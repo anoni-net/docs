@@ -1,5 +1,5 @@
 [project]
-name = "anoni.net Docs"
+name = "anoni-net-docs"
 version = "2025.12.31"
 description = "About OONI Probe and ASNs finding in Taiwan."
 readme = "README.md"
