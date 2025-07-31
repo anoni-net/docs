@@ -11,8 +11,9 @@ icon: material/home-circle
 
 !!! tip "重要信息"
 
+    - `新增`{style="color: DodgerBlue;"}：[Tails 6.18 支持 WebTunnel 桥接协议](./blog/posts/tails-6-18-webtunnel.md) - 2025/07/31
     - `活动`{style="color: OrangeRed;"}：「[匿名网络工作坊 2025/08](./event-workshop-2025.md)」已开始报名！ - 2025/07/01
-    - `活动`{style="color: OrangeRed;"}：「[匿名网络工作坊 2025/08](./event-workshop-2025-prepare.md)」已开始招募工作人员和小助手。- 2025/04/28
+    - `活动`{style="color: OrangeRed;"}：「[筹备：匿名网络工作坊 2025/08](./event-workshop-2025-prepare.md)」已开始招募工作人员和小助手。- 2025/04/28
     - `新增`{style="color: DodgerBlue;"}：[Arti 1.4.1 更新发布](./blog/posts/arti-141.md)、[OONI：去识别化的观测数据安全](./blog/posts/2025-probe-security-without-identification.md) - 2025/03/16
     - `回顾`{style="color: purple;"}：[网络自由工作坊：Tor、Tails、OONI](./blog/posts/rightscon25-tor-tails-ooni-after.md) - 2025/03/09
 
