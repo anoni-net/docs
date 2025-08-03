@@ -63,9 +63,9 @@ Pluggable Transports：
 
 - To further evade censorship, Bridges often use Pluggable Transports, which are protocols that alter the characteristics of Tor traffic to make it appear like regular HTTPS traffic or other types. These technologies include Obfs4, meek, [Snowflake](https://snowflake.torproject.org/){target="_blank"}, and others, which can obfuscate Tor traffic, making detection and blocking more challenging.
 
-## How to Setup a Middle/Guard Relay
+## How to Setup a Middle Relay
 
-Setting up a Middle Relay or Guard Relay requires some technical knowledge and basic installation and configuration. It is recommended to use Debian or Ubuntu operating systems for installation, and the following examples will use Debian/Ubuntu as well.
+Setting up a Middle Relay requires some technical knowledge and basic installation and configuration. It is recommended to use Debian or Ubuntu operating systems for installation, and the following examples will use Debian/Ubuntu as well.
 
 !!! info "Other Operating Systems"
 
@@ -73,7 +73,7 @@ Setting up a Middle Relay or Guard Relay requires some technical knowledge and b
 
 !!! warning "Considerations Before Setting Up!"
 
-    The following tutorial only uses Guard Relays and Middle Relays as examples. If you wish to set up more advanced nodes, please consider the following questions and assess the risks you can undertake:
+    The following tutorial only uses Middle Relays as examples. If you wish to set up more advanced nodes, please consider the following questions and assess the risks you can undertake:
 
     - Do you want to run a Tor exit or non-exit (bridge/guard/middle) relay?
     - If you want to run an exit relay: Which ports do you want to allow in your exit policy? (More ports usually means potentially more abuse complaints.)
@@ -210,3 +210,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 ??? question "How do I upgrade my Tor Relay software?"
 
     Keeping the Tor software updated is essential for security patches and new features. On most Linux systems, you can update Tor via the package manager. Windows and macOS users should regularly check the Tor website for updates.
+
+??? question "How can I become a Guard Relay?"
+
+    Guard Relays are automatically selected by the Tor network; users cannot manually configure this. If your node runs stably and has sufficient bandwidth, it may be chosen as a Guard Relay.

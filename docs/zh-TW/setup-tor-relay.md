@@ -24,16 +24,16 @@ icon: simple/torproject
 
     以下的教學僅使用入口節點與中間節點作為範例，如果您想要進階的節點建立操作，請思考以下問題並評估可承擔的風險：
 
-    - 您想要建立一個 Tor 出口節點還是非出口（橋接、入口、中間）節點？
+    - 您想要建立一個 Tor 出口節點還是非出口（橋接、中間）節點？
     - 如果您想建立一個出口節點：您要在出口政策中允許哪些連線埠？更多的連線埠通常代表可能會有更多的濫用或違法投訴。
     - 您希望使用哪個外部 TCP 連線埠來接受 Tor 連接？`ORPort` 設定：如果您的伺服器上沒有其他服務佔用此連線埠，我們建議使用 443 連線埠。推薦使用 `ORPort 443`，是因為這通常是公共 Wi-Fi 網絡中少數幾個開放的端口之一。連線埠 9001 也是另一個常用的 `ORPort`。
     - 您將使用哪個電子郵件作為節點的聯絡訊息 `ContactInfo` 欄位？這個資訊將會公開。
     - 您希望允許多少頻寬、每月流量用於 Tor 流量？
     - 伺服器是否允許 IPv6 地址？
 
-## 如何建立 Middle/Guard Relay
+## 如何建立 Middle Relay
 
-建立一個 Middle Relay 或 Guard Relay 需要一些技術知識和基本的安裝與設定。建議使用 Debian 或 Ubuntu 作業系統來安裝，以下範例也將使用 Debian/Ubuntu 操作。
+建立一個 Middle Relay 需要一些技術知識和基本的安裝與設定。建議使用 Debian 或 Ubuntu 作業系統來安裝，以下範例也將使用 Debian/Ubuntu 操作。
 
 !!! info "其他作業系統"
 
@@ -166,3 +166,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 ??? question "如何升級我的 Tor Relay 軟體？"
 
     保持 Tor 軟體更新非常重要，以獲得最新的安全更新和功能。大多數 Linux 系統上，可以通過套件管理器來更新 Tor。Windows 和 macOS 使用者應定期檢查 Tor 官網上的更新。
+
+??? question "如何成為 Guard Relay？"
+
+    Guard Relay 由 Tor 網路自動選定，使用者無法手動配置。若節點穩定運行且具備足夠頻寬，便有可能被選為 Guard Relay。

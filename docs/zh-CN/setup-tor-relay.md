@@ -31,9 +31,9 @@ icon: simple/torproject
     - 您希望允许多少带宽、每月流量用于 Tor 流量？
     - 服务器是否允许 IPv6 地址？
 
-## 如何建立 Middle/Guard Relay
+## 如何建立 Middle Relay
 
-建立一个 Middle Relay 或 Guard Relay 需要一些技术知识和基本的安装与设置。建议使用 Debian 或 Ubuntu 操作系统来进行安装，以下范例也将采用 Debian/Ubuntu 系统进行操作。
+建立一个 Middle Relay 需要一些技术知识和基本的安装与设置。建议使用 Debian 或 Ubuntu 操作系统来进行安装，以下范例也将采用 Debian/Ubuntu 系统进行操作。
 
 !!! info "其他操作系统"
 
@@ -165,3 +165,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 ??? question "如何升级我的 Tor Relay 软件？"
 
     保持 Tor 软件更新非常重要，以获得最新的安全更新和功能。在大多数 Linux 系统上，可以通过包管理器来更新 Tor。Windows 和 macOS 用户应定期检查 Tor 官网上的更新。
+
+??? question "如何成为 Guard Relay？"
+
+    Guard Relay 由 Tor 网络自动选定，用户无法手动配置。如果节点稳定运行且具备足够的带宽，就有可能被选为 Guard Relay。
