@@ -19,6 +19,8 @@ Tails 7.0~rc2 是即將推出 Tails 7.0 的第二個候選版本。計畫在 9 �
 
 Tails 團隊已經用與正式版本一樣詳盡的自動與手動測試流程檢測過 7.0~rc2。但 Tails 7.0~rc2 可能依然存在尚未發現的問題。與其他正式版本一樣，Tails 團隊會為 Tails 7.0~rc2 提供自動安全升級。
 
+<!--more-->
+
 ## 變更與更新
 
 - 用 [GNOME Console](https://apps.gnome.org/Console/){target="_blank"} 取代 [GNOME Terminal](https://gitlab.gnome.org/GNOME/gnome-terminal){target="_blank"}。（[#20161](https://gitlab.tails.boum.org/tails/tails/-/issues/20161){target="_blank"}）
