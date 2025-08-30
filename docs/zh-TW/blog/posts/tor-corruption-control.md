@@ -20,7 +20,7 @@ description: "自網路在土庫曼開始普及以來，就一直受到嚴格的
 
     - [Corruption and Control: How Turkmenistan turned internet censorship into a business, Tor Blog, by gus, nina, 2025-08-27](https://blog.torproject.org/Corruption-Control-Turkmenistan-internet-censorship-business/){target="_blank"}
 
-![](https://blog.torproject.org/Corruption-Control-Turkmenistan-internet-censorship-business/lead.webp)
+![](https://forum.torproject.org/uploads/default/original/2X/f/f0a900173e408d4d9f15f346fa3b5b7750efce96.png)
 
 2021 年 7 月，一個關於 Tor 使用量在土庫曼驟降的現象[引起了我們的注意](https://archive.is/5Kp4s){target="_blank"}。Tor 後來了解到，這標誌著這個後蘇聯國家進入了審查與限制的新時代。不過讓我們倒退回去看整件事情的起源...
 
