@@ -10,6 +10,9 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密歷史：如何從軍事專案到維繫隱私的救命繩索](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
+    - `新增`{style="color: DodgerBlue;"}：[貪腐與控管：土庫曼如何將網路審查變成一門生意](./blog/posts/tor-corruption-control.md) - 2025/08/30
+    - `新增`{style="color: DodgerBlue;"}：[OMG！第三屆 Open Measurement Gathering（OMG）的有問必答（AMA）活動總結](./blog/posts/2025-omg.md) - 2025/08/29
     - `新增`{style="color: DodgerBlue;"}：[Tails 6.18 支援 WebTunnel 橋接協定](./blog/posts/tails-6-18-webtunnel.md) - 2025/07/31
     - `活動`{style="color: OrangeRed;"}：「[匿名網路工作坊 2025/08](./event-workshop-2025.md)」已開始報名！ - 2025/07/01
     - `活動`{style="color: OrangeRed;"}：「[籌備：匿名網路工作坊 2025/08](./event-workshop-2025-prepare.md)」已開始招募工作人員與小幫手。 - 2025/04/28
