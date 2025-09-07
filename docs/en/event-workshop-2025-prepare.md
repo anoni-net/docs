@@ -77,20 +77,20 @@ The preparation period for the workshop runs from May 2025 to early August 2025,
 
     - [x] `Announcement`{style="color: red;"} Preparation progress and ongoing staff recruitment.
     - [x] `Confirmation`{style="color: purple;"} List of staff and helpers.
-    - [ ] `Materials`{style="color: green;"} Details of Tor/Tails workshop course.
-    - [ ] `Materials`{style="color: green;"} Details of OONI workshop course.
+    - [x] `Materials`{style="color: green;"} Details of Tor/Tails workshop course.
+    - [x] `Materials`{style="color: green;"} Details of OONI workshop course.
     - [ ] `Feedback`{style="color: dodgerblue;"} Provide course and material design feedback to Tor/Tails, OONI teams.
 
 === "2025/07"
 
-    - [ ] `Announcement`{style="color: red;"} Workshop course content and registration method.
-    - [ ] `Notification`{style="color: darkorange;"} Registrants' event attendance and timing.
-    - [ ] `Production`{style="color: midnightblue;"} Print a small number of flyers to be placed at OCF booths and bulletin boards.
-    - [ ] `Confirmation`{style="color: purple;"} Tasks of staff on the event day.
+    - [x] `Announcement`{style="color: red;"} Workshop course content and registration method.
+    - [x] `Notification`{style="color: darkorange;"} Registrants' event attendance and timing.
+    - [x] `Production`{style="color: midnightblue;"} Print a small number of flyers to be placed at OCF booths and bulletin boards.
+    - [x] `Confirmation`{style="color: purple;"} Tasks of staff on the event day.
 
 === "2025/08"
 
-    - [ ] <code>:star2:</code> Execute the event day.
+    - [x] <code>:star2:</code> Execute the event day.
     - [ ] `Announcement`{style="color: red;"} Post-event report article.
     - [ ] `Notification`{style="color: darkorange;"} Feedback from registrants and suggestions for continued participation after the event.
     - [ ] `Feedback`{style="color: dodgerblue;"} Provide feedback to the Tor/Tails, OONI teams about the event records.

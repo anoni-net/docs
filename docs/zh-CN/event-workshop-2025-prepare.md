@@ -72,20 +72,20 @@ icon: octicons/workflow-24
 
     - [x] `公告`{style="color: red;"} 筹备进度与持续招募工作人员。
     - [x] `确认`{style="color: purple;"} 工作人员与小助手名单。
-    - [ ] `教材`{style="color: green;"} Tor/Tails 匿名网络工作坊课程细节。
-    - [ ] `教材`{style="color: green;"} OONI 工作坊课程细节。
+    - [x] `教材`{style="color: green;"} Tor/Tails 匿名网络工作坊课程细节。
+    - [x] `教材`{style="color: green;"} OONI 工作坊课程细节。
     - [ ] `反馈`{style="color: dodgerblue;"} 给 Tor/Tails、OONI 团队关于我们所设计的课程与教材。
 
 === "2025/07"
 
-    - [ ] `公告`{style="color: red;"} 工作坊课程内容与报名方式。
-    - [ ] `通知`{style="color: darkorange;"} 通知报名者活动出席与时间。
-    - [ ] `制作`{style="color: midnightblue;"} 少量活动传单印制，于 OCF 摊位放置与公告栏张贴。
-    - [ ] `确认`{style="color: purple;"} 活动日当天工作人员的任务。
+    - [x] `公告`{style="color: red;"} 工作坊课程内容与报名方式。
+    - [x] `通知`{style="color: darkorange;"} 通知报名者活动出席与时间。
+    - [x] `制作`{style="color: midnightblue;"} 少量活动传单印制，于 OCF 摊位放置与公告栏张贴。
+    - [x] `确认`{style="color: purple;"} 活动日当天工作人员的任务。
 
 === "2025/08"
 
-    - [ ] <code>:star2:</code> 活动日执行。
+    - [x] <code>:star2:</code> 活动日执行。
     - [ ] `公告`{style="color: red;"} 工作坊活动后记录文章。
     - [ ] `通知`{style="color: darkorange;"} 收集报名者的意见反馈与活动后可持续参与的建议。
     - [ ] `反馈`{style="color: dodgerblue;"} 给 Tor/Tails、OONI 团队关于活动记录。
