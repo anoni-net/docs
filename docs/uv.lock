@@ -31,7 +31,7 @@ dev = [{ name = "awscli", specifier = ">=1.38.36" }]
 
 [[package]]
 name = "awscli"
-version = "1.42.21"
+version = "1.42.25"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore" },
@@ -41,9 +41,9 @@ dependencies = [
     { name = "rsa" },
     { name = "s3transfer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/97/c7/d5329c15f3a6926de4da014594c1bf32bca3f9b1380328fef668611eb813/awscli-1.42.21.tar.gz", hash = "sha256:371a60901cd3858e7da9943fc40a992dca560d01b6da126b902e992be30dcb4d", size = 1889568, upload-time = "2025-08-29T19:20:53.666Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2f/4f/c046d241fabc2739728acfd4f7530ab255ba219de6403be649e540cfeb15/awscli-1.42.25.tar.gz", hash = "sha256:18b1925b4c42ef6ee1b72c089bd3d852301061a4ee5392d6180fb5838771aa5d", size = 1889356, upload-time = "2025-09-05T19:23:18.615Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b6/3a/4c4d210f72031fdb0c9d57e4e694755b0fc1ab09aa4eaaa10786ffa7b9a0/awscli-1.42.21-py3-none-any.whl", hash = "sha256:efe81866de02357961fa332194333e2b974ecee24725b3194d09150350261246", size = 4663618, upload-time = "2025-08-29T19:20:50.869Z" },
+    { url = "https://files.pythonhosted.org/packages/ec/7e/09671279f1d9d5d92db7dd828b6c6c9c06ce88dbc571b05a0be0292fb426/awscli-1.42.25-py3-none-any.whl", hash = "sha256:4dbcaa5421d7e1cbdfdd387c87650bb379626515146f465df2666004ed82e09b", size = 4663617, upload-time = "2025-09-05T19:23:16.777Z" },
 ]
 
 [[package]]
@@ -71,16 +71,16 @@ wheels = [
 
 [[package]]
 name = "botocore"
-version = "1.40.21"
+version = "1.40.25"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jmespath" },
     { name = "python-dateutil" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/50/11/d9a500a0e86b74017854e3ff12fd943f74f4358337799e0b272eaa6b4e27/botocore-1.40.21.tar.gz", hash = "sha256:f77e9c199df0252b14ea739a9ac99723940f6bde90f4c2e7802701553a62827b", size = 14321194, upload-time = "2025-08-29T19:20:46.892Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1a/ba/7faa7e1061c2d2d60700815928ec0e5a7eeb83c5311126eccc6125e1797b/botocore-1.40.25.tar.gz", hash = "sha256:41fd186018a48dc517a4312a8d3085d548cb3fb1f463972134140bf7ee55a397", size = 14331329, upload-time = "2025-09-05T19:23:12.37Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/6a/effb671afa31d35805d0760b45676136fd1209e263641861456b4566ae9b/botocore-1.40.21-py3-none-any.whl", hash = "sha256:574ecf9b68c1721650024a27e00e0080b6f141c281ebfce49e0d302969270ef4", size = 13993859, upload-time = "2025-08-29T19:20:41.404Z" },
+    { url = "https://files.pythonhosted.org/packages/45/e5/4c32b35109bc3f8f8ebe3d78f952d2bf702bacce975a45997cc268c11860/botocore-1.40.25-py3-none-any.whl", hash = "sha256:5603ea9955cd31974446f0b5688911a5dad71fbdfbf7457944cda8a83fcf2a9e", size = 14003384, upload-time = "2025-09-05T19:23:09.731Z" },
 ]
 
 [[package]]
@@ -342,11 +342,11 @@ wheels = [
 
 [[package]]
 name = "markdown"
-version = "3.8.2"
+version = "3.9"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d7/c2/4ab49206c17f75cb08d6311171f2d65798988db4360c4d1485bd0eedd67c/markdown-3.8.2.tar.gz", hash = "sha256:247b9a70dd12e27f67431ce62523e675b866d254f900c4fe75ce3dda62237c45", size = 362071, upload-time = "2025-06-19T17:12:44.483Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/37/02347f6d6d8279247a5837082ebc26fc0d5aaeaf75aa013fcbb433c777ab/markdown-3.9.tar.gz", hash = "sha256:d2900fe1782bd33bdbbd56859defef70c2e78fc46668f8eb9df3128138f2cb6a", size = 364585, upload-time = "2025-09-04T20:25:22.885Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/2b/34cc11786bc00d0f04d0f5fdc3a2b1ae0b6239eef72d3d345805f9ad92a1/markdown-3.8.2-py3-none-any.whl", hash = "sha256:5c83764dbd4e00bdd94d85a19b8d55ccca20fe35b2e678a1422b380324dd5f24", size = 106827, upload-time = "2025-06-19T17:12:42.994Z" },
+    { url = "https://files.pythonhosted.org/packages/70/ae/44c4a6a4cbb496d93c6257954260fe3a6e91b7bed2240e5dad2a717f5111/markdown-3.9-py3-none-any.whl", hash = "sha256:9f4d91ed810864ea88a6f32c07ba8bee1346c0cc1f6b1f9f6c822f2a9667d280", size = 107441, upload-time = "2025-09-04T20:25:21.784Z" },
 ]
 
 [[package]]
@@ -422,15 +422,15 @@ wheels = [
 
 [[package]]
 name = "mkdocs-charts-plugin"
-version = "0.0.12"
+version = "0.0.13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "mkdocs" },
     { name = "pymdown-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/70/43/b00e9916d96fe62649809104ab49210addc7bcb66415773e3827fbe17dbd/mkdocs_charts_plugin-0.0.12.tar.gz", hash = "sha256:095150824a966852a4556fe5f501d17c08346acccdd0d43c340e3adcea686314", size = 10712, upload-time = "2024-10-22T13:45:22.215Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/15/84/d3c731390478a6f9dea0a4517e24287a317a015d85bde7342ba60ddac3e2/mkdocs_charts_plugin-0.0.13.tar.gz", hash = "sha256:7de0a74a2ecc8a5a17ce49ebf84c3175ec03a17725e85b970c0b2c3d59faa311", size = 10921, upload-time = "2025-09-02T09:52:25.416Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/09/07/6e960d3d6c19055ec30126eb7df04cd46cccefdca5a03cd1412797177ae0/mkdocs_charts_plugin-0.0.12-py3-none-any.whl", hash = "sha256:b3b2c8b06d87903e7f50318dd8c908e44455ea83ffc99c49d518ab0cf93a2ec2", size = 9675, upload-time = "2024-10-22T13:45:21.243Z" },
+    { url = "https://files.pythonhosted.org/packages/31/6f/4015dbb4c26bf1fc4b5b637188fc47ec2f1781baccc2e13b0c48887ae9b0/mkdocs_charts_plugin-0.0.13-py3-none-any.whl", hash = "sha256:cef515bb3b4acb3dfea45787d7db3a6f39bf649dbb369a73416c6a1386cac258", size = 9848, upload-time = "2025-09-02T09:52:24.122Z" },
 ]
 
 [[package]]
