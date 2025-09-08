@@ -11,7 +11,7 @@ description: "近期社群活動更新資訊"
 ---
 # 2025/08 專案進度更新
 
-![匿名網路工作坊進度更新](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![近期社群活動更新資訊](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 在 8/9 - 8/10 的[工作坊活動](../../event-workshop-2025.md){target="_blank"}已順利的舉辦完成，我們目前正在準備工作坊後的討論、回顧、思考後續可以努力的方向。不論您是否有在活動二天的參與，都先感謝還持續的關注我們！
 
