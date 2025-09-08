@@ -6,8 +6,8 @@ categories:
     - News
 slug: updates-202508
 image: "assets/images/post-update.png"
-summary: "Current Project Status and Updates 2025/06/13"
-description: "Current Project Status and Updates 2025/06/13"
+summary: "Current Project Status and Updates 2025/08"
+description: "Current Project Status and Updates 2025/08"
 ---
 
 # 2025/08 Project Update
