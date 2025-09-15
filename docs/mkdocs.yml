@@ -23,6 +23,7 @@ nav:
           - ooni-weblists.md
           - ooni-i18n.md
           - tor-snowflake.md
+          - intro/ooni-run-v2.md
       - !ENV [NAV_PPP, "參與準備"]:
           - setup-repo.md
           - setup-tor-relay.md
