@@ -26,6 +26,7 @@ icon: material/folder-open
 - [:material-list-status: OONI 網站檢測清單](../ooni-weblists.md)
 - [:material-translate-variant: 中文化與文件翻譯](../ooni-i18n.md)
 - [:material-snowflake: Tor Snowflake 橋接點建立（網頁版）](../tor-snowflake.md)
+- [:material-help-network: OONI Run v2 操作說明](./ooni-run-v2.md)
 
 </div>
 
