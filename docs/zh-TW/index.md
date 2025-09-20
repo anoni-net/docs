@@ -10,6 +10,7 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 發佈](./blog/posts/tails-7-released.md) - 2025/09/20
     - `新增`{style="color: DodgerBlue;"}：[OONI Run v2 操作說明](./intro/ooni-run-v2.md) - 2025/09/15
     - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密歷史：如何從軍事專案到維繫隱私的救命繩索](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
     - `新增`{style="color: DodgerBlue;"}：[貪腐與控管：土庫曼如何將網路審查變成一門生意](./blog/posts/tor-corruption-control.md) - 2025/08/30
