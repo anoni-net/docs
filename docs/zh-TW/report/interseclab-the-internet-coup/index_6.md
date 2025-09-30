@@ -26,7 +26,10 @@ Geedge Networks 將其產品作為整套方案出售給客戶（政府）。在�
 
 雖然 Geedge 在客戶國家的系統架構大致相似，但各客戶之間的架構仍存在一些差異。通常，Geedge 的國內設置涉及一個指揮與控制中心，通常被稱為國家中心。一些國家擁有兩個國家中心，而不是僅有一個。在大多數情況下，國家中心構成系統的核心，它連接到十幾個或更多其他節點，這些節點向國家中心提供數據。這些節點位於各地區中心的獨立 ISP 場所。Geedge 只查詢從這些從屬節點中存儲在地區中心的儲存伺服器上的數據。
 
-圖片說明：此圖示展示 Geedge Networks 的系統部署過程：在國家指揮和地區中心安裝硬體、通過持續的數據收集和保存進行審查政策配置和監控流程、持續的技術支持，以及與 Mesalab 共享數據以改善系統。
+<figure markdown="span">
+  [![圖片於報告 31 頁](https://assets.anoni.net/the-internet-coup/index-6-31-1.png)](https://assets.anoni.net/the-internet-coup/index-6-31-1.png){target="_blank"}
+  <figcaption>圖片說明：此圖示展示 Geedge Networks 的系統部署過程：在國家指揮和地區中心安裝硬體、通過持續的數據收集和保存進行審查政策配置和監控流程、持續的技術支持，以及與 Mesalab 共享數據以改善系統。</figcaption>
+</figure>
 
 ### 日常運營
 
@@ -41,7 +44,10 @@ Geedge 系統可以部署在兩種主要模式中：鏡像模式和內聯模式�
 * 鏡像模式（Mirrored Mode）：在文件中有時稱為「被動」模式，此模式將數據通過網路擷取點（network tap）鏡像到 Geedge 設備。具體而言，網路擷取點是一個光學旁路開關。封包不需等待處理即可繼續到達目的地。在此模式下，如果 Geedge 系統發生故障，網際網路依然可以正常運行。這種模式的優勢在於它不會因處理延遲或擁塞增加網路延遲。在鏡像模式下，客戶無法阻止特定流量通過，必須依賴封包注入來阻擋連接。
 * 內聯模式（In-line Mode）：文件中也稱為「主動」模式，流量必須先通過 Geedge 設備才能到達目的地。在此模式下，如果 Geedge 系統發生故障，網際網路將停止運作。此模式因為處理需要增加了網路延遲，並可能在網路擁塞時因流量超過 Geedge 系統的容量而產生額外的延誤。此模式的優勢在於，能夠完全阻止特定的流量流經網路。這通常是那些希望絕對控制的客戶選擇的解決方案，代價則是可靠性和網路品質的降低。
 
-（TODO: Page 33 one drawing）
+<figure markdown="span">
+  [![圖片於報告 33 頁](https://assets.anoni.net/the-internet-coup/index-6-33-1.png)](https://assets.anoni.net/the-internet-coup/index-6-33-1.png){target="_blank"}
+  <figcaption>圖片說明：內聯主動模式（In-line Mode）、鏡像被動模式（Mirrored Mode）的差異。</figcaption>
+</figure>
 
 ### Geedge 監控與合法攔截的區別
 
@@ -59,7 +65,10 @@ Geedge 系統可以部署在兩種主要模式中：鏡像模式和內聯模式�
 
 以下章節突出洩漏數據中客戶樣態（政府）的顯著發現。這些發現並非意在對洩漏中的所有部署數據進行全面分析。本專案的範圍不包括對 Geedge 在客戶國家存在對當地人口的全部影響進行完整評估。
 
-圖片說明：這張地圖顯示了 Geedge Networks 運營的管轄區域。
+<figure markdown="span">
+  [![圖片於報告 35 頁](https://assets.anoni.net/the-internet-coup/index-6-35-1.png)](https://assets.anoni.net/the-internet-coup/index-6-35-1.png){target="_blank"}
+  <figcaption>圖片說明：這張地圖顯示了 Geedge Networks 運營的管轄區域。</figcaption>
+</figure>
 
 ## K18 和 K24：哈薩克
 
@@ -188,6 +197,11 @@ Geedge 的 Sanity Directory 組件的一個核心功能是將流量歸因於特�
 
 Investcom Holding 的完整內容見於附錄。
 
+<figure markdown="span">
+  [![圖片於報告 49 頁](https://assets.anoni.net/the-internet-coup/index-6-49-1.png)](https://assets.anoni.net/the-internet-coup/index-6-49-1.png){target="_blank"}
+  <figcaption>圖片說明：從 Geedge Networks 數據資料中提取的圖像顯示了 Frontiir 仰光數據中心的網路拓撲，其中 Geedge 的硬體整合到了 ISP 的網路基礎設施中。</figcaption>
+</figure>
+
 洩漏的文件還包含有關封鎖 VPN、Tor（特別是 Tor 在行動裝置上的 Orbot）和 Psiphon 的詳細訊息。緬甸的封鎖 VPN 名單比一些其他客戶（國家，如：衣索比亞或哈薩克）的名單還長。文件記錄了攔截「高優先級應用」的規則制定過程，其中包括共計 55 款應用程式的封鎖規則，比如即時通訊應用 Signal 和 WhatsApp。值得注意的是，這些封鎖規則由 Geedge 制定，而非客戶（國家）。這很可能不是大多數競爭產品的做法。
 
 將「規則制定」外包給客戶，對於不想直接參與特定社交媒體應用、VPN 和網站封鎖規則的客戶來說，可能是一個賣點。
@@ -258,7 +272,10 @@ J24 計畫還包括用於針對特定群體的功能。這些功能允許在地�
 
 一個截圖顯示福建專案在 2022 年 8 月的一週儀表板，題為「泉州市公安局清遠系統」，顯示該週封鎖的大多數「欺詐網站」託管在美國。
 
-圖片說明：從 Geedge 數據集中提取的福建專案儀表板截圖。
+<figure markdown="span">
+  [![圖片於報告 54 頁](https://assets.anoni.net/the-internet-coup/index-6-54-1.png)](https://assets.anoni.net/the-internet-coup/index-6-54-1.png){target="_blank"}
+  <figcaption>圖片說明：從 Geedge 數據資料中提取的福建專案儀表板截圖。</figcaption>
+</figure>
 
 幾份文件還提到一個位於中國東部沿海的江蘇省專案。Geedge 與當地江蘇省公安廳（JPSB）合作的理由是打擊網路詐騙。通訊顯示，JPSB 對於允許 Geedge 建立大數據資料庫猶豫不決，更希望 Geedge 在現有基礎設施上部署工具。一個名為江蘇南京的初步測試環境於 2023 年 2 月開始運行，而江蘇反詐騙專案似已於2024 年 3 月 15 日進入生產模式。
 
