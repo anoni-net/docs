@@ -12,7 +12,7 @@ icon: material/arrow-right-bottom
 
 洩漏資料的分析提供了對 Geedge Networks 向其客戶推銷的監控和審查能力的詳細理解，並深入剖析了 Geedge 的開發過程、與客戶互動以及其產品如何建立在現有網路軟硬體之上。以下，我們概述了 Geedge Networks 提供的各項產品，提供這些產品如何在技術上部署的見解，其功能，以及對 Geedge 運營地區內網路使用者的影響。
 
-雖然以下產品是獨立描述的，但需要注意的是，Geedge Networks 以完整套件形式銷售這些產品。該公司在初期階段與客戶政府密切合作，以滿足其訂製的審查和監控需求，並能夠重新使用現有硬體或透過新硬體完全建立系統。
+雖然以下產品是獨立描述的，但需要注意的是，Geedge Networks[^4] 以完整套件形式銷售這些產品。該公司在初期階段與客戶政府密切合作，以滿足其訂製的審查和監控需求，並能夠重新使用現有硬體或透過新硬體完全建立系統。
 
 <figure markdown="span">
   [![圖片於報告 13 頁](https://assets.anoni.net/the-internet-coup/index-5-13-1.png)](https://assets.anoni.net/the-internet-coup/index-5-13-1.png){target="_blank"}
@@ -30,7 +30,7 @@ Cyber Narrator 是個強大的工具，能夠追蹤網路流量到個別用戶�
   <figcaption>圖片說明：這是一個來自 Cyber Narrator 的定位地圖截圖，顯示它如何監控特定區域的個人群體。六角形顏色代表人口密度。顯示的數據包括 CID、MSISDN 和群體分類。此範例中，特定行動用戶在上海被標示為恐怖份子首腦。Cyber Narrator 使用者可以點擊六角形來查看用戶數，區分當地人、訪客和使用漫遊服務的人群。</figcaption>
 </figure>
 
-Cyber Narrator 從其資料倉儲解決方案 TSG Galaxy 所收集的數據，以及另一個由 Geedge Networks 開發的工具 WebSketch 中提取資料。WebSketch 是一個由 Geedge 建立並運行的網路情報搜尋工具，是Geedge 唯一一個不在客戶端設置，而由 Geedge 自己托管的產品。WebSketch 的數據來源於 Geedge 自身的網路研究，並通過與第三方數據經紀公司獲取的資訊進行彙整。
+Cyber Narrator 從其資料倉儲解決方案 TSG Galaxy 所收集的數據，以及另一個由 Geedge Networks 開發的工具 WebSketch 中提取資料。WebSketch 是一個由 Geedge 建立並運行的網路情報搜尋工具，是 Geedge 唯一一個不在客戶端設置，而由 Geedge 自己托管的產品。WebSketch 的數據來源於 Geedge 自身的網路研究，並通過與第三方數據經紀公司獲取的資訊進行彙整。
 
 WebSketch 結合了流行的資安情報服務 Shodan 和 Greynoise 的功能。像 Shodan 一樣，WebSketch 通過掃描網際網路以發現連接的設備，如攝影機、路由器和伺服器。WebSketch 也仿效 Greynoise 的功能，讓客戶能將原本無意義的標識如 IP 位址和域名標記為連結到特定網路服務，如微信或 VPN 服務。WebSketch 的設計文件中 Geedge 員工被要求在設計新功能時參考 Greynoise，這顯示其對 Greynoise 的高度依賴。分析該報告的洩漏數據中包含了在中國新疆部署 Cyber Narrator 的詳細要求清單，確保產品能識別「可疑」的通信模式，如使用 VPN 和國際漫遊。這種 Cyber Narrator 的使用案例（如下述中國部署部分所述）明確顯示出，Cyber Narrator 能夠使客戶（政府）和安全部隊更容易標記使用隱蔽工具或訪問其他應用程式或網頁的個別用戶，這些工具和網站都被客戶（政府）視為可能的惡意工具。Cyber Narrator 的分析能力也能阻擋對特定網站或虛擬私人網路（VPN）服務的訪問。
 
@@ -38,9 +38,9 @@ WebSketch 結合了流行的資安情報服務 Shodan 和 Greynoise 的功能。
 
 ### TSG GALAXY：聚合分析以進行大規模監控
 
-TSG Galaxy 是 Geedge Networks 的提取、轉換、載入（Extract, Transform, Load, ETL）資料倉儲解決方案，專為網際網路級別的大規模監控而設計，收集並整合客戶國家所有網路使用者以及透過網絡傳輸的海量數據。它基於開源的 Apache Kafka 流處理平台，這是一個常用於為線上電子商務和廣告商提供客戶分析的數據資料處理軟體。這項研究中分析的洩漏數據包含 TSG Galaxy 的 SQL 模式，顯示 TSG Galaxy 被用來儲存所有 TCP 和 UDP 會話、這些主要用於寬頻和行動數據的傳輸協議，以及國內所有 SIP 會話。SIP 是用於 VoIP（網際網路語音協議）的協議，是大多數現代電話網路的基礎。這意味著 TSG Galaxy 不僅能監控網際網路上的流量和內容，還能監控電話通話。
+TSG Galaxy 是 Geedge Networks 的提取、轉換、載入（Extract, Transform, Load, ETL）資料倉儲解決方案，專為網際網路級別的大規模監控而設計，收集並整合客戶國家所有網路使用者以及透過網絡傳輸的海量數據。它基於開源的 Apache Kafka 流處理平台[^5]，這是一個常用於為線上電子商務和廣告商提供客戶分析的數據資料處理軟體。這項研究中分析的洩漏數據包含 TSG Galaxy 的 SQL 模式[^6]，顯示 TSG Galaxy 被用來儲存所有 TCP 和 UDP 會話、這些主要用於寬頻和行動數據的傳輸協議，以及國內所有 SIP 會話。SIP 是用於 VoIP（網際網路語音協議）的協議，是大多數現代電話網路的基礎。這意味著 TSG Galaxy 不僅能監控網際網路上的流量和內容，還能監控電話通話。
 
-TSG Galaxy 使用 IP 數據資料流訊息輸出（IP Flow Information Export, IPFIX）來分析流量，並使用深度封包檢測（DPI）萃取元數據資料。通過 DPI，他們可以萃取詳細的獨一無二的指紋數據，包括 TLS 和 QUIC 伺服器名稱指示、DNS 查詢和電子郵件標頭。TSG Galaxy 還實施了連接指紋技術，如 JA3 哈希，允許 Cyber Narrator 識別模式以幫助確定用戶所使用的操作系統以及他們所用來連接的應用程式。這項技術可用來幫助識別用戶是否使用了如 VPN 等規避工具來隱藏流量或繞過審查。在 TSG Galaxy 中，所有這些訊息與來自網路服務提供商（ISP）的訊息相結合，通過各種標記，如 IP 地址、用戶 ID、IMEI 和 IMSI，將其連接到個別網路使用者。從 TSG Galaxy 萃取的元數據被發送到一個可由客戶通過 Cyber Narrator 進行查詢的數據資料庫。
+TSG Galaxy 使用 IP 數據資料流訊息輸出（IP Flow Information Export, IPFIX）來分析流量，並使用深度封包檢測（DPI）萃取元數據資料。通過 DPI，他們可以萃取詳細的獨一無二的指紋數據，包括 TLS 和 QUIC 伺服器名稱指示、DNS 查詢和電子郵件標頭。TSG Galaxy 還實施了連接指紋技術，如 JA3 哈希，允許 Cyber Narrator 識別模式以幫助確定用戶所使用的操作系統以及他們所用來連接的應用程式。這項技術可用來幫助識別用戶是否使用了如 VPN 等規避工具來隱藏流量或繞過審查。在 TSG Galaxy 中，所有這些訊息與來自網路服務提供商（ISP）的訊息相結合，通過各種標記，如 IP 地址、用戶 ID、IMEI 和 IMSI[^7]，將其連接到個別網路使用者。從 TSG Galaxy 萃取的元數據被發送到一個可由客戶通過 Cyber Narrator 進行查詢的數據資料庫。
 
 <figure markdown="span">
   [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-1.png)](https://assets.anoni.net/the-internet-coup/index-5-16-1.png){target="_blank"}
@@ -49,11 +49,14 @@ TSG Galaxy 使用 IP 數據資料流訊息輸出（IP Flow Information Export, I
 
 這項研究的一個重要發現是，所有在客戶（政府）位置內由 TSG Galaxy 收集的網路使用者數據似乎對 Geedge Networks 的員工可見。數據同時顯示，真實客戶數據資料的快照有時會分享給中科院的 Mesalab，這是一個似乎與 Geedge Networks 緊密相關的學術實驗室。數據資料顯示，Mesalab 的工程學生使用這些真實世界的客戶資訊進行研究，目的是更好地理解和阻止網路審查規避。Geedge 與其附屬機構保存客戶數據的時間長短仍不明確。
 
-圖片說明：這些是來自 Mesalab 文件的照片，顯示了 2021 年 3 月 14 日至 4 月 28 日期間的一次新疆出差，可能是由中國科學院的成員或畢業生在 TSG 部署工作期間拍攝的，照片中可能是在伺服器室拍攝的。這些照片是報告的一部分，報導集中於實驗室的政治、科學和商業目標，引用科學家呼籲為國家的利益服務。據報導，由於北京團隊辦公空間有限，不得不「窩」在伺服器室裡。
+<figure markdown="span">
+  [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-2.png)](https://assets.anoni.net/the-internet-coup/index-5-16-2.png){target="_blank"}
+  <figcaption>圖片說明：這些是來自 Mesalab 文件的照片，顯示了 2021 年 3 月 14 日至 4 月 28 日期間的一次新疆出差，可能是由中國科學院的成員或畢業生在 TSG 部署工作期間拍攝的，照片中可能是在伺服器室拍攝的。這些照片是報告的一部分，報導集中於實驗室的政治、科學和商業目標，引用科學家呼籲為國家的利益服務。據報導，由於北京團隊辦公空間有限，不得不「窩」在伺服器室裡。</figcaption>
+</figure>
 
 ### 天狗安全閘道：審查與控制中心
 
-天狗安全閘道（TSG）是 Geedge Networks 提供的旗艦產品，作為一個運營商級別或國家級防火牆與流量管理解決方案，其全面能力可媲美中國防火長城（GFW）。TSG 允許對整個國家所有用戶流量進行全面監控，並促進識別和阻擋網頁內容及應用程式。TSG 與企業環境中部署的防火牆設備相似，但能夠擴展以處理整個國家的網際網路流量。這項技術似乎缺乏保障人權的倫理限制。
+天狗安全閘道（TSG）是 Geedge Networks 提供的旗艦產品，作為一個運營商級別或國家級防火牆與流量管理解決方案，其全面能力可媲美中國防火長城（GFW）。TSG[^8] 允許對整個國家所有用戶流量進行全面監控，並促進識別和阻擋網頁內容及應用程式。TSG 與企業環境中部署的防火牆設備相似，但能夠擴展以處理整個國家的網際網路流量。這項技術似乎缺乏保障人權的倫理限制。
 
 TSG 具備全面的監控和審查功能，透過深度封包檢測，具備識別和封鎖 VPN 及翻牆工具、限制流量、監控、追蹤、標記及阻擋個別網路使用者，並能夠向使用者植入惡意軟體的能力。以下章節將描述這些功能，並詳細說明 TSG 軟硬體如何部署與管理。
 
@@ -78,13 +81,13 @@ TSG 能夠通過兩種主要的方法分析傳輸層安全（TLS）流量。第�
 
 TSG 也運用深度封包檢測來全面識別與虛擬私人網路（VPN）和翻牆工具相關的協議，例如 OpenVPN 和 WireGuard。它允許客戶與 Geedge Networks 合作制定規則來阻擋特定服務供應商的訪問，Geedge 同時管理一個行動裝置農場，在受控環境下安裝和運行 VPN 應用程式。此外，Geedge Networks 的員工似乎有能力在其辦公室內建立 Wi-Fi 網絡，以遠端連接任何裝置到客戶網路。這一功能讓他們能在真實情境中驗證封鎖機制是否運作有效。
 
-即使當 TSG 無法識別與使用者活動相關的應用程式或服務時，系統也能標記任何異常的大流量為可疑流量。系統能夠配置將這些標記的流量在預定時間（例如 24 小時）後進行封鎖。這種方法與防火長城（GFW）的觀察結果一致，觀察顯示其在一段時間後封鎖任何高頻寬加密流量，即使無法識別流量的具體性質。
+即使當 TSG 無法識別與使用者活動相關的應用程式或服務時，系統也能標記任何異常的大流量為可疑流量。系統能夠配置將這些標記的流量在預定時間（例如 24 小時）後進行封鎖。這種方法與防火長城（GFW）的觀察結果一致，觀察顯示其在一段時間後封鎖任何高頻寬加密流量，即使無法識別流量的具體性質[^9]。
 
-AppSketch 是一個資料庫，作為集中式存儲庫，其中 Geedge 根據流量指紋為所有服務提供商創建檔案，讓客戶能夠更選擇性地阻擋 VPN 和其他應用程式，這些應用程式可能被公司或政府組織使用。AppSketch 的設計使得制定阻擋規則的人員不需要具有深厚的技術知識，這意味著客戶（政府）可以將某些公司列入白名單以使用 VPN，並決定哪些 VPN 可以被允許使用。舉例來說，緬甸的網路安全法規定，緬甸政府會維護一個允許使用受限制的 VPN 和應用程式的公司清單。
+AppSketch 是一個資料庫，作為集中式存儲庫，其中 Geedge 根據流量指紋[^10]為所有服務提供商創建檔案，讓客戶能夠更選擇性地阻擋 VPN 和其他應用程式，這些應用程式可能被公司或政府組織使用。AppSketch 的設計使得制定阻擋規則的人員不需要具有深厚的技術知識，這意味著客戶（政府）可以將某些公司列入白名單以使用 VPN，並決定哪些 VPN 可以被允許使用。舉例來說，緬甸的網路安全法規定，緬甸政府會維護一個允許使用受限制的 VPN 和應用程式的公司清單。
 
 Geedge Networks 正在開發一個稱為 AppSketch Works 的沙盒引擎，旨在自動生成應用程式分類檔案。這類產品將允許客戶在手機上運行任何應用程式，系統將自動學習如何在網路上封鎖它。
 
-然而，在洩漏的時間點上，AppSketch Works 項目似乎仍處於開發初期階段，由於需要較高級別的技術技能來配置它以及誤分類的問題，該原型受到了客戶的不利反饋。然而，值得注意的是，此工具的進一步開發將允許 Geedge 將定義封鎖規則的責任轉移給政府客戶，取代客戶總是將此過程外包給 Geedge。
+然而，在洩漏的時間點上，AppSketch Works 項目似乎仍處於開發初期階段，由於需要較高級別的技術技能來配置它以及誤分類的問題[^11]，該原型受到了客戶的不利反饋。然而，值得注意的是，此工具的進一步開發將允許 Geedge 將定義封鎖規則的責任轉移給政府客戶，取代客戶總是將此過程外包給 Geedge。
 
 <figure markdown="span">
   [![圖片於報告 20 頁](https://assets.anoni.net/the-internet-coup/index-5-20-1.png)](https://assets.anoni.net/the-internet-coup/index-5-20-1.png){target="_blank"}
@@ -103,7 +106,7 @@ Sanity Directory（SAN）或使用者聲譽流量管理系統是一個訂閱者�
 
 ### 識別和封鎖個別網路使用者
 
-TSG 還能識別共享相同公共 IP 地址的個別網路使用者。TSG 包含自己的網路位址轉換（NAT）實作，稱為 WAN-NAT，可以在「來源 NAT」（SNAT）模式下運作以實現運營商級別網路位址轉換（CGNAT），或在「目的地 NAT」（DNAT）模式下運作以重定向往網際網路的流量。例如，它可以重新路由原本打算給公共 DNS 解析器的流量到由運營商或政府控制的 DNS 解析器。TSG 也能偵測並封鎖使用手機網路共享，即「網路分享」（tethering）功能將行動裝置網路連接分享給其他設備的用戶。
+TSG 還能識別共享相同公共 IP 地址的個別網路使用者。TSG 包含自己的網路位址轉換（NAT）實作，稱為 WAN-NAT，可以在「來源 NAT」（SNAT）模式下運作以實現運營商級別網路位址轉換（CGNAT），或在「目的地 NAT」（DNAT）模式下運作以重定向往網際網路的流量。例如，它可以重新路由原本打算給公共 DNS 解析器的流量到由運營商或政府控制的 DNS 解析器。TSG 也能偵測並封鎖使用手機網路共享，即「網路分享」（tethering）功能將行動裝置網路連接分享給其他設備的用戶[^12]。
 
 這些功能是值得注意的，因為這些功能對於網路服務提供商（ISPs）來說頗具吸引力，而不僅僅是針對客戶政府，滿足了網路管理和成本節約的需求。這可能有助於通過提供額外的吸引服務，例如更廣泛的監控和審查功能，來確保 ISPs 在其網路上安裝 Geedge 的支持。
 
@@ -119,7 +122,7 @@ TSG 的沿路注入功能系統能針對特定用戶進行精確針對性的惡�
 
 上面描述的功能可以用來感染用戶以部署任何其他公司提供的間諜軟體。然而，值得注意的是，Geedge Networks 也試圖自行將此功能武器化。
 
-在洩漏的數據資料中，Geedge Networks 識別出的最令人困惑的產品之一是 DLL Active Defence，這通常是在網絡犯罪黑市上才會找到的產品。乍看之下，這似乎是一個用來防護分散式阻斷服務（DDoS）攻擊的系統；然而，細看之後發現，它實際上是一個用來對付被認為在政治上不受歡迎的網站和其他網路服務的 DDoS 攻擊平台。這看起來像是 Geedge 對中國「大炮」（Great Cannon） 的自主實作，如 2015 年公民實驗室（Citizen Lab）報告所描述的那樣。
+在洩漏的數據資料中，Geedge Networks 識別出的最令人困惑的產品之一是 DLL Active Defence，這通常是在網絡犯罪黑市上才會找到的產品。乍看之下，這似乎是一個用來防護分散式阻斷服務（DDoS）攻擊的系統；然而，細看之後發現，它實際上是一個用來對付被認為在政治上不受歡迎的網站和其他網路服務的 DDoS 攻擊平台。這看起來像是 Geedge 對中國「大炮」（Great Cannon） 的自主實作，如 2015 年公民實驗室（Citizen Lab）報告[^13]所描述的那樣。
 
 這一功能的存在意味著，當國家防火牆可以封鎖國內公民無法訪問的網站時，DLL Active Defence 功能則可以使該網站對全球所有網絡使用者都無法訪問，而不僅僅是在國家防火牆範圍內。
 
@@ -145,7 +148,7 @@ DLL 透過網路掃描來識別流量放大點，比如遞迴 DNS 服務器，�
 
 TSG 節點被設計為可以被組合成一個叢集，並且網路流量通過其中並在節點間分配。TSGX 不僅僅是擁有一個或兩個防火牆設備以提高冗餘能力，而是可以水平擴展，客戶可以新增更多節點。每個節點都增加了處理更多網路流量的能力。個別節點透過網路封包經紀進行連接，根據流量的來源和目的地來進行負載平衡。網路封包經紀（NPBs）是硬體設備，數據顯示 Geedge 有使用來自第三方供應商如 Niagara Networks 的 NPBs。此外，Geedge 還提供他們自己的產品 Ether Fabric，以下將有詳細介紹。
 
-TSG 叢集中的節點透過一個名為中央管理系統（Central Management, CM）來進行集中管理，該系統也以其前內部名稱「畢方」（Bifang）識別。這個系統提供一個網頁介面和應用程式介面（API），用於與所有運行防火牆的 TSG 硬體進行互動和配置。
+TSG 叢集中的節點透過一個名為中央管理系統（Central Management, CM）來進行集中管理，該系統也以其前內部名稱「畢方」（Bifang）[^14]識別。這個系統提供一個網頁介面和應用程式介面（API），用於與所有運行防火牆的 TSG 硬體進行互動和配置[^15]。
 
 ### TSG-OS
 
@@ -177,7 +180,7 @@ Ether Fabric 的硬體組件在很大程度上是可互換的，其建造基於�
 
 有關恒光 VELA 平台的公開訊息有限；然而，硬體似乎類似於中國公司 Embedway 生產的 OptiWay ATCA 平台。此外，文件中所包含的管理介面供應商 MAC 地址查詢結果顯示，部分硬體可能由台灣公司 ADLINK Technology Inc. 製造。控制平面基於 Open Network Linux，並由 Geedge Networks 內部開發。
 
-由於 P4 編程語言的目標獨立性，Barefoot 交換芯片是可以互換的。洩露的資訊指出，Geedge Networks 已經研究了來自 AMD、博通和美滿（隸屬於 NVIDIA）的替代解決方案。例如，P4 也可以用於 FPGA 平台，如 Intel 的 PA8921 加速卡，用於 Embedway 的其他產品中。根據 Intel 在其官方網站上發布的 2023 年 11 月技術簡報，Intel 確實向 Embedway 提供了用於深度封包檢測應用的加速卡。不過，我們的研究沒有發現任何這些加速卡由 Geedge Networks 使用的證據。
+由於 P4 編程語言的目標獨立性，Barefoot 交換芯片是可以互換的。洩露的資訊指出，Geedge Networks 已經研究了來自 AMD、博通和美滿（隸屬於 NVIDIA）的替代解決方案。例如，P4 也可以用於 FPGA 平台，如 Intel 的 PA8921 加速卡，用於 Embedway 的其他產品中。根據 Intel 在其官方網站上發布的 2023 年 11 月技術簡報，Intel 確實向 Embedway 提供了用於深度封包檢測應用的加速卡[^16]。不過，我們的研究沒有發現任何這些加速卡由 Geedge Networks 使用的證據。
 
 ### Network Zodiac 監控網路硬體
 
@@ -189,3 +192,17 @@ Network Zodiac（哪吒）是由 Geedge Networks 開發的一款網路級資產�
 </figure>
 
 Network Zodiac 與流行的開源解決方案的一個顯著不同功能是其集成的網頁終端，該終端允許網路管理員使用 SSH 遠端連接到任何受監控的端點。這一功能為客戶提供直接訪問網路設備的能力，方便進行故障排除和管理。然而，這也使客戶承受了顯著的安全風險。在最壞的情況下，駭客可能會訪問部署在一個國家內部的所有安全設備。這種取捨顯示 Geedge 優先考慮大規模管理的便捷和易用性，而非基本的安全性。
+
+[^4]: 從資料中看到的客戶部署情況顯示，Cyber Narrator 運行於中國伺服器製造商浪潮的高密度存儲伺服器上。該軟體本身並不依賴於特定硬體，可部署於任何供應商的通用伺服器硬體上。
+[^5]: 它基於 Apache Kafka，利用了 Apache Druid 資料儲存、Apache Rink 分散式處理引擎和 ClickHouse 分析型資料庫構建而成。
+[^6]: SQL 模式本質上是一個資料庫的組織系統。
+[^7]: 這意味著，TSG Galaxy 的客戶可以將網路流量歸因於一個 IP 位址，以及特定的手機或 SIM 卡。
+[^8]: 在中國神話中，天狗通常被描繪為一隻在日食或月食中吞噬太陽或月亮的狗。
+[^9]: Minqshi Wuet et al, "How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic", Proceedings of  the 32nd USENIX Securitmposium. August 9-11 2023. Anaheim CA USA <https://www.usenix.org/conference/usenixsecurity23/presentation/wu-mingshi>.
+[^10]: 為了提取這些指紋，Geedge 和 Mesalab 的學生使用了一個開源工具 tcpdump 的修改版本，稱為 tcpdump_mesa。接著，指紋會被轉換為規則集，使用四個深度數據包檢查系統之一：SAPP（Stream Analyze Process Platform），一個 C 語言的封包解析和注入庫；Stellar，一個狀態防火牆插件平台，相較於 SAPP 運作在更高的抽象層次；或是 Maat，一個宣告式系統。與 SAPP 和 Stellar 不同，Maat 不需要編程知識以開發新規則。Maat 能夠匹配常見的連接指紋，包括 IP 位址、域名、TLS 伺服器名稱指示（SNI）、JA3/JA4 指紋，這些指紋在 JSON 文件中被指定。Maat 規則透過使用 Redis 資料庫進行同步，以確保這些規則在 TSG 叢集的節點中一致應用。另一個執行深度數據包檢查的系統由兩個二進位文件組成，分別為「libqmengine.so」和「libqmbundle.so」。雖然洩漏的信息不包括相關的源代碼，其中包含的 Jira 票據將這一系統稱作 QDPI 或「第三方識別引擎庫」，這暗示了該系統可能不是由 Geedge Networks 開發。分析數據中的 Jira 票據表達了關於無法修改第三方引擎行為的擔憂，並強調了在獲取此系統技術支援時的挑戰。這些擔憂進一步支持了這些二進位文件不是由 Geedge Networks 開發的觀點。對這些二進位文件的初步逆向工程指出它們參與了網路協議和服務的分類。與第三方引擎的整合是透過使用名為 qdpi_detector 的 Stellar 插件來完成的。
+[^11]: 他們在中國的一個區域性國內客戶中試驗了這個系統。該軟體的初始版本收到此客戶的負面反饋，主要原因是需要在 Python 中進行用戶介面自動化腳本編寫以促進與應用程式的互動。這成了一個重大挑戰，因為終端使用者通常缺乏必要的腳本編寫技能。此外，客戶擔心自動分類過程可能會導致誤報，將廣告網絡和由第三方庫產生的其他網路請求錯誤分類為指紋。
+[^12]: 儘管當今市場上大多數網路分享檢測解決方案主要依靠分析收到的 IP 封包的生存時間（TTL）值，TSG 採用的是更為複雜的方法。它結合被動作業系統檢測技術與深度數據包檢查來識別與驗證入口網頁檢測（特別是所謂的 generate_204 請求）相關的 HTTP 請求，這些請求根據所用的作業系統而有所不同。因此，任何通過行動連線進入網路的桌面作業系統客戶均被視為網路分享活動的指示。天狗安全閘道採用的另一種技術涉及分析 TCP 時間戳值中的差異，在現代 TCP 堆疊中，這個計數器在啟動時初始化為一個隨機值；這些值的變化表明在網路位址轉換（NAT）背後存在多個裝置。
+[^13]: Bill Marczak et al, "China's Great Cannon", published on April 10 2025. <https://citizenlab.ca/2015/04/chinas-great-cannon/>.
+[^14]: 在中國神話中，畢方是一種獨腳鳥，象徵著不幸的預兆，特別是與火相關的不幸。據信它的出現預示著該地區可能有災難發生。
+[^15]: 該系統整合了統一認證，並由中央配置存儲支撐，這可將設置同步到叢集中的各個節點，同時還整合了故障轉移機制以確保運營的連續性。其底層使用一個 Restful API 來查詢叢集中的各種組件以獲取狀態和故障信息。此 API 在內部被稱為 TSG-OAM，其中 OAM 是運營和維護的縮寫。
+[^16]: Intel Corporation. "EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration. Solution Brief. November 2023. <https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf>.
