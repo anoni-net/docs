@@ -22,6 +22,6 @@ icon: material/arrow-right-bottom
 
 我們的研究顯示，快速擴展的可能性很大。隨著這種一站式網路控制解決方案需求增長，像 Geedge 這類公司持續向新客戶推銷、創新與擴展其業務。我們敦促國際社會使用這份報告提供的見解，以面對這些技術商品化和數位壓制全球市場進化的現實。
 
-[^1]: Access Now. "Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm" Access Now, April 6, 2023. https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/
-[^2]: Africanews. "Kenya's Safaricom to enter Ethiopia" Africanews, October 7, 2022. https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/
-[^3]: United Nations. "IGF 2022 - Conference Room 1 - English" YouTube Video, 9:20:32. Published November 2022. https://www.youtube.com/live/UOpmpxRFh-4?t=33662s
+[^1]: Access Now. "Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm" Access Now, April 6, 2023. <https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/>{target="_blank"}.
+[^2]: Africanews. "Kenya's Safaricom to enter Ethiopia" Africanews, October 7, 2022. <https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/>{target="_blank"}.
+[^3]: United Nations. "IGF 2022 - Conference Room 1 - English" YouTube Video, 9:20:32. Published November 2022. <https://www.youtube.com/live/UOpmpxRFh-4?t=33662s>{target="_blank"}.
