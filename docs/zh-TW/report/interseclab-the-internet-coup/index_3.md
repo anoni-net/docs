@@ -10,7 +10,7 @@ icon: material/arrow-right-bottom
     - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
     - 本章節內容翻譯範圍為報告 **INDEX 3/8** 的內容。
 
-當聯合國 2022 網際網路治理論壇（IGF）的參與者齊聚在衣索比亞的亞的斯亞貝巴（Addis），討論「連結所有人並保障人權」時，提格雷（Tigray）地區的七百萬衣索比亞人已經經歷了超過兩年的網路封鎖，無法上網。儘管通訊中斷持續進行，國際論壇的代表對於兩週前簽署的停火協議保持樂觀。他們也在慶祝電信業的自由化，以及 Safaricom 進入當地市場——這是第一家獲得該國營運許可的國際公司。在為期一週的會議結束時，衣索比亞副總理德梅克·梅科南·哈森（Demeke Mekonnen Hassen）代表政府發表告別演說，感謝來自聯合國和多個成員國的國際貴賓。當他完成書面講稿時，一個不知名的聲音打斷了直播視頻，對遠程參會者播放：「恢復提格雷的網路連線的時間表是什麼？」這個問題不斷重複。
+當聯合國 2022 網際網路治理論壇（IGF）的參與者齊聚在衣索比亞的亞的斯亞貝巴（Addis），討論「連結所有人並保障人權」時，提格雷（Tigray）地區的七百萬衣索比亞人已經經歷了超過兩年的網路封鎖[^1]，無法上網。儘管通訊中斷持續進行，國際論壇的代表對於兩週前簽署的停火協議保持樂觀。他們也在慶祝電信業的自由化，以及 Safaricom 進入當地市場——這是第一家獲得該國營運許可的國際公司[^2]。在為期一週的會議結束時，衣索比亞副總理德梅克·梅科南·哈森（Demeke Mekonnen Hassen）代表政府發表告別演說，感謝來自聯合國和多個成員國的國際貴賓。當他完成書面講稿時，一個不知名的聲音打斷了直播視頻，對遠程參會者播放：「恢復提格雷的網路連線的時間表是什麼？」這個問題不斷重複[^3]。
 
 這一時刻突顯了衣索比亞在網路治理方法上的矛盾，以及國際社會對電信自由化和競爭自然改善網路自由的期待。實際上，當 IGF 正在進行時，中國公司 Geedge Networks 同時在與政府合作，安裝複雜的硬體和軟體產品包，以實現前所未有的監控和審查能力。
 
@@ -21,3 +21,7 @@ icon: material/arrow-right-bottom
 我們選擇在全球網路自由緊要關頭發表這份報告。過去十年，威權政府一直在開發自己網路控制系統，與各種不透明的公司和供應商合作，建立拼圖式系統來封鎖網上內容、關閉網路，並監控使用者。這份報告揭示了一個根本的轉變：像 Geedge 這樣的公司現在公開推銷全面的產品套件，為任何政府提供廣泛的先進工具進行大規模和精準監控及審查——甚至提供自動與每個客戶共享的軟體更新。這些公司創新以識別、封鎖和禁用審查規避工具，同時在其系統中建立韌性，並透過設計與大多數商用網路硬體提供商的互操作性使其不受制裁影響。
 
 我們的研究顯示，快速擴展的可能性很大。隨著這種一站式網路控制解決方案需求增長，像 Geedge 這類公司持續向新客戶推銷、創新與擴展其業務。我們敦促國際社會使用這份報告提供的見解，以面對這些技術商品化和數位壓制全球市場進化的現實。
+
+[^1]: Access Now. "Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm" Access Now, April 6, 2023. https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/
+[^2]: Africanews. "Kenya's Safaricom to enter Ethiopia" Africanews, October 7, 2022. https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/
+[^3]: United Nations. "IGF 2022 - Conference Room 1 - English" YouTube Video, 9:20:32. Published November 2022. https://www.youtube.com/live/UOpmpxRFh-4?t=33662s
