@@ -25,3 +25,7 @@ icon: material/arrow-right-bottom
 [^1]: Access Now. "Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm" Access Now, April 6, 2023. <https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/>{target="_blank"}.
 [^2]: Africanews. "Kenya's Safaricom to enter Ethiopia" Africanews, October 7, 2022. <https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/>{target="_blank"}.
 [^3]: United Nations. "IGF 2022 - Conference Room 1 - English" YouTube Video, 9:20:32. Published November 2022. <https://www.youtube.com/live/UOpmpxRFh-4?t=33662s>{target="_blank"}.
+
+*[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
+*[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
+*[IGF]: 網際網路治理論壇（IGF，全名 Internet Governance Forum）是由聯合國主導的一個全球性平台，其目的在於促進多方利益相關者就網際網路相關政策問題進行對話和交流。IGF 提供了一個開放且包容的場域，讓各國政府、企業、技術社群、公民社會和學術機構得以共同探討和討論網際網路治理的各種議題，例如網路安全、隱私保護、數位包容等。儘管 IGF 不具約束力，也不會產出具法律效力的文件，但它在促進跨界合作和知識共享方面發揮了重要作用。
