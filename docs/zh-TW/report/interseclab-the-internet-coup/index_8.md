@@ -1,5 +1,6 @@
 ---
 title: 結論、反思與未來步驟：反擊作為服務的數位威權主義
+description: 網路政變 / The Internet Coup | InterSecLab
 icon: material/arrow-right-bottom
 ---
 
