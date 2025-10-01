@@ -1,5 +1,6 @@
 ---
 title: 網路政變 / The Internet Coup | InterSecLab
+description: 關於中國網路防火牆服務輸出到其他國家，希望引起各界對網路自由和網路治理的反思和警覺
 ---
 
 # :material-file-outline: 網路政變 - InterSecLab
