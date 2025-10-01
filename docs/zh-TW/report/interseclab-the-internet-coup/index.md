@@ -31,7 +31,9 @@ title: 網路政變 / The Internet Coup | InterSecLab
 
 * **2025/10/01：**正體中文（臺灣用語）翻譯釋出，目前註腳內容尚未完全翻譯完成，持續補完中。
 
-每個頁面的右上方、標題後方都有一個「**:material-note-edit-outline: 編輯圖示**」，如果在頁面上發現任何需要修正的內容，都可以直接透過「**:material-note-edit-outline: 編輯圖示**」的連結到 Github 上編輯、提交修正。
+!!! info ":material-note-edit-outline: 編輯圖示"
+
+    每個頁面的右上方、標題後方都有一個「**:material-note-edit-outline: 編輯圖示**」，如果在頁面上發現任何需要修正的內容，都可以直接透過「**:material-note-edit-outline: 編輯圖示**」的連結到 Github 上編輯、提交修正。
 
 ## 關於 InterSecLab
 
