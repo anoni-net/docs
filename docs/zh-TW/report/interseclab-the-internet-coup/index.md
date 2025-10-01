@@ -31,6 +31,8 @@ title: 網路政變 / The Internet Coup | InterSecLab
 
 * **2025/10/01：**正體中文（臺灣用語）翻譯釋出，目前註腳內容尚未完全翻譯完成，持續補完中。
 
+每個頁面的右上方、標題後方都有一個「**:material-note-edit-outline: 編輯圖示**」，如果在頁面上發現任何需要修正的內容，都可以直接透過「**:material-note-edit-outline: 編輯圖示**」的連結到 Github 上編輯、提交修正。
+
 ## 關於 InterSecLab
 
 [InterSecLab](https://interseclab.org/about/){target="_blank"} 是一家專注於數位安全的實驗室，具備先進的數位鑑識及威脅情報能力。透過技術分析及創新研究，我們協助各機構辨識數位威脅並監測、分析更廣泛的趨勢以及駭客的滲透和控管手法。我們的多學科團隊在網路鑑識、惡意軟體分析、事件應對、公開情報（OSINT）、系統安全及資料科學擁有專業技術。
