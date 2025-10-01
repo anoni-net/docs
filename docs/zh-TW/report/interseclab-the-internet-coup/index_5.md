@@ -35,20 +35,20 @@ Cyber Narrator 從其資料倉儲解決方案 TSG Galaxy 所收集的數據，�
 
 WebSketch 結合了流行的資安情報服務 Shodan 和 Greynoise 的功能。像 Shodan 一樣，WebSketch 通過掃描網際網路以發現連接的設備，如攝影機、路由器和伺服器。WebSketch 也仿效 Greynoise 的功能，讓客戶能將原本無意義的標識如 IP 位址和域名標記為連結到特定網路服務，如微信或 VPN 服務。WebSketch 的設計文件中 Geedge 員工被要求在設計新功能時參考 Greynoise，這顯示其對 Greynoise 的高度依賴。分析該報告的洩漏數據中包含了在中國新疆部署 Cyber Narrator 的詳細要求清單，確保產品能識別「可疑」的通信模式，如使用 VPN 和國際漫遊。這種 Cyber Narrator 的使用案例（如下述中國部署部分所述）明確顯示出，Cyber Narrator 能夠使客戶（政府）和安全部隊更容易標記使用隱蔽工具或訪問其他應用程式或網頁的個別用戶，這些工具和網站都被客戶（政府）視為可能的惡意工具。Cyber Narrator 的分析能力也能阻擋對特定網站或虛擬私人網路（VPN）服務的訪問。
 
-透過 Cyber Narrator，客戶（政府）還能識別出在限制實施之前訪問過該內容或服務的個人。實際上，這意味著客戶（國家）可以「回溯時間」找出那些曾經訪問過後來被定為非法網站的人。這對公民自由和言論自由具有令人擔憂的含義，因為網路使用者可能因於當初合法的線上行為而被識別、監控甚至受懲罰。這種能力是透過另一 Geedge 產品天狗安全閘道（Tiangou Secure Gateway，TSG）的巨量數據資料收集和聚合功能實現的，更詳細的描述可在 Tiangou Secure Gateway 章節中找到。
+透過 Cyber Narrator，客戶（政府）還能識別出在限制實施之前訪問過該內容或服務的個人。實際上，這意味著客戶（國家）可以「回溯時間」找出那些曾經訪問過後來被定為非法網站的人。這對公民自由和言論自由具有令人擔憂的含義，因為網路使用者可能因於當初合法的線上行為而被識別、監控甚至受懲罰。這種能力是透過另一 Geedge 產品天狗安全閘道（Tiangou Secure Gateway，TSG）的巨量資料數據收集和聚合功能實現的，更詳細的描述可在 Tiangou Secure Gateway 章節中找到。
 
 ### TSG GALAXY：聚合分析以進行大規模監控
 
-TSG Galaxy 是 Geedge Networks 的提取、轉換、載入（Extract, Transform, Load, ETL）資料倉儲解決方案，專為網際網路級別的大規模監控而設計，收集並整合客戶國家所有網路使用者以及透過網路傳輸的海量數據。它基於開源的 Apache Kafka 流處理平台[^5]，這是一個常用於為線上電子商務和廣告商提供客戶分析的數據資料處理軟體。這項研究中分析的洩漏數據包含 TSG Galaxy 的 SQL 模式[^6]，顯示 TSG Galaxy 被用來儲存所有 TCP 和 UDP 會話、這些主要用於寬頻和行動數據的傳輸協議，以及國內所有 SIP 會話。SIP 是用於 VoIP（網際網路語音協議）的協議，是大多數現代電話網路的基礎。這意味著 TSG Galaxy 不僅能監控網際網路上的流量和內容，還能監控電話通話。
+TSG Galaxy 是 Geedge Networks 的提取、轉換、載入（Extract, Transform, Load, ETL）資料倉儲解決方案，專為網際網路級別的大規模監控而設計，收集並整合客戶國家所有網路使用者以及透過網路傳輸的海量數據。它基於開源的 Apache Kafka 流處理平台[^5]，這是一個常用於為線上電子商務和廣告商提供客戶分析的資料數據處理軟體。這項研究中分析的洩漏數據包含 TSG Galaxy 的 SQL 模式[^6]，顯示 TSG Galaxy 被用來儲存所有 TCP 和 UDP 會話、這些主要用於寬頻和行動數據的傳輸協議，以及國內所有 SIP 會話。SIP 是用於 VoIP（網際網路語音協議）的協議，是大多數現代電話網路的基礎。這意味著 TSG Galaxy 不僅能監控網際網路上的流量和內容，還能監控電話通話。
 
-TSG Galaxy 使用 IP 數據資料流訊息輸出（IP Flow Information Export, IPFIX）來分析流量，並使用深度封包檢測（DPI）萃取元數據資料。通過 DPI，他們可以萃取詳細的獨一無二的指紋數據，包括 TLS 和 QUIC 伺服器名稱指示、DNS 查詢和電子郵件標頭。TSG Galaxy 還實施了連接指紋技術，如 JA3 哈希，允許 Cyber Narrator 識別模式以幫助確定用戶所使用的操作系統以及他們所用來連接的應用程式。這項技術可用來幫助識別用戶是否使用了如 VPN 等規避工具來隱藏流量或繞過審查。在 TSG Galaxy 中，所有這些訊息與來自網路服務提供商（ISP）的訊息相結合，通過各種標記，如 IP 地址、用戶 ID、IMEI 和 IMSI[^7]，將其連接到個別網路使用者。從 TSG Galaxy 萃取的元數據被發送到一個可由客戶通過 Cyber Narrator 進行查詢的數據資料庫。
+TSG Galaxy 使用 IP 資料數據流訊息輸出（IP Flow Information Export, IPFIX）來分析流量，並使用深度封包檢測（DPI）萃取元資料數據。通過 DPI，他們可以萃取詳細的獨一無二的指紋數據，包括 TLS 和 QUIC 伺服器名稱指示、DNS 查詢和電子郵件標頭。TSG Galaxy 還實施了連接指紋技術，如 JA3 哈希，允許 Cyber Narrator 識別模式以幫助確定用戶所使用的操作系統以及他們所用來連接的應用程式。這項技術可用來幫助識別用戶是否使用了如 VPN 等規避工具來隱藏流量或繞過審查。在 TSG Galaxy 中，所有這些訊息與來自網路服務提供商（ISP）的訊息相結合，通過各種標記，如 IP 地址、用戶 ID、IMEI 和 IMSI[^7]，將其連接到個別網路使用者。從 TSG Galaxy 萃取的元數據被發送到一個可由客戶通過 Cyber Narrator 進行查詢的數據資料庫。
 
 <figure markdown="span">
   [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-1.png)](https://assets.anoni.net/the-internet-coup/index-5-16-1.png){target="_blank"}
   <figcaption>圖片說明：這個圖示展示了流量記錄如何被吸收以及數據從 TSG 流向 Cyber Narrator 的過程。起初，網路使用者嘗試訪問一個網站，對 "example.com" 的網站請求被送往 ISP 的基礎設施並在此由 TSG-X 捕捉。TSG-X 查詢 Sanity Directory 以識別用戶 IP 的所有者。這一由 Sanity Directory 從 ISP 信號收集的身份回傳為 Jane Doe。然後 TSG-X 將該 IP 標記為 IP 所有者名和訪問的網站，並將這一記錄記錄在 TSG Galaxy 中。通過 Cyber Narrator，一名政府官員可以查詢 Jane Doe 訪問過的網站。</figcaption>
 </figure>
 
-這項研究的一個重要發現是，所有在客戶（政府）位置內由 TSG Galaxy 收集的網路使用者數據似乎對 Geedge Networks 的員工可見。數據同時顯示，真實客戶數據資料的快照有時會分享給中科院的 Mesalab，這是一個似乎與 Geedge Networks 緊密相關的學術實驗室。數據資料顯示，Mesalab 的工程學生使用這些真實世界的客戶資訊進行研究，目的是更好地理解和阻止網路審查規避。Geedge 與其附屬機構保存客戶數據的時間長短仍不明確。
+這項研究的一個重要發現是，所有在客戶（政府）位置內由 TSG Galaxy 收集的網路使用者數據似乎對 Geedge Networks 的員工可見。數據同時顯示，真實客戶資料數據的快照有時會分享給中科院的 Mesalab，這是一個似乎與 Geedge Networks 緊密相關的學術實驗室。資料數據顯示，Mesalab 的工程學生使用這些真實世界的客戶資訊進行研究，目的是更好地理解和阻止網路審查規避。Geedge 與其附屬機構保存客戶數據的時間長短仍不明確。
 
 <figure markdown="span">
   [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-2.png)](https://assets.anoni.net/the-internet-coup/index-5-16-2.png){target="_blank"}
@@ -123,7 +123,7 @@ TSG 的沿路注入功能系統能針對特定用戶進行精確針對性的惡�
 
 上面描述的功能可以用來感染用戶以部署任何其他公司提供的間諜軟體。然而，值得注意的是，Geedge Networks 也試圖自行將此功能武器化。
 
-在洩漏的數據資料中，Geedge Networks 識別出的最令人困惑的產品之一是 DLL Active Defence，這通常是在網路犯罪黑市上才會找到的產品。乍看之下，這似乎是一個用來防護分散式阻斷服務（DDoS）攻擊的系統；然而，細看之後發現，它實際上是一個用來對付被認為在政治上不受歡迎的網站和其他網路服務的 DDoS 攻擊平台。這看起來像是 Geedge 對中國「大炮」（Great Cannon） 的自主實作，如 2015 年公民實驗室（Citizen Lab）報告[^13]所描述的那樣。
+在洩漏的資料數據中，Geedge Networks 識別出的最令人困惑的產品之一是 DLL Active Defence，這通常是在網路犯罪黑市上才會找到的產品。乍看之下，這似乎是一個用來防護分散式阻斷服務（DDoS）攻擊的系統；然而，細看之後發現，它實際上是一個用來對付被認為在政治上不受歡迎的網站和其他網路服務的 DDoS 攻擊平台。這看起來像是 Geedge 對中國「大炮」（Great Cannon） 的自主實作，如 2015 年公民實驗室（Citizen Lab）報告[^13]所描述的那樣。
 
 這一功能的存在意味著，當國家防火牆可以封鎖國內公民無法訪問的網站時，DLL Active Defence 功能則可以使該網站對全球所有網路使用者都無法訪問，而不僅僅是在國家防火牆範圍內。
 

@@ -200,7 +200,7 @@ Investcom Holding 的完整內容見於附錄。
 
 <figure markdown="span">
   [![圖片於報告 49 頁](https://assets.anoni.net/the-internet-coup/index-6-49-1.png)](https://assets.anoni.net/the-internet-coup/index-6-49-1.png){target="_blank"}
-  <figcaption>圖片說明：從 Geedge Networks 數據資料中提取的圖像顯示了 Frontiir 仰光數據中心的網路拓撲，其中 Geedge 的硬體整合到了 ISP 的網路基礎設施中。</figcaption>
+  <figcaption>圖片說明：從 Geedge Networks 資料數據中提取的圖像顯示了 Frontiir 仰光數據中心的網路拓撲，其中 Geedge 的硬體整合到了 ISP 的網路基礎設施中。</figcaption>
 </figure>
 
 洩漏的文件還包含有關封鎖 VPN、Tor（特別是 Tor 在行動裝置上的 Orbot）和 Psiphon 的詳細訊息。緬甸的封鎖 VPN 名單比一些其他客戶（國家，如：衣索比亞或哈薩克）的名單還長。文件記錄了攔截「高優先級應用」的規則制定過程，其中包括共計 55 款應用程式的封鎖規則，比如即時通訊應用 Signal 和 WhatsApp。值得注意的是，這些封鎖規則由 Geedge 制定，而非客戶（國家）。這很可能不是大多數競爭產品的做法。
@@ -211,7 +211,7 @@ Investcom Holding 的完整內容見於附錄。
 
 ## A24：處於初期階段的未知客戶
 
-雖然洩漏的文件包含與本報告中所提客戶（國家）相關的具體地點和（或）網路服務提供商的資訊，但與 A24 相關的數據資料並未包括任何可以識別客戶的指標。有關 A24 客戶身份的唯一線索是其代號中的首字母 A 和年份 2024。
+雖然洩漏的文件包含與本報告中所提客戶（國家）相關的具體地點和（或）網路服務提供商的資訊，但與 A24 相關的資料數據並未包括任何可以識別客戶的指標。有關 A24 客戶身份的唯一線索是其代號中的首字母 A 和年份 2024。
 
 除此之外，資料顯示，於洩漏發生時，A24 與 Geedge 的合作關係似乎仍處於初期階段，涉及兩個 Geedge 設備的概念驗證部署，一個處於鏡像模式，另一個處於內聯模式，以向客戶說明這兩種模式的區別。
 
@@ -275,7 +275,7 @@ J24 計畫還包括用於針對特定群體的功能。這些功能允許在地�
 
 <figure markdown="span">
   [![圖片於報告 54 頁](https://assets.anoni.net/the-internet-coup/index-6-54-1.png)](https://assets.anoni.net/the-internet-coup/index-6-54-1.png){target="_blank"}
-  <figcaption>圖片說明：從 Geedge 數據資料中提取的福建專案儀表板截圖。</figcaption>
+  <figcaption>圖片說明：從 Geedge 資料數據中提取的福建專案儀表板截圖。</figcaption>
 </figure>
 
 幾份文件還提到一個位於中國東部沿海的江蘇省專案。Geedge 與當地江蘇省公安廳（JPSB）合作的理由是打擊網路詐騙。通訊顯示，JPSB 對於允許 Geedge 建立大數據資料庫猶豫不決，更希望 Geedge 在現有基礎設施上部署工具。一個名為江蘇南京的初步測試環境於 2023 年 2 月開始運行，而江蘇反詐騙專案似已於2024 年 3 月 15 日進入生產模式。
