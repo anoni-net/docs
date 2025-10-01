@@ -9,6 +9,7 @@ icon: material/arrow-right-bottom
 
     - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
     - 本章節內容翻譯範圍為報告 **INDEX 4/8** 的內容。
+    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
 
 這項研究所審查的超過 10 萬份洩漏文件來自一個消息來源，該來源也將資料共享給以下合作夥伴：國際特赦組織、緬甸正義（Justice For Myanmar）、Paper Trail Media、《環球郵報》、Tor Project、奧地利報紙《DER STANDARD》及 Follow The Money。這些夥伴以及本報告的作者合作分析、驗證並報導此資料的各個方面。
 

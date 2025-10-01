@@ -9,6 +9,7 @@ icon: material/arrow-right-bottom
 
     - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
     - 本章節內容翻譯範圍為報告 **INDEX 3/8** 的內容。
+    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
 
 當聯合國 2022 網際網路治理論壇（IGF）的參與者齊聚在衣索比亞的亞的斯亞貝巴（Addis），討論「連結所有人並保障人權」時，提格雷（Tigray）地區的七百萬衣索比亞人已經經歷了超過兩年的網路封鎖[^1]，無法上網。儘管通訊中斷持續進行，國際論壇的代表對於兩週前簽署的停火協議保持樂觀。他們也在慶祝電信業的自由化，以及 Safaricom 進入當地市場——這是第一家獲得該國營運許可的國際公司[^2]。在為期一週的會議結束時，衣索比亞副總理德梅克·梅科南·哈森（Demeke Mekonnen Hassen）代表政府發表告別演說，感謝來自聯合國和多個成員國的國際貴賓。當他完成書面講稿時，一個不知名的聲音打斷了直播視頻，對遠程參會者播放：「恢復提格雷的網路連線的時間表是什麼？」這個問題不斷重複[^3]。
 

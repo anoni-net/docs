@@ -9,6 +9,7 @@ icon: material/arrow-right-bottom
 
     - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
     - 本章節內容翻譯範圍為報告 **INDEX 5/8** 的內容。
+    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
 
 洩漏資料的分析提供了對 Geedge Networks 向其客戶推銷的監控和審查能力的詳細理解，並深入剖析了 Geedge 的開發過程、與客戶互動以及其產品如何建立在現有網路軟硬體之上。以下，我們概述了 Geedge Networks 提供的各項產品，提供這些產品如何在技術上部署的見解，其功能，以及對 Geedge 運營地區內網路使用者的影響。
 
