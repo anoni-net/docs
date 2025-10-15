@@ -17,7 +17,7 @@ icon: material/snowflake
     - 请直接点击「启动」按钮。
     - 此页面可放置在标签页后台中运行。
     - 如果启动后没有正常运作，请检查是否启用了 WebRTC 功能，理论上可以建立视频会议的浏览器都支持。
-    - 可通过浏览器插件安装，详情请参考[官方页面](https://snowflake.torproject.org/){target="_blank"}说明。
+    - 可通过浏览器插件安装，详情请参考[官方页面](https://snowflake.torproject.org/zh-CN/){target="_blank"}说明。
 
 </div>
 

@@ -59,7 +59,7 @@ icon: material/chat-question
 
 Pluggable Transports：
 
-- 為了進一步躲避審查，Bridge 經常使用 Pluggable Transports，這些協議可以改變 Tor 流量的特徵，使其看起來像普通的 HTTPS 流量或其他類型的流量。這些技術包括 Obfs4、meek、[Snowflake](https://snowflake.torproject.org/){target="_blank"} 等，它們可以混淆 Tor 流量，使得檢測和封鎖變得更加困難。
+- 為了進一步躲避審查，Bridge 經常使用 Pluggable Transports，這些協議可以改變 Tor 流量的特徵，使其看起來像普通的 HTTPS 流量或其他類型的流量。這些技術包括 Obfs4、meek、[Snowflake](https://snowflake.torproject.org/zh-TW/){target="_blank"} 等，它們可以混淆 Tor 流量，使得檢測和封鎖變得更加困難。
 
 ## 如何參與 Relay 建立
 

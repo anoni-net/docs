@@ -17,7 +17,7 @@ icon: material/snowflake
     - 請直接「啟動」按鈕。
     - 此頁面可放置在分頁背景中運作。
     - 如果啟動後沒有正常運作，請檢查是否有啟用 WebRTC 功能，理論上可以建立視訊會議的瀏覽器都有支援。
-    - 可透過瀏覽器套件安裝，請參考[官方頁面](https://snowflake.torproject.org/){target="_blank"}說明。
+    - 可透過瀏覽器套件安裝，請參考[官方頁面](https://snowflake.torproject.org/zh-TW/){target="_blank"}說明。
 
 </div>
 
