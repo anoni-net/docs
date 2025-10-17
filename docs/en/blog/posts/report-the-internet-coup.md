@@ -18,7 +18,7 @@ In mid-September, you may have noticed something significant: approximately 500G
 
 [InterSecLab](https://interseclab.org/){target="_blank"}, a digital security-focused laboratory, became aware of this leaked data around December 2024 and promptly took action. Over the course of 10 months, they collaborated with several organizations and tech communities to verify and analyze the leaked data. The findings were published in a report released on September 12, 2025.
 
-Although we (Anonymous Network Community) did not assist in the initial stages, after the report was released, we quickly reviewed its content. The report confirmed many of the long-suspected capabilities of the Great Firewall. Furthermore, the report provided a clearer picture of the teams and organizations operating behind the scenes. Their development environment is similar to that of modern startup teams, with operations and maintenance for international deployments being remotely executable. In other words, the Chinese government and other client countries can activate customized or general rules with a single click!
+Although we (Anonymous Network Community) did not assist in the initial stages, after the report was released, we quickly reviewed its content. The report confirmed many of the long-suspected capabilities of the Great Firewall. Furthermore, the report provided a clearer picture of the teams and organizations operating behind the scenes. Their development environment is similar to that of modern startup teams, with operations and maintenance for international deployments being remotely executable. In other words, the Chinese Communist Party government and other client countries can activate customized or general rules with a single click!
 
 <!-- more -->
 
