@@ -14,9 +14,9 @@ description: "技術分析報告：一家中國公司如何向威權政權出口
 
 ![](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius:10px;"}
 
-在九月中的時候，不知道您是否有注意到一件事情，一份大約 500G 的資料被外洩[公開](https://www.ithome.com.tw/news/171273){target="_blank"}出來，而這份資料是關於中國網路防火牆（或稱[中國防火長城 GFW](https://zh.wikipedia.org/zh-tw/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E){target="_blank"}）技術與如何將這套系統出口落地到其他威權政權國家。
+在九月中的時候，不知道您是否有注意到一件事情，一份大約 500G 的資料被[公開](https://www.ithome.com.tw/news/171273){target="_blank"}出來，而這份資料是關於中國網路防火牆（或稱[中國防火長城 GFW](https://zh.wikipedia.org/zh-tw/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E){target="_blank"}）技術與如何將這套系統出口落地到其他威權政權國家。
 
-一家專注數位安全的實驗室 [InterSecLab](https://interseclab.org/){target="_blank"} 針對外洩資料也在第一時間做出核實調查與分析報告，報告於 2025/09/12 發佈釋出。
+一家專注數位安全的實驗室 [InterSecLab](https://interseclab.org/){target="_blank"} 針對外洩資料，在去年（2024/12 前後）已知悉這份外洩資料，也在第一時間採取行動，歷經 10 個月的時間與多家組織、科技社群針對外洩資料進行核實調查與分析報告，報告於 2025/09/12 發佈釋出。
 
 「匿名網路社群」雖然沒有參與到前期的協助，但報告釋出後，我們快速瀏覽報告內容，內容證實了許多關於中國防火長城長期以來「疑似可能」的能耐。
 
