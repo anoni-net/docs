@@ -10,6 +10,7 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `活動`{style="color: OrangeRed;"}：「[網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會](./blog/posts/internetfreedom-oct2025.md)」 - 2025/10/18
     - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 發佈](./blog/posts/tails-7-released.md) - 2025/09/20
     - `新增`{style="color: DodgerBlue;"}：[OONI Run v2 操作說明](./intro/ooni-run-v2.md) - 2025/09/15
     - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密歷史：如何從軍事專案到維繫隱私的救命繩索](./blog/posts/tor-military-to-privacy.md) - 2025/09/07

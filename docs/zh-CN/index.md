@@ -11,6 +11,7 @@ icon: material/home-circle
 
 !!! tip "重要信息"
 
+    - `活动`{style="color: OrangeRed;"}：「[网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会](./blog/posts/internetfreedom-oct2025.md)」- 2025/10/18
     - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 发布](./blog/posts/tails-7-released.md) - 2025/09/20
     - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密历史：如何从军事项目变成维系隐私的生命线](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
     - `新增`{style="color: DodgerBlue;"}：[腐败与监管：土库曼斯坦如何将网络审查变成一门生意](./blog/posts/tor-corruption-control.md) - 2025/08/30

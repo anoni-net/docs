@@ -11,6 +11,7 @@ We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance 
 
 !!! tip "Updated"
 
+    - `Event`{style="color: OrangeRed;"}: [Taipei Coffee and Circumvention Meetup 2025/10](./blog/posts/internetfreedom-oct2025.md) - 18 Oct, 2025
     - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025.md) **Registration is now open**! - 01 Jul, 2025
     - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025-prepare.md) Recruitment for staff and helpers has begun. - 29 Apr, 2025
     - `Review`{style="color: Purple"}: [Internet Freedom Workshop: Tor、Tails、OONI](./blog/posts/rightscon25-tor-tails-ooni-after.md) - 09 Mar, 2025
