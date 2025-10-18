@@ -33,7 +33,7 @@ description: "快速回顧，國家級的監控，我們還可以採取怎樣的
 
 在報告中[提到](../../report/interseclab-the-internet-coup/index_7.md){target="_blank"}，目前常見的 VPN 協定都可識別與阻擋，但 Tor 橋接類型中的 WebTunnel 目前還無法進行有效的阻擋，由於資料外洩的時間點是在 2024/12 左右，但經過 10 個月的時間後，不確定防火長城的技術是否依舊無法阻擋，而與 WebTunnel 類似透過串流偽裝 Tor 連線的 Snowflake 也可規避封包檢測。
 
-在當晚的活動，我們帶著大家快速介紹 [Snowflake](../../tor-snowflake.md){target="_blank"}，只要透過瀏覽器套件，開啟後建立一個類似視訊會議串流後，就可以透過瀏覽器搭建一個 Tor 橋接點，協助完全無法使用 Tor 的地區經過你的橋接中繼點連上 onion 網路。而對於有技術能力的參與者，我們也建議可以透過 Tor 官方包好的 [WebTunnel](community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}（Docker 映像檔），建立一個類似瀏覽某個網頁的行為，提供一個[橋接中繼點](../../what-is-tor.md){target="_blank"}。
+在當晚的活動，我們帶著大家快速介紹 [Snowflake](../../tor-snowflake.md){target="_blank"}，只要透過瀏覽器套件，開啟後建立一個類似視訊會議串流後，就可以透過瀏覽器搭建一個 Tor 橋接點，協助完全無法使用 Tor 的地區經過你的橋接中繼點連上 onion 網路。而對於有技術能力的參與者，我們也建議可以透過 Tor 官方包好的 [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}（Docker 映像檔），建立一個類似瀏覽某個網頁的行為，提供一個[橋接中繼點](../../what-is-tor.md){target="_blank"}。
 
 ## 採取行動
 
