@@ -19,7 +19,7 @@ description: "全新的支持文档网站，为全球用户提供一个完整的
 
     - [A new home for Tor user documentation, Tor Blog, by gus, 2025-10-29](https://blog.torproject.org/new-user-support-portal-tor-tails/){target="_blank"}
 
-![Banner](https://blog.torproject.org/new-user-support-portal-tor-tails/lead.webp){style="border-radius: 10px;"}
+![Tor 使用者文件的新家](https://forum.torproject.org/uploads/default/original/2X/7/746c347ebc3558fee33a3cd5eb7917e0d892f673.png){style="border-radius: 10px;"}
 
 隐私技术的力量，取决于人们能否顺利使用它。每天有数百万人依靠 Tor 来保护他们在网络上的隐私与自由。不过直到现在，想找到问题的答案，常常不得不在不同网站之间来回切换：一个是 Tor 浏览器手册，另一个是支持门户。这种碎片化的体验不仅不便于浏览，也不利于维护。
 

@@ -19,7 +19,7 @@ description: "新的支援文件網站，給予全球的使用者一個完整資
 
     - [A new home for Tor user documentation, Tor Blog, by gus, 2025-10-29](https://blog.torproject.org/new-user-support-portal-tor-tails/){target="_blank"}
 
-![Banner](https://blog.torproject.org/new-user-support-portal-tor-tails/lead.webp){style="border-radius: 10px;"}
+![Tor 使用者文件的新家](https://forum.torproject.org/uploads/default/original/2X/7/746c347ebc3558fee33a3cd5eb7917e0d892f673.png){style="border-radius: 10px;"}
 
 隱私技術的力量，取決於人們是否能夠順利使用它。每天都有數百萬人仰賴 Tor 來保護他們在網路上的隱私與自由。不過直到現在，想找到問題的答案，常常得在不同網站之間來回切換：一個是 Tor 瀏覽器手冊，另一個是支援入口網站。這種分散的體驗不僅難以瀏覽，也不利於維護。
 
