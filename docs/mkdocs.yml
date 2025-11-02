@@ -50,6 +50,7 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
+      - about/send-censorship.md
   - !ENV [NAV_WATCHER, "監控觀察"]:
       - watcher-tor-relays.md
 theme:
