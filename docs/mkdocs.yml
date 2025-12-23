@@ -88,6 +88,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes
+    - navigation.path
     - toc.integrate
     - search.suggest
     - search.highlight
@@ -96,6 +97,7 @@ theme:
     - content.action.edit
     - content.tooltips
     - content.code.copy
+    - content.footnote.tooltips
 extra:
   alternate:
     - name: 臺灣正體（zh-TW）
@@ -141,7 +143,7 @@ plugins:
   - blog:
       post_url_date_format: yyyy/MM
       post_url_format: "{date}/{slug}"
-      archive: false
+      archive: true
       categories: true
       categories_name: !ENV [CATE_NAME, "文章類型"]
   - rss:
