@@ -11,6 +11,7 @@ We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance 
 
 !!! tip "Updated"
 
+    - `Update`{style="color: DodgerBlue;"}：[Setting Up a Tor Relay at National Taiwan Normal University: A Practical Experience of Communicating with the University and Leaving Open Possibilities](./blog/posts/ntnu-nz.md) - 30 Dec, 2025
     - `Event`{style="color: OrangeRed;"}: [Taipei Coffee and Circumvention Meetup 2025/10](./blog/posts/internetfreedom-oct2025.md) - 18 Oct, 2025
     - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025.md) **Registration is now open**! - 01 Jul, 2025
     - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025-prepare.md) Recruitment for staff and helpers has begun. - 29 Apr, 2025

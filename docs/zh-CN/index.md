@@ -11,16 +11,13 @@ icon: material/home-circle
 
 !!! tip "重要信息"
 
+    - `新增`{style="color: DodgerBlue;"}：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活动`{style="color: OrangeRed;"}：「[网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会](./blog/posts/internetfreedom-oct2025.md)」- 2025/10/18
     - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 发布](./blog/posts/tails-7-released.md) - 2025/09/20
     - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密历史：如何从军事项目变成维系隐私的生命线](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
     - `新增`{style="color: DodgerBlue;"}：[腐败与监管：土库曼斯坦如何将网络审查变成一门生意](./blog/posts/tor-corruption-control.md) - 2025/08/30
     - `新增`{style="color: DodgerBlue;"}：[OMG！第三届 Open Measurement Gathering（OMG）的有问必答（AMA）活动总结](./blog/posts/2025-omg.md) - 2025/08/28
     - `新增`{style="color: DodgerBlue;"}：[Tails 6.18 支持 WebTunnel 桥接协议](./blog/posts/tails-6-18-webtunnel.md) - 2025/07/31
-    - `活动`{style="color: OrangeRed;"}：「[匿名网络工作坊 2025/08](./event-workshop-2025.md)」已开始报名！ - 2025/07/01
-    - `活动`{style="color: OrangeRed;"}：「[筹备：匿名网络工作坊 2025/08](./event-workshop-2025-prepare.md)」已开始招募工作人员和小助手。- 2025/04/28
-    - `新增`{style="color: DodgerBlue;"}：[Arti 1.4.1 更新发布](./blog/posts/arti-141.md)、[OONI：去识别化的观测数据安全](./blog/posts/2025-probe-security-without-identification.md) - 2025/03/16
-    - `回顾`{style="color: purple;"}：[网络自由工作坊：Tor、Tails、OONI](./blog/posts/rightscon25-tor-tails-ooni-after.md) - 2025/03/09
 
 ## :material-chat-question: 项目简介
 
