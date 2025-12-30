@@ -119,6 +119,16 @@ If we hope to see Tor Relays on more campuses in the future, these “uncool but
 
     The existence of anonymous networks is not the result of isolated individual actions, but the outcome of communities engaging in long-term communication, mutual understanding, and collaboration. Through such processes, internet freedom can move from an abstract concept to a public infrastructure that can truly be put into practice.
 
+!!! info "Tor × EFF University Challenge: Make Your Campus Part of the Anonymous Network"
+
+    The [Tor Project](https://www.torproject.org/){target="_blank"} and the [Electronic Frontier Foundation (EFF)](https://www.eff.org/){target="_blank"} jointly run the **Tor University Challenge**, inviting university students around the world to set up Tor Relays on their campuses using academic networks. By successfully deploying and maintaining a Tor Relay within a university network, participating institutions can have their university names listed on the project’s official website—showing the world that their campus is actively contributing to the infrastructure of anonymous communication and internet freedom.
+
+    This is not only a technical challenge, but also a symbolic act: **it represents a university’s willingness to support the practice of privacy, anonymity, and an open internet within the realms of education and research.** In the National Taiwan Normal University case discussed here, we have already seen that **as long as there is a willingness to communicate and understand institutional constraints, Tor Relays are not impossible on Taiwanese campuses.**
+
+    If you are currently a university student with an interest in networking, cybersecurity, privacy, or public infrastructure, the Tor University Challenge offers a concrete and documentable starting point: **let your actions take place not only on your own computer, but also be seen by the world.**
+
+    :point_right: Project website: <https://toruniversity.eff.org>{target="_blank"}
+
 !!! info "The Role of Tor Relays in Academic Networks"
 
     Many people have heard of Tor, but do not necessarily understand its significance within **academic networks**.
