@@ -41,7 +41,7 @@ description: "一位資工系學生，如何在學術網路體制內，讓匿名
 ## 跟學校怎麼談？關鍵不是說服，而是讓對方能交代
 
 <figure markdown="span">
-  ![提案企劃書](https://assets.anoni.net/blog/nz-ntnu-4.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>專案計劃說明書</figcaption>
+  ![提案企劃書](https://assets.anoni.net/blog/nz-ntnu-4.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>行政流程時間表</figcaption>
 </figure>
 
 實際行動時，他沒有把 Tor 包裝成什麼很酷或很激進的東西，而是用學校能理解的語言來說明：
@@ -55,7 +55,7 @@ description: "一位資工系學生，如何在學術網路體制內，讓匿名
 ## 行政流程真的很麻煩，但不是死路
 
 <figure markdown="span">
-  ![行政流程](https://assets.anoni.net/blog/nz-ntnu-3.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>行政流程時間表</figcaption>
+  ![行政流程](https://assets.anoni.net/blog/nz-ntnu-3.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>專案計劃說明書</figcaption>
 </figure>
 
 在台師大的情況下，對外連線預設是全部封鎖，任何服務都必須申請例外開放，包含 IP、用途、說明文件，最後還得能對應到學校回報教育部的流程。他形容這段過程「很煩，但可預期」。

@@ -41,7 +41,7 @@ But precisely because of these limitations, he wanted to find out: **“Under su
 ## How Did He Talk to the University? The Key Wasn’t Persuasion, but Giving Them Something They Could Account For
 
 <figure markdown="span">
-  ![Project Proposal Document](https://assets.anoni.net/blog/nz-ntnu-4.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>Project Proposal Document</figcaption>
+  ![Project Proposal Document](https://assets.anoni.net/blog/nz-ntnu-4.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>Administrative Process Timeline</figcaption>
 </figure>
 
 When it came to taking action, he didn’t package Tor as something “cool” or radical. Instead, he explained it in terms the university could understand:
@@ -55,7 +55,7 @@ Process-wise, he engaged in actual email exchanges with network administrators, 
 ## The Administrative Process Is Truly a Hassle, but Not a Dead End
 
 <figure markdown="span">
-  ![Administrative Process](https://assets.anoni.net/blog/nz-ntnu-3.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>Administrative Process Timeline</figcaption>
+  ![Administrative Process](https://assets.anoni.net/blog/nz-ntnu-3.png){ style="border-radius: 5px; border: 1px solid #999; width: 70%;" }<figcaption>Project Proposal Document</figcaption>
 </figure>
 
 At National Taiwan Normal University, all outbound connections are blocked by default. Any service requires applying for an exception, including specifying IP addresses, intended use, and supporting documentation, and ultimately ensuring it aligns with the university’s reporting procedures to the Ministry of Education. He described this process as “annoying, but predictable.”
