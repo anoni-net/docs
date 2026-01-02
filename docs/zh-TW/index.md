@@ -10,6 +10,7 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `新增`{style="color: DodgerBlue;"}：[延續 2025，走向 2026：個人隱私指引、Tor Relay 校園建立競賽、匿名支付探索](./blog/posts/2025to2026.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活動`{style="color: OrangeRed;"}：「[網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會](./blog/posts/internetfreedom-oct2025.md)」 - 2025/10/18
     - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 發佈](./blog/posts/tails-7-released.md) - 2025/09/20
