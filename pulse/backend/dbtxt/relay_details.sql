@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS relay_details (
     asn varchar(10),
     as_name varchar(100),
     consensus_weight smallserial,
-    platform varchar(40),
+    platform varchar(100),
     version varchar(20),
     country varchar(10),
     country_name varchar(40),
