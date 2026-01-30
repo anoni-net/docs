@@ -1,7 +1,8 @@
 ''' API '''
 from fastapi import FastAPI
-from routers import vega
 from fastapi.middleware.cors import CORSMiddleware
+
+from routers import vega
 
 TAG_META = [
     {'name': 'vega', 'description': 'For Vega-Lite output graphics.'}
