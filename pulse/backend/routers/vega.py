@@ -14,19 +14,19 @@ router = APIRouter(
 )
 
 
-class Country(Enum):
+class Country(str, Enum):
     """Country enum for Tor relay queries"""
-    tw = 'tw'
-    jp = 'jp'
-    kr = 'kr'
-    hk = 'hk'
+    TW = 'tw'
+    JP = 'jp'
+    KR = 'kr'
+    HK = 'hk'
 
 
 class NodeType(Enum):
     """Node type enum for Tor relays"""
-    guard = 'guard'
-    middle = 'middle'
-    exit = 'exit'
+    GUARD = 'guard'
+    MIDDLE = 'middle'
+    EXIT = 'exit'
 
 
 class RelaysRunning(BaseModel):
@@ -66,7 +66,7 @@ class RelaysFlags(BaseModel):
 
 
 @router.get('/tor/relays/running')
-async def tor_relays_running(country: Country) -> list[RelaysRunning]:
+async def tor_relays_running(country: Country, limit: int = 45) -> list[RelaysRunning]:
     ''' Get Tor Relays Running by country'''
     datas = []
     with PGConn() as pg_conn:
@@ -78,7 +78,8 @@ async def tor_relays_running(country: Country) -> list[RelaysRunning]:
                                        where country=%s
                                        group by dt, running
                                        order by dt, running
-                                      ;''', (country, )):
+                                       limit %s
+                                      ;''', (country, limit)):
             datas.append(RelaysRunning(
                 created_at=row[0], count=row[1], running=row[2], observed_bandwidth=row[3]))
 
@@ -86,7 +87,7 @@ async def tor_relays_running(country: Country) -> list[RelaysRunning]:
 
 
 @router.get('/tor/relays/version')
-async def tor_relays_version(country: Country) -> list[RelaysVersion]:
+async def tor_relays_version(country: Country, limit: int = 45) -> list[RelaysVersion]:
     '''Get Tor Relays Version by country'''
     datas = []
     with PGConn() as pg_conn:
@@ -97,8 +98,9 @@ async def tor_relays_version(country: Country) -> list[RelaysVersion]:
                                        from relay_details
                                        where country=%s
                                        group by dt, version
-                                       order by dt, version desc;
-                                      ;''', (country, )):
+                                       order by dt, version desc
+                                       limit %s
+                                      ;''', (country, limit)):
             datas.append(RelaysVersion(
                 created_at=row[0], count=row[1], version=row[2]))
 
@@ -106,7 +108,7 @@ async def tor_relays_version(country: Country) -> list[RelaysVersion]:
 
 
 @router.get('/tor/relays/asn')
-async def tor_relays_asn(country: Country) -> list[RelaysASN]:
+async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
     '''Get Tor Relays Version by country'''
     datas = []
     with PGConn() as pg_conn:
@@ -117,8 +119,9 @@ async def tor_relays_asn(country: Country) -> list[RelaysASN]:
                                        from relay_details
                                        where country=%s
                                        group by dt, asn
-                                       order by dt, asn;
-                                      ;''', (country, )):
+                                       order by dt, asn
+                                       limit %s
+                                      ;''', (country, limit)):
             datas.append(
                 RelaysASN(created_at=row[0], count=row[1], asn=row[2]))
 
@@ -126,7 +129,7 @@ async def tor_relays_asn(country: Country) -> list[RelaysASN]:
 
 
 @router.get('/tor/relays/node_type')
-async def tor_relays_node_type(country: Country) -> list[RelaysNodeType]:
+async def tor_relays_node_type(country: Country, limit: int = 45) -> list[RelaysNodeType]:
     '''Get Tor Relays Node Type by country'''
     datas = []
     with PGConn() as pg_conn:
@@ -155,20 +158,21 @@ async def tor_relays_node_type(country: Country) -> list[RelaysNodeType]:
                 GROUP BY
                     dt
                 ORDER BY
-                    dt;
-            ;''', (country, )):
+                    dt
+                LIMIT %s
+            ;''', (country, limit)):
             datas.append(RelaysNodeType(
-                created_at=row[0], count=row[1], node=NodeType.guard))
+                created_at=row[0], count=row[1], node=NodeType.GUARD))
             datas.append(RelaysNodeType(
-                created_at=row[0], count=row[2], node=NodeType.middle))
+                created_at=row[0], count=row[2], node=NodeType.MIDDLE))
             datas.append(RelaysNodeType(
-                created_at=row[0], count=row[3], node=NodeType.exit))
+                created_at=row[0], count=row[3], node=NodeType.EXIT))
 
     return datas
 
 
 @router.get('/tor/relays/flags')
-async def tor_relays_flags(country: Country) -> list[RelaysFlags]:
+async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlags]:
     '''Get Tor Relays Flags by country'''
     datas = []
     with PGConn() as pg_conn:
@@ -192,7 +196,9 @@ async def tor_relays_flags(country: Country) -> list[RelaysFlags]:
             GROUP BY
                 dt, ele
             ORDER BY
-                ele, dt;''', (country, )):
+                ele, dt
+            LIMIT %s
+                                       ;''', (country, limit)):
             datas.append(RelaysFlags(
                 created_at=row[0], count=row[2], flag=row[1]))
 

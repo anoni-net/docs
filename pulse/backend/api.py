@@ -41,4 +41,4 @@ app.include_router(vega.router)
 @app.get('/')
 async def main():
     ''' main page '''
-    return {'Hello': "world"}
+    return {'Hello': "world", "docs": "/api/readme"}
