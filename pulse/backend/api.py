@@ -1,4 +1,13 @@
-''' API '''
+'''
+Anoni.net Tor-Watcher API
+
+This module provides a FastAPI application for storing and visualizing
+daily observational data about Tor network activity. It exposes endpoints
+for generating Vega-Lite compatible graphics and accessing network statistics.
+
+The API is designed to be consumed by frontend applications and supports
+CORS for cross-origin requests.
+'''
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -26,19 +35,25 @@ app = FastAPI(
     }
 )
 
+# Configure CORS middleware to allow cross-origin requests from any origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allow requests from all origins
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
 )
 
-
+# Include routers
 app.include_router(vega.router)
 
 
 @app.get('/')
 async def main():
-    ''' main page '''
+    '''
+    Health check and API information endpoint.
+
+    Returns:
+        dict: A greeting message and link to API documentation.
+    '''
     return {'Hello': "world", "docs": "/api/readme"}
