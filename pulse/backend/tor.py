@@ -1,34 +1,38 @@
-""" Fetch tor metrics
+"""Fetch tor metrics
 
-    https://metrics.torproject.org/onionoo.html
+https://metrics.torproject.org/onionoo.html
 
 """
+
 import logging
 import sys
-from tor_onionoo import TorOnionoo
-from pgdb import PGConn
 
 import click
 
+from pgdb import PGConn
+from tor_onionoo import TorOnionoo
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(stream=sys.stdout), ],
+    format="[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(stream=sys.stdout),
+    ],
 )
 
-logger = logging.getLogger('tor-details')
+logger = logging.getLogger("tor-details")
+
 
 @click.group()
 def cli():
-    ''' cli for groups '''
+    """cli for groups"""
 
 
-@cli.command('details', short_help='Get tor nodes details')
-@click.option('--country', default='tw', help='country code')
-@click.option('--save', default=True, help='country code')
-def details(country='tw', save=True):
-    ''' Get details '''
+@cli.command("details", short_help="Get tor nodes details")
+@click.option("--country", default="tw", help="country code")
+@click.option("--save", default=True, help="country code")
+def details(country="tw", save=True):
+    """Get details"""
     resp_details = TorOnionoo().get_details(country=country)
 
     bandwidth = 0
@@ -37,11 +41,12 @@ def details(country='tw', save=True):
         logger.info(relay)
 
     logger.info(
-        f'bandwidth: {bandwidth/1000/1000:.4f} MB/s ({bandwidth/1000/1000*8:.4f} Mb/s)')
-    logger.info(f'relays: {len(resp_details.relays)}')
+        f"bandwidth: {bandwidth / 1000 / 1000:.4f} MB/s ({bandwidth / 1000 / 1000 * 8:.4f} Mb/s)"
+    )
+    logger.info(f"relays: {len(resp_details.relays)}")
 
     if save:
-        sql = '''INSERT INTO relay_details (
+        sql = """INSERT INTO relay_details (
                        created_at,
                        fingerprint,
                        nickname,
@@ -93,12 +98,12 @@ def details(country='tw', save=True):
                        %(exit_probability)s
                        )
                 ON CONFLICT (created_at, fingerprint) DO NOTHING
-            '''
-        logger.info('Going into connecting DB')
+            """
+        logger.info("Going into connecting DB")
         with PGConn() as pg:
             for relay in resp_details.relays:
                 relay_dict = relay.model_dump()
-                relay_dict['created_at'] = resp_details.relays_published
+                relay_dict["created_at"] = resp_details.relays_published
                 for key, value in relay_dict.items():
                     if isinstance(value, int):
                         print(key, value)
@@ -106,5 +111,6 @@ def details(country='tw', save=True):
                 logger.info(relay_dict)
                 pg.cur.execute(sql, relay_dict)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     cli()

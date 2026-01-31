@@ -1,15 +1,18 @@
-""" Structs """
-from pydantic import BaseModel, Field
+"""Structs"""
+
 from datetime import datetime
+
+from pydantic import BaseModel, Field
 
 
 class Relay(BaseModel):
-    ''' Relay Structs '''
+    """Relay Structs"""
+
     nickname: str
     fingerprint: str
     running: bool
     measured: bool
-    asn: str = Field(alias='as')
+    asn: str = Field(alias="as")
     as_name: str = ""
     consensus_weight: int
     platform: str
@@ -20,7 +23,7 @@ class Relay(BaseModel):
     flags: list[str]
     first_seen: datetime
     last_seen: datetime
-    last_changed: datetime = Field(alias='last_changed_address_or_port')
+    last_changed: datetime = Field(alias="last_changed_address_or_port")
     bandwidth_rate: int
     bandwidth_burst: int
     observed_bandwidth: int
@@ -29,8 +32,10 @@ class Relay(BaseModel):
     middle_probability: float = 0
     exit_probability: float = 0
 
+
 class Details(BaseModel):
-    ''' Details Structs '''
+    """Details Structs"""
+
     version: str
     build_revision: str
     relays_published: datetime

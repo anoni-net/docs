@@ -1,20 +1,17 @@
 {
     "python.analysis.typeCheckingMode": "basic",
     "git.alwaysSignOff": true,
+    "scm.defaultViewMode": "tree",
     "python.testing.cwd": "${workspaceFolder}",
     "python.envFile": "${workspaceFolder}/.env",
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
     "python.analysis.autoImportCompletions": true,
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
         }
-    },
-    "isort.args": [
-        "--src=${workspaceFolder}",
-        "--line-length=100"
-    ],
-    "isort.check": true
+    }
 }
