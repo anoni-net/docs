@@ -1,6 +1,13 @@
+x-logging: &default-logging
+  driver: "local"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   db:
     image: postgres:17.7-alpine3.23
+    logging: *default-logging
     environment:
       POSTGRES_DB: ${PG_DB}
       POSTGRES_USER: ${PG_USER}
@@ -10,19 +17,75 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - "${PG_HOST}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  db-init:
+    image: postgres:17.7-alpine3.23
+    logging: *default-logging
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    environment:
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: ${PG_DB}
+      PGUSER: ${PG_USER}
+      PGPASSWORD: ${PG_PASSWORD}
+    volumes:
+      - ./backend/dbtxt:/dbtxt:ro
+    command:
+      - sh
+      - -c
+      - |
+        set -eu
+        psql -v ON_ERROR_STOP=1 -f /dbtxt/relay_details.sql
+        psql -v ON_ERROR_STOP=1 -f /dbtxt/asn_count.sql
 
   backend:
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
     build: ./backend
     restart: always
+    logging: *default-logging
+    environment:
+      PG_CONN: "postgresql://${PG_USER}:${PG_PASSWORD}@db:5432/${PG_DB}"
+    healthcheck:
+      test: ["CMD-SHELL", "pidof crond >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
 
   api:
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
     build:
       context: ./backend
       dockerfile: Dockerfile.api
     restart: always
+    logging: *default-logging
     ports:
       - "${API_HOST}:8000"
+    environment:
+      PG_CONN: "postgresql://${PG_USER}:${PG_PASSWORD}@db:5432/${PG_DB}"
+      CORS_ALLOW_ORIGINS: "${CORS_ALLOW_ORIGINS:-}"
+      CORS_ALLOW_CREDENTIALS: "${CORS_ALLOW_CREDENTIALS:-false}"
+    healthcheck:
+      # Note: FastAPI is configured with root_path="/api", so health endpoints live under /api/*.
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/api/healthz\", timeout=2).read()'"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
