@@ -4,7 +4,6 @@ WORKDIR /app
 ADD pyproject.toml \
     uv.lock \
     structs.py \
-    setting.py \
     pgdb.py \
     tor_onionoo.py \
     tor.py \

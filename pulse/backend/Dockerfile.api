@@ -3,7 +3,6 @@ FROM python:3.12.12-alpine3.23
 WORKDIR /app
 ADD pyproject.toml \
     uv.lock \
-    setting.py \
     pgdb.py \
     api.py \
     ./
@@ -21,4 +20,4 @@ RUN \
     cd ~/.cache/ && \
     rm -rf /var/cache/apk/* /var/lib/apk/* /etc/apk/cache/*
 
-ENTRYPOINT ["/bin/sh", "-c", "uv run fastapi run api.py"]
+ENTRYPOINT ["/bin/sh", "-c", "uv run fastapi run --host 0.0.0.0 --port 8000 api.py"]
