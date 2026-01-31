@@ -159,7 +159,7 @@ async def tor_relays_running(country: Country, limit: int = 45) -> list[RelaysRu
             from relay_details
             where country=%s
             group by dt, running
-            order by dt, running
+            order by dt desc, running
             limit %s
             ;""",
             (country, limit),
@@ -197,7 +197,7 @@ async def tor_relays_version(country: Country, limit: int = 45) -> list[RelaysVe
                                        from relay_details
                                        where country=%s
                                        group by dt, version
-                                       order by dt, version desc
+                                       order by dt desc, version desc
                                        limit %s
                                       ;""",
             (country, limit),
@@ -231,7 +231,7 @@ async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
                                        from relay_details
                                        where country=%s
                                        group by dt, asn
-                                       order by dt, asn
+                                       order by dt desc, asn
                                        limit %s
                                       ;""",
             (country, limit),
@@ -251,7 +251,7 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
 
     Args:
         country: Country code (TW, JP, KR, HK)
-        limit: Maximum number of records to return (default: 45)
+        limit: Number of recent days to return (default: 45)
 
     Returns:
         List of RelaysNodeType objects with role distribution
@@ -260,7 +260,12 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
             """
-            WITH by_fingerprint AS (
+            WITH max_dt AS (
+                SELECT max(date(created_at)) AS max_dt
+                FROM relay_details
+                WHERE country = %s AND running = true
+            ),
+            by_fingerprint AS (
                 SELECT
                     date(created_at) AS dt,
                     fingerprint,
@@ -270,24 +275,25 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
                 FROM
                     relay_details
                 WHERE
-                    country = %s AND running = true
-                GROUP BY
-                    dt, fingerprint, guard, middle, exit
-                )
-                SELECT
-                    dt,
-                    SUM(guard) AS guard,
-                    SUM(middle) AS middle,
-                    SUM(exit) AS exit
-                FROM
-                    by_fingerprint
-                GROUP BY
-                    dt
-                ORDER BY
-                    dt
-                LIMIT %s
+                    country = %s
+                    AND running = true
+                    AND date(created_at)
+                        >= (SELECT max_dt FROM max_dt)
+                        - (GREATEST(%s::int, 1) - 1) * interval '1 day'
+            )
+            SELECT
+                dt,
+                SUM(guard) AS guard,
+                SUM(middle) AS middle,
+                SUM(exit) AS exit
+            FROM
+                by_fingerprint
+            GROUP BY
+                dt
+            ORDER BY
+                dt desc
             ;""",
-            (country, limit),
+            (country, country, limit),
         ):
             datas.append(RelaysNodeType(created_at=row[0], count=row[1], node=NodeType.GUARD))
             datas.append(RelaysNodeType(created_at=row[0], count=row[2], node=NodeType.MIDDLE))
@@ -306,7 +312,7 @@ async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlag
 
     Args:
         country: Country code (TW, JP, KR, HK)
-        limit: Maximum number of records to return (default: 45)
+        limit: Number of recent days to return (default: 45)
 
     Returns:
         List of RelaysFlags objects with flag distribution
@@ -315,13 +321,22 @@ async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlag
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
             """
-            WITH by_flags AS (
+            WITH max_dt AS (
+                SELECT max(date(created_at)) AS max_dt
+                FROM relay_details
+                WHERE country = %s AND running = true
+            ),
+            by_flags AS (
                 SELECT
                     date(created_at) AS dt, ele, fingerprint
                 FROM
                     relay_details, UNNEST(flags) AS ele
                 WHERE
-                    country = %s AND running = true
+                    country = %s
+                    AND running = true
+                    AND date(created_at)
+                        >= (SELECT max_dt FROM max_dt)
+                        - (GREATEST(%s::int, 1) - 1) * interval '1 day'
                 GROUP BY
                     dt, ele, fingerprint
                 ORDER BY
@@ -334,10 +349,9 @@ async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlag
             GROUP BY
                 dt, ele
             ORDER BY
-                ele, dt
-            LIMIT %s
+                ele, dt desc
                                        ;""",
-            (country, limit),
+            (country, country, limit),
         ):
             datas.append(RelaysFlags(created_at=row[0], count=row[2], flag=row[1]))
 
