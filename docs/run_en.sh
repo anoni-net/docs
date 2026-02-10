@@ -5,6 +5,7 @@ export SITE_URL='https://anoni.net/docs/en/'
 export EDIT_URI='https://github.com/anoni-net/docs/blob/main/docs/en/'
 export SITE_DESC='Promotion and Translation of Anonymous Network Tools: Tor, Tails, and OONI in Taiwan.'
 export NAV_ABOUT='About'
+export NAV_COMMUNITY="Community"
 export NAV_INTRO='Overview'
 export NAV_EVENT='Activity'
 export NAV_PP='Projects'

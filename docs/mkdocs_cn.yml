@@ -37,6 +37,10 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
+      - !ENV [NAV_COMMUNITY, "社群參與"]:
+          - about/community/index.md
+          - about/community/participate.md
+          - about/community/communication-tools.md
   - !ENV [NAV_WATCHER, "監控觀察"]:
       - watcher-tor-relays.md
 theme:

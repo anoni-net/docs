@@ -12,6 +12,12 @@ Currently, we adopt a cautious approach to provide updates on project progress a
 
 If you have discussions that cannot be made public, you can directly contact the project team members through this email address.
 
+### Community Discussion & Video
+
+For ongoing discussions and theme collaboration, we use **Matrix** (web client [Element](https://matrix.anoni.net/){target=\"_blank\"}, homeserver `im.anoni.net`), [**Cryptpad** encrypted collaboration](https://cryptpad.anoni.net/){target=\"_blank\"}, and [**Jitsi**](https://jitsi.goodmeet.asia/){target=\"_blank\"} for online meetings. For how to request accounts and get started, please see [Communication and Collaboration Tools](about/community/communication-tools.md).
+
+---
+
 - Anonymity Networks Community <whisper@anoni.net>
 - PGP: [B7DF84305C7911D90D59A66061F66CF36EE386D4](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
 

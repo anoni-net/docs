@@ -11,4 +11,6 @@ icon: material/account-box-outline
 
 我們目前首要任務是完成 2025/08 舉辦的「[匿名網路工作坊](../event-workshop-2025.md)」活動，希望在工作坊活動後可以募集到第一批的社群夥伴，一起規劃 2026 年的工作目標與社群樣態！
 
+想參與 2026 主題（個人隱私指引、Tor Relay 校園建立、匿名支付）或加入日常討論？請前往 [社群參與](community/index.md)。
+
 [:material-email-fast-outline: 關注我們](../contact.md){ .md-button }

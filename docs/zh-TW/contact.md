@@ -12,6 +12,12 @@ icon: material/email-fast-outline
 
 或是您有較無法公開的討論，也可以透過此信箱直接聯繫團隊成員。
 
+### 社群討論與視訊
+
+日常討論與主題協作我們使用 **Matrix**（網頁版 [Element](https://matrix.anoni.net/){target="_blank"}，家伺服器 `im.anoni.net`）、[**Cryptpad** 加密共筆](https://cryptpad.anoni.net/){target="_blank"}、[**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} 線上視訊。帳號建立與使用方式請見 [溝通與協作工具](about/community/communication-tools.md)。
+
+---
+
 - 匿名網路社群 Anoni.net <whisper@anoni.net>
 - PGP: [B7DF84305C7911D90D59A66061F66CF36EE386D4](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
 

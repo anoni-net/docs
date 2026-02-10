@@ -11,6 +11,7 @@ icon: material/home-circle
 
 !!! tip "重要信息"
 
+    - `新增`{style="color: DodgerBlue;"}：[2026 社区参与：个人隐私指引、Tor Relay 校园建设、匿名支付](./about/community/index.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[延续 2025，走向 2026：个人隐私指引、Tor Relay 校园建设竞赛、匿名支付探索](./blog/posts/2025to2026.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活动`{style="color: OrangeRed;"}：「[网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会](./blog/posts/internetfreedom-oct2025.md)」- 2025/10/18

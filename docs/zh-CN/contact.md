@@ -12,6 +12,12 @@ icon: material/email-fast-outline
 
 或者如果您有较无法公开讨论的事情，也可以通过此邮箱直接联系项目团队成员。
 
+### 社区讨论与视频通话
+
+在日常讨论与主题协作上，我们使用 **Matrix**（网页版 [Element](https://matrix.anoni.net/){target="_blank"}，主服务器 `im.anoni.net`）、[**Cryptpad** 加密协作文档](https://cryptpad.anoni.net/){target="_blank"}、[**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} 在线视频会议。帐号申请与使用方式请参见[沟通与协作工具](about/community/communication-tools.md)。
+
+---
+
 - 匿名网络社群 Anoni.net <whisper@anoni.net>
 - PGP: [B7DF84305C7911D90D59A66061F66CF36EE386D4](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
 
