@@ -34,3 +34,7 @@ icon: material/message-text
 - **用途**：線上會議（主題討論、定期 sync）
 - **服務**：[https://jitsi.goodmeet.asia/](https://jitsi.goodmeet.asia/){target="_blank"}（免費使用，非自架）。
 - **使用方式**：開啟連結、建立或輸入會議室名稱、分享連結（會在 Matrix Room 中公布）。
+
+---
+
+**延伸閱讀**：想了解我們為什麼自架 Matrix、以及如何兼顧隱私與社群品質，可參考 [從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md)。

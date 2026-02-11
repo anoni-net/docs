@@ -6,7 +6,7 @@ icon: material/account-group
 
 # :material-account-group: 社群參與
 
-我們以「**匿名網路**」為核心，透過 Tor、Tails、OONI 等工具在臺灣推廣網路自由與隱私。2026 年聚焦三大主題，歡迎有興趣的夥伴選擇一個主題加入討論與協作。
+我們以「**匿名網路**」為核心，透過 Tor、Tails、OONI 等工具在臺灣推廣網路自由與隱私。2026 年聚焦三大主題，歡迎有興趣的夥伴選擇一個主題加入討論與協作。我們使用自架 Matrix 家伺服器與申請制帳號，在隱私與社群品質之間取得平衡；若想了解背後考量，可參見下方延伸閱讀。
 
 ## 2026 三大主題
 
@@ -30,3 +30,5 @@ icon: material/account-group
     - 訂閱電子報、PGP 聯絡方式
 
 </div>
+
+**延伸閱讀**：[從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md) — 說明我們自架 Matrix 家伺服器的緣由與隱私取捨。

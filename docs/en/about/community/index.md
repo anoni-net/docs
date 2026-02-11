@@ -31,3 +31,5 @@ For detailed background and planning, see: [Continuing from 2025 into 2026: Pers
 
 </div>
 
+**Further reading**: [From Discord's age verification to why we self-host Matrix](../../blog/posts/2026-discord-matrix-statement.md) — why we run our own Matrix homeserver and how we think about privacy.
+

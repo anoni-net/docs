@@ -31,3 +31,5 @@ icon: material/account-group
 
 </div>
 
+**延伸阅读**：[从 Discord 年龄验证谈起：我们为什么自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md) — 说明我们自架 Matrix 主服务器的缘由与隐私取舍。
+

@@ -35,3 +35,7 @@ For day-to-day work, our community uses **Matrix** for discussion, **Cryptpad** 
 - **Service**: [https://jitsi.goodmeet.asia/](https://jitsi.goodmeet.asia/){target="_blank"} (free to use, hosted by a third party and not self-hosted).
 - **How to use**: Open the link, create or enter a room name, and share the meeting link (usually posted in Matrix rooms).
 
+---
+
+**Further reading**: To learn why we self-host Matrix and how we balance privacy with community quality, see [From Discord's age verification to why we self-host Matrix](../../blog/posts/2026-discord-matrix-statement.md).
+

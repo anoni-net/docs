@@ -35,3 +35,7 @@ icon: material/message-text
 - **服务**：[https://jitsi.goodmeet.asia/](https://jitsi.goodmeet.asia/){target="_blank"}（免费使用，非自建）。
 - **使用方式**：打开链接、新建或输入会议室名称、分享会议链接（通常会在 Matrix rooms 中公布）。
 
+---
+
+**延伸阅读**：想了解我们为什么自架 Matrix、以及如何兼顾隐私与社群品质，可参考 [从 Discord 年龄验证谈起：我们为什么自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md)。
+
