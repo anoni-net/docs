@@ -39,28 +39,27 @@ jobs:
         run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
       - name: Build Docs (/)
         run: source ./.venv/bin/activate; sh ./run.sh;
-      - name: Replaces og
-        run: cd output/assets/images/social/blog/posts; wget https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./rightscon25-pre-event.png;
       - name: Build Docs (/zh-tw)
         run: source ./.venv/bin/activate; sh ./run_zh-tw.sh;
       - name: Build Docs (/zh-cn)
         run: source ./.venv/bin/activate; sh ./run_zh-cn.sh;
-      - name: Replaces og
-        run: cd output/zh-tw/assets/images/social/blog/posts; wget https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./rightscon25-pre-event.png;
       - name: Build Docs (/en)
         run: source ./.venv/bin/activate; sh ./run_en.sh;
-      - name: Replaces og
-        run: cd output/en/assets/images/social/blog/posts; wget https://s3.toomore.net/ocf/tor-pre-event.png -O ./rightscon25-pre-event.png;
-      - name: Replaces og
-        run: cd output/assets/images/social/blog/posts; cp ../../../../../blog/assets/images/g0v-hackath65n.webp ./g0v-hackath65n.png;
-      - name: Replaces og (/zh-tw)
-        run: cd output/zh-tw/assets/images/social/blog/posts; cp ../../../../../blog/assets/images/g0v-hackath65n.webp ./g0v-hackath65n.png;
-      - name: Replaces og
-        run: cd output/assets/images/social/blog/posts; cp ../../../../../blog/assets/images/tor-tails-workshop-slide.webp ./rightscon25-tor-tails-ooni-after.png;
-      - name: Replaces og (/zh-tw)
-        run: cd output/zh-tw/assets/images/social/blog/posts; cp ../../../../../blog/assets/images/tor-tails-workshop-slide.webp ./rightscon25-tor-tails-ooni-after.png;
-      - name: Replaces og (/en)
-        run: cd output/en/assets/images/social/blog/posts; cp ../../../../../blog/assets/images/tor-tails-workshop-slide.webp ./rightscon25-tor-tails-ooni-after.png;
+      - name: Replace OG images
+        run: |
+          # output 結構已改為依年份 blog/YYYY/MM/
+          for base in ./output ./output/zh-tw ./output/en; do
+            [ -d "$base" ] || continue
+            mkdir -p "$base/assets/images/social/blog/2025/02" "$base/assets/images/social/blog/2025/03"
+          done
+          wget -q https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./output/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+          [ -d ./output/zh-tw ] && wget -q https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./output/zh-tw/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+          [ -d ./output/en ] && wget -q https://s3.toomore.net/ocf/tor-pre-event.png -O ./output/en/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+          for base in ./output ./output/zh-tw ./output/en; do
+            [ -d "$base" ] || continue
+            [ -f "$base/blog/assets/images/g0v-hackath65n.webp" ] && cp "$base/blog/assets/images/g0v-hackath65n.webp" "$base/assets/images/social/blog/2025/02/g0v-hackath65n.png"
+            [ -f "$base/blog/assets/images/tor-tails-workshop-slide.webp" ] && cp "$base/blog/assets/images/tor-tails-workshop-slide.webp" "$base/assets/images/social/blog/2025/03/rightscon25-tor-tails-ooni-after.png"
+          done
       - name: Clean the all files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
