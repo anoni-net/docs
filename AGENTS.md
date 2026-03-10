@@ -2,22 +2,25 @@
 
 ## Cursor Cloud specific instructions
 
-This monorepo has three subprojects, each with its own `pyproject.toml` + `uv.lock`. See `CLAUDE.md` for full development docs.
+This monorepo has three subprojects (`docs/`, `pulse/`, `asn_coverage/`), each with its own `pyproject.toml` + `uv.lock`. See `CLAUDE.md` for full development docs.
 
-### Services overview
+### Docs subproject (primary dev scope)
 
-| Service | Dir | Dev command | Port |
-|---|---|---|---|
-| Docs (MkDocs) | `docs/` | `uv run mkdocs serve` | 8000 (default) |
-| Pulse API (FastAPI) | `pulse/` | `docker compose up -d` (full stack) or `uv run fastapi dev api.py` in `pulse/backend/` (API only) | 8080 (Docker) or 8000 (local) |
-| ASN Coverage CLI | `asn_coverage/` | `uv run python ooni.py --help` | N/A |
+Run the MkDocs dev server from `docs/`:
 
-### Caveats
+```bash
+cd docs
+uv run mkdocs serve          # serves zh-TW on http://127.0.0.1:8000
+uv run mkdocs build --clean  # build validation
+```
 
-- **Docker for Pulse**: The Pulse stack (PostgreSQL + API + cron backend) runs via Docker Compose. In a nested container environment (like this VM), Docker needs `fuse-overlayfs` storage driver and `iptables-legacy`. The Docker daemon must be started with `sudo dockerd` before running `docker compose up -d` in `pulse/`.
-- **Pulse `.env`**: Copy `pulse/.env.sample` to `pulse/.env` and fill in values before running Docker Compose. Example dev values: `PG_HOST="127.0.0.1:5432"`, `API_HOST="127.0.0.1:8080"`, `PG_DB="pulse"`, `PG_USER="pulse"`, `PG_PASSWORD="pulsedev123"`.
-- **MkDocs port conflict**: Both docs and pulse API default to port 8000. Use `-a 127.0.0.1:8001` with `mkdocs serve` when running both simultaneously, or use the Docker Compose mapping (port 8080) for Pulse.
-- **MkDocs startup time**: The docs dev server downloads external assets (Vega libs, emoji SVGs, images) on first build, which can take 20-30 seconds. Wait for the "Serving on" log line before testing.
-- **Lint**: Only `pulse/backend/` has ruff configured. Run `uv run ruff check .` from `pulse/backend/`.
-- **No automated test suites**: The repo does not have pytest or other test frameworks configured. Validation is done via `ruff check` (lint) and `mkdocs build` (docs build).
-- **ASN Coverage needs internet**: The `asn_coverage/` CLI downloads from OONI's public S3 bucket (`ooni-data-eu-fra`), requiring internet access. No AWS credentials needed (unsigned access).
+**Caveats:**
+- **MkDocs startup time**: The dev server downloads external assets (Vega libs, emoji SVGs, images) on first build, which can take 20-30 seconds. Wait for the "Serving on" log line before testing.
+- **Port conflict with Pulse**: If Pulse API is also running, use `-a 127.0.0.1:8001` to avoid the default port 8000 clash.
+- **No automated test suites**: Validation is done via `mkdocs build`. There is no pytest or other test framework.
+- **System imaging libs**: `mkdocs-material[imaging]` (social card generation) requires `libcairo2-dev`, `libpango1.0-dev`, `libgdk-pixbuf2.0-dev`, `libffi-dev` — these are pre-installed in the VM snapshot.
+
+### Other subprojects (for reference)
+
+- **Pulse** (`pulse/`): FastAPI + PostgreSQL via Docker Compose. See `CLAUDE.md` § Pulse for details. Needs Docker with `fuse-overlayfs` in nested environments.
+- **ASN Coverage** (`asn_coverage/`): CLI tool. `uv run python ooni.py --help`. Needs internet for S3 access.
