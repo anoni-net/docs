@@ -11,6 +11,8 @@ icon: material/home-circle
 
 !!! tip "重要信息"
 
+    - `新增`{style="color: DodgerBlue;"}：[2026/03 社区近况更新](./blog/posts/updates-202603.md) - 2026/03/29
+    - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台师大架设 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
     - `新增`{style="color: DodgerBlue;"}：[2026 社区参与：个人隐私指引、Tor Relay 校园建设、匿名支付](./about/community/index.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[延续 2025，走向 2026：个人隐私指引、Tor Relay 校园建设竞赛、匿名支付探索](./blog/posts/2025to2026.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](./blog/posts/ntnu-nz.md) - 2025/12/30

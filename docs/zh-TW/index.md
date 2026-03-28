@@ -10,6 +10,8 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `新增`{style="color: DodgerBlue;"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
+    - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
     - `新增`{style="color: DodgerBlue;"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./about/community/index.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活動`{style="color: OrangeRed;"}：「[網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會](./blog/posts/internetfreedom-oct2025.md)」 - 2025/10/18
