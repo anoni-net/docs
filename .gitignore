@@ -2,3 +2,5 @@
 .venv
 *.code-workspace
 __pycache__/
+docs/site/
+.python-version
