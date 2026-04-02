@@ -14,7 +14,7 @@ nav:
   - index.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
-  - !ENV [NAV_INTRO, "專案簡介"]:
+  - !ENV [NAV_INTRO, "認識匿名網路"]:
       - intro/index.md
       - internet-freedom-matter.md
       - what-is-ooni.md
