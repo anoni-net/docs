@@ -17,6 +17,7 @@ nav:
   - !ENV [NAV_INTRO, "認識匿名網路"]:
       - intro/index.md
       - internet-freedom-matter.md
+      - what-is-anonymous-network.md
       - what-is-ooni.md
       - what-is-tor.md
       - what-is-tails.md

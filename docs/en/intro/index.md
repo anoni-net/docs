@@ -5,10 +5,11 @@ icon: material/folder-open
 
 # :material-folder-open: Get Started
 
-The project is currently focused on advocating and promoting "Anonymous Networks." We utilize tools such as Tor, Tails, and OONI to aid in the establishment and observation of "Anonymous Networks." You can start by exploring "[Why Internet Freedom Matters](../internet-freedom-matter.md)" to gain a deeper understanding!
+The project is currently focused on advocating and promoting "Anonymous Networks." We utilize tools such as Tor, Tails, and OONI to aid in the establishment and observation of "Anonymous Networks." You can start by exploring "[What is an Anonymous Network?](../what-is-anonymous-network.md)" to gain a deeper understanding!
 
 <div class="grid cards" markdown>
 
+- [:fontawesome-regular-circle-question: What is an Anonymous Network?](../what-is-anonymous-network.md)
 - [:fontawesome-regular-circle-question: Why does Internet Freedom matter?](../internet-freedom-matter.md)
 - [:fontawesome-regular-circle-question: What is OONI?](../what-is-ooni.md)
 

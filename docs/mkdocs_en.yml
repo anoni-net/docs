@@ -15,6 +15,7 @@ nav:
   - !ENV [NAV_INTRO, "專案簡介"]:
       - intro/index.md
       - internet-freedom-matter.md
+      - what-is-anonymous-network.md
       - what-is-ooni.md
       - !ENV [NAV_PP, "參與專案"]:
           - ooni-asns-coverage.md

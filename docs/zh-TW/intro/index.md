@@ -5,10 +5,11 @@ icon: material/folder-open
 
 # :material-folder-open: 認識匿名網路
 
-專案目前專注在「匿名網路」的倡議與推廣，透過 Tor、Tails、OONI 等工具協助「匿名網路」的建立與觀察。可以先從「[網路自由為什麼重要？](../internet-freedom-matter.md)」開始瞭解！
+專案目前專注在「匿名網路」的倡議與推廣，透過 Tor、Tails、OONI 等工具協助「匿名網路」的建立與觀察。可以先從「[什麼是匿名網路？](../what-is-anonymous-network.md)」開始瞭解！
 
 <div class="grid cards" markdown>
 
+- [:fontawesome-regular-circle-question: 什麼是匿名網路？](../what-is-anonymous-network.md)
 - [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../internet-freedom-matter.md)
 - [:fontawesome-regular-circle-question: 什麼是 OONI？](../what-is-ooni.md)
 - [:fontawesome-regular-circle-question: 什麼是 Tor？](../what-is-tor.md)
