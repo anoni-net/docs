@@ -5,12 +5,16 @@ icon: material/account-box-outline
 
 # :material-account-box-outline: About Us
 
-We are a group focused on "Anonymous Networks" and "Internet Freedom," aiming to raise public awareness about the importance of internet freedom through tools like Tor, Tails, and OONI. We are currently recruiting community members to establish our initial group of partners, with hopes to regularly share and update on the status of "Anonymous Networks" online.
+We are a group focused on "Anonymous Networks" and "Internet Freedom," aiming to raise public awareness about the importance of internet freedom through tools like Tor, Tails, and OONI, and to promote practical privacy protection in Taiwan.
 
-At the start of our project, we concentrated solely on the OONI project, by examining the completeness of observational data for Taiwanese ASNs in the OONI database and whether it reflects Taiwan's current internet status. As we continued to promote OONI, we found that Taiwan enjoys relatively more internet freedom, with fewer occurrences of international issues. Consequently, it is challenging to find real-life cases related to internet monitoring or interference in Taiwan to support promotion efforts. Therefore, we decided to shift our focus and role, concentrating on privacy-related issues and promoting and establishing anonymous network services with a focus on "Anonymous Networks."
+Our project began with a focus on OONI, examining the completeness of observational data for Taiwanese ASNs in the OONI database. Over time, we expanded our scope to focus more broadly on promoting anonymous network tools and building related services. In August 2025, we successfully held the [Anonymous Network Workshop](../event-workshop-2025.md) at National Taiwan University of Science and Technology, and recruited our first group of community partners to work together into 2026.
 
-Our primary mission is to successfully conduct the "Anonymous Network Workshop" scheduled for August 2025. We hope to recruit our first group of community partners through this workshop to collaboratively plan the goals and structure for the community in 2026!
+**In 2026, the community is focused on three themes:**
 
-If you’d like to join the 2026 themes (Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments) or participate in everyday discussions, please visit [Community Participation](community/index.md).
+- **Personal Privacy Guidelines**: Compile practical privacy protection guides with tools and steps for different situations (everyday, sensitive work, high-risk contexts).
+- **Tor Relay on Campus**: Work with EFF and the Tor Project to promote campus relay nodes. We already have a successful case at NTNU.
+- **Anonymous Payments**: Explore anonymous payment methods beyond cash (e.g., stablecoins, blockchain-based tools), including both regulatory and practical aspects.
+
+If you'd like to join or participate in everyday discussions, please visit [Community Participation](community/index.md).
 
 [:material-email-fast-outline: Follow Us](../contact.md){ .md-button }

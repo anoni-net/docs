@@ -17,7 +17,7 @@ icon: material/account-reactivate-outline
 
     Tor/Tails 匿名網路工作坊、OONI 觀測資料分析、圓桌會議討論（開源與匿名網路相關議題）。
 
-    :material-account-supervisor-outline: 適合對象：媒聞媒體、獨立記者、公民團體、科技社群。
+    :material-account-supervisor-outline: 適合對象：新聞媒體、獨立記者、公民團體、科技社群。
 
 -   [:material-calendar-plus: 籌備：匿名網路工作坊](../event-workshop-2025-prepare.md)
     :material-update: 2025/08/09（二日）
@@ -27,6 +27,6 @@ icon: material/account-reactivate-outline
 
     參與活動籌備、培訓助教小幫手、工作人員招募。
 
-    :material-account-supervisor-outline: 適合對象：任何對於匿名網路議有有興趣的夥伴。
+    :material-account-supervisor-outline: 適合對象：任何對於匿名網路議題有興趣的夥伴。
 
 </div>

@@ -9,7 +9,7 @@ site_description:
 site_author: Anoni.net Volunteer
 repo_url: https://github.com/anoni-net/docs
 repo_name: anoni-net/docs
-copyright: "CC-BY 4.0 2023-2025 Anoni.net Docs Project"
+copyright: "CC-BY 4.0 2023-2026 Anoni.net Docs Project"
 nav:
   - index.md
   - !ENV [NAV_INTRO, "專案簡介"]:

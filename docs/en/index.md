@@ -14,12 +14,10 @@ We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance 
     - `New`{style="color: DodgerBlue;"}：[2026/03 Community Update](./blog/posts/updates-202603.md) - 29 Mar, 2026
     - `New`{style="color: SeaGreen;"}：[Tor Project Guest Post: Setting Up a Tor Relay at a University in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 23 Mar, 2026
     - `Update`{style="color: DodgerBlue;"}：[2026 Community Participation: Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments](./about/community/index.md) - 2026/01/02
-    - `Update`{style="color: DodgerBlue;"}：[Continuing from 2025 into 2026: Personal Privacy Guidelines, Tor Relay Campus Deployment Competition, and Exploration of Anonymous Payments](./blog/posts/2025to2026.md) - 2026/01/02
     - `Update`{style="color: DodgerBlue;"}：[Setting Up a Tor Relay at National Taiwan Normal University: A Practical Experience of Communicating with the University and Leaving Open Possibilities](./blog/posts/ntnu-nz.md) - 30 Dec, 2025
     - `Event`{style="color: OrangeRed;"}: [Taipei Coffee and Circumvention Meetup 2025/10](./blog/posts/internetfreedom-oct2025.md) - 18 Oct, 2025
-    - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025.md) **Registration is now open**! - 01 Jul, 2025
-    - `Event`{style="color: OrangeRed;"}: [Anonymous Network Workshop 2025/08](./event-workshop-2025-prepare.md) Recruitment for staff and helpers has begun. - 29 Apr, 2025
-    - `Review`{style="color: Purple"}: [Internet Freedom Workshop: Tor、Tails、OONI](./blog/posts/rightscon25-tor-tails-ooni-after.md) - 09 Mar, 2025
+
+    More announcements at [:material-bullhorn-outline: Recent Announcements](./blog/index.md).
 
 ## :fontawesome-regular-circle-question: Inside The Project
 

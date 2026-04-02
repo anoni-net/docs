@@ -15,12 +15,8 @@ icon: material/home-circle
     - `新增`{style="color: DodgerBlue;"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./about/community/index.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活動`{style="color: OrangeRed;"}：「[網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會](./blog/posts/internetfreedom-oct2025.md)」 - 2025/10/18
-    - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 發佈](./blog/posts/tails-7-released.md) - 2025/09/20
-    - `新增`{style="color: DodgerBlue;"}：[OONI Run v2 操作說明](./intro/ooni-run-v2.md) - 2025/09/15
-    - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密歷史：如何從軍事專案到維繫隱私的救命繩索](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
-    - `新增`{style="color: DodgerBlue;"}：[貪腐與控管：土庫曼如何將網路審查變成一門生意](./blog/posts/tor-corruption-control.md) - 2025/08/30
-    - `新增`{style="color: DodgerBlue;"}：[OMG！第三屆 Open Measurement Gathering（OMG）的有問必答（AMA）活動總結](./blog/posts/2025-omg.md) - 2025/08/29
-    - `新增`{style="color: DodgerBlue;"}：[Tails 6.18 支援 WebTunnel 橋接協定](./blog/posts/tails-6-18-webtunnel.md) - 2025/07/31
+
+    更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
 
 ## :fontawesome-regular-circle-question: 專案簡介
 

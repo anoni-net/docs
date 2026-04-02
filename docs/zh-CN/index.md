@@ -14,14 +14,10 @@ icon: material/home-circle
     - `新增`{style="color: DodgerBlue;"}：[2026/03 社区近况更新](./blog/posts/updates-202603.md) - 2026/03/29
     - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台师大架设 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
     - `新增`{style="color: DodgerBlue;"}：[2026 社区参与：个人隐私指引、Tor Relay 校园建设、匿名支付](./about/community/index.md) - 2026/01/02
-    - `新增`{style="color: DodgerBlue;"}：[延续 2025，走向 2026：个人隐私指引、Tor Relay 校园建设竞赛、匿名支付探索](./blog/posts/2025to2026.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活动`{style="color: OrangeRed;"}：「[网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会](./blog/posts/internetfreedom-oct2025.md)」- 2025/10/18
-    - `新增`{style="color: DodgerBlue;"}：[Tails 7.0 发布](./blog/posts/tails-7-released.md) - 2025/09/20
-    - `新增`{style="color: DodgerBlue;"}：[Tor 的秘密历史：如何从军事项目变成维系隐私的生命线](./blog/posts/tor-military-to-privacy.md) - 2025/09/07
-    - `新增`{style="color: DodgerBlue;"}：[腐败与监管：土库曼斯坦如何将网络审查变成一门生意](./blog/posts/tor-corruption-control.md) - 2025/08/30
-    - `新增`{style="color: DodgerBlue;"}：[OMG！第三届 Open Measurement Gathering（OMG）的有问必答（AMA）活动总结](./blog/posts/2025-omg.md) - 2025/08/28
-    - `新增`{style="color: DodgerBlue;"}：[Tails 6.18 支持 WebTunnel 桥接协议](./blog/posts/tails-6-18-webtunnel.md) - 2025/07/31
+
+    更多公告请见 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
 
 ## :material-chat-question: 项目简介
 
