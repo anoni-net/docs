@@ -1,9 +1,9 @@
 ---
-title: 项目简介
+title: 认识匿名网络
 icon: material/folder-open
 ---
 
-# :material-folder-open: 项目简介
+# :material-folder-open: 认识匿名网络
 
 项目目前专注于「匿名网络」的倡导与推广，通过 Tor、Tails、OONI 等工具协助「匿名网络」的建立与观察。可以先从「[网络自由为什么重要？](../internet-freedom-matter.md)」开始了解！
 

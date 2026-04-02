@@ -1,9 +1,9 @@
 ---
-title: Intro
+title: Get Started
 icon: material/folder-open
 ---
 
-# :material-folder-open: Project Introduction
+# :material-folder-open: Get Started
 
 The project is currently focused on advocating and promoting "Anonymous Networks." We utilize tools such as Tor, Tails, and OONI to aid in the establishment and observation of "Anonymous Networks." You can start by exploring "[Why Internet Freedom Matters](../internet-freedom-matter.md)" to gain a deeper understanding!
 

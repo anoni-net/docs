@@ -19,7 +19,7 @@ We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance 
 
     More announcements at [:material-bullhorn-outline: Recent Announcements](./blog/index.md).
 
-## :fontawesome-regular-circle-question: Inside The Project
+## :fontawesome-regular-circle-question: Get Started
 
 <div class="grid cards" markdown>
 

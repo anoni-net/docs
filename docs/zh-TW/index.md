@@ -18,7 +18,7 @@ icon: material/home-circle
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
 
-## :fontawesome-regular-circle-question: 專案簡介
+## :fontawesome-regular-circle-question: 認識匿名網路
 
 <div class="grid cards" markdown>
 

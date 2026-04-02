@@ -1,9 +1,9 @@
 ---
-title: 專案簡介
+title: 認識匿名網路
 icon: material/folder-open
 ---
 
-# :material-folder-open: 專案簡介
+# :material-folder-open: 認識匿名網路
 
 專案目前專注在「匿名網路」的倡議與推廣，透過 Tor、Tails、OONI 等工具協助「匿名網路」的建立與觀察。可以先從「[網路自由為什麼重要？](../internet-freedom-matter.md)」開始瞭解！
 

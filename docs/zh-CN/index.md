@@ -19,7 +19,7 @@ icon: material/home-circle
 
     更多公告请见 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
 
-## :material-chat-question: 项目简介
+## :material-chat-question: 认识匿名网络
 
 <div class="grid cards" markdown>
 
