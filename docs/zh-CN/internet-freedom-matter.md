@@ -1,68 +1,72 @@
 ---
 title: 网络自由为什么重要？
+description: 从亚洲语境理解网络审查、监控与平台压力，以及 OONI 观测与 Tor 匿名连线能扮演的角色。
 icon: material/chat-question
 ---
 
 # :material-chat-question: 网络自由为什么重要？
 
-在当今信息快速流通的数字时代，网络自由已经成为我们日常生活中不可或缺的一部分。这不仅涉及到我们如何获取信息，还影响到我们如何沟通、工作以及参与社区与倡议活动。对于生活在亚洲地区的我们来说，网络自由显得尤为重要。因此，参与像 OONI 和 Tor 这样关注网络审查、匿名网络基础设施的项目，对于保护、改善和提升网络自由具有深远意义！
+在这里，**网络自由**指的是：人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](./what-is-anonymous-network.md)。
+
+除了政府封锁与大规模监控，跨境平台规则、账号处置、算法可见度与数据留存，也会塑造谁能说话、谁能被看见。多地的诽谤、国安或信息治理相关法规争议，则带来制度性的寒蝉效应。在中国的情境下，网络连线与内容可见度常受到多层过滤与平台治理的影响，账号处置与数据留存也会让表达与获取信息面临更高的不确定性。对想要参与公共讨论的人而言，这些因素会直接影响「网络自由是否稳固」。
+
+以下先以东亚、东南亚为例，说明几种常见的压力模式。细节与新闻案例会随时间改变，建议搭配 [Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"} 国别页与本地报导交叉阅读。
 
 ## 东亚
 
-在东亚地区，网络审查和限制的情况各有不同。许多国家对信息传播和社交媒体进行严格监控与限制。例如，中国的「长城防火墙[^1]」是一个全球知名的网络过滤系统，经常限制用户访问 Facebook、X（Twitter）、Instagram 等国际网站以及 Google 的多项服务。此外，中国政府也对国内平台上的内容进行严格审查，包括涉及政治、宗教及社会运动的话题。在朝鲜，网络更是与外界几乎完全隔绝，普通公民仅能使用内部网络「光明网[^2]」，其中的内容受到国家严格监控。
+中国的「长城防火墙[^1]」长期过滤大量国际网站与服务，并对境内平台内容进行政治、宗教与社会议题上的审查。朝鲜则将一般民众与全球互联网几乎隔绝，仅能使用国家管控下的内部网络「光明网[^2]」。
+
+台湾在区域内多被评为相对开放，仍面对跨境平台治理、信息安全与政治性操纵的讨论，以及对新闻与倡议工作者的法律与舆论压力。分数与叙事会随调查年度更新，可参考 Freedom House 台湾条目[^10]。
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
         <img src="../assets/images/freedom_house_explore_the_map.png"
-            alt="Freedom House - Freedom on the Net 2024"
-            title="Freedom House - Freedom on the Net 2024"
+            alt="Freedom House Freedom on the Net 互动地图"
+            title="Freedom House Freedom on the Net 互动地图"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Freedom House - Freedom on the Net 2024</capture>
+    <capture>Freedom House「Freedom on the Net」互动地图（各国分数随年度报告更新，画面为站内示意截图）</capture>
 </figure>
 
 ## 东南亚
 
-在东南亚，越南[^3]政府要求国际网络公司配合删除被认为抨击政府的内容，旨在限制政治批评言论。印尼[^4]则时常封锁含有政治敏感、宗教敏感、色情与赌博内容的网站，加以限制。马来西亚[^5]在过去曾经封锁新闻网站和博客，特别是那些报道政府腐败的媒体。此外，菲律宾[^6]的网络环境受到高度监控，特别是在政治选举期间，政府可能对新闻媒体及社交平台的内容进行干预。泰国[^7]法律规定，任何在网络上表达对皇室不敬的言论都可能面临刑事起诉。
+越南政府曾要求国际平台配合下架政治性批评内容[^3]。印尼对特定类别网站采取封锁或限制[^4]。马来西亚曾出现针对调查报导媒体与博客的封锁[^5]。菲律宾在选举等高压时期，新闻与社群内容常成为监控与干预焦点[^6]。泰国对皇室相关言论的刑事追诉，长期影响线上表意空间[^7]。
 
-缅甸[^8]的网络审查情况尤其在政治动荡时期变得严重。自从 2021 年政变以来[^9]，军政府多次限制或全面封锁网络，以阻止反对势力组织和传播信息。社交媒体平台如 Facebook 被频繁封禁，因为这些平台被反对者广泛用于组织抗议活动。同时，新闻网站和独立媒体也受到严厉打击，许多记者被逮捕或恐吓，从而限制了新闻自由。
+缅甸在 2021 年政变后反复断网、封锁社群与镇压独立媒体[^8][^9]，是「冲突与戒严情境下网络成为战场」的极端例子。
 
-## OONI 网络审查观测
+## 观测与匿名连线
+
+亚太地区的封锁与干预，需要可被验证的公开纪录。[OONI](https://ooni.org/){target="_blank"} 透过志工与探测数据，让特定网络与规避工具的可及性以图表与开放数据呈现。下方截图为历史区间范例，实际曲线与国家筛选请以 [OONI Explorer](https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW){target="_blank"} 为准。
 
 <figure markdown="span">
-    <a href="https://explorer.ooni.org/chart/circumvention?since=2024-11-29&until=2024-12-30&probe_cc=CN%2CHK%2CTW" target="_blank">
+    <a href="https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW" target="_blank">
         <img src="../assets/images/ooni_chart_circumvention.png"
-            alt="OONI Explorer - Circumvention (CN, HK, TW)"
-            title="OONI Explorer - Circumvention (CN, HK, TW)"
+            alt="OONI Explorer：规避工具观测（CN, HK, TW 范例）"
+            title="OONI Explorer：规避工具观测（CN, HK, TW 范例）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>OONI Explorer - Circumvention (CN, HK, TW)</capture>
+    <capture>OONI Explorer：规避工具观测（画面为站内保留之示意截图，区间与数据以网站为准）</capture>
 </figure>
 
-这些案例显示，亚洲各国的网络环境仍受诸多限制，在这些国家中，普通用户往往难以获得全面和客观的信息，并且必须小心应对来自政府的审查和监控。这就是为什么像 OONI 这样的项目变得如此重要。OONI 的工作是监测全球各地的网络封锁情况，包括亚太地区。OONI 不仅提供有关网络审查的详细报告，还帮助人们提高对这些事件的认识。通过观测信息，用户可以更了解自己所在国家的网络状况，从而增强自我防范和抵御的意识！
-
-## Tor 匿名隐私网络
+[Tor](https://www.torproject.org/){target="_blank"} 则透过多层路由与中继网络，协助使用者在高风险环境下维持匿名与连线，并可贡献中继节点强化整体网络韧性。台湾目前已有公开可见的中继与守护节点分布，可从 Tor Metrics 查询。
 
 <figure markdown="span">
     <a href="https://metrics.torproject.org/rs.html#search/country:tw" target="_blank">
         <img src="../assets/images/tor_relay_tw.png"
-            alt="Tor Relay in Taiwan"
-            title="Tor Relay in Taiwan"
+            alt="Tor Metrics：台湾地区 Tor 中继与守护节点"
+            title="Tor Metrics：台湾地区 Tor 中继与守护节点"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
     </a>
-    <capture>Tor Relay in Taiwan</capture>
+    <capture>Tor Metrics：台湾地区中继与守护节点（画面随网络状态变动）</capture>
 </figure>
 
-同时，Tor 项目提供了一个能够更自由、匿名与安全上网的途径。Tor 旨在保护个人隐私，用户可以匿名浏览网络，这对于生活在网络审查较严的地区的人来说特别重要！它不仅让人们能够访问被封锁的信息，还能保护用户免受监控！
-
-参与这些项目的重要性在于，通过我们的支持和贡献，可以促进网络自由。无论是使用它们的工具，还是参与信息分享、开源工具开发或推广教育，我们都可以帮助别人更好地理解和抵抗网络审查！
-
-总之，网络自由对我们的生活意义重大！对亚洲地区的许多人来说，它影响着我们获取真相、表达观点和充分利用数字资源的能力。通过支持 OONI 和 Tor，我们不仅在保护自己，也在为创造一个更加开放和包容的网络环境而努力，这是每个人都能参与其中，也是对未来理想的数字生活领域的一种承诺。
+无论是跑 OONI 测试、架设 Tor 中继，或协助翻译与教学，都是在具体支撑网络自由。你可以从下方项目列表挑一项开始。
 
 ## :fontawesome-solid-diagram-project: 下一步可参与的项目
 
 <div class="grid cards" markdown>
 
+- [:material-chat-question: 什么是匿名网络？](./what-is-anonymous-network.md)
 - [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asns-coverage.md)
 - [:material-list-status: OONI 网站检测列表](./ooni-weblists.md)
 - [:material-translate-variant: 中文化与文件翻译](./ooni-i18n.md)
@@ -72,9 +76,10 @@ icon: material/chat-question
 [^1]: [4所大学团队每日测试4亿个网域研究「防火长城」，发现有31万个网域被挡下、部分的封锁只是「意外」](https://www.thenewslens.com/article/153597){target="_blank"} - TNL The News Lens 关键评论网
 [^2]: [金正恩无所不在：北韩监视器数量增加，强化全方位监控](https://global.udn.com/global_vision/story/8663/7970562){target="_blank"} - 转角国际 udn Global
 [^3]: [【人权焦点】让我们呼吸! 越南政府的网络审查 与科技巨头的共谋](https://www.amnesty.tw/news/3805){target="_blank"} - 国际特赦组织台湾分会
-[^4]: [印尼预计6月落实网络新规定，恐剥夺社交平台言论自由](https://www.thenewslens.com/article/164619){target="_blank"} - TNL The News Lens 关键评论网
+[^4]: [印尼预计6月落实网络新规定，恐剥夺社交平台言论自由](https://www.thenewslens.com/article/164619){target="_blank"} - TNL The News Lens 关键评论网（法规细节请以印尼官方与最新报导为准）
 [^5]: [马来西亚局内人](https://zh.wikipedia.org/zh-tw/%E9%A9%AC%E6%9D%A5%E8%A5%BF%E4%BA%9A%E5%B1%80%E5%86%85%E4%BA%BA){target="_blank"} - 维基百科，自由的百科全书
 [^6]: [菲律宾「Rappler」撤照风波：杜特蒂杀向记者的复仇印记？](https://global.udn.com/global_vision/story/8663/6435){target="_blank"} - 转角国际 udn Global
 [^7]: [泰国王室骂不得！男子脸书PO文惹祸 遭判刑50年破纪录](https://udn.com/news/story/6812/7721452){target="_blank"} - 联合新闻网
 [^8]: [缅甸被彻底剥夺的新闻自由：报导飓风灾害的记者遭军政府判刑20年监禁](https://feja.org.tw/72219/){target="_blank"} - 卓越新闻奖基金会
 [^9]: [封锁、断网、审查：从缅甸政变看「网络中立权」的重要性](https://lab.ocf.tw/2022/02/12/mymmar-block/){target="_blank"} - OCF Lab 开放实验室
+[^10]: [Freedom House：Taiwan（Freedom on the Net 国别条目）](https://freedomhouse.org/country/taiwan/freedom-net/2024){target="_blank"}（年度与网址随报告更新，若链接失效请改从[互动地图](https://freedomhouse.org/explore-the-map)进入）
