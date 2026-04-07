@@ -1,12 +1,29 @@
 ---
 title: COSCUP 2026 公開徵稿
-description: 匿名網路社群於 COSCUP 2026 社群議程軌公開徵稿。歡迎透過 Pretalx 投稿，分享 Tor、Tails、OONI、匿名支付與穩定幣等隱私與數位安全實務，並與自由軟體、開放協作與開放文化呼應。
+description: 匿名網路社群於 COSCUP 2026 社群議程軌公開徵稿。歡迎透過 Pretalx 投稿，分享 Tor、Tails、OONI、匿名支付與穩定幣等隱私與數位安全實務，並與自由軟體、開放協作與開源文化呼應。
 icon: material/email-edit
+meta:
+  - property: og:image
+    content: https://assets.anoni.net/event/coscup-2026-cfp.webp
+  - property: og:image
+    content: https://assets.anoni.net/event/coscup-2026-cfp.png
+  - property: og:image:secure_url
+    content: https://assets.anoni.net/event/coscup-2026-cfp.webp
+  - property: og:image:secure_url
+    content: https://assets.anoni.net/event/coscup-2026-cfp.png
+  - property: og:image:type
+    content: image/webp
+  - property: og:image:type
+    content: image/png
+  - property: twitter:image
+    content: https://assets.anoni.net/event/coscup-2026-cfp.png
 ---
 
 # :material-email-edit: 匿名網路社群公開徵稿：COSCUP 2026 社群議程軌
 
 **匿名網路社群**關注匿名、隱私與數位安全，致力建立華文領域的匿名與隱私實務指引，推動在地化的工具應用與知識協作。推廣與文件長期以開源專案 **Tor**、**Tails**、**OONI** 為核心關注對象。
+
+![匿名網路社群 2026 公開徵稿主視覺](https://assets.anoni.net/event/coscup-2026-cfp.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #b56b3e;"}
 
 **COSCUP** 長期籌辦開源社群年會為核心，許多匿名與抗審查工具也以**自由軟體**形式發展，仰賴社群檢視、文件與基礎建設參與。今年社群順利正式[錄取](https://blog.coscup.org/2026/03/coscup-x-ubucon-asia-2026-coscup-x.html){target="_blank"} **COSCUP 2026 社群議程軌**（二天），將於 **8 月 8 日與 9 日**在台灣科技大學（NTUST）舉辦議程與工作坊。現正公開徵稿，歡迎研究者、實踐者、NGO 工作者、公民科技開發者與社群成員分享觀察、工具操作與實務經驗，並與開源社群年會的脈絡呼應。
 
