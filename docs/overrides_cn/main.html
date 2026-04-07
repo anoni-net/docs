@@ -1,9 +1,43 @@
-{% extends "base.html" %} {% block site_meta %} {{ super() }}
-<meta
-  http-equiv="onion-location"
-  content="http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/zh-cn/{{page.url}}"
-/>
-{% endblock %} {% block scripts %} {{ super() }}
+{% extends "base.html" %}
+
+{% block site_meta %}
+  {% if page.meta and page.meta.og and page.meta.og.enabled %}
+    {% set page_title = page.meta.get("title", page.title) %}
+    {% set page_desc = page.meta.get("description", config.site_description) %}
+    {% set og_image = page.meta.og.image %}
+    {% set og_image_type = page.meta.og.get("image_type", "image/png") %}
+    {% set og_image_width = page.meta.og.get("image_width", 1200) %}
+    {% set og_image_height = page.meta.og.get("image_height", 630) %}
+    {% set twitter_card = page.meta.og.get("twitter_card", "summary_large_image") %}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ page_title }} - {{ config.site_name }}" />
+    <meta property="og:description" content="{{ page_desc }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:image:type" content="{{ og_image_type }}" />
+    <meta property="og:image:width" content="{{ og_image_width }}" />
+    <meta property="og:image:height" content="{{ og_image_height }}" />
+    <meta property="og:url" content="{{ page.canonical_url }}" />
+    <meta property="twitter:card" content="{{ twitter_card }}" />
+    <meta property="twitter:title" content="{{ page_title }} - {{ config.site_name }}" />
+    <meta property="twitter:description" content="{{ page_desc }}" />
+    <meta property="twitter:image" content="{{ og_image }}" />
+  {% endif %}
+
+  {{ super() }}
+  <meta
+    http-equiv="onion-location"
+    content="http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/zh-cn/{{ page.url }}"
+  />
+{% endblock %}
+
+{% block extrahead %}
+  {% if not (page.meta and page.meta.og and page.meta.og.enabled) %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
 <!-- Cloudflare Web Analytics -->
 <script
   defer
