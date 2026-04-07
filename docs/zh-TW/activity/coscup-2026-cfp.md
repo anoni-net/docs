@@ -2,21 +2,7 @@
 title: COSCUP 2026 公開徵稿
 description: 匿名網路社群於 COSCUP 2026 社群議程軌公開徵稿。歡迎透過 Pretalx 投稿，分享 Tor、Tails、OONI、匿名支付與穩定幣等隱私與數位安全實務，並與自由軟體、開放協作與開源文化呼應。
 icon: material/email-edit
-meta:
-  - property: og:image
-    content: https://assets.anoni.net/event/coscup-2026-cfp.webp
-  - property: og:image
-    content: https://assets.anoni.net/event/coscup-2026-cfp.png
-  - property: og:image:secure_url
-    content: https://assets.anoni.net/event/coscup-2026-cfp.webp
-  - property: og:image:secure_url
-    content: https://assets.anoni.net/event/coscup-2026-cfp.png
-  - property: og:image:type
-    content: image/webp
-  - property: og:image:type
-    content: image/png
-  - property: twitter:image
-    content: https://assets.anoni.net/event/coscup-2026-cfp.png
+image: https://assets.anoni.net/event/coscup-2026-cfp.png
 ---
 
 # :material-email-edit: 匿名網路社群公開徵稿：COSCUP 2026 社群議程軌
