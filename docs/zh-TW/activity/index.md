@@ -9,6 +9,16 @@ icon: material/account-reactivate-outline
 
 <div class="grid cards" markdown>
 
+-   [:material-email-edit: COSCUP 2026 公開徵稿](./coscup-2026-cfp.md)
+    :material-update: 此刻 ~ 2026/05/09（截止）
+    :octicons-location-24: 國立台灣科技大學
+
+    ---
+
+    社群議程軌徵稿。分享匿名、隱私與數位安全相關議題。
+
+    :material-account-supervisor-outline: 適合對象：投稿講者與工作坊（研究者、實踐者、NGO 與公民團體工作者、公民科技開發者、開源社群成員）。
+
 -   [:material-calendar-plus: 匿名網路工作坊](../event-workshop-2025.md)
     :material-update: 2025/08/09（二日）
     :octicons-location-24: 國立台灣科技大學
