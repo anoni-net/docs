@@ -1,0 +1,11 @@
+{#- hreflang alternates: language root + page.url (same as header switcher). -#}
+{% if config.extra.alternate is iterable %}
+  {% for alt in config.extra.alternate %}
+    {% if page is defined and page %}
+      {% set base = alt.link.rstrip('/') %}
+      <link rel="alternate" href="{{ (base ~ '/' ~ page.url) | url }}" hreflang="{{ alt.lang | d(lang.t('language')) }}">
+    {% else %}
+      <link rel="alternate" href="{{ alt.link }}" hreflang="{{ alt.lang | d(lang.t('language')) }}">
+    {% endif %}
+  {% endfor %}
+{% endif %}
