@@ -9,6 +9,16 @@ We occasionally hold workshops or discussion meetings on topics related to anony
 
 <div class="grid cards" markdown>
 
+-   [:material-email-edit: COSCUP 2026 Call for Proposals](./coscup-2026-cfp.md)
+    :material-update: Open now ~ May 9, 2026 (deadline, AoE)
+    :octicons-location-24: National Taiwan University of Science and Technology（國立台灣科技大學）
+
+    ---
+
+    Call for proposals for the community track. Topics on anonymity, privacy, and digital security.
+
+    :material-account-supervisor-outline: Intended audience: speakers and workshop proposers (researchers, practitioners, NGO and civil-society staff, civic-tech developers, open-source community members).
+
 -   [:material-calendar-plus: Anonymous Network Workshop](../event-workshop-2025.md)
     :material-update: August 9, 2025 (two days)
     :octicons-location-24: National Taiwan University of Science and Technology（國立台灣科技大學）
