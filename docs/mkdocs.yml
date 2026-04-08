@@ -37,18 +37,6 @@ nav:
       - event-workshop-2025.md
       - !ENV [NAV_EVENT_PREPARE, "籌備頁面"]:
           - event-workshop-2025-prepare.md
-  - !ENV [NAV_REPORT, "嚴選報告"]:
-      - report/index.md
-      - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
-          - report/interseclab-the-internet-coup/index.md
-          - report/interseclab-the-internet-coup/index_1.md
-          - report/interseclab-the-internet-coup/index_2.md
-          - report/interseclab-the-internet-coup/index_3.md
-          - report/interseclab-the-internet-coup/index_4.md
-          - report/interseclab-the-internet-coup/index_5.md
-          - report/interseclab-the-internet-coup/index_6.md
-          - report/interseclab-the-internet-coup/index_7.md
-          - report/interseclab-the-internet-coup/index_8.md
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
@@ -59,6 +47,18 @@ nav:
           - about/send-censorship.md
   - !ENV [NAV_WATCHER, "監控觀察"]:
       - watcher-tor-relays.md
+      - !ENV [NAV_REPORT, "嚴選報告"]:
+          - report/index.md
+          - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
+              - report/interseclab-the-internet-coup/index.md
+              - report/interseclab-the-internet-coup/index_1.md
+              - report/interseclab-the-internet-coup/index_2.md
+              - report/interseclab-the-internet-coup/index_3.md
+              - report/interseclab-the-internet-coup/index_4.md
+              - report/interseclab-the-internet-coup/index_5.md
+              - report/interseclab-the-internet-coup/index_6.md
+              - report/interseclab-the-internet-coup/index_7.md
+              - report/interseclab-the-internet-coup/index_8.md
 theme:
   name: material
   icon:
