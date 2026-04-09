@@ -11,6 +11,7 @@ We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance 
 
 !!! tip "Updated"
 
+    - `Event`{style="color: OrangeRed;"}：[COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) - 8 Apr, 2026
     - `New`{style="color: DodgerBlue;"}：[2026/03 Community Update](./blog/posts/updates-202603.md) - 29 Mar, 2026
     - `New`{style="color: SeaGreen;"}：[Tor Project Guest Post: Setting Up a Tor Relay at a University in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 23 Mar, 2026
     - `Update`{style="color: DodgerBlue;"}：[2026 Community Participation: Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments](./about/community/index.md) - 2026/01/02
