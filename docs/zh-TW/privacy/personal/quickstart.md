@@ -1,5 +1,7 @@
 ---
 title: 15 分鐘隱私健檢清單
+icon: material/clipboard-check-outline
+description: 15 分鐘完成的個人隱私健檢清單，涵蓋帳號、裝置、平台與瀏覽設定。
 ---
 
 # 15 分鐘隱私健檢清單

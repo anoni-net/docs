@@ -1,6 +1,7 @@
 ---
 title: 個人隱私
 icon: material/shield-account
+description: 個人隱私主題首頁，整理一般使用者可立即採取的隱私調整與後續深入指引。
 ---
 
 # 個人隱私
