@@ -11,13 +11,13 @@ icon: material/shield-account
 
 如果你是第一次整理自己的隱私設定，建議先完成這份清單：
 
-- [15 分鐘隱私健檢清單](./quickstart-15min.md)
+- [15 分鐘隱私健檢清單](./quickstart.md)
 
 ## 第一個深入主題
 
 先做完快速上手後，可以進一步調整平常最常用的入口：
 
-- [瀏覽器與搜尋](./browser-and-search.md)
+- [瀏覽器與搜尋](./browser.md)
 
 ## 後續將補上的深入頁面
 

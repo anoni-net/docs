@@ -21,6 +21,10 @@ nav:
       - what-is-ooni.md
       - what-is-tor.md
       - what-is-tails.md
+      - !ENV [NAV_PRIVACY_PERSONAL, "個人隱私"]:
+          - privacy/personal/index.md
+          - privacy/personal/quickstart.md
+          - privacy/personal/browser.md
       - !ENV [NAV_PP, "參與專案"]:
           - ooni-asns-coverage.md
           - ooni-weblists.md
@@ -31,10 +35,6 @@ nav:
           - setup-repo.md
           - setup-tor-relay.md
           - setup-skill-level.md
-  - 個人隱私:
-      - privacy/personal/index.md
-      - privacy/personal/quickstart-15min.md
-      - privacy/personal/browser-and-search.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md

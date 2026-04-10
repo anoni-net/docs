@@ -37,4 +37,4 @@ title: 瀏覽器與搜尋
 完成本頁後，可回到：
 
 - [個人隱私主題首頁](./index.md)
-- [15 分鐘隱私健檢清單](./quickstart-15min.md)
+- [15 分鐘隱私健檢清單](./quickstart.md)

@@ -34,4 +34,4 @@ title: 15 分鐘隱私健檢清單
 
 完成以上項目後，建議先讀：
 
-- [瀏覽器與搜尋](./browser-and-search.md)
+- [瀏覽器與搜尋](./browser.md)
