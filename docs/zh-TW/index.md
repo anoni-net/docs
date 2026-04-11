@@ -10,6 +10,7 @@ icon: material/home-circle
 
 !!! tip "重要資訊"
 
+    - `新增`{style="color: DodgerBlue;"}：[OONI 新版 Probe Desktop 測試邀請](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
     - `活動`{style="color: OrangeRed;"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
     - `新增`{style="color: DodgerBlue;"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
     - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
