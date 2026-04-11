@@ -57,7 +57,7 @@ sh build_docs_anoni_onion.sh  # Onion 版
 
 - 直接編輯 `zh-TW/`、`zh-CN/`、`en/` 下的 Markdown
 - 部落格文章：`{語言}/blog/posts/`
-- 更多說明請見專案根目錄 [README](../README.md) 與 [CLAUDE.md](../CLAUDE.md)
+- 更多說明請見 [CONTRIBUTING.md](../CONTRIBUTING.md)、專案根目錄 [README](../README.md) 與 [CLAUDE.md](../CLAUDE.md)
 
 ## 資源連結
 
@@ -68,7 +68,7 @@ sh build_docs_anoni_onion.sh  # Onion 版
 ## 授權
 
 - 文件內容：CC-BY 4.0  
-- Copyright 2023-2025 Anoni.net Docs Project
+- Copyright 2023-2026 Anoni.net Docs Project
 
 ---
 
@@ -131,7 +131,7 @@ Note: `build_docs_anoni.sh` and `build_docs_anoni_onion.sh` contain server-speci
 
 - Edit Markdown under `zh-TW/`, `zh-CN/`, or `en/`
 - Blog posts: `{lang}/blog/posts/`
-- See the project root [README](../README.md) and [CLAUDE.md](../CLAUDE.md) for more.
+- See [CONTRIBUTING.md](../CONTRIBUTING.md), the project root [README](../README.md), and [CLAUDE.md](../CLAUDE.md) for more.
 
 ## Links
 
@@ -142,4 +142,4 @@ Note: `build_docs_anoni.sh` and `build_docs_anoni_onion.sh` contain server-speci
 ## License
 
 - Documentation content: CC-BY 4.0  
-- Copyright 2023-2025 Anoni.net Docs Project
+- Copyright 2023-2026 Anoni.net Docs Project

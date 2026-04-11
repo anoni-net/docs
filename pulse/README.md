@@ -30,7 +30,7 @@ pulse/
 - **完整資料儲存**: PostgreSQL 資料庫儲存中繼節點詳細資訊與歷史紀錄
 - **RESTful API**: FastAPI 提供高效能 REST API
 - **視覺化支援**: Vega-Lite 格式圖表資料端點
-- **健康檢查**: 內建 `/healthz` 和 `/readyz` 端點
+- **健康檢查**: 內建 `/api/healthz` 和 `/api/readyz` 端點（`root_path="/api"`）
 - **CORS 支援**: 可配置跨域請求設定
 - **Docker 部署**: 一鍵啟動完整服務
 

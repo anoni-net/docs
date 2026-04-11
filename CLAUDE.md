@@ -19,6 +19,23 @@ anoni-net-docs/
 └── asn_coverage/   # OONI ASN 分析工具 (Python CLI)
 ```
 
+### 授權一覽
+
+| 範圍 | 授權 |
+|------|------|
+| `docs/` 網站內容 | [CC-BY 4.0](./LICENSE)（根目錄 `LICENSE` 為全文） |
+| `pulse/` 程式碼 | [MIT](./pulse/LICENSE) |
+| `asn_coverage/` 程式碼 | [GPL-3.0](./asn_coverage/LICENSE) |
+
+根目錄 `LICENSE-asn_coverage` 為 `asn_coverage` 之 GPL-3.0 全文副本，以 `asn_coverage/LICENSE` 為準。
+
+### 兩套 OONI 相關程式（勿混淆）
+
+| 位置 | 用途 | 資料來源 |
+|------|------|----------|
+| `pulse/backend/ooni.py` | Pulse 服務內建的 **OONI API** 客戶端（與監控後端一併部署） | OONI API |
+| `asn_coverage/ooni.py` | **批次**下載 S3 觀測資料、ASN 涵蓋分析 CLI | OONI AWS S3 公開資料集 |
+
 ## 開發環境設置
 
 此專案使用 **uv** 作為 Python 套件管理工具。所有子專案都使用 Python 3.12+。
@@ -215,8 +232,10 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 處理 Open Graph 圖片
   - 清理並上傳至 S3
 
-- **check-ripe.yml**: 檢查 RIPE ASN 資料
-- **lookback-ooni.yml**: 定期收集 OONI 資料
+- **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
+  - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
+- **lookback-ooni.yml**: 定期回溯 OONI 資料（`asn_coverage/`）
+  - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
 
 ## 專案特定注意事項
 

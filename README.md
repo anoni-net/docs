@@ -116,20 +116,24 @@ uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 
 ## 🤝 貢獻
 
-我們歡迎任何形式的貢獻！無論是翻譯文件、回報問題、提出建議或提交程式碼。
-
-- 文件貢獻：直接編輯 `docs/{語言}/` 目錄下的 Markdown 檔案
-- 問題回報：使用 GitHub Issues
-- 程式碼貢獻：Fork 後提交 Pull Request
+我們歡迎任何形式的貢獻。流程、分支與 CI 說明請見 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
 ## 📝 授權
 
-- **文件內容**: [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **程式碼**: MIT License（見各子專案的 LICENSE 檔案）
+本儲存庫內不同目錄適用不同授權，請以各目錄的 `LICENSE` 與下表為準（**並非**所有程式碼皆為 MIT）。
+
+| 範圍 | 授權 |
+|------|------|
+| `docs/` 網站內容（Markdown 等） | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| [`pulse/`](pulse/) 程式碼 | [MIT](pulse/LICENSE) |
+| [`asn_coverage/`](asn_coverage/) 程式碼 | [GPL-3.0](asn_coverage/LICENSE) |
+
+- 根目錄 [`LICENSE`](LICENSE) 為 **CC-BY 4.0** 全文，作為文件與網站內容之預設授權標示。
+- 根目錄 [`LICENSE-asn_coverage`](LICENSE-asn_coverage) 為 **`asn_coverage` 子專案 GPL-3.0** 全文之副本，便於在根目錄瀏覽；以 [`asn_coverage/LICENSE`](asn_coverage/LICENSE) 為準。
 
 ---
 
-**Copyright © 2023-2025 Anoni.net Docs Project**
+**Copyright © 2023-2026 Anoni.net Docs Project**
 
 ---
 
@@ -251,17 +255,21 @@ uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds! Whether it's translating documentation, reporting issues, suggesting improvements, or submitting code.
-
-- Documentation contributions: Directly edit Markdown files in `docs/{language}/` directories
-- Issue reporting: Use GitHub Issues
-- Code contributions: Fork and submit Pull Requests
+We welcome contributions of all kinds. See [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow, branches, and CI.
 
 ## 📝 License
 
-- **Documentation Content**: [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **Code**: MIT License (see LICENSE files in each subproject)
+This repository contains multiple licenses. Use the table below and each subdirectory’s `LICENSE` file (**not** all code is MIT).
+
+| Scope | License |
+|-------|---------|
+| `docs/` site content (Markdown, etc.) | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| [`pulse/`](pulse/) code | [MIT](pulse/LICENSE) |
+| [`asn_coverage/`](asn_coverage/) code | [GPL-3.0](asn_coverage/LICENSE) |
+
+- The root [`LICENSE`](LICENSE) file is the full **CC-BY 4.0** text used as the default license notice for documentation and site content.
+- Root [`LICENSE-asn_coverage`](LICENSE-asn_coverage) is a **duplicate copy** of the GPL-3.0 text for `asn_coverage`; [`asn_coverage/LICENSE`](asn_coverage/LICENSE) is authoritative.
 
 ---
 
-**Copyright © 2023-2025 Anoni.net Docs Project**
+**Copyright © 2023-2026 Anoni.net Docs Project**
