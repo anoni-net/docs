@@ -7,7 +7,16 @@ icon: material/home-circle
 
 In the rapidly evolving digital age, the internet has become an indispensable part of our lives. However, with the widespread adoption of the internet, personal privacy and online freedom are facing unprecedented challenges. In Taiwan, we aim to promote the concepts of "**anonymous networks**" and "**internet freedom**" to raise public awareness of these critical issues.
 
-We plan to use open-source anonymous tools like Tor, Tails, and OONI to enhance anonymity and security online. We hope that **news media**, **independent journalists**, **civil society groups**, and the **open-source technology community** will have more opportunities for collaboration and exchange. Together, we seek to explore and develop corresponding solutions to enhance our ability to protect privacy and expand the scope of international cooperation. This will give us the opportunity to jointly participate on the international stage in defending online privacy and freedom of expression.
+We plan to use open-source anonymous tools like Tor, Tails, and OONI to strengthen anonymity and security online. We also want **news media**, **independent journalists**, **civil society groups**, and the **open-source technology community** to have more opportunities to collaborate and learn from each other.
+
+We focus on these participants because their work often requires protecting sources and members, staying connected during cross-border verification, and using open measurements to document blocking, throttling, or pressure.
+
+- **News media**: Reducing the risk that identities and traffic patterns are correlated and tracked during editorial work, and still being able to verify facts and explain them publicly when connectivity is disrupted.
+- **Independent journalists**: When security and legal support are limited, relying more on anonymous networking and privacy-first environments to investigate and stay in touch.
+- **Civil society groups**: Advocacy and contacts that need protection, while official sites and social accounts can also become targets.
+- **Open-source technology community**: Contributing through relays, testing, and documentation to keep anonymous-network infrastructure usable and resilient.
+
+For more detail, see [What is an anonymous network? Why different participants use it](./what-is-anonymous-network.md#stakeholders-why). We look forward to discussing practical approaches with you and strengthening privacy protection and anonymity in day-to-day work and organizational practice.
 
 !!! tip "Updated"
 

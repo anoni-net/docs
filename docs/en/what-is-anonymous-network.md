@@ -26,6 +26,28 @@ An anonymous network offers a concrete path forward. Through a combination of te
 
 To understand the current state of internet freedom in Asia, start here: [Why does Internet Freedom matter?](./internet-freedom-matter.md)
 
+## Why Different Participants Use This {#stakeholders-why}
+
+The following explains why news media, independent journalists, civil society groups, and the open-source technology community turn to anonymous networking, verifiable and auditable measurement, and privacy-first environments in practice. Each group cares about different details, but they often share the same underlying concerns: identity and behavioral traces, whether connections stay usable, and whether open data can show that interference is happening.
+
+### News media
+
+Editorial workflows regularly touch sensitive topics and require protecting sources and newsroom communications. Anonymous networking lowers the risk that institutions and individuals are profiled and tracked through traffic and identity signals. Cross-border verification often depends on connectivity and access that censorship or platform rules can disrupt. With open measurement tools such as OONI, “this site or service became hard to reach” can be documented in a reproducible, citable record for public explanation and follow-up. In high-risk, one-off situations, teams may also pair this with a privacy-first environment designed for that kind of use.
+
+### Independent journalists
+
+Compared with newsrooms that have institutional backing, independent reporters more often face gaps in security and legal support, with a larger exposed surface for personal accounts and online collaboration. Anonymous networking supports online investigation and channels for reaching sources, and it reduces how easily connections and identities can be pinned down on high-stakes topics. When you need evidence that blocking or throttling is happening on a network, OONI’s public data is a practical place to look. When the goal is to route an entire working environment through Tor by default and leave as little local trace as possible after shutdown, many people use an approach such as Tails.
+
+### Civil society groups
+
+Advocacy, petitions, and cross-border cooperation involve protecting members and contacts. Organizational accounts, campaign sites, or event pages can become targets for traffic manipulation or policy-driven interference. Anonymous networking and circumvention practices help groups stay reachable and keep accessing resources under pressure. Turning blocking and throttling into citable measurement also helps explain the situation to others and gives international solidarity efforts something concrete to rely on.
+
+### Open-source technology community
+
+Anonymous networking depends on inspectable code and repeatable build and deployment practices. Maintaining and contributing to that infrastructure is part of helping others connect safely and see whether interference is occurring. Work on Tor relays, Snowflake bridges, OONI testing, and documentation translation links individual needs back to the resilience and observability of the network as a whole.
+
+To connect this to regional context and institutional pressure, continue with [Why does Internet Freedom matter?](./internet-freedom-matter.md).
+
 ## How the Tools Fit Together
 
 This project centers on three core open-source tools, each addressing a different layer of anonymous networking:
