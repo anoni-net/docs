@@ -1,4 +1,4 @@
-FROM python:3.12.12-alpine3.23
+FROM python:3.12.13-alpine3.23
 
 WORKDIR /app
 ADD pyproject.toml \
@@ -22,21 +22,27 @@ RUN \
     rm -rf /var/cache/apk/* /var/lib/apk/* /etc/apk/cache/*
 
 RUN \
-    echo "@reboot cd /app; uv run tor.py details" >> /etc/crontabs/root
-RUN \
-    echo "@reboot cd /app; uv run tor.py details --country=jp" >> /etc/crontabs/root
-RUN \
-    echo "@reboot cd /app; uv run tor.py details --country=kr" >> /etc/crontabs/root
-RUN \
-    echo "@reboot cd /app; uv run tor.py details --country=hk" >> /etc/crontabs/root
+    echo "@reboot cd /app; uv run tor.py details" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=jp" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=kr" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=hk" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=sg" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=in" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=vn" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=de" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=us" >> /etc/crontabs/root && \
+    echo "@reboot cd /app; uv run tor.py details --country=nl" >> /etc/crontabs/root
 
 RUN \
-    echo "5 * * * * cd /app; uv run tor.py details" >> /etc/crontabs/root
-RUN \
-    echo "5 * * * * cd /app; uv run tor.py details --country=jp" >> /etc/crontabs/root
-RUN \
-    echo "5 * * * * cd /app; uv run tor.py details --country=kr" >> /etc/crontabs/root
-RUN \
-    echo "5 * * * * cd /app; uv run tor.py details --country=hk" >> /etc/crontabs/root
+    echo "5 * * * * cd /app; uv run tor.py details" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=jp" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=kr" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=hk" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=sg" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=in" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=vn" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=de" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=us" >> /etc/crontabs/root && \
+    echo "5 * * * * cd /app; uv run tor.py details --country=nl" >> /etc/crontabs/root
 
 ENTRYPOINT ["/bin/sh", "-c", "crond -f"]

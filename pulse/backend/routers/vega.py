@@ -33,12 +33,24 @@ class Country(str, Enum):
     - JP: Japan
     - KR: South Korea
     - HK: Hong Kong
+    - SG: Singapore
+    - IN: India
+    - VN: Vietnam
+    - DE: Germany
+    - US: United States
+    - NL: Netherlands
     """
 
     TW = "tw"
     JP = "jp"
     KR = "kr"
     HK = "hk"
+    SG = "sg"
+    IN = "in"
+    VN = "vn"
+    DE = "de"
+    US = "us"
+    NL = "nl"
 
 
 class NodeType(Enum):
