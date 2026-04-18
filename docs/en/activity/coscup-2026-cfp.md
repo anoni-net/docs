@@ -83,7 +83,7 @@ Below are further angles on anonymity, privacy, and internet freedom, including 
     - Open-source licensing, reproducible builds, supply chain and download verification, community trust, and governance
     - Other topics closely tied to anonymity, privacy, internet freedom, and digital security that help participants take action
 
-## Cross-community collaboration: Anonymity Networks Community × ETHTaipei
+## Cross-community collaboration: Anonymity Networks Community × ETHTaipei { #anoni-netxETHTaipei }
 
 This year we are partnering with **ETHTaipei** (Taipei Ethereum Community) on program coordination. Both communities approach **anonymous payments** from different angles. To ensure submissions reach the most fitting audience, we will review proposals together:
 
