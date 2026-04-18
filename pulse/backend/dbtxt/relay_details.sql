@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS relay_details (
     measured boolean,
     asn varchar(10),
     as_name varchar(100),
-    consensus_weight smallint,
+    consensus_weight integer,
     platform varchar(100),
     version varchar(20),
     country varchar(10),
