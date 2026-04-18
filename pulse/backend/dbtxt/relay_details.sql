@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS relay_details (
     version varchar(20),
     country varchar(10),
     country_name varchar(40),
-    contact varchar(400),
+    contact text,
     flags varchar(20)[],
     first_seen timestamp with time zone,
     last_seen timestamp with time zone,
