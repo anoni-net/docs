@@ -83,6 +83,17 @@ Below are further angles on anonymity, privacy, and internet freedom, including 
     - Open-source licensing, reproducible builds, supply chain and download verification, community trust, and governance
     - Other topics closely tied to anonymity, privacy, internet freedom, and digital security that help participants take action
 
+## Cross-community collaboration: Anonymity Networks Community × ETHTaipei
+
+This year we are partnering with **ETHTaipei** (Taipei Ethereum Community) on program coordination. Both communities approach **anonymous payments** from different angles. To ensure submissions reach the most fitting audience, we will review proposals together:
+
+- **Application-oriented and introductory talks**: prioritized for the Anonymity Networks Community track
+- **Technical and protocol-level talks**: may be moved to the ETHTaipei blockchain track
+
+You do not need to decide which track to submit to — we will discuss placement with speakers during the review process. Both communities will cross-promote their schedules, so attendees can move between tracks to follow related topics across the event.
+
+On **Day 2 (Aug 9)**, both communities plan to co-organize a dedicated session on **Anonymous Payments**. Speakers and attendees interested in this topic are especially encouraged to take note. If you have a relevant proposal, feel free to mention in your submission notes that you are interested in being included in the cross-community session.
+
 ## How to submit
 
 Submit through the **official COSCUP 2026 Pretalx**.
