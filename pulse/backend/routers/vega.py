@@ -9,11 +9,15 @@ multiple dimensions: running status, version, ASN, node type, and flags.
 
 from datetime import datetime
 from enum import Enum
+from typing import Any
 
+from cachetools import TTLCache
 from fastapi import APIRouter, status
 from pydantic import BaseModel, Field
 
 from pgdb import PGConn
+
+_cache: TTLCache = TTLCache(maxsize=128, ttl=300)
 
 router = APIRouter(
     prefix="/vega",
@@ -162,6 +166,10 @@ async def tor_relays_running(country: Country, limit: int = 45) -> list[RelaysRu
     Returns:
         List of RelaysRunning objects with daily statistics
     """
+    cache_key: tuple[Any, ...] = ("running", country, limit)
+    if cache_key in _cache:
+        return _cache[cache_key]
+
     datas = []
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
@@ -184,6 +192,7 @@ async def tor_relays_running(country: Country, limit: int = 45) -> list[RelaysRu
                 )
             )
 
+    _cache[cache_key] = datas
     return datas
 
 
@@ -201,6 +210,10 @@ async def tor_relays_version(country: Country, limit: int = 45) -> list[RelaysVe
     Returns:
         List of RelaysVersion objects with version distribution
     """
+    cache_key: tuple[Any, ...] = ("version", country, limit)
+    if cache_key in _cache:
+        return _cache[cache_key]
+
     datas = []
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
@@ -218,6 +231,7 @@ async def tor_relays_version(country: Country, limit: int = 45) -> list[RelaysVe
         ):
             datas.append(RelaysVersion(created_at=row[0], count=row[1], version=row[2]))
 
+    _cache[cache_key] = datas
     return datas
 
 
@@ -235,6 +249,10 @@ async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
     Returns:
         List of RelaysASN objects with ASN distribution
     """
+    cache_key: tuple[Any, ...] = ("asn", country, limit)
+    if cache_key in _cache:
+        return _cache[cache_key]
+
     datas = []
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
@@ -251,8 +269,11 @@ async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
                                       ;""",
             (country, limit),
         ):
-            datas.append(RelaysASN(created_at=row[0], count=row[1], asn=row[2], as_name=row[3] or ""))
+            datas.append(
+                RelaysASN(created_at=row[0], count=row[1], asn=row[2], as_name=row[3] or "")
+            )
 
+    _cache[cache_key] = datas
     return datas
 
 
@@ -271,6 +292,10 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
     Returns:
         List of RelaysNodeType objects with role distribution
     """
+    cache_key: tuple[Any, ...] = ("node_type", country, limit)
+    if cache_key in _cache:
+        return _cache[cache_key]
+
     datas = []
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
@@ -314,6 +339,7 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
             datas.append(RelaysNodeType(created_at=row[0], count=row[2], node=NodeType.MIDDLE))
             datas.append(RelaysNodeType(created_at=row[0], count=row[3], node=NodeType.EXIT))
 
+    _cache[cache_key] = datas
     return datas
 
 
@@ -332,6 +358,10 @@ async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlag
     Returns:
         List of RelaysFlags objects with flag distribution
     """
+    cache_key: tuple[Any, ...] = ("flags", country, limit)
+    if cache_key in _cache:
+        return _cache[cache_key]
+
     datas = []
     with PGConn() as pg_conn:
         for row in pg_conn.cur.execute(
@@ -370,4 +400,5 @@ async def tor_relays_flags(country: Country, limit: int = 45) -> list[RelaysFlag
         ):
             datas.append(RelaysFlags(created_at=row[0], count=row[2], flag=row[1]))
 
+    _cache[cache_key] = datas
     return datas

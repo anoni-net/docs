@@ -33,7 +33,11 @@ def cli():
 @click.option("--save", default=True, help="country code")
 def details(country="tw", save=True):
     """Get details"""
-    resp_details = TorOnionoo().get_details(country=country)
+    try:
+        resp_details = TorOnionoo().get_details(country=country)
+    except Exception as e:
+        logger.error("Failed to fetch Onionoo data for %s: %s", country, e)
+        raise SystemExit(1)
 
     bandwidth = 0
     for relay in resp_details.relays:
@@ -104,10 +108,6 @@ def details(country="tw", save=True):
             for relay in resp_details.relays:
                 relay_dict = relay.model_dump()
                 relay_dict["created_at"] = resp_details.relays_published
-                for key, value in relay_dict.items():
-                    if isinstance(value, int):
-                        print(key, value)
-
                 logger.info(relay_dict)
                 pg.cur.execute(sql, relay_dict)
 
