@@ -96,11 +96,13 @@ class RelaysASN(BaseModel):
         created_at: Date of observation
         count: Number of distinct relays
         asn: Autonomous System Number
+        as_name: Autonomous System name
     """
 
     created_at: datetime
     count: int
     asn: str
+    as_name: str = Field(default="")
 
 
 class RelaysNodeType(BaseModel):
@@ -227,7 +229,8 @@ async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
             """
                                        select date(created_at) as dt,
                                               count(DISTINCT fingerprint),
-                                              asn
+                                              asn,
+                                              max(as_name) as as_name
                                        from relay_details
                                        where country=%s
                                        group by dt, asn
@@ -236,7 +239,7 @@ async def tor_relays_asn(country: Country, limit: int = 45) -> list[RelaysASN]:
                                       ;""",
             (country, limit),
         ):
-            datas.append(RelaysASN(created_at=row[0], count=row[1], asn=row[2]))
+            datas.append(RelaysASN(created_at=row[0], count=row[1], asn=row[2], as_name=row[3] or ""))
 
     return datas
 
