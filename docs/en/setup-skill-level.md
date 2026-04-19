@@ -5,457 +5,554 @@ icon: octicons/paste-24
 
 # :octicons-paste-24: Self-Skills Evaluation Form
 
-Here is a self-evaluation scale to help quickly assess your understanding of Tor, Tails, and OONI. If you're unsure where to start learning, you can use this evaluation form as a guide for your studies.
+Here is a self-evaluation scale to help you quickly assess your understanding of Tor, Tails, and OONI. If you are unsure where to start, use this form as a learning guide.
 
-## Tor Skills Grading Chart
+!!! info "How to Use This Form"
 
-### :material-checkbox-marked-circle-auto-outline: Tor-Basic
+    | Level | What You Can Do | Who It's For |
+    |-------|----------------|-------------|
+    | **Awareness** | Read documentation, understand concepts | Anyone interested in internet freedom |
+    | **Practice** | Install and operate tools in daily use | Journalists, civil society workers, anyone who needs to protect their communications |
+    | **Contribute** | Build infrastructure, analyze data, participate in the community | Open-source community members with basic command-line or data analysis skills |
 
-=== ":material-checkbox-marked-circle-outline: Tor: Basic L1"
+## Tor Skills
 
-    - [x] Understand what Tor is.
-    - [x] Understand why internet freedom is important, and what anonymous networks are.
-    - [x] Is the internet in Taiwan free?
-    - [x] Current internet conditions in neighboring countries.
+=== ":material-checkbox-marked-circle-outline: Awareness"
 
-    !!! abstract "Tor: Basic L1"
+    **Self-assessment** (check the items you can already do):
 
-        ??? question "Understand what Tor is."
+    - [ ] I can explain how Tor works (onion routing, three-layer relay nodes).
+    - [ ] I can explain why internet freedom matters and what anonymous networks are for.
+    - [ ] I can describe the current state of internet freedom in my region.
+    - [ ] I can describe differences in internet freedom across regions and give specific examples.
 
-            You can start by exploring the "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" section to gain an understanding.
+    ??? tip "Not there yet? Start here."
+        1. Read "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" (about 5–10 minutes)
+        2. Read "[What is an Anonymous Network?](./what-is-anonymous-network.md){target="_blank"}"
+        3. Read "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}"
+        4. Come back and check the items above to confirm your understanding.
 
-            Tor typically refers to "The Onion Router," which relays network connections randomly through three nodes. The "Tor Browser" is designed by the Tor team using the open-source browser Firefox to facilitate accessing websites ending in .onion via the onion network.
+    !!! abstract "Reference"
 
-            :octicons-question-24: **Additional Information**
+        ??? question "How Tor works."
 
-            1. **Background of Tor**: Tor was originally developed by the U.S. Naval Research Laboratory with the aim of protecting government communications. It was later made available to the public to support freedom of speech and privacy protection.
-            2. **How it works**: Tor's name derives from its routing technique—The Onion Router. It encrypts your internet traffic and relays it through multiple nodes, making it difficult to trace.
-            3. **Privacy and security advantages**: Using Tor can prevent network monitoring and traffic analysis, serving as a vital tool for privacy protection. Consequently, Tor can circumvent geo-blocking and internet censorship, allowing for freer exploration of information online.
-            4. **Disadvantages and limitations**: While Tor offers strong privacy protection, its speed is usually slower than traditional internet connections due to the multiple layers of encryption and nodes. Using Tor does not guarantee complete anonymity; users may still be identifiable if they inadvertently reveal personal information or log into service accounts.
-            5. **Legal and ethical considerations**: In some countries or regions, using Tor may be considered illegal or inappropriate, and users should understand local laws to avoid legal issues. There are also illegal activities on the onion network, so users should remain vigilant when browsing.
-            6. **Usage tips**: When using Tor, avoid enabling unnecessary plugins, scripts, or downloading untrusted content, as these actions may reveal your real IP address or expose you to security risks.
+            Start with "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" on the official Tor Project site.
 
-        ??? question "Understand why internet freedom is important, and what anonymous networks are."
+            Tor refers to "The Onion Router," which relays network connections randomly through three nodes. The "Tor Browser" is built by the Tor team on top of Firefox ESR and is designed for connecting to `.onion` websites.
 
-            You can begin by exploring the "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}" section to gain an understanding.
+            :octicons-question-24: **More details**
 
-            :octicons-question-24: **Additional Information**
+            1. **Background**: Tor was originally developed by the U.S. Naval Research Laboratory to protect government communications. It was later made available to the public to support freedom of speech and privacy.
+            2. **How it works**: Tor encrypts your traffic and routes it through multiple relay nodes, making it very difficult to trace.
+            3. **Privacy and security**: Tor prevents network monitoring and traffic analysis, and can bypass geo-blocking and censorship.
+            4. **Limitations**: Speeds are typically slower than regular connections. If a user voluntarily reveals identifying information (e.g., logs into an account), they may still be identifiable.
+            5. **Legal considerations**: In some countries, using Tor may be subject to legal restrictions. Check local regulations before use.
 
-            Taiwan's internet is generally free, but there are severe differences in the level of internet control in the neighboring countries.
+        ??? question "Why internet freedom matters, and what anonymous networks are."
 
-            1. **The Importance of Internet Freedom**: Internet freedom involves issues of **freedom of speech**, **information flow**, and **privacy rights**. A free internet allows people to exchange ideas, access information, and express opinions without restrictions, which is crucial for democratic and innovative development. In some countries, strict internet control may lead governments to block websites, restrict social media, and monitor personal traffic, affecting not only basic human rights but also limiting informational diversity and transparency.
-            2. **What is an Anonymous Network**: An anonymous network is a technology that allows users to browse the internet while hiding their identities to protect their privacy and security. These networks typically rely on multi-layer encryption and routing technologies, such as Tor's Onion Routing, making users' traffic difficult to trace. Anonymous networks can serve as a safe haven for users in complex political environments, particularly those wishing to circumvent censorship or protect sensitive information.
-            3. **Advantages and Risks of Anonymous Networks**: Using an anonymous network can protect privacy and help users bypass internet censorship, access blocked websites, and communicate with a broader audience. However, anonymous networks are also used for some illegal activities, which may attract the attention and intervention of legal authorities. Thus, while gaining anonymity and freedom, users must understand and bear the associated risks.
+            Start with "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}".
 
-        ??? question "Is the internet in Taiwan free?"
+            :octicons-question-24: **More details**
 
-            Do you think the internet in Taiwan is free? As we reflect on this, we might consider comparative events or reference materials.
+            1. **Importance of internet freedom**: Internet freedom involves freedom of speech, the flow of information, and the right to privacy. A free internet allows people to exchange ideas and access information without restriction — crucial for democracy and innovation. In some countries, governments block websites, restrict social media, or monitor personal traffic.
+            2. **What is an anonymous network**: An anonymous network lets users browse the internet without revealing their identity, protecting their privacy and security. These networks rely on multi-layer encryption and routing techniques such as Tor's onion routing, making user traffic difficult to trace.
+            3. **Benefits and risks**: Anonymous networks protect privacy and help users bypass censorship. However, they are also used for illegal activity. Users must understand the risks that come with anonymity.
 
-            :octicons-question-24: **Additional Information**
+        ??? question "What is the current state of internet freedom in your region?"
 
-            1. **International Rankings and Reports**: According to the annual reports from "Freedom House," Taiwan is generally rated as one of the countries with high internet freedom. This report evaluates global countries on openness of internet access, freedom of speech, and user rights protection. Taiwanese netizens can freely access most international websites and express diverse political viewpoints online, which might face restrictions or risks in some neighboring countries.
-            2. **Comparative Events**: In contrast, China employs the "Great Firewall" technology to comprehensively block various international sites like Google, Facebook, and Twitter/X, conducting internet censorship. Since the implementation of the National Security Law, Hong Kong's internet freedom has also been affected, with some websites being blocked. These situations highlight Taiwan's prominence in internet freedom.
-            3. **Local Events and Policies**: In Taiwan, while internet freedom of speech is highly secured, challenges such as **fake news** and **cyberbullying** remain, pushing the government and civil organizations to actively seek legal and technical improvements. Regarding internet surveillance, the government may require telecommunications providers to cooperate by providing user information when necessary for investigations, but most of these actions are legally constrained to protect citizens' privacy rights.
-            4. **Reference Data**: According to evaluations by multiple international organizations, Taiwan scores high on internet freedom indices. These evaluations are based on the severity of internet censorship, surveillance measures, freedom of speech, and the legal system.
+            Internet freedom varies significantly by location. Here are some angles to consider:
 
-        ??? question "Current internet conditions in neighboring countries."
+            :octicons-question-24: **More details**
 
-            This is an open topic, and it is encouraged that you research and understand the state of internet freedom in the countries surrounding Taiwan. Here are some guidelines to get you started:
+            1. **International rankings**: Freedom House publishes an annual *Freedom on the Net* report, assessing countries on internet access, freedom of expression, and user rights. It is a useful starting point.
+            2. **Taiwan**: According to multiple international assessments, Taiwan ranks highly for internet freedom. People can freely access most international websites and openly express political views. Disinformation and online harassment remain ongoing challenges.
+            3. **Hong Kong and Malaysia as reference points**: After the National Security Law took effect, internet freedom in Hong Kong declined. Malaysia has also seen content blocks during politically sensitive periods. These examples show that internet freedom can change significantly in a short time.
+
+        ??? question "Internet freedom differences across regions."
+
+            This is an open topic. We encourage you to search and explore the internet freedom landscape in different regions. Here are some starting points:
 
             **Keywords**
 
-            1. **Internet Freedom Reports** - Learn about the ranking and status of various countries in terms of internet freedom, for example by searching for the "Freedom House Internet Freedom Report."
-            2. **Great Firewall** - China's internet censorship mechanism.
-            3. **National Security Law** - The law affecting internet freedom in Hong Kong.
-            4. **Disinformation and Information Manipulation** - The challenges of misinformation faced by different countries.
-            5. **Internet Shutdowns** - Events related to Myanmar and their impact on society.
-            6. **Internet Surveillance Laws** - The surveillance measures of different countries and their effects.
+            1. **Freedom on the Net**: Search for "Freedom House Internet Freedom Report" to find country rankings.
+            2. **Great Firewall**: China's internet censorship mechanism.
+            3. **National Security Law**: The law in Hong Kong that has affected internet freedom.
+            4. **Internet Shutdowns**: Events in Myanmar, Iran, and other countries.
+            5. **Internet Surveillance Laws**: Surveillance measures and their impact in various countries.
 
-            **Events**
+            **Notable events**
 
-            1. **2021 Myanmar Military Coup** - Its impact on internet freedom in the country.
-            2. **Singapore's Protection from Online Falsehoods and Manipulation Act (POFMA)** - About the misinformation act and its implementation effects.
-            3. **Thailand's Street Protests and Royal Criticism** - Exploring the government's suppression of internet surveillance and freedom of speech.
-            4. **Vietnam's Content Blocking Measures** - Specific instances where internet users face heavy control.
+            1. **2021 Myanmar military coup**: Its impact on internet freedom in the country.
+            2. **Singapore's POFMA**: The Protection from Online Falsehoods and Manipulation Act and its effects.
+            3. **Thai protests and royal criticism**: Government suppression of online speech.
+            4. **Vietnam's content blocking**: Specific examples of controlled internet use.
 
-=== ":material-checkbox-marked-circle-outline: Tor: Basic L2"
+=== ":material-checkbox-marked-circle-outline: Practice"
 
-    - [x] Understand how Tor browser connects.
-    - [x] Types of Tor bridges: Bridge, Snowflake, WebTunnel.
-    - [x] Use cases and timing for each connection.
-    - [x] Can you connect to Tor via VPN?
+    **Self-assessment** (check the items you can already do):
 
-    !!! abstract "Tor: Basic L2"
+    - [ ] I can download and install the Tor Browser.
+    - [ ] I can explain when to use Bridge, Snowflake, or WebTunnel.
+    - [ ] I can explain whether and when to pair Tor with a VPN, and the differences between the two approaches.
+    - [ ] I can connect to Tor both directly and via a bridge, and have used it for at least one week.
+    - [ ] I can switch the current Tor circuit (New Tor Circuit).
+    - [ ] I can access `.onion` websites.
 
-        ??? question "Understand how Tor browser connects."
+    ??? tip "Not there yet? Start here."
+        1. Go to the [Tor Project website](https://www.torproject.org/download/){target="_blank"} and download the Tor Browser.
+        2. After installing, use the Tor Browser for everyday browsing for at least one week to get familiar with its interface.
+        3. Try accessing the project's `.onion` website to verify that bridge connections also work.
 
-            The "[Tor Browser](https://www.torproject.org/zh-TW/download/){target="_blank"}" is designed by the Tor team using the open-source [Firefox ESR](https://www.mozilla.org/zh-TW/firefox/enterprise/){target="_blank"}, a long-term support version, tailored for the onion network to facilitate accessing websites ending in .onion. Currently, both [Brave](https://brave.com/zh-tw/){target="_blank"} and [Mullvad](https://mullvad.net/zh-hant/browser){target="_blank"} browsers can be used to connect to .onion websites.
+    !!! abstract "Reference"
 
-            The Tor Browser is similar to regular browsers but emphasizes **privacy protection** and effectively blocks **ad tracking**. When connecting to regular websites (non-.onion URLs), data is randomly transmitted through three Tor relays. For .onion websites, a connection enters the .onion network after the third relay.
+        ??? question "How to connect with Tor Browser."
 
-            :octicons-question-24: **Additional Information**
+            The [Tor Browser](https://www.torproject.org/download/){target="_blank"} is built on [Firefox ESR](https://www.mozilla.org/en-US/firefox/enterprise/){target="_blank"} and designed for the onion network. [Brave](https://brave.com/){target="_blank"} and [Mullvad Browser](https://mullvad.net/en/browser){target="_blank"} also support `.onion` sites.
 
-            1. **Anonymous Browsing**: The Tor Browser is primarily designed to protect user privacy. When you browse the internet with Tor, your traffic passes through a series of randomly selected relay servers, undergoing multiple layers of encryption and routing. This ensures that any entity trying to track the origin can only see the IPs of virtual relays, not your actual IP address. Thus, Tor effectively prevents websites and service providers from logging or tracking your IP address and browsing behavior, enhancing user anonymity.
-            2. **Circumventing Censorship**: In some countries or regions, governments may enforce internet censorship, restricting user access to certain websites or services. The Tor Browser helps users bypass these blocks since its traffic is relayed through servers in multiple countries, complicating recognition and blocking by surveillance and filtering systems. This allows users to freely access content banned by local network administrators or governments, enjoying a more liberated internet environment.
-            3. **Security Protection**: Tor Browser uses multi-layer encryption technology and onion routing to enhance network security, particularly when using public Wi-Fi or other insecure network environments. Each layer of transmission is encrypted, only decrypted upon entering and exiting the Tor network. Each relay server only sees incoming and outgoing data to the directly adjacent servers, preventing knowledge of the full transmission path or final destination. This effectively reduces the risk of man-in-the-middle attacks while protecting user data from theft or tampering.
-            4. **Temporary Access**: One-time usage design of the Tor Browser ensures that user privacy is thoroughly protected after each session. When you close the Tor Browser, all browsing history, cookies, login information, and other temporary cache data are automatically cleared, preventing others from viewing your browsing activity and safeguarding personal data against unauthorized access.
-            5. **Open Source**: Tor's open-source nature means its code is publicly available, allowing developers and security experts to review and fix potential vulnerabilities, enhancing overall security. Open-source community collaboration enables Tor to be continuously updated, addressing emerging security threats and attracting developers worldwide to cooperate, contributing to the enhancement of privacy protection.
+            Tor Browser is similar to a regular browser but focuses on privacy and blocks ad tracking. Traffic to regular websites passes through three random Tor relays. Traffic to `.onion` sites enters the onion network after the third relay.
 
-        ??? question "Types of Tor bridges: Bridge, Snowflake, WebTunnel."
+            :octicons-question-24: **More details**
 
-            In the Tor network, bridge servers exist to help users facing internet censorship or blocks connect to Tor. Below are different types of Tor Bridges:
+            1. **Anonymous browsing**: Traffic is routed through randomly selected relay servers with multiple layers of encryption, making the source very hard to trace.
+            2. **Bypassing censorship**: Traffic is routed through relays in different countries, making it difficult for monitoring or filtering systems to identify and block connections.
+            3. **Temporary-use design**: When you close Tor Browser, all browsing history, cookies, and login data are automatically cleared.
+            4. **Open source**: Tor's source code is publicly available, allowing developers and security experts to audit and fix potential issues.
 
-            1. **Bridge**: This is the most basic type of Tor bridge. Bridges serve as secret entry points not listed on the public Tor network, making them harder to block. Users can manually obtain these bridges to connect to the Tor network and bypass common blocking measures. (Refer to how to obtain a [Tor Bridge](https://bridges.torproject.org/){target="_blank"})
-            2. **Snowflake**: This type of bridge is specifically designed to counter high-intensity internet censorship. Snowflake employs the WebRTC protocol, allowing volunteers to use their browsers as temporary Tor entry points. Due to its dynamic nature, it is more challenging to block. This bridge can automatically connect and offer more random entry points, further enhancing connectivity reliability. (Refer to how to install [Snowflake](https://snowflake.torproject.org/){target="_blank"})
-            3. **WebTunnel**: This is a newer technology designed to tackle more complex blocking strategies. WebTunnel uses HTTPS servers as entry points to mitigate the issue of traditional bridges being blocked. Since it uses the HTTPS protocol, WebTunnel traffic is difficult to distinguish and block, thereby increasing the chances of bypassing censorship. (Refer to how to set up a [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"})
+        ??? question "Tor bridge types: Bridge, Snowflake, WebTunnel."
 
-        ??? question "Use cases and timing for each connection."
+            Bridge servers exist to help users in censored or blocked environments connect to Tor. Here are the main bridge types:
 
-            1. **Bridge**:
-                  - **Use Case**: You are in an environment with basic Tor blocking, such as certain schools, workplaces, or internet cafes that restrict access to Tor.
-                  - **When to Use**: Suitable for situations requiring simple circumvention of mild blocking. You can first attempt a basic Bridge, which is usually sufficient to bypass most IP-based blockings. You can obtain the latest bridge host list from the official Tor website or other sources.
-            2. **Snowflake**:
-                  - **Use Case**: Facing severe censorship in countries like China and Iran, where deep packet inspection (DPI) and IP blocking are commonly used to prevent Tor traffic.
-                  - **When to Use**: When Bridges are unable to bypass censorship or when you need a more randomized connection to avoid detection and blocking, Snowflake is a better choice. Snowflake utilizes WebRTC (a technology that enables browsers and devices to connect directly without a middle server) for more randomized and decentralized connections, supported by global volunteers, thereby improving the connection success rate.
-            3. **WebTunnel**:
-                  - **Use Case**: When your network not only blocks Tor entries but also has advanced traffic monitoring mechanisms capable of quickly identifying and blocking Snowflake.
-                  - **When to Use**: When encountering extreme blocking strategies and other bridge types fail, try WebTunnel. Its HTTPS disguise can more effectively hide Tor traffic within regular internet traffic, such as accessing HTTPS websites, making it difficult to distinguish and block.
+            1. **Bridge**: The most basic type. A bridge is a secret entry point not listed in the public Tor network, making it harder to block. Users can manually obtain bridges to connect. (See how to get a [Tor Bridge](https://bridges.torproject.org/){target="_blank"})
+            2. **Snowflake**: Uses the WebRTC protocol to let volunteers use their browsers as temporary Tor entry points. Because it is dynamic and decentralized, it is harder to block. (See how to install [Snowflake](https://snowflake.torproject.org/){target="_blank"})
+            3. **WebTunnel**: Uses an HTTPS server as the entry point. Its traffic is nearly indistinguishable from regular HTTPS traffic, making it effective against sophisticated blocking. (See how to set up [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"})
 
-        ??? question "Can you connect to Tor via VPN?"
+        ??? question "When to use each bridge type."
 
-            Connecting to Tor through a VPN is a common practice, known as either "VPN-over-Tor" or "Tor-over-VPN," and there are differences between the two:
+            1. **Bridge**: Use when your network has basic Tor blocks (e.g., schools, workplaces). Sufficient for most IP-based blocks.
+            2. **Snowflake**: Use in environments with strong censorship that employs Deep Packet Inspection (DPI), such as China or Iran.
+            3. **WebTunnel**: Use when all other bridge types have failed and you face extreme blocking. Its HTTPS disguise hides Tor traffic among normal web traffic.
 
-            1. **VPN-over-Tor**: This method involves first connecting to the Tor network and then using a VPN service through Tor. This configuration is less common as it requires the VPN provider to support connections through the Tor network, and it might not offer additional protection for your IP address.
-            2. **Tor-over-VPN**: This is the more commonly used approach. You first connect to a VPN, and then connect to Tor from the VPN. This method has several advantages for enhancing privacy and security:
-                  - Your original IP address is hidden behind the VPN server, preventing ISPs (Internet Service Providers) from seeing that you are using Tor.
-                  - The VPN connection can help bypass blocks on Tor network entries, especially in certain countries or network environments where Tor entry nodes are blocked.
+        ??? question "Can I use Tor with a VPN?"
 
-=== ":material-checkbox-marked-circle-outline: Tor: Basic L3"
+            Using a VPN with Tor is common. There are two main approaches:
 
-    - [x] Install the Tor browser and use it for at least one week.
-    - [x] Connect to the Tor network via **direct connection** and **bridge connection**.
-    - [x] Operate switching current connection paths.
-    - [x] Connect to **.onion** domain.
+            1. **Tor-over-VPN**: Connect to VPN first, then connect to Tor. This is the more commonly used approach. Your real IP is hidden behind the VPN server, so your ISP cannot see you are using Tor. The VPN can also help bypass blocks on Tor entry nodes.
+            2. **VPN-over-Tor**: Connect to Tor first, then use a VPN through Tor. This is rare and requires VPN provider support. It may not provide additional IP protection.
 
-    !!! abstract "Tor: Basic L3"
+        ??? question "Install Tor Browser and use it for at least one week."
 
-        ??? question "Install the Tor browser and use it for at least one week."
+            1. Go to the [Tor Project website](https://www.torproject.org/){target="_blank"} and download the Tor Browser for your operating system.
+            2. Install and launch Tor Browser.
+            3. Use Tor Browser for daily browsing for at least one week to get comfortable with its interface. Note the privacy and security features, and any inconveniences you encounter.
 
-            1. Visit the [Tor Project official website](https://www.torproject.org/){target="_blank"} to download the Tor Browser suitable for your operating system.
-            2. Once the download is complete, follow the instructions to install and launch the Tor Browser.
-            3. Use the Tor Browser for daily web browsing throughout the week to familiarize yourself with its interface and features. Pay special attention to anonymity and security while using it. Also, note any inconveniences you encounter and explore possible solutions.
+        ??? question "Connect via direct connection and bridge."
 
-        ??? question "Connect to the Tor network via **direct connection** and **bridge connection**."
+            1. When you launch Tor Browser, it will start establishing a connection.
+            2. Entering a URL connects you directly through Tor. This works best in regions that do not block Tor.
+            3. Click the first icon on the left side of the address bar (Tor Circuit, similar to :material-map-marker-path:) to view your current relay path.
+            4. If Tor is blocked in your network, go to Settings, Connection, Bridges. Choose a built-in bridge type, or enter bridge information you obtained elsewhere.
 
-            1. When you launch the Tor Browser, you will usually see the browser establishing a connection.
-            2. Enter the URL to browse directly through the Tor network. This method is best suited for countries that do not block the Tor network.
-            3. You can click on the first icon (similar to :material-map-marker-path:) located to the left of the address bar to view the current route and connection method.
-            4. If your network blocks Tor, go to "Settings," then "Connection," and select "Bridges." You can choose from built-in bridge types or enter bridge information that you have obtained from other sources.
+        ??? question "Switch the current Tor circuit."
 
-        ??? question "Operate switching current connection paths."
+            1. Click the Tor Circuit icon in the address bar to view your current connection path.
+            2. Click "New Tor circuit for this site" to rebuild the connection path. This is useful when the exit node is blocked by a website and you want to try a different country.
 
-            1. You can click on the first icon (a Tor Circuit icon, similar to :material-map-marker-path:) to the left of the address bar to view the current route and connection method.
-            2. Click on the last line "New Tor circuit for this site" to have the Tor Browser re-establish the connection path. This is useful when the exit node is being blocked by the website, allowing you to attempt connecting through different countries.
+        ??? question "Connect to .onion websites."
 
-        ??? question "Connect to **.onion** domain."
+            1. Visit the [project website](https://anoni.net/docs/){target="_blank"} and look for the purple ".onion available" button in the address bar. Clicking it redirects you to the `.onion` domain.
+            2. DuckDuckGo also provides a `.onion` service: <https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/>{target="_blank"}
 
-            1. Connect to the [project website](https://anoni.net/docs/en/){target="_blank"}. Notice a purple button saying ".onion available" that appears at the end of the address bar. Clicking it will redirect you to the .onion domain, indicating that the site actively provides guidance to connect to its .onion domain.
-            2. DuckDuckGo also offers a .onion service: [https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/](https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/){target="_blank"}
+=== ":material-checkbox-marked-circle-auto-outline: Contribute"
 
-### :material-checkbox-marked-circle-auto-outline: Tor-Advanced
+    **Self-assessment** (check the items you can already do):
 
-=== ":material-checkbox-marked-circle-auto-outline: Tor: Advanced L1"
+    - [ ] I can clearly distinguish between Tor (the onion routing protocol), the Onion network, and Tor Browser.
+    - [ ] I can set up a Tor bridge using the Snowflake browser extension.
+    - [ ] I can run the Tor service and route other applications through it using SOCKS v5.
+    - [ ] I can look up relay status by region on [metrics.torproject.org](https://metrics.torproject.org){target="_blank"}.
+    - [ ] I can set up and maintain a Tor Relay.
+    - [ ] I can set up a Tor Bridge or WebTunnel relay.
+    - [ ] I can host a `.onion` website.
 
-    - [x] Clearly understand what Tor, Onion, and Tor Browser each refer to in terms of technology.
-    - [x] Use the Snowflake browser add-on to set up a Tor bridge.
-    - [x] Start Tor and connect via SOCKS v5.
-    - [x] Use [metrics.torproject.org](https://metrics.torproject.org){target="_blank"} to query relays in Taiwan.
+    ??? tip "Not there yet? Start here."
+        1. Complete all items in the Practice level first.
+        2. Read "[How to Set Up a Tor Relay](./setup-tor-relay.md){target="_blank"}" for the full installation and configuration process.
+        3. See "[Tor Relays Monitor](./watcher-tor-relays.md){target="_blank"}" to learn how to observe relay status.
+        4. See "[Tor Snowflake](./tor-snowflake.md){target="_blank"}" to learn how to run a Snowflake bridge via browser extension or standalone program.
 
-    !!! warning ""
+    !!! abstract "Reference"
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+        ??? question "Tor vs. Onion network vs. Tor Browser."
 
-=== ":material-checkbox-marked-circle-auto-outline: Tor: Advanced L2"
+            - **Tor (The Onion Router)**: The underlying anonymous routing technology. Traffic passes through multiple relay nodes with layers of encryption, making the source very hard to trace.
+            - **Onion network**: The network of hidden services accessible only via Tor, identified by `.onion` addresses.
+            - **Tor Browser**: A Firefox ESR-based browser with Tor built in, making it easy for regular users to access Tor and `.onion` sites.
 
-    - [x] Establish a Tor Relay.
-    - [x] Set up a Tor Bridge.
-    - [x] Create a WebTunnel relay.
-    - [x] Build a **.onion** website.
+        ??? question "Set up a Tor bridge using the Snowflake browser extension."
 
-    !!! warning ""
+            Snowflake lets you use your browser as a temporary Tor bridge, helping users in censored regions connect to Tor.
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+            1. Install the [Snowflake extension](https://snowflake.torproject.org/){target="_blank"} in Chrome or Firefox.
+            2. It runs automatically after installation. The extension icon shows the number of connections currently being relayed.
+            3. See the "[Tor Snowflake](./tor-snowflake.md){target="_blank"}" page for detailed instructions.
 
-## Tails Skills Grading Chart
+        ??? question "Run the Tor service and connect via SOCKS v5."
 
-### :material-checkbox-marked-circle-auto-outline: Tails-Basic
+            Beyond Tor Browser, you can install and run the Tor service directly on your system to let other applications use Tor via SOCKS v5.
 
-=== ":material-checkbox-marked-circle-outline: Tails: Basic L1"
+            1. Install on Debian/Ubuntu: `apt install tor`
+            2. The default SOCKS v5 port is `9050`.
+            3. In any application that supports SOCKS v5 proxy, set the proxy server to `127.0.0.1:9050`.
+            4. Verify the connection with: `curl --socks5-hostname 127.0.0.1:9050 https://check.torproject.org/api/ip`
 
-    - [x] Understand what Tails is and how it works.
-    - [x] Understand why internet freedom is important, and what anonymous networks are.
-    - [x] Is the internet in Taiwan free?
-    - [x] Current internet conditions in neighboring countries.
+        ??? question "Look up relay status on metrics.torproject.org."
 
-    !!! abstract "Tails: Basic L1"
+            [Tor Metrics](https://metrics.torproject.org){target="_blank"} provides statistics on the Tor network, including relay counts, bandwidth usage, and geographic distribution.
 
-        ??? question "Understand what Tails is and how it works."
+            1. Go to [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} to search relays by country, nickname, or fingerprint.
+            2. For Taiwan (TW), select Country: TW in Advanced options to see a list of active relays.
+            3. The "[Tor Relays Monitor](./watcher-tor-relays.md){target="_blank"}" page also provides visualized monitoring data.
 
-            You can start by exploring the "[What is Tails?](https://tails.net/){target="_blank"}" section to gain an understanding.
+        ??? question "Set up and maintain a Tor Relay."
 
-        ??? question "Understand why internet freedom is important, and what anonymous networks are."
+            Setting up a Tor Relay requires basic Linux skills and a server with a static IP and stable bandwidth.
 
-            You can begin by exploring the "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}" section to gain an understanding.
+            See "[How to Set Up a Tor Relay](./setup-tor-relay.md){target="_blank"}" for the full guide, covering:
 
-            :octicons-question-24: **Additional Information**
+            - Middle Relay installation and configuration (`/etc/tor/torrc`)
+            - Bridge relay setup
+            - WebTunnel relay setup
+            - Post-installation best practices
 
-            Taiwan's internet is generally free, but there are severe differences in the level of internet control in the neighboring countries.
+        ??? question "Host a .onion website."
 
-            1. **The Importance of Internet Freedom**: Internet freedom involves issues of **freedom of speech**, **information flow**, and **privacy rights**. A free internet allows people to exchange ideas, access information, and express opinions without restrictions, which is crucial for democratic and innovative development. In some countries, strict internet control may lead governments to block websites, restrict social media, and monitor personal traffic, affecting not only basic human rights but also limiting informational diversity and transparency.
-            2. **What is an Anonymous Network**: An anonymous network is a technology that allows users to browse the internet while hiding their identities to protect their privacy and security. These networks typically rely on multi-layer encryption and routing technologies, such as the Tor Onion Routing, making users' traffic difficult to trace. Anonymous networks can serve as a safe haven for users in complex political environments, particularly those wishing to circumvent censorship or protect sensitive information.
-            3. **Advantages and Risks of Anonymous Networks**: Using an anonymous network can protect privacy and help users bypass internet censorship, access blocked websites, and communicate with a broader audience. However, anonymous networks are also used for some illegal activities, which may attract the attention and intervention of legal authorities. Thus, while gaining anonymity and freedom, users must understand and bear the associated risks.
+            A `.onion` website is a hidden service accessible only through Tor. To set one up, configure the Tor service on your server and specify the local listening port for the hidden service.
 
-        ??? question "Is the internet in Taiwan free?"
+            See the official guide: [Tor Project | Set up Your Onion Service](https://community.torproject.org/onion-services/setup/){target="_blank"}.
 
-            Do you think the internet in Taiwan is free? As we reflect on this, we might consider comparative events or reference materials.
+## Tails Skills
 
-            :octicons-question-24: **Additional Information**
+=== ":material-checkbox-marked-circle-outline: Awareness"
 
-            1. **International Rankings and Reports**: According to the annual reports from "Freedom House," Taiwan is generally rated as one of the countries with high internet freedom. This report evaluates global countries on openness of internet access, freedom of speech, and user rights protection. Taiwanese netizens can freely access most international websites and express diverse political viewpoints online, which might face restrictions or risks in some neighboring countries.
-            2. **Comparative Events**: In contrast, China employs the "Great Firewall" technology to comprehensively block various international sites like Google, Facebook, and Twitter/X, conducting internet censorship. Since the implementation of the National Security Law, Hong Kong's internet freedom has also been affected, with some websites being blocked. These situations highlight Taiwan's prominence in internet freedom.
-            3. **Local Events and Policies**: In Taiwan, while internet freedom of speech is highly secured, challenges such as **fake news** and **cyberbullying** remain, pushing the government and civil organizations to actively seek legal and technical improvements. Regarding internet surveillance, the government may require telecommunications providers to cooperate by providing user information when necessary for investigations, but most of these actions are legally constrained to protect citizens' privacy rights.
-            4. **Reference Data**: According to evaluations by multiple international organizations, Taiwan scores high on internet freedom indices. These evaluations are based on the severity of internet censorship, surveillance measures, freedom of speech, and the legal system.
+    **Self-assessment** (check the items you can already do):
 
-        ??? question "Current internet conditions in neighboring countries."
+    - [ ] I can explain what Tails is and how it differs from a regular operating system.
+    - [ ] I can describe the main use cases for Tails and its key limitations.
+    - [ ] I can explain why internet freedom matters and what anonymous networks are. (Same as Tor Awareness)
+    - [ ] I can describe the current state of internet freedom in my region. (Same as Tor Awareness)
 
-            This is an open topic, and it is encouraged that you research and understand the state of internet freedom in the countries surrounding Taiwan. Here are some guidelines to get you started:
+    ??? tip "Not there yet? Start here."
+        1. Visit [tails.net](https://tails.net/){target="_blank"} and read the introductory documentation (about 5–10 minutes).
+        2. The background knowledge on internet freedom and anonymous networks is the same as the Tor Awareness level. Complete "[Tor Awareness](#Tor-Skills)" first, then come back.
+        3. Come back and check the items above to confirm your understanding.
 
-            **Keywords**
+    !!! abstract "Reference"
 
-            1. **Internet Freedom Reports** - Learn about the ranking and status of various countries in terms of internet freedom, for example by searching for the "Freedom House Internet Freedom Report."
-            2. **Great Firewall** - China's internet censorship mechanism.
-            3. **National Security Law** - The law affecting internet freedom in Hong Kong.
-            4. **Disinformation and Information Manipulation** - The challenges of misinformation faced by different countries.
-            5. **Internet Shutdowns** - Events related to Myanmar and their impact on society.
-            6. **Internet Surveillance Laws** - The surveillance measures of different countries and their effects.
+        ??? question "What is Tails and how does it work?"
 
-            **Events**
+            Tails is a portable operating system built with security at its core. It runs entirely from a USB drive in RAM and leaves no trace on the computer you use it on. All outgoing network connections are routed through Tor by default.
 
-            1. **2021 Myanmar Military Coup** - Its impact on internet freedom in the country.
-            2. **Singapore's Protection from Online Falsehoods and Manipulation Act (POFMA)** - About the misinformation act and its implementation effects.
-            3. **Thailand's Street Protests and Royal Criticism** - Exploring the government's suppression of internet surveillance and freedom of speech.
-            4. **Vietnam's Content Blocking Measures** - Specific instances where internet users face heavy control.
+            See [tails.net](https://tails.net/){target="_blank"} for the full introduction.
 
-=== ":material-checkbox-marked-circle-outline: Tails: Basic L2"
+        ??? question "Why internet freedom matters, and what anonymous networks are."
 
-    - [x] Understand how to install, make a Tails USB system.
-    - [x] Know how to set a computer to boot from USB.
-    - [x] Which types of Mac computers cannot use Tails.
-    - [x] Usage scenarios and limitations of Tails.
+            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)" and "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}".
 
-    !!! abstract "Tails: Basic L2"
+        ??? question "What is the current state of internet freedom in your region?"
 
-        ??? question "Understand how to install, make a Tails USB system."
+            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)".
 
-            - **Download Tails**: Visit the [Tails official website](https://tails.net/){target="_blank"} to download the Tails ISO image.
-            - **Prepare Tools**: You will need a USB flash drive with at least 8GB of space and a tool like [Balena Etcher](https://etcher.balena.io/){target="_blank"} or [Rufus](https://rufus.ie/){target="_blank"} to create a bootable USB drive.
-            - **Installation and Creation**: [Refer to the official website](https://tails.net/install/index.en.html){target="_blank"} for the creation process and choose the appropriate operating system to execute it.
+=== ":material-checkbox-marked-circle-outline: Practice"
 
-        ??? question "Know how to set a computer to boot from USB."
+    **Self-assessment** (check the items you can already do):
 
-            - **Enter BIOS/UEFI Settings**: On most computers, after restarting, you will see key options (such as F2, F12, Delete). Press the corresponding key to enter BIOS or UEFI settings.
-            - **Adjust Boot Order**: In the boot menu, adjust the settings to make the USB flash drive the primary boot device. Save the changes and restart the computer. The system will automatically boot from the USB.
+    - [ ] I can create a Tails bootable USB drive and boot into Tails.
+    - [ ] I know which Mac models cannot run Tails and why.
+    - [ ] I understand the main use cases and limitations of Tails.
+    - [ ] I can create a Persistent Storage volume.
+    - [ ] I can configure a Bridge to adjust Tails's Tor connection.
+    - [ ] I can share files securely with OnionShare, and have used Tails for at least one week.
 
-        ??? question "Which types of Mac computers cannot use Tails."
+    ??? tip "Not there yet? Start here."
+        1. Go to [tails.net](https://tails.net/){target="_blank"} and download the Tails image.
+        2. Prepare a USB drive with at least 8 GB and use [Balena Etcher](https://etcher.balena.io/){target="_blank"} to create the bootable drive.
+        3. Follow the [official Tails installation guide](https://tails.net/install/index.en.html){target="_blank"} to complete the setup and boot from USB.
+        4. Use Tails for daily tasks for at least one week to get familiar with its features.
 
-            - **Unsupported Types**: Certain newer Mac models, particularly those using the Apple T2 chip or Apple Silicon (M series chips), may have boot security mechanisms that prevent them from booting from non-Apple certified USB devices.
+    !!! abstract "Reference"
 
-        ??? question "Usage scenarios and limitations of Tails."
+        ??? question "How to create a Tails bootable USB drive."
 
-            - **Use Case**: The Tails operating system is primarily designed for individuals needing high privacy protection, such as journalists, human rights organizations, or anyone wanting to browse anonymously. It runs without a trace in memory and leaves no data on the computer after shutdown.
+            - **Download Tails**: Go to [tails.net](https://tails.net/){target="_blank"} and download the Tails image.
+            - **Prepare tools**: You need a USB drive with at least 8 GB and a tool such as [Balena Etcher](https://etcher.balena.io/){target="_blank"} or [Rufus](https://rufus.ie/en/){target="_blank"}.
+            - **Create the drive**: Follow the [official installation guide](https://tails.net/install/index.en.html){target="_blank"} for your operating system.
+
+        ??? question "How to boot from USB."
+
+            - **Enter BIOS/UEFI settings**: Restart the computer and press the appropriate key (e.g., F2, F12, Delete) to enter BIOS or UEFI settings.
+            - **Adjust boot order**: Set the USB drive as the primary boot device. Save and restart — the system will boot from USB automatically.
+
+        ??? question "Which Mac models cannot run Tails?"
+
+            - **Unsupported models**: Macs with an Apple T2 chip or Apple Silicon (M-series chips) may not boot from non-Apple-certified USB devices due to secure boot restrictions.
+
+        ??? question "Tails use cases and limitations."
+
+            - **Use cases**: Tails is designed for people who need strong privacy protection, such as journalists, human rights workers, or anyone who wants to browse anonymously. It runs in RAM and leaves no data on the computer after shutdown.
             - **Limitations**:
-                1. **Hardware Compatibility**: Tails might have limited support for some hardware drivers, particularly new wireless network cards.
-                2. **Operation**: Since Tails is based on a Linux system, specifically Debian OS with a GNOME desktop environment, there is a learning curve for users unfamiliar with Linux environments.
-                3. **Permanent Storage**: Although it can create a Persistent Storage encrypted partition to retain certain data, it is designed to leave no trace.
-                4. **Frequent Updates**: For security reasons, Tails updates often. It is necessary to keep it continuously updated to protect your privacy.
+                1. **Hardware compatibility**: Driver support for some newer Wi-Fi cards may be limited.
+                2. **Learning curve**: Tails is based on Linux (Debian) with the GNOME desktop, which may take some getting used to if you are not familiar with Linux.
+                3. **Persistent storage**: While you can create an encrypted Persistent Storage for some data, Tails is designed by default to leave no trace.
+                4. **Frequent updates**: Tails updates frequently for security. Keeping it up to date is essential.
 
-=== ":material-checkbox-marked-circle-outline: Tails: Basic L3"
+        ??? question "Create Persistent Storage."
 
-    - [x] Install Tails, and use it for at least one week.
-    - [x] Establish persistent storage.
-    - [x] Use Bridge configuration for Tails network connection.
-    - [x] Share files using OnionShare.
+            - After booting into Tails, open the Applications menu and go to Tails, Configure persistent volume.
+            - Follow the instructions to set up the encrypted Persistent Storage. This area lets you save configuration files, email, and personal data securely.
+            - Once set up, you can choose whether to unlock Persistent Storage each time you start Tails.
 
-    !!! abstract "Tails: Basic L3"
+        ??? question "Configure a Bridge for Tails's Tor connection."
 
-        ??? question "Install Tails, and use it for at least one week."
+            - After logging into Tails, you will see a screen for configuring the Tor connection.
+            - If Tor is blocked in your region, choose the Bridge option.
+            - Select a built-in bridge type, or manually enter bridge information you have obtained elsewhere.
 
-            - Follow the previously mentioned steps to download and create a bootable Tails USB drive.
-            - Insert the USB flash drive, restart the computer, and boot from the USB to enter the Tails operating system.
-            - Use Tails for regular daily internet activities for one week. During this time, familiarize yourself with Tails' features and settings, such as Tor browsing and secure email usage.
+        ??? question "Share files with OnionShare."
 
-        ??? question "Establish persistent storage."
+            - OnionShare is a tool for securely sharing files over the Tor network. It comes pre-installed in Tails.
+            - Open OnionShare from the Applications menu.
+            - Drag and drop files into OnionShare, or select them manually.
+            - After starting the share, OnionShare generates a `.onion` URL. Share it with trusted people so they can download the files using Tor Browser.
 
-            - After launching Tails, find the "Applications" menu on the desktop and select "Tails" > "Configure persistent volume."
-            - Follow the instructions to set up the persistent encrypted storage. This area allows you to save settings files, emails, and other personal data, with encryption ensuring the security of your data.
-            - Once the encrypted storage is created, you can choose to enable it at the login screen when you restart Tails.
+=== ":material-checkbox-marked-circle-auto-outline: Contribute"
 
-        ??? question "Use Bridge configuration for Tails network connection."
+    **Self-assessment** (check the items you can already do):
 
-            - After logging into Tails, a network configuration for connecting to Tor will appear.
-            - Choose to configure a bridge if your region blocks direct connections to Tor.
-            - You can select from the built-in bridges or manually enter bridge information you have obtained to bypass the block.
+    - [ ] I can set up Gmail in Thunderbird for sending and receiving email (IMAP).
+    - [ ] I can update Tails to the latest version.
+    - [ ] I understand how MAC Address Anonymization works in Tails.
+    - [ ] I can back up my Persistent Storage to another USB drive.
+    - [ ] I can manage passwords with KeePassXC.
+    - [ ] I can create an OpenPGP key pair and encrypt files using GnuPG and Kleopatra.
+    - [ ] I can send an encrypted email using Thunderbird.
 
-        ??? question "Share files using OnionShare."
+    ??? tip "Not there yet? Start here."
+        1. Complete all items in the Practice level first.
+        2. Open Thunderbird in Tails and follow the setup wizard to configure your IMAP account.
+        3. Refer to the [official Tails documentation](https://tails.net/doc/index.en.html){target="_blank"} for guides on KeePassXC and GnuPG.
 
-            - OnionShare is a tool for securely sharing files through the Tor network.
-            - Find and launch OnionShare in the "Applications" menu within Tails.
-            - Load files you want to share into OnionShare by dragging and dropping them, or by selecting the files.
-            - After starting the share, OnionShare will generate a .onion address that you can share with trusted individuals. They can then use the Tor Browser to download the files.
+    !!! abstract "Reference"
 
-### :material-checkbox-marked-circle-auto-outline: Tails-Advanced
+        ??? question "Set up Gmail in Thunderbird (IMAP)."
 
-=== ":material-checkbox-marked-circle-auto-outline: Tails: Advanced L1"
+            1. Open Thunderbird in Tails.
+            2. Follow the setup wizard and enter your Gmail address. Choose IMAP.
+            3. Gmail currently requires an App Password for third-party clients like Thunderbird. Enable two-step verification in your Google Account security settings first, then generate an App Password.
+            4. Once configured, your email will be transmitted through the Tor network.
 
-    - [x] Use Thunderbird to set up reception and sending for a Gmail account (IMAP protocol).
-    - [x] Update Tails to the latest version.
-    - [x] Understand MAC address anonymization.
-    - [x] Backup persistent storage.
+        ??? question "Update Tails to the latest version."
 
-    !!! warning ""
+            - Tails has a built-in update detection feature. If a new version is available, the system will notify you on the desktop after startup.
+            - Follow the prompts to update. You will need a second USB drive to complete the update (cloning from the old version to the new one).
+            - See the [official Tails upgrade guide](https://tails.net/doc/upgrade/index.en.html){target="_blank"} for detailed steps.
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+        ??? question "MAC Address Anonymization."
 
-=== ":material-checkbox-marked-circle-auto-outline: Tails: Advanced L2"
+            - A MAC address is a unique identifier for a network card, visible to other devices on the same local network.
+            - Tails enables MAC Address Anonymization by default — it generates a random MAC address at startup so your device cannot be identified in the same Wi-Fi environment.
+            - If your network requires a fixed MAC address to connect (e.g., corporate networks), you can temporarily disable this feature from the Tails startup menu.
 
-    - [x] Use the KeePassXC password manager.
-    - [x] Create encryption keys and encrypt files using GnuPG and Kleopatra.
-    - [x] Send encrypted mail to `whisper@anoni.net` via Thunderbird (refer to [Stay Updated](./contact.md) for public keys).
-    - [x] Secure file deletion procedures.
+        ??? question "Back up Persistent Storage."
 
-    !!! warning ""
+            - You can clone your Persistent Storage to another Tails USB drive as a backup.
+            - Go to Applications, Tails, Clone Tails and follow the steps. You can choose whether to include the Persistent Storage in the clone.
+            - Regular backups are recommended in case your USB drive is damaged or lost.
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+        ??? question "Manage passwords with KeePassXC."
 
-## OONI Skills Grading Chart
+            - KeePassXC is an open-source password manager included in Tails.
+            - Launch it, create a new password database, and set a master password.
+            - Store all your account passwords in the database. You only need to remember the master password.
+            - Save the database file in Persistent Storage so it is available the next time you use Tails.
 
-### :material-checkbox-marked-circle-auto-outline: OONI-Basic
+        ??? question "Create an OpenPGP key pair and encrypt files."
 
-=== ":material-checkbox-marked-circle-outline: OONI: Basic L1"
+            1. Open Kleopatra in Tails (Applications, Accessories).
+            2. Create a new OpenPGP key pair (a public key and a private key).
+            3. Share your public key with others so they can encrypt files or emails they send to you.
+            4. Store your private key in Persistent Storage.
+            5. Use Kleopatra to encrypt or decrypt files, and Thunderbird to send encrypted emails.
 
-    - [x] Understand what OONI is.
-    - [x] Understand what network surveillance and censorship are.
-    - [x] How OONI tests operate.
-    - [x] Differences in network surveillance and censorship between Taiwan and other countries.
+        ??? question "Send an encrypted email with Thunderbird."
 
-    !!! abstract "OONI: Basic L1"
+            - After creating a GnuPG key pair and setting up Thunderbird, you can try sending an encrypted email to `whisper@anoni.net`.
+            - To get the public key for `whisper@anoni.net`, see the "[Contact](./contact.md){target="_blank"}" page.
+            - Compose the email in Thunderbird, choose to encrypt it, and send. The recipient will decrypt it using their private key.
 
-        ??? question "Understand what OONI is."
+## OONI Skills
 
-            You can start by exploring the "[What is OONI?](./what-is-ooni.md){target="_blank"}" section to gain an understanding.
+=== ":material-checkbox-marked-circle-outline: Awareness"
 
-        ??? question "Understand what network surveillance and censorship are."
+    **Self-assessment** (check the items you can already do):
 
-            - **Internet Surveillance**: Refers to the monitoring and recording of users' online activities by governments, organizations, or individuals, such as emails, search history, website browsing, and communications. Surveillance often involves the use of monitoring technologies, like data packet inspection, to obtain specific internet traffic information.
-            - **Internet Censorship**: Refers to the restriction or control of users' access to certain information on the internet. This can include blocking websites, filtering content, or prohibiting certain keyword searches. Censorship is often implemented by governments but can also be enacted by corporations or other organizations.
+    - [ ] I can explain what OONI is and what it is for.
+    - [ ] I can distinguish between network surveillance and network censorship.
+    - [ ] I can explain how OONI's testing works.
+    - [ ] I can describe differences in network surveillance and censorship across regions.
 
-        ??? question "How OONI tests operate."
+    ??? tip "Not there yet? Start here."
+        1. Read "[What is OONI?](./what-is-ooni.md){target="_blank"}" (about 5–10 minutes)
+        2. Read "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}"
+        3. Come back and check the items above to confirm your understanding.
 
-            - OONI provides a free open-source testing tool called OONI Probe, which allows users to run tests in their own network environments to detect if their network is being censored.
-            - OONI Probe tests systematically send requests to various websites and services to check if the sites and services listed on the [web list](./ooni-weblists.md){target="_blank"} can be accessed normally.
-            - The test results are **anonymously uploaded** to OONI's data servers and made publicly available on [OONI Explorer](https://explorer.ooni.org/){target="_blank"} for researchers and the public, facilitating a better understanding of internet freedom.
+    !!! abstract "Reference"
 
-        ??? question "Differences in network surveillance and censorship between Taiwan and other countries."
+        ??? question "What is OONI?"
 
-            - **Taiwan**: Taiwan's internet environment is relatively free, with the government not implementing widespread internet censorship or surveillance. Users are free to browse a wide range of content on the internet, and the government places a relatively strong emphasis on protecting individual privacy rights.
-            - **Other Countries**: For example, Mainland China enforces strict internet blocking and censorship policies, often referred to as the "Great Firewall," which restricts access to many foreign websites and services. Countries like North Korea impose more extreme restrictions on internet access, allowing only a very limited selection of content. Other countries, such as Russia and Iran, also engage in varying degrees of internet surveillance and website blocking.
-            - You can refer to the section "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}" for more information.
+            Start with "[What is OONI?](./what-is-ooni.md){target="_blank"}".
 
-=== ":material-checkbox-marked-circle-outline: OONI: Basic L2"
+        ??? question "Network surveillance vs. network censorship."
 
-    - [x] Install and use OONI Probe to generate test reports.
-    - [x] Can you use OONI Probe with VPN?
-    - [x] Risks of using OONI Probe.
-    - [x] How ASN Autonomous Networks work.
+            - **Network surveillance**: The monitoring and recording of users' online activities — such as emails, search history, website visits, and calls — by governments, organizations, or individuals. Surveillance often involves deep packet inspection (DPI) to extract specific traffic information.
+            - **Network censorship**: Restricting or controlling access to certain information on the internet, including blocking websites, filtering content, or banning keyword searches. Censorship is typically implemented by governments but may also be enforced by companies or other institutions.
 
-    !!! abstract "OONI: Basic L2"
+        ??? question "How OONI testing works."
 
-        ??? question "Install and use OONI Probe to generate test reports."
+            - OONI provides the free, open-source tool OONI Probe. Users can run tests on their own network to detect censorship.
+            - OONI Probe periodically sends requests to multiple websites and services, checking whether the sites on [the list](./ooni-weblists.md){target="_blank"} are accessible.
+            - Test results are uploaded anonymously to OONI's servers and published on [OONI Explorer](https://explorer.ooni.org/){target="_blank"} for researchers and the public.
 
-            - **Install OONI Probe**: Download the OONI Probe application through the [OONI official website](https://ooni.org/install/){target="_blank"}.
-            - **Using OONI Probe**:
-                - After launching the application, you can choose the type of test you want to run, such as testing website blocking, connectivity of instant messaging apps, or interference from middleboxes.
-                - Once you tap to start the test, OONI Probe will automatically perform the detection and generate results.
-                - The results are uploaded to OONI's servers and displayed in your application, and you can also view more detailed reports on the OONI Explorer website.
+        ??? question "Differences in surveillance and censorship across regions."
 
-        ??? question "Can you use OONI Probe with VPN?"
+            - **Taiwan**: The internet environment is relatively open. The government has not implemented large-scale censorship or surveillance, and privacy rights are generally protected.
+            - **China**: Enforces strict internet blocks and censorship under the "Great Firewall," restricting access to many foreign websites and services.
+            - **North Korea**: Imposes extreme restrictions on internet access, allowing only a small selection of content.
+            - **Russia and Iran**: Carry out varying degrees of network surveillance and website blocking.
+            - See "[Why Internet Freedom Matters?](./internet-freedom-matter.md){target="_blank"}" for more context.
 
-            - It is not recommended to use a VPN with OONI Probe tests, as a VPN will alter your traffic path and IP address, potentially resulting in detection of a changed network environment rather than any censorship or interference that might exist in your actual network.
-            - The goal is to **test the local network** for censorship conditions, so tests should be conducted without a VPN to accurately measure the true network situation.
+=== ":material-checkbox-marked-circle-outline: Practice"
+
+    **Self-assessment** (check the items you can already do):
+
+    - [ ] I can install and use OONI Probe to generate a measurement report.
+    - [ ] I can explain why using OONI Probe over a VPN is not recommended.
+    - [ ] I understand the risks of using OONI Probe in regions with strict censorship.
+    - [ ] I can explain how Autonomous System Numbers (ASNs) work.
+    - [ ] I can use OONI Explorer to review recent measurement data for a specific country.
+    - [ ] I can use OONI Explorer to compare measurement data across countries.
+    - [ ] I can create an OONI Run link and find the corresponding online report.
+
+    ??? tip "Not there yet? Start here."
+        1. Go to [ooni.org/install/](https://ooni.org/install/){target="_blank"} and install OONI Probe.
+        2. Run a full website test and view the results.
+        3. Go to [OONI Explorer](https://explorer.ooni.org/){target="_blank"} to see where your test results appear.
+
+    !!! abstract "Reference"
+
+        ??? question "Install and use OONI Probe."
+
+            - **Install**: Download OONI Probe from [ooni.org/install/](https://ooni.org/install/){target="_blank"}.
+            - **Use**:
+                - Choose a test type: website blocking, instant messaging app connectivity, or middlebox interference.
+                - Start the test. OONI Probe runs automatically and generates results.
+                - Results are uploaded to OONI's servers. You can also view detailed reports on OONI Explorer.
+
+        ??? question "Why not use OONI Probe over a VPN?"
+
+            - A VPN changes your traffic path and IP address, which may cause OONI Probe to measure the VPN's network environment rather than your actual local network.
+            - OONI Probe is meant to test your local network for censorship. Run it without a VPN to get accurate results.
 
         ??? question "Risks of using OONI Probe."
 
-            - Using OONI Probe for testing can attract the attention of network administrators, especially in countries with strict internet censorship. Therefore, it's important to be aware of the local internet policies and assess the potential risks of using OONI Probe.
-            - During testing, OONI Probe will access various websites and services, which could trigger observation and logging by network monitoring systems.
+            - In regions with strict censorship, running OONI Probe may attract the attention of network administrators. Understand your local network policies and assess the risks before running tests.
+            - OONI Probe accesses various websites and services during testing, which may trigger network monitoring logs.
 
-        ??? question "How ASN Autonomous Networks work."
+        ??? question "How ASNs work."
 
-            - An ASN is a unique identifier used to identify an Autonomous System (AS).
-            - An Autonomous System is a collection of one or more IP blocks, managed by one or more Internet Service Providers (ISPs) or large enterprise units for routing. Each AS communicates on the Internet using an ASN to facilitate the exchange of routing information and IP packets. The ASN system ensures more efficient operation of the global Internet and guarantees that traffic between different networks can reach its intended destination correctly. You can refer to the introduction in the first paragraph of "[ASNs Autonomous System Observational Data Analysis](./ooni-asns-coverage.md){target="_blank"}" for more information.
+            - An ASN (Autonomous System Number) is the unique identifier for an Autonomous System (AS).
+            - An AS is a group of IP address blocks managed by one or more ISPs or large organizations. Each AS uses its ASN to exchange routing information with other ASes on the internet.
+            - See "[ASNs Coverage Analysis](./ooni-asns-coverage.md){target="_blank"}" for an introduction.
 
-=== ":material-checkbox-marked-circle-outline:OONI: Basic L3"
+        ??? question "Review recent measurement data on OONI Explorer."
 
-    - [x] Use OONI Explorer to organize Taiwan's observation data for the past six months.
-    - [x] Compare observation data for three countries using OONI Explorer.
-    - [x] Review current internet blocking reports.
-    - [x] Create an OONI Run test link and find the online report content of that link.
+            - Go to [OONI Explorer](https://explorer.ooni.org/){target="_blank"}.
+            - Select a country in the country field.
+            - Use the date range picker to select the time period you want to view.
+            - Browse results by test type: website blocking, instant messaging connectivity, and more.
+            - Download or record relevant data and events for further analysis.
 
-    !!! abstract "OONI: Basic L3"
+        ??? question "Compare measurement data across countries on OONI Explorer."
 
-        ??? question "Use OONI Explorer to organize Taiwan's observation data for the past six months."
-
-            - Visit the [OONI Explorer](https://explorer.ooni.org/){target="_blank"} website.
-            - Find "Taiwan" as the observed location in the country column.
-            - Use the date range selector to set the time frame to the past six months.
-            - Review the results of different types of tests, such as website blocking, and the connectivity of instant messaging applications.
-            - You can download or record relevant data and events from this period for further analysis.
-
-        ??? question "Compare observation data for three countries using OONI Explorer."
-
-            - On the OONI Explorer page, select "Country" for the vertical axis (Rows) and use the filters to choose the three countries you want to compare. ([Reference Settings](https://explorer.ooni.org/chart/mat?test_name=web_connectivity&axis_x=measurement_start_day&since=2025-05-01&until=2025-05-30&time_grain=day&axis_y=probe_cc){target="_blank"}).
-            - Review the differences in test results for these countries, including website blocking, detection of man-in-the-middle attacks, etc.
-            - Export the data as a CSV file for data comparison.
+            - In OONI Explorer, set the Rows axis to "Country" and use the Filters to select the countries you want to compare. ([Reference configuration](https://explorer.ooni.org/chart/mat?test_name=web_connectivity&axis_x=measurement_start_day&since=2025-05-01&until=2025-05-30&time_grain=day&axis_y=probe_cc){target="_blank"})
+            - Review differences in test results across countries, including website blocking and middlebox detection.
+            - Export data as CSV for further analysis.
 
         ??? question "Review current internet blocking reports."
 
-            - On the OONI Explorer homepage, there are typically the latest reports and trends regarding global internet censorship and blocking.
-            - Browse the ["Search"](https://explorer.ooni.org/search){target="_blank"} or look up specific services and websites to check their current connectivity status.
-            - You can view different types of tests under ["Internet Censorship"](https://explorer.ooni.org/social-media){target="_blank"}, such as social media, news media, etc.
+            - The OONI Explorer homepage features the latest reports and trends on global censorship and blocking.
+            - Browse the [Search](https://explorer.ooni.org/search){target="_blank"} page or search for specific services and websites to check their connectivity.
+            - Also explore the [Social Media](https://explorer.ooni.org/social-media){target="_blank"} section for test results by category.
 
-        ??? question "Create an OONI Run test link and find the online report content of that link."
+        ??? question "Create an OONI Run link and find the report."
 
-            - On the [OONI Run](https://run.ooni.org/){target="_blank"} page, provide your email to receive a login link.
-            - After logging in through the link, fill out the mandatory fields on the form.
-            - In the "Add URL+" section, add the website URL you want to test. Once completed, click "Create Link" to finalize the setup.
-            - Share the URL or click on it, and follow the instructions to open OONI Probe to start the test. ([Test Reference](https://run.ooni.org/v2/10182){target="_blank"}).
-            - The number `10182` at the end of the URL `https://run.ooni.org/v2/10182` is the OONI Run Link ID, which you can enter directly in OONI Explorer to find the test results. ([Result Reference](https://explorer.ooni.org/search?since=2025-04-29&until=2026-07-01&failure=false&ooni_run_link_id=10182){target="_blank"}).
+            - Go to [OONI Run](https://run.ooni.org/){target="_blank"} and enter your email to get a login link.
+            - Log in and fill in the required fields.
+            - Add URLs to test under "Add URL+" and click "Create Link".
+            - Share the link or click it to open OONI Probe and start testing. ([Example test](https://run.ooni.org/v2/10182){target="_blank"})
+            - The number in the URL (e.g., `10182` in `https://run.ooni.org/v2/10182`) is the OONI Run Link ID. Enter it in OONI Explorer to find the results. ([Example results](https://explorer.ooni.org/search?since=2025-04-29&until=2026-07-01&failure=false&ooni_run_link_id=10182){target="_blank"})
 
-### :material-checkbox-marked-circle-auto-outline: OONI-Advanced
+=== ":material-checkbox-marked-circle-auto-outline: Contribute"
 
-=== ":material-checkbox-marked-circle-auto-outline: OONI: Advanced L1"
+    **Self-assessment** (check the items you can already do):
 
-    - [x] Start OONI Probe using command line.
-    - [x] Understand how website observation lists are compiled.
+    - [ ] I can run OONI Probe from the command line and execute specific tests.
+    - [ ] I understand how test lists are curated and categorized.
+    - [ ] I can review URLs in an existing test list, and flag items that need to be updated or removed.
+    - [ ] I can submit a Pull Request to update a Citizen Lab test list.
+    - [ ] I can process and analyze raw OONI measurement data.
 
-    !!! warning ""
+    ??? tip "Not there yet? Start here."
+        1. Complete all items in the Practice level first.
+        2. Read "[OONI Web Test Lists](./ooni-weblists.md){target="_blank"}" to understand how lists are curated and maintained.
+        3. Read "[ASNs Coverage Analysis](./ooni-asns-coverage.md){target="_blank"}" to learn how raw data is analyzed.
+        4. Browse the [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} repository on GitHub to explore the list format for different countries.
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+    !!! abstract "Reference"
 
-=== ":material-checkbox-marked-circle-auto-outline: OONI: Advanced L2"
+        ??? question "Run OONI Probe from the command line."
 
-    - [x] Sort and analyze data using raw observation data.
-    - [x] Assist in compiling and correcting lists.
+            OONI Probe is available as a CLI tool in addition to the GUI app:
 
-    !!! warning ""
+            1. Go to the [OONI Probe CLI page](https://ooni.org/install/cli){target="_blank"} and download the version for your system.
+            2. After installing, use `ooniprobe run` to run all tests, or `ooniprobe run websites` to test websites only.
+            3. The CLI is suitable for running on servers or in scheduled environments to continuously monitor network conditions in specific regions.
 
-        :wave: The assessment reference material for the Advanced section is expected to be completed by 2025/Q3.
+        ??? question "How test lists are curated."
+
+            When OONI Probe runs website tests, it checks URLs from the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"}.
+
+            The lists are divided into:
+            - **Global list**: Covers widely visited websites, mostly in English.
+            - **Country lists**: Region-specific lists with local-language content. In countries with internet censorship, these also include blocked websites.
+
+            URLs are categorized into four groups: political, social, conflict and security, and internet tools.
+
+            See "[OONI Web Test Lists](./ooni-weblists.md){target="_blank"}" for more details.
+
+        ??? question "How to contribute to test list maintenance."
+
+            Steps to contribute:
+
+            1. Go to [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} and find the country CSV file you want to work on (e.g., `lists/tw.csv`).
+            2. Check each URL in the list. Flag URLs that need updating (broken links, changed domains) or should be removed (site no longer operating).
+            3. Submit a Pull Request with your changes.
+            4. See "[OONI Web Test Lists](./ooni-weblists.md){target="_blank"}" for more details on the process.
+
+        ??? question "Process and analyze raw OONI measurement data."
+
+            OONI provides public raw measurement data on AWS S3:
+
+            1. Data is stored in the S3 bucket `ooni-data-eu-fra` (eu-central-1 region).
+            2. Format: `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`
+            3. The [ASN coverage analysis tool](./ooni-asns-coverage.md){target="_blank"} in this project provides a download and analysis example — see `asn_coverage/ooni.py`.
+            4. Raw data can be used to analyze ASN measurement coverage, track blocking status of specific websites over time, and conduct cross-region comparisons.
