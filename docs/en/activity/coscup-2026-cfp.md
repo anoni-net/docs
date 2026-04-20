@@ -85,7 +85,7 @@ Below are further angles on anonymity, privacy, and internet freedom, including 
 
 ## Cross-community collaboration: Anonymity Networks Community × ETHTaipei { #anoni-netxETHTaipei }
 
-This year we are partnering with **ETHTaipei** (Taipei Ethereum Community) on program coordination. Both communities approach **anonymous payments** from different angles. To ensure submissions reach the most fitting audience, we will review proposals together:
+This year we are partnering with **ETHTaipei** ([Taipei Ethereum Community](https://ethtaipei.org/){target="_blank"}) on program coordination. Both communities approach **anonymous payments** from different angles. To ensure submissions reach the most fitting audience, we will review proposals together:
 
 - **Application-oriented and introductory talks**: prioritized for the Anonymity Networks Community track
 - **Technical and protocol-level talks**: may be moved to the ETHTaipei blockchain track
