@@ -6,7 +6,7 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/event/coscup-2026-cfp.png
+  image: https://assets.anoni.net/event/anoni-net-eth-taipei.png
   image_type: image/png
   image_width: 1536
   image_height: 1024
@@ -17,7 +17,7 @@ og:
 
 **匿名网络社群**关注匿名、隐私与数字安全，致力于建立中文领域的匿名与隐私实务指引，推动本地化的工具应用与知识协作。推广与文档长期以开源项目 **Tor**、**Tails**、**OONI** 为核心关注对象。
 
-![匿名网络社群 2026 公开征稿主视觉](https://assets.anoni.net/event/coscup-2026-cfp.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #b56b3e;"}
+![匿名网络社群 2026 公开征稿主视觉](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #6DBF67;"}
 
 **COSCUP** 长期以筹办开源社群年会为核心，许多匿名与抗审查工具也以**自由软件**形式发展，依赖社群检视、文档与基础设施参与。今年社群已正式[入选](https://blog.coscup.org/2026/03/coscup-x-ubucon-asia-2026-coscup-x.html){target="_blank"} **COSCUP 2026 社群议程轨**（两天），将于 **8 月 8 日与 9 日**在台湾科技大学（NTUST）举办议程与工作坊。现正公开征稿，欢迎研究者、实践者、NGO 工作者、公民科技开发者与社群成员分享观察、工具操作与实务经验，并与开源社群年会的脉络呼应。
 

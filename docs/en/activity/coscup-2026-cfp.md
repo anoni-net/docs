@@ -6,7 +6,7 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/event/coscup-2026-cfp.png
+  image: https://assets.anoni.net/event/anoni-net-eth-taipei.png
   image_type: image/png
   image_width: 1536
   image_height: 1024
@@ -17,7 +17,7 @@ og:
 
 **Anonymity Networks Community** focuses on anonymity, privacy, and digital security. We work to build practical guidance for Chinese-speaking audiences and to support localized tooling and collaborative knowledge. Our outreach and documentation center on the open-source projects **Tor**, **Tails**, and **OONI**.
 
-![Anonymity Networks Community 2026 call for proposals hero image](https://assets.anoni.net/event/coscup-2026-cfp.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #b56b3e;"}
+![Anonymity Networks Community 2026 call for proposals hero image](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #6DBF67;"}
 
 **COSCUP** has long organized an annual conference for open-source communities. Many anonymity and anti-censorship tools also grow as **free software**, relying on community review, documentation, and infrastructure work. This year our community was [accepted](https://blog.coscup.org/2026/03/coscup-x-ubucon-asia-2026-coscup-x.html){target="_blank"} for a **COSCUP 2026 community track** (two days). Sessions and workshops will run on **August 8 and 9** at National Taiwan University of Science and Technology (NTUST). We are now accepting proposals. Researchers, practitioners, NGO staff, civic-tech developers, and community members are welcome to share observations, hands-on tool use, and field experience in line with the open-source conference setting.
 
