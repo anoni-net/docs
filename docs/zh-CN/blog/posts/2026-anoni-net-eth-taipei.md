@@ -5,12 +5,14 @@ authors:
 categories:
     - 公告
 slug: 2026-anoni-net-eth-taipei
-image: "https://assets.anoni.net/event/coscup-2026-cfp.webp"
+image: "https://assets.anoni.net/event/anoni-net-eth-taipei.webp"
 summary: "匿名网络社区与 ETHTaipei 合作：参与 COSCUP 2026，公开征稿。"
 description: "匿名网络社区与 ETHTaipei 合作：参与 COSCUP 2026，公开征稿。"
 ---
 
 # 跨社区合作：匿名网络社区 × ETHTaipei
+
+![跨社区合作：匿名网络社区 × ETHTaipei](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #6DBF67;"}
 
 今年我们很高兴与 **ETHTaipei**（[台北以太坊社区](https://ethtaipei.org/){target="_blank"}）展开议程合作。两个社区在**匿名支付**主题上各有不同切入角度，为让投稿者的稿件能到最合适的听众面前，我们将联合审稿：
 

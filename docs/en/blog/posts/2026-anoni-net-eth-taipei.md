@@ -5,12 +5,14 @@ authors:
 categories:
     - News
 slug: 2026-anoni-net-eth-taipei
-image: "https://assets.anoni.net/event/coscup-2026-cfp.webp"
+image: "https://assets.anoni.net/event/anoni-net-eth-taipei.webp"
 summary: "Anonymity Networks Community partners with ETHTaipei for COSCUP 2026 with an open call for proposals."
 description: "Anonymity Networks Community partners with ETHTaipei for COSCUP 2026 with an open call for proposals."
 ---
 
 # Cross-Community Collaboration: Anonymity Networks Community × ETHTaipei
+
+![Cross-Community Collaboration: Anonymity Networks Community × ETHTaipei](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #6DBF67;"}
 
 This year we are excited to partner with **ETHTaipei** ([Taipei Ethereum Community](https://ethtaipei.org/){target="_blank"}) on program coordination. Both communities approach **anonymous payments** from different angles. To ensure each submission reaches the most fitting audience, we will review proposals together:
 
