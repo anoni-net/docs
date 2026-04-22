@@ -332,14 +332,14 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     - [ ] I can update Tails to the latest version.
     - [ ] I understand how MAC Address Anonymization works in Tails.
     - [ ] I can back up my Persistent Storage to another USB drive.
-    - [ ] I can manage passwords with KeePassXC.
+    - [ ] I can manage passwords with GNOME Secrets.
     - [ ] I can create an OpenPGP key pair and encrypt files using GnuPG and Kleopatra.
     - [ ] I can send an encrypted email using Thunderbird.
 
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
         2. Open Thunderbird in Tails and follow the setup wizard to configure your IMAP account.
-        3. Refer to the [official Tails documentation](https://tails.net/doc/index.en.html){target="_blank"} for guides on KeePassXC and GnuPG.
+        3. Refer to the [official Tails documentation](https://tails.net/doc/index.en.html){target="_blank"} for guides on GNOME Secrets and GnuPG.
 
     !!! abstract "Reference"
 
@@ -368,11 +368,12 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             - Go to Applications, Tails, Clone Tails and follow the steps. You can choose whether to include the Persistent Storage in the clone.
             - Regular backups are recommended in case your USB drive is damaged or lost.
 
-        ??? question "Manage passwords with KeePassXC."
+        ??? question "Manage passwords with GNOME Secrets."
 
-            - KeePassXC is an open-source password manager included in Tails.
+            - GNOME Secrets replaces KeePassXC as the built-in password manager starting from Tails 7.6, integrating more tightly with the GNOME desktop environment.
             - Launch it, create a new password database, and set a master password.
             - Store all your account passwords in the database. You only need to remember the master password.
+            - GNOME Secrets uses the same database format as KeePassXC, so existing KeePassXC password databases can be opened directly in GNOME Secrets.
             - Save the database file in Persistent Storage so it is available the next time you use Tails.
 
         ??? question "Create an OpenPGP key pair and encrypt files."

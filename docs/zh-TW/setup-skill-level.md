@@ -332,14 +332,14 @@ icon: octicons/paste-24
     - [ ] 我能夠將 Tails 更新到下一個最新版本。
     - [ ] 我理解 MAC 位址匿名化（MAC Address Anonymization）的作用。
     - [ ] 我能夠備份持久性加密磁區（Persistent Storage）到另一個 USB。
-    - [ ] 我能夠使用 KeePassXC 管理密碼。
+    - [ ] 我能夠使用 GNOME Secrets 管理密碼。
     - [ ] 我能夠使用 GnuPG 與 Kleopatra 建立加密金鑰並加密檔案。
     - [ ] 我能夠透過 Thunderbird 寄送加密郵件。
 
     ??? tip "還沒到這個程度？從這裡開始"
         1. 先完成「實作」層的所有項目。
         2. 在 Tails 中啟動 Thunderbird，依照提示設定 IMAP 帳號。
-        3. 參考 [Tails 官方文件](https://tails.net/doc/index.en.html){target="_blank"} 中關於 KeePassXC 和 GnuPG 的操作說明。
+        3. 參考 [Tails 官方文件](https://tails.net/doc/index.en.html){target="_blank"} 中關於 GNOME Secrets 和 GnuPG 的操作說明。
 
     !!! abstract "參考說明"
 
@@ -368,11 +368,12 @@ icon: octicons/paste-24
             - 前往「Applications」、「Tails」、「Clone Tails」，依照步驟複製，選擇是否一併複製持久性磁區。
             - 建議定期備份，以防 USB 隨身碟損壞導致資料遺失。
 
-        ??? question "使用 KeePassXC 管理密碼。"
+        ??? question "使用 GNOME Secrets 管理密碼。"
 
-            - KeePassXC 是一個開源的密碼管理工具，Tails 內建提供。
+            - GNOME Secrets 是 Tails 7.6 起取代 KeePassXC 的內建密碼管理工具，與 GNOME 桌面環境整合更緊密。
             - 啟動後，建立一個新的密碼資料庫，並設定一組主密碼。
             - 將所有帳號的密碼儲存在資料庫中，下次使用時只需記住主密碼即可。
+            - GNOME Secrets 使用與 KeePassXC 相同的資料庫格式，原有的 KeePassXC 密碼資料庫可直接在 GNOME Secrets 開啟。
             - 資料庫檔案可儲存在持久性加密磁區中，以便下次使用 Tails 時取用。
 
         ??? question "使用 GnuPG 與 Kleopatra 建立加密金鑰並加密檔案。"
@@ -385,7 +386,7 @@ icon: octicons/paste-24
 
         ??? question "透過 Thunderbird 寄送加密郵件。"
 
-            - 完成 KeePassXC 金鑰建立與 Thunderbird 設定後，可以嘗試向本專案的加密郵件地址 `whisper@anoni.net` 寄送加密郵件。
+            - 完成 GNOME Secrets 金鑰建立與 Thunderbird 設定後，可以嘗試向本專案的加密郵件地址 `whisper@anoni.net` 寄送加密郵件。
             - 取得 `whisper@anoni.net` 的公開金鑰，請參考「[持續關注](./contact.md){target="_blank"}」頁面。
             - 在 Thunderbird 撰寫郵件，選擇加密後寄出，收件方會使用其私鑰解密。
 
