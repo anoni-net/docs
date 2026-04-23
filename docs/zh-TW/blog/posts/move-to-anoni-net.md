@@ -13,7 +13,7 @@ description: 社群專案建立 - 匿名網路社群
 
 # 社群專案建立 - 匿名網路社群
 
-![匿名網路社群 Anoni.net](https://images.anoni.net/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![匿名網路社群 Anoni.net](../../assets/images/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 我們從原本僅關注 [OONI](../../what-is-ooni.md){target="_blank"} 的觀測與分析資料，再到一同推廣 [Tor](../../what-is-tor.md){target="_blank"}/[Tails](../../what-is-tails.md){target="_blank"} 匿名網路工具，決定以「**匿名網路**」議題來持續推動「**網路自由**」在臺灣。
 
