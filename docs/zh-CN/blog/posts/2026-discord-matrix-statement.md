@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: 2026-discord-matrix-statement
 image: "assets/images/post-update.png"
 summary: "从 Discord 年龄验证谈起：我们为什么自架 Matrix，以及如何兼顾隐私与社群品质"

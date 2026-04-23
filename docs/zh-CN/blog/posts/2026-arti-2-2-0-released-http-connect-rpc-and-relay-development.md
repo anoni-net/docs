@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻译文章
 slug: arti-2-2-0-released-http-connect-rpc-and-relay-development
 image: "assets/images/tor.webp"
 summary: "Arti 2.2.0 将 HTTP CONNECT 纳入完整构建并默认启用、增强 RPC 管理能力，并持续推进 relay 开发"

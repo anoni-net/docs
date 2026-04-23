@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tails
+    - 翻譯文章
 slug: tails-7-rc
 image: "assets/images/tails.png"
 summary: "Tails 7.0 預計在 9/18 或 10/16 釋出，目前已發布第二個最終測試版本（RC）邀請大家協助測試"

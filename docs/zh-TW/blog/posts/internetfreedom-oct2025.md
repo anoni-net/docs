@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活動
+    - 社群
 slug: internetfreedom-oct2025
 image: "assets/images/post-update.png"
 summary: "快速回顧，國家級的監控，我們還可以採取怎樣的行動"

@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: updates-202506
 image: "assets/images/post-update.png"
 summary: "即将在 08/09-08/10 举办的工作坊活动已经开始报名了！"

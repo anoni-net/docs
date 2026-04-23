@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻譯文章
 slug: 2026-code-audit-for-tor-vpn-completed-by-cure53
 image: "https://forum.torproject.org/uploads/default/original/2X/4/4825413b93e0884f51aed631e4111ded9a117e60.jpeg"
 summary: "Cure53 完成 TorVPN Android 版與 Onionmasq 的安全稽核，核心 Tor 整合穩固，並已追蹤各項建議的後續修補進度"

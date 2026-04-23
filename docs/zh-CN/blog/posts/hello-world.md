@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 公告
+    - 社区
 image: "assets/images/post-update.png"
 ---
 

@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tails
+    - 翻譯文章
 slug: tails-7-released
 image: "assets/images/tails.png"
 summary: "Tails 7.0 已發佈是首個基於 Debian 13（代號 Trixie）和 GNOME 48（代號 Bengaluru）的版本"

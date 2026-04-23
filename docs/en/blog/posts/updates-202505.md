@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: updates-202505
 image: "assets/images/post-update.png"
 summary: "Current Project Status and Updates 2025/05"

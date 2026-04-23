@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社群
 slug: taiwan-vasp-draft-cabinet
 image: "assets/images/post-update.png"
 summary: "行政院通過《虛擬資產服務法》草案送立法院：許可制、穩定幣專章、刑事罰則與過渡期，以及誰在公聽會裡發聲。"

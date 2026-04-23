@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 公告
+    - 社区
 slug: 2026-coscup-anoni-track-cfp
 image: "https://assets.anoni.net/event/coscup-2026-cfp.webp"
 summary: "匿名网络社群公开征稿：投稿 COSCUP 2026 社群议程轨，征稿截止 2026 年 5 月 9 日（AoE）。"

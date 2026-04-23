@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: updates-202508
 image: "assets/images/post-update.png"
 summary: "近期社区活动更新信息"

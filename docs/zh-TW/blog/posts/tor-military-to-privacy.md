@@ -6,6 +6,7 @@ categories:
     - 更新
     - Tor
     - Tails
+    - 翻譯文章
 slug: tor-military-to-privacy
 image: "assets/images/tor.webp"
 summary: "一個關於秘密、抗爭與網路自由鬥爭的故事"

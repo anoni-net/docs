@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - event
+    - Community
 slug: g0v-hackath71n
 image: "assets/images/g0v-hackath71n.webp"
 summary: "You are invited to join the g0v Hackath71n, the 71st g0v Hackathon, on January 25, 2026, to help push the project forward together!"

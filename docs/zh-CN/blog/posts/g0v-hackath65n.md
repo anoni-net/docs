@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活动
+    - 社区
 slug: g0v-hackath65n
 image: "assets/images/g0v-hackath65n.webp"
 summary: "邀请您于 2025 年 2 月 22 日参加 g0v Hackath65n 零时政府第 65 次黑客松活动，一起推进项目进度！"

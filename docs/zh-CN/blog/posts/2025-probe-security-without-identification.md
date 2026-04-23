@@ -5,6 +5,7 @@ authors:
 categories:
     - 技术
     - OONI
+    - 翻译文章
 slug: 2025-probe-security-without-identification
 image: "assets/images/ooni-credentials-table.png"
 summary: "OONI 预计实施匿名凭证以减缓虚假观测数据对观测数据库可信度的影响"

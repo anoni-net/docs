@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: updates-202603
 image: "assets/images/post-update.png"
 summary: "2026/03 社区近况：Tor Project 客座文章、COSCUP 2026 议题轨道确认、g0v Hackath71n 匿名支付讨论、Cryptpad 简繁体中文翻译"

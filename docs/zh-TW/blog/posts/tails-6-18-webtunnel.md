@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tails
+    - 翻譯文章
 slug: tails-6-18-webtunnel
 image: "assets/images/tails.png"
 summary: "Tails 支援 WebTunnel 橋接類型，幫助更多無法直接連入 Tor 洋蔥路由，透過此方式連入"

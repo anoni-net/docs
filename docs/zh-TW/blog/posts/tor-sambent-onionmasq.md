@@ -5,6 +5,7 @@ authors:
 categories:
     - 文章
     - Tor
+    - 翻譯文章
 slug: tor-sambent-onionmasq
 image: "assets/images/tor.webp"
 summary: "OnionMasq 透過內核級別網路隔離，確保所有應用程式流量都經由 Tor 路由的實驗性技術，提供比傳統方法更強的隱私與安全性"

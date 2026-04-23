@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: updates-202603
 image: "assets/images/post-update.png"
 summary: "2026/03 Community Update: Tor Project guest post, COSCUP 2026 community track, and Cryptpad zh_Hant/zh_Hans localization"

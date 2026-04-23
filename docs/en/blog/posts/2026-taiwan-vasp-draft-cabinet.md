@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: taiwan-vasp-draft-cabinet
 image: "assets/images/post-update.png"
 summary: "Taiwan’s Executive Yuan cleared a Virtual Asset Service Provider bill for the Legislature: licensing, stablecoin rules, criminal penalties, and who shows up at public hearings."

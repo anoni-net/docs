@@ -5,6 +5,7 @@ authors:
 categories:
     - Updates
     - Tor
+    - Translated Article
 slug: tpa-adr
 image: "assets/images/tor.webp"
 summary: "How Tor's TPA team moved from RFCs to ADRs, and why that inspired us to rethink how we record decisions."

@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻译文章
 slug: arti_1_4_1_released
 image: "assets/images/tor.webp"
 summary: "Arti 是 Tor Project 正在进行的项目，使用 Rust 开发新一代的 Tor 用户端"

@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 公告
+    - 社群
 slug: 2026-anoni-net-eth-taipei
 image: "https://assets.anoni.net/event/anoni-net-eth-taipei.webp"
 summary: "匿名網路社群與 ETHTaipei 合作：參與 COSCUP 2026，公開徵稿。"

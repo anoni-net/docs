@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: updates-202503
 image: "assets/images/watcher-tor-relays.png"
 summary: "Current Project Status and Updates 2025/03"

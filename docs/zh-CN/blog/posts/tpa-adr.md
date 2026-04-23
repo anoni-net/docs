@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻译文章
 slug: tpa-adr
 image: "assets/images/tor.webp"
 summary: "Tor 系统管理团队 TPA 改用 ADR 记录决策：更短的模板、更清楚的决策者、以及把决策记录与对外沟通分开。"

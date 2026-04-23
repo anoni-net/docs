@@ -6,6 +6,7 @@ categories:
     - Perspective
     - Tor
     - Relay
+    - Translated Article
 slug: a-server-that-forgets-exploring-stateless-relays
 summary: "Why stateless, diskless Tor relays matter: seizure resistance, TPM-backed identity, and open operational trade-offs"
 description: "A localized take on Tor Project's stateless relay post, focusing on trust assumptions, unresolved engineering work, and Taiwan-relevant operator context"

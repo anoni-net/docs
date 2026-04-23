@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - Event
+    - Community
 slug: event-workshop-2025-preparing
 image: "assets/images/event-workshop-2025.png"
 summary: "Recruiting workshop preparation staff and training helpers for the Anonymous Network Workshop!"

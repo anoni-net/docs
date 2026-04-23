@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - event
+    - Community
 slug: internetfreedom-oct2025
 image: "assets/images/post-update.png"
 summary: "Quick Recap: What Actions Can We Take Against State-Level Surveillance?"

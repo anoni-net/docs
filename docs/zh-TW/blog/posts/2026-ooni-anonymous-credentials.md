@@ -5,6 +5,7 @@ authors:
 categories:
     - 技術
     - OONI
+    - 翻譯文章
 summary: "從高層次介紹 OONI 如何為 OONI Probe 設計並打造匿名憑證系統。"
 description: "從高層次介紹 OONI 如何為 OONI Probe 設計並打造匿名憑證系統。"
 ---

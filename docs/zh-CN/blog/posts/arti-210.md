@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻译文章
 slug: arti_2_1_0_released
 image: "assets/images/tor.webp"
 summary: "Arti 是 Tor Project 正在进行的项目，使用 Rust 开发新一代 Tor 客户端，这次 2.1.0 版本在中继和 RPC 上有重要进展"

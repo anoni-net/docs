@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - event
+    - Community
 slug: rightscon25-tor-tails-ooni-after
 image: "assets/images/tor-tails-workshop-slide.webp"
 summary: "Summary and recap of the events on 2025/02/23, including the Tor/Tails and OONI workshops and Roger's lecture."

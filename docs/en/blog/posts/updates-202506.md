@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: updates-202506
 image: "assets/images/post-update.png"
 summary: "Registration is now open for the workshop happening on August 9th and 10th!"

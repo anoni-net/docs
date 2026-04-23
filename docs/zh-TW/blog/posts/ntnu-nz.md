@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社群
 slug: ntnu-nz
 image: "assets/images/post-update.png"
 summary: "一位資工系學生，如何在學術網路體制內，讓匿名網路真正上線運作"

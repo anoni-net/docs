@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: 2026-discord-matrix-statement
 image: "assets/images/post-update.png"
 summary: "From Discord's age verification to why we self-host Matrix: balancing privacy and community quality"

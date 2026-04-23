@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tor
+    - 翻譯文章
 slug: tor-support-new-home
 image: "assets/images/tor.webp"
 summary: "新的支援文件網站，給予全球的使用者一個完整資料查詢的地方"

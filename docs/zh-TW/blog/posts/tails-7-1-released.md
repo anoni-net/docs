@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - Tails
+    - 翻譯文章
 slug: tails-7-1-released
 image: "assets/images/tails.png"
 summary: "Tails 7.1 更新 Snowflake 連接效率與 OpenSSL 安全性更新"

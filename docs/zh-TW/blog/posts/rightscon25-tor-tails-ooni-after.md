@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活動
+    - 社群
 slug: rightscon25-tor-tails-ooni-after
 image: "assets/images/tor-tails-workshop-slide.webp"
 summary: "在 2025/02/23 活動結束後，關於工作坊 Tor/Tails, OONI，講座 Roger 的活動摘要與回顧。"

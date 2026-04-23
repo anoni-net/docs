@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活動
+    - 社群
 slug: rightscon25-tor-tails-ooni
 image: "assets/images/tor-pre-event.webp"
 summary: "邀請您於 2025 年 2 月 23 日在台北參加一場全天活動，專注於線上隱私、規避審查及審查監測。本次免費的前期活動由開放文化基金會、OONI 和 The Tor Project 合辦，包含實作工作坊及 The Tor Project 共同創辦人 Roger Dingledine 的公開主題演講。"

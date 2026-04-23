@@ -5,6 +5,7 @@ authors:
 categories:
     - 技術
     - Tor
+    - 翻譯文章
 slug: oniux-kernel-level-tor
 image: "assets/images/oniux-kernel-level-tor.webp"
 summary: "oniux：針對任何 Linux 應用程式的核心層級 Tor 隔離技術"

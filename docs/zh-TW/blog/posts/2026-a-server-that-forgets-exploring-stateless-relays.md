@@ -6,6 +6,7 @@ categories:
     - 更新
     - Tor
     - Relay
+    - 翻譯文章
 slug: a-server-that-forgets-exploring-stateless-relays
 summary: "Tor Project 討論 Stateless Relay：從扣押風險、TPM、遠端證明到 re-sealing 等未解題，評估無狀態中繼的安全與營運取捨。"
 description: "完整翻譯 A Server That Forgets: Exploring Stateless Relays，整理無狀態 Tor Relay 的設計脈絡、現有路線與開放問題，文末補上台灣在地觀點。"

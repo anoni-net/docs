@@ -5,6 +5,7 @@ authors:
 categories:
     - Update
     - Tor
+    - Translated Article
 slug: arti-2-2-0-released-http-connect-rpc-and-relay-development
 image: "assets/images/tor.webp"
 summary: "Arti 2.2.0 makes HTTP CONNECT a default-ready path, upgrades RPC integration and admin control, and continues relay groundwork"

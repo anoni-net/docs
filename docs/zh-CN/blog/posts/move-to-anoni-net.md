@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: move-to-anoni-net
 image: "assets/images/og_home.png"
 summary: "社群项目建立 - 匿名网络社群"

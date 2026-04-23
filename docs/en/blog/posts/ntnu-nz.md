@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: ntnu-nz
 image: "assets/images/post-update.png"
 summary: "How can a computer science student, within the academic network system, make an anonymous network truly go live and operate?"

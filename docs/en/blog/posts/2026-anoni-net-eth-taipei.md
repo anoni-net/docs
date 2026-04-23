@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: 2026-anoni-net-eth-taipei
 image: "https://assets.anoni.net/event/anoni-net-eth-taipei.webp"
 summary: "Anonymity Networks Community partners with ETHTaipei for COSCUP 2026 with an open call for proposals."

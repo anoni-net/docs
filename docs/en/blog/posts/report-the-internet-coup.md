@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Translated Article
 slug: report-the-internet-coup
 image: "assets/images/post-update.png"
 summary: "How a Chinese Company Exports Great Firewall Services to Authoritarian Regimes "

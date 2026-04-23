@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: updates-202505
 image: "assets/images/post-update.png"
 summary: "项目当前近况与更新 2025/05"

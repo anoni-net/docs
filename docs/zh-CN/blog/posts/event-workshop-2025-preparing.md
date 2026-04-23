@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活动
+    - 社区
 slug: event-workshop-2025-preparing
 image: "assets/images/event-workshop-2025.png"
 summary: "匿名网络工作坊招募活动筹备人员与培训小助手！"

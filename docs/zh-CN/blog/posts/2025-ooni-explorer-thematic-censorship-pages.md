@@ -5,6 +5,7 @@ authors:
 categories:
     - 技术
     - OONI
+    - 翻译文章
 slug: 2025-ooni-explorer-thematic-censorship-pages
 image: "assets/images/ooni-explorer-thematic-censorship-pages.png"
 summary: "发布全新 OONI Explorer 专题审查页面！全球社交媒体、新闻媒体和翻墙工具封锁情况的图表和报告"

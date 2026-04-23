@@ -6,6 +6,7 @@ categories:
     - 更新
     - Tor
     - Tails
+    - 翻譯文章
 slug: tor-tails-stronger-together
 image: "assets/images/tor.webp"
 summary: "Tails, Tor 攜手合作，目標將 Tails 納入 Tor Project，以整合資源、避免資源重複使用"

@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: 2026-coscup-anoni-track-cfp
 image: "https://assets.anoni.net/event/coscup-2026-cfp.webp"
 summary: "Anonymity Networks Community is accepting proposals for the COSCUP 2026 community track, with a CFP deadline of May 9, 2026 (AoE)."

@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: ntnu-nz
 image: "assets/images/post-update.png"
 summary: "一位资工系学生，如何在学术网络体制内，让匿名网络真正上线运作"

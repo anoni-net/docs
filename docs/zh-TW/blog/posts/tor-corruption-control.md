@@ -6,6 +6,7 @@ categories:
     - 更新
     - Tor
     - Tails
+    - 翻譯文章
 slug: tor-corruption-control
 image: "assets/images/tor.webp"
 summary: "自網路在土庫曼開始普及以來，就一直受到嚴格的限制和審查。整個國家的電信產業要麼由政府直接掌控，要麼由與統治家族有關聯的人士持有"

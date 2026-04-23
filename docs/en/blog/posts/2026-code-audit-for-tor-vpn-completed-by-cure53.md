@@ -5,6 +5,7 @@ authors:
 categories:
     - Update
     - Tor
+    - Translated Article
 slug: 2026-code-audit-for-tor-vpn-completed-by-cure53
 image: "https://forum.torproject.org/uploads/default/original/2X/4/4825413b93e0884f51aed631e4111ded9a117e60.jpeg"
 summary: "Cure53's independent audit of TorVPN for Android found core Tor routing solid — and identified specific areas worth watching for mobile privacy communities in Taiwan"

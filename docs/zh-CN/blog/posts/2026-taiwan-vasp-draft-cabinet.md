@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 社区
 slug: taiwan-vasp-draft-cabinet
 image: "assets/images/post-update.png"
 summary: "行政院通过《虚拟资产服务法》草案送立法院：许可制、稳定币专章、刑事罚则与过渡期，以及谁在公听会里发声。"

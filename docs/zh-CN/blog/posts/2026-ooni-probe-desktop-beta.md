@@ -5,6 +5,7 @@ authors:
 categories:
     - 更新
     - OONI
+    - 翻译文章
 slug: ooni-probe-desktop-beta-2026
 image: "assets/images/ooni-run-v2.webp"
 summary: "OONI 推出新版跨平台 Probe Desktop 与仪表盘，邀请社区下载内测版并协助反馈问题与建议"

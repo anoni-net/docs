@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - event
+    - Community
 slug: rightscon25-tor-tails-ooni
 image: "assets/images/tor-pre-event.webp"
 summary: "Join us on February 23rd, 2025, in Taipei, Taiwan, for a full-day event focused on online privacy, censorship circumvention, and monitoring. Hosted in partnership with the Open Culture Foundation, OONI, and The Tor Project, this free pre-event includes hands-on workshops and a keynote by Roger Dingledine, co-founder of The Tor Project."

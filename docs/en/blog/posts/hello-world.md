@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 image: "assets/images/post-update.png"
 ---
 

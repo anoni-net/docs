@@ -6,6 +6,7 @@ categories:
     - 更新
     - Tor
     - Tails
+    - 翻译文章
 slug: tor-corruption-control
 image: "assets/images/tor.webp"
 summary: "自从互联网在土库曼斯坦开始普及以来，就一直受到严格的限制和审查。整个国家的电信产业要么由政府直接掌控，要么由与统治家族有关联的人士持有"

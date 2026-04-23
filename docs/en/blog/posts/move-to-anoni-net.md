@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - News
+    - Community
 slug: move-to-anoni-net
 image: "assets/images/og_home.png"
 summary: "Community Project Establishment - Anonymity Network Community"

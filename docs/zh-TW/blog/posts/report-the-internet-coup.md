@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 更新
+    - 翻譯文章
 slug: report-the-internet-coup
 image: "assets/images/post-update.png"
 summary: "技術分析報告：一家中國公司如何向威權政權出口防火長城服務"

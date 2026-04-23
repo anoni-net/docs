@@ -4,6 +4,7 @@ authors:
     - toomore
 categories:
     - 活动
+    - 社区
 slug: g0v-hackath71n
 image: "assets/images/g0v-hackath71n.webp"
 summary: "邀请您于 2026 年 1 月 25 日参加 g0v Hackath71n 零时政府第 71 次黑客松活动，一起推进项目进度！"
