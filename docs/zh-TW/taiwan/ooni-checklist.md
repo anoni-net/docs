@@ -7,7 +7,7 @@ icon: material/list-status
 <figure markdown="span">
     <a target="_blank"
        href="../assets/images/ooni_asn.svg">
-        <img src="../assets/images/ooni_asn.svg"
+        <img src="../../assets/images/ooni_asn.svg"
             alt="OONI Probe 檢測流程"
             title="OONI Probe 檢測流程"
         >
@@ -54,8 +54,8 @@ icon: material/list-status
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 什麼是 OONI？](./what-is-ooni.md)
-- [:material-chat-question: 網路自由為什麼重要](./internet-freedom-matter.md)
-- [:octicons-mark-github-24: 專案研究預先準備](./setup-repo.md)
+- [:material-chat-question: 什麼是 OONI？](../tools/what-is-ooni.md)
+- [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
+- [:octicons-mark-github-24: 專案研究預先準備](../community/setup-repo.md)
 
 </div>

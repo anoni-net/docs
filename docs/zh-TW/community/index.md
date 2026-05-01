@@ -14,21 +14,21 @@ icon: material/account-group
 - **Tor Relay 校園建立**：與 EFF、Tor 合作推動校園中繼節點，已有台師大成功案例，目標整理申請流程與活動企劃。
 - **匿名支付**：探索現金以外情境下的匿名支付（如穩定幣、區塊鏈應用），含法規與實作面向。
 
-詳細說明與規劃請見：[延續 2025，走向 2026：個人隱私指引、Tor Relay 校園建立競賽、匿名支付探索](../../blog/posts/2025to2026.md)。
+詳細說明與規劃請見：[延續 2025，走向 2026：個人隱私指引、Tor Relay 校園建立競賽、匿名支付探索](../blog/posts/2025to2026.md)。
 
 ## 你可以怎麼參與
 
 <div class="grid cards" markdown>
 
-- [:material-hand-heart: 如何參與與認領主題](participate.md)
+- [:material-hand-heart: 如何參與與認領主題](how-to-contribute.md)
     - 隨時參與、到 Matrix 表達意願、平時用 Matrix rooms 討論
 
-- [:material-message-text: 溝通與協作工具](communication-tools.md)
+- [:material-message-text: 溝通與協作工具](tools.md)
     - Matrix、Cryptpad、Jitsi 帳號與使用方式（含 Public Space）
 
-- [:material-email-fast-outline: 持續關注](../../contact.md)
+- [:material-email-fast-outline: 持續關注](../contact.md)
     - 訂閱電子報、PGP 聯絡方式
 
 </div>
 
-**延伸閱讀**：[從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md) — 說明我們自架 Matrix 家伺服器的緣由與隱私取捨。
+**延伸閱讀**：[從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../blog/posts/2026-discord-matrix-statement.md) — 說明我們自架 Matrix 家伺服器的緣由與隱私取捨。

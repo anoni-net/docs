@@ -27,7 +27,7 @@ description: "技術分析報告：一家中國公司如何向威權政權出口
 
 ## 詳細內容
 
-還有更多詳細的外洩資料與中國防火長城的營運樣態，可以透過這份我們已經翻譯為[正體中文（臺灣用語）](../../report/interseclab-the-internet-coup/index.md){target="_blank"}的報告。
+還有更多詳細的外洩資料與中國防火長城的營運樣態，可以透過這份我們已經翻譯為[正體中文（臺灣用語）](../../reports/interseclab-network-coup/index.md){target="_blank"}的報告。
 
 這份已翻譯報告的編排方式會與原文報告中的 INDEX 段落作為章節來呈現（共八個章節）。希望如果您在閱讀的時候，能方便對回原始報告中的段落。
 

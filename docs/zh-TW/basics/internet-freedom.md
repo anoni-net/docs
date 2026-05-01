@@ -6,7 +6,7 @@ icon: material/chat-question
 
 # :material-chat-question: 網路自由為什麼重要？
 
-在這裡，**網路自由**指的是：人們能否在免於不當干預的情況下取得資訊、表達意見，以及選擇自己信任的工具與連線方式。它和「匿名、隱私、規避審查」常一起出現，但側重點不同，可先從[什麼是匿名網路？](./what-is-anonymous-network.md)對照閱讀。
+在這裡，**網路自由**指的是：人們能否在免於不當干預的情況下取得資訊、表達意見，以及選擇自己信任的工具與連線方式。它和「匿名、隱私、規避審查」常一起出現，但側重點不同，可先從[什麼是匿名網路？](../tools/what-is-anonymity-network.md)對照閱讀。
 
 除了政府封鎖與大規模監控，跨境平台規則、帳號處置、演算法可見度與資料留存，也會形塑誰能說話、誰能被看見。多地的誹謗、國安或資訊治理相關法規爭議，則帶來制度性的寒蟬效應。在台灣的情境下，相對開放的連線環境仍伴隨對跨國平台的高度依賴，以及對公民社會、獨立媒體與倡議者的各種壓力，這些都與「網路自由是否穩固」直接相關。
 
@@ -20,7 +20,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
-        <img src="../assets/images/freedom_house_explore_the_map.png"
+        <img src="../../assets/images/freedom_house_explore_the_map.png"
             alt="Freedom House Freedom on the Net 互動地圖"
             title="Freedom House Freedom on the Net 互動地圖"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
@@ -40,7 +40,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW" target="_blank">
-        <img src="../assets/images/ooni_chart_circumvention.png"
+        <img src="../../assets/images/ooni_chart_circumvention.png"
             alt="OONI Explorer：規避工具觀測（CN, HK, TW 範例）"
             title="OONI Explorer：規避工具觀測（CN, HK, TW 範例）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
@@ -52,7 +52,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://metrics.torproject.org/rs.html#search/country:tw" target="_blank">
-        <img src="../assets/images/tor_relay_tw.png"
+        <img src="../../assets/images/tor_relay_tw.png"
             alt="Tor Metrics：臺灣地區 Tor 中繼與守護節點"
             title="Tor Metrics：臺灣地區 Tor 中繼與守護節點"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
@@ -66,10 +66,10 @@ icon: material/chat-question
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 什麼是匿名網路？](./what-is-anonymous-network.md)
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 網站檢測清單](./ooni-weblists.md)
-- [:material-translate-variant: 中文化與文件翻譯](./ooni-i18n.md)
+- [:material-chat-question: 什麼是匿名網路？](../tools/what-is-anonymity-network.md)
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>
 

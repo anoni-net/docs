@@ -15,7 +15,7 @@ icon: material/home-circle
 - **公民團體**：在倡議與聯絡對象需要保護、官網與社群帳號等組織網站服務也可能成為被鎖定的對象。
 - **開源科技社群**：透過中繼（Relay）、測試與文件翻譯等貢獻，強化匿名網路基礎建設的可用性。
 
-更完整的說明見[什麼是匿名網路？各參與者為何會用到](./what-is-anonymous-network.md#stakeholders-why)。我們期待與你討論、研擬對應的作法，提升隱私保護與匿名的能力在日常的事務與組織中。
+更完整的說明見[什麼是匿名網路？各參與者為何會用到](./tools/what-is-anonymity-network.md#stakeholders-why)。我們期待與你討論、研擬對應的作法，提升隱私保護與匿名的能力在日常的事務與組織中。
 
 !!! tip "重要資訊"
 
@@ -23,7 +23,7 @@ icon: material/home-circle
     - `活動`{style="color: OrangeRed;"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
     - `新增`{style="color: DodgerBlue;"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
     - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
-    - `新增`{style="color: DodgerBlue;"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./about/community/index.md) - 2026/01/02
+    - `新增`{style="color: DodgerBlue;"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./community/index.md) - 2026/01/02
     - `新增`{style="color: DodgerBlue;"}：[在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](./blog/posts/ntnu-nz.md) - 2025/12/30
     - `活動`{style="color: OrangeRed;"}：「[網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會](./blog/posts/internetfreedom-oct2025.md)」 - 2025/10/18
 
@@ -33,10 +33,10 @@ icon: material/home-circle
 
 <div class="grid cards" markdown>
 
-- [:fontawesome-regular-circle-question: 什麼是 OONI？](./what-is-ooni.md)
-- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](./internet-freedom-matter.md)
-- [:fontawesome-regular-circle-question: 什麼是 Tor？](./what-is-tor.md)
-- [:fontawesome-regular-circle-question: 什麼是 Tails？](./what-is-tails.md)
+- [:fontawesome-regular-circle-question: 什麼是 OONI？](./tools/what-is-ooni.md)
+- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](./basics/internet-freedom.md)
+- [:fontawesome-regular-circle-question: 什麼是 Tor？](./tools/what-is-tor.md)
+- [:fontawesome-regular-circle-question: 什麼是 Tails？](./tools/what-is-tails.md)
 
 </div>
 
@@ -44,10 +44,10 @@ icon: material/home-circle
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 網站檢測清單](./ooni-weblists.md)
-- [:material-translate-variant: 中文化與文件翻譯](./ooni-i18n.md)
-- [:octicons-mark-github-24: 專案研究預先準備](./setup-repo.md)
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](./taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 網站檢測清單](./taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化與文件翻譯](./community/i18n.md)
+- [:octicons-mark-github-24: 專案研究預先準備](./community/setup-repo.md)
 
 </div>
 

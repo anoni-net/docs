@@ -12,7 +12,7 @@ icon: material/hand-heart
 - **Tor Relay 校園建立**：校園 Tor Relay 申請流程文件化、活動企劃、校園推廣。
 - **匿名支付**：主題研究、法規釐清、實作經驗分享。
 
-完整說明與背景請見：[延續 2025，走向 2026](../../blog/posts/2025to2026.md)。
+完整說明與背景請見：[延續 2025，走向 2026](../blog/posts/2025to2026.md)。
 
 ## 如何選擇與認領
 
@@ -21,7 +21,7 @@ icon: material/hand-heart
 - 可到對應主題的 room 頻道留言
 - 方便後續分組與協作，也讓其他夥伴知道誰在做什麼
 
-建議先加入社群的 **Public Space**，一次取得所有相關 room 的入口，詳見 [溝通與協作工具](communication-tools.md)。
+建議先加入社群的 **Public Space**，一次取得所有相關 room 的入口，詳見 [溝通與協作工具](tools.md)。
 
 ## 平時如何參與
 
@@ -29,4 +29,4 @@ icon: material/hand-heart
 - **共筆協作**：使用 **Cryptpad** 撰寫共筆、活動紀錄或敏感內容。
 - **線上視訊**：定期或主題討論時使用 **Jitsi** 開會，連結會於 Matrix 公布。
 
-下一步：若你還沒使用過這些工具，請先閱讀 [溝通與協作工具](communication-tools.md)（帳號建立、服務入口、Public Space 連結）。
+下一步：若你還沒使用過這些工具，請先閱讀 [溝通與協作工具](tools.md)（帳號建立、服務入口、Public Space 連結）。

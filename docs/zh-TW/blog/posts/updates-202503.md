@@ -52,7 +52,7 @@ COSCUP 預計 8/9、10 於臺灣科技大學舉辦，我們會在這兩天的其
 
 ![Tor Relays 觀測站](./assets/images/watcher-tor-relays.png){style="border:1px solid #cdcdcd; border-radius: 5px;"}
 
-在專案頁面新增一個 [Tor Relays 觀察站](../../watcher-tor-relays.md){target="_blank"}，這頁面主要是觀察目前臺灣的 Tor Relays 中繼站的數量、運作狀況。Tor 官方網站提供一個 [Tor Metrics](https://metrics.torproject.org/){target="_blank"} 的查詢網站，我們每小時會透過擷取網站上的紀錄資訊、回來整理成好閱讀的圖表資訊，方便我們在推廣時能有一個較好說故事的版面。
+在專案頁面新增一個 [Tor Relays 觀察站](../../taiwan/tor-relay-watcher.md){target="_blank"}，這頁面主要是觀察目前臺灣的 Tor Relays 中繼站的數量、運作狀況。Tor 官方網站提供一個 [Tor Metrics](https://metrics.torproject.org/){target="_blank"} 的查詢網站，我們每小時會透過擷取網站上的紀錄資訊、回來整理成好閱讀的圖表資訊，方便我們在推廣時能有一個較好說故事的版面。
 
 目前這個頁面還在開發與嘗試中，不保證 24 小時都會運作（我們正在解決穩定性問題 XD），開發的程式碼也還沒有合併到主線上，有興趣的夥伴可以參考 [pulse](https://github.com/anoni-net/docs/compare/main...pulse?expand=1){target="_blank"} 與 [api](https://github.com/anoni-net/docs/compare/main...api?expand=1){target="_blank"} 這兩個分支，或是可以直接在 [API 文件頁面](https://anoni.net/api/readme){target="_blank"}隨意嘗試，目前用到 Python 語言的 [FastAPI](https://fastapi.tiangolo.com/){target="_blank"}、[Pydantic](https://docs.pydantic.dev/latest/){target="_blank"} 作為開發的框架。
 

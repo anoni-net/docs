@@ -9,7 +9,7 @@ icon: simple/torproject
 
 !!! warning "建立前需衡量事項！"
 
-    如果您對 Tor 還不是很瞭解，可以先參考「[什麼是 Tor？](./what-is-tor.md)」的介紹。
+    如果您對 Tor 還不是很瞭解，可以先參考「[什麼是 Tor？](../tools/what-is-tor.md)」的介紹。
 
     <figure markdown="span">
         <a target="_blank"

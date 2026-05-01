@@ -66,11 +66,11 @@ description: "近期社群活動更新資訊"
     <caption>Tor Relay 類型</caption>
 </figure>
 
-WebTunnel 是 Tor 橋接類型其中一項，協助 Tor 的使用者無法直接連到 Onion 洋蔥路由網路中時，協助代理轉接連線的伺服器，詳細的介紹與說明可以參考[這篇文章](../../what-is-tor.md#%E4%B8%AD%E7%B9%BC%E7%AF%80%E9%BB%9E%E6%A9%8B%E6%8E%A5%E9%BB%9E){target="_blank"}。自 Tails 6.18 版本，也加入支援 WebTunnel 橋接方式的連線。由於橋接點有其功能的重要性，因此不會在 Tor 官網上查詢到連線參數，需要透過[主動索取](https://bridges.torproject.org/){target="_blank"}的方式取得連線資訊。
+WebTunnel 是 Tor 橋接類型其中一項，協助 Tor 的使用者無法直接連到 Onion 洋蔥路由網路中時，協助代理轉接連線的伺服器，詳細的介紹與說明可以參考[這篇文章](../../tools/what-is-tor.md#%E4%B8%AD%E7%B9%BC%E7%AF%80%E9%BB%9E%E6%A9%8B%E6%8E%A5%E9%BB%9E){target="_blank"}。自 Tails 6.18 版本，也加入支援 WebTunnel 橋接方式的連線。由於橋接點有其功能的重要性，因此不會在 Tor 官網上查詢到連線參數，需要透過[主動索取](https://bridges.torproject.org/){target="_blank"}的方式取得連線資訊。
 
 也因此，我們無法統計目前有多少台 Tor WebTunnel 的橋接點建立在臺灣，如果您有興趣，可以參考「[WebTunnel Docker setup](https://community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}」來建立，或是您本身就有一個 nginx 架起來的服務，提供一個路徑給予 WebTunnel 橋接連線來[貢獻一個節點](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"}也非常感謝！
 
-當然，還有更簡單的方式協助貢獻一個橋接點，透過瀏覽器的方式建立 [Tor Snowflake 橋接點](../../tor-snowflake.md){target="_blank"}！
+當然，還有更簡單的方式協助貢獻一個橋接點，透過瀏覽器的方式建立 [Tor Snowflake 橋接點](../../tools/tor-snowflake.md){target="_blank"}！
 
 ## 最後
 

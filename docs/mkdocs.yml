@@ -14,23 +14,68 @@ nav:
   - index.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
-  - !ENV [NAV_INTRO, "認識匿名網路"]:
-      - intro/index.md
-      - internet-freedom-matter.md
-      - what-is-anonymous-network.md
-      - what-is-ooni.md
-      - what-is-tor.md
-      - what-is-tails.md
-      - !ENV [NAV_PP, "參與專案"]:
-          - ooni-asns-coverage.md
-          - ooni-weblists.md
-          - ooni-i18n.md
-          - tor-snowflake.md
-          - intro/ooni-run-v2.md
-      - !ENV [NAV_PPP, "參與準備"]:
-          - setup-repo.md
-          - setup-tor-relay.md
-          - setup-skill-level.md
+  - !ENV [NAV_BASICS, "概念層"]:
+      - basics/index.md
+      - basics/anonymity-vs-privacy.md
+      - basics/threat-model.md
+      - basics/metadata.md
+      - basics/internet-freedom.md
+  - !ENV [NAV_TOOLS, "工具層"]:
+      - tools/index.md
+      - tools/what-is-anonymity-network.md
+      - tools/what-is-tor.md
+      - tools/what-is-tails.md
+      - tools/what-is-ooni.md
+      - tools/tor-browser-advanced.md
+      - tools/tor-snowflake.md
+      - tools/ooni-run-v2.md
+      - tools/tails-vs-whonix-vs-qubes.md
+      - tools/messaging-comparison.md
+      - tools/password-manager.md
+  - !ENV [NAV_SCENARIOS, "場景層"]:
+      - scenarios/index.md
+      - scenarios/journalist.md
+      - scenarios/activist.md
+      - scenarios/domestic-violence.md
+      - scenarios/lgbtq.md
+      - scenarios/election-observer.md
+  - !ENV [NAV_TAIWAN, "在地脈絡"]:
+      - taiwan/index.md
+      - taiwan/ooni-asn-coverage.md
+      - taiwan/ooni-checklist.md
+      - taiwan/tor-relay-watcher.md
+      - taiwan/pdpa-2025.md
+      - taiwan/whistleblower-law.md
+  - !ENV [NAV_ADVANCED, "進階層"]:
+      - advanced/index.md
+      - advanced/e2ee.md
+      - advanced/post-quantum.md
+      - advanced/dweb-ipfs-onion.md
+  - !ENV [NAV_REPORTS, "嚴選報告"]:
+      - reports/index.md
+      - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
+          - reports/interseclab-network-coup/index.md
+          - reports/interseclab-network-coup/index_1.md
+          - reports/interseclab-network-coup/index_2.md
+          - reports/interseclab-network-coup/index_3.md
+          - reports/interseclab-network-coup/index_4.md
+          - reports/interseclab-network-coup/index_5.md
+          - reports/interseclab-network-coup/index_6.md
+          - reports/interseclab-network-coup/index_7.md
+          - reports/interseclab-network-coup/index_8.md
+  - !ENV [NAV_COMMUNITY, "社群"]:
+      - community/index.md
+      - community/how-to-contribute.md
+      - community/skill-level.md
+      - community/setup-repo.md
+      - community/setup-tor-relay.md
+      - community/i18n.md
+      - community/tools.md
+      - community/upload-sensitive.md
+      - community/contributor-handbook.md
+      - community/governance.md
+      - community/roadmap-2026.md
+  - help.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
@@ -40,25 +85,6 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
-      - !ENV [NAV_COMMUNITY, "社群參與"]:
-          - about/community/index.md
-          - about/community/participate.md
-          - about/community/communication-tools.md
-          - about/send-censorship.md
-  - !ENV [NAV_WATCHER, "監控觀察"]:
-      - watcher-tor-relays.md
-      - !ENV [NAV_REPORT, "嚴選報告"]:
-          - report/index.md
-          - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
-              - report/interseclab-the-internet-coup/index.md
-              - report/interseclab-the-internet-coup/index_1.md
-              - report/interseclab-the-internet-coup/index_2.md
-              - report/interseclab-the-internet-coup/index_3.md
-              - report/interseclab-the-internet-coup/index_4.md
-              - report/interseclab-the-internet-coup/index_5.md
-              - report/interseclab-the-internet-coup/index_6.md
-              - report/interseclab-the-internet-coup/index_7.md
-              - report/interseclab-the-internet-coup/index_8.md
 theme:
   name: material
   icon:

@@ -24,7 +24,7 @@ icon: material/chat-question
 
 匿名網路提供了一條具體的應對路徑。透過技術工具的組合，讓人們在受限的環境中仍能維持隱私與連線能力，同時把干預行為留下可被查驗的記錄。
 
-關於亞洲地區的網路自由現況，可以從這裡進一步了解：[網路自由為什麼重要？](./internet-freedom-matter.md)
+關於亞洲地區的網路自由現況，可以從這裡進一步了解：[網路自由為什麼重要？](../basics/internet-freedom.md)
 
 ## 不同參與者為何會用到 {#stakeholders-why}
 
@@ -46,7 +46,7 @@ icon: material/chat-question
 
 匿名網路仰賴可檢驗的程式碼與可重複建置的流程，基礎建設的維護與貢獻本身就是讓他人能安全連線、並看見干預是否發生的一環。參與 Tor 中繼、Snowflake 橋接、OONI 測試與文件翻譯等工作，能把個別使用者的需求，連回整體網路的韌性與可觀測性。
 
-若想從區域脈絡與制度壓力理解審查、監控與平台規則如何影響上述工作，可接著閱讀 [網路自由為什麼重要？](./internet-freedom-matter.md)。
+若想從區域脈絡與制度壓力理解審查、監控與平台規則如何影響上述工作，可接著閱讀 [網路自由為什麼重要？](../basics/internet-freedom.md)。
 
 ## 工具如何各司其職
 
@@ -82,13 +82,13 @@ icon: material/chat-question
 - **Tor Relay 校園建立**：在臺灣各大學推動中繼節點部署，讓本地頻寬成為全球 Tor 網路的一部分，強化整體基礎建設的韌性。
 - **匿名支付**：探索現金以外情境下的匿名支付可能性，含法規、穩定幣與區塊鏈應用等面向，補齊匿名實踐中常被忽略的一塊。
 
-這三個方向的完整說明，可以在[社群參與頁面](./about/community/index.md)與[2026 年度規劃](./blog/posts/2025to2026.md)中找到。
+這三個方向的完整說明，可以在[社群參與頁面](../community/index.md)與[2026 年度規劃](../blog/posts/2025to2026.md)中找到。
 
 ## :fontawesome-solid-diagram-project: 繼續深入
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 網路自由為什麼重要？](./internet-freedom-matter.md)
+- [:material-chat-question: 網路自由為什麼重要？](../basics/internet-freedom.md)
 - [:simple-torproject: 什麼是 Tor？](./what-is-tor.md)
 - [:simple-tails: 什麼是 Tails？](./what-is-tails.md)
 - [:material-access-point-network: 什麼是 OONI？](./what-is-ooni.md)

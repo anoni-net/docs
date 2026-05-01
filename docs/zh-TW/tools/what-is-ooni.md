@@ -21,7 +21,7 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
 
 <figure markdown="span">
     <a href="../assets/images/how-ooni-works.svg">
-        <img src="../assets/images/how-ooni-works.svg"
+        <img src="../../assets/images/how-ooni-works.svg"
             alt="OONI 如何運作，透過比對網頁呈現來推測是否內容被干預"
             title="OONI 如何運作，透過比對網頁呈現來推測是否內容被干預"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
@@ -49,7 +49,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <figure markdown="span">
     <a href="../assets/images/ooni_screen_desktop.png">
-        <img src="../assets/images/ooni_screen_desktop.png"
+        <img src="../../assets/images/ooni_screen_desktop.png"
             alt="OONI 桌面程式操作頁面"
             title="OONI 桌面程式操作頁面"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:75%;">
@@ -71,7 +71,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <figure markdown="span">
     <a href="../assets/images/ooni_explorer.png">
-        <img src="../assets/images/ooni_explorer.png"
+        <img src="../../assets/images/ooni_explorer.png"
             alt="OONI Explore 觀測資料網站（延遲一小時）"
             title="OONI Explore 觀測資料網站（延遲一小時）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:75%;">
@@ -86,7 +86,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
     <figure markdown="span">
         <a href="../assets/images/ooni_explorer_asn.png">
-            <img src="../assets/images/ooni_explorer_asn.png"
+            <img src="../../assets/images/ooni_explorer_asn.png"
                 alt="OONI Explore 可將「縱軸」項目選成 ASN 篩選分離各 ASN 觀測資料狀況。"
                 title="OONI Explore 可將「縱軸」項目選成 ASN 篩選分離各 ASN 觀測資料狀況。"
                 style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:80%;">
@@ -97,7 +97,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 網路自由為什麼重要](./internet-freedom-matter.md)
+- [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 
 </div>
 
@@ -105,8 +105,8 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 網站檢測清單](./ooni-weblists.md)
-- [:material-translate-variant: 中文化與文件翻譯](./ooni-i18n.md)
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>

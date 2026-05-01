@@ -10,7 +10,7 @@ icon: material/access-point-network
 <figure markdown="span" style="width: 80%;">
     <a target="_blank"
        href="https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/">
-        <img src="../assets/images/autonomous-system-diagram.svg"
+        <img src="../../assets/images/autonomous-system-diagram.svg"
             alt="ASNs 在實際網路上串連在一起，圖示來源：https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/"
             title="ASNs 在實際網路上串連在一起，圖示來源：https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/"
         >
@@ -105,7 +105,7 @@ AS 可以被理解為一個單一的管理實體（例如：一家公司、一�
 <figure markdown="span">
     <a target="_blank"
        href="../assets/images/ooni_raw_data.png">
-        <img src="../assets/images/ooni_raw_data.png"
+        <img src="../../assets/images/ooni_raw_data.png"
             alt="OONI Probe 「原始測量資料」的資訊。"
             title="OONI Probe 「原始測量資料」的資訊。"
             style="border: 1px solid #000000; border-radius: 10px;"
@@ -165,7 +165,7 @@ python3 ./ripe.py save --loc=TW
 
 <div class="grid cards" markdown>
 
-- [:octicons-mark-github-24: 專案研究預先準備](./setup-repo.md)
-- [:material-chat-question: 什麼是 OONI？](./what-is-ooni.md)
+- [:octicons-mark-github-24: 專案研究預先準備](../community/setup-repo.md)
+- [:material-chat-question: 什麼是 OONI？](../tools/what-is-ooni.md)
 
 </div>

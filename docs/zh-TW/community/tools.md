@@ -37,4 +37,4 @@ icon: material/message-text
 
 ---
 
-**延伸閱讀**：想了解我們為什麼自架 Matrix、以及如何兼顧隱私與社群品質，可參考 [從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md)。
+**延伸閱讀**：想了解我們為什麼自架 Matrix、以及如何兼顧隱私與社群品質，可參考 [從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../blog/posts/2026-discord-matrix-statement.md)。

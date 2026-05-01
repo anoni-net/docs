@@ -15,7 +15,7 @@ description: 社群專案建立 - 匿名網路社群
 
 ![匿名網路社群 Anoni.net](../../assets/images/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-我們從原本僅關注 [OONI](../../what-is-ooni.md){target="_blank"} 的觀測與分析資料，再到一同推廣 [Tor](../../what-is-tor.md){target="_blank"}/[Tails](../../what-is-tails.md){target="_blank"} 匿名網路工具，決定以「**匿名網路**」議題來持續推動「**網路自由**」在臺灣。
+我們從原本僅關注 [OONI](../../tools/what-is-ooni.md){target="_blank"} 的觀測與分析資料，再到一同推廣 [Tor](../../tools/what-is-tor.md){target="_blank"}/[Tails](../../tools/what-is-tails.md){target="_blank"} 匿名網路工具，決定以「**匿名網路**」議題來持續推動「**網路自由**」在臺灣。
 
 社群夥伴也因為這一次工作坊活動的關係，我們很幸運的集結到來自不同背景的夥伴加入，希望在未來我們也可以維持這樣的特性，關注或是提供更多樣性協助於我們服務的對象。
 

@@ -16,7 +16,7 @@ icon: material/calendar-star
 - 地點：國立臺灣科技大學 研揚教學大樓 TR-510 教室
 - 會議形式：工作坊、圓桌會議討論
 
-本工作坊將由在地開源社群「[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"}」提供技術支援與實務引導，介紹 [Tor](./what-is-tor.md){target="_blank"}、[Tails](./what-is-tails.md){target="_blank"}、[OONI](./what-is-ooni.md){target="_blank"} 等開源匿名網路工具，協助參與者建立第二安全裝置、匿名連線與進行網路審查偵測，提升行動與倡議的數位韌性。讓我們一起實踐資訊自由的基礎建設，用技術守護真相與抵抗壓迫。
+本工作坊將由在地開源社群「[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"}」提供技術支援與實務引導，介紹 [Tor](./tools/what-is-tor.md){target="_blank"}、[Tails](./tools/what-is-tails.md){target="_blank"}、[OONI](./tools/what-is-ooni.md){target="_blank"} 等開源匿名網路工具，協助參與者建立第二安全裝置、匿名連線與進行網路審查偵測，提升行動與倡議的數位韌性。讓我們一起實踐資訊自由的基礎建設，用技術守護真相與抵抗壓迫。
 
 [立即報名](https://form.anoni.net/s/cmc5t86n8000hlj0199ocqw2m){ .md-button .md-button--primary target="_blank"}
 
@@ -27,7 +27,7 @@ icon: material/calendar-star
 - 如何使用 Tor 網路匿名瀏覽
 - 建立安全、不可追蹤的**第二工作環境**（使用 Tails 與 USB 裝置）
 - 基礎的威脅模型評估：認識你的對手、風險與對應行動
-- 使用橋接器（Bridges）與 [Snowflake](./tor-snowflake.md){target="_blank"} 繞過封鎖國家或環境的網路審查
+- 使用橋接器（Bridges）與 [Snowflake](./tools/tor-snowflake.md){target="_blank"} 繞過封鎖國家或環境的網路審查
 
 **:tools: 實作能力與工具掌握**
 

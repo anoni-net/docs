@@ -177,9 +177,9 @@ The link can be used on multiple devices and will expire in 24 hours.
 
 <div class="grid cards" markdown>
 
-- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../internet-freedom-matter.md)
-- [:fontawesome-regular-circle-question: 什麼是 OONI？](../what-is-ooni.md)
-- [:fontawesome-regular-circle-question: 什麼是 Tor？](../what-is-tor.md)
-- [:fontawesome-regular-circle-question: 什麼是 Tails？](../what-is-tails.md)
+- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../basics/internet-freedom.md)
+- [:fontawesome-regular-circle-question: 什麼是 OONI？](./what-is-ooni.md)
+- [:fontawesome-regular-circle-question: 什麼是 Tor？](./what-is-tor.md)
+- [:fontawesome-regular-circle-question: 什麼是 Tails？](./what-is-tails.md)
 
 </div>

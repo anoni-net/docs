@@ -28,34 +28,34 @@ description: "邀請您於 2025 年 2 月 22 日 g0v Hackath65n 零時政府第 
 
 2/22 的黑客松活動有三個專案目標要推進：
 
-1. [OONI 網站檢測清單更新](../../ooni-weblists.md)
-2. [ASNs 自治網路觀測資料分析](../../ooni-asns-coverage.md)
-3. [中文化與詞彙校閱](../../ooni-i18n.md)
+1. [OONI 網站檢測清單更新](../../taiwan/ooni-checklist.md)
+2. [ASNs 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)
+3. [中文化與詞彙校閱](../../community/i18n.md)
 
 ### OONI 網站檢測清單更新
 
 名單自從 2017 年後就已經很久沒有更新了。除了繼續更新名單外，在這次的黑客松活動中，我們也計畫「建立和新增」需列入觀察的網站網址。關於收錄標準、如何自動化整理等問題，我們需要大家在當天一起動腦思考與協助！
 
-[:material-arrow-right-circle-outline: 瞭解此專案的背景](../../ooni-weblists.md){ .md-button target="_blank" }
+[:material-arrow-right-circle-outline: 瞭解此專案的背景](../../taiwan/ooni-checklist.md){ .md-button target="_blank" }
 
 ### ASNs 自治網路觀測資料分析
 
 針對 OONI 觀測資料多樣性不足的問題，我們要如何隨時監控資料的品質呢？是否可以透過某種量化指標或數字來快速掌握狀況？要如何將其實作並建立起來呢？在這次活動，我們將討論資料流架構、自動化分析等相關問題。最後，我們也需要思考如何吸引更多人參與 OONI 觀察資料的蒐集。
 
-[:material-arrow-right-circle-outline: 瞭解此專案目前的進度](../../ooni-weblists.md){ .md-button target="_blank" }
+[:material-arrow-right-circle-outline: 瞭解此專案目前的進度](../../taiwan/ooni-checklist.md){ .md-button target="_blank" }
 
 ### 中文化與詞彙校閱
 
 我們需要進行年度詞彙校準的作業！現有的正體中文翻譯中，可能存在一些誤用或不通順的詞句，這正是我們檢視並修正為更符合我們習慣用語的好時機。
 
-[:material-arrow-right-circle-outline: 所有產品列表](../../ooni-i18n.md){ .md-button target="_blank" }
+[:material-arrow-right-circle-outline: 所有產品列表](../../community/i18n.md){ .md-button target="_blank" }
 
 ## :fontawesome-regular-circle-question: 其他資源
 
 <div class="grid cards" markdown>
 
-- [:fontawesome-regular-circle-question: 什麼是 OONI？](../../what-is-ooni.md)
-- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../../internet-freedom-matter.md)
-- [:octicons-mark-github-24: 專案研究預先準備](../../setup-repo.md)
+- [:fontawesome-regular-circle-question: 什麼是 OONI？](../../tools/what-is-ooni.md)
+- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../../basics/internet-freedom.md)
+- [:octicons-mark-github-24: 專案研究預先準備](../../community/setup-repo.md)
 
 </div>
