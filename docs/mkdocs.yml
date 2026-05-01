@@ -14,31 +14,37 @@ nav:
   - index.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
-  - !ENV [NAV_BASICS, "概念層"]:
-      - basics/index.md
-      - basics/anonymity-vs-privacy.md
-      - basics/threat-model.md
-      - basics/metadata.md
-      - basics/internet-freedom.md
-  - !ENV [NAV_TOOLS, "工具層"]:
-      - tools/index.md
-      - tools/what-is-anonymity-network.md
-      - tools/what-is-tor.md
-      - tools/what-is-tails.md
-      - tools/what-is-ooni.md
-      - tools/tor-browser-advanced.md
-      - tools/tor-snowflake.md
-      - tools/ooni-run-v2.md
-      - tools/tails-vs-whonix-vs-qubes.md
-      - tools/messaging-comparison.md
-      - tools/password-manager.md
-  - !ENV [NAV_SCENARIOS, "場景層"]:
-      - scenarios/index.md
-      - scenarios/journalist.md
-      - scenarios/activist.md
-      - scenarios/domestic-violence.md
-      - scenarios/lgbtq.md
-      - scenarios/election-observer.md
+  - !ENV [NAV_GUIDES, "指南"]:
+      - !ENV [NAV_BASICS, "概念"]:
+          - basics/index.md
+          - basics/anonymity-vs-privacy.md
+          - basics/threat-model.md
+          - basics/metadata.md
+          - basics/internet-freedom.md
+      - !ENV [NAV_TOOLS, "工具"]:
+          - tools/index.md
+          - tools/what-is-anonymity-network.md
+          - tools/what-is-tor.md
+          - tools/what-is-tails.md
+          - tools/what-is-ooni.md
+          - tools/tor-browser-advanced.md
+          - tools/tor-snowflake.md
+          - tools/ooni-run-v2.md
+          - tools/tails-vs-whonix-vs-qubes.md
+          - tools/messaging-comparison.md
+          - tools/password-manager.md
+      - !ENV [NAV_SCENARIOS, "場景"]:
+          - scenarios/index.md
+          - scenarios/journalist.md
+          - scenarios/activist.md
+          - scenarios/domestic-violence.md
+          - scenarios/lgbtq.md
+          - scenarios/election-observer.md
+      - !ENV [NAV_ADVANCED, "進階"]:
+          - advanced/index.md
+          - advanced/e2ee.md
+          - advanced/post-quantum.md
+          - advanced/dweb-ipfs-onion.md
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
       - taiwan/index.md
       - taiwan/ooni-asn-coverage.md
@@ -46,11 +52,6 @@ nav:
       - taiwan/tor-relay-watcher.md
       - taiwan/pdpa-2025.md
       - taiwan/whistleblower-law.md
-  - !ENV [NAV_ADVANCED, "進階層"]:
-      - advanced/index.md
-      - advanced/e2ee.md
-      - advanced/post-quantum.md
-      - advanced/dweb-ipfs-onion.md
   - !ENV [NAV_REPORTS, "嚴選報告"]:
       - reports/index.md
       - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
@@ -121,7 +122,6 @@ theme:
     - navigation.tabs.sticky
     - navigation.indexes
     - navigation.path
-    - toc.integrate
     - search.suggest
     - search.highlight
     - search.share

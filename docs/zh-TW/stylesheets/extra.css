@@ -4,12 +4,12 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 
 @media screen and (max-width: 100em) {
   .md-grid {
-    max-width: 1022px;
+    max-width: 1200px;
   }
 }
 
 @media screen and (min-width: 100em) {
   .md-grid {
-    max-width: 1240px;
+    max-width: 1440px;
   }
 }
