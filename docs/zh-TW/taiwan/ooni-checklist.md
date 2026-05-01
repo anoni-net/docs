@@ -6,7 +6,7 @@ icon: material/list-status
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/ooni_asn.svg">
+       href="../../assets/images/ooni_asn.svg">
         <img src="../../assets/images/ooni_asn.svg"
             alt="OONI Probe 檢測流程"
             title="OONI Probe 檢測流程"

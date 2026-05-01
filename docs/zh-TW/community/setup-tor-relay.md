@@ -13,8 +13,8 @@ icon: simple/torproject
 
     <figure markdown="span">
         <a target="_blank"
-        href="../assets/images/tor_diagram.original.webp">
-            <img src="../assets/images/tor_diagram.original.webp"
+        href="../../assets/images/tor_diagram.original.webp">
+            <img src="../../assets/images/tor_diagram.original.webp"
                 alt="Tor Relay 運作流程"
                 title="Tor Relay 運作流程"
             >

@@ -20,7 +20,7 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
 ## 如何運作？
 
 <figure markdown="span">
-    <a href="../assets/images/how-ooni-works.svg">
+    <a href="../../assets/images/how-ooni-works.svg">
         <img src="../../assets/images/how-ooni-works.svg"
             alt="OONI 如何運作，透過比對網頁呈現來推測是否內容被干預"
             title="OONI 如何運作，透過比對網頁呈現來推測是否內容被干預"
@@ -48,7 +48,7 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
 OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){target="_blank"}（Android, iOS）、[桌面版本](https://ooni.org/install/){target="_blank"}（Windows 64bit, macOS）、或是無任何桌面介面的[終端程式版本](https://ooni.org/install/cli){target="_blank"}。
 
 <figure markdown="span">
-    <a href="../assets/images/ooni_screen_desktop.png">
+    <a href="../../assets/images/ooni_screen_desktop.png">
         <img src="../../assets/images/ooni_screen_desktop.png"
             alt="OONI 桌面程式操作頁面"
             title="OONI 桌面程式操作頁面"
@@ -70,7 +70,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 ## OONI Explorer 觀測資料
 
 <figure markdown="span">
-    <a href="../assets/images/ooni_explorer.png">
+    <a href="../../assets/images/ooni_explorer.png">
         <img src="../../assets/images/ooni_explorer.png"
             alt="OONI Explore 觀測資料網站（延遲一小時）"
             title="OONI Explore 觀測資料網站（延遲一小時）"
@@ -85,7 +85,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
     可將「縱軸」項目選成 ASN 篩選分離各 ASN 觀測資料狀況。
 
     <figure markdown="span">
-        <a href="../assets/images/ooni_explorer_asn.png">
+        <a href="../../assets/images/ooni_explorer_asn.png">
             <img src="../../assets/images/ooni_explorer_asn.png"
                 alt="OONI Explore 可將「縱軸」項目選成 ASN 篩選分離各 ASN 觀測資料狀況。"
                 title="OONI Explore 可將「縱軸」項目選成 ASN 篩選分離各 ASN 觀測資料狀況。"

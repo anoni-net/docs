@@ -9,7 +9,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_diagram.original.webp">
+       href="../../assets/images/tor_diagram.original.webp">
         <img src="../../assets/images/tor_diagram.original.webp"
             alt="Tor Relay 運作流程"
             title="Tor Relay 運作流程"
@@ -32,7 +32,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_relays.svg">
+       href="../../assets/images/tor_relays.svg">
         <img src="../../assets/images/tor_relays.svg"
             alt="Tor Relay 類型"
             title="Tor Relay 類型"
