@@ -21,6 +21,7 @@ nav:
           - basics/threat-model.md
           - basics/metadata.md
           - basics/internet-freedom.md
+          - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
           - tools/what-is-anonymity-network.md
@@ -33,6 +34,7 @@ nav:
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/messaging-comparison.md
           - tools/password-manager.md
+          - tools/crypto-privacy-spectrum.md
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/journalist.md
@@ -40,11 +42,13 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/lgbtq.md
           - scenarios/election-observer.md
+          - scenarios/nonprofit-anonymous-donation.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
           - advanced/e2ee.md
           - advanced/post-quantum.md
           - advanced/dweb-ipfs-onion.md
+          - advanced/zk-identity-payments.md
       - !ENV [NAV_REPORTS, "報告"]:
           - reports/index.md
           - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
@@ -63,6 +67,7 @@ nav:
       - taiwan/ooni-checklist.md
       - taiwan/tor-relay-watcher.md
       - taiwan/pdpa-2025.md
+      - taiwan/vasp-2026.md
       - taiwan/whistleblower-law.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
@@ -76,6 +81,7 @@ nav:
       - community/contributor-handbook.md
       - community/governance.md
       - community/roadmap-2026.md
+      - community/payments-research.md
   - help.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
