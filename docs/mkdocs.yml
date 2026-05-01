@@ -82,7 +82,7 @@ nav:
       - community/governance.md
       - community/roadmap-2026.md
       - community/payments-research.md
-  - help.md
+  - help/index.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
