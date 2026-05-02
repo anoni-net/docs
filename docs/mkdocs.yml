@@ -1,19 +1,17 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
-site_name: !ENV [SITE_NAME, "匿名網路社群 Anoni.net/Docs"]
+site_name: !ENV [SITE_NAME, "匿名網路社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
 edit_uri:
   !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/zh-TW/"]
 
 site_description:
   !ENV [SITE_DESC, "推廣與翻譯匿名網路 Tor, Tails 與 OONI 觀測工具"]
-site_author: Anoni.net Volunteer
+site_author: anoni.net Volunteer
 repo_url: https://github.com/anoni-net/docs
 repo_name: 匿名網路社群文件
-copyright: "CC-BY 4.0 2023-2026 Anoni.net Docs Project"
+copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
-  - !ENV [NAV_POST, "資訊更新"]:
-      - blog/index.md
   - !ENV [NAV_GUIDES, "指南"]:
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
@@ -69,6 +67,8 @@ nav:
       - taiwan/pdpa-2025.md
       - taiwan/vasp-2026.md
       - taiwan/whistleblower-law.md
+  - !ENV [NAV_POST, "資訊更新"]:
+      - blog/index.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
       - community/how-to-contribute.md
@@ -82,7 +82,6 @@ nav:
       - community/governance.md
       - community/roadmap-2026.md
       - community/payments-research.md
-  - help/index.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
@@ -92,6 +91,7 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
+      - help/index.md
 theme:
   name: material
   icon:

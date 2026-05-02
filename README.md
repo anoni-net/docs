@@ -1,8 +1,8 @@
-# 匿名網路社群文件 | Anoni.net Docs
+# 匿名網路社群文件 | anoni.net Docs
 
 > 推廣與翻譯匿名網路 Tor、Tails 與 OONI 觀測工具
 
-此專案是「匿名網路社群 Anoni.net」的核心文件系統，致力於推廣網路自由與隱私保護工具。專案包含多語系文件網站、Tor 中繼監控系統，以及 OONI 觀測資料分析工具。
+此專案是「匿名網路社群 anoni.net」的核心文件系統，致力於推廣網路自由與隱私保護工具。專案包含多語系文件網站、Tor 中繼監控系統，以及 OONI 觀測資料分析工具。
 
 ## 📚 專案結構
 
@@ -133,15 +133,15 @@ uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 
 ---
 
-**Copyright © 2023-2026 Anoni.net Docs Project**
+**Copyright © 2023-2026 anoni.net Docs Project**
 
 ---
 
-# Anoni.net Documentation
+# anoni.net Documentation
 
 > Promoting and translating Tor, Tails, and OONI measurement tools for anonymous networks
 
-This project is the core documentation system for the "Anonymous Network Community Anoni.net", dedicated to promoting internet freedom and privacy protection tools. The project includes a multilingual documentation website, a Tor relay monitoring system, and OONI measurement data analysis tools.
+This project is the core documentation system for the "Anonymous Network Community anoni.net", dedicated to promoting internet freedom and privacy protection tools. The project includes a multilingual documentation website, a Tor relay monitoring system, and OONI measurement data analysis tools.
 
 ## 📚 Project Structure
 
@@ -272,4 +272,4 @@ This repository contains multiple licenses. Use the table below and each subdire
 
 ---
 
-**Copyright © 2023-2026 Anoni.net Docs Project**
+**Copyright © 2023-2026 anoni.net Docs Project**

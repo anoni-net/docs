@@ -10,7 +10,7 @@ image: "assets/images/post-update.png"
 
 # Project Relaunch 2025
 
-Hello everyone, Anoni.net Docs is set to reboot in 2025, with three sub-projects currently planned as the focus and goals for our 2025 research. If you are interested in this topic, consider joining us to explore, discuss, and work on issues related to ["Internet Freedom"](../../internet-freedom-matter.md){target="_blank"}.
+Hello everyone, anoni.net Docs is set to reboot in 2025, with three sub-projects currently planned as the focus and goals for our 2025 research. If you are interested in this topic, consider joining us to explore, discuss, and work on issues related to ["Internet Freedom"](../../internet-freedom-matter.md){target="_blank"}.
 
 This document site will also serve as a place for ongoing updates, event announcements, and the publication of research results. We recommend subscribing to the [mailing list](../../contact.md){target="_blank"}, as we will use it to send notifications about any new information updates.
 
@@ -18,7 +18,7 @@ This document site will also serve as a place for ongoing updates, event announc
 
 ## Project Plan
 
-The Anoni.net Docs project currently comprises three sub-projects, covering data analysis, assisting with the maintenance and update of localized website testing lists, and promoting localization and document translation. Regardless of your background or location, if you are interested in the following sub-projects, you are welcome to participate! Below is a brief introduction to the sub-projects and the goals we aim to achieve.
+The anoni.net Docs project currently comprises three sub-projects, covering data analysis, assisting with the maintenance and update of localized website testing lists, and promoting localization and document translation. Regardless of your background or location, if you are interested in the following sub-projects, you are welcome to participate! Below is a brief introduction to the sub-projects and the goals we aim to achieve.
 
 ### ASN Autonomous System Network Observation Data Analysis
 

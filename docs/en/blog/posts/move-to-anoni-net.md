@@ -13,7 +13,7 @@ description: "The topic of 'anonymous networks' to continue advocating for 'inte
 
 # Community Project Establishment - Anonymity Network Community
 
-![Anonymity Network Community Anoni.net](https://images.anoni.net/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Anonymity Network Community anoni.net](https://images.anoni.net/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 We initially focused solely on observing and analyzing [OONI](../../what-is-ooni.md){target="_blank"} data. Now, we are jointly promoting Tor/Tails anonymous network tools, deciding to use the topic of "**anonymous networks**" to continue advocating for "**internet freedom**" in Taiwan.
 

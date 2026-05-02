@@ -18,7 +18,7 @@ icon: material/email-fast-outline
 
 ---
 
-- 匿名網路社群 Anoni.net <whisper@anoni.net>
+- 匿名網路社群 anoni.net <whisper@anoni.net>
 - PGP: [B7DF84305C7911D90D59A66061F66CF36EE386D4](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
 
     ??? quote "PGP 公開金鑰檔案"

@@ -16,7 +16,7 @@ description: "Registration is now open for the workshop happening on August 9th 
 
 June 2025 has passed, and this month we continued our preparations for the workshop event scheduled for August. We've also conducted online training sessions focusing on the basics of Tor/Tails and OONI. The "[Anonymous Network Workshop](../../event-workshop-2025.md){target="_blank"}" event information has been fully updated, with the two-day event agenda and registration form now completed. Registration is now open!
 
-In addition, we have moved the project to the "[Anoni.net Community](https://anoni.net/en/){target="_blank"}" [GitHub](https://github.com/anoni-net){target="_blank"} page. The original OONI-Research project page will automatically redirect to the new domain, serving as a promotional tool for the "anonymous network" alongside Tor/Tails.
+In addition, we have moved the project to the "[anoni.net Community](https://anoni.net/en/){target="_blank"}" [GitHub](https://github.com/anoni-net){target="_blank"} page. The original OONI-Research project page will automatically redirect to the new domain, serving as a promotional tool for the "anonymous network" alongside Tor/Tails.
 
 !!! quote ""
 

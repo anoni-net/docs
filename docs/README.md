@@ -1,6 +1,6 @@
-# 匿名網路社群文件 | Anoni.net Docs
+# 匿名網路社群文件 | anoni.net Docs
 
-> 本目錄為 Anoni.net 多語系文件網站，推廣與翻譯 Tor、Tails、OONI 等匿名網路與觀測工具。
+> 本目錄為 anoni.net 多語系文件網站，推廣與翻譯 Tor、Tails、OONI 等匿名網路與觀測工具。
 
 此為 MkDocs 驅動的文件子專案，提供繁體中文、簡體中文與英文三種語言版本。
 
@@ -68,13 +68,13 @@ sh build_docs_anoni_onion.sh  # Onion 版
 ## 授權
 
 - 文件內容：CC-BY 4.0  
-- Copyright 2023-2026 Anoni.net Docs Project
+- Copyright 2023-2026 anoni.net Docs Project
 
 ---
 
-# Anoni.net Documentation
+# anoni.net Documentation
 
-> This directory is the Anoni.net multilingual documentation site, promoting and translating Tor, Tails, OONI, and related anonymous network and measurement tools.
+> This directory is the anoni.net multilingual documentation site, promoting and translating Tor, Tails, OONI, and related anonymous network and measurement tools.
 
 This is the MkDocs-driven documentation subproject, providing Traditional Chinese, Simplified Chinese, and English versions.
 
@@ -142,4 +142,4 @@ Note: `build_docs_anoni.sh` and `build_docs_anoni_onion.sh` contain server-speci
 ## License
 
 - Documentation content: CC-BY 4.0  
-- Copyright 2023-2026 Anoni.net Docs Project
+- Copyright 2023-2026 anoni.net Docs Project

@@ -4,7 +4,7 @@
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage 是 Anoni.net 專案的資料分析工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。
+ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。
 
 ## 🎯 專案目標
 
@@ -320,7 +320,7 @@ Apache License 2.0 - 詳見 [LICENSE](LICENSE) 檔案
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage is a data analysis tool for the Anoni.net project, designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures.
+ASN Coverage is a data analysis tool for the anoni.net project, designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures.
 
 ## 🎯 Project Goals
 
@@ -630,4 +630,4 @@ Apache License 2.0 - See [LICENSE](LICENSE) file
 
 ---
 
-**Copyright © 2023-2025 Anoni.net ASN Coverage Project**
+**Copyright © 2023-2025 anoni.net ASN Coverage Project**

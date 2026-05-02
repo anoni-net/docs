@@ -44,7 +44,7 @@ icon: octicons/workflow-24
     - 想要报名的角色：[ ] 活动筹备人员、[ ] 工作坊小助手。
     - 在工作坊活动中可以贡献与获得的事项：（让我们可以避免安排不有趣的事务给你！）
 
-报名邮件请寄到：`匿名网络社群 Anoni.net <whisper@anoni.net>`，期待并感谢你的参与！
+报名邮件请寄到：`匿名网络社群 anoni.net <whisper@anoni.net>`，期待并感谢你的参与！
 
 ## :fontawesome-solid-clipboard-user: 活动筹备人员
 

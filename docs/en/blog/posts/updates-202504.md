@@ -14,7 +14,7 @@ description: "Current Project Status and Updates 2025/04"
 
 ![2025/04 Project Status and Updates](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-Long time no see. April was a very busy period, and the Anoni.net Docs project progressed a bit slowly. We translated an update released by OONI: [Launch: New OONI Explorer thematic censorship pages](https://anoni.net/docs/blog/2025/04/2025-ooni-explorer-thematic-censorship-pages/). Additionally, our translation of the "[Tor University Challenge](https://toruniversity.eff.org/zh-tw/)" for eff.org has been completed and successfully updated on their website. However, we currently lack the energy to promote this program, so perhaps we can brainstorm on how to push it forward.
+Long time no see. April was a very busy period, and the anoni.net Docs project progressed a bit slowly. We translated an update released by OONI: [Launch: New OONI Explorer thematic censorship pages](https://anoni.net/docs/blog/2025/04/2025-ooni-explorer-thematic-censorship-pages/). Additionally, our translation of the "[Tor University Challenge](https://toruniversity.eff.org/zh-tw/)" for eff.org has been completed and successfully updated on their website. However, we currently lack the energy to promote this program, so perhaps we can brainstorm on how to push it forward.
 
 ![EFF, Tor University](./assets/images/eff-tor-university-zh-tw.png){style="border-radius: 5px;"}
 
