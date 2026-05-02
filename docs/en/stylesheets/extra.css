@@ -1,3 +1,35 @@
+/* ==========================================================================
+   品牌色 token（依 .claude/rules/brand-identity.md）
+   主色 cyan #00aeff、Accent、結構性次色、中性色
+   ========================================================================== */
+
+:root {
+  /* Brand cyan 9 階色票 */
+  --brand-cyan-50:  #e0f4ff;
+  --brand-cyan-100: #b3e3ff;
+  --brand-cyan-200: #80d1ff;
+  --brand-cyan-300: #4dbfff;
+  --brand-cyan-400: #26b3ff;
+  --brand-cyan-500: #00aeff;
+  --brand-cyan-600: #009ee6;
+  --brand-cyan-700: #0089bf;
+  --brand-cyan-800: #006d99;
+  --brand-cyan-900: #003e57;
+
+  /* Accent（固定 2 個） */
+  --accent-action:    #ef6c00;  /* CTA、活動公告 */
+  --accent-emergency: #d32f2f;  /* 緊急求救、警告 */
+
+  /* 結構性次色（綁定三大主題） */
+  --cat-privacy:  #4caf50;  /* 個人隱私指引 */
+  --cat-relay:    #7b1fa2;  /* Tor Relay 校園建立 */
+  --cat-payments: #ef6c00;  /* 匿名支付（與 --accent-action 同色） */
+
+  /* 中性 */
+  --neutral-muted:  #546e7a;
+  --neutral-border: #cdcdcd;
+}
+
 html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__inner.md-grid {
     padding: 0 1rem;
 }

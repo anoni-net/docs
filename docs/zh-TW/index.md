@@ -6,7 +6,7 @@ hide:
   - toc
 ---
 
-# :material-shield-account-outline:{ .xl .middle style="color: #00aeff;" } 匿名網路社群 anoni.net
+# :material-shield-account-outline:{ .xl .middle style="color: var(--brand-cyan-500);" } 匿名網路社群 anoni.net
 
 > 推廣 Tor、Tails、OONI，串連台灣的網路自由實踐與在地觀測。
 
@@ -16,19 +16,19 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-account-group-outline:{ .lg .middle style="color: #00aeff;" } **我們是誰**
+- :material-account-group-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們是誰**
 
     ---
 
     一群關注匿名網路、隱私與網路自由的在地社群成員。長期推廣 Tor、Tails、OONI 等開源工具，並與 EFF、Tor Project、OONI 等國際組織合作，把全球議題帶回台灣脈絡討論。
 
-- :material-target:{ .lg .middle style="color: #00aeff;" } **我們在做什麼**
+- :material-target:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們在做什麼**
 
     ---
 
     維運在地的網路觀測（OONI 檢測清單、ASN 覆蓋分析、Tor Relay 觀測）、追蹤台灣個資與加密支付法規動態、舉辦工作坊與社群小聚，並翻譯國際研究報告。所有產出都以 [anoni.net Docs](./guides/index.md) 為文件中心。
 
-- :material-account-supervisor-circle-outline:{ .lg .middle style="color: #00aeff;" } **我們為誰寫**
+- :material-account-supervisor-circle-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們為誰寫**
 
     ---
 
@@ -40,7 +40,7 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-shield-lock-outline:{ .lg .middle style="color: #4caf50;" } **個人隱私指引**
+- :material-shield-lock-outline:{ .lg .middle style="color: var(--cat-privacy);" } **個人隱私指引**
 
     ---
 
@@ -48,7 +48,7 @@ hide:
 
     [:octicons-arrow-right-24: 研究專題](./community/privacy-guide.md)
 
-- :material-server-network:{ .lg .middle style="color: #7b1fa2;" } **Tor Relay 校園建立**
+- :material-server-network:{ .lg .middle style="color: var(--cat-relay);" } **Tor Relay 校園建立**
 
     ---
 
@@ -56,7 +56,7 @@ hide:
 
     [:octicons-arrow-right-24: 研究專題](./community/relay-on-campus.md)
 
-- :material-cash-multiple:{ .lg .middle style="color: #ef6c00;" } **匿名支付**
+- :material-cash-multiple:{ .lg .middle style="color: var(--cat-payments);" } **匿名支付**
 
     ---
 
@@ -70,7 +70,7 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-compass-outline:{ .lg .middle style="color: #00aeff;" } **指南**
+- :material-compass-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **指南**
 
     ---
 
@@ -78,7 +78,7 @@ hide:
 
     [:octicons-arrow-right-24: 五個層次](./guides/index.md)
 
-- :material-island:{ .lg .middle style="color: #00aeff;" } **在地脈絡**
+- :material-island:{ .lg .middle style="color: var(--brand-cyan-500);" } **在地脈絡**
 
     ---
 
@@ -86,7 +86,7 @@ hide:
 
     [:octicons-arrow-right-24: 切入觀察](./taiwan/index.md)
 
-- :material-account-group:{ .lg .middle style="color: #00aeff;" } **社群參與**
+- :material-account-group:{ .lg .middle style="color: var(--brand-cyan-500);" } **社群參與**
 
     ---
 
@@ -94,7 +94,7 @@ hide:
 
     [:octicons-arrow-right-24: 加入我們](./community/index.md)
 
-- :material-lifebuoy:{ .lg .middle style="color: #d32f2f;" } **緊急求救**
+- :material-lifebuoy:{ .lg .middle style="color: var(--accent-emergency);" } **緊急求救**
 
     ---
 
@@ -108,25 +108,25 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-newspaper-variant-outline:{ .lg .middle style="color: #546e7a;" } **新聞媒體**
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--neutral-muted);" } **新聞媒體**
 
     ---
 
     降低採編過程中身分與流量被比對、追蹤的風險，連線受阻時仍能查證與對外說明。
 
-- :material-account-edit-outline:{ .lg .middle style="color: #546e7a;" } **獨立記者**
+- :material-account-edit-outline:{ .lg .middle style="color: var(--neutral-muted);" } **獨立記者**
 
     ---
 
     在資安與法律支援有限時，更仰賴匿名網路與以隱私為重的使用環境完成調查與聯繫。
 
-- :material-account-group-outline:{ .lg .middle style="color: #546e7a;" } **公民團體**
+- :material-account-group-outline:{ .lg .middle style="color: var(--neutral-muted);" } **公民團體**
 
     ---
 
     倡議與聯絡對象需要保護，官網、社群帳號等組織服務也可能成為被鎖定的對象。
 
-- :material-source-branch:{ .lg .middle style="color: #546e7a;" } **開源科技社群**
+- :material-source-branch:{ .lg .middle style="color: var(--neutral-muted);" } **開源科技社群**
 
     ---
 
@@ -138,10 +138,10 @@ hide:
 
 !!! tip "最新動態"
 
-    - `新增`{style="color: DodgerBlue;"}：[OONI 新版 Probe Desktop 測試邀請](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
-    - `活動`{style="color: OrangeRed;"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
-    - `新增`{style="color: DodgerBlue;"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
-    - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
-    - `新增`{style="color: DodgerBlue;"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./community/index.md) - 2026/01/02
+    - `新增`{style="color: var(--brand-cyan-600);"}：[OONI 新版 Probe Desktop 測試邀請](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
+    - `活動`{style="color: var(--accent-action);"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
+    - `新增`{style="color: var(--brand-cyan-600);"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
+    - `更新`{style="color: var(--cat-privacy);"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
+    - `新增`{style="color: var(--brand-cyan-600);"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./community/index.md) - 2026/01/02
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。

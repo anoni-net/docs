@@ -99,7 +99,7 @@ nav:
 theme:
   name: material
   icon:
-    logo: material/database-search-outline
+    logo: material/hexagon-multiple-outline
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:
@@ -116,8 +116,8 @@ theme:
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: brown
-      accent: lime
+      primary: cyan
+      accent: light blue
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
