@@ -15,10 +15,10 @@ nav:
   - !ENV [NAV_GUIDES, "指南"]:
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
+          - basics/internet-freedom.md
           - basics/anonymity-vs-privacy.md
           - basics/threat-model.md
           - basics/metadata.md
-          - basics/internet-freedom.md
           - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
