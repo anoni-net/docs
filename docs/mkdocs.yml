@@ -74,6 +74,7 @@ nav:
       - community/how-to-contribute.md
       - community/skill-level.md
       - community/setup-repo.md
+      - community/asn-coverage-howto.md
       - community/setup-tor-relay.md
       - community/i18n.md
       - community/tools.md
