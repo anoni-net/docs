@@ -1,22 +1,49 @@
 ---
-title: 網路自由為什麼重要？
-description: 從亞洲脈絡理解網路審查、監控與平台壓力，以及 OONI 觀測與 Tor 匿名連線能扮演的角色。
+title: 網路自由為什麼重要
+description: 從匿名網路社群的觀點理解網路自由：連線層、個資與身分、金流的三個面向，連結到 2026 三大主題與在地法規動態。
 icon: material/chat-question
 ---
 
-# :material-chat-question: 網路自由為什麼重要？
+# :material-chat-question: 網路自由為什麼重要
 
-在這裡，**網路自由**指的是：人們能否在免於不當干預的情況下取得資訊、表達意見，以及選擇自己信任的工具與連線方式。它和「匿名、隱私、規避審查」常一起出現，但側重點不同，可先從[什麼是匿名網路？](../tools/what-is-anonymity-network.md)對照閱讀。
+匿名網路社群 anoni.net 是一個關注匿名網路、隱私、網路自由的在地社群。為什麼網路自由值得我們長期投入，現在談仍然有意義？台灣的連線環境相對開放，但「相對」兩個字承擔的條件愈來愈不穩固。這頁整理我們具體看到的事，以及正在做什麼來回應。
 
-除了政府封鎖與大規模監控，跨境平台規則、帳號處置、演算法可見度與資料留存，也會形塑誰能說話、誰能被看見。多地的誹謗、國安或資訊治理相關法規爭議，則帶來制度性的寒蟬效應。在台灣的情境下，相對開放的連線環境仍伴隨對跨國平台的高度依賴，以及對公民社會、獨立媒體與倡議者的各種壓力，這些都與「網路自由是否穩固」直接相關。
+## 我們怎麼理解網路自由
 
-以下先以東亞、東南亞為例，說明幾種常見的壓力模式。細節與新聞案例會隨時間改變，建議搭配 [Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"} 國別頁與在地報導交叉閱讀。
+**網路自由**關注的是人們能否在免於不當干預的情況下取得資訊、表達意見，以及選擇自己信任的工具與連線方式。它和「匿名」、「隱私」、「規避審查」常一起出現，側重點略有不同，可先從 [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 對照閱讀。
 
-## 東亞
+放回社群成員的日常裡，網路自由是一組我們具體看到的事：
 
-中國的「長城防火牆[^1]」長期過濾大量國際網站與服務，並對境內平台內容進行政治、宗教與社會議題上的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管下的內部網路「光明網[^2]」。
+- 跨境平台規則決定誰能說話、誰會被降低能見度
+- 帳號處置、演算法可見度、資料留存形塑公共討論的空間
+- 多地的誹謗、國安或資訊治理相關法規爭議帶來制度性的寒蟬效應
+- 在台灣，相對開放的連線環境伴隨對跨國平台的高度依賴，以及對公民社會、獨立媒體、倡議者的各種壓力
 
-臺灣在區域內多被評為相對開放，但仍面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力。分數與敘事會隨調查年度更新，可參考 Freedom House 臺灣條目[^10]。
+把這些放在一起看，「網路自由是否穩固」是一個多面向的問題，由連線層、個資與身分、金流三件事共同決定。這也對應到社群 2026 三大主題：個人隱私指引、Tor Relay 校園建立、匿名支付。
+
+## 我們關心的三個面向
+
+### 連線層的自由
+
+簡單說，你能不能連上想連的服務、用信任的工具，過程中不留下能識別到你的痕跡。
+
+這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](../community/roadmap-2026.md)，把台灣的頻寬納入全球 Tor 網路的基礎建設。
+
+### 個資與身分的自由
+
+簡單說，你能不能掌握「關於你的資料」流向了哪裡、被誰持有、能否要求刪除。
+
+這個面向對應到社群熟悉的兩個概念，[威脅模型怎麼想](./threat-model.md)（評估你保護什麼、防誰、付出多少成本）與 [Metadata 是什麼](./metadata.md)（為什麼通訊內容被加密還不夠）。在地脈絡上，[2025 個資法修法](../taiwan/pdpa-2025.md) 設立了個人資料保護委員會，把過去分散的監督權責集中、罰則向 GDPR 靠攏，是台灣個資制度近年最大的一次調整。
+
+### 金流的自由
+
+金流是社群比較新的關注點。一筆轉帳的時間、金額、收款人，配上信用卡號或銀行戶名，幾乎能還原一個人的社交網絡與行動軌跡。這份 metadata 比通訊 metadata 更黏：強制連結到實名、長期保留、跨機構交叉。
+
+社群把這個議題寫成 [為什麼匿名支付重要](./payments-anonymity.md)，並在 [匿名支付研究專題](../community/payments-research.md) 持續累積素材。在地脈絡上，[2026 台灣 VASP 法草案](../taiwan/vasp-2026.md) 進入立法院審議，加密資產監理從登記制走向許可制，是另一條制度性的轉折。
+
+## 區域脈絡：為什麼這在台灣也值得關注
+
+台灣的連線環境放在區域裡面看仍是相對開放的，但「相對」承擔的條件來自鄰近地區的具體事件。中國的「長城防火牆[^1]」長期過濾大量國際網站，並對境內平台內容進行政治、宗教、社會議題的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管的內部網路「光明網[^2]」。東南亞各地有越南要求平台下架政治性批評內容[^3]、印尼對特定類別網站封鎖[^4]、馬來西亞針對調查報導媒體的封鎖[^5]、菲律賓在選舉時期的監控與干預[^6]、泰國對皇室相關言論的刑事追訴[^7]、緬甸 2021 年政變後反覆斷網[^8][^9]。台灣則仍面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力，分數與敘事會隨年度更新[^10]。
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
@@ -28,15 +55,9 @@ icon: material/chat-question
     <capture>Freedom House「Freedom on the Net」互動地圖（各國分數隨年度報告更新，畫面為站內示意截圖）</capture>
 </figure>
 
-## 東南亞
+「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。
 
-越南政府曾要求國際平台配合下架政治性批評內容[^3]。印尼對特定類別網站採取封鎖或限制[^4]。馬來西亞曾出現針對調查報導媒體與部落格的封鎖[^5]。菲律賓在選舉等高張力時期，新聞與社群內容常成為監控與干預焦點[^6]。泰國對皇室相關言論的刑事追訴，長期影響線上表意空間[^7]。
-
-緬甸在 2021 年政變後反覆斷網、封鎖社群與鎮壓獨立媒體[^8][^9]，是「衝突與戒嚴情境下網路成為戰場」的極端例子。
-
-## 觀測與匿名連線
-
-亞太地區的封鎖與干預，需要可被驗證的公開紀錄。[OONI](https://ooni.org/){target="_blank"} 透過志工與探測資料，讓特定網路與規避工具的可及性以圖表與開放資料呈現。下方截圖為歷史區間範例，實際曲線與國家篩選請以 [OONI Explorer](https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW){target="_blank"} 為準。
+亞太地區的封鎖與干預需要可被驗證的公開紀錄。OONI 透過志工探測讓特定網路與規避工具的可及性以圖表與開放資料呈現。
 
 <figure markdown="span">
     <a href="https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW" target="_blank">
@@ -48,7 +69,7 @@ icon: material/chat-question
     <capture>OONI Explorer：規避工具觀測（畫面為站內保留之示意截圖，區間與資料以網站為準）</capture>
 </figure>
 
-[Tor](https://www.torproject.org/){target="_blank"} 則透過多層路由與中繼網路，協助使用者在高風險環境下維持匿名與連線，並可貢獻中繼節點強化整體網路韌性。臺灣目前已有公開可見的中繼與守護節點分佈，可自 Tor Metrics 查詢。
+Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 Tor Relay 校園建立工作正是把這份基礎建設推得更深入的具體行動。
 
 <figure markdown="span">
     <a href="https://metrics.torproject.org/rs.html#search/country:tw" target="_blank">
@@ -60,18 +81,15 @@ icon: material/chat-question
     <capture>Tor Metrics：臺灣地區中繼與守護節點（畫面隨網路狀態變動）</capture>
 </figure>
 
-無論是跑 OONI 測試、架設 Tor 中繼，或協助翻譯與教學，都是在具體支撐網路自由。你可以從下方專案列表挑一項開始。
+## 你可以從哪裡開始
 
-## :fontawesome-solid-diagram-project: 下一步可參與的專案
+社群的工作是一份持續累積、需要更多人加入的進行式，沒有單一的「完成」時刻。看你想從哪個方向切入，三條建議路徑：
 
-<div class="grid cards" markdown>
+- **想先理解概念**：往 basics/ 其他四篇繼續走。[匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 釐清詞彙，[威脅模型怎麼想](./threat-model.md) 給判斷框架，[Metadata 是什麼](./metadata.md) 補上「機密 ≠ 匿名」的盲點，[為什麼匿名支付重要](./payments-anonymity.md) 把金流納入匿名思維。
+- **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 則是社群長期維運的在地資料。
+- **想參與實作**：往 [community/](../community/index.md) 走。可以先看 [2026 年度路線圖](../community/roadmap-2026.md)、[匿名支付研究專題](../community/payments-research.md)、[如何參與與認領主題](../community/how-to-contribute.md)，再依興趣選一個方向加入 Matrix 討論。
 
-- [:material-chat-question: 什麼是匿名網路？](../tools/what-is-anonymity-network.md)
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
-- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
-- [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
-
-</div>
+跑 OONI 測試、架設 Tor 中繼、協助翻譯、寫一篇文章、把這頁分享給可能受用的人，每一個都算數。
 
 [^1]: [4所大學團隊每日測試4億個網域研究「防火長城」，發現有31萬網域被擋下、部分的封鎖只是「意外」](https://www.thenewslens.com/article/153597){target="_blank"} - TNL The News Lens 關鍵評論網
 [^2]: [金正恩無所不在：北韓監視器數量增加，強化全方位監控](https://global.udn.com/global_vision/story/8663/7970562){target="_blank"} - 轉角國際 udn Global
