@@ -6,7 +6,7 @@ icon: material/folder-search-outline
 
 # :material-folder-search-outline: 匿名支付研究專題
 
-匿名支付是 匿名網路社群 anoni.net 2026 的三大主題之一，跟「個人隱私指引」、「Tor Relay 校園建立」並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、目前進度、相關文章索引、待翻譯的外部報告，以及如何加入社群討論。
+匿名支付是 匿名網路社群 anoni.net 2026 的三大主題之一，跟 [個人隱私指引](./privacy-guide.md)、[Tor Relay 校園建立](./relay-on-campus.md) 並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、目前進度、相關文章索引、待翻譯的外部報告，以及如何加入社群討論。
 
 ## 為什麼把支付獨立成一個主題
 

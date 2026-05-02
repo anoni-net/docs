@@ -13,3 +13,58 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     max-width: 1440px;
   }
 }
+
+/* ==========================================================================
+   左側 sidebar：section 群組標題用背景色塊區隔
+   套用範圍：navigation.sections + navigation.indexes 下的 section 標題
+   （指南 tab 下的 概念 / 工具 / 場景 / 進階 / 報告 等）
+   ========================================================================== */
+
+.md-sidebar--primary .md-nav__item--section > .md-nav__link {
+  margin: 0.6rem 0 0.3rem;
+  padding: 0.35rem 0.6rem;
+  background-color: var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  font-weight: 600;
+}
+
+.md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-accent-fg-color);
+}
+
+/* section 子項目稍微縮排 */
+.md-sidebar--primary .md-nav__item--section > nav.md-nav {
+  padding-left: 0.4rem;
+}
+
+/* ==========================================================================
+   圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
+   .lg → 2rem（卡片標題用）
+   .xl → 3rem
+   .huge → 4rem（Hero 用）
+   .middle → 垂直置中
+   ========================================================================== */
+
+.twemoji.lg svg,
+.md-typeset .twemoji.lg svg {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+.twemoji.xl svg,
+.md-typeset .twemoji.xl svg {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.twemoji.huge svg,
+.md-typeset .twemoji.huge svg {
+  height: 4rem;
+  width: 4rem;
+}
+
+.twemoji.middle,
+.md-typeset .twemoji.middle {
+  vertical-align: middle;
+}

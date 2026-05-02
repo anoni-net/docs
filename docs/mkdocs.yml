@@ -13,6 +13,7 @@ copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
   - !ENV [NAV_GUIDES, "指南"]:
+      - guides/index.md
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -82,6 +83,8 @@ nav:
       - community/contributor-handbook.md
       - community/governance.md
       - community/roadmap-2026.md
+      - community/privacy-guide.md
+      - community/relay-on-campus.md
       - community/payments-research.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md

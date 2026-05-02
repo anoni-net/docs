@@ -16,11 +16,15 @@ icon: material/road-variant
 
 在過去一年推廣 Tor、Tails、OONI 的過程中，社群最常遇到的提問是「我下一步該怎麼做才能讓自己更安全」。這個提問背後缺的是一套可實際操作、依情境分級的隱私指引。我們會在這一年內逐步開展隱私主題，整理日常使用、敏感工作、高風險情境三種等級的工具與步驟，落地成 [概念](../basics/index.md)、[工具](../tools/index.md)、[場景](../scenarios/index.md) 三個層次的文件。
 
+研究專題入口、文章索引與目前進度請見 [個人隱私指引研究專題](./privacy-guide.md)。
+
 ### Tor Relay 校園建立
 
 這項計畫源自 EFF 與 Tor Project 合作推動的 [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"}，目標在大專院校建置穩定的中繼節點。台灣已有成功案例：國立臺灣師範大學資訊工程學系資訊中心已運行一個 Tor Relay 中繼，由社群夥伴透過教授與教職員提案、協調後完成。詳細經過可參考 [台師大 NZ 訪談](../blog/posts/ntnu-nz.md)。
 
-2025 我們完成了 Tor University Challenge 網站的正體中文翻譯，2026 將實際走進校園推動建置流程。延伸閱讀：[如何搭建 Tor Relay](./setup-tor-relay.md)。
+2025 我們完成了 Tor University Challenge 網站的正體中文翻譯，2026 將實際走進校園推動建置流程。
+
+研究專題入口、案例累積與如何加入請見 [Tor Relay 校園建立研究專題](./relay-on-campus.md)。技術 how-to 見 [如何搭建 Tor Relay](./setup-tor-relay.md)。
 
 ### 匿名支付探索
 
