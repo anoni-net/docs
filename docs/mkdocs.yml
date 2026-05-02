@@ -61,8 +61,8 @@ nav:
               - reports/interseclab-network-coup/index_8.md
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
       - taiwan/index.md
-      - taiwan/ooni-asn-coverage.md
       - taiwan/ooni-checklist.md
+      - taiwan/ooni-asn-coverage.md
       - taiwan/tor-relay-watcher.md
       - taiwan/pdpa-2025.md
       - taiwan/vasp-2026.md

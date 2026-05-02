@@ -1,5 +1,6 @@
 ---
 title: OONI 網站檢測清單
+description: OONI Probe 在台灣使用的網站檢測清單怎麼維護，以及社群如何協助分類與更新。
 icon: material/list-status
 ---
 # :material-list-status: OONI 網站檢測清單

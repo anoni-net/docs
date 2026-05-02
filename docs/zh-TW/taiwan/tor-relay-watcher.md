@@ -1,6 +1,6 @@
 ---
 title: Tor Relays 觀測點
-description: 各項觀察指標瞭解目前臺灣 Tor Relays 運作狀況
+description: 各項觀察指標瞭解目前台灣 Tor Relays 運作狀況。
 icon: material/chart-bar
 
 ---

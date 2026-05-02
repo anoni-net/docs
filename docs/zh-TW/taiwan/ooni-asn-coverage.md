@@ -1,9 +1,10 @@
 ---
-title: ASNs 自治網路觀測資料分析
+title: ASN 自治網路觀測資料分析
+description: 台灣各 ASN 的 OONI 觀測覆蓋率分析，從盲點看哪些電信商與網路系統需要更多測試。
 icon: material/access-point-network
 ---
 
-# :material-access-point-network: ASNs 自治網路觀測資料分析
+# :material-access-point-network: ASN 自治網路觀測資料分析
 
 ## 什麼是自治系統 AS？
 
