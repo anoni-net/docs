@@ -72,20 +72,23 @@ nav:
       - blog/index.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
-      - community/how-to-contribute.md
-      - community/skill-level.md
-      - community/setup-repo.md
-      - community/asn-coverage-howto.md
-      - community/setup-tor-relay.md
-      - community/i18n.md
-      - community/tools.md
-      - community/upload-sensitive.md
-      - community/contributor-handbook.md
-      - community/governance.md
-      - community/roadmap-2026.md
-      - community/privacy-guide.md
-      - community/relay-on-campus.md
-      - community/payments-research.md
+      - "開始參與":
+          - community/how-to-contribute.md
+          - community/skill-level.md
+          - community/contributor-handbook.md
+          - community/governance.md
+      - "動手實作":
+          - community/tools.md
+          - community/setup-repo.md
+          - community/i18n.md
+          - community/setup-tor-relay.md
+          - community/asn-coverage-howto.md
+          - community/upload-sensitive.md
+      - "推動主題":
+          - community/roadmap-2026.md
+          - community/privacy-guide.md
+          - community/relay-on-campus.md
+          - community/payments-research.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
