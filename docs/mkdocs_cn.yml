@@ -47,8 +47,8 @@ nav:
       - watcher-tor-relays.md
 theme:
   name: material
+  logo: assets/images/logo-white.svg
   icon:
-    logo: material/hexagon-multiple-outline
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:

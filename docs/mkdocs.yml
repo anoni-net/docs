@@ -84,6 +84,7 @@ nav:
           - community/setup-tor-relay.md
           - community/asn-coverage-howto.md
           - community/upload-sensitive.md
+          - community/brand-assets.md
       - "推動主題":
           - community/roadmap-2026.md
           - community/privacy-guide.md
@@ -101,8 +102,8 @@ nav:
       - help/index.md
 theme:
   name: material
+  logo: assets/images/logo-white.svg
   icon:
-    logo: material/hexagon-multiple-outline
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:
