@@ -309,9 +309,9 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
                 SELECT
                     date(created_at) AS dt,
                     fingerprint,
-                    (CASE WHEN guard_probability > 0 THEN 1 ELSE 0 END) AS guard,
-                    (CASE WHEN middle_probability > 0 THEN 1 ELSE 0 END) AS middle,
-                    (CASE WHEN exit_probability > 0 THEN 1 ELSE 0 END) AS exit
+                    MAX(CASE WHEN guard_probability > 0 THEN 1 ELSE 0 END) AS guard,
+                    MAX(CASE WHEN middle_probability > 0 THEN 1 ELSE 0 END) AS middle,
+                    MAX(CASE WHEN exit_probability > 0 THEN 1 ELSE 0 END) AS exit
                 FROM
                     relay_details
                 WHERE
@@ -320,6 +320,8 @@ async def tor_relays_node_type(country: Country, limit: int = 45) -> list[Relays
                     AND date(created_at)
                         >= (SELECT max_dt FROM max_dt)
                         - (GREATEST(%s::int, 1) - 1) * interval '1 day'
+                GROUP BY
+                    dt, fingerprint
             )
             SELECT
                 dt,
