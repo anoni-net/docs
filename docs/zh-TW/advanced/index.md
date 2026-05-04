@@ -13,3 +13,4 @@ icon: material/lock-outline
 - [端對端加密如何運作](./e2ee.md)：金鑰交換、前向保密、群組訊息的工程取捨。
 - [後量子密碼概觀](./post-quantum.md)：NIST 標準的進度與真實系統的轉換時程。
 - [去中心化網站發布](./dweb-ipfs-onion.md)：IPFS 與 Onion 的差別與合用場景。
+- [零知識身分驗證與支付](./zk-identity-payments.md)：環簽名、zk-SNARKs、鏈上分析的能與不能。
