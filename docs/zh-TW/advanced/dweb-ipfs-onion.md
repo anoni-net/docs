@@ -66,7 +66,7 @@ Tor Onion 服務（v3）讓網站直接運作於 Tor 網路：
 ## 兩者解決不同問題
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/ipfs-vs-onion.drawio.svg" alt="IPFS 與 Onion 架構對照：IPFS 走 gateway → DHT → peer，主解抗刪除；Onion 走 Guard → Middle → Rendezvous → HSDir → 服務，主解連線匿名">
+    <img class="brand-frame" src="../../assets/images/ipfs-vs-onion.drawio.svg" alt="IPFS 與 Onion 架構對照。IPFS 走 gateway → DHT → peer，主要解決抗刪除。Onion 走 Guard → Middle → Rendezvous → HSDir → 服務，主要解決連線匿名">
 </figure>
 
 | 維度 | IPFS | Onion |

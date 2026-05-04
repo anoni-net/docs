@@ -17,7 +17,7 @@ icon: material/shield-key-outline
 3. **時間圖譜**（Transaction Graph）：A 跟 B 之間的轉帳路徑。比特幣可重建完整圖譜，Monero 用 ring signatures 製造誘餌混淆，Zcash 屏蔽交易看不到圖譜。
 4. **元資料**（Metadata）：交易由哪個 IP、哪個錢包客戶端、什麼時間點送出。所有鏈都仰賴 P2P 網路層的隱私（搭配 Tor、Dandelion++ 等）。
 
-「隱私穩定幣」的設計，多半是在這四層中選某幾層做隱匿，而非全部。理解這四層的差別，比記住「哪個幣最匿名」更有幫助。
+「隱私穩定幣」的設計，多半在這四層中挑某幾層做隱匿。四層全部隱匿的設計實際上很少。理解這四層的差別，比記住「哪個幣最匿名」更有幫助。
 
 ## Monero 怎麼做：環簽名 + Stealth Address + RingCT
 
@@ -44,7 +44,7 @@ Zcash 走的是另一條更激進的路線。屏蔽交易（shielded transaction
 - 沒有重複花費。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/zcash-shielded.drawio.svg" alt="Zcash 屏蔽交易：寄件人與收件人之間透過 zk-SNARK 證明連線。鏈上可見 proof、nullifier、commitment、手續費；不可見寄件人地址、收件人地址、金額、圖譜關聯">
+    <img class="brand-frame" src="../../assets/images/zcash-shielded.drawio.svg" alt="Zcash 屏蔽交易：寄件人與收件人之間透過 zk-SNARK 證明連線。鏈上可見的部分：proof、nullifier、commitment、手續費。鏈上不可見的部分：寄件人地址、收件人地址、金額、圖譜關聯">
 </figure>
 
 整個證明在鏈上只有幾百 bytes，驗證者不需要知道金額、地址、來源。從鏈上看到的屏蔽交易只有「有一筆屏蔽交易發生」，看不到金額、寄件人、收件人。
