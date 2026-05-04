@@ -27,6 +27,10 @@ Monero 的設計來自 2013 年的 CryptoNote 白皮書，三個核心機制：
 - **Ring Signatures**：寄件人簽署交易時，把自己的真實簽章混進其他過去交易輸出的「誘餌」（decoys）中。觀察者只能確定「這 16 個輸出之一是真的」，但無法確定哪一個。Monero 目前預設環大小為 16。
 - **RingCT**（Ring Confidential Transactions）：用 Bulletproofs+ 同態承諾隱藏金額，同時證明「輸入總和等於輸出總和」（沒有憑空印錢）。
 
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/monero-ring.drawio.svg" alt="Monero Ring Signature 示意：寄件人的真實簽章混進 15 個誘餌中，環大小 16，觀察者只能驗證「16 個之一是真的」、無法反推哪一個">
+</figure>
+
 三者組合下，鏈上看到的是：「某個一次性地址收到一筆隱藏金額，由 16 個可能寄件人之一發送」。沒有 Alice 與 Bob 的概念。
 
 代價是區塊鏈體積大、交易驗證計算重、合規挑戰大。多數 KYC 交易所自 2020 年起陸續下架 Monero。
@@ -38,6 +42,10 @@ Zcash 走的是另一條更激進的路線。屏蔽交易（shielded transaction
 - 我有花費這個 note 的權限。
 - 我創造的新 note 金額總和等於消耗的 note 金額。
 - 沒有重複花費。
+
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/zcash-shielded.drawio.svg" alt="Zcash 屏蔽交易：寄件人與收件人之間透過 zk-SNARK 證明連線。鏈上可見 proof、nullifier、commitment、手續費；不可見寄件人地址、收件人地址、金額、圖譜關聯">
+</figure>
 
 整個證明在鏈上只有幾百 bytes，驗證者不需要知道金額、地址、來源。從鏈上看到的屏蔽交易只有「有一筆屏蔽交易發生」，看不到金額、寄件人、收件人。
 

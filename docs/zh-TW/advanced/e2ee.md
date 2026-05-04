@@ -16,6 +16,10 @@ icon: material/key-chain-variant
 
 實作上，現代協議普遍使用基於橢圓曲線的 X25519，比早期的有限體版本更小、更快，且抗側通道攻擊。Signal、Tor、TLS 1.3、SSH 預設都是 X25519。
 
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/dh-exchange.drawio.svg" alt="Diffie-Hellman 金鑰交換流程：Alice 與 Bob 各自挑秘密 a、b，交換 G^a、G^b，雙方各自算出共同金鑰 G^ab，Eve 即使看到中間訊息也無法在合理時間內反推">
+</figure>
+
 DH 解決了「協商出共同金鑰」這件事。但只有 DH 不夠：金鑰一旦長期存在，只要有一天被偷走，過去與未來的所有訊息都會被解密。下一步要解決的就是這個。
 
 ## 前向保密：今天金鑰被偷，過去訊息為何仍安全
@@ -38,6 +42,10 @@ Double Ratchet 是 Signal Protocol 的核心，名稱來自兩種同時運作的
 1. **完整前向保密**：每則訊息有獨立的對稱鑰，攻擊者拿到當下的金鑰，過去與未來的訊息仍然安全。
 2. **後向保密**（Post-Compromise Security，PCS）：即使裝置一度被入侵、金鑰被竊，只要在下一次 DH 交換時攻擊者沒有攔下訊息，安全狀態就會自我恢復。
 3. **離線訊息**：對方不在線時可以累積訊息，等對方上線再批次同步，每則仍有獨立鑰。
+
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/double-ratchet.drawio.svg" alt="Double Ratchet 的兩種金鑰更新機制：對稱 ratchet 每送一則訊息推進一格、DH ratchet 收到對方訊息時整段重置，每則訊息有獨立金鑰">
+</figure>
 
 Double Ratchet 在 2014 年被 Open Whisper Systems（後來的 Signal Foundation）整合進 Signal Protocol，後續被 WhatsApp、Facebook Messenger Secret Conversations、Skype Private Conversations 採用。
 

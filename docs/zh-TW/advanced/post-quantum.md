@@ -8,6 +8,10 @@ icon: material/atom-variant
 
 後量子密碼（Post-Quantum Cryptography，PQC）要回答的問題：未來十年內密碼學會被誰打破、什麼時候打破、現在該換哪些。可運作的大型量子電腦距離實際攻破 RSA 與橢圓曲線還有距離，但「現在加密、未來解密」的威脅讓轉換不能等到那一天。NIST 在 2024 年確立第一批後量子標準，主流瀏覽器、TLS 函式庫、Signal Protocol 已開始導入。這篇整理三個面向：威脅模型與時程、NIST 標準的選型、實際系統的轉換進度，以及一般人和組織需要關心的時間點。
 
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="後量子密碼遷移時程：從 2023 Signal PQXDH、2024 NIST FIPS 與主流瀏覽器啟用、到 2030–2035 主要系統應完成轉換、2040 舊密碼學硬時間表">
+</figure>
+
 ## Harvest Now, Decrypt Later 威脅模型
 
 「現在加密、未來解密」（Harvest Now, Decrypt Later，HNDL）是後量子轉換的核心動機。攻擊者今天錄下你的加密通訊，存在硬碟裡，等十年後手上有大型量子電腦時，再用 Shor 演算法把當時的金鑰交換破出來，還原所有錄到的密文。
