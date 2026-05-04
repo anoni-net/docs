@@ -6,7 +6,7 @@ hide:
   - toc
 ---
 
-# :material-shield-account-outline:{ .xl .middle style="color: var(--brand-cyan-500);" } 匿名網路社群 anoni.net
+# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> 匿名網路社群 anoni.net
 
 > 推廣 Tor、Tails、OONI，串連台灣的網路自由實踐與在地觀測。
 
