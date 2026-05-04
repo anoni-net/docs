@@ -4,7 +4,7 @@ description: Tails，全名為「The Amnesic Incognito Live System」（無記�
 icon: material/chat-question
 
 ---
-# 什麼是 Tails？
+# :material-chat-question: 什麼是 Tails？
 
 <figure markdown="span">
     <a href="https://upload.wikimedia.org/wikipedia/commons/9/99/Tails-logo-flat-inverted.svg" target="_blank">
