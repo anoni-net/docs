@@ -100,3 +100,16 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .md-typeset .twemoji.middle {
   vertical-align: middle;
 }
+
+/* ==========================================================================
+   .brand-frame — 文章內截圖 / 流程圖的品牌色框
+   用法：
+     - markdown: ![alt](url){.brand-frame}
+     - HTML: <img class="brand-frame" src="..." alt="...">
+   ========================================================================== */
+
+.md-typeset img.brand-frame {
+  border-radius: 10px;
+  border: 1px solid var(--brand-cyan-500);
+  box-shadow: 0 0 0.3rem var(--brand-cyan-500);
+}
