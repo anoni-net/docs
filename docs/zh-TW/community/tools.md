@@ -39,6 +39,7 @@ icon: material/server-network-outline
 - **入口**：[https://pad.anoni.net/](https://pad.anoni.net/){target="_blank"}
 - **帳號申請**：無須帳號，建立 pad 後分享連結即可協作。
 - **使用方式**：適合公開、可丟棄的內容。需要長期保存或加密協作時改用 Cryptpad。
+- **臨時聊天場景**：當下遇到一個人但雙方都不想交換 app 帳號時，可開新 pad 把 URL 給對方，使用 pad 內建的 chat sidebar 當作一次性對話空間。聊完關閉分頁、清空 pad 內容即可。注意內容無加密，server 端理論上仍可看到。
 
 ## 個人隱私工具
 
