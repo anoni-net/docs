@@ -1,6 +1,6 @@
 ---
 title: 社群參與
-description: 2026 主題說明、如何參與、溝通與協作工具
+description: 2026 主題說明、如何參與、社群自架服務
 icon: material/account-group
 ---
 
@@ -25,8 +25,8 @@ icon: material/account-group
 - [:material-hand-heart: 如何參與與認領主題](how-to-contribute.md)
     - 隨時參與、到 Matrix 表達意願、平時用 Matrix rooms 討論
 
-- [:material-message-text: 溝通與協作工具](tools.md)
-    - Matrix、Cryptpad、Jitsi 帳號與使用方式（含 Public Space）
+- [:material-server-network-outline: 社群自架服務](tools.md)
+    - Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口與帳號需求
 
 - [:material-email-fast-outline: 持續關注](../contact.md)
     - 訂閱電子報、PGP 聯絡方式

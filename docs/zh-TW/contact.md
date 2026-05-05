@@ -14,7 +14,7 @@ icon: material/email-fast-outline
 
 ### 社群討論與視訊
 
-日常討論與主題協作我們使用 **Matrix**（網頁版 [Element](https://matrix.anoni.net/){target="_blank"}，家伺服器 `im.anoni.net`）、[**Cryptpad** 加密共筆](https://cryptpad.anoni.net/){target="_blank"}、[**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} 線上視訊。帳號建立與使用方式請見 [溝通與協作工具](community/tools.md)。
+日常討論與主題協作我們使用 **Matrix**（網頁版 [Element](https://matrix.anoni.net/){target="_blank"}，家伺服器 `im.anoni.net`）、[**Cryptpad** 加密共筆](https://cryptpad.anoni.net/){target="_blank"}、[**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} 線上視訊。帳號建立與使用方式請見 [社群自架服務](community/tools.md)。
 
 ---
 

@@ -330,5 +330,5 @@ grep -c mxfile your-diagram.drawio.svg
 ## :material-link-variant: 接下來
 
 - [貢獻者百科](contributor-handbook.md) — 整體貢獻流程、PR 規範、翻譯流程
-- [溝通與協作工具](tools.md) — Matrix、Cryptpad、Jitsi 的設定
+- [社群自架服務](tools.md) — Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口與帳號需求
 - [2026 年度路線圖](roadmap-2026.md) — 三大主題與時程
