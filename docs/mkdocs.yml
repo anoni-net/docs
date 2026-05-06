@@ -1,4 +1,10 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
+exclude_docs: |
+  scenarios/activist.md
+  scenarios/domestic-violence.md
+  scenarios/lgbtq.md
+  scenarios/election-observer.md
+  scenarios/nonprofit-anonymous-donation.md
 site_name: !ENV [SITE_NAME, "匿名網路社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
 edit_uri:
@@ -37,11 +43,6 @@ nav:
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/journalist.md
-          - scenarios/activist.md
-          - scenarios/domestic-violence.md
-          - scenarios/lgbtq.md
-          - scenarios/election-observer.md
-          - scenarios/nonprofit-anonymous-donation.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
           - advanced/e2ee.md
