@@ -16,13 +16,13 @@ icon: material/account-group-outline
 
 下列場景的文章正在規劃，以下是大綱方向。如果你身在這些情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
 
-- **社運行動者的數位準備**：動員前、行動中、被盤查時的逐步建議（[issue #261](https://github.com/toomore/anoni-net-ws/issues/261)）
-- **家暴受害者的數位準備**：在離開加害者前後重建數位界線（[issue #262](https://github.com/toomore/anoni-net-ws/issues/262)）
-- **LGBTQ+ 與性少數的匿名社交**：在不友善環境中保留連結的方式（[issue #263](https://github.com/toomore/anoni-net-ws/issues/263)）
-- **選舉觀察員的自保**：站點觀察、資料記錄、安全聯繫的基本守則（[issue #264](https://github.com/toomore/anoni-net-ws/issues/264)）
-- **倡議組織的匿名捐款**：與 2026 三大主題之一「匿名支付」對齊，含法規、收款管道、後續處理（[issue #265](https://github.com/toomore/anoni-net-ws/issues/265)）
+- **社運行動者的數位準備**：動員前、行動中、被盤查時的逐步建議（[issue #32](https://github.com/anoni-net/docs/issues/32)）
+- **家暴受害者的數位準備**：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
+- **LGBTQ+ 與性少數的匿名社交**：在不友善環境中保留連結的方式（[issue #34](https://github.com/anoni-net/docs/issues/34)）
+- **選舉觀察員的自保**：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）
+- **倡議組織的匿名捐款**：與 2026 三大主題之一「匿名支付」對齊，含法規、收款管道、後續處理（[issue #36](https://github.com/anoni-net/docs/issues/36)）
 
-整體進度與認領狀況見 [scenarios/ 上線時抽掉的文章追蹤](https://github.com/toomore/anoni-net-ws/issues/268)。
+整體進度與認領狀況見 [scenarios/ 上線時抽掉的文章追蹤](https://github.com/anoni-net/docs/issues/37)。
 
 ## 怎麼參與
 
