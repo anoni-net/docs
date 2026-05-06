@@ -35,6 +35,7 @@ nav:
           - tools/what-is-ooni.md
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
+          - tools/onionshare.md
           - tools/ooni-run-v2.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/messaging-comparison.md
