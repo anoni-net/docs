@@ -79,7 +79,7 @@ Tails 包含：
 - **Thunderbird**，用於加密電子郵件
 - **KeePassXC**，用於創建和儲存強密碼
 - **LibreOffice**，一套辦公室軟體套件
-- **OnionShare**，用於通過 Tor 共享檔案、網站和聊天室
+- **[OnionShare](./onionshare.md)**，透過 Tor 起臨時 onion service，傳檔、收檔、架站、聊天
 - **Metadata Cleaner**，用於移除檔案中的中繼資料
 - ... 以及[其他更多的軟體](https://tails.net/doc/about/features/index.en.html){target="_blank"}。
 

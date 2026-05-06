@@ -33,7 +33,7 @@ icon: material/calendar-star
 
 - 使用 Tails 製作**可攜式匿名作業系統**，在公共或不可信裝置上安全工作
 - 學習 [OONI Probe](https://ooni.org/install/){target="_blank"} 如何測量網路審查與服務封鎖，並回報全球開源資料庫
-- 使用 [TorBrowser](https://www.torproject.org/zh-TW/download/){target="_blank"} 和 [OnionShare](https://onionshare.org/){target="_blank"} 進行安全的文件分享與協作
+- 使用 [TorBrowser](https://www.torproject.org/zh-TW/download/){target="_blank"} 和 [OnionShare](./tools/onionshare.md) 進行安全的文件分享與協作
 
 **:jigsaw: 社群支援與持續學習**
 

@@ -32,7 +32,7 @@ icon: material/newspaper-variant-outline
 
 - **SecureDrop**：[Freedom of the Press Foundation](https://freedom.press/){target="_blank"} 維運的開源系統，記者透過 Tor 隱藏服務收件，消息來源可上傳檔案不留 metadata。國際大型媒體（紐約時報、衛報、Intercept）都有部署
 - **Signal 號碼**：個人記者最常見的入口，但要注意 Signal 仍綁手機號碼，第一次接觸前對方可能不想暴露號碼
-- **Tor 上的隱蔽收件箱**：自架的 onion service + 簡易表單系統（社群可考慮自架 [OnionShare](https://onionshare.org/){target="_blank"} 接收）
+- **Tor 上的隱蔽收件箱**：自架的 onion service + 簡易表單系統（社群可考慮用 [OnionShare](../tools/onionshare.md) 的 Receive 模式架輕量版收件箱）
 - **PGP 公鑰**：傳統方式但門檻高，多數對方不會用
 
 ### 對方主動先聯繫的處理
@@ -103,7 +103,7 @@ icon: material/newspaper-variant-outline
 如果需要把檔案再傳給編輯或法律顧問：
 
 - **anoni.net Send**（[send.anoni.net](https://send.anoni.net/){target="_blank"}）：端對端加密、可設密碼、過期自動刪除
-- **OnionShare**：透過 Tor 起隱蔽服務傳檔，雙方都用 Tor Browser
+- **[OnionShare](../tools/onionshare.md)**：透過 Tor 起臨時 onion service 傳檔（Send 模式），雙方都用 Tor Browser，適合給法律顧問或編輯送一次性檔案
 - **加密郵件附件**：PGP 加密後寄送（適合對方有 PGP 工具的場景）
 - **不要用**：LINE、Facebook、Email 附件、雲端硬碟分享連結（這些都留下平台側紀錄）
 

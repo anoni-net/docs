@@ -271,7 +271,7 @@ icon: octicons/paste-24
     - [ ] 我了解 Tails 的主要使用情境與限制。
     - [ ] 我能夠建立持久性加密磁區（Persistent Storage）。
     - [ ] 我能夠設定 Bridge 橋接，調整 Tails 的 Tor 連線方式。
-    - [ ] 我能夠使用 OnionShare 透過 Tor 網路分享檔案，並已實際使用 Tails 至少一週。
+    - [ ] 我能夠使用 [OnionShare](../tools/onionshare.md) 透過 Tor 網路分享檔案，並已實際使用 Tails 至少一週。
 
     ??? tip "還沒到這個程度？從這裡開始"
         1. 前往 [Tails 官方網站](https://tails.net/){target="_blank"} 下載 Tails 映像檔。
@@ -319,7 +319,7 @@ icon: octicons/paste-24
 
         ??? question "使用 OnionShare 分享檔案。"
 
-            - OnionShare 是一個可以透過 Tor 網路安全分享檔案的工具。
+            - OnionShare 是一個可以透過 Tor 網路安全分享檔案的工具，完整介紹見 [OnionShare](../tools/onionshare.md)。
             - 在 Tails 的「Applications」選單中找到並啟動 OnionShare。
             - 透過拖放或選取檔案的方式，將想分享的檔案載入 OnionShare。
             - 啟動分享後，OnionShare 會生成一個 `.onion` 網址，將這網址提供給信任的人，他們即可使用 Tor 瀏覽器下載。

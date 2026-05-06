@@ -174,7 +174,7 @@ icon: octicons/workflow-24
         - [x] 安裝 Tails，並實際使用至少一週。
         - [x] 建立持久性加密磁區（Persistent Storage）。
         - [x] 使用 Bridge 橋接設定 Tails 網路連線方式。
-        - [x] 使用 OnionShare 軟體分享檔案。
+        - [x] 使用 [OnionShare](./tools/onionshare.md) 軟體分享檔案。
 
     === ":material-checkbox-marked-circle-auto-outline: Tails: Advanced L1"
 
