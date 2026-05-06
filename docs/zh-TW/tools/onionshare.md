@@ -16,12 +16,42 @@ icon: material/share-circle
 
 ## 四種使用模式
 
+<figure markdown="span">
+    <a href="https://assets.anoni.net/docs/onionshare-modes.png" target="_blank">
+        <img src="https://assets.anoni.net/docs/onionshare-modes.png"
+            alt="OnionShare 主視窗的四個模式分頁"
+            title="OnionShare 主視窗的四個模式分頁"
+            class="brand-frame">
+    </a>
+    <capture>OnionShare 主視窗的四個模式分頁，從左到右分別是 Share Files、Receive Files、Host a Website、Chat Anonymously。</capture>
+</figure>
+
 ### Send（送檔）
 
 把檔案丟進 OnionShare，產生一個 `.onion` 網址。把網址透過安全管道交給對方，對方用 Tor Browser 開啟、下載。
 
 - **適用**：把證據傳給律師、把訪談材料寄給編輯、行動結束分發紀錄、給法律顧問送一次性檔案。
 - **限制**：對方需要 Tor Browser。下載完成後啟動者要手動關閉 OnionShare（也可以設定下載完自動停）。
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/docs/onionshare-send-url.png" target="_blank">
+        <img src="https://assets.anoni.net/docs/onionshare-send-url.png"
+            alt="OnionShare Send 模式產生 .onion URL 與 private key"
+            title="OnionShare Send 模式產生 .onion URL 與 private key"
+            class="brand-frame">
+    </a>
+    <capture>Send 模式啟動分享後，OnionShare 會產生 .onion 網址與 private key。把網址跟 private key 透過不同安全管道交給對方，可避免中間人替換。</capture>
+</figure>
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/docs/onionshare-receiver-view.png" target="_blank">
+        <img src="https://assets.anoni.net/docs/onionshare-receiver-view.png"
+            alt="接收方在 Tor Browser 看到的 OnionShare 下載頁"
+            title="接收方在 Tor Browser 看到的 OnionShare 下載頁"
+            class="brand-frame">
+    </a>
+    <capture>接收方拿到 .onion 網址後，在 Tor Browser 開啟看到的是預設的下載頁面，外觀像一般靜態網站，不必額外學習。</capture>
+</figure>
 
 ### Receive（收檔）
 
