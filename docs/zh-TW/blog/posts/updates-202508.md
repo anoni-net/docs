@@ -28,7 +28,7 @@ description: "近期社群活動更新資訊"
 
 ## 整理共筆內容
 
-工作坊活動後，我們預計在 9/21 召開工作坊工作人員的回顧會議，整理活動共筆內容，您可以透過這裡的[活動議程表](../../event-workshop-2025.md#%E5%AE%8C%E6%95%B4%E6%B4%BB%E5%8B%95%E6%99%82%E7%A8%8B%E8%A1%A8){target="_blank"}上的連結回顧共筆內容，或是也可回信給我們關於你的想法，2025 年底或 2026 一整年的時間區間。
+工作坊活動後，我們預計在 9/21 召開工作坊工作人員的回顧會議，整理活動共筆內容，您可以透過這裡的[活動議程表](../../event-workshop-2025.md){target="_blank"}（頁內「完整活動時程表」段落）上的連結回顧共筆內容，或是也可回信給我們關於你的想法，2025 年底或 2026 一整年的時間區間。
 
 ## 翻譯文章
 
@@ -66,7 +66,7 @@ description: "近期社群活動更新資訊"
     <caption>Tor Relay 類型</caption>
 </figure>
 
-WebTunnel 是 Tor 橋接類型其中一項，協助 Tor 的使用者無法直接連到 Onion 洋蔥路由網路中時，協助代理轉接連線的伺服器，詳細的介紹與說明可以參考[這篇文章](../../tools/what-is-tor.md#%E4%B8%AD%E7%B9%BC%E7%AF%80%E9%BB%9E%E6%A9%8B%E6%8E%A5%E9%BB%9E){target="_blank"}。自 Tails 6.18 版本，也加入支援 WebTunnel 橋接方式的連線。由於橋接點有其功能的重要性，因此不會在 Tor 官網上查詢到連線參數，需要透過[主動索取](https://bridges.torproject.org/){target="_blank"}的方式取得連線資訊。
+WebTunnel 是 Tor 橋接類型其中一項，協助 Tor 的使用者無法直接連到 Onion 洋蔥路由網路中時，協助代理轉接連線的伺服器，詳細的介紹與說明可以參考[這篇文章](../../tools/what-is-tor.md){target="_blank"}（頁內「中繼節點、橋接點」段落）。自 Tails 6.18 版本，也加入支援 WebTunnel 橋接方式的連線。由於橋接點有其功能的重要性，因此不會在 Tor 官網上查詢到連線參數，需要透過[主動索取](https://bridges.torproject.org/){target="_blank"}的方式取得連線資訊。
 
 也因此，我們無法統計目前有多少台 Tor WebTunnel 的橋接點建立在臺灣，如果您有興趣，可以參考「[WebTunnel Docker setup](https://community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}」來建立，或是您本身就有一個 nginx 架起來的服務，提供一個路徑給予 WebTunnel 橋接連線來[貢獻一個節點](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"}也非常感謝！
 

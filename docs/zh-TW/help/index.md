@@ -26,7 +26,7 @@ icon: material/lifebuoy
 
 1. 從你信任的另一台裝置登入該服務，看是否還能進入
 2. 立即更換密碼，並把新密碼存進密碼管理器（不要用瀏覽器記住）
-3. 開啟兩步驟驗證（2FA）；如果原本就有開且驗證碼也被換掉，走服務的「帳號回復」流程
+3. 開啟兩步驟驗證（2FA）。如果原本就有開且驗證碼也被換掉，走服務的「帳號回復」流程
 4. 登出所有其他裝置（多數服務在「安全性」或「裝置」頁有此選項）
 
 ### 接下來的 30 分鐘
@@ -54,7 +54,7 @@ icon: material/lifebuoy
 ### 報案
 
 - 撥打 110 或前往就近派出所報案，取得受理證明（後續向業者申請補發或保險可能需要）
-- 提供裝置序號（IMEI／序號）給警方與業者；事先存在 Email 或實體文件可省時間
+- 提供裝置序號（IMEI、序號）給警方與業者，事先存在 Email 或實體文件可省時間
 
 ### 後續
 
@@ -73,7 +73,7 @@ icon: material/lifebuoy
 ### 求助管道
 
 - **撥打 113 保護專線**：諮詢與評估，必要時轉介社工
-- **保護令申請**：透過警察、社政或地方法院家事庭申請；緊急保護令可在數小時內核發
+- **保護令申請**：透過警察、社政或地方法院家事庭申請。緊急保護令可在數小時內核發
 - **跟蹤騷擾防制法**：自 2022 年施行，對不受歡迎的接近、跟監、撥打騷擾電話、寄送物品等都有刑事追訴依據
 
 ### 在地支援組織
@@ -86,7 +86,7 @@ icon: material/lifebuoy
 ### 數位防護的同步動作
 
 - 把社群媒體切換到僅限好友／私人帳號
-- 移除照片中的位置標籤、Metadata；新照片上傳前以 Tails 內建的 Metadata Cleaner 或類似工具去識別
+- 移除照片中的位置標籤、Metadata。新照片上傳前以 Tails 內建的 Metadata Cleaner 或類似工具去識別
 - 關閉相關 App 的位置共享（Google Maps、Find My）
 - 進一步閱讀：[家暴受害者的數位準備](../scenarios/domestic-violence.md)、[Metadata 是什麼](../basics/metadata.md)
 
@@ -96,8 +96,8 @@ icon: material/lifebuoy
 
 下方列的是當事人「還沒準備離開」或「離開過程中」的數位面準備：
 
-- 共用裝置上的搜尋紀錄、地圖紀錄、通訊紀錄可能會被檢視；準備一台對方不知情的裝置作為求助管道（公共圖書館電腦、信任親友的裝置都可以）
-- 共用家庭方案的雲端、定位（Find My、Google Family）可能讓對方看到你的位置；先確認再決定要不要離開
+- 共用裝置上的搜尋紀錄、地圖紀錄、通訊紀錄可能會被檢視，準備一台對方不知情的裝置作為求助管道（公共圖書館電腦、信任親友的裝置都可以）
+- 共用家庭方案的雲端、定位（Find My、Google Family）可能讓對方看到你的位置，先確認再決定要不要離開
 - 加害者偶爾會在當事人裝置上偷裝追蹤類 App。如果離開後仍感覺位置被掌握，請就近警察局或保護專線協助檢測
 - 詳細流程請見 [家暴倖存者的數位準備](../scenarios/domestic-violence.md)（撰寫中）
 
@@ -105,8 +105,8 @@ icon: material/lifebuoy
 
 情境差異大，列出常見的應對方向：
 
-- **特定網站打不開**：先用 OONI Probe 或 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 確認是個別封鎖還是區域問題；可參考 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 看 TW 的觀測現況
-- **整個家用網路被中斷**：先確認是否電信端的問題（撥打 ISP 客服）；如果懷疑是針對性處置，記錄時間、IP、服務名稱與訊息截圖
+- **特定網站打不開**：先用 OONI Probe 或 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 確認是個別封鎖還是區域問題，可參考 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 看 TW 的觀測現況
+- **整個家用網路被中斷**：先確認是否電信端的問題（撥打 ISP 客服）。如果懷疑是針對性處置，記錄時間、IP、服務名稱與訊息截圖
 - **跨境連線受限**：嘗試 Tor Browser 與內建橋接（obfs4、Snowflake、meek-azure）。橋接點建立可參考 [Tor Snowflake](../tools/tor-snowflake.md)
 - **完全無法連上 Tor**：透過電子郵件（[bridges@torproject.org](mailto:bridges@torproject.org)）申請非公開橋接
 
