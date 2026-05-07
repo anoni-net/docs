@@ -12,6 +12,7 @@ icon: material/account-group-outline
 
 - [記者保護消息來源](./journalist.md)：第一次接觸、確認身分、檔案交換、訪談紀錄、報導刊出後的整理。
 - [社運行動者的數位準備](./activist.md)：動員前準備、行動現場、行動之後、跨組織協作的逐步建議。
+- [倡議組織的匿名捐款管道](./nonprofit-anonymous-donation.md)：給組織方與捐款人雙角色的合法匿名捐款流程，含台灣公益勸募條例、政治獻金法、VASP 與稅務脈絡。
 
 ## 籌備中
 
@@ -20,7 +21,6 @@ icon: material/account-group-outline
 - **家暴受害者的數位準備**：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
 - **LGBTQ+ 與性少數的匿名社交**：在不友善環境中保留連結的方式（[issue #34](https://github.com/anoni-net/docs/issues/34)）
 - **選舉觀察員的自保**：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）
-- **倡議組織的匿名捐款**：與 2026 三大主題之一「匿名支付」對齊，含法規、收款管道、後續處理（[issue #36](https://github.com/anoni-net/docs/issues/36)）
 
 整體進度與認領狀況見 [scenarios/ 上線時抽掉的文章追蹤](https://github.com/anoni-net/docs/issues/37)。
 
