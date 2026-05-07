@@ -37,5 +37,5 @@ icon: material/message-text
 
 ---
 
-**延伸阅读**：想了解我们为什么自架 Matrix、以及如何兼顾隐私与社群品质，可参考 [从 Discord 年龄验证谈起：我们为什么自架 Matrix](../../blog/posts/2026-discord-matrix-statement.md)。
+**延伸阅读**：想了解我们为什么自架 Matrix、以及如何兼顾隐私与社群品质，可参考 [从 Discord 年龄验证谈起：我们为什么自架 Matrix](../blog/posts/2026-discord-matrix-statement.md)。
 

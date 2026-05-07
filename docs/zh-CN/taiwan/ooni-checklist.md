@@ -1,5 +1,6 @@
 ---
 title: OONI 网站检测清单
+description: OONI Probe 在台湾使用的网站检测清单怎么维护，以及社群如何协助分类与更新。
 icon: material/list-status
 ---
 # :material-list-status: OONI 网站检测清单
@@ -54,8 +55,8 @@ icon: material/list-status
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 什么是 OONI？](./what-is-ooni.md)
-- [:material-chat-question: 网络自由为什么重要？](./internet-freedom-matter.md)
-- [:octicons-mark-github-24: 项目研究预先准备](./setup-repo.md)
+- [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
+- [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
+- [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 
 </div>

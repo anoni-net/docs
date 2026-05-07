@@ -27,16 +27,16 @@ icon: octicons/paste-24
     - [ ] 我能够说明不同地区在网络自由上的差异，并举出具体事例。
 
     ??? tip "还没到这个程度？从这里开始"
-        1. 阅读「[什么是 Tor？](./what-is-tor.md){target="_blank"}」（约 5–10 分钟）
-        2. 阅读「[什么是匿名网络？](./what-is-anonymous-network.md){target="_blank"}」
-        3. 阅读「[网络自由为什么重要？](./internet-freedom-matter.md){target="_blank"}」
+        1. 阅读「[什么是 Tor？](../tools/what-is-tor.md){target="_blank"}」（约 5–10 分钟）
+        2. 阅读「[什么是匿名网络？](../tools/what-is-anonymity-network.md){target="_blank"}」
+        3. 阅读「[网络自由为什么重要？](../basics/internet-freedom.md){target="_blank"}」
         4. 完成后回来勾选清单，确认自己的理解。
 
     !!! abstract "参考说明"
 
         ??? question "Tor 的运作原理。"
 
-            可以先从「[什么是 Tor？](./what-is-tor.md){target="_blank"}」章节开始了解。
+            可以先从「[什么是 Tor？](../tools/what-is-tor.md){target="_blank"}」章节开始了解。
 
             Tor 通常指「洋葱路由（The Onion Router）」，通过三层节点将网络连接随机转送到三台主机进出。「Tor 浏览器」是 Tor 团队利用开源浏览器 Firefox ESR 针对洋葱网络所设计的，方便连接 `.onion` 结尾的网站。
 
@@ -50,7 +50,7 @@ icon: octicons/paste-24
 
         ??? question "网络自由为何重要？匿名网络是什么？"
 
-            可以先从「[网络自由为什么重要？](./internet-freedom-matter.md){target="_blank"}」章节开始了解。
+            可以先从「[网络自由为什么重要？](../basics/internet-freedom.md){target="_blank"}」章节开始了解。
 
             :octicons-question-24: **补充说明**
 
@@ -176,9 +176,9 @@ icon: octicons/paste-24
 
     ??? tip "还没到这个程度？从这里开始"
         1. 先完成「实践」层的所有项目。
-        2. 阅读「[如何搭建 Tor Relay](./setup-tor-relay.md){target="_blank"}」，了解中继站的安装与设置流程。
-        3. 参考「[Tor Relays 观测点](./watcher-tor-relays.md){target="_blank"}」，了解如何观察中继站的运作状况。
-        4. 参考「[Tor Snowflake](./tor-snowflake.md){target="_blank"}」，了解如何通过浏览器或独立程序提供 Snowflake 桥接。
+        2. 阅读「[如何搭建 Tor Relay](../community/setup-tor-relay.md){target="_blank"}」，了解中继站的安装与设置流程。
+        3. 参考「[Tor Relays 观测点](../taiwan/tor-relay-watcher.md){target="_blank"}」，了解如何观察中继站的运作状况。
+        4. 参考「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」，了解如何通过浏览器或独立程序提供 Snowflake 桥接。
 
     !!! abstract "参考说明"
 
@@ -194,7 +194,7 @@ icon: octicons/paste-24
 
             1. 在 Chrome 或 Firefox 安装 [Snowflake 扩展套件](https://snowflake.torproject.org/){target="_blank"}。
             2. 安装后会自动运作。你可以在扩展套件图示上查看目前转发的连接数量。
-            3. 可参考项目页面「[Tor Snowflake](./tor-snowflake.md){target="_blank"}」的详细说明。
+            3. 可参考项目页面「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」的详细说明。
 
         ??? question "启动 Tor 服务并通过 SOCKS v5 方式连接。"
 
@@ -211,13 +211,13 @@ icon: octicons/paste-24
 
             1. 前往 [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"}，可依国家、名称或 Fingerprint 搜索中继点。
             2. 以台湾（TW）为例，可在「Advanced options」中选择 Country: TW，查看目前运作中的中继站清单。
-            3. 也可以在「[Tor Relays 观测点](./watcher-tor-relays.md){target="_blank"}」页面查看本项目整理的可视化观测数据。
+            3. 也可以在「[Tor Relays 观测点](../taiwan/tor-relay-watcher.md){target="_blank"}」页面查看本项目整理的可视化观测数据。
 
         ??? question "建立并维护 Tor Relay 中继点。"
 
             建立 Tor Relay 需要具备 Linux 基本操作能力，以及一台具有固定 IP 和稳定带宽的服务器。
 
-            完整的安装与设置步骤请参考「[如何搭建 Tor Relay](./setup-tor-relay.md){target="_blank"}」，其中涵盖：
+            完整的安装与设置步骤请参考「[如何搭建 Tor Relay](../community/setup-tor-relay.md){target="_blank"}」，其中涵盖：
 
             - Middle Relay 的安装与设置（`/etc/tor/torrc`）
             - Bridge 桥接点的建立
@@ -242,7 +242,7 @@ icon: octicons/paste-24
     - [ ] 我能够描述自己所在地区的网络自由现况。（与 Tor 了解层相同）
 
     ??? tip "还没到这个程度？从这里开始"
-        1. 阅读「[什么是 Tails？](./what-is-tails.md){target="_blank"}」（约 5–10 分钟）
+        1. 阅读「[什么是 Tails？](../tools/what-is-tails.md){target="_blank"}」（约 5–10 分钟）
         2. 「网络自由」与「匿名网络」的背景知识与 Tor 了解层相同，可先完成「[Tor 了解](#Tor-技能分级)」再回来继续。
         3. 完成后回来勾选清单，确认自己的理解。
 
@@ -250,13 +250,13 @@ icon: octicons/paste-24
 
         ??? question "Tails 是什么，以及它的运作原理。"
 
-            可以先从「[什么是 Tails？](./what-is-tails.md){target="_blank"}」章节开始了解。
+            可以先从「[什么是 Tails？](../tools/what-is-tails.md){target="_blank"}」章节开始了解。
 
             Tails 是一个以安全为核心设计的可携式操作系统，从 USB 随身碟开机后运行于内存中，不在你使用的电脑上留下任何痕迹。所有对外的网络连接默认通过 Tor 网络传输。
 
         ??? question "网络自由为何重要？匿名网络是什么？"
 
-            这部分的背景知识与 Tor 了解层相同，请参考「[Tor 了解](#Tor-技能分级)」中的对应说明，以及「[网络自由为什么重要？](./internet-freedom-matter.md){target="_blank"}」章节。
+            这部分的背景知识与 Tor 了解层相同，请参考「[Tor 了解](#Tor-技能分级)」中的对应说明，以及「[网络自由为什么重要？](../basics/internet-freedom.md){target="_blank"}」章节。
 
         ??? question "你所在地区的网络自由现况如何？"
 
@@ -387,7 +387,7 @@ icon: octicons/paste-24
         ??? question "通过 Thunderbird 寄送加密邮件。"
 
             - 完成 GnuPG 密钥建立与 Thunderbird 设置后，可以尝试向本项目的加密邮件地址 `whisper@anoni.net` 寄送加密邮件。
-            - 取得 `whisper@anoni.net` 的公开密钥，请参考「[持续关注](./contact.md){target="_blank"}」页面。
+            - 取得 `whisper@anoni.net` 的公开密钥，请参考「[持续关注](../contact.md){target="_blank"}」页面。
             - 在 Thunderbird 撰写邮件，选择加密后寄出，收件方会使用其私钥解密。
 
 ## OONI 技能分级
@@ -402,15 +402,15 @@ icon: octicons/paste-24
     - [ ] 我能够描述不同地区在网络监视与审查上的差异。
 
     ??? tip "还没到这个程度？从这里开始"
-        1. 阅读「[什么是 OONI？](./what-is-ooni.md){target="_blank"}」（约 5–10 分钟）
-        2. 阅读「[网络自由为什么重要？](./internet-freedom-matter.md){target="_blank"}」
+        1. 阅读「[什么是 OONI？](../tools/what-is-ooni.md){target="_blank"}」（约 5–10 分钟）
+        2. 阅读「[网络自由为什么重要？](../basics/internet-freedom.md){target="_blank"}」
         3. 完成后回来勾选清单，确认自己的理解。
 
     !!! abstract "参考说明"
 
         ??? question "OONI 是什么。"
 
-            可以先从「[什么是 OONI？](./what-is-ooni.md){target="_blank"}」章节开始了解。
+            可以先从「[什么是 OONI？](../tools/what-is-ooni.md){target="_blank"}」章节开始了解。
 
         ??? question "网络监视（surveillance）与网络审查（censorship）的差异。"
 
@@ -420,7 +420,7 @@ icon: octicons/paste-24
         ??? question "OONI 的检测运作方式。"
 
             - OONI 提供免费的开源工具 OONI Probe，用户可在自己的网络环境执行测试，检测网络是否被审查。
-            - OONI Probe 会定期发送请求至多个网站和服务，确认[名单上](./ooni-weblists.md){target="_blank"}的网站是否可以正常访问。
+            - OONI Probe 会定期发送请求至多个网站和服务，确认[名单上](../taiwan/ooni-checklist.md){target="_blank"}的网站是否可以正常访问。
             - 测试结果会匿名上传到 OONI 的数据服务器，并在 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} 上公开，供研究者和公众使用。
 
         ??? question "不同地区在网络监视与审查上的差异。"
@@ -429,7 +429,7 @@ icon: octicons/paste-24
             - **中国大陆**：执行严格的网络封锁和审查政策，通称「防火长城（Great Firewall）」，限制访问许多外国网站和服务。
             - **北韩**：对网络访问进行极端限制，仅允许极少数精选内容。
             - **俄罗斯、伊朗**：进行不同程度的网络监控和网站封锁。
-            - 可参考「[网络自由为什么重要？](./internet-freedom-matter.md){target="_blank"}」章节。
+            - 可参考「[网络自由为什么重要？](../basics/internet-freedom.md){target="_blank"}」章节。
 
 === ":material-checkbox-marked-circle-outline: 实践"
 
@@ -472,7 +472,7 @@ icon: octicons/paste-24
 
             - ASN 是用于识别自治网络（AS）的唯一识别码。
             - 自治网络是由一个或多个网络服务提供者（ISP）或大型企业管理的一组 IP 地址区块。每个 AS 通过 ASN 在互联网上互相通讯，交换路由信息。
-            - 可参考「[ASNs 自治网络观测数据分析](./ooni-asns-coverage.md){target="_blank"}」中的介绍。
+            - 可参考「[ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md){target="_blank"}」中的介绍。
 
         ??? question "通过 OONI Explorer 整理特定国家近期的观测数据。"
 
@@ -514,8 +514,8 @@ icon: octicons/paste-24
 
     ??? tip "还没到这个程度？从这里开始"
         1. 先完成「实践」层的所有项目。
-        2. 阅读「[OONI 网站检测清单](./ooni-weblists.md){target="_blank"}」，了解名单的收录方式与现况。
-        3. 阅读「[ASNs 自治网络观测数据分析](./ooni-asns-coverage.md){target="_blank"}」，了解原始数据的分析方式。
+        2. 阅读「[OONI 网站检测清单](../taiwan/ooni-checklist.md){target="_blank"}」，了解名单的收录方式与现况。
+        3. 阅读「[ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md){target="_blank"}」，了解原始数据的分析方式。
         4. 前往 [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} GitHub 项目，浏览各国的名单格式。
 
     !!! abstract "参考说明"
@@ -538,7 +538,7 @@ icon: octicons/paste-24
 
             名单的收录分为四大类别：政治、社会、冲突与安全、互联网工具。
 
-            可参考「[OONI 网站检测清单](./ooni-weblists.md){target="_blank"}」了解更多。
+            可参考「[OONI 网站检测清单](../taiwan/ooni-checklist.md){target="_blank"}」了解更多。
 
         ??? question "如何协助整理与更新名单。"
 
@@ -547,7 +547,7 @@ icon: octicons/paste-24
             1. 前往 [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 找到对应地区的 CSV 文件（如 `lists/tw.csv`）。
             2. 逐一检查名单中的网址，标记需更新（网址失效、已更换域名）或可弃用（网站已停止营运）的项目。
             3. 修改完成后，提交 Pull Request 请求更新。
-            4. 详细流程可参考「[OONI 网站检测清单](./ooni-weblists.md){target="_blank"}」中的说明。
+            4. 详细流程可参考「[OONI 网站检测清单](../taiwan/ooni-checklist.md){target="_blank"}」中的说明。
 
         ??? question "通过原始观测数据进行分析。"
 
@@ -555,5 +555,5 @@ icon: octicons/paste-24
 
             1. 数据存放于 S3 bucket `ooni-data-eu-fra`（eu-central-1 区域）。
             2. 格式为 `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`。
-            3. 本项目的 [ASN 涵盖分析工具](./ooni-asns-coverage.md){target="_blank"} 提供了下载与分析的范例，可参考 `asn_coverage/ooni.py` 的实作方式。
+            3. 本项目的 [ASN 涵盖分析工具](../taiwan/ooni-asn-coverage.md){target="_blank"} 提供了下载与分析的范例，可参考 `asn_coverage/ooni.py` 的实作方式。
             4. 原始数据可用于分析特定 ASN 的观测涵盖率、追踪特定网站在不同时间点的封锁状态，以及进行跨地区比较。

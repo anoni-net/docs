@@ -6,7 +6,7 @@ icon: material/chat-question
 
 # :material-chat-question: 网络自由为什么重要？
 
-在这里，**网络自由**指的是：人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](./what-is-anonymous-network.md)。
+在这里，**网络自由**指的是：人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](../tools/what-is-anonymity-network.md)。
 
 除了政府封锁与大规模监控，跨境平台规则、账号处置、算法可见度与数据留存，也会塑造谁能说话、谁能被看见。多地的诽谤、国安或信息治理相关法规争议，则带来制度性的寒蝉效应。在中国的情境下，网络连线与内容可见度常受到多层过滤与平台治理的影响，账号处置与数据留存也会让表达与获取信息面临更高的不确定性。对想要参与公共讨论的人而言，这些因素会直接影响「网络自由是否稳固」。
 
@@ -66,10 +66,10 @@ icon: material/chat-question
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 什么是匿名网络？](./what-is-anonymous-network.md)
-- [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 网站检测列表](./ooni-weblists.md)
-- [:material-translate-variant: 中文化与文件翻译](./ooni-i18n.md)
+- [:material-chat-question: 什么是匿名网络？](../tools/what-is-anonymity-network.md)
+- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 网站检测列表](../taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>
 

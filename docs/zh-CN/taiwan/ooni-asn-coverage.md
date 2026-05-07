@@ -1,5 +1,6 @@
 ---
 title: ASNs 自治网络观测数据分析
+description: 台湾各 ASN 的 OONI 观测覆盖率分析，从盲点看哪些电信商与网络系统需要更多测试。
 icon: material/access-point-network
 ---
 
@@ -165,7 +166,7 @@ python3 ./ripe.py save --loc=TW
 
 <div class="grid cards" markdown>
 
-- [:octicons-mark-github-24: 项目研究预先准备](./setup-repo.md)
-- [:material-chat-question: 什么是 OONI？](./what-is-ooni.md)
+- [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
+- [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 
 </div>

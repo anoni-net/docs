@@ -24,7 +24,7 @@ icon: material/chat-question
 
 匿名网络提供了一条具体的应对路径。透过技术工具的组合，让人们在受限的环境中仍能维持隐私与连线能力，同时把干预行为留下可被查验的记录。
 
-关于亚洲地区的网络自由现况，可以从这里进一步了解：[网络自由为什么重要？](./internet-freedom-matter.md)
+关于亚洲地区的网络自由现况，可以从这里进一步了解：[网络自由为什么重要？](../basics/internet-freedom.md)
 
 ## 不同参与者为何会用到 {#stakeholders-why}
 
@@ -46,7 +46,7 @@ icon: material/chat-question
 
 匿名网络仰赖可检验的代码与可重复构建的流程，基础建设的维护与贡献本身就是让他人能安全连接、并看见干预是否发生的一环。参与 Tor 中继、Snowflake 桥接、OONI 测试与文档翻译等工作，能把个别使用者的需求，连回整体网络的韧性与可观测性。
 
-若要从区域脉络与制度压力理解审查、监控与平台规则如何影响上述工作，可接着阅读 [网络自由为什么重要？](./internet-freedom-matter.md)。
+若要从区域脉络与制度压力理解审查、监控与平台规则如何影响上述工作，可接着阅读 [网络自由为什么重要？](../basics/internet-freedom.md)。
 
 ## 工具如何各司其职
 
@@ -58,19 +58,19 @@ icon: material/chat-question
 
     透过多层加密与随机路径，使使用者的 IP 位址与行为难以被追踪。Tor 也支持 .onion 服务，让连线本身在网络上几乎不可见。
 
-    [:fontawesome-regular-circle-question: 什么是 Tor？](./what-is-tor.md)
+    [:fontawesome-regular-circle-question: 什么是 Tor？](../tools/what-is-tor.md)
 
 - **:simple-tails: Tails — 以隐私为设计前提的使用环境**
 
     一个从 USB 随身碟启动的作业系统，关机后不留任何使用痕迹，且流量预设透过 Tor 路由。Tails 把匿名与隐私的要求内建到整个使用环境中。
 
-    [:fontawesome-regular-circle-question: 什么是 Tails？](./what-is-tails.md)
+    [:fontawesome-regular-circle-question: 什么是 Tails？](../tools/what-is-tails.md)
 
 - **:material-access-point-network: OONI — 让网络干预可被观测**
 
     提供开放的测试工具与公开数据，让任何人都能侦测并记录特定网站或服务是否被封锁或降速。OONI 把审查行为转化为可被验证的公开数据，每一笔侦测结果都留有记录可查。
 
-    [:fontawesome-regular-circle-question: 什么是 OONI？](./what-is-ooni.md)
+    [:fontawesome-regular-circle-question: 什么是 OONI？](../tools/what-is-ooni.md)
 
 </div>
 
@@ -82,15 +82,15 @@ icon: material/chat-question
 - **Tor Relay 校园建立**：在台湾各大学推动中继节点部署，让本地带宽成为全球 Tor 网络的一部分，强化整体基础建设的韧性。
 - **匿名支付**：探索现金以外情境下的匿名支付可能性，含法规、稳定币与区块链应用等面向，补齐匿名实践中常被忽略的一块。
 
-这三个方向的完整说明，可以在[社区参与页面](./about/community/index.md)与 [2026 年度规划](./blog/posts/2025to2026.md)中找到。
+这三个方向的完整说明，可以在[社区参与页面](../community/index.md)与 [2026 年度规划](../blog/posts/2025to2026.md)中找到。
 
 ## :fontawesome-solid-diagram-project: 继续深入
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 网络自由为什么重要？](./internet-freedom-matter.md)
-- [:simple-torproject: 什么是 Tor？](./what-is-tor.md)
-- [:simple-tails: 什么是 Tails？](./what-is-tails.md)
-- [:material-access-point-network: 什么是 OONI？](./what-is-ooni.md)
+- [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
+- [:simple-torproject: 什么是 Tor？](../tools/what-is-tor.md)
+- [:simple-tails: 什么是 Tails？](../tools/what-is-tails.md)
+- [:material-access-point-network: 什么是 OONI？](../tools/what-is-ooni.md)
 
 </div>

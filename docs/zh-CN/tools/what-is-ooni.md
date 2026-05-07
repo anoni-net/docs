@@ -97,7 +97,7 @@ OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 网络自由为什么重要？](./internet-freedom-matter.md)
+- [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
 
 </div>
 
@@ -105,8 +105,8 @@ OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 网站检测列表](./ooni-weblists.md)
-- [:material-translate-variant: 中文化与文件翻译](./ooni-i18n.md)
+- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 网站检测列表](../taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

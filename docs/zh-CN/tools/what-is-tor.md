@@ -5,7 +5,7 @@ icon: material/chat-question
 
 ---
 
-# 什么是 Tor？
+# :material-chat-question: 什么是 Tor？
 
 <figure markdown="span">
     <a target="_blank"
@@ -63,14 +63,14 @@ icon: material/chat-question
 
 ## 如何参与 Relay 建立
 
-如何建立 Tor Relay 提供 Tor 网络节点与带宽，可以参考「[如何搭建 Tor Relay](./setup-tor-relay.md)」。
+如何建立 Tor Relay 提供 Tor 网络节点与带宽，可以参考「[如何搭建 Tor Relay](../community/setup-tor-relay.md)」。
 
 ## :material-chat-question: 一同了解
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 网络自由为什么重要？](./internet-freedom-matter.md)
-- [:material-chat-question: 如何搭建 Tor Relay](./setup-tor-relay.md)
+- [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
+- [:material-chat-question: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 
 </div>
 
@@ -78,8 +78,8 @@ icon: material/chat-question
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 网站检测列表](./ooni-weblists.md)
-- [:material-translate-variant: 中文化与文件翻译](./ooni-i18n.md)
+- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 网站检测列表](../taiwan/ooni-checklist.md)
+- [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>
