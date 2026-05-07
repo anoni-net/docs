@@ -1,6 +1,5 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
 exclude_docs: |
-  scenarios/activist.md
   scenarios/domestic-violence.md
   scenarios/lgbtq.md
   scenarios/election-observer.md
@@ -44,6 +43,7 @@ nav:
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/journalist.md
+          - scenarios/activist.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
           - advanced/e2ee.md

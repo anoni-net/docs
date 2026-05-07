@@ -11,12 +11,12 @@ icon: material/account-group-outline
 ## 已上線
 
 - [記者保護消息來源](./journalist.md)：第一次接觸、確認身分、檔案交換、訪談紀錄、報導刊出後的整理。
+- [社運行動者的數位準備](./activist.md)：動員前準備、行動現場、行動之後、跨組織協作的逐步建議。
 
 ## 籌備中
 
 下列場景的文章正在規劃，以下是大綱方向。如果你身在這些情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
 
-- **社運行動者的數位準備**：動員前、行動中、被盤查時的逐步建議（[issue #32](https://github.com/anoni-net/docs/issues/32)）
 - **家暴受害者的數位準備**：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
 - **LGBTQ+ 與性少數的匿名社交**：在不友善環境中保留連結的方式（[issue #34](https://github.com/anoni-net/docs/issues/34)）
 - **選舉觀察員的自保**：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）
