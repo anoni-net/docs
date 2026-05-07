@@ -90,6 +90,9 @@ theme:
     - content.code.copy
 extra:
   alternate:
+    - name: 简体中文（zh-CN）
+      link: /docs/zh-cn/
+      lang: zh-CN
     - name: 臺灣正體（zh-TW）
       link: /docs/zh-tw/
       lang: zh-TW

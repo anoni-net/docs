@@ -88,6 +88,9 @@ theme:
     - content.code.copy
 extra:
   alternate:
+    - name: English (en-US)
+      link: /docs/en/
+      lang: en
     - name: 臺灣正體（zh-TW）
       link: /docs/zh-tw/
       lang: zh-TW
