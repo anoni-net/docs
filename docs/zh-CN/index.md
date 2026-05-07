@@ -1,62 +1,147 @@
 ---
 title: 首页
 icon: material/home-circle
+hide:
+  - navigation
+  - toc
 ---
 
-# 匿名网络社群
+# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> 匿名网络社群 anoni.net
 
-在这个数字时代迅速发展的背景下，网络已成为我们生活中不可或缺的一部分。然而，随着网络的普及，个人隐私和网络自由面临前所未有的挑战。在台湾，我们希望借由推广**匿名网络**与**网络自由**的概念，唤起社会大众对这些重要议题的重视。
+> 推广 Tor、Tails、OONI，串连台湾的网络自由实践与在地观测。
 
-我们计划使用 Tor、Tails 和 OONI 等开源匿名工具，增强在网络上的匿名性与安全性，也希望**新闻媒体**、**独立记者**、**公民团体**与**开源科技社区**有更多机会协作与交流。
+[:material-account-group: 认识社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 订阅电子报](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](./feed_rss_created.xml){ .md-button }
 
-我们特别关注这几类参与者，是因为他们在实务上往往要同时面对消息来源与成员的保护、跨境查证时能否顺利连线，以及能否用开放观测把封锁、降速或施压说清楚。
+## :material-account-multiple-outline: 我们是谁、为谁写
 
-- **新闻媒体**：降低采编过程中身份与流量被比对、追踪的风险，并在连线受阻时仍能查证与对外说明。
-- **独立记者**：在信息安全与法律支援有限时，更依赖匿名网络与以隐私为重的使用环境来完成调查与联系。
-- **公民团体**：在倡议与联络对象需要保护、官网与社群账号等组织网站服务也可能成为被锁定的对象。
-- **开源科技社区**：透过中继（Relay）、测试与文档翻译等贡献，强化匿名网络基础建设的可用性。
+<div class="grid cards" markdown>
 
-更完整的说明见[什么是匿名网络？各参与者为何会用到](./what-is-anonymous-network.md#stakeholders-why)。我们期待与你讨论、研拟对应的做法，提升隐私保护与匿名的能力在日常的事务与组织中。
+- :material-account-group-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我们是谁**
 
-!!! tip "重要信息"
+    ---
 
-    - `新增`{style="color: DodgerBlue;"}：[OONI 新版 Probe Desktop 测试邀请](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
-    - `活动`{style="color: OrangeRed;"}：[COSCUP 2026 公开征稿](./activity/coscup-2026-cfp.md) - 2026/04/08
-    - `新增`{style="color: DodgerBlue;"}：[2026/03 社区近况更新](./blog/posts/updates-202603.md) - 2026/03/29
-    - `更新`{style="color: SeaGreen;"}：[Tor Project 客座文章：在台师大架设 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
-    - `新增`{style="color: DodgerBlue;"}：[2026 社区参与：个人隐私指引、Tor Relay 校园建设、匿名支付](./about/community/index.md) - 2026/01/02
-    - `新增`{style="color: DodgerBlue;"}：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](./blog/posts/ntnu-nz.md) - 2025/12/30
-    - `活动`{style="color: OrangeRed;"}：「[网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会](./blog/posts/internetfreedom-oct2025.md)」- 2025/10/18
+    一群关注匿名网络、隐私与网络自由的在地社群成员。长期推广 Tor、Tails、OONI 等开源工具，并与 EFF、Tor Project、OONI 等国际组织合作，把全球议题带回台湾脉络讨论。
+
+- :material-target:{ .lg .middle style="color: var(--brand-cyan-500);" } **我们在做什么**
+
+    ---
+
+    维运在地的网络观测（OONI 检测清单、ASN 覆盖分析、Tor Relay 观测）、追踪台湾个资与加密支付法规动态、举办工作坊与社群小聚，并翻译国际研究报告。所有产出都以 [anoni.net Docs](./guides/index.md) 为文件中心。
+
+- :material-account-supervisor-circle-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我们为谁写**
+
+    ---
+
+    新闻媒体、独立记者、公民团体、开源科技社群。这些参与者实务上常面对消息来源保护、跨境查证与封锁规避的挑战，匿名网络与隐私工具能补足现有制度的缺口。完整说明见 [什么是匿名网络？各参与者为何会用到](./tools/what-is-anonymity-network.md#stakeholders-why)。
+
+</div>
+
+## :material-flag-checkered: 2026 三大主题
+
+<div class="grid cards" markdown>
+
+- :material-shield-lock-outline:{ .lg .middle style="color: var(--cat-privacy);" } **个人隐私指引**
+
+    ---
+
+    整理可实际操作的隐私保护指引，依情境（日常、敏感工作、高风险）提供工具与步骤，搭配威胁模型评估。
+
+    [:octicons-arrow-right-24: 研究专题](./community/privacy-guide.md)
+
+- :material-server-network:{ .lg .middle style="color: var(--cat-relay);" } **Tor Relay 校园建立**
+
+    ---
+
+    与 EFF、Tor Project 合作推动校园中继节点。台师大已有成功案例，目标整理申请流程与活动企划供其他学校参考。
+
+    [:octicons-arrow-right-24: 研究专题](./community/relay-on-campus.md)
+
+- :material-cash-multiple:{ .lg .middle style="color: var(--cat-payments);" } **匿名支付**
+
+    ---
+
+    探索现金以外情境下的匿名支付（稳定币、区块链应用），含法规（VASP 法 2026）、技术与实作面向。
+
+    [:octicons-arrow-right-24: 研究专题](./community/payments-research.md)
+
+</div>
+
+## :material-rocket-launch-outline: 从这里开始
+
+<div class="grid cards" markdown>
+
+- :material-compass-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **指南**
+
+    ---
+
+    从概念、工具、场景到进阶与报告，5 个阅读层次。
+
+    [:octicons-arrow-right-24: 五个层次](./guides/index.md)
+
+- :material-island:{ .lg .middle style="color: var(--brand-cyan-500);" } **在地脉络**
+
+    ---
+
+    台湾的网络观测、个资法、VASP 法、揭弊者保护法。
+
+    [:octicons-arrow-right-24: 切入观察](./taiwan/index.md)
+
+- :material-account-group:{ .lg .middle style="color: var(--brand-cyan-500);" } **社群参与**
+
+    ---
+
+    2026 三大主题、如何加入、Matrix 与协作工具。
+
+    [:octicons-arrow-right-24: 加入我们](./community/index.md)
+
+- :material-lifebuoy:{ .lg .middle style="color: var(--accent-emergency);" } **紧急求救**
+
+    ---
+
+    账号被盗、装置遗失、跟踪骚扰的紧急应对。
+
+    [:octicons-arrow-right-24: 取得协助](./help/index.md)
+
+</div>
+
+## :material-account-supervisor-outline: 我们关注的参与者
+
+<div class="grid cards" markdown>
+
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--neutral-muted);" } **新闻媒体**
+
+    ---
+
+    降低采编过程中身分与流量被比对、追踪的风险，连线受阻时仍能查证与对外说明。
+
+- :material-account-edit-outline:{ .lg .middle style="color: var(--neutral-muted);" } **独立记者**
+
+    ---
+
+    在信息安全与法律支援有限时，更仰赖匿名网络与以隐私为重的使用环境完成调查与联系。
+
+- :material-account-group-outline:{ .lg .middle style="color: var(--neutral-muted);" } **公民团体**
+
+    ---
+
+    倡议与联络对象需要保护，官网、社群账号等组织服务也可能成为被锁定的对象。
+
+- :material-source-branch:{ .lg .middle style="color: var(--neutral-muted);" } **开源科技社群**
+
+    ---
+
+    通过中继（Relay）、测试与文件翻译等贡献，强化匿名网络基础建设的可用性。
+
+</div>
+
+## :material-bullhorn-outline: 近期公告
+
+!!! tip "最新动态"
+
+    - `新增`{style="color: var(--brand-cyan-600);"}：[OONI 新版 Probe Desktop 测试邀请](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
+    - `活动`{style="color: var(--accent-action);"}：[COSCUP 2026 公开征稿](./activity/coscup-2026-cfp.md) - 2026/04/08
+    - `新增`{style="color: var(--brand-cyan-600);"}：[2026/03 社群近况更新](./blog/posts/updates-202603.md) - 2026/03/29
+    - `更新`{style="color: var(--cat-privacy);"}：[Tor Project 客座文章：在台师大架设 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
+    - `新增`{style="color: var(--brand-cyan-600);"}：[2026 社群参与：个人隐私指引、Tor Relay 校园建立、匿名支付](./community/index.md) - 2026/01/02
 
     更多公告请见 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
-
-## :material-chat-question: 认识匿名网络
-
-<div class="grid cards" markdown>
-
-- [:material-chat-question: 什么是 OONI？](./what-is-ooni.md)
-- [:material-chat-question: 网络自由为什么重要？](./internet-freedom-matter.md)
-- [:material-chat-question: 什么是 Tor？](./what-is-tor.md)
-- [:material-chat-question: 什么是 Tails？](./what-is-tails.md)
-
-</div>
-
-## :fontawesome-solid-diagram-project: 参与项目
-
-<div class="grid cards" markdown>
-
-- [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asns-coverage.md)
-- [:material-list-status: OONI 网站检测列表](./ooni-weblists.md)
-- [:material-translate-variant: 中文化与文件翻译](./ooni-i18n.md)
-- [:octicons-mark-github-24: 项目研究预先准备](./setup-repo.md)
-
-</div>
-
-## :material-update: 持续追踪进度
-
-<div class="grid cards" markdown>
-
-- [:material-bullhorn-outline: 近期公告](./blog/index.md)
-- [:material-email-fast-outline: 订阅邮件群组](./contact.md)
-
-</div>
