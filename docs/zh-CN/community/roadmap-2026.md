@@ -57,7 +57,7 @@ icon: material/road-variant
 
 ### 研究与报告翻译
 
-2025 年下半年完成了 [InterSecLab 网络长城技术输出研究](../reports/interseclab-network-coup/index.md) 的中译与分享。2026 年会持续挑选对在地有参考价值的国际报告进行翻译与注释，并以「[严选报告](../reports/index.md)」分类沉淀。
+2025 年下半年完成了 [InterSecLab 网络长城技术输出研究](https://anoni.net/docs/zh-tw/reports/interseclab-network-coup/){target="_blank"} 的中译与分享（中译版仅在 zh-TW 维护）。2026 年会持续挑选对在地有参考价值的国际报告进行翻译与注释，并以「[严选报告](../reports/index.md)」分类沉淀。
 
 ### 外部活动参与
 

@@ -34,7 +34,7 @@ description: "快速回顾，国家级的监控，我们还可以采取怎样的
 
 报告中[提到](https://anoni.net/docs/report/interseclab-the-internet-coup/index_7/){target="_blank"}，目前常见的 VPN 协议都可以被识别和阻挡，但 Tor 桥接类型中的 WebTunnel 目前尚无法有效阻挡。由于数据泄露的时间在 2024 年 12 月左右，经过 10 个月后，不确定防火长城的技术是否仍然无法阻挡。此外，与 WebTunnel 类似通过流量伪装 Tor 连接的 Snowflake 也可以规避封包检测。
 
-在当晚的活动中，我们快速向大家介绍了 [Snowflake](../../tor-snowflake.md){target="_blank"}。只需通过浏览器插件，开启后建立一个类似视频会议流的连接，就可以通过浏览器搭建一个 Tor 桥接点，帮助无法使用 Tor 的地区通过你的桥接中继点连接到洋葱网络。对于有技术能力的参与者，我们建议可以通过 Tor 官方打包的 [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}（Docker），建立一个类似浏览网页的行为，提供一个[桥接中继点](../../what-is-tor.md){target="_blank"}。
+在当晚的活动中，我们快速向大家介绍了 [Snowflake](../../tools/tor-snowflake.md){target="_blank"}。只需通过浏览器插件，开启后建立一个类似视频会议流的连接，就可以通过浏览器搭建一个 Tor 桥接点，帮助无法使用 Tor 的地区通过你的桥接中继点连接到洋葱网络。对于有技术能力的参与者，我们建议可以通过 Tor 官方打包的 [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/docker/){target="_blank"}（Docker），建立一个类似浏览网页的行为，提供一个[桥接中继点](../../tools/what-is-tor.md){target="_blank"}。
 
 ## 采取行动
 

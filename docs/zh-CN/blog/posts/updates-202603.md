@@ -43,11 +43,11 @@ Tor Project 官方网站 Blog 文章 [Setting up a Tor Relay at a university in 
 
 ### 参与我们
 
-如果你对「隐私保护」、「校园 Tor Relay 建设」或「匿名支付」等主题有兴趣，欢迎加入我们一起协作。社区目前整理了 2026 年的主题方向与参与方式，你可以先从[这里了解](../../about/community/participate.md)有哪些议题最想投入。
+如果你对「隐私保护」、「校园 Tor Relay 建设」或「匿名支付」等主题有兴趣，欢迎加入我们一起协作。社区目前整理了 2026 年的主题方向与参与方式，你可以先从[这里了解](../../community/how-to-contribute.md)有哪些议题最想投入。
 
 不需要等到活动现场才参与，平时就能从线上开始。你可以先挑一个感兴趣的主题，接着到对应的讨论空间打声招呼、分享关注点，或认领一个你愿意持续追踪的小题目，让大家知道可以如何互相支持。
 
-我们日常主要通过 Matrix 讨论、用 Cryptpad 进行协作笔记、在需要时以 Jitsi 开线上会议。工具入口、账号申请方式与基本使用说明都整理在[沟通与协作工具](../../about/community/communication-tools.md)页面。
+我们日常主要通过 Matrix 讨论、用 Cryptpad 进行协作笔记、在需要时以 Jitsi 开线上会议。工具入口、账号申请方式与基本使用说明都整理在[沟通与协作工具](../../community/tools.md)页面。
 
 如果你是第一次接触这些工具，也不用担心。可以先从加入 [Public Space](https://matrix.to/#/#community:im.anoni.net){target="_blank"} 开始，看看目前有哪些 room 正在讨论，再选择自己想先旁听或直接参与的主题。通常从阅读近期消息、回复一两个问题开始，就是最好的第一步。
 
