@@ -123,3 +123,12 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   vertical-align: middle;
   margin-right: 0.5rem;
 }
+
+/* ==========================================================================
+   .md-button — wrap 后保留垂直呼吸
+   桌面宽度单行排列时 right margin 已足够，手机 wrap 后加 bottom margin
+   ========================================================================== */
+
+.md-typeset .md-button {
+  margin-bottom: 0.4rem;
+}
