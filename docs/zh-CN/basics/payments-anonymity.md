@@ -81,7 +81,7 @@ icon: material/cash-multiple
 - 个人在「自管钱包」、「自有资金移转」的范围内，多数司法管辖不要求个人实名披露每一笔交易
 - 「对外提供支付服务」、「发行类货币资产」、「代为兑换」会落入监理范围
 
-社群推广匿名支付的立场一直清楚：合法是前提，工具是教育与风险理解的对象。详见 [台湾 VASP 法 2026](../taiwan/vasp-2026.md)。
+社群推广匿名支付的立场一直清楚：合法是前提，工具是教育与风险理解的对象。各地的具体监理框架差异很大，台湾案例可见 [台湾 VASP 法 2026](../taiwan/vasp-2026.md)。
 
 ## 接下来
 
@@ -90,5 +90,5 @@ icon: material/cash-multiple
 - 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（Q2 撰写中）
 - 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)（Q2–Q3 撰写中）
 - 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)（Q2–Q3 撰写中）
-- 在地面：[台湾 VASP 法 2026](../taiwan/vasp-2026.md)
+- 台湾案例：[台湾 VASP 法 2026](../taiwan/vasp-2026.md)
 - 社群研究入口：[匿名支付研究专题](../community/payments-research.md)
