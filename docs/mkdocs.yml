@@ -132,7 +132,6 @@ theme:
   features:
     - navigation.top
     - navigation.sections
-    - navigation.footer
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes

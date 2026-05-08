@@ -74,7 +74,6 @@ theme:
     - navigation.top
     - navigation.expand
     - navigation.sections
-    - navigation.footer
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes
