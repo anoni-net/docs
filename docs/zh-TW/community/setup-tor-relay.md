@@ -165,8 +165,8 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "如何升級我的 Tor Relay 軟體？"
 
-    保持 Tor 軟體更新非常重要，以獲得最新的安全更新和功能。大多數 Linux 系統上，可以通過套件管理器來更新 Tor。Windows 和 macOS 使用者應定期檢查 Tor 官網上的更新。
+    保持 Tor 軟體更新非常重要，以獲得最新的安全更新和功能。大多數 Linux 系統上，可以透過套件管理器來更新 Tor。Windows 和 macOS 使用者應定期檢查 Tor 官網上的更新。
 
 ??? question "如何成為 Guard Relay？"
 
-    Guard Relay 由 Tor 網路自動選定，使用者無法手動配置。若節點穩定運行且具備足夠頻寬，便有可能被選為 Guard Relay。
+    Guard Relay 由 Tor 網路自動選定，使用者無法手動設定。若節點穩定運行且具備足夠頻寬，便有可能被選為 Guard Relay。

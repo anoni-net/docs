@@ -47,7 +47,7 @@ Tor Onion 服務（v3）讓網站直接運作於 Tor 網路：
 
 - **自描述地址**：.onion 地址本身就是公鑰的 hash，不需要 DNS、不需要憑證授權。
 - **Descriptor publishing**：服務透過 Hidden Service Directories（HSDir）發布自己的位置描述。
-- **Rendezvous protocol**：用戶與服務透過 Tor 網路內的會合點建立加密連線，雙方都不知道對方的 IP。
+- **Rendezvous protocol**：使用者與服務透過 Tor 網路內的會合點建立加密連線，雙方都不知道對方的 IP。
 
 對網站發布的意義：
 
@@ -101,7 +101,7 @@ EFF、ProtonMail、紐約時報、BBC、CIA 都有 Onion 鏡像。Cloudflare 對
 
 ### Cloudflare 1.1.1.1 onion
 
-Cloudflare 提供其公開 DNS 服務的 .onion 端點，讓 Tor 用戶可以做到「DNS 解析也走 Tor 網路」，避免 DNS 層的監控。
+Cloudflare 提供其公開 DNS 服務的 .onion 端點，讓 Tor 使用者可以做到「DNS 解析也走 Tor 網路」，避免 DNS 層的監控。
 
 ## anoni.net 文件站的實際部署
 

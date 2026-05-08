@@ -14,7 +14,7 @@ icon: material/access-point-network
 
 1. **測試網路審查：**[OONI Probe](https://ooni.org/install/ "前往下載。"){target="_blank"} 用於測試網站或網路可訪問性的應用程式，使用者可以使用它來檢查特定網站或線上服務是否被封鎖。
 2. **開放資料：**OONI 將收集到的檢測數據[資料公開](https://ooni.org/data/){target="_blank"}，提供自由開放的[查閱與分析](https://explorer.ooni.org/zh-Hant "線上查閱觀測資料。"){target="_blank"}，提高對[全球網路](https://explorer.ooni.org/zh-Hant/countries "各國家目前觀測資料的數量。"){target="_blank"}審查狀況的認知。
-3. **倡議與研究：**通過分析檢測數據資料，OONI 與研究人員和倡議者合作，共同關注全球及區域性網路干擾的[趨勢與影響](https://ooni.org/post/){target="_blank"}。
+3. **倡議與研究：**透過分析檢測數據資料，OONI 與研究人員和倡議者合作，共同關注全球及區域性網路干擾的[趨勢與影響](https://ooni.org/post/){target="_blank"}。
 4. **在地社群合作：**OONI 與[其他組織](https://ooni.org/partners/){target="_blank"}、在地社群與專案合作，以增強檢測技術能力，推進網路開放及無障礙訪問的目標。
 
 參與 OONI 的檢測活動，等於把你這條網路的觀測資料留進公開資料集。當其他人需要佐證封鎖事件、追跨境差異、或對照不同 ASN 的狀況時，會有更多元的紀錄可以引用。
