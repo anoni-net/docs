@@ -8,15 +8,9 @@ icon: material/chat-question
 
 **匿名網路**讓使用者在連上網際網路時，不必預設交出自己的身分或留下完整的行為軌跡，仍能自由地取得資訊、溝通與協作。它涵蓋的範圍相當廣，從連線方式、使用環境，到讓網路干預得以被觀測與記錄，都屬於這個概念的一部分。
 
-## 三個容易混淆的概念
+## 匿名、隱私、規避審查三件事
 
-談到匿名網路，常會同時出現三個相關但側重點不同的詞：
-
-- **匿名（Anonymity）**：讓他人無法確認你是誰。目標是隱藏身分，讓觀察者無法將連線或行為與特定的人對應。
-- **隱私（Privacy）**：讓他人無法掌握你在做什麼。目標是保護內容與行為，不被他人攔截、記錄或分析。
-- **規避審查（Circumvention）**：在被封鎖的網路環境中，仍能連上受限的資源或服務。目標是繞過地理或政策性的存取限制。
-
-三者有時重疊，有時各自成為主要需求。使用者的情境決定了哪個面向最關鍵，匿名網路的工具與實踐往往也同時照顧到其中好幾個。
+匿名網路同時牽涉三個相關但不同的目標。**匿名**讓他人無法確認你是誰，**隱私**讓他人無法掌握你在做什麼，**規避審查**讓你在被封鎖的環境中仍能連上受限資源。三者常常重疊，使用者的情境決定哪一個最關鍵。再加上常被混用的「假名」與「機密性」，完整的定義與差別見 [匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)。
 
 ## 與「網路自由」的關係
 
@@ -48,31 +42,39 @@ icon: material/chat-question
 
 若想從區域脈絡與制度壓力理解審查、監控與平台規則如何影響上述工作，可接著閱讀 [網路自由為什麼重要？](../basics/internet-freedom.md)。
 
-## 工具如何各司其職
+## 工具家族怎麼分工
 
-本專案圍繞三個核心開源工具，分別處理匿名網路的不同層面：
+匿名網路不是單一工具能解決的事。本站把工具分成四個層次，每一層處理一類問題，挑跟你情境相關的那一群讀就好。
 
 <div class="grid cards" markdown>
 
-- **:simple-torproject: Tor — 匿名連線與中繼網路**
+- **:simple-torproject: 連線層：Tor 工具家族**
 
-    透過多層加密與隨機路徑，使使用者的 IP 位址與行為難以被追蹤。Tor 也支援 .onion 服務，讓連線本身在網路上幾乎不可見。
+    把使用者的連線藏進多層加密與隨機路徑，讓 IP 與行為難以被追蹤。匿名瀏覽、檔案傳輸、貢獻橋接點，都從這群開始。
 
     [:fontawesome-regular-circle-question: 什麼是 Tor？](./what-is-tor.md)
 
-- **:simple-tails: Tails — 以隱私為設計前提的使用環境**
+- **:simple-tails: 環境層：匿名作業系統**
 
-    一個從 USB 隨身碟啟動的作業系統，關機後不留任何使用痕跡，且流量預設透過 Tor 路由。Tails 把匿名與隱私的要求內建到整個使用環境中。
+    把整個作業系統都切到匿名前提下。從 USB 啟動、預設走 Tor、關機不留痕跡，適合採訪、處理外來檔案、行動現場這類高敏感任務。
 
     [:fontawesome-regular-circle-question: 什麼是 Tails？](./what-is-tails.md)
 
-- **:material-access-point-network: OONI — 讓網路干預可被觀測**
+- **:material-access-point-network: 觀測層：網路審查的可驗證紀錄**
 
-    提供開放的測試工具與公開資料，讓任何人都能偵測並記錄特定網站或服務是否被封鎖或降速。OONI 把審查行為轉化為可被驗證的公開資料，每一筆偵測結果都留有記錄可查。
+    把封鎖、降速、監控這些感受，轉成有時間、地點、ASN 對得上的公開觀測資料，留下可被引用、可重現的紀錄。
 
     [:fontawesome-regular-circle-question: 什麼是 OONI？](./what-is-ooni.md)
 
+- **:material-key-variant: 日常隱私基本功**
+
+    通訊軟體選哪個、密碼怎麼管、要匿名付錢時用什麼工具。三個主題各自獨立，是日常使用就能落地的部分。
+
+    [:fontawesome-regular-circle-question: 匿名通訊工具比較](./messaging-comparison.md)
+
 </div>
+
+每個家族的完整文章列表見 [工具層首頁](./index.md)。
 
 ## 2026：社群正在補齊的三塊
 
@@ -84,13 +86,22 @@ icon: material/chat-question
 
 這三個方向的完整說明，可以在[社群參與頁面](../community/index.md)與[2026 年度規劃](../blog/posts/2025to2026.md)中找到。
 
-## :fontawesome-solid-diagram-project: 繼續深入
+## :material-chat-question: 一同瞭解
 
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 網路自由為什麼重要？](../basics/internet-freedom.md)
-- [:simple-torproject: 什麼是 Tor？](./what-is-tor.md)
-- [:simple-tails: 什麼是 Tails？](./what-is-tails.md)
-- [:material-access-point-network: 什麼是 OONI？](./what-is-ooni.md)
+- [:material-chat-question: 匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)
+- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+
+</div>
+
+## :fontawesome-solid-diagram-project: 下一步可參與的專案
+
+<div class="grid cards" markdown>
+
+- [:material-shield-account-outline: 個人隱私指引](../community/privacy-guide.md)
+- [:material-school-outline: Tor Relay 校園建立](../community/relay-on-campus.md)
+- [:material-currency-btc: 匿名支付研究](../community/payments-research.md)
 
 </div>

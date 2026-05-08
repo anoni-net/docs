@@ -8,15 +8,9 @@ icon: material/chat-question
 
 **匿名网络**让使用者在连上互联网时，不必预设交出自己的身份或留下完整的行为轨迹，仍能自由地取得资讯、沟通与协作。它涵盖的范围相当广，从连线方式、使用环境，到让网络干预得以被观测与记录，都属于这个概念的一部分。
 
-## 三个容易混淆的概念
+## 匿名、隐私、规避审查三件事
 
-谈到匿名网络，常会同时出现三个相关但侧重点不同的词：
-
-- **匿名（Anonymity）**：让他人无法确认你是谁。目标是隐藏身份，让观察者无法将连线或行为与特定的人对应。
-- **隐私（Privacy）**：让他人无法掌握你在做什么。目标是保护内容与行为，不被他人拦截、记录或分析。
-- **规避审查（Circumvention）**：在被封锁的网络环境中，仍能连上受限的资源或服务。目标是绕过地理或政策性的访问限制。
-
-三者有时重叠，有时各自成为主要需求。使用者的情境决定了哪个面向最关键，匿名网络的工具与实践往往也同时照顾到其中好几个。
+匿名网络同时牵涉三个相关但不同的目标。**匿名**让他人无法确认你是谁，**隐私**让他人无法掌握你在做什么，**规避审查**让你在被封锁的环境中仍能连上受限资源。三者常常重叠，使用者的情境决定哪一个最关键。再加上常被混用的「假名」与「机密性」，完整的定义与差别见 [匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)。
 
 ## 与「网络自由」的关系
 
@@ -48,31 +42,39 @@ icon: material/chat-question
 
 若要从区域脉络与制度压力理解审查、监控与平台规则如何影响上述工作，可接着阅读 [网络自由为什么重要？](../basics/internet-freedom.md)。
 
-## 工具如何各司其职
+## 工具家族怎么分工
 
-本项目围绕三个核心开源工具，分别处理匿名网络的不同层面：
+匿名网络不是单一工具能解决的事。本站把工具分成四个层次，每一层处理一类问题，挑跟你情境相关的那一群读就好。
 
 <div class="grid cards" markdown>
 
-- **:simple-torproject: Tor — 匿名连线与中继网络**
+- **:simple-torproject: 连线层：Tor 工具家族**
 
-    透过多层加密与随机路径，使使用者的 IP 位址与行为难以被追踪。Tor 也支持 .onion 服务，让连线本身在网络上几乎不可见。
+    把使用者的连线藏进多层加密与随机路径，让 IP 与行为难以被追踪。匿名浏览、文件传输、贡献桥接点，都从这群开始。
 
-    [:fontawesome-regular-circle-question: 什么是 Tor？](../tools/what-is-tor.md)
+    [:fontawesome-regular-circle-question: 什么是 Tor？](./what-is-tor.md)
 
-- **:simple-tails: Tails — 以隐私为设计前提的使用环境**
+- **:simple-tails: 环境层：匿名作业系统**
 
-    一个从 USB 随身碟启动的作业系统，关机后不留任何使用痕迹，且流量预设透过 Tor 路由。Tails 把匿名与隐私的要求内建到整个使用环境中。
+    把整个作业系统都切到匿名前提下。从 USB 启动、预设走 Tor、关机不留痕迹，适合采访、处理外来文件、行动现场这类高敏感任务。
 
-    [:fontawesome-regular-circle-question: 什么是 Tails？](../tools/what-is-tails.md)
+    [:fontawesome-regular-circle-question: 什么是 Tails？](./what-is-tails.md)
 
-- **:material-access-point-network: OONI — 让网络干预可被观测**
+- **:material-access-point-network: 观测层：网络审查的可验证记录**
 
-    提供开放的测试工具与公开数据，让任何人都能侦测并记录特定网站或服务是否被封锁或降速。OONI 把审查行为转化为可被验证的公开数据，每一笔侦测结果都留有记录可查。
+    把封锁、降速、监控这些感受，转成有时间、地点、ASN 对得上的公开观测资料，留下可被引用、可重现的记录。
 
-    [:fontawesome-regular-circle-question: 什么是 OONI？](../tools/what-is-ooni.md)
+    [:fontawesome-regular-circle-question: 什么是 OONI？](./what-is-ooni.md)
+
+- **:material-key-variant: 日常隐私基本功**
+
+    通讯软体选哪个、密码怎么管、要匿名付钱时用什么工具。三个主题各自独立，是日常使用就能落地的部分。
+
+    [:fontawesome-regular-circle-question: 匿名通讯工具比较](./messaging-comparison.md)
 
 </div>
+
+每个家族的完整文章列表见 [工具层首页](./index.md)。
 
 ## 2026：社区正在补齐的三块
 
@@ -84,13 +86,22 @@ icon: material/chat-question
 
 这三个方向的完整说明，可以在[社区参与页面](../community/index.md)与 [2026 年度规划](../blog/posts/2025to2026.md)中找到。
 
-## :fontawesome-solid-diagram-project: 继续深入
+## :material-chat-question: 一同了解
 
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
-- [:simple-torproject: 什么是 Tor？](../tools/what-is-tor.md)
-- [:simple-tails: 什么是 Tails？](../tools/what-is-tails.md)
-- [:material-access-point-network: 什么是 OONI？](../tools/what-is-ooni.md)
+- [:material-chat-question: 匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)
+- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+
+</div>
+
+## :fontawesome-solid-diagram-project: 下一步可参与的项目
+
+<div class="grid cards" markdown>
+
+- [:material-shield-account-outline: 个人隐私指引](../community/privacy-guide.md)
+- [:material-school-outline: Tor Relay 校园建立](../community/relay-on-campus.md)
+- [:material-currency-btc: 匿名支付研究](../community/payments-research.md)
 
 </div>

@@ -1,7 +1,6 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
 exclude_docs: |
   scenarios/domestic-violence.md
-  scenarios/lgbtq.md
   scenarios/election-observer.md
 site_name: !ENV [SITE_NAME, "匿名網路社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
@@ -29,13 +28,13 @@ nav:
           - tools/index.md
           - tools/what-is-anonymity-network.md
           - tools/what-is-tor.md
-          - tools/what-is-tails.md
-          - tools/what-is-ooni.md
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
           - tools/onionshare.md
-          - tools/ooni-run-v2.md
+          - tools/what-is-tails.md
           - tools/tails-vs-whonix-vs-qubes.md
+          - tools/what-is-ooni.md
+          - tools/ooni-run-v2.md
           - tools/messaging-comparison.md
           - tools/password-manager.md
           - tools/crypto-privacy-spectrum.md
@@ -43,6 +42,7 @@ nav:
           - scenarios/index.md
           - scenarios/journalist.md
           - scenarios/activist.md
+          - scenarios/lgbtq.md
           - scenarios/nonprofit-anonymous-donation.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
