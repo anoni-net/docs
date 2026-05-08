@@ -11,9 +11,9 @@ icon: material/toolbox-outline
 ## 文章一覽
 
 - [什麼是匿名網路](./what-is-anonymity-network.md)：匿名網路解決什麼問題，與 VPN 有何不同。
-- [什麼是 Tor](./what-is-tor.md)：洋蔥路由的基本原理與 Tor Browser 入門。
-- [什麼是 Tails](./what-is-tails.md)：即用即丟的隨身作業系統。
-- [什麼是 OONI](./what-is-ooni.md)：開源的網路審查觀測平台。
+- [什麼是 Tor](./what-is-tor.md)：Tor 怎麼用、跟 VPN 差在哪、什麼時候不該用。
+- [什麼是 Tails](./what-is-tails.md)：把高敏感任務切到一個拋棄式環境，做完抽 USB 走人。
+- [什麼是 OONI](./what-is-ooni.md)：把「連不上」「跑很慢」變成有時間、地點、ASN 對得上的公開觀測紀錄。
 - [Tor Browser 進階設定](./tor-browser-advanced.md)：橋接、安全等級、Onion 站點與隔離策略。
 - [Tails、Whonix、Qubes 的差別](./tails-vs-whonix-vs-qubes.md)：三套常見匿名作業系統的取捨。
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session 等工具的差異。

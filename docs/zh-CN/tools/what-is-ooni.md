@@ -1,21 +1,23 @@
 ---
-title: 什么是 OONI？
-description: OONI，全名为「Open Observatory of Network Interference」（网络干扰开放观测），是一项全球性倡议，主要目标是监测和报告网络审查及干扰情况。
-icon: material/chat-question
-
+title: 什么是 OONI
+description: OONI 是让网络审查可被观测的开源工具与公开数据集，可以把「连不上」「跑很慢」这些个人感受，变成有时间、地点、ASN 对得上的可引用纪录。
+icon: material/access-point-network
 ---
-# :material-chat-question: 什么是 OONI？
 
-OONI，全名为「Open Observatory of Network Interference」（网络干扰开放观测），是一项全球性倡议，主要目标是监测和报告网络审查及干扰情况。OONI 通过提供开源工具与收集网络测试数据，协助用户识别是否存在互联网封锁、监控或降速等现象，并提供实时和公开的网络审查观测数据分析。
+# :material-access-point-network: 什么是 OONI
+
+连不上某个网站时，第一个直觉通常是「是我网络有问题吗？」OONI（Open Observatory of Network Interference，网络干扰开放观测）就是为了把这种感受转成可验证的资料。它提供开源检测工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 与公开资料平台 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，让任何人都能跑检测、查纪录，把封锁、监控、降速这些行为留下时间、地点、ASN 都对得上的观测痕迹。
+
+OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社群、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
 
 ## OONI 计划主要推动事项
 
-1. **测试网络审查：**[OONI Probe](https://ooni.org/install/ "前往下载。"){target="_blank"} 是用于测试网站或网络可访问性的应用程序，用户可以使用它来检查特定网站或在线服务是否被封锁。
-2. **开放数据：**OONI 将收集到的检测数据[资料公开](https://ooni.org/data/){target="_blank"}，提供自由开放的[查阅与分析](https://explorer.ooni.org/zh-CN "在线查阅观测资料。"){target="_blank"}，提高对[全球网络](https://explorer.ooni.org/zh-CN/countries "各国家目前观测资料的数量。"){target="_blank"}审查状况的认知。
-3. **倡议与研究：**通过分析检测数据资料，OONI 与研究人员和倡议者合作，关注全球及区域性网络干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}。
-4. **本地社区合作：**OONI 与[其他组织](https://ooni.org/partners/){target="_blank"}、本地社区与项目合作，以增强检测技术能力，推进网络开放及无障碍访问的目标。
+1. **测试网路审查：**[OONI Probe](https://ooni.org/install/){target="_blank"} 用于测试网站或网络可访问性的应用程序，使用者可以用它检查特定网站或在线服务是否被封锁。
+2. **开放数据：**OONI 把收集到的检测[数据公开](https://ooni.org/data/){target="_blank"}，提供自由开放的[查阅与分析](https://explorer.ooni.org/){target="_blank"}，提高对[全球网路](https://explorer.ooni.org/countries){target="_blank"}审查状况的认知。
+3. **倡议与研究：**通过分析检测数据，OONI 与研究人员和倡议者合作，共同关注全球及区域性网路干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}。
+4. **在地社群合作：**OONI 与[其他组织](https://ooni.org/partners/){target="_blank"}、在地社群与项目合作，以增强检测技术能力，推进网路开放及无障碍访问的目标。
 
-参与 OONI 的检测活动，用户能够帮助提高对全球网络开放性的认识，并支持促进数字信息自由流通的努力。
+参与 OONI 的检测活动，等于把你这条网路的观测数据留进公开资料集。当其他人需要佐证封锁事件、追跨境差异、或对照不同 ASN 的状况时，会有更多元的纪录可以引用。
 
 ## 如何运作？
 
@@ -28,24 +30,44 @@ OONI，全名为「Open Observatory of Network Interference」（网络干扰开
     </a>
 </figure>
 
-- **Probe：**为 OONI 检测观察程序。
-- **Censor：**为信息传输过程中的监控者，可能为公司 IT 网络、电信公司、国家级别的网络架构。网络干预可通过以下方式进行，但其结果与目的都是阻止查看网站内容。
+- **Probe：**OONI 检测观察程序。
+- **Censor：**资料传输过程中的监控者，可能是公司 IT 网络、电信公司、国家级网络架构。网路干预可透过以下方式进行，结果与目的都是阻止检视网站内容：
     1. DNS 篡改（DNS tampering、DNS 异常）
     2. IP 封锁（DNS tampering、TCP/IP 异常）
-    3. HTTP 封锁（HTTP blocking、例如：封锁页面）
-    4. 基于 TLS 的干扰（例如在 TLS 握手期间的 ClientHello 信息后观察到的连接重置）
-- **Tor：**[洋葱路由网络](https://zh.wikipedia.org/zh-cn/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1 "前往 Wiki 了解更多！"){target="_blank"}，将连接请求通过三层节点的转介传送取得信息。
-- **Helper：**检测目标对象，可能为：网站、通讯软件连接、VPN 连接、连接性能等。
+    3. HTTP 封锁（HTTP blocking，例如：封锁页面）
+    4. 基于 TLS 的干扰（例如在 TLS 握手期间的 ClientHello 信息后观察到的连线重置）
+- **Tor：**[洋葱路由网络](https://zh.wikipedia.org/zh-cn/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1){target="_blank"}，将连线请求透过三层节点的转介传送取得资讯。
+- **Helper：**检测目标对象，可能是网站、通讯软件连线、VPN 连线、连线效能等。
 
-在中国，类似的屏蔽行为和技术包括如中国电信等公司提供的内容过滤服务，或通过 DNS 拦截广告和恶意网站的工具。这类服务常用于限制访问不当内容或保护用户。国家互联网信息办公室（网信办）和相关部门也会通过 DNS 劫持等技术手段，进行网络内容监管，以打击不法行为，确保网络空间的安全和清朗。这些措施都可视为对网页浏览的限制。
+!!! info "anoni.net 是台湾的社群"
 
-!!! question "台湾所处的网络是否真的自由？"
+    下面这段反映 anoni.net 在台湾观察到的善意阻挡与刻意阻挡的边界，其他简中读者可对照当地情境参考。
 
-    以上举例通常都是针对恶意网站、网络广告、钓鱼诈骗进行善意阻挡（如：[DNS RPZ](https://blog.twnic.tw/2020/09/23/15311/){target="_blank"}），但如果是刻意阻挡某些内容呢？或者来自某些未被观察记录到的 ASNs 的阻挡行为？**虽然目前观测的数据都无大规模阻挡**，但由于观测数据多样性不足，数据主要集中在中华电信（[AS3462](https://radar.cloudflare.com/zh-cn/as3462){target="_blank"}）的[观测资料](https://explorer.ooni.org/chart/mat?probe_cc=TW&since=2024-10-01&until=2024-12-31&time_grain=month&axis_x=measurement_start_day&axis_y=probe_asn&test_name=web_connectivity){target="_blank"}，因此在「各区域观察数据与 ASNs 覆盖率」研究项目中会比对目前我们还有多少在 TW 的 ASNs 是未被观测到的。
+    在台湾比较熟悉的类似阻挡技术，包括中华电信提供的「[色情守门员](https://hicare.hinet.net/CHT/hicare/){target="_blank"}」、透过 DNS 阻挡广告与恶意网站的 [AdGuard](https://adguard.com/){target="_blank"}、[Pi-Hole](https://pi-hole.net/){target="_blank"}，或是数位发展部与财团法人台湾网络资讯中心（TWNIC）进行域名阻挡的[打击诈骗方式](https://moda.gov.tw/press/press-releases/6303){target="_blank"}，都可算是阻挡网页浏览的实务。
+
+    以上举例通常都是针对恶意网站、网络广告、钓鱼诈骗的善意阻挡（如 [DNS RPZ](https://blog.twnic.tw/2020/09/23/15311/){target="_blank"}），但如果是刻意阻挡某些内容呢？或是来自某些未被观察纪录到 ASN 的阻挡行为？目前观测的资料无大规模阻挡，但因为观测资料多样性不足，集中在中华电信（[AS3462](https://radar.cloudflare.com/as3462){target="_blank"}）的[观测资料](https://explorer.ooni.org/chart/mat?probe_cc=TW&since=2024-10-01&until=2024-12-31&time_grain=month&axis_x=measurement_start_day&axis_y=probe_asn&test_name=web_connectivity){target="_blank"}，因此在「各区域观察资料与 ASN 涵盖率」研究项目中会比对目前在 TW 还有多少 ASN 是未被观测到的。
+
+## OONI 适合做什么、不适合做什么
+
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网路环境用。动手前先回头看 [威胁模型怎么想](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
+
+**适合**：
+
+- 佐证封锁事件。某个网站某个时段在某个 ASN 连不上，OONI Probe 跑过会留下可引用的纪录。
+- 长期观测单一地区的网路环境变化。把 OONI Probe 跑成 cronjob，几个月下来能看到趋势。
+- 跨 ASN、跨地区比较。OONI Explorer 上不同 ASN 的观测结果可以对照，找出哪一段网路有差异。
+- 媒体、研究、倡议用途。需要外部可验证的数据时，公开资料集是坚实的引用基础。
+
+**不适合**：
+
+- 即时警报。OONI 资料有约一小时延迟，不是给「现在这一秒网站连不上」做即时诊断用的。
+- 判断单一装置中毒或本地 DNS 设错。OONI 看的是网路层的可及性，不是端点安全。
+- 辨识深度封包检测（DPI）行为的细节。OONI 观察的是「结果」（连得上/连不上、回应内容是否异常），不是「过程」中的封包细节。
+- 取代 Tor 或 VPN。OONI 不会把你的连线匿名化，它只是让你知道网路有没有在干预。
 
 ## 如何安装 OONI Probe 观测程序
 
-OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){target="_blank"}（Android, iOS）、[桌面版本](https://ooni.org/install/){target="_blank"}（Windows 64bit, macOS）、或是无任何桌面界面的[终端程序版本](https://ooni.org/install/cli){target="_blank"}。
+OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){target="_blank"}（Android、iOS）、[桌面版本](https://ooni.org/install/){target="_blank"}（Windows 64bit、macOS），或是无任何桌面界面的[终端程序版本](https://ooni.org/install/cli){target="_blank"}。
 
 <figure markdown="span">
     <a href="../assets/images/ooni_screen_desktop.png">
@@ -56,7 +78,7 @@ OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){tar
     </a>
 </figure>
 
-终端界面可以使用 `ooniprobe run` 执行所有检测项目。或者设置 `cronjob` 在空闲时间运行观测检测。
+终端机界面可以使用 `ooniprobe run` 执行所有检测项目，或是设定 `cronjob` 在空闲时间跑观察检测。
 
 ``` bash
 # 在第 4、10 和 22 小时的第 10 分钟执行。
@@ -65,39 +87,63 @@ OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){tar
 
 !!! warning "自动执行"
 
-    目前 `ooniprobe autorun` 的指令尚未实现完成，因此可先使用 `cronjob` 方式定时检测。
+    目前 `ooniprobe autorun` 的指令还未实作完成，因此先使用 `cronjob` 方式定时检测。
 
 ## OONI Explorer 观测资料
 
 <figure markdown="span">
     <a href="../assets/images/ooni_explorer.png">
         <img src="../assets/images/ooni_explorer.png"
-            alt="OONI Explore 观测资料网站（延迟一小时）"
-            title="OONI Explore 观测资料网站（延迟一小时）"
+            alt="OONI Explorer 观测资料网站（延迟一小时）"
+            title="OONI Explorer 观测资料网站（延迟一小时）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:75%;">
     </a>
 </figure>
 
-检测到的观测资料会即时上传到 OONI 的数据库，可通过 [OONI Explorer](https://explorer.ooni.org/zh-CN/chart/mat?probe_cc=TW&since=2024-10-01&until=2025-01-01&time_grain=day&axis_x=measurement_start_day&test_name=web_connectivity){target="_blank"} 在线分析各个区域的状况及不同检测项目的结果。此外，也可以直接访问 [S3 存储空间（Registry of Open Data on AWS）](https://registry.opendata.aws/ooni/){target="_blank"}，下载延迟一小时的原始观测数据，以便进行更深入的交叉分析。可根据分析议题需求选择实时查阅或下载详细数据进行进一步研究。
+检测到的观察资料会即时回传到 OONI 的资料库，可透过 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 在线分析各个区域的状况及不同检测项目的结果。也可以直接存取 [S3 储存空间（Registry of Open Data on AWS）](https://registry.opendata.aws/ooni/){target="_blank"}，下载延迟一小时的原始观测资料，用来做更深入的交叉分析。
 
-!!! info "观察 AS 数据"
+!!! info "观察 ASN 资料"
 
-    可将「纵轴」项目选择为 ASN，以筛选和分离各 ASN 的观测数据状况。
+    可将「纵轴」项目选成 ASN，筛选分离各 ASN 观测资料状况。
 
     <figure markdown="span">
         <a href="../assets/images/ooni_explorer_asn.png">
             <img src="../assets/images/ooni_explorer_asn.png"
-                alt="OONI Explore 可将「纵轴」项目选择为 ASN，以筛选和分离各 ASN 的观测数据状况。"
-                title="OONI Explore 可将「纵轴」项目选择为 ASN，以筛选和分离各 ASN 的观测数据状况。"
+                alt="OONI Explorer 可将「纵轴」项目选成 ASN 筛选分离各 ASN 观测资料状况。"
+                title="OONI Explorer 可将「纵轴」项目选成 ASN 筛选分离各 ASN 观测资料状况。"
                 style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:80%;">
         </a>
     </figure>
+
+## 常见问题
+
+??? question "我在家里跑 OONI Probe，会不会被 ISP 标记？"
+
+    OONI Probe 的测试行为（连到一份公开的测试清单上的网站、记录回应）跟一般使用者浏览网页差别不大，多数网路环境下没有特殊风险。预设清单（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多数高敏感类型的网站。在审查严格的国家（如中国、伊朗）情况不同，OONI 官方文件有额外的风险说明，启用前建议查阅。
+
+??? question "OONI 检测会不会误判？"
+
+    会。OONI 看到的是「连线结果与一般情况不同」，不会自动断定原因。常见误判来源：对方网站本身故障、CDN 负载平衡造成 IP 变动、本地 DNS 设定错误、企业或校园网路的合规过滤。OONI Explorer 把判断逻辑（DNS、TCP、TLS、HTTP 各层的观察结果）公开，误判可以被追查与修正。要做严谨结论前，建议交叉比对多个 ASN、多个时段的纪录。
+
+??? question "善意的 DNS 阻挡（防钓鱼、防恶意网站）算审查吗？"
+
+    OONI 的角色是观测与记录，不是判定。它会把「在这个 ASN、这个时段、这个网站 DNS 解析异常」如实写下来。是不是「审查」、是不是「合理」要靠人去诠释。这也是为什么观测资料的价值在于「公开、可重现」，而不是「谁说了算」。
+
+??? question "可以同时跑 OONI Probe 跟 Tor 吗？"
+
+    可以，但要分清楚目的。OONI Probe 是观测工具，跑检测时走的是你本地的 ISP 连线（这样才能观测到当地的网路环境）。如果让 OONI 走 Tor，观测到的是 Tor 出口节点的网路环境，不是你本地的，失去意义。Tor Browser 与 OONI Probe 在同一台电脑上可以共存，各跑各的。
+
+??? question "最简单的贡献方式是什么？"
+
+    手机装 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天让它跑一次自动检测就是有效贡献。如果家里有 Linux 主机，照本文「如何安装」段的 cronjob 范例设定，就能持续累积。想再进一步可以参考 [OONI 网站检测清单](../taiwan/ooni-checklist.md) 补充本地关注的网站，或读 [ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 还缺观测点。
 
 ## :material-chat-question: 一同了解
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 网络自由为什么重要？](../basics/internet-freedom.md)
+- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 网路自由为什么重要](../basics/internet-freedom.md)
+- [:material-chat-question: 什么是匿名网路](./what-is-anonymity-network.md)
 
 </div>
 
@@ -105,8 +151,8 @@ OONI Probe 观测程序提供[移动设备版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
-- [:material-list-status: OONI 网站检测列表](../taiwan/ooni-checklist.md)
-- [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
+- [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
+- [:material-access-point-network: ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-server-network: Tor Relay 观测点](../taiwan/tor-relay-watcher.md)
 
 </div>

@@ -1,12 +1,14 @@
 ---
-title: 什麼是 OONI？
-description: OONI，全名為「Open Observatory of Network Interference」（網路干擾開放觀測），是一項全球性倡議，主要目標是監測和報告網路審查及干擾情況。
-icon: material/chat-question
-
+title: 什麼是 OONI
+description: OONI 是讓網路審查可被觀測的開放工具與資料集。在台灣可以用它把「連不上」「跑很慢」這些個人感受，變成有時間、地點、ASN 對得上的公開觀測紀錄。
+icon: material/access-point-network
 ---
-# :material-chat-question: 什麼是 OONI？
 
-OONI，全名為「Open Observatory of Network Interference」（網路干擾開放觀測），是一項全球性倡議，主要目標是監測和報告網路審查及干擾情況。OONI 透過提供開放原始碼的工具與收集網路測試數據資料，協助使用者識別是否存在網際網路封鎖、監控或降速等現象，並提供即時與公開的網路審查觀測資料分析。
+# :material-access-point-network: 什麼是 OONI
+
+連不上某個網站時，第一個直覺通常是「是我網路有問題嗎？」OONI（Open Observatory of Network Interference，網路干擾開放觀測）就是為了把這種感受轉成可驗證的資料。它提供開源檢測工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 與公開資料平台 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"}，讓任何人都能跑檢測、查紀錄，把封鎖、監控、降速這些行為留下時間、地點、ASN 都對得上的觀測痕跡。
+
+對在台灣的我們，OONI 的價值不只在於「有沒有被封鎖」這個單點問題，而在於它讓討論能以資料為基礎。社群、媒體、研究者要佐證一次連線異常時，有可引用、可重現的紀錄。也因此，[ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 在台灣才會是個值得長期關注的議題：觀測點越多元，這份紀錄的代表性就越強。
 
 ## OONI 計畫主要推動事項
 
@@ -15,7 +17,7 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
 3. **倡議與研究：**通過分析檢測數據資料，OONI 與研究人員和倡議者合作，共同關注全球及區域性網路干擾的[趨勢與影響](https://ooni.org/post/){target="_blank"}。
 4. **在地社群合作：**OONI 與[其他組織](https://ooni.org/partners/){target="_blank"}、在地社群與專案合作，以增強檢測技術能力，推進網路開放及無障礙訪問的目標。
 
-參與 OONI 的檢測活動，使用者能夠幫助提高對全球網路開放性的認識，並支持促進數位資訊自由流通的努力。
+參與 OONI 的檢測活動，等於把你這條網路的觀測資料留進公開資料集。當其他人需要佐證封鎖事件、追跨境差異、或對照不同 ASN 的狀況時，會有更多元的紀錄可以引用。
 
 ## 如何運作？
 
@@ -35,7 +37,7 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
     3. HTTP 封鎖（HTTP blocking、例如：封鎖頁面）
     4. 基於 TLS 的干擾（例如在 TLS 握手期間的 ClientHello 訊息後觀察到的連線重置）
 - **Tor：**[洋蔥路由網路](https://zh.wikipedia.org/zh-tw/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1 "前往 Wiki 了解更多！"){target="_blank"}，將連線請求透過三層節點的轉介傳送取得資訊。
-- **Helper：**檢測目標對象，可能為：網站、通訊軟體連線、VPN 連線、連線效能⋯等。
+- **Helper：**檢測目標對象，可能為網站、通訊軟體連線、VPN 連線、連線效能等。
 
 在臺灣比較熟悉與類似的阻擋行為與技術如中華電信提供的「[色情守門員](https://hicare.hinet.net/CHT/hicare/){target="_blank"}」、透過 DNS 阻擋廣告、惡意網站的 [AdGuard](https://adguard.com/zh_tw/welcome.html){target="_blank"}、[Pi-Hole](https://pi-hole.net/){target="_blank"}。 或是數位發展部與財團法人臺灣網路資訊中心（TWNIC）進行網域阻擋的[打擊詐騙方式](https://moda.gov.tw/press/press-releases/6303){target="_blank"}，都可算是阻擋網頁瀏覽。
 
@@ -43,7 +45,23 @@ OONI，全名為「Open Observatory of Network Interference」（網路干擾開
 
     以上舉例通常都是針對惡意網站、網路廣告、釣魚詐騙來進行善意阻擋（如：[DNS RPZ](https://blog.twnic.tw/2020/09/23/15311/){target="_blank"}），但如果是刻意阻擋某些內容呢？或是來自某些未被觀察紀錄到 ASNs 的阻擋行為？**雖然目前觀測的資料都無大規模阻擋**，但因為觀測資料多樣性不足，都只集中在中華電信（[AS3462](https://radar.cloudflare.com/zh-tw/as3462){target="_blank"}）的[觀測資料](https://explorer.ooni.org/chart/mat?probe_cc=TW&since=2024-10-01&until=2024-12-31&time_grain=month&axis_x=measurement_start_day&axis_y=probe_asn&test_name=web_connectivity){target="_blank"}，因此在「各區域觀察資料與 ASNs 涵蓋率」研究項目中會比對目前我們還有多少在 TW 的 ASNs 是未被觀測到的。
 
-## 如何安裝 OONI Probe 觀測程式
+## OONI 適合做什麼、不適合做什麼
+
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一樣：Tor 與 Tails 給使用者保護自己用，OONI 給社群、媒體、研究者觀測網路環境用。動手前先回頭看 [威脅模型怎麼想](../basics/threat-model.md) 有助於釐清需求是不是真的對得上 OONI 解決的問題。
+
+**適合**：
+
+- 佐證封鎖事件。某個網站某個時段在某個 ASN 連不上，OONI Probe 跑過會留下可引用的紀錄。
+- 長期觀測單一地區的網路環境變化。把 OONI Probe 跑成 cronjob，幾個月下來能看到趨勢。
+- 跨 ASN、跨地區比較。OONI Explorer 上不同 ASN 的觀測結果可以對照，找出哪一段網路有差異。
+- 媒體、研究、倡議用途。需要外部可驗證的數據時，公開資料集是堅實的引用基礎。
+
+**不適合**：
+
+- 即時警報。OONI 資料有約一小時延遲，不是給「現在這一秒網站連不上」做即時診斷用的。
+- 判斷單一裝置中毒或本地 DNS 設錯。OONI 看的是網路層的可及性，不是端點安全。
+- 辨識深度封包檢測（DPI）行為的細節。OONI 觀察的是「結果」（連得上/連不上、回應內容是否異常），不是「過程」中的封包細節。
+- 取代 Tor 或 VPN。OONI 不會把你的連線匿名化，它只是讓你知道網路有沒有在干預。
 
 OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){target="_blank"}（Android, iOS）、[桌面版本](https://ooni.org/install/){target="_blank"}（Windows 64bit, macOS）、或是無任何桌面介面的[終端程式版本](https://ooni.org/install/cli){target="_blank"}。
 
@@ -93,11 +111,35 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
         </a>
     </figure>
 
+## 常見問題
+
+??? question "我在家裡跑 OONI Probe，會不會被 ISP 標記？"
+
+    OONI Probe 的測試行為（連到一份公開的測試清單上的網站、記錄回應）跟一般使用者瀏覽網頁差別不大，台灣目前沒有任何 ISP 因為跑 OONI 而封鎖或警告使用者的案例。如果擔心，預設清單（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多數高敏感類型的網站，可以放心。在審查嚴格的國家（如中國、伊朗）情況不同，OONI 官方文件有額外的風險說明。
+
+??? question "OONI 檢測會不會誤判？"
+
+    會。OONI 看到的是「連線結果與一般情況不同」，不會自動斷定原因。常見誤判來源：對方網站本身故障、CDN 負載平衡造成 IP 變動、本地 DNS 設定錯誤、企業/校園網路的合規過濾。OONI Explorer 把判斷邏輯（DNS、TCP、TLS、HTTP 各層的觀察結果）公開，誤判可以被追查與修正。要做嚴謹結論前，建議交叉比對多個 ASN、多個時段的紀錄。
+
+??? question "TWNIC 的 DNS RPZ 阻擋詐騙網站，OONI 算這是審查嗎？"
+
+    OONI 的角色是觀測與記錄，不是判定。它會把「在這個 ASN、這個時段、這個網站 DNS 解析異常」如實寫下來。是不是「審查」、是不是「合理」要靠人去詮釋。TWNIC 的詐騙網站封鎖在 OONI 資料裡會呈現為 DNS 異常，但不會被自動標記成審查。這也是為什麼觀測資料的價值在於「公開、可重現」，而不是「誰說了算」。
+
+??? question "可以同時跑 OONI Probe 跟 Tor 嗎？"
+
+    可以，但要分清楚目的。OONI Probe 是觀測工具，跑檢測時走的是你本地的 ISP 連線（這樣才能觀測到當地的網路環境）。如果讓 OONI 走 Tor，觀測到的是 Tor 出口節點的網路環境，不是你本地的，失去意義。Tor Browser 與 OONI Probe 在同一台電腦上可以共存，各跑各的。
+
+??? question "我在台灣，最簡單的貢獻方式是什麼？"
+
+    手機裝 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天讓它跑一次自動檢測就是有效貢獻。如果家裡有 Linux 主機，照本文「如何安裝」段的 cronjob 範例設定，就能持續累積。想再進一步可以參考 [OONI 網站檢測清單](../taiwan/ooni-checklist.md) 補充本地關注的網站，或讀 [ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 還缺觀測點。
+
 ## :material-chat-question: 一同瞭解
 
 <div class="grid cards" markdown>
 
+- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
+- [:material-chat-question: 什麼是匿名網路](./what-is-anonymity-network.md)
 
 </div>
 
@@ -105,8 +147,8 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
 - [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
-- [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-server-network: Tor Relay 觀測點](../taiwan/tor-relay-watcher.md)
 
 </div>
