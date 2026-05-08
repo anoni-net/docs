@@ -5,7 +5,7 @@ icon: material/list-status
 ---
 # :material-list-status: OONI 網站檢測清單
 
-這頁是 [在地脈絡 → 連線層的在地觀測](./index.md) 群組的入門起點。在談「台灣的連線環境怎麼樣」之前，要先回答一個基本問題：「我們在測什麼網站？」OONI Probe 不是全網掃描，每次檢測會根據一份事前列舉的網站清單逐一執行。這份清單怎麼維護、怎麼更新、誰在貢獻，是後續 [ASN 覆蓋率分析](./ooni-asn-coverage.md) 與其他觀測解讀的前提。
+這頁是 [在地脈絡 → 連線層的在地觀測](./index.md) 群組的入門起點。OONI Probe 每次檢測都依據一份事前列舉的網站清單，逐一檢查每個網址的連線狀況。清單上收錄什麼、由誰維護、多久更新一次，會直接影響 [ASN 覆蓋率分析](./ooni-asn-coverage.md) 等後續觀測能讀出什麼。
 
 <figure markdown="span">
     <a target="_blank"
@@ -18,24 +18,24 @@ icon: material/list-status
     <caption>OONI Probe 檢測流程</caption>
 </figure>
 
-在使用 OONI Probe 進行「網站」檢測時，檢測程式會根據事先列舉的「網站清單」逐一檢測。這裡所提及的「網站清單」實際上是透過 [Citizen Lab](https://citizenlab.ca/){target="_blank"} 所維護的 [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 專案，分別收錄本地（local）、全球（global）熱門的網站網址。
+這份清單由 [Citizen Lab](https://citizenlab.ca/){target="_blank"} 維護的 [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 專案管理，分成本地（local）與全球（global）兩種，分別收錄各地與全球的熱門網址。
 
-全球（global）名單上的大多數網站以英語呈現。本地名單則由地區提供，內容涵蓋當地和地區層級的多種分類，並使用當地語言。在有網際網路審查的國家，本地清單還包括了許多已被封鎖的網站。
+全球名單以英文網站為主。本地名單由各地區社群協助蒐集，貼近當地脈絡、用當地語言呈現。在有網路審查的國家，本地清單也會收錄已被封鎖的網站，方便後續觀測。
 
-名單收錄標準大致上可廣泛的分為四大類：
+名單收錄標準大致分為四大類：
 
-1. **政治：**主要關注於那些表達與現任政府持不同立場的網站。與人權、言論自由、少數族裔權利和宗教運動更廣泛相關的內容也被納入考量。
-2. **社會：**包括與性別、賭博、非法藥物和酒精相關，以及其他可能在社會上被視為敏感或具冒犯性的話題。
-3. **衝突、安全：**包括與武裝衝突、邊界爭議、分裂運動和激進團體相關的內容。
-4. **網際網路工具：**提供電子郵件、雲端空間、搜尋、翻譯、網路電話（VoIP）服務和規避審查方法的網站被歸類在這一類別中。
+1. **政治**：與現任政府立場不同的網站。人權、言論自由、少數族群權利、宗教運動等延伸主題也包含在內。
+2. **社會**：性別、賭博、非法藥物、酒精，以及其他在當地被視為敏感的議題。
+3. **衝突、安全**：武裝衝突、邊界爭議、分裂運動、激進團體相關的內容。
+4. **網際網路工具**：電子郵件、雲端空間、搜尋、翻譯、網路電話（VoIP）、規避審查工具等服務。
 
 ## 台灣觀察名單現況
 
-目前台灣的名單 [tw.csv](https://github.com/citizenlab/test-lists/blob/master/lists/tw.csv){target="_blank" } 大部分在 2017 年新增建立，由於後續沒有持續維護，目前名單上有滿多網站已經結束或更換品牌網址，舊網址無效或仍是 `http://` 開頭，需要先整理目前的名單內容。
+台灣的名單 [tw.csv](https://github.com/citizenlab/test-lists/blob/master/lists/tw.csv){target="_blank" } 大多在 2017 年建立，之後沒有持續維護，現在名單上有不少網站已經停止營運或換了品牌網址，也有許多項目仍是 `http://` 開頭，需要先整理一輪。
 
 !!! note "http:// → https://"
 
-    有些網站不會自動將 `http://` 開頭的傳輸協定透過轉址方式（如：[`301 Moved Permanently`](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/301){target="_blank"}、[`308 Permanent Redirect`](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/308){target="_blank"}）到 `https://` 而造成檢測錯誤。在申請 TLS/SSL 憑證門檻降低與加密傳輸成為基本網站建構條件下，`https://` 應為預設的輸入網址格式。
+    有些網站不會自動把 `http://` 透過 [`301 Moved Permanently`](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/301){target="_blank"} 或 [`308 Permanent Redirect`](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/308){target="_blank"} 轉址到 `https://`，這會讓 OONI 檢測誤判。現在 TLS/SSL 憑證取得門檻已經很低，加密傳輸也是網站基本配備，清單上的網址預設應該用 `https://`。
 
 ## 名單更新
 
@@ -47,7 +47,7 @@ icon: material/list-status
 
 ## 名單新增
 
-名單於 2017 年建立後，已多年未作大規模調整，需要審視目前也需要加入檢測的網站清單。「新增什麼」的判斷會依四大分類（政治、社會、衝突安全、網際網路工具）做篩選，社群協作中持續討論。
+名單從 2017 年建立後就沒有再做大規模調整，需要重新盤點哪些網站值得加進來。新增的判斷依四大分類（政治、社會、衝突與安全、網際網路工具）做篩選，這部分社群還在持續討論。
 
 ## 志工怎麼參與
 
