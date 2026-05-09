@@ -10,13 +10,13 @@ icon: material/calendar-star
 
 在數位監控與網路審查逐漸蔓延的環境中，**新聞記者**、**公民團體**與**人權倡議者**正面臨前所未有的資訊風險：通訊可能被攔截、身分可能被追蹤，受訪者的安全也面臨威脅。在這樣的時代，我們需要不只依賴平台，而是重新掌握通訊的主控權。
 
-> _:shield: 當新聞自由遭遇監控與審查，當倡議行動被監視、聲音被封鎖——我們還能如何安全發聲、守護人權與自由？_
+> _:shield: 當新聞自由遭遇監控與審查，當倡議行動被監視、聲音被封鎖，我們還能如何安全發聲、守護人權與自由？_
 
 - 日期：2025/08/09（六）、2025/08/10（日）
 - 地點：國立臺灣科技大學 研揚教學大樓 TR-510 教室
 - 會議形式：工作坊、圓桌會議討論
 
-本工作坊將由在地開源社群「[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"}」提供技術支援與實務引導，介紹 [Tor](./what-is-tor.md){target="_blank"}、[Tails](./what-is-tails.md){target="_blank"}、[OONI](./what-is-ooni.md){target="_blank"} 等開源匿名網路工具，協助參與者建立第二安全裝置、匿名連線與進行網路審查偵測，提升行動與倡議的數位韌性。讓我們一起實踐資訊自由的基礎建設，用技術守護真相與抵抗壓迫。
+本工作坊將由在地開源社群「[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"}」提供技術支援與實務引導，介紹 [Tor](./tools/what-is-tor.md){target="_blank"}、[Tails](./tools/what-is-tails.md){target="_blank"}、[OONI](./tools/what-is-ooni.md){target="_blank"} 等開源匿名網路工具，協助參與者建立第二安全裝置、匿名連線與進行網路審查偵測，提升行動與倡議的數位韌性。讓我們一起實踐資訊自由的基礎建設，用技術守護真相與抵抗壓迫。
 
 [立即報名](https://form.anoni.net/s/cmc5t86n8000hlj0199ocqw2m){ .md-button .md-button--primary target="_blank"}
 
@@ -27,13 +27,13 @@ icon: material/calendar-star
 - 如何使用 Tor 網路匿名瀏覽
 - 建立安全、不可追蹤的**第二工作環境**（使用 Tails 與 USB 裝置）
 - 基礎的威脅模型評估：認識你的對手、風險與對應行動
-- 使用橋接器（Bridges）與 [Snowflake](./tor-snowflake.md){target="_blank"} 繞過封鎖國家或環境的網路審查
+- 使用橋接器（Bridges）與 [Snowflake](./tools/tor-snowflake.md){target="_blank"} 繞過封鎖國家或環境的網路審查
 
 **:tools: 實作能力與工具掌握**
 
 - 使用 Tails 製作**可攜式匿名作業系統**，在公共或不可信裝置上安全工作
 - 學習 [OONI Probe](https://ooni.org/install/){target="_blank"} 如何測量網路審查與服務封鎖，並回報全球開源資料庫
-- 使用 [TorBrowser](https://www.torproject.org/zh-TW/download/){target="_blank"} 和 [OnionShare](https://onionshare.org/){target="_blank"} 進行安全的文件分享與協作
+- 使用 [TorBrowser](https://www.torproject.org/zh-TW/download/){target="_blank"} 和 [OnionShare](./tools/onionshare.md) 進行安全的文件分享與協作
 
 **:jigsaw: 社群支援與持續學習**
 

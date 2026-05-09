@@ -1,5 +1,6 @@
 ---
 title: 活动参与
+description: 匿名网络、网络自由相关的工作坊、讨论会议与年会议程，含 COSCUP 2026 征稿、定点工作坊。开放台湾与海外华语读者的实体与线上参与。
 icon: material/account-reactivate-outline
 ---
 

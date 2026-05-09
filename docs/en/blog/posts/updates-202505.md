@@ -55,7 +55,7 @@ We are also conducting a poll on the discussion topics. If you have time, please
 
 ## Self-Skills Evaluation Form
 
-We have completed a [skills assessment form](../../setup-skill-level.md){target="_blank"} for Tor, Tails, and OONI, which allows participants to self-assess their familiarity with "anonymous networks." The assessment is divided into **Basic L1 to L3** and **Advanced L1 to L2**. Currently, the basic sections include reference answers, but it is recommended to first explore the questions at each level independently. For parts you cannot find or are unsure about, you can refer to the suggestions we've provided.
+We have completed a skills assessment form for Tor, Tails, and OONI, which allows participants to self-assess their familiarity with "anonymous networks." The assessment is divided into **Basic L1 to L3** and **Advanced L1 to L2**. Currently, the basic sections include reference answers, but it is recommended to first explore the questions at each level independently. For parts you cannot find or are unsure about, you can refer to the suggestions we've provided.
 
 Helpers in the workshop will be trained to reach **Basic L3** level before the event, aiming to ensure they have the ability to answer questions or guide participants through activities during the event.
 

@@ -15,7 +15,7 @@ In an environment where digital surveillance and internet censorship are increas
 - Location: Room TR-510, Yan-Yang Teaching Building, National Taiwan University of Science and Technology（國立臺灣科技大學 研揚教學大樓 TR-510 教室）
 - Conference format: Workshop and roundtable discussions
 
-This workshop will be supported and guided by the local open-source community "[Anonymous Network Community anoni.net](https://anoni.net/en/){target="_blank"}," introducing open-source anonymous network tools such as Tor, Tails, and [OONI](./what-is-ooni.md){target="_blank"}. It will assist participants in setting up secondary secure devices, establishing anonymous connections, and conducting network censorship detection, thereby enhancing the digital resilience of their movements and advocacy efforts. Let's work together to implement the infrastructure for information freedom, using technology to safeguard truth and resist oppression.
+This workshop will be supported and guided by the local open-source community "[Anonymous Network Community anoni.net](https://anoni.net/en/){target="_blank"}," introducing open-source anonymous network tools such as Tor, Tails, and [OONI](https://ooni.org/about/){target="_blank"}. It will assist participants in setting up secondary secure devices, establishing anonymous connections, and conducting network censorship detection, thereby enhancing the digital resilience of their movements and advocacy efforts. Let's work together to implement the infrastructure for information freedom, using technology to safeguard truth and resist oppression.
 
 [Register Now](https://form.anoni.net/s/cmc5t86n8000hlj0199ocqw2m){ .md-button .md-button--primary target="_blank"}
 
@@ -26,7 +26,7 @@ This workshop will be supported and guided by the local open-source community "[
 - How to use the Tor network for anonymous browsing
 - Establish a secure, untraceable **secondary work environment** (using Tails and USB devices)
 - Basic threat modeling assessment: Know your adversaries, risks, and corresponding actions
-- Use Bridges and [Snowflake](./tor-snowflake.md){target="_blank"} to bypass internet censorship in blocked countries or environments
+- Use Bridges and [Snowflake](https://snowflake.torproject.org/){target="_blank"} to bypass internet censorship in blocked countries or environments
 
 **:tools: Practical Skills and Tool Mastery**
 

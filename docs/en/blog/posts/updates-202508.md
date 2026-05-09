@@ -67,7 +67,7 @@ WebTunnel is one type of Tor bridge that assists users in connecting to the Onio
 
 Because of this, we cannot determine how many Tor WebTunnel bridges are currently established in Taiwan. If you are interested, you can refer to the "[WebTunnel Docker setup](https://community.torproject.org/relay/setup/webtunnel/docker/){target='_blank'}" to create one, or if you already have a service set up with nginx, you can [contribute a node](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"} by providing a path for the WebTunnel bridge connection—we greatly appreciate such contributions!
 
-Of course, there is an even easier way to contribute a bridge point: by using a browser to set up a [Tor Snowflake bridge](../../tor-snowflake.md){target="_blank"}!
+Of course, there is an even easier way to contribute a bridge point: by using a browser to set up a [Tor Snowflake bridge](https://snowflake.torproject.org/){target="_blank"}!
 
 ## Conclusion
 

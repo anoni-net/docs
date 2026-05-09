@@ -62,7 +62,7 @@ Outside Taiwan, readers often imagine **NGO-led** advocacy. In this policy area,
 
 The draft targets **commercial service providers** and **stablecoin issuers** that take customer assets or operate platforms under the statute’s definitions. **Non-custodial wallets** and routine on-chain transfers often sit outside that core line of business, though facts still matter at the margin. If you are unsure how an activity is classified, ask a qualified professional in Taiwan. This article stays at the pattern level so readers can orient coverage without a case memo.
 
-## Why the Anoni.net community cares
+## Why the anoni.net community cares
 
 We promote **Tor**, **Tails**, and **OONI** and think about **payments and identity** as privacy problems. Clearer VASP rules change how **regulated exchanges** and **on-chain self-custody** sit next to each other in practice. Understanding the bill’s progress helps communities discuss **privacy, anti-fraud enforcement, and compliance** with a shared vocabulary.
 

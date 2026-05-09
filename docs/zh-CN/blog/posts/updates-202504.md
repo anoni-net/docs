@@ -14,7 +14,7 @@ description: "项目当前近况与更新 2025/04"
 
 ![2025/04 项目进度更新](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-好久不见了，四月份经历了一个非常忙碌的阶段，Anoni.net Docs 项目也稍微缓慢推进。我们翻译了一篇来自 OONI 的发布更新：[新 OONI Explorer 主题审查页面](./2025-ooni-explorer-thematic-censorship-pages.md)。
+好久不见了，四月份经历了一个非常忙碌的阶段，anoni.net Docs 项目也稍微缓慢推进。我们翻译了一篇来自 OONI 的发布更新：[新 OONI Explorer 主题审查页面](./2025-ooni-explorer-thematic-censorship-pages.md)。
 
 另外，我们协助 eff.org 翻译的「[Tor 大学挑战赛计划](https://toruniversity.eff.org/zh-tw/)」现已翻译完毕并顺利更新到官网上，但目前还没有足够的能量来推广这个计划，或许再找个时间想想如何推动与展开。
 

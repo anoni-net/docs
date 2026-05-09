@@ -57,7 +57,7 @@ Tor 社群長期以來致力於捍衛網路自由，運營中繼節點並[提供
 
 ## 土庫曼的網路審查產業
 
-真相是在一篇由 [Turkmen.news](https://en.turkmen.news/news/internet-access-a-money-spinner-for-turkmenistan-s-cyber-security-service/){target="_blank"} 的調查報導中揭露的。土庫曼網路審查負責機構——網路安全部門，不僅負責封鎖如 Tor 這類翻牆工具，還在暗中出售網路接入。正如報導所言：「**一旦行賄，土庫曼公民就能獲得完整的高速網路自由接入。**」
+真相是在一篇由 [Turkmen.news](https://en.turkmen.news/news/internet-access-a-money-spinner-for-turkmenistan-s-cyber-security-service/){target="_blank"} 的調查報導中揭露的。土庫曼網路審查負責機構（網路安全部門）不僅負責封鎖如 Tor 這類翻牆工具，還在暗中出售網路接入。正如報導所言：「**一旦行賄，土庫曼公民就能獲得完整的高速網路自由接入。**」
 
 到 2023 年，這種網路審查商業模式已無法忽視。Turkmen.news 的新報告揭示，網路安全部門的代理正在銷售付費 VPN 服務，並提供 IP 白名單服務，這些卻是他們自己對公眾限制的。
 

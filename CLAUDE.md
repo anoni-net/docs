@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 專案概述
 
-此專案是「匿名網路社群 Anoni.net」的文件系統，主要包含三個子專案：
+此專案是「匿名網路社群 anoni.net」的文件系統，主要包含三個子專案：
 
 1. **docs/** - MkDocs 驅動的多語系文件網站（zh-TW, zh-CN, en）
 2. **pulse/** - Tor 中繼監控系統（FastAPI + PostgreSQL）

@@ -38,8 +38,8 @@ description: "邀請您於 2026 年 1 月 25 日 g0v Hackath71n 零時政府第 
 
 <div class="grid cards" markdown>
 
-- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../../internet-freedom-matter.md)
-- [:octicons-mark-github-24: 專案研究預先準備](../../setup-repo.md)
+- [:fontawesome-regular-circle-question: 網路自由為什麼重要？](../../basics/internet-freedom.md)
+- [:octicons-mark-github-24: 專案研究預先準備](../../community/setup-repo.md)
 - [:simple-readdotcv: 2026 規劃藍圖](./2025to2026.md)
 - [:simple-readdotcv: 在台師大架設 Tor Relay](./ntnu-nz.md)
 

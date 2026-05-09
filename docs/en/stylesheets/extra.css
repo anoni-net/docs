@@ -1,15 +1,125 @@
+/* ==========================================================================
+   品牌色 token（依 .claude/rules/brand-identity.md）
+   主色 cyan #00aeff、Accent、結構性次色、中性色
+   ========================================================================== */
+
+:root {
+  /* Brand cyan 9 階色票 */
+  --brand-cyan-50:  #e0f4ff;
+  --brand-cyan-100: #b3e3ff;
+  --brand-cyan-200: #80d1ff;
+  --brand-cyan-300: #4dbfff;
+  --brand-cyan-400: #26b3ff;
+  --brand-cyan-500: #00aeff;
+  --brand-cyan-600: #009ee6;
+  --brand-cyan-700: #0089bf;
+  --brand-cyan-800: #006d99;
+  --brand-cyan-900: #003e57;
+
+  /* Accent（固定 2 個） */
+  --accent-action:    #ef6c00;  /* CTA、活動公告 */
+  --accent-emergency: #d32f2f;  /* 緊急求救、警告 */
+
+  /* 結構性次色（綁定三大主題） */
+  --cat-privacy:  #4caf50;  /* 個人隱私指引 */
+  --cat-relay:    #7b1fa2;  /* Tor Relay 校園建立 */
+  --cat-payments: #ef6c00;  /* 匿名支付（與 --accent-action 同色） */
+
+  /* 中性 */
+  --neutral-muted:  #546e7a;
+  --neutral-border: #cdcdcd;
+}
+
 html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__inner.md-grid {
     padding: 0 1rem;
 }
 
 @media screen and (max-width: 100em) {
   .md-grid {
-    max-width: 1022px;
+    max-width: 1200px;
   }
 }
 
 @media screen and (min-width: 100em) {
   .md-grid {
-    max-width: 1240px;
+    max-width: 1440px;
   }
+}
+
+/* ==========================================================================
+   左側 sidebar：section 群組標題用背景色塊區隔
+   套用範圍：navigation.sections + navigation.indexes 下的 section 標題
+   （指南 tab 下的 概念 / 工具 / 場景 / 進階 / 報告 等）
+   ========================================================================== */
+
+.md-sidebar--primary .md-nav__item--section > .md-nav__link {
+  margin: 0.6rem 0 0.3rem;
+  padding: 0.35rem 0.6rem;
+  background-color: var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  font-weight: 600;
+}
+
+.md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-accent-fg-color);
+}
+
+/* section 子項目稍微縮排 */
+.md-sidebar--primary .md-nav__item--section > nav.md-nav {
+  padding-left: 0.4rem;
+}
+
+/* ==========================================================================
+   圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
+   .lg → 2rem（卡片標題用）
+   .xl → 3rem
+   .huge → 4rem（Hero 用）
+   .middle → 垂直置中
+   ========================================================================== */
+
+.twemoji.lg svg,
+.md-typeset .twemoji.lg svg {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+.twemoji.xl svg,
+.md-typeset .twemoji.xl svg {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.twemoji.huge svg,
+.md-typeset .twemoji.huge svg {
+  height: 4rem;
+  width: 4rem;
+}
+
+.twemoji.middle,
+.md-typeset .twemoji.middle {
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   .brand-frame — Brand-color frame for article screenshots / diagrams
+   Usage:
+     - markdown: ![alt](url){.brand-frame}
+     - HTML: <img class="brand-frame" src="..." alt="...">
+   ========================================================================== */
+
+.md-typeset img.brand-frame {
+  border-radius: 10px;
+  border: 1px solid var(--brand-cyan-500);
+  box-shadow: 0 0 0.3rem var(--brand-cyan-500);
+}
+
+/* ==========================================================================
+   .hero-icon — Home page H1 logo (same logo-tonal as header / favicon)
+   ========================================================================== */
+
+.md-typeset h1 img.hero-icon {
+  height: 2.5rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
 }

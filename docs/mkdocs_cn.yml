@@ -1,54 +1,100 @@
-docs_dir: !ENV [DOCS_DIR, "zh-TW"]
-site_name: !ENV [SITE_NAME, "匿名網路社群 Anoni.net/Docs"]
-site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
+docs_dir: !ENV [DOCS_DIR, "zh-CN"]
+site_name: !ENV [SITE_NAME, "匿名网络社群 anoni.net/Docs"]
+site_url: !ENV [SITE_URL, "https://anoni.net/docs/zh-cn/"]
 edit_uri:
-  !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/zh-TW/"]
+  !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/zh-CN/"]
 
 site_description:
-  !ENV [SITE_DESC, "推廣與翻譯匿名網路 Tor, Tails 與 OONI 觀測工具"]
-site_author: Anoni.net Volunteer
+  !ENV [SITE_DESC, "推广与翻译匿名网络 Tor、Tails 与 OONI 观测工具"]
+site_author: anoni.net Volunteer
 repo_url: https://github.com/anoni-net/docs
 repo_name: 匿名网络社群文件
-copyright: "CC-BY 4.0 2023-2026 Anoni.net Docs Project"
+copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
-  - !ENV [NAV_POST, "資訊更新"]:
+  - !ENV [NAV_GUIDES, "指南"]:
+      - guides/index.md
+      - !ENV [NAV_BASICS, "概念"]:
+          - basics/index.md
+          - basics/internet-freedom.md
+          - basics/anonymity-vs-privacy.md
+          - basics/threat-model.md
+          - basics/metadata.md
+          - basics/payments-anonymity.md
+      - !ENV [NAV_TOOLS, "工具"]:
+          - tools/index.md
+          - tools/what-is-anonymity-network.md
+          - tools/what-is-tor.md
+          - tools/tor-browser-advanced.md
+          - tools/tor-snowflake.md
+          - tools/onionshare.md
+          - tools/what-is-tails.md
+          - tools/tails-vs-whonix-vs-qubes.md
+          - tools/what-is-ooni.md
+          - tools/ooni-run-v2.md
+          - tools/messaging-comparison.md
+          - tools/password-manager.md
+          - tools/crypto-privacy-spectrum.md
+      - !ENV [NAV_SCENARIOS, "场景"]:
+          - scenarios/index.md
+          - scenarios/journalist.md
+          - scenarios/activist.md
+          - scenarios/lgbtq.md
+          - scenarios/domestic-violence.md
+          - scenarios/election-observer.md
+          - scenarios/nonprofit-anonymous-donation.md
+      - !ENV [NAV_ADVANCED, "进阶"]:
+          - advanced/index.md
+          - advanced/e2ee.md
+          - advanced/post-quantum.md
+          - advanced/dweb-ipfs-onion.md
+          - advanced/zk-identity-payments.md
+      - !ENV [NAV_REPORTS, "报告"]:
+          - reports/index.md
+  - !ENV [NAV_TAIWAN, "在地脉络"]:
+      - taiwan/index.md
+      - taiwan/ooni-checklist.md
+      - taiwan/ooni-asn-coverage.md
+      - taiwan/tor-relay-watcher.md
+      - taiwan/pdpa-2025.md
+      - taiwan/vasp-2026.md
+      - taiwan/whistleblower-law.md
+  - !ENV [NAV_POST, "信息更新"]:
       - blog/index.md
-  - !ENV [NAV_INTRO, "專案簡介"]:
-      - intro/index.md
-      - internet-freedom-matter.md
-      - what-is-anonymous-network.md
-      - what-is-ooni.md
-      - what-is-tor.md
-      - what-is-tails.md
-      - !ENV [NAV_PP, "參與專案"]:
-          - ooni-asns-coverage.md
-          - ooni-weblists.md
-          - ooni-i18n.md
-          - tor-snowflake.md
-      - !ENV [NAV_PPP, "參與準備"]:
-          - setup-repo.md
-          - setup-tor-relay.md
-          - setup-skill-level.md
-  - !ENV [NAV_EVENT, "活動參與"]:
+  - !ENV [NAV_COMMUNITY, "社群"]:
+      - community/index.md
+      - "开始参与":
+          - community/how-to-contribute.md
+          - community/skill-level.md
+          - community/contributor-handbook.md
+          - community/governance.md
+      - "动手实作":
+          - community/tools.md
+          - community/setup-repo.md
+          - community/i18n.md
+          - community/setup-tor-relay.md
+          - community/asn-coverage-howto.md
+          - community/upload-sensitive.md
+          - community/brand-assets.md
+      - "推动主题":
+          - community/roadmap-2026.md
+          - community/privacy-guide.md
+          - community/relay-on-campus.md
+          - community/payments-research.md
+  - !ENV [NAV_EVENT, "活动参与"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
       - event-workshop-2025.md
-      - !ENV [NAV_EVENT_PREPARE, "籌備頁面"]:
+      - !ENV [NAV_EVENT_PREPARE, "筹备页面"]:
           - event-workshop-2025-prepare.md
-  - !ENV [NAV_ABOUT, "關於我們"]:
+  - !ENV [NAV_ABOUT, "关于我们"]:
       - about/index.md
       - contact.md
-      - !ENV [NAV_COMMUNITY, "社群參與"]:
-          - about/community/index.md
-          - about/community/participate.md
-          - about/community/communication-tools.md
-  - !ENV [NAV_WATCHER, "監控觀察"]:
-      - watcher-tor-relays.md
+      - help/index.md
 theme:
   name: material
+  logo: assets/images/logo-white.svg
   icon:
-    logo: material/database-search-outline
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:
@@ -65,22 +111,20 @@ theme:
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: brown
-      accent: lime
+      primary: cyan
+      accent: light blue
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
-  language: !ENV [LANGUAGE, "zh-TW"]
-  custom_dir: !ENV [OVERRIDES, "overrides"]
+  language: !ENV [LANGUAGE, "zh"]
+  custom_dir: !ENV [OVERRIDES, "overrides_cn"]
   features:
     - navigation.top
-    - navigation.expand
     - navigation.sections
-    - navigation.footer
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes
-    - toc.integrate
+    - navigation.path
     - search.suggest
     - search.highlight
     - search.share
@@ -88,11 +132,15 @@ theme:
     - content.action.edit
     - content.tooltips
     - content.code.copy
+    - content.footnote.tooltips
 extra:
   alternate:
     - name: 臺灣正體（zh-TW）
       link: /docs/zh-tw/
       lang: zh-TW
+    - name: 简体中文（zh-CN）
+      link: /docs/zh-cn/
+      lang: zh-CN
     - name: English (en-US)
       link: /docs/en/
       lang: en
@@ -120,7 +168,7 @@ plugins:
       cards_layout_options:
         font_family: Noto Sans SC
         color: "#ffffff"
-        background_color: "#0287cf"
+        background_color: "#00aeff"
   - privacy
   - git-revision-date-localized:
       type: iso_datetime
@@ -130,9 +178,9 @@ plugins:
   - blog:
       post_url_date_format: yyyy/MM
       post_url_format: "{date}/{slug}"
-      archive: false
+      archive: true
       categories: true
-      categories_name: !ENV [CATE_NAME, "文章類型"]
+      categories_name: !ENV [CATE_NAME, "文章类型"]
   - rss:
       match_path: blog/posts/.*
       date_from_meta:
@@ -153,6 +201,7 @@ plugins:
           themes_dark:
             - slate
 markdown_extensions:
+  - abbr
   - attr_list
   - md_in_html
   - admonition
@@ -163,6 +212,7 @@ markdown_extensions:
         - name: vegalite
           class: vegalite
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
+  - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:

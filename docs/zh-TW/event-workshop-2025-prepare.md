@@ -44,7 +44,7 @@ icon: octicons/workflow-24
     - 想要報名的角色：[ ] 活動籌備人員、[ ] 工作坊小幫手。
     - 在工作坊活動中可以貢獻與獲得的事項：（讓我們可以避免安排不好玩的事務給你！）
 
-報名信件請寄到：`匿名網路社群 Anoni.net <whisper@anoni.net>`，期待與感謝你的參與！
+報名信件請寄到：`匿名網路社群 anoni.net <whisper@anoni.net>`，期待與感謝你的參與！
 
 ## :fontawesome-solid-clipboard-user: 活動籌備人員
 
@@ -174,7 +174,7 @@ icon: octicons/workflow-24
         - [x] 安裝 Tails，並實際使用至少一週。
         - [x] 建立持久性加密磁區（Persistent Storage）。
         - [x] 使用 Bridge 橋接設定 Tails 網路連線方式。
-        - [x] 使用 OnionShare 軟體分享檔案。
+        - [x] 使用 [OnionShare](./tools/onionshare.md) 軟體分享檔案。
 
     === ":material-checkbox-marked-circle-auto-outline: Tails: Advanced L1"
 

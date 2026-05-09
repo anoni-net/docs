@@ -90,7 +90,7 @@ muCMZProtocol!(submit<min_age_today, max_age, min_measurement_count, max_measure
 - OONI Probe 維持相同的網路在地假名
 - measurement_count 單調遞增（不會倒退或跳號造假）
 - 年齡分桶（age bucket）保持正確
-- OONI 看不到原始數值——只能驗證「被證明的敘述」
+- OONI 看不到原始數值，只能驗證「被證明的敘述」
 - 惡意客戶端無法偽造可信度中繼資料
 
 *伺服器只會看到證明（proof）*[^6]，看不到底層屬性值。

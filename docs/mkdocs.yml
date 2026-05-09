@@ -1,36 +1,96 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
-site_name: !ENV [SITE_NAME, "匿名網路社群 Anoni.net/Docs"]
+site_name: !ENV [SITE_NAME, "匿名網路社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
 edit_uri:
   !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/zh-TW/"]
 
 site_description:
   !ENV [SITE_DESC, "推廣與翻譯匿名網路 Tor, Tails 與 OONI 觀測工具"]
-site_author: Anoni.net Volunteer
+site_author: anoni.net Volunteer
 repo_url: https://github.com/anoni-net/docs
 repo_name: 匿名網路社群文件
-copyright: "CC-BY 4.0 2023-2026 Anoni.net Docs Project"
+copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
+  - !ENV [NAV_GUIDES, "指南"]:
+      - guides/index.md
+      - !ENV [NAV_BASICS, "概念"]:
+          - basics/index.md
+          - basics/internet-freedom.md
+          - basics/anonymity-vs-privacy.md
+          - basics/threat-model.md
+          - basics/metadata.md
+          - basics/payments-anonymity.md
+      - !ENV [NAV_TOOLS, "工具"]:
+          - tools/index.md
+          - tools/what-is-anonymity-network.md
+          - tools/what-is-tor.md
+          - tools/tor-browser-advanced.md
+          - tools/tor-snowflake.md
+          - tools/onionshare.md
+          - tools/what-is-tails.md
+          - tools/tails-vs-whonix-vs-qubes.md
+          - tools/what-is-ooni.md
+          - tools/ooni-run-v2.md
+          - tools/messaging-comparison.md
+          - tools/password-manager.md
+          - tools/crypto-privacy-spectrum.md
+      - !ENV [NAV_SCENARIOS, "場景"]:
+          - scenarios/index.md
+          - scenarios/journalist.md
+          - scenarios/activist.md
+          - scenarios/lgbtq.md
+          - scenarios/domestic-violence.md
+          - scenarios/election-observer.md
+          - scenarios/nonprofit-anonymous-donation.md
+      - !ENV [NAV_ADVANCED, "進階"]:
+          - advanced/index.md
+          - advanced/e2ee.md
+          - advanced/post-quantum.md
+          - advanced/dweb-ipfs-onion.md
+          - advanced/zk-identity-payments.md
+      - !ENV [NAV_REPORTS, "報告"]:
+          - reports/index.md
+          - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
+              - reports/interseclab-network-coup/index.md
+              - reports/interseclab-network-coup/index_1.md
+              - reports/interseclab-network-coup/index_2.md
+              - reports/interseclab-network-coup/index_3.md
+              - reports/interseclab-network-coup/index_4.md
+              - reports/interseclab-network-coup/index_5.md
+              - reports/interseclab-network-coup/index_6.md
+              - reports/interseclab-network-coup/index_7.md
+              - reports/interseclab-network-coup/index_8.md
+  - !ENV [NAV_TAIWAN, "在地脈絡"]:
+      - taiwan/index.md
+      - taiwan/ooni-checklist.md
+      - taiwan/ooni-asn-coverage.md
+      - taiwan/tor-relay-watcher.md
+      - taiwan/pdpa-2025.md
+      - taiwan/vasp-2026.md
+      - taiwan/whistleblower-law.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
-  - !ENV [NAV_INTRO, "認識匿名網路"]:
-      - intro/index.md
-      - internet-freedom-matter.md
-      - what-is-anonymous-network.md
-      - what-is-ooni.md
-      - what-is-tor.md
-      - what-is-tails.md
-      - !ENV [NAV_PP, "參與專案"]:
-          - ooni-asns-coverage.md
-          - ooni-weblists.md
-          - ooni-i18n.md
-          - tor-snowflake.md
-          - intro/ooni-run-v2.md
-      - !ENV [NAV_PPP, "參與準備"]:
-          - setup-repo.md
-          - setup-tor-relay.md
-          - setup-skill-level.md
+  - !ENV [NAV_COMMUNITY, "社群"]:
+      - community/index.md
+      - "開始參與":
+          - community/how-to-contribute.md
+          - community/skill-level.md
+          - community/contributor-handbook.md
+          - community/governance.md
+      - "動手實作":
+          - community/tools.md
+          - community/setup-repo.md
+          - community/i18n.md
+          - community/setup-tor-relay.md
+          - community/asn-coverage-howto.md
+          - community/upload-sensitive.md
+          - community/brand-assets.md
+      - "推動主題":
+          - community/roadmap-2026.md
+          - community/privacy-guide.md
+          - community/relay-on-campus.md
+          - community/payments-research.md
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
@@ -40,29 +100,11 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
-      - !ENV [NAV_COMMUNITY, "社群參與"]:
-          - about/community/index.md
-          - about/community/participate.md
-          - about/community/communication-tools.md
-          - about/send-censorship.md
-  - !ENV [NAV_WATCHER, "監控觀察"]:
-      - watcher-tor-relays.md
-      - !ENV [NAV_REPORT, "嚴選報告"]:
-          - report/index.md
-          - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
-              - report/interseclab-the-internet-coup/index.md
-              - report/interseclab-the-internet-coup/index_1.md
-              - report/interseclab-the-internet-coup/index_2.md
-              - report/interseclab-the-internet-coup/index_3.md
-              - report/interseclab-the-internet-coup/index_4.md
-              - report/interseclab-the-internet-coup/index_5.md
-              - report/interseclab-the-internet-coup/index_6.md
-              - report/interseclab-the-internet-coup/index_7.md
-              - report/interseclab-the-internet-coup/index_8.md
+      - help/index.md
 theme:
   name: material
+  logo: assets/images/logo-white.svg
   icon:
-    logo: material/database-search-outline
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:
@@ -79,8 +121,8 @@ theme:
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: brown
-      accent: lime
+      primary: cyan
+      accent: light blue
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
@@ -88,14 +130,11 @@ theme:
   custom_dir: !ENV [OVERRIDES, "overrides"]
   features:
     - navigation.top
-    - navigation.expand
     - navigation.sections
-    - navigation.footer
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes
     - navigation.path
-    - toc.integrate
     - search.suggest
     - search.highlight
     - search.share
@@ -139,7 +178,7 @@ plugins:
       cards_layout_options:
         font_family: Noto Sans TC
         color: "#ffffff"
-        background_color: "#0287cf"
+        background_color: "#00aeff"
   - privacy
   - git-revision-date-localized:
       type: iso_datetime

@@ -2,3 +2,7 @@ output
 .cache/
 anoni-net-docs-ipfs
 .python-version
+.DS_Store
+
+# drawio Desktop auto-saved backups
+.$*.bkp

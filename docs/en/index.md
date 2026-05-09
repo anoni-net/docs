@@ -1,59 +1,155 @@
 ---
 title: Home
+description: A Taiwan-anchored volunteer observatory tracking networked freedom across the Sinophone Asia-Pacific region — OONI measurements, Tor relay monitoring, and on-the-ground community context.
 icon: material/home-circle
+hide:
+  - navigation
+  - toc
 ---
 
-# Anonymity Network Community
+# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net Docs
 
-In the rapidly evolving digital age, the internet has become an indispensable part of our lives. However, with the widespread adoption of the internet, personal privacy and online freedom are facing unprecedented challenges. In Taiwan, we aim to promote the concepts of "**anonymous networks**" and "**internet freedom**" to raise public awareness of these critical issues.
+> A Taiwan-anchored volunteer observatory for networked freedom across the Sinophone Asia-Pacific.
 
-We plan to use open-source anonymous tools like Tor, Tails, and OONI to strengthen anonymity and security online. We also want **news media**, **independent journalists**, **civil society groups**, and the **open-source technology community** to have more opportunities to collaborate and learn from each other.
+[:material-account-group: About us](./about/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: Newsletter](./contact.md){ .md-button } [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](./feed_rss_created.xml){ .md-button }
 
-We focus on these participants because their work often requires protecting sources and members, staying connected during cross-border verification, and using open measurements to document blocking, throttling, or pressure.
+## :material-compass-outline: Why this site exists
 
-- **News media**: Reducing the risk that identities and traffic patterns are correlated and tracked during editorial work, and still being able to verify facts and explain them publicly when connectivity is disrupted.
-- **Independent journalists**: When security and legal support are limited, relying more on anonymous networking and privacy-first environments to investigate and stay in touch.
-- **Civil society groups**: Advocacy and contacts that need protection, while official sites and social accounts can also become targets.
-- **Open-source technology community**: Contributing through relays, testing, and documentation to keep anonymous-network infrastructure usable and resilient.
+We combine OONI network measurements, Tor relay monitoring, and on-the-ground community context, written by people working inside the region. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the Sinophone diaspora.
 
-For more detail, see [What is an anonymous network? Why different participants use it](./what-is-anonymous-network.md#stakeholders-why). We look forward to discussing practical approaches with you and strengthening privacy protection and anonymity in day-to-day work and organizational practice.
+This is not a privacy 101 site. For introductory material on Tor, Tails, OONI, Signal, or general digital safety, well-established English resources include [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, and the [Tor Project Support Portal](https://support.torproject.org/){target="_blank"}. Where we try to add something is the regional context and on-the-ground observation those sites are not set up to produce.
 
-!!! tip "Updated"
-
-    - `Event`{style="color: OrangeRed;"}：[COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) - 8 Apr, 2026
-    - `New`{style="color: DodgerBlue;"}：[2026/03 Community Update](./blog/posts/updates-202603.md) - 29 Mar, 2026
-    - `New`{style="color: SeaGreen;"}：[Tor Project Guest Post: Setting Up a Tor Relay at a University in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 23 Mar, 2026
-    - `Update`{style="color: DodgerBlue;"}：[2026 Community Participation: Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments](./about/community/index.md) - 2026/01/02
-    - `Update`{style="color: DodgerBlue;"}：[Setting Up a Tor Relay at National Taiwan Normal University: A Practical Experience of Communicating with the University and Leaving Open Possibilities](./blog/posts/ntnu-nz.md) - 30 Dec, 2025
-    - `Event`{style="color: OrangeRed;"}: [Taipei Coffee and Circumvention Meetup 2025/10](./blog/posts/internetfreedom-oct2025.md) - 18 Oct, 2025
-
-    More announcements at [:material-bullhorn-outline: Recent Announcements](./blog/index.md).
-
-## :fontawesome-regular-circle-question: Get Started
+## :material-target: Three ways to use this site
 
 <div class="grid cards" markdown>
 
-- [:fontawesome-regular-circle-question: What is OONI?](./what-is-ooni.md)
-- [:fontawesome-regular-circle-question: Why does Internet Freedom matter?](./internet-freedom-matter.md)
+- :material-bookmark-check-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Cite our work**
+
+    ---
+
+    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN coverage analysis tool over OONI public data, and have published one full Chinese translation of a regional report (InterSecLab Geedge / MESA, 2025). Regulatory explainers (Taiwan PDPA / VASP / whistleblower) are in active drafting.
+
+    [:octicons-arrow-right-24: Regional observatory](./regional/index.md)
+
+- :material-handshake-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Collaborate with us**
+
+    ---
+
+    Peer organizations, funders, and AP-based contributors who want to work with a Taiwan-based community on regional measurement, advocacy, or documentation. Existing partnerships (Tor Project, OONI, EFF, university hosts) are listed on the [About page](./about/index.md).
+
+    [:octicons-arrow-right-24: Community & contact](./community/index.md)
+
+- :material-compass-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Find a regional guide**
+
+    ---
+
+    Diaspora, cross-border travelers, and people whose families remain in less open jurisdictions. The first scenario guide is up; more are queued. The regional context is what global English-language privacy sites do not cover.
+
+    [:octicons-arrow-right-24: Scenarios](./scenarios/index.md)
 
 </div>
 
-## :fontawesome-solid-diagram-project: The Projects
+## :material-map-outline: What we observe
+
+Our standing varies by jurisdiction. We don't claim equal depth across the region; the section below is honest about where we have direct experience versus where we are following, often through second-hand sources. Conceptual frame: [Why networked freedom matters](./basics/internet-freedom.md).
+
+### Where we work from
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs Observation Data Analysis](./ooni-asns-coverage.md)
-- [:material-list-status: OONI Website Testing List](./ooni-weblists.md)
-- [:material-translate-variant: L10n and Documentation Translation](./ooni-i18n.md)
-- [:octicons-mark-github-24: Project Research Preparation](./setup-repo.md)
+- :material-island:{ .lg .middle style="color: var(--brand-cyan-500);" } **Taiwan**
+
+    ---
+
+    The community is in Taipei; this is the only jurisdiction where we have direct, first-hand standing. Personal Data Protection Act 2025, VASP Act 2026, the whistleblower-protection law's technical aspects, and one of the more open Sinophone connectivity environments that we use as a reference baseline. Most regulatory writing on this site is Taiwan-specific.
+
+- :material-source-branch:{ .lg .middle style="color: var(--brand-cyan-500);" } **Taiwan's open-source and civic-tech community**
+
+    ---
+
+    We are part of the local privacy, anti-surveillance, and open-source conversation in Taiwan, and regularly share observations and project work at COSCUP, g0v hackathons, ETHTaipei, and our own Internet Freedom Coffee meetups. This is where contributors with interest in anonymity and privacy tend to find us, and where we report observations back to a peer audience close to the work.
 
 </div>
 
-## :material-update: Continuously Track Progress
+### What we follow closely
 
 <div class="grid cards" markdown>
 
-- [:material-bullhorn-outline: Recent Announcements](./blog/index.md)
-- [:material-email-fast-outline: Subscribe to the Mailing List](./contact.md){target="_blank"}
+- :material-wall:{ .lg .middle style="color: var(--neutral-muted);" } **Mainland China**
+
+    ---
+
+    Followed through public sources, not first-hand observation. The Great Firewall's filtering and DPI patterns, real-name infrastructure on domestic platforms, content-governance cycles, and the technical export of these systems abroad (the 2025 InterSecLab Geedge / MESA leak is the one report we have translated in full to Chinese).
+
+- :material-domain:{ .lg .middle style="color: var(--neutral-muted);" } **Hong Kong & Macau**
+
+    ---
+
+    Followed through public sources and contacts in the diaspora. Post-2020 National Security Law civic-space contraction, expansion of iAMSmart electronic identity and integration with HKID, and the cross-strait device-search environment.
 
 </div>
+
+### What we keep an eye on
+
+<div class="grid cards" markdown>
+
+- :material-bank-outline:{ .lg .middle style="color: var(--neutral-muted);" } **Singapore**
+
+    ---
+
+    Lower-priority on the site so far. POFMA, the 2022 Section 377A repeal alongside marriage-definition lock-in, and Singpass as a deeply-integrated real-name layer are the threads we monitor when relevant to a scenario.
+
+- :material-mosque:{ .lg .middle style="color: var(--neutral-muted);" } **Malaysia**
+
+    ---
+
+    Lower-priority on the site so far. Federal Section 377 plus state-level Islamic enforcement (JAIS raids), and reports of dating-app data entering enforcement chains, are the threads we monitor when relevant to a scenario.
+
+</div>
+
+### Cutting across the above
+
+<div class="grid cards" markdown>
+
+- :material-airplane:{ .lg .middle style="color: var(--neutral-muted);" } **The diaspora & cross-border**
+
+    ---
+
+    Families and identities that move between the jurisdictions above. Cross-border travel device preparation, return-trip risk, and the metadata of Sinophone family-group chats. Often the most relevant layer for English-preferring readers.
+
+</div>
+
+## :material-account-supervisor-outline: Who we write for
+
+<div class="grid cards" markdown>
+
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--neutral-muted);" } **International rights organizations**
+
+    ---
+
+    Rights advocacy, anti-surveillance, and anti-censorship organizations covering the Asia-Pacific that may use this site for regional context and citable observations. Documented partners are listed on the [About page](./about/index.md).
+
+- :material-account-edit-outline:{ .lg .middle style="color: var(--neutral-muted);" } **Journalists & academic researchers**
+
+    ---
+
+    Reporters and researchers covering Internet freedom, surveillance, and platform regulation in the Asia-Pacific who need regional context that complements the upstream English literature.
+
+- :material-airplane-takeoff:{ .lg .middle style="color: var(--neutral-muted);" } **The English-preferring Sinophone diaspora**
+
+    ---
+
+    People with family or networks in the region who read English more comfortably than Chinese, particularly post-NSL diaspora, students abroad, and second-generation readers.
+
+</div>
+
+## :material-bullhorn-outline: Recent updates
+
+!!! tip "Latest"
+
+    - `Event`{style="color: var(--accent-action);"}: [COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) — 2026-04-08
+    - `New`{style="color: var(--brand-cyan-600);"}: [2026/03 Community Update](./blog/posts/updates-202603.md) — 2026-03-29
+    - `Update`{style="color: var(--cat-privacy);"}: [Tor Project guest post — Setting up a Tor relay at a university in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} — 2026-03-23
+    - `New`{style="color: var(--brand-cyan-600);"}: [2026 community focus — Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments](./community/index.md) — 2026-01-02
+
+    More at [:material-bullhorn-outline: Updates](./blog/index.md).
