@@ -11,7 +11,7 @@ hide:
 
 > A Taiwan-anchored volunteer observatory for networked freedom across the Sinophone Asia-Pacific.
 
-[:material-account-group: About us](./about/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: Newsletter](./contact.md){ .md-button } [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](./feed_rss_created.xml){ .md-button }
+[:material-account-group: About us](./about/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: Newsletter](./contact.md){ .md-button } [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/en/feed_rss_created.xml){ .md-button }
 
 ## :material-compass-outline: Why this site exists
 
