@@ -11,7 +11,7 @@ hide:
 
 > 推廣 Tor、Tails、OONI，串連台灣的網路自由實踐與在地觀測。
 
-[:material-account-group: 認識社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 訂閱電子報](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](./feed_rss_created.xml){ .md-button }
+[:material-account-group: 認識社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 訂閱電子報](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/feed_rss_created.xml){ .md-button }
 
 ## :material-account-multiple-outline: 我們是誰、為誰寫
 
