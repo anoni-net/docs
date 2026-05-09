@@ -1,5 +1,6 @@
 ---
 title: 首頁
+description: 推廣 Tor、Tails、OONI 與匿名網路工具的台灣社群入口。整理觀測資料、在地法規（個資法、VASP、揭弊者保護）、場景指引與工作坊活動，串連台灣的網路自由實踐。
 icon: material/home-circle
 hide:
   - navigation

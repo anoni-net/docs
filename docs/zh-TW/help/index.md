@@ -85,7 +85,7 @@ icon: material/lifebuoy
 
 ### 數位防護的同步動作
 
-- 把社群媒體切換到僅限好友／私人帳號
+- 把社群媒體切換到僅限好友或私人帳號
 - 移除照片中的位置標籤、Metadata。新照片上傳前以 Tails 內建的 Metadata Cleaner 或類似工具去識別
 - 關閉相關 App 的位置共享（Google Maps、Find My）
 - 進一步閱讀：[家暴受害者的數位準備](../scenarios/domestic-violence.md)、[Metadata 是什麼](../basics/metadata.md)

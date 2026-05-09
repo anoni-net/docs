@@ -1,5 +1,6 @@
 ---
 title: 首页
+description: 推广 Tor、Tails、OONI 与匿名网络工具的台湾社群入口。整理观测数据、华语地区在地脉络（个资法、VASP、揭弊者保护等）、场景指引与工作坊活动，串连华语圈的网络自由实践。
 icon: material/home-circle
 hide:
   - navigation

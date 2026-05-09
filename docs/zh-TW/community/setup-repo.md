@@ -1,5 +1,6 @@
 ---
 title: 專案研究預先準備
+description: 加入 anoni.net 文件站、Pulse、ASN Coverage 等專案開發前的環境設定指南，包含 git、GitHub、本機開發環境基礎。給想實際動手協作的台灣志工。
 icon: octicons/mark-github-24
 ---
 # :octicons-mark-github-24: 專案研究預先準備

@@ -1,7 +1,4 @@
 docs_dir: !ENV [DOCS_DIR, "zh-TW"]
-exclude_docs: |
-  scenarios/domestic-violence.md
-  scenarios/election-observer.md
 site_name: !ENV [SITE_NAME, "匿名網路社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/"]
 edit_uri:
@@ -115,7 +112,7 @@ plugins:
       cards_layout_options:
         font_family: Public Sans
         color: "#ffffff"
-        background_color: "#0287cf"
+        background_color: "#00aeff"
   - privacy
   - git-revision-date-localized:
       type: iso_datetime

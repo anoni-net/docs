@@ -1,5 +1,6 @@
 ---
 title: 如何搭建 Tor Relay
+description: 在台灣搭建 Tor 中繼節點、橋接、出口節點的法律、技術與行政考量。對應 EFF Tor University Challenge 經驗，含校園網路場景與台灣電信法規。
 icon: simple/torproject
 ---
 

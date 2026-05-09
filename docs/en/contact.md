@@ -14,7 +14,7 @@ If you have discussions that cannot be made public, you can directly contact the
 
 ### Community Discussion & Video
 
-For ongoing discussions and theme collaboration, we use **Matrix** (web client [Element](https://matrix.anoni.net/){target=\"_blank\"}, homeserver `im.anoni.net`), [**Cryptpad** encrypted collaboration](https://cryptpad.anoni.net/){target=\"_blank\"}, and [**Jitsi**](https://jitsi.goodmeet.asia/){target=\"_blank\"} for online meetings. For how to request accounts and get started, please see [Communication and Collaboration Tools](about/community/communication-tools.md).
+For ongoing discussions and theme collaboration, we use **Matrix** (web client [Element](https://matrix.anoni.net/){target=\"_blank\"}, homeserver `im.anoni.net`), [**Cryptpad** encrypted collaboration](https://cryptpad.anoni.net/){target=\"_blank\"}, and [**Jitsi**](https://jitsi.goodmeet.asia/){target=\"_blank\"} for online meetings. For how to request accounts and get started, please see [Community](community/index.md).
 
 ---
 

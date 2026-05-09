@@ -1,5 +1,6 @@
 ---
 title: 關於我們
+description: 匿名網路社群 anoni.net 的緣起、組織定位與 2026 三大主題（個人隱私指引、Tor Relay 校園建立、匿名支付）。給想了解社群工作方向的讀者。
 icon: material/account-box-outline
 ---
 

@@ -153,7 +153,7 @@ If you find a stranger adding your alt with your main account's full name in the
 - Don't delete the harassment — it's your evidence later
 - Move social media to friends-only, but don't mass-delete posts (often read as guilt)
 - Local helplines are listed in the regional context section below
-- For severe cases, see [Help](../help/index.md) for emergency channels
+- For severe cases, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual) for emergency digital-safety support
 
 ## Family-controlled traces on personal devices
 

@@ -6,6 +6,7 @@ categories:
     - 公告
     - 社区
 image: "assets/images/post-update.png"
+description: "anoni.net Docs 2025 项目重启，公告社群三个子项目的研究方向，邀请对网络自由与匿名网络议题有兴趣的华语读者一同加入。"
 ---
 
 # 项目重启 2025

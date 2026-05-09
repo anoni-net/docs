@@ -1,5 +1,6 @@
 ---
 title: 项目研究预先准备
+description: 加入 anoni.net 文件站、Pulse、ASN Coverage 等项目开发前的环境设定指南，包含 git、GitHub、本机开发环境基础。给想实际动手协作的华语志愿者。
 icon: octicons/mark-github-24
 ---
 # :octicons-mark-github-24: 项目研究预先准备

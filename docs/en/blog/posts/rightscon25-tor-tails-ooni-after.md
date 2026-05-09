@@ -92,11 +92,11 @@ When creating a new list in OONI Run, users can also specify an associated numbe
 
 !!! info "Content You Might Be Interested In"
 
-    1. [What is OONI?](../../what-is-ooni.md){target="_blank"}
+    1. [What is OONI?](https://ooni.org/about/){target="_blank"}
     2. OONI Run Link ID created on the event day is [10137](https://explorer.ooni.org/chart/mat?since=2025-02-22&until=2025-03-07&time_grain=day&axis_x=measurement_start_day&test_name=web_connectivity&ooni_run_link_id=10137){target="_blank"}. You can quickly understand the network situation through [crowd-assisted testing](https://explorer.ooni.org/search?since=2025-02-23&until=2025-02-24&test_name=web_connectivity&failure=true&ooni_run_link_id=10137){target="_blank"}.
     3. [Probe Security Without Identification, Michele Orrù, 2025-02-20](https://ooni.org/post/2025-probe-security-without-identification/){target="_blank"}: As OONI probes enhance network situation assessment, risks such as intentional or unintentional uploading of incorrect observation data by users could impact the credibility of OONI's observations. The article discusses how attackers may use fake data to pollute OONI's observation database to undermine platform trust, emphasizing transparency and exposing digital rights violations.
     4. 2024 OONI Review: <https://ooni.org/post/2024-year-in-review/>{target="_blank"}
-    5. [Taiwan ASNs Overview in OONI Observational Data (2023/12)](../../ooni-asns-coverage.md){target="_blank"}
+    5. [Taiwan ASNs Overview in OONI Observational Data (2023/12)](../../regional/index.md){target="_blank"}
 
 ## Roger's Talk
 

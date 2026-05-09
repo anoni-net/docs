@@ -52,7 +52,7 @@ icon: material/chat-question
     <capture>OONI Explorer：规避工具观测（画面为站内保留之示意截图，区间与数据以网站为准）</capture>
 </figure>
 
-[Tor](https://www.torproject.org/){target="_blank"} 则透过多层路由与中继网络，协助使用者在高风险环境下维持匿名与连线。Tor 中继是去中心化的志愿基础建设，可从 Tor Metrics 逐国查询分布状况。下图是台湾节点分布范例（anoni.net 社群所在地），其他国家／地区可在同一介面切换查看。
+[Tor](https://www.torproject.org/){target="_blank"} 则透过多层路由与中继网络，协助使用者在高风险环境下维持匿名与连线。Tor 中继是去中心化的志愿基础建设，可从 Tor Metrics 逐国查询分布状况。下图是台湾节点分布范例（anoni.net 社群所在地），其他国家或地区可在同一介面切换查看。
 
 <figure markdown="span">
     <a href="https://metrics.torproject.org/rs.html#search/country:tw" target="_blank">

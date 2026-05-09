@@ -53,13 +53,13 @@ Why an application process:
 - **So everyone who joins knows what this space is**: applicants understand that this is for themes like “personal privacy guidelines,” “Tor relays on campus,” and “anonymous payments”—not a general-purpose chat. People who write in for a code usually already have some interest in these topics.
 - **We’re protecting the space, not excluding people**: we don’t ask for real names or ID documents, only that you take a moment to write and briefly say what you’re interested in. If these themes matter to you, we welcome you to get in touch.
 
-For how to request accounts and get started, see [Communication and Collaboration Tools](../../about/community/communication-tools.md).
+For how to request accounts and get started, see [Community](../../community/index.md).
 
 ## A word to people who use Discord
 
 We don’t want this to feel like an either/or: many people need to stay on Discord for communities, games, or projects, and that’s fine. We’re saying: **when you need to discuss sensitive topics or want higher privacy and a predictable environment, there is a small, stable Matrix space here**.
 
-- If you want to dive into the 2026 themes (personal privacy guidelines, Tor Relay on campus, anonymous payments) or run experiments around anonymous networks, you’re welcome to do that on [Matrix and Cryptpad](../../about/community/index.md).
+- If you want to dive into the 2026 themes (personal privacy guidelines, Tor Relay on campus, anonymous payments) or run experiments around anonymous networks, you’re welcome to do that on [Matrix and Cryptpad](../../community/index.md).
 - If you only want to follow along occasionally, staying on your current platform is fine. We’ll keep sharing progress on the site and at events; you can decide later whether to go further.
 
 anoni.net’s door stays open. The difference is that we think about this path in terms of **who decides the rules and who holds the data**, and we use a self-hosted Matrix and an application-based account process to balance privacy and quality in a way we can live with.

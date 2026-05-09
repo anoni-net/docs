@@ -15,12 +15,12 @@ icon: material/account-group-outline
 - [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：帳號分流、交友 app 風險、跨平台連結追蹤、家人控管下的本機痕跡、跨國旅行裝置準備。
 - [倡議組織的匿名捐款管道](./nonprofit-anonymous-donation.md)：給組織方與捐款人雙角色的合法匿名捐款流程，含台灣公益勸募條例、政治獻金法、VASP 與稅務脈絡。
 
-## 籌備中
+## 撰寫中（2026 Q3 完成）
 
-下列場景的文章正在規劃，以下是大綱方向。如果你身在這些情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
+下列場景已上線骨架條列，內文預計 2026 Q3 補完整版。如果你身在這些情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
 
-- **家暴受害者的數位準備**：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
-- **選舉觀察員的自保**：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）
+- [家暴受害者的數位準備](./domestic-violence.md)：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
+- [選舉觀察員的自保](./election-observer.md)：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）
 
 整體進度與認領狀況見 [scenarios/ 上線時抽掉的文章追蹤](https://github.com/anoni-net/docs/issues/37)。
 

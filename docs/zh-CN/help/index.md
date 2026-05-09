@@ -89,7 +89,7 @@ icon: material/lifebuoy
 
 ### 数位防护的同步动作
 
-- 把社群媒体切换到仅限好友／私人账号
+- 把社群媒体切换到仅限好友或私人账号
 - 移除照片中的位置标签、Metadata。新照片上传前以 Tails 内建的 Metadata Cleaner 或类似工具去识别
 - 关闭相关 App 的位置共享（Google Maps、Find My）
 - 进一步阅读：[家暴受害者的数位准备](../scenarios/domestic-violence.md)、[Metadata 是什么](../basics/metadata.md)

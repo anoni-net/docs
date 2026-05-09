@@ -6,6 +6,7 @@ categories:
     - 公告
     - 社群
 image: "assets/images/post-update.png"
+description: "anoni.net Docs 2025 專案重啟，公告社群三個子專案的研究方向，邀請對網路自由與匿名網路議題有興趣的台灣讀者一同加入。"
 ---
 
 # 專案重啟 2025

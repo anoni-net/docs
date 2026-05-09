@@ -1,5 +1,6 @@
 ---
 title: 自我技能評估表
+description: 評估自己對 Tor、Tails、OONI 的理解程度，搭配學習路徑指引。給剛接觸匿名網路的台灣志工，作為加入社群協作前的參考量表。
 icon: octicons/paste-24
 ---
 
