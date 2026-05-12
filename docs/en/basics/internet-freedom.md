@@ -12,7 +12,7 @@ This page explains how anoni.net thinks about the concept, and why it is worth t
 
 !!! info "About this site"
 
-    anoni.net is a volunteer community based in Taipei. We discuss networked freedom as a regional question, with Taiwan as one example among several. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora. Region-specific situations differ — readers should weigh the framing here against local conditions on the ground.
+    anoni.net is a volunteer community based in Taiwan. We discuss networked freedom as a regional question, with Taiwan as one example among several. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora. Region-specific situations differ — readers should weigh the framing here against local conditions on the ground.
 
 ## How we think about it: three layers
 

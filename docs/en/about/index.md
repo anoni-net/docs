@@ -1,19 +1,19 @@
 ---
 title: About anoni.net
-description: A volunteer community based in Taipei tracking networked freedom across the Sinophone Asia-Pacific. Governance, partnerships, publications, and how to verify what we do.
+description: A volunteer community based in Taiwan tracking networked freedom across the Sinophone Asia-Pacific. Governance, partnerships, publications, and how to verify what we do.
 icon: material/account-box-outline
 ---
 
 # :material-account-box-outline: About anoni.net
 
-anoni.net is a small volunteer community based in Taipei, working on networked freedom across the Sinophone Asia-Pacific. The community formed around 2023 with a focus on OONI measurement coverage in Taiwan, and has since broadened its scope toward regional observation, regulatory tracking, and selective translation of regional research.
+anoni.net is a small volunteer community based in Taiwan, working on networked freedom across the Sinophone Asia-Pacific. The community formed around 2023 with a focus on OONI measurement coverage in Taiwan, and has since broadened its scope toward regional observation, regulatory tracking, and selective translation of regional research.
 
 This page is written for international peer organizations, journalists, researchers, and funders who need to know who is behind the work before citing it, partnering, or recommending it onward.
 
 ## What we are
 
 - **A volunteer community.** No salaried staff. The site, the Pulse measurement system, the ASN coverage tooling, and the regional translations are produced by community contributors on their own time, sometimes under pseudonyms.
-- **Based in Taipei.** The active core is in Taiwan. We hope to bring in regional contributors over time but currently have only occasional informal exchange with collaborators elsewhere in the region.
+- **Based in Taiwan.** The active core is in Taipei. We hope to bring in regional contributors over time but currently have only occasional informal exchange with collaborators elsewhere in the region.
 - **Anchored in self-hosted infrastructure.** We run our own Matrix homeserver (`im.anoni.net`), a Cryptpad instance, an Etherpad, a Send instance, a SearXNG instance, and a Formbricks instance. Internal coordination happens on these tools rather than on third-party platforms.
 - **Originally a Chinese-language community.** The Traditional Chinese (zh-TW) edition is the source of truth. A re-localized Simplified Chinese (zh-CN) edition exists. This English edition is being rebuilt as a regional observatory for international readers, not as a one-to-one translation.
 
