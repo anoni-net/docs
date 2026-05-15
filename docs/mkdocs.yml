@@ -174,6 +174,18 @@ plugins:
       lang:
         - zh
         - en
+  - redirects:
+      redirect_maps:
+        'report/index.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup/index.md': 'reports/interseclab-network-coup/index.md'
+        'report/interseclab-the-internet-coup/index_1.md': 'reports/interseclab-network-coup/index_1.md'
+        'report/interseclab-the-internet-coup/index_2.md': 'reports/interseclab-network-coup/index_2.md'
+        'report/interseclab-the-internet-coup/index_3.md': 'reports/interseclab-network-coup/index_3.md'
+        'report/interseclab-the-internet-coup/index_4.md': 'reports/interseclab-network-coup/index_4.md'
+        'report/interseclab-the-internet-coup/index_5.md': 'reports/interseclab-network-coup/index_5.md'
+        'report/interseclab-the-internet-coup/index_6.md': 'reports/interseclab-network-coup/index_6.md'
+        'report/interseclab-the-internet-coup/index_7.md': 'reports/interseclab-network-coup/index_7.md'
+        'report/interseclab-the-internet-coup/index_8.md': 'reports/interseclab-network-coup/index_8.md'
   - social:
       cards_layout_options:
         font_family: Noto Sans TC
