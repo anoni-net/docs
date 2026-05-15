@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <h1>404 - 找不到页面</h1>
+
+  <div id="lang-fallback" hidden style="margin-top: 1.5rem; padding: 1rem 1.2rem; border-left: 4px solid var(--md-accent-fg-color, #4051b5); background: var(--md-default-bg-color--lighter, #f5f5f5);">
+    <p style="margin: 0;">
+      此页面暂无简体中文版本，可以前往繁体中文版：
+      <a id="lang-fallback-link" href="#"></a>
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var langPrefix = '/zh-cn/';
+      var path = window.location.pathname;
+      var idx = path.indexOf(langPrefix);
+      if (idx < 0) { return; }
+      var before = path.substring(0, idx);
+      var after = path.substring(idx + langPrefix.length);
+      var fallback = before + '/' + after;
+      if (fallback === path) { return; }
+      fetch(fallback, { method: 'GET', redirect: 'follow' })
+        .then(function (res) {
+          if (!res.ok) { return; }
+          var box = document.getElementById('lang-fallback');
+          var link = document.getElementById('lang-fallback-link');
+          if (!box || !link) { return; }
+          link.textContent = fallback;
+          link.setAttribute('href', fallback);
+          box.hidden = false;
+        })
+        .catch(function () { /* silent: keep native 404 */ });
+    })();
+  </script>
+{% endblock %}
