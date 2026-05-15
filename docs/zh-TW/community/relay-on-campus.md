@@ -55,7 +55,7 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 
 - :material-file-document-edit-outline: [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md)：提案文件、四封溝通 email、行政時間軸
 - :material-server-network-outline: [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：torrc、UFW、狀態網頁、監控、事件處置 runbook
-- :material-chat-question-outline: [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：Q1-Q10 校方常見疑慮與台灣脈絡補充
+- :material-chat-question-outline: [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A 與台灣脈絡補充
 
 建議的閱讀順序：先看 [台師大案例訪談](../blog/posts/ntnu-nz.md) 對全貌有感，再依角色挑工具包裡的對應檔案。提案者讀提案範本、技術維運者讀 SOP、要面對校方時帶上 FAQ。
 

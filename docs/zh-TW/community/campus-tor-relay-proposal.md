@@ -21,7 +21,7 @@ icon: material/file-document-edit-outline
 
 1. 把下方「提案文件主體」整段複製到 Google Docs 或 Word
 2. 全文搜尋 `<` 找出所有 placeholder，逐一替換成自己學校的資料
-3. 把 [校園 FAQ](./campus-relay-faq.md) 的 Q1-Q10 整理成附錄一
+3. 把 [校園 FAQ](./campus-relay-faq.md) 整理成附錄一
 4. 把 [架設 SOP](./campus-tor-relay-sop.md) 的技術細節整理成附錄二
 5. 找一位願意背書的指導教授一起 review
 6. 送進學校的提案審核流程
@@ -249,7 +249,7 @@ icon: material/file-document-edit-outline
 - [ ] **準備一台主機**。教授實驗室提供、系上閒置、自備 VM 都可以。Tor Relay 資源需求不高
 - [ ] **註冊一個專案 email**。不要把 ContactInfo 綁個人主帳號。建議用社團 email 或專案 email，畢業也好交接
 - [ ] **想清楚畢業後的交接方案**。學弟妹接手、社團共同維運、轉給教授實驗室都可以，但要在提案時就講清楚
-- [ ] **讀完 [校園 FAQ Q1-Q10](./campus-relay-faq.md)**。確保自己被問到時都答得出來
+- [ ] **讀完 [校園 FAQ](./campus-relay-faq.md)**。確保自己被問到時都答得出來
 - [ ] **讀完 [校園架設 SOP](./campus-tor-relay-sop.md)**。對技術全貌有感，知道自己要做什麼
 - [ ] **讀完 [台師大案例訪談](../blog/posts/ntnu-nz.md)**。對溝通語氣、踩雷點有感
 
@@ -267,7 +267,7 @@ icon: material/file-document-edit-outline
 
     提案範本只是第一步。準備好範本後，建議照下面順序繼續：
 
-    1. **[校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)**：把 Q1-Q10 看過一遍，面談時被問到才不會卡住。FAQ 也可以附在計畫書後面當作附錄一
+    1. **[校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)**：把十題常見疑慮看過一遍，面談時被問到才不會卡住。FAQ 也可以附在計畫書後面當作附錄一
     2. **[校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)**：提案通過、拿到 IP 與機房位置之後，依 SOP 上線
 
     建議的閱讀順序：**提案範本 → FAQ → SOP**。
@@ -276,7 +276,7 @@ icon: material/file-document-edit-outline
 
 - [台師大案例訪談](../blog/posts/ntnu-nz.md)：第一個成功案例的完整過程
 - [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：技術細節（torrc、UFW、監控、事件處置）
-- [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：Q1-Q10 校方常見疑慮
+- [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A
 - [Tor Relay 校園建立研究專題](./relay-on-campus.md)：社群推動主題入口
 - [EFF Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"}：全球大學校園計畫官網
 - [Tor Project blog：Setting Up a Tor University Relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}：台師大案例英文版

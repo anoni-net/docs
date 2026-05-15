@@ -137,7 +137,7 @@ icon: material/chat-question-outline
 
     由於設計原因，Tor 無法監控或禁止使用者的行為。這樣的設計雖可能被惡意利用，但更多時候它保護了真正需要的人，包括：
 
-    - 人權活動家
+    - 人權工作者
     - 記者
     - 家暴倖存者
     - 吹哨者
@@ -235,4 +235,4 @@ icon: material/chat-question-outline
 
 ## 資料來源與致謝
 
-本 FAQ 的 Q1-Q10 主體由社群夥伴 **蘇恩立（NZ）** 提供，整理自他在台灣師範大學的計畫書原始版本。台灣脈絡補充由匿名網路社群 anoni.net 整理。原始材料由 NZ 同意以本站 [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權釋出。
+本 FAQ 的十題主體由社群夥伴 **蘇恩立（NZ）** 提供，整理自他在台灣師範大學的計畫書原始版本。台灣脈絡補充由匿名網路社群 anoni.net 整理。原始材料由 NZ 同意以本站 [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權釋出。

@@ -19,7 +19,7 @@ description: "一位資工系學生，如何在學術網路體制內，讓匿名
 
     - [校園 Tor Relay 提案範本](../../community/campus-tor-relay-proposal.md)：提案文件、四封溝通 email、行政時間軸
     - [校園 Tor Relay 架設 SOP](../../community/campus-tor-relay-sop.md)：torrc、UFW、狀態網頁、監控
-    - [校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)：Q1-Q10 校方常見疑慮
+    - [校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)：校方常見疑慮 Q&A
 
 ## 前言：為什麼在校園談匿名網路？
 
