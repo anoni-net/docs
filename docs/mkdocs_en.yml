@@ -27,6 +27,12 @@ nav:
       - regional/tor-relay-watcher.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
+      - !ENV [NAV_CHANGELOG, "Software Changelog"]:
+          - changelog/index.md
+          - changelog/tor.md
+          - changelog/tails.md
+          - changelog/arti.md
+          - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
   - !ENV [NAV_EVENT, "Events"]:
