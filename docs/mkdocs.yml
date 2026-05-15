@@ -83,6 +83,9 @@ nav:
           - community/setup-repo.md
           - community/i18n.md
           - community/setup-tor-relay.md
+          - community/campus-tor-relay-proposal.md
+          - community/campus-tor-relay-sop.md
+          - community/campus-relay-faq.md
           - community/asn-coverage-howto.md
           - community/upload-sensitive.md
           - community/brand-assets.md

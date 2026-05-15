@@ -47,13 +47,23 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 - **Tor University Challenge 中譯**：完成 [EFF Tor University Challenge 網站](https://toruniversity.eff.org/zh-tw/){target="_blank"} 的正體中文翻譯，降低台灣其他學校接觸計畫的語言門檻
 - **觀測站 Pulse 上線**：[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 即時顯示台灣（與日本、南韓、香港）的中繼節點狀況
 - **訪談企劃**：把台師大架設過程整理成 [深度訪談](../blog/posts/ntnu-nz.md)，公開給後續推動者參考
+- **範本工具包上線**：把台師大實作經驗整理成提案文件、技術 SOP、校方 FAQ 三份檔案，其他學校可直接套用（見下方「範本工具包」段落）
+
+## 範本工具包（可直接拿去用）
+
+這個工具包整理自社群夥伴 NZ 在台師大的實作經驗，目的是把「**第二、三所學校的推動成本**」降到最低。其他學校的學生不必從零開始，可以直接複製範本、改寫、送進自己學校的審核流程。
+
+- :material-file-document-edit-outline: [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md)：提案文件、四封溝通 email、行政時間軸
+- :material-server-network-outline: [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：torrc、UFW、狀態網頁、監控、事件處置 runbook
+- :material-chat-question-outline: [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A 與台灣脈絡補充
+
+建議的閱讀順序：先看 [台師大案例訪談](../blog/posts/ntnu-nz.md) 對全貌有感，再依角色挑工具包裡的對應檔案。提案者讀提案範本、技術維運者讀 SOP、要面對校方時帶上 FAQ。
 
 ## 進行中與待完成
 
-- **校園架設 SOP 文件**：把零散的經驗整理成可複製流程（預計 Q2-Q3）
 - **第二所學校接洽**：與其他大專院校的初步聯繫與評估
 - **資安活動搭配**：跟學校資安週、迎新講座、Hackerton 等活動的合作模式
-- **政策溝通材料**：給校方/教育部層級的計畫說明、法律疑慮回應、國際比較資料
+- **政策溝通材料**：給教育部層級的計畫說明、跨國比較資料
 - 翻譯候選報告（候選清單見下方）
 
 ## 待翻譯與延伸閱讀

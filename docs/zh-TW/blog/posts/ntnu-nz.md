@@ -13,6 +13,14 @@ description: "一位資工系學生，如何在學術網路體制內，讓匿名
 
 # 在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗
 
+!!! tip "想在自己學校也來一台？"
+
+    這篇是案例訪談，記下「**怎麼被做成**」的過程。如果你想實際在自己學校推動，請直接使用 NZ 同意公開的[**範本工具包**](../../community/relay-on-campus.md)：
+
+    - [校園 Tor Relay 提案範本](../../community/campus-tor-relay-proposal.md)：提案文件、四封溝通 email、行政時間軸
+    - [校園 Tor Relay 架設 SOP](../../community/campus-tor-relay-sop.md)：torrc、UFW、狀態網頁、監控
+    - [校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)：校方常見疑慮 Q&A
+
 ## 前言：為什麼在校園談匿名網路？
 
 在網路高度被監控與集中管理的時代，匿名通訊已是能否安全探索、研究與表達的重要基礎，不只是技術選項。對台灣而言，這個問題尤其現實。我們身處東亞關鍵位置，網路自由與通訊韌性是社會能否承受壓力的底層能力，已經不再是抽象價值。
