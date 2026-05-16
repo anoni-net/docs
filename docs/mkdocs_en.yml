@@ -35,6 +35,7 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      - community/onionoo-mcp.md
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md

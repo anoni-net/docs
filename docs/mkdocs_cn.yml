@@ -79,6 +79,7 @@ nav:
           - community/setup-repo.md
           - community/i18n.md
           - community/setup-tor-relay.md
+          - community/onionoo-mcp.md
           - community/asn-coverage-howto.md
           - community/upload-sensitive.md
           - community/brand-assets.md
