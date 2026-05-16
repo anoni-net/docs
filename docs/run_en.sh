@@ -1,4 +1,6 @@
 #!/bin/bash
+export DISABLE_MKDOCS_2_WARNING=true
+export NO_MKDOCS_2_WARNING=true
 export DOCS_DIR='en'
 export SITE_NAME='anoni.net Docs — Sinophone Asia-Pacific Networked Freedom Observatory'
 export SITE_URL='https://anoni.net/docs/en/'

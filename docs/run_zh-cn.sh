@@ -1,4 +1,6 @@
 #!/bin/bash
+export DISABLE_MKDOCS_2_WARNING=true
+export NO_MKDOCS_2_WARNING=true
 export DOCS_DIR='zh-CN'
 export SITE_NAME='匿名网络社群 Anoni.net/Docs'
 export SITE_URL='https://anoni.net/docs/zh-cn/'
