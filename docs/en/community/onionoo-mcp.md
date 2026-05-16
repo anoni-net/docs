@@ -1,10 +1,10 @@
 ---
-title: onionoo MCP — a query service for Tor relays
+title: "onionoo MCP: a query service for Tor relays"
 description: A community-hosted Onionoo proxy that exposes the Tor relay metadata API as both an OpenAPI-described HTTP service and an MCP server, so AI agents and tooling can query Tor relays without wrangling raw Onionoo.
 icon: material/api
 ---
 
-# :material-api: onionoo MCP — a query service for Tor relays
+# :material-api: onionoo MCP: a query service for Tor relays
 
 [Onionoo](https://metrics.torproject.org/onionoo.html){target="_blank"} is the Tor Project's metadata API for Tor relays and bridges. Anyone can query it over HTTP for the current state of the network: fingerprints, IPs, country and ASN, consensus flags (Guard, Exit, HSDir, and so on), bandwidth history, and uptime time series. The Tor Project's own [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} and most third-party Tor dashboards are powered by it.
 
@@ -159,13 +159,13 @@ Once `onionoo` MCP is wired into Claude Desktop or Claude Code, you can ask:
 The agent breaks the question into a handful of MCP tool calls (over the HTTP transport, that's typically `aggregate_countries` plus `get_details`; over stdio, the task-oriented tools `country_summary`, `aggregate_relays`, and `top_relays_by_bandwidth` are available too) and assembles a single report. Queries like this previously meant manually composing Onionoo parameters and merging JSON. Now they are a single sentence.
 
 <figure markdown="span">
-    <a href="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result.png" target="_blank">
-        <img src="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result.png"
-            alt="Claude Desktop response from Opus 4.7 summarizing Taiwan's Tor relays: 13 running relays, total bandwidth ~39.2 MiB/s (~329 Mbps), consensus weight 8,570, with a top-5 ASN table (AS3462 Chunghwa Telecom 10 relays, AS1659 TANet, AS9416 Hoshin Multimedia, AS18041 Taiwan Digital Streaming each 1 relay)"
+    <a href="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result-en.png" target="_blank">
+        <img src="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result-en.png"
+            alt="Claude Desktop response from Opus 4.7 summarizing Taiwan's current Tor relays: 13 running relays, total advertised bandwidth ~41.1 MB/s (~329 Mbit/s combined), based on the consensus published 2026-05-16 15:00 UTC, with an ASN breakdown table — AS3462 Chunghwa Telecom (HiNet) 10 relays (77%), AS1659 TANet, AS9416 Hoshin Multimedia, AS18041 Taiwan Digital Streaming each 1 relay (8% each)"
             title="Claude Desktop's summary of Taiwan's current Tor footprint"
             class="brand-frame">
     </a>
-    <capture>The model's final summary — running count, total bandwidth, consensus weight, and ASN distribution in one place. Numbers come from upstream Onionoo and are a point-in-time snapshot; values shift as the network evolves.</capture>
+    <capture>The model's final summary — running count, total bandwidth, and ASN distribution in one place, anchored to a specific consensus snapshot. Numbers come from upstream Onionoo and are a point-in-time view; values shift as the network evolves.</capture>
 </figure>
 
 Expanding the model's reasoning shows it asking the MCP server which tools are available, then planning which ones to combine:
