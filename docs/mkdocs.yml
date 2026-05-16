@@ -68,6 +68,7 @@ nav:
               - reports/interseclab-madlink/index_3.md
               - reports/interseclab-madlink/index_4.md
               - reports/interseclab-madlink/index_5.md
+              - reports/interseclab-madlink/index_6.md
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
       - taiwan/index.md
       - taiwan/ooni-checklist.md
