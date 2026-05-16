@@ -30,6 +30,40 @@ The service does **not** store any Onionoo data. It only forwards requests and r
     <capture>The Swagger UI at <code>onionoo.anoni.net/docs</code>. Every <code>/v1/*</code> endpoint has a full schema and a Try-it-out button for ad-hoc testing.</capture>
 </figure>
 
+## API and MCP: a primer
+
+### API: a data interface for programs
+
+An **API (Application Programming Interface)** is a standard way for programs to query data from each other. Onionoo itself is an API: you send an HTTP request (for example, "give me every running relay in Taiwan") and it returns JSON.
+
+A few things to note about querying an API directly:
+
+- The specification is written for engineers — you need to know which endpoints exist, what parameters each takes, and what fields come back.
+- The answer is **raw data**. A typical Onionoo response is hundreds of relays' worth of detail; turning that into a trend or a conclusion means more code.
+- It works best when you already know exactly what to ask.
+
+### MCP: an interface layer for AI tools
+
+**MCP (Model Context Protocol)** is an open protocol Anthropic introduced in 2024. It defines a standard format for how AI models invoke external tools:
+
+- For an AI client (Claude Desktop, Cursor, Claude Code, and others), MCP turns external services into "a list of tools plus a call format" that the model can read, decide when to use, and pick from on its own.
+- For a service provider, wrapping an existing API as an MCP server means every MCP-capable AI client can connect to it directly — no need to redo the integration each time a new client appears.
+
+### What this changes for data exploration
+
+Imagine you want to survey an unfamiliar dataset — say, "what does Taiwan's Tor relay footprint look like right now?" With only the raw API, the flow is roughly:
+
+1. Read Onionoo's documentation; find the right endpoints (`/details`, `/aggregate`, and so on).
+2. Write a script that combines a few queries, merges the JSON, and computes the statistics.
+3. Format the result into a readable table or chart.
+
+With MCP wired in, it becomes:
+
+1. Ask the AI tool directly: "What does Taiwan's Tor relay footprint look like — running count, total bandwidth, top five ASNs?"
+2. The AI picks the tools, composes the queries, and assembles a readable report (and, with some luck, sprinkles in context — for instance noting that TANet is Taiwan's academic network).
+
+This is especially useful for early-stage research and data exploration: you do not need to learn the dataset's schema before you can start asking questions. The AI does the first pass of querying and summarizing for you, and you decide where to dig deeper after reading its report. When some queries need to be repeated or wired into a formal analysis, the API is still there — the two paths coexist.
+
 ## Why this service
 
 Onionoo's specification is solid, but it ships **without an OpenAPI description**, and its field names are short (optimized for transfer size). That works for a human writing a client by hand. It is less friendly to AI agents and third-party tooling:
