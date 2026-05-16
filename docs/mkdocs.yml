@@ -71,6 +71,12 @@ nav:
       - taiwan/whistleblower-law.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
+      - !ENV [NAV_CHANGELOG, "軟體更新日誌"]:
+          - changelog/index.md
+          - changelog/tor.md
+          - changelog/tails.md
+          - changelog/arti.md
+          - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
       - "開始參與":
