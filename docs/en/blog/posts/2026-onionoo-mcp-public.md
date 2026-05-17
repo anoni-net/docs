@@ -7,8 +7,8 @@ categories:
     - News
 slug: 2026-onionoo-mcp-public
 image: "assets/images/post-update.png"
-summary: "The community's onionoo-fastapi service is now public at onionoo.anoni.net. Connect any MCP-capable AI client and ask about the live Tor relay network in plain language."
-description: "The community's onionoo-fastapi service is now public at onionoo.anoni.net. Connect any MCP-capable AI client and ask about the live Tor relay network in plain language."
+summary: "The community's onionoo-fastapi service is now public at onionoo.anoni.net. Ask any MCP-capable AI client about the live Tor relay network in plain language."
+description: "The community's onionoo-fastapi service is now public at onionoo.anoni.net. Ask any MCP-capable AI client about the live Tor relay network in plain language."
 ---
 
 # onionoo MCP is now public: query the Tor relay network in plain language

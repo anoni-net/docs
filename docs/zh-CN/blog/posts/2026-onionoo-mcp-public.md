@@ -56,7 +56,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
 
 ## 怎么接上去
 
-### 给 AI 客户端使用者
+### 给 AI 客户端用户
 
 在 Claude Desktop、Cursor 或其他支持 MCP 的客户端，在配置文件的 `mcpServers` 区块加上：
 
@@ -75,7 +75,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
 
 [:material-arrow-right-circle-outline: 阅读完整 onionoo MCP 使用文件](../../community/onionoo-mcp.md){ .md-button .md-button--primary }
 
-### 给写程序直接调用的使用者
+### 给写程序直接调用的用户
 
 每个端点都会回传语义化 JSON，可以直接用 `curl` 调用。
 
@@ -94,12 +94,12 @@ curl -s 'https://onionoo.anoni.net/v1/aggregate/countries?running=true' | jq .
 anoni.net 目前在 Tor 观测这条线上有三个入口，可以依任务挑。
 
 - **[Tor Relays 观测点](../../taiwan/tor-relay-watcher.md)**：图表面板，看台湾中继节点的数量与带宽趋势，适合想看走势的场合。
-- **[ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)**：OONI 观测数据的 ASN 涵盖分析，适合想知道哪些 ASN 的使用者实际在被观测到。
+- **[ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)**：OONI 观测数据的 ASN 涵盖分析，适合想知道哪些 ASN 的用户实际在被观测到。
 - **onionoo MCP**（这次新增）：用问句快速做 ad-hoc 查询，适合想针对某个 relay、某个 ASN、某个国家盘点现况。
 
 三个入口数据来源不同（Pulse 自己抓的历史时序、OONI 原始观测数据、Onionoo 即时 snapshot），互相补完，不重复。
 
-## 参与与回馈
+## 参与与反馈
 
 - 回报问题或提建议：<https://github.com/anoni-net/onionoo-fastapi/issues>
 - 想讨论该补哪些任务导向工具、或请社区示范某类查询，欢迎到 [Matrix 公开 room](../../community/tools.md) 提。
