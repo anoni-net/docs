@@ -47,7 +47,7 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 - **Tor University Challenge 中譯**：完成 [EFF Tor University Challenge 網站](https://toruniversity.eff.org/zh-tw/){target="_blank"} 的正體中文翻譯，降低台灣其他學校接觸計畫的語言門檻
 - **觀測站 Pulse 上線**：[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 即時顯示台灣（與日本、南韓、香港）的中繼節點狀況
 - **訪談企劃**：把台師大架設過程整理成 [深度訪談](../blog/posts/ntnu-nz.md)，公開給後續推動者參考
-- **範本工具包上線**：把台師大實作經驗整理成提案文件、技術 SOP、校方 FAQ 三份檔案，其他學校可直接套用（見下方「範本工具包」段落）
+- **範本工具包上線**：把台師大實作經驗整理成提案文件、技術 SOP、校方 FAQ 三份檔案，其他學校可直接套用（[上線公告](../blog/posts/2026-campus-tor-relay-template-kit.md)，內容見下方「範本工具包」段落）
 
 ## 範本工具包（可直接拿去用）
 

@@ -25,17 +25,17 @@ The templates are ready. The next step is for more universities to take them up.
 
 Three documents cover the three roles in the rollout sequence: proposal author, technical operator, and the university administration team that gets asked questions.
 
-- **Proposal template** (school-facing document, four outreach email patterns, two-month administrative timeline): [https://anoni.net/docs/en/community/campus-tor-relay-proposal/](https://anoni.net/docs/en/community/campus-tor-relay-proposal/){target="_blank"}
-- **Deployment SOP** (torrc, UFW, status page architecture, monitoring runbook, IPv6, handover): [https://anoni.net/docs/en/community/campus-tor-relay-sop/](https://anoni.net/docs/en/community/campus-tor-relay-sop/){target="_blank"}
-- **FAQ for university administration and legal counsel** (ten questions with Taiwan-specific annotations, plus two one-page summaries): [https://anoni.net/docs/en/community/campus-relay-faq/](https://anoni.net/docs/en/community/campus-relay-faq/){target="_blank"}
+!!! note "English translation status"
+
+    The three community documents below are currently only available in Mandarin. The Mandarin originals are the authoritative source and carry the full Taiwan-specific legal annotations. English versions will be added in a follow-up release.
+
+- **Proposal template** (school-facing document, four outreach email patterns, two-month administrative timeline): [https://anoni.net/docs/zh-tw/community/campus-tor-relay-proposal/](https://anoni.net/docs/zh-tw/community/campus-tor-relay-proposal/){target="_blank"}
+- **Deployment SOP** (torrc, UFW, status page architecture, monitoring runbook, IPv6, handover): [https://anoni.net/docs/zh-tw/community/campus-tor-relay-sop/](https://anoni.net/docs/zh-tw/community/campus-tor-relay-sop/){target="_blank"}
+- **FAQ for university administration and legal counsel** (ten questions with Taiwan-specific annotations, plus two one-page summaries): [https://anoni.net/docs/zh-tw/community/campus-relay-faq/](https://anoni.net/docs/zh-tw/community/campus-relay-faq/){target="_blank"}
 
 The hub page collects all three with case studies, project goals, and a backlog of external resources awaiting translation:
 
-- [https://anoni.net/docs/en/community/relay-on-campus/](https://anoni.net/docs/en/community/relay-on-campus/){target="_blank"}
-
-!!! note "English translation status"
-
-    The English versions of the three community documents are still being prepared. Until they land, the Mandarin originals are the authoritative source and carry the full Taiwan-specific legal annotations: [Tor Relay 校園建立研究專題](https://anoni.net/docs/zh-tw/community/relay-on-campus/){target="_blank"}.
+- [Tor Relay 校園建立研究專題](https://anoni.net/docs/zh-tw/community/relay-on-campus/){target="_blank"}
 
 ## For readers outside Taiwan
 
@@ -52,7 +52,7 @@ If your university already runs a relay through EFF's Tor University Challenge p
 
 Tor's anonymity rests on relay diversity. When relays concentrate in a few countries or network providers, the network's ability to resist traffic analysis weakens. Taiwan's relay count on Tor Metrics is still limited, and each stable node adds another margin of resistance. Real-time observation:
 
-- [Tor Relays watcher](../../taiwan/tor-relay-watcher.md)
+- [Tor Relays watcher](https://anoni.net/docs/zh-tw/taiwan/tor-relay-watcher/){target="_blank"}
 
 University campuses are a reasonable place to close that gap: stable academic bandwidth, students and staff with the skill to operate the node, a clearer institutional review path than residential or small-company hosting, and direct alignment with EFF's [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}.
 
