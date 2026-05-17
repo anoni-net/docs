@@ -15,7 +15,7 @@ description: "一位資工系學生，如何在學術網路體制內，讓匿名
 
 !!! tip "想在自己學校也來一台？"
 
-    這篇是案例訪談，記下「**怎麼被做成**」的過程。如果你想實際在自己學校推動，請直接使用 NZ 同意公開的[**範本工具包**](../../community/relay-on-campus.md)：
+    這篇是案例訪談，記下「**怎麼被做成**」的過程。如果你想實際在自己學校推動，請直接使用 NZ 同意公開的[**範本工具包**](../../community/relay-on-campus.md)（[上線公告](./2026-campus-tor-relay-template-kit.md)）：
 
     - [校園 Tor Relay 提案範本](../../community/campus-tor-relay-proposal.md)：提案文件、四封溝通 email、行政時間軸
     - [校園 Tor Relay 架設 SOP](../../community/campus-tor-relay-sop.md)：torrc、UFW、狀態網頁、監控
