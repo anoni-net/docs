@@ -176,7 +176,7 @@ Tor ORPort（Guard/Middle 唯一必需）：
 sudo ufw allow 9001/tcp comment 'Tor ORPort'
 ```
 
-MetricsPort（預設不開；若有內網監控主機 `<監控主機 IP>`）：
+MetricsPort（預設不開，若有內網監控主機 `<監控主機 IP>`）：
 
 ```bash
 sudo ufw allow from <監控主機 IP> to any port 9035 proto tcp comment 'Prometheus -> Tor MetricsPort'
