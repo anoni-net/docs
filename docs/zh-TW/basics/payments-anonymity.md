@@ -29,7 +29,7 @@ icon: material/cash-multiple
 
 過去十多年，PayPal、Venmo、Stripe 等金融中介反覆關停或凍結特定使用者的帳號。被波及的對象常常跟言論性質或地緣風險相關，像是教波斯詩歌的美國公民被 PayPal 凍結戶頭，紐約穆斯林市議員轉帳備註寫了孟加拉餐廳名字而被擋，長年支持 Tor 中繼運作的個人捐款人被無預警關停 PayPal 帳號。前 EFF Activism Director Rainey Reitman 在新書《Transaction Denied》整理了這條脈絡，書中追問金融中介可不可以擔任線上言論的仲裁者。
 
-對個人使用者來說，這代表「金流隱私」不只是「不要被別人知道我付了什麼」的問題，也是「我的收款管道會不會被單方面切斷」的問題。社群在 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相關案例與台灣處境，[匿名支付研究專題](../community/payments-research.md) 也持續追蹤相關討論。
+對個人使用者來說，「金流隱私」既包含別人能否看到我付了什麼，也包含我的收款管道會不會被單方面切斷。社群在 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相關案例與台灣處境，[匿名支付研究專題](../community/payments-research.md) 也持續追蹤相關討論。
 
 ## 現金是最成熟的匿名支付
 
