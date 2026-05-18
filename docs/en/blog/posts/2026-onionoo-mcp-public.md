@@ -35,7 +35,7 @@ The service does **not** store any Onionoo data. It only forwards requests and r
 
 ## What you can ask
 
-Once connected, you can hand the following sorts of questions to the agent in plain language.
+Once connected, you can ask the agent the following sorts of questions in plain language.
 
 - **Audit a country's Tor footprint**: "Summarize Taiwan's running Tor relays. Count, total bandwidth, consensus weight, top five ASNs, and pick the three relays with the highest consensus weight."
 - **Inspect a specific ASN**: "List all running Tor relays under TANet (AS1659), including their flags, bandwidth, and uptime."
@@ -97,7 +97,7 @@ anoni.net now has three entry points for Tor network observation, each suited to
 - **[ASN observation coverage analysis](https://anoni.net/docs/zh-tw/taiwan/ooni-asn-coverage/){target="_blank"}** (Mandarin): OONI observation data broken down by ASN. Good when you want to know which ASNs are actually being measured.
 - **onionoo MCP** (new): ask ad-hoc questions in plain language. Good when you want to scope out a specific relay, ASN, or country.
 
-The three rely on different data sources (Pulse's own historical time series, OONI's raw observation data, and Onionoo's live snapshots) and complement each other rather than duplicate.
+The three rely on different data sources (Pulse's own historical time series, OONI's raw observation data, and Onionoo's live snapshots) and complement each other rather than duplicating coverage.
 
 ## Contribute or report back
 
