@@ -88,13 +88,15 @@ icon: material/currency-btc
 
 CoinJoin 是比特幣早期的隱私強化路線：多名使用者把交易合併成一筆，外界無法分辨哪個輸入對應哪個輸出。代表性實作有 Wasabi Wallet、Samourai Wallet 的 Whirlpool 服務，以及在以太坊上的 Tornado Cash。
 
-!!! warning "法律風險：2024 年後的三件事"
+!!! warning "法律風險：執法與立法動向"
 
     - **Tornado Cash**：2022 年被美國 OFAC 列入 SDN 清單，是首次對「智慧合約地址」本身的制裁。
     - **Samourai Wallet**：2024 年開發者被美國司法部起訴並關閉服務。
     - **Wasabi Wallet**：營運方 zkSNACKs 在 2024 年公告停止 CoinJoin 協調服務。
+    - **GENIUS Act（穩定幣，2025-07）**：美國通過聯邦穩定幣法，要求 100% 準備、月度揭露、禁止支付利息，把發行人納入 Bank Secrecy Act。USDT、USDC 等流通量最大的穩定幣會受直接約束，台灣使用者持有受影響。
+    - **CLARITY Act（市場結構，2026-05 參議院銀行委員會通過）**：把 SEC 與 CFTC 對加密資產的管轄權重劃，CFTC 主管 digital commodity 現貨市場。DeFi 協議是否被視為 digital commodity exchange 需要註冊，社群仍在觀察。
 
-對台灣使用者的判斷重點：技術本身沒有犯罪化，「協調服務」與「混幣輸出」在多數司法管轄會引發合規關切。詳細案例分析見 [倡議組織的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md) 的 Tornado Cash 段落。社群目前的立場是把這條路線當作背景知識，不再做為主推工具。
+對台灣使用者的判斷重點：技術本身沒有犯罪化，「協調服務」與「混幣輸出」在多數司法管轄會引發合規關切。詳細案例分析見 [倡議組織的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md) 的 Tornado Cash 段落。社群目前的立場是把這條路線當作背景知識，不再做為主推工具。美國 2025–2026 市場結構立法的整體脈絡，詳見 [台灣 VASP 法 2026](../taiwan/vasp-2026.md) 的國際對照段。
 
 ## 穩定幣：方便，但會被凍結
 

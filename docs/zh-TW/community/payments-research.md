@@ -58,6 +58,7 @@ icon: material/folder-search-outline
 - 鏈上分析：Chainalysis、TRM Labs 等公司的公開報告，以及學術界對鏈上隱私的批判
 - Tornado Cash 制裁案例：美國 OFAC 制裁、後續訴訟與技術社群回應的時序整理
 - 跨境捐款：對倡議組織如何在合規前提下接受加密貨幣捐款的個案研究
+- 美國 2025–2026 加密市場結構立法：GENIUS Act（穩定幣，2025-07 Trump 簽署）、CLARITY Act（市場結構，2026-05 參議院銀行委員會通過）、Anti-CBDC Surveillance State Act（眾議院 2025-07 通過，參議院 S.1124 待審）的條文重點與時序整理，作為跟台灣 VASP 草案的對照素材
 
 ## 如何加入討論
 
