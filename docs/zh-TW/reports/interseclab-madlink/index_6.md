@@ -9,7 +9,7 @@ icon: material/eye-outline
 !!! note ""
 
     - 本頁為 anoni.net 編輯團隊的觀察整理，**不屬於** [InterSecLab MADLink 原報告](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}的內容。
-    - 觀察快照時間：**2026-05-16**。後續若有新進展（媒體報導、政府表態、凌華稽核結果、立委公開發言等），請透過頁面右上方「:material-note-edit-outline: 編輯圖示」回報，或在[參與討論](./index.md#參與討論)頻道分享。
+    - 觀察快照時間：**2026-05-20**（2026-05-16 初版，2026-05-20 新增「外部交叉驗證」段落）。後續若有新進展（媒體報導、政府表態、凌華稽核結果、立委公開發言等），請透過頁面右上方「:material-note-edit-outline: 編輯圖示」回報，或在[參與討論](./index.md#參與討論)頻道分享。
     - 頁面下半段提供 **English summary for international readers**，方便從海外連過來的讀者了解這份報告在台灣本地的後續狀況。
 
 ## 為什麼要寫這段觀察
@@ -17,6 +17,30 @@ icon: material/eye-outline
 MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本地公司供應監控與審查設備給威權政府的供應鏈。當報告點名了一家台灣上市公司，理論上會引發本地媒體追問、立委質詢、主管機關回應這樣的循環。
 
 但這份報告發布後，台灣中文公共領域的反應明顯偏少。這種「沒有反應」本身就是觀察素材，它顯示報告所指出的制度缺口可能不只在法規層面，也在政治關注與媒體議題化的層面。記錄這個狀態，是為了讓後續查找這份報告的人能看到當下的接收脈絡，也讓社群有一個追蹤的起點。
+
+## 外部交叉驗證
+
+這份報告點名一家上市公司、引述一連串技術細節。在記錄台灣本地反應之前，我們先對報告中的關鍵事證做了一輪獨立查證，讓讀者能自行重現。
+
+### 報告核心事證
+
+**IEEE OUI `00:30:64` 確實登記在 ADLINK Technology, Inc. 名下。** 這是報告把 EtherFabric 與凌華關聯起來的硬體指紋，也是整份報告最容易自行驗證的一條線索。透過 macvendors.com（[`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}）或 macvendorlookup.com（[`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}）查詢，兩個獨立來源都回傳「ADLINK TECHNOLOGY, INC.」，註冊地址為新北中和區建一路 166 號 9 樓（凌華舊址）。這從硬體層級確認了「EtherFabric 管理介面 MAC 位址來自凌華設備」這項主張屬實。
+
+**CSA-7400 被凌華自家行銷成 DPI 與防火牆設備。** 報告反駁凌華「通用平台」說法的核心，就是這款產品本身的市場定位。在凌華中英文官網[產品頁](https://www.adlinktech.com/Products/Network_Security_Appliance/4UNetworkAppliance/CSA-7400?lang=en){target="_blank"}上，CSA-7400 明確被分類在「Network Security Appliance」底下，行銷為「DPI、IDS/IPS、DDoS、NGFW」carrier-grade 設備。manualzz 上的 [Quick Start Manual](https://manualzz.com/doc/55701658/adlink-technology-csa-7400-quick-start-manual){target="_blank"} 也載明出貨預載 CentOS 7，與報告描述 TSG-OS 早期基於 CentOS 的細節一致。
+
+**積至（海南）信息技術有限公司由方濱興於 2018 年在海南創立。** 維基百科[积至信息](https://zh.wikipedia.org/wiki/%E7%A7%AF%E8%87%B3%E4%BF%A1%E6%81%AF){target="_blank"}、[大紀元 2025-09-13 報導](https://www.epochtimes.com/b5/25/9/13/n14593857.htm){target="_blank"}、[新唐人](https://www.ntdtv.com/b5/2025/09/13/a104019706.html){target="_blank"} 互相印證該公司基本資訊、創辦人身分，以及與中科院信息工程研究所 MESA 實驗室的同根關係。
+
+**New Bloom Magazine 2026-04-29 那篇報導真實存在。** 標題「[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}」，發佈時間 2026-04-29 07:41 UTC。這是目前唯一明確聚焦凌華—Geedge 連結的台灣相關英文媒體報導。
+
+### 編輯觀察自身
+
+**「台灣中文主流媒體零覆蓋」的判斷有跨來源支持。** 用「凌華 Geedge」、「MADLink 凌華」、「凌華 哈薩克」等關鍵字跨媒體搜尋，截至 2026-05-20 沒有任何一則台灣中文主流報導直接聚焦這條供應鏈線。同期凌華自家中文新聞版面在邊緣 AI、Taiwan Excellence 獎項、CYBERSEC 2026 參展等業務話題上。
+
+**「沈伯洋無公開發言」的判斷可重現。** 搜尋他在立法院議事系統、社群平台與媒體採訪的近期版面，找不到他就此議題的進一步發聲。他目前公開版面被「中國紅色通緝令」、「徵召選台北市長」、「凌濤揭沈父親公司與中國有商業往來」等議題佔據。
+
+**「凌華未發布相關重大訊息」的判斷可重現。** 在 [公開資訊觀測站](https://mopsov.twse.com.tw/){target="_blank"} 以代號 6166 查詢，截至 2026-05-20 沒有針對 Geedge、CSA-7400 出貨案、內部稽核啟動的公開重大訊息公告。
+
+如果你想自行重現這些查證，最快的入口是 OUI lookup（30 秒）與凌華官網產品頁（1 分鐘）這兩條。
 
 ## 媒體覆蓋對比
 
@@ -73,11 +97,30 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 !!! note ""
 
-    This section is an editorial observation by **anoni.net**, not part of the original [InterSecLab MADLink report](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}. Snapshot as of **2026-05-16**.
+    This section is an editorial observation by **anoni.net**, not part of the original [InterSecLab MADLink report](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}. Snapshot as of **2026-05-20** (initial 2026-05-16; independent verification section added 2026-05-20).
 
 ### Why we're documenting this
 
 The MADLink report's central question is whether Taiwan's regulatory framework prevented a Taiwanese company from supplying hardware to a Chinese surveillance exporter. When a published report names a publicly listed Taiwanese company, the expected follow-up loop is local journalism, legislative questioning, and a government response. That loop has barely started. The absence is itself data: it suggests the regulatory gap the report describes operates at the political and media-attention level, not only the legal one. We document the snapshot so future readers of the report can see the local reception context.
+
+### Independent verification
+
+The report names a publicly listed company and cites a chain of technical details. Before recording the local reception, we ran an independent verification pass on the key claims so readers can reproduce the checks themselves.
+
+**Verifying the core report claims:**
+
+* **The IEEE OUI `00:30:64` is registered to ADLINK Technology, Inc.** This is the hardware-layer fingerprint the report uses to link EtherFabric to ADLINK, and the most easily verifiable claim. Two independent lookup services ([`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}, [`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}) both return "ADLINK TECHNOLOGY, INC." with ADLINK's old Chung-ho (New Taipei) address.
+* **The CSA-7400 is marketed by ADLINK itself as a DPI / firewall appliance.** On ADLINK's [official product page](https://www.adlinktech.com/Products/Network_Security_Appliance/4UNetworkAppliance/CSA-7400?lang=en){target="_blank"}, the CSA-7400 sits in the "Network Security Appliance" category and is positioned for DPI, IDS/IPS, DDoS, and NGFW workloads. The publicly mirrored [Quick Start Manual](https://manualzz.com/doc/55701658/adlink-technology-csa-7400-quick-start-manual){target="_blank"} confirms it ships with CentOS 7 preinstalled, consistent with the report's description of early TSG-OS being CentOS-based.
+* **Geedge (Hainan) Information Technology Co., Ltd. was founded in 2018 by Fang Binxing.** Cross-confirmed by [Chinese Wikipedia](https://zh.wikipedia.org/wiki/%E7%A7%AF%E8%87%B3%E4%BF%A1%E6%81%AF){target="_blank"}, [Epoch Times' September 2025 reporting](https://www.epochtimes.com/b5/25/9/13/n14593857.htm){target="_blank"}, and [NTD](https://www.ntdtv.com/b5/2025/09/13/a104019706.html){target="_blank"}, including the company's links to MESA Lab at CAS Institute of Information Engineering.
+* **The New Bloom Magazine article we cite exists and is dated 2026-04-29.** Title "[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}", published 2026-04-29 07:41 UTC.
+
+**Verifying our own editorial observations:**
+
+* **The "no Taiwan Chinese-language coverage" call is supported across sources.** Cross-outlet searches for "凌華 Geedge", "MADLink 凌華", and "凌華 哈薩克" returned no direct Taiwan Chinese-language reporting on this angle as of 2026-05-20. ADLINK's own Chinese-language press coverage during the same window stayed on edge AI, Taiwan Excellence awards, and CYBERSEC 2026.
+* **The "no public statement from Puma Shen" call is reproducible.** Searches across his parliamentary record, social platforms, and recent press coverage show no follow-up statements on MADLink or ADLINK. His current public attention is absorbed by China's Red Notice against him, his Taipei mayoral nomination, and a separate accusation regarding his father's business in China.
+* **The "no ADLINK material disclosure" call is reproducible.** Querying [Taiwan's Market Observation Post System](https://mopsov.twse.com.tw/){target="_blank"} under stock code 6166 returns no public material announcement regarding Geedge, the CSA-7400 shipment, or the promised internal audit, as of 2026-05-20.
+
+The fastest entry points for reproducing the verification are the OUI lookup (30 seconds) and ADLINK's own product page (1 minute).
 
 ### Coverage map
 
