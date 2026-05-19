@@ -40,8 +40,6 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 **「凌華未發布相關重大訊息」的判斷可重現。** 在 [公開資訊觀測站](https://mopsov.twse.com.tw/){target="_blank"} 以代號 6166 查詢，截至 2026-05-20 沒有針對 Geedge、CSA-7400 出貨案、內部稽核啟動的公開重大訊息公告。
 
-如果你想自行重現這些查證，最快的入口是 OUI lookup（30 秒）與凌華官網產品頁（1 分鐘）這兩條。
-
 ## 媒體覆蓋對比
 
 ### 國際與英文媒體（有覆蓋）
@@ -78,13 +76,45 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 ## 後續可追蹤指標
 
-如果你想關注或推進這個議題，以下是值得追蹤的觀察點：
+如果你想關注或推進這個議題，以下是按單位分組的觀察入口（追蹤什麼），與不同成本的執行方式（怎麼追蹤）。
 
-* 立委沈伯洋是否就此議題提出書面質詢、新聞稿或社群發言。考量他目前的選舉時程，比較可能要等選後才會有動作。
-* 經濟部國貿署是否更新「戰略性高科技貨品」管制框架，將監控與審查科技納入考量。
-* 凌華科技是否對外公布內部稽核結果，或在年報、法說會中說明此事的後續處理。
-* 中文媒體（特別是過去寫過防火長城、中國資安、出口管制議題的記者）是否有後續追蹤報導。
-* 台灣公民團體（如 g0v、Open Culture Foundation、台灣人權促進會、經濟民主連合等）是否就此議題發起連署、座談或政策倡議。
+### 政府與制度層面
+
+**經濟部國際貿易署**
+
+* 入口：[戰略性高科技貨品出口實體管制清單](https://publicinfo.trade.gov.tw/icp/exportList.html){target="_blank"}、[國貿署新聞稿](https://www.trade.gov.tw/Pages/List.aspx?nodeID=40){target="_blank"}
+* 觀察什麼：是否把監控、審查設備供應商納入實體清單；是否引入針對「最終用途」的審查機制；是否就此案在跨部會審查會議中有公開揭露的結論。
+
+**立法院與立委沈伯洋**
+
+* 入口：[立法院 IVOD](https://ivod.ly.gov.tw/){target="_blank"}、[立法院議事暨公報資訊網](https://lci.ly.gov.tw/){target="_blank"}、[立法院議事整合資訊網](https://ppg.ly.gov.tw/ppg/){target="_blank"}、沈伯洋的 X、Facebook、Threads
+* 觀察什麼：沈伯洋是否就此議題提書面質詢、口頭質詢、提案或新聞稿；其他立委（特別是經濟、外交及國防、司法及法制委員會）是否接手；委員會是否邀請主管機關列席報告。
+
+**金管會與證交所（凌華為上市公司）**
+
+* 入口：[公開資訊觀測站](https://mopsov.twse.com.tw/){target="_blank"} 代號 6166（重大訊息、年報、ESG 報告）
+* 觀察什麼：凌華是否公告與 Geedge 出貨案相關的重大訊息；是否在 2026 年年報、ESG/永續報告書揭露此案與內部稽核結果；法說會逐字稿中是否被分析師問到。
+
+**監察院**
+
+* 入口：[監察院糾正案公告](https://www.cy.gov.tw/){target="_blank"}
+* 觀察什麼：是否有就主管機關「出口合規審查未識別最終用途」一事，提出糾正或糾舉。
+
+### 媒體與公民社會層面
+
+* **中文媒體**：特別是過去寫過防火長城、中國資安、出口管制議題的記者，是否有後續追蹤報導。可關注 TechNews、iThome、報導者、READr、端傳媒等。
+* **台灣公民團體**：g0v、開放文化基金會、台灣人權促進會、經濟民主連合等，是否就此議題發起連署、座談或政策倡議。
+
+### 怎麼動手追蹤（成本由低到高）
+
+| 方式 | 一次性成本 | 持續成本 | 適用 |
+|---|---|---|---|
+| **Google Alerts** | 10 分鐘 | 0 | 設「凌華 Geedge」、「戰略性高科技貨品 監控」、「沈伯洋 凌華」、「ADLINK Geedge」等關鍵字，命中時收 email 通知 |
+| **手動巡查** | 0 | 每月約 30 分鐘 | 社群輪值，依上述 5 個入口跑 checklist，回報到本頁編輯紀錄 |
+| **RSS / HTML diff bot** | 1–2 小時設定 | 0 | 把國貿署新聞稿、公開資訊觀測站 6166 抓進 anoni.net 既有的 Matrix 頻道 |
+| **自動化爬蟲** | 4–6 小時設定 | 0 | 定期爬實體清單與重訊頁面，內容有變動時自動開 GitHub Issue 通報 |
+
+四種方式可以混用，最低成本的組合是 Google Alerts 加手動巡查。觀察到具體訊號（例如國貿署更新框架、沈伯洋公開質詢、凌華發重訊）之後，再考慮是否加上自動化監測。
 
 ## 觀察更新方式
 
@@ -120,8 +150,6 @@ The report names a publicly listed company and cites a chain of technical detail
 * **The "no public statement from Puma Shen" call is reproducible.** Searches across his parliamentary record, social platforms, and recent press coverage show no follow-up statements on MADLink or ADLINK. His current public attention is absorbed by China's Red Notice against him, his Taipei mayoral nomination, and a separate accusation regarding his father's business in China.
 * **The "no ADLINK material disclosure" call is reproducible.** Querying [Taiwan's Market Observation Post System](https://mopsov.twse.com.tw/){target="_blank"} under stock code 6166 returns no public material announcement regarding Geedge, the CSA-7400 shipment, or the promised internal audit, as of 2026-05-20.
 
-The fastest entry points for reproducing the verification are the OUI lookup (30 seconds) and ADLINK's own product page (1 minute).
-
 ### Coverage map
 
 **International / English coverage (present):**
@@ -154,11 +182,30 @@ The original report already argues that Taiwan's export control framework is ori
 
 ### Indicators to watch
 
-* Whether Legislator Puma Shen issues written questioning, a press release, or a public statement on this issue. Given his current electoral focus, follow-up may not arrive until after the November 2026 Taipei mayoral election.
-* Whether the Bureau of Foreign Trade updates its Strategic High-Tech Commodities framework to incorporate surveillance and censorship technology.
-* Whether ADLINK publicly releases the results of its promised internal audit, or addresses the matter in its annual report or investor calls.
-* Whether Chinese-language journalists who have previously covered the Great Firewall, Chinese infosec topics, or export controls pick up the story.
-* Whether Taiwan civil society organisations (g0v, Open Culture Foundation, Taiwan Association for Human Rights, Economic Democracy Union and others) launch petitions, panel discussions, or policy advocacy on this issue.
+Grouped by entity, with concrete entry points (what to watch) and execution tiers (how to watch).
+
+**Government and regulatory level:**
+
+* **Bureau of Foreign Trade, MOEA** — Entry points: [Strategic High-Tech Commodities Entity List](https://publicinfo.trade.gov.tw/icp/exportList.html){target="_blank"}, [BoFT press releases](https://www.trade.gov.tw/Pages/List.aspx?nodeID=40){target="_blank"}. Watch for: addition of surveillance/censorship technology vendors to the entity list; introduction of end-use review; any publicly disclosed conclusions from the quarterly interagency review meetings.
+* **Legislative Yuan and Legislator Puma Shen** — Entry points: [Legislative Yuan IVOD](https://ivod.ly.gov.tw/){target="_blank"}, [Legislative Yuan proceedings and gazette](https://lci.ly.gov.tw/){target="_blank"}, [Legislative Yuan integrated information system](https://ppg.ly.gov.tw/ppg/){target="_blank"}, Puma Shen's X / Facebook / Threads. Watch for: written or oral questioning by Shen; proposals or press releases from him or other legislators (particularly on the Economic, Foreign and National Defense, or Judiciary committees); committee invitations for the responsible agency to report.
+* **Financial Supervisory Commission and TWSE (ADLINK is publicly listed)** — Entry points: [Market Observation Post System](https://mopsov.twse.com.tw/){target="_blank"}, stock code 6166 (material announcements, annual reports, ESG reports). Watch for: material announcements regarding Geedge; disclosure of this matter in the 2026 annual report or sustainability report; investor questions on earnings calls.
+* **Control Yuan** — Entry point: [Control Yuan corrective measures](https://www.cy.gov.tw/){target="_blank"}. Watch for: any corrective action or impeachment regarding the regulatory failure to identify end use during export compliance review.
+
+**Media and civil society level:**
+
+* **Chinese-language media** — Whether journalists who previously covered the Great Firewall, Chinese infosec topics, or export controls follow up. Outlets to track include TechNews, iThome, The Reporter, READr, and Initium.
+* **Taiwan civil society** — Whether g0v, Open Culture Foundation, Taiwan Association for Human Rights, Economic Democracy Union and similar organisations launch petitions, panel discussions, or policy advocacy on this issue.
+
+**How to actually track these (low to high cost):**
+
+| Approach | One-time setup | Ongoing | Best for |
+|---|---|---|---|
+| **Google Alerts** | 10 minutes | 0 | Keywords like "凌華 Geedge", "ADLINK Geedge", "戰略性高科技貨品 監控", email notification on hit |
+| **Manual check** | 0 | ~30 min/month | Community rotation, run a checklist over the five entry points above, log to this page's changelog |
+| **RSS / HTML diff bot** | 1–2 hours | 0 | Feed BoFT press releases and MOPS code 6166 into anoni.net's existing Matrix channel |
+| **Scheduled scraper** | 4–6 hours | 0 | Periodically scrape the entity list and material announcements; auto-open a GitHub Issue when content changes |
+
+These four approaches can be combined. The lowest-cost starting point is Google Alerts plus a manual check. Adding automated monitoring is worth considering once concrete signals appear, such as the BoFT updating the framework, Shen raising the issue publicly, or ADLINK filing a material announcement.
 
 ### Contributing updates
 
