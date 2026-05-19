@@ -41,7 +41,7 @@ icon: material/folder-search-outline
 - **g0v Hackath71n 議題提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主題討論，集結初步參與意願。
 - **COSCUP 2026 議程合作**：與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 達成議程合作，第二天（8/9）會聯合舉辦匿名支付主題場次，徵稿與聯合審稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
 - **架構落地**：在文件站的 7 大分類中明確分配支付主題的位置，避免另開獨立分類造成結構碎裂。
-- **金融審查角度的點火文**：2026/05 blog 發了 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 與台灣 PayPal 2017 撤離、Stripe 結構性不支援串起來，作為「匿名支付」主題的動機面補強。
+- **金融審查角度的點火文**：2026/05 blog 發了 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 與台灣 PayPal 2017 關閉境內交易、Stripe 結構性不支援串起來，作為「匿名支付」主題的動機面補強。
 
 ## 進行中與待完成
 
