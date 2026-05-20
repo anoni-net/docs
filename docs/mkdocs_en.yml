@@ -22,6 +22,8 @@ nav:
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
+      - !ENV [NAV_REPORTS, "Reports"]:
+          - reports/index.md
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
       - regional/tor-relay-watcher.md
