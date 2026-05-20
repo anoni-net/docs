@@ -14,6 +14,15 @@ description: "2017 年 5 月 9 日 PayPal 關閉台灣境內交易，2026 年的
 
 # PayPal 關閉台灣境內交易那天，跟 EFF 新書 Transaction Denied 在講同一件事
 
+<figure markdown="span">
+    <a href="../../assets/images/2026-financial-companies-as-censors.png" target="_blank">
+        <img src="../../assets/images/2026-financial-companies-as-censors.png"
+            alt="被膠帶封口的存錢豬，象徵被金融中介切斷的支付管道"
+            style="border-radius: 10px;">
+    </a>
+    <figcaption>圖片來自 EFF Deeplinks 文章 [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} 的社交卡片（EFF Financial Censorship banner 圖庫），授權為 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}。</figcaption>
+</figure>
+
 2017 年 5 月 9 日，美國的跨境電子支付服務 PayPal 全數關閉台灣境內交易功能，兩個 PayPal Taiwan 帳號之間不能再收付款，跨境收付款則維持運作。受衝擊最大的是剛起步的實況產業，Twitch Cheer、YouTube Super Chat、StreamLabs、NightDev 這些依賴 PayPal 處理本地觀眾贊助的工具集體中斷，小型組織與獨立媒體的本地金流也跟著受影響[^8]。
 
 法源是 2015 年通過的《電子支付機構管理條例》第三條第一項，PayPal 選擇不申請許可，關閉境內交易功能[^9]。八年過去，美國的線上金流處理服務 Stripe 至今未開放台灣使用者註冊。Stripe 是 Substack、許多訂閱制 SaaS、許多開源專案贊助頁面背後的信用卡收款層，台灣的個人創作者要先繞道註冊一間美國 LLC 才用得上[^10]。
