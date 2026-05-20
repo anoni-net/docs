@@ -23,10 +23,14 @@ og:
 
 [Submit on Pretalx](https://pretalx.coscup.org/coscup-2026/cfp){ .md-button .md-button--primary target="_blank"}
 
+!!! note "CFP deadline extended to May 23, 2026 (AoE)"
+
+    We have extended the CFP deadline to **May 23, 2026 (AoE)** so more speakers have time to prepare proposals. We will keep inviting researchers, practitioners, NGO staff, developers, and community members to submit, and we welcome readers to forward the call to anyone who fits. If you are still drafting a proposal, use this extra window to finish it. If you know someone who would be a good speaker, please pass along the call or make an introduction.
+
 ## Event and timeline
 
 - **Dates**: August 8 and 9, 2026, National Taiwan University of Science and Technology (NTUST)
-- **Joint CFP deadline**: May 9, 2026 (AoE)
+- **Joint CFP deadline**: **May 23, 2026 (AoE)** (extended from May 9)
 - **Acceptance announcements**: June 9, 2026
 - **Schedule**: Pretalx scheduling to be completed by June 23, 2026
 

@@ -61,6 +61,7 @@ icon: material/folder-search-outline
 - 跨境捐款：對倡議組織如何在合規前提下接受加密貨幣捐款的個案研究
 - 金融審查專題：Rainey Reitman《Transaction Denied》（Beacon Press, 2026），整理十多年金融中介擔任言論審查者的案例
 - EFF Financial Censorship 系列文章（2012–2025）：Smashwords、Nifty Archive、OnlyFans、Palestinians PayPal、Naked Yoga、Tor PayPal、Tornado Cash 等
+- 美國 2025–2026 加密市場結構立法：GENIUS Act（穩定幣，2025-07 Trump 簽署）、CLARITY Act（市場結構，2026-05 參議院銀行委員會通過）、Anti-CBDC Surveillance State Act（眾議院 2025-07 通過，參議院 S.1124 待審）的條文重點與時序整理，作為跟台灣 VASP 草案的對照素材
 
 ## 如何加入討論
 
