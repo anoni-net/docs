@@ -41,7 +41,7 @@ icon: material/folder-search-outline
 - **g0v Hackath71n 议题提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主题讨论，集结初步参与意愿。
 - **COSCUP 2026 议程合作**：与 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 达成议程合作，第二天（8/9）会联合举办匿名支付主题场次，征稿与联合审稿说明见 [COSCUP 2026 公开征稿](../activity/coscup-2026-cfp.md)。
 - **架构落地**：在文件站的 7 大分类中明确分配支付主题的位置，避免另开独立分类造成结构碎裂。
-- **金融审查角度的点火文**：2026/05 blog 发了 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 跟华语六地区的金流处境（台湾 PayPal 2017 撤离与 Stripe 至今未开放、香港 2019 后冻结、中国大陆「保护性冻结」、新马 KYC 趋同）串起来，作为「匿名支付」主题的动机面补强。
+- **金融审查角度的点火文**：2026/05 blog 发了 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 与台湾 PayPal 2017 关闭境内交易、Stripe 至今未开放，以及华语六地区（香港 2019 后冻结、中国大陆「保护性冻结」、新马 KYC 收紧）的同样故事串起来，作为「匿名支付」主题的动机面补强。
 
 ## 进行中与待完成
 
