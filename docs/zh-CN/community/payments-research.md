@@ -41,6 +41,7 @@ icon: material/folder-search-outline
 - **g0v Hackath71n 议题提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主题讨论，集结初步参与意愿。
 - **COSCUP 2026 议程合作**：与 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 达成议程合作，第二天（8/9）会联合举办匿名支付主题场次，征稿与联合审稿说明见 [COSCUP 2026 公开征稿](../activity/coscup-2026-cfp.md)。
 - **架构落地**：在文件站的 7 大分类中明确分配支付主题的位置，避免另开独立分类造成结构碎裂。
+- **金融审查角度的点火文**：2026/05 blog 发了 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 跟华语六地区的金流处境（台湾 PayPal 2017 撤离与 Stripe 至今未开放、香港 2019 后冻结、中国大陆「保护性冻结」、新马 KYC 趋同）串起来，作为「匿名支付」主题的动机面补强。
 
 ## 进行中与待完成
 
@@ -58,6 +59,8 @@ icon: material/folder-search-outline
 - 链上分析：Chainalysis、TRM Labs 等公司的公开报告，以及学术界对链上隐私的批判
 - Tornado Cash 制裁案例：美国 OFAC 制裁、后续诉讼与技术社群回应的时序整理
 - 跨境捐款：对倡议组织如何在合规前提下接受加密货币捐款的个案研究
+- 金融审查专题：Rainey Reitman《Transaction Denied》（Beacon Press, 2026），整理十多年金融中介担任言论审查者的案例
+- EFF Financial Censorship 系列文章（2012–2025）：Smashwords、Nifty Archive、OnlyFans、Palestinians PayPal、Naked Yoga、Tor PayPal、Tornado Cash 等
 
 ## 如何加入讨论
 
