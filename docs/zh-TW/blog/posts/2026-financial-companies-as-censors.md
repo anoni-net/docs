@@ -15,8 +15,8 @@ description: "2017 年 5 月 9 日 PayPal 關閉台灣境內交易，2026 年的
 # PayPal 關閉台灣境內交易、Stripe 至今未開放：EFF 新書 Transaction Denied 整理十多年金融審查案例
 
 <figure markdown="span">
-    <a href="../../assets/images/2026-financial-companies-as-censors.png" target="_blank">
-        <img src="../../assets/images/2026-financial-companies-as-censors.png"
+    <a href="../../../../assets/images/2026-financial-companies-as-censors.png" target="_blank">
+        <img src="../../../../assets/images/2026-financial-companies-as-censors.png"
             alt="被膠帶封口的存錢豬，象徵被金融中介切斷的支付管道"
             style="border-radius: 10px;">
     </a>
