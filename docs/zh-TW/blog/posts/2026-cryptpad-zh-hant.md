@@ -49,7 +49,7 @@ CryptPad 由法國 [XWiki SAS](https://xwiki.com/){target="_blank"} 開發，使
 - **Code/Markdown**：程式碼與 Markdown 編輯器
 - **Drive**：雲端硬碟，整合上述所有檔案類型
 
-關鍵在於**所有內容都在你瀏覽器端就完成加密**，伺服器收到的是密文，CryptPad 的營運者、anoni.net 的維運者，都沒有解開內容的鑰匙。這套架構稱為 zero-knowledge（零知識），意思是「即便我們想看，也看不到」。
+關鍵在於**所有內容都在你瀏覽器端就完成加密**，伺服器收到的是密文，CryptPad 的營運者、anoni.net 的維護者，都沒有解開內容的鑰匙。這套架構稱為 zero-knowledge（零知識），意思是「即便我們想看，也看不到」。
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/cryptpad-richtext-collab.png" target="_blank">
@@ -81,7 +81,7 @@ CryptPad 由法國 [XWiki SAS](https://xwiki.com/){target="_blank"} 開發，使
 
 **開源、可自架、可審視**：AGPLv3 授權保證任何衍生服務都必須開源，我們自架時也能完整檢查程式碼。加密協議與資料結構公開可審視，跟 Tor、Tails、OONI 一樣，是可被驗證的隱私。
 
-**規則由維運者與社群決定**：自架的好處跟 [自架 Matrix](2026-discord-matrix-statement.md) 的理由一致，紀錄保存策略、註冊政策、頻道規則由我們決定，可預期、可問責、可隨社群需求調整。
+**規則由維護者與社群決定**：自架的好處跟 [自架 Matrix](2026-discord-matrix-statement.md) 的理由一致，紀錄保存策略、註冊政策、頻道規則由我們決定，可預期、可問責、可隨社群需求調整。
 
 **有歐洲公部門與民間組織的真實部署經驗**：CryptPad 在歐洲多個公部門專案、NGO 與研究單位內被採用，合規、可靠性、長期維護三方面都有實際使用紀錄，把它推給更多正體中文使用者時不必擔心是 demo 漂亮的玩具。
 
