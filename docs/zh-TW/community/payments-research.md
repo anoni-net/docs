@@ -41,6 +41,7 @@ icon: material/folder-search-outline
 - **g0v Hackath71n 議題提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主題討論，集結初步參與意願。
 - **COSCUP 2026 議程合作**：與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 達成議程合作，第二天（8/9）會聯合舉辦匿名支付主題場次，徵稿與聯合審稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
 - **架構落地**：在文件站的 7 大分類中明確分配支付主題的位置，避免另開獨立分類造成結構碎裂。
+- **金融審查角度的點火文**：2026/05 blog 發了 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 與台灣 PayPal 2017 關閉境內交易、Stripe 結構性不支援串起來，作為「匿名支付」主題的動機面補強。
 
 ## 進行中與待完成
 
@@ -58,6 +59,8 @@ icon: material/folder-search-outline
 - 鏈上分析：Chainalysis、TRM Labs 等公司的公開報告，以及學術界對鏈上隱私的批判
 - Tornado Cash 制裁案例：美國 OFAC 制裁、後續訴訟與技術社群回應的時序整理
 - 跨境捐款：對倡議組織如何在合規前提下接受加密貨幣捐款的個案研究
+- 金融審查專題：Rainey Reitman《Transaction Denied》（Beacon Press, 2026），整理十多年金融中介擔任言論審查者的案例
+- EFF Financial Censorship 系列文章（2012–2025）：Smashwords、Nifty Archive、OnlyFans、Palestinians PayPal、Naked Yoga、Tor PayPal、Tornado Cash 等
 - 美國 2025–2026 加密市場結構立法：GENIUS Act（穩定幣，2025-07 Trump 簽署）、CLARITY Act（市場結構，2026-05 參議院銀行委員會通過）、Anti-CBDC Surveillance State Act（眾議院 2025-07 通過，參議院 S.1124 待審）的條文重點與時序整理，作為跟台灣 VASP 草案的對照素材
 
 ## 如何加入討論
