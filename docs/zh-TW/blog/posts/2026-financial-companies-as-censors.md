@@ -8,11 +8,11 @@ categories:
     - 隱私
 slug: 2026-financial-companies-as-censors
 image: "assets/images/2026-financial-companies-as-censors.png"
-summary: "2017 年 5 月 9 日 PayPal 關掉台灣境內交易那天，跟 EFF 前 Activism Director Rainey Reitman 新書《Transaction Denied》整理的過去十多年全球金融審查案例，講的就是同一件事。從這個角度看 Stripe 至今不開放台灣使用者註冊、《虛擬資產服務法》逐步上路對倡議組織與獨立創作者的影響。"
+summary: "2017 年 5 月 9 日 PayPal 關閉台灣境內交易，2026 年的台灣個人仍然無法直接申請 Stripe。EFF 前 Activism Director Rainey Reitman 新書《Transaction Denied》整理十多年金融中介擔任審查者的案例，台灣這兩件事跟全球同類事件放在一起對照，再延伸到《虛擬資產服務法》逐步上路對倡議組織與獨立創作者的影響。"
 description: "2017 年 5 月 9 日 PayPal 關閉台灣境內交易，2026 年的台灣個人仍然無法直接申請 Stripe。EFF 前 Activism Director Rainey Reitman 新書《Transaction Denied》整理十多年金融中介擔任言論審查者的案例，把台灣這兩件事跟全球同類事件放在一起對照。"
 ---
 
-# PayPal 關閉台灣境內交易那天，跟 EFF 新書 Transaction Denied 在講同一件事
+# PayPal 關閉台灣境內交易、Stripe 至今未開放：EFF 新書 Transaction Denied 整理十多年金融審查案例
 
 <figure markdown="span">
     <a href="../../assets/images/2026-financial-companies-as-censors.png" target="_blank">
