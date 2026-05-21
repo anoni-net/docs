@@ -8,6 +8,23 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 操作系统的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tails 7.8
+
+> 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
+
+- Tor Browser 升至 15.0.14（基于 Firefox ESR 140.11）。
+- 修补 Linux 内核本地提权漏洞「Fragnesia」（同步缓解「Drity Frag」）。此类漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。
+- 修补 Flatpak 通过 Yelp 逃逸沙箱的问题，yelp 升至 42.2-4tails1。
+- 修补 CVE-2026-46529（evince）、CVE-2026-41989（libgcrypt20）、CVE-2026-41054（haveged）。
+- 移除内置 Thunderbird。仍可通过持久存储的 additional software 自动安装，每次启动 Tails 时从 Debian 仓库拉取最新版本。原因是 Tails 发布节奏跟着 Firefox，Debian 的 Thunderbird 新版通常稍晚才到，过去导致 Tails 内置版本常带已知漏洞。
+- 底层升级至 Debian Trixie 13.5。
+- Secure Boot CA 升级通知改为只在 Secure Boot 已启用时才显示，避免在停用情境下出现混淆信息。
+- WhisperBack 错误回报加入已安装的 Flatpak 应用程序与 runtimes 清单。
+
+!!! info "Tails 7.7.x 系列"
+
+    Tails 7.7.3、7.7.2、7.7.1、7.7 等条目目前仅在 [正体中文版](https://anoni.net/docs/zh-tw/changelog/tails/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
+
 ## Tails 7.6
 
 > 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"} · [完整翻译文章](../blog/posts/2026-tails-7-6.md)
