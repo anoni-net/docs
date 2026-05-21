@@ -31,6 +31,7 @@ icon: material/server-network-outline
 - **用途**：共筆、活動共編、機敏內容加密協作
 - **入口**：社群 Cryptpad [首頁](https://cryptpad.anoni.net/)
 - **帳號申請**：目前 Cryptpad 帳號亦需來信 <whisper@anoni.net> 申請，預設提供 50 MBs 的容量，未來可調整。
+- **介面語言**：自 CryptPad 2026.5.0 起，「中文(正體)」與「中文(簡體)」皆為內建語系，可在右上角設定頁切換，或於網址加 `?lang=zh_Hant` / `?lang=zh_Hans`。社群為 zh_Hant 投入兩年半上游翻譯的歷程見 [CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](../blog/posts/2026-cryptpad-zh-hant.md)。
 - **使用方式**：取得帳號後可開新 pad、分享連結、設定權限（僅檢視、可編輯），活動共筆連結通常會貼在 Matrix 公布。
 
 ### Etherpad（即時共筆）
