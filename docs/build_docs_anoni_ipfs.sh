@@ -30,6 +30,7 @@ RUN run.sh
 RUN run_en.sh
 RUN run_zh-tw.sh
 RUN run_zh-cn.sh
+mkdir -p ./anoni-net-docs-ipfs
 rm -rf ./anoni-net-docs-ipfs/*
 cp -r ./output/* ./anoni-net-docs-ipfs/
 
