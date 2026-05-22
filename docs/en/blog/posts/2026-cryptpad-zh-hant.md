@@ -7,8 +7,8 @@ categories:
     - News
 slug: 2026-cryptpad-zh-hant
 image: "assets/images/post-update.png"
-summary: "Two and a half years of upstream community work landed in CryptPad 2026.5.0 (2026/05/13): zh_Hant (Traditional / Orthodox Chinese) is now a built-in locale, zh_Hans was upgraded alongside it, and a new locale alias system migrates older zh_CN / zh_TW settings without surprise. The community-hosted cryptpad.anoni.net is upgraded; readers in Taiwan, Hong Kong, Macau, and across the diaspora can now use one of the few end-to-end encrypted collaboration suites entirely in their own script."
-description: "Two and a half years of upstream community work landed in CryptPad 2026.5.0 (2026/05/13): zh_Hant (Traditional / Orthodox Chinese) is now a built-in locale, zh_Hans was upgraded alongside it, and a new locale alias system migrates older zh_CN / zh_TW settings without surprise. The community-hosted cryptpad.anoni.net is upgraded; readers in Taiwan, Hong Kong, Macau, and across the diaspora can now use one of the few end-to-end encrypted collaboration suites entirely in their own script."
+summary: "Two and a half years of upstream community work landed in CryptPad 2026.5.0 (2026/05/13): zh_Hant (Traditional Chinese) is now a built-in locale, zh_Hans was upgraded alongside it, and a new locale alias system migrates older zh_CN / zh_TW settings without surprise. The community-hosted cryptpad.anoni.net is upgraded; readers in Taiwan, Hong Kong, Macau, and across the diaspora can now use one of the few end-to-end encrypted collaboration suites entirely in their own script."
+description: "Two and a half years of upstream community work landed in CryptPad 2026.5.0 (2026/05/13): zh_Hant (Traditional Chinese) is now a built-in locale, zh_Hans was upgraded alongside it, and a new locale alias system migrates older zh_CN / zh_TW settings without surprise. The community-hosted cryptpad.anoni.net is upgraded; readers in Taiwan, Hong Kong, Macau, and across the diaspora can now use one of the few end-to-end encrypted collaboration suites entirely in their own script."
 ---
 
 # CryptPad 2026.5.0: zh_Hant Lands as a Built-in Locale After Two and a Half Years Upstream
@@ -101,9 +101,11 @@ The CryptPad main application, the Accounts plugin, and the User Guide together 
 
 That single PR not only turned on `zh_Hant` and `zh_Hans` as official locales, but also added a locale-alias mechanism so that accounts still configured with `zh_CN` or `zh_TW` (the older codes) automatically fall back to the new `zh_Hans` and `zh_Hant`, instead of getting pushed back to English after the upgrade. Existing Simplified Chinese users see their UI carry on as Chinese without having to reset anything.
 
-## A note on “正體” (Orthodox) vs “繁體” (Traditional)
+## A note on 正體 vs 繁體 — naming the script
 
-CryptPad’s language menu originally read “中文(繁體)” — *Traditional Chinese* — for the zh_Hant entry. PR #1329 changed it to “中文(正體)” — literally *Orthodox Chinese*. It is a small surface change with a small political point behind it: the community prefers “正體”, because “繁” (*complex*) implies “more complex than Simplified”, but the script as used in Taiwan, Hong Kong, and Macau is simply the historically continuous form of written Chinese — not a more elaborate counterpart to anything. Operating systems and most software still call it *Traditional Chinese*, and we are not asking anyone to change that across the board. But where we are doing the translation work ourselves, we use the name we prefer. How a community names its own script is part of the localisation work, not separate from it.
+CryptPad’s language menu originally read “中文(繁體)” for the zh_Hant entry — *fántǐ*, literally “complex form”. PR #1329 changed it to “中文(正體)” — *zhèngtǐ*, roughly “proper” or “standard” form. The community prefers 正體 because 繁 (*complex*) implies “more complex than Simplified”, whereas the script as used in Taiwan, Hong Kong, and Macau is simply the historically continuous form of written Chinese, with no “more elaborate than” relationship to anything.
+
+Operating systems and most English-language writing still call it *Traditional Chinese*, and we are not asking anyone to change that across the board. Where we are doing the translation work ourselves, we use the name we prefer. How a community names its own script is part of the localisation work.
 
 ## Using cryptpad.anoni.net from a censored or restricted network
 
