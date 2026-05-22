@@ -12,6 +12,7 @@ export NAV_GUIDES='Guides'
 export NAV_BASICS='Concepts'
 export NAV_SCENARIOS='Scenarios'
 export NAV_REGIONAL='Regional'
+export NAV_REPORTS='Reports'
 export NAV_EVENT='Events'
 export NAV_POST='Updates'
 export NAV_EVENT_PREPARE="Pre-Event"
