@@ -4,3 +4,7 @@
 __pycache__/
 docs/site/
 .python-version
+
+# Local IDE / agent config (Claude Code, Cursor)
+.claude/
+.cursor/
