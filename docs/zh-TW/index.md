@@ -139,10 +139,11 @@ hide:
 
 !!! tip "最新動態"
 
-    - `新增`{style="color: var(--brand-cyan-600);"}：[OONI 新版 Probe Desktop 測試邀請](./blog/posts/2026-ooni-probe-desktop-beta.md) - 2026/04/11
+    - `更新`{style="color: var(--cat-privacy);"}：[InterSecLab MADLink 報告翻譯：凌華 1,708 台 CSA-7400 進入哈薩克審查系統](./blog/posts/report-madlink.md) - 2026/05/23
+    - `新增`{style="color: var(--brand-cyan-600);"}：[校園 Tor Relay 範本工具包：提案、SOP、FAQ 三份範本上線](./blog/posts/2026-campus-tor-relay-template-kit.md) - 2026/05/21
+    - `更新`{style="color: var(--cat-privacy);"}：[Transaction Denied 中文導讀：金融公司作為審查者](./blog/posts/2026-financial-companies-as-censors.md) - 2026/05/21
+    - `新增`{style="color: var(--brand-cyan-600);"}：[onionoo MCP 上線：用一句中文問 Tor 中繼節點現況](./blog/posts/2026-onionoo-mcp-public.md) - 2026/05/19
+    - `新增`{style="color: var(--brand-cyan-600);"}：[什麼是差分隱私](./blog/posts/2025-what-is-differential-privacy.md) - 2026/04/27
     - `活動`{style="color: var(--accent-action);"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
-    - `新增`{style="color: var(--brand-cyan-600);"}：[2026/03 社群近況更新](./blog/posts/updates-202603.md) - 2026/03/29
-    - `更新`{style="color: var(--cat-privacy);"}：[Tor Project 客座文章：在台師大架設 Tor Relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} - 2026/03/23
-    - `新增`{style="color: var(--brand-cyan-600);"}：[2026 社群參與：個人隱私指引、Tor Relay 校園建立、匿名支付](./community/index.md) - 2026/01/02
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。

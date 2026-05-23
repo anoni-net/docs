@@ -147,9 +147,11 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
 !!! tip "Latest"
 
+    - `Update`{style="color: var(--cat-privacy);"}: [MADLink (Mandarin translation): ADLINK's 1,708 CSA-7400 units in Kazakhstan's censorship stack](./blog/posts/report-madlink.md) — 2026-05-23
+    - `New`{style="color: var(--brand-cyan-600);"}: [Campus Tor Relay templates — proposal, SOP, and FAQ](./blog/posts/2026-campus-tor-relay-template-kit.md) — 2026-05-21
+    - `Update`{style="color: var(--cat-privacy);"}: [Transaction Denied — a Sinophone Asia-Pacific reading of EFF's book on financial censorship](./blog/posts/2026-financial-companies-as-censors.md) — 2026-05-21
+    - `New`{style="color: var(--brand-cyan-600);"}: [onionoo MCP is now public — query the Tor relay network in plain language](./blog/posts/2026-onionoo-mcp-public.md) — 2026-05-19
+    - `New`{style="color: var(--brand-cyan-600);"}: [What is Differential Privacy?](./blog/posts/2025-what-is-differential-privacy.md) — 2026-04-27
     - `Event`{style="color: var(--accent-action);"}: [COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) — 2026-04-08
-    - `New`{style="color: var(--brand-cyan-600);"}: [2026/03 Community Update](./blog/posts/updates-202603.md) — 2026-03-29
-    - `Update`{style="color: var(--cat-privacy);"}: [Tor Project guest post — Setting up a Tor relay at a university in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} — 2026-03-23
-    - `New`{style="color: var(--brand-cyan-600);"}: [2026 community focus — Personal Privacy Guidelines, Tor Relay on Campus, Anonymous Payments](./community/index.md) — 2026-01-02
 
     More at [:material-bullhorn-outline: Updates](./blog/index.md).
