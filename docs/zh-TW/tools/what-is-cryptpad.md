@@ -104,7 +104,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 | 內容對伺服器加密 | E2EE / zero-knowledge | 否 | 否 | 否 |
 | 多人即時共編 | 是 | 是 | 是 | 是 |
 | 試算表、簡報、表單 | 內建（OnlyOffice） | 內建 | 內建 | 無 |
-| 註冊門檻 | 註冊碼制（cryptpad.anoni.net）／一般註冊（cryptpad.org） | Google 帳號 | 信箱 + 密碼 | 多為無帳號 |
+| 註冊門檻 | 註冊碼制（cryptpad.anoni.net）、一般註冊（cryptpad.org） | Google 帳號 | 信箱 + 密碼 | 多為無帳號 |
 | 自架成本 | AGPLv3，可完整自架 | 不可 | 不可 | 開源，可自架 |
 | 適用情境 | 長期、敏感、加密協作 | 一般辦公 | 知識庫、專案管理 | 臨時共筆、活動現場 |
 
