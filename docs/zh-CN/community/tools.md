@@ -27,6 +27,7 @@ icon: material/message-text
 - **用途**：共笔、活动共编、敏感内容加密协作
 - **入口**：社区 Cryptpad [首页](https://cryptpad.anoni.net/)
 - **帐号申请**：目前 Cryptpad 帐号同样需要发送邮件至 <whisper@anoni.net> 申请，默认提供 50 MB 容量，未来可视情况调整。
+- **界面语言**：自 CryptPad 2026.5.0 起，「中文(简体)」与「中文(正体)」皆为内建语系，可在右上角设置页切换，或于网址加 `?lang=zh_Hans` / `?lang=zh_Hant`。社区为 zh_Hant 投入两年半上游翻译的历程见 [CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](../blog/posts/2026-cryptpad-zh-hant.md)。
 - **使用方式**：取得帐号后可新建 pad、分享链接、设置权限（仅查看、可编辑），活动用的共笔链接通常会在 Matrix 公布。
 
 ## Jitsi（在线视频会议）
