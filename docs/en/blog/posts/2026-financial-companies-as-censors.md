@@ -43,6 +43,14 @@ When a multi-year small-amount donor has a single fresh donation flagged as susp
 
 Reitman points out that this pattern works long-term because the underlying assumption — financial institutions are neutral conduits — is widely accepted. In practice, the combination of overcautious compliance-driven risk avoidance, service terms vague to the point of unpredictability, automated decisions with no human review interface, and no functioning appeals path for those cut off produces an outcome that's effectively the same as content removal[^7]. EFF has tracked dozens of these cases over the past decade-plus, faster than any legislature has moved on the issue.
 
+## From account blocks to platform content policy: a new chain of cases in 2025-2026
+
+The cases Reitman compiles mostly center on financial institutions cutting off individual or organizational accounts. From 2025 onward, a different mode of pressure has emerged. Payment processors use contract terms and fine threats to push platforms into revising their own content policies. The target has shifted from individual accounts to entire platform-level policies.
+
+In February 2025, Mastercard and Visa pressured multiple Japanese cultural-industry platforms, forcing services to adjust what they sold. Japan's domestic card brand JCB and various stored-value mechanisms absorbed some of the impact, allowing the affected services to barely scrape through[^13]. In July of the same year, Steam (Valve) confirmed it had removed adult games from its store under payment-processor pressure[^14]. In March 2026, U.S. FTC Chair Andrew N. Ferguson issued warning letters to PayPal, Stripe, Visa, and Mastercard on "debanking American consumers" — the first time a U.S. federal regulator publicly framed this pattern as an issue[^15]. In May 2026, Kickstarter revised its content guidelines to ban several categories of NSFW content, with Stripe identified as the pressure source behind the policy change[^16].
+
+From individual accounts severed, to entire markets shut out, to platform content policies rewritten by proxy, the reach of financial intermediaries has expanded steadily over the past decade-plus.
+
 ## Taiwan as case study: PayPal's domestic shutdown, Stripe's continued closure
 
 Read PayPal's 2017 domestic shutdown and Stripe's continued closure through Reitman's lens, and both look like the same thing: financial intermediaries unilaterally deciding who can collect money on their networks.
@@ -73,7 +81,7 @@ The community set anonymous payments as one of three 2026 focus areas. The origi
 
 The existing **Why Anonymous Payments Matter** anchor ([zh-TW page](https://anoni.net/docs/zh-tw/basics/payments-anonymity/){target="_blank"}, en version pending) addresses payment flows as passively observed. This post addresses payment flows as actively cut off. Reading both together gives the fuller picture.
 
-Next steps planned include adding a "cross-border sanctions and over-compliance side effects" section to **Taiwan VASP Act 2026**, and selecting 5–8 EFF Financial Censorship articles from the past decade-plus for curated translation. The **Anonymous Payments Research Track** ([zh-TW page](https://anoni.net/docs/zh-tw/community/payments-research/){target="_blank"}, en version pending) is where the community discussion and translation backlog live.
+Next steps planned include adding a "cross-border sanctions and over-compliance side effects" section to **Taiwan VASP Act 2026**, and selecting 5–8 EFF Financial Censorship articles from the past decade-plus for curated translation. Tracking the progress of alternative payment systems is also part of the picture. Europe's European Payments Initiative and Brazil's Pix are two existing implementations[^17][^18], though payment rails are heavily regulated in every jurisdiction and building a scaled alternative is not cheap. The **Anonymous Payments Research Track** ([zh-TW page](https://anoni.net/docs/zh-tw/community/payments-research/){target="_blank"}, en version pending) is where the community discussion and translation backlog live.
 
 For English-language readers who want the underlying material, EFF's [Financial Censorship issue page](https://www.eff.org/issues/financial-censorship){target="_blank"} is the best entry point. _Transaction Denied_ is available from [Beacon Press](https://www.beacon.org/Transaction-Denied-P2455.aspx){target="_blank"}.
 
@@ -95,3 +103,9 @@ For English-language readers who want the underlying material, EFF's [Financial 
 [^10]: [Essential guide for Taiwan creators: platform fees and remittance back to Taiwan](https://most.tw/posts/blog/creatorsplatform202409/){target="_blank"} - most.tw (in Mandarin)
 [^11]: [Rainey Reitman](https://www.eff.org/about/staff/rainey-reitman-0){target="_blank"} - EFF Staff (11 years at EFF, co-founder and current board chair of the Freedom of the Press Foundation)
 [^12]: [Adds support for remote sellers in Taiwan to Stripe Tax](https://docs.stripe.com/changelog/clover/2025-10-29/stripe-tax-taiwan-remote-support){target="_blank"} - Stripe Changelog (2025-10-29)
+[^13]: [Mastercard and VISA's Offensive Against Japanese Cultural Industries](https://blog.gslin.org/archives/2025/02/24/12271/mastercard-%e8%88%87-visa-%e5%b0%8d%e6%97%a5%e6%9c%ac%e6%96%87%e5%8c%96%e7%94%a2%e6%a5%ad%e7%9a%84%e6%94%bb%e5%8b%a2/){target="_blank"} - Gea-Suan Lin's BLOG (in Mandarin)
+[^14]: [Steam (Valve) confirms adult games removed under payment processor pressure](https://blog.gslin.org/archives/2025/07/21/12523/){target="_blank"} - Gea-Suan Lin's BLOG (in Mandarin)
+[^15]: [FTC Chairman Andrew N. Ferguson Issues Warning Letters to CEOs of PayPal, Stripe, Visa and Mastercard About Debanking American Consumers](https://www.ftc.gov/news-events/news/press-releases/2026/03/ftc-chairman-andrew-n-ferguson-issues-warning-letters-ceos-paypal-stripe-visa-mastercard-about-debanking-american-consumers){target="_blank"} - U.S. Federal Trade Commission
+[^16]: [Kickstarter Is The Latest Platform Seemingly Forced To Ban Adult Content By Payment Processors](https://kotaku.com/kickstarter-is-the-latest-platform-seemingly-forced-to-ban-adult-content-by-payment-processors-2000695648){target="_blank"} - Kotaku
+[^17]: [European Payments Initiative](https://en.wikipedia.org/wiki/European_Payments_Initiative){target="_blank"} - Wikipedia
+[^18]: [Pix (payment system)](https://en.wikipedia.org/wiki/Pix_(payment_system)){target="_blank"} - Wikipedia

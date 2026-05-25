@@ -43,6 +43,14 @@ Rainey Reitman 在 EFF 任职 11 年，先后担任 Activism Director 与 Chief 
 
 Reitman 在书里点出，这个模式之所以能长期运作，靠的是「金融机构是中性管道」这份既有认知。实际运作起来，合规导向的过度避险、模糊到不可预测的服务条款、自动化决策但没有人类审查介面、被切断的人没有可运作的申诉管道，这几个元素加在一起的效果跟内容被删除其实一样[^8]。EFF 过去十多年发过数十篇文章追踪这些案例，累积速度比修法快得多。
 
+## 从账号封锁到平台内容政策：2025-2026 的新案例链
+
+Reitman 书里收的案例多半围绕「金融机构切断个人或组织账号」这个型态。2025 年起的几起事件呈现出另一种施压型态，金流公司透过合约条款与罚款威胁，要求平台自己修改内容政策，施压对象从个别账号扩大到整个平台层面。
+
+2025 年 2 月，Mastercard 与 Visa 对日本多家文化产业平台施压，受影响的服务被迫调整贩售品项。日本还有自家的 JCB 与点数卡机制可以挡一些冲击，勉强撑过去[^13]。同年 7 月，Steam（Valve）证实在金流公司压力下，从商店移除部分成人游戏[^14]。2026 年 3 月，美国 FTC 主席 Andrew N. Ferguson 发出警告函给 PayPal、Stripe、Visa、Mastercard，谈「debanking American consumers」议题，这是美国联邦监管者公开把这个模式列为议题的第一次[^15]。2026 年 5 月，Kickstarter 修改内容指引、禁止几类 NSFW 内容，Stripe 被认为是这次政策变动背后的压力来源[^16]。
+
+从个人账号被切断、整个市场被排除、到平台内容政策被间接改写，金流中介能施加的影响在十多年间持续扩大。
+
 ## 回到台湾：PayPal 关闭境内交易、Stripe 从未开放，都是金融中介的单方面决定
 
 把 PayPal 2017 关闭境内交易跟 Stripe 至今不开放放在 Reitman 的框架下看，两件事都是金融中介单方面决定谁能在自己的网络上收钱。
@@ -69,7 +77,7 @@ Reitman 在书里没有展开亚洲案例，但她整理出的四个元素「合
 
 社群把 2026 年的三大主题之一定在匿名支付，原本想说的是「个人金流是 metadata 的独立维度」。Reitman 这本书让我们看到金流还会被主动拿来当审查工具，这个风险对倡议组织、独立媒体、创作者不是抽象议题。既有的 [为什么匿名支付重要](../../basics/payments-anonymity.md) 处理的是金流被动被观察的问题，这篇处理的是金流主动被切断的问题，两篇对照看比较完整。
 
-下一步预计推进的方向，包括在《台湾 VASP 法 2026》补一段「跨境制裁与过度合规副作用」的观察，以及从 EFF 过去十多年 Financial Censorship 系列文章选 5 到 8 篇做策展性翻译。如果你关心这个主题，欢迎透过 [匿名支付研究专题](../../community/payments-research.md) 加入社群讨论。
+下一步预计推进的方向，包括在《台湾 VASP 法 2026》补一段「跨境制裁与过度合规副作用」的观察，以及从 EFF 过去十多年 Financial Censorship 系列文章选 5 到 8 篇做策展性翻译。替代金流系统的进展也值得追踪，欧洲 European Payments Initiative、巴西 Pix 是两个现有实作[^17][^18]，但金流在各国都是高度管制行业，规模化替代系统的建立成本不低。如果你关心这个主题，欢迎透过 [匿名支付研究专题](../../community/payments-research.md) 加入社群讨论。
 
 ## 相关阅读
 
@@ -90,3 +98,9 @@ Reitman 在书里没有展开亚洲案例，但她整理出的四个元素「合
 [^10]: [实况主 Donate 将受影响？PayPal 宣布停止台湾境内交易服务](https://gnn.gamer.com.tw/detail.php?sn=146778){target="_blank"} - 巴哈姆特 GNN
 [^11]: [台湾创作者必看！支持平台抽成与汇款回台湾完整攻略](https://most.tw/posts/blog/creatorsplatform202409/){target="_blank"} - most.tw
 [^12]: [Adds support for remote sellers in Taiwan to Stripe Tax](https://docs.stripe.com/changelog/clover/2025-10-29/stripe-tax-taiwan-remote-support){target="_blank"} - Stripe Changelog（2025-10-29）
+[^13]: [Mastercard 与 VISA 对日本文化产业的攻势](https://blog.gslin.org/archives/2025/02/24/12271/mastercard-%e8%88%87-visa-%e5%b0%8d%e6%97%a5%e6%9c%ac%e6%96%87%e5%8c%96%e7%94%a2%e6%a5%ad%e7%9a%84%e6%94%bb%e5%8b%a2/){target="_blank"} - Gea-Suan Lin's BLOG
+[^14]: [Steam (Valve) 确认是因为金流公司（信用卡公司）的压力下架成人游戏](https://blog.gslin.org/archives/2025/07/21/12523/){target="_blank"} - Gea-Suan Lin's BLOG
+[^15]: [FTC Chairman Andrew N. Ferguson Issues Warning Letters to CEOs of PayPal, Stripe, Visa and Mastercard About Debanking American Consumers](https://www.ftc.gov/news-events/news/press-releases/2026/03/ftc-chairman-andrew-n-ferguson-issues-warning-letters-ceos-paypal-stripe-visa-mastercard-about-debanking-american-consumers){target="_blank"} - U.S. Federal Trade Commission
+[^16]: [Kickstarter Is The Latest Platform Seemingly Forced To Ban Adult Content By Payment Processors](https://kotaku.com/kickstarter-is-the-latest-platform-seemingly-forced-to-ban-adult-content-by-payment-processors-2000695648){target="_blank"} - Kotaku
+[^17]: [European Payments Initiative](https://en.wikipedia.org/wiki/European_Payments_Initiative){target="_blank"} - Wikipedia
+[^18]: [Pix (payment system)](https://en.wikipedia.org/wiki/Pix_(payment_system)){target="_blank"} - Wikipedia
