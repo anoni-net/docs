@@ -130,6 +130,22 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m2.png" alt="OONI Probe 儀表板上的檢測卡片與執行按鈕" style="width:50%">
 </figure>
 
+### 用 miniooni CLI 跑檢測
+
+行動裝置之外，OONI 也有命令列版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在伺服器、研究腳本或自動化環境跑檢測。把 OONI Run v2 連結餵給 CLI 有個容易踩到的雷，**不能直接把網頁版的網址丟給 `-i`**。
+
+```bash
+# 不會 work，CLI 拿到 HTML，JSON 解析就會失敗
+miniooni oonirun -i https://run.ooni.org/v2/10328
+
+# 正確用法，直接指向 API 的 descriptor JSON
+miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
+```
+
+原因是 miniooni 的 `-i` 會把你給的網址當成 descriptor JSON 端點直接 GET，期望拿到 JSON 回來。`run.ooni.org/v2/<ID>` 是給瀏覽器看的網頁，回應是 HTML，CLI 解析就會失敗。實際的 descriptor 由 API 提供，網址格式為 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接從網頁網址末段取得（社群連結為 `10328`）。
+
+桌面版與行動 App 不受這個限制影響，作業系統會把 `https://run.ooni.org/v2/<ID>` 交給 OONI Probe 自行處理。這個限制目前只影響 miniooni CLI，upstream 已有 [TODO 標註](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，後續可能會補上自動轉換。
+
 ## 觀察資料
 
 所有的檢測資料最後都會上傳到 OONI 的公開資料庫中，在 [OONI Explorer](https://explorer.ooni.org/zh-Hant/chart/mat?test_name=web_connectivity&axis_x=measurement_start_day&since=2025-09-01&until=2025-10-16&time_grain=day&ooni_run_link_id=10328){target="_blank"} 的搜尋介面中，可以直接在「OONI Run Link ID」欄位輸入分享連結的編號，例如範例為 `https://run.ooni.org/v2/10328`，其編碼為 `10328`，就可以輸入此編碼搜尋協助者的檢測結果。
