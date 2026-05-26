@@ -10,4 +10,4 @@ icon: material/access-point-network
 
 !!! info "No entries yet in English"
 
-    OONI release translations exist in [traditional Chinese](https://anoni.net/docs/zh-tw/changelog/ooni/){target="_blank"} (OONI Probe Desktop 6.0.1 beta, OONI Explorer thematic censorship pages). English versions will be added as the community translates them.
+    OONI release translations exist in [traditional Chinese](https://anoni.net/docs/changelog/ooni/){target="_blank"} (OONI Probe Desktop 6.0.1 beta, OONI Explorer thematic censorship pages). English versions will be added as the community translates them.

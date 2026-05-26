@@ -21,11 +21,11 @@ The community selects external research and papers, typically long-form analysis
 InterSecLab, 2025-09-12. Analysis of a leaked 500 GB dataset showing how Geedge Networks (积至公司 / 积至（海南）信息技术有限公司) builds and exports Great Firewall-style services to other countries.
 
 * Original report: [The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes - InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}
-* zh-TW translation (8 chapters): [anoni.net/docs/zh-tw/reports/interseclab-network-coup/](https://anoni.net/docs/zh-tw/reports/interseclab-network-coup/){target="_blank"}
+* zh-TW translation (8 chapters): [anoni.net/docs/reports/interseclab-network-coup/](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}
 
 ### MADLink: A Taiwanese Vestige in the Geedge Supply Chain
 
 InterSecLab, 2026-04-24. First in InterSecLab's supply-chain investigation series. Documents how Taiwan-listed ADLINK Technologies (6166) shipped 1,708 CSA-7400 network appliances to Geedge Networks between 2019 and 2020, ultimately deployed in Kazakhstan's nation-scale censorship system, with ADLINK components also identified in EtherFabric devices deployed in Myanmar.
 
 * Original report: [MADLink: A Taiwanese Vestige in the Geedge Supply Chain - InterSecLab](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}
-* zh-TW translation (5 chapters + one Taiwan-response editorial observation written by anoni.net, available in both zh-TW and English): [anoni.net/docs/zh-tw/reports/interseclab-madlink/](https://anoni.net/docs/zh-tw/reports/interseclab-madlink/){target="_blank"}
+* zh-TW translation (5 chapters + one Taiwan-response editorial observation written by anoni.net, available in both zh-TW and English): [anoni.net/docs/reports/interseclab-madlink/](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}

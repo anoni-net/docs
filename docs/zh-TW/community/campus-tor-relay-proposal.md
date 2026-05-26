@@ -113,8 +113,8 @@ icon: material/file-document-edit-outline
 
     ### 附錄
 
-    - 附錄一、常見問題 FAQ：見 [校園 Tor Relay：給校方與法務的 FAQ](https://anoni.net/docs/zh-tw/community/campus-relay-faq/){target="_blank"}
-    - 附錄二、技術細節：見 [校園 Tor Relay 架設 SOP](https://anoni.net/docs/zh-tw/community/campus-tor-relay-sop/){target="_blank"}
+    - 附錄一、常見問題 FAQ：見 [校園 Tor Relay：給校方與法務的 FAQ](https://anoni.net/docs/community/campus-relay-faq/){target="_blank"}
+    - 附錄二、技術細節：見 [校園 Tor Relay 架設 SOP](https://anoni.net/docs/community/campus-tor-relay-sop/){target="_blank"}
 
 ## 典型行政時間軸
 

@@ -16,4 +16,4 @@ Arti is the Tor Project's next-generation Tor implementation written in Rust. Ne
 
 !!! info "Earlier versions"
 
-    Translations of Arti 2.1.0 and 1.4.1 are currently available only in [traditional Chinese](https://anoni.net/docs/zh-tw/changelog/arti/){target="_blank"}. English versions will be added as the community translates them.
+    Translations of Arti 2.1.0 and 1.4.1 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/arti/){target="_blank"}. English versions will be added as the community translates them.

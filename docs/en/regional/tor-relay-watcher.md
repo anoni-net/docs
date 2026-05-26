@@ -350,7 +350,7 @@ Latest-day running and stopped counts across all four watched regions, side by s
 
 !!! example "Want to take action?"
 
-    - :material-server-network: **Run a relay**: the [Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"} is the canonical English starting point. Our community's campus-relay deployment writeup is currently in zh-TW only ([如何搭建 Tor Relay](https://anoni.net/docs/zh-tw/community/setup-tor-relay/){target="_blank"}); an English version is planned.
+    - :material-server-network: **Run a relay**: the [Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"} is the canonical English starting point. Our community's campus-relay deployment writeup is currently in zh-TW only ([如何搭建 Tor Relay](https://anoni.net/docs/community/setup-tor-relay/){target="_blank"}); an English version is planned.
     - :material-chart-bar: **Underlying data**: the charts on this page are served by [the Pulse backend API](https://anoni.net/api/readme){target="_blank"}. The schema is still being adjusted, so endpoints may change.
 
 ## Related
