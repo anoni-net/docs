@@ -19,6 +19,6 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 !!! info "Earlier Tor Browser versions"
 
-    Tor Browser 15.0.13, 16.0a6 (alpha), 15.0.12, 15.0.11, and earlier entries are currently available only in [traditional Chinese](https://anoni.net/docs/zh-tw/changelog/tor/){target="_blank"}. English versions will be added as the community translates them.
+    Tor Browser 15.0.13, 16.0a6 (alpha), 15.0.12, 15.0.11, and earlier entries are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/tor/){target="_blank"}. English versions will be added as the community translates them.
 
     Past Tor-related translations also live in [Updates](../blog/index.md), including [Cure53 completes Tor VPN code audit](../blog/posts/2026-code-audit-for-tor-vpn-completed-by-cure53.md).

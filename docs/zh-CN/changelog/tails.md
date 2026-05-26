@@ -23,7 +23,7 @@ icon: material/usb-flash-drive-outline
 
 !!! info "Tails 7.7.x 系列"
 
-    Tails 7.7.3、7.7.2、7.7.1、7.7 等条目目前仅在 [正体中文版](https://anoni.net/docs/zh-tw/changelog/tails/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
+    Tails 7.7.3、7.7.2、7.7.1、7.7 等条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/tails/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
 
 ## Tails 7.6
 

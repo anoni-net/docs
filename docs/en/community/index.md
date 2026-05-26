@@ -91,7 +91,7 @@ We organize and co-organize workshops and meetups. Past include the 2025 Anonymo
 
 If you have sensitive material (whistleblowing, leaked documents, primary observation that needs careful handling), email `whisper@anoni.net` from a fresh account using PGP encryption (key on the [contact page](../contact.md)), or hand off in person at meetups and conferences.
 
-We do not advise on, or assist with, illegal activity (see the [governance code of conduct](https://anoni.net/docs/zh-tw/community/governance/){target="_blank"} for explicit refusals). For sensitive material related to journalism, advocacy, research, or personal safety, however, we'll handle it with appropriate care.
+We do not advise on, or assist with, illegal activity (see the [governance code of conduct](https://anoni.net/docs/community/governance/){target="_blank"} for explicit refusals). For sensitive material related to journalism, advocacy, research, or personal safety, however, we'll handle it with appropriate care.
 
 ## :material-information-outline: Background reading
 

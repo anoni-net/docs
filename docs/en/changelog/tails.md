@@ -29,4 +29,4 @@ icon: material/usb-flash-drive-outline
 
 !!! info "Earlier versions"
 
-    Translations of Tails 7.7.3, 7.7.2, 7.7.1, 7.7, 7.1, 7.0, 7.0~rc2, and 6.18 are currently available only in [traditional Chinese](https://anoni.net/docs/zh-tw/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.
+    Translations of Tails 7.7.3, 7.7.2, 7.7.1, 7.7, 7.1, 7.0, 7.0~rc2, and 6.18 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.

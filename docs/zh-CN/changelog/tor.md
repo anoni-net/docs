@@ -19,7 +19,7 @@ icon: simple/torbrowser
 
 !!! info "更早的 Tor Browser 版本"
 
-    Tor Browser 15.0.13、16.0a6（Alpha 测试通道）、15.0.12、15.0.11 等条目目前仅在 [正体中文版](https://anoni.net/docs/zh-tw/changelog/tor/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
+    Tor Browser 15.0.13、16.0a6（Alpha 测试通道）、15.0.12、15.0.11 等条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/tor/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
 
     更多 Tor 相关翻译保留在 [近期公告](../blog/index.md)，包括：
 

@@ -27,7 +27,7 @@ This page is written for international peer organizations, journalists, research
 
 ## Governance
 
-The community runs on a low-formalism consensus model. A draft governance charter is going through community review and is documented in detail on the Chinese editions ([zh-TW governance charter](https://anoni.net/docs/zh-tw/community/governance/){target="_blank"}). Headlines:
+The community runs on a low-formalism consensus model. A draft governance charter is going through community review and is documented in detail on the Chinese editions ([zh-TW governance charter](https://anoni.net/docs/community/governance/){target="_blank"}). Headlines:
 
 - **Roles** — *Core members* (long-term maintainers with self-host operations and PR-merge authority), *contributors* (anyone with active output), *observers* (newsletter / Public Space participants), *visitors* (anyone reading and corresponding via `whisper@anoni.net`).
 - **Decisions** — consensus by default with a 3-day window for objections; voting only when consensus is blocked or under time pressure. Major decisions (charter changes, core-member additions) require 2/3 majority of active contributors.

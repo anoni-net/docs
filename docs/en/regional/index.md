@@ -88,7 +88,7 @@ Three threads run through the regional observation:
 
 **Regulation we track.** Where local laws shape the threat model, we publish English-language explainers of the law as it actually operates: PDPA 2025, VASP 2026, whistleblower protection, with cross-references to comparable frameworks elsewhere in the region (POFMA, NSL, Section 377). These are Tier 2 articles in active drafting.
 
-**One translated report so far.** We have produced one full Traditional Chinese translation of regional research to date: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/zh-tw/reports/interseclab-network-coup/){target="_blank"}. An English curated index pointing readers to InterSecLab's English original is in Tier 2 drafting. We do not have a curated reports library beyond that single piece of work; future translations will be added case-by-case when the report fills a Chinese-language gap.
+**One translated report so far.** We have produced one full Traditional Chinese translation of regional research to date: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}. An English curated index pointing readers to InterSecLab's English original is in Tier 2 drafting. We do not have a curated reports library beyond that single piece of work; future translations will be added case-by-case when the report fills a Chinese-language gap.
 
 ## :material-file-document-outline: Articles in this section
 
