@@ -59,7 +59,13 @@ NEW_CID=$(ipfs $IPFS_API add -r --cid-version=1 --quieter "$SCRIPT_DIR/anoni-net
 echo "[upload] 新 CID: $NEW_CID"
 
 echo "[upload] 發布 IPNS ([anoni-net] key)..."
-ipfs $IPFS_API name publish --key=anoni-net "/ipfs/$NEW_CID"
+# --lifetime=720h：DHT 上的 IPNS record 30 天內有效，避免 gateway 解析時找不到（預設 24h 對非每日 deploy 太短）
+# --ttl=5m：客戶端 cache IPNS 解析結果 5 分鐘，平衡解析效能與更新延遲
+ipfs $IPFS_API name publish \
+    --key=anoni-net \
+    --lifetime=720h \
+    --ttl=5m \
+    "/ipfs/$NEW_CID"
 
 if [ -n "$OLD_CID" ]; then
     OLD_HASH="${OLD_CID#/ipfs/}"
