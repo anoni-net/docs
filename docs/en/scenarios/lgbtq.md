@@ -44,7 +44,7 @@ Each layer should at minimum have its own:
 - **Email**: Don't register community-layer accounts with a work email or a shared family inbox. ProtonMail or Tuta are reasonable privacy-respecting providers; a fresh, phone-unlinked Gmail also works.
 - **Browser profile**: Firefox and Chrome both support multiple profiles, each with its own cookies, login state, and bookmarks. Open the community-layer profile only for community-layer accounts; don't run both profiles logged in simultaneously.
 - **Password-manager vault**: Bitwarden and 1Password support collections / vaults. Put the community layer in its own vault; if your main account is breached, the community layer doesn't fall with it. For background, see [Privacy Guides — password managers](https://www.privacyguides.org/en/passwords/){target="_blank"}.
-- **Two-factor authentication**: Authy and Aegis can group accounts. Don't put community-layer TOTPs in the same group as your work email on the same handset.
+- **Two-factor authentication**: Aegis (Android) and Raivo / 2FAS (iOS) can group accounts. Don't put community-layer TOTPs in the same group as your work email on the same handset. Twilio retired Authy's desktop client in 2024; new adopters should pick one of the alternatives above.
 
 ### Alt-account hygiene
 
@@ -58,7 +58,7 @@ Each layer should at minimum have its own:
 
 In practice:
 
-- Register alts using a virtual phone number (services like MySudo, JusTalk, TextNow) rather than your real SIM
+- Register alts using a virtual phone number (services like MySudo or TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale recently — verify before relying on one. JusTalk, once a common recommendation, was found in 2022 to be storing supposedly end-to-end-encrypted messages and virtual-number mappings in an unauthenticated database[^13]; avoid.
 - Use a non-face image for the alt: a pseudonym graphic, an abstract image, or a back / silhouette / pet photo
 - Make the username structurally different — don't use shared initials with a suffix
 - Stagger posting times deliberately (main during the day, alt in the evening)
@@ -91,11 +91,11 @@ Dating apps are the highest-density identity-management situation. A single app 
 
 App settings and policies change every few months; specifics here are direction, not guarantees:
 
-- **Grindr**: High location precision; the "show distance" setting can be coarsened in Settings → Privacy. Be deliberate about ethnicity, HIV status, and other sensitive profile fields.
+- **Grindr**: High location precision; turn off the distance indicator under Profile → Settings → Show Me → Show My Distance, and also disable "Precise Location" at the OS level. Be deliberate about ethnicity, HIV status, and other sensitive profile fields.
 - **HER**: Friendlier WLW / queer environment, but profile photos still need separation from main-account photos.
 - **Lex**: Text-first and photo-optional, so relatively higher anonymity by design — but specific personal details in the bio still identify.
 - **Queer communities on Bluesky and Mastodon**: Strictly social platforms but partly take on connection functions. Username separation matters; consider followers-only posting.
-- **Tinder**: Mainstream, photo-required, lowest anonymity flexibility. Disconnect Instagram integration if used.
+- **Tinder**: Mainstream, photo-required, lowest anonymity flexibility. Meta severed Tinder's Instagram API integration in late 2024, so the connection feature is gone for new users; still keep an IG handle out of the bio.
 - **Blued, Aloha, and other Sinophone-region MSM apps**: Smaller, more concentrated user bases; identification risk from circumstantial details (school, employer, neighborhood landmark) is higher. Blued in particular operates under continuous mainland Chinese content-regulatory pressure.
 - **9monsters and other Asia-region apps**: Smaller, region-concentrated user bases; same caution.
 
@@ -176,7 +176,7 @@ Spend 30 minutes listing what your devices and accounts expose to family members
 Browsing history is the most common exposure source:
 
 - Use Firefox / Chrome incognito for sensitive searches, but recognize incognito doesn't hide DNS, ISP, or home-router logs
-- Set the browser to clear history on exit (Firefox: Settings → Privacy & Security; Chrome: Settings → Privacy → Cookies)
+- Set the browser to clear history on exit (Firefox: Settings → Privacy & Security; Chrome: Settings → Privacy and Security → Cookies and other site data)
 - Search-suggestion auto-complete pulls from history; delete sensitive terms from Google's "My Activity"
 - Browser autofill remembers form data; don't sign into family-shared services in a profile that has been used for sensitive accounts
 
@@ -186,17 +186,17 @@ iCloud and Google Drive sync messages and photos by default. If a family member 
 
 - Audit iPhone Settings → Apple ID → iCloud for which apps sync
 - Disable iCloud Backup for sensitive-conversation apps (Signal, Telegram, dating apps)
-- Signal doesn't itself iCloud-back-up, but iOS device backup includes Signal's data folder if device backup is on
+- Signal's messages don't sync to Apple iCloud, but iOS device backup includes Signal's data folder if device backup is on. Signal shipped its own Secure Backups in v8.0 (February 2026), which is E2EE and stored on Signal's servers — separate from Apple iCloud; whether to opt in depends on your threat model
 - Google Photos auto-uploads from selected folders; sensitive screenshots should go to a non-uploading folder
 
 ### Lock-screen notification preview
 
 The most common exposure is a phone on a table flashing a Grindr / HER / Tinder preview. Mitigations:
 
-- iPhone: Settings → Notifications → app → "Show Previews" set to "When Unlocked" or "Never"
+- iPhone (iOS 18): set "Show Previews" globally at Settings → Notifications → Show Previews ("When Unlocked" or "Never"), or per-app at Settings → Apps → [App] → Notifications → Lock Screen Appearance → Show Previews
 - Android: Settings → Notifications → Lock Screen → "Don't show notifications" or "Don't show sensitive content"
 - Move sensitive apps deeper into folders, off the home screen
-- iOS 17+ supports custom app icons (effectively disguising Grindr as a calculator). Useful against casual glance, useless against active search.
+- iOS 18 lets you tint icons or switch them to a dark variant, but that isn't true "custom" disguise. The actual trick for disguising Grindr as a calculator is the Shortcuts → Add to Home Screen route (available since iOS 14). Useful against casual glance, useless against active search.
 
 ### What incognito doesn't hide
 
@@ -220,7 +220,7 @@ If a family member has found evidence (an app, a conversation), you're past prev
 
 ## Cross-border travel: preparing for less-friendly jurisdictions
 
-LGBTQ+ legal status varies dramatically by country. As of 2026, around 60 jurisdictions still criminalize same-sex intimate conduct, and several criminalize "LGBTQ+ propaganda"[^1]. Before travel to such jurisdictions, the digital identity on your devices needs separate handling.
+LGBTQ+ legal status varies dramatically by country. Per ILGA World's 2025 data, 64 UN member states still criminalize same-sex intimate conduct (7 with the death penalty as a possible punishment, 5 where the law is unclear), and several criminalize "LGBTQ+ propaganda"[^1]. Before travel to such jurisdictions, the digital identity on your devices needs separate handling.
 
 ### Before you go: audit the destination
 
@@ -257,8 +257,8 @@ Higher cost, but more reliable than wiping the main phone before each trip.
 Cloud backups speed recovery on return; they also create risk during travel:
 
 - iCloud Backup is on by default and viewable from any device that can sign into the Apple ID
-- Signal doesn't iCloud-back-up itself, but iOS device backup includes Signal's folder
-- WhatsApp on Android backs up to Google Drive by default — disable in WhatsApp → Settings → Chats → Backup
+- Signal's messages don't reach Apple iCloud, but iOS device backup includes Signal's folder; Signal's own Secure Backups (v8.0, February 2026) are E2EE and stored on Signal's servers
+- WhatsApp on Android can back up to Google Drive — not on by default, but the onboarding flow often turns it on. Disable in WhatsApp → Settings → Chats → Chat Backup
 
 Pause cloud backups before travel; resume after. If you're worried about device loss en route, do a local encrypted backup before leaving rather than relying on cloud.
 
@@ -268,7 +268,7 @@ How deep customs can search varies:
 
 - **United States**: Border officers can inspect phones and laptops and request unlock. Citizens can refuse but may have devices seized. Non-citizens refusing may be denied entry.
 - **United Kingdom**: Customs can inspect; refusal may trigger anti-terror legislation
-- **Singapore**: Immigration can search; LGBTQ+ content found is no longer directly criminal after the 2022 Section 377A repeal but can still be questioned
+- **Singapore**: Immigration can search; LGBTQ+ content found is no longer directly criminal after Section 377A was repealed (Parliament November 2022, in force 3 January 2023) but can still be questioned
 - **Malaysia**: Federal Section 377 plus state-level Islamic enforcement mean LGBTQ+ content found may trigger follow-up investigation
 - **Parts of the Middle East**: Phone searches are routine; Grindr or visible LGBTQ+ content can lead to detention
 
@@ -277,7 +277,7 @@ Practical:
 - Set a strong unlock code (6+ digit PIN; disable Face ID and fingerprint at the border)
 - Power-cycle the phone before arrival (clears RAM unlock state)
 - Stay calm; don't volunteer to unlock; only do so on explicit request
-- For real legal exposure, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual) before travel
+- For real legal exposure, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} before travel (24/7, 10 languages, ~2-hour response)
 
 ### Combine with a threat model
 
@@ -327,7 +327,7 @@ Most directly relevant to digital identity management:
 - **Difference vs. neighboring jurisdictions**: Taiwan's legal environment differs sharply from mainland China, Hong Kong, Macau, Singapore, and Malaysia. Cross-strait, Southeast Asian, and overseas-bound relationships, migrations, and job moves should anticipate this difference and prepare devices accordingly.
 - **Local practice**: Dating-app uptake is high; Grindr, HER, and Lex have substantial communities in Taipei, Taichung, and Kaohsiung, but identification risk is materially higher in smaller cities and rural areas. Workplace and campus "friendliness" varies widely.
 - **PDPA 2025**: When profile photos, conversations, or chat histories are leaked maliciously, the leaker may be liable under Taiwan's revised Personal Data Protection Act. Detail tracking is in Tier 2 drafting in [Regional](../regional/index.md).
-- **Help channels**: 113 hotline (domestic violence, sexual assault, stalking — 24/7); the Taiwan Tongzhi Hotline Association[^10] (02-2392-1969, 07-281-1265); the Marriage Equality Coalition[^11]; the Taiwan LGBT Family Rights Advocacy[^12]; the 1995 mental-health hotline.
+- **Help channels**: 113 hotline (domestic violence, sexual assault, stalking — 24/7); the Taiwan Tongzhi Hotline Association[^10] (02-2392-1969, 07-281-1265); the Marriage Equality Coalition[^11]; the Taiwan LGBT Family Rights Advocacy[^12]; the 1925 mental-health hotline (Ministry of Health and Welfare; 1995 is the privately-run Lifeline Taiwan).
 
 ### Cross-border patterns
 
@@ -367,3 +367,4 @@ Common threads when moving across the region:
 [^10]: [Taiwan Tongzhi Hotline Association](https://hotline.org.tw/){target="_blank"} — emotional support, coming-out counseling, family help.
 [^11]: [Marriage Equality Coalition Taiwan](https://equallove.tw/){target="_blank"} — policy advocacy and rights work.
 [^12]: [Taiwan LGBT Family Rights Advocacy](https://www.lgbtfamily.org.tw/){target="_blank"} — counseling on LGBT families and same-sex marriage.
+[^13]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the unauthenticated database that exposed virtual-number mappings.
