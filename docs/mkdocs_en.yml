@@ -122,7 +122,10 @@ plugins:
         font_family: Public Sans
         color: "#ffffff"
         background_color: "#00aeff"
-  - privacy
+  - privacy:
+      assets_exclude:
+        - aa.anoni.net/*
+        - static.cloudflareinsights.com/*
   - git-revision-date-localized:
       type: iso_datetime
       locale: en
