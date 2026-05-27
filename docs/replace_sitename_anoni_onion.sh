@@ -1,3 +1,10 @@
+# Strip standard-build-only analytics block from overrides before mkdocs build。
+# aa.anoni.net 分析端點僅在 standard 生效，避免 Onion 使用者連到 clearnet endpoint
+sed -i '/anoni-analytics-start/,/anoni-analytics-end/d' \
+	./overrides/main.html \
+	./overrides_en/main.html \
+	./overrides_cn/main.html
+
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
