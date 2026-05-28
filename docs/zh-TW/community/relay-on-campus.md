@@ -35,7 +35,7 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 
 - 案例：[在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](../blog/posts/ntnu-nz.md)
 - 國際參考：[Tor Project 客座文章：Setting Up a Tor University Relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}
-- 技術 how-to：[如何搭建 Tor Relay](./setup-tor-relay.md)
+- 技術 how-to：[如何搭建 Tor Relay](./setup-tor-relay.md)、[如何搭建 Tor WebTunnel 橋接](./setup-tor-webtunnel.md)
 - 觀測：[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md)
 - 概念：[什麼是 Tor](../tools/what-is-tor.md)、[Tor Snowflake 橋接點](../tools/tor-snowflake.md)
 - 進階：[一個會遺忘的伺服器：探索無狀態中繼](../blog/posts/2026-a-server-that-forgets-exploring-stateless-relays.md)

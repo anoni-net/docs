@@ -105,6 +105,7 @@ icon: material/snowflake
 
 <div class="grid cards" markdown>
 
+- [:material-tunnel-outline: 如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 - [:material-school-outline: Tor Relay 校園建立](../community/relay-on-campus.md)
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
