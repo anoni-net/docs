@@ -37,6 +37,7 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
