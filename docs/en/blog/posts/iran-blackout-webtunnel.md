@@ -117,7 +117,7 @@ If running a WebTunnel bridge isn't an option for you, you can still open a brow
 
 ## Not just Iran
 
-Iran's shutdown was extreme, but censorship and shutdowns aren't a distant exception. Myanmar, Belarus, and China sustain heavy filtering year-round, and every regional conflict, election, or protest tends to come with a tightening of the network. Hong Kong has gone from a fairly open internet to seeing national-security-law site blocking in recent years. Earthquakes and undersea-cable cuts can disrupt a region's outbound connectivity too. Helping people elsewhere get around censorship today is also how a community builds the experience of running and maintaining anonymity infrastructure for when it's needed closer to home.
+Iran's shutdown was extreme, but censorship and shutdowns aren't a distant exception. Myanmar, Belarus, and China sustain heavy filtering year-round[^8][^9][^10], and every regional conflict, election, or protest tends to come with a tightening of the network. Hong Kong has gone from a fairly open internet to seeing national-security-law site blocking in recent years[^11]. Earthquakes and undersea-cable cuts can disrupt a region's outbound connectivity too[^12]. Helping people elsewhere get around censorship today is also how a community builds the experience of running and maintaining anonymity infrastructure for when it's needed closer to home.
 
 One node doesn't change much, but many nodes spread across the world add up to a network a censor can't pull down all at once. If you have a spare VPS or physical machine, a domain, and a little time, we'd love for you to help stand up more bridges, wherever you are.
 
@@ -138,3 +138,8 @@ Community discussion happens on [Matrix](../../contact.md) (home server `im.anon
 [^5]: [Hiding in plain sight: Introducing WebTunnel](https://blog.torproject.org/introducing-webtunnel-evading-censorship-by-hiding-in-plain-sight/){target="_blank"} - The Tor Project
 [^6]: [Staying ahead of censors in 2025: What we've learned from fighting censorship in Iran and Russia](https://blog.torproject.org/staying-ahead-of-censors-2025/){target="_blank"} - The Tor Project
 [^7]: [How Iranians are overcoming unprecedented internet censorship](https://www.techradar.com/vpn/vpn-privacy-security/iranians-are-resilient-they-always-find-ways-to-speak-how-iranians-are-overcoming-unprecedented-internet-censorship){target="_blank"} - TechRadar
+[^8]: [Update: internet access, censorship, and the Myanmar coup](https://www.accessnow.org/press-release/update-internet-access-censorship-myanmar/){target="_blank"} - Access Now
+[^9]: [Internet disruption hits Belarus on election day](https://netblocks.org/reports/internet-disruption-hits-belarus-on-election-day-YAE2jKB3){target="_blank"} - NetBlocks
+[^10]: [China: Freedom on the Net 2025 Country Report](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House
+[^11]: [Hong Kong Website Blocked, Sparking Fears Over Great Firewall](https://www.rfa.org/english/news/china/blocked-01082021140451.html){target="_blank"} - Radio Free Asia
+[^12]: [After Chinese Vessels Cut Matsu Internet Cables, Taiwan Seeks to Improve Its Communications Resilience](https://thediplomat.com/2023/04/after-chinese-vessels-cut-matsu-internet-cables-taiwan-shows-its-communications-resilience/){target="_blank"} - The Diplomat
