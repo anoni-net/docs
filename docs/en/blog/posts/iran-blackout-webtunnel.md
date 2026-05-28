@@ -57,6 +57,18 @@ The Tor WebTunnel bridge our community runs sits in the background, helping peop
 
 During the blackout, people there couldn't even reach Tor, because the entire outbound link was down. Once connectivity returned, many rushed to find out what had happened while they were cut off and to reconnect with family they had lost touch with. Journalists needed to get local news out, civil-society groups needed to coordinate with the outside, and all of that means reaching sites and services that have long been blocked. Getting around the censorship usually means Tor, and where Tor itself is blocked, it means bridges run by volunteers around the world. When people connected to Tor through a bridge, some of those connections came through the node our community hosts (the community also runs a node in Singapore, which didn't receive traffic this time).
 
+Looking at the source networks behind the connections to this bridge, the top five are all major Iranian carriers, confirming the traffic really is coming from ordinary users on the ground there.
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/iran-asn.png" target="_blank">
+        <img src="https://assets.anoni.net/blog/iran-asn.png"
+            alt="Cloudflare dashboard source-ASN list: the top five source networks for the WebTunnel bridge are all Iranian carriers, led by MCI Mobile Communication at 144.7 GB, then TCI, Irancell, Aria Shatel, and Pasargad"
+            title="Source ASNs for the WebTunnel bridge: the top five are all major Iranian carriers"
+            class="brand-frame">
+    </a>
+    <figcaption>Source ASNs for connections to the WebTunnel bridge (Cloudflare dashboard). The top five are all major Iranian carriers: Mobile Communication Company of Iran (MCI), Iran Telecommunication Company (TCI), Irancell, Aria Shatel, and Pasargad, confirming the traffic comes from users inside Iran.</figcaption>
+</figure>
+
 The traffic didn't fade after those first two days. Connections have kept coming through this bridge since. According to monitors like NetBlocks, Iran's recovery is incomplete: mobile networks were still down for a stretch while home Wi-Fi came back first, blocks on major social platforms remain in place, and in some cases are tighter than before the shutdown, so reaching ordinary sites abroad often still requires tools like a VPN[^3][^4]. For many people, even with the internet "reopened," reaching the outside still means routing around a lot of blocking, and our WebTunnel bridge is one of those ways around.
 
 With traffic still flowing through it day after day, a handful of bridges is clearly not enough. So we'd like to invite more people who are able to run bridges, in more places, so that more people who need to reach the outside can get through.
