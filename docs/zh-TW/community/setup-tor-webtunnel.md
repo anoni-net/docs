@@ -98,6 +98,35 @@ location = /$PATH {
 }
 ```
 
+!!! tip "進階：兩個官方沒提的反向代理加固"
+
+    上面的設定能正常運作。有兩個官方文件沒寫的小調整，能讓秘密路徑更難被探測、長連線更穩定，實務上很值得加。
+
+    **把秘密路徑藏得更徹底**
+
+    預設情況下，對秘密路徑送一個沒有 WebSocket 握手的普通請求，會被轉發給橋接，而橋接的回應可能跟站上其他路徑長得不一樣，反而暴露出這個路徑的存在。加一行，讓沒有 Upgrade 標頭的請求一律回 404，這個路徑就跟站上任何不存在的網址沒有兩樣：
+
+    ```nginx
+    location = /$PATH {
+        # 只有真正的 WebTunnel 握手能通過，普通探測一律回 404
+        if ($http_upgrade = "") { return 404; }
+        proxy_pass http://127.0.0.1:15000;
+        # ⋯⋯其餘設定同上
+    }
+    ```
+
+    真正的 WebTunnel 連線一定帶 Upgrade 標頭，這行不會擋到正常的橋接客戶端。
+
+    **別讓 nginx 切斷長連線**
+
+    nginx 的 `proxy_read_timeout` 預設只有 60 秒，連線超過 60 秒沒有資料流動就會被切掉，對長時間掛著的 Tor 電路會造成莫名的斷線。把 `location` 區塊裡的逾時拉長，並開啟 TCP keepalive：
+
+    ```nginx
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        proxy_socket_keepalive on;
+    ```
+
 根路徑 `location /` 維持回傳一個正常網頁，讓伺服器整體看起來像普通網站，只有知道秘密路徑的 Tor 客戶端會走到橋接。改完測試設定並重新載入：
 
 ```bash

@@ -98,6 +98,35 @@ location = /$PATH {
 }
 ```
 
+!!! tip "Advanced: two reverse-proxy hardening tweaks the official docs skip"
+
+    The setup above works. Two small adjustments the official docs don't mention make the secret path harder to probe and long-lived connections more stable, and they're well worth adding in practice.
+
+    **Hide the secret path more thoroughly**
+
+    By default, a plain request to the secret path without a WebSocket handshake gets forwarded to the bridge, and the bridge's response may differ from the rest of the site, giving the path away. Add one line so any request without an `Upgrade` header gets a 404, making the path indistinguishable from any non-existent URL on the site:
+
+    ```nginx
+    location = /$PATH {
+        # Only a real WebTunnel handshake gets through; plain probes get a 404
+        if ($http_upgrade = "") { return 404; }
+        proxy_pass http://127.0.0.1:15000;
+        # ...rest of the config as above
+    }
+    ```
+
+    A real WebTunnel connection always carries an `Upgrade` header, so this line won't block legitimate bridge clients.
+
+    **Don't let nginx cut long connections**
+
+    nginx's `proxy_read_timeout` defaults to 60 seconds, so a connection with no data flowing for 60 seconds gets dropped, causing spurious disconnects for the long-lived Tor circuits a bridge carries. Raise the timeouts in the `location` block and enable TCP keepalive:
+
+    ```nginx
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        proxy_socket_keepalive on;
+    ```
+
 Keep the root path `location /` serving a normal web page so the server as a whole looks like an ordinary site; only a Tor client that knows the secret path reaches the bridge. After editing, test the config and reload:
 
 ```bash
