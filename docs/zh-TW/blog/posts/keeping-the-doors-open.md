@@ -88,7 +88,7 @@ Unredacted 文章裡那位中國使用者的話格外少見，因為身處審查
 
 ## 來自 anoni.net 社群：GreenWare 在台灣的可行性
 
-Unredacted 把 123 個 exit relays 跑在 400W 上，這個數字對台灣社群讀起來特別有感。以工業用電費約 NT$ 3.5 至 6 / kWh 估算，400W 全年運轉約 3,500 度電，一年大約 NT$ 12,000 至 21,000，對學校資訊中心或社群協作空間而言是可以負擔的營運成本。
+Unredacted 把 123 個 exit relays 跑在 400W 上，這個數字對台灣社群讀起來特別有感。以一般工商業用電費約 NT$ 3.5 至 6 / 度估算[^1]，400W 全年運轉約 3,500 度電，一年大約 NT$ 12,000 至 21,000，對學校資訊中心或社群協作空間而言是可以負擔的營運成本。
 
 關鍵在硬體規模化的設計。台灣 maker 社群對 Raspberry Pi 5 並不陌生，PoE+ HAT 與 PoE 交換器在台灣的常見零售管道都能買到（如 Cytron、群創、PChome）。ComputeBlade（20 模組 1U 機箱）目前在台灣較少零售管道，可以透過官方海外訂購或社群代購取得。校園機房比家用網路更適合做這件事，原因有三：固定 IP、學術網路頻寬、有人巡檢機器。
 
@@ -115,3 +115,5 @@ Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把
 - [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md)
 - [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - 同系列：[Defending the public's right to know（OONI）](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}、[Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}
+
+[^1]: 台電 2026 年平均電價為每度 NT$ 3.7823（經濟部 2026-03-27 電價審議會決議，4–9 月維持平均電價），實際每度單價依用電種類與時間電價（尖峰、離峰）而有差異。資料來源：[台灣電力公司電價表](https://www.taipower.com.tw/2289/2290/46940/){target="_blank"}。

@@ -88,7 +88,7 @@ Unredacted 文章里那位中国用户的话格外少见，因为身处审查环
 
 ## 来自 anoni.net 社群：GreenWare 在自由连接地区的可行性
 
-Unredacted 把 123 个 exit relays 跑在 400W 上，这个数字换算成运营成本相当友好。以台湾工业用电费约 NT$ 3.5 至 6 / kWh（约人民币 0.8 至 1.4 元 / kWh）估算，400W 全年运转约 3,500 度电，一年大约 NT$ 12,000 至 21,000，对学校信息中心或社群协作空间而言是可以负担的运营成本。读者在其他地区可以换算当地电价，量级通常落在同一个区间。
+Unredacted 把 123 个 exit relays 跑在 400W 上，这个数字换算成运营成本相当友好。以台湾一般工商业用电费约 NT$ 3.5 至 6 / 度（约人民币 0.8 至 1.4 元 / 度）估算[^1]，400W 全年运转约 3,500 度电，一年大约 NT$ 12,000 至 21,000，对学校信息中心或社群协作空间而言是可以负担的运营成本。读者在其他地区可以换算当地电价，量级通常落在同一个区间。
 
 关键在硬件规模化的设计。Raspberry Pi 5 对各地 maker 社群都不陌生，PoE+ HAT 与 PoE 交换机在常见零售管道都能买到（台湾如 Cytron、群创、PChome，其他地区可循当地电子零售管道）。ComputeBlade（20 模组 1U 机箱）目前零售管道较少，可以通过官方海外订购或社群代购取得。机构机房比家用网络更适合做这件事，原因有三：固定 IP、机构网络带宽、有人巡检机器。
 
@@ -115,3 +115,5 @@ Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把
 - [Tor Relays 观测点](../../taiwan/tor-relay-watcher.md)
 - [ASN 观测资料分析](../../taiwan/ooni-asn-coverage.md)
 - 同系列：[Defending the public's right to know（OONI）](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}、[Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}
+
+[^1]: 台电 2026 年平均电价为每度 NT$ 3.7823（经济部 2026-03-27 电价审议会决议，4–9 月维持平均电价），实际每度单价依用电种类与时间电价（尖峰、离峰）而有差异。资料来源：[台湾电力公司电价表](https://www.taipower.com.tw/2289/2290/46940/){target="_blank"}。

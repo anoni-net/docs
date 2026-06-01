@@ -48,7 +48,7 @@ For the Sinophone world, demand for circumvention has grown since 2020 across Ho
 
 ## From the anoni.net community: GreenWare's feasibility for free-connectivity regions
 
-Unredacted running 123 exit relays on 400W makes for friendly operating economics. At Taiwan's industrial electricity rate of roughly NT$3.5–6 per kWh (about US$0.11–0.19), 400W running year-round is about 3,500 kWh, or roughly NT$12,000–21,000 a year (about US$400–700). That is an affordable line item for a campus IT center or a community workspace. Readers elsewhere can convert their local rate; the order of magnitude usually lands in the same range.
+Unredacted running 123 exit relays on 400W makes for friendly operating economics. At a typical Taiwan commercial electricity rate of roughly NT$3.5–6 per kWh (about US$0.11–0.19), 400W running year-round is about 3,500 kWh, or roughly NT$12,000–21,000 a year (about US$400–700).[^1] That is an affordable line item for a campus IT center or a community workspace. Readers elsewhere can convert their local rate; the order of magnitude usually lands in the same range.
 
 The key is designing the hardware to scale. Raspberry Pi 5 is familiar to maker communities everywhere, and PoE+ HATs and PoE switches are easy to buy through ordinary electronics retail. ComputeBlade (the 20-module 1U chassis) has fewer retail channels and is usually obtained through official overseas ordering or a community group buy. An institutional server room suits this better than a home network, for three reasons: a static IP, institutional bandwidth, and someone on site to check the machines.
 
@@ -73,3 +73,5 @@ If Unredacted's work makes you want to help people in censored regions reach the
 - [Setting up a Tor relay at NTNU](ntnu-nz.md)
 - [Tor Relays watch page](../../regional/tor-relay-watcher.md)
 - Same series: [Defending the public's right to know (OONI)](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}, [Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}
+
+[^1]: Taiwan's 2026 average electricity rate is NT$3.7823 per kWh (frozen for April–September by the 2026-03-27 rate review); the actual per-kWh price varies by customer class and time-of-use tier. Source: [Taipower electricity rate schedule](https://www.taipower.com.tw/2289/2290/46940/){target="_blank"}.
