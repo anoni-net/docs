@@ -13,9 +13,9 @@ description: "我們普查了全部 336 條 OONI Run v2 清單，逐條撈出生
 
 # 我們普查了 336 條 OONI Run v2 清單：被低估的高槓桿用法
 
-![OONI Run v2 使用樣態普查](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![OONI Run v2 使用樣態普查](https://assets.anoni.net/docs/ooni-run-v2-header.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-全世界的 OONI Run v2 累積跑出 1,417 萬筆檢測，其中 3 條清單就佔了 72%。這 3 條清單背後有一個多數人沒看見的做法，把一份清單對準一個明確的審查現象，再用持續運行的測量後端長期累積。我們對全部 Run v2 做了一次普查，想弄清楚這個落差到底有多大，以及它對想做在地連線觀測的社群代表什麼。
+全世界的 OONI Run v2 累積跑出 1,417 萬筆檢測，其中 3 條清單就佔了 72%。這 3 條清單用了同一種作法，每條清單只針對一個特定的審查或封鎖現象，再用一個持續運行的測量後端定期執行、長期累積資料。我們對全部 Run v2 做了一次普查，量出這種集中的程度，也說明這種作法對想做在地連線觀測的社群有什麼參考價值。
 
 <!-- more -->
 
