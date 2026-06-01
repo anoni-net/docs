@@ -74,7 +74,7 @@ The open Internet is kept open by many people and organizations investing energy
 
 The message from the user in China that opens Unredacted's post is rare to see in public, because people living under censorship usually have no channel to speak out safely. anoni.net is an anonymity-network community based in Taiwan, and that is the vantage point these notes are written from. Taiwan's network environment is relatively free: no Great Firewall, no mandatory VPN registration, no state censorship orders to ISPs. That is exactly why a place like Taiwan, with free outbound connectivity, is well positioned to host Tor relays and bridges and carry a share of the circumvention work. The people this infrastructure serves are in heavily censored places like mainland China and Iran. Other regions with equally free connectivity, like Singapore, Malaysia, and wherever the diaspora lives, are just as suitable as hosting locations.
 
-The anoni.net community tracks the number and distribution of Tor relays in Taiwan through [Pulse live monitoring](https://api.anoni.net/api/readme){target="_blank"}. As of 2026-05-31, Onionoo sees 12 running relays inside Taiwan, of which only 3 carry the Exit flag (initramfs, GuruKopi, jerryrelay). Set against Unredacted, a single organization running 123 exit relays and carrying nearly 300 TiB over 30 days, Taiwan's nationwide exit capacity is under 3% of theirs. We keep this number current on the [Tor Relays watch page](../../regional/tor-relay-watcher.md) and pair it with OONI's censorship observations for Taiwan and nearby regions.
+The anoni.net community tracks the number and distribution of Tor relays in Taiwan through [Pulse live monitoring](https://api.anoni.net/api/readme){target="_blank"}. As of 2026-05-31, Onionoo (the Tor Project's relay data service) sees 12 running relays inside Taiwan, of which only 3 carry the Exit flag (initramfs, GuruKopi, jerryrelay). Set against Unredacted, a single organization running 123 exit relays and carrying nearly 300 TiB over 30 days, Taiwan's nationwide exit capacity is under 3% of theirs. We keep this number current on the [Tor Relays watch page](../../regional/tor-relay-watcher.md) and pair it with OONI's censorship observations for Taiwan and nearby regions.
 
 For the Sinophone world, demand for circumvention has grown since 2020 across Hong Kong, Macau, and Mandarin-speaking communities in Southeast Asia, while circumvention resources written in Chinese remain comparatively scarce. Part of anoni.net's work is filling that gap with Chinese-language documentation, walking the same path as Unredacted Education.
 
@@ -86,11 +86,11 @@ The key is designing the hardware to scale. Raspberry Pi 5 is familiar to maker 
 
 Campus Tor relays are one of anoni.net's three focus areas for 2026, and the community is collecting field experience into a setup playbook ([Campus Tor Relay research track](https://anoni.net/docs/community/relay-on-campus/){target="_blank"}, a zh-TW page with the English version pending, plus the writeup [Setting up a Tor relay at NTNU](ntnu-nz.md)). Unredacted's engineering approach with GreenWare is a useful reference point for the next school weighing a deployment: start with a single PoE-powered Raspberry Pi 5 middle relay, and once it runs stably, consider exits and chassis density.
 
-For an individual or a small space, running a Snowflake proxy (a browser extension or Docker) carries almost no electricity cost and is the lowest-barrier entry into circumvention infrastructure (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
+For an individual or a small group, running a Snowflake proxy (a browser extension or Docker) carries almost no electricity cost and is the lowest-barrier entry into circumvention infrastructure (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
 
 ## What you can do
 
-If Unredacted's work makes you want to help keep the doors open, here are a few entry points:
+If Unredacted's work makes you want to help people in censored regions reach the open internet, here are a few entry points:
 
 - **Learn about Unredacted**: visit [unredacted.org](https://unredacted.org/){target="_blank"} for their services and transparency information, then decide whether to support their servers, bandwidth, and staffing through their official channels.
 - **Run Snowflake**: the lowest-barrier contribution, run from a browser extension or Docker (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
