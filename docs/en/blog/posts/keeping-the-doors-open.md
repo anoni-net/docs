@@ -12,7 +12,7 @@ summary: "Unredacted runs 300+ servers powering FreeSocks, Tor bridges, Snowflak
 description: "Unredacted runs 300+ servers and 123 Tor exit relays on roughly 400W. Set against Taiwan's 12 observed relays, free-connectivity regions are well placed to host more circumvention infrastructure for the censored."
 ---
 
-# Keeping the Doors Open: How Unredacted Holds a Route to the Open Internet for Censored Regions
+# How Unredacted Helps People in Censored Regions Reach the Open Internet
 
 !!! info ""
 

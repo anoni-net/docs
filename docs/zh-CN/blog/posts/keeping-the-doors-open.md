@@ -12,7 +12,7 @@ summary: "Unredacted 用 300+ 台服务器跑 FreeSocks、Tor bridges、Snowflak
 description: "Unredacted 用 300+ 台服务器跑 FreeSocks、Tor bridges、Snowflake 等抗审查服务，并用约 400W 跑 123 个 Tor exit relay。对照台湾 12 个 Tor 中继节点的现况，对外连接自由的地区有条件替被封锁地区架设更多 Tor 中继节点。"
 ---
 
-# 把门开着：Unredacted 如何替审查地区守住一条通往开放网络的路
+# Unredacted 如何帮受审查地区的人连上开放网络
 
 !!! info ""
 
