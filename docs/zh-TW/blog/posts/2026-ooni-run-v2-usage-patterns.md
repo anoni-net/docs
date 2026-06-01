@@ -1,5 +1,5 @@
 ---
-date: 2026-06-01
+date: 2026-06-02
 authors:
     - toomore
 categories:
@@ -27,7 +27,7 @@ OONI（Open Observatory of Network Interference，開放網路干擾觀測站）
 
 ## 母體有多大：337 條，兩年
 
-OONI Run v2 從 2024-04-24 第一條檢測連結上線到現在約 26 個月，全世界總共只建立過 337 條檢測連結（其中 1 條已被刪除，現存 336 條）。建立數在 2024 年 10 到 12 月衝高，之後穩定在每月 10 到 19 條之間。157 個不重複作者參與，332 條走 web_connectivity，幾乎清一色在測網站可達性。
+OONI Run v2 從 2024-04-24 第一條檢測連結上線到現在約 26 個月，全世界總共只建立過 337 條檢測連結（其中 1 條已被刪除，現存 336 條）。建立數在 2024 年 10 到 12 月衝高，之後穩定在每月 10 到 19 條之間。157 個不重複作者參與，332 條走網路連線測試（Web Connectivity），幾乎清一色在測網站可達性。
 
 - 每月新建的 Run v2 檢測連結數量
 ```vegalite
@@ -135,7 +135,7 @@ anoni.net 社群把這套做法整理在 [issue #78](https://github.com/anoni-ne
     issue #78 提出一套 civic-internet-watch 測量模式，把系統拆成兩層。
 
     - **名單治理**：社群自己維護一份公民團體網站名單，single source of truth 放在社群的 git repo，收錄標準、徵詢狀態與敏感分級都由社群依在地脈絡決定，git 歷史本身就是清單治理紀錄。
-    - **測量與資料**：用標準 web_connectivity 方法，從名單產生一條 OONI Run v2 連結來檢測。志工手機與自營節點消費同一條連結、帶同一個 Run Link ID，結果全部進 OONI 公開資料集，可用 OONI API 與 Explorer 查詢、研究員可引用，沒有資料鎖定。
+    - **測量與資料**：用標準網路連線測試方法，從名單產生一條 OONI Run v2 連結來檢測。志工手機與自營節點消費同一條連結、帶同一個 Run Link ID，結果全部進 OONI 公開資料集，可用 OONI API 與 Explorer 查詢、研究員可引用，沒有資料鎖定。
 
     名單治理不去更動共享的 Citizen Lab `tw.csv`，避免反覆改動造成長期測量時間序列斷層。`tw.csv` 從必要路徑降為可選的 additive 回饋，成熟非敏感的組織才以只新增的方式回饋換取全平台基線，敏感組織只留在社群自管名單與 Run v2，不進公開的 PR。
 
