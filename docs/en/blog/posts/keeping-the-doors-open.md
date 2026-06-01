@@ -16,63 +16,31 @@ description: "Unredacted runs 300+ servers and 123 Tor exit relays on roughly 40
 
 !!! info ""
 
-    The body below is the original English text of a guest post on the Tor Blog, written by Unredacted. The three sections after the horizontal rule are additions from the anoni.net community: a Taiwan vantage point, GreenWare's feasibility for free-connectivity regions, and what you can do.
+    This post is based on a guest post on the Tor Blog by Unredacted, with an anoni.net community perspective added for Taiwan and the wider Sinophone region.
 
     - [Keeping the doors open, Tor Blog, by Unredacted.org, 2026-05-15](https://blog.torproject.org/keeping-the-doors-open-unredacted/){target="_blank"}
 
 ![Keeping the doors open](assets/images/tor.webp){style="border-radius: 10px;"}
 
-This guest post is part of a spotlight series on the organizations defending the free internet.
+[Unredacted](https://unredacted.org/){target="_blank"} is a US-based 501(c)(3) non-profit that runs a network of 300+ servers to keep people in heavily censored places connected to the open internet. Their guest post is part of the Tor Blog's spotlight series on organizations defending the free internet, and it opens with a line from a user in China: "You have helped many many people to overcome the great firewall." That kind of message is rare, because people living under censorship usually have no safe channel to send one.
 
-A user in China once said this about our work:
-
-> "You have helped many many people to overcome the great firewall. Without your help, I would be in the totally darkness trap and being brain-washed."
-
-We don't hear from the people who use our services very often. Most of them can't or don't feel that they can safely send a message. When one comes through, it's a reminder of what's actually at stake.
+This post highlights what Unredacted builds, and what it looks like from where the anoni.net community sits, in Taiwan.
 
 <!-- more -->
 
-We're [Unredacted](https://unredacted.org/){target="_blank"}, a US-based 501(c)(3) non-profit. We build and operate Internet infrastructure that helps people reach the open Internet and protect their right to privacy. We do this by operating a network of over 300 servers around the world. We're a way through when the front door is locked, and a place to communicate when the public square isn't safe. Most of the work is invisible: datacenter work, hardware, automation, open source software, bandwidth, abuse queues, monitoring alerts, and the late nights spent keeping all of it online.
+## What Unredacted runs
 
-What we do falls into three areas. Censorship Evasion is where Unredacted Door lives, our umbrella for the services designed to route around blocking. Secure Infrastructure is where we run things like [XMPP.is](https://xmpp.is/){target="_blank"} and our [Matrix homeserver](https://unredacted.org/services/si/matrix/){target="_blank"}, and other free services built with security and privacy in mind. Unredacted Education is the writing and documentation side: guides and explainers for the people who want to understand the work and replicate it. Alongside those, [Unredacted Labs](https://unredacted.org/blog/2025/05/unredacted-labs/){target="_blank"} is where we experiment with infrastructure ideas that aren't quite production-ready. GreenWare is one of those, our effort to run real network capacity on hardware that doesn't burn a lot of power.
-
-## Unredacted Door
-
-The name is literal. When the entrance to the open Internet gets walled off, people need another way in.
-
-Unredacted Door brings together several of our circumvention services: FreeSocks, messaging proxies for Signal and Telegram, Tor bridges, and Snowflake proxies. In a recent 30-day window, these services carried nearly 300 TiB of traffic for tens of thousands of people routing around censorship in their countries. That's roughly the equivalent of bandwidth to stream tens of thousands of hours of 4K video. Demand isn't slowing, and we need to continue building more. Every new filter, every new law, every "for your safety" rollout sends more people looking for a route the censors haven't found yet.
-
-The largest piece of Unredacted Door is [FreeSocks](https://freesocks.org/){target="_blank"}: free proxies for people in places where censorship is severe. If you've never run into one, a proxy is a relay point. Your app doesn't talk directly to the blocked service. It talks to a server that carries the connection past whatever filters are sitting between you and the wider Internet. FreeSocks is built to make that relay quietly unremarkable, which is exactly the trait a standard VPN tends to lack. A VPN advertises itself. There's a known endpoint, a known handshake, an obvious shape on the wire. Censors are very good at blocking things they can recognize.
-
-No single tool covers every situation. Tor Browser gives you strong privacy and anonymity for browsing. Snowflake helps people reach Tor when access to the network itself is blocked. FreeSocks proxies push specific traffic through a route that's harder to spot. People living under censorship usually need a few of these on hand, because no single door stays open forever.
-
-That's why we're putting serious work into the next version of FreeSocks (v2). It uses Xray, a powerful and versatile traffic-routing engine, which can make proxy traffic look more like ordinary web traffic, bundled with our open source [control plane](https://github.com/unredacted/freesocks-control-plane){target="_blank"} that allows us to rotate endpoints automatically when censors find and block a server. The less a user has to fiddle with their setup while they're already under pressure, the better.
+**Unredacted Door** is their umbrella for circumvention services: FreeSocks proxies, messaging proxies for Signal and Telegram, Tor bridges, and Snowflake. Over a recent 30-day window these carried nearly 300 TiB for tens of thousands of people routing around censorship. The largest piece, FreeSocks, is built to look unremarkable on the wire, the opposite of a standard VPN that advertises itself through a known endpoint and handshake. FreeSocks v2 leans on **Xray** to make proxy traffic resemble ordinary HTTPS, paired with an open-source control plane that rotates endpoints automatically when a server gets blocked.
 
 !!! note "What is Xray"
 
-    Xray is a traffic-routing and obfuscation tool descended from the V2Ray project, widely adopted by users in heavily censored places like China and Iran. It offers protocols such as VLESS, Trojan, and Reality that disguise proxy traffic as ordinary HTTPS / TLS, so it does not stand out to machine fingerprinting. The handshake and packet shapes a standard VPN gives away at a glance are exactly what Xray smooths over, which is why it has become a mainstay in the circumvention toolkit. See the [Xray-core project](https://github.com/XTLS/Xray-core){target="_blank"} for details. (This note is an addition from the anoni.net editors.)
+    Xray is a traffic-routing and obfuscation tool descended from the V2Ray project, widely used in heavily censored places like China and Iran. Protocols such as VLESS, Trojan, and Reality disguise proxy traffic as ordinary HTTPS / TLS, smoothing over the handshake and packet shapes a VPN gives away at a glance. See the [Xray-core project](https://github.com/XTLS/Xray-core){target="_blank"}.
 
-## GreenWare: sustainable infrastructure, literally
-
-Tor relays, bridges, proxies, and more. They run on hardware in datacenters, and that hardware has a real footprint: financial, operational, and environmental. If we want privacy infrastructure to last, we have to ask what's actually sustainable to operate.
-
-[GreenWare](https://unredacted.org/blog/2025/05/unredacted-labs/#greenware){target="_blank"} is our attempt to shrink that footprint without shrinking what we can carry on it. The premise is straightforward: most Tor relay traffic doesn't need a server that draws power like a space heater. A relay needs a steady network, predictable CPU, and enough memory to hold its state. That's a workload a single-board computer can handle, if the chassis around it is built to take it seriously.
-
-We started with Raspberry Pi 5 boards powered over PoE, fed entirely through their network cables. The idea worked. A typical server in a datacenter draws as much power as a small space heater. A Pi draws less than a lightbulb. But the first generation had ceilings. Density wasn't where we wanted it, and a few of the supporting components weren't built for the hours we were putting on them.
-
-So we run two deployments in parallel now. The first is a 1U chassis with 20 ComputeBlade modules stacked into it. We deployed all 20 in our datacenter and moved a chunk of our Tor exit relays onto them. That chassis pulls a little over 100W under load, roughly what an old incandescent bulb burns. The second is a custom Raspberry Pi chassis we designed after the ComputeBlade work taught us what we actually wanted in the field. Both are live, and as of writing all 123 of our Tor exit relays run on this combined infrastructure, drawing roughly 400W in total. As time goes on, we'll have more to say about the chassis design and the project as it matures.
-
-The Tor network runs on people and organizations willing to operate infrastructure for it. Exits are the hardest part of that job. They need bandwidth, maintenance, abuse handling, legal nerve, and money. If we can drop the cost and the power required to run real exit capacity, more people can take on a piece of the work and diversify and grow the network.
-
-Our longer-term ambition is to keep pushing on efficient hardware, carbon tracking, and eventually renewable-powered micro points of presence. We'd be more than glad to partner with organizations and companies that want to see this grow.
-
-The open Internet is kept open by many people and organizations investing energy, time, and effort: the [researchers measuring censorship](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}, the [relay operators providing bandwidth](https://blog.torproject.org/exploring-stateless-relays/){target="_blank"}, and the communities that refuse to leave one another behind. At Unredacted, our part is building and maintaining the routes people may need when the obvious ones disappear.
-
----
+**GreenWare** is their effort to run real relay capacity on low-power hardware. Instead of datacenter servers that draw power like a space heater, they run Tor exits on PoE-powered Raspberry Pi 5 boards and a 1U chassis of 20 ComputeBlade modules. As of their writing, all 123 of their Tor exit relays run on this combined setup, drawing roughly 400W in total, about what a few old incandescent bulbs burn. Lower cost and power per exit means more people can take on the hardest, most legally exposed part of running Tor.
 
 ## From the anoni.net community: a Taiwan vantage point
 
-The message from the user in China that opens Unredacted's post is rare to see in public, because people living under censorship usually have no channel to speak out safely. anoni.net is an anonymity-network community based in Taiwan, and that is the vantage point these notes are written from. Taiwan's network environment is relatively free: no Great Firewall, no mandatory VPN registration, no state censorship orders to ISPs. That is exactly why a place like Taiwan, with free outbound connectivity, is well positioned to host Tor relays and bridges and carry a share of the circumvention work. The people this infrastructure serves are in heavily censored places like mainland China and Iran. Other regions with equally free connectivity, like Singapore, Malaysia, and wherever the diaspora lives, are just as suitable as hosting locations.
+anoni.net is an anonymity-network community based in Taiwan, and that is the vantage point these notes are written from. Taiwan's network environment is relatively free: no Great Firewall, no mandatory VPN registration, no state censorship orders to ISPs. That is exactly why a place like Taiwan, with free outbound connectivity, is well positioned to host Tor relays and bridges and carry a share of the circumvention work. The people this infrastructure serves are in heavily censored places like mainland China and Iran. Other regions with equally free connectivity, like Singapore, Malaysia, and wherever the diaspora lives, are just as suitable as hosting locations.
 
 The anoni.net community tracks the number and distribution of Tor relays in Taiwan through [Pulse live monitoring](https://api.anoni.net/api/readme){target="_blank"}. As of 2026-05-31, Onionoo (the Tor Project's relay data service) sees 12 running relays inside Taiwan, of which only 3 carry the Exit flag (initramfs, GuruKopi, jerryrelay). Set against Unredacted, a single organization running 123 exit relays and carrying nearly 300 TiB over 30 days, Taiwan's nationwide exit capacity is under 3% of theirs. We keep this number current on the [Tor Relays watch page](../../regional/tor-relay-watcher.md) and pair it with OONI's censorship observations for Taiwan and nearby regions.
 
