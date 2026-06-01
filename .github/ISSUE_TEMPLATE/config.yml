@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Matrix 社群討論（先來打聲招呼）
+    url: https://matrix.to/#/#community:im.anoni.net
+    about: 認領主題、即時討論、找夥伴。帳號申請請來信 whisper@anoni.net。
+  - name: GitHub Discussions
+    url: https://github.com/anoni-net/docs/discussions
+    about: 開放式提問與想法討論。
+  - name: 如何參與與認領主題
+    url: https://anoni.net/docs/zh-TW/community/how-to-contribute/
+    about: 第一次參與，先看這份 3 分鐘入門。
+  - name: 不熟 GitHub？寫信給我們
+    url: https://anoni.net/docs/zh-TW/contact/
+    about: 社群信箱與其他聯絡方式。

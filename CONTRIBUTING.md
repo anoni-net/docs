@@ -24,10 +24,12 @@
 
 ## 建議貢獻流程
 
-1. 搜尋或開 [GitHub Issues](https://github.com/anoni-net/docs/issues) 說明要改什麼（翻譯、錯字、功能、bug）。
+1. 搜尋或開 [GitHub Issue](https://github.com/anoni-net/docs/issues/new/choose) 說明要改什麼。新人可直接用 issue 表單分流：翻譯認領、內容提案、來源建議、文件錯誤。
 2. Fork 本儲存庫，從 `main` 開分支（命名清楚即可，例如 `fix/docs-typo-zh-tw`）。
 3. 只改與主題相關的檔案；大改動可開 **Draft PR** 先收集意見。
 4. 送出 Pull Request；維護者會依時間回覆。
+
+互動請遵循[行為準則](./CODE_OF_CONDUCT.md)。第一次參與的完整入門見[如何參與與認領主題](https://anoni.net/docs/zh-TW/community/how-to-contribute/)。
 
 ## 授權（貢獻前請知悉）
 

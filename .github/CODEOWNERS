@@ -1,0 +1,31 @@
+# CODEOWNERS — 自動指派審核者
+#
+# 落實「核心把關、周邊全開」：工具操作與 OPSEC 安全核心由維護者把關，
+# 其餘內容（basics、taiwan、reports、blog、翻譯投影等）不在此列，維持輕量審核。
+#
+# 注意：
+# - 這裡刻意不設全域 `*` owner，避免每個 PR 都被要求維護者審核。
+#   只有下列安全核心路徑會在開啟分支保護「require review from Code Owners」時強制審核。
+# - 被指派的帳號需有本 repo 的 write 權限，否則該行會被 GitHub 忽略。
+# - 目前只列出已確認的維護者，新審核者或團隊（@anoni-net/<team>）加入後再補。
+
+# 安全/OPSEC 核心（zh-TW 為來源語言）→ 維護者技術審核
+/docs/zh-TW/tools/                   @toomore
+/docs/zh-TW/scenarios/               @toomore
+/docs/zh-TW/advanced/                @toomore
+/docs/zh-TW/guides/                  @toomore
+/docs/zh-TW/help/                    @toomore
+
+# 治理與社群規範
+/CODE_OF_CONDUCT.md                  @toomore
+/docs/zh-TW/community/governance.md  @toomore
+
+# 子系統（程式碼）
+/pulse/                              @toomore
+/asn_coverage/                       @toomore
+
+# 待補（範例，補上實際帳號或團隊後取消註解）：
+# /docs/zh-CN/                       @anoni-net/translation-reviewers
+# /docs/en/                          @anoni-net/translation-reviewers
+# /pulse/                            @anoni-net/pulse-owners
+# /asn_coverage/                     @anoni-net/asn-owners

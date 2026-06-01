@@ -1,0 +1,27 @@
+name: 文件錯誤 Bug
+description: 回報文件內容錯誤、失效連結、顯示問題
+title: "[錯誤] "
+labels: ["bug", "documentation"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 哪一頁
+      description: 文件網址或檔案路徑。
+      placeholder: https://anoni.net/docs/zh-TW/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 問題描述
+      description: 你看到什麼、預期應該是什麼。
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: 建議修正
+      description: 有想法的話寫下來，沒有也沒關係。
+    validations:
+      required: false

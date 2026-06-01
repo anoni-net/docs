@@ -1,0 +1,53 @@
+name: 翻譯認領 Translation
+description: 認領把一篇 zh-TW 文章翻成 zh-CN 或 en
+title: "[翻譯] "
+labels: ["l10n", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感謝你想幫忙翻譯。zh-TW 是 single source of truth，zh-CN 與 en 都從 zh-TW 同步。動手前建議先讀[中文化與文件翻譯流程](https://anoni.net/docs/zh-TW/community/i18n/)。
+  - type: input
+    id: source
+    attributes:
+      label: 來源文章
+      description: 要翻譯的 zh-TW 文章路徑或網址。
+      placeholder: docs/zh-TW/basics/anonymity-vs-privacy.md
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: 目標語言
+      options:
+        - zh-CN（簡體中文，中國用語）
+        - en（英文，需補在地脈絡）
+    validations:
+      required: true
+  - type: dropdown
+    id: experience
+    attributes:
+      label: 翻譯經驗
+      description: 方便夥伴判斷要不要多陪一段，沒有經驗完全沒關係。
+      options:
+        - 第一次參與翻譯
+        - 翻譯過幾篇
+        - 熟手
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補充
+      description: 想先確認的詞彙、時間規劃，或需要的協助。
+    validations:
+      required: false
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: 開始前的確認
+      options:
+        - label: 我了解 zh-TW 是來源，翻譯內容以 zh-TW 為準。
+          required: true
+        - label: 我已讀過或會先讀 i18n 翻譯流程。
+          required: false

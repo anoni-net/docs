@@ -1,0 +1,43 @@
+name: 來源建議 Source / RSS
+description: 推薦值得追蹤翻譯的官方 blog、研究機構或 RSS 來源
+title: "[來源] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        我們會定期從這些來源挑選文章翻譯成中文。推薦前可以先看現有來源的類型：匿名工具與專案、監控量測與研究、數位人權與政策、匿名支付、台灣在地。
+  - type: input
+    id: name
+    attributes:
+      label: 來源名稱
+      placeholder: 例如 Tor Project Blog
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: 網站或 RSS 連結
+      placeholder: https://blog.torproject.org/blog/feed
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 類型
+      options:
+        - 匿名工具與專案
+        - 監控量測與研究
+        - 數位人權與政策
+        - 匿名支付
+        - 台灣在地
+        - 其他
+    validations:
+      required: false
+  - type: textarea
+    id: why
+    attributes:
+      label: 推薦原因
+      description: 為什麼值得追蹤、內容品質、更新頻率。
+    validations:
+      required: true
