@@ -1,6 +1,6 @@
 # 行為準則 | Code of Conduct
 
-這份行為準則摘自 anoni.net 社群[治理章程](https://anoni.net/docs/zh-TW/community/governance/)的「行為準則」與「違反處置」兩節，獨立放在這裡，方便第一次接觸的人快速看到。完整的決策方式與爭議處理流程以治理章程為準。
+這份行為準則摘自 anoni.net 社群[治理章程](https://anoni.net/docs/community/governance/)的「行為準則」與「違反處置」兩節，獨立放在這裡，方便第一次接觸的人快速看到。完整的決策方式與爭議處理流程以治理章程為準。
 
 ## 適用範圍
 
@@ -34,7 +34,7 @@
 
 ## 機敏資訊
 
-- 涉及個人資料、未公開研究、敏感受害者身分的內容，走[上傳機敏資訊流程](https://anoni.net/docs/zh-TW/community/upload-sensitive/)。
+- 涉及個人資料、未公開研究、敏感受害者身分的內容，走[上傳機敏資訊流程](https://anoni.net/docs/community/upload-sensitive/)。
 - 不在公開 room 直接貼受害者個資或未公開的爆料原文。
 - 引用敏感報導時保留原作者來源，不擅自摘要敏感細節。
 
@@ -57,4 +57,4 @@
 
 ---
 
-**English (short):** This Code of Conduct is excerpted from the anoni.net community [governance charter](https://anoni.net/docs/zh-TW/community/governance/). It applies to all anoni.net collaboration spaces: the docs repositories, self-hosted services, events, and external representation. Be respectful, critique ideas rather than people, and assume good faith. All collaboration must be for lawful purposes. Report violations to <whisper@anoni.net>; core members handle enforcement, ranging from a private reminder to permanent removal.
+**English (short):** This Code of Conduct is excerpted from the anoni.net community [governance charter](https://anoni.net/docs/community/governance/). It applies to all anoni.net collaboration spaces: the docs repositories, self-hosted services, events, and external representation. Be respectful, critique ideas rather than people, and assume good faith. All collaboration must be for lawful purposes. Report violations to <whisper@anoni.net>; core members handle enforcement, ranging from a private reminder to permanent removal.

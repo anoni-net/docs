@@ -29,7 +29,7 @@
 3. 只改與主題相關的檔案；大改動可開 **Draft PR** 先收集意見。
 4. 送出 Pull Request；維護者會依時間回覆。
 
-互動請遵循[行為準則](./CODE_OF_CONDUCT.md)。第一次參與的完整入門見[如何參與與認領主題](https://anoni.net/docs/zh-TW/community/how-to-contribute/)。
+互動請遵循[行為準則](./CODE_OF_CONDUCT.md)。第一次參與的完整入門見[如何參與與認領主題](https://anoni.net/docs/community/how-to-contribute/)。
 
 ## 授權（貢獻前請知悉）
 

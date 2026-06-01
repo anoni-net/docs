@@ -33,4 +33,4 @@
 
 ---
 
-分支命名與 PR 描述規範見[貢獻者百科](https://anoni.net/docs/zh-TW/community/contributor-handbook/)。結構性變動（搬檔、改 nav）請先在 Matrix 提案討論再開 PR。
+分支命名與 PR 描述規範見[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)。結構性變動（搬檔、改 nav）請先在 Matrix 提案討論再開 PR。

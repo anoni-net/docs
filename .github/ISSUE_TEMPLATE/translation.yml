@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        感謝你想幫忙翻譯。zh-TW 是 single source of truth，zh-CN 與 en 都從 zh-TW 同步。動手前建議先讀[中文化與文件翻譯流程](https://anoni.net/docs/zh-TW/community/i18n/)。
+        感謝你想幫忙翻譯。zh-TW 是 single source of truth，zh-CN 與 en 都從 zh-TW 同步。動手前建議先讀[中文化與文件翻譯流程](https://anoni.net/docs/community/i18n/)。
   - type: input
     id: source
     attributes:

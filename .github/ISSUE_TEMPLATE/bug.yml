@@ -8,7 +8,7 @@ body:
     attributes:
       label: 哪一頁
       description: 文件網址或檔案路徑。
-      placeholder: https://anoni.net/docs/zh-TW/...
+      placeholder: https://anoni.net/docs/...
     validations:
       required: true
   - type: textarea
