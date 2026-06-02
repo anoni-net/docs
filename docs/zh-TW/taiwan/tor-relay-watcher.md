@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var rows = results.map(function (result) {
         var data = result.data;
         var c = result.country;
-        if (!data.length) return '<tr><td>' + c.label + '</td><td style="text-align:right;">—</td><td style="text-align:right;">—</td></tr>';
+        if (!data.length) return '<tr><td>' + c.label + '</td><td style="text-align:right;">&mdash;</td><td style="text-align:right;">&mdash;</td></tr>';
         var latestDay = data.reduce(function (m, d) { return d.created_at > m ? d.created_at : m; }, '').slice(0, 10);
         var latest = data.filter(function (d) { return d.created_at.slice(0, 10) === latestDay; });
         var running = (latest.find(function (d) { return d.running === true; }) || {}).count || 0;
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <div style="margin-top:1.25rem;">
-<p style="font-size:.85rem;color:var(--md-default-fg-color--light);margin-bottom:.5rem;" id="asn-table-date">資料日期：—</p>
+<p style="font-size:.85rem;color:var(--md-default-fg-color--light);margin-bottom:.5rem;" id="asn-table-date">資料日期：&mdash;</p>
 <table>
   <thead>
     <tr>
@@ -333,7 +333,7 @@ Tor 軟體版本的更新狀況，以及各節點所具備的能力標籤分佈�
 
 各地區最新一日的中繼節點運作數量一覽，方便對照不同地區的貢獻規模。
 
-<p id="summary-table-date" style="font-size:.85rem;color:var(--md-default-fg-color--light);margin-bottom:.5rem;">資料日期：—</p>
+<p id="summary-table-date" style="font-size:.85rem;color:var(--md-default-fg-color--light);margin-bottom:.5rem;">資料日期：&mdash;</p>
 <table>
   <thead>
     <tr>

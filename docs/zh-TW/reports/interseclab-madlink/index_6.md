@@ -30,7 +30,7 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 **積至（海南）信息技術有限公司由方濱興於 2018 年在海南創立。** 維基百科[积至信息](https://zh.wikipedia.org/wiki/%E7%A7%AF%E8%87%B3%E4%BF%A1%E6%81%AF){target="_blank"}、[大紀元 2025-09-13 報導](https://www.epochtimes.com/b5/25/9/13/n14593857.htm){target="_blank"}、[新唐人](https://www.ntdtv.com/b5/2025/09/13/a104019706.html){target="_blank"} 互相印證該公司基本資訊、創辦人身分，以及與中科院信息工程研究所 MESA 實驗室的同根關係。
 
-**New Bloom Magazine 2026-04-29 那篇報導真實存在。** 標題「[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}」，發佈時間 2026-04-29 07:41 UTC。這是目前唯一明確聚焦凌華—Geedge 連結的台灣相關英文媒體報導。
+**New Bloom Magazine 2026-04-29 那篇報導真實存在。** 標題「[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}」，發佈時間 2026-04-29 07:41 UTC。這是目前唯一明確聚焦凌華與 Geedge 連結的台灣相關英文媒體報導。
 
 ### 編輯觀察自身
 
@@ -50,7 +50,7 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 ### 台灣中文媒體（基本無覆蓋）
 
-* 台灣主流新聞媒體（聯合、自由、中央社、TVBS、TechNews、iThome 等）：截至 2026-05-16，搜尋未發現任何一則直接報導 MADLink 或凌華—Geedge—哈薩克這條線。
+* 台灣主流新聞媒體（聯合、自由、中央社、TVBS、TechNews、iThome 等）：截至 2026-05-16，搜尋未發現任何一則直接報導 MADLink 或凌華、Geedge、哈薩克這條線。
 * [TechNews 科技新報](https://infosecu.technews.tw/2025/09/14/china-geedge-mesa-leak-analyzing-the-great-firewall-largest-document-leak/){target="_blank"} 在 2025-09 寫過防火長城 500GB 外洩事件本身，但沒有後續追凌華供應鏈這塊。
 * 凌華公司的中文新聞版面集中在邊緣 AI 接單、Taiwan Excellence 獎項、CYBERSEC 2026 參展等業務話題。
 * 立法委員沈伯洋雖然在原始報告中被引述發言，但在台灣公開場合（質詢、記者會、社群平台）找不到他就此議題進一步發聲的紀錄。他近期版面被「徵召選台北市長」與「重慶公安立案偵查」兩件事吃光。
@@ -184,6 +184,8 @@ The original report already argues that Taiwan's export control framework is ori
 
 Grouped by entity, with concrete entry points (what to watch) and execution tiers (how to watch).
 
+<!-- 以下為英文附錄，破折號是英文標點，不套用中文寫作規則 -->
+<!-- docs-style-lint: disable -->
 **Government and regulatory level:**
 
 * **Bureau of Foreign Trade, MOEA** — Entry points: [Strategic High-Tech Commodities Entity List](https://publicinfo.trade.gov.tw/icp/exportList.html){target="_blank"}, [BoFT press releases](https://www.trade.gov.tw/Pages/List.aspx?nodeID=40){target="_blank"}. Watch for: addition of surveillance/censorship technology vendors to the entity list; introduction of end-use review; any publicly disclosed conclusions from the quarterly interagency review meetings.
@@ -195,6 +197,8 @@ Grouped by entity, with concrete entry points (what to watch) and execution tier
 
 * **Chinese-language media** — Whether journalists who previously covered the Great Firewall, Chinese infosec topics, or export controls follow up. Outlets to track include TechNews, iThome, The Reporter, READr, and Initium.
 * **Taiwan civil society** — Whether g0v, Open Culture Foundation, Taiwan Association for Human Rights, Economic Democracy Union and similar organisations launch petitions, panel discussions, or policy advocacy on this issue.
+
+<!-- docs-style-lint: enable -->
 
 **How to actually track these (low to high cost):**
 
