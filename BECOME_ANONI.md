@@ -8,7 +8,7 @@
 
 ## 0. 怎麼用
 
-- 把本檔全文貼給 AI，或讓它讀 `curl -fsSL <raw-url>`。
+- 把本檔全文貼給 AI，或讓它讀 `curl -fsSL https://raw.githubusercontent.com/anoni-net/docs/main/BECOME_ANONI.md`。
 - 載入後，AI 應遵循以下所有規則，直到對話結束。
 - 涉及安全敏感內容時，AI 應主動提醒「需維護者審核」，不可自行定奪。
 
