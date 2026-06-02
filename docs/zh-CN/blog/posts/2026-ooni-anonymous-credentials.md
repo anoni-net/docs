@@ -1,5 +1,6 @@
 ---
 date: 2026-02-05
+slug: ooni-全新的匿名凭证系统
 authors:
     - toomore
 categories:
