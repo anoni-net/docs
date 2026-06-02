@@ -64,7 +64,7 @@ BLOG_REQUIRED = ["date", "slug", "categories", "authors"]
 LINT_DIRECTIVE = re.compile(r"<!--\s*docs-style-lint:\s*(disable|enable|disable-line)\s*-->")
 
 # 規則文件本身會引用被禁的句型當例子，預設略過（可用 --include-rule-docs 強制掃）
-RULE_DOCS = {"contributor-handbook.md", "docs-writing-style.md"}
+RULE_DOCS = {"contributor-handbook.md", "docs-writing-style.md", "BECOME_ANONI.md"}
 
 
 def split_front_matter(text: str):
