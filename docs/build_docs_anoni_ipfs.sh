@@ -61,6 +61,8 @@ cleanup_source() {
 trap cleanup_source EXIT
 
 rm -rf ./output/*
+# 清掉 privacy plugin 快取，避免外部資源（如 vega-embed）換 URL 形狀後殘留舊鏡像 symlink 害圖表不 render
+rm -rf .cache/plugin/privacy
 RUN replace_sitename_anoni_ipfs.sh
 RUN run.sh
 RUN run_en.sh
