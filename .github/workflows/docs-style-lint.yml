@@ -1,0 +1,44 @@
+# 編輯標準掃描器（Tier 1）。只掃這個 PR 變更到的 docs Markdown。
+#
+# 目前是 warn 階段：問題以 annotation 標在 PR 變更行上，但 continue-on-error 讓 job
+# 維持綠燈，不擋 merge。收斂誤報後要改 blocking，只要拿掉下面的 continue-on-error，
+# 並在 repo 設定把這個 check 設為 branch protection 必過即可。
+name: docs-style-lint
+
+on:
+  pull_request:
+    paths:
+      - "docs/**/*.md"
+      - "tools/docs_style_lint.py"
+      - ".github/workflows/docs-style-lint.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: 掃描變更的 Markdown（warn 階段，不擋 merge）
+        continue-on-error: true
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          mapfile -t files < <(git diff --name-only --diff-filter=ACM "$base" HEAD -- docs \
+            | grep -E '\.md$' || true)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "沒有變更的 Markdown，略過。"
+            exit 0
+          fi
+          echo "掃描 ${#files[@]} 個變更檔："
+          printf '  %s\n' "${files[@]}"
+          python3 tools/docs_style_lint.py --format github "${files[@]}"
