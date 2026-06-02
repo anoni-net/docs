@@ -8,7 +8,7 @@ icon: material/bullhorn-outline
 
 社運場景的數位風險跟個人匿名不太一樣。多數風險來自群組通訊、裝置被檢查、現場照片與位置資訊的暴露，跟你身邊還有誰、組織內部紀錄留在哪、現場有沒有人拍到你都有關。這篇文章把一場行動拆成四個階段來談：動員前的準備、行動現場、行動之後、跨組織協作。每個階段配對應的工具與設定，並對照台灣與香港兩地行動圈累積的實務。
 
-要先理解風險為什麼存在，可以回頭看 [威脅模型怎麼想](../basics/threat-model.md) 與 [Metadata 是什麼](../basics/metadata.md)。
+要先理解風險為什麼存在，可以回頭看 [威脅模型如何建立](../basics/threat-model.md) 與 [Metadata 是什麼](../basics/metadata.md)。
 
 ## 為什麼需要這套流程
 
@@ -271,7 +271,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 - 拍照、轉錄、截圖外傳的規則（預設禁止，特例由協調者決定）
 - 訊息保留多久（建議 disappearing messages 設 1 週或 1 個月）
 - 新成員加入流程（誰可以拉人、要不要事前討論）
-- 退出時怎麼處理紀錄（不刪歷史、自己離開）
+- 退出時如何處理紀錄（不刪歷史、自己離開）
 
 ## 台灣的脈絡
 
@@ -302,7 +302,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 
 ## 接下來
 
-- [威脅模型怎麼想](../basics/threat-model.md)：每場行動前先盤點對手與資產
+- [威脅模型如何建立](../basics/threat-model.md)：每場行動前先盤點對手與資產
 - [Metadata 是什麼](../basics/metadata.md)：理解照片、文件背後的元資料
 - [記者保護消息來源](./journalist.md)：跟記者對接時雙方都要做的整理
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同場景的取捨

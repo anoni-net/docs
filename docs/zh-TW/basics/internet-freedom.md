@@ -8,7 +8,7 @@ icon: material/chat-question
 
 匿名網路社群 anoni.net 是一個關注匿名網路、隱私、網路自由的在地社群。為什麼網路自由值得我們長期投入，現在談仍然有意義？台灣的連線環境相對開放，但「相對」兩個字承擔的條件愈來愈不穩固。這頁整理我們具體看到的事，以及正在做什麼來回應。
 
-## 我們怎麼理解網路自由
+## 我們如何理解網路自由
 
 **網路自由**關注在人們能否在免於不當干預的情況下取得資訊、表達意見，以及選擇自己信任的工具與連線方式。它和「匿名」、「隱私」、「規避審查」常一起出現，側重點略有不同，可先從 [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 對照閱讀。
 
@@ -33,7 +33,7 @@ icon: material/chat-question
 
 簡單說，你能不能掌握「關於你的資料」流向了哪裡、被誰持有、能否要求刪除。
 
-這個面向對應到社群熟悉的兩個概念，[威脅模型怎麼想](./threat-model.md)（評估你保護什麼、防誰、付出多少成本）與 [Metadata 是什麼](./metadata.md)（為什麼通訊內容被加密還不夠）。在地脈絡上，[2025 個資法修法](../taiwan/pdpa-2025.md) 設立了個人資料保護委員會，把過去分散的監督權責集中、罰則向 GDPR 靠攏，是台灣個資制度近年最大的一次調整。
+這個面向對應到社群熟悉的兩個概念，[威脅模型如何建立](./threat-model.md)（評估你保護什麼、防誰、付出多少成本）與 [Metadata 是什麼](./metadata.md)（為什麼通訊內容被加密還不夠）。在地脈絡上，[2025 個資法修法](../taiwan/pdpa-2025.md) 設立了個人資料保護委員會，把過去分散的監督權責集中、罰則向 GDPR 靠攏，是台灣個資制度近年最大的一次調整。
 
 ### 金流的自由
 
@@ -85,7 +85,7 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 
 社群的工作是一份持續累積、需要更多人加入的進行式，沒有單一的「完成」時刻。看你想從哪個方向切入，三條建議路徑：
 
-- **想先理解概念**：往 basics/ 其他四篇繼續走。[匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 釐清詞彙，[威脅模型怎麼想](./threat-model.md) 給判斷框架，[Metadata 是什麼](./metadata.md) 補上「機密 ≠ 匿名」的盲點，[為什麼匿名支付重要](./payments-anonymity.md) 把金流納入匿名思維。
+- **想先理解概念**：往 basics/ 其他四篇繼續走。[匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 釐清詞彙，[威脅模型如何建立](./threat-model.md) 給判斷框架，[Metadata 是什麼](./metadata.md) 補上「機密 ≠ 匿名」的盲點，[為什麼匿名支付重要](./payments-anonymity.md) 把金流納入匿名思維。
 - **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 則是社群長期維運的在地資料。
 - **想參與實作**：往 [community/](../community/index.md) 走。可以先看 [2026 年度路線圖](../community/roadmap-2026.md)、[匿名支付研究專題](../community/payments-research.md)、[如何參與與認領主題](../community/how-to-contribute.md)，再依興趣選一個方向加入 Matrix 討論。
 

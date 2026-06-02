@@ -74,7 +74,7 @@ icon: material/share-circle
 - **適用**：行動現場臨時協調、敏感會議的會中通訊、不希望事後留下對話紀錄的小組討論。
 - **限制**：所有人都要 Tor Browser 連入。歷史訊息不保留，無法事後翻閱。
 
-## 怎麼安裝
+## 如何安裝
 
 - **macOS、Windows、Linux 桌面**：到 [onionshare.org](https://onionshare.org/){target="_blank"} 下載官方 GUI。
 - **Flatpak 或 Snap**：對 Linux 使用者更方便的封裝，套件庫名稱 `org.onionshare.OnionShare`。

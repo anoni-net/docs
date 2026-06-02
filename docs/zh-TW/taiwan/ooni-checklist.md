@@ -1,6 +1,6 @@
 ---
 title: OONI 網站檢測清單
-description: OONI Probe 在台灣使用的網站檢測清單怎麼維護，以及社群如何協助分類與更新。
+description: OONI Probe 在台灣使用的網站檢測清單如何維護，以及社群如何協助分類與更新。
 icon: material/list-status
 ---
 # :material-list-status: OONI 網站檢測清單
@@ -49,7 +49,7 @@ icon: material/list-status
 
 名單從 2017 年建立後就沒有再做大規模調整，需要重新盤點哪些網站值得加進來。新增的判斷依四大分類（政治、社會、衝突與安全、網際網路工具）做篩選，這部分社群還在持續討論。
 
-## 志工怎麼參與
+## 志工如何參與
 
 清單維護是非常適合新貢獻者入門的工作，不需要寫程式，需要的是：
 

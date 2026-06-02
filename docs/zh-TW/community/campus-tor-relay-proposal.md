@@ -17,7 +17,7 @@ icon: material/file-document-edit-outline
 - **不是**：技術安裝步驟（請見 [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)）、校方常見疑慮（請見 [校園 FAQ](./campus-relay-faq.md)）
 - **授權**：依本站 CC-BY 4.0，可自由複製、修改、提交給學校。署名建議：「整理自 anoni.net 校園 Tor Relay 範本」
 
-## 怎麼使用這份範本
+## 如何使用這份範本
 
 1. 把下方「提案文件主體」整段複製到 Google Docs 或 Word
 2. 全文搜尋 `<` 找出所有 placeholder，逐一替換成自己學校的資料

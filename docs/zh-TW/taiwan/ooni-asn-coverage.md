@@ -48,9 +48,9 @@ icon: material/access-point-network
 
 [:material-chart-bar: 2023/12 觀察報告](https://ocf.tw/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
 
-## 怎麼解讀單筆測量資料
+## 如何解讀單筆測量資料
 
-如果想了解單筆 OONI 測量的內容怎麼判讀，從 OONI Probe 操作開始：
+如果想了解單筆 OONI 測量的內容如何判讀，從 OONI Probe 操作開始：
 
 1. 下載 [OONI Probe](https://ooni.org/install/){target="_blank"}（行動裝置或桌面版本）
 2. 開啟 OONI Probe、選擇「網站」項目並執行檢測

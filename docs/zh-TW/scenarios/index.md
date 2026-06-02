@@ -24,7 +24,7 @@ icon: material/account-group-outline
 
 整體進度與認領狀況見 [scenarios/ 上線時抽掉的文章追蹤](https://github.com/anoni-net/docs/issues/37)。
 
-## 怎麼參與
+## 如何參與
 
 - **想看哪個場景**：到 [Matrix 公開 room](../community/tools.md) 表達需求，會幫助我們判斷哪些主題優先寫
 - **想協助撰寫**：認領對應的 GitHub issue（每個 issue 都列出預期內容），先在 Matrix 表達意願再開始

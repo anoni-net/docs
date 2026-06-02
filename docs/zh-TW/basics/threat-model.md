@@ -1,10 +1,10 @@
 ---
-title: 威脅模型怎麼想
+title: 威脅模型如何建立
 description: 從「想保護什麼、防範誰、能付出多少成本」三個問題，建立屬於自己的威脅模型。
 icon: material/shield-search
 ---
 
-# :material-shield-search: 威脅模型怎麼想
+# :material-shield-search: 威脅模型如何建立
 
 談匿名與隱私時，最常見的誤區是把工具當成答案，跳過釐清「我到底在防什麼」這一步。「我用 Tor 就安全嗎」、「Signal 跟 Telegram 哪個比較安全」、「我該不該裝 VPN」，這類提問背後缺的是一個結構化的判斷框架。威脅模型就是那個框架。
 

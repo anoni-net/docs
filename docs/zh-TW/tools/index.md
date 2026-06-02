@@ -6,17 +6,17 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具層
 
-讀完[概念層](../basics/index.md)後，這個分類介紹幾個在匿名網路討論中最常被提到的工具。12 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型怎麼想](../basics/threat-model.md)，確認自己在抗誰，避免「工具當答案」的誤區。
+讀完[概念層](../basics/index.md)後，這個分類介紹幾個在匿名網路討論中最常被提到的工具。12 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免「工具當答案」的誤區。
 
 ## 先看這篇
 
-- [什麼是匿名網路](./what-is-anonymity-network.md)：匿名網路解決什麼問題、後續工具家族怎麼分工，第一次來建議先讀這篇。
+- [什麼是匿名網路](./what-is-anonymity-network.md)：匿名網路解決什麼問題、後續工具家族如何分工，第一次來建議先讀這篇。
 
 ## 連線層：Tor 工具家族
 
 想匿名瀏覽、傳檔、或貢獻網路自由基礎建設的人，從這群開始。
 
-- [什麼是 Tor](./what-is-tor.md)：Tor 怎麼用、跟 VPN 差在哪、什麼時候不該用。
+- [什麼是 Tor](./what-is-tor.md)：Tor 如何使用、跟 VPN 差在哪、什麼時候不該用。
 - [Tor Browser 進階設定](./tor-browser-advanced.md)：橋接、安全等級、Onion 站點與身分隔離。
 - [Tor Snowflake](./tor-snowflake.md)：開瀏覽器分頁，幫受審查地區的使用者連上 Tor，台灣門檻最低的網路自由貢獻方式。
 - [OnionShare](./onionshare.md)：透過 Tor 起臨時 onion service，匿名傳檔、收檔、架站、聊天。

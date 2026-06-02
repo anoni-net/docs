@@ -28,7 +28,7 @@ CryptPad 採用 zero-knowledge（零知識）架構。具體地說：
 
 - **加密發生在瀏覽器**：你輸入的文字、貼上的圖片、共編的每一個改動，在離開你的電腦前就先被加密。
 - **伺服器只看到密文**：CryptPad 的營運者、anoni.net 的維護者、你連線經過的任何中間方，看到的都是無法解讀的密文流。
-- **鑰匙在 URL 的 fragment**：解密 pad 所需的鑰匙寫在 URL 的 `#` 之後（fragment），這段不會送到伺服器。分享 pad 的連結就等於分享鑰匙，鑰匙是否外洩取決於你怎麼傳這條 URL。
+- **鑰匙在 URL 的 fragment**：解密 pad 所需的鑰匙寫在 URL 的 `#` 之後（fragment），這段不會送到伺服器。分享 pad 的連結就等於分享鑰匙，鑰匙是否外洩取決於你如何傳這條 URL。
 - **多人共編也維持加密**：當其他人透過你的分享連結加入時，他們在瀏覽器端拿到同一把鑰匙，在自己的瀏覽器解密與重新加密所有改動。
 
 換句話說：**即便我們想看，也看不到**。
@@ -126,7 +126,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 - 需要 AI 自動摘要、全文檢索整個資料庫的場景（Notion 系生態）
 - 視訊會議（CryptPad 不做視訊）
 
-## 怎麼開始用
+## 如何開始使用
 
 主要有三種選擇：
 
@@ -183,7 +183,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 端對端加密如何運作](../advanced/e2ee.md)
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: 什麼是匿名網路](./what-is-anonymity-network.md)
 
 </div>

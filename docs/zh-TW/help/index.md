@@ -40,7 +40,7 @@ icon: material/lifebuoy
 
 - 把所有關鍵帳號（Email、銀行、社群、雲端）的密碼換成獨立、隨機的長密碼
 - 全部開啟 2FA，優先使用 TOTP（Authy、Aegis 等）或硬體金鑰，盡量不用簡訊
-- 進一步閱讀：[密碼管理器入門](../tools/password-manager.md)、[威脅模型怎麼想](../basics/threat-model.md)
+- 進一步閱讀：[密碼管理器入門](../tools/password-manager.md)、[威脅模型如何建立](../basics/threat-model.md)
 
 ## 裝置遺失或被偷
 

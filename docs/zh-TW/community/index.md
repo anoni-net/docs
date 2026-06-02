@@ -18,7 +18,7 @@ icon: material/account-group
 
 完整 2025 回顧與 2026 起步背景見：[延續 2025，走向 2026](../blog/posts/2025to2026.md)。
 
-## 你可以怎麼參與
+## 你可以如何參與
 
 <div class="grid cards" markdown>
 

@@ -1,6 +1,6 @@
 ---
 title: Tails、Whonix、Qubes 的差別
-description: 三套常見匿名作業系統的設計目標、適用情境與門檻比較。在台灣的記者、社運參與者、IT 從業者怎麼挑，跟單純用 Tor Browser 差在哪。
+description: 三套常見匿名作業系統的設計目標、適用情境與門檻比較。在台灣的記者、社運參與者、IT 從業者如何挑選，跟單純用 Tor Browser 差在哪。
 icon: material/compare-horizontal
 ---
 
@@ -8,7 +8,7 @@ icon: material/compare-horizontal
 
 多數匿名瀏覽需求，裝 [Tor Browser](./what-is-tor.md) 就夠用。但有些工作會把整台電腦的安全前提一起拖下水：審閱外來機敏檔案、長期維持一個跟你日常身分切開的工作流、要在不信任的硬體上做敏感任務。這時要連作業系統一起切。
 
-社群最常被一起提到的三套匿名作業系統是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它們的設計目標不同，適合的情境也不同。動手前先回頭看 [威脅模型怎麼想](../basics/threat-model.md)，把「我在抗誰、能投入多少」釐清，比直接挑工具更重要。
+社群最常被一起提到的三套匿名作業系統是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它們的設計目標不同，適合的情境也不同。動手前先回頭看 [威脅模型如何建立](../basics/threat-model.md)，把「我在抗誰、能投入多少」釐清，比直接挑工具更重要。
 
 !!! tip "30 秒結論"
 
@@ -28,7 +28,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 讀每一套時可以對照這五個軸：
 
-1. **隔離模型**：怎麼切「敏感任務」與「其他東西」的界線。
+1. **隔離模型**：如何切「敏感任務」與「其他東西」的界線。
 2. **持久性**：關機後是清空、還是保留你的工作。
 3. **硬體需求**：能不能用你手邊的電腦。
 4. **學習曲線**：第一次用要花多久才順手。
@@ -89,7 +89,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 ## Qubes OS
 
-[Qubes OS](https://www.qubes-os.org/){target="_blank"} 處理的是更前面的問題：整台電腦的隔離。Tails、Whonix 主要圍繞 Tor 流量設計，Qubes 不預設走 Tor，要解決的是同一台電腦上工作、個人、銀行、敏感任務怎麼互不影響。它用 Xen hypervisor 把作業系統切成多個 qube，每個 qube 是一個獨立的 VM，有自己的顏色標示（紅 = 高敏感、黃 = 工作、綠 = 個人、藍 = 銀行等）。
+[Qubes OS](https://www.qubes-os.org/){target="_blank"} 處理的是更前面的問題：整台電腦的隔離。Tails、Whonix 主要圍繞 Tor 流量設計，Qubes 不預設走 Tor，要解決的是同一台電腦上工作、個人、銀行、敏感任務如何互不影響。它用 Xen hypervisor 把作業系統切成多個 qube，每個 qube 是一個獨立的 VM，有自己的顏色標示（紅 = 高敏感、黃 = 工作、綠 = 個人、藍 = 銀行等）。
 
 設計重點：
 
@@ -166,7 +166,7 @@ Tails 的完整介紹與安裝步驟在 [什麼是 Tails](./what-is-tails.md)。
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:simple-tails: 什麼是 Tails](./what-is-tails.md)
 - [:material-share-variant-outline: OnionShare](./onionshare.md)
 
