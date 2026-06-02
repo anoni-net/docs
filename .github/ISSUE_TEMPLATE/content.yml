@@ -1,55 +1,57 @@
-name: 內容提案 New content / 在地案例
-description: 提議新文章主題，或補充台灣在地案例與觀點
-title: "[內容] "
+name: 內容提案 Content / 在地案例 Local case
+description: 提議新文章主題，或補充台灣在地案例與觀點 / Propose a topic or add a Taiwan local case
+title: "[內容 Content] "
 labels: ["documentation", "enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
         想新增一篇文章，或替既有文章補上台灣在地案例都從這裡開始。工具操作與安全情境類內容（tools、scenarios、advanced）會由維護者做技術審核才合併，動手前可先看[如何參與與認領主題](https://anoni.net/docs/community/how-to-contribute/)。
+
+        Propose a new article or add a Taiwan local case here. Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge. See [how to contribute](https://anoni.net/docs/community/how-to-contribute/).
   - type: dropdown
     id: kind
     attributes:
-      label: 提案類型
+      label: 提案類型 / Type
       options:
-        - 新主題文章
-        - 既有文章的在地案例或台灣觀點補充
-        - 其他
+        - 新主題文章 / New article
+        - 既有文章的在地案例或台灣觀點補充 / Local case or Taiwan perspective for an existing article
+        - 其他 / Other
     validations:
       required: true
   - type: dropdown
     id: category
     attributes:
-      label: 預計分類
-      description: 不確定可先選「不確定」，我們一起決定放哪。
+      label: 預計分類 / Category
+      description: 不確定可先選「不確定」。 / Pick "not sure" if unsure.
       options:
-        - basics 概念
-        - tools 工具
-        - scenarios 場景
-        - advanced 進階
-        - taiwan 在地
-        - reports 報告中譯
-        - 不確定
+        - basics 概念 / concepts
+        - tools 工具 / tools
+        - scenarios 場景 / scenarios
+        - advanced 進階 / advanced
+        - taiwan 在地 / local
+        - reports 報告中譯 / translated reports
+        - 不確定 / not sure
     validations:
       required: false
   - type: textarea
     id: summary
     attributes:
-      label: 主題重點
-      description: 想寫什麼、為什麼重要、對哪些讀者有用。
+      label: 主題重點 / Summary
+      description: 想寫什麼、為什麼重要、對哪些讀者有用。 / What, why it matters, who it helps.
     validations:
       required: true
   - type: textarea
     id: sources
     attributes:
-      label: 參考來源
-      description: 手上的資料、連結、案例出處。
+      label: 參考來源 / Sources
+      description: 手上的資料、連結、案例出處。 / Data, links, case sources.
     validations:
       required: false
   - type: checkboxes
     id: ack
     attributes:
-      label: 開始前的確認
+      label: 開始前的確認 / Before you start
       options:
-        - label: 若內容屬 tools、scenarios、advanced 安全核心，我了解需要維護者技術審核才會合併。
+        - label: 若內容屬 tools、scenarios、advanced 安全核心，我了解需要維護者技術審核才會合併。 / I understand security-core content needs maintainer review.
           required: false

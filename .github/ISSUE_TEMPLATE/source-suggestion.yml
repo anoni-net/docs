@@ -1,43 +1,45 @@
 name: 來源建議 Source / RSS
-description: 推薦值得追蹤翻譯的官方 blog、研究機構或 RSS 來源
-title: "[來源] "
+description: 推薦值得追蹤翻譯的官方 blog、研究機構或 RSS 來源 / Suggest a blog, org, or RSS to track
+title: "[來源 Source] "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        我們會定期從這些來源挑選文章翻譯成中文。推薦前可以先看現有來源的類型：匿名工具與專案、監控量測與研究、數位人權與政策、匿名支付、台灣在地。
+        我們會定期從這些來源挑選文章翻譯成中文。現有來源類型：匿名工具與專案、監控量測與研究、數位人權與政策、匿名支付、台灣在地。
+
+        We periodically pick articles from these sources to translate. Existing categories: anonymity tools, censorship measurement, digital rights, anonymous payments, Taiwan-local.
   - type: input
     id: name
     attributes:
-      label: 來源名稱
-      placeholder: 例如 Tor Project Blog
+      label: 來源名稱 / Source name
+      placeholder: Tor Project Blog
     validations:
       required: true
   - type: input
     id: url
     attributes:
-      label: 網站或 RSS 連結
+      label: 網站或 RSS 連結 / Site or RSS URL
       placeholder: https://blog.torproject.org/blog/feed
     validations:
       required: true
   - type: dropdown
     id: category
     attributes:
-      label: 類型
+      label: 類型 / Category
       options:
-        - 匿名工具與專案
-        - 監控量測與研究
-        - 數位人權與政策
-        - 匿名支付
-        - 台灣在地
-        - 其他
+        - 匿名工具與專案 / Anonymity tools & projects
+        - 監控量測與研究 / Censorship measurement & research
+        - 數位人權與政策 / Digital rights & policy
+        - 匿名支付 / Anonymous payments
+        - 台灣在地 / Taiwan-local
+        - 其他 / Other
     validations:
       required: false
   - type: textarea
     id: why
     attributes:
-      label: 推薦原因
-      description: 為什麼值得追蹤、內容品質、更新頻率。
+      label: 推薦原因 / Why
+      description: 為什麼值得追蹤、內容品質、更新頻率。 / Why worth tracking, quality, frequency.
     validations:
       required: true
