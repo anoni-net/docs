@@ -1,0 +1,55 @@
+name: 翻譯認領 Translation
+description: 認領把一篇 zh-TW 文章翻成 zh-CN 或 en / Claim an article to translate
+title: "[翻譯 Translation] "
+labels: ["l10n", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感謝你想幫忙翻譯。zh-TW 是 single source of truth，zh-CN 與 en 都從 zh-TW 同步。動手前建議先讀[中文化與文件翻譯流程](https://anoni.net/docs/community/i18n/)。
+
+        Thanks for helping translate. zh-TW is the single source of truth; zh-CN and en are synced from it. Please read the [i18n workflow](https://anoni.net/docs/community/i18n/) first.
+  - type: input
+    id: source
+    attributes:
+      label: 來源文章 / Source article
+      description: 要翻譯的 zh-TW 文章路徑或網址。 / Path or URL of the zh-TW article.
+      placeholder: docs/zh-TW/basics/anonymity-vs-privacy.md
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: 目標語言 / Target language
+      options:
+        - zh-CN（簡體中文，中國用語 / Simplified Chinese）
+        - en（英文，需補在地脈絡 / English, add local context）
+    validations:
+      required: true
+  - type: dropdown
+    id: experience
+    attributes:
+      label: 翻譯經驗 / Translation experience
+      description: 沒有經驗完全沒關係。 / No experience needed.
+      options:
+        - 第一次參與翻譯 / First time
+        - 翻譯過幾篇 / A few before
+        - 熟手 / Experienced
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補充 / Notes
+      description: 想先確認的詞彙、時間規劃，或需要的協助。 / Terms to confirm, timing, or help needed.
+    validations:
+      required: false
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: 開始前的確認 / Before you start
+      options:
+        - label: 我了解 zh-TW 是來源，翻譯以 zh-TW 為準。 / I understand zh-TW is the source of truth.
+          required: true
+        - label: 我已讀過或會先讀 i18n 翻譯流程。 / I have read or will read the i18n workflow.
+          required: false
