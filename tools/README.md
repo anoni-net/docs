@@ -2,7 +2,7 @@
 
 把公開[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)「寫作風格規範」裡可機器判斷的硬規則做成檢查，輸出 `file:line` 與規則代碼。
 
-編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的 Markdown 自動跑，目前為 warn 階段（提醒不擋）。
+編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。規則是中文寫作規範，套用在 zh-TW 與 zh-CN，不掃英文版（docs/en 的破折號、分號等在英文是正常的）。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的中文 Markdown 自動跑，目前為 warn 階段（提醒不擋）。
 
 ## 用法
 
@@ -23,7 +23,7 @@ python3 tools/docs_style_lint.py --format json <path>
 
 ## CI：GitHub Action（只掃變更檔）
 
-舊文有不少遺留違規（見下方試跑結果）。CI 不全庫掃，只掃這次 PR 變更到的 Markdown，避免舊文擋住新貢獻。由 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 處理：`pull_request` 觸發、用 `git diff` 算出變更的 `docs/**/*.md`，跑 `--format github` 把問題以 annotation 標在 PR 的變更行上。
+舊文有不少遺留違規（見下方試跑結果）。CI 不全庫掃，只掃這次 PR 變更到的 Markdown，避免舊文擋住新貢獻。由 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 處理：`pull_request` 觸發、用 `git diff` 算出變更的中文 Markdown（`docs/zh-TW`、`docs/zh-CN`，不含 en），跑 `--format github` 把問題以 annotation 標在 PR 的變更行上。
 
 目前是 **warn 階段**：問題只提醒，job 維持綠燈，不擋 merge。要改 blocking：拿掉 workflow 裡的 `continue-on-error`，並在 repo 設定把這個 check 設為 branch protection 必過。
 
