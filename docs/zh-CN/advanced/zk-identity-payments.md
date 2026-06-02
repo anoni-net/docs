@@ -19,7 +19,7 @@ icon: material/shield-key-outline
 
 「隐私稳定币」的设计，多半在这四层中挑某几层做隐匿。四层全部隐匿的设计实际上很少。理解这四层的差别，比记住「哪个币最匿名」更有帮助。
 
-## Monero 怎么做：环签名 + Stealth Address + RingCT
+## Monero 如何做到：环签名 + Stealth Address + RingCT
 
 Monero 的设计来自 2013 年的 CryptoNote 白皮书，三个核心机制：
 
@@ -35,7 +35,7 @@ Monero 的设计来自 2013 年的 CryptoNote 白皮书，三个核心机制：
 
 代价是区块链体积大、交易验证计算重、合规挑战大。多数 KYC 交易所自 2020 年起陆续下架 Monero。
 
-## Zcash 怎么做：zk-SNARKs 与屏蔽池
+## Zcash 如何做到：zk-SNARKs 与屏蔽池
 
 Zcash 走的是另一条更激进的路线。屏蔽交易（shielded transaction）用 zk-SNARKs（Zero-Knowledge Succinct Non-Interactive Argument of Knowledge）证明：
 

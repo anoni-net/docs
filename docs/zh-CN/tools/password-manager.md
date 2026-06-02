@@ -6,7 +6,7 @@ icon: material/key-variant
 
 # :material-key-variant: 密码管理器入门
 
-重复密码、简单密码、写在便条纸上的密码，是被攻击时最常见的破口。密码管理器让你只需要记一组主密码，其他密码可以又长又随机，并在不同装置之间同步。这篇文章说明密码管理器的核心威胁模型、四类常见工具的取舍（KeePassXC、Bitwarden、1Password、Apple Passwords）、TOTP 双因子验证的搭配方式、Passkey 与硬件密钥的角色，以及在台湾使用时的特殊情境与备援策略。动之前可以先回头看 [威胁模型怎么想](../basics/threat-model.md)，知道自己在抗谁。
+重复密码、简单密码、写在便条纸上的密码，是被攻击时最常见的破口。密码管理器让你只需要记一组主密码，其他密码可以又长又随机，并在不同装置之间同步。这篇文章说明密码管理器的核心威胁模型、四类常见工具的取舍（KeePassXC、Bitwarden、1Password、Apple Passwords）、TOTP 双因子验证的搭配方式、Passkey 与硬件密钥的角色，以及在台湾使用时的特殊情境与备援策略。动之前可以先回头看 [威胁模型如何建立](../basics/threat-model.md)，知道自己在抗谁。
 
 ## 为什么需要密码管理器
 
@@ -166,7 +166,7 @@ Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: Metadata 是什么](../basics/metadata.md)
 - [:material-chat-question: 什么是 Tails](./what-is-tails.md)
 

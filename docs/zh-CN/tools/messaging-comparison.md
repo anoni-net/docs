@@ -8,7 +8,7 @@ icon: material/message-text-outline
 
 「端对端加密」这几个字在 微信、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意义差很多。差异涵盖多个面向：密钥由谁持有、注册时要不要绑手机号码或邮箱、Metadata 留在哪个 server、服务器掉线后还能不能通讯、群组与多装置的设计选择。
 
-这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。动手前可以先回头看 [威胁模型怎么想](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密如何运作](../advanced/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
+这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。动手前可以先回头看 [威胁模型如何建立](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密如何运作](../advanced/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
 
 ## 为什么要分开比较这些工具
 
@@ -18,7 +18,7 @@ icon: material/message-text-outline
 - **默认启用吗**：很多工具的 E2EE 是可选功能，要使用者主动切换才生效。
 - **Metadata 留在哪**：消息内容加密了，「谁跟谁、什么时候、多频繁」这层往往没加密。
 
-微信、Telegram、WhatsApp 三家在前述三个问题上都有明显短处，所以不在主名单。在中国大陆，微信仍然是社交基础建设切不掉，后面的「在中国大陆的补充」会讲怎么分流。
+微信、Telegram、WhatsApp 三家在前述三个问题上都有明显短处，所以不在主名单。在中国大陆，微信仍然是社交基础建设切不掉，后面的「在中国大陆的补充」会讲如何分流。
 
 主名单的 5 个工具是社群实际在用、且设计目标就是 E2EE 与 Metadata 最小化的选项。下面先给判读框架，再开始一个一个介绍。
 
@@ -263,7 +263,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-shield-search: Metadata 是什么](../basics/metadata.md)
 - [:material-key-chain-variant: 端对端加密如何运作](../advanced/e2ee.md)
 

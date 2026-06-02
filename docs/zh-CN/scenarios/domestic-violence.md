@@ -14,7 +14,7 @@ icon: material/shield-account-outline
 
 家暴情境下的数位风险，常常来自加害者拥有共用装置、共用账号、家庭计划方案的存取权，或在被害者装置上偷装追踪类 App。这篇文章从一个非线性的时间轴出发：在还没离开时可以悄悄做的整理（不打草惊蛇）、离开当下的优先顺序（紧急联络、位置、金融），以及离开后重建独立数位身分的步骤（新邮件、新号码、新装置、旧账号的处置）。内容会引用各地家暴防治组织提供的资源，并标注哪些步骤需要旁人协助。
 
-要先理解风险为什么存在，可以回头看 [威胁模型怎么想](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
+要先理解风险为什么存在，可以回头看 [威胁模型如何建立](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
 
 ## 将涵盖的章节
 
@@ -101,4 +101,4 @@ icon: material/shield-account-outline
 
 - [LGBTQ+ 与性少数的匿名社交](./lgbtq.md)：身分区隔、家人控管下的本机痕迹管理
 - [社运行动者的数位准备](./activist.md)：行动现场、被临检时的装置与通讯应对
-- [威胁模型怎么想](../basics/threat-model.md)：判断「保护什么、防谁、能付多少成本」的整体框架
+- [威胁模型如何建立](../basics/threat-model.md)：判断「保护什么、防谁、能付多少成本」的整体框架
