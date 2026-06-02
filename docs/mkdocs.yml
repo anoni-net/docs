@@ -92,6 +92,7 @@ nav:
           - community/how-to-contribute.md
           - community/skill-level.md
           - community/contributor-handbook.md
+          - community/become-anoni.md
           - community/governance.md
       - "動手實作":
           - community/tools.md
@@ -258,7 +259,8 @@ markdown_extensions:
         - name: vegalite
           class: vegalite
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: [".", ".."]
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
