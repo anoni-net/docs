@@ -41,7 +41,7 @@ description: "发布全新 OONI Explorer 专题审查页面！全球社交媒体
 
 [OONI Explorer](https://explorer.ooni.org/) 是全球最大的**互联网审查开放数据库**。这些观测数据由全球 [OONI Probe](https://ooni.org/install/) 的用户贡献，他们在所在网络上进行审查测试，并将测试结果实时上传到开放数据库中。自 2012 年以来，OONI Probe 的用户已经贡献了来自 [242 个国家和地区、28000 个网络，以及超过 20 亿笔测量数据](https://explorer.ooni.org/)，所有这些数据都可以在 OONI Explorer 上公开获取。随着 OONI Probe 用户持续进行测试，每天都有新的测量数据实时发布。您也可以通过协助[运行 OONI Probe](https://ooni.org/install/) 来贡献 OONI 的观测数据。
 
-为了让研究人员和人权捍卫者能够监测和响应全球的审查事件，我们建立了 OONI Explorer：一个网络平台，其中包含一个测量数据的[搜索工具](https://explorer.ooni.org/search)，以及一个[测量数据汇整工具包](https://explorer.ooni.org/chart/mat)，用于根据 OONI 观测数据生成可视化的图表。OONI Explorer 还包括[以域名为中心的页面](https://explorer.ooni.org/domains)，让您查看与 OONI Probe 测试特定域名相关的数据；以网络为中心的页面，通过这些页面您可以了解特定自治网络（AS）上的 OONI Probe 测试，以及提供每个国家 OONI 测量覆盖详情的[国家专属页面](https://explorer.ooni.org/countries)。我们还在 OONI Explorer 的「审查发现」页面上发布简短报告，记录[新出现的审查事件](https://explorer.ooni.org/findings)。
+为了让研究人员和人权捍卫者能够监测和响应全球的审查事件，我们建立了 OONI Explorer：一个网络平台，其中包含一个测量数据的[搜索工具](https://explorer.ooni.org/search)，以及一个[测量数据汇整工具包](https://explorer.ooni.org/chart/mat)，用于根据 OONI 观测数据生成可视化的图表。OONI Explorer 还包括[以域名为中心的页面](https://explorer.ooni.org/domains)，让您查看与 OONI Probe 测试特定域名相关的数据。以网络为中心的页面，通过这些页面您可以了解特定自治网络（AS）上的 OONI Probe 测试，以及提供每个国家 OONI 测量覆盖详情的[国家专属页面](https://explorer.ooni.org/countries)。我们还在 OONI Explorer 的「审查发现」页面上发布简短报告，记录[新出现的审查事件](https://explorer.ooni.org/findings)。
 
 ### 为什么要有新的专题审查页面？
 

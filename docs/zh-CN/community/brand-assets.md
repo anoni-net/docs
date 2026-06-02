@@ -329,6 +329,6 @@ grep -c mxfile your-diagram.drawio.svg
 
 ## :material-link-variant: 接下来
 
-- [贡献者百科](contributor-handbook.md) — 整体贡献流程、PR 规范、翻译流程
-- [社群自架服务](tools.md) — Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口与账号需求
-- [2026 年度路线图](roadmap-2026.md) — 三大主题与时程
+- [贡献者百科](contributor-handbook.md)：整体贡献流程、PR 规范、翻译流程
+- [社群自架服务](tools.md)：Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口与账号需求
+- [2026 年度路线图](roadmap-2026.md)：三大主题与时程

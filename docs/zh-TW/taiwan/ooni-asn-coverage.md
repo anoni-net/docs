@@ -55,7 +55,7 @@ icon: material/access-point-network
 1. 下載 [OONI Probe](https://ooni.org/install/){target="_blank"}（行動裝置或桌面版本）
 2. 開啟 OONI Probe、選擇「網站」項目並執行檢測
 3. 完成後到「測試結果」找到剛剛的網站檢測，檢視是否有「！」或「？」項目
-4. 點擊任一「！」或「？」查看可能的檢測問題；其中可看到「數據」、「在 OONI Explorer 中顯示」連結
+4. 點擊任一「！」或「？」查看可能的檢測問題。其中可看到「數據」、「在 OONI Explorer 中顯示」連結
 5. 點擊連結即可查看原始數據資料
 
 舉例：[`20241024185921.623617_TW_webconnectivity_578b6d3845fed2e2`](https://explorer.ooni.org/zh-Hant/m/20241024185921.623617_TW_webconnectivity_578b6d3845fed2e2){target="_blank"}

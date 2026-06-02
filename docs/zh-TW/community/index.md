@@ -33,4 +33,4 @@ icon: material/account-group
 
 </div>
 
-**延伸閱讀**：[從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../blog/posts/2026-discord-matrix-statement.md) — 說明我們自架 Matrix 家伺服器的緣由與隱私取捨。
+**延伸閱讀**：[從 Discord 年齡驗證談起：我們為什麼自架 Matrix](../blog/posts/2026-discord-matrix-statement.md)：說明我們自架 Matrix 家伺服器的緣由與隱私取捨。
