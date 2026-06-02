@@ -1,6 +1,6 @@
 ---
 title: 什麼是 OONI
-description: OONI 是讓網路審查可被觀測的開放工具與資料集。在台灣可以用它把「連不上」「跑很慢」這些個人感受，變成有時間、地點、ASN 對得上的公開觀測紀錄。
+description: OONI 是讓網路審查可被觀測的開放工具與資料集。在台灣可以用它把「連不上」、「跑很慢」這些個人感受，變成有時間、地點、ASN 對得上的公開觀測紀錄。
 icon: material/access-point-network
 ---
 
