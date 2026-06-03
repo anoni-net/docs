@@ -51,11 +51,13 @@ if ! git diff --quiet; then
 fi
 
 # 任何狀況（正常結束、中途失敗、Ctrl-C）都還原 source
-# 避免 replace_sitename_anoni_ipfs.sh 的 in-place 修改殘留在 working tree
+# 避免 replace_sitename_anoni_ipfs.sh 的 in-place 修改殘留在 working tree。
+# 用 :/（整個 repo）而非 .（僅 docs/），因為 replace 也會改寫 repo 根的 snippet 正本
+# （如 ../BECOME_ANONI.md）。開頭的 git diff --quiet 已檢查整個 repo，還原範圍對齊它才安全。
 cleanup_source() {
   rc=$?
   echo "[build] 還原 source（清除 replace 留下的 in-place 修改）"
-  git restore . 2>/dev/null || true
+  git restore :/ 2>/dev/null || true
   exit $rc
 }
 trap cleanup_source EXIT

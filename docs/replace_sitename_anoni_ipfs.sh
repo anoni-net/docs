@@ -15,6 +15,14 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i 's|https://anoni.net/docs|https://anoni-net.ipns.dweb.link|g' {} +
 
+# pymdownx snippets（--8<--）的正本放 repo 根目錄（base_path 含 '..'），
+# 例如 community/become-anoni.md 嵌入 ../BECOME_ANONI.md。這些檔在 docs/ 之外，
+# 上面 find ./ 掃不到，build 時會把含 https://anoni.net/docs 的原文 inline 進 output，
+# 害 build_docs_anoni_ipfs.sh 的 sanity check 失敗。先一併改寫 repo 根的 markdown snippet 來源。
+# （build_docs_anoni_ipfs.sh 的 cleanup trap 用 git restore :/ 還原整個 repo）
+find .. -maxdepth 1 -type f -name '*.md' \
+	-exec sed -i 's|https://anoni.net/docs|https://anoni-net.ipns.dweb.link|g' {} +
+
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
