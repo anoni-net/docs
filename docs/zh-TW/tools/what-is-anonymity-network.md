@@ -42,7 +42,7 @@ icon: material/chat-question
 
 若想從區域脈絡與制度壓力理解審查、監控與平台規則如何影響上述工作，可接著閱讀 [網路自由為什麼重要？](../basics/internet-freedom.md)。
 
-## 工具家族怎麼分工
+## 工具家族如何分工
 
 匿名網路不是單一工具能解決的事。本站把工具分成四個層次，每一層處理一類問題，挑跟你情境相關的那一群讀就好。
 
@@ -68,7 +68,7 @@ icon: material/chat-question
 
 - **:material-key-variant: 日常隱私基本功**
 
-    通訊軟體選哪個、密碼怎麼管、要匿名付錢時用什麼工具。三個主題各自獨立，是日常使用就能落地的部分。
+    通訊軟體選哪個、密碼如何管理、要匿名付錢時用什麼工具。三個主題各自獨立，是日常使用就能落地的部分。
 
     [:fontawesome-regular-circle-question: 匿名通訊工具比較](./messaging-comparison.md)
 
@@ -92,7 +92,7 @@ icon: material/chat-question
 
 - [:material-chat-question: 網路自由為什麼重要？](../basics/internet-freedom.md)
 - [:material-chat-question: 匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 
 </div>
 

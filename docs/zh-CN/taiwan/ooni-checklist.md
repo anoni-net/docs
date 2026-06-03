@@ -1,6 +1,6 @@
 ---
 title: OONI 网站检测清单
-description: OONI Probe 在台湾使用的网站检测清单怎么维护，以及社群如何协助分类与更新。
+description: OONI Probe 在台湾使用的网站检测清单如何维护，以及社群如何协助分类与更新。
 icon: material/list-status
 ---
 # :material-list-status: OONI 网站检测清单

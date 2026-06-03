@@ -44,7 +44,7 @@ icon: material/lifebuoy
 
 - 把所有关键账号（Email、银行、社群、云端）的密码换成独立、随机的长密码
 - 全部开启 2FA，优先使用 TOTP（Authy、Aegis 等）或硬件密钥，尽量不用短信
-- 进一步阅读：[密码管理器入门](../tools/password-manager.md)、[威胁模型怎么想](../basics/threat-model.md)
+- 进一步阅读：[密码管理器入门](../tools/password-manager.md)、[威胁模型如何建立](../basics/threat-model.md)
 
 ## 装置遗失或被偷
 

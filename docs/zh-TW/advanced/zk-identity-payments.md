@@ -19,7 +19,7 @@ icon: material/shield-key-outline
 
 「隱私穩定幣」的設計，多半在這四層中挑某幾層做隱匿。四層全部隱匿的設計實際上很少。理解這四層的差別，比記住「哪個幣最匿名」更有幫助。
 
-## Monero 怎麼做：環簽名 + Stealth Address + RingCT
+## Monero 如何做到：環簽名 + Stealth Address + RingCT
 
 Monero 的設計來自 2013 年的 CryptoNote 白皮書，三個核心機制：
 
@@ -35,7 +35,7 @@ Monero 的設計來自 2013 年的 CryptoNote 白皮書，三個核心機制：
 
 代價是區塊鏈體積大、交易驗證計算重、合規挑戰大。多數 KYC 交易所自 2020 年起陸續下架 Monero。
 
-## Zcash 怎麼做：zk-SNARKs 與遮蔽池
+## Zcash 如何做到：zk-SNARKs 與遮蔽池
 
 Zcash 走的是另一條更激進的路線。遮蔽交易（shielded transaction）用 zk-SNARKs（Zero-Knowledge Succinct Non-Interactive Argument of Knowledge）證明：
 

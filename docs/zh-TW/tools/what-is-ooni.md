@@ -47,7 +47,7 @@ icon: material/access-point-network
 
 ## OONI 適合做什麼、不適合做什麼
 
-OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一樣：Tor 與 Tails 給使用者保護自己用，OONI 給社群、媒體、研究者觀測網路環境用。動手前先回頭看 [威脅模型怎麼想](../basics/threat-model.md) 有助於釐清需求是不是真的對得上 OONI 解決的問題。
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一樣：Tor 與 Tails 給使用者保護自己用，OONI 給社群、媒體、研究者觀測網路環境用。動手前先回頭看 [威脅模型如何建立](../basics/threat-model.md) 有助於釐清需求是不是真的對得上 OONI 解決的問題。
 
 **適合**：
 
@@ -137,7 +137,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 - [:material-chat-question: 什麼是匿名網路](./what-is-anonymity-network.md)
 

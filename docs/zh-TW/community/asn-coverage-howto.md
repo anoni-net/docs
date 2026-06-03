@@ -1,12 +1,12 @@
 ---
 title: ASN 觀測資料擷取與分析
-description: anoni-net/docs 提供的 OONI 資料擷取程式怎麼設定與使用，是 ASN 觀測分析的延伸操作指南。
+description: anoni-net/docs 提供的 OONI 資料擷取程式如何設定與使用，是 ASN 觀測分析的延伸操作指南。
 icon: material/database-search
 ---
 
 # :material-database-search: ASN 觀測資料擷取與分析
 
-這頁是 [在地脈絡 → ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 的技術延伸：當你想自己動手抓 OONI 公開資料、計算特定區域 ASN 的觀測覆蓋率時，這篇介紹 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的擷取程式怎麼設定與使用。
+這頁是 [在地脈絡 → ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 的技術延伸：當你想自己動手抓 OONI 公開資料、計算特定區域 ASN 的觀測覆蓋率時，這篇介紹 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的擷取程式如何設定與使用。
 
 開始前建議先讀 [專案研究預先準備](./setup-repo.md) 把開發環境建好。
 

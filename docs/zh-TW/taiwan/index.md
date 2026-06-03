@@ -14,7 +14,7 @@ icon: material/island
 
 對應 anoni.net 長期維運的觀測資料工作，看「台灣的連線環境實際長怎樣」。
 
-- [OONI 網站檢測清單](./ooni-checklist.md)：在地清單怎麼維護、分類與更新，是觀測資料的入門起點。
+- [OONI 網站檢測清單](./ooni-checklist.md)：在地清單如何維護、分類與更新，是觀測資料的入門起點。
 - [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)：台灣各 ASN 的 OONI 測試覆蓋與盲點。
 - [Tor Relays 觀測點](./tor-relay-watcher.md)：台灣 Tor 中繼節點的即時運作狀況與區域比較。
 
@@ -34,4 +34,4 @@ icon: material/island
 
 法律保護的範圍與技術匿名能力之間，存在一段需要討論的距離。
 
-- [揭弊者保護法的技術觀察](./whistleblower-law.md)：2025 年上路的《公益揭弊者保護法》保護什麼、私部門缺口在哪、揭弊者本人怎麼準備。
+- [揭弊者保護法的技術觀察](./whistleblower-law.md)：2025 年上路的《公益揭弊者保護法》保護什麼、私部門缺口在哪、揭弊者本人如何準備。

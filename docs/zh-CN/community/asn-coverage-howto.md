@@ -1,12 +1,12 @@
 ---
 title: ASN 观测资料撷取与分析
-description: anoni-net/docs 提供的 OONI 资料撷取程序怎么设置与使用，是 ASN 观测分析的延伸操作指南。
+description: anoni-net/docs 提供的 OONI 资料撷取程序如何设置与使用，是 ASN 观测分析的延伸操作指南。
 icon: material/database-search
 ---
 
 # :material-database-search: ASN 观测资料撷取与分析
 
-这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己动手抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序怎么设置与使用。
+这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己动手抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序如何设置与使用。
 
 开始前建议先读 [项目研究预先准备](./setup-repo.md) 把开发环境建好。
 

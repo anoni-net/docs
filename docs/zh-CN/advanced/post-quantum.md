@@ -125,7 +125,7 @@ NIST 还在第四轮评估其他基于 code-based、isogeny-based、multivariate
 - [:material-key-chain-variant: 端对端加密如何运作](./e2ee.md)
 - [:material-shield-key-outline: 零知识身份验证与支付](./zk-identity-payments.md)
 - [:material-web-box: 去中心化网站发布](./dweb-ipfs-onion.md)
-- [:material-shield-account-outline: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-shield-account-outline: 威胁模型如何建立](../basics/threat-model.md)
 
 </div>
 

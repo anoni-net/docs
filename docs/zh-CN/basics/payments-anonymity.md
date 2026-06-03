@@ -21,7 +21,7 @@ icon: material/cash-multiple
 
 这四个特性合起来，让金流 metadata 比通讯 metadata、上网 metadata 更难消除。你可以用 Tor 隐藏连线、用 Signal 加密通讯、用 Tails 不留装置痕迹，但你买 Tor 服务的订阅、捐款给开发者、付给律师的咨询费，每一笔都会留下能对应到你的记录。
 
-从威胁模型角度看，这代表：**任何把支付当成行动最后一哩的方案，都需要单独思考金流的匿名性**。详见 [威胁模型怎么想](./threat-model.md)。
+从威胁模型角度看，这代表：**任何把支付当成行动最后一哩的方案，都需要单独思考金流的匿名性**。详见 [威胁模型如何建立](./threat-model.md)。
 
 ## 金流也会被拿来当审查工具
 
@@ -93,7 +93,7 @@ icon: material/cash-multiple
 
 ## 接下来
 
-- 带这个概念进 [威胁模型怎么想](./threat-model.md)，问自己「我的支付行为留下哪些对应到真实身份的痕迹」
+- 带这个概念进 [威胁模型如何建立](./threat-model.md)，问自己「我的支付行为留下哪些对应到真实身份的痕迹」
 - 看 [Metadata 是什么](./metadata.md)，理解金流是 metadata 的一个维度
 - 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（Q2 撰写中）
 - 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)（Q2–Q3 撰写中）

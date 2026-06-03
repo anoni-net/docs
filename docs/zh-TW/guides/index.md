@@ -34,7 +34,7 @@ icon: material/compass-outline
 
 </div>
 
-## 怎麼走這條路徑
+## 如何走這條路徑
 
 不必照順序讀完全部 5 個分類，幾種切入方式：
 

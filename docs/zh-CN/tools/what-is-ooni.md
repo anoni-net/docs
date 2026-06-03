@@ -49,7 +49,7 @@ OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于
 
 ## OONI 适合做什么、不适合做什么
 
-OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网路环境用。动手前先回头看 [威胁模型怎么想](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网路环境用。动手前先回头看 [威胁模型如何建立](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
 
 **适合**：
 
@@ -141,7 +141,7 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: 网路自由为什么重要](../basics/internet-freedom.md)
 - [:material-chat-question: 什么是匿名网路](./what-is-anonymity-network.md)
 

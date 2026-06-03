@@ -8,7 +8,7 @@ icon: material/message-text-outline
 
 「端對端加密」這幾個字在 LINE、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意義差很多。差異涵蓋多個面向：金鑰由誰持有、註冊時要不要綁手機號碼或郵件、Metadata 留在哪個 server、伺服器掉線後還能不能通訊、群組與多裝置的設計選擇。
 
-這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。動手前可以先回頭看 [威脅模型怎麼想](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密如何運作](../advanced/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
+這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。動手前可以先回頭看 [威脅模型如何建立](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密如何運作](../advanced/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
 
 ## 為什麼要分開比較這些工具
 
@@ -18,7 +18,7 @@ icon: material/message-text-outline
 - **預設啟用嗎**：很多工具的 E2EE 是可選功能，要使用者主動切換才生效。
 - **Metadata 留在哪**：訊息內容加密了，「誰跟誰、什麼時候、多頻繁」這層往往沒加密。
 
-LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，所以不在主名單。它們在台灣社交網絡裡仍然不可避免，後面的「在台灣的補充」會說明怎麼分流。
+LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，所以不在主名單。它們在台灣社交網絡裡仍然不可避免，後面的「在台灣的補充」會說明如何分流。
 
 主名單的 5 個工具是社群實際在用、且設計目標就是 E2EE 與 Metadata 最小化的選項。下面先給判讀框架，再開始一個一個介紹。
 
@@ -226,7 +226,7 @@ LINE 不是「加密通訊工具」，是「有部分加密的社交平台」。
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-shield-search: Metadata 是什麼](../basics/metadata.md)
 - [:material-key-chain-variant: 端對端加密如何運作](../advanced/e2ee.md)
 

@@ -8,7 +8,7 @@ icon: material/bullhorn-outline
 
 社运场景的数位风险跟个人匿名不太一样。多数风险来自群组通讯、装置被检查、现场照片与位置信息的暴露，跟你身边还有谁、组织内部记录留在哪、现场有没有人拍到你都有关。这篇文章把一场行动拆成四个阶段来谈：动员前的准备、行动现场、行动之后、跨组织协作。每个阶段配对应的工具与设定，并对照台湾与香港两地行动圈累积的实务。
 
-要先理解风险为什么存在，可以回头看 [威胁模型怎么想](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
+要先理解风险为什么存在，可以回头看 [威胁模型如何建立](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
 
 ## 为什么需要这套流程
 
@@ -271,7 +271,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 - 拍照、转录、截图外传的规则（预设禁止，特例由协调者决定）
 - 消息保留多久（建议 disappearing messages 设 1 週或 1 个月）
 - 新成员加入流程（谁可以拉人、要不要事前讨论）
-- 退出时怎么处理记录（不删历史、自己离开）
+- 退出时如何处理记录（不删历史、自己离开）
 
 ## 台湾的脉络
 
@@ -302,7 +302,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 
 ## 接下来
 
-- [威胁模型怎么想](../basics/threat-model.md)：每场行动前先盘点对手与资产
+- [威胁模型如何建立](../basics/threat-model.md)：每场行动前先盘点对手与资产
 - [Metadata 是什么](../basics/metadata.md)：理解照片、文件背后的元数据
 - [记者保护消息来源](./journalist.md)：跟记者对接时双方都要做的整理
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同场景的取舍
