@@ -37,7 +37,7 @@ icon: material/folder-search-outline
 
 ## 已完成的事
 
-- **VASP 法律觀察**：行政院 2026 年 4 月透過《虛擬資產服務法》草案後，社群完成首篇 [blog 觀察文](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)，整理草案架構、罰則、與業界公協會在公聽會的角色，並進一步把它整理為 [長期參考文件](../taiwan/vasp-2026.md)。
+- **VASP 法律觀察**：行政院 2026 年 4 月透過《虛擬資產服務法》草案後，社群完成首篇 [blog 觀察文](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)，整理草案架構、罰則、與業界公協會在公聽會的角色，並進一步把它整理為 [長期參考文件](../taiwan/vasp-2026.md)。2026-05 再補入證交所、櫃買中心發布的企業持有端會計與內控兩指引。
 - **g0v Hackath71n 議題提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主題討論，集結初步參與意願。
 - **COSCUP 2026 議程合作**：與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 達成議程合作，第二天（8/9）會聯合舉辦匿名支付主題場次，徵稿與聯合審稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
 - **架構落地**：在文件站的 7 大分類中明確分配支付主題的位置，避免另開獨立分類造成結構碎裂。
