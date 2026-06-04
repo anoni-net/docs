@@ -8,6 +8,29 @@ icon: material/code-tags
 
 Arti 是 [Tor Project](../tools/what-is-tor.md) 以 Rust 开发的新一代 Tor 实现。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## c-tor 移植到 Rust 的进度
+
+Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor（社群惯称 c-tor）整套以 Rust 重写，换取更好的内存安全、模块化架构与可嵌入性。开发顺序先把客户端补到足以取代 c-tor，再往中继端推进。下表依据官方 [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"} 与 release notes 整理，状态以实际发布的功能为准。
+
+| 功能领域 | 进度 | 完成 / 进行的版本 |
+|---|---|---|
+| 客户端核心（SOCKS 代理、`arti-client` 嵌入库） | ✅ 已完成，宣告 stable | 1.0.0（2022-09） |
+| DNS 代理 | ✅ 已完成 | 1.0.0（2022-09） |
+| 抗审查：桥接与 pluggable transports（obfs4、Snowflake、WebTunnel） | ✅ 已完成 | 1.1.0（2022-11） |
+| 连接 onion 服务（客户端） | ✅ 已完成 | 1.1.6（2023-06） |
+| 架设 onion 服务（服务端，含 full vanguards、限制性发现、客户端授权） | ✅ 已完成 | 1.2.0（2024-03）起 |
+| RPC 控制接口（取代 c-tor 的 control port） | ✅ 已完成，转 stable | 1.4.2（2025-03） |
+| HTTP CONNECT 代理 | ✅ 已完成，默认启用 | 2.2.0（2026-03） |
+| 流量控制与拥塞控制（`flowctl-cc`，为 conflux 铺路） | ✅ 已完成，转 stable | 2.4.0（2026-06） |
+| 嵌入非 Rust 语言（C FFI） | 🟡 RPC client 已有 C 友好接口，完整 FFI 规划中 | 进行中 |
+| 中继（relay）：circuit reactor、relay channel、握手响应、TLS server 端 | 🟡 开发中，尚不可用 | 2.0.0（2026-02）起 |
+| 目录权威（directory authority）：证书管理、目录缓存 | 🟡 开发中，尚不可用 | 2.0.0（2026-02）起 |
+| control-port 协议兼容 | ⬜ 不另行实现，改以 RPC 取代 | — |
+
+图例：✅ 已完成　🟡 开发中　⬜ 不实现
+
+客户端这一侧的能力已大致对齐 c-tor，能当 SOCKS 代理、连接与架设 onion 服务、走桥接与 pluggable transports。计划现在的主力放在中继端，relay 与 directory authority 仍在开发，还无法用 Arti 架设 Tor 中继，这部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 接口取代，设计取向不同。
+
 ## Arti 2.4.0
 
 > 2026-06-01 · [上游公告](https://blog.torproject.org/arti_2_4_0_released/){target="_blank"}
