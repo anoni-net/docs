@@ -11,7 +11,8 @@
     python3 tools/docs_style_lint.py --format json <path>
 
 掃描前會剝除 fenced code、inline code、HTML 註解、Markdown 連結的 URL 與裸 URL，
-避免在程式碼與網址上誤判。front matter 不套用內文標點規則，只做欄位檢查。
+避免在程式碼與網址上誤判。front matter 不套用內文標點規則，只做欄位檢查。表格空
+資料格用破折號當佔位（| — |）是正當用法，不觸發 em-dash 規則。
 
 exit code：有任一 error 回 1，否則回 0（warn 不影響 exit code）。
 """
@@ -121,6 +122,20 @@ def strip_noise(line: str, state: dict) -> str:
     return out
 
 
+def in_empty_table_cell(clean: str, pos: int) -> bool:
+    """clean 行中 pos 位置的破折號，是否為「整格只有一個破折號」的表格空資料格。
+
+    表格用 `| — |` 表示該格無資料是正當寫法，不該套用 em-dash 插入語規則。判定條件：
+    位置左右最近的 `|` 之間、去空白後剛好只有一個破折號。其餘情況（插入語、與文字
+    混在同一格）仍會被標記。
+    """
+    left = clean.rfind("|", 0, pos)
+    right = clean.find("|", pos)
+    if left == -1 or right == -1:
+        return False
+    return clean[left + 1:right].strip() == "—"
+
+
 def lint_file(path: Path):
     findings = []
     try:
@@ -171,6 +186,9 @@ def lint_file(path: Path):
             continue
         for code, sev, rx, msg in PROSE_RULES:
             for m in rx.finditer(clean):
+                # 表格空資料格的破折號佔位（| — |）放行，只有整格就是一個破折號才算
+                if code == "em-dash" and in_empty_table_cell(clean, m.start()):
+                    continue
                 snippet = raw[max(0, m.start() - 8): m.start() + 12].strip()
                 findings.append((i, sev, code, msg, snippet))
         if AI_OPENER_RE.search(clean):

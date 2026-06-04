@@ -41,7 +41,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 | 規則代碼 | 嚴重度 | 內容 |
 |---|---|---|
-| `em-dash` | error | 破折號「—」當插入語 |
+| `em-dash` | error | 破折號「—」當插入語（表格空資料格 `| — |` 放行）|
 | `semicolon` | error | 全形分號「；」 |
 | `fullwidth-slash` | error | 全形「／」 |
 | `bushi-ershi` | error | 「不是…而是…」句型 |
@@ -67,7 +67,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 ## 已知邊界（會誤報或需人判斷）
 
-- `em-dash`：若破折號出現在外部專有名詞的連結文字（例 `[Cloudflare Radar — Iran](...)`），會被標記。必要時改寫標籤或人工放行。
+- `em-dash`：若破折號出現在外部專有名詞的連結文字（例 `[Cloudflare Radar — Iran](...)`），會被標記。必要時改寫標籤或人工放行。表格空資料格 `| — |`（整格只有一個破折號）已自動放行，破折號跟其他文字混在同一格仍會被標記。
 - `colloquial-jiang`、`definition-phrasing`：列為 warn 而非 error，因為「講清楚」、「指的是什麼呢」等仍有正當用法，只當提醒。
 
 ## 關閉特定檢查
