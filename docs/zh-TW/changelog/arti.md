@@ -8,6 +8,15 @@ icon: material/code-tags
 
 Arti 是 [Tor Project](../tools/what-is-tor.md) 以 Rust 開發的新一代 Tor 實作。本頁從上游 release notes 條列摘譯，新版本永遠在最上面。
 
+## Arti 2.4.0
+
+> 2026-06-01 · [上游公告](https://blog.torproject.org/arti_2_4_0_released/){target="_blank"}
+
+- 持續往「Arti 作為 Tor 中繼」與「Arti 作為 directory authority」開發。
+- 修補多個影響 onion 服務用戶端連線的錯誤。
+- 流量控制與壅塞控制（flow control / congestion control）正式列為穩定，編譯時啟用 `flowctl-cc` feature 即可使用。
+- `arti-client` crate 出現多項 `TorClient` API 破壞性變更，並移除 `use_obsolete_software` 選項（#1960），對應 2.3.0 預告的介面調整。
+
 ## Arti 2.3.0
 
 > 2026-05-07 · [上游公告](https://blog.torproject.org/arti_2_3_0_released/){target="_blank"}

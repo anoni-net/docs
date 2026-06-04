@@ -8,6 +8,12 @@ icon: material/code-tags
 
 Arti 是 [Tor Project](../tools/what-is-tor.md) 以 Rust 开发的新一代 Tor 实现。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Arti 2.4.0
+
+> 2026-06-01 · [上游公告](https://blog.torproject.org/arti_2_4_0_released/){target="_blank"}
+
+- 持续推进「Arti 作为 Tor 中继」与「Arti 作为 directory authority」开发、修补多个影响 onion 服务客户端连接的错误、流量控制与拥塞控制（flowctl-cc）正式列为稳定、`arti-client` 的 `TorClient` API 出现多项破坏性变更。
+
 ## Arti 2.2.0
 
 > 2026-03-31 · [上游公告](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
@@ -25,3 +31,7 @@ Arti 是 [Tor Project](../tools/what-is-tor.md) 以 Rust 开发的新一代 Tor 
 > 2025-03-16 · [上游公告](https://blog.torproject.org/arti_1_4_1_released/){target="_blank"} · [完整翻译文章](../blog/posts/arti-141.md)
 
 - Arti 客户端例行更新，包含错误修正与稳定性改善，为后续中继支持与 RPC 工作铺路。
+
+!!! info "更早的 Arti 版本"
+
+    Arti 2.3.0 的完整摘要目前仅在 [正体中文版](https://anoni.net/docs/changelog/arti/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
