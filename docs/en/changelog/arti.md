@@ -8,6 +8,12 @@ icon: material/code-tags
 
 Arti is the Tor Project's next-generation Tor implementation written in Rust. Newest at the top. Each entry links back to the full translation.
 
+## Arti 2.4.0
+
+> 2026-06-01 · [Upstream announcement](https://blog.torproject.org/arti_2_4_0_released/){target="_blank"}
+
+- Continued development toward running Arti as a relay and as a directory authority, fixes for several onion service client connectivity bugs, flow control and congestion control (flowctl-cc) now stable, and multiple breaking changes to the `arti-client` `TorClient` APIs.
+
 ## Arti 2.2.0
 
 > 2026-03-31 · [Upstream announcement](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [Full translation](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
@@ -16,4 +22,4 @@ Arti is the Tor Project's next-generation Tor implementation written in Rust. Ne
 
 !!! info "Earlier versions"
 
-    Translations of Arti 2.1.0 and 1.4.1 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/arti/){target="_blank"}. English versions will be added as the community translates them.
+    Translations of Arti 2.3.0, 2.1.0, and 1.4.1 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/arti/){target="_blank"}. English versions will be added as the community translates them.
