@@ -89,8 +89,13 @@ done
 
 if [ -n "$OLD_CID" ]; then
     OLD_HASH="${OLD_CID#/ipfs/}"
-    echo "[upload] Unpin 舊版本: $OLD_HASH"
-    ipfs $IPFS_API pin rm "$OLD_HASH" 2>/dev/null || echo "[upload] Unpin 失敗（可能已移除），繼續"
+    if [ "$OLD_HASH" = "$NEW_CID" ]; then
+        # 內容未變時 add 出的 CID 會與舊版相同，這時 unpin + 後續 repo gc 會把剛發布的內容刪掉。
+        echo "[upload] 內容未變（CID 與舊版相同 $NEW_CID），跳過 unpin 以免移除剛發布的內容"
+    else
+        echo "[upload] Unpin 舊版本: $OLD_HASH"
+        ipfs $IPFS_API pin rm "$OLD_HASH" 2>/dev/null || echo "[upload] Unpin 失敗（可能已移除），繼續"
+    fi
 fi
 
 echo "[upload] 執行 repo GC..."
