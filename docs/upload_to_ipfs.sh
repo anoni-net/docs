@@ -60,17 +60,42 @@ echo "[upload] 新 CID: $NEW_CID"
 
 echo "[upload] 發布 IPNS ([anoni-net] key)..."
 # --lifetime=720h：DHT 上的 IPNS record 30 天內有效，避免 gateway 解析時找不到（預設 24h 對非每日 deploy 太短）
-# --ttl=5m：客戶端 cache IPNS 解析結果 5 分鐘，平衡解析效能與更新延遲
+# --ttl=1m：客戶端/閘道 cache IPNS 解析結果 1 分鐘，縮短發布後換新版的空窗。
+#          配合節點已開的 Routing.AcceleratedDHTClient（ipfs_host），重新解析很便宜，壓低 ttl 划算。
 ipfs $IPFS_API name publish \
     --key=anoni-net \
     --lifetime=720h \
-    --ttl=5m \
+    --ttl=1m \
     "/ipfs/$NEW_CID"
+
+# 主動把新 CID 宣告到 DHT（root 即可，閘道連上本節點後會用 bitswap 抓其餘區塊）。
+# 配合 Accelerated DHT Client，provide 很快；非致命，失敗不中斷發布。
+echo "[upload] provide 新 CID 到 DHT..."
+ipfs $IPFS_API routing provide "$NEW_CID" || echo "[upload] provide 非致命失敗，繼續"
+
+# Pre-warm 公開閘道：先抓一次，逼閘道解析並把內容收進邊緣快取，縮短第一個訪客的等待。
+# 三個目標：dweb.link/ipfs.io 用新 CID 直接暖內容；DNSLink 網址觸發重新解析。全部非致命。
+echo "[upload] Pre-warm 公開閘道..."
+for gw in \
+    "https://dweb.link/ipfs/$NEW_CID/" \
+    "https://ipfs.io/ipfs/$NEW_CID/" \
+    "https://anoni-net.ipns.dweb.link/"; do
+    if curl -fsS -o /dev/null --max-time 60 "$gw"; then
+        echo "[upload]   warmed: $gw"
+    else
+        echo "[upload]   warm 失敗（略過）: $gw"
+    fi
+done
 
 if [ -n "$OLD_CID" ]; then
     OLD_HASH="${OLD_CID#/ipfs/}"
-    echo "[upload] Unpin 舊版本: $OLD_HASH"
-    ipfs $IPFS_API pin rm "$OLD_HASH" 2>/dev/null || echo "[upload] Unpin 失敗（可能已移除），繼續"
+    if [ "$OLD_HASH" = "$NEW_CID" ]; then
+        # 內容未變時 add 出的 CID 會與舊版相同，這時 unpin + 後續 repo gc 會把剛發布的內容刪掉。
+        echo "[upload] 內容未變（CID 與舊版相同 $NEW_CID），跳過 unpin 以免移除剛發布的內容"
+    else
+        echo "[upload] Unpin 舊版本: $OLD_HASH"
+        ipfs $IPFS_API pin rm "$OLD_HASH" 2>/dev/null || echo "[upload] Unpin 失敗（可能已移除），繼續"
+    fi
 fi
 
 echo "[upload] 執行 repo GC..."
