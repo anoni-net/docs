@@ -8,7 +8,10 @@ sh ./run_zh-cn.sh
 sh ./replace_og.sh
 rm -rf /srv/anoni-net/anoni-net/website/docs/*
 cp -r ./output/* /srv/anoni-net/anoni-net/website/docs/
-# 預壓 search_index.json：Cloudflare 對 >1MB 的 JSON 不做 edge 壓縮，
-# 改由 nginx gzip_static always 直接吐預壓好的 .gz（搭配 anoni.net vhost 的 location 設定）
-find /srv/anoni-net/anoni-net/website/docs -name 'search_index.json' -exec gzip -9 -k -f {} \;
+# 預壓 >=100KB 的可壓縮檔：Cloudflare 對大檔的 edge 壓縮不可靠（連數百 KB 都可能放棄），
+# 改由 nginx gzip_static always 直接送預壓好的 .gz。小檔交給 Cloudflare 即時壓即可。
+find /srv/anoni-net/anoni-net/website/docs -type f \
+  \( -iname '*.json' -o -iname '*.js' -o -iname '*.css' -o -iname '*.html' \
+     -o -iname '*.xml' -o -iname '*.svg' -o -iname '*.txt' \) \
+  -size +100k ! -iname '*.gz' -exec gzip -9 -k -f {} \;
 sudo chown -R ubuntu:nginx /srv/anoni-net/anoni-net/website/docs/*
