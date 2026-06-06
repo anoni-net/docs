@@ -43,6 +43,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/asia-travel.md
       - !ENV [NAV_ADVANCED, "进阶"]:
           - advanced/index.md
           - advanced/e2ee.md
