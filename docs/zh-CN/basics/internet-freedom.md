@@ -6,7 +6,7 @@ icon: material/chat-question
 
 # :material-chat-question: 网络自由为什么重要
 
-在这里，**网络自由**指的是：人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](../tools/what-is-anonymity-network.md)。
+在这里，**网络自由**关注人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](../tools/what-is-anonymity-network.md)。
 
 !!! info "关于 anoni.net"
 
