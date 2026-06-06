@@ -96,5 +96,5 @@ Beyond consuming this data, anoni.net runs the [Pulse](https://github.com/anoni-
 [^7]: [Malaysia: World Report 2024 — Human Rights Watch](https://www.hrw.org/world-report/2024/country-chapters/malaysia){target="_blank"}.
 [^8]: [Philippines: Press freedom and the prosecution of Rappler — Reporters Without Borders](https://rsf.org/en/country/philippines){target="_blank"}.
 [^9]: [Thailand: Lèse-majesté prosecutions — Human Rights Watch](https://www.hrw.org/asia/thailand){target="_blank"}.
-[^10]: [Freedom House — Taiwan country page (Freedom on the Net)](https://freedomhouse.org/country/taiwan/freedom-net/2024){target="_blank"}; year and URL change with each edition.
+[^10]: [Freedom House — Taiwan country page (Freedom on the Net)](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}; year and URL change with each edition.
 [^11]: [Myanmar: Internet shutdowns and crackdown on independent media after the 2021 coup — Human Rights Watch](https://www.hrw.org/world-report/2024/country-chapters/myanmar){target="_blank"}.
