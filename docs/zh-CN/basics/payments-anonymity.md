@@ -72,14 +72,14 @@ icon: material/cash-multiple
 现金以外的「比较匿名」支付方案，光谱大致是：
 
 - **预付礼物卡、超商代码**：可现金购买，但平台层面可被追踪、有金额上限
-- **隐私币（Monero、Zcash 屏蔽交易）**：协议层面默认或可选的隐私强化，但取得与兑换阶段仍有摩擦
+- **隐私币（Monero、Zcash 屏蔽交易）**：协议层面默认或可选的隐私强化，但取得与兑换阶段的摩擦近年明显增加。Binance 在 2024 年 2 月全球下架 Monero 等隐私币，Kraken 则因应欧盟 MiCA（加密资产市场监理法）与反洗钱规范，在 2024 年对 EEA（欧洲经济区）用户下架 Monero，用法币换到隐私币这一步变得更难
 - **比特币、以太坊**：交易公开可查，但取得管道（去中心化交易所、P2P）能影响可追溯性
 - **稳定币**：法定货币连动的链上资产，便于支付但隐私取决于所在链与取得方式
 - **多重签署 + 分层账户**：把账户结构化拆解，让单一账户无法对应到单一个人。属于配套做法，不直接提供匿名，但能降低图谱的可追溯度
 
 每一个选项都有取舍：技术门槛、合法性、对手方接受度、波动性、税务影响。没有「最匿名」的单一答案，只有「对应你的威胁模型最合适」的组合。
 
-工具层面的详细比较见 [加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（撰写中）。
+工具层面的详细比较见 [加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)。
 
 ## 法规面：合法是前提
 
@@ -95,8 +95,8 @@ icon: material/cash-multiple
 
 - 带这个概念进 [威胁模型如何建立](./threat-model.md)，问自己「我的支付行为留下哪些对应到真实身份的痕迹」
 - 看 [Metadata 是什么](./metadata.md)，理解金流是 metadata 的一个维度
-- 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（Q2 撰写中）
-- 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)（Q2–Q3 撰写中）
-- 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)（Q2–Q3 撰写中）
+- 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)
+- 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)
+- 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)
 - 台湾案例：[台湾 VASP 法 2026](../taiwan/vasp-2026.md)
 - 社群研究入口：[匿名支付研究专题](../community/payments-research.md)

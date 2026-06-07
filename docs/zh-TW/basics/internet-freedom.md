@@ -43,7 +43,7 @@ icon: material/chat-question
 
 ## 區域脈絡：為什麼這在台灣也值得關注
 
-台灣的連線環境放在區域裡面看仍是相對開放的，但「相對」承擔的條件來自鄰近地區的具體事件。中國的「長城防火牆[^1]」長期過濾大量國際網站，並對境內平台內容進行政治、宗教、社會議題的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管的內部網路「光明網[^2]」。東南亞各地有越南要求平台下架政治性批評內容[^3]、印尼對特定類別網站封鎖[^4]、馬來西亞針對調查報導媒體的封鎖[^5]、菲律賓在選舉時期的監控與干預[^6]、泰國對皇室相關言論的刑事追訴[^7]、緬甸 2021 年政變後反覆斷網[^8][^9]。台灣則仍面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力，分數與敘事會隨年度更新[^10]。
+台灣的連線環境放在區域裡面看仍是相對開放的，但「相對」承擔的條件來自鄰近地區的具體事件。中國的「長城防火牆[^1]」長期過濾大量國際網站，並對境內平台內容進行政治、宗教、社會議題的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管的內部網路「光明網[^2]」。東南亞各地有越南要求平台下架政治性批評內容[^3]、印尼對特定類別網站封鎖[^4]、馬來西亞針對調查報導媒體的封鎖[^5]、菲律賓在選舉時期的監控與干預[^6]、泰國對皇室相關言論的刑事追訴[^7]、緬甸 2021 年政變後反覆斷網[^8][^9]。除了封鎖網站，管制也延伸到工具與使用者本身。印尼自 2026 年 3 月起，率先在東南亞禁止未滿 16 歲者使用社群媒體[^12]。緬甸則在 2025 年通過資安法（Cybersecurity Law），把未經許可提供 VPN 入罪[^13]。台灣則仍面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力，分數與敘事會隨年度更新[^10]。
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
@@ -55,7 +55,7 @@ icon: material/chat-question
     <capture>Freedom House「Freedom on the Net」互動地圖（各國分數隨年度報告更新，畫面為站內示意截圖）</capture>
 </figure>
 
-「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。
+「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。2025 年 9 月再有大量防火長城內部資料外流（超過 500GB，來自承包商 Geedge Networks 與中國科學院旗下 MESA Lab），文件顯示這套技術已輸出到哈薩克、衣索比亞、緬甸、巴基斯坦等國，並提及另一個未具名國家，讓外界長期推測的「把審查系統當產品輸出」首次有了內部文件層級的佐證[^11]。
 
 亞太地區的封鎖與干預需要可被驗證的公開紀錄。OONI 透過志工探測讓特定網路與規避工具的可及性以圖表與開放資料呈現。
 
@@ -100,4 +100,7 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 [^7]: [泰國王室罵不得！男子臉書PO文惹禍 遭判刑50年破紀錄](https://udn.com/news/story/6812/7721452){target="_blank"} - 聯合新聞網
 [^8]: [緬甸被徹底剝奪的新聞自由：報導颶風災害的記者遭軍政府判刑20年監禁](https://feja.org.tw/72219/){target="_blank"} - 卓越新聞獎基金會
 [^9]: [封鎖、斷網、審查：從緬甸政變看「網路中立權」的重要性](https://lab.ocf.tw/2022/02/12/mymmar-block/){target="_blank"} - OCF Lab 開放實驗室
-[^10]: [Freedom House：Taiwan（Freedom on the Net 國別條目）](https://freedomhouse.org/country/taiwan/freedom-net/2024){target="_blank"}（年度與網址隨報告更新，若連結失效請改從[互動地圖](https://freedomhouse.org/explore-the-map)進入）
+[^10]: [Freedom House：Taiwan（Freedom on the Net 國別條目）](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}（年度與網址隨報告更新，若連結失效請改從[互動地圖](https://freedomhouse.org/explore-the-map)進入）
+[^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
+[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另見 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付費牆，標題即點明東南亞首例）
+[^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia
