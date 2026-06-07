@@ -20,7 +20,7 @@ icon: material/chat-question
 
 中国的「长城防火墙[^1]」长期过滤大量国际网站与服务，并对境内平台内容进行政治、宗教与社会议题上的审查。朝鲜则将一般民众与全球互联网几乎隔绝，仅能使用国家管控下的内部网络「光明网[^2]」。
 
-2025 年 9 月，大量长城防火墙内部资料外流（超过 500GB，来自承包商 Geedge Networks 与中国科学院旗下 MESA Lab），文件显示这套审查与监控技术已向外输出，至少涵盖哈萨克斯坦、埃塞俄比亚、缅甸、巴基斯坦等五个国家[^11]。这让「把审查系统当产品输出」从外界推测，变成有内部文件层级的佐证。
+2025 年 9 月，大量长城防火墙内部资料外流（超过 500GB，来自承包商 Geedge Networks 与中国科学院旗下 MESA Lab），文件显示这套审查与监控技术已向外输出，至少涵盖哈萨克斯坦、埃塞俄比亚、缅甸、巴基斯坦等国，并提及另一个未具名国家[^11]。这让「把审查系统当产品输出」从外界推测，变成有内部文件层级的佐证。
 
 区域内各地的开放程度差异很大。即使是相对开放的地区（如台湾[^10]），也面对跨境平台治理、信息安全与政治性操纵的讨论，以及对新闻与倡议工作者的法律与舆论压力。各国分数与叙事会随调查年度更新，建议用 Freedom House 互动地图逐国查阅。
 
@@ -92,5 +92,5 @@ icon: material/chat-question
 [^9]: [封锁、断网、审查：从缅甸政变看「网络中立权」的重要性](https://lab.ocf.tw/2022/02/12/mymmar-block/){target="_blank"} - OCF Lab 开放实验室
 [^10]: [Freedom House：Taiwan（Freedom on the Net 国别条目）](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}（年度与网址随报告更新，若链接失效请改从[互动地图](https://freedomhouse.org/explore-the-map)进入）
 [^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
-[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST
+[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另见 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付费墙，标题即点明东南亚首例）
 [^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia

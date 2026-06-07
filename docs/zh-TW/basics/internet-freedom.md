@@ -55,7 +55,7 @@ icon: material/chat-question
     <capture>Freedom House「Freedom on the Net」互動地圖（各國分數隨年度報告更新，畫面為站內示意截圖）</capture>
 </figure>
 
-「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。2025 年 9 月再有大量防火長城內部資料外流（超過 500GB，來自承包商 Geedge Networks 與中國科學院旗下 MESA Lab），文件顯示這套技術已輸出到哈薩克、衣索比亞、緬甸、巴基斯坦等至少五個國家，讓外界長期推測的「把審查系統當產品輸出」首次有了內部文件層級的佐證[^11]。
+「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。2025 年 9 月再有大量防火長城內部資料外流（超過 500GB，來自承包商 Geedge Networks 與中國科學院旗下 MESA Lab），文件顯示這套技術已輸出到哈薩克、衣索比亞、緬甸、巴基斯坦等國，並提及另一個未具名國家，讓外界長期推測的「把審查系統當產品輸出」首次有了內部文件層級的佐證[^11]。
 
 亞太地區的封鎖與干預需要可被驗證的公開紀錄。OONI 透過志工探測讓特定網路與規避工具的可及性以圖表與開放資料呈現。
 
@@ -102,5 +102,5 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 [^9]: [封鎖、斷網、審查：從緬甸政變看「網路中立權」的重要性](https://lab.ocf.tw/2022/02/12/mymmar-block/){target="_blank"} - OCF Lab 開放實驗室
 [^10]: [Freedom House：Taiwan（Freedom on the Net 國別條目）](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}（年度與網址隨報告更新，若連結失效請改從[互動地圖](https://freedomhouse.org/explore-the-map)進入）
 [^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
-[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST
+[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另見 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付費牆，標題即點明東南亞首例）
 [^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia
