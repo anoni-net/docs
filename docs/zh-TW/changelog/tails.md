@@ -8,6 +8,15 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 作業系統的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。
 
+## Tails 7.8.1
+
+> 2026-06-04 · [上游公告](https://tails.net/news/version_7.8.1/){target="_blank"}
+
+- 緊急安全更新，修補 Linux 核心重大漏洞與 Tor 用戶端的多個安全漏洞。
+- 修補 Linux 核心漏洞 CVE-2026-43503（核心升至 6.12.90-2），此漏洞可讓 Tails 內的應用程式取得管理員權限，配合其他未知漏洞可能被用於完整接管 Tails 並進行去匿名化。目前尚未發現實際被利用案例。
+- Tor 用戶端升至 0.4.9.9，修補多個安全漏洞。
+- 此版為安全專用的緊急釋出，未變動 Tor Browser、Thunderbird 與 Debian 底層版本，沿用 7.8 的軟體組合。可從 Tails 7.0 以後版本自動升級。
+
 ## Tails 7.8
 
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
