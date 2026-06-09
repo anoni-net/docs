@@ -200,6 +200,7 @@ After running the items above, copy the key contacts from section 4 (emergency c
 
 - [Regional observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [Basics: networked freedom](../basics/internet-freedom.md) — the conceptual frame behind these scenarios.
+- [The thinking behind this page (blog)](../blog/posts/travel-ai-briefing.md) — why we package the questions worth asking into a prompt pack you run on your own trusted AI.
 
 ---
 
