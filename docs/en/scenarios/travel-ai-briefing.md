@@ -61,6 +61,8 @@ This page is **not** a per-country data table. It works for **any destination**:
 
 ## The questions (copy one at a time)
 
+Each block below is one question. Send them one at a time: copy a question, send it, read the AI's answer and check it against the primary sources at the bottom, then paste the next one. The priming prompt is set up for one-at-a-time answers, so asking each question separately gives fuller answers and is easier to verify item by item. Pasting them all at once tends to produce a single vague, merged reply that is harder to check.
+
 ### 1. Digital environment: censorship, Tor, VPN, device search
 
 ```text
