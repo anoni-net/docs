@@ -6,8 +6,15 @@ categories:
     - 社群
     - 隱私
 slug: travel-ai-briefing
+image: "https://assets.anoni.net/blog/travel-ai-briefing.png"
 summary: "新頁面上線：把出國前該問的數位安全問題打包成可複製的 prompt，帶回去問你自己信任的 AI，產出目的地的行前概況。"
 description: "我們把出國前該查的網路審查、法律、SIM 與緊急聯絡整理成一包 prompt，你帶回去問自己信任的 AI 就能產出目的地概況，敏感查詢不會經過我們。"
+og:
+  enabled: true
+  image: https://assets.anoni.net/blog/travel-ai-briefing.png
+  image_width: 1536
+  image_height: 1024
+  twitter_card: summary_large_image
 ---
 
 # 出國前數位安全：把該問的問題，帶回去問你自己的 AI
