@@ -17,6 +17,7 @@ icon: material/island
 - [OONI 網站檢測清單](./ooni-checklist.md)：在地清單如何維護、分類與更新，是觀測資料的入門起點。
 - [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)：台灣各 ASN 的 OONI 測試覆蓋與盲點。
 - [Tor Relays 觀測點](./tor-relay-watcher.md)：台灣 Tor 中繼節點的即時運作狀況與區域比較。
+- [onionoo MCP：用一句中文查 Tor 節點現況](../community/onionoo-mcp.md)：社群自架的查詢服務，不用寫程式，在 claude.ai 接上後直接問台灣與各地有多少 Tor 中繼、頻寬多大、落在哪些電信網路。
 
 ### 個資與身分
 
