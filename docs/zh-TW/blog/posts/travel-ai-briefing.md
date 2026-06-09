@@ -19,6 +19,15 @@ og:
 
 # 出國前數位安全：把該問的問題，帶回去問你自己的 AI
 
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/travel-ai-briefing.png" target="_blank">
+        <img src="https://assets.anoni.net/blog/travel-ai-briefing.png"
+            alt="插圖：左側一個 AI 助理把散落的資料卡片（Wi-Fi、定位、鎖頭、SIM、QR 等）收攏，沿著虛線整理成右側一張有盾牌外框的行前概況清單，上方有一架飛機與航線弧線"
+            title="把散落各處的情報，整理成一份有保護的行前概況"
+            class="brand-frame">
+    </a>
+</figure>
+
 出國前大家都會查簽證、插頭、換匯，卻很少有人查「我要去的地方，網路被怎麼管？我的工作在那裡合不合法？出事打給誰？」對記者、人權工作者、NGO 成員與研究者來說，這些才是真正影響安全的問題，難的是出發前你根本不知道該問什麼。
 
 <!-- more -->
