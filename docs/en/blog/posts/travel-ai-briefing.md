@@ -32,12 +32,12 @@ Before a trip you check visas, plug types, and currency. Few people check how th
 
 <!-- more -->
 
-Those answers are scattered across censorship measurements, foreign-ministry advisories, and the news, and nobody reads through them line by line. An AI assistant is good at pulling that kind of scattered information together; the catch is that the questions worth asking are rarely the ones that come to mind. Things like "will border control search my phone or ask me to unlock it", or "which VPNs still work on arrival, and does Signal connect" — you won't necessarily think of them, and the wrong question gets you a tourist's answer.
+Those answers are scattered across censorship measurements, foreign-ministry advisories, and the news, and nobody reads through them line by line. An AI assistant is good at pulling that kind of scattered information together. The catch is that the questions worth asking are rarely the ones that come to mind. Things like "will border control search my phone or ask me to unlock it", or "which VPNs still work on arrival, and does Signal connect" — you won't necessarily think of them, and the wrong question gets you a tourist's answer.
 
 So we built a page that packs those right questions into a set of copy-paste prompts. You paste them into an AI you trust, the ChatGPT or Claude you already use, or a local model you run yourself, and it pulls the destination's censorship, legal, SIM, and emergency-contact picture into a single pre-departure briefing.
 
 Splitting it this way keeps your destination and identity off our servers, while the questions themselves stay open and fixed for anyone to check. The same pack works for any country, so changing destination doesn't mean starting over.
 
-The full priming prompt and the dozen-plus questions are on [Pre-departure digital safety — brief yourself with AI prompts](../../scenarios/travel-ai-briefing.md); copy and you are ready to start.
+The full priming prompt and the dozen-plus questions are on [Pre-departure digital safety — brief yourself with AI prompts](../../scenarios/travel-ai-briefing.md) — copy and you are ready to start.
 
 If you have on-the-ground experience for a specific destination, come share it through the channels on our [Community](../../community/index.md) page, or send it anonymously to [whisper@anoni.net](mailto:whisper@anoni.net).
