@@ -13,6 +13,9 @@ This page is **not** a per-country data table. It works for **any destination**:
 !!! note "Why copy-paste prompts instead of an online lookup tool"
     We deliberately do **not** run this as an "enter a destination, get an answer" service. For this audience, the query itself — "I'm going to country X, I'm a journalist, dates are Y" — is sensitive intelligence; on any server it gets logged and could be subpoenaed or leaked. By having you copy text and ask **your own** AI, **your destination and identity never reach us**. The trade-off is that answer quality depends on which AI you use — so always cross-check against the primary sources at the bottom of this page.
 
+!!! tip "Pasting into a cloud AI still leaks to that provider"
+    Even though it doesn't go through us, pasting your query into a cloud AI (ChatGPT, Claude, Gemini, etc.) still lets that provider see it. For **sensitive destinations**, use a local/self-hosted model, or at least use the "low-data" priming prompt below: fill in only the country, never your name, organization, or exact dates.
+
 ## How to use it
 
 1. **Fill in once**: in the "priming prompt", replace `{origin}`, `{destination}`, and `{length of stay}` with your details (dates and role are optional), then paste it into your AI.
@@ -21,9 +24,6 @@ This page is **not** a per-country data table. It works for **any destination**:
 
 !!! warning "AI will fabricate phone numbers, laws, and prices"
     Language models are very good at sounding confident while being wrong. Treat the AI's reply as a starting list of *what to check next*, not as the final answer — especially emergency numbers, legal citations, visa rules, and tariffs. **Always** verify those against official primary sources.
-
-!!! tip "Pasting into a cloud AI still leaks to that provider"
-    Even though it doesn't go through us, pasting your query into a cloud AI (ChatGPT, Claude, Gemini, etc.) still lets that provider see it. For **sensitive destinations**, use a local/self-hosted model, or at least use the "low-data" priming prompt below: fill in only the country, never your name, organization, or exact dates.
 
 ## Priming prompt (paste this first)
 
@@ -164,7 +164,7 @@ line of work, and should be avoided?
 
 ## Turn the results into a pocket emergency card
 
-After running the items above, copy the key contacts onto a card, print and laminate it, keep one in your wallet and one in your luggage, and also save it to an offline note on your phone and (if you use one) Tails. Blank template:
+After running the items above, copy the key contacts from section 4 (emergency contacts and support network) onto a card, print and laminate it, keep one in your wallet and one in your luggage, and also save it to an offline note on your phone and (if you use one) Tails. Blank template:
 
 ```text
 [Digital security incident] Access Now Digital Security Helpline (24/7, multilingual)
