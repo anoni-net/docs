@@ -46,7 +46,7 @@ Tor Project's post highlights three concrete patterns of use:
 
 The post also walks through OONI Explorer's [thematic pages](https://ooni.org/post/2025-ooni-explorer-thematic-censorship-pages/){target="_blank"} and individual findings — [Zawia3 in Egypt](https://explorer.ooni.org/findings/99431807200){target="_blank"}, [12 news websites in Jordan](https://explorer.ooni.org/findings/101531332700){target="_blank"}, [The Wire in India](https://explorer.ooni.org/findings/667455800){target="_blank"} during the conflict with Pakistan — and frames open documentation as the basis for collective response. The full narrative is in [the original post](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}; the rest of this article focuses on regional context the original does not cover.
 
-## Sinophone Asia-Pacific: the same workflow, six regional readings
+## Sinophone Asia-Pacific: the same workflow, divergent local conditions
 
 Tor Project's post focuses on Kenya, Tanzania, Egypt, Jordan, India, and Russian exile media. The same documentation logic — open measurement, peer-reviewed methodology, public dataset, expert-opinion reporting — applies across Sinophone Asia-Pacific, but the legal-advocacy environments diverge sharply.
 
