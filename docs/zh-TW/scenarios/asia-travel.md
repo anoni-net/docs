@@ -153,7 +153,7 @@ icon: material/bag-suitcase-outline
 
 ## 相關閱讀
 
-- [出國前數位安全：用 AI 自助產生目的地 briefing](./travel-ai-briefing.md)：本表沒收錄的目的地，用這一頁的 prompt 問你自己的 AI，自己產生對照。
+- [出國前數位安全：用 AI 自助產生目的地概況](./travel-ai-briefing.md)：本表沒收錄的目的地，用這一頁的 prompt 問你自己的 AI，自己產生對照。
 - [威脅模型](../basics/threat-model.md)：先想清楚對手是誰、能取得什麼，才知道每地要做到哪種程度。
 - [Metadata 為什麼重要](../basics/metadata.md)：連線與裝置留下的紀錄，是出差時最容易忽略的暴露面。
 - [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：其中的跨國旅行裝置準備一節，可搭配本文的乾淨機建議。
