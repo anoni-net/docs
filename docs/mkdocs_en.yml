@@ -22,6 +22,7 @@ nav:
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
+          - scenarios/travel-ai-briefing.md
       - !ENV [NAV_REPORTS, "Reports"]:
           - reports/index.md
   - !ENV [NAV_REGIONAL, "Regional"]:

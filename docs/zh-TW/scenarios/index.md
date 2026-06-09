@@ -15,6 +15,7 @@ icon: material/account-group-outline
 - [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：帳號分流、交友 app 風險、跨平台連結追蹤、家人控管下的本機痕跡、跨國旅行裝置準備。
 - [倡議組織的匿名捐款管道](./nonprofit-anonymous-donation.md)：給組織方與捐款人雙角色的合法匿名捐款流程，含台灣公益勸募條例、政治獻金法、VASP 與稅務脈絡。
 - [出差與研討會的數位準備（東亞與東南亞）](./asia-travel.md)：十四地的網路審查、VPN 與 Tor 可達性、SIM 實名與入境查機對照，搭配分層的行前準備清單。
+- [出國前數位安全：用 AI 自助產生目的地 briefing](./travel-ai-briefing.md)：適用任何目的地，複製 prompt 問你自己的 AI，產出審查、法律、SIM、緊急聯絡的行前 briefing。與「東亞東南亞出差」篇互補。
 
 ## 撰寫中（2026 Q3 完成）
 
