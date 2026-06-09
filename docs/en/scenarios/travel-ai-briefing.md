@@ -15,8 +15,8 @@ This page is **not** a per-country data table. It works for **any destination**:
 
 ## How to use it
 
-1. **Fill the blanks**: replace `{origin}`, `{destination}`, `{length of stay}` in the prompts below (dates and role are optional).
-2. **Set the role first**: paste the "priming prompt" into your AI, then paste each question below.
+1. **Fill in once**: in the "priming prompt", replace `{origin}`, `{destination}`, and `{length of stay}` with your details (dates and role are optional), then paste it into your AI.
+2. **Copy questions as-is**: the questions below need no editing — paste them one at a time. The AI remembers the destination and origin from the priming prompt.
 3. **Verify yourself**: check the AI's answers against the primary sources at the bottom. **Don't trust blindly.**
 
 !!! warning "AI will fabricate phone numbers, laws, and prices"
@@ -37,7 +37,8 @@ This page is **not** a per-country data table. It works for **any destination**:
     I'm travelling from {origin} to {destination}, staying about {length of stay} days.
     (Optional) The dates are roughly {date range}; my line of work is {leave blank if unsure}.
 
-    I'll paste questions one at a time. For each, please:
+    I'll paste questions one at a time — they won't repeat the destination or origin,
+    so always use what I set above. For each, please:
     1. Cite verifiable primary sources where possible (OONI, Tor Metrics/Onionoo,
        Access Now, both countries' foreign ministries, RSF, Freedom House, CIVICUS),
        with links and the date of the data.
@@ -53,9 +54,9 @@ This page is **not** a per-country data table. It works for **any destination**:
     safety before travel. I'm going to {destination} (country level is enough); assume
     a short stay. I will not give my name, organization, or exact dates.
 
-    I'll paste questions one at a time. For each, cite verifiable primary sources with
-    links, separate fact from inference, say when you're unsure, and end with one
-    actionable line.
+    I'll paste questions one at a time — they won't repeat the destination, so always
+    use what I set above. For each, cite verifiable primary sources with links, separate
+    fact from inference, say when you're unsure, and end with one actionable line.
     ```
 
 ## The questions (copy one at a time)
@@ -63,7 +64,7 @@ This page is **not** a per-country data table. It works for **any destination**:
 ### 1. Digital environment: censorship, Tor, VPN, device search
 
 ```text
-[Digital 1 / Censorship & blocking] Check OONI Explorer for {destination} over the
+[Digital 1 / Censorship & blocking] Check OONI Explorer for the destination over the
 last 6–12 months: are Tor, Signal, WhatsApp, Telegram, major VPNs (e.g. ProtonVPN),
 and independent news / human-rights sites showing DNS/TCP/HTTP blocking or anomalies?
 List confirmed/anomaly findings with dates and link to OONI Explorer.
@@ -71,26 +72,26 @@ List confirmed/anomaly findings with dates and link to OONI Explorer.
 
 ```text
 [Digital 2 / Tor reachability] How many running Tor relays and bridges, and roughly
-how much bandwidth, does {destination} have (per Tor Metrics / Onionoo)? Based on that,
+how much bandwidth, does the destination have (per Tor Metrics / Onionoo)? Based on that,
 can Tor connect directly, or will I need a pluggable transport (obfs4 / Snowflake /
 WebTunnel)? Give me an on-arrival connection plan with a fallback order.
 ```
 
 ```text
-[Digital 3 / VPN legality & usability] Is using a VPN legal in {destination}? Are
+[Digital 3 / VPN legality & usability] Is using a VPN legal in the destination? Are
 protocols like WireGuard or OpenVPN blocked or throttled? Are only government-approved
 VPNs allowed? What should I install before departure, and what backups should I prepare?
 ```
 
 ```text
-[Digital 4 / Border & device search] On entry to {destination}, might customs search my
+[Digital 4 / Border & device search] On entry to the destination, might customs search my
 phone or laptop, or ask me to log into social accounts? Are there laws compelling
 disclosure of passwords or encryption keys? Is possessing or using encrypted messaging
 apps illegal? Any record of journalists or HRDs being denied entry or detained?
 ```
 
 ```text
-[Digital 5 / Shutdown risk] Has {destination} had internet shutdowns or throttling in
+[Digital 5 / Shutdown risk] Has the destination had internet shutdowns or throttling in
 the past (see Access Now #KeepItOn)? If my stay overlaps an election, protests, or a
 sensitive anniversary, how elevated is the risk? What offline fallbacks should I prepare?
 ```
@@ -98,32 +99,32 @@ sensitive anniversary, how elevated is the risk? What offline fallbacks should I
 ### 2. Legal and political risk
 
 ```text
-[Legal 6 / Travel advisory] What advisory level has {origin}'s foreign ministry issued
-for {destination}? Cross-check the current US State Department and UK FCDO advisories.
+[Legal 6 / Travel advisory] What advisory level has my origin's foreign ministry issued
+for the destination? Cross-check the current US State Department and UK FCDO advisories.
 Any recent unrest, protests, or conflict? Include official links and update dates.
 ```
 
 ```text
 [Legal 7 / Risk to my role] For journalists / NGOs / activists, what is the legal climate
-in {destination}? Reference the RSF Press Freedom Index, Freedom House "Freedom on the
+in the destination? Reference the RSF Press Freedom Index, Freedom House "Freedom on the
 Net", and the CIVICUS Monitor rating. Are there foreign-agent / NGO-registration laws,
 defamation / lèse-majesté / blasphemy offences, or assembly restrictions? Which routine
 activities of mine could break local law?
 ```
 
 ```text
-[Legal 8 / Entry & identity] Entering {destination} on a {origin} passport — what visa
-or electronic travel authorization (ETA / ETIAS, etc.) is required? Does staying
-{length of stay} days fit the visa-free allowance? Do {origin}–{destination} diplomatic
+[Legal 8 / Entry & identity] Entering the destination on my passport — what visa
+or electronic travel authorization (ETA / ETIAS, etc.) is required? Does my length of
+stay fit the visa-free allowance? Do my origin's and the destination's diplomatic
 relations affect the consular help I can get?
 ```
 
 ### 3. Connectivity (SIM / eSIM)
 
 ```text
-[Connectivity 9 / SIM & eSIM] Does buying a physical SIM in {destination} require
-real-name registration (passport / biometrics)? Given a {length of stay}-day stay
-departing from {origin}, should I use a regional or single-country eSIM (e.g. Airalo)
+[Connectivity 9 / SIM & eSIM] Does buying a physical SIM in the destination require
+real-name registration (passport / biometrics)? Given my length of stay and origin,
+should I use a regional or single-country eSIM (e.g. Airalo)
 or home-number roaming? List a few options with rough prices and the local carriers
 they use — and remind me to use VoIP (Signal/WhatsApp) for voice over traditional roaming.
 ```
@@ -132,8 +133,8 @@ they use — and remind me to use VoIP (Signal/WhatsApp) for voice over traditio
 
 ```text
 [Emergency 10 / Consular office] What are the 24-hour emergency line, general phone,
-address, and office hours of {origin}'s embassy/representative office in {destination}?
-If {origin} has no office there, which nearest accredited office covers it? Format it so
+address, and office hours of my origin's embassy/representative office in the destination?
+If my origin has no office there, which nearest accredited office covers it? Format it so
 I can copy it onto a card.
 ```
 
@@ -141,12 +142,12 @@ I can copy it onto a card.
 [Emergency 11 / Digital security & local support] Give me the Access Now Digital Security
 Helpline contact (24/7, multilingual, help@accessnow.org, responds within two hours).
 What local digital-rights, journalist-protection, or legal-aid organizations exist in
-{destination}? Who do I contact if a device is seized or an account is attacked?
+the destination? Who do I contact if a device is seized or an account is attacked?
 ```
 
 ```text
 [Emergency 12 / Local emergency numbers & legal aid] What are the police, ambulance, and
-fire numbers in {destination}? If I'm stopped or detained, what local legal-aid or lawyer
+fire numbers in the destination? If I'm stopped or detained, what local legal-aid or lawyer
 hotlines can I reach in real time?
 ```
 
@@ -154,7 +155,7 @@ hotlines can I reach in real time?
 
 ```text
 [Physical 13 / Surveillance & safety, optional] How pervasive is public surveillance in
-{destination} (CCTV, facial recognition)? What is the police attitude toward assemblies
+the destination (CCTV, facial recognition)? What is the police attitude toward assemblies
 and street photography? Which areas or behaviours carry higher risk for someone in my
 line of work, and should be avoided?
 ```
