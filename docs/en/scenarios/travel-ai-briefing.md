@@ -79,6 +79,9 @@ can Tor connect directly, or will I need a pluggable transport (obfs4 / Snowflak
 WebTunnel)? Give me an on-arrival connection plan with a fallback order.
 ```
 
+!!! tip "Want real Tor relay numbers? Connect onionoo MCP first"
+    With no external data source, an AI will often invent the relay/bridge counts and bandwidth this question asks for (exactly the failure this page warns about). Our community-run [onionoo MCP](../community/onionoo-mcp.md) wraps Tor Project's public Onionoo data behind a single URL. Paste it into an assistant like claude.ai and it can pull real, citable numbers as of the moment you ask, instead of guessing.
+
 ```text
 [Digital 3 / VPN legality & usability] Is using a VPN legal in the destination? Are
 protocols like WireGuard or OpenVPN blocked or throttled? Are only government-approved
@@ -199,6 +202,7 @@ After running the items above, copy the key contacts from section 4 (emergency c
 ## See also
 
 - [Regional observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
+- [onionoo MCP — a query service for Tor relays](../community/onionoo-mcp.md) — hand "Digital 2" above to the AI directly. Connect this URL and your assistant can answer how many Tor relays a country has, how much bandwidth, and which networks host them, with numbers straight from Tor Project's Onionoo.
 - [Basics: networked freedom](../basics/internet-freedom.md) — the conceptual frame behind these scenarios.
 - [The thinking behind this page (blog)](../blog/posts/travel-ai-briefing.md) — why we package the questions worth asking into a prompt pack you run on your own trusted AI.
 
