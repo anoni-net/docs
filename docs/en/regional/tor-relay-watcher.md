@@ -357,6 +357,7 @@ Latest-day running and stopped counts across all four watched regions, side by s
 
 <div class="grid cards" markdown>
 
+- [:material-api: Query Tor relays in plain language](../community/onionoo-mcp.md)
 - [:material-map-outline: Regional Observatory](./index.md)
 - [:material-chat-question: Why networked freedom matters](../basics/internet-freedom.md)
 - [:simple-torbrowser: Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"}

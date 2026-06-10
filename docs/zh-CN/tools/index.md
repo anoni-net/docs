@@ -34,6 +34,7 @@ icon: material/toolbox-outline
 
 - [什么是 OONI](./what-is-ooni.md)：把网络干预变成有时间、地点、ASN 对得上的观测记录。
 - [OONI Run v2 操作说明](./ooni-run-v2.md)：建立动态检测名单，协助观察特定网站是否被审查或封锁。
+- [onionoo MCP：用中文查 Tor 中继节点现况](../community/onionoo-mcp.md)：社区自架的查询服务，不用写代码，在 claude.ai 接上后盘点某国有多少 Tor 中继、带宽多大、落在哪些电信网络。
 
 ## 日常隐私基本功
 
