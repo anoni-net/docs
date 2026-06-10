@@ -65,11 +65,6 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   color: var(--md-accent-fg-color);
 }
 
-/* section 子項目稍微縮排 */
-.md-sidebar--primary .md-nav__item--section > nav.md-nav {
-  padding-left: 0.4rem;
-}
-
 /* ==========================================================================
    圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
    .lg → 2rem（卡片標題用）
