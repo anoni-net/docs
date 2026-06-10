@@ -11,8 +11,9 @@
     python3 tools/docs_style_lint.py --format json <path>
 
 掃描前會剝除 fenced code、inline code、HTML 註解、Markdown 連結的 URL 與裸 URL，
-避免在程式碼與網址上誤判。front matter 不套用內文標點規則，只做欄位檢查。表格空
-資料格用破折號當佔位（| — |）是正當用法，不觸發 em-dash 規則。
+避免在程式碼與網址上誤判。front matter 不套用內文標點規則，只做欄位檢查。em-dash
+規則對下列情況放行：表格空資料格佔位（| — |）、引用的連結標題（[原文標題](url)，
+照錄來源原文）、以及 docs/en 英文檔（破折號在英文是正常排版）。
 
 exit code：有任一 error 回 1，否則回 0（warn 不影響 exit code）。
 """
@@ -136,6 +137,31 @@ def in_empty_table_cell(clean: str, pos: int) -> bool:
     return clean[left + 1:right].strip() == "—"
 
 
+def in_link_text(clean: str, pos: int) -> bool:
+    """clean 行中 pos 位置的破折號，是否落在 Markdown 連結文字 [text](url) 的 text 內。
+
+    引用外部資料時，連結文字常是來源的原始標題，標題本身的破折號屬照錄，不該套用
+    插入語規則（例：`[Developer mode — apps...](url)`）。判定條件：pos 左右最近的
+    `[` `]` 之間沒有其他中括號，且 `]` 後緊接 `(`（行內連結，而非一般方括號）。
+    """
+    left = clean.rfind("[", 0, pos)
+    right = clean.find("]", pos)
+    if left == -1 or right == -1:
+        return False
+    if "]" in clean[left + 1:pos] or "[" in clean[pos:right]:
+        return False
+    return right + 1 < len(clean) and clean[right + 1] == "("
+
+
+def is_english_doc(path: Path) -> bool:
+    """en 文件採英文排版，破折號 — 屬正常用法，不套用 em-dash 規則。
+
+    對應 CI 既有設定（docs-style-lint.yml 只掃 docs/zh-TW、docs/zh-CN）。手動對含
+    docs/en 的路徑掃描時，這裡確保 en 不被 em-dash 規則誤判。
+    """
+    return "/en/" in path.as_posix()
+
+
 def lint_file(path: Path):
     findings = []
     try:
@@ -160,6 +186,7 @@ def lint_file(path: Path):
             findings.append((1, WARN, "frontmatter-summary",
                              "blog post 建議有 summary 或 description", ""))
 
+    english = is_english_doc(path)
     state = {}
     in_fm = bool(fm_lines)
     fm_end_line = body_start  # 1-based 行號：front matter 結尾的 --- 行
@@ -185,9 +212,14 @@ def lint_file(path: Path):
         if not clean.strip():
             continue
         for code, sev, rx, msg in PROSE_RULES:
+            if code == "em-dash" and english:
+                continue
             for m in rx.finditer(clean):
-                # 表格空資料格的破折號佔位（| — |）放行，只有整格就是一個破折號才算
-                if code == "em-dash" and in_empty_table_cell(clean, m.start()):
+                # em-dash 放行：表格空資料格（| — |）與引用的連結標題（[原文標題](url)）
+                if code == "em-dash" and (
+                    in_empty_table_cell(clean, m.start())
+                    or in_link_text(clean, m.start())
+                ):
                     continue
                 snippet = raw[max(0, m.start() - 8): m.start() + 12].strip()
                 findings.append((i, sev, code, msg, snippet))
