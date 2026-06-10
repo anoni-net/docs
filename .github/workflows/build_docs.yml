@@ -60,6 +60,8 @@ jobs:
             [ -f "$base/blog/assets/images/g0v-hackath65n.webp" ] && cp "$base/blog/assets/images/g0v-hackath65n.webp" "$base/assets/images/social/blog/2025/02/g0v-hackath65n.png"
             [ -f "$base/blog/assets/images/tor-tails-workshop-slide.webp" ] && cp "$base/blog/assets/images/tor-tails-workshop-slide.webp" "$base/assets/images/social/blog/2025/03/rightscon25-tor-tails-ooni-after.png"
           done
+      - name: Inject PWA build version
+        run: find ./output -name 'sw.js' -exec sed -i "s/__BUILD_VERSION__/$(date +%Y%m%d%H%M)/" {} \;
       - name: Clean the all files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
