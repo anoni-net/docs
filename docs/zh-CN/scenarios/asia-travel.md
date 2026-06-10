@@ -152,6 +152,7 @@ icon: material/bag-suitcase-outline
 
 ## 相关阅读
 
+- [出国前数字安全：用 AI 自助生成目的地概况](./travel-ai-briefing.md)：本表没收录的目的地，用这一页的 prompt 问你自己的 AI，自己生成对照。
 - [威胁模型](../basics/threat-model.md)：先想清楚对手是谁、能取得什么，才知道每地要做到哪种程度。
 - [Metadata 为什么重要](../basics/metadata.md)：连接与装置留下的记录，是出差时最容易忽略的暴露面。
 - [LGBTQ+ 与性少数的匿名社交](./lgbtq.md)：其中的跨国旅行装置准备一节，可搭配本文的干净机建议。

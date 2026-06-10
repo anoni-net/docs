@@ -1,0 +1,43 @@
+---
+date: 2026-06-10
+authors:
+    - toomore
+categories:
+    - 社群
+    - 隱私
+slug: travel-ai-briefing
+image: "https://assets.anoni.net/blog/travel-ai-briefing.png"
+summary: "新頁面上線：把出國前該問的數位安全問題打包成可複製的 prompt，帶回去問你自己信任的 AI，產出目的地的行前概況。"
+description: "我們把出國前該查的網路審查、法律、SIM 與緊急聯絡整理成一包 prompt，你帶回去問自己信任的 AI 就能產出目的地概況，敏感查詢不會經過我們。"
+og:
+  enabled: true
+  image: https://assets.anoni.net/blog/travel-ai-briefing.png
+  image_width: 1536
+  image_height: 1024
+  twitter_card: summary_large_image
+---
+
+# 出國前數位安全：把該問的問題，帶回去問你自己的 AI
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/travel-ai-briefing.png" target="_blank">
+        <img src="https://assets.anoni.net/blog/travel-ai-briefing.png"
+            alt="插圖：左側一個 AI 助理把散落的資料卡片（Wi-Fi、定位、鎖頭、SIM、QR 等）收攏，沿著虛線整理成右側一張有盾牌外框的行前概況清單，上方有一架飛機與航線弧線"
+            title="把散落各處的情報，整理成一份有保護的行前概況"
+            class="brand-frame">
+    </a>
+</figure>
+
+出國前大家都會查簽證、插頭、換匯，卻很少有人查「我要去的地方，網路被怎麼管？我的工作在那裡合不合法？出事打給誰？」對記者、人權工作者、NGO 成員與研究者來說，這些才是真正影響安全的問題，難的是出發前你根本不知道該問什麼。
+
+<!-- more -->
+
+這些答案散在各種審查量測、各國外交部公告與新聞裡，平常沒人會一條一條去翻。AI 助理很適合把這種資料收攏成一份，但真正派得上用場的問題，自己不一定想得到，像是「入境時海關會不會搜你的手機、要不要你交出密碼」，或「落地後哪些 VPN 還能用、Signal 連不連得上」。問錯問題，AI 只會給你觀光客視角的答案。
+
+所以我們新做了一頁，把這些「該問的問題」整理成一包可以直接複製的 prompt。你複製後帶回去問你自己信任的 AI（你平常用的 ChatGPT、Claude，或自己跑的本地模型都行），讓它幫你把目的地的審查、法律、SIM 與緊急聯絡整理成一份行前概況。
+
+這樣分工下，你的目的地和身分這種敏感資訊不會送到我們的伺服器。要問什麼是公開、固定的，誰都能檢查。同一包問題對任何國家都適用，換一個目的地不用重來。
+
+完整的開場 prompt 與十幾個調查問題都在 [出國前數位安全：用 AI 自助產生目的地概況](../../scenarios/travel-ai-briefing.md)，照著複製就能開始。如果你的目的地在東亞、東南亞，我們另外整理了一份預先填好十四地的對照表 [出差與研討會的數位準備](../../scenarios/asia-travel.md)，兩頁可以互相對照。
+
+有特定目的地的實地經驗想分享，歡迎到 [Matrix 公開 room](../../community/tools.md) 討論，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
