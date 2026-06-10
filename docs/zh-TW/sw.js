@@ -65,11 +65,12 @@ const CORE_PAGES_ZH = [
   "tools/messaging-comparison/",
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
-  // scenarios（場景，核心 + asia-travel）
+  // scenarios（場景，核心 + asia-travel + travel-ai-briefing）
   "scenarios/",
   "scenarios/journalist/",
   "scenarios/activist/",
   "scenarios/asia-travel/",
+  "scenarios/travel-ai-briefing/",
   // advanced（進階，全部）
   "advanced/",
   "advanced/e2ee/",
@@ -84,6 +85,8 @@ const CORE_PAGES_ZH = [
   "taiwan/whistleblower-law/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  // community（社群，選錄離線可讀的工具頁）
+  "community/onionoo-mcp/",
 ];
 
 // en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、taiwan/、advanced/、help/）。
@@ -96,6 +99,8 @@ const CORE_PAGES_EN = [
   "basics/internet-freedom/",
   "scenarios/",
   "scenarios/lgbtq/",
+  "scenarios/travel-ai-briefing/",
+  "community/onionoo-mcp/",
   "regional/",
   "regional/tor-relay-watcher/",
 ];
