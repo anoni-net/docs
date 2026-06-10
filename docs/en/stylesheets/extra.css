@@ -70,6 +70,15 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   background-color: transparent;
 }
 
+/* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
+.md-path__link {
+  color: var(--brand-cyan-500);
+}
+
+.md-path__link:hover {
+  color: var(--brand-cyan-600);
+}
+
 /* ==========================================================================
    圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
    .lg → 2rem（卡片標題用）
