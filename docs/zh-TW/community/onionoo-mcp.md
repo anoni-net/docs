@@ -269,6 +269,7 @@ docker compose up -d --build
 
 - **回報問題 / 提建議**：<https://github.com/anoni-net/onionoo-fastapi/issues>
 - **想自己跑 Tor relay**：見 [如何搭建 Tor Relay](./setup-tor-relay.md)，相關觀測指標在 [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md)。
+- **出國前評估**：[出國前數位安全：用 AI 自助產生目的地概況](../scenarios/travel-ai-briefing.md)。記者、NGO 出國前要查目的地的 Tor 可達性時，接上 onionoo MCP 就能讓 AI 查到真實、可引用的 Onionoo 數字。
 - **延伸閱讀**：[什麼是 Tor？](../tools/what-is-tor.md)、[ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)。
 
 服務目前以 v1.0.0 釋出，授權為 MIT。歡迎 issue、PR，或在 Matrix 上一起討論之後該補哪些任務導向工具。
