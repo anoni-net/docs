@@ -36,8 +36,8 @@ const SHELL_ASSETS = [
   "assets/images/icon-192.png",
 ];
 
-// 各語系都預快取的核心章節（三語系檔名結構相同）
-const CORE_PAGES = [
+// zh 版（zh-TW 根、/zh-tw/、/zh-cn/）章節結構一致，預快取完整核心章節
+const CORE_PAGES_ZH = [
   "",
   "offline/",
   "guides/",
@@ -56,10 +56,29 @@ const CORE_PAGES = [
   "scenarios/activist/",
 ];
 
+// en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、basics 多數頁），
+// 只預快取目前實際存在的核心頁。en 之後新增核心頁時記得補進來。
+const CORE_PAGES_EN = [
+  "",
+  "offline/",
+  "basics/",
+  "basics/internet-freedom/",
+  "scenarios/",
+];
+
+// 各語系前綴對應的核心章節清單
+const CORE_PAGES_BY_PREFIX = {
+  "": CORE_PAGES_ZH,
+  "zh-tw/": CORE_PAGES_ZH,
+  "zh-cn/": CORE_PAGES_ZH,
+  "en/": CORE_PAGES_EN,
+};
+
 function precacheUrls() {
   const urls = [];
   for (const prefix of LANG_PREFIXES) {
-    for (const page of CORE_PAGES) {
+    const pages = CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH;
+    for (const page of pages) {
       urls.push(SCOPE_PATH + prefix + page);
     }
     for (const asset of SHELL_ASSETS) {
