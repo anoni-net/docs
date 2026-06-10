@@ -65,9 +65,18 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   color: var(--md-accent-fg-color);
 }
 
-/* section 子項目稍微縮排 */
-.md-sidebar--primary .md-nav__item--section > nav.md-nav {
-  padding-left: 0.4rem;
+/* 巢狀 section（如報告分章）的子標題不沿用上層 section 的背景色塊 */
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+  background-color: transparent;
+}
+
+/* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
+.md-path__link {
+  color: var(--brand-cyan-500);
+}
+
+.md-path__link:hover {
+  color: var(--brand-cyan-600);
 }
 
 /* ==========================================================================

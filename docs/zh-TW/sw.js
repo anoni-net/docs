@@ -36,34 +36,68 @@ const SHELL_ASSETS = [
   "assets/images/icon-192.png",
 ];
 
-// zh 版（zh-TW 根、/zh-tw/、/zh-cn/）章節結構一致，預快取完整核心章節
+// zh 版（zh-TW 根、/zh-tw/、/zh-cn/）章節結構一致，預快取完整指南集 + 緊急頁。
+// 個別語系若缺某頁（如 zh-CN 暫無 what-is-cryptpad），install 時 404 由 allSettled 容忍。
 const CORE_PAGES_ZH = [
   "",
   "offline/",
   "guides/",
+  "help/",
+  // basics（概念，全部）
   "basics/",
   "basics/internet-freedom/",
   "basics/anonymity-vs-privacy/",
   "basics/threat-model/",
   "basics/metadata/",
+  "basics/payments-anonymity/",
+  // tools(工具，全部)
   "tools/",
   "tools/what-is-anonymity-network/",
   "tools/what-is-tor/",
   "tools/what-is-tails/",
   "tools/what-is-ooni/",
+  "tools/what-is-cryptpad/",
+  "tools/tor-browser-advanced/",
+  "tools/tor-snowflake/",
+  "tools/onionshare/",
+  "tools/ooni-run-v2/",
+  "tools/tails-vs-whonix-vs-qubes/",
+  "tools/messaging-comparison/",
+  "tools/password-manager/",
+  "tools/crypto-privacy-spectrum/",
+  // scenarios（場景，核心 + asia-travel）
   "scenarios/",
   "scenarios/journalist/",
   "scenarios/activist/",
+  "scenarios/asia-travel/",
+  // advanced（進階，全部）
+  "advanced/",
+  "advanced/e2ee/",
+  "advanced/post-quantum/",
+  "advanced/dweb-ipfs-onion/",
+  "advanced/zk-identity-payments/",
+  // taiwan（在地，全部；ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
+  "taiwan/",
+  "taiwan/ooni-checklist/",
+  "taiwan/pdpa-2025/",
+  "taiwan/vasp-2026/",
+  "taiwan/whistleblower-law/",
+  "taiwan/ooni-asn-coverage/",
+  "taiwan/tor-relay-watcher/",
 ];
 
-// en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、basics 多數頁），
-// 只預快取目前實際存在的核心頁。en 之後新增核心頁時記得補進來。
+// en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、taiwan/、advanced/、help/）。
+// 只預快取目前實際存在的核心頁，en 之後新增核心頁時記得補進來。
 const CORE_PAGES_EN = [
   "",
   "offline/",
+  "about/",
   "basics/",
   "basics/internet-freedom/",
   "scenarios/",
+  "scenarios/lgbtq/",
+  "regional/",
+  "regional/tor-relay-watcher/",
 ];
 
 // 各語系前綴對應的核心章節清單
