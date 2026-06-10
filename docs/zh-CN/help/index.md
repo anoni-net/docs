@@ -114,6 +114,27 @@ icon: material/lifebuoy
 - **跨境连线受限**：尝试 Tor Browser 与内建桥接（obfs4、Snowflake、meek-azure）。桥接点建立可参考 [Tor Snowflake](../tools/tor-snowflake.md)
 - **完全无法连上 Tor**：透过电子邮件（[bridges@torproject.org](mailto:bridges@torproject.org)）申请非公开桥接
 
+## 趁有网络时，把文档站装成离线 App
+
+断网或被封锁时，连不上网就查不到这页的应对步骤。趁现在还能连接，把这个文档站装成 App（PWA，把网站像一般 App 一样装到设备上），核心章节会先下载到设备，之后没网络也能查阅。
+
+!!! tip "建议现在就做"
+    这是预先准备。等网络断了才装就来不及，花一分钟装好，等于在手机或电脑里先存一份离线版指南。
+
+安装方式（用一般浏览器打开 [anoni.net/docs](../index.md)，先别用 Tor Browser，原因见下）：
+
+- **Android（Chrome、Edge 等）**：打开站点后点浏览器菜单，选「安装应用」或「添加到主屏幕」。
+- **电脑（Chrome、Edge）**：地址栏右侧会出现安装图标，或从菜单选「安装 anoni.net Docs」。
+- **iPhone、iPad（Safari）**：点「分享」按钮，再选「添加到主屏幕」。
+
+装好后的离线行为：
+
+- 概念、工具、场景的核心章节在安装时就先下载，断网也能读。
+- 之前浏览过的页面会留在设备上，照常打开。
+- 没缓存到的页面断网时会显示「当前离线中」提示页，引导你回到已存的内容。连接恢复后刷新，就会回到最新版本。
+
+要注意：Tor Browser 以及 onion、IPFS 版基于隐私考量不提供离线安装（这些版本不会注册后台的 Service Worker）。需要离线备援时用一般浏览器在 anoni.net 安装，平时的匿名浏览再回到 Tor Browser。
+
 ## 个资外泄或被公开（Doxxing）
 
 ### 立即动作
