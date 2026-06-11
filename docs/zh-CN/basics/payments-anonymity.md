@@ -27,7 +27,7 @@ icon: material/cash-multiple
 
 前面讲的是金流的被动观察风险，metadata 被别人看到、被分析、被连结回真实身份。金流还有另一面是被主动拿来当审查工具。
 
-过去十多年，PayPal、Venmo、Stripe 等金融中介反复关停或冻结特定使用者的账号。被波及的对象常常跟言论性质或地缘风险相关，像是教波斯诗歌的美国公民被 PayPal 冻结账号，纽约穆斯林市议员转账备注写了孟加拉餐厅名字而被挡，长年支持 Tor 中继运作的个人捐款人被无预警关停 PayPal 账号。前 EFF Activism Director Rainey Reitman 在新书《Transaction Denied》整理了这条脉络，书中追问金融中介可不可以担任线上言论的仲裁者。
+过去十多年，PayPal、Venmo、Stripe 等金融中介反复关停或冻结特定使用者的账号。被波及的对象常常跟言论性质或地缘风险相关，像是教波斯诗歌的美国公民被 PayPal 冻结账号，纽约一位穆斯林市议员候选人因为 Venmo 转账备注出现「Al-Aqsa」（一间餐厅、也是知名清真寺的名字）而被挡，长年架设 Tor 中继节点、用 PayPal 支付服务器费用的个人被无预警关停账号。前 EFF Activism Director Rainey Reitman 在新书《Transaction Denied》整理了这条脉络，书中追问金融中介可不可以担任线上言论的仲裁者。
 
 对个人使用者来说，「金流隐私」既包含别人能否看到我付了什么，也包含我的收款管道会不会被单方面切断。社群在 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相关案例与华语六地区的故事，[匿名支付研究专题](../community/payments-research.md) 也持续追踪相关讨论。
 
