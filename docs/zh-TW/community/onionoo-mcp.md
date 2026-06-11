@@ -34,9 +34,9 @@ icon: material/api
 
 亞太地區常見的三家雲端 AI，目前的接法門檻不太一樣：
 
-| 雲端 AI | 能在 App 裡直接貼網址嗎 | 怎麼接 |
+| 雲端 AI | 能在 App 裡直接貼網址嗎 | 接法 |
 |---|---|---|
-| **Claude（claude.ai）** | 可以，免費方案就行 | 設定 → Connectors（連接器）→ Add custom connector，貼上網址 |
+| **Claude（claude.ai）** | 可以，免費方案也行（限 1 個連接器） | 設定 → Connectors（連接器）→ Add custom connector，貼上網址 |
 | **ChatGPT** | 可以，但要付費方案（Plus 以上，免費版不支援） | 設定 → Apps → 進階設定 → 開啟「Developer Mode（開發者模式）」→ 新增自訂 connector，貼上網址 |
 | **Google Gemini** | 消費版聊天 App 目前還不行 | 要走 Gemini CLI（需要寫設定檔）或 Gemini Enterprise（需要 Google Cloud 管理權限），屬於工程或企業路徑，見[後半給工程師的段落](#給工程師與想自架的人) |
 

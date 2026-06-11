@@ -10,6 +10,10 @@ icon: material/database-search
 
 開始前建議先讀 [專案研究預先準備](./setup-repo.md) 把開發環境建好。
 
+!!! tip "執行位置"
+
+    下面的指令都在 `anoni-net-docs/asn_coverage/` 目錄下執行。第一次使用先 `cd` 進該目錄、跑 `uv sync` 裝好依賴，接著用 `uv run python ooni.py ...`（或先 `source .venv/bin/activate` 再依下方範例執行）。
+
 ## 資料來源
 
 OONI Probe 的觀測資料會回傳到 OONI 的 [AWS S3 Open Data](https://registry.opendata.aws/ooni/){target="_blank"} 中儲存。你可以：
@@ -24,7 +28,7 @@ OONI Probe 的觀測資料會回傳到 OONI 的 [AWS S3 Open Data](https://regis
 ### 回看觀察資料
 
 ```bash title="回看觀察資料"
-python3 ./ooni.py lookback [--unit=36] [--loc=TW] [--frame=hours]
+python3 ./ooni.py lookback [--units=36] [--loc=TW] [--frame=hours]
 ```
 
 區間單位為小時，預設為 36 個單位（36 小時），區域為台灣（`TW`）。執行後會依單位儲存以下格式的檔案：
@@ -45,7 +49,7 @@ python3 ./ooni.py span --start=YYYY/MM/DD --end=YYYY/MM/DD [--loc=TW]
 python3 ./ooni.py sheetrow --path={資料路徑}
 ```
 
-將已擷取的資料展開後、方便在試算表中進行計算使用，將另存一份開頭為 `rows_` 的資料檔案。
+將已擷取的資料展開，方便在試算表中計算，會另存一份開頭為 `rows_` 的資料檔案。
 
 ### 計算 ASN 統計
 

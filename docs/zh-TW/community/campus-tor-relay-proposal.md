@@ -57,7 +57,7 @@ icon: material/file-document-edit-outline
     - 協助處於資訊審查地區的公民突破防火牆
     - 支援律師、醫療患者、研究者等在敏感領域的安全交流
 
-    全球已有眾多大學（如 Hamburg、Stanford、Cambridge 等）參與設立 Tor Relay，台灣目前已有國立臺灣師範大學資訊工程學系完成首例（詳見 [Tor Project blog 客座文章](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}）。本校若能參與，將有助於強化資訊工程教育、資訊自由與隱私保護的實踐。
+    全球已有眾多大學（如 MIT、Stanford、Cambridge 等）參與設立 Tor Relay，台灣目前已有國立臺灣師範大學資訊工程學系完成首例（詳見 [Tor Project blog 客座文章](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}）。本校若能參與，將有助於強化資訊工程教育、資訊自由與隱私保護的實踐。
 
     ### 貳、計畫內容
 
@@ -146,7 +146,7 @@ icon: material/file-document-edit-outline
 
     我是 `<系所>` `<年級>` 的 `<姓名>`，目前正在研究 Tor 匿名網路相關主題。我想跟您報告一個構想：響應 EFF 的 Tor University Challenge（[https://toruniversity.eff.org/zh-tw/](https://toruniversity.eff.org/zh-tw/){target="_blank"}），在 `<學校名>` 校園內架設一個 **非出口節點**（Non-Exit Relay）。
 
-    這類節點僅在 Tor 網路內轉送加密流量，**不與外部網站直接通訊**，因此不會收到濫用申訴或法律疑慮。全球已有 Hamburg、Stanford、Cambridge 等多所大學參與，台灣師範大學資訊工程學系是國內首例。
+    這類節點僅在 Tor 網路內轉送加密流量，**不與外部網站直接通訊**，因此不會收到濫用申訴或法律疑慮。全球已有 MIT、Stanford、Cambridge 等多所大學參與，台灣師範大學資訊工程學系是國內首例。
 
     具體架設後，我會：
 
@@ -178,7 +178,7 @@ icon: material/file-document-edit-outline
 
     - 架設類型：**非出口節點**（Non-Exit Relay），僅在 Tor 網路內轉送加密流量，不會與外部網站直接通訊
     - 法律風險：因為不是出口節點，**不會收到濫用通知或法律糾紛**
-    - 國際參考：Hamburg、Stanford、Cambridge 等大學已參與，台灣師範大學資訊工程學系是國內首例
+    - 國際參考：MIT、Stanford、Cambridge 等大學已參與，台灣師範大學資訊工程學系是國內首例
     - 維運：由我與指導教授共同負責，可隨時於 10 分鐘內下線
 
     詳細計畫書、FAQ、技術細節隨信附上：
@@ -268,7 +268,7 @@ icon: material/file-document-edit-outline
     提案範本只是第一步。準備好範本後，建議照下面順序繼續：
 
     1. **[校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)**：把十題常見疑慮看過一遍，面談時被問到才不會卡住。FAQ 也可以附在計畫書後面當作附錄一
-    2. **[校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)**：提案通過、拿到 IP 與機房位置之後，依 SOP 上線
+    2. **[校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)**：提案通過、取得 IP 與機房位置之後，依 SOP 上線
 
     建議的閱讀順序：**提案範本 → FAQ → SOP**。
 

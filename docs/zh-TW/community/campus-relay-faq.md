@@ -21,7 +21,7 @@ icon: material/chat-question-outline
 
 ??? question "為什麼大學是架設 Tor Relay 的好地方？"
 
-    大學是架設 Tor Relay 的理想場域，因為通常具備良好的網路連線能力，並且擁有豐富的技術人力（包含教授、學生與 IT 團隊）。此外，大學普遍重視思想與言論自由。透過運行 Tor Relay，學校能直接展現自己作為「思想自由守護者」與「反審查先鋒」的形象。
+    大學適合架設 Tor Relay，原因落在校方能直接評估的幾個面向：學術網路頻寬穩定，資工、資安、資訊中心本來就有架設與維運的人力；可以從風險最低的 Non-Exit Relay 開始，不碰出口流量、不需處理對外連線的投訴；節點隨時能停掉，是可逆的決定；架設與維運過程本身就是匿名網路、資安、開源治理的教學案例。對重視學術自由與資訊近用的學校來說，這也是把理念落實到基礎建設的具體做法。
 
     **台灣脈絡補充**
 
@@ -47,9 +47,9 @@ icon: material/chat-question-outline
 
     **台灣脈絡補充**
 
-    對校園計畫來說，最簡單的處理方式就是 `ExitPolicy reject *:*`，把所有對外連線全部關掉。這樣完全沒有濫用問題可以處理，因為流量根本出不去你的 Relay。詳細設定見 [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md#torrc-參考設定)。
+    對校園計畫來說，最簡單的處理方式就是 `ExitPolicy reject *:*`，把所有對外連線全部關掉。這樣幾乎不會收到濫用投訴，因為流量不會從你的 Relay 出去（仍建議保留 EFF 的 abuse 回應範本備用）。詳細設定見 [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md#torrc-參考設定)。
 
-??? question "Tor 不是會讓犯罪份子做壞事嗎？"
+??? question "Tor 不是會讓犯罪分子做壞事嗎？"
 
     Tor 的使命是促進人權，並透過自由、開源的技術，讓使用者抵抗大規模監控與網路審查。Tor 社群對於任何將工具用於不法用途的行為，一向譴責。
 
@@ -62,6 +62,8 @@ icon: material/chat-question-outline
     台灣刑法第 358–363 條（妨害電腦使用罪章）規範的是「無故輸入他人帳號密碼」、「以電腦不正方法獲取他人電磁紀錄」等具體行為。**Middle Relay 不接觸內容、不解析使用者資料、不知道使用者身份**，在法律上跟「網路傳輸基礎設施」的性質類似，跟前述條款的犯罪行為構成要件無關。
 
     個人資料保護法第 2 條對「個人資料」的定義是「**得以直接或間接方式識別該個人之資料**」。Middle Relay 處理 Tor 網路的加密 cells，**沒有可識別資料**，因此不涉及個資處理。
+
+    以上為社群整理的法律觀點，非正式法律意見。涉及個案的法律疑慮，建議諮詢法律專業人員。
 
 ??? question "那分散式阻斷服務攻擊（DDoS）呢？"
 
@@ -180,7 +182,7 @@ icon: material/chat-question-outline
 
     **參考**
 
-    - 全球大學（Hamburg、Stanford、Cambridge、MIT 等）均有運行
+    - 全球大學（MIT、Stanford、Cambridge、CMU 等）均有運行
     - 台灣首例：[國立臺灣師範大學資訊工程學系（2025/11 上線）](../blog/posts/ntnu-nz.md)
     - 國際計畫：[EFF Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"}
 
@@ -190,7 +192,7 @@ icon: material/chat-question-outline
 
     **這是什麼**
 
-    校園架設 Tor Relay 是響應 EFF（Electronic Frontier Foundation）與 Tor Project 共同推動的 Tor University Challenge 國際計畫。全球已有多所大學參與（Hamburg、Stanford、Cambridge、MIT 等）。
+    校園架設 Tor Relay 是響應 EFF（Electronic Frontier Foundation）與 Tor Project 共同推動的 Tor University Challenge 國際計畫。全球已有多所大學參與（MIT、Stanford、Cambridge、CMU 等）。
 
     **對學校的法律意義**
 
