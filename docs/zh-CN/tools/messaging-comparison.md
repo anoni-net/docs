@@ -87,7 +87,7 @@ icon: material/message-text-outline
 
 ## Session
 
-[Session](https://getsession.org/){target="_blank"} 是从 Signal fork 出来的版本，把手机号码换成随机 ID，消息流量走类 Tor 的网络（Lokinet）降低 metadata。跨装置同步靠一段 24 字 mnemonic，这也是你的「账号备份」。
+[Session](https://getsession.org/){target="_blank"} 是从 Signal fork 出来的版本，把手机号码换成随机 ID，消息流量走类 Tor 的网络（Lokinet）降低 metadata。跨装置同步靠一段 13 字 recovery password（mnemonic），这也是你的「账号备份」。
 
 身份模型上，每个 Session ID 是 66 个十六进位字符（装置产生的公钥），没有任何电话或邮箱绑定。对方想找你只能拿到这个 ID。理论上连 server 都不知道谁跟谁在通讯。
 
@@ -95,7 +95,7 @@ icon: material/message-text-outline
 
 - 拒绝电话号码绑定、又不想花时间学 SimpleX 的使用者
 - 可接受消息延迟较高（去中心化网络的代价）的长期通道
-- 一次性协作（mnemonic 写下来收好，之后在哪台装置都可恢复）
+- 一次性协作（recovery password 写下来收好，之后在哪台装置都可恢复）
 
 **限制**：
 
@@ -176,7 +176,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ### LINE
 
-[LINE](https://line.me/){target="_blank"} 在中国大陆被封锁，是港、台、日、东南亚的主流 IM。即便能连入，E2EE 设计仍受限：Letter Sealing（2015 推出）只覆盖一对一对话与部分群组消息，且须双方都启用且使用最新版本才生效，server 端在司法协助请求下可提供未加密内容。
+[LINE](https://line.me/){target="_blank"} 在中国大陆被封锁，是港、台、日、东南亚的主流 IM。即便能连入，E2EE 设计仍受限：Letter Sealing（2015 年推出，自 2021 年起预设开启、无法手动关闭）只覆盖一对一对话与部分群组消息，server 端在司法协助请求下可提供未加密内容。
 
 ### Telegram
 
@@ -247,7 +247,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ??? question "Briar 在没网络时真的能用？"
 
-    在实体距离内可以。Briar 支援 Bluetooth（10 公尺内）与 Wi-Fi Direct（同个房间到 30 公尺内）的点对点通讯，双方直接交换消息不需要任何 server 或 ISP。长距离不行，要等任一方接上 Tor 后消息才会跨距离投递。实际情境：一场活动现场断网时，能用 Briar 跟同场的人联络，但要联络场外的人就回不去了。
+    在实体距离内可以。Briar 支援 Bluetooth 与 Wi-Fi Direct 的点对点通讯（约 10–30 公尺，视环境与障碍物而定），双方直接交换消息不需要任何 server 或 ISP。长距离不行，要等任一方接上 Tor 后消息才会跨距离投递。实际情境：一场活动现场断网时，能用 Briar 跟同场的人联络，但要联络场外的人就回不去了。
 
 ??? question "Matrix 自架值得吗"
 

@@ -14,6 +14,17 @@ icon: material/share-circle
 - **会话即用即丢**。关掉 OnionShare，onion service 同时下线，网址自动失效。没有后台 log、没有 metadata 落地。
 - **跨平台桌面工具**。macOS、Windows、Linux、Tails 都有 GUI。也有 CLI 可以架在 server 做长期收件箱。
 
+## 你应该知道的事
+
+开始操作前，先掌握几个使用前提：
+
+- **IP 不会泄漏给对方**。流量走 Tor，对方只看到 `.onion` 网址，看不到你的真实 IP。
+- **会话结束就消失**。关闭 OnionShare 视窗，onion service 同时下线，没有残留。Tor 网络也不会留下这个 onion 曾经存在的记录。
+- **网址要透过安全管道交给对方**。OnionShare 不负责配送网址。如果你用 LINE 把网址传给对方，那一段就不再匿名。常见做法是 Signal、Cryptpad 或当面口头交换。
+- **对方需要 Tor Browser**。如果对方完全不会用 Tor，OnionShare 不适合。改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密邮件。
+- **长期 Receive 收件箱建议用独立硬件**。挂在主力电脑 24/7 容易被当作攻击面，建议用 Tails USB 或专用 Linux box。
+- **流量会用到你的网络带宽**。对方下载大档时，你的网络上传会被占用，速度也受限于 Tor 网络（速度受 Tor 网路当下壅塞情况影响，可能偏慢）。
+
 ## 四种使用模式
 
 <figure markdown="span">
@@ -96,15 +107,6 @@ icon: material/share-circle
 - 已经在 Signal 对话中、单纯传一份档，用 Signal 附件就够
 - 第一次接触、对方不该暴露身份、不想经第三方，用 OnionShare
 
-## 你应该知道的事
-
-- **IP 不会泄漏给对方**。流量走 Tor，对方只看到 `.onion` 网址，看不到你的真实 IP。
-- **会话结束就消失**。关闭 OnionShare 视窗，onion service 同时下线，没有残留。Tor 网络也不会留下这个 onion 曾经存在的记录。
-- **网址要透过安全管道交给对方**。OnionShare 不负责配送网址。如果你用 LINE 把网址传给对方，那一段就不再匿名。常见做法是 Signal、Cryptpad 或当面口头交换。
-- **对方需要 Tor Browser**。如果对方完全不会用 Tor，OnionShare 不适合。改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密邮件。
-- **长期 Receive 收件箱建议用独立硬件**。挂在主力电脑 24/7 容易被当作攻击面，建议用 Tails USB 或专用 Linux box。
-- **流量会用到你的网络带宽**。对方下载大档时，你的网络上传会被占用，速度也受限于 Tor 网络（通常 1 至 3 MB/s）。
-
 ## 常见问题
 
 ??? question "对方完全没用过 Tor，怎么引导？"
@@ -117,7 +119,7 @@ icon: material/share-circle
 
 ??? question "Receive 模式可以收多大的文件？"
 
-    技术上没有文件大小限制，实务上受限于三个因素，你的网络上传带宽、Tor 网络速度（通常 1 至 3 MB/s）、你愿意把 OnionShare 开多久。超过 1 GB 的文件建议拆段或改用其他管道。
+    技术上没有文件大小限制，实务上受限于三个因素，你的网络上传带宽、Tor 网络速度（速度受 Tor 网路当下壅塞情况影响，可能偏慢）、你愿意把 OnionShare 开多久。超过 1 GB 的文件建议拆段或改用其他管道。
 
 ??? question "Chat 模式跟 Signal、SimpleX 有什么差？"
 
@@ -125,7 +127,7 @@ icon: material/share-circle
 
 ??? question "手机可以用吗？"
 
-    OnionShare 没有官方 iOS 或 Android app（截至 2026 年）。手机端只能当「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 开启对方提供的 `.onion` 网址。发送方需要桌面或 Tails。
+    OnionShare 有官方 Android app（Google Play 与 F-Droid 可装，仍是 beta），iOS app 仍在开发中（截至 2026 年）。手机端较成熟的用法仍是当「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 开启对方提供的 `.onion` 网址。要当发送方建议用桌面或 Tails。
 
 ??? question "OnionShare 跟 Tor Bridge、Snowflake 有关系吗？"
 
