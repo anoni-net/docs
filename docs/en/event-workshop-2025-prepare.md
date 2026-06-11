@@ -25,13 +25,13 @@ Currently, we need the following roles, each of which can be cross-participatory
 
 <div class="grid cards" markdown>
 
-- **[:fontawesome-solid-clipboard-user: Event Organizer](#event-organizer)**
+- **[:fontawesome-solid-clipboard-user: Event Organizer](#Event-Organizer)**
 
     ---
 
     Assist with event registration, notifications, promotion, and venue setup on the day of the event.
 
-- **[:fontawesome-solid-clipboard-user: Workshop Helper](#workshop-helper)**
+- **[:fontawesome-solid-clipboard-user: Workshop Helper](#Workshop-Helper)**
 
     ---
 
@@ -103,7 +103,7 @@ The workshop is expected to offer two courses:
 
 <div class="grid cards" markdown>
 
-- **[:octicons-bookmark-16: Tor, Tails Anonymous Network](#TorTails-Anonymous-Network)**
+- **[:octicons-bookmark-16: Tor, Tails Anonymous Network](#Tor-Tails-Anonymous-Network)**
 
     ---
 
