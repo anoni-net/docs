@@ -23,7 +23,7 @@ This page is **not** a per-country data table. It works for **any destination**:
 3. **Verify yourself**: check the AI's answers against the primary sources at the bottom. **Don't trust blindly.**
 
 !!! warning "AI will fabricate phone numbers, laws, and prices"
-    Language models are very good at sounding confident while being wrong. Treat the AI's reply as a starting list of *what to check next*, not as the final answer — especially emergency numbers, legal citations, visa rules, and tariffs. **Always** verify those against official primary sources.
+    Language models are very good at sounding confident while being wrong. Treat the AI's reply as a starting list of *what to check next*, not as the final answer — especially emergency numbers, legal citations, visa rules, and tariffs. **Always** verify those against official primary sources. Note the perverse twist: the more obscure the destination, the less training data the AI has and the more it will fabricate — exactly when you most need accuracy. In those cases especially, treat AI output only as a checklist of *what to verify* against the primary sources at the bottom of this page.
 
 ## Priming prompt (paste this first)
 
@@ -79,8 +79,8 @@ can Tor connect directly, or will I need a pluggable transport (obfs4 / Snowflak
 WebTunnel)? Give me an on-arrival connection plan with a fallback order.
 ```
 
-!!! tip "Want real Tor relay numbers? Connect onionoo MCP first"
-    With no external data source, an AI will often invent the relay/bridge counts and bandwidth this question asks for (exactly the failure this page warns about). Our community-run [onionoo MCP](../community/onionoo-mcp.md) wraps Tor Project's public Onionoo data behind a single URL. Paste it into an assistant like claude.ai and it can pull real, citable numbers as of the moment you ask, instead of guessing.
+!!! tip "(advanced) Want real Tor relay numbers? You can connect onionoo MCP"
+    With no external data source, an AI will often invent the relay/bridge counts and bandwidth this question asks for (exactly the failure this page warns about). If your assistant supports MCP (a standard interface that lets an AI connect to external live data sources), such as claude.ai, you can connect our community-run [onionoo MCP](../community/onionoo-mcp.md). It wraps Tor Project's public Onionoo data behind a single URL, so the AI can pull real, citable numbers as of the moment you ask, instead of guessing. If you only use the ChatGPT web app, skip this and cross-check the AI's answer against Tor Metrics at the bottom of this page.
 
 ```text
 [Digital 3 / VPN legality & usability] Is using a VPN legal in the destination? Are
