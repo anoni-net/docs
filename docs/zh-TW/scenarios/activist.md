@@ -86,7 +86,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 工具：
 
 - [Bitwarden](https://bitwarden.com/){target="_blank"} 或 KeePassXC（離線），詳細選擇見 [密碼管理器入門](../tools/password-manager.md)
-- 兩階段驗證優先用 TOTP（會定時跳出 6 位數驗證碼的那種，像 Google Authenticator；可用 Authy、Aegis 或 Bitwarden 內建），不要只用簡訊
+- 兩階段驗證優先用 TOTP（會定時跳出 6 位數驗證碼的那種，像 Google Authenticator，可用 Authy、Aegis 或 Bitwarden 內建），不要只用簡訊
 - 每個帳號的密碼都是密碼管理器產生的長隨機字串
 
 這節是為了做損害控制。萬一裝置被搜或被扣、帳號被連帶突破，密碼不重複、兩階段驗證有開，可以把損失壓到最低。

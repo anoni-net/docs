@@ -86,7 +86,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 工具：
 
 - [Bitwarden](https://bitwarden.com/){target="_blank"} 或 KeePassXC（离线），详细选择见 [密码管理器入门](../tools/password-manager.md)
-- 两阶段验证优先用 TOTP（会定时跳出 6 位数验证码的那种，像 Google Authenticator；可用 Authy、Aegis 或 Bitwarden 内建），不要只用短信
+- 两阶段验证优先用 TOTP（会定时跳出 6 位数验证码的那种，像 Google Authenticator，可用 Authy、Aegis 或 Bitwarden 内建），不要只用短信
 - 每个账号的密码都是密码管理器产生的长随机字串
 
 这节是为了做损害控制。万一装置被搜或被扣、账号被连带突破，密码不重复、两阶段验证有开，可以把损失压到最低。
