@@ -6,7 +6,7 @@ icon: material/newspaper-variant-outline
 
 # :material-newspaper-variant-outline: 记者保护消息来源
 
-调查报导的风险常常不在记者身上，而在消息来源那一端。记者就算被盯上，背后通常还有编辑部、媒体律师、业界同行的支援。消息来源就不一定，可能是公司内部的中阶员工、政府机关的承办、被监控的社运参与者，他们暴露的代价远比记者高。
+调查报导的风险，最重的一端往往落在消息来源，而不是记者。记者就算被盯上，背后通常还有编辑部、媒体律师、业界同行的支援。消息来源就不一定，可能是公司内部的中阶员工、政府机关的承办、被监控的社运参与者，他们暴露的代价远比记者高。
 
 这篇文章从一个常见流程出发：第一次接触的安全管道、确认对方身份、敏感文件交换、访谈记录保存、报导刊出后双方都需要做的数位整理。每一步都对应到具体的工具与威胁模型，并引用台湾与东南亚调查报导圈常见的实务做法。
 
@@ -14,7 +14,7 @@ icon: material/newspaper-variant-outline
 
 ## 为什么需要这套流程
 
-「我又没有要爆什么大新闻，这些步骤太麻烦」是常见的抗拒，但威胁不是只有国安等级的对手才有。常见场景：
+威胁不只有国安等级的对手。常见场景：
 
 - 商业爆料的内部员工，公司有完整的存取记录与设备管理系统
 - 跨境议题的访问对象，所在地法规不同、家人或同事在境内
@@ -30,10 +30,10 @@ icon: material/newspaper-variant-outline
 
 报社或记者个人公开「请用这个管道联系我」的入口，比起被动等对方找方法，主动降低对方暴露的风险。常见选项：
 
-- **SecureDrop**：[Freedom of the Press Foundation](https://freedom.press/){target="_blank"} 维运的开源系统，记者透过 Tor 隐藏服务收件，消息来源可上传文件不留 metadata。国际大型媒体（纽约时报、卫报、Intercept）都有部署
+- **SecureDrop**：[Freedom of the Press Foundation](https://freedom.press/){target="_blank"} 维运的开源系统，记者透过 Tor 隐藏服务（只能用 Tor 连到的网站，连线双方互相看不到对方位置）收件，大幅减少记者与消息来源之间的通讯轨迹。注意它不会自动清掉文件本身的 metadata（EXIF、作者栏位），那仍要消息来源上传前自清、或记者收到后处理。需要技术部署与长期维运，通常是国际大型媒体（纽约时报、卫报、Intercept）才架得起来。个人记者用下面的 Signal 或 anoni.net Send 就够，不必为了 SecureDrop 焦虑
 - **Signal 号码**：个人记者最常见的入口，但要注意 Signal 仍绑手机号码，第一次接触前对方可能不想暴露号码
-- **Tor 上的隐蔽收件箱**：自架的 onion service + 简易表单系统（社群可考虑用 [OnionShare](../tools/onionshare.md) 的 Receive 模式架轻量版收件箱）
-- **PGP 公钥**：传统方式但门槛高，多数对方不会用
+- **Tor 上的隐蔽收件箱**：自架的 onion service（Tor 隐藏服务）加简易表单系统（社群可考虑用 [OnionShare](../tools/onionshare.md) 的 Receive 模式架轻量版收件箱）
+- **PGP 公钥**：传统的加密邮件方式，安全但设定门槛高，多数消息来源不会用，现在较少当第一线入口
 
 ### 对方主动先联系的处理
 
@@ -56,7 +56,7 @@ icon: material/newspaper-variant-outline
 
 ## 确认对方身份
 
-确认身份跟保护身份是同一件事的两面。要在不问太多、不留记录的前提下，确认对方确实是他自称的人。
+确认身份与保护身份是同一件事的两面。要在不问太多、不留记录的前提下，确认对方确实是他自称的人。
 
 ### 多管道交叉验证
 
@@ -75,7 +75,7 @@ icon: material/newspaper-variant-outline
 
 ### 去除 metadata
 
-收到文件的第一件事是去 metadata，不是直接打开。Office 文件、PDF、照片、视频都会带 metadata，包括：
+收到文件的第一件事是去 metadata，先别急着打开。Office 文件、PDF、照片、视频都会带 metadata，包括：
 
 - 作者名称、公司信息（Office 档的 author 栏位）
 - 拍照的 GPS 坐标、相机型号、时间戳
@@ -119,16 +119,13 @@ icon: material/newspaper-variant-outline
 | 即时打字记录 | 中 | 多数情境 |
 | 事后凭记忆写 | 低 | 高风险场景、对方明确要求不留记录 |
 
-录音的话，用独立录音装置（[Tascam](https://tascam.com/){target="_blank"} 或 [Zoom](https://zoomcorp.com/){target="_blank"} 的手持式录音机，这里的 Zoom 是日本录音设备厂商 Zoom Corporation，不是视讯会议的那家 Zoom），不要用手机。原因有六点：
+录音的话，用独立录音装置（[Tascam](https://tascam.com/){target="_blank"} 或 [Zoom](https://zoomcorp.com/){target="_blank"} 的手持式录音机，这里的 Zoom 是日本录音设备厂商 Zoom Corporation，与视讯会议的 Zoom 无关），不要用手机。手机不适合的核心原因有三个：
 
-- **手机绑定身份**。SIM、Apple ID、Google Account、各种 app 账号都挂在同一台机，录音文件跟你的相片、消息、位置记录共存。装置一旦被搜或被扣，全部一起暴露。
-- **自动云端同步难关乾净**。iCloud、Google Drive、相簿备份、消息 app 的媒体备份默认会把录音文件上云，OS 升级或 app 更新后常常自动再打开。敏感受访者对这个无法接受。
-- **文件 metadata 跟手机绑死**。手机产生的录音文件会带 GPS、装置型号、时间戳，跟手机的位置历史交叉就能还原访问现场。独立录音机只有时间戳，不带位置与装置 ID。
-- **app 权限与背景行为难稽核**。手机上其他 app 可能有麦克风或文件存取权限，crash report、telemetry 会回传片段。独立录音机是 air-gapped 硬件，无网络、无 OS、无 app，就是一张 SD 卡。
-- **可独立销毁**。独立录音机的 SD 卡是物理可销毁单位，不会牵连其他资料。手机要销毁录音得连带处理整台或整个分区，难度与成本都更高。
-- **录音稳定性**。长访谈（2 至 3 小时）手机常因来电、通知、低电量中断，独立录音机没这些干扰，电池与储存空间管理也更可预期。
+- **手机把录音文件跟你的身份绑在一起**。SIM、Apple ID、Google 账号、各种 app 都挂在同一台机，录音文件跟你的相片、消息、位置记录共存，还会带 GPS、装置型号等 metadata，跟手机的位置历史一交叉就能还原访问现场。手机一旦被搜或被扣，这些全部一起暴露。独立录音机没有网络、没有 OS、没有 app（这种完全不连网的硬件叫 air-gapped），就是一张只带时间戳的 SD 卡。
+- **手机很难挡住自动上云**。iCloud、Google Drive、相簿与消息 app 的备份默认会把录音文件上传，OS 或 app 更新后又常常自动打开，敏感受访者无法接受。
+- **独立录音机可以单独销毁**。SD 卡是物理上可销毁的单位，不会牵连其他资料，手机要销毁录音却得连带处理整台或整个分区。长访谈（2 至 3 小时）手机也常因来电、通知、低电量中断，独立录音机更稳。
 
-录完尽快上传到加密容器、删除原装置。报导刊出后评估是否销毁原档。
+录完尽快上传到加密容器，再从原装置删除。报导刊出后评估是否销毁原档。
 
 打字记录：用 Cryptpad 或本地加密笔记，不要用 Google Docs、Notion 等云端服务（即使免费版加密，metadata 仍可能被调阅）。
 
@@ -184,8 +181,8 @@ icon: material/newspaper-variant-outline
 
 ### 在地实务
 
-- 台湾调查报导圈使用 Signal 为主、Telegram 部分使用、SecureDrop 部署仍少
-- 报导者、镜周刊等媒体有专责的数位安全团队或外部顾问
+- 台湾调查报导圈以 Signal 为主、部分采用 Telegram，SecureDrop 部署仍少
+- 部分台湾媒体日益重视记者与消息来源的数位安全（报导者长期有资讯安全相关报导），但是否设有专责的数位安全编制或外部顾问，各家不一
 - 跨境议题（中国、东南亚）通常会跟国际组织合作（OCCRP、Forbidden Stories），他们有自己的安全标准
 
 ### 求助管道

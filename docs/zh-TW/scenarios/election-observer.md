@@ -6,10 +6,10 @@ icon: material/vote-outline
 
 # :material-vote-outline: 選舉觀察員的自保
 
-!!! info "撰寫中（2026 Q3）"
-    這篇文章還在準備中，下方段落是主題大綱。歡迎到 [Matrix 社群](../community/tools.md) 表達想看的角度，或參與撰寫，見 [如何參與](../community/how-to-contribute.md)。社群追蹤連結 [issue #35](https://github.com/anoni-net/docs/issues/35)。
+!!! info "本頁完整版撰寫中（2026 Q3）：現在就能用的內容在這裡"
+    完整文章還在準備中，下方「將涵蓋的章節」目前是大綱。需要現在就能用的內容，請看本頁下方「暫時可以參考的內容」與「相關閱讀」。歡迎到 [Matrix 社群](../community/tools.md) 表達想看的角度，或參與撰寫，見 [如何參與](../community/how-to-contribute.md)。社群追蹤 [issue #35](https://github.com/anoni-net/docs/issues/35)。
 
-選舉觀察員的工作經常需要在敏感時間、敏感地點記錄與回報資訊，數位安全和人身安全同樣重要。這篇文章面向兩種角色：在台灣本地擔任投開票所觀察員的志工，以及外派到他國執行國際觀察任務的成員。內容包含現場記錄的工具選擇、回報通道的安全設計、設備出入境的注意事項、被盤查時的應對，以及任務結束後資料保存與銷毀的政策。引用 OSCE/ODIHR、Carter Center 等國際選舉觀察組織的標準作法，並對照 [威脅模型](../basics/threat-model.md) 給出在地版本的建議。
+選舉觀察員經常要在敏感時間、敏感地點記錄與回報資訊，數位安全與人身安全同樣重要。這篇文章面向兩種角色，準備強度差很多。在台灣本地擔任投開票所觀察員的志工，是戴證件、合法公開的身分，多數時間不需要強匿名，重點在「拍到投票人的臉會不會違法」、「能不能用手機回報票數」這類現場分寸，下方大綱裡的 burner 手機、衛星通訊、海關搜查這些多半用不到。外派到他國執行國際觀察任務的成員，才需要評估護照風險、跨境通訊監控與設備出入境。內容包含現場記錄的工具選擇、回報通道的安全設計、設備出入境的注意事項、被盤查時的應對，以及任務結束後資料保存與銷毀的政策。引用 OSCE/ODIHR、Carter Center 等國際選舉觀察組織的標準作法，並對照 [威脅模型](../basics/threat-model.md) 給出在地版本的建議。
 
 要先理解風險為什麼存在，可以回頭看 [威脅模型如何建立](../basics/threat-model.md) 與 [Metadata 是什麼](../basics/metadata.md)。
 
@@ -48,8 +48,8 @@ icon: material/vote-outline
 
 台灣的選舉觀察員多來自中央選舉委員會公告的觀察名單，或由公民團體、國際觀察團派遣。在地脈絡的特別之處：
 
-- **投開票所觀察員**：依公職人員選舉罷免法相關規定，由各政黨、候選人推派或公民團體申請。多數時間不需要強匿名，但要避免把選務人員、個別投票人的身分被相片或紀錄連到外部公開。
-- **跨境觀察任務**：台灣公民赴他國執行觀察工作時要評估護照風險、跨國通訊監控、目的地對 LGBTQ+ 或記者身份的法律敏感度。
+- **投開票所觀察員**：依公職人員選舉罷免法相關規定，由各政黨、候選人推派或公民團體申請。多數時間不需要強匿名，但要避免讓選務人員、個別投票人的身分透過相片或紀錄連到外部公開。
+- **跨境觀察任務**：台灣公民赴他國執行觀察工作時要評估護照風險、跨國通訊監控、目的地對 LGBTQ+ 或記者身分的法律敏感度。
 - **東亞區域觀察的特殊性**：到日本、韓國、東南亞國家觀察選舉時，跟當地公民組織、選務機關、媒體的往來，都應預先評估通訊管道。
 
 ## 暫時可以參考的內容
@@ -63,7 +63,7 @@ icon: material/vote-outline
 
 英文資源可參考：
 
-- [OSCE/ODIHR Election Observation Handbook](https://www.osce.org/odihr/elections/handbook){target="_blank"}：歐安組織的選舉觀察員標準作業手冊。
+- [OSCE/ODIHR Election Observation Handbooks](https://www.osce.org/odihr/elections/handbooks){target="_blank"}：歐安組織的選舉觀察員標準作業手冊。
 - [Carter Center Election Standards](https://www.cartercenter.org/peace/democracy/observed.html){target="_blank"}：卡特中心的國際觀察標準與工具集。
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境觀察任務遇到緊急數位安全問題時的多語求助管道。
 

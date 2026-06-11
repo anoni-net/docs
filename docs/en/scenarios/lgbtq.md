@@ -58,7 +58,7 @@ Each layer should at minimum have its own:
 
 In practice:
 
-- Register alts using a virtual phone number (services like MySudo or TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale recently — verify before relying on one. JusTalk, once a common recommendation, was found in 2022 to be storing supposedly end-to-end-encrypted messages and virtual-number mappings in an unauthenticated database[^13]; avoid.
+- Register alts using a virtual phone number (services like MySudo or TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale recently — verify before relying on one. JusTalk, once a common recommendation, was found in 2022 to have fake E2EE: millions of plaintext messages and virtual-number mappings were exposed online[^13]; avoid.
 - Use a non-face image for the alt: a pseudonym graphic, an abstract image, or a back / silhouette / pet photo
 - Make the username structurally different — don't use shared initials with a suffix
 - Stagger posting times deliberately (main during the day, alt in the evening)
@@ -95,7 +95,7 @@ App settings and policies change every few months; specifics here are direction,
 - **HER**: Friendlier WLW / queer environment, but profile photos still need separation from main-account photos.
 - **Lex**: Text-first and photo-optional, so relatively higher anonymity by design — but specific personal details in the bio still identify.
 - **Queer communities on Bluesky and Mastodon**: Strictly social platforms but partly take on connection functions. Username separation matters; consider followers-only posting.
-- **Tinder**: Mainstream, photo-required, lowest anonymity flexibility. Meta severed Tinder's Instagram API integration in late 2024, so the connection feature is gone for new users; still keep an IG handle out of the bio.
+- **Tinder**: Mainstream, photo-required, lowest anonymity flexibility. Meta deprecated the general Instagram Basic Display API in late 2024 (4 December), which removed Instagram integration for Tinder and other third-party apps, so the connection feature is gone for new users; still keep an IG handle out of the bio.
 - **Blued, Aloha, and other Sinophone-region MSM apps**: Smaller, more concentrated user bases; identification risk from circumstantial details (school, employer, neighborhood landmark) is higher. Blued in particular operates under continuous mainland Chinese content-regulatory pressure.
 - **9monsters and other Asia-region apps**: Smaller, region-concentrated user bases; same caution.
 
@@ -122,7 +122,7 @@ The most-overlooked direction in deanonymization is when *external observers* co
 
 ### Reverse-image search of profile photos
 
-Google Images, Yandex, TinEye, and PimEyes can reverse a single image, including a face, against the indexed web. Practically:
+Google Images, Yandex, TinEye, and PimEyes can reverse a single image, including a face, against the indexed web. PimEyes states it searches the open web only and excludes social media and video platforms, but combined with reverse-image search and username matching it can still surface linked accounts. Practically:
 
 - Public-account and alt-account profile photos must never overlap
 - Test by saving the photo and running it through [Google Images](https://images.google.com/){target="_blank"} reverse search before posting
@@ -163,7 +163,7 @@ Adult children still living at home, or minors, often face a *legitimate-access*
 
 Common shared surfaces in a family:
 
-- **Apple Family / Google Family Link**: Parent accounts can see app-installation history, purchase history, screen-time data, and (depending on settings) location. Family Link grants more direct controls for under-13 accounts.
+- **Apple Family / Google Family Link**: Parent accounts can see app-installation history, purchase history, screen-time data, and (depending on settings) location. Family Link grants more direct controls for children and minors (the threshold varies by local digital-consent age).
 - **Shared Apple ID or Google account**: A "convenient for family iCloud photos" arrangement effectively shares everything that auto-backs-up: messages, browsing history, photos.
 - **Shared streaming services**: Netflix, Spotify, Disney+, and YouTube History are all family-visible.
 - **Home router**: DNS queries and connected domains can be logged on prosumer routers and on the family-router products some ISPs provide.
@@ -204,7 +204,7 @@ Incognito only clears your local traces. Still logged elsewhere:
 
 - DNS queries — your `grindr.com` resolution is visible to home router and ISP
 - Home-router logs (some prosumer / ISP-provided units)
-- ISP connection records (retained 6 months to 2 years depending on jurisdiction)
+- ISP connection records (retained months to years, depending on jurisdiction and provider)
 - Corporate or school network proxy logs
 
 To hide the connection layer itself you need [Tor](https://www.torproject.org/){target="_blank"} or a trusted VPN. A VPN routes traffic and DNS to the VPN provider; the home router only sees a connection to the VPN endpoint. The provider then sees what you reach, so VPN-provider choice matters.
@@ -277,7 +277,7 @@ Practical:
 - Set a strong unlock code (6+ digit PIN; disable Face ID and fingerprint at the border)
 - Power-cycle the phone before arrival (clears RAM unlock state)
 - Stay calm; don't volunteer to unlock; only do so on explicit request
-- For real legal exposure, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} before travel (24/7, 10 languages, ~2-hour response)
+- For real legal exposure, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} before travel (24/7, multilingual, responds within ~2 hours)
 
 ### Combine with a threat model
 
@@ -367,4 +367,4 @@ Common threads when moving across the region:
 [^10]: [Taiwan Tongzhi Hotline Association](https://hotline.org.tw/){target="_blank"} — emotional support, coming-out counseling, family help.
 [^11]: [Marriage Equality Coalition Taiwan](https://equallove.tw/){target="_blank"} — policy advocacy and rights work.
 [^12]: [Taiwan LGBT Family Rights Advocacy](https://www.lgbtfamily.org.tw/){target="_blank"} — counseling on LGBT families and same-sex marriage.
-[^13]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the unauthenticated database that exposed virtual-number mappings.
+[^13]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the millions of plaintext messages and virtual-number mappings exposed online.
