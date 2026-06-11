@@ -34,9 +34,9 @@ icon: material/api
 
 亚太地区常见的三家云端 AI，目前的接法门槛不太一样：
 
-| 云端 AI | 能在 App 里直接贴网址吗 | 怎么接 |
+| 云端 AI | 能在 App 里直接贴网址吗 | 接法 |
 |---|---|---|
-| **Claude（claude.ai）** | 可以，免费方案就行 | 设置 → Connectors（连接器）→ Add custom connector，贴上网址 |
+| **Claude（claude.ai）** | 可以，免费方案也行（限 1 个连接器） | 设置 → Connectors（连接器）→ Add custom connector，贴上网址 |
 | **ChatGPT** | 可以，但要付费方案（Plus 以上，免费版不支持） | 设置 → Apps → 高级设置 → 开启「Developer Mode（开发者模式）」→ 新增自定义 connector，贴上网址 |
 | **Google Gemini** | 消费版聊天 App 目前还不行 | 要走 Gemini CLI（需要写配置文件）或 Gemini Enterprise（需要 Google Cloud 管理权限），属于工程或企业路径，见[后半给工程师的段落](#给工程师与想自架的人) |
 

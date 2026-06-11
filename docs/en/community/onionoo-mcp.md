@@ -8,7 +8,7 @@ icon: material/api
 
 Want to know how many Tor relays Taiwan is running right now, whether that number has grown or shrunk over the past six months, and which telecoms host them? The answers are all in the Tor Project's public data — but getting them used to mean writing code to fetch and crunch it yourself. onionoo MCP turns that into a single plain-language question. Connect the service inside an AI assistant (such as claude.ai), type "How many working Tor relays does Taiwan have right now?", and it queries, computes, and hands back a readable report.
 
-The first half of this page is for people who want to look up data but don't write code — journalists, civil-society groups, fact-checkers. The second half ([for engineers and self-hosters](#for-engineers-and-self-hosters)) is for people who want to call it from code or run their own copy.
+The first half of this page is for people who want to look up data but don't write code — journalists, civil-society groups, fact-checkers. The second half ([for engineers and self-hosters](#For-engineers-and-self-hosters)) is for people who want to call it from code or run their own copy.
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result-en.png" target="_blank">
@@ -36,9 +36,9 @@ Three cloud AI assistants common across the Asia-Pacific region differ in how ea
 
 | Cloud AI | Paste a URL in the app? | How to connect |
 |---|---|---|
-| **Claude (claude.ai)** | Yes — even on the free plan | Settings → Connectors → Add custom connector, paste the URL |
+| **Claude (claude.ai)** | Yes — even on the free plan (1 connector limit) | Settings → Connectors → Add custom connector, paste the URL |
 | **ChatGPT** | Yes, but needs a paid plan (Plus or above; not Free) | Settings → Apps → Advanced → turn on Developer Mode → add a custom connector, paste the URL |
-| **Google Gemini** | Not yet in the consumer chat app | Goes through Gemini CLI (config file) or Gemini Enterprise (Google Cloud admin) — an engineering or enterprise path; see [the engineer section](#for-engineers-and-self-hosters) |
+| **Google Gemini** | Not yet in the consumer chat app | Goes through Gemini CLI (config file) or Gemini Enterprise (Google Cloud admin) — an engineering or enterprise path; see [the engineer section](#For-engineers-and-self-hosters) |
 
 Plan tiers and the exact location of these settings can change; check each vendor's own docs (Claude[^connector], ChatGPT[^chatgpt], Gemini[^gemini]).
 

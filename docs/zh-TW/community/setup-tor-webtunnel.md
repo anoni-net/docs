@@ -6,7 +6,7 @@ icon: material/tunnel-outline
 
 # :material-tunnel-outline: 如何搭建 Tor WebTunnel 橋接
 
-WebTunnel 是 Tor 目前抗審查能力最強的橋接方式。它把 Tor 流量包進一個正常的 HTTPS 連線裡，在審查者眼中跟一般人瀏覽網站沒有兩樣。當審查系統用深度封包檢測（DPI）封鎖 obfs4 這類「看起來不像 HTTPS」的協定時，WebTunnel 依然能穿過去。
+WebTunnel 是 Tor 目前抗審查能力最強的橋接方式之一。它把 Tor 流量包進一個正常的 HTTPS 連線裡，流量形態與一般 HTTPS 瀏覽近似，難以被深度封包檢測（DPI）單獨挑出來。當審查系統用 DPI 封鎖 obfs4 這類「看起來不像 HTTPS」的協定時，WebTunnel 通常仍能穿過去。
 
 這份文件帶你在台灣的一台小型 VPS 上，用官方 Docker 方式架起一個 WebTunnel 橋接，從網域、TLS 憑證、nginx 反向代理到上線驗證，並附上監控、偽裝頁、防火牆與事件處置的維運做法。
 
@@ -16,9 +16,9 @@ WebTunnel 是 Tor 目前抗審查能力最強的橋接方式。它把 Tor 流量
 
     Tor 的對外貢獻有幾種，門檻與抗審查強度各不相同：
 
-    - [Tor Snowflake](../tools/tor-snowflake.md)：開瀏覽器分頁就能跑的臨時橋接，門檻最低，但走 WebRTC，部分審查環境偵測得到。
+    - [Tor Snowflake](../tools/tor-snowflake.md)：開瀏覽器分頁就能跑的臨時橋接，門檻最低，但走 WebRTC，握手特徵仍可能被指紋識別，嚴格審查地區（如中國）已有封鎖記錄。
     - **WebTunnel（本文）**：需要 VPS、網域與 TLS，偽裝成 HTTPS，重度審查地區最難封鎖。
-    - [Tor Relay](./setup-tor-relay.md)：中繼節點，撐起 Tor 網路的頻寬與多元性，不屬於橋接。
+    - [Tor Relay](./setup-tor-relay.md)：中繼節點，負責 Tor 網路的頻寬與節點多元性，不屬於橋接。
 
     橋接（Bridge）跟中繼一樣不直接連向使用者要去的目的地，對外網站看到的是 Tor 出口節點，不是你的伺服器，因此營運橋接的法律風險跟入口、中間節點同級，遠低於出口節點。
 
@@ -27,7 +27,7 @@ WebTunnel 是 Tor 目前抗審查能力最強的橋接方式。它把 Tor 流量
 - **對外連線受審查程度低、頻寬充足**：台灣是合適的橋接來源地。
 - **IP 與 ASN 多元性有價值**：審查者會去封鎖已知的橋接 IP，分散在不同國家、不同網路供應商的橋接越多，當地使用者能用的入口就越多。
 - **比架中繼省資源**：一台 512MB 到 1GB RAM 的 VPS 就夠跑，成本與運維負擔比 Tor Relay 低。
-- **回應真實需求**：2026 年伊朗在軍事行動期間封網近三個月，重新開放後大量流量湧入志工架設的 WebTunnel。這類橋接在極端審查下是當地人能否連上 Tor 的關鍵。
+- **回應真實需求**：2026 年伊朗在軍事行動期間多次大規模斷網，第二階段持續近三個月（2 月底至 5 月底）。重新開放後，社群自架的 WebTunnel 觀察到流量明顯湧入，記錄在 [伊朗斷網後：流量湧入社群的 WebTunnel](../blog/posts/iran-blackout-webtunnel.md)。在這類極端審查下，這種偽裝成 HTTPS 的橋接，往往是當地人能否連上 Tor 的關鍵。
 
 ## 開始前要準備的東西
 

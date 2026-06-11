@@ -6,11 +6,11 @@ icon: material/server-network
 
 # :material-server-network: Tor Relay 校園建立研究專題
 
-Tor Relay 校園建立是 匿名網路社群 anoni.net 2026 的三大主題之一，跟「個人隱私指引」、「匿名支付」並列為今年的重點推進項目。這頁是專題的對外入口，整理推動目標、相關文章索引、案例累積，以及如何加入社群協作。
+Tor Relay 校園建立是匿名網路社群 anoni.net 2026 的三大主題之一，跟「個人隱私指引」、「匿名支付」並列為今年的重點推進項目。這頁是專題的對外入口，整理推動目標、相關文章索引、案例累積，以及如何加入社群協作。
 
 ## 為什麼把校園 Tor Relay 獨立成一個主題
 
-Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼集中在少數國家或少數網路供應商時，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能看到的中繼數量有限，多元性還有很大成長空間（即時觀測見 [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md)）。
+Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼集中在少數國家或少數網路供應商時，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能看到的中繼數量有限，截至 2026-06 約 15 個運作中的中繼，相比德國上千、美國數千的規模差距明顯，多元性還有很大成長空間（數字會隨時間變動，即時觀測見 [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md)）。
 
 大專院校是補上這個缺口的合適切入點：
 
@@ -20,12 +20,12 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 - **教育價值**：架設過程本身就是匿名網路、資安、開源治理的具體教學場景
 - **國際接軌**：對接 EFF 的 [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} 計畫，把台灣校園納入全球架設網絡
 
-社群想做的是**把校園架設的完整流程、跟學校溝通的話術、實際維運經驗整理成可複製的方法論**，讓第二、第三所學校的推動成本明顯降低。
+社群想把校園架設的完整流程、跟學校溝通的應答範本、實際維運經驗整理成可複製的方法論，讓第二、第三所學校的推動成本明顯降低。
 
 ## 2026 推動目標
 
 - **校園架設 SOP 文件**：從提案、跟學校溝通、技術設置、上線、後續維運的完整流程
-- **跟學校溝通的話術與案例庫**：法律疑慮、頻寬使用、用途說明等高頻問題的回應參考
+- **跟學校溝通的應答範本與案例庫**：法律疑慮、頻寬使用、用途說明等高頻問題的回應參考
 - **第二、三所學校接洽**：以台師大為起點，向其他大專院校擴展
 - **EFF/Tor Project 對接**：建立穩定的國際對接管道，把台灣案例回饋給全球計畫
 - **觀測即時化**：透過 [Pulse](https://api.anoni.net/api/readme){target="_blank"} 持續追蹤校園節點的運作狀況
@@ -62,7 +62,7 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 ## 進行中與待完成
 
 - **第二所學校接洽**：與其他大專院校的初步聯繫與評估
-- **資安活動搭配**：跟學校資安週、迎新講座、Hackerton 等活動的合作模式
+- **資安活動搭配**：跟學校資安週、迎新講座、Hackathon 等活動的合作模式
 - **政策溝通材料**：給教育部層級的計畫說明、跨國比較資料
 - 翻譯候選報告（候選清單見下方）
 
@@ -73,7 +73,7 @@ Tor 網路的匿名性靠**多元的中繼節點**支撐。當絕大多數中繼
 - [Tor Project Relay Operator Guides](https://community.torproject.org/relay/){target="_blank"}：中繼站營運官方指南
 - [Tor University Challenge case studies](https://toruniversity.eff.org/case-studies/){target="_blank"}：國際校園案例研究
 - [EFF Legal FAQ for Tor relay operators](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"}：營運中繼的法律常見問題
-- 各國校園 Tor Relay 政策案例（MIT、Northeastern、CMU 等）
+- 各國校園 Tor Relay 政策案例（MIT、Stanford、CMU 等）
 
 ## 如何加入討論
 
