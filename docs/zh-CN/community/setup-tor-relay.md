@@ -60,8 +60,8 @@ Nickname    myNiceRelay # 调整 "myNiceRelay" 为你要公开呈现的名称
 ContactInfo your@e-mail # 联系方式，将公开呈现
                         # 如不想公开，可设置成 none
 ORPort      9001        # 默认的 Port 为 9001
-                        # 如果能提供 443, 80 等看起来像
-                        # 网页常用的 Port，更能帮助严峻的国家
+                        # 改用 443 这类常见的 HTTPS Port
+                        # 更能帮助处于严格审查地区的使用者连上
                         # 也请记得开启防火墙或对外 Port 设置。
 ExitRelay   0           # 不成为出口节点
 SocksPort   0
@@ -89,7 +89,7 @@ apt install nyx
 
 ## 建立多组 Tor 配置文件 `tor-instance-create`
 
-`tor-instance-create` 是一个用来在同一台服务器上建立多个独立 Tor 的工具。这在需要运行多个 Tor 以增加匿名性或流量分散的情况下特别有用。`tor-instance-create` 是 Tor 的一部分，通常已经随 Tor 软件包一起安装。
+`tor-instance-create` 是一个用来在同一台服务器上建立多个独立 Tor instance 的工具，方便把多个中继的设置与日志分开管理。它是 Debian/Ubuntu 的 tor 软件包附带的脚本，安装 tor 软件包后通常就有。
 
 ### 建立新的 Tor Instance
 
@@ -153,7 +153,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "运作 Tor Relay 有什么要求？"
 
-    建立 Tor Relay 前，确保您的网络有稳定的上传和下载速度。至少需具备 100 KB/s 的上传带宽且有固定的 IP 地址。此外，确认你的 ISP 允许这类流量，并且你的网络设备（如防火墙和路由器）可正确设置所需的连接端口转发。
+    建立 Tor Relay 前，确保你的网络有稳定的上传和下载速度。Tor Project 官方建议中继至少具备 10 Mbit/s（约 1.25 MB/s）的上传与下载带宽（见 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。带宽不足 10 Mbit/s 但仍有 1 Mbit/s 以上时，官方建议改跑 obfs4 桥接而非中继。另需有固定的 IP 地址。此外，确认你的 ISP 允许这类流量，并且你的网络设备（如防火墙和路由器）可正确设置所需的连接端口转发。
 
 ??? question "Tor Relay 会影响我的网速吗？"
 

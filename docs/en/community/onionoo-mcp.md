@@ -36,7 +36,7 @@ Three cloud AI assistants common across the Asia-Pacific region differ in how ea
 
 | Cloud AI | Paste a URL in the app? | How to connect |
 |---|---|---|
-| **Claude (claude.ai)** | Yes — even on the free plan | Settings → Connectors → Add custom connector, paste the URL |
+| **Claude (claude.ai)** | Yes — even on the free plan (1 connector limit) | Settings → Connectors → Add custom connector, paste the URL |
 | **ChatGPT** | Yes, but needs a paid plan (Plus or above; not Free) | Settings → Apps → Advanced → turn on Developer Mode → add a custom connector, paste the URL |
 | **Google Gemini** | Not yet in the consumer chat app | Goes through Gemini CLI (config file) or Gemini Enterprise (Google Cloud admin) — an engineering or enterprise path; see [the engineer section](#for-engineers-and-self-hosters) |
 

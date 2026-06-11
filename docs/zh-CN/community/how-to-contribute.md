@@ -23,6 +23,10 @@ icon: material/hand-heart
 
 建议先加入社区的 **Public Space**，一次取得所有相关 room 的入口，详见 [社群自架服务](tools.md)。
 
+!!! note "还没有 Matrix 账号？"
+
+    `im.anoni.net` 采申请制，先来信 <whisper@anoni.net> 取得账号（申请方式与注意事项见 [社群自架服务](tools.md)）。等待回复的期间，可以先订阅 [电子报](../contact.md)、读 [三大主题研究专题](index.md) 与 [指南](../guides/index.md)，想好自己想投入哪个方向。
+
 ## 平时如何参与
 
 - **日常讨论**：以 **Matrix rooms** 为主，各主题可按需要建立或使用对应 room。

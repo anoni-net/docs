@@ -6,7 +6,7 @@ icon: material/tunnel-outline
 
 # :material-tunnel-outline: How to set up a Tor WebTunnel bridge
 
-WebTunnel is currently Tor's most censorship-resistant kind of bridge. It wraps Tor traffic inside an ordinary HTTPS connection, so to a censor it looks no different from a person browsing a website. When a censorship system uses deep packet inspection (DPI) to block protocols like obfs4 that "don't look like HTTPS," WebTunnel still gets through.
+WebTunnel is currently one of Tor's most censorship-resistant kinds of bridge. It wraps Tor traffic inside an ordinary HTTPS connection, so its traffic closely resembles ordinary HTTPS browsing and is hard for DPI to single out. When a censorship system uses deep packet inspection (DPI) to block protocols like obfs4 that "don't look like HTTPS," WebTunnel usually still gets through.
 
 This guide walks you through standing up a WebTunnel bridge on a small VPS using the official Docker method, from the domain, TLS certificate, and nginx reverse proxy to verifying it's live, along with operational practices for monitoring, the cover page, the firewall, and incident handling.
 
@@ -16,7 +16,7 @@ This guide walks you through standing up a WebTunnel bridge on a small VPS using
 
     There are several ways to contribute to Tor, with different barriers to entry and different levels of censorship resistance:
 
-    - [Tor Snowflake](https://snowflake.torproject.org/){target="_blank"}: a temporary bridge you can run from a browser tab, the lowest barrier, but it runs over WebRTC and some censorship environments can detect it.
+    - [Tor Snowflake](https://snowflake.torproject.org/){target="_blank"}: a temporary bridge you can run from a browser tab, the lowest barrier, but it runs over WebRTC, whose handshake can still be fingerprinted, and strict-censorship regions such as China have already blocked it.
     - **WebTunnel (this guide)**: needs a VPS, a domain, and TLS; disguises itself as HTTPS; hardest to block in heavily censored places.
     - [Tor relay](https://community.torproject.org/relay/){target="_blank"}: a relay node that carries the bandwidth and diversity of the Tor network; it is not a bridge.
 

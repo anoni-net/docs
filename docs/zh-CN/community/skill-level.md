@@ -6,7 +6,7 @@ icon: octicons/paste-24
 
 # :octicons-paste-24: 自我技能评估表
 
-这里提供一份自我评估的量表，方便快速定位对于 Tor、Tails、OONI 了解的程度。如果不知道从哪里开始学习，可以把评估表当作学习的指引参考。
+这里提供一份自我评估的量表，方便快速定位你对 Tor、Tails、OONI 的熟悉程度。三个工具的角色不同：Tor 是匿名上网的基础、Tails 把使用情境拉到更高的安全需求、OONI 则是观测与测量网络审查。你不必依序把三个都点满，挑跟你想参与的主题相关的来评估就好。如果不知道从哪里开始学习，每个分级下的「从这里开始」都列了对应的入门文章，照着补完就能往上一级走。
 
 !!! info "如何使用评估表"
 
@@ -295,7 +295,8 @@ icon: octicons/paste-24
 
         ??? question "哪些 Mac 机型无法使用 Tails？"
 
-            - **不支持的类型**：使用 Apple T2 芯片或 Apple Silicon（M 系列芯片）的 Mac，由于启动安全机制，可能无法顺利从非苹果认证的 USB 装置启动。
+            - **完全不支持**：搭载 Apple Silicon（M 系列芯片）的 Mac 无法运行 Tails，因为 Tails 只支持 x86-64 架构。
+            - **可能受限**：较旧的 Intel Mac 若有 Apple T2 安全芯片，可能要先在「启动安全工具」放宽安全启动设置才能从 USB 开机，部分机型仍有已知问题。实际支持情形以 [Tails 官方系统需求](https://tails.net/doc/about/requirements/){target="_blank"} 为准。
 
         ??? question "Tails 的使用情境与限制。"
 
@@ -558,3 +559,11 @@ icon: octicons/paste-24
             2. 格式为 `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`。
             3. 本项目的 [ASN 涵盖分析工具](../taiwan/ooni-asn-coverage.md){target="_blank"} 提供了下载与分析的范例，可参考 `asn_coverage/ooni.py` 的实作方式。
             4. 原始数据可用于分析特定 ASN 的观测涵盖率、追踪特定网站在不同时间点的封锁状态，以及进行跨地区比较。
+
+## 评估完之后
+
+这份量表是自我参照用的，勾选结果不用回报给谁，直接照结果挑下一步就好：
+
+- **认识层**：先订阅 [电子报](../contact.md) 跟读社群动态，或到 [指南](../guides/index.md) 把概念补齐。
+- **实作层**：照各工具分级下的「从这里开始」动手安装、日常操作，遇到问题到 Matrix 发问。
+- **贡献层**：到 [如何参与与认领主题](./how-to-contribute.md) 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社群会协助你接上手。账号申请与服务入口见 [社群自架服务](./tools.md)。
