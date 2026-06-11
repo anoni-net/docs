@@ -6,7 +6,7 @@ icon: material/compare-horizontal
 
 # :material-compare-horizontal: Tails、Whonix、Qubes 的差別
 
-多數匿名瀏覽需求，裝 [Tor Browser](./what-is-tor.md) 就夠用。但有些工作會把整台電腦的安全前提一起拖下水：審閱外來機敏檔案、長期維持一個跟你日常身分切開的工作流、要在不信任的硬體上做敏感任務。這時要連作業系統一起切。
+多數匿名瀏覽需求，裝 [Tor Browser](./what-is-tor.md) 就夠用。但有些工作會讓整台電腦的安全前提一起失效：審閱外來機敏檔案、長期維持一個跟你日常身分切開的工作流、要在不信任的硬體上做敏感任務。這時要連作業系統一起隔離。
 
 社群最常被一起提到的三套匿名作業系統是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它們的設計目標不同，適合的情境也不同。動手前先回頭看 [威脅模型如何建立](../basics/threat-model.md)，把「我在抗誰、能投入多少」釐清，比直接挑工具更重要。
 
@@ -22,7 +22,7 @@ icon: material/compare-horizontal
 
 整機隔離跟瀏覽器隔離的差別在攻擊面的大小。Tor Browser 處理的是網頁連線跟身分綁定那一層，但你電腦上其他應用程式（Email 客戶端、雲端硬碟、IDE、輸入法、剪貼簿、字型快取）都還在主機上，跟 Tor 流量並行，留下交叉識別的機會。
 
-Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄式路線，整次工作階段在 USB 上跑，關機就消失。Whonix 換另一條路：在你日常作業系統裡架兩台虛擬機，一台 Gateway 鎖住所有對外流量強制走 Tor，一台 Workstation 給你做事，整套設定可以持久保留。Qubes 則拉到更上層，用 Xen hypervisor 把電腦切成多個 qube，每個任務在自己的 qube 裡跑，硬體層的攻擊更難跨界。
+Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄式路線，整次工作階段在 USB 上跑，關機就消失。Whonix 換另一條路：在你日常作業系統裡架兩台虛擬機，一台 Gateway 鎖住所有對外流量強制走 Tor，一台 Workstation 給你做事，整套設定可以持久保留。Qubes 則拉到更上層，用 Xen hypervisor（管理多台虛擬機的底層軟體）把電腦切成多個 qube（各自獨立的虛擬機），每個任務在自己的 qube 裡跑，硬體層的攻擊更難跨界。
 
 ## 五個比較軸
 
@@ -40,7 +40,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 |------|-------|--------|----------|
 | 隔離模型 | 整機重置（amnesic） | 雙 VM：Gateway + Workstation | 多 VM compartmentalization |
 | 持久性 | 預設遺忘，可選 Persistent Storage | 持久（VM 狀態保留） | 持久（template + qubes） |
-| 硬體需求 | Intel x86-64，10 年內機種多數可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 對硬體挑剔，要 VT-x、VT-d、16 GB+ RAM、SSD |
+| 硬體需求 | Intel x86-64，10 年內機種多數可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 對硬體挑剔，VT-d 必要、RAM 最低 6 GB（建議 16 GB 以上）、SSD |
 | 學習曲線 | 1 小時上手 | 半天到一天理解雙 VM | 一週適應 qube 操作流程 |
 | Tor 整合 | 強制全流量走 Tor | Gateway 強制 Workstation 走 Tor，主機 OS 不必走 | 預設不強制，需安裝 Whonix 模板才有 Tor |
 | 對應角色 | 記者、社運短期任務、家暴倖存者準備離開 | 長期 Tor 工作流、IT 從業者、跨平台需求 | IT 陣營、高敏感長期任務、嚴格 compartmentalization |
@@ -82,10 +82,10 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 **限制**：
 
-- 安全前提依賴主機 OS。主機被入侵了，Whonix VM 內的工作也保護不到（Qubes 解這層）。
+- 安全前提依賴主機 OS。主機被入侵了，Whonix VM 內的工作也難以保護（Qubes 在這層上有更好的隔離）。
 - VM 跑兩台會吃掉 4 GB+ 記憶體，舊機跑起來會明顯卡頓。
 - 不像 Tails 關機就清空，Whonix 是持久環境，使用紀錄會累積在 VM 內。
-- macOS 上 Apple Silicon 機型要用 [UTM](https://mac.getutm.app/){target="_blank"} 或 QEMU 跑 ARM64 版本，部分功能尚未完整支援，社群仍在追進度。
+- macOS 上 Apple Silicon 機型沒有官方預建的 ARM64 映像，要自行用 [UTM](https://mac.getutm.app/){target="_blank"} 或 QEMU 從原始碼建置，官方標示僅供開發者、維護狀態不穩定。
 
 ## Qubes OS
 
@@ -104,11 +104,11 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 - IT 陣營、安全研究員、長期高敏感任務工作者。
 - 願意付學習成本，把 work / personal / banking / 高敏 / 一次性 五類任務嚴格分到不同 qube 的進階使用者。
-- 已經有支援硬體（VT-d 必要、16 GB+ RAM、SSD），不用再為 Qubes 換機器。
+- 已經有支援硬體（VT-d 必要、RAM 建議 16 GB 以上、SSD），不用再為 Qubes 換機器。
 
 **限制**：
 
-- 對硬體挑剔。CPU 必須支援 VT-x 與 VT-d，記憶體建議 16 GB 以上，需要 SSD。買機前一定要查 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"}。
+- 對硬體挑剔。CPU 必須支援 VT-x 與 VT-d（處理器的硬體虛擬化功能，讓多台虛擬機安全並行），記憶體建議 16 GB 以上，需要 SSD。買機前一定要查 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"}。
 - 學習曲線陡。第一週會在「我這個檔案要在哪個 qube 開」、「這個 USB 要怎麼跨 qube 傳檔」這類操作上摸索。
 - 預設無 Tor 整合，要 Tor 必須額外裝 Whonix template。
 - 不支援 Apple Silicon。
@@ -147,7 +147,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 ??? question "Mac M 系列能跑哪一套？"
 
     - **Tails**：完全不能。Tails 不支援 Apple Silicon。
-    - **Whonix**：可以透過 [UTM](https://mac.getutm.app/){target="_blank"} 跑 ARM64 版本，仍在社群實驗階段。日常可用但要追進度。
+    - **Whonix**：Apple Silicon 上沒有可直接下載的預建映像，要自行從原始碼建置 ARM64 版本，官方標示僅供開發者、維護狀態不穩定，不建議用於安全敏感場景。
     - **Qubes**：完全不能。Qubes 需要 x86-64 + VT-d，Apple Silicon 是 ARM 架構，沒有計畫支援。
 
     多數 Apple Silicon 使用者要做整機隔離，會準備一台 Intel PC（二手 ThinkPad 是常見選擇）。

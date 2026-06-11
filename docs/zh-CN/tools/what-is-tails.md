@@ -109,7 +109,7 @@ Tails、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://
 
 ## 如何安装
 
-Tails 可以从 Windows、macOS、Ubuntu/Linux 制作 USB 开机磁碟，[官方安装页](https://tails.net/install/index.en.html){target="_blank"} 有逐步指引。下载大小约 1.6 GB，安装时间约半小时。
+Tails 可以从 Windows、macOS、Ubuntu/Linux 制作 USB 开机磁碟，[官方安装页](https://tails.net/install/index.en.html){target="_blank"} 有逐步指引。下载大小约 1.9 GB，实际安装时间视网速与硬体而定。
 
 ??? warning "硬体相容性"
 
@@ -123,7 +123,7 @@ Tails 可以从 Windows、macOS、Ubuntu/Linux 制作 USB 开机磁碟，[官方
 
     Tails 或许不能运行在：
 
-    - 内存不足 2 GB 的旧电脑上。
+    - 内存不足 3 GB 的旧电脑上。
     - 部分新显卡未被 Linux 良好支援的机型，特别是 Nvidia 与 AMD Radeon 显卡常有相容性问题。
 
     了解更多目前已知的[硬体问题](https://tails.net/support/known_issues/index.en.html){target="_blank"}。
@@ -133,7 +133,7 @@ Tails 可以从 Windows、macOS、Ubuntu/Linux 制作 USB 开机磁碟，[官方
     - 至少 8 GB 大小的 USB 随身碟。安装时 USB 上的资料会全部清空。
     - 可以从 USB 启动的装置。
     - 64 位元 [x86-64](https://zh.wikipedia.org/zh-cn/X86-64){target="_blank"} 处理器。
-    - 至少 2 GB 的内存，避免使用时卡顿。
+    - 至少 3 GB 内存才能顺畅运作，低于此值可能不稳定。
 
 ## 预装的工具
 
@@ -141,7 +141,7 @@ Tails 内建一系列预设安全的开源工具：
 
 - **Tor 浏览器**搭配 **uBlock Origin**：日常浏览。
 - **Thunderbird**：加密电子邮件。
-- **KeePassXC**：密码管理（[密码管理器入门](./password-manager.md) 有更多说明）。
+- **GNOME Secrets**：密码管理（Tails 7.6 起取代 KeePassXC，[密码管理器入门](./password-manager.md) 有更多说明）。
 - **LibreOffice**：文书处理。
 - **[OnionShare](./onionshare.md)**：透过 Tor 起临时 onion service 收发档案、聊天、架站。
 - **Metadata Cleaner**：清除档案的 EXIF、文件作者等隐藏资讯（为什么重要见 [Metadata 是什么](../basics/metadata.md)）。
@@ -200,4 +200,4 @@ Tails 内建一系列预设安全的开源工具：
 </div>
 
 [^1]: [图片来源自 tails.net](https://tails.net/){target="_blank"}
-[^2]: [Should I update Tails using apt upgrade or Synaptic?](https://tails.net/support/faq/index.en.html#upgrade){target="_blank"}
+[^2]: [Tails release schedule](https://tails.net/contribute/release_schedule/){target="_blank"}

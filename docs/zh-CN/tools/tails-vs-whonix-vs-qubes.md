@@ -40,7 +40,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 |------|-------|--------|----------|
 | 隔离模型 | 整机重置（amnesic） | 双 VM：Gateway + Workstation | 多 VM compartmentalization |
 | 持久性 | 默认遗忘，可选 Persistent Storage | 持久（VM 状态保留） | 持久（template + qubes） |
-| 硬件需求 | Intel x86-64，10 年内机种多数可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 对硬件挑剔，要 VT-x、VT-d、16 GB+ RAM、SSD |
+| 硬件需求 | Intel x86-64，10 年内机种多数可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 对硬件挑剔，VT-d 必要、RAM 最低 6 GB（建议 16 GB 以上）、SSD |
 | 学习曲线 | 1 小时上手 | 半天到一天理解双 VM | 一周适应 qube 操作流程 |
 | Tor 整合 | 强制全流量走 Tor | Gateway 强制 Workstation 走 Tor，主机 OS 不必走 | 默认不强制，需安装 Whonix 模板才有 Tor |
 | 对应角色 | 记者、社运短期任务、家暴幸存者准备离开 | 长期 Tor 工作流、IT 从业者、跨平台需求 | IT 阵营、高敏感长期任务、严格 compartmentalization |
@@ -85,7 +85,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 - 安全前提依赖主机 OS。主机被入侵了，Whonix VM 内的工作也保护不到（Qubes 解这层）。
 - VM 跑两台会吃掉 4 GB+ 内存，旧机跑起来会明显卡顿。
 - 不像 Tails 关机就清空，Whonix 是持久环境，使用纪录会累积在 VM 内。
-- macOS 上 Apple Silicon 机型要用 [UTM](https://mac.getutm.app/){target="_blank"} 或 QEMU 跑 ARM64 版本，部分功能尚未完整支持，社群仍在追进度。
+- Apple Silicon 上没有可直接下载的预建映像，要自行从原始码建置 ARM64 版本，官方标示仅供开发者、维护状态不稳定，不建议用于安全敏感场景。
 
 ## Qubes OS
 
@@ -104,7 +104,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 - IT 阵营、安全研究员、长期高敏感任务工作者。
 - 愿意付学习成本，把 work / personal / banking / 高敏 / 一次性 五类任务严格分到不同 qube 的进阶使用者。
-- 已经有支持硬件（VT-d 必要、16 GB+ RAM、SSD），不用再为 Qubes 换机器。
+- 已经有支持硬件（VT-d 必要、RAM 最低 6 GB、建议 16 GB 以上、SSD），不用再为 Qubes 换机器。
 
 **限制**：
 
@@ -149,7 +149,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 ??? question "Mac M 系列能跑哪一套？"
 
     - **Tails**：完全不能。Tails 不支持 Apple Silicon。
-    - **Whonix**：可以透过 [UTM](https://mac.getutm.app/){target="_blank"} 跑 ARM64 版本，仍在社群实验阶段。日常可用但要追进度。
+    - **Whonix**：Apple Silicon 上没有可直接下载的预建映像，要自行从原始码建置 ARM64 版本，官方标示仅供开发者、维护状态不稳定，不建议用于安全敏感场景。
     - **Qubes**：完全不能。Qubes 需要 x86-64 + VT-d，Apple Silicon 是 ARM 架构，没有计画支持。
 
     多数 Apple Silicon 使用者要做整机隔离，会准备一台 Intel PC（二手 ThinkPad 是常见选择）。
