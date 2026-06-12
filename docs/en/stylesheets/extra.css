@@ -47,27 +47,66 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
-   左側 sidebar：section 群組標題用背景色塊區隔
-   套用範圍：navigation.sections + navigation.indexes 下的 section 標題
+   左側 sidebar：section 群組標題做成有左側品牌色強調棒的區塊標頭
+   套用範圍：桌面寬度（看得到左側 sidebar 時）的 navigation.sections 群組
    （指南 tab 下的 概念 / 工具 / 場景 / 進階 / 報告 等）
+   只在桌面套用，窄螢幕收進抽屜選單時維持 Material 預設樣式
    ========================================================================== */
 
-.md-sidebar--primary .md-nav__item--section > .md-nav__link {
-  margin: 0.6rem 0 0.3rem;
-  padding: 0.35rem 0.6rem;
-  background-color: var(--md-default-fg-color--lightest);
-  border-radius: 0.2rem;
-  font-weight: 600;
-}
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link {
+    margin: 0.9rem 0.4rem 0.25rem 0;
+    padding: 0.3rem 0.5rem 0.3rem 0.55rem;
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 12%, transparent);
+    border-left: 0.2rem solid var(--brand-cyan-500);
+    border-radius: 0 0.2rem 0.2rem 0;
+    color: var(--brand-cyan-700);
+    font-weight: 700;
+  }
 
-.md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
-  background-color: var(--md-accent-fg-color--transparent);
-  color: var(--md-accent-fg-color);
-}
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 20%, transparent);
+    color: var(--brand-cyan-800);
+  }
 
-/* 巢狀 section（如報告分章）的子標題不沿用上層 section 的背景色塊 */
-.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
-  background-color: transparent;
+  /* 第二層群組標題（概念 / 工具 / 場景 / 進階 / 報告）：細框 + 圓角 chip 樣式 */
+  .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+    margin: 0.6rem 0.4rem 0.2rem 0;
+    padding: 0.3rem 0.5rem;
+    background-color: transparent;
+    border: 1px solid var(--brand-cyan-200);
+    border-radius: 5px;
+    color: var(--brand-cyan-700);
+    font-weight: 600;
+  }
+
+  /* 第二層群組（概念 / 工具 / 場景 / 進階 / 報告）底下的項目：右縮，
+     讓項目圖示與群組標題的圖示對齊（chip 的 border + padding 把標題圖示推右了） */
+  .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
+    padding-left: 0.5rem;
+  }
+
+  /* lifted 的當前 tab 標頭（指南）是 position:sticky 的遮罩列，背景必須不透明，
+     否則 hover 或捲動時會透出底下捲上來的 nav 文字。改用不透明同色 tint，
+     box-shadow 也染同色，沿用 Material 的 sticky 遮罩 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active.md-nav__item--section > .md-nav__link {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 12%, var(--md-default-bg-color));
+    box-shadow: 0 0 0.4rem 0.4rem var(--md-default-bg-color);
+  }
+
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active.md-nav__item--section > .md-nav__link:hover {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 18%, var(--md-default-bg-color));
+    box-shadow: 0 0 0.4rem 0.4rem var(--md-default-bg-color);
+  }
+
+  /* 暗色模式（slate）：頂層與第二層群組標題文字提亮，確保深底上對比足夠 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__item--section > .md-nav__link {
+    color: var(--brand-cyan-300);
+  }
+
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+    color: var(--brand-cyan-300);
+  }
 }
 
 /* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
@@ -131,4 +170,62 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   height: 2.5rem;
   vertical-align: middle;
   margin-right: 0.5rem;
+}
+
+/* ==========================================================================
+   暗色模式（slate）：內文與一般文字改純白
+   預設是半透明灰白（約 rgba(226, 228, 233, 0.82)），閱讀時不夠凸顯
+   ========================================================================== */
+
+[data-md-color-scheme="slate"] {
+  --md-typeset-color: #ffffff;
+  --md-default-fg-color: #ffffff;
+}
+
+/* ==========================================================================
+   Footer 文字改純白（footer 底色在亮暗模式都是深色，純白兩種模式皆適用）
+   蓋掉 Material 預設的半透明白（版權、Made with… 等）
+   ========================================================================== */
+
+.md-footer {
+  --md-footer-fg-color: #ffffff;
+  --md-footer-fg-color--light: #ffffff;
+  --md-footer-fg-color--lighter: #ffffff;
+}
+
+/* ==========================================================================
+   Footer「本站可離線閱讀」是新功能：做成醒目的 pill 連結 + 「新」標記
+   （結構見 overrides/partials/copyright.html 的 .md-copyright__offline）
+   ========================================================================== */
+
+.md-copyright__offline {
+  margin-top: 0.6em !important;
+}
+
+.md-copyright__offline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.25em 0.75em;
+  border-radius: 999px;
+  background-color: var(--brand-cyan-500);
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.md-copyright__offline a:hover {
+  background-color: var(--brand-cyan-600);
+}
+
+/* 前綴「新」徽章，標示這是近期新功能 */
+.md-copyright__offline a::before {
+  content: "NEW";
+  padding: 0.12em 0.45em;
+  border-radius: 999px;
+  background-color: var(--accent-action);
+  color: #ffffff;
+  font-size: 0.78em;
+  font-weight: 700;
+  line-height: 1.3;
 }
