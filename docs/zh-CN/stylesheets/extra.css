@@ -246,11 +246,15 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
-   亮色模式：內容頁 H1 標題改純黑（Material 預設 h1 是較淺的灰）
+   內容頁 H1 標題：亮色純黑、暗色純白（Material 預設 h1 是較淺的灰/灰白）
    ========================================================================== */
 
 [data-md-color-scheme="default"] .md-typeset h1 {
   color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: #ffffff;
 }
 
 /* ==========================================================================
