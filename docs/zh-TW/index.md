@@ -139,11 +139,11 @@ hide:
 
 !!! tip "最新動態"
 
-    - `新增`{style="color: var(--brand-cyan-600);"}：[出國前數位安全：把該問的問題打包成 prompt，帶回去問你自己信任的 AI](./blog/posts/travel-ai-briefing.md) - 2026/06/10
-    - `新增`{style="color: var(--brand-cyan-600);"}：[普查 336 條 OONI Run v2 清單：3 條就佔了全網 72% 的檢測量](./blog/posts/2026-ooni-run-v2-usage-patterns.md) - 2026/06/02
-    - `更新`{style="color: var(--cat-privacy);"}：[Unredacted 如何幫受審查地區的人連上開放網路](./blog/posts/keeping-the-doors-open.md) - 2026/06/01
-    - `更新`{style="color: var(--cat-privacy);"}：[伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](./blog/posts/iran-blackout-webtunnel.md) - 2026/05/28
-    - `新增`{style="color: var(--brand-cyan-600);"}：[CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](./blog/posts/2026-cryptpad-zh-hant.md) - 2026/05/25
+    - `新增`{style="color: var(--brand-cyan-800);"}：[出國前數位安全：把該問的問題打包成 prompt，帶回去問你自己信任的 AI](./blog/posts/travel-ai-briefing.md) - 2026/06/10
+    - `新增`{style="color: var(--brand-cyan-800);"}：[普查 336 條 OONI Run v2 清單：3 條就佔了全網 72% 的檢測量](./blog/posts/2026-ooni-run-v2-usage-patterns.md) - 2026/06/02
+    - `更新`{style="color: #2e7d32;"}：[Unredacted 如何幫受審查地區的人連上開放網路](./blog/posts/keeping-the-doors-open.md) - 2026/06/01
+    - `更新`{style="color: #2e7d32;"}：[伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](./blog/posts/iran-blackout-webtunnel.md) - 2026/05/28
+    - `新增`{style="color: var(--brand-cyan-800);"}：[CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](./blog/posts/2026-cryptpad-zh-hant.md) - 2026/05/25
     - `活動`{style="color: var(--accent-action);"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
