@@ -134,6 +134,26 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav__link   { color: var(--guide-reports-d);   border-color: var(--guide-reports-d); }
 }
 
+/* ==========================================================================
+   內容頁標題（H1）依所屬指南分類上色，跟左欄分類 chip 同色
+   作法：用 :has() 看左欄哪個分類 li 帶 --active（即當前所在分類），
+   依其 nth 位置（概念=1…報告=5）幫 .md-content 的 H1 上色。
+   H1 的標題圖示是 fill:currentColor，會一起變色。報告子章節不在此直接路徑上、不會誤觸。
+   ========================================================================== */
+
+.md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-basics); }
+.md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-tools); }
+.md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-scenarios); }
+.md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-advanced); }
+.md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-reports); }
+
+/* 暗色（slate）用較亮的變體 */
+[data-md-color-scheme="slate"] .md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-basics-d); }
+[data-md-color-scheme="slate"] .md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-tools-d); }
+[data-md-color-scheme="slate"] .md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-scenarios-d); }
+[data-md-color-scheme="slate"] .md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-advanced-d); }
+[data-md-color-scheme="slate"] .md-main:has(.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5).md-nav__item--active) .md-content .md-typeset h1 { color: var(--guide-reports-d); }
+
 /* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
 .md-path__link {
   color: var(--brand-cyan-500);
