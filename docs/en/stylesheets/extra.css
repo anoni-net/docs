@@ -163,14 +163,12 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-reports-d) 85%, black); }
 }
 
-/* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
-.md-path__link {
-  color: var(--brand-cyan-500);
-}
-
-.md-path__link:hover {
-  color: var(--brand-cyan-600);
-}
+/* 麵包屑（navigation.path）：亮色用 cyan-800 過 WCAG AA（白底 5.76:1），
+   暗色維持 cyan-500（slate 上 5.28:1）。hover 各自再深/再亮一階。 */
+[data-md-color-scheme="default"] .md-path__link { color: var(--brand-cyan-800); }
+[data-md-color-scheme="slate"]   .md-path__link { color: var(--brand-cyan-500); }
+[data-md-color-scheme="default"] .md-path__link:hover { color: var(--brand-cyan-900); }
+[data-md-color-scheme="slate"]   .md-path__link:hover { color: var(--brand-cyan-300); }
 
 /* ==========================================================================
    圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
@@ -246,6 +244,19 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 
 [data-md-color-scheme="slate"] .md-typeset h1 {
   color: #ffffff;
+}
+
+/* ==========================================================================
+   WCAG AA 對比（亮色模式）：Material 「light blue」primary 太淺，內文連結
+   #02a6f2 在白底僅 2.71:1。把連結 / accent / header 底色統一改品牌 cyan-800
+   #006d99（白底 5.76:1，仍在 cyan 色階、只是較深）。
+   只改亮色：cyan-800 在 slate 暗底僅 2.27，故暗色維持 Material 預設（已過 AA）。
+   ========================================================================== */
+
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--brand-cyan-800);   /* 內文連結 2.71 → 5.76 */
+  --md-accent-fg-color: var(--brand-cyan-800);   /* hover / accent / 按鈕 */
+  --md-primary-fg-color: var(--brand-cyan-800);  /* header 底色，白字 2.71 → 5.76 */
 }
 
 /* ==========================================================================
