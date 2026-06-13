@@ -139,11 +139,11 @@ hide:
 
 !!! tip "最新動態"
 
-    - `更新`{style="color: var(--cat-privacy);"}：[InterSecLab MADLink 報告翻譯：凌華 1,708 台 CSA-7400 進入哈薩克審查系統](./blog/posts/report-madlink.md) - 2026/05/23
-    - `新增`{style="color: var(--brand-cyan-600);"}：[校園 Tor Relay 範本工具包：提案、SOP、FAQ 三份範本上線](./blog/posts/2026-campus-tor-relay-template-kit.md) - 2026/05/21
-    - `更新`{style="color: var(--cat-privacy);"}：[Transaction Denied 中文導讀：金融公司作為審查者](./blog/posts/2026-financial-companies-as-censors.md) - 2026/05/21
-    - `新增`{style="color: var(--brand-cyan-600);"}：[onionoo MCP 上線：用一句中文問 Tor 中繼節點現況](./blog/posts/2026-onionoo-mcp-public.md) - 2026/05/19
-    - `新增`{style="color: var(--brand-cyan-600);"}：[什麼是差分隱私](./blog/posts/2025-what-is-differential-privacy.md) - 2026/04/27
+    - `新增`{style="color: var(--brand-cyan-600);"}：[出國前數位安全：把該問的問題打包成 prompt，帶回去問你自己信任的 AI](./blog/posts/travel-ai-briefing.md) - 2026/06/10
+    - `新增`{style="color: var(--brand-cyan-600);"}：[普查 336 條 OONI Run v2 清單：3 條就佔了全網 72% 的檢測量](./blog/posts/2026-ooni-run-v2-usage-patterns.md) - 2026/06/02
+    - `更新`{style="color: var(--cat-privacy);"}：[Unredacted 如何幫受審查地區的人連上開放網路](./blog/posts/keeping-the-doors-open.md) - 2026/06/01
+    - `更新`{style="color: var(--cat-privacy);"}：[伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](./blog/posts/iran-blackout-webtunnel.md) - 2026/05/28
+    - `新增`{style="color: var(--brand-cyan-600);"}：[CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](./blog/posts/2026-cryptpad-zh-hant.md) - 2026/05/25
     - `活動`{style="color: var(--accent-action);"}：[COSCUP 2026 公開徵稿](./activity/coscup-2026-cfp.md) - 2026/04/08
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
