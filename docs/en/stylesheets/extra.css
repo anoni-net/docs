@@ -32,7 +32,7 @@
   /* 指南分類色（sidebar 導覽 chip 用 UI 色，非內容語意色，見 brand-identity.md）
      刻意避開三大主題保留色：綠 #4caf50、紫 #7b1fa2、橙 #ef6c00 與緊急紅 #d32f2f */
   --guide-basics:    #0089bf;  --guide-basics-d:    #4dbfff;  /* 概念：品牌 cyan 錨點 */
-  --guide-tools:     #00838f;  --guide-tools-d:     #4db6ac;  /* 工具：teal */
+  --guide-tools:     #2e7d32;  --guide-tools-d:     #66bb6a;  /* 工具：深綠（跟 cyan 拉開，比隱私綠 #4caf50 更深） */
   --guide-scenarios: #ad1457;  --guide-scenarios-d: #f06292;  /* 場景：洋紅 */
   --guide-advanced:  #4527a0;  --guide-advanced-d:  #9575cd;  /* 進階：靛紫 */
   --guide-reports:   #1565c0;  --guide-reports-d:   #64b5f6;  /* 報告：藍 */
