@@ -28,6 +28,14 @@
   /* 中性 */
   --neutral-muted:  #546e7a;
   --neutral-border: #cdcdcd;
+
+  /* 指南分類色（sidebar 導覽 chip 用 UI 色，非內容語意色，見 brand-identity.md）
+     刻意避開三大主題保留色：綠 #4caf50、紫 #7b1fa2、橙 #ef6c00 與緊急紅 #d32f2f */
+  --guide-basics:    #0089bf;  --guide-basics-d:    #4dbfff;  /* 概念：品牌 cyan 錨點 */
+  --guide-tools:     #00838f;  --guide-tools-d:     #4db6ac;  /* 工具：teal */
+  --guide-scenarios: #ad1457;  --guide-scenarios-d: #f06292;  /* 場景：洋紅 */
+  --guide-advanced:  #4527a0;  --guide-advanced-d:  #9575cd;  /* 進階：靛紫 */
+  --guide-reports:   #1565c0;  --guide-reports-d:   #64b5f6;  /* 報告：藍 */
 }
 
 html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__inner.md-grid {
@@ -80,6 +88,16 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     font-weight: 600;
   }
 
+  /* 每個分類給自己的主題色：color 同時染標題文字與 SVG 圖示，border-color 染框。
+     用 lifted 路徑 + nth-of-type 依位置鎖定 5 個分類（概念=1…報告=5），與 active
+     狀態無關（避免瀏覽該分類時 href 收斂成 ./ 而退色）；排除報告底下的子章節。
+     注意：依賴 mkdocs.yml 的分類順序，改順序需同步調整對應色。 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav__link    { color: var(--guide-basics);    border-color: var(--guide-basics); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav__link     { color: var(--guide-tools);     border-color: var(--guide-tools); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav__link { color: var(--guide-scenarios); border-color: var(--guide-scenarios); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav__link  { color: var(--guide-advanced);  border-color: var(--guide-advanced); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav__link   { color: var(--guide-reports);   border-color: var(--guide-reports); }
+
   /* 第二層群組（概念 / 工具 / 場景 / 進階 / 報告）底下的項目：右縮，
      讓項目圖示與群組標題的圖示對齊（chip 的 border + padding 把標題圖示推右了） */
   .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
@@ -107,6 +125,13 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
     color: var(--brand-cyan-300);
   }
+
+  /* 暗色：每類用較亮的變體（nth 對應同上），維持彼此區隔與深底對比 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav__link    { color: var(--guide-basics-d);    border-color: var(--guide-basics-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav__link     { color: var(--guide-tools-d);     border-color: var(--guide-tools-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav__link { color: var(--guide-scenarios-d); border-color: var(--guide-scenarios-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav__link  { color: var(--guide-advanced-d);  border-color: var(--guide-advanced-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav__link   { color: var(--guide-reports-d);   border-color: var(--guide-reports-d); }
 }
 
 /* 麵包屑（navigation.path）用社群主題色 cyan，不用預設灰 */
