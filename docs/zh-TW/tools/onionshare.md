@@ -14,6 +14,17 @@ icon: material/share-circle
 - **會話即用即丟**。關掉 OnionShare，onion service 同時下線，網址自動失效。沒有後台 log、沒有 metadata 落地。
 - **跨平台桌面工具**。macOS、Windows、Linux、Tails 都有 GUI。也有 CLI 可以架在 server 做長期收件箱。
 
+## 你應該知道的事
+
+開始操作前，先掌握幾個使用前提：
+
+- **IP 不會洩漏給對方**。流量走 Tor，對方只看到 `.onion` 網址，看不到你的真實 IP。
+- **會話結束就消失**。關閉 OnionShare 視窗，onion service 同時下線，沒有殘留。Tor 網路也不會留下這個 onion 曾經存在的紀錄。
+- **網址要透過安全管道交給對方**。OnionShare 不負責配送網址。如果你用 LINE 把網址傳給對方，那一段就不再匿名。常見做法是 Signal、Cryptpad 或當面口頭交換。
+- **對方需要 Tor Browser**。如果對方完全不會用 Tor，OnionShare 不適合。改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密郵件。
+- **長期 Receive 收件箱建議用獨立硬體**。掛在主力電腦 24/7 容易被當作攻擊面，建議用 Tails USB 或專用 Linux box。
+- **流量會用到你的網路頻寬**。對方下載大檔時，你的網路上傳會被佔用，速度也受限於 Tor 網路（速度受 Tor 網路當下壅塞情況影響，可能偏慢）。
+
 ## 四種使用模式
 
 <figure markdown="span">
@@ -74,7 +85,7 @@ icon: material/share-circle
 - **適用**：行動現場臨時協調、敏感會議的會中通訊、不希望事後留下對話紀錄的小組討論。
 - **限制**：所有人都要 Tor Browser 連入。歷史訊息不保留，無法事後翻閱。
 
-## 怎麼安裝
+## 如何安裝
 
 - **macOS、Windows、Linux 桌面**：到 [onionshare.org](https://onionshare.org/){target="_blank"} 下載官方 GUI。
 - **Flatpak 或 Snap**：對 Linux 使用者更方便的封裝，套件庫名稱 `org.onionshare.OnionShare`。
@@ -96,20 +107,11 @@ icon: material/share-circle
 - 已經在 Signal 對話中、單純傳一份檔，用 Signal 附件就夠
 - 第一次接觸、對方不該暴露身分、不想經第三方，用 OnionShare
 
-## 你應該知道的事
-
-- **IP 不會洩漏給對方**。流量走 Tor，對方只看到 `.onion` 網址，看不到你的真實 IP。
-- **會話結束就消失**。關閉 OnionShare 視窗，onion service 同時下線，沒有殘留。Tor 網路也不會留下這個 onion 曾經存在的紀錄。
-- **網址要透過安全管道交給對方**。OnionShare 不負責配送網址。如果你用 LINE 把網址傳給對方，那一段就不再匿名。常見做法是 Signal、Cryptpad 或當面口頭交換。
-- **對方需要 Tor Browser**。如果對方完全不會用 Tor，OnionShare 不適合。改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密郵件。
-- **長期 Receive 收件箱建議用獨立硬體**。掛在主力電腦 24/7 容易被當作攻擊面，建議用 Tails USB 或專用 Linux box。
-- **流量會用到你的網路頻寬**。對方下載大檔時，你的網路上傳會被佔用，速度也受限於 Tor 網路（通常 1 至 3 MB/s）。
-
 ## 常見問題
 
 ??? question "對方完全沒用過 Tor，怎麼引導？"
 
-    給對方 [Tor Browser 進階設定](./tor-browser-advanced.md) 的入門段落，請對方先安裝 Tor Browser、再開你的 `.onion` 網址。如果對方拒絕安裝 Tor，改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密郵件。
+    把 [Tor Browser 進階設定](./tor-browser-advanced.md) 的入門段落連結傳給對方，請對方先安裝 Tor Browser，再開你的 `.onion` 網址。如果對方拒絕安裝 Tor，改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密郵件。
 
 ??? question "怎麼確認對方拿到的是正確網址、沒被替換？"
 
@@ -117,7 +119,7 @@ icon: material/share-circle
 
 ??? question "Receive 模式可以收多大的檔案？"
 
-    技術上沒有檔案大小限制，實務上受限於三個因素，你的網路上傳頻寬、Tor 網路速度（通常 1 至 3 MB/s）、你願意把 OnionShare 開多久。超過 1 GB 的檔案建議拆段或改用其他管道。
+    技術上沒有檔案大小限制，實務上受限於三個因素，你的網路上傳頻寬、Tor 網路速度（速度受 Tor 網路當下壅塞情況影響，可能偏慢）、你願意把 OnionShare 開多久。超過 1 GB 的檔案建議拆段或改用其他管道。
 
 ??? question "Chat 模式跟 Signal、SimpleX 有什麼差？"
 
@@ -125,11 +127,15 @@ icon: material/share-circle
 
 ??? question "手機可以用嗎？"
 
-    OnionShare 沒有官方 iOS 或 Android app（截至 2026 年）。手機端只能當「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 開啟對方提供的 `.onion` 網址。發送方需要桌面或 Tails。
+    OnionShare 有官方 Android app（Google Play 與 F-Droid 可裝，仍是 beta），iOS app 仍在開發中（截至 2026 年）。手機端較成熟的用法仍是當「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 開啟對方提供的 `.onion` 網址。要當發送方建議用桌面或 Tails。
 
 ??? question "OnionShare 跟 Tor Bridge、Snowflake 有關係嗎？"
 
     沒有直接關係。Tor Bridge、[Snowflake](./tor-snowflake.md) 是「幫助別人連上 Tor 網路」的入口節點，OnionShare 則是「在 Tor 網路上提供服務」的工具。兩者是 Tor 生態裡不同位置的角色。
+
+## 接下來
+
+第一次要把敏感檔案傳出去，先挑一個模式試跑一次（送檔最單純），熟悉「產生 `.onion` 網址、透過安全管道交給對方」這個流程。要把它接進完整的工作流程，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](../community/upload-sensitive.md)。
 
 ## :material-chat-question: 一同瞭解
 

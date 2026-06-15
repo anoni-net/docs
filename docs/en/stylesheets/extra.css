@@ -28,6 +28,14 @@
   /* 中性 */
   --neutral-muted:  #546e7a;
   --neutral-border: #cdcdcd;
+
+  /* 指南分類色（sidebar 導覽 chip 用 UI 色，非內容語意色，見 brand-identity.md）
+     刻意避開三大主題保留色：綠 #4caf50、紫 #7b1fa2、橙 #ef6c00 與緊急紅 #d32f2f */
+  --guide-basics:    #0079a3;  --guide-basics-d:    #4dbfff;  /* 概念：品牌 cyan（深一階以過 AA 對比） */
+  --guide-tools:     #2e7d32;  --guide-tools-d:     #66bb6a;  /* 工具：深綠（跟 cyan 拉開，比隱私綠 #4caf50 更深） */
+  --guide-scenarios: #ad1457;  --guide-scenarios-d: #f06292;  /* 場景：洋紅 */
+  --guide-advanced:  #4527a0;  --guide-advanced-d:  #b39ddb;  /* 進階：靛紫（暗色提亮以過 AA 對比） */
+  --guide-reports:   #946c00;  --guide-reports-d:   #e0b020;  /* 報告：琥珀金（離開藍色系，色盲下與概念完全分開） */
 }
 
 html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__inner.md-grid {
@@ -47,28 +55,120 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
-   左側 sidebar：section 群組標題用背景色塊區隔
-   套用範圍：navigation.sections + navigation.indexes 下的 section 標題
+   左側 sidebar：section 群組標題做成有左側品牌色強調棒的區塊標頭
+   套用範圍：桌面寬度（看得到左側 sidebar 時）的 navigation.sections 群組
    （指南 tab 下的 概念 / 工具 / 場景 / 進階 / 報告 等）
+   只在桌面套用，窄螢幕收進抽屜選單時維持 Material 預設樣式
    ========================================================================== */
 
-.md-sidebar--primary .md-nav__item--section > .md-nav__link {
-  margin: 0.6rem 0 0.3rem;
-  padding: 0.35rem 0.6rem;
-  background-color: var(--md-default-fg-color--lightest);
-  border-radius: 0.2rem;
-  font-weight: 600;
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link {
+    margin: 0.9rem 0.4rem 0.25rem 0;
+    padding: 0.3rem 0.5rem 0.3rem 0.55rem;
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 12%, transparent);
+    border-left: 0.2rem solid var(--brand-cyan-500);
+    border-radius: 0 0.2rem 0.2rem 0;
+    color: var(--brand-cyan-700);
+    font-weight: 700;
+  }
+
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 20%, transparent);
+    color: var(--brand-cyan-800);
+  }
+
+  /* 第二層群組標題（概念 / 工具 / 場景 / 進階 / 報告）：細框 + 圓角 chip 樣式 */
+  .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+    margin: 0.6rem 0.4rem 0.2rem 0;
+    padding: 0.3rem 0.5rem;
+    background-color: transparent;
+    border: 1px solid var(--brand-cyan-200);
+    border-radius: 5px;
+    color: var(--brand-cyan-700);
+    font-weight: 600;
+  }
+
+  /* 每個分類給自己的主題色：color 同時染標題文字與 SVG 圖示，border-color 染框。
+     用 lifted 路徑 + nth-of-type 依位置鎖定 5 個分類（概念=1…報告=5），與 active
+     狀態無關（避免瀏覽該分類時 href 收斂成 ./ 而退色）；排除報告底下的子章節。
+     注意：依賴 mkdocs.yml 的分類順序，改順序需同步調整對應色。 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav__link    { color: var(--guide-basics);    border-color: var(--guide-basics); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav__link     { color: var(--guide-tools);     border-color: var(--guide-tools); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav__link { color: var(--guide-scenarios); border-color: var(--guide-scenarios); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav__link  { color: var(--guide-advanced);  border-color: var(--guide-advanced); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav__link   { color: var(--guide-reports);   border-color: var(--guide-reports); }
+
+  /* 第二層群組（概念 / 工具 / 場景 / 進階 / 報告）底下的項目：右縮，
+     讓項目圖示與群組標題的圖示對齊（chip 的 border + padding 把標題圖示推右了） */
+  .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
+    padding-left: 0.5rem;
+  }
+
+  /* lifted 的當前 tab 標頭（指南）是 position:sticky 的遮罩列，背景必須不透明，
+     否則 hover 或捲動時會透出底下捲上來的 nav 文字。改用不透明同色 tint，
+     box-shadow 也染同色，沿用 Material 的 sticky 遮罩 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active.md-nav__item--section > .md-nav__link {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 12%, var(--md-default-bg-color));
+    box-shadow: 0 0 0.4rem 0.4rem var(--md-default-bg-color);
+  }
+
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active.md-nav__item--section > .md-nav__link:hover {
+    background-color: color-mix(in srgb, var(--brand-cyan-500) 18%, var(--md-default-bg-color));
+    box-shadow: 0 0 0.4rem 0.4rem var(--md-default-bg-color);
+  }
+
+  /* 暗色模式（slate）：頂層與第二層群組標題文字提亮，確保深底上對比足夠 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__item--section > .md-nav__link {
+    color: var(--brand-cyan-300);
+  }
+
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link {
+    color: var(--brand-cyan-300);
+  }
+
+  /* 暗色：每類用較亮的變體（nth 對應同上），維持彼此區隔與深底對比 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav__link    { color: var(--guide-basics-d);    border-color: var(--guide-basics-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav__link     { color: var(--guide-tools-d);     border-color: var(--guide-tools-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav__link { color: var(--guide-scenarios-d); border-color: var(--guide-scenarios-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav__link  { color: var(--guide-advanced-d);  border-color: var(--guide-advanced-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav__link   { color: var(--guide-reports-d);   border-color: var(--guide-reports-d); }
+
+  /* 各分類底下的子連結文字（含圖示，fill:currentColor）也套該分類主題色 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav .md-nav__link { color: var(--guide-basics); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav .md-nav__link { color: var(--guide-tools); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav .md-nav__link { color: var(--guide-scenarios); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav .md-nav__link { color: var(--guide-advanced); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav .md-nav__link { color: var(--guide-reports); }
+
+  /* 暗色：子連結用較亮的變體 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav .md-nav__link { color: var(--guide-basics-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav .md-nav__link { color: var(--guide-tools-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav .md-nav__link { color: var(--guide-scenarios-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav .md-nav__link { color: var(--guide-advanced-d); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav .md-nav__link { color: var(--guide-reports-d); }
+
+  /* active（當前頁）連結：加粗 + 顏色比所屬分類色再深一點，從同色兄弟中突出 */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav .md-nav__link--active { font-weight: 700; }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-basics) 70%, black); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-tools) 70%, black); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-scenarios) 70%, black); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-advanced) 70%, black); }
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-reports) 70%, black); }
+
+  /* 暗色：active 連結輕度加深（過深會在深底上看不清），仍加粗 */
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(1) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-basics-d) 85%, black); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(2) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-tools-d) 85%, black); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(3) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-scenarios-d) 85%, black); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(4) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-advanced-d) 85%, black); }
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--section:nth-of-type(5) > .md-nav .md-nav__link--active { color: color-mix(in srgb, var(--guide-reports-d) 85%, black); }
 }
 
-.md-sidebar--primary .md-nav__item--section > .md-nav__link:hover {
-  background-color: var(--md-accent-fg-color--transparent);
-  color: var(--md-accent-fg-color);
-}
-
-/* section 子項目稍微縮排 */
-.md-sidebar--primary .md-nav__item--section > nav.md-nav {
-  padding-left: 0.4rem;
-}
+/* 麵包屑（navigation.path）：亮色用 cyan-800 過 WCAG AA（白底 5.76:1），
+   暗色維持 cyan-500（slate 上 5.28:1）。hover 各自再深/再亮一階。 */
+[data-md-color-scheme="default"] .md-path__link { color: var(--brand-cyan-800); }
+[data-md-color-scheme="slate"]   .md-path__link { color: var(--brand-cyan-500); }
+[data-md-color-scheme="default"] .md-path__link:hover { color: var(--brand-cyan-900); }
+[data-md-color-scheme="slate"]   .md-path__link:hover { color: var(--brand-cyan-300); }
 
 /* ==========================================================================
    圖示尺寸與對齊（Material 的 :icon:{ .lg .middle } 在非 Insiders 不生效，自補）
@@ -122,4 +222,87 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   height: 2.5rem;
   vertical-align: middle;
   margin-right: 0.5rem;
+}
+
+/* ==========================================================================
+   暗色模式（slate）：內文與一般文字改純白
+   預設是半透明灰白（約 rgba(226, 228, 233, 0.82)），閱讀時不夠凸顯
+   ========================================================================== */
+
+[data-md-color-scheme="slate"] {
+  --md-typeset-color: #ffffff;
+  --md-default-fg-color: #ffffff;
+}
+
+/* ==========================================================================
+   內容頁 H1 標題：亮色純黑、暗色純白（Material 預設 h1 是較淺的灰/灰白）
+   ========================================================================== */
+
+[data-md-color-scheme="default"] .md-typeset h1 {
+  color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   WCAG AA 對比（亮色模式）：Material 「light blue」primary 太淺，內文連結
+   #02a6f2 在白底僅 2.71:1。把連結 / accent / header 底色統一改品牌 cyan-800
+   #006d99（白底 5.76:1，仍在 cyan 色階、只是較深）。
+   只改亮色：cyan-800 在 slate 暗底僅 2.27，故暗色維持 Material 預設（已過 AA）。
+   ========================================================================== */
+
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--brand-cyan-800);   /* 內文連結 2.71 → 5.76 */
+  --md-accent-fg-color: var(--brand-cyan-800);   /* hover / accent / 按鈕 */
+  --md-primary-fg-color: var(--brand-cyan-800);  /* header 底色，白字 2.71 → 5.76 */
+}
+
+/* ==========================================================================
+   Footer 文字改純白（footer 底色在亮暗模式都是深色，純白兩種模式皆適用）
+   蓋掉 Material 預設的半透明白（版權、Made with… 等）
+   ========================================================================== */
+
+.md-footer {
+  --md-footer-fg-color: #ffffff;
+  --md-footer-fg-color--light: #ffffff;
+  --md-footer-fg-color--lighter: #ffffff;
+}
+
+/* ==========================================================================
+   Footer「本站可離線閱讀」是新功能：做成醒目的 pill 連結 + 「新」標記
+   （結構見 overrides/partials/copyright.html 的 .md-copyright__offline）
+   ========================================================================== */
+
+.md-copyright__offline {
+  margin-top: 0.6em !important;
+}
+
+.md-copyright__offline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.25em 0.75em;
+  border-radius: 999px;
+  background-color: var(--brand-cyan-500);
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.md-copyright__offline a:hover {
+  background-color: var(--brand-cyan-600);
+}
+
+/* 前綴「新」徽章，標示這是近期新功能 */
+.md-copyright__offline a::before {
+  content: "NEW";
+  padding: 0.12em 0.45em;
+  border-radius: 999px;
+  background-color: var(--accent-action);
+  color: #ffffff;
+  font-size: 0.78em;
+  font-weight: 700;
+  line-height: 1.3;
 }

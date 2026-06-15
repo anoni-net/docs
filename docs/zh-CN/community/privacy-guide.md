@@ -6,13 +6,13 @@ icon: material/shield-lock-outline
 
 # :material-shield-lock-outline: 个人隐私指引研究专题
 
-个人隐私指引是 匿名网络社群 anoni.net 2026 的三大主题之一，跟「Tor Relay 校园建立」、「匿名支付」并列为今年的重点推进项目。这页是研究专题的对外入口，整理研究目标、相关文章索引、目前进度，以及如何加入社群讨论。
+个人隐私指引是匿名网络社群 anoni.net 2026 的三大主题之一，跟「Tor Relay 校园建立」、「匿名支付」并列为今年的重点推进项目。这页是研究专题的对外入口，整理研究目标、相关文章索引、目前进度，以及如何加入社群讨论。
 
 ## 为什么把个人隐私指引独立成一个主题
 
 社群推广 Tor、Tails、OONI 多年，最常被问的问题是「我下一步该怎么做才能让自己更安全」。这个提问背后缺的，是一套**可实际操作、依情境分级**的隐私指引。
 
-现有的中文资源多半停留在「介绍某个工具」或「列举一堆技巧」，缺少把概念、工具、场景三层串起来的桥梁。读者学完工具不知道对应到什么风险，看完场景不知道从哪开始实作，看完概念不知道怎么落地。社群想做的是把这三层接起来，让「个人隐私」可以从「知道工具名称」一路走到「在自己的情境下实际采用」。
+现有的中文资源多半停留在「介绍某个工具」或「列举一堆技巧」，缺少把概念、工具、场景三层串起来的桥梁。读者学完工具不知道对应到什么风险，看完场景不知道从哪开始实作，看完概念不知道如何落地。社群想做的是把这三层接起来，让「个人隐私」可以从「知道工具名称」一路走到「在自己的情境下实际采用」。
 
 ## 2026 研究目标
 
@@ -27,26 +27,24 @@ icon: material/shield-lock-outline
 
 社群依「[指南](../guides/index.md)」的分层结构，把隐私主题分散到不同层次：
 
-- 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型怎么想](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)
+- 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)
 - 工具：[什么是 Tor](../tools/what-is-tor.md)、[什么是 Tails](../tools/what-is-tails.md)、[Tor Browser 进阶设定](../tools/tor-browser-advanced.md)、[匿名操作系统比较](../tools/tails-vs-whonix-vs-qubes.md)、[消息工具比较](../tools/messaging-comparison.md)、[密码管理器入门](../tools/password-manager.md)
 - 场景：[记者保护消息来源](../scenarios/journalist.md)、[社运行动者的数位准备](../scenarios/activist.md)、[家暴幸存者的数位准备](../scenarios/domestic-violence.md)、[LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)
 - 进阶：[端对端加密如何运作](../advanced/e2ee.md)
 - 在地：[台湾个资法 2025 修法](../taiwan/pdpa-2025.md)、[揭弊者保护法的技术观察](../taiwan/whistleblower-law.md)
 
-以上多数仍在撰写中，会依季度节奏逐步补齐。
+以上文章初稿多已上线，仍会依季度节奏持续校订与补充。
 
 ## 已完成的事
 
-- **概念层五篇上线**：[网络自由为什么重要](../basics/internet-freedom.md)、[匿名/隐私/假名/机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型怎么想](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)、[为什么匿名支付重要](../basics/payments-anonymity.md)
+- **概念层五篇上线**：[网络自由为什么重要](../basics/internet-freedom.md)、[匿名/隐私/假名/机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)、[为什么匿名支付重要](../basics/payments-anonymity.md)
 - **三大面向框架**：在 [网络自由为什么重要](../basics/internet-freedom.md) 确立「连线层 / 个资与身份 / 金流」三面向，作为个人隐私指引的整体骨架
 - **在地法规参考**：[个资法 2025](../taiwan/pdpa-2025.md)、[揭弊者保护法](../taiwan/whistleblower-law.md) 两篇完整上线
 - **写作规范与分类**：sitemap 7 大分类落地，[指南](../guides/index.md) 入口页建立，阅读路径明确化
 
 ## 进行中与待完成
 
-- 工具层深度补完（Tor Browser 进阶、消息工具比较、密码管理器、加密货币隐私光谱等）
-- 场景层 6 篇开展（[记者保护消息来源](../scenarios/journalist.md) 已起头，其余待写）
-- 进阶层 [端对端加密如何运作](../advanced/e2ee.md) 撰写
+- 工具层、场景层、进阶层各篇初稿已上线，持续依读者反馈校订与补充
 - **三级隐私指引合集**（本主题的核心交付物，预计 Q3 整合上述各层内容）
 - 工作坊教材：把研究产出转成可用于工作坊、小聚的讲义
 - 翻译候选报告（候选清单见下方）

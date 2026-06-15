@@ -1,7 +1,7 @@
 ---
 date: 2026-01-16
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 活動
     - 社群

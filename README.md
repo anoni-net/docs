@@ -116,7 +116,16 @@ uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 
 ## 🤝 貢獻
 
-我們歡迎任何形式的貢獻。流程、分支與 CI 說明請見 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+我們歡迎任何形式的貢獻。第一次來，照下面四條路徑找到自己的起點：
+
+- **看到錯字或失效連結** → 開 [文件錯誤 Issue](https://github.com/anoni-net/docs/issues/new?template=bug.yml)，或小修直接送 PR。
+- **想翻譯一篇文章** → 開 [翻譯認領 Issue](https://github.com/anoni-net/docs/issues/new?template=translation.yml)，流程見[中文化與文件翻譯](https://anoni.net/docs/community/i18n/)。
+- **想提新主題、補在地案例，或推薦來源** → 用[內容提案](https://github.com/anoni-net/docs/issues/new?template=content.yml)或[來源建議](https://github.com/anoni-net/docs/issues/new?template=source-suggestion.yml) Issue。
+- **想參與推廣、活動或維運** → 到 Matrix [社群 Public Space](https://matrix.to/#/#community:im.anoni.net) 打聲招呼。
+
+工具操作與安全情境類內容（tools、scenarios、advanced）由維護者技術審核才合併，其餘內容輕量審核。完整入門見[如何參與與認領主題](https://anoni.net/docs/community/how-to-contribute/)與[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)。流程、分支與 CI、授權見 [CONTRIBUTING.md](./CONTRIBUTING.md)，互動規範見[行為準則](./CODE_OF_CONDUCT.md)。
+
+**找人**：Matrix [Public Space](https://matrix.to/#/#community:im.anoni.net)（帳號申請來信 whisper@anoni.net）、[GitHub Discussions](https://github.com/anoni-net/docs/discussions)、加密共筆 [Cryptpad](https://cryptpad.anoni.net/)。
 
 ## 📝 授權
 
@@ -255,7 +264,14 @@ uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds. See [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow, branches, and CI.
+We welcome contributions of all kinds. Pick your starting point:
+
+- **Typo or broken link** → open a [bug issue](https://github.com/anoni-net/docs/issues/new?template=bug.yml), or send a small PR directly.
+- **Translate an article** → open a [translation issue](https://github.com/anoni-net/docs/issues/new?template=translation.yml); see the [i18n workflow](https://anoni.net/docs/community/i18n/).
+- **Propose a topic, add a local case, or suggest a source** → use the [content](https://github.com/anoni-net/docs/issues/new?template=content.yml) or [source](https://github.com/anoni-net/docs/issues/new?template=source-suggestion.yml) issue forms.
+- **Help with outreach, events, or ops** → say hi in the Matrix [community Public Space](https://matrix.to/#/#community:im.anoni.net).
+
+Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge; everything else is lighter. See [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow, branches, CI, and licensing, and the [Code of Conduct](./CODE_OF_CONDUCT.md). Reach us via Matrix Public Space (account requests: whisper@anoni.net), [GitHub Discussions](https://github.com/anoni-net/docs/discussions), or [Cryptpad](https://cryptpad.anoni.net/).
 
 ## 📝 License
 

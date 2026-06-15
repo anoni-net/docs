@@ -8,6 +8,15 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 操作系统的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tails 7.8.1
+
+> 2026-06-04 · [上游公告](https://tails.net/news/version_7.8.1/){target="_blank"}
+
+- 紧急安全更新，修补 Linux 内核重大漏洞与 Tor 客户端的多个安全漏洞。
+- 修补 Linux 内核漏洞 CVE-2026-43503（内核升至 6.12.90-2），此漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。目前尚未发现实际被利用案例。
+- Tor 客户端升至 0.4.9.9，修补多个安全漏洞。
+- 此版为安全专用的紧急发布，未变动 Tor Browser、Thunderbird 与 Debian 底层版本，沿用 7.8 的软件组合。可从 Tails 7.0 以后版本自动升级。
+
 ## Tails 7.8
 
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
@@ -23,7 +32,7 @@ icon: material/usb-flash-drive-outline
 
 !!! info "Tails 7.7.x 系列"
 
-    Tails 7.7.3、7.7.2、7.7.1、7.7 等条目目前仅在 [正体中文版](https://anoni.net/docs/zh-tw/changelog/tails/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
+    Tails 7.7.3、7.7.2、7.7.1、7.7 等条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/tails/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
 
 ## Tails 7.6
 

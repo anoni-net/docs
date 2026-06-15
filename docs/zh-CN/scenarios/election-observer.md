@@ -6,12 +6,12 @@ icon: material/vote-outline
 
 # :material-vote-outline: 选举观察员的自保
 
-!!! info "撰写中（2026 Q3）"
-    这篇文章还在准备中，下方段落是主题大纲。欢迎到 [Matrix 社群](../community/tools.md) 表达想看的角度，或参与撰写，见 [如何参与](../community/how-to-contribute.md)。社群追踪连结 [issue #35](https://github.com/anoni-net/docs/issues/35)。
+!!! info "本页完整版撰写中（2026 Q3）：现在就能用的内容在这里"
+    完整文章还在准备中，下方「将涵盖的章节」目前是大纲。需要现在就能用的内容，请看本页下方「暂时可以参考的内容」与「相关阅读」。欢迎到 [Matrix 社群](../community/tools.md) 表达想看的角度，或参与撰写，见 [如何参与](../community/how-to-contribute.md)。社群追踪 [issue #35](https://github.com/anoni-net/docs/issues/35)。
 
-选举观察员的工作经常需要在敏感时间、敏感地点记录与回报资讯，数位安全和人身安全同样重要。这篇文章面向两种角色：本地担任投开票所观察员的志工，以及外派到他国执行国际观察任务的成员。内容包含现场记录的工具选择、回报通道的安全设计、设备出入境的注意事项、被盘查时的应对，以及任务结束后资料保存与销毁的政策。引用 OSCE/ODIHR、Carter Center 等国际选举观察组织的标准作法，并对照 [威胁模型](../basics/threat-model.md) 给出在地版本的建议。
+选举观察员经常要在敏感时间、敏感地点记录与回报资讯，数位安全与人身安全同样重要。这篇文章面向两种角色，准备强度差很多。本地担任投开票所观察员的志工，是戴证件、合法公开的身分，多数时间不需要强匿名，重点在「拍到投票人的脸会不会违法」、「能不能用手机回报票数」这类现场分寸，下方大纲里的 burner 手机、卫星通讯、海关搜查这些多半用不到。外派到他国执行国际观察任务的成员，才需要评估护照风险、跨境通讯监控与设备出入境。内容包含现场记录的工具选择、回报通道的安全设计、设备出入境的注意事项、被盘查时的应对，以及任务结束后资料保存与销毁的政策。引用 OSCE/ODIHR、Carter Center 等国际选举观察组织的标准作法，并对照 [威胁模型](../basics/threat-model.md) 给出在地版本的建议。
 
-要先理解风险为什么存在，可以回头看 [威胁模型怎么想](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
+要先理解风险为什么存在，可以回头看 [威胁模型如何建立](../basics/threat-model.md) 与 [Metadata 是什么](../basics/metadata.md)。
 
 ## 将涵盖的章节
 
@@ -40,7 +40,7 @@ icon: material/vote-outline
 
 ### 任务结束的资料处理
 
-- 观察报告完成后的原始素材保存政策：保留多久、由谁保管、加密金钥怎么分管
+- 观察报告完成后的原始素材保存政策：保留多久、由谁保管、加密金钥如何分管
 - 受访者资料的去识别化处理流程
 - 设备归还或重置：磁碟覆写、云端账号清理、个人资讯回收
 
@@ -69,12 +69,12 @@ icon: material/vote-outline
 ### 台湾
 
 - 台湾的选举观察员多来自中央选举委员会公告的观察名单，或由公民团体、国际观察团派遣
-- **投开票所观察员**：依公职人员选举罢免法相关规定，由各政党、候选人推派或公民团体申请。多数时间不需要强匿名，但要避免把选务人员、个别投票人的身分被相片或记录连到外部公开
+- **投开票所观察员**：依公职人员选举罢免法相关规定，由各政党、候选人推派或公民团体申请。多数时间不需要强匿名，但要避免让选务人员、个别投票人的身分透过相片或记录连到外部公开
 - 国际选举观察团（Carter Center 等）多次派员观察台湾大选，可作为参考案例
 
 ### 跨境观察任务
 
-- 华语地区公民赴他国执行观察工作时要评估护照风险、跨国通讯监控、目的地对 LGBTQ+ 或记者身份的法律敏感度
+- 华语地区公民赴他国执行观察工作时要评估护照风险、跨国通讯监控、目的地对 LGBTQ+ 或记者身分的法律敏感度
 - 到东南亚国家（菲律宾、印尼、泰国）观察选举时，跟当地公民组织、选务机关、媒体的往来都应预先评估通讯管道
 - 在威权或半威权环境观察时的安全协议与撤离计画
 
@@ -89,7 +89,7 @@ icon: material/vote-outline
 
 英文资源可参考：
 
-- [OSCE/ODIHR Election Observation Handbook](https://www.osce.org/odihr/elections/handbook){target="_blank"}：欧安组织的选举观察员标准作业手册。
+- [OSCE/ODIHR Election Observation Handbooks](https://www.osce.org/odihr/elections/handbooks){target="_blank"}：欧安组织的选举观察员标准作业手册。
 - [Carter Center Election Standards](https://www.cartercenter.org/peace/democracy/observed.html){target="_blank"}：卡特中心的国际观察标准与工具集。
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境观察任务遇到紧急数位安全问题时的多语求助管道。
 
@@ -97,4 +97,4 @@ icon: material/vote-outline
 
 - [社运行动者的数位准备](./activist.md)：行动现场与被临检时的装置与通讯应对
 - [记者保护消息来源](./journalist.md)：敏感档案交换与访谈记录保存
-- [威胁模型怎么想](../basics/threat-model.md)：跨境任务的威胁模型怎么建立
+- [威胁模型如何建立](../basics/threat-model.md)：跨境任务的威胁模型如何建立

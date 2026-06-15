@@ -1,6 +1,6 @@
 ---
 title: Tails、Whonix、Qubes 的差别
-description: 三套常见匿名操作系统的设计目标、适用情境与门槛比较。记者、社运参与者、IT 从业者怎么挑，跟单纯用 Tor Browser 差在哪。
+description: 三套常见匿名操作系统的设计目标、适用情境与门槛比较。记者、社运参与者、IT 从业者如何挑选，跟单纯用 Tor Browser 差在哪。
 icon: material/compare-horizontal
 ---
 
@@ -8,7 +8,7 @@ icon: material/compare-horizontal
 
 多数匿名浏览需求，装 [Tor Browser](./what-is-tor.md) 就够用。但有些工作会把整台电脑的安全前提一起拖下水：审阅外来机敏档案、长期维持一个跟你日常身分切开的工作流、要在不信任的硬件上做敏感任务。这时要连操作系统一起切。
 
-社群最常被一起提到的三套匿名操作系统是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它们的设计目标不同，适合的情境也不同。动手前先回头看 [威胁模型怎么想](../basics/threat-model.md)，把「我在抗谁、能投入多少」厘清，比直接挑工具更重要。
+社群最常被一起提到的三套匿名操作系统是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它们的设计目标不同，适合的情境也不同。动手前先回头看 [威胁模型如何建立](../basics/threat-model.md)，把「我在抗谁、能投入多少」厘清，比直接挑工具更重要。
 
 !!! tip "30 秒结论"
 
@@ -28,7 +28,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 读每一套时可以对照这五个轴：
 
-1. **隔离模型**：怎么切「敏感任务」与「其他东西」的界线。
+1. **隔离模型**：如何切「敏感任务」与「其他东西」的界线。
 2. **持久性**：关机后是清空、还是保留你的工作。
 3. **硬件需求**：能不能用你手边的电脑。
 4. **学习曲线**：第一次用要花多久才顺手。
@@ -40,7 +40,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 |------|-------|--------|----------|
 | 隔离模型 | 整机重置（amnesic） | 双 VM：Gateway + Workstation | 多 VM compartmentalization |
 | 持久性 | 默认遗忘，可选 Persistent Storage | 持久（VM 状态保留） | 持久（template + qubes） |
-| 硬件需求 | Intel x86-64，10 年内机种多数可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 对硬件挑剔，要 VT-x、VT-d、16 GB+ RAM、SSD |
+| 硬件需求 | Intel x86-64，10 年内机种多数可 | 跨平台（Windows、macOS、Linux），有 VirtualBox 或 KVM 即可 | 对硬件挑剔，VT-d 必要、RAM 最低 6 GB（建议 16 GB 以上）、SSD |
 | 学习曲线 | 1 小时上手 | 半天到一天理解双 VM | 一周适应 qube 操作流程 |
 | Tor 整合 | 强制全流量走 Tor | Gateway 强制 Workstation 走 Tor，主机 OS 不必走 | 默认不强制，需安装 Whonix 模板才有 Tor |
 | 对应角色 | 记者、社运短期任务、家暴幸存者准备离开 | 长期 Tor 工作流、IT 从业者、跨平台需求 | IT 阵营、高敏感长期任务、严格 compartmentalization |
@@ -85,11 +85,11 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 - 安全前提依赖主机 OS。主机被入侵了，Whonix VM 内的工作也保护不到（Qubes 解这层）。
 - VM 跑两台会吃掉 4 GB+ 内存，旧机跑起来会明显卡顿。
 - 不像 Tails 关机就清空，Whonix 是持久环境，使用纪录会累积在 VM 内。
-- macOS 上 Apple Silicon 机型要用 [UTM](https://mac.getutm.app/){target="_blank"} 或 QEMU 跑 ARM64 版本，部分功能尚未完整支持，社群仍在追进度。
+- Apple Silicon 上没有可直接下载的预建映像，要自行从原始码建置 ARM64 版本，官方标示仅供开发者、维护状态不稳定，不建议用于安全敏感场景。
 
 ## Qubes OS
 
-[Qubes OS](https://www.qubes-os.org/){target="_blank"} 处理的是更前面的问题：整台电脑的隔离。Tails、Whonix 主要围绕 Tor 流量设计，Qubes 不默认走 Tor，要解决的是同一台电脑上工作、个人、银行、敏感任务怎么互不影响。它用 Xen hypervisor 把操作系统切成多个 qube，每个 qube 是一个独立的 VM，有自己的颜色标示（红 = 高敏感、黄 = 工作、绿 = 个人、蓝 = 银行等）。
+[Qubes OS](https://www.qubes-os.org/){target="_blank"} 处理的是更前面的问题：整台电脑的隔离。Tails、Whonix 主要围绕 Tor 流量设计，Qubes 不默认走 Tor，要解决的是同一台电脑上工作、个人、银行、敏感任务如何互不影响。它用 Xen hypervisor 把操作系统切成多个 qube，每个 qube 是一个独立的 VM，有自己的颜色标示（红 = 高敏感、黄 = 工作、绿 = 个人、蓝 = 银行等）。
 
 设计重点：
 
@@ -104,7 +104,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 - IT 阵营、安全研究员、长期高敏感任务工作者。
 - 愿意付学习成本，把 work / personal / banking / 高敏 / 一次性 五类任务严格分到不同 qube 的进阶使用者。
-- 已经有支持硬件（VT-d 必要、16 GB+ RAM、SSD），不用再为 Qubes 换机器。
+- 已经有支持硬件（VT-d 必要、RAM 最低 6 GB、建议 16 GB 以上、SSD），不用再为 Qubes 换机器。
 
 **限制**：
 
@@ -136,7 +136,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 ??? question "我只是想匿名浏览，需要这么复杂吗？"
 
-    多数情境不需要。[Tor Browser](./what-is-tor.md) 在你日常电脑上装起来，就能解决「不洩漏 IP、不洩漏浏览身分」这层需求。会走到整机隔离这套讨论，通常是因为「我电脑上其他应用、其他档案会跟敏感任务交叉」「我不信任手边这台电脑」「我长期维持一个跟日常身分切开的工作流」。如果你的需求是单次匿名浏览，不必动到 Tails、Whonix、Qubes 任何一套。
+    多数情境不需要。[Tor Browser](./what-is-tor.md) 在你日常电脑上装起来，就能解决「不洩漏 IP、不洩漏浏览身分」这层需求。会走到整机隔离这套讨论，通常是因为「我电脑上其他应用、其他档案会跟敏感任务交叉」、「我不信任手边这台电脑」、「我长期维持一个跟日常身分切开的工作流」。如果你的需求是单次匿名浏览，不必动到 Tails、Whonix、Qubes 任何一套。
 
 ??? question "Tails 上能不能也跑 Whonix？"
 
@@ -149,7 +149,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 ??? question "Mac M 系列能跑哪一套？"
 
     - **Tails**：完全不能。Tails 不支持 Apple Silicon。
-    - **Whonix**：可以透过 [UTM](https://mac.getutm.app/){target="_blank"} 跑 ARM64 版本，仍在社群实验阶段。日常可用但要追进度。
+    - **Whonix**：Apple Silicon 上没有可直接下载的预建映像，要自行从原始码建置 ARM64 版本，官方标示仅供开发者、维护状态不稳定，不建议用于安全敏感场景。
     - **Qubes**：完全不能。Qubes 需要 x86-64 + VT-d，Apple Silicon 是 ARM 架构，没有计画支持。
 
     多数 Apple Silicon 使用者要做整机隔离，会准备一台 Intel PC（二手 ThinkPad 是常见选择）。
@@ -168,7 +168,7 @@ Tails 的完整介绍与安装步骤在 [什么是 Tails](./what-is-tails.md)。
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:simple-tails: 什么是 Tails](./what-is-tails.md)
 - [:material-share-variant-outline: OnionShare](./onionshare.md)
 

@@ -13,6 +13,7 @@ Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the 
 ## :material-check-circle-outline: Available now
 
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account separation, dating-app risk, cross-platform correlation, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora.
+- [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — copy-paste prompts you feed to your own AI to get a destination's censorship, legal, SIM, and emergency-contact picture before you travel; works for any country, and no query reaches us.
 
 ## :material-progress-pencil: In Tier 2 drafting
 

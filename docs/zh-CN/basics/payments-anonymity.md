@@ -21,13 +21,13 @@ icon: material/cash-multiple
 
 这四个特性合起来，让金流 metadata 比通讯 metadata、上网 metadata 更难消除。你可以用 Tor 隐藏连线、用 Signal 加密通讯、用 Tails 不留装置痕迹，但你买 Tor 服务的订阅、捐款给开发者、付给律师的咨询费，每一笔都会留下能对应到你的记录。
 
-从威胁模型角度看，这代表：**任何把支付当成行动最后一哩的方案，都需要单独思考金流的匿名性**。详见 [威胁模型怎么想](./threat-model.md)。
+从威胁模型角度看，这代表：**任何把支付当成行动最后一哩的方案，都需要单独思考金流的匿名性**。详见 [威胁模型如何建立](./threat-model.md)。
 
 ## 金流也会被拿来当审查工具
 
 前面讲的是金流的被动观察风险，metadata 被别人看到、被分析、被连结回真实身份。金流还有另一面是被主动拿来当审查工具。
 
-过去十多年，PayPal、Venmo、Stripe 等金融中介反复关停或冻结特定使用者的账号。被波及的对象常常跟言论性质或地缘风险相关，像是教波斯诗歌的美国公民被 PayPal 冻结账号，纽约穆斯林市议员转账备注写了孟加拉餐厅名字而被挡，长年支持 Tor 中继运作的个人捐款人被无预警关停 PayPal 账号。前 EFF Activism Director Rainey Reitman 在新书《Transaction Denied》整理了这条脉络，书中追问金融中介可不可以担任线上言论的仲裁者。
+过去十多年，PayPal、Venmo、Stripe 等金融中介反复关停或冻结特定使用者的账号。被波及的对象常常跟言论性质或地缘风险相关，像是教波斯诗歌的美国公民被 PayPal 冻结账号，纽约一位穆斯林市议员候选人因为 Venmo 转账备注出现「Al-Aqsa」（一间餐厅、也是知名清真寺的名字）而被挡，长年架设 Tor 中继节点、用 PayPal 支付服务器费用的个人被无预警关停账号。前 EFF Activism Director Rainey Reitman 在新书《Transaction Denied》整理了这条脉络，书中追问金融中介可不可以担任线上言论的仲裁者。
 
 对个人使用者来说，「金流隐私」既包含别人能否看到我付了什么，也包含我的收款管道会不会被单方面切断。社群在 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相关案例与华语六地区的故事，[匿名支付研究专题](../community/payments-research.md) 也持续追踪相关讨论。
 
@@ -72,14 +72,14 @@ icon: material/cash-multiple
 现金以外的「比较匿名」支付方案，光谱大致是：
 
 - **预付礼物卡、超商代码**：可现金购买，但平台层面可被追踪、有金额上限
-- **隐私币（Monero、Zcash 屏蔽交易）**：协议层面默认或可选的隐私强化，但取得与兑换阶段仍有摩擦
+- **隐私币（Monero、Zcash 屏蔽交易）**：协议层面默认或可选的隐私强化，但取得与兑换阶段的摩擦近年明显增加。Binance 在 2024 年 2 月全球下架 Monero 等隐私币，Kraken 则因应欧盟 MiCA（加密资产市场监理法）与反洗钱规范，在 2024 年对 EEA（欧洲经济区）用户下架 Monero，用法币换到隐私币这一步变得更难
 - **比特币、以太坊**：交易公开可查，但取得管道（去中心化交易所、P2P）能影响可追溯性
 - **稳定币**：法定货币连动的链上资产，便于支付但隐私取决于所在链与取得方式
 - **多重签署 + 分层账户**：把账户结构化拆解，让单一账户无法对应到单一个人。属于配套做法，不直接提供匿名，但能降低图谱的可追溯度
 
 每一个选项都有取舍：技术门槛、合法性、对手方接受度、波动性、税务影响。没有「最匿名」的单一答案，只有「对应你的威胁模型最合适」的组合。
 
-工具层面的详细比较见 [加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（撰写中）。
+工具层面的详细比较见 [加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)。
 
 ## 法规面：合法是前提
 
@@ -93,10 +93,10 @@ icon: material/cash-multiple
 
 ## 接下来
 
-- 带这个概念进 [威胁模型怎么想](./threat-model.md)，问自己「我的支付行为留下哪些对应到真实身份的痕迹」
+- 带这个概念进 [威胁模型如何建立](./threat-model.md)，问自己「我的支付行为留下哪些对应到真实身份的痕迹」
 - 看 [Metadata 是什么](./metadata.md)，理解金流是 metadata 的一个维度
-- 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)（Q2 撰写中）
-- 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)（Q2–Q3 撰写中）
-- 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)（Q2–Q3 撰写中）
+- 工具面：[加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)
+- 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)
+- 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)
 - 台湾案例：[台湾 VASP 法 2026](../taiwan/vasp-2026.md)
 - 社群研究入口：[匿名支付研究专题](../community/payments-research.md)

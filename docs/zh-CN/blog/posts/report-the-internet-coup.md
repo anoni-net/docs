@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 更新
     - 翻译文章
@@ -27,7 +27,7 @@ description: "技术分析报告：一家中国公司如何向威权政权出口
 
 ## 详细内容
 
-还有更多详细的外泄资料与中国防火长城的营运样态，可以透过这份我们已经翻译为[正体中文（台湾用语）](https://anoni.net/docs/zh-tw/reports/interseclab-network-coup/){target="_blank"}的报告（中译版仅在 zh-TW 维护）。
+还有更多详细的外泄资料与中国防火长城的营运样态，可以透过这份我们已经翻译为[正体中文（台湾用语）](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}的报告（中译版仅在 zh-TW 维护）。
 
 这份已翻译报告的编排方式会与原文报告中的 INDEX 段落作为章节来呈现（共八个章节）。希望如果您在阅读的时候，能方便对回原始报告中的段落。
 

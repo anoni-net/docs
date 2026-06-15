@@ -8,6 +8,15 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.8.1
+
+> 2026-06-04 · [Upstream announcement](https://tails.net/news/version_7.8.1/){target="_blank"}
+
+- Emergency security release fixing a serious Linux kernel vulnerability and several Tor client security vulnerabilities.
+- Patches the Linux kernel flaw CVE-2026-43503 (kernel updated to 6.12.90-2), a local privilege escalation that lets an application inside Tails gain administrator privileges; combined with other unknown vulnerabilities it could fully compromise Tails and deanonymize the user. No active exploitation has been observed.
+- Tor client updated to 0.4.9.9, fixing several security vulnerabilities.
+- This is a security-only emergency release; Tor Browser, Thunderbird, and the Debian base version are unchanged from 7.8. Automatic upgrades are available from Tails 7.0 or later.
+
 ## Tails 7.8
 
 > 2026-05-21 · [Upstream announcement](https://tails.net/news/version_7.8/){target="_blank"}
@@ -29,4 +38,4 @@ icon: material/usb-flash-drive-outline
 
 !!! info "Earlier versions"
 
-    Translations of Tails 7.7.3, 7.7.2, 7.7.1, 7.7, 7.1, 7.0, 7.0~rc2, and 6.18 are currently available only in [traditional Chinese](https://anoni.net/docs/zh-tw/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.
+    Translations of Tails 7.7.3, 7.7.2, 7.7.1, 7.7, 7.1, 7.0, 7.0~rc2, and 6.18 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.

@@ -1,7 +1,7 @@
 ---
 date: 2026-05-21
 authors:
-    - toomore
+    - anoni-net
 categories:
     - Perspective
     - Privacy
@@ -59,7 +59,7 @@ Read PayPal's 2017 domestic shutdown and Stripe's continued closure through Reit
 
 **Stripe's case is "the market was never opened."** Individuals and companies in Taiwan cannot apply for a Stripe account directly. The common workaround is to register a U.S. LLC, apply for an EIN, open a U.S. bank account, and operate Stripe under the U.S. corporate name[^10]. That route carries its own compliance cost — failure to file IRS Form 5472 starts at a US$25,000 penalty — and the threshold is high for individual creators. In October 2025, Stripe Tax began supporting Taiwan remote-seller tax registration[^12], but Stripe Tax handles tax registration only. Taiwan users still cannot open a Stripe payment account.
 
-Neither is "censorship" in the traditional sense, but for advocacy organizations, independent media, and creators, the effect is censorship-shaped. Depending on cross-border payment rails means the primary collection channel can disappear at any time, or may have never existed. Domestic third-party processors fill some of the gap, but cross-border collection, international convergence on KYC, and the gradual rollout of Taiwan's Virtual Asset Service Provider Act are tightening simultaneously. The institutional framing is documented in Mandarin at **Taiwan VASP Act 2026** ([zh-TW page](https://anoni.net/docs/zh-tw/taiwan/vasp-2026/){target="_blank"}, en version pending). Organization-side responses sit under **Anonymous Donation Channels for Advocacy Organizations** ([zh-TW page](https://anoni.net/docs/zh-tw/scenarios/nonprofit-anonymous-donation/){target="_blank"}, en version pending).
+Neither is "censorship" in the traditional sense, but for advocacy organizations, independent media, and creators, the effect is censorship-shaped. Depending on cross-border payment rails means the primary collection channel can disappear at any time, or may have never existed. Domestic third-party processors fill some of the gap, but cross-border collection, international convergence on KYC, and the gradual rollout of Taiwan's Virtual Asset Service Provider Act are tightening simultaneously. The institutional framing is documented in Mandarin at **Taiwan VASP Act 2026** ([zh-TW page](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}, en version pending). Organization-side responses sit under **Anonymous Donation Channels for Advocacy Organizations** ([zh-TW page](https://anoni.net/docs/scenarios/nonprofit-anonymous-donation/){target="_blank"}, en version pending).
 
 ## Sinophone Asia-Pacific: the same mechanisms with regionally specific outcomes
 
@@ -79,9 +79,9 @@ For English-language readers approaching this from outside the region, the takea
 
 The community set anonymous payments as one of three 2026 focus areas. The original framing was "individual financial flows are an independent dimension of metadata." Reitman's book reframes the question: financial flows can be actively wielded as a censorship tool, and the risk is not abstract for advocacy organizations, independent media, or creators.
 
-The existing **Why Anonymous Payments Matter** anchor ([zh-TW page](https://anoni.net/docs/zh-tw/basics/payments-anonymity/){target="_blank"}, en version pending) addresses payment flows as passively observed. This post addresses payment flows as actively cut off. Reading both together gives the fuller picture.
+The existing **Why Anonymous Payments Matter** anchor ([zh-TW page](https://anoni.net/docs/basics/payments-anonymity/){target="_blank"}, en version pending) addresses payment flows as passively observed. This post addresses payment flows as actively cut off. Reading both together gives the fuller picture.
 
-Next steps planned include adding a "cross-border sanctions and over-compliance side effects" section to **Taiwan VASP Act 2026**, and selecting 5–8 EFF Financial Censorship articles from the past decade-plus for curated translation. Tracking the progress of alternative payment systems is also part of the picture. Europe's European Payments Initiative and Brazil's Pix are two existing implementations[^17][^18], though payment rails are heavily regulated in every jurisdiction and building a scaled alternative is not cheap. The **Anonymous Payments Research Track** ([zh-TW page](https://anoni.net/docs/zh-tw/community/payments-research/){target="_blank"}, en version pending) is where the community discussion and translation backlog live.
+Next steps planned include adding a "cross-border sanctions and over-compliance side effects" section to **Taiwan VASP Act 2026**, and selecting 5–8 EFF Financial Censorship articles from the past decade-plus for curated translation. Tracking the progress of alternative payment systems is also part of the picture. Europe's European Payments Initiative and Brazil's Pix are two existing implementations[^17][^18], though payment rails are heavily regulated in every jurisdiction and building a scaled alternative is not cheap. The **Anonymous Payments Research Track** ([zh-TW page](https://anoni.net/docs/community/payments-research/){target="_blank"}, en version pending) is where the community discussion and translation backlog live.
 
 For English-language readers who want the underlying material, EFF's [Financial Censorship issue page](https://www.eff.org/issues/financial-censorship){target="_blank"} is the best entry point. _Transaction Denied_ is available from [Beacon Press](https://www.beacon.org/Transaction-Denied-P2455.aspx){target="_blank"}.
 

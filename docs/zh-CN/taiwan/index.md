@@ -18,9 +18,10 @@ icon: material/island
 
 对应 anoni.net 长期维运的观测资料工作，看「台湾的连线环境实际长怎样」。
 
-- [OONI 网站检测清单](./ooni-checklist.md)：在地清单怎么维护、分类与更新，是观测资料的入门起点。
+- [OONI 网站检测清单](./ooni-checklist.md)：在地清单如何维护、分类与更新，是观测资料的入门起点。
 - [ASN 自治网络观测资料分析](./ooni-asn-coverage.md)：台湾各 ASN 的 OONI 测试覆盖与盲点。
 - [Tor Relays 观测点](./tor-relay-watcher.md)：台湾 Tor 中继节点的即时运作状况与区域比较。
+- [onionoo MCP：用一句中文查 Tor 节点现况](../community/onionoo-mcp.md)：社区自架的查询服务，不用写代码，在 claude.ai 接上后直接问台湾与各地有多少 Tor 中继、带宽多大、落在哪些电信网络。
 
 ### 个资与身分
 
@@ -38,4 +39,4 @@ icon: material/island
 
 法律保护的范围与技术匿名能力之间，存在一段需要讨论的距离。
 
-- [揭弊者保护法的技术观察](./whistleblower-law.md)：2025 年上路的《公益揭弊者保护法》保护什么、私部门缺口在哪、揭弊者本人怎么准备。
+- [揭弊者保护法的技术观察](./whistleblower-law.md)：2025 年上路的《公益揭弊者保护法》保护什么、私部门缺口在哪、揭弊者本人如何准备。

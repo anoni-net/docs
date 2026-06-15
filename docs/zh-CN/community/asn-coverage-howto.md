@@ -1,14 +1,18 @@
 ---
 title: ASN 观测资料撷取与分析
-description: anoni-net/docs 提供的 OONI 资料撷取程序怎么设置与使用，是 ASN 观测分析的延伸操作指南。
+description: anoni-net/docs 提供的 OONI 资料撷取程序如何设置与使用，是 ASN 观测分析的延伸操作指南。
 icon: material/database-search
 ---
 
 # :material-database-search: ASN 观测资料撷取与分析
 
-这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己动手抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序怎么设置与使用。
+这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己动手抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序如何设置与使用。
 
 开始前建议先读 [项目研究预先准备](./setup-repo.md) 把开发环境建好。
+
+!!! tip "执行位置"
+
+    下面的指令都在 `anoni-net-docs/asn_coverage/` 目录下执行。第一次使用先 `cd` 进该目录、跑 `uv sync` 装好依赖，接着用 `uv run python ooni.py ...`（或先 `source .venv/bin/activate` 再依下方范例执行）。
 
 ## 资料来源
 
@@ -24,7 +28,7 @@ OONI Probe 的观测资料会回传到 OONI 的 [AWS S3 Open Data](https://regis
 ### 回看观察资料
 
 ```bash title="回看观察资料"
-python3 ./ooni.py lookback [--unit=36] [--loc=TW] [--frame=hours]
+python3 ./ooni.py lookback [--units=36] [--loc=TW] [--frame=hours]
 ```
 
 区间单位为小时，默认为 36 个单位（36 小时），区域为台湾（`TW`）。执行后会依单位储存以下格式的文件：
@@ -45,7 +49,7 @@ python3 ./ooni.py span --start=YYYY/MM/DD --end=YYYY/MM/DD [--loc=TW]
 python3 ./ooni.py sheetrow --path={资料路径}
 ```
 
-将已撷取的资料展开后、方便在试算表中进行计算使用，将另存一份开头为 `rows_` 的资料文件。
+将已撷取的资料展开，方便在试算表中计算，会另存一份开头为 `rows_` 的资料文件。
 
 ### 计算 ASN 统计
 

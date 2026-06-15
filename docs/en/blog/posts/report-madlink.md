@@ -1,7 +1,7 @@
 ---
 date: 2026-05-23
 authors:
-    - toomore
+    - anoni-net
 categories:
     - News
     - Translated Article
@@ -31,7 +31,7 @@ Geedge's current-generation TSG hardware (deployed in Ethiopia, Pakistan, and My
 
 ## The Mandarin translation: reading path
 
-The full translation lives here: [MADLink / A Taiwanese Vestige in the Geedge Supply Chain (zh-TW)](https://anoni.net/docs/zh-tw/reports/interseclab-madlink/){target="_blank"} (Mandarin translation maintained in zh-TW only).
+The full translation lives here: [MADLink / A Taiwanese Vestige in the Geedge Supply Chain (zh-TW)](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"} (Mandarin translation maintained in zh-TW only).
 
 The original report is a single long web page. The translation team split it into 5 chapters so that Matrix discussions can map to specific sections:
 
@@ -45,7 +45,7 @@ ADLINK's full reply to InterSecLab is preserved verbatim in the appendix so read
 
 ## What's new this round: the editorial observation page
 
-For The Internet Coup, our work ended with a faithful translation. MADLink names a publicly listed Taiwanese company, which would normally trigger the expected loop of local press follow-up, legislative questioning, and a regulator response. As of 2026-05-20, Taiwan's Chinese-language public sphere has stayed noticeably quiet. That silence is itself observation material, so we added a separate page: [Editorial observation: Taiwan's response to MADLink](https://anoni.net/docs/zh-tw/reports/interseclab-madlink/index_6/#English-summary-for-international-readers){target="_blank"}.
+For The Internet Coup, our work ended with a faithful translation. MADLink names a publicly listed Taiwanese company, which would normally trigger the expected loop of local press follow-up, legislative questioning, and a regulator response. As of 2026-05-20, Taiwan's Chinese-language public sphere has stayed noticeably quiet. That silence is itself observation material, so we added a separate page: [Editorial observation: Taiwan's response to MADLink](https://anoni.net/docs/reports/interseclab-madlink/index_6/#English-summary-for-international-readers){target="_blank"}.
 
 This page is explicitly an anoni.net editorial work, not part of the InterSecLab report. It has five sections:
 
@@ -77,7 +77,7 @@ If you spot reporting, government documents, or public statements not yet captur
 
 ## Further reading
 
-* [MADLink translation index (zh-TW)](https://anoni.net/docs/zh-tw/reports/interseclab-madlink/){target="_blank"}: report translation entry point (Mandarin maintained in zh-TW only)
-* [Editorial observation: Taiwan's response to MADLink (English summary)](https://anoni.net/docs/zh-tw/reports/interseclab-madlink/index_6/#English-summary-for-international-readers){target="_blank"}: our reception snapshot, English version
+* [MADLink translation index (zh-TW)](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}: report translation entry point (Mandarin maintained in zh-TW only)
+* [Editorial observation: Taiwan's response to MADLink (English summary)](https://anoni.net/docs/reports/interseclab-madlink/index_6/#English-summary-for-international-readers){target="_blank"}: our reception snapshot, English version
 * [The Internet Coup — InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}: the original first report in this investigative series
 * [Report: The Internet Coup (anoni.net blog)](./report-the-internet-coup.md){target="_blank"}: our previous report-translation announcement

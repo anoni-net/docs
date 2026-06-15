@@ -1,7 +1,7 @@
 ---
 date: 2025-02-05
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 活动
     - 社区

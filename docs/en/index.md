@@ -147,11 +147,11 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
 !!! tip "Latest"
 
-    - `Update`{style="color: var(--cat-privacy);"}: [MADLink (Mandarin translation): ADLINK's 1,708 CSA-7400 units in Kazakhstan's censorship stack](./blog/posts/report-madlink.md) — 2026-05-23
-    - `New`{style="color: var(--brand-cyan-600);"}: [Campus Tor Relay templates — proposal, SOP, and FAQ](./blog/posts/2026-campus-tor-relay-template-kit.md) — 2026-05-21
-    - `Update`{style="color: var(--cat-privacy);"}: [Transaction Denied — a Sinophone Asia-Pacific reading of EFF's book on financial censorship](./blog/posts/2026-financial-companies-as-censors.md) — 2026-05-21
-    - `New`{style="color: var(--brand-cyan-600);"}: [onionoo MCP is now public — query the Tor relay network in plain language](./blog/posts/2026-onionoo-mcp-public.md) — 2026-05-19
-    - `New`{style="color: var(--brand-cyan-600);"}: [What is Differential Privacy?](./blog/posts/2025-what-is-differential-privacy.md) — 2026-04-27
+    - `New`{style="color: var(--brand-cyan-600);"}: [Brief yourself before you travel — take the right questions to your own AI](./blog/posts/travel-ai-briefing.md) — 2026-06-10
+    - `New`{style="color: var(--brand-cyan-600);"}: [We surveyed all 336 OONI Run v2 links, and three of them drive 72% of all measurements](./blog/posts/2026-ooni-run-v2-usage-patterns.md) — 2026-06-02
+    - `Update`{style="color: var(--cat-privacy);"}: [How Unredacted Helps People in Censored Regions Reach the Open Internet](./blog/posts/keeping-the-doors-open.md) — 2026-06-01
+    - `Update`{style="color: var(--cat-privacy);"}: [After Iran's 80-day blackout, traffic surged through our community's Tor WebTunnel bridge](./blog/posts/iran-blackout-webtunnel.md) — 2026-05-28
+    - `New`{style="color: var(--brand-cyan-600);"}: [CryptPad 2026.5.0: zh_Hant Lands as a Built-in Locale After Two and a Half Years Upstream](./blog/posts/2026-cryptpad-zh-hant.md) — 2026-05-25
     - `Event`{style="color: var(--accent-action);"}: [COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) — 2026-04-08
 
     More at [:material-bullhorn-outline: Updates](./blog/index.md).

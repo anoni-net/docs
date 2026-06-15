@@ -8,6 +8,25 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon、Onion 服務的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。本頁同時收錄穩定版與 Alpha 測試通道，Alpha 條目會在標題標注。
 
+## Tor Browser 15.0.15
+
+> 2026-06-03 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15015/){target="_blank"}
+
+- tor daemon 重要安全更新，並修正部分審查規避問題。
+- tor 用戶端升至 0.4.9.9。
+- NoScript 升至 13.6.20.1984。
+- Moat 模組支援設定多組 (front, reflector) domain fronting 配對（tor-browser#42436）。
+- 修正桌面版（Windows、macOS、Linux）Captcha 無法運作的問題（tor-browser#44997）。
+- 通知 Linux i686 使用者不再提供更新（tor-browser#44886，backport #44361）。
+
+## Tor Browser 16.0a7（Alpha 測試通道）
+
+> 2026-06-03 · [dist 目錄](https://dist.torproject.org/torbrowser/16.0a7/){target="_blank"}
+
+- Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
+- 已在 dist 釋出二進位檔，官方部落格尚未發布對應公告。
+- 改以 Firefox 151.0a1 為基底（前一個 Alpha 16.0a6 為 150.0a1）。
+
 ## Tor Browser 15.0.14
 
 > 2026-05-19 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15014/){target="_blank"}

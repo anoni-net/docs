@@ -6,7 +6,7 @@ icon: material/key-variant
 
 # :material-key-variant: 密码管理器入门
 
-重复密码、简单密码、写在便条纸上的密码，是被攻击时最常见的破口。密码管理器让你只需要记一组主密码，其他密码可以又长又随机，并在不同装置之间同步。这篇文章说明密码管理器的核心威胁模型、四类常见工具的取舍（KeePassXC、Bitwarden、1Password、Apple Passwords）、TOTP 双因子验证的搭配方式、Passkey 与硬件密钥的角色，以及在台湾使用时的特殊情境与备援策略。动之前可以先回头看 [威胁模型怎么想](../basics/threat-model.md)，知道自己在抗谁。
+重复密码、简单密码、写在便条纸上的密码，是被攻击时最常见的破口。密码管理器让你只需要记一组主密码，其他密码可以又长又随机，并在不同装置之间同步。这篇文章说明密码管理器的核心威胁模型、四类常见工具的取舍（KeePassXC、Bitwarden、1Password、Apple Passwords）、TOTP 双因子验证的搭配方式、Passkey 与硬件密钥的角色，以及在台湾使用时的特殊情境与备援策略。动之前可以先回头看 [威胁模型如何建立](../basics/threat-model.md)，知道自己在抗谁。
 
 ## 为什么需要密码管理器
 
@@ -54,17 +54,17 @@ icon: material/key-variant
 
 ### 云端同步：Bitwarden
 
-[Bitwarden](https://bitwarden.com/){target="_blank"} 是开源密码管理器，厂商提供云端储存与同步，端对端加密由厂商实作。免费版功能齐全（无限项目、无限装置、无限平台），Premium 约每年 10 美元，加上 TOTP 整合、进阶报告、优先支援。
+[Bitwarden](https://bitwarden.com/){target="_blank"} 是开源密码管理器，厂商提供云端储存与同步，端对端加密由厂商实作。免费版功能齐全（无限项目、无限装置、无限平台），Premium 每年 19.80 美元（2026 年 1 月调涨，实际以官网为准），加上 TOTP 整合、进阶报告、优先支援。
 
 技术上，Bitwarden 有公开的第三方安全 audit，源代码开放。如果你不信任 Bitwarden 公司本身，可以自架 [Vaultwarden](https://github.com/dani-garcia/vaultwarden){target="_blank"}（社群重写的相容后端），客户端不变。
 
-信任前提是：厂商不被攻破、E2EE 实作正确。即使厂商被攻破，攻击者拿到的也是加密过的密钥库，需要再破解你的主密码。但 LastPass 2022 的事件提醒：密钥库的元数据（网站清单）可能不加密，攻击者能据此规划针对性钓鱼。
+信任前提是：厂商不被攻破、E2EE 实作正确。即使厂商被攻破，攻击者拿到的也是加密过的密钥库，需要再破解你的主密码。但 LastPass 2022 的事件提醒：密钥库的元数据（网站 URL 等栏位）并未加密，攻击者能据此规划针对性钓鱼。
 
 适合：跨多装置、多平台使用、能接受厂商依赖的人。
 
 ### 商业整合：1Password
 
-[1Password](https://1password.com/){target="_blank"} 是付费服务（个人约每年 36 美元），在 UX 与额外功能上做得最完整。Watchtower 主动监控你的密码是否出现在外泄数据库、是否使用弱密码、哪些服务该开 2FA 还没开。家庭与团队计划成熟，多人共享部分项目方便。
+[1Password](https://1password.com/){target="_blank"} 是付费服务（个人每年约 48 美元，2026 年 3 月调涨，实际以官网为准），在 UX 与额外功能上做得最完整。Watchtower 主动监控你的密码是否出现在外泄数据库、是否使用弱密码、哪些服务该开 2FA 还没开。家庭与团队计划成熟，多人共享部分项目方便。
 
 1Password 是闭源，但有公开第三方 audit，并用「Secret Key」设计：除了主密码，还有一组装置上才有的长随机字串，攻击者光拿到主密码也解不开密钥库。
 
@@ -123,6 +123,16 @@ Passkey 是基于 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target=
 
 **至少买两支**：一支日常用、一支备用（锁在家里的保险柜或信任的家人那边）。只买一支遗失就被锁死，要走服务的「账号回复」流程，那是你不会想经历的麻烦。
 
+## 常见错误（避免踩坑）
+
+社群实际遇过的踩坑案例：
+
+- **匯出后忘了删档**：从浏览器或旧密码管理器匯出时是 CSV / JSON 明文，匯入新工具后忘记删掉文件，后来电脑被偷或文件外流就裸奔
+- **两个密钥库并存没同步**：家用装置一个密钥库、工作装置另一个密钥库，新增密码只在一边，要用时找不到。决定一套就好
+- **主密码跟其他服务的密码重用**：违反主密码的核心原则。哪怕是「跟某个自己旧账号类似」也算重用
+- **密钥库文件放没加密的云端**：`.kdbx` 本身有加密，但放在共用云端硬盘（Dropbox 共享文件夹、Google Drive 工作文件夹）会增加曝露面，建议再加一层自己的加密
+- **不开 2FA 的密码管理器账号**：Bitwarden / 1Password 账号本身的登录务必开 2FA，最好用硬件密钥
+
 ## 备援与恢复策略
 
 密码管理器是单一支点，备援要做到位。
@@ -152,21 +162,11 @@ Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬
 - **Apple ID 在台等同关键账号**：很多服务（电商、串流、订阅制 app）透过 Sign in with Apple 登录，Apple ID 失守会连带失去多个服务。Apple ID 本身务必开 2FA、设 Recovery Contacts
 - **被盗后的补救**：见 [紧急求救](../help/index.md) 的「账号被盗或被异常登录」章节，这篇是预防、求救页是事后补救
 
-## 常见错误（避免踩坑）
-
-社群实际遇过的踩坑案例：
-
-- **匯出后忘了删档**：从浏览器或旧密码管理器匯出时是 CSV / JSON 明文，匯入新工具后忘记删掉文件，后来电脑被偷或文件外流就裸奔
-- **两个密钥库并存没同步**：家用装置一个密钥库、工作装置另一个密钥库，新增密码只在一边，要用时找不到。决定一套就好
-- **主密码跟其他服务的密码重用**：违反主密码的核心原则。哪怕是「跟某个自己旧账号类似」也算重用
-- **密钥库文件放没加密的云端**：`.kdbx` 本身有加密，但放在共用云端硬盘（Dropbox 共享文件夹、Google Drive 工作文件夹）会增加曝露面，建议再加一层自己的加密
-- **不开 2FA 的密码管理器账号**：Bitwarden / 1Password 账号本身的登录务必开 2FA，最好用硬件密钥
-
 ## :material-chat-question: 一同了解
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 威胁模型怎么想](../basics/threat-model.md)
+- [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: Metadata 是什么](../basics/metadata.md)
 - [:material-chat-question: 什么是 Tails](./what-is-tails.md)
 

@@ -8,6 +8,10 @@ icon: material/account-group
 
 我们以「**匿名网络**」为核心，透过 Tor、Tails、OONI 等工具在台湾推广网络自由与隐私。2026 年聚焦三大主题，欢迎有兴趣的伙伴选择一个主题加入讨论与协作。我们使用自架 Matrix 家服务器与申请制账号，在隐私与社群品质之间取得平衡，背后考量可参见下方延伸阅读。
 
+!!! tip "第一次来，想先做点什么？"
+
+    很多事情不需要账号就能开始：订阅 [电子报](../contact.md) 跟读社群动态、直接用 [社群自架服务](tools.md) 里的 SearXNG 搜索与 Send 传档、读 [指南](../guides/index.md) 里的隐私文章。想进一步参与讨论，再来信申请 Matrix 账号即可。
+
 ## 2026 三大主题
 
 每个主题都有独立的研究专题入口页，整理研究目标、相关文章索引、进度与如何加入。
@@ -18,7 +22,7 @@ icon: material/account-group
 
 完整 2025 回顾与 2026 起步背景见：[延续 2025，走向 2026](../blog/posts/2025to2026.md)。
 
-## 你可以怎么参与
+## 你可以如何参与
 
 <div class="grid cards" markdown>
 
@@ -33,4 +37,4 @@ icon: material/account-group
 
 </div>
 
-**延伸阅读**：[从 Discord 年龄验证谈起：我们为什么自架 Matrix](../blog/posts/2026-discord-matrix-statement.md) — 说明我们自架 Matrix 家服务器的缘由与隐私取舍。
+**延伸阅读**：[从 Discord 年龄验证谈起：我们为什么自架 Matrix](../blog/posts/2026-discord-matrix-statement.md)：说明我们自架 Matrix 家服务器的缘由与隐私取舍。

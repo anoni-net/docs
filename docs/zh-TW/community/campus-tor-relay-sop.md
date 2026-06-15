@@ -8,7 +8,7 @@ icon: material/server-network-outline
 
 這份 SOP 是 [如何搭建 Tor Relay](./setup-tor-relay.md) 的進階補充，專門處理**校園網路場景**下的特殊性。內容整理自社群夥伴 NZ 在台灣師範大學的實作經驗，請搭配 [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md) 與 [校園 FAQ](./campus-relay-faq.md) 一併使用。
 
-如果你還在評估「該不該做」、「怎麼說服學校」，請先回到 [校園提案範本](./campus-tor-relay-proposal.md)。這一頁假設你已經拿到上線許可，正準備動手。
+如果你還在評估「該不該做」、「如何說服學校」，請先回到 [校園提案範本](./campus-tor-relay-proposal.md)。這一頁假設你已經取得上線許可，正準備動手。
 
 ## 跟個人架設的差異
 
@@ -23,7 +23,7 @@ icon: material/server-network-outline
 
 ## 專案範疇與非範疇
 
-跟資訊中心溝通時，**先講清楚自己不要做什麼**，比講清楚要做什麼更重要。
+跟資訊中心溝通時，**先說清楚自己不要做什麼**，比說清楚要做什麼更重要。
 
 **範疇內**
 

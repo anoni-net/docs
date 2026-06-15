@@ -1,7 +1,7 @@
 ---
 date: 2025-09-21
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 文章
     - Tor

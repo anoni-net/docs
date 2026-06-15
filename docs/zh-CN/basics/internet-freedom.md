@@ -6,7 +6,7 @@ icon: material/chat-question
 
 # :material-chat-question: 网络自由为什么重要
 
-在这里，**网络自由**指的是：人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](../tools/what-is-anonymity-network.md)。
+在这里，**网络自由**关注人们能否在免于不当干预的情况下取得信息、表达意见，以及选择自己信任的工具与连线方式。它与「匿名、隐私、规避审查」常一起出现，但侧重点不同，可先对照阅读[什么是匿名网络？](../tools/what-is-anonymity-network.md)。
 
 !!! info "关于 anoni.net"
 
@@ -19,6 +19,8 @@ icon: material/chat-question
 ## 东亚
 
 中国的「长城防火墙[^1]」长期过滤大量国际网站与服务，并对境内平台内容进行政治、宗教与社会议题上的审查。朝鲜则将一般民众与全球互联网几乎隔绝，仅能使用国家管控下的内部网络「光明网[^2]」。
+
+2025 年 9 月，大量长城防火墙内部资料外流（约 500GB 到 600GB，来自承包商 Geedge Networks 与中国科学院信息工程研究所旗下的 MESA Lab），文件显示这套审查与监控技术已向外输出，至少涵盖哈萨克斯坦、埃塞俄比亚、缅甸、巴基斯坦等国，并提及另一个未具名国家[^11]。这让「把审查系统当产品输出」从外界推测，变成有内部文件层级的佐证。
 
 区域内各地的开放程度差异很大。即使是相对开放的地区（如台湾[^10]），也面对跨境平台治理、信息安全与政治性操纵的讨论，以及对新闻与倡议工作者的法律与舆论压力。各国分数与叙事会随调查年度更新，建议用 Freedom House 互动地图逐国查阅。
 
@@ -34,9 +36,11 @@ icon: material/chat-question
 
 ## 东南亚
 
-越南政府曾要求国际平台配合下架政治性批评内容[^3]。印尼对特定类别网站采取封锁或限制[^4]。马来西亚曾出现针对调查报导媒体与博客的封锁[^5]。菲律宾在选举等高压时期，新闻与社群内容常成为监控与干预焦点[^6]。泰国对皇室相关言论的刑事追诉，长期影响线上表意空间[^7]。
+越南政府曾要求国际平台配合下架政治性批评内容[^3]。印尼对特定类别网站采取封锁或限制[^4]。马来西亚曾出现针对调查报导媒体与博客的封锁[^5]。菲律宾对独立新闻媒体的撤照与施压，长期压缩新闻自由空间[^6]。泰国对皇室相关言论的刑事追诉，长期影响线上表意空间[^7]。
 
 缅甸在 2021 年政变后反复断网、封锁社群与镇压独立媒体[^8][^9]，是「冲突与戒严情境下网络成为战场」的极端例子。
+
+除了封锁网站，管制也延伸到工具与用户本身。印尼自 2026 年 3 月起，率先在东南亚禁止未满 16 岁者使用社交媒体[^12]。缅甸则在 2025 年通过网络安全法（Cybersecurity Law），把未经许可提供 VPN 服务入罪[^13]。
 
 ## 观测与匿名连线
 
@@ -78,7 +82,7 @@ icon: material/chat-question
 </div>
 
 [^1]: [4所大学团队每日测试4亿个网域研究「防火长城」，发现有31万个网域被挡下、部分的封锁只是「意外」](https://www.thenewslens.com/article/153597){target="_blank"} - TNL The News Lens 关键评论网
-[^2]: [金正恩无所不在：北韩监视器数量增加，强化全方位监控](https://global.udn.com/global_vision/story/8663/7970562){target="_blank"} - 转角国际 udn Global
+[^2]: [光明网 (朝鲜)：朝鲜国家管控的内部网络](https://zh.wikipedia.org/zh-cn/%E5%85%89%E6%98%8E%E7%BD%91_%28%E6%9C%9D%E9%B2%9C%29){target="_blank"} - 维基百科，自由的百科全书
 [^3]: [【人权焦点】让我们呼吸! 越南政府的网络审查 与科技巨头的共谋](https://www.amnesty.tw/news/3805){target="_blank"} - 国际特赦组织台湾分会
 [^4]: [印尼预计6月落实网络新规定，恐剥夺社交平台言论自由](https://www.thenewslens.com/article/164619){target="_blank"} - TNL The News Lens 关键评论网（法规细节请以印尼官方与最新报导为准）
 [^5]: [马来西亚局内人](https://zh.wikipedia.org/zh-tw/%E9%A9%AC%E6%9D%A5%E8%A5%BF%E4%BA%9A%E5%B1%80%E5%86%85%E4%BA%BA){target="_blank"} - 维基百科，自由的百科全书
@@ -86,4 +90,7 @@ icon: material/chat-question
 [^7]: [泰国王室骂不得！男子脸书PO文惹祸 遭判刑50年破纪录](https://udn.com/news/story/6812/7721452){target="_blank"} - 联合新闻网
 [^8]: [缅甸被彻底剥夺的新闻自由：报导飓风灾害的记者遭军政府判刑20年监禁](https://feja.org.tw/72219/){target="_blank"} - 卓越新闻奖基金会
 [^9]: [封锁、断网、审查：从缅甸政变看「网络中立权」的重要性](https://lab.ocf.tw/2022/02/12/mymmar-block/){target="_blank"} - OCF Lab 开放实验室
-[^10]: [Freedom House：Taiwan（Freedom on the Net 国别条目）](https://freedomhouse.org/country/taiwan/freedom-net/2024){target="_blank"}（年度与网址随报告更新，若链接失效请改从[互动地图](https://freedomhouse.org/explore-the-map)进入）
+[^10]: [Freedom House：Taiwan（Freedom on the Net 国别条目）](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}（年度与网址随报告更新，若链接失效请改从[互动地图](https://freedomhouse.org/explore-the-map)进入）
+[^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
+[^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另见 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付费墙，标题即点明东南亚首例）
+[^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia

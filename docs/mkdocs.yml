@@ -44,6 +44,8 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/asia-travel.md
+          - scenarios/travel-ai-briefing.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
           - advanced/e2ee.md
@@ -92,6 +94,7 @@ nav:
           - community/how-to-contribute.md
           - community/skill-level.md
           - community/contributor-handbook.md
+          - community/become-anoni.md
           - community/governance.md
       - "動手實作":
           - community/tools.md
@@ -99,6 +102,7 @@ nav:
           - community/i18n.md
           - community/zh-hant-naming.md
           - community/setup-tor-relay.md
+          - community/setup-tor-webtunnel.md
           - community/campus-tor-relay-proposal.md
           - community/campus-tor-relay-sop.md
           - community/campus-relay-faq.md
@@ -188,7 +192,7 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/vega@5
   - https://cdn.jsdelivr.net/npm/vega-lite@5
-  - https://cdn.jsdelivr.net/npm/vega-embed@6
+  - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
 plugins:
   - search:
       lang:
@@ -211,7 +215,10 @@ plugins:
         font_family: Noto Sans TC
         color: "#ffffff"
         background_color: "#00aeff"
-  - privacy
+  - privacy:
+      assets_exclude:
+        - aa.anoni.net/*
+        - static.cloudflareinsights.com/*
   - git-revision-date-localized:
       type: iso_datetime
       locale: en
@@ -254,7 +261,8 @@ markdown_extensions:
         - name: vegalite
           class: vegalite
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: [".", ".."]
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:

@@ -6,7 +6,7 @@ icon: material/file-lock-outline
 
 # :material-file-lock-outline: 什麼是 CryptPad？
 
-寫一份不能曝光的文件，最直接的選擇是什麼？Google Docs 寫起來最順，但每一段文字、每一次修訂都以可被服務商讀取的形式存在他們的伺服器上。Notion、Microsoft 365 也是同樣的結構。對記者寫不能曝光的稿、社運工作者協商不能被監聽的策略、NGO 整理脆弱使用者的求助紀錄、學者研究敏感議題這些情境，工具的選擇直接決定一份草稿能不能安全寫得出來。
+寫一份不能曝光的文件，最直接的選擇是什麼？Google Docs 寫起來最順，但每一段文字、每一次修訂都以可被服務商讀取的形式存在他們的伺服器上。Notion、Microsoft 365 也是同樣的結構。對記者寫不能曝光的稿、社運工作者協商不能被監聽的策略、NGO 整理脆弱使用者的求助紀錄、學者研究敏感議題這些情境，工具的選擇決定了草稿能不能從頭到尾不被服務商讀取。
 
 [CryptPad](https://cryptpad.org/){target="_blank"} 是少數真的讓伺服器看不到內容的線上協作辦公套件。由法國 [XWiki SAS](https://xwiki.com/){target="_blank"} 開發，採用 [AGPLv3](https://github.com/cryptpad/cryptpad/blob/main/LICENSE){target="_blank"} 授權。內容在你瀏覽器端就完成加密，伺服器收到的是密文，但功能完整到一個介面就能涵蓋大部分 Google Workspace 的常用情境。
 
@@ -28,10 +28,10 @@ CryptPad 採用 zero-knowledge（零知識）架構。具體地說：
 
 - **加密發生在瀏覽器**：你輸入的文字、貼上的圖片、共編的每一個改動，在離開你的電腦前就先被加密。
 - **伺服器只看到密文**：CryptPad 的營運者、anoni.net 的維護者、你連線經過的任何中間方，看到的都是無法解讀的密文流。
-- **鑰匙在 URL 的 fragment**：解密 pad 所需的鑰匙寫在 URL 的 `#` 之後（fragment），這段不會送到伺服器。分享 pad 的連結就等於分享鑰匙，鑰匙是否外洩取決於你怎麼傳這條 URL。
+- **鑰匙在 URL 的 fragment**：解密 pad 所需的鑰匙寫在 URL 的 `#` 之後（fragment），這段不會送到伺服器。分享 pad 的連結就等於分享鑰匙，鑰匙是否外洩取決於你如何傳這條 URL。
 - **多人共編也維持加密**：當其他人透過你的分享連結加入時，他們在瀏覽器端拿到同一把鑰匙，在自己的瀏覽器解密與重新加密所有改動。
 
-換句話說：**即便我們想看，也看不到**。
+**即便我們想看，也看不到。**
 
 這層保證的代價是兩個現實限制。第一，**密碼或鑰匙遺失就無法復原內容**。CryptPad 不能幫你 reset。第二，**全文搜尋、內容索引、AI 摘要這類需要伺服器讀內容的功能不存在**。對於需要長期保密的工作來說，這通常是可以接受的取捨。
 
@@ -126,7 +126,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 - 需要 AI 自動摘要、全文檢索整個資料庫的場景（Notion 系生態）
 - 視訊會議（CryptPad 不做視訊）
 
-## 怎麼開始用
+## 如何開始使用
 
 主要有三種選擇：
 
@@ -183,7 +183,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 端對端加密如何運作](../advanced/e2ee.md)
-- [:material-chat-question: 威脅模型怎麼想](../basics/threat-model.md)
+- [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: 什麼是匿名網路](./what-is-anonymity-network.md)
 
 </div>

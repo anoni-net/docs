@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Matrix 社群討論 / Community chat
+    url: https://matrix.to/#/#community:im.anoni.net
+    about: 認領主題、即時討論、找夥伴。帳號申請來信 whisper@anoni.net。 / Claim topics, chat, find collaborators. Account requests at whisper@anoni.net.
+  - name: GitHub Discussions
+    url: https://github.com/anoni-net/docs/discussions
+    about: 開放式提問與想法討論。 / Open questions and ideas.
+  - name: 如何參與 / How to contribute
+    url: https://anoni.net/docs/community/how-to-contribute/
+    about: 第一次參與，先看這份 3 分鐘入門。 / A 3-minute starter for first-timers.
+  - name: 不熟 GitHub？寫信給我們 / Not on GitHub? Email us
+    url: https://anoni.net/docs/contact/
+    about: 社群信箱與其他聯絡方式。 / Community email and other ways to reach us.

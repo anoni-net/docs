@@ -22,6 +22,7 @@ nav:
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
+          - scenarios/travel-ai-briefing.md
       - !ENV [NAV_REPORTS, "Reports"]:
           - reports/index.md
   - !ENV [NAV_REGIONAL, "Regional"]:
@@ -37,6 +38,7 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
@@ -111,7 +113,7 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/vega@5
   - https://cdn.jsdelivr.net/npm/vega-lite@5
-  - https://cdn.jsdelivr.net/npm/vega-embed@6
+  - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
 plugins:
   - search:
       lang:
@@ -122,7 +124,10 @@ plugins:
         font_family: Public Sans
         color: "#ffffff"
         background_color: "#00aeff"
-  - privacy
+  - privacy:
+      assets_exclude:
+        - aa.anoni.net/*
+        - static.cloudflareinsights.com/*
   - git-revision-date-localized:
       type: iso_datetime
       locale: en

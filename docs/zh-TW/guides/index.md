@@ -34,7 +34,7 @@ icon: material/compass-outline
 
 </div>
 
-## 怎麼走這條路徑
+## 如何走這條路徑
 
 不必照順序讀完全部 5 個分類，幾種切入方式：
 
@@ -44,4 +44,4 @@ icon: material/compass-outline
 - **想理解技術原理**：到 [進階](../advanced/index.md) 看 E2EE、後量子等深度主題
 - **看外部資源**：到 [報告](../reports/index.md) 看翻譯整理過的研究
 
-延伸到在地的法規與觀測，可以接著看 [在地脈絡](../taiwan/index.md)；想加入社群協作，見 [社群參與](../community/index.md)。
+延伸到在地的法規與觀測，可以接著看 [在地脈絡](../taiwan/index.md)。想加入社群協作，見 [社群參與](../community/index.md)。

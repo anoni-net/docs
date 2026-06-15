@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
 authors:
-    - toomore
+    - anoni-net
 categories:
     - News
     - Translated Article

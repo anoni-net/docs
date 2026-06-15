@@ -1,0 +1,27 @@
+name: 文件錯誤 Bug
+description: 回報文件內容錯誤、失效連結、顯示問題 / Report a doc error, broken link, or display issue
+title: "[錯誤 Bug] "
+labels: ["bug", "documentation"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 哪一頁 / Where
+      description: 文件網址或檔案路徑。 / Page URL or file path.
+      placeholder: https://anoni.net/docs/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 問題描述 / What's wrong
+      description: 你看到什麼、預期應該是什麼。 / What you saw, what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: 建議修正 / Suggested fix
+      description: 有想法的話寫下來，沒有也沒關係。 / Optional, if you have an idea.
+    validations:
+      required: false

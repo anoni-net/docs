@@ -6,11 +6,11 @@ icon: material/server-network
 
 # :material-server-network: Tor Relay 校园建立研究专题
 
-Tor Relay 校园建立是 匿名网络社群 anoni.net 2026 的三大主题之一，跟「个人隐私指引」、「匿名支付」并列为今年的重点推进项目。这页是专题的对外入口，整理推动目标、相关文章索引、案例累积，以及如何加入社群协作。
+Tor Relay 校园建立是匿名网络社群 anoni.net 2026 的三大主题之一，跟「个人隐私指引」、「匿名支付」并列为今年的重点推进项目。这页是专题的对外入口，整理推动目标、相关文章索引、案例累积，以及如何加入社群协作。
 
 ## 为什么把校园 Tor Relay 独立成一个主题
 
-Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继集中在少数国家或少数网络供应商时，Tor 对抗流量分析的能力就会降低。台湾目前在 Tor Metrics 上能看到的中继数量有限，多元性还有很大成长空间（即时观测见 [Tor Relays 观测点](../taiwan/tor-relay-watcher.md)）。
+Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继集中在少数国家或少数网络供应商时，Tor 对抗流量分析的能力就会降低。台湾目前在 Tor Metrics 上能看到的中继数量有限，截至 2026-06 约 15 个运行中的中继，相比德国上千、美国数千的规模差距明显，多元性还有很大成长空间（数字会随时间变动，即时观测见 [Tor Relays 观测点](../taiwan/tor-relay-watcher.md)）。
 
 大专院校是补上这个缺口的合适切入点：
 
@@ -20,12 +20,12 @@ Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继
 - **教育价值**：架设过程本身就是匿名网络、信息安全、开源治理的具体教学场景
 - **国际接轨**：对接 EFF 的 [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} 计划，把台湾校园纳入全球架设网络
 
-社群想做的是**把校园架设的完整流程、跟学校沟通的话术、实际维运经验整理成可复制的方法论**，让第二、第三所学校的推动成本明显降低。
+社群想把校园架设的完整流程、跟学校沟通的应答范本、实际维运经验整理成可复制的方法论，让第二、第三所学校的推动成本明显降低。
 
 ## 2026 推动目标
 
 - **校园架设 SOP 文件**：从提案、跟学校沟通、技术设置、上线、后续维运的完整流程
-- **跟学校沟通的话术与案例库**：法律疑虑、带宽使用、用途说明等高频问题的回应参考
+- **跟学校沟通的应答范本与案例库**：法律疑虑、带宽使用、用途说明等高频问题的回应参考
 - **第二、三所学校接洽**：以台师大为起点，向其他大专院校扩展
 - **EFF/Tor Project 对接**：建立稳定的国际对接管道，把台湾案例回馈给全球计划
 - **观测即时化**：透过 [Pulse](https://api.anoni.net/api/readme){target="_blank"} 持续追踪校园节点的运作状况
@@ -35,7 +35,7 @@ Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继
 
 - 案例：[在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](../blog/posts/ntnu-nz.md)
 - 国际参考：[Tor Project 客座文章：Setting Up a Tor University Relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}
-- 技术 how-to：[如何搭建 Tor Relay](./setup-tor-relay.md)
+- 技术 how-to：[如何搭建 Tor Relay](./setup-tor-relay.md)、[如何搭建 Tor WebTunnel 桥接](./setup-tor-webtunnel.md)
 - 观测：[Tor Relays 观测点](../taiwan/tor-relay-watcher.md)
 - 概念：[什么是 Tor](../tools/what-is-tor.md)、[Tor Snowflake 桥接点](../tools/tor-snowflake.md)
 - 进阶：[一个会遗忘的服务器：探索无状态中继](../blog/posts/2026-a-server-that-forgets-exploring-stateless-relays.md)
@@ -52,7 +52,7 @@ Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继
 
 - **校园架设 SOP 文件**：把零散的经验整理成可复制流程（预计 Q2-Q3）
 - **第二所学校接洽**：与其他大专院校的初步联系与评估
-- **信息安全活动搭配**：跟学校信息安全周、迎新讲座、Hackerton 等活动的合作模式
+- **信息安全活动搭配**：跟学校信息安全周、迎新讲座、Hackathon 等活动的合作模式
 - **政策沟通材料**：给校方/教育部层级的计划说明、法律疑虑回应、国际比较资料
 - 翻译候选报告（候选清单见下方）
 
@@ -63,7 +63,7 @@ Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继
 - [Tor Project Relay Operator Guides](https://community.torproject.org/relay/){target="_blank"}：中继站营运官方指南
 - [Tor University Challenge case studies](https://toruniversity.eff.org/case-studies/){target="_blank"}：国际校园案例研究
 - [EFF Legal FAQ for Tor relay operators](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"}：营运中继的法律常见问题
-- 各国校园 Tor Relay 政策案例（MIT、Northeastern、CMU 等）
+- 各国校园 Tor Relay 政策案例（MIT、Stanford、CMU 等）
 
 ## 如何加入讨论
 
