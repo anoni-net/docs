@@ -1,7 +1,7 @@
 ---
 date: 2026-06-10
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 社区
     - 隐私

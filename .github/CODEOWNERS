@@ -6,23 +6,25 @@
 # 注意：
 # - 這裡刻意不設全域 `*` owner，避免每個 PR 都被要求維護者審核。
 #   只有下列安全核心路徑會在開啟分支保護「require review from Code Owners」時強制審核。
-# - 被指派的帳號需有本 repo 的 write 權限，否則該行會被 GitHub 忽略。
-# - 目前只列出已確認的維護者，新審核者或團隊（@anoni-net/<team>）加入後再補。
+# - 被指派的帳號或團隊需有本 repo 的 write 權限，否則該行會被 GitHub 忽略。
+# - 安全核心由 @anoni-net/maintainers 團隊把關。此團隊必須先在 org 建立、加入成員並授予 write
+#   權限，下列規則才會生效；團隊不存在時 GitHub 會忽略該行，等同無強制審核。
+# - 細分團隊（譯審、子系統）見文末範例，補上後可把對應路徑改指更精確的團隊。
 
 # 安全/OPSEC 核心（zh-TW 為來源語言）→ 維護者技術審核
-/docs/zh-TW/tools/                   @toomore
-/docs/zh-TW/scenarios/               @toomore
-/docs/zh-TW/advanced/                @toomore
-/docs/zh-TW/guides/                  @toomore
-/docs/zh-TW/help/                    @toomore
+/docs/zh-TW/tools/                   @anoni-net/maintainers
+/docs/zh-TW/scenarios/               @anoni-net/maintainers
+/docs/zh-TW/advanced/                @anoni-net/maintainers
+/docs/zh-TW/guides/                  @anoni-net/maintainers
+/docs/zh-TW/help/                    @anoni-net/maintainers
 
 # 治理與社群規範
-/CODE_OF_CONDUCT.md                  @toomore
-/docs/zh-TW/community/governance.md  @toomore
+/CODE_OF_CONDUCT.md                  @anoni-net/maintainers
+/docs/zh-TW/community/governance.md  @anoni-net/maintainers
 
 # 子系統（程式碼）
-/pulse/                              @toomore
-/asn_coverage/                       @toomore
+/pulse/                              @anoni-net/maintainers
+/asn_coverage/                       @anoni-net/maintainers
 
 # 待補（範例，補上實際帳號或團隊後取消註解）：
 # /docs/zh-CN/                       @anoni-net/translation-reviewers

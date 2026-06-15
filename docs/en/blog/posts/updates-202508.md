@@ -1,7 +1,7 @@
 ---
 date: 2025-09-09
 authors:
-    - toomore
+    - anoni-net
 categories:
     - News
     - Community

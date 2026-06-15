@@ -8,9 +8,9 @@ for base in ./output ./output/zh-tw ./output/en; do
   mkdir -p "$base/assets/images/social/blog/2025/02" "$base/assets/images/social/blog/2025/03"
 done
 
-wget -q https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./output/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
-[ -d ./output/zh-tw ] && wget -q https://s3.toomore.net/ocf/tor-pre-event-zh-tw.png -O ./output/zh-tw/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
-[ -d ./output/en ] && wget -q https://s3.toomore.net/ocf/tor-pre-event.png -O ./output/en/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-zh-tw.png -O ./output/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+[ -d ./output/zh-tw ] && wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-zh-tw.png -O ./output/zh-tw/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
+[ -d ./output/en ] && wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-en.png -O ./output/en/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
 
 for base in ./output ./output/zh-tw ./output/en; do
   [ -d "$base" ] || continue

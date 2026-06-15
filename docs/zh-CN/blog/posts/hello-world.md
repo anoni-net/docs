@@ -2,7 +2,7 @@
 date: 2025-01-06
 slug: 项目重启-2025
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 公告
     - 社区
