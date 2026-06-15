@@ -3,13 +3,13 @@ title: Tor Snowflake
 description: 開瀏覽器分頁，協助受審查地區的 Tor 使用者連線。在台灣門檻最低的網路自由貢獻方式。
 icon: material/snowflake
 ---
-# :material-snowflake: Tor Snowflake 橋接點（網頁版）
+# :material-snowflake: Tor Snowflake 橋接點
 
 打開瀏覽器分頁，幫世界上連不上 Tor 的人連上 Tor 網路。不需要安裝、不需要伺服器，分頁開著就在運作。
 
 ## 為什麼要開 Snowflake
 
-在伊朗、緬甸、白俄羅斯這類嚴重審查地區，Tor 的入口節點長期被偵測與封鎖。當地使用者要連上 Tor，需要透過外部志工提供的「橋接點」繞過。Snowflake 把你的瀏覽器變成一個臨時橋接點，受審查地區的 Tor 使用者透過你的瀏覽器連上 Tor 網路。可參考 [InterSecLab 中國防火長城資料外洩研究](../reports/interseclab-network-coup/index_7.md) 與 [2025 年 10 月國際網路自由觀察](../blog/posts/internetfreedom-oct2025.md) 了解全球審查現況。
+在伊朗、緬甸、白俄羅斯這類嚴重審查地區，Tor 的入口節點長期被偵測與封鎖。當地使用者要連上 Tor，需要透過外部志工提供的「橋接點」繞過。Snowflake 把你的瀏覽器變成一個臨時橋接點，受審查地區的 Tor 使用者透過你的瀏覽器連上 Tor 網路。可參考 [InterSecLab 中國防火長城資料外洩研究](../reports/interseclab-network-coup/index_7.md)、[2025 年 10 月國際網路自由觀察](../blog/posts/internetfreedom-oct2025.md)，了解全球審查現況。
 
 對在台灣的我們，這是門檻最低的網路自由貢獻方式：
 
@@ -61,7 +61,7 @@ icon: material/snowflake
 
 - **不會洩漏你的真實 IP 給最終使用者**。受審查地區的 Tor 使用者透過你連線後，他們的網路請求會經過 Tor 多層加密，最後從 Tor 出口節點離開。對外網站看到的是出口節點，不是你的 IP。
 - **你不會看到別人在做什麼**。流量在你的瀏覽器中只是被中繼，內容已被 Tor 加密，無法解讀。
-- **你的 IP 不會被公開列為固定橋接**。Snowflake 採用短暫配對機制，跟傳統 Tor Bridge 的公開列表不同，IP 流動性高。
+- **你的 IP 不會被公開列為固定橋接**。Snowflake 採用短暫配對機制，跟傳統 Tor Bridge 的公開列表不同，IP 流動性高。不過配對過程中，連線的使用者端仍會看到你的 IP，Snowflake 的重點是不被列進公開橋接清單，而非讓 IP 完全隱形。
 - **頻寬影響很小**。預設值對日常瀏覽幾乎無感。擴充套件可以調整流量上限。
 - **企業或校園網路請先確認政策**。在公司或學校網路啟動 Snowflake，等於把該網路的 IP 用來轉發第三方流量。資訊政策嚴格的環境（金融、政府、研究單位）建議先問過資訊部門。
 

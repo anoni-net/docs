@@ -1,0 +1,29 @@
+{
+  "name": "anoni.net Docs",
+  "short_name": "anoni.net Docs",
+  "description": "Taiwan-anchored volunteer observatory tracking networked freedom across the Sinophone Asia-Pacific region — OONI measurements, Tor relay monitoring, and on-the-ground community context.",
+  "lang": "en",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#00aeff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

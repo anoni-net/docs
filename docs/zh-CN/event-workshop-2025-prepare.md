@@ -63,32 +63,32 @@ icon: octicons/workflow-24
 
 === "2025/05"
 
-    - [x] `公告`{style="color: red;"} 工作坊开始招募工作人员与小助手。
-    - [x] `通知`{style="color: darkorange;"} 工作坊筹备已开始，欢迎加入！
-    - [x] `确认`{style="color: purple;"} 五月份线上启动会议。
-    - [x] `教材`{style="color: green;"} 翻译 Tor/Tails 简报。
+    - [x] `公告`{style="color: #c62828;"} 工作坊开始招募工作人员与小助手。
+    - [x] `通知`{style="color: #c43e00;"} 工作坊筹备已开始，欢迎加入！
+    - [x] `确认`{style="color: #6a1b9a;"} 五月份线上启动会议。
+    - [x] `教材`{style="color: #2e7d32;"} 翻译 Tor/Tails 简报。
 
 === "2025/06"
 
-    - [x] `公告`{style="color: red;"} 筹备进度与持续招募工作人员。
-    - [x] `确认`{style="color: purple;"} 工作人员与小助手名单。
-    - [x] `教材`{style="color: green;"} Tor/Tails 匿名网络工作坊课程细节。
-    - [x] `教材`{style="color: green;"} OONI 工作坊课程细节。
-    - [ ] `反馈`{style="color: dodgerblue;"} 给 Tor/Tails、OONI 团队关于我们所设计的课程与教材。
+    - [x] `公告`{style="color: #c62828;"} 筹备进度与持续招募工作人员。
+    - [x] `确认`{style="color: #6a1b9a;"} 工作人员与小助手名单。
+    - [x] `教材`{style="color: #2e7d32;"} Tor/Tails 匿名网络工作坊课程细节。
+    - [x] `教材`{style="color: #2e7d32;"} OONI 工作坊课程细节。
+    - [ ] `反馈`{style="color: #1565c0;"} 给 Tor/Tails、OONI 团队关于我们所设计的课程与教材。
 
 === "2025/07"
 
-    - [x] `公告`{style="color: red;"} 工作坊课程内容与报名方式。
-    - [x] `通知`{style="color: darkorange;"} 通知报名者活动出席与时间。
-    - [x] `制作`{style="color: midnightblue;"} 少量活动传单印制，于 OCF 摊位放置与公告栏张贴。
-    - [x] `确认`{style="color: purple;"} 活动日当天工作人员的任务。
+    - [x] `公告`{style="color: #c62828;"} 工作坊课程内容与报名方式。
+    - [x] `通知`{style="color: #c43e00;"} 通知报名者活动出席与时间。
+    - [x] `制作`{style="color: #1a237e;"} 少量活动传单印制，于 OCF 摊位放置与公告栏张贴。
+    - [x] `确认`{style="color: #6a1b9a;"} 活动日当天工作人员的任务。
 
 === "2025/08"
 
     - [x] <code>:star2:</code> 活动日执行。
-    - [ ] `公告`{style="color: red;"} 工作坊活动后记录文章。
-    - [ ] `通知`{style="color: darkorange;"} 收集报名者的意见反馈与活动后可持续参与的建议。
-    - [ ] `反馈`{style="color: dodgerblue;"} 给 Tor/Tails、OONI 团队关于活动记录。
+    - [ ] `公告`{style="color: #c62828;"} 工作坊活动后记录文章。
+    - [ ] `通知`{style="color: #c43e00;"} 收集报名者的意见反馈与活动后可持续参与的建议。
+    - [ ] `反馈`{style="color: #1565c0;"} 给 Tor/Tails、OONI 团队关于活动记录。
 
 [报名参与「活动筹备人员」](#报名工作人员){ .md-button .md-button--primary }
 
@@ -253,7 +253,7 @@ icon: octicons/workflow-24
 
 ### 候选讨论议题
 
-目前初步规划三大类、六项讨论议题，协调员加入时可能会有所调整，或以协调员所设定的议题进行讨论。在活动前我们有一份议题讨论的[问卷调查](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}，大约 2 分钟的作答时间，请协助我们`（可匿名）`{style="color: purple;"}了解各议题的喜好程度，感谢！
+目前初步规划三大类、六项讨论议题，协调员加入时可能会有所调整，或以协调员所设定的议题进行讨论。在活动前我们有一份议题讨论的[问卷调查](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}，大约 2 分钟的作答时间，请协助我们`（可匿名）`{style="color: #6a1b9a;"}了解各议题的喜好程度，感谢！
 
 [协助填写：议题讨论问卷调查](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){ .md-button .md-button--primary target="_blank"} [:material-qrcode-scan: QRcode](./assets/images/workshop_form_zh.png){target="_blank"}
 

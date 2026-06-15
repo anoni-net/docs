@@ -17,7 +17,7 @@ icon: material/bag-suitcase-outline
 
 - **審查強度**用 Freedom House 的 [Freedom on the Net](https://freedomhouse.org/report/freedom-net){target="_blank"}（FOTN，年度網路自由評比，滿分 100，分數越高越自由）2025 年版的分數與分級。香港、澳門不在 FOTN 單獨評分範圍，改用質性描述標註。
 - **分數高不代表沒有風險**。香港、澳門主流服務都連得上，表面像自由網，真正的代價在實名登記、瀏覽紀錄長期留存與法律追究。讀的時候要把「能不能連上」跟「連上之後會不會被究責」分開看。
-- **VPN 與 Tor 兩欄**呈現工具的技術可達性與合法性。即使工具能用，發表特定內容仍可能觸法，這部分看逐地註記與最後的研討會提醒。
+- **VPN 與 Tor 兩欄**呈現工具的技術可達性與合法性。Tor 是把連線經過多個中繼轉送、隱藏你來源位置的免費匿名工具（詳見 [什麼是 Tor](../tools/what-is-tor.md)），不熟的人可以先看 VPN 欄，把 Tor 欄當進階參考。即使工具能用，發表特定內容仍可能觸法，這部分看逐地註記與最後的研討會提醒。
 - 先看下一節的「出發前通用準備」，每個地點都適用，再依目的地落在哪個風險層補上加碼準備。
 
 ## 東亞與東南亞網路監控對照表
@@ -47,7 +47,7 @@ icon: material/bag-suitcase-outline
 
 - **帶最簡化的裝置**。出差用的手機、筆電裡，跟這趟無關的資料越少越好。高風險地建議準備一支只裝必要 App 的乾淨機，敏感資料留在雲端或家裡，需要時再透過加密連線取用。
 - **出發前裝好並測試規避工具**。VPN、Tor Browser 與橋接都要在家裡先裝好、連一次確認可用。到了審查嚴的地方，App 商店與工具官網本身就連不上，落地才想下載通常來不及。Tor 的橋接設定見 [Tor Snowflake 橋接點](../tools/tor-snowflake.md) 與 [Tor Browser 進階設定](../tools/tor-browser-advanced.md)，自架橋接見 [如何架設 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
-- **準備兩種以上的連線方式**。單一 VPN 協定常被封，多帶一兩款備援。中國這類地方標準 WireGuard、OpenVPN 幾秒內被封，要選有混淆（obfuscation，把 VPN 流量偽裝成一般 HTTPS）功能的方案。具備這類混淆的服務，例如 Proton VPN（Stealth 協定）、Mullvad（混淆、Shadowsocks 橋接）、ExpressVPN（Lightway 自動混淆）、NordVPN（NordWhisper）、Surfshark（Camouflage Mode）、Astrill（StealthVPN）。哪些「現在能用」會隨封鎖更新而變，出發前查當地最新回報並先測試一次。
+- **準備兩種以上的連線方式**。單一 VPN 協定常被封，多帶一兩款備援。多數目的地用一般 VPN 就夠，只有中國、緬甸這種強封鎖地，標準的 WireGuard、OpenVPN 幾秒內就被封，要改用有混淆（obfuscation，把 VPN 流量偽裝成一般 HTTPS）功能的方案。具備這類混淆的服務，例如 Proton VPN（Stealth 協定）、Mullvad（混淆、Shadowsocks 橋接）、ExpressVPN（自動混淆，Lightway 協定）、NordVPN（NordWhisper）、Surfshark（Camouflage Mode）、Astrill（StealthVPN）。哪些「現在能用」會隨封鎖更新而變，出發前查當地最新回報並先測試一次。
 - **敏感通訊改用端對端加密工具**。Signal 是常見選擇，但部分地區會封鎖，出發前確認目的地能不能連，連不上時改走 Tor 或 VPN。團隊出差可事先約好主要與備用管道。
 - **帳號分流**。研討會社交、商務聯絡與個人帳號分開，減少一個被盯上時牽連到其他身分。
 - **SIM 用漫遊或純數據 eSIM**。三種方式都會留下某種身分紀錄，差別在這份紀錄落在誰手上、當地政府能不能直接把門號對應到你本人：
@@ -62,17 +62,19 @@ icon: material/bag-suitcase-outline
 
 ## 依風險分層的加碼準備
 
+先做完上一節的通用準備，再依目的地落在哪一層補上加碼項。這節給的是跨地的準備強度，每地更細的被封服務與查證來源見後面的逐地註記。
+
 ### 低風險：台灣（基準）、日本、南韓
 
 接近家用環境，用平常的工具即可。主要記得辦 SIM 要帶護照，日本 2026 年 4 月起連純數據 eSIM 都要驗護照。南韓有內容過濾與較強的通訊攔截法制，處理敏感資料時仍建議自備 VPN。
 
 ### 中風險：菲律賓、馬來西亞、新加坡、印尼、香港、澳門
 
-主流服務大致可用，VPN 與 Tor 可連，但各有針對性封鎖與較強的法律工具。這裡真正要顧的是你發表了什麼、以及實名登記留下的紀錄，連線本身通常不成問題。落地辦卡帶齊證件，公共與會場 WiFi 一律走 VPN，對外發表前先了解當地的誹謗與內容法規。
+主流服務大致可用，VPN 與 Tor 可連，但各有針對性封鎖與較強的法律工具。這裡真正要顧的是你發表了什麼、以及實名登記留下的紀錄，連線本身通常不成問題。落地辦卡帶齊證件，公共與會場 Wi-Fi 一律走 VPN，對外發表前先了解當地的誹謗與內容法規。
 
 ### 高風險：泰國、越南、柬埔寨、中國大陸
 
-系統性封鎖規模大，法律對線上言論的追訴力道強。出發前務必裝好混淆型 VPN 與 Tor 橋接並測試，帶乾淨機，敏感工作不要在當地網路上做。中國要假設所有連線都被看、境外服務都連不到。泰國、越南建議預設 Tor 橋接，因為近年封鎖規模大增、直連可能受阻。
+系統性封鎖規模大，法律對線上言論的追訴力道強。出發前務必裝好混淆型 VPN 與 Tor 橋接並測試，帶乾淨機，敏感工作不要在當地網路上做。中國要假設所有連線都受監看、境外服務都連不到。泰國、越南建議預設 Tor 橋接，因為近年封鎖規模大增、直連可能受阻。
 
 ### 極高風險：緬甸
 
@@ -84,7 +86,7 @@ icon: material/bag-suitcase-outline
 
 ### 中國大陸
 
-防火長城（Great Firewall）長期完整封鎖 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 與全語系 Wikipedia，外媒多數被封。手法含 DNS 污染、SNI 過濾與深度封包檢測（DPI，逐筆分析連線判斷是否放行的技術）。個人翻牆屬違法灰色地帶，2025 年底國安部公開警告會究責。VPN 要選有強混淆的方案、入境前裝好至少兩款。Tor 直連無法使用，obfs4、meek、Snowflake 幾乎都失效，WebTunnel 偶爾連得上但常數分鐘內被封，不應視為可靠管道。SIM 自 2019 年底起強制實名加人臉，外籍旅客同樣適用。2024 年 7 月起新規授權國安人員檢查個人電子裝置，深圳、上海有海關抽查手機與筆電的報告。查證來源（2026-06）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 對中國的連線指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}。
+防火長城（Great Firewall）長期完整封鎖 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 與全語系 Wikipedia，外媒多數被封。手法含 DNS 污染、SNI 過濾與深度封包檢測（DPI，逐筆分析連線判斷是否放行的技術）。個人翻牆屬違法灰色地帶，2025 年底國安部公開警告會究責。VPN 要選有強混淆的方案、入境前裝好至少兩款。Tor 直連在中國無法使用，obfs4 橋接長期被封。Tor Project 對中國目前建議優先用 WebTunnel，Snowflake、meek 作為備選，但可用性會隨封鎖更新大幅波動，出發前務必先測試，並多備幾種橋接。SIM 自 2019 年底起強制實名加人臉，外籍旅客同樣適用。2024 年 7 月起新規授權國安人員檢查個人電子裝置，深圳、上海有海關抽查手機與筆電的報告。查證來源（2026-06）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 對中國的連線指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}。
 
 ### 香港
 
@@ -100,11 +102,11 @@ icon: material/bag-suitcase-outline
 
 ### 南韓
 
-主流外站不封鎖，旅客一般瀏覽不受影響。但有系統性的內容過濾，KCSC 對色情、賭博、北韓宣傳等類別封鎖，2023 年封鎖約 22 萬個網站或網頁，技術上採 SNI 過濾（監看 HTTPS 連線中未加密的網域名稱欄位來比對黑名單），等於 ISP 拿得到你造訪的網域清單。VPN 合法，常被用來繞過過濾。Tor 直連一般可用。SIM 須出示護照實名，觀光 eSIM 較寬鬆但仍綁護照。南韓通訊攔截法制偏強，《通訊秘密保護法》授權即時攔截，處理敏感資料者宜納入威脅模型。查證來源（2026-06）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer。
+主流外站不封鎖，旅客一般瀏覽不受影響。但有系統性的內容過濾，KCSC 對色情、賭博、北韓宣傳等類別封鎖，近年每年封鎖逾 20 萬件網站、網頁與社群貼文，技術上採 SNI 過濾（監看 HTTPS 連線中未加密的網域名稱欄位來比對黑名單），等於 ISP 拿得到你造訪的網域清單。VPN 合法，常被用來繞過過濾。Tor 直連一般可用。SIM 須出示護照實名，觀光 eSIM 較寬鬆但仍綁護照。南韓通訊攔截法制偏強，《通訊秘密保護法》授權即時攔截，處理敏感資料者宜納入威脅模型。查證來源（2026-06）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer、[KCSC 行政審查統計](https://www.opennetkorea.org/en/wp/5153){target="_blank"} - Open Net Korea。
 
 ### 台灣（基準）
 
-全亞洲最開放的網路環境，FOTN 2025 亞洲第 1、全球第 7，主流服務皆不封鎖，作為本表的最低風險對照。Freedom House 點出的疑慮在制度層面：TWNIC 透明度報告顯示 2025 上半年逾 5 萬個網站被列入封鎖（多走 DNS RPZ 框架、且大多未經司法審查），屬治理透明度問題，非旅客日常會遇到的廣泛封鎖。VPN 合法、Tor 直連可用。SIM 預付卡須出示護照（含入境章），通常還要第二證件，機場購買多半只需護照。查證來源（2026-06）：[FOTN 2025 Taiwan](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}。
+全亞洲最開放的網路環境，FOTN 2025 亞洲第 1、全球第 7，主流服務皆不封鎖，作為本表的最低風險對照。Freedom House 點出的疑慮在制度層面：TWNIC 透明度報告顯示 2025 上半年逾 5 萬個網域被列入 RPZ 屏蔽，多數透過緊急請求（RPZ 1.5）、未經事前司法審查，屬治理透明度問題，非旅客日常會遇到的廣泛封鎖。VPN 合法、Tor 直連可用。SIM 預付卡須出示護照（含入境章），通常還要第二證件，機場購買多半只需護照。查證來源（2026-06）：[FOTN 2025 Taiwan](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}、[TWNIC RPZ 透明度報告](https://rpz.twnic.tw/){target="_blank"}。
 
 ### 菲律賓
 
@@ -112,11 +114,11 @@ icon: material/bag-suitcase-outline
 
 ### 馬來西亞
 
-有封鎖，但以線上賭博、色情、侵權為大宗，2018 至 2024 年累計封逾 24,000 個網站。政治動機封鎖過 Sarawak Report、Medium，兩者已於 2025 年 3 月前解封。2024 年底兩項新法擴權：《通訊與多媒體法》修正案與《線上安全法》，賦予 MCMC 更廣的內容移除與監控權。2025 年對 Telegram 取得針對特定公開頻道的法院禁制令。WhatsApp、Telegram、Signal 一般可用，VPN 與 Tor 可用。SIM 自 2018 年起強制實名，旅客須出示護照正本（不接受影本）加在馬住宿地址，2025 年底起新卡須搭配 MyDigital ID。真正的紅線是涉及王室、煽動、宗教與種族的內容。查證來源（2026-06）：[FOTN 2025 Malaysia](https://freedomhouse.org/country/malaysia/freedom-net/2025){target="_blank"}、[MCMC SIM 登記 FAQ](https://www.mcmc.gov.my/en/faqs/prepaid-registration/what-type-of-documents-can-be-used-for-the-registr){target="_blank"}。
+有封鎖，但以線上賭博、色情、侵權為大宗，2018 至 2024 年累計封逾 24,000 個網站。政治動機封鎖過 Sarawak Report、Medium，兩者已於 2025 年 3 月前解封。2024 年底兩項新法擴權：《通訊與多媒體法》修正案，以及《線上安全法》（Online Safety Act 2025，2024 年 12 月國會通過、2026 年 1 月生效），賦予 MCMC 更廣的內容移除與監控權。2025 年對 Telegram 取得針對特定公開頻道的法院禁制令。WhatsApp、Telegram、Signal 一般可用，VPN 與 Tor 可用。SIM 自 2018 年起強制實名，旅客須出示護照正本（不接受影本）加在馬住宿地址，2025 年底起本地新卡登記須綁 MyDigital ID（限馬國公民，外國旅客不適用，仍以護照登記）。真正的紅線是涉及王室、煽動、宗教與種族的內容。查證來源（2026-06）：[FOTN 2025 Malaysia](https://freedomhouse.org/country/malaysia/freedom-net/2025){target="_blank"}、[MCMC SIM 登記 FAQ](https://www.mcmc.gov.my/en/faqs/prepaid-registration/what-type-of-documents-can-be-used-for-the-registr){target="_blank"}。
 
 ### 新加坡
 
-封鎖範圍窄但法律工具強。2024 年 10 月封鎖 10 個被指可用於對新加坡發動敵意資訊行動的網站。新聞網站受 IMDA 牌照與 POFMA（防止網路假訊息與操縱法）約束，政府可對被認定不實的陳述發更正指令。VPN 與 Tor 合法可用，主流服務日常可達。SIM 須以護照登記，以護照登記的非居民卡自 2024 年 7 月起效期僅 30 天。2024 年《刑事訴訟修正法》擴大警方與移民關卡局的搜查權，合法逮捕時可搜查隨身手機毋須另行令狀，實務上一般旅客少見隨機解鎖，但法律門檻低。最大風險在你發表了什麼（POFMA、誹謗、FICA）。查證來源（2026-06）：[FOTN 2025 Singapore](https://freedomhouse.org/country/singapore/freedom-net/2025){target="_blank"}、[Criminal Procedure Amendments Act 2024](https://sso.agc.gov.sg/Acts-Supp/5-2024/Published/20240318?DocDate=20240318){target="_blank"}。
+封鎖範圍窄但法律工具強。2024 年 10 月封鎖 10 個被指可用於對新加坡發動敵意資訊行動的網站。新聞網站受 IMDA 牌照與 POFMA（防止網路假訊息與操縱法）約束，政府可對被認定不實的陳述發更正指令。VPN 與 Tor 合法可用，主流服務日常可達。SIM 須以護照登記，以護照登記的非居民卡自 2024 年 7 月起效期僅 30 天。2024 年《刑事訴訟修正法》擴大無令狀搜查權，逮捕可疑犯罪者時得搜查其持有或控制的物件，實務上一般旅客少見隨機解鎖，但法律門檻低。最大風險在你發表了什麼（POFMA、誹謗、FICA）。查證來源（2026-06）：[FOTN 2025 Singapore](https://freedomhouse.org/country/singapore/freedom-net/2025){target="_blank"}、[Criminal Procedure Amendments Act 2024](https://sso.agc.gov.sg/Acts-Supp/5-2024/Published/20240318?DocDate=20240318){target="_blank"}。
 
 ### 印尼
 
@@ -128,11 +130,11 @@ icon: material/bag-suitcase-outline
 
 ### 泰國
 
-東南亞中最受限，FOTN 唯一列為不自由的一個。法源是《電腦犯罪法》與刑法第 112 條（冒犯王室，lèse-majesté，刑期 3 至 15 年）。法院下令、數位經濟與社會部執行 URL 封鎖，官方稱 2025 年底到 2026 年初封鎖逾 22 萬個 URL（多數為線上賭博）。LINE 為主流，WhatsApp、Telegram、Signal 目前可用。VPN 合法普遍，但近年封鎖規模大增，建議旅客預設 Tor 橋接以防直連受阻。SIM 自 2025 年 8 月起導入臉部活體偵測，所有人辦卡須本人到場、出示護照正本，旅客卡 60 天效期。第 112 條與電腦犯罪法適用境內任何人、不分國籍，外國人曾因相關貼文被捕、沒收護照、驅逐並終身禁入，按讚與轉發都可能擔責。絕不公開評論王室。查證來源（2026-06）：[FOTN 2025 Thailand](https://freedomhouse.org/country/thailand/freedom-net/2025){target="_blank"}、[Thailand biometric SIM registration](https://www.biometricupdate.com/202508/thailand-mandates-biometric-liveness-detection-for-sim-registration){target="_blank"} - Biometric Update。
+東南亞主要商旅目的地中審查最受關注的一個，FOTN 列為不自由（與越南、緬甸同列）。法源是《電腦犯罪法》與刑法第 112 條（冒犯王室，lèse-majesté，刑期 3 至 15 年）。法院下令、數位經濟與社會部執行 URL 封鎖，官方稱 2025 年底到 2026 年初封鎖逾 22 萬個 URL（多數為線上賭博）。LINE 為主流，WhatsApp、Telegram、Signal 目前可用。VPN 合法普遍，但近年封鎖規模大增，建議旅客預設 Tor 橋接以防直連受阻。SIM 自 2025 年 8 月起導入臉部活體偵測，所有人辦卡須本人到場、出示護照正本，旅客卡 60 天效期。第 112 條與電腦犯罪法適用境內任何人、不分國籍，外國人曾因相關貼文被捕、沒收護照、驅逐並終身禁入，按讚與轉發都可能擔責。絕不公開評論王室。查證來源（2026-06）：[FOTN 2025 Thailand](https://freedomhouse.org/country/thailand/freedom-net/2025){target="_blank"}、[Thailand biometric SIM registration](https://www.biometricupdate.com/202508/thailand-mandates-biometric-liveness-detection-for-sim-registration){target="_blank"} - Biometric Update、[True Tourist SIM（60 天效期、護照登記）](https://www.true.th/en/prepaid/sim/tourist){target="_blank"}。
 
 ### 越南
 
-高審查環境，FOTN 22 分。2025 年 5 月電信局下令 ISP 封鎖 Telegram，用戶未掛 VPN 即難以連上。Decree 53/2022 要求外國業者資料在地化、留存資料至少 24 個月。Decree 147/2024 要求大型平台以越南手機號或身分證實名、24 小時內移除違法內容，Facebook 受影響最大。另有數萬人規模的「47 部隊」網軍以檢舉與帶風向壓制異議。VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大致可用，但審查機制活躍，建議備妥 WebTunnel 或 Snowflake 橋接。SIM 強制護照實名。會場與飯店 WiFi 不應視為可信，敏感通訊改用 Signal 並先確認可達。查證來源（2026-06）：[FOTN 2025 Vietnam](https://freedomhouse.org/country/vietnam/freedom-net/2025){target="_blank"}、[Vietnam orders Telegram ban](https://www.aljazeera.com/news/2025/5/24/vietnam-orders-ban-on-popular-messaging-app){target="_blank"} - Al Jazeera。
+高審查環境，FOTN 22 分。2025 年 5 月電信局下令 ISP 封鎖 Telegram，用戶未掛 VPN 即難以連上。Decree 53/2022 要求外國業者資料在地化、留存資料至少 24 個月。Decree 147/2024 要求大型平台以越南手機號或身分證實名、24 小時內移除違法內容，Facebook 受影響最大。另有數萬人規模的「47 部隊」網軍以檢舉與帶風向壓制異議。VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大致可用，但審查機制活躍，建議備妥 WebTunnel 或 Snowflake 橋接。SIM 強制護照實名。會場與飯店 Wi-Fi 不應視為可信，敏感通訊改用 Signal 並先確認可達。查證來源（2026-06）：[FOTN 2025 Vietnam](https://freedomhouse.org/country/vietnam/freedom-net/2025){target="_blank"}、[Vietnam orders Telegram ban](https://www.aljazeera.com/news/2025/5/24/vietnam-orders-ban-on-popular-messaging-app){target="_blank"} - Al Jazeera。
 
 ### 緬甸
 
@@ -143,7 +145,7 @@ icon: material/bag-suitcase-outline
 研討會跟單純出差不同，下面幾項要另外準備。
 
 - **報到實名與議程資料**。不少研討會報名要綁實名與單位，到了現場領的識別證、簽到系統都會留下出席紀錄。涉及敏感議題的活動，評估用哪個身分報名、要不要公開出席。
-- **會場與飯店 WiFi 一律視為不可信**。公共網路有假熱點與竊聽風險，連線一律走 VPN 加密。在中國、越南、緬甸這類地方，更要假設場館網路本身受監控。
+- **會場與飯店 Wi-Fi 一律視為不可信**。公共網路有假熱點與竊聽風險，連線一律走 VPN 加密。在中國、越南、緬甸這類地方，更要假設場館網路本身受監控。
 - **公開發表的法律風險才是大宗**。多數地點連得上網，真正會出事的是你發表了什麼、分享了什麼。泰國的刑法第 112 條、新加坡的 POFMA 與誹謗法、馬來西亞涉王室與宗教的內容、越南與中國的政治言論，都可能讓外國與會者被追訴。發表涉當地政治、王室、宗教、種族的內容前先查清楚規範。
 - **團隊出差約好通訊管道**。主要與備用管道各一，遇到斷網或單一工具被封時還能聯絡。緬甸這類隨時可能斷網的地方尤其要先約好。
 
@@ -153,6 +155,7 @@ icon: material/bag-suitcase-outline
 
 ## 相關閱讀
 
+- [出國前數位安全：用 AI 自助產生目的地概況](./travel-ai-briefing.md)：本表沒收錄的目的地，用這一頁的 prompt 問你自己的 AI，自己產生對照。
 - [威脅模型](../basics/threat-model.md)：先想清楚對手是誰、能取得什麼，才知道每地要做到哪種程度。
 - [Metadata 為什麼重要](../basics/metadata.md)：連線與裝置留下的紀錄，是出差時最容易忽略的暴露面。
 - [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：其中的跨國旅行裝置準備一節，可搭配本文的乾淨機建議。

@@ -1,7 +1,7 @@
 ---
 date: 2026-05-21
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 更新
     - 翻譯文章

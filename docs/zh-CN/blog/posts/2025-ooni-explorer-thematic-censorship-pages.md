@@ -1,7 +1,7 @@
 ---
 date: 2025-04-08
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 技术
     - OONI

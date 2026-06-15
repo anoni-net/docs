@@ -10,7 +10,7 @@ icon: simple/torproject
 
 !!! warning "建立前需衡量事項！"
 
-    如果您對 Tor 還不是很瞭解，可以先參考「[什麼是 Tor？](../tools/what-is-tor.md)」的介紹。
+    如果你對 Tor 還不是很熟悉，可以先參考「[什麼是 Tor？](../tools/what-is-tor.md)」的介紹。
 
     <figure markdown="span">
         <a target="_blank"
@@ -23,13 +23,13 @@ icon: simple/torproject
         <caption>Tor Relay 運作流程</caption>
     </figure>
 
-    以下的教學僅使用入口節點與中間節點作為範例，如果您想要進階的節點建立操作，請思考以下問題並評估可承擔的風險：
+    以下的教學僅使用入口節點與中間節點作為範例，如果你想要進階的節點建立操作，請思考以下問題並評估可承擔的風險：
 
-    - 您想要建立一個 Tor 出口節點還是非出口（橋接、中間）節點？
-    - 如果您想建立一個出口節點：您要在出口政策中允許哪些連線埠？更多的連線埠通常代表可能會有更多的濫用或違法投訴。
-    - 您希望使用哪個外部 TCP 連線埠來接受 Tor 連接？`ORPort` 設定：如果您的伺服器上沒有其他服務佔用此連線埠，我們建議使用 443 連線埠。推薦使用 `ORPort 443`，是因為這通常是公共 Wi-Fi 網絡中少數幾個開放的端口之一。連線埠 9001 也是另一個常用的 `ORPort`。
-    - 您將使用哪個電子郵件作為節點的聯絡訊息 `ContactInfo` 欄位？這個資訊將會公開。
-    - 您希望允許多少頻寬、每月流量用於 Tor 流量？
+    - 你想要建立一個 Tor 出口節點還是非出口（橋接、中間）節點？
+    - 如果你想建立一個出口節點：你要在出口政策中允許哪些連線埠？更多的連線埠通常代表可能會有更多的濫用或違法投訴。
+    - 你希望使用哪個外部 TCP 連線埠來接受 Tor 連接？`ORPort` 設定：如果你的伺服器上沒有其他服務佔用此連線埠，我們建議使用 443 連線埠。推薦使用 `ORPort 443`，是因為這通常是公共 Wi-Fi 網絡中少數幾個開放的端口之一。連線埠 9001 也是另一個常用的 `ORPort`。
+    - 你將使用哪個電子郵件作為節點的聯絡訊息 `ContactInfo` 欄位？這個資訊將會公開。
+    - 你希望允許多少頻寬、每月流量用於 Tor 流量？
     - 伺服器是否允許 IPv6 地址？
 
 ## 如何建立 Middle Relay
@@ -60,8 +60,8 @@ Nickname    myNiceRelay # 調整 "myNiceRelay" 為你要公開呈現的名稱
 ContactInfo your@e-mail # 聯絡方式，將公開呈現
                         # 如不想公開，可設定成 none
 ORPort      9001        # 預設的 Port 為 9001
-                        # 如果能提供 443, 80 等看起來像
-                        # 網頁常用的 Port，更能幫助嚴峻的國家
+                        # 改用 443 這類常見的 HTTPS Port
+                        # 更能幫助處於嚴格審查地區的使用者連上
                         # 也請記得開啟防火牆或對外 Port 設定。
 ExitRelay   0           # 不成為出口節點
 SocksPort   0
@@ -82,7 +82,7 @@ systemctl restart tor@default
 
 ## 使用 nyx 監控
 
-使用 nyx 來監控您的 Relay 狀態和性能：
+使用 nyx 來監控你的 Relay 狀態和性能：
 
 ```bash
 apt install nyx
@@ -90,7 +90,7 @@ apt install nyx
 
 ## 建立多組 Tor 設定檔 `tor-instance-create`
 
-`tor-instance-create` 是一個用來在同一台伺服器上建立多個獨立 Tor 的工具。這在需要運行多個 Tor 以增加匿名性或流量分散的情況下特別有用。`tor-instance-create` 是 Tor 的一部分，通常已經隨 Tor 套件一起安裝。
+`tor-instance-create` 是一個用來在同一台伺服器上建立多個獨立 Tor instance 的工具，方便把多個中繼的設定與日誌分開管理。它是 Debian/Ubuntu 的 tor 套件附帶的腳本，安裝 tor 套件後通常就有。
 
 ### 建立新的 Tor Instance
 
@@ -103,7 +103,7 @@ tor-instance-create tor@mytor2
 
 ### 設定新的設定檔
 
-新的設定檔位置在 `/var/lib/tor-instances/mytor2/torrc`，在設定檔中，您可以設定各種參數，例如：
+新的設定檔位置在 `/var/lib/tor-instances/mytor2/torrc`，在設定檔中，你可以設定各種參數，例如：
 
 ```bash
 ORPort 9002  # 設定新的 ORPort，確保每個 instance 使用不同的端口
@@ -154,7 +154,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "運作 Tor Relay 有什麼要求？"
 
-    建立 Tor Relay 前，確保您的網路有穩定的上傳和下載速度。至少需具備 100 KB/s 的上傳頻寬且有固定的 IP 位址。此外，確認你的 ISP 允許這類流量，並且你的網路設備（如防火牆和路由器）可正確設定所需的連線埠轉發。
+    建立 Tor Relay 前，確保你的網路有穩定的上傳和下載速度。Tor Project 官方建議中繼至少具備 10 Mbit/s（約 1.25 MB/s）的上傳與下載頻寬（見 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。頻寬不足 10 Mbit/s 但仍有 1 Mbit/s 以上時，官方建議改跑 obfs4 橋接而非中繼。另需有固定的 IP 位址。此外，確認你的 ISP 允許這類流量，並且你的網路設備（如防火牆和路由器）可正確設定所需的連線埠轉發。
 
 ??? question "Tor Relay 會影響我的網速嗎？"
 

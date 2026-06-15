@@ -1,7 +1,7 @@
 ---
 date: 2026-04-10
 authors:
-    - toomore
+    - anoni-net
 categories:
     - Perspective
     - Tor

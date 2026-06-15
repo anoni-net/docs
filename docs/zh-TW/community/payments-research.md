@@ -6,7 +6,7 @@ icon: material/folder-search-outline
 
 # :material-folder-search-outline: 匿名支付研究專題
 
-匿名支付是 匿名網路社群 anoni.net 2026 的三大主題之一，跟 [個人隱私指引](./privacy-guide.md)、[Tor Relay 校園建立](./relay-on-campus.md) 並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、目前進度、相關文章索引、待翻譯的外部報告，以及如何加入社群討論。
+匿名支付是匿名網路社群 anoni.net 2026 的三大主題之一，跟 [個人隱私指引](./privacy-guide.md)、[Tor Relay 校園建立](./relay-on-campus.md) 並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、目前進度、相關文章索引、待翻譯的外部報告，以及如何加入社群討論。
 
 ## 為什麼把支付獨立成一個主題
 
@@ -33,19 +33,19 @@ icon: material/folder-search-outline
 - 進階：[零知識身分驗證與支付](../advanced/zk-identity-payments.md)
 - 在地：[台灣 VASP 法 2026](../taiwan/vasp-2026.md)
 
-以上多數仍在撰寫中，會依季度節奏逐步補齊。
+以上文章初稿多已上線，仍會依季度節奏持續校訂與補充。
 
 ## 已完成的事
 
-- **VASP 法律觀察**：行政院 2026 年 4 月透過《虛擬資產服務法》草案後，社群完成首篇 [blog 觀察文](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)，整理草案架構、罰則、與業界公協會在公聽會的角色，並進一步把它整理為 [長期參考文件](../taiwan/vasp-2026.md)。2026-05 再補入證交所、櫃買中心發布的企業持有端會計與內控兩指引。
-- **g0v Hackath71n 議題提案**：社群在 2026/03 的 g0v 黑客松提出匿名支付主題討論，集結初步參與意願。
+- **VASP 法律觀察**：行政院 2026 年 4 月通過《虛擬資產服務法》草案、送立法院審議後，社群完成首篇 [blog 觀察文](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)，整理草案架構、罰則、與業界公協會在公聽會的角色，並進一步把它整理為 [長期參考文件](../taiwan/vasp-2026.md)。2026-05 再補入證交所、櫃買中心發布的企業持有端會計與內控兩指引。
+- **g0v Hackath71n 議題提案**：社群在 2026/01 的 g0v Hackath71n（高雄）提出匿名支付主題討論，集結初步參與意願。
 - **COSCUP 2026 議程合作**：與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 達成議程合作，第二天（8/9）會聯合舉辦匿名支付主題場次，徵稿與聯合審稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
 - **架構落地**：在文件站的 7 大分類中明確分配支付主題的位置，避免另開獨立分類造成結構碎裂。
 - **金融審查角度的點火文**：2026/05 blog 發了 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 與台灣 PayPal 2017 關閉境內交易、Stripe 結構性不支援串起來，作為「匿名支付」主題的動機面補強。
 
 ## 進行中與待完成
 
-- 完整撰寫上述 6 篇文章
+- 上述各層文章初稿已上線，持續校訂與補充細節
 - 工作坊規劃：在 COSCUP 之外，視夥伴需求安排定點工作坊
 - 翻譯外部研究報告（候選清單見下方）
 - 內部研究小組定期同步：以 Cryptpad 共筆累積案例

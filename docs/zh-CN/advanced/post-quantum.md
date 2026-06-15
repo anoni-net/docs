@@ -6,15 +6,11 @@ icon: material/atom-variant
 
 # :material-atom-variant: 后量子密码概观
 
-后量子密码（Post-Quantum Cryptography，PQC）要回答的问题：未来十年内密码学会被谁打破、什么时候打破、现在该换哪些。可运作的大型量子电脑距离实际攻破 RSA 与椭圆曲线还有距离，但「现在加密、未来解密」的威胁让转换不能等到那一天。NIST 在 2024 年确立第一批后量子标准，主流浏览器、TLS 库、Signal Protocol 已开始导入。这篇整理三个面向：威胁模型与时程、NIST 标准的选型、实际系统的转换进度，以及一般人和组织需要关心的时间点。
-
-<figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="后量子密码迁移时程：从 2023 Signal PQXDH、2024 NIST FIPS 与主流浏览器启用、到 2030–2035 主要系统应完成转换、2040 旧密码学硬时间表">
-</figure>
+后量子密码（Post-Quantum Cryptography，PQC）关注三件事：现有密码学在未来十年内是否会被量子电脑打破、何时发生、现在该优先转换哪些算法。可运作的大型量子电脑距离实际攻破 RSA 与椭圆曲线还有距离，但「现在加密、未来解密」的威胁让转换不能等到那一天。NIST 在 2024 年确立第一批后量子标准，主流浏览器、TLS 库、Signal Protocol 已开始导入。这篇整理三个面向：威胁模型与时程、NIST 标准的选型、实际系统的转换进度，以及一般人和组织需要关心的时间点。
 
 ## Harvest Now, Decrypt Later 威胁模型
 
-「现在加密、未来解密」（Harvest Now, Decrypt Later，HNDL）是后量子转换的核心动机。攻击者今天录下你的加密通讯，存在硬盘里，等十年后手上有大型量子电脑时，再用 Shor 算法把当时的密钥交换破出来，还原所有录到的密文。
+「现在加密、未来解密」（Harvest Now, Decrypt Later，HNDL）是后量子转换的核心动机。攻击者今天录下你的加密通讯，存进硬盘，等十年后取得大型量子电脑时，再用 Shor 算法（量子电脑上能快速分解大数、破解 RSA 与椭圆曲线的算法，现有电脑做不到）破解当时的密钥交换，还原所有录下的密文。
 
 这个威胁对谁实际成立？
 
@@ -24,7 +20,11 @@ icon: material/atom-variant
 
 对个人即时聊天、短期 session token，HNDL 风险低（内容过期、价值降低）。对银行 KYC 文件、医疗影像、人权工作者的访谈记录，风险高。
 
-NIST、NSA、ENISA（欧盟信息安全机构）都把 2030–2035 视为「主要系统应已完成转换」的目标，2040 视为「旧密码学不应再有重要部署」的硬时间表。这个时程意味着新部署从现在起就应该规划 PQC 路径。
+NIST（IR 8547）把 2030 年定为弃用旧算法、2035 年定为完全禁止使用的官方时间表，NSA CNSA 2.0 与 ENISA 的路线图也围绕这两个年份[^1]。这个时程意味着新部署从现在起就应该规划 PQC 路径。
+
+<figure markdown="span">
+    <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="后量子密码迁移时程：从 2023 Signal PQXDH、2024 NIST FIPS 与主流浏览器启用、到 2030–2035 主要系统应完成转换、2040 旧密码学硬时间表">
+</figure>
 
 ## NIST 2024 三大标准
 
@@ -35,23 +35,23 @@ NIST 从 2016 年启动 PQC 竞赛，2022 年初步选定算法，2024 年 8 月
 - 全名 Module-Lattice-based Key Encapsulation Mechanism。
 - 基于 CRYSTALS-Kyber 算法。
 - 用途：取代 RSA-OAEP、ECDH 在 TLS、SSH、加密消息中的密钥交换角色。
-- 效能：密钥大小约 800–1500 bytes（比 X25519 的 32 bytes 大），但运算速度快、硬件加速友善。
+- 效能：公钥大小依安全等级而定（ML-KEM-512 为 800 bytes、ML-KEM-768 为 1184 bytes、ML-KEM-1024 为 1568 bytes），都比 X25519 的 32 bytes 大，封包略大但对一般连线速度没有可感影响，运算速度快、硬件加速友善。
 
 ### ML-DSA（FIPS 204）：数位签章
 
 - 全名 Module-Lattice-based Digital Signature Algorithm。
 - 基于 CRYSTALS-Dilithium 算法。
 - 用途：取代 RSA-PSS、ECDSA 在凭证、软件签章、区块链中的角色。
-- 签章大小约 2–4 KB（比 ECDSA 的 64 bytes 大）。
+- 签章大小约 2.4–4.6 KB（依安全等级而定，比 ECDSA 的 64 bytes 大）。
 
 ### SLH-DSA（FIPS 205）：Hash-based 签章
 
 - 全名 Stateless Hash-based Digital Signature Algorithm。
 - 基于 SPHINCS+。
 - 用途：作为 ML-DSA 的备援，安全性只依赖 hash 函数的抗碰撞性，数学基础最保守。
-- 缺点：签章大（10–50 KB）、速度慢，适合长期凭证、不适合高频签章。
+- 缺点：签章大（约 8–50 KB，依参数集而定）、速度慢，适合长期凭证、不适合高频签章。
 
-NIST 还在第四轮评估其他基于 code-based、isogeny-based、multivariate 的算法作为长期备援。但短期内 ML-KEM + ML-DSA 是业界主流。
+NIST 第四轮持续评估 code-based 算法作为长期备援，2025 年选定 code-based 的 HQC 为第四个标准化 KEM（唯一的 isogeny-based KEM 候选 SIKE 已在 2022 年被破解移除）[^2]。短期内 ML-KEM + ML-DSA 是业界主流。
 
 ## 真实系统的转换时程
 
@@ -67,13 +67,13 @@ NIST 还在第四轮评估其他基于 code-based、isogeny-based、multivariate
 
 ### Cloudflare、AWS、Google Cloud
 
-- Cloudflare 2024-09 起所有客户连线默认支援 PQC，是全球部署最积极的 CDN。
-- AWS 2024-10 在 KMS、ACM、Secrets Manager 启用 PQC。
+- Cloudflare 自 2022 年起对所有客户的 server 端连线默认启用 PQ 密钥协议，2024 年完成从 Kyber 草案版本迁移到正式 ML-KEM 标准[^3]，是全球部署最积极的 CDN 之一。
+- AWS 2025-04 在 KMS、ACM、Secrets Manager 的 TLS 连线启用 ML-KEM[^4]。
 - Google Cloud 对企业客户提供 PQC 选项。
 
 ### Signal Protocol
 
-- Signal 2023 年发布 PQXDH（Post-Quantum Extended Diffie-Hellman），把 ML-KEM 加入密钥交换流程。
+- Signal 2023 年发布 PQXDH（Post-Quantum Extended Diffie-Hellman），把后量子密钥封装（初期 CRYSTALS-Kyber，后升级至 ML-KEM）加入密钥交换流程。
 - 对前向保密与 PCS 的设计没影响，仅在初次握手加上 PQC 层。
 - 这是对 HNDL 威胁最直接的回应。
 
@@ -106,9 +106,9 @@ NIST 还在第四轮评估其他基于 code-based、isogeny-based、multivariate
 
 台湾的合规时程目前还在跟随 NIST 与 ENISA 的步调：
 
-- **政府机密通讯**：国家通讯传播委员会（NCC）与信息安全研究院尚未发布明确 PQC 时程，但已启动评估。
-- **金融**：金融监督管理委员会跟进 BIS、ECB 的指引，预计 2026–2028 对银行核心系统提出 PQC 要求。
-- **医疗**：医疗影像与电子病历的长期保存（30 年以上）对 HNDL 风险高，可能是国内最早需要主动规划 PQC 的领域。
+- **政府机密通讯**：台湾各主管机关尚未公布明确的 PQC 转换时程，预期跟随 NIST 与 ENISA 的步调推动。
+- **金融**：金融监督管理委员会预计 2026 年发布金融业 PQC 迁移参考指引，目前已成立先导小组建立技术清单，正式监理要求的时程尚未公布[^5]。
+- **医疗**：医疗影像与电子病历需长期保存（台湾《医疗法》规定病历至少保存 7 年，部分影像与追踪资料更久），对 HNDL 风险高，可能是国内最早需要主动规划 PQC 的领域。
 
 对个人与一般组织，现在不需要急着手动部署 PQC。优先动作是：
 
@@ -138,3 +138,9 @@ NIST 还在第四轮评估其他基于 code-based、isogeny-based、multivariate
 - [:material-account-edit-outline: 社运行动者的数位准备](../scenarios/activist.md)
 
 </div>
+
+[^1]: [NIST IR 8547: Transition to Post-Quantum Cryptography Standards](https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf){target="_blank"} - NIST
+[^2]: [NIST IR 8545: Status Report on the Fourth Round of the PQC Standardization Process](https://nvlpubs.nist.gov/nistpubs/ir/2025/NIST.IR.8545.pdf){target="_blank"} - NIST
+[^3]: [Post-quantum cryptography for all](https://blog.cloudflare.com/post-quantum-for-all/){target="_blank"} - Cloudflare
+[^4]: [ML-KEM post-quantum TLS now supported in AWS KMS, ACM, and Secrets Manager](https://aws.amazon.com/blogs/security/ml-kem-post-quantum-tls-now-supported-in-aws-kms-acm-and-secrets-manager/){target="_blank"} - AWS
+[^5]: [金管会 2026 年六大资安重点](https://www.ithome.com.tw/news/173594){target="_blank"} - iThome
