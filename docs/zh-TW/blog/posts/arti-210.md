@@ -1,7 +1,7 @@
 ---
 date: 2026-03-18
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 更新
     - Tor

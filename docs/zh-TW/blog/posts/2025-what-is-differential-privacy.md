@@ -1,7 +1,7 @@
 ---
 date: 2026-04-27
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 技術
     - 隱私

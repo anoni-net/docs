@@ -1,7 +1,7 @@
 ---
 date: 2026-05-25
 authors:
-    - toomore
+    - anoni-net
 categories:
     - Community
     - News
@@ -95,9 +95,9 @@ The CryptPad main application, the Accounts plugin, and the User Guide together 
 
 **2026/03/13.** All of the above reached translation completion. The community filed [Issue #2237](https://github.com/cryptpad/cryptpad/issues/2237){target="_blank"} upstream to report the milestone and to ask CryptPad maintainers to enable `zh_Hant` as a built-in selectable locale in the next release.
 
-**2026/05/13.** CryptPad [2026.5.0 “🌷 Spring release”](https://github.com/cryptpad/cryptpad/releases/tag/2026.5.0){target="_blank"} shipped. The Improvements section of the release notes lists, verbatim:
+**2026/05/13.** CryptPad [2026.5.0 “🌷 Spring release”](https://github.com/cryptpad/cryptpad/releases/tag/2026.5.0){target="_blank"} shipped. The Improvements section of the release notes lists:
 
-> Enable zh-Hant/zh-Hans locales (#2237) and add alias system for locales [#2254](https://github.com/cryptpad/cryptpad/pull/2254){target="_blank"} by @toomore
+> Enable zh-Hant/zh-Hans locales (#2237) and add alias system for locales [#2254](https://github.com/cryptpad/cryptpad/pull/2254){target="_blank"} by the anoni.net community
 
 That single PR not only turned on `zh_Hant` and `zh_Hans` as official locales, but also added a locale-alias mechanism so that accounts still configured with `zh_CN` or `zh_TW` (the older codes) automatically fall back to the new `zh_Hans` and `zh_Hant`, instead of getting pushed back to English after the upgrade. Existing Simplified Chinese users see their UI carry on as Chinese without having to reset anything.
 

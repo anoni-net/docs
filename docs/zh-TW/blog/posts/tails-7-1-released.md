@@ -1,7 +1,7 @@
 ---
 date: 2025-10-15
 authors:
-    - toomore
+    - anoni-net
 categories:
     - 更新
     - Tails
