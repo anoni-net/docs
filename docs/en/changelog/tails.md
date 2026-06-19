@@ -8,6 +8,16 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.9
+
+> 2026-06-18 · [Upstream announcement](https://tails.net/news/version_7.9/){target="_blank"}
+
+- Regular scheduled release, not an emergency security update.
+- Tor Browser updated to 15.0.16.
+- Updated some firmware packages, improving support for newer hardware such as graphics and Wi-Fi.
+- Fixed a bug where the "outdated Secure Boot certificate" prompt could appear in the rare case when the certificates were already up to date.
+- The Linux kernel, Thunderbird, and the Debian base are unchanged from 7.8. Automatic upgrades are available from Tails 7.0 or later.
+
 ## Tails 7.8.1
 
 > 2026-06-04 · [Upstream announcement](https://tails.net/news/version_7.8.1/){target="_blank"}
