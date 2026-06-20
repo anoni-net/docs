@@ -6,7 +6,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具层
 
-读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。12 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
+读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。13 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
 
 ## 先看这篇
 
@@ -27,6 +27,7 @@ icon: material/toolbox-outline
 
 - [什么是 Tails](./what-is-tails.md)：从 USB 启动、预设走 Tor、关机后不留痕迹的可携式系统。
 - [Tails、Whonix、Qubes 的差别](./tails-vs-whonix-vs-qubes.md)：三套常见匿名作业系统的取舍，依角色推荐适合的选择。
+- [GrapheneOS：高度隐私的行动作业系统](./grapheneos.md)：把 Android 安全强化并去 Google 化的手机系统，以及 Google 收紧 AOSP 后它面临的处境。
 
 ## 观测层：网络审查的可验证记录
 
