@@ -6,7 +6,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具層
 
-這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。12 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
+這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。13 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
 
 ## 先看這篇
 
@@ -27,6 +27,7 @@ icon: material/toolbox-outline
 
 - [什麼是 Tails](./what-is-tails.md)：從 USB 啟動、預設走 Tor、關機後不留痕跡的可攜式系統。
 - [Tails、Whonix、Qubes 的差別](./tails-vs-whonix-vs-qubes.md)：三套常見匿名作業系統的取捨，依角色推薦適合的選擇。
+- [GrapheneOS：高度隱私的行動作業系統](./grapheneos.md)：把 Android 安全強化並去 Google 化的手機系統，以及 Google 收緊 AOSP 後它面臨的處境。
 
 ## 觀測層：網路審查的可驗證紀錄
 
