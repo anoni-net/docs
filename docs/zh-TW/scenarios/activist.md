@@ -306,6 +306,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 - [Metadata 是什麼](../basics/metadata.md)：理解照片、文件背後的元資料
 - [記者保護消息來源](./journalist.md)：跟記者對接時雙方都要做的整理
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同場景的取捨
+- [VPN 的風險與選擇](../tools/vpn-guide.md)：會場、飯店公共網路上的連線層防護與服務選擇
 - [密碼管理器入門](../tools/password-manager.md)：行動前的帳號衛生基礎
 - [OnionShare 透過 Tor 匿名傳輸](../tools/onionshare.md)：一次性檔案交換的工具選擇
 - [個人隱私指引研究專題](../community/privacy-guide.md)：把場景指引串回個人隱私的整體規劃
