@@ -19,11 +19,24 @@ nav:
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md
+          - basics/anonymity-vs-privacy.md
+          - basics/metadata.md
+          - basics/threat-model.md
       - !ENV [NAV_TOOLS, "Tools"]:
+          - tools/index.md
+          - tools/messaging-comparison.md
+          - tools/crypto-privacy-spectrum.md
+          - tools/tails-vs-whonix-vs-qubes.md
+          - tools/tor-browser-advanced.md
           - tools/vpn-guide.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
+          - scenarios/domestic-violence.md
+          - scenarios/journalist.md
+          - scenarios/activist.md
+          - scenarios/election-observer.md
+          - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
       - !ENV [NAV_REPORTS, "Reports"]:
           - reports/index.md
@@ -40,6 +53,9 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      - community/how-to-contribute.md
+      - community/governance.md
+      - community/i18n.md
       - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md
   - !ENV [NAV_EVENT, "Events"]:
