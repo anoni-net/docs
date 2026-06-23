@@ -19,6 +19,8 @@ nav:
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md
+      - !ENV [NAV_TOOLS, "Tools"]:
+          - tools/vpn-guide.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
