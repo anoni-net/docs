@@ -28,6 +28,7 @@ nav:
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
           - tools/onionshare.md
+          - tools/vpn-guide.md
           - tools/what-is-tails.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/what-is-ooni.md

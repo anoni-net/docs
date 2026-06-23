@@ -47,7 +47,7 @@ icon: material/bag-suitcase-outline
 
 - **带最简化的装置**。出差用的手机、笔电里，跟这趟无关的数据越少越好。高风险地建议准备一支只装必要 App 的干净机，敏感数据留在云端或家里，需要时再透过加密连接取用。
 - **出发前装好并测试规避工具**。VPN、Tor Browser 与桥接都要在家里先装好、连一次确认可用。到了审查严的地方，App 商店与工具官网本身就连不上，落地才想下载通常来不及。Tor 的桥接设定见 [Tor Snowflake 桥接点](../tools/tor-snowflake.md) 与 [Tor Browser 进阶设定](../tools/tor-browser-advanced.md)，自架桥接见 [如何架设 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
-- **准备两种以上的连接方式**。单一 VPN 协议常被封，多带一两款备援。多数目的地用一般 VPN 就够，只有中国、缅甸这种强封锁地，标准的 WireGuard、OpenVPN 几秒内就被封，要改用有混淆（obfuscation，把 VPN 流量伪装成一般 HTTPS）功能的方案。具备这类混淆的服务，例如 Proton VPN（Stealth 协议）、Mullvad（混淆、Shadowsocks 桥接）、ExpressVPN（自动混淆，Lightway 协议）、NordVPN（NordWhisper）、Surfshark（Camouflage Mode）、Astrill（StealthVPN）。哪些「现在能用」会随封锁更新而变，出发前查当地最新回报并先测试一次。
+- **准备两种以上的连接方式**。单一 VPN 协议常被封，多带一两款备援。多数目的地用一般 VPN 就够，只有中国、缅甸这种强封锁地，标准的 WireGuard、OpenVPN 几秒内就被封，要改用有混淆（obfuscation，把 VPN 流量伪装成一般 HTTPS）功能的方案。具备这类混淆的服务，例如 Proton VPN（Stealth 协议）、Mullvad（混淆、Shadowsocks 桥接）、ExpressVPN（自动混淆，Lightway 协议）、NordVPN（NordWhisper）、Surfshark（Camouflage Mode）、Astrill（StealthVPN）。哪些「现在能用」会随封锁更新而变，出发前查当地最新回报并先测试一次。怎么挑一个值得信任的 VPN（审计、所有权、匿名付款）见 [VPN 的风险与选择](../tools/vpn-guide.md)。
 - **敏感通讯改用端对端加密工具**。Signal 是常见选择，但部分地区会封锁，出发前确认目的地能不能连，连不上时改走 Tor 或 VPN。团队出差可事先约好主要与备用管道。
 - **账号分流**。研讨会社交、商务联络与个人账号分开，减少一个被盯上时牵连到其他身份。
 - **SIM 用漫游或纯数据 eSIM**。三种方式都会留下某种身份记录，差别在这份记录落在谁手上、当地政府能不能直接把号码对应到你本人：
