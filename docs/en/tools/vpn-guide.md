@@ -212,7 +212,7 @@ For the full pre-departure briefing workflow — censorship, legal, SIM, and eme
 
 ## VPN or Tor?
 
-The two tools solve different problems; choose by who you need to resist.
+The two tools solve different problems; choose based on who you need to resist.
 
 - **A VPN is enough** for encrypting your connection on public Wi-Fi, at venues, and in hotels, for unblocking geo-restrictions, for secure internal connections in an organization, or for speed-sensitive everyday use. Your adversary is the same-segment eavesdropper, the local ISP, geo-blocking.
 - **You need Tor** when the adversary can obtain the VPN provider's records, when you're protecting a source, or for high-sensitivity anonymity. Your adversary can subpoena providers and do traffic correlation.
@@ -253,7 +253,7 @@ What actually matters is often what you left in your accounts and what you publi
 
 ??? question "How do I tell if my VPN is leaking?"
 
-    With the VPN connected, open a tool like [browserleaks.com](https://browserleaks.com/){target="_blank"} that tests IP, DNS, and WebRTC leaks at once, and check whether the IP and DNS shown are the VPN's and whether your original real IP is leaking. It belongs to no VPN provider, though it also has no formal authority's endorsement — treat it as a handy reference. Confirm the client's kill switch is on. Leaks are most likely when you switch Wi-Fi or your phone moves to mobile data, so test again at those moments.
+    With the VPN connected, open a tool like [browserleaks.com](https://browserleaks.com/){target="_blank"} that tests IP, DNS, and WebRTC leaks at once, and check whether the IP and DNS shown are the VPN's and whether your original real IP is leaking. It belongs to no VPN provider, though no authority formally vouches for it either — treat it as a handy reference. Confirm the client's kill switch is on. Leaks are most likely when you switch Wi-Fi or your phone moves to mobile data, so test again at those moments.
 
 ??? question "What should I watch for with a VPN on mobile?"
 
