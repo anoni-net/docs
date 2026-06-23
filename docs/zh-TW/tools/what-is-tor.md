@@ -19,7 +19,7 @@ icon: simple/torproject
 
 [Tor（The Onion Router）](https://www.torproject.org/){target="_blank"} 是一個由志工營運、透過多層加密與隨機路徑把網路連線匿名化的開源網路。對在台灣的我們來說，Tor 解決的問題很具體：當你連上一個網站時，預設會把 IP 位址、瀏覽指紋、連線時序留給對方與沿路所有觀察者。Tor 把這條鏈拆成三段，讓沒有任何單一節點同時知道「你是誰」與「你在連什麼」。
 
-跟 VPN 的差別常被混淆。VPN 把你的流量集中到一個信任的服務提供者：你信任 VPN 業者不記錄、不交資料，業者本身就是個單點。Tor 把信任分散，沒有任何節點能同時看到完整路徑，因此不需要信任任一節點就能達成匿名。要看更完整的對照與選擇邏輯，可以接著讀 [什麼是匿名網路](./what-is-anonymity-network.md) 與 [威脅模型如何建立](../basics/threat-model.md)。
+跟 VPN 的差別常被混淆。VPN 把你的流量集中到一個信任的服務提供者：你信任 VPN 業者不記錄、不交資料，業者本身就是個單點。Tor 把信任分散，沒有任何節點能同時看到完整路徑，因此不需要信任任一節點就能達成匿名。要看更完整的對照與選擇邏輯，可以接著讀 [什麼是匿名網路](./what-is-anonymity-network.md) 與 [威脅模型如何建立](../basics/threat-model.md)。VPN 本身的具體風險、怎麼挑值得信任的服務、什麼時候 VPN 夠用而不必動用 Tor，見 [VPN 的風險與選擇](./vpn-guide.md)。
 
 ## Onion routing 如何運作
 

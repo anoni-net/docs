@@ -28,6 +28,7 @@ nav:
           - tools/crypto-privacy-spectrum.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/tor-browser-advanced.md
+          - tools/vpn-guide.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md

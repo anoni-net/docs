@@ -19,7 +19,7 @@ icon: simple/torproject
 
 [Tor（The Onion Router）](https://www.torproject.org/){target="_blank"} 是由志工营运、透过多层加密与随机路径把网路连线匿名化的开源网路。Tor 解决的问题很具体：连上一个网站时，预设会把 IP 位址、浏览指纹、连线时序留给对方与沿路所有观察者。Tor 把这条连线拆成三段，让没有任何单一节点同时知道「你是谁」与「你在连什么」。
 
-跟 VPN 的差别常被混淆。VPN 把流量集中到一个信任的服务提供者：你信任 VPN 业者不记录、不交资料，业者本身就是单点。Tor 不需要信任任一节点，就能达成「没有任何节点同时看到完整路径」这件事。要看更完整的对照与选择逻辑，可以接着读 [什么是匿名网路](./what-is-anonymity-network.md) 与 [威胁模型如何建立](../basics/threat-model.md)。
+跟 VPN 的差别常被混淆。VPN 把流量集中到一个信任的服务提供者：你信任 VPN 业者不记录、不交资料，业者本身就是单点。Tor 不需要信任任一节点，就能达成「没有任何节点同时看到完整路径」这件事。要看更完整的对照与选择逻辑，可以接着读 [什么是匿名网路](./what-is-anonymity-network.md) 与 [威胁模型如何建立](../basics/threat-model.md)。VPN 本身的具体风险、怎么挑值得信任的服务、什么时候 VPN 够用而不必动用 Tor，见 [VPN 的风险与选择](./vpn-guide.md)。
 
 ## Onion routing 如何运作
 
