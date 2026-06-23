@@ -14,7 +14,7 @@ icon: material/toolbox-outline
 
 ## 連線層：Tor 工具家族
 
-想匿名瀏覽、傳檔、或貢獻網路自由基礎建設的人，從這群開始。最後一篇講 VPN，它不屬於 Tor 家族，卻是多數人最先碰到的連線工具，放這裡跟 Tor 對照著讀。
+想匿名瀏覽、傳檔、或貢獻網路自由基礎建設的人，從這群開始。最後一篇介紹 VPN，它不屬於 Tor 家族，卻是多數人最先碰到的連線工具，放這裡跟 Tor 對照著讀。
 
 - [什麼是 Tor](./what-is-tor.md)：Tor 如何使用、跟 VPN 差在哪、什麼時候不該用。
 - [Tor Browser 進階設定](./tor-browser-advanced.md)：橋接、安全等級、Onion 站點與身分隔離。
