@@ -197,4 +197,5 @@ icon: material/newspaper-variant-outline
 - [威脅模型](../basics/threat-model.md)：寫報導前，先盤點誰是對手、能拿到什麼
 - [Metadata 為什麼重要](../basics/metadata.md)：理解檔案隱含的元資料風險
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同場景的取捨
+- [VPN 的風險與選擇](../tools/vpn-guide.md)：公開 Wi-Fi 採訪、傳稿時的連線層防護與服務選擇
 - [社群自架服務](../community/tools.md)：anoni.net 提供給公益用途的協作工具入口
