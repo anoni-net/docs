@@ -8,7 +8,7 @@ icon: material/heart-multiple-outline
 
 For LGBTQ+ and sexual-minority readers, *whether*, *when*, and *to whom* to disclose identity is rarely a one-time decision. Family, workplace, school, and peer pressures can turn an unintended exposure into long-term harm. This guide is written to be useful in both pre-disclosure and post-disclosure situations: the question it tries to help with is *how to maintain connections while controlling the pace of exposure*.
 
-This page works alongside the conceptual frame in [Why networked freedom matters](../basics/internet-freedom.md) and the regional empirical work in the [Regional Observatory](../regional/index.md). We assume some familiarity with general digital safety; if you want background on threat modeling, anonymity vs. privacy, or metadata as concepts, [EFF's Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} and [Privacy Guides](https://www.privacyguides.org/){target="_blank"} are the English-language references we usually point to.
+This page works alongside the conceptual frame in [Why networked freedom matters](../basics/internet-freedom.md) and the regional empirical work in the [Regional Observatory](../regional/index.md). We assume some familiarity with general digital safety; for the vocabulary, see our [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md) page, and for threat modeling and metadata as concepts, [EFF's Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} and [Privacy Guides](https://www.privacyguides.org/){target="_blank"} are the English-language references we usually point to.
 
 ## Why this matters
 

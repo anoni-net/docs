@@ -61,7 +61,7 @@ For background on why we self-host (and why Matrix specifically), see [From Disc
 
 ## :material-rocket-launch-outline: Concrete ways to contribute
 
-Beyond ad-hoc collaboration, the community runs structured workstreams:
+Beyond ad-hoc collaboration, the community runs structured workstreams. For the mechanics of making a contribution (the discuss-first norm, the GitHub flow, what makes a change easy to accept), see [How to contribute](./how-to-contribute.md).
 
 ### Regional observation
 
@@ -69,7 +69,7 @@ Help expand the [Regional Observatory](../regional/index.md): submit primary obs
 
 ### Translation
 
-The site has three editions (zh-TW, zh-CN, en). The Chinese editions are the source of truth for most content; the English edition is being rebuilt as a regional observatory rather than a one-to-one translation. We welcome:
+The site has three editions (zh-TW, zh-CN, en). The Chinese editions are the source of truth for most content; the English edition is being rebuilt as a regional observatory rather than a one-to-one translation. The full workflow, term consistency, and how to propose a new language are on the [localization guide](./i18n.md). We welcome:
 
 - English contributors helping refine the regional voice
 - Translators bridging long-form regional research between English and Chinese where it doesn't yet exist in both. Public reports from groups like Citizen Lab, Article 19, or Human Rights Watch Asia chapters are typical candidates; we don't have an arrangement with any of these organizations and we'd be doing the translation independently with attribution
@@ -91,7 +91,7 @@ We organize and co-organize workshops and meetups. Past include the 2025 Anonymo
 
 If you have sensitive material (whistleblowing, leaked documents, primary observation that needs careful handling), email `whisper@anoni.net` from a fresh account using PGP encryption (key on the [contact page](../contact.md)), or hand off in person at meetups and conferences.
 
-We do not advise on, or assist with, illegal activity (see the [governance code of conduct](https://anoni.net/docs/community/governance/){target="_blank"} for explicit refusals). For sensitive material related to journalism, advocacy, research, or personal safety, however, we'll handle it with appropriate care.
+We do not advise on, or assist with, illegal activity (see the [governance code of conduct](./governance.md) for explicit refusals). For sensitive material related to journalism, advocacy, research, or personal safety, however, we'll handle it with appropriate care.
 
 ## :material-information-outline: Background reading
 
