@@ -171,3 +171,12 @@ nyx -s /run/tor-instances/{instance-name}/control
 ??? question "如何成為 Guard Relay？"
 
     Guard Relay 由 Tor 網路自動選定，使用者無法手動設定。若節點穩定運行且具備足夠頻寬，便有可能被選為 Guard Relay。
+
+## :fontawesome-solid-diagram-project: 相關閱讀
+
+<div class="grid cards" markdown>
+
+- [:material-handshake-outline: Tor Project 生態與對接](./tor-project-ecosystem.md)
+- [:material-tunnel-outline: 設置 Tor WebTunnel](./setup-tor-webtunnel.md)
+
+</div>
