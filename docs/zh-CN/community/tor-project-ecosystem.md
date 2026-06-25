@@ -6,7 +6,7 @@ icon: material/handshake-outline
 <!-- zh-CN：Claude Code 候选稿，待人工校对（词汇差异与政治措辞） -->
 # :material-handshake-outline: Tor Project 生态与对接
 
-匿名网络社区 anoni.net 这一年在地推广 Tor、Tails、OONI，伙伴问得最多的，是除了自己用、对外讲之外，能不能直接参与 Tor 上游的开发与社区。可以，而且门槛比想象低。接上游能带来几件实际的事，在地的观测成果可以回馈给维护网络健康的团队，每多架一个中继就替所在区域增加一个节点、提升 IP 多样性，Tor 的繁体中文翻译也需要人持续维护、跟上每次更新。Tor Project 是公开治理的非营利组织，沟通渠道、源代码、规划文件大多对外开放，无论身在哪个华语环境，都能从翻译、跑中继、办推广开始参与。
+匿名网络社区 anoni.net 这一年在地推广 Tor、Tails、OONI，伙伴问得最多的，是除了自己使用、推广之外，能不能直接参与 Tor 上游的开发与社区。可以，而且门槛比想象低。接上游能带来几件实际的事，在地的观测成果可以回馈给维护网络健康的团队，每多架一个中继就替所在区域增加一个节点、提升 IP 多样性，Tor 的繁体中文翻译也需要人持续维护、跟上每次更新。Tor Project 是公开治理的非营利组织，沟通渠道、源代码、规划文件大多对外开放，无论身在哪个华语环境，都能从翻译、跑中继、办推广开始参与。
 
 这页把四件事整理在一起：Tor 的规划去哪里看、哪些项目还在动、官方的沟通渠道、以及对中文社区最容易切入的参与方式。各条参与方式若站内已有操作教程，会直接链接过去。
 
@@ -78,7 +78,7 @@ Tor 把 IRC（OFTC 网络）与 Matrix 双向桥接，用 Element 加入 Matrix 
 
 1. 本地化翻译。门槛最低，不需审核账号、不需技术背景，个人就能在 Weblate 开始，还能直接把繁体中文做好，是建立社区贡献记录最快的方式。流程与 Weblate 链接见 [中文化与文件翻译](./i18n.md) 的「Tor 文件翻译」一节，第一次参与先读 [成为 Tor 翻译者](https://community.torproject.org/localization/becoming-tor-translator/){target="_blank"}。
 2. 进 `#tor-project` 与论坛自我介绍。这是 meetup、outreach、社区事务的主场，后续一切正式对接的起点。
-3. 办在地 meetup。Tor 的 [Outreach](https://community.torproject.org/outreach/){target="_blank"} 提供 Street Team Kit、讲稿与「如何办自己的 Tor meetup」素材，属官方鼓励的自主行动，不需审批，需要讲者时写信给 <speaking@torproject.org>。
+3. 办在地 meetup。Tor 的 [Outreach](https://community.torproject.org/outreach/){target="_blank"} 提供 Street Team Kit、简报与「如何办自己的 Tor meetup」素材，属官方鼓励的自主行动，不需审批，需要讲者时写信给 <speaking@torproject.org>。
 4. 跑中继或架网桥。有机器与带宽的成员可架设中继，强化区域节点覆盖，技术操作见 [如何搭建 Tor Relay](./setup-tor-relay.md)。想架设伪装成 HTTPS 的网桥见 [设置 Tor WebTunnel](./setup-tor-webtunnel.md)，求助渠道是 `#tor-relays` 与 tor-relays 邮件列表。
 5. 开发与回报问题。需要 GitLab 账号的人到 [anonticket.torproject.org](https://anonticket.torproject.org/){target="_blank"} 匿名申请或回报，再到对应 repo 开 issue，新手可从标 first-contributors 的 issue 入手，技术讨论在 `#tor-dev`。
 6. Training Partner 正式对接。Tor 有 [training partners](https://community.torproject.org/training/partners/){target="_blank"} 机制，这是社区对组织最正式的合作形式，通常建立在前面几项已有贡献记录之后，适合当中长期目标。

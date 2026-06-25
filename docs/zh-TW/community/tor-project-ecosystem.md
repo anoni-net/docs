@@ -5,7 +5,7 @@ icon: material/handshake-outline
 ---
 # :material-handshake-outline: Tor Project 生態與對接
 
-匿名網路社群 anoni.net 這一年在地推廣 Tor、Tails、OONI，夥伴問得最多的，是除了在台灣用、在台灣講，能不能直接參與 Tor 上游的開發與社群。可以，而且門檻比想像低。接上游能帶來幾件實際的事，台灣的觀測成果可以回饋給維護網路健康的團隊，每多架一個中繼就替亞太增加一個節點、提升 IP 多元性，Tor 的正體中文翻譯也需要人持續維護、跟上每次更新。Tor Project 是公開治理的非營利組織，溝通管道、原始碼、規劃文件大多對外開放，無論在台灣、香港、澳門或其他華語環境，都能從翻譯、跑中繼、辦推廣開始參與。
+匿名網路社群 anoni.net 這一年在地推廣 Tor、Tails、OONI，夥伴問得最多的，是除了在台灣使用、推廣，能不能直接參與 Tor 上游的開發與社群。可以，而且門檻比想像低。接上游能帶來幾件實際的事，台灣的觀測成果可以回饋給維護網路健康的團隊，每多架一個中繼就替亞太增加一個節點、提升 IP 多元性，Tor 的正體中文翻譯也需要人持續維護、跟上每次更新。Tor Project 是公開治理的非營利組織，溝通管道、原始碼、規劃文件大多對外開放，無論在台灣、香港、澳門或其他華語環境，都能從翻譯、跑中繼、辦推廣開始參與。
 
 這頁把四件事整理在一起：Tor 的規劃去哪裡看、哪些專案還在動、官方的溝通管道、以及對正體中文社群最容易切入的參與方式。各條參與方式若站內已有操作教學，會直接連過去。
 
@@ -77,7 +77,7 @@ Tor 把 IRC（OFTC 網路）與 Matrix 雙向橋接，用 Element 加入 Matrix 
 
 1. 在地化翻譯。門檻最低，不需審核帳號、不需技術背景，個人就能在 Weblate 開始，還能直接把正體中文做好，是建立社群貢獻紀錄最快的方式。流程與 Weblate 連結見 [中文化與文件翻譯](./i18n.md) 的「Tor 文件翻譯」一節，第一次參與先讀 [成為 Tor 翻譯者](https://community.torproject.org/localization/becoming-tor-translator/){target="_blank"}。
 2. 進 `#tor-project` 與論壇自我介紹。這是 meetup、outreach、社群事務的主場，後續一切正式對接的起點。
-3. 辦在地 meetup。Tor 的 [Outreach](https://community.torproject.org/outreach/){target="_blank"} 提供 Street Team Kit、講稿與「如何辦自己的 Tor meetup」素材，屬官方鼓勵的自主行動，不需審批，需要講者時寫信給 <speaking@torproject.org>。
+3. 辦在地 meetup。Tor 的 [Outreach](https://community.torproject.org/outreach/){target="_blank"} 提供 Street Team Kit、簡報與「如何辦自己的 Tor meetup」素材，屬官方鼓勵的自主行動，不需審批，需要講者時寫信給 <speaking@torproject.org>。
 4. 跑中繼或架橋接。有機器與頻寬的成員可在台灣架設中繼，強化亞太節點覆蓋，技術操作見 [如何搭建 Tor Relay](./setup-tor-relay.md)。想架設偽裝成 HTTPS 的橋接見 [設置 Tor WebTunnel](./setup-tor-webtunnel.md)，求助管道是 `#tor-relays` 與 tor-relays 郵件列表。
 5. 開發與回報問題。需要 GitLab 帳號的人到 [anonticket.torproject.org](https://anonticket.torproject.org/){target="_blank"} 匿名申請或回報，再到對應 repo 開 issue，新手可從標 first-contributors 的 issue 入手，技術討論在 `#tor-dev`。
 6. Training Partner 正式對接。Tor 有 [training partners](https://community.torproject.org/training/partners/){target="_blank"} 機制，這是社群對組織最正式的合作形式，通常建立在前面幾項已有貢獻紀錄之後，適合當中長期目標。
