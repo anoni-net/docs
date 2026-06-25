@@ -70,7 +70,7 @@ icon: material/road-variant
 - **Pulse**：Tor 中繼即時監控（FastAPI + PostgreSQL），對應 [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 頁面的圖表來源
 - **ASN Coverage**：OONI 公開資料的批次分析工具，對應 [ASN 觀測資料分析](../taiwan/ooni-asn-coverage.md)
 
-兩個子專案的程式碼與議題追蹤都在 [GitHub anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}。
+兩個子專案的程式碼與議題追蹤都在 [GitHub anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}。這兩個觀測工具如何對接 Tor 上游的 network-health 方向，見 [Tor Project 生態與對接](./tor-project-ecosystem.md)。
 
 ## 如何加入
 
