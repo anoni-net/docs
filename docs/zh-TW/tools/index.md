@@ -39,8 +39,9 @@ icon: material/toolbox-outline
 
 ## 日常隱私基本功
 
-想從通訊、帳號、金流先補齊基礎的人，從這群開始。三篇主題彼此獨立，不必照順序。
+想從通訊、帳號、金流先補齊基礎的人，從這群開始。四篇主題彼此獨立，不必照順序。
 
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
 - [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。
+- [Asian Diceware 密語字典](./asian-diceware.md)：社群參考 EFF 做的 7776 字密語詞表，混入亞洲外來語，教你怎麼用骰子或安全亂數產生好記又夠強的密語。
 - [加密貨幣的隱私光譜](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、穩定幣的隱私差異與自管錢包、multisig。

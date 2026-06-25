@@ -17,6 +17,7 @@ What we publish here is the layer the single-tool docs don't cover: **cross-tool
 ## Articles
 
 - [Secure messaging compared](./messaging-comparison.md) — Signal, SimpleX, Session, Briar, and Matrix against a threat-model checklist (metadata, identifiers, network resistance), with the regional twist that phone-number registration ties to a legal identity.
+- [Asian Diceware passphrase wordlist](./asian-diceware.md) — a community-made, EFF-compatible Diceware list that blends in dictionary-attested Asian loanwords; how to roll up a memorable-yet-strong passphrase with dice or a secure RNG.
 - [Cryptocurrency privacy spectrum](./crypto-privacy-spectrum.md) — where Bitcoin, Lightning, stablecoins, Monero, and Zcash actually sit on a transparency-to-privacy axis, and what that means for at-risk users in the region.
 - [Tails vs Whonix vs Qubes](./tails-vs-whonix-vs-qubes.md) — three different anonymity-OS philosophies (amnesia, isolation, compartmentalization), which threat each fits, routing setup depth to the projects.
 - [Tor Browser advanced settings](./tor-browser-advanced.md) — the security-level slider, fingerprinting protections, and the common hardening mistakes, pointing to the canonical Tor docs for specifics.

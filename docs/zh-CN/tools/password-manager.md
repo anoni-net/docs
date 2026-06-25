@@ -22,7 +22,7 @@ icon: material/key-variant
 
 主密码是整套系统的单一支点，值得花一点时间想清楚。
 
-**用 passphrase，不要用单字密码**。Passphrase 是 4 到 6 个随机英文单字串成的句子（例如 `correct horse battery staple`），熵比短而复杂的密码高得多，也比较好记。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。
+**用 passphrase，不要用单字密码**。Passphrase 是 4 到 6 个随机英文单字串成的句子（例如 `correct horse battery staple`），熵比短而复杂的密码高得多，也比较好记。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。社群也做了一份带亚洲味、与 EFF 相容的 [Asian Diceware 密语字典](./asian-diceware.md)，附 A5 小册与掷骰、安全随机数的产生教学。
 
 **主密码不要重用**。这个密码一旦曝露，等于你所有的账号全部曝露。除了密码管理器，其他任何服务都不能用这组密码。
 

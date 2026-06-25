@@ -65,12 +65,13 @@ icon: material/road-variant
 
 ## 技術維運項目
 
-文件站之外，社群也維運兩個與 Tor、OONI 相關的技術子專案：
+文件站之外，社群也維運幾個與 Tor、OONI、密碼安全相關的技術子專案：
 
 - **Pulse**：Tor 中繼即時監控（FastAPI + PostgreSQL），對應 [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 頁面的圖表來源
 - **ASN Coverage**：OONI 公開資料的批次分析工具，對應 [ASN 觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- **Asian Diceware**：EFF 相容的 7776 字密語詞表，混入有字典背書的亞洲外來語，為社群未來自建類似 AnonTicket 的匿名服務平台、產生帳號代碼做準備，對應 [Asian Diceware 密語字典](../tools/asian-diceware.md)
 
-兩個子專案的程式碼與議題追蹤都在 [GitHub anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}。這兩個觀測工具如何對接 Tor 上游的 network-health 方向，見 [Tor Project 生態與對接](./tor-project-ecosystem.md)。
+Pulse 與 ASN Coverage 的程式碼與議題追蹤在 [GitHub anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}，Asian Diceware 獨立放在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。兩個觀測工具如何對接 Tor 上游的 network-health 方向，見 [Tor Project 生態與對接](./tor-project-ecosystem.md)。
 
 ## 如何加入
 

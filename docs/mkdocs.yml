@@ -36,6 +36,7 @@ nav:
           - tools/what-is-cryptpad.md
           - tools/messaging-comparison.md
           - tools/password-manager.md
+          - tools/asian-diceware.md
           - tools/crypto-privacy-spectrum.md
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
