@@ -25,7 +25,7 @@ The technique has a name, Diceware, proposed by Arnold Reinhold in 1995[^reinhol
 
 ## What we made
 
-asian-diceware is a 7,776-word, EFF-compatible wordlist that works as a drop-in replacement for the EFF Large Wordlist, matching its security and usability. The difference is the vocabulary: we include 161 dictionary-attested Asian loanwords (verified against OED, Merriam-Webster, and Cambridge) and fill the rest with the most common, easy-to-spell English words.
+asian-diceware is a 7,776-word, EFF-compatible wordlist that works as a drop-in replacement for the EFF Large Wordlist, matching its security and usability. The difference is the vocabulary: we include 292 dictionary-attested Asian loanwords (verified against OED, Merriam-Webster, and Cambridge) and fill the rest with the most common, easy-to-spell English words.
 
 Many of these are already everyday English words anywhere, with extra resonance for anyone who grew up around Asian languages and food: `tofu`, `ramen`, `miso`, `matcha`, `karaoke`, `tsunami`, `kimchi`, `bibimbap`, `typhoon`, `oolong`, `yoga`, `karma`, `curry`, `mango`. Some carry a Sinophone flavor — `oolong`, `boba` (bubble tea, which originated in Taiwan), `ketchup` (whose root traces to Hokkien, a southern Chinese language), `pinyin`. Others you might not realize are Asian loanwords at all, like `shampoo`, `bungalow`, `jungle`, `gecko`, `bazaar`, and `guru`.
 
@@ -35,9 +35,20 @@ The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0);
 
 Looking ahead, the community also wants to build an anonymous-service platform along the lines of [AnonTicket](https://anonticket.torproject.org/){target="_blank"} (still at the planning stage), where an account is identified by a string of random words instead of an email — and this list is meant to be the word source for those codes.
 
+## Why only ~3.8%?
+
+Treat the 3.8% (292 of 7,776 words) like a beer's ABV: a deliberately chosen number, not a watered-down accident. The share is capped by how many *recognizable* Asian loanwords English has actually absorbed as single dictionary words. An exhaustive OED / Merriam-Webster / Cambridge sweep turns up roughly 330 that a Sinophone reader would recognize; 292 are pinned and about 40 are held in reserve, so the recognizable well is nearly dry.
+
+Pushing much higher (say 10%, ≈ 778 words) would force one of two things, and we want neither:
+
+- **Flooding the list with obscure words** (`puttee`, `howdah`, `nilgai`, `maund`) that most people can't spell, say, or recall. That breaks the EFF property this list exists to keep: a passphrase you can write down and read back without errors.
+- **Switching to romanized Mandarin or Zhuyin syllables.** That is a separate project — Hanyu Pinyin, Wade-Giles, and Tongyong all coexist, so spellings collide and turn ambiguous.
+
+And here is where the ABV analogy breaks down: a higher percentage does not make the passphrase stronger. Every word carries the same 12.925 bits, whether it is `tofu` or `the`. The entropy comes from the list being exactly 7,776 words with each die roll uniform, never from where the words came from. The Asian share changes flavor and recognizability, never security. So unlike beer, "higher proof" buys you nothing here, and usability wins when it conflicts with cultural coverage.
+
 ## How to use it
 
-Rolling dice against a table is the most direct way; a handful of dice plus one table is enough, no coding required. There are two ways to get the table: print the A5 booklet ([download the PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.3.1.pdf){target="_blank"}; see [Print a booklet](#Print-a-booklet) below), or open the dice file [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"} on GitHub.
+Rolling dice against a table is the most direct way; a handful of dice plus one table is enough, no coding required. There are two ways to get the table: print the A5 booklet ([download the PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}; see [Print a booklet](#Print-a-booklet) below), or open the dice file [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"} on GitHub.
 
 **Method 1 — physical dice.** Roll 5 dice and read them left to right as a five-digit number (each die 1–6). The table is sorted in numeric order (from 11111 to 66666), so you can flip close to your number, or search for the line that starts with your five digits; the word after it is the one you drew. Repeat six times and join them with `-`. For example, rolling `6 3 4 4 4` reads as `63444`, which maps to `tofu`.
 
@@ -148,7 +159,7 @@ We formatted the 7,776-word list as an A5 dice-lookup booklet, complete with a c
 The wordlist is CC-BY-4.0, so anyone can print it and hand it out. When the community runs in-person events (mostly in Taiwan), we bring printed copies; if you run into us, you are welcome to say hello. See [Activity](../activity/index.md) for where we will be next, or [Stay Informed](../contact.md) for updates.
 
 !!! tip "Download the A5 booklet (PDF)"
-    [asian_diceware_7776_booklet_a5_v0.3.1.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.3.1.pdf){target="_blank"} (about 36 pages; prints on A4 or US Letter with any home or shop printer, then fold into a booklet). The wordlist data is CC-BY-4.0, so you are welcome to print, hand out, and reuse it — please keep the attribution on the colophon page.
+    [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"} (about 36 pages; prints on A4 or US Letter with any home or shop printer, then fold into a booklet). The wordlist data is CC-BY-4.0, so you are welcome to print, hand out, and reuse it — please keep the attribution on the colophon page.
 
 ## :material-chat-question: Related reading
 

@@ -23,7 +23,7 @@ Tails 在建立加密儲存時也會直接建議一組這樣的密語（5.12 起
 
 ## 我們做了什麼：帶亞洲味的英文字典
 
-asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成 EFF Large Wordlist 的直接替代品，安全性與可用性對齊。差別在用字，我們固定收錄 161 個有字典背書（OED、Merriam-Webster、Cambridge 查證）的亞洲外來語，其餘用最高頻、好拼寫的常見英文字填滿。
+asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成 EFF Large Wordlist 的直接替代品，安全性與可用性對齊。差別在用字，我們固定收錄 292 個有字典背書（OED、Merriam-Webster、Cambridge 查證）的亞洲外來語，其餘用最高頻、好拼寫的常見英文字填滿。
 
 這些外來語對台灣與亞洲讀者特別好認：`tofu`、`ramen`、`miso`、`matcha`、`karaoke`、`tsunami`、`kimchi`、`bibimbap`、`typhoon`、`oolong`、`yoga`、`karma`、`curry`、`mango`。其中有不少台灣與華語圈的味道：`oolong`（烏龍茶）、`boba`（珍珠奶茶，源自台灣）、`ketchup`（源頭可追到閩南語）、`pinyin`（拼音）。也有一些你可能沒發現是亞洲外來語的字，像 `shampoo`、`bungalow`、`jungle`、`gecko`、`bazaar`、`guru`。
 
@@ -31,9 +31,20 @@ asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成
 
 這份詞表開源（程式碼採 MIT、詞表資料採 CC-BY-4.0），原始碼與完整詞表在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。詞表的功能是讓抽字這一步更好認好記，本身不涉及加密。真正的安全來自你如何產生、保管與使用密語。
 
+## 為什麼亞洲外來語只占約 3.8%
+
+詞表裡的亞洲外來語約占 3.8%（7776 字中 292 個）。這個比例可以比照啤酒的酒精濃度（ABV）來看，是刻意挑過的數字。比例的上限取決於英語實際吸收成「單一字典詞」的可辨識亞洲外來語有多少。把 OED、Merriam-Webster、Cambridge 查過一輪，台灣與華語圈讀者認得出來的大約 330 個，其中 292 個納入清單，另外約 40 個留作備援，可辨識的外來語幾乎就到頂了。
+
+想再往上拉（例如 10%、約 778 個字），只會逼出兩種做法，兩種我們都不採用：
+
+- **拿冷僻詞充數**（`puttee`、`howdah`、`nilgai`、`maund`），多數人拼不出、唸不準、也記不住。這會破壞這份清單要守住的 EFF 特性，也就是抄得下來、唸得回去、不容易出錯。
+- **改用羅馬拼音的官話或注音音節**，那屬於另一個專案。台灣同時有漢語拼音、威妥瑪、通用拼音幾套拼法，彼此打架、容易產生歧義。
+
+酒精濃度的比喻到這裡就不成立了。比例拉高，密語並不會更強。無論抽到 `tofu` 還是 `the`，每個字都帶一樣的 12.925 bits。強度來自清單恰好 7776 字、每次擲骰機率均勻，跟字的來源無關。亞洲外來語的比例只改變這份表的風味與好認程度，不影響安全性。所以跟啤酒不一樣，這裡「濃度更高」並不會多給你什麼。當文化覆蓋和好用性衝突時，好用性優先。
+
 ## 如何使用
 
-擲骰子查表是最直覺的方式，一把骰子加一張表就能開始，不必懂程式。要查的那張表有兩種取得方式。印一本 A5 小冊最方便（[直接下載 PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.3.1.pdf){target="_blank"}，更多說明見下方〈[印一本小冊帶著走](#印一本小冊帶著走)〉），或直接開啟 GitHub 上的 dice 檔 [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"}。
+擲骰子查表是最直覺的方式，一把骰子加一張表就能開始，不必懂程式。要查的那張表有兩種取得方式。印一本 A5 小冊最方便（[直接下載 PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}，更多說明見下方〈[印一本小冊帶著走](#印一本小冊帶著走)〉），或直接開啟 GitHub 上的 dice 檔 [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"}。
 
 **方法一，用實體骰子查表：**擲 5 顆骰，由左到右讀成一個五位數（每顆 1 到 6）。那張表是照代碼從小到大排列的，翻到、或用搜尋找到開頭是你這五位數的那一行，後面接的字就是抽到的字。重複 6 次，把 6 個字用 `-` 接起來。例如擲出 `6 3 4 4 4`，讀成 `63444`，查到 `tofu`。
 
@@ -144,7 +155,7 @@ asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成
 社群參加工作坊、小聚、研討會這類實體活動時，也會帶幾本印好的小冊到現場發送。如果你在活動裡拿到一本、或剛好遇到我們，非常歡迎過來聊聊，問密語、問匿名網路，或只是打聲招呼都可以。想知道我們最近會出現在哪，見 [活動參與](../activity/index.md)。想直接找我們，可以到社群的 Matrix（入口見 [社群自架服務](../community/tools.md)），或 [持續關注](../contact.md) 我們的後續消息。
 
 !!! tip "下載 A5 小冊（PDF）"
-    [asian_diceware_7776_booklet_a5_v0.3.1.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.3.1.pdf){target="_blank"}（約 36 頁，用家裡或便利商店的印表機印 A4、對折成冊即可）。詞表資料採 CC-BY-4.0，歡迎自行列印、發放與再利用，請保留版權頁的出處標註。
+    [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}（約 36 頁，用家裡或便利商店的印表機印 A4、對折成冊即可）。詞表資料採 CC-BY-4.0，歡迎自行列印、發放與再利用，請保留版權頁的出處標註。
 
 ## 我們想做的匿名服務平台
 
