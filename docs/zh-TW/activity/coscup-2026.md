@@ -17,16 +17,25 @@ og:
 
 ![COSCUP 2026 匿名網路社群議程軌主視覺](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-在監控與審查擴散的環境裡，記者的消息來源、公民團體的成員、想保護日常足跡的一般人，面對的是同一組風險：通訊可能被攔截、身分可能被追蹤、一筆轉帳的時間與金額足以反推出整張社會網絡。匿名網路社群 anoni.net 把這一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、個人隱私與匿名支付累積的實作經驗，帶進 COSCUP 2026 的開源社群現場。二天的議程與工作坊，從網路如何運作、審查如何擋住你開始，一路談到瀏覽器追蹤、校園 Tor 節點、健保資料庫的個資權利、個人隱私防護，以及合法前提下的匿名支付。
+記者要保護消息來源、公民團體要守住成員與捐款人的安全、開發者想確認手上的工具真的擋得住監控。在審查與監控擴散的環境裡，這些需求都落在同一組風險上，通訊可能被攔截、身分可能被追蹤、一筆轉帳的時間與金額足以反推出整張關係網，組織的成員名單與金流甚至可能在你不知情時就被攤開。
+
+匿名網路社群 anoni.net 把這一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、個人隱私與匿名支付累積的實作經驗，帶進 COSCUP 2026 的開源社群現場。二天的議程從網路與審查如何運作開始，一路到記者保護消息來源、校園 Tor 節點、瀏覽器追蹤、健保資料庫的個資權利，以及與 ETHTaipei 合辦的匿名支付場。不論你是來找馬上能用的工具，還是想一起貢獻開源專案，都能挑到對應的場次。
 
 !!! info "活動資訊"
 
     - 日期：2026/08/08（六）、2026/08/09（日）
     - 地點：國立臺灣科技大學（NTUST），社群議程軌在 `TR-510`，8/08 下午與 ETHTaipei 合辦場在 `TR-511`
     - 形式：社群議程、實作工作坊、與 ETHTaipei 合辦的匿名支付場
-    - 入場：COSCUP 採免費入場，當天到場即可參與，實際報名方式與議程時間以大會公告為準
+    - 入場：COSCUP 免費入場，社群議程軌不需另外報名，當天到場即可參與（議程時間到活動前仍可能微調，以 COSCUP 官方議程為準）
 
 [前往 COSCUP 2026 議程](https://pretalx.coscup.org/coscup-2026/){ .md-button .md-button--primary target="_blank"} [社群徵稿說明](./coscup-2026-cfp.md){ .md-button }
+
+!!! tip "依你的身分，建議從這幾場開始"
+
+    - **新聞媒體、獨立記者**：8/08 上午「記者如何用開源工具保護消息來源」最直接，可搭配「威脅模型與 Metadata 入門」。8/09 下午的「健保資料庫案之後」與「隱私指南 2026」延伸到個資權利與個人防護。
+    - **公民團體、NGO**：8/08 上午四場導論最貼近組織處境，「隱私指南 2026」談到組織遭法律調取資料時的事前準備。想評估匿名捐款管道，8/08 下午與 ETHTaipei 合辦的匿名支付場（特別是「我不洗錢，為何要理解匿名支付？」）是好入門。
+    - **開源、科技社群**：8/09 技術含量最高，OpenWRT、臺師大 Tor 節點、瀏覽器指紋研究都能動手。8/08 下午的 ZK 自然人憑證、zkKYC、隱匿地址是協議層乾貨。想一起貢獻見[如何參與](../community/how-to-contribute.md)。
+    - 各場都不需另外報名，當天到場即可，也歡迎帶同事一起來。
 
 ## :material-calendar-text: 議程總覽
 
@@ -34,16 +43,16 @@ og:
 
 ### Day 1 — 2026/08/08（六）
 
-8/08 上午由 anoni.net 社群成員主講四場開源匿名網路導論，受眾為公民團體、新聞媒體與獨立記者，以初階導論為主，四場都扣著開源主軸。下午 13:00 接續與 ETHTaipei 合辦的「匿名支付」場。
+8/08 上午由 anoni.net 社群成員主講四場開源匿名網路導論，特別適合公民團體、新聞媒體與獨立記者，從入門角度切入、四場都扣著開源主軸。下午 13:00 接續與 ETHTaipei 合辦的「匿名支付」場，協議層的技術含量更高。
 
 **上午 09:30-12:00　社群開源匿名網路導論（教室 `TR-510`）**
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 09:30-10:00 | <span class="sess-tag sess-tag--basic">基礎</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 從社群緣起與開源協作參與國際專案講起，帶出 2026 推進的三大主題 | anoni.net 社群 | 30 分鐘 |
-| 10:10-10:40 | <span class="sess-tag sess-tag--basic">基礎</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 | 30 分鐘 |
+| 09:30-10:00 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 從社群緣起與開源協作參與國際專案講起，帶出 2026 推進的三大主題 | anoni.net 社群 | 30 分鐘 |
+| 10:10-10:40 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 | 30 分鐘 |
 | 10:50-11:20 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-newspaper-variant-outline: **記者如何用開源工具保護消息來源：從第一次接觸到報導刊出後的數位整理**<br>:material-arrow-right-bottom: 從第一次接觸到報導刊出，每一步該用哪些可受公開檢視的開源工具保護來源 | anoni.net 社群 | 30 分鐘 |
-| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 說明金流為何是最難擺脫的 metadata，盤點開源去中心化的替代方案 | anoni.net 社群 | 30 分鐘 |
+| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 金流為何是最難擺脫的 metadata，從捐款、募款到日常轉帳的隱私風險與開源替代方案 | anoni.net 社群 | 30 分鐘 |
 
 **下午 13:00-16:30　ETHTaipei 合辦「匿名支付」場（教室 `TR-511`，議程由 ETHTaipei 安排）**
 
@@ -52,19 +61,19 @@ og:
 | 13:00-13:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-card-account-details-outline: **零知識證明與自然人憑證身份驗證**<br>:material-arrow-right-bottom: 不必交出任何個資，就能用自然人憑證向網站證明你是台灣公民 | Ya-wen Jeng | 30 分鐘 |
 | 13:40-14:10 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC、卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang） | 30 分鐘 |
 | 14:20-14:50 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU | 30 分鐘 |
-| 15:00-15:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 用白話走過鏈上隱私金流，對照 Tornado Cash、Privacy Pool、Railgun、Kohaku | 黃豆泥 mashbean | 30 分鐘 |
+| 15:00-15:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean | 30 分鐘 |
 | 15:40-16:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc | 50 分鐘 |
 
 ### Day 2 — 2026/08/09（日）
 
-8/09 全天排定七場錄取議程。上午由 Raghu 的英文場從網路與審查基礎開場，下午由臺師大 Tor 節點實務接棒。今日議程不限初階，適合對網路運作有基本了解、想進一步動手實作的參與者。
+8/09 全天排定七場錄取議程，題材從網路與審查基礎、家用網路與校園 Tor 節點，到健保資料庫的個資權利與個人隱私防護。技術場與貼近生活的場交錯，開發者、記者、公民團體都能挑到對應的場次。
 
 **上午 10:00-12:00（教室 `TR-510`）**
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 10:00-10:50 | <span class="sess-tag sess-tag--basic">基礎</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容 | Raghu | 50 分鐘 |
-| 10:55-11:25 | <span class="sess-tag sess-tag--basic">基礎</span> :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 用 OpenWRT 在家用路由器做到一般機種沒有的隱私與安全設定 | Pellaeon Lin | 30 分鐘 |
+| 10:00-10:50 | <span class="sess-tag sess-tag--basic">通用</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容 | Raghu | 50 分鐘 |
+| 10:55-11:25 | <span class="sess-tag sess-tag--basic">通用</span> :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 在家用路由器上做到一般機種沒有的進階設定，含 VLAN 隔離、多 WAN、site-to-site VPN 與 Tor 上游 | Pellaeon Lin | 30 分鐘 |
 | 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>:material-arrow-right-bottom: VASP 法通過後，台灣人的身分在區塊鏈上會用哪些開放標準被定位 | Yusef Schultz | 30 分鐘 |
 
 （12:00-13:00 午休）
@@ -74,9 +83,9 @@ og:
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
 | 13:00-13:30 | <span class="sess-tag sess-tag--relay">Tor Relay</span> :simple-torproject: **在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談**<br>:material-arrow-right-bottom: 在臺師大架設學術 Tor 節點的完整歷程，從技術配置到校內政策協調 | NZ | 30 分鐘 |
-| 13:35-14:25 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>:material-arrow-right-bottom: 拆解硬體相關 API 被用於瀏覽器指紋追蹤的機制，以及反追蹤的動機與策略 | Pellaeon Lin | 50 分鐘 |
+| 13:35-14:25 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>:material-arrow-right-bottom: 你每天用的瀏覽器如何被指紋追蹤、可能洩漏你聯繫了誰，以及如何反追蹤 | Pellaeon Lin | 50 分鐘 |
 | 14:30-15:00 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-database-lock: **健保資料庫案之後：停止利用權如何實踐？以及其他大型資料庫**<br>:material-arrow-right-bottom: 健保資料庫退出權訴訟到修法的經過，以及如何申請停止利用權 | Kuan-Ju Chou | 30 分鐘 |
-| 15:05-15:55 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-shield-account-outline: **隱私指南 2026**<br>:material-arrow-right-bottom: 從個人風險矩陣、自我檢核方法到組織協作隱私的三段式工作坊 | Justyn | 50 分鐘 |
+| 15:05-15:55 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-shield-account-outline: **隱私指南 2026**<br>:material-arrow-right-bottom: 從個人隱私風險矩陣，到 NGO 與媒體面對法律調取資料的準備，再到門檻簽章、MPC 等組織級進階工具 | Justyn | 50 分鐘 |
 
 ## :material-text-box-multiple-outline: 議程介紹 { #議程介紹 }
 
@@ -158,7 +167,7 @@ og:
 
 ## :material-handshake: 跨社群合作：匿名網路社群 × ETHTaipei { #跨社群合作 }
 
-今年社群與 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）展開議程合作。兩個社群在匿名支付主題上各有不同切入角度，[徵稿與聯合審稿安排](./coscup-2026-cfp.md#anoni-netxETHTaipei)把應用導向、科普類稿件安排到匿名網路社群議程軌，技術、協議層稿件可能調整到 ETHTaipei 區塊鏈議程軌。8/08 下午的「匿名支付」合辦場，歡迎對這個主題有興趣的參與者特別關注，也可以在兩個議程軌之間跨場聽相關主題。
+今年社群與 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）展開議程合作，8/08 下午的「匿名支付」合辦場把關心數位人權的社群和區塊鏈開發者帶到同一個房間。NGO 與記者能在這裡了解捐款與金流的隱私風險，開發者則能聽到協議層的零知識證明與隱匿地址實作。應用導向、科普類稿件安排在匿名網路社群議程軌，技術、協議層稿件可能調整到 ETHTaipei 區塊鏈議程軌（見[徵稿與聯合審稿安排](./coscup-2026-cfp.md#anoni-netxETHTaipei)），歡迎在兩個議程軌之間跨場。
 
 ## :material-link-variant: 相關連結
 
@@ -166,6 +175,8 @@ og:
 - [匿名網路工作坊 2025（活動紀錄）](../event-workshop-2025.md)：去年二日工作坊與圓桌會議的內容
 - [延續 2025，走向 2026：個人隱私指引、Tor Relay 校園建立競賽、匿名支付探索](../blog/posts/2025to2026.md)
 - [關於我們](../about/index.md)
+- [如何參與與認領主題](../community/how-to-contribute.md)：想一起貢獻 Tor、OONI、翻譯或架設節點的入口
+- [Tor Project 生態與對接](../community/tor-project-ecosystem.md)：與上游 Tor 專案對接的導引
 
 !!! info "活動更新與聯絡"
 
