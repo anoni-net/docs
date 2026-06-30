@@ -8,6 +8,19 @@ icon: material/access-point-network
 
 [OONI](https://ooni.org/){target="_blank"} Probe, Explorer, and Run release summaries. Newest at the top. Each entry links back to the full translation.
 
+## OONI Probe 6.1.0
+
+> 2026-06-25 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.0){target="_blank"}
+
+- Measurement engine remains on OONI Probe CLI v3.29.0.
+- Adds support for anonymous credentials, integrating the passport mechanism.
+- Desktop adds a "Run at startup" preference.
+- macOS desktop bundles and signs the JavaFX native libraries; JavaFX becomes optional for desktop distributions.
+- Desktop database access is pinned to a single dedicated thread for stability.
+- The descriptors screen gains a manual refresh button.
+- Updated translations and bumped dependencies (Kotlin, Compose, and others).
+- Various bug fixes and stability improvements.
+
 ## OONI Probe 6.0.2
 
 > 2026-05-25 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.0.2){target="_blank"}

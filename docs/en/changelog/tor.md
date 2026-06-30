@@ -8,6 +8,15 @@ icon: simple/torbrowser
 
 Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tor Browser 15.0.17
+
+> 2026-06-28 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}
+
+- A small release focused on a tor security update, with no change to the Firefox base.
+- tor client updated to 0.4.9.11.
+- NoScript updated to 13.6.25.1984.
+- Build process updated boklm's GPG subkey and renewed morgan's signing key (tor-browser-build#41821, #41827).
+
 ## Tor Browser 15.0.16
 
 > 2026-06-17 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15016/){target="_blank"}
