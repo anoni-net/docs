@@ -108,14 +108,7 @@ og:
 
 ??? abstract ":material-router-network: 以 OpenWRT 等開源軟體建立家用網路環境（Pellaeon Lin，30 分鐘）"
 
-    OpenWRT 是一套開源的路由器作業系統。這場跳過基本網路設定，直接示範一般家用路由器不提供、但用一點 OpenWRT 設定就能達成的隱私與安全功能：
-
-    - 挑選支援 OpenWRT 的硬體
-    - VLAN、訪客網路及危險設備隔離
-    - 多個 WAN（如何把電信商給你的多個 IP 用好用滿）
-    - 策略路由、site-to-site VPN
-    - 危險 IP 及域名阻擋
-    - 特殊上游網路：VPN 供應商、Tor
+    OpenWRT 是一套開源的路由器作業系統。這場跳過基本網路設定，直接示範一般家用路由器不提供、但用一點 OpenWRT 設定就能達成的方便、安全與隱私功能，涵蓋挑選支援 OpenWRT 的硬體、用 VLAN 做訪客網路與危險設備隔離、把電信商配發的多個 IP 透過多 WAN 設定充分運用、策略路由與 site-to-site VPN、危險 IP 與域名阻擋，以及 VPN 供應商與 Tor 等特殊上游網路的設定。
 
 ??? abstract ":material-fingerprint: 區塊鏈網路上基於開放標準的實體身份識別方法（Yusef Schultz，30 分鐘）"
 
@@ -123,14 +116,7 @@ og:
 
 ??? abstract ":simple-torproject: 在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談（NZ，30 分鐘）"
 
-    學術網路頻寬穩定、IP 聲譽良好，一直是全球 Tor 網路最重要的支柱之一，但在校園環境部署 Tor 節點要同時處理技術配置與校內政策。這場分享講者在國立臺灣師範大學（NTNU）建立學術 Tor 節點的完整歷程：
-
-    - 計畫緣起：EFF 發起的 Tor University Challenge 及其對全球匿名網路的意義
-    - 技術實踐：基於 Linux 環境的節點配置、防火牆規則設定
-    - 行政協調：如何與學校資訊單位溝通，以及如何應用 EFF 提供的法律指南
-    - 社群影響：建立節點後的觀察、流量分析與對後續校園推廣的建議
-
-    社群整理過的校園架設脈絡見[校園 Tor Relay 建立](../community/relay-on-campus.md)。
+    學術網路頻寬穩定、IP 聲譽良好，一直是全球 Tor 網路最重要的支柱之一，但在校園環境部署 Tor 節點要同時處理技術配置與校內政策。這場分享講者在國立臺灣師範大學（NTNU）建立學術 Tor 節點的完整歷程，從 EFF 發起的 Tor University Challenge 計畫緣起與其對全球匿名網路的意義，談到 Linux 環境下的節點配置與防火牆規則、如何與學校資訊單位溝通並應用 EFF 提供的法律指南，以及建立節點後的流量觀察與對後續校園推廣的建議，希望藉這段經驗鼓勵更多台灣學研單位參與全球隱私基礎設施的建設。社群整理過的校園架設脈絡見[校園 Tor Relay 建立](../community/relay-on-campus.md)。
 
 ??? abstract ":material-eye-off-outline: 瀏覽器追蹤技術、反追蹤策略和使用者自主（Pellaeon Lin，50 分鐘）"
 
