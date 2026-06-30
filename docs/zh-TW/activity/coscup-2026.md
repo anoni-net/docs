@@ -47,22 +47,22 @@ og:
 
 **上午 09:30-12:00　社群開源匿名網路導論（教室 `TR-510`）**
 
-| 時間 | 議程 | 講者 | 長度 |
-|------|------|------|------|
-| 09:30-10:00 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 介紹社群緣起、如何以開源協作參與國際專案，帶出 2026 推進的三大主題 | anoni.net 社群 | 30 分鐘 |
-| 10:10-10:40 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 | 30 分鐘 |
-| 10:50-11:20 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-newspaper-variant-outline: **記者如何用開源工具保護消息來源：從第一次接觸到報導刊出後的數位整理**<br>:material-arrow-right-bottom: 從第一次接觸到報導刊出，每一步該用哪些可受公開檢視的開源工具保護來源 | anoni.net 社群 | 30 分鐘 |
-| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 金流為何是最難擺脫的 metadata，從捐款、募款到日常轉帳的隱私風險與開源替代方案 | anoni.net 社群 | 30 分鐘 |
+| 時間 | 議程 | 講者<br>長度 |
+|------|------|------|
+| 09:30-10:00 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 介紹社群緣起、如何以開源協作參與國際專案，帶出 2026 推進的三大主題 | anoni.net 社群<br>30 分鐘 |
+| 10:10-10:40 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群<br>30 分鐘 |
+| 10:50-11:20 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-newspaper-variant-outline: **記者如何用開源工具保護消息來源：從第一次接觸到報導刊出後的數位整理**<br>:material-arrow-right-bottom: 從第一次接觸到報導刊出，每一步該用哪些可受公開檢視的開源工具保護來源 | anoni.net 社群<br>30 分鐘 |
+| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 金流為何是最難擺脫的 metadata，從捐款、募款到日常轉帳的隱私風險與開源替代方案 | anoni.net 社群<br>30 分鐘 |
 
 **下午 13:00-16:30　ETHTaipei 合辦「匿名支付」場（教室 `TR-511`，議程由 ETHTaipei 安排）**
 
-| 時間 | 議程 | 講者 | 長度 |
-|------|------|------|------|
-| 13:00-13:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-card-account-details-outline: **零知識證明與自然人憑證身份驗證**<br>:material-arrow-right-bottom: 不必交出任何個資，就能用自然人憑證向網站證明你是台灣公民 | Ya-wen Jeng | 30 分鐘 |
-| 13:40-14:10 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC、卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang） | 30 分鐘 |
-| 14:20-14:50 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU | 30 分鐘 |
-| 15:00-15:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean | 30 分鐘 |
-| 15:40-16:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc | 50 分鐘 |
+| 時間 | 議程 | 講者<br>長度 |
+|------|------|------|
+| 13:00-13:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-card-account-details-outline: **零知識證明與自然人憑證身份驗證**<br>:material-arrow-right-bottom: 不必交出任何個資，就能用自然人憑證向網站證明你是台灣公民 | Ya-wen Jeng<br>30 分鐘 |
+| 13:40-14:10 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC、卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang）<br>30 分鐘 |
+| 14:20-14:50 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU<br>30 分鐘 |
+| 15:00-15:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean<br>30 分鐘 |
+| 15:40-16:30 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc<br>50 分鐘 |
 
 ### Day 2 — 2026/08/09（日）
 
@@ -70,22 +70,22 @@ og:
 
 **上午 10:00-12:00（教室 `TR-510`）**
 
-| 時間 | 議程 | 講者 | 長度 |
-|------|------|------|------|
-| 10:00-10:50 | <span class="sess-tag sess-tag--basic">通用</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容 | Raghu | 50 分鐘 |
-| 10:55-11:25 | <span class="sess-tag sess-tag--basic">通用</span> :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 在家用路由器上做到一般機種沒有的進階設定，含 VLAN 隔離、多 WAN、site-to-site VPN 與 Tor 上游 | Pellaeon Lin | 30 分鐘 |
-| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>:material-arrow-right-bottom: VASP 法通過後，台灣人的身分在區塊鏈上會用哪些開放標準被定位 | Yusef Schultz | 30 分鐘 |
+| 時間 | 議程 | 講者<br>長度 |
+|------|------|------|
+| 10:00-10:50 | <span class="sess-tag sess-tag--basic">通用</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容 | Raghu<br>50 分鐘 |
+| 10:55-11:25 | <span class="sess-tag sess-tag--basic">通用</span> :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 在家用路由器上做到一般機種沒有的進階設定，含 VLAN 隔離、多 WAN、site-to-site VPN 與 Tor 上游 | Pellaeon Lin<br>30 分鐘 |
+| 11:30-12:00 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>:material-arrow-right-bottom: VASP 法通過後，台灣人的身分在區塊鏈上會用哪些開放標準被定位 | Yusef Schultz<br>30 分鐘 |
 
 （12:00-13:00 午休）
 
 **下午 13:00-16:00（教室 `TR-510`）**
 
-| 時間 | 議程 | 講者 | 長度 |
-|------|------|------|------|
-| 13:00-13:30 | <span class="sess-tag sess-tag--relay">Tor Relay</span> :simple-torproject: **在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談**<br>:material-arrow-right-bottom: 在臺師大架設學術 Tor 節點的完整歷程，從技術配置到校內政策協調 | NZ | 30 分鐘 |
-| 13:35-14:25 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>:material-arrow-right-bottom: 你每天用的瀏覽器如何被指紋追蹤、可能洩漏你聯繫了誰，以及如何反追蹤 | Pellaeon Lin | 50 分鐘 |
-| 14:30-15:00 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-database-lock: **健保資料庫案之後：停止利用權如何實踐？以及其他大型資料庫**<br>:material-arrow-right-bottom: 健保資料庫退出權訴訟到修法的經過，以及如何申請停止利用權 | Kuan-Ju Chou | 30 分鐘 |
-| 15:05-15:55 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-shield-account-outline: **隱私指南 2026**<br>:material-arrow-right-bottom: 從個人隱私風險矩陣，到 NGO 與媒體面對法律調取資料的準備，再到門檻簽章、MPC 等組織級進階工具 | Justyn | 50 分鐘 |
+| 時間 | 議程 | 講者<br>長度 |
+|------|------|------|
+| 13:00-13:30 | <span class="sess-tag sess-tag--relay">Tor Relay</span> :simple-torproject: **在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談**<br>:material-arrow-right-bottom: 在臺師大架設學術 Tor 節點的完整歷程，從技術配置到校內政策協調 | NZ<br>30 分鐘 |
+| 13:35-14:25 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>:material-arrow-right-bottom: 你每天用的瀏覽器如何被指紋追蹤、可能洩漏你聯繫了誰，以及如何反追蹤 | Pellaeon Lin<br>50 分鐘 |
+| 14:30-15:00 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-database-lock: **健保資料庫案之後：停止利用權如何實踐？以及其他大型資料庫**<br>:material-arrow-right-bottom: 健保資料庫退出權訴訟到修法的經過，以及如何申請停止利用權 | Kuan-Ju Chou<br>30 分鐘 |
+| 15:05-15:55 | <span class="sess-tag sess-tag--privacy">個人隱私</span> :material-shield-account-outline: **隱私指南 2026**<br>:material-arrow-right-bottom: 從個人隱私風險矩陣，到 NGO 與媒體面對法律調取資料的準備，再到門檻簽章、MPC 等組織級進階工具 | Justyn<br>50 分鐘 |
 
 ## :material-text-box-multiple-outline: 議程介紹 { #議程介紹 }
 
