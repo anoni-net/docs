@@ -99,6 +99,7 @@ nav:
   - !ENV [NAV_EVENT, "活动参与"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
+      - activity/coscup-2026.md
       - event-workshop-2025.md
       - !ENV [NAV_EVENT_PREPARE, "筹备页面"]:
           - event-workshop-2025-prepare.md

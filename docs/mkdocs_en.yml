@@ -62,6 +62,7 @@ nav:
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
+      - activity/coscup-2026.md
       - event-workshop-2025.md
       - !ENV [NAV_EVENT_PREPARE, "Pre-Event"]:
           - event-workshop-2025-prepare.md
