@@ -8,6 +8,14 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon 与 Onion 服务的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tor Browser 15.0.17
+
+> 2026-06-28 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}
+
+- 以 tor 安全更新为主的小版本，未变动 Firefox 基底。
+- tor 客户端升至 0.4.9.11，NoScript 升至 13.6.25.1984。
+- 构建流程更新 boklm 的 GPG 子密钥与 morgan 的续期密钥（tor-browser-build#41821、#41827）。
+
 ## Tor Browser 15.0.16
 
 > 2026-06-17 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15016/){target="_blank"}

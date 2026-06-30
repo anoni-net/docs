@@ -8,6 +8,15 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon、Onion 服務的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。本頁同時收錄穩定版與 Alpha 測試通道，Alpha 條目會在標題標注。
 
+## Tor Browser 15.0.17
+
+> 2026-06-28 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}
+
+- 以 tor 安全更新為主的小版本，未變動 Firefox 基底。
+- tor 用戶端升至 0.4.9.11。
+- NoScript 升至 13.6.25.1984。
+- 建置流程更新 boklm 的 GPG 子金鑰與 morgan 的續期金鑰（tor-browser-build#41821、#41827）。
+
 ## Tor Browser 15.0.16
 
 > 2026-06-17 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15016/){target="_blank"}
