@@ -121,6 +121,7 @@ nav:
   - !ENV [NAV_EVENT, "活動參與"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
+      - activity/coscup-2026.md
       - event-workshop-2025.md
       - !ENV [NAV_EVENT_PREPARE, "籌備頁面"]:
           - event-workshop-2025-prepare.md
