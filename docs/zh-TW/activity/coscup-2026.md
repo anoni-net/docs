@@ -40,20 +40,20 @@ og:
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 09:30-10:00 | :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>從社群緣起與開源協作參與國際專案講起，帶出 2026 推進的三大主題 | anoni.net 社群 | 30 分鐘 |
-| 10:10-10:40 | :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 | 30 分鐘 |
-| 10:50-11:20 | :material-newspaper-variant-outline: **記者如何用開源工具保護消息來源：從第一次接觸到報導刊出後的數位整理**<br>沿著消息來源的生命週期，逐步對應到可被獨立檢視的開源工具 | anoni.net 社群 | 30 分鐘 |
-| 11:30-12:00 | :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>說明金流為何是最難擺脫的 metadata，盤點開源去中心化的替代方案 | anoni.net 社群 | 30 分鐘 |
+| 09:30-10:00 | :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 從社群緣起與開源協作參與國際專案講起，帶出 2026 推進的三大主題 | anoni.net 社群 | 30 分鐘 |
+| 10:10-10:40 | :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 | 30 分鐘 |
+| 10:50-11:20 | :material-newspaper-variant-outline: **記者如何用開源工具保護消息來源：從第一次接觸到報導刊出後的數位整理**<br>:material-arrow-right-bottom: 沿著消息來源的生命週期，逐步對應到可被獨立檢視的開源工具 | anoni.net 社群 | 30 分鐘 |
+| 11:30-12:00 | :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 說明金流為何是最難擺脫的 metadata，盤點開源去中心化的替代方案 | anoni.net 社群 | 30 分鐘 |
 
 **下午 13:00-16:30　ETHTaipei 合辦「匿名支付」場（教室 `TR-511`，議程由 ETHTaipei 安排）**
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 13:00-13:30 | :material-card-account-details-outline: **零知識證明與自然人憑證身份驗證**<br>用 ZKP 結合自然人憑證，向服務證明「我是台灣公民」卻不洩漏個資 | Ya-wen Jeng | 30 分鐘 |
-| 13:40-14:10 | :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>用一組密碼學原語組出能通過 KYC、卻不讓伺服器看到身份資料的流程 | ryanycw（Ryan Wang） | 30 分鐘 |
-| 14:20-14:50 | :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>拆解隱匿地址與 ERC-5564，說明不可連結性與不可追溯性的差別 | Jennifer HSU | 30 分鐘 |
-| 15:00-15:30 | :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>用白話走過鏈上隱私金流，對照 Tornado Cash、Privacy Pool、Railgun、Kohaku | 黃豆泥 mashbean | 30 分鐘 |
-| 15:40-16:30 | :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc | 50 分鐘 |
+| 13:00-13:30 | :material-card-account-details-outline: **零知識證明與自然人憑證身份驗證**<br>:material-arrow-right-bottom: 用 ZKP 結合自然人憑證，向服務證明「我是台灣公民」卻不洩漏個資 | Ya-wen Jeng | 30 分鐘 |
+| 13:40-14:10 | :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC、卻不讓伺服器看到身份資料的流程 | ryanycw（Ryan Wang） | 30 分鐘 |
+| 14:20-14:50 | :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 拆解隱匿地址與 ERC-5564，說明不可連結性與不可追溯性的差別 | Jennifer HSU | 30 分鐘 |
+| 15:00-15:30 | :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 用白話走過鏈上隱私金流，對照 Tornado Cash、Privacy Pool、Railgun、Kohaku | 黃豆泥 mashbean | 30 分鐘 |
+| 15:40-16:30 | :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc | 50 分鐘 |
 
 ### Day 2 — 2026/08/09（日）
 
@@ -63,9 +63,9 @@ og:
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 10:00-10:50 | :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>用寄明信片的比喻，看清封包路上有哪些角色、能看到與改動什麼 | Raghu | 50 分鐘 |
-| 10:55-11:25 | :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>用 OpenWRT 在家用路由器做到一般機種沒有的隱私與安全設定 | Pellaeon Lin | 30 分鐘 |
-| 11:30-12:00 | :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>介紹用哪些開放標準在區塊鏈上定位身份，以及密碼學界的正面影響 | Yusef Schultz | 30 分鐘 |
+| 10:00-10:50 | :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清封包路上有哪些角色、能看到與改動什麼 | Raghu | 50 分鐘 |
+| 10:55-11:25 | :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 用 OpenWRT 在家用路由器做到一般機種沒有的隱私與安全設定 | Pellaeon Lin | 30 分鐘 |
+| 11:30-12:00 | :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>:material-arrow-right-bottom: 介紹用哪些開放標準在區塊鏈上定位身份，以及密碼學界的正面影響 | Yusef Schultz | 30 分鐘 |
 
 （12:00-13:00 午休）
 
@@ -73,10 +73,10 @@ og:
 
 | 時間 | 議程 | 講者 | 長度 |
 |------|------|------|------|
-| 13:00-13:30 | :simple-torproject: **在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談**<br>在臺師大架設學術 Tor 節點的完整歷程，從技術配置到校內政策協調 | NZ | 30 分鐘 |
-| 13:35-14:25 | :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>硬體相關 API 如何被拿來做指紋追蹤，以及反追蹤的動機與策略 | Pellaeon Lin | 50 分鐘 |
-| 14:30-15:00 | :material-database-lock: **健保資料庫案之後：停止利用權如何實踐？以及其他大型資料庫**<br>健保資料庫退出權訴訟到修法的經過，以及如何申請停止利用權 | Kuan-Ju Chou | 30 分鐘 |
-| 15:05-15:55 | :material-shield-account-outline: **隱私指南 2026**<br>從個人風險矩陣、自我檢核方法到組織協作隱私的三段式工作坊 | Justyn | 50 分鐘 |
+| 13:00-13:30 | :simple-torproject: **在學校種洋蔥？臺師大 Tor 節點建立實務與 EFF Tor University Challenge 經驗談**<br>:material-arrow-right-bottom: 在臺師大架設學術 Tor 節點的完整歷程，從技術配置到校內政策協調 | NZ | 30 分鐘 |
+| 13:35-14:25 | :material-eye-off-outline: **瀏覽器追蹤技術、反追蹤策略和使用者自主**<br>:material-arrow-right-bottom: 硬體相關 API 如何被拿來做指紋追蹤，以及反追蹤的動機與策略 | Pellaeon Lin | 50 分鐘 |
+| 14:30-15:00 | :material-database-lock: **健保資料庫案之後：停止利用權如何實踐？以及其他大型資料庫**<br>:material-arrow-right-bottom: 健保資料庫退出權訴訟到修法的經過，以及如何申請停止利用權 | Kuan-Ju Chou | 30 分鐘 |
+| 15:05-15:55 | :material-shield-account-outline: **隱私指南 2026**<br>:material-arrow-right-bottom: 從個人風險矩陣、自我檢核方法到組織協作隱私的三段式工作坊 | Justyn | 50 分鐘 |
 
 ## :material-text-box-multiple-outline: 議程介紹 { #議程介紹 }
 
