@@ -12,7 +12,7 @@ icon: material/account-reactivate-outline
 
 -   [:material-calendar-star: COSCUP 2026 匿名網路社群議程軌](./coscup-2026.md)
     :material-update: 2026/08/08、08/09（二日）
-    :octicons-location-24: 國立台灣科技大學
+    :octicons-location-24: 國立台灣科技大學 `TR-510`
 
     ---
 
