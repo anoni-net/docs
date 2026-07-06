@@ -8,6 +8,15 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.9.1
+
+> 2026-07-01 · [Upstream announcement](https://tails.net/news/version_7.9.1/){target="_blank"}
+
+- Emergency security release fixing two local privilege-escalation flaws in the Linux kernel.
+- Patches CVE-2026-43503 (DirtyClone) and CVE-2026-46331 (PACKET_EDIT_MEME), with the kernel updated to 6.12.94. Such flaws let an application inside Tails gain administrator privileges; combined with other unknown vulnerabilities they could fully compromise Tails and deanonymize the user. No active exploitation has been observed.
+- Tor Browser updated to 15.0.17, and the Tor client to 0.4.9.11.
+- This is a security-only release; aside from Tor Browser, the kernel, and the Tor client, it keeps 7.9's software set. Automatic upgrades are available from Tails 7.0 or later.
+
 ## Tails 7.9
 
 > 2026-06-18 · [Upstream announcement](https://tails.net/news/version_7.9/){target="_blank"}

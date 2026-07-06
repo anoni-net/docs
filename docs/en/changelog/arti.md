@@ -31,6 +31,13 @@ Legend: ✅ Done　🟡 In development　⬜ Not implemented
 
 On the client side, Arti's capabilities are now largely on par with c-tor: it works as a SOCKS proxy, connects to and hosts onion services, and runs over bridges and pluggable transports. The project's current focus is the relay side. Relay and directory authority support are still under development, so you cannot yet run a Tor relay with Arti, which still requires c-tor. Arti replaces c-tor's control port with the RPC interface, a different design approach.
 
+## Arti 2.5.0
+
+> 2026-06-30 · [Upstream announcement](https://blog.torproject.org/arti_2_5_0_released/){target="_blank"}
+
+- Counter Galois Onion (CGO) cryptography is now stable (enable the `counter-galois-onion` feature, or `full`), congestion control (`flowctl-cc`) is now on by default, relay and directory-authority development continues (added encoding/decoding for router descriptors, microdescriptors, and consensuses), and the MSRV moves to Rust 1.91.
+- Fixes two medium-severity denial-of-service issues: TROVE-2026-24 (a malicious directory mirror could trigger a `tor-netdoc` parser crash that eventually stalls the `tor-dirmgr` task) and TROVE-2026-27 (an inefficient algorithm could be exploited to stall the CPU); neither has been observed in the wild.
+
 ## Arti 2.4.0
 
 > 2026-06-01 · [Upstream announcement](https://blog.torproject.org/arti_2_4_0_released/){target="_blank"}
