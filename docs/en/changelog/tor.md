@@ -8,6 +8,16 @@ icon: simple/torbrowser
 
 Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tor Browser 16.0a8 (alpha)
+
+> 2026-07-02 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a8/){target="_blank"}
+
+- The alpha channel is for testing only and may contain usability, security, and privacy bugs; regular users should stay on the stable channel (15.x).
+- Important Firefox security update, rebased onto Firefox 152.0a1 (the previous alpha 16.0a7 was on 151.0a1); Android GeckoView also moved to 152.0a1.
+- tor client updated to 0.4.9.11, NoScript to 13.6.25.90301984, OpenSSL to 3.5.7, and Go to 1.26.4 in the build toolchain.
+- Fixed a cross-site oracle vulnerability by rejecting worklets in Safer Mode; XSLT disabled for the 16.0 series.
+- Desktop: disabled IP Protection and fixed letterboxing background rendering plus several regressions after the Firefox 152 rebase. Android: added frequent regions to Tor connection assist, removed default-browser functionality, and switched omni.ja to xz compression.
+
 ## Tor Browser 15.0.17
 
 > 2026-06-28 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}

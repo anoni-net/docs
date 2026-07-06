@@ -8,6 +8,16 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon 与 Onion 服务的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tor Browser 16.0a8（Alpha 测试通道）
+
+> 2026-07-02 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a8/){target="_blank"}
+
+- Alpha 通道仅供测试，可能含影响可用性、安全与隐私的错误，一般用户请继续用稳定版（15.x）。
+- 重要的 Firefox 安全更新，rebase 至 Firefox 152.0a1（前一个 Alpha 16.0a7 为 151.0a1），Android 版 GeckoView 同步升至 152.0a1。
+- tor 客户端升至 0.4.9.11、NoScript 升至 13.6.25.90301984、OpenSSL 升至 3.5.7、构建工具链的 Go 升至 1.26.4。
+- 修补跨站 oracle 漏洞，Safer Mode 下拒绝 worklet。16.0 系列停用 XSLT。
+- 桌面版停用 IP Protection，并修正 letterboxing 背景显示与 Firefox 152 rebase 后的多项 regression。Android 版在 Tor connection assist 加入常用区域、移除默认浏览器功能，omni.ja 改用 xz 压缩。
+
 ## Tor Browser 15.0.17
 
 > 2026-06-28 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}

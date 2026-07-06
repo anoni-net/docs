@@ -8,6 +8,15 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 操作系统的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tails 7.9.1
+
+> 2026-07-01 · [上游公告](https://tails.net/news/version_7.9.1/){target="_blank"}
+
+- 紧急安全更新，修补 Linux 内核两个本地提权漏洞。
+- 修补 CVE-2026-43503（DirtyClone）与 CVE-2026-46331（PACKET_EDIT_MEME），内核升至 6.12.94。此类漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。目前尚未发现实际被利用案例。
+- Tor Browser 升至 15.0.17，Tor 客户端升至 0.4.9.11。
+- 此版为安全专用发布，除 Tor Browser、内核与 Tor 客户端外沿用 7.9 的软件组合。可从 Tails 7.0 以后版本自动升级。
+
 ## Tails 7.9
 
 > 2026-06-18 · [上游公告](https://tails.net/news/version_7.9/){target="_blank"}
