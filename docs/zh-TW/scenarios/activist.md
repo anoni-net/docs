@@ -300,6 +300,15 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 - 裝置疑似被植入監控、需要鑑識：[Citizen Lab](https://citizenlab.ca/){target="_blank"}
 - 緊急情況見 [緊急求救](../help/index.md)
 
+### 香港的脈絡
+
+前面的技術操作（burner、Signal/Matrix 分層、EXIF 清除）多半通用，但香港的法律風險層級與求助生態跟台灣差很多，不能照抄台灣的假設。
+
+- **法規量級不同**：香港《國安法》(2020) 與 2024 年《維護國家安全條例》(基本法 23 條) 下，煽動罪最高刑期已從 2 年提高到 7 年（涉境外勢力達 10 年），另有分裂國家、顛覆、境外干預等罪，最重可判終身監禁。參與集會、群組通訊、裝置內容都可能成為國安案件的證據，國安處可扣押裝置作鑑識，跟台灣以罰鍰為主的集遊法、社維法不是同一量級。
+- **本地求助管道大幅萎縮**：香港民間人權陣線、職工盟等組織已於 2021 年在國安壓力下解散，「找本地 NGO 就有支援」在香港多半已不成立。數位安全與風險評估建議轉向國際組織，如上面已列的 [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} 與 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。
+
+查證來源（2026-07）：[Article 23: Hong Kong's 2024 security law](https://hongkongfp.com/article23-security-law/){target="_blank"} - Hong Kong Free Press、[Safeguarding National Security Ordinance](https://en.wikipedia.org/wiki/Safeguarding_National_Security_Ordinance){target="_blank"}。
+
 ## 接下來
 
 - [威脅模型如何建立](../basics/threat-model.md)：每場行動前先盤點對手與資產
