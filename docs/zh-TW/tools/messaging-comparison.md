@@ -178,7 +178,7 @@ LINE 不是「加密通訊工具」，是「有部分加密的社交平台」。
 - **隱私風險不在「對話內容會洩漏」**：在「跟誰、什麼時候、多頻繁」的圖譜分析能力，這層 Meta 集團掌握得很完整
 - **企業帳號與廣告整合**：WhatsApp Business API 與 Meta 廣告系統的整合會持續擴張，這對隱私敏感使用者是長期警示
 
-## 在台灣的補充
+## 在台灣與香港的補充
 
 幾個跟台灣使用情境特別相關的補充：
 
@@ -195,6 +195,12 @@ LINE 不是「加密通訊工具」，是「有部分加密的社交平台」。
 **社群討論在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，帳號申請與加入方式見 [社群自架服務](../community/tools.md)。
 
 **協議層的台灣脈絡**：Signal、Matrix 為什麼是社群兩條主要路徑，協議層的細節見 [端對端加密如何運作](../advanced/e2ee.md) 的「在地脈絡」一節。
+
+香港的分流對象與威脅模型不同：
+
+- **要分流的主流工具是 WhatsApp（非 LINE）**：香港最普及的即時通訊是 WhatsApp，跟家人、公司、服務商多半切不掉。務實做法同樣是分流，把敏感、長期留痕的對話切到 Signal 或 Matrix，一般生活留在 WhatsApp。
+- **2FA 生態不同**：香港的銀行與政府服務（HKID、iAM Smart 數位身分）多用簡訊 OTP，SIM swap 同樣是風險，能改 TOTP 就改。
+- **威脅模型要對應國安監控**：2019 年後 Telegram、Signal 被大量用於社運動員，國安法之後通訊與社群紀錄可成為國安、煽動案件的證據來源，E2EE 工具的政治風險層級比台灣高，脈絡見 [VPN 的風險與選擇](./vpn-guide.md) 的香港段[^hk]。
 
 ## 常見問題
 
@@ -243,3 +249,4 @@ LINE 不是「加密通訊工具」，是「有部分加密的社交平台」。
 </div>
 
 [^1]: [Bridgefy, the messenger promising secure, private chat for activists, was a bug-ridden mess](https://blog.cryptographyengineering.com/2020/08/24/anatomy-of-a-bad-idea-bridgefys-broken-encryption/){target="_blank"} - Cryptography Engineering blog
+[^hk]: 香港《國安法》後監控與通訊紀錄作為證據的脈絡見 [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - Hong Kong Free Press。VPN/Tor 在港的政治風險見本站 [VPN 的風險與選擇](./vpn-guide.md) 的香港小節。
