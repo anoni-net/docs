@@ -1,6 +1,6 @@
 ---
 title: Tor Snowflake
-description: 開瀏覽器分頁，協助受審查地區的 Tor 使用者連線。在台灣門檻最低的網路自由貢獻方式。
+description: 開瀏覽器分頁，協助受審查地區的 Tor 使用者連線。對外連線不受封鎖的地區，門檻最低的網路自由貢獻方式。
 icon: material/snowflake
 ---
 # :material-snowflake: Tor Snowflake 橋接點
@@ -11,11 +11,13 @@ icon: material/snowflake
 
 在伊朗、緬甸、白俄羅斯這類嚴重審查地區，Tor 的入口節點長期被偵測與封鎖。當地使用者要連上 Tor，需要透過外部志工提供的「橋接點」繞過。Snowflake 把你的瀏覽器變成一個臨時橋接點，受審查地區的 Tor 使用者透過你的瀏覽器連上 Tor 網路。可參考 [InterSecLab 中國防火長城資料外洩研究](../reports/interseclab-network-coup/index_7.md)、[2025 年 10 月國際網路自由觀察](../blog/posts/internetfreedom-oct2025.md)，了解全球審查現況。
 
-對在台灣的我們，這是門檻最低的網路自由貢獻方式：
+在台灣、香港這類對外連線不受全面封鎖的地方，這是門檻最低的網路自由貢獻方式：
 
-- 對外連線受審查程度低、頻寬充足，是合適的橋接點來源國家。
+- 對外連線受審查程度低、頻寬充足，是合適的橋接點來源地區。
 - 比起架 [Tor Relay](../community/setup-tor-relay.md) 需要的伺服器、頻寬、運維成本，Snowflake 只需要一個分頁。
 - 適合白天電腦長開、放著分頁背景跑的工作者。
+
+香港讀者要多一層評估。Snowflake 把你的瀏覽器變成替他人轉發 Tor 流量的節點，在 2020 年《國安法》與 2026 年 3 月生效的裝置解密義務（持令狀調查國安案時可要求交出裝置密碼，拒絕最高一年徒刑）之下，一旦裝置被搜查，「為什麼你的瀏覽器在幫審查地區的人連 Tor」本身可能引來額外關注。技術上合法、可用，但參與前要把國安監控與裝置搜查的風險算進來，脈絡見 [VPN 的風險與選擇](./vpn-guide.md) 的香港段。
 
 對於有興趣投入更多的人，下一步可以參考 [Tor Relay 校園建立](../community/relay-on-campus.md)。
 

@@ -1,12 +1,12 @@
 ---
 title: Asian Diceware：帶亞洲味的英文密語字典
-description: 匿名網路社群參考 EFF Diceware 做的開源密語字典，把 tofu、boba、oolong、kimchi 這類有字典背書的亞洲外來語混進 7776 字英文詞表，讓在台灣與亞洲生活的人更好記。這篇說明如何使用、何時使用、密語強度與隨機性，並提供 A5 小冊 PDF 下載。
+description: 匿名網路社群參考 EFF Diceware 做的開源密語字典，把 tofu、boba、oolong、kimchi 這類有字典背書的亞洲外來語混進 7776 字英文詞表，讓在台灣、香港與亞洲各地生活的人更好記。這篇說明如何使用、何時使用、密語強度與隨機性，並提供 A5 小冊 PDF 下載。
 icon: material/dice-multiple-outline
 ---
 
 # :material-dice-multiple-outline: Asian Diceware：帶亞洲味的英文密語字典
 
-又長又隨機的密碼最安全，但人腦記不住，於是多數人改用生日加寵物名字，還一組到處重複使用。有個更省力的方法，擲幾次骰子、從一份固定的詞表裡抽出幾個英文字串起來，當成你的密碼。這種「密語」（passphrase）好記、好輸入，強度卻遠高於一般人手打的密碼。這個做法你可能早就用過，下一節就列幾個你大概見過的例子。我們做的是一份帶亞洲味的版本，把已經進入英文字典的亞洲外來語混進去，對在台灣與亞洲生活的人更好認、更好記。動手前可以先看 [威脅模型如何建立](../basics/threat-model.md)，清楚自己要防範誰，再讀 [密碼管理器入門](./password-manager.md)，了解密語在整套密碼防線裡的位置。
+又長又隨機的密碼最安全，但人腦記不住，於是多數人改用生日加寵物名字，還一組到處重複使用。有個更省力的方法，擲幾次骰子、從一份固定的詞表裡抽出幾個英文字串起來，當成你的密碼。這種「密語」（passphrase）好記、好輸入，強度卻遠高於一般人手打的密碼。這個做法你可能早就用過，下一節就列幾個你大概見過的例子。我們做的是一份帶亞洲味的版本，把已經進入英文字典的亞洲外來語混進去，對在台灣、香港與亞洲各地生活的人更好認、更好記。動手前可以先看 [威脅模型如何建立](../basics/threat-model.md)，清楚自己要防範誰，再讀 [密碼管理器入門](./password-manager.md)，了解密語在整套密碼防線裡的位置。
 
 ## 你其實早就見過這個做法
 
@@ -25,9 +25,9 @@ Tails 在建立加密儲存時也會直接建議一組這樣的密語（5.12 起
 
 asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成 EFF Large Wordlist 的直接替代品，安全性與可用性對齊。差別在用字，我們固定收錄 292 個有字典背書（OED、Merriam-Webster、Cambridge 查證）的亞洲外來語，其餘用最高頻、好拼寫的常見英文字填滿。
 
-這些外來語對台灣與亞洲讀者特別好認：`tofu`、`ramen`、`miso`、`matcha`、`karaoke`、`tsunami`、`kimchi`、`bibimbap`、`typhoon`、`oolong`、`yoga`、`karma`、`curry`、`mango`。其中有不少台灣與華語圈的味道：`oolong`（烏龍茶）、`boba`（珍珠奶茶，源自台灣）、`ketchup`（源頭可追到閩南語）、`pinyin`（拼音）。也有一些你可能沒發現是亞洲外來語的字，像 `shampoo`、`bungalow`、`jungle`、`gecko`、`bazaar`、`guru`。
+這些外來語對台灣、香港與亞洲各地讀者特別好認：`tofu`、`ramen`、`miso`、`matcha`、`karaoke`、`tsunami`、`kimchi`、`bibimbap`、`typhoon`、`oolong`、`yoga`、`karma`、`curry`、`mango`。其中有不少台灣與華語圈的味道：`oolong`（烏龍茶）、`boba`（珍珠奶茶，源自台灣）、`ketchup`（源頭可追到閩南語）、`pinyin`（拼音）。也有一些你可能沒發現是亞洲外來語的字，像 `shampoo`、`bungalow`、`jungle`、`gecko`、`bazaar`、`guru`。
 
-選字有兩個刻意的限制。第一，外來語一律收已經進英文字典的單一英文 token，不收 `feng shui`、`kung fu`、`dim sum` 這類有空格的詞。第二，我們不自己音譯華語，因為台灣同時有漢語拼音、威妥瑪、通用拼音幾套標準，拼法會打架，所以只收英文拼法已被字典固定下來的字。
+選字有兩個刻意的限制。第一，外來語一律收已經進英文字典的單一英文 token，不收 `feng shui`、`kung fu`、`dim sum` 這類有空格的詞。第二，我們不自己音譯華語，因為台灣同時有漢語拼音、威妥瑪、通用拼音幾套標準，香港另有粵語拼音（Jyutping）等系統，拼法會打架，所以只收英文拼法已被字典固定下來的字。
 
 這份詞表開源（程式碼採 MIT、詞表資料採 CC-BY-4.0），原始碼與完整詞表在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。詞表的功能是讓抽字這一步更好認好記，本身不涉及加密。真正的安全來自你如何產生、保管與使用密語。
 
