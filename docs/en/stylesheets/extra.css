@@ -225,6 +225,16 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
+   .md-button — keep vertical breathing room after wrap
+   The right margin is enough on a single desktop row; add bottom margin so
+   buttons that wrap onto a second row on mobile don't stick together.
+   ========================================================================== */
+
+.md-typeset .md-button {
+  margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
    暗色模式（slate）：內文與一般文字改純白
    預設是半透明灰白（約 rgba(226, 228, 233, 0.82)），閱讀時不夠凸顯
    ========================================================================== */
