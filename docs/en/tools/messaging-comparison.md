@@ -49,6 +49,8 @@ The consequence is direct: **a tool that registers you by phone number is anchor
 
 This is the same trap as mistaking *confidential* for *anonymous*, explained in [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md). If your threat model includes the carrier, the state, or anyone who can compel either, the identifier column outranks every other column. That is what moves SimpleX, Session, Briar, and Threema into a different category from the phone-anchored tools: they let you register without ever presenting a number that resolves to your name.
 
+Hong Kong is a concrete instance of exactly this shift. WhatsApp, not LINE, is the territory's default everyday app, phone-anchored and visible across Meta's graph. During the 2019 protests, organizers moved en masse to Telegram and Signal specifically to get away from that default. Since the 2020 National Security Law, messaging activity and social-platform records have been used as evidence in national-security and sedition cases[^10], which is the same logic as the regional SIM-registration point above playing out in practice: once the state is the adversary, what a tool's operator and carrier can be compelled to hand over matters more than the label on the box.
+
 ## The trade-offs, tool by tool
 
 ### Signal
@@ -98,3 +100,4 @@ And the inverse, the mistakes this page is meant to prevent: don't treat a phone
 [^7]: [Threema Private](https://threema.com/en/products/private){target="_blank"} — Threema. Can be used anonymously with a randomly generated Threema ID, without a phone number or email.
 [^8]: [GSMA — Mandatory Registration of Prepaid SIM Cards](https://www.gsma.com/public-policy/wp-content/uploads/2021/08/GSMA-Mandatory-Registration-of-Prepaid-SIM-Cards-2021.pdf){target="_blank"} — GSMA, for the regional picture of identity-linked SIM registration.
 [^9]: [Anatomy of a bad idea: Bridgefy's broken encryption](https://blog.cryptographyengineering.com/2020/08/24/anatomy-of-a-bad-idea-bridgefys-broken-encryption/){target="_blank"} — Cryptography Engineering, on the 2020 findings against Bridgefy's encryption design.
+[^10]: [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} — Hong Kong Free Press; and [Hong Kong: New Security Law a Full-Scale Assault on Rights](https://www.hrw.org/news/2024/03/19/hong-kong-new-security-law-full-scale-assault-on-rights){target="_blank"} — Human Rights Watch, on surveillance and prosecutions since the 2020 National Security Law.

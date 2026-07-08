@@ -21,8 +21,15 @@ A few things the general guides under-weight for this region:
 - **Network-level observation.** Deep packet inspection and lawful-intercept tooling documented in the region (see the [Regional Observatory](../regional/index.md)) means network surveillance belongs in the threat model, not just on-the-ground policing.
 - **Coordination metadata.** Group-chat membership is itself sensitive: who is in the room, who joined when. Content encryption alone does not cover it. See [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md).
 
+## Hong Kong: a sharper risk tier
+
+Everything in the delta above still applies, but Hong Kong sits in a different risk category, not just a stricter version of the same one. Since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance ([the Article 23 legislation](https://hongkongfp.com/article23-security-law/){target="_blank"}), the maximum sentence for sedition alone rose from 2 years to 7, and to 10 with a foreign element. National-security police can seize a device under warrant, and a decryption obligation in force since March 2026 compels a person under national-security investigation to hand over device passwords, with up to a year's imprisonment for refusal (see the Hong Kong entry in our [VPN risks and choices](../tools/vpn-guide.md) guide for the fuller legal picture). Assembly participation, group-chat membership, and ordinary device content can all become evidence in a national-security case, a different order of consequence than the fine-based public-order enforcement common elsewhere in the delta above.
+
+Local organizations that once absorbed this kind of risk, the Civil Human Rights Front and the Hong Kong Confederation of Trade Unions among them, dissolved under pressure in 2021. Treat "there's a local group that handles this" as no longer reliably true, and route to international organizations instead: [Reporters Without Borders](https://rsf.org/en){target="_blank"}, the [Committee to Protect Journalists](https://cpj.org/){target="_blank"}, the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual), and [Citizen Lab](https://citizenlab.ca/){target="_blank"} for device forensics.
+
 ## Where to go from here
 
 - [Attending a Protest](https://ssd.eff.org/module/attending-protest){target="_blank"} — the canonical guide, in multiple languages
 - [Cross-border travel and device searches](./asia-travel.md) — for organizers moving across the region
 - [Threat modeling](../basics/threat-model.md) — run the five questions for your specific action
+- [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if you or someone in your network is detained or a device is seized

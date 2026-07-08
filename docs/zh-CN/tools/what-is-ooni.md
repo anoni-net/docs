@@ -116,7 +116,7 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 ??? question "我在家里跑 OONI Probe，会不会被 ISP 标记？"
 
-    OONI Probe 的测试行为（连到一份公开的测试清单上的网站、记录回应）跟一般使用者浏览网页差别不大，多数网路环境下没有特殊风险。预设清单（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多数高敏感类型的网站。在审查严格的国家（如中国、伊朗）情况不同，OONI 官方文件有额外的风险说明，启用前建议查阅。
+    OONI Probe 的测试行为（连到一份公开的测试清单上的网站、记录回应）跟一般使用者浏览网页差别不大。以台湾为例，anoni.net 目前没有观察到任何 ISP 因为跑 OONI 而封锁或警告使用者的案例，但这是特定地区的观察，不能直接套用到其他地方。预设清单（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多数高敏感类型的网站。香港在 2020 年《国安法》后监控与寒蝉效应升高，跑检测前建议先读 [VPN 的风险与选择](./vpn-guide.md)，评估自身处境。在审查严格的国家（如中国、伊朗）情况又不同，OONI 官方文件有额外的风险说明，启用前建议查阅。
 
 ??? question "OONI 检测会不会误判？"
 

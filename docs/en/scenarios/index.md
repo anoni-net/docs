@@ -10,6 +10,10 @@ Tools are neither good nor bad in the abstract. Their value depends on whether t
 
 Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the [regional observatory](../regional/index.md) to specific lived practice.
 
+!!! note "Hong Kong and Macau readers: expect a higher risk tier"
+
+    Most of the scenarios below default to Taiwan or general Sinophone Asia-Pacific examples. Read that framing as a floor, not a ceiling, for Hong Kong. Since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, national-security offenses carry sentences measured in years rather than fines, national-security police can seize and forensically examine a device under warrant, and the local civil-society organizations that once absorbed this kind of risk have largely dissolved since 2021. Where a scenario below assumes a functioning local NGO safety net, that assumption often no longer holds; the [activists](./activist.md) and [journalists](./journalist.md) pages route Hong Kong readers to international organizations instead. Macau's environment differs again and is comparatively under-documented here.
+
 ## :material-check-circle-outline: Available now
 
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account separation, dating-app risk, cross-platform correlation, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora.

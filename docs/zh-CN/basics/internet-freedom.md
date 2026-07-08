@@ -18,11 +18,15 @@ icon: material/chat-question
 
 ## 东亚
 
-中国的「长城防火墙[^1]」长期过滤大量国际网站与服务，并对境内平台内容进行政治、宗教与社会议题上的审查。朝鲜则将一般民众与全球互联网几乎隔绝，仅能使用国家管控下的内部网络「光明网[^2]」。
+中国的「长城防火墙[^1]」长期过滤大量国际网站与服务，并对境内平台内容进行政治、宗教与社会议题上的审查。朝鲜则将一般民众与全球互联网几乎隔绝，仅能使用国家管控下的内部网络「光明网[^2]」。香港则在 2020 年《国安法》生效后出现具体的网站封锁，警方依《国安法》第 43 条要求 ISP 以 DNS 篡改封锁 HKChronicles（香港编年史）、Hong Kong Watch 等网站，2024 年《维护国家安全条例》（基本法 23 条立法）进一步扩大调查与下架权限[^hk]。
 
 2025 年 9 月，大量长城防火墙内部资料外流（约 500GB 到 600GB，来自承包商 Geedge Networks 与中国科学院信息工程研究所旗下的 MESA Lab），文件显示这套审查与监控技术已向外输出，至少涵盖哈萨克斯坦、埃塞俄比亚、缅甸、巴基斯坦等国，并提及另一个未具名国家[^11]。这让「把审查系统当产品输出」从外界推测，变成有内部文件层级的佐证。
 
 区域内各地的开放程度差异很大。即使是相对开放的地区（如台湾[^10]），也面对跨境平台治理、信息安全与政治性操纵的讨论，以及对新闻与倡议工作者的法律与舆论压力。各国分数与叙事会随调查年度更新，建议用 Freedom House 互动地图逐国查阅。
+
+!!! note "香港读者请注意"
+
+    上面「相对开放的地区」这个框架不适用于香港。香港在 2020 年《国安法》生效后已从「相对开放」进入有具体法律后果与个案的阶段，阅读本站其他文章、评估自身威胁模型时，不要把「目前还相对宽松」的假设套用到香港的处境。
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
@@ -68,7 +72,7 @@ icon: material/chat-question
     <capture>Tor Metrics：台湾地区中继与守护节点（画面随网络状态变动）</capture>
 </figure>
 
-无论是跑 OONI 测试、架设 Tor 中继，或协助翻译与教学，都是在具体支撑网络自由。你可以从下方项目列表挑一项开始。
+无论是跑 OONI 测试、架设 Tor 中继，或协助翻译与教学，都是在具体支撑网络自由。在香港这类国安监控升高的地区，公开架设或宣传 Tor 中继的政治风险与台湾不同，参与前应按在地处境分开评估。你可以从下方项目列表挑一项开始。
 
 ## :fontawesome-solid-diagram-project: 下一步可参与的项目
 
@@ -94,3 +98,4 @@ icon: material/chat-question
 [^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
 [^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另见 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付费墙，标题即点明东南亚首例）
 [^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia
+[^hk]: 香港网站封锁案例见 [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - Hong Kong Free Press。2024 年《维护国家安全条例》（基本法 23 条立法）见 [Hong Kong: New Security Law a Full-Scale Assault on Rights](https://www.hrw.org/news/2024/03/19/hong-kong-new-security-law-full-scale-assault-on-rights){target="_blank"} - Human Rights Watch。香港自由度评级见 [Hong Kong: Freedom in the World 2026](https://freedomhouse.org/country/hong-kong/freedom-world/2026){target="_blank"} - Freedom House。

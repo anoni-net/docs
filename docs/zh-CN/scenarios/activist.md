@@ -300,6 +300,15 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 - 装置疑似被植入监控、需要鑑识：[Citizen Lab](https://citizenlab.ca/){target="_blank"}
 - 紧急情况见 [紧急求救](../help/index.md)
 
+## 香港的脉络
+
+前面的技术操作（burner、Signal/Matrix 分层、EXIF 清除）多半通用，但香港的法律风险层级与求助生态跟台湾差很多，不能照抄台湾的假设。
+
+- **法规量级不同**：香港《国安法》（2020）与 2024 年《维护国家安全条例》（基本法 23 条立法）下，煽动罪最高刑期已从 2 年提高到 7 年（涉境外势力达 10 年），另有分裂国家、颠覆、境外干预等罪，最重可判终身监禁。参与集会、群组通讯、装置内容都可能成为国安案件的证据，国安处可扣押装置作鑑识，跟台湾以罚锾为主的集游法、社维法不是同一量级。
+- **本地求助管道大幅萎缩**：香港民间人权阵线、职工盟等组织已于 2021 年在国安压力下解散，「找本地 NGO 就有支援」在香港多半已不成立。数位安全与风险评估建议转向国际组织，如 [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} 与 [Citizen Lab](https://citizenlab.ca/){target="_blank"}，若行动本身涉及新闻工作或对外发声，也可参考 [RSF 无国界记者](https://rsf.org/en){target="_blank"} 与 [CPJ 保护记者委员会](https://cpj.org/){target="_blank"}。人身安全若有立即风险，优先考虑离开当地或联系国际人权组织的紧急协助。
+
+查证来源（2026-07）：[Article 23: Hong Kong's 2024 security law](https://hongkongfp.com/article23-security-law/){target="_blank"} - Hong Kong Free Press、[Safeguarding National Security Ordinance](https://en.wikipedia.org/wiki/Safeguarding_National_Security_Ordinance){target="_blank"} - Wikipedia。
+
 ## 接下来
 
 - [威胁模型如何建立](../basics/threat-model.md)：每场行动前先盘点对手与资产
