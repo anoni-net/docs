@@ -6,7 +6,7 @@ icon: material/dice-multiple-outline
 
 # :material-dice-multiple-outline: Asian Diceware: an Asian-flavored passphrase wordlist
 
-A long random password is the safest option, but nobody can remember one — so most people fall back on a birthday plus a pet's name and reuse it everywhere. There is an easier way: roll a few dice, pull a handful of English words from a fixed list, and string them together as your password. This kind of "passphrase" is easy to remember and easy to type, yet far stronger than a hand-picked password. You have probably encountered this idea before (the next section lists a few examples). What we made is an Asian-flavored version, blending in Asian loanwords that English already absorbed, so the words feel familiar to people who grew up around Asian languages and food. You will find `oolong`, `boba` (bubble tea, which originated in Taiwan), `tofu`, and `pinyin` in there, alongside `ramen`, `matcha`, `kimchi`, and `typhoon`, plus a few you might not realize are loanwords at all, like `shampoo` (from Hindi) and `ketchup` (whose root traces to Hokkien). The full list and the word-choice rules are in [What we made](#What-we-made) below. Before you start, read [Threat modeling](../basics/threat-model.md) to be clear about who you are defending against.
+A long random password is the safest option, but nobody can remember one — so most people fall back on a birthday plus a pet's name and reuse it everywhere. There is an easier way: roll a few dice, pull a handful of English words from a fixed list, and string them together as your password. This kind of "passphrase" is easy to remember and easy to type, yet far stronger than a hand-picked password. You have probably encountered this idea before (the next section lists a few examples). What we made is an Asian-flavored version, blending in Asian loanwords that English already absorbed, so the words feel familiar to people who grew up around Asian languages and food. You will find `oolong`, `boba` (bubble tea, which originated in Taiwan), `tofu`, and `pinyin` in there, alongside `ramen`, `matcha`, `kimchi`, and `typhoon`, plus a few you might not realize are loanwords at all, like `shampoo` (from Hindi) and `ketchup` (whose root traces to Hokkien). The full list and the word-choice rules are in [What we made](#What-we-made) below.
 
 ## You have already seen this idea
 
@@ -29,28 +29,27 @@ asian-diceware is a 7,776-word, EFF-compatible wordlist that works as a drop-in 
 
 Many of these are already everyday English words anywhere, with extra resonance for anyone who grew up around Asian languages and food: `tofu`, `ramen`, `miso`, `matcha`, `karaoke`, `tsunami`, `kimchi`, `bibimbap`, `typhoon`, `oolong`, `yoga`, `karma`, `curry`, `mango`. Some carry a Sinophone flavor — `oolong`, `boba` (bubble tea, which originated in Taiwan), `ketchup` (whose root traces to Hokkien, a southern Chinese language), `pinyin`. Others you might not realize are Asian loanwords at all, like `shampoo`, `bungalow`, `jungle`, `gecko`, `bazaar`, and `guru`.
 
-Two limits on word choice are deliberate. First, a loanword must be a single English-dictionary token, so spaced forms like `feng shui`, `kung fu`, and `dim sum` are out. Second, we do not transliterate Chinese ourselves, because several competing romanization systems coexist across the Sinophone world (Hanyu Pinyin, Wade-Giles, and Tongyong for Mandarin; Jyutping and other systems for Cantonese, as used in Hong Kong), so we only accept words whose English spelling is already fixed in a dictionary.
+Two limits on word choice are deliberate. First, a loanword must be a single word in an English dictionary, so spaced forms like `feng shui`, `kung fu`, and `dim sum` are out. Second, we do not transliterate Chinese ourselves, because several competing romanization systems coexist across the Sinophone world (Hanyu Pinyin, Wade-Giles, and Tongyong for Mandarin; Jyutping and other systems for Cantonese, as used in Hong Kong), so we only accept words whose English spelling is already fixed in a dictionary.
+
+Asian loanwords are only about 3.8% of the list, so a six-word passphrase carries an Asian word only about one time in five; the rest are common English words. That is deliberate: the security is identical to the original EFF list, and the Asian flavor is a bonus, not something to expect in every draw.
+
+??? note "Why only ~3.8%?"
+    Treat the 3.8% (292 of 7,776 words) like a beer's ABV: a deliberately chosen number, not a watered-down accident. The share is capped by how many *recognizable* Asian loanwords English has actually absorbed as single dictionary words. An exhaustive OED / Merriam-Webster / Cambridge sweep turns up roughly 330 that a Sinophone reader would recognize; 292 are pinned and about 40 are held in reserve, so the recognizable well is nearly dry.
+
+    Pushing much higher (say 10%, ≈ 778 words) would force one of two things, and we want neither:
+
+    - **Flooding the list with obscure words** (`puttee`, `howdah`, `nilgai`, `maund`) that most people can't spell, say, or recall. That breaks the EFF property this list exists to keep: a passphrase you can write down and read back without errors.
+    - **Switching to romanized Mandarin or Zhuyin syllables.** That is a separate project — Hanyu Pinyin, Wade-Giles, and Tongyong all coexist, so spellings collide and turn ambiguous.
+
+    A higher percentage does not make the passphrase stronger. Every word carries the same weight whether it is `tofu` or `the`; the entropy comes from the list being exactly 7,776 words with each die roll uniform, never from where the words came from. So unlike beer, "higher proof" buys you nothing here, and usability wins when it conflicts with cultural coverage.
 
 The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0); the source and full list are at [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. The list itself only makes the individual words easy to recognize and remember; it provides no encryption. The real security comes from how you generate, store, and use the passphrase.
-
-Looking ahead, the community also wants to build an anonymous-service platform along the lines of [AnonTicket](https://anonticket.torproject.org/){target="_blank"} (still at the planning stage), where an account is identified by a string of random words instead of an email — and this list is meant to be the word source for those codes.
-
-## Why only ~3.8%?
-
-Treat the 3.8% (292 of 7,776 words) like a beer's ABV: a deliberately chosen number, not a watered-down accident. The share is capped by how many *recognizable* Asian loanwords English has actually absorbed as single dictionary words. An exhaustive OED / Merriam-Webster / Cambridge sweep turns up roughly 330 that a Sinophone reader would recognize; 292 are pinned and about 40 are held in reserve, so the recognizable well is nearly dry.
-
-Pushing much higher (say 10%, ≈ 778 words) would force one of two things, and we want neither:
-
-- **Flooding the list with obscure words** (`puttee`, `howdah`, `nilgai`, `maund`) that most people can't spell, say, or recall. That breaks the EFF property this list exists to keep: a passphrase you can write down and read back without errors.
-- **Switching to romanized Mandarin or Zhuyin syllables.** That is a separate project — Hanyu Pinyin, Wade-Giles, and Tongyong all coexist, so spellings collide and turn ambiguous.
-
-And here is where the ABV analogy breaks down: a higher percentage does not make the passphrase stronger. Every word carries the same 12.925 bits, whether it is `tofu` or `the`. The entropy comes from the list being exactly 7,776 words with each die roll uniform, never from where the words came from. The Asian share changes flavor and recognizability, never security. So unlike beer, "higher proof" buys you nothing here, and usability wins when it conflicts with cultural coverage.
 
 ## How to use it
 
 Rolling dice against a table is the most direct way; a handful of dice plus one table is enough, no coding required. There are two ways to get the table: print the A5 booklet ([download the PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}; see [Print a booklet](#Print-a-booklet) below), or open the dice file [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"} on GitHub.
 
-**Method 1 — physical dice.** Roll 5 dice and read them left to right as a five-digit number (each die 1–6). The table is sorted in numeric order (from 11111 to 66666), so you can flip close to your number, or search for the line that starts with your five digits; the word after it is the one you drew. Repeat six times and join them with `-`. For example, rolling `6 3 4 4 4` reads as `63444`, which maps to `tofu`.
+**Method 1 — physical dice.** Roll 5 dice and read them left to right as a five-digit number (each die 1–6). The table is sorted in numeric order (from 11111 to 66666), so you can flip close to your number, or search for the line that starts with your five digits; the word after it is the one you drew. Repeat six times and join them with `-`. For example, rolling `6 3 4 4 4` reads as `63444`, which maps to `tofu`. After six rolls you might hold a passphrase like `tofu-oolong-gecko-mango-bazaar-haiku` — easy to read out and copy down, far more memorable than a random string.
 
 No dice? They are cheap: stationery shops, convenience stores, and game shops all carry them, a set costs next to nothing, or you can borrow a few. Alternatively, use an offline dice-roll app (turn off the network first). Dice plus a table — print a booklet and you are set — is the complete method, with no computer needed at any point. Only if you want to skip the dice and you can code a little do you need the shortcuts below.
 
@@ -90,7 +89,7 @@ A passphrase is not only for logins; this "number-to-word" table is useful in se
 - **Passwords you have to type by hand:** a home Wi-Fi password, signing in to a streaming account on a TV or game console, a device shared with family — anywhere you enter it character by character, a random string is painful while a passphrase is easy to type and say.
 - **Passphrases for encrypted disks, backups, and keys:** full-disk encryption, encrypted backups, a PGP private key — anything where a typo locks you out and a leak exposes everything.
 - **Verification numbers you read aloud:** to check a key fingerprint or safety number, encode the number with this table and read the words instead of the digits; it is far less error-prone. This is what the PGP word list does[^pgpwords].
-- **A shared codebook with a trusted contact:** use the list as a private codebook to confirm identity or pass a pre-arranged signal — see the next section.
+- **A shared codebook with a trusted contact:** use the list as a private codebook to confirm identity or pass a pre-arranged signal — see [the codebook section](#Agreeing-on-a-codebook-with-someone-you-trust) below.
 
 ## How strong are six words
 
@@ -125,14 +124,14 @@ One caveat: the equivalence above only holds for truly random generation. A pass
 
 No matter how good the list, if the word-picking is not random, the whole passphrase falls apart.
 
-- **Always use true randomness:** physical dice, or a cryptographically secure RNG (Python's `secrets`, `/dev/urandom`). Do not use a non-secure RNG like `random`, do not hand-pick words, and do not choose ones that "look random" — human-picked words are far easier to guess.
+- **Always use true randomness:** physical dice are the simplest. If you generate with code instead, use a cryptographically secure method (see the developer note above); do not hand-pick words, and do not choose ones that "look random" — human-picked words are far easier to guess.
 - **Do not rewrite it into a sentence:** if `tofu-ramen-gecko` reads awkwardly and you smooth it into a fluent phrase, you have destroyed the randomness. Keep the order and words exactly as drawn.
 - **Do not reuse:** one passphrase, one place; a master password especially must not be shared with any other service. Unless it may have leaked, you do not need to rotate it on a schedule — frequent changes tend to become unmemorable or reused. If a service does report a breach, just change that one account.
 - **Store it immediately:** do not screenshot it to a cloud photo album or paste it into a chat. Save it straight into your password manager's vault, or write it on paper and lock it away. When rolling, watch for shoulder surfers.
 
 ## Agreeing on a codebook with someone you trust
 
-For everyday password use, the section above is enough. This section covers an advanced use of the list, for those who need it.
+For everyday password use, the section above is enough. This section covers an advanced use of the list — journalists, civil-society groups, and anyone who needs to pass a low-key signal may find it especially useful.
 
 !!! warning "Know its limits first"
     This kind of code is obfuscation, not encryption. It stops a casual onlooker, but not an adversary who records messages to compare later or who obtains what you agreed on, and certainly not state-level surveillance. If the content truly cannot leak, or someone's safety depends on it, do not rely on this alone — pair it with end-to-end encrypted tools (see [Secure messaging compared](./messaging-comparison.md)) and a complete safety plan. The uses below all assume this.
@@ -160,6 +159,9 @@ The wordlist is CC-BY-4.0, so anyone can print it and hand it out. When the comm
 
 !!! tip "Download the A5 booklet (PDF)"
     [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"} (about 36 pages; prints on A4 or US Letter with any home or shop printer, then fold into a booklet). The wordlist data is CC-BY-4.0, so you are welcome to print, hand out, and reuse it — please keep the attribution on the colophon page.
+
+!!! info "Still planning: an anonymous-service platform"
+    Looking ahead, the community also wants to build an anonymous-service platform along the lines of [AnonTicket](https://anonticket.torproject.org/){target="_blank"} (still at the planning stage), where an account is identified by a string of system-generated random words instead of an email. AnonTicket is a Tor Project service for filing anonymous reports, and this asian-diceware list is meant to be the word source for those codes.
 
 ## :material-chat-question: Related reading
 
