@@ -39,6 +39,8 @@ icon: material/cash-multiple
 
 過去十多年，PayPal、Venmo、Stripe 等金融中介反覆關停或凍結特定使用者的帳號。被波及的對象常常跟言論性質或地緣風險相關，像是教波斯詩歌的美國公民被 PayPal 凍結戶頭，紐約一位穆斯林市議員候選人因為 Venmo 轉帳備註出現「Al-Aqsa」（一間餐廳、也是知名清真寺的名字）而被擋，長年架設 Tor 中繼節點、用 PayPal 支付伺服器費用的個人被無預警關停帳號。前 EFF Activism Director Rainey Reitman 在新書《Transaction Denied》整理了這條脈絡，書中追問金融中介能否擔任線上言論的仲裁者。
 
+金流審查也不只發生在美國。為 2019 年反送中運動被捕者提供人道援助的「612 人道支援基金」，在壓力下於 2021 年宣布停止運作，五名信託人（包括陳日君樞機、前立法會議員吳靄儀、歌手何韻詩等）2022 年 5 月一度以《國安法》第 29 條「勾結外國勢力」被捕，最終檢方未循《國安法》起訴，改以《社團條例》未註冊定罪、各被罰款[^hk]。對香港的捐款人而言，這裡的風險層級遠高於「帳號被平台停用」，除了收款管道被切斷，資金用途本身可能被定性為危害國家安全。
+
 對個人使用者來說，「金流隱私」既包含別人能否看到我付了什麼，也包含我的收款管道是否會被單方面切斷。社群在 [金融公司也能當審查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相關案例與台灣處境，[匿名支付研究專題](../community/payments-research.md) 也持續追蹤相關討論。
 
 ## 現金是最成熟的匿名支付
@@ -100,3 +102,5 @@ icon: material/cash-multiple
 - 進階面：[零知識身分驗證與支付](../advanced/zk-identity-payments.md)
 - 在地面：[台灣 VASP 法 2026](../taiwan/vasp-2026.md)
 - 社群研究入口：[匿名支付研究專題](../community/payments-research.md)
+
+[^hk]: 「612 人道支援基金」信託人案見 [Cardinal Zen and 4 others appeal against conviction over failing to register protester relief fund as society](https://hongkongfp.com/2022/12/14/cardinal-zen-and-4-others-appeal-against-conviction-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"} - Hong Kong Free Press。

@@ -27,7 +27,7 @@ icon: material/chat-question
 
 連線層的自由，在於你能不能連上想連的服務、用信任的工具，過程中不留下能識別到你的痕跡。
 
-這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](../community/roadmap-2026.md)，把台灣的頻寬納入全球 Tor 網路的基礎建設。
+這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](../community/roadmap-2026.md)，把台灣的頻寬納入全球 Tor 網路的基礎建設。在香港這類國安監控升高的地區，公開架設或宣傳 Tor relay 的政治風險與台灣不同，參與前要按在地處境分開評估。
 
 ### 個資與身分的自由
 
@@ -46,7 +46,11 @@ icon: material/chat-question
 
 ## 區域脈絡：為什麼這在台灣也值得關注
 
-台灣的連線環境放在區域裡面看仍是相對開放的，但「相對」承擔的條件來自鄰近地區的具體事件。中國的「長城防火牆[^1]」長期過濾大量國際網站，並對境內平台內容進行政治、宗教、社會議題的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管的內部網路「光明網[^2]」。東南亞各地有越南要求平台下架政治性批評內容[^3]、印尼對特定類別網站封鎖[^4]、馬來西亞針對調查報導媒體的封鎖[^5]、菲律賓對獨立新聞媒體的撤照與施壓[^6]、泰國對皇室相關言論的刑事追訴[^7]、緬甸 2021 年政變後反覆斷網[^8][^9]。除了封鎖網站，管制也延伸到工具與使用者本身。印尼自 2026 年 3 月起率先在東南亞禁止未滿 16 歲者使用社群媒體[^12]。緬甸在 2025 年通過資安法（Cybersecurity Law），把未經許可提供 VPN 服務入罪[^13]。台灣同樣面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力（Freedom House 的分數與敘事隨年度報告更新[^10]）。這些看似鄰國的事，和台灣的距離比想像中近。台灣同處這條海纜與網路治理的鏈上，鄰近地區用過的管制手段、對外輸出的監控技術，都可能改變我們明天的連線條件。
+台灣的連線環境放在區域裡面看仍是相對開放的，但「相對」承擔的條件來自鄰近地區的具體事件。中國的「長城防火牆[^1]」長期過濾大量國際網站，並對境內平台內容進行政治、宗教、社會議題的審查。北韓則將一般民眾與全球網際網路幾乎隔絕，僅能使用國家控管的內部網路「光明網[^2]」。東南亞各地有越南要求平台下架政治性批評內容[^3]、印尼對特定類別網站封鎖[^4]、馬來西亞針對調查報導媒體的封鎖[^5]、菲律賓對獨立新聞媒體的撤照與施壓[^6]、泰國對皇室相關言論的刑事追訴[^7]、緬甸 2021 年政變後反覆斷網[^8][^9]。香港則在 2020 年《國安法》後出現具體的網站封鎖，警方依《國安法》第 43 條要求 ISP 以 DNS 竄改封鎖 HKChronicles（香港編年史）、Hong Kong Watch 等網站，2024 年《維護國家安全條例》（基本法 23 條立法）再擴大調查與下架權限[^hk]。除了封鎖網站，管制也延伸到工具與使用者本身。印尼自 2026 年 3 月起率先在東南亞禁止未滿 16 歲者使用社群媒體[^12]。緬甸在 2025 年通過資安法（Cybersecurity Law），把未經許可提供 VPN 服務入罪[^13]。台灣同樣面對跨境平台治理、資安與政治性操弄的討論，以及對新聞與倡議工作者的法律與輿論壓力（Freedom House 的分數與敘事隨年度報告更新[^10]）。這些看似鄰國的事，和台灣的距離比想像中近。台灣同處這條海纜與網路治理的鏈上，鄰近地區用過的管制手段、對外輸出的監控技術，都可能改變我們明天的連線條件。
+
+!!! note "香港與其他正體中文讀者"
+
+    上面台灣「相對開放」的起點跟香港不一樣。香港在 2020 年後已從「相對開放」進入有具體法律後果與個案的階段，閱讀本站其他文章時，不要把「目前還相對寬鬆」的假設套到自己身上，威脅模型要按所在地區重新評估。
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
@@ -107,3 +111,4 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 [^11]: [Geedge & MESA Leak: Analyzing the Great Firewall's Largest Document Leak](https://gfw.report/blog/geedge_and_mesa_leak/en/){target="_blank"} - GFW Report
 [^12]: [Indonesia social media ban for minors comes into effect](https://www.jurist.org/news/2026/03/indonesia-social-media-ban-for-minors-comes-into-effect/){target="_blank"} - JURIST。另見 [Indonesia Starts First Southeast Asia Social Media Ban for Kids](https://www.bloomberg.com/news/articles/2026-03-28/indonesia-starts-first-southeast-asia-social-media-ban-for-kids){target="_blank"} - Bloomberg（付費牆，標題即點明東南亞首例）
 [^13]: [Myanmar enacts cybersecurity law that aims to restrict use of VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - Radio Free Asia
+[^hk]: 香港網站封鎖案例見 [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - Hong Kong Free Press。2024 年《維護國家安全條例》（基本法 23 條立法）見 [Hong Kong: New Security Law a Full-Scale Assault on Rights](https://www.hrw.org/news/2024/03/19/hong-kong-new-security-law-full-scale-assault-on-rights){target="_blank"} - Human Rights Watch。香港自由度評級見 [Hong Kong: Freedom in the World 2026](https://freedomhouse.org/country/hong-kong/freedom-world/2026){target="_blank"} - Freedom House。

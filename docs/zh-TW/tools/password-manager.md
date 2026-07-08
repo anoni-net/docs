@@ -152,15 +152,20 @@ Passkey 是基於 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target=
 
 Tails 使用者：把 `.kdbx` 存進 Persistent Storage 並另外備份到加密硬碟。Tails 預設關機就清空，沒做 Persistent Storage 設定的話下次開機什麼都沒了。
 
-## 在台灣的補充
+## 在台灣與香港的補充
 
-台灣有幾個跟密碼管理器相關的特殊情境，國際指南通常不會提：
+台灣、香港有幾個跟密碼管理器相關的特殊情境，國際指南通常不會提：
 
 - **簡訊 2FA 是常態但不安全**：銀行（網銀、信用卡 OTP）、政府服務（自然人憑證、健保署）多半依賴簡訊。能改 TOTP 的服務（Google、Microsoft、PChome、蝦皮、各家交易所）一律改，並把 recovery codes 存進金庫
 - **SIM swap 在台近年常見**：跟電信業者設定「號碼異動需臨櫃 + 雙重驗證」，避免攻擊者打客服就能把門號移走
 - **雙證件帳號**：自然人憑證、行動自然人憑證、健保卡的 PIN 與恢復碼存進金庫，但**主密碼仍要跟這些 PIN 分開**
 - **Apple ID 在台等同關鍵帳號**：很多服務（電商、串流、訂閱制 app）透過 Sign in with Apple 登入，Apple ID 失守會連帶失去多個服務。Apple ID 本身務必開 2FA、設 Recovery Contacts
 - **被盜後的補救**：見 [緊急求救](../help/index.md) 的「帳號被盜或被異常登入」章節，這篇是預防、求救頁是事後補救
+
+香港的對應情境：
+
+- **政府與銀行服務的 2FA**：HKID、iAM Smart（政府數位身分）與網銀多用簡訊 OTP，SIM swap 同樣存在，能改 TOTP 的服務就改，recovery codes 存進金庫。
+- **Apple ID 一樣是關鍵帳號**：Sign in with Apple 綁定多個服務的邏輯在香港一樣成立，務必開 2FA 與 Recovery Contacts。
 
 ## :material-chat-question: 一同瞭解
 
