@@ -112,7 +112,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 ??? question "我在家裡跑 OONI Probe，會不會被 ISP 標記？"
 
-    OONI Probe 的測試行為（連到一份公開的測試清單上的網站、記錄回應）跟一般使用者瀏覽網頁差別不大。在台灣，目前沒有任何 ISP 因為跑 OONI 而封鎖或警告使用者的案例。如果擔心，預設清單（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多數高敏感類型的網站。「沒有案例」是台灣威脅模型下的觀察，不能直接套到別處：香港在 2020 年《國安法》後監控與寒蟬效應升高，跑檢測前建議先讀 [VPN 的風險與選擇](./vpn-guide.md) 的香港段評估自身處境。在審查嚴格的國家（如中國、伊朗）情況又不同，OONI 官方文件有額外的風險說明。
+    OONI Probe 的測試行為（連到一份公開的測試清單上的網站、記錄回應）跟一般使用者瀏覽網頁差別不大。在台灣，目前沒有任何 ISP 因為跑 OONI 而封鎖或警告使用者的案例。如果擔心，預設清單（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多數高敏感類型的網站。「沒有案例」是台灣威脅模型下的觀察，不能直接套用到其他地方。香港在 2020 年《國安法》後監控與寒蟬效應升高，跑檢測前建議先讀 [VPN 的風險與選擇](./vpn-guide.md) 的香港小節，評估自身處境。在審查嚴格的國家（如中國、伊朗）情況又不同，OONI 官方文件有額外的風險說明。
 
 ??? question "OONI 檢測會不會誤判？"
 

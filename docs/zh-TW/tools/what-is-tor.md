@@ -58,7 +58,7 @@ Tor 的節點分兩類：公開的中繼點（Relay）與隱藏的橋接點（Br
 - **meek**：把流量包裝成連到 Microsoft Azure 這類大型雲端服務（早年也用過 Google、Cloudflare，後來這些業者陸續關閉了 domain fronting），審查者要嘛全擋這些服務，要嘛放行。
 - **[Snowflake](./tor-snowflake.md)**：把流量包裝成 WebRTC（視訊會議常用協議），由全球志工的瀏覽器分頁臨時當橋接。
 
-在台灣、香港這類對外連線不受全面封鎖的地方，使用 Tor 不需要橋接（直接用公開中繼就連得上），也可以開 [Snowflake 瀏覽器分頁](./tor-snowflake.md) 變成橋接給審查地區的人用。這是門檻最低的網路自由貢獻方式，香港讀者參與前的風險評估見 [Tor Snowflake 橋接點](./tor-snowflake.md) 的說明。
+在台灣，使用 Tor 不需要橋接（直接用公開中繼就連得上），也可以開 [Snowflake 瀏覽器分頁](./tor-snowflake.md) 變成橋接給審查地區的人用，這是門檻最低的網路自由貢獻方式。香港對外連線同樣不受全面封鎖、技術上可行，但參與前要評估國安監控的風險，見 [Tor Snowflake 橋接點](./tor-snowflake.md) 的香港小節。
 
 ## Tor 適合做什麼、不適合做什麼
 
