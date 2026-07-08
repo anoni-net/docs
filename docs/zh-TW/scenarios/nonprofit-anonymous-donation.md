@@ -14,9 +14,9 @@ icon: material/hand-coin-outline
 
 !!! warning "香港與跨境捐款讀者請先讀"
 
-    這篇的法規脈絡是台灣的（公益勸募條例、政治獻金法、VASP）。香港的風險層級不同，也高得多。在「612 人道支援基金」案裡，這筆為 2019 年反修例運動被捕者提供人道援助的眾籌基金遭調查停運，五名信託人一度以《國安法》第 29 條「勾結外國勢力」被捕，最終改以《社團條例》未註冊定罪。對香港的組織與捐款人，核心風險是資金用途本身可能被定性為危害國家安全，匿名捐款技術做得再乾淨也擋不掉這一層。想支持香港公民社會或流亡港人組織的跨境捐款人，同樣要留意香港國安法可能的域外效力。動手前務必按自身所在地重做威脅模型評估。
+    這篇的法規脈絡是台灣的（公益勸募條例、政治獻金法、VASP）。香港的風險層級不同，也高得多。在「612 人道支援基金」案裡，這筆為 2019 年反送中運動被捕者提供人道援助的眾籌基金遭調查停運，五名信託人一度以《國安法》第 29 條「勾結外國勢力」被捕，最終改以《社團條例》未註冊定罪。對香港的組織與捐款人，核心風險是資金用途本身可能被定性為危害國家安全，匿名捐款技術做得再乾淨也擋不掉這一層。想支持香港公民社會或流亡港人組織的跨境捐款人，同樣要留意香港《國安法》可能的域外效力。動手前務必按自身所在地重做威脅模型評估。
 
-    查證來源（2026-07）：[Cardinal Zen and 4 others appeal against conviction](https://hongkongfp.com/2022/12/14/cardinal-zen-and-4-others-appeal-against-conviction-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"} - Hong Kong Free Press。
+    查證來源（2026-07）：[Cardinal Zen and 4 others appeal against conviction over failing to register protester relief fund as society](https://hongkongfp.com/2022/12/14/cardinal-zen-and-4-others-appeal-against-conviction-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"} - Hong Kong Free Press。
 
 ## 為什麼這個議題要單獨寫
 

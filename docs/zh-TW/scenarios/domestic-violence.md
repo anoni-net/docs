@@ -60,14 +60,14 @@ icon: material/shield-account-outline
 - **勵馨基金會**：[https://www.goh.org.tw/](https://www.goh.org.tw/){target="_blank"}
 - 各縣市政府社會局家庭暴力暨性侵害防治中心
 
-香港的對應資源與法律落差不同。香港至今沒有專門的反跟蹤騷擾罪（法改會 2000 年建議立法後遭擱置），被跟蹤、起底時只能援引民事侵權、性騷擾或 2021 年新增的「起底」刑事罪名間接處理，保護力道明顯較弱。以下管道相對不受國安法直接衝擊（家暴屬非政治化的公共服務）：
+香港的對應資源與法律落差不同。香港至今沒有專門的反跟蹤騷擾罪（法改會 2000 年建議立法後遭擱置），被跟蹤、起底（未經同意公開他人個人資料、意圖造成傷害，即 doxxing）時只能援引民事侵權、性騷擾或 2021 年新增的「起底」刑事罪名間接處理，保護力道明顯較弱。以下管道相對不受《國安法》直接衝擊（家暴屬非政治化的公共服務）：
 
 - **社會福利署 24 小時熱線**：2343 2255
 - **和諧之家（Harmony House）**：24 小時婦女熱線 2522 0434、男士熱線 2295 1386
 - **風雨蘭（RainLily）**：香港首間性暴力危機支援中心，求助熱線 2375 5322
-- **明愛向晴軒 向晴熱線**：18288，24 小時危機支援
+- **明愛向晴軒（向晴熱線）**：18288，24 小時危機支援
 
-查證來源（2026-07）：[風雨蘭服務](https://rainlily.org.hk/chi/service){target="_blank"} - ACSVAW 關注婦女性暴力協會、[和諧之家 24 小時婦女熱線](https://findahelpline.com/organizations/24-harmony-house-24-hour-woman-hotline){target="_blank"}、[Stalking](https://familyclic.hk/en/category/topics/daily-lives-legal-issues/stalking/){target="_blank"} - Family CLIC。
+查證來源（2026-07）：[風雨蘭服務](https://rainlily.org.hk/chi/service){target="_blank"} - ACSVAW 關注婦女性暴力協會、[和諧之家 24 小時婦女熱線](https://findahelpline.com/organizations/24-harmony-house-24-hour-woman-hotline){target="_blank"} - findahelpline.com、[Stalking](https://familyclic.hk/en/category/topics/daily-lives-legal-issues/stalking/){target="_blank"} - Family CLIC。
 
 ## 暫時可以參考的內容
 
