@@ -16,6 +16,12 @@ This page is that individual guide. It assumes the mission has its own security 
 
 Before the tooling, get the framing straight. Observation is a high-stakes role precisely because the data you gather is *meant* to be evidence. That makes [threat modeling](../basics/threat-model.md) the first step, and [metadata](../basics/metadata.md) the concept that drives most of the device-handling advice below.
 
+!!! warning "Hong Kong readers: the premise of this page may not hold"
+
+    This page assumes there is a meaningful, competitive election to observe. Since Hong Kong's 2021 electoral overhaul, a Candidate Eligibility Review Committee vets candidates for "patriotism" on advice from a national security committee that is not subject to judicial review, and directly elected seats have been drastically reduced. Independent observation of election fairness has little to attach to under that system. Separately, acting as an independent election observer or monitor as a civil-society actor in Hong Kong may itself be treated as "foreign interference." There is no known public prosecution on this specific point, so that is an inference from how the relevant offenses are scoped, not a documented case. If you want to follow Hong Kong's electoral system, reading existing reporting from Freedom House and international election-observation organizations is a safer route than conducting observation yourself. Treat the rest of this page as guidance for missions elsewhere, not a template for Hong Kong.
+
+    Source (checked July 2026): [2021 Hong Kong electoral changes](https://en.wikipedia.org/wiki/2021_Hong_Kong_electoral_changes){target="_blank"} — Wikipedia.
+
 ## Why an individual observer is a target
 
 Observers are increasingly attacked, not only as institutions but as named people. A 2024 GNDEM/NDI report on the global state of nonpartisan citizen observers' rights documents restrictive laws, politicized accreditation, and escalating violence and harassment as the primary barriers observers face[^1]. Those pressures land on individuals: an accreditation list is a roster of names, a polling-place observer is a face in a room, a mission report has authors.

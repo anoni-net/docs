@@ -302,9 +302,10 @@ Most directly relevant to digital identity management:
 
 - **Post-2020 environment**: Following the National Security Law, civic space has contracted. Some LGBTQ+ advocacy organizations have adjusted operating models or paused activity.
 - **Electronic identity expansion**: iAMSmart and related government e-identity services have expanded service integration; cross-service identity correlation is increasing.
-- **Legal framework**: The 2023 Court of Final Appeal ruling required the government to establish a same-sex civil-union legal framework within two years[^6]. The 2018 QT case established that foreign-spouse visas may not discriminate against same-sex partners.
+- **Legal framework**: The 2023 Court of Final Appeal ruling gave the government two years to establish an alternative legal framework for same-sex partnerships[^6]. That deadline passed in September 2025, when the Legislative Council voted down the government's own Registration of Same-Sex Partnerships Bill 71 votes to nil, the first government bill defeated since the 2021 electoral overhaul[^14]. Hong Kong has no employment anti-discrimination law covering sexual orientation. The 2018 QT case established that foreign-spouse visas may not discriminate against same-sex partners.
+- **No dedicated anti-stalking law**: Hong Kong has never enacted an anti-stalking offense; a 2000 Law Reform Commission proposal was shelved. Someone stalked or doxxed (personal data published without consent and with intent to cause harm) has to rely on civil tort, sexual-harassment law, or a 2021 doxxing offense rather than a purpose-built remedy, a narrower backstop than Taiwan's Stalking and Harassment Prevention Act provides.
 - **Cross-strait device-search environment**: Travel between Hong Kong, Macau, mainland China, and Taiwan involves multiple customs checkpoints with different search standards. A device audit before departure is sensible.
-- **Help channels**: GENDR (女同學社), Rainbow Action (彩虹行動), and the BGCA "Sexuality Without Limits" project are still operating, but contact channels and program rhythms shift; check current status.
+- **Help channels**: GENDR (女同學社), Rainbow Action (彩虹行動), and the BGCA "Sexuality Without Limits" project are still operating, alongside Tung Wah Group of Hospitals' 24-hour "Rainbow Line" (同・一線) support line for sexual and gender minorities at 2217 5959, and [Rainbow of Hong Kong](https://www.rainbowhk.org/){target="_blank"}; contact channels and program rhythms shift, check current status.
 
 ### Singapore
 
@@ -368,3 +369,4 @@ Common threads when moving across the region:
 [^11]: [Marriage Equality Coalition Taiwan](https://equallove.tw/){target="_blank"} — policy advocacy and rights work.
 [^12]: [Taiwan LGBT Family Rights Advocacy](https://www.lgbtfamily.org.tw/){target="_blank"} — counseling on LGBT families and same-sex marriage.
 [^13]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the millions of plaintext messages and virtual-number mappings exposed online.
+[^14]: [Registration of Same-sex Partnerships Bill](https://en.wikipedia.org/wiki/Registration_of_Same-sex_Partnerships_Bill){target="_blank"} — Wikipedia, on the Legislative Council's rejection of the bill in September 2025.

@@ -192,6 +192,15 @@ icon: material/newspaper-variant-outline
 - Citizen Lab（装置鑑识与监控分析）：[https://citizenlab.ca/](https://citizenlab.ca/){target="_blank"}
 - 紧急情况见 [紧急求救](../help/index.md)
 
+## 香港的脉络
+
+中段的技术操作（SecureDrop、metadata 清除、独立录音机、代号对应表隔离）通用，但香港记者面对的对手层级与求助资源跟台湾不同。
+
+- **对手是「国家」级**：2024 年《维护国家安全条例》（SNSO）设有「窃取国家机密」、「境外干预」等罪，未经授权揭露被认定为国家机密的信息，消息来源本人可能直接触犯窃密罪，记者收受、发布也可能被视为共谋，风险远高于台湾通保法、揭弊者保护法的框架。香港记者协会（HKJA）虽仍运作，但持续遭受组织性骚扰，无法简单当成「找 NGO 就安全」的安全网。
+- **求助资源以国际组织为主**：[RSF 无国界记者](https://rsf.org/en){target="_blank"}、[CPJ 保护记者委员会](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多语），装置鑑识找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。
+
+查证来源（2026-07）：[Article 23: Hong Kong's 2024 security law](https://hongkongfp.com/article23-security-law/){target="_blank"} - Hong Kong Free Press。
+
 ## 接下来
 
 - [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能拿到什么

@@ -27,7 +27,7 @@ asian-diceware 是一份 7776 字、与 EFF 相容的密语词表，可以当成
 
 这些外来语对华语圈与亚洲的读者特别好认：`tofu`、`ramen`、`miso`、`matcha`、`karaoke`、`tsunami`、`kimchi`、`bibimbap`、`typhoon`、`oolong`、`yoga`、`karma`、`curry`、`mango`。其中有不少华语圈的味道：`oolong`（乌龙茶）、`boba`（珍珠奶茶，源自台湾）、`ketchup`（源头可追到闽南语）、`pinyin`（拼音）。也有一些你可能没发现是亚洲外来语的字，像 `shampoo`、`bungalow`、`jungle`、`gecko`、`bazaar`、`guru`。
 
-选字有两个刻意的限制。第一，外来语一律收已经进英文字典的单一英文 token，不收 `feng shui`、`kung fu`、`dim sum` 这类有空格的词。第二，我们不自己音译华语，因为华语圈用过汉语拼音、威妥玛、通用拼音几套标准，拼法会打架，所以只收英文拼法已被字典固定下来的字。
+选字有两个刻意的限制。第一，外来语一律收已经进英文字典的单一英文 token，不收 `feng shui`、`kung fu`、`dim sum` 这类有空格的词。第二，我们不自己音译华语，因为华语圈用过汉语拼音、威妥玛、通用拼音几套标准，香港等地另有粤语拼音（Jyutping）等系统，拼法会打架，所以只收英文拼法已被字典固定下来的字。
 
 这份词表开源（代码采 MIT、词表资料采 CC-BY-4.0），原始码与完整词表在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。词表的功能是让抽字这一步更好认好记，本身不涉及加密。真正的安全来自你如何产生、保管与使用密语。
 

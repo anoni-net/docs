@@ -12,6 +12,12 @@ icon: material/hand-coin-outline
 
 要先理解为什么要做到这个程度，可以回头看 [为什么匿名支付重要](../basics/payments-anonymity.md) 与 [威胁模型如何建立](../basics/threat-model.md)。工具细节对应到 [加密货币的隐私光谱](../tools/crypto-privacy-spectrum.md)，台湾法规对应到 [台湾 VASP 法 2026](../taiwan/vasp-2026.md)。
 
+!!! warning "香港与跨境捐款读者请先读"
+
+    这篇最后「台湾的脉络」一节聚焦台湾法规（公益劝募条例、政治献金法、VASP）。香港的风险层级不同，也高得多。在「612 人道支援基金」案里，这笔为 2019 年反送中运动被捕者提供人道援助的众筹基金遭调查停运，五名信托人一度以《国安法》第 29 条「勾结外国势力」被捕，最终改以《社团条例》未注册定罪。对香港的组织与捐款人，核心风险是资金用途本身可能被定性为危害国家安全，匿名捐款技术做得再干净也挡不掉这一层。想支持香港公民社会或流亡港人组织的跨境捐款人，同样要留意香港《国安法》可能的域外效力。动手前务必按自身所在地重做威胁模型评估。
+
+    查证来源（2026-07）：[Cardinal Zen and 4 others appeal against conviction over failing to register protester relief fund as society](https://hongkongfp.com/2022/12/14/cardinal-zen-and-4-others-appeal-against-conviction-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"} - Hong Kong Free Press。
+
 ## 为什么这个议题要单独写
 
 「捐款不就是给个账号然后填收据吗」是最常见的反应。对中性议题（救灾、教育、宠物医疗）来说大致是这样，但下面这几个情境就完全不是：

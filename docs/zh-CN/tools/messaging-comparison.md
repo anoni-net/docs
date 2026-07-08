@@ -196,9 +196,9 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 - **隐私风险不在「对话内容会泄漏」**：在「跟谁、什么时候、多频繁」的图谱分析能力，这层 Meta 集团掌握得很完整
 - **企业账号与广告整合**：WhatsApp Business API 与 Meta 广告系统的整合会持续扩张，这对隐私敏感使用者是长期警示
 
-## 在中国大陆的补充
+## 在中国大陆与香港的补充
 
-几个跟中国大陆使用情境特别相关的补充：
+几个跟中国大陆、香港使用情境特别相关的补充：
 
 **境内可达性**：本文 5 个主名单工具多数被「长城防火墙」（Great Firewall, GFW）封锁，境内直连不稳。整理大致情况：
 
@@ -228,6 +228,12 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 **社群讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社群自架服务](../community/tools.md)。境内访问需可靠的境外网络连接。
 
 **协议层细节**：Signal 与 Matrix 各自的协议设计与威胁模型见 [端对端加密如何运作](../advanced/e2ee.md)。
+
+香港的分流对象与威胁模型跟大陆不同：
+
+- **要分流的主流工具是 WhatsApp（非微信）**：香港最普及的即时通讯是 WhatsApp，跟家人、公司、服务商多半切不掉。务实做法同样是分流，把敏感、长期留痕的对话切到 Signal 或 Matrix，一般生活留在 WhatsApp。
+- **2FA 生态不同**：香港的银行与政府服务（HKID、iAM Smart 数字身份）多用短信 OTP，SIM swap 同样是风险，能改 TOTP 的服务就改，做法见 [密码管理器入门](./password-manager.md) 的对应段落。
+- **威胁模型要对应国安监控**：2019 年反送中运动期间，Telegram、Signal 因为群组动员与较强的加密特性被大量采用。《国安法》之后，通讯与社群平台上的记录成为国安、煽动案件的证据来源[^hk]，这层政治风险跟大陆的合规关切不是同一量级，脉络见 [VPN 的风险与选择](./vpn-guide.md)。
 
 ## 常见问题
 
@@ -280,3 +286,4 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 </div>
 
 [^1]: [Bridgefy, the messenger promising secure, private chat for activists, was a bug-ridden mess](https://blog.cryptographyengineering.com/2020/08/24/anatomy-of-a-bad-idea-bridgefys-broken-encryption/){target="_blank"} - Cryptography Engineering blog
+[^hk]: 香港《国安法》后监控与通讯记录作为证据的脉络见 [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - Hong Kong Free Press。
