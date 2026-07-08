@@ -1,6 +1,6 @@
 ---
 title: 什麼是 OONI
-description: OONI 是讓網路審查可被觀測的開放工具與資料集。在台灣可以用它把「連不上」、「跑很慢」這些個人感受，變成有時間、地點、ASN 對得上的公開觀測紀錄。
+description: OONI 是讓網路審查可被觀測的開放工具與資料集。可以用它把「連不上」、「跑很慢」這些個人感受，變成有時間、地點、ASN 對得上的公開觀測紀錄。
 icon: material/access-point-network
 ---
 
@@ -8,7 +8,7 @@ icon: material/access-point-network
 
 連不上某個網站時，第一個直覺通常是「是我網路有問題嗎？」OONI（Open Observatory of Network Interference，網路干擾開放觀測）就是為了把這種感受轉成可驗證的資料。它提供開源檢測工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 與公開資料平台 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"}，讓任何人都能跑檢測、查紀錄，把封鎖、監控、降速這些行為留下時間、地點、ASN 都對得上的觀測痕跡。
 
-對在台灣的我們，OONI 的核心價值在於讓討論能以資料為基礎。某個網站連不上，不必停在「是不是被封鎖了」的猜測，OONI 能留下時間、地點、ASN 都對得上的紀錄，讓社群、媒體、研究者佐證一次連線異常時有可引用、可重現的依據。也因此，[ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 在台灣才會是個值得長期關注的議題，觀測點越多元，這份紀錄的代表性就越強。
+對正體中文使用者，OONI 的核心價值在於讓討論能以資料為基礎。某個網站連不上，不必停在「是不是被封鎖了」的猜測，OONI 能留下時間、地點、ASN 都對得上的紀錄，讓社群、媒體、研究者佐證一次連線異常時有可引用、可重現的依據。也因此，[ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 在台灣才會是個值得長期關注的議題，觀測點越多元，這份紀錄的代表性就越強。
 
 ## OONI 計畫主要推動事項
 
@@ -112,7 +112,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 ??? question "我在家裡跑 OONI Probe，會不會被 ISP 標記？"
 
-    OONI Probe 的測試行為（連到一份公開的測試清單上的網站、記錄回應）跟一般使用者瀏覽網頁差別不大，台灣目前沒有任何 ISP 因為跑 OONI 而封鎖或警告使用者的案例。如果擔心，預設清單（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多數高敏感類型的網站，可以放心。在審查嚴格的國家（如中國、伊朗）情況不同，OONI 官方文件有額外的風險說明。
+    OONI Probe 的測試行為（連到一份公開的測試清單上的網站、記錄回應）跟一般使用者瀏覽網頁差別不大。在台灣，目前沒有任何 ISP 因為跑 OONI 而封鎖或警告使用者的案例。如果擔心，預設清單（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多數高敏感類型的網站。「沒有案例」是台灣威脅模型下的觀察，不能直接套用到其他地方。香港在 2020 年《國安法》後監控與寒蟬效應升高，跑檢測前建議先讀 [VPN 的風險與選擇](./vpn-guide.md) 的香港小節，評估自身處境。在審查嚴格的國家（如中國、伊朗）情況又不同，OONI 官方文件有額外的風險說明。
 
 ??? question "OONI 檢測會不會誤判？"
 
@@ -126,7 +126,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
     可以，但要分清楚目的。OONI Probe 是觀測工具，跑檢測時走的是你本地的 ISP 連線（這樣才能觀測到當地的網路環境）。如果讓 OONI 走 Tor，觀測到的是 Tor 出口節點的網路環境，不是你本地的，失去意義。Tor Browser 與 OONI Probe 在同一台電腦上可以共存，各跑各的。
 
-??? question "我在台灣，最簡單的貢獻方式是什麼？"
+??? question "最簡單的貢獻方式是什麼？"
 
     手機裝 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天讓它跑一次自動檢測就是有效貢獻。如果家裡有 Linux 主機，照本文「如何安裝」段的 cronjob 範例設定，就能持續累積。想再進一步可以參考 [OONI 網站檢測清單](../taiwan/ooni-checklist.md) 補充本地關注的網站，或讀 [ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 還缺觀測點。
 

@@ -1,6 +1,6 @@
 ---
 title: 什麼是 Tails
-description: Tails 是從 USB 啟動、預設走 Tor、關機後不留痕跡的可攜式作業系統。在台灣的記者、研究者、行動現場工作者，可以用它把高敏感任務跟日常電腦徹底切開。
+description: Tails 是從 USB 啟動、預設走 Tor、關機後不留痕跡的可攜式作業系統。記者、研究者、行動現場工作者，可以用它把高敏感任務跟日常電腦徹底切開。
 icon: simple/tails
 ---
 
@@ -8,7 +8,7 @@ icon: simple/tails
 
 [Tails](https://tails.net/){target="_blank"}（The Amnesic Incognito Live System，無記憶的匿蹤系統）是一個從 USB 隨身碟或外接硬碟啟動的作業系統。它把 Tor、加密郵件、密碼管理器、檔案 Metadata 清除工具預先打包好，關機後整個記憶體被清空，不留下任何使用痕跡。
 
-對在台灣的我們，Tails 對應的場景包括採訪敏感議題的記者要保護消息來源、研究員要處理外來檔案而不污染主機、行動現場要在不熟悉的網路環境工作、機敏檔案要審閱但不希望留在筆電上。這些場景下，日常電腦的長期使用痕跡是個大破口，Tails 把任務切到一個臨時的乾淨環境，做完抽 USB 走人。
+對正體中文使用者，Tails 對應的場景包括採訪敏感議題的記者要保護消息來源、研究員要處理外來檔案而不污染主機、行動現場要在不熟悉的網路環境工作、機敏檔案要審閱但不希望留在筆電上。這些場景下，日常電腦的長期使用痕跡是個大破口，Tails 把任務切到一個臨時的乾淨環境，做完抽 USB 走人。
 
 Tails 基於 [Debian Linux](https://zh.wikipedia.org/zh-tw/Debian){target="_blank"}，由獨立非營利組織開發，跟 Tor Project 長期合作。社群在 2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)，後續會持續推。
 
