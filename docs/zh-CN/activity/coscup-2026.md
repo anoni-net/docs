@@ -19,7 +19,7 @@ og:
 
 记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
 
-匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实作经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到记者保护消息来源、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
+匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实作经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到现实世界的开源隐私工具、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
 
 !!! info "活动信息"
 
@@ -32,8 +32,8 @@ og:
 
 !!! tip "依你的身份，建议从这几场开始"
 
-    - **新闻媒体、独立记者**：8/08 上午「记者如何用开源工具保护消息来源」最直接，可搭配「威胁模型与 Metadata 入门」。8/09 下午的「健保数据库案之后」与「隐私指南 2026」延伸到个资权利与个人防护。
-    - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，「隐私指南 2026」谈到组织遭法律调取数据时的事前准备。想评估匿名捐款管道，8/08 下午与 ETHTaipei 合办的匿名支付场（特别是「我不洗钱，为何要理解匿名支付？」）是好入门。
+    - **新闻媒体、独立记者**：8/08 上午「现实世界的开源隐私工具」盘点记者实际在用的安全收件管道、去识别化与隔离工具，可搭配「威胁模型与 Metadata 入门」。8/09 下午的「健保数据库案之后」与「隐私指南 2026」延伸到个资权利与个人防护。
+    - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，「现实世界的开源隐私工具」直接盘点公民团体与 NGO 的加密通信、内部协作与检举投递工具，「隐私指南 2026」谈到组织遭法律调取数据时的事前准备。想评估匿名捐款管道，8/08 下午与 ETHTaipei 合办的匿名支付场（特别是「我不洗钱，为何要理解匿名支付？」）是好入门。
     - **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能动手。8/08 下午的零知识证明（ZK）自然人凭证、隐私保护的 KYC（金融机构确认客户身份）流程、隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](../community/how-to-contribute.md)。
     - 各场都不需另外报名，当天到场即可，也欢迎带同事一起来。
 
@@ -51,7 +51,7 @@ og:
 |------|------|------|
 | 09:30-10:00<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名网络社群 anoni.net 介绍：开源匿名工具、社群实践与 2026 三大主题**<br>:material-arrow-right-bottom: 介绍社群缘起、如何以开源协作参与国际项目，带出 2026 推进的三大主题 | anoni.net 社群 |
 | 10:10-10:40<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威胁模型与 Metadata 入门：认识你的对手，以及为什么匿名工具要开源才可信**<br>:material-arrow-right-bottom: 用威胁模型搭出判断框架，并说明为何匿名工具要开源才可信 | anoni.net 社群 |
-| 10:50-11:20<br>30 分钟 | <span class="sess-tag sess-tag--privacy">个人隐私</span> :material-newspaper-variant-outline: **记者如何用开源工具保护消息来源：从第一次接触到报导刊出后的数字整理**<br>:material-arrow-right-bottom: 从第一次接触到报导刊出，每一步该用哪些可受公开查看的开源工具保护来源 | anoni.net 社群 |
+| 10:50-11:20<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-toolbox-outline: **现实世界的开源隐私工具：公民团体、独立记者与个人隐私防护的实际运用**<br>:material-arrow-right-bottom: 公民团体、独立记者与个人各自在用哪些可受公开审计的开源隐私工具、又用在哪些情境 | anoni.net 社群 |
 | 11:30-12:00<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **为什么匿名支付重要：开源、去中心化的金流与台湾 VASP 法 2026**<br>:material-arrow-right-bottom: 金流为何是最难摆脱的 metadata，从捐款、募款到日常转账的隐私风险与开源替代方案 | anoni.net 社群 |
 
 **下午 13:00-16:30　ETHTaipei 合办「匿名支付」场（教室 `TR-511`，议程由 ETHTaipei 安排）**
@@ -105,11 +105,11 @@ og:
 
     带着这套框架，你以后遇到新工具、新威胁就知道如何对号入座，也会明白和开源直接相关的一点，当对手有能力检查你的设备与通信时，工具能不能被独立审核就攸关安全，这也是 Tor Browser、Tails 采用开放源代码与可重现建置（reproducible build，任何人都能从源代码编出比特相同的程序、验证没被动过手脚）的原因。对记者与公民团体来说，这类 metadata 往往足以反推出消息来源与行动网络。
 
-??? abstract ":material-newspaper-variant-outline: 记者如何用开源工具保护消息来源：从第一次接触到报导刊出后的数字整理"
+??? abstract ":material-toolbox-outline: 现实世界的开源隐私工具：公民团体、独立记者与个人隐私防护的实际运用"
 
-    调查报导的风险，最重的一端常落在消息来源身上。记者背后通常还有编辑部与媒体律师，消息来源却可能是公司内部员工、政府机关承办或被监控的社运参与者，暴露的代价高得多。沿着**消息的生命周期**走一遍，从第一次接触、身份确认、敏感文件交换到报导刊出后的数字整理，每一步都对应到一套源代码公开、可被独立查看的开源工具，并对照台湾的通信保障及监察法与 2025 年上路的[揭弊者保护法](../taiwan/whistleblower-law.md)。
+    这场整理公民团体、独立记者与注重隐私的个人在现实中实际采用的开源隐私工具，分成三个场景依序介绍，每一项都说清楚由谁采用、在什么情境下派上用场。这些高风险场景特别倚赖源代码可被公开审计的开源工具，封闭软件无从验证是否遭到窜改，正好回扣前一场[威胁模型](../basics/threat-model.md)的判断框架。
 
-    听完你会知道第一次接触该开哪种**安全收件管道**（Signal、Freedom of the Press Foundation 维运的 SecureDrop、[OnionShare](../tools/onionshare.md)）、如何在不留记录的前提下确认对方身份、敏感文件交换前用 mat2 或 Metadata Cleaner 去除 metadata 并以 VeraCrypt 或 Cryptpad 加密保存，以及报导刊出后记者端与消息来源端各自要做的数字整理。完整流程见[记者保护消息来源](../scenarios/journalist.md)。
+    公民团体与 NGO 对外用 Signal、Matrix 加密通信，内部协作用 CryptPad、Etherpad，并以 SecureDrop、[OnionShare](../tools/onionshare.md) 接受检举与敏感数据投递，另以 OONI 观测各地的网络审查。独立记者这一段涵盖安全收件管道、以 mat2 与 Metadata Cleaner 清除文件内嵌的作者与 GPS metadata，并运用 Tails、Qubes OS 隔离高风险作业。个人隐私防护则有 Tor Browser 与 Brave 抵御网页追踪、GrapheneOS 与 LineageOS 取回手机的控制权、KeePassXC 与 Bitwarden 管理密码。完整的场景与工具对照见[记者保护消息来源](../scenarios/journalist.md)与[通信工具比较](../tools/messaging-comparison.md)。
 
 ??? abstract ":material-cash-multiple: 为什么匿名支付重要：开源、去中心化的金流与台湾 VASP 法 2026"
 
