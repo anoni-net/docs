@@ -53,10 +53,10 @@ og:
 
 | 時間 | 議程 | 講者 |
 |------|------|------|
-| 09:30-10:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 有一群人在台灣把 Tor、Tails、OONI 這些隱私工具中文化、實際推廣。這場講他們是誰、在做什麼，也講為什麼高風險工作要用驗得了的開源工具、而不是無從檢查的黑箱軟體 | anoni.net 社群 |
+| 09:30-10:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 有一群人在台灣把 Tor、Tails、OONI 這些隱私工具中文化、實際推廣。這場介紹他們是誰、在做什麼，也說明為什麼高風險工作要用驗得了的開源工具、而不是無從檢查的黑箱軟體 | anoni.net 社群 |
 | 10:10-10:40<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 就算通話內容沒被監聽，誰在什麼時間聯繫了誰，常常就足以讓消息來源曝光。這場帶你判斷自己該防誰、又要防到什麼程度 | anoni.net 社群 |
 | 10:50-11:20<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-toolbox-outline: **現實世界的開源隱私工具：公民團體、獨立記者與個人隱私防護的實際運用**<br>:material-arrow-right-bottom: 記者、NGO 與在意隱私的一般人，實際上都在用哪些原始碼公開、可被檢驗的免費工具保護自己？這場直接列出來，不管你是誰都能挑一兩個回家用 | anoni.net 社群 |
-| 11:30-12:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 一筆給敏感議題組織的捐款、給線人的轉帳，金流本身就會洩漏關係。這場用白話講金流隱私，不需要加密貨幣背景 | anoni.net 社群 |
+| 11:30-12:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 一筆給敏感議題組織的捐款、給線人的轉帳，金流本身就會洩漏關係。這場用白話說明金流隱私，不需要加密貨幣背景 | anoni.net 社群 |
 
 **下午 13:00-16:30　ETHTaipei 合辦「匿名支付」場（教室 `TR-511`，議程由 ETHTaipei 安排）**
 
@@ -227,7 +227,7 @@ og:
 
 ??? abstract ":material-shield-account-outline: 隱私指南 2026（Justyn，50 分鐘）"
 
-    從個人到組織，這場工作坊與座談依序處理三件事。第一，建立**個人隱私風險矩陣**，把廣告追蹤與資料仲介、詐騙與盜帳號、親密關係加害者、跨境盤查、針對性監控等威脅來源分級，對應到數位身分、行動裝置、SaaS 與雲端、金流四個暴露面，每一格給出以開源工具與裝置內建設定為主的預設配置建議。第二，自我檢核方法學，重點放在方法本身，如何看 App 內嵌的追蹤器、如何觀察裝置真正連去哪裡、如何讀懂 iOS App Privacy Report，並對照 NIST Privacy Framework 與 OWASP MASVS 做最小自評。第三，組織層面的多人協作隱私，針對 NGO、獨立媒體、小型公司，涵蓋共享密碼管理、端對端加密協作、組織遭遇法律調取資料的事前準備，以及 Shamir Secret Sharing、門檻簽章（FROST、TSS）、MPC（多方計算）、Private Set Intersection（隱私集合交集）、OpenMLS 等較進階、適合技術背景組織管理者的前瞻工具（非技術背景可略過這串工具名，不影響前兩部分；有密碼學背景的組織管理者，第三部分的門檻簽章、MPC、PSI 才是重點）。
+    從個人到組織，這場工作坊與座談依序處理三件事。第一，建立**個人隱私風險矩陣**，把廣告追蹤與資料仲介、詐騙與盜帳號、親密關係加害者、跨境盤查、針對性監控等威脅來源分級，對應到數位身分、行動裝置、SaaS 與雲端、金流四個暴露面，每一格給出以開源工具與裝置內建設定為主的預設配置建議。第二，自我檢核方法學，重點放在方法本身，如何看 App 內嵌的追蹤器、如何觀察裝置真正連去哪裡、如何讀懂 iOS App Privacy Report，並對照 NIST Privacy Framework 與 OWASP MASVS 做最小自評。第三，組織層面的多人協作隱私，針對 NGO、獨立媒體、小型公司，涵蓋共享密碼管理、端對端加密協作、組織遭遇法律調取資料的事前準備，以及 Shamir Secret Sharing、門檻簽章（FROST、TSS）、MPC（多方計算）、Private Set Intersection（隱私集合交集）、OpenMLS 等較進階、適合技術背景組織管理者的前瞻工具（非技術背景可略過這串工具名，不影響前兩部分。有密碼學背景的組織管理者，第三部分的門檻簽章、MPC、PSI 才是重點）。
 
     不管你是個人、NGO 還是小型團隊，都能帶走一份對照自己情境的預設配置與**自我檢核方法**，遇到新工具、新威脅、新法規時知道如何自己判斷，不必死背一份推薦清單，密碼學細節本身則點到為止。
 
