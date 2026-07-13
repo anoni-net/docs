@@ -29,16 +29,20 @@ The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work 
     - Language: most sessions are in Mandarin. Raghu's "The Workings of the Internet" is in English.
     - Admission: COSCUP is free, and the community track needs no separate registration — just show up. Times may still shift before the event; the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"} is authoritative.
 
-[COSCUP 2026 schedule](https://pretalx.coscup.org/coscup-2026/){ .md-button .md-button--primary target="_blank"} [Call for proposals](./coscup-2026-cfp.md){ .md-button }
+[COSCUP 2026 schedule](#schedule-overview){ .md-button .md-button--primary }
+
+!!! tip "Free entry, no registration — you can attend anonymously"
+
+    COSCUP is free and the community track needs no advance sign-up: just walk into the room. For a community that promotes anonymity, attending can itself be anonymous — you leave no personal details behind to sit in on a talk. If you are looking for privacy or anonymity solutions, come straight to `TR-510` (the Aug 8 afternoon anonymous-payments session is in `TR-511`), pick the sessions that fit you from this rich and varied program, and feel free to chat with speakers and community members between talks.
 
 !!! tip "Where to start, by who you are"
 
     - **Newsrooms and independent journalists**: "Real-world open-source privacy tools" (Aug 8 morning) walks through the secure intake channels, metadata scrubbing, and isolation tools journalists actually use, paired with "Threat models and metadata 101". On Aug 9 afternoon, "After the health-insurance database case" and "Privacy guide 2026" extend into data-privacy rights and personal defense.
     - **Civil-society groups and NGOs**: the four Aug 8 morning primers map closely to organizational realities, and "Real-world open-source privacy tools" surveys the encrypted messaging, collaboration, and leak-intake tools civil-society groups and NGOs rely on, while "Privacy guide 2026" covers preparing for legal data requests. To weigh anonymous donation channels, the Aug 8 afternoon ETHTaipei session (especially "I don't launder money — so why understand anonymous payments?") is a good entry point.
     - **Open-source and tech community**: Aug 9 is the most technical — OpenWRT, the NTNU Tor node, and browser-fingerprint research are all hands-on. The Aug 8 afternoon zero-knowledge Citizen Digital Certificate work, privacy-preserving KYC, and stealth addresses are the meatiest protocol-level content. To contribute, see [how to contribute](../community/how-to-contribute.md).
-    - None of the sessions need separate registration — just show up, and feel free to bring colleagues.
+    - Feel free to bring colleagues along.
 
-## :material-calendar-text: Schedule overview
+## :material-calendar-text: Schedule overview { #schedule-overview }
 
 Below is the community track plan; actual times follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. Session titles are translated from the program (most talks are in Mandarin). Changeover breaks sit between sessions (10 minutes on Aug 8 morning, 5 minutes on Aug 9 to fit a fuller day).
 
