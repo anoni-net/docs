@@ -53,10 +53,10 @@ og:
 
 | 時間 | 議程 | 講者 |
 |------|------|------|
-| 09:30-10:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 介紹社群緣起、如何以開源協作參與國際專案，帶出 2026 推進的三大主題 | anoni.net 社群 |
-| 10:10-10:40<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 用威脅模型搭出判斷框架，並說明為何匿名工具要開源才可信 | anoni.net 社群 |
-| 10:50-11:20<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-toolbox-outline: **現實世界的開源隱私工具：公民團體、獨立記者與個人隱私防護的實際運用**<br>:material-arrow-right-bottom: 公民團體、獨立記者與個人各自在用哪些可受公開稽核的開源隱私工具、又用在哪些情境 | anoni.net 社群 |
-| 11:30-12:00<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 金流為何是最難擺脫的 metadata，從捐款、募款到日常轉帳的隱私風險與開源替代方案 | anoni.net 社群 |
+| 09:30-10:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名網路社群 anoni.net 介紹：開源匿名工具、社群實踐與 2026 三大主題**<br>:material-arrow-right-bottom: 有一群人在台灣把 Tor、Tails、OONI 這些隱私工具中文化、實際推廣。這場講他們是誰、在做什麼，以及你今天可以怎麼一起參與 | anoni.net 社群 |
+| 10:10-10:40<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威脅模型與 Metadata 入門：認識你的對手，以及為什麼匿名工具要開源才可信**<br>:material-arrow-right-bottom: 就算通話內容沒被監聽，誰在什麼時間聯繫了誰，常常就足以讓消息來源曝光。這場帶你判斷自己該防誰、又要防到什麼程度 | anoni.net 社群 |
+| 10:50-11:20<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-toolbox-outline: **現實世界的開源隱私工具：公民團體、獨立記者與個人隱私防護的實際運用**<br>:material-arrow-right-bottom: 記者、NGO 與在意隱私的一般人，實際上都在用哪些原始碼公開、可被檢驗的免費工具保護自己？這場直接列出來，不管你是誰都能挑一兩個回家用 | anoni.net 社群 |
+| 11:30-12:00<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-cash-multiple: **為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026**<br>:material-arrow-right-bottom: 一筆給敏感議題組織的捐款、給線人的轉帳，金流本身就會洩漏關係。這場用白話講金流隱私，不需要加密貨幣背景 | anoni.net 社群 |
 
 **下午 13:00-16:30　ETHTaipei 合辦「匿名支付」場（教室 `TR-511`，議程由 ETHTaipei 安排）**
 
@@ -66,7 +66,7 @@ og:
 | 13:40-14:10<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC，卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang） |
 | 14:20-14:50<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU |
 | 15:00-15:30<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean |
-| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機操作示範 Tornado Cash 與 Privacy Pool 的用法與隱私眉角 | Liangcc |
+| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機示範 Tornado Cash 與 Privacy Pool 的用法，不用自己動手、跟著看就好 | Liangcc |
 
 ### Day 2：2026/08/09（日）
 
@@ -76,7 +76,7 @@ og:
 
 | 時間 | 議程 | 講者 |
 |------|------|------|
-| 10:00-10:50<br>50 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容 | Raghu |
+| 10:00-10:50<br>50 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-web: **The Workings of the Internet：網路如何運作、審查如何擋住你（英文進行）**<br>:material-arrow-right-bottom: 用寄明信片的比喻，看清你連上網站的路上有誰能偷看或竄改內容，英文不熟也能跟上大意 | Raghu |
 | 10:55-11:25<br>30 分鐘 | <span class="sess-tag sess-tag--basic">通用</span> :material-router-network: **以 OpenWRT 等開源軟體建立家用網路環境**<br>:material-arrow-right-bottom: 在家用路由器上做到一般機種沒有的進階設定，含 VLAN 隔離、多 WAN、site-to-site VPN 與 Tor 上游 | Pellaeon Lin |
 | 11:30-12:00<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-fingerprint: **區塊鏈網路上基於開放標準的實體身份識別方法**<br>:material-arrow-right-bottom: VASP 法通過後，台灣人的身分在區塊鏈上會用哪些開放標準被定位 | Yusef Schultz |
 
@@ -115,7 +115,7 @@ og:
 
 ??? abstract ":material-toolbox-outline: 現實世界的開源隱私工具：公民團體、獨立記者與個人隱私防護的實際運用"
 
-    這場整理公民團體、獨立記者與注重隱私的個人在現實中實際採用的開源隱私工具，分成三個場景依序介紹，每一項都說清楚由誰採用、在什麼情境下派上用場。這些高風險場景特別倚賴原始碼可被公開稽核的開源工具，封閉軟體無從驗證是否遭到竄改，正好回扣前一場[威脅模型](../basics/threat-model.md)的判斷框架。
+    這場整理公民團體、獨立記者與注重隱私的個人在現實中實際採用的開源隱私工具，分成三個場景依序介紹，每一項都說清楚由誰採用、在什麼情境下派上用場。這些高風險場景特別倚賴原始碼可被公開稽核的開源工具，封閉軟體無從驗證是否遭到竄改，正好回扣前一場[威脅模型](../basics/threat-model.md)的判斷框架。這場重點放在幾樣最容易上手的工具，你不必記住整份清單，聽完能先挑一兩個回家用。
 
     公民團體與 NGO 對外用 Signal、Matrix 加密通訊，內部協作用 CryptPad、Etherpad，並以 SecureDrop、[OnionShare](../tools/onionshare.md) 接受檢舉與敏感資料投遞，另以 OONI 觀測各地的網路審查。獨立記者這一段涵蓋安全收件管道、以 mat2 與 Metadata Cleaner 清除檔案內嵌的作者與 GPS metadata，並運用 Tails、Qubes OS 隔離高風險作業。個人隱私防護則有 Tor Browser 與 Brave 抵禦網頁追蹤、GrapheneOS 與 LineageOS 取回手機的控制權、KeePassXC 與 Bitwarden 管理密碼。完整的場景與工具對照見[記者保護消息來源](../scenarios/journalist.md)與[通訊工具比較](../tools/messaging-comparison.md)。
 
@@ -123,7 +123,7 @@ og:
 
 ??? abstract ":material-cash-multiple: 為什麼匿名支付重要：開源、去中心化的金流與台灣 VASP 法 2026"
 
-    談匿名與隱私時，金流常被遺漏。一筆轉帳的時間、金額、收款對象，配上信用卡號或銀行戶名，幾乎能還原一個人的社交網絡與活動範圍。金流是最難擺脫的一種 metadata，開戶需要實名 KYC（金融機構確認客戶身分的程序），紀錄依法長期保存，跨機構雙向留存，在合法程序下可被調閱，也容易被當成審查工具，從 PayPal、Venmo 凍結特定帳號的案例，到長年架設 Tor 中繼節點，卻被支付平台無預警關停的處境。
+    這場不需要任何加密貨幣背景。談匿名與隱私時，金流常被遺漏。一筆轉帳的時間、金額、收款對象，配上信用卡號或銀行戶名，幾乎能還原一個人的社交網絡與活動範圍。金流是最難擺脫的一種 metadata，開戶需要實名 KYC（金融機構確認客戶身分的程序），紀錄依法長期保存，跨機構雙向留存，在合法程序下可被調閱，也容易被當成審查工具，從 PayPal、Venmo 凍結特定帳號的案例，到長年架設 Tor 中繼節點，卻被支付平台無預警關停的處境。
 
     聽完你會看懂以開源協定為基礎的替代方案各有什麼取捨，例如協議層就遮蔽交易資訊的隱私幣 Monero、Zcash，以及零知識證明、多重簽署等開源實作在技術門檻、合法性與接受度上的差別，也會掌握台灣 2026 年上路的[虛擬資產服務法（VASP 法）](../taiwan/vasp-2026.md)帶來的在地脈絡。社群一向強調合法是匿名支付的前提，工具用於教育與理解風險，這也為下午與 ETHTaipei 合辦的匿名支付場暖身。
 
@@ -169,7 +169,7 @@ og:
 
     工作坊從使用者視角出發，介紹龍捲風現金（Tornado Cash）的設計哲學，以及隱私池（Privacy Pool）在它之上的改進。
 
-    現場會用道具與實機操作示範兩樣工具如何操作，你能帶走的是實際使用上的隱私眉角，密碼學細節則點到為止。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
+    現場會用道具與實機操作示範兩樣工具如何操作，不需自備電腦或動手寫程式，跟著看就好，你能帶走的是實際使用上的隱私眉角，密碼學細節則點到為止。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
 
     :material-open-in-new: [COSCUP 官方議程頁](https://pretalx.coscup.org/coscup-2026/talk/3WHJYA/){target="_blank"}
 
@@ -179,7 +179,7 @@ og:
 
 ??? abstract ":material-web: The Workings of the Internet：網路如何運作、審查如何擋住你（Raghu，50 分鐘，英文進行）"
 
-    你在瀏覽器輸入 `google.com` 按下 enter，封包到底經過哪些方的手？這場用**寄明信片的比喻**，帶你看清楚從你的裝置到目標網站之間，有哪些（多半合法的）角色經手、它們能看到什麼、又能改動什麼。
+    你在瀏覽器輸入 `google.com` 按下 enter，封包到底經過哪些方的手？這場用**寄明信片的比喻**，帶你看清楚從你的裝置到目標網站之間，有哪些（多半合法的）角色經手、它們能看到什麼、又能改動什麼。議程以英文進行，但用生活比喻切入、不預設技術背景，英文不熟也能跟上大意。
 
     理解這套機制之後，你會看懂審查、監控與資料外洩是如何發生的，也看得出那些把你嚇去買「某某 VPN」的廣告話術問題在哪。聽完你可能會驚訝預設情況下網路有多不隱私，也會開始更嚴格地看待那些掠奪式的 VPN 行銷。
 
@@ -227,7 +227,7 @@ og:
 
 ??? abstract ":material-shield-account-outline: 隱私指南 2026（Justyn，50 分鐘）"
 
-    從個人到組織，這場工作坊與座談依序處理三件事。第一，建立**個人隱私風險矩陣**，把廣告追蹤與資料仲介、詐騙與盜帳號、親密關係加害者、跨境盤查、針對性監控等威脅來源分級，對應到數位身分、行動裝置、SaaS 與雲端、金流四個暴露面，每一格給出以開源工具與裝置內建設定為主的預設配置建議。第二，自我檢核方法學，重點放在方法本身，如何看 App 內嵌的追蹤器、如何觀察裝置真正連去哪裡、如何讀懂 iOS App Privacy Report，並對照 NIST Privacy Framework 與 OWASP MASVS 做最小自評。第三，組織層面的多人協作隱私，針對 NGO、獨立媒體、小型公司，涵蓋共享密碼管理、端對端加密協作、組織遭遇法律調取資料的事前準備，以及 Shamir Secret Sharing、門檻簽章（FROST、TSS）、MPC（多方計算）、Private Set Intersection（隱私集合交集）、OpenMLS 等較進階、適合技術背景組織管理者的前瞻工具。
+    從個人到組織，這場工作坊與座談依序處理三件事。第一，建立**個人隱私風險矩陣**，把廣告追蹤與資料仲介、詐騙與盜帳號、親密關係加害者、跨境盤查、針對性監控等威脅來源分級，對應到數位身分、行動裝置、SaaS 與雲端、金流四個暴露面，每一格給出以開源工具與裝置內建設定為主的預設配置建議。第二，自我檢核方法學，重點放在方法本身，如何看 App 內嵌的追蹤器、如何觀察裝置真正連去哪裡、如何讀懂 iOS App Privacy Report，並對照 NIST Privacy Framework 與 OWASP MASVS 做最小自評。第三，組織層面的多人協作隱私，針對 NGO、獨立媒體、小型公司，涵蓋共享密碼管理、端對端加密協作、組織遭遇法律調取資料的事前準備，以及 Shamir Secret Sharing、門檻簽章（FROST、TSS）、MPC（多方計算）、Private Set Intersection（隱私集合交集）、OpenMLS 等較進階、適合技術背景組織管理者的前瞻工具（非技術背景可略過這串工具名，不影響前兩部分）。
 
     不管你是個人、NGO 還是小型團隊，都能帶走一份對照自己情境的預設配置與**自我檢核方法**，遇到新工具、新威脅、新法規時知道如何自己判斷，不必死背一份推薦清單，密碼學細節本身則點到為止。
 
