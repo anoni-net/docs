@@ -57,7 +57,7 @@ AI_OPENER_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS) + r")")
 
 # 口語「講」，扣掉常見正當詞
 JIANG_RE = re.compile(r"講")
-JIANG_ALLOW = re.compile(r"(演講|講座|講師|講者|講習|講義|講堂|宣講)")
+JIANG_ALLOW = re.compile(r"(演講|講座|講師|講者|講習|講義|講堂|宣講|主講)")
 
 # 部落格 front matter 必填欄位（title 來自 H1，不在此列）
 BLOG_REQUIRED = ["date", "slug", "categories", "authors"]

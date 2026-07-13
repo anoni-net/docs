@@ -10,6 +10,16 @@ icon: material/account-reactivate-outline
 
 <div class="grid cards" markdown>
 
+-   [:material-calendar-star: COSCUP 2026 匿名网络社群议程轨](./coscup-2026.md)
+    :material-update: 2026/08/08、08/09（二日）
+    :octicons-location-24: 国立台湾科技大学 `TR-510`
+
+    ---
+
+    两日社群议程与工作坊。涵盖网络审查、浏览器追踪、校园 Tor 节点、个资权利、隐私指南与匿名支付，并与 ETHTaipei 合办匿名支付场。
+
+    :material-account-supervisor-outline: 适合对象：新闻媒体、独立记者、公民团体、NGO 工作者、开源与科技社群。
+
 -   [:material-email-edit: COSCUP 2026 公开征稿](./coscup-2026-cfp.md)
     :material-update: 目前 ~ 2026/05/09（截止）
     :octicons-location-24: 国立台湾科技大学

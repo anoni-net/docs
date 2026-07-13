@@ -1,0 +1,130 @@
+---
+title: COSCUP 2026 Anonymity Networks Community track
+description: The Anonymity Networks Community (anoni.net) runs a two-day community track at COSCUP 2026 (Aug 8–9, NTUST, Taipei) — talks and workshops on Tor, Tails, OONI, browser tracking, campus Tor nodes, data-privacy rights, a personal privacy guide, and anonymous payments, including a session co-organized with ETHTaipei.
+icon: material/calendar-star
+social:
+  cards: false
+og:
+  enabled: true
+  image: https://assets.anoni.net/event/anoni-net-eth-taipei.png
+  image_type: image/png
+  image_width: 1536
+  image_height: 1024
+  twitter_card: summary_large_image
+---
+
+# :material-calendar-star: COSCUP 2026 Anonymity Networks Community track
+
+![COSCUP 2026 Anonymity Networks Community track hero image](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
+Journalists need to protect sources, civil-society groups need to protect members and donors, developers want to know whether the tools in their hands actually hold up against surveillance, and ordinary people rattled by scam texts or ad tracking just want a little control back. Under spreading censorship and monitoring, these needs land on the same set of risks: traffic can be intercepted, identities can be traced, and the timing and amount of a single transfer can reconstruct an entire web of relationships — sometimes exposing an organization's member list and money flow without anyone noticing.
+
+The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work with **Tor**, **Tails**, **OONI**, personal privacy, and anonymous payments to the open-source floor of COSCUP 2026. The two days run from how the internet and censorship work, through real-world open-source privacy tools, campus Tor nodes, browser tracking, and data-privacy rights, to an anonymous-payments session co-organized with ETHTaipei. Whether you came looking for tools you can use right away or want to contribute to open-source projects, there is a session for you.
+
+!!! info "Event details"
+
+    - Dates: August 8 (Sat) and 9 (Sun), 2026
+    - Venue: National Taiwan University of Science and Technology (NTUST), Taipei. The community track is in `TR-510`; the Aug 8 afternoon session co-organized with ETHTaipei is in `TR-511`.
+    - Format: community talks, hands-on workshops, and an anonymous-payments session co-organized with ETHTaipei
+    - Language: most sessions are in Mandarin. Raghu's "The Workings of the Internet" is in English.
+    - Admission: COSCUP is free, and the community track needs no separate registration — just show up. Times may still shift before the event; the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"} is authoritative.
+
+[COSCUP 2026 schedule](#schedule-overview){ .md-button .md-button--primary }
+
+!!! tip "Free entry, no registration — you can attend anonymously"
+
+    COSCUP is free and the community track needs no advance sign-up: just walk into the room. For a community that promotes anonymity, attending can itself be anonymous — you leave no personal details behind to sit in on a talk. If you are looking for privacy or anonymity solutions, come straight to `TR-510` (the Aug 8 afternoon anonymous-payments session is in `TR-511`), pick the sessions that fit you from this rich and varied program, and feel free to chat with speakers and community members between talks.
+
+!!! tip "Where to start, by who you are"
+
+    - **Newsrooms and independent journalists**: "Real-world open-source privacy tools" (Aug 8 morning) walks through the secure intake channels, metadata scrubbing, and isolation tools journalists actually use, paired with "Threat models and metadata 101". On Aug 9 afternoon, "Browser tracking, anti-tracking strategies" unpacks how your everyday browser can leak who you've contacted, and "After the health-insurance database case" and "Privacy guide 2026" extend into data-privacy rights and responding to legal data requests. Further reading: [protecting journalistic sources](../scenarios/journalist.md).
+    - **Civil-society groups and NGOs**: the four Aug 8 morning primers map closely to organizational realities, and "Real-world open-source privacy tools" surveys the encrypted messaging, collaboration, and leak-intake tools civil-society groups and NGOs rely on, while "Privacy guide 2026" covers preparing for legal data requests. To weigh anonymous donation channels, start with Aug 8 morning's "Why anonymous payments matter" (plain language, no crypto background), then go deeper with the Aug 8 afternoon ETHTaipei session's "I don't launder money — so why understand anonymous payments?".
+    - **Open-source and tech community**: Aug 9 is the most technical — OpenWRT, the NTNU Tor node, and browser-fingerprint research are all hands-on. The Aug 8 afternoon zero-knowledge Citizen Digital Certificate work, privacy-preserving KYC, and stealth addresses are the meatiest protocol-level content. To contribute, see [how to contribute](../community/how-to-contribute.md).
+    - Feel free to bring colleagues along.
+
+## :material-calendar-text: Schedule overview { #schedule-overview }
+
+Below is the community track plan; actual times follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. Session titles are translated from the program (most talks are in Mandarin). Changeover breaks sit between sessions (10 minutes on Aug 8 morning, 5 minutes on Aug 9 to fit a fuller day).
+
+### Day 1: 2026/08/08 (Sat)
+
+Aug 8 morning is four open-source anonymity primers led by anoni.net community members — pitched as entry-level and well suited to civil-society groups, news media, and independent journalists, with open source as the through-line. From 13:00, the ETHTaipei co-organized "Anonymous Payments" session takes over with heavier protocol-level content.
+
+**Morning 09:30–12:00 · community open-source anonymity primers (room `TR-510`)**
+
+| Time | Session | Speaker |
+|------|---------|---------|
+| 09:30-10:00<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-account-group: **Meet Anonymity Networks Community: open-source anonymity tools, community practice, and the three 2026 themes**<br>:material-arrow-right-bottom: A group in Taiwan localizing Tor, Tails, and OONI into Chinese: who they are, what they do, and why high-risk work needs tools you can verify rather than a black box you can't | anoni.net community |
+| 10:10-10:40<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-target-account: **Threat models and metadata 101: know your adversary, and why anonymity tools must be open source to be trustworthy**<br>:material-arrow-right-bottom: Even if your calls aren't tapped, who you contacted and when is often enough to expose a source. Work out who you're defending against, and how far to go | anoni.net community |
+| 10:50-11:20<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-toolbox-outline: **Real-world open-source privacy tools: how civil-society groups, independent journalists, and individuals actually use them**<br>:material-arrow-right-bottom: Which open, auditable, free tools journalists, NGOs, and privacy-minded individuals actually use to protect themselves, laid out so anyone can pick one or two to take home | anoni.net community |
+| 11:30-12:00<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-cash-multiple: **Why anonymous payments matter: open, decentralized money flows and Taiwan's VASP Act 2026**<br>:material-arrow-right-bottom: A donation to a sensitive-issue group, a transfer to a source: the money flow itself leaks the relationship. Plain-language money-flow privacy, no crypto background needed | anoni.net community |
+
+**Afternoon 13:00–16:30 · ETHTaipei "Anonymous Payments" session (room `TR-511`, program arranged by ETHTaipei)**
+
+| Time | Session | Speaker |
+|------|---------|---------|
+| 13:00-13:30<br>30 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-card-account-details-outline: **Zero-knowledge proofs and Citizen Digital Certificate identity verification**<br>:material-arrow-right-bottom: Prove you are a Taiwanese citizen to a service without handing over any personal data | Ya-wen Jeng |
+| 13:40-14:10<br>30 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: A stack of cryptographic primitives that passes KYC without the server ever seeing your identity data | ryanycw (Ryan Wang) |
+| 14:20-14:50<br>30 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-link-off: **Starting from unlinkability: how stealth addresses solve on-chain financial privacy (Fluidkey case study)**<br>:material-arrow-right-bottom: Stealth addresses scatter one person's payments across unrelated addresses no outsider can link | Jennifer HSU |
+| 15:00-15:30<br>30 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-bitcoin: **"I don't launder money — so why understand anonymous payments?" A from-scratch intro to private crypto flows**<br>:material-arrow-right-bottom: Why advocacy groups and donors should grasp crypto's privacy risks, walked through in plain language | 黃豆泥 mashbean |
+| 15:40-16:30<br>50 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-hammer-wrench: **Hands-on private payments workshop: from Tornado Cash to Privacy Pool**<br>:material-arrow-right-bottom: Props and live demos of how Tornado Cash and Privacy Pool work, with the practical privacy caveats | Liangcc |
+
+### Day 2: 2026/08/09 (Sun)
+
+Aug 9 is a full day of seven accepted talks, spanning network and censorship basics, home networking and campus Tor nodes, on-chain identity, browser tracking, health-database privacy rights, and personal privacy. Technical and everyday-facing sessions alternate, so developers, journalists, and civil-society groups can each find sessions that fit.
+
+**Morning 10:00–12:00 (room `TR-510`)**
+
+| Time | Session | Speaker |
+|------|---------|---------|
+| 10:00-10:50<br>50 min | <span class="sess-tag sess-tag--basic">General</span> :material-web: **The Workings of the Internet: how the net works and how censors block you (in English)**<br>:material-arrow-right-bottom: A postcard analogy for who sits between you and a website, and what they can see or change | Raghu |
+| 10:55-11:25<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-router-network: **Building a home network with OpenWRT and other open-source software**<br>:material-arrow-right-bottom: Advanced router setups consumer gear won't give you: VLAN isolation, multi-WAN, site-to-site VPN, and Tor as upstream | Pellaeon Lin |
+| 11:30-12:00<br>30 min | <span class="sess-tag sess-tag--payments">Payments</span> :material-fingerprint: **Open-standard real-identity methods on blockchain networks**<br>:material-arrow-right-bottom: After the VASP Act, which open standards will locate Taiwanese identities on-chain | Yusef Schultz |
+
+(12:00–13:00 lunch)
+
+**Afternoon 13:00–16:00 (room `TR-510`)**
+
+| Time | Session | Speaker |
+|------|---------|---------|
+| 13:00-13:30<br>30 min | <span class="sess-tag sess-tag--relay">Tor Relay</span> :simple-torproject: **Growing onions on campus? Running an academic Tor node at NTNU and lessons from the EFF Tor University Challenge**<br>:material-arrow-right-bottom: The full journey of standing up an academic Tor node, from technical config to campus policy | NZ |
+| 13:35-14:25<br>50 min | <span class="sess-tag sess-tag--privacy">Privacy</span> :material-eye-off-outline: **Browser tracking, anti-tracking strategies, and user autonomy**<br>:material-arrow-right-bottom: How your everyday browser gets fingerprinted and may leak who you contact, and how to push back | Pellaeon Lin |
+| 14:30-15:00<br>30 min | <span class="sess-tag sess-tag--privacy">Privacy</span> :material-database-lock: **After the health-insurance database case: exercising the right to stop secondary use, and other large databases**<br>:material-arrow-right-bottom: From the opt-out lawsuit to the amended law, and how to exercise the right over your own medical data | Kuan-Ju Chou |
+| 15:05-15:55<br>50 min | <span class="sess-tag sess-tag--privacy">Privacy</span> :material-shield-account-outline: **Privacy guide 2026**<br>:material-arrow-right-bottom: From a personal risk matrix, to NGO and newsroom prep for legal data requests, to threshold signatures and MPC | Justyn |
+
+## :material-account-voice: Speakers { #speakers }
+
+The four Aug 8 morning primers are led by anoni.net community members (people who actually run Tor relays and work on the Traditional Chinese localization and bug reports for Tails and OONI); more about the community is on [About us](../about/index.md). Below are the invited and co-organized speakers in program order — click a name for their full bio on COSCUP pretalx.
+
+**Aug 8 afternoon · ETHTaipei "Anonymous Payments" session**
+
+- **[Ya-wen Jeng (Vivian Jeng)](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**: on the Privacy Stewards of Ethereum team at the Ethereum Foundation, focused on zero-knowledge proofs and privacy tech; led the Mopro and Unirep open-source tools. Speaks on "Zero-knowledge proofs and Citizen Digital Certificate identity verification".
+- **[ryanycw (Ryan Wang)](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**: DeFi developer and ETHTaipei co-organizer, interested in privacy, tech, and Ethereum. Speaks on "The Privacy-preserving Identity Pipeline in KYC".
+- **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**: works at the self-custodial privacy wallet Fluidkey and founded the XueDAO developer community. Speaks on "Starting from unlinkability: how stealth addresses solve on-chain financial privacy".
+- **[黃豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**: focused on decentralized tech and digital self-sovereignty; GM of Matters, former security-systems engineer at Taiwan's Ministry of Digital Affairs, now a Harvard policy visiting fellow and an Ethereum Foundation Silviculture member. Speaks on "I don't launder money — so why understand anonymous payments?".
+- **[Liangcc (CC)](https://pretalx.coscup.org/coscup-2026/speaker/UYKEPE/){target="_blank"}**: builds zero-knowledge applications in the Ethereum ecosystem; interested in the humanities, economics, and cryptographic proofs. Runs the "Hands-on private payments workshop".
+
+**Aug 9 · Day 2 sessions**
+
+- **[Raghu](https://pretalx.coscup.org/coscup-2026/speaker/X3GX3V/){target="_blank"}**: backend engineer working in networking (IP, TCP, packet analysis) and security research. Speaks on "The Workings of the Internet" (in English).
+- **[Pellaeon Lin](https://pretalx.coscup.org/coscup-2026/speaker/BJYRYX/){target="_blank"}**: digital security researcher and trainer focused on digital rights and FOSS. Speaks on "Building a home network with OpenWRT" and "Browser tracking, anti-tracking strategies and user autonomy".
+- **[Yusef Schultz](https://pretalx.coscup.org/coscup-2026/speaker/FAGUY7/){target="_blank"}**: speaks on "Open-standard real-identity methods on blockchain networks"; full bio on pretalx.
+- **[NZ (En-Li Su)](https://pretalx.coscup.org/coscup-2026/speaker/WCJNBL/){target="_blank"}**: a CS student at NTNU maintaining the first Tor node on the Taiwan Academic Network (TANet), interested in security and internet governance. Speaks on "Growing onions on campus? Running an academic Tor node at NTNU".
+- **[Kuan-Ju Chou](https://pretalx.coscup.org/coscup-2026/speaker/UAREZS/){target="_blank"}**: works on digital rights at the Taiwan Association for Human Rights. Speaks on "After the health-insurance database case".
+- **[Justyn](https://pretalx.coscup.org/coscup-2026/speaker/WZGMJG/){target="_blank"}**: speaks on "Privacy guide 2026"; full bio to follow on pretalx.
+
+## :material-handshake: Cross-community collaboration: Anonymity Networks Community × ETHTaipei { #cross-community }
+
+This year the community is partnering with [ETHTaipei](https://ethtaipei.org/){target="_blank"} (the Taipei Ethereum Community) on programming. The Aug 8 afternoon "Anonymous Payments" session puts people who care about digital rights and blockchain developers in the same room: NGOs and journalists can learn the privacy risks of donations and money flows, while developers get protocol-level zero-knowledge proofs and stealth-address implementations. Application-oriented and introductory talks sit in the Anonymity Networks Community track; technical and protocol-level talks may move to the ETHTaipei blockchain track (see the [joint review arrangement](./coscup-2026-cfp.md#anoni-netxETHTaipei)). Attendees are welcome to move between the two tracks.
+
+## :material-link-variant: Related links
+
+- [COSCUP 2026 Call for Proposals](./coscup-2026-cfp.md): topics, cross-community collaboration, and how to submit
+- [Anonymous network workshop 2025 (event recap)](../event-workshop-2025.md): last year's two-day workshop and roundtables
+- [From 2025 to 2026: privacy guidance, campus Tor relay contest, anonymous payments](../blog/posts/2025to2026.md)
+- [About us](../about/index.md)
+- [How to contribute](../community/how-to-contribute.md): the entry point for helping with Tor, OONI, translation, or running a node
+
+!!! info "Updates and contact"
+
+    Session details and times may still change before the event; the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"} is the latest source. To hear about community events, [stay in touch](../contact.md) through our newsletter and contact channels.

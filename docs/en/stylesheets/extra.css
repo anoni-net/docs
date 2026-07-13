@@ -38,6 +38,53 @@
   --guide-reports:   #946c00;  --guide-reports-d:   #e0b020;  /* 報告：琥珀金（離開藍色系，色盲下與概念完全分開） */
 }
 
+/* ==========================================================================
+   活動頁議程主題標籤 .sess-tag（對齊 2026 三大主題；soft chip 淡底深字、過 AA）
+   見 .claude/rules/brand-identity.md；不挪用 --guide-* sidebar 導覽色
+   ========================================================================== */
+.sess-tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.02rem 0.4rem;
+  margin-right: 0.3rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  vertical-align: 0.1em;
+  border: 1px solid transparent;
+}
+.sess-tag--basic    { background: var(--brand-cyan-50); color: var(--brand-cyan-800); border-color: var(--brand-cyan-200); }
+.sess-tag--privacy  { background: #e8f5e9; color: #1b5e20; border-color: #a5d6a7; }
+.sess-tag--relay    { background: #f3e5f5; color: #6a1b9a; border-color: #ce93d8; }
+.sess-tag--payments { background: #fff3e0; color: #b35309; border-color: #ffcc80; }
+
+[data-md-color-scheme="slate"] .sess-tag--basic    { background: rgba(0,174,255,.15); color: var(--brand-cyan-300); border-color: rgba(0,174,255,.40); }
+[data-md-color-scheme="slate"] .sess-tag--privacy  { background: rgba(76,175,80,.18); color: #81c784; border-color: rgba(76,175,80,.42); }
+[data-md-color-scheme="slate"] .sess-tag--relay    { background: rgba(123,31,162,.24); color: #ce93d8; border-color: rgba(123,31,162,.50); }
+[data-md-color-scheme="slate"] .sess-tag--payments { background: rgba(239,108,0,.18); color: #ffb74d; border-color: rgba(239,108,0,.45); }
+
+/* Schedule table: tint the session icon + title with the category colour (matches .sess-tag,
+   only appears on the activity page; :has(+ strong) targets the session icon before the title,
+   leaving the description arrow neutral) */
+.md-typeset td:has(.sess-tag--basic)    strong,
+.md-typeset td:has(.sess-tag--basic)    .twemoji:has(+ strong) { color: var(--brand-cyan-800); }
+.md-typeset td:has(.sess-tag--privacy)  strong,
+.md-typeset td:has(.sess-tag--privacy)  .twemoji:has(+ strong) { color: #1b5e20; }
+.md-typeset td:has(.sess-tag--relay)    strong,
+.md-typeset td:has(.sess-tag--relay)    .twemoji:has(+ strong) { color: #6a1b9a; }
+.md-typeset td:has(.sess-tag--payments) strong,
+.md-typeset td:has(.sess-tag--payments) .twemoji:has(+ strong) { color: #b35309; }
+
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--basic)    strong,
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--basic)    .twemoji:has(+ strong) { color: var(--brand-cyan-300); }
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--privacy)  strong,
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--privacy)  .twemoji:has(+ strong) { color: #81c784; }
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--relay)    strong,
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--relay)    .twemoji:has(+ strong) { color: #ce93d8; }
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--payments) strong,
+[data-md-color-scheme="slate"] .md-typeset td:has(.sess-tag--payments) .twemoji:has(+ strong) { color: #ffb74d; }
+
 html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__inner.md-grid {
     padding: 0 1rem;
 }

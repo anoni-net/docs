@@ -9,6 +9,16 @@ We occasionally hold workshops or discussion meetings on topics related to anony
 
 <div class="grid cards" markdown>
 
+-   [:material-calendar-star: COSCUP 2026 Anonymity Networks Community track](./coscup-2026.md)
+    :material-update: August 8–9, 2026 (two days)
+    :octicons-location-24: National Taiwan University of Science and Technology（國立台灣科技大學）`TR-510`
+
+    ---
+
+    Two days of community talks and workshops covering network censorship, browser tracking, campus Tor nodes, data-privacy rights, a personal privacy guide, and anonymous payments, including a session co-organized with ETHTaipei.
+
+    :material-account-supervisor-outline: Intended audience: news media, independent journalists, civil-society groups, NGO staff, open-source and tech communities.
+
 -   [:material-email-edit: COSCUP 2026 Call for Proposals](./coscup-2026-cfp.md)
     :material-update: Open now ~ May 9, 2026 (deadline, AoE)
     :octicons-location-24: National Taiwan University of Science and Technology（國立台灣科技大學）
