@@ -8,6 +8,17 @@ icon: material/access-point-network
 
 [OONI](https://ooni.org/){target="_blank"} Probe, Explorer, and Run release summaries. Newest at the top. Each entry links back to the full translation.
 
+## OONI Probe 6.1.1
+
+> 2026-07-07 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.1){target="_blank"}
+
+- Measurement engine remains on OONI Probe CLI v3.29.0.
+- Desktop adds in-app language selection, so the interface no longer has to follow the system locale.
+- Android migrates to AGP 9 and adds the ProGuard rules needed for the JNA and UniFFI bindings.
+- Database writes are now filtered before being applied, and an index was added on `Measurement.is_done`.
+- Fixed incorrect scaling of usage figures at gigabyte size.
+- Updated translations: German, Brazilian Portuguese, European Portuguese, and Turkish.
+
 ## OONI Probe 6.1.0
 
 > 2026-06-25 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.0){target="_blank"}
