@@ -59,6 +59,7 @@ nav:
       - community/i18n.md
       - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md
+      - community/pin-ipfs-mirror.md
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md

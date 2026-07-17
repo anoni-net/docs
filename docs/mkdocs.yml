@@ -112,6 +112,7 @@ nav:
           - community/onionoo-mcp.md
           - community/asn-coverage-howto.md
           - community/upload-sensitive.md
+          - community/pin-ipfs-mirror.md
           - community/brand-assets.md
       - "推動主題":
           - community/roadmap-2026.md
