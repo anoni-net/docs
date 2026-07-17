@@ -8,6 +8,15 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon 与 Onion 服务的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tor Browser 15.0.18
+
+> 2026-07-14 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15018/){target="_blank"}
+
+- 以 Firefox 安全修补为主的小版本。
+- Firefox 基底维持 140.12.0esr，改以 cherry-pick 带入 firefox/esr140 分支的后续修补（tor-browser#45111），未做 rebase。
+- NoScript 升至 13.6.30.1984，构建工具链的 Go 升至 1.25.12（Windows、Linux、Android）。
+- 构建流程更新 boklm 的 GPG 子密钥（tor-browser-build#41821）。
+
 ## Tor Browser 16.0a8（Alpha 测试通道）
 
 > 2026-07-02 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a8/){target="_blank"}
