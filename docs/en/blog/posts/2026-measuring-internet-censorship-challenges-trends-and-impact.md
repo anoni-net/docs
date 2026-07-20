@@ -1,7 +1,7 @@
 ---
 date: 2026-06-26
 authors:
-    - toomore
+    - anoni-net
 categories:
     - Observation
     - OONI
