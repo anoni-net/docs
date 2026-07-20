@@ -28,6 +28,7 @@ icon: material/toolbox-outline
 
 - [什么是 Tails](./what-is-tails.md)：从 USB 启动、预设走 Tor、关机后不留痕迹的可携式系统。
 - [Tails、Whonix、Qubes 的差别](./tails-vs-whonix-vs-qubes.md)：三套常见匿名作业系统的取舍，依角色推荐适合的选择。
+- [GrapheneOS：高度隐私的行动作业系统](./grapheneos.md)：把 Android 安全强化并去 Google 化的手机系统，以及 Google 收紧 AOSP 后它面临的处境。
 
 ## 观测层：网络审查的可验证记录
 
