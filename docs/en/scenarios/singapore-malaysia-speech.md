@@ -10,9 +10,14 @@ Most English-language guidance on online speech assumes a US or European legal f
 
 It is a regional companion, not a full playbook: the general operational security lives in [how to build a threat model](../basics/threat-model.md), [activists and protest digital safety](./activist.md), and [journalists and source protection](./journalist.md), and this page adds the Singapore–Malaysia layer that those pages assume you already have.
 
-!!! note "Standing and scope"
+!!! warning "In-region verification wanted before this page is treated as settled"
 
-    We follow Singapore and Malaysia through public sources and diaspora contacts, not first-hand local practice. These laws move fast: the Malaysian Section 233 penalties changed in early 2025 and a constitutional test of that section was decided in 2026, and Singapore brought its first criminal POFMA prosecutions in 2026. Read the descriptions below as a map of where to look, current at the time of writing, not as legal advice, and confirm the specifics against a local source. We would welcome an in-region co-author to deepen and keep this current; reach us through the [Community](../community/index.md) page.
+    We follow Singapore and Malaysia through public sources and diaspora contacts, not first-hand local practice, and these laws move fast. Read the descriptions below as a map of where to look, current at the time of writing, and not as legal advice. Before anyone relies on this page, a Singapore or Malaysia partner should confirm the current position on:
+
+    - **Singapore** — POFMA's present enforcement posture (correction notice vs. criminal charge), the FICA "politically significant person" designation thresholds, how far the Public Order Act reaches online organizing, and current SIM-registration and Singpass specifics.
+    - **Malaysia** — the post-February-2025 wording and penalties of CMA Section 233 and how the 2026 *Heidy Quah* intent test works in practice, the current pace of Sedition Act enforcement, the Societies Act threshold for what counts as "organizing," the scope of state-level Syariah enforcement, and current SIM / MyDigital ID requirements.
+
+    If you organize, give, or work on digital rights in either jurisdiction and can help verify or co-author, reach us through the [Community](../community/index.md) page.
 
 ## Why the regional frame is load-bearing
 

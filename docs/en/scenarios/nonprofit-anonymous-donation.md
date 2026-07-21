@@ -186,9 +186,9 @@ Statutory detail is where "anonymous donation" stops being universal. We have fi
 
 The universal principle underneath all of them: check your own jurisdiction's charitable-solicitation and political-donation statutes, and remember that *anonymous does not mean unreported*. The organization still reports aggregate anonymous income even when it cannot name the donor.
 
-!!! note "Help us localize this"
+!!! warning "In-region verification wanted"
 
-    The Singapore and Malaysia detail above is written at a remove, not from first-hand practice. If you organize or give in those jurisdictions and can help verify or co-author the specifics, reach us through the [Community](../community/index.md) page.
+    The Singapore and Malaysia lines above are written at a remove, not from first-hand practice; treat them as followed-at-a-distance until a local source confirms them. Specifically, a partner in either jurisdiction should confirm the current charitable-fundraising and political-donation rules, whether and how foreign donations are restricted, and how the real-name identity layer (Singpass in Singapore) affects a domestic electronic donation rail. If you organize or give there and can help verify or co-author, reach us through the [Community](../community/index.md) page.
 
 ## What's next
 
