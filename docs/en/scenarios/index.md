@@ -23,12 +23,7 @@ Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the 
 - [Election observer self-protection](./election-observer.md) — the individual operational-security layer that org-level guidance from GNDEM, NDI, and ANFREL leaves open: device prep, secure reporting, seized-device exposure, harassment, and cross-border accreditation.
 - [Cross-border travel and device searches in Asia](./asia-travel.md) — general device-minimization OPSEC plus Asia-specific border-search context, because the canonical English guide describes only US law and misleads travelers in Asia.
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — copy-paste prompts you feed to your own AI to get a destination's censorship, legal, SIM, and emergency-contact picture before you travel; works for any country, and no query reaches us.
-
-## :material-progress-pencil: In Tier 2 drafting
-
-The following scenario exists in detail in our Chinese editions and is queued for English re-framing in a later round:
-
-- **Anonymous donations to advocacy organizations** — for both organizers and donors, with regional banking and crypto context
+- [Anonymous donation channels for advocacy organizations](./nonprofit-anonymous-donation.md) — a working design for legally anonymous giving that protects donors while keeping the organization accountable, for both organizers and donors, with Sinophone Asia-Pacific banking, crypto, and cross-border context.
 
 ## :material-help-circle-outline: How to suggest a scenario
 

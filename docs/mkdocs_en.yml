@@ -37,6 +37,7 @@ nav:
           - scenarios/journalist.md
           - scenarios/activist.md
           - scenarios/election-observer.md
+          - scenarios/nonprofit-anonymous-donation.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
       - !ENV [NAV_REPORTS, "Reports"]:
