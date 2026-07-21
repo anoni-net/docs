@@ -1,5 +1,5 @@
 ---
-date: 2026-06-12
+date: 2026-07-26
 authors:
     - anoni-net
 categories:
