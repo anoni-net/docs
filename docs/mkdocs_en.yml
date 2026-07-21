@@ -22,6 +22,7 @@ nav:
           - basics/anonymity-vs-privacy.md
           - basics/metadata.md
           - basics/threat-model.md
+          - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "Tools"]:
           - tools/index.md
           - tools/messaging-comparison.md
@@ -29,7 +30,9 @@ nav:
           - tools/crypto-privacy-spectrum.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/tor-browser-advanced.md
+          - tools/tor-snowflake.md
           - tools/vpn-guide.md
+          - tools/ooni-run-v2.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/lgbtq.md
