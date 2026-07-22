@@ -236,6 +236,13 @@ plugins:
         'about/community/participate.md': 'community/how-to-contribute.md'
         'about/community/communication-tools.md': 'community/tools.md'
         'about/send-censorship.md': 'community/upload-sensitive.md'
+        # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
+        'about/community.md': 'community/index.md'
+        'blog/2025/01/project-relaunch-2025.md': 'blog/index.md'
+        'blog/2025/01/项目重启-2025.md': 'blog/index.md'
+        'blog/2026/02/ooni-全新的匿名凭证系统.md': 'blog/index.md'
+        'regional.md': 'taiwan/index.md'
+        'regional/tor-relay-watcher.md': 'taiwan/index.md'
   - social:
       cards_layout_options:
         font_family: Noto Sans TC
