@@ -140,6 +140,24 @@ plugins:
       lang:
         - zh
         - en
+  - redirects:
+      redirect_maps:
+        # 2026 flat → categorised restructure (3aa2a65); en is a curated subset,
+        # so dropped pages redirect to the nearest live section index.
+        'internet-freedom-matter.md': 'basics/internet-freedom.md'
+        'intro/index.md': 'basics/index.md'
+        'what-is-tails.md': 'tools/tails-vs-whonix-vs-qubes.md'
+        'what-is-tor.md': 'tools/tor-browser-advanced.md'
+        'what-is-anonymous-network.md': 'tools/index.md'
+        'tor-snowflake.md': 'tools/index.md'
+        'what-is-ooni.md': 'regional/index.md'
+        'ooni-asns-coverage.md': 'regional/index.md'
+        'ooni-weblists.md': 'regional/index.md'
+        'watcher-tor-relays.md': 'regional/tor-relay-watcher.md'
+        'ooni-i18n.md': 'community/i18n.md'
+        'setup-repo.md': 'community/index.md'
+        'setup-tor-relay.md': 'community/index.md'
+        'setup-skill-level.md': 'community/index.md'
   - social:
       cards_layout_options:
         font_family: Public Sans

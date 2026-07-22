@@ -216,6 +216,26 @@ plugins:
         'report/interseclab-the-internet-coup/index_6.md': 'reports/interseclab-network-coup/index_6.md'
         'report/interseclab-the-internet-coup/index_7.md': 'reports/interseclab-network-coup/index_7.md'
         'report/interseclab-the-internet-coup/index_8.md': 'reports/interseclab-network-coup/index_8.md'
+        # 2026 扁平結構 → 7 分類改版（ddad3ca）舊網址止血，同時覆蓋 /docs/ 與 /docs/zh-tw/
+        'internet-freedom-matter.md': 'basics/internet-freedom.md'
+        'intro/index.md': 'basics/index.md'
+        'intro/ooni-run-v2.md': 'tools/ooni-run-v2.md'
+        'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'
+        'what-is-ooni.md': 'tools/what-is-ooni.md'
+        'what-is-tails.md': 'tools/what-is-tails.md'
+        'what-is-tor.md': 'tools/what-is-tor.md'
+        'tor-snowflake.md': 'tools/tor-snowflake.md'
+        'ooni-asns-coverage.md': 'taiwan/ooni-asn-coverage.md'
+        'ooni-weblists.md': 'taiwan/ooni-checklist.md'
+        'watcher-tor-relays.md': 'taiwan/tor-relay-watcher.md'
+        'ooni-i18n.md': 'community/i18n.md'
+        'setup-repo.md': 'community/setup-repo.md'
+        'setup-tor-relay.md': 'community/setup-tor-relay.md'
+        'setup-skill-level.md': 'community/skill-level.md'
+        'about/community/index.md': 'community/index.md'
+        'about/community/participate.md': 'community/how-to-contribute.md'
+        'about/community/communication-tools.md': 'community/tools.md'
+        'about/send-censorship.md': 'community/upload-sensitive.md'
   - social:
       cards_layout_options:
         font_family: Noto Sans TC
