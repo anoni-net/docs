@@ -102,6 +102,15 @@ icon: material/book-open-variant
 
 如果你的新文章不確定該放哪一類，先在 Matrix 上問一聲，避免直接 PR 後又要搬。
 
+### 搬檔、改名、刪頁要補 redirect
+
+移動、改名或刪除已上線的頁面時，在同一個 PR 補上 redirect，讓舊網址不會變成 404。舊網址會長期活在搜尋引擎、書籤與外部連結裡，少了 redirect 就流失既有讀者與累積的 SEO 權重。
+
+- redirect 寫在三支 mkdocs 設定的 `plugins.redirects.redirect_maps`：`mkdocs.yml` 對應 zh-TW（同時涵蓋 `/docs/` 與 `/docs/zh-tw/`）、`mkdocs_en.yml` 對應 en、`mkdocs_cn.yml` 對應 zh-cn。
+- 格式是「舊路徑: 新路徑」，路徑相對各語系的 docs 目錄，不含 `docs/<lang>/` 前綴。例：`'tools/what-is-ooni.md': 'tools/index.md'`。
+- 找不到一對一的新頁時，導向所屬分類的 index 頁（`community/index.md`、`tools/index.md` 等）。
+- 既有 redirect 保留不刪，舊網址會一直有人點進來。唯一要回頭改的情況：某條的目標頁自己也被移掉，redirect 變成斷鏈。
+
 ## 圖片與資源
 
 - 圖片放在 `docs/zh-TW/assets/images/`

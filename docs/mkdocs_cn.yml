@@ -182,6 +182,53 @@ plugins:
       lang:
         - zh
         - en
+  - redirects:
+      redirect_maps:
+        # 2026 扁平结构 → 7 分类改版（ceaf889）旧网址止血
+        'internet-freedom-matter.md': 'basics/internet-freedom.md'
+        'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'
+        'what-is-ooni.md': 'tools/what-is-ooni.md'
+        'what-is-tails.md': 'tools/what-is-tails.md'
+        'what-is-tor.md': 'tools/what-is-tor.md'
+        'tor-snowflake.md': 'tools/tor-snowflake.md'
+        'ooni-asns-coverage.md': 'taiwan/ooni-asn-coverage.md'
+        'ooni-weblists.md': 'taiwan/ooni-checklist.md'
+        'watcher-tor-relays.md': 'taiwan/tor-relay-watcher.md'
+        'ooni-i18n.md': 'community/i18n.md'
+        'setup-repo.md': 'community/setup-repo.md'
+        'setup-tor-relay.md': 'community/setup-tor-relay.md'
+        'setup-skill-level.md': 'community/skill-level.md'
+        'about/community/index.md': 'community/index.md'
+        'about/community/participate.md': 'community/how-to-contribute.md'
+        'about/community/communication-tools.md': 'community/tools.md'
+        # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
+        'about/community.md': 'community/index.md'
+        'about/send-censorship.md': 'about/index.md'
+        'blog/2025/01/project-relaunch-2025.md': 'blog/index.md'
+        'blog/2025/01/專案重啟-2025.md': 'blog/index.md'
+        'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
+        'community/become-anoni.md': 'community/index.md'
+        'community/campus-relay-faq.md': 'community/index.md'
+        'community/campus-tor-relay-proposal.md': 'community/index.md'
+        'community/campus-tor-relay-sop.md': 'community/index.md'
+        'regional.md': 'taiwan/index.md'
+        'regional/tor-relay-watcher.md': 'taiwan/index.md'
+        'report/interseclab-the-internet-coup.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup/index_8.md': 'reports/index.md'
+        'reports/interseclab-madlink.md': 'reports/index.md'
+        'reports/interseclab-madlink/index_3.md': 'reports/index.md'
+        'reports/interseclab-madlink/index_6.md': 'reports/index.md'
+        'reports/interseclab-network-coup.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_1.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_2.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_3.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_4.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_5.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_6.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_7.md': 'reports/index.md'
+        'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
   - social:
       cards_layout_options:
         font_family: Noto Sans SC
