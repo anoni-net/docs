@@ -498,9 +498,19 @@ async function animate() {
   await post.renderAsync();
 }
 
+// 讓提示列固定在底部操作區上緣、保留固定間距（依 dock 實際高度動態定位，任何螢幕尺寸都不會壓到）
+function positionHint() {
+  const d = $('dock');
+  if (!d || !el.hint) return;
+  el.hint.style.bottom = (window.innerHeight - d.getBoundingClientRect().top + 18) + 'px';
+}
+
 // ---- 啟動 ----
 async function main() {
   initStaticText();
+  positionHint();
+  if (window.ResizeObserver) new ResizeObserver(positionHint).observe($('dock'));
+  addEventListener('resize', positionHint);
   const ok = await initRenderer();
   if (!ok) return;
   bindControls(renderer.domElement);
