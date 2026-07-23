@@ -18,9 +18,9 @@ const COL = {
   client: 0x38d6ff,
   service: 0xb98cff,
   website: 0x7dffb0,       // 明網網站（clearnet）
-  clientStream: 0xaaf0ff,  // 請求（去程）
-  serviceStream: 0xe6d4ff,
-  respStream: 0xa8ffcf,    // 明網回應（回程，原路走回）
+  clientStream: 0x2fb6ff,  // 請求（去程）— 飽和 cyan，避免 additive 疊成白
+  serviceStream: 0x9a5cff, // 飽和 violet
+  respStream: 0x2bef86,    // 明網回應（回程，原路走回）— 飽和 green
   rp: 0xffffff,
 };
 
@@ -76,7 +76,7 @@ async function initRenderer() {
   const scenePass = pass(scene, camera);
   const col = scenePass.getTextureNode('output');
   const glow = col.add(bloom(col, 0.95, 0.6, 0.5));
-  post.outputNode = afterImage(glow, 0.91); // 殘影：越大拖尾越長（流動感）
+  post.outputNode = afterImage(glow, 0.6); // 短殘影：微尾巴＋流動感，又不會糊成一團
 
   addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
   return true;
@@ -153,6 +153,8 @@ let pGeo, pPos, pCol, pMat, points;
 const particles = new Array(MAX_PARTICLES);
 const freeList = [];
 const tmp = new THREE.Vector3();
+const dir = new THREE.Vector3();
+const AXIS_Z = new THREE.Vector3(0, 0, 1);
 
 function buildParticles() {
   pPos = new Float32Array(MAX_PARTICLES * 3);
@@ -161,7 +163,7 @@ function buildParticles() {
   pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
   pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
-  pMat = new THREE.PointsNodeMaterial({ size: 0.22, sizeAttenuation: true, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  pMat = new THREE.PointsNodeMaterial({ size: 0.26, sizeAttenuation: true, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
   points = new THREE.Points(pGeo, pMat);
   points.frustumCulled = false;
   scene.add(points);
@@ -191,7 +193,7 @@ function clearParticles() {
 // ---- 連線（會合，避開有害節點）----
 let connections = [];
 const flashes = [];
-const leaders = [];
+const tracers = [];
 
 function pickDistinct(pool, n, exclude) {
   const out = [];
@@ -226,7 +228,7 @@ function spawnConnection(type) {
       serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
       rp, hops: [...cHops, ...sHops],
     });
-    spawnLeader(clientCurve, LEAD_C); spawnLeader(serviceCurve, LEAD_S); // 去程引導頭
+    spawnTracer(clientCurve, COL.clientStream); spawnTracer(serviceCurve, COL.serviceStream); // 去程曳光彈頭
   } else {
     // 明網：client → guard → middle → exit → 網站，回應原路走回
     const hops = pickDistinct(goodRelays, 3, null);
@@ -239,8 +241,17 @@ function spawnConnection(type) {
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
       exit, website: websiteNode, hops,
     });
-    spawnLeader(fwdCurve, LEAD_C); // 去程引導頭
+    spawnTracer(fwdCurve, COL.clientStream); // 去程曳光彈頭
   }
+}
+
+// 曳光彈頭：每股流量發出時，一顆較大、該股亮色的球領在最前面，殘影拉成平滑尾巴（非串珠）
+function spawnTracer(curve, hex) {
+  const m = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10),
+    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
+  m.scale.set(0.16, 0.16, 0.62); // 沿行進方向拉長成 streak（曳光彈形狀，不靠殘影）
+  m.userData = { curve, t: 0, speed: 1.05 / TRAVEL };
+  group.add(m); tracers.push(m);
 }
 
 // 溫和的會合光暈：低不透明、緩起緩落（sin ease）；系統要求減少動態時完全不放
@@ -252,14 +263,6 @@ function spawnPulse(pos, hex) {
   group.add(m); flashes.push(m);
 }
 
-// 引導頭：每股流量發出時，一顆略大、該股亮色的粒子跑在最前面領路（速度略快於所有粒子）
-function spawnLeader(curve, hex) {
-  const m = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 12),
-    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
-  m.userData = { curve, t: 0, speed: 1.12 / TRAVEL };
-  group.add(m); leaders.push(m);
-}
-const LEAD_C = 0xd8f6ff, LEAD_S = 0xecdcff, LEAD_R = 0xd0ffe4; // 去程(client/service)、明網回程 的引導色
 
 function envelope(age, flowEnd) { // 淡入 → 維持 → 流完淡掉
   if (age < 0.3) return age / 0.3;
@@ -288,7 +291,7 @@ function updateConnections(dt) {
         }
       }
       // 會合 → RP 柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnLeader(conn.clientRet, LEAD_C); spawnLeader(conn.serviceRet, LEAD_S); }
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnTracer(conn.clientRet, COL.clientStream); spawnTracer(conn.serviceRet, COL.serviceStream); }
       // 回程：RP → client、RP → service（原路走回）
       if (conn.age >= retStart && conn.age < retEnd) {
         conn.emit -= dt;
@@ -314,7 +317,7 @@ function updateConnections(dt) {
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
       // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnLeader(conn.retCurve, LEAD_R); }
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
@@ -433,12 +436,13 @@ async function animate() {
   pGeo.attributes.position.needsUpdate = true;
   pGeo.attributes.color.needsUpdate = true;
 
-  // 引導頭沿路徑前進，跑完即移除
-  for (let i = leaders.length - 1; i >= 0; i--) {
-    const L = leaders[i], u = L.userData;
+  // 曳光彈頭沿路徑前進，跑完即移除
+  for (let i = tracers.length - 1; i >= 0; i--) {
+    const T = tracers[i], u = T.userData;
     u.t += u.speed * dt;
-    if (u.t >= 1) { group.remove(L); L.geometry.dispose(); leaders.splice(i, 1); continue; }
-    u.curve.getPoint(u.t, tmp); L.position.copy(tmp);
+    if (u.t >= 1) { group.remove(T); T.geometry.dispose(); tracers.splice(i, 1); continue; }
+    u.curve.getPoint(u.t, tmp); T.position.copy(tmp);
+    u.curve.getTangent(u.t, dir); T.quaternion.setFromUnitVectors(AXIS_Z, dir); // 頭朝行進方向
   }
 
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
