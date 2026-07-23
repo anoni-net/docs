@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="robots" content="noindex" />
-  <title>.onion 會合流量 · anoni.net</title>
+  <title>Tor 連線流量 · anoni.net</title>
   <style>
     :root {
       --cyan: #00aeff; --client: #38d6ff; --service: #b98cff; --bad: #ff5a5a;
@@ -59,11 +59,12 @@
 </head>
 <body>
   <div id="top" class="panel">
-    <h1 id="title">.onion 會合流量</h1>
-    <div id="caption">每次 .onion 連線，你和服務各建一條 3 跳電路，在隨機挑選的會合點相遇。</div>
+    <h1 id="title">Tor 連線流量</h1>
+    <div id="caption">兩種流量：連 .onion 服務在隨機會合點相遇；連明網網站則經 3 跳出口後，回應原路走回。</div>
     <div id="legend">
       <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
       <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
       <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（隨機挑選）</div>
       <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
     </div>
@@ -74,12 +75,12 @@
     <div class="ctrl-title">調控</div>
     <label class="ctrl"><span>relay 節點 <b id="v-relays">24</b></span>
       <input id="c-relays" type="range" min="8" max="48" step="1" value="24"></label>
-    <label class="ctrl"><span>電路數 <b id="v-circuits">12</b></span>
-      <input id="c-circuits" type="range" min="1" max="20" step="1" value="12"></label>
+    <label class="ctrl"><span>電路數 <b id="v-circuits">2</b></span>
+      <input id="c-circuits" type="range" min="1" max="20" step="1" value="2"></label>
     <label class="ctrl"><span>有害節點 <b id="v-bad">2</b></span>
       <input id="c-bad" type="range" min="0" max="10" step="1" value="2"></label>
     <label class="ctrl"><span>流量 <b id="v-flow">中</b></span>
-      <input id="c-flow" type="range" min="0" max="100" step="1" value="60"></label>
+      <input id="c-flow" type="range" min="0" max="100" step="1" value="70"></label>
   </div>
 
   <div id="hint" class="panel">

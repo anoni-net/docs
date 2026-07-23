@@ -1,6 +1,6 @@
 ---
 title: 互動與呈現
-description: 用可以動手玩、或看流量動起來的 3D 小畫面理解匿名網路。有帶你走一遍 Tor 三跳洋蔥路由的解謎，也有模擬 .onion 連線隨機挑會合點、流量匯流的動態呈現。
+description: 用可以動手玩、或看流量動起來的 3D 小畫面理解匿名網路。有帶你走一遍 Tor 三跳洋蔥路由的解謎，也有模擬 Tor 連線流量的動態呈現：連 .onion 服務在會合點相遇、連明網網站原路往返。
 icon: material/cube-outline
 ---
 
@@ -18,11 +18,11 @@ icon: material/cube-outline
 
     [:octicons-arrow-right-24: 開始遊戲](onion-routing/index.html){ .md-button .md-button--primary }
 
--   :material-lan:{ .lg .middle } __.onion 會合流量__
+-   :material-lan:{ .lg .middle } __Tor 連線流量__
 
     ---
 
-    看的呈現。模擬 .onion 連線的流量動態：你和服務各建一條 3 跳電路，在隨機挑選的會合點相遇，用細小發光粒子表現流量匯流。可點擊加連線、拖曳轉視角。
+    看的呈現。用細小發光粒子與殘影表現 Tor 流量的兩種路徑：連 .onion 服務在隨機會合點相遇，連明網網站則經 3 跳出口後原路往返。relay 數、電路數、有害節點、流量都可即時調控。
 
     [:octicons-arrow-right-24: 開始觀看](onion-rendezvous/index.html){ .md-button .md-button--primary }
 

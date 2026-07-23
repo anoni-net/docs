@@ -17,8 +17,10 @@ const COL = {
   bad: 0xff5a5a,
   client: 0x38d6ff,
   service: 0xb98cff,
-  clientStream: 0xaaf0ff,
+  website: 0x7dffb0,       // 明網網站（clearnet）
+  clientStream: 0xaaf0ff,  // 請求（去程）
   serviceStream: 0xe6d4ff,
+  respStream: 0xa8ffcf,    // 明網回應（回程，原路走回）
   rp: 0xffffff,
 };
 
@@ -35,6 +37,7 @@ const EMIT_DUR = 1.1;        // 每次連線「送出流量」持續多久（一
 const TRAVEL = 1.9;          // 粒子從起點流到會合點約幾秒
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const FIELD = new THREE.Vector3(18, 10, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
 
 function emitInterval() { return 0.05 - params.flow * 0.038; } // flow 越大越密（0.05→0.012）
 
@@ -82,54 +85,67 @@ async function initRenderer() {
 // ---- 節點雲（可即時重建）----
 const group = new THREE.Group();
 let relays = [], goodRelays = [];
-let clientNode, serviceNode;
+let clientNode, serviceNode, websiteNode;
 
 function makeNode(colorHex, radius, baseEmis, geo) {
   const uEmis = uniform(baseEmis);
+  const uCol = uniform(new THREE.Color(colorHex)); // 可變色（good ↔ bad 就地轉換）
   const mat = new THREE.MeshStandardNodeMaterial({ color: colorHex, roughness: 0.4, metalness: 0.2 });
-  mat.emissiveNode = color(colorHex).mul(uEmis);
+  mat.emissiveNode = uCol.mul(uEmis);
   const mesh = new THREE.Mesh(geo || new THREE.SphereGeometry(radius, 16, 12), mat);
-  mesh.userData = { uEmis, baseEmis, boost: 0, phase: Math.random() * 6.28, bad: false };
+  // life：新增從 0 淡入、移除淡出到 0；bad：是否有害節點
+  mesh.userData = { uEmis, uCol, baseEmis, goodEmis: baseEmis, boost: 0, phase: Math.random() * 6.28, bad: false, life: 0, dying: false };
   return mesh;
 }
 
-function clearRelays() {
-  for (const m of relays) { group.remove(m); m.geometry.dispose(); m.material.dispose(); }
-  relays = []; goodRelays = [];
+function addRelay() {
+  const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
+  const m = makeNode(COL.relay, 0.34 + Math.random() * 0.12, 0.35 + Math.random() * 0.25);
+  m.position.set(Math.cos(a) * FIELD.x * r, Math.sin(a) * FIELD.y * r, (Math.random() - 0.5) * 2 * FIELD.z);
+  m.userData.life = 0; // 從 0 慢慢長出來
+  group.add(m); relays.push(m);
+  return m;
+}
+
+function setBad(node, bad) {           // good ↔ bad 就地轉換，不動位置
+  node.userData.bad = bad;
+  const hex = bad ? COL.bad : COL.relay;
+  node.userData.uCol.value.set(hex);
+  node.material.color.set(hex);
+  node.userData.baseEmis = bad ? 0.75 : node.userData.goodEmis;
+  node.userData.boost = Math.max(node.userData.boost, 0.8); // 轉換時閃一下
+}
+
+// 增量調整：既有節點不動位置，數量變化用生命動畫（淡入 / 淡出）漸變
+function reconcile() {
+  let live = relays.filter((n) => !n.userData.dying);
+  // 1. 節點總數：不足長新的（淡入），過多標記淡出（優先淡出乾淨節點以保留壞節點）
+  while (live.length < params.relays) live.push(addRelay());
+  if (live.length > params.relays) {
+    const order = live.filter((n) => !n.userData.bad).concat(live.filter((n) => n.userData.bad));
+    let kill = live.length - params.relays;
+    for (const n of order) { if (kill <= 0) break; n.userData.dying = true; kill--; }
+    live = relays.filter((n) => !n.userData.dying);
+  }
+  // 2. 有害節點數：就地變色，不動位置
+  let liveBad = live.filter((n) => n.userData.bad);
+  let liveGood = live.filter((n) => !n.userData.bad);
+  while (liveBad.length < params.bad && liveGood.length > 0) { const n = liveGood.pop(); setBad(n, true); liveBad.push(n); }
+  while (liveBad.length > params.bad) { const n = liveBad.pop(); setBad(n, false); }
+  // 3. 會合點與 3 跳只從乾淨、未淡出的節點挑
+  goodRelays = relays.filter((n) => !n.userData.bad && !n.userData.dying);
 }
 
 function buildField() {
-  clearRelays();
-  // 隨機挑 params.bad 個當有害節點
-  const badSet = new Set();
-  const pool = [...Array(params.relays).keys()];
-  for (let i = 0; i < Math.min(params.bad, params.relays); i++) {
-    badSet.add(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
-  }
-  for (let i = 0; i < params.relays; i++) {
-    const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
-    const bad = badSet.has(i);
-    const m = makeNode(bad ? COL.bad : COL.relay, bad ? 0.42 : 0.34 + Math.random() * 0.12, bad ? 0.75 : 0.35 + Math.random() * 0.25);
-    m.position.set(Math.cos(a) * FIELD.x * r, Math.sin(a) * FIELD.y * r, (Math.random() - 0.5) * 2 * FIELD.z);
-    m.userData.bad = bad;
-    group.add(m); relays.push(m);
-    if (!bad) goodRelays.push(m);
-  }
-  // client 與服務只建一次
-  if (!clientNode) {
-    clientNode = makeNode(COL.client, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-    clientNode.position.set(-FIELD.x - 7, 0, 0);
-    serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-    serviceNode.position.set(FIELD.x + 7, 0, 0);
-    group.add(clientNode, serviceNode);
-  }
+  clientNode = makeNode(COL.client, 1.15, 1.5, new THREE.IcosahedronGeometry(1.15, 1));
+  clientNode.position.set(-FIELD.x - 8, 0, 0); clientNode.userData.life = 1;
+  serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
+  serviceNode.position.set(FIELD.x + 8, 6, 0); serviceNode.userData.life = 1;   // .onion 服務（右上）
+  websiteNode = makeNode(COL.website, 1.05, 1.4, new THREE.IcosahedronGeometry(1.05, 1));
+  websiteNode.position.set(FIELD.x + 8, -6, 0); websiteNode.userData.life = 1;  // 明網網站（右下）
+  group.add(clientNode, serviceNode, websiteNode);
   scene.add(group);
-}
-
-function rebuild() {
-  connections = [];   // 舊連線引用了舊節點，一併清掉
-  clearParticles();
-  buildField();
+  reconcile(); // 依 params 長出 relay 與有害節點
 }
 
 // ---- 粒子池 ----
@@ -186,25 +202,55 @@ function pickDistinct(pool, n, exclude) {
   return out;
 }
 
-function spawnConnection() {
-  if (goodRelays.length < 3) return;             // 乾淨節點不足就不發起
-  const rp = goodRelays[Math.floor(Math.random() * goodRelays.length)];
-  const cHops = pickDistinct(goodRelays, 2, rp);
-  const sHops = pickDistinct(goodRelays, 2, rp);
-  if (cHops.length < 2 || sHops.length < 2) return;
-  const clientCurve = new THREE.CatmullRomCurve3([clientNode.position, cHops[0].position, cHops[1].position, rp.position], false, 'catmullrom', 0.4);
-  const serviceCurve = new THREE.CatmullRomCurve3([serviceNode.position, sHops[0].position, sHops[1].position, rp.position], false, 'catmullrom', 0.4);
-  connections.push({
-    clientCurve, serviceCurve, rp, hops: [...cHops, ...sHops],
-    age: 0, emit: 0, emitDur: EMIT_DUR * (0.7 + Math.random() * 0.8), flashed: false,
-  });
+function curveThrough(nodes) {
+  return new THREE.CatmullRomCurve3(nodes.map((n) => n.position), false, 'catmullrom', 0.4);
 }
 
-function spawnFlash(pos) {
-  const shell = new THREE.Mesh(new THREE.SphereGeometry(0.7, 20, 14),
-    new THREE.MeshBasicNodeMaterial({ color: COL.rp, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
-  shell.position.copy(pos); shell.userData.life = 0;
-  group.add(shell); flashes.push(shell);
+function spawnConnection(type) {
+  if (goodRelays.length < 3) return;             // 乾淨節點不足就不發起
+  type = type || (Math.random() < 0.5 ? 'onion' : 'clearnet');
+  const emitDur = EMIT_DUR * (0.7 + Math.random() * 0.8);
+  if (type === 'onion') {
+    // .onion：client 與服務各建 3 跳電路，在隨機會合點相遇
+    const rp = goodRelays[Math.floor(Math.random() * goodRelays.length)];
+    const cHops = pickDistinct(goodRelays, 2, rp);
+    const sHops = pickDistinct(goodRelays, 2, rp);
+    if (cHops.length < 2 || sHops.length < 2) return;
+    connections.push({
+      type: 'onion', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
+      clientCurve: curveThrough([clientNode, cHops[0], cHops[1], rp]),
+      serviceCurve: curveThrough([serviceNode, sHops[0], sHops[1], rp]),
+      clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
+      serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
+      rp, hops: [...cHops, ...sHops],
+    });
+  } else {
+    // 明網：client → guard → middle → exit → 網站，回應原路走回
+    const hops = pickDistinct(goodRelays, 3, null);
+    if (hops.length < 3) return;
+    const exit = hops[2];
+    connections.push({
+      type: 'clearnet', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
+      fwdCurve: curveThrough([clientNode, hops[0], hops[1], exit, websiteNode]),
+      retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
+      exit, website: websiteNode, hops,
+    });
+  }
+}
+
+// 溫和的會合光暈：低不透明、緩起緩落（sin ease）；系統要求減少動態時完全不放
+function spawnPulse(pos, hex) {
+  if (REDUCED) return;
+  const m = new THREE.Mesh(new THREE.SphereGeometry(0.9, 20, 14),
+    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
+  m.position.copy(pos); m.userData.life = 0;
+  group.add(m); flashes.push(m);
+}
+
+function envelope(age, flowEnd) { // 淡入 → 維持 → 流完淡掉
+  if (age < 0.3) return age / 0.3;
+  if (age < flowEnd) return 1;
+  return Math.max(0, 1 - (age - flowEnd) / 0.6);
 }
 
 function updateConnections(dt) {
@@ -212,26 +258,60 @@ function updateConnections(dt) {
   for (let i = connections.length - 1; i >= 0; i--) {
     const conn = connections[i];
     conn.age += dt;
-    const emitting = conn.age < conn.emitDur;
-    const flowEnd = conn.emitDur + TRAVEL;
-    // 節點高亮的強度：淡入 → 維持 → 流完淡掉
-    let op;
-    if (conn.age < 0.3) op = conn.age / 0.3;
-    else if (conn.age < flowEnd) op = 1;
-    else op = Math.max(0, 1 - (conn.age - flowEnd) / 0.6);
 
-    if (emitting) {
-      conn.emit -= dt;
-      while (conn.emit <= 0) {
-        allocParticle(conn.clientCurve, COL.clientStream);
-        allocParticle(conn.serviceCurve, COL.serviceStream);
-        conn.emit += interval;
+    if (conn.type === 'onion') {
+      const retStart = TRAVEL;
+      const retEnd = retStart + conn.emitDur;
+      const flowEnd = retEnd + TRAVEL;
+      const op = envelope(conn.age, flowEnd);
+      // 去程：client → RP、service → RP
+      if (conn.age < conn.emitDur) {
+        conn.emit -= dt;
+        while (conn.emit <= 0) {
+          allocParticle(conn.clientCurve, COL.clientStream);
+          allocParticle(conn.serviceCurve, COL.serviceStream);
+          conn.emit += interval;
+        }
       }
+      // 會合 → RP 柔和發光、開始回程
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; }
+      // 回程：RP → client、RP → service（原路走回）
+      if (conn.age >= retStart && conn.age < retEnd) {
+        conn.emit -= dt;
+        while (conn.emit <= 0) {
+          allocParticle(conn.clientRet, COL.clientStream);
+          allocParticle(conn.serviceRet, COL.serviceStream);
+          conn.emit += interval;
+        }
+      }
+      // 回程抵達 → client、service 柔和發光
+      if (!conn.flashed2 && conn.age > retStart + TRAVEL) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); spawnPulse(serviceNode.position, 0xd9c2ff); }
+      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
+      for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
+      if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
+
+    } else { // clearnet：去程 client → 網站，回程原路走回
+      const retStart = TRAVEL;
+      const retEnd = retStart + conn.emitDur;
+      const flowEnd = retEnd + TRAVEL;
+      const op = envelope(conn.age, flowEnd);
+      if (conn.age < conn.emitDur) { // 去程
+        conn.emit -= dt;
+        while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
+      }
+      // 去程抵達網站 → 網站柔和發光、開始回程
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; }
+      if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
+        conn.emit -= dt;
+        while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
+      }
+      // 回程抵達 client → client 柔和發光
+      if (!conn.flashed2 && conn.age > retStart + TRAVEL) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); }
+      conn.website.userData.boost = Math.max(conn.website.userData.boost, 1.4 * op);
+      clientNode.userData.boost = Math.max(clientNode.userData.boost, 0.6 * op);
+      for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
+      if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
-    conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
-    for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
-    if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnFlash(conn.rp.position); }
-    if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
   }
 }
 
@@ -285,14 +365,27 @@ function flowLabel(v) { return v < 0.34 ? '低' : v < 0.67 ? '中' : '高'; }
 function bindUI() {
   const num = (id) => Number($(id).value);
   params.relays = num('c-relays'); params.circuits = num('c-circuits');
-  params.bad = num('c-bad'); params.flow = num('c-flow') / 100;
+  params.bad = Math.min(num('c-bad'), params.relays); params.flow = num('c-flow') / 100;
+  $('c-bad').max = params.relays;              // 有害節點數上限 = relay 節點數
+  $('c-bad').value = params.bad;
   $('v-relays').textContent = params.relays;
   $('v-circuits').textContent = params.circuits;
   $('v-bad').textContent = params.bad;
   $('v-flow').textContent = flowLabel(params.flow);
 
-  $('c-relays').addEventListener('input', (e) => { params.relays = Number(e.target.value); if (params.bad > params.relays) { params.bad = params.relays; $('c-bad').value = params.bad; $('v-bad').textContent = params.bad; } $('v-relays').textContent = params.relays; rebuild(); });
-  $('c-bad').addEventListener('input', (e) => { params.bad = Math.min(Number(e.target.value), params.relays); $('v-bad').textContent = params.bad; rebuild(); });
+  $('c-relays').addEventListener('input', (e) => {
+    params.relays = Number(e.target.value);
+    $('v-relays').textContent = params.relays;
+    $('c-bad').max = params.relays;            // bad 上限連動 relay
+    if (params.bad > params.relays) { params.bad = params.relays; $('c-bad').value = params.bad; $('v-bad').textContent = params.bad; }
+    reconcile();
+  });
+  $('c-bad').addEventListener('input', (e) => {
+    params.bad = Math.min(Number(e.target.value), params.relays);
+    $('c-bad').value = params.bad;             // 反映夾住後的值
+    $('v-bad').textContent = params.bad;
+    reconcile();
+  });
   $('c-circuits').addEventListener('input', (e) => { params.circuits = Number(e.target.value); $('v-circuits').textContent = params.circuits; });
   $('c-flow').addEventListener('input', (e) => { params.flow = Number(e.target.value) / 100; $('v-flow').textContent = flowLabel(params.flow); });
 }
@@ -326,16 +419,23 @@ async function animate() {
   pGeo.attributes.position.needsUpdate = true;
   pGeo.attributes.color.needsUpdate = true;
 
-  // 節點脈動 + boost 衰減
+  // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
   for (const m of relays) updateNode(m, tsec, dt);
-  updateNode(clientNode, tsec, dt); updateNode(serviceNode, tsec, dt);
+  updateNode(clientNode, tsec, dt); updateNode(serviceNode, tsec, dt); updateNode(websiteNode, tsec, dt);
+  // 淡出完成的節點移除（既有節點不動位置，只有被移除的會消失）
+  for (let i = relays.length - 1; i >= 0; i--) {
+    const m = relays[i];
+    if (m.userData.dying && m.userData.life <= 0) {
+      group.remove(m); m.geometry.dispose(); m.material.dispose(); relays.splice(i, 1);
+    }
+  }
 
-  // 會合閃光漣漪
+  // 會合光暈（溫和：低不透明、緩起緩落、放大幅度小）
   for (let i = flashes.length - 1; i >= 0; i--) {
     const sh = flashes[i]; sh.userData.life += dt;
-    const k = sh.userData.life / 0.7;
-    sh.scale.setScalar(1 + k * 4.5);
-    sh.material.opacity = Math.max(0, 0.85 * (1 - k));
+    const k = sh.userData.life / 1.3;
+    sh.scale.setScalar(1 + k * 1.3);
+    sh.material.opacity = 0.3 * Math.sin(Math.min(1, k) * Math.PI);
     if (k >= 1) { group.remove(sh); sh.geometry.dispose(); flashes.splice(i, 1); }
   }
 
@@ -344,10 +444,13 @@ async function animate() {
 
 function updateNode(m, tsec, dt) {
   const ud = m.userData;
+  // 生命動畫：新增從 0 長到 1（淡入），移除從 1 淡到 0
+  if (ud.dying) ud.life = Math.max(0, ud.life - dt / 0.5);
+  else if (ud.life < 1) ud.life = Math.min(1, ud.life + dt / 0.6);
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 2.2); }
-  ud.uEmis.value = e;
-  m.scale.setScalar(1 + (ud.boost > 0 ? ud.boost * 0.14 : 0));
+  ud.uEmis.value = e * ud.life;
+  m.scale.setScalar(ud.life * (1 + (ud.boost > 0 ? ud.boost * 0.14 : 0)));
 }
 
 // ---- 啟動 ----
