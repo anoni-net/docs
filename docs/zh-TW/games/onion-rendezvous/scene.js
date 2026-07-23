@@ -175,7 +175,7 @@ function allocParticle(curve, hex) {
   const idx = freeList.pop();
   if (idx === undefined) return;
   const p = particles[idx];
-  p.active = true; p.curve = curve; p.t = 0; p.speed = (1 / TRAVEL) * (0.85 + Math.random() * 0.3);
+  p.active = true; p.curve = curve; p.t = 0; p.speed = (1 / TRAVEL) * (0.9 + Math.random() * 0.15);
   setCol(idx, hex);
 }
 function freeParticle(idx) {
@@ -191,6 +191,7 @@ function clearParticles() {
 // ---- 連線（會合，避開有害節點）----
 let connections = [];
 const flashes = [];
+const leaders = [];
 
 function pickDistinct(pool, n, exclude) {
   const out = [];
@@ -216,25 +217,29 @@ function spawnConnection(type) {
     const cHops = pickDistinct(goodRelays, 2, rp);
     const sHops = pickDistinct(goodRelays, 2, rp);
     if (cHops.length < 2 || sHops.length < 2) return;
+    const clientCurve = curveThrough([clientNode, cHops[0], cHops[1], rp]);
+    const serviceCurve = curveThrough([serviceNode, sHops[0], sHops[1], rp]);
     connections.push({
       type: 'onion', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
-      clientCurve: curveThrough([clientNode, cHops[0], cHops[1], rp]),
-      serviceCurve: curveThrough([serviceNode, sHops[0], sHops[1], rp]),
+      clientCurve, serviceCurve,
       clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
       serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
       rp, hops: [...cHops, ...sHops],
     });
+    spawnLeader(clientCurve, LEAD_C); spawnLeader(serviceCurve, LEAD_S); // 去程引導頭
   } else {
     // 明網：client → guard → middle → exit → 網站，回應原路走回
     const hops = pickDistinct(goodRelays, 3, null);
     if (hops.length < 3) return;
     const exit = hops[2];
+    const fwdCurve = curveThrough([clientNode, hops[0], hops[1], exit, websiteNode]);
     connections.push({
       type: 'clearnet', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
-      fwdCurve: curveThrough([clientNode, hops[0], hops[1], exit, websiteNode]),
+      fwdCurve,
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
       exit, website: websiteNode, hops,
     });
+    spawnLeader(fwdCurve, LEAD_C); // 去程引導頭
   }
 }
 
@@ -246,6 +251,15 @@ function spawnPulse(pos, hex) {
   m.position.copy(pos); m.userData.life = 0;
   group.add(m); flashes.push(m);
 }
+
+// 引導頭：每股流量發出時，一顆略大、該股亮色的粒子跑在最前面領路（速度略快於所有粒子）
+function spawnLeader(curve, hex) {
+  const m = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 12),
+    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
+  m.userData = { curve, t: 0, speed: 1.12 / TRAVEL };
+  group.add(m); leaders.push(m);
+}
+const LEAD_C = 0xd8f6ff, LEAD_S = 0xecdcff, LEAD_R = 0xd0ffe4; // 去程(client/service)、明網回程 的引導色
 
 function envelope(age, flowEnd) { // 淡入 → 維持 → 流完淡掉
   if (age < 0.3) return age / 0.3;
@@ -273,8 +287,8 @@ function updateConnections(dt) {
           conn.emit += interval;
         }
       }
-      // 會合 → RP 柔和發光、開始回程
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; }
+      // 會合 → RP 柔和發光、開始回程（回程也放引導頭）
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnLeader(conn.clientRet, LEAD_C); spawnLeader(conn.serviceRet, LEAD_S); }
       // 回程：RP → client、RP → service（原路走回）
       if (conn.age >= retStart && conn.age < retEnd) {
         conn.emit -= dt;
@@ -299,8 +313,8 @@ function updateConnections(dt) {
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
-      // 去程抵達網站 → 網站柔和發光、開始回程
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; }
+      // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
+      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnLeader(conn.retCurve, LEAD_R); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
@@ -418,6 +432,14 @@ async function animate() {
   }
   pGeo.attributes.position.needsUpdate = true;
   pGeo.attributes.color.needsUpdate = true;
+
+  // 引導頭沿路徑前進，跑完即移除
+  for (let i = leaders.length - 1; i >= 0; i--) {
+    const L = leaders[i], u = L.userData;
+    u.t += u.speed * dt;
+    if (u.t >= 1) { group.remove(L); L.geometry.dispose(); leaders.splice(i, 1); continue; }
+    u.curve.getPoint(u.t, tmp); L.position.copy(tmp);
+  }
 
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
   for (const m of relays) updateNode(m, tsec, dt);
