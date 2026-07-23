@@ -29,7 +29,6 @@ const SPAWN_MIN_GAP = 0.12;  // 補新連線的最小間隔（錯開避免同步
 
 // ---- three.js ----
 let renderer, scene, camera, post;
-const TARGET = new THREE.Vector3(0, 0, 0);
 
 async function initRenderer() {
   const hasGPU = !!navigator.gpu;
@@ -51,7 +50,7 @@ async function initRenderer() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
-  scene.fog = new THREE.Fog(COL.bg, 46, 120);
+  scene.fog = new THREE.Fog(COL.bg, 60, 130);
   camera = new THREE.PerspectiveCamera(52, innerWidth / innerHeight, 0.5, 400);
 
   scene.add(new THREE.HemisphereLight(0x2a3f60, 0x0a0a12, 0.8));
@@ -71,7 +70,7 @@ async function initRenderer() {
 const group = new THREE.Group();
 let relays = [];        // 一般 relay 節點
 let clientNode, serviceNode;
-const FIELD = new THREE.Vector3(16, 9, 12); // 橢球半徑
+const FIELD = new THREE.Vector3(18, 10, 1); // 平面分布：x/y 為橢圓半徑，z 只給微幅厚度（物件仍是 3D）
 
 function makeNode(colorHex, radius, baseEmis, geo) {
   const uEmis = uniform(baseEmis);
@@ -83,23 +82,22 @@ function makeNode(colorHex, radius, baseEmis, geo) {
 }
 
 function buildField() {
-  // relay 散布在橢球內
+  // relay 散布在平面上的橢圓內（極座標，sqrt 讓分布均勻），z 只給微幅厚度
   for (let i = 0; i < FIELD_N; i++) {
-    const u = Math.random(), v = Math.random(), w = Math.random();
-    const theta = u * Math.PI * 2, phi = Math.acos(2 * v - 1), r = Math.cbrt(w);
+    const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
     const m = makeNode(COL.relay, 0.34 + Math.random() * 0.12, 0.35 + Math.random() * 0.25);
     m.position.set(
-      Math.sin(phi) * Math.cos(theta) * FIELD.x * r,
-      Math.cos(phi) * FIELD.y * r,
-      Math.sin(phi) * Math.sin(theta) * FIELD.z * r,
+      Math.cos(a) * FIELD.x * r,
+      Math.sin(a) * FIELD.y * r,
+      (Math.random() - 0.5) * 2 * FIELD.z,
     );
     group.add(m); relays.push(m);
   }
-  // client 與 .onion 服務放兩側
+  // client 與 .onion 服務放平面兩側
   clientNode = makeNode(COL.client, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-  clientNode.position.set(-FIELD.x - 6, -3, 4);
+  clientNode.position.set(-FIELD.x - 7, 0, 0);
   serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-  serviceNode.position.set(FIELD.x + 6, 4, -4);
+  serviceNode.position.set(FIELD.x + 7, 0, 0);
   group.add(clientNode, serviceNode);
   scene.add(group);
 }
@@ -219,18 +217,14 @@ function updateConnections(dt) {
   }
 }
 
-// ---- 相機 orbit（緩慢自轉 + 拖曳 + 縮放；點擊空白處加一條連線）----
-const orbit = { theta: 0.5, phi: 1.15, radius: 52 };
+// ---- 相機固定正對平面（拖曳平移、滾輪／雙指縮放；點擊空白處加一條連線）----
+const view = { cx: 0, cy: 0, dist: 40 }; // 平面中心 + 相機距離
 const pointers = new Map();
-let downPos = null, dragged = false, pinchStart = 0, radiusStart = 0;
+let downPos = null, dragged = false, pinchStart = 0, distStart = 0;
 
 function applyCamera() {
-  camera.position.set(
-    TARGET.x + orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta),
-    TARGET.y + orbit.radius * Math.cos(orbit.phi),
-    TARGET.z + orbit.radius * Math.sin(orbit.phi) * Math.sin(orbit.theta),
-  );
-  camera.lookAt(TARGET);
+  camera.position.set(view.cx, view.cy, view.dist);
+  camera.lookAt(view.cx, view.cy, 0);
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
@@ -239,7 +233,7 @@ function bindControls(dom) {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 1) { downPos = { x: e.clientX, y: e.clientY }; dragged = false; }
-    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); radiusStart = orbit.radius; }
+    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); distStart = view.dist; }
   });
   dom.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -248,13 +242,14 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) orbit.radius = clamp(radiusStart * pinchStart / d, 26, 95);
+      if (pinchStart > 0) view.dist = clamp(distStart * pinchStart / d, 22, 78);
       dragged = true; return;
     }
     const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
     if (downPos && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 6) dragged = true;
-    orbit.theta -= dx * 0.005;
-    orbit.phi = clamp(orbit.phi - dy * 0.005, 0.25, Math.PI - 0.25);
+    const k = view.dist * 0.0016; // 平移量隨縮放調整
+    view.cx = clamp(view.cx - dx * k, -26, 26);
+    view.cy = clamp(view.cy + dy * k, -18, 18);
   });
   const up = (e) => {
     const wasClick = pointers.size === 1 && !dragged;
@@ -264,7 +259,7 @@ function bindControls(dom) {
   };
   dom.addEventListener('pointerup', up);
   dom.addEventListener('pointercancel', up);
-  dom.addEventListener('wheel', (e) => { e.preventDefault(); orbit.radius = clamp(orbit.radius * (1 + Math.sign(e.deltaY) * 0.08), 26, 95); }, { passive: false });
+  dom.addEventListener('wheel', (e) => { e.preventDefault(); view.dist = clamp(view.dist * (1 + Math.sign(e.deltaY) * 0.08), 22, 78); }, { passive: false });
 }
 
 // ---- 每幀 ----
@@ -276,7 +271,6 @@ async function animate() {
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
   const tsec = now / 1000;
 
-  if (pointers.size === 0) orbit.theta += dt * 0.04; // 緩慢自轉
   applyCamera();
 
   // 維持約 TARGET_CONNS 條連線在跑：不足就補一條，錯開避免同步
