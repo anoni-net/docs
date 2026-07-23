@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>.onion 會合流量 · anoni.net</title>
+  <style>
+    :root {
+      --cyan: #00aeff; --client: #38d6ff; --service: #b98cff;
+      --ink: #eaf6ff; --muted: #9fb6c8;
+      --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; }
+    body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
+    canvas { display: block; position: fixed; inset: 0; }
+
+    .panel {
+      position: fixed; z-index: 10; background: var(--panel);
+      border: 1px solid var(--panel-b); border-radius: 14px;
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+    }
+    #top { left: 14px; top: 14px; max-width: min(90vw, 340px); padding: 13px 15px; }
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; }
+    #caption { margin: 5px 0 10px; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
+    #legend { display: flex; flex-direction: column; gap: 5px; }
+    .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+    .lg-dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
+    #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
+    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
+
+    #hint { left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    #hint.hidden { display: none; }
+    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
+  </style>
+  <script type="importmap">
+  { "imports": {
+      "three": "../vendor/three.webgpu.min.js",
+      "three/webgpu": "../vendor/three.webgpu.min.js",
+      "three/tsl": "../vendor/three.tsl.min.js",
+      "three/addons/": "../vendor/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <div id="top" class="panel">
+    <h1 id="title">.onion 會合流量</h1>
+    <div id="caption">每次 .onion 連線，你和服務各建一條 3 跳電路，在隨機挑選的會合點相遇。</div>
+    <div id="legend">
+      <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）與它的電路</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務與它的電路</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（隨機挑選）</div>
+    </div>
+    <div id="backend">偵測中…</div>
+  </div>
+
+  <div id="hint" class="panel">
+    <span id="hint-text">點擊畫面加一條連線 · 拖曳可旋轉 · 滾輪或雙指縮放</span>
+    <span id="hint-close">知道了</span>
+  </div>
+
+  <script type="module" src="./scene.js"></script>
+</body>
+</html>
