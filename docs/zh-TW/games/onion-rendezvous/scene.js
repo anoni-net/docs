@@ -36,6 +36,8 @@ const MAX_PARTICLES = 8000;
 const EMIT_DUR = 1.1;        // 每次連線「送出流量」持續多久（一次性脈衝）
 const TRAVEL = 1.9;          // （保留參考）粒子從起點流到會合點約幾秒
 const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
+const TAIL_WORLD = 4.5;      // 曳光彈尾巴世界長度（units），各路徑一致
+const TRAIL_SEG = 14, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.09; // 尾巴 tube 參數
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const FIELD = new THREE.Vector3(18, 10, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
@@ -77,7 +79,7 @@ async function initRenderer() {
   const scenePass = pass(scene, camera);
   const col = scenePass.getTextureNode('output');
   const glow = col.add(bloom(col, 0.95, 0.6, 0.5));
-  post.outputNode = afterImage(glow, 0.6); // 短殘影：微尾巴＋流動感，又不會糊成一團
+  post.outputNode = afterImage(glow, 0.45); // 尾巴由 tube 提供，殘影僅留一點流動感
 
   addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
   return true;
@@ -250,10 +252,11 @@ function spawnConnection(type) {
 
 // 曳光彈頭：每股流量發出時，一顆較大、該股亮色的球領在最前面，殘影拉成平滑尾巴（非串珠）
 function spawnTracer(curve, hex) {
-  const m = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10),
-    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
-  m.scale.set(0.15, 0.15, 0.9); // 沿行進方向拉長成 streak（曳光彈形狀，夠長讓殘影格重疊更平滑）
-  m.userData = { curve, t: 0, speed: WORLD_SPEED / curve.getLength() }; // 世界等速
+  const mat = new THREE.MeshBasicNodeMaterial({ vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); // geometry 每幀依曲線重建
+  m.frustumCulled = false;
+  const len = curve.getLength();
+  m.userData = { curve, t: 0, speed: WORLD_SPEED / len, len, color: new THREE.Color(hex) };
   group.add(m); tracers.push(m);
 }
 
@@ -444,8 +447,24 @@ async function animate() {
     const T = tracers[i], u = T.userData;
     u.t += u.speed * dt;
     if (u.t >= 1) { group.remove(T); T.geometry.dispose(); tracers.splice(i, 1); continue; }
-    u.curve.getPointAt(u.t, tmp); T.position.copy(tmp);          // 依弧長 → 等速，不暴衝
-    u.curve.getTangentAt(u.t, dir); T.quaternion.setFromUnitVectors(AXIS_Z, dir); // 頭朝行進方向
+    if (u.t < 0.01) continue; // 太短先不畫，避免退化曲線
+    // 取曲線上 [t-尾長, t] 這一段當尾巴 → tube 必定順著軌跡彎（不是剛體整個轉）
+    const t1 = Math.max(0, u.t - TAIL_WORLD / u.len);
+    const pts = [];
+    for (let s = 0; s <= TRAIL_SEG; s++) {
+      const uu = t1 + (u.t - t1) * (s / TRAIL_SEG);
+      pts.push(u.curve.getPointAt(uu).clone());
+    }
+    const geo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), TRAIL_SEG, TRAIL_RADIUS, TRAIL_RADIAL, false);
+    // 頂點色：尾端暗（additive 下不可見）→ 頭端亮，做出曳光彈頭亮尾淡
+    const radN = TRAIL_RADIAL + 1, n = geo.attributes.position.count, col = new Float32Array(n * 3);
+    for (let v = 0; v < n; v++) {
+      const b = Math.floor(v / radN) / TRAIL_SEG; // 0 尾 → 1 頭
+      const bb = b * b; // 偏向頭端更亮
+      col[v * 3] = u.color.r * bb; col[v * 3 + 1] = u.color.g * bb; col[v * 3 + 2] = u.color.b * bb;
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    T.geometry.dispose(); T.geometry = geo;
   }
 
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
