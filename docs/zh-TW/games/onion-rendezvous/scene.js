@@ -19,12 +19,13 @@ const COL = {
   rp: 0xffffff,
 };
 
-const FIELD_N = 60;          // relay 節點數
+const FIELD_N = 24;          // relay 節點數
 const MAX_PARTICLES = 6000;
-const EMIT_INTERVAL = 0.018; // 每條電路每隔多久噴一顆粒子（越小越密）
-const TRAVEL = 2.6;          // 粒子從起點流到會合點約幾秒
-const SPAWN_INTERVAL = 1.5;  // 自動發起連線的間隔
-const MAX_CONNS = 6;
+const EMIT_INTERVAL = 0.024; // 每條電路每隔多久噴一顆粒子（越小越密）
+const EMIT_DUR = 1.1;        // 每次連線「送出流量」持續多久，之後停止（一次性脈衝）
+const TRAVEL = 1.9;          // 粒子從起點流到會合點約幾秒
+const TARGET_CONNS = 15;     // 同時約幾條連線在跑
+const SPAWN_MIN_GAP = 0.12;  // 補新連線的最小間隔（錯開避免同步）
 
 // ---- three.js ----
 let renderer, scene, camera, post;
@@ -70,7 +71,7 @@ async function initRenderer() {
 const group = new THREE.Group();
 let relays = [];        // 一般 relay 節點
 let clientNode, serviceNode;
-const FIELD = new THREE.Vector3(19, 11, 15); // 橢球半徑
+const FIELD = new THREE.Vector3(16, 9, 12); // 橢球半徑
 
 function makeNode(colorHex, radius, baseEmis, geo) {
   const uEmis = uniform(baseEmis);
@@ -154,7 +155,6 @@ function pickDistinct(pool, n, exclude) {
 }
 
 function spawnConnection() {
-  if (connections.length >= MAX_CONNS) { connections.shift(); }
   const rp = relays[Math.floor(Math.random() * relays.length)];
   const cHops = pickDistinct(relays, 2, rp);
   const sHops = pickDistinct(relays, 2, rp);
@@ -163,7 +163,7 @@ function spawnConnection() {
   const serviceCurve = new THREE.CatmullRomCurve3([serviceNode.position, sHops[0].position, sHops[1].position, rp.position], false, 'catmullrom', 0.4);
   connections.push({
     clientCurve, serviceCurve, rp, hops: [...cHops, ...sHops],
-    age: 0, ttl: 4 + Math.random() * 2.5, emit: 0, flashed: false,
+    age: 0, emit: 0, emitDur: EMIT_DUR * (0.7 + Math.random() * 0.8), flashed: false,
     lineC: addFaintLine(clientCurve, COL.clientStream), lineS: addFaintLine(serviceCurve, COL.serviceStream),
   });
 }
@@ -187,26 +187,31 @@ function updateConnections(dt) {
   for (let i = connections.length - 1; i >= 0; i--) {
     const conn = connections[i];
     conn.age += dt;
-    const alive = conn.age < conn.ttl;
-    // 電路淡入淡出（faint line）
-    const fade = alive ? Math.min(1, conn.age / 0.6) : Math.max(0, 1 - (conn.age - conn.ttl) / 0.8);
-    conn.lineC.material.opacity = 0.11 * fade;
-    conn.lineS.material.opacity = 0.11 * fade;
+    const emitting = conn.age < conn.emitDur;         // 送出流量的期間
+    const flowEnd = conn.emitDur + TRAVEL;            // 最後一顆粒子大約抵達會合點的時間
+    // 路徑透明度：淡入 → 維持 → 流完後漸漸消失
+    let op;
+    if (conn.age < 0.3) op = conn.age / 0.3;
+    else if (conn.age < flowEnd) op = 1;
+    else op = Math.max(0, 1 - (conn.age - flowEnd) / 0.6);
+    conn.lineC.material.opacity = 0.13 * op;
+    conn.lineS.material.opacity = 0.13 * op;
 
-    if (alive) {
+    if (emitting) {
       conn.emit -= dt;
       while (conn.emit <= 0) {
         allocParticle(conn.clientCurve, COL.clientStream);
         allocParticle(conn.serviceCurve, COL.serviceStream);
         conn.emit += EMIT_INTERVAL;
       }
-      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6);
-      for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7);
-      // 兩股流大約在 TRAVEL 秒後抵達會合點 → 閃一下「接上了」
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnFlash(conn.rp.position); }
     }
-    // 收尾：停止噴粒子後，等殘餘粒子跑完再移除
-    if (conn.age > conn.ttl + TRAVEL + 0.5) {
+    // 會合點與經過的節點在流動期間高亮，流完跟著淡掉
+    conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
+    for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
+    // 兩股流大約在 TRAVEL 秒後抵達會合點 → 閃一下「接上了」
+    if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnFlash(conn.rp.position); }
+    // 流完 + 淡出完 → 這段路移除
+    if (conn.age > flowEnd + 0.7) {
       group.remove(conn.lineC); conn.lineC.geometry.dispose();
       group.remove(conn.lineS); conn.lineS.geometry.dispose();
       connections.splice(i, 1);
@@ -274,9 +279,9 @@ async function animate() {
   if (pointers.size === 0) orbit.theta += dt * 0.04; // 緩慢自轉
   applyCamera();
 
-  // 自動發起連線
+  // 維持約 TARGET_CONNS 條連線在跑：不足就補一條，錯開避免同步
   spawnTimer -= dt;
-  if (spawnTimer <= 0) { spawnConnection(); spawnTimer = SPAWN_INTERVAL; }
+  if (spawnTimer <= 0 && connections.length < TARGET_CONNS) { spawnConnection(); spawnTimer = SPAWN_MIN_GAP; }
 
   updateConnections(dt);
 
@@ -324,8 +329,8 @@ async function main() {
   buildParticles();
   bindControls(renderer.domElement);
   $('hint-close').addEventListener('click', () => $('hint').classList.add('hidden'));
-  // 開場先鋪幾條，畫面一開始就有流量
-  for (let i = 0; i < 3; i++) spawnConnection();
+  // 開場先鋪幾條，畫面一開始就有流量（其餘由維持機制補到 TARGET_CONNS）
+  for (let i = 0; i < 8; i++) spawnConnection();
   renderer.setAnimationLoop(animate);
 }
 
