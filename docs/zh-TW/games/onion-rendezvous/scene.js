@@ -249,7 +249,7 @@ function spawnConnection(type) {
 function spawnTracer(curve, hex) {
   const m = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10),
     new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
-  m.scale.set(0.16, 0.16, 0.62); // 沿行進方向拉長成 streak（曳光彈形狀，不靠殘影）
+  m.scale.set(0.15, 0.15, 0.9); // 沿行進方向拉長成 streak（曳光彈形狀，夠長讓殘影格重疊更平滑）
   m.userData = { curve, t: 0, speed: 1.05 / TRAVEL };
   group.add(m); tracers.push(m);
 }
@@ -430,7 +430,7 @@ async function animate() {
     if (!p.active) continue;
     p.t += p.speed * dt;
     if (p.t >= 1) { freeParticle(i); continue; }
-    p.curve.getPoint(p.t, tmp);
+    p.curve.getPointAt(p.t, tmp); // 依弧長 → 等速
     pPos[i * 3] = tmp.x; pPos[i * 3 + 1] = tmp.y; pPos[i * 3 + 2] = tmp.z;
   }
   pGeo.attributes.position.needsUpdate = true;
@@ -441,8 +441,8 @@ async function animate() {
     const T = tracers[i], u = T.userData;
     u.t += u.speed * dt;
     if (u.t >= 1) { group.remove(T); T.geometry.dispose(); tracers.splice(i, 1); continue; }
-    u.curve.getPoint(u.t, tmp); T.position.copy(tmp);
-    u.curve.getTangent(u.t, dir); T.quaternion.setFromUnitVectors(AXIS_Z, dir); // 頭朝行進方向
+    u.curve.getPointAt(u.t, tmp); T.position.copy(tmp);          // 依弧長 → 等速，不暴衝
+    u.curve.getTangentAt(u.t, dir); T.quaternion.setFromUnitVectors(AXIS_Z, dir); // 頭朝行進方向
   }
 
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
