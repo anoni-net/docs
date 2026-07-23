@@ -8,6 +8,16 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon、Onion 服務的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。本頁同時收錄穩定版與 Alpha 測試通道，Alpha 條目會在標題標注。
 
+## Tor Browser 15.0.19
+
+> 2026-07-21 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15019/){target="_blank"}
+
+- 以 Firefox 安全修補為主的小版本，帶入來自 Firefox 的重要安全更新。
+- Firefox 基底 rebase 至 140.13.0esr（tor-browser#45117），桌面版與 Android 版 GeckoView 同步升至 140.13.0esr。
+- 從 Firefox 153 backport 安全修補（tor-browser#45124）。
+- NoScript 升至 13.6.31.1984。
+- 還原先前 Funding the Commons 相關的實作變更（tor-browser#44748）。
+
 ## Tor Browser 15.0.18
 
 > 2026-07-14 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15018/){target="_blank"}

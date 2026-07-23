@@ -8,6 +8,17 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.10
+
+> 2026-07-23 · [Upstream announcement](https://tails.net/news/version_7.10/){target="_blank"}
+
+- A scheduled release introducing a new shutdown procedure and a new video player.
+- Adopts GNOME's standard shutdown procedure. The Power Off dialog now warns about unsaved documents and open applications, and shutdown completes automatically after 60 seconds. It is a bit slower in exchange for better data protection. An emergency shutdown option remains for a faster power-off.
+- The video player is now Celluloid, more modern and reliable, and it has no network access. To watch videos online, use Tor Browser or install VLC as additional software. Celluloid does not work on computers manufactured in 2011 or earlier.
+- Tor Browser updated to 15.0.19.
+- Updated some firmware to improve support for newer hardware such as graphics cards and Wi-Fi.
+- Automatic upgrades are available from Tails 7.0 or later; a manual upgrade is available if the automatic one fails. Fresh installations will erase existing Persistent Storage.
+
 ## Tails 7.9.1
 
 > 2026-07-01 · [Upstream announcement](https://tails.net/news/version_7.9.1/){target="_blank"}

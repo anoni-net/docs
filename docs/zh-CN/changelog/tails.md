@@ -8,6 +8,17 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 操作系统的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## Tails 7.10
+
+> 2026-07-23 · [上游公告](https://tails.net/news/version_7.10/){target="_blank"}
+
+- 例行排程版本，带来新的关机流程与视频播放器。
+- 改用 GNOME 标准关机流程。关机前会提醒尚未保存的文档与开启中的应用程序，并在 60 秒后自动关机。速度略慢，换来更好的数据保护。紧急关机选项仍保留，供需要快速断电时使用。
+- 视频播放器改用 Celluloid，更现代也更可靠，且不具网络访问权限。要在线看视频请改用 Tor Browser，或额外安装 VLC。此播放器不支持 2011 年（含）以前制造的电脑。
+- Tor Browser 升至 15.0.19。
+- 更新部分 firmware，改善显卡、Wi-Fi 等较新硬件的支持。
+- 可从 Tails 7.0 以后版本自动升级，若自动升级失败可改用手动升级。全新安装会清除既有的 Persistent Storage。
+
 ## Tails 7.9.1
 
 > 2026-07-01 · [上游公告](https://tails.net/news/version_7.9.1/){target="_blank"}
