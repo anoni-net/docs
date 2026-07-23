@@ -83,6 +83,7 @@ nav:
       - taiwan/pdpa-2025.md
       - taiwan/vasp-2026.md
       - taiwan/whistleblower-law.md
+  - !ENV [NAV_GAMES, "遊戲"]: games/index.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
       - !ENV [NAV_CHANGELOG, "軟體更新日誌"]:

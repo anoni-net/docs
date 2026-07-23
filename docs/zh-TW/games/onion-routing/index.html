@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>路由任務 · anoni.net</title>
+  <style>
+    :root {
+      --cyan: #00aeff; --cyan-600: #009ee6; --cyan-800: #006d99;
+      --ink: #eaf6ff; --muted: #9fb6c8;
+      --panel: rgba(9, 16, 26, .82); --panel-b: rgba(0, 174, 255, .28);
+      --danger: #ff5a5a;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #05070e; }
+    body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
+    canvas { display: block; position: fixed; inset: 0; }
+    a { color: var(--cyan); }
+
+    .panel {
+      position: fixed; z-index: 10; background: var(--panel);
+      border: 1px solid var(--panel-b); border-radius: 14px;
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+    }
+
+    /* 左上：品牌 + 任務 */
+    #top { left: 14px; top: 14px; max-width: min(90vw, 340px); padding: 13px 15px; }
+    #brand-title { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: .3px; }
+    #brand-tagline { margin: 2px 0 9px; color: var(--muted); font-size: 12.5px; }
+    #level-name { font-weight: 700; color: var(--cyan); font-size: 13px; margin-bottom: 3px; }
+    #objective { color: var(--ink); font-size: 13px; }
+    #backend { display: inline-block; margin-top: 9px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
+    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: var(--danger); }
+
+    /* 圖例 */
+    #legend-toggle { top: 14px; right: 14px; padding: 8px 13px; font-size: 12.5px; font-weight: 700; cursor: pointer; color: var(--ink); }
+    #legend { right: 14px; top: 54px; padding: 12px 15px; max-width: 240px; display: none; }
+    #legend.open { display: block; }
+    .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; margin: 4px 0; }
+    .lg-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
+    .lg-note { margin-top: 8px; color: var(--muted); font-size: 11.5px; }
+
+    /* 底部操作區 */
+    #dock { left: 50%; bottom: 18px; transform: translateX(-50%); padding: 13px 16px; display: flex; flex-direction: column; gap: 10px; align-items: center; max-width: min(94vw, 620px); }
+    #hops { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .hop { min-width: 150px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 10px; padding: 7px 11px; }
+    .hop-label { font-size: 11px; color: var(--muted); }
+    .slot-val { font-size: 13px; font-weight: 700; color: var(--muted); }
+    .slot-val.filled { color: var(--cyan); }
+    #actions { display: flex; gap: 10px; }
+    button { font: inherit; font-weight: 800; border: none; border-radius: 10px; padding: 10px 20px; cursor: pointer; }
+    #btn-send { background: var(--cyan); color: #06121c; box-shadow: 0 4px 16px rgba(0,174,255,.35); }
+    #btn-send:disabled { opacity: .5; cursor: default; }
+    #btn-reset { background: rgba(255,255,255,.08); color: var(--ink); }
+    button:active { transform: translateY(1px); }
+    .feedback { min-height: 0; max-width: 560px; text-align: center; font-size: 13px; color: var(--danger); opacity: 0; transition: opacity .2s; }
+    .feedback.show { opacity: 1; }
+
+    /* Tooltip */
+    #tooltip { position: fixed; z-index: 20; display: none; pointer-events: none; background: rgba(6,12,20,.94); border: 1px solid var(--panel-b); border-radius: 8px; padding: 5px 9px; font-size: 12px; font-weight: 700; }
+
+    /* 教學卡 */
+    #card { position: fixed; inset: 0; z-index: 30; display: none; align-items: center; justify-content: center; background: rgba(3,6,12,.6); backdrop-filter: blur(4px); padding: 20px; }
+    #card.show { display: flex; }
+    #card-inner { background: var(--panel); border: 1px solid var(--panel-b); border-radius: 18px; max-width: 460px; padding: 24px 26px; box-shadow: 0 20px 70px rgba(0,0,0,.6); }
+    #card-title { margin: 0 0 10px; font-size: 18px; color: var(--cyan); }
+    #card-body { color: var(--ink); font-size: 14px; line-height: 1.75; }
+    #card-actions { margin-top: 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    #card-link { font-size: 13px; font-weight: 700; text-decoration: none; }
+    #btn-next { background: var(--cyan); color: #06121c; margin-left: auto; }
+
+    /* 提示 */
+    #hint { left: 50%; bottom: 130px; transform: translateX(-50%); z-index: 9; max-width: min(90vw, 480px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    #hint.hidden { display: none; }
+    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
+
+    @media (max-width: 560px) {
+      #top { max-width: 74vw; padding: 11px 13px; }
+      #brand-title { font-size: 15px; }
+      .hop { min-width: 120px; }
+      #hint { bottom: 168px; }
+    }
+  </style>
+  <script type="importmap">
+  { "imports": {
+      "three": "../vendor/three.webgpu.min.js",
+      "three/webgpu": "../vendor/three.webgpu.min.js",
+      "three/tsl": "../vendor/three.tsl.min.js",
+      "three/addons/": "../vendor/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <div id="top" class="panel">
+    <h1 id="brand-title">路由任務</h1>
+    <div id="brand-tagline">tagline</div>
+    <div id="level-name">關卡</div>
+    <div id="objective">目標</div>
+    <div id="backend">偵測中…</div>
+  </div>
+
+  <div id="legend-toggle" class="panel">圖例</div>
+  <div id="legend" class="panel"><div id="legend-body"></div></div>
+
+  <div id="tooltip"></div>
+
+  <div id="hint" class="panel">
+    <span id="hint-text"></span>
+    <span id="hint-close">知道了</span>
+  </div>
+
+  <div id="dock" class="panel">
+    <div id="hops">
+      <div class="hop"><div class="hop-label" id="hop-label-0">入口</div><div class="slot-val" id="slot-0">—</div></div>
+      <div class="hop"><div class="hop-label" id="hop-label-1">中繼</div><div class="slot-val" id="slot-1">—</div></div>
+      <div class="hop"><div class="hop-label" id="hop-label-2">出口</div><div class="slot-val" id="slot-2">—</div></div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div id="actions">
+      <button id="btn-reset">重選</button>
+      <button id="btn-send">送出訊息</button>
+    </div>
+  </div>
+
+  <div id="card">
+    <div id="card-inner">
+      <h2 id="card-title"></h2>
+      <div id="card-body"></div>
+      <div id="card-actions">
+        <a id="card-link" href="#" target="_top"></a>
+        <button id="btn-next">下一關</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
