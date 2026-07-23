@@ -34,7 +34,8 @@ const params = {
 
 const MAX_PARTICLES = 8000;
 const EMIT_DUR = 1.1;        // 每次連線「送出流量」持續多久（一次性脈衝）
-const TRAVEL = 1.9;          // 粒子從起點流到會合點約幾秒
+const TRAVEL = 1.9;          // （保留參考）粒子從起點流到會合點約幾秒
+const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const FIELD = new THREE.Vector3(18, 10, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
@@ -177,7 +178,7 @@ function allocParticle(curve, hex) {
   const idx = freeList.pop();
   if (idx === undefined) return;
   const p = particles[idx];
-  p.active = true; p.curve = curve; p.t = 0; p.speed = (1 / TRAVEL) * (0.9 + Math.random() * 0.15);
+  p.active = true; p.curve = curve; p.t = 0; p.speed = (WORLD_SPEED / curve.getLength()) * (0.9 + Math.random() * 0.15); // 世界等速
   setCol(idx, hex);
 }
 function freeParticle(idx) {
@@ -223,6 +224,7 @@ function spawnConnection(type) {
     const serviceCurve = curveThrough([serviceNode, sHops[0], sHops[1], rp]);
     connections.push({
       type: 'onion', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
+      tHop: Math.max(clientCurve.getLength(), serviceCurve.getLength()) / WORLD_SPEED,
       clientCurve, serviceCurve,
       clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
       serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
@@ -237,6 +239,7 @@ function spawnConnection(type) {
     const fwdCurve = curveThrough([clientNode, hops[0], hops[1], exit, websiteNode]);
     connections.push({
       type: 'clearnet', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
+      tHop: fwdCurve.getLength() / WORLD_SPEED,
       fwdCurve,
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
       exit, website: websiteNode, hops,
@@ -250,7 +253,7 @@ function spawnTracer(curve, hex) {
   const m = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10),
     new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
   m.scale.set(0.15, 0.15, 0.9); // 沿行進方向拉長成 streak（曳光彈形狀，夠長讓殘影格重疊更平滑）
-  m.userData = { curve, t: 0, speed: 1.05 / TRAVEL };
+  m.userData = { curve, t: 0, speed: WORLD_SPEED / curve.getLength() }; // 世界等速
   group.add(m); tracers.push(m);
 }
 
@@ -277,9 +280,9 @@ function updateConnections(dt) {
     conn.age += dt;
 
     if (conn.type === 'onion') {
-      const retStart = TRAVEL;
+      const retStart = conn.tHop;
       const retEnd = retStart + conn.emitDur;
-      const flowEnd = retEnd + TRAVEL;
+      const flowEnd = retEnd + conn.tHop;
       const op = envelope(conn.age, flowEnd);
       // 去程：client → RP、service → RP
       if (conn.age < conn.emitDur) {
@@ -291,7 +294,7 @@ function updateConnections(dt) {
         }
       }
       // 會合 → RP 柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnTracer(conn.clientRet, COL.clientStream); spawnTracer(conn.serviceRet, COL.serviceStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnTracer(conn.clientRet, COL.clientStream); spawnTracer(conn.serviceRet, COL.serviceStream); }
       // 回程：RP → client、RP → service（原路走回）
       if (conn.age >= retStart && conn.age < retEnd) {
         conn.emit -= dt;
@@ -302,28 +305,28 @@ function updateConnections(dt) {
         }
       }
       // 回程抵達 → client、service 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + TRAVEL) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); spawnPulse(serviceNode.position, 0xd9c2ff); }
+      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); spawnPulse(serviceNode.position, 0xd9c2ff); }
       conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
       for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
 
     } else { // clearnet：去程 client → 網站，回程原路走回
-      const retStart = TRAVEL;
+      const retStart = conn.tHop;
       const retEnd = retStart + conn.emitDur;
-      const flowEnd = retEnd + TRAVEL;
+      const flowEnd = retEnd + conn.tHop;
       const op = envelope(conn.age, flowEnd);
       if (conn.age < conn.emitDur) { // 去程
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
       // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > TRAVEL) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
       // 回程抵達 client → client 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + TRAVEL) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); }
+      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); }
       conn.website.userData.boost = Math.max(conn.website.userData.boost, 1.4 * op);
       clientNode.userData.boost = Math.max(clientNode.userData.boost, 0.6 * op);
       for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
