@@ -7,7 +7,7 @@
   <title>.onion 會合流量 · anoni.net</title>
   <style>
     :root {
-      --cyan: #00aeff; --client: #38d6ff; --service: #b98cff;
+      --cyan: #00aeff; --client: #38d6ff; --service: #b98cff; --bad: #ff5a5a;
       --ink: #eaf6ff; --muted: #9fb6c8;
       --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
     }
@@ -29,11 +29,24 @@
     .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
     .lg-dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
     #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
-    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
+    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: var(--bad); }
 
-    #hint { left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    /* 控制面板 */
+    #controls { left: 14px; bottom: 20px; padding: 12px 15px; width: 216px; display: flex; flex-direction: column; gap: 10px; }
+    .ctrl-title { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 1px; }
+    .ctrl { font-size: 12px; color: var(--ink); display: flex; flex-direction: column; gap: 4px; }
+    .ctrl span { display: flex; justify-content: space-between; }
+    .ctrl b { color: var(--cyan); font-weight: 800; }
+    .ctrl input[type=range] { width: 100%; height: 4px; accent-color: var(--cyan); cursor: pointer; }
+
+    #hint { left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 440px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
+
+    @media (max-width: 620px) {
+      #controls { width: 180px; bottom: 66px; }
+      #hint { bottom: 14px; font-size: 11px; }
+    }
   </style>
   <script type="importmap">
   { "imports": {
@@ -49,11 +62,24 @@
     <h1 id="title">.onion 會合流量</h1>
     <div id="caption">每次 .onion 連線，你和服務各建一條 3 跳電路，在隨機挑選的會合點相遇。</div>
     <div id="legend">
-      <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）與它的電路</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務與它的電路</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
       <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（隨機挑選）</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
     </div>
     <div id="backend">偵測中…</div>
+  </div>
+
+  <div id="controls" class="panel">
+    <div class="ctrl-title">調控</div>
+    <label class="ctrl"><span>relay 節點 <b id="v-relays">24</b></span>
+      <input id="c-relays" type="range" min="8" max="48" step="1" value="24"></label>
+    <label class="ctrl"><span>電路數 <b id="v-circuits">12</b></span>
+      <input id="c-circuits" type="range" min="1" max="20" step="1" value="12"></label>
+    <label class="ctrl"><span>有害節點 <b id="v-bad">2</b></span>
+      <input id="c-bad" type="range" min="0" max="10" step="1" value="2"></label>
+    <label class="ctrl"><span>流量 <b id="v-flow">中</b></span>
+      <input id="c-flow" type="range" min="0" max="100" step="1" value="60"></label>
   </div>
 
   <div id="hint" class="panel">
