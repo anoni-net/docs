@@ -492,7 +492,7 @@ async function animate() {
 
   // 維持約 params.circuits 條連線：不足就補，錯開避免同步
   spawnTimer -= dt;
-  if (spawnTimer <= 0 && connections.length < params.circuits) { spawnConnection(); spawnTimer = SPAWN_MIN_GAP; }
+  if (spawnTimer <= 0 && connections.length < params.circuits) { spawnConnection(); spawnTimer = SPAWN_MIN_GAP + Math.random() * 0.3; } // 隨機錯開，避免同步齊發
 
   updateConnections(dt);
 
@@ -578,7 +578,7 @@ async function main() {
   buildParticles();
   bindControls(renderer.domElement);
   $('hint-close').addEventListener('click', () => $('hint').classList.add('hidden'));
-  for (let i = 0; i < 8; i++) spawnConnection(); // 開場先鋪幾條
+  // 連線由 animate 的排程器依 params.circuits（預設 2）逐條錯開補齊，不在開場齊發
   renderer.setAnimationLoop(animate);
 }
 
