@@ -209,7 +209,9 @@ function pickDistinct(pool, n, exclude) {
 }
 
 function curveThrough(nodes) {
-  return new THREE.CatmullRomCurve3(nodes.map((n) => n.position), false, 'catmullrom', 0.4);
+  const c = new THREE.CatmullRomCurve3(nodes.map((n) => n.position), false, 'catmullrom', 0.4);
+  c._glow = nodes.filter((n) => !n.userData.isEndpoint); // 這條路徑上會被粒子點亮的 relay（端點除外）
+  return c;
 }
 
 function spawnConnection(type) {
@@ -282,9 +284,7 @@ function updateConnections(dt) {
     if (conn.type === 'onion') {
       const retStart = conn.tHop;
       const retEnd = retStart + conn.emitDur;
-      const flowEnd = retEnd + conn.tHop;
-      const op = envelope(conn.age, flowEnd);
-      // 去程：client → RP、service → RP
+      const flowEnd = retEnd + conn.tHop;      // 去程：client → RP、service → RP
       if (conn.age < conn.emitDur) {
         conn.emit -= dt;
         while (conn.emit <= 0) {
@@ -304,16 +304,12 @@ function updateConnections(dt) {
           conn.emit += interval;
         }
       }
-      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op); // 會合點 relay 發亮
-      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 20 * op * dt, 10); // 流量經過的 relay 微微充能發亮
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
 
     } else { // clearnet：去程 client → 網站，回程原路走回
       const retStart = conn.tHop;
       const retEnd = retStart + conn.emitDur;
-      const flowEnd = retEnd + conn.tHop;
-      const op = envelope(conn.age, flowEnd);
-      if (conn.age < conn.emitDur) { // 去程
+      const flowEnd = retEnd + conn.tHop;      if (conn.age < conn.emitDur) { // 去程
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
@@ -323,7 +319,6 @@ function updateConnections(dt) {
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
-      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 20 * op * dt, 10); // 流量經過的 relay 微微充能發亮（clearnet 無會合點、端點不亮）
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
   }
@@ -429,6 +424,12 @@ async function animate() {
     if (p.t >= 1) { freeParticle(i); continue; }
     p.curve.getPointAt(p.t, tmp); // 依弧長 → 等速
     pPos[i * 3] = tmp.x; pPos[i * 3 + 1] = tmp.y; pPos[i * 3 + 2] = tmp.z;
+    // 粒子實際經過 relay 球體時，給它能量（發亮）；離開後由衰減慢慢暗回閒置
+    const glow = p.curve._glow;
+    if (glow) for (let g = 0; g < glow.length; g++) {
+      const r = glow[g], dx = tmp.x - r.position.x, dy = tmp.y - r.position.y, dz = tmp.z - r.position.z;
+      if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 12 * dt, 10);
+    }
   }
   pGeo.attributes.position.needsUpdate = true;
   pGeo.attributes.color.needsUpdate = true;
