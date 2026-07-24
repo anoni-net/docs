@@ -305,7 +305,7 @@ function updateConnections(dt) {
         }
       }
       conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op); // 會合點 relay 發亮
-      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 5 * op * dt, 1.8); // 流量經過的 relay 微微充能發亮
+      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 20 * op * dt, 10); // 流量經過的 relay 微微充能發亮
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
 
     } else { // clearnet：去程 client → 網站，回程原路走回
@@ -323,7 +323,7 @@ function updateConnections(dt) {
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
-      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 5 * op * dt, 1.8); // 流量經過的 relay 微微充能發亮（clearnet 無會合點、端點不亮）
+      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 20 * op * dt, 10); // 流量經過的 relay 微微充能發亮（clearnet 無會合點、端點不亮）
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
   }
