@@ -16,6 +16,7 @@ const COL = {
   both: 0xff6b8a,  // guard+exit
   earth: 0x0a1626,
   grid: 0x14364e,
+  coast: 0x3a7fa8, // 洲界海岸線
   atmo: 0x0b5cff,
 };
 const ROLE_COL = [COL.mid, COL.guard, COL.exit, COL.both]; // index = roleCode
@@ -87,15 +88,34 @@ function buildEarth() {
   // 經緯線網格
   const grid = new THREE.Mesh(
     new THREE.SphereGeometry(R * 1.002, 24, 16),
-    new THREE.MeshBasicNodeMaterial({ color: COL.grid, wireframe: true, transparent: true, opacity: 0.5 })
+    new THREE.MeshBasicNodeMaterial({ color: COL.grid, wireframe: true, transparent: true, opacity: 0.28 })
   );
   globe.add(grid);
   // 大氣層輝光
   const atmo = new THREE.Mesh(
     new THREE.SphereGeometry(R * 1.14, 40, 28),
-    new THREE.MeshBasicNodeMaterial({ color: COL.atmo, side: THREE.BackSide, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false })
+    new THREE.MeshBasicNodeMaterial({ color: COL.atmo, side: THREE.BackSide, transparent: true, opacity: 0.11, blending: THREE.AdditiveBlending, depthWrite: false })
   );
   scene.add(atmo);
+}
+
+async function loadContinents() {
+  try {
+    const { seg } = await fetch('./continents.json').then((r) => r.json());
+    const n = seg.length / 4;
+    const pos = new Float32Array(n * 2 * 3);
+    const v = new THREE.Vector3();
+    for (let i = 0; i < n; i++) {
+      llToVec(seg[i * 4 + 1], seg[i * 4], R * 1.004, v);
+      pos[i * 6] = v.x; pos[i * 6 + 1] = v.y; pos[i * 6 + 2] = v.z;
+      llToVec(seg[i * 4 + 3], seg[i * 4 + 2], R * 1.004, v);
+      pos[i * 6 + 3] = v.x; pos[i * 6 + 4] = v.y; pos[i * 6 + 5] = v.z;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const m = new THREE.LineBasicMaterial({ color: COL.coast, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false });
+    globe.add(new THREE.LineSegments(g, m));
+  } catch (e) { /* 洲界輪廓可選，抓不到就略過 */ }
 }
 
 async function loadRelays() {
@@ -194,7 +214,7 @@ async function animate() {
 async function main() {
   const ok = await initRenderer();
   if (!ok) return;
-  await loadRelays();
+  await Promise.all([loadRelays(), loadContinents()]);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
