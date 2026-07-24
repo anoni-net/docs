@@ -34,7 +34,6 @@ const params = {
 
 const MAX_PARTICLES = 8000;
 const EMIT_DUR = 0.4;        // 一波送出流量的持續時間（短＝緊湊封包，一顆引導頭從頭領到尾）
-const TRAVEL = 1.9;          // （保留參考）粒子從起點流到會合點約幾秒
 const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
 const TAIL_WORLD = 6.5;      // 回程彗星尾巴世界長度（units），加長讓「回應回來」更顯眼
 const TRAIL_SEG = 16, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.13; // 尾巴 tube 參數（加粗、稍多分段）
@@ -83,7 +82,7 @@ async function initRenderer() {
   const scenePass = pass(scene, camera);
   const col = scenePass.getTextureNode('output');
   const glow = col.add(bloom(col, 0.95, 0.6, 0.5));
-  post.outputNode = afterImage(glow, 0.45); // 尾巴由 tube 提供，殘影僅留一點流動感
+  post.outputNode = afterImage(glow, REDUCED ? 0 : 0.45); // 尾巴由 tube 提供，殘影僅留一點流動感；減少動態偏好時關閉
 
   addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
   return true;
@@ -412,7 +411,7 @@ function bindControls(dom) {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 1) { downPos = { x: e.clientX, y: e.clientY }; dragged = false; }
-    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); distStart = view.dist; }
+    if (pointers.size === 2) { dragged = true; const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); distStart = view.dist; }
   });
   dom.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -510,7 +509,7 @@ async function animate() {
   for (let i = tracers.length - 1; i >= 0; i--) {
     const T = tracers[i], u = T.userData;
     u.t += u.speed * dt;
-    if (u.t >= 1) { group.remove(T); T.geometry.dispose(); tracers.splice(i, 1); continue; }
+    if (u.t >= 1) { group.remove(T); T.geometry.dispose(); T.material.dispose(); tracers.splice(i, 1); continue; }
     if (u.t < 0.01) continue; // 太短先不畫，避免退化曲線
     // 取曲線上 [t-尾長, t] 這一段當尾巴 → tube 必定順著軌跡彎（不是剛體整個轉）
     const t1 = Math.max(0, u.t - TAIL_WORLD / u.len);
@@ -543,7 +542,13 @@ async function animate() {
   }
 
 
-  await post.renderAsync();
+  try {
+    await post.renderAsync();
+  } catch (e) {
+    console.error(e);
+    $('backend').textContent = '渲染中斷'; $('backend').className = 'err';
+    renderer.setAnimationLoop(null); // 停止 loop，避免持續拋錯洗版
+  }
 }
 
 function updateNode(m, tsec, dt) {
@@ -551,7 +556,7 @@ function updateNode(m, tsec, dt) {
   // 生命動畫：新增從 0 長到 1（淡入），移除從 1 淡到 0
   if (ud.dying) ud.life = Math.max(0, ud.life - dt / 0.5);
   else if (ud.life < 1) ud.life = Math.min(1, ud.life + dt / 0.6);
-  let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
+  let e = ud.baseEmis * (1 + (REDUCED ? 0 : 0.2) * Math.sin(tsec * 1.6 + ud.phase));
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 1.6); } // 粒子離開後變暗消逝（閒置）
   ud.uEmis.value = e * ud.life;
   // 會合閃白光：flashT 1→0（0.5 秒），白光強度 = flashT² × 5，配 bloom 明顯亮一下
