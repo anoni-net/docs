@@ -42,6 +42,7 @@ const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
 const LINE_OP = 0.15;        // onion：電路細線不透明度（additive，淡）
+const PARTICLE_GAIN = 1.8;   // 流量粒子色彩增益（推進 HDR → 更亮、bloom 更明顯）
 const FIELD = new THREE.Vector3(20, 11.5, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
 
@@ -189,7 +190,7 @@ function buildParticles() {
 }
 
 function setCol(idx, hex) {
-  const c = new THREE.Color(hex);
+  const c = new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN); // 提亮，讓流動粒子更醒目
   pCol[idx * 3] = c.r; pCol[idx * 3 + 1] = c.g; pCol[idx * 3 + 2] = c.b;
 }
 function allocParticle(curve, hex, speed) {
@@ -298,7 +299,7 @@ function spawnTracer(curve, hex, speed) {
   const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); // geometry 每幀依曲線重建
   m.frustumCulled = false;
   const len = curve.getLength();
-  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex) };
+  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN) };
   group.add(m); tracers.push(m);
 }
 
