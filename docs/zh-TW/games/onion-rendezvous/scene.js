@@ -93,11 +93,12 @@ let clientNode, serviceNode, websiteNode;
 function makeNode(colorHex, radius, baseEmis, geo) {
   const uEmis = uniform(baseEmis);
   const uCol = uniform(new THREE.Color(colorHex)); // 可變色（good ↔ bad 就地轉換）
+  const uFlash = uniform(new THREE.Color(0, 0, 0)); // 會合閃白光（加在 emissive 上）
   const mat = new THREE.MeshStandardNodeMaterial({ color: colorHex, roughness: 0.4, metalness: 0.2 });
-  mat.emissiveNode = uCol.mul(uEmis);
+  mat.emissiveNode = uCol.mul(uEmis).add(uFlash);
   const mesh = new THREE.Mesh(geo || new THREE.SphereGeometry(radius, 16, 12), mat);
-  // life：新增從 0 淡入、移除淡出到 0；bad：是否有害節點
-  mesh.userData = { uEmis, uCol, baseEmis, goodEmis: baseEmis, boost: 0, phase: Math.random() * 6.28, bad: false, life: 0, dying: false };
+  // life：淡入淡出；bad：有害節點；flashT：會合閃光 1→0
+  mesh.userData = { uEmis, uCol, uFlash, baseEmis, goodEmis: baseEmis, boost: 0, phase: Math.random() * 6.28, bad: false, life: 0, dying: false, flashT: 0 };
   return mesh;
 }
 
@@ -223,9 +224,10 @@ function spawnConnection(type) {
     if (cHops.length < 2 || sHops.length < 2) return;
     const clientCurve = curveThrough([clientNode, cHops[0], cHops[1], rp]);
     const serviceCurve = curveThrough([serviceNode, sHops[0], sHops[1], rp]);
+    const tHop = Math.max(clientCurve.getLength(), serviceCurve.getLength()) / WORLD_SPEED;
     connections.push({
       type: 'onion', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
-      tHop: Math.max(clientCurve.getLength(), serviceCurve.getLength()) / WORLD_SPEED,
+      tHop,
       clientCurve, serviceCurve,
       clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
       serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
@@ -259,9 +261,9 @@ function spawnTracer(curve, hex) {
   group.add(m); tracers.push(m);
 }
 
-// 會合特效：讓該節點球體本身瞬間發亮（emissive 尖峰後自然衰減），取代原本擴散光暈
+// 會合特效：讓會合點 relay 球體瞬間閃白光（明顯亮一下，0.5 秒衰減）
 function flashNode(node) {
-  node.userData.boost = Math.max(node.userData.boost, 2.5);
+  node.userData.flashT = 1;
 }
 
 
@@ -302,10 +304,7 @@ function updateConnections(dt) {
           conn.emit += interval;
         }
       }
-      // 回程抵達 → client、service 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; flashNode(clientNode); flashNode(serviceNode); }
-      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
-      for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
+      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op); // 只有會合點 relay 發亮（hop 與端點不亮）
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
 
     } else { // clearnet：去程 client → 網站，回程原路走回
@@ -318,17 +317,12 @@ function updateConnections(dt) {
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
       // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; flashNode(conn.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
-      // 回程抵達 client → client 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; flashNode(clientNode); }
-      conn.website.userData.boost = Math.max(conn.website.userData.boost, 1.4 * op);
-      clientNode.userData.boost = Math.max(clientNode.userData.boost, 0.6 * op);
-      for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
-      if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
+      if (conn.age > flowEnd + 0.7) connections.splice(i, 1); // clearnet 無會合點，不點亮任何節點
     }
   }
 }
@@ -485,7 +479,10 @@ function updateNode(m, tsec, dt) {
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 2.2); }
   ud.uEmis.value = e * ud.life;
-  // 端點（client/服務/網站）保留原本的 boost 放大；relay（含 rendezvous 會合點）只發亮不放大
+  // 會合閃白光：flashT 1→0（0.5 秒），白光強度 = flashT² × 5，配 bloom 明顯亮一下
+  if (ud.flashT > 0) ud.flashT = Math.max(0, ud.flashT - dt / 0.6); // 會合白閃約 0.6 秒
+  ud.uFlash.value.setScalar(ud.flashT * ud.flashT * 5 * ud.life);   // 亮白 pop、快速衰減
+  // 端點保留原本 boost 放大；relay 不放大
   m.scale.setScalar(ud.life * (1 + (ud.isEndpoint && ud.boost > 0 ? ud.boost * 0.14 : 0)));
 }
 
