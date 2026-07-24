@@ -428,7 +428,7 @@ async function animate() {
     const glow = p.curve._glow;
     if (glow) for (let g = 0; g < glow.length; g++) {
       const r = glow[g], dx = tmp.x - r.position.x, dy = tmp.y - r.position.y, dz = tmp.z - r.position.z;
-      if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 12 * dt, 10);
+      if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 8 * dt, 3);
     }
   }
   pGeo.attributes.position.needsUpdate = true;
