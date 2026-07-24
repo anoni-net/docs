@@ -304,7 +304,8 @@ function updateConnections(dt) {
           conn.emit += interval;
         }
       }
-      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op); // 只有會合點 relay 發亮（hop 與端點不亮）
+      conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op); // 會合點 relay 發亮
+      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 2.5 * op * dt, 0.7); // 流量經過的 relay 微微充能發亮
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
 
     } else { // clearnet：去程 client → 網站，回程原路走回
@@ -322,7 +323,8 @@ function updateConnections(dt) {
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
-      if (conn.age > flowEnd + 0.7) connections.splice(i, 1); // clearnet 無會合點，不點亮任何節點
+      for (const h of conn.hops) h.userData.boost = Math.min(h.userData.boost + 2.5 * op * dt, 0.7); // 流量經過的 relay 微微充能發亮（clearnet 無會合點、端點不亮）
+      if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
   }
 }
@@ -477,7 +479,7 @@ function updateNode(m, tsec, dt) {
   if (ud.dying) ud.life = Math.max(0, ud.life - dt / 0.5);
   else if (ud.life < 1) ud.life = Math.min(1, ud.life + dt / 0.6);
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
-  if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 2.2); }
+  if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 0.9); } // 衰減放慢＝慢慢暗下來（閒置）
   ud.uEmis.value = e * ud.life;
   // 會合閃白光：flashT 1→0（0.5 秒），白光強度 = flashT² × 5，配 bloom 明顯亮一下
   if (ud.flashT > 0) ud.flashT = Math.max(0, ud.flashT - dt / 0.6); // 會合白閃約 0.6 秒
