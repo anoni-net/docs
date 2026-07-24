@@ -289,7 +289,7 @@ function spawnConnection(type) {
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
       exit, website: websiteNode, hops,
     });
-    spawnTracer(fwdCurve, COL.clientStream); // 去程引導頭領這一波
+    // 去程（從端點出發）不放彗星頭，只有粒子流；回程才有彗星頭
   }
 }
 
@@ -340,13 +340,9 @@ function updateConnections(dt) {
         }
       }
 
-      // 1) 去程：線畫好後，兩股同時往 RP 跑（fwdSpeed → 同時抵達）；一顆引導頭領這一波封包
+      // 1) 去程：線畫好後，兩股同時往 RP 跑（fwdSpeed → 同時抵達）；去向不放彗星頭，只有粒子流
       if (conn.age >= T_EST) {
-        if (!conn.fwdStarted) {
-          conn.fwdStarted = true; conn.emit = 0;
-          spawnTracer(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
-          spawnTracer(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
-        }
+        if (!conn.fwdStarted) { conn.fwdStarted = true; conn.emit = 0; }
         if (conn.age < T_EST + conn.emitDur) {
           conn.emit -= dt;
           while (conn.emit <= 0) {
