@@ -36,8 +36,8 @@ const MAX_PARTICLES = 8000;
 const EMIT_DUR = 0.4;        // 一波送出流量的持續時間（短＝緊湊封包，一顆引導頭從頭領到尾）
 const TRAVEL = 1.9;          // （保留參考）粒子從起點流到會合點約幾秒
 const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
-const TAIL_WORLD = 4.5;      // 曳光彈尾巴世界長度（units），各路徑一致
-const TRAIL_SEG = 14, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.09; // 尾巴 tube 參數
+const TAIL_WORLD = 6.5;      // 回程彗星尾巴世界長度（units），加長讓「回應回來」更顯眼
+const TRAIL_SEG = 16, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.13; // 尾巴 tube 參數（加粗、稍多分段）
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
@@ -263,13 +263,14 @@ function spawnConnection(type) {
     if (cHops.length < 2 || sHops.length < 2) return;
     const clientCurve = curveThrough([clientNode, cHops[0], cHops[1], rp]);
     const serviceCurve = curveThrough([serviceNode, sHops[0], sHops[1], rp]);
+    const clientRet = curveThrough([rp, cHops[1], cHops[0], clientNode]);   // 回程：RP → client
+    const serviceRet = curveThrough([rp, sHops[1], sHops[0], serviceNode]); // 回程：RP → service
     const tHop = Math.max(clientCurve.getLength(), serviceCurve.getLength()) / WORLD_SPEED;
     connections.push({
       type: 'onion', age: 0, emit: 0, emitDur,
       tHop, fwdSpeed: 1 / tHop, // 去程兩股都用 tHop 走完 → 同時抵達 RP
       clientCurve, serviceCurve,
-      clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
-      serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
+      clientRet, serviceRet,
       rp, hops: [...cHops, ...sHops],
       clientLine: spawnLine(clientCurve, COL.clientStream),   // 電路細線：client → RP
       serviceLine: spawnLine(serviceCurve, COL.serviceStream), // 電路細線：服務 → RP
