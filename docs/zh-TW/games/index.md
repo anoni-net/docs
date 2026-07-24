@@ -1,6 +1,6 @@
 ---
 title: 互動與呈現
-description: 用可以動手玩、或看流量動起來的 3D 小畫面理解匿名網路。有帶你走一遍 Tor 三跳洋蔥路由的解謎，也有模擬 Tor 連線流量的動態呈現：連 .onion 服務在會合點相遇、連明網網站原路往返。
+description: 用可以動手玩、或看資料動起來的 3D 小畫面理解匿名網路。有帶你走一遍 Tor 三跳洋蔥路由的解謎，有模擬 Tor 連線流量在會合點相遇的動態呈現，也有把全球近萬台真實 Tor 中繼標在地球上的網路現況。
 icon: material/cube-outline
 ---
 
@@ -26,6 +26,14 @@ icon: material/cube-outline
 
     [:octicons-arrow-right-24: 開始觀看](onion-rendezvous/index.html){ .md-button .md-button--primary }
 
+-   :material-earth:{ .lg .middle } __Tor 中繼地球儀__
+
+    ---
+
+    看真實資料。把全球正在運作的近萬台 Tor 中繼標在地球上，顏色分 guard、middle、exit，大小分頻寬，一眼看出網路高度集中在少數國家與網段。資料取自 Onionoo。
+
+    [:octicons-arrow-right-24: 開始探索](tor-network/index.html){ .md-button .md-button--primary }
+
 </div>
 
 ## 想先讀文字版
@@ -36,4 +44,4 @@ icon: material/cube-outline
 
 ## 接下來
 
-這是互動區的頭兩個作品，之後會再加更多。有想法或想一起做，歡迎到[社群](../community/index.md)找我們。
+這是互動區的頭三個作品，之後會再加更多。有想法或想一起做，歡迎到[社群](../community/index.md)找我們。
