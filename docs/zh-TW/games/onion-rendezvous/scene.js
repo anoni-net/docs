@@ -310,13 +310,6 @@ function flashNode(node) {
   node.userData.flashT = 1;
 }
 
-
-function envelope(age, flowEnd) { // 淡入 → 維持 → 流完淡掉
-  if (age < 0.3) return age / 0.3;
-  if (age < flowEnd) return 1;
-  return Math.max(0, 1 - (age - flowEnd) / 0.6);
-}
-
 function updateConnections(dt) {
   const interval = emitInterval();
   for (let i = connections.length - 1; i >= 0; i--) {
