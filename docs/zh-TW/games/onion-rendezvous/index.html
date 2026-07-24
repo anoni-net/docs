@@ -23,10 +23,10 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
     #top { left: 14px; top: 14px; max-width: min(94vw, 620px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 11px 15px; }
-    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; }
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     #title::-webkit-details-marker { display: none; }
-    #title::after { content: '▾'; float: right; color: var(--muted); font-size: 12px; margin-left: 10px; font-weight: 400; }
-    #info:not([open]) > #title::after { content: '▸'; }
+    #title::after { content: '▾ 收合'; flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
+    #info:not([open]) > #title::after { content: '▸ 說明'; }
     .info-body { display: flex; gap: 18px; align-items: flex-start; margin-top: 9px; }
     #caption { flex: 1 1 300px; min-width: 0; margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
     .info-side { flex: 0 0 auto; max-width: 250px; display: flex; flex-direction: column; }
@@ -56,7 +56,7 @@
       .info-body { flex-direction: column; gap: 9px; margin-top: 7px; }
       .info-side { max-width: none; }
       #title { font-size: 15px; }
-      #caption { font-size: 12px; line-height: 1.65; }
+      #caption { flex: 0 0 auto; font-size: 12px; line-height: 1.65; }
       #controls { width: 164px; bottom: 58px; padding: 10px 12px; gap: 8px; }
       #hint { bottom: 12px; font-size: 10.5px; max-width: 94vw; padding: 7px 12px; }
     }
