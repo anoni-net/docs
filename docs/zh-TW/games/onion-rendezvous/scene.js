@@ -36,7 +36,7 @@ const MAX_PARTICLES = 8000;
 const EMIT_DUR = 0.4;        // 一波送出流量的持續時間（短＝緊湊封包，一顆引導頭從頭領到尾）
 const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
 const TAIL_WORLD = 6.5;      // 回程彗星尾巴世界長度（units），加長讓「回應回來」更顯眼
-const TRAIL_SEG = 16, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.13; // 尾巴 tube 參數（加粗、稍多分段）
+const TRAIL_SEG = 16, TRAIL_RADIUS = 0.13; // 尾巴 ribbon 參數（分段數、半寬）
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
@@ -296,11 +296,20 @@ function spawnConnection(type) {
 
 // 曳光彈頭：每股流量發出時，一顆較大、該股亮色的球領在最前面，殘影拉成平滑尾巴（非串珠）
 function spawnTracer(curve, hex, speed) {
-  const mat = new THREE.MeshBasicNodeMaterial({ vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
-  const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); // geometry 每幀依曲線重建
+  const mat = new THREE.MeshBasicNodeMaterial({ vertexColors: true, transparent: true, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false });
+  // 持久 geometry：固定拓樸的 ribbon（相機正對平面，扁帶看起來就是管子），每幀只更新 attribute 內容、不重建
+  const N = TRAIL_SEG + 1;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(N * 2 * 3), col = new Float32Array(N * 2 * 3);
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const idx = [];
+  for (let s = 0; s < TRAIL_SEG; s++) { const a = s * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  geo.setIndex(idx);
+  const m = new THREE.Mesh(geo, mat);
   m.frustumCulled = false;
   const len = curve.getLength();
-  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN * 1.35) }; // 頭比粒子更亮，從封包裡跳出來
+  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN * 1.35), pos, col }; // 頭比粒子更亮，從封包裡跳出來
   group.add(m); tracers.push(m);
 }
 
@@ -510,24 +519,24 @@ async function animate() {
     const T = tracers[i], u = T.userData;
     u.t += u.speed * dt;
     if (u.t >= 1) { group.remove(T); T.geometry.dispose(); T.material.dispose(); tracers.splice(i, 1); continue; }
-    if (u.t < 0.01) continue; // 太短先不畫，避免退化曲線
-    // 取曲線上 [t-尾長, t] 這一段當尾巴 → tube 必定順著軌跡彎（不是剛體整個轉）
+    if (u.t < 0.01) continue; // 太短先不畫
+    // 取曲線 [t-尾長, t] 這段，逐點算「位置＋垂直切線的偏移」填進固定 ribbon（順著軌跡彎）
     const t1 = Math.max(0, u.t - TAIL_WORLD / u.len);
-    const pts = [];
+    const pos = u.pos, col = u.col, cr = u.color;
     for (let s = 0; s <= TRAIL_SEG; s++) {
-      const uu = t1 + (u.t - t1) * (s / TRAIL_SEG);
-      pts.push(u.curve.getPointAt(uu).clone());
+      const f = s / TRAIL_SEG;
+      const uu = t1 + (u.t - t1) * f;
+      u.curve.getPointAt(uu, tmp);    // 位置（scratch）
+      u.curve.getTangentAt(uu, dir);  // 切線（scratch）
+      const pl = Math.hypot(dir.x, dir.y) || 1;
+      const ox = (-dir.y / pl) * TRAIL_RADIUS, oy = (dir.x / pl) * TRAIL_RADIUS; // xy 平面上垂直切線
+      const bb = f * f, k = s * 6; // 尾端暗（additive 下不可見）→ 頭端亮
+      pos[k] = tmp.x - ox; pos[k + 1] = tmp.y - oy; pos[k + 2] = tmp.z;     // 左
+      pos[k + 3] = tmp.x + ox; pos[k + 4] = tmp.y + oy; pos[k + 5] = tmp.z; // 右
+      col[k] = col[k + 3] = cr.r * bb; col[k + 1] = col[k + 4] = cr.g * bb; col[k + 2] = col[k + 5] = cr.b * bb;
     }
-    const geo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), TRAIL_SEG, TRAIL_RADIUS, TRAIL_RADIAL, false);
-    // 頂點色：尾端暗（additive 下不可見）→ 頭端亮，做出曳光彈頭亮尾淡
-    const radN = TRAIL_RADIAL + 1, n = geo.attributes.position.count, col = new Float32Array(n * 3);
-    for (let v = 0; v < n; v++) {
-      const b = Math.floor(v / radN) / TRAIL_SEG; // 0 尾 → 1 頭
-      const bb = b * b; // 偏向頭端更亮
-      col[v * 3] = u.color.r * bb; col[v * 3 + 1] = u.color.g * bb; col[v * 3 + 2] = u.color.b * bb;
-    }
-    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    T.geometry.dispose(); T.geometry = geo;
+    T.geometry.attributes.position.needsUpdate = true;
+    T.geometry.attributes.color.needsUpdate = true;
   }
 
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
