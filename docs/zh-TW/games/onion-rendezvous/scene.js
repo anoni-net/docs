@@ -199,7 +199,8 @@ function allocParticle(curve, hex, speed) {
   const p = particles[idx];
   // speed 未指定＝世界等速（WORLD_SPEED/長度）；指定＝固定時長（會合時兩股同時抵達 RP）
   const base = speed !== undefined ? speed : WORLD_SPEED / curve.getLength();
-  p.active = true; p.curve = curve; p.t = 0; p.speed = base * (0.82 + Math.random() * 0.15); // 一律略慢於引導頭（1.0×），讓頭永遠領在最前、不被超車
+  // 指定速度（去程 fwdSpeed，要求同時抵達）→ 照用，不抖動；未指定（回程/clearnet，有彗星頭）→ 略慢於頭 0.82~0.97×，讓頭領在最前
+  p.active = true; p.curve = curve; p.t = 0; p.speed = speed !== undefined ? base : base * (0.82 + Math.random() * 0.15);
   setCol(idx, hex);
 }
 function freeParticle(idx) {
