@@ -22,7 +22,7 @@
       backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
-    #top { left: 14px; top: 14px; max-width: min(90vw, 340px); padding: 13px 15px; }
+    #top { left: 14px; top: 14px; max-width: min(90vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 13px 15px; }
     #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; }
     #caption { margin: 5px 0 10px; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
     #legend { display: flex; flex-direction: column; gap: 5px; }
@@ -30,6 +30,9 @@
     .lg-dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
     #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
     #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: var(--bad); }
+    #note { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.6; display: flex; flex-direction: column; gap: 5px; }
+    #note p { margin: 0; }
+    #note .note-sm { font-size: 10.5px; opacity: .78; }
 
     /* 控制面板 */
     #controls { left: 14px; bottom: 20px; padding: 12px 15px; width: 216px; display: flex; flex-direction: column; gap: 10px; }
@@ -60,13 +63,17 @@
 <body>
   <div id="top" class="panel">
     <h1 id="title">Tor 連線流量</h1>
-    <div id="caption">兩種流量：連 .onion 服務在隨機會合點相遇；連明網網站則經 3 跳出口後，回應原路走回。</div>
+    <div id="caption">兩種流量都走 3 跳中繼。連 .onion 服務時，你和服務各自建一條 3 跳電路，在隨機挑出的會合點相遇（全程共 6 跳）。連明網網站則是你走 3 跳到出口，直達網站後原路傳回。</div>
     <div id="legend">
       <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
       <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
       <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（隨機挑選）</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（雙方在此交換）</div>
       <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
+    </div>
+    <div id="note">
+      <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
+      <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
     </div>
     <div id="backend">偵測中…</div>
   </div>
