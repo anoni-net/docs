@@ -189,11 +189,13 @@ function setCol(idx, hex) {
   const c = new THREE.Color(hex);
   pCol[idx * 3] = c.r; pCol[idx * 3 + 1] = c.g; pCol[idx * 3 + 2] = c.b;
 }
-function allocParticle(curve, hex) {
+function allocParticle(curve, hex, speed) {
   const idx = freeList.pop();
   if (idx === undefined) return;
   const p = particles[idx];
-  p.active = true; p.curve = curve; p.t = 0; p.speed = (WORLD_SPEED / curve.getLength()) * (0.9 + Math.random() * 0.15); // 世界等速
+  // speed 未指定＝世界等速（WORLD_SPEED/長度）；指定＝固定時長（會合時兩股同時抵達 RP）
+  const base = speed !== undefined ? speed : WORLD_SPEED / curve.getLength();
+  p.active = true; p.curve = curve; p.t = 0; p.speed = base * (0.9 + Math.random() * 0.15);
   setCol(idx, hex);
 }
 function freeParticle(idx) {
@@ -239,15 +241,16 @@ function spawnConnection(type) {
     const clientCurve = curveThrough([clientNode, cHops[0], cHops[1], rp]);
     const serviceCurve = curveThrough([serviceNode, sHops[0], sHops[1], rp]);
     const tHop = Math.max(clientCurve.getLength(), serviceCurve.getLength()) / WORLD_SPEED;
+    const fwdSpeed = 1 / tHop; // 去程兩股不論長短都用 tHop 走完 → 同時抵達 RP
     connections.push({
       type: 'onion', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
-      tHop,
+      tHop, fwdSpeed,
       clientCurve, serviceCurve,
       clientRet: curveThrough([rp, cHops[1], cHops[0], clientNode]),   // 回程：RP → client
       serviceRet: curveThrough([rp, sHops[1], sHops[0], serviceNode]), // 回程：RP → service
       rp, hops: [...cHops, ...sHops],
     });
-    spawnTracer(clientCurve, COL.clientStream); spawnTracer(serviceCurve, COL.serviceStream); // 去程曳光彈頭
+    spawnTracer(clientCurve, COL.clientStream, fwdSpeed); spawnTracer(serviceCurve, COL.serviceStream, fwdSpeed); // 去程曳光彈頭（同時抵達）
   } else {
     // 明網：client → guard → middle → exit → 網站，回應原路走回
     const hops = pickDistinct(goodRelays, 3, null);
@@ -266,12 +269,12 @@ function spawnConnection(type) {
 }
 
 // 曳光彈頭：每股流量發出時，一顆較大、該股亮色的球領在最前面，殘影拉成平滑尾巴（非串珠）
-function spawnTracer(curve, hex) {
+function spawnTracer(curve, hex, speed) {
   const mat = new THREE.MeshBasicNodeMaterial({ vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
   const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); // geometry 每幀依曲線重建
   m.frustumCulled = false;
   const len = curve.getLength();
-  m.userData = { curve, t: 0, speed: WORLD_SPEED / len, len, color: new THREE.Color(hex) };
+  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex) };
   group.add(m); tracers.push(m);
 }
 
@@ -300,8 +303,8 @@ function updateConnections(dt) {
       if (conn.age < conn.emitDur) {
         conn.emit -= dt;
         while (conn.emit <= 0) {
-          allocParticle(conn.clientCurve, COL.clientStream);
-          allocParticle(conn.serviceCurve, COL.serviceStream);
+          allocParticle(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
+          allocParticle(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
           conn.emit += interval;
         }
       }
