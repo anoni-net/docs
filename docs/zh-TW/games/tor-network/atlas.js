@@ -14,10 +14,9 @@ const COL = {
   guard: 0x57e39a, // guard
   exit: 0xffb64d,  // exit
   both: 0xff6b8a,  // guard+exit
-  earth: 0x0a1626,
-  grid: 0x14364e,
-  coast: 0x3a7fa8, // 洲界海岸線
-  atmo: 0x0b5cff,
+  earth: 0x102a46, // 海面（有光時看得出深藍球體）
+  grid: 0x17405c,
+  coast: 0x4f9ecb, // 洲界海岸線
 };
 const ROLE_COL = [COL.mid, COL.guard, COL.exit, COL.both]; // index = roleCode
 const ROLE_NAME = ['中繼', 'guard 入口', 'exit 出口', 'guard＋exit'];
@@ -71,7 +70,10 @@ async function initRenderer() {
   scene.background = new THREE.Color(COL.bg);
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
   camera.position.set(0, 0, view.dist);
-  scene.add(new THREE.HemisphereLight(0x33507a, 0x05070d, 1.1));
+  scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.5));
+  const sun = new THREE.DirectionalLight(0xbfe0ff, 2.1); // 當太陽，做出日夜明暗、球體立體感
+  sun.position.set(-5, 2.5, 6);
+  scene.add(sun);
 
   globe = new THREE.Group();
   globe.rotation.y = -2.1; // 開場先轉到歐美一帶（中繼最多）
@@ -93,12 +95,6 @@ function buildEarth() {
     new THREE.MeshBasicNodeMaterial({ color: COL.grid, wireframe: true, transparent: true, opacity: 0.28 })
   );
   globe.add(grid);
-  // 大氣層輝光
-  const atmo = new THREE.Mesh(
-    new THREE.SphereGeometry(R * 1.14, 40, 28),
-    new THREE.MeshBasicNodeMaterial({ color: COL.atmo, side: THREE.BackSide, transparent: true, opacity: 0.11, blending: THREE.AdditiveBlending, depthWrite: false })
-  );
-  scene.add(atmo);
 }
 
 async function loadContinents() {
