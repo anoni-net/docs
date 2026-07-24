@@ -44,6 +44,8 @@ const R = 5;
 let renderer, scene, camera, post, globe;
 const view = { dist: 14, rx: 0, ry: 0, spin: true };
 const tmp = new THREE.Vector3();
+const pointMats = []; // relay 點的材質，載入時淡入
+let pointsIn = 0;
 
 function llToVec(lat, lon, r, out) {
   const phi = (90 - lat) * Math.PI / 180;
@@ -146,6 +148,8 @@ async function loadRelays() {
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos[b]), 3));
     g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(col[b]), 3));
     const m = new THREE.PointsNodeMaterial({ size: BUCKETS[b].size, sizeAttenuation: true, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    m.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
+    pointMats.push(m);
     const pts = new THREE.Points(g, m);
     pts.frustumCulled = false;
     globe.add(pts);
@@ -204,6 +208,7 @@ async function animate() {
   globe.rotation.x = view.rx;
   camera.position.z += (view.dist - camera.position.z) * 0.12;
   camera.lookAt(0, 0, 0);
+  if (pointsIn < 1) { pointsIn = Math.min(1, pointsIn + dt / 1.2); for (const m of pointMats) m.opacity = pointsIn; } // 點層淡入
   try {
     await post.renderAsync();
   } catch (e) {
