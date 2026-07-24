@@ -119,7 +119,7 @@ async function loadContinents() {
 }
 
 async function loadRelays() {
-  const snap = await fetch('./snapshot.json').then((r) => r.json());
+  const snap = await fetch('./snapshot.json', { cache: 'no-cache' }).then((r) => r.json()); // 資料每小時更新，每次載入都向 server 驗證新鮮度
   // 依頻寬分三桶，每桶一個 Points（避開此版 three.js 無法逐點設 size 的限制）
   const BUCKETS = [
     { max: 2000, size: 0.05 },
