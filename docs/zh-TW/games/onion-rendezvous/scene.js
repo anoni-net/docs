@@ -485,7 +485,7 @@ function updateNode(m, tsec, dt) {
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 2.2); }
   ud.uEmis.value = e * ud.life;
-  m.scale.setScalar(ud.life * (1 + (ud.boost > 0 ? ud.boost * 0.14 : 0)));
+  m.scale.setScalar(ud.life); // 只發亮，不隨 boost 放大（會合點球體發亮、不膨脹擴散）
 }
 
 // ---- 啟動 ----
