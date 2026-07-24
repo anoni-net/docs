@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Tor 連線流量 · anoni.net</title>
+  <style>
+    :root {
+      --cyan: #00aeff; --client: #38d6ff; --service: #b98cff; --bad: #ff5a5a;
+      --ink: #eaf6ff; --muted: #9fb6c8;
+      --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; }
+    body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
+    canvas { display: block; position: fixed; inset: 0; touch-action: none; }
+
+    .panel {
+      position: fixed; z-index: 10; background: var(--panel);
+      border: 1px solid var(--panel-b); border-radius: 14px;
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+    }
+    #top { left: 14px; top: 14px; max-width: min(94vw, 620px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 11px 15px; }
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    #title::-webkit-details-marker { display: none; }
+    #title::after { content: '▾ 收合'; flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
+    #info:not([open]) > #title::after { content: '▸ 說明'; }
+    .info-body { display: flex; gap: 18px; align-items: flex-start; margin-top: 9px; }
+    #caption { flex: 1 1 300px; min-width: 0; margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
+    .info-side { flex: 0 0 auto; max-width: 250px; display: flex; flex-direction: column; }
+    #legend { display: flex; flex-direction: column; gap: 5px; }
+    .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+    .lg-dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
+    #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
+    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: var(--bad); }
+    #note { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.6; display: flex; flex-direction: column; gap: 5px; }
+    #note p { margin: 0; }
+    #note .note-sm { font-size: 10.5px; opacity: .78; }
+
+    /* 控制面板 */
+    #controls { left: 14px; bottom: 20px; padding: 12px 15px; width: 216px; display: flex; flex-direction: column; gap: 10px; }
+    .ctrl-title { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 1px; }
+    .ctrl { font-size: 12px; color: var(--ink); display: flex; flex-direction: column; gap: 4px; }
+    .ctrl span { display: flex; justify-content: space-between; }
+    .ctrl b { color: var(--cyan); font-weight: 800; }
+    .ctrl input[type=range] { width: 100%; height: 4px; accent-color: var(--cyan); cursor: pointer; }
+
+    #hint { left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 440px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    #hint.hidden { display: none; }
+    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
+
+    @media (max-width: 680px) {
+      #top { max-width: min(92vw, 340px); padding: 10px 13px; }
+      .info-body { flex-direction: column; gap: 9px; margin-top: 7px; }
+      .info-side { max-width: none; }
+      #title { font-size: 15px; }
+      #caption { flex: 0 0 auto; font-size: 12px; line-height: 1.65; }
+      #controls { width: 164px; bottom: 58px; padding: 10px 12px; gap: 8px; }
+      #hint { bottom: 12px; font-size: 10.5px; max-width: 94vw; padding: 7px 12px; }
+    }
+  </style>
+  <script type="importmap">
+  { "imports": {
+      "three": "../vendor/three.webgpu.min.js",
+      "three/webgpu": "../vendor/three.webgpu.min.js",
+      "three/tsl": "../vendor/three.tsl.min.js",
+      "three/addons/": "../vendor/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <div id="top" class="panel">
+    <details id="info" open>
+      <summary id="title">Tor 連線流量</summary>
+      <div class="info-body">
+        <div id="caption">兩種流量都走 3 跳中繼。連 .onion 服務時，你和服務各自建一條 3 跳電路，在隨機挑出的會合點相遇（全程共 6 跳）。連明網網站則是你走 3 跳到出口，直達網站後原路傳回。</div>
+        <div class="info-side">
+          <div id="legend">
+            <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（雙方在此交換）</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
+          </div>
+          <div id="note">
+            <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
+            <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
+          </div>
+          <div id="backend">偵測中…</div>
+        </div>
+      </div>
+    </details>
+  </div>
+  <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
+
+  <div id="controls" class="panel">
+    <div class="ctrl-title">調控</div>
+    <label class="ctrl"><span>relay 節點 <b id="v-relays">24</b></span>
+      <input id="c-relays" type="range" min="8" max="48" step="1" value="24"></label>
+    <label class="ctrl"><span>電路數 <b id="v-circuits">2</b></span>
+      <input id="c-circuits" type="range" min="1" max="20" step="1" value="2"></label>
+    <label class="ctrl"><span>有害節點 <b id="v-bad">2</b></span>
+      <input id="c-bad" type="range" min="0" max="10" step="1" value="2"></label>
+    <label class="ctrl"><span>流量 <b id="v-flow">中</b></span>
+      <input id="c-flow" type="range" min="0" max="100" step="1" value="70"></label>
+  </div>
+
+  <div id="hint" class="panel">
+    <span id="hint-text">點擊畫面加一條連線 · 拖曳可平移 · 滾輪或雙指縮放</span>
+    <span id="hint-close">知道了</span>
+  </div>
+
+  <script type="module" src="./scene.js"></script>
+</body>
+</html>
