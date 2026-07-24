@@ -199,7 +199,7 @@ function allocParticle(curve, hex, speed) {
   const p = particles[idx];
   // speed 未指定＝世界等速（WORLD_SPEED/長度）；指定＝固定時長（會合時兩股同時抵達 RP）
   const base = speed !== undefined ? speed : WORLD_SPEED / curve.getLength();
-  p.active = true; p.curve = curve; p.t = 0; p.speed = base * (0.9 + Math.random() * 0.15);
+  p.active = true; p.curve = curve; p.t = 0; p.speed = base * (0.82 + Math.random() * 0.15); // 一律略慢於引導頭（1.0×），讓頭永遠領在最前、不被超車
   setCol(idx, hex);
 }
 function freeParticle(idx) {
@@ -299,7 +299,7 @@ function spawnTracer(curve, hex, speed) {
   const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); // geometry 每幀依曲線重建
   m.frustumCulled = false;
   const len = curve.getLength();
-  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN) };
+  m.userData = { curve, t: 0, speed: speed !== undefined ? speed : WORLD_SPEED / len, len, color: new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN * 1.35) }; // 頭比粒子更亮，從封包裡跳出來
   group.add(m); tracers.push(m);
 }
 
