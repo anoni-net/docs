@@ -6,7 +6,7 @@ icon: material/cube-outline
 
 # :material-cube-outline: 互動與呈現
 
-這一區放可以動手玩、或單純看著它動的 3D 小畫面，把匿名網路的概念變成看得到、點得到的東西。全部用 three.js（WebGPU／TSL）在瀏覽器裡跑，免安裝，桌機和手機都能玩。
+這一區放可以動手玩、或單純看著它動的 3D 小畫面，把匿名網路的概念變成看得到、點得到的東西。全部用 three.js（WebGPU/TSL）在瀏覽器裡跑，免安裝，桌機和手機都能玩。
 
 <div class="grid cards" markdown>
 
