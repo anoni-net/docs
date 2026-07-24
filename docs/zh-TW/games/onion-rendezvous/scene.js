@@ -39,7 +39,7 @@ const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度�
 const TAIL_WORLD = 4.5;      // 曳光彈尾巴世界長度（units），各路徑一致
 const TRAIL_SEG = 14, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.09; // 尾巴 tube 參數
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
-const FIELD = new THREE.Vector3(18, 10, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
+const FIELD = new THREE.Vector3(20, 11.5, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
 
 function emitInterval() { return 0.05 - params.flow * 0.038; } // flow 越大越密（0.05→0.012）
@@ -103,9 +103,21 @@ function makeNode(colorHex, radius, baseEmis, geo) {
 }
 
 function addRelay() {
-  const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
   const m = makeNode(COL.relay, 0.34 + Math.random() * 0.12, 0.35 + Math.random() * 0.25);
-  m.position.set(Math.cos(a) * FIELD.x * r, Math.sin(a) * FIELD.y * r, (Math.random() - 0.5) * 2 * FIELD.z);
+  // best-candidate 取樣：從多個候選點挑「離既有 relay 最遠」的，避免擠成一團
+  let bx = 0, by = 0, bestD = -1;
+  for (let k = 0; k < 22; k++) {
+    const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
+    const px = Math.cos(a) * FIELD.x * r, py = Math.sin(a) * FIELD.y * r;
+    let nd = Infinity;
+    for (const n of relays) {
+      if (n.userData.dying) continue;
+      const dx = px - n.position.x, dy = py - n.position.y, d = dx * dx + dy * dy;
+      if (d < nd) nd = d;
+    }
+    if (nd > bestD) { bestD = nd; bx = px; by = py; }
+  }
+  m.position.set(bx, by, (Math.random() - 0.5) * 2 * FIELD.z);
   m.userData.life = 0; // 從 0 慢慢長出來
   group.add(m); relays.push(m);
   return m;
@@ -141,12 +153,12 @@ function reconcile() {
 }
 
 function buildField() {
-  clientNode = makeNode(COL.client, 1.15, 1.5, new THREE.IcosahedronGeometry(1.15, 1));
-  clientNode.position.set(-FIELD.x - 8, 0, 0); clientNode.userData.life = 1; clientNode.userData.isEndpoint = true;
-  serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-  serviceNode.position.set(FIELD.x + 8, 6, 0); serviceNode.userData.life = 1; serviceNode.userData.isEndpoint = true;   // .onion 服務（右上）
-  websiteNode = makeNode(COL.website, 1.05, 1.4, new THREE.IcosahedronGeometry(1.05, 1));
-  websiteNode.position.set(FIELD.x + 8, -6, 0); websiteNode.userData.life = 1; websiteNode.userData.isEndpoint = true;  // 明網網站（右下）
+  clientNode = makeNode(COL.client, 1.15, 1.5, new THREE.IcosahedronGeometry(1.15, 4));
+  clientNode.position.set(-FIELD.x - 7, 0, 0); clientNode.userData.life = 1; clientNode.userData.isEndpoint = true;
+  serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 4));
+  serviceNode.position.set(FIELD.x + 7, 8.5, 0); serviceNode.userData.life = 1; serviceNode.userData.isEndpoint = true;   // .onion 服務（右上）
+  websiteNode = makeNode(COL.website, 1.05, 1.4, new THREE.IcosahedronGeometry(1.05, 4));
+  websiteNode.position.set(FIELD.x + 7, -8.5, 0); websiteNode.userData.life = 1; websiteNode.userData.isEndpoint = true;  // 明網網站（右下）
   group.add(clientNode, serviceNode, websiteNode);
   scene.add(group);
   reconcile(); // 依 params 長出 relay 與有害節點
