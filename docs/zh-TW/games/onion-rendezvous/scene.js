@@ -141,11 +141,11 @@ function reconcile() {
 
 function buildField() {
   clientNode = makeNode(COL.client, 1.15, 1.5, new THREE.IcosahedronGeometry(1.15, 1));
-  clientNode.position.set(-FIELD.x - 8, 0, 0); clientNode.userData.life = 1;
+  clientNode.position.set(-FIELD.x - 8, 0, 0); clientNode.userData.life = 1; clientNode.userData.isEndpoint = true;
   serviceNode = makeNode(COL.service, 1.05, 1.5, new THREE.IcosahedronGeometry(1.05, 1));
-  serviceNode.position.set(FIELD.x + 8, 6, 0); serviceNode.userData.life = 1;   // .onion 服務（右上）
+  serviceNode.position.set(FIELD.x + 8, 6, 0); serviceNode.userData.life = 1; serviceNode.userData.isEndpoint = true;   // .onion 服務（右上）
   websiteNode = makeNode(COL.website, 1.05, 1.4, new THREE.IcosahedronGeometry(1.05, 1));
-  websiteNode.position.set(FIELD.x + 8, -6, 0); websiteNode.userData.life = 1;  // 明網網站（右下）
+  websiteNode.position.set(FIELD.x + 8, -6, 0); websiteNode.userData.life = 1; websiteNode.userData.isEndpoint = true;  // 明網網站（右下）
   group.add(clientNode, serviceNode, websiteNode);
   scene.add(group);
   reconcile(); // 依 params 長出 relay 與有害節點
@@ -485,7 +485,8 @@ function updateNode(m, tsec, dt) {
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 2.2); }
   ud.uEmis.value = e * ud.life;
-  m.scale.setScalar(ud.life); // 只發亮，不隨 boost 放大（會合點球體發亮、不膨脹擴散）
+  // 端點（client/服務/網站）保留原本的 boost 放大；relay（含 rendezvous 會合點）只發亮不放大
+  m.scale.setScalar(ud.life * (1 + (ud.isEndpoint && ud.boost > 0 ? ud.boost * 0.14 : 0)));
 }
 
 // ---- 啟動 ----
