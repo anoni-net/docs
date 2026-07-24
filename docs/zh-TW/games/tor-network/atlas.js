@@ -14,7 +14,7 @@ const COL = {
   guard: 0x57e39a, // guard
   exit: 0xffb64d,  // exit
   both: 0xff6b8a,  // guard+exit
-  earth: 0x102a46, // 海面（有光時看得出深藍球體）
+  earth: 0x16395e, // 海面（有光時看得出深藍球體）
   grid: 0x17405c,
   coast: 0x4f9ecb, // 洲界海岸線
 };
@@ -70,9 +70,9 @@ async function initRenderer() {
   scene.background = new THREE.Color(COL.bg);
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
   camera.position.set(0, 0, view.dist);
-  scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.5));
-  const sun = new THREE.DirectionalLight(0xbfe0ff, 2.1); // 當太陽，做出日夜明暗、球體立體感
-  sun.position.set(-5, 2.5, 6);
+  scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.28)); // 環境光壓低，夜側才夠暗
+  const sun = new THREE.DirectionalLight(0xcfe6ff, 3.2); // 太陽從左側來，明暗交界落在正面
+  sun.position.set(-8, 1.5, 2.5);
   scene.add(sun);
 
   globe = new THREE.Group();
