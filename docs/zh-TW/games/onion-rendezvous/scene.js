@@ -38,6 +38,7 @@ const TRAVEL = 1.9;          // （保留參考）粒子從起點流到會合點
 const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
 const TAIL_WORLD = 4.5;      // 曳光彈尾巴世界長度（units），各路徑一致
 const TRAIL_SEG = 14, TRAIL_RADIAL = 6, TRAIL_RADIUS = 0.09; // 尾巴 tube 參數
+const TRACER_GAP = 0.5;      // 發射期間每隔幾秒補一顆引導頭（整段流量都間歇有亮頭，不留無頭尾巴）
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
@@ -273,7 +274,7 @@ function spawnConnection(type) {
       rp, hops: [...cHops, ...sHops],
       clientLine: spawnLine(clientCurve, COL.clientStream),   // 電路細線：client → RP
       serviceLine: spawnLine(serviceCurve, COL.serviceStream), // 電路細線：服務 → RP
-      estDone: false, fwdStarted: false, flashed: false, retStarted: false,
+      estDone: false, fwdStarted: false, flashed: false, retStarted: false, tracerT: 0,
     });
     // 曳光彈頭改在去程／回程開始時才發（見 updateConnections）
   } else {
@@ -283,13 +284,13 @@ function spawnConnection(type) {
     const exit = hops[2];
     const fwdCurve = curveThrough([clientNode, hops[0], hops[1], exit, websiteNode]);
     connections.push({
-      type: 'clearnet', age: 0, emit: 0, emitDur, flashed: false, flashed2: false,
+      type: 'clearnet', age: 0, emit: 0, emitDur, flashed: false, tracerT: 0,
       tHop: fwdCurve.getLength() / WORLD_SPEED,
       fwdCurve,
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
       exit, website: websiteNode, hops,
     });
-    spawnTracer(fwdCurve, COL.clientStream); // 去程曳光彈頭
+    // 去程引導頭改在 updateConnections 週期性補（見下）
   }
 }
 
@@ -340,19 +341,21 @@ function updateConnections(dt) {
         }
       }
 
-      // 1) 去程：線畫好後，兩股同時往 RP 跑（fwdSpeed → 同時抵達）
+      // 1) 去程：線畫好後，兩股同時往 RP 跑（fwdSpeed → 同時抵達）；發射期間週期性補引導頭
       if (conn.age >= T_EST) {
-        if (!conn.fwdStarted) {
-          conn.fwdStarted = true; conn.emit = 0;
-          spawnTracer(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
-          spawnTracer(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
-        }
+        if (!conn.fwdStarted) { conn.fwdStarted = true; conn.emit = 0; conn.tracerT = 0; }
         if (conn.age < T_EST + conn.emitDur) {
           conn.emit -= dt;
           while (conn.emit <= 0) {
             allocParticle(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
             allocParticle(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
             conn.emit += interval;
+          }
+          conn.tracerT -= dt;
+          if (conn.tracerT <= 0) {
+            spawnTracer(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
+            spawnTracer(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
+            conn.tracerT = TRACER_GAP;
           }
         }
       }
@@ -361,19 +364,21 @@ function updateConnections(dt) {
       if (!conn.flashed && conn.age >= A) { conn.flashed = true; flashNode(conn.rp); }
       if (conn.age >= A && conn.age < retStart) conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 4);
 
-      // 3) 交換後：從 RP 同時發出回程，各自原路走回（世界等速）
+      // 3) 交換後：從 RP 同時發出回程，各自原路走回（世界等速）；週期性補引導頭
       if (conn.age >= retStart) {
-        if (!conn.retStarted) {
-          conn.retStarted = true; conn.emit = 0;
-          spawnTracer(conn.clientRet, COL.clientStream);
-          spawnTracer(conn.serviceRet, COL.serviceStream);
-        }
+        if (!conn.retStarted) { conn.retStarted = true; conn.emit = 0; conn.tracerT = 0; }
         if (conn.age < retEnd) {
           conn.emit -= dt;
           while (conn.emit <= 0) {
             allocParticle(conn.clientRet, COL.clientStream);
             allocParticle(conn.serviceRet, COL.serviceStream);
             conn.emit += interval;
+          }
+          conn.tracerT -= dt;
+          if (conn.tracerT <= 0) {
+            spawnTracer(conn.clientRet, COL.clientStream);
+            spawnTracer(conn.serviceRet, COL.serviceStream);
+            conn.tracerT = TRACER_GAP;
           }
         }
       }
@@ -389,15 +394,20 @@ function updateConnections(dt) {
     } else { // clearnet：去程 client → 網站，回程原路走回
       const retStart = conn.tHop;
       const retEnd = retStart + conn.emitDur;
-      const flowEnd = retEnd + conn.tHop;      if (conn.age < conn.emitDur) { // 去程
+      const flowEnd = retEnd + conn.tHop;
+      if (conn.age < conn.emitDur) { // 去程；週期性補引導頭
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
+        conn.tracerT -= dt;
+        if (conn.tracerT <= 0) { spawnTracer(conn.fwdCurve, COL.clientStream); conn.tracerT = TRACER_GAP; }
       }
-      // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
-      if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
+      // 去程抵達網站 → 網站柔和發光、開始回程
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; conn.emit = 0; conn.tracerT = 0; }
+      if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）；週期性補引導頭
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
+        conn.tracerT -= dt;
+        if (conn.tracerT <= 0) { spawnTracer(conn.retCurve, COL.respStream); conn.tracerT = TRACER_GAP; }
       }
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
