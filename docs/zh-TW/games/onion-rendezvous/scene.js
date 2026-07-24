@@ -195,7 +195,6 @@ function clearParticles() {
 
 // ---- 連線（會合，避開有害節點）----
 let connections = [];
-const flashes = [];
 const tracers = [];
 
 function pickDistinct(pool, n, exclude) {
@@ -260,13 +259,9 @@ function spawnTracer(curve, hex) {
   group.add(m); tracers.push(m);
 }
 
-// 溫和的會合光暈：低不透明、緩起緩落（sin ease）；系統要求減少動態時完全不放
-function spawnPulse(pos, hex) {
-  if (REDUCED) return;
-  const m = new THREE.Mesh(new THREE.SphereGeometry(0.9, 20, 14),
-    new THREE.MeshBasicNodeMaterial({ color: hex, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
-  m.position.copy(pos); m.userData.life = 0;
-  group.add(m); flashes.push(m);
+// 會合特效：讓該節點球體本身瞬間發亮（emissive 尖峰後自然衰減），取代原本擴散光暈
+function flashNode(node) {
+  node.userData.boost = Math.max(node.userData.boost, 2.5);
 }
 
 
@@ -297,7 +292,7 @@ function updateConnections(dt) {
         }
       }
       // 會合 → RP 柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; spawnPulse(conn.rp.position, 0xbfe6ff); conn.emit = 0; spawnTracer(conn.clientRet, COL.clientStream); spawnTracer(conn.serviceRet, COL.serviceStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; flashNode(conn.rp); conn.emit = 0; spawnTracer(conn.clientRet, COL.clientStream); spawnTracer(conn.serviceRet, COL.serviceStream); }
       // 回程：RP → client、RP → service（原路走回）
       if (conn.age >= retStart && conn.age < retEnd) {
         conn.emit -= dt;
@@ -308,7 +303,7 @@ function updateConnections(dt) {
         }
       }
       // 回程抵達 → client、service 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); spawnPulse(serviceNode.position, 0xd9c2ff); }
+      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; flashNode(clientNode); flashNode(serviceNode); }
       conn.rp.userData.boost = Math.max(conn.rp.userData.boost, 1.6 * op);
       for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
@@ -323,13 +318,13 @@ function updateConnections(dt) {
         while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
       }
       // 去程抵達網站 → 網站柔和發光、開始回程（回程也放引導頭）
-      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; spawnPulse(conn.website.position, COL.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; flashNode(conn.website); conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
         while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
       }
       // 回程抵達 client → client 柔和發光
-      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; spawnPulse(clientNode.position, 0xbfe6ff); }
+      if (!conn.flashed2 && conn.age > retStart + conn.tHop) { conn.flashed2 = true; flashNode(clientNode); }
       conn.website.userData.boost = Math.max(conn.website.userData.boost, 1.4 * op);
       clientNode.userData.boost = Math.max(clientNode.userData.boost, 0.6 * op);
       for (const h of conn.hops) h.userData.boost = Math.max(h.userData.boost, 0.7 * op);
@@ -478,14 +473,6 @@ async function animate() {
     }
   }
 
-  // 會合光暈（溫和：低不透明、緩起緩落、放大幅度小）
-  for (let i = flashes.length - 1; i >= 0; i--) {
-    const sh = flashes[i]; sh.userData.life += dt;
-    const k = sh.userData.life / 1.3;
-    sh.scale.setScalar(1 + k * 1.3);
-    sh.material.opacity = 0.3 * Math.sin(Math.min(1, k) * Math.PI);
-    if (k >= 1) { group.remove(sh); sh.geometry.dispose(); flashes.splice(i, 1); }
-  }
 
   await post.renderAsync();
 }
