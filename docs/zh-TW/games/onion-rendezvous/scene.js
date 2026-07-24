@@ -428,7 +428,7 @@ async function animate() {
     const glow = p.curve._glow;
     if (glow) for (let g = 0; g < glow.length; g++) {
       const r = glow[g], dx = tmp.x - r.position.x, dy = tmp.y - r.position.y, dz = tmp.z - r.position.z;
-      if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 8 * dt, 3);
+      if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 8 * dt, 6);
     }
   }
   pGeo.attributes.position.needsUpdate = true;
@@ -480,7 +480,7 @@ function updateNode(m, tsec, dt) {
   if (ud.dying) ud.life = Math.max(0, ud.life - dt / 0.5);
   else if (ud.life < 1) ud.life = Math.min(1, ud.life + dt / 0.6);
   let e = ud.baseEmis * (1 + 0.2 * Math.sin(tsec * 1.6 + ud.phase));
-  if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 0.9); } // 衰減放慢＝慢慢暗下來（閒置）
+  if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 1.6); } // 粒子離開後變暗消逝（閒置）
   ud.uEmis.value = e * ud.life;
   // 會合閃白光：flashT 1→0（0.5 秒），白光強度 = flashT² × 5，配 bloom 明顯亮一下
   if (ud.flashT > 0) ud.flashT = Math.max(0, ud.flashT - dt / 0.6); // 會合白閃約 0.6 秒
