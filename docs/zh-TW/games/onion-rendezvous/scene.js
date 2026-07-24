@@ -41,6 +41,8 @@ const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
 const LINE_OP = 0.15;        // onion：電路細線不透明度（additive，淡）
+const HOP_LIGHT_AT = [0.34, 0.67, 0.99]; // 電路建立時，3 個跳點依序點亮的進度門檻（凸顯「3 跳」）
+const HOP_LIGHT_BOOST = 3;   // 依序點亮時每個跳點的 boost 強度
 const PARTICLE_GAIN = 1.8;   // 流量粒子色彩增益（推進 HDR → 更亮、bloom 更明顯）
 const FIELD = new THREE.Vector3(20, 11.5, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
@@ -274,7 +276,7 @@ function spawnConnection(type) {
       rp, hops: [...cHops, ...sHops],
       clientLine: spawnLine(clientCurve, COL.clientStream),   // 電路細線：client → RP
       serviceLine: spawnLine(serviceCurve, COL.serviceStream), // 電路細線：服務 → RP
-      estDone: false, fwdStarted: false, flashed: false, retStarted: false,
+      estDone: false, fwdStarted: false, flashed: false, retStarted: false, hopLit: 0,
     });
     // 曳光彈頭改在去程／回程開始時才發（見 updateConnections）
   } else {
@@ -330,17 +332,18 @@ function updateConnections(dt) {
       const retEnd = retStart + conn.emitDur;
       const flowEnd = retEnd + conn.tHop;
 
-      // 0) 建立電路：兩條細線從端點漸畫到同一台 RP
+      // 0) 建立電路：兩條細線漸畫到同一台 RP，沿線 3 個跳點依序 1→2→3 亮起（凸顯「3 跳」）
       if (!conn.estDone) {
-        if (conn.age < T_EST) {
-          const p = conn.age / T_EST;
-          setLineDraw(conn.clientLine, p); conn.clientLine.material.opacity = LINE_OP * p;
-          setLineDraw(conn.serviceLine, p); conn.serviceLine.material.opacity = LINE_OP * p;
-        } else {
-          conn.estDone = true;
-          setLineDraw(conn.clientLine, 1); conn.clientLine.material.opacity = LINE_OP;
-          setLineDraw(conn.serviceLine, 1); conn.serviceLine.material.opacity = LINE_OP;
+        const p = Math.min(1, conn.age / T_EST);
+        setLineDraw(conn.clientLine, p); conn.clientLine.material.opacity = LINE_OP * p;
+        setLineDraw(conn.serviceLine, p); conn.serviceLine.material.opacity = LINE_OP * p;
+        while (conn.hopLit < 3 && p >= HOP_LIGHT_AT[conn.hopLit]) {
+          const cg = conn.clientCurve._glow, sg = conn.serviceCurve._glow, g = conn.hopLit;
+          cg[g].userData.boost = Math.max(cg[g].userData.boost, HOP_LIGHT_BOOST);
+          sg[g].userData.boost = Math.max(sg[g].userData.boost, HOP_LIGHT_BOOST);
+          conn.hopLit++;
         }
+        if (conn.age >= T_EST) conn.estDone = true;
       }
 
       // 1) 去程：線畫好後，兩股同時往 RP 跑（fwdSpeed → 同時抵達）；去向不放彗星頭，只有粒子流
