@@ -22,9 +22,14 @@
       backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
-    #top { left: 14px; top: 14px; max-width: min(90vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 13px 15px; }
-    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; }
-    #caption { margin: 5px 0 10px; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
+    #top { left: 14px; top: 14px; max-width: min(94vw, 620px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 11px 15px; }
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; }
+    #title::-webkit-details-marker { display: none; }
+    #title::after { content: '▾'; float: right; color: var(--muted); font-size: 12px; margin-left: 10px; font-weight: 400; }
+    #info:not([open]) > #title::after { content: '▸'; }
+    .info-body { display: flex; gap: 18px; align-items: flex-start; margin-top: 9px; }
+    #caption { flex: 1 1 300px; min-width: 0; margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.7; }
+    .info-side { flex: 0 0 auto; max-width: 250px; display: flex; flex-direction: column; }
     #legend { display: flex; flex-direction: column; gap: 5px; }
     .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
     .lg-dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
@@ -46,9 +51,14 @@
     #hint.hidden { display: none; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
 
-    @media (max-width: 620px) {
-      #controls { width: 180px; bottom: 66px; }
-      #hint { bottom: 14px; font-size: 11px; }
+    @media (max-width: 680px) {
+      #top { max-width: min(92vw, 340px); padding: 10px 13px; }
+      .info-body { flex-direction: column; gap: 9px; margin-top: 7px; }
+      .info-side { max-width: none; }
+      #title { font-size: 15px; }
+      #caption { font-size: 12px; line-height: 1.65; }
+      #controls { width: 164px; bottom: 58px; padding: 10px 12px; gap: 8px; }
+      #hint { bottom: 12px; font-size: 10.5px; max-width: 94vw; padding: 7px 12px; }
     }
   </style>
   <script type="importmap">
@@ -62,21 +72,28 @@
 </head>
 <body>
   <div id="top" class="panel">
-    <h1 id="title">Tor 連線流量</h1>
-    <div id="caption">兩種流量都走 3 跳中繼。連 .onion 服務時，你和服務各自建一條 3 跳電路，在隨機挑出的會合點相遇（全程共 6 跳）。連明網網站則是你走 3 跳到出口，直達網站後原路傳回。</div>
-    <div id="legend">
-      <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（雙方在此交換）</div>
-      <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
-    </div>
-    <div id="note">
-      <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
-      <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
-    </div>
-    <div id="backend">偵測中…</div>
+    <details id="info" open>
+      <summary id="title">Tor 連線流量</summary>
+      <div class="info-body">
+        <div id="caption">兩種流量都走 3 跳中繼。連 .onion 服務時，你和服務各自建一條 3 跳電路，在隨機挑出的會合點相遇（全程共 6 跳）。連明網網站則是你走 3 跳到出口，直達網站後原路傳回。</div>
+        <div class="info-side">
+          <div id="legend">
+            <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（雙方在此交換）</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
+          </div>
+          <div id="note">
+            <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
+            <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
+          </div>
+          <div id="backend">偵測中…</div>
+        </div>
+      </div>
+    </details>
   </div>
+  <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
 
   <div id="controls" class="panel">
     <div class="ctrl-title">調控</div>
