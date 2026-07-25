@@ -41,6 +41,10 @@
     .lg-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; margin: 4px 0; }
     .lg-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex: none; }
     .lg-note { margin-top: 8px; color: var(--muted); font-size: 11.5px; }
+    .lg-regions { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; }
+    .lg-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; }
+    .lg-dot.sm { width: 9px; height: 9px; }
+    #legend-toggle:focus-visible, #hint-close:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 
     /* 底部操作區 */
     #dock { left: 50%; bottom: 18px; transform: translateX(-50%); padding: 13px 16px; display: flex; flex-direction: column; gap: 10px; align-items: center; max-width: min(94vw, 620px); }
@@ -106,14 +110,14 @@
     <div id="backend">偵測中…</div>
   </div>
 
-  <div id="legend-toggle" class="panel">圖例</div>
+  <div id="legend-toggle" class="panel" role="button" tabindex="0">圖例</div>
   <div id="legend" class="panel"><div id="legend-body"></div></div>
 
   <div id="tooltip"></div>
 
   <div id="hint" class="panel">
     <span id="hint-text"></span>
-    <span id="hint-close">知道了</span>
+    <span id="hint-close" role="button" tabindex="0">知道了</span>
   </div>
 
   <div id="dock" class="panel">

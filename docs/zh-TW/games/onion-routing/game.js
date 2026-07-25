@@ -9,6 +9,7 @@ import { STR, t, pickLang } from './i18n.js';
 
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
 
 // ---- 顏色 / 尺寸 ----
 const COL = {
@@ -57,15 +58,18 @@ function initStaticText() {
   // 窄螢幕用短版，長句在手機會擠成三行、把提示列撐高，反過來壓縮到場景
   $('hint-text').textContent = matchMedia('(max-width:560px)').matches ? S('hintShort') : (S('selectHint') + ' ' + S('dragHint'));
   el.legendToggle.textContent = S('legendTitle');
+  const hex = (v) => '#' + v.toString(16).padStart(6, '0');
+  const regionDots = Object.values(REGIONS)
+    .map((r) => `<span class="lg-chip"><i class="lg-dot sm" style="background:${hex(r.color)}"></i>${r.place}</span>`).join('');
   $('legend-body').innerHTML = [
     ['#7ffcff', S('legendSource')],
     ['#ffd27f', S('legendDest')],
-    ['#00aeff', S('legendRelay')],
     ['#00e5ff', S('legendBridge')],
     ['#ff3b3b', S('legendSurveilled')],
     ['#59657a', S('legendBlocked')],
   ].map(([c, label]) => `<div class="lg-row"><span class="lg-dot" style="background:${c}"></span>${label}</div>`).join('')
-    + `<div class="lg-note">${S('legendRegion')}</div>`;
+    + `<div class="lg-note">${S('legendRegion')}</div><div class="lg-regions">${regionDots}</div>`
+    + `<div class="lg-note">${S('selectHint')} ${S('dragHint')}</div>`;
 }
 
 function nodeLabel(n) {
@@ -243,7 +247,11 @@ function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 let levelIdx = 0;
 let nodes = [];          // 所有可視節點（含 source/dest）
 let selectable = [];     // 可點選的中繼／橋接
-let selected = [];       // 已選節點（依序）
+// 索引就是跳位（0 入口、1 中繼、2 出口），沒選的留 null。
+// 用緊湊陣列的話，取消中間那一跳會讓後面的往前遞補，玩家沒動到的節點被默默換了跳位。
+let selected = [null, null, null];
+const chosen = () => selected.filter(Boolean);
+const hopCount = () => LEVELS[levelIdx].rules.hops;
 let pathMesh = null;
 let hovered = null;
 let animating = false;
@@ -272,12 +280,21 @@ function makeNodeMesh(n) {
     mesh.add(ring);
     mesh.userData.ring = ring;
   }
+  // 被監聽：加一圈斜置的環。第二關的玩法就是避開這種節點，只用紅色區分的話，
+  // 紅綠色盲會分不出它跟德國、瑞典那些綠色系中繼。
+  if (n.surveilled) {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(R_RELAY * 1.42, 0.055, 8, 32),
+      new THREE.MeshBasicNodeMaterial({ color: COL.surveilled, transparent: true, opacity: 0.85 }));
+    ring.rotation.x = Math.PI / 2.6;
+    mesh.add(ring);
+    mesh.userData.ring = ring;
+  }
   return mesh;
 }
 
 function loadLevel(idx) {
   // 清場
-  selected = []; hovered = null; animating = false;
+  selected = [null, null, null]; hovered = null; animating = false;
   if (pathMesh) { group.remove(pathMesh); pathMesh.geometry.dispose(); pathMesh = null; }
   while (group.children.length) group.remove(group.children[0]);
   nodes = []; selectable = [];
@@ -310,16 +327,29 @@ function onClick(screen) {
   raycaster.setFromCamera(ndc, camera);
   const meshes = selectable.map((n) => n._mesh);
   const hit = raycaster.intersectObjects(meshes, false)[0];
-  if (!hit) return;
+  if (!hit) {
+    // 兩顆端點又大又亮卻不能選，手機沒有 hover 提示，點下去毫無反應會像畫面壞掉
+    const ends = nodes.filter((n) => n.role === 'source' || n.role === 'dest').map((n) => n._mesh).filter(Boolean);
+    if (ends.length && raycaster.intersectObjects(ends, false)[0]) say(S('hintEndpoint'));
+    return;
+  }
   const n = hit.object.userData.node;
   const at = selected.indexOf(n);
-  if (at >= 0) selected.splice(at, 1);
-  else if (selected.length < LEVELS[levelIdx].rules.hops) selected.push(n);
-  el.feedback.textContent = '';
-  el.feedback.className = 'feedback';
+  if (at >= 0) {
+    selected[at] = null; // 只清掉這一跳，其他跳位待在原地
+  } else {
+    const slot = selected.slice(0, hopCount()).indexOf(null);
+    if (slot < 0) { say(S('hintFull', { n: hopCount() })); return; }
+    selected[slot] = n;
+  }
+  clearSay();
   updateSlots();
   updatePath();
 }
+
+// 提示列共用：說一句話、或把話收回去
+function say(msg) { el.feedback.textContent = msg; el.feedback.className = 'feedback show'; }
+function clearSay() { el.feedback.textContent = ''; el.feedback.className = 'feedback'; }
 
 function updateSlots() {
   const hops = LEVELS[levelIdx].rules.hops;
@@ -349,20 +379,26 @@ function pathPoints() {
   const src = nodes.find((n) => n.role === 'source');
   const dst = nodes.find((n) => n.role === 'dest');
   const pts = [new THREE.Vector3(src.x, src.y, src.z)];
-  for (const n of selected) pts.push(new THREE.Vector3(n.x, n.y, n.z));
-  if (selected.length === lv.rules.hops) pts.push(new THREE.Vector3(dst.x, dst.y, dst.z));
+  const sel = chosen();
+  for (const n of sel) pts.push(new THREE.Vector3(n.x, n.y, n.z));
+  if (sel.length === lv.rules.hops) pts.push(new THREE.Vector3(dst.x, dst.y, dst.z));
   return pts;
 }
 
 // ---- 驗證 ----
 function validate() {
   const lv = LEVELS[levelIdx], r = lv.rules;
-  if (selected.length !== r.hops) return { ok: false, msg: S('failHopsCount', { n: selected.length }) };
-  for (const n of selected) if (n.blocked) return { ok: false, msg: S('failBlocked', { name: nodeLabel(n) }) };
-  for (const n of selected) if (n.surveilled) return { ok: false, msg: S('failSurveilled', { name: nodeLabel(n) }) };
-  if (r.requireBridge && !selected[0].bridge) return { ok: false, msg: S('failNeedBridge') };
+  const sel = chosen();
+  if (sel.length !== r.hops) return { ok: false, msg: S('failHopsCount', { n: sel.length }) };
+  for (const n of sel) if (n.blocked) return { ok: false, msg: S('failBlocked', { name: nodeLabel(n) }) };
+  for (const n of sel) if (n.surveilled) return { ok: false, msg: S('failSurveilled', { name: nodeLabel(n) }) };
+  if (r.requireBridge) {
+    if (!selected[0] || !selected[0].bridge) return { ok: false, msg: S('failNeedBridge') };
+    // 橋接是進 Tor 的入口，真實網路裡不會拿來當中繼或出口用
+    if (sel.slice(1).some((n) => n.bridge)) return { ok: false, msg: S('failBridgeOnlyEntry') };
+  }
   if (r.requireDiversity) {
-    const regions = new Set(selected.map((n) => n.region));
+    const regions = new Set(sel.map((n) => n.region));
     if (regions.size < r.hops) return { ok: false, msg: S('failDiversity') };
   }
   return { ok: true };
@@ -401,12 +437,13 @@ function runPacket() {
   });
   group.add(packet);
 
-  const hops = selected.length;         // 3
+  const sel = chosen();
+  const hops = sel.length;              // 3
   const thresholds = [];                // 各跳在 curve 上的參數 u
   for (let i = 1; i <= hops; i++) thresholds.push(i / (pts.length - 1));
   let peeled = 0;
   const DURATION = 3.2;
-  anim = { curve, t0: null, dur: DURATION, thresholds, peeled, hops };
+  anim = { curve, t0: null, dur: DURATION, thresholds, peeled, hops, hopNodes: sel };
 }
 
 function spawnPeel(posVec, colorHex) {
@@ -427,7 +464,7 @@ function tickPacket(now) {
 
   // 到達某一跳 → 剝一層洋蔥
   while (anim.peeled < anim.hops && u >= anim.thresholds[anim.peeled]) {
-    const hopNode = selected[anim.peeled];
+    const hopNode = anim.hopNodes[anim.peeled];
     if (shells[anim.peeled]) shells[anim.peeled].visible = false;
     spawnPeel(new THREE.Vector3(hopNode.x, hopNode.y, hopNode.z), COL.shell[anim.peeled] || COL.path);
     // 節點閃一下
@@ -467,7 +504,9 @@ function onNext() {
     // 全部通關 → 顯示總結卡
     el.cardTitle.textContent = S('allClearTitle');
     el.cardBody.textContent = S('allClearBody');
-    el.cardLink.style.display = 'none';
+    el.cardLink.textContent = S('allClearLink');
+    el.cardLink.href = '../index.html';
+    el.cardLink.style.display = '';
     el.cardNext.textContent = S('btnReplay');
     el.card.classList.add('show');
     levelIdx = -1; // 下次按 → 從頭
@@ -502,20 +541,30 @@ function hoverTick() {
 
 let prevNow = performance.now();
 async function animate() {
+  try {
+    await frame();
+  } catch (e) {
+    console.error(e);
+    say(S('runtimeError'));
+    renderer.setAnimationLoop(null); // 停下來，免得每幀重複拋錯
+  }
+}
+
+async function frame() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
   const tsec = now / 1000;
 
   orbit.idle += dt;
   // 還沒開始選取時，閒置緩慢 attract 旋轉；一旦選了節點就固定視角，方便瞄準
-  if (orbit.idle > 6 && pointers.size === 0 && selected.length === 0) orbit.theta += dt * 0.05;
+  if (orbit.idle > 6 && pointers.size === 0 && chosen().length === 0 && !REDUCED) orbit.theta += dt * 0.05;
   applyCamera();
 
   // 節點脈動 / 選取強調 / 閃光
   for (const n of nodes) {
     const m = n._mesh; if (!m) continue;
     const ud = m.userData;
-    let e = ud.baseEmis * (1 + 0.18 * Math.sin(tsec * 2 + ud.phase));
+    let e = ud.baseEmis * (1 + (REDUCED ? 0 : 0.18) * Math.sin(tsec * 2 + ud.phase));
     const sel = selected.indexOf(n);
     if (sel >= 0) e += 0.9;
     if (hovered === n) e += 0.5;
@@ -558,10 +607,15 @@ async function main() {
   if (!ok) return;
   bindControls(renderer.domElement);
   el.send.addEventListener('click', onSend);
-  el.reset.addEventListener('click', () => { if (animating) return; selected = []; el.feedback.textContent = ''; el.feedback.className = 'feedback'; updateSlots(); updatePath(); });
+  el.reset.addEventListener('click', () => { if (animating) return; selected = [null, null, null]; clearSay(); updateSlots(); updatePath(); });
   el.cardNext.addEventListener('click', onNextClickRouter);
-  el.legendToggle.addEventListener('click', () => el.legend.classList.toggle('open'));
-  $('hint-close').addEventListener('click', () => el.hint.classList.add('hidden'));
+  const onActivate = (node, fn) => {
+    if (!node) return;
+    node.addEventListener('click', fn);
+    node.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } });
+  };
+  onActivate(el.legendToggle, () => el.legend.classList.toggle('open'));
+  onActivate($('hint-close'), () => el.hint.classList.add('hidden'));
   loadLevel(0);
   renderer.setAnimationLoop(animate);
 }
