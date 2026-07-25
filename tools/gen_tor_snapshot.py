@@ -13,33 +13,32 @@ read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份�
     relays: [[country, role, weight], ...] }
   role 編碼：0 中繼 / 1 guard / 2 exit / 3 guard+exit
 
-取回策略（繞開 proxy 的已知限制，見 anoni-net/onionoo-fastapi#2）：
+取回策略：
   - total 與 countries 取自 aggregate_countries（伺服器端聚合，準確涵蓋全網，
     與 aggregate_flags 的 Running 相符）。
-  - 逐台 relays 改成「按國家分頁」而不是全域 offset 分頁。全域分頁會漏抓約 15%
-    （實測 8199／9696），按國家分頁誤差在 ±0.5% 以內（時間差造成，非分頁漏抓）。
-  - fields 單獨帶會 500，搭配 raw=true 就正常，payload 因此小很多（一國一頁約 1 秒）。
-  - limit 上限仍是 200，所以大國要多頁；跨國家用執行緒平行取回。
-  - fingerprint 去重，避免分頁邊界重複。
+  - 逐台 relays 一次取回：帶 fields 投影時 limit 可以開到全網大小，實測 limit=20000
+    兩秒就拿回全部，不必分頁。
+  - 不要用 offset 分頁。實測分頁仍會漏抓（9 頁只拿到 8999／9901，少約 9%），
+    一次取完就沒有這個問題（anoni-net/onionoo-fastapi#2 的 fields 與 limit 已修好，
+    分頁那項還在）。
+  - 仍照 fingerprint 去重，多一層保險。
 
 用法：
   python3 tools/gen_tor_snapshot.py [輸出路徑]
   預設輸出 docs/zh-TW/games/tor-network/snapshot.json
 """
-import json, os, subprocess, sys, threading, time
+import json, os, subprocess, sys, time
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
 
 MCP = os.environ.get("ONIONOO_MCP", "https://onionoo.anoni.net/mcp")
-PAGE_LIMIT = 200  # proxy 上限 200，帶更大的值會被 input validation 擋下
+FULL_LIMIT = 20000  # 帶 fields 投影時可以開到全網大小，一次取完
 FIELDS = "fingerprint,country,flags,consensus_weight"  # 只要畫地球用得到的欄位
-WORKERS = int(os.environ.get("SNAPSHOT_WORKERS", "4"))
 # Onionoo 給的這幾種國別沒有明確位置（eu 泛指歐洲、?? 未知），country 參數也查不到，
 # 地球上本來就不畫，逐台取回時直接跳過。
 NO_PLACE = {"eu", "??", "xx", ""}
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW", "games", "tor-network", "snapshot.json")
 
-_local = threading.local()
+_SID = None
 
 
 def _curl(sid, payload, timeout="120"):
@@ -81,10 +80,10 @@ def new_session():
 
 
 def session():
-    """每個執行緒各自持有一個 MCP session，避免共用時互相干擾。"""
-    if not getattr(_local, "sid", None):
-        _local.sid = new_session()
-    return _local.sid
+    global _SID
+    if not _SID:
+        _SID = new_session()
+    return _SID
 
 
 def call(name, arguments, tries=3):
@@ -96,31 +95,23 @@ def call(name, arguments, tries=3):
             if txt.strip().startswith(("{", "[")):
                 return json.loads(txt)
         if attempt < tries - 1:
-            _local.sid = None  # session 可能已過期，下一輪重新握手
+            global _SID
+            _SID = None  # session 可能已過期，下一輪重新握手
             time.sleep(1)
     return None
 
 
-def fetch_country(cc, expect):
-    """抓單一國家的全部 running relay，回傳 (fingerprint → relay dict, relays_published)。"""
-    got, published, off = {}, None, 0
-    cap = expect + PAGE_LIMIT * 2  # 上限保護，避免 proxy 異常時無限翻頁
-    while off < cap:
-        d = call("get_details", {"running": True, "country": cc, "limit": PAGE_LIMIT,
-                                 "offset": off, "fields": FIELDS, "raw": True})
-        if d is None:
-            print(f"  {cc} offset {off} 取回失敗，該國停在 {len(got)}／{expect}", file=sys.stderr)
-            break
-        page = d.get("relays", [])
-        published = published or d.get("relays_published")
-        for r in page:
-            fp = r.get("fingerprint")
-            if fp:
-                got[fp] = r
-        if len(page) < PAGE_LIMIT:
-            break
-        off += PAGE_LIMIT
-    return got, published
+def fetch_all():
+    """一次取回全網 running relay，回傳 (fingerprint → relay dict, relays_published)。"""
+    d = call("get_details", {"running": True, "limit": FULL_LIMIT, "fields": FIELDS})
+    if d is None:
+        raise SystemExit("get_details 取回失敗")
+    got = {}
+    for r in d.get("relays", []):
+        fp = r.get("fingerprint")
+        if fp:
+            got[fp] = r
+    return got, d.get("relays_published")
 
 
 def main():
@@ -137,19 +128,17 @@ def main():
     top_countries = countries[:20]
     no_place = sum(n for cc, n in countries if cc in NO_PLACE)
 
-    # 2) 逐台 relay：按國家平行分頁取回
-    targets = [(cc, n) for cc, n in countries if cc not in NO_PLACE]
-    relays, published = {}, None
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for (cc, expect), (got, pub) in zip(targets, pool.map(lambda t: fetch_country(*t), targets)):
-            relays.update(got)
-            published = published or pub
-            if abs(len(got) - expect) > max(5, expect * 0.02):
-                print(f"  注意：{cc} 取回 {len(got)}，聚合值 {expect}", file=sys.stderr)
+    # 2) 逐台 relay：一次取回全網
+    relays, published = fetch_all()
+    want = total - no_place
+    if len(relays) < want * 0.98:
+        print(f"  注意：取回 {len(relays)} 台，聚合值扣掉無國別後是 {want}", file=sys.stderr)
 
     out_relays, rc = [], Counter()
     for r in relays.values():
         country = (r.get("country") or "??").lower()
+        if country in NO_PLACE:
+            continue  # 地球上沒有位置可放，存了也畫不出來
         fl = r.get("flags") or []
         role = (2 if "Exit" in fl else 0) + (1 if "Guard" in fl else 0)
         out_relays.append([country, role, int(r.get("consensus_weight") or 0)])
