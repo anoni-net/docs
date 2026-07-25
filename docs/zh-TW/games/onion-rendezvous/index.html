@@ -38,6 +38,12 @@
     #note { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.6; display: flex; flex-direction: column; gap: 5px; }
     #note p { margin: 0; }
     #note .note-sm { font-size: 10.5px; opacity: .78; }
+    /* 細節收進可展開區。全部攤開的話左上面板會長到蓋住 client 端點 */
+    #note .more summary { cursor: pointer; color: var(--cyan); font-size: 11px; font-weight: 700; list-style: none; }
+    #note .more summary::-webkit-details-marker { display: none; }
+    #note .more summary::after { content: ' ▾'; }
+    #note .more[open] summary::after { content: ' ▴'; }
+    #note .more p { margin-top: 5px; }
 
     /* 控制面板 */
     #controls { left: 14px; bottom: 20px; padding: 12px 15px; width: 216px; display: flex; flex-direction: column; gap: 10px; }
@@ -78,6 +84,7 @@
         <div id="caption">兩種流量都走 3 跳中繼。連 .onion 服務時，你和服務各自建一條 3 跳電路，在隨機挑出的會合點相遇（全程共 6 跳）。連明網網站則是你走 3 跳到出口，直達網站後原路傳回。</div>
         <div class="info-side">
           <div id="legend">
+            <div class="lg-row"><span class="lg-dot" style="background:#2f5876"></span>relay 節點（乾淨中繼）</div>
             <div class="lg-row"><span class="lg-dot" style="background:#38d6ff"></span>你（client）的電路</div>
             <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
             <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
@@ -86,8 +93,12 @@
           </div>
           <div id="note">
             <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
-            <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
-            <p class="note-sm">畫面上的有害節點代表已經被標記出問題的中繼。真實的 Tor 選路徑只排除已經被標記的節點，還沒被抓到的惡意中繼一樣可能被選中。Tor 的安全靠的是把路徑拆開，讓任何一方都無法同時看到你是誰與你在連什麼。</p>
+            <details class="more">
+              <summary>跟真實 Tor 的差別</summary>
+              <p class="note-sm">實際上服務會先把介紹點清單發布出去，你連線前要先查到這份清單，再挑好會合點，透過介紹點悄悄告知服務。為了畫面簡潔，這裡省略介紹點與查詢的過程。</p>
+              <p class="note-sm">畫面上每條連線的 3 跳都重新抽選，方便同時呈現很多條。實際使用時，你的入口節點（Guard）會固定用上數週才換，只有中間與出口常常變動。</p>
+              <p class="note-sm">畫面上的有害節點代表已經被標記出問題的中繼。真實的 Tor 選路徑只排除已經被標記的節點，還沒被抓到的惡意中繼一樣可能被選中。Tor 的安全靠的是把路徑拆開，讓任何一方都無法同時看到你是誰與你在連什麼。</p>
+            </details>
           </div>
           <div id="backend">偵測中…</div>
         </div>
@@ -100,8 +111,8 @@
     <div class="ctrl-title">調控</div>
     <label class="ctrl"><span>relay 節點 <b id="v-relays">24</b></span>
       <input id="c-relays" type="range" min="8" max="48" step="1" value="24"></label>
-    <label class="ctrl"><span>電路數 <b id="v-circuits">2</b></span>
-      <input id="c-circuits" type="range" min="1" max="20" step="1" value="2"></label>
+    <label class="ctrl"><span>電路數 <b id="v-circuits">6</b></span>
+      <input id="c-circuits" type="range" min="1" max="20" step="1" value="6"></label>
     <label class="ctrl"><span>有害節點 <b id="v-bad">2</b></span>
       <input id="c-bad" type="range" min="0" max="10" step="1" value="2"></label>
     <label class="ctrl"><span>流量 <b id="v-flow">中</b></span>

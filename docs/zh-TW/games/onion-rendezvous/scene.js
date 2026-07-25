@@ -34,20 +34,23 @@ const params = {
 
 const MAX_PARTICLES = 8000;
 const EMIT_DUR = 0.4;        // 一波送出流量的持續時間（短＝緊湊封包，一顆引導頭從頭領到尾）
-const WORLD_SPEED = 15;      // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
+const WORLD_SPEED_BASE = 15; // 世界等速 units/sec：速度與路徑長度無關，長路徑就多花時間
 const TAIL_WORLD = 6.5;      // 回程彗星尾巴世界長度（units），加長讓「回應回來」更顯眼
-const TRAIL_SEG = 16, TRAIL_RADIUS = 0.13; // 尾巴 ribbon 參數（分段數、半寬）
+const TRAIL_SEG = 12, TRAIL_RADIUS = 0.13; // 尾巴 ribbon 參數（分段數、半寬）
 const SPAWN_MIN_GAP = 0.1;   // 補新連線的最小間隔（錯開避免同步）
 const T_EST = 0.55;          // onion：電路細線畫到 RP 的時間（建立電路）
 const T_EXCH = 0.6;          // onion：兩股都抵達 RP 後，在 RP 交換資訊的停頓
-const LINE_OP = 0.15;        // onion：電路細線不透明度（additive，淡）
+const LINE_OP = 0.28;        // onion：電路細線不透明度（additive）。太淡的話兩種路徑的形狀差異就看不出來
 const HOP_LIGHT_AT = [0.34, 0.67, 0.99]; // 電路建立時，3 個跳點依序點亮的進度門檻（凸顯「3 跳」）
 const HOP_LIGHT_BOOST = 3;   // 依序點亮時每個跳點的 boost 強度
 const PARTICLE_GAIN = 1.8;   // 流量粒子色彩增益（推進 HDR → 更亮、bloom 更明顯）
 const FIELD = new THREE.Vector3(20, 11.5, 1); // 平面：x/y 橢圓半徑，z 微幅厚度（物件仍 3D）
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
+// 這件作品本質是一直在動的，減少動態偏好時整體放慢、連線也少發一點，不是只拿掉殘影
+const MOTION = REDUCED ? 0.4 : 1;
+const WORLD_SPEED = WORLD_SPEED_BASE * MOTION;
 
-function emitInterval() { return 0.05 - params.flow * 0.038; } // flow 越大越密（0.05→0.012）
+function emitInterval() { return (0.05 - params.flow * 0.038) / MOTION; } // flow 越大越密（0.05→0.012）
 
 // ---- three.js ----
 let renderer, scene, camera, post;
@@ -83,7 +86,7 @@ async function initRenderer() {
   post = new THREE.PostProcessing(renderer);
   const scenePass = pass(scene, camera);
   const col = scenePass.getTextureNode('output');
-  const glow = col.add(bloom(col, 0.95, 0.6, 0.5));
+  const glow = col.add(bloom(col, 0.95, 0.6, 0.5)); // threshold 維持原值，拉高會連 relay 與電路線的輝光一起削掉
   post.outputNode = afterImage(glow, REDUCED ? 0 : 0.45); // 尾巴由 tube 提供，殘影僅留一點流動感；減少動態偏好時關閉
 
   addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
@@ -148,11 +151,16 @@ function reconcile() {
     for (const n of order) { if (kill <= 0) break; n.userData.dying = true; kill--; }
     live = relays.filter((n) => !n.userData.dying);
   }
-  // 2. 有害節點數：就地變色，不動位置
+  // 2. 有害節點數：就地變色，不動位置。留至少 3 個乾淨節點，否則電路無路可走、畫面會靜止
+  const wantBad = Math.min(params.bad, Math.max(0, live.length - 3));
   let liveBad = live.filter((n) => n.userData.bad);
   let liveGood = live.filter((n) => !n.userData.bad);
-  while (liveBad.length < params.bad && liveGood.length > 0) { const n = liveGood.pop(); setBad(n, true); liveBad.push(n); }
-  while (liveBad.length > params.bad) { const n = liveBad.pop(); setBad(n, false); }
+  const inUse = new Set();
+  for (const c of connections) { if (c.rp) inUse.add(c.rp); for (const h of c.hops || []) inUse.add(h); }
+  // 優先挑沒有電路在用的節點轉紅，免得正在飛的粒子當場穿過一顆紅點
+  liveGood.sort((a2, b2) => (inUse.has(a2) ? 1 : 0) - (inUse.has(b2) ? 1 : 0));
+  while (liveBad.length < wantBad && liveGood.length > 0) { const n = liveGood.shift(); setBad(n, true); liveBad.push(n); }
+  while (liveBad.length > wantBad) { const n = liveBad.pop(); setBad(n, false); }
   // 3. 會合點與 3 跳只從乾淨、未淡出的節點挑
   goodRelays = relays.filter((n) => !n.userData.bad && !n.userData.dying);
 }
@@ -185,6 +193,7 @@ function buildParticles() {
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
   pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
   pMat = new THREE.PointsNodeMaterial({ size: 0.26, sizeAttenuation: true, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  pGeo.setDrawRange(0, 0);
   points = new THREE.Points(pGeo, pMat);
   points.frustumCulled = false;
   scene.add(points);
@@ -194,9 +203,11 @@ function setCol(idx, hex) {
   const c = new THREE.Color(hex).multiplyScalar(PARTICLE_GAIN); // 提亮，讓流動粒子更醒目
   pCol[idx * 3] = c.r; pCol[idx * 3 + 1] = c.g; pCol[idx * 3 + 2] = c.b;
 }
+let pHigh = 0; // 用過的最大索引 + 1。freeList 從 0 開始配置，這個上緣就是實際用量
 function allocParticle(curve, hex, speed) {
   const idx = freeList.pop();
   if (idx === undefined) return;
+  if (idx + 1 > pHigh) { pHigh = idx + 1; if (pGeo) pGeo.setDrawRange(0, pHigh); }
   const p = particles[idx];
   // speed 未指定＝世界等速（WORLD_SPEED/長度）；指定＝固定時長（會合時兩股同時抵達 RP）
   const base = speed !== undefined ? speed : WORLD_SPEED / curve.getLength();
@@ -211,6 +222,7 @@ function freeParticle(idx) {
 }
 function clearParticles() {
   for (let i = 0; i < MAX_PARTICLES; i++) if (particles[i].active) freeParticle(i);
+  pHigh = 0; if (pGeo) pGeo.setDrawRange(0, 0);
   if (pGeo) { pGeo.attributes.color.needsUpdate = true; pGeo.attributes.position.needsUpdate = true; }
 }
 
@@ -221,8 +233,8 @@ const lines = []; // onion 電路細線（沿曲線的細管），生命與連�
 
 // 電路細線：一條沿曲線的細管，用 drawRange 從端點漸畫到 RP（表現「電路接出去」）
 function spawnLine(curve, hex) {
-  const geo = new THREE.TubeGeometry(curve, 60, 0.02, 5, false); // 更細
-  const mat = new THREE.MeshBasicNodeMaterial({ color: new THREE.Color(hex).multiplyScalar(0.55), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }); // 調暗，退成路徑底線、不搶粒子
+  const geo = new THREE.TubeGeometry(curve, 60, 0.05, 5, false); // 細，但要看得見
+  const mat = new THREE.MeshBasicNodeMaterial({ color: new THREE.Color(hex).multiplyScalar(0.72), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }); // 壓在粒子亮度之下，退成路徑底線
   mat.opacity = 0;
   const m = new THREE.Mesh(geo, mat);
   m.frustumCulled = false;
@@ -253,9 +265,23 @@ function curveThrough(nodes) {
   return c;
 }
 
-function spawnConnection(type) {
+// 同一族色系內給每條連線一點位移，維持「cyan＝client、violet＝服務」的語意，
+// 又讓同時在跑的多條彼此分得出來
+let connSeq = 0;
+const _tintC = new THREE.Color(), _hsl = {};
+function tint(hex, seq) {
+  _tintC.set(hex).getHSL(_hsl);
+  const k = (seq % 5) - 2; // -2..2
+  _tintC.setHSL((_hsl.h + k * 0.018 + 1) % 1, Math.min(1, _hsl.s * (1 + k * 0.05)), Math.min(0.92, _hsl.l * (1 + k * 0.06)));
+  return _tintC.getHex();
+}
+
+function spawnConnection(type, marked) {
   if (goodRelays.length < 3) return;             // 乾淨節點不足就不發起
+  const seq = connSeq++;
+  const cCol = tint(COL.clientStream, seq), sCol = tint(COL.serviceStream, seq), rCol = tint(COL.respStream, seq);
   type = type || (Math.random() < 0.5 ? 'onion' : 'clearnet');
+  const before = connections.length;
   const emitDur = EMIT_DUR * (0.7 + Math.random() * 0.8);
   if (type === 'onion') {
     // .onion：client 與服務各建 3 跳電路，在隨機會合點相遇
@@ -274,11 +300,13 @@ function spawnConnection(type) {
       clientCurve, serviceCurve,
       clientRet, serviceRet,
       rp, hops: [...cHops, ...sHops],
-      clientLine: spawnLine(clientCurve, COL.clientStream),   // 電路細線：client → RP
-      serviceLine: spawnLine(serviceCurve, COL.serviceStream), // 電路細線：服務 → RP
+      cCol, sCol,
+      clientLine: spawnLine(clientCurve, cCol),   // 電路細線：client → RP
+      serviceLine: spawnLine(serviceCurve, sCol), // 電路細線：服務 → RP
       estDone: false, fwdStarted: false, flashed: false, retStarted: false, hopLit: 0,
     });
     // 曳光彈頭改在去程／回程開始時才發（見 updateConnections）
+    markNew(before, marked);
   } else {
     // 明網：client → guard → middle → exit → 網站，回應原路走回
     const hops = pickDistinct(goodRelays, 3, null);
@@ -290,10 +318,20 @@ function spawnConnection(type) {
       tHop: fwdCurve.getLength() / WORLD_SPEED,
       fwdCurve,
       retCurve: curveThrough([websiteNode, exit, hops[1], hops[0], clientNode]),
-      exit, website: websiteNode, hops,
+      exit, website: websiteNode, hops, cCol, rCol,
     });
     // 去程（從端點出發）不放彗星頭，只有粒子流；回程才有彗星頭
+    markNew(before, marked);
   }
+}
+
+// 點擊發起的連線讓第一跳亮一下。電路數開高時，畫面上同時十幾條在跑，
+// 不給記號的話點了根本看不出多了哪一條。
+function markNew(before, marked) {
+  if (!marked || connections.length <= before) return;
+  const c = connections[connections.length - 1];
+  const n = (c.hops && c.hops[0]) || c.rp;
+  if (n) n.userData.boost = Math.max(n.userData.boost, 5);
 }
 
 // 曳光彈頭：每股流量發出時，一顆較大、該股亮色的球領在最前面，殘影拉成平滑尾巴（非串珠）
@@ -315,9 +353,29 @@ function spawnTracer(curve, hex, speed) {
   group.add(m); tracers.push(m);
 }
 
-// 會合特效：讓會合點 relay 球體瞬間閃白光（明顯亮一下，0.5 秒衰減）
+// 會合特效：白閃 + 一圈擴散環。兩股流量在這裡相遇是本作的重點，
+// 只靠節點發亮的話，跟其他被粒子路過而發亮的 relay 分不出來。
+const rings = [];
 function flashNode(node) {
   node.userData.flashT = 1;
+  if (REDUCED) return;
+  const geo = new THREE.RingGeometry(0.95, 1.12, 44);
+  const mat = new THREE.MeshBasicNodeMaterial({ color: COL.rp, transparent: true, opacity: 0.9, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false });
+  const m = new THREE.Mesh(geo, mat);
+  m.position.copy(node.position);
+  m.userData.life = 0;
+  m.frustumCulled = false;
+  group.add(m); rings.push(m);
+}
+
+function updateRings(dt) {
+  for (let i = rings.length - 1; i >= 0; i--) {
+    const r = rings[i];
+    const k = (r.userData.life += dt) / 1.1;
+    r.scale.setScalar(1 + k * 3.4);
+    r.material.opacity = Math.max(0, 0.9 * (1 - k) * (1 - k));
+    if (k >= 1) { group.remove(r); r.geometry.dispose(); r.material.dispose(); rings.splice(i, 1); }
+  }
 }
 
 function updateConnections(dt) {
@@ -352,8 +410,8 @@ function updateConnections(dt) {
         if (conn.age < T_EST + conn.emitDur) {
           conn.emit -= dt;
           while (conn.emit <= 0) {
-            allocParticle(conn.clientCurve, COL.clientStream, conn.fwdSpeed);
-            allocParticle(conn.serviceCurve, COL.serviceStream, conn.fwdSpeed);
+            allocParticle(conn.clientCurve, conn.cCol, conn.fwdSpeed);
+            allocParticle(conn.serviceCurve, conn.sCol, conn.fwdSpeed);
             conn.emit += interval;
           }
         }
@@ -367,14 +425,14 @@ function updateConnections(dt) {
       if (conn.age >= retStart) {
         if (!conn.retStarted) {
           conn.retStarted = true; conn.emit = 0;
-          spawnTracer(conn.clientRet, COL.clientStream);
-          spawnTracer(conn.serviceRet, COL.serviceStream);
+          spawnTracer(conn.clientRet, conn.cCol);
+          spawnTracer(conn.serviceRet, conn.sCol);
         }
         if (conn.age < retEnd) {
           conn.emit -= dt;
           while (conn.emit <= 0) {
-            allocParticle(conn.clientRet, COL.clientStream);
-            allocParticle(conn.serviceRet, COL.serviceStream);
+            allocParticle(conn.clientRet, conn.cCol);
+            allocParticle(conn.serviceRet, conn.sCol);
             conn.emit += interval;
           }
         }
@@ -394,13 +452,13 @@ function updateConnections(dt) {
       const flowEnd = retEnd + conn.tHop;
       if (conn.age < conn.emitDur) { // 去程
         conn.emit -= dt;
-        while (conn.emit <= 0) { allocParticle(conn.fwdCurve, COL.clientStream); conn.emit += interval; }
+        while (conn.emit <= 0) { allocParticle(conn.fwdCurve, conn.cCol); conn.emit += interval; }
       }
       // 去程抵達網站 → 網站柔和發光、開始回程（一顆引導頭領回程這一波）
-      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; conn.emit = 0; spawnTracer(conn.retCurve, COL.respStream); }
+      if (!conn.flashed && conn.age > conn.tHop) { conn.flashed = true; conn.emit = 0; spawnTracer(conn.retCurve, conn.rCol); }
       if (conn.age >= retStart && conn.age < retEnd) { // 回程（原路）
         conn.emit -= dt;
-        while (conn.emit <= 0) { allocParticle(conn.retCurve, COL.respStream); conn.emit += interval; }
+        while (conn.emit <= 0) { allocParticle(conn.retCurve, conn.rCol); conn.emit += interval; }
       }
       if (conn.age > flowEnd + 0.7) connections.splice(i, 1);
     }
@@ -415,7 +473,7 @@ const ZOOM_MIN = 0.55, ZOOM_MAX = 1.95;
 const CONTENT_LONG = 31;  // client 到服務那一軸要容納的半寬（端點在 ±27，加上球半徑與留白）
 const CONTENT_SHORT = 13; // 另一軸（服務與網站上下錯開 ±8.5）
 const pointers = new Map();
-let downPos = null, dragged = false, pinchStart = 0, zoomStart = 1;
+let downPos = null, dragged = false, pinchStart = 0, zoomStart = 1, lastClickAt = 0;
 
 // 直式螢幕把整個場景轉 90 度，長軸改走螢幕的長邊，兩端才進得來
 function isPortrait() { return innerWidth < innerHeight; }
@@ -482,7 +540,8 @@ function bindControls(dom) {
   const up = (e) => {
     const wasClick = pointers.size === 1 && !dragged;
     pointers.delete(e.pointerId);
-    if (wasClick) spawnConnection();
+    // 連點會讓瞬時連線數遠超過滑桿設定，節流一下；新連線給個記號，才看得出多了哪一條
+    if (wasClick && performance.now() - lastClickAt > 250) { lastClickAt = performance.now(); spawnConnection(null, true); }
     if (pointers.size < 2) pinchStart = 0;
   };
   dom.addEventListener('pointerup', up);
@@ -525,6 +584,16 @@ let prevNow = performance.now();
 let spawnTimer = 0;
 
 async function animate() {
+  try {
+    await frame();
+  } catch (e) {
+    console.error(e);
+    $('backend').textContent = '畫面發生錯誤，重新整理可以再試一次'; $('backend').className = 'err';
+    renderer.setAnimationLoop(null); // 停止 loop，避免持續拋錯洗版
+  }
+}
+
+async function frame() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
   const tsec = now / 1000;
@@ -533,7 +602,7 @@ async function animate() {
 
   // 維持約 params.circuits 條連線：不足就補，錯開避免同步
   spawnTimer -= dt;
-  if (spawnTimer <= 0 && connections.length < params.circuits) { spawnConnection(); spawnTimer = SPAWN_MIN_GAP + Math.random() * 0.3; } // 隨機錯開，避免同步齊發
+  if (spawnTimer <= 0 && connections.length < params.circuits) { spawnConnection(); spawnTimer = (SPAWN_MIN_GAP + Math.random() * 0.3) / MOTION; } // 隨機錯開，避免同步齊發
 
   updateConnections(dt);
 
@@ -552,6 +621,8 @@ async function animate() {
       if (dx * dx + dy * dy + dz * dz < 0.8) r.userData.boost = Math.min(r.userData.boost + 8 * dt, 6);
     }
   }
+  pGeo.attributes.position.updateRanges = [{ start: 0, count: pHigh * 3 }];
+  pGeo.attributes.color.updateRanges = [{ start: 0, count: pHigh * 3 }];
   pGeo.attributes.position.needsUpdate = true;
   pGeo.attributes.color.needsUpdate = true;
 
@@ -580,6 +651,8 @@ async function animate() {
     T.geometry.attributes.color.needsUpdate = true;
   }
 
+  updateRings(dt);
+
   // 節點脈動 + 生命動畫（淡入/淡出）+ boost 衰減
   for (const m of relays) updateNode(m, tsec, dt);
   updateNode(clientNode, tsec, dt); updateNode(serviceNode, tsec, dt); updateNode(websiteNode, tsec, dt);
@@ -592,13 +665,7 @@ async function animate() {
   }
 
 
-  try {
-    await post.renderAsync();
-  } catch (e) {
-    console.error(e);
-    $('backend').textContent = '渲染中斷'; $('backend').className = 'err';
-    renderer.setAnimationLoop(null); // 停止 loop，避免持續拋錯洗版
-  }
+  await post.renderAsync();
 }
 
 function updateNode(m, tsec, dt) {
@@ -610,7 +677,7 @@ function updateNode(m, tsec, dt) {
   if (ud.boost > 0) { e += ud.boost; ud.boost = Math.max(0, ud.boost - dt * 1.6); } // 粒子離開後變暗消逝（閒置）
   ud.uEmis.value = e * ud.life;
   // 會合閃白光：flashT 1→0（0.5 秒），白光強度 = flashT² × 5，配 bloom 明顯亮一下
-  if (ud.flashT > 0) ud.flashT = Math.max(0, ud.flashT - dt / 0.6); // 會合白閃約 0.6 秒
+  if (ud.flashT > 0) ud.flashT = Math.max(0, ud.flashT - dt / 1.15); // 會合白閃約 1.15 秒，跟一般路過發亮拉開差距
   ud.uFlash.value.setScalar(ud.flashT * ud.flashT * 5 * ud.life);   // 亮白 pop、快速衰減
   // 端點保留原本 boost 放大；relay 不放大
   m.scale.setScalar(ud.life * (1 + (ud.isEndpoint && ud.boost > 0 ? ud.boost * 0.14 : 0)));
