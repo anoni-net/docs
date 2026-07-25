@@ -62,6 +62,14 @@
     #sizes .sz.s { width: 3px; height: 3px; }
     #sizes .sz.m { width: 6px; height: 6px; }
     #sizes .sz.l { width: 12px; height: 12px; }
+    /* 各國角色組成：球面上四色混在一起讀不出來，並排的長條才比得動 */
+    .mix-row { display: flex; align-items: center; gap: 6px; margin: 3px 0; font-size: 10.5px; color: var(--muted); }
+    .mix-row .cc { width: 23px; font-weight: 800; color: var(--ink); flex: none; }
+    .mix-row .tot { width: 38px; text-align: right; color: var(--ink); flex: none; }
+    .mix-bar { flex: 1; display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); }
+    .mix-bar span { display: block; height: 100%; }
+    .mix-row .n { width: 52px; text-align: right; flex: none; }
+    #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
     #hint .narrow { display: none; }
     @media (max-width: 680px) {
@@ -89,13 +97,14 @@
         <div id="pub">資料快照：<span id="stat-pub">…</span></div>
         <div class="lbl">角色分布</div>
         <div class="row" id="stat-role"></div>
-        <div class="lbl">中繼最多的國家</div>
-        <div class="row" id="stat-country"></div>
         <div class="lbl">陸地亮度：該國中繼數（非線性，中段差距已放大）</div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
+        <div class="lbl">各國中繼數與角色組成（30 台以上）</div>
+        <div id="stat-mix"></div>
+        <div id="mix-note"></div>
         <div class="lbl">點的大小：共識權重（扛多少流量）</div>
         <div id="sizes"><i class="sz s"></i>1 萬以下<i class="sz m"></i>1 到 6 萬<i class="sz l"></i>6 萬以上</div>
-        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色，大小分共識權重（Tor 用來分配流量的比重）。點的位置是在該國國界內隨機挑的，代表這台中繼登記在這個國家。Onionoo 只給到國別，沒有更精確的座標，所以每次重新整理，同一個國家的點會落在不同地方。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
+        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色，大小分共識權重（Tor 用來分配流量的比重）。同一個國家的點聚成一團，團的大小照台數走，跟國土面積無關。位置只代表這台中繼登記在哪個國家，Onionoo 只給到國別，沒有更精確的座標，每次重新整理團內的排列也會不一樣。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
         <div id="gap"></div>
         <div id="backend">偵測中…</div>
       </div>

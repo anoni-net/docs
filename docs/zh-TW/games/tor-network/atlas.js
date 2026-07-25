@@ -1,5 +1,5 @@
 // Tor 網路現況地球儀
-// 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼隨機灑在所屬國家的國土範圍內。
+// 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼依國別聚成一團一團畫在地球上。
 // 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
 // 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
@@ -232,17 +232,23 @@ function inRings(rings, lon, lat) {
   return hit;
 }
 
-// 在國土內隨機取一點。Natural Earth 沒有的小地方（新加坡、香港）退回錨點加小抖動。
-function sampleIn(a, out) {
-  if (a.rings) {
-    for (let t = 0; t < 24; t++) {
-      const lon = a.bb[0] + Math.random() * a.bb[2];
-      const lat = a.bb[1] + Math.random() * a.bb[3];
-      if (inRings(a.rings, lon, lat)) { out[0] = lat; out[1] = lon; return out; }
-    }
-  }
-  out[0] = a.ll[0] + (Math.random() + Math.random() - 1) * a.jlat;
-  out[1] = a.ll[1] + (Math.random() + Math.random() - 1) * a.jlon;
+// 散布半徑由中繼數決定，不再由國土面積決定。
+// 原本在國界內隨機取樣，結果是加拿大 203 台灑滿整片國土（連北極圈都有點），瑞典 513 台
+// 被細長國土拉成稀疏一條，看起來比只多 2.3 倍的荷蘭還少。點的疏密其實只是「面積 ÷ 台數」，
+// 跟地理毫無關係，Onionoo 也只給到國別。改成一國一團，團的大小才對得起數量。
+const CLUSTER_MIN_DEG = 0.30;  // 只有一台的國家也要看得到
+const CLUSTER_K = 0.040;       // 乘上 sqrt(台數)：面積正比於數量，團內密度各國一致。
+// 這組數字驗算過全部 2850 組國家對，只有荷比與德荷兩組會碰到（各超 0.5° 與 0.3°），
+// 一般混色下就是邊緣暈染，看得出是兩團，不會糊成一片。
+function clusterRadiusDeg(n) { return CLUSTER_MIN_DEG + CLUSTER_K * Math.sqrt(n); }
+
+function sampleCluster(a, n, out) {
+  const rad = clusterRadiusDeg(n);
+  const ang = Math.random() * Math.PI * 2;
+  const rr = Math.sqrt(Math.random()) * rad; // 開根號才會在圓內均勻分布，不會往中心擠
+  const lonScale = 1 / Math.max(0.15, Math.cos(a.ll[0] * Math.PI / 180)); // 高緯度的經度要放大補償
+  out[0] = a.ll[0] + rr * Math.sin(ang);
+  out[1] = a.ll[1] + rr * Math.cos(ang) * lonScale;
   return out;
 }
 
@@ -259,14 +265,14 @@ function relaySize(w) {
   return SIZE_MIN + SIZE_SPAN * t;
 }
 
-function buildRelays(snap) {
+function buildRelays(snap, counts) {
   const list = [];
   const ll = [0, 0];
   for (let i = 0; i < snap.relays.length; i++) {
     const [country, role, w] = snap.relays[i];
     const a = ANCHOR.get(country);
     if (!a || NO_PLACE.has(country)) continue;
-    sampleIn(a, ll);
+    sampleCluster(a, counts.get(country) || 1, ll);
     llToVec(ll[0], ll[1], R * 1.012, tmp);
     list.push({ x: tmp.x, y: tmp.y, z: tmp.z, role, s: relaySize(w) });
   }
@@ -274,7 +280,7 @@ function buildRelays(snap) {
 
   const geo = new THREE.OctahedronGeometry(1, 0); // 8 個三角形，小尺寸下配上光暈就是一顆圓點
   const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: true });
-  mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
+  mat.opacity = 1; // 載入時從 0 淡入
   pointMats.push(mat);
   const mesh = new THREE.InstancedMesh(geo, mat, list.length);
   mesh.frustumCulled = false;
@@ -362,6 +368,45 @@ function updateLabels() {
   }
 }
 
+// 各國角色組成。球面上四色點混在一起看不出「這個國家偏 guard 還是偏 exit」，
+// 並排的長條才比得動。exit 段固定放最左邊，橫向掃一眼就能比長度。
+const MIX_MIN = 30; // 台數太少的國家，一台 exit 就是 100%，比例沒有意義
+function roleBreakdown(snap) {
+  const m = new Map();
+  for (const [cc, role] of snap.relays) {
+    if (NO_PLACE.has(cc)) continue;
+    if (!m.has(cc)) m.set(cc, [0, 0, 0, 0]);
+    m.get(cc)[role]++;
+  }
+  return m;
+}
+
+function fillMix(snap) {
+  const box = $('stat-mix');
+  if (!box) return;
+  const rows = [...roleBreakdown(snap).entries()]
+    .map(([cc, r]) => ({ cc, r, t: r[0] + r[1] + r[2] + r[3] }))
+    .filter((x) => x.t >= MIX_MIN);
+  if (!rows.length) return;
+  const hex = (v) => '#' + v.toString(16).padStart(6, '0');
+  const exitPct = (x) => Math.round((x.r[2] + x.r[3]) / x.t * 100); // exit 與 guard+exit 都會跑出口流量
+  box.innerHTML = [...rows].sort((a, b) => b.t - a.t).slice(0, 10).map(({ cc, r, t }) => {
+    const seg = (i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${hex(ROLE_COL[i])}"></span>` : '');
+    return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
+      + `<span class="tot">${t.toLocaleString()}</span>`
+      + `<span class="mix-bar">${[2, 3, 1, 0].map(seg).join('')}</span>`
+      + `<span class="n">出口 ${exitPct({ r, t })}%</span></div>`;
+  }).join('');
+  const byExit = [...rows].sort((a, b) => exitPct(b) - exitPct(a));
+  const fmt = (x) => `${x.cc.toUpperCase()} ${exitPct(x)}%`;
+  const note = $('mix-note');
+  if (note) {
+    note.textContent = `出口流量比例最高：${byExit.slice(0, 3).map(fmt).join('、')}。`
+      + `最低：${byExit.slice(-3).reverse().map(fmt).join('、')}。`
+      + `出口要承受濫用投訴與法律風險，各國願不願意跑差很多。`;
+  }
+}
+
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
 function countryCounts(snap) {
   const m = new Map();
@@ -378,8 +423,6 @@ function fillPanel(snap, drawn) {
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
     `<span class="chip" style="--c:#${ROLE_COL[k].toString(16).padStart(6, '0')}">${rn[k]} ${(br[k] || 0).toLocaleString()}</span>`
   ).join('');
-  $('stat-country').innerHTML = (snap.topCountries || []).slice(0, 8)
-    .map(([cc, n]) => `<span class="chip">${cc.toUpperCase()} ${n}</span>`).join('');
   // 地球上畫出來的台數少於總數時要講清楚，別讓人以為每一台都在畫面上
   const miss = snap.total - drawn;
   if (drawn && miss > 0) {
@@ -464,11 +507,13 @@ async function main() {
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
   ]);
-  buildEarth(world, countryCounts(snap));
+  const counts = countryCounts(snap);
+  buildEarth(world, counts);
   if (coast) buildCoastline(coast);
-  const drawn = buildRelays(snap);
+  const drawn = buildRelays(snap, counts);
   buildLabels(snap);
   fillPanel(snap, drawn);
+  fillMix(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
