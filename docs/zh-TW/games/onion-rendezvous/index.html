@@ -82,11 +82,12 @@
             <div class="lg-row"><span class="lg-dot" style="background:#b98cff"></span>.onion 服務的電路</div>
             <div class="lg-row"><span class="lg-dot" style="background:#7dffb0"></span>明網網站（原路往返）</div>
             <div class="lg-row"><span class="lg-dot" style="background:#ffffff"></span>會合點（雙方在此交換）</div>
-            <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（電路避開）</div>
+            <div class="lg-row"><span class="lg-dot" style="background:#ff5a5a"></span>有害節點（已標記，電路避開）</div>
           </div>
           <div id="note">
             <p>會合點只負責轉送，看不到你和服務交換的內容，雙方也都不知道對方的真實位置。回程帶亮頭的彗星代表回應正在傳回。</p>
             <p class="note-sm">實際上是你挑好會合點，再透過服務的介紹點悄悄告知服務。為了畫面簡潔，此處省略介紹點。</p>
+            <p class="note-sm">畫面上的有害節點代表已經被標記出問題的中繼。真實的 Tor 選路徑只排除已經被標記的節點，還沒被抓到的惡意中繼一樣可能被選中。Tor 的安全靠的是把路徑拆開，讓任何一方都無法同時看到你是誰與你在連什麼。</p>
           </div>
           <div id="backend">偵測中…</div>
         </div>
