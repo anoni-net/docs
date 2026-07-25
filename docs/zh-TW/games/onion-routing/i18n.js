@@ -1,9 +1,9 @@
 // 洋蔥路由解謎 · 三語字串
 // zh-TW 是 single source of truth，先填滿；en / zh-cn 目前沿用 zh-TW 當 placeholder，待同步。
-// 遊戲名稱尚未定案，先用一個字串 gameTitle 集中管理，日後改名只動這裡。
+// 遊戲名稱集中在 gameTitle，改名只動這裡（index.html 另有一份靜態 fallback，避免載入前空白）。
 
 const ZH_TW = {
-  gameTitle: '路由任務（暫名）',
+  gameTitle: 'Tor 路由解謎',
   tagline: '把訊息安全送到對岸',
 
   backendDetecting: '偵測繪圖後端…',
