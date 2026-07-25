@@ -24,6 +24,7 @@ const ZH_TW = {
   btnReplay: '再玩一次',
   selectHint: '在畫面中依序點選 3 個中繼，組成一條路徑。再點一次可取消。',
   dragHint: '拖曳可旋轉視角，滾輪或雙指可縮放。',
+  hintShort: '依序點 3 個中繼。再點一次可取消。拖曳可轉視角。',
 
   // 圖例
   legendTitle: '圖例',

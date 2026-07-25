@@ -408,13 +408,50 @@ function updateConnections(dt) {
 }
 
 // ---- 相機固定正對平面（拖曳平移、滾輪／雙指縮放；點擊空白處加一條連線）----
-const view = { cx: 0, cy: 0, dist: 40 };
+// zoom 是「相對於整個場景剛好入鏡的倍率」。距離寫死的話，直式手機的水平視野只有桌機的
+// 三分之一左右，client 與服務這兩端會整個掉到畫面外，等於看不到這件作品在講什麼。
+const view = { cx: 0, cy: 0, zoom: 1 };
+const ZOOM_MIN = 0.55, ZOOM_MAX = 1.95;
+const CONTENT_LONG = 31;  // client 到服務那一軸要容納的半寬（端點在 ±27，加上球半徑與留白）
+const CONTENT_SHORT = 13; // 另一軸（服務與網站上下錯開 ±8.5）
 const pointers = new Map();
-let downPos = null, dragged = false, pinchStart = 0, distStart = 0;
+let downPos = null, dragged = false, pinchStart = 0, zoomStart = 1;
+
+// 直式螢幕把整個場景轉 90 度，長軸改走螢幕的長邊，兩端才進得來
+function isPortrait() { return innerWidth < innerHeight; }
+
+// 直式時底部的調控面板與提示列會壓在畫面上，可用的高度要先扣掉，否則端點會落在面板後面
+function uiBottomPx() {
+  if (!isPortrait()) return 0;
+  let px = 0;
+  for (const id of ['controls', 'hint']) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const r = el.getBoundingClientRect();
+    if (r.height) px = Math.max(px, innerHeight - r.top);
+  }
+  return Math.min(px, innerHeight * 0.45); // 保底，面板再高也留一半以上給場景
+}
+
+function fitDist() {
+  const tanV = Math.tan(camera.fov * Math.PI / 360);
+  const tanH = tanV * camera.aspect;
+  const usable = 1 - uiBottomPx() / innerHeight;
+  const w = isPortrait() ? CONTENT_SHORT : CONTENT_LONG;
+  const h = isPortrait() ? CONTENT_LONG : CONTENT_SHORT;
+  return Math.max(h / (tanV * usable), w / tanH);
+}
+function targetDist() { return fitDist() * view.zoom; }
 
 function applyCamera() {
-  camera.position.set(view.cx, view.cy, view.dist);
-  camera.lookAt(view.cx, view.cy, 0);
+  const d = targetDist();
+  // 相機往下讓開底部面板，場景就整個浮到還看得見的那半邊
+  const off = uiBottomPx() * 0.5 * (2 * d * Math.tan(camera.fov * Math.PI / 360) / innerHeight);
+  camera.position.set(view.cx, view.cy - off, d);
+  camera.lookAt(view.cx, view.cy - off, 0);
+  group.rotation.z = isPortrait() ? Math.PI / 2 : 0;
+  // 霧的範圍跟著距離走，否則拉遠後整片節點雲會被霧吃掉
+  if (scene.fog) { scene.fog.near = d * 1.5; scene.fog.far = d * 3.25; }
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
@@ -423,7 +460,7 @@ function bindControls(dom) {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 1) { downPos = { x: e.clientX, y: e.clientY }; dragged = false; }
-    if (pointers.size === 2) { dragged = true; const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); distStart = view.dist; }
+    if (pointers.size === 2) { dragged = true; const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -432,14 +469,15 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) view.dist = clamp(distStart * pinchStart / d, 22, 78);
+      if (pinchStart > 0) view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX);
       dragged = true; return;
     }
     const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
     if (downPos && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 6) dragged = true;
-    const k = view.dist * 0.0016;
-    view.cx = clamp(view.cx - dx * k, -26, 26);
-    view.cy = clamp(view.cy + dy * k, -18, 18);
+    const k = targetDist() * 0.0016;
+    const px = isPortrait() ? 18 : 26, py = isPortrait() ? 26 : 18; // 轉 90 度後長軸換到垂直方向
+    view.cx = clamp(view.cx - dx * k, -px, px);
+    view.cy = clamp(view.cy + dy * k, -py, py);
   });
   const up = (e) => {
     const wasClick = pointers.size === 1 && !dragged;
@@ -449,7 +487,7 @@ function bindControls(dom) {
   };
   dom.addEventListener('pointerup', up);
   dom.addEventListener('pointercancel', up);
-  dom.addEventListener('wheel', (e) => { e.preventDefault(); view.dist = clamp(view.dist * (1 + Math.sign(e.deltaY) * 0.08), 22, 78); }, { passive: false });
+  dom.addEventListener('wheel', (e) => { e.preventDefault(); view.zoom = clamp(view.zoom * (1 + Math.sign(e.deltaY) * 0.08), ZOOM_MIN, ZOOM_MAX); }, { passive: false });
 }
 
 // ---- 調控面板 ----

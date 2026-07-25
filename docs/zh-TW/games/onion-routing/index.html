@@ -79,8 +79,13 @@
     @media (max-width: 560px) {
       #top { max-width: 74vw; padding: 11px 13px; }
       #brand-title { font-size: 15px; }
-      .hop { min-width: 120px; }
-      #hint { bottom: 168px; }
+      /* 三張跳位卡改成擠在同一列。原本各佔一列，操作區會吃掉螢幕下半，把節點壓在面板後面 */
+      #dock { padding: 10px 12px; gap: 8px; bottom: 12px; }
+      #hops { gap: 6px; width: 100%; flex-wrap: nowrap; }
+      .hop { min-width: 0; flex: 1; padding: 6px 8px; }
+      .hop-label { font-size: 10px; }
+      .slot-val { font-size: 11.5px; }
+      button { padding: 9px 16px; white-space: nowrap; flex: none; }
     }
   </style>
   <script type="importmap">

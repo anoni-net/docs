@@ -54,7 +54,8 @@ function initStaticText() {
   $('hop-label-0').textContent = S('hopGuard');
   $('hop-label-1').textContent = S('hopMiddle');
   $('hop-label-2').textContent = S('hopExit');
-  $('hint-text').textContent = S('selectHint') + ' ' + S('dragHint');
+  // 窄螢幕用短版，長句在手機會擠成三行、把提示列撐高，反過來壓縮到場景
+  $('hint-text').textContent = matchMedia('(max-width:560px)').matches ? S('hintShort') : (S('selectHint') + ' ' + S('dragHint'));
   el.legendToggle.textContent = S('legendTitle');
   $('legend-body').innerHTML = [
     ['#7ffcff', S('legendSource')],
@@ -145,18 +146,60 @@ function addStarfield() {
 }
 
 // ---- 自訂 orbit（拖曳旋轉、滾輪／雙指縮放）+ 點擊選節點 ----
-const orbit = { theta: Math.PI * 0.5, phi: Math.PI * 0.42, radius: 34, idle: 0 };
+// zoom 是「相對於場景剛好入鏡的倍率」。距離寫死的話，直式手機的水平視野只涵蓋 ±7.7，
+// 而寄件端與收件人在 ±16，兩端會整個掉到畫面外，關卡等於少了頭尾。
+const orbit = { theta: Math.PI * 0.5, phi: Math.PI * 0.42, zoom: 1, idle: 0 };
+const ZOOM_MIN = 0.5, ZOOM_MAX = 2;
+const CONTENT_LONG = 17.5;  // 寄件端與收件人在 ±16，加上球半徑與留白
+const CONTENT_SHORT = 7.5;  // 中繼的 y、z 大約在 ±6
 const pointers = new Map();
-let downPos = null, dragged = false, pinchStart = 0, radiusStart = 0;
+let downPos = null, dragged = false, pinchStart = 0, zoomStart = 1;
+
+function isPortrait() { return innerWidth < innerHeight; }
+
+// 直式時上下都有面板壓在畫面上（標題在上、操作區在下），可用高度要先扣掉，
+// 場景再往兩塊面板中間對齊，節點與端點才不會躲在面板後面點不到。
+function uiInsets() {
+  if (!isPortrait()) return { top: 0, bottom: 0 };
+  const cap = innerHeight * 0.35; // 保底，面板再高也留得下中間那段
+  let top = 0, bottom = 0;
+  const t = $('top');
+  if (t) { const r = t.getBoundingClientRect(); if (r.height) top = r.bottom; }
+  for (const id of ['dock', 'hint']) {
+    const el = $(id);
+    if (!el) continue;
+    const r = el.getBoundingClientRect();
+    if (r.height) bottom = Math.max(bottom, innerHeight - r.top);
+  }
+  return { top: Math.min(top, cap), bottom: Math.min(bottom, cap) };
+}
+
+function fitRadius() {
+  const tanV = Math.tan(camera.fov * Math.PI / 360);
+  const tanH = tanV * camera.aspect;
+  const ins = uiInsets();
+  const usable = 1 - (ins.top + ins.bottom) / innerHeight;
+  const pad = isPortrait() ? 1.15 : 1.5; // 桌機留白多一點，維持原本的空曠取景
+  const w = (isPortrait() ? CONTENT_SHORT : CONTENT_LONG) * pad;
+  const h = (isPortrait() ? CONTENT_LONG : CONTENT_SHORT) * pad;
+  return Math.max(h / (tanV * usable), w / tanH);
+}
 
 function applyCamera() {
-  const { theta, phi, radius } = orbit;
+  const { theta, phi } = orbit;
+  const radius = fitRadius() * orbit.zoom;
+  const ins = uiInsets();
+  // 對齊到上下面板之間那段的中心（底部面板較高時，場景整個往上移）
+  TARGET.y = (ins.top - ins.bottom) * 0.5 * (2 * radius * Math.tan(camera.fov * Math.PI / 360) / innerHeight);
   camera.position.set(
     TARGET.x + radius * Math.sin(phi) * Math.cos(theta),
     TARGET.y + radius * Math.cos(phi),
     TARGET.z + radius * Math.sin(phi) * Math.sin(theta),
   );
   camera.lookAt(TARGET);
+  group.rotation.z = isPortrait() ? Math.PI / 2 : 0; // 直式把場景立起來，寄件端與收件人改走螢幕長邊
+  // 霧的範圍跟著距離走，否則直式拉遠後整個場景會被霧吃掉
+  if (scene.fog) { scene.fog.near = radius * 1.24; scene.fog.far = radius * 2.65; }
 }
 
 function bindControls(dom) {
@@ -164,7 +207,7 @@ function bindControls(dom) {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 1) { downPos = { x: e.clientX, y: e.clientY }; dragged = false; orbit.idle = 0; }
-    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); radiusStart = orbit.radius; }
+    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = orbit.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -174,7 +217,7 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) orbit.radius = clamp(radiusStart * pinchStart / d, 16, 70);
+      if (pinchStart > 0) orbit.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX);
       dragged = true;
       return;
     }
@@ -191,7 +234,7 @@ function bindControls(dom) {
   };
   dom.addEventListener('pointerup', up);
   dom.addEventListener('pointercancel', up);
-  dom.addEventListener('wheel', (e) => { e.preventDefault(); orbit.radius = clamp(orbit.radius * (1 + Math.sign(e.deltaY) * 0.08), 16, 70); orbit.idle = 0; }, { passive: false });
+  dom.addEventListener('wheel', (e) => { e.preventDefault(); orbit.zoom = clamp(orbit.zoom * (1 + Math.sign(e.deltaY) * 0.08), ZOOM_MIN, ZOOM_MAX); orbit.idle = 0; }, { passive: false });
 }
 
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
