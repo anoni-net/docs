@@ -20,9 +20,9 @@ const COL = {
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
   sea: '#06182c',       // 海
-  land: '#14304a',      // 沒有中繼的陸地
-  landLo: '#1a3d5e',    // 有中繼，最少
-  landHi: '#356690',    // 有中繼，最多。刻意壓低，底圖只是提示，主角是上面的中繼點
+  land: '#16334e',      // 陸地本色，各國一致
+  glowLo: '#0d2c46',    // 有中繼，最少
+  glowHi: '#3d87bd',    // 有中繼，最多。壓著上限走，底圖只是提示，主角是上面的中繼點
   border: 'rgba(4,16,28,.85)',
   grid: 'rgba(120,190,240,.10)',
   equator: 'rgba(120,190,240,.20)',
@@ -52,7 +52,18 @@ const NO_PLACE = new Set(['eu', 'xx', '??', '']);
 const R = 5;
 
 let renderer, scene, camera, post, globe;
-const view = { dist: 14, rx: 0.45, ry: -0.9, spin: true }; // 開場看北大西洋兩岸，稍微低頭讓北半球（中繼幾乎都在那）置中
+// zoom 是「相對於剛好完整入鏡的倍率」，不是絕對距離。畫面比例一變（手機轉向、視窗縮放），
+// 貼合距離跟著重算，地球就不會被裁掉，使用者原本放大到哪一級也保留得住。
+const view = { zoom: 1, rx: 0.45, ry: -0.9, spin: true }; // 開場看北大西洋兩岸，稍微低頭讓北半球（中繼幾乎都在那）置中
+const ZOOM_MIN = 0.42, ZOOM_MAX = 1.4;
+
+// 整顆地球完整入鏡所需的距離。直式手機的水平視野比垂直窄很多，固定距離會把地球裁掉大半。
+function fitDist() {
+  const vFov = camera.fov * Math.PI / 180;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  return R * 1.18 / Math.sin(Math.min(vFov, hFov) / 2);
+}
+function targetDist() { return fitDist() * view.zoom; }
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 let pointsIn = 0;
@@ -81,7 +92,7 @@ async function initRenderer() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
-  camera.position.set(0, 0, view.dist);
+  camera.position.set(0, 0, targetDist());
   scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.5)); // 夜側留一點底光，國界與陸地仍讀得到
   const sun = new THREE.DirectionalLight(0xcfe6ff, 2.2); // 太陽從左側來，明暗交界落在正面
   sun.position.set(-8, 1.5, 2.5);
@@ -97,41 +108,46 @@ const TEX_W = 2048, TEX_H = 1024;
 const texX = (lon) => (lon + 180) / 360 * TEX_W;
 const texY = (lat) => (90 - lat) / 180 * TEX_H;
 
-function landColor(n, max) {
-  if (!n) return MAP.land;
+function glowColor(n, max) {
   const t = Math.pow(n / max, 0.35); // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
-  const a = MAP.landLo, b = MAP.landHi;
+  const a = MAP.glowLo, b = MAP.glowHi;
   const mix = (i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t);
   return `rgb(${mix(1)},${mix(3)},${mix(5)})`;
 }
 
+// 畫兩張貼圖。base 是海陸與國界，吃日夜光照；glow 只放各國中繼數的等值色，走自體發光。
+// 分開的原因：陸地亮度若併在 base 裡，會被 dot(N,L) 的明暗蓋過去，色階就讀不出來了。
 function paintEarth(world, counts) {
-  const cv = document.createElement('canvas');
-  cv.width = TEX_W; cv.height = TEX_H;
-  const g = cv.getContext('2d');
+  const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
+  const base = mk(), glow = mk();
+  const g = base.getContext('2d'), gg = glow.getContext('2d');
   g.fillStyle = MAP.sea;
   g.fillRect(0, 0, TEX_W, TEX_H);
+  gg.fillStyle = '#000';
+  gg.fillRect(0, 0, TEX_W, TEX_H);
 
   let max = 1;
   for (const v of counts.values()) if (v > max) max = v;
   g.lineJoin = 'round';
   g.strokeStyle = MAP.border;
   g.lineWidth = 1.6;
+  g.fillStyle = MAP.land;
   for (const c of world.c) {
     let lo0 = 999, lo1 = -999, la0 = 999, la1 = -999;
-    g.beginPath();
+    const path = new Path2D();
     for (const ring of c.p) {
-      g.moveTo(texX(ring[0]), texY(ring[1]));
-      for (let i = 2; i < ring.length; i += 2) g.lineTo(texX(ring[i]), texY(ring[i + 1]));
-      g.closePath();
+      path.moveTo(texX(ring[0]), texY(ring[1]));
+      for (let i = 2; i < ring.length; i += 2) path.lineTo(texX(ring[i]), texY(ring[i + 1]));
+      path.closePath();
       for (let i = 0; i < ring.length; i += 2) {
         if (ring[i] < lo0) lo0 = ring[i]; if (ring[i] > lo1) lo1 = ring[i];
         if (ring[i + 1] < la0) la0 = ring[i + 1]; if (ring[i + 1] > la1) la1 = ring[i + 1];
       }
     }
-    g.fillStyle = landColor(counts.get(c.k) || 0, max);
-    g.fill();
-    g.stroke();
+    g.fill(path);
+    g.stroke(path);
+    const n = counts.get(c.k) || 0;
+    if (n) { gg.fillStyle = glowColor(n, max); gg.fill(path); }
     // 順手把國界留給中繼點取樣用，點才會落在國土內而不是質心附近一團
     if (!c.k) continue;
     if (!ANCHOR.has(c.k)) ANCHOR.set(c.k, { ll: [c.m[1], c.m[0]], jlat: 1, jlon: 1.4 });
@@ -147,17 +163,23 @@ function paintEarth(world, counts) {
   for (let lat = -60; lat <= 60; lat += 30) { g.beginPath(); g.moveTo(0, texY(lat)); g.lineTo(TEX_W, texY(lat)); g.stroke(); }
   g.strokeStyle = MAP.equator;
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
-  return cv;
+  return { base, glow };
 }
 
 function buildEarth(world, counts) {
   for (const k in CENTROID) ANCHOR.set(k, { ll: CENTROID[k], jlat: 1, jlon: 1.4 });
-  const tex = new THREE.CanvasTexture(paintEarth(world, counts));
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.wrapS = THREE.RepeatWrapping;
-  if (renderer.getMaxAnisotropy) tex.anisotropy = Math.min(8, renderer.getMaxAnisotropy());
-  const mat = new THREE.MeshStandardNodeMaterial({ map: tex, roughness: 1, metalness: 0 });
-  mat.emissiveNode = texture(tex).mul(0.26); // 夜側不全黑，轉到背光面仍看得出海陸與國家深淺
+  const painted = paintEarth(world, counts);
+  const toTex = (cv) => {
+    const t = new THREE.CanvasTexture(cv);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = THREE.RepeatWrapping;
+    if (renderer.getMaxAnisotropy) t.anisotropy = Math.min(8, renderer.getMaxAnisotropy());
+    return t;
+  };
+  const baseTex = toTex(painted.base), glowTex = toTex(painted.glow);
+  const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
+  // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
+  mat.emissiveNode = texture(baseTex).mul(0.15).add(texture(glowTex).mul(0.5));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
 }
 
@@ -257,7 +279,25 @@ function buildLabels(snap) {
     box.appendChild(el);
     labels.push({ el, v: llToVec(a.ll[0], a.ll[1], R * 1.03, new THREE.Vector3()), w: 44, h: 15, on: false });
   });
+  measureLabels();
+}
+
+// 標籤尺寸要在字型載入完、以及字級隨畫面寬度改變後重量，否則邊界判斷會用到過時的寬度
+function measureLabels() {
   requestAnimationFrame(() => { for (const l of labels) { l.w = l.el.offsetWidth; l.h = l.el.offsetHeight; } });
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLabels);
+
+// 左上面板與底部提示列會蓋住標籤，壓在它們上面的國家就不標
+let uiBoxes = [];
+function refreshUIBoxes() {
+  uiBoxes = [];
+  for (const id of ['top', 'hint']) {
+    const el = $(id);
+    if (!el) continue;
+    const r = el.getBoundingClientRect(); // 面板是 fixed，offsetParent 一律為 null，改看實際尺寸判斷有沒有顯示
+    if (r.width && r.height) uiBoxes.push({ x0: r.left - 4, y0: r.top - 4, x1: r.right + 4, y1: r.bottom + 4 });
+  }
 }
 
 const placed = [];
@@ -274,7 +314,12 @@ function updateLabels() {
     if (show) {
       proj.project(camera);
       const x = (proj.x * 0.5 + 0.5) * innerWidth, y = (-proj.y * 0.5 + 0.5) * innerHeight;
-      for (const q of placed) {
+      // 貼著畫面邊緣的標籤會被切一半，讀不出來就不如不標
+      if (x - l.w / 2 < 4 || x + l.w / 2 > innerWidth - 4 || y - l.h / 2 < 4 || y + l.h / 2 > innerHeight - 4) show = false;
+      for (const b of show ? uiBoxes : []) {
+        if (x + l.w / 2 > b.x0 && x - l.w / 2 < b.x1 && y + l.h / 2 > b.y0 && y - l.h / 2 < b.y1) { show = false; break; }
+      }
+      for (const q of show ? placed : []) {
         if (Math.abs(x - q.x) < (l.w + q.w) / 2 + 7 && Math.abs(y - q.y) < (l.h + q.h) / 2 + 3) { show = false; break; }
       }
       if (show) {
@@ -305,20 +350,23 @@ function fillPanel(snap, drawn) {
   $('stat-country').innerHTML = (snap.topCountries || []).slice(0, 8)
     .map(([cc, n]) => `<span class="chip">${cc.toUpperCase()} ${n}</span>`).join('');
   // 地球上畫出來的台數少於總數時要講清楚，別讓人以為每一台都在畫面上
-  if (drawn && drawn < snap.total) {
-    $('gap').textContent = `地球上目前畫出 ${drawn.toLocaleString()} 台，其餘受資料來源的分頁限制尚未取得。`;
+  const miss = snap.total - drawn;
+  if (drawn && miss > 0) {
+    $('gap').textContent = miss <= (snap.noPlace || 0) + 5
+      ? `另有 ${miss} 台的國別是 eu 或未知，地球上沒有位置可放，略過不畫。`
+      : `地球上畫出 ${drawn.toLocaleString()} 台，其餘 ${miss.toLocaleString()} 台缺明確國別或取回時未取得。`;
   }
 }
 
 // ---- 控制：拖曳旋轉、滾輪縮放、閒置自轉 ----
 const pointers = new Map();
-let last = null, pinchStart = 0, distStart = 0;
+let last = null, pinchStart = 0, zoomStart = 1;
 function bindControls(dom) {
   dom.addEventListener('pointerdown', (e) => {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     view.spin = false; last = { x: e.clientX, y: e.clientY };
-    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); distStart = view.dist; }
+    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -326,7 +374,7 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) view.dist = clamp(distStart * pinchStart / d, 7.5, 30);
+      if (pinchStart > 0) view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX);
       return;
     }
     if (!last) return;
@@ -336,7 +384,10 @@ function bindControls(dom) {
   });
   const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) last = null; if (pointers.size < 2) pinchStart = 0; };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
-  dom.addEventListener('wheel', (e) => { e.preventDefault(); view.dist = clamp(view.dist * (1 + Math.sign(e.deltaY) * 0.08), 7.5, 30); }, { passive: false });
+  dom.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    view.zoom = clamp(view.zoom * (1 + Math.sign(e.deltaY) * 0.08), ZOOM_MIN, ZOOM_MAX);
+  }, { passive: false });
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
@@ -347,7 +398,7 @@ async function animate() {
   if (view.spin && !REDUCED) view.ry += dt * 0.06;
   globe.rotation.y = view.ry;
   globe.rotation.x = view.rx;
-  camera.position.z += (view.dist - camera.position.z) * 0.12;
+  camera.position.z += (targetDist() - camera.position.z) * 0.12;
   camera.lookAt(0, 0, 0);
   if (pointsIn < 1) { pointsIn = Math.min(1, pointsIn + dt / 1.2); for (const m of pointMats) m.opacity = pointsIn; } // 點層淡入
   updateLabels();
@@ -375,9 +426,17 @@ async function main() {
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
   post.outputNode = c.add(bloom(c, 0.6, 0.5, 0.7));
-  addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    refreshUIBoxes(); // 距離由 targetDist() 依新的畫面比例自動貼合，這裡不用另外算
+    measureLabels();
+  });
   bindControls(renderer.domElement);
-  $('hint-close') && $('hint-close').addEventListener('click', () => $('hint').classList.add('hidden'));
+  refreshUIBoxes();
+  $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
+  $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
   renderer.setAnimationLoop(animate);
   // 閒置一段時間後恢復自轉
   addEventListener('pointerup', () => { setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); });

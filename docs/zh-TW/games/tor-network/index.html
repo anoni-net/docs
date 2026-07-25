@@ -50,8 +50,14 @@
 
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
-    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; }
-    @media (max-width: 680px) { #hint { font-size: 10.5px; bottom: 12px; } #big { font-size: 24px; } .lb { font-size: 10px; } }
+    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
+    #hint .narrow { display: none; }
+    @media (max-width: 680px) {
+      #hint { font-size: 10.5px; bottom: 12px; padding: 7px 12px; }
+      #hint .wide { display: none; }
+      #hint .narrow { display: inline; }
+      #big { font-size: 24px; } .lb { font-size: 10px; }
+    }
   </style>
   <script type="importmap">
   { "imports": {
@@ -86,7 +92,8 @@
   <div id="labels"></div>
 
   <div id="hint" class="panel">
-    <span>拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
     <span id="hint-close">知道了</span>
   </div>
 
