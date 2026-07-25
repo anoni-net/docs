@@ -30,7 +30,7 @@ icon: material/cube-outline
 
     ---
 
-    看真實資料。把全球正在運作的近萬台 Tor 中繼標在地球上，顏色分 guard、middle、exit，大小分頻寬，一眼看出網路高度集中在少數國家與網段。資料取自 Onionoo。
+    看真實資料。把全球正在運作的近萬台 Tor 中繼灑進各自的國界裡，顏色分 guard、middle、exit，大小分頻寬，陸地依該國中繼數調亮。有中繼的國家都標了代號與數量，一眼看出網路高度集中在少數國家。資料取自 Onionoo。
 
     [:octicons-arrow-right-24: 開始探索](tor-network/index.html){ .md-button .md-button--primary }
 

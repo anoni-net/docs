@@ -84,7 +84,8 @@ def main():
     agg = call(sid, "aggregate_countries", {"running": True, "top": 300})
     buckets = agg["buckets"] if agg else []
     total = sum(b["relay_count"] for b in buckets)
-    top_countries = [[b["key"], b["relay_count"]] for b in sorted(buckets, key=lambda x: -x["relay_count"])[:20]]
+    countries = [[b["key"], b["relay_count"]] for b in sorted(buckets, key=lambda x: -x["relay_count"])]
+    top_countries = countries[:20]
 
     # 2) 逐台 relay（地球上的點），分頁取 details
     relays, published, off = [], None, 0
@@ -118,7 +119,8 @@ def main():
         "total": grand,                               # 準確（aggregate）
         "sampled": len(out_relays),                   # 目前地球上實際畫出的點數
         "byRole": by_role,                            # 依樣本比例推估到 total
-        "topCountries": top_countries,                # 準確（aggregate）
+        "topCountries": top_countries,                # 準確（aggregate），面板用
+        "countries": countries,                       # 準確（aggregate）全部國家，等值區圖上色用
         "relays": out_relays,
     }
     with open(out, "w", encoding="utf-8") as f:
