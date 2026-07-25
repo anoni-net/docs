@@ -1,6 +1,6 @@
 // Tor 網路現況地球儀
 // 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼隨機灑在所屬國家的國土範圍內。
-// 顏色分 middle/guard/exit/both，大小分頻寬三桶。three.js WebGPURenderer + TSL bloom。
+// 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
 // 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
 import { pass, texture } from 'three/tsl';
@@ -246,41 +246,52 @@ function sampleIn(a, out) {
   return out;
 }
 
+// 每台中繼一個 instance。原本用 Points 分三桶，但這版 three.js 的 WebGL2 backend
+// 會忽略 PointsNodeMaterial 的 size：實測把 size 從 0.045 一路開到 14 都沒有任何差別，
+// 所有點一律畫成 1px，等於「大小分權重」這個編碼在 fallback 路徑上完全不存在。
+// 改用 InstancedMesh 逐台縮放，尺寸就真的照 consensus weight 走，也不必再分桶。
+// 螢幕直徑 ≈ s * 141（畫面高 900、fov 45、距離約 15.4 時）
+const SIZE_MIN = 0.015;   // 約 2.1 px：權重最低的中繼
+const SIZE_SPAN = 0.042;  // 加上去的部分，滿格約 8 px
+const SIZE_REF = 80000;   // 到這個權重就吃滿，再高不再變大（前 3% 左右）
+function relaySize(w) {
+  const t = Math.min(1, Math.pow(Math.max(0, w) / SIZE_REF, 0.8)); // 0.8 次方讓大點集中在真正高權重的那些
+  return SIZE_MIN + SIZE_SPAN * t;
+}
+
 function buildRelays(snap) {
-  // 依頻寬分三桶，每桶一個 Points（避開此版 three.js 無法逐點設 size 的限制）
-  const BUCKETS = [
-    { max: 2000, size: 0.045 },
-    { max: 30000, size: 0.09 },
-    { max: Infinity, size: 0.16 },
-  ];
-  const pos = [[], [], []], col = [[], [], []];
-  const c = new THREE.Color();
+  const list = [];
   const ll = [0, 0];
-  let drawn = 0;
   for (let i = 0; i < snap.relays.length; i++) {
     const [country, role, w] = snap.relays[i];
     const a = ANCHOR.get(country);
     if (!a || NO_PLACE.has(country)) continue;
-    drawn++;
     sampleIn(a, ll);
     llToVec(ll[0], ll[1], R * 1.012, tmp);
-    const b = w < BUCKETS[0].max ? 0 : w < BUCKETS[1].max ? 1 : 2;
-    pos[b].push(tmp.x, tmp.y, tmp.z);
-    c.set(ROLE_COL[role]).multiplyScalar(1.25); // 壓低單點增益，密集區疊起來才不會整片衝成白
-    col[b].push(c.r, c.g, c.b);
+    list.push({ x: tmp.x, y: tmp.y, z: tmp.z, role, s: relaySize(w) });
   }
-  for (let b = 0; b < 3; b++) {
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos[b]), 3));
-    g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(col[b]), 3));
-    const m = new THREE.PointsNodeMaterial({ size: BUCKETS[b].size, sizeAttenuation: true, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
-    m.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
-    pointMats.push(m);
-    const pts = new THREE.Points(g, m);
-    pts.frustumCulled = false;
-    globe.add(pts);
+  if (!list.length) return 0;
+
+  const geo = new THREE.OctahedronGeometry(1, 0); // 8 個三角形，小尺寸下配上光暈就是一顆圓點
+  const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
+  pointMats.push(mat);
+  const mesh = new THREE.InstancedMesh(geo, mat, list.length);
+  mesh.frustumCulled = false;
+  const m4 = new THREE.Matrix4();
+  const c = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const n = list[i];
+    m4.makeScale(n.s, n.s, n.s);
+    m4.setPosition(n.x, n.y, n.z);
+    mesh.setMatrixAt(i, m4);
+    c.set(ROLE_COL[n.role]).multiplyScalar(0.95); // 壓低單點增益，密集區疊起來才不會整片衝成白
+    mesh.setColorAt(i, c);
   }
-  return drawn;
+  mesh.instanceMatrix.needsUpdate = true;
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  globe.add(mesh);
+  return list.length;
 }
 
 // ---- 國家標籤：每個有中繼的國家都給一個，轉到背面淡出。

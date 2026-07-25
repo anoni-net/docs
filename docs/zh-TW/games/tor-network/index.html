@@ -59,9 +59,9 @@
     @media (prefers-reduced-motion: reduce) { #loading { animation: none; opacity: .7; } }
     #sizes { display: flex; align-items: center; gap: 6px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
     #sizes .sz { display: inline-block; border-radius: 50%; background: #cfe8ff; box-shadow: 0 0 6px #cfe8ff; }
-    #sizes .sz.s { width: 4px; height: 4px; }
-    #sizes .sz.m { width: 7px; height: 7px; }
-    #sizes .sz.l { width: 11px; height: 11px; }
+    #sizes .sz.s { width: 3px; height: 3px; }
+    #sizes .sz.m { width: 6px; height: 6px; }
+    #sizes .sz.l { width: 12px; height: 12px; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
     #hint .narrow { display: none; }
     @media (max-width: 680px) {
@@ -93,9 +93,9 @@
         <div class="row" id="stat-country"></div>
         <div class="lbl">陸地亮度：該國中繼數（非線性，中段差距已放大）</div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
-        <div class="lbl">點的大小：該台頻寬</div>
-        <div id="sizes"><i class="sz s"></i>小<i class="sz m"></i>中<i class="sz l"></i>大</div>
-        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色、大小分頻寬。點的位置是在該國國界內隨機挑的，代表這台中繼登記在這個國家。Onionoo 只給到國別，沒有更精確的座標，所以每次重新整理，同一個國家的點會落在不同地方。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
+        <div class="lbl">點的大小：共識權重（扛多少流量）</div>
+        <div id="sizes"><i class="sz s"></i>1 萬以下<i class="sz m"></i>1 到 6 萬<i class="sz l"></i>6 萬以上</div>
+        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色，大小分共識權重（Tor 用來分配流量的比重）。點的位置是在該國國界內隨機挑的，代表這台中繼登記在這個國家。Onionoo 只給到國別，沒有更精確的座標，所以每次重新整理，同一個國家的點會落在不同地方。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
         <div id="gap"></div>
         <div id="backend">偵測中…</div>
       </div>
