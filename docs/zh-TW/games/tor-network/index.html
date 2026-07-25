@@ -43,6 +43,19 @@
     #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
 
     #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; }
+    .lb.on { pointer-events: auto; cursor: pointer; }
+    .lb.on:hover, .lb.on:focus-visible { color: #fff; text-shadow: 0 0 6px var(--cyan), 0 0 12px #04060d; outline: none; }
+    /* 點國家看細節。球面上讀不出來的數字，點一下就給 */
+    #cc-card { left: 50%; bottom: 74px; transform: translateX(-50%); z-index: 15; width: min(92vw, 330px); padding: 13px 16px; }
+    #cc-card[hidden] { display: none; }
+    #cc-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+    #cc-code { font-size: 19px; font-weight: 800; letter-spacing: .5px; }
+    #cc-sub { color: var(--muted); font-size: 11.5px; }
+    #cc-close { margin-left: auto; cursor: pointer; color: var(--cyan); font-weight: 800; font-size: 11.5px; }
+    #cc-body { color: var(--muted); font-size: 11.5px; line-height: 1.75; }
+    #cc-body b { color: var(--ink); font-weight: 700; }
+    #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
+    #cc-bar span { display: block; height: 100%; }
     .lb { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .25s; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #d7ecff; white-space: nowrap; text-shadow: 0 0 5px #04060d, 0 0 11px #04060d, 0 1px 2px #04060d; }
     .lb i { font-style: normal; font-weight: 700; color: #8fb0c8; margin-left: 5px; }
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
@@ -70,6 +83,11 @@
     .mix-bar span { display: block; height: 100%; }
     .mix-row .n { width: 52px; text-align: right; flex: none; }
     #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
+    #metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
+    #metric-sw button { flex: 1; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
+    #metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
+    #metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
     #hint .narrow { display: none; }
     @media (max-width: 680px) {
@@ -97,7 +115,8 @@
         <div id="pub">資料快照：<span id="stat-pub">…</span></div>
         <div class="lbl">角色分布</div>
         <div class="row" id="stat-role"></div>
-        <div class="lbl">陸地亮度：該國中繼數（非線性，中段差距已放大）</div>
+        <div class="lbl">陸地亮度：<span id="metric-name">該國中繼數</span>（非線性，中段差距已放大）</div>
+        <div id="metric-sw"><button id="m-count" class="on">依台數</button><button id="m-weight">依共識權重</button></div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
         <div class="lbl">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
@@ -113,6 +132,12 @@
   <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
 
   <div id="labels"></div>
+
+  <div id="cc-card" class="panel" hidden>
+    <div id="cc-head"><span id="cc-code"></span><span id="cc-sub"></span><span id="cc-close" role="button" tabindex="0">關閉</span></div>
+    <div id="cc-bar"></div>
+    <div id="cc-body"></div>
+  </div>
 
   <div id="fatal" hidden></div>
   <div id="loading">載入中…</div>

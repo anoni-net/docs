@@ -134,6 +134,25 @@ function glowColor(n, max) {
 
 // 畫兩張貼圖。base 是海陸與國界，吃日夜光照；glow 只放各國中繼數的等值色，走自體發光。
 // 分開的原因：陸地亮度若併在 base 裡，會被 dot(N,L) 的明暗蓋過去，色階就讀不出來了。
+const COUNTRY_PATH = new Map(); // ISO2 → Path2D（貼圖座標），重畫發光層時直接沿用
+let GLOW = null;          // { canvas, tex }：發光層，切換指標時重畫
+let METRIC = 'count';     // 目前的指標：台數或共識權重
+
+// 發光層：各國依指標值上色。切換「台數／共識權重」時只重畫這一張。
+function paintGlow(values, canvas) {
+  const gg = canvas.getContext('2d');
+  gg.fillStyle = '#000';
+  gg.fillRect(0, 0, TEX_W, TEX_H);
+  let max = 1;
+  for (const v of values.values()) if (v > max) max = v;
+  for (const [cc, path] of COUNTRY_PATH) {
+    const n = values.get(cc) || 0;
+    if (!n) continue;
+    gg.fillStyle = glowColor(n, max);
+    gg.fill(path);
+  }
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
   const base = mk(), glow = mk();
@@ -143,8 +162,6 @@ function paintEarth(world, counts) {
   gg.fillStyle = '#000';
   gg.fillRect(0, 0, TEX_W, TEX_H);
 
-  let max = 1;
-  for (const v of counts.values()) if (v > max) max = v;
   g.lineJoin = 'round';
   g.strokeStyle = MAP.border;
   g.lineWidth = 1.6;
@@ -163,9 +180,8 @@ function paintEarth(world, counts) {
     }
     g.fill(path);
     g.stroke(path);
-    const n = counts.get(c.k) || 0;
-    if (n) { gg.fillStyle = glowColor(n, max); gg.fill(path); }
-    // 順手把國界留給中繼點取樣用，點才會落在國土內而不是質心附近一團
+    // 順手把國界留著，切換指標重畫發光層時不必再解析一次多邊形
+    if (c.k) COUNTRY_PATH.set(c.k, path);
     if (!c.k) continue;
     if (!ANCHOR.has(c.k)) ANCHOR.set(c.k, { ll: [c.m[1], c.m[0]], jlat: 1, jlon: 1.4 });
     const a = ANCHOR.get(c.k);
@@ -180,6 +196,7 @@ function paintEarth(world, counts) {
   for (let lat = -60; lat <= 60; lat += 30) { g.beginPath(); g.moveTo(0, texY(lat)); g.lineTo(TEX_W, texY(lat)); g.stroke(); }
   g.strokeStyle = MAP.equator;
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
+  paintGlow(counts, glow);
   return { base, glow };
 }
 
@@ -197,6 +214,7 @@ function buildEarth(world, counts) {
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${MAP.glowLo} 14%, ${MAP.glowHi})`;
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow);
+  GLOW = { canvas: painted.glow, tex: glowTex };
   const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   mat.emissiveNode = texture(baseTex).mul(0.15).add(texture(glowTex).mul(0.5));
@@ -303,6 +321,10 @@ function buildRelays(snap, counts) {
 // ---- 國家標籤：每個有中繼的國家都給一個，轉到背面淡出。
 // 位置擠不下時讓中繼多的優先，放大地球後小國的標籤就會浮出來。
 const labels = [];
+// 這個站的讀者主要在台灣，「台灣有幾台」大概是最常被問的一題，但 TW 只有 12 台、
+// 排名第 47，在重疊避讓裡優先權最低，畫面沒轉到剛好角度就看不到。給它插隊。
+const LABEL_ALWAYS = ['tw'];
+
 function buildLabels(snap) {
   const box = $('labels');
   if (!box) return;
@@ -311,11 +333,14 @@ function buildLabels(snap) {
     const a = ANCHOR.get(cc);
     if (!a || NO_PLACE.has(cc)) return;
     const el = document.createElement('div');
-    el.className = rank < 10 ? 'lb' : 'lb sm'; // 前段用亮字，長尾壓暗，一眼看得出主次
+    el.className = rank < 10 || LABEL_ALWAYS.includes(cc) ? 'lb' : 'lb sm'; // 前段用亮字，長尾壓暗
     el.innerHTML = `${cc.toUpperCase()}<i>${n.toLocaleString()}</i>`;
+    el.dataset.cc = cc;
     box.appendChild(el);
-    labels.push({ el, v: llToVec(a.ll[0], a.ll[1], R * 1.03, new THREE.Vector3()), w: 44, h: 15, on: false });
+    labels.push({ cc, el, v: llToVec(a.ll[0], a.ll[1], R * 1.03, new THREE.Vector3()), w: 44, h: 15, on: false });
   });
+  // 排在前面的先卡位，白名單移到最前面才不會被大國擠掉
+  labels.sort((x, y) => (LABEL_ALWAYS.includes(y.cc) ? 1 : 0) - (LABEL_ALWAYS.includes(x.cc) ? 1 : 0));
   measureLabels();
 }
 
@@ -364,7 +389,7 @@ function updateLabels() {
         l.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%)`;
       }
     }
-    if (show !== l.on) { l.on = show; l.el.style.opacity = show ? 1 : 0; }
+    if (show !== l.on) { l.on = show; l.el.style.opacity = show ? 1 : 0; l.el.classList.toggle('on', show); }
   }
 }
 
@@ -405,6 +430,73 @@ function fillMix(snap) {
       + `最低：${byExit.slice(-3).reverse().map(fmt).join('、')}。`
       + `出口要承受濫用投訴與法律風險，各國願不願意跑差很多。`;
   }
+}
+
+// ---- 點國家看細節 ----
+// 球面上讀得到的只有國碼與台數，排名、權重佔比、角色組成這些都得點一下才給。
+let CC_STATS = null;
+function buildStats(snap) {
+  const mix = roleBreakdown(snap);
+  const w = new Map();
+  for (const [cc, , wt] of snap.relays) {
+    if (NO_PLACE.has(cc)) continue;
+    w.set(cc, (w.get(cc) || 0) + wt);
+  }
+  const totalN = [...mix.values()].reduce((a, r) => a + r[0] + r[1] + r[2] + r[3], 0);
+  const totalW = [...w.values()].reduce((a, x) => a + x, 0);
+  const byN = [...mix.entries()].map(([cc, r]) => [cc, r[0] + r[1] + r[2] + r[3]]).sort((a, b) => b[1] - a[1]);
+  const byW = [...w.entries()].sort((a, b) => b[1] - a[1]);
+  const rankN = new Map(byN.map(([cc], i) => [cc, i + 1]));
+  const rankW = new Map(byW.map(([cc], i) => [cc, i + 1]));
+  let exitAll = 0;
+  for (const r of mix.values()) exitAll += r[2] + r[3];
+  CC_STATS = { mix, w, totalN, totalW, rankN, rankW, exitShare: exitAll / totalN };
+}
+
+function showCountry(cc) {
+  const card = $('cc-card');
+  if (!card || !CC_STATS) return;
+  const r = CC_STATS.mix.get(cc);
+  if (!r) return;
+  const t = r[0] + r[1] + r[2] + r[3];
+  const wShare = (CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100;
+  const exitPct = (r[2] + r[3]) / t * 100;
+  const hex = (v) => '#' + v.toString(16).padStart(6, '0');
+  $('cc-code').textContent = cc.toUpperCase();
+  $('cc-sub').textContent = `${t.toLocaleString()} 台，台數排名第 ${CC_STATS.rankN.get(cc)}`;
+  $('cc-bar').innerHTML = [2, 3, 1, 0]
+    .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${hex(ROLE_COL[i])}"></span>` : ''))
+    .join('');
+  const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
+  $('cc-body').innerHTML =
+    `佔全網台數 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，佔共識權重 <b>${pct(wShare)}%</b>（排名第 ${CC_STATS.rankW.get(cc)}）<br>`
+    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網平均 ${Math.round(CC_STATS.exitShare * 100)}%<br>`
+    + `guard ${r[1]}　exit ${r[2]}　guard＋exit ${r[3]}　middle ${r[0]}`;
+  card.hidden = false;
+  stopSpin();
+}
+function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
+
+// 台數排 US 第一，換成共識權重就變 DE 第一。這件事寫在說明裡很容易被略過，
+// 給一個切換讓人自己看排名怎麼翻過來。
+function setMetric(mode) {
+  if (!CC_STATS || !GLOW || mode === METRIC) return;
+  METRIC = mode;
+  const byCount = mode === 'count';
+  const values = byCount ? new Map([...CC_STATS.mix].map(([cc, r]) => [cc, r[0] + r[1] + r[2] + r[3]])) : CC_STATS.w;
+  paintGlow(values, GLOW.canvas);
+  GLOW.tex.needsUpdate = true;
+  for (const l of labels) {
+    const v = values.get(l.cc) || 0;
+    const pct = v / CC_STATS.totalW * 100;
+    const txt = byCount ? v.toLocaleString() : (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%'); // 小國一律 0.0% 沒有意義
+    l.el.innerHTML = `${l.cc.toUpperCase()}<i>${txt}</i>`;
+  }
+  measureLabels();
+  const name = $('metric-name');
+  if (name) name.textContent = byCount ? '該國中繼數' : '該國共識權重';
+  $('m-count') && $('m-count').classList.toggle('on', byCount);
+  $('m-weight') && $('m-weight').classList.toggle('on', !byCount);
 }
 
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
@@ -514,6 +606,7 @@ async function main() {
   buildLabels(snap);
   fillPanel(snap, drawn);
   fillMix(snap);
+  buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
@@ -526,6 +619,20 @@ async function main() {
     measureLabels();
   });
   bindControls(renderer.domElement);
+  $('labels').addEventListener('click', (e) => {
+    const el = e.target.closest('.lb');
+    if (el && el.dataset.cc) showCountry(el.dataset.cc);
+  });
+  $('labels').addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target.closest('.lb');
+    if (el && el.dataset.cc) { e.preventDefault(); showCountry(el.dataset.cc); }
+  });
+  $('m-count') && $('m-count').addEventListener('click', () => setMetric('count'));
+  $('m-weight') && $('m-weight').addEventListener('click', () => setMetric('weight'));
+  $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
+  renderer.domElement.addEventListener('pointerdown', hideCountry); // 轉動地球就把卡片收掉
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
   $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
