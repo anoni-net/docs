@@ -273,7 +273,7 @@ function buildRelays(snap) {
   if (!list.length) return 0;
 
   const geo = new THREE.OctahedronGeometry(1, 0); // 8 個三角形，小尺寸下配上光暈就是一顆圓點
-  const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: true });
   mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
   pointMats.push(mat);
   const mesh = new THREE.InstancedMesh(geo, mat, list.length);
@@ -285,7 +285,7 @@ function buildRelays(snap) {
     m4.makeScale(n.s, n.s, n.s);
     m4.setPosition(n.x, n.y, n.z);
     mesh.setMatrixAt(i, m4);
-    c.set(ROLE_COL[n.role]).multiplyScalar(0.95); // 壓低單點增益，密集區疊起來才不會整片衝成白
+    c.set(ROLE_COL[n.role]).multiplyScalar(1.15); // 壓低單點增益，密集區疊起來才不會整片衝成白
     mesh.setColorAt(i, c);
   }
   mesh.instanceMatrix.needsUpdate = true;
@@ -472,7 +472,7 @@ async function main() {
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
-  post.outputNode = c.add(bloom(c, 0.6, 0.5, 0.82)); // threshold 拉高，密集區才不會一路暈成白斑
+  post.outputNode = c.add(bloom(c, 0.5, 0.5, 0.72)); // threshold 拉高，密集區才不會一路暈成白斑
   addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
