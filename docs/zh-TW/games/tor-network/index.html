@@ -53,6 +53,15 @@
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
     #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
     #fatal[hidden] { display: none; }
+    #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
+    #loading.done { display: none; }
+    @keyframes breathe { 0%, 100% { opacity: .35; } 50% { opacity: .9; } }
+    @media (prefers-reduced-motion: reduce) { #loading { animation: none; opacity: .7; } }
+    #sizes { display: flex; align-items: center; gap: 6px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
+    #sizes .sz { display: inline-block; border-radius: 50%; background: #cfe8ff; box-shadow: 0 0 6px #cfe8ff; }
+    #sizes .sz.s { width: 4px; height: 4px; }
+    #sizes .sz.m { width: 7px; height: 7px; }
+    #sizes .sz.l { width: 11px; height: 11px; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
     #hint .narrow { display: none; }
     @media (max-width: 680px) {
@@ -82,9 +91,11 @@
         <div class="row" id="stat-role"></div>
         <div class="lbl">中繼最多的國家</div>
         <div class="row" id="stat-country"></div>
-        <div class="lbl">陸地亮度：該國中繼數</div>
+        <div class="lbl">陸地亮度：該國中繼數（非線性，中段差距已放大）</div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
-        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色、大小分頻寬。點的位置是在該國國界內隨機挑的，代表這台中繼登記在這個國家。Onionoo 只給到國別，沒有更精確的座標，所以每次重新整理，同一個國家的點會落在不同地方。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
+        <div class="lbl">點的大小：該台頻寬</div>
+        <div id="sizes"><i class="sz s"></i>小<i class="sz m"></i>中<i class="sz l"></i>大</div>
+        <div id="note">每個亮點是一台真實中繼，依所在國家聚在地球上，顏色分角色、大小分頻寬。點的位置是在該國國界內隨機挑的，代表這台中繼登記在這個國家。Onionoo 只給到國別，沒有更精確的座標，所以每次重新整理，同一個國家的點會落在不同地方。陸地本身也依該國中繼數調亮，愈亮代表托管在那裡的中繼愈多。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。有中繼的國家都標了代號與數量，擠在一起時放大就會浮出來。</div>
         <div id="gap"></div>
         <div id="backend">偵測中…</div>
       </div>
@@ -95,6 +106,7 @@
   <div id="labels"></div>
 
   <div id="fatal" hidden></div>
+  <div id="loading">載入中…</div>
 
   <div id="hint" class="panel">
     <span class="wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>

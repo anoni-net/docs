@@ -3,7 +3,10 @@
 
 資料來源：自架的 onionoo.anoni.net MCP（Streamable HTTP，無需驗證），它是 Onionoo 的
 read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份靜態快照，不在瀏覽器
-端打外部請求。適合排程（cron）每小時重生成。
+端打外部請求。
+
+目前是人工執行這支腳本再把 snapshot.json commit 進 repo，沒有排程。畫面上的
+「資料快照」時間就是這份檔案的產出時間，久沒重跑的話畫面看起來仍然正常，但資料是舊的。
 
 輸出（給 atlas.js 讀）：
   { published, source, total, sampled, noPlace, byRole, topCountries, countries,

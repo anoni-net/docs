@@ -11,10 +11,12 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const COL = {
   bg: 0x04060d,
-  mid: 0x2fb6ff,   // 中繼（middle）
-  guard: 0x57e39a, // guard
-  exit: 0xffb64d,  // exit
-  both: 0xff6b8a,  // guard+exit
+  // 四色刻意排成一條亮度階梯（暗→亮：middle、guard、exit、both）。
+  // 只靠色相的話，第二型色盲下 guard、exit、both 會收斂成同一種黃棕色。
+  mid: 0x2a9fe0,   // 中繼（middle）
+  guard: 0x4fd58f, // guard
+  exit: 0xffb347,  // exit
+  both: 0xff9ec7,  // guard+exit
   coast: 0x6fc0ee, // 海岸線
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
@@ -214,7 +216,7 @@ function buildCoastline(coast) {
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const m = new THREE.LineBasicMaterial({ color: COL.coast, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false });
+  const m = new THREE.LineBasicMaterial({ color: COL.coast, transparent: true, opacity: 0.17, blending: THREE.AdditiveBlending, depthWrite: false });
   globe.add(new THREE.LineSegments(g, m));
 }
 
@@ -264,7 +266,7 @@ function buildRelays(snap) {
     llToVec(ll[0], ll[1], R * 1.012, tmp);
     const b = w < BUCKETS[0].max ? 0 : w < BUCKETS[1].max ? 1 : 2;
     pos[b].push(tmp.x, tmp.y, tmp.z);
-    c.set(ROLE_COL[role]).multiplyScalar(1.6);
+    c.set(ROLE_COL[role]).multiplyScalar(1.25); // 壓低單點增益，密集區疊起來才不會整片衝成白
     col[b].push(c.r, c.g, c.b);
   }
   for (let b = 0; b < 3; b++) {
@@ -361,7 +363,7 @@ function fillPanel(snap, drawn) {
   $('stat-total').textContent = snap.total.toLocaleString();
   $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC';
   const br = snap.byRole || {};
-  const rn = { 0: '中繼', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
+  const rn = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
     `<span class="chip" style="--c:#${ROLE_COL[k].toString(16).padStart(6, '0')}">${rn[k]} ${(br[k] || 0).toLocaleString()}</span>`
   ).join('');
@@ -378,12 +380,13 @@ function fillPanel(snap, drawn) {
 
 // ---- 控制：拖曳旋轉、滾輪縮放、閒置自轉 ----
 const pointers = new Map();
+const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
 function bindControls(dom) {
   dom.addEventListener('pointerdown', (e) => {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    view.spin = false; last = { x: e.clientX, y: e.clientY };
+    stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
@@ -396,24 +399,39 @@ function bindControls(dom) {
       return;
     }
     if (!last) return;
-    view.ry += (e.clientX - last.x) * 0.006;
-    view.rx = clamp(view.rx + (e.clientY - last.y) * 0.006, -1.2, 1.2);
+    const dry = (e.clientX - last.x) * 0.006, drx = (e.clientY - last.y) * 0.006;
+    view.ry += dry;
+    view.rx = clamp(view.rx + drx, -1.2, 1.2);
+    spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
-  const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) last = null; if (pointers.size < 2) pinchStart = 0; };
+  const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) { last = null; pauseSpin(); } if (pointers.size < 2) pinchStart = 0; };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
   dom.addEventListener('wheel', (e) => {
     e.preventDefault();
-    view.zoom = clamp(view.zoom * (1 + Math.sign(e.deltaY) * 0.08), ZOOM_MIN, ZOOM_MAX);
+    // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
+    const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
+    const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
+    view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
   }, { passive: false });
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+let spinTimer = 0;
+function stopSpin() { view.spin = false; clearTimeout(spinTimer); }
+function pauseSpin() { stopSpin(); spinTimer = setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); }
 
 let prevNow = performance.now();
 async function animate() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
   if (view.spin && !REDUCED) view.ry += dt * 0.06;
+  else if (!REDUCED && pointers.size === 0 && (Math.abs(spin.ry) > 2e-4 || Math.abs(spin.rx) > 2e-4)) {
+    view.ry += spin.ry;
+    view.rx = clamp(view.rx + spin.rx, -1.2, 1.2);
+    spin.ry *= 0.92; spin.rx *= 0.92; // 放開後滑行一小段再停
+  }
   globe.rotation.y = view.ry;
   globe.rotation.x = view.rx;
   camera.position.z += (targetDist() - camera.position.z) * 0.12;
@@ -443,7 +461,7 @@ async function main() {
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
-  post.outputNode = c.add(bloom(c, 0.6, 0.5, 0.7));
+  post.outputNode = c.add(bloom(c, 0.6, 0.5, 0.82)); // threshold 拉高，密集區才不會一路暈成白斑
   addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
@@ -455,8 +473,8 @@ async function main() {
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
   $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
+  const load = $('loading');
+  if (load) load.classList.add('done');
   renderer.setAnimationLoop(animate);
-  // 閒置一段時間後恢復自轉
-  addEventListener('pointerup', () => { setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); });
 }
-main().catch((e) => { console.error(e); fatal('地球儀載入失敗，資料可能沒抓到。重新整理頁面可以再試一次。'); });
+main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal('地球儀載入失敗，資料可能沒抓到。重新整理頁面可以再試一次。'); });
