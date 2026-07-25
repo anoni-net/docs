@@ -76,6 +76,21 @@ function llToVec(lat, lon, r, out) {
   return out;
 }
 
+// 出事時要讓人看得到。徽章在面板裡，而手機預設把面板收起來，只寫徽章等於沒說。
+function fatal(msg) {
+  const box = $('fatal');
+  if (box) { box.textContent = msg; box.hidden = false; }
+  const badge = $('backend');
+  if (badge) { badge.textContent = msg; badge.className = 'err'; }
+}
+
+// fetch 對 404、500 不會 reject，錯誤頁會一路餵進 json() 才炸開，這裡先攔下來
+async function getJSON(url, opt) {
+  const r = await fetch(url, opt);
+  if (!r.ok) throw new Error(`${url} → HTTP ${r.status}`);
+  return r.json();
+}
+
 async function initRenderer() {
   const forceWebGL = new URLSearchParams(location.search).get('backend') === 'webgl';
   renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
@@ -84,7 +99,7 @@ async function initRenderer() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   document.body.appendChild(renderer.domElement);
-  try { await renderer.init(); } catch (e) { $('backend').textContent = '渲染器初始化失敗'; $('backend').className = 'err'; return false; }
+  try { await renderer.init(); } catch (e) { console.error(e); fatal('這個瀏覽器無法啟用 WebGPU 或 WebGL2，地球儀畫不出來。'); return false; }
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
   $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
   $('backend').className = isGPU ? 'gpu' : 'gl';
@@ -176,6 +191,9 @@ function buildEarth(world, counts) {
     if (renderer.getMaxAnisotropy) t.anisotropy = Math.min(8, renderer.getMaxAnisotropy());
     return t;
   };
+  // 面板的漸層圖例直接吃這裡的色值，免得 CSS 與 JS 各留一份色碼、改了色階就對不上
+  const ramp = document.querySelector('#ramp i');
+  if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${MAP.glowLo} 14%, ${MAP.glowHi})`;
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow);
   const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
@@ -405,7 +423,7 @@ async function animate() {
   try {
     await post.renderAsync();
   } catch (e) {
-    console.error(e); $('backend').textContent = '渲染中斷'; $('backend').className = 'err'; renderer.setAnimationLoop(null);
+    console.error(e); fatal('顯示已中斷，重新整理頁面可以再試一次。'); renderer.setAnimationLoop(null);
   }
 }
 
@@ -413,9 +431,9 @@ async function main() {
   const ok = await initRenderer();
   if (!ok) return;
   const [snap, world, coast] = await Promise.all([
-    fetch('./snapshot.json', { cache: 'no-cache' }).then((r) => r.json()), // 資料每小時更新，每次載入都向 server 驗證新鮮度
-    fetch('./countries.json').then((r) => r.json()),
-    fetch('./continents.json').then((r) => r.json()).catch(() => null), // 海岸線可選，抓不到就略過
+    getJSON('./snapshot.json', { cache: 'no-cache' }), // 快照由人工重新產生，每次載入都向 server 驗證新鮮度
+    getJSON('./countries.json'),
+    getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
   ]);
   buildEarth(world, countryCounts(snap));
   if (coast) buildCoastline(coast);
@@ -441,4 +459,4 @@ async function main() {
   // 閒置一段時間後恢復自轉
   addEventListener('pointerup', () => { setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); });
 }
-main().catch((e) => { $('backend').textContent = '啟動失敗'; $('backend').className = 'err'; console.error(e); });
+main().catch((e) => { console.error(e); fatal('地球儀載入失敗，資料可能沒抓到。重新整理頁面可以再試一次。'); });
