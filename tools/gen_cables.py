@@ -26,6 +26,7 @@ PAUSE = 8              # 每次查詢之間的間隔秒數，對公共服務的�
 RETRY = 3
 TOLERANCE = 0.015      # 簡化容差（度）。0.05 會把 63% 的線砍成兩點直線，形狀整個沒了
 MIN_POINTS = 2
+STITCH_KM = 40         # 端點相距這個距離以內就接起來，OSM 把一條電纜拆成多個 way
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "cables.json")
 
@@ -76,6 +77,47 @@ def simplify(pts, tol):
     return simplify(pts[:idx + 1], tol)[:-1] + simplify(pts[idx:], tol)
 
 
+def hav_km(a, b):
+    """兩個 (lon, lat) 的球面距離，公里。"""
+    r = 6371
+    p1, p2 = math.radians(a[1]), math.radians(b[1])
+    dp, dl = math.radians(b[1] - a[1]), math.radians(b[0] - a[0])
+    h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(min(1, math.sqrt(h)))
+
+
+def stitch(lines, tol_km=STITCH_KM):
+    """把首尾相近的線接起來。
+
+    OSM 常把一條電纜拆成好幾個 way，端點之間留下幾公里到幾十公里的縫。畫在地球上
+    就是一段一段斷開的線，看起來像渲染壞掉，其實是資料的切法。這裡把接得起來的接起來。
+    """
+    remain = [list(ln) for ln in lines]
+    out = []
+    while remain:
+        cur = remain.pop()
+        joined = True
+        while joined:
+            joined = False
+            for i, other in enumerate(remain):
+                pairs = (
+                    (hav_km(cur[-1], other[0]), False, False),   # 尾接頭
+                    (hav_km(cur[-1], other[-1]), False, True),   # 尾接尾（對方要反轉）
+                    (hav_km(cur[0], other[-1]), True, False),    # 頭接尾
+                    (hav_km(cur[0], other[0]), True, True),      # 頭接頭（對方要反轉）
+                )
+                d, at_head, flip = min(pairs, key=lambda x: x[0])
+                if d > tol_km:
+                    continue
+                seg = list(reversed(other)) if flip else other
+                cur = (seg[:-1] + cur) if at_head else (cur + seg[1:])
+                remain.pop(i)
+                joined = True
+                break
+        out.append(cur)
+    return out
+
+
 def main():
     out = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else DEFAULT_OUT)
     t0 = time.time()
@@ -92,9 +134,14 @@ def main():
             pts = [(round(g["lon"], 3), round(g["lat"], 3)) for g in geom if "lon" in g]
             if len(pts) < MIN_POINTS:
                 continue
-            pts = simplify(pts, TOLERANCE)
             lines.append(pts)
         time.sleep(PAUSE)
+
+    # 先接合再簡化。順序反過來的話，簡化會先把端點挪動，接縫更難對上。
+    before = len(lines)
+    lines = stitch(lines)
+    lines = [simplify(ln, TOLERANCE) for ln in lines]
+    print(f"  接合：{before} 條 → {len(lines)} 條", file=sys.stderr)
 
     # 攤平成 [lon, lat, lon, lat, ...]，前端直接讀，不用再解物件
     flat = [[c for p in ln for c in p] for ln in lines]
