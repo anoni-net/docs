@@ -31,6 +31,20 @@ const MAP = {
 };
 const ROLE_COL = [COL.mid, COL.guard, COL.exit, COL.both]; // index = roleCode
 
+// 地圖模式：全部，或單看某一種角色。發光層依模式換色階，深淺代表該國的數量。
+// lo 是「有一台」的顏色，hi 是「最多的那個國家」，中間走 glowColor 的冪次曲線。
+const MODES = {
+  all:    { lbl: '全部',        lo: '#0d2c46', hi: '#3d87bd' },
+  guard:  { lbl: 'guard',       lo: '#0c2b1e', hi: '#4fd58f' },
+  exit:   { lbl: 'exit',        lo: '#2b1d09', hi: '#ffb347' },
+  both:   { lbl: 'guard＋exit', lo: '#2a1220', hi: '#ff9ec7' },
+  middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
+};
+const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
+// 個別中繼點。國別資料撐不出空間分布，歐洲十幾國的團怎麼排都會擠在一起，
+// 所以預設只畫國家色塊。想把點畫回來就改成 true。
+const SHOW_DOTS = false;
+
 // ISO2 → [緯度, 經度] 手調的國家定位。優先於 countries.json 算出來的質心，
 // 因為 Natural Earth 110m 沒有新加坡、香港這種小地方，挪威一類的質心也會飄到鄰國。
 const CENTROID = {
@@ -125,9 +139,9 @@ const TEX_W = 2048, TEX_H = 1024;
 const texX = (lon) => (lon + 180) / 360 * TEX_W;
 const texY = (lat) => (90 - lat) / 180 * TEX_H;
 
-function glowColor(n, max) {
+function glowColor(n, max, ramp) {
   const t = Math.pow(n / max, 0.35); // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
-  const a = MAP.glowLo, b = MAP.glowHi;
+  const a = (ramp && ramp.lo) || MAP.glowLo, b = (ramp && ramp.hi) || MAP.glowHi;
   const mix = (i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t);
   return `rgb(${mix(1)},${mix(3)},${mix(5)})`;
 }
@@ -136,10 +150,10 @@ function glowColor(n, max) {
 // 分開的原因：陸地亮度若併在 base 裡，會被 dot(N,L) 的明暗蓋過去，色階就讀不出來了。
 const COUNTRY_PATH = new Map(); // ISO2 → Path2D（貼圖座標），重畫發光層時直接沿用
 let GLOW = null;          // { canvas, tex }：發光層，切換指標時重畫
-let METRIC = 'count';     // 目前的指標：台數或共識權重
+let MODE = 'all-count';   // 目前的地圖模式
 
 // 發光層：各國依指標值上色。切換「台數／共識權重」時只重畫這一張。
-function paintGlow(values, canvas) {
+function paintGlow(values, canvas, ramp) {
   const gg = canvas.getContext('2d');
   gg.fillStyle = '#000';
   gg.fillRect(0, 0, TEX_W, TEX_H);
@@ -148,7 +162,7 @@ function paintGlow(values, canvas) {
   for (const [cc, path] of COUNTRY_PATH) {
     const n = values.get(cc) || 0;
     if (!n) continue;
-    gg.fillStyle = glowColor(n, max);
+    gg.fillStyle = glowColor(n, max, ramp);
     gg.fill(path);
   }
 }
@@ -317,6 +331,11 @@ function relaySize(w) {
 }
 
 function buildRelays(snap, counts) {
+  if (!SHOW_DOTS) {
+    let n = 0;
+    for (const [cc] of snap.relays) if (ANCHOR.has(cc) && !NO_PLACE.has(cc)) n++;
+    return n;
+  }
   const list = [];
   const ll = [0, 0];
   for (let i = 0; i < snap.relays.length; i++) {
@@ -511,26 +530,51 @@ function showCountry(cc) {
 }
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 
-// 台數排 US 第一，換成共識權重就變 DE 第一。這件事寫在說明裡很容易被略過，
-// 給一個切換讓人自己看排名怎麼翻過來。
-function setMetric(mode) {
-  if (!CC_STATS || !GLOW || mode === METRIC) return;
-  METRIC = mode;
-  const byCount = mode === 'count';
-  const values = byCount ? new Map([...CC_STATS.mix].map(([cc, r]) => [cc, r[0] + r[1] + r[2] + r[3]])) : CC_STATS.w;
-  paintGlow(values, GLOW.canvas);
+// 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
+// 角色分布那四個 chip 直接當按鈕用，點下去地球就換成那個角色的色調。
+function modeRamp(mode) { return MODES[mode === 'all-weight' ? 'all' : (mode === 'all-count' ? 'all' : mode)]; }
+
+function modeValues(mode) {
+  if (mode === 'all-weight') return CC_STATS.w;
+  const role = MODE_ROLE[mode];
+  const m = new Map();
+  for (const [cc, r] of CC_STATS.mix) {
+    const v = role === undefined ? r[0] + r[1] + r[2] + r[3] : r[role];
+    if (v) m.set(cc, v);
+  }
+  return m;
+}
+
+function modeLabel(mode) {
+  if (mode === 'all-count') return '該國中繼數';
+  if (mode === 'all-weight') return '該國共識權重';
+  return `該國的 ${MODES[mode].lbl} 數`;
+}
+
+function setMode(mode) {
+  if (!CC_STATS || !GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
+  MODE = mode;
+  const values = modeValues(mode);
+  paintGlow(values, GLOW.canvas, modeRamp(mode));
   GLOW.tex.needsUpdate = true;
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
     const pct = v / CC_STATS.totalW * 100;
-    const txt = byCount ? v.toLocaleString() : (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%'); // 小國一律 0.0% 沒有意義
+    const txt = mode === 'all-weight'
+      ? (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%')
+      : v.toLocaleString();
     l.el.innerHTML = `${l.cc.toUpperCase()}<i>${txt}</i>`;
+    l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
   }
   measureLabels();
   const name = $('metric-name');
-  if (name) name.textContent = byCount ? '該國中繼數' : '該國共識權重';
-  $('m-count') && $('m-count').classList.toggle('on', byCount);
-  $('m-weight') && $('m-weight').classList.toggle('on', !byCount);
+  if (name) name.textContent = modeLabel(mode);
+  const r = modeRamp(mode);
+  const ramp = document.querySelector('#ramp i');
+  if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
+  for (const el of document.querySelectorAll('[data-mode]')) {
+    el.classList.toggle('on', el.dataset.mode === mode);
+  }
 }
 
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
@@ -546,8 +590,9 @@ function fillPanel(snap, drawn) {
   $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC';
   const br = snap.byRole || {};
   const rn = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
+  const modeOf = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'both' };
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
-    `<span class="chip" style="--c:#${ROLE_COL[k].toString(16).padStart(6, '0')}">${rn[k]} ${(br[k] || 0).toLocaleString()}</span>`
+    `<span class="chip act" role="button" tabindex="0" data-mode="${modeOf[k]}" style="--c:#${ROLE_COL[k].toString(16).padStart(6, '0')}">${rn[k]} ${(br[k] || 0).toLocaleString()}</span>`
   ).join('');
   // 地球上畫出來的台數少於總數時要講清楚，別讓人以為每一台都在畫面上
   const miss = snap.total - drawn;
@@ -642,7 +687,7 @@ async function main() {
   const counts = countryCounts(snap);
   buildEarth(world, counts);
   if (coast) buildCoastline(coast);
-  relaxClusters(counts);
+  if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
   buildLabels(snap);
   fillPanel(snap, drawn);
@@ -669,8 +714,12 @@ async function main() {
     const el = e.target.closest('.lb');
     if (el && el.dataset.cc) { e.preventDefault(); showCountry(el.dataset.cc); }
   });
-  $('m-count') && $('m-count').addEventListener('click', () => setMetric('count'));
-  $('m-weight') && $('m-weight').addEventListener('click', () => setMetric('weight'));
+  for (const el of document.querySelectorAll('[data-mode]')) {
+    el.addEventListener('click', () => setMode(el.dataset.mode));
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMode(el.dataset.mode); }
+    });
+  }
   $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
   renderer.domElement.addEventListener('pointerdown', hideCountry); // 轉動地球就把卡片收掉
