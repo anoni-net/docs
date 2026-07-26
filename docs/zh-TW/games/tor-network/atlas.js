@@ -93,6 +93,18 @@ const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
 let pointsIn = 0;
+// 點的大小補償。放大時鏡頭靠近，同一顆點在螢幕上等比例變大，近看就糊成一片色塊。
+// 這裡反向縮小幾何，讓點在螢幕上的大小大致固定，放大的效果落在「點彼此拉開」而不是
+// 「每顆點變胖」，這樣才看得到個別的中繼。
+//
+// 縮放只能重算 instanceMatrix，另外兩條路都試過而且都會讓點整批消失：
+//   mesh.scale       在 instanceMatrix 之外，會把 translation 一起縮，點縮進地心
+//   mat.positionNode 覆寫掉 NodeMaterial 處理 instancing 的那段，instance 位置整個沒套用
+// dotGroups 保存每顆點的原始位置與大小，重算時從這份原始值乘上係數，避免誤差累積。
+const dotGroups = [];
+const DOT_EXP = 0.85;   // 1 是完全補償螢幕大小。留點餘裕，放大時仍稍微變大，手感自然些
+const DOT_STEP = 0.02;  // 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣
+let lastDotK = 1;
 const ANCHOR = new Map(); // ISO2 → { ll: [緯度, 經度], jlat, jlon, rings, bb }，沒有國界資料時才用 ll 加 jlat/jlon 抖動
 
 function llToVec(lat, lon, r, out) {
@@ -565,7 +577,10 @@ function buildRelays(snap, counts) {
   }
   if (!total) return 0;
 
-  const geo = new THREE.OctahedronGeometry(1, 0); // 8 個三角形，小尺寸下配上光暈就是一顆圓點
+  // 8 面的八面體在遠看時還過得去，放大之後就是一顆一顆的菱形方塊，稜線清清楚楚。
+  // 細分一階變 32 面，配上光暈看起來就是圓的了。9,889 個 instance 共用一份幾何，
+  // 面數從 8 變 32 是 30 萬個三角形，仍在單一 draw call 裡，代價可以接受。
+  const geo = new THREE.OctahedronGeometry(1, 1);
   const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: true });
   mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
   pointMats.push(mat);
@@ -589,8 +604,26 @@ function buildRelays(snap, counts) {
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     globe.add(mesh);
     relayMeshes.push(mesh);
+    dotGroups.push({ mesh, list });
   }
   return total;
+}
+
+// 依鏡頭距離重算每顆點的大小。位置照原樣寫回去，只有 scale 跟著係數變。
+function rescaleDots(k) {
+  if (!dotGroups.length || Math.abs(k - lastDotK) < DOT_STEP) return;
+  lastDotK = k;
+  const m4 = new THREE.Matrix4();
+  for (const g of dotGroups) {
+    for (let i = 0; i < g.list.length; i++) {
+      const n = g.list[i];
+      const s = n.s * k;
+      m4.makeScale(s, s, s);
+      m4.setPosition(n.x, n.y, n.z);
+      g.mesh.setMatrixAt(i, m4);
+    }
+    g.mesh.instanceMatrix.needsUpdate = true;
+  }
 }
 
 // ---- 國家標籤：每個有中繼的國家都給一個，轉到背面淡出。
@@ -1165,6 +1198,8 @@ function applySnapshot(snap) {
   }
   relayMeshes.length = 0;
   pointMats.length = 0;
+  dotGroups.length = 0;
+  lastDotK = 1;
   const box = $('labels');
   if (box) box.innerHTML = '';
   labels.length = 0;
@@ -1277,6 +1312,7 @@ async function animate() {
   const lod = clamp((ZOOM_MAX - view.zoom) / (ZOOM_MAX - 0.7), 0, 1);
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
+  rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
   updateLabels();
   try {
     await post.renderAsync();
