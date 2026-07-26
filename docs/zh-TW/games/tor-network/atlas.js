@@ -541,6 +541,8 @@ function buildStats(snap) {
   const byW = [...w.entries()].sort((a, b) => b[1] - a[1]);
   const rankN = new Map(byN.map(([cc], i) => [cc, i + 1]));
   const rankW = new Map(byW.map(([cc], i) => [cc, i + 1]));
+  // 全網整體的出口比例：總出口台數 ÷ 總台數。不是各國比例的平均（那是 19%，
+  // 因為小國拉低了），拿來跟單一國家對照時要講清楚是哪一種。
   let exitAll = 0;
   for (const r of mix.values()) exitAll += r[2] + r[3];
   CC_STATS = { mix, w, totalN, totalW, rankN, rankW, exitShare: exitAll / totalN };
@@ -562,7 +564,7 @@ function showCountry(cc) {
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
   $('cc-body').innerHTML =
     `佔全網台數 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，佔共識權重 <b>${pct(wShare)}%</b>（排名第 ${CC_STATS.rankW.get(cc)}）<br>`
-    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網平均 ${Math.round(CC_STATS.exitShare * 100)}%`
+    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網整體 ${Math.round(CC_STATS.exitShare * 100)}%`
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`;
