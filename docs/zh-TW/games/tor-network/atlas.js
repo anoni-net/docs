@@ -39,7 +39,9 @@ const MODES = {
   exit:   { lbl: 'exit',        lo: '#2b1d09', hi: '#ffb347' },
   both:   { lbl: 'guard＋exit', lo: '#2a1220', hi: '#ff9ec7' },
   middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
+  conc:   { lbl: '單一業者集中度', lo: '#2b1030', hi: '#c47ad8' }, // 紫，跟四個角色色都拉開
 };
+const CONC_MIN = 10; // 台數太少的國家，集中度沒有意義（一台就是 100%）
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
 const ROLE_NAME = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
 const roleHex = (k) => '#' + ROLE_COL[k].toString(16).padStart(6, '0');
@@ -528,7 +530,11 @@ function fillMix(snap) {
 // ---- 點國家看細節 ----
 // 球面上讀得到的只有國碼與台數，排名、權重佔比、角色組成這些都得點一下才給。
 let CC_STATS = null;
+let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 function buildStats(snap) {
+  SNAP_ASN = snap.asn || null;
+  SNAP_VER = snap.version || null;
+  SNAP_ASN_TOP = snap.asnTop || null;
   const mix = roleBreakdown(snap);
   const w = new Map();
   for (const [cc, , wt] of snap.relays) {
@@ -543,9 +549,17 @@ function buildStats(snap) {
   const rankW = new Map(byW.map(([cc], i) => [cc, i + 1]));
   // 全網整體的出口比例：總出口台數 ÷ 總台數。不是各國比例的平均（那是 19%，
   // 因為小國拉低了），拿來跟單一國家對照時要講清楚是哪一種。
+  // 各國最大托管商的佔比。這是比例不是台數，所以另外算一份。
+  const conc = new Map(), asn = SNAP_ASN || {};
+  const cntByCC = new Map(byN);
+  for (const cc in asn) {
+    const t = cntByCC.get(cc) || 0;
+    const topN = (asn[cc].t && asn[cc].t[0] && asn[cc].t[0][2]) || 0;
+    if (t >= CONC_MIN && topN) conc.set(cc, topN / t * 100);
+  }
   let exitAll = 0;
   for (const r of mix.values()) exitAll += r[2] + r[3];
-  CC_STATS = { mix, w, totalN, totalW, rankN, rankW, exitShare: exitAll / totalN };
+  CC_STATS = { mix, w, totalN, totalW, rankN, rankW, conc, cnt: cntByCC, exitShare: exitAll / totalN };
 }
 
 function showCountry(cc) {
@@ -567,7 +581,26 @@ function showCountry(cc) {
     + `出口流量 <b>${Math.round(exitPct)}%</b>，全網整體 ${Math.round(CC_STATS.exitShare * 100)}%`
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
-    + `</div>`;
+    + `</div>`
+    + hostingLine(cc, t)
+    + versionLine(cc);
+}
+
+// 托管商：這一國的中繼實際上放在誰的機房。國界分散不等於機房分散。
+function hostingLine(cc, total) {
+  const a = SNAP_ASN && SNAP_ASN[cc];
+  if (!a || !a.t || !a.t.length) return '';
+  const [, name, n] = a.t[0];
+  const pct = Math.round(n / total * 100);
+  const rest = a.t.slice(1).map(([id, nm, k]) => `${nm || id} ${k}`).join('、');
+  return `<div class="cc-sub2">托管商：<b>${name || a.t[0][0]}</b> ${n} 台（${pct}%），這一國共 ${a.n} 家`
+    + (rest ? `<br><span class="dim">其次 ${rest}</span>` : '') + `</div>`;
+}
+
+function versionLine(cc) {
+  const v = SNAP_VER && SNAP_VER[cc];
+  if (!v || !v[0]) return '';
+  return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}／${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
   card.hidden = false;
   stopSpin();
 }
@@ -575,10 +608,11 @@ function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
 // 角色分布那四個 chip 直接當按鈕用，點下去地球就換成那個角色的色調。
-function modeRamp(mode) { return MODES[mode === 'all-weight' ? 'all' : (mode === 'all-count' ? 'all' : mode)]; }
+function modeRamp(mode) { return MODES[(mode === 'all-weight' || mode === 'all-count') ? 'all' : mode]; }
 
 function modeValues(mode) {
   if (mode === 'all-weight') return CC_STATS.w;
+  if (mode === 'conc') return CC_STATS.conc;
   const role = MODE_ROLE[mode];
   const m = new Map();
   for (const [cc, r] of CC_STATS.mix) {
@@ -599,6 +633,7 @@ function setMode(mode) {
     const pct = v / CC_STATS.totalW * 100;
     const txt = mode === 'all-weight'
       ? (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%')
+      : mode === 'conc' ? Math.round(v) + '%'
       : v.toLocaleString();
     l.el.innerHTML = `${l.cc.toUpperCase()}<i>${txt}</i>`;
     l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
@@ -614,6 +649,48 @@ function setMode(mode) {
     el.classList.toggle('on', on);
     if (MODE_ROLE[el.dataset.mode] !== undefined) el.title = on ? '再點一次看全部' : '只看這個角色';
   }
+}
+
+// 托管商排行與亞洲對照。國界分散不代表機房分散，這兩塊把另一半講出來。
+const ASIA = ['sg', 'jp', 'hk', 'kr', 'tw'];
+
+function fillAsn(snap) {
+  const box = $('stat-asn');
+  if (!box || !snap.asnTop || !snap.asnTop.length) return;
+  const tot = snap.sampled || snap.total || 1;
+  const max = snap.asnTop[0][2] || 1;
+  box.innerHTML = snap.asnTop.slice(0, 8).map(([id, nm, n]) =>
+    `<div class="mix-row"><span class="as-nm" title="${id}">${nm || id}</span>`
+    + `<span class="tot">${n.toLocaleString()}</span>`
+    + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#c47ad8"></span></span>`
+    + `<span class="n">${(n / tot * 100).toFixed(1)}%</span></div>`).join('');
+  const note = $('asn-note');
+  const v = snap.versionAll;
+  if (note) {
+    const top3 = snap.asnTop.slice(0, 3).reduce((a, x) => a + x[2], 0);
+    note.innerHTML = `這些是賣主機與雲端的公司，全球共 ${(snap.asnCount || '數百')} 家托管了這些中繼，`
+      + `前三家就佔 ${(top3 / tot * 100).toFixed(1)}%。國界分散不代表機房分散，同一家的一個政策就能影響很大一塊。`
+      + (v && v[0] ? `<br>另外，全網有 ${Math.round(v[1] / v[0] * 100)}% 的中繼跑在官方建議的版本上。` : '');
+  }
+}
+
+function fillAsia(snap) {
+  const box = $('stat-asia');
+  if (!box) return;
+  const cnt = new Map(snap.countries || []);
+  const rows = ASIA.filter((cc) => cnt.has(cc)).sort((a, b) => cnt.get(b) - cnt.get(a));
+  if (!rows.length) return;
+  const max = cnt.get(rows[0]) || 1;
+  box.innerHTML = rows.map((cc) => {
+    const n = cnt.get(cc);
+    const a = snap.asn && snap.asn[cc];
+    const conc = a && a.t && a.t[0] ? Math.round(a.t[0][2] / n * 100) : null;
+    const hi = cc === 'tw' ? ' hi' : '';
+    return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
+      + `<span class="tot">${n.toLocaleString()}</span>`
+      + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#4fd58f"></span></span>`
+      + `<span class="n">${a ? a.n + ' 家' : ''}${conc !== null ? `／最大 ${conc}%` : ''}</span></div>`;
+  }).join('');
 }
 
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
@@ -730,6 +807,8 @@ async function main() {
   buildLabels(snap);
   fillPanel(snap, drawn);
   fillMix(snap);
+  fillAsn(snap);
+  fillAsia(snap);
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);

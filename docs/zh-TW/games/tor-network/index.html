@@ -57,6 +57,8 @@
     #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
     #cc-bar span { display: block; height: 100%; }
     .cc-roles { display: flex; flex-wrap: nowrap; gap: 5px; margin-top: 8px; }
+    .cc-sub2 { margin-top: 7px; font-size: 11px; line-height: 1.6; }
+    .cc-sub2 .dim, #cc-body .dim { color: #7d93a6; }
     .cc-roles .chip { white-space: nowrap; }
     @media (max-width: 560px) { .cc-roles { flex-wrap: wrap; } }
     .lb { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .25s; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #d7ecff; white-space: nowrap; text-shadow: 0 0 5px #04060d, 0 0 11px #04060d, 0 1px 2px #04060d; }
@@ -85,7 +87,15 @@
     .mix-bar { flex: 1; display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); }
     .mix-bar span { display: block; height: 100%; }
     .mix-row .n { width: 52px; text-align: right; flex: none; }
+    .mix-row .as-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+    .mix-row.hi .cc, .mix-row.hi .tot { color: var(--cyan); }
+    #stat-asn .mix-bar, #stat-asia .mix-bar { flex: 0 0 52px; }
+    #stat-asn .n { width: 44px; }
+    #stat-asia .n { width: 88px; }
     #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #asn-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #metric-sw { flex-wrap: wrap; }
+    #metric-sw button { flex: 1 1 44%; }
     /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
     #metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
     #metric-sw button { flex: 1; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
@@ -127,12 +137,17 @@
         <div id="pub">資料快照：<span id="stat-pub">…</span></div>
         <div class="lbl">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
-        <div class="lbl">陸地亮度：數量多寡（非線性，中段差距已放大）</div>
-        <div id="metric-sw"><button data-mode="all-count" class="on">全部（台數）</button><button data-mode="all-weight">全部（權重）</button></div>
+        <div class="lbl">陸地亮度：由低到高（非線性，中段差距已放大）</div>
+        <div id="metric-sw"><button data-mode="all-count" class="on">全部（台數）</button><button data-mode="all-weight">全部（權重）</button><button data-mode="conc">單一業者集中度</button></div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
         <div class="lbl">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
         <div id="mix-note"></div>
+        <div class="lbl">托管商排行（全球）</div>
+        <div id="stat-asn"></div>
+        <div id="asn-note"></div>
+        <div class="lbl">亞洲鄰近國家</div>
+        <div id="stat-asia"></div>
         <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。</div>
         <div id="gap"></div>
         <div id="backend">偵測中…</div>

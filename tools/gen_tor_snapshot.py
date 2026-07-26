@@ -28,11 +28,14 @@ read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份�
   預設輸出 docs/zh-TW/games/tor-network/snapshot.json
 """
 import json, os, subprocess, sys, time
-from collections import Counter
+from collections import Counter, defaultdict
 
 MCP = os.environ.get("ONIONOO_MCP", "https://onionoo.anoni.net/mcp")
 FULL_LIMIT = 20000  # 帶 fields 投影時可以開到全網大小，一次取完
-FIELDS = "fingerprint,country,flags,consensus_weight"  # 只要畫地球用得到的欄位
+FIELDS = "fingerprint,country,flags,consensus_weight,as,as_name,recommended_version"  # 只要畫地球用得到的欄位
+AS_TOP_PER_COUNTRY = 3   # 每國留前幾大托管商
+AS_TOP_GLOBAL = 15       # 全球托管商排行留幾筆
+AS_NAME_MAX = 26         # 名稱截斷，避免 snapshot 被一堆公司全名撐大
 # Onionoo 給的這幾種國別沒有明確位置（eu 泛指歐洲、?? 未知），country 參數也查不到，
 # 地球上本來就不畫，逐台取回時直接跳過。
 NO_PLACE = {"eu", "??", "xx", ""}
@@ -135,6 +138,10 @@ def main():
         print(f"  注意：取回 {len(relays)} 台，聚合值扣掉無國別後是 {want}", file=sys.stderr)
 
     out_relays, rc = [], Counter()
+    as_by_cc = defaultdict(Counter)   # 國家 → 各托管商台數
+    as_global = Counter()             # 全球托管商台數
+    as_names = {}                     # AS 代號 → 名稱
+    ver_by_cc = defaultdict(lambda: [0, 0])  # 國家 → [總數, 跑官方建議版本的台數]
     for r in relays.values():
         country = (r.get("country") or "??").lower()
         if country in NO_PLACE:
@@ -143,6 +150,25 @@ def main():
         role = (2 if "Exit" in fl else 0) + (1 if "Guard" in fl else 0)
         out_relays.append([country, role, int(r.get("consensus_weight") or 0)])
         rc[role] += 1
+        asn = r.get("as")
+        if asn:
+            as_by_cc[country][asn] += 1
+            as_global[asn] += 1
+            nm = (r.get("as_name") or "").strip()
+            if nm and asn not in as_names:
+                as_names[asn] = nm[:AS_NAME_MAX]
+        ver_by_cc[country][0] += 1
+        if r.get("recommended_version"):
+            ver_by_cc[country][1] += 1
+
+    # 只存聚合值。逐台把 AS 存下來會讓檔案多 43%，而畫面上用不到那個粒度。
+    asn_by_cc = {
+        cc: {"t": [[a, as_names.get(a, ""), n] for a, n in c.most_common(AS_TOP_PER_COUNTRY)], "n": len(c)}
+        for cc, c in as_by_cc.items()
+    }
+    asn_top = [[a, as_names.get(a, ""), n] for a, n in as_global.most_common(AS_TOP_GLOBAL)]
+    ver_total = sum(v[0] for v in ver_by_cc.values())
+    ver_rec = sum(v[1] for v in ver_by_cc.values())
 
     snap = {
         "published": published,
@@ -153,6 +179,11 @@ def main():
         "byRole": {str(k): rc[k] for k in sorted(rc)},  # 逐台實際計數
         "topCountries": top_countries,
         "countries": countries,                         # 全部國家，等值區圖上色用
+        "asn": asn_by_cc,                               # 各國前幾大托管商與相異家數
+        "asnTop": asn_top,                              # 全球托管商排行
+        "asnCount": len(as_global),                     # 全球有多少家托管商
+        "version": {cc: v for cc, v in ver_by_cc.items()},  # 各國 [總數, 跑建議版本數]
+        "versionAll": [ver_total, ver_rec],             # 全網 [總數, 跑建議版本數]
         "relays": out_relays,
     }
     with open(out, "w", encoding="utf-8") as f:
@@ -161,6 +192,8 @@ def main():
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")
     print(f"  total(aggregate)={total}  dots={len(out_relays)}  無國別={no_place}  "
           f"有國別涵蓋率={covered:.1f}%  countries={len(buckets)}  byRole={dict(rc)}")
+    print(f"  托管商：全球 {len(as_global)} 家，最大 {asn_top[0][1] or asn_top[0][0]} {asn_top[0][2]} 台"
+          f"｜跑建議版本 {ver_rec}／{ver_total}（{ver_rec / ver_total * 100:.1f}%）")
 
 
 if __name__ == "__main__":
