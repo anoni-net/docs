@@ -18,6 +18,7 @@ const COL = {
   exit: 0xffb347,  // exit
   both: 0xff9ec7,  // guard+exit
   coast: 0x6fc0ee, // 海岸線
+  cable: 0x2f7fa8, // 海底電纜。壓得比海岸線還低，只是讓海面不要一片空白
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -251,6 +252,27 @@ function buildEarth(world, counts) {
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   mat.emissiveNode = texture(baseTex).mul(0.15).add(texture(glowTex).mul(0.5));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
+}
+
+// 海底電纜。資料是 OpenStreetMap 的 communication=line + submarine=yes，覆蓋並不完整，
+// 這一層的定位是海面的背景質感，不是完整的海纜清單。
+function buildCables(data) {
+  const lines = (data && data.lines) || [];
+  if (!lines.length) return;
+  const pos = [];
+  const v = new THREE.Vector3();
+  for (const ln of lines) {
+    for (let i = 0; i + 3 < ln.length; i += 2) {
+      llToVec(ln[i + 1], ln[i], R * 1.003, v);
+      pos.push(v.x, v.y, v.z);
+      llToVec(ln[i + 3], ln[i + 2], R * 1.003, v);
+      pos.push(v.x, v.y, v.z);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.3, depthWrite: false });
+  globe.add(new THREE.LineSegments(g, m));
 }
 
 function buildCoastline(coast) {
@@ -794,13 +816,15 @@ async function animate() {
 async function main() {
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast] = await Promise.all([
+  const [snap, world, coast, cables] = await Promise.all([
     getJSON('./snapshot.json', { cache: 'no-cache' }), // 快照由人工重新產生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
+    getJSON('./cables.json').catch(() => null),     // 海底電纜可選
   ]);
   const counts = countryCounts(snap);
   buildEarth(world, counts);
+  if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   if (coast) buildCoastline(coast);
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);

@@ -36,6 +36,7 @@
     .lbl { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: .5px; margin: 2px 0 4px; }
     #note { color: var(--muted); font-size: 11.5px; line-height: 1.6; }
     #gap:not(:empty) { margin-top: 7px; color: #7d93a6; font-size: 10.5px; line-height: 1.5; }
+    #credit { margin-top: 7px; color: #6b7f90; font-size: 10px; line-height: 1.5; }
     #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
     #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
 
@@ -150,6 +151,7 @@
         <div id="stat-asia"></div>
         <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。</div>
         <div id="gap"></div>
+        <div id="credit">海面上的細線是海底電纜，資料來自 OpenStreetMap（ODbL），目前的收錄以歐洲與地中海較完整，其他海域還缺很多，這一層是背景不是完整的海纜清單。</div>
         <div id="backend">偵測中…</div>
       </div>
     </details>
