@@ -4,7 +4,8 @@
 // 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
 import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
-         float, mix, hash, oscSine, uniform, instanceIndex } from 'three/tsl';
+         float, mix, hash, uniform, instanceIndex,
+         uv, smoothstep, mx_fractal_noise_float } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 
 const $ = (id) => document.getElementById(id);
@@ -95,9 +96,9 @@ const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
 let pointsIn = 0;
-// 呼吸用的時鐘。TSL 有內建的 time node，但實測它在這個組合下不會前進（點各自停在
-// 自己的相位，畫面完全靜止），改用自己的 uniform 在 animate() 裡推，行為明確可控。
-const breathT = uniform(0);
+// 動效共用的時鐘。TSL 有內建的 time node，但實測它在這個組合下不會前進（畫面完全靜止），
+// 改用自己的 uniform 在 animate() 裡推，行為明確可控。呼吸與極光都吃這一個。
+const clockT = uniform(0);
 // 點的大小補償。放大時鏡頭靠近，同一顆點在螢幕上等比例變大，近看就糊成一片色塊。
 // 這裡反向縮小幾何，讓點在螢幕上的大小大致固定，放大的效果落在「點彼此拉開」而不是
 // 「每顆點變胖」，這樣才看得到個別的中繼。
@@ -558,6 +559,67 @@ function buildAtmosphere() {
   globe.add(mesh);
 }
 
+// 極光。兩極各一條環狀簾幕，貼著地表往外飄起。
+//
+// 緯度挑 68 度是有理由的：中繼最北的幾個國家質心都在這條線以南（挪威 61、芬蘭 64、
+// 冰島 64.9），簾幕落在它們北邊，不會蓋到任何國家的陸地亮度。
+//
+// 條紋用純數學雜訊（mx_fractal_noise_float）算，不吃任何貼圖，飄動靠把時鐘加進取樣
+// 座標。刻意不動頂點（沒用 positionNode），一來省成本，二來那條路徑在這個專案沒驗證過。
+const AUR_LAT = 68;      // 簾幕所在緯度
+const AUR_HEIGHT = 0.16; // 簾幕頂端離地高度，佔地球半徑的比例。真實極光約 2-5%，這裡誇大才看得見
+const AUR_INTENSITY = 2.0;
+function buildAurora() {
+  const segU = 168, segV = 8;
+  const pos = [], uvs = [], idx = [];
+  const v = new THREE.Vector3();
+  const band = (sign) => {
+    const base = pos.length / 3;
+    for (let iu = 0; iu <= segU; iu++) {
+      const lon = -180 + 360 * iu / segU;
+      for (let iv = 0; iv <= segV; iv++) {
+        const t = iv / segV;                       // 0 貼地、1 頂端
+        llToVec(sign * AUR_LAT, lon, R * (1.012 + AUR_HEIGHT * t * t), v);
+        pos.push(v.x, v.y, v.z);
+        // 南北兩條帶的 u 差一個大位移，雜訊相位才不會左右對稱
+        uvs.push(iu / segU + (sign > 0 ? 0 : 37.5), t);
+      }
+    }
+    const stride = segV + 1;
+    for (let iu = 0; iu < segU; iu++) {
+      for (let iv = 0; iv < segV; iv++) {
+        const a = base + iu * stride + iv, b = a + stride;
+        idx.push(a, b, a + 1, b, b + 1, a + 1);
+      }
+    }
+  };
+  band(1);
+  band(-1);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+  g.setIndex(idx);
+
+  const mat = new THREE.MeshBasicNodeMaterial({
+    transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+  });
+  const u = uv().x, vv = uv().y;
+  const drift = clockT.mul(0.03);
+  // 兩層雜訊：低頻給大塊的明暗起伏，高頻給直條紋理，兩者反向漂移才不像整片在平移
+  const n1 = mx_fractal_noise_float(vec3(u.mul(5).add(drift), vv.mul(2), clockT.mul(0.02)), 3, 2.0, 0.55);
+  const n2 = mx_fractal_noise_float(vec3(u.mul(17).sub(drift.mul(1.7)), vv.mul(5), 0), 2, 2.0, 0.5);
+  const streak = smoothstep(0.18, 0.85, n1.mul(0.7).add(n2.mul(0.3)));
+  const footFade = smoothstep(0.0, 0.22, vv);            // 貼地那端漸入，不要憑空冒出來
+  const tipFade = oneMinus(smoothstep(0.5, 1.0, vv));    // 頂端散掉
+  // 綠佔大部分，紫只在最頂端。從赤道視角看，簾幕底部被地球擋住，線性漸層會讓露出來的
+  // 那截幾乎全是紫的，看起來不像極光。用次方讓綠色一路撐到高處。
+  mat.colorNode = mix(vec3(0.10, 0.95, 0.55), vec3(0.55, 0.30, 0.95), vv.pow(2.6).clamp(0, 1));
+  mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY);
+  const mesh = new THREE.Mesh(g, mat);
+  mesh.renderOrder = 40; // 這幾層同心透明物件的預設排序不穩定，明確指定
+  globe.add(mesh);
+}
+
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -722,7 +784,7 @@ function buildRelays(snap, counts) {
     // rate 是角速度不是頻率，週期等於 2π/rate。第一版寫 0.10 以為是 0.1 Hz，
     // 實際上是 63 秒才一個循環，看起來就是完全不動。0.6 到 1.1 對應 6 到 10 秒。
     const rate = float(0.6).add(seed.mul(0.5));
-    const wave = breathT.mul(rate).add(seed.mul(6.283)).sin().mul(0.5).add(0.5);
+    const wave = clockT.mul(rate).add(seed.mul(6.283)).sin().mul(0.5).add(0.5);
     // 振幅開到 0.3。點只有幾個像素寬、相位又各自不同，振幅小於一半在畫面上等於沒做
     // （第一版 0.78 到 1.0 完全看不出來）。上限仍鎖在 1.0，不會比現在更亮。
     const amt = mix(float(0.3), float(1.0), wave);
@@ -1484,7 +1546,7 @@ async function animate() {
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
-  breathT.value += dt; // 中繼點呼吸的時鐘，REDUCED 時 colorNode 根本沒掛，推了也沒作用
+  clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
@@ -1520,6 +1582,7 @@ async function main() {
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
+  if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast);
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
