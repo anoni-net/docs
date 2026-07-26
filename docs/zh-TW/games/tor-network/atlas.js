@@ -584,6 +584,8 @@ function showCountry(cc) {
     + `</div>`
     + hostingLine(cc, t)
     + versionLine(cc);
+  card.hidden = false;
+  stopSpin();
 }
 
 // 托管商：這一國的中繼實際上放在誰的機房。國界分散不等於機房分散。
@@ -601,8 +603,6 @@ function versionLine(cc) {
   const v = SNAP_VER && SNAP_VER[cc];
   if (!v || !v[0]) return '';
   return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}／${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
-  card.hidden = false;
-  stopSpin();
 }
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 
