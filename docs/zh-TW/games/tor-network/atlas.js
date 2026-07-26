@@ -172,7 +172,7 @@ const COUNTRY_PATH = new Map(); // ISO2 → Path2D（貼圖座標），重畫發
 let GLOW = null;          // { canvas, tex }：發光層，切換指標時重畫
 let MODE = 'all-count';   // 目前的地圖模式
 
-// 發光層：各國依指標值上色。切換「台數／共識權重」時只重畫這一張。
+// 發光層：各國依指標值上色。切換「台數、共識權重」時只重畫這一張。
 function paintGlow(values, canvas, ramp) {
   const gg = canvas.getContext('2d');
   gg.fillStyle = '#000';
@@ -785,7 +785,7 @@ function hostingLine(cc, total) {
 function versionLine(cc) {
   const v = SNAP_VER && SNAP_VER[cc];
   if (!v || !v[0]) return '';
-  return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}／${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
+  return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}/${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
 }
 // OONI 對這一國的觀測。措辭刻意停在「沒有照預期完成」，不寫成封鎖率。
 // anomaly 的成因包含審查、網路不穩與 ISP 故障，單看比率沒辦法分辨是哪一種，
@@ -914,7 +914,7 @@ function fillAsia(snap) {
     return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${n.toLocaleString()}</span>`
       + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#4fd58f"></span></span>`
-      + `<span class="n">${a ? a.n + ' 家' : ''}${conc !== null ? `／最大 ${conc}%` : ''}</span></div>`;
+      + `<span class="n">${a ? a.n + ' 家' : ''}${conc !== null ? `/最大 ${conc}%` : ''}</span></div>`;
   }).join('');
 }
 

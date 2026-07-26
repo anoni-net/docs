@@ -18,7 +18,7 @@ read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份�
     與 aggregate_flags 的 Running 相符）。
   - 逐台 relays 一次取回：帶 fields 投影時 limit 可以開到全網大小，實測 limit=20000
     兩秒就拿回全部，不必分頁。
-  - 不要用 offset 分頁。實測分頁仍會漏抓（9 頁只拿到 8999／9901，少約 9%），
+  - 不要用 offset 分頁。實測分頁仍會漏抓（9 頁只拿到 8999/9901，少約 9%），
     一次取完就沒有這個問題（anoni-net/onionoo-fastapi#2 的 fields 與 limit 已修好，
     分頁那項還在）。
   - 仍照 fingerprint 去重，多一層保險。
@@ -193,7 +193,7 @@ def main():
     print(f"  total(aggregate)={total}  dots={len(out_relays)}  無國別={no_place}  "
           f"有國別涵蓋率={covered:.1f}%  countries={len(buckets)}  byRole={dict(rc)}")
     print(f"  托管商：全球 {len(as_global)} 家，最大 {asn_top[0][1] or asn_top[0][0]} {asn_top[0][2]} 台"
-          f"｜跑建議版本 {ver_rec}／{ver_total}（{ver_rec / ver_total * 100:.1f}%）")
+          f"｜跑建議版本 {ver_rec}/{ver_total}（{ver_rec / ver_total * 100:.1f}%）")
 
 
 if __name__ == "__main__":

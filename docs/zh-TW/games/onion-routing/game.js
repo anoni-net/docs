@@ -162,7 +162,7 @@ function addStarfield() {
   scene.add(new THREE.Points(g, m));
 }
 
-// ---- 自訂 orbit（拖曳旋轉、滾輪／雙指縮放）+ 點擊選節點 ----
+// ---- 自訂 orbit（拖曳旋轉、滾輪、雙指縮放）+ 點擊選節點 ----
 // zoom 是「相對於場景剛好入鏡的倍率」。距離寫死的話，直式手機的水平視野只涵蓋 ±7.7，
 // 而寄件端與收件人在 ±16，兩端會整個掉到畫面外，關卡等於少了頭尾。
 const orbit = { theta: Math.PI * 0.5, phi: Math.PI * 0.42, zoom: 1, idle: 0 };
@@ -259,7 +259,7 @@ function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 // ---- 關卡狀態 ----
 let levelIdx = 0;
 let nodes = [];          // 所有可視節點（含 source/dest）
-let selectable = [];     // 可點選的中繼／橋接
+let selectable = [];     // 可點選的中繼、橋接
 // 索引就是跳位（0 入口、1 中繼、2 出口），沒選的留 null。
 // 用緊湊陣列的話，取消中間那一跳會讓後面的往前遞補，玩家沒動到的節點被默默換了跳位。
 let selected = [null, null, null];
@@ -313,7 +313,7 @@ function loadLevel(idx) {
   nodes = []; selectable = [];
 
   const lv = LEVELS[idx];
-  el.levelName.textContent = `${S('levelLabel')} ${idx + 1}／${LEVELS.length}｜${S(lv.nameKey)}`;
+  el.levelName.textContent = `${S('levelLabel')} ${idx + 1}/${LEVELS.length}｜${S(lv.nameKey)}`;
   el.objective.textContent = S(lv.objKey);
 
   const src = { ...lv.source, role: 'source', id: '__src' };

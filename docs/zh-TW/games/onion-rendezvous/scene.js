@@ -71,7 +71,7 @@ async function initRenderer() {
   const hasGPU = !!navigator.gpu;
   const hasGL2 = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
   const forceWebGL = new URLSearchParams(location.search).get('backend') === 'webgl';
-  if (!hasGL2 && (forceWebGL || !hasGPU)) { $('backend').textContent = '這個瀏覽器不支援 WebGPU／WebGL2'; $('backend').className = 'err'; return false; }
+  if (!hasGL2 && (forceWebGL || !hasGPU)) { $('backend').textContent = '這個瀏覽器不支援 WebGPU 或 WebGL2'; $('backend').className = 'err'; return false; }
 
   renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -318,7 +318,7 @@ function spawnConnection(type, marked) {
       serviceLine: spawnLine(serviceCurve, sCol), // 電路細線：服務 → RP
       estDone: false, fwdStarted: false, flashed: false, retStarted: false, hopLit: 0,
     });
-    // 曳光彈頭改在去程／回程開始時才發（見 updateConnections）
+    // 曳光彈頭改在去程、回程開始時才發（見 updateConnections）
     markNew(before, marked);
   } else {
     // 明網：client → guard → middle → exit → 網站，回應原路走回
@@ -478,7 +478,7 @@ function updateConnections(dt) {
   }
 }
 
-// ---- 相機固定正對平面（拖曳平移、滾輪／雙指縮放；點擊空白處加一條連線）----
+// ---- 相機固定正對平面（拖曳平移、滾輪、雙指縮放；點擊空白處加一條連線）----
 // zoom 是「相對於整個場景剛好入鏡的倍率」。距離寫死的話，直式手機的水平視野只有桌機的
 // 三分之一左右，client 與服務這兩端會整個掉到畫面外，等於看不到這件作品在講什麼。
 const view = { cx: 0, cy: 0, zoom: 1 };

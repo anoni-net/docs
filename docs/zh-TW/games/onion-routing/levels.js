@@ -2,7 +2,7 @@
 // 相機預設看向原點，繞原點 orbit。節點顏色由所在地區（ASN）決定；被監聽（surveilled）、
 // 被封鎖（blocked）、橋接（bridge）會覆蓋外觀。
 
-// 地區 = 一個 ASN（自治系統）。color 用於區分不同 ASN，避開危險狀態用的紅／灰。
+// 地區 = 一個 ASN（自治系統）。color 用於區分不同 ASN，避開危險狀態用的紅、灰。
 export const REGIONS = {
   TW: { asn: 'AS3462',  place: '台灣',   color: 0x00aeff },
   JP: { asn: 'AS2914',  place: '日本',   color: 0x8a7bff },
