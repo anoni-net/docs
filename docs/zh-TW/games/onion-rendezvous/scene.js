@@ -55,6 +55,18 @@ function emitInterval() { return (0.05 - params.flow * 0.038) / MOTION; } // flo
 // ---- three.js ----
 let renderer, scene, camera, post;
 
+// 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
+// WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
+async function webgpuBlocker() {
+  if (new URLSearchParams(location.search).get('backend') === 'webgl') return '網址帶了 backend=webgl';
+  if (!window.isSecureContext) return '頁面不是 https 或 localhost';
+  if (!navigator.gpu) return '這個瀏覽器沒有 WebGPU';
+  try {
+    if (!(await navigator.gpu.requestAdapter())) return '系統沒有給出可用的 GPU';
+  } catch (e) { return 'WebGPU 被擋下'; }
+  return '';
+}
+
 async function initRenderer() {
   const hasGPU = !!navigator.gpu;
   const hasGL2 = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
@@ -72,6 +84,7 @@ async function initRenderer() {
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
   $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
   $('backend').className = isGPU ? 'gpu' : 'gl';
+  if (!isGPU) webgpuBlocker().then((why) => { if (why) $('backend').textContent = `WebGL2（fallback：${why}）`; });
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
