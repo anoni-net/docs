@@ -56,6 +56,7 @@
     #cc-body b { color: var(--ink); font-weight: 700; }
     #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
     #cc-bar span { display: block; height: 100%; }
+    .cc-roles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
     .lb { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .25s; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #d7ecff; white-space: nowrap; text-shadow: 0 0 5px #04060d, 0 0 11px #04060d, 0 1px 2px #04060d; }
     .lb i { font-style: normal; font-weight: 700; color: #8fb0c8; margin-left: 5px; }
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
@@ -92,7 +93,9 @@
     .chip.act { cursor: pointer; border: 1px solid transparent; }
     .chip.act:hover { background: rgba(255,255,255,.12); }
     .chip.act.on { background: rgba(0,174,255,.18); border-color: rgba(0,174,255,.55); color: #fff; }
-    .chip.act.on::after { content: '×'; margin-left: 4px; font-weight: 800; color: var(--cyan); }
+    /* × 的位置一律留著，只切換可見度。只在選中時才長出來的話，chip 會變寬、把後面的擠到下一行 */
+    .chip.act::after { content: '×'; margin-left: 4px; font-weight: 800; color: var(--cyan); opacity: 0; transition: opacity .15s; }
+    .chip.act.on::after { opacity: 1; }
     .chip.act:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     .lb[data-off="1"] { display: none; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }

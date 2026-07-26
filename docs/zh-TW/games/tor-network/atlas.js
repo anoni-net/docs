@@ -41,6 +41,8 @@ const MODES = {
   middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
 };
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
+const ROLE_NAME = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
+const roleHex = (k) => '#' + ROLE_COL[k].toString(16).padStart(6, '0');
 // 個別中繼點。國別資料撐不出空間分布，歐洲十幾國的團怎麼排都會擠在一起，
 // 所以預設只畫國家色塊。想把點畫回來就改成 true。
 const SHOW_DOTS = true;
@@ -552,17 +554,18 @@ function showCountry(cc) {
   const t = r[0] + r[1] + r[2] + r[3];
   const wShare = (CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100;
   const exitPct = (r[2] + r[3]) / t * 100;
-  const hex = (v) => '#' + v.toString(16).padStart(6, '0');
   $('cc-code').textContent = cc.toUpperCase();
   $('cc-sub').textContent = `${t.toLocaleString()} 台，台數排名第 ${CC_STATS.rankN.get(cc)}`;
   $('cc-bar').innerHTML = [2, 3, 1, 0]
-    .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${hex(ROLE_COL[i])}"></span>` : ''))
+    .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
     .join('');
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
   $('cc-body').innerHTML =
     `佔全網台數 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，佔共識權重 <b>${pct(wShare)}%</b>（排名第 ${CC_STATS.rankW.get(cc)}）<br>`
-    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網平均 ${Math.round(CC_STATS.exitShare * 100)}%<br>`
-    + `guard ${r[1]}　exit ${r[2]}　guard＋exit ${r[3]}　middle ${r[0]}`;
+    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網平均 ${Math.round(CC_STATS.exitShare * 100)}%`
+    + `<div class="cc-roles">`
+    + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
+    + `</div>`;
   card.hidden = false;
   stopSpin();
 }
@@ -623,10 +626,9 @@ function fillPanel(snap, drawn) {
   $('stat-total').textContent = snap.total.toLocaleString();
   $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC';
   const br = snap.byRole || {};
-  const rn = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'guard＋exit' };
   const modeOf = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'both' };
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
-    `<span class="chip act" role="button" tabindex="0" data-mode="${modeOf[k]}" style="--c:#${ROLE_COL[k].toString(16).padStart(6, '0')}">${rn[k]} ${(br[k] || 0).toLocaleString()}</span>`
+    `<span class="chip act" role="button" tabindex="0" data-mode="${modeOf[k]}" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${(br[k] || 0).toLocaleString()}</span>`
   ).join('');
   // 地球上畫出來的台數少於總數時要講清楚，別讓人以為每一台都在畫面上
   const miss = snap.total - drawn;
