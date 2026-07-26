@@ -859,8 +859,9 @@ function showCountry(cc) {
     .join('');
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
   $('cc-body').innerHTML =
-    `佔全網台數 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，佔共識權重 <b>${pct(wShare)}%</b>（排名第 ${CC_STATS.rankW.get(cc)}）<br>`
-    + `出口流量 <b>${Math.round(exitPct)}%</b>，全網整體 ${Math.round(CC_STATS.exitShare * 100)}%`
+    // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
+    `佔全網 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，權重 <b>${pct(wShare)}%</b>（第 ${CC_STATS.rankW.get(cc)}）`
+    + `，出口 <b>${Math.round(exitPct)}%</b>（全網 ${Math.round(CC_STATS.exitShare * 100)}%）`
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
@@ -881,15 +882,16 @@ function hostingLine(cc, total) {
   if (!a || !a.t || !a.t.length) return '';
   const [, name, n] = a.t[0];
   const pct = Math.round(n / total * 100);
-  const rest = a.t.slice(1).map(([id, nm, k]) => `${nm || id} ${k}`).join('、');
-  return `<div class="cc-sub2">托管商：<b>${name || a.t[0][0]}</b> ${n} 台（${pct}%），這一國共 ${a.n} 家`
-    + (rest ? `<br><span class="dim">其次 ${rest}</span>` : '') + `</div>`;
+  // 次要托管商移到 title。它是「機房有多分散」的佐證，值得留，但不值得多佔一行
+  const rest = a.t.slice(1).map(([id, nm, k]) => `${nm || id} ${k} 台`).join('、');
+  return `<div class="cc-sub2"${rest ? ` title="其次 ${rest}"` : ''}>`
+    + `托管商 <b>${name || a.t[0][0]}</b> ${n} 台（${pct}%），全國 ${a.n} 家</div>`;
 }
 
 function versionLine(cc) {
   const v = SNAP_VER && SNAP_VER[cc];
   if (!v || !v[0]) return '';
-  return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}/${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
+  return `<div class="cc-sub2 dim">官方建議版本 ${v[1]}/${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
 }
 // OONI 對這一國的觀測。措辭刻意停在「沒有照預期完成」，不寫成封鎖率。
 // anomaly 的成因包含審查、網路不穩與 ISP 故障，單看比率沒辦法分辨是哪一種，
@@ -902,10 +904,12 @@ function ooniLine(cc) {
   const pct = a / m * 100;
   const blocked = (OONI.blocked || []).includes(cc);
   const val = pct < 10 ? pct.toFixed(1) : Math.round(pct);
-  return `<div class="cc-sub2${blocked ? ' warn' : ' dim'}">OONI 觀測：近 ${OONI.days} 天 `
-    + `${m.toLocaleString()} 次 Tor 連線測試，<b>${val}%</b> 沒有照預期完成`
-    + (blocked ? `<br><span class="dim">高到這個程度通常表示連線被擋，OONI 的異常也可能來自網路不穩。</span>` : '')
-    + `</div>`;
+  // 免責說明移到 title。面板的 OONI 區塊已經完整講過一次，卡片這裡不必再佔兩行
+  const why = blocked
+    ? '高到這個程度通常表示連線被擋，但 OONI 的異常也可能來自網路不穩或 ISP 故障'
+    : 'anomaly 代表測試沒有照預期完成，成因包含連線被擋、網路不穩與 ISP 故障';
+  return `<div class="cc-sub2${blocked ? ' warn' : ' dim'}" title="${why}">`
+    + `OONI 近 ${OONI.days} 天測試 ${m.toLocaleString()} 次，<b>${val}%</b> 未照預期完成</div>`;
 }
 
 // 這一國有多少人在用。中繼數是供給端，這是需求端，兩個數字擺在一起才看得出落差。
@@ -918,9 +922,9 @@ function usersLine(cc, relays) {
   const [cur, avg] = u;
   // 每台中繼「服務」多少使用者。這不是真的負載，只是兩個數字的比值，用來凸顯落差。
   const per = relays ? Math.round(cur / relays) : 0;
-  return `<div class="cc-sub2">估計 <b>${cur.toLocaleString()}</b> 人在用（${TORUSERS.days} 天平均 ${avg.toLocaleString()}）`
-    + (per ? `<br><span class="dim">這一國每有 1 台中繼，就有約 ${per.toLocaleString()} 人在用</span>` : '')
-    + `</div>`;
+  return `<div class="cc-sub2" title="Tor Metrics 依中繼收到的目錄請求反推，是估計值不是普查">`
+    + `估計 <b>${cur.toLocaleString()}</b> 人在用（${TORUSERS.days} 天平均 ${avg.toLocaleString()}）`
+    + (per ? `，每台中繼約 ${per.toLocaleString()} 人` : '') + `</div>`;
 }
 
 // 這一國的人用什麼方式繞過封鎖。跟 ooni.json 那層是一組的：OONI 說連不上，這裡說改用什麼。
@@ -930,7 +934,7 @@ function bridgeLine(cc) {
   const b = TORUSERS.bridge[cc];
   if (!b || !b.length) return '';
   const list = b.map(([t, n]) => `<span class="chip2">${PT_NAME[t] || t} ${n.toLocaleString()}</span>`).join('');
-  return `<div class="cc-sub2">透過橋接繞道<div class="cc-roles">${list}</div></div>`;
+  return `<div class="cc-sub2 bridges" title="被擋的人改用哪種可插拔傳輸繞過去">橋接繞道${list}</div>`;
 }
 
 // 這一國被整個關掉過幾次，以及理由。
@@ -950,11 +954,12 @@ function shutdownLine(cc) {
   const top = Object.entries(causes || {}).slice(0, 3)
     .map(([k, v]) => `${CAUSE_ZH[k] || k} ${v}`).join('、');
   const [y0] = SHUTDOWNS.years || [];
-  return `<div class="cc-sub2 warn">${y0 ? y0 + ' 年以來' : ''}有 <b>${n}</b> 次網路關閉紀錄`
-    + (year ? `，最近一次在 ${year} 年` : '')
-    + (top ? `<br><span class="dim">主要成因：${top}</span>` : '')
-    + (ctl ? `<br><span class="dim">其中 ${ctl} 次屬於資訊管制、抗議或選舉期間的管控</span>` : '')
-    + `</div>`;
+  // 成因細節移到 title。武裝衝突未必是政府下令，那個區分靠 ctl 這個數字帶出來就夠
+  const tip = top ? `主要成因：${top}（武裝衝突未必是政府主動決策）` : '';
+  return `<div class="cc-sub2 warn"${tip ? ` title="${tip}"` : ''}>`
+    + `${y0 ? y0 + ' 年起 ' : ''}<b>${n}</b> 次網路關閉`
+    + (year ? `，最近 ${year} 年` : '')
+    + (ctl ? `，${ctl} 次屬管控類` : '') + `</div>`;
 }
 
 // 往外連到 Cloudflare Radar。只給連結，不取它的資料：Radar 的 API 要 Cloudflare 帳號的
@@ -976,10 +981,9 @@ function radarLine(cc) {
   const asLink = top && /^AS\d+$/i.test(top[0])
     ? extLink(RADAR + top[0].toLowerCase(), top[1] || top[0], '在 Cloudflare Radar 看這家業者的網路狀況')
     : '';
-  return `<div class="cc-sub2 dim ext">延伸查詢：`
-    + extLink(RADAR + cc, `${cc.toUpperCase()} 的網路狀況`, '在 Cloudflare Radar 看這一國的流量與中斷紀錄')
-    + (asLink ? `、${asLink}` : '')
-    + `<br><span class="tiny">連往 Cloudflare Radar，離開本站。</span></div>`;
+  return `<div class="cc-sub2 dim ext">Cloudflare Radar<span class="tiny">（離開本站）</span>：`
+    + extLink(RADAR + cc, cc.toUpperCase(), '在 Cloudflare Radar 看這一國的流量與中斷紀錄')
+    + (asLink ? `、${asLink}` : '') + `</div>`;
 }
 
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
