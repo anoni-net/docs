@@ -3,7 +3,8 @@
 // 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
 // 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
-import { pass, texture } from 'three/tsl';
+import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
+         float, mix, hash, oscSine, time, instanceIndex } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 
 const $ = (id) => document.getElementById(id);
@@ -188,6 +189,50 @@ async function initRenderer() {
 const TEX_W = 2048, TEX_H = 1024;
 const texX = (lon) => (lon + 180) / 360 * TEX_W;
 const texY = (lat) => (90 - lat) / 180 * TEX_H;
+
+// 星空。原本背景是一片純色，地球像浮在漆黑裡的一顆球。
+//
+// 用 canvas 現畫成等距圓柱投影再丟給 scene.background，跟 paintEarth() 同一招，
+// 不下載任何星圖。真實星表（HYG 之類）壓到只留亮星也是幾百 KB，而這裡的視角是使用者
+// 隨手轉的假想天球，不是地球上某時某地的實際天空，科學準確度在這裡換不到東西。
+//
+// 亮度刻意壓在 bloom 的門檻（0.72，比的是線性 luminance）以下。最亮的星 alpha 約 0.47，
+// 疊在黑底上換算成線性大約 0.27，不會被 bloom 抓出來糊成一片。
+// scene.background 不是 mesh，不吃 draw call。
+const SKY_STARS = 3200;
+function buildSky() {
+  const cv = document.createElement('canvas');
+  cv.width = TEX_W; cv.height = TEX_H;
+  const g = cv.getContext('2d');
+  g.fillStyle = '#03050b';
+  g.fillRect(0, 0, TEX_W, TEX_H);
+  // 銀河帶：隨便挑一個大圓當帶狀中心，離它愈近星愈密。純粹是質感，不對應真實銀河位置。
+  const band = new THREE.Vector3(0.3, 0.85, -0.4).normalize();
+  const dir = new THREE.Vector3();
+  let seed = 20260726;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  for (let i = 0; i < SKY_STARS; i++) {
+    // 用 acos 取緯度，不然星星會在兩極擠成一團
+    const lon = (rnd() - 0.5) * 360;
+    const lat = 90 - Math.acos(2 * rnd() - 1) * 180 / Math.PI;
+    llToVec(lat, lon, 1, dir);
+    const near = Math.exp(-Math.pow(Math.acos(Math.min(1, Math.abs(dir.dot(band)))) * 4, 2));
+    if (rnd() > 0.15 + near * 0.5) continue;
+    const r = 0.9 + rnd() * (near > 0.3 ? 1.8 : 1.2);
+    const a = (0.30 + rnd() * 0.45) * (0.55 + near * 0.55);
+    g.fillStyle = rnd() < 0.15 ? `rgba(255,224,190,${a.toFixed(2)})` : `rgba(200,220,255,${a.toFixed(2)})`;
+    g.beginPath();
+    g.arc(texX(lon), texY(lat), r, 0, Math.PI * 2);
+    g.fill();
+  }
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.mapping = THREE.EquirectangularReflectionMapping;
+  // 關掉 mipmap。星星只有一兩個像素寬，縮圖會把它們直接平均掉，畫面上就是一片黑。
+  tex.generateMipmaps = false;
+  tex.minFilter = THREE.LinearFilter;
+  scene.background = tex;
+}
 
 function glowColor(n, max, ramp) {
   const t = Math.pow(n / max, 0.35); // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
@@ -483,6 +528,33 @@ function buildBlocked(world) {
   globe.add(new THREE.LineSegments(g, m));
 }
 
+// 大氣層邊緣輝光。地球邊緣原本是硬邊直接切到背景色，任何參考級的星球渲染都有這圈散射光。
+//
+// 用一顆略大的同心殼球，亮度取 Fresnel 項：正對鏡頭處 dot(N,V)≈1、輪廓邊緣 dot(N,V)≈0，
+// 取 pow(1-dot, n) 就會只在邊緣亮起來。關鍵是這個衰減是幾何決定的，畫面中心那塊
+// 「要讀國家亮度、讀中繼點」的區域拿到的疊加光趨近於零，不是靠調參數壓低。
+//
+// three/tsl 沒有現成的 fresnel node（翻過 export 列表，一次都沒出現），要自己兜。
+//
+// 亮度算過：藍色 luminance 約 0.53，乘上 intensity 0.6 約 0.32，低於 bloom 的門檻 0.72
+// （bloom 比的是 tonemap 之前的線性 luminance），所以這層不會被 bloom 抓去糊成白斑。
+const RIM_POWER = 5.5;   // 衰減要夠陡。3.2 時中心仍有可見疊加，被 bloom 一暈整顆球都蒙上藍霧
+const RIM_INTENSITY = 0.32; // additive 是疊在陸地本身的亮度上，兩者相加才是 bloom 看到的值
+function buildAtmosphere() {
+  const mat = new THREE.MeshBasicNodeMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const viewDir = cameraPosition.sub(positionWorld).normalize();
+  const rim = oneMinus(saturate(dot(normalWorld, viewDir))).pow(RIM_POWER);
+  mat.colorNode = vec3(0x6f / 255, 0xc0 / 255, 0xee / 255); // 沿用海岸線的藍，跟現有冷色系一致
+  mat.opacityNode = rim.mul(RIM_INTENSITY);
+  const mesh = new THREE.Mesh(new THREE.SphereGeometry(R * 1.045, 48, 32), mat);
+  // 這幾層透明物件都以地球球心為中心，包圍球中心到相機的距離幾乎打平，
+  // 預設排序會不穩定（哪層蓋在哪層可能逐幀跳動），所以明確指定順序。
+  mesh.renderOrder = 50;
+  globe.add(mesh);
+}
+
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -630,6 +702,21 @@ function buildRelays(snap, counts) {
   const geo = new THREE.OctahedronGeometry(1, 1);
   const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: true });
   mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
+  // 每顆點以自己的節奏緩慢明暗，像遠處的城市燈火，不是整批一起閃。
+  //
+  // 走 colorNode 是刻意的：NodeMaterial 的 colorNode 跟 instanceColor 是相乘，角色色相
+  // 不受影響。反過來 opacityNode 會整個蓋掉 .opacity（是互斥的 if/else 不是相乘），
+  // 而 animate() 每幀都在寫 m.opacity 做淡入與 LOD，碰了那個屬性這兩件事會靜靜失效。
+  //
+  // 振幅只往暗處走，上限就是今天的基準值。這樣單顆點的峰值亮度不會超過已經調過、
+  // 已知不過曝的水準，等於用數學把 bloom 過曝的風險直接排除，不必賭實測。
+  if (!REDUCED) {
+    const seed = hash(instanceIndex);
+    const rate = float(0.10).add(seed.mul(0.08));   // 0.10 到 0.18 Hz，每顆點速率不同
+    const wave = oscSine(time.mul(rate).add(seed.mul(6.283)));
+    const amt = mix(float(0.78), float(1.0), wave);
+    mat.colorNode = vec3(amt, amt, amt);
+  }
   pointMats.push(mat);
   const m4 = new THREE.Matrix4();
   const c = new THREE.Color();
@@ -1416,10 +1503,12 @@ async function main() {
     if (b) b.hidden = false; // 沒抓到資料就不要露出一個按了會空白的按鈕
   }
   const counts = countryCounts(snap);
+  buildSky();                      // 星空要先鋪，後面的東西才像在太空裡
   buildEarth(world, counts);
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
+  buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast);
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
