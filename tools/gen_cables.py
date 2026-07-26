@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """產生「Tor 中繼地球儀」的海底電纜底圖（docs/zh-TW/games/tor-network/cables.json）。
 
-資料來源：OpenStreetMap，經 Overpass API 取 communication=line + submarine=yes 的線段。
+資料來源：OpenStreetMap，經 Overpass API 取 seamark:type=cable_submarine 的線段。
+海纜在 OSM 主要是用航海圖那套 seamark 標籤在記（海纜關係到船隻拋錨），數量是
+communication=line + submarine=yes 的十幾倍，亞太的覆蓋差別尤其大。
 授權 ODbL，使用時要標註「© OpenStreetMap contributors」，畫面上與這個檔案都有註明。
 
 OSM 的海底電纜覆蓋並不完整（例如台灣周邊只收錄了一部分），這個圖層的定位是「海洋
@@ -21,11 +23,12 @@ import time
 
 API = os.environ.get("OVERPASS_API", "https://overpass-api.de/api/interpreter")
 UA = "anoni.net-globe/1.0 (docs.anoni.net; submarine cable basemap)"
-LON_STEP = 30          # 每塊經度寬度，太大會逾時
+LON_STEP = 15          # 每塊經度寬度，太大會逾時。換標籤後資料多了十幾倍，切細一點
 PAUSE = 8              # 每次查詢之間的間隔秒數，對公共服務的基本禮貌
 RETRY = 3
 TOLERANCE = 0.015      # 簡化容差（度）。0.05 會把 63% 的線砍成兩點直線，形狀整個沒了
 MIN_POINTS = 2
+MIN_LEN_KM = 15        # 太短的多半是港內或登陸段，畫在地球儀上只是雜點
 STITCH_KM = 40         # 端點相距這個距離以內就接起來，OSM 把一條電纜拆成多個 way
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "cables.json")
@@ -33,7 +36,7 @@ DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
 
 def overpass(lon0, lon1):
     q = ('[out:json][timeout:120];'
-         f'way["communication"="line"]["submarine"="yes"](-85,{lon0},85,{lon1});'
+         f'way["seamark:type"="cable_submarine"](-85,{lon0},85,{lon1});'
          'out geom;')
     for attempt in range(RETRY):
         r = subprocess.run(
@@ -137,6 +140,11 @@ def main():
             lines.append(pts)
         time.sleep(PAUSE)
 
+    # 濾掉太短的線段
+    def length_km(pts):
+        return sum(hav_km(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+    lines = [ln for ln in lines if length_km(ln) >= MIN_LEN_KM]
+
     # 先接合再簡化。順序反過來的話，簡化會先把端點挪動，接縫更難對上。
     before = len(lines)
     lines = stitch(lines)
@@ -149,7 +157,7 @@ def main():
     data = {
         "source": "OpenStreetMap contributors",
         "license": "ODbL 1.0",
-        "note": "communication=line + submarine=yes。OSM 的海纜覆蓋不完整，這是底圖不是完整清單。",
+        "note": "seamark:type=cable_submarine。OSM 的海纜覆蓋仍不完整，這是底圖不是完整清單。",
         "lines": flat,
     }
     with open(out, "w", encoding="utf-8") as f:
