@@ -374,41 +374,55 @@ function buildTrunks() {
   globe.add(new THREE.LineSegments(g, m));
 }
 
-// OONI 觀測到 Tor 連線大量失敗的國家，在該國位置套一個空心圓環。
+// OONI 觀測到 Tor 連線大量失敗的國家，沿著該國國界描一圈紅線。
 //
-// 用環不用點，是因為中繼點全是實心的，形狀分開就不會有人把這一層讀成「這裡有很多中繼」。
-// 這幾國的共同點正好是幾乎沒有中繼（PK、EG、MM 是 0 台，CN 1 台），環套上去多半是空的，
-// 那個對比本身就是要講的事。
+// 早先的版本是在國家中心套一個固定半徑的圓環，那個做法在大國身上完全不成比例：
+// 俄羅斯橫跨九千公里，半徑四百多公里的圓環既框不住也讀不出是哪一國。改描國界之後
+// 範圍就是這一國真正的範圍，順帶也不必再挑圓環半徑這種每個國家都會錯的參數。
+//
+// 描邊不填色，是因為填色會蓋掉底下的陸地亮度（那是中繼數）。這幾國的共同點正好是
+// 幾乎沒有中繼（PK、EG、MM 是 0 台，CN 1 台），框起來裡面是暗的，那個對比就是要講的事。
 //
 // 門檻在 gen_ooni_snapshot.py 決定，這裡不做二次篩選。中段的異常率是雜訊，
 // 想放寬門檻請先讀那支程式開頭關於 anomaly 的說明。
-function buildBlocked() {
+//
+// 這一層直接吃 countries.json 的國界，等於把那份資料的領土畫法照搬到畫面上。
+// 現用的 Natural Earth 110m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
+// 換底圖資料前請重新確認這件事。
+function buildBlocked(world) {
   const list = (OONI && OONI.blocked) || [];
-  if (!list.length) return;
+  if (!list.length || !world) return;
+  const want = new Set(list);
   const pos = [];
-  const c = new THREE.Vector3(), u = new THREE.Vector3(), v = new THREE.Vector3();
-  const p = new THREE.Vector3(), prev = new THREE.Vector3();
-  const RAD = 0.075;   // 圓環的角半徑（弧度），約 480 公里，小國也框得住又不會蓋掉鄰國
-  const SEG = 48;
-  for (const cc of list) {
-    const a = ANCHOR.get(cc);
-    if (!a) continue;                 // 沒有位置資料的就跳過，硬標會標錯地方
-    llToVec(a.ll[0], a.ll[1], 1, c);
-    // 找兩個垂直於中心的正交向量，圓就畫在這兩個方向張出的平面上。
-    // 拿一個跟 c 不平行的向量做外積即可，這裡挑北極，靠近極區時改用 x 軸避免退化。
-    u.set(0, 1, 0);
-    if (Math.abs(c.y) > 0.9) u.set(1, 0, 0);
-    u.crossVectors(c, u).normalize();
-    v.crossVectors(c, u).normalize();
-    const cos = Math.cos(RAD), sin = Math.sin(RAD);
-    for (let i = 0; i <= SEG; i++) {
-      const t = i / SEG * Math.PI * 2;
-      p.copy(c).multiplyScalar(cos)
-        .addScaledVector(u, Math.cos(t) * sin)
-        .addScaledVector(v, Math.sin(t) * sin)
-        .normalize().multiplyScalar(R * 1.014);
-      if (i > 0) pos.push(prev.x, prev.y, prev.z, p.x, p.y, p.z);
-      prev.copy(p);
+  const v = new THREE.Vector3(), prev = new THREE.Vector3();
+  // 國界的相鄰點最遠有 9 度（俄羅斯北岸），直線連過去會從地球內部穿過，
+  // 中段被球體擋住就是一段一段的斷線，跟海纜那層是同一個坑。
+  const MAX_STEP_DEG = 1.5;
+  const HEIGHT = R * 1.014;
+  const edge = (lon1, lat1, lon2, lat2) => {
+    let dlon = lon2 - lon1;
+    if (dlon > 180) dlon -= 360; else if (dlon < -180) dlon += 360;
+    const dlat = lat2 - lat1;
+    const cos = Math.cos((lat1 + lat2) / 2 * Math.PI / 180);
+    const steps = Math.max(1, Math.ceil(Math.hypot(dlat, dlon * cos) / MAX_STEP_DEG));
+    let plat = lat1, plon = lon1;
+    for (let k = 1; k <= steps; k++) {
+      const t = k / steps;
+      const lat = lat1 + dlat * t, lon = lon1 + dlon * t;
+      llToVec(plat, plon, HEIGHT, prev);
+      pos.push(prev.x, prev.y, prev.z);
+      llToVec(lat, lon, HEIGHT, v);
+      pos.push(v.x, v.y, v.z);
+      plat = lat; plon = lon;
+    }
+  };
+  for (const c of world.c) {
+    if (!c.k || !want.has(c.k)) continue;
+    for (const ring of c.p) {
+      if (ring.length < 6) continue;   // 少於三個點圍不成形狀
+      for (let i = 0; i + 3 < ring.length; i += 2) edge(ring[i], ring[i + 1], ring[i + 2], ring[i + 3]);
+      // 環要自己閉合，資料的最後一點不一定等於第一點
+      edge(ring[ring.length - 2], ring[ring.length - 1], ring[0], ring[1]);
     }
   }
   const g = new THREE.BufferGeometry();
@@ -1028,7 +1042,7 @@ async function main() {
   fillMix(snap);
   fillAsn(snap);
   fillAsia(snap);
-  buildBlocked(); // 要在 buildEarth 之後，ANCHOR 那時才有各國位置
+  buildBlocked(world);
   fillOoni(snap);
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
