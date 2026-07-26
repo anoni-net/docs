@@ -19,6 +19,7 @@ const COL = {
   both: 0xff9ec7,  // guard+exit
   coast: 0x6fc0ee, // 海岸線
   cable: 0x2f7fa8, // 海底電纜。壓得比海岸線還低，只是讓海面不要一片空白
+  blocked: 0xff5a6e, // OONI 觀測到 Tor 連線大量失敗的國家。紅色系跟四個角色色都拉開
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -373,6 +374,49 @@ function buildTrunks() {
   globe.add(new THREE.LineSegments(g, m));
 }
 
+// OONI 觀測到 Tor 連線大量失敗的國家，在該國位置套一個空心圓環。
+//
+// 用環不用點，是因為中繼點全是實心的，形狀分開就不會有人把這一層讀成「這裡有很多中繼」。
+// 這幾國的共同點正好是幾乎沒有中繼（PK、EG、MM 是 0 台，CN 1 台），環套上去多半是空的，
+// 那個對比本身就是要講的事。
+//
+// 門檻在 gen_ooni_snapshot.py 決定，這裡不做二次篩選。中段的異常率是雜訊，
+// 想放寬門檻請先讀那支程式開頭關於 anomaly 的說明。
+function buildBlocked() {
+  const list = (OONI && OONI.blocked) || [];
+  if (!list.length) return;
+  const pos = [];
+  const c = new THREE.Vector3(), u = new THREE.Vector3(), v = new THREE.Vector3();
+  const p = new THREE.Vector3(), prev = new THREE.Vector3();
+  const RAD = 0.075;   // 圓環的角半徑（弧度），約 480 公里，小國也框得住又不會蓋掉鄰國
+  const SEG = 48;
+  for (const cc of list) {
+    const a = ANCHOR.get(cc);
+    if (!a) continue;                 // 沒有位置資料的就跳過，硬標會標錯地方
+    llToVec(a.ll[0], a.ll[1], 1, c);
+    // 找兩個垂直於中心的正交向量，圓就畫在這兩個方向張出的平面上。
+    // 拿一個跟 c 不平行的向量做外積即可，這裡挑北極，靠近極區時改用 x 軸避免退化。
+    u.set(0, 1, 0);
+    if (Math.abs(c.y) > 0.9) u.set(1, 0, 0);
+    u.crossVectors(c, u).normalize();
+    v.crossVectors(c, u).normalize();
+    const cos = Math.cos(RAD), sin = Math.sin(RAD);
+    for (let i = 0; i <= SEG; i++) {
+      const t = i / SEG * Math.PI * 2;
+      p.copy(c).multiplyScalar(cos)
+        .addScaledVector(u, Math.cos(t) * sin)
+        .addScaledVector(v, Math.sin(t) * sin)
+        .normalize().multiplyScalar(R * 1.014);
+      if (i > 0) pos.push(prev.x, prev.y, prev.z, p.x, p.y, p.z);
+      prev.copy(p);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  const m = new THREE.LineBasicMaterial({ color: COL.blocked, transparent: true, opacity: 0.85, depthWrite: false });
+  globe.add(new THREE.LineSegments(g, m));
+}
+
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -651,6 +695,9 @@ function fillMix(snap) {
 // 球面上讀得到的只有國碼與台數，排名、權重佔比、角色組成這些都得點一下才給。
 let CC_STATS = null;
 let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
+// OONI 的觀測。這份資料的授權跟 Onionoo 那份不同（CC BY-NC-SA 4.0），所以分開存也分開讀，
+// 畫面上的 credit 要各自標註。細節看 tools/gen_ooni_snapshot.py。
+let OONI = null;
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
   SNAP_VER = snap.version || null;
@@ -703,7 +750,8 @@ function showCountry(cc) {
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
     + hostingLine(cc, t)
-    + versionLine(cc);
+    + versionLine(cc)
+    + ooniLine(cc);
   card.hidden = false;
   stopSpin();
 }
@@ -724,6 +772,23 @@ function versionLine(cc) {
   if (!v || !v[0]) return '';
   return `<div class="cc-sub2 dim">跑官方建議版本 ${v[1]}／${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
 }
+// OONI 對這一國的觀測。措辭刻意停在「沒有照預期完成」，不寫成封鎖率。
+// anomaly 的成因包含審查、網路不穩與 ISP 故障，單看比率沒辦法分辨是哪一種，
+// 只有高到極端才敢指名（那幾國在 blocked 清單裡，另外給一句話）。
+function ooniLine(cc) {
+  if (!OONI || !OONI.cc) return '';
+  const o = OONI.cc[cc];
+  if (!o || !o[0]) return '';
+  const [m, a] = o;
+  const pct = a / m * 100;
+  const blocked = (OONI.blocked || []).includes(cc);
+  const val = pct < 10 ? pct.toFixed(1) : Math.round(pct);
+  return `<div class="cc-sub2${blocked ? ' warn' : ' dim'}">OONI 觀測：近 ${OONI.days} 天 `
+    + `${m.toLocaleString()} 次 Tor 連線測試，<b>${val}%</b> 沒有照預期完成`
+    + (blocked ? `<br><span class="dim">高到這個程度通常表示連線被擋，OONI 的異常也可能來自網路不穩。</span>` : '')
+    + `</div>`;
+}
+
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
@@ -811,6 +876,35 @@ function fillAsia(snap) {
       + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#4fd58f"></span></span>`
       + `<span class="n">${a ? a.n + ' 家' : ''}${conc !== null ? `／最大 ${conc}%` : ''}</span></div>`;
   }).join('');
+}
+
+// OONI 觀測到 Tor 連線大量失敗的國家，一併把該國的中繼數擺出來。
+// 這一塊的重點是兩個獨立來源撞在一起的那個結果：連不上 Tor 的地方，也幾乎沒有人在那裡跑中繼。
+// 條的長度用異常率，數字給中繼數，讓「條很長、數字是 0」自己說話。
+function fillOoni(snap) {
+  const box = $('stat-ooni');
+  if (!box || !OONI || !OONI.blocked || !OONI.blocked.length) return;
+  const cnt = new Map(snap.countries || []);
+  box.innerHTML = OONI.blocked.map((cc) => {
+    const o = OONI.cc[cc];
+    const pct = o[1] / o[0] * 100;
+    const n = cnt.get(cc) || 0;
+    return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
+      + `<span class="tot">${Math.round(pct)}%</span>`
+      + `<span class="mix-bar"><span style="width:${pct.toFixed(1)}%;background:${'#' + COL.blocked.toString(16)}"></span></span>`
+      + `<span class="n">中繼 ${n.toLocaleString()}</span></div>`;
+  }).join('');
+  const note = $('ooni-note');
+  if (!note) return;
+  const all = OONI.all || [0, 0];
+  // 措辭要停在「沒有照預期完成」。這個比率沒辦法區分審查、網路不穩與 ISP 故障，
+  // 寫成封鎖率就是拿雜訊指控特定國家。
+  // 門檻寫死在文案裡，改了 gen_ooni_snapshot.py 的 BLOCK_PCT 就會對不上，所以讀資料裡的值
+  note.innerHTML = `這幾國近 ${OONI.days} 天的 Tor 連線測試有 ${OONI.blockPct}% 以上沒有照預期完成，`
+    + `同一期間全球平均是 ${(all[1] / all[0] * 100).toFixed(0)}%。`
+    + `異常的成因包含連線被擋、網路不穩與 ISP 故障，單看比率分不出是哪一種，`
+    + `所以這裡只列高到極端的那幾國，中段的數字沒有拿來上色。`
+    + `對照左邊的中繼數會看到，連不上 Tor 的地方，也幾乎沒有人在那裡跑中繼。`;
 }
 
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
@@ -914,12 +1008,14 @@ async function animate() {
 async function main() {
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables] = await Promise.all([
+  const [snap, world, coast, cables, ooni] = await Promise.all([
     getJSON('./snapshot.json', { cache: 'no-cache' }), // 快照由人工重新產生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
     getJSON('./cables.json').catch(() => null),     // 海底電纜可選
+    getJSON('./ooni.json').catch(() => null),       // OONI 觀測可選
   ]);
+  OONI = ooni;
   const counts = countryCounts(snap);
   buildEarth(world, counts);
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
@@ -932,6 +1028,8 @@ async function main() {
   fillMix(snap);
   fillAsn(snap);
   fillAsia(snap);
+  buildBlocked(); // 要在 buildEarth 之後，ANCHOR 那時才有各國位置
+  fillOoni(snap);
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
