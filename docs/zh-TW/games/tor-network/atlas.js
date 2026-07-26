@@ -254,19 +254,52 @@ function inRings(rings, lon, lat) {
 // 原本在國界內隨機取樣，結果是加拿大 203 台灑滿整片國土（連北極圈都有點），瑞典 513 台
 // 被細長國土拉成稀疏一條，看起來比只多 2.3 倍的荷蘭還少。點的疏密其實只是「面積 ÷ 台數」，
 // 跟地理毫無關係，Onionoo 也只給到國別。改成一國一團，團的大小才對得起數量。
-const CLUSTER_MIN_DEG = 0.30;  // 只有一台的國家也要看得到
-const CLUSTER_K = 0.040;       // 乘上 sqrt(台數)：面積正比於數量，團內密度各國一致。
+const CLUSTER_MIN_DEG = 0.26;  // 只有一台的國家也要看得到
+const CLUSTER_K = 0.032;       // 乘上 sqrt(台數)：面積正比於數量，團內密度各國一致。
 // 這組數字驗算過全部 2850 組國家對，只有荷比與德荷兩組會碰到（各超 0.5° 與 0.3°），
 // 一般混色下就是邊緣暈染，看得出是兩團，不會糊成一片。
 function clusterRadiusDeg(n) { return CLUSTER_MIN_DEG + CLUSTER_K * Math.sqrt(n); }
 
+// 荷比盧德這種鄰國，團心本來就只隔 1.6 度，團會直接疊在一起。用排斥迭代把碰到的
+// 輕輕推開，位移都在幾十公里等級。位置本來就只代表國別，推開不會失去任何資訊。
+function relaxClusters(counts) {
+  const items = [];
+  for (const [cc, n] of counts) {
+    const a = ANCHOR.get(cc);
+    if (!a || NO_PLACE.has(cc)) continue;
+    a.cl = [a.ll[0], a.ll[1]];
+    items.push({ a, r: clusterRadiusDeg(n) });
+  }
+  const GAP = 0.42; // 團之間至少留這麼多度，光看得出是分開的兩團
+  for (let iter = 0; iter < 120; iter++) {
+    let moved = false;
+    for (let i = 0; i < items.length; i++) {
+      for (let j = i + 1; j < items.length; j++) {
+        const A = items[i].a.cl, B = items[j].a.cl;
+        const cl = Math.max(0.15, Math.cos((A[0] + B[0]) / 2 * Math.PI / 180));
+        const dy = B[0] - A[0], dx = (B[1] - A[1]) * cl;
+        const d = Math.hypot(dx, dy) || 1e-6;
+        const need = items[i].r + items[j].r + GAP;
+        if (d >= need) continue;
+        moved = true;
+        const push = (need - d) * 0.25;
+        const wa = items[j].r / (items[i].r + items[j].r), wb = 1 - wa; // 大團少讓，小團多讓
+        A[0] -= dy / d * push * wa; A[1] -= dx / d * push * wa / cl;
+        B[0] += dy / d * push * wb; B[1] += dx / d * push * wb / cl;
+      }
+    }
+    if (!moved) break;
+  }
+}
+
 function sampleCluster(a, n, out) {
+  const c = a.cl || a.ll;
   const rad = clusterRadiusDeg(n);
   const ang = Math.random() * Math.PI * 2;
   const rr = Math.sqrt(Math.random()) * rad; // 開根號才會在圓內均勻分布，不會往中心擠
-  const lonScale = 1 / Math.max(0.15, Math.cos(a.ll[0] * Math.PI / 180)); // 高緯度的經度要放大補償
-  out[0] = a.ll[0] + rr * Math.sin(ang);
-  out[1] = a.ll[1] + rr * Math.cos(ang) * lonScale;
+  const lonScale = 1 / Math.max(0.15, Math.cos(c[0] * Math.PI / 180)); // 高緯度的經度要放大補償
+  out[0] = c[0] + rr * Math.sin(ang);
+  out[1] = c[1] + rr * Math.cos(ang) * lonScale;
   return out;
 }
 
@@ -337,7 +370,8 @@ function buildLabels(snap) {
     el.innerHTML = `${cc.toUpperCase()}<i>${n.toLocaleString()}</i>`;
     el.dataset.cc = cc;
     box.appendChild(el);
-    labels.push({ cc, el, v: llToVec(a.ll[0], a.ll[1], R * 1.03, new THREE.Vector3()), w: 44, h: 15, on: false });
+    const c = a.cl || a.ll;
+    labels.push({ cc, el, v: llToVec(c[0], c[1], R * 1.03, new THREE.Vector3()), w: 44, h: 15, on: false });
   });
   // 排在前面的先卡位，白名單移到最前面才不會被大國擠掉
   labels.sort((x, y) => (LABEL_ALWAYS.includes(y.cc) ? 1 : 0) - (LABEL_ALWAYS.includes(x.cc) ? 1 : 0));
@@ -582,7 +616,13 @@ async function animate() {
   globe.rotation.x = view.rx;
   camera.position.z += (targetDist() - camera.position.z) * 0.12;
   camera.lookAt(0, 0, 0);
-  if (pointsIn < 1) { pointsIn = Math.min(1, pointsIn + dt / 1.2); for (const m of pointMats) m.opacity = pointsIn; } // 點層淡入
+  if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
+  // 遠看時歐洲十幾個國家團擠在很小的螢幕範圍內，怎麼排都糊。讓點隨距離退成底噪，
+  // 陸地色階與國家標籤接手講「集中在哪」，放大之後再把個別中繼交出來。
+  // 只動透明度。instance 的位置烘在矩陣裡，改 mesh.scale 會把位置一起縮，點會縮進地球中心不見。
+  const lod = clamp((ZOOM_MAX - view.zoom) / (ZOOM_MAX - 0.7), 0, 1);
+  const wantOp = pointsIn * (0.5 + 0.5 * lod);
+  for (const m of pointMats) m.opacity = wantOp;
   updateLabels();
   try {
     await post.renderAsync();
@@ -602,6 +642,7 @@ async function main() {
   const counts = countryCounts(snap);
   buildEarth(world, counts);
   if (coast) buildCoastline(coast);
+  relaxClusters(counts);
   const drawn = buildRelays(snap, counts);
   buildLabels(snap);
   fillPanel(snap, drawn);
