@@ -765,7 +765,8 @@ function showCountry(cc) {
     + `</div>`
     + hostingLine(cc, t)
     + versionLine(cc)
-    + ooniLine(cc);
+    + ooniLine(cc)
+    + radarLine(cc);
   card.hidden = false;
   stopSpin();
 }
@@ -801,6 +802,31 @@ function ooniLine(cc) {
     + `${m.toLocaleString()} 次 Tor 連線測試，<b>${val}%</b> 沒有照預期完成`
     + (blocked ? `<br><span class="dim">高到這個程度通常表示連線被擋，OONI 的異常也可能來自網路不穩。</span>` : '')
     + `</div>`;
+}
+
+// 往外連到 Cloudflare Radar。只給連結，不取它的資料：Radar 的 API 要 Cloudflare 帳號的
+// token，靜態站得把金鑰帶進產快照的流程，而連結不構成任何重製，也就沒有授權要處理。
+//
+// URL 格式是 radar.cloudflare.com/{國碼} 與 /as{編號}。開發環境的 DNS 擋掉了這個網域，
+// 沒辦法在這裡自動驗證，格式集中在這兩個函式，真的變了就改這裡。
+//
+// 這是講隱私的站，點出去等於告訴 Cloudflare 有人在看哪一國、哪一家業者，所以連結
+// 一律帶 noreferrer，也不自動預先載入。
+const RADAR = 'https://radar.cloudflare.com/';
+const extLink = (href, text, title) =>
+  `<a href="${href}" target="_blank" rel="noopener noreferrer external"${title ? ` title="${title}"` : ''}>${text} ↗</a>`;
+
+function radarLine(cc) {
+  const asn = SNAP_ASN && SNAP_ASN[cc];
+  const top = asn && asn.t && asn.t[0];
+  // Onionoo 給的是 AS12345，Radar 的網址要小寫的 as12345
+  const asLink = top && /^AS\d+$/i.test(top[0])
+    ? extLink(RADAR + top[0].toLowerCase(), top[1] || top[0], '在 Cloudflare Radar 看這家業者的網路狀況')
+    : '';
+  return `<div class="cc-sub2 dim ext">延伸查詢：`
+    + extLink(RADAR + cc, `${cc.toUpperCase()} 的網路狀況`, '在 Cloudflare Radar 看這一國的流量與中斷紀錄')
+    + (asLink ? `、${asLink}` : '')
+    + `<br><span class="tiny">連往 Cloudflare Radar，離開本站。</span></div>`;
 }
 
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
