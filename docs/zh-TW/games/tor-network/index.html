@@ -118,8 +118,8 @@
     #stat-users .n, #stat-shutdown .n { width: 74px; }
     .chip2 { display: inline-block; padding: 0 6px; margin: 0 0 0 4px; border-radius: 9px;
              background: rgba(120,170,210,.13); color: #b9d3e6; font-size: 10.5px; }
-    /* 卡片一長就難讀，能一行講完的就不要換行。放不下時才讓瀏覽器自己折 */
-    .cc-sub2.bridges { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    /* 同一類資訊寫成一句話，放不下時讓瀏覽器自己折，不要拆成兩段各佔一行 */
+    .cc-sub2 .tiny, .cc-sub2.tiny { font-size: 10px; color: #6b8296; line-height: 1.5; }
     #metric-sw { flex-wrap: wrap; }
     #metric-sw button { flex: 1 1 44%; }
     /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
