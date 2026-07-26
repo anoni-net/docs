@@ -42,6 +42,9 @@ const MODES = {
   both:   { lbl: 'guard＋exit', lo: '#2a1220', hi: '#ff9ec7' },
   middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
   conc:   { lbl: '單一業者集中度', lo: '#2b1030', hi: '#c47ad8' }, // 紫，跟四個角色色都拉開
+  // 使用者估計是需求端，跟其他模式的供給端不是同一件事，色相挑剩下沒人用的黃。
+  // 這個模式下中繼點照樣全部顯示，「陸地亮度是用的人、點是架的機器」那個落差就是重點。
+  users:  { lbl: '使用者估計',   lo: '#2a2410', hi: '#e8d24a' },
 };
 const CONC_MIN = 10; // 台數太少的國家，集中度沒有意義（一台就是 100%）
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
@@ -712,6 +715,10 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 // OONI 的觀測。這份資料的授權跟 Onionoo 那份不同（CC BY-NC-SA 4.0），所以分開存也分開讀，
 // 畫面上的 credit 要各自標註。細節看 tools/gen_ooni_snapshot.py。
 let OONI = null;
+// Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
+// 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
+let TORUSERS = null, SHUTDOWNS = null;
+let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
   SNAP_VER = snap.version || null;
@@ -763,9 +770,12 @@ function showCountry(cc) {
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
+    + usersLine(cc, t)
     + hostingLine(cc, t)
     + versionLine(cc)
     + ooniLine(cc)
+    + bridgeLine(cc)
+    + shutdownLine(cc)
     + radarLine(cc);
   card.hidden = false;
   stopSpin();
@@ -804,6 +814,55 @@ function ooniLine(cc) {
     + `</div>`;
 }
 
+// 這一國有多少人在用。中繼數是供給端，這是需求端，兩個數字擺在一起才看得出落差。
+// 措辭要留住「估計」兩個字，Tor Metrics 是用中繼收到的目錄請求反推的，信心區間很寬
+// （台灣 10,585 人的區間是 3,722 到 21,578），寫成確定數字是騙人的。
+function usersLine(cc, relays) {
+  if (!TORUSERS || !TORUSERS.users) return '';
+  const u = TORUSERS.users[cc];
+  if (!u) return '';
+  const [cur, avg] = u;
+  // 每台中繼「服務」多少使用者。這不是真的負載，只是兩個數字的比值，用來凸顯落差。
+  const per = relays ? Math.round(cur / relays) : 0;
+  return `<div class="cc-sub2">估計 <b>${cur.toLocaleString()}</b> 人在用（${TORUSERS.days} 天平均 ${avg.toLocaleString()}）`
+    + (per ? `<br><span class="dim">這一國每有 1 台中繼，就有約 ${per.toLocaleString()} 人在用</span>` : '')
+    + `</div>`;
+}
+
+// 這一國的人用什麼方式繞過封鎖。跟 ooni.json 那層是一組的：OONI 說連不上，這裡說改用什麼。
+const PT_NAME = { '<OR>': '一般橋接', obfs4: 'obfs4', obfs3: 'obfs3', snowflake: 'snowflake', webtunnel: 'webtunnel', meek: 'meek', conjure: 'conjure' };
+function bridgeLine(cc) {
+  if (!TORUSERS || !TORUSERS.bridge) return '';
+  const b = TORUSERS.bridge[cc];
+  if (!b || !b.length) return '';
+  const list = b.map(([t, n]) => `<span class="chip2">${PT_NAME[t] || t} ${n.toLocaleString()}</span>`).join('');
+  return `<div class="cc-sub2">透過橋接繞道<div class="cc-roles">${list}</div></div>`;
+}
+
+// 這一國被整個關掉過幾次，以及理由。
+// Conflict 與 Communal violence 未必是政府主動決策（可能是戰事打壞基礎設施），
+// 資料裡分開算過，這裡只把「資訊管制類」的件數單獨講出來，不把全部件數講成政府封鎖。
+const CAUSE_ZH = {
+  'Conflict': '武裝衝突', 'Protests': '抗議活動', 'Information control': '資訊管制',
+  'Communal violence': '族群衝突', 'Exam cheating': '防止考試作弊',
+  'Visits by government officials': '官員視察', 'Elections': '選舉',
+  'Other': '其他', 'Unknown': '不明',
+};
+function shutdownLine(cc) {
+  if (!SHUTDOWNS || !SHUTDOWNS.cc) return '';
+  const s = SHUTDOWNS.cc[cc];
+  if (!s) return '';
+  const [n, ctl, year, causes] = s;
+  const top = Object.entries(causes || {}).slice(0, 3)
+    .map(([k, v]) => `${CAUSE_ZH[k] || k} ${v}`).join('、');
+  const [y0] = SHUTDOWNS.years || [];
+  return `<div class="cc-sub2 warn">${y0 ? y0 + ' 年以來' : ''}有 <b>${n}</b> 次網路關閉紀錄`
+    + (year ? `，最近一次在 ${year} 年` : '')
+    + (top ? `<br><span class="dim">主要成因：${top}</span>` : '')
+    + (ctl ? `<br><span class="dim">其中 ${ctl} 次屬於資訊管制、抗議或選舉期間的管控</span>` : '')
+    + `</div>`;
+}
+
 // 往外連到 Cloudflare Radar。只給連結，不取它的資料：Radar 的 API 要 Cloudflare 帳號的
 // token，靜態站得把金鑰帶進產快照的流程，而連結不構成任何重製，也就沒有授權要處理。
 //
@@ -838,6 +897,7 @@ function modeRamp(mode) { return MODES[(mode === 'all-weight' || mode === 'all-c
 function modeValues(mode) {
   if (mode === 'all-weight') return CC_STATS.w;
   if (mode === 'conc') return CC_STATS.conc;
+  if (mode === 'users') return USERS_MAP || new Map();
   const role = MODE_ROLE[mode];
   const m = new Map();
   for (const [cc, r] of CC_STATS.mix) {
@@ -947,6 +1007,59 @@ function fillOoni(snap) {
     + `對照左邊的中繼數會看到，連不上 Tor 的地方，也幾乎沒有人在那裡跑中繼。`;
 }
 
+// 使用者最多的國家，對照該國的中繼數。跟 fillOoni 那塊相反：那邊講「連不上的地方」，
+// 這邊講「用的人最多的地方」，兩塊合起來才是完整的需求面。
+function fillUsers(snap) {
+  const box = $('stat-users');
+  if (!box || !TORUSERS || !TORUSERS.users) return;
+  const cnt = new Map(snap.countries || []);
+  const rows = Object.entries(TORUSERS.users).sort((a, b) => b[1][0] - a[1][0]).slice(0, 8);
+  if (!rows.length) return;
+  const max = rows[0][1][0];
+  box.innerHTML = rows.map(([cc, [cur]]) => {
+    const hi = cc === 'tw' ? ' hi' : '';
+    return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
+      + `<span class="tot">${cur.toLocaleString()}</span>`
+      + `<span class="mix-bar"><span style="width:${(cur / max * 100).toFixed(1)}%;background:${MODES.users.hi}"></span></span>`
+      + `<span class="n">中繼 ${(cnt.get(cc) || 0).toLocaleString()}</span></div>`;
+  }).join('');
+  const note = $('users-note');
+  if (!note) return;
+  const tw = TORUSERS.users.tw;
+  note.innerHTML = `全球估計每天約 ${Math.round(TORUSERS.usersAll / 10000) / 100} 萬人在用，資料是 ${TORUSERS.date}。`
+    + (tw ? `台灣估計 ${tw[0].toLocaleString()} 人，中繼 ${(cnt.get('tw') || 0)} 台。` : '')
+    + `用的人在哪跟中繼架在哪是兩件事，中繼多的國家多半是機房便宜、法規友善，`
+    + `跟那裡有多少人需要 Tor 沒有直接關係。`
+    + `這些是用中繼收到的目錄請求反推的估計值，信心區間相當寬，看趨勢比看絕對數字可靠。`;
+}
+
+// 被整個關掉過的地方。這份資料的成因是人工查證後標註的，比測量類的異常率乾淨，
+// 所以敢直接講「發生過什麼」。但件數多寡也反映了有沒有人在盯，沒人盯的地方不代表沒發生。
+function fillShutdowns() {
+  const box = $('stat-shutdown');
+  if (!box || !SHUTDOWNS || !SHUTDOWNS.cc) return;
+  const rows = Object.entries(SHUTDOWNS.cc).sort((a, b) => b[1][0] - a[1][0]).slice(0, 7);
+  if (!rows.length) return;
+  const max = rows[0][1][0];
+  box.innerHTML = rows.map(([cc, [n, , year]]) => {
+    return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
+      + `<span class="tot">${n} 次</span>`
+      + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#e0663a"></span></span>`
+      + `<span class="n">最近 ${year || '—'}</span></div>`;
+  }).join('');
+  const note = $('shutdown-note');
+  if (!note) return;
+  const [y0, y1] = SHUTDOWNS.years || [];
+  const c = SHUTDOWNS.causesAll || {};
+  const pick = (k) => c[k] || 0;
+  note.innerHTML = `${y0} 到 ${y1} 年間全球 ${SHUTDOWNS.total} 筆紀錄，由 Access Now 的 #KeepItOn 聯盟人工查證。`
+    + `成因以武裝衝突 ${pick('Conflict')} 次最多，其次是抗議活動 ${pick('Protests')} 次與資訊管制 ${pick('Information control')} 次。`
+    + `也有為了防止考試作弊 ${pick('Exam cheating')} 次與官員視察期間 ${pick('Visits by government officials')} 次而關閉的紀錄。`
+    + `武裝衝突與族群衝突未必是政府主動下令，戰事打壞基礎設施也算在內，`
+    + `所以國家卡片另外標出屬於資訊管制類的件數。`
+    + `另外印度的紀錄多半是單一邦或單一地區的斷網，跟上面那些全國性受阻的情況性質不同。`;
+}
+
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
 function countryCounts(snap) {
   const m = new Map();
@@ -1048,14 +1161,23 @@ async function animate() {
 async function main() {
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns] = await Promise.all([
     getJSON('./snapshot.json', { cache: 'no-cache' }), // 快照由人工重新產生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
     getJSON('./cables.json').catch(() => null),     // 海底電纜可選
     getJSON('./ooni.json').catch(() => null),       // OONI 觀測可選
+    getJSON('./torusers.json').catch(() => null),   // 使用者面可選
+    getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
   ]);
   OONI = ooni;
+  TORUSERS = torusers;
+  SHUTDOWNS = shutdowns;
+  if (TORUSERS && TORUSERS.users) {
+    USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
+    const b = $('btn-users');
+    if (b) b.hidden = false; // 沒抓到資料就不要露出一個按了會空白的按鈕
+  }
   const counts = countryCounts(snap);
   buildEarth(world, counts);
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
@@ -1069,7 +1191,9 @@ async function main() {
   fillAsn(snap);
   fillAsia(snap);
   buildBlocked(world);
+  fillUsers(snap);
   fillOoni(snap);
+  fillShutdowns();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
