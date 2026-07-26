@@ -43,7 +43,7 @@ const MODES = {
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
 // 個別中繼點。國別資料撐不出空間分布，歐洲十幾國的團怎麼排都會擠在一起，
 // 所以預設只畫國家色塊。想把點畫回來就改成 true。
-const SHOW_DOTS = false;
+const SHOW_DOTS = true;
 
 // ISO2 → [緯度, 經度] 手調的國家定位。優先於 countries.json 算出來的質心，
 // 因為 Natural Earth 110m 沒有新加坡、香港這種小地方，挪威一類的質心也會飄到鄰國。
@@ -82,6 +82,7 @@ function fitDist() {
 function targetDist() { return fitDist() * view.zoom; }
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
+const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
 let pointsIn = 0;
 const ANCHOR = new Map(); // ISO2 → { ll: [緯度, 經度], jlat, jlon, rings, bb }，沒有國界資料時才用 ll 加 jlat/jlon 抖動
 
@@ -107,6 +108,18 @@ async function getJSON(url, opt) {
   return r.json();
 }
 
+// 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
+// WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
+async function webgpuBlocker() {
+  if (new URLSearchParams(location.search).get('backend') === 'webgl') return '網址帶了 backend=webgl';
+  if (!window.isSecureContext) return '頁面不是 https 或 localhost';
+  if (!navigator.gpu) return '這個瀏覽器沒有 WebGPU';
+  try {
+    if (!(await navigator.gpu.requestAdapter())) return '系統沒有給出可用的 GPU';
+  } catch (e) { return 'WebGPU 被擋下'; }
+  return '';
+}
+
 async function initRenderer() {
   const forceWebGL = new URLSearchParams(location.search).get('backend') === 'webgl';
   renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
@@ -117,8 +130,9 @@ async function initRenderer() {
   document.body.appendChild(renderer.domElement);
   try { await renderer.init(); } catch (e) { console.error(e); fatal('這個瀏覽器無法啟用 WebGPU 或 WebGL2，地球儀畫不出來。'); return false; }
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
-  $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
   $('backend').className = isGPU ? 'gpu' : 'gl';
+  $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
+  if (!isGPU) webgpuBlocker().then((why) => { if (why) $('backend').textContent = `WebGL2（fallback：${why}）`; });
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
@@ -306,6 +320,22 @@ function relaxClusters(counts) {
   }
 }
 
+// 在國土內隨機取一點。Natural Earth 沒有的小地方（新加坡、香港）退回錨點加小抖動。
+// 色塊已經把「多少台」講清楚了，點在這裡負責的是質感與存在感，散在國土上比擠成一團自然。
+function sampleIn(a, out) {
+  if (a.rings) {
+    for (let t = 0; t < 24; t++) {
+      const lon = a.bb[0] + Math.random() * a.bb[2];
+      const lat = a.bb[1] + Math.random() * a.bb[3];
+      if (inRings(a.rings, lon, lat)) { out[0] = lat; out[1] = lon; return out; }
+    }
+  }
+  out[0] = a.ll[0] + (Math.random() + Math.random() - 1) * (a.jlat || 1);
+  out[1] = a.ll[1] + (Math.random() + Math.random() - 1) * (a.jlon || 1.4);
+  return out;
+}
+
+// 群聚版留著備用：把散布半徑改成照台數算，一國一團。
 function sampleCluster(a, n, out) {
   const c = a.cl || a.ll;
   const rad = clusterRadiusDeg(n);
@@ -336,38 +366,46 @@ function buildRelays(snap, counts) {
     for (const [cc] of snap.relays) if (ANCHOR.has(cc) && !NO_PLACE.has(cc)) n++;
     return n;
   }
-  const list = [];
+  const groups = [[], [], [], []]; // 依角色分開，切到單一角色時只留那一組
   const ll = [0, 0];
+  let total = 0;
   for (let i = 0; i < snap.relays.length; i++) {
     const [country, role, w] = snap.relays[i];
     const a = ANCHOR.get(country);
     if (!a || NO_PLACE.has(country)) continue;
-    sampleCluster(a, counts.get(country) || 1, ll);
+    sampleIn(a, ll);
     llToVec(ll[0], ll[1], R * 1.012, tmp);
-    list.push({ x: tmp.x, y: tmp.y, z: tmp.z, role, s: relaySize(w) });
+    groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w) });
+    total++;
   }
-  if (!list.length) return 0;
+  if (!total) return 0;
 
   const geo = new THREE.OctahedronGeometry(1, 0); // 8 個三角形，小尺寸下配上光暈就是一顆圓點
   const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: true });
-  mat.opacity = 1; // 載入時從 0 淡入
+  mat.opacity = REDUCED ? 1 : 0; // 載入時從 0 淡入
   pointMats.push(mat);
-  const mesh = new THREE.InstancedMesh(geo, mat, list.length);
-  mesh.frustumCulled = false;
   const m4 = new THREE.Matrix4();
   const c = new THREE.Color();
-  for (let i = 0; i < list.length; i++) {
-    const n = list[i];
-    m4.makeScale(n.s, n.s, n.s);
-    m4.setPosition(n.x, n.y, n.z);
-    mesh.setMatrixAt(i, m4);
-    c.set(ROLE_COL[n.role]).multiplyScalar(1.15); // 壓低單點增益，密集區疊起來才不會整片衝成白
-    mesh.setColorAt(i, c);
+  for (let role = 0; role < 4; role++) {
+    const list = groups[role];
+    if (!list.length) continue;
+    const mesh = new THREE.InstancedMesh(geo, mat, list.length);
+    mesh.frustumCulled = false;
+    mesh.userData.role = role;
+    for (let i = 0; i < list.length; i++) {
+      const n = list[i];
+      m4.makeScale(n.s, n.s, n.s);
+      m4.setPosition(n.x, n.y, n.z);
+      mesh.setMatrixAt(i, m4);
+      c.set(ROLE_COL[role]).multiplyScalar(1.15);
+      mesh.setColorAt(i, c);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+    globe.add(mesh);
+    relayMeshes.push(mesh);
   }
-  mesh.instanceMatrix.needsUpdate = true;
-  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-  globe.add(mesh);
-  return list.length;
+  return total;
 }
 
 // ---- 國家標籤：每個有中繼的國家都給一個，轉到背面淡出。
@@ -569,6 +607,8 @@ function setMode(mode) {
   measureLabels();
   const name = $('metric-name');
   if (name) name.textContent = modeLabel(mode);
+  const role = MODE_ROLE[mode];
+  for (const m of relayMeshes) m.visible = role === undefined || m.userData.role === role;
   const r = modeRamp(mode);
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
