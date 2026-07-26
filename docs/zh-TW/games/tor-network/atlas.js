@@ -583,12 +583,6 @@ function modeValues(mode) {
   return m;
 }
 
-function modeLabel(mode) {
-  if (mode === 'all-count') return '該國中繼數';
-  if (mode === 'all-weight') return '該國共識權重';
-  return `該國的 ${MODES[mode].lbl} 數`;
-}
-
 function setMode(mode) {
   if (!CC_STATS || !GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
   MODE = mode;
@@ -605,15 +599,15 @@ function setMode(mode) {
     l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
   }
   measureLabels();
-  const name = $('metric-name');
-  if (name) name.textContent = modeLabel(mode);
   const role = MODE_ROLE[mode];
   for (const m of relayMeshes) m.visible = role === undefined || m.userData.role === role;
   const r = modeRamp(mode);
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
   for (const el of document.querySelectorAll('[data-mode]')) {
-    el.classList.toggle('on', el.dataset.mode === mode);
+    const on = el.dataset.mode === mode;
+    el.classList.toggle('on', on);
+    if (MODE_ROLE[el.dataset.mode] !== undefined) el.title = on ? '再點一次看全部' : '只看這個角色';
   }
 }
 
@@ -755,10 +749,11 @@ async function main() {
     if (el && el.dataset.cc) { e.preventDefault(); showCountry(el.dataset.cc); }
   });
   for (const el of document.querySelectorAll('[data-mode]')) {
-    el.addEventListener('click', () => setMode(el.dataset.mode));
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMode(el.dataset.mode); }
-    });
+    const isRole = MODE_ROLE[el.dataset.mode] !== undefined;
+    // 角色 chip 再點一次就取消，回到看全部。沒有這個的話進得去出不來。
+    const go = () => setMode(isRole && el.dataset.mode === MODE ? 'all-count' : el.dataset.mode);
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
   }
   $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });

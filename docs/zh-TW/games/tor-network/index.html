@@ -92,6 +92,7 @@
     .chip.act { cursor: pointer; border: 1px solid transparent; }
     .chip.act:hover { background: rgba(255,255,255,.12); }
     .chip.act.on { background: rgba(0,174,255,.18); border-color: rgba(0,174,255,.55); color: #fff; }
+    .chip.act.on::after { content: '×'; margin-left: 4px; font-weight: 800; color: var(--cyan); }
     .chip.act:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     .lb[data-off="1"] { display: none; }
     #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
@@ -119,10 +120,10 @@
       <div class="body">
         <div id="big"><span id="stat-total">–</span> <small>台運作中的中繼</small></div>
         <div id="pub">資料快照：<span id="stat-pub">…</span></div>
-        <div class="lbl">角色分布（點一下只看這個角色）</div>
+        <div class="lbl">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
-        <div class="lbl">陸地亮度：<span id="metric-name">該國中繼數</span>（非線性，中段差距已放大）</div>
-        <div id="metric-sw"><button data-mode="all-count" class="on">依台數</button><button data-mode="all-weight">依共識權重</button></div>
+        <div class="lbl">陸地亮度：數量多寡（非線性，中段差距已放大）</div>
+        <div id="metric-sw"><button data-mode="all-count" class="on">全部（台數）</button><button data-mode="all-weight">全部（權重）</button></div>
         <div id="ramp"><span>無</span><i></i><span>最多</span></div>
         <div class="lbl">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
