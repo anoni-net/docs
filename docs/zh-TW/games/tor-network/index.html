@@ -46,7 +46,7 @@
     .lb.on { pointer-events: auto; cursor: pointer; }
     .lb.on:hover, .lb.on:focus-visible { color: #fff; text-shadow: 0 0 6px var(--cyan), 0 0 12px #04060d; outline: none; }
     /* 點國家看細節。球面上讀不出來的數字，點一下就給 */
-    #cc-card { left: 50%; bottom: 74px; transform: translateX(-50%); z-index: 15; width: min(92vw, 330px); padding: 13px 16px; }
+    #cc-card { left: 50%; bottom: 74px; transform: translateX(-50%); z-index: 15; width: min(94vw, 470px); padding: 13px 18px; }
     #cc-card[hidden] { display: none; }
     #cc-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
     #cc-code { font-size: 19px; font-weight: 800; letter-spacing: .5px; }
@@ -56,7 +56,9 @@
     #cc-body b { color: var(--ink); font-weight: 700; }
     #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
     #cc-bar span { display: block; height: 100%; }
-    .cc-roles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .cc-roles { display: flex; flex-wrap: nowrap; gap: 5px; margin-top: 8px; }
+    .cc-roles .chip { white-space: nowrap; }
+    @media (max-width: 560px) { .cc-roles { flex-wrap: wrap; } }
     .lb { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .25s; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #d7ecff; white-space: nowrap; text-shadow: 0 0 5px #04060d, 0 0 11px #04060d, 0 1px 2px #04060d; }
     .lb i { font-style: normal; font-weight: 700; color: #8fb0c8; margin-left: 5px; }
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
