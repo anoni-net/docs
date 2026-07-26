@@ -286,7 +286,9 @@ function buildCables(data) {
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.3, depthWrite: false });
+  // 這一層是背景，主角是中繼點與陸地亮度。北海、地中海一帶疊了幾十條線，透明度再高一點
+  // 就會連成一片蓋過等值色，0.3 已經看得出在跟 choropleth 搶注意力。
+  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.22, depthWrite: false });
   globe.add(new THREE.LineSegments(g, m));
 }
 
@@ -363,8 +365,11 @@ function buildTrunks() {
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-  // 比實測線再淡一階。示意的東西畫淡一點，看得到走向又不會被當成真的路由。
-  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.22, depthWrite: false });
+  // 這個值跟實測線那層只差 0.02，看起來像可以合併，實際上不行，兩層的密度差很多。
+  // 實測線集中在北海、地中海那種疊了幾十條的地方，走廊線在太平洋往往是方圓幾千公里
+  // 只有孤零零一條。同樣的 alpha 疊起來的視覺重量差一個量級，稀疏那邊要拉高才看得見。
+  // 想調的話兩個數字要分開試，統一成同一個值會有一邊壞掉。
+  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.20, depthWrite: false });
   globe.add(new THREE.LineSegments(g, m));
 }
 
