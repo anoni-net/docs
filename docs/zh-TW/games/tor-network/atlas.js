@@ -261,12 +261,27 @@ function buildCables(data) {
   if (!lines.length) return;
   const pos = [];
   const v = new THREE.Vector3();
+  // 兩點之間畫直線，跨得遠就會從地球內部穿過去，中段被球體擋住看起來就是斷掉。
+  // 資料裡最長的一段有 4600 公里，所以超過這個角距離就沿著經緯度補點貼回球面。
+  const MAX_STEP_DEG = 1.5;
   for (const ln of lines) {
     for (let i = 0; i + 3 < ln.length; i += 2) {
-      llToVec(ln[i + 1], ln[i], R * 1.003, v);
-      pos.push(v.x, v.y, v.z);
-      llToVec(ln[i + 3], ln[i + 2], R * 1.003, v);
-      pos.push(v.x, v.y, v.z);
+      const lon1 = ln[i], lat1 = ln[i + 1], lat2 = ln[i + 3];
+      let dlon = ln[i + 2] - lon1;
+      if (dlon > 180) dlon -= 360; else if (dlon < -180) dlon += 360; // 跨換日線走短的那邊
+      const dlat = lat2 - lat1;
+      const cos = Math.cos((lat1 + lat2) / 2 * Math.PI / 180);
+      const steps = Math.max(1, Math.ceil(Math.hypot(dlat, dlon * cos) / MAX_STEP_DEG));
+      let plat = lat1, plon = lon1;
+      for (let k = 1; k <= steps; k++) {
+        const t = k / steps;
+        const lat = lat1 + dlat * t, lon = lon1 + dlon * t;
+        llToVec(plat, plon, R * 1.003, v);
+        pos.push(v.x, v.y, v.z);
+        llToVec(lat, lon, R * 1.003, v);
+        pos.push(v.x, v.y, v.z);
+        plat = lat; plon = lon;
+      }
     }
   }
   const g = new THREE.BufferGeometry();

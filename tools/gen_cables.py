@@ -24,7 +24,7 @@ UA = "anoni.net-globe/1.0 (docs.anoni.net; submarine cable basemap)"
 LON_STEP = 30          # 每塊經度寬度，太大會逾時
 PAUSE = 8              # 每次查詢之間的間隔秒數，對公共服務的基本禮貌
 RETRY = 3
-TOLERANCE = 0.05       # 簡化容差（度）。約 5 公里，地球儀上看不出差別
+TOLERANCE = 0.015      # 簡化容差（度）。0.05 會把 63% 的線砍成兩點直線，形狀整個沒了
 MIN_POINTS = 2
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "cables.json")
