@@ -115,7 +115,10 @@ let lastDotK = 1;
 //
 // 靠 InstancedMesh.count 只畫前幾個 instance，成本是零，不必重建幾何。前提是 list
 // 的順序要先打散：relays 是照國別排的，直接取前 N 個會變成「只顯示排在前面的國家」。
-const SAMPLE_MIN = 0.2;  // 最遠時畫五分之一
+const SAMPLE_MIN = 0.2;   // 最遠時畫五分之一
+// 比例不是照 lod 線性長，那樣預設距離會落在六成五。1.75 這個指數讓預設剛好是一半，
+// 兩端不變（最遠仍是 SAMPLE_MIN，zoom 0.7 以內仍是全部）。改預設比例就調這個數字。
+const SAMPLE_EXP = 1.75;
 let lastCountF = -1;
 const ANCHOR = new Map(); // ISO2 → { ll: [緯度, 經度], jlat, jlon, rings, bb }，沒有國界資料時才用 ll 加 jlat/jlon 抖動
 
@@ -473,7 +476,11 @@ function buildBlocked(world) {
   const list = (OONI && OONI.blocked) || [];
   if (!list.length || !world) return;
   const want = new Set(list);
-  const pos = ringSegments(world, (c) => !!c.k && want.has(c.k), R * 1.014);
+  // 貼著地面走。早先抬到 1.014 是想避開中繼點的遮擋，代價是線浮起來跟地形錯開，
+  // 掠射角下會整條跑到地球輪廓外面。而且這幾國本來就幾乎沒有中繼（PK、EG、MM 是 0 台，
+  // CN 1 台），沒有需要避開的東西，抬高純粹是白付視差的代價。
+  // 比國界那層（1.0036）高一點點，兩條線重疊時紅色蓋在上面。
+  const pos = ringSegments(world, (c) => !!c.k && want.has(c.k), R * 1.0045);
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
   const m = new THREE.LineBasicMaterial({ color: COL.blocked, transparent: true, opacity: 0.85, depthWrite: false });
@@ -1368,7 +1375,7 @@ async function animate() {
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
-  setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * lod); // 遠看抽樣，放大逐步補齊
+  setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
     await post.renderAsync();
