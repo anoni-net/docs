@@ -862,12 +862,12 @@ function showCountry(cc) {
     // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
     `佔全網 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，權重 <b>${pct(wShare)}%</b>（第 ${CC_STATS.rankW.get(cc)}）`
     + `，出口 <b>${Math.round(exitPct)}%</b>（全網 ${Math.round(CC_STATS.exitShare * 100)}%）`
+    + versionPart(cc)
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
     + usersLine(cc, t)
     + hostingLine(cc, t)
-    + versionLine(cc)
     + ooniLine(cc)
     + bridgeLine(cc)
     + shutdownLine(cc)
@@ -889,10 +889,12 @@ function hostingLine(cc, total) {
     + (rest ? `，其次 ${rest}` : '') + `，全國 ${a.n} 家</div>`;
 }
 
-function versionLine(cc) {
+// 跑官方建議版本的台數。這是維運品質，跟佔比、權重同屬「這一國中繼的數字」，
+// 短短一句自己佔一行太浪費，接在第一行結尾。分數本身已經看得出比例，不再附百分比。
+function versionPart(cc) {
   const v = SNAP_VER && SNAP_VER[cc];
   if (!v || !v[0]) return '';
-  return `<div class="cc-sub2 dim">官方建議版本 ${v[1]}/${v[0]}（${Math.round(v[1] / v[0] * 100)}%）</div>`;
+  return `，建議版本 <b>${v[1]}/${v[0]}</b>`;
 }
 // OONI 對這一國的觀測。措辭刻意停在「沒有照預期完成」，不寫成封鎖率。
 // anomaly 的成因包含審查、網路不穩與 ISP 故障，單看比率沒辦法分辨是哪一種，
