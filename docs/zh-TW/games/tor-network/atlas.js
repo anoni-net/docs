@@ -106,6 +106,17 @@ const dotGroups = [];
 const DOT_EXP = 0.85;   // 1 是完全補償螢幕大小。留點餘裕，放大時仍稍微變大，手感自然些
 const DOT_STEP = 0.02;  // 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣
 let lastDotK = 1;
+
+// 遠看時只畫一部分的點。
+//
+// 那個距離下歐洲十幾國的點疊在幾十個像素裡，全部畫出來就是一片糊掉的色塊，而且
+// 「哪一國多」這件事已經由陸地色階在講了，點在那裡只是質感。放大之後再逐步把其餘的
+// 交出來，一顆一顆看得清楚。
+//
+// 靠 InstancedMesh.count 只畫前幾個 instance，成本是零，不必重建幾何。前提是 list
+// 的順序要先打散：relays 是照國別排的，直接取前 N 個會變成「只顯示排在前面的國家」。
+const SAMPLE_MIN = 0.2;  // 最遠時畫五分之一
+let lastCountF = -1;
 const ANCHOR = new Map(); // ISO2 → { ll: [緯度, 經度], jlat, jlon, rings, bb }，沒有國界資料時才用 ll 加 jlat/jlon 抖動
 
 function llToVec(lat, lon, r, out) {
@@ -599,6 +610,16 @@ function buildRelays(snap, counts) {
     total++;
   }
   if (!total) return 0;
+  // 打散每一組的順序。遠看時只畫前面一段，順序照國別排的話會變成整個國家消失，
+  // 打散之後前面一段就是全球各地的均勻抽樣。用固定種子，每次載入的樣本一致。
+  let seed = 20260726;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  for (const list of groups) {
+    for (let i = list.length - 1; i > 0; i--) {
+      const j = (rnd() * (i + 1)) | 0;
+      const t = list[i]; list[i] = list[j]; list[j] = t;
+    }
+  }
 
   // 8 面的八面體在遠看時還過得去，放大之後就是一顆一顆的菱形方塊，稜線清清楚楚。
   // 細分一階變 32 面，配上光暈看起來就是圓的了。9,889 個 instance 共用一份幾何，
@@ -646,6 +667,16 @@ function rescaleDots(k) {
       g.mesh.setMatrixAt(i, m4);
     }
     g.mesh.instanceMatrix.needsUpdate = true;
+  }
+}
+
+// 依鏡頭距離決定畫幾個點。f 是比例，1 代表全部畫出來。
+function setDotCount(f) {
+  if (!dotGroups.length || Math.abs(f - lastCountF) < 0.01) return;
+  lastCountF = f;
+  for (const g of dotGroups) {
+    // 至少留一個，不然只有一兩台中繼的國家會在遠看時整個不見
+    g.mesh.count = Math.max(Math.min(g.list.length, 1), Math.ceil(g.list.length * f));
   }
 }
 
@@ -1223,6 +1254,7 @@ function applySnapshot(snap) {
   pointMats.length = 0;
   dotGroups.length = 0;
   lastDotK = 1;
+  lastCountF = -1;
   const box = $('labels');
   if (box) box.innerHTML = '';
   labels.length = 0;
@@ -1336,6 +1368,7 @@ async function animate() {
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * lod); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
     await post.renderAsync();
