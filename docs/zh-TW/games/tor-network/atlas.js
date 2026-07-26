@@ -4,7 +4,7 @@
 // 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
 import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
-         float, mix, hash, oscSine, time, instanceIndex } from 'three/tsl';
+         float, mix, hash, oscSine, uniform, instanceIndex } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 
 const $ = (id) => document.getElementById(id);
@@ -95,6 +95,9 @@ const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
 let pointsIn = 0;
+// 呼吸用的時鐘。TSL 有內建的 time node，但實測它在這個組合下不會前進（點各自停在
+// 自己的相位，畫面完全靜止），改用自己的 uniform 在 animate() 裡推，行為明確可控。
+const breathT = uniform(0);
 // 點的大小補償。放大時鏡頭靠近，同一顆點在螢幕上等比例變大，近看就糊成一片色塊。
 // 這裡反向縮小幾何，讓點在螢幕上的大小大致固定，放大的效果落在「點彼此拉開」而不是
 // 「每顆點變胖」，這樣才看得到個別的中繼。
@@ -628,16 +631,22 @@ function relaxClusters(counts) {
 
 // 在國土內隨機取一點。Natural Earth 沒有的小地方（新加坡、香港）退回錨點加小抖動。
 // 色塊已經把「多少台」講清楚了，點在這裡負責的是質感與存在感，散在國土上比擠成一團自然。
+// 點位取樣用的亂數。刻意不是 Math.random：每次重新整理都換一組位置的話，同一個國家的
+// 點會整片跳動，而且畫面完全無法比對（先前想量呼吸效果時，同一時間截兩次就有三成像素
+// 不同，全是這裡造成的）。固定種子之後每次載入都畫在一樣的位置。
+let dotSeed = 20260726;
+const dotRnd = () => (dotSeed = (dotSeed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+
 function sampleIn(a, out) {
   if (a.rings) {
     for (let t = 0; t < 24; t++) {
-      const lon = a.bb[0] + Math.random() * a.bb[2];
-      const lat = a.bb[1] + Math.random() * a.bb[3];
+      const lon = a.bb[0] + dotRnd() * a.bb[2];
+      const lat = a.bb[1] + dotRnd() * a.bb[3];
       if (inRings(a.rings, lon, lat)) { out[0] = lat; out[1] = lon; return out; }
     }
   }
-  out[0] = a.ll[0] + (Math.random() + Math.random() - 1) * (a.jlat || 1);
-  out[1] = a.ll[1] + (Math.random() + Math.random() - 1) * (a.jlon || 1.4);
+  out[0] = a.ll[0] + (dotRnd() + dotRnd() - 1) * (a.jlat || 1);
+  out[1] = a.ll[1] + (dotRnd() + dotRnd() - 1) * (a.jlon || 1.4);
   return out;
 }
 
@@ -645,8 +654,8 @@ function sampleIn(a, out) {
 function sampleCluster(a, n, out) {
   const c = a.cl || a.ll;
   const rad = clusterRadiusDeg(n);
-  const ang = Math.random() * Math.PI * 2;
-  const rr = Math.sqrt(Math.random()) * rad; // 開根號才會在圓內均勻分布，不會往中心擠
+  const ang = dotRnd() * Math.PI * 2;
+  const rr = Math.sqrt(dotRnd()) * rad; // 開根號才會在圓內均勻分布，不會往中心擠
   const lonScale = 1 / Math.max(0.15, Math.cos(c[0] * Math.PI / 180)); // 高緯度的經度要放大補償
   out[0] = c[0] + rr * Math.sin(ang);
   out[1] = c[1] + rr * Math.cos(ang) * lonScale;
@@ -687,11 +696,9 @@ function buildRelays(snap, counts) {
   if (!total) return 0;
   // 打散每一組的順序。遠看時只畫前面一段，順序照國別排的話會變成整個國家消失，
   // 打散之後前面一段就是全球各地的均勻抽樣。用固定種子，每次載入的樣本一致。
-  let seed = 20260726;
-  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
   for (const list of groups) {
     for (let i = list.length - 1; i > 0; i--) {
-      const j = (rnd() * (i + 1)) | 0;
+      const j = (dotRnd() * (i + 1)) | 0;
       const t = list[i]; list[i] = list[j]; list[j] = t;
     }
   }
@@ -712,9 +719,13 @@ function buildRelays(snap, counts) {
   // 已知不過曝的水準，等於用數學把 bloom 過曝的風險直接排除，不必賭實測。
   if (!REDUCED) {
     const seed = hash(instanceIndex);
-    const rate = float(0.10).add(seed.mul(0.08));   // 0.10 到 0.18 Hz，每顆點速率不同
-    const wave = oscSine(time.mul(rate).add(seed.mul(6.283)));
-    const amt = mix(float(0.78), float(1.0), wave);
+    // rate 是角速度不是頻率，週期等於 2π/rate。第一版寫 0.10 以為是 0.1 Hz，
+    // 實際上是 63 秒才一個循環，看起來就是完全不動。0.6 到 1.1 對應 6 到 10 秒。
+    const rate = float(0.6).add(seed.mul(0.5));
+    const wave = breathT.mul(rate).add(seed.mul(6.283)).sin().mul(0.5).add(0.5);
+    // 振幅開到 0.3。點只有幾個像素寬、相位又各自不同，振幅小於一半在畫面上等於沒做
+    // （第一版 0.78 到 1.0 完全看不出來）。上限仍鎖在 1.0，不會比現在更亮。
+    const amt = mix(float(0.3), float(1.0), wave);
     mat.colorNode = vec3(amt, amt, amt);
   }
   pointMats.push(mat);
@@ -1473,6 +1484,7 @@ async function animate() {
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  breathT.value += dt; // 中繼點呼吸的時鐘，REDUCED 時 colorNode 根本沒掛，推了也沒作用
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
