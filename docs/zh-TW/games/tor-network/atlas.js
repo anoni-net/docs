@@ -20,6 +20,7 @@ const COL = {
   coast: 0x6fc0ee, // 海岸線
   cable: 0x2f7fa8, // 海底電纜。壓得比海岸線還低，只是讓海面不要一片空白
   blocked: 0xff5a6e, // OONI 觀測到 Tor 連線大量失敗的國家。紅色系跟四個角色色都拉開
+  border: 0x4f88b4,  // 國界。壓在海岸線之下一階，讓海陸交界仍然是最清楚的那條線
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -228,7 +229,8 @@ function paintEarth(world, counts) {
       }
     }
     g.fill(path);
-    g.stroke(path);
+    // 國界不在這裡描了。貼圖只有 2048×1024，放大之後邊界是鋸齒，改用 buildBorders
+    // 畫成 3D 線段。這裡若同時描一次，兩條線會因為解析度不同而錯開。
     // 順手把國界留著，切換指標重畫發光層時不必再解析一次多邊形
     if (c.k) COUNTRY_PATH.set(c.k, path);
     if (!c.k) continue;
@@ -404,16 +406,13 @@ function buildTrunks() {
 // 這一層直接吃 countries.json 的國界，等於把那份資料的領土畫法照搬到畫面上。
 // 現用的 Natural Earth 110m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
 // 換底圖資料前請重新確認這件事。
-function buildBlocked(world) {
-  const list = (OONI && OONI.blocked) || [];
-  if (!list.length || !world) return;
-  const want = new Set(list);
+// 把國界多邊形轉成貼在球面上的線段。pick 決定要哪些國家，height 是離地高度。
+// 國界的相鄰點最遠有 9 度（俄羅斯北岸），直線連過去會從地球內部穿過，中段被球體
+// 擋住就是一段一段的斷線，跟海纜那層是同一個坑，所以超過門檻要沿經緯度補點貼回球面。
+function ringSegments(world, pick, height) {
   const pos = [];
   const v = new THREE.Vector3(), prev = new THREE.Vector3();
-  // 國界的相鄰點最遠有 9 度（俄羅斯北岸），直線連過去會從地球內部穿過，
-  // 中段被球體擋住就是一段一段的斷線，跟海纜那層是同一個坑。
   const MAX_STEP_DEG = 1.5;
-  const HEIGHT = R * 1.014;
   const edge = (lon1, lat1, lon2, lat2) => {
     let dlon = lon2 - lon1;
     if (dlon > 180) dlon -= 360; else if (dlon < -180) dlon += 360;
@@ -424,15 +423,15 @@ function buildBlocked(world) {
     for (let k = 1; k <= steps; k++) {
       const t = k / steps;
       const lat = lat1 + dlat * t, lon = lon1 + dlon * t;
-      llToVec(plat, plon, HEIGHT, prev);
+      llToVec(plat, plon, height, prev);
       pos.push(prev.x, prev.y, prev.z);
-      llToVec(lat, lon, HEIGHT, v);
+      llToVec(lat, lon, height, v);
       pos.push(v.x, v.y, v.z);
       plat = lat; plon = lon;
     }
   };
   for (const c of world.c) {
-    if (!c.k || !want.has(c.k)) continue;
+    if (!pick(c)) continue;
     for (const ring of c.p) {
       if (ring.length < 6) continue;   // 少於三個點圍不成形狀
       for (let i = 0; i + 3 < ring.length; i += 2) edge(ring[i], ring[i + 1], ring[i + 2], ring[i + 3]);
@@ -440,6 +439,30 @@ function buildBlocked(world) {
       edge(ring[ring.length - 2], ring[ring.length - 1], ring[0], ring[1]);
     }
   }
+  return pos;
+}
+
+// 國界。原本只描在 2048×1024 的貼圖上，赤道處一個像素就是二十公里，放大之後邊界糊成
+// 一片鋸齒。改成 3D 線段之後是向量的，放多大都還是一條線。
+// 代價是 17,000 個線段，比海岸線那層的 5,000 多，但一樣是單一 draw call。
+function buildBorders(world) {
+  if (!world) return;
+  // 高度壓在海岸線（1.004）之下。沿海國家的國界跟海岸線本來就重疊，讓海岸線畫在上面，
+  // 重疊處看到的是比較亮的那條，海陸交界仍然是最清楚的線。
+  const pos = ringSegments(world, (c) => !!c.k, R * 1.0036);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
+  // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
+  const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: 0.72, depthWrite: false });
+  globe.add(new THREE.LineSegments(g, m));
+}
+
+function buildBlocked(world) {
+  const list = (OONI && OONI.blocked) || [];
+  if (!list.length || !world) return;
+  const want = new Set(list);
+  const pos = ringSegments(world, (c) => !!c.k && want.has(c.k), R * 1.014);
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
   const m = new THREE.LineBasicMaterial({ color: COL.blocked, transparent: true, opacity: 0.85, depthWrite: false });
@@ -1345,6 +1368,7 @@ async function main() {
   buildEarth(world, counts);
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
+  buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
   if (coast) buildCoastline(coast);
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
