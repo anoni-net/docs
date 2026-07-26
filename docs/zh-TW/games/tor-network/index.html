@@ -49,6 +49,16 @@
     #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
     #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
 
+    #live-box { margin: 0 0 10px; }
+    #live-box[hidden] { display: none; }
+    #btn-live { font: inherit; font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 999px; cursor: pointer;
+                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-live:disabled { opacity: .5; cursor: default; }
+    #btn-live:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    #live-status { margin-left: 7px; font-size: 10.5px; color: var(--muted); }
+    #live-status.ok { color: #57e39a; }
+    #live-status.err { color: #ff8a99; }
+    #live-note { margin-top: 5px; color: #6b8296; font-size: 10px; line-height: 1.5; }
     #ramp { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
     #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
 
@@ -149,6 +159,9 @@
       <div class="body">
         <div id="big"><span id="stat-total">–</span> <small>台運作中的中繼</small></div>
         <div id="pub">資料快照：<span id="stat-pub">…</span></div>
+        <div id="live-box" hidden><button id="btn-live">即時更新</button><span id="live-status"></span>
+          <div id="live-note">畫面預設讀站上的靜態快照，不會對外連線。按下這個鍵會由你的瀏覽器直接連到 onionoo.anoni.net 取最新資料，那台伺服器就會看到你的 IP。</div>
+        </div>
         <div class="lbl">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
         <div class="lbl">陸地亮度：由低到高（非線性，中段差距已放大）</div>

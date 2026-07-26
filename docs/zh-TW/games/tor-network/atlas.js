@@ -1070,7 +1070,8 @@ function countryCounts(snap) {
 
 function fillPanel(snap, drawn) {
   $('stat-total').textContent = snap.total.toLocaleString();
-  $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC';
+  $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC'
+    + (snap.live ? '（剛才即時取得）' : '');
   const br = snap.byRole || {};
   const modeOf = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'both' };
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
@@ -1082,6 +1083,132 @@ function fillPanel(snap, drawn) {
     $('gap').textContent = miss <= (snap.noPlace || 0) + 5
       ? `另有 ${miss} 台的國別是 eu 或未知，地球上沒有位置可放，略過不畫。`
       : `地球上畫出 ${drawn.toLocaleString()} 台，其餘 ${miss.toLocaleString()} 台缺明確國別或取回時未取得。`;
+  }
+}
+
+// ---- 即時更新 ----
+//
+// 預設讀站上的靜態快照，完全不對外連線。這個功能要使用者自己按下去才會動，因為按下去
+// 等於把他的 IP 送到 onionoo.anoni.net，在一個講隱私的站上，這件事要他自己決定，
+// 按鈕旁邊也直接寫明會連到哪裡。
+//
+// 只做中繼這一份。海纜、國界是幾乎不動的資料，OONI 是 30 天滾動視窗、使用者估計是
+// 每日更新，即時抓都沒有意義，而且 api.ooni.org 沒有回 Access-Control-Allow-Origin，
+// 前端本來就打不到。
+const LIVE_API = 'https://onionoo.anoni.net/v1/details';
+const LIVE_FIELDS = 'country,flags,consensus_weight,as,as_name,recommended_version';
+// 這三個要跟 tools/gen_tor_snapshot.py 的同名常數一致，不然即時跟靜態兩份會長得不一樣
+const AS_TOP_PER_COUNTRY = 3, AS_TOP_GLOBAL = 15, AS_NAME_MAX = 26;
+
+// .onion 與 IPFS 版本不給這個按鈕。onion 上打 clearnet 端點會脫離 onion 的保護範圍，
+// IPFS 版本的定位是離線也能看，對外連線跟那個定位相衝。
+function liveAllowed() {
+  const h = location.hostname || '';
+  if (h.endsWith('.onion')) return false;
+  if (/(^|\.)ipfs\.|(^|\.)ipns\.|\.eth\.(link|limo)$/.test(h)) return false;
+  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return false; // 公開網關的路徑式位址
+  return true;
+}
+
+// 把逐台資料聚合成跟 snapshot.json 同構的物件。欄位定義照 tools/gen_tor_snapshot.py，
+// 那支腳本改了輸出格式，這裡要跟著改。
+function aggregateLive(relays, published) {
+  const out = [], rc = {};
+  const cnt = new Map(), asByCC = new Map(), asGlobal = new Map();
+  const asNames = new Map(), verByCC = new Map();
+  for (const r of relays) {
+    const cc = (r.country || '??').toLowerCase();
+    cnt.set(cc, (cnt.get(cc) || 0) + 1);
+    if (NO_PLACE.has(cc)) continue;   // 地球上沒有位置可放
+    const fl = r.flags || [];
+    const role = (fl.indexOf('Exit') >= 0 ? 2 : 0) + (fl.indexOf('Guard') >= 0 ? 1 : 0);
+    out.push([cc, role, r.consensus_weight | 0]);
+    rc[role] = (rc[role] || 0) + 1;
+    const asn = r.as;
+    if (asn) {
+      let m = asByCC.get(cc);
+      if (!m) asByCC.set(cc, m = new Map());
+      m.set(asn, (m.get(asn) || 0) + 1);
+      asGlobal.set(asn, (asGlobal.get(asn) || 0) + 1);
+      if (r.as_name && !asNames.has(asn)) asNames.set(asn, String(r.as_name).slice(0, AS_NAME_MAX));
+    }
+    let v = verByCC.get(cc);
+    if (!v) verByCC.set(cc, v = [0, 0]);
+    v[0]++;
+    if (r.recommended_version) v[1]++;
+  }
+  const top = (m, n) => [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n);
+  const asn = {};
+  for (const [cc, m] of asByCC) {
+    asn[cc] = { t: top(m, AS_TOP_PER_COUNTRY).map(([a, n]) => [a, asNames.get(a) || '', n]), n: m.size };
+  }
+  const version = {};
+  let vTotal = 0, vRec = 0;
+  for (const [cc, v] of verByCC) { version[cc] = v; vTotal += v[0]; vRec += v[1]; }
+  const countries = [...cnt.entries()].sort((a, b) => b[1] - a[1]);
+  let noPlace = 0;
+  for (const [cc, n] of countries) if (NO_PLACE.has(cc)) noPlace += n;
+  return {
+    published, source: 'onionoo.anoni.net', live: true,
+    total: relays.length, sampled: out.length, noPlace,
+    byRole: rc, topCountries: countries.slice(0, 20), countries,
+    asn, asnTop: top(asGlobal, AS_TOP_GLOBAL).map(([a, n]) => [a, asNames.get(a) || '', n]),
+    asnCount: asGlobal.size, version, versionAll: [vTotal, vRec], relays: out,
+  };
+}
+
+// 用新的快照重畫。舊的中繼點與標籤要先清乾淨，不然會疊在上面愈積愈多。
+function applySnapshot(snap) {
+  for (const m of relayMeshes) {
+    globe.remove(m);
+    if (m.geometry) m.geometry.dispose();
+  }
+  relayMeshes.length = 0;
+  pointMats.length = 0;
+  const box = $('labels');
+  if (box) box.innerHTML = '';
+  labels.length = 0;
+
+  const counts = countryCounts(snap);
+  // ANCHOR 不重建，國家位置本來就不會變。relaxClusters 也跳過，那是依台數推開團的位置，
+  // 一次更新的台數變化推不動它，重跑只是白花時間。
+  const drawn = buildRelays(snap, counts);
+  for (const m of pointMats) m.opacity = 1; // 更新是使用者按出來的，不需要再淡入一次
+  buildLabels(snap);
+  buildStats(snap);
+  fillPanel(snap, drawn);
+  fillMix(snap);
+  fillAsn(snap);
+  fillAsia(snap);
+  fillUsers(snap);
+  setMode(MODE); // 色階、標籤數字、角色顯示都在這裡一起更新
+}
+
+async function fetchLive(btn) {
+  const status = $('live-status');
+  const say = (t, cls) => { if (status) { status.textContent = t; status.className = cls || ''; } };
+  btn.disabled = true;
+  say('連線中…');
+  try {
+    const url = `${LIVE_API}?running=true&limit=20000&fields=${encodeURIComponent(LIVE_FIELDS)}`;
+    // 不送 cookie 也不送 referrer，這個請求只需要拿公開資料，沒有理由多給對方任何東西
+    const r = await fetch(url, { mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
+    if (!r.ok) throw new Error(`伺服器回應 HTTP ${r.status}`);
+    const d = await r.json();
+    const relays = d.relays || [];
+    if (!relays.length) throw new Error('回應裡沒有中繼資料');
+    applySnapshot(aggregateLive(relays, d.relays_published));
+    say(`已更新，取回 ${relays.length.toLocaleString()} 台`, 'ok');
+  } catch (e) {
+    console.error(e);
+    // 被跨來源擋下時 fetch 丟的是 TypeError，訊息只有含糊的 Failed to fetch，
+    // 直接把它翻成看得懂的說法，不要讓使用者對著一句英文乾瞪眼。
+    const msg = /Failed to fetch|NetworkError|Load failed/i.test(e.message)
+      ? '連不上 onionoo.anoni.net。可能是網路不通，或瀏覽器擋下了跨來源請求。'
+      : e.message;
+    say(`更新失敗。${msg}畫面上仍是原本的快照。`, 'err');
+  } finally {
+    btn.disabled = false;
   }
 }
 
@@ -1207,6 +1334,12 @@ async function main() {
     measureLabels();
   });
   bindControls(renderer.domElement);
+  // 即時更新的按鈕預設藏著，只在 clearnet 版本露出來
+  const liveBtn = $('btn-live');
+  if (liveBtn && liveAllowed()) {
+    $('live-box').hidden = false;
+    liveBtn.addEventListener('click', () => fetchLive(liveBtn));
+  }
   $('labels').addEventListener('click', (e) => {
     const el = e.target.closest('.lb');
     if (el && el.dataset.cc) showCountry(el.dataset.cc);
