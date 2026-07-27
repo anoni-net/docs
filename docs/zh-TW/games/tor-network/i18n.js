@@ -1,0 +1,398 @@
+// Tor 中繼地球儀 · 三語字串
+// zh-TW 是 single source of truth。三份表的 key 必須一致，缺 key 時 t() 會退回 zh-TW。
+// 語言用網址參數決定（?lang=en、?lang=zh-cn），跟另外兩個作品同一套做法。
+//
+// 這份表裡有一批句子的措辭是刻意調過的，翻譯時不能鬆掉：
+//   ooniNote / creditOoni  anomaly 只代表「測試沒有照預期完成」，不等於審查。
+//                          翻成 blocked / censored 就等於把整個作品在避免的誤導寫回去。
+//   circTag / cableNote    走廊與三跳路徑都是示意，不是實測路由。
+//   usersNote / cardNote   使用者數是估計值不是普查。
+//   shutdownNote           武裝衝突類的關閉未必是政府主動下令。
+// 動到這幾條之前先讀 tools/gen_ooni_snapshot.py 開頭那段說明。
+
+const ZH_TW = {
+  pageTitle: 'Tor 中繼地球儀',
+  unitRelays: '台運作中的中繼',
+  snapshotAt: '資料快照：',
+  btnLive: '即時更新',
+  liveNote: '畫面預設只連本站與 assets.anoni.net，兩者都是我們自己的主機，取得的靜態快照對所有人都一樣。按下這個鍵會多連一台 onionoo.anoni.net 即時取資料，那台伺服器會看到你的 IP。',
+
+  lblRoles: '角色分布（點一下只看這個角色，再點一次看全部）',
+  lblBrightness: '陸地亮度：由低到高（非線性，中段差距已放大）',
+  modeCount: '中繼台數',
+  modeWeight: '共識權重',
+  modeConc: '業者集中度',
+  modeUsers: '使用者數',
+  modeUsersTip: '陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示',
+  rampLow: '無',
+  rampHigh: '最多',
+
+  lblMix: '各國中繼數與角色組成（30 台以上）',
+  lblAsn: '托管商排行（全球）',
+  lblAsia: '亞洲鄰近國家',
+  lblUsers: '用的人最多的地方（Tor Metrics 估計）',
+  lblOoni: 'Tor 連線受阻的地方（OONI 觀測）',
+  lblShutdown: '網路被整個關掉的地方（Access Now 紀錄）',
+
+  note: '陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。',
+
+  creditTitle: '資料來源',
+  creditOnionoo: '中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。',
+  creditMetrics: '使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。',
+  creditOoni: 'Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。',
+  creditAccessNow: '網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。',
+  creditNaturalEarth: '國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。',
+  creditOsm: '海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。',
+
+  circTag: '示意路徑　guard → middle → exit',
+  ccClose: '關閉',
+  loading: '載入中…',
+  hintWide: '拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉',
+  hintNarrow: '拖曳旋轉 · 雙指放大浮出更多標籤',
+  hintClose: '知道了',
+  toggleOpen: '▾ 收合',
+  toggleClosed: '▸ 詳情',
+
+  backendDetecting: '偵測中…',
+  backendWebGL: 'WebGL2（fallback）',
+  backendSep: '：',
+  blkForced: '網址帶了 backend=webgl',
+  blkInsecure: '頁面不是 https 或 localhost',
+  blkNoGpu: '這個瀏覽器沒有 WebGPU',
+  blkNoAdapter: '系統沒有給出可用的 GPU',
+  blkRejected: 'WebGPU 被擋下',
+  fatalNoGpu: '這個瀏覽器無法啟用 WebGPU 或 WebGL2，地球儀畫不出來。',
+  fatalRender: '顯示已中斷，重新整理頁面可以再試一次。',
+  fatalLoad: '地球儀載入失敗，資料可能沒抓到。重新整理頁面可以再試一次。',
+  // ---- 面板各區塊的說明 ----
+  noteMix: '出口流量比例最高：{hi}。最低：{lo}。出口要承受濫用投訴與法律風險，各國願不願意跑差很多。',
+  noteAsn: '這些是賣主機與雲端的公司，全球共 {n} 家托管了這些中繼，前三家就佔 {pct}%。國界分散不代表機房分散，同一家的一個政策就能影響很大一塊。',
+  noteAsnVer: '<br>另外，全網有 {pct}% 的中繼跑在官方建議的版本上。',
+  noteOoni: '這幾國近 {days} 天的 Tor 連線測試有 {thr}% 以上沒有照預期完成，同一期間全球平均是 {avg}%。異常的成因包含連線被擋、網路不穩與 ISP 故障，單看比率分不出是哪一種，所以這裡只列高到極端的那幾國，中段的數字沒有拿來上色。對照左邊的中繼數會看到，連不上 Tor 的地方，也幾乎沒有人在那裡跑中繼。',
+  noteUsers: '全球估計每天約 {wan} 萬人在用，資料是 {date}。',
+  noteUsersTw: '台灣估計 {n} 人，中繼 {relays} 台。',
+  noteUsersTail: '用的人在哪跟中繼架在哪是兩件事，中繼多的國家多半是機房便宜、法規友善，跟那裡有多少人需要 Tor 沒有直接關係。這些是用中繼收到的目錄請求反推的估計值，信心區間相當寬，看趨勢比看絕對數字可靠。',
+  noteShutdown: '{y0} 到 {y1} 年間全球 {total} 筆紀錄，由 Access Now 的 #KeepItOn 聯盟人工查證。成因以武裝衝突 {conflict} 次最多，其次是抗議活動 {protest} 次與資訊管制 {info} 次。也有為了防止考試作弊 {exam} 次與官員視察期間 {visit} 次而關閉的紀錄。武裝衝突與族群衝突未必是政府主動下令，戰事打壞基礎設施也算在內，所以國家卡片另外標出屬於資訊管制類的件數。另外印度的紀錄多半是單一邦或單一地區的斷網，跟上面那些全國性受阻的情況性質不同。',
+
+  // ---- 國家卡片 ----
+  cardSub: '{n} 台，台數排名第 {rank}',
+  cardShare: '佔全網 <b>{share}%</b>，權重 <b>{w}%</b>（第 {wrank}），出口 <b>{exit}%</b>（全網 {all}%）',
+  cardVersion: '，已安裝官方建議版本 <b>{ok}/{tot}</b>（{pct}%）',
+  cardUsers: '估計 <b>{n}</b> 人在用（{days} 天平均 {avg}）',
+  cardUsersPer: '，每台中繼約 {n} 人',
+  cardHosting: '托管商 <b>{name}</b> {n} 台（{pct}%）',
+  cardHostingRest: '，其次 {rest}',
+  cardHostingAll: '，全國 {n} 家',
+  cardOoni: 'OONI 近 {days} 天測試 {n} 次，<b>{pct}%</b> 未照預期完成',
+  cardOoniBlocked: '，多半是被擋',
+  cardBridge: '橋接繞道',
+  cardShutdownHead: '{y0} 年起 ',
+  cardShutdownN: ' 次網路關閉',
+  cardShutdownYear: '，最近 {y} 年',
+  cardShutdownCtl: '，{n} 次屬管控類',
+  cardShutdownTop: '，主因{top}',
+  cardRadar: 'Cloudflare Radar',
+  cardRadarOff: '（離開本站）',
+  cardRadarTipCc: '在 Cloudflare Radar 看這一國的流量與中斷紀錄',
+  cardRadarTipAs: '在 Cloudflare Radar 看這家業者的網路狀況',
+  cardNoteUsers: '人數為估計值',
+  cardNoteOoni: 'OONI 異常的成因含封鎖、網路不穩與 ISP 故障',
+  cardNoteShutdown: '武裝衝突類的關閉未必由政府主動下令',
+
+  // ---- 即時更新 ----
+  liveConnecting: '連線中…',
+  liveOk: '已更新，取回 {n} 台',
+  liveFail: '更新失敗。{msg}畫面上仍是原本的快照。',
+  liveFailNet: '連不上 onionoo.anoni.net。可能是網路不通，或瀏覽器擋下了跨來源請求。',
+  liveHttp: '伺服器回應 HTTP {code}',
+  liveNoData: '回應裡沒有中繼資料',
+  liveTag: '（剛才即時取得）',
+
+  // ---- 其他 ----
+  modeAllLbl: '全部',
+  modeConcLbl: '單一業者集中度',
+  modeUsersLbl: '使用者估計',
+  ptPlain: '一般橋接',
+  gapNoPlace: '另有 {n} 台的國別是 eu 或未知，地球上沒有位置可放，略過不畫。',
+  gapPartial: '地球上畫出 {drawn} 台，其餘 {miss} 台缺明確國別或取回時未取得。',
+  causeConflict: '武裝衝突', causeProtests: '抗議活動', causeInfo: '資訊管制',
+  causeCommunal: '族群衝突', causeExam: '防止考試作弊', causeVisit: '官員視察',
+  causeElection: '選舉', causeOther: '其他', causeUnknown: '不明',
+  rowExit: '出口 {pct}%',
+  rowRelays: '中繼 {n}',
+  rowProviders: '{n} 家',
+  rowTopShare: ' / 最大 {pct}%',
+  rowTimes: '{n} 次',
+  rowLatest: '最近 {y}',
+  listSep: '、',
+  roleTipAll: '再點一次看全部',
+  roleTipOne: '只看這個角色',
+};
+
+const EN = {
+  pageTitle: 'Tor Relay Globe',
+  unitRelays: 'relays running',
+  snapshotAt: 'Snapshot: ',
+  btnLive: 'Update now',
+  liveNote: 'By default this page only talks to this site and assets.anoni.net, both of which we run, and the static snapshot it fetches is identical for everyone. Pressing this button adds a direct connection to onionoo.anoni.net for live data, which means that server sees your IP.',
+
+  lblRoles: 'Roles (click one to isolate it, click again for all)',
+  lblBrightness: 'Land brightness: low to high (non-linear, mid-range spread out)',
+  modeCount: 'Relay count',
+  modeWeight: 'Consensus weight',
+  modeConc: 'Provider concentration',
+  modeUsers: 'Estimated users',
+  modeUsersTip: 'Land brightness switches to the estimated number of Tor users per country. Relay dots stay as they are.',
+  rampLow: 'none',
+  rampHigh: 'most',
+
+  lblMix: 'Relay count and role mix by country (30 or more)',
+  lblAsn: 'Hosting providers (global)',
+  lblAsia: 'Neighbouring Asia',
+  lblUsers: 'Where the most people use it (Tor Metrics estimate)',
+  lblOoni: 'Where Tor connections run into trouble (OONI)',
+  lblShutdown: 'Where the network was shut down entirely (Access Now)',
+
+  note: 'Land brightness shows how many relays a country hosts: the brighter it is, the more it holds. Click any of the four role chips and the globe keeps only that role, with the same brightness-equals-count rule. Click a country label for its details. Nearly ten thousand relays look spread across the world, but they are heavily concentrated in the United States, Germany and the Netherlands, the bright patches, ranked here by count. Rank by bandwidth instead and the top three become Germany, the Netherlands and the United States: the US has the most relays but each one carries less traffic. Onionoo only reports country, not a finer location, so what you see is a country-level count. Zoomed out, the globe draws only a fraction of the dots and fills in the rest as you zoom in. To read density, use the land brightness, which always reflects the full count.',
+
+  creditTitle: 'Data sources',
+  creditOnionoo: 'Relay data comes from <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>, fetched through a self-hosted onionoo.anoni.net. Only country-level aggregates are kept, with no identifying information about individual relays.',
+  creditMetrics: 'User estimates and bridge statistics come from <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>, licensed <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>. The user counts are inferred from directory requests reaching relays. They are estimates with fairly wide confidence intervals, not a census.',
+  creditOoni: 'Tor connection measurements come from <a href="https://ooni.org/" rel="noopener">OONI</a> (Open Observatory of Network Interference), licensed <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>. What is shown is the share of tor tests over the past 30 days that did not complete as expected, which OONI calls an anomaly. Causes include blocking, unstable networks and ISP faults.',
+  creditAccessNow: 'Shutdown events come from the STOP dataset by <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a>, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. The cause of each event is verified and labelled by hand by that coalition. Updates are irregular and do not reflect live status.',
+  creditNaturalEarth: 'Country outlines come from <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (public domain, 110m scale).',
+  creditOsm: 'The clearer thin lines over the sea are submarine cables from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors (ODbL), with better coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors as great-circle arcs between publicly known landing points: only the general direction is meaningful, and real routing needs a dedicated cable map.',
+
+  circTag: 'Illustrative path　guard → middle → exit',
+  ccClose: 'Close',
+  loading: 'Loading…',
+  hintWide: 'Drag to rotate · scroll or pinch to zoom and more country labels appear · rotation resumes when you let go',
+  hintNarrow: 'Drag to rotate · pinch to reveal more labels',
+  hintClose: 'Got it',
+  toggleOpen: '▾ Hide',
+  toggleClosed: '▸ Details',
+
+  backendDetecting: 'Detecting…',
+  backendWebGL: 'WebGL2 (fallback)',
+  backendSep: ': ',
+  blkForced: 'the URL asked for backend=webgl',
+  blkInsecure: 'the page is not on https or localhost',
+  blkNoGpu: 'this browser has no WebGPU',
+  blkNoAdapter: 'the system offered no usable GPU',
+  blkRejected: 'WebGPU was refused',
+  fatalNoGpu: 'This browser can enable neither WebGPU nor WebGL2, so the globe cannot be drawn.',
+  fatalRender: 'Rendering stopped. Reload the page to try again.',
+  fatalLoad: 'The globe failed to load, possibly because the data did not arrive. Reload the page to try again.',
+  // ---- 面板各區塊的說明 ----
+  noteMix: 'Highest share of exit traffic: {hi}. Lowest: {lo}. Exits absorb abuse complaints and legal risk, and countries differ a great deal in how willing they are to run them.',
+  noteAsn: 'These are hosting and cloud companies. {n} of them host these relays worldwide, and the top three alone account for {pct}%. Spread across borders does not mean spread across machine rooms: a single policy at one provider can affect a large slice at once.',
+  noteAsnVer: '<br>Separately, {pct}% of all relays run a version the project recommends.',
+  noteOoni: 'In these countries, more than {thr}% of Tor connection tests over the past {days} days did not complete as expected, against a global average of {avg}% over the same period. Anomalies can come from blocking, unstable networks or ISP faults, and the rate alone cannot tell them apart, so only the most extreme countries are listed here and the mid-range numbers are not used for colouring. Compare with the relay counts on the left: where Tor cannot be reached, almost nobody runs a relay either.',
+  noteUsers: 'Roughly {mil} million people use it worldwide each day, as of {date}.',
+  noteUsersTw: 'Taiwan is estimated at {n} users with {relays} relays.',
+  noteUsersTail: 'Where people use Tor and where relays are hosted are two different things. Countries with many relays tend to have cheap hosting and friendly regulation, which has no direct bearing on how many people there need Tor. These figures are inferred from directory requests reaching relays, with fairly wide confidence intervals, so the trend is more reliable than any absolute number.',
+  noteShutdown: '{total} records worldwide between {y0} and {y1}, verified by hand by the Access Now #KeepItOn coalition. Armed conflict is the most common cause at {conflict} events, followed by protests at {protest} and information control at {info}. There are also {exam} shutdowns to stop exam cheating and {visit} during visits by government officials. Armed conflict and communal violence are not necessarily ordered by a government, since infrastructure damaged in fighting counts too, which is why the country cards break out the information-control cases separately. India\'s records are also mostly state-level or district-level shutdowns, different in kind from the nationwide disruption listed above.',
+
+  // ---- 國家卡片 ----
+  cardSub: '{n} relays, ranked {rank} by count',
+  cardShare: '<b>{share}%</b> of all relays, <b>{w}%</b> of weight (rank {wrank}), exit <b>{exit}%</b> (global {all}%)',
+  cardVersion: ', recommended version installed on <b>{ok}/{tot}</b> ({pct}%)',
+  cardUsers: 'about <b>{n}</b> users ({days}-day average {avg})',
+  cardUsersPer: ', roughly {n} users per relay',
+  cardHosting: 'Hosted by <b>{name}</b>, {n} relays ({pct}%)',
+  cardHostingRest: ', then {rest}',
+  cardHostingAll: ', {n} providers in total',
+  cardOoni: 'OONI ran {n} tests over {days} days, <b>{pct}%</b> did not complete as expected',
+  cardOoniBlocked: ', most likely blocked',
+  cardBridge: 'Bridges in use',
+  cardShutdownHead: 'Since {y0}, ',
+  cardShutdownN: ' shutdowns',
+  cardShutdownYear: ', most recently in {y}',
+  cardShutdownCtl: ', {n} of them control-related',
+  cardShutdownTop: ', mainly {top}',
+  cardRadar: 'Cloudflare Radar',
+  cardRadarOff: ' (leaves this site)',
+  cardRadarTipCc: 'See this country\'s traffic and outage record on Cloudflare Radar',
+  cardRadarTipAs: 'See this provider\'s network on Cloudflare Radar',
+  cardNoteUsers: 'User counts are estimates',
+  cardNoteOoni: 'OONI anomalies can come from blocking, unstable networks or ISP faults',
+  cardNoteShutdown: 'Armed-conflict shutdowns are not necessarily ordered by a government',
+
+  // ---- 即時更新 ----
+  liveConnecting: 'Connecting…',
+  liveOk: 'Updated, {n} relays fetched',
+  liveFail: 'Update failed. {msg} The snapshot on screen is unchanged.',
+  liveFailNet: 'Could not reach onionoo.anoni.net. The network may be down, or the browser blocked the cross-origin request.',
+  liveHttp: 'server returned HTTP {code}',
+  liveNoData: 'the response contained no relay data',
+  liveTag: ' (fetched just now)',
+
+  // ---- 其他 ----
+  modeAllLbl: 'All',
+  modeConcLbl: 'Provider concentration',
+  modeUsersLbl: 'Estimated users',
+  ptPlain: 'plain bridge',
+  gapNoPlace: 'A further {n} relays report their country as eu or unknown, so they have nowhere to sit on the globe and are left out.',
+  gapPartial: '{drawn} relays are drawn on the globe. The remaining {miss} lack a clear country or were not returned in this fetch.',
+  causeConflict: 'armed conflict', causeProtests: 'protests', causeInfo: 'information control',
+  causeCommunal: 'communal violence', causeExam: 'exam cheating', causeVisit: 'official visits',
+  causeElection: 'elections', causeOther: 'other', causeUnknown: 'unknown',
+  rowExit: 'exit {pct}%',
+  rowRelays: '{n} relays',
+  rowProviders: '{n} providers',
+  rowTopShare: ' / top {pct}%',
+  rowTimes: '{n}×',
+  rowLatest: 'last {y}',
+  listSep: ', ',
+  roleTipAll: 'Click again to show all',
+  roleTipOne: 'Show only this role',
+};
+
+const ZH_CN = {
+  pageTitle: 'Tor 中继地球仪',
+  unitRelays: '台运作中的中继',
+  snapshotAt: '数据快照：',
+  btnLive: '实时更新',
+  liveNote: '画面预设只连本站与 assets.anoni.net，两者都是我们自己的主机，取得的静态快照对所有人都一样。按下这个键会多连一台 onionoo.anoni.net 实时取数据，那台服务器会看到你的 IP。',
+
+  lblRoles: '角色分布（点一下只看这个角色，再点一次看全部）',
+  lblBrightness: '陆地亮度：由低到高（非线性，中段差距已放大）',
+  modeCount: '中继台数',
+  modeWeight: '共识权重',
+  modeConc: '服务商集中度',
+  modeUsers: '用户数',
+  modeUsersTip: '陆地亮度改成各国估计有多少人在用 Tor，中继点照样显示',
+  rampLow: '无',
+  rampHigh: '最多',
+
+  lblMix: '各国中继数与角色组成（30 台以上）',
+  lblAsn: '托管商排行（全球）',
+  lblAsia: '亚洲邻近国家',
+  lblUsers: '用的人最多的地方（Tor Metrics 估计）',
+  lblOoni: 'Tor 连线受阻的地方（OONI 观测）',
+  lblShutdown: '网络被整个关掉的地方（Access Now 记录）',
+
+  note: '陆地的亮度代表该国有多少台中继，愈亮的国家托管的中继愈多。角色分布那四个标签点下去，地球会只留那一种角色，深浅一样是数量。点国家标签可以看那一国的细节。近万台中继看似遍布全球，实际高度集中在美国、德国、荷兰这几块亮起来的地方，这个顺序照台数排。换成带宽排，前三名会变成德国、荷兰、美国，美国的中继台数最多，单台扛的流量比较小。Onionoo 只给到国别，没有更精确的位置，地图上呈现的是国家层级的数量。远看时地球上只画其中一部分的点，放大会逐步补齐到全部，要读密度请看陆地亮度，那个一直是全部的台数。',
+
+  creditTitle: '数据来源',
+  creditOnionoo: '中继数据来自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，经自架的 onionoo.anoni.net 取回。只取到国家层级的聚合，没有个别中继的识别信息。',
+  creditMetrics: '用户估计与网桥统计来自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授权 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人数是用中继收到的目录请求反推的估计值，置信区间相当宽，不是普查。',
+  creditOoni: 'Tor 连线观测来自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授权 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。画面呈现的是 tor 测试近 30 天各国没有照预期完成的比率，OONI 称为 anomaly，成因包含连线被挡、网络不稳与 ISP 故障。',
+  creditAccessNow: '网络关闭事件来自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 数据集，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每笔事件的成因由该联盟人工查证后标注，更新是不定期的，不是实时状态。',
+  creditNaturalEarth: '国界轮廓来自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。',
+  creditOsm: '海面上看得比较清楚的细线是海底电缆，来自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 贡献者（ODbL），收录以欧洲、地中海与大西洋较完整。最淡的一层是主要跨洋走廊的示意，取两端公开的登陆地点拉出大圆弧，只有走向可信，实际路由要看专门的海缆地图。',
+
+  circTag: '示意路径　guard → middle → exit',
+  ccClose: '关闭',
+  loading: '载入中…',
+  hintWide: '拖曳旋转地球 · 滚轮或双指放大会浮出更多国家标签 · 放开后自动转',
+  hintNarrow: '拖曳旋转 · 双指放大浮出更多标签',
+  hintClose: '知道了',
+  toggleOpen: '▾ 收合',
+  toggleClosed: '▸ 详情',
+
+  backendDetecting: '检测中…',
+  backendWebGL: 'WebGL2（fallback）',
+  backendSep: '：',
+  blkForced: '网址带了 backend=webgl',
+  blkInsecure: '页面不是 https 或 localhost',
+  blkNoGpu: '这个浏览器没有 WebGPU',
+  blkNoAdapter: '系统没有给出可用的 GPU',
+  blkRejected: 'WebGPU 被挡下',
+  fatalNoGpu: '这个浏览器无法启用 WebGPU 或 WebGL2，地球仪画不出来。',
+  fatalRender: '显示已中断，刷新页面可以再试一次。',
+  fatalLoad: '地球仪载入失败，数据可能没抓到。刷新页面可以再试一次。',
+  // ---- 面板各區塊的說明 ----
+  noteMix: '出口流量比例最高：{hi}。最低：{lo}。出口要承受滥用投诉与法律风险，各国愿不愿意跑差很多。',
+  noteAsn: '这些是卖主机与云端的公司，全球共 {n} 家托管了这些中继，前三家就占 {pct}%。国界分散不代表机房分散，同一家的一个政策就能影响很大一块。',
+  noteAsnVer: '<br>另外，全网有 {pct}% 的中继跑在官方建议的版本上。',
+  noteOoni: '这几国近 {days} 天的 Tor 连线测试有 {thr}% 以上没有照预期完成，同一期间全球平均是 {avg}%。异常的成因包含连线被挡、网络不稳与 ISP 故障，单看比率分不出是哪一种，所以这里只列高到极端的那几国，中段的数字没有拿来上色。对照左边的中继数会看到，连不上 Tor 的地方，也几乎没有人在那里跑中继。',
+  noteUsers: '全球估计每天约 {wan} 万人在用，数据是 {date}。',
+  noteUsersTw: '台湾估计 {n} 人，中继 {relays} 台。',
+  noteUsersTail: '用的人在哪跟中继架在哪是两件事，中继多的国家多半是机房便宜、法规友善，跟那里有多少人需要 Tor 没有直接关系。这些是用中继收到的目录请求反推的估计值，置信区间相当宽，看趋势比看绝对数字可靠。',
+  noteShutdown: '{y0} 到 {y1} 年间全球 {total} 笔记录，由 Access Now 的 #KeepItOn 联盟人工查证。成因以武装冲突 {conflict} 次最多，其次是抗议活动 {protest} 次与信息管制 {info} 次。也有为了防止考试作弊 {exam} 次与官员视察期间 {visit} 次而关闭的记录。武装冲突与族群冲突未必是政府主动下令，战事打坏基础设施也算在内，所以国家卡片另外标出属于信息管制类的件数。另外印度的记录多半是单一邦或单一地区的断网，跟上面那些全国性受阻的情况性质不同。',
+
+  // ---- 國家卡片 ----
+  cardSub: '{n} 台，台数排名第 {rank}',
+  cardShare: '占全网 <b>{share}%</b>，权重 <b>{w}%</b>（第 {wrank}），出口 <b>{exit}%</b>（全网 {all}%）',
+  cardVersion: '，已安装官方建议版本 <b>{ok}/{tot}</b>（{pct}%）',
+  cardUsers: '估计 <b>{n}</b> 人在用（{days} 天平均 {avg}）',
+  cardUsersPer: '，每台中继约 {n} 人',
+  cardHosting: '托管商 <b>{name}</b> {n} 台（{pct}%）',
+  cardHostingRest: '，其次 {rest}',
+  cardHostingAll: '，全国 {n} 家',
+  cardOoni: 'OONI 近 {days} 天测试 {n} 次，<b>{pct}%</b> 未照预期完成',
+  cardOoniBlocked: '，多半是被挡',
+  cardBridge: '网桥绕道',
+  cardShutdownHead: '{y0} 年起 ',
+  cardShutdownN: ' 次网络关闭',
+  cardShutdownYear: '，最近 {y} 年',
+  cardShutdownCtl: '，{n} 次属管控类',
+  cardShutdownTop: '，主因{top}',
+  cardRadar: 'Cloudflare Radar',
+  cardRadarOff: '（离开本站）',
+  cardRadarTipCc: '在 Cloudflare Radar 看这一国的流量与中断记录',
+  cardRadarTipAs: '在 Cloudflare Radar 看这家服务商的网络状况',
+  cardNoteUsers: '人数为估计值',
+  cardNoteOoni: 'OONI 异常的成因含封锁、网络不稳与 ISP 故障',
+  cardNoteShutdown: '武装冲突类的关闭未必由政府主动下令',
+
+  // ---- 即時更新 ----
+  liveConnecting: '连线中…',
+  liveOk: '已更新，取回 {n} 台',
+  liveFail: '更新失败。{msg}画面上仍是原本的快照。',
+  liveFailNet: '连不上 onionoo.anoni.net。可能是网络不通，或浏览器挡下了跨来源请求。',
+  liveHttp: '服务器回应 HTTP {code}',
+  liveNoData: '回应里没有中继数据',
+  liveTag: '（刚才实时取得）',
+
+  // ---- 其他 ----
+  modeAllLbl: '全部',
+  modeConcLbl: '单一服务商集中度',
+  modeUsersLbl: '用户估计',
+  ptPlain: '一般网桥',
+  gapNoPlace: '另有 {n} 台的国别是 eu 或未知，地球上没有位置可放，略过不画。',
+  gapPartial: '地球上画出 {drawn} 台，其余 {miss} 台缺明确国别或取回时未取得。',
+  causeConflict: '武装冲突', causeProtests: '抗议活动', causeInfo: '信息管制',
+  causeCommunal: '族群冲突', causeExam: '防止考试作弊', causeVisit: '官员视察',
+  causeElection: '选举', causeOther: '其他', causeUnknown: '不明',
+  rowExit: '出口 {pct}%',
+  rowRelays: '中继 {n}',
+  rowProviders: '{n} 家',
+  rowTopShare: ' / 最大 {pct}%',
+  rowTimes: '{n} 次',
+  rowLatest: '最近 {y}',
+  listSep: '、',
+  roleTipAll: '再点一次看全部',
+  roleTipOne: '只看这个角色',
+};
+
+export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };
+
+export function pickLang() {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q && STR[q]) return q;
+  return 'zh-TW';
+}
+
+export function t(lang, key, vars) {
+  const table = STR[lang] || STR['zh-TW'];
+  let s = (table[key] != null) ? table[key] : (STR['zh-TW'][key] != null ? STR['zh-TW'][key] : key);
+  if (vars) for (const k in vars) s = s.replaceAll('{' + k + '}', String(vars[k]));
+  return s;
+}
+
+// 語言切換。三個語系共用同一份程式，差別只在網址參數，所以原地換 query 就好。
+// 語言名稱各自用自己的語言寫，不跟著介面翻譯，否則使用者落在看不懂的語言時找不到自己要哪一個。
+// zh-TW 是預設不掛參數，維持乾淨的正規網址。
+const LANG_NAMES = [['zh-TW', '正體中文'], ['zh-cn', '简体中文'], ['en', 'English']];
+
+export function langLinksHTML(lang) {
+  return LANG_NAMES.map(([code, name]) => {
+    if (code === lang) return `<span class="on">${name}</span>`;
+    const u = new URL(location.href);
+    if (code === 'zh-TW') u.searchParams.delete('lang');
+    else u.searchParams.set('lang', code);
+    return `<a href="${u.pathname}${u.search}">${name}</a>`;
+  }).join('<i>·</i>');
+}

@@ -49,6 +49,7 @@ nav:
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
       - regional/tor-relay-watcher.md
+  - !ENV [NAV_GAMES, "Interactive"]: games/index.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
       - !ENV [NAV_CHANGELOG, "Software Changelog"]:

@@ -29,6 +29,9 @@ anoni-net-docs/
 
 根目錄 `LICENSE-asn_coverage` 為 `asn_coverage` 之 GPL-3.0 全文副本，以 `asn_coverage/LICENSE` 為準。
 
+`docs/zh-TW/games/tor-network/` 底下有六份外部資料，各自沿用原始授權，其中 `ooni.json` 是
+CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE)。
+
 ### 兩套 OONI 相關程式（勿混淆）
 
 | 位置 | 用途 | 資料來源 |

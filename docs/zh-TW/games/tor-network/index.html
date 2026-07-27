@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Tor 中繼地球儀 · anoni.net</title>
+  <style>
+    :root {
+      --cyan: #00aeff; --ink: #eaf6ff; --muted: #9fb6c8;
+      --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; }
+    body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
+    canvas { display: block; position: fixed; inset: 0; touch-action: none; }
+
+    .panel {
+      position: fixed; z-index: 10; background: var(--panel);
+      border: 1px solid var(--panel-b); border-radius: 14px;
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+    }
+    #top { left: 14px; top: 14px; max-width: min(94vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 12px 15px; }
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    #title::-webkit-details-marker { display: none; }
+    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
+    #info:not([open]) > #title::after { content: var(--toggle-closed, '▸ 詳情'); }
+    .body { margin-top: 9px; }
+    #big { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
+    #big small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
+    #pub { color: var(--muted); font-size: 11px; margin: 3px 0 10px; }
+    .row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+    .chip { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--ink); display: inline-flex; align-items: center; gap: 5px; }
+    .chip[style*="--c"]::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 7px var(--c); }
+    .lbl { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: .5px; margin: 2px 0 4px; }
+    #note { color: var(--muted); font-size: 11.5px; line-height: 1.6; }
+    #gap:not(:empty) { margin-top: 7px; color: #7d93a6; font-size: 10.5px; line-height: 1.5; }
+    #credit { margin-top: 7px; color: #6b7f90; font-size: 10px; line-height: 1.5; }
+    #credit b { color: #8ba4b8; font-weight: 600; }
+    #credit p { margin: 0 0 5px; }
+    #credit a { color: #7fa8c4; }
+    .cc-sub2.ext { border-top: 1px solid rgba(120,170,210,.16); padding-top: 6px; }
+    .cc-sub2.ext a { color: #7fb6dc; text-decoration: none; }
+    .cc-sub2.ext a:hover { text-decoration: underline; }
+    .cc-sub2 .tiny { font-size: 10px; color: #6b8296; }
+    .cc-sub2.warn { color: #ff8a99; }
+    .cc-sub2.warn .dim { color: #b98793; }
+    #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
+    #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
+    #langs { margin-top: 8px; font-size: 11px; color: var(--muted); }
+    #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
+    #langs .on { color: #fff; font-weight: 700; }
+    #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
+
+    #live-box { margin: 0 0 10px; }
+    #live-box[hidden] { display: none; }
+    #btn-live { font: inherit; font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 999px; cursor: pointer;
+                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-live:disabled { opacity: .5; cursor: default; }
+    #btn-live:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    #live-status { margin-left: 7px; font-size: 10.5px; color: var(--muted); }
+    #live-status.ok { color: #57e39a; }
+    #live-status.err { color: #ff8a99; }
+    #live-note { margin-top: 5px; color: #6b8296; font-size: 10px; line-height: 1.5; }
+    #ramp { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
+    #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
+
+    #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; }
+    .lb.on { pointer-events: auto; cursor: pointer; }
+    .lb.on:hover, .lb.on:focus-visible { color: #fff; text-shadow: 0 0 6px var(--cyan), 0 0 12px #04060d; outline: none; }
+    /* 點國家看細節。球面上讀不出來的數字，點一下就給 */
+    #cc-card { left: 50%; bottom: 74px; transform: translateX(-50%); z-index: 15; width: min(94vw, 470px); padding: 13px 18px; }
+    #cc-card[hidden] { display: none; }
+    #cc-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+    #cc-code { font-size: 19px; font-weight: 800; letter-spacing: .5px; }
+    #cc-sub { color: var(--muted); font-size: 11.5px; }
+    #cc-close { margin-left: auto; cursor: pointer; color: var(--cyan); font-weight: 800; font-size: 11.5px; }
+    #cc-body { color: var(--muted); font-size: 11.5px; line-height: 1.75; }
+    #cc-body b { color: var(--ink); font-weight: 700; }
+    #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
+    #cc-bar span { display: block; height: 100%; }
+    .cc-roles { display: flex; flex-wrap: nowrap; gap: 5px; margin-top: 8px; }
+    .cc-sub2 { margin-top: 7px; font-size: 11px; line-height: 1.6; }
+    .cc-sub2 .dim, #cc-body .dim { color: #7d93a6; }
+    .cc-roles .chip { white-space: nowrap; }
+    @media (max-width: 560px) { .cc-roles { flex-wrap: wrap; } }
+    .lb { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .25s; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #d7ecff; white-space: nowrap; text-shadow: 0 0 5px #04060d, 0 0 11px #04060d, 0 1px 2px #04060d; }
+    .lb i { font-style: normal; font-weight: 700; color: #8fb0c8; margin-left: 5px; }
+    .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
+    .lb.sm i { color: #7695ad; margin-left: 4px; }
+
+    /* 三跳路徑飛過去時掛在畫面上的說明。動畫只有幾秒，說明寫在面板裡沒人會去看 */
+    #circ-tag { position: fixed; right: 16px; bottom: 18px; z-index: 9; padding: 5px 11px;
+                border-radius: 999px; background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
+                color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
+                opacity: 0; transition: opacity .5s; pointer-events: none;
+                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    #circ-tag.on { opacity: 1; }
+    @media (max-width: 680px) { #circ-tag { right: 10px; bottom: 62px; font-size: 10px; } }
+    #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    #hint.hidden { display: none; }
+    /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
+    #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
+    #fatal[hidden] { display: none; }
+    #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
+    #loading.done { display: none; }
+    @keyframes breathe { 0%, 100% { opacity: .35; } 50% { opacity: .9; } }
+    @media (prefers-reduced-motion: reduce) { #loading { animation: none; opacity: .7; } }
+    #sizes { display: flex; align-items: center; gap: 6px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
+    #sizes .sz { display: inline-block; border-radius: 50%; background: #cfe8ff; box-shadow: 0 0 6px #cfe8ff; }
+    #sizes .sz.s { width: 3px; height: 3px; }
+    #sizes .sz.m { width: 6px; height: 6px; }
+    #sizes .sz.l { width: 12px; height: 12px; }
+    /* 各國角色組成：球面上四色混在一起讀不出來，並排的長條才比得動 */
+    .mix-row { display: flex; align-items: center; gap: 6px; margin: 3px 0; font-size: 10.5px; color: var(--muted); }
+    .mix-row .cc { width: 23px; font-weight: 800; color: var(--ink); flex: none; }
+    .mix-row .tot { width: 38px; text-align: right; color: var(--ink); flex: none; }
+    .mix-bar { flex: 1; display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); }
+    .mix-bar span { display: block; height: 100%; }
+    .mix-row .n { width: 52px; text-align: right; flex: none; }
+    .mix-row .as-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+    .mix-row.hi .cc, .mix-row.hi .tot { color: var(--cyan); }
+    #stat-asn .mix-bar, #stat-asia .mix-bar { flex: 0 0 52px; }
+    #stat-asn .n { width: 44px; }
+    #stat-asia .n { width: 88px; }
+    #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #asn-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #ooni-note, #users-note, #shutdown-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #stat-users .n, #stat-shutdown .n { width: 74px; }
+    .chip2 { display: inline-block; padding: 0 6px; margin: 0 0 0 4px; border-radius: 9px;
+             background: rgba(120,170,210,.13); color: #b9d3e6; font-size: 10.5px; }
+    /* 同一類資訊寫成一句話，放不下時讓瀏覽器自己折，不要拆成兩段各佔一行 */
+    .cc-sub2 .tiny, .cc-sub2.tiny { font-size: 10px; color: #6b8296; line-height: 1.5; }
+    #metric-sw { flex-wrap: wrap; }
+    #metric-sw button { flex: 1 1 44%; }
+    /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
+    #metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
+    #metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
+    #metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
+    #metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    /* 角色 chip 直接當按鈕：點下去地球換成那個角色的色調 */
+    .chip.act { cursor: pointer; border: 1px solid transparent; }
+    .chip.act:hover { background: rgba(255,255,255,.12); }
+    .chip.act.on { background: rgba(0,174,255,.18); border-color: rgba(0,174,255,.55); color: #fff; }
+    /* × 的位置一律留著，只切換可見度。只在選中時才長出來的話，chip 會變寬、把後面的擠到下一行 */
+    .chip.act::after { content: '×'; margin-left: 4px; font-weight: 800; color: var(--cyan); opacity: 0; transition: opacity .15s; }
+    .chip.act.on::after { opacity: 1; }
+    .chip.act:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    .lb[data-off="1"] { display: none; }
+    #hint-close { cursor: pointer; color: var(--cyan); font-weight: 800; flex: none; }
+    #hint .narrow { display: none; }
+    @media (max-width: 680px) {
+      #hint { font-size: 10.5px; bottom: 12px; padding: 7px 12px; }
+      #hint .wide { display: none; }
+      #hint .narrow { display: inline; }
+      #big { font-size: 24px; } .lb { font-size: 10px; }
+    }
+  </style>
+  <script type="importmap">
+  { "imports": {
+      "three": "../vendor/three.webgpu.min.js",
+      "three/webgpu": "../vendor/three.webgpu.min.js",
+      "three/tsl": "../vendor/three.tsl.min.js",
+      "three/addons/": "../vendor/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <div id="top" class="panel">
+    <details id="info" open>
+      <summary id="title">Tor 中繼地球儀</summary>
+      <div class="body">
+        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
+        <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
+        <div id="live-box" hidden><button id="btn-live">即時更新</button><span id="live-status"></span>
+          <div id="live-note">畫面預設只連本站與 assets.anoni.net，兩者都是我們自己的主機，取得的靜態快照對所有人都一樣。按下這個鍵會多連一台 onionoo.anoni.net 即時取資料，那台伺服器會看到你的 IP。</div>
+        </div>
+        <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
+        <div class="row" id="stat-role"></div>
+        <div class="lbl" id="lbl-brightness">陸地亮度：由低到高（非線性，中段差距已放大）</div>
+        <div id="metric-sw"><button data-mode="all-count" class="on" id="mode-count">中繼台數</button><button data-mode="all-weight" id="mode-weight">共識權重</button><button data-mode="conc" id="mode-conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
+        <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
+        <div class="lbl" id="lbl-mix">各國中繼數與角色組成（30 台以上）</div>
+        <div id="stat-mix"></div>
+        <div id="mix-note"></div>
+        <div class="lbl" id="lbl-asn">托管商排行（全球）</div>
+        <div id="stat-asn"></div>
+        <div id="asn-note"></div>
+        <div class="lbl" id="lbl-asia">亞洲鄰近國家</div>
+        <div id="stat-asia"></div>
+        <div class="lbl" id="lbl-users">用的人最多的地方（Tor Metrics 估計）</div>
+        <div id="stat-users"></div>
+        <div id="users-note"></div>
+        <div class="lbl" id="lbl-ooni">Tor 連線受阻的地方（OONI 觀測）</div>
+        <div id="stat-ooni"></div>
+        <div id="ooni-note"></div>
+        <div class="lbl" id="lbl-shutdown">網路被整個關掉的地方（Access Now 紀錄）</div>
+        <div id="stat-shutdown"></div>
+        <div id="shutdown-note"></div>
+        <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。</div>
+        <div id="gap"></div>
+        <div id="credit">
+          <p><b id="credit-title">資料來源</b></p>
+          <p id="credit-onionoo">中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。</p>
+          <p id="credit-metrics">使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
+          <p id="credit-ooni">Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
+          <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
+          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。</p>
+          <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
+        </div>
+        <div id="backend">偵測中…</div>
+        <div id="langs"></div>
+      </div>
+    </details>
+  </div>
+  <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
+
+  <div id="circ-tag">示意路徑　guard → middle → exit</div>
+  <div id="labels"></div>
+
+  <div id="cc-card" class="panel" hidden>
+    <div id="cc-head"><span id="cc-code"></span><span id="cc-sub"></span><span id="cc-close" role="button" tabindex="0">關閉</span></div>
+    <div id="cc-bar"></div>
+    <div id="cc-body"></div>
+  </div>
+
+  <div id="fatal" hidden></div>
+  <div id="loading">載入中…</div>
+
+  <div id="hint" class="panel">
+    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="narrow" id="hint-narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
+    <span id="hint-close">知道了</span>
+  </div>
+
+  <script type="module" src="./atlas.js"></script>
+</body>
+</html>

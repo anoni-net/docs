@@ -1,0 +1,35 @@
+# 第三方資料的授權例外
+
+根目錄的 `LICENSE`（CC BY 4.0）適用於本專案自己產出的文件內容。
+`docs/zh-TW/games/tor-network/` 底下有幾份資料來自外部來源，各自沿用原本的授權，
+重製或再散布時要照那一份的條款，不能只看根目錄的 LICENSE。
+
+| 檔案 | 來源 | 授權 |
+|------|------|------|
+| `ooni.json` | [OONI](https://ooni.org/) | [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md)，**禁止商業使用**，衍生內容需以相同授權釋出 |
+| `cables.json` | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0，衍生資料庫需以相同授權釋出並保持開放 |
+| `shutdowns.json` | [Access Now #KeepItOn](https://www.accessnow.org/keepiton-data-dashboard/) STOP 資料集 | CC BY 4.0 |
+| `snapshot.json` | [Onionoo](https://metrics.torproject.org/onionoo.html)（經自架 proxy 取回） | CC0 1.0 |
+| `torusers.json` | [Tor Metrics](https://metrics.torproject.org/) | CC0 1.0 |
+| `countries.json`、`continents.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
+
+## `ooni.json` 的兩條附加條款
+
+這份是六個來源裡條款最緊的一份，NC 與 SA 兩條要分開看。
+
+**NC（禁止商業使用）**：anoni.net 沒有商業行為，這條在目前的用法下不構成限制。
+要把本站內容用於商業情境時必須先把這一份抽掉或另外取得授權。
+
+**SA（相同方式分享）**：這條跟根目錄的 CC BY 4.0 有張力，兩個授權互不相容。
+處理方式是讓 `ooni.json` 保持獨立的一份，不把它的內容併進其他資料檔，
+畫面上也只是跟其他來源並列呈現。這樣整體屬於 CC 定義的「集合」，
+各份資料各自沿用原授權，SA 的範圍停在 `ooni.json` 自己身上，不會擴散到站台其他內容。
+
+要維持這個狀態，往後有兩件事不能做：把 OONI 的欄位寫進 `snapshot.json` 之類的其他檔案，
+或是產出一份混合了 OONI 與其他來源的新資料檔。任何一種都會讓成品變成 CC 定義的「改編」，
+屆時整份衍生物都得改用 CC BY-NC-SA 4.0 釋出。
+
+## 機器可讀的同一份資訊
+
+七個資料檔內部都帶有 `source`、`sourceUrl`、`license`、`licenseUrl` 欄位。
+畫面上的來源聲明在 `docs/zh-TW/games/tor-network/i18n.js` 的 `creditXxx` 系列，三種語言各一份。
