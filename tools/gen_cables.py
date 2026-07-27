@@ -156,7 +156,9 @@ def main():
     total_pts = sum(len(f) // 2 for f in flat)
     data = {
         "source": "OpenStreetMap contributors",
+        "sourceUrl": "https://www.openstreetmap.org/copyright",
         "license": "ODbL 1.0",
+        "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
         "note": "seamark:type=cable_submarine。OSM 的海纜覆蓋仍不完整，這是底圖不是完整清單。",
         "lines": flat,
     }
