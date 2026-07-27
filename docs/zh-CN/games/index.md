@@ -20,7 +20,7 @@ icon: material/cube-outline
 
 ## 作品
 
-作品本身是繁体中文界面，三个语言版本共用同一份程序。
+三个作品都支持简体中文界面。三个语言版本共用同一份程序，语言由网址参数决定。
 
 <div class="grid cards" markdown>
 
@@ -30,7 +30,7 @@ icon: material/cube-outline
 
     动手玩的解谜。把消息从你送到对岸的收件人，自己挑 3 个中继组成 Tor 的 guard → middle → exit 路径，避开监听、把 3 跳分散到不同 ASN，遇到封锁改走网桥。
 
-    <a href="../../games/onion-routing/index.html" class="md-button md-button--primary">:octicons-arrow-right-24: 开始游戏</a>
+    <a href="../../games/onion-routing/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始游戏</a>
 
 -   :material-lan:{ .lg .middle } __Tor 连线流量__
 
@@ -38,7 +38,7 @@ icon: material/cube-outline
 
     看的呈现。用细小发光粒子与残影表现 Tor 流量的两种路径：连 .onion 服务在随机会合点相遇，连明网网站则经 3 跳出口后原路往返。relay 数、电路数、有害节点、流量都可实时调控。
 
-    <a href="../../games/onion-rendezvous/index.html" class="md-button md-button--primary">:octicons-arrow-right-24: 开始观看</a>
+    <a href="../../games/onion-rendezvous/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始观看</a>
 
 -   :material-earth:{ .lg .middle } __Tor 中继地球仪__
 
@@ -46,7 +46,7 @@ icon: material/cube-outline
 
     看真实数据。把全球正在运作的近万台 Tor 中继洒进各自的国界里，颜色分 guard、middle、exit，大小分带宽，陆地依该国中继数调亮。有中继的国家都标了代号与数量，一眼看出网络高度集中在少数国家。数据取自 Onionoo。
 
-    <a href="../../games/tor-network/index.html" class="md-button md-button--primary">:octicons-arrow-right-24: 开始探索</a>
+    <a href="../../games/tor-network/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始探索</a>
 
 </div>
 
