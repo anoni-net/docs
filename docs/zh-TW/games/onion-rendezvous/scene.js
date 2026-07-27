@@ -8,8 +8,40 @@ import * as THREE from 'three';
 import { color, uniform, pass } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { afterImage } from 'three/addons/tsl/display/AfterImageNode.js';
+import { pickLang, t } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
+const LANG = pickLang();
+const S = (k, v) => t(LANG, k, v);
+
+// 把畫面上的靜態文字換成目前語言。HTML 裡留的是繁中，載入前不會空白，載入後由這裡覆蓋。
+function applyI18n() {
+  document.title = S('pageTitle') + ' · anoni.net';
+  const set = (id, key) => { const el = $(id); if (el) el.textContent = S(key); };
+  set('title', 'pageTitle');
+  set('caption', 'caption');
+  ['lgRelay', 'lgClient', 'lgOnion', 'lgClear', 'lgRendez', 'lgBad'].forEach((k, i) => {
+    const el = $('lg-' + i);
+    // 圖例每行前面有一顆色點，只換文字節點，不要把 span 洗掉
+    if (el && el.lastChild) el.lastChild.textContent = S(k);
+  });
+  set('note-main', 'noteMain');
+  set('note-more', 'noteMore');
+  set('nsm-0', 'noteSm0');
+  set('nsm-1', 'noteSm1');
+  set('nsm-2', 'noteSm2');
+  set('ctrl-title', 'ctrlTitle');
+  set('lbl-relays', 'lblRelays');
+  set('lbl-circuits', 'lblCircuits');
+  set('lbl-bad', 'lblBad');
+  set('lbl-flow', 'lblFlow');
+  set('hint-text', 'hintText');
+  set('hint-close', 'hintClose');
+  set('backend', 'backendDetecting');
+  // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
+  document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
+  document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
+}
 
 const COL = {
   bg: 0x04060d,
@@ -58,12 +90,12 @@ let renderer, scene, camera, post;
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
 // WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
 async function webgpuBlocker() {
-  if (new URLSearchParams(location.search).get('backend') === 'webgl') return '網址帶了 backend=webgl';
-  if (!window.isSecureContext) return '頁面不是 https 或 localhost';
-  if (!navigator.gpu) return '這個瀏覽器沒有 WebGPU';
+  if (new URLSearchParams(location.search).get('backend') === 'webgl') return 'blkForced';
+  if (!window.isSecureContext) return 'blkInsecure';
+  if (!navigator.gpu) return 'blkNoGpu';
   try {
-    if (!(await navigator.gpu.requestAdapter())) return '系統沒有給出可用的 GPU';
-  } catch (e) { return 'WebGPU 被擋下'; }
+    if (!(await navigator.gpu.requestAdapter())) return 'blkNoAdapter';
+  } catch (e) { return 'blkRejected'; }
   return '';
 }
 
@@ -71,7 +103,7 @@ async function initRenderer() {
   const hasGPU = !!navigator.gpu;
   const hasGL2 = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
   const forceWebGL = new URLSearchParams(location.search).get('backend') === 'webgl';
-  if (!hasGL2 && (forceWebGL || !hasGPU)) { $('backend').textContent = '這個瀏覽器不支援 WebGPU 或 WebGL2'; $('backend').className = 'err'; return false; }
+  if (!hasGL2 && (forceWebGL || !hasGPU)) { $('backend').textContent = S('backendNoSupport'); $('backend').className = 'err'; return false; }
 
   renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -79,12 +111,15 @@ async function initRenderer() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   document.body.appendChild(renderer.domElement);
-  try { await renderer.init(); } catch (e) { $('backend').textContent = '渲染器初始化失敗'; $('backend').className = 'err'; return false; }
+  try { await renderer.init(); } catch (e) { $('backend').textContent = S('backendInitFail'); $('backend').className = 'err'; return false; }
 
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
-  $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
+  $('backend').textContent = isGPU ? 'WebGPU' : S('backendWebGL');
   $('backend').className = isGPU ? 'gpu' : 'gl';
-  if (!isGPU) webgpuBlocker().then((why) => { if (why) $('backend').textContent = `WebGL2（fallback：${why}）`; });
+  // blocker 回傳的是 i18n 的 key，翻譯與分隔標點都交給語言表決定
+  if (!isGPU) webgpuBlocker().then((why) => {
+    if (why) $('backend').textContent = `${S('backendWebGL')}${S('backendSep')}${S(why)}`;
+  });
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
@@ -563,7 +598,7 @@ function bindControls(dom) {
 }
 
 // ---- 調控面板 ----
-function flowLabel(v) { return v < 0.34 ? '低' : v < 0.67 ? '中' : '高'; }
+function flowLabel(v) { return v < 0.34 ? S('flowLow') : v < 0.67 ? S('flowMid') : S('flowHigh'); }
 function bindUI() {
   const num = (id) => Number($(id).value);
   params.relays = num('c-relays'); params.circuits = num('c-circuits');
@@ -601,7 +636,7 @@ async function animate() {
     await frame();
   } catch (e) {
     console.error(e);
-    $('backend').textContent = '畫面發生錯誤，重新整理可以再試一次'; $('backend').className = 'err';
+    $('backend').textContent = S('backendRuntime'); $('backend').className = 'err';
     renderer.setAnimationLoop(null); // 停止 loop，避免持續拋錯洗版
   }
 }
@@ -698,6 +733,7 @@ function updateNode(m, tsec, dt) {
 
 // ---- 啟動 ----
 async function main() {
+  applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
   bindUI();
@@ -709,4 +745,4 @@ async function main() {
   renderer.setAnimationLoop(animate);
 }
 
-main().catch((e) => { $('backend').textContent = '啟動失敗'; $('backend').className = 'err'; console.error(e); });
+main().catch((e) => { $('backend').textContent = S('backendBootFail'); $('backend').className = 'err'; console.error(e); });
