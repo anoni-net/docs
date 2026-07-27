@@ -24,8 +24,8 @@
     #top { left: 14px; top: 14px; max-width: min(94vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 12px 15px; }
     #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     #title::-webkit-details-marker { display: none; }
-    #title::after { content: '▾ 收合'; flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
-    #info:not([open]) > #title::after { content: '▸ 詳情'; }
+    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
+    #info:not([open]) > #title::after { content: var(--toggle-closed, '▸ 詳情'); }
     .body { margin-top: 9px; }
     #big { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
     #big small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
@@ -167,43 +167,43 @@
     <details id="info" open>
       <summary id="title">Tor 中繼地球儀</summary>
       <div class="body">
-        <div id="big"><span id="stat-total">–</span> <small>台運作中的中繼</small></div>
-        <div id="pub">資料快照：<span id="stat-pub">…</span></div>
+        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
+        <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
         <div id="live-box" hidden><button id="btn-live">即時更新</button><span id="live-status"></span>
           <div id="live-note">畫面預設讀站上的靜態快照，不會對外連線。按下這個鍵會由你的瀏覽器直接連到 onionoo.anoni.net 取最新資料，那台伺服器就會看到你的 IP。</div>
         </div>
-        <div class="lbl">角色分布（點一下只看這個角色，再點一次看全部）</div>
+        <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
-        <div class="lbl">陸地亮度：由低到高（非線性，中段差距已放大）</div>
-        <div id="metric-sw"><button data-mode="all-count" class="on">中繼台數</button><button data-mode="all-weight">共識權重</button><button data-mode="conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
-        <div id="ramp"><span>無</span><i></i><span>最多</span></div>
-        <div class="lbl">各國中繼數與角色組成（30 台以上）</div>
+        <div class="lbl" id="lbl-brightness">陸地亮度：由低到高（非線性，中段差距已放大）</div>
+        <div id="metric-sw"><button data-mode="all-count" class="on" id="mode-count">中繼台數</button><button data-mode="all-weight" id="mode-weight">共識權重</button><button data-mode="conc" id="mode-conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
+        <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
+        <div class="lbl" id="lbl-mix">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
         <div id="mix-note"></div>
-        <div class="lbl">托管商排行（全球）</div>
+        <div class="lbl" id="lbl-asn">托管商排行（全球）</div>
         <div id="stat-asn"></div>
         <div id="asn-note"></div>
-        <div class="lbl">亞洲鄰近國家</div>
+        <div class="lbl" id="lbl-asia">亞洲鄰近國家</div>
         <div id="stat-asia"></div>
-        <div class="lbl">用的人最多的地方（Tor Metrics 估計）</div>
+        <div class="lbl" id="lbl-users">用的人最多的地方（Tor Metrics 估計）</div>
         <div id="stat-users"></div>
         <div id="users-note"></div>
-        <div class="lbl">Tor 連線受阻的地方（OONI 觀測）</div>
+        <div class="lbl" id="lbl-ooni">Tor 連線受阻的地方（OONI 觀測）</div>
         <div id="stat-ooni"></div>
         <div id="ooni-note"></div>
-        <div class="lbl">網路被整個關掉的地方（Access Now 紀錄）</div>
+        <div class="lbl" id="lbl-shutdown">網路被整個關掉的地方（Access Now 紀錄）</div>
         <div id="stat-shutdown"></div>
         <div id="shutdown-note"></div>
         <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。</div>
         <div id="gap"></div>
         <div id="credit">
-          <p><b>資料來源</b></p>
-          <p>中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。</p>
-          <p>使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
-          <p>Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
-          <p>網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
-          <p>國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。</p>
-          <p>海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
+          <p><b id="credit-title">資料來源</b></p>
+          <p id="credit-onionoo">中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。</p>
+          <p id="credit-metrics">使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
+          <p id="credit-ooni">Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
+          <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
+          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。</p>
+          <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
         </div>
         <div id="backend">偵測中…</div>
       </div>
@@ -224,8 +224,8 @@
   <div id="loading">載入中…</div>
 
   <div id="hint" class="panel">
-    <span class="wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
-    <span class="narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
+    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="narrow" id="hint-narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
     <span id="hint-close">知道了</span>
   </div>
 

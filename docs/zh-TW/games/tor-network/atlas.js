@@ -7,8 +7,59 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
+import { pickLang, t } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
+const LANG = pickLang();
+const S = (k, v) => t(LANG, k, v);
+
+// 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
+function applyI18n() {
+  document.title = S('pageTitle') + ' · anoni.net';
+  const set = (id, key, html) => {
+    const el = $(id);
+    if (!el) return;
+    if (html) el.innerHTML = S(key); else el.textContent = S(key);
+  };
+  set('title', 'pageTitle');
+  set('unit-relays', 'unitRelays');
+  set('snapshot-at', 'snapshotAt');
+  set('btn-live', 'btnLive');
+  set('live-note', 'liveNote');
+  set('lbl-roles', 'lblRoles');
+  set('lbl-brightness', 'lblBrightness');
+  set('mode-count', 'modeCount');
+  set('mode-weight', 'modeWeight');
+  set('mode-conc', 'modeConc');
+  set('ramp-lo', 'rampLow');
+  set('ramp-hi', 'rampHigh');
+  set('lbl-mix', 'lblMix');
+  set('lbl-asn', 'lblAsn');
+  set('lbl-asia', 'lblAsia');
+  set('lbl-users', 'lblUsers');
+  set('lbl-ooni', 'lblOoni');
+  set('lbl-shutdown', 'lblShutdown');
+  set('note', 'note');
+  set('credit-title', 'creditTitle');
+  set('credit-onionoo', 'creditOnionoo', true);
+  set('credit-metrics', 'creditMetrics', true);
+  set('credit-ooni', 'creditOoni', true);
+  set('credit-accessnow', 'creditAccessNow', true);
+  set('credit-ne', 'creditNaturalEarth', true);
+  set('credit-osm', 'creditOsm', true);
+  set('circ-tag', 'circTag');
+  set('cc-close', 'ccClose');
+  set('loading', 'loading');
+  set('hint-wide', 'hintWide');
+  set('hint-narrow', 'hintNarrow');
+  set('hint-close', 'hintClose');
+  set('backend', 'backendDetecting');
+  const bu = $('btn-users');
+  if (bu) { bu.textContent = S('modeUsers'); bu.title = S('modeUsersTip'); }
+  // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
+  document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
+  document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
+}
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const COL = {
@@ -156,12 +207,12 @@ async function getJSON(url, opt) {
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
 // WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
 async function webgpuBlocker() {
-  if (new URLSearchParams(location.search).get('backend') === 'webgl') return '網址帶了 backend=webgl';
-  if (!window.isSecureContext) return '頁面不是 https 或 localhost';
-  if (!navigator.gpu) return '這個瀏覽器沒有 WebGPU';
+  if (new URLSearchParams(location.search).get('backend') === 'webgl') return 'blkForced';
+  if (!window.isSecureContext) return 'blkInsecure';
+  if (!navigator.gpu) return 'blkNoGpu';
   try {
-    if (!(await navigator.gpu.requestAdapter())) return '系統沒有給出可用的 GPU';
-  } catch (e) { return 'WebGPU 被擋下'; }
+    if (!(await navigator.gpu.requestAdapter())) return 'blkNoAdapter';
+  } catch (e) { return 'blkRejected'; }
   return '';
 }
 
@@ -173,11 +224,11 @@ async function initRenderer() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   document.body.appendChild(renderer.domElement);
-  try { await renderer.init(); } catch (e) { console.error(e); fatal('這個瀏覽器無法啟用 WebGPU 或 WebGL2，地球儀畫不出來。'); return false; }
+  try { await renderer.init(); } catch (e) { console.error(e); fatal(S('fatalNoGpu')); return false; }
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
   $('backend').className = isGPU ? 'gpu' : 'gl';
-  $('backend').textContent = isGPU ? 'WebGPU' : 'WebGL2（fallback）';
-  if (!isGPU) webgpuBlocker().then((why) => { if (why) $('backend').textContent = `WebGL2（fallback：${why}）`; });
+  $('backend').textContent = isGPU ? 'WebGPU' : S('backendWebGL');
+  if (!isGPU) webgpuBlocker().then((why) => { if (why) $('backend').textContent = `${S('backendWebGL')}${S('backendSep')}${S(why)}`; });
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
@@ -1686,11 +1737,12 @@ async function animate() {
   try {
     await post.renderAsync();
   } catch (e) {
-    console.error(e); fatal('顯示已中斷，重新整理頁面可以再試一次。'); renderer.setAnimationLoop(null);
+    console.error(e); fatal(S('fatalRender')); renderer.setAnimationLoop(null);
   }
 }
 
 async function main() {
+  applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
   const [snap, world, coast, cables, ooni, torusers, shutdowns] = await Promise.all([
@@ -1776,4 +1828,4 @@ async function main() {
   if (load) load.classList.add('done');
   renderer.setAnimationLoop(animate);
 }
-main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal('地球儀載入失敗，資料可能沒抓到。重新整理頁面可以再試一次。'); });
+main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });
