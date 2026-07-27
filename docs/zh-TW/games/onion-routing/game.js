@@ -58,6 +58,7 @@ function initStaticText() {
   // 窄螢幕用短版，長句在手機會擠成三行、把提示列撐高，反過來壓縮到場景
   $('hint-text').textContent = matchMedia('(max-width:560px)').matches ? S('hintShort') : (S('selectHint') + ' ' + S('dragHint'));
   el.legendToggle.textContent = S('legendTitle');
+  $('hint-close').textContent = S('hintClose');
   const hex = (v) => '#' + v.toString(16).padStart(6, '0');
   const regionDots = Object.values(REGIONS)
     .map((r) => `<span class="lg-chip"><i class="lg-dot sm" style="background:${hex(r.color)}"></i>${r.place}</span>`).join('');
@@ -90,13 +91,14 @@ const TARGET = new THREE.Vector3(0, 0, 0);
 
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
 // WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
+// 回傳 i18n 的 key 不是字串，呼叫端再翻。早先直接回中文，英文版的徽章會混一句繁中。
 async function webgpuBlocker() {
-  if (new URLSearchParams(location.search).get('backend') === 'webgl') return '網址帶了 backend=webgl';
-  if (!window.isSecureContext) return '頁面不是 https 或 localhost';
-  if (!navigator.gpu) return '這個瀏覽器沒有 WebGPU';
+  if (new URLSearchParams(location.search).get('backend') === 'webgl') return 'blkForced';
+  if (!window.isSecureContext) return 'blkInsecure';
+  if (!navigator.gpu) return 'blkNoGpu';
   try {
-    if (!(await navigator.gpu.requestAdapter())) return '系統沒有給出可用的 GPU';
-  } catch (e) { return 'WebGPU 被擋下'; }
+    if (!(await navigator.gpu.requestAdapter())) return 'blkNoAdapter';
+  } catch (e) { return 'blkRejected'; }
   return '';
 }
 
@@ -117,7 +119,7 @@ async function initRenderer() {
   const isGPU = !!(renderer.backend && renderer.backend.isWebGPUBackend);
   el.backend.textContent = isGPU ? S('backendWebGPU') : S('backendWebGL');
   el.backend.className = isGPU ? 'gpu' : 'gl';
-  if (!isGPU) webgpuBlocker().then((why) => { if (why) el.backend.textContent = `${S('backendWebGL')}：${why}`; });
+  if (!isGPU) webgpuBlocker().then((why) => { if (why) el.backend.textContent = `${S('backendWebGL')}${S('backendSep')}${S(why)}`; });
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x05070e);
