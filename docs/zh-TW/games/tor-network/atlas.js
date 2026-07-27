@@ -1477,7 +1477,13 @@ function fillUsers(snap) {
   const note = $('users-note');
   if (!note) return;
   const tw = TORUSERS.users.tw;
-  note.innerHTML = S('noteUsers', { wan: Math.round(TORUSERS.usersAll / 10000) / 100, date: TORUSERS.date })
+  // 中文用「萬」、英文用 million，兩個單位都傳進去讓各語言的句型自己挑。
+  // 早先只傳一個 wan 而且多除了一次 100，畫面上把 308 萬寫成 3.08 萬，差一百倍。
+  note.innerHTML = S('noteUsers', {
+    wan: Math.round(TORUSERS.usersAll / 10000),
+    mil: (TORUSERS.usersAll / 1e6).toFixed(1),
+    date: TORUSERS.date,
+  })
     + (tw ? S('noteUsersTw', { n: tw[0].toLocaleString(), relays: cnt.get('tw') || 0 }) : '')
     + S('noteUsersTail');
 }
@@ -1558,6 +1564,21 @@ function liveAllowed() {
   return true;
 }
 
+// AS 的註冊名稱不一定是公司。個人申請的 AS 登記的就是持有人本名，把它印在畫面上等於
+// 公告「這個人在這個國家跑中繼」。判斷刻意設成「預設當個人」：找不到機構線索又長得像
+// 人名就不用名稱，退回顯示 AS 號碼。這份規則要跟 tools/gen_tor_snapshot.py 保持一致，
+// 那邊是靜態快照的入口，這邊是「即時更新」的入口，漏掉任何一邊名字都會回到畫面上。
+const ORG_HINT = /(\b(gmbh|ltd|llc|inc|corp|co|company|limited|holding|group|ag|a\/s|as|ab|oy|oyj|ehf|b\.?v|n\.?v|s\.?a|s\.?r\.?l|s\.?r\.?o|sas|sarl|sia|ou|kft|zrt|spa|srl|se|plc|lp|llp|pty|pte|sdn|bhd|pt|kk|gk|shpk|d\.?o\.?o|tic|san|doo|aps)\b|network|net|hosting|host|server|cloud|data|internet|telecom|telekom|comm|system|solution|technolog|service|digital|media|computer|broadband|cyber|online|infra|colo|datacenter|carrier|isp|exchange|vpn|proxy|web|domain|register|telefon|mobile|wireless|fiber|fibre|satellite|transit|peering|telephone|distance|global|connectivity|bilisim|servicos|platform|foundation|forening|stiftung|association|society|club|universit|institut|research|academ|school|college|library|museum|church|ministry|government|council|agency|bureau|authority|federation|union|alliance|coalition|cooperative|collective|project|initiative|lab|team|community|nonprofit|ngo|trust|fund|amendment|liberty|freedom|privacy|rights|frihet|digitala|\d)/i;
+function isPersonName(name) {
+  const s = (name || '').trim();
+  if (!s) return false;
+  if (s.toLowerCase().includes('trading as')) return true;
+  if (ORG_HINT.test(s)) return false;
+  // 不設詞數上限，理由同 gen_tor_snapshot.py：人名長度沒有上限
+  const w = s.split(/\s+/);
+  return w.length > 1 && w.every((x) => x && x[0] === x[0].toUpperCase());
+}
+
 // 把逐台資料聚合成跟 snapshot.json 同構的物件。欄位定義照 tools/gen_tor_snapshot.py，
 // 那支腳本改了輸出格式，這裡要跟著改。
 function aggregateLive(relays, published) {
@@ -1578,7 +1599,7 @@ function aggregateLive(relays, published) {
       if (!m) asByCC.set(cc, m = new Map());
       m.set(asn, (m.get(asn) || 0) + 1);
       asGlobal.set(asn, (asGlobal.get(asn) || 0) + 1);
-      if (r.as_name && !asNames.has(asn)) asNames.set(asn, String(r.as_name).slice(0, AS_NAME_MAX));
+      if (r.as_name && !asNames.has(asn) && !isPersonName(r.as_name)) asNames.set(asn, String(r.as_name).slice(0, AS_NAME_MAX));
     }
     let v = verByCC.get(cc);
     if (!v) verByCC.set(cc, v = [0, 0]);

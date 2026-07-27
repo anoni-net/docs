@@ -27,7 +27,7 @@ read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份�
   python3 tools/gen_tor_snapshot.py [輸出路徑]
   預設輸出 docs/zh-TW/games/tor-network/snapshot.json
 """
-import json, os, subprocess, sys, time
+import json, os, re, subprocess, sys, time
 from collections import Counter, defaultdict
 
 MCP = os.environ.get("ONIONOO_MCP", "https://onionoo.anoni.net/mcp")
@@ -36,6 +36,43 @@ FIELDS = "fingerprint,country,flags,consensus_weight,as,as_name,recommended_vers
 AS_TOP_PER_COUNTRY = 3   # 每國留前幾大托管商
 AS_TOP_GLOBAL = 15       # 全球托管商排行留幾筆
 AS_NAME_MAX = 26         # 名稱截斷，避免 snapshot 被一堆公司全名撐大
+
+# AS 的註冊名稱不一定是公司。個人申請的 AS，RIR 上登記的就是持有人本名，Onionoo 原樣
+# 給出來。把那種名字放進 snapshot 再印到畫面上，等於公告「這個人在這個國家跑中繼」，
+# 對中國、俄羅斯、烏克蘭這類地區的個人尤其危險，也違反這個站不揭露個別操作者的原則。
+#
+# 判斷方向刻意設成「預設當個人」：名稱裡找不到任何機構線索，又長得像人名，就不存名稱，
+# 畫面上退回顯示 AS 號碼。寧可讓幾家小公司變成 ASxxxxx，也不要漏掉一個真人。
+ORG_HINT = re.compile(r"""(?ix)
+  \b(gmbh|ltd|llc|inc|corp|co|company|limited|holding|group|ag|a/s|as|ab|oy|oyj|ehf|
+  b\.?v|n\.?v|s\.?a|s\.?r\.?l|s\.?r\.?o|sas|sarl|sia|ou|oü|kft|zrt|spa|srl|se|plc|lp|llp|
+  pty|pte|sdn|bhd|pt|kk|gk|shpk|d\.?o\.?o|tic|san|doo|apS|aps)\b
+  | (network|net|hosting|host|server|cloud|data|internet|telecom|telekom|comm|
+  system|solution|technolog|service|digital|media|computer|broadband|cyber|online|
+  infra|colo|datacenter|carrier|isp|exchange|vpn|proxy|web|domain|register|telefon|
+  mobile|wireless|fiber|fibre|satellite|transit|peering|telephone|distance|global|connectivity|bilisim|servicos|platform)
+  | (foundation|forening|stiftung|association|society|club|universit|institut|
+  research|academ|school|college|library|museum|church|ministry|government|council|
+  agency|bureau|authority|federation|union|alliance|coalition|cooperative|collective|
+  project|initiative|labs?|team|community|nonprofit|ngo|trust|fund)
+  | (amendment|liberty|freedom|privacy|rights|frihet|digitala)
+  | \d
+""")
+
+
+def is_person_name(name):
+    """看起來像個人姓名就回 True，那種名稱不寫進 snapshot。"""
+    s = (name or "").strip()
+    if not s:
+        return False
+    if "trading as" in s.lower():   # 個人商號，登記的還是本名
+        return True
+    if ORG_HINT.search(s):
+        return False
+    # 不設詞數上限。第一版限 4 個詞以內，結果一個五段式的阿拉伯姓名整個漏掉。
+    # 人名長度沒有上限，公司名少了機構詞才是例外，所以這裡只看「有沒有機構線索」。
+    words = s.split()
+    return len(words) > 1 and all(w[:1].isupper() for w in words if w)
 # Onionoo 給的這幾種國別沒有明確位置（eu 泛指歐洲、?? 未知），country 參數也查不到，
 # 地球上本來就不畫，逐台取回時直接跳過。
 NO_PLACE = {"eu", "??", "xx", ""}
@@ -155,7 +192,8 @@ def main():
             as_by_cc[country][asn] += 1
             as_global[asn] += 1
             nm = (r.get("as_name") or "").strip()
-            if nm and asn not in as_names:
+            # 疑似個人姓名的不收，畫面上就會退回顯示 AS 號碼
+            if nm and asn not in as_names and not is_person_name(nm):
                 as_names[asn] = nm[:AS_NAME_MAX]
         ver_by_cc[country][0] += 1
         if r.get("recommended_version"):
