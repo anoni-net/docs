@@ -90,15 +90,15 @@ const ROLE_COL = [COL.mid, COL.guard, COL.exit, COL.both]; // index = roleCode
 // 地圖模式：全部，或單看某一種角色。發光層依模式換色階，深淺代表該國的數量。
 // lo 是「有一台」的顏色，hi 是「最多的那個國家」，中間走 glowColor 的冪次曲線。
 const MODES = {
-  all:    { lbl: '全部',        lo: '#0d2c46', hi: '#3d87bd' },
+  all:    { get lbl() { return S('modeAllLbl'); },   lo: '#0d2c46', hi: '#3d87bd' },
   guard:  { lbl: 'guard',       lo: '#0c2b1e', hi: '#4fd58f' },
   exit:   { lbl: 'exit',        lo: '#2b1d09', hi: '#ffb347' },
   both:   { lbl: 'guard＋exit', lo: '#2a1220', hi: '#ff9ec7' },
   middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
-  conc:   { lbl: '單一業者集中度', lo: '#2b1030', hi: '#c47ad8' }, // 紫，跟四個角色色都拉開
+  conc:   { get lbl() { return S('modeConcLbl'); },  lo: '#2b1030', hi: '#c47ad8' }, // 紫，跟四個角色色都拉開
   // 使用者估計是需求端，跟其他模式的供給端不是同一件事，色相挑剩下沒人用的黃。
   // 這個模式下中繼點照樣全部顯示，「陸地亮度是用的人、點是架的機器」那個落差就是重點。
-  users:  { lbl: '使用者估計',   lo: '#2a2410', hi: '#e8d24a' },
+  users:  { get lbl() { return S('modeUsersLbl'); }, lo: '#2a2410', hi: '#e8d24a' },
 };
 const CONC_MIN = 10; // 台數太少的國家，集中度沒有意義（一台就是 100%）
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
@@ -1130,15 +1130,16 @@ function fillMix(snap) {
     return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${t.toLocaleString()}</span>`
       + `<span class="mix-bar">${[2, 3, 1, 0].map(seg).join('')}</span>`
-      + `<span class="n">出口 ${exitPct({ r, t })}%</span></div>`;
+      + `<span class="n">${S('rowExit', { pct: exitPct({ r, t }) })}</span></div>`;
   }).join('');
   const byExit = [...rows].sort((a, b) => exitPct(b) - exitPct(a));
   const fmt = (x) => `${x.cc.toUpperCase()} ${exitPct(x)}%`;
   const note = $('mix-note');
   if (note) {
-    note.textContent = `出口流量比例最高：${byExit.slice(0, 3).map(fmt).join('、')}。`
-      + `最低：${byExit.slice(-3).reverse().map(fmt).join('、')}。`
-      + `出口要承受濫用投訴與法律風險，各國願不願意跑差很多。`;
+    note.textContent = S('noteMix', {
+      hi: byExit.slice(0, 3).map(fmt).join(S('listSep')),
+      lo: byExit.slice(-3).reverse().map(fmt).join(S('listSep')),
+    });
   }
 }
 
@@ -1193,15 +1194,17 @@ function showCountry(cc) {
   const wShare = (CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100;
   const exitPct = (r[2] + r[3]) / t * 100;
   $('cc-code').textContent = cc.toUpperCase();
-  $('cc-sub').textContent = `${t.toLocaleString()} 台，台數排名第 ${CC_STATS.rankN.get(cc)}`;
+  $('cc-sub').textContent = S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) });
   $('cc-bar').innerHTML = [2, 3, 1, 0]
     .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
     .join('');
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
   $('cc-body').innerHTML =
     // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
-    `佔全網 <b>${pct(t / CC_STATS.totalN * 100)}%</b>，權重 <b>${pct(wShare)}%</b>（第 ${CC_STATS.rankW.get(cc)}）`
-    + `，出口 <b>${Math.round(exitPct)}%</b>（全網 ${Math.round(CC_STATS.exitShare * 100)}%）`
+    S('cardShare', {
+      share: pct(t / CC_STATS.totalN * 100), w: pct(wShare), wrank: CC_STATS.rankW.get(cc),
+      exit: Math.round(exitPct), all: Math.round(CC_STATS.exitShare * 100),
+    })
     + versionPart(cc)
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
@@ -1224,9 +1227,9 @@ function hostingLine(cc, total) {
   const [, name, n] = a.t[0];
   const pct = Math.round(n / total * 100);
   // 次要業者接在同一句裡。手機沒有 hover，藏進 title 等於藏起來
-  const rest = a.t.slice(1).map(([id, nm, k]) => `${nm || id} ${k}`).join('、');
-  return `<div class="cc-sub2">托管商 <b>${name || a.t[0][0]}</b> ${n} 台（${pct}%）`
-    + (rest ? `，其次 ${rest}` : '') + `，全國 ${a.n} 家</div>`;
+  const rest = a.t.slice(1).map(([id, nm, k]) => `${nm || id} ${k}`).join(S('listSep'));
+  return `<div class="cc-sub2">` + S('cardHosting', { name: name || a.t[0][0], n, pct })
+    + (rest ? S('cardHostingRest', { rest }) : '') + S('cardHostingAll', { n: a.n }) + `</div>`;
 }
 
 // 跑官方建議版本的台數。這是維運品質，跟佔比、權重同屬「這一國中繼的數字」，
@@ -1235,7 +1238,7 @@ function hostingLine(cc, total) {
 function versionPart(cc) {
   const v = SNAP_VER && SNAP_VER[cc];
   if (!v || !v[0]) return '';
-  return `，已安裝官方建議版本 <b>${v[1]}/${v[0]}</b>（${Math.round(v[1] / v[0] * 100)}%）`;
+  return S('cardVersion', { ok: v[1], tot: v[0], pct: Math.round(v[1] / v[0] * 100) });
 }
 // OONI 對這一國的觀測。措辭刻意停在「沒有照預期完成」，不寫成封鎖率。
 // anomaly 的成因包含審查、網路不穩與 ISP 故障，單看比率沒辦法分辨是哪一種，
@@ -1250,8 +1253,8 @@ function ooniLine(cc) {
   const val = pct < 10 ? pct.toFixed(1) : Math.round(pct);
   // 成因的免責統一收在卡片末尾那行，不逐項重複
   return `<div class="cc-sub2${blocked ? ' warn' : ' dim'}">`
-    + `OONI 近 ${OONI.days} 天測試 ${m.toLocaleString()} 次，<b>${val}%</b> 未照預期完成`
-    + (blocked ? '，多半是被擋' : '') + `</div>`;
+    + S('cardOoni', { days: OONI.days, n: m.toLocaleString(), pct: val })
+    + (blocked ? S('cardOoniBlocked') : '') + `</div>`;
 }
 
 // 這一國有多少人在用。中繼數是供給端，這是需求端，兩個數字擺在一起才看得出落差。
@@ -1265,28 +1268,30 @@ function usersLine(cc, relays) {
   // 每台中繼「服務」多少使用者。這不是真的負載，只是兩個數字的比值，用來凸顯落差。
   const per = relays ? Math.round(cur / relays) : 0;
   return `<div class="cc-sub2">`
-    + `估計 <b>${cur.toLocaleString()}</b> 人在用（${TORUSERS.days} 天平均 ${avg.toLocaleString()}）`
-    + (per ? `，每台中繼約 ${per.toLocaleString()} 人` : '') + `</div>`;
+    + S('cardUsers', { n: cur.toLocaleString(), days: TORUSERS.days, avg: avg.toLocaleString() })
+    + (per ? S('cardUsersPer', { n: per.toLocaleString() }) : '') + `</div>`;
 }
 
 // 這一國的人用什麼方式繞過封鎖。跟 ooni.json 那層是一組的：OONI 說連不上，這裡說改用什麼。
-const PT_NAME = { '<OR>': '一般橋接', obfs4: 'obfs4', obfs3: 'obfs3', snowflake: 'snowflake', webtunnel: 'webtunnel', meek: 'meek', conjure: 'conjure' };
+const PT_NAME = { '<OR>': null, obfs4: 'obfs4', obfs3: 'obfs3', snowflake: 'snowflake', webtunnel: 'webtunnel', meek: 'meek', conjure: 'conjure' };
 function bridgeLine(cc) {
   if (!TORUSERS || !TORUSERS.bridge) return '';
   const b = TORUSERS.bridge[cc];
   if (!b || !b.length) return '';
-  const list = b.map(([t, n]) => `<span class="chip2">${PT_NAME[t] || t} ${n.toLocaleString()}</span>`).join('');
-  return `<div class="cc-sub2 bridges">橋接繞道${list}</div>`;
+  const list = b.map(([t, n]) =>
+    `<span class="chip2">${(t === '<OR>' ? S('ptPlain') : (PT_NAME[t] || t))} ${n.toLocaleString()}</span>`).join('');
+  return `<div class="cc-sub2 bridges">${S('cardBridge')}${list}</div>`;
 }
 
 // 這一國被整個關掉過幾次，以及理由。
 // Conflict 與 Communal violence 未必是政府主動決策（可能是戰事打壞基礎設施），
 // 資料裡分開算過，這裡只把「資訊管制類」的件數單獨講出來，不把全部件數講成政府封鎖。
-const CAUSE_ZH = {
-  'Conflict': '武裝衝突', 'Protests': '抗議活動', 'Information control': '資訊管制',
-  'Communal violence': '族群衝突', 'Exam cheating': '防止考試作弊',
-  'Visits by government officials': '官員視察', 'Elections': '選舉',
-  'Other': '其他', 'Unknown': '不明',
+// 成因的中譯。值是 i18n 的 key，實際字串由語言表決定。
+const CAUSE_KEY = {
+  'Conflict': 'causeConflict', 'Protests': 'causeProtests', 'Information control': 'causeInfo',
+  'Communal violence': 'causeCommunal', 'Exam cheating': 'causeExam',
+  'Visits by government officials': 'causeVisit', 'Elections': 'causeElection',
+  'Other': 'causeOther', 'Unknown': 'causeUnknown',
 };
 function shutdownLine(cc) {
   if (!SHUTDOWNS || !SHUTDOWNS.cc) return '';
@@ -1294,22 +1299,22 @@ function shutdownLine(cc) {
   if (!s) return '';
   const [n, ctl, year, causes] = s;
   const top = Object.entries(causes || {}).slice(0, 3)
-    .map(([k, v]) => `${CAUSE_ZH[k] || k} ${v}`).join('、');
+    .map(([k, v]) => `${(CAUSE_KEY[k] ? S(CAUSE_KEY[k]) : k)} ${v}`).join(S('listSep'));
   const [y0] = SHUTDOWNS.years || [];
   return `<div class="cc-sub2 warn">`
-    + `${y0 ? y0 + ' 年起 ' : ''}<b>${n}</b> 次網路關閉`
-    + (year ? `，最近 ${year} 年` : '')
-    + (ctl ? `，${ctl} 次屬管控類` : '')
-    + (top ? `，主因${top}` : '') + `</div>`;
+    + (y0 ? S('cardShutdownHead', { y0 }) : '') + `<b>${n}</b>` + S('cardShutdownN')
+    + (year ? S('cardShutdownYear', { y: year }) : '')
+    + (ctl ? S('cardShutdownCtl', { n: ctl }) : '')
+    + (top ? S('cardShutdownTop', { top }) : '') + `</div>`;
 }
 
 // 三份資料各自的但書收成一行。逐項標註會讓每一類都多佔一行，卡片就是這樣長起來的。
 // 這些話不能省：人數是估計值、OONI 的異常不等於審查、武裝衝突類的關閉未必是政府下令。
 function cardNote(cc) {
   const bits = [];
-  if (TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push('人數為估計值');
-  if (OONI && OONI.cc && OONI.cc[cc]) bits.push('OONI 異常的成因含封鎖、網路不穩與 ISP 故障');
-  if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) bits.push('武裝衝突類的關閉未必由政府主動下令');
+  if (TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push(S('cardNoteUsers'));
+  if (OONI && OONI.cc && OONI.cc[cc]) bits.push(S('cardNoteOoni'));
+  if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) bits.push(S('cardNoteShutdown'));
   return bits.length ? `<div class="cc-sub2 tiny dim">${bits.join('。')}。</div>` : '';
 }
 
@@ -1330,10 +1335,10 @@ function radarLine(cc) {
   const top = asn && asn.t && asn.t[0];
   // Onionoo 給的是 AS12345，Radar 的網址要小寫的 as12345
   const asLink = top && /^AS\d+$/i.test(top[0])
-    ? extLink(RADAR + top[0].toLowerCase(), top[1] || top[0], '在 Cloudflare Radar 看這家業者的網路狀況')
+    ? extLink(RADAR + top[0].toLowerCase(), top[1] || top[0], S('cardRadarTipAs'))
     : '';
-  return `<div class="cc-sub2 dim ext">Cloudflare Radar<span class="tiny">（離開本站）</span>：`
-    + extLink(RADAR + cc, cc.toUpperCase(), '在 Cloudflare Radar 看這一國的流量與中斷紀錄')
+  return `<div class="cc-sub2 dim ext">${S('cardRadar')}<span class="tiny">${S('cardRadarOff')}</span>${S('backendSep')}`
+    + extLink(RADAR + cc, cc.toUpperCase(), S('cardRadarTipCc'))
     + (asLink ? `、${asLink}` : '') + `</div>`;
 }
 
@@ -1402,9 +1407,8 @@ function fillAsn(snap) {
   const v = snap.versionAll;
   if (note) {
     const top3 = snap.asnTop.slice(0, 3).reduce((a, x) => a + x[2], 0);
-    note.innerHTML = `這些是賣主機與雲端的公司，全球共 ${(snap.asnCount || '數百')} 家托管了這些中繼，`
-      + `前三家就佔 ${(top3 / tot * 100).toFixed(1)}%。國界分散不代表機房分散，同一家的一個政策就能影響很大一塊。`
-      + (v && v[0] ? `<br>另外，全網有 ${Math.round(v[1] / v[0] * 100)}% 的中繼跑在官方建議的版本上。` : '');
+    note.innerHTML = S('noteAsn', { n: snap.asnCount || '?', pct: (top3 / tot * 100).toFixed(1) })
+      + (v && v[0] ? S('noteAsnVer', { pct: Math.round(v[1] / v[0] * 100) }) : '');
   }
 }
 
@@ -1423,7 +1427,7 @@ function fillAsia(snap) {
     return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${n.toLocaleString()}</span>`
       + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#4fd58f"></span></span>`
-      + `<span class="n">${a ? a.n + ' 家' : ''}${conc !== null ? `/最大 ${conc}%` : ''}</span></div>`;
+      + `<span class="n">${a ? S('rowProviders', { n: a.n }) : ''}${conc !== null ? S('rowTopShare', { pct: conc }) : ''}</span></div>`;
   }).join('');
 }
 
@@ -1441,7 +1445,7 @@ function fillOoni(snap) {
     return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${Math.round(pct)}%</span>`
       + `<span class="mix-bar"><span style="width:${pct.toFixed(1)}%;background:${'#' + COL.blocked.toString(16)}"></span></span>`
-      + `<span class="n">中繼 ${n.toLocaleString()}</span></div>`;
+      + `<span class="n">${S('rowRelays', { n: n.toLocaleString() })}</span></div>`;
   }).join('');
   const note = $('ooni-note');
   if (!note) return;
@@ -1449,11 +1453,9 @@ function fillOoni(snap) {
   // 措辭要停在「沒有照預期完成」。這個比率沒辦法區分審查、網路不穩與 ISP 故障，
   // 寫成封鎖率就是拿雜訊指控特定國家。
   // 門檻寫死在文案裡，改了 gen_ooni_snapshot.py 的 BLOCK_PCT 就會對不上，所以讀資料裡的值
-  note.innerHTML = `這幾國近 ${OONI.days} 天的 Tor 連線測試有 ${OONI.blockPct}% 以上沒有照預期完成，`
-    + `同一期間全球平均是 ${(all[1] / all[0] * 100).toFixed(0)}%。`
-    + `異常的成因包含連線被擋、網路不穩與 ISP 故障，單看比率分不出是哪一種，`
-    + `所以這裡只列高到極端的那幾國，中段的數字沒有拿來上色。`
-    + `對照左邊的中繼數會看到，連不上 Tor 的地方，也幾乎沒有人在那裡跑中繼。`;
+  note.innerHTML = S('noteOoni', {
+    days: OONI.days, thr: OONI.blockPct, avg: (all[1] / all[0] * 100).toFixed(0),
+  });
 }
 
 // 使用者最多的國家，對照該國的中繼數。跟 fillOoni 那塊相反：那邊講「連不上的地方」，
@@ -1470,16 +1472,14 @@ function fillUsers(snap) {
     return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${cur.toLocaleString()}</span>`
       + `<span class="mix-bar"><span style="width:${(cur / max * 100).toFixed(1)}%;background:${MODES.users.hi}"></span></span>`
-      + `<span class="n">中繼 ${(cnt.get(cc) || 0).toLocaleString()}</span></div>`;
+      + `<span class="n">${S('rowRelays', { n: (cnt.get(cc) || 0).toLocaleString() })}</span></div>`;
   }).join('');
   const note = $('users-note');
   if (!note) return;
   const tw = TORUSERS.users.tw;
-  note.innerHTML = `全球估計每天約 ${Math.round(TORUSERS.usersAll / 10000) / 100} 萬人在用，資料是 ${TORUSERS.date}。`
-    + (tw ? `台灣估計 ${tw[0].toLocaleString()} 人，中繼 ${(cnt.get('tw') || 0)} 台。` : '')
-    + `用的人在哪跟中繼架在哪是兩件事，中繼多的國家多半是機房便宜、法規友善，`
-    + `跟那裡有多少人需要 Tor 沒有直接關係。`
-    + `這些是用中繼收到的目錄請求反推的估計值，信心區間相當寬，看趨勢比看絕對數字可靠。`;
+  note.innerHTML = S('noteUsers', { wan: Math.round(TORUSERS.usersAll / 10000) / 100, date: TORUSERS.date })
+    + (tw ? S('noteUsersTw', { n: tw[0].toLocaleString(), relays: cnt.get('tw') || 0 }) : '')
+    + S('noteUsersTail');
 }
 
 // 被整個關掉過的地方。這份資料的成因是人工查證後標註的，比測量類的異常率乾淨，
@@ -1492,21 +1492,20 @@ function fillShutdowns() {
   const max = rows[0][1][0];
   box.innerHTML = rows.map(([cc, [n, , year]]) => {
     return `<div class="mix-row"><span class="cc">${cc.toUpperCase()}</span>`
-      + `<span class="tot">${n} 次</span>`
+      + `<span class="tot">${S('rowTimes', { n })}</span>`
       + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#e0663a"></span></span>`
-      + `<span class="n">最近 ${year || '—'}</span></div>`;
+      + `<span class="n">${S('rowLatest', { y: year || '—' })}</span></div>`;
   }).join('');
   const note = $('shutdown-note');
   if (!note) return;
   const [y0, y1] = SHUTDOWNS.years || [];
   const c = SHUTDOWNS.causesAll || {};
   const pick = (k) => c[k] || 0;
-  note.innerHTML = `${y0} 到 ${y1} 年間全球 ${SHUTDOWNS.total} 筆紀錄，由 Access Now 的 #KeepItOn 聯盟人工查證。`
-    + `成因以武裝衝突 ${pick('Conflict')} 次最多，其次是抗議活動 ${pick('Protests')} 次與資訊管制 ${pick('Information control')} 次。`
-    + `也有為了防止考試作弊 ${pick('Exam cheating')} 次與官員視察期間 ${pick('Visits by government officials')} 次而關閉的紀錄。`
-    + `武裝衝突與族群衝突未必是政府主動下令，戰事打壞基礎設施也算在內，`
-    + `所以國家卡片另外標出屬於資訊管制類的件數。`
-    + `另外印度的紀錄多半是單一邦或單一地區的斷網，跟上面那些全國性受阻的情況性質不同。`;
+  note.innerHTML = S('noteShutdown', {
+    y0, y1, total: SHUTDOWNS.total,
+    conflict: pick('Conflict'), protest: pick('Protests'), info: pick('Information control'),
+    exam: pick('Exam cheating'), visit: pick('Visits by government officials'),
+  });
 }
 
 // snapshot 的 countries 是伺服器端聚合的準確值；舊快照沒這欄位就退回逐台樣本統計
@@ -1520,7 +1519,7 @@ function countryCounts(snap) {
 function fillPanel(snap, drawn) {
   $('stat-total').textContent = snap.total.toLocaleString();
   $('stat-pub').textContent = (snap.published || '').replace(' ', ' · ') + ' UTC'
-    + (snap.live ? '（剛才即時取得）' : '');
+    + (snap.live ? S('liveTag') : '');
   const br = snap.byRole || {};
   const modeOf = { 0: 'middle', 1: 'guard', 2: 'exit', 3: 'both' };
   $('stat-role').innerHTML = [1, 3, 2, 0].map((k) =>
@@ -1530,8 +1529,8 @@ function fillPanel(snap, drawn) {
   const miss = snap.total - drawn;
   if (drawn && miss > 0) {
     $('gap').textContent = miss <= (snap.noPlace || 0) + 5
-      ? `另有 ${miss} 台的國別是 eu 或未知，地球上沒有位置可放，略過不畫。`
-      : `地球上畫出 ${drawn.toLocaleString()} 台，其餘 ${miss.toLocaleString()} 台缺明確國別或取回時未取得。`;
+      ? S('gapNoPlace', { n: miss })
+      : S('gapPartial', { drawn: drawn.toLocaleString(), miss: miss.toLocaleString() });
   }
 }
 
@@ -1640,25 +1639,24 @@ async function fetchLive(btn) {
   const status = $('live-status');
   const say = (t, cls) => { if (status) { status.textContent = t; status.className = cls || ''; } };
   btn.disabled = true;
-  say('連線中…');
+  say(S('liveConnecting'));
   try {
     const url = `${LIVE_API}?running=true&limit=20000&fields=${encodeURIComponent(LIVE_FIELDS)}`;
     // 不送 cookie 也不送 referrer，這個請求只需要拿公開資料，沒有理由多給對方任何東西
     const r = await fetch(url, { mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
-    if (!r.ok) throw new Error(`伺服器回應 HTTP ${r.status}`);
+    if (!r.ok) throw new Error(S('liveHttp', { code: r.status }));
     const d = await r.json();
     const relays = d.relays || [];
-    if (!relays.length) throw new Error('回應裡沒有中繼資料');
+    if (!relays.length) throw new Error(S('liveNoData'));
     applySnapshot(aggregateLive(relays, d.relays_published));
-    say(`已更新，取回 ${relays.length.toLocaleString()} 台`, 'ok');
+    say(S('liveOk', { n: relays.length.toLocaleString() }), 'ok');
   } catch (e) {
     console.error(e);
     // 被跨來源擋下時 fetch 丟的是 TypeError，訊息只有含糊的 Failed to fetch，
     // 直接把它翻成看得懂的說法，不要讓使用者對著一句英文乾瞪眼。
     const msg = /Failed to fetch|NetworkError|Load failed/i.test(e.message)
-      ? '連不上 onionoo.anoni.net。可能是網路不通，或瀏覽器擋下了跨來源請求。'
-      : e.message;
-    say(`更新失敗。${msg}畫面上仍是原本的快照。`, 'err');
+      ? S('liveFailNet') : e.message;
+    say(S('liveFail', { msg }), 'err');
   } finally {
     btn.disabled = false;
   }
