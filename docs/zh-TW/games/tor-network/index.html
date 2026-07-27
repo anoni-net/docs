@@ -48,6 +48,11 @@
     .cc-sub2.warn .dim { color: #b98793; }
     #backend { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
     #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: #ff5a5a; }
+    #langs { margin-top: 8px; font-size: 11px; color: var(--muted); }
+    #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
+    #langs .on { color: #fff; font-weight: 700; }
+    #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
 
     #live-box { margin: 0 0 10px; }
     #live-box[hidden] { display: none; }
@@ -206,6 +211,7 @@
           <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
         </div>
         <div id="backend">偵測中…</div>
+        <div id="langs"></div>
       </div>
     </details>
   </div>

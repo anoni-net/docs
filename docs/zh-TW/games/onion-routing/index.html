@@ -33,6 +33,11 @@
     #objective { color: var(--ink); font-size: 13px; }
     #backend { display: inline-block; margin-top: 9px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); }
     #backend.gpu { color: #57e39a; } #backend.gl { color: #ffcf5c; } #backend.err { color: var(--danger); }
+    #langs { margin-top: 8px; font-size: 11px; color: var(--muted); }
+    #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
+    #langs .on { color: #fff; font-weight: 700; }
+    #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
 
     /* 圖例 */
     #legend-toggle { top: 14px; right: 14px; padding: 8px 13px; font-size: 12.5px; font-weight: 700; cursor: pointer; color: var(--ink); }
@@ -108,6 +113,7 @@
     <div id="level-name">關卡</div>
     <div id="objective">目標</div>
     <div id="backend">偵測中…</div>
+    <div id="langs"></div>
   </div>
 
   <div id="legend-toggle" class="panel" role="button" tabindex="0">圖例</div>

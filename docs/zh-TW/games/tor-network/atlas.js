@@ -7,7 +7,7 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
-import { pickLang, t } from './i18n.js';
+import { pickLang, t, langLinksHTML } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -17,6 +17,8 @@ document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn'
 
 // 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
 function applyI18n() {
+  const lb = $('langs');
+  if (lb) lb.innerHTML = langLinksHTML(LANG);
   document.title = S('pageTitle') + ' · anoni.net';
   const set = (id, key, html) => {
     const el = $(id);

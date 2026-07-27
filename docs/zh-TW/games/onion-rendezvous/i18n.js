@@ -151,3 +151,18 @@ export function t(lang, key, vars) {
   if (vars) for (const k in vars) s = s.replaceAll('{' + k + '}', String(vars[k]));
   return s;
 }
+
+// 語言切換。三個語系共用同一份程式，差別只在網址參數，所以原地換 query 就好。
+// 語言名稱各自用自己的語言寫，不跟著介面翻譯，否則使用者落在看不懂的語言時找不到自己要哪一個。
+// zh-TW 是預設不掛參數，維持乾淨的正規網址。
+const LANG_NAMES = [['zh-TW', '正體中文'], ['zh-cn', '简体中文'], ['en', 'English']];
+
+export function langLinksHTML(lang) {
+  return LANG_NAMES.map(([code, name]) => {
+    if (code === lang) return `<span class="on">${name}</span>`;
+    const u = new URL(location.href);
+    if (code === 'zh-TW') u.searchParams.delete('lang');
+    else u.searchParams.set('lang', code);
+    return `<a href="${u.pathname}${u.search}">${name}</a>`;
+  }).join('<i>·</i>');
+}

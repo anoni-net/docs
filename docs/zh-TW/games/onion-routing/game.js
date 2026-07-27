@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { color, uniform, pass } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { LEVELS, REGIONS } from './levels.js';
-import { STR, t, pickLang } from './i18n.js';
+import { STR, t, pickLang, langLinksHTML } from './i18n.js';
 
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
@@ -49,6 +49,8 @@ const el = {
 };
 
 function initStaticText() {
+  const lb = $('langs');
+  if (lb) lb.innerHTML = langLinksHTML(LANG);
   document.title = S('gameTitle') + ' · anoni.net';
   $('brand-title').textContent = S('gameTitle');
   $('brand-tagline').textContent = S('tagline');
