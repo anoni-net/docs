@@ -620,61 +620,6 @@ function buildAurora() {
   globe.add(mesh);
 }
 
-// 低軌衛星。刻意不指名國家，它跟中繼是同一個語彙：分散在全球的基礎設施節點。
-//
-// 掛在 globe 底下而不是 scene。物理上衛星不該跟著地球自轉，但這裡拖曳的語意是
-// 「轉動視角看不同面」，掛在 scene 的話拖曳時衛星會固定在螢幕上不動，像貼在鏡頭前。
-//
-// 形狀用長方體，跟中繼點的八面體分開，免得有人讀成「天上也有中繼」。
-// 材質吃場景既有的太陽光，飛到日照側自然會亮一下，不必另外寫反光邏輯。
-const SAT_N = 14;
-const SAT_GEO = [0.09, 0.036, 0.15]; // 不照真實比例，跟中繼點一樣是為了看得見刻意放大
-const sats = [];
-let satMesh = null;
-function buildSats() {
-  const geo = new THREE.BoxGeometry(...SAT_GEO);
-  const mat = new THREE.MeshStandardNodeMaterial({ color: 0x9fb4c6, roughness: 0.55, metalness: 0.35 });
-  satMesh = new THREE.InstancedMesh(geo, mat, SAT_N);
-  satMesh.frustumCulled = false;
-  const yAxis = new THREE.Vector3(0, 1, 0), xAxis = new THREE.Vector3(1, 0, 0);
-  for (let i = 0; i < SAT_N; i++) {
-    // 每顆一個軌道平面，用兩個正交基底向量描述，之後每幀只要三角函數就能算位置
-    const q = new THREE.Quaternion()
-      .setFromAxisAngle(yAxis, dotRnd() * Math.PI * 2)
-      .multiply(new THREE.Quaternion().setFromAxisAngle(xAxis, dotRnd() * Math.PI)); // 含極軌
-    sats.push({
-      u: new THREE.Vector3(1, 0, 0).applyQuaternion(q),
-      v: new THREE.Vector3(0, 0, 1).applyQuaternion(q),
-      r: R * (1.06 + dotRnd() * 0.09),
-      phase: dotRnd() * Math.PI * 2,
-      // 0.08 到 0.13 rad/s，繞一圈 48 到 78 秒。再快就會從「基礎設施」變成「特效」
-      speed: 0.08 + dotRnd() * 0.05,
-    });
-  }
-  globe.add(satMesh);
-  updateSats(0);
-}
-
-const satM4 = new THREE.Matrix4();
-const satPos = new THREE.Vector3(), satFwd = new THREE.Vector3(), satUp = new THREE.Vector3();
-const satTgt = new THREE.Vector3();
-function updateSats(t) {
-  if (!satMesh) return;
-  for (let i = 0; i < sats.length; i++) {
-    const s = sats[i];
-    const th = s.phase + t * s.speed;
-    const c = Math.cos(th), sn = Math.sin(th);
-    satPos.copy(s.u).multiplyScalar(c * s.r).addScaledVector(s.v, sn * s.r);
-    satFwd.copy(s.u).multiplyScalar(-sn).addScaledVector(s.v, c);   // 軌道切線，長軸朝這裡
-    satUp.copy(satPos).normalize();                                  // 徑向當上方，衛星底面朝地球
-    satTgt.copy(satPos).add(satFwd);
-    satM4.lookAt(satPos, satTgt, satUp);
-    satM4.setPosition(satPos);
-    satMesh.setMatrixAt(i, satM4);
-  }
-  satMesh.instanceMatrix.needsUpdate = true;
-}
-
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -1602,7 +1547,6 @@ async function animate() {
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
-  updateSats(clockT.value);
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
@@ -1639,7 +1583,6 @@ async function main() {
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
-  if (!REDUCED) buildSats();       // 同理，停住的衛星只是幾個漂在天上的方塊
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast);
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
