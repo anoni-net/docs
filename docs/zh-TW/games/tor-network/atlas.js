@@ -1900,7 +1900,9 @@ async function main() {
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
     getJSON('./cables.json').catch(() => null),     // 海底電纜可選
     getJSON('./ooni.json').catch(() => null),       // OONI 觀測可選
-    getJSONAsset('torusers.json').catch(() => null), // 使用者面可選，定期重生
+    // 跟 snapshot 一樣帶 no-cache。assets 回的是 max-age=43200，瀏覽器會把這份快取十二小時，
+    // 但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。
+    getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
   ]);
   OONI = ooni;
