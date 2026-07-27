@@ -769,10 +769,15 @@ function buildAurora() {
 // 中繼分布。但三點的組合本身不是真實電路：Tor 選路徑要看子網、家族、頻寬權重，這裡
 // 完全沒有模擬，飛行節奏也不對應真實電路約十分鐘的輪替。畫面上必須一直掛著「示意」
 // 兩個字，不能只寫在面板裡，因為動畫短暫又吸睛，沒人會在那幾秒去翻長篇說明。
-const CIRC_N = 2;          // 同時最多兩條
+const CIRC_N = 3;          // 同時最多三條
 const CIRC_FLY = 3.4;      // 一條飛完幾秒
 const CIRC_FADE = 1.1;     // 飛完之後淡出
-const CIRC_GAP = [3.5, 8]; // 下一條的間隔，隨機取樣。固定週期會變成節拍器
+// 下一條的間隔，隨機取樣。固定週期會變成節拍器，所以取區間不取定值。
+// 一條的生命是 FLY + FADE = 4.5 秒。照狀態機模擬三千秒的結果：
+//   舊的 N=2、gap[3.5,8]   平均同時 0.88 條，三分之一的時間畫面上一條都沒有
+//   現在 N=3、gap[0.9,2.8] 平均同時 2.0 條，三條同時佔 36%，空場 0%（瀏覽器實測）
+// 再縮間隔就會變成連續不斷的流動，「偶爾轉了三手」那個語氣會消失。
+const CIRC_GAP = [0.9, 2.8];
 const CIRC_SEG = 96;       // 每條路徑的取樣點數
 const circuits = [];
 
@@ -838,7 +843,9 @@ function buildCircuits() {
     circuits.push({
       line, geo, uHead, uAlpha,
       state: 'wait', t: 0,
-      wait: CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]) + i * 2.5,
+      // 開場錯開，免得三條同時起跑看起來像同一個動作。間隔縮短後這個錯開也要跟著縮，
+      // 不然第三條要等太久才第一次出現。
+      wait: CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]) + i * 1.2,
     });
   }
 }
