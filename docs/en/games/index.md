@@ -99,7 +99,7 @@ These pages cover concepts that show up in the current works.
 
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
 - Running a relay and watching the network: [Tor relay watcher](../regional/tor-relay-watcher.md)
-- Getting through when Tor is blocked: [Set up a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md)
+- Getting through when Tor is blocked: [Tor Snowflake bridges](../tools/tor-snowflake.md)
 
 ## What comes next
 

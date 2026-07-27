@@ -85,7 +85,8 @@ const ZH_TW = {
   regionSE: '瑞典',
   sepBar: '｜',
   // 遊戲只有一份，永遠跑在 /docs/games/onion-routing/，所以 ../../ 是 /docs/。
-  // en 站沒有 what-is-tor 這三篇，改指向英文站真的有、主題也對得上的頁。
+  // en 站沒有 what-is-tor 與 ooni-asn-coverage，改指向英文站真的有、主題也對得上的頁。
+  // tor-snowflake 原本也沒有，PR #153 合併時 main 上已經補上英文版，所以接回真正對題的那篇。
   // 總覽頁是靜態 mkdocs 頁，掛 ?lang= 沒有作用，要直接連到各語系自己那份。
   docOverview: '../index.html',
   docTor: '../../tools/what-is-tor/',
@@ -163,7 +164,7 @@ const EN = {
   teachL4: 'The censor blocked every known Tor relay address at once, so you could not even reach the first hop. A bridge is an entry point that is not on any public list. Snowflake, obfs4 and WebTunnel disguise the traffic as an ordinary connection to get you into the Tor network, after which the middle and exit relays work as usual.',
   learnMoreTor: 'Further reading: anonymity vs privacy',
   learnMoreAsn: 'Further reading: watching the relay network',
-  learnMoreSnowflake: 'Further reading: setting up a WebTunnel bridge',
+  learnMoreSnowflake: 'Further reading: Tor Snowflake bridges',
 
   allClearTitle: 'All levels cleared',
   allClearLink: 'Back to Interactive for the other works',
@@ -178,7 +179,7 @@ const EN = {
   docOverview: '../../en/games/',
   docTor: '../../en/basics/anonymity-vs-privacy/',
   docAsn: '../../en/regional/tor-relay-watcher/',
-  docSnowflake: '../../en/community/setup-tor-webtunnel/',
+  docSnowflake: '../../en/tools/tor-snowflake/',
 };
 
 const ZH_CN = {
