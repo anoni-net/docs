@@ -239,6 +239,23 @@ async function getJSON(url, opt) {
   return r.json();
 }
 
+// snapshot 與 torusers 由 tools/publish_games_data.sh 在正式機上定期重生，發布到 assets，
+// 不隨文件站一起走版。其餘五份變動以季或年計，跟著站台發布就好，維持相對路徑。
+//
+// 先打 assets，任何原因失敗就退回站上那一份。assets 掛掉、CORS 沒設好、或使用者的網路
+// 擋掉那個網域時，地球儀仍然畫得出來，只是資料是隨站發布的那一版，不會整顆球變空。
+//
+// 注意 assets.anoni.net 必須回 Access-Control-Allow-Origin，這是跨來源請求，
+// 沒有這個 header 瀏覽器會直接擋掉，每次載入都會走到退回那條路。
+const ASSETS = 'https://assets.anoni.net/games/';
+async function getJSONAsset(name, opt) {
+  try {
+    return await getJSON(ASSETS + name, { ...opt, mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
+  } catch (e) {
+    return getJSON('./' + name, opt);
+  }
+}
+
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
 // WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
 async function webgpuBlocker() {
@@ -1878,12 +1895,12 @@ async function main() {
   const ok = await initRenderer();
   if (!ok) return;
   const [snap, world, coast, cables, ooni, torusers, shutdowns] = await Promise.all([
-    getJSON('./snapshot.json', { cache: 'no-cache' }), // 快照由人工重新產生，每次載入都向 server 驗證新鮮度
+    getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
     getJSON('./cables.json').catch(() => null),     // 海底電纜可選
     getJSON('./ooni.json').catch(() => null),       // OONI 觀測可選
-    getJSON('./torusers.json').catch(() => null),   // 使用者面可選
+    getJSONAsset('torusers.json').catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
   ]);
   OONI = ooni;
