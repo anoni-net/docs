@@ -13,8 +13,23 @@
 | `torusers.json` | [Tor Metrics](https://metrics.torproject.org/) | CC0 1.0 |
 | `countries.json`、`continents.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 
-`ooni.json` 的非商業條款是這裡面唯一會限制用途的一條，要把本站內容用於商業情境時
-必須先處理這一份。
+## `ooni.json` 的兩條附加條款
 
-每個資料檔內部也帶有 `source`、`license`、`licenseUrl` 欄位，是機器可讀的同一份資訊。
+這份是六個來源裡條款最緊的一份，NC 與 SA 兩條要分開看。
+
+**NC（禁止商業使用）**：anoni.net 沒有商業行為，這條在目前的用法下不構成限制。
+要把本站內容用於商業情境時必須先把這一份抽掉或另外取得授權。
+
+**SA（相同方式分享）**：這條跟根目錄的 CC BY 4.0 有張力，兩個授權互不相容。
+處理方式是讓 `ooni.json` 保持獨立的一份，不把它的內容併進其他資料檔，
+畫面上也只是跟其他來源並列呈現。這樣整體屬於 CC 定義的「集合」，
+各份資料各自沿用原授權，SA 的範圍停在 `ooni.json` 自己身上，不會擴散到站台其他內容。
+
+要維持這個狀態，往後有兩件事不能做：把 OONI 的欄位寫進 `snapshot.json` 之類的其他檔案，
+或是產出一份混合了 OONI 與其他來源的新資料檔。任何一種都會讓成品變成 CC 定義的「改編」，
+屆時整份衍生物都得改用 CC BY-NC-SA 4.0 釋出。
+
+## 機器可讀的同一份資訊
+
+七個資料檔內部都帶有 `source`、`sourceUrl`、`license`、`licenseUrl` 欄位。
 畫面上的來源聲明在 `docs/zh-TW/games/tor-network/i18n.js` 的 `creditXxx` 系列，三種語言各一份。

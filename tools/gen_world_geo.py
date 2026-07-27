@@ -96,7 +96,17 @@ def build_coastline():
     return {"seg": seg}
 
 
+# 每份資料檔都自帶來源與授權，是 NOTICE 那張表的機器可讀版本。少一份就等於 NOTICE 說謊。
+CREDIT = {
+    "source": "Natural Earth",
+    "sourceUrl": "https://www.naturalearthdata.com/",
+    "license": "public domain",
+    "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/",
+}
+
+
 def write(name, data):
+    data = {**CREDIT, **data}
     path = os.path.abspath(os.path.join(OUT_DIR, name))
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, separators=(",", ":"), ensure_ascii=False)

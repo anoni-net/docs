@@ -211,6 +211,9 @@ def main():
     snap = {
         "published": published,
         "source": "onionoo.anoni.net MCP",
+        "sourceUrl": "https://metrics.torproject.org/onionoo.html",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
         "total": total,                                 # 準確（aggregate）
         "sampled": len(out_relays),                     # 地球上實際畫出的點數
         "noPlace": no_place,                            # 沒有明確國別、地球上不畫的台數
