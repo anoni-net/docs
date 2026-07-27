@@ -125,6 +125,8 @@ const ZH_TW = {
   rowTimes: '{n} 次',
   rowLatest: '最近 {y}',
   listSep: '、',
+  roleTipAll: '再點一次看全部',
+  roleTipOne: '只看這個角色',
 };
 
 const EN = {
@@ -242,6 +244,8 @@ const EN = {
   rowTimes: '{n}×',
   rowLatest: 'last {y}',
   listSep: ', ',
+  roleTipAll: 'Click again to show all',
+  roleTipOne: 'Show only this role',
 };
 
 const ZH_CN = {
@@ -255,8 +259,8 @@ const ZH_CN = {
   lblBrightness: '陆地亮度：由低到高（非线性，中段差距已放大）',
   modeCount: '中继台数',
   modeWeight: '共识权重',
-  modeConc: '业者集中度',
-  modeUsers: '使用者数',
+  modeConc: '服务商集中度',
+  modeUsers: '用户数',
   modeUsersTip: '陆地亮度改成各国估计有多少人在用 Tor，中继点照样显示',
   rampLow: '无',
   rampHigh: '最多',
@@ -272,7 +276,7 @@ const ZH_CN = {
 
   creditTitle: '数据来源',
   creditOnionoo: '中继数据来自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，经自架的 onionoo.anoni.net 取回。只取到国家层级的聚合，没有个别中继的识别信息。',
-  creditMetrics: '使用者估计与网桥统计来自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授权 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人数是用中继收到的目录请求反推的估计值，置信区间相当宽，不是普查。',
+  creditMetrics: '用户估计与网桥统计来自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授权 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人数是用中继收到的目录请求反推的估计值，置信区间相当宽，不是普查。',
   creditOoni: 'Tor 连线观测来自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授权 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。画面呈现的是 tor 测试近 30 天各国没有照预期完成的比率，OONI 称为 anomaly，成因包含连线被挡、网络不稳与 ISP 故障。',
   creditAccessNow: '网络关闭事件来自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 数据集，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每笔事件的成因由该联盟人工查证后标注，更新是不定期的，不是实时状态。',
   creditNaturalEarth: '国界轮廓来自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。',
@@ -328,7 +332,7 @@ const ZH_CN = {
   cardRadar: 'Cloudflare Radar',
   cardRadarOff: '（离开本站）',
   cardRadarTipCc: '在 Cloudflare Radar 看这一国的流量与中断记录',
-  cardRadarTipAs: '在 Cloudflare Radar 看这家业者的网络状况',
+  cardRadarTipAs: '在 Cloudflare Radar 看这家服务商的网络状况',
   cardNoteUsers: '人数为估计值',
   cardNoteOoni: 'OONI 异常的成因含封锁、网络不稳与 ISP 故障',
   cardNoteShutdown: '武装冲突类的关闭未必由政府主动下令',
@@ -344,8 +348,8 @@ const ZH_CN = {
 
   // ---- 其他 ----
   modeAllLbl: '全部',
-  modeConcLbl: '单一业者集中度',
-  modeUsersLbl: '使用者估计',
+  modeConcLbl: '单一服务商集中度',
+  modeUsersLbl: '用户估计',
   ptPlain: '一般网桥',
   gapNoPlace: '另有 {n} 台的国别是 eu 或未知，地球上没有位置可放，略过不画。',
   gapPartial: '地球上画出 {drawn} 台，其余 {miss} 台缺明确国别或取回时未取得。',
@@ -359,6 +363,8 @@ const ZH_CN = {
   rowTimes: '{n} 次',
   rowLatest: '最近 {y}',
   listSep: '、',
+  roleTipAll: '再点一次看全部',
+  roleTipOne: '只看这个角色',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };

@@ -1,0 +1,20 @@
+# 第三方資料的授權例外
+
+根目錄的 `LICENSE`（CC BY 4.0）適用於本專案自己產出的文件內容。
+`docs/zh-TW/games/tor-network/` 底下有幾份資料來自外部來源，各自沿用原本的授權，
+重製或再散布時要照那一份的條款，不能只看根目錄的 LICENSE。
+
+| 檔案 | 來源 | 授權 |
+|------|------|------|
+| `ooni.json` | [OONI](https://ooni.org/) | [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md)，**禁止商業使用**，衍生內容需以相同授權釋出 |
+| `cables.json` | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0，衍生資料庫需以相同授權釋出並保持開放 |
+| `shutdowns.json` | [Access Now #KeepItOn](https://www.accessnow.org/keepiton-data-dashboard/) STOP 資料集 | CC BY 4.0 |
+| `snapshot.json` | [Onionoo](https://metrics.torproject.org/onionoo.html)（經自架 proxy 取回） | CC0 1.0 |
+| `torusers.json` | [Tor Metrics](https://metrics.torproject.org/) | CC0 1.0 |
+| `countries.json`、`continents.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
+
+`ooni.json` 的非商業條款是這裡面唯一會限制用途的一條，要把本站內容用於商業情境時
+必須先處理這一份。
+
+每個資料檔內部也帶有 `source`、`license`、`licenseUrl` 欄位，是機器可讀的同一份資訊。
+畫面上的來源聲明在 `docs/zh-TW/games/tor-network/i18n.js` 的 `creditXxx` 系列，三種語言各一份。

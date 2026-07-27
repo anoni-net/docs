@@ -1386,7 +1386,7 @@ function setMode(mode) {
   for (const el of document.querySelectorAll('[data-mode]')) {
     const on = el.dataset.mode === mode;
     el.classList.toggle('on', on);
-    if (MODE_ROLE[el.dataset.mode] !== undefined) el.title = on ? '再點一次看全部' : '只看這個角色';
+    if (MODE_ROLE[el.dataset.mode] !== undefined) el.title = on ? S('roleTipAll') : S('roleTipOne');
   }
 }
 
