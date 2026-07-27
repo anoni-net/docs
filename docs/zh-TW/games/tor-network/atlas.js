@@ -134,7 +134,7 @@ const CENTROID = {
 const NO_PLACE = new Set(['eu', 'xx', '??', '']);
 const R = 5;
 
-let renderer, scene, camera, post, globe;
+let renderer, scene, camera, post, globe, sun;
 // zoom 是「相對於剛好完整入鏡的倍率」，不是絕對距離。畫面比例一變（手機轉向、視窗縮放），
 // 貼合距離跟著重算，地球就不會被裁掉，使用者原本放大到哪一級也保留得住。
 // 開場正對日本，順著自轉往東亞、太平洋、美洲一路帶過去。rx 稍微低頭，讓北半球
@@ -185,6 +185,37 @@ const SAMPLE_MIN = 0.2;   // 最遠時畫五分之一
 const SAMPLE_EXP = 1.75;
 let lastCountF = -1;
 const ANCHOR = new Map(); // ISO2 → { ll: [緯度, 經度], jlat, jlon, rings, bb }，沒有國界資料時才用 ll 加 jlat/jlon 抖動
+
+// 太陽直射點。原本的太陽是寫死的固定向量（-8, 1.5, 2.5），純粹為了構圖讓明暗交界
+// 落在正面，跟真實時間無關。改成由 UTC 時間算出直射的經緯度，日夜分界線就會跟著
+// 真實時間走，四季的晝長差異也會自己對上。
+//
+// 用的是 NOAA 低精度太陽位置公式，這個尺度下精度遠超過需要。不打任何 API，
+// 輸入只有 Date，所以靜態快照與即時模式一樣準，也不會多一個對外連線。
+//
+// 直射點經度取赤經減格林威治恆星時，比走「時間方程」那條路少一層近似。
+// 驗算過：夏至赤緯 +23.44、冬至 -23.43、春分秋分約 0，12:00 UTC 經度 1.6
+// （時間方程造成的偏移），06:00 UTC 在東經 91.6（該地正好中午）。
+function subsolarPoint(date) {
+  const rad = Math.PI / 180;
+  const d = date.getTime() / 86400000 + 2440587.5 - 2451545.0; // J2000 起算的天數
+  const L = (280.460 + 0.9856474 * d) % 360;         // 平黃經
+  const g = ((357.528 + 0.9856003 * d) % 360) * rad; // 平近點角
+  const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * rad; // 真黃經
+  const eps = (23.439 - 0.0000004 * d) * rad;        // 黃赤交角
+  const ra = Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / rad;
+  const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / rad;
+  const gmst = 280.46061837 + 360.98564736629 * d;   // 格林威治恆星時
+  return { lat: dec, lon: ((ra - gmst) % 360 + 540) % 360 - 180 };
+}
+
+const sunVec = new THREE.Vector3();
+function updateSun(date) {
+  if (!sun) return;
+  const p = subsolarPoint(date || new Date());
+  llToVec(p.lat, p.lon, 40, sunVec); // 距離只要遠到方向穩定就好，平行光不看距離衰減
+  sun.position.copy(sunVec);
+}
 
 function llToVec(lat, lon, r, out) {
   const phi = (90 - lat) * Math.PI / 180;
@@ -239,12 +270,16 @@ async function initRenderer() {
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
   camera.position.set(0, 0, targetDist());
   scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.5)); // 夜側留一點底光，國界與陸地仍讀得到
-  const sun = new THREE.DirectionalLight(0xcfe6ff, 2.2); // 太陽從左側來，明暗交界落在正面
-  sun.position.set(-8, 1.5, 2.5);
-  scene.add(sun);
-
   globe = new THREE.Group();
   scene.add(globe);
+
+  // 太陽掛在 globe 底下，位置每幀由 UTC 時間換算的直射點決定。
+  // 掛在 globe 而不是 scene，是因為直射點是地理座標，要跟著地球一起轉，
+  // 這樣被照亮的半球才會固定在正確的經度上，而不是跟著鏡頭跑。
+  // target 預設在原點，globe 也在原點，所以光的方向就是直射點指向地心。
+  sun = new THREE.DirectionalLight(0xcfe6ff, 2.2);
+  globe.add(sun);
+  updateSun();
   return true;
 }
 
@@ -1809,6 +1844,7 @@ async function animate() {
   }
   globe.rotation.y = view.ry;
   globe.rotation.x = view.rx;
+  updateSun(); // 直射點每小時移 15 度，每幀重算的成本是幾個三角函數，不值得另外做節流
   camera.position.z += (targetDist() - camera.position.z) * 0.12;
   camera.lookAt(0, 0, 0);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
