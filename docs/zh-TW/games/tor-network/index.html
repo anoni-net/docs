@@ -86,6 +86,14 @@
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
     .lb.sm i { color: #7695ad; margin-left: 4px; }
 
+    /* 三跳路徑飛過去時掛在畫面上的說明。動畫只有幾秒，說明寫在面板裡沒人會去看 */
+    #circ-tag { position: fixed; right: 16px; bottom: 18px; z-index: 9; padding: 5px 11px;
+                border-radius: 999px; background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
+                color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
+                opacity: 0; transition: opacity .5s; pointer-events: none;
+                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    #circ-tag.on { opacity: 1; }
+    @media (max-width: 680px) { #circ-tag { right: 10px; bottom: 62px; font-size: 10px; } }
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
@@ -203,6 +211,7 @@
   </div>
   <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
 
+  <div id="circ-tag">示意路徑　guard → middle → exit</div>
   <div id="labels"></div>
 
   <div id="cc-card" class="panel" hidden>

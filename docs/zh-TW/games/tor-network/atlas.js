@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
          float, mix, hash, uniform, instanceIndex,
-         uv, smoothstep, mx_fractal_noise_float } from 'three/tsl';
+         uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 
 const $ = (id) => document.getElementById(id);
@@ -622,6 +622,135 @@ function buildAurora() {
   const mesh = new THREE.Mesh(g, mat);
   mesh.renderOrder = 40; // 這幾層同心透明物件的預設排序不穩定，明確指定
   globe.add(mesh);
+}
+
+// Tor 的三跳路徑。偶爾畫一條從 guard 經 middle 到 exit 的弧線，讓「訊息被轉了三手」
+// 這件事看得見。
+//
+// 端點是真實的中繼位置（直接從 dotGroups 挑），所以哪個國家常被選中會自然反映真實的
+// 中繼分布。但三點的組合本身不是真實電路：Tor 選路徑要看子網、家族、頻寬權重，這裡
+// 完全沒有模擬，飛行節奏也不對應真實電路約十分鐘的輪替。畫面上必須一直掛著「示意」
+// 兩個字，不能只寫在面板裡，因為動畫短暫又吸睛，沒人會在那幾秒去翻長篇說明。
+const CIRC_N = 2;          // 同時最多兩條
+const CIRC_FLY = 3.4;      // 一條飛完幾秒
+const CIRC_FADE = 1.1;     // 飛完之後淡出
+const CIRC_GAP = [3.5, 8]; // 下一條的間隔，隨機取樣。固定週期會變成節拍器
+const CIRC_SEG = 96;       // 每條路徑的取樣點數
+const circuits = [];
+
+// 從某個角色的點裡隨機挑一個。guard 收 role 1 與 3，exit 收 2 與 3，both 兩邊都算。
+function pickRelay(roles) {
+  const pool = dotGroups.filter((g) => roles.includes(g.mesh.userData.role) && g.list.length);
+  if (!pool.length) return null;
+  const g = pool[(Math.random() * pool.length) | 0];
+  return g.list[(Math.random() * g.list.length) | 0];
+}
+
+// 兩點之間的大圓弧，中段往外抬起來，看起來才像飛過去而不是貼著地面爬。
+// 抬多高看兩點的角距離，繞半個地球的那種要抬得比鄰國之間的高。
+function arcInto(a, b, out, from, count) {
+  const va = new THREE.Vector3(a.x, a.y, a.z).normalize();
+  const vb = new THREE.Vector3(b.x, b.y, b.z).normalize();
+  const ang = Math.max(1e-4, va.angleTo(vb));
+  const sin = Math.sin(ang);
+  const lift = R * (0.04 + 0.16 * (ang / Math.PI));
+  const v = new THREE.Vector3();
+  for (let i = 0; i < count; i++) {
+    const t = i / (count - 1);
+    const w1 = Math.sin((1 - t) * ang) / sin, w2 = Math.sin(t * ang) / sin;
+    v.copy(va).multiplyScalar(w1).addScaledVector(vb, w2).normalize()
+      .multiplyScalar(R * 1.014 + lift * Math.sin(t * Math.PI));
+    out[(from + i) * 3] = v.x;
+    out[(from + i) * 3 + 1] = v.y;
+    out[(from + i) * 3 + 2] = v.z;
+  }
+}
+
+function buildCircuits() {
+  for (let i = 0; i < CIRC_N; i++) {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(CIRC_SEG * 3), 3));
+    const u = new Float32Array(CIRC_SEG);
+    for (let k = 0; k < CIRC_SEG; k++) u[k] = k / (CIRC_SEG - 1);
+    geo.setAttribute('aU', new THREE.BufferAttribute(u, 1));
+    geo.setDrawRange(0, 0); // 閒置時不畫
+
+    // 這是全新材質，opacityNode 沒有跟任何既有邏輯衝突（中繼點那邊不能碰是因為
+    // animate() 每幀在寫 .opacity，這裡沒有那回事）。
+    const mat = new THREE.LineBasicNodeMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    });
+    const uHead = uniform(0), uAlpha = uniform(0);
+    const au = attribute('aU', 'float');
+    const TRAIL = 0.18;
+    // d 是「頭部已經走過這一點多遠」。負的代表還沒掃到，要完全不畫。
+    // 早先寫成 clamp(0,1) 是錯的：負值被夾成 0，反而算出最亮，整條弧會一起亮起來，
+    // 看起來像一條靜態的線而不是跑動的光點。
+    const d = uHead.sub(au);
+    const head = smoothstep(-0.012, 0.0, d);              // 頭部前方乾淨切掉
+    const tail = oneMinus(d.div(TRAIL).clamp(0, 1));      // 往後線性衰減
+    const bright = head.mul(tail).pow(1.6);
+    mat.colorNode = vec3(0.88, 0.97, 1.0); // 近白偏青。四個角色色與警示紅都不能借用
+    mat.opacityNode = bright.mul(uAlpha);
+
+    const line = new THREE.Line(geo, mat);
+    line.frustumCulled = false;
+    line.renderOrder = 45;
+    globe.add(line);
+    circuits.push({
+      line, geo, uHead, uAlpha,
+      state: 'wait', t: 0,
+      wait: CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]) + i * 2.5,
+    });
+  }
+}
+
+// 挑三個端點，把兩段弧接成一條連續的線。挑不到就這輪跳過。
+function spawnCircuit(c) {
+  const g = pickRelay([1, 3]);   // guard
+  const m = pickRelay([0]);      // middle
+  const e = pickRelay([2, 3]);   // exit
+  if (!g || !m || !e) return false;
+  const pos = c.geo.attributes.position.array;
+  const half = CIRC_SEG >> 1;
+  arcInto(g, m, pos, 0, half);
+  arcInto(m, e, pos, half, CIRC_SEG - half);
+  c.geo.attributes.position.needsUpdate = true;
+  c.geo.setDrawRange(0, CIRC_SEG);
+  return true;
+}
+
+function updateCircuits(dt) {
+  if (!circuits.length) return;
+  let anyOn = false;
+  for (const c of circuits) {
+    c.t += dt;
+    if (c.state === 'wait') {
+      if (c.t >= c.wait) {
+        c.t = 0;
+        c.state = spawnCircuit(c) ? 'fly' : 'wait';
+        if (c.state === 'wait') c.wait = 2;
+      }
+    } else if (c.state === 'fly') {
+      const p = c.t / CIRC_FLY;
+      c.uHead.value = p;
+      c.uAlpha.value = Math.min(1, c.t / 0.35); // 起手淡入，不要憑空出現
+      if (p >= 1) { c.state = 'fade'; c.t = 0; }
+    } else {
+      // 淡出時讓頭部繼續往前跑一小段，尾巴才會自己收掉，不是整條一起消失
+      c.uHead.value = 1 + c.t / CIRC_FADE * 0.2;
+      c.uAlpha.value = Math.max(0, 1 - c.t / CIRC_FADE);
+      if (c.t >= CIRC_FADE) {
+        c.state = 'wait'; c.t = 0;
+        c.uAlpha.value = 0;
+        c.geo.setDrawRange(0, 0);
+        c.wait = CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]);
+      }
+    }
+    if (c.state !== 'wait') anyOn = true;
+  }
+  const tag = $('circ-tag');
+  if (tag) tag.classList.toggle('on', anyOn);
 }
 
 function buildCoastline(coast) {
@@ -1551,6 +1680,7 @@ async function animate() {
   for (const m of pointMats) m.opacity = wantOp;
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
+  updateCircuits(dt);
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
@@ -1592,6 +1722,7 @@ async function main() {
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
   buildLabels(snap);
+  if (!REDUCED) buildCircuits(); // 要在 buildRelays 之後，端點是從 dotGroups 挑的
   fillPanel(snap, drawn);
   fillMix(snap);
   fillAsn(snap);
