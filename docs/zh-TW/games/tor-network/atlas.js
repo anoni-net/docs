@@ -323,9 +323,53 @@ function paintGlow(values, canvas, ramp) {
   }
 }
 
+// 受阻國家的內側漸層。單靠邊界紅線的話，一個國家被鄰國的紅線包圍時看不出來是誰被標記，
+// 線本身沒有內外之分。往國土內側鋪一層由邊界向中心衰減的紅，方向性就出來了。
+//
+// 用 canvas 的內發光做：clip 到國土範圍再描邊，shadowBlur 讓描邊往兩側糊開，
+// 外側被 clip 切掉，只留內側那一半。分兩道疊，寬的那道給大範圍的暈染，
+// 窄的那道把貼著邊界的地方提亮，衰減才有層次。
+//
+// 貼圖是等距長方投影，blur 半徑固定在貼圖像素上，換算到地表就是高緯度窄、低緯度寬。
+// 目前受阻的幾國都落在中低緯（EG 27°N、MM 21°N、PK 30°N、CN 35°N），這個偏差看不出來。
+// 哪天清單裡出現高緯度國家，這裡要改成依緯度縮放 blur。
+// 內側漸層的深度，單位是貼圖像素。2048 寬在赤道約 19.6 公里/px，26px 約 510 公里。
+// 埃及在貼圖上約 57px 寬，所以漸層會吃掉它接近一半，白俄羅斯、亞塞拜然這種小國則整片染紅，
+// 大國（RU、CN）就只是一圈內鑲邊。這個差異是想要的：面積小的國家本來就該整塊讀得出來。
+const BLOCK_INWARD = 26;
+const BLOCK_PEAK = 0.6;  // 貼著邊界那一格的強度，往內線性衰減到 0
+const BLOCK_EMIT = 0.5;  // emissive 係數。紅色轉線性後 luminance 約 0.30，乘完約 0.15，
+                         // 離 bloom 門檻 0.72 還有距離，不會把這幾國暈成白斑
+function paintBlocked(canvas) {
+  const gb = canvas.getContext('2d');
+  gb.fillStyle = '#000';
+  gb.fillRect(0, 0, TEX_W, TEX_H);
+  const list = (OONI && OONI.blocked) || [];
+  if (!list.length) return;
+  const red = '#' + COL.blocked.toString(16).padStart(6, '0');
+  for (const cc of list) {
+    const path = COUNTRY_PATH.get(cc);
+    if (!path) continue;
+    gb.save();
+    gb.clip(path);                            // 描邊有一半落在國土外，clip 把它切掉，只留內側
+    gb.globalCompositeOperation = 'lighter';  // 疊加而不是覆蓋，這樣層數才會累積成漸層
+    gb.strokeStyle = red;
+    gb.lineJoin = 'round';
+    gb.globalAlpha = BLOCK_PEAK / BLOCK_INWARD;
+    // 描邊以路徑為中心，線寬 w 的那一道往內覆蓋 w/2。從寬畫到窄，每一道都用同樣的淡薄透明度，
+    // 距離邊界 d 的地方會被「w/2 > d」的那幾道蓋到，層數隨 d 線性遞減，累加起來就是線性漸層。
+    // 先前用 shadowBlur 做內發光，實測衰減只有 6px 就沒了，範圍不受控。
+    for (let d = BLOCK_INWARD; d >= 1; d--) {
+      gb.lineWidth = d * 2;
+      gb.stroke(path);
+    }
+    gb.restore();
+  }
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
-  const base = mk(), glow = mk();
+  const base = mk(), glow = mk(), block = mk();
   const g = base.getContext('2d'), gg = glow.getContext('2d');
   g.fillStyle = MAP.sea;
   g.fillRect(0, 0, TEX_W, TEX_H);
@@ -368,7 +412,8 @@ function paintEarth(world, counts) {
   g.strokeStyle = MAP.equator;
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
   paintGlow(counts, glow);
-  return { base, glow };
+  paintBlocked(block); // 要在上面填完 COUNTRY_PATH 之後才有國土路徑可以 clip
+  return { base, glow, block };
 }
 
 function buildEarth(world, counts) {
@@ -384,11 +429,14 @@ function buildEarth(world, counts) {
   // 面板的漸層圖例直接吃這裡的色值，免得 CSS 與 JS 各留一份色碼、改了色階就對不上
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${MAP.glowLo} 14%, ${MAP.glowHi})`;
-  const baseTex = toTex(painted.base), glowTex = toTex(painted.glow);
+  const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
   GLOW = { canvas: painted.glow, tex: glowTex };
   const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
-  mat.emissiveNode = texture(baseTex).mul(0.15).add(texture(glowTex).mul(0.5));
+  // 受阻漸層另存一層，切換「台數、共識權重」時 paintGlow 只重畫 glow，這一層不受影響
+  mat.emissiveNode = texture(baseTex).mul(0.15)
+    .add(texture(glowTex).mul(0.5))
+    .add(texture(blockTex).mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
 }
 
