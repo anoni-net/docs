@@ -9,6 +9,8 @@ import { STR, t, pickLang } from './i18n.js';
 
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+// html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
+document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches; // 減少動態偏好
 
 // ---- 顏色 / 尺寸 ----
@@ -61,7 +63,7 @@ function initStaticText() {
   $('hint-close').textContent = S('hintClose');
   const hex = (v) => '#' + v.toString(16).padStart(6, '0');
   const regionDots = Object.values(REGIONS)
-    .map((r) => `<span class="lg-chip"><i class="lg-dot sm" style="background:${hex(r.color)}"></i>${r.place}</span>`).join('');
+    .map((r) => `<span class="lg-chip"><i class="lg-dot sm" style="background:${hex(r.color)}"></i>${S(r.placeKey)}</span>`).join('');
   $('legend-body').innerHTML = [
     ['#7ffcff', S('legendSource')],
     ['#ffd27f', S('legendDest')],
@@ -76,7 +78,7 @@ function initStaticText() {
 function nodeLabel(n) {
   if (n.role === 'source') return S('legendSource');
   if (n.role === 'dest') return S('legendDest');
-  if (n.bridge) return `${n.transport}｜${S('legendBridge')}`;
+  if (n.bridge) return `${n.transport}${S('sepBar')}${S('legendBridge')}`;
   const rg = REGIONS[n.region];
   let s = `${rg.place} ${rg.asn}`;
   if (n.surveilled) s += `（${S('legendSurveilled')}）`;
@@ -315,7 +317,7 @@ function loadLevel(idx) {
   nodes = []; selectable = [];
 
   const lv = LEVELS[idx];
-  el.levelName.textContent = `${S('levelLabel')} ${idx + 1}/${LEVELS.length}｜${S(lv.nameKey)}`;
+  el.levelName.textContent = `${S('levelLabel')} ${idx + 1}/${LEVELS.length}${S('sepBar')}${S(lv.nameKey)}`;
   el.objective.textContent = S(lv.objKey);
 
   const src = { ...lv.source, role: 'source', id: '__src' };
@@ -503,7 +505,7 @@ function showTeach() {
   el.cardTitle.textContent = S('teachTitle');
   el.cardBody.textContent = S(lv.teachKey);
   el.cardLink.textContent = S(lv.learnMore.labelKey);
-  el.cardLink.href = lv.learnMore.href;
+  el.cardLink.href = S(lv.learnMore.pathKey);
   el.cardLink.style.display = '';
   if (levelIdx < LEVELS.length - 1) el.cardNext.textContent = S('btnNext');
   else el.cardNext.textContent = S('btnReplay');
@@ -520,7 +522,7 @@ function onNext() {
     el.cardTitle.textContent = S('allClearTitle');
     el.cardBody.textContent = S('allClearBody');
     el.cardLink.textContent = S('allClearLink');
-    el.cardLink.href = '../index.html';
+    el.cardLink.href = S('docOverview');
     el.cardLink.style.display = '';
     el.cardNext.textContent = S('btnReplay');
     el.card.classList.add('show');

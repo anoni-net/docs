@@ -77,6 +77,20 @@ const ZH_TW = {
   allClearTitle: '全部通關',
   allClearLink: '回互動與呈現看其他作品',
   allClearBody: '你走過了 Tor 路由的幾個核心取捨：三跳、分散 ASN、封鎖時改走橋接。這只是 Phase 1 的第一個關卡集，之後會再加。',
+  regionTW: '台灣',
+  regionJP: '日本',
+  regionDE: '德國',
+  regionNL: '荷蘭',
+  regionUS: '美國',
+  regionSE: '瑞典',
+  sepBar: '｜',
+  // 遊戲只有一份，永遠跑在 /docs/games/onion-routing/，所以 ../../ 是 /docs/。
+  // en 站沒有 what-is-tor 這三篇，改指向英文站真的有、主題也對得上的頁。
+  // 總覽頁是靜態 mkdocs 頁，掛 ?lang= 沒有作用，要直接連到各語系自己那份。
+  docOverview: '../index.html',
+  docTor: '../../tools/what-is-tor/',
+  docAsn: '../../taiwan/ooni-asn-coverage/',
+  docSnowflake: '../../tools/tor-snowflake/',
 };
 
 const EN = {
@@ -147,13 +161,24 @@ const EN = {
   teachL2: 'Some of those relays were under surveillance, recording traffic as it passed. In the real Tor network relays are run by volunteers worldwide. Most are trustworthy, but you cannot assume every one of them is clean. Spreading trust and avoiding known bad nodes is itself part of choosing a route.',
   teachL3: 'ASNs (autonomous systems, groups of IP addresses under shared management) are the point of this level. Even if 3 relays sit in different data centres, an adversary watching a single ASN they all belong to can see both the entry and the exit. Spreading the hops across different ASNs is what actually keeps the two ends apart. anoni.net tracks which ASNs Taiwan\'s Tor relays land in for exactly this reason.',
   teachL4: 'The censor blocked every known Tor relay address at once, so you could not even reach the first hop. A bridge is an entry point that is not on any public list. Snowflake, obfs4 and WebTunnel disguise the traffic as an ordinary connection to get you into the Tor network, after which the middle and exit relays work as usual.',
-  learnMoreTor: 'Further reading: what Tor is',
-  learnMoreAsn: 'Further reading: ASN coverage in Taiwan',
-  learnMoreSnowflake: 'Further reading: Tor Snowflake bridges',
+  learnMoreTor: 'Further reading: anonymity vs privacy',
+  learnMoreAsn: 'Further reading: watching the relay network',
+  learnMoreSnowflake: 'Further reading: setting up a WebTunnel bridge',
 
   allClearTitle: 'All levels cleared',
   allClearLink: 'Back to Interactive for the other works',
   allClearBody: 'You have walked through several of the core trade-offs in Tor routing: three hops, spreading across ASNs, and switching to bridges when blocked. This is only the first set of levels from Phase 1, with more to come.',
+  regionTW: 'Taiwan',
+  regionJP: 'Japan',
+  regionDE: 'Germany',
+  regionNL: 'Netherlands',
+  regionUS: 'United States',
+  regionSE: 'Sweden',
+  sepBar: ' | ',
+  docOverview: '../../en/games/',
+  docTor: '../../en/basics/anonymity-vs-privacy/',
+  docAsn: '../../en/regional/tor-relay-watcher/',
+  docSnowflake: '../../en/community/setup-tor-webtunnel/',
 };
 
 const ZH_CN = {
@@ -231,6 +256,17 @@ const ZH_CN = {
   allClearTitle: '全部通关',
   allClearLink: '回互动与呈现看其他作品',
   allClearBody: '你走过了 Tor 路由的几个核心取舍：三跳、分散 ASN、封锁时改走网桥。这只是 Phase 1 的第一个关卡集，之后会再加。',
+  regionTW: '台湾',
+  regionJP: '日本',
+  regionDE: '德国',
+  regionNL: '荷兰',
+  regionUS: '美国',
+  regionSE: '瑞典',
+  sepBar: '｜',
+  docOverview: '../../zh-cn/games/',
+  docTor: '../../zh-cn/tools/what-is-tor/',
+  docAsn: '../../zh-cn/taiwan/ooni-asn-coverage/',
+  docSnowflake: '../../zh-cn/tools/tor-snowflake/',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };

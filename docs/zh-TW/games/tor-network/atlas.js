@@ -12,6 +12,8 @@ import { pickLang, t } from './i18n.js';
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+// html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
+document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 
 // 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
 function applyI18n() {
@@ -1436,7 +1438,11 @@ function fillAsia(snap) {
 // 條的長度用異常率，數字給中繼數，讓「條很長、數字是 0」自己說話。
 function fillOoni(snap) {
   const box = $('stat-ooni');
-  if (!box || !OONI || !OONI.blocked || !OONI.blocked.length) return;
+  if (!box || !OONI || !OONI.blocked || !OONI.blocked.length) {
+    const t = $('lbl-ooni');
+    if (t) t.hidden = true;   // 資料缺就連標題一起收掉，不要留空區塊
+    return;
+  }
   const cnt = new Map(snap.countries || []);
   box.innerHTML = OONI.blocked.map((cc) => {
     const o = OONI.cc[cc];
@@ -1462,7 +1468,11 @@ function fillOoni(snap) {
 // 這邊講「用的人最多的地方」，兩塊合起來才是完整的需求面。
 function fillUsers(snap) {
   const box = $('stat-users');
-  if (!box || !TORUSERS || !TORUSERS.users) return;
+  if (!box || !TORUSERS || !TORUSERS.users) {
+    const t = $('lbl-users');
+    if (t) t.hidden = true;   // 資料缺就連標題一起收掉，不要留空區塊
+    return;
+  }
   const cnt = new Map(snap.countries || []);
   const rows = Object.entries(TORUSERS.users).sort((a, b) => b[1][0] - a[1][0]).slice(0, 8);
   if (!rows.length) return;
@@ -1492,7 +1502,11 @@ function fillUsers(snap) {
 // 所以敢直接講「發生過什麼」。但件數多寡也反映了有沒有人在盯，沒人盯的地方不代表沒發生。
 function fillShutdowns() {
   const box = $('stat-shutdown');
-  if (!box || !SHUTDOWNS || !SHUTDOWNS.cc) return;
+  if (!box || !SHUTDOWNS || !SHUTDOWNS.cc) {
+    const t = $('lbl-shutdown');
+    if (t) t.hidden = true;   // 資料缺就連標題一起收掉，不要留空區塊
+    return;
+  }
   const rows = Object.entries(SHUTDOWNS.cc).sort((a, b) => b[1][0] - a[1][0]).slice(0, 7);
   if (!rows.length) return;
   const max = rows[0][1][0];

@@ -3,13 +3,16 @@
 // 被封鎖（blocked）、橋接（bridge）會覆蓋外觀。
 
 // 地區 = 一個 ASN（自治系統）。color 用於區分不同 ASN，避開危險狀態用的紅、灰。
+// placeKey 是 i18n 的 key 不是字串：地名要跟著語言換，寫死的話英文版會冒出繁中地名。
+// learnMore.pathKey 也是 key：三個語系的文件路徑各自不同，英文站甚至沒有對應的篇，
+// 所以完整路徑存在語言表裡，這裡只留 key。
 export const REGIONS = {
-  TW: { asn: 'AS3462',  place: '台灣',   color: 0x00aeff },
-  JP: { asn: 'AS2914',  place: '日本',   color: 0x8a7bff },
-  DE: { asn: 'AS24940', place: '德國',   color: 0x35d0a0 },
-  NL: { asn: 'AS16276', place: '荷蘭',   color: 0xffcf5c },
-  US: { asn: 'AS7922',  place: '美國',   color: 0xff7ac2 },
-  SE: { asn: 'AS31898', place: '瑞典',   color: 0x9ad24a },
+  TW: { asn: 'AS3462',  placeKey: 'regionTW',   color: 0x00aeff },
+  JP: { asn: 'AS2914',  placeKey: 'regionJP',   color: 0x8a7bff },
+  DE: { asn: 'AS24940', placeKey: 'regionDE',   color: 0x35d0a0 },
+  NL: { asn: 'AS16276', placeKey: 'regionNL',   color: 0xffcf5c },
+  US: { asn: 'AS7922',  placeKey: 'regionUS',   color: 0xff7ac2 },
+  SE: { asn: 'AS31898', placeKey: 'regionSE',   color: 0x9ad24a },
 };
 
 // 端點座標三關共用（source 左、dest 右）。
@@ -28,7 +31,7 @@ export const LEVELS = [
     nameKey: 'nameL1',
     objKey: 'objL1',
     teachKey: 'teachL1',
-    learnMore: { labelKey: 'learnMoreTor', href: '../../tools/what-is-tor/' },
+    learnMore: { labelKey: 'learnMoreTor', pathKey: 'docTor' },
     rules: { hops: 3 },
     source: SRC,
     dest: DST,
@@ -47,7 +50,7 @@ export const LEVELS = [
     nameKey: 'nameL2',
     objKey: 'objL2',
     teachKey: 'teachL2',
-    learnMore: { labelKey: 'learnMoreTor', href: '../../tools/what-is-tor/' },
+    learnMore: { labelKey: 'learnMoreTor', pathKey: 'docTor' },
     rules: { hops: 3 },
     source: SRC,
     dest: DST,
@@ -67,7 +70,7 @@ export const LEVELS = [
     nameKey: 'nameL3',
     objKey: 'objL3',
     teachKey: 'teachL3',
-    learnMore: { labelKey: 'learnMoreAsn', href: '../../taiwan/ooni-asn-coverage/' },
+    learnMore: { labelKey: 'learnMoreAsn', pathKey: 'docAsn' },
     rules: { hops: 3, requireDiversity: true },
     source: SRC,
     dest: DST,
@@ -88,7 +91,7 @@ export const LEVELS = [
     nameKey: 'nameL4',
     objKey: 'objL4',
     teachKey: 'teachL4',
-    learnMore: { labelKey: 'learnMoreSnowflake', href: '../../tools/tor-snowflake/' },
+    learnMore: { labelKey: 'learnMoreSnowflake', pathKey: 'docSnowflake' },
     rules: { hops: 3, requireBridge: true, censorActive: true },
     source: SRC,
     dest: DST,

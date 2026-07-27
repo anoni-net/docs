@@ -13,6 +13,8 @@ import { pickLang, t } from './i18n.js';
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+// html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
+document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 
 // 把畫面上的靜態文字換成目前語言。HTML 裡留的是繁中，載入前不會空白，載入後由這裡覆蓋。
 function applyI18n() {
