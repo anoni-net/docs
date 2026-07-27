@@ -2,6 +2,13 @@
 title: Interactive
 description: Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor - a puzzle that walks you through three-hop onion routing, a live view of traffic meeting at rendezvous points, and a relay globe built from six public datasets.
 icon: material/cube-outline
+social:
+  cards: false
+og:
+  enabled: true
+  image: https://assets.anoni.net/games/tor-network.png
+  image_width: 2993
+  image_height: 1713
 ---
 
 # :material-cube-outline: Interactive

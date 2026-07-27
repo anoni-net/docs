@@ -2,6 +2,13 @@
 title: 互动与呈现
 description: 以 3D 影像与可操作的游戏呈现隐私与匿名技术。目前三件作品都以 Tor 为题：走一遍三跳洋葱路由的解谜、连线流量在会合点相遇的动态呈现、整合六份公开数据的全球中继地球仪。
 icon: material/cube-outline
+social:
+  cards: false
+og:
+  enabled: true
+  image: https://assets.anoni.net/games/tor-network.png
+  image_width: 2993
+  image_height: 1713
 ---
 
 # :material-cube-outline: 互动与呈现
