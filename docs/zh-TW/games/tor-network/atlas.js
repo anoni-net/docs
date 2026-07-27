@@ -1628,10 +1628,16 @@ function aggregateLive(relays, published) {
 
 // 用新的快照重畫。舊的中繼點與標籤要先清乾淨，不然會疊在上面愈積愈多。
 function applySnapshot(snap) {
+  // 材質一定要 dispose。只清 geometry 不夠：renderer 內部是把完整的 GPU 清除掛在
+  // material 的 dispose 事件上，geometry 的 dispose 只會清掉快取的 attribute 參照，
+  // pipeline 與 bindings 仍留著。這個函式每按一次「即時更新」就跑一遍，漏掉會累積。
+  // 四個角色共用同一份 geometry 與 material，各自 dispose 一次就好。
   for (const m of relayMeshes) {
     globe.remove(m);
-    if (m.geometry) m.geometry.dispose();
+    m.dispose();                       // InstancedMesh 自己的 instanceMatrix / instanceColor
   }
+  if (relayMeshes.length && relayMeshes[0].geometry) relayMeshes[0].geometry.dispose();
+  for (const mat of pointMats) mat.dispose();
   relayMeshes.length = 0;
   pointMats.length = 0;
   dotGroups.length = 0;
