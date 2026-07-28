@@ -10,6 +10,12 @@
  * __BUILD_VERSION__ 由 build_docs_anoni.sh 於部署時替換，
  * 換版後 activate 階段會清除舊快取。
  *
+ * manifest 的 id：docs/zh-TW/manifest.webmanifest 同時被 run.sh（輸出到 /docs/）
+ * 與 run_zh-tw.sh（輸出到 /docs/zh-tw/）使用，兩棵樹的內容逐位元組相同。裡面的
+ * id 寫成 "/docs/"，而規格上 id 是相對 origin 解析，所以兩棵樹都會得到
+ * https://anoni.net/docs/，瀏覽器視為同一個 App。這是刻意的：同一份內容不該
+ * 出現兩個可安裝項目。en 與 zh-cn 各自有獨立的 manifest 與 id，不受影響。
+ *
  * 注意：theme 資產的 hash 檔名需與 overrides/base.html 同步，
  * 升級 mkdocs-material 時要一併更新。
  */
@@ -76,16 +82,25 @@ const CORE_PAGES_ZH = [
   "tools/crypto-privacy-spectrum/",
   // scenarios（場景）
   //
-  // 這裡刻意不放 journalist、activist、lgbtq、domestic-violence 這幾頁。
-  // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的，
-  // 而這幾頁一旦躺在裝置的 Cache Storage 裡，本身就是指向性證據：它會顯示
-  // 「這台裝置下載過記者、行動者、LGBTQ 的保護指南全文」。
+  // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
+  // 有些頁面一旦躺在裝置的 Cache Storage 裡，本身就是指向性證據，會顯示
+  // 「這台裝置下載過某某族群的保護指南全文」。這些文章自己就在教讀者清
+  // 瀏覽器痕跡、提防裝置被檢查，站台不該一邊這樣教、一邊把文章推進讀者裝置。
   //
-  // 這些文章自己就在教讀者清瀏覽器痕跡、提防裝置被檢查，站台不該一邊這樣教、
-  // 一邊把文章推進讀者裝置。讀者主動點開時，runtime 快取仍會存下來離線可讀，
-  // 那是他自己的選擇。
+  // 判準（新增頁面時照這個問，不要只看它放在哪個資料夾）：
+  //   這頁是不是用第二人稱或隱含第二人稱，指導「唯一一種身分的人」在採取
+  //   某個具體行動前後該做什麼準備？
   //
-  // 旅行類保留：那是情境準備而非身分指向，被看到不會把讀者歸類到受威脅族群。
+  // 是的話就不要放進 CORE_PAGES。讀者主動點開時 runtime 快取仍會存下來離線
+  // 可讀，那是他自己的選擇，不是站台替他決定的。
+  //
+  // 依這個判準，這次移除了 scenarios 的 journalist、activist、lgbtq，以及
+  // taiwan/whistleblower-law（它放在法規資料夾，但整篇是揭弊者本人的行動準備
+  // 清單，性質跟 journalist 一樣，按資料夾掃會漏掉）。
+  // domestic-violence、election-observer 等頁本來就不在清單裡，同樣不要加。
+  //
+  // 旅行類保留：讀者是「任何出國的人」，不指向特定受威脅身分。
+  // 工具與概念頁保留：那是說明書，讀者拿去做什麼是開放的，不鎖定身分。
   "scenarios/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
@@ -95,12 +110,12 @@ const CORE_PAGES_ZH = [
   "advanced/post-quantum/",
   "advanced/dweb-ipfs-onion/",
   "advanced/zk-identity-payments/",
-  // taiwan（在地，全部；ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
+  // taiwan（在地。whistleblower-law 依上面的判準排除，不是漏掉。
+  // ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
   "taiwan/",
   "taiwan/ooni-checklist/",
   "taiwan/pdpa-2025/",
   "taiwan/vasp-2026/",
-  "taiwan/whistleblower-law/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
   // community（社群，選錄離線可讀的工具頁）
@@ -177,10 +192,19 @@ self.addEventListener("activate", (event) => {
 
 function offlinePathFor(pathname) {
   const rel = pathname.slice(SCOPE_PATH.length);
-  for (const prefix of ["zh-tw/", "zh-cn/", "en/"]) {
+  // 這裡沒有 "zh-tw/"。zh-tw 樹跟根路徑是同一份內容，precache 只收根路徑那份，
+  // 導向 /zh-tw/offline/ 會落到一個不存在於快取的頁面，讀者就吃到瀏覽器原生
+  // 的錯誤畫面。落到最後的預設值（根路徑的 offline 頁）內容完全一樣。
+  for (const prefix of ["zh-cn/", "en/"]) {
     if (rel.startsWith(prefix)) return SCOPE_PATH + prefix + "offline/";
   }
   return SCOPE_PATH + "offline/";
+}
+
+// event 可能不存在（例如未來從別處呼叫），沒有就退回 fire-and-forget
+function keepAlive(event, promise) {
+  if (event && typeof event.waitUntil === "function") event.waitUntil(promise);
+  return promise;
 }
 
 async function trimCache(cacheName, maxEntries) {
@@ -192,15 +216,16 @@ async function trimCache(cacheName, maxEntries) {
   }
 }
 
-async function networkFirst(request) {
+async function networkFirst(request, event) {
   try {
     const response = await fetch(request);
     if (response.ok) {
       const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
-      // 一定要 await。原本沒等就回傳，SW 有機會在裁剪跑完前被瀏覽器終止，
-      // 上限長期就守不住。
-      await trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES);
+      // 用 waitUntil 而不是 await。純 fire-and-forget 的話 SW 可能在裁剪跑完前
+      // 被瀏覽器終止，上限長期守不住；改成 await 又會讓每次導覽都等裁剪跑完才
+      // 拿到回應。waitUntil 兩邊都要得到：SW 活到裁剪結束，回應不被卡住。
+      keepAlive(event, trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES));
     }
     return response;
   } catch (err) {
@@ -212,14 +237,14 @@ async function networkFirst(request) {
   }
 }
 
-async function staleWhileRevalidate(request) {
+async function staleWhileRevalidate(request, event) {
   const cached = await caches.match(request);
   const fetchPromise = fetch(request)
     .then(async (response) => {
       if (response.ok) {
         const cache = await caches.open(RUNTIME_ASSETS);
         await cache.put(request, response.clone());
-        await trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES);
+        keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
       }
       return response;
     })
@@ -237,8 +262,8 @@ self.addEventListener("fetch", (event) => {
   if (!url.pathname.startsWith(SCOPE_PATH)) return;
 
   if (request.mode === "navigate") {
-    event.respondWith(networkFirst(request));
+    event.respondWith(networkFirst(request, event));
   } else {
-    event.respondWith(staleWhileRevalidate(request));
+    event.respondWith(staleWhileRevalidate(request, event));
   }
 });
