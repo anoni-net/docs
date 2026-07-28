@@ -30,7 +30,7 @@ const ZH_TW = {
   flowMid: '中',
   flowHigh: '高',
 
-  hintText: '點擊畫面加一條連線 · 拖曳可平移 · 滾輪或雙指縮放',
+  hintText: '點選畫面加一條連線 · 拖曳可平移 · 滾輪或雙指縮放',
   hintClose: '知道了',
 
   backendDetecting: '偵測中…',
