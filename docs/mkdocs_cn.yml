@@ -80,6 +80,7 @@ nav:
           - community/how-to-contribute.md
           - community/skill-level.md
           - community/contributor-handbook.md
+          - community/become-anoni.md
           - community/tor-project-ecosystem.md
           - community/governance.md
       - "动手实作":
@@ -208,7 +209,6 @@ plugins:
         'blog/2025/01/project-relaunch-2025.md': 'blog/index.md'
         'blog/2025/01/專案重啟-2025.md': 'blog/index.md'
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
-        'community/become-anoni.md': 'community/index.md'
         'community/campus-relay-faq.md': 'community/index.md'
         'community/campus-tor-relay-proposal.md': 'community/index.md'
         'community/campus-tor-relay-sop.md': 'community/index.md'
