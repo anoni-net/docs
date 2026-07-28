@@ -281,7 +281,8 @@ markdown_extensions:
         - name: vegalite
           class: vegalite
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: [".", ".."]
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
