@@ -72,6 +72,10 @@ RUN run_zh-tw.sh
 RUN run_zh-cn.sh
 mkdir -p ./anoni-net-docs-ipfs
 rm -rf ./anoni-net-docs-ipfs/*
+# service worker 只在 clearnet 註冊（overrides/base.html 的 hostname 白名單），
+# onion 與 IPFS 版不會用到，且這裡沒有做 __BUILD_VERSION__ 替換。
+# 留著是永遠不會執行的死檔案，會誤導後人，部署前移除。
+find ./output -name "sw.js" -delete
 cp -r ./output/* ./anoni-net-docs-ipfs/
 
 # Sanity check：IPFS 鏡像內不該還有主站 URL

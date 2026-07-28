@@ -16,14 +16,23 @@
 
 const VERSION = "__BUILD_VERSION__";
 const PRECACHE = "anoni-docs-precache-" + VERSION;
-const RUNTIME = "anoni-docs-runtime-" + VERSION;
-const RUNTIME_MAX_ENTRIES = 200;
+// runtime 拆兩個。原本導覽頁與圖片、字型共用同一個 200 筆上限，
+// 圖多的頁面逛幾輪就會把讀者想留著離線看的頁面擠掉。
+const RUNTIME_PAGES = "anoni-docs-pages-" + VERSION;
+const RUNTIME_ASSETS = "anoni-docs-assets-" + VERSION;
+const PAGES_MAX_ENTRIES = 120;
+const ASSETS_MAX_ENTRIES = 200;
 
 // SW scope 在正式站是 /docs/，本地開發（mkdocs serve）是 /
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
 
 // 各語系 build 的根路徑前綴（相對於 scope）。預設 build（zh-TW）在根。
-const LANG_PREFIXES = ["", "zh-tw/", "zh-cn/", "en/"];
+//
+// 這裡不放 "zh-tw/"。站台會建置四棵樹，但根路徑與 /zh-tw/ 是同一份 zh-TW 內容，
+// 兩邊都預快取等於同樣的四十幾頁抓兩次。實測整份 precache 是 21.3 MB，其中
+// 6.8 MB（31%）就是這份重複。讀者很可能在受限或計量的網路下第一次造訪，這個
+// 浪費是實打實的。/zh-tw/ 的頁面若真的被造訪，runtime 快取仍會接住。
+const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 
 // theme app shell（hash 檔名與 overrides/base.html 同步）
 const SHELL_ASSETS = [
@@ -65,10 +74,19 @@ const CORE_PAGES_ZH = [
   "tools/messaging-comparison/",
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
-  // scenarios（場景，核心 + asia-travel + travel-ai-briefing）
+  // scenarios（場景）
+  //
+  // 這裡刻意不放 journalist、activist、lgbtq、domestic-violence 這幾頁。
+  // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的，
+  // 而這幾頁一旦躺在裝置的 Cache Storage 裡，本身就是指向性證據：它會顯示
+  // 「這台裝置下載過記者、行動者、LGBTQ 的保護指南全文」。
+  //
+  // 這些文章自己就在教讀者清瀏覽器痕跡、提防裝置被檢查，站台不該一邊這樣教、
+  // 一邊把文章推進讀者裝置。讀者主動點開時，runtime 快取仍會存下來離線可讀，
+  // 那是他自己的選擇。
+  //
+  // 旅行類保留：那是情境準備而非身分指向，被看到不會把讀者歸類到受威脅族群。
   "scenarios/",
-  "scenarios/journalist/",
-  "scenarios/activist/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
   // advanced（進階，全部）
@@ -97,8 +115,8 @@ const CORE_PAGES_EN = [
   "about/",
   "basics/",
   "basics/internet-freedom/",
+  // scenarios/lgbtq 同樣不預快取，理由見 CORE_PAGES_ZH 的說明
   "scenarios/",
-  "scenarios/lgbtq/",
   "scenarios/travel-ai-briefing/",
   "community/onionoo-mcp/",
   "regional/",
@@ -108,7 +126,6 @@ const CORE_PAGES_EN = [
 // 各語系前綴對應的核心章節清單
 const CORE_PAGES_BY_PREFIX = {
   "": CORE_PAGES_ZH,
-  "zh-tw/": CORE_PAGES_ZH,
   "zh-cn/": CORE_PAGES_ZH,
   "en/": CORE_PAGES_EN,
 };
@@ -148,7 +165,9 @@ self.addEventListener("activate", (event) => {
       const keys = await caches.keys();
       await Promise.all(
         keys
-          .filter((key) => key !== PRECACHE && key !== RUNTIME)
+          .filter(
+            (key) => key !== PRECACHE && key !== RUNTIME_PAGES && key !== RUNTIME_ASSETS
+          )
           .map((key) => caches.delete(key))
       );
       await self.clients.claim();
@@ -164,11 +183,11 @@ function offlinePathFor(pathname) {
   return SCOPE_PATH + "offline/";
 }
 
-async function trimRuntimeCache() {
-  const cache = await caches.open(RUNTIME);
+async function trimCache(cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
   const keys = await cache.keys();
-  if (keys.length <= RUNTIME_MAX_ENTRIES) return;
-  for (const key of keys.slice(0, keys.length - RUNTIME_MAX_ENTRIES)) {
+  if (keys.length <= maxEntries) return;
+  for (const key of keys.slice(0, keys.length - maxEntries)) {
     await cache.delete(key);
   }
 }
@@ -177,9 +196,11 @@ async function networkFirst(request) {
   try {
     const response = await fetch(request);
     if (response.ok) {
-      const cache = await caches.open(RUNTIME);
+      const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
-      trimRuntimeCache();
+      // 一定要 await。原本沒等就回傳，SW 有機會在裁剪跑完前被瀏覽器終止，
+      // 上限長期就守不住。
+      await trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES);
     }
     return response;
   } catch (err) {
@@ -196,9 +217,9 @@ async function staleWhileRevalidate(request) {
   const fetchPromise = fetch(request)
     .then(async (response) => {
       if (response.ok) {
-        const cache = await caches.open(RUNTIME);
+        const cache = await caches.open(RUNTIME_ASSETS);
         await cache.put(request, response.clone());
-        trimRuntimeCache();
+        await trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES);
       }
       return response;
     })
