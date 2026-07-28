@@ -1,5 +1,6 @@
 {
   "name": "匿名網路社群 anoni.net/Docs",
+  "id": "/docs/",
   "short_name": "anoni.net Docs",
   "description": "推廣與翻譯匿名網路 Tor, Tails 與 OONI 觀測工具",
   "lang": "zh-TW",
