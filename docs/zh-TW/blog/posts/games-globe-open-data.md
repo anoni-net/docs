@@ -71,7 +71,7 @@ Access Now 的斷網事件則相反，每一筆都經過人工查證，成因清
 
 網路基礎建設這一類查了一輪，幾乎全軍覆沒，卡住的理由還很像。
 
-[RIPE Atlas](https://atlas.ripe.net/) 的探針資料很漂亮，`2026` 年 7 月查詢時全球有近六萬個探針，含經緯度與 ASN，API 直接回得出來。但服務條款寫明商業使用需另外取得 RIPE NCC 許可，沒有開放授權宣告。PeeringDB 的 API 一樣打得通，但可接受使用政策寫明不可整批轉散布給第三方。Packet Clearing House 的 IXP 目錄是 CC BY-NC-SA 3.0，Cloudflare Radar 是 CC BY-NC 4.0，兩者的非商業條款都會傳染到我們的內容上。
+[RIPE Atlas](https://atlas.ripe.net/) 佈署在各地的量測節點（probe）資料很漂亮，`2026` 年 7 月查詢時全球有近六萬個節點，含經緯度與 ASN，API 直接回得出來。但服務條款寫明商業使用需另外取得 RIPE NCC 許可，沒有開放授權宣告。PeeringDB 的 API 一樣打得通，但可接受使用政策寫明不可整批轉散布給第三方。Packet Clearing House 的 IXP 目錄是 CC BY-NC-SA 3.0，Cloudflare Radar 是 CC BY-NC 4.0，兩者的非商業條款都會傳染到我們的內容上。
 
 [IODA](https://ioda.inetintel.cc.gatech.edu/) 是這裡面最可惜的一份。它以 BGP 路由撤除、主動探測與 darknet 流量異常偵測各國的網路中斷，是真量測，主題跟這個站高度吻合。API 回得出資料，但回應本身就帶著一行 `Copyright (c) 2021-2025 Georgia Tech Research Corporation. All Rights Reserved.`。
 
