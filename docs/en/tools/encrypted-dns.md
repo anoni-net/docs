@@ -63,19 +63,20 @@ The blocklist and the classification method are usually unpublished, so you cann
 
 If you are protecting people in a household, a filtering resolver is reasonable. If the same device is also meant to tell you whether a network is being interfered with, turn it off before measuring.
 
-### Three operators checked line by line
+### Four operators checked line by line
 
-Only three, because these are the ones whose addresses, encrypted endpoints and policies were checked against their own documentation. Checked `2026-07`.
+Only four, because these are the ones whose addresses, encrypted endpoints and policies were checked against their own documentation. Checked `2026-07`.
 
 | Service | Jurisdiction | Retention | Independent audit | Non-filtering address and endpoints | Filtering options |
 |---|---|---|---|---|---|
 | **Cloudflare** | United States | Not written to non-volatile storage; deleted within 25 hours[^cf-privacy] | Yes, a top-four firm[^cf-privacy] | `1.1.1.1`, `1.0.0.1`, `2606:4700:4700::1111` | `1.1.1.2` blocks malware, `1.1.1.3` adds adult content; encrypted endpoints `security.cloudflare-dns.com`, `family.cloudflare-dns.com`[^cf-families] |
 | **Quad9** | Switzerland, foundation based in Zürich; has been sued in Germany and France over domain blocking[^quad9-press] | Not stated on the pages checked | Not stated on the pages checked | `9.9.9.10`, `149.112.112.10`, `dns10.quad9.net`, `https://dns10.quad9.net/dns-query` | `9.9.9.9` (the headline address) blocks malware and validates DNSSEC, `9.9.9.11` adds ECS[^quad9] |
 | **Mullvad** | Sweden; usable without an account | Not stated on the pages checked | Not stated on the pages checked | `194.242.2.2`, `2a07:e340::2`, `dns.mullvad.net`, `https://dns.mullvad.net/dns-query` | `194.242.2.3` blocks ads, with four further levels up to `194.242.2.9` with every list on[^mullvad] |
+| **Quad101** | Taiwan, operated by TWNIC | Temporary records kept up to 30 days, including source and destination IPs, queried domains and timestamps[^quad101-privacy] | Not stated on the pages checked | No non-filtering option. `101.101.101.101`, `101.102.103.104`, `2001:de4::101`, `2001:de4::102`; the site states DoH and DoT are supported but publishes no endpoint[^quad101] | Filters phishing, malware, botnet C&C, and "domains in violation of applicable law" by default[^quad101-terms] |
 
 Two traps in that table. First, Quad9's headline `9.9.9.9` is the **filtering** one, so unfiltered means `9.9.9.10` — the opposite default to Cloudflare. Second, the ECS on `9.9.9.11` (EDNS Client Subnet) attaches a prefix of your IP address to queries sent onward to authoritative servers so a CDN can pick a closer node; the cost is that information previously known only to the resolver reaches the upstream too. In privacy terms that is a subtraction.
 
-Other operators include AdGuard, NextDNS, dns0.eu and Control D — take addresses and endpoints from their own documentation, because reposted lists go stale silently. Google's `8.8.8.8` is heavily used across the region and also offers DoH and DoT[^google-dot]; it is absent from the table because its policies were not checked line by line this round, not because it was judged unsuitable.
+Quad101 is the only regionally-operated option among these four; see the regional section below. Other operators include AdGuard, NextDNS, dns0.eu and Control D — take addresses and endpoints from their own documentation, because reposted lists go stale silently. Google's `8.8.8.8` is heavily used across the region and also offers DoH and DoT[^google-dot]; it is absent from the table because its policies were not checked line by line this round, not because it was judged unsuitable.
 
 ## Self-hosting is not free either
 
@@ -136,6 +137,16 @@ Firefox also has a mechanism by which a network can signal it to disable encrypt
 Across the region the common reasons for changing DNS are speed and reachability — some domain does not resolve on the ISP's resolver. That second motive depends on which layer the blocking sits at: DNS-layer blocking is defeated by changing resolver, blocking at the IP or SNI layer is not, whoever answers you.
 
 It is also worth knowing what you give up. In Taiwan, Chunghwa Telecom's content filter and the anti-fraud domain blocking run by the Ministry of Digital Affairs with TWNIC both operate at the DNS layer. Moving to an overseas resolver disables those alongside everything else: you gain queries your ISP cannot see, and lose the phishing and fraud domains those blocks were catching. For a household with children or older relatives that trade needs weighing, and a filtering resolver is one middle path.
+
+For anyone who would rather keep the data in the region, TWNIC's Quad101 is the one public option, at `101.101.101.101` and `101.102.103.104`, with DNSSEC validation enabled[^quad101]. Run it past the four criteria above and three things stand out.
+
+It has no non-filtering variant, and the published scope covers phishing, malware and botnet C&C plus a fourth category, "domains in violation of applicable law"[^quad101-terms]. That last one is considerably broader than the other three and, as with every operator here, the list itself is unpublished, so you cannot know in advance what it covers. If the device is also meant to tell you whether a network is being interfered with, or to run OONI Probe, that property changes the results directly.
+
+Retention also runs longer than the overseas three: the stated policy is to keep only minimal query data, with temporary records held up to 30 days covering source and destination IPs, ports, query types, domain names, timestamps and response data, while what is kept long-term is a sample stripped of personal information[^quad101-privacy]. Set against Cloudflare's commitment to delete within 25 hours for `1.1.1.1`, that is the gap.
+
+The encrypted endpoints are not published: the site states DoH and DoT are supported without giving a hostname or a URL[^quad101-terms]. By this page's own logic, entering only the IP `101.101.101.101` yields plaintext queries, so using encryption means asking TWNIC for the endpoint first.
+
+Choosing Quad101 means keeping the data in Taiwan with a local institution, at the price of accepting a filtering set that includes legal compliance and a longer retention window than the overseas three. There is no single right answer to that trade, but it is not the same kind of product as the other three in the table, and it is worth knowing where the difference sits before choosing.
 
 If you run OONI Probe, this matters for the data. Under the `ts-017` specification, Web Connectivity resolves the domain with the system resolver, then compares against a test helper, counting it consistent only when addresses or ASNs line up[^ooni-wc].
 
@@ -216,4 +227,7 @@ Before running OONI Probe, run them in reverse: turn off every third-party resol
 [^chrome-dns]: [Use secure DNS in Chrome](https://support.google.com/chrome/answer/10468685){target="_blank"} - Google Chrome Help; the fallback difference between automatic mode and a custom provider is described here.
 [^tor-socks]: [SOCKS extensions](https://spec.torproject.org/socks-extensions.html){target="_blank"} - Tor specifications.
 [^odoh]: [RFC 9230: Oblivious DNS over HTTPS](https://www.rfc-editor.org/rfc/rfc9230.html){target="_blank"} - IETF.
+[^quad101]: [Quad101](https://101.101.101.101/){target="_blank"} - TWNIC's public DNS service.
+[^quad101-terms]: [Quad101 terms of service](https://101.101.101.101/ann1.html){target="_blank"} - TWNIC; the four filtering categories are enumerated here.
+[^quad101-privacy]: [Quad101 privacy policy](https://101.101.101.101/ann2.html){target="_blank"} - TWNIC; retention periods and DNSSEC validation are described here.
 [^ooni-wc]: [ts-017-web-connectivity](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} - OONI test specification.
