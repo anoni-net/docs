@@ -12,17 +12,19 @@ icon: material/lightbulb-outline
 
 ## 収録記事
 
-- [匿名・プライバシー・仮名・機密](./anonymity-vs-privacy.md) — 同義語のように使われる四つの言葉が、それぞれ別のものを守っています。道具を選ぶための一枚の対照表を、アジア太平洋と日本の事例とともに。
+この 3 本は続けて読むと噛み合います。まず言葉を分け、次に暗号化の外側に何が残るかを見て、最後に自分の場合はどれが問題になるのかを決める、という順序です。
 
-日本語版はこの層から収録を始めています。以下のページは現在、英語版と繁体字中国語版のみです。
+- [匿名・プライバシー・仮名・機密](./anonymity-vs-privacy.md) — 同義語のように使われる四つの言葉が、それぞれ別のものを守っています。道具を選ぶための一枚の対照表を、アジア太平洋と日本の事例とともに。
+- [メタデータはなぜ危険か](./metadata.md) — 暗号化が隠してくれない付随情報（誰と、いつ、どのくらいの頻度で、どこから）。日本の読者向けに LINE の Letter Sealing がどこまで守るのかも整理しています。
+- [脅威モデルの立て方](./threat-model.md) — 何を守り、誰から守り、どこまでコストを払えるか。立場ごとの例と、日本の相談窓口つき。
+
+以下のページは現在、英語版と繁体字中国語版のみです。
 
 - [ネットワークの自由がなぜ重要か](https://anoni.net/docs/en/basics/internet-freedom/){target="_blank"}（英語）— 東アジアと東南アジアという地域的な枠組みと、anoni.net の 3 つの観測軸（接続層、個人データとアイデンティティ層、資金の流れの層）。
-- [メタデータとその重要性](https://anoni.net/docs/en/basics/metadata/){target="_blank"}（英語）— 暗号化が隠してくれない通信の付随情報（誰と、いつ、どのくらいの頻度で、どこから）。実名 SIM 制度がそれを法的な身元に結びつける、という地域固有の事情つき。
-- [脅威モデリング](https://anoni.net/docs/en/basics/threat-model/){target="_blank"}（英語）— 道具を選ぶ前に問うべき 5 つの質問と、地域を移動すると敵対者と賭け金がどう変わるか。
 
 ## この先の読みどころ
 
+- [地域観測](../regional/index.md) — 実証的な観測作業と国ごとの記録。[Tor リレー観測](../regional/tor-relay-watcher.md)は日本のデータを既定表示にしています
 - [私たちについて](../about/index.md) — このサイトを作っているコミュニティ
-- [地域観測](https://anoni.net/docs/en/regional/){target="_blank"}（英語）— 実証的な観測作業と国ごとの記録
 - [シナリオ](https://anoni.net/docs/en/scenarios/){target="_blank"}（英語）— 地域の文脈を踏まえた実践的なガイド
 - プライバシーの入門資料： [EFF SSD](https://ssd.eff.org/){target="_blank"}、[Privacy Guides](https://www.privacyguides.org/){target="_blank"}、[Tor Project サポート](https://support.torproject.org/){target="_blank"}

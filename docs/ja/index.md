@@ -43,7 +43,7 @@ OONI のネットワーク観測、Tor リレーの監視、そして現地で�
 
     ---
 
-    私たちが運用している Tor リレー監視システム Pulse は、台湾、香港、**日本**、韓国のリレーについて、稼働状況、バージョン、ASN、ノード種別、フラグの分布を継続的に記録しています。日本のリレー事情に関する数字は、このサイトのデータから直接読み取れます。
+    私たちが運用している Tor リレー監視システム Pulse は、台湾、香港、**日本**、韓国のリレーについて、稼働状況、バージョン、ASN、ノード種別、フラグの分布を継続的に記録しています。[Tor リレー観測](./regional/tor-relay-watcher.md)は日本語版では**日本を既定表示**にしているので、日本のリレー事情はそのまま読み取れます。
 
 - :material-earth:{ .lg .middle style="color: var(--brand-cyan-500);" } **地域の検閲動向は地続きです**
 
@@ -67,7 +67,13 @@ OONI のネットワーク観測、Tor リレーの監視、そして現地で�
 
     ---
 
-    道具を選ぶ前に必要な語彙の整理。まずは[匿名・プライバシー・仮名・機密の違い](./basics/anonymity-vs-privacy.md)から。
+    道具を選ぶ前に必要な語彙と枠組み。[匿名・プライバシー・仮名・機密](./basics/anonymity-vs-privacy.md)、[メタデータはなぜ危険か](./basics/metadata.md)、[脅威モデルの立て方](./basics/threat-model.md)の 3 本。この順に読むと噛み合います。
+
+- [:material-map-outline: 地域観測](./regional/index.md)
+
+    ---
+
+    アジア太平洋の中国語圏で何が起きているかの記録。[Tor リレー観測](./regional/tor-relay-watcher.md)は Pulse の実データで、**日本を既定表示**にしています。
 
 - [:material-account-box-outline: 私たちについて](./about/index.md)
 
