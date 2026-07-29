@@ -10,11 +10,17 @@ icon: material/email-fast-outline
 
 - 登録先： <https://form.anoni.net/s/w21855zpca072rvgp0s2govj>{target="_blank"}
 
-公開の場では話しにくい内容がある場合は、下記のメールアドレスからプロジェクトメンバーに直接ご連絡ください。
+公開の場では話しにくい内容がある場合は、このページ末尾の暗号化メールからプロジェクトメンバーに直接ご連絡ください。
 
 ### コミュニティでの議論とオンライン会議
 
 継続的な議論やテーマごとの協働には **Matrix**（Web クライアントは [Element](https://matrix.anoni.net/){target="_blank"}、ホームサーバーは `im.anoni.net`）を、暗号化された共同編集には [**Cryptpad**](https://cryptpad.anoni.net/){target="_blank"} を、オンライン会議には [**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} を使っています。アカウントの申請方法と参加の手順は[コミュニティページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）をご覧ください。
+
+### 日本語版を読む
+
+- [基本概念](./basics/index.md) — 匿名性、メタデータ、脅威モデルの 3 本
+- [地域観測](./regional/index.md) — [Tor リレー観測](./regional/tor-relay-watcher.md)は日本を既定表示にしています
+- [私たちについて](./about/index.md) — 運営体制と検証の手段
 
 ### 日本語での連絡について
 
@@ -42,3 +48,9 @@ icon: material/email-fast-outline
         =TJp2
         -----END PGP PUBLIC KEY BLOCK-----
         ```
+
+---
+
+原文：[聯絡我們](https://anoni.net/docs/contact/){target="_blank"}（繁体字中国語）
+
+この日本語訳は初稿で、日本語母語話者の校正を経ていません。気になる箇所は [Issue](https://github.com/anoni-net/docs/issues){target="_blank"} か <whisper@anoni.net> へ。方針は[訳語の方針](./translation-glossary.md)にあります。

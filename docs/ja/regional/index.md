@@ -8,17 +8,17 @@ icon: material/map-outline
 
 アジア太平洋の中国語圏はひとつの規制環境ではありません。中国大陸、香港、マカオ、シンガポール、マレーシア、台湾、そしてその間を移動する人々のあいだで、言論、身元、決済、接続を律するルールは大きく異なります。この違いは、その地域で報道、アドボカシー、研究をする人にとっても、単に国境をまたいで私生活を送りたい人にとっても実際に効いてきます。
 
-私たちは台北にいます。この位置には特有の価値があります。台湾の接続環境は地域のなかでも開かれているほうでありながら、条件がもっと厳しい複数の法域と言語、家族のつながり、プラットフォームの生態系を共有しています。この視点から、観測、規制、実際の運用の 3 つを追っています。
+私たちは台北にいます。台湾の接続環境は地域のなかでも開かれているほうでありながら、条件がもっと厳しい複数の法域と言語、家族のつながり、プラットフォームの生態系を共有しています。この視点から、観測、規制、実際の運用の 3 つを追っています。
 
-!!! warning "日本は観測対象ではなく参照点です"
+!!! warning "このセクションに日本は含まれません"
 
-    誤解を避けるために先に書いておきます。**私たちは日本の法制度や言論環境を観測していません。** 日本が登場するのは Tor リレーの監視においてだけで、これは地域の参照点として台湾、香港、韓国と並べているものです。
+    **私たちが日本について継続的に扱っているのは Tor リレーの計測だけです。** 日本の法制度や言論環境は追っていません。以下で扱うのは中国大陸、香港・マカオ、シンガポール、マレーシア、台湾です。
 
-    日本の読者にとってこのセクションの価値は、日本の状況を知ることではなく、**隣接する法域で何が起きているかを中国語の一次情報を読める位置から見た記録**にあります。中国大陸の検閲技術が国外へ輸出される動き、香港の国家安全維持法以降の変化、越境時の端末検査といった論点は、日本の事業者、研究者、報道関係者にとって無関係ではありません。
+    日本の読者にとってこのセクションの価値は、**隣接する法域で何が起きているかを、中国語の一次情報を読める位置から見た記録**にあります。
 
 ## :material-eye-outline: どこまで語れるか
 
-法域によって私たちの立ち位置は違います。地域全体に同じ深さがあるとは主張しません。以下のカードは、それぞれの部分についてどれだけ直接的に語れるかで分けています。
+地域全体に同じ深さがあるとは主張しません。以下のカードは、それぞれについてどれだけ直接的に語れるかで分けています。
 
 ### 私たちが立っている場所
 
@@ -98,7 +98,7 @@ icon: material/map-outline
 
 ## :material-file-document-outline: 日本語版に収録しているページ
 
-- [Tor リレー観測](./tor-relay-watcher.md) — 日本、台湾、韓国、香港の Tor リレーの稼働状況。Pulse API から取得した実データで、**日本語版は日本を既定表示にしています**。
+- [Tor リレー観測](./tor-relay-watcher.md) — 日本、台湾、韓国、香港の Tor リレーの稼働状況。Pulse が Onionoo API から取得した実データです。
 
 以下は英語版と繁体字中国語版のみです。
 
@@ -111,9 +111,9 @@ icon: material/map-outline
 
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"}：記録のある提携先である OONI の公開ツールです。検閲回避ツールとプラットフォームの到達性について広く使われる参照データセットで、国コードと期間で直接絞り込めます。
 - [Tor Metrics](https://metrics.torproject.org/){target="_blank"}：記録のある提携先である Tor Project の公開ツールです。国別のリレー、ガード、ブリッジの数がわかり、地域の Tor の容量を把握するのに使えます。
-- [Freedom House — Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}：年次のスコアと詳細な国別章です。地域間比較のために引用しています。Freedom House との関係はありません。
-- [Citizen Lab](https://citizenlab.ca/){target="_blank"}：トロント大学の研究グループで、アジア太平洋について実質的な成果を出しています。報告書を引用しています。関係はありません。
-- [Article 19 Asia](https://www.article19.org/regions/asia/){target="_blank"} と [Access Now Asia-Pacific](https://www.accessnow.org/region/asia-pacific/){target="_blank"}：読んでいる、また推奨する地域の市民社会の視点です。いずれとも関係はありません。
+- [Freedom House — Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}：年次のスコアと詳細な国別章です。地域間比較のために引用しています。
+- [Citizen Lab](https://citizenlab.ca/){target="_blank"}：トロント大学の研究グループで、アジア太平洋について実質的な成果を出しています。報告書を引用しています。
+- [Article 19 Asia](https://www.article19.org/regions/asia/){target="_blank"} と [Access Now Asia-Pacific](https://www.accessnow.org/region/asia-pacific/){target="_blank"}：読んでいる、また推奨する地域の市民社会の視点です。
 
 ## :material-handshake-outline: 一緒に作業する
 
@@ -127,3 +127,9 @@ icon: material/map-outline
 ## :material-information-outline: 免責
 
 地域に関する記述は公開されている観測をまとめたものであり、法的助言ではありません。規制環境は速く動くため、個別の判断は最新の現地法と専門家に確認してください。出来事を引用する際は一次情報源にリンクします。一次情報源が中国語である場合はその旨を明記し、可能であれば信頼できる英語の要約も併せて示します。
+
+---
+
+原文：[Regional Observatory](https://anoni.net/docs/en/regional/){target="_blank"}（英語）
+
+この日本語訳は初稿で、日本語母語話者の校正を経ていません。気になる箇所は [Issue](https://github.com/anoni-net/docs/issues){target="_blank"} か <whisper@anoni.net> へ。方針は[訳語の方針](../translation-glossary.md)にあります。

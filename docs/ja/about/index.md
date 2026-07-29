@@ -21,13 +21,13 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 
 - **anoni.net Docs** — [anoni.net/docs](https://anoni.net/docs/){target="_blank"} で公開している多言語ドキュメントサイト。Tor onion ミラーは [docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"} にあります。ソースは [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} で公開しています。
 - **Pulse** — 台湾、香港、日本、韓国の Tor リレーについて、稼働状況、バージョン、ASN、ノード種別、フラグの分布を追跡する監視システム。FastAPI と PostgreSQL によるオープンソースのサービスで、REST API と Vega-Lite チャート API を [api.anoni.net](https://api.anoni.net/api/readme){target="_blank"} で公開しています。
-- **ASN カバレッジ分析ツール** — OONI の S3 公開データを一括処理し、地域ごとに ASN 単位の観測充足度を可視化する Python の CLI です。観測が手薄なネットワークの特定と地域間比較に使っています。
+- **[ASN カバレッジ分析ツール](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"}** — OONI の S3 公開データを一括処理し、地域ごとに ASN 単位の観測充足度を可視化する Python の CLI です。観測が手薄なネットワークの特定と地域間比較に使っています。
 - **地域レポートの翻訳（現時点で 1 件）** — 2025 年の InterSecLab による Geedge Networks / MESA Lab 漏洩レポートの繁体字中国語全訳を zh-TW 版で公開しています。今後の翻訳は、その地域レポートが中国語圏の空白を埋めるかどうかを見て個別に判断します。
 - **ブログとコミュニティ更新** — コミュニティの活動報告、カンファレンス参加（RightsCon、COSCUP、ETHTaipei）の記録、Tor Project、OONI、Tails の上流アナウンスの翻訳を公開しています。
 
 ## ガバナンス
 
-形式を最小限に抑えた合意形成モデルで運営しています。ガバナンス憲章の草案はコミュニティレビュー中で、全文は[ガバナンス憲章](https://anoni.net/docs/en/community/governance/){target="_blank"}（英語）にあります。要点は次のとおりです。
+形式を最小限に抑えた合意形成モデルで運営しています。全文は[ガバナンス憲章](https://anoni.net/docs/en/community/governance/){target="_blank"}（英語、コミュニティレビュー中）にありますが、判断に必要な要点は以下に日本語でまとめてあるので、英語を読まずに済むはずです。
 
 - **役割** — *コアメンバー*（自前インフラの運用権限と PR マージ権限を持つ長期メンテナ）、*貢献者*（実際に成果を出している人）、*オブザーバー*（ニュースレター購読者や Public Space の参加者）、*訪問者*（閲覧し `whisper@anoni.net` 経由で連絡してくる人）。
 - **意思決定** — 原則は合意形成で、異議申し立てのための 3 日間の猶予期間を設けます。投票は合意が行き詰まったときと時間的な制約があるときに限ります。憲章の変更やコアメンバーの追加といった重要な決定は、活動中の貢献者の 3 分の 2 の賛成を要します。
@@ -45,7 +45,7 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 - **[Electronic Frontier Foundation](https://www.eff.org/){target="_blank"}** — Tor Relay on Campus の取り組みでの協働。EFF と Tor Project の共同企画である [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} の繁体字中国語訳を担当しました。
 - **大学の受け入れ先** — 国立台湾師範大学（Tor リレーの設置）、国立台湾科技大学（2025 年に匿名ネットワークのワークショップを開催）。
 
-方針として、協力者は明示的にクレジットします。自分たちの成果でないものを自分たちのものとして扱うことはしません。
+方針として、協力者は明示的にクレジットします。
 
 ## その他の関与と貢献
 
@@ -69,7 +69,9 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 - **Pulse のコード** — [MIT License](https://github.com/anoni-net/docs/blob/main/pulse/LICENSE){target="_blank"}
 - **ASN カバレッジ分析ツール** — [GPL-3.0](https://github.com/anoni-net/docs/blob/main/asn_coverage/LICENSE){target="_blank"}
 
-ドキュメントを再利用する際の出典表示の書式は「anoni.net Docs Project, 該当ページの URL, CC-BY 4.0」です。
+- **Pulse API が返す観測データ** — 上流は Tor Project の [Onionoo](https://onionoo.torproject.org/){target="_blank"} で、その利用条件に従います。私たちが加えた集計結果の再利用は CC-BY 4.0 です。
+
+ドキュメントを再利用する際の出典表示の書式は「anoni.net Docs Project, 該当ページの URL, CC-BY 4.0, 参照 2026-07-29」のように、参照日を添えてください。
 
 !!! info "日本語訳の再利用について"
 
@@ -91,4 +93,12 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 - **ニュースレター** — [連絡先ページ](../contact.md)から登録できます
 - **GitHub** — Issue と PR は [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} へ
 
+日本語版で読めるのは[基本概念](../basics/index.md)と[地域観測](../regional/index.md)です。訳文を直してくださる方は[訳語の方針](../translation-glossary.md)をご覧ください。
+
 紹介、提携の相談、研究協力については、用途ごとにどの窓口が適切かを[コミュニティページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）に整理しています。
+
+---
+
+原文：[關於我們](https://anoni.net/docs/about/){target="_blank"}（繁体字中国語）
+
+この日本語訳は初稿で、日本語母語話者の校正を経ていません。気になる箇所は [Issue](https://github.com/anoni-net/docs/issues){target="_blank"} か <whisper@anoni.net> へ。方針は[訳語の方針](../translation-glossary.md)にあります。

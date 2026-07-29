@@ -32,6 +32,7 @@ nav:
   - !ENV [NAV_ABOUT, "私たちについて"]:
       - about/index.md
       - contact.md
+      - translation-glossary.md
 theme:
   name: material
   logo: assets/images/logo-white.svg
