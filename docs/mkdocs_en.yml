@@ -32,6 +32,7 @@ nav:
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
           - tools/vpn-guide.md
+          - tools/encrypted-dns.md
           - tools/ooni-run-v2.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
