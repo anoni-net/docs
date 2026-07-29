@@ -36,7 +36,7 @@ icon: material/usb-flash-drive-outline
 - 例行排程版本，非緊急安全釋出。
 - Tor Browser 升至 15.0.16。
 - 更新部分 firmware 套件，改善較新硬體的支援，包含顯示卡、Wi-Fi 等。
-- 修正在 Secure Boot 憑證其實已是最新的少數情境下，仍誤跳「憑證過期」通知的問題。
+- 修正在 Secure Boot 憑證已是最新的少數情境下，仍誤跳「憑證過期」通知的問題。
 - 未變動 Linux 核心、Thunderbird 與 Debian 底層，沿用 7.8 的軟體組合。可從 Tails 7.0 以後版本自動升級。
 
 ## Tails 7.8.1

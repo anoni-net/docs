@@ -34,18 +34,18 @@ Tor 存在的原因，是希望保护网络用户免受不必要监控。Tor 网
 
 ## 什么是无状态
 
-无状态系统不会在重启之间保留任何数据。每次开机都从固定、已知的镜像开始，和 [Tails](https://tails.net/){target="_blank"} 的思路类似。把 Tor relay 全部跑在 RAM 的概念并不新。专门为此设计、基于 uClibc 的微型 Linux 发行版 [Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"}，至少在 2015 年就已存在。
+无状态系统不会在重启之间保留任何数据。每次开机都从固定、已知的镜像开始，和 [Tails](https://tails.net/){target="_blank"} 的思路类似。把 Tor relay 全部运作于 RAM 的概念并不新。专门为此设计、基于 uClibc 的微型 Linux 发行版 [Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"}，至少在 2015 年就已存在。
 
 对 relay 运营者来说，这种设计通过默认机制提高了安全门槛，也让系统更容易形成良好实践：
 
 - **物理攻击抵抗能力**：机器若被扣押或克隆，可能没有可供分析的内容。按具体部署不同，提取 relay 密钥可能变得不可行。
 - **声明式配置**：系统通过版本控制管理。无状态系统每次启动都会重新应用声明配置，不会悄悄偏离既定状态。
-- **不可变运行环境**：文件系统是只读。即便攻击者拿到代码执行能力，也难以跨重启持久化恶意内容。
+- **不可变运行环境**：文件系统是只读。即便攻击者取得代码执行能力，也难以跨重启持久化恶意内容。
 - **可复现性**：重启后不变化的系统更容易验证，也更有机会被复现和审计。
 
 ## 为什么 Tor relays 很难做到无状态
 
-Tor relay 的信誉是随时间积累的。持续运行数月的 relay 会拿到带宽旗标，从而对网络更有价值。这个信誉绑定在长期加密身份密钥上。若丢失这些密钥，relay 就会失去身份，也等于失去在网络中的信誉，需要从零开始。
+Tor relay 的信誉是随时间积累的。持续运行数月的 relay 会取得带宽旗标，从而对网络更有价值。这个信誉绑定在长期加密身份密钥上。若丢失这些密钥，relay 就会失去身份，也等于失去在网络中的信誉，需要从零开始。
 
 因此，relay 身份必须在重启后仍可保留，同时又不能被轻易提取。把密钥放在磁盘上，可能被扣押和复制。把密钥放进 TPM 这类安全芯片，对攻击者来说通常更难下手。
 
@@ -67,7 +67,7 @@ TPM 也不能解决全部问题。Tor 使用的 ed25519 密钥并不受 TPM 原�
 
 ### 最小 RAM disk
 
-最简单的做法是把所有东西跑在 RAM，密钥手动管理。从 2015 年开始，[Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"} 就在这么做。身份密钥通过 SCP 导出和导入，重启前不做就等于重来。没有 TPM、没有远程证明、没有 verified boot，只有“RAM 断电即失”这个保证。即便如此，仍比传统有磁盘状态的部署更进一步。
+最简单的做法是把所有东西运作于 RAM，密钥手动管理。从 2015 年开始，[Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"} 就在这么做。身份密钥通过 SCP 导出和导入，重启前不做就等于重来。没有 TPM、没有远程证明、没有 verified boot，只有“RAM 断电即失”这个保证。即便如此，仍比传统有磁盘状态的部署更进一步。
 
 ### VM 型 RAM disk
 
@@ -87,7 +87,7 @@ TPM 也不能解决全部问题。Tor 使用的 ed25519 密钥并不受 TPM 原�
 
 ### 无状态重启与升级冲突
 
-我们目前用标准 unattended upgrades 更新 Tor binary。但重启会回到 OS 镜像，而镜像里可能还是旧版本，结果变成非预期降级。怎样同时兼顾自动安全更新与无状态镜像，目前还没完全解决。
+我们目前用标准 unattended upgrades 更新 Tor binary。但重启会回到 OS 镜像，而镜像里可能还是旧版本，结果变成非预期降级。如何同时兼顾自动安全更新与无状态镜像，目前还没完全解决。
 
 ### 内存约束
 

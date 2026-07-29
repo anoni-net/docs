@@ -8,7 +8,7 @@ icon: material/server-network-outline
 
 這份 SOP 是 [如何搭建 Tor Relay](./setup-tor-relay.md) 的進階補充，專門處理**校園網路場景**下的特殊性。內容整理自社群夥伴 NZ 在台灣師範大學的實作經驗，請搭配 [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md) 與 [校園 FAQ](./campus-relay-faq.md) 一併使用。
 
-如果你還在評估「該不該做」、「如何說服學校」，請先回到 [校園提案範本](./campus-tor-relay-proposal.md)。這一頁假設你已經取得上線許可，正準備動手。
+如果你還在評估「該不該做」、「如何說服學校」，請先回到 [校園提案範本](./campus-tor-relay-proposal.md)。這一頁假設你已經取得上線許可，正準備實際操作。
 
 ## 跟個人架設的差異
 
@@ -92,7 +92,7 @@ icon: material/server-network-outline
 
 - **版本來源**：優先使用 [Tor Project 官方套件庫](https://support.torproject.org/apt/tor-deb-repo/){target="_blank"}，發行版內建版本通常落後一兩個版本
 - **服務帳號**：使用套件預設的 `debian-tor` 帳號執行，**不要用 root**
-- **只跑非出口**：以 `ExitRelay 0` 與 `ExitPolicy reject *:*` 明確宣告，避免被誤當成 Exit Relay
+- **只營運非出口**：以 `ExitRelay 0` 與 `ExitPolicy reject *:*` 明確宣告，避免被誤當成 Exit Relay
 
 ## torrc 參考設定
 

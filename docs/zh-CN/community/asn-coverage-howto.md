@@ -6,13 +6,13 @@ icon: material/database-search
 
 # :material-database-search: ASN 观测资料撷取与分析
 
-这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己动手抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序如何设置与使用。
+这页是 [在地脉络 → ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸：当你想自己实际操作抓 OONI 公开资料、计算特定区域 ASN 的观测覆盖率时，这篇介绍 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序如何设置与使用。
 
 开始前建议先读 [项目研究预先准备](./setup-repo.md) 把开发环境建好。
 
 !!! tip "执行位置"
 
-    下面的指令都在 `anoni-net-docs/asn_coverage/` 目录下执行。第一次使用先 `cd` 进该目录、跑 `uv sync` 装好依赖，接着用 `uv run python ooni.py ...`（或先 `source .venv/bin/activate` 再依下方范例执行）。
+    下面的指令都在 `anoni-net-docs/asn_coverage/` 目录下执行。第一次使用先 `cd` 进该目录、执行 `uv sync` 装好依赖，接着用 `uv run python ooni.py ...`（或先 `source .venv/bin/activate` 再依下方范例执行）。
 
 ## 资料来源
 

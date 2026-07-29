@@ -7,8 +7,8 @@ categories:
     - 社群
 slug: internetfreedom-oct2025
 image: "assets/images/post-update.png"
-summary: "快速回顧，國家級的監控，我們還可以採取怎樣的行動"
-description: "快速回顧，國家級的監控，我們還可以採取怎樣的行動"
+summary: "快速回顧，國家級的監控，我們還可以採取如何的行動"
+description: "快速回顧，國家級的監控，我們還可以採取如何的行動"
 ---
 
 # 網路自由小聚 2025/10：數位威權主義商品化 - 網路政變報告分享會

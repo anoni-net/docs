@@ -7,9 +7,9 @@ icon: material/chart-bar
 
 # :material-chart-bar: Tor Relays 觀測點
 
-從 [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md) 接續討論「連線層的在地觀測」。前兩篇看的是「我們在測什麼網站」與「測量端落在哪些 ASN」，這篇換到節點端：台灣有多少 Tor 中繼節點（替全球 Tor 使用者轉送加密流量的志願伺服器）、跑在哪些 ASN 上、貢獻多少頻寬。頁面也順帶列出日本、南韓、香港的同期資料，作為鄰近地區的參照。
+從 [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md) 接續討論「連線層的在地觀測」。前兩篇看的是「我們在測什麼網站」與「測量端落在哪些 ASN」，這篇換到節點端：台灣有多少 Tor 中繼節點（替全球 Tor 使用者轉送加密流量的志願伺服器）、運作於哪些 ASN 上、貢獻多少頻寬。頁面也順帶列出日本、南韓、香港的同期資料，作為鄰近地區的參照。
 
-看這頁的圖表時，可以帶著幾個問題：台灣持續運作的中繼節點有幾個、總頻寬夠不夠，數字越高代表在地能提供的轉送能量越強。節點分散在越多不同的 ASN 越好，全集中在單一電信商，一旦那家網路出問題或被施壓，整批節點會一起受影響。跟日本、南韓比，台灣的規模還有不少成長空間。想自己也架一個，可以直接跳到頁尾的「想動手做？」。
+看這頁的圖表時，可以帶著幾個問題：台灣持續運作的中繼節點有幾個、總頻寬夠不夠，數字越高代表在地能提供的轉送能量越強。節點分散在越多不同的 ASN 越好，全集中在單一電信商，一旦那家網路出問題或被施壓，整批節點會一起受影響。跟日本、南韓比，台灣的規模還有不少成長空間。想自己也架一個，可以直接跳到頁尾的「想實作？」。
 
 <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
   <span style="font-weight:500;font-size:.95rem;">觀測地區：</span>
@@ -349,7 +349,7 @@ Tor 軟體版本的更新狀況，以及各節點所具備的能力標籤（Flag
   </tbody>
 </table>
 
-!!! example "想動手做？"
+!!! example "想實作？"
 
     - :material-server-network: **想自己架 Tor relay**：見 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校園架 relay 是 anoni.net 2026 三大主題之一，可看 [Tor Relay 校園建立](../community/relay-on-campus.md)。
     - :material-chart-bar: **觀測資料來源**：本頁圖表透過 [Pulse 後端 API](https://anoni.net/api/readme){target="_blank"} 提供，觀察項目與資料服務都還在持續調整中。

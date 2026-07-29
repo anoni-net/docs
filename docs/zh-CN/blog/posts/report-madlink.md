@@ -49,7 +49,7 @@ Geedge 目前这一代的 TSG 部署在埃塞俄比亚、巴基斯坦和缅甸�
 
 这页明确标示为 anoni.net 编辑团队的整理，不属于 InterSecLab 原报告。内容分成五个区块：
 
-**外部交叉验证：** 为了让读者能自行重现，我们对报告中的关键事证跑了一轮独立查证，例如 IEEE OUI `00:30:64` 确实登记在凌华名下（macvendors 与 macvendorlookup 两个独立来源都回传「ADLINK TECHNOLOGY, INC.」）、CSA-7400 在凌华中英文官网上明确被分类为「Network Security Appliance」并行销 DPI/IDS/IPS/NGFW、积至（海南）信息技术有限公司由方滨兴 2018 年在海南创立（维基百科、大纪元、新唐人交叉印证）、New Bloom Magazine 2026-04-29 那篇报道真实存在。
+**外部交叉验证：** 为了让读者能自行重现，我们对报告中的关键事证进行了一轮独立查证，例如 IEEE OUI `00:30:64` 确实登记在凌华名下（macvendors 与 macvendorlookup 两个独立来源都回传「ADLINK TECHNOLOGY, INC.」）、CSA-7400 在凌华中英文官网上明确被分类为「Network Security Appliance」并行销 DPI/IDS/IPS/NGFW、积至（海南）信息技术有限公司由方滨兴 2018 年在海南创立（维基百科、大纪元、新唐人交叉印证）、New Bloom Magazine 2026-04-29 那篇报道真实存在。
 
 **媒体覆盖对比：** 国际与英文媒体有覆盖（InterSecLab 原报告、New Bloom Magazine、cybernews 等）。台湾中文媒体基本无覆盖（联合、自由、中央社、TVBS、TechNews、iThome 等截至 2026-05-16 都没有直接报道，TechNews 虽然在 2025-09 写过 Geedge 500GB 外泄本身，但未追凌华这条线）。被原报告引述的立法委员沈伯洋，在公开场合也找不到就此议题的进一步发声。
 

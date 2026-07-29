@@ -7,16 +7,16 @@ categories:
     - 隐私
 slug: 2026-grapheneos-android-17
 image: "https://assets.anoni.net/blog/2026-grapheneos-android-17.jpg"
-summary: "Android 17 在 2026 年 6 月 16 日上线，GrapheneOS 当天完成移植。真正的故事是 Google 从 2025 年起连续两步收紧 AOSP，加上 Play Integrity、Microsoft Authenticator、欧盟 Unified Attestation 一路把更安全的系统挡在门外。这些动作指向同一件事，你买的手机，到底谁决定它能跑什么系统。"
+summary: "Android 17 在 2026 年 6 月 16 日上线，GrapheneOS 当天完成移植。真正的故事是 Google 从 2025 年起连续两步收紧 AOSP，加上 Play Integrity、Microsoft Authenticator、欧盟 Unified Attestation 一路把更安全的系统挡在门外。这些动作指向同一件事，你买的手机，到底谁决定它能执行什么系统。"
 description: "Android 17 上线后 GrapheneOS 的处境：Google 收紧 AOSP、attestation 锁定非官方系统，以及这对华语区与重视隐私的用户代表什么。"
 ---
 
-# Android 17 上线后的 GrapheneOS：谁决定手机上能跑什么系统
+# Android 17 上线后的 GrapheneOS：谁决定手机上能执行什么系统
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/blog/2026-grapheneos-android-17.jpg" target="_blank">
         <img src="https://assets.anoni.net/blog/2026-grapheneos-android-17.jpg"
-            alt="Android 17 上线后的 GrapheneOS：谁决定手机上能跑什么系统"
+            alt="Android 17 上线后的 GrapheneOS：谁决定手机上能执行什么系统"
             style="border-radius: 5px;">
     </a>
     <figcaption>图片：智能手机被锁链缠绕，象征装置被外部规则锁住。摄影 Towfiqu barbhuiya，来源 [Pexels](https://www.pexels.com/photo/close-up-of-a-smart-phone-with-a-lock-11391947/){target="_blank"}（Pexels License）。</figcaption>
@@ -24,7 +24,7 @@ description: "Android 17 上线后 GrapheneOS 的处境：Google 收紧 AOSP、a
 
 手机是你花钱买的，但它能装什么、能执行什么系统，越来越不是你能决定的。这个问题平常不会浮上台面，直到你想换一套更保护隐私的系统，却发现某些 app 因为「侦测到非原厂系统」而拒绝执行，或是你信任的开源系统因为得不到硬件资料而越来越难维护。Android 17 在 2026 年 6 月 16 日上线[^1]，把这个问题又往前推了一步。
 
-对隐私使用者来说，首当其冲的是 [GrapheneOS](https://grapheneos.org/){target="_blank"}，一套把 Android 安全强化、移除 Google 绑定的行动作业系统。它几乎只能跑在 Google Pixel 上，而 Google 正一步步调整 Android 与 Pixel 的开放程度，维持一套干净、由使用者掌握的手机系统，成本也随之升高。
+对隐私使用者来说，首当其冲的是 [GrapheneOS](https://grapheneos.org/){target="_blank"}，一套把 Android 安全强化、移除 Google 绑定的行动作业系统。它几乎只能运作于 Google Pixel 上，而 Google 正一步步调整 Android 与 Pixel 的开放程度，维持一套干净、由使用者掌握的手机系统，成本也随之升高。
 
 <!-- more -->
 
@@ -42,7 +42,7 @@ GrapheneOS 这类系统，必须仰赖 Google 公开的 Android 原始码与 Pix
 
 即使如此，GrapheneOS 在 Android 17 发布当天（2026 年 6 月 16 日）就完成移植[^4]。过程中遇到 Android 17 本身一个影响 recovery 侧载的上游 bug，第一版 build 因此没有直接推送，修正后的版本 `2026061800` 在 6 月 18 日进入 Alpha 测试通道[^4]。
 
-移植速度没有变慢，这是 GrapheneOS 工程能力的展示。但每一代要付出的逆向工程成本都在增加，而这个成本是 Google 的政策单方面加上去的。一个原本可以靠公开资料顺畅进行的工作，现在得靠逆向工程填补缺口。GrapheneOS 能维持这样的移植速度多久，取决于 Google 后续是否继续缩减公开资料的范围。
+移植速度没有变慢，这是 GrapheneOS 工程能力的展示。但每一代要付出的逆向工程成本都在增加，而这个成本是 Google 的政策单方面加上去的。一个原本可以靠公开资料顺畅进行的工作，现在需仰赖逆向工程填补缺口。GrapheneOS 能维持这样的移植速度多久，取决于 Google 后续是否继续缩减公开资料的范围。
 
 ## 另一种压力：attestation 将非官方系统判为不合格
 
@@ -62,17 +62,17 @@ attestation 的压力在 2026 年明显增强，下面三件事几乎同时推�
 
 面对 Pixel 的不确定，GrapheneOS 开始找替代硬件。2026 年 3 月 1 日的 MWC 2026，GrapheneOS 与 Motorola 宣布长期合作，计画推出预载 GrapheneOS、支援 bootloader 解锁与重锁的机型[^8]。这是 GrapheneOS 第一次把硬件出路铺到 Pixel 以外，具体机型与上市时间官方都还没公布。
 
-回头看这次合作的起因，GrapheneOS 表示，正是 Google 停止公开 Pixel 共用的驱动程式原始码，才促成 Motorola 主动找上门[^9]。Google 想把 Android 收得更紧，反而把一个原本绑在自家硬件上的项目推向了竞争对手。
+回头看这次合作的起因，GrapheneOS 表示，正是 Google 停止公开 Pixel 共用的驱动程式原始码，才促成 Motorola 主动前来追究[^9]。Google 想把 Android 收得更紧，反而把一个原本绑在自家硬件上的项目推向了竞争对手。
 
 至于 Pixel 本身，GrapheneOS 的说法是「不确定之后还会不会替新推出的 Pixel 加上支援」[^10]。媒体据此推测 Pixel 11 可能是最后一款受官方支援的新 Pixel，但这是媒体的推论，GrapheneOS 官方并没有做出这个承诺，Pixel 11 之后的机型是否支援仍在未定之天。
 
-## 谁决定手机上能跑什么系统
+## 谁决定手机上能执行什么系统
 
-Google 收紧 AOSP、用 Play Integrity 决定哪些系统合格，Microsoft 跟着把不合格的系统排除，欧盟研议自己的认证框架，Android 17 要求侧载先过验证。这些机制累加下来，你手机上能跑什么系统、能装什么 app，能自己决定的部分越来越少。
+Google 收紧 AOSP、用 Play Integrity 决定哪些系统合格，Microsoft 跟着把不合格的系统排除，欧盟研议自己的认证框架，Android 17 要求侧载先过验证。这些机制累加下来，你手机上能执行什么系统、能装什么 app，能自己决定的部分越来越少。
 
 这跟我们在 [从 Discord 年龄验证谈起：我们为什么自架 Matrix](./2026-discord-matrix-statement.md) 与 [金融公司当起审查者](./2026-financial-companies-as-censors.md) 谈过的是同一类问题。当关键的基础设施掌握在少数平台手中，规则由它们单方面决定，一般使用者难以参与，也难以脱离。手机作业系统是其中最贴身的一层，定位、通讯、相簿与身分都存在这一层上。
 
-GrapheneOS 的价值，就在于它让使用者在原厂系统之外仍然有得选。它不完美，依赖 Pixel、可能被部分 app 拒绝执行、需要一定的学习成本，但它证明了这件事在技术上可行。
+GrapheneOS 的价值，就在于它让使用者在原厂系统之外仍然有选择。它不完美，依赖 Pixel、可能被部分 app 拒绝执行、需要一定的学习成本，但它证明了这件事在技术上可行。
 
 ## 对华语区读者的意义
 

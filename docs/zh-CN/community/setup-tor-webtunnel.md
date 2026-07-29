@@ -16,7 +16,7 @@ WebTunnel 是 Tor 目前抗审查能力最强的桥接方式之一。它把 Tor 
 
     Tor 的对外贡献有几种，门槛与抗审查强度各不相同：
 
-    - [Tor Snowflake](../tools/tor-snowflake.md)：开浏览器分页就能跑的临时桥接，门槛最低，但走 WebRTC，握手特征仍可能被指纹识别，严格审查地区（如中国）已有封锁记录。
+    - [Tor Snowflake](../tools/tor-snowflake.md)：开浏览器分页就能执行的临时桥接，门槛最低，但走 WebRTC，握手特征仍可能被指纹识别，严格审查地区（如中国）已有封锁记录。
     - **WebTunnel（本文）**：需要 VPS、域名与 TLS，伪装成 HTTPS，重度审查地区最难封锁。
     - [Tor Relay](./setup-tor-relay.md)：中继节点，负责 Tor 网络的带宽与节点多元性，不属于桥接。
 
@@ -26,7 +26,7 @@ WebTunnel 是 Tor 目前抗审查能力最强的桥接方式之一。它把 Tor 
 
 - **对外连接受审查程度低、带宽充足的地方是合适的桥接来源地**。
 - **IP 与 ASN 多元性有价值**：审查者会去封锁已知的桥接 IP，分散在不同国家、不同网络供应商的桥接越多，当地使用者能用的入口就越多。
-- **比架中继省资源**：一台 512MB 到 1GB RAM 的 VPS 就够跑，成本与运维负担比 Tor Relay 低。
+- **比架中继省资源**：一台 512MB 到 1GB RAM 的 VPS 就足以执行，成本与运维负担比 Tor Relay 低。
 - **回应真实需求**：2026 年伊朗在军事行动期间多次大规模断网，第二阶段持续近三个月（2 月底至 5 月底）。重新开放后，社区自架的 WebTunnel 观察到流量明显涌入，记录在 [伊朗断网后：流量涌入社区的 WebTunnel](../blog/posts/iran-blackout-webtunnel.md)。在这类极端审查下，这种伪装成 HTTPS 的桥接，往往是当地人能否连上 Tor 的关键。
 
 ## 开始前要准备的东西
@@ -44,7 +44,7 @@ WebTunnel 是 Tor 目前抗审查能力最强的桥接方式之一。它把 Tor 
     - 根路径（`/`）放一个无害的页面（个人首页、放置页、简单部落格都可以），让扫描者看到的是一个普通网站。
     - 在低风险环境，用既有域名的子域名通常没问题。若你想要更高的营运隐私，再考虑用匿名注册的独立域名。
 
-整个流程分两部分：先把域名、TLS、反向代理这层架好（让服务器看起来像个正常 HTTPS 网站），再用 Docker 把桥接跑起来。
+整个流程分两部分：先把域名、TLS、反向代理这层架好（让服务器看起来像个正常 HTTPS 网站），再用 Docker 把桥接运作起来。
 
 ## 第一部分：域名、TLS 与 nginx 反向代理
 
@@ -117,7 +117,7 @@ location = /$PATH {
 
     真正的 WebTunnel 连线一定带 Upgrade 标头，这行不会挡到正常的桥接客户端。
 
-    **别让 nginx 切断长连线**
+    **不要让 nginx 切断长连线**
 
     nginx 的 `proxy_read_timeout` 预设只有 60 秒，连线超过 60 秒没有资料流动就会被切掉，对长时间挂着的 Tor 电路会造成莫名的断线。把 `location` 区块里的逾时拉长，并开启 TCP keepalive：
 
@@ -133,7 +133,7 @@ location = /$PATH {
 nginx -t && systemctl reload nginx
 ```
 
-## 第二部分：用 Docker 跑 WebTunnel 桥接
+## 第二部分：用 Docker 执行 WebTunnel 桥接
 
 ### 安装 Docker
 
@@ -229,19 +229,19 @@ compose 预设自动更新桥接本体。系统层的 Docker、nginx、certbot �
 
 ??? question "WebTunnel 跟 Snowflake、obfs4 有什么不同？"
 
-    三者都是帮人绕过审查连上 Tor 的桥接。Snowflake 走 WebRTC（浏览器做视讯通话用的那种即时连接技术）、开浏览器就能跑，但易被侦测。obfs4 把流量变成随机噪声，但 DPI 仍可能辨识出它不像 HTTPS 而封锁。WebTunnel 把流量包进真正的 HTTPS 连接，审查者要封它就得连带封掉大量正常网站，因此在中国、伊朗、哈萨克这类 DPI 严格的地方最有效。
+    三者都是帮人绕过审查连上 Tor 的桥接。Snowflake 走 WebRTC（浏览器做视讯通话用的那种即时连接技术）、开浏览器就能执行，但易被侦测。obfs4 把流量变成随机噪声，但 DPI 仍可能辨识出它不像 HTTPS 而封锁。WebTunnel 把流量包进真正的 HTTPS 连接，审查者要封它就得连带封掉大量正常网站，因此在中国、伊朗、哈萨克这类 DPI 严格的地方最有效。
 
-??? question "营运 WebTunnel 桥接合法吗？会被找上门吗？"
+??? question "营运 WebTunnel 桥接合法吗？会被前来追究吗？"
 
     桥接跟入口、中间节点一样不连向最终目的地，对外网站看到的是 Tor 出口节点，不是你的服务器。在网络相对自由的地方，目前允许营运这类节点，风险远低于出口节点。若收到询问，可参考 [EFF Tor 中继营运者法律 FAQ](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"}。
 
 ??? question "需要多大的服务器？"
 
-    一台 512MB RAM 的小 VPS 跑得动，但建议配到 1GB，因为 Tor 进程本身可能吃到接近 1GiB 的内存。CPU 与带宽需求都不高。
+    一台 512MB RAM 的小 VPS 执行得动，但建议配到 1GB，因为 Tor 进程本身可能吃到接近 1GiB 的内存。CPU 与带宽需求都不高。
 
 ??? question "我可以用家里的网络架吗？"
 
-    可以，但需要固定对外 IP、能在路由器做埠转发（443），且 ISP 允许这类流量。家用动态 IP 会让桥接位址不稳定。用 VPS 通常更省事、更稳定。
+    可以，但需要固定对外 IP、能在路由器做埠转发（443），且 ISP 允许这类流量。家用动态 IP 会让桥接位址不稳定。用 VPS 通常更简便、更稳定。
 
 ??? question "桥接行里的 IP 是我的服务器 IP 吗？"
 
@@ -249,7 +249,7 @@ compose 预设自动更新桥接本体。系统层的 Docker、nginx、certbot �
 
 ??? question "一定要用 Docker 吗？"
 
-    不是唯一方式。也可以从原始码编译 Go 二进位档来跑，做法见 [Tor Project | Compile and run WebTunnel from source](https://community.torproject.org/relay/setup/webtunnel/source/){target="_blank"}。对多数人来说 Docker 是最省事的路。
+    不是唯一方式。也可以从原始码编译 Go 二进位档执行，做法见 [Tor Project | Compile and run WebTunnel from source](https://community.torproject.org/relay/setup/webtunnel/source/){target="_blank"}。对多数人来说 Docker 是最简便的路。
 
 ## :material-chat-question: 一同了解
 

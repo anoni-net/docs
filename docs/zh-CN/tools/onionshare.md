@@ -10,7 +10,7 @@ icon: material/share-circle
 ## 为什么用 OnionShare
 
 - **不必信任第三方平台**。文件直接从你的电脑传到对方的 Tor Browser，中间没有 Google Drive、没有 Dropbox、没有 anoni.net。
-- **无账号、无 ID**。对方拿到的只是一个 `.onion` 网址，他不会知道你是谁、你的 IP 是什么。你也不会知道对方是谁。
+- **无账号、无 ID**。对方取得的只是一个 `.onion` 网址，他不会知道你是谁、你的 IP 是什么。你也不会知道对方是谁。
 - **会话即用即丢**。关掉 OnionShare，onion service 同时下线，网址自动失效。没有后台 log、没有 metadata 落地。
 - **跨平台桌面工具**。macOS、Windows、Linux、Tails 都有 GUI。也有 CLI 可以架在 server 做长期收件箱。
 
@@ -61,7 +61,7 @@ icon: material/share-circle
             title="接收方在 Tor Browser 看到的 OnionShare 下载页"
             class="brand-frame">
     </a>
-    <capture>接收方拿到 .onion 网址后，在 Tor Browser 开启看到的是默认的下载页面，外观像一般静态网站，不必额外学习。</capture>
+    <capture>接收方取得 .onion 网址后，在 Tor Browser 开启看到的是默认的下载页面，外观像一般静态网站，不必额外学习。</capture>
 </figure>
 
 ### Receive（收档）
@@ -97,7 +97,7 @@ icon: material/share-circle
 | 工具 | 适用 | 与 OnionShare 的差别 |
 |---|---|---|
 | [send.anoni.net](https://send.anoni.net/){target="_blank"} | 一次性加密传档，网页浏览器即可使用 | 双方都不需 Tor，门槛低。文件经过 anoni.net server（端对端加密、可设密码、过期自动删除），信任边界比 OnionShare 大 |
-| [SecureDrop](https://securedrop.org/){target="_blank"} | 媒体机构的隐蔽收件系统 | 需要专业部署与长期运维，国际大型媒体（纽约时报、卫报、Intercept）使用。OnionShare Receive 是个人记者就能跑的轻量版 |
+| [SecureDrop](https://securedrop.org/){target="_blank"} | 媒体机构的隐蔽收件系统 | 需要专业部署与长期运维，国际大型媒体（纽约时报、卫报、Intercept）使用。OnionShare Receive 是个人记者就能执行的轻量版 |
 | Signal 附件 | 已建立信任的双方传档 | Signal 绑手机号码，第一次接触前对方可能不想暴露号码。OnionShare 完全无账号、无 ID，适合首次接触 |
 
 选择逻辑：
@@ -113,7 +113,7 @@ icon: material/share-circle
 
     给对方 [Tor Browser 进阶设定](./tor-browser-advanced.md) 的入门段落，请对方先安装 Tor Browser、再开你的 `.onion` 网址。如果对方拒绝安装 Tor，改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密邮件。
 
-??? question "怎么确认对方拿到的是正确网址、没被替换？"
+??? question "怎么确认对方取得的是正确网址、没被替换？"
 
     OnionShare 产生网址的同时会给一个 private key 或 public key 指纹。把网址跟指纹分开两个管道交给对方（例如网址用 Signal、指纹用当面口头），对方在 Tor Browser 开启时验证指纹。OnionShare GUI 也支援「需要对方输入 password 才能下载」，敏感场景建议启用。
 

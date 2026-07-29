@@ -1,13 +1,13 @@
 ---
 title: 專案研究預先準備
-description: 加入 anoni.net 文件站、Pulse、ASN Coverage 等專案開發前的環境設定指南，包含 git、GitHub、本機開發環境基礎。給想實際動手協作的台灣志工。
+description: 加入 anoni.net 文件站、Pulse、ASN Coverage 等專案開發前的環境設定指南，包含 git、GitHub、本機開發環境基礎。給想實際實際操作協作的台灣志工。
 icon: octicons/mark-github-24
 ---
 # :octicons-mark-github-24: 專案研究預先準備
 
 ## 你需要先準備什麼
 
-anoni.net 的文件站、Pulse、ASN Coverage 都放在 GitHub（[anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}），用 git 做版本控制、用 Pull Request 收貢獻。動手前你需要：
+anoni.net 的文件站、Pulse、ASN Coverage 都放在 GitHub（[anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}），用 git 做版本控制、用 Pull Request 收貢獻。操作前你需要：
 
 - 一個 [GitHub 帳號](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github){target="_blank"}
 - 本機裝好 git、Python、uv 與一個編輯器（下面逐項說明）

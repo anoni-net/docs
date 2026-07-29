@@ -51,6 +51,11 @@ git diff --name-only --diff-filter=ACM origin/main... \
 | `frontmatter-missing` | error | blog post 缺 date/slug/categories/authors |
 | `definition-phrasing` | warn | 「談的是/指的是/涵蓋的是」|
 | `colloquial-jiang` | warn | 口語「講」（已扣除演講/講座等正當詞）|
+| `colloquial-run` | warn | 口語「跑」當執行軟體用（已扣除跑步/賽跑等正當詞）|
+| `colloquial-get` | warn | 「拿到」，改用「取得」|
+| `colloquial-must` | warn | 「得先／得靠」，改用「需先／需仰賴」|
+| `colloquial-hands-on` | warn | 「動手」，改用「實際操作／著手／實作」|
+| `colloquial-word` | warn | 踩到、找上門、省事、省力、怎樣、照舊、差不多、沒空、搞、弄壞、弄錯、掛了 |
 | `machine-field` | warn | 機器欄位名直接出現在內文（如 `web_connectivity`）|
 | `title-missing` / `frontmatter-summary` | warn | blog 無 H1 標題 / 無 summary |
 
@@ -69,6 +74,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 - `em-dash`：若破折號出現在外部專有名詞的連結文字（例 `[Cloudflare Radar — Iran](...)`），會被標記。必要時改寫標籤或人工放行。表格空資料格 `| — |`（整格只有一個破折號）已自動放行，破折號跟其他文字混在同一格仍會被標記。
 - `colloquial-jiang`、`definition-phrasing`：列為 warn 而非 error，因為「講清楚」、「指的是什麼呢」等仍有正當用法，只當提醒。
+- `colloquial-*` 系列：一律 warn 而非 error，因為替換詞要看語境（「跑」依情況是執行、架設、運作或營運），機器不宜直接改。照錄他人說法時（例：把讀者感受寫成「跑很慢」）屬正當用法，已列入例外，其餘情況請人工判斷後改寫。
 
 ## 關閉特定檢查
 

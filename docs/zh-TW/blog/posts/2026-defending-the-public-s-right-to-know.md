@@ -39,7 +39,7 @@ description: "Tor Project 部落格上的一篇文章，整理 OONI 觀測資料
 
 ## 守護公共紀錄
 
-OONI 的觀測資料是[全球最大的網路審查開放資料集](https://explorer.ooni.org/){target="_blank"}，自 2012 年以來已累積數十億筆量測，涵蓋 245 個國家與地區、數萬個網路。這些資料能存在，是因為全球各地有人在使用 [OONI Probe](https://ooni.org/install/){target="_blank"}（一款免費的網路測量工具，桌面版與手機版都有，按一下就對你所在的網路跑一輪連線測試），把自己連線的網路狀況回報上來。每一筆新的量測，都會加進這份公共紀錄。
+OONI 的觀測資料是[全球最大的網路審查開放資料集](https://explorer.ooni.org/){target="_blank"}，自 2012 年以來已累積數十億筆量測，涵蓋 245 個國家與地區、數萬個網路。這些資料能存在，是因為全球各地有人在使用 [OONI Probe](https://ooni.org/install/){target="_blank"}（一款免費的網路測量工具，桌面版與手機版都有，按一下就對你所在的網路執行一輪連線測試），把自己連線的網路狀況回報上來。每一筆新的量測，都會加進這份公共紀錄。
 
 這份資料集之所以受到引用，原因同時來自規模與方法論。網路審查常常以「讓干擾看不出來」的方式進行，被封鎖的網站看起來像壞掉了、被限速的應用程式看起來不穩定、整段網路關閉看起來像是技術故障。在 OONI 採用的[公開量測方法論](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}、同儕審查、專家回饋與對照組量測的基礎上，這些手段可以在資料層面被識別出來，「網路被審查了」這類主張因此可以被檢驗、被挑戰、被驗證。
 
@@ -82,7 +82,7 @@ OONI 在肯亞、坦尚尼亞、約旦、印度、埃及的故事，地理位置
 
 匿名網路社群長期維護一份 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)，把台灣每個 ASN（自治系統編號，可粗略理解成每家 ISP 的網路編號，中華電信、台哥大各自不同）的 OONI 觀測筆數整理成圖表。實際看下來，觀測集中在少數幾家網路，行動網路、學術網路、許多本地 ISP 仍然是空白。OONI 全球資料集再龐大，台灣這塊還是要靠在地使用者持續[執行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能補上盲點。
 
-台灣的情況也一樣，哪個 ASN 沒人在跑 OONI，未來如果在那條路徑上發生封鎖或中斷，就缺少能引用的證據。
+台灣的情況也一樣，哪個 ASN 沒人在執行 OONI，未來如果在那條路徑上發生封鎖或中斷，就缺少能引用的證據。
 
 ### 從肯亞訴訟看台灣的倡議切入點
 
@@ -96,7 +96,7 @@ OONI Probe 桌面版與行動版都能在家用網路、行動網路、公共 Wi
 
 不論你是想補觀測、做研究，還是要把資料用在報導或倡議，都有可以著手的起點。
 
-- **一般讀者**：[安裝 OONI Probe](https://ooni.org/install/){target="_blank"} 跑一輪，讓你這條網路出現在公共紀錄裡（執行前可先看 OONI 對[潛在風險的說明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想納入定期測量的網站，可以到 OONI 的[測試清單編輯器](https://test-lists.ooni.org/login){target="_blank"}提交，之後全球的 OONI Probe 就會把它排進測試。
+- **一般讀者**：[安裝 OONI Probe](https://ooni.org/install/){target="_blank"} 執行一輪，讓你這條網路出現在公共紀錄裡（執行前可先看 OONI 對[潛在風險的說明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想納入定期測量的網站，可以到 OONI 的[測試清單編輯器](https://test-lists.ooni.org/login){target="_blank"}提交，之後全球的 OONI Probe 就會把它排進測試。
 - **研究者與技術社群**：先看 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md) 上台灣 ASN 的盲點分布，再評估自己這條網路或實驗環境可以補上哪些量測，並把資料整理成可重複比對的圖表。
 - **記者、媒體編輯、人權律師**：下次處理中國、香港、緬甸等地封鎖事件的報導時，[OONI Explorer](https://explorer.ooni.org/){target="_blank"} 上的量測截圖、調查發現（findings）短篇報告、長篇研究報告都可以引用做公開佐證。要走到公共利益訴訟層級的案件，肯亞案示範了向 OONI 申請專家意見報告的流程。
 

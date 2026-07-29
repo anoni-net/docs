@@ -6,13 +6,13 @@ icon: material/access-point-network
 
 # :material-access-point-network: 什么是 OONI
 
-连不上某个网站时，第一个直觉通常是「是我网络有问题吗？」OONI（Open Observatory of Network Interference，网络干扰开放观测）就是为了把这种感受转成可验证的资料。它提供开源检测工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 与公开资料平台 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，让任何人都能跑检测、查纪录，把封锁、监控、降速这些行为留下时间、地点、ASN 都对得上的观测痕迹。
+连不上某个网站时，第一个直觉通常是「是我网络有问题吗？」OONI（Open Observatory of Network Interference，网络干扰开放观测）就是为了把这种感受转成可验证的资料。它提供开源检测工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 与公开资料平台 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，让任何人都能执行检测、查纪录，把封锁、监控、降速这些行为留下时间、地点、ASN 都对得上的观测痕迹。
 
 OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社群、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
 
 ## OONI 计划主要推动事项
 
-OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/install/){target="_blank"} 这个检测应用程序，用来检查特定网站或在线服务是否被封锁。跑出来的结果会[公开成数据集](https://ooni.org/data/){target="_blank"}，任何人都能[在线查阅与分析](https://explorer.ooni.org/){target="_blank"}，了解[各地网络](https://explorer.ooni.org/countries){target="_blank"}的审查状况。OONI 同时跟研究人员、倡议者合作，分析这些数据、追踪全球与区域网络干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}，也跟[各地组织](https://ooni.org/partners/){target="_blank"}与在地社群合作，把检测能力铺到更多网络角落。
+OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/install/){target="_blank"} 这个检测应用程序，用来检查特定网站或在线服务是否被封锁。产出的结果会[公开成数据集](https://ooni.org/data/){target="_blank"}，任何人都能[在线查阅与分析](https://explorer.ooni.org/){target="_blank"}，了解[各地网络](https://explorer.ooni.org/countries){target="_blank"}的审查状况。OONI 同时跟研究人员、倡议者合作，分析这些数据、追踪全球与区域网络干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}，也跟[各地组织](https://ooni.org/partners/){target="_blank"}与在地社群合作，把检测能力铺到更多网络角落。
 
 参与 OONI 的检测活动，等于把你这条网路的观测数据留进公开资料集。当其他人需要佐证封锁事件、追跨境差异、或对照不同 ASN 的状况时，会有更多元的纪录可以引用。
 
@@ -46,12 +46,12 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
 
 ## OONI 适合做什么、不适合做什么
 
-OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网路环境用。动手前先回头看 [威胁模型如何建立](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网路环境用。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
 
 **适合**：
 
-- 佐证封锁事件。某个网站某个时段在某个 ASN 连不上，OONI Probe 跑过会留下可引用的纪录。
-- 长期观测单一地区的网路环境变化。把 OONI Probe 跑成 cronjob，几个月下来能看到趋势。
+- 佐证封锁事件。某个网站某个时段在某个 ASN 连不上，OONI Probe 执行过会留下可引用的纪录。
+- 长期观测单一地区的网路环境变化。把 OONI Probe 设成 cronjob，几个月下来能看到趋势。
 - 跨 ASN、跨地区比较。OONI Explorer 上不同 ASN 的观测结果可以对照，找出哪一段网路有差异。
 - 媒体、研究、倡议用途。需要外部可验证的数据时，公开资料集是坚实的引用基础。
 
@@ -75,7 +75,7 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
     </a>
 </figure>
 
-终端机界面可以使用 `ooniprobe run` 执行所有检测项目，或是设定 `cronjob` 在空闲时间跑观察检测。
+终端机界面可以使用 `ooniprobe run` 执行所有检测项目，或是设定 `cronjob` 在空闲时间执行观察检测。
 
 ``` bash
 # 在第 4、10 和 22 小时的第 10 分钟执行。
@@ -114,9 +114,9 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 ## 常见问题
 
-??? question "我在家里跑 OONI Probe，会不会被 ISP 标记？"
+??? question "我在家里执行 OONI Probe，会不会被 ISP 标记？"
 
-    OONI Probe 的测试行为（连到一份公开的测试清单上的网站、记录回应）跟一般使用者浏览网页差别不大。以台湾为例，anoni.net 目前没有观察到任何 ISP 因为跑 OONI 而封锁或警告使用者的案例，但这是特定地区的观察，不能直接套用到其他地方。预设清单（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多数高敏感类型的网站。香港在 2020 年《国安法》后监控与寒蝉效应升高，跑检测前建议先读 [VPN 的风险与选择](./vpn-guide.md)，评估自身处境。在审查严格的国家（如中国、伊朗）情况又不同，OONI 官方文件有额外的风险说明，启用前建议查阅。
+    OONI Probe 的测试行为（连到一份公开的测试清单上的网站、记录回应）跟一般使用者浏览网页差别不大。以台湾为例，anoni.net 目前没有观察到任何 ISP 因为执行 OONI 而封锁或警告使用者的案例，但这是特定地区的观察，不能直接套用到其他地方。预设清单（[Test List](https://github.com/citizenlab/test-lists){target="_blank"}）排除了多数高敏感类型的网站。香港在 2020 年《国安法》后监控与寒蝉效应升高，执行检测前建议先读 [VPN 的风险与选择](./vpn-guide.md)，评估自身处境。在审查严格的国家（如中国、伊朗）情况又不同，OONI 官方文件有额外的风险说明，启用前建议查阅。
 
 ??? question "OONI 检测会不会误判？"
 
@@ -126,13 +126,13 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
     OONI 的角色是观测与记录，不是判定。它会把「在这个 ASN、这个时段、这个网站 DNS 解析异常」如实写下来。是不是「审查」、是不是「合理」要靠人去诠释。这也是为什么观测资料的价值在于「公开、可重现」，而不是「谁说了算」。
 
-??? question "可以同时跑 OONI Probe 跟 Tor 吗？"
+??? question "可以同时执行 OONI Probe 跟 Tor 吗？"
 
-    可以，但要分清楚目的。OONI Probe 是观测工具，跑检测时走的是你本地的 ISP 连线（这样才能观测到当地的网路环境）。如果让 OONI 走 Tor，观测到的是 Tor 出口节点的网路环境，不是你本地的，失去意义。Tor Browser 与 OONI Probe 在同一台电脑上可以共存，各跑各的。
+    可以，但要分清楚目的。OONI Probe 是观测工具，执行检测时走的是你本地的 ISP 连线（这样才能观测到当地的网路环境）。如果让 OONI 走 Tor，观测到的是 Tor 出口节点的网路环境，不是你本地的，失去意义。Tor Browser 与 OONI Probe 在同一台电脑上可以共存，各自运作。
 
 ??? question "最简单的贡献方式是什么？"
 
-    手机装 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天让它跑一次自动检测就是有效贡献。如果家里有 Linux 主机，照本文「如何安装」段的 cronjob 范例设定，就能持续累积。想再进一步可以参考 [OONI 网站检测清单](../taiwan/ooni-checklist.md) 补充本地关注的网站，或读 [ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 还缺观测点。
+    手机装 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天让它执行一次自动检测就是有效贡献。如果家里有 Linux 主机，照本文「如何安装」段的 cronjob 范例设定，就能持续累积。想再进一步可以参考 [OONI 网站检测清单](../taiwan/ooni-checklist.md) 补充本地关注的网站，或读 [ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 还缺观测点。
 
 ## :material-chat-question: 一同了解
 

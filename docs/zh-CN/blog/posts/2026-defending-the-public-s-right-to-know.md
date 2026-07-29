@@ -39,7 +39,7 @@ description: "Tor Project 博客上的一篇文章，整理 OONI 观测数据如
 
 ## 守护公共纪录
 
-OONI 的观测数据是[全球最大的网络审查开放数据集](https://explorer.ooni.org/){target="_blank"}，自 2012 年以来已累积数十亿笔测量，涵盖 245 个国家与地区、数万个网络。这些数据能存在，是因为全球各地有人在使用 [OONI Probe](https://ooni.org/install/){target="_blank"}（一款免费的网络测量工具，桌面版与手机版都有，按一下就对你所在的网络跑一轮连线测试），把自己连线的网络状况回报上来。每一笔新的测量，都会加进这份公共纪录。
+OONI 的观测数据是[全球最大的网络审查开放数据集](https://explorer.ooni.org/){target="_blank"}，自 2012 年以来已累积数十亿笔测量，涵盖 245 个国家与地区、数万个网络。这些数据能存在，是因为全球各地有人在使用 [OONI Probe](https://ooni.org/install/){target="_blank"}（一款免费的网络测量工具，桌面版与手机版都有，按一下就对你所在的网络执行一轮连线测试），把自己连线的网络状况回报上来。每一笔新的测量，都会加进这份公共纪录。
 
 这份数据集之所以受到引用，原因同时来自规模与方法论。网络审查常常以「让干扰看不出来」的方式进行，被封锁的网站看起来像坏掉了、被限速的应用看起来不稳定、整段网络关闭看起来像是技术故障。在 OONI 采用的[公开测量方法论](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}、同行评审、专家反馈与对照组测量的基础上，这些手段可以在数据层面被识别出来，「网络被审查了」这类主张因此可以被检验、被挑战、被验证。
 
@@ -80,9 +80,9 @@ OONI 在肯尼亚、坦桑尼亚、约旦、印度、埃及的故事，地理位
 
 ### 华语六地区的 OONI 观测覆盖现况
 
-中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在跑 OONI 的网络。其中，台湾的匿名网络社群长期维护一份 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
+中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在执行 OONI 的网络。其中，台湾的匿名网络社群长期维护一份 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
 
-OONI 全球数据集再庞大，每个地区仍然要靠在地使用者持续[运行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能补上盲点。哪个 ASN 没人在跑 OONI，未来如果在那条路径上发生封锁或中断，就缺少能引用的证据。
+OONI 全球数据集再庞大，每个地区仍然要靠在地使用者持续[运行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能补上盲点。哪个 ASN 没人在执行 OONI，未来如果在那条路径上发生封锁或中断，就缺少能引用的证据。
 
 ### 从肯尼亚诉讼看华语六地区的倡议切入点
 
@@ -98,7 +98,7 @@ OONI Probe 桌面版与移动版都能在家用网络、移动网络、公共 Wi
 
 不论你是想补观测、做研究，还是要把数据用在报道或倡议，都有可以着手的起点。
 
-- **一般读者**：[安装 OONI Probe](https://ooni.org/install/){target="_blank"} 跑一轮，让你这条网络出现在公共纪录里（运行前可先看 OONI 对[潜在风险的说明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想纳入定期测量的网站，可以到 OONI 的[测试列表编辑器](https://test-lists.ooni.org/login){target="_blank"}提交，之后全球的 OONI Probe 就会把它排进测试。
+- **一般读者**：[安装 OONI Probe](https://ooni.org/install/){target="_blank"} 执行一轮，让你这条网络出现在公共纪录里（运行前可先看 OONI 对[潜在风险的说明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想纳入定期测量的网站，可以到 OONI 的[测试列表编辑器](https://test-lists.ooni.org/login){target="_blank"}提交，之后全球的 OONI Probe 就会把它排进测试。
 - **研究者与技术社群**：参考 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md) 上的盲点分布做法，再评估自己这条网络或实验环境可以补上哪些测量，并把数据整理成可重复比对的图表。
 - **记者、媒体编辑、人权律师**：下次处理中国大陆、香港、缅甸等地封锁事件的报道时，[OONI Explorer](https://explorer.ooni.org/){target="_blank"} 上的测量截图、调查发现（findings）短篇报告、长篇研究报告都可以引用做公开佐证。要走到公益诉讼层级的案件，肯尼亚案示范了向 OONI 申请专家意见报告的流程。
 

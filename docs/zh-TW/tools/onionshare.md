@@ -10,7 +10,7 @@ icon: material/share-circle
 ## 為什麼用 OnionShare
 
 - **不必信任第三方平台**。檔案直接從你的電腦傳到對方的 Tor Browser，中間沒有 Google Drive、沒有 Dropbox、沒有 anoni.net。
-- **無帳號、無 ID**。對方拿到的只是一個 `.onion` 網址，他不會知道你是誰、你的 IP 是什麼。你也不會知道對方是誰。
+- **無帳號、無 ID**。對方取得的只是一個 `.onion` 網址，他不會知道你是誰、你的 IP 是什麼。你也不會知道對方是誰。
 - **會話即用即丟**。關掉 OnionShare，onion service 同時下線，網址自動失效。沒有後台 log、沒有 metadata 落地。
 - **跨平台桌面工具**。macOS、Windows、Linux、Tails 都有 GUI。也有 CLI 可以架在 server 做長期收件箱。
 
@@ -61,7 +61,7 @@ icon: material/share-circle
             title="接收方在 Tor Browser 看到的 OnionShare 下載頁"
             class="brand-frame">
     </a>
-    <capture>接收方拿到 .onion 網址後，在 Tor Browser 開啟看到的是預設的下載頁面，外觀像一般靜態網站，不必額外學習。</capture>
+    <capture>接收方取得 .onion 網址後，在 Tor Browser 開啟看到的是預設的下載頁面，外觀像一般靜態網站，不必額外學習。</capture>
 </figure>
 
 ### Receive（收檔）
@@ -97,7 +97,7 @@ icon: material/share-circle
 | 工具 | 適用 | 與 OnionShare 的差別 |
 |---|---|---|
 | [send.anoni.net](https://send.anoni.net/){target="_blank"} | 一次性加密傳檔，網頁瀏覽器即可使用 | 雙方都不需 Tor，門檻低。檔案經過 anoni.net server（端對端加密、可設密碼、過期自動刪除），信任邊界比 OnionShare 大 |
-| [SecureDrop](https://securedrop.org/){target="_blank"} | 媒體機構的隱蔽收件系統 | 需要專業部署與長期運維，國際大型媒體（紐約時報、衛報、Intercept）使用。OnionShare Receive 是個人記者就能跑的輕量版 |
+| [SecureDrop](https://securedrop.org/){target="_blank"} | 媒體機構的隱蔽收件系統 | 需要專業部署與長期運維，國際大型媒體（紐約時報、衛報、Intercept）使用。OnionShare Receive 是個人記者就能執行的輕量版 |
 | Signal 附件 | 已建立信任的雙方傳檔 | Signal 綁手機號碼，第一次接觸前對方可能不想暴露號碼。OnionShare 完全無帳號、無 ID，適合首次接觸 |
 
 選擇邏輯：
@@ -113,7 +113,7 @@ icon: material/share-circle
 
     把 [Tor Browser 進階設定](./tor-browser-advanced.md) 的入門段落連結傳給對方，請對方先安裝 Tor Browser，再開你的 `.onion` 網址。如果對方拒絕安裝 Tor，改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密郵件。
 
-??? question "怎麼確認對方拿到的是正確網址、沒被替換？"
+??? question "怎麼確認對方取得的是正確網址、沒被替換？"
 
     OnionShare 產生網址的同時會給一個 private key 或 public key 指紋。把網址跟指紋分開兩個管道交給對方（例如網址用 Signal、指紋用當面口頭），對方在 Tor Browser 開啟時驗證指紋。OnionShare GUI 也支援「需要對方輸入 password 才能下載」，敏感場景建議啟用。
 
@@ -135,7 +135,7 @@ icon: material/share-circle
 
 ## 接下來
 
-第一次要把敏感檔案傳出去，先挑一個模式試跑一次（送檔最單純），熟悉「產生 `.onion` 網址、透過安全管道交給對方」這個流程。要把它接進完整的工作流程，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](../community/upload-sensitive.md)。
+第一次要把敏感檔案傳出去，先挑一個模式試行一次（送檔最單純），熟悉「產生 `.onion` 網址、透過安全管道交給對方」這個流程。要把它接進完整的工作流程，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](../community/upload-sensitive.md)。
 
 ## :material-chat-question: 一同瞭解
 

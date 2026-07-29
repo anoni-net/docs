@@ -34,13 +34,13 @@ Tor 之所以存在，是因為我們希望保護網路使用者，免於不必�
 
 ## 什麼是無狀態
 
-無狀態系統不會在重開機之間保留任何資料。每次開機都從固定、已知的映像開始，和 [Tails](https://tails.net/){target="_blank"} 的做法類似。把 Tor relay 全部跑在 RAM 的概念不是新提案。專為這個目的打造、基於 uClibc 的微型 Linux 發行版 [Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"}，至少在 2015 年就已存在。
+無狀態系統不會在重開機之間保留任何資料。每次開機都從固定、已知的映像開始，和 [Tails](https://tails.net/){target="_blank"} 的做法類似。把 Tor relay 全部運作於 RAM 的概念不是新提案。專為這個目的打造、基於 uClibc 的微型 Linux 發行版 [Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"}，至少在 2015 年就已存在。
 
 對 relay 營運者來說，這種設計用預設機制提高了安全門檻，也逼迫系統朝更好的操作習慣前進：
 
 - **對實體攻擊的抵抗力**：機器若被扣押或複製，可能沒有可供分析的內容。依部署方式不同，抽取 relay 金鑰可能變得不可行。
 - **宣告式設定**：系統透過版本控制管理。無狀態系統每次開機都重新套用宣告內容，不會默默偏離既定設定。
-- **不可變執行環境**：檔案系統是唯讀。即便攻擊者拿到程式執行權，也難以把惡意內容跨重開機保留下來。
+- **不可變執行環境**：檔案系統是唯讀。即便攻擊者取得程式執行權，也難以把惡意內容跨重開機保留下來。
 - **可重現性**：重開機後不改變的系統更容易驗證，也更有機會被重現與稽核。
 
 ## 為什麼 Tor relays 很難做到無狀態
@@ -67,11 +67,11 @@ TPM 不是萬靈丹。Tor 使用的 ed25519 金鑰並不受 TPM 晶片原生支�
 
 ### 最小 RAM disk
 
-最簡單的方式是把所有東西跑在 RAM，金鑰手動管理。從 2015 年開始，[Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"} 就在做這件事。身份金鑰透過 SCP 匯出與匯入，若重開機前沒做就等於重新開始。沒有 TPM、沒有遠端證明、沒有 verified boot，只有「RAM 斷電即失」這個保證。即便如此，仍比傳統有磁碟狀態的部署更進一步。
+最簡單的方式是把所有東西運作於 RAM，金鑰手動管理。從 2015 年開始，[Tor-ramdisk](https://archive.torproject.org/websites/lists.torproject.org/pipermail/tor-talk/2015-July/038493.html){target="_blank"} 就在做這件事。身份金鑰透過 SCP 匯出與匯入，若重開機前沒做就等於重新開始。沒有 TPM、沒有遠端證明、沒有 verified boot，只有「RAM 斷電即失」這個保證。即便如此，仍比傳統有磁碟狀態的部署更進一步。
 
 ### VM 型 RAM disk
 
-[Emerald Onion](https://blog.emeraldonion.org/evolving-our-tor-relay-security-architecture){target="_blank"} 在 Proxmox hypervisor 上為每個 relay 跑 Alpine Linux 映像（每份 66 MB）。VM 全部開機進 RAM，且不掛持久儲存。身份透過 Tor 的 OfflineMasterKey 功能管理，長期 master key 離線生成，且不接觸 relay。更新靠重建映像，回滾容易，不需要特殊硬體。
+[Emerald Onion](https://blog.emeraldonion.org/evolving-our-tor-relay-security-architecture){target="_blank"} 在 Proxmox hypervisor 上為每個 relay 執行 Alpine Linux 映像（每份 66 MB）。VM 全部開機進 RAM，且不掛持久儲存。身份透過 Tor 的 OfflineMasterKey 功能管理，長期 master key 離線生成，且不接觸 relay。更新靠重建映像，回滾容易，不需要特殊硬體。
 
 ### 裸機 + TPM 身份綁定
 
@@ -101,7 +101,7 @@ TPM 不是萬靈丹。Tor 使用的 ed25519 金鑰並不受 TPM 晶片原生支�
 
 ### 遠端證明
 
-Sealing 是把金鑰綁在機器狀態。Attestation 則是讓節點向外部證明該狀態。驗證方像是設定伺服器，甚至未來可能是 Tor directory authorities，都可發出加密挑戰，只有跑在預期軟體堆疊上的節點能正確回應。這會把開機完整性由本地屬性提升成可遠端驗證屬性，降低對營運者的信任需求。
+Sealing 是把金鑰綁在機器狀態。Attestation 則是讓節點向外部證明該狀態。驗證方像是設定伺服器，甚至未來可能是 Tor directory authorities，都可發出加密挑戰，只有運作於預期軟體堆疊上的節點能正確回應。這會把開機完整性由本地屬性提升成可遠端驗證屬性，降低對營運者的信任需求。
 
 ### 透明日誌
 

@@ -8,7 +8,7 @@ icon: material/api
 
 想知道台湾现在有几个还在运行的 Tor 节点、半年来是变多还是变少、这些节点落在哪几家电信运营商底下吗？这些答案都在 Tor Project 的公开数据里，过去要回答得自己写代码去抓、去算。onionoo MCP 把这一步变成一句中文问句。在 AI 助手（像 claude.ai）里接上这个服务，直接打「台湾现在有几个能用的 Tor 节点？」，它就会去查、算好、回一份能读的报告。
 
-这页前半写给想查数据、但不写代码的人（记者、公民团体、事实核查者），照着做就能上手。后半（[给工程师与想自架的人](#给工程师与想自架的人)）写给要用代码调用、或想自己跑一份服务的人。
+这页前半写给想查数据、但不写代码的人（记者、公民团体、事实核查者），照着做就能上手。后半（[给工程师与想自架的人](#给工程师与想自架的人)）写给要用代码调用、或想自行架设一份服务的人。
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/onionoo-mcp-tw-summary-result.png" target="_blank">
@@ -17,12 +17,12 @@ icon: material/api
             title="AI 助手整理出的台湾 Tor 中继节点现况报告"
             class="brand-frame">
     </a>
-    <capture>你会拿到的东西：问一句中文，AI 助手回一份整理好的报告（运行中节点数、总带宽、前五大电信网络）。底层数值来自 Tor Project 官方数据，这是查询当下的快照，会随时间变动。</capture>
+    <capture>你会取得的东西：问一句中文，AI 助手回一份整理好的报告（运行中节点数、总带宽、前五大电信网络）。底层数值来自 Tor Project 官方数据，这是查询当下的快照，会随时间变动。</capture>
 </figure>
 
 ## 它能帮你回答什么
 
-- **事实核查**：有人说「台湾的 Tor 量能很低」，你可以当场问出「现在有几个运行中节点、总带宽多少、跟某个时间点相比的变化」，拿到能对照、能引用的数字。
+- **事实核查**：有人说「台湾的 Tor 量能很低」，你可以当场问出「现在有几个运行中节点、总带宽多少、跟某个时间点相比的变化」，取得能对照、能引用的数字。
 - **新闻报道**：写某国网络封锁或翻墙基础建设的题目时，盘点某个国家有多少 Tor 中继、出口节点（流量离开 Tor 连回普通网站的最后一站）集中在哪些网络运营商，做跨国比较。
 - **公民团体与倡议**：盘点某地区节点的分散程度（落在几家电信运营商，越分散越不容易被一次切断），当作数字韧性的观察指标。
 
@@ -94,7 +94,7 @@ icon: material/api
 可以。底层数据来自 Tor Project 官方维护的 [Onionoo](https://metrics.torproject.org/onionoo.html){target="_blank"}（Tor 的中继节点公开数据服务），onionoo.anoni.net 只负责把它转成比较好读的格式，本身不另外存储或加工数值。
 
 - **想交叉核对**：同样的节点可以在 Tor Project 官方的 [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} 查到，数字应该对得起来。
-- **注意时效**：服务为了减轻上游负担会把响应缓存约 5 分钟，加上 Onionoo 本身也是定期更新，所以你拿到的是「某个时间点的快照」，不是实时值。要引用时把查询时间一起记下来。
+- **注意时效**：服务为了减轻上游负担会把响应缓存约 5 分钟，加上 Onionoo 本身也是定期更新，所以你取得的是「某个时间点的快照」，不是实时值。要引用时把查询时间一起记下来。
 - **引用写法**：可以写成「数据来源：Tor Project Onionoo（经 anoni.net onionoo 服务查询，查询时间 2026-06-09）」。
 
 以上就是一般查数据的用法，看到这里就够了。想用代码直接调用、或自己架一份服务，再往下读。
@@ -103,7 +103,7 @@ icon: material/api
 
 ## 给工程师与想自架的人
 
-以下技术性较高，写给要在代码里直接调用、或想自己跑一份服务的人。一般查数据用前半段就够了。
+以下技术性较高，写给要在代码里直接调用、或想自行架设一份服务的人。一般查数据用前半段就够了。
 
 `onionoo-fastapi` 把 Onionoo API 包装成两种对工具与 AI 代理（agent）更友好的接口：
 
@@ -139,7 +139,7 @@ Onionoo 的规范本身很完整，但**没有 OpenAPI 描述**，字段也偏�
 
 ### API 与 MCP 的差别
 
-**API（Application Programming Interface，应用程序接口）** 是让程序互相查询数据的标准。Onionoo 本身就是一个 API：你发一个 HTTP 请求过去（例如「给我台湾所有 running 的 relay」），它回一份 JSON。规范是给工程师读的，拿到的是原始数据，适合「已经知道要问什么」的情境。
+**API（Application Programming Interface，应用程序接口）** 是让程序互相查询数据的标准。Onionoo 本身就是一个 API：你发一个 HTTP 请求过去（例如「给我台湾所有 running 的 relay」），它回一份 JSON。规范是给工程师读的，取得的是原始数据，适合「已经知道要问什么」的情境。
 
 **MCP（Model Context Protocol，模型上下文协议）** 是 Anthropic 在 2024 年提出的开放协议，定义 AI 模型如何调用外部工具的标准格式。把现有 API 包装成一个 MCP server，所有支持 MCP 的 AI 代理或客户端就都能直接接上，模型能自己读懂工具清单、决定何时调用哪一个，不必每次出现新客户端就重做集成。
 
@@ -162,7 +162,7 @@ Onionoo 的规范本身很完整，但**没有 OpenAPI 描述**，字段也偏�
 
 存档、重启客户端，工具清单就会出现 `onionoo` 这组工具。
 
-如果要在本机跑（不依赖远端服务），可以改用 stdio transport：
+如果要在本機执行（不依赖远端服务），可以改用 stdio transport：
 
 ```json
 {
@@ -198,7 +198,7 @@ curl -s 'https://onionoo.anoni.net/v1/aggregate/countries?running=true' | jq .
 
 ### 自架（Docker）
 
-如果想自己跑一份（例如在 .onion 服务、内网或实验环境）：
+如果想自行架设一份（例如在 .onion 服务、内网或实验环境）：
 
 ```bash
 git clone https://github.com/anoni-net/onionoo-fastapi
@@ -268,7 +268,7 @@ docker compose up -d --build
 ## 参与与贡献
 
 - **回报问题 / 提建议**：<https://github.com/anoni-net/onionoo-fastapi/issues>
-- **想自己跑 Tor relay**：见 [如何搭建 Tor Relay](./setup-tor-relay.md)，相关观测指标在 [Tor Relays 观测点](../taiwan/tor-relay-watcher.md)。
+- **想自行架设 Tor relay**：见 [如何搭建 Tor Relay](./setup-tor-relay.md)，相关观测指标在 [Tor Relays 观测点](../taiwan/tor-relay-watcher.md)。
 - **出国前评估**：[出国前数字安全：用 AI 自助生成目的地概况](../scenarios/travel-ai-briefing.md)。记者、NGO 出国前要查目的地的 Tor 可达性时，接上 onionoo MCP 就能让 AI 查到真实、可引用的 Onionoo 数字。
 - **延伸阅读**：[什么是 Tor？](../tools/what-is-tor.md)、[ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)。
 

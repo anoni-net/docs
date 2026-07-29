@@ -12,7 +12,7 @@ icon: material/island
 
 ### 連線層的在地觀測
 
-對應 anoni.net 長期維運的觀測資料工作，看「台灣的連線環境實際長怎樣」。
+對應 anoni.net 長期維運的觀測資料工作，看「台灣的連線環境實際長如何」。
 
 - [OONI 網站檢測清單](./ooni-checklist.md)：在地清單如何維護、分類與更新，是觀測資料的入門起點。
 - [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)：台灣各 ASN 的 OONI 測試覆蓋與盲點。

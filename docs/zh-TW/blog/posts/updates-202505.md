@@ -59,15 +59,15 @@ description: "專案目前近況與更新 2025/05"
 
 工作坊活動中的小幫手會在這次工作坊活動前培訓到**基礎 L3** 的能力，希望在活動中有能力回覆問題或帶著參與者完成活動。
 
-**進階**的部分比較偏向實際動手操作，我們預計在 2025/Q3 的時候再來繼續完成這部份的內容，敬請期待！
+**進階**的部分比較偏向實際實際操作，我們預計在 2025/Q3 的時候再來繼續完成這部份的內容，敬請期待！
 
 ## 匿名網路社群的建立？
 
-一開始我們也有點好奇，在臺灣有多少人關注「匿名網路」的議題，但上次舉辦第一次線上會議後，發現大家其實都滿在意或已是平時研究的議題，社群的建立似乎像是喊一下：「我們這裡也在聊著、做著一樣的事情喔！」而簡單的把大家聚在一起這樣！
+一開始我們也有點好奇，在臺灣有多少人關注「匿名網路」的議題，但上次舉辦第一次線上會議後，發現大家都滿在意或已是平時研究的議題，社群的建立似乎像是喊一下：「我們這裡也在聊著、做著一樣的事情喔！」而簡單的把大家聚在一起這樣！
 
 我們也盡量自己搭建或使用可匿名的服務（[Etherpad](https://pad.anoni.net/){target="_blank"}、[Formbricks](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}、[Jitsi](https://jitsi.goodmeet.asia/){target="_blank"}），試著建立相對應的 onion 服務（[專案文件](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Etherpad](http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Formbricks](http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/s/cmaxjo2p40000o10131byw3do){target="_blank"}），盡量有意識的協助參與夥伴可以保有一定的匿名方式與我們一起辦活動（行事曆還在尋找、郵件還在評估是否用 [Stalwart](https://stalw.art/){target="_blank"} 架設）。
 
-目前希望把八月份的「[匿名網路工作坊](../../event-workshop-2025.md)」順利辦完後，可能要來開始思考一個「**社群**」可以長成怎樣的樣態，在臺灣或是在亞太地區、印太地區可以提供怎樣的服務、如何參與國際事務。我們希望大家可以多給我們一些意見，即使是**要求**也行 XD。
+目前希望把八月份的「[匿名網路工作坊](../../event-workshop-2025.md)」順利辦完後，可能要來開始思考一個「**社群**」可以長成如何的樣態，在臺灣或是在亞太地區、印太地區可以提供如何的服務、如何參與國際事務。我們希望大家可以多給我們一些意見，即使是**要求**也行 XD。
 
 接下來距離工作坊活動剩下約二個月的時間籌備，也會是開始忙碌的時刻，以上所回報的進度再請大家多多幫忙了，感謝！
 

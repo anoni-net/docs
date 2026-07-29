@@ -8,7 +8,7 @@ description: 如何建立动态的 OONI Probe 检测名单，协助观察特定�
 
 ![OONI RUN v2 Header](https://assets.anoni.net/docs/ooni-run-v2-header.png){.brand-frame}
 
-你想追踪一批网站是否被特定地区封锁，但又无法亲自到当地测试。OONI Run v2 的解法是：建立一个移动装置链接、把要测的网站列进去、分享给当地协助者，协助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 开启链接就能跑测试，结果即时上传到 [OONI](./what-is-ooni.md) 的公开数据库。
+你想追踪一批网站是否被特定地区封锁，但又无法亲自到当地测试。OONI Run v2 的解法是：建立一个移动装置链接、把要测的网站列进去、分享给当地协助者，协助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 开启链接就能执行测试，结果即时上传到 [OONI](./what-is-ooni.md) 的公开数据库。
 
 [OONI Run](https://run.ooni.org/){target="_blank"} 是这个流程的入口。委内瑞拉、马来西亚、印度等地的社群长期[用它做审查测量活动](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把当地的封锁事件即时观测下来。OONI 团队根据 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社群回馈，于 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，链接变短、可动态更新、协助者已安装过就会自动同步新加的网站，不用重发。测量结果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 用链接 ID 搜寻。
 
@@ -20,7 +20,7 @@ OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个�
 
 !!! tip "你是哪一种读者"
 
-    - **只想帮忙跑测试**：看下面「anoni.net 如何使用」，移动装置装好 [OONI Probe](https://ooni.org/install/mobile){target="_blank"}、点一下链接就完成，不必往下读建立流程。
+    - **只想帮忙执行测试**：看下面「anoni.net 如何使用」，移动装置装好 [OONI Probe](https://ooni.org/install/mobile){target="_blank"}、点一下链接就完成，不必往下读建立流程。
     - **想自己建立一条观测名单**：先读「你应该知道的事」掌握风险前提，再照「操作说明」一步步建立、分享。
 
 ## 你应该知道的事
@@ -37,9 +37,9 @@ OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个�
 
 ## anoni.net 如何使用
 
-社群维运的 OONI Run 链接 ID 是 `10328`，网址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前纳入 anoni.net 的官网、Cryptpad、Etherpad、SearXNG、Send、Matrix 与 docs 站。协助者用 OONI Probe 安装这条链接后，每次跑测试都会把这几个自架服务的可达性回传到 OONI 公开数据库。对社群来说，这是长期确认「我们的服务在台湾不同电信商眼中还连得上」的低成本方式。
+社群维运的 OONI Run 链接 ID 是 `10328`，网址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前纳入 anoni.net 的官网、Cryptpad、Etherpad、SearXNG、Send、Matrix 与 docs 站。协助者用 OONI Probe 安装这条链接后，每次执行测试都会把这几个自架服务的可达性回传到 OONI 公开数据库。对社群来说，这是长期确认「我们的服务在台湾不同电信商眼中还连得上」的低成本方式。
 
-链接之外，[OONI 网站检测清单](../taiwan/ooni-checklist.md) 整理了台湾脉络下值得长期观测的网站清单，配套的 [ASNs 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部结果按 ASN 切开，看不同电信商连到不同国际服务的状况。如果你想协助跑这条链接的测试，移动装置安装 OONI Probe 后点上面的网址即可。
+链接之外，[OONI 网站检测清单](../taiwan/ooni-checklist.md) 整理了台湾脉络下值得长期观测的网站清单，配套的 [ASNs 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部结果按 ASN 切开，看不同电信商连到不同国际服务的状况。如果你想协助执行这条链接的测试，移动装置安装 OONI Probe 后点上面的网址即可。
 
 ## 操作说明
 
@@ -133,9 +133,9 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m2.png" alt="OONI Probe 仪表板上的检测卡片与执行按钮" style="width:50%">
 </figure>
 
-### 用 miniooni CLI 跑检测
+### 用 miniooni CLI 执行检测
 
-移动装置之外，OONI 也有命令行版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在服务器、研究脚本或自动化环境跑检测。把 OONI Run v2 链接喂给 CLI 有个容易踩到的雷，**不能直接把网页版的网址丢给 `-i`**。
+移动装置之外，OONI 也有命令行版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在服务器、研究脚本或自动化环境执行检测。把 OONI Run v2 链接喂给 CLI 有个容易遇到的雷，**不能直接把网页版的网址丢给 `-i`**。
 
 ```bash
 # 不会 work，CLI 拿到 HTML，JSON 解析就会失败
@@ -145,7 +145,7 @@ miniooni oonirun -i https://run.ooni.org/v2/10328
 miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 ```
 
-原因是 miniooni 的 `-i` 会把你给的网址当成 descriptor JSON 端点直接 GET，期望拿到 JSON 回来。`run.ooni.org/v2/<ID>` 是给浏览器看的网页，响应是 HTML，CLI 解析就会失败。实际的 descriptor 由 API 提供，网址格式为 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接从网页网址末段获取（社群链接为 `10328`）。
+原因是 miniooni 的 `-i` 会把你给的网址当成 descriptor JSON 端点直接 GET，期望取得 JSON 回来。`run.ooni.org/v2/<ID>` 是给浏览器看的网页，响应是 HTML，CLI 解析就会失败。实际的 descriptor 由 API 提供，网址格式为 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接从网页网址末段获取（社群链接为 `10328`）。
 
 桌面版与移动 App 不受这个限制影响，操作系统会把 `https://run.ooni.org/v2/<ID>` 交给 OONI Probe 自行处理。这个限制目前只影响 miniooni CLI，upstream 已有 [TODO 标注](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，后续可能会补上自动转换。
 

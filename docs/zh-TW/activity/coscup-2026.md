@@ -17,7 +17,7 @@ og:
 
 ![COSCUP 2026 匿名網路社群議程軌主視覺](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-記者要保護消息來源、公民團體要守住成員與捐款人的安全、開發者想確認手上的工具真的擋得住監控，還有被詐騙簡訊嚇過、被廣告追著跑而想拿回一點主導權的一般人。在審查與監控擴散的環境裡，這些需求都落在同一組風險上，通訊可能被攔截、身分可能被追蹤、一筆轉帳的時間與金額足以反推出整張關係網，組織的成員名單與金流甚至可能在你不知情時就被攤開。
+記者要保護消息來源、公民團體要守住成員與捐款人的安全、開發者想確認手上的工具真的擋得住監控，還有被詐騙簡訊嚇過、被廣告持續追蹤而想拿回一點主導權的一般人。在審查與監控擴散的環境裡，這些需求都落在同一組風險上，通訊可能被攔截、身分可能被追蹤、一筆轉帳的時間與金額足以反推出整張關係網，組織的成員名單與金流甚至可能在你不知情時就被攤開。
 
 匿名網路社群 anoni.net 把這一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、個人隱私與匿名支付累積的實作經驗，帶進 COSCUP 2026 的開源社群現場。兩天的議程從網路與審查如何運作開始，一路到現實世界的開源隱私工具、校園 Tor 節點、瀏覽器追蹤、健保資料庫的個資權利，以及與 ETHTaipei 合辦的匿名支付場。不論你是來找馬上能用的工具，還是想一起貢獻開源專案，都能挑到對應的場次。
 
@@ -38,7 +38,7 @@ og:
 
     - **新聞媒體、獨立記者**：8/08 上午「現實世界的開源隱私工具」盤點記者實際在用的安全收件管道、去識別化與隔離工具，可搭配「威脅模型與 Metadata 入門」。8/09 下午的「瀏覽器追蹤技術、反追蹤策略」會拆解你每天用的瀏覽器如何洩漏你聯繫過誰，「健保資料庫案之後」與「隱私指南 2026」再延伸到個資權利與法律調取的因應。延伸閱讀：[記者保護消息來源](../scenarios/journalist.md)。
     - **公民團體、NGO**：8/08 上午四場導論最貼近組織處境，「現實世界的開源隱私工具」直接盤點公民團體與 NGO 的加密通訊、內部協作與檢舉投遞工具，「隱私指南 2026」談到組織遭法律調取資料時的事前準備。想評估匿名捐款管道，先聽 8/08 上午「為什麼匿名支付重要」（白話、不需加密貨幣背景），想再深入可接 8/08 下午與 ETHTaipei 合辦場的「我不洗錢，為何要理解匿名支付？」。
-    - **開源、科技社群**：8/09 技術含量最高，OpenWRT、臺師大 Tor 節點、瀏覽器指紋研究都能動手。8/08 下午的零知識證明（ZK）自然人憑證、隱私保護的 KYC（金融機構確認客戶身分）流程、隱匿地址是協議層最扎實的內容。想一起貢獻見[如何參與](../community/how-to-contribute.md)。
+    - **開源、科技社群**：8/09 技術含量最高，OpenWRT、臺師大 Tor 節點、瀏覽器指紋研究都能實際操作。8/08 下午的零知識證明（ZK）自然人憑證、隱私保護的 KYC（金融機構確認客戶身分）流程、隱匿地址是協議層最扎實的內容。想一起貢獻見[如何參與](../community/how-to-contribute.md)。
     - 也歡迎帶同事、夥伴一起來聽。
 
 ## :material-calendar-text: 議程總覽 { #議程總覽 }
@@ -66,7 +66,7 @@ og:
 | 13:40-14:10<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC，卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang） |
 | 14:20-14:50<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU |
 | 15:00-15:30<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean |
-| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機示範 Tornado Cash 與 Privacy Pool 的用法，不用自己動手、跟著看就好 | Liangcc |
+| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機示範 Tornado Cash 與 Privacy Pool 的用法，不用自己實際操作、跟著看就好 | Liangcc |
 
 ### Day 2：2026/08/09（日）
 
@@ -169,7 +169,7 @@ og:
 
     工作坊從使用者視角出發，介紹龍捲風現金（Tornado Cash）的設計哲學，以及隱私池（Privacy Pool）在它之上的改進。
 
-    現場會用道具與實機操作示範兩樣工具如何操作，不需自備電腦或動手寫程式，跟著看就好，你能帶走的是實際使用上的隱私眉角，密碼學細節則點到為止。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
+    現場會用道具與實機操作示範兩樣工具如何操作，不需自備電腦或實際操作寫程式，跟著看就好，你能帶走的是實際使用上的隱私眉角，密碼學細節則點到為止。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
 
     :material-open-in-new: [COSCUP 官方議程頁](https://pretalx.coscup.org/coscup-2026/talk/3WHJYA/){target="_blank"}
 

@@ -15,7 +15,7 @@ GrapheneOS 是一套以 AOSP（Android Open Source Project，Android 的開源�
     - **它是什麼**：把 Android 安全強化、移除 Google 綁定的手機作業系統，非營利、開源。
     - **它保護**：縮小手機被入侵的攻擊面、把 Google 服務關進沙箱、給你逐 app 的網路與感測器開關。
     - **它不保護**：GrapheneOS 不是匿名工具，無法阻擋電信商的基地台定位，要匿名仍要搭配 [Tor](./what-is-tor.md)。
-    - **硬體**：目前幾乎只跑在 Google Pixel，因為只有它同時提供可重新鎖回的 bootloader、安全晶片與長期更新。
+    - **硬體**：目前幾乎只運作於 Google Pixel，因為只有它同時提供可重新鎖回的 bootloader、安全晶片與長期更新。
 
     展開細節見下方各節。
 
@@ -59,7 +59,7 @@ GrapheneOS 對硬體的要求很嚴格，列在官方 [FAQ](https://grapheneos.o
 
 目前同時滿足這些條件的消費級手機幾乎只有 Google Pixel。Pixel 從第 6 代起搭載 Titan M2 安全晶片（第 3 到 5 代是第一代 Titan M），這顆晶片是金鑰保護與硬體驗證的信任根。
 
-GrapheneOS 目前只能跑在 Google 自家的 Pixel 上，但它要對付的，正是 Google 服務對手機的滲透。Google 對 Pixel 與 Android 的每一個政策調整，都會直接影響 GrapheneOS 的處境，而 Android 17 之後，Google 收緊的力道越來越強。
+GrapheneOS 目前只能運作於 Google 自家的 Pixel 上，但它要對付的，正是 Google 服務對手機的滲透。Google 對 Pixel 與 Android 的每一個政策調整，都會直接影響 GrapheneOS 的處境，而 Android 17 之後，Google 收緊的力道越來越強。
 
 ## Android 17 之後：Google 收緊 AOSP 與 Pixel 資料的開放程度
 
@@ -76,7 +76,7 @@ Google 收緊 AOSP、attestation 鎖定非官方系統的完整時間軸與分�
 - **取得管道**：Pixel 在台灣沒有官方銷售，多數人透過水貨、海外代購或出國時自行購入。買之前先到官方 [FAQ](https://grapheneos.org/faq){target="_blank"} 確認那台是 GrapheneOS 支援的型號，二手機要特別確認 bootloader 沒有被鎖死（電信商綁約機常鎖住 bootloader，一旦鎖住就無法解鎖刷機）。
 - **app 鎖定的實際衝擊**：銀行、政府、企業驗證類 app 越來越常用 attestation 檢查裝置，GrapheneOS 使用者可能遇到某些 app 拒絕執行。對把手機當主要上網裝置的在地使用者，轉用前要先確認每天必用的 app 有哪些可能受影響、自己能否接受，再決定是否轉移。
 - **側載限制正在逼近**：Android 17 新增的應用程式側載「開發者驗證」流程，2026 年先在巴西、印尼、新加坡、泰國試行，2027 年擴大。APAC 是第一批試驗場，台灣雖不在首批，但這類政策通常會逐步擴大到鄰近地區。
-- 取得管道、app 鎖定、側載限制，指向的都是同一件事，誰有權決定你買來的手機上能跑什麼系統、能裝什麼 app。GrapheneOS 讓使用者在原廠系統之外仍然有得選。
+- 取得管道、app 鎖定、側載限制，指向的都是同一件事，誰有權決定你買來的手機上能執行什麼系統、能裝什麼 app。GrapheneOS 讓使用者在原廠系統之外仍然有選擇。
 
 ## 常見問題
 
@@ -98,7 +98,7 @@ Google 收緊 AOSP、attestation 鎖定非官方系統的完整時間軸與分�
 
 ??? question "與 LineageOS、CalyxOS、/e/OS 有什麼不同？"
 
-    四套的取捨不同。GrapheneOS 是 hardening 最徹底的一套，要求在 Pixel 上重鎖 bootloader 以維持完整的安全模型。CalyxOS 走 microG（一套開源的 Google 服務替代實作）加上重鎖 bootloader 的實用中間路線。LineageOS 支援的機型最廣，但不提供同等的安全強化，而且在很多機型上解鎖 bootloader 後就削弱了 Android 預設的安全保護。/e/OS 以延續舊硬體可用為主，漏洞緩解的等級最低。要最高的安全與隱私選 GrapheneOS，要照顧更多舊機型或想更省事，可以看其他幾套。
+    四套的取捨不同。GrapheneOS 是 hardening 最徹底的一套，要求在 Pixel 上重鎖 bootloader 以維持完整的安全模型。CalyxOS 走 microG（一套開源的 Google 服務替代實作）加上重鎖 bootloader 的實用中間路線。LineageOS 支援的機型最廣，但不提供同等的安全強化，而且在很多機型上解鎖 bootloader 後就削弱了 Android 預設的安全保護。/e/OS 以延續舊硬體可用為主，漏洞緩解的等級最低。要最高的安全與隱私選 GrapheneOS，要照顧更多舊機型或想更簡便，可以看其他幾套。
 
 ## 接下來
 

@@ -17,7 +17,7 @@ og:
 
 ![COSCUP 2026 匿名网络社群议程轨主视觉](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控，还有被诈骗短信吓过、被广告追着跑而想拿回一点主导权的一般人。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
+记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控，还有被诈骗短信吓过、被广告持續追踪而想拿回一点主导权的一般人。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
 
 匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实作经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到现实世界的开源隐私工具、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
 
@@ -38,7 +38,7 @@ og:
 
     - **新闻媒体、独立记者**：8/08 上午「现实世界的开源隐私工具」盘点记者实际在用的安全收件管道、去识别化与隔离工具，可搭配「威胁模型与 Metadata 入门」。8/09 下午的「浏览器追踪技术、反追踪策略」会拆解你每天用的浏览器如何泄漏你联系过谁，「健保数据库案之后」与「隐私指南 2026」再延伸到个资权利与法律调取的因应。延伸阅读：[记者保护消息来源](../scenarios/journalist.md)。
     - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，「现实世界的开源隐私工具」直接盘点公民团体与 NGO 的加密通信、内部协作与检举投递工具，「隐私指南 2026」谈到组织遭法律调取数据时的事前准备。想评估匿名捐款管道，先听 8/08 上午「为什么匿名支付重要」（白话、不需加密货币背景），想再深入可接 8/08 下午与 ETHTaipei 合办场的「我不洗钱，为何要理解匿名支付？」。
-    - **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能动手。8/08 下午的零知识证明（ZK）自然人凭证、隐私保护的 KYC（金融机构确认客户身份）流程、隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](../community/how-to-contribute.md)。
+    - **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能实际操作。8/08 下午的零知识证明（ZK）自然人凭证、隐私保护的 KYC（金融机构确认客户身份）流程、隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](../community/how-to-contribute.md)。
     - 也欢迎带同事、伙伴一起来听。
 
 ## :material-calendar-text: 议程总览 { #议程总览 }
@@ -66,7 +66,7 @@ og:
 | 13:40-14:10<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一组密码学原语组出能通过 KYC，却不让服务器看到身份数据的流程 | ryanycw（Ryan Wang） |
 | 14:20-14:50<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **从不可链接性出发：隐匿地址如何解决链上金融隐私（以 Fluidkey 为例）**<br>:material-arrow-right-bottom: 用隐匿地址让同一人每次收款都落在不相关的地址，外部串不成同一身份 | Jennifer HSU |
 | 15:00-15:30<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗钱，为何要理解匿名支付？从零开始介绍隐私加密金流交易**<br>:material-arrow-right-bottom: 为什么倡议组织与捐款人也该懂加密货币金流的隐私风险，用白话走过几套解法 | 黄豆泥 mashbean |
-| 15:40-16:30<br>50 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隐私支付实作工作坊：从龙卷风现金到隐私池**<br>:material-arrow-right-bottom: 用道具与实机示范 Tornado Cash 与 Privacy Pool 的用法，不用自己动手、跟着看就好 | Liangcc |
+| 15:40-16:30<br>50 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隐私支付实作工作坊：从龙卷风现金到隐私池**<br>:material-arrow-right-bottom: 用道具与实机示范 Tornado Cash 与 Privacy Pool 的用法，不用自己实际操作、跟着看就好 | Liangcc |
 
 ### Day 2：2026/08/09（日）
 
@@ -169,7 +169,7 @@ og:
 
     工作坊从用户视角出发，介绍龙卷风现金（Tornado Cash）的设计哲学，以及隐私池（Privacy Pool）在它之上的改进。
 
-    现场会用道具与实机操作示范两样工具如何操作，不需自备电脑或动手写程序，跟着看就好，你能带走的是实际使用上的隐私眉角，密码学细节则点到为止。时间允许的话，也会谈这些工具的沿革与在现实世界造成的冲击。
+    现场会用道具与实机操作示范两样工具如何操作，不需自备电脑或实际操作写程序，跟着看就好，你能带走的是实际使用上的隐私眉角，密码学细节则点到为止。时间允许的话，也会谈这些工具的沿革与在现实世界造成的冲击。
 
     :material-open-in-new: [COSCUP 官方议程页](https://pretalx.coscup.org/coscup-2026/talk/3WHJYA/){target="_blank"}
 
@@ -243,20 +243,20 @@ og:
 
 **8/08 下午 ETHTaipei 合办「匿名支付」场**
 
-- **[Ya-wen Jeng（Vivian Jeng）](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**：任职 Ethereum Foundation 的 Privacy Stewards of Ethereum 团队，专注零知识证明与隐私技术推广，主导 Mopro、Unirep 等开源工具开发。主讲「零知识证明与自然人凭证身份验证」。
-- **[ryanycw（Ryan Wang）](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**：DeFi 开发者，ETHTaipei 共同主办，关注隐私、技术与以太坊。主讲「The Privacy-preserving Identity Pipeline in KYC」。
-- **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**：任职自托管隐私钱包 Fluidkey，台湾开发者社群 XueDAO 创办人，推广区块链技术。主讲「从不可链接性出发：隐匿地址如何解决链上金融隐私」。
-- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数字发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主讲「我不洗钱，为何要理解匿名支付？」。
+- **[Ya-wen Jeng（Vivian Jeng）](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**：任职 Ethereum Foundation 的 Privacy Stewards of Ethereum 团队，专注零知识证明与隐私技术推广，主导 Mopro、Unirep 等开源工具开发。主講「零知识证明与自然人凭证身份验证」。
+- **[ryanycw（Ryan Wang）](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**：DeFi 开发者，ETHTaipei 共同主办，关注隐私、技术与以太坊。主講「The Privacy-preserving Identity Pipeline in KYC」。
+- **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**：任职自托管隐私钱包 Fluidkey，台湾开发者社群 XueDAO 创办人，推广区块链技术。主講「从不可链接性出发：隐匿地址如何解决链上金融隐私」。
+- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数字发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主講「我不洗钱，为何要理解匿名支付？」。
 - **[Liangcc（CC）](https://pretalx.coscup.org/coscup-2026/speaker/UYKEPE/){target="_blank"}**：在以太坊生态开发零知识应用，关注人文、经济与密码学证明。带领「隐私支付实作工作坊：从龙卷风现金到隐私池」。
 
 **8/09 Day 2 议程**
 
-- **[Raghu](https://pretalx.coscup.org/coscup-2026/speaker/X3GX3V/){target="_blank"}**：后端工程师，投入 IP、TCP、封包分析与资安研究。主讲「The Workings of the Internet」（英文进行）。
-- **[Pellaeon Lin](https://pretalx.coscup.org/coscup-2026/speaker/BJYRYX/){target="_blank"}**：数字安全研究员与讲师，关注数字人权与自由软件。主讲「以 OpenWRT 等开源软件创建家用网络环境」与「浏览器追踪技术、反追踪策略和用户自主」两场。
-- **[Yusef Schultz](https://pretalx.coscup.org/coscup-2026/speaker/FAGUY7/){target="_blank"}**：主讲「区块链网络上基于开放标准的实体身份识别方法」，完整简介见 pretalx 讲者页。
-- **[NZ（苏恩立）](https://pretalx.coscup.org/coscup-2026/speaker/WCJNBL/){target="_blank"}**：台师大资工系学生，维运台湾学术网络（TANet）首个 Tor 节点，关注资安与网络治理。主讲「在学校种洋葱？台师大 Tor 节点创建实务与 EFF Tor University Challenge 经验谈」。
-- **[Kuan-Ju Chou](https://pretalx.coscup.org/coscup-2026/speaker/UAREZS/){target="_blank"}**：在台湾人权促进会服务，负责数字人权。主讲「健保数据库案之后：停止利用权如何实践？」。
-- **[Justyn](https://pretalx.coscup.org/coscup-2026/speaker/WZGMJG/){target="_blank"}**：主讲「隐私指南 2026」，完整简介稍后于 pretalx 讲者页更新。
+- **[Raghu](https://pretalx.coscup.org/coscup-2026/speaker/X3GX3V/){target="_blank"}**：后端工程师，投入 IP、TCP、封包分析与资安研究。主講「The Workings of the Internet」（英文进行）。
+- **[Pellaeon Lin](https://pretalx.coscup.org/coscup-2026/speaker/BJYRYX/){target="_blank"}**：数字安全研究员与讲师，关注数字人权与自由软件。主講「以 OpenWRT 等开源软件创建家用网络环境」与「浏览器追踪技术、反追踪策略和用户自主」两场。
+- **[Yusef Schultz](https://pretalx.coscup.org/coscup-2026/speaker/FAGUY7/){target="_blank"}**：主講「区块链网络上基于开放标准的实体身份识别方法」，完整简介见 pretalx 讲者页。
+- **[NZ（苏恩立）](https://pretalx.coscup.org/coscup-2026/speaker/WCJNBL/){target="_blank"}**：台师大资工系学生，维运台湾学术网络（TANet）首个 Tor 节点，关注资安与网络治理。主講「在学校种洋葱？台师大 Tor 节点创建实务与 EFF Tor University Challenge 经验谈」。
+- **[Kuan-Ju Chou](https://pretalx.coscup.org/coscup-2026/speaker/UAREZS/){target="_blank"}**：在台湾人权促进会服务，负责数字人权。主講「健保数据库案之后：停止利用权如何实践？」。
+- **[Justyn](https://pretalx.coscup.org/coscup-2026/speaker/WZGMJG/){target="_blank"}**：主講「隐私指南 2026」，完整简介稍后于 pretalx 讲者页更新。
 
 ## :material-link-variant: 相关链接
 

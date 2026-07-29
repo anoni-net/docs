@@ -284,7 +284,7 @@ icon: octicons/workflow-24
     #### 「如何在地化一套开源匿名工具包？」
 
     - 从日常浏览（Tor）到操作系统（Tails）到网络监测（OONI），有哪些开源工具还可以纳入？
-    - 工具包长怎样？（如 Live USB image、本地语系包、手册）？
+    - 工具包长如何？（如 Live USB image、本地语系包、手册）？
     - 推出「台湾版本」的简化套件（适合 NGO、记者、新手）
 
     [协助填写：议题讨论问卷调查](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){ .md-button .md-button--primary target="_blank"}

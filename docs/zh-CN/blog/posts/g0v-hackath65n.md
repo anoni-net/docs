@@ -15,7 +15,7 @@ description: "邀请您于 2025 年 2 月 22 日参加 g0v Hackath65n 零时政�
 
 ![g0v hackath65n / 零时政府第 65 次黑客松](./assets/images/g0v-hackath65n.webp)
 
-除了 2/23 的[工作坊活动](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我们也有报名参与「[g0v Hackath65n 零时政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活动，这次提案内容将动手启动 anoni.net Docs 2025 年度项目目标项目。
+除了 2/23 的[工作坊活动](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我们也有报名参与「[g0v Hackath65n 零时政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活动，这次提案内容将实际操作启动 anoni.net Docs 2025 年度项目目标项目。
 
 目前看起来活动还有一些名额，如果对我们的项目有兴趣、想要做出贡献的话，欢迎在活动当天加入我们（无论你来自什么背景、专业）！
 
