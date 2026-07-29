@@ -33,7 +33,7 @@ DNS 查詢預設走明文，你的裝置每問一次「這個網域的 IP 是多
 
 加密查詢要指定的是一個主機名稱或網址，例如 Cloudflare 的 DoT 主機名稱 `security.cloudflare-dns.com` 與 DoH 網址 `https://security.cloudflare-dns.com/dns-query`[^cf-families]，這一點很容易搞錯。在 Wi-Fi 設定或路由器裡填一個 IP 位址，換掉的只有回答你的那台伺服器，查詢仍然走明文的第 53 埠，路徑上的人照樣讀得到你問過哪些網域。要真的加密，得用作業系統或瀏覽器的加密 DNS 設定填入主機名稱，各平台的設定方式差異不小。
 
-resolver 本身收下你的每一筆查詢，也知道是誰問的，把系統設定從電信商的 resolver 換成 Cloudflare 或 Google，改變的只是這批紀錄落在誰手上。查詢加密之後，你接著要連上的目的 IP 仍然出現在封包裡，掌握你這條線路的一方看得到你連去哪台伺服器。TLS 握手裡的 SNI 欄位也還在，SNI 的變化與限制寫在 [Metadata 是什麼，為什麼重要](../basics/metadata.md)。具體要選哪一家、怎麼確認設定真的生效，見 [加密 DNS 怎麼選與怎麼設](../tools/encrypted-dns.md)。
+resolver 本身收下你的每一筆查詢，也知道是誰問的，把系統設定從電信商的 resolver 換成 Cloudflare 或 Google，改變的只是這批紀錄落在誰手上。查詢加密之後，你接著要連上的目的 IP 仍然出現在封包裡，掌握你這條線路的一方看得到你連去哪台伺服器。TLS 握手裡的 SNI 欄位也還在，SNI 的變化與限制寫在 [Metadata 是什麼，為什麼重要](../basics/metadata.md)。具體要選哪一家、各平台的欄位收什麼，見 [加密 DNS 怎麼選、怎麼確認真的生效](../tools/encrypted-dns.md)。
 
 ### 過濾型 resolver：跟審查用同一個動作，也會污染量測
 
@@ -41,7 +41,7 @@ Cloudflare 除了不過濾的 `1.1.1.1`，另外提供 `1.1.1.2`（擋惡意軟�
 
 回傳一個假答案讓連線失敗，正是 DNS 層審查的做法，技術動作一樣，差別在這個動作由誰決定。過濾是你自己選的，隨時可以換回 `1.1.1.1`，Cloudflare 也提供匿名回報誤判的管道。完整封鎖清單與分類方法並未公開，你無法事先知道哪些網域會被擋掉。
 
-跑 OONI Probe 的人會直接踩到這個差別。網路連線測試（Web Connectivity）先用系統 resolver 解析網域，再跟測試輔助伺服器解出來的結果比對，位址或 ASN 對得上才算一致[^ooni-wc]。過濾型 resolver 對被擋的網域回 `0.0.0.0`，這個結果跟輔助伺服器對不上，量測資料看起來像當地網路出了狀況，來源是這台裝置自己的設定。
+跑 OONI Probe 的人會直接踩到這個差別。過濾型 resolver 對被擋的網域回 `0.0.0.0`，量測資料看起來像當地網路出了狀況，來源是這台裝置自己的設定。比對機制與量測前該怎麼調整，見 [加密 DNS 怎麼選、怎麼確認真的生效](../tools/encrypted-dns.md)。
 
 ## IPFS：去中心化，每次查詢仍帶著你的 IP
 
@@ -85,11 +85,11 @@ tunnel 在 I2P 是單向的，outbound 送出去、inbound 收進來，每個參
 
 這頁不談安裝，要動手試的話從各專案的官方文件開始。
 
-## 在地脈絡：台灣的 DNS 設定與 OONI 量測
+## 在地脈絡：台灣
 
-台灣讀者換掉 DNS 設定的常見動機是解析比較快，或者某些網域在電信商的 resolver 上連不到，兩個動機都合理，但換 resolver 只對 DNS 層的阻擋有用，如果阻擋發生在 IP 或 SNI 那一層，換誰回答你都連不上。
+台灣讀者換掉 DNS 設定的常見動機是解析比較快，或者某些網域在電信商的 resolver 上連不到，兩個動機都合理，但換 resolver 只對 DNS 層的封鎖有用，如果封鎖發生在 IP 或 SNI 那一層，換誰回答你都連不上。
 
-跑 OONI Probe 的人另外要留意一件事。社群長期在整理 [台灣 ASN 涵蓋率](../taiwan/ooni-asn-coverage.md)，資料來自各地志工的量測，量測的目標正是這個網路本身的 DNS 行為。這裡不建議統一改用境外 resolver，那會把真正的 ISP 層阻擋一起蓋掉。要做的是移除自己額外加上的過濾型 resolver，讓裝置回到該網路原本的設定。這些量測後續怎麼用，見 [什麼是 OONI](../tools/what-is-ooni.md)。
+換掉之後會一併失去哪些既有的 DNS 層防護、跑 OONI Probe 時裝置該怎麼設定，都寫在 [加密 DNS 怎麼選、怎麼確認真的生效](../tools/encrypted-dns.md)。社群長期在整理的 [台灣 ASN 涵蓋率](../taiwan/ooni-asn-coverage.md) 就靠這些量測。
 
 ## 回到威脅模型：表上那幾欄各自對應什麼提問
 
@@ -106,7 +106,7 @@ tunnel 在 I2P 是單向的，outbound 送出去、inbound 收進來，每個參
 
 ??? question "我怎麼知道自己的 DNS 查詢真的加密了"
 
-    看你填進去的是什麼。填的是 `1.1.1.1` 這種 IP 位址，那是明文查詢，只換了回答你的伺服器。加密 DNS 要填的是主機名稱或網址，例如 `security.cloudflare-dns.com`。多數作業系統把這個選項放在跟一般 DNS 設定不同的地方，瀏覽器也有自己獨立的一份，只在瀏覽器開啟時其他 App 的查詢仍然走明文。各平台的具體設定方式差異不小，動手前先確認你改的是哪一層。
+    看你填進去的是主機名稱還是 IP 位址。多數平台的一般 DNS 欄位只收 IP，填進去就是明文，Windows 是例外。各平台的欄位形狀、失敗時會不會靜默退回明文，以及設完怎麼實測，見 [加密 DNS 怎麼選、怎麼確認真的生效](../tools/encrypted-dns.md)。
 
 ??? question "VPN 為什麼不在這張表上"
 
@@ -148,4 +148,3 @@ tunnel 在 I2P 是單向的，outbound 送出去、inbound 收進來，每個參
 [^ipfs-privacy]: [Privacy and Encryption](https://docs.ipfs.tech/concepts/privacy-and-encryption/){target="_blank"} - IPFS 官方文件。
 [^i2p-intro]: [Intro to I2P](https://i2p.net/en/docs/overview/intro){target="_blank"} - I2P 官方站。舊網域 `geti2p.net` 現已轉向此站。
 [^i2p-comparison]: [I2P Compared to Tor](https://i2p.net/en/docs/overview/comparison){target="_blank"} - I2P 官方站，人數與路由器規模為該頁列出的數字。
-[^ooni-wc]: [ts-017-web-connectivity](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} - OONI 測試規格。

@@ -21,7 +21,7 @@ icon: material/toolbox-outline
 - [Tor Snowflake](./tor-snowflake.md)：开浏览器分页，帮受审查地区的使用者连上 Tor，门槛最低的网络自由贡献方式。
 - [OnionShare](./onionshare.md)：透过 Tor 起临时 onion service，匿名传档、收档、架站、聊天。
 - [VPN 的风险与选择](./vpn-guide.md)：VPN 的具体风险、怎么挑值得信任的服务、各地能不能用，以及什么时候该改用 Tor。
-- [加密 DNS 怎么选与怎么设](./encrypted-dns.md)：DoH、DoT、DoQ 的差别，resolver 业者的挑选准则，以及怎么确认你设的真的生效了。
+- [加密 DNS 怎么选、怎么确认真的生效](./encrypted-dns.md)：DoH、DoT、DoQ 的差别，resolver 业者的挑选准则，各平台的栏位收什么、失败时会不会静默退回明文。
 
 ## 环境层：匿名作业系统
 
