@@ -37,7 +37,7 @@ og:
 !!! tip "依你的身份，建议从这几场开始"
 
     - **新闻媒体、独立记者**：8/08 上午「现实世界的开源隐私工具」盘点记者实际在用的安全收件管道、去识别化与隔离工具，可搭配「威胁模型与 Metadata 入门」。8/09 下午的「浏览器追踪技术、反追踪策略」会拆解你每天用的浏览器如何泄漏你联系过谁，「健保数据库案之后」与「隐私指南 2026」再延伸到个资权利与法律调取的因应。延伸阅读：[记者保护消息来源](../scenarios/journalist.md)。
-    - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，「现实世界的开源隐私工具」直接盘点公民团体与 NGO 的加密通信、内部协作与检举投递工具，「隐私指南 2026」谈到组织遭法律调取数据时的事前准备。想评估匿名捐款管道，8/08 下午与 ETHTaipei 合办场的「我不洗钱，为何要理解匿名支付？」是白话入门，不需要加密货币背景。同一天上午还有一场谈匿名的资格验证，处理的是组织与个人怎么证明符合条件而不必交出身分。
+    - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，「现实世界的开源隐私工具」直接盘点公民团体与 NGO 的加密通信、内部协作与检举投递工具，「毒品非毒、洗钱非洗钱」说明受助者或检举者如何证明自己符合条件，却不必留下身分数据，「隐私指南 2026」谈到组织遭法律调取数据时的事前准备。想评估匿名捐款管道，8/08 下午与 ETHTaipei 合办场的「我不洗钱，为何要理解匿名支付？」是白话入门，不需要加密货币背景。
     - **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能实际操作。8/08 下午的零知识证明（ZK）自然人凭证、隐私保护的 KYC（金融机构确认客户身份）流程、隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](../community/how-to-contribute.md)。
     - 也欢迎带同事、伙伴一起来听。
 
@@ -47,16 +47,16 @@ og:
 
 ### Day 1：2026/08/08（六）
 
-8/08 上午前三场由 anoni.net 社群成员担纲开源匿名网络导论，第四场是邀请议程，特别适合公民团体、新闻媒体与独立记者，从入门角度切入，四场都扣着开源主轴。下午 13:00 接续与 ETHTaipei 合办的「匿名支付」场，协议层的技术含量更高。
+8/08 上午四场开源匿名网络导论，前三场由 anoni.net 社群成员担纲，第四场是邀请议程。四场都从入门角度切入、扣着开源主轴，特别适合公民团体、新闻媒体与独立记者。下午 13:00 接续与 ETHTaipei 合办的「匿名支付」场，协议层的技术含量更高。
 
-**上午 09:30-12:00　社群开源匿名网络导论（教室 `TR-510`）**
+**上午 09:30-12:00　开源匿名网络导论（教室 `TR-510`）**
 
 | 时间 | 议程 | 讲者 |
 |------|------|------|
 | 09:30-10:00<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-account-group: **匿名网络社群 anoni.net 介绍：开源匿名工具、社群实践与 2026 三大主题**<br>:material-arrow-right-bottom: 有一群人在台湾把 Tor、Tails、OONI 这些隐私工具中文化、实际推广。这场介绍他们是谁、在做什么，也说明为什么高风险工作要用验得了的开源工具、而不是无从检查的黑箱软件 | anoni.net 社群 |
 | 10:10-10:40<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-target-account: **威胁模型与 Metadata 入门：认识你的对手，以及为什么匿名工具要开源才可信**<br>:material-arrow-right-bottom: 就算通话内容没被监听，谁在什么时间联系了谁，常常就足以让消息来源曝光。这场带你判断自己该防谁、又要防到什么程度 | anoni.net 社群 |
 | 10:50-11:20<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-toolbox-outline: **现实世界的开源隐私工具：公民团体、独立记者与个人隐私防护的实际运用**<br>:material-arrow-right-bottom: 记者、NGO 与在意隐私的一般人，实际上都在用哪些源代码公开、可被检验的免费工具保护自己？这场直接列出来，不管你是谁都能挑一两个回家用 | anoni.net 社群 |
-| 11:30-12:00<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-scale-balance: **毒品非毒、洗钱非洗钱—浅谈匿名的资格验证**<br>:material-arrow-right-bottom: 在全面实名与无须许可之间的第三条路，用开放标准的可验证凭证证明资格，不必交出身分 | Denken Chen | <!-- docs-style-lint: disable-line -->
+| 11:30-12:00<br>30 分钟 | <span class="sess-tag sess-tag--basic">通用</span> :material-scale-balance: **毒品非毒、洗钱非洗钱—浅谈匿名的资格验证**<br>:material-arrow-right-bottom: 同一件事换一套规则就被归成两种性质，谁有权定义合法与非法。在实名与匿名之外找第三条路，不需要密码学背景 | Denken Chen | <!-- docs-style-lint: disable-line -->
 
 **下午 13:00-16:30　ETHTaipei 合办「匿名支付」场（教室 `TR-511`，议程由 ETHTaipei 安排）**
 
@@ -93,9 +93,9 @@ og:
 
 ## :material-text-box-multiple-outline: 议程介绍 { #议程介绍 }
 
-### Day 1（8/08 上午）：社群开源匿名网络导论
+### Day 1（8/08 上午）：开源匿名网络导论
 
-四场导论由 anoni.net 社群成员担纲，取材自既有文档与 2025 工作坊内容。介绍的工具（Tor、Tails、OONI、Signal、SecureDrop、OnionShare、Cryptpad、mat2 等）全是自由开源软件，社群本身也以贡献国际开源项目（翻译、架设中继节点、回报问题）的方式参与。
+前三场导论由 anoni.net 社群成员担纲，取材自既有文档与 2025 工作坊内容，第四场为邀请议程。介绍的工具（Tor、Tails、OONI、Signal、SecureDrop、OnionShare、Cryptpad、mat2 等）全是自由开源软件，社群本身也以贡献国际开源项目（翻译、架设中继节点、回报问题）的方式参与。
 
 ??? abstract ":material-account-group: 匿名网络社群 anoni.net 介绍：开源匿名工具、社群实践与 2026 三大主题"
 
@@ -121,21 +121,21 @@ og:
 
     :material-open-in-new: [COSCUP 官方议程页](https://pretalx.coscup.org/coscup-2026/talk/QPDZEC/){target="_blank"}
 
-??? abstract ":material-scale-balance: 毒品非毒、洗钱非洗钱—浅谈匿名的资格验证（Denken Chen，30 分钟）"  <!-- docs-style-lint: disable-line -->
+<!-- docs-style-lint: disable -->
+??? abstract ":material-scale-balance: 毒品非毒、洗钱非洗钱—浅谈匿名的资格验证（Denken Chen，30 分钟）"
 
-    讲者从《我们与恶的距离》开场，问的是经历过那部戏之后，我们对善恶边界为什么仍旧如此笃定，以及在全面实名监控与无须许可的匿名服务之间，有没有第三条路可走。同一件事在不同规则下被归成两种性质，标题的「毒品非毒、洗钱非洗钱」点出的就是这个落差。
+    讲者从《我们与恶的距离》谈起，问的是看完那部戏之后，我们对善恶边界为何仍然这么有把握。同一件事物换一套规则就被归成两种性质，标题的「毒品非毒、洗钱非洗钱」把这个落差直接写了出来。接着才是这场的核心提问，在全面实名监控与无须许可的匿名服务之间，还有没有第三条路。
 
-    第三条路的技术名字叫资格验证，也就是证明一个人符合某项条件，而不必连带交出他是谁。这条线在开源世界有现成的基础：W3C 的去中心化标识符（Decentralized Identifiers，DID）与可验证凭证（Verifiable Credentials，VC）是两份开放标准，搭配选择性披露（selective disclosure）与零知识证明，持有者可以只出示「已成年」、「具备某项资格」这样的单一断言，验证方拿不到其余栏位。标准公开、实作可被检视，才有办法让人相信验证流程没有偷偷多留一份记录，这也是这个题目属于开源社群的原因。
+    这个提问在技术上对应到资格验证，证明一个人符合某项条件，而不必一并揭露身分。W3C 的可验证凭证（Verifiable Credentials，VC）这类开放标准搭配选择性披露（selective disclosure），让持有者只出示「已成年」这一项，其余数据验证方看不到。开放标准的作用在于验证规则不由单一厂商定义，任何人都能自己实作钱包或验证端，而使用者手上那一端是否开源可稽核，决定了你能不能确认它没有多送东西出去。听完你会分得出证明资格与证明身分是两件事，也会拿到一把尺去量各种实名制方案。
 
-    讲者的背景正好落在这条线上，软件开发与写作十余年，投入 W3C 的 Credentials Community Group，参与台湾数字凭证皮夹的相关工作，同时是 Ptt-iOS、Taiwan E-Book Search 等开源项目的发起人。
-
-    这个题目与社群长期关切的事直接相连，OONI 为了让测量数据可信、又不追踪回报的人，采用的正是匿名凭证，设计与取舍写在 [OONI 全新的匿名凭证系统](../blog/posts/2026-ooni-anonymous-credentials.md)。台湾这一侧的规则脉络则有 2026 年上路的[虚拟资产服务法（VASP 法）](../taiwan/vasp-2026.md)，实名与匿名的界线怎么划，会直接影响一般人能用到什么服务。适合关心数字身分、实名制争议与匿名服务治理的人，不需要密码学背景。
+    OONI 为了让测量数据可信、又不追踪回报者，用的是同一类思路的匿名凭证（anonymous credentials），设计与取舍写在 [OONI 全新的匿名凭证系统](../blog/posts/2026-ooni-anonymous-credentials.md)。讲者在 8/09 的 Open Source Policy 议程轨另有一场与黄豆泥 mashbean 合讲的[年龄验证、数字监控、隐私权，讨论这些以前，不妨先开源吧](https://pretalx.coscup.org/coscup-2026/talk/JSMGDZ/){target="_blank"}，会分析欧盟正在开源开发的年龄验证 App。这场适合关心数字身分、实名制争议与匿名服务治理的听众，不需要密码学背景。
 
     :material-open-in-new: [COSCUP 官方议程页](https://pretalx.coscup.org/coscup-2026/talk/WYGFAZ/){target="_blank"}
+<!-- docs-style-lint: enable -->
 
 ### Day 1（8/08 下午）：ETHTaipei 合办「匿名支付」场
 
-13:00-16:30 为与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）合办的「匿名支付」主题场，在 `TR-511` 教室进行，议程由 ETHTaipei 安排，共五场。上午的导论从公民与倡议视角谈隐私工具与匿名的资格验证，白话、不碰密码学细节，下午这五场接续把焦点收在金流，展开「如何实作」，从零知识证明结合自然人凭证、KYC 的隐私保护流程、链上隐匿地址，一路谈到隐私加密金流与实作工作坊。两个社群在匿名支付主题上各有切入角度，分工与背景见[跨社群合作](#跨社群合作)。
+13:00-16:30 为与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）合办的「匿名支付」主题场，在 `TR-511` 教室进行，议程由 ETHTaipei 安排，共五场。上午的导论从公民与倡议视角谈隐私工具与匿名的资格验证，白话、不深入密码学细节。下午前两场正好把资格验证接到金流上，用零知识证明搭自然人凭证向服务证明「我是台湾公民」、用 zkKYC 证明「已成年、与上个月注册的是同一人」，都是上午那句「证明符合条件而不揭露身分」的协议层实作，接着三场再从链上隐匿地址谈到隐私加密金流与实作工作坊。两个社群在匿名支付主题上各有切入角度，分工与背景见[跨社群合作](#跨社群合作)。
 
 ??? abstract ":material-card-account-details-outline: 零知识证明与自然人凭证身份验证（Ya-wen Jeng，30 分钟）"
 
@@ -245,9 +245,9 @@ og:
 
 8/08 上午前三场开源匿名网络导论由 anoni.net 社群成员担纲（社群中实际维运 Tor 中继节点、参与 Tails 与 OONI 正体中文化与问题回报的成员），社群背景见[关于我们](../about/index.md)。以下依议程顺序列出邀请与合办讲者，点名字可看 COSCUP pretalx 上讲者本人提供的完整简介。
 
-**8/08 上午社群导论**
+**8/08 上午 邀请议程**
 
-- **[Denken Chen](https://pretalx.coscup.org/coscup-2026/speaker/FW9HYA/){target="_blank"}**：软件开发与写作十余年，投入 W3C 的去中心化标识符与可验证凭证标准，参与 Credentials Community Group 与台湾数字凭证皮夹的相关工作，也是 Ptt-iOS、Taiwan E-Book Search 等开源项目的发起人。主讲「毒品非毒、洗钱非洗钱—浅谈匿名的资格验证」。 <!-- docs-style-lint: disable-line -->
+- **[Denken Chen](https://pretalx.coscup.org/coscup-2026/speaker/FW9HYA/){target="_blank"}**：从事软件开发与写作十余年，投入 W3C 的去中心化标识符与可验证凭证标准，参与 Credentials Community Group 与台湾数字凭证皮夹的工作，也是 Ptt-iOS、Taiwan E-Book Search 等开源项目的发起人。主讲「毒品非毒、洗钱非洗钱—浅谈匿名的资格验证」，并在 8/09 的 Open Source Policy 议程轨与黄豆泥 mashbean 合讲「年龄验证、数字监控、隐私权，讨论这些以前，不妨先开源吧」。 <!-- docs-style-lint: disable-line -->
 
 **8/08 下午 ETHTaipei 合办「匿名支付」场**
 
