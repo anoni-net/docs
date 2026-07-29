@@ -80,6 +80,7 @@ const CORE_PAGES_ZH = [
   "tools/messaging-comparison/",
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
+  "tools/encrypted-dns/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。

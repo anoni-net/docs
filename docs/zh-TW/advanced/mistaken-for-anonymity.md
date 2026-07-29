@@ -33,7 +33,7 @@ DNS 查詢預設走明文，你的裝置每問一次「這個網域的 IP 是多
 
 加密查詢要指定的是一個主機名稱或網址，例如 Cloudflare 的 DoT 主機名稱 `security.cloudflare-dns.com` 與 DoH 網址 `https://security.cloudflare-dns.com/dns-query`[^cf-families]，這一點很容易搞錯。在 Wi-Fi 設定或路由器裡填一個 IP 位址，換掉的只有回答你的那台伺服器，查詢仍然走明文的第 53 埠，路徑上的人照樣讀得到你問過哪些網域。要真的加密，得用作業系統或瀏覽器的加密 DNS 設定填入主機名稱，各平台的設定方式差異不小。
 
-resolver 本身收下你的每一筆查詢，也知道是誰問的，把系統設定從電信商的 resolver 換成 Cloudflare 或 Google，改變的只是這批紀錄落在誰手上。查詢加密之後，你接著要連上的目的 IP 仍然出現在封包裡，掌握你這條線路的一方看得到你連去哪台伺服器。TLS 握手裡的 SNI 欄位也還在，SNI 的變化與限制寫在 [Metadata 是什麼，為什麼重要](../basics/metadata.md)。
+resolver 本身收下你的每一筆查詢，也知道是誰問的，把系統設定從電信商的 resolver 換成 Cloudflare 或 Google，改變的只是這批紀錄落在誰手上。查詢加密之後，你接著要連上的目的 IP 仍然出現在封包裡，掌握你這條線路的一方看得到你連去哪台伺服器。TLS 握手裡的 SNI 欄位也還在，SNI 的變化與限制寫在 [Metadata 是什麼，為什麼重要](../basics/metadata.md)。具體要選哪一家、怎麼確認設定真的生效，見 [加密 DNS 怎麼選與怎麼設](../tools/encrypted-dns.md)。
 
 ### 過濾型 resolver：跟審查用同一個動作，也會污染量測
 

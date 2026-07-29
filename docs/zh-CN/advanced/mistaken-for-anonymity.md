@@ -33,7 +33,7 @@ DNS 查询默认走明文，你的设备每问一次「这个域名的 IP 是多
 
 加密查询要指定的是一个主机名称或网址，例如 Cloudflare 的 DoT 主机名称 `security.cloudflare-dns.com` 与 DoH 网址 `https://security.cloudflare-dns.com/dns-query`[^cf-families]，这一点很容易搞错。在 Wi-Fi 设置或路由器里填一个 IP 地址，换掉的只有回答你的那台服务器，查询仍然走明文的第 53 端口，路径上的人照样读得到你问过哪些域名。要真的加密，得用操作系统或浏览器的加密 DNS 设置填入主机名称，各平台的设置方式差异不小。
 
-resolver 本身收下你的每一笔查询，也知道是谁问的，把系统设置从运营商的 resolver 换成 Cloudflare 或 Google，改变的只是这批记录落在谁手上。查询加密之后，你接着要连上的目的 IP 仍然出现在数据包里，掌握你这条线路的一方看得到你连去哪台服务器。TLS 握手里的 SNI 字段也还在，SNI 的变化与限制写在 [Metadata 是什么，为什么重要](../basics/metadata.md)。
+resolver 本身收下你的每一笔查询，也知道是谁问的，把系统设置从运营商的 resolver 换成 Cloudflare 或 Google，改变的只是这批记录落在谁手上。查询加密之后，你接着要连上的目的 IP 仍然出现在数据包里，掌握你这条线路的一方看得到你连去哪台服务器。TLS 握手里的 SNI 字段也还在，SNI 的变化与限制写在 [Metadata 是什么，为什么重要](../basics/metadata.md)。具体要选哪一家、怎么确认设置真的生效，见 [加密 DNS 怎么选与怎么设](../tools/encrypted-dns.md)。
 
 ### 过滤型 resolver：跟审查用同一个动作，也会污染测量
 
