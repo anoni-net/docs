@@ -1,5 +1,5 @@
 ---
-title: Interactive
+title: "Interactive: 3D Tor network visualisations and games"
 description: Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor - a puzzle that walks you through three-hop onion routing, a live view of traffic meeting at rendezvous points, and a relay globe built from six public datasets.
 icon: material/cube-outline
 social:
@@ -123,3 +123,79 @@ Knowing JavaScript is enough to work on the copy, the level design and the inter
 ## What comes next
 
 These are the first three pieces, all focused on Tor. Plenty of other privacy topics deserve the same treatment: what metadata gives away, how a threat model shifts with your situation, what the money trail behind anonymous payments looks like. All of them are on the list. If you have an idea or want to build one with us, come find us in the [community](../community/index.md).
+
+<!-- Structured data. The three works ship their own JSON-LD in their head, since
+     they never pass through the mkdocs template, and point isPartOf back at the
+     zh-TW #collection. This block lists them as an ItemList. Keep the @id values
+     identical to the ones in each work's index.html. -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://anoni.net/docs/en/games/#collection",
+      "name": "Interactive",
+      "url": "https://anoni.net/docs/en/games/",
+      "description": "Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://anoni.net/#organization" },
+      "mainEntity": { "@id": "https://anoni.net/docs/en/games/#works" }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://anoni.net/docs/en/games/#works",
+      "name": "The works",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "VideoGame",
+            "@id": "https://anoni.net/docs/games/onion-routing/#work",
+            "name": "Tor Routing Puzzle",
+            "url": "https://anoni.net/docs/games/onion-routing/?lang=en",
+            "image": "https://assets.anoni.net/games/onion-routing.png",
+            "description": "A playable puzzle. Pick three relays to form a Tor guard, middle and exit path, avoid monitored nodes, spread the three hops across different ASNs, and switch to a bridge when blocked."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebApplication",
+            "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
+            "name": "Tor Traffic Rendezvous",
+            "url": "https://anoni.net/docs/games/onion-rendezvous/?lang=en",
+            "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+            "applicationCategory": "EducationalApplication",
+            "description": "A piece to watch rather than play. Glowing particles trace the two shapes Tor traffic takes, with .onion connections meeting at a rendezvous point picked at random."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "WebApplication",
+            "@id": "https://anoni.net/docs/games/tor-network/#work",
+            "name": "Tor Relay Globe",
+            "url": "https://anoni.net/docs/games/tor-network/?lang=en",
+            "image": "https://assets.anoni.net/games/tor-network.png",
+            "applicationCategory": "EducationalApplication",
+            "description": "A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, layered with connectivity observations, user estimates, shutdown records and submarine cables."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Docs", "item": "https://anoni.net/docs/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Interactive" }
+      ]
+    }
+  ]
+}
+</script>
