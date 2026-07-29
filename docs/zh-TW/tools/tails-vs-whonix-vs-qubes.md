@@ -83,7 +83,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 **限制**：
 
 - 安全前提依賴主機 OS。主機被入侵了，Whonix VM 內的工作也難以保護（Qubes 在這層上有更好的隔離）。
-- VM 執行兩台會吃掉 4 GB+ 記憶體，舊機運作起來會明顯卡頓。
+- VM 開兩台會吃掉 4 GB+ 記憶體，舊機用起來會明顯卡頓。
 - 不像 Tails 關機就清空，Whonix 是持久環境，使用紀錄會累積在 VM 內。
 - macOS 上 Apple Silicon 機型沒有官方預建的 ARM64 映像，要自行用 [UTM](https://mac.getutm.app/){target="_blank"} 或 QEMU 從原始碼建置，官方標示僅供開發者、維護狀態不穩定。
 

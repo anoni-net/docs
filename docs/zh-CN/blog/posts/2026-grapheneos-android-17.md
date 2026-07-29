@@ -62,7 +62,7 @@ attestation 的压力在 2026 年明显增强，下面三件事几乎同时推�
 
 面对 Pixel 的不确定，GrapheneOS 开始找替代硬件。2026 年 3 月 1 日的 MWC 2026，GrapheneOS 与 Motorola 宣布长期合作，计画推出预载 GrapheneOS、支援 bootloader 解锁与重锁的机型[^8]。这是 GrapheneOS 第一次把硬件出路铺到 Pixel 以外，具体机型与上市时间官方都还没公布。
 
-回头看这次合作的起因，GrapheneOS 表示，正是 Google 停止公开 Pixel 共用的驱动程式原始码，才促成 Motorola 主动前来追究[^9]。Google 想把 Android 收得更紧，反而把一个原本绑在自家硬件上的项目推向了竞争对手。
+回头看这次合作的起因，GrapheneOS 表示，正是 Google 停止公开 Pixel 共用的驱动程式原始码，才促成 Motorola 主动接洽[^9]。Google 想把 Android 收得更紧，反而把一个原本绑在自家硬件上的项目推向了竞争对手。
 
 至于 Pixel 本身，GrapheneOS 的说法是「不确定之后还会不会替新推出的 Pixel 加上支援」[^10]。媒体据此推测 Pixel 11 可能是最后一款受官方支援的新 Pixel，但这是媒体的推论，GrapheneOS 官方并没有做出这个承诺，Pixel 11 之后的机型是否支援仍在未定之天。
 

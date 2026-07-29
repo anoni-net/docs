@@ -128,7 +128,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ## 搭建 Tor Relay 的常見問題
 
-??? question "搭建 Tor Relay 會被警察前來追究嗎？"
+??? question "搭建 Tor Relay 會被警察找上嗎？"
 
     Relay 有三層：入口節點（Guard Relay）、中間節點（Middle Relay）、出口節點（Exit Relay）。其中入口節點與中間節點是扮演 Tor 網路內傳輸轉送的類型，不是連結存取最終目的地的節點主機，因此不會與執法單位接觸的可能。也因此搭建出口節點的潛在風險也需要審慎評估後再決定是否行動。
 

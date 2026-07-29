@@ -105,7 +105,7 @@ WebTunnel 的做法不同，它把 Tor 流量包進一個真正的 HTTPS 連線�
 
 門檻不高：
 
-- 一台 512MB 到 1GB 記憶體的小型 VPS 就執行得動，成本和維護心力都比架 [Tor Relay](../../community/setup-tor-relay.md) 低。
+- 一台 512MB 到 1GB 記憶體的小型 VPS 就足以支撐，成本和維護心力都比架 [Tor Relay](../../community/setup-tor-relay.md) 低。
 - 需要一個網域（或子網域）和一張 TLS 憑證（讓網站能用 https 安全連線的憑證），用 Let's Encrypt 免費就能申請。
 - 法律風險很低。橋接只是中轉站，不會直接連到使用者最後要造訪的網站，對外網站看到的是 Tor 網路的出口，不是你的伺服器，比架設 Tor 出口節點安全得多。
 

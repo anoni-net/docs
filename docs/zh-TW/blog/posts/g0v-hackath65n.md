@@ -15,7 +15,7 @@ description: "邀請您於 2025 年 2 月 22 日 g0v Hackath65n 零時政府第 
 
 ![g0v hackath65n / 零時政府第 65 次 黑客松](./assets/images/g0v-hackath65n.webp)
 
-除了 2/23 的[工作坊活動](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我們也有報名參與「[g0v Hackath65n 零時政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活動，這次提案內容將實際操作啟動 OONI-Reseatch 2025 年度專案目標項目。
+除了 2/23 的[工作坊活動](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我們也有報名參與「[g0v Hackath65n 零時政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活動，這次提案內容將著手啟動 OONI-Reseatch 2025 年度專案目標項目。
 
 目前看起來活動還有一點點名額，如果對於我們的專案有興趣、想要做出貢獻的話，歡迎在活動當天加入我們（不論你來自什麼背景、專業）！
 
@@ -40,7 +40,7 @@ description: "邀請您於 2025 年 2 月 22 日 g0v Hackath65n 零時政府第 
 
 ### ASNs 自治網路觀測資料分析
 
-針對 OONI 觀測資料多樣性不足的問題，我們要如何隨時監控資料的品質呢？是否可以透過某種量化指標或數字來快速掌握狀況？要如何將作並建立起來呢？在這次活動，我們將討論資料流架構、自動化分析等相關問題。最後，我們也需要思考如何吸引更多人參與 OONI 觀察資料的蒐集。
+針對 OONI 觀測資料多樣性不足的問題，我們要如何隨時監控資料的品質呢？是否可以透過某種量化指標或數字來快速掌握狀況？要如何將其實作並建立起來呢？在這次活動，我們將討論資料流架構、自動化分析等相關問題。最後，我們也需要思考如何吸引更多人參與 OONI 觀察資料的蒐集。
 
 [:material-arrow-right-circle-outline: 瞭解此專案目前的進度](../../taiwan/ooni-checklist.md){ .md-button target="_blank" }
 

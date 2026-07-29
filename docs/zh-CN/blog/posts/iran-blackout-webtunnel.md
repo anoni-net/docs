@@ -105,7 +105,7 @@ WebTunnel 的做法不同，它把 Tor 流量包进一个真正的 HTTPS 连接�
 
 门槛不高：
 
-- 一台 512MB 到 1GB 内存的小型 VPS 就执行得动，成本和维护心力都比架 [Tor Relay](../../community/setup-tor-relay.md) 低。
+- 一台 512MB 到 1GB 内存的小型 VPS 就足以支撑，成本和维护心力都比架 [Tor Relay](../../community/setup-tor-relay.md) 低。
 - 需要一个域名（或子域名）和一张 TLS 证书（让网站能用 https 安全连接的证书），用 Let's Encrypt 免费就能申请。
 - 法律风险很低。桥接只是中转站，不会直接连到使用者最后要造访的网站，对外网站看到的是 Tor 网络的出口，不是你的服务器，比架设 Tor 出口节点安全得多。
 
