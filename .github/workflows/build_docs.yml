@@ -35,6 +35,27 @@ jobs:
         run: uv sync --group=dev
       - name: Show packages
         run: uv tree
+      # mkdocs-material 的 privacy 外掛會把外部資產下載到
+      # docs/.cache/plugin/privacy/assets/external/<host>/。**下載失敗時它仍然會把該檔
+      # 登記進 files**，之後 copy_static_files 找不到檔案就丟 FileNotFoundError，整個
+      # 建置失敗。外掛本身沒有重試，而 .cache 既不在版控也沒進 CI 快取，等於每次建置
+      # 都要重新對十幾個外部主機碰運氣。2026-07 就因為 interseclab.org 與
+      # search.anoni.net 各失敗一次，兩次都不是內容有問題。
+      #
+      # 把這個目錄快取起來，上一次成功下載的檔案就會留著，單一主機的暫時性故障不再
+      # 拖垮建置。只快取 privacy 一個子目錄（約 45 MB），social 外掛的字型與卡片
+      # （約 177 MB）不含在內，那部分是可重算的，也不是失敗來源。
+      #
+      # 注意：快取全新或被 LRU 淘汰時（首次建置、長期沒跑）仍然要重新下載，
+      # 那種情況下這層保護不存在。要根治得把外部圖片鏡像到 assets.anoni.net。
+      - name: Cache privacy plugin external assets
+        uses: actions/cache@v4
+        with:
+          path: docs/.cache/plugin/privacy
+          key: mkdocs-privacy-${{ github.sha }}
+          restore-keys: |
+            mkdocs-privacy-
+
       - name: Install mkdocs-material social dependencies
         run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
       - name: Build Docs (/)
