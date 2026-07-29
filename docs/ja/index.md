@@ -65,7 +65,7 @@ hide:
 
     ---
 
-    道具を選ぶ前に必要な語彙と枠組み。[匿名・プライバシー・仮名・機密](./basics/anonymity-vs-privacy.md)、[メタデータはなぜ危険か](./basics/metadata.md)、[脅威モデルの立て方](./basics/threat-model.md)の 3 本。この順に読むと噛み合います。
+    まず[ネットワークの自由](./basics/internet-freedom.md)で枠組みを押さえ、[匿名・プライバシー・仮名・機密](./basics/anonymity-vs-privacy.md)、[メタデータはなぜ危険か](./basics/metadata.md)、[脅威モデルの立て方](./basics/threat-model.md)と読み進めます。
 
 - [:material-map-outline: 地域観測](./regional/index.md)
 
@@ -105,7 +105,6 @@ hide:
 
 | 原文 | 内容 |
 |---|---|
-| ネットワークの自由がなぜ重要か | このサイトの主張の中核。東アジアと東南アジアの地域的な枠組みと、接続・個人データ・資金の流れという 3 つの観測軸 |
 | メッセージングツールの比較 | Signal、Telegram、LINE などを、電話番号による登録が実在の身元を固定するという観点で比べたもの |
 | Tor リレーの立て方 | 中継の種類ごとの手順と運用上の注意 |
 | 暗号化 DNS の選び方と確認方法 | DoH / DoT / DoQ の違い、事業者の選択、各 OS での設定、壊れたときの挙動 |

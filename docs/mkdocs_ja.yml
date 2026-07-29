@@ -23,6 +23,7 @@ nav:
   - !ENV [NAV_GUIDES, "ガイド"]:
       - !ENV [NAV_BASICS, "基本概念"]:
           - basics/index.md
+          - basics/internet-freedom.md
           - basics/anonymity-vs-privacy.md
           - basics/metadata.md
           - basics/threat-model.md

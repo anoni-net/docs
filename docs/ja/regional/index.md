@@ -98,11 +98,22 @@ icon: material/map-outline
 
 ## :material-file-document-outline: 日本語版に収録しているページ
 
+上のカードで挙げた法域それぞれについての記事は、まだ日本語にはありません。現時点で日本語で読めるのは次の 2 本です。
+
+- [ネットワークの自由](../basics/internet-freedom.md) — このセクション全体の概念的な枠組み。接続、個人データ、資金の流れという 3 つの層と、東アジア・東南アジアの地域的な状況。
 - [Tor リレー観測](./tor-relay-watcher.md) — 日本、台湾、韓国、香港の Tor リレーの稼働状況。Pulse が Onionoo API から取得した実データです。
 
-以下は英語版と繁体字中国語版のみです。
+### 今後収録する予定のもの
 
-- [ネットワークの自由がなぜ重要か](https://anoni.net/docs/en/basics/internet-freedom/){target="_blank"}（英語）— このセクション全体の概念的な枠組み。
+順番はご要望を見て決めます。読みたいものがあれば [Issue](https://github.com/anoni-net/docs/issues){target="_blank"} でお知らせください。
+
+- 台湾の個人資料保護法（2025 年改正）の観測
+- 台湾の VASP 法（2026 年）の観測
+- ASN カバレッジの地域間比較（TW / HK / JP / KR / SG / MY）
+- InterSecLab の Geedge / MESA レポートの索引
+
+現時点で英語版と繁体字中国語版のみのもの。
+
 - [LGBTQ+ と性的少数者、中国語圏における匿名の社会生活](https://anoni.net/docs/en/scenarios/lgbtq/){target="_blank"}（英語）— 複数地域の文脈を含むシナリオ記事。
 
 ## :material-book-open-variant: 私たちが読んで引用している公開情報源
