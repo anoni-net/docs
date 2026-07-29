@@ -167,7 +167,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
           "item": {
             "@type": "WebApplication",
             "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
-            "name": "Tor Traffic Rendezvous",
+            "name": "Tor Traffic Flow",
             "url": "https://anoni.net/docs/games/onion-rendezvous/?lang=en",
             "image": "https://assets.anoni.net/games/onion-rendezvous.png",
             "applicationCategory": "EducationalApplication",
