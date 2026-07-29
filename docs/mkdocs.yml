@@ -55,6 +55,7 @@ nav:
           - advanced/post-quantum.md
           - advanced/dweb-ipfs-onion.md
           - advanced/zk-identity-payments.md
+          - advanced/mistaken-for-anonymity.md
       - !ENV [NAV_REPORTS, "報告"]:
           - reports/index.md
           - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
