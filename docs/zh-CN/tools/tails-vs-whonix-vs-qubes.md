@@ -118,7 +118,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 依 [威胁模型](../basics/threat-model.md) 的角色思考：
 
 - **一般使用者**（没有特别敏感工作）：通常不需要这三套任何一套，[Tor Browser](./what-is-tor.md) + [密码管理器](./password-manager.md) 已经涵盖多数场景。
-- **记者**（保护消息来源）：默认 Tails。详细工作流见 [记者保护消息来源](../scenarios/journalist.md)。長期进行很多采访、累积大量档案，可考虑升级到 Whonix（搭配 [上传机敏资讯流程](../community/upload-sensitive.md)）。
+- **记者**（保护消息来源）：默认 Tails。详细工作流见 [记者保护消息来源](../scenarios/journalist.md)。长期进行很多采访、累积大量档案，可考虑升级到 Whonix（搭配 [上传机敏资讯流程](../community/upload-sensitive.md)）。
 - **社运参与者**：行动现场 Tails（U 盘带着走，被临检时抽出来），长期协作回家用一般笔电 + Signal。详细场景见 [社运行动者的数位准备](../scenarios/activist.md)。
 - **家暴幸存者**（准备离开）：Tails 在加害者看不到的环境（图书馆、咖啡店）使用，避免家庭网络与共用装置上留下任何痕迹。
 - **IT 从业者、安全研究员**：依硬件与时间投入挑 Whonix（低门槛）或 Qubes（高隔离）。需要把 work / personal / banking 严格分开的选 Qubes。

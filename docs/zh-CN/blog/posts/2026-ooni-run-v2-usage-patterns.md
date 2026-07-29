@@ -60,7 +60,7 @@ OONI Run v2 从 2024-04-24 第一条检测链接上线到现在约 26 个月，�
 {"description":"Distribution of lifetime measurement counts per link","data":{"values":[{"bucket":"= 0","links":112,"share":0.0,"order":0},{"bucket":"1–99","links":81,"share":0.0,"order":1},{"bucket":"100–999","links":73,"share":0.2,"order":2},{"bucket":"1k–9999","links":41,"share":1.0,"order":3},{"bucket":"1万–9.9万","links":15,"share":2.4,"order":4},{"bucket":"10万–99万","links":12,"share":28.0,"order":5},{"bucket":"100万+","links":2,"share":68.3,"order":6}]},"mark":{"type":"bar","tooltip":true,"color":"#0089bf"},"encoding":{"x":{"field":"bucket","type":"ordinal","sort":{"field":"order"},"title":"生涯检测量级距","axis":{"labelAngle":-30}},"y":{"field":"links","type":"quantitative","title":"检测链接数"},"tooltip":[{"field":"bucket","title":"级距"},{"field":"links","title":"检测链接数"},{"field":"share","title":"占总检测量 %"}]}}
 ```
 
-长尾的另一头，336 条检测链接里有 112 条（33%）生涯检测量是 0，建好后几乎没被执行过。有 193 条（57%）不到 100 笔，整体中位数只有 27 笔。多数 Run v2 检测链接被建出来、执行幾次就停下。
+长尾的另一头，336 条检测链接里有 112 条（33%）生涯检测量是 0，建好后几乎没被执行过。有 193 条（57%）不到 100 笔，整体中位数只有 27 笔。多数 Run v2 检测链接被建出来、执行几次就停下。
 
 ## 数据集中在哪些使用情境
 

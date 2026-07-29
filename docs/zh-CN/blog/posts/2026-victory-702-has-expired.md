@@ -42,7 +42,7 @@ Section 702 由美国 2008 年的《FISA Amendments Act》（外国情报监控�
 - **下游收集（Downstream，旧称 PRISM）**：政府要求 Google、Microsoft、Apple、Facebook、Yahoo 等科技公司，交出符合条件的使用者通信[^2]。
 - **上游收集（Upstream）**：NSA（国家安全局）直接从互联网骨干的缆线与交换器上截取流量[^2]。
 
-PRISM 与 Upstream 不是传说中的代号。它们是 702 这条法律授权底下，實際运作的两个程序。
+PRISM 与 Upstream 不是传说中的代号。它们是 702 这条法律授权底下，实际运作的两个程序。
 
 ## 跟斯诺登事件的关联
 

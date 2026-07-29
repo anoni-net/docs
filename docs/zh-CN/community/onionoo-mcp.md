@@ -162,7 +162,7 @@ Onionoo 的规范本身很完整，但**没有 OpenAPI 描述**，字段也偏�
 
 存档、重启客户端，工具清单就会出现 `onionoo` 这组工具。
 
-如果要在本機执行（不依赖远端服务），可以改用 stdio transport：
+如果要在本机执行（不依赖远端服务），可以改用 stdio transport：
 
 ```json
 {

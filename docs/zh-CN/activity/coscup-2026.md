@@ -17,7 +17,7 @@ og:
 
 ![COSCUP 2026 匿名网络社群议程轨主视觉](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控，还有被诈骗短信吓过、被广告持續追踪而想拿回一点主导权的一般人。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
+记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控，还有被诈骗短信吓过、被广告持续追踪而想拿回一点主导权的一般人。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
 
 匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实作经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到现实世界的开源隐私工具、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
 
@@ -243,20 +243,20 @@ og:
 
 **8/08 下午 ETHTaipei 合办「匿名支付」场**
 
-- **[Ya-wen Jeng（Vivian Jeng）](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**：任职 Ethereum Foundation 的 Privacy Stewards of Ethereum 团队，专注零知识证明与隐私技术推广，主导 Mopro、Unirep 等开源工具开发。主講「零知识证明与自然人凭证身份验证」。
-- **[ryanycw（Ryan Wang）](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**：DeFi 开发者，ETHTaipei 共同主办，关注隐私、技术与以太坊。主講「The Privacy-preserving Identity Pipeline in KYC」。
-- **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**：任职自托管隐私钱包 Fluidkey，台湾开发者社群 XueDAO 创办人，推广区块链技术。主講「从不可链接性出发：隐匿地址如何解决链上金融隐私」。
-- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数字发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主講「我不洗钱，为何要理解匿名支付？」。
+- **[Ya-wen Jeng（Vivian Jeng）](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**：任职 Ethereum Foundation 的 Privacy Stewards of Ethereum 团队，专注零知识证明与隐私技术推广，主导 Mopro、Unirep 等开源工具开发。主讲「零知识证明与自然人凭证身份验证」。
+- **[ryanycw（Ryan Wang）](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**：DeFi 开发者，ETHTaipei 共同主办，关注隐私、技术与以太坊。主讲「The Privacy-preserving Identity Pipeline in KYC」。
+- **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**：任职自托管隐私钱包 Fluidkey，台湾开发者社群 XueDAO 创办人，推广区块链技术。主讲「从不可链接性出发：隐匿地址如何解决链上金融隐私」。
+- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数字发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主讲「我不洗钱，为何要理解匿名支付？」。
 - **[Liangcc（CC）](https://pretalx.coscup.org/coscup-2026/speaker/UYKEPE/){target="_blank"}**：在以太坊生态开发零知识应用，关注人文、经济与密码学证明。带领「隐私支付实作工作坊：从龙卷风现金到隐私池」。
 
 **8/09 Day 2 议程**
 
-- **[Raghu](https://pretalx.coscup.org/coscup-2026/speaker/X3GX3V/){target="_blank"}**：后端工程师，投入 IP、TCP、封包分析与资安研究。主講「The Workings of the Internet」（英文进行）。
-- **[Pellaeon Lin](https://pretalx.coscup.org/coscup-2026/speaker/BJYRYX/){target="_blank"}**：数字安全研究员与讲师，关注数字人权与自由软件。主講「以 OpenWRT 等开源软件创建家用网络环境」与「浏览器追踪技术、反追踪策略和用户自主」两场。
-- **[Yusef Schultz](https://pretalx.coscup.org/coscup-2026/speaker/FAGUY7/){target="_blank"}**：主講「区块链网络上基于开放标准的实体身份识别方法」，完整简介见 pretalx 讲者页。
-- **[NZ（苏恩立）](https://pretalx.coscup.org/coscup-2026/speaker/WCJNBL/){target="_blank"}**：台师大资工系学生，维运台湾学术网络（TANet）首个 Tor 节点，关注资安与网络治理。主講「在学校种洋葱？台师大 Tor 节点创建实务与 EFF Tor University Challenge 经验谈」。
-- **[Kuan-Ju Chou](https://pretalx.coscup.org/coscup-2026/speaker/UAREZS/){target="_blank"}**：在台湾人权促进会服务，负责数字人权。主講「健保数据库案之后：停止利用权如何实践？」。
-- **[Justyn](https://pretalx.coscup.org/coscup-2026/speaker/WZGMJG/){target="_blank"}**：主講「隐私指南 2026」，完整简介稍后于 pretalx 讲者页更新。
+- **[Raghu](https://pretalx.coscup.org/coscup-2026/speaker/X3GX3V/){target="_blank"}**：后端工程师，投入 IP、TCP、封包分析与资安研究。主讲「The Workings of the Internet」（英文进行）。
+- **[Pellaeon Lin](https://pretalx.coscup.org/coscup-2026/speaker/BJYRYX/){target="_blank"}**：数字安全研究员与讲师，关注数字人权与自由软件。主讲「以 OpenWRT 等开源软件创建家用网络环境」与「浏览器追踪技术、反追踪策略和用户自主」两场。
+- **[Yusef Schultz](https://pretalx.coscup.org/coscup-2026/speaker/FAGUY7/){target="_blank"}**：主讲「区块链网络上基于开放标准的实体身份识别方法」，完整简介见 pretalx 讲者页。
+- **[NZ（苏恩立）](https://pretalx.coscup.org/coscup-2026/speaker/WCJNBL/){target="_blank"}**：台师大资工系学生，维运台湾学术网络（TANet）首个 Tor 节点，关注资安与网络治理。主讲「在学校种洋葱？台师大 Tor 节点创建实务与 EFF Tor University Challenge 经验谈」。
+- **[Kuan-Ju Chou](https://pretalx.coscup.org/coscup-2026/speaker/UAREZS/){target="_blank"}**：在台湾人权促进会服务，负责数字人权。主讲「健保数据库案之后：停止利用权如何实践？」。
+- **[Justyn](https://pretalx.coscup.org/coscup-2026/speaker/WZGMJG/){target="_blank"}**：主讲「隐私指南 2026」，完整简介稍后于 pretalx 讲者页更新。
 
 ## :material-link-variant: 相关链接
 

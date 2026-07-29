@@ -283,7 +283,7 @@ drawio 有两个写档动作：
 
 ### 如何验证有 XML
 
-存完之后，終端機执行：
+存完之后，终端机执行：
 
 ```bash
 grep -c mxfile your-diagram.drawio.svg
