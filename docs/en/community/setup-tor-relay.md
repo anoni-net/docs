@@ -1,18 +1,19 @@
 ---
-title: How to setup a Tor Relay
+title: How to set up a Tor relay
+description: Install and run a Tor middle relay on Debian or Ubuntu, from torrc configuration and nyx monitoring to running multiple instances. Includes an FAQ on legal risk, home networks, and bandwidth requirements, written from a Taiwan-based community's operating experience.
 icon: simple/torproject
 ---
 
-# :simple-torproject: How to Setup a Tor Relay
+# :simple-torproject: How to set up a Tor relay
 
-How to install a Tor Relay, Bridge, and Exit Node on a network in Taiwan.
+How to install and run a Tor middle relay, written from the operating experience of a Taiwan-based volunteer community. The installation itself is not region-specific, so the steps apply anywhere. Where local law or ISP conditions matter, we say so and point you to sources for your own jurisdiction.
 
 ## What is Tor?
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_diagram.original.webp">
-        <img src="../assets/images/tor_diagram.original.webp"
+       href="../../assets/images/tor_diagram.original.webp">
+        <img src="../../assets/images/tor_diagram.original.webp"
             alt="How Tor Relay Works"
             title="How Tor Relay Works"
         >
@@ -34,8 +35,8 @@ How to install a Tor Relay, Bridge, and Exit Node on a network in Taiwan.
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_relays.svg">
-        <img src="../assets/images/tor_relays.svg"
+       href="../../assets/images/tor_relays.svg">
+        <img src="../../assets/images/tor_relays.svg"
             alt="Tor Relays"
             title="Tor Relays"
         >
@@ -59,7 +60,7 @@ Features and Uses:
 - **Censorship Circumvention:** In certain countries and regions, governments or ISPs may block access to the Tor network. In such cases, users can use Bridges to bypass these blockages. Bridges serve as hidden entry points, assisting users in establishing initial connections, after which their traffic is forwarded to regular Tor relays.
 - **Distribution Method:** Since Bridges' IP addresses are not public, users need specific methods to obtain these addresses. Users can acquire Bridge addresses through the Tor website, by sending an email, or using other channels such as Bridge distribution tools.
 
-Pluggable Transports：
+Pluggable transports:
 
 - To further evade censorship, Bridges often use Pluggable Transports, which are protocols that alter the characteristics of Tor traffic to make it appear like regular HTTPS traffic or other types. These technologies include Obfs4, meek, [Snowflake](https://snowflake.torproject.org/){target="_blank"}, and others, which can obfuscate Tor traffic, making detection and blocking more challenging.
 
@@ -69,7 +70,7 @@ Setting up a Middle Relay requires some technical knowledge and basic installati
 
 !!! info "Other Operating Systems"
 
-    For other operating systems or more detailed installation instructions, refer to the official documentation: [Tor Project | Middle/Guard relay](https://community.torproject.org/relay/setup/guard/){target="_blank"}。
+    For other operating systems or more detailed installation instructions, refer to the official documentation: [Tor Project | Middle/Guard relay](https://community.torproject.org/relay/setup/guard/){target="_blank"}.
 
 !!! warning "Considerations Before Setting Up!"
 
@@ -101,11 +102,11 @@ Edit configuration file: `/etc/tor/torrc`
 Nickname    myNiceRelay # Adjust "myNiceRelay" to the name you want to display publicly.
 ContactInfo your@e-mail # Contact information, will be displayed publicly.
                         # If you don't want it to be public, you can set it to none.
-ORPort      9001        # The default Port is 9001.
-                        # Using ports like 443 or 80, which appear to be commonly used
-                        # web ports, can further assist users in restrictive countries.
-                        # Also, remember to adjust firewall settings or open the external
-                        # ports accordingly.
+ORPort      9001        # The default port is 9001.
+                        # Port 443 is often one of the few ports left open on
+                        # restrictive networks, so using it can help users there
+                        # reach your relay. Remember to open the matching port on
+                        # your firewall and router.
 ExitRelay   0           # Do not become an Exit Relay.
 SocksPort   0
 Log notice file /var/log/tor/notices.log # Enable log recording
@@ -133,13 +134,17 @@ apt install nyx
 
 ## Create Multiple Tor Configurations with `tor-instance-create`
 
-`tor-instance-create` is a tool used to create multiple independent Tor instances on the same server. This is particularly useful in scenarios that require running multiple Tor instances to increase anonymity or distribute traffic. `tor-instance-create` is part of Tor and is typically installed along with the Tor package.
+`tor-instance-create` creates multiple independent Tor instances on the same server, which keeps the configuration and logs of each relay separate and easier to manage. It ships with the `tor` package on Debian and Ubuntu.
+
+Running several instances does not make any of them more anonymous. The benefit is operational: separate config, separate data directory, separate log.
 
 ### Create a New Tor Instance
 
+The command takes the instance name; the matching systemd unit is then `tor@<instance-name>`.
+
 ```bash
-tor-instance-create tor@{instance-name}
-tor-instance-create tor@mytor2
+tor-instance-create {instance-name}
+tor-instance-create mytor2
 ```
 
 This will create a new Tor instance named `mytor2`, with its configuration directory created under `/var/lib/tor-instances/mytor2`.
@@ -177,7 +182,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "Is it feasible to set up a relay using a home network?"
 
-    Setting up a Tor Relay over a home network (e.g., using broadband or cable internet) may require configuring the router provided by your ISP, which can have some technical challenges. If you can manually set and adjust router configurations, ensure firewalls are enabled and incoming ports are specified, as the default is usually to block all incoming connections.
+    Setting up a Tor relay over a home network (e.g., using broadband or cable internet) may require configuring the router provided by your ISP, which can have some technical challenges. Home routers block all inbound connections by default, so you need to allow inbound traffic on your ORPort in the firewall and forward that port on the router.
 
 ??? question "Why should I run a Tor Relay?"
 
@@ -193,15 +198,17 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "Is running a Tor Relay legal?"
 
-    In Taiwan, the internet is relatively free, and it's currently allowed to use Tor Relays. However, legal situations can change, so it's good to stay informed about internet freedom issues and legislation. Running an Exit Relay might involve more legal risks; it's advisable to understand the relevant regulations first.
+    We can only speak to Taiwan, where the internet is relatively free and running a Tor relay is currently legal. Legal situations change, so it is worth following internet freedom issues and legislation where you are. Running an exit relay carries more legal risk, so read up on your local regulations first.
+
+    For jurisdictions outside Taiwan, the EFF's [Legal FAQ for Tor Relay Operators](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"} is the standard starting point.
 
 ??? question "What are the requirements for running a Tor Relay?"
 
-    Ensure your network has stable upload and download speeds, with at least 100 KB/s upload bandwidth and a static IP address. Also, check that your ISP permits such traffic and your network equipment (like a firewall and router) can correctly configure the required port forwarding.
+    Make sure your network has stable upload and download speeds. The Tor Project recommends at least 10 Mbit/s (about 1.25 MB/s) in each direction for a relay, see [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}. If you have more than 1 Mbit/s but less than 10 Mbit/s, the Tor Project suggests running an obfs4 bridge instead of a relay. You also need a static IP address. Check that your ISP permits this kind of traffic and that your network equipment (firewall and router) can be configured for the required port forwarding.
 
 ??? question "Will a Tor Relay affect my internet speed?"
 
-    A Tor Relay uses the maximum bandwidth you configure, so it won't consume all your network resources. However, you might notice slight speed reductions under heavy load. You can adjust the bandwidth limits in the settings as needed.
+    A Tor relay only uses up to the bandwidth limit you configure, so it will not consume all your available capacity. You might still notice slight speed reductions under heavy load. You can adjust the bandwidth limits in the settings as needed.
 
 ??? question "How do I protect my privacy while running a Tor Relay?"
 
@@ -214,3 +221,13 @@ nyx -s /run/tor-instances/{instance-name}/control
 ??? question "How can I become a Guard Relay?"
 
     Guard Relays are automatically selected by the Tor network; users cannot manually configure this. If your node runs stably and has sufficient bandwidth, it may be chosen as a Guard Relay.
+
+## :fontawesome-solid-diagram-project: Where to go from here
+
+<div class="grid cards" markdown>
+
+- [:material-tunnel-outline: How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md) — for censored networks where a plain relay will not reach users
+- [:material-radar: Tor relay watcher](../regional/tor-relay-watcher.md) — what relay operation looks like across the region
+- [:material-account-group-outline: Join the community](./index.md) — our Matrix space, and how to reach us if you get stuck
+
+</div>

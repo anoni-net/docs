@@ -1,8 +1,13 @@
 ---
 title: Project Research Preparation
+description: Set up the tools you need to contribute to anoni.net's repositories: Git and GitHub, Python with uv, and an editor, then fork anoni-net/docs and open your first pull request.
 icon: octicons/mark-github-24
 ---
 # :octicons-mark-github-24: Project Research Preparation
+
+anoni.net's documentation site, Pulse, and the ASN Coverage analysis tools all live in [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} on GitHub. The project uses Git for version control and accepts contributions through pull requests, and the Python tooling needs version 3.12 or newer managed with `uv`.
+
+This page covers the tools you need before you can work on any of that. If you already use Git and Python day to day, skip to [Fork a Project](#Fork-a-Project) and go straight to [How to contribute](./how-to-contribute.md).
 
 ## What is a Version Control System
 
@@ -30,8 +35,8 @@ Git is a distributed version control system commonly used in software developmen
 
 !!! info "Recommended Reading"
 
-    - [What is Git? Why Learn It? - Learn Git for Yourself | Gao Jianlong](https://gitbook.tw/chapters/introduction/what-is-git){target="_blank"}
-    - [Git Basics - Git](https://git-scm.com/book/zh-tw/v2/%E9%96%8B%E5%A7%8B-Git-%E5%9F%BA%E7%A4%8E%E8%A6%81%E9%BB%9E){target="_blank"}
+    - [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics){target="_blank"} — from the official Pro Git book
+    - [What is Git? Why Learn It?](https://gitbook.tw/chapters/introduction/what-is-git){target="_blank"} by Eddie Kao (in Traditional Chinese)
 
 ### GitHub
 
@@ -98,11 +103,11 @@ Python's design philosophy emphasizes code readability and simplicity, allowing 
 
 !!! tip "How to Install uv"
 
-    - For installation instructions, please refer to the [official documentation](https://docs.astral.sh/uv/getting-started/installation/)){target="_blank"}.
+    - For installation instructions, please refer to the [official documentation](https://docs.astral.sh/uv/getting-started/installation/){target="_blank"}.
 
 ### VS Code
 
-[Visual Studio Code](https://code.visualstudio.com/){target="_blank"} (commonly abbreviated as VS Code) is a lightweight code editor (IDE) developed by Microsoft. Its standout feature is cross-platform support, allowing it to run on Windows, macOS, and Linux systems. VS Code features a modern user interface and a wealth of functionalities, making it a popular tool among developers. The editor has integrated support for Git, simplifying version control and team collaboration. Moreover, VS Code's extension marketplace is extensive, allowing developers to install various extensions to enhance the editor's capabilities, whether it's adding support for different languages or integrating different development tools or frameworks.
+[Visual Studio Code](https://code.visualstudio.com/){target="_blank"} (commonly abbreviated as VS Code) is a lightweight code editor developed by Microsoft. Its standout feature is cross-platform support, allowing it to run on Windows, macOS, and Linux systems. VS Code features a modern user interface and a wealth of functionalities, making it a popular tool among developers. The editor has integrated support for Git, simplifying version control and team collaboration. Moreover, VS Code's extension marketplace is extensive, allowing developers to install various extensions to enhance the editor's capabilities, whether it's adding support for different languages or integrating different development tools or frameworks.
 
 !!! tip "How to Install VS Code"
 
@@ -112,7 +117,7 @@ Python's design philosophy emphasizes code readability and simplicity, allowing 
 
 A fork is the process of copying someone else's repository to your account on a distributed version control platform (such as GitHub), mainly used to make changes and experiment individually without affecting the original project. Forking is a common practice in open-source collaboration, allowing developers to explore new ideas or solve problems in a separate repository.
 
-To fork a repository, log into your GitHub account and navigate to the repository you want to fork. Click the "Fork" button in the upper-right corner of the repository page, and GitHub will copy the repository to your account.
+To fork a repository, log into your GitHub account and navigate to the repository you want to fork, which for this project is [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}. Click the "Fork" button in the upper-right corner of the repository page, and GitHub will copy the repository to your account.
 
 After forking, you typically want to create a new branch in this forked repository to make changes without affecting the main branch. First, `git clone` the repository to your local machine. Then, in the command line, navigate to the project folder and use the following command to create and switch to a new branch:
 
@@ -133,5 +138,15 @@ By forking, creating branches, committing, and submitting PRs, you can effective
 
 !!! note "About Further Learning and Application"
 
-    - It's recommended to spend some time learning [how to use Git](https://gitbook.tw/){target="_blank"}, as it is quite beneficial for managing code and future document versioning!
-    - Python is also a user-friendly programming language worth learning and applying well. Recommended reading: "[Learn PYTHON for Yourself](https://pythonbook.cc/){target="_blank}".
+    - It is worth spending some time learning [Git](https://git-scm.com/book/en/v2){target="_blank"}, which pays off for both code and documentation work. [Learn Git for Yourself](https://gitbook.tw/){target="_blank"} covers the same ground in Traditional Chinese.
+    - Python is a good language to have. [Learn Python for Yourself](https://pythonbook.cc/){target="_blank"} is a solid introduction (in Traditional Chinese).
+
+## :fontawesome-solid-diagram-project: Where to go from here
+
+<div class="grid cards" markdown>
+
+- [:material-hand-heart-outline: How to contribute](./how-to-contribute.md) — pick a topic and open your first pull request
+- [:material-stairs: Self-skills evaluation](./skill-level.md) — work out where to start based on what you already know
+- [:material-account-group-outline: Join the community](./index.md) — our Matrix space, and how to reach us if you get stuck
+
+</div>

@@ -1,5 +1,6 @@
 ---
 title: Self-Skills Evaluation Form
+description: A self-assessment checklist across Tor, Tails, and OONI, split into three levels — awareness, hands-on use, and contribution. Work out where you currently stand with each tool and what to do next, with no need to be at the same level in all three.
 icon: octicons/paste-24
 ---
 
@@ -28,8 +29,8 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     ??? tip "Not there yet? Start here."
         1. Read "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" (about 5–10 minutes)
-        2. Read "[What is an Anonymous Network?](../basics/anonymity-vs-privacy.md){target="_blank"}"
-        3. Read "[Why Internet Freedom Matters?](../basics/internet-freedom.md){target="_blank"}"
+        2. Read "[Anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md)"
+        3. Read "[Why networked freedom matters](../basics/internet-freedom.md)"
         4. Come back and check the items above to confirm your understanding.
 
     !!! abstract "Reference"
@@ -50,7 +51,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Why internet freedom matters, and what anonymous networks are."
 
-            Start with "[Why Internet Freedom Matters?](../basics/internet-freedom.md){target="_blank"}".
+            Start with "[Why networked freedom matters](../basics/internet-freedom.md)".
 
             :octicons-question-24: **More details**
 
@@ -107,7 +108,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "How to connect with Tor Browser."
 
-            The [Tor Browser](https://www.torproject.org/download/){target="_blank"} is built on [Firefox ESR](https://www.mozilla.org/en-US/firefox/enterprise/){target="_blank"} and designed for the onion network. [Brave](https://brave.com/){target="_blank"} and [Mullvad Browser](https://mullvad.net/en/browser){target="_blank"} also support `.onion` sites.
+            The [Tor Browser](https://www.torproject.org/download/){target="_blank"} is built on [Firefox ESR](https://www.mozilla.org/en-US/firefox/enterprise/){target="_blank"} and routes all browsing through the Tor network, including `.onion` sites. [Brave](https://brave.com/){target="_blank"} can also reach `.onion` sites through its private window with Tor. [Mullvad Browser](https://mullvad.net/en/browser){target="_blank"} shares Tor Browser's anti-fingerprinting work but has no Tor network layer, so it cannot reach `.onion` sites on its own.
 
             Tor Browser is similar to a regular browser but focuses on privacy and blocks ad tracking. Traffic to regular websites passes through three random Tor relays. Traffic to `.onion` sites enters the onion network after the third relay.
 
@@ -176,9 +177,9 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
-        2. Read "[How to Set Up a Tor Relay](./setup-tor-relay.md){target="_blank"}" for the full installation and configuration process.
-        3. See "[Tor Relays Monitor](../regional/tor-relay-watcher.md){target="_blank"}" to learn how to observe relay status.
-        4. See "[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}" to learn how to run a Snowflake bridge via browser extension or standalone program.
+        2. Read "[How to set up a Tor relay](./setup-tor-relay.md)" for the full installation and configuration process.
+        3. See "[Tor relay watcher](../regional/tor-relay-watcher.md)" to learn how to observe relay status.
+        4. See "[Tor Snowflake](../tools/tor-snowflake.md)" to learn how to run a Snowflake bridge via browser extension or standalone program.
 
     !!! abstract "Reference"
 
@@ -194,7 +195,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
             1. Install the [Snowflake extension](https://snowflake.torproject.org/){target="_blank"} in Chrome or Firefox.
             2. It runs automatically after installation. The extension icon shows the number of connections currently being relayed.
-            3. See the "[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}" page for detailed instructions.
+            3. See the "[Tor Snowflake](../tools/tor-snowflake.md)" page for detailed instructions.
 
         ??? question "Run the Tor service and connect via SOCKS v5."
 
@@ -211,18 +212,19 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
             1. Go to [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} to search relays by country, nickname, or fingerprint.
             2. For Taiwan (TW), select Country: TW in Advanced options to see a list of active relays.
-            3. The "[Tor Relays Monitor](../regional/tor-relay-watcher.md){target="_blank"}" page also provides visualized monitoring data.
+            3. The "[Tor relay watcher](../regional/tor-relay-watcher.md)" page also provides visualized monitoring data.
 
         ??? question "Set up and maintain a Tor Relay."
 
             Setting up a Tor Relay requires basic Linux skills and a server with a static IP and stable bandwidth.
 
-            See "[How to Set Up a Tor Relay](./setup-tor-relay.md){target="_blank"}" for the full guide, covering:
+            See "[How to set up a Tor relay](./setup-tor-relay.md)" for the full guide, covering:
 
             - Middle Relay installation and configuration (`/etc/tor/torrc`)
-            - Bridge relay setup
-            - WebTunnel relay setup
-            - Post-installation best practices
+            - Running multiple instances with `tor-instance-create`
+            - Monitoring with nyx, and post-installation best practices
+
+            For a bridge that survives heavy censorship, see "[How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md)".
 
         ??? question "Host a .onion website."
 
@@ -256,7 +258,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Why internet freedom matters, and what anonymous networks are."
 
-            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)" and "[Why Internet Freedom Matters?](../basics/internet-freedom.md){target="_blank"}".
+            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)" and "[Why networked freedom matters](../basics/internet-freedom.md)".
 
         ??? question "What is the current state of internet freedom in your region?"
 
@@ -294,7 +296,8 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Which Mac models cannot run Tails?"
 
-            - **Unsupported models**: Macs with an Apple T2 chip or Apple Silicon (M-series chips) may not boot from non-Apple-certified USB devices due to secure boot restrictions.
+            - **Not supported at all**: Apple Silicon Macs (M-series chips). Tails only runs on x86-64, so this is an architecture limitation and no boot setting will change it.
+            - **May need configuration**: Intel Macs with an Apple T2 chip, where Startup Security Utility blocks booting from external media until you relax the secure boot setting. See the [Tails system requirements](https://tails.net/doc/about/requirements/){target="_blank"}.
 
         ??? question "Tails use cases and limitations."
 
@@ -387,7 +390,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
         ??? question "Send an encrypted email with Thunderbird."
 
             - After creating a GnuPG key pair and setting up Thunderbird, you can try sending an encrypted email to `whisper@anoni.net`.
-            - To get the public key for `whisper@anoni.net`, see the "[Contact](../contact.md){target="_blank"}" page.
+            - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](../contact.md)" page.
             - Compose the email in Thunderbird, choose to encrypt it, and send. The recipient will decrypt it using their private key.
 
 ## OONI Skills
@@ -402,15 +405,15 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     - [ ] I can describe differences in network surveillance and censorship across regions.
 
     ??? tip "Not there yet? Start here."
-        1. Read "[What is OONI?](https://ooni.org/){target="_blank"}{target="_blank"}" (about 5–10 minutes)
-        2. Read "[Why Internet Freedom Matters?](../basics/internet-freedom.md){target="_blank"}"
+        1. Read "[What is OONI?](https://ooni.org/){target="_blank"}" (about 5–10 minutes)
+        2. Read "[Why networked freedom matters](../basics/internet-freedom.md)"
         3. Come back and check the items above to confirm your understanding.
 
     !!! abstract "Reference"
 
         ??? question "What is OONI?"
 
-            Start with "[What is OONI?](https://ooni.org/){target="_blank"}{target="_blank"}".
+            Start with "[What is OONI?](https://ooni.org/){target="_blank"}".
 
         ??? question "Network surveillance vs. network censorship."
 
@@ -420,7 +423,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
         ??? question "How OONI testing works."
 
             - OONI provides the free, open-source tool OONI Probe. Users can run tests on their own network to detect censorship.
-            - OONI Probe periodically sends requests to multiple websites and services, checking whether the sites on [the list](../regional/ooni-checklist.md){target="_blank"} are accessible.
+            - OONI Probe periodically sends requests to multiple websites and services, checking whether the sites on [OONI Website Testing List](../regional/ooni-checklist.md) are accessible.
             - Test results are uploaded anonymously to OONI's servers and published on [OONI Explorer](https://explorer.ooni.org/){target="_blank"} for researchers and the public.
 
         ??? question "Differences in surveillance and censorship across regions."
@@ -429,7 +432,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             - **China**: Enforces strict internet blocks and censorship under the "Great Firewall," restricting access to many foreign websites and services.
             - **North Korea**: Imposes extreme restrictions on internet access, allowing only a small selection of content.
             - **Russia and Iran**: Carry out varying degrees of network surveillance and website blocking.
-            - See "[Why Internet Freedom Matters?](../basics/internet-freedom.md){target="_blank"}" for more context.
+            - See "[Why networked freedom matters](../basics/internet-freedom.md)" for more context.
 
 === ":material-checkbox-marked-circle-outline: Practice"
 
@@ -472,7 +475,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
             - An ASN (Autonomous System Number) is the unique identifier for an Autonomous System (AS).
             - An AS is a group of IP address blocks managed by one or more ISPs or large organizations. Each AS uses its ASN to exchange routing information with other ASes on the internet.
-            - See "[ASNs Coverage Analysis](../regional/ooni-asn-coverage.md){target="_blank"}" for an introduction.
+            - See "[ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md)" for an introduction.
 
         ??? question "Review recent measurement data on OONI Explorer."
 
@@ -514,8 +517,8 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
-        2. Read "[OONI Web Test Lists](../regional/ooni-checklist.md){target="_blank"}" to understand how lists are curated and maintained.
-        3. Read "[ASNs Coverage Analysis](../regional/ooni-asn-coverage.md){target="_blank"}" to learn how raw data is analyzed.
+        2. Read "[OONI Website Testing List](../regional/ooni-checklist.md)" to understand how lists are curated and maintained.
+        3. Read "[ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md)" to learn how raw data is analyzed.
         4. Browse the [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} repository on GitHub to explore the list format for different countries.
 
     !!! abstract "Reference"
@@ -533,12 +536,13 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             When OONI Probe runs website tests, it checks URLs from the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"}.
 
             The lists are divided into:
+
             - **Global list**: Covers widely visited websites, mostly in English.
             - **Country lists**: Region-specific lists with local-language content. In countries with internet censorship, these also include blocked websites.
 
             URLs are categorized into four groups: political, social, conflict and security, and internet tools.
 
-            See "[OONI Web Test Lists](../regional/ooni-checklist.md){target="_blank"}" for more details.
+            See "[OONI Website Testing List](../regional/ooni-checklist.md)" for more details.
 
         ??? question "How to contribute to test list maintenance."
 
@@ -547,7 +551,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             1. Go to [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} and find the country CSV file you want to work on (e.g., `lists/tw.csv`).
             2. Check each URL in the list. Flag URLs that need updating (broken links, changed domains) or should be removed (site no longer operating).
             3. Submit a Pull Request with your changes.
-            4. See "[OONI Web Test Lists](../regional/ooni-checklist.md){target="_blank"}" for more details on the process.
+            4. See "[OONI Website Testing List](../regional/ooni-checklist.md)" for more details on the process.
 
         ??? question "Process and analyze raw OONI measurement data."
 
@@ -555,5 +559,15 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
             1. Data is stored in the S3 bucket `ooni-data-eu-fra` (eu-central-1 region).
             2. Format: `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`
-            3. The [ASN coverage analysis tool](../regional/ooni-asn-coverage.md){target="_blank"} in this project provides a download and analysis example — see `asn_coverage/ooni.py`.
+            3. The [ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md) in this project provides a download and analysis example — see `asn_coverage/ooni.py`.
             4. Raw data can be used to analyze ASN measurement coverage, track blocking status of specific websites over time, and conduct cross-region comparisons.
+
+## After the assessment
+
+This form is for your own reference. Nobody collects the results, so just pick your next step from where you landed:
+
+- **Awareness level:** subscribe to the [newsletter](../contact.md) to follow what the community is doing, or work through [Concepts](../basics/index.md) to fill in the gaps.
+- **Hands-on level:** follow the "Not there yet? Start here." steps under each tool and actually install and use it. Bring problems to Matrix.
+- **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](./index.md) for how to join.
+
+You do not need to be at the same level in all three tools. Being at contribution level for OONI and awareness level for Tails is a perfectly normal place to be.

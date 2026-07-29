@@ -79,9 +79,13 @@ The site has three editions (zh-TW, zh-CN, en). The Chinese editions are the sou
 
 The Tor Relay on Campus initiative documents how to deploy a Tor relay at a university in the region. The first deployment is at National Taiwan Normal University; we're documenting application processes, technical setup, and outreach. Help: contribute campus-deployment write-ups, support relay operations, donate bandwidth or hosting.
 
+Start with [How to set up a Tor relay](./setup-tor-relay.md), or [How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md) if the target users are on a censored network.
+
 ### OONI Probe and ASN coverage
 
 Run [OONI Probe](https://ooni.org/install/){target="_blank"} on devices in the region — this is the most direct way to expand observation. Help: run probes, propose entries for regional websites test lists, contribute to the ASN coverage analysis tooling.
+
+See [ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md) for where the measurement blind spots are, and [OONI Website Testing List](../regional/ooni-checklist.md) for list maintenance, which needs no programming.
 
 ### Workshops and events
 
@@ -98,4 +102,6 @@ We do not advise on, or assist with, illegal activity (see the [governance code 
 - [About anoni.net](../about/index.md) — governance, partnerships, licensing, how to verify what we do
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame
 - [Regional Observatory](../regional/index.md) — what we publish empirically
+- [Self-skills evaluation](./skill-level.md) — work out where to start across Tor, Tails, and OONI
+- [Project research preparation](./setup-repo.md) — the tooling you need before your first pull request
 - [Updates / blog](../blog/index.md) — recent work
