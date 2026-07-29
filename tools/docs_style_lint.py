@@ -57,7 +57,31 @@ AI_OPENER_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS) + r")")
 
 # 口語「講」，扣掉常見正當詞
 JIANG_RE = re.compile(r"講")
-JIANG_ALLOW = re.compile(r"(演講|講座|講師|講者|講習|講義|講堂|宣講|主講)")
+JIANG_ALLOW = re.compile(r"(演講|講座|講師|講者|講習|講義|講堂|講稿|講話|講求|講究|講評|宣講|主講|開講|聽講)")
+
+# 其餘口語詞（貢獻者百科「口語字改書面語」）。比對方式與 JIANG 相同：
+# 取命中處前後各 2 字的視窗去對例外清單，避開正當複合詞。繁簡兩種寫法都收。
+# 全部列為 warn，因為替換詞要看語境（跑 → 執行／架設／運作／營運），不宜機器直接改。
+COLLOQUIAL_RULES = [
+    ("colloquial-run", re.compile(r"跑"),
+     re.compile(r"(跑步|奔跑|跑道|賽跑|长跑|長跑|赛跑|跑很慢)"),
+     "口語「跑」請依語境改書面語（執行、架設、運作、營運）"),
+    ("colloquial-get", re.compile(r"拿到"), None,
+     "「拿到」改書面語（取得）"),
+    ("colloquial-must", re.compile(r"(?<![值取懂覺記使獲曉捨值觉记获])得(先|靠)"), None,
+     "口語「得先／得靠」改書面語（需先、需仰賴）"),
+    ("colloquial-hands-on", re.compile(r"動手|动手"), None,
+     "「動手」改書面語（實際操作、著手、實作）"),
+    ("filler-transition", re.compile(r"(換句話說|换句话说|其實(?![施質力現體效作驗例況用行政])|其实(?![施质力现体效作验例况用行政]))"), None,
+     "填充轉折請刪除或改寫（貢獻者百科「去 AI 味」一節）"),
+    # 「怎樣」的替換要看文法：當副詞（怎樣做）用「如何」，當修飾語（怎樣的 X）
+    # 用「什麼樣的」。「長怎樣」在臺灣是固定說法，改「長如何」不成話，要整句改寫。
+    ("colloquial-zenyang", re.compile(r"怎樣|怎样"), None,
+     "「怎樣」改書面語：副詞用「如何」，修飾語（怎樣的 X）用「什麼樣的」，「長怎樣」整句改寫"),
+    ("colloquial-word", re.compile(
+        r"(踩到|找上門|找上门|省事|省力|照舊|照旧|差不多|沒空|没空|搞|弄壞|弄坏|弄錯|弄错|掛了|挂了)"),
+     None, "口語詞請改書面語"),
+]
 
 # 部落格 front matter 必填欄位（title 來自 H1，不在此列）
 BLOG_REQUIRED = ["date", "slug", "categories", "authors"]
@@ -236,6 +260,13 @@ def lint_file(path: Path):
             if not JIANG_ALLOW.search(around):
                 findings.append((i, WARN, "colloquial-jiang",
                                  "口語「講」建議改書面語（提到、說明）", raw[max(0, m.start() - 6): m.start() + 6].strip()))
+        for code, rx, allow, msg in COLLOQUIAL_RULES:
+            for m in rx.finditer(clean):
+                around = clean[max(0, m.start() - 2): m.end() + 2]
+                if allow is not None and allow.search(around):
+                    continue
+                findings.append((i, WARN, code, msg,
+                                 raw[max(0, m.start() - 6): m.start() + 6].strip()))
     return findings
 
 

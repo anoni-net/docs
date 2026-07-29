@@ -96,7 +96,7 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 - **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 則是社群長期維運的在地資料。
 - **想參與實作**：往 [community/](../community/index.md) 走。可以先看 [2026 年度路線圖](../community/roadmap-2026.md)、[匿名支付研究專題](../community/payments-research.md)、[如何參與與認領主題](../community/how-to-contribute.md)，再依興趣選一個方向加入 Matrix 討論。
 
-跑 OONI 測試、架設 Tor 中繼、協助翻譯、寫一篇文章、把這頁分享給可能受用的人，每一個都算數。
+執行 OONI 測試、架設 Tor 中繼、協助翻譯、寫一篇文章、把這頁分享給可能受用的人，每一個都算數。
 
 [^1]: [4所大學團隊每日測試4億個網域研究「防火長城」，發現有31萬網域被擋下、部分的封鎖只是「意外」](https://www.thenewslens.com/article/153597){target="_blank"} - TNL The News Lens 關鍵評論網
 [^2]: [光明網 (北韓)：北韓國家控管的內部網路](https://zh.wikipedia.org/zh-tw/%E5%85%89%E6%98%8E%E7%BD%91_%28%E6%9C%9D%E9%B2%9C%29){target="_blank"} - 維基百科，自由的百科全書

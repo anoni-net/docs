@@ -29,7 +29,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
 - 字段短码（如 `r`、`f`、`n`、`a`）为了传输效率而设计，对语言模型不够语义化，模型容易误解 `r` 是 `relay` 还是 `running`。
 - 一次查询常要组合多个端点（details、uptime、bandwidth），AI 代理重复拼凑容易出错。
 
-`onionoo-fastapi` 把这些事情做掉。短码还原成 `nickname`、`fingerprint`、`addresses`、`running` 等语义名称，补上完整 OpenAPI 规范，并把几个常见任务包成单一 MCP 工具调用。想看某中继节点的健康状况时，调用一次就能拿到合并好的 details、uptime、bandwidth 快照，不必自己组三个端点。
+`onionoo-fastapi` 把这些事情做掉。短码还原成 `nickname`、`fingerprint`、`addresses`、`running` 等语义名称，补上完整 OpenAPI 规范，并把几个常见任务包成单一 MCP 工具调用。想看某中继节点的健康状况时，调用一次就能取得合并好的 details、uptime、bandwidth 快照，不必自己组三个端点。
 
 服务本身**不储存**任何 Onionoo 数据，只负责转发与重新包装回应。上游数据来自 <https://onionoo.torproject.org>。
 
@@ -52,7 +52,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
     <capture>Claude Desktop 接上 onionoo MCP 后，请模型「整理台湾 Tor 中继节点现况」回出的汇整报告。底层数值来自上游 Onionoo，这是某一时点的 snapshot。</capture>
 </figure>
 
-这类查询以往要先翻 Onionoo 文件、写脚本、合并 JSON、再整理表格，现在一句话就能拿到初步结果。盘点完再决定下一步要往哪钻，研究启动的成本差很多。
+这类查询以往要先翻 Onionoo 文件、写脚本、合并 JSON、再整理表格，现在一句话就能取得初步结果。盘点完再决定下一步要往哪钻，研究启动的成本差很多。
 
 ## 如何接上
 
@@ -103,7 +103,7 @@ anoni.net 目前在 Tor 观测这条线上有三个入口，可以依任务挑�
 
 - 回报问题或提建议：<https://github.com/anoni-net/onionoo-fastapi/issues>
 - 想讨论该补哪些任务导向工具、或请社区示范某类查询，欢迎到 [Matrix 公开 room](../../community/tools.md) 提出来。
-- 想自己跑一份（例如在 .onion 服务、内网或实验环境），完整文件的「自架（Docker）」段落有 Docker 启动指令与环境变数列表。
+- 想自行架设一份（例如在 .onion 服务、内网或实验环境），完整文件的「自架（Docker）」段落有 Docker 启动指令与环境变数列表。
 
 服务以 MIT 授权释出，源代码在 <https://github.com/anoni-net/onionoo-fastapi>，任何 issue、PR 都欢迎。
 

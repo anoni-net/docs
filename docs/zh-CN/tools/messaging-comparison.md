@@ -8,17 +8,17 @@ icon: material/message-text-outline
 
 「端对端加密」这几个字在 微信、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意义差很多。差异涵盖多个面向：密钥由谁持有、注册时要不要绑手机号码或邮箱、Metadata 留在哪个 server、服务器掉线后还能不能通讯、群组与多装置的设计选择。
 
-这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。动手前可以先回头看 [威胁模型如何建立](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密如何运作](../advanced/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
+这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。操作前可以先回头看 [威胁模型如何建立](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密如何运作](../advanced/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
 
 ## 为什么要分开比较这些工具
 
 「端对端加密」听起来像一个技术合格章，但实际上要追问三件事才有意义：
 
-- **「端」是什么**：是装置、是账号、还是一段随机 ID？决定了攻击者拿到账号还是装置时的风险。
+- **「端」是什么**：是装置、是账号、还是一段随机 ID？决定了攻击者取得账号还是装置时的风险。
 - **默认启用吗**：很多工具的 E2EE 是可选功能，要使用者主动切换才生效。
 - **Metadata 留在哪**：消息内容加密了，「谁跟谁、什么时候、多频繁」这层往往没加密。
 
-微信、Telegram、WhatsApp 三家在前述三个问题上都有明显短处，所以不在主名单。在中国大陆，微信仍然是社交基础建设切不掉，后面的「在中国大陆的补充」会讲如何分流。
+微信、Telegram、WhatsApp 三家在前述三个问题上都有明显短处，所以不在主名单。在中国大陆，微信仍然是社交基础建设切不掉，后面的「在中国大陆的补充」会提到如何分流。
 
 主名单的 5 个工具是社群实际在用、且设计目标就是 E2EE 与 Metadata 最小化的选项。下面先给判读框架，再开始一个一个介绍。
 
@@ -69,7 +69,7 @@ icon: material/message-text-outline
 
 [SimpleX Chat](https://simplex.chat/){target="_blank"} 在身份模型上做了最大胆的选择：完全没有 user identifier。每段对话走一组「queue」，由随机 ID 识别，server 看到的只是「这个 queue 收到一个消息要转给谁」，不知道你的账号是谁、你的联络人有谁、你跟谁在通讯。
 
-加好友的方式是交换一个 invitation link 或 QR code，双方在第一次连接时建立 queue，之后就用这组 queue 通讯。换句话说，SimpleX 没有「账号」这个数据项，要找你的对手连个搜索目标都没有。
+加好友的方式是交换一个 invitation link 或 QR code，双方在第一次连接时建立 queue，之后就用这组 queue 通讯。SimpleX 没有「账号」这个数据项，要找你的对手连个搜索目标都没有。
 
 **适合谁**：
 
@@ -89,7 +89,7 @@ icon: material/message-text-outline
 
 [Session](https://getsession.org/){target="_blank"} 是从 Signal fork 出来的版本，把手机号码换成随机 ID，消息流量走类 Tor 的网络（Lokinet）降低 metadata。跨装置同步靠一段 13 字 recovery password（mnemonic），这也是你的「账号备份」。
 
-身份模型上，每个 Session ID 是 66 个十六进位字符（装置产生的公钥），没有任何电话或邮箱绑定。对方想找你只能拿到这个 ID。理论上连 server 都不知道谁跟谁在通讯。
+身份模型上，每个 Session ID 是 66 个十六进位字符（装置产生的公钥），没有任何电话或邮箱绑定。对方想找你只能取得这个 ID。理论上连 server 都不知道谁跟谁在通讯。
 
 **适合谁**：
 
@@ -131,7 +131,7 @@ icon: material/message-text-outline
 
 [Matrix](https://matrix.org/){target="_blank"} 是联邦化的开源即时通讯协议，最常用的客户端是 [Element](https://element.io/){target="_blank"}（也叫 Element X 在新版）。设计上类似 email：每个人有一个 homeserver，homeserver 之间互通。
 
-anoni.net 自己跑一个 Matrix homeserver（`im.anoni.net`），是社群长期协作的主要管道。社群的 Public Space 在 `#community:im.anoni.net`，公开房间可以加入。
+anoni.net 自行架设一个 Matrix homeserver（`im.anoni.net`），是社群长期协作的主要管道。社群的 Public Space 在 `#community:im.anoni.net`，公开房间可以加入。
 
 E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时可以勾选 E2EE，公开房间通常不开（因为要让新成员看得到历史）。协议目前用 Megolm（类 Sender Keys 的设计），未来转向 MLS。
 

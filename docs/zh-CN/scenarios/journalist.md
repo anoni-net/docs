@@ -22,7 +22,7 @@ icon: material/newspaper-variant-outline
 - 科技公司员工讨论监控产品、被追踪通讯记录
 - 警方相关案件的关系人，地检署可调阅通讯记录
 
-每一个场景都有「对手能拿到什么」这个问题。记者要做的是让对手即使拿到了通讯记录、云端备份、家中电脑，也无法把消息回溯到消息来源身上。
+每一个场景都有「对手能取得什么」这个问题。记者要做的是让对手即使取得了通讯记录、云端备份、家中电脑，也无法把消息回溯到消息来源身上。
 
 ## 第一次接触
 
@@ -75,7 +75,7 @@ icon: material/newspaper-variant-outline
 
 ### 去除 metadata
 
-收到文件的第一件事是去 metadata，先别急着打开。Office 文件、PDF、照片、视频都会带 metadata，包括：
+收到文件的第一件事是去 metadata，先不要急着打开。Office 文件、PDF、照片、视频都会带 metadata，包括：
 
 - 作者名称、公司信息（Office 档的 author 栏位）
 - 拍照的 GPS 坐标、相机型号、时间戳
@@ -203,7 +203,7 @@ icon: material/newspaper-variant-outline
 
 ## 接下来
 
-- [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能拿到什么
+- [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能取得什么
 - [Metadata 为什么重要](../basics/metadata.md)：理解文件隐含的元数据风险
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [社群自架服务](../community/tools.md)：anoni.net 提供给公益用途的协作工具入口

@@ -127,7 +127,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ## 搭建 Tor Relay 的常见问题
 
-??? question "搭建 Tor Relay 会被警察找上门吗？"
+??? question "搭建 Tor Relay 会被警察找上吗？"
 
     Relay 有三层：入口节点（Guard Relay）、中间节点（Middle Relay）、出口节点（Exit Relay）。其中入口节点与中间节点在 Tor 网络中扮演的是传输转送的角色，不负责连接和访问最终目的地的节点主机，因此与执法单位接触的可能性很低。因此，搭建出口节点的潜在风险需要经过慎重评估后再决定是否行动。
 
@@ -153,7 +153,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "运作 Tor Relay 有什么要求？"
 
-    建立 Tor Relay 前，确保你的网络有稳定的上传和下载速度。Tor Project 官方建议中继至少具备 10 Mbit/s（约 1.25 MB/s）的上传与下载带宽（见 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。带宽不足 10 Mbit/s 但仍有 1 Mbit/s 以上时，官方建议改跑 obfs4 桥接而非中继。另需有固定的 IP 地址。此外，确认你的 ISP 允许这类流量，并且你的网络设备（如防火墙和路由器）可正确设置所需的连接端口转发。
+    建立 Tor Relay 前，确保你的网络有稳定的上传和下载速度。Tor Project 官方建议中继至少具备 10 Mbit/s（约 1.25 MB/s）的上传与下载带宽（见 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。带宽不足 10 Mbit/s 但仍有 1 Mbit/s 以上时，官方建议改执行 obfs4 桥接而非中继。另需有固定的 IP 地址。此外，确认你的 ISP 允许这类流量，并且你的网络设备（如防火墙和路由器）可正确设置所需的连接端口转发。
 
 ??? question "Tor Relay 会影响我的网速吗？"
 

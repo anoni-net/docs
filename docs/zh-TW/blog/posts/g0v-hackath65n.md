@@ -15,7 +15,7 @@ description: "邀請您於 2025 年 2 月 22 日 g0v Hackath65n 零時政府第 
 
 ![g0v hackath65n / 零時政府第 65 次 黑客松](./assets/images/g0v-hackath65n.webp)
 
-除了 2/23 的[工作坊活動](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我們也有報名參與「[g0v Hackath65n 零時政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活動，這次提案內容將動手啟動 OONI-Reseatch 2025 年度專案目標項目。
+除了 2/23 的[工作坊活動](./rightscon25-pre-event.md){target="_blank"}外，前一天 2/22 我們也有報名參與「[g0v Hackath65n 零時政府第 65 次黑客松](https://jothon.g0v.tw/){target="_blank"}」的活動，這次提案內容將著手啟動 OONI-Reseatch 2025 年度專案目標項目。
 
 目前看起來活動還有一點點名額，如果對於我們的專案有興趣、想要做出貢獻的話，歡迎在活動當天加入我們（不論你來自什麼背景、專業）！
 

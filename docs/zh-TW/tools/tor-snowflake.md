@@ -15,7 +15,7 @@ icon: material/snowflake
 
 - 對外連線受審查程度低、頻寬充足，是合適的橋接點來源地區。
 - 比起架 [Tor Relay](../community/setup-tor-relay.md) 需要的伺服器、頻寬、運維成本，Snowflake 只需要一個分頁。
-- 適合白天電腦長開、放著分頁背景跑的工作者。
+- 適合白天電腦長開、放著分頁背景執行的工作者。
 
 !!! warning "香港讀者：參與前先評估風險"
 
@@ -31,7 +31,7 @@ icon: material/snowflake
 
 -   
     - 點擊 widget 中的「ON」按鈕。
-    - 此分頁可以放在背景跑，不會影響其他工作。
+    - 此分頁可以放在背景執行，不會影響其他工作。
     - 啟動後 widget 會顯示是否有人正在透過你連線。
     - 關閉分頁就停止運作，沒有殘留設定。
 
@@ -87,11 +87,11 @@ icon: material/snowflake
 
     兩者貢獻量級與架設門檻都差很多。Tor Relay 提供穩定中繼，需要公網 IP 與長時間運轉的伺服器。Snowflake 提供短暫橋接，分頁開著就在運作，門檻最低。如果你有穩定上行頻寬與運維能力，Relay 的貢獻量級更大，可參考 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。如果是一般瀏覽用網路，從 Snowflake 開始是合適的入門。
 
-??? question "VPN 開著可以同時跑 Snowflake 嗎？"
+??? question "VPN 開著可以同時執行 Snowflake 嗎？"
 
-    技術上可以，但流量會經過 VPN 業者，對 Tor 的橋接其實是 VPN 的 IP 與 ASN，不是你本地的網路。如果想保護自己的 Snowflake IP 不被觀察，VPN 是合理選擇。如果要貢獻台灣的 ASN 多樣性與頻寬，建議用本地連線直接跑。
+    技術上可以，但流量會經過 VPN 業者，對 Tor 的橋接是 VPN 的 IP 與 ASN，不是你本地的網路。如果想保護自己的 Snowflake IP 不被觀察，VPN 是合理選擇。如果要貢獻台灣的 ASN 多樣性與頻寬，建議用本地連線直接執行。
 
-??? question "我家是 IPv6-only 或 CGNAT，可以跑嗎？"
+??? question "我家是 IPv6-only 或 CGNAT，可以執行嗎？"
 
     Snowflake 走 WebRTC 並使用 STUN/TURN 穿透，多數家用 NAT 環境可以正常運作。CGNAT 環境穿透成功率較低但不會完全失敗。IPv6-only 目前 Snowflake 端有部分相容性限制，可參考 [Snowflake 官方頁面](https://snowflake.torproject.org/zh-TW/){target="_blank"} 的最新狀態。
 

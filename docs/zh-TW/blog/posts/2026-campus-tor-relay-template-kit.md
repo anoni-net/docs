@@ -29,7 +29,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 **[校園 Tor Relay 提案範本](../../community/campus-tor-relay-proposal.md)**：一份完整的「Tor University Challenge at <學校名>」提案計畫書、四封對外溝通 email（給指導教授、資訊中心網路組組長、系上網管申請主機/IP、對外開放 port 申請）、台師大實際走過的兩個月行政時間軸，以及提案前的準備清單與踩雷提醒。所有放在 `<placeholder>` 裡的欄位都標出來，複製出去把學校名、系所、IP 段、教授姓名填進去就能送進審核流程。
 
-**[校園 Tor Relay 架設 SOP](../../community/campus-tor-relay-sop.md)**：提案通過、拿到機房位置與 IP 之後的技術部署文件。內容包含 torrc 參考設定（ContactInfo、Non-Exit 宣告、頻寬上限、MetricsPort 安全提醒）、UFW 防火牆設計（SSH 限校內 VPN 段、ORPort 9001 對外開放）、對外狀態網頁兩種架構選擇（Nginx + Onionoo 推薦，或 MetricsPort + Prometheus + Grafana）、監控與事件處置 runbook、IPv6 設定、畢業後交接清單。
+**[校園 Tor Relay 架設 SOP](../../community/campus-tor-relay-sop.md)**：提案通過、取得機房位置與 IP 之後的技術部署文件。內容包含 torrc 參考設定（ContactInfo、Non-Exit 宣告、頻寬上限、MetricsPort 安全提醒）、UFW 防火牆設計（SSH 限校內 VPN 段、ORPort 9001 對外開放）、對外狀態網頁兩種架構選擇（Nginx + Onionoo 推薦，或 MetricsPort + Prometheus + Grafana）、監控與事件處置 runbook、IPv6 設定、畢業後交接清單。
 
 **[校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)**：十題校方資訊中心、法務、網管最常擔心的問題，每題都有台灣脈絡補充，刑法妨害電腦使用罪章、個資法第 2 條、TANet 對外連線審核機制都已經對到具體條文。頁尾另外整理「給網管的一頁摘要」與「給校方行政與法務的一頁摘要」，30 秒讀完，可以直接複製貼進 mail 開頭或當會議 handout。
 
@@ -50,7 +50,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 - [NZ 原始 Google Drive 資料夾](https://drive.google.com/drive/folders/1B9ysi2ELC9w46bD3o7TMsnv55nupI1nz){target="_blank"}
 
-裡面包含台師大原版專案計畫說明書（Google Doc）、2025/12/21 校內分享 slides、現場照片。原始 Doc 裡有 NZ 個人 email、指導教授資訊、學校 IP 段等具體欄位，請不要直接 fork 原始 Doc 改學校名就送出去，容易在送件時被識破。原始存檔的價值是讓你對照寫作結構、用語拿捏，動手時還是用 anoni.net 上 placeholder 化過的範本。
+裡面包含台師大原版專案計畫說明書（Google Doc）、2025/12/21 校內分享 slides、現場照片。原始 Doc 裡有 NZ 個人 email、指導教授資訊、學校 IP 段等具體欄位，請不要直接 fork 原始 Doc 改學校名就送出去，容易在送件時被識破。原始存檔的價值是讓你對照寫作結構、用語拿捏，實際操作時還是用 anoni.net 上 placeholder 化過的範本。
 
 英文版的案例脈絡，也已經刊在 Tor Project 官方部落格，國際同行看得到台灣這條線：
 
@@ -77,7 +77,7 @@ Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在�
 - **指導教授、實驗室助理、資訊中心的教職員**：你掛名能讓提案順利不少。學校行政體系對「有教授掛名」的提案接受度普遍更高
 - **正在找專題題目或修網路、資安課程的同學**：Tor Relay 架設本身就是完整的網路、系統管理、政策溝通實作題目，可以整理成專題、學位論文或 COSCUP 投稿
 
-不需要架過 Tor Relay 也歡迎參與。「我想學」就是合理的加入動機，社群會搭配[「如何搭建 Tor Relay」](../../community/setup-tor-relay.md)文件協助你動手。
+不需要架過 Tor Relay 也歡迎參與。「我想學」就是合理的加入動機，社群會搭配[「如何搭建 Tor Relay」](../../community/setup-tor-relay.md)文件協助你實際操作。
 
 如果你正在自己學校推動、卡在某個環節想找人討論，或者已經有想法但不知道如何跟教授開口，任何一個階段都歡迎聯繫社群。常用入口整理在[社群自架服務](../../community/tools.md)頁面，Matrix 公開 room 也可以直接打招呼。
 
@@ -87,4 +87,4 @@ Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在�
 
 每個成功上線的校園 Relay 都讓推動成本變低一點。你的案例會幫到後面響應的學校。社群會把新增的學校加進「Tor Relay 校園建立研究專題」的「已完成的事」段落，往後加入的學校可以有更多參考。
 
-這份工具包是給想響應的學校一個共用起點，可被任何一所大學拿去、改寫、送進自己校園的審核流程。每多一所學校加入，共用範本庫就持續累積，後續推動的人會更省力。
+這份工具包是給想響應的學校一個共用起點，可被任何一所大學拿去、改寫、送進自己校園的審核流程。每多一所學校加入，共用範本庫就持續累積，後續推動的人會更容易。

@@ -6,7 +6,7 @@ icon: simple/ipfs
 
 # :simple-ipfs: 帮忙 pin 文件站的 IPFS 镜像
 
-anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站被封锁或下架时仍然读得到。IPFS 上的内容要有节点 pin 才会存活，目前只有社群自己的节点在 pin。你多跑一个节点帮忙 pin，网络上就多一份完整副本，抗删除的底气更足。
+anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站被封锁或下架时仍然读得到。IPFS 上的内容要有节点 pin 才会存活，目前只有社群自己的节点在 pin。你多架设一个节点帮忙 pin，网络上就多一份完整副本，抗删除的底气更足。
 
 这页教你用一个常驻的 IPFS 节点，加一支自动跟上最新版本的定时脚本。整个过程对 Windows、Linux、macOS 都适用，有没有用 Docker 都可以。
 
@@ -14,7 +14,7 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
 
     - 一台几乎整天开着、能联网的电脑（台式机、家用服务器、或一台小主机都可以）。
     - 安装 IPFS（下面会带你装）。
-    - 跑一支定时脚本，每隔几小时自动 pin 最新版本。
+    - 执行一支定时脚本，每隔几小时自动 pin 最新版本。
 
     帮不了节点也没关系，文末的「不想自架节点」有用 pinning service 代 pin 的替代做法。
 
@@ -27,7 +27,7 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
 - IPNS（InterPlanetary Name System）是一个固定不变的名字，永远指向「目前最新」的那个 CID。文件站的 IPNS 名字就是下面那串 `k51…`。
 - pin 的意思是「保证留住某个 CID 的内容」。pin 绑在 CID 上，不会自己跟着 IPNS 走。所以文件站一发新版，你上次 pin 的还是旧 CID。
 
-结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，这件事要定期重跑，这就是为什么要设定时任务。
+结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，这件事要定期重新执行，这就是为什么要设定时任务。
 
 ## 运作原理（为什么定时就够，不用等通知）
 
@@ -40,9 +40,9 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
     - IPNS 名称：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - 浏览器打开看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
-脚本每次跑的动作是：解析 IPNS 拿到当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
+脚本每次执行的动作是：解析 IPNS 取得当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
 
-## 步骤一：跑一个常驻的 IPFS 节点
+## 步骤一：架设一个常驻的 IPFS 节点
 
 pin 要能抓齐内容，本机就得有一个持续运作的 IPFS daemon。下面依你的环境选一种。
 
@@ -61,17 +61,17 @@ pin 要能抓齐内容，本机就得有一个持续运作的 IPFS daemon。下�
     ipfs daemon
     ```
 
-    要让 daemon 长时间常驻，Linux 建议做成 systemd user service，macOS 可以用 `brew services` 或 launchd。临时测试时，直接让 `ipfs daemon` 在后台跑也可以。
+    要让 daemon 长时间常驻，Linux 建议做成 systemd user service，macOS 可以用 `brew services` 或 launchd。临时测试时，直接让 `ipfs daemon` 在后台执行也可以。
 
 === "Windows"
 
-    最省事的是安装 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它内含 kubo，登录后会自动在系统托盘常驻，daemon 一直开着。
+    最简便的是安装 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它内含 kubo，登录后会自动在系统托盘常驻，daemon 一直开着。
 
     装好后确认命令行能调用到 `ipfs`。独立版 kubo 需要自己把 `ipfs.exe` 加进系统 PATH，用 IPFS Desktop 的话，若 PATH 找不到 `ipfs`，在脚本里改用完整路径即可。
 
 === "Docker"
 
-    用一个 `docker-compose.yml` 跑 kubo，容器名取 `ipfs_host`：
+    用一个 `docker-compose.yml` 执行 kubo，容器名取 `ipfs_host`：
 
     ```yaml
     services:
@@ -123,7 +123,7 @@ chmod +x anoni-pin.sh
 --8<-- "_scripts/anoni-pin.ps1"
 ```
 
-先手动跑一次确认正常（PowerShell 默认会挡脚本，用 `-ExecutionPolicy Bypass` 放行这一次）：
+先手动执行一次确认正常（PowerShell 默认会挡脚本，用 `-ExecutionPolicy Bypass` 放行这一次）：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\anoni-pin.ps1
@@ -131,7 +131,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\anoni-pin.ps1
 
 ## 步骤三：设定定时任务
 
-让脚本每隔几小时自动跑。文件站更新不频繁，每 6 小时足够，想更快跟上可以缩短。
+让脚本每隔几小时自动执行。文件站更新不频繁，每 6 小时足够，想更快跟上可以缩短。
 
 === "Linux / macOS"
 
@@ -141,17 +141,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\anoni-pin.ps1
     crontab -e
     ```
 
-    加一行，每 6 小时跑一次，并把输出写进 log：
+    加一行，每 6 小时执行一次，并把输出写进 log：
 
     ```bash
     0 */6 * * * /path/to/anoni-pin.sh >> $HOME/.anoni-pin/log 2>&1
     ```
 
-    想要开机补跑漏掉的任务，也可以改用 systemd timer（设 `Persistent=true`），效果更稳。
+    想要开机补执行漏掉的任务，也可以改用 systemd timer（设 `Persistent=true`），效果更稳。
 
 === "Windows"
 
-    用「任务计划程序」。最快的方式是命令行创建，每 6 小时跑一次：
+    用「任务计划程序」。最快的方式是命令行创建，每 6 小时执行一次：
 
     ```powershell
     schtasks /Create /TN "anoni-ipfs-pin" `

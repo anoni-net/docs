@@ -7,7 +7,7 @@ icon: material/chart-bar
 
 # :material-chart-bar: Tor Relays 观测点
 
-从 [ASNs 自治网络观测数据分析](./ooni-asn-coverage.md) 接续讨论「连线层的在地观测」。前两篇看的是「我们在测什么网站」与「测量端落在哪些 ASN」，这篇换到节点端：台湾有多少 Tor 中继节点、跑在哪些 ASN 上、贡献多少带宽。中继节点的数量与分散程度，是台湾对全球 Tor 网络贡献量的直接指标。页面也顺带列出日本、韩国、香港的同期数据，作为邻近地区的参照。
+从 [ASNs 自治网络观测数据分析](./ooni-asn-coverage.md) 接续讨论「连线层的在地观测」。前两篇看的是「我们在测什么网站」与「测量端落在哪些 ASN」，这篇换到节点端：台湾有多少 Tor 中继节点、运作于哪些 ASN 上、贡献多少带宽。中继节点的数量与分散程度，是台湾对全球 Tor 网络贡献量的直接指标。页面也顺带列出日本、韩国、香港的同期数据，作为邻近地区的参照。
 
 <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
   <span style="font-weight:500;font-size:.95rem;">观测地区：</span>
@@ -347,7 +347,7 @@ Tor 软件版本的更新状况，以及各节点所具备的能力标签分布�
   </tbody>
 </table>
 
-!!! example "想动手做？"
+!!! example "想实作？"
 
     - :material-server-network: **想自己架 Tor relay**：见 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校园架 relay 是 anoni.net 2026 三大主题之一，可看 [Tor Relay 校园建立](../community/relay-on-campus.md)。
     - :material-chart-bar: **观测数据来源**：本页图表通过 [Pulse 后端 API](https://anoni.net/api/readme){target="_blank"} 提供，观察项目与数据服务都还在持续调整中。

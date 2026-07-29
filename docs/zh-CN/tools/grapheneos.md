@@ -15,7 +15,7 @@ GrapheneOS 是一套以 AOSP（Android Open Source Project，Android 的开源�
     - **它是什么**：把 Android 安全强化、移除 Google 绑定的手机作业系统，非营利、开源。
     - **它保护**：缩小手机被入侵的攻击面、把 Google 服务关进沙箱、给你逐 app 的网络与传感器开关。
     - **它不保护**：GrapheneOS 不是匿名工具，无法阻挡电信商的基地台定位，要匿名仍要搭配 [Tor](./what-is-tor.md)。
-    - **硬件**：目前几乎只跑在 Google Pixel，因为只有它同时提供可重新锁回的 bootloader、安全晶片与长期更新。
+    - **硬件**：目前几乎只运作于 Google Pixel，因为只有它同时提供可重新锁回的 bootloader、安全晶片与长期更新。
 
     展开细节见下方各节。
 
@@ -49,7 +49,7 @@ GrapheneOS 的功能可以分成三组：缩减攻击面、减少对 Google 的�
 
 隐私与匿名的界线对 anoni.net 的读者特别重要。GrapheneOS 把重点放在 privacy（隐私）与 security（安全），它让别人更难入侵你的手机、更难从你的 app 蒐集资料，但它不宣称让你匿名。
 
-只要连上电信商的行动网络，你就必然要向电信商表明身分，GrapheneOS 无法改变这一点，唯一能避免基地台层级定位的方式是开飞航模式。要在网络层匿名（不泄漏真实 IP、不被绑定浏览身分），仍要靠 [Tor](./what-is-tor.md)。GrapheneOS 官方也把内建的 DNS-over-TLS 明讲成「不是 Tor 或 VPN 的替代品」。
+只要连上电信商的行动网络，你就必然要向电信商表明身分，GrapheneOS 无法改变这一点，唯一能避免基地台层级定位的方式是开飞航模式。要在网络层匿名（不泄漏真实 IP、不被绑定浏览身分），仍要靠 [Tor](./what-is-tor.md)。GrapheneOS 官方也把内建的 DNS-over-TLS 明提到成「不是 Tor 或 VPN 的替代品」。
 
 操作前先读 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)，确认你要的是哪一种保护，再用 [威胁模型如何建立](../basics/threat-model.md) 厘清自己在抗谁。桌面端的整机隔离方案见 [Tails、Whonix、Qubes 的差别](./tails-vs-whonix-vs-qubes.md)，行动端的 OS 强化跟桌面端的匿名作业系统处理的是不同层次的问题，依威胁模型搭配使用。
 
@@ -59,7 +59,7 @@ GrapheneOS 对硬件的要求很严格，列在官方 [FAQ](https://grapheneos.o
 
 目前同时满足这些条件的消费级手机几乎只有 Google Pixel。Pixel 从第 6 代起搭载 Titan M2 安全晶片（第 3 到 5 代是第一代 Titan M），这颗晶片是金钥保护与硬件验证的信任根。
 
-GrapheneOS 目前只能跑在 Google 自家的 Pixel 上，但它要对付的，正是 Google 服务对手机的渗透。Google 对 Pixel 与 Android 的每一个政策调整，都会直接影响 GrapheneOS 的处境，而 Android 17 之后，Google 收紧的力道越来越强。
+GrapheneOS 目前只能运作于 Google 自家的 Pixel 上，但它要对付的，正是 Google 服务对手机的渗透。Google 对 Pixel 与 Android 的每一个政策调整，都会直接影响 GrapheneOS 的处境，而 Android 17 之后，Google 收紧的力道越来越强。
 
 ## Android 17 之后：Google 收紧 AOSP 与 Pixel 资料的开放程度
 
@@ -77,7 +77,7 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 - **app 锁定的实际冲击**：银行、政府、企业验证类 app 越来越常用 attestation 检查装置，GrapheneOS 使用者可能遇到某些 app 拒绝执行。对把手机当主要上网装置的人，转用前要先确认每天必用的 app 有哪些可能受影响、自己能否接受，再决定是否转移。
 - **在中国大陆的情境不同**：Google 服务在中国大陆本就难以使用，degoogle 与 sandboxed Google Play 的意义跟海外不一样，但「装什么系统、装什么 app 由谁决定」的问题一样存在，甚至更尖锐。本地大量 app 同时走自家的装置认证与实名要求，非官方系统一样容易被挡。
 - **侧载限制正在逼近**：Android 17 新增的应用程式侧载「开发者验证」流程，2026 年先在巴西、印尼、新加坡、泰国试行，2027 年扩大。APAC 是第一批试验场，华语地区多数不在首批，但这类政策通常会逐步扩大。
-- 取得管道、app 锁定、侧载限制，指向的都是同一件事，谁有权决定你买来的手机上能跑什么系统、能装什么 app。GrapheneOS 让使用者在原厂系统之外仍然有得选。
+- 取得管道、app 锁定、侧载限制，指向的都是同一件事，谁有权决定你买来的手机上能执行什么系统、能装什么 app。GrapheneOS 让使用者在原厂系统之外仍然有选择。
 
 ## 常见问题
 
@@ -99,7 +99,7 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 
 ??? question "与 LineageOS、CalyxOS、/e/OS 有什么不同？"
 
-    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 预设的安全保护。/e/OS 以延续旧硬件可用为主，漏洞缓解的等级最低。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更省事，可以看其他几套。
+    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 预设的安全保护。/e/OS 以延续旧硬件可用为主，漏洞缓解的等级最低。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
 
 ## 接下来
 

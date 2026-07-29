@@ -12,7 +12,7 @@ icon: material/web-box
 
 网站发布的选项从「中心化 + 高效能」到「去中心化 + 抗审查」形成一道光谱：
 
-- **自架服务器**：自己有 IP、自己有 DNS。完全可控，也完全集中。被封 IP、被没收服务器就挂了。
+- **自架服务器**：自己有 IP、自己有 DNS。完全可控，也完全集中。被封 IP、被没收服务器就无法连接。
 - **CDN**（Cloudflare、Fastly、CloudFront）：边缘节点代理流量。效能与抗 DDoS 强，但对 CDN 服务商与 root DNS 高度依赖。
 - **静态站托管**（GitHub Pages、Cloudflare Pages、Netlify）：简化部署，但服务商可单方面下架。
 - **IPFS**：内容用 hash 定址，理论上任何节点都可以代为提供。没有单一可下架的点，但内容存活靠 pin。

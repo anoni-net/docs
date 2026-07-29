@@ -50,7 +50,7 @@ icon: material/access-point-network
 
 ## 如何解讀單筆測量資料（進階）
 
-這一節示範如何讀懂一筆原始測量紀錄，適合想自己動手分析的人，一般讀者可以直接跳到下一節。想了解單筆 OONI 測量的內容如何判讀，從 OONI Probe 操作開始：
+這一節示範如何讀懂一筆原始測量紀錄，適合想自己著手分析的人，一般讀者可以直接跳到下一節。想了解單筆 OONI 測量的內容如何判讀，從 OONI Probe 操作開始：
 
 1. 下載 [OONI Probe](https://ooni.org/install/){target="_blank"}（行動裝置或桌面版本）
 2. 開啟 OONI Probe、選擇「網站」項目並執行檢測
@@ -81,7 +81,7 @@ icon: material/access-point-network
 
     - 問題：網站受到阻擋無法連線存取，是 AS 還是 DNS 的問題呢？
 
-## 想動手分析？
+## 想著手分析？
 
 如果你想自己擷取與分析 OONI 公開資料，計算特定區域的 ASN 覆蓋率，相關工具設定與指令見：
 

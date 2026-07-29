@@ -121,7 +121,7 @@ icon: material/lifebuoy
 !!! tip "建议现在就做"
     这是预先准备。等网络断了才装就来不及，花一分钟装好，等于在手机或电脑里先存一份离线版指南。
 
-安装方式（用一般浏览器打开 [anoni.net/docs](../index.md)，先别用 Tor Browser，原因见下）：
+安装方式（用一般浏览器打开 [anoni.net/docs](../index.md)，先不要使用 Tor Browser，原因见下）：
 
 - **Android（Chrome、Edge 等）**：打开站点后点浏览器菜单，选「安装应用」或「添加到主屏幕」。
 - **电脑（Chrome、Edge）**：地址栏右侧会出现安装图标，或从菜单选「安装 anoni.net Docs」。

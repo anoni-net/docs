@@ -8,13 +8,13 @@ icon: material/message-text-outline
 
 「端對端加密」這幾個字在 LINE、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意義差很多。差異落在金鑰由誰持有、註冊時是否要綁手機號碼或郵件、Metadata 留在哪個 server、伺服器掉線後是否仍能通訊，以及群組與多裝置的設計選擇。
 
-這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。動手前可以先回頭看 [威脅模型如何建立](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密如何運作](../advanced/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
+這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。操作前可以先回頭看 [威脅模型如何建立](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密如何運作](../advanced/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
 
 ## 為什麼要分開比較這些工具
 
 「端對端加密」聽起來像一個技術合格章，但實際上要追問三件事才有意義：
 
-- **「端」是什麼**：是裝置、是帳號、還是一段隨機 ID？決定了攻擊者拿到帳號還是裝置時的風險。
+- **「端」是什麼**：是裝置、是帳號、還是一段隨機 ID？決定了攻擊者取得帳號還是裝置時的風險。
 - **預設啟用嗎**：很多工具的 E2EE 是可選功能，要使用者主動切換才生效。
 - **Metadata 留在哪**：訊息內容加密了，「誰跟誰、什麼時候、多頻繁」這層往往沒加密。
 
@@ -68,7 +68,7 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 [SimpleX Chat](https://simplex.chat/){target="_blank"} 在身分模型上做了最大膽的選擇：完全沒有 user identifier。每段對話走一組「queue」，由隨機 ID 識別，server 看到的只是「這個 queue 收到一個訊息要轉給誰」，不知道你的帳號是誰、你的聯絡人有誰、你跟誰在通訊。
 
-加好友的方式是交換一個 invitation link 或 QR code，雙方在第一次連線時建立 queue，之後就用這組 queue 通訊。換句話說，SimpleX 沒有「帳號」這個資料項，要找你的對手連個搜尋目標都沒有。
+加好友的方式是交換一個 invitation link 或 QR code，雙方在第一次連線時建立 queue，之後就用這組 queue 通訊。SimpleX 沒有「帳號」這個資料項，要找你的對手連個搜尋目標都沒有。
 
 **適合誰**：
 
@@ -87,7 +87,7 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 [Session](https://getsession.org/){target="_blank"} 是從 Signal fork 出來的版本，把手機號碼換成隨機 ID，訊息流量走類 Tor 的網路（Lokinet）降低 metadata。跨裝置同步靠一段 13 字 recovery password（mnemonic），這也是你的「帳號備份」。
 
-身分模型上，每個 Session ID 是 66 個十六進位字元（裝置產生的公鑰），沒有任何電話或 email 綁定。對方想找你只能拿到這個 ID。理論上連 server 都不知道誰跟誰在通訊。
+身分模型上，每個 Session ID 是 66 個十六進位字元（裝置產生的公鑰），沒有任何電話或 email 綁定。對方想找你只能取得這個 ID。理論上連 server 都不知道誰跟誰在通訊。
 
 **適合誰**：
 
@@ -127,7 +127,7 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 [Matrix](https://matrix.org/){target="_blank"} 是聯邦化的開源即時通訊協議，最常用的客戶端是 [Element](https://element.io/){target="_blank"}（也叫 Element X 在新版）。設計上類似 email：每個人有一個 homeserver，homeserver 之間互通。
 
-anoni.net 自己跑一個 Matrix homeserver（`im.anoni.net`），是社群長期協作的主要管道。社群的 Public Space 在 `#community:im.anoni.net`，公開房間可以加入。
+anoni.net 自行架設一個 Matrix homeserver（`im.anoni.net`），是社群長期協作的主要管道。社群的 Public Space 在 `#community:im.anoni.net`，公開房間可以加入。
 
 E2EE 是房間級別的開關，不是預設全部啟用。建立私人房間時可以勾選 E2EE，公開房間通常不開（因為要讓新成員看得到歷史）。協議目前用 Megolm（類 Sender Keys 的設計），未來轉向 MLS。
 

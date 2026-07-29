@@ -8,7 +8,7 @@ description: 如何建立動態的 OONI Probe 檢測名單，協助觀察特定�
 
 ![OONI RUN v2 Header](https://assets.anoni.net/docs/ooni-run-v2-header.png){.brand-frame}
 
-你想追蹤一批網站是否被特定地區封鎖，但又無法親自到當地測試。OONI Run v2 讓你建立一個行動裝置連結，把要測的網站列進去、分享給當地協助者，協助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 開啟連結就能跑測試，結果即時上傳到 [OONI](./what-is-ooni.md) 的公開資料庫。
+你想追蹤一批網站是否被特定地區封鎖，但又無法親自到當地測試。OONI Run v2 讓你建立一個行動裝置連結，把要測的網站列進去、分享給當地協助者，協助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 開啟連結就能執行測試，結果即時上傳到 [OONI](./what-is-ooni.md) 的公開資料庫。
 
 [OONI Run](https://run.ooni.org/){target="_blank"} 是這個流程的入口。委內瑞拉、馬來西亞、印度等地的社群長期[用它做審查測量活動](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把當地的封鎖事件即時觀測下來。OONI 團隊根據 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社群回饋，於 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，連結變短、可動態更新、協助者已安裝過就會自動同步新加的網站，不用重發。測量結果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} 用連結 ID 搜尋。
 
@@ -20,7 +20,7 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 !!! tip "你是哪一種讀者"
 
-    - **只想幫忙跑測試**：看下面「anoni.net 如何使用」，行動裝置裝好 [OONI Probe](https://ooni.org/install/mobile){target="_blank"}、點一下連結就完成，不必往下讀建立流程。
+    - **只想幫忙執行測試**：看下面「anoni.net 如何使用」，行動裝置裝好 [OONI Probe](https://ooni.org/install/mobile){target="_blank"}、點一下連結就完成，不必往下讀建立流程。
     - **想自己建立一條觀測名單**：先讀「你應該知道的事」掌握風險前提，再照「操作說明」一步步建立、分享。
 
 ## 你應該知道的事
@@ -37,9 +37,9 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 ## anoni.net 如何使用
 
-社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前納入 anoni.net 的官網、Cryptpad、Etherpad、SearXNG、Send、Matrix 與 docs 站。協助者用 OONI Probe 安裝這條連結後，每次跑測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
+社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前納入 anoni.net 的官網、Cryptpad、Etherpad、SearXNG、Send、Matrix 與 docs 站。協助者用 OONI Probe 安裝這條連結後，每次執行測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
 
-連結之外，[OONI 網站檢測清單](../taiwan/ooni-checklist.md) 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助跑這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
+連結之外，[OONI 網站檢測清單](../taiwan/ooni-checklist.md) 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助執行這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
 
 ## 操作說明
 
@@ -133,9 +133,9 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m2.png" alt="OONI Probe 儀表板上的檢測卡片與執行按鈕" style="width:50%">
 </figure>
 
-### 用 miniooni CLI 跑檢測
+### 用 miniooni CLI 執行檢測
 
-行動裝置之外，OONI 也有命令列版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在伺服器、研究腳本或自動化環境跑檢測。把 OONI Run v2 連結餵給 CLI 有個容易踩到的雷，**不能直接把網頁版的網址丟給 `-i`**。
+行動裝置之外，OONI 也有命令列版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在伺服器、研究腳本或自動化環境執行檢測。把 OONI Run v2 連結餵給 CLI 有個容易遇到的雷，**不能直接把網頁版的網址丟給 `-i`**。
 
 ```bash
 # 不會 work，CLI 拿到 HTML，JSON 解析就會失敗
@@ -145,7 +145,7 @@ miniooni oonirun -i https://run.ooni.org/v2/10328
 miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 ```
 
-原因是 miniooni 的 `-i` 會把你給的網址當成 descriptor JSON 端點直接 GET，期望拿到 JSON 回來。`run.ooni.org/v2/<ID>` 是給瀏覽器看的網頁，回應是 HTML，CLI 解析就會失敗。實際的 descriptor 由 API 提供，網址格式為 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接從網頁網址末段取得（社群連結為 `10328`）。
+原因是 miniooni 的 `-i` 會把你給的網址當成 descriptor JSON 端點直接 GET，期望取得 JSON 回來。`run.ooni.org/v2/<ID>` 是給瀏覽器看的網頁，回應是 HTML，CLI 解析就會失敗。實際的 descriptor 由 API 提供，網址格式為 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接從網頁網址末段取得（社群連結為 `10328`）。
 
 桌面版與行動 App 不受這個限制影響，作業系統會把 `https://run.ooni.org/v2/<ID>` 交給 OONI Probe 自行處理。這個限制目前只影響 miniooni CLI，upstream 已有 [TODO 標註](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，後續可能會補上自動轉換。
 

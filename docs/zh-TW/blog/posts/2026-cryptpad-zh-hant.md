@@ -23,7 +23,7 @@ description: "CryptPad 是少數讓伺服器看不到內容的線上協作工具
     <figcaption>cryptpad.anoni.net 切換成「中文(正體)」後的 Drive 首頁，所有檔案分類與 app 入口都已在地化</figcaption>
 </figure>
 
-在台灣，以及更廣的正體中文使用環境，想找一套真正不會被第三方平台默默收走內容的協作工具，其實沒有想像中容易。Google Docs、Notion、Microsoft 365 都很好用，但每一段文字、每一個改動，都會以可被服務商讀取的形式存放在他們的伺服器上。在這之上，演算法、廣告、訓練語料、政府調閱請求，各有各的取用方式。
+在台灣，以及更廣的正體中文使用環境，想找一套真正不會被第三方平台默默收走內容的協作工具，沒有想像中容易。Google Docs、Notion、Microsoft 365 都很好用，但每一段文字、每一個改動，都會以可被服務商讀取的形式存放在他們的伺服器上。在這之上，演算法、廣告、訓練語料、政府調閱請求，各有各的取用方式。
 
 這層差異對記者寫不能曝光的稿、社運工作者協商不能被監聽的策略、NGO 整理脆弱使用者的求助紀錄、學者研究敏感議題這些情境，往往決定一份草稿能不能安全寫得出來。
 
@@ -99,7 +99,7 @@ CryptPad 主應用、Accounts plugin 與 User Guide 加起來上千條字串，�
 
 > Enable zh-Hant/zh-Hans locales (#2237) and add alias system for locales [#2254](https://github.com/cryptpad/cryptpad/pull/2254){target="_blank"} by the anoni.net community
 
-這次合併除了把 `zh_Hant` 與 `zh_Hans` 打開為正式語系，也加上了 locale alias 機制，讓舊有以 `zh_CN`、`zh_TW` 為設定值的帳號可以自動 fallback 對應到新的 `zh_Hans`、`zh_Hant`，不會在升級後跑回英文。
+這次合併除了把 `zh_Hant` 與 `zh_Hans` 打開為正式語系，也加上了 locale alias 機制，讓舊有以 `zh_CN`、`zh_TW` 為設定值的帳號可以自動 fallback 對應到新的 `zh_Hans`、`zh_Hant`，不會在升級後退回英文。
 
 ## 關於「正體中文」與「繁體中文」的用字
 

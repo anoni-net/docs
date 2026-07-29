@@ -22,7 +22,7 @@ icon: material/newspaper-variant-outline
 - 科技公司員工討論監控產品、被追蹤通訊紀錄
 - 警方相關案件的關係人，地檢署可調閱通訊紀錄
 
-每一個場景都有「對手能拿到什麼」這個問題。記者要做的是讓對手即使拿到了通訊紀錄、雲端備份、家中電腦，也無法把訊息回溯到消息來源身上。
+每一個場景都有「對手能取得什麼」這個問題。記者要做的是讓對手即使取得了通訊紀錄、雲端備份、家中電腦，也無法把訊息回溯到消息來源身上。
 
 ## 第一次接觸
 
@@ -75,7 +75,7 @@ icon: material/newspaper-variant-outline
 
 ### 去除 metadata
 
-收到檔案的第一件事是去 metadata，先別急著打開。Office 文件、PDF、照片、影片都會帶 metadata，包括：
+收到檔案的第一件事是去 metadata，先不要急著打開。Office 文件、PDF、照片、影片都會帶 metadata，包括：
 
 - 作者名稱、公司資訊（Office 檔的 author 欄位）
 - 拍照的 GPS 座標、相機型號、時間戳
@@ -203,7 +203,7 @@ icon: material/newspaper-variant-outline
 
 ## 接下來
 
-- [威脅模型](../basics/threat-model.md)：寫報導前，先盤點誰是對手、能拿到什麼
+- [威脅模型](../basics/threat-model.md)：寫報導前，先盤點誰是對手、能取得什麼
 - [Metadata 為什麼重要](../basics/metadata.md)：理解檔案隱含的元資料風險
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同場景的取捨
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：公開 Wi-Fi 採訪、傳稿時的連線層防護與服務選擇
