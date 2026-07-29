@@ -17,7 +17,7 @@ This is a shared problem across every country list, not a Taiwan-specific one. T
             title="OONI Probe Testing Process"
         >
     </a>
-    <caption>OONI Probe Testing Process</caption>
+    <figcaption>OONI Probe Testing Process</figcaption>
 </figure>
 
 When OONI Probe runs a web connectivity test, it checks each site against a pre-defined test list. These lists are maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"} in the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project, and cover both globally popular sites and country-specific ones.
@@ -31,7 +31,7 @@ URLs on the list fall into four categories:
 3. **Conflict and Security:** Covers content related to armed conflicts, boundary disputes, separatist movements, and radical groups.
 4. **Internet Tools:** Websites that provide email, cloud storage, search, translation, Voice over IP (VoIP) services, and censorship circumvention methods fall under this category.
 
-## Current Status of the Taiwan Observation List
+## Current status of the Taiwan test list
 
 Most of the current Taiwan list [tw.csv](https://github.com/citizenlab/test-lists/blob/master/lists/tw.csv){target="_blank"} was added in 2017. Without continuous maintenance, many entries now point to sites that have shut down, moved to a new domain, or are still listed under a dead or `http://`-only URL. Tidying up what is already on the list comes first.
 
@@ -39,7 +39,7 @@ Most of the current Taiwan list [tw.csv](https://github.com/citizenlab/test-list
 
     Some websites do not redirect `http://` to `https://` automatically (via [`301 Moved Permanently`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301){target="_blank"} or [`308 Permanent Redirect`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308){target="_blank"}), which produces misleading test errors. TLS certificates are now easy to obtain and encrypted transport is a baseline expectation, so `https://` should be the default form for URLs on the list.
 
-## List Updates
+## Updating the list
 
 The first step is to check each site listed in [tw.csv](https://github.com/citizenlab/test-lists/blob/master/lists/tw.csv){target="_blank"} and mark it as needing an update or ready to be dropped. A [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests){target="_blank"} then goes to [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} with the proposed changes.
 
@@ -47,7 +47,7 @@ The first step is to check each site listed in [tw.csv](https://github.com/citiz
 
     Our community [submitted a list revision](https://github.com/citizenlab/test-lists/pull/1444){target="_blank"} on 28 September 2023. Work on it is ongoing.
 
-## List Additions
+## Adding to the list
 
 The list has not had a large-scale revision since it was created in 2017, so it needs a fresh review of which sites are worth adding. Candidates are screened against the four Citizen Lab categories above. This part is still under discussion in the community.
 

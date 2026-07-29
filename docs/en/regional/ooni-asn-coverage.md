@@ -1,10 +1,10 @@
 ---
-title: ASNs Observation Data Analysis
+title: ASN observation data analysis
 description: A coverage audit of OONI measurement data for Taiwan: 78.94% of observations come from just two ASNs and only 7.32% of the country's roughly 437 ASNs appear at all. Explains why ASN diversity limits what censorship measurement can show, and how to run the same audit for your own country.
 icon: material/access-point-network
 ---
 
-# :material-access-point-network: ASNs Observation Data Analysis
+# :material-access-point-network: ASN observation data analysis
 
 !!! info "About the figures on this page"
 
@@ -21,7 +21,7 @@ The internet is a mesh of interconnected Autonomous Systems (AS). Each AS is a g
             alt="How ASNs interconnect on the real network, diagram from cloudflare.com"
             title="How ASNs interconnect on the real network, diagram from cloudflare.com">
     </a>
-    <caption>How ASNs interconnect on the real network ([image source](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}).</caption>
+    <figcaption>How ASNs interconnect on the real network ([image source](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}).</figcaption>
 </figure>
 
 For OONI measurement, the ASN is the smallest useful unit of "which network did we see this censorship on". The same website may be unreachable on one carrier and fine on another, and you cannot tell those apart without breaking the data down by ASN. That is why OONI analysis keeps asking how many distinct ASNs a region's measurements come from. The higher that share, the better the data reflects the region's actual connectivity.
@@ -85,7 +85,7 @@ Finally, in the "Raw Measurement Data" section, you can find all the raw data of
             style="border: 1px solid #000000; border-radius: 10px;"
         >
     </a>
-    <caption>Information on "Raw Measurement Data" in OONI Probe.</caption>
+    <figcaption>Information on "Raw Measurement Data" in OONI Probe.</figcaption>
 </figure>
 
 !!! question "Detections Revealing Differences Between AS and DNS"
@@ -107,6 +107,6 @@ If you want to retrieve and analyse OONI's public data to calculate ASN coverage
 
 - [:material-list-status: OONI Website Testing List](./ooni-checklist.md) — the list these measurements are collected against, and how to help maintain it
 - [:material-radar: Regional Observatory](./index.md) — the rest of what we measure and publish
-- [:octicons-mark-github-24: Project research preparation](../community/setup-repo.md) — set up the environment to run the analysis yourself
+- [:octicons-mark-github-24: Development environment setup](../community/setup-repo.md) — set up the environment to run the analysis yourself
 
 </div>

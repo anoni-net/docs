@@ -20,7 +20,7 @@ How to install and run a Tor middle relay, written from the operating experience
                 title="How Tor Relay Works"
             >
         </a>
-        <caption>How Tor Relay Works</caption>
+        <figcaption>How Tor Relay Works</figcaption>
     </figure>
 
     This guide only covers a middle relay. If you want to run something more exposed, work through these questions first and decide how much risk you are willing to accept:

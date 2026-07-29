@@ -98,7 +98,7 @@ Tier 1 of the English site (the version you are reading) ships the regional fram
 
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
 - [Tor relay watcher](./tor-relay-watcher.md) — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
-- [ASNs Observation Data Analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
+- [ASN observation data analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](../scenarios/lgbtq.md) — the showcase scenario, with the full multi-region context section.
 

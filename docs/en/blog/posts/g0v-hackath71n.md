@@ -45,7 +45,7 @@ The January 25 hackathon will focus on advancing :simple-readdotcv:{style="color
 <div class="grid cards" markdown>
 
 - [:fontawesome-regular-circle-question: Why does Internet Freedom matter?](../../basics/internet-freedom.md)
-- [:octicons-mark-github-24: Project Research Preparation](../../community/index.md)
+- [:octicons-mark-github-24: Development environment setup](../../community/index.md)
 - [:simple-readdotcv: 2026 Roadmap](./2025to2026.md)
 - [:simple-readdotcv: Setting Up a Tor Relay at National Taiwan Normal University](./ntnu-nz.md)
 

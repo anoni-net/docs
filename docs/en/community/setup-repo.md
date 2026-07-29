@@ -1,9 +1,9 @@
 ---
-title: Project Research Preparation
+title: Development environment setup
 description: Set up the tools you need to contribute to anoni.net's repositories: a GitHub account, Git, Python 3.12 with uv, and an editor. Then fork anoni-net/docs and open your first pull request.
 icon: octicons/mark-github-24
 ---
-# :octicons-mark-github-24: Project Research Preparation
+# :octicons-mark-github-24: Development environment setup
 
 ## What you need first
 

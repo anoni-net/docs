@@ -5,7 +5,7 @@ icon: material/database-search
 ---
 # :material-database-search: ASN observation data retrieval and analysis
 
-This page covers the tooling for retrieving OONI's public measurement data and calculating ASN coverage for a region. For what the resulting numbers mean and why ASN diversity matters, start with [ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md).
+This page covers the tooling for retrieving OONI's public measurement data and calculating ASN coverage for a region. For what the resulting numbers mean and why ASN diversity matters, start with [ASN observation data analysis](../regional/ooni-asn-coverage.md).
 
 
 The data from tests conducted using OONI Probe is sent back for storage in OONI's [AWS S3 Open Data](https://registry.opendata.aws/ooni/){target="_blank"}. [OONI Docs](https://docs.ooni.org/data){target="_blank"} provides a simple tutorial on data retrieval, and you can also use our completed [retrieval script](https://github.com/anoni-net/docs/blob/main/asn_coverage/ooni.py){target="_blank"}. The data field structure can be referenced from [ooni/spec](https://github.com/ooni/spec){target="_blank"}.
@@ -14,7 +14,7 @@ Below is a guide on how to retrieve test observation data using the [retrieval s
 
 !!! info "Where to run these commands"
 
-    Set up the project environment first, see [Project research preparation](./setup-repo.md). All commands below run from the `asn_coverage/` directory of a cloned [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} checkout, after `uv sync` has installed the dependencies:
+    Set up the project environment first, see [Development environment setup](./setup-repo.md). All commands below run from the `asn_coverage/` directory of a cloned [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} checkout, after `uv sync` has installed the dependencies:
 
     ```bash
     cd anoni-net-docs/asn_coverage
@@ -58,8 +58,8 @@ For a worked example of the resulting statistics, see:
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md) — what the coverage numbers mean
+- [:material-access-point-network: ASN observation data analysis](../regional/ooni-asn-coverage.md) — what the coverage numbers mean
 - [:material-list-status: OONI Website Testing List](../regional/ooni-checklist.md) — the list these measurements run against
-- [:octicons-mark-github-24: Project research preparation](./setup-repo.md) — environment setup
+- [:octicons-mark-github-24: Development environment setup](./setup-repo.md) — environment setup
 
 </div>
