@@ -51,7 +51,7 @@ icon: material/chat-question
             title="Freedom House — Freedom on the Net の対話型マップ"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Freedom House — Freedom on the Net の対話型マップ（例示。最新のデータと国別章は freedomhouse.org にあります）</capture>
+    <figcaption>Freedom House — Freedom on the Net の対話型マップ（例示。最新のデータと国別章は freedomhouse.org にあります）</figcaption>
 </figure>
 
 ## 東南アジア
@@ -73,7 +73,7 @@ icon: material/chat-question
             title="OONI Explorer — 検閲回避ツールの到達性（CN、HK、TW の例示）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>OONI Explorer — CN、HK、TW における検閲回避ツールの到達性（例示。最新データは OONI のサイトにあります）</capture>
+    <figcaption>OONI Explorer — CN、HK、TW における検閲回避ツールの到達性（例示。最新データは OONI のサイトにあります）</figcaption>
 </figure>
 
 [Tor](https://www.torproject.org/){target="_blank"} は多段の匿名経路と、リレーおよびブリッジのネットワークを提供しており、圧力の強い環境で接続を保つ助けになります。リレー網はボランティアによる分散したインフラで、Tor Metrics が国ごとのリレー数とガード数を公開しています。
@@ -85,7 +85,7 @@ icon: material/chat-question
             title="Tor Metrics — 台湾地域のリレーとガードノード"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Tor Metrics — 台湾地域のリレーとガードノード（このコミュニティが活動する中国語圏の拠点。例示のスナップショット）</capture>
+    <figcaption>Tor Metrics — 台湾地域のリレーとガードノード（このコミュニティが活動する中国語圏の拠点。例示のスナップショット）</figcaption>
 </figure>
 
 これらのデータを読むだけでなく、anoni.net は [Pulse](https://github.com/anoni-net/docs/tree/main/pulse){target="_blank"} を運用して台湾、香港、日本、韓国の Tor リレーの分布を追跡し、[ASN カバレッジ](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} のツールで地域の自律システムにおける OONI の観測充足度を可視化しています。日本のリレーの実データは[Tor リレー観測](../regional/tor-relay-watcher.md)で見られます。
