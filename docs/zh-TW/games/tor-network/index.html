@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="robots" content="noindex" />
   <title>Tor 中繼地球儀 · anoni.net</title>
   <meta name="description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
+  <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
+       兩份內容完全相同。canonical 指向前者，把權重集中到一個網址上。
+       語言由 ?lang= 決定，同一份檔案服務三個語系，所以正規網址不帶參數。 -->
+  <link rel="canonical" href="https://anoni.net/docs/games/tor-network/" />
   <!-- OG 寫死在這裡，因為這頁不經過 mkdocs 的模板。三個語系共用同一份程式，
        抓取預覽的爬蟲不會執行 JS，所以這裡固定用預設語系 zh-TW 的文案與正規網址。 -->
   <meta property="og:type" content="website" />
@@ -20,6 +23,105 @@
   <meta property="twitter:title" content="Tor 中繼地球儀 · anoni.net" />
   <meta property="twitter:description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
   <meta property="twitter:image" content="https://assets.anoni.net/games/tor-network.png" />
+  <!-- 結構化資料。與 OG 同樣寫死，理由相同：這頁不經 mkdocs 模板，抓取的爬蟲不執行 JS。
+       isBasedOn 逐筆列出六份外部資料，讓來源與授權在畫面之外也能被機器讀到，
+       內容要與畫面下方的來源聲明和根目錄 NOTICE 保持一致。 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://anoni.net/docs/games/tor-network/#work",
+        "name": "Tor 中繼地球儀",
+        "alternateName": ["Tor Relay Globe", "Tor 中继地球仪"],
+        "url": "https://anoni.net/docs/games/tor-network/",
+        "description": "以真實資料構成的地球儀。將全球正在運作的近萬台 Tor 中繼落在各自的國界之內，顏色區分 guard、middle、exit，大小對應頻寬，陸地亮度依指標上色。除了中繼分布，另外整合了連線受阻觀測、使用者估計、斷網事件與海底電纜等外部資料。",
+        "image": "https://assets.anoni.net/games/tor-network.png",
+        "inLanguage": ["zh-Hant", "zh-Hans", "en"],
+        "applicationCategory": "EducationalApplication",
+        "applicationSubCategory": "資料視覺化",
+        "operatingSystem": "Web browser",
+        "browserRequirements": "需要支援 WebGPU 或 WebGL2 的瀏覽器，免安裝",
+        "isAccessibleForFree": true,
+        "isFamilyFriendly": true,
+        "license": "https://github.com/anoni-net/docs/blob/main/LICENSE",
+        "author": { "@id": "https://anoni.net/#organization" },
+        "publisher": { "@id": "https://anoni.net/#organization" },
+        "isPartOf": { "@id": "https://anoni.net/docs/games/#collection" },
+        "about": [
+          { "@type": "Thing", "name": "Tor", "sameAs": "https://www.torproject.org/" },
+          { "@type": "Thing", "name": "Tor 中繼", "sameAs": "https://community.torproject.org/relay/" },
+          { "@type": "Thing", "name": "網路審查", "sameAs": "https://en.wikipedia.org/wiki/Internet_censorship" }
+        ],
+        "isBasedOn": [
+          {
+            "@type": "Dataset",
+            "name": "Onionoo 中繼資料",
+            "url": "https://metrics.torproject.org/onionoo.html",
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "creator": { "@type": "Organization", "name": "The Tor Project" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Tor Metrics 使用者與橋接估計",
+            "url": "https://metrics.torproject.org/",
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "creator": { "@type": "Organization", "name": "The Tor Project" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "OONI tor 測試觀測",
+            "url": "https://ooni.org/",
+            "license": "https://github.com/ooni/license/blob/master/data/LICENSE.md",
+            "creator": { "@type": "Organization", "name": "Open Observatory of Network Interference" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Access Now #KeepItOn STOP 斷網事件",
+            "url": "https://www.accessnow.org/keepiton-data-dashboard/",
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "creator": { "@type": "Organization", "name": "Access Now" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "OpenStreetMap 海底電纜路徑",
+            "url": "https://www.openstreetmap.org/copyright",
+            "license": "https://opendatacommons.org/licenses/odbl/",
+            "creator": { "@type": "Organization", "name": "OpenStreetMap contributors" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Natural Earth 國界與海岸線",
+            "url": "https://www.naturalearthdata.com/",
+            "license": "https://www.naturalearthdata.com/about/terms-of-use/",
+            "creator": { "@type": "Organization", "name": "Natural Earth" }
+          }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anoni.net/#organization",
+        "name": "匿名網路社群 anoni.net",
+        "url": "https://anoni.net/"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://anoni.net/docs/games/#collection",
+        "name": "互動與呈現",
+        "url": "https://anoni.net/docs/games/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "文件", "item": "https://anoni.net/docs/" },
+          { "@type": "ListItem", "position": 2, "name": "互動與呈現", "item": "https://anoni.net/docs/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Tor 中繼地球儀" }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --cyan: #00aeff; --ink: #eaf6ff; --muted: #9fb6c8;
