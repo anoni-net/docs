@@ -7,8 +7,8 @@ categories:
     - 社区
 slug: internetfreedom-oct2025
 image: "assets/images/post-update.png"
-summary: "快速回顾，国家级的监控，我们还可以采取如何的行动"
-description: "快速回顾，国家级的监控，我们还可以采取如何的行动"
+summary: "快速回顾，国家级的监控，我们还可以采取什么样的行动"
+description: "快速回顾，国家级的监控，我们还可以采取什么样的行动"
 ---
 
 # 网络自由小聚 2025/10：数字威权主义商品化 - 网络政变报告分享会

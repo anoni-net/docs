@@ -16,7 +16,7 @@ icon: material/island
 
 ### 连线层的在地观测
 
-对应 anoni.net 长期维运的观测资料工作，看「台湾的连线环境实际长如何」。
+对应 anoni.net 长期维运的观测资料工作，看「台湾的连线环境实际是什么样子」。
 
 - [OONI 网站检测清单](./ooni-checklist.md)：在地清单如何维护、分类与更新，是观测资料的入门起点。
 - [ASN 自治网络观测资料分析](./ooni-asn-coverage.md)：台湾各 ASN 的 OONI 测试覆盖与盲点。

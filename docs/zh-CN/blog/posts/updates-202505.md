@@ -71,7 +71,7 @@ description: "项目当前近况与更新 2025/05"
 
 我们也尽量自己搭建或使用可匿名的服务（[Etherpad](https://pad.anoni.net/){target="_blank"}、[Formbricks](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}、[Jitsi](https://jitsi.goodmeet.asia/){target="_blank"}），试着建立相对应的 onion 服务（[项目文件](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Etherpad](http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Formbricks](http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/s/cmaxjo2p40000o10131byw3do){target="_blank"}），尽量有意识地协助参与伙伴可以保持一定的匿名方式与我们一起办活动（行事历还在寻找、邮件还在评估是否用 [Stalwart](https://stalw.art/){target="_blank"} 架设）。
 
-目前希望在八月份的「[匿名网络工作坊](../../event-workshop-2025.md)」顺利办完后，可能要开始思考一个「**社区**」可以成长成如何的样子，无论是在台湾还是在亚太地区、印太地区可以提供如何的服务、如何参与国际事务。我们希望大家可以多给我们一些意见，即使是**要求**也行 XD。
+目前希望在八月份的「[匿名网络工作坊](../../event-workshop-2025.md)」顺利办完后，可能要开始思考一个「**社区**」可以成长成什么样子，无论是在台湾还是在亚太地区、印太地区可以提供什么样的服务、如何参与国际事务。我们希望大家可以多给我们一些意见，即使是**要求**也行 XD。
 
 接下来距离工作坊活动剩下约两个月的时间筹备，也会开始忙碌，以上所汇报的进度再请大家多多帮忙了，感谢！
 
