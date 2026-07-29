@@ -30,7 +30,7 @@ Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：侦测你�
             title="Tor Browser 的 Connection Assist 与桥接设定"
             class="brand-frame">
     </a>
-    <capture>Tor Browser 的 Connection Assist 与桥接设定（详见 <a href="https://support.torproject.org/zh-CN/bridges/" target="_blank">Tor 官方说明：桥接</a>）</capture>
+    <figcaption>Tor Browser 的 Connection Assist 与桥接设定（详见 <a href="https://support.torproject.org/zh-CN/bridges/" target="_blank">Tor 官方说明：桥接</a>）</figcaption>
 </figure>
 
 ## 安全等级（Security Level）
@@ -50,7 +50,7 @@ Tor Browser 提供三段安全等级，从网址列旁的盾牌图示点开「Ch
             title="Tor Browser Security Level slider 的三段选项"
             class="brand-frame">
     </a>
-    <capture>Tor Browser Security Level slider 的三段选项（详见 <a href="https://support.torproject.org/zh-CN/security-settings/" target="_blank">Tor 官方说明：安全性等级</a>）</capture>
+    <figcaption>Tor Browser Security Level slider 的三段选项（详见 <a href="https://support.torproject.org/zh-CN/security-settings/" target="_blank">Tor 官方说明：安全性等级</a>）</figcaption>
 </figure>
 
 ## 身份隔离：New Identity 与 New Tor Circuit
@@ -74,7 +74,7 @@ Tor Browser 默认启用 First Party Isolation，每个分页的 cookies、cache
             title="Tor Browser 汉堡选单显示 New Identity 与 New Tor Circuit for this Site"
             class="brand-frame">
     </a>
-    <capture>Tor Browser 汉堡选单显示 New Identity 与 New Tor Circuit for this Site（详见 <a href="https://support.torproject.org/zh-CN/managing-identities/" target="_blank">Tor 官方说明：管理身份</a>）</capture>
+    <figcaption>Tor Browser 汉堡选单显示 New Identity 与 New Tor Circuit for this Site（详见 <a href="https://support.torproject.org/zh-CN/managing-identities/" target="_blank">Tor 官方说明：管理身份</a>）</figcaption>
 </figure>
 
 ## Tor Circuit 检视
@@ -94,7 +94,7 @@ Tor Browser 默认启用 First Party Isolation，每个分页的 cookies、cache
             title="Tor Browser 显示当前 Tor Circuit 的三层中继节点与所在国家"
             class="brand-frame">
     </a>
-    <capture>Tor Browser 显示当前 Tor Circuit 的三层中继节点与所在国家（详见 <a href="https://support.torproject.org/zh-CN/managing-identities/" target="_blank">Tor 官方说明：管理身份</a>）</capture>
+    <figcaption>Tor Browser 显示当前 Tor Circuit 的三层中继节点与所在国家（详见 <a href="https://support.torproject.org/zh-CN/managing-identities/" target="_blank">Tor 官方说明：管理身份</a>）</figcaption>
 </figure>
 
 ## Onion 站点偏好
@@ -116,7 +116,7 @@ Tor Browser 默认启用 First Party Isolation，每个分页的 cookies、cache
             title="Tor Browser 对 .onion-Location 的提示与 onion 站点偏好设定"
             class="brand-frame">
     </a>
-    <capture>Tor Browser 对 .onion-Location 的提示与 onion 站点偏好设定（详见 <a href="https://support.torproject.org/zh-CN/onion-services/" target="_blank">Tor 官方说明：洋葱服务</a>）</capture>
+    <figcaption>Tor Browser 对 .onion-Location 的提示与 onion 站点偏好设定（详见 <a href="https://support.torproject.org/zh-CN/onion-services/" target="_blank">Tor 官方说明：洋葱服务</a>）</figcaption>
 </figure>
 
 ## 指纹抗性与视窗大小

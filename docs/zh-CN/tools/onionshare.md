@@ -34,7 +34,7 @@ icon: material/share-circle
             title="OnionShare 主视窗的四个模式分页"
             class="brand-frame">
     </a>
-    <capture>OnionShare 主视窗的四个模式分页，从左到右分别是 Share Files、Receive Files、Host a Website、Chat Anonymously。</capture>
+    <figcaption>OnionShare 主视窗的四个模式分页，从左到右分别是 Share Files、Receive Files、Host a Website、Chat Anonymously。</figcaption>
 </figure>
 
 ### Send（送档）
@@ -51,7 +51,7 @@ icon: material/share-circle
             title="OnionShare Send 模式产生 .onion URL 与 private key"
             class="brand-frame">
     </a>
-    <capture>Send 模式启动分享后，OnionShare 会产生 .onion 网址与 private key。把网址跟 private key 透过不同安全管道交给对方，可避免中间人替换。</capture>
+    <figcaption>Send 模式启动分享后，OnionShare 会产生 .onion 网址与 private key。把网址跟 private key 透过不同安全管道交给对方，可避免中间人替换。</figcaption>
 </figure>
 
 <figure markdown="span">
@@ -61,7 +61,7 @@ icon: material/share-circle
             title="接收方在 Tor Browser 看到的 OnionShare 下载页"
             class="brand-frame">
     </a>
-    <capture>接收方取得 .onion 网址后，在 Tor Browser 开启看到的是默认的下载页面，外观像一般静态网站，不必额外学习。</capture>
+    <figcaption>接收方取得 .onion 网址后，在 Tor Browser 开启看到的是默认的下载页面，外观像一般静态网站，不必额外学习。</figcaption>
 </figure>
 
 ### Receive（收档）

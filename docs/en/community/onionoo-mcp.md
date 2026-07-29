@@ -17,7 +17,7 @@ The first half of this page is for people who want to look up data but don't wri
             title="Claude Desktop's summary of Taiwan's current Tor footprint"
             class="brand-frame">
     </a>
-    <capture>What you get back: ask in plain language, and the assistant returns a tidy report (running relay count, total bandwidth, top networks). The underlying numbers come from the Tor Project's public data; this is a point-in-time snapshot that shifts as the network evolves.</capture>
+    <figcaption>What you get back: ask in plain language, and the assistant returns a tidy report (running relay count, total bandwidth, top networks). The underlying numbers come from the Tor Project's public data; this is a point-in-time snapshot that shifts as the network evolves.</figcaption>
 </figure>
 
 ## What it can answer for you
@@ -58,7 +58,7 @@ If you are on a company or team (Team or Enterprise) account, usually only an ac
             title="The Connectors panel after pasting the URL"
             class="brand-frame">
     </a>
-    <capture>Once added, the Connectors panel shows the <code>onionoo</code> custom connector and the query tools it provides. The assistant picks the tools itself — you just ask in plain language.</capture>
+    <figcaption>Once added, the Connectors panel shows the <code>onionoo</code> custom connector and the query tools it provides. The assistant picks the tools itself — you just ask in plain language.</figcaption>
 </figure>
 
 ## Questions you can copy and paste
@@ -124,7 +124,7 @@ The service does **not** store any Onionoo data. It only forwards requests and r
             title="Swagger UI for onionoo.anoni.net"
             class="brand-frame">
     </a>
-    <capture>The Swagger UI at <code>onionoo.anoni.net/docs</code>. Every <code>/v1/*</code> endpoint has a full schema and a Try-it-out button for ad-hoc testing.</capture>
+    <figcaption>The Swagger UI at <code>onionoo.anoni.net/docs</code>. Every <code>/v1/*</code> endpoint has a full schema and a Try-it-out button for ad-hoc testing.</figcaption>
 </figure>
 
 ### Why this service
@@ -255,7 +255,7 @@ The agent breaks the question into a handful of MCP tool calls and assembles a s
             title="Claude Opus 4.7's expanded tool-use trace"
             class="brand-frame">
     </a>
-    <capture>The agent narrates its plan — what to query, which tool to pick, what to do with the response — with the actual <code>aggregate_countries</code> and <code>get_details</code> tool calls inlined. The full MCP interaction is visible, which makes debugging and prompt tuning much easier.</capture>
+    <figcaption>The agent narrates its plan — what to query, which tool to pick, what to do with the response — with the actual <code>aggregate_countries</code> and <code>get_details</code> tool calls inlined. The full MCP interaction is visible, which makes debugging and prompt tuning much easier.</figcaption>
 </figure>
 
 ### Observability and operations

@@ -60,7 +60,7 @@ Given the limited number of servers available in Asia on the current [public ser
             title="Tor Relay Types"
         >
     </a>
-    <caption>Tor Relay Types</caption>
+    <figcaption>Tor Relay Types</figcaption>
 </figure>
 
 WebTunnel is one type of Tor bridge that assists users in connecting to the Onion routing network when they can't directly access it. WebTunnel acts as a proxy server to relay connections. Since [Tails 6.18 version](https://tails.net/news/version_6.18/){target="_blank"}, it also added support for connecting via WebTunnel bridges. Due to the critical role of bridge points, connection parameters are not readily available on the Tor official website and need to be [requested](https://bridges.torproject.org/){target="_blank"} directly.

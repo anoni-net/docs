@@ -41,7 +41,7 @@ Conditions across the region vary widely. Even in jurisdictions counted as relat
             title="Freedom House — Freedom on the Net interactive map"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Freedom House — Freedom on the Net interactive map (illustrative snapshot; live data and country chapters on freedomhouse.org)</capture>
+    <figcaption>Freedom House — Freedom on the Net interactive map (illustrative snapshot; live data and country chapters on freedomhouse.org)</figcaption>
 </figure>
 
 ## Southeast Asia
@@ -63,7 +63,7 @@ Open, verifiable measurement makes regional framing concrete. [OONI](https://oon
             title="OONI Explorer — circumvention tools (CN, HK, TW illustrative)"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>OONI Explorer — circumvention-tool reachability across CN, HK, TW (illustrative; live data on the OONI site)</capture>
+    <figcaption>OONI Explorer — circumvention-tool reachability across CN, HK, TW (illustrative; live data on the OONI site)</figcaption>
 </figure>
 
 [Tor](https://www.torproject.org/){target="_blank"} provides anonymous, multi-hop routing and a relay-and-bridge network that helps users maintain connection in high-pressure environments. The relay network is a decentralized volunteer infrastructure, and Tor Metrics exposes per-country relay and guard counts.
@@ -75,7 +75,7 @@ Open, verifiable measurement makes regional framing concrete. [OONI](https://oon
             title="Tor Metrics — Taiwan-region relays and guard nodes"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Tor Metrics — Taiwan-region relays and guard nodes (the Sinophone-region anchor where this community works; illustrative snapshot)</capture>
+    <figcaption>Tor Metrics — Taiwan-region relays and guard nodes (the Sinophone-region anchor where this community works; illustrative snapshot)</figcaption>
 </figure>
 
 Beyond consuming this data, anoni.net runs the [Pulse](https://github.com/anoni-net/docs/tree/main/pulse){target="_blank"} system to track Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, and the [ASN coverage](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} tooling to map OONI observation completeness across regional autonomous systems. Both are intended to feed the cross-region comparisons being assembled on the [Regional Observatory](../regional/index.md), which is in active drafting.
