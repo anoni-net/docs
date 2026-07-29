@@ -45,6 +45,10 @@ jobs:
         run: source ./.venv/bin/activate; sh ./run_zh-cn.sh;
       - name: Build Docs (/en)
         run: source ./.venv/bin/activate; sh ./run_en.sh;
+      # 日本語版はキュレーション方式。言語切り替えメニューにはまだ載せていないが、
+      # ビルドはここで回して /docs/ja/ で内容を確認できるようにしておく。
+      - name: Build Docs (/ja)
+        run: source ./.venv/bin/activate; sh ./run_ja.sh;
       - name: Replace OG images
         run: |
           # output 結構已改為依年份 blog/YYYY/MM/

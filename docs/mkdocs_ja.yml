@@ -1,0 +1,157 @@
+# 日本語版（キュレーション方式）
+#
+# zh-TW が single source of truth。日本語版は zh-CN のような全ページ対訳ではなく、
+# en と同じく「日本の読者に価値のあるページだけを選んで訳す」方式で運用する。
+# 選定方針と現在の収録範囲は ja/index.md に明記すること。
+#
+# 未訳ページへのリンクは overrides_ja/404.html が拾い、英語版 → 繁体字中国語版の
+# 順に案内する。mkdocs-redirects は使わない（旧 URL が存在しない新規トラックのため）。
+docs_dir: !ENV [DOCS_DIR, "ja"]
+site_name: !ENV [SITE_NAME, "anoni.net Docs 日本語版"]
+site_url: !ENV [SITE_URL, "https://anoni.net/docs/ja/"]
+edit_uri:
+  !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/ja/"]
+
+site_description:
+  !ENV [SITE_DESC, "台湾を拠点とするボランティア観測コミュニティ。OONI 観測、Tor リレー監視、現地の文脈をアジア太平洋の中国語圏から発信しています。"]
+site_author: anoni.net Volunteer
+repo_url: https://github.com/anoni-net/docs
+repo_name: anoni-net/docs
+copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
+nav:
+  - index.md
+  - !ENV [NAV_GUIDES, "ガイド"]:
+      - !ENV [NAV_BASICS, "基本概念"]:
+          - basics/index.md
+          - basics/anonymity-vs-privacy.md
+  - !ENV [NAV_ABOUT, "私たちについて"]:
+      - about/index.md
+      - contact.md
+theme:
+  name: material
+  logo: assets/images/logo-white.svg
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/images/favicon.svg
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: ライト モードに切り替え
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light blue
+      accent: light blue
+      toggle:
+        icon: material/lightbulb
+        name: ダーク モードに切り替え
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: cyan
+      accent: light blue
+      toggle:
+        icon: material/lightbulb-outline
+        name: ライト モードに切り替え
+  language: !ENV [LANGUAGE, "ja"]
+  custom_dir: !ENV [OVERRIDES, "overrides_ja"]
+  features:
+    - navigation.top
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.path
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.action.view
+    - content.action.edit
+    - content.tooltips
+    - content.code.copy
+    - content.footnote.tooltips
+extra:
+  # 日本語版の切り替えメニューからは全言語に行けるようにする。
+  # 逆方向（zh-TW / zh-CN / en から日本語版へ）は、収録ページ数が十分になるまで
+  # 各設定ファイルの extra.alternate に ja を追加しない。ここが公開スイッチ。
+  alternate:
+    - name: 日本語（ja）
+      link: /docs/ja/
+      lang: ja
+    - name: English (en-US)
+      link: /docs/en/
+      lang: en
+    - name: 臺灣正體（zh-TW）
+      link: /docs/zh-tw/
+      lang: zh-TW
+    - name: 簡體中文（zh-CN）
+      link: /docs/zh-cn/
+      lang: zh-CN
+  social:
+    - icon: material/home
+      link: https://anoni.net/docs/ja/
+    - icon: fontawesome/brands/github
+      link: https://github.com/anoni-net/docs
+    - icon: simple/torbrowser
+      link: http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/ja/
+    - icon: material/email-plus
+      link: https://form.anoni.net/s/w21855zpca072rvgp0s2govj
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/vega@5
+  - https://cdn.jsdelivr.net/npm/vega-lite@5
+  - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+plugins:
+  # lunr の日本語トークナイザ（lunr.ja + tinyseg.js）は mkdocs-material に同梱済み。
+  # 技術用語は英語のまま残すため en も併せて有効にする。
+  - search:
+      lang:
+        - ja
+        - en
+  - social:
+      cards_layout_options:
+        font_family: Noto Sans JP
+        color: "#ffffff"
+        background_color: "#00aeff"
+  - privacy:
+      assets_exclude:
+        - aa.anoni.net/*
+        - static.cloudflareinsights.com/*
+  - git-revision-date-localized:
+      type: iso_datetime
+      locale: ja
+      enable_creation_date: true
+      enable_parallel_processing: true
+  - charts:
+      vega_theme_light: powerbi
+      vega_theme_dark: carbong100
+      integrations:
+        mkdocs_material:
+          themes_light:
+            - default
+          themes_dark:
+            - slate
+markdown_extensions:
+  - abbr
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.blocks.caption
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: vegalite
+          class: vegalite
+          format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {}
+  - footnotes

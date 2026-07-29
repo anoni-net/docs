@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <h1>404 - ページが見つかりません</h1>
+
+  <p>
+    日本語版はまだ一部のページのみを公開しています。お探しの内容は他の言語版にある場合があります。
+  </p>
+
+  <div id="lang-fallback-en" hidden style="margin-top: 1.5rem; padding: 1rem 1.2rem; border-left: 4px solid var(--md-accent-fg-color, #4051b5); background: var(--md-default-bg-color--lighter, #f5f5f5);">
+    <p style="margin: 0;">
+      このページの英語版があります：
+      <a id="lang-fallback-en-link" href="#"></a>
+    </p>
+  </div>
+
+  <div id="lang-fallback-zh" hidden style="margin-top: 1rem; padding: 1rem 1.2rem; border-left: 4px solid var(--md-default-fg-color--lighter, #999); background: var(--md-default-bg-color--lighter, #f5f5f5);">
+    <p style="margin: 0;">
+      繁体字中国語版（原文）があります：
+      <a id="lang-fallback-zh-link" href="#"></a>
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var langPrefix = '/ja/';
+      var path = window.location.pathname;
+      var idx = path.indexOf(langPrefix);
+      if (idx < 0) { return; }
+      var before = path.substring(0, idx);
+      var after = path.substring(idx + langPrefix.length);
+
+      function offer(url, boxId, linkId) {
+        if (url === path) { return; }
+        fetch(url, { method: 'GET', redirect: 'follow' })
+          .then(function (res) {
+            if (!res.ok) { return; }
+            var box = document.getElementById(boxId);
+            var link = document.getElementById(linkId);
+            if (!box || !link) { return; }
+            link.textContent = url;
+            link.setAttribute('href', url);
+            box.hidden = false;
+          })
+          .catch(function () { /* silent: keep native 404 */ });
+      }
+
+      // 日本語の読者は繁体字中国語より英語を読めることが多いため、英語版を先に案内する。
+      offer(before + '/en/' + after, 'lang-fallback-en', 'lang-fallback-en-link');
+      offer(before + '/' + after, 'lang-fallback-zh', 'lang-fallback-zh-link');
+    })();
+  </script>
+{% endblock %}

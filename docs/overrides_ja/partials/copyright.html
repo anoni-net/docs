@@ -1,0 +1,31 @@
+<div class="md-copyright">
+  {% if config.copyright %}
+  <div class="md-copyright__highlight">{{ config.copyright }}</div>
+  <div>
+    Tor：<a
+      href="http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/ja/{{page.url}}"
+      >http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/ja/{{page.url}}</a
+    ><br />
+    IPFS/IPNS:
+    <a
+      href="https://anoni-net.ipns.dweb.link/ja/{{page.url}}"
+      >anoni-net.ipns.dweb.link/ja/{{page.url}}</a
+    >
+  </div>
+  {#-
+    オフライン導線は出さない。Service Worker 自体は共有の overrides/base.html から
+    全ツリーで登録されるが、sw.js の LANG_PREFIXES は ["", "zh-cn/", "en/"] であり
+    "ja/" を含まない。つまり日本語版のページはプリキャッシュされないため、ここで
+    オフライン利用を案内すると事実と食い違う。日本語版を LANG_PREFIXES に追加し、
+    ja/offline.md と ja/offline-install.md を用意した時点でこのブロックを復活させること。
+  -#}
+  {% endif %} {% if not config.extra.generator == false %} Made with
+  <a
+    href="https://squidfunk.github.io/mkdocs-material/"
+    target="_blank"
+    rel="noopener"
+  >
+    Material for MkDocs
+  </a>
+  {% endif %}
+</div>
