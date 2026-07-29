@@ -16,11 +16,11 @@ How to install and run a Tor middle relay, written from the operating experience
         <a target="_blank"
         href="../../assets/images/tor_diagram.original.webp">
             <img src="../../assets/images/tor_diagram.original.webp"
-                alt="How Tor Relay Works"
-                title="How Tor Relay Works"
+                alt="How Tor relays work"
+                title="How Tor relays work"
             >
         </a>
-        <figcaption>How Tor Relay Works</figcaption>
+        <figcaption>How Tor relays work</figcaption>
     </figure>
 
     This guide only covers a middle relay. If you want to run something more exposed, work through these questions first and decide how much risk you are willing to accept:
@@ -64,18 +64,18 @@ ORPort      9001        # The default port is 9001.
                         # restrictive networks, so using it can help users there
                         # reach your relay. Remember to open the matching port on
                         # your firewall and router.
-ExitRelay   0           # Do not become an Exit Relay.
+ExitRelay   0           # Do not become an exit relay.
 SocksPort   0
-Log notice file /var/log/tor/notices.log # Enable log recording
+Log notice file /var/log/tor/notices.log # Enable logging
 ```
 
-Restart Tor, with the default setting as `tor@default`
+Restart Tor. The default instance is `tor@default`.
 
 ```bash
 systemctl restart tor@default
 ```
 
-Check the logs or system log `/var/log/syslog` for the text `Self-testing indicates your ORPort` and a message indicating `reachable`. About three hours later, you should be able to search for your Relay information on [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"}.
+Check the logs or system log `/var/log/syslog` for the text `Self-testing indicates your ORPort` and a message indicating `reachable`. After about three hours your relay should appear on [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"}. It can take longer, and that is normal, so resist the urge to start changing settings while you wait.
 
 !!! info "Post-installation precautions"
 
@@ -134,51 +134,51 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ## Common questions
 
-??? question "Will the police come after me for setting up a Tor Relay?"
+??? question "Will the police come after me for setting up a Tor relay?"
 
-    There are three types of relays: Guard Relay, Middle Relay, and Exit Relay. Guard and Middle Relays only serve to transmit traffic within the Tor network and do not connect directly to final destinations, so there is little risk of encountering law enforcement. However, running an Exit Relay carries potential legal risks and should be carefully considered.
+    There are three types of relays: guard, middle, and exit. Guard and middle relays only forward traffic inside the Tor network and never connect to a final destination, so there is little risk of law enforcement getting in touch. Running an exit relay carries real legal risk and needs careful consideration.
 
 ??? question "Is it feasible to set up a relay using a home network?"
 
     Setting up a Tor relay over a home network (e.g., using broadband or cable internet) may require configuring the router provided by your ISP, which can have some technical challenges. Home routers block all inbound connections by default, so you need to allow inbound traffic on your ORPort in the firewall and forward that port on the router.
 
-??? question "Why should I run a Tor Relay?"
+??? question "Why should I run a Tor relay?"
 
-    Running a Tor Relay helps expand the Tor network's bandwidth and stability, allowing more people to browse the internet safely and anonymously. This is vital for promoting internet freedom and privacy rights.
+    Running a Tor relay helps expand the Tor network's bandwidth and stability, allowing more people to browse the internet safely and anonymously. This is vital for promoting internet freedom and privacy rights.
 
-??? question "What benefits do I get from running a Tor Relay?"
+??? question "What benefits do I get from running a Tor relay?"
 
-    Although operating a Tor Relay doesn't offer direct financial rewards, it promotes global internet freedom, supports free speech, and privacy. It also makes you part of the open-source community, contributing to the infrastructure for an anonymous internet.
+    Although operating a Tor relay doesn't offer direct financial rewards, it promotes global internet freedom and supports free speech and privacy. It also makes you part of the open-source community, contributing to the infrastructure for an anonymous internet.
 
-??? question "Does running a Tor Relay require extensive technical knowledge?"
+??? question "Does running a Tor relay require extensive technical knowledge?"
 
-    Not necessarily. Basic networking knowledge (like IP addresses and port settings) is helpful, but Tor provides detailed installation guides, and many community forums offer support. Anyone interested can learn and set up a Relay.
+    Not necessarily. Basic networking knowledge (like IP addresses and port settings) is helpful, but Tor provides detailed installation guides, and many community forums offer support. Anyone interested can learn and set up a relay.
 
-??? question "Is running a Tor Relay legal?"
+??? question "Is running a Tor relay legal?"
 
     We can only speak to Taiwan, where the internet is relatively free and running a Tor relay is currently legal. Legal situations change, so it is worth following internet freedom issues and legislation where you are. Running an exit relay carries more legal risk, so read up on your local regulations first.
 
     For jurisdictions outside Taiwan, the EFF's [Legal FAQ for Tor Relay Operators](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"} is the standard starting point.
 
-??? question "What are the requirements for running a Tor Relay?"
+??? question "What are the requirements for running a Tor relay?"
 
     Make sure your network has stable upload and download speeds. The Tor Project recommends at least 10 Mbit/s (about 1.25 MB/s) in each direction for a relay, see [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}. If you have more than 1 Mbit/s but less than 10 Mbit/s, the Tor Project suggests running an obfs4 bridge instead of a relay. You also need a static IP address. Check that your ISP permits this kind of traffic and that your network equipment (firewall and router) can be configured for the required port forwarding.
 
-??? question "Will a Tor Relay affect my internet speed?"
+??? question "Will a Tor relay affect my internet speed?"
 
     A Tor relay only uses up to the bandwidth limit you configure, so it will not consume all your available capacity. You might still notice slight speed reductions under heavy load. You can adjust the bandwidth limits in the settings as needed.
 
-??? question "How do I protect my privacy while running a Tor Relay?"
+??? question "How do I protect my privacy while running a Tor relay?"
 
-    Tor Relays do not access or track users' traffic themselves, but it's advisable to be cautious with identifiable information, like not using an email address that contains personal details. Regularly update the Tor software for enhanced security.
+    Tor relays do not access or track users' traffic themselves, but it's advisable to be cautious with identifiable information, like not using an email address that contains personal details. Regularly update the Tor software for enhanced security.
 
-??? question "How do I upgrade my Tor Relay software?"
+??? question "How do I upgrade my Tor relay software?"
 
     Keeping the Tor software updated is essential for security patches and new features. On most Linux systems, you can update Tor via the package manager. Windows and macOS users should regularly check the Tor website for updates.
 
-??? question "How can I become a Guard Relay?"
+??? question "How can I become a guard relay?"
 
-    Guard Relays are automatically selected by the Tor network; users cannot manually configure this. If your node runs stably and has sufficient bandwidth, it may be chosen as a Guard Relay.
+    Guard relays are selected automatically by the Tor network and cannot be configured manually. If your relay runs stably and has enough bandwidth, it may be chosen as a guard.
 
 ## :fontawesome-solid-diagram-project: Where to go from here
 

@@ -22,7 +22,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     **Self-assessment** (check the items you can already do):
 
-    - [ ] I can explain how Tor works (onion routing, three-layer relays).
+    - [ ] I can explain how Tor works (onion routing, a three-hop circuit).
     - [ ] I can explain why internet freedom matters and what anonymous networks are for.
     - [ ] I can describe the current state of internet freedom in my region.
     - [ ] I can describe differences in internet freedom across regions and give specific examples.
@@ -137,7 +137,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
             Using a VPN with Tor is common. There are two main approaches:
 
-            1. **Tor-over-VPN**: Connect to VPN first, then connect to Tor. This is the more commonly used approach. Your real IP is hidden behind the VPN server, so your ISP cannot see you are using Tor. The VPN can also help bypass blocks on Tor entry nodes.
+            1. **Tor-over-VPN**: Connect to a VPN first, then connect to Tor. This is the more commonly used approach. Your real IP is hidden behind the VPN server, so your ISP cannot see you are using Tor. The VPN can also help bypass blocks on Tor entry nodes.
             2. **VPN-over-Tor**: Connect to Tor first, then use a VPN through Tor. This is rare and requires VPN provider support. It may not provide additional IP protection.
 
         ??? question "Install Tor Browser and use it for at least one week"
@@ -158,20 +158,20 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             1. Click the Tor Circuit icon in the address bar to view your current connection path.
             2. Click "New Tor circuit for this site" to rebuild the connection path. This is useful when the exit node is blocked by a website and you want to try a different country.
 
-        ??? question "Connect to .onion websites"
+        ??? question "Connect to `.onion` websites"
 
-            1. Visit the [project website](https://anoni.net/docs/){target="_blank"} and look for the purple ".onion available" button in the address bar. Clicking it redirects you to the `.onion` domain.
+            1. Visit the [project website](https://anoni.net/docs/en/){target="_blank"} and look for the purple "`.onion` available" button in the address bar. Clicking it redirects you to the `.onion` domain.
             2. DuckDuckGo also provides a `.onion` service: <https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/>{target="_blank"}
 
 === ":material-checkbox-marked-circle-auto-outline: Contribute"
 
     **Self-assessment** (check the items you can already do):
 
-    - [ ] I can clearly distinguish between Tor (the onion routing protocol), the Onion network, and Tor Browser.
+    - [ ] I can clearly distinguish between Tor (The Onion Router), the Onion network, and Tor Browser.
     - [ ] I can set up a Tor bridge using the Snowflake browser extension.
     - [ ] I can run the Tor service and route other applications through it using SOCKS v5.
     - [ ] I can look up relay status by region on [metrics.torproject.org](https://metrics.torproject.org){target="_blank"}.
-    - [ ] I can set up and maintain a Tor Relay.
+    - [ ] I can set up and maintain a Tor relay.
     - [ ] I can set up a Tor Bridge or WebTunnel relay.
     - [ ] I can host a `.onion` website.
 
@@ -214,19 +214,19 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             2. For Taiwan (TW), select Country: TW in Advanced options to see a list of active relays.
             3. The "[Tor relay watcher](../regional/tor-relay-watcher.md)" page also provides visualized monitoring data.
 
-        ??? question "Set up and maintain a Tor Relay"
+        ??? question "Set up and maintain a Tor relay"
 
-            Setting up a Tor Relay requires basic Linux skills and a server with a static IP and stable bandwidth.
+            Setting up a Tor relay requires basic Linux skills and a server with a static IP and stable bandwidth.
 
             See "[How to set up a Tor relay](./setup-tor-relay.md)" for the full guide, covering:
 
-            - Middle Relay installation and configuration (`/etc/tor/torrc`)
+            - Middle relay installation and configuration (`/etc/tor/torrc`)
             - Running multiple instances with `tor-instance-create`
             - Monitoring with nyx, and post-installation best practices
 
             For a bridge that survives heavy censorship, see "[How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md)".
 
-        ??? question "Host a .onion website"
+        ??? question "Host a `.onion` website"
 
             A `.onion` website is a onion service accessible only through Tor. To set one up, configure the Tor service on your server and specify the local listening port for the onion service.
 
@@ -252,7 +252,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "What is Tails and how does it work?"
 
-            Tails is a portable operating system built with security at its core. It runs entirely from a USB drive in RAM and leaves no trace on the computer you use it on. All outgoing network connections are routed through Tor by default.
+            Tails is a portable operating system built with security at its core. It boots from a USB drive, runs entirely in RAM, and leaves no trace on the computer you use it on. All outgoing network connections are routed through Tor by default.
 
             See [tails.net](https://tails.net/){target="_blank"} for the full introduction.
 
@@ -356,7 +356,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
         ??? question "Update Tails to the latest version"
 
             - Tails has a built-in update detection feature. If a new version is available, the system will notify you on the desktop after startup.
-            - Follow the prompts to update. You will need a second USB drive to complete the update (cloning from the old version to the new one).
+            - Follow the prompts to update. A manual upgrade needs a second USB drive, since it clones the old version onto the new one. Automatic upgrades do not.
             - See the [official Tails upgrade guide](https://tails.net/doc/upgrade/index.en.html){target="_blank"} for detailed steps.
 
         ??? question "MAC Address Anonymization"
@@ -401,11 +401,11 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     - [ ] I can explain what OONI is and what it is for.
     - [ ] I can distinguish between network surveillance and network censorship.
-    - [ ] I can explain how OONI's testing works.
+    - [ ] I can explain how OONI Probe testing works.
     - [ ] I can describe differences in network surveillance and censorship across regions.
 
     ??? tip "Not there yet? Start here."
-        1. Read "[What is OONI?](https://ooni.org/){target="_blank"}" (about 5–10 minutes)
+        1. Read "[What is OONI?](https://ooni.org/about/){target="_blank"}" (about 5–10 minutes)
         2. Read "[Why networked freedom matters](../basics/internet-freedom.md)"
         3. Come back and check the items above to confirm your understanding.
 
@@ -413,7 +413,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "What is OONI?"
 
-            Start with "[What is OONI?](https://ooni.org/){target="_blank"}".
+            Start with "[What is OONI?](https://ooni.org/about/){target="_blank"}".
 
         ??? question "Network surveillance vs. network censorship"
 

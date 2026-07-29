@@ -40,7 +40,7 @@ For OONI measurement, the ASN is the smallest useful unit of "which network did 
 
 [OONI](https://ooni.org/){target="_blank"} is supported by a global network of volunteers who use [OONI Probe](https://ooni.org/install/){target="_blank"} to detect issues like internet blocking and content censorship in their regions. The test results from OONI Probe are uploaded to the project's [open data repository](https://registry.opendata.aws/ooni/){target="_blank"} for record-keeping and further analysis and use.
 
-From November 2023 to March 2024, we analyzed the open data using [scripted retrieval](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} to primarily assess the current state of observation data, whether there is a lack of data or other issues.
+From November 2023 to March 2024, we analyzed the open data using our [retrieval scripts](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} to assess how complete the observation data was and where the gaps were.
 
 According to findings in the [December 2023 report](https://ocf.tw/en/p/ooni/report/202312.html){target="_blank"} by the Open Culture Foundation (OCF), a Taiwan-based nonprofit supporting open-source and digital-rights work, Taiwan's observational data ranked among the top ten in the OONI Explorer database by volume, which looks adequate. The samples tell a different story once you break them down by network: most observations come from [AS3462](https://radar.cloudflare.com/en-us/as3462){target="_blank"} (Chunghwa Telecom, the incumbent national carrier) and [AS18041](https://radar.cloudflare.com/en-us/as18041){target="_blank"} (Taiwan Digital Streaming), which together account for about 78.94% of all observation data. Taiwan has roughly 437 ASNs, yet the measurements cover only 7.32% of them.
 
@@ -68,7 +68,7 @@ If you haven't used OONI Probe yet, try understanding the process through the fo
 
 ### Reading the raw data
 
-For example, a measurement data item has the UID:
+Take this measurement, identified by the UID:
 
 - [`20241024185921.623617_TW_webconnectivity_578b6d3845fed2e2`](https://explorer.ooni.org/zh-Hant/m/20241024185921.623617_TW_webconnectivity_578b6d3845fed2e2){target="_blank"}
 
@@ -90,7 +90,7 @@ Finally, in the "Raw Measurement Data" section, you can find all the raw data of
 
 !!! question "Detections Revealing Differences Between AS and DNS"
 
-    In this example explanation process, it can be observed that OONI Probe logs the entire testing process. For instance, we can find that even while accessing the internet through Chunghwa Telecom's network, the DNS queries in the test data are performed using Cloudflare's DNS.
+    This example shows that OONI Probe records the whole test path. Note that even though the connection went through Chunghwa Telecom's network, the DNS queries in the test data were answered by Cloudflare's DNS.
 
     - Question: If a website is blocked and cannot be accessed, is it an issue with the AS or the DNS?
 
