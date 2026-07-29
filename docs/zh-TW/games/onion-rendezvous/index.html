@@ -111,6 +111,9 @@
     #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
     #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs .on { color: #fff; font-weight: 700; }
+    #backlink { margin-top: 6px; font-size: 11px; color: var(--muted); }
+    #backlink a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #backlink a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
     #note { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.6; display: flex; flex-direction: column; gap: 5px; }
     #note p { margin: 0; }
@@ -179,6 +182,9 @@
           </div>
           <div id="backend">偵測中…</div>
           <div id="langs"></div>
+          <!-- 這頁對爬蟲來說原本是死路，連結一條都沒有，對使用者也沒有回去的路。
+               靜態寫死 zh-TW 版本讓爬蟲讀得到，其他語系由 i18n 換掉整段（含連結網址）。 -->
+          <div id="backlink">← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../tools/tor-snowflake/">Tor Snowflake 橋接</a></div>
         </div>
       </div>
     </details>

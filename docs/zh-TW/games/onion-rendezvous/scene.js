@@ -20,6 +20,9 @@ document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn'
 function applyI18n() {
   const lb = $('langs');
   if (lb) lb.innerHTML = langLinksHTML(LANG);
+  // 返回列整段換掉，因為連結網址本身各語系不同，指向的是各自語系的文件。
+  const bl = $('backlink');
+  if (bl) bl.innerHTML = S('backlink');
   document.title = S('pageTitle') + ' · anoni.net';
   const set = (id, key) => { const el = $(id); if (el) el.textContent = S(key); };
   set('title', 'pageTitle');

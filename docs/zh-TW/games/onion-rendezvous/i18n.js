@@ -45,6 +45,9 @@ const ZH_TW = {
   blkNoGpu: '這個瀏覽器沒有 WebGPU',
   blkNoAdapter: '系統沒有給出可用的 GPU',
   blkRejected: 'WebGPU 被擋下',
+
+  // 面板底部的返回列，整段連同連結一起換語言。
+  backlink: '← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../tools/tor-snowflake/">Tor Snowflake 橋接</a>',
 };
 
 const EN = {
@@ -90,6 +93,9 @@ const EN = {
   blkNoGpu: 'this browser has no WebGPU',
   blkNoAdapter: 'the system offered no usable GPU',
   blkRejected: 'WebGPU was refused',
+
+  // 英文站沒有 what-is-tor，改指實際存在的英文頁。
+  backlink: '← <a href="../../en/games/">Interactive</a>　Further reading: <a href="../../en/basics/anonymity-vs-privacy/">Anonymity vs privacy</a>, <a href="../../en/tools/tor-snowflake/">Tor Snowflake</a>',
 };
 
 const ZH_CN = {
@@ -135,6 +141,8 @@ const ZH_CN = {
   blkNoGpu: '这个浏览器没有 WebGPU',
   blkNoAdapter: '系统没有给出可用的 GPU',
   blkRejected: 'WebGPU 被挡下',
+
+  backlink: '← <a href="../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="../../zh-cn/tools/tor-snowflake/">Tor Snowflake</a>',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };

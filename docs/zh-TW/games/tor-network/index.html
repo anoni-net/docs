@@ -169,6 +169,9 @@
     #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
     #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs .on { color: #fff; font-weight: 700; }
+    #backlink { margin-top: 6px; font-size: 11px; color: var(--muted); }
+    #backlink a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #backlink a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
 
     #live-box { margin: 0 0 10px; }
@@ -329,6 +332,9 @@
         </div>
         <div id="backend">偵測中…</div>
         <div id="langs"></div>
+        <!-- 這頁的連結原本全部指向站外的資料來源，站內一條都沒有，權重只出不進。
+             靜態寫死 zh-TW 版本讓爬蟲讀得到，其他語系由 i18n 換掉整段（含連結網址）。 -->
+        <div id="backlink">← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../tools/what-is-tor/">什麼是 Tor</a></div>
       </div>
     </details>
   </div>
