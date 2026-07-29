@@ -10,11 +10,11 @@ icon: material/email-fast-outline
 
 - 登録先： <https://form.anoni.net/s/w21855zpca072rvgp0s2govj>{target="_blank"}
 
-公開の場では話しにくい内容がある場合は、下記のメール アドレスからプロジェクト メンバーに直接ご連絡ください。
+公開の場では話しにくい内容がある場合は、下記のメールアドレスからプロジェクトメンバーに直接ご連絡ください。
 
 ### コミュニティでの議論とオンライン会議
 
-継続的な議論やテーマごとの協働には **Matrix**（Web クライアントは [Element](https://matrix.anoni.net/){target="_blank"}、ホームサーバーは `im.anoni.net`）、[**Cryptpad** による暗号化された共同編集](https://cryptpad.anoni.net/){target="_blank"}、オンライン会議には [**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} を使っています。アカウントの申請方法と参加の手順は[コミュニティ ページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）をご覧ください。
+継続的な議論やテーマごとの協働には **Matrix**（Web クライアントは [Element](https://matrix.anoni.net/){target="_blank"}、ホームサーバーは `im.anoni.net`）を、暗号化された共同編集には [**Cryptpad**](https://cryptpad.anoni.net/){target="_blank"} を、オンライン会議には [**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} を使っています。アカウントの申請方法と参加の手順は[コミュニティページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）をご覧ください。
 
 ### 日本語での連絡について
 

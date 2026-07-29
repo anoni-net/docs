@@ -8,7 +8,7 @@ icon: material/account-box-outline
 
 anoni.net は台湾を拠点とする小規模なボランティアコミュニティで、アジア太平洋の中国語圏におけるネットワークの自由を扱っています。2023 年ごろに台湾の OONI 観測カバレッジを中心テーマとして集まり、その後、地域観測、法制度の追跡、地域研究の選択的な翻訳へと範囲を広げてきました。
 
-このページは、私たちの成果を引用する、提携する、あるいは他者に薦める前に「誰がやっているのか」を確認する必要がある海外の同業組織、報道関係者、研究者、資金提供者に向けて書いています。
+このページは海外の同業組織、報道関係者、研究者、資金提供者に向けて書いています。私たちの成果を引用する、提携する、あるいは他者に薦める、その前に「誰がやっているのか」を確認しておきたい方々を想定しています。
 
 ## 私たちの実像
 
@@ -27,23 +27,23 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 
 ## ガバナンス
 
-形式を最小限に抑えた合意形成モデルで運営しています。ガバナンス憲章の草案はコミュニティ レビュー中で、全文は[ガバナンス憲章](https://anoni.net/docs/en/community/governance/){target="_blank"}（英語）にあります。要点は次のとおりです。
+形式を最小限に抑えた合意形成モデルで運営しています。ガバナンス憲章の草案はコミュニティレビュー中で、全文は[ガバナンス憲章](https://anoni.net/docs/en/community/governance/){target="_blank"}（英語）にあります。要点は次のとおりです。
 
-- **役割** — *コア メンバー*（自前インフラの運用権限と PR マージ権限を持つ長期メンテナ）、*貢献者*（実際に成果を出している人）、*オブザーバー*（ニュースレター購読者や Public Space の参加者）、*訪問者*（閲覧し `whisper@anoni.net` 経由で連絡してくる人）。
-- **意思決定** — 原則は合意形成で、異議申し立てのための 3 日間の窓を設けます。投票は合意が行き詰まったときと時間的な制約があるときに限ります。憲章の変更やコア メンバーの追加といった重要な決定は、活動中の貢献者の 3 分の 2 の賛成を要します。
-- **紛争処理** — 内容に関する対立は提案プロセスに乗せます。対人的な対立はコア メンバーが扱い、ハラスメントや脅迫といった重大な事例では直ちにアクセス権を剥奪し、影響を受けた人への支援を個別に検討します。
-- **行動規範** — 背景、技術レベル、政治的立場の違いを越えて敬意を保つこと。議論はアイデアに向け、人格に向けないこと。公開ルームでの透明性を保つこと。違法行為（マネーロンダリング、ハラスメント、児童性的虐待コンテンツ、外国政府の情報活動）への協力は明確に拒否します。
+- **役割** — *コアメンバー*（自前インフラの運用権限と PR マージ権限を持つ長期メンテナ）、*貢献者*（実際に成果を出している人）、*オブザーバー*（ニュースレター購読者や Public Space の参加者）、*訪問者*（閲覧し `whisper@anoni.net` 経由で連絡してくる人）。
+- **意思決定** — 原則は合意形成で、異議申し立てのための 3 日間の猶予期間を設けます。投票は合意が行き詰まったときと時間的な制約があるときに限ります。憲章の変更やコアメンバーの追加といった重要な決定は、活動中の貢献者の 3 分の 2 の賛成を要します。
+- **紛争処理** — 内容に関する対立は提案プロセスに乗せます。対人的な対立はコアメンバーが扱い、ハラスメントや脅迫といった重大な事例では直ちにアクセス権を剥奪し、影響を受けた人への支援を個別に検討します。
+- **行動規範** — 背景、技術レベル、政治的立場の違いを越えて敬意を保ちます。議論はアイデアに向け、人格には向けません。公開ルームでの透明性を保ちます。違法行為（マネーロンダリング、ハラスメント、児童性的虐待素材、外国政府の情報活動）への協力は明確に拒否します。
 
-意思決定の履歴と重要な変更は、[GitHub リポジトリ](https://github.com/anoni-net/docs){target="_blank"} のコミット ログとプロジェクトのブログで確認できます。
+意思決定の履歴と重要な変更は、[GitHub リポジトリ](https://github.com/anoni-net/docs){target="_blank"} のコミットログとプロジェクトのブログで確認できます。
 
 ## 提携と協働
 
 直接協働した組織の一覧です。掲載の基準は双方向の協働があることで、引用や参加だけのものは含めません。
 
-- **[Tor Project](https://torproject.org/){target="_blank"}** — 翻訳への貢献、[Snowflake](https://snowflake.torproject.org/){target="_blank"} ブリッジの提供、台湾でのキャンパス リレー設置の継続的な取り組み。[国立台湾師範大学のリレー](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}は 2026 年 3 月に Tor Project ブログのゲスト記事として取り上げられました。
+- **[Tor Project](https://torproject.org/){target="_blank"}** — 翻訳への貢献、[Snowflake](https://snowflake.torproject.org/){target="_blank"} ブリッジの提供、台湾でのキャンパスリレー設置の継続的な取り組み。[国立台湾師範大学のリレー](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}は 2026 年 3 月に Tor Project ブログのゲスト記事として取り上げられました。
 - **[OONI](https://ooni.org/){target="_blank"}** — OONI Probe のローカル運用、地域のテスト対象サイト一覧への貢献、OONI の方法論とアナウンスの中国語訳。
 - **[Electronic Frontier Foundation](https://www.eff.org/){target="_blank"}** — Tor Relay on Campus の取り組みでの協働。EFF と Tor Project の共同企画である [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} の繁体字中国語訳を担当しました。
-- **大学の受け入れ先** — 国立台湾師範大学（Tor リレーの設置）、国立台湾科技大学（2025 年の匿名ネットワーク ワークショップ会場）。
+- **大学の受け入れ先** — 国立台湾師範大学（Tor リレーの設置）、国立台湾科技大学（2025 年の匿名ネットワークワークショップ会場）。
 
 方針として、協力者は明示的にクレジットします。自分たちの成果でないものを自分たちのものとして扱うことはしません。
 
@@ -57,9 +57,9 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 
 ## 資金と資源
 
-現在はボランティア運営で、外部資金は受けていません。運営費（ドメイン登録料、Matrix とドキュメントサイトのサーバー費用、カンファレンスの旅費）はコア メンバーが負担しています。助成金や寄付を受け取る体制は整えておらず、そうする前に資金提供者と話をしたいと考えています。
+現在はボランティア運営で、外部資金は受けていません。運営費（ドメイン登録料、Matrix とドキュメントサイトのサーバー費用、カンファレンスの旅費）はコアメンバーが負担しています。助成金や寄付を受け取る体制は整えておらず、そうする前に資金提供者と話をしたいと考えています。
 
-アジア太平洋の中国語圏におけるネットワークの自由に関心のある資金提供者の方は、[コミュニティ ページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）に記載の窓口からご連絡ください。
+アジア太平洋の中国語圏におけるネットワークの自由に関心のある資金提供者の方は、[コミュニティページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）に記載の窓口からご連絡ください。
 
 ## ライセンス
 
@@ -67,7 +67,7 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 
 - **ドキュメントサイトの内容**（[github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}）— [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"} — 出典表示のうえで共有と改変が可能です
 - **Pulse のコード** — [MIT License](https://github.com/anoni-net/docs/blob/main/pulse/LICENSE){target="_blank"}
-- **ASN カバレッジ ツール** — [GPL-3.0](https://github.com/anoni-net/docs/blob/main/asn_coverage/LICENSE){target="_blank"}
+- **ASN カバレッジ分析ツール** — [GPL-3.0](https://github.com/anoni-net/docs/blob/main/asn_coverage/LICENSE){target="_blank"}
 
 ドキュメントを再利用する際の出典表示の書式は「anoni.net Docs Project, 該当ページの URL, CC-BY 4.0」です。
 
@@ -79,7 +79,7 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 
 このページに書かれた主張とは独立に、次の点は外から確認できます。
 
-- ドキュメントサイト、Pulse、ASN カバレッジ ツールの全ソースは [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} にあり、コミット履歴と貢献者一覧も公開されています
+- ドキュメントサイト、Pulse、ASN カバレッジ分析ツールの全ソースは [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} にあり、コミット履歴と貢献者一覧も公開されています
 - Pulse のデータは [api.anoni.net](https://api.anoni.net/api/readme){target="_blank"} から誰でも読めます
 - [Tor onion ミラー](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}は clearnet 版と同じ内容を反映しています
 - 最近の活動と対外的な参加は[更新情報](https://anoni.net/docs/en/blog/){target="_blank"}（英語）に、写真や記録とともに残しています
@@ -91,4 +91,4 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 - **ニュースレター** — [連絡先ページ](../contact.md)から登録できます
 - **GitHub** — Issue と PR は [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} へ
 
-紹介、提携の相談、研究協力については、用途ごとにどの窓口が適切かを[コミュニティ ページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）に整理しています。
+紹介、提携の相談、研究協力については、用途ごとにどの窓口が適切かを[コミュニティページ](https://anoni.net/docs/en/community/){target="_blank"}（英語）に整理しています。

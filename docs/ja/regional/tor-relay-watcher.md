@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 ```
 
-- リレー フラグの分布[^6]
+- リレーフラグの分布[^6]
 ```vegalite
   {
     "description": "Tor Relays Flags (count), Japan",
