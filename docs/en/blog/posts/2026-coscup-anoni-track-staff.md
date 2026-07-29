@@ -38,7 +38,7 @@ All three roles follow a set routine. We hold one online briefing the week befor
 
 ## When and where
 
-- **Sat, Aug 8**: 08:30 to 17:00. The morning is the community's four primer talks; from 13:00 it is the anonymous-payments session co-organized with ETHTaipei (`TR-511`), where our staffing is lighter.
+- **Sat, Aug 8**: 08:30 to 17:00. The morning is three community primers plus one invited talk; from 13:00 it is the anonymous-payments session co-organized with ETHTaipei (`TR-511`), where our staffing is lighter.
 - **Sun, Aug 9**: 09:00 to 16:30. Seven accepted talks back to back, the day we need people most.
 - **Venue**: National Taiwan University of Science and Technology (NTUST), Taipei. The community track is in `TR-510`.
 

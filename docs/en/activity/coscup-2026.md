@@ -38,7 +38,7 @@ The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work 
 !!! tip "Where to start, by who you are"
 
     - **Newsrooms and independent journalists**: "Real-world open-source privacy tools" (Aug 8 morning) walks through the secure intake channels, metadata scrubbing, and isolation tools journalists actually use, paired with "Threat models and metadata 101". On Aug 9 afternoon, "Browser tracking, anti-tracking strategies" unpacks how your everyday browser can leak who you've contacted, and "After the health-insurance database case" and "Privacy guide 2026" extend into data-privacy rights and responding to legal data requests. Further reading: [protecting journalistic sources](../scenarios/journalist.md).
-    - **Civil-society groups and NGOs**: the four Aug 8 morning primers map closely to organizational realities, and "Real-world open-source privacy tools" surveys the encrypted messaging, collaboration, and leak-intake tools civil-society groups and NGOs rely on, while "Privacy guide 2026" covers preparing for legal data requests. To weigh anonymous donation channels, start with Aug 8 morning's "Why anonymous payments matter" (plain language, no crypto background), then go deeper with the Aug 8 afternoon ETHTaipei session's "I don't launder money — so why understand anonymous payments?".
+    - **Civil-society groups and NGOs**: the four Aug 8 morning primers map closely to organizational realities, and "Real-world open-source privacy tools" surveys the encrypted messaging, collaboration, and leak-intake tools civil-society groups and NGOs rely on, while "Privacy guide 2026" covers preparing for legal data requests. The Aug 8 morning talk on anonymous eligibility verification covers how a beneficiary or a whistleblower can prove they qualify without leaving identifying data behind. To weigh anonymous donation channels, the Aug 8 afternoon ETHTaipei session's "I don't launder money — so why understand anonymous payments?" is the plain-language entry point, with no crypto background needed.
     - **Open-source and tech community**: Aug 9 is the most technical — OpenWRT, the NTNU Tor node, and browser-fingerprint research are all hands-on. The Aug 8 afternoon zero-knowledge Citizen Digital Certificate work, privacy-preserving KYC, and stealth addresses are the meatiest protocol-level content. To contribute, see [how to contribute](../community/how-to-contribute.md).
     - Feel free to bring colleagues along.
 
@@ -48,7 +48,7 @@ Below is the community track plan; actual times follow the [official COSCUP sche
 
 ### Day 1: 2026/08/08 (Sat)
 
-Aug 8 morning is four open-source anonymity primers led by anoni.net community members — pitched as entry-level and well suited to civil-society groups, news media, and independent journalists, with open source as the through-line. From 13:00, the ETHTaipei co-organized "Anonymous Payments" session takes over with heavier protocol-level content.
+Aug 8 morning is four open-source anonymity primers, the first three led by anoni.net community members and the fourth an invited talk — pitched as entry-level and well suited to civil-society groups, news media, and independent journalists, with open source as the through-line. From 13:00, the ETHTaipei co-organized "Anonymous Payments" session takes over with heavier protocol-level content.
 
 **Morning 09:30–12:00 · community open-source anonymity primers (room `TR-510`)**
 
@@ -57,7 +57,7 @@ Aug 8 morning is four open-source anonymity primers led by anoni.net community m
 | 09:30-10:00<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-account-group: **Meet Anonymity Networks Community: open-source anonymity tools, community practice, and the three 2026 themes**<br>:material-arrow-right-bottom: A group in Taiwan localizing Tor, Tails, and OONI into Chinese: who they are, what they do, and why high-risk work needs tools you can verify rather than a black box you can't | anoni.net community |
 | 10:10-10:40<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-target-account: **Threat models and metadata 101: know your adversary, and why anonymity tools must be open source to be trustworthy**<br>:material-arrow-right-bottom: Even if your calls aren't tapped, who you contacted and when is often enough to expose a source. Work out who you're defending against, and how far to go | anoni.net community |
 | 10:50-11:20<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-toolbox-outline: **Real-world open-source privacy tools: how civil-society groups, independent journalists, and individuals actually use them**<br>:material-arrow-right-bottom: Which open, auditable, free tools journalists, NGOs, and privacy-minded individuals actually use to protect themselves, laid out so anyone can pick one or two to take home | anoni.net community |
-| 11:30-12:00<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-cash-multiple: **Why anonymous payments matter: open, decentralized money flows and Taiwan's VASP Act 2026**<br>:material-arrow-right-bottom: A donation to a sensitive-issue group, a transfer to a source: the money flow itself leaks the relationship. Plain-language money-flow privacy, no crypto background needed | anoni.net community |
+| 11:30-12:00<br>30 min | <span class="sess-tag sess-tag--basic">General</span> :material-scale-balance: **毒品非毒、洗錢非洗錢—淺談匿名的資格驗證 (Drugs that aren't drugs, laundering that isn't laundering: on anonymous eligibility verification)**<br>:material-arrow-right-bottom: The same thing gets sorted into two categories under different rules, so who gets to define lawful and unlawful? Looking for a third path between full real-name identification and no identification at all; no cryptography background needed | Denken Chen |
 
 **Afternoon 13:00–16:30 · ETHTaipei "Anonymous Payments" session (room `TR-511`, program arranged by ETHTaipei)**
 
@@ -94,7 +94,11 @@ Aug 9 is a full day of seven accepted talks, spanning network and censorship bas
 
 ## :material-account-voice: Speakers { #speakers }
 
-The four Aug 8 morning primers are led by anoni.net community members (people who actually run Tor relays and work on the Traditional Chinese localization and bug reports for Tails and OONI); more about the community is on [About us](../about/index.md). Below are the invited and co-organized speakers in program order — click a name for their full bio on COSCUP pretalx.
+The first three Aug 8 morning primers are led by anoni.net community members (people who actually run Tor relays and work on the Traditional Chinese localization and bug reports for Tails and OONI), and the fourth is an invited talk; more about the community is on [About us](../about/index.md). Below are the invited and co-organized speakers in program order — click a name for their full bio on COSCUP pretalx.
+
+**Aug 8 morning · invited talk**
+
+- **[Denken Chen](https://pretalx.coscup.org/coscup-2026/speaker/FW9HYA/){target="_blank"}**: over ten years in software development and writing; works on the W3C Decentralized Identifiers and Verifiable Credentials standards, takes part in the Credentials Community Group and in Taiwan's digital identity wallet, and started the Ptt-iOS and Taiwan E-Book Search open-source projects. Speaks on "毒品非毒、洗錢非洗錢—淺談匿名的資格驗證", and co-presents "年齡驗證、數位監控、隱私權，討論這些以前，不妨先開源吧" with 黃豆泥 mashbean in the Aug 9 Open Source Policy track.
 
 **Aug 8 afternoon · ETHTaipei "Anonymous Payments" session**
 
