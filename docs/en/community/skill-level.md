@@ -4,7 +4,7 @@ description: A self-assessment checklist across Tor, Tails, and OONI, split into
 icon: octicons/paste-24
 ---
 
-# :octicons-paste-24: Self-Skills Evaluation Form
+# :octicons-paste-24: Self-skills evaluation form
 
 Here is a self-evaluation scale to help you quickly assess your understanding of Tor, Tails, and OONI. If you are unsure where to start, use this form as a learning guide.
 
@@ -16,13 +16,13 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     | **Practice** | Install and operate tools in daily use | Journalists, civil society workers, anyone who needs to protect their communications |
     | **Contribute** | Build infrastructure, analyze data, participate in the community | Open-source community members with basic command-line or data analysis skills |
 
-## Tor Skills
+## Tor skills
 
 === ":material-checkbox-marked-circle-outline: Awareness"
 
     **Self-assessment** (check the items you can already do):
 
-    - [ ] I can explain how Tor works (onion routing, three-layer relay nodes).
+    - [ ] I can explain how Tor works (onion routing, three-layer relays).
     - [ ] I can explain why internet freedom matters and what anonymous networks are for.
     - [ ] I can describe the current state of internet freedom in my region.
     - [ ] I can describe differences in internet freedom across regions and give specific examples.
@@ -44,7 +44,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             :octicons-question-24: **More details**
 
             1. **Background**: Tor was originally developed by the U.S. Naval Research Laboratory to protect government communications. It was later made available to the public to support freedom of speech and privacy.
-            2. **How it works**: Tor encrypts your traffic and routes it through multiple relay nodes, making it very difficult to trace.
+            2. **How it works**: Tor encrypts your traffic and routes it through multiple relays, making it very difficult to trace.
             3. **Privacy and security**: Tor prevents network monitoring and traffic analysis, and can bypass geo-blocking and censorship.
             4. **Limitations**: Speeds are typically slower than regular connections. If a user voluntarily reveals identifying information (e.g., logs into an account), they may still be identifiable.
             5. **Legal considerations**: In some countries, using Tor may be subject to legal restrictions. Check local regulations before use.
@@ -185,8 +185,8 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Tor vs. Onion network vs. Tor Browser."
 
-            - **Tor (The Onion Router)**: The underlying anonymous routing technology. Traffic passes through multiple relay nodes with layers of encryption, making the source very hard to trace.
-            - **Onion network**: The network of hidden services accessible only via Tor, identified by `.onion` addresses.
+            - **Tor (The Onion Router)**: The underlying anonymous routing technology. Traffic passes through multiple relays with layers of encryption, making the source very hard to trace.
+            - **Onion network**: The network of onion services accessible only via Tor, identified by `.onion` addresses.
             - **Tor Browser**: A Firefox ESR-based browser with Tor built in, making it easy for regular users to access Tor and `.onion` sites.
 
         ??? question "Set up a Tor bridge using the Snowflake browser extension."
@@ -228,11 +228,11 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Host a .onion website."
 
-            A `.onion` website is a hidden service accessible only through Tor. To set one up, configure the Tor service on your server and specify the local listening port for the hidden service.
+            A `.onion` website is a onion service accessible only through Tor. To set one up, configure the Tor service on your server and specify the local listening port for the onion service.
 
             See the official guide: [Tor Project | Set up Your Onion Service](https://community.torproject.org/onion-services/setup/){target="_blank"}.
 
-## Tails Skills
+## Tails skills
 
 === ":material-checkbox-marked-circle-outline: Awareness"
 
@@ -245,7 +245,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
     ??? tip "Not there yet? Start here."
         1. Visit [tails.net](https://tails.net/){target="_blank"} and read the introductory documentation (about 5–10 minutes).
-        2. The background knowledge on internet freedom and anonymous networks is the same as the Tor Awareness level. Complete "[Tor Awareness](#Tor-Skills)" first, then come back.
+        2. The background knowledge on internet freedom and anonymous networks is the same as the Tor Awareness level. Complete the [Tor skills](#Tor-skills) section first, then come back.
         3. Come back and check the items above to confirm your understanding.
 
     !!! abstract "Reference"
@@ -258,11 +258,11 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Why internet freedom matters, and what anonymous networks are."
 
-            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)" and "[Why networked freedom matters](../basics/internet-freedom.md)".
+            This background knowledge is the same as the Tor Awareness level. See the [Tor skills](#Tor-skills) section and "[Why networked freedom matters](../basics/internet-freedom.md)".
 
         ??? question "What is the current state of internet freedom in your region?"
 
-            This background knowledge is the same as the Tor Awareness level. See "[Tor Awareness](#Tor-Skills)".
+            This background knowledge is the same as the Tor Awareness level. See the [Tor skills](#Tor-skills) section.
 
 === ":material-checkbox-marked-circle-outline: Practice"
 
@@ -393,7 +393,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](../contact.md)" page.
             - Compose the email in Thunderbird, choose to encrypt it, and send. The recipient will decrypt it using their private key.
 
-## OONI Skills
+## OONI skills
 
 === ":material-checkbox-marked-circle-outline: Awareness"
 
@@ -531,36 +531,17 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
             2. After installing, use `ooniprobe run` to run all tests, or `ooniprobe run websites` to test websites only.
             3. The CLI is suitable for running on servers or in scheduled environments to continuously monitor network conditions in specific regions.
 
-        ??? question "How test lists are curated."
+        ??? question "Test lists, and how to help maintain them."
 
-            When OONI Probe runs website tests, it checks URLs from the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"}.
+            OONI Probe measures against the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"}: a global list plus one per country, sorted into four categories.
 
-            The lists are divided into:
-
-            - **Global list**: Covers widely visited websites, mostly in English.
-            - **Country lists**: Region-specific lists with local-language content. In countries with internet censorship, these also include blocked websites.
-
-            URLs are categorized into four groups: political, social, conflict and security, and internet tools.
-
-            See "[OONI Website Testing List](../regional/ooni-checklist.md)" for more details.
-
-        ??? question "How to contribute to test list maintenance."
-
-            Steps to contribute:
-
-            1. Go to [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} and find the country CSV file you want to work on (e.g., `lists/tw.csv`).
-            2. Check each URL in the list. Flag URLs that need updating (broken links, changed domains) or should be removed (site no longer operating).
-            3. Submit a Pull Request with your changes.
-            4. See "[OONI Website Testing List](../regional/ooni-checklist.md)" for more details on the process.
+            [OONI Website Testing List](../regional/ooni-checklist.md) covers how the lists work, what shape a country list is typically in, and the review-and-pull-request workflow for helping maintain one. It needs no programming.
 
         ??? question "Process and analyze raw OONI measurement data."
 
-            OONI provides public raw measurement data on AWS S3:
+            OONI publishes raw measurement data on AWS S3 (`ooni-data-eu-fra`, eu-central-1), which you can use to analyse ASN coverage, track a site's blocking status over time, or compare across regions.
 
-            1. Data is stored in the S3 bucket `ooni-data-eu-fra` (eu-central-1 region).
-            2. Format: `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`
-            3. The [ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md) in this project provides a download and analysis example — see `asn_coverage/ooni.py`.
-            4. Raw data can be used to analyze ASN measurement coverage, track blocking status of specific websites over time, and conduct cross-region comparisons.
+            [ASN observation data retrieval and analysis](./asn-coverage-howto.md) has the retrieval scripts and commands, and [ASNs Observation Data Analysis](../regional/ooni-asn-coverage.md) explains what the resulting numbers mean.
 
 ## After the assessment
 

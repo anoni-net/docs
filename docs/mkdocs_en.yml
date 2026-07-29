@@ -68,6 +68,7 @@ nav:
       - community/governance.md
       - community/i18n.md
       - community/setup-repo.md
+      - community/asn-coverage-howto.md
       - community/setup-tor-relay.md
       - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md
@@ -202,7 +203,6 @@ plugins:
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
         'blog/2026/03/arti_2_1_0_released.md': 'blog/index.md'
         'blog/2026/04/ooni-probe-desktop-beta-2026.md': 'blog/index.md'
-        'community/asn-coverage-howto.md': 'community/index.md'
         'community/become-anoni.md': 'community/index.md'
         'community/brand-assets.md': 'community/index.md'
         'community/campus-relay-faq.md': 'community/index.md'

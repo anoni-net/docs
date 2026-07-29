@@ -8,89 +8,46 @@ icon: simple/torproject
 
 How to install and run a Tor middle relay, written from the operating experience of a Taiwan-based volunteer community. The installation itself is not region-specific, so the steps apply anywhere. Where local law or ISP conditions matter, we say so and point you to sources for your own jurisdiction.
 
-## What is Tor?
+!!! warning "Considerations before you start"
 
-<figure markdown="span">
-    <a target="_blank"
-       href="../../assets/images/tor_diagram.original.webp">
-        <img src="../../assets/images/tor_diagram.original.webp"
-            alt="How Tor Relay Works"
-            title="How Tor Relay Works"
-        >
-    </a>
-    <caption>How Tor Relay Works</caption>
-</figure>
+    If you are not yet familiar with how Tor works, start with [What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"} and [Types of relays on the Tor network](https://community.torproject.org/relay/types-of-relays/){target="_blank"} on the Tor Project's own site. They keep those current in a way we cannot match.
 
-[Tor (The Onion Router)](https://www.torproject.org/){target="_blank"} is an open-source anonymous communication network designed to protect users' privacy and freedom. Tor anonymizes users' internet activity through multilayer encryption and routing technology, preventing network surveillance and traffic analysis.
+    <figure markdown="span">
+        <a target="_blank"
+        href="../../assets/images/tor_diagram.original.webp">
+            <img src="../../assets/images/tor_diagram.original.webp"
+                alt="How Tor Relay Works"
+                title="How Tor Relay Works"
+            >
+        </a>
+        <caption>How Tor Relay Works</caption>
+    </figure>
 
-- **Onion Routing:** Each time a user sends a request, the Tor client selects a random path and transmits data through multiple relay nodes. The packet data is encrypted and decrypted at each node, much like peeling an onion, until it reaches its destination. Each node only knows the previous and next nodes, preventing any single node from knowing the entire data transmission path.
-- **Anonymity:** Users' IP addresses and network activities are hidden, enhancing anonymity. The Tor network makes it very difficult to trace users' online behavior.
-- **Privacy Protection:** Tor protects users from being monitored by ISPs (Internet Service Providers), governments, and other surveillance entities. It also helps users bypass internet censorship and access restricted websites.
-- **Dark Web:** Tor supports accessing .onion domains, which are only connectable within the Tor network, providing an additional layer of anonymity. The Dark Web has some legitimate uses, such as protecting freedom of speech and privacy, although it also hosts illegal activities.
-- **Usage:** Users can download and install the Tor Browser, a modified version of Firefox, pre-configured to use the Tor network. Many users utilize the Tor Browser to surf the internet anonymously and protect personal privacy.
+    This guide only covers a middle relay. If you want to run something more exposed, work through these questions first and decide how much risk you are willing to accept:
 
-## Relay and Bridge
+    - Do you want to run a Tor exit or non-exit (bridge/guard/middle) relay?
+    - If you want to run an exit relay: which ports do you want to allow in your exit policy? More ports usually means more abuse complaints.
+    - What external TCP port do you want to use for incoming Tor connections? For the `ORPort` setting we recommend port 443 if no other daemon on your server is using it, because it is often one of the few ports left open on public Wi-Fi. Port 9001 is another common choice.
+    - What email address will you use in the `ContactInfo` field of your relay? This information is public.
+    - How much bandwidth and monthly traffic do you want to allow for Tor traffic?
+    - Does the server have an IPv6 address?
 
-### What is Tor Relay?
+## How to set up a middle relay
 
-<figure markdown="span">
-    <a target="_blank"
-       href="../../assets/images/tor_relays.svg">
-        <img src="../../assets/images/tor_relays.svg"
-            alt="Tor Relays"
-            title="Tor Relays"
-        >
-    </a>
-    <caption>Tor Relays</caption>
-</figure>
+Setting up a middle relay takes some technical knowledge and a basic install-and-configure workflow. We recommend Debian or Ubuntu, and the examples below use them.
 
-In the Tor network, relays are volunteer-operated servers used to forward users' traffic to achieve anonymous network communication. These relays are a core component of the Tor network, working together to hide users' IP addresses and online activities. There are three types of relays: Guard Relay, Middle Relay, and Exit Relay. Each type plays a different role in the Tor network:
-
-- **Guard Relay:** This is the first node to which a user connects in the Tor network. It knows the user's real IP address but does not know the user's final destination. Typically, the Tor client selects a set of trusted guard relays and reuses them over time to reduce the attack surface.
-- **Middle Relay:** This relay is positioned between the guard relay and the exit relay, used to forward traffic. It only knows the previous and next nodes, unable to determine the user's real IP address or the final destination. This design ensures that even if the middle relay is attacked or monitored, the attacker cannot trace the entire path of network communication.
-- **Exit Relay:** This is the last relay where user traffic exits the Tor network and enters the public internet. It knows the user's final destination but not the user's real IP address. Volunteers operating exit relays incur some risk, as the traffic leaving them may contain sensitive or illegal content.
-
-### What is Bridge?
-
-Apart from relays, the Tor network also has an important type of node called a Bridge. Bridges are specifically designed to circumvent network censorship or blockages against Tor usage. They play a special role in the Tor network, primarily aimed at helping people in countries or regions with strict restrictions to access Tor. Here are some key points about Bridges:
-
-Features and Uses:
-
-- **Secrecy:** Unlike regular relays, Bridges' IP addresses are not publicly listed in the Tor network's public index. This makes it difficult for censorship bodies to identify and block them, as these bodies often rely on public relay lists to enforce blockages.
-- **Censorship Circumvention:** In certain countries and regions, governments or ISPs may block access to the Tor network. In such cases, users can use Bridges to bypass these blockages. Bridges serve as hidden entry points, assisting users in establishing initial connections, after which their traffic is forwarded to regular Tor relays.
-- **Distribution Method:** Since Bridges' IP addresses are not public, users need specific methods to obtain these addresses. Users can acquire Bridge addresses through the Tor website, by sending an email, or using other channels such as Bridge distribution tools.
-
-Pluggable transports:
-
-- To further evade censorship, Bridges often use Pluggable Transports, which are protocols that alter the characteristics of Tor traffic to make it appear like regular HTTPS traffic or other types. These technologies include Obfs4, meek, [Snowflake](https://snowflake.torproject.org/){target="_blank"}, and others, which can obfuscate Tor traffic, making detection and blocking more challenging.
-
-## How to Setup a Middle Relay
-
-Setting up a Middle Relay requires some technical knowledge and basic installation and configuration. It is recommended to use Debian or Ubuntu operating systems for installation, and the following examples will use Debian/Ubuntu as well.
-
-!!! info "Other Operating Systems"
+!!! info "Other operating systems"
 
     For other operating systems or more detailed installation instructions, refer to the official documentation: [Tor Project | Middle/Guard relay](https://community.torproject.org/relay/setup/guard/){target="_blank"}.
 
-!!! warning "Considerations Before Setting Up!"
-
-    The following tutorial only uses Middle Relays as examples. If you wish to set up more advanced nodes, please consider the following questions and assess the risks you can undertake:
-
-    - Do you want to run a Tor exit or non-exit (bridge/guard/middle) relay?
-    - If you want to run an exit relay: Which ports do you want to allow in your exit policy? (More ports usually means potentially more abuse complaints.)
-    - What external TCP port do you want to use for incoming Tor connections? ("ORPort" configuration: We recommend port 443 if that is not used by another daemon on your server already. ORPort 443 is recommended because it is often one of the few open ports on public WIFI networks. Port 9001 is another commonly used ORPort.)
-    - What email address will you use in the ContactInfo field of your relay(s)? This information will be made public.
-    - How much bandwidth/monthly traffic do you want to allow for Tor traffic?
-    - Does the server have an IPv6 address?
-
-### Install tor
+### Install Tor
 
 ```bash
 apt update
 apt install tor
 ```
 
-!!! info "Choosing Different Versions"
+!!! info "Choosing a different version"
 
     There might be situations where Tor is not the latest version in various Linux distributions. If you need to install the latest or testing version, you can refer to the official documentation to make adjustments: [Why and how can I enable the Tor Package Repository in Debian?](https://support.torproject.org/apt/tor-deb-repo/){target="_blank"}
 
@@ -120,25 +77,26 @@ systemctl restart tor@default
 
 Check the logs or system log `/var/log/syslog` for the text `Self-testing indicates your ORPort` and a message indicating `reachable`. About three hours later, you should be able to search for your Relay information on [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"}.
 
-!!! info "Post-installation Precautions"
+!!! info "Post-installation precautions"
 
     After installation, you can refer to the official documentation for important considerations: [Tor Project | Relay Post-install and good practices](https://community.torproject.org/relay/setup/post-install/){target="_blank"}.
 
-## Use nyx for Monitoring
+## Monitor the relay with nyx
 
-Use nyx to monitor the status and performance of your Relay:
+nyx is a terminal status monitor for Tor. Install it, then run `nyx` to watch your relay's bandwidth, connections, and log output live.
 
 ```bash
 apt install nyx
+nyx
 ```
 
-## Create Multiple Tor Configurations with `tor-instance-create`
+## Run multiple relays with `tor-instance-create`
 
 `tor-instance-create` creates multiple independent Tor instances on the same server, which keeps the configuration and logs of each relay separate and easier to manage. It ships with the `tor` package on Debian and Ubuntu.
 
 Running several instances does not make any of them more anonymous. The benefit is operational: separate config, separate data directory, separate log.
 
-### Create a New Tor Instance
+### Create a new Tor instance
 
 The command takes the instance name; the matching systemd unit is then `tor@<instance-name>`.
 
@@ -149,7 +107,7 @@ tor-instance-create mytor2
 
 This will create a new Tor instance named `mytor2`, with its configuration directory created under `/var/lib/tor-instances/mytor2`.
 
-### Configure the New Configuration File
+### Edit the new instance configuration
 
 The new configuration file is located at `/var/lib/tor-instances/mytor2/torrc`. In this configuration file, you can set various parameters, such as:
 
@@ -168,13 +126,13 @@ Start or restart the newly created Tor instance.
 systemctl start tor@mytor2
 ```
 
-### Use nyx to Monitor the New Configuration
+### Monitor the new instance with nyx
 
 ```bash
 nyx -s /run/tor-instances/{instance-name}/control
 ```
 
-## Common Issues When Setting Up a Tor Relay
+## Common questions
 
 ??? question "Will the police come after me for setting up a Tor Relay?"
 
