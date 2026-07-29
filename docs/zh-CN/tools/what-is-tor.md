@@ -14,7 +14,7 @@ icon: simple/torproject
             title="Tor Relay 运作流程"
         >
     </a>
-    <caption>Tor Relay 运作流程</caption>
+    <figcaption>Tor Relay 运作流程</figcaption>
 </figure>
 
 [Tor（The Onion Router）](https://www.torproject.org/){target="_blank"} 是由志工营运、透过多层加密与随机路径把网路连线匿名化的开源网路。Tor 解决的问题很具体：连上一个网站时，预设会把 IP 位址、浏览指纹、连线时序留给对方与沿路所有观察者。Tor 把这条连线拆成三段，让没有任何单一节点同时知道「你是谁」与「你在连什么」。
@@ -41,7 +41,7 @@ icon: simple/torproject
             title="Tor Relay 类型"
         >
     </a>
-    <caption>Tor Relay 类型</caption>
+    <figcaption>Tor Relay 类型</figcaption>
 </figure>
 
 ## 中继点与桥接点

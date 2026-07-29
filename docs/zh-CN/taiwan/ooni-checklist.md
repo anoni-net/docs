@@ -13,7 +13,7 @@ icon: material/list-status
             title="OONI Probe 检测流程"
         >
     </a>
-    <caption>OONI Probe 检测流程</caption>
+    <figcaption>OONI Probe 检测流程</figcaption>
 </figure>
 
 OONI Probe 每次检测都依据一份事先列举的网站清单，逐一检查每个网址的连接状况。这份清单由 [Citizen Lab](https://citizenlab.ca/){target="_blank"} 维护的 [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 项目管理，分成本地（local）与全球（global）两种，分别收录各地与全球的热门网址。
