@@ -12,6 +12,7 @@ on:
       - "docs/zh-TW/**/*.md"
       - "docs/zh-CN/**/*.md"
       - "tools/docs_style_lint.py"
+      - "tools/test_docs_style_lint.py"
       - ".github/workflows/docs-style-lint.yml"
 
 permissions:
@@ -30,6 +31,12 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+
+      # 規則本身的回歸測試。內容掃描是 warn 階段不擋 merge，但「規則有沒有壞掉」
+      # 是二元的，所以這一步會擋。實際踩過兩次：簡體「讲」完全沒被檢查、
+      # 「得先」的例外字集繁簡不對稱導致誤報，都是抽樣看不出來的覆蓋缺口。
+      - name: 測試 linter 規則
+        run: python3 tools/test_docs_style_lint.py
 
       - name: 掃描變更的 Markdown（warn 階段，不擋 merge）
         continue-on-error: true
