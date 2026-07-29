@@ -8,7 +8,7 @@ icon: material/account-box-outline
 
 anoni.net は台湾を拠点とする小規模なボランティアコミュニティで、アジア太平洋の中国語圏におけるネットワークの自由を扱っています。2023 年ごろに台湾の OONI 観測カバレッジを中心テーマとして集まり、その後、地域観測、法制度の追跡、地域研究の選択的な翻訳へと範囲を広げてきました。
 
-このページは海外の同業組織、報道関係者、研究者、資金提供者に向けて書いています。私たちの成果を引用する、提携する、あるいは他者に薦める、その前に「誰がやっているのか」を確認しておきたい方々を想定しています。
+このページは海外の同業組織、報道関係者、研究者、資金提供者に向けて書いています。私たちの成果を引用したり、提携したり、他者に薦めたりする前に、「誰がやっているのか」を確認しておきたい方々を想定しています。
 
 ## 私たちの実像
 
@@ -43,7 +43,7 @@ anoni.net は台湾を拠点とする小規模なボランティアコミュニ�
 - **[Tor Project](https://torproject.org/){target="_blank"}** — 翻訳への貢献、[Snowflake](https://snowflake.torproject.org/){target="_blank"} ブリッジの提供、台湾でのキャンパスリレー設置の継続的な取り組み。[国立台湾師範大学のリレー](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}は 2026 年 3 月に Tor Project ブログのゲスト記事として取り上げられました。
 - **[OONI](https://ooni.org/){target="_blank"}** — OONI Probe のローカル運用、地域のテスト対象サイト一覧への貢献、OONI の方法論とアナウンスの中国語訳。
 - **[Electronic Frontier Foundation](https://www.eff.org/){target="_blank"}** — Tor Relay on Campus の取り組みでの協働。EFF と Tor Project の共同企画である [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} の繁体字中国語訳を担当しました。
-- **大学の受け入れ先** — 国立台湾師範大学（Tor リレーの設置）、国立台湾科技大学（2025 年の匿名ネットワークワークショップ会場）。
+- **大学の受け入れ先** — 国立台湾師範大学（Tor リレーの設置）、国立台湾科技大学（2025 年に匿名ネットワークのワークショップを開催）。
 
 方針として、協力者は明示的にクレジットします。自分たちの成果でないものを自分たちのものとして扱うことはしません。
 
