@@ -29,6 +29,7 @@ nav:
           - tools/tor-snowflake.md
           - tools/onionshare.md
           - tools/vpn-guide.md
+          - tools/encrypted-dns.md
           - tools/what-is-tails.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/grapheneos.md
