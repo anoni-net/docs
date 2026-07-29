@@ -80,6 +80,7 @@ const CORE_PAGES_ZH = [
   "tools/messaging-comparison/",
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
+  "tools/encrypted-dns/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
@@ -110,6 +111,7 @@ const CORE_PAGES_ZH = [
   "advanced/post-quantum/",
   "advanced/dweb-ipfs-onion/",
   "advanced/zk-identity-payments/",
+  "advanced/mistaken-for-anonymity/",
   // taiwan（在地。whistleblower-law 依上面的判準排除，不是漏掉。
   // ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
   "taiwan/",

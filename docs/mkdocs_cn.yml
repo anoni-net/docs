@@ -29,6 +29,7 @@ nav:
           - tools/tor-snowflake.md
           - tools/onionshare.md
           - tools/vpn-guide.md
+          - tools/encrypted-dns.md
           - tools/what-is-tails.md
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/grapheneos.md
@@ -55,6 +56,7 @@ nav:
           - advanced/post-quantum.md
           - advanced/dweb-ipfs-onion.md
           - advanced/zk-identity-payments.md
+          - advanced/mistaken-for-anonymity.md
       - !ENV [NAV_REPORTS, "报告"]:
           - reports/index.md
   - !ENV [NAV_TAIWAN, "在地脉络"]:

@@ -110,7 +110,7 @@ Metadata 是各種日常行為的副產品，散佈在各處，沒有單一集�
 
 - 用密碼管理器，給每個服務不同的帳密，降低帳號之間被串連、被一次攻破的風險
 - 瀏覽器裝 uBlock Origin 等阻擋追蹤的擴充
-- DNS 改用支援加密查詢的服務（DoH/DoT）
+- DNS 改用支援加密查詢的服務（DoH/DoT）。這一步換掉的是誰收得到你的查詢，連線本身不會因此變匿名（見 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)）
 - 對固定通訊對象使用一致的工具，避免在多個平台留下對應關係
 
 ### 高成本（特定情境下值得）
@@ -126,5 +126,6 @@ Metadata 是各種日常行為的副產品，散佈在各處，沒有單一集�
 - 看 [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md)，理解為什麼「機密 ≠ 匿名」
 - 想知道金流也是 metadata 的一種，請見 [為什麼匿名支付重要](./payments-anonymity.md)
 - 工具層的 [什麼是 Tor](../tools/what-is-tor.md)、[什麼是 Tails](../tools/what-is-tails.md) 是減少網路 metadata 的兩個關鍵工具
+- 想知道加密 DNS、IPFS 這類工具各自減少了哪一種 metadata、又留下哪一種，見 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
 
 [^1]: David Cole, "We Kill People Based on Metadata", The New York Review, 2014.05.10.

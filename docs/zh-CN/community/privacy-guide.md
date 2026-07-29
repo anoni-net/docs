@@ -18,7 +18,7 @@ icon: material/shield-lock-outline
 
 - **三级威胁模型框架**：把日常使用、敏感工作、高风险情境三种等级的对应工具与步骤整理成参考表
 - **概念到实作的桥**：在威胁模型与工具操作之间补上判断流程（什么时候该升级、什么时候不必过度防护）
-- **常见误区整理**：VPN ≠ 匿名、HTTPS ≠ 安全、私密模式 ≠ 隐私等高频误解的拆解
+- **常见误区整理**：VPN ≠ 匿名、HTTPS ≠ 安全、私密模式 ≠ 隐私、去中心化 ≠ 匿名等高频误解的拆解
 - **场景指引落地**：给记者、社运参与者、家暴幸存者、LGBTQ+ 等具体角色的实作流程
 - **跨主题串接**：把个资、金流、连线层三个面向（见 [网络自由为什么重要](../basics/internet-freedom.md)）整合进个人隐私的整体规划
 - **教材化**：把研究产出整理成可用于工作坊、小聚的教材，方便对外推广
@@ -30,7 +30,7 @@ icon: material/shield-lock-outline
 - 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)
 - 工具：[什么是 Tor](../tools/what-is-tor.md)、[什么是 Tails](../tools/what-is-tails.md)、[Tor Browser 进阶设定](../tools/tor-browser-advanced.md)、[匿名操作系统比较](../tools/tails-vs-whonix-vs-qubes.md)、[消息工具比较](../tools/messaging-comparison.md)、[密码管理器入门](../tools/password-manager.md)
 - 场景：[记者保护消息来源](../scenarios/journalist.md)、[社运行动者的数位准备](../scenarios/activist.md)、[家暴幸存者的数位准备](../scenarios/domestic-violence.md)、[LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)
-- 进阶：[端对端加密如何运作](../advanced/e2ee.md)
+- 进阶：[端对端加密如何运作](../advanced/e2ee.md)、[常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)
 - 在地：[台湾个资法 2025 修法](../taiwan/pdpa-2025.md)、[揭弊者保护法的技术观察](../taiwan/whistleblower-law.md)
 
 以上文章初稿多已上线，仍会依季度节奏持续校订与补充。

@@ -14,3 +14,4 @@ icon: material/lock-outline
 - [后量子密码概观](./post-quantum.md)：NIST 标准的进度与真实系统的转换时程。
 - [去中心化网站发布](./dweb-ipfs-onion.md)：IPFS 与 Onion 的差别与合用场景。
 - [零知识身分验证与支付](./zk-identity-payments.md)：环签名、zk-SNARKs、链上分析的能与不能。
+- [常被误认为匿名的网络](./mistaken-for-anonymity.md)：加密 DNS、IPFS、Yggdrasil、DN42、I2P 各自提供什么、不提供什么。

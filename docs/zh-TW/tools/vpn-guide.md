@@ -266,6 +266,7 @@ VPN 在某地能不能用沒有全球通用答案，會隨地區與時間變。�
 - [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-incognito-circle: 匿名與隱私的差別](../basics/anonymity-vs-privacy.md)
 - [:material-airplane: 亞洲出差與研討會的數位準備](../scenarios/asia-travel.md)
+- [:material-incognito-off: 常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
 
 </div>
 

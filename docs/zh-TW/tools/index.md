@@ -21,6 +21,7 @@ icon: material/toolbox-outline
 - [Tor Snowflake](./tor-snowflake.md)：開瀏覽器分頁，幫受審查地區的使用者連上 Tor，台灣門檻最低的網路自由貢獻方式。
 - [OnionShare](./onionshare.md)：透過 Tor 起臨時 onion service，匿名傳檔、收檔、架站、聊天。
 - [VPN 的風險與選擇](./vpn-guide.md)：VPN 的具體風險、怎麼挑值得信任的服務、各地能不能用，以及什麼時候該改用 Tor。
+- [加密 DNS 怎麼選、怎麼確認真的生效](./encrypted-dns.md)：DoH、DoT、DoQ 的差別，resolver 業者的挑選準則，各平台的欄位收什麼、失敗時會不會靜默退回明文。
 
 ## 環境層：匿名作業系統
 
