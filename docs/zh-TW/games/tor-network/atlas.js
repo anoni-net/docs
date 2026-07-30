@@ -54,6 +54,7 @@ function applyI18n() {
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
+  set('credit-netusers', 'creditNetUsers', true);
   set('credit-currents', 'creditCurrents', true);
   set('circ-tag', 'circTag');
   set('cc-close', 'ccClose');
@@ -1427,7 +1428,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -1533,6 +1534,23 @@ function ooniLine(cc) {
 }
 
 // 這一國有多少人在用。中繼數是供給端，這是需求端，兩個數字擺在一起才看得出落差。
+// 這一國有多少人上網。用途是給上面那個 Tor 使用者數當脈絡：兩國的 Tor 人數差很多時，
+// 先看得出來是不是單純因為一邊上網的人本來就少。
+//
+// 刻意只呈現比例，不換算成「每十萬上網人口有幾人用 Tor」。Tor 的人數本身是估計值，
+// 信心區間寬到上下差好幾倍，除以人口之後不確定性一點都沒少，卻會長得像一個精確的比值。
+// 分子分母各自呈現，讓讀的人自己拿捏，比端出一個假精確的數字誠實。
+//
+// 回傳 [片語, 是否來自替代來源]。台灣走的是 alt 那條，World Bank 沒有收錄台灣。
+function netPctLine(cc) {
+  if (!NETUSERS) return null;
+  const main = NETUSERS.pct && NETUSERS.pct[cc];
+  if (main) return [S('cardNetPct', { pct: main[0], year: main[1] }), false];
+  const alt = NETUSERS.alt && NETUSERS.alt.pct && NETUSERS.alt.pct[cc];
+  if (alt) return [S('cardNetPctAlt', { pct: alt[0], year: alt[1], src: NETUSERS.alt.source }), true];
+  return null;
+}
+
 // 措辭要留住「估計」兩個字，Tor Metrics 是用中繼收到的目錄請求反推的，信心區間很寬
 // （台灣 10,585 人的區間是 3,722 到 21,578），寫成確定數字是騙人的。
 function usersLine(cc, relays) {
@@ -1542,9 +1560,11 @@ function usersLine(cc, relays) {
   const [cur, avg] = u;
   // 每台中繼「服務」多少使用者。這不是真的負載，只是兩個數字的比值，用來凸顯落差。
   const per = relays ? Math.round(cur / relays) : 0;
+  const net = netPctLine(cc);
   return `<div class="cc-sub2">`
     + S('cardUsers', { n: cur.toLocaleString(), days: TORUSERS.days, avg: avg.toLocaleString() })
-    + (per ? S('cardUsersPer', { n: per.toLocaleString() }) : '') + `</div>`;
+    + (per ? S('cardUsersPer', { n: per.toLocaleString() }) : '')
+    + (net ? net[0] : '') + `</div>`;
 }
 
 // 這一國的人用什麼方式繞過封鎖。跟 ooni.json 那層是一組的：OONI 說連不上，這裡說改用什麼。
@@ -1588,6 +1608,9 @@ function shutdownLine(cc) {
 function cardNote(cc) {
   const bits = [];
   if (TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push(S('cardNoteUsers'));
+  // 上網比例走替代來源的那幾筆（目前只有台灣）要講一句，方法論跟其他國家不同。
+  const net = netPctLine(cc);
+  if (net && net[1] && TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push(S('cardNoteNetAlt'));
   if (OONI && OONI.cc && OONI.cc[cc]) bits.push(S('cardNoteOoni'));
   if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) bits.push(S('cardNoteShutdown'));
   return bits.length ? `<div class="cc-sub2 tiny dim">${bits.join('。')}。</div>` : '';
@@ -2058,7 +2081,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2068,10 +2091,12 @@ async function main() {
     // 但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。
     getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
+    getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
   ]);
   OONI = ooni;
   TORUSERS = torusers;
   SHUTDOWNS = shutdowns;
+  NETUSERS = netusers;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
