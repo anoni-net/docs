@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="robots" content="noindex" />
   <title>Tor 連線流量 · anoni.net</title>
   <meta name="description" content="用發光粒子與殘影看 Tor 流量的兩種路徑：連 .onion 服務在隨機會合點相遇，連明網網站則經 3 跳出口後原路往返。relay 數、電路數、流量都能即時調整。" />
+  <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
+       兩份內容完全相同。canonical 指向前者，把權重集中到一個網址上。
+       語言由 ?lang= 決定，同一份檔案服務三個語系，所以正規網址不帶參數。 -->
+  <link rel="canonical" href="https://anoni.net/docs/games/onion-rendezvous/" />
   <!-- OG 寫死在這裡，因為這頁不經過 mkdocs 的模板。三個語系共用同一份程式，
        抓取預覽的爬蟲不會執行 JS，所以這裡固定用預設語系 zh-TW 的文案與正規網址。 -->
   <meta property="og:type" content="website" />
@@ -20,6 +23,60 @@
   <meta property="twitter:title" content="Tor 連線流量 · anoni.net" />
   <meta property="twitter:description" content="用發光粒子與殘影看 Tor 流量的兩種路徑：連 .onion 服務在隨機會合點相遇，連明網網站則經 3 跳出口後原路往返。relay 數、電路數、流量都能即時調整。" />
   <meta property="twitter:image" content="https://assets.anoni.net/games/onion-rendezvous.png" />
+  <!-- 結構化資料。與 OG 同樣寫死，理由相同：這頁不經 mkdocs 模板，抓取的爬蟲不執行 JS。
+       這件作品以觀看為主，沒有勝負與關卡，所以用 WebApplication 而非 VideoGame。 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
+        "name": "Tor 連線流量",
+        "alternateName": ["Tor Traffic Flow", "Tor 连线流量"],
+        "url": "https://anoni.net/docs/games/onion-rendezvous/",
+        "description": "以觀看為主的呈現。用細小發光粒子與殘影表現 Tor 流量的兩種路徑：連線 .onion 服務時雙方各建一條 3 跳電路，在隨機挑出的會合點相遇，連線明網網站則經 3 跳出口後原路往返。relay 數、電路數、已被標記的有害節點、流量都能即時調整。",
+        "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+        "inLanguage": ["zh-Hant", "zh-Hans", "en"],
+        "applicationCategory": "EducationalApplication",
+        "applicationSubCategory": "資料視覺化",
+        "operatingSystem": "Web browser",
+        "browserRequirements": "需要支援 WebGPU 或 WebGL2 的瀏覽器，免安裝",
+        "isAccessibleForFree": true,
+        "isFamilyFriendly": true,
+        "license": "https://github.com/anoni-net/docs/blob/main/LICENSE",
+        "author": { "@id": "https://anoni.net/#organization" },
+        "publisher": { "@id": "https://anoni.net/#organization" },
+        "isPartOf": { "@id": "https://anoni.net/docs/games/#collection" },
+        "about": [
+          { "@type": "Thing", "name": "Tor", "sameAs": "https://www.torproject.org/" },
+          { "@type": "Thing", "name": "洋蔥服務（.onion）", "sameAs": "https://community.torproject.org/onion-services/" },
+          { "@type": "Thing", "name": "會合點", "sameAs": "https://spec.torproject.org/rend-spec/" }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anoni.net/#organization",
+        "name": "匿名網路社群 anoni.net",
+        "url": "https://anoni.net/"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://anoni.net/docs/games/#collection",
+        "name": "互動與呈現",
+        "url": "https://anoni.net/docs/games/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "文件", "item": "https://anoni.net/docs/" },
+          { "@type": "ListItem", "position": 2, "name": "互動與呈現", "item": "https://anoni.net/docs/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Tor 連線流量" }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --cyan: #00aeff; --client: #38d6ff; --service: #b98cff; --bad: #ff5a5a;
@@ -54,6 +111,9 @@
     #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
     #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs .on { color: #fff; font-weight: 700; }
+    #backlink { margin-top: 6px; font-size: 11px; color: var(--muted); }
+    #backlink a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #backlink a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
     #note { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.6; display: flex; flex-direction: column; gap: 5px; }
     #note p { margin: 0; }
@@ -122,6 +182,9 @@
           </div>
           <div id="backend">偵測中…</div>
           <div id="langs"></div>
+          <!-- 這頁對爬蟲來說原本是死路，連結一條都沒有，對使用者也沒有回去的路。
+               靜態寫死 zh-TW 版本讓爬蟲讀得到，其他語系由 i18n 換掉整段（含連結網址）。 -->
+          <div id="backlink">← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../tools/tor-snowflake/">Tor Snowflake 橋接</a></div>
         </div>
       </div>
     </details>

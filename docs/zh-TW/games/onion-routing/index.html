@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="robots" content="noindex" />
   <title>Tor 路由解謎 · anoni.net</title>
   <meta name="description" content="自己挑 3 個中繼組成 Tor 的 guard、middle、exit 路徑，避開被監聽的節點、把 3 跳分散到不同 ASN，遇到封鎖改走橋接。四個關卡各對應一項真實的選路考量。" />
+  <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
+       兩份內容完全相同。canonical 指向前者，把權重集中到一個網址上。
+       語言由 ?lang= 決定，同一份檔案服務三個語系，所以正規網址不帶參數。 -->
+  <link rel="canonical" href="https://anoni.net/docs/games/onion-routing/" />
   <!-- OG 寫死在這裡，因為這頁不經過 mkdocs 的模板。三個語系共用同一份程式，
        抓取預覽的爬蟲不會執行 JS，所以這裡固定用預設語系 zh-TW 的文案與正規網址。 -->
   <meta property="og:type" content="website" />
@@ -20,6 +23,61 @@
   <meta property="twitter:title" content="Tor 路由解謎 · anoni.net" />
   <meta property="twitter:description" content="自己挑 3 個中繼組成 Tor 的 guard、middle、exit 路徑，避開被監聽的節點、把 3 跳分散到不同 ASN，遇到封鎖改走橋接。四個關卡各對應一項真實的選路考量。" />
   <meta property="twitter:image" content="https://assets.anoni.net/games/onion-routing.png" />
+  <!-- 結構化資料。與 OG 同樣寫死，理由相同：這頁不經 mkdocs 模板，抓取的爬蟲不執行 JS。
+       @id 用完整網址加片段，三件作品與著陸頁互相指涉時才能連成同一張圖。 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "VideoGame",
+        "@id": "https://anoni.net/docs/games/onion-routing/#work",
+        "name": "Tor 路由解謎",
+        "alternateName": ["Tor Routing Puzzle", "Tor 路由解谜"],
+        "url": "https://anoni.net/docs/games/onion-routing/",
+        "description": "可操作的解謎。將訊息從你送到對岸的收件人，自行挑選 3 個中繼組成 Tor 的 guard、middle、exit 路徑，過程中要避開被監聽的節點、將 3 跳分散到不同 ASN，遇到封鎖則改走橋接。四個關卡各對應一項真實的選路考量。",
+        "image": "https://assets.anoni.net/games/onion-routing.png",
+        "inLanguage": ["zh-Hant", "zh-Hans", "en"],
+        "genre": ["解謎", "教育"],
+        "applicationCategory": "GameApplication",
+        "gamePlatform": "Web browser",
+        "playMode": "SinglePlayer",
+        "browserRequirements": "需要支援 WebGPU 或 WebGL2 的瀏覽器，免安裝",
+        "isAccessibleForFree": true,
+        "isFamilyFriendly": true,
+        "license": "https://github.com/anoni-net/docs/blob/main/LICENSE",
+        "author": { "@id": "https://anoni.net/#organization" },
+        "publisher": { "@id": "https://anoni.net/#organization" },
+        "isPartOf": { "@id": "https://anoni.net/docs/games/#collection" },
+        "about": [
+          { "@type": "Thing", "name": "Tor", "sameAs": "https://www.torproject.org/" },
+          { "@type": "Thing", "name": "洋蔥路由", "sameAs": "https://en.wikipedia.org/wiki/Onion_routing" },
+          { "@type": "Thing", "name": "自治系統（ASN）", "sameAs": "https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anoni.net/#organization",
+        "name": "匿名網路社群 anoni.net",
+        "url": "https://anoni.net/"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://anoni.net/docs/games/#collection",
+        "name": "互動與呈現",
+        "url": "https://anoni.net/docs/games/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "文件", "item": "https://anoni.net/docs/" },
+          { "@type": "ListItem", "position": 2, "name": "互動與呈現", "item": "https://anoni.net/docs/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Tor 路由解謎" }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --cyan: #00aeff; --cyan-600: #009ee6; --cyan-800: #006d99;
@@ -52,6 +110,9 @@
     #langs a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
     #langs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs .on { color: #fff; font-weight: 700; }
+    #backlink { margin-top: 6px; font-size: 11px; color: var(--muted); }
+    #backlink a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.18); }
+    #backlink a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
     #langs i { margin: 0 6px; opacity: .4; font-style: normal; }
 
     /* 圖例 */
@@ -129,6 +190,9 @@
     <div id="objective">目標</div>
     <div id="backend">偵測中…</div>
     <div id="langs"></div>
+    <!-- 這頁對爬蟲來說原本是死路，站內連結一條都沒有，對使用者也沒有回去的路。
+         靜態寫死 zh-TW 版本讓爬蟲讀得到，其他語系由 i18n 換掉整段（含連結網址）。 -->
+    <div id="backlink">← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../taiwan/ooni-asn-coverage/">台灣 ASN 觀測涵蓋</a></div>
   </div>
 
   <div id="legend-toggle" class="panel" role="button" tabindex="0">圖例</div>

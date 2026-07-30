@@ -1,5 +1,5 @@
 ---
-title: 互动与呈现
+title: 互动与呈现：Tor 网络的 3D 可视化与互动游戏
 description: 以 3D 影像与可操作的游戏呈现隐私与匿名技术。目前三件作品都以 Tor 为题：走一遍三跳洋葱路由的解谜、连线流量在会合点相遇的动态呈现、整合六份公开数据的全球中继地球仪。
 icon: material/cube-outline
 social:
@@ -123,3 +123,78 @@ og:
 ## 接下来
 
 这是互动区的头三件作品，主题集中在 Tor。隐私领域中值得做成画面的题材仍然很多，元数据会泄漏什么、威胁模型如何随处境改变、匿名支付的资金流样貌，都在候补名单上。有想法或想一起参与，欢迎到[社群](../community/index.md)找我们。
+
+<!-- 结构化数据。三件作品的 index.html 不经 mkdocs 模板，各自在 head 写了自己的
+     JSON-LD，并用 isPartOf 指向 zh-TW 的 #collection。这一段把三件作品列成
+     ItemList。@id 必须与各作品 index.html 里的一致。 -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://anoni.net/docs/zh-cn/games/#collection",
+      "name": "互动与呈现",
+      "url": "https://anoni.net/docs/zh-cn/games/",
+      "description": "以 3D 影像与可操作的游戏呈现隐私与匿名技术。目前三件作品都以 Tor 为题。",
+      "inLanguage": "zh-Hans",
+      "publisher": { "@id": "https://anoni.net/#organization" },
+      "mainEntity": { "@id": "https://anoni.net/docs/zh-cn/games/#works" }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://anoni.net/docs/zh-cn/games/#works",
+      "name": "作品",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "VideoGame",
+            "@id": "https://anoni.net/docs/games/onion-routing/#work",
+            "name": "Tor 路由解谜",
+            "url": "https://anoni.net/docs/games/onion-routing/?lang=zh-cn",
+            "image": "https://assets.anoni.net/games/onion-routing.png",
+            "description": "可操作的解谜。自行挑选 3 个中继组成 Tor 的 guard、middle、exit 路径，避开被监听的节点、将 3 跳分散到不同 ASN，遇到封锁则改走网桥。"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebApplication",
+            "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
+            "name": "Tor 连线流量",
+            "url": "https://anoni.net/docs/games/onion-rendezvous/?lang=zh-cn",
+            "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+            "applicationCategory": "EducationalApplication",
+            "description": "以观看为主的呈现。用发光粒子与残影表现 Tor 流量的两种路径，连线 .onion 服务时双方各建一条 3 跳线路，在随机挑出的会合点相遇。"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "WebApplication",
+            "@id": "https://anoni.net/docs/games/tor-network/#work",
+            "name": "Tor 中继地球仪",
+            "url": "https://anoni.net/docs/games/tor-network/?lang=zh-cn",
+            "image": "https://assets.anoni.net/games/tor-network.png",
+            "applicationCategory": "EducationalApplication",
+            "description": "以真实数据构成的地球仪。将全球正在运行的近万台 Tor 中继落在各自的国界之内，另外整合连线受阻观测、用户估计、断网事件与海底电缆。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "文档", "item": "https://anoni.net/docs/zh-cn/" },
+        { "@type": "ListItem", "position": 2, "name": "互动与呈现" }
+      ]
+    }
+  ]
+}
+</script>

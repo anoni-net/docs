@@ -12,4 +12,25 @@
     </url>
     {%- endif -%}
 {% endfor %}
+{#-
+  互動區的三件作品是手寫的 index.html，當靜態檔放在 docs/zh-TW/games/ 底下，不是 md
+  頁面，所以不在 pages 裡，上面那個迴圈產不出它們。它們從著陸頁被連到，爬蟲遲早會找
+  到，列進來是為了讓 Search Console 能單獨追蹤這三頁的索引狀態。
+
+  只在預設語系那次建置輸出。作品的檔案只存在 zh-TW 的樹底下，output/en/games/ 與
+  output/zh-cn/games/ 都只有 index.html，列進那兩份 sitemap 會變成 404。那兩次
+  建置用的是 overrides_en 與 overrides_cn，本來就不會走到這裡。run.sh 與
+  run_zh-tw.sh 共用這個目錄，靠 site_url 分辨：只有 run.sh 結尾是 /docs/，而三件
+  作品的 canonical 都指向那個網址。
+
+  網址用 config.site_url 組出來，onion 與 IPFS 版本換了 SITE_URL 就會跟著換。
+  lastmod 留空，這三個檔的更新時間不像 md 頁有 git 外掛可以問。
+-#}
+{%- if config.site_url and config.site_url.endswith('/docs/') %}
+{%- for work in ['onion-routing', 'onion-rendezvous', 'tor-network'] %}
+    <url>
+         <loc>{{ (config.site_url ~ 'games/' ~ work ~ '/')|e }}</loc>
+    </url>
+{%- endfor %}
+{%- endif %}
 </urlset>

@@ -127,6 +127,9 @@ const ZH_TW = {
   listSep: '、',
   roleTipAll: '再點一次看全部',
   roleTipOne: '只看這個角色',
+
+  // 面板底部的返回列，整段連同連結一起換語言。
+  backlink: '← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../tools/what-is-tor/">什麼是 Tor</a>',
 };
 
 const EN = {
@@ -246,6 +249,8 @@ const EN = {
   listSep: ', ',
   roleTipAll: 'Click again to show all',
   roleTipOne: 'Show only this role',
+
+  backlink: '← <a href="../../en/games/">Interactive</a>　Further reading: <a href="../../en/blog/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
 };
 
 const ZH_CN = {
@@ -365,6 +370,8 @@ const ZH_CN = {
   listSep: '、',
   roleTipAll: '再点一次看全部',
   roleTipOne: '只看这个角色',
+
+  backlink: '← <a href="../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };
