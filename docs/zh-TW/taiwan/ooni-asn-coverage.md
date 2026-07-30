@@ -19,7 +19,7 @@ icon: material/access-point-network
             alt="ASN 在實際網路上串連在一起，圖示來源：cloudflare.com"
             title="ASN 在實際網路上串連在一起，圖示來源：cloudflare.com">
     </a>
-    <caption>ASN 在實際網路上串連在一起（[圖片來源](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}）。</caption>
+    <figcaption>ASN 在實際網路上串連在一起（[圖片來源](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}）。</figcaption>
 </figure>
 
 對 OONI 觀測來說，ASN 是「在哪一家網路上看到審查」的最小單位。同一個網站可能在中華電信看不到、在台灣大哥大看得到，這種差異需要先以 ASN 為單位才能區分清楚。所以 OONI 分析常常會問「這個地區的測量資料有多少不同的 ASN 來源」，這個比例越高，越能反映該區域的整體連線環境。
@@ -72,7 +72,7 @@ icon: material/access-point-network
             title="OONI Probe「原始測量資料」的資訊"
             style="border: 1px solid #000000; border-radius: 10px;">
     </a>
-    <caption>OONI Probe「原始測量資料」的資訊。</caption>
+    <figcaption>OONI Probe「原始測量資料」的資訊。</figcaption>
 </figure>
 
 !!! question "AS 與 DNS 的差異"

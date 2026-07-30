@@ -63,7 +63,7 @@ description: "近期社区活动更新信息"
             title="Tor Relay 类型"
         >
     </a>
-    <caption>Tor Relay 类型</caption>
+    <figcaption>Tor Relay 类型</figcaption>
 </figure>
 
 WebTunnel 是 Tor 桥接类型中的一种，帮助 Tor 用户在无法直接连接到 Onion 洋葱路由网络时，通过代理转接连接的服务器。详细的介绍与说明可以参考[这篇文章](../../tools/what-is-tor.md#%E4%B8%AD%E7%BB%A7%E8%8A%82%E7%82%B9%E6%A1%A5%E6%8E%A5%E8%8A%82%E7%82%B9){target="_blank"}。自 Tails 6.18 版本起，也加入了对 WebTunnel 桥接方式的连接支持。由于桥接点有其功能的重要性，因此不会在 Tor 官网上公开连接参数，需要通过[主动索取](https://bridges.torproject.org/){target="_blank"}的方式获取连接信息。

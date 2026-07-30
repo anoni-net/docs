@@ -309,7 +309,7 @@ icon: octicons/paste-24
 
         ??? question "建立持久性加密磁區（Persistent Storage）。"
 
-            - 開啟 Tails 後，在桌面上找到「Applications」選單，選擇「Tails」、「Configure persistent volume」。
+            - 開啟 Tails 後，依序選擇「Apps」、「Tails」、「Persistent Storage」。
             - 依照指示設定持久性加密磁區，這個區域讓你可以保存設定檔案、電子郵件等個人資料，並透過加密保護資料安全。
             - 完成後，當你重啟 Tails 時，可在登入頁面選擇是否啟用這個加密磁區。
 
@@ -349,7 +349,7 @@ icon: octicons/paste-24
 
             1. 在 Tails 中開啟 Thunderbird。
             2. 依照設定精靈，輸入 Gmail 帳號，選擇 IMAP 協定。
-            3. Gmail 目前需要使用「應用程式密碼（App Password）」才能在 Thunderbird 中驗證，需先在 Google 帳號安全設定中開啟兩步驟驗證，再產生應用程式密碼。
+            3. Thunderbird 透過 Google 的 OAuth2 流程登入 Gmail，設定時會開啟瀏覽器視窗讓你授權。Google 官方說明[不建議使用應用程式密碼（App Password）](https://support.google.com/accounts/answer/185833){target="_blank"}，現行的郵件用戶端也用不到，只有在用戶端不支援 OAuth2 時才需要退回這個做法。
             4. 完成設定後，電子郵件將透過 Tor 網路傳輸。
 
         ??? question "更新 Tails 到最新版本。"

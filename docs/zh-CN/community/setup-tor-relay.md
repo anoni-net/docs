@@ -20,7 +20,7 @@ icon: simple/torproject
                 title="Tor Relay 运作流程"
             >
         </a>
-        <caption>Tor Relay 运作流程</caption>
+        <figcaption>Tor Relay 运作流程</figcaption>
     </figure>
 
     以下的教学仅使用入口节点与中间节点作为范例，如果您想要进行更高级的节点建立操作，请思考以下问题并评估可承受的风险：

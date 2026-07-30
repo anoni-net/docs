@@ -15,7 +15,7 @@ icon: material/list-status
             title="OONI Probe 檢測流程"
         >
     </a>
-    <caption>OONI Probe 檢測流程</caption>
+    <figcaption>OONI Probe 檢測流程</figcaption>
 </figure>
 
 這份清單由 [Citizen Lab](https://citizenlab.ca/){target="_blank"} 維護的 [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 專案管理，分成本地（local）與全球（global）兩種，分別收錄各地與全球的熱門網址。
