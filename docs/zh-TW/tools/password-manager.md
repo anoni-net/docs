@@ -49,7 +49,7 @@ icon: material/key-variant
             title="KeePassXC 主畫面顯示金庫項目列表"
             class="brand-frame">
     </a>
-    <capture>KeePassXC 主畫面顯示金庫項目列表（圖片來源：<a href="https://keepassxc.org/docs/" target="_blank">KeePassXC 官方文件</a>）</capture>
+    <figcaption>KeePassXC 主畫面顯示金庫項目列表（圖片來源：<a href="https://keepassxc.org/docs/" target="_blank">KeePassXC 官方文件</a>）</figcaption>
 </figure>
 
 ### 雲端同步：Bitwarden
@@ -98,7 +98,7 @@ iOS 18 與 macOS Sequoia 起，Apple 把密碼功能獨立成 [Passwords](https:
             title="Bitwarden 為帳號設定 TOTP authenticator 的畫面"
             class="brand-frame">
     </a>
-    <capture>Bitwarden 為帳號設定 TOTP authenticator 的畫面（圖片來源：<a href="https://bitwarden.com/help/integrated-authenticator/" target="_blank">Bitwarden 官方說明</a>）</capture>
+    <figcaption>Bitwarden 為帳號設定 TOTP authenticator 的畫面（圖片來源：<a href="https://bitwarden.com/help/integrated-authenticator/" target="_blank">Bitwarden 官方說明</a>）</figcaption>
 </figure>
 
 ## Passkeys：取代密碼的新方案

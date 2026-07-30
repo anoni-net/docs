@@ -27,7 +27,7 @@ description: "OONI 預計實作匿名憑證減緩假觀測資料影響觀測資�
             title="Security without identification: transaction systems to make big brother obsolete"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>在他那篇具有開創性的論文《[沒有身份識別的安全性：使老大哥過時的交易系統](https://dl.acm.org/doi/10.1145/4372.4373){target="_blank"}》中，Chaum 構想了一個使用者可以使用單一數位錢包匿名與多個組織互動的未來，即使這些組織互相勾結。 </capture>
+    <figcaption>在他那篇具有開創性的論文《[沒有身份識別的安全性：使老大哥過時的交易系統](https://dl.acm.org/doi/10.1145/4372.4373){target="_blank"}》中，Chaum 構想了一個使用者可以使用單一數位錢包匿名與多個組織互動的未來，即使這些組織互相勾結。 </figcaption>
 </figure>
 
 為了提升 OONI 觀測資料的可信度，並防止故意或無意上傳的錯誤測量結果對 OONI 資料庫的影響，我們正在考慮在 OONI Probe 中設計和實作匿名憑證。在這篇文章中，我們提供了匿名憑證的現有文獻回顧。這是為了讓對密碼學領域不太熟悉但又好奇的讀者，能深入了解其所依據的協議。
@@ -133,7 +133,7 @@ OONI 的基礎設施相當特殊：使用者上傳的隱私在網路層級和應
             title="匿名憑證在理論密碼學中的全貌，以及 OONI 的定位。"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>匿名憑證在理論密碼學中的全貌，以及 OONI 的定位。</capture>
+    <figcaption>匿名憑證在理論密碼學中的全貌，以及 OONI 的定位。</figcaption>
 </figure>
 
 在文獻之外，觀察**當前佈署憑證的生態系統**，從成熟的老牌公司到新興的早期區塊鏈專案，可以看到以下三種類型：

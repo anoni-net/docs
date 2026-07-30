@@ -49,7 +49,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
             title="Claude Desktop 整理出的台湾 Tor 中继节点现况报告"
             class="brand-frame">
     </a>
-    <capture>Claude Desktop 接上 onionoo MCP 后，请模型「整理台湾 Tor 中继节点现况」回出的汇整报告。底层数值来自上游 Onionoo，这是某一时点的 snapshot。</capture>
+    <figcaption>Claude Desktop 接上 onionoo MCP 后，请模型「整理台湾 Tor 中继节点现况」回出的汇整报告。底层数值来自上游 Onionoo，这是某一时点的 snapshot。</figcaption>
 </figure>
 
 这类查询以往要先翻 Onionoo 文件、写脚本、合并 JSON、再整理表格，现在一句话就能取得初步结果。盘点完再决定下一步要往哪钻，研究启动的成本差很多。

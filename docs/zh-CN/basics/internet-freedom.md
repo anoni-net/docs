@@ -35,7 +35,7 @@ icon: material/chat-question
             title="Freedom House Freedom on the Net 互动地图"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>Freedom House「Freedom on the Net」互动地图（各国分数随年度报告更新，画面为站内示意截图）</capture>
+    <figcaption>Freedom House「Freedom on the Net」互动地图（各国分数随年度报告更新，画面为站内示意截图）</figcaption>
 </figure>
 
 ## 东南亚
@@ -57,7 +57,7 @@ icon: material/chat-question
             title="OONI Explorer：规避工具观测（CN, HK, TW 范例）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <capture>OONI Explorer：规避工具观测（画面为站内保留之示意截图，区间与数据以网站为准）</capture>
+    <figcaption>OONI Explorer：规避工具观测（画面为站内保留之示意截图，区间与数据以网站为准）</figcaption>
 </figure>
 
 [Tor](https://www.torproject.org/){target="_blank"} 则透过多层路由与中继网络，协助使用者在高风险环境下维持匿名与连线。Tor 中继是去中心化的志愿基础建设，可从 Tor Metrics 逐国查询分布状况。下图是台湾节点分布范例（anoni.net 社群所在地），其他国家或地区可在同一介面切换查看。
@@ -69,7 +69,7 @@ icon: material/chat-question
             title="Tor Metrics：台湾地区 Tor 中继与守护节点"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
     </a>
-    <capture>Tor Metrics：台湾地区中继与守护节点（画面随网络状态变动）</capture>
+    <figcaption>Tor Metrics：台湾地区中继与守护节点（画面随网络状态变动）</figcaption>
 </figure>
 
 无论是执行 OONI 测试、架设 Tor 中继，或协助翻译与教学，都是在具体支撑网络自由。在香港这类国安监控升高的地区，公开架设或宣传 Tor 中继的政治风险与台湾不同，参与前应按在地处境分开评估。你可以从下方项目列表挑一项开始。

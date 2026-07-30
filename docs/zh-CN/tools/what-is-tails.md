@@ -30,7 +30,7 @@ Tails 真正的价值在三个刻意的设计选择所组合出来的工作环�
             style="width: 80%;"
         >
     </a>
-    <capture>Tails 关闭后会自动遗忘，重启后如同全新的环境不留下踪迹[^1]</capture>
+    <figcaption>Tails 关闭后会自动遗忘，重启后如同全新的环境不留下踪迹[^1]</figcaption>
 </figure>
 
 Tails 完全运作于内存里，不写硬盘。关机时内存清空，这台电脑没有任何使用纪录、没有浏览历史、没有开过的档案、没有暂存。下次开机是全新环境。
@@ -49,7 +49,7 @@ Tails 完全运作于内存里，不写硬盘。关机时内存清空，这台�
             style="height: 350px;"
         >
     </a>
-    <capture>Tails 在网际网路上不留下踪迹[^1]</capture>
+    <figcaption>Tails 在网际网路上不留下踪迹[^1]</figcaption>
 </figure>
 
 Tails 的所有网路流量都经过 [Tor](./what-is-tor.md)。任何应用程序试图绕过 Tor 直接连网，会被防火墙拦下并显示警告。这跟「自己装 Tor Browser 但其他应用走一般网路」的差别很大：你在 Tails 里看到的网站不知道你的真实 IP、你下载的 Email 不洩漏连线位置、你连的云端硬盘看不到你在哪。
@@ -66,7 +66,7 @@ Tails 的所有网路流量都经过 [Tor](./what-is-tor.md)。任何应用程�
             style="width: 80%;"
         >
     </a>
-    <capture>Tails 可运行在 USB 随身碟或外接硬盘中[^1]</capture>
+    <figcaption>Tails 可运行在 USB 随身碟或外接硬盘中[^1]</figcaption>
 </figure>
 
 Tails 运作于 USB 上，开机选择从 USB 启动，主机原本的硬盘不会被读写。这意味着：

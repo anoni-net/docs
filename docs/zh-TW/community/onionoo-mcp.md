@@ -17,7 +17,7 @@ icon: material/api
             title="AI 助理整理出的臺灣 Tor 中繼節點現況報告"
             class="brand-frame">
     </a>
-    <capture>你會取得的東西：問一句中文，AI 助理回一份整理好的報告（運作中節點數、總頻寬、前五大電信網路）。底層數值來自 Tor Project 官方資料，這是查詢當下的快照，會隨時間變動。</capture>
+    <figcaption>你會取得的東西：問一句中文，AI 助理回一份整理好的報告（運作中節點數、總頻寬、前五大電信網路）。底層數值來自 Tor Project 官方資料，這是查詢當下的快照，會隨時間變動。</figcaption>
 </figure>
 
 ## 它能幫你回答什麼
@@ -58,7 +58,7 @@ icon: material/api
             title="在 Connectors 設定頁貼上網址後的樣子"
             class="brand-frame">
     </a>
-    <capture>加好之後，Connectors 頁會出現 <code>onionoo</code> 這個自訂連接器，底下是它提供的查詢工具。AI 助理會自己挑工具，你只要用中文問就好。</capture>
+    <figcaption>加好之後，Connectors 頁會出現 <code>onionoo</code> 這個自訂連接器，底下是它提供的查詢工具。AI 助理會自己挑工具，你只要用中文問就好。</figcaption>
 </figure>
 
 ## 可以直接複製的問句
@@ -124,7 +124,7 @@ icon: material/api
             title="onionoo.anoni.net 的 Swagger UI"
             class="brand-frame">
     </a>
-    <capture><code>onionoo.anoni.net/docs</code> 的 Swagger UI 入口，所有 <code>/v1/*</code> 端點都有完整 schema 與「Try it out」可即時測試。</capture>
+    <figcaption><code>onionoo.anoni.net/docs</code> 的 Swagger UI 入口，所有 <code>/v1/*</code> 端點都有完整 schema 與「Try it out」可即時測試。</figcaption>
 </figure>
 
 ### 為什麼做這個服務
@@ -255,7 +255,7 @@ docker compose up -d --build
             title="Claude Opus 4.7 的工具呼叫展開過程"
             class="brand-frame">
     </a>
-    <capture>展開模型側的推理，可以看到代理一步一步說出要查什麼、選哪個工具、結果回來後下一步要做什麼。文字之間夾著實際的 <code>aggregate_countries</code>、<code>get_details</code> 工具呼叫，方便除錯或微調 prompt。</capture>
+    <figcaption>展開模型側的推理，可以看到代理一步一步說出要查什麼、選哪個工具、結果回來後下一步要做什麼。文字之間夾著實際的 <code>aggregate_countries</code>、<code>get_details</code> 工具呼叫，方便除錯或微調 prompt。</figcaption>
 </figure>
 
 ### 觀測指標與運維

@@ -49,7 +49,7 @@ Once connected, you can ask the agent the following sorts of questions in plain 
             title="Claude Desktop's Taiwan Tor relay summary"
             class="brand-frame">
     </a>
-    <capture>Claude Desktop connected to onionoo MCP, replying to "Summarize Taiwan's Tor relays" with a structured report. The numbers come from upstream Onionoo and represent a point-in-time snapshot.</capture>
+    <figcaption>Claude Desktop connected to onionoo MCP, replying to "Summarize Taiwan's Tor relays" with a structured report. The numbers come from upstream Onionoo and represent a point-in-time snapshot.</figcaption>
 </figure>
 
 The pre-MCP version of this workflow meant skimming the Onionoo docs, writing a script, merging JSON, and formatting a table. A single sentence now gets you to a first-cut answer, and the cost of starting a piece of research drops sharply.
