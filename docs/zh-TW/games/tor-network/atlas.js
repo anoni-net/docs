@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
          float, mix, hash, uniform, instanceIndex,
-         uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
+         uv, smoothstep, mx_fractal_noise_float, attribute, fract } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML } from './i18n.js';
 
@@ -54,6 +54,7 @@ function applyI18n() {
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
+  set('credit-currents', 'creditCurrents', true);
   set('circ-tag', 'circTag');
   set('cc-close', 'ccClose');
   set('loading', 'loading');
@@ -79,6 +80,15 @@ const COL = {
   both: 0xff9ec7,  // guard+exit
   coast: 0x6fc0ee, // 海岸線
   cable: 0x2f7fa8, // 海底電纜。壓得比海岸線還低，只是讓海面不要一片空白
+  // 大洋環流。慣例上暖流畫紅、寒流畫藍，這裡不能照做：紅橙粉全被四個角色色與
+  // blocked 的警示紅佔走了，海面上冒出一條暖色線會被讀成中繼或警示。改成都留在冷色系，
+  // 暖流偏青綠、寒流偏藍紫，靠色相分。
+  //
+  // 兩個都刻意壓低彩度、壓暗。中繼點是小而飽和的點，環流是寬而柔的帶，退到環境層
+  // 才不會跟資料層搶讀。也要跟 cable 的鋼藍拉開，那是這一層最容易被誤認的對象，
+  // 所以寒流往紫走而不是留在藍。
+  curWarm: 0x4c8f86, // 暖流
+  curCold: 0x6a759f, // 寒流
   blocked: 0xff5a6e, // OONI 觀測到 Tor 連線大量失敗的國家。紅色系跟四個角色色都拉開
   border: 0x4f88b4,  // 國界。壓在海岸線之下一階，讓海陸交界仍然是最清楚的那條線
 };
@@ -495,6 +505,157 @@ function buildEarth(world, counts) {
     .add(texture(glowTex).mul(0.5))
     .add(texture(blockTex).mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
+}
+
+// 大洋環流的主幹。
+//
+// 這一層跟其他六份不一樣，沒有對應的外部資料檔。各大環流的名稱、走向與冷暖分類是公開的
+// 海洋學常識，座標是照著這些常識手繪的，沒有取用任何一家的流場資料，所以 NOTICE 不必
+// 多一筆授權。口徑跟 TRUNK 一致：走向可信，位置是示意，寬度與流速完全沒有對應。
+// 面板的 credit 要把這件事講出來，畫面上一條會動的線很容易被當成實測流場。
+//
+// 主幹是固定地理，灣流與黑潮的位置以世紀為單位變化，所以這份座標不需要定期重生，
+// 也就不進 publish_games_data.sh。這是選它而不是接 RTOFS 即時流場的主要理由，
+// 那條路要在正式機上解 GRIB2，會破掉「只依賴 python3 與 curl」這個現有的界線。
+//
+// 刻意不畫索馬利亞洋流。那條隨季風每年反向兩次，畫成單一方向有一半的時間是錯的。
+//
+// 座標寫成 [緯度, 經度]，跟 cables.json 的 [lon, lat] 相反，手寫時緯度在前好讀。
+// w 是 1 暖流、0 寒流，陣列順序就是流向。全部用 tools/check_currents_land.mjs 驗過
+// 沒有壓到陸地，改座標之後請重跑，光看畫面看不出擦到岸的那幾度。
+const CURRENTS = [
+  // 北大西洋環流（順時針）
+  { w: 1, p: [[26,-79.6],[28,-79.7],[30,-79.9],[32,-78.6],[34,-76.4],[35.5,-74.5],[37,-71.5],[38.5,-68],[40,-63],[41,-57],[42.5,-50],[44,-44]] },  // 灣流
+  { w: 1, p: [[44,-44],[47,-38],[50,-31],[53,-24],[56,-18],[58,-12],[60,-6],[62,0],[64,6],[67,11]] },  // 北大西洋暖流
+  { w: 0, p: [[42,-11],[38,-11],[34,-11],[30,-13],[26,-16],[22,-19],[18,-19],[15,-19]] },  // 加那利寒流
+  { w: 1, p: [[13,-20],[12,-28],[11,-36],[10,-44],[10,-52],[11,-58]] },  // 北赤道洋流（大西洋）
+  { w: 0, p: [[63,-59],[60,-61],[57,-58.5],[54,-55],[51,-52.5],[48,-50],[45,-49],[43,-50]] },  // 拉布拉多寒流
+  { w: 0, p: [[81,-2],[78,-6],[75,-11],[72,-15],[69,-20],[66,-30],[63,-38],[60.5,-42]] },  // 東格陵蘭寒流
+  // 南大西洋環流（逆時針）
+  { w: 1, p: [[-6,-34.3],[-8,-34.2],[-10,-35.2],[-14,-38],[-18,-38],[-22,-40],[-26,-46],[-31,-49.5],[-35,-52.5]] },  // 巴西暖流
+  { w: 0, p: [[-35,18],[-32,16.5],[-29,15],[-26,13.5],[-23,12.5],[-20,11.3],[-17,10.5],[-14,10],[-11,10.5]] },  // 本格拉寒流
+  { w: 1, p: [[-3,8],[-3,0],[-3,-10],[-3,-20],[-4,-28],[-5,-33]] },  // 南赤道洋流（大西洋）
+  { w: 0, p: [[-40,-55],[-41,-45],[-42,-33],[-42,-20],[-41,-8],[-39,4],[-37,14]] },  // 南大西洋洋流
+  // 印度洋
+  { w: 1, p: [[-24,36],[-27,33.5],[-30,31.8],[-32.5,29.5],[-34.5,26.5],[-36,23],[-37.5,20.5],[-38,18]] },  // 厄加勒斯暖流
+  { w: 0, p: [[-35,112],[-31,111],[-27,110],[-23,109],[-19,110],[-16,113]] },  // 西澳寒流
+  { w: 1, p: [[-12,105],[-12,95],[-12,82],[-11,70],[-10,58],[-10,48]] },  // 南赤道洋流（印度洋）
+  // 北太平洋環流（順時針）
+  { w: 1, p: [[17,123],[19.5,122.5],[21.5,122],[23,122.3],[25.5,123],[27.5,126],[29.5,129],[30.8,132],[32.8,136.5],[34.3,140.3]] },  // 黑潮
+  { w: 1, p: [[35,142],[36.5,148],[38,156],[39.5,165],[41,175],[42,-175],[43,-165],[44,-155],[45,-145],[45,-135]] },  // 北太平洋洋流
+  { w: 0, p: [[47,-127],[43,-126],[39,-125],[35,-122.5],[31,-119],[27,-116],[24,-113.5]] },  // 加利福尼亞寒流
+  { w: 1, p: [[13,-105],[12,-125],[11,-145],[11,-165],[12,175],[13,155],[14,138],[15,126]] },  // 北赤道洋流（太平洋）
+  { w: 0, p: [[56,166],[53,162],[50,157],[47,153.5],[44,148.5],[42,145],[39,143.5]] },  // 親潮
+  { w: 1, p: [[6,132],[6,150],[6,168],[6,-175],[6.5,-160],[7,-145],[7,-130],[6,-115]] },  // 赤道逆流（太平洋）
+  // 南太平洋環流（逆時針）
+  { w: 1, p: [[-17,148],[-21,152],[-25,154.5],[-29,154.5],[-33,152.5],[-37,151],[-40,150.5]] },  // 東澳暖流
+  { w: 0, p: [[-44,-77],[-39,-75.5],[-34,-73.5],[-29,-72.5],[-24,-71.5],[-19,-72],[-14,-77.5],[-9,-80.5],[-5,-82.5],[-2,-83]] },  // 秘魯寒流
+  { w: 1, p: [[-3,-88],[-3,-105],[-3,-125],[-3,-145],[-3,-165],[-3.5,-178],[-4,168]] },  // 南赤道洋流（太平洋）
+  // 南冰洋。繞完一圈，從 -180 畫到 180 首尾就接上了
+  { w: 0, p: [[-56,-180],[-58,-165],[-59,-150],[-58,-135],[-56,-120],[-55,-105],[-56,-90],[-58,-75],[-59,-62],[-57,-50],[-53,-38],[-52,-25],[-53,-12],[-55,0],[-57,12],[-58,25],[-57,40],[-55,55],[-55,68],[-55,82],[-54,95],[-55,110],[-57,127],[-58,143],[-57,160],[-56,175],[-56,180]] },  // 南極繞極流
+];
+
+// 畫法要跟海底電纜明顯分開。兩層都是海面上的細線、都在冷色系，畫成同樣的 1px 線段
+// 會直接被讀成同一種東西。三個地方拉開：
+//
+//   形態  電纜是連續不斷的線，環流只有一節一節的流帶，節與節之間是真的空的。
+//         所以這一層沒有底色，整條線的存在感完全來自跑動的亮紋。
+//   寬度  GPU 的線寬鎖死在 1px，粗細做不出差異，所以改織成貼著球面的緞帶，
+//         寬度給的是地表的度數。放大之後緞帶會跟著變寬，電纜永遠是髮絲線。
+//   邊緣  緞帶橫向柔邊，中間亮兩側收掉。硬邊的寬線看起來只是比較粗的電纜。
+//
+// 緞帶的織法沿用極光那層：手工推頂點，不靠任何 fat line 的 addon（vendor 也沒有）。
+const CUR_H = 1.0022;      // 離地高度。壓在海纜（1.003）之下
+const CUR_STEP_DEG = 1.2;  // 沿線的補點間距。跟海纜同一個坑，跨得遠的直線會從地球內部穿過去
+const CUR_WIDTH_DEG = 1.5; // 緞帶寬度，單位是地表的度。赤道上約 165 公里
+const CUR_DENSITY = 6;     // 每弧度幾節亮紋。1/6 弧度約 9.5 度，在赤道約一千公里
+const CUR_SPEED = 0.28;    // 相位速度。除以 DENSITY 才是紋路實際跑的角速度，一節約 3.6 秒
+const CUR_TAIL = 4.5;      // 尾巴的衰減次方。愈大頭愈集中、尾巴拖愈長
+const CUR_TAPER = 0.18;    // 尾端收剩幾成寬。頭尾同寬的話整節會讀成一根膠囊
+const CUR_PEAK = 0.42;     // 亮紋強度。暖流色轉線性後 luminance 約 0.23，相乘後約 0.10，
+                           // 離 bloom 的 0.72 門檻還很遠，這一層不會被暈成白帶
+const CUR_STILL = 0.10;    // REDUCED 時的定值亮度
+
+function buildCurrents() {
+  const pos = [], us = [], vs = [], ws = [], idx = [];
+  const radial = new THREE.Vector3(), tan = new THREE.Vector3(), side = new THREE.Vector3();
+  const halfW = R * (CUR_WIDTH_DEG / 2) * Math.PI / 180;
+  for (const cur of CURRENTS) {
+    // 先把整條補成密點再織緞帶。分兩步是為了讓弧長可以一路累積，而且算切線要看
+    // 前後鄰點，邊補邊發射的寫法拿不到後面那一點。
+    const pts = [];
+    for (let i = 0; i + 1 < cur.p.length; i++) {
+      const lat1 = cur.p[i][0], lon1 = cur.p[i][1];
+      const dlat = cur.p[i + 1][0] - lat1;
+      let dlon = cur.p[i + 1][1] - lon1;
+      if (dlon > 180) dlon -= 360; else if (dlon < -180) dlon += 360; // 跨換日線走短的那邊
+      const cos = Math.cos((lat1 + lat1 + dlat) / 2 * Math.PI / 180);
+      const steps = Math.max(1, Math.ceil(Math.hypot(dlat, dlon * cos) / CUR_STEP_DEG));
+      for (let k = (i ? 1 : 0); k <= steps; k++) { // 接續的段跳過第 0 點，免得跟上一段的尾巴重複
+        const t = k / steps;
+        pts.push(llToVec(lat1 + dlat * t, lon1 + dlon * t, R * CUR_H, new THREE.Vector3()));
+      }
+    }
+    const base = pos.length / 3;
+    // aU 存的是累積弧長（弧度），不是 0 到 1 的比例。用比例的話，南極繞極流那條
+    // 三萬公里的線跟黑潮那條三千公里的線會被切成同樣的節數，紋路長度差一個量級。
+    let u = 0;
+    for (let i = 0; i < pts.length; i++) {
+      if (i) u += pts[i - 1].angleTo(pts[i]);
+      // 切線取前後鄰點的差，端點退回單邊差分。side 是切線與法線的外積，也就是
+      // 貼著球面、垂直於流向的那個方向，緞帶就往這兩邊各撐開半個寬度。
+      tan.copy(pts[Math.min(i + 1, pts.length - 1)]).sub(pts[Math.max(i - 1, 0)]).normalize();
+      radial.copy(pts[i]).normalize();
+      side.crossVectors(tan, radial).normalize().multiplyScalar(halfW);
+      pos.push(pts[i].x + side.x, pts[i].y + side.y, pts[i].z + side.z);
+      pos.push(pts[i].x - side.x, pts[i].y - side.y, pts[i].z - side.z);
+      us.push(u, u);
+      vs.push(0, 1);
+      ws.push(cur.w, cur.w);
+      if (i) {
+        const a = base + (i - 1) * 2;
+        idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
+      }
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  g.setAttribute('aU', new THREE.BufferAttribute(new Float32Array(us), 1));
+  g.setAttribute('aV', new THREE.BufferAttribute(new Float32Array(vs), 1));
+  g.setAttribute('aW', new THREE.BufferAttribute(new Float32Array(ws), 1));
+  g.setIndex(idx);
+
+  const mat = new THREE.MeshBasicNodeMaterial({
+    transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+  });
+  // 顏色要先從 sRGB 轉到線性工作空間再交給 vec3。直接寫 vec3(0x3f/255, ...) 的話
+  // 那組數字會被當成已經是線性值，顯示出來會比指定的色票淡一大截，飽和度掉光。
+  // 這一層要的是低彩度的環境色，再被沖淡就跟白色沒兩樣了。
+  const cw = new THREE.Color(COL.curWarm), cc = new THREE.Color(COL.curCold);
+  mat.colorNode = mix(vec3(cc.r, cc.g, cc.b), vec3(cw.r, cw.g, cw.b), attribute('aW', 'float'));
+  const across = attribute('aV', 'float').sub(0.5).abs().mul(2); // 0 在中線、1 在緞帶邊緣
+  if (REDUCED) {
+    // 極光在 REDUCED 時整層不建，那層沒有動畫就沒有內容。這層不一樣，環流的走向
+    // 本身就是要講的東西，所以留下來，改成整條均勻的柔邊帶。連續的寬帶跟髮絲線
+    // 還是分得出來，靜止時不必再靠亮紋去區隔。
+    mat.opacityNode = oneMinus(smoothstep(0.35, 1.0, across)).mul(CUR_STILL);
+  } else {
+    // 相位隨弧長遞增、隨時間遞減，所以亮紋往 aU 變大的方向跑，也就是座標的排列順序。
+    // 亮度取 phase 本身而不是 oneMinus(phase)：頭要在下游、尾巴拖在上游，
+    // 反過來寫會變成尾巴在前面，看起來像水在倒流。
+    const phase = fract(attribute('aU', 'float').mul(CUR_DENSITY).sub(clockT.mul(CUR_SPEED)));
+    const bright = phase.pow(CUR_TAIL);
+    // 尾巴要跟著變窄。只調亮度、寬度不動的話，一節會讀成一根等寬的膠囊，
+    // 跟「一道流」差很遠。頭最寬，往尾端收到 CUR_TAPER，整節就成了梭形。
+    const half = bright.mul(1 - CUR_TAPER).add(CUR_TAPER);
+    const edge = oneMinus(smoothstep(half.mul(0.35), half, across));
+    mat.opacityNode = bright.mul(CUR_PEAK).mul(edge);
+  }
+  const mesh = new THREE.Mesh(g, mat);
+  // 這幾層同心透明物件的預設排序不穩定，明確指定。放在海纜與國界（都是 0）之後，
+  // additive 只會加亮，疊在上面不會蓋掉底下那幾層的線。
+  mesh.renderOrder = 10;
+  globe.add(mesh);
 }
 
 // 海底電纜。資料是 OpenStreetMap 的 communication=line + submarine=yes，覆蓋並不完整，
@@ -1919,6 +2080,7 @@ async function main() {
   const counts = countryCounts(snap);
   buildSky();                      // 星空要先鋪，後面的東西才像在太空裡
   buildEarth(world, counts);
+  buildCurrents();                 // 大洋環流。壓在海纜之下，海面的底層質感
   if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面

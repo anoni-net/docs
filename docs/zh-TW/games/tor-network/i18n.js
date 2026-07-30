@@ -43,6 +43,7 @@ const ZH_TW = {
   creditAccessNow: '網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。',
   creditNaturalEarth: '國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。',
   creditOsm: '海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。',
+  creditCurrents: '海面上一節一節往前跑的光帶是大洋環流的主幹，跟連續不斷的海底電纜細線是兩回事。暖流偏青綠、寒流偏藍紫，光帶跑的方向就是流向。走向與冷暖分類依公開的海洋學常識手繪，沒有取用任何流場資料，位置只到示意的程度，光帶的寬度與速度都沒有對應真實流速。索馬利亞洋流隨季風每年反向兩次，畫成單一方向會有一半的時間是錯的，所以沒有收錄。',
 
   circTag: '示意路徑　guard → middle → exit',
   ccClose: '關閉',
@@ -165,6 +166,7 @@ const EN = {
   creditAccessNow: 'Shutdown events come from the STOP dataset by <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a>, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. The cause of each event is verified and labelled by hand by that coalition. Updates are irregular and do not reflect live status.',
   creditNaturalEarth: 'Country outlines come from <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (public domain, 110m scale).',
   creditOsm: 'The clearer thin lines over the sea are submarine cables from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors (ODbL), with better coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors as great-circle arcs between publicly known landing points: only the general direction is meaningful, and real routing needs a dedicated cable map.',
+  creditCurrents: 'The tapered bands travelling across the sea in bursts are the major ocean current systems, distinct from the unbroken thin lines of the submarine cables. Teal marks warm currents, blue-violet marks cold ones, and each band runs in the direction of flow. Both the paths and the warm/cold classification are drawn by hand from public oceanographic knowledge, with no flow-field data involved, so the positions are indicative only. Neither the width of a band nor the speed it travels corresponds to real current speed. The Somali Current reverses with the monsoon twice a year, so a single fixed direction would be wrong half the time and it is left out.',
 
   circTag: 'Illustrative path　guard → middle → exit',
   ccClose: 'Close',
@@ -286,6 +288,7 @@ const ZH_CN = {
   creditAccessNow: '网络关闭事件来自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 数据集，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每笔事件的成因由该联盟人工查证后标注，更新是不定期的，不是实时状态。',
   creditNaturalEarth: '国界轮廓来自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。',
   creditOsm: '海面上看得比较清楚的细线是海底电缆，来自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 贡献者（ODbL），收录以欧洲、地中海与大西洋较完整。最淡的一层是主要跨洋走廊的示意，取两端公开的登陆地点拉出大圆弧，只有走向可信，实际路由要看专门的海缆地图。',
+  creditCurrents: '海面上一节一节往前跑的光带是大洋环流的主干，跟连续不断的海底电缆细线是两回事。暖流偏青绿、寒流偏蓝紫，光带跑的方向就是流向。走向与冷暖分类依公开的海洋学常识手绘，没有取用任何流场数据，位置只到示意的程度，光带的宽度与速度都没有对应真实流速。索马里洋流随季风每年反向两次，画成单一方向会有一半的时间是错的，所以没有收录。',
 
   circTag: '示意路径　guard → middle → exit',
   ccClose: '关闭',
