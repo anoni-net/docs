@@ -152,7 +152,13 @@
       backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
-    #top { left: 14px; top: 14px; max-width: min(94vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 12px 15px; }
+    /* 高度先寫 vh 再寫 dvh。手機瀏覽器的 100vh 指的是工具列收起來時的高度，
+       工具列出現時面板會比可見區還高，最後一行就被蓋住。dvh 會跟著縮，
+       不支援的瀏覽器落回上面那行。 */
+    #top { left: 14px; top: 14px; max-width: min(94vw, 340px); overflow-y: auto;
+           max-height: calc(100vh - 28px);
+           max-height: calc(100dvh - 28px);
+           padding: 12px 15px calc(12px + env(safe-area-inset-bottom, 0px)); }
     /* 中繼台數搬進 summary，收合時仍然看得到。那是這顆地球儀最想先講的一個數字，
        收起來只剩標題就等於什麼都沒說。資料快照以下才是收合的範圍。 */
     #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; }
@@ -323,6 +329,10 @@
       #hint .wide { display: none; }
       #hint .narrow { display: inline; }
       #big { font-size: 24px; } .lb { font-size: 10px; }
+      /* 底部多留一段。除了瀏覽器工具列，畫面下緣還有 #hint 那條提示是固定定位的
+         （bottom: 12px、約 46px 高，合計佔掉下緣約 58px），會壓在面板最後幾行上面。
+         58 再加 26 的呼吸空間，讓最後一行離提示條與可見區下緣都有餘裕。 */
+      #top { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
     }
   </style>
   <script type="importmap">
