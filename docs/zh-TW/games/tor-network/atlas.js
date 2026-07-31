@@ -75,12 +75,14 @@ function applyI18n() {
   set('lbl-users', 'lblUsers');
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
+  set('lbl-seacable', 'lblSeacable');
   set('note', 'note');
   set('credit-title', 'creditTitle');
   set('credit-onionoo', 'creditOnionoo', true);
   set('credit-metrics', 'creditMetrics', true);
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
+  set('credit-seacable', 'creditSeacable', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
   set('credit-netusers', 'creditNetUsers', true);
@@ -1244,6 +1246,46 @@ function updateCircuits(dt) {
   }
 }
 
+// 連到台灣的海纜障礙。跟 OONI 與斷網事件並列，都是「網路怎麼壞掉」的不同面向，
+// 差別在這一份是實體基礎建設而不是政策或封鎖。
+//
+// 沒有畫在地球上，只在面板裡列。公告給的位置是「距某地約 N 公里」，有距離沒有方位，
+// 真正的斷點在那個地點周圍的一圈上而不是一個點。畫成點會讓人以為我們知道得比實際多，
+// 畫成圈又會蓋掉一大片海面，而且 0.6 公里那筆畫出來根本看不到。
+//
+// 資料檔沒有的時候連標題一起收掉，跟 fillShutdowns 同一個做法。
+function fillSeacable() {
+  const box = $('stat-seacable');
+  const lbl = $('lbl-seacable');
+  const note = $('seacable-note');
+  const cr = $('credit-seacable');
+  const list = SEACABLE && SEACABLE.faults;
+  if (!box || !list || !list.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    // 來源聲明也要收。留著會變成一段說「資料來自數位發展部」卻沒有那份資料的敘述。
+    if (cr) cr.hidden = true;
+    return;
+  }
+  box.innerHTML = list.map((f) => {
+    const where = f.where
+      ? S('scFrom', { from: f.where.from, km: f.where.km })
+      : S('scNoWhere');
+    const sub = [
+      f.fix ? S('scFix', { d: f.fix }) : '',
+      // 優先用英文簡稱。中文全名在簡中與英文版會夾一段繁體，對照表對不到才退回原名。
+      (() => { const a = (f.altAbbr && f.altAbbr.length ? f.altAbbr : f.alt) || [];
+        return a.length ? S('scAlt', { list: a.join(S('listSep')) }) : ''; })(),
+    ].filter(Boolean).join('　');
+    return `<div class="sc-row"><div class="sc-top">`
+      + `<span class="sc-ab">${f.abbr || f.name}</span>`
+      + `<span class="sc-loc">${where}</span>`
+      + `<span class="sc-st">${f.start ? S('scStart', { d: f.start }) : ''}</span></div>`
+      + (sub ? `<div class="sc-sub">${sub}</div>` : '') + `</div>`;
+  }).join('');
+  if (note) note.innerHTML = S('noteSeacable');
+}
+
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -1593,7 +1635,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2255,7 +2297,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2267,12 +2309,16 @@ async function main() {
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
     getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
     getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
+    // 海纜障礙可選。這份刻意還沒進 repo，那張表未標示授權，等 moda 回覆再落地。
+    // 檔案不在的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
+    getJSON('./seacable.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
   SHUTDOWNS = shutdowns;
   NETUSERS = netusers;
   BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
+  SEACABLE = seacable;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
@@ -2300,6 +2346,7 @@ async function main() {
   fillUsers(snap);
   fillOoni(snap);
   fillShutdowns();
+  fillSeacable();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);

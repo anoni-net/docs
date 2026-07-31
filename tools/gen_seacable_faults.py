@@ -53,6 +53,10 @@ from html.parser import HTMLParser
 # 網址可用環境變數覆寫，測剖析器對版面變動的反應時不必改檔案
 URL = os.environ.get("MODA_FAULT_URL",
                      "https://moda.gov.tw/major-policies/subseacable/fault/1749")
+# 海纜清單。障礙表只給中文名，替代路由那欄也是中文，簡中與英文版顯示起來會夾一段繁中。
+# 這一頁有中文全名、英文簡稱、英文全名與連接國別的對照，拿來把名字正規化成簡稱。
+LIST_URL = os.environ.get("MODA_LIST_URL",
+                          "https://moda.gov.tw/major-policies/subseacable/1747")
 # 表頭必須看得到這幾個詞，對不上就是頁面改版了
 NEED = ("海纜名稱", "障礙", "修復")
 MIN_ROWS = 1
@@ -169,13 +173,53 @@ def parse_where(s):
     return {"from": m.group(1).strip(), "km": km}
 
 
-def fetch(url):
+def fetch_cables():
+    """從海纜清單頁建對照表。回傳 中文全名 → {abbr, en, cc}，取不到就回空的。
+
+    這一份是加分項不是必要項，抓不到就讓障礙表照原樣輸出中文名，不要讓整支失敗。
+    """
+    html_text = fetch(LIST_URL, quiet=True)
+    if not html_text:
+        print("  提醒：海纜清單頁取不到，替代路由會留中文全名", file=sys.stderr)
+        return {}
+    p = TableParser()
+    p.feed(html_text)
+    out = {}
+    for tb in p.tables:
+        grid = expand_rowspan(tb)
+        # 第一列可能是標題橫幅（只有一格），表頭在下一列
+        head = next((r for r in grid[:3] if len(r) >= 3 and "中文全名" in "".join(r)), None)
+        if not head:
+            continue
+        def col(kw):
+            return next((i for i, h in enumerate(head) if kw in h), None)
+        c_zh, c_ab, c_en, c_cc = col("中文全名"), col("英文簡稱"), col("英文全名"), col("連接")
+        if c_zh is None or c_ab is None:
+            continue
+        for line in grid[grid.index(head) + 1:]:
+            if len(line) <= max(c_zh, c_ab):
+                continue
+            zh, ab = line[c_zh].strip(), line[c_ab].strip()
+            if not zh or not ab:
+                continue
+            item = out.setdefault(zh, {"abbr": ab, "cc": []})
+            if c_en is not None and len(line) > c_en and line[c_en].strip():
+                item["en"] = line[c_en].strip()
+            if c_cc is not None and len(line) > c_cc:
+                v = line[c_cc].strip()
+                if v and v not in item["cc"]:
+                    item["cc"].append(v)
+    return out
+
+
+def fetch(url, quiet=False):
     for attempt in range(3):
         r = subprocess.run(["curl", "-sL", "--max-time", "120", "-A", "Mozilla/5.0", url],
                            capture_output=True, text=True)
         if r.returncode == 0 and "<table" in r.stdout:
             return r.stdout
-        print(f"  第 {attempt + 1} 次取回失敗，等一下再試", file=sys.stderr)
+        if not quiet:
+            print(f"  第 {attempt + 1} 次取回失敗，等一下再試", file=sys.stderr)
         time.sleep(5)
     return None
 
@@ -193,6 +237,7 @@ def main():
     html_text = fetch(URL)
     if not html_text:
         raise SystemExit("moda 的海纜障礙頁取回失敗")
+    cables = fetch_cables()
 
     p = TableParser()
     p.feed(html_text)
@@ -240,6 +285,8 @@ def main():
             alt = [x.strip() for x in re.split(r"[、,，]", line[c_alt]) if x.strip()]
             if alt:
                 item["alt"] = alt
+                # 對得到就換成英文簡稱。對照表缺的（或本來就是簡稱的）留原樣。
+                item["altAbbr"] = [cables.get(a, {}).get("abbr", a) for a in alt]
         where = parse_where(desc)
         if where:
             item["where"] = where
@@ -259,11 +306,16 @@ def main():
                  "請先向 moda 確認。日期原為民國年，已轉為西元。障礙位置是從表格文字裡"
                  "解出的概略距離，不是精確座標。"),
         "faults": faults,
+        # 中文全名 → 英文簡稱、英文全名、連接國別。給前端把名字正規化用，
+        # 簡中與英文版才不會夾一段繁體中文的纜線名。
+        "cables": cables,
     }
     write_atomic(out, data)
 
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")
-    print(f"  {len(faults)} 筆障礙")
+    named = sum(1 for f in faults if f.get("where"))
+    print(f"  {len(faults)} 筆障礙，其中 {named} 筆解得出概略位置")
+    print(f"  海纜對照表 {len(cables)} 條")
     for f in faults:
         w = f.get("where")
         loc = f"　距{w['from']} {w['km']} 公里" if w else ""

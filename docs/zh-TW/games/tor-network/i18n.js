@@ -32,6 +32,12 @@ const ZH_TW = {
   lblUsers: '用的人最多的地方（Tor Metrics 估計）',
   lblOoni: 'Tor 連線受阻的地方（OONI 觀測）',
   lblShutdown: '網路被整個關掉的地方（Access Now 紀錄）',
+  lblSeacable: '連到台灣的海纜障礙（數位發展部）',
+  scFrom: '距{from} {km} 公里',
+  scStart: '{d} 起',
+  scFix: '預計 {d} 修復',
+  scAlt: '替代 {list}',
+  scNoWhere: '公告未載明位置',
 
   note: '陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。',
 
@@ -40,6 +46,7 @@ const ZH_TW = {
   creditMetrics: '使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。',
   creditOoni: 'Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。',
   creditAccessNow: '網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。',
+  creditSeacable: '連到台灣的海纜障礙狀況來自<a href="https://moda.gov.tw/major-policies/subseacable/fault/1749" rel="noopener">數位發展部</a>公布的表格。該頁面的示意圖來自 TeleGeography 並採 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>，這裡只取表格不含圖。表格本身未標示授權。',
   creditNaturalEarth: '國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。海面的深淺是同一來源的等深線（10m 比例尺），只取 200、1000、3000、5000 公尺四層，最淺那階就是大陸棚。海底電纜幾乎都沿著陸棚鋪、避開深海盆，兩層對照著看得出來為什麼纜線走那些路徑。',
   creditOsm: '海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。',
   creditNetUsers: '國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">數位發展部的國家數位近用調查</a>（政府資料開放授權條款-第1版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。',
@@ -73,6 +80,7 @@ const ZH_TW = {
   noteUsers: '全球估計每天約 {wan} 萬人在用，資料是 {date}。',
   noteUsersTw: '台灣估計 {n} 人，中繼 {relays} 台。',
   noteUsersTail: '用的人在哪跟中繼架在哪是兩件事，中繼多的國家多半是機房便宜、法規友善，跟那裡有多少人需要 Tor 沒有直接關係。這些是用中繼收到的目錄請求反推的估計值，信心區間相當寬，看趨勢比看絕對數字可靠。',
+  noteSeacable: '這幾條是連到台灣的海纜，不是全球清單。障礙位置取自公告的敘述文字，只有距離沒有方位，實際斷點在該地點周圍的某處。替代路由是公告列出的備援，同一條備援本身也可能正在障礙中。預計修復日期會隨海纜船的調度變動。地點名稱照公告原文，官方沒有提供對應的英文或簡體寫法。',
   noteShutdown: '{y0} 到 {y1} 年間全球 {total} 筆紀錄，由 Access Now 的 #KeepItOn 聯盟人工查證。成因以武裝衝突 {conflict} 次最多，其次是抗議活動 {protest} 次與資訊管制 {info} 次。也有為了防止考試作弊 {exam} 次與官員視察期間 {visit} 次而關閉的紀錄。武裝衝突與族群衝突未必是政府主動下令，戰事打壞基礎設施也算在內，所以國家卡片另外標出屬於資訊管制類的件數。另外印度的紀錄多半是單一邦或單一地區的斷網，跟上面那些全國性受阻的情況性質不同。',
 
   // ---- 國家卡片 ----
@@ -159,6 +167,12 @@ const EN = {
   lblUsers: 'Where the most people use it (Tor Metrics estimate)',
   lblOoni: 'Where Tor connections run into trouble (OONI)',
   lblShutdown: 'Where the network was shut down entirely (Access Now)',
+  lblSeacable: 'Faults on cables landing in Taiwan (Ministry of Digital Affairs)',
+  scFrom: '{km} km from {from}',
+  scStart: 'since {d}',
+  scFix: 'repair due {d}',
+  scAlt: 'backup {list}',
+  scNoWhere: 'location not stated',
 
   note: 'Land brightness shows how many relays a country hosts: the brighter it is, the more it holds. Click any of the four role chips and the globe keeps only that role, with the same brightness-equals-count rule. Click a country label for its details. Nearly ten thousand relays look spread across the world, but they are heavily concentrated in the United States, Germany and the Netherlands, the bright patches, ranked here by count. Rank by bandwidth instead and the top three become Germany, the Netherlands and the United States: the US has the most relays but each one carries less traffic. Onionoo only reports country, not a finer location, so what you see is a country-level count. Zoomed out, the globe draws only a fraction of the dots and fills in the rest as you zoom in. To read density, use the land brightness, which always reflects the full count.',
 
@@ -167,6 +181,7 @@ const EN = {
   creditMetrics: 'User estimates and bridge statistics come from <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>, licensed <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>. The user counts are inferred from directory requests reaching relays. They are estimates with fairly wide confidence intervals, not a census.',
   creditOoni: 'Tor connection measurements come from <a href="https://ooni.org/" rel="noopener">OONI</a> (Open Observatory of Network Interference), licensed <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>. What is shown is the share of tor tests over the past 30 days that did not complete as expected, which OONI calls an anomaly. Causes include blocking, unstable networks and ISP faults.',
   creditAccessNow: 'Shutdown events come from the STOP dataset by <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a>, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. The cause of each event is verified and labelled by hand by that coalition. Updates are irregular and do not reflect live status.',
+  creditSeacable: 'Fault status for the cables landing in Taiwan comes from a table published by <a href="https://moda.gov.tw/major-policies/subseacable/fault/1749" rel="noopener">Taiwan\'s Ministry of Digital Affairs</a>. The diagrams on that page come from TeleGeography under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>, and only the table is used here. The table itself carries no licence statement.',
   creditNaturalEarth: 'Country outlines come from <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (public domain, 110m scale). The shading of the sea is bathymetry from the same source (10m scale), reduced to four contours at 200, 1000, 3000 and 5000 metres. The palest band is the continental shelf. Submarine cables mostly follow the shelf and avoid the deep basins, so the two layers together show why the cables run where they do.',
   creditOsm: 'The clearer thin lines over the sea are submarine cables from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors (ODbL), with better coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors as great-circle arcs between publicly known landing points: only the general direction is meaningful, and real routing needs a dedicated cable map.',
   creditNetUsers: 'The share of the population online, shown on country cards, comes from <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> Individuals using the Internet, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. The most recent year with data differs by country, so every figure carries its own year. The World Bank does not cover Taiwan, so that one figure comes from the <a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">Ministry of Digital Affairs National Digital Access Survey</a> instead, a telephone survey of people aged 12 and over. It is not the same kind of survey as the others and the card says so.',
@@ -200,6 +215,7 @@ const EN = {
   noteUsers: 'Roughly {mil} million people use it worldwide each day, as of {date}.',
   noteUsersTw: 'Taiwan is estimated at {n} users with {relays} relays.',
   noteUsersTail: 'Where people use Tor and where relays are hosted are two different things. Countries with many relays tend to have cheap hosting and friendly regulation, which has no direct bearing on how many people there need Tor. These figures are inferred from directory requests reaching relays, with fairly wide confidence intervals, so the trend is more reliable than any absolute number.',
+  noteSeacable: 'These are the cables landing in Taiwan, not a global list. Fault positions are read out of the wording of the official notice: a distance with no bearing, so the actual break is somewhere on a ring around the named place. The backup column is the route the notice names, and a backup can itself be under repair at the same time. Repair dates move with cable ship scheduling. Place names are left as published, in Chinese: the ministry does not provide an English form.',
   noteShutdown: '{total} records worldwide between {y0} and {y1}, verified by hand by the Access Now #KeepItOn coalition. Armed conflict is the most common cause at {conflict} events, followed by protests at {protest} and information control at {info}. There are also {exam} shutdowns to stop exam cheating and {visit} during visits by government officials. Armed conflict and communal violence are not necessarily ordered by a government, since infrastructure damaged in fighting counts too, which is why the country cards break out the information-control cases separately. India\'s records are also mostly state-level or district-level shutdowns, different in kind from the nationwide disruption listed above.',
 
   // ---- 國家卡片 ----
@@ -285,6 +301,12 @@ const ZH_CN = {
   lblUsers: '用的人最多的地方（Tor Metrics 估计）',
   lblOoni: 'Tor 连线受阻的地方（OONI 观测）',
   lblShutdown: '网络被整个关掉的地方（Access Now 记录）',
+  lblSeacable: '连到台湾的海缆障碍（数位发展部）',
+  scFrom: '距{from} {km} 公里',
+  scStart: '{d} 起',
+  scFix: '预计 {d} 修复',
+  scAlt: '替代 {list}',
+  scNoWhere: '公告未载明位置',
 
   note: '陆地的亮度代表该国有多少台中继，愈亮的国家托管的中继愈多。角色分布那四个标签点下去，地球会只留那一种角色，深浅一样是数量。点国家标签可以看那一国的细节。近万台中继看似遍布全球，实际高度集中在美国、德国、荷兰这几块亮起来的地方，这个顺序照台数排。换成带宽排，前三名会变成德国、荷兰、美国，美国的中继台数最多，单台扛的流量比较小。Onionoo 只给到国别，没有更精确的位置，地图上呈现的是国家层级的数量。远看时地球上只画其中一部分的点，放大会逐步补齐到全部，要读密度请看陆地亮度，那个一直是全部的台数。',
 
@@ -293,6 +315,7 @@ const ZH_CN = {
   creditMetrics: '用户估计与网桥统计来自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授权 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人数是用中继收到的目录请求反推的估计值，置信区间相当宽，不是普查。',
   creditOoni: 'Tor 连线观测来自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授权 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。画面呈现的是 tor 测试近 30 天各国没有照预期完成的比率，OONI 称为 anomaly，成因包含连线被挡、网络不稳与 ISP 故障。',
   creditAccessNow: '网络关闭事件来自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 数据集，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每笔事件的成因由该联盟人工查证后标注，更新是不定期的，不是实时状态。',
+  creditSeacable: '连到台湾的海缆障碍状况来自<a href="https://moda.gov.tw/major-policies/subseacable/fault/1749" rel="noopener">数位发展部</a>公布的表格。该页面的示意图来自 TeleGeography 并采 <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>，这里只取表格不含图。表格本身未标示授权。',
   creditNaturalEarth: '国界轮廓来自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。海面的深浅是同一来源的等深线（10m 比例尺），只取 200、1000、3000、5000 公尺四层，最浅那阶就是大陆棚。海底电缆几乎都沿着陆棚铺、避开深海盆，两层对照着看得出来为什么缆线走那些路径。',
   creditOsm: '海面上看得比较清楚的细线是海底电缆，来自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 贡献者（ODbL），收录以欧洲、地中海与大西洋较完整。最淡的一层是主要跨洋走廊的示意，取两端公开的登陆地点拉出大圆弧，只有走向可信，实际路由要看专门的海缆地图。',
   creditNetUsers: '国家卡片上的上网人口比例来自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各国最新有值的年份不同，所以每一笔都标了年份。World Bank 没有收录台湾，台湾那一笔改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">数位发展部的国家数位近用调查</a>（政府资料开放授权条款-第1版），那是对 12 岁以上人口的电话抽样，跟其他国家的来源不是同一种调查，卡片上会另外标出来。',
@@ -326,6 +349,7 @@ const ZH_CN = {
   noteUsers: '全球估计每天约 {wan} 万人在用，数据是 {date}。',
   noteUsersTw: '台湾估计 {n} 人，中继 {relays} 台。',
   noteUsersTail: '用的人在哪跟中继架在哪是两件事，中继多的国家多半是机房便宜、法规友善，跟那里有多少人需要 Tor 没有直接关系。这些是用中继收到的目录请求反推的估计值，置信区间相当宽，看趋势比看绝对数字可靠。',
+  noteSeacable: '这几条是连到台湾的海缆，不是全球清单。障碍位置取自公告的叙述文字，只有距离没有方位，实际断点在该地点周围的某处。替代路由是公告列出的备援，同一条备援本身也可能正在障碍中。预计修复日期会随海缆船的调度变动。地点名称照公告原文，官方没有提供对应的简体写法。',
   noteShutdown: '{y0} 到 {y1} 年间全球 {total} 笔记录，由 Access Now 的 #KeepItOn 联盟人工查证。成因以武装冲突 {conflict} 次最多，其次是抗议活动 {protest} 次与信息管制 {info} 次。也有为了防止考试作弊 {exam} 次与官员视察期间 {visit} 次而关闭的记录。武装冲突与族群冲突未必是政府主动下令，战事打坏基础设施也算在内，所以国家卡片另外标出属于信息管制类的件数。另外印度的记录多半是单一邦或单一地区的断网，跟上面那些全国性受阻的情况性质不同。',
 
   // ---- 國家卡片 ----
