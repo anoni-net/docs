@@ -1043,7 +1043,7 @@ function buildAurora() {
 // 上限壓在 FEED_MAX。三跳每一兩秒就生一條，不設限的話高樓會蓋到畫面外。滿了就把最舊
 // 的那則（DOM 上的第一個）提前收掉。
 const FEED_MAX = 4;
-const FEED_TTL = 5200;   // 一則活多久（毫秒）。三跳一條的生命是 4.5 秒，留一點餘裕
+const FEED_TTL = 6000;   // 沒有指定時一則活多久（毫秒）。三跳那邊自己傳，不吃這個值
 const FEED_OUT = 450;    // 淡出動畫的長度，要跟 CSS 的 transition 對得上
 
 function notify(html, ttl = FEED_TTL) {
@@ -1079,15 +1079,18 @@ function notify(html, ttl = FEED_TTL) {
 // 中繼分布。但三點的組合本身不是真實電路：Tor 選路徑要看子網、家族、頻寬權重，這裡
 // 完全沒有模擬，飛行節奏也不對應真實電路約十分鐘的輪替。畫面上必須一直掛著「示意」
 // 兩個字，不能只寫在面板裡，因為動畫短暫又吸睛，沒人會在那幾秒去翻長篇說明。
-const CIRC_N = 3;          // 同時最多三條
+const CIRC_N = 1;          // 同時只畫一條
 const CIRC_FLY = 3.4;      // 一條飛完幾秒
 const CIRC_FADE = 1.1;     // 飛完之後淡出
 // 下一條的間隔，隨機取樣。固定週期會變成節拍器，所以取區間不取定值。
-// 一條的生命是 FLY + FADE = 4.5 秒。照狀態機模擬三千秒的結果：
-//   舊的 N=2、gap[3.5,8]   平均同時 0.88 條，三分之一的時間畫面上一條都沒有
-//   現在 N=3、gap[0.9,2.8] 平均同時 2.0 條，三條同時佔 36%，空場 0%（瀏覽器實測）
-// 再縮間隔就會變成連續不斷的流動，「偶爾轉了三手」那個語氣會消失。
-const CIRC_GAP = [0.9, 2.8];
+//
+// 一條的生命是 FLY + FADE = 4.5 秒，加上這段間隔就是整個週期。取 4 到 7 秒，
+// 週期落在 8.5 到 11.5 秒，平均 10 秒一條。
+//
+// 早先是 N=3、gap[0.9,2.8]，平均同時兩條、空場 0%，畫面上幾乎一直有東西在飛。
+// 那個密度會讓弧線變成背景動態，而不是「偶爾轉了三手」的一次示範。改成一次一條、
+// 十秒一次之後，每一條都看得完整，中間的空檔也讓中繼點與海面自己被看見。
+const CIRC_GAP = [4.0, 7.0];
 const CIRC_SEG = 96;       // 每條路徑的取樣點數
 // 三跳的角色色各自放大到這個線性亮度。這個值對齊原本那條近白光點的 luminance（0.95），
 // 換色之後光點的存在感不變，也還在 bloom 門檻（0.72）之上。
@@ -1203,9 +1206,19 @@ function spawnCircuit(c) {
   const m = pickRelay([0]);      // middle
   const e = pickRelay([2, 3]);   // exit
   if (!g || !m || !e) return false;
-  // 訊息跟著這條弧線活。ttl 只當保險絲，真正的收場是弧線飛完時由 updateCircuits 收掉。
-  // 用 setTimeout 的真實時間去對弧線的模擬時間會對不齊，慢的裝置上訊息會先消失。
-  c.msg = notify(hopsHTML(g, m, e), 30000);
+  // 訊息刻意活得比弧線久。一次只畫一條的話，訊息跟著弧線收掉就永遠只有一則，
+  // 右下角那疊「蓋高樓」的效果會整個消失。這一區的定位是最近幾條路徑的紀錄，
+  // 不是當下狀態的鏡子。
+  //
+  // 正常的退場靠 FEED_MAX：新的一則把最舊的擠掉，畫面上就固定是最近四條。這個規則
+  // 不看時鐘，所以裝置快慢都成立。ttl 給到三分鐘只是清掉沒人看時殘留的那幾則。
+  //
+  // 不用短 ttl 是因為兩個時鐘不一致。弧線由 animate 的模擬時間驅動，而 dt 夾在
+  // 0.05 秒，幀率低於 20 時模擬時間會落後真實時間；ttl 卻是 setTimeout 的真實時間。
+  // 實測 headless 只有 2.5 fps，模擬時間只跑真實時間的 0.13 倍，十秒一條變成七十幾秒
+  // 一條，短 ttl 會讓訊息在下一條出現之前就全部消失。真機不會這麼慢，但讓退場規則
+  // 不依賴幀率仍然比較穩。
+  notify(hopsHTML(g, m, e), 180000);
   const pos = c.geo.attributes.position.array;
   const half = CIRC_SEG >> 1;
   arcInto(g, m, pos, 0, half);
@@ -1238,8 +1251,6 @@ function updateCircuits(dt) {
         c.state = 'wait'; c.t = 0;
         c.uAlpha.value = 0;
         c.geo.setDrawRange(0, 0);
-        if (c.msg && c.msg._drop) c.msg._drop();
-        c.msg = null;
         c.wait = CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]);
       }
     }
