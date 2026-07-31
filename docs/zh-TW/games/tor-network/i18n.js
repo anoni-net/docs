@@ -15,7 +15,6 @@ const ZH_TW = {
   unitRelays: '台運作中的中繼',
   snapshotAt: '資料快照：',
   btnLive: '即時更新',
-  liveNote: '畫面預設只連本站與 assets.anoni.net，兩者都是我們自己的主機，取得的靜態快照對所有人都一樣。按下這個鍵會多連一台 onionoo.anoni.net 即時取資料，那台伺服器會看到你的 IP。',
 
   lblRoles: '角色分布（點一下只看這個角色，再點一次看全部）',
   lblBrightness: '陸地亮度：由低到高（非線性，中段差距已放大）',
@@ -143,7 +142,6 @@ const EN = {
   unitRelays: 'relays running',
   snapshotAt: 'Snapshot: ',
   btnLive: 'Update',
-  liveNote: 'By default this page only talks to this site and assets.anoni.net, both of which we run, and the static snapshot it fetches is identical for everyone. Pressing this button adds a direct connection to onionoo.anoni.net for live data, which means that server sees your IP.',
 
   lblRoles: 'Roles (click one to isolate it, click again for all)',
   lblBrightness: 'Land brightness: low to high (non-linear, mid-range spread out)',
@@ -270,7 +268,6 @@ const ZH_CN = {
   unitRelays: '台运作中的中继',
   snapshotAt: '数据快照：',
   btnLive: '实时更新',
-  liveNote: '画面预设只连本站与 assets.anoni.net，两者都是我们自己的主机，取得的静态快照对所有人都一样。按下这个键会多连一台 onionoo.anoni.net 实时取数据，那台服务器会看到你的 IP。',
 
   lblRoles: '角色分布（点一下只看这个角色，再点一次看全部）',
   lblBrightness: '陆地亮度：由低到高（非线性，中段差距已放大）',

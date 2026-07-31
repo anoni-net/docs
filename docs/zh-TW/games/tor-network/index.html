@@ -210,7 +210,6 @@
     #live-status { font-size: 10.5px; color: var(--muted); }
     #live-status.ok { color: #57e39a; }
     #live-status.err { color: #ff8a99; }
-    #live-note { margin-top: 5px; color: #6b8296; font-size: 10px; line-height: 1.5; }
     #ramp { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
     #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
 
@@ -322,7 +321,6 @@
         <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
         <div id="live-box" hidden><span id="live-status"></span>
-          <div id="live-note">畫面預設只連本站與 assets.anoni.net，兩者都是我們自己的主機，取得的靜態快照對所有人都一樣。按下這個鍵會多連一台 onionoo.anoni.net 即時取資料，那台伺服器會看到你的 IP。</div>
         </div>
         <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>

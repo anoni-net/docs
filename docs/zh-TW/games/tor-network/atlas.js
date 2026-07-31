@@ -62,7 +62,6 @@ function applyI18n() {
   // 停用期間給個 title，滑過去看得出來是還沒好而不是壞了。放行時會清掉。
   const lb0 = $('btn-live');
   if (lb0 && lb0.disabled) lb0.title = S('loading');
-  set('live-note', 'liveNote');
   set('lbl-roles', 'lblRoles');
   set('lbl-brightness', 'lblBrightness');
   set('mode-count', 'modeCount');
@@ -2067,7 +2066,14 @@ function applySnapshot(snap) {
 
 async function fetchLive(btn) {
   const status = $('live-status');
-  const say = (t, cls) => { if (status) { status.textContent = t; status.className = cls || ''; } };
+  // live-box 只裝狀態文字，沒東西時不要先佔一段空白，第一次有狀態才露出來
+  const say = (t, cls) => {
+    if (!status) return;
+    status.textContent = t;
+    status.className = cls || '';
+    const box = $('live-box');
+    if (box) box.hidden = false;
+  };
   btn.disabled = true;
   say(S('liveConnecting'));
   try {
@@ -2240,13 +2246,12 @@ async function main() {
   if (liveBtn && liveAllowed()) {
     liveBtn.disabled = false;
     liveBtn.removeAttribute('title');
-    $('live-box').hidden = false;
     liveBtn.addEventListener('click', (e) => {
       // summary 底下的點擊預設會開合 details，按這顆鍵不應該連帶把面板收起來
       e.preventDefault();
       e.stopPropagation();
-      // 面板收合時內文的隱私說明看不到，先展開再取資料。不要在使用者看不到
-      // 「那台伺服器會看到你的 IP」的情況下就把請求送出去。
+      // 狀態文字（連線中、已更新、失敗原因）在面板內文裡，收合時看不到，
+      // 按了會像沒反應。先展開再取資料。
       // 這裡不必自己叫 refreshUIBoxes，設 open 會觸發 toggle，那邊已經掛了。
       const info = $('info');
       if (info && !info.open) info.open = true;
