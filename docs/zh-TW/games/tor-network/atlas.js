@@ -1042,9 +1042,21 @@ function buildAurora() {
 //
 // 上限壓在 FEED_MAX。三跳每一兩秒就生一條，不設限的話高樓會蓋到畫面外。滿了就把最舊
 // 的那則（DOM 上的第一個）提前收掉。
-const FEED_MAX = 4;
-const FEED_TTL = 6000;   // 沒有指定時一則活多久（毫秒）。三跳那邊自己傳，不吃這個值
+const FEED_MAX = 6;      // 安全上限。正常退場靠各自的到期時間，這只是防呆
+const FEED_TTL = 25;     // 一則活多久，單位是「動畫秒」不是真實秒，見下方說明
 const FEED_OUT = 450;    // 淡出動畫的長度，要跟 CSS 的 transition 對得上
+
+// 到期時間用動畫時鐘算，不用 setTimeout。
+//
+// 三跳路徑的節奏由 animate 的模擬時間驅動，而 dt 夾在 0.05 秒，幀率低於 20 時模擬時間
+// 會落後真實時間。用 setTimeout 的話兩個時鐘會分家：實測 headless 只有 2.5 fps，模擬
+// 時間只跑真實時間的 0.13 倍，十秒一條變成七十幾秒一條，而 45 秒的真實時間 ttl 早就
+// 到期，畫面上永遠只剩一則。改用同一個時鐘之後，不論裝置快慢，「幾條之內會消失」
+// 這件事都成立。
+//
+// 代價是分頁切到背景時 rAF 停掉、時鐘也跟著停，回來時那幾則還在。那反而是想要的：
+// 使用者沒看到的那段時間不該算進壽命裡。
+const feedItems = [];
 
 function notify(html, ttl = FEED_TTL) {
   const box = $('feed');
@@ -1062,7 +1074,7 @@ function notify(html, ttl = FEED_TTL) {
     setTimeout(() => el.remove(), FEED_OUT);
   };
   el._drop = drop;
-  setTimeout(drop, ttl);
+  feedItems.push({ el, dieAt: clockT.value + ttl });
   // 超額的先收。drop 是延遲移除，收的當下 DOM 還在，所以要照索引取而不是反覆讀
   // firstElementChild，否則同一則會被拿到很多次。
   const kids = [...box.children];
@@ -1070,6 +1082,15 @@ function notify(html, ttl = FEED_TTL) {
     if (kids[i]._drop) kids[i]._drop(); else kids[i].remove();
   }
   return el;
+}
+
+// 每幀掃一次到期的。由 animate 呼叫，跟 clockT 同步。
+function updateFeed() {
+  for (let i = feedItems.length - 1; i >= 0; i--) {
+    const it = feedItems[i];
+    if (!it.el.isConnected) { feedItems.splice(i, 1); continue; }
+    if (clockT.value >= it.dieAt) { it.el._drop(); feedItems.splice(i, 1); }
+  }
 }
 
 // Tor 的三跳路徑。偶爾畫一條從 guard 經 middle 到 exit 的弧線，讓「訊息被轉了三手」
@@ -1210,15 +1231,9 @@ function spawnCircuit(c) {
   // 右下角那疊「蓋高樓」的效果會整個消失。這一區的定位是最近幾條路徑的紀錄，
   // 不是當下狀態的鏡子。
   //
-  // 正常的退場靠 FEED_MAX：新的一則把最舊的擠掉，畫面上就固定是最近四條。這個規則
-  // 不看時鐘，所以裝置快慢都成立。ttl 給到三分鐘只是清掉沒人看時殘留的那幾則。
-  //
-  // 不用短 ttl 是因為兩個時鐘不一致。弧線由 animate 的模擬時間驅動，而 dt 夾在
-  // 0.05 秒，幀率低於 20 時模擬時間會落後真實時間；ttl 卻是 setTimeout 的真實時間。
-  // 實測 headless 只有 2.5 fps，模擬時間只跑真實時間的 0.13 倍，十秒一條變成七十幾秒
-  // 一條，短 ttl 會讓訊息在下一條出現之前就全部消失。真機不會這麼慢，但讓退場規則
-  // 不依賴幀率仍然比較穩。
-  notify(hopsHTML(g, m, e), 180000);
+  // 用預設的 FEED_TTL（38 動畫秒）。十秒一條的節奏下畫面上會維持三到四則，
+  // 每一則都是自己到期淡出，不是被新的擠掉。
+  notify(hopsHTML(g, m, e));
   const pos = c.geo.attributes.position.array;
   const half = CIRC_SEG >> 1;
   arcInto(g, m, pos, 0, half);
@@ -2295,6 +2310,7 @@ async function animate() {
   rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
+  updateFeed();
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {

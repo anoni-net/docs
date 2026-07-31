@@ -286,7 +286,9 @@
     .mix-row .n { width: 52px; text-align: right; flex: none; }
     .mix-row .as-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
     .mix-row.hi .cc, .mix-row.hi .tot { color: var(--cyan); }
-    #stat-asn .mix-bar, #stat-asia .mix-bar { flex: 0 0 52px; }
+    /* 托管商那區的業者名稱是彈性欄（.as-nm），長條要固定寬才不會被擠掉。
+       亞洲那區沒有那個欄位，長條跟其他區一樣撐滿剩下的空間就好。 */
+    #stat-asn .mix-bar { flex: 0 0 52px; }
     #stat-asn .n { width: 44px; }
     #stat-asia .n { width: 88px; }
     #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
