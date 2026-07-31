@@ -1087,6 +1087,16 @@ const CIRC_FADE = 1.1;     // 飛完之後淡出
 // 再縮間隔就會變成連續不斷的流動，「偶爾轉了三手」那個語氣會消失。
 const CIRC_GAP = [0.9, 2.8];
 const CIRC_SEG = 96;       // 每條路徑的取樣點數
+// 三跳的角色色各自放大到這個線性亮度。這個值對齊原本那條近白光點的 luminance（0.95），
+// 換色之後光點的存在感不變，也還在 bloom 門檻（0.72）之上。
+//
+// 一開始是把角色色往白色混，那是錯的：ACES tonemap 對高亮度本來就會往白色壓，再混白
+// 等於壓兩次。實測混白 0.45 之後三個顏色變成 #d4e6dc、#d1dee7、#ebe1d3，三個淡灰白，
+// 畫面上就是一條白線，等於沒上色。改成乘倍率，通道比例不變，色相就留得住。
+//
+// 逐色正規化而不是一律乘同一個倍率，是因為三個角色色本身的亮度差很多（guard 0.51、
+// middle 0.31、exit 0.54）。乘同一個數的話 middle 那一段會明顯比兩端暗，看起來像瑕疵。
+const CIRC_LUM = 0.95;
 const circuits = [];
 
 // 從某個角色的點裡隨機挑一個。guard 收 role 1 與 3，exit 收 2 與 3，both 兩邊都算。
@@ -1141,7 +1151,26 @@ function buildCircuits() {
     const head = smoothstep(-0.012, 0.0, d);              // 頭部前方乾淨切掉
     const tail = oneMinus(d.div(TRAIL).clamp(0, 1));      // 往後線性衰減
     const bright = head.mul(tail).pow(1.6);
-    mat.colorNode = vec3(0.88, 0.97, 1.0); // 近白偏青。四個角色色與警示紅都不能借用
+    // 沿著弧線把三跳的角色色接起來：起點 guard、中點 middle、終點 exit，跟右下角
+    // 訊息串那三個國碼用同一組色。同一條電路在畫面上與文字上講的是同一件事。
+    //
+    // 這裡原本刻意避開四個角色色（怕跟中繼點混淆），現在反過來用是因為訊息串已經先用
+    // 這組色標了三跳，兩邊不一致才是真的會搞混。弧線是會動的線、中繼點是靜止的點，
+    // 形態本來就分得開。警示紅仍然不碰。
+    //
+    // 純角色色轉線性之後 luminance 只有 0.31 到 0.54，低於 bloom 的 0.72 門檻，直接用
+    // 會讓光點失去現在的亮度。往白色靠一點把亮度拉回門檻附近，色相仍然讀得出來。
+    // THREE.Color 會把 sRGB 的色碼轉成線性工作空間，這裡的 r/g/b 已經是線性值
+    const hop = (hex) => {
+      const c = new THREE.Color(hex);
+      const l = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+      const k = CIRC_LUM / Math.max(l, 1e-4);
+      return vec3(c.r * k, c.g * k, c.b * k);
+    };
+    // au 是 0 到 1 的弧長比例，0.5 正好是中點那一跳（arcInto 前後各鋪一半）
+    mat.colorNode = mix(
+      mix(hop(COL.guard), hop(COL.mid), au.mul(2).clamp(0, 1)),
+      hop(COL.exit), au.sub(0.5).mul(2).clamp(0, 1));
     mat.opacityNode = bright.mul(uAlpha);
 
     const line = new THREE.Line(geo, mat);
