@@ -2270,6 +2270,17 @@ function bindControls(dom) {
   });
   const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) { last = null; pauseSpin(); } if (pointers.size < 2) pinchStart = 0; };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
+  // Safari 的捏合走的是 gesture 事件，畫布上的 touch-action: none 擋不到它，
+  // 結果雙指放大會變成整頁縮放而不是把地球拉近。這三個事件是 WebKit 專屬的，
+  // 其他瀏覽器沒有，加了也不會有副作用。
+  //
+  // 只擋畫布。面板那邊的字最小只有 10.5px，在那裡捏合仍然走瀏覽器縮放，
+  // 讀不清楚的人放得大。全域擋掉會把那條路一起封死。
+  for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
+    dom.addEventListener(g, (e) => e.preventDefault());
+  }
+  // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字
+  dom.addEventListener('dblclick', (e) => e.preventDefault());
   dom.addEventListener('wheel', (e) => {
     e.preventDefault();
     // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
