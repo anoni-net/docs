@@ -10,6 +10,34 @@ OSM 的海底電纜覆蓋並不完整（例如台灣周邊只收錄了一部分�
 不要一片空白」的背景質感，不是完整的海纜清單，畫面文案要照這個口徑寫。
 
 Overpass 是志工營運的公共服務，這支腳本刻意分區慢慢抓並重試，不要縮短間隔或平行化。
+主站 overpass-api.de 常態性回 504，換 OVERPASS_API 指到鏡像（overpass.private.coffee
+實測可用）比一直重試有效。
+
+=== 查過但不存在：海纜登陸點 ===
+
+登陸點是海纜的咽喉，台灣那幾個的脆弱性也有話可講，所以查過能不能加。結論是
+**OSM 沒有這份資料**，不是抓不到。用 taginfo 查全球數量，五個候選標籤全都是 0 筆：
+
+  man_made=cable_landing_point   0
+  seamark:type=landing_point     0
+  landing_point=yes              0
+  man_made=landing_point         0
+  communication=landing_point    0
+
+另外直接看台灣周邊（18-28N、115-128E）47 條海纜 way 的標籤，也沒有任何登陸點的痕跡。
+登陸點座標是 TeleGeography 商品的一部分，跟纜線幾何一樣沒有進 OSM，理由見
+blog/posts/games-globe-open-data.md 記的那段授權不相容。要做只能自己從公開的登陸地點
+清單手繪，性質會變成跟 TRUNK 一樣的示意，不是實測資料。
+
+=== 已知偏差：混到電力海纜 ===
+
+這支沒有做任何標籤過濾，凡是 seamark:type=cable_submarine 都收。而那個標籤同時涵蓋
+通訊海纜與電力海纜。實測台灣周邊 47 條裡有 29 條帶 power 標籤、17 條帶 communication、
+13 條帶 telecom:medium，也就是說畫面上有一部分「海底電纜」其實是電力纜。
+
+在「海面不要一片空白」的定位下這個偏差可以接受，但畫面文案說的是海底電纜，嚴格講
+不夠精確。要修的話在 overpass() 的查詢加上排除 power，或改成只收帶 communication /
+telecom:medium 的那些，代價是線更少、太平洋更空。動之前先想清楚要哪一種。
 
 用法：
   python3 tools/gen_cables.py [輸出路徑]
