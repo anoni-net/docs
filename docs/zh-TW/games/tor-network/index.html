@@ -158,9 +158,10 @@
        右邊的按鈕與收合鈕會被擠出面板。 */
     #title-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     #title::-webkit-details-marker { display: none; }
-    /* 兩顆膠囊鍵靠 --pill-w 對齊成同寬，值由 sizePills() 依當前語系量出來。
-       沒有這個變數時各自依內容撐開，退化得還能看。 */
-    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--pill-w, auto); text-align: center; }
+    /* 收合鍵在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），
+       寬度會跟著變，切換時整排會跳。--toggle-w 取兩者較寬的當下限把它釘住。
+       這個值只給收合鍵，即時更新鍵依自己的內容撐開，不互相對齊。 */
+    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--toggle-w, auto); text-align: center; }
     #info:not([open]) > #title::after { content: var(--toggle-closed, '▸ 詳情'); }
     .body { margin-top: 9px; }
     #big { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
@@ -196,11 +197,15 @@
     #live-box { margin: 0 0 10px; }
     #live-box[hidden] { display: none; }
     /* 按鈕在 summary 裡，跟收合鈕並排。flex: none 讓它不被標題文字擠扁。 */
-    #btn-live { flex: none; font: inherit; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; cursor: pointer;
-                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan);
-                min-width: var(--pill-w, auto); text-align: center; }
+    /* line-height 要跟 #title::after 一樣寫死 1。font: inherit 會把 body 的 1.6 帶進來，
+       兩顆並排時按鈕會高出約 6px。 */
+    #btn-live { flex: none; font: inherit; font-size: 11px; font-weight: 700; line-height: 1; padding: 3px 9px;
+                border-radius: 999px; cursor: pointer;
+                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    /* 資料還沒備妥時按鈕就在位子上，只是按不動。這樣版面不會在載入完成的瞬間跳一下，
+       使用者也一開始就知道有這個功能。 */
+    #btn-live:disabled { opacity: .45; cursor: default; }
     #btn-live[hidden] { display: none; }
-    #btn-live:disabled { opacity: .5; cursor: default; }
     #btn-live:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     #live-status { font-size: 10.5px; color: var(--muted); }
     #live-status.ok { color: #57e39a; }
@@ -312,7 +317,7 @@
 <body>
   <div id="top" class="panel">
     <details id="info" open>
-      <summary id="title"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" hidden>即時更新</button></summary>
+      <summary id="title"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" disabled>即時更新</button></summary>
       <div class="body">
         <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>

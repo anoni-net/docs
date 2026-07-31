@@ -15,28 +15,29 @@ const S = (k, v) => t(LANG, k, v);
 // html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
 document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 
-// 標題列那兩顆膠囊鍵（即時更新、收合）對齊成同寬。
+// 把收合鍵的寬度釘住。
 //
-// 收合鍵是 #title::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏的探針，
-// 取三個字串裡最寬的那個，寫進 --pill-w 讓兩邊都當 min-width 吃。三個字串是因為
-// 收合鍵在展開與收合兩種狀態下的文字不一樣，英文版實測 35.4 與 49.3 相差不少，
-// 只量其中一種，切換狀態時整排會跳動。
+// 它在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），寬度會跟著變，
+// 英文實測 35.4 與 49.3，切換狀態時整排會跳一下。取兩者較寬的當 min-width 就不動了。
 //
-// 探針用 800 的字重，那是兩顆裡比較粗的（按鈕是 700），照最寬的算才不會有一邊擠到。
-function sizePills() {
+// 收合鍵是 #title::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏探針再把
+// 結果寫進 CSS 變數。字重用 800，跟偽元素一致。
+//
+// 即時更新鍵不吃這個值，讓它依自己的內容撐開就好。
+function sizeToggle() {
   const title = $('title');
   if (!title) return;
   const probe = document.createElement('span');
   probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:11px;font-weight:800;';
   title.appendChild(probe);
   let w = 0;
-  for (const k of ['btnLive', 'toggleOpen', 'toggleClosed']) {
+  for (const k of ['toggleOpen', 'toggleClosed']) {
     probe.textContent = S(k);
     w = Math.max(w, probe.getBoundingClientRect().width);
   }
   probe.remove();
-  // 兩顆的左右內距都是 9px，加上各 1px 的框線，box-sizing 是 border-box 所以要含進去
-  document.documentElement.style.setProperty('--pill-w', `${Math.ceil(w) + 20}px`);
+  // 左右內距 9px 加各 1px 框線，box-sizing 是 border-box 所以要含進去
+  document.documentElement.style.setProperty('--toggle-w', `${Math.ceil(w) + 20}px`);
 }
 
 // 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
@@ -58,6 +59,9 @@ function applyI18n() {
   set('unit-relays', 'unitRelays');
   set('snapshot-at', 'snapshotAt');
   set('btn-live', 'btnLive');
+  // 停用期間給個 title，滑過去看得出來是還沒好而不是壞了。放行時會清掉。
+  const lb0 = $('btn-live');
+  if (lb0 && lb0.disabled) lb0.title = S('loading');
   set('live-note', 'liveNote');
   set('lbl-roles', 'lblRoles');
   set('lbl-brightness', 'lblBrightness');
@@ -94,7 +98,7 @@ function applyI18n() {
   // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
   document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
   document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
-  sizePills();
+  sizeToggle();
 }
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -2228,11 +2232,14 @@ async function main() {
     measureLabels();
   });
   bindControls(renderer.domElement);
-  // 即時更新的按鈕預設藏著，只在 clearnet 版本露出來。
+  // 即時更新的按鈕從一開始就在位子上，只是停用著，等這裡才放行。
+  // 版面不會在載入完成的瞬間跳一下，使用者也一開始就知道有這個功能。
+  // onion 與 IPFS 版本整顆收掉，那兩種情境下連出去會把 IP 交出去，違背使用者選它的理由。
   // 按鈕在 summary 裡跟收合鈕並排，狀態文字與隱私說明留在面板內文。
   const liveBtn = $('btn-live');
   if (liveBtn && liveAllowed()) {
-    liveBtn.hidden = false;
+    liveBtn.disabled = false;
+    liveBtn.removeAttribute('title');
     $('live-box').hidden = false;
     liveBtn.addEventListener('click', (e) => {
       // summary 底下的點擊預設會開合 details，按這顆鍵不應該連帶把面板收起來
@@ -2245,6 +2252,8 @@ async function main() {
       if (info && !info.open) info.open = true;
       fetchLive(liveBtn);
     });
+  } else if (liveBtn) {
+    liveBtn.hidden = true;
   }
   $('labels').addEventListener('click', (e) => {
     const el = e.target.closest('.lb');
