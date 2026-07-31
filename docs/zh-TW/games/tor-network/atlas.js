@@ -2309,9 +2309,11 @@ async function main() {
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
     getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
     getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
-    // 海纜障礙可選。這份刻意還沒進 repo，那張表未標示授權，等 moda 回覆再落地。
-    // 檔案不在的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
-    getJSON('./seacable.json').catch(() => null),
+    // 海纜障礙可選。由 publish_games_data.sh 定期重生並發布到 assets，所以走
+    // getJSONAsset 而不是站台自己的路徑，更新不必等文件站重建。
+    // 障礙的存續期是月為單位，assets 的 12 小時快取夠新鮮，不必額外帶 no-cache。
+    // 取不到的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
+    getJSONAsset('seacable.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;

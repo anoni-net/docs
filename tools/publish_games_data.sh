@@ -4,9 +4,14 @@
 #
 #   snapshot.json  Onionoo 中繼快照，每小時都在變，是最需要定期重生的一份
 #   torusers.json  Tor Metrics 的使用者數與橋接數，每日更新
+#   seacable.json  數位發展部的海纜障礙狀況，變動以月計但屬於即時性的資訊
 #
-# 另外五份（countries、continents、cables、ooni、shutdowns）變動以季或年計，
-# 跟著文件站一起發布就好，不在這支腳本的範圍內。
+# 另外六份（countries、continents、bathymetry、cables、ooni、shutdowns、netusers）
+# 變動以季或年計，跟著文件站一起發布就好，不在這支腳本的範圍內。
+#
+# seacable 跟前兩份有個關鍵差別：它是盡力而為的。moda 那頁沒有 API，是在剖析 HTML，
+# 對方改版就會失敗。這種失敗不可以擋住 snapshot 與 torusers 的更新，否則 moda 改一次
+# 版面，線上的中繼資料就跟著凍住。所以它單獨處理，失敗只警告不中止。
 #
 # 相依只有 python3 與 curl，兩支產生腳本都只用標準庫，正式機不需要 venv。
 #
@@ -42,6 +47,16 @@ python3 "$ROOT/tools/gen_tor_snapshot.py"      "$WORK/snapshot.json" >/dev/null 
 python3 "$ROOT/tools/gen_torusers_snapshot.py" "$WORK/torusers.json" >/dev/null || die "torusers 產生失敗（metrics.torproject.org 可達嗎）"
 say "   snapshot.json  $(stat -c%s "$WORK/snapshot.json") bytes"
 say "   torusers.json  $(stat -c%s "$WORK/torusers.json") bytes"
+
+# 盡力而為的那一份。刻意不用 die，理由見檔頭。
+SEACABLE=0
+if python3 "$ROOT/tools/gen_seacable_faults.py" "$WORK/seacable.json" >/dev/null; then
+    SEACABLE=1
+    say "   seacable.json  $(stat -c%s "$WORK/seacable.json") bytes"
+else
+    say "   seacable.json  產生失敗，這一輪跳過（moda 的頁面可能改版了）"
+    rm -f "$WORK/seacable.json"
+fi
 
 # 上游掛掉或改格式時，產生腳本有可能寫出一份語法正確但內容是空的檔案。
 # 沒有這關的話，某天 Onionoo 出問題就會把線上的地球儀變成一顆空球，而且
@@ -93,6 +108,30 @@ if bad:
 print("   通過")
 PY
 
+# seacable 的檢查也是盡力而為，沒過只丟掉它自己，不影響另外兩份。
+# faults 是空陣列要放行：那代表當下沒有海纜在修，是合法狀態不是剖析失敗。
+if [ "$SEACABLE" = "1" ]; then
+    if ! python3 - "$WORK/seacable.json" <<'SEA'
+import json, sys
+try:
+    d = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception as e:
+    print(f"   seacable.json 不是合法 JSON：{e}"); sys.exit(1)
+if not isinstance(d.get("faults"), list):
+    print("   缺 faults 陣列"); sys.exit(1)
+if not d.get("source") or not d.get("sourceUrl"):
+    print("   缺 source 或 sourceUrl，NOTICE 承諾每份資料都標得出來源"); sys.exit(1)
+if "license" not in d:
+    print("   缺 license 欄位"); sys.exit(1)
+print(f"   seacable  {len(d['faults'])} 筆障礙、對照表 {len(d.get('cables') or {})} 條")
+SEA
+    then
+        say "   seacable 檢查沒過，這一輪跳過"
+        SEACABLE=0
+        rm -f "$WORK/seacable.json"
+    fi
+fi
+
 if [ "$DRY_RUN" = "1" ]; then
     say "== dry-run，不發布 =="
     say "   產物留在 $WORK（腳本結束後會清掉）"
@@ -103,7 +142,9 @@ say "== 發布到 $DEST =="
 [ -d "$DEST" ] || die "$DEST 不存在，請先建好目錄（mkdir -p $DEST）"
 [ -w "$DEST" ] || die "$DEST 不可寫，請確認執行者的權限"
 
-for f in snapshot.json torusers.json; do
+FILES="snapshot.json torusers.json"
+[ "$SEACABLE" = "1" ] && FILES="$FILES seacable.json"
+for f in $FILES; do
     # 留一份上一版。發布之後才發現有問題時，把 .prev 換回來就好，
     # 不必等下一次重生，也不必回去翻 git。
     [ -f "$DEST/$f" ] && cp -p "$DEST/$f" "$DEST/$f.prev"

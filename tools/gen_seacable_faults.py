@@ -59,7 +59,8 @@ LIST_URL = os.environ.get("MODA_LIST_URL",
                           "https://moda.gov.tw/major-policies/subseacable/1747")
 # 表頭必須看得到這幾個詞，對不上就是頁面改版了
 NEED = ("海纜名稱", "障礙", "修復")
-MIN_ROWS = 1
+# 零筆障礙是合法狀態，代表當下沒有海纜在修，不是剖析失敗。把關的是表頭那幾個關鍵字，
+# 表頭認得出來就代表版面沒變，這時候沒有資料列就是真的沒有障礙。
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "seacable.json")
 
@@ -292,9 +293,6 @@ def main():
             item["where"] = where
         faults.append(item)
 
-    if len(faults) < MIN_ROWS:
-        raise SystemExit(f"只解出 {len(faults)} 筆障礙，不像正常的表格內容")
-
     data = {
         "source": "數位發展部　海纜障礙狀況",
         "sourceUrl": URL,
@@ -314,6 +312,9 @@ def main():
 
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")
     named = sum(1 for f in faults if f.get("where"))
+    if not faults:
+        print("  0 筆障礙。表頭認得出來，所以這是「當下沒有海纜在修」而不是剖析失敗。",
+              file=sys.stderr)
     print(f"  {len(faults)} 筆障礙，其中 {named} 筆解得出概略位置")
     print(f"  海纜對照表 {len(cables)} 條")
     for f in faults:
