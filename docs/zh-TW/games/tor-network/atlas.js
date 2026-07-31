@@ -15,6 +15,30 @@ const S = (k, v) => t(LANG, k, v);
 // html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
 document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 
+// 標題列那兩顆膠囊鍵（即時更新、收合）對齊成同寬。
+//
+// 收合鍵是 #title::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏的探針，
+// 取三個字串裡最寬的那個，寫進 --pill-w 讓兩邊都當 min-width 吃。三個字串是因為
+// 收合鍵在展開與收合兩種狀態下的文字不一樣，英文版實測 35.4 與 49.3 相差不少，
+// 只量其中一種，切換狀態時整排會跳動。
+//
+// 探針用 800 的字重，那是兩顆裡比較粗的（按鈕是 700），照最寬的算才不會有一邊擠到。
+function sizePills() {
+  const title = $('title');
+  if (!title) return;
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:11px;font-weight:800;';
+  title.appendChild(probe);
+  let w = 0;
+  for (const k of ['btnLive', 'toggleOpen', 'toggleClosed']) {
+    probe.textContent = S(k);
+    w = Math.max(w, probe.getBoundingClientRect().width);
+  }
+  probe.remove();
+  // 兩顆的左右內距都是 9px，加上各 1px 的框線，box-sizing 是 border-box 所以要含進去
+  document.documentElement.style.setProperty('--pill-w', `${Math.ceil(w) + 20}px`);
+}
+
 // 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
 function applyI18n() {
   const lb = $('langs');
@@ -28,7 +52,9 @@ function applyI18n() {
     if (!el) return;
     if (html) el.innerHTML = S(key); else el.textContent = S(key);
   };
-  set('title', 'pageTitle');
+  // 換的是標題那一段文字，不是整個 summary。summary 裡還有即時更新的按鈕，
+  // 對 #title 下 textContent 會把按鈕一起洗掉。
+  set('title-text', 'pageTitle');
   set('unit-relays', 'unitRelays');
   set('snapshot-at', 'snapshotAt');
   set('btn-live', 'btnLive');
@@ -68,6 +94,7 @@ function applyI18n() {
   // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
   document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
   document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
+  sizePills();
 }
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -2201,11 +2228,23 @@ async function main() {
     measureLabels();
   });
   bindControls(renderer.domElement);
-  // 即時更新的按鈕預設藏著，只在 clearnet 版本露出來
+  // 即時更新的按鈕預設藏著，只在 clearnet 版本露出來。
+  // 按鈕在 summary 裡跟收合鈕並排，狀態文字與隱私說明留在面板內文。
   const liveBtn = $('btn-live');
   if (liveBtn && liveAllowed()) {
+    liveBtn.hidden = false;
     $('live-box').hidden = false;
-    liveBtn.addEventListener('click', () => fetchLive(liveBtn));
+    liveBtn.addEventListener('click', (e) => {
+      // summary 底下的點擊預設會開合 details，按這顆鍵不應該連帶把面板收起來
+      e.preventDefault();
+      e.stopPropagation();
+      // 面板收合時內文的隱私說明看不到，先展開再取資料。不要在使用者看不到
+      // 「那台伺服器會看到你的 IP」的情況下就把請求送出去。
+      // 這裡不必自己叫 refreshUIBoxes，設 open 會觸發 toggle，那邊已經掛了。
+      const info = $('info');
+      if (info && !info.open) info.open = true;
+      fetchLive(liveBtn);
+    });
   }
   $('labels').addEventListener('click', (e) => {
     const el = e.target.closest('.lb');

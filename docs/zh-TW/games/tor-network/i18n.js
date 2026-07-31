@@ -142,7 +142,7 @@ const EN = {
   pageTitle: 'Tor Relay Globe',
   unitRelays: 'relays running',
   snapshotAt: 'Snapshot: ',
-  btnLive: 'Update now',
+  btnLive: 'Update',
   liveNote: 'By default this page only talks to this site and assets.anoni.net, both of which we run, and the static snapshot it fetches is identical for everyone. Pressing this button adds a direct connection to onionoo.anoni.net for live data, which means that server sees your IP.',
 
   lblRoles: 'Roles (click one to isolate it, click again for all)',
