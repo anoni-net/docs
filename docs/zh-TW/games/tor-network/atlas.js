@@ -95,7 +95,14 @@ const COL = {
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
-  sea: '#06182c',       // 海
+  sea: '#06182c',       // 海。深海的底色，等深線讀不到時整片海就是這個顏色
+  // 海底地形的五階，由淺到深：大陸棚、200-1000、1000-3000、3000-5000、5000 以下。
+  // 最深那階刻意等於 sea，這樣沒有 bathymetry.json 時畫面跟以前一模一樣，
+  // 有的時候也只是把靠岸的那一圈提亮，大洋主體不動。
+  //
+  // 幅度壓得很克制。陸地亮度是資料（中繼數），海底地形是背景，海的階差要是拉得跟
+  // 陸地的色階一樣明顯，讀者會以為海面上那幾階也在講什麼數字。
+  seaRamp: ['#083350', '#082b44', '#07223a', '#061c31', '#06182c'],
   land: '#16334e',      // 陸地本色，各國一致
   glowLo: '#0d2c46',    // 有中繼，最少
   glowHi: '#3d87bd',    // 有中繼，最多。壓著上限走，底圖只是提示，主角是上面的中繼點
@@ -406,6 +413,10 @@ function paintGlow(values, canvas, ramp) {
 // 大國（RU、CN）就只是一圈內鑲邊。這個差異是想要的：面積小的國家本來就該整塊讀得出來。
 const BLOCK_INWARD = 26;
 const BLOCK_PEAK = 0.6;  // 貼著邊界那一格的強度，往內線性衰減到 0
+// 海的自發光係數。夜側 base 只乘 0.15，海的色階窄，乘完差距不到一階色。
+// 這一層只有海，所以係數可以拉高而不影響陸地。0.55 之後陸棚在夜側讀得出來，
+// 最深那階仍然接近黑，日夜的分界也還在。
+const SEA_EMIT = 0.55;
 const BLOCK_EMIT = 0.5;  // emissive 係數。紅色轉線性後 luminance 約 0.30，乘完約 0.15，
                          // 離 bloom 門檻 0.72 還有距離，不會把這幾國暈成白斑
 function paintBlocked(canvas) {
@@ -435,12 +446,45 @@ function paintBlocked(canvas) {
   }
 }
 
+// 海底地形。先鋪最淺的那階當底，再由淺到深一階一階疊上去，沒有被任何一階蓋到的
+// 就是大陸棚。海纜幾乎都沿著陸棚鋪、避開深海盆，所以陸棚那圈亮起來之後，海纜層
+// 的走向就有了解釋。抓不到資料時退回單色，跟以前一樣。
+//
+// 一階的所有環合成一個 Path2D 一次填。evenodd 是為了讓環裡的洞不被塗成深海，
+// 洞代表「這一塊比周圍淺」，中洋脊就是那種形狀而且面積很大。實測大西洋中洋脊在
+// 3000 公尺那層的穿越數是 2，巴倫支海在 200 公尺層也是 2，都靠 evenodd 判成外面。
+// 同一階的外環之間不會重疊，所以 evenodd 不會誤消掉別的地方。
+function paintSeaFloor(ctx) {
+  ctx.fillStyle = BATHY && BATHY.levels ? MAP.seaRamp[0] : MAP.sea;
+  ctx.fillRect(0, 0, TEX_W, TEX_H);
+  if (!BATHY || !BATHY.levels) return;
+  BATHY.levels.forEach((lv, i) => {
+    const path = new Path2D();
+    for (const ring of lv.p) {
+      path.moveTo(texX(ring[0]), texY(ring[1]));
+      for (let k = 2; k < ring.length; k += 2) path.lineTo(texX(ring[k]), texY(ring[k + 1]));
+      path.closePath();
+    }
+    ctx.fillStyle = MAP.seaRamp[Math.min(i + 1, MAP.seaRamp.length - 1)];
+    ctx.fill(path, 'evenodd');
+  });
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
   const base = mk(), glow = mk(), block = mk();
-  const g = base.getContext('2d'), gg = glow.getContext('2d');
-  g.fillStyle = MAP.sea;
-  g.fillRect(0, 0, TEX_W, TEX_H);
+  // 夜側專用的海。base 的自發光只有 0.15，海的色階本來就窄，乘完之後差距不到一階色，
+  // 實測夜側整片海是 (0,0,3)，等深線等於只在白天看得見。這一層只放海、陸地塗黑，
+  // 用高一點的係數疊回去，海就整圈都保得住深淺，陸地的日夜對比完全不受影響。
+  //
+  // 解析度砍一半就夠。等深線是大尺度的形狀，不像國界那樣需要銳利的邊，而且再多一張
+  // 全尺寸貼圖是多 8 MB 的顯存。
+  const sea = document.createElement('canvas');
+  sea.width = TEX_W >> 1; sea.height = TEX_H >> 1;
+  const g = base.getContext('2d'), gg = glow.getContext('2d'), gsea = sea.getContext('2d');
+  gsea.scale(0.5, 0.5); // 之後都用 TEX_W/TEX_H 的座標畫，跟其他幾張共用同一套 texX/texY
+  paintSeaFloor(g);
+  paintSeaFloor(gsea);
   gg.fillStyle = '#000';
   gg.fillRect(0, 0, TEX_W, TEX_H);
 
@@ -448,6 +492,7 @@ function paintEarth(world, counts) {
   g.strokeStyle = MAP.border;
   g.lineWidth = 1.6;
   g.fillStyle = MAP.land;
+  gsea.fillStyle = '#000'; // 夜側那層的陸地
   for (const c of world.c) {
     let lo0 = 999, lo1 = -999, la0 = 999, la1 = -999;
     const path = new Path2D();
@@ -461,6 +506,7 @@ function paintEarth(world, counts) {
       }
     }
     g.fill(path);
+    gsea.fill(path); // 夜側那層把陸地塗黑，讓它只負責海，陸地的明暗仍然只由日照決定
     // 國界不在這裡描了。貼圖只有 2048×1024，放大之後邊界是鋸齒，改用 buildBorders
     // 畫成 3D 線段。這裡若同時描一次，兩條線會因為解析度不同而錯開。
     // 順手把國界留著，切換指標重畫發光層時不必再解析一次多邊形
@@ -481,7 +527,7 @@ function paintEarth(world, counts) {
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
   paintGlow(counts, glow);
   paintBlocked(block); // 要在上面填完 COUNTRY_PATH 之後才有國土路徑可以 clip
-  return { base, glow, block };
+  return { base, glow, block, sea };
 }
 
 function buildEarth(world, counts) {
@@ -498,11 +544,13 @@ function buildEarth(world, counts) {
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${MAP.glowLo} 14%, ${MAP.glowHi})`;
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
+  const seaTex = toTex(painted.sea);
   GLOW = { canvas: painted.glow, tex: glowTex };
   const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   // 受阻漸層另存一層，切換「台數、共識權重」時 paintGlow 只重畫 glow，這一層不受影響
   mat.emissiveNode = texture(baseTex).mul(0.15)
+    .add(texture(seaTex).mul(SEA_EMIT))
     .add(texture(glowTex).mul(0.5))
     .add(texture(blockTex).mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
@@ -1428,7 +1476,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2081,7 +2129,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2092,11 +2140,13 @@ async function main() {
     getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
     getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
+    getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
   ]);
   OONI = ooni;
   TORUSERS = torusers;
   SHUTDOWNS = shutdowns;
   NETUSERS = netusers;
+  BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
