@@ -60,6 +60,15 @@ DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "netusers.json")
 
 
+def write_atomic(out, data):
+    """先寫暫存檔再 rename。同一顆檔案系統上的 rename 是原子操作，中途失敗不會留下
+    半截的 json 蓋掉本來好的那份。publish_games_data.sh 對它負責的兩份也是這樣做。"""
+    tmp = out + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
+    os.replace(tmp, out)
+
+
 def fetch(url, binary=False, want=None):
     """用 curl 取回。跟這個 repo 其他產生腳本一樣只依賴 python3 與 curl。
 
@@ -84,7 +93,11 @@ def real_countries():
     raw = fetch(f"{WB_API}country?format=json&per_page=400", want=lambda t: t.lstrip().startswith("["))
     if not raw:
         raise SystemExit("World Bank 國家清單取回失敗")
-    body = json.loads(raw)[1]
+    meta, body = json.loads(raw)[0], json.loads(raw)[1]
+    # per_page 給得夠大就會單頁拿完，但那是「目前資料量還小」而不是保證。
+    # 哪天筆數超過 per_page，回應會安靜地只給第一頁，濾出來的國家數就會少一截。
+    if int(meta.get("pages", 1)) > 1:
+        raise SystemExit(f"World Bank 國家清單有 {meta.get('pages')} 頁，per_page 要調大")
     out = {}
     for c in body:
         # region.id 是 NA 的那些是聚合區域，不是國家
@@ -106,6 +119,8 @@ def worldbank_pct(valid):
     body = json.loads(raw)
     if len(body) < 2 or not body[1]:
         raise SystemExit("World Bank 指標回應沒有資料")
+    if int(body[0].get("pages", 1)) > 1:
+        raise SystemExit(f"World Bank 指標有 {body[0].get('pages')} 頁，per_page 要調大")
     best = {}
     for r in body[1]:
         if r.get("value") is None:
@@ -214,8 +229,7 @@ def main():
     if not data.get("alt"):
         print("  警告：這份沒有台灣。要接受請確認過再 commit", file=sys.stderr)
 
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
+    write_atomic(out, data)
 
     years = sorted({y for _, y in pct.values()})
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")

@@ -23,6 +23,9 @@
  * 用法（沒有相依，讀 atlas.js 現有的 CURRENTS 與參數）：
  *   node tools/check_currents_land.mjs
  *
+ * 另外會檢查有沒有兩條的端點重合。重合處的緞帶三角形會疊出一塊比較亮的區域，
+ * 而且弧長各自從 0 起算，亮紋的相位在那裡會重來一次。這個只警告不擋。
+ *
  * 全部通過時 exit 0，有壓到陸地時 exit 1，可以直接掛進 CI。
  * 輸入本身不合理（countries.json 少得離譜、CURRENTS 解析不到）時 exit 2，
  * 這是為了避免上游壞掉時這支安靜地回報「全部通過」，那種綠燈比紅燈危險。
@@ -35,10 +38,33 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const GAME = path.join(ROOT, 'docs/zh-TW/games/tor-network');
 
 const src = fs.readFileSync(path.join(GAME, 'atlas.js'), 'utf8');
-const m = src.match(/const CURRENTS = \[([\s\S]*?)\n\];/);
-if (!m) { console.error('ERROR: atlas.js 裡找不到 CURRENTS'); process.exit(2); }
-// 收尾的中括號要自己一行。CURRENTS 最後一筆後面跟著行註解，接在同一行會被註解吃掉。
-const CURRENTS = eval('[' + m[1] + '\n]');
+
+// 用括號配對切出整個陣列，不要用 /\n\];/ 這種樣式去猜結尾。樣式的版本依賴
+// 「收尾中括號自成一行」這個手寫慣例，有人把它接到別的東西後面就會安靜地切錯，
+// 而切錯的後果是這支檢查的東西不完整卻照樣回報通過。
+function extractArray(text, marker) {
+  const at = text.indexOf(marker);
+  if (at < 0) return null;
+  const start = text.indexOf('[', at);
+  if (start < 0) return null;
+  let depth = 0, inStr = null, inLine = false, inBlock = false;
+  for (let i = start; i < text.length; i++) {
+    const c = text[i], n = text[i + 1];
+    if (inLine) { if (c === '\n') inLine = false; continue; }
+    if (inBlock) { if (c === '*' && n === '/') { inBlock = false; i++; } continue; }
+    if (inStr) { if (c === '\\') i++; else if (c === inStr) inStr = null; continue; }
+    if (c === '/' && n === '/') { inLine = true; i++; continue; }
+    if (c === '/' && n === '*') { inBlock = true; i++; continue; }
+    if (c === '"' || c === "'" || c === '`') { inStr = c; continue; }
+    if (c === '[') depth++;
+    else if (c === ']') { depth--; if (depth === 0) return text.slice(start, i + 1); }
+  }
+  return null;
+}
+
+const literal = extractArray(src, 'const CURRENTS =');
+if (!literal) { console.error('ERROR: atlas.js 裡找不到（或切不出）CURRENTS'); process.exit(2); }
+const CURRENTS = eval(literal);
 
 // 渲染參數一律從 atlas.js 讀，這支跟畫面用的是同一組數字
 function num(re, label) {
@@ -114,6 +140,24 @@ const FRACS = [0.25, 0.4, 0.55, 0.7, 0.85, 1.0];
 
 console.log(`緞帶寬 ${WIDTH_DEG}°（半寬 ${(WIDTH_DEG / 2).toFixed(2)}°）｜補點間距 ${STEP_DEG}°｜${CURRENTS.length} 條`);
 
+// 端點重合的兩條會在接合處疊出一塊比較亮的三角形，而且 aU 各自從 0 起算，
+// 亮紋的相位會在那裡重來一次。物理上連續的流請合成一筆。
+const endpoints = new Map();
+CURRENTS.forEach((cur, ci) => {
+  for (const [label, q] of [['起', cur.p[0]], ['迄', cur.p[cur.p.length - 1]]]) {
+    const k = q.join(',');
+    if (!endpoints.has(k)) endpoints.set(k, []);
+    endpoints.get(k).push(`CURRENTS[${ci}] ${label}`);
+  }
+});
+let joins = 0;
+for (const [k, who] of endpoints) {
+  if (who.length > 1) {
+    joins++;
+    console.log(`⚠ 端點重合於 (${k})：${who.join(' / ')}　合成一筆可以避免接合處疊亮與相位重來`);
+  }
+}
+
 let bad = 0;
 CURRENTS.forEach((cur, ci) => {
   const pts = [];
@@ -158,4 +202,4 @@ if (bad) {
   console.log('把該段的控制點往海側推，或把 CUR_WIDTH_DEG 調細。位移大到會改變地理位置時，寧可調細緞帶。');
   process.exit(1);
 }
-console.log(`全部 ${CURRENTS.length} 條的緞帶都在海上`);
+console.log(`全部 ${CURRENTS.length} 條的緞帶都在海上${joins ? `（另有 ${joins} 處端點重合，見上方警告）` : ''}`);

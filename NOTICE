@@ -11,8 +11,8 @@
 | `shutdowns.json` | [Access Now #KeepItOn](https://www.accessnow.org/keepiton-data-dashboard/) STOP 資料集 | CC BY 4.0 |
 | `snapshot.json` | [Onionoo](https://metrics.torproject.org/onionoo.html)（經自架 proxy 取回） | CC0 1.0 |
 | `torusers.json` | [Tor Metrics](https://metrics.torproject.org/) | CC0 1.0 |
-| `netusers.json` 的 `pct` | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS)　Individuals using the Internet | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| `netusers.json` 的 `alt.pct` | [數位發展部　國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `netusers.json` 的 `pct` | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS) Individuals using the Internet | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `netusers.json` 的 `alt.pct` | [數位發展部 國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自

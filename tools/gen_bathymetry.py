@@ -63,6 +63,15 @@ DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "bathymetry.json")
 
 
+def write_atomic(out, data):
+    """先寫暫存檔再 rename。同一顆檔案系統上的 rename 是原子操作，中途失敗不會留下
+    半截的 json 蓋掉本來好的那份。publish_games_data.sh 對它負責的兩份也是這樣做。"""
+    tmp = out + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
+    os.replace(tmp, out)
+
+
 def fetch(name):
     r = subprocess.run(["curl", "-sL", "--max-time", "300", BASE + name],
                        capture_output=True, text=True)
@@ -186,15 +195,19 @@ def main():
 
     data = {
         "source": "Natural Earth",
-        "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-bathymetry/",
+        # 跟 countries.json、continents.json 用同一個網址。三份都出自 Natural Earth，
+        # NOTICE 也是三份合成一列一個連結，這裡各寫各的會讓三方對不起來。
+        # 這一份實際的下載頁記在 note 裡，資訊沒有丟。
+        "sourceUrl": "https://www.naturalearthdata.com/",
         "license": "public domain",
         "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/",
-        "note": ("Natural Earth 10m 等深線，只取 200、1000、3000、5000 四層，"
-                 "座標簡化到 0.1 度。環包含洞，前端要用 evenodd 填色。"),
+        "note": ("Natural Earth 10m 等深線，下載頁 "
+                 "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-bathymetry/ ，"
+                 "只取 200、1000、3000、5000 四層，座標簡化到 0.1 度。"
+                 "環包含洞，前端要用 evenodd 填色。"),
         "levels": levels,   # 由淺到深，前端照順序畫，深的疊在淺的上面
     }
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
+    write_atomic(out, data)
     size = os.path.getsize(out)
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")
     print(f"  檔案 {size:,} bytes（{size / 1024 / 1024:.2f} MB）")
