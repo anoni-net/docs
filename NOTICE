@@ -12,13 +12,14 @@
 | `snapshot.json` | [Onionoo](https://metrics.torproject.org/onionoo.html)（經自架 proxy 取回） | CC0 1.0 |
 | `torusers.json` | [Tor Metrics](https://metrics.torproject.org/) | CC0 1.0 |
 | `netusers.json` 的 `pct` | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS)　Individuals using the Internet | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| `netusers.json` 的 `alt.pct` | [數位發展部　國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款第 1 版](https://data.gov.tw/license) |
+| `netusers.json` 的 `alt.pct` | [數位發展部　國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
-`ooni.json` 那種相容性問題。分開放的理由是方法論不同，不是授權。
+`ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
+一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
 
 大洋環流那一層（`atlas.js` 的 `CURRENTS`）沒有列在表裡，那是照公開的海洋學常識手繪的
 座標，沒有取用任何一家的流場資料。跨洋走廊示意線（`TRUNK`）同理。

@@ -137,6 +137,19 @@ def simplify(ring):
     return out
 
 
+def has_dateline_jump(ring):
+    """相鄰兩點的經度跳超過 180 度，代表這個環在換日線被切開但沒接好。
+
+    實測目前四層資料一個都沒有（Natural Earth 已經在換日線切好多邊形），所以這只是
+    上游換版時的守門。真的出現的話，Douglas-Peucker 會把跳號兩端當成一條橫跨整張地圖
+    的長直線去算距離，化簡結果會多出一條肉眼可見的偽線段。寧可整支紅燈也不要默默畫錯。
+    """
+    for i in range(1, len(ring)):
+        if abs(ring[i][0] - ring[i - 1][0]) > 180:
+            return True
+    return False
+
+
 def rings_of(feature):
     """一個 feature 底下所有的環，外環與洞都要。洞是「比周圍淺」的區域，丟不得。"""
     g = feature.get("geometry") or {}
@@ -159,6 +172,9 @@ def main():
         kept, dropped, pts = [], 0, 0
         for feat in gj.get("features", []):
             for ring in rings_of(feat):
+                if has_dateline_jump(ring):
+                    raise SystemExit(f"{name} 有環在換日線出現跳號，"
+                                     "上游資料的切法變了，先確認過再放行")
                 s = simplify(ring)
                 if s is None:
                     dropped += 1

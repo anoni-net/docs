@@ -24,7 +24,7 @@
   <meta property="twitter:description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
   <meta property="twitter:image" content="https://assets.anoni.net/games/tor-network.png" />
   <!-- 結構化資料。與 OG 同樣寫死，理由相同：這頁不經 mkdocs 模板，抓取的爬蟲不執行 JS。
-       isBasedOn 逐筆列出六份外部資料，讓來源與授權在畫面之外也能被機器讀到，
+       isBasedOn 逐筆列出所有外部資料，讓來源與授權在畫面之外也能被機器讀到，
        內容要與畫面下方的來源聲明和根目錄 NOTICE 保持一致。 -->
   <script type="application/ld+json">
   {
@@ -92,10 +92,24 @@
           },
           {
             "@type": "Dataset",
-            "name": "Natural Earth 國界與海岸線",
+            "name": "Natural Earth 國界、海岸線與海底等深線",
             "url": "https://www.naturalearthdata.com/",
             "license": "https://www.naturalearthdata.com/about/terms-of-use/",
             "creator": { "@type": "Organization", "name": "Natural Earth" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "World Bank Individuals using the Internet",
+            "url": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "creator": { "@type": "Organization", "name": "World Bank" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "國家數位近用調查",
+            "url": "https://moda.gov.tw/digital-affairs/digital-service/operations/208",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "數位發展部" }
           }
         ]
       },
@@ -327,10 +341,10 @@
           <p id="credit-metrics">使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
           <p id="credit-ooni">Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
           <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
-          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。</p>
+          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。海面的深淺是同一來源的等深線（10m 比例尺），只取 200、1000、3000、5000 公尺四層，最淺那階就是大陸棚。海底電纜幾乎都沿著陸棚鋪、避開深海盆，兩層對照著看得出來為什麼纜線走那些路徑。</p>
           <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
-          <p id="credit-netusers">國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">數位發展部的國家數位近用調查</a>（政府資料開放授權條款第 1 版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。</p>
-          <p id="credit-currents">海面上一節一節往前跑的光帶是大洋環流的主幹，跟連續不斷的海底電纜細線是兩回事。暖流偏青綠、寒流偏藍紫，光帶跑的方向就是流向。走向與冷暖分類依公開的海洋學常識手繪，沒有取用任何流場資料，位置只到示意的程度，光帶的寬度與速度都沒有對應真實流速。索馬利亞洋流隨季風每年反向兩次，畫成單一方向會有一半的時間是錯的，所以沒有收錄。</p>
+          <p id="credit-netusers">國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">數位發展部的國家數位近用調查</a>（政府資料開放授權條款-第1版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。</p>
+          <p id="credit-currents">海面上一節一節向前推進的光帶是大洋環流的主幹，跟連續不斷的海底電纜細線是兩回事。暖流偏青綠、寒流偏藍紫，光帶前進的方向就是流向。走向與冷暖分類依公開的海洋學常識手繪，沒有取用任何流場資料，位置只到示意的程度，光帶的寬度與速度都沒有對應真實流速。索馬利亞洋流隨季風每年反向兩次，畫成單一方向會有一半的時間是錯的，所以沒有收錄。</p>
         </div>
         <div id="backend">偵測中…</div>
         <div id="langs"></div>

@@ -12,7 +12,7 @@ CC BY 4.0，免金鑰、JSON。
 
 **World Bank 沒有收錄台灣。** 217 個經濟體裡一個都找不到，台灣不是世界銀行會員。對一個
 以台灣為重心的站台來說那格空著是最糟的結果，所以台灣單獨取自數位發展部的「國家數位近用
-調查」（前身是國發會的數位機會調查、數位發展調查），授權是政府資料開放授權條款第 1 版。
+調查」（前身是國發會的數位機會調查、數位發展調查），授權是政府資料開放授權條款-第1版。
 
 兩份的方法論不同，World Bank 那份源頭是 ITU 彙整各國通報，台灣這份是對 12 歲以上人口的
 電話抽樣調查（2025 年樣本 15,142、抽樣誤差 ±0.8%）。所以台灣那個數字**不應該跟其他國家
@@ -33,8 +33,10 @@ publish_games_data.sh，跟 cables、ooni、shutdowns 一樣產生一次就 comm
 2. 各國最新有值的年份不一樣，所以要抓一段區間再逐國取最新的非空值，不能寫死某一年。
 3. moda 的檔案網址是 File/Get 加一段不透明 ID，是從
    https://moda.gov.tw/digital-affairs/digital-service/operations/208 頁面上
-   「歷年調查彙整資料(csv檔案)」那個連結抄來的。網站改版時這個 ID 會失效，抓不到時
-   這支不會整個失敗，只會少掉台灣那一筆並印出警告，請回上面那頁重抄。
+   「歷年調查彙整資料(csv檔案)」那個連結抄來的。網站改版時這個 ID 會失效。失效時這支
+   不會整個失敗，會沿用輸出檔裡既有的 alt 區塊並加上 alt.stale=true，同時印出警告。
+   這是刻意的：無聲地用「缺台灣」的新檔覆蓋掉「有台灣」的舊檔，是這支最容易造成的
+   實質損害。看到 stale 標記就回上面那頁重抄網址。
 4. moda 那份 CSV 是 Big5，標稱 UTF-8 的那個連結實測內容一樣。年度欄是民國年。
 
 用法：
@@ -58,13 +60,20 @@ DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
                            "games", "tor-network", "netusers.json")
 
 
-def fetch(url, binary=False):
-    """用 curl 取回。跟這個 repo 其他產生腳本一樣只依賴 python3 與 curl。"""
+def fetch(url, binary=False, want=None):
+    """用 curl 取回。跟這個 repo 其他產生腳本一樣只依賴 python3 與 curl。
+
+    want 是「內容看起來像不像預期」的檢查函式。只看 stdout 非空是不夠的，
+    暫時性的錯誤頁、速率限制頁也是非空的，那會被當成成功、跳過重試，
+    等到下游 json.loads 才炸開。同目錄其他腳本都有這道檢查。
+    """
     for attempt in range(3):
         r = subprocess.run(["curl", "-sL", "--max-time", "120", "-A", "Mozilla/5.0", url],
                            capture_output=True)
-        if r.stdout:
-            return r.stdout if binary else r.stdout.decode("utf-8", "replace")
+        if r.returncode == 0 and r.stdout:
+            out = r.stdout if binary else r.stdout.decode("utf-8", "replace")
+            if want is None or want(out):
+                return out
         print(f"  第 {attempt + 1} 次取回失敗，等一下再試：{url[:70]}", file=sys.stderr)
         time.sleep(5)
     return None
@@ -72,7 +81,7 @@ def fetch(url, binary=False):
 
 def real_countries():
     """World Bank 的國家清單，濾掉區域聚合。回傳 ISO2 小寫 → 名稱。"""
-    raw = fetch(f"{WB_API}country?format=json&per_page=400")
+    raw = fetch(f"{WB_API}country?format=json&per_page=400", want=lambda t: t.lstrip().startswith("["))
     if not raw:
         raise SystemExit("World Bank 國家清單取回失敗")
     body = json.loads(raw)[1]
@@ -91,7 +100,7 @@ def worldbank_pct(valid):
     """逐國取最新有值的上網比例。回傳 ISO2 小寫 → [百分比, 年份]。"""
     url = (f"{WB_API}country/all/indicator/{INDICATOR}"
            f"?format=json&date={YEAR_FROM}:{date.today().year}&per_page=20000")
-    raw = fetch(url)
+    raw = fetch(url, want=lambda t: t.lstrip().startswith("["))
     if not raw:
         raise SystemExit("World Bank 指標取回失敗")
     body = json.loads(raw)
@@ -106,16 +115,17 @@ def worldbank_pct(valid):
             continue
         try:
             year = int(r["date"])
-        except (KeyError, ValueError):
+            val = round(float(r["value"]), 1)
+        except (KeyError, TypeError, ValueError):
             continue
         if cc not in best or year > best[cc][1]:
-            best[cc] = [round(float(r["value"]), 1), year]
+            best[cc] = [val, year]
     return best
 
 
 def taiwan_pct():
     """台灣的個人上網率，取自 moda 的歷年調查彙整。回傳 [百分比, 西元年] 或 None。"""
-    raw = fetch(MODA_CSV, binary=True)
+    raw = fetch(MODA_CSV, binary=True, want=lambda b: b"," in b[:4096])
     if not raw:
         print(f"  警告：moda 的 CSV 取不到，台灣會缺一筆。請到 {MODA_PAGE} 重抄連結",
               file=sys.stderr)
@@ -150,6 +160,9 @@ def taiwan_pct():
             continue
         if best is None or year > best[1]:
             best = [round(pct, 1), year]
+    if best is None:
+        print("  警告：moda 的 CSV 找得到欄位但每一列都解析失敗，資料列格式可能改了",
+              file=sys.stderr)
     return best
 
 
@@ -184,6 +197,22 @@ def main():
                      "放在一起看可以，直接比大小不行。"),
             "pct": {"tw": tw},
         }
+
+    # 台灣抓不到時，沿用舊檔裡的 alt 區塊。moda 的網址是不透明 ID，失效是預期會發生的事，
+    # 而這個站台最在意的就是台灣那一筆。無聲地用「缺台灣」的新檔覆蓋掉「有台灣」的舊檔，
+    # 執行者只要沒盯著 stderr 就會直接 commit 出去。寧可留舊值並標記出來。
+    if not tw and os.path.exists(out):
+        try:
+            with open(out, encoding="utf-8") as f:
+                prev = json.load(f)
+            if prev.get("alt", {}).get("pct"):
+                data["alt"] = prev["alt"]
+                data["alt"]["stale"] = True
+                print("  台灣沿用舊檔的數值，已標記 alt.stale=true", file=sys.stderr)
+        except (OSError, ValueError):
+            pass
+    if not data.get("alt"):
+        print("  警告：這份沒有台灣。要接受請確認過再 commit", file=sys.stderr)
 
     with open(out, "w", encoding="utf-8") as f:
         json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
