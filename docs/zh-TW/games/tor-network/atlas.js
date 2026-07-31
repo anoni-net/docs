@@ -85,7 +85,6 @@ function applyI18n() {
   set('credit-osm', 'creditOsm', true);
   set('credit-netusers', 'creditNetUsers', true);
   set('credit-currents', 'creditCurrents', true);
-  set('circ-tag', 'circTag');
   set('cc-close', 'ccClose');
   set('loading', 'loading');
   set('hint-wide', 'hintWide');
@@ -1034,6 +1033,43 @@ function buildAurora() {
   globe.add(mesh);
 }
 
+// 畫面右下的訊息串。新的一則從底下進來，把舊的往上頂。
+//
+// 這是通用的，任何想在畫面上講一句話的功能都可以呼叫，不限三跳路徑。所以這裡不碰
+// 任何跟電路有關的東西，只管排版與生命週期。
+//
+// 上限壓在 FEED_MAX。三跳每一兩秒就生一條，不設限的話高樓會蓋到畫面外。滿了就把最舊
+// 的那則（DOM 上的第一個）提前收掉。
+const FEED_MAX = 4;
+const FEED_TTL = 5200;   // 一則活多久（毫秒）。三跳一條的生命是 4.5 秒，留一點餘裕
+const FEED_OUT = 450;    // 淡出動畫的長度，要跟 CSS 的 transition 對得上
+
+function notify(html, ttl = FEED_TTL) {
+  const box = $('feed');
+  if (!box) return null;
+  const el = document.createElement('div');
+  el.className = 'feed-item';
+  el.innerHTML = html;
+  box.appendChild(el);
+  // 先進 DOM 再加 class，讓瀏覽器有一幀的機會套用起始狀態，否則沒有過場直接就位
+  requestAnimationFrame(() => el.classList.add('in'));
+  const drop = () => {
+    if (!el.isConnected) return;
+    el.classList.remove('in');
+    el.classList.add('out');
+    setTimeout(() => el.remove(), FEED_OUT);
+  };
+  el._drop = drop;
+  setTimeout(drop, ttl);
+  // 超額的先收。drop 是延遲移除，收的當下 DOM 還在，所以要照索引取而不是反覆讀
+  // firstElementChild，否則同一則會被拿到很多次。
+  const kids = [...box.children];
+  for (let i = 0; i < kids.length - FEED_MAX; i++) {
+    if (kids[i]._drop) kids[i]._drop(); else kids[i].remove();
+  }
+  return el;
+}
+
 // Tor 的三跳路徑。偶爾畫一條從 guard 經 middle 到 exit 的弧線，讓「訊息被轉了三手」
 // 這件事看得見。
 //
@@ -1123,11 +1159,22 @@ function buildCircuits() {
 }
 
 // 挑三個端點，把兩段弧接成一條連續的線。挑不到就這輪跳過。
+// 三跳的國碼依角色上色，沿用中繼點那組色。這樣一行字同時講了走哪三國與誰是哪一跳，
+// 不必再多寫一行解釋。「示意」兩個字要留著，這條路徑不是真實電路。
+function hopsHTML(g, m, e) {
+  const cell = (n, col) => `<span class="hop" style="color:${roleHex(col)}">${(n.cc || '??').toUpperCase()}</span>`;
+  const sep = '<span class="sep">→</span>';
+  return `${S('circTag')}　${cell(g, 1)}${sep}${cell(m, 0)}${sep}${cell(e, 2)}`;
+}
+
 function spawnCircuit(c) {
   const g = pickRelay([1, 3]);   // guard
   const m = pickRelay([0]);      // middle
   const e = pickRelay([2, 3]);   // exit
   if (!g || !m || !e) return false;
+  // 訊息跟著這條弧線活。ttl 只當保險絲，真正的收場是弧線飛完時由 updateCircuits 收掉。
+  // 用 setTimeout 的真實時間去對弧線的模擬時間會對不齊，慢的裝置上訊息會先消失。
+  c.msg = notify(hopsHTML(g, m, e), 30000);
   const pos = c.geo.attributes.position.array;
   const half = CIRC_SEG >> 1;
   arcInto(g, m, pos, 0, half);
@@ -1139,7 +1186,6 @@ function spawnCircuit(c) {
 
 function updateCircuits(dt) {
   if (!circuits.length) return;
-  let anyOn = false;
   for (const c of circuits) {
     c.t += dt;
     if (c.state === 'wait') {
@@ -1161,13 +1207,12 @@ function updateCircuits(dt) {
         c.state = 'wait'; c.t = 0;
         c.uAlpha.value = 0;
         c.geo.setDrawRange(0, 0);
+        if (c.msg && c.msg._drop) c.msg._drop();
+        c.msg = null;
         c.wait = CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]);
       }
     }
-    if (c.state !== 'wait') anyOn = true;
   }
-  const tag = $('circ-tag');
-  if (tag) tag.classList.toggle('on', anyOn);
 }
 
 function buildCoastline(coast) {
@@ -1302,7 +1347,8 @@ function buildRelays(snap, counts) {
     if (!a || NO_PLACE.has(country)) continue;
     sampleIn(a, ll);
     llToVec(ll[0], ll[1], R * 1.012, tmp);
-    groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w) });
+    // cc 帶著走，訊息串要拿它顯示三跳落在哪幾國
+    groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w), cc: country });
     total++;
   }
   if (!total) return 0;

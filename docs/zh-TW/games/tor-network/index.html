@@ -241,14 +241,22 @@
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
     .lb.sm i { color: #7695ad; margin-left: 4px; }
 
-    /* 三跳路徑飛過去時掛在畫面上的說明。動畫只有幾秒，說明寫在面板裡沒人會去看 */
-    #circ-tag { position: fixed; right: 16px; bottom: 18px; z-index: 9; padding: 5px 11px;
-                border-radius: 999px; background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
-                color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
-                opacity: 0; transition: opacity .5s; pointer-events: none;
-                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-    #circ-tag.on { opacity: 1; }
-    @media (max-width: 680px) { #circ-tag { right: 10px; bottom: 62px; font-size: 10px; } }
+    /* 訊息串。新的一則從底下進來，把舊的往上頂，蓋高樓那樣。
+       這一區是通用的，任何想在畫面上講一句話的功能都可以往這裡丟，不限三跳路徑。 */
+    #feed { position: fixed; right: 16px; bottom: 18px; z-index: 9; pointer-events: none;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+    .feed-item { padding: 5px 11px; border-radius: 999px;
+                 background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
+                 color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
+                 white-space: nowrap; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+                 opacity: 0; transform: translateY(8px); transition: opacity .45s, transform .45s; }
+    .feed-item.in { opacity: 1; transform: none; }
+    .feed-item.out { opacity: 0; transform: translateY(-4px); }
+    /* 三跳的國碼依角色上色，沿用中繼點那組色，不必另外寫一行字解釋誰是誰 */
+    .feed-item .hop { font-weight: 700; }
+    .feed-item .sep { opacity: .5; margin: 0 3px; }
+    @media (max-width: 680px) { #feed { right: 10px; bottom: 62px; } .feed-item { font-size: 10px; } }
+    @media (prefers-reduced-motion: reduce) { .feed-item { transition: opacity .2s; transform: none; } }
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
@@ -373,7 +381,7 @@
   </div>
   <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
 
-  <div id="circ-tag">示意路徑　guard → middle → exit</div>
+  <div id="feed"></div>
   <div id="labels"></div>
 
   <div id="cc-card" class="panel" hidden>

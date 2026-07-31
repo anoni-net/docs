@@ -45,7 +45,7 @@ const ZH_TW = {
   creditNetUsers: '國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">數位發展部的國家數位近用調查</a>（政府資料開放授權條款-第1版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。',
   creditCurrents: '海面上一節一節向前推進的光帶是大洋環流的主幹，跟連續不斷的海底電纜細線是兩回事。暖流偏青綠、寒流偏藍紫，光帶前進的方向就是流向。走向與冷暖分類依公開的海洋學常識手繪，沒有取用任何流場資料，位置只到示意的程度，光帶的寬度與速度都沒有對應真實流速。索馬利亞洋流隨季風每年反向兩次，畫成單一方向會有一半的時間是錯的，所以沒有收錄。',
 
-  circTag: '示意路徑　guard → middle → exit',
+  circTag: '示意路徑',
   ccClose: '關閉',
   loading: '載入中…',
   hintWide: '拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉',
@@ -172,7 +172,7 @@ const EN = {
   creditNetUsers: 'The share of the population online, shown on country cards, comes from <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> Individuals using the Internet, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. The most recent year with data differs by country, so every figure carries its own year. The World Bank does not cover Taiwan, so that one figure comes from the <a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">Ministry of Digital Affairs National Digital Access Survey</a> instead, a telephone survey of people aged 12 and over. It is not the same kind of survey as the others and the card says so.',
   creditCurrents: 'The tapered bands travelling across the sea in bursts are the major ocean current systems, distinct from the unbroken thin lines of the submarine cables. Teal marks warm currents, blue-violet marks cold ones, and each band runs in the direction of flow. Both the paths and the warm/cold classification are drawn by hand from public oceanographic knowledge, with no flow-field data involved, so the positions are indicative only. Neither the width of a band nor the speed it travels corresponds to real current speed. The Somali Current reverses with the monsoon twice a year, so a single fixed direction would be wrong half the time and it is left out.',
 
-  circTag: 'Illustrative path　guard → middle → exit',
+  circTag: 'Illustrative path',
   ccClose: 'Close',
   loading: 'Loading…',
   hintWide: 'Drag to rotate · scroll or pinch to zoom and more country labels appear · rotation resumes when you let go',
@@ -298,7 +298,7 @@ const ZH_CN = {
   creditNetUsers: '国家卡片上的上网人口比例来自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授权 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各国最新有值的年份不同，所以每一笔都标了年份。World Bank 没有收录台湾，台湾那一笔改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">数位发展部的国家数位近用调查</a>（政府资料开放授权条款-第1版），那是对 12 岁以上人口的电话抽样，跟其他国家的来源不是同一种调查，卡片上会另外标出来。',
   creditCurrents: '海面上一节一节向前推进的光带是大洋环流的主干，跟连续不断的海底电缆细线是两回事。暖流偏青绿、寒流偏蓝紫，光带前进的方向就是流向。走向与冷暖分类依公开的海洋学常识手绘，没有取用任何流场数据，位置只到示意的程度，光带的宽度与速度都没有对应真实流速。索马里洋流随季风每年反向两次，画成单一方向会有一半的时间是错的，所以没有收录。',
 
-  circTag: '示意路径　guard → middle → exit',
+  circTag: '示意路径',
   ccClose: '关闭',
   loading: '载入中…',
   hintWide: '拖曳旋转地球 · 滚轮或双指放大会浮出更多国家标签 · 放开后自动转',
