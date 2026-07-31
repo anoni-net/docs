@@ -331,8 +331,12 @@
       #big { font-size: 24px; } .lb { font-size: 10px; }
       /* 底部多留一段。除了瀏覽器工具列，畫面下緣還有 #hint 那條提示是固定定位的
          （bottom: 12px、約 46px 高，合計佔掉下緣約 58px），會壓在面板最後幾行上面。
-         58 再加 26 的呼吸空間，讓最後一行離提示條與可見區下緣都有餘裕。 */
-      #top { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+         58 再加 26 的呼吸空間，讓最後一行離提示條與可見區下緣都有餘裕。
+
+         掛在 .body 而不是 #top 上。#top 在收合狀態也存在，留白會變成標題底下一段
+         沒有內容的空白；.body 是 details 的內容區，收起來就不佔位。
+         #top 自己那 12px 的下內距仍然生效，所以這裡只補到 72。 */
+      .body { padding-bottom: 72px; }
     }
   </style>
   <script type="importmap">
