@@ -153,18 +153,22 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
     #top { left: 14px; top: 14px; max-width: min(94vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 12px 15px; }
-    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; }
+    /* 中繼台數搬進 summary，收合時仍然看得到。那是這顆地球儀最想先講的一個數字，
+       收起來只剩標題就等於什麼都沒說。資料快照以下才是收合的範圍。 */
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; }
+    .title-row { display: flex; align-items: center; gap: 8px; }
     /* 標題文字吃掉剩下的空間並可縮。窄螢幕與英文版的字串比較長，不讓它縮的話
        右邊的按鈕與收合鈕會被擠出面板。 */
     #title-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     #title::-webkit-details-marker { display: none; }
+    /* 收合鍵掛在 .title-row 上，掛在 #title 會排到台數那一行底下 */
     /* 收合鍵在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），
        寬度會跟著變，切換時整排會跳。--toggle-w 取兩者較寬的當下限把它釘住。
        這個值只給收合鍵，即時更新鍵依自己的內容撐開，不互相對齊。 */
-    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--toggle-w, auto); text-align: center; }
-    #info:not([open]) > #title::after { content: var(--toggle-closed, '▸ 詳情'); }
-    .body { margin-top: 9px; }
-    #big { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
+    .title-row::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--toggle-w, auto); text-align: center; }
+    #info:not([open]) .title-row::after { content: var(--toggle-closed, '▸ 詳情'); }
+    .body { margin-top: 3px; }
+    #big { margin-top: 9px; font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
     #big small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
     #pub { color: var(--muted); font-size: 11px; margin: 3px 0 10px; }
     .row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
@@ -316,9 +320,11 @@
 <body>
   <div id="top" class="panel">
     <details id="info" open>
-      <summary id="title"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" disabled>即時更新</button></summary>
-      <div class="body">
+      <summary id="title">
+        <div class="title-row"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" disabled>即時更新</button></div>
         <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
+      </summary>
+      <div class="body">
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
         <div id="live-box" hidden><span id="live-status"></span>
         </div>

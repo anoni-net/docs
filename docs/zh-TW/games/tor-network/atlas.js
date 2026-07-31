@@ -20,12 +20,12 @@ document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn'
 // 它在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），寬度會跟著變，
 // 英文實測 35.4 與 49.3，切換狀態時整排會跳一下。取兩者較寬的當 min-width 就不動了。
 //
-// 收合鍵是 #title::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏探針再把
+// 收合鍵是 .title-row::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏探針再把
 // 結果寫進 CSS 變數。字重用 800，跟偽元素一致。
 //
 // 即時更新鍵不吃這個值，讓它依自己的內容撐開就好。
 function sizeToggle() {
-  const title = $('title');
+  const title = document.querySelector('.title-row');
   if (!title) return;
   const probe = document.createElement('span');
   probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:11px;font-weight:800;';
