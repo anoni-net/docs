@@ -2270,14 +2270,15 @@ function bindControls(dom) {
   });
   const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) { last = null; pauseSpin(); } if (pointers.size < 2) pinchStart = 0; };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
-  // Safari 的捏合走的是 gesture 事件，畫布上的 touch-action: none 擋不到它，
-  // 結果雙指放大會變成整頁縮放而不是把地球拉近。這三個事件是 WebKit 專屬的，
-  // 其他瀏覽器沒有，加了也不會有副作用。
+  // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
+  // 而 iOS Safari 從 10 開始也忽略 viewport 的 user-scalable=no。所以整頁鎖縮放
+  // 這件事在 Safari 上只能靠攔這三個事件，跟 index.html 的 viewport 是一組的，
+  // 兩個都要有，各瀏覽器的行為才一致。
   //
-  // 只擋畫布。面板那邊的字最小只有 10.5px，在那裡捏合仍然走瀏覽器縮放，
-  // 讀不清楚的人放得大。全域擋掉會把那條路一起封死。
+  // 掛在 document 而不是畫布上。只擋畫布的話 Safari 在面板上仍然縮得動，
+  // 那會變成同一個手勢在螢幕不同位置有不同結果，比全鎖更難預期。
   for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
-    dom.addEventListener(g, (e) => e.preventDefault());
+    document.addEventListener(g, (e) => e.preventDefault(), { passive: false });
   }
   // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字
   dom.addEventListener('dblclick', (e) => e.preventDefault());

@@ -2,7 +2,12 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- 鎖住瀏覽器縮放。這頁是一個佔滿畫面的互動場景，雙指的意思是把地球拉近，
+       讓它同時觸發整頁縮放只會兩邊都不對。代價是面板裡最小 10.5px 的字沒辦法
+       用瀏覽器放大，這是刻意的取捨。
+       iOS Safari 從 10 開始就忽略 user-scalable 與 maximum-scale，那邊靠
+       atlas.js 攔 gesture 事件達成同樣效果，兩個一起才在各瀏覽器上一致。 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Tor 中繼地球儀 · anoni.net</title>
   <meta name="description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
   <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
