@@ -80,6 +80,8 @@ function applyI18n() {
   set('btn-tw', 'btnTw');
   set('lbl-grid', 'lblGrid');
   set('lbl-energy', 'lblEnergy');
+  set('use-total', 'useTotal');
+  set('use-ind', 'useInd');
   set('lbl-power', 'lblPower');
   set('lbl-landing', 'lblLanding');
   set('note', 'note');
@@ -2123,6 +2125,7 @@ function rescaleRenew(k) {
 
 // 用電量與備轉容量率。前者是需求面，跟變電所那一段的供給面配成一對，
 // 後者是「電網每天離極限多近」，台電自己的橙燈門檻是 10%。
+let USE_MODE = 'total';
 function fillEnergy() {
   const box = $('stat-energy');
   const lbl = $('lbl-energy');
@@ -2135,14 +2138,23 @@ function fillEnergy() {
     return;
   }
   const d = ENERGY.demand;
-  const max = d.counties[0].total || 1;
+  // 兩種看法。看售電量六都在前面，看工業用電佔比新竹會跳到第一，那才是科學園區
+  // 在這份資料裡真正的樣子。新竹縣與新竹市在行政上是分開的兩列，看總量的時候
+  // 園區的用電會被切成兩半，看佔比就不受影響。
+  const indPct = (c) => (c.total ? (c.sectors['工業'] || 0) / c.total * 100 : 0);
+  const byInd = USE_MODE === 'ind';
+  const list = (byInd ? d.counties.slice().sort((a, b) => indPct(b) - indPct(a)) : d.counties)
+    .slice(0, 8);
+  const max = byInd ? 100 : (d.counties[0].total || 1);
   // 度換算成該語系的單位。中文是億度，英文是 TWh，倍率跟單位一起放在 i18n。
   const scale = parseFloat(S('unitYiScale')) || 1;
-  const rows = d.counties.slice(0, 8).map((c) => {
-    const v = c.total / 1e8 * scale;
+  const rows = list.map((c) => {
+    const v = byInd ? indPct(c) : c.total / 1e8 * scale;
+    const w = byInd ? indPct(c) : c.total / max * 100;
     return `<div class="pw-row"><b>${countyName(c.county)}</b>`
-      + `<i><s style="width:${Math.round(c.total / max * 100)}%" class="use"></s></i>`
-      + `<em>${v.toFixed(v < 10 ? 2 : 1)}</em><u>${S('unitYi')}</u></div>`;
+      + `<i><s style="width:${Math.round(w)}%" class="${byInd ? 'ind' : 'use'}"></s></i>`
+      + `<em>${byInd ? v.toFixed(1) : v.toFixed(v < 10 ? 2 : 1)}</em>`
+      + `<u>${byInd ? '%' : S('unitYi')}</u></div>`;
   }).join('');
   // 備轉容量率的走勢。一天一根細條，低於 10% 的換色，看得出吃緊集中在哪幾段。
   const rv = ENERGY.reserve;
@@ -2154,7 +2166,7 @@ function fillEnergy() {
     : '';
   box.innerHTML = rows + spark;
   if (note) {
-    note.innerHTML = S('noteEnergy', {
+    note.innerHTML = S(byInd ? 'noteEnergyInd' : 'noteEnergy', {
       label: d.label, months: d.months,
       sites: (ENERGY.siteTotal || {}).n || 0,
       located: (ENERGY.siteTotal || {}).located || 0,
@@ -3313,6 +3325,14 @@ function bindControls(dom) {
   for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
     document.addEventListener(g, (e) => e.preventDefault(), { passive: false });
   }
+  for (const el of document.querySelectorAll('[data-use]')) {
+    el.addEventListener('click', () => {
+      USE_MODE = el.dataset.use;
+      for (const o of document.querySelectorAll('[data-use]')) o.classList.toggle('on', o === el);
+      fillEnergy();
+    });
+  }
+
   const twBtn = $('btn-tw');
   if (twBtn) twBtn.addEventListener('click', () => flyTo(TW_LAT, TW_LON, TW_SPAN_LAT, TW_SPAN_LON));
 

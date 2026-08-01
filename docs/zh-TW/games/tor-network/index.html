@@ -415,6 +415,8 @@
     .pw-row u { flex: 0 0 52px; text-align: right; text-decoration: none; color: var(--muted); }
     /* 用電量的長條跟發電那組區隔，用中性的藍灰，那是需求不是供給 */
     .pw-row i s.use { background: #6f8fae; }
+    /* 工業用電佔比。跟售電量那個藍灰分開，讀得出來是不同的量。 */
+    .pw-row i s.ind { background: #b98fd0; }
     /* 備轉容量率的走勢，一天一根。低於 10% 是台電的橙燈門檻，換成警示色。 */
     .rv-spark { display: flex; align-items: flex-end; gap: 1px; height: 34px; margin: 8px 0 2px; }
     .rv-spark s { flex: 1 1 0; min-width: 0; background: #4a7fa8; text-decoration: none; border-radius: 1px 1px 0 0; }
@@ -436,13 +438,13 @@
              background: rgba(120,170,210,.13); color: #b9d3e6; font-size: 10.5px; }
     /* 同一類資訊寫成一句話，放不下時讓瀏覽器自己折，不要拆成兩段各佔一行 */
     .cc-sub2 .tiny, .cc-sub2.tiny { font-size: 10px; color: #6b8296; line-height: 1.5; }
-    #metric-sw { flex-wrap: wrap; }
-    #metric-sw button { flex: 1 1 44%; }
+    #metric-sw, .metric-sw { flex-wrap: wrap; }
+    #metric-sw button, .metric-sw button { flex: 1 1 44%; }
     /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
-    #metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
-    #metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
-    #metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
-    #metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    #metric-sw, .metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
+    #metric-sw button, .metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
+    #metric-sw button.on, .metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
+    #metric-sw button:focus-visible, .metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     /* 角色 chip 直接當按鈕：點下去地球換成那個角色的色調 */
     .chip.act { cursor: pointer; border: 1px solid transparent; }
     .chip.act:hover { background: rgba(255,255,255,.12); }
@@ -524,6 +526,9 @@
           <div id="stat-grid"></div>
           <div id="grid-note"></div>
           <div class="lbl" id="lbl-energy">台灣的用電與備轉容量（台電）</div>
+          <!-- 兩種看法。看總量六都在前面，看工業佔比新竹會跳到第一，那才是科學園區
+               在這份資料裡真正的樣子。新竹縣市在行政上是分開的兩列，總量會被切一半。 -->
+          <div id="use-sw" class="metric-sw"><button data-use="total" class="on" id="use-total">售電量</button><button data-use="ind" id="use-ind">工業用電佔比</button></div>
           <div id="stat-energy"></div>
           <div id="energy-note"></div>
           <div class="lbl" id="lbl-power">台灣的變電所負載（台電）</div>
