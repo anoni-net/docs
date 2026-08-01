@@ -2383,7 +2383,27 @@ function bindControls(dom) {
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
-  const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) { last = null; pauseSpin(); } if (pointers.size < 2) pinchStart = 0; };
+  // 放開手指時要把拖曳的基準點重新對齊到還按著的那一根。
+  //
+  // 捏合期間 pointermove 走的是 size === 2 提早 return 那條路，last 從第二根手指
+  // 按下之後就沒有再更新過。少了這個重新對齊，放開一根之後剩下那根只要動一下，
+  // dry 算的就是「這根的現在位置」減「另一根當初按下的位置」，也就是捏合張開的
+  // 那段距離，幾百像素，地球會瞬間彈到別的地方。而且同一個值會寫進 spin 當成
+  // 滑行速度，以 0.92 每幀衰減，放開後還會繼續飛四十幾幀才停。
+  const up = (e) => {
+    pointers.delete(e.pointerId);
+    const n = pointers.size;
+    if (n === 0) { last = null; pauseSpin(); return; }
+    const p = [...pointers.values()];
+    if (n === 1) {
+      pinchStart = 0;
+      last = { x: p[0].x, y: p[0].y }; // 對齊到剩下的那一根，位移從這裡重新起算
+      spin.rx = spin.ry = 0;           // 捏合不該留下滑行速度
+      return;
+    }
+    // 三指收到剩兩指，捏合的基準距離也要重取，否則縮放會跟著跳
+    if (n === 2) { pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
+  };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
   // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
   // 而 iOS Safari 從 10 開始也忽略 viewport 的 user-scalable=no。所以整頁鎖縮放
