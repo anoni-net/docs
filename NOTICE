@@ -15,12 +15,24 @@
 | `netusers.json` 的 `alt.pct` | [數位發展部 國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 | `tw-landing.json` | 本專案自建，座標主要取自 [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0（OSM 的部分），其餘為事實彙整 |
+| `tw-admin.json` | [內政部國土測繪中心 直轄市、縣市界線](https://data.gov.tw/dataset/7442) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
 `ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
 一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
+
+`tw-admin.json` 是台灣的縣市界線，鏡頭貼近台灣時才畫出來。走向量線而不是併進底圖，
+因為底圖是一張 2048x1024 的貼圖，每度只有 5.7 個像素，台灣本島在上面只有 14 像素寬，
+縣市界線靠貼圖畫不出來。這一層同時也是台灣的海岸線，`continents.json` 那份來自
+Natural Earth 110m，在縣市尺度下太粗。
+
+原始資料 22 個縣市、697 個環、332,091 個點，經 Douglas-Peucker 簡化到 84 環、
+12,955 點，容差 0.0006 度（約 67 公尺）。跨距小於 0.005 度的環丟掉，蘭嶼、綠島、
+小琉球、澎湖本島、金門本島、南竿都有測試守著不被濾掉。該資料集把釣魚台列嶼歸在
+宜蘭縣、東沙島與南沙太平島歸在高雄市，這裡照原資料收錄不做刪改，那是資料提供機關
+的界定。產生器是 `tools/gen_tw_admin.py`。
 
 `tw-landing.json`（台灣的海纜登陸點）跟上表其他幾份不一樣，它是這個專案自己建的，
 不是取用現成的資料集。會走到自建這一步，是因為登陸點座標從來沒有進過任何開放資料庫。

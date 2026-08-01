@@ -85,6 +85,7 @@ function applyI18n() {
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-seacable', 'creditSeacable', true);
   set('credit-landing', 'creditLanding', true);
+  set('credit-twadmin', 'creditTwAdmin', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
   set('credit-netusers', 'creditNetUsers', true);
@@ -128,6 +129,9 @@ const COL = {
   // 台灣海纜登陸點。要跟 cable 的鋼藍拉開（那是同一個主題的鄰居圖層），也要避開
   // 四個角色色與 blocked 的紅。留在青綠這一側，比 curWarm 亮一階，讀得出是資料層。
   landing: 0x63d6c0,
+  // 台灣縣市界線。跟 border 的藍同一族但亮一階，讀得出是「更細一級的行政界線」，
+  // 又不會跟 landing 的青綠或中繼點的角色色打架。只在貼近地表時才畫。
+  twAdmin: 0x7fb8dd,
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -199,7 +203,21 @@ let renderer, scene, camera, post, globe, sun;
 // ry 跟經度的換算：llToVec 的慣例下，要讓經度 L 面向鏡頭得設 ry = (-L - 90) 度。
 // 2.28 rad 約當經度 141，日本本州正對畫面中心。
 const view = { zoom: 1, rx: 0.45, ry: 2.28, spin: true };
-const ZOOM_MIN = 0.42, ZOOM_MAX = 1.4;
+// zoom 現在是「離地高度」的倍率，不是「離球心距離」的倍率。
+//
+// 舊的算法是 fitDist * zoom，那個在鏡頭靠近地表時會塌掉：涵蓋的地表角度隨距離
+// 漸近趨近零，整個縮放範圍的九成六只涵蓋 180 度到 4 度，剩下四趴要塞 4 度到 0.5 度。
+// 想看到縣市層級（一度地表大約 111 公里）相機得壓到離球心 5.1，那時 zoom 只剩
+// 0.331 到 0.351 那一小段，滾一格就從整個台灣跳到一個鄉鎮。
+//
+// 改成 R + (fitDist - R) * zoom 之後 zoom 正比於離地高度，深層變成近乎線性：
+// 桌機 zoom 0.0101 對到一度、0.0051 對到半度，乘法式的滾輪與捏合一路都是同樣手感。
+// zoom = 1 兩種算法給的距離一樣，進場的視角完全沒變。
+//
+// ZOOM_MIN 停在 0.004（桌機約 0.4 度、44 公里）。再下去就會看到縣市界線被
+// Douglas-Peucker 簡化掉的痕跡，那份資料的容差是 0.0006 度、約 67 公尺，
+// 0.3 度視野下剛好是一個像素。工具能給的精度到哪，這裡就停在哪。
+const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
 
 // 整顆地球完整入鏡所需的距離。直式手機的水平視野比垂直窄很多，固定距離會把地球裁掉大半。
 function fitDist() {
@@ -207,7 +225,20 @@ function fitDist() {
   const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
   return R * 1.18 / Math.sin(Math.min(vFov, hFov) / 2);
 }
-function targetDist() { return fitDist() * view.zoom; }
+function targetDist() { return R + (fitDist() - R) * view.zoom; }
+
+// 從「太空視角」過渡到「地圖視角」的程度，0 是太空、1 是貼著地表。
+//
+// 這底下幾層是為了太空視角存在的，鏡頭壓到地表附近時它們只會擋路：大氣層的殼在
+// R*1.045，相機低於那個高度會鑽進殼裡。極光的簾幕頂端到 R*1.172，示意路徑的弧線
+// 最高拱到 R*1.2。反過來縣市界線只有貼近了才有意義，遠看是一團糾結的線。
+// 兩邊都吃這一個值，一個往下淡出、一個往上淡入。
+const DEEP_HI = 1.5;   // 離地高於這個值，完全是太空視角
+const DEEP_LO = 0.35;  // 低於這個值，完全是地圖視角
+const deepU = uniform(0);
+function deepT() {
+  return clamp((DEEP_HI - (camera.position.z - R)) / (DEEP_HI - DEEP_LO), 0, 1);
+}
 
 // 拖曳的靈敏度。每像素轉多少弧度，正比於相機到球面前緣的距離。
 //
@@ -766,7 +797,9 @@ function buildCurrents() {
     // 跟「一道流」差很遠。頭最寬，往尾端收到 CUR_TAPER，整節就成了梭形。
     const half = bright.mul(1 - CUR_TAPER).add(CUR_TAPER);
     const edge = oneMinus(smoothstep(half.mul(0.35), half, across));
-    mat.opacityNode = bright.mul(CUR_PEAK).mul(edge);
+    // 貼近地表時淡出。環流是一條寬 1.1 度的緞帶，畫面只涵蓋 3 度的時候它會糊成
+    // 一整片斜向色塊蓋住海面，而且那是手繪的示意，不是實測資料，近看沒有意義。
+    mat.opacityNode = bright.mul(CUR_PEAK).mul(edge).mul(oneMinus(deepU));
   }
   const mesh = new THREE.Mesh(g, mat);
   // 這幾層同心透明物件的預設排序不穩定，明確指定。放在海纜與國界（都是 0）之後，
@@ -854,6 +887,8 @@ const TRUNK = [
   [[-33.9,18.42],[-34.44,18.37],[-34.64,18.92],[-34.89,19.85],[-34.69,21.64],[-34.8,25],[-32.84,28.56],[-31.55,30.09],[-29.87,31.05],[-28.96,32.26],[-27.66,32.93],[-25.1,34.17],[-24.2,35.48],[-23.47,35.89],[-22.68,35.65],[-20,36.5],[-17.16,38.86],[-16.73,39.79],[-15.85,40.3],[-14.96,40.78],[-14.42,41.02],[-13.96,40.64],[-10.27,40.55],[-8.43,40.2],[-6.8,39.28],[-4.04,39.66],[2,45.5],[2.75,46.75],[3.94,47.59],[4.94,48.66],[6.28,49.24],[8.77,50.64],[11.5,51.5],[12.03,51.4],[12.13,50.87],[12.21,49.98],[12.32,48.3],[12.5,45],[11.6,43.15]],
   [[-33,-71.6],[-12,-77.1],[-11.07,-78.19],[-9.77,-78.78],[-7.23,-79.91],[-6.33,-81.27],[-4.75,-81.63],[-1.81,-80.99],[9,-79.5]],
 ];
+const TRUNK_OP = 0.20;   // 走廊示意線在太空視角下的不透明度
+let trunkMat = null;
 
 function buildTrunks() {
   const pos = [];
@@ -886,7 +921,10 @@ function buildTrunks() {
   // 實測線集中在北海、地中海那種疊了幾十條的地方，走廊線在太平洋往往是方圓幾千公里
   // 只有孤零零一條。同樣的 alpha 疊起來的視覺重量差一個量級，稀疏那邊要拉高才看得見。
   // 想調的話兩個數字要分開試，統一成同一個值會有一邊壞掉。
-  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.20, depthWrite: false });
+  // 這一層是示意，只有走向可信。地圖視角下線條會變粗變顯眼，看起來像實測路由，
+  // 那是誤導，所以貼近地表時淡出。每幀由 animate 寫 opacity。
+  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: TRUNK_OP, depthWrite: false });
+  trunkMat = m;
   globe.add(new THREE.LineSegments(g, m));
 }
 
@@ -944,6 +982,32 @@ function ringSegments(world, pick, height) {
 // 國界。原本只描在 2048×1024 的貼圖上，赤道處一個像素就是二十公里，放大之後邊界糊成
 // 一片鋸齒。改成 3D 線段之後是向量的，放多大都還是一條線。
 // 代價是 17,000 個線段，比海岸線那層的 5,000 多，但一樣是單一 draw call。
+// 台灣的縣市界線。內政部國土測繪中心的資料，簡化到 12,955 點。
+//
+// 走向量線不是貼圖。底圖是一張 2048x1024 的 canvas，每度只有 5.7 個像素，台灣本島
+// 在上面只有 14 像素寬。畫面涵蓋 1 度地表時那 14 像素要撐滿螢幕，放大 158 倍，
+// 縣市界線用貼圖畫不出來。線段不論放到多近都是銳利的。
+//
+// 縣市多邊形的外圍就是海岸線，而且是實測等級的。continents.json 那條海岸線來自
+// Natural Earth 110m，一度才一個點，在縣市尺度下完全不能看。所以貼近台灣的時候，
+// 實際上是這一層在同時提供縣市界與可用的海岸線。
+//
+// 遠看時整個台灣只有幾十個像素，二十二個縣市的線會糊成一團亮斑，反而讓台灣變得
+// 比周圍國家醒目，那是視覺上的偏袒。所以跟著 deepU 淡入，太空視角下完全不畫。
+let twAdminMat = null;
+function buildTwAdmin(admin) {
+  if (!admin || !admin.c || !admin.c.length) return;
+  // 高度壓在中繼點（1.012）與登陸點（1.011）之下，那兩層是資料，界線是底圖。
+  // 但要高過國界（1.0036）與海岸線（1.004），重疊時看到的是比較細的這一條。
+  const pos = ringSegments(admin, () => true, R * 1.005);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  twAdminMat = new THREE.LineBasicMaterial({
+    color: COL.twAdmin, transparent: true, opacity: 0, depthWrite: false,
+  });
+  globe.add(new THREE.LineSegments(g, twAdminMat));
+}
+
 function buildBorders(world) {
   if (!world) return;
   // 高度壓在海岸線（1.004）之下。沿海國家的國界跟海岸線本來就重疊，讓海岸線畫在上面，
@@ -991,7 +1055,9 @@ function buildAtmosphere() {
   const viewDir = cameraPosition.sub(positionWorld).normalize();
   const rim = oneMinus(saturate(dot(normalWorld, viewDir))).pow(RIM_POWER);
   mat.colorNode = vec3(0x6f / 255, 0xc0 / 255, 0xee / 255); // 沿用海岸線的藍，跟現有冷色系一致
-  mat.opacityNode = rim.mul(RIM_INTENSITY);
+  // 貼近地表時淡出。殼在 R*1.045，相機低於那個高度會鑽進去，從裡面看邊緣輝光
+  // 會變成整片糊在鏡頭上的藍霧。真實世界從十公里高空也看不到地球的邊緣輝光。
+  mat.opacityNode = rim.mul(RIM_INTENSITY).mul(oneMinus(deepU));
   const mesh = new THREE.Mesh(new THREE.SphereGeometry(R * 1.045, 48, 32), mat);
   // 這幾層透明物件都以地球球心為中心，包圍球中心到相機的距離幾乎打平，
   // 預設排序會不穩定（哪層蓋在哪層可能逐幀跳動），所以明確指定順序。
@@ -1054,7 +1120,8 @@ function buildAurora() {
   // 綠佔大部分，紫只在最頂端。從赤道視角看，簾幕底部被地球擋住，線性漸層會讓露出來的
   // 那截幾乎全是紫的，看起來不像極光。用次方讓綠色一路撐到高處。
   mat.colorNode = mix(vec3(0.10, 0.95, 0.55), vec3(0.55, 0.30, 0.95), vv.pow(2.6).clamp(0, 1));
-  mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY);
+  // 簾幕頂端到 R*1.172，鏡頭壓低之後會橫在畫面上，跟著 deepU 淡出
+  mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY).mul(oneMinus(deepU));
   const mesh = new THREE.Mesh(g, mat);
   mesh.renderOrder = 40; // 這幾層同心透明物件的預設排序不穩定，明確指定
   globe.add(mesh);
@@ -1222,7 +1289,8 @@ function buildCircuits() {
     mat.colorNode = mix(
       mix(hop(COL.guard), hop(COL.mid), au.mul(2).clamp(0, 1)),
       hop(COL.exit), au.sub(0.5).mul(2).clamp(0, 1));
-    mat.opacityNode = bright.mul(uAlpha);
+    // 弧線最高拱到 R*1.2，地圖視角下只會從頭頂掃過去擋畫面，一起淡出
+    mat.opacityNode = bright.mul(uAlpha).mul(oneMinus(deepU));
 
     const line = new THREE.Line(geo, mat);
     line.frustumCulled = false;
@@ -1346,6 +1414,7 @@ function fillSeacable() {
 // 與亮度都照精度分級，面板上也直接把精度標出來。
 //
 // 資料檔沒有的時候整段收掉，跟 fillSeacable 同一個做法。
+let landingMesh = null, lastLandingK = 1;
 const LP_PREC = {
   '站址':   { key: 'lpAt',       size: 0.018, alpha: 1.00 },
   '設施':   { key: 'lpFacility', size: 0.022, alpha: 0.72 },
@@ -1402,7 +1471,7 @@ function fillLanding() {
 function buildLanding() {
   const list = LANDING && LANDING.points;
   if (!list || !list.length) return;
-  const geo = new THREE.OctahedronGeometry(1, 1); // 跟中繼點同一種幾何，遠看都是圓的
+  const geo = new THREE.OctahedronGeometry(1, 2); // 細分兩階，貼近看才不會露出多邊形的邊
   const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
   mat.opacity = 0.85;
   const mesh = new THREE.InstancedMesh(geo, mat, list.length);
@@ -1424,6 +1493,34 @@ function buildLanding() {
   mesh.instanceMatrix.needsUpdate = true;
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   globe.add(mesh);
+  landingMesh = mesh;
+}
+
+// 登陸點標記要跟中繼點一樣做螢幕尺寸補償。
+//
+// 標記的世界尺寸 0.018 到 0.034，換算到地表是半徑 23 到 43 公里。太空視角下那是
+// 幾個像素的小點，但畫面涵蓋 2 度（222 公里）的時候，一個鄉鎮級的標記會脹成螢幕
+// 的五分之一，一整片綠色蓋掉底下的縣市界。實測看到的就是這個。
+//
+// 精度分級的意思是「我們對這一筆的把握有多少」，用螢幕上的大小表達就夠了，
+// 不需要讓它在地表上真的占那麼大一塊。
+function rescaleLanding(k) {
+  const list = LANDING && LANDING.points;
+  if (!landingMesh || !list) return;
+  if (Math.abs(k - lastLandingK) < DOT_STEP) return;
+  lastLandingK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
+    const sz = meta.size * k;
+    llToVec(p.lat, p.lon, R * 1.011, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    landingMesh.setMatrixAt(i, m);
+  }
+  landingMesh.instanceMatrix.needsUpdate = true;
 }
 
 function buildCoastline(coast) {
@@ -2446,7 +2543,19 @@ async function animate() {
   globe.rotation.x = view.rx;
   updateSun(); // 直射點每小時移 15 度，每幀重算的成本是幾個三角函數，不值得另外做節流
   camera.position.z += (targetDist() - camera.position.z) * 0.12;
+  // 近裁面要跟著高度縮。原本寫死 0.1，而 ZOOM_MIN 對到的相機離地表只有 0.042，
+  // 整顆地球會被切在裁面外面直接消失。取離地高度的十分之一，留一個下限避免
+  // near 太小把深度精度吃光。
+  const near = Math.max(0.002, (camera.position.z - R) * 0.1);
+  if (Math.abs(camera.near - near) > near * 0.05) {
+    camera.near = near;
+    camera.updateProjectionMatrix();
+  }
   camera.lookAt(0, 0, 0);
+  deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
+  // LineBasicMaterial 不吃 node，這一層的淡入直接寫 opacity
+  if (twAdminMat) twAdminMat.opacity = deepU.value * 0.85;
+  if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
   // 遠看時歐洲十幾個國家團擠在很小的螢幕範圍內，怎麼排都糊。讓點隨距離退成底噪，
   // 陸地色階與國家標籤接手講「集中在哪」，放大之後再把個別中繼交出來。
@@ -2454,7 +2563,9 @@ async function animate() {
   const lod = clamp((ZOOM_MAX - view.zoom) / (ZOOM_MAX - 0.7), 0, 1);
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
-  rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  const dotK = Math.pow(view.zoom, DOT_EXP); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  rescaleDots(dotK);
+  rescaleLanding(dotK); // 登陸點跟中繼點用同一個補償，兩層的相對大小才不會隨縮放亂跑
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
   updateFeed();
@@ -2471,7 +2582,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2491,6 +2602,8 @@ async function main() {
     // 台灣海纜登陸點。自建資料，跟站台一起發布而不是走 assets，因為它是人工維護的，
     // 改動頻率是「查到新來源才動」，沒有定期重生的必要。
     getJSON('./tw-landing.json').catch(() => null),
+    // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟站台一起發布。
+    getJSON('./tw-admin.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
@@ -2514,6 +2627,7 @@ async function main() {
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast);
+  buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
   buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);

@@ -115,6 +115,21 @@
             "url": "https://moda.gov.tw/digital-affairs/digital-service/operations/208",
             "license": "https://data.gov.tw/license",
             "creator": { "@type": "Organization", "name": "數位發展部" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "直轄市、縣市界線（TWD97 經緯度）",
+            "url": "https://data.gov.tw/dataset/7442",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "內政部國土測繪中心" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣海纜登陸點",
+            "description": "本專案自建，座標主要取自 OpenStreetMap，登陸地名取自政府公告與公開報導，每一筆的出處記在 tools/data/tw_landing.toml。",
+            "url": "https://anoni.net/docs/games/tor-network/tw-landing.json",
+            "license": "https://opendatacommons.org/licenses/odbl/",
+            "creator": { "@type": "Organization", "name": "匿名網路社群 anoni.net" }
           }
         ]
       },
@@ -416,6 +431,7 @@
           <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
           <p id="credit-seacable">連到台灣的海纜障礙狀況來自<a href="https://moda.gov.tw/major-policies/subseacable/fault/1749" rel="noopener">數位發展部</a>公布的表格。該頁面的示意圖來自 TeleGeography 並採 CC BY-SA 4.0，這裡只取表格不含圖。表格本身未標示授權。</p>
           <p id="credit-landing">台灣的海纜登陸點是這個專案自己建的，沒有使用 TeleGeography 的資料。座標與設施位置來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），登陸地名來自農業部漁業署的航行通告與海纜事件的公開報導，纜線清單對照<a href="https://moda.gov.tw/major-policies/subseacable/1747" rel="noopener">數位發展部</a>的海纜清單。每一筆的出處逐條記在 tools/data/tw_landing.toml。</p>
+          <p id="credit-twadmin">貼近台灣時出現的細界線是縣市界，來自<a href="https://data.gov.tw/dataset/7442" rel="noopener">內政部國土測繪中心的直轄市、縣市界線</a>，授權<a href="https://data.gov.tw/license" rel="noopener">政府資料開放授權條款-第1版</a>。原始資料 33 萬個點，這裡簡化到 1 萬 3 千個，容差約 67 公尺。這一層同時也是台灣的海岸線，全球那份海岸線的比例尺在縣市尺度下不夠用。釣魚台列嶼、東沙島與南沙太平島照原資料所屬縣市收錄。</p>
           <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。海面的深淺是同一來源的等深線（10m 比例尺），只取 200、1000、3000、5000 公尺四層，最淺那階就是大陸棚。海底電纜幾乎都沿著陸棚鋪、避開深海盆，兩層對照著看得出來為什麼纜線走那些路徑。</p>
           <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
           <p id="credit-netusers">國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener">數位發展部的國家數位近用調查</a>（政府資料開放授權條款-第1版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。</p>
