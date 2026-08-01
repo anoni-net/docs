@@ -79,6 +79,7 @@ function applyI18n() {
   set('tw-title', 'twTitle');
   set('btn-tw', 'btnTw');
   set('lbl-grid', 'lblGrid');
+  set('lbl-energy', 'lblEnergy');
   set('lbl-power', 'lblPower');
   set('lbl-landing', 'lblLanding');
   set('note', 'note');
@@ -88,6 +89,7 @@ function applyI18n() {
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-seacable', 'creditSeacable', true);
+  set('credit-energy', 'creditEnergy', true);
   set('credit-grid', 'creditGrid', true);
   set('credit-power', 'creditPower', true);
   set('credit-landing', 'creditLanding', true);
@@ -155,6 +157,9 @@ const COL = {
   // 那個距離下畫面上的中繼點只有個位數，實際不會混淆。
   gridLine: 0xc86a3a, // 345kV 骨幹
   plant: 0xffa050,    // 發電廠
+  // 台電自建的再生能源場址。純黃色目前沒有別的圖層在用，跟 exit 的琥珀、
+  // guard 的綠都拉得開，而且黃色讀起來就是太陽能與風力那一類。
+  renew: 0xf0e050,
 
 
 };
@@ -2049,6 +2054,117 @@ function fillGrid() {
   }
 }
 
+// 台電自建的再生能源場址。跟上面那批電廠分開一層，因為位置的來源不一樣：
+// 電廠是靠名稱對 OpenStreetMap，這一批是把台電給的地址拿去地理編碼。
+//
+// 精度差很多而且逐筆不同，93 處裡面門牌級 22、里級 56、鄉鎮級 14。點的大小照容量走，
+// 不要另外用大小表達精度，那會跟電廠那層的尺寸語意打架。精度寫在卡片上。
+//
+// 離岸一期的地址是「彰化縣芳苑鄉外海7.2-8.7公里處」，那不是地址，產生器直接留 null
+// 而不是退到芳苑鄉的陸地上。畫面上就會少那一個點，說明文字有交代。
+const RENEW_SIZE_MIN = 0.010;
+const RENEW_SIZE_SPAN = 0.016;
+const RENEW_CAP_REF = 120;   // 陸域風力最大的場址約 110 MW
+let renewMat = null, renewMesh = null, lastRenewK = 1;
+
+function renewSites() {
+  const list = ENERGY && ENERGY.sites;
+  return list ? list.filter((s) => s.lat !== null && s.lon !== null) : [];
+}
+
+function renewSize(s) {
+  const t = Math.min(1, Math.sqrt(Math.max(0, s.cap) / RENEW_CAP_REF));
+  return RENEW_SIZE_MIN + RENEW_SIZE_SPAN * t;
+}
+
+function buildRenew() {
+  const list = renewSites();
+  if (!list.length) return;
+  renewMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  renewMat.opacity = 0;
+  renewMesh = new THREE.InstancedMesh(new THREE.OctahedronGeometry(1, 2), renewMat, list.length);
+  renewMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const c = new THREE.Color(COL.renew);
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    // 壓在電廠（1.010）之下、變電所（1.009）之上。這些場址多半很小，
+    // 有幾座太陽能就蓋在大電廠的廠區裡，讓大的畫在上面比較好讀。
+    llToVec(s.lat, s.lon, R * 1.0095, v);
+    const sz = renewSize(s);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    renewMesh.setMatrixAt(i, m);
+    renewMesh.setColorAt(i, c);
+  }
+  renewMesh.instanceMatrix.needsUpdate = true;
+  if (renewMesh.instanceColor) renewMesh.instanceColor.needsUpdate = true;
+  globe.add(renewMesh);
+}
+
+function rescaleRenew(k) {
+  const list = renewSites();
+  if (!renewMesh || !list.length) return;
+  if (Math.abs(k - lastRenewK) < DOT_STEP) return;
+  lastRenewK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    const sz = renewSize(s) * k;
+    llToVec(s.lat, s.lon, R * 1.0095, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    renewMesh.setMatrixAt(i, m);
+  }
+  renewMesh.instanceMatrix.needsUpdate = true;
+}
+
+// 用電量與備轉容量率。前者是需求面，跟變電所那一段的供給面配成一對，
+// 後者是「電網每天離極限多近」，台電自己的橙燈門檻是 10%。
+function fillEnergy() {
+  const box = $('stat-energy');
+  const lbl = $('lbl-energy');
+  const note = $('energy-note');
+  const cr = $('credit-energy');
+  if (!box || !ENERGY || !ENERGY.demand || !ENERGY.demand.counties.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const d = ENERGY.demand;
+  const max = d.counties[0].total || 1;
+  // 度換算成該語系的單位。中文是億度，英文是 TWh，倍率跟單位一起放在 i18n。
+  const scale = parseFloat(S('unitYiScale')) || 1;
+  const rows = d.counties.slice(0, 8).map((c) => {
+    const v = c.total / 1e8 * scale;
+    return `<div class="pw-row"><b>${countyName(c.county)}</b>`
+      + `<i><s style="width:${Math.round(c.total / max * 100)}%" class="use"></s></i>`
+      + `<em>${v.toFixed(v < 10 ? 2 : 1)}</em><u>${S('unitYi')}</u></div>`;
+  }).join('');
+  // 備轉容量率的走勢。一天一根細條，低於 10% 的換色，看得出吃緊集中在哪幾段。
+  const rv = ENERGY.reserve;
+  const spark = rv && rv.days.length
+    ? `<div class="rv-spark" role="img" aria-label="${S('rvAria', { n: rv.days.length })}">`
+      + rv.days.map(([, p]) =>
+        `<s style="height:${Math.round(clamp(p / 40, 0.05, 1) * 100)}%" class="${p < 10 ? 'tight' : ''}"></s>`).join('')
+      + '</div>'
+    : '';
+  box.innerHTML = rows + spark;
+  if (note) {
+    note.innerHTML = S('noteEnergy', {
+      label: d.label, months: d.months,
+      sites: (ENERGY.siteTotal || {}).n || 0,
+      located: (ENERGY.siteTotal || {}).located || 0,
+      siteCap: Math.round((ENERGY.siteTotal || {}).cap || 0).toLocaleString(),
+      min: rv ? rv.min : '–', median: rv ? rv.median : '–', tight: rv ? rv.tight : 0,
+      days: rv ? rv.days.length : 0,
+    });
+  }
+}
+
 function buildCoastline(coast, world) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -2409,7 +2525,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null, GRID = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null, GRID = null, ENERGY = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2671,6 +2787,7 @@ function pickFeature(sx, sy) {
   for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
   for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
   for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * 1.011);
+  for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * 1.0095);
   if (best) return best;
 
   // 沒點到點才輪到線
@@ -2717,6 +2834,17 @@ function showFeature(hit) {
         ratio: d.ratio === null ? '–' : Math.round(d.ratio * 100),
       }))
       + (d.area ? '<br>' + S('pkSubArea', { area: d.area }) : '');
+  } else if (hit.kind === 'renew') {
+    const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+    code = d.name;
+    sub = table[d.type] || d.type;
+    body = S('pkRenew', {
+      cap: num(d.cap).toLocaleString(),
+      model: d.model || '–',
+      units: d.units || '–',
+      addr: d.addr,
+      prec: d.precision,
+    });
   } else if (hit.kind === 'landing') {
     code = LANG === 'en' ? d.en : (LANG === 'zh-cn' ? d.zhCn : d.zh);
     sub = LANG === 'en' ? d.adminEn : (LANG === 'zh-cn' ? d.adminZhCn : d.admin);
@@ -3279,6 +3407,7 @@ async function animate() {
   if (powerMat) powerMat.opacity = swap * 0.9;
   if (gridLineMat) gridLineMat.opacity = swap * 0.55;
   if (plantMat) plantMat.opacity = swap * 0.95;
+  if (renewMat) renewMat.opacity = swap * 0.9;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
@@ -3294,6 +3423,7 @@ async function animate() {
   rescaleLanding(dotK); // 登陸點跟中繼點用同一個補償，兩層的相對大小才不會隨縮放亂跑
   rescalePower(dotK);
   rescalePlants(dotK);
+  rescaleRenew(dotK);
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
   updateFeed();
@@ -3310,7 +3440,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power, grid] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power, grid, energy] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -3336,6 +3466,8 @@ async function main() {
     getJSON('./tw-power.json').catch(() => null),
     // 發電廠與 345kV 電網骨幹。含即時發電量的快照，時間戳在 stamp 欄位。
     getJSON('./tw-grid.json').catch(() => null),
+    // 再生能源場址、各縣市用電量、每日備轉容量率，三份都是台電的。
+    getJSON('./tw-energy.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
@@ -3346,6 +3478,7 @@ async function main() {
   LANDING = landing;
   POWER = power;
   GRID = grid;
+  ENERGY = energy;
   TWADMIN = twAdmin;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
@@ -3365,6 +3498,7 @@ async function main() {
   buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
   buildPower();                    // 變電所，跟縣市界同一個時機淡入
   buildGrid();                     // 345kV 骨幹與發電廠
+  buildRenew();                    // 台電自建的再生能源場址
   buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
@@ -3382,6 +3516,7 @@ async function main() {
   fillLanding();
   fillPower();
   fillGrid();
+  fillEnergy();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
@@ -3437,20 +3572,22 @@ async function main() {
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
   // 點地球上的設施看細節。
   //
-  // 按下去先把卡片收掉（轉動地球本來就該收），放開時如果幾乎沒有移動、時間也短，
-  // 才當成點擊去試命中。不這樣分的話拖曳結束會誤觸，轉一下地球就跳出一張卡片。
+  // 按下去先把卡片收掉（轉動地球本來就該收），放開時如果幾乎沒有移動才當成點擊。
+  //
+  // 只看位移不看時間。第一版還加了「按住不超過 600 毫秒」，實測會擋掉正常的點擊：
+  // 慢慢按下再放開很容易超過，卡片就不出來，而且失敗得很安靜。拖曳本來就會產生位移，
+  // 位移那一關擋得住，時間那一關只是多一個會誤傷的條件。
   let pressAt = null;
   renderer.domElement.addEventListener('pointerdown', (e) => {
     hideCountry();
     fly = null;   // 使用者接手，飛行中途也要能打斷
-    pressAt = { x: e.clientX, y: e.clientY, t: performance.now() };
+    pressAt = { x: e.clientX, y: e.clientY };
   });
   renderer.domElement.addEventListener('pointerup', (e) => {
     if (!pressAt) return;
     const moved = Math.hypot(e.clientX - pressAt.x, e.clientY - pressAt.y);
-    const held = performance.now() - pressAt.t;
     pressAt = null;
-    if (moved > 6 || held > 600 || pointers.size > 0) return;
+    if (moved > 6 || pointers.size > 0) return;
     const hit = pickFeature(e.clientX, e.clientY);
     if (hit) showFeature(hit);
   });

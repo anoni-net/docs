@@ -20,12 +20,29 @@
 | `tw-power.json` 的座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
 | `tw-grid.json` 的容量與發電量 | [台灣電力公司各機組發電量即時資訊](https://data.gov.tw/dataset/8931) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `tw-grid.json` 的電廠位置與輸電線 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
+| `tw-energy.json` 的三份台電資料 | [再生能源各場址](https://data.gov.tw/dataset/17141)、[各縣市用電統計](https://data.gov.tw/dataset/29935)、[每日尖峰備轉容量率](https://data.gov.tw/dataset/25850) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `tw-energy.json` 的場址座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) Nominatim 地理編碼 | ODbL 1.0 |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
 `ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
 一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
+
+`tw-energy.json` 收三份台電資料。再生能源各場址（17141）是台電自建的風力、太陽能與
+地熱場址，各縣市用電統計（29935）是需求面，每日尖峰備轉容量率（25850）是電網每天離
+極限多近。
+
+場址那份只有地址沒有座標，經 Nominatim 地理編碼，並用 `tw-admin.json` 的縣市界驗過
+每一筆確實落在台電所述的縣市，實測 92 筆全部通過。精度逐筆不同，門牌級 22、里級 56、
+鄉鎮級 14，輸出的 `precision` 欄位據實標，引用時要一併看。離岸一期的地址寫的是
+「彰化縣芳苑鄉外海7.2-8.7公里處」，那不是地址，產生器留 null 而不是退到芳苑鄉的
+陸地上，把離岸風場畫到岸上比沒有更糟。
+
+用電統計的年月是民國年月（11504 是民國115年4月，也就是 2026 年 4 月），售電量那一欄
+有些帶千分位逗號有些不帶。備轉容量率的日期則是西元 YYYYMMDD，兩份不要混。
+備轉容量率低於 10% 是台電自己的供電吃緊門檻，畫面上那一段換色用的就是這個。
+產生器是 `tools/gen_tw_energy.py`。
 
 `tw-grid.json` 是台灣的發電廠與電網骨幹，同樣一個檔案裡兩個來源。裝置容量與當下
 淨發電量來自台電每十分鐘更新的即時發電資訊，電廠位置與輸電線幾何來自 OpenStreetMap。
