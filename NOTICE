@@ -16,12 +16,27 @@
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 | `tw-landing.json` | 本專案自建，座標主要取自 [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0（OSM 的部分），其餘為事實彙整 |
 | `tw-admin.json` | [內政部國土測繪中心 直轄市、縣市界線](https://data.gov.tw/dataset/7442) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `tw-power.json` 的容量與負載 | [台灣電力公司二次變電所主變壓器裝置容量及負載](https://data.gov.tw/dataset/16960) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `tw-power.json` 的座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
 `ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
 一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
+
+`tw-power.json` 是台灣二次變電所的容量與負載，一個檔案裡兩個來源。容量、可靠容量、
+前一年最大負載與供電範圍來自台電那份，座標來自 OpenStreetMap，因為台電那份沒有座標。
+兩邊靠變電所名稱對名，台電寫「基隆S/S」而 OSM 寫「基隆變電所」，去掉尾綴取詞幹比對，
+全台唯一才採用。對到之後再用 `tw-admin.json` 的縣市界驗一次，確認座標確實落在台電
+所述的縣市，實測 201 座全部通過。280 座裡只有 201 座對得到座標，其餘的 OSM 沒有收錄，
+畫面上的統計用全部 280 座，地圖上只畫得出那 201 座，說明文字有寫明這個落差。
+
+引用那份資料時要留意口徑。「可靠容量」是 N-1 容量，也就是最大的那台主變壓器故障時
+剩下的還能供多少。「最大負載除以可靠容量」超過 100% 的意思是尖峰時掉一台主變就撐不住，
+不是現在就過載，這兩件事差很多。另有 17 座只有一台主變，沒有 N-1 可言，輸出裡的
+`ratio` 給 null 並另標 `solo`，不要跟有備援的站排在同一個名次裡。產生器是
+`tools/gen_tw_power.py`，開頭有完整說明。
 
 `tw-admin.json` 是台灣的縣市界線，鏡頭貼近台灣時才畫出來。走向量線而不是併進底圖，
 因為底圖是一張 2048x1024 的貼圖，每度只有 5.7 個像素，台灣本島在上面只有 14 像素寬，

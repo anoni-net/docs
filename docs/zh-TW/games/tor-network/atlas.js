@@ -76,6 +76,7 @@ function applyI18n() {
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
   set('lbl-seacable', 'lblSeacable');
+  set('lbl-power', 'lblPower');
   set('lbl-landing', 'lblLanding');
   set('note', 'note');
   set('credit-title', 'creditTitle');
@@ -84,6 +85,7 @@ function applyI18n() {
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-seacable', 'creditSeacable', true);
+  set('credit-power', 'creditPower', true);
   set('credit-landing', 'creditLanding', true);
   set('credit-twadmin', 'creditTwAdmin', true);
   set('credit-ne', 'creditNaturalEarth', true);
@@ -132,6 +134,18 @@ const COL = {
   // 台灣縣市界線。跟 border 的藍同一族但亮一階，讀得出是「更細一級的行政界線」，
   // 又不會跟 landing 的青綠或中繼點的角色色打架。只在貼近地表時才畫。
   twAdmin: 0x7fb8dd,
+  // 變電所的負載率色階。紫到洋紅這一段目前沒有別的圖層在用，跟四個角色色、
+  // blocked 的警示紅、landing 的青綠都拉得開。刻意不用綠到紅那套交通號誌配色：
+  // 紅在這張圖上已經是「OONI 觀測到大量連線失敗」的意思，再用一次會混淆。
+  //
+  // 低端刻意比背景亮一階。第一版用 0x5f7fd8，亮度 0.23，壓在縣市界的 0.44 之下，
+  // 結果整層看起來只有洋紅那幾顆存在，餘裕還夠的那些融進深藍背景裡看不見。
+  powLo: 0x7ea8e0,   // 備援餘裕還夠。L=0.38，比海（0.01）與陸地（0.03）亮得多
+  powHi: 0xe8559a,   // 尖峰時掉一台主變就撐不住
+  // 單一主變沒有 N-1 可言，不屬於上面那條色階，所以跳出冷暖兩端用暖白，
+  // 讀起來是「另一類」而不是「更嚴重」或「更輕微」。
+  powSolo: 0xd9d3c0,
+
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -1570,6 +1584,151 @@ function twOutlineKeys(world) {
 // 實測輪廓完全對不上，看起來像兩個台灣疊在一起。所以台灣那一段跟著 deepU 淡出，
 // 由縣市界接手，其他地方的海岸線一律不動。
 let coastTwMat = null;
+// 台灣的變電所。台灣電力公司的二次變電所清單（政府資料開放授權條款-第1版）
+// 加上 OpenStreetMap 的座標（ODbL），產生器是 tools/gen_tw_power.py。
+//
+// === 負載率的口徑，改文案前先讀 ===
+//
+// 「可靠容量」是 N-1 容量：最大的那台主變壓器故障時，剩下的還能供多少。所以
+// 「最大負載 ÷ 可靠容量」超過 100% 的意思是「尖峰時如果掉一台主變，剩下的撐不住」，
+// 不是「現在就過載」。280 座裡有 64 座是這樣。這兩件事差很多，畫面上不能寫成
+// 「過載」或「超載」，那是把備援餘裕講成當下的故障。
+//
+// 另外 17 座的可靠容量是 0，那是只有一台主變的站，沒有 N-1 可言。它們不是負載率
+// 無限大，是本來就沒有備援，所以另外給一個顏色，不排進負載率的名次裡。
+//
+// 280 座裡只有 201 座畫得出來，OSM 沒收錄的那 79 座沒有座標。面板的統計用全部
+// 280 座，地圖上少掉的那些要在說明裡講清楚，不能讓人以為地圖上就是全部。
+// 比中繼點大一些。這一層要讀的是顏色（負載率），太小就只剩下「有一個點」，
+// 分不出藍紫還是洋紅。實測 0.012 到 0.026 在貼近台灣時只有兩三個像素，看不出色差。
+const POW_SIZE_MIN = 0.019;   // 25 MVA 的小站
+const POW_SIZE_SPAN = 0.020;  // 加上去的部分，175 MVA 吃滿
+const POW_SIZE_REF = 175;
+const POW_R_LO = 0.5;         // 負載率色階的兩端，低於這個一律最冷
+const POW_R_HI = 1.4;         // 高於這個一律最熱
+let powerMat = null, powerMesh = null, lastPowerK = 1;
+
+// 縣市名的語系對照。tw-admin.json 本來就帶了三語，台電那份只有繁中，
+// 直接印出去的話英文版與簡中版都會夾一段繁體，跟先前登陸點踩過的是同一個坑。
+// 台電混用「台」與「臺」，兩邊都正規化成「臺」再對。
+function countyName(zh) {
+  const key = (zh || '').replace(/台/g, '臺');
+  const list = TWADMIN && TWADMIN.c;
+  const hit = list && list.find((c) => c.zh.replace(/台/g, '臺') === key);
+  if (!hit) return zh;
+  return LANG === 'en' ? hit.en : (LANG === 'zh-cn' ? hit.zhCn : hit.zh);
+}
+
+function powerPoints() {
+  const list = POWER && POWER.subs;
+  return list ? list.filter((s) => s.lat !== null && s.lon !== null) : [];
+}
+
+// 色階的兩端拉成一樣亮，讓色相帶訊息而不是亮度。
+//
+// 沒有正規化的話洋紅（L=0.26）對深藍海面（L=0.01）的對比遠高於淡藍那端，畫面上
+// 洋紅整個蓋過去，看起來像大多數變電所都沒有備援餘裕。實際上 263 座可算的裡面
+// 只有 64 座是那樣，四分之一不到。亮度差造成的視覺誇大要在色階這一層解掉。
+// 示意路徑的三跳角色色也是同一個做法。
+const POW_LUM = 0.40;
+const lumOf = (c) => 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+function evenLum(hex) {
+  const c = new THREE.Color(hex);
+  return c.multiplyScalar(POW_LUM / Math.max(lumOf(c), 1e-4));
+}
+const POW_C_LO = evenLum(COL.powLo);
+const POW_C_HI = evenLum(COL.powHi);
+const POW_C_SOLO = evenLum(COL.powSolo);
+
+function powerColor(s, out) {
+  if (s.solo) return out.copy(POW_C_SOLO);
+  const t = clamp(((s.ratio || 0) - POW_R_LO) / (POW_R_HI - POW_R_LO), 0, 1);
+  return out.copy(POW_C_LO).lerp(POW_C_HI, t);
+}
+
+function powerSize(s) {
+  const t = Math.min(1, (s.cap || 0) / POW_SIZE_REF);
+  return POW_SIZE_MIN + POW_SIZE_SPAN * t;
+}
+
+function buildPower() {
+  const list = powerPoints();
+  if (!list.length) return;
+  const geo = new THREE.OctahedronGeometry(1, 2);
+  powerMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  powerMat.opacity = 0; // 由 animate 跟著 twSwapT 淡入
+  powerMesh = new THREE.InstancedMesh(geo, powerMat, list.length);
+  powerMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const c = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    // 壓在中繼點（1.012）與登陸點（1.011）之下、縣市界（1.005）之上。
+    // 電力是這一層要講的主題，但中繼點仍然是這張圖的主角。
+    llToVec(s.lat, s.lon, R * 1.009, v);
+    const sz = powerSize(s);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    powerMesh.setMatrixAt(i, m);
+    powerMesh.setColorAt(i, powerColor(s, c));
+  }
+  powerMesh.instanceMatrix.needsUpdate = true;
+  if (powerMesh.instanceColor) powerMesh.instanceColor.needsUpdate = true;
+  globe.add(powerMesh);
+}
+
+// 跟中繼點與登陸點吃同一個補償係數，三層的相對大小才不會隨縮放亂跑
+function rescalePower(k) {
+  const list = powerPoints();
+  if (!powerMesh || !list.length) return;
+  if (Math.abs(k - lastPowerK) < DOT_STEP) return;
+  lastPowerK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    const sz = powerSize(s) * k;
+    llToVec(s.lat, s.lon, R * 1.009, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    powerMesh.setMatrixAt(i, m);
+  }
+  powerMesh.instanceMatrix.needsUpdate = true;
+}
+
+function fillPower() {
+  const box = $('stat-power');
+  const lbl = $('lbl-power');
+  const note = $('power-note');
+  const cr = $('credit-power');
+  if (!box || !POWER || !POWER.counties || !POWER.counties.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const t = POWER.total;
+  // 縣市照最大負載排。條長度用負載率，超過 100% 的那一段特別標出來。
+  const rows = POWER.counties.slice(0, 10).map((c) => {
+    const r = c.ratio || 0;
+    const pct = Math.min(100, r * 100 / POW_R_HI); // 滿格用跟地圖色階同一個上限
+    const over = r > 1;
+    return `<div class="pw-row"><b>${countyName(c.county)}</b>`
+      + `<i><s style="width:${Math.min(100, pct)}%" class="${over ? 'over' : ''}"></s></i>`
+      + `<em>${Math.round(r * 100)}%</em>`
+      + `<u>${c.n} ${S('pwUnit')}</u></div>`;
+  }).join('');
+  box.innerHTML = rows;
+  if (note) {
+    note.innerHTML = S('notePower', {
+      n: t.n, located: t.located, tight: t.tight, ratable: t.ratable, solo: t.solo,
+      cap: Math.round(t.cap).toLocaleString(),
+      load: Math.round(t.load).toLocaleString(),
+    });
+  }
+}
+
 function buildCoastline(coast, world) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -1930,7 +2089,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2615,6 +2774,7 @@ async function animate() {
   // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
   const swap = twSwapT();
   if (twAdminMat) twAdminMat.opacity = swap * 0.85;
+  if (powerMat) powerMat.opacity = swap * 0.9;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
@@ -2628,6 +2788,7 @@ async function animate() {
   const dotK = Math.pow(view.zoom, DOT_EXP); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
   rescaleDots(dotK);
   rescaleLanding(dotK); // 登陸點跟中繼點用同一個補償，兩層的相對大小才不會隨縮放亂跑
+  rescalePower(dotK);
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
   updateFeed();
@@ -2644,7 +2805,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2666,6 +2827,8 @@ async function main() {
     getJSON('./tw-landing.json').catch(() => null),
     // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟站台一起發布。
     getJSON('./tw-admin.json').catch(() => null),
+    // 台灣變電所的容量與負載。跟縣市界一樣是人工跑產生器更新的。
+    getJSON('./tw-power.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
@@ -2674,6 +2837,8 @@ async function main() {
   BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
   SEACABLE = seacable;
   LANDING = landing;
+  POWER = power;
+  TWADMIN = twAdmin;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
@@ -2690,6 +2855,7 @@ async function main() {
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast, world);
   buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
+  buildPower();                    // 變電所，跟縣市界同一個時機淡入
   buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
@@ -2705,6 +2871,7 @@ async function main() {
   fillShutdowns();
   fillSeacable();
   fillLanding();
+  fillPower();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
