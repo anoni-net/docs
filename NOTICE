@@ -18,12 +18,35 @@
 | `tw-admin.json` | [內政部國土測繪中心 直轄市、縣市界線](https://data.gov.tw/dataset/7442) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `tw-power.json` 的容量與負載 | [台灣電力公司二次變電所主變壓器裝置容量及負載](https://data.gov.tw/dataset/16960) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `tw-power.json` 的座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
+| `tw-grid.json` 的容量與發電量 | [台灣電力公司各機組發電量即時資訊](https://data.gov.tw/dataset/8931) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `tw-grid.json` 的電廠位置與輸電線 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
 `ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
 一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
+
+`tw-grid.json` 是台灣的發電廠與電網骨幹，同樣一個檔案裡兩個來源。裝置容量與當下
+淨發電量來自台電每十分鐘更新的即時發電資訊，電廠位置與輸電線幾何來自 OpenStreetMap。
+畫面上呈現的是產生資料當下的快照，不是即時值，時間戳在 `stamp` 欄位。
+
+引用時有三件事要留意。
+
+一、電網只有 345kV 這一層。不限電壓抓 OSM 的輸電線，一度見方的格子在 Overpass 主站
+與鏡像都會超時，抓不動。345kV 剛好是台灣電網的骨幹，南電北送走的是這一層，
+但 161kV 以下的配電網完全沒有畫，那不是完整電網。
+
+二、82 座電廠裡只有 17 座對得到座標。大型電廠 OSM 都有收，所以那 17 座已經佔了
+裝置容量的七成一，對不到的多半是離岸風場、小水力，還有「電池」「汽電共生」這種
+本來就不是單一廠址的分類。
+
+三、還有一塊完全沒有位置：「其它購電太陽能」一列就 15,175 MW，那是全台分散式光電
+的總和，比任何一座電廠都大。它在面板上單獨列一條，但地圖上不會出現，不要把地圖上
+的點加起來當成台灣的發電量。
+
+台電那份的機組列到「大潭CC#1」這個層級，聚成電廠的規則、小計列與儲能負載重複計算
+的處理都寫在 `tools/gen_tw_grid.py` 的開頭。
 
 `tw-power.json` 是台灣二次變電所的容量與負載，一個檔案裡兩個來源。容量、可靠容量、
 前一年最大負載與供電範圍來自台電那份，座標來自 OpenStreetMap，因為台電那份沒有座標。
@@ -83,7 +106,7 @@ CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個�
 
 ## `ooni.json` 的兩條附加條款
 
-這份是六個來源裡條款最緊的一份，NC 與 SA 兩條要分開看。
+這份是所有來源裡條款最緊的一份，NC 與 SA 兩條要分開看。
 
 **NC（禁止商業使用）**：anoni.net 沒有商業行為，這條在目前的用法下不構成限制。
 要把本站內容用於商業情境時必須先把這一份抽掉或另外取得授權。
@@ -99,6 +122,7 @@ CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個�
 
 ## 機器可讀的同一份資訊
 
-九個資料檔內部都帶有 `source`、`sourceUrl`、`license`、`licenseUrl` 欄位，
+資料檔內部都帶有來源與授權的欄位（`source`、`sourceUrl`、`license`、`licenseUrl`，
+台灣那幾份改用 `sources` 陣列，因為一個檔案裡有兩三個來源），
 `netusers.json` 在 `alt` 底下另有一組，對應台灣那一筆的不同來源。
 畫面上的來源聲明在 `docs/zh-TW/games/tor-network/i18n.js` 的 `creditXxx` 系列，三種語言各一份。

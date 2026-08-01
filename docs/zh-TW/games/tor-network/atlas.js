@@ -7,7 +7,7 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute, fract } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
-import { pickLang, t, langLinksHTML } from './i18n.js';
+import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -76,6 +76,7 @@ function applyI18n() {
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
   set('lbl-seacable', 'lblSeacable');
+  set('lbl-grid', 'lblGrid');
   set('lbl-power', 'lblPower');
   set('lbl-landing', 'lblLanding');
   set('note', 'note');
@@ -85,6 +86,7 @@ function applyI18n() {
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-seacable', 'creditSeacable', true);
+  set('credit-grid', 'creditGrid', true);
   set('credit-power', 'creditPower', true);
   set('credit-landing', 'creditLanding', true);
   set('credit-twadmin', 'creditTwAdmin', true);
@@ -145,6 +147,12 @@ const COL = {
   // 單一主變沒有 N-1 可言，不屬於上面那條色階，所以跳出冷暖兩端用暖白，
   // 讀起來是「另一類」而不是「更嚴重」或「更輕微」。
   powSolo: 0xd9d3c0,
+  // 發電與電網。變電所已經占掉藍到洋紅那一段，登陸點是青綠，所以這一層走暖橙。
+  // 跟 exit 中繼的琥珀色相近，但那是點、這是線與較大的點，而且只在貼近台灣時出現，
+  // 那個距離下畫面上的中繼點只有個位數，實際不會混淆。
+  gridLine: 0xc86a3a, // 345kV 骨幹
+  plant: 0xffa050,    // 發電廠
+
 
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
@@ -1729,6 +1737,145 @@ function fillPower() {
   }
 }
 
+// 發電廠與 345kV 電網骨幹。台電的即時發電資訊（政府資料開放授權條款-第1版）
+// 加上 OpenStreetMap 的位置與線路幾何（ODbL），產生器是 tools/gen_tw_grid.py。
+//
+// === 只有骨幹，不是完整電網 ===
+//
+// 畫的是 345kV 這一層。不限電壓抓 OSM 的輸電線，一度見方的格子在 Overpass 主站與
+// 鏡像都會超時，抓不動。而 345kV 剛好就是台灣電網的骨幹，南電北送走的是這一層。
+// 161kV 以下的配電網完全沒有畫，面板說明要講清楚，不要讓人以為看到的是全部。
+//
+// === 發電廠只有一部分畫得出來 ===
+//
+// 台電那份沒有座標，靠名稱跟 OSM 對。82 座裡只有 17 座對得到，但那 17 座佔了
+// 全部裝置容量的七成一，因為大型電廠 OSM 都有收，對不到的多半是離岸風場、
+// 小水力，還有「電池」「汽電共生」這種本來就不是單一廠址的分類。
+//
+// 另外還有一塊完全沒有位置可言：「其它購電太陽能」一列就 15,175 MW，那是全台
+// 分散式光電的總和。它不在地圖上，但量比任何一座電廠都大，面板要單獨列出來，
+// 否則讀者會以為地圖上的點加起來就是台灣的發電量。
+const PLANT_SIZE_MIN = 0.016;
+const PLANT_SIZE_SPAN = 0.030;
+const PLANT_CAP_REF = 7000;   // 大潭 7,544 MW，到這裡吃滿
+let gridLineMat = null, plantMat = null, plantMesh = null, lastPlantK = 1;
+
+function gridPlants() {
+  const list = GRID && GRID.plants;
+  return list ? list.filter((p) => p.lat !== null && p.lon !== null) : [];
+}
+
+function plantSize(p) {
+  // 容量差三個數量級（0.5 MW 到 7,544 MW），開根號壓一下，小廠才不會變成看不見的點
+  const t = Math.min(1, Math.sqrt(Math.max(0, p.cap) / PLANT_CAP_REF));
+  return PLANT_SIZE_MIN + PLANT_SIZE_SPAN * t;
+}
+
+function buildGrid() {
+  if (!GRID) return;
+  // 345kV 線。壓在變電所（1.009）之下、縣市界（1.005）之上，它是背景不是主角。
+  const lines = GRID.lines || [];
+  if (lines.length) {
+    const pos = [];
+    const v = new THREE.Vector3(), prev = new THREE.Vector3();
+    for (const ln of lines) {
+      const p = ln.p;
+      for (let i = 0; i + 3 < p.length; i += 2) {
+        llToVec(p[i + 1], p[i], R * 1.007, prev);
+        pos.push(prev.x, prev.y, prev.z);
+        llToVec(p[i + 3], p[i + 2], R * 1.007, v);
+        pos.push(v.x, v.y, v.z);
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+    gridLineMat = new THREE.LineBasicMaterial({
+      color: COL.gridLine, transparent: true, opacity: 0, depthWrite: false,
+    });
+    globe.add(new THREE.LineSegments(g, gridLineMat));
+  }
+  // 發電廠
+  const list = gridPlants();
+  if (!list.length) return;
+  plantMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  plantMat.opacity = 0;
+  plantMesh = new THREE.InstancedMesh(new THREE.OctahedronGeometry(1, 2), plantMat, list.length);
+  plantMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const base = new THREE.Color(COL.plant);
+  const c = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    // 抬到變電所之上。發電廠比變電所少得多也大得多，疊在一起時它該在上面。
+    llToVec(p.lat, p.lon, R * 1.010, v);
+    const sz = plantSize(p);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    plantMesh.setMatrixAt(i, m);
+    // 亮度帶當下的出力比例，暗的是停機或低載。色相不變，避免再開一組語意。
+    const duty = p.cap > 0 ? clamp(p.out / p.cap, 0, 1) : 0;
+    plantMesh.setColorAt(i, c.copy(base).multiplyScalar(0.45 + 0.55 * duty));
+  }
+  plantMesh.instanceMatrix.needsUpdate = true;
+  if (plantMesh.instanceColor) plantMesh.instanceColor.needsUpdate = true;
+  globe.add(plantMesh);
+}
+
+function rescalePlants(k) {
+  const list = gridPlants();
+  if (!plantMesh || !list.length) return;
+  if (Math.abs(k - lastPlantK) < DOT_STEP) return;
+  lastPlantK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const sz = plantSize(p) * k;
+    llToVec(p.lat, p.lon, R * 1.010, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    plantMesh.setMatrixAt(i, m);
+  }
+  plantMesh.instanceMatrix.needsUpdate = true;
+}
+
+function fillGrid() {
+  const box = $('stat-grid');
+  const lbl = $('lbl-grid');
+  const note = $('grid-note');
+  const cr = $('credit-grid');
+  if (!box || !GRID || !GRID.byType || !GRID.byType.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const t = GRID.total;
+  const max = Math.max(...GRID.byType.map((x) => x.cap), t.distCap);
+  const row = (label, cap, cls) =>
+    `<div class="pw-row"><b>${label}</b>`
+    + `<i><s style="width:${Math.round(cap / max * 100)}%" class="${cls || ''}"></s></i>`
+    + `<em>${Math.round(cap).toLocaleString()}</em><u>MW</u></div>`;
+  // 分散式那一塊沒有位置，但量比任何一座電廠都大，放在同一張圖裡才不會被忽略
+  // 發電類型走 i18n 的對照表，對不到就原樣輸出
+  // t() 是做字串代換的，取不了物件，所以這裡直接讀 STR
+  const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+  const tyName = (k) => table[k] || k;
+  const rows = GRID.byType.slice(0, 7).map((x) => row(tyName(x.type), x.cap)).join('')
+    + row(S('gridDist'), t.distCap, 'dist');
+  box.innerHTML = rows;
+  if (note) {
+    note.innerHTML = S('noteGrid', {
+      plants: t.plants, located: t.located, lines: t.lines,
+      cap: Math.round(t.cap).toLocaleString(),
+      out: Math.round(t.out).toLocaleString(),
+      distCap: Math.round(t.distCap).toLocaleString(),
+      stamp: (GRID.stamp || '').replace('T', ' '),
+    });
+  }
+}
+
 function buildCoastline(coast, world) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -2089,7 +2236,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null, GRID = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2775,6 +2922,8 @@ async function animate() {
   const swap = twSwapT();
   if (twAdminMat) twAdminMat.opacity = swap * 0.85;
   if (powerMat) powerMat.opacity = swap * 0.9;
+  if (gridLineMat) gridLineMat.opacity = swap * 0.55;
+  if (plantMat) plantMat.opacity = swap * 0.95;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
@@ -2789,6 +2938,7 @@ async function animate() {
   rescaleDots(dotK);
   rescaleLanding(dotK); // 登陸點跟中繼點用同一個補償，兩層的相對大小才不會隨縮放亂跑
   rescalePower(dotK);
+  rescalePlants(dotK);
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
   updateFeed();
@@ -2805,7 +2955,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power, grid] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2829,6 +2979,8 @@ async function main() {
     getJSON('./tw-admin.json').catch(() => null),
     // 台灣變電所的容量與負載。跟縣市界一樣是人工跑產生器更新的。
     getJSON('./tw-power.json').catch(() => null),
+    // 發電廠與 345kV 電網骨幹。含即時發電量的快照，時間戳在 stamp 欄位。
+    getJSON('./tw-grid.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
@@ -2838,6 +2990,7 @@ async function main() {
   SEACABLE = seacable;
   LANDING = landing;
   POWER = power;
+  GRID = grid;
   TWADMIN = twAdmin;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
@@ -2856,6 +3009,7 @@ async function main() {
   if (coast) buildCoastline(coast, world);
   buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
   buildPower();                    // 變電所，跟縣市界同一個時機淡入
+  buildGrid();                     // 345kV 骨幹與發電廠
   buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
@@ -2872,6 +3026,7 @@ async function main() {
   fillSeacable();
   fillLanding();
   fillPower();
+  fillGrid();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
