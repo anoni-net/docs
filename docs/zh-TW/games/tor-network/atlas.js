@@ -1871,6 +1871,7 @@ function fillGrid() {
       cap: Math.round(t.cap).toLocaleString(),
       out: Math.round(t.out).toLocaleString(),
       distCap: Math.round(t.distCap).toLocaleString(),
+      commissioning: t.commissioning || 0,
       stamp: (GRID.stamp || '').replace('T', ' '),
     });
   }

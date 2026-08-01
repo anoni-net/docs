@@ -244,25 +244,29 @@ def main():
     osm_plants, osm_lines, failed = fetch_osm(os.environ.get("OSM_GRID_CACHE"))
 
     # 機組聚成電廠。小計列、彙總桶、儲能負載各自處理，理由見檔頭。
-    plants, distributed, skipped = collections.defaultdict(
-        lambda: {"units": 0, "cap": 0.0, "out": 0.0, "types": collections.Counter()}), [], 0
+    plants, distributed, skipped, commissioning = collections.defaultdict(
+        lambda: {"units": 0, "cap": 0.0, "out": 0.0, "types": collections.Counter()}), [], 0, 0
     for r in rows:
         ty = clean_type(r["機組類型"])
         name = (r["機組名稱"] or "").strip()
         cap = num(r["裝置容量(MW)"])
         outv = num(r["淨發電量(MW)"])
-        if cap is None:                      # 小計列，容量欄夾著百分比
-            skipped += 1
-            continue
         if any(k in name for k in ("小計", "合計", "總計")):
             skipped += 1
             continue
         if "儲能負載" in ty:                  # 跟儲能是同一批機組的另一個方向，加了會重複
             skipped += 1
             continue
-        if name.startswith(("其它", "其他")):  # 分散式的彙總桶，沒有位置
-            distributed.append({"name": name, "type": ty, "cap": cap, "out": outv})
+        if "其它" in name or "其他" in name:   # 分散式的彙總桶，沒有位置
+            distributed.append({"name": name, "type": ty, "cap": cap or 0.0, "out": outv})
             continue
+        # 裝置容量是「-」的先別丟。備註寫著「新機組試俥」「新增設備測試運轉」，
+        # 那是還沒商轉所以容量尚未計入，可是它們真的在發電。實測台中CC#1 一台就
+        # 1,243 MW，全部加起來 2,449 MW，整列丟掉的話發電量會少報將近一成。
+        # 容量算 0（台電沒計就是沒計），發電量照收，另外數一個 commissioning 報出來。
+        if cap is None:
+            commissioning += 1
+            cap = 0.0
         p = plants[plant_of(name)]
         p["units"] += 1
         p["cap"] += cap
@@ -349,6 +353,8 @@ def main():
             "distCap": round(sum(d["cap"] for d in distributed), 1),
             "distOut": round(sum(d["out"] or 0 for d in distributed), 1),
             "lines": len(lines),
+            # 還在試俥、台電尚未計入裝置容量、但已經在發電的機組數
+            "commissioning": commissioning,
         },
         "byType": [{"type": k, "cap": round(v, 1)} for k, v in by_type.most_common()],
         "plants": items,
@@ -365,7 +371,8 @@ def main():
 
     t = payload["total"]
     print(f"寫出 {out}")
-    print(f"  資料時間 {stamp}｜跳過 {skipped} 列（小計、儲能負載）")
+    print(f"  資料時間 {stamp}｜跳過 {skipped} 列（小計、儲能負載）"
+          f"｜試俥中尚未計入容量但有發電的 {commissioning} 部")
     if scattered:
         print(f"  這幾座在 OSM 的多個條目散得太開，沒有採用座標：{scattered[:6]}", file=sys.stderr)
     print(f"  電廠 {t['plants']} 座，其中 {t['located']} 座有座標"
