@@ -371,6 +371,31 @@ function updateFov() {
   if (fly && flyKeep !== null && flyKeep < 179) fly.zoom = zoomForCover(flyKeep);
 }
 
+// 縮放讀數。網址加 ?debug 才出現。
+//
+// 調鏡頭與縮放手感的時候，光靠「某一段怪怪的」很難定位，有個數字可以指就快得多。
+// 顯示的是短邊涵蓋多少度地表（換算公里）、zoom、視角、離地高，以及驅動圖層淡入
+// 淡出的那兩個過渡值。
+const DBG = new URLSearchParams(location.search).has('debug');
+let dbgEl = null, dbgAcc = 0;
+function updateDbg(dt) {
+  if (!DBG) return;
+  if (!dbgEl) { dbgEl = $('dbg'); if (!dbgEl) return; dbgEl.hidden = false; }
+  dbgAcc += dt;
+  if (dbgAcc < 0.1) return;          // 每秒更新十次就夠，不必每幀重排文字
+  dbgAcc = 0;
+  const c = coverDeg();
+  const tc = coverDeg(targetDist());
+  const km = (x) => (x >= 180 ? '整顆' : `${Math.round(x * 111).toLocaleString()} km`);
+  dbgEl.textContent =
+    `涵蓋 ${c >= 180 ? '整顆' : c.toFixed(2) + '°'}  ${km(c)}\n`
+    + `目標 ${tc >= 180 ? '整顆' : tc.toFixed(2) + '°'}\n`
+    + `zoom ${view.zoom.toFixed(5)}\n`
+    + `fov  ${camera.fov.toFixed(1)}°\n`
+    + `離地 ${(camera.position.z - R).toFixed(3)}\n`
+    + `deep ${deepU.value.toFixed(2)}  swap ${twSwapT().toFixed(2)}`;
+}
+
 // 飛行中的目標。null 代表沒有在飛。
 let fly = null;
 function flyTo(lat, lon, spanLat, spanLon) {
@@ -3198,6 +3223,7 @@ async function animate() {
   camera.lookAt(0, 0, 0);
   deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
   updateFov();           // 貼近地表時換成望遠鏡頭，畫面才會平
+  updateDbg(dt);         // ?debug 時右上角的縮放讀數
   // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
   // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
   const swap = twSwapT();

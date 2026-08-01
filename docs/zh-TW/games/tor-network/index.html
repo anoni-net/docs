@@ -330,6 +330,16 @@
               line-height: 1; padding: 4px 10px; border-radius: 999px; cursor: pointer;
               border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
     #btn-tw:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    /* 縮放讀數。網址加 ?debug 才出現，一般使用者看不到。
+       調鏡頭與縮放手感時要能一眼看到現在的數字，不然只能憑感覺describe「某一段怪」。
+       放右上角：面板在左上、訊息串在右下、提示在下緣中間，這裡是空的。 */
+    #dbg { position: fixed; right: 12px; top: 12px; z-index: 16;
+           padding: 7px 10px; border-radius: 8px;
+           font: 11px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+           color: #bfe0ff; background: rgba(9,16,26,.82); border: 1px solid var(--panel-b);
+           backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+           white-space: pre; pointer-events: none; }
+    #dbg[hidden] { display: none; }
     #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
     #fatal[hidden] { display: none; }
     #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
@@ -524,6 +534,8 @@
 
   <div id="feed"></div>
   <div id="labels"></div>
+
+  <div id="dbg" hidden></div>
 
   <div id="cc-card" class="panel" hidden>
     <div id="cc-head"><span id="cc-code"></span><span id="cc-sub"></span><span id="cc-close" role="button" tabindex="0">關閉</span></div>
