@@ -76,6 +76,7 @@ function applyI18n() {
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
   set('lbl-seacable', 'lblSeacable');
+  set('lbl-landing', 'lblLanding');
   set('note', 'note');
   set('credit-title', 'creditTitle');
   set('credit-onionoo', 'creditOnionoo', true);
@@ -83,6 +84,7 @@ function applyI18n() {
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
   set('credit-seacable', 'creditSeacable', true);
+  set('credit-landing', 'creditLanding', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
   set('credit-netusers', 'creditNetUsers', true);
@@ -123,6 +125,9 @@ const COL = {
   curCold: 0x6a759f, // 寒流
   blocked: 0xff5a6e, // OONI 觀測到 Tor 連線大量失敗的國家。紅色系跟四個角色色都拉開
   border: 0x4f88b4,  // 國界。壓在海岸線之下一階，讓海陸交界仍然是最清楚的那條線
+  // 台灣海纜登陸點。要跟 cable 的鋼藍拉開（那是同一個主題的鄰居圖層），也要避開
+  // 四個角色色與 blocked 的紅。留在青綠這一側，比 curWarm 亮一階，讀得出是資料層。
+  landing: 0x63d6c0,
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
@@ -1332,6 +1337,95 @@ function fillSeacable() {
   if (note) note.innerHTML = S('noteSeacable');
 }
 
+// 台灣的海纜登陸點。跟其他圖層不同，這一份是自建的，資料來源逐筆記在
+// tools/data/tw_landing.toml，產生器是 tools/gen_tw_landing.py。
+//
+// 精度差很多，而且那個差別本身就是資訊。頭城與枋山是 OSM 明確標註的海纜站建物，
+// 而且有海纜線段端點在數十公尺內佐證。東引、南竿只查得到鄉鎮級地名，座標是取
+// 鄉鎮中心。畫成一模一樣的點會讓人以為我們對每一筆的把握都相同，所以標記大小
+// 與亮度都照精度分級，面板上也直接把精度標出來。
+//
+// 資料檔沒有的時候整段收掉，跟 fillSeacable 同一個做法。
+const LP_PREC = {
+  '站址':   { key: 'lpAt',       size: 0.018, alpha: 1.00 },
+  '設施':   { key: 'lpFacility', size: 0.022, alpha: 0.72 },
+  '端點':   { key: 'lpEnd',      size: 0.022, alpha: 0.72 },
+  '里':     { key: 'lpVillage',  size: 0.028, alpha: 0.52 },
+  '鄉鎮':   { key: 'lpTown',     size: 0.034, alpha: 0.42 },
+};
+
+function fillLanding() {
+  const box = $('stat-landing');
+  const lbl = $('lbl-landing');
+  const note = $('landing-note');
+  const cr = $('credit-landing');
+  const list = LANDING && LANDING.points;
+  if (!box || !list || !list.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  // 精度高的排前面，讀者先看到最可靠的那幾筆
+  const order = Object.keys(LP_PREC);
+  const rows = list.slice().sort((a, b) => order.indexOf(a.precision) - order.indexOf(b.precision));
+  box.innerHTML = rows.map((p) => {
+    const meta = LP_PREC[p.precision];
+    const prec = meta ? S(meta.key) : p.precision;
+    // LANG 的三個值是 zh-TW、zh-cn、en，簡中那個是小寫，別寫成 zh-CN。
+    // 三語形式都在資料裡，這份是自建的，沒有理由讓英文版夾一段繁體。
+    const nm = LANG === 'en' ? p.en : (LANG === 'zh-cn' ? p.zhCn : p.zh);
+    const ad = LANG === 'en' ? p.adminEn : (LANG === 'zh-cn' ? p.adminZhCn : p.admin);
+    const cb = p.cables && p.cables.length
+      ? `<span class="lp-cb">${p.cables.join(S('listSep'))}</span>`
+      : `<span class="lp-cb none">${S('lpNoCable')}</span>`;
+    return `<div class="lp-row"><div class="lp-top">`
+      + `<span class="lp-nm">${nm}</span>`
+      + `<span class="lp-ad">${ad}</span>`
+      + `<span class="lp-pr" data-p="${p.precision}">${prec}</span></div>`
+      + `<div class="lp-sub">${cb}</div></div>`;
+  }).join('');
+  if (note) note.innerHTML = S('noteLanding');
+}
+
+// 標記畫成一顆顆小球，半徑照精度放大。精度低的畫得大而暗，看起來就像一片模糊的
+// 範圍而不是一個確定的點，這是刻意的。台灣在全球尺度下很小，這一層要放大到台灣
+// 附近才看得見，平常只是海岸邊幾點微光。
+//
+// 不要用 AdditiveBlending。這 14 個點全擠在台灣周邊幾度之內，淡水、八里、草漯在
+// 放大到台灣的視角下只差幾個像素，馬祖三個點也是，additive 會把重疊處一路疊到爆白，
+// 精度分級就整個讀不出來了（實測過）。一般混色不會疊，維持得住分級。
+//
+// 顏色走 instanceColor 而不是 colorNode。NodeMaterial 的 colorNode 跟 instanceColor
+// 是相乘的，設了 colorNode 之後 instanceColor 仍然有效，但這裡不需要，直接把
+// 「顏色乘上精度亮度」算好寫進 instanceColor 就好。
+function buildLanding() {
+  const list = LANDING && LANDING.points;
+  if (!list || !list.length) return;
+  const geo = new THREE.OctahedronGeometry(1, 1); // 跟中繼點同一種幾何，遠看都是圓的
+  const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  mat.opacity = 0.85;
+  const mesh = new THREE.InstancedMesh(geo, mat, list.length);
+  mesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const base = new THREE.Color(COL.landing);
+  const col = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
+    llToVec(p.lat, p.lon, R * 1.011, v);
+    m.makeScale(meta.size, meta.size, meta.size);
+    m.setPosition(v);
+    mesh.setMatrixAt(i, m);
+    col.copy(base).multiplyScalar(meta.alpha);
+    mesh.setColorAt(i, col);
+  }
+  mesh.instanceMatrix.needsUpdate = true;
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  globe.add(mesh);
+}
+
 function buildCoastline(coast) {
   const seg = coast.seg;
   const n = seg.length / 4;
@@ -1681,7 +1775,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -2357,7 +2451,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -2374,6 +2468,9 @@ async function main() {
     // 障礙的存續期是月為單位，assets 的 12 小時快取夠新鮮，不必額外帶 no-cache。
     // 取不到的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
     getJSONAsset('seacable.json').catch(() => null),
+    // 台灣海纜登陸點。自建資料，跟站台一起發布而不是走 assets，因為它是人工維護的，
+    // 改動頻率是「查到新來源才動」，沒有定期重生的必要。
+    getJSON('./tw-landing.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
@@ -2381,6 +2478,7 @@ async function main() {
   NETUSERS = netusers;
   BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
   SEACABLE = seacable;
+  LANDING = landing;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
@@ -2396,6 +2494,7 @@ async function main() {
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast);
+  buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
   buildLabels(snap);
@@ -2409,6 +2508,7 @@ async function main() {
   fillOoni(snap);
   fillShutdowns();
   fillSeacable();
+  fillLanding();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);

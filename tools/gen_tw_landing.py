@@ -60,7 +60,11 @@ def check_points(points):
     seen = {}
     for i, p in enumerate(points):
         where = f"第 {i + 1} 筆（id={p.get('id', '?')}）"
-        for key in ("id", "name_zh", "name_en", "admin", "lat", "lon", "precision"):
+        # 三語名稱都要有。這是自建資料集，不像 moda 的公告只有中文原文，
+        # 沒有理由讓英文版與簡中版夾一段繁體。
+        for key in ("id", "name_zh", "name_zh_cn", "name_en",
+                    "admin", "admin_zh_cn", "admin_en",
+                    "lat", "lon", "precision"):
             if not p.get(key) and p.get(key) != 0:
                 raise SystemExit(f"{where} 缺欄位 {key}")
         if p["id"] in seen:
@@ -144,8 +148,11 @@ def main():
             {
                 "id": p["id"],
                 "zh": p["name_zh"],
+                "zhCn": p["name_zh_cn"],
                 "en": p["name_en"],
                 "admin": p["admin"],
+                "adminZhCn": p["admin_zh_cn"],
+                "adminEn": p["admin_en"],
                 "lat": round(float(p["lat"]), 5),
                 "lon": round(float(p["lon"]), 5),
                 "precision": p["precision"],

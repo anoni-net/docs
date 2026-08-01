@@ -14,12 +14,29 @@
 | `netusers.json` 的 `pct` | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS) Individuals using the Internet | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | `netusers.json` 的 `alt.pct` | [數位發展部 國家數位近用調查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
+| `tw-landing.json` | 本專案自建，座標主要取自 [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0（OSM 的部分），其餘為事實彙整 |
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
 `license` 欄位。兩份都是姓名標示類的授權，沒有 NC 或 SA，併在同一個檔案不會有下面
 `ooni.json` 那種相容性問題。分開放的理由在方法論：一份是 ITU 彙整各國通報，
 一份是對 12 歲以上人口的電話抽樣，兩者的數字不該被當成同一把尺。
+
+`tw-landing.json`（台灣的海纜登陸點）跟上表其他幾份不一樣，它是這個專案自己建的，
+不是取用現成的資料集。會走到自建這一步，是因為登陸點座標從來沒有進過任何開放資料庫。
+OSM 沒有登陸點標籤（五個候選標籤查過都是 0 筆），Wikidata 的海底通訊電纜項目 190 個
+只有 1 個帶座標。唯一完整的來源是 TeleGeography，而他們 2022 年底之後把 GitHub 上的
+CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個版本的 fork，但只有台灣
+6 個登陸點，現行版有 21 個，差的 15 個正好是馬祖、澎湖、金門這些離島。
+
+所以這一份沒有使用 TeleGeography 的任何資料。座標與設施位置來自 OSM（ODbL，須標註
+「© OpenStreetMap contributors」），登陸地名來自農業部漁業署的航行通告與海纜事件的
+公開報導，纜線清單對照數位發展部的海纜清單。政府公告與新聞報導引用的是其中的事實
+（哪條纜線連哪兩地），事實不受著作權保護。座標的彙整與精度判斷是本專案自己做的。
+
+每一筆的出處逐條記在 `tools/data/tw_landing.toml`，產生器是 `tools/gen_tw_landing.py`。
+輸出的 `precision` 欄位標示每一筆的可信程度，從「站址」到「鄉鎮」分五級，引用時要
+一併看那個欄位。這份是 v1，已知缺口寫在 toml 的檔頭。
 
 `seacable.json`（連到台灣的海纜障礙）不在上表，因為它不在 repo 裡。那一份由
 `tools/publish_games_data.sh` 產生後直接發布到 assets.anoni.net，本地沒有留副本。
