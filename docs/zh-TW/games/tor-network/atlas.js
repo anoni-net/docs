@@ -337,6 +337,27 @@ const FOV_FAR = 45;    // 太空視角
 const FOV_NEAR = 18;   // 地圖視角
 const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
 
+// 換鏡頭的區間，用畫面短邊的涵蓋度界定。
+//
+// 這件事本質上是變焦推軌：鏡頭縮窄的同時相機後退，中心的比例不變但畫面邊緣會脹縮。
+// 那個扭曲感是這種手法本來就有的，消不掉，只能挑一個不礙事的地方讓它發生。
+//
+// 第一版跟著 deepU 走，也就是涵蓋度 14.7 度到 3.3 度之間換，那正好是使用者在看
+// 縣市界、變電所、電廠的範圍，一邊看一邊扭很不自然。
+//
+// 改成在遠處就換完：涵蓋度 90 度到 30 度之間完成，那一段是從整顆地球往下衝的過程，
+// 畫面本來就變化很快，扭曲被蓋過去。到了 30 度以內鏡頭就固定在 18 度不再動，
+// 整個細看的範圍都是同一顆鏡頭。整顆地球入鏡時涵蓋度是飽和的 180 度，維持 45 度廣角，
+// 進場的樣子完全沒變。
+const FOV_HI_COVER = 90;
+const FOV_LO_COVER = 30;
+
+/** 換鏡頭的進度。頭尾用 smoothstep 抹平，線性斜坡在兩端有硬轉折，看得出來。 */
+function fovT() {
+  const t = clamp((FOV_HI_COVER - coverDeg(targetDist())) / (FOV_HI_COVER - FOV_LO_COVER), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
 /** 解出在現在的 fov 與長寬比下，短邊涵蓋 deg 度所需的 zoom */
 function zoomForCover(deg) {
   const f = fitDist();
@@ -349,7 +370,7 @@ function zoomForCover(deg) {
 }
 
 function updateFov() {
-  const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * deepU.value;
+  const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * fovT();
   if (Math.abs(camera.fov - want) < FOV_STEP) return;
   // 換鏡頭前先記下要看到多少地表，換完把 zoom 調回同樣的涵蓋度。
   // 不補償的話，視角一窄畫面就會自己往裡縮，使用者會覺得縮放失控。
