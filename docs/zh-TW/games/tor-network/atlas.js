@@ -240,6 +240,20 @@ function deepT() {
   return clamp((DEEP_HI - (camera.position.z - R)) / (DEEP_HI - DEEP_LO), 0, 1);
 }
 
+// 台灣那一圈粗輪廓換成縣市界的交接，用自己的一條曲線，比 deepU 早。
+//
+// 兩件事該分開。deepU 管的是大氣層、極光那些太空視角專屬的層什麼時候退場，那要等到
+// 真的很貼近地表。而粗輪廓跟細輪廓的矛盾出現得早得多：台灣高約 3.5 度，畫面涵蓋
+// 35 度的時候它就有九十幾個像素高，那個 9 點的八邊形跟實測輪廓錯開多少已經看得出來。
+//
+// 兩層共用這一條，一個往下淡出一個往上淡入，交接才會是一次乾淨的替換。用同一條
+// deepU 的話會出現兩個台灣同時半透明疊著的那一段。
+const SWAP_HI = 3.5;   // 離地高於這個值，只畫粗輪廓
+const SWAP_LO = 1.0;   // 低於這個值，只畫縣市界
+function twSwapT() {
+  return clamp((SWAP_HI - (camera.position.z - R)) / (SWAP_HI - SWAP_LO), 0, 1);
+}
+
 // 拖曳的靈敏度。每像素轉多少弧度，正比於相機到球面前緣的距離。
 //
 // 固定係數的話放大之後會失控：同樣一個弧度，鏡頭近時球面在螢幕上跑的距離大得多。
@@ -888,6 +902,8 @@ const TRUNK = [
   [[-33,-71.6],[-12,-77.1],[-11.07,-78.19],[-9.77,-78.78],[-7.23,-79.91],[-6.33,-81.27],[-4.75,-81.63],[-1.81,-80.99],[9,-79.5]],
 ];
 const TRUNK_OP = 0.20;   // 走廊示意線在太空視角下的不透明度
+const BORDER_OP = 0.72;  // 國界
+const COAST_OP = 0.17;   // 海岸線
 let trunkMat = null;
 
 function buildTrunks() {
@@ -1008,17 +1024,26 @@ function buildTwAdmin(admin) {
   globe.add(new THREE.LineSegments(g, twAdminMat));
 }
 
+// 國界同樣分兩份。台灣那一圈是 9 個點的八邊形，貼近了跟縣市界對不上，要退場。
+// 這裡靠 c.k === 'tw' 直接挑，比座標比對更直接。
+let borderTwMat = null;
 function buildBorders(world) {
   if (!world) return;
   // 高度壓在海岸線（1.004）之下。沿海國家的國界跟海岸線本來就重疊，讓海岸線畫在上面，
   // 重疊處看到的是比較亮的那條，海陸交界仍然是最清楚的線。
-  const pos = ringSegments(world, (c) => !!c.k, R * 1.0036);
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-  // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
-  // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
-  const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: 0.72, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  const mk = (pick) => {
+    const pos = ringSegments(world, pick, R * 1.0036);
+    if (!pos.length) return null;
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+    // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
+    // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
+    const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: BORDER_OP, depthWrite: false });
+    globe.add(new THREE.LineSegments(g, m));
+    return m;
+  };
+  mk((c) => !!c.k && c.k !== 'tw');
+  borderTwMat = mk((c) => c.k === 'tw');
 }
 
 function buildBlocked(world) {
@@ -1523,21 +1548,54 @@ function rescaleLanding(k) {
   landingMesh.instanceMatrix.needsUpdate = true;
 }
 
-function buildCoastline(coast) {
+// 台灣那一圈粗輪廓的頂點。countries.json 裡的台灣只有 9 個點，continents.json 在
+// 那一帶的 8 條海岸線線段用的是同一組點，兩者畫出來是同一個歪掉的八邊形。
+//
+// 用頂點比對而不是畫一個框，因為框會誤傷。那一帶 117E 到 124E 之間還有三條線段是
+// 福建的海岸，框到就會把中國的海岸線一起弄不見，而那邊我們沒有更好的資料可以接手。
+// 比對頂點是精確的：這幾條線段本來就是同一份資料的同一組座標。
+function twOutlineKeys(world) {
+  const tw = world && world.c && world.c.find((c) => c.k === 'tw');
+  const set = new Set();
+  if (!tw) return set;
+  for (const ring of tw.p) {
+    for (let i = 0; i + 1 < ring.length; i += 2) set.add(`${ring[i]},${ring[i + 1]}`);
+  }
+  return set;
+}
+
+// 海岸線分兩份幾何：台灣那一段跟其他地方。
+//
+// 貼近台灣的時候，那 8 條線段畫出來的八邊形會橫跨整座島，跟縣市界那份 12,955 點的
+// 實測輪廓完全對不上，看起來像兩個台灣疊在一起。所以台灣那一段跟著 deepU 淡出，
+// 由縣市界接手，其他地方的海岸線一律不動。
+let coastTwMat = null;
+function buildCoastline(coast, world) {
   const seg = coast.seg;
   const n = seg.length / 4;
-  const pos = new Float32Array(n * 2 * 3);
+  const keys = twOutlineKeys(world);
   const v = new THREE.Vector3();
+  const main = [], twPart = [];
   for (let i = 0; i < n; i++) {
-    llToVec(seg[i * 4 + 1], seg[i * 4], R * 1.004, v);
-    pos[i * 6] = v.x; pos[i * 6 + 1] = v.y; pos[i * 6 + 2] = v.z;
-    llToVec(seg[i * 4 + 3], seg[i * 4 + 2], R * 1.004, v);
-    pos[i * 6 + 3] = v.x; pos[i * 6 + 4] = v.y; pos[i * 6 + 5] = v.z;
+    const x0 = seg[i * 4], y0 = seg[i * 4 + 1], x1 = seg[i * 4 + 2], y1 = seg[i * 4 + 3];
+    // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
+    const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
+    const out = isTw ? twPart : main;
+    llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
+    llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
   }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const m = new THREE.LineBasicMaterial({ color: COL.coast, transparent: true, opacity: 0.17, blending: THREE.AdditiveBlending, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  const mk = (arr, opacity) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(arr), 3));
+    const m = new THREE.LineBasicMaterial({
+      color: COL.coast, transparent: true, opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    globe.add(new THREE.LineSegments(g, m));
+    return m;
+  };
+  if (main.length) mk(main, COAST_OP);
+  if (twPart.length) coastTwMat = mk(twPart, COAST_OP);
 }
 
 // 射線法：點是否落在該國的任一個外環內
@@ -2553,8 +2611,12 @@ async function animate() {
   }
   camera.lookAt(0, 0, 0);
   deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
-  // LineBasicMaterial 不吃 node，這一層的淡入直接寫 opacity
-  if (twAdminMat) twAdminMat.opacity = deepU.value * 0.85;
+  // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
+  // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
+  const swap = twSwapT();
+  if (twAdminMat) twAdminMat.opacity = swap * 0.85;
+  if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
+  if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
   // 遠看時歐洲十幾個國家團擠在很小的螢幕範圍內，怎麼排都糊。讓點隨距離退成底噪，
@@ -2626,7 +2688,7 @@ async function main() {
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
-  if (coast) buildCoastline(coast);
+  if (coast) buildCoastline(coast, world);
   buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
   buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
