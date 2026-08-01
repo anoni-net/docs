@@ -2452,6 +2452,7 @@ function showCountry(cc) {
   const exitPct = (r[2] + r[3]) / t * 100;
   $('cc-code').textContent = cc.toUpperCase();
   $('cc-sub').textContent = S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) });
+  $('cc-bar').hidden = false;   // 設施卡片可能把它收起來過
   $('cc-bar').innerHTML = [2, 3, 1, 0]
     .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
     .join('');
@@ -2636,6 +2637,8 @@ function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 //
 // 輸電線是線段不是點，用 Raycaster 配 Line.threshold，那個本來就是為線設計的。
 // 線的優先序放最後，點壓在線上的時候應該選點。
+// 卡片上那條負載率比例條的滿格。全台最高 2.09，留一點餘裕。
+const CARD_R_MAX = 2.2;
 const PICK_PX = 16;        // 點的命中半徑（像素）
 const PICK_LINE = 0.035;   // 線的命中門檻（世界單位）
 const pickRay = new THREE.Raycaster();
@@ -2729,7 +2732,31 @@ function showFeature(hit) {
   }
   $('cc-code').textContent = code;
   $('cc-sub').textContent = sub;
-  $('cc-bar').innerHTML = '';   // 這張卡沒有角色比例條，清掉上一次國家卡片留下的
+  // 那條比例條要嘛有內容要嘛整條收掉。留一條空的會變成一截灰軌，看起來像壞掉的
+  // 進度條，實際上是上一張國家卡片留下的空殼。
+  const bar = $('cc-bar');
+  const hex = (n) => '#' + n.toString(16).padStart(6, '0');
+  if (bar) {
+    let html = '';
+    if (hit.kind === 'sub' && !d.solo && d.ratio !== null) {
+      // 分兩段：可靠容量以內的部分與超出的部分。兩段的交界就是 100%，
+      // 有沒有越線一眼看得出來，不必另外畫刻度。
+      //
+      // 滿格用 CARD_R_MAX 而不是地圖色階的 POW_R_HI。色階的上限是為了跨站比較，
+      // 1.4 以上一律同色沒關係。但卡片講的是這一座，撞頂的話 182% 跟 147% 會長得
+      // 一模一樣。實測全台的負載率最高 2.09，取 2.2 讓每一座都分得出來。
+      const okW = Math.min(d.ratio, 1) / CARD_R_MAX * 100;
+      const overW = Math.max(0, Math.min(d.ratio, CARD_R_MAX) - 1) / CARD_R_MAX * 100;
+      html = `<span style="width:${okW.toFixed(1)}%;background:${hex(COL.powLo)}"></span>`
+        + (overW > 0 ? `<span style="width:${overW.toFixed(1)}%;background:${hex(COL.powHi)}"></span>` : '');
+    } else if (hit.kind === 'plant' && d.cap > 0) {
+      // 當下出力佔裝置容量多少
+      const w = clamp(d.out / d.cap, 0, 1) * 100;
+      html = `<span style="width:${w.toFixed(1)}%;background:${hex(COL.plant)}"></span>`;
+    }
+    bar.innerHTML = html;
+    bar.hidden = !html;
+  }
   $('cc-body').innerHTML = body;
   card.hidden = false;
 }
