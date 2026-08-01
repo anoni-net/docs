@@ -25,9 +25,22 @@ Overpass 是志工營運的公共服務，這支腳本刻意分區慢慢抓並�
   communication=landing_point    0
 
 另外直接看台灣周邊（18-28N、115-128E）47 條海纜 way 的標籤，也沒有任何登陸點的痕跡。
-登陸點座標是 TeleGeography 商品的一部分，跟纜線幾何一樣沒有進 OSM，理由見
-blog/posts/games-globe-open-data.md 記的那段授權不相容。要做只能自己從公開的登陸地點
-清單手繪，性質會變成跟 TRUNK 一樣的示意，不是實測資料。
+登陸點座標跟纜線幾何一樣沒有進 OSM，理由見 blog/posts/games-globe-open-data.md 記的
+那段授權不相容。要做只能自己從公開的登陸地點清單手繪，性質會變成跟 TRUNK 一樣的示意，
+不是實測資料。
+
+補充（2026-08-01 查到的更精確狀況）：TeleGeography 曾經在 GitHub 公開整份 GeoJSON，
+repo 是 `telegeography/www.submarinecablemap.com`，路徑 `web/public/api/v3/` 下有
+`cable-geo.json` 與 `landing-point-geo.json`。那份的 LICENSE 是 CC BY-NC-SA 3.0。
+現在該 repo 與整個 GitHub org 都回 404，官網 FAQ 也改成地圖圖片 CC BY-SA 4.0、
+geocoded 資料另外付費授權。也就是說開放版本存在過，後來被收回。
+
+網路上找得到 2022 年的 fork（`lintaojlu/submarine_cable_information`），內容完整，
+1335 個登陸點，台灣 6 個（Toucheng、Tanshui、Fangshan、Pa Li、Guningtou、Lake Ci），
+505 個 cable JSON。fork 帶著原始的 CC BY-NC-SA 3.0 LICENSE 檔。CC 授權對已散布的
+副本不可撤回，所以法律上大概站得住，但有三個實際問題。NC 條款的商業定義模糊，
+SA 3.0 的 copyleft 會傳染到我們的衍生檔，資料停在 2022 年。加上原始權利人明顯是
+刻意收回的，用它等於逆著對方的意思走。要用之前先想清楚願不願意承擔這些。
 
 === 已知偏差：混到電力海纜 ===
 
@@ -38,6 +51,43 @@ blog/posts/games-globe-open-data.md 記的那段授權不相容。要做只能�
 在「海面不要一片空白」的定位下這個偏差可以接受，但畫面文案說的是海底電纜，嚴格講
 不夠精確。要修的話在 overpass() 的查詢加上排除 power，或改成只收帶 communication /
 telecom:medium 的那些，代價是線更少、太平洋更空。動之前先想清楚要哪一種。
+
+=== 查過但行不通：用 BGP 推測海纜 ===
+
+2026-08-01 查證，結論是 BGP 推不出海纜，別再花時間。分兩個層次講。
+
+推路線幾何：學術界確實有 Bischof 2018（HotNets）、Nautilus 2023（SIGMETRICS）、
+Calypso 2025（SIGCOMM）這條線的工作，但它們做的是把 IP 連線「對應到」某條已知海纜，
+主力訊號是 traceroute 的 RTT 與地理可行性，BGP 只是配角。而且三者都需要一份現成的
+海纜清單與登陸點座標當輸入。Nautilus 論文的參考文獻 `[12]` 直接指向上面那個已經
+404 的 TeleGeography repo。這條路的前提資料就是我們原本卡住的東西。
+
+偵測斷纜：這個方向合理，但實測訊號比想像中弱很多。拿 2025-09-06 紅海 SMW4/IMEWE
+斷纜當已知事件驗過兩種做法。
+
+一、RouteViews 新加坡 collector 的 MRT，事件當下 22:30-23:15 UTC 對照一週前同時段，
+UPDATE 訊息 508,344 對 430,407（×1.18），撤回前綴 52,059 對 41,966（×1.24），
+都在日常波動範圍內。逐 ASN 看更亂，Airtel 行動 ×96 但 Reliance Jio ×0.0，
+而完全無關的對照組中華電信 `AS3462` 是 ×6.2，比多數受影響的 ASN 還高。
+單一 collector 加短時窗的 churn 量，雜訊蓋過訊號。
+
+二、IODA 的 BGP 可見度（這個指標本來就是為偵測斷網設計的），2025-08-30 到 09-14
+逐日看，巴基斯坦、阿聯全平，印度只從 160,250 掉到 160,064，也就是 0.1%。
+
+原因很單純。BGP 看的是「連不連得上」，海纜斷掉通常只是繞路變慢，前綴照樣宣告著。
+要讓 BGP 可見度真的掉下來，得是整國斷網那種等級。Anurag Bhatia 2025-09 那篇用
+IXP looking glass 的路由數確實抓得到大事件，但他自己寫明認不出是哪一條纜，
+而且 Tier-1 因為 peering policy 會維持一致路由，斷在他們身上完全看不見。
+
+授權方面順手查了，備忘。RouteViews 原始 MRT 是 CC BY 4.0，可以用，
+但要 `mrtparse` 這類套件解析（純 python、Apache-2.0），且單一 collector 一天約
+96 個檔、260 MB，超出 publish_games_data.sh 只靠 python3 與 curl 的規模。
+RIPEstat 的條款明文寫 `A User may not re-package, compile, re-distribute`，不能收。
+IODA 的 API 回應裡 copyright 是 `All Rights Reserved`（Georgia Tech Research
+Corporation），也不能收。
+
+真正可行的組合還是現在這個方向。BGP 那半我們拿不到也不需要，moda 的維修表已經
+直接給了「哪一條纜、什麼原因、修復進度」，那是 BGP 推不出來的資訊。
 
 用法：
   python3 tools/gen_cables.py [輸出路徑]
