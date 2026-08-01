@@ -203,6 +203,26 @@ function fitDist() {
   return R * 1.18 / Math.sin(Math.min(vFov, hFov) / 2);
 }
 function targetDist() { return fitDist() * view.zoom; }
+
+// 拖曳的靈敏度。每像素轉多少弧度，正比於相機到球面前緣的距離。
+//
+// 固定係數的話放大之後會失控：同樣一個弧度，鏡頭近時球面在螢幕上跑的距離大得多。
+// 實測桌機從 zoom 1.0 拉到 0.42，同樣的拖曳在螢幕上的位移差了七倍，手指動一點點
+// 地球就飛過去。
+//
+// 螢幕位移正比於 R / (d - R)，其中 d 是相機距離。所以角度要正比於 (d - R) 才會抵銷，
+// 拖一個像素、球面就跟著走固定的像素數，不論縮到多近。
+//
+// 基準取 zoom = 1（fitDist - R），那是進場時的距離，係數維持原本調好的 0.006，
+// 預設視角的手感不變，只有放大縮小時才修正。
+//
+// 用 camera.position.z 而不是 targetDist()，因為 animate 是平滑趨近目標距離的，
+// 拖曳當下看到的是相機實際在哪，靈敏度要跟畫面一致而不是跟目標值一致。
+const DRAG_K = 0.006;
+function dragRate() {
+  const ref = Math.max(1e-3, fitDist() - R);
+  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref;
+}
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
@@ -2262,7 +2282,8 @@ function bindControls(dom) {
       return;
     }
     if (!last) return;
-    const dry = (e.clientX - last.x) * 0.006, drx = (e.clientY - last.y) * 0.006;
+    const k = dragRate();
+    const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
