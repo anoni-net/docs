@@ -65,8 +65,15 @@ const harness = `
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const ZOOM_MIN = 0.42, ZOOM_MAX = 1.6;
   const dragRate = () => ${DRAG_K};
-  const stopSpin = () => {};
-  const pauseSpin = () => {};
+  // bindControls 現在會去抓「繼續轉動」那顆按鈕並掛 click，這裡給個假的 DOM 查詢。
+  // 抓不到就回 null，bindControls 有做防呆，兩條路都要能跑。
+  let spinOn = true;
+  const btn = { hidden: true, addEventListener: () => {} };
+  const $ = (id) => (id === 'btn-spin' ? btn : null);
+  const REDUCED = false;
+  const setSpin = (on) => { spinOn = on; btn.hidden = on; };
+  const stopSpin = () => setSpin(false);
+  const pauseSpin = () => setSpin(false);
   ${body}
   const H = {};
   const dom = {

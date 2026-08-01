@@ -98,6 +98,7 @@ function applyI18n() {
   set('loading', 'loading');
   set('hint-wide', 'hintWide');
   set('hint-narrow', 'hintNarrow');
+  set('btn-spin', 'btnSpin');
   set('hint-close', 'hintClose');
   set('backend', 'backendDetecting');
   const bu = $('btn-users');
@@ -2877,6 +2878,14 @@ function bindControls(dom) {
   for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
     document.addEventListener(g, (e) => e.preventDefault(), { passive: false });
   }
+  const spinBtn = $('btn-spin');
+  if (spinBtn) {
+    spinBtn.addEventListener('click', () => {
+      setSpin(true);
+      spin.rx = spin.ry = 0; // 別讓上一次拖曳殘留的滑行速度疊在自轉上
+    });
+  }
+
   // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字
   dom.addEventListener('dblclick', (e) => e.preventDefault());
   dom.addEventListener('wheel', (e) => {
@@ -2890,9 +2899,25 @@ function bindControls(dom) {
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
-let spinTimer = 0;
-function stopSpin() { view.spin = false; clearTimeout(spinTimer); }
-function pauseSpin() { stopSpin(); spinTimer = setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); }
+// 自轉的開關。
+//
+// 原本是放開之後三秒半自己轉回來。那個在使用者只是想看一眼的時候還行，但要對著
+// 台灣看縣市或變電所的時候很煩：手一離開就開始飄，得一直重新對位。
+//
+// 改成一動就停，而且停住不自己恢復，改用一顆按鈕明講。停的時候按鈕出現，
+// 按下去恢復自轉、按鈕收起來。
+//
+// REDUCED（prefers-reduced-motion）下本來就不自轉，那顆按鈕也不該出現，
+// 否則按了什麼都不會動。
+function setSpin(on) {
+  view.spin = on && !REDUCED;
+  const b = $('btn-spin');
+  if (b) b.hidden = view.spin || REDUCED;
+}
+function stopSpin() { setSpin(false); }
+// 名字保留。呼叫端的語意是「使用者動了，別再自己轉」，跟 stopSpin 一樣，
+// 但保留兩個名字讓呼叫處讀得出當初的意圖（按下去 vs 放開）。
+function pauseSpin() { setSpin(false); }
 
 let prevNow = performance.now();
 async function animate() {

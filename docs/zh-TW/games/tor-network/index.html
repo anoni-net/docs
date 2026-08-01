@@ -215,7 +215,9 @@
     .title-row::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--toggle-w, auto); text-align: center; }
     #info:not([open]) .title-row::after { content: var(--toggle-closed, '▸ 詳情'); }
     .body { margin-top: 3px; }
-    #big { margin-top: 9px; font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
+    /* flex 是給「繼續轉動」用的，它靠 margin-left:auto 推到這一行的右端 */
+    #big { margin-top: 9px; font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1;
+           display: flex; align-items: baseline; gap: 6px; }
     #big small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
     #pub { color: var(--muted); font-size: 11px; margin: 3px 0 10px; }
     .row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
@@ -307,6 +309,18 @@
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
+    /* 繼續轉動。使用者一動地球就停下來，這顆才出現，按了就消失。
+       不做成浮在地球上的按鈕：試過左下角，被展開的面板蓋住吃掉點擊，而手機上
+       面板寬 340px、高到貼齊下緣，畫面四角沒有一處是面板不會覆蓋的。
+       放在面板裡就不會被蓋，收合時那兩列也還看得到。
+       擺第二列不擺標題列，因為標題列已經有即時更新與收合兩顆，再塞一顆會把
+       標題擠成「Tor 中...」。中繼台數那一行右邊是空的。 */
+    #btn-spin { margin-left: auto; align-self: center; flex: none;
+                font: inherit; font-size: 11px; font-weight: 700; line-height: 1;
+                padding: 3px 9px; border-radius: 999px; cursor: pointer;
+                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-spin[hidden] { display: none; }
+    #btn-spin:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
     #fatal[hidden] { display: none; }
     #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
@@ -421,7 +435,7 @@
     <details id="info" open>
       <summary id="title">
         <div class="title-row"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" disabled>即時更新</button></div>
-        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
+        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small><button id="btn-spin" type="button" hidden>繼續轉動</button></div>
       </summary>
       <div class="body">
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
@@ -502,7 +516,7 @@
   <div id="loading">載入中…</div>
 
   <div id="hint" class="panel">
-    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤</span>
     <span class="narrow" id="hint-narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
     <span id="hint-close">知道了</span>
   </div>
