@@ -351,12 +351,19 @@ function zoomForCover(deg) {
 function updateFov() {
   const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * deepU.value;
   if (Math.abs(camera.fov - want) < FOV_STEP) return;
-  // 換鏡頭前先記下現在看到多少地表，換完把 zoom 調回同樣的涵蓋度。
+  // 換鏡頭前先記下要看到多少地表，換完把 zoom 調回同樣的涵蓋度。
   // 不補償的話，視角一窄畫面就會自己往裡縮，使用者會覺得縮放失控。
+  //
+  // 這裡要拿「目標距離」的涵蓋度，不是相機當下位置的。相機是平滑趨近目標的，
+  // 滾輪剛改完 view.zoom 的那幾幀相機還沒動到位，用當下位置算的話等於每一幀都把
+  // view.zoom 拉回相機現在所在的地方，滾輪的輸入就被抵消掉了。
+  //
+  // 實測那個 bug 的樣子：視角開始收窄之前每四格滾輪涵蓋度縮 1.45 倍，之後掉到
+  // 1.10 倍，滾很多圈才動一點。
   //
   // 飛行目標也要一起換算，而且要在改 fov 之前先用舊的 fov 算出它的涵蓋度，
   // 改完之後再解回新的 zoom。順序反過來的話等於原地繞一圈，什麼都沒補到。
-  const keep = coverDeg();
+  const keep = coverDeg(targetDist());
   const flyKeep = fly ? coverDeg(R + (fitDist() - R) * fly.zoom) : null;
   camera.fov = want;
   camera.updateProjectionMatrix();
