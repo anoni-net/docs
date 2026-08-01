@@ -80,7 +80,9 @@ const harness = `
     addEventListener: (t, f) => { (H[t] = H[t] || []).push(f); },
     setPointerCapture: () => {},
   };
-  globalThis.document = { addEventListener: () => {} };
+  // bindControls 會掃 [data-use] 掛切換鈕的 click，這裡沒有 DOM，回空陣列就好。
+  // 這支只驗拖曳與捏合的狀態機，不驗那些按鈕。
+  globalThis.document = { addEventListener: () => {}, querySelectorAll: () => [] };
   bindControls(dom);
   return {
     fire: (t, e) => (H[t] || []).forEach((f) => f(e)),
