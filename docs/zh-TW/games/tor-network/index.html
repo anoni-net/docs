@@ -321,6 +321,15 @@
                 border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
     #btn-spin[hidden] { display: none; }
     #btn-spin:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    /* 台灣專區。用一條左側細線與縮排跟上面的全球資料分開，不另外加背景框，
+       面板本來就已經有一層框了，再套一層會太重。 */
+    #tw-group { margin: 12px 0 4px; padding-left: 9px; border-left: 2px solid rgba(0,174,255,.35); }
+    #tw-head { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; }
+    #tw-title { font-size: 12.5px; font-weight: 800; color: var(--ink); letter-spacing: .5px; }
+    #btn-tw { margin-left: auto; flex: none; font: inherit; font-size: 11px; font-weight: 700;
+              line-height: 1; padding: 4px 10px; border-radius: 999px; cursor: pointer;
+              border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-tw:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
     #fatal[hidden] { display: none; }
     #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
@@ -463,18 +472,28 @@
         <div class="lbl" id="lbl-shutdown">網路被整個關掉的地方（Access Now 紀錄）</div>
         <div id="stat-shutdown"></div>
         <div id="shutdown-note"></div>
-        <div class="lbl" id="lbl-seacable">連到台灣的海纜障礙（數位發展部）</div>
-        <div id="stat-seacable"></div>
-        <div id="seacable-note"></div>
-        <div class="lbl" id="lbl-grid">台灣的發電與電網骨幹（台電）</div>
-        <div id="stat-grid"></div>
-        <div id="grid-note"></div>
-        <div class="lbl" id="lbl-power">台灣的變電所負載（台電）</div>
-        <div id="stat-power"></div>
-        <div id="power-note"></div>
-        <div class="lbl" id="lbl-landing">台灣的海纜登陸點（自建資料）</div>
-        <div id="stat-landing"></div>
-        <div id="landing-note"></div>
+        <!-- 台灣專區。這幾層跟上面那些全球資料的性質不同：範圍只有台灣，而且要放大到
+             台灣才畫得出來，所以集中在一起並給一個帶按鈕的標頭，按了直接飛過去。
+             區塊順序照「電從哪來、怎麼送、怎麼出海」排：發電與電網骨幹、變電所、
+             海纜登陸點、海纜障礙。 -->
+        <div id="tw-group">
+          <div id="tw-head">
+            <span id="tw-title">台灣</span>
+            <button id="btn-tw" type="button">關注台灣</button>
+          </div>
+          <div class="lbl" id="lbl-grid">台灣的發電與電網骨幹（台電）</div>
+          <div id="stat-grid"></div>
+          <div id="grid-note"></div>
+          <div class="lbl" id="lbl-power">台灣的變電所負載（台電）</div>
+          <div id="stat-power"></div>
+          <div id="power-note"></div>
+          <div class="lbl" id="lbl-landing">台灣的海纜登陸點（自建資料）</div>
+          <div id="stat-landing"></div>
+          <div id="landing-note"></div>
+          <div class="lbl" id="lbl-seacable">連到台灣的海纜障礙（數位發展部）</div>
+          <div id="stat-seacable"></div>
+          <div id="seacable-note"></div>
+        </div>
         <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。</div>
         <div id="gap"></div>
         <div id="credit">

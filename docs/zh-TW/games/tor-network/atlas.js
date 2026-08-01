@@ -76,6 +76,8 @@ function applyI18n() {
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
   set('lbl-seacable', 'lblSeacable');
+  set('tw-title', 'twTitle');
+  set('btn-tw', 'btnTw');
   set('lbl-grid', 'lblGrid');
   set('lbl-power', 'lblPower');
   set('lbl-landing', 'lblLanding');
@@ -261,6 +263,66 @@ const DEEP_LO = 0.35;  // 低於這個值，完全是地圖視角
 const deepU = uniform(0);
 function deepT() {
   return clamp((DEEP_HI - (camera.position.z - R)) / (DEEP_HI - DEEP_LO), 0, 1);
+}
+
+// 「關注台灣」的飛行定位。
+//
+// 目標經緯度是台灣本島的中心。涵蓋度用解的不用寫死 zoom，因為 zoom 是相對於
+// fitDist 的倍率，而 fitDist 隨畫面長寬比變動很大（桌機 15.4、手機直式 31.4）。
+// 同一個 zoom 在兩種螢幕上看到的地表範圍差好幾倍，寫死的話手機會太遠或桌機會太近。
+//
+// 5.5 度大約是本島填滿畫面、澎湖還看得到的程度。要連馬祖與金門一起入鏡得拉到 8 度
+// 以上，那時本島就變小了，取捨之後選前者。
+const TW_LAT = 23.75, TW_LON = 121.0;
+// 要框住的地表範圍。本島南北 3.6 度、東西 2.0 度，各留一點邊。
+// 東西給到 3.0 度是為了讓澎湖（119.5E，離中心 1.5 度）留在畫面裡。
+const TW_SPAN_LAT = 4.6, TW_SPAN_LON = 3.0;
+
+/** 讓畫面至少涵蓋 latDeg 的南北與 lonDeg 的東西所需的 zoom。
+ *
+ * 不能只看短邊。直式手機的短邊是寬度，而台灣是南北狹長的島，照短邊框會把島縮得
+ * 很小（實測只佔畫面高度的三成）。反過來只看高度的話，直式手機的水平視野會窄到
+ * 把澎湖切掉。所以兩個方向各解一次，取比較遠的那個，兩邊都框得住。
+ *
+ * 涵蓋度沒有解析反函數，用二分。
+ */
+function zoomForExtent(latDeg, lonDeg) {
+  const vFov = camera.fov * Math.PI / 180;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  const f = fitDist();
+  const solve = (halfFov, deg) => {
+    const cov = (d) => {
+      const disc = d * d * Math.cos(halfFov) ** 2 - d * d + R * R;
+      if (disc < 0) return 999;                      // 視線掃出球外，整顆入鏡
+      const t = d * Math.cos(halfFov) - Math.sqrt(disc);
+      return 2 * Math.asin(Math.min(1, t * Math.sin(halfFov) / R)) * 180 / Math.PI;
+    };
+    let lo = ZOOM_MIN, hi = 1;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (cov(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
+    }
+    return (lo + hi) / 2;
+  };
+  // 兩個方向都要滿足，取比較遠的（zoom 較大的）那一個
+  return clamp(Math.max(solve(vFov / 2, latDeg), solve(hFov / 2, lonDeg)), ZOOM_MIN, ZOOM_MAX);
+}
+
+// 飛行中的目標。null 代表沒有在飛。
+let fly = null;
+function flyTo(lat, lon, spanLat, spanLon) {
+  // ry 是繞 Y 軸的角度，正負無界。目標要換算到離現在最近的那一圈，
+  // 否則從 ry = 7.5 飛到 -0.6 會沿著長邊繞大半圈。
+  const wantRy = -lon * Math.PI / 180 - Math.PI / 2;
+  const k = Math.round((view.ry - wantRy) / (Math.PI * 2));
+  fly = {
+    ry: wantRy + k * Math.PI * 2,
+    rx: clamp(lat * Math.PI / 180, -1.2, 1.2),
+    zoom: zoomForExtent(spanLat, spanLon),
+  };
+  setSpin(false);              // 飛過去之後不該又自己轉走
+  spin.rx = spin.ry = 0;
+  hideCountry();
 }
 
 // 台灣那一圈粗輪廓換成縣市界的交接，用自己的一條曲線，比 deepU 早。
@@ -2987,6 +3049,9 @@ function bindControls(dom) {
   for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
     document.addEventListener(g, (e) => e.preventDefault(), { passive: false });
   }
+  const twBtn = $('btn-tw');
+  if (twBtn) twBtn.addEventListener('click', () => flyTo(TW_LAT, TW_LON, TW_SPAN_LAT, TW_SPAN_LON));
+
   const spinBtn = $('btn-spin');
   if (spinBtn) {
     spinBtn.addEventListener('click', () => {
@@ -3003,6 +3068,7 @@ function bindControls(dom) {
     const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
     const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
     view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    fly = null;
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
   }, { passive: false });
 }
@@ -3032,6 +3098,22 @@ let prevNow = performance.now();
 async function animate() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
+  // 飛行定位。三個量一起用同一個係數趨近，到位就把 fly 清掉交還給使用者。
+  // 0.09 比相機距離的 0.12 慢一點，轉動與縮放同時發生時看起來比較穩。
+  // REDUCED 下直接跳過去，那個模式的使用者不想看到大幅度的動畫。
+  if (fly) {
+    if (REDUCED) {
+      view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
+    } else {
+      view.ry += (fly.ry - view.ry) * 0.09;
+      view.rx += (fly.rx - view.rx) * 0.09;
+      view.zoom += (fly.zoom - view.zoom) * 0.09;
+      if (Math.abs(fly.ry - view.ry) < 1e-3 && Math.abs(fly.rx - view.rx) < 1e-3
+          && Math.abs(fly.zoom - view.zoom) < 1e-4) {
+        view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
+      }
+    }
+  }
   if (view.spin && !REDUCED) view.ry += dt * 0.06;
   else if (!REDUCED && pointers.size === 0 && (Math.abs(spin.ry) > 2e-4 || Math.abs(spin.rx) > 2e-4)) {
     view.ry += spin.ry;
@@ -3222,6 +3304,7 @@ async function main() {
   let pressAt = null;
   renderer.domElement.addEventListener('pointerdown', (e) => {
     hideCountry();
+    fly = null;   // 使用者接手，飛行中途也要能打斷
     pressAt = { x: e.clientX, y: e.clientY, t: performance.now() };
   });
   renderer.domElement.addEventListener('pointerup', (e) => {
