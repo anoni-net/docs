@@ -258,11 +258,28 @@ function targetDist() { return R + (fitDist() - R) * view.zoom; }
 // R*1.045，相機低於那個高度會鑽進殼裡。極光的簾幕頂端到 R*1.172，示意路徑的弧線
 // 最高拱到 R*1.2。反過來縣市界線只有貼近了才有意義，遠看是一團糾結的線。
 // 兩邊都吃這一個值，一個往下淡出、一個往上淡入。
-const DEEP_HI = 1.5;   // 離地高於這個值，完全是太空視角
-const DEEP_LO = 0.35;  // 低於這個值，完全是地圖視角
+// 畫面短邊涵蓋多少度地表。所有「現在算遠看還是近看」的判斷都吃這個值。
+//
+// 原本這幾個轉換是用離地高度判斷的，改掉是因為深處要縮窄視角讓畫面變平，而縮窄
+// 視角之後同樣的涵蓋度需要站得更遠。用高度判斷的話會變成：視角一窄、高度就升，
+// 判斷就退回遠看，視角又放寬，來回震盪。改用涵蓋度就沒有這個回饋，而且「螢幕上
+// 看得到多少地表」本來就比「離地多高」更貼近這幾個轉換真正想表達的事。
+function coverDeg(dist) {
+  const d = dist === undefined ? camera.position.z : dist;
+  const vFov = camera.fov * Math.PI / 180;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  const th = Math.min(vFov, hFov) / 2;
+  const disc = d * d * Math.cos(th) ** 2 - d * d + R * R;
+  if (disc < 0) return 180;                       // 視線掃出球外，整顆入鏡
+  const t = d * Math.cos(th) - Math.sqrt(disc);
+  return 2 * Math.asin(Math.min(1, t * Math.sin(th) / R)) * 180 / Math.PI;
+}
+
+const DEEP_HI = 14.7;  // 短邊涵蓋大於這麼多度，完全是太空視角
+const DEEP_LO = 3.3;   // 小於這麼多度，完全是地圖視角
 const deepU = uniform(0);
 function deepT() {
-  return clamp((DEEP_HI - (camera.position.z - R)) / (DEEP_HI - DEEP_LO), 0, 1);
+  return clamp((DEEP_HI - coverDeg()) / (DEEP_HI - DEEP_LO), 0, 1);
 }
 
 // 「關注台灣」的飛行定位。
@@ -308,6 +325,45 @@ function zoomForExtent(latDeg, lonDeg) {
   return clamp(Math.max(solve(vFov / 2, latDeg), solve(hFov / 2, lonDeg)), ZOOM_MIN, ZOOM_MAX);
 }
 
+// 貼近地表時把鏡頭從廣角換成望遠，畫面就會平掉。
+//
+// 45 度廣角貼在球面上看，畫面上下緣那條視線打到地表時的入射角是 24.8 度，很斜，
+// 讀起來就是一顆球。同樣涵蓋南北 4.6 度，把視角縮到 18 度、相機退到三倍遠之後，
+// 入射角剩 11.3 度，接近正射，看起來就是一張平面地圖。
+//
+// 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦，所以
+// 換視角的同時要補償 zoom，讓涵蓋度不變，否則按下「關注台灣」之後畫面會自己再縮一段。
+const FOV_FAR = 45;    // 太空視角
+const FOV_NEAR = 18;   // 地圖視角
+const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
+
+/** 解出在現在的 fov 與長寬比下，短邊涵蓋 deg 度所需的 zoom */
+function zoomForCover(deg) {
+  const f = fitDist();
+  let lo = ZOOM_MIN, hi = ZOOM_MAX;
+  for (let i = 0; i < 50; i++) {
+    const mid = (lo + hi) / 2;
+    if (coverDeg(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
+  }
+  return clamp((lo + hi) / 2, ZOOM_MIN, ZOOM_MAX);
+}
+
+function updateFov() {
+  const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * deepU.value;
+  if (Math.abs(camera.fov - want) < FOV_STEP) return;
+  // 換鏡頭前先記下現在看到多少地表，換完把 zoom 調回同樣的涵蓋度。
+  // 不補償的話，視角一窄畫面就會自己往裡縮，使用者會覺得縮放失控。
+  //
+  // 飛行目標也要一起換算，而且要在改 fov 之前先用舊的 fov 算出它的涵蓋度，
+  // 改完之後再解回新的 zoom。順序反過來的話等於原地繞一圈，什麼都沒補到。
+  const keep = coverDeg();
+  const flyKeep = fly ? coverDeg(R + (fitDist() - R) * fly.zoom) : null;
+  camera.fov = want;
+  camera.updateProjectionMatrix();
+  if (keep < 179) view.zoom = zoomForCover(keep);
+  if (fly && flyKeep !== null && flyKeep < 179) fly.zoom = zoomForCover(flyKeep);
+}
+
 // 飛行中的目標。null 代表沒有在飛。
 let fly = null;
 function flyTo(lat, lon, spanLat, spanLon) {
@@ -333,10 +389,10 @@ function flyTo(lat, lon, spanLat, spanLon) {
 //
 // 兩層共用這一條，一個往下淡出一個往上淡入，交接才會是一次乾淨的替換。用同一條
 // deepU 的話會出現兩個台灣同時半透明疊著的那一段。
-const SWAP_HI = 3.5;   // 離地高於這個值，只畫粗輪廓
-const SWAP_LO = 1.0;   // 低於這個值，只畫縣市界
+const SWAP_HI = 36;    // 短邊涵蓋大於這麼多度，只畫粗輪廓
+const SWAP_LO = 9.7;   // 小於這麼多度，只畫縣市界
 function twSwapT() {
-  return clamp((SWAP_HI - (camera.position.z - R)) / (SWAP_HI - SWAP_LO), 0, 1);
+  return clamp((SWAP_HI - coverDeg()) / (SWAP_HI - SWAP_LO), 0, 1);
 }
 
 // 拖曳的靈敏度。每像素轉多少弧度，正比於相機到球面前緣的距離。
@@ -3134,6 +3190,7 @@ async function animate() {
   }
   camera.lookAt(0, 0, 0);
   deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
+  updateFov();           // 貼近地表時換成望遠鏡頭，畫面才會平
   // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
   // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
   const swap = twSwapT();
