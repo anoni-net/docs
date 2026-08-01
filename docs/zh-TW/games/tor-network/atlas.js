@@ -2422,13 +2422,32 @@ const LABEL_ALWAYS = ['tw'];
 function buildLabels(snap) {
   const box = $('labels');
   if (!box) return;
-  const list = snap.countries || snap.topCountries || [];
+  const relayList = snap.countries || snap.topCountries || [];
+  // 有中繼的排前面（照台數），後面接上「沒有中繼但別的資料裡有」的那些。
+  //
+  // 只用中繼決定標籤的話，這個站真正在講的那幾個地方會整批消失：實測 OONI 有觀測
+  // 但沒有中繼的 95 國、有斷網紀錄但沒有中繼的 35 國，伊朗、緬甸、敘利亞都在裡面。
+  // 點不到國碼就看不到那些資訊，等於資料在檔案裡但使用者拿不到。
+  //
+  // 後面那批照使用者數排，人多的先卡位。標籤本來就有碰撞閃避與距離分級，
+  // 多出來的候選只是「放大之後才浮出來」，遠看的畫面不會變擠。
+  const seen = new Set(relayList.map(([cc]) => cc));
+  const extra = [];
+  for (const cc of ANCHOR.keys()) {
+    if (seen.has(cc) || NO_PLACE.has(cc) || !hasCountryData(cc)) continue;
+    extra.push([cc, 0]);
+  }
+  const users = (c) => (USERS_MAP && USERS_MAP.get(c)) || 0;
+  extra.sort((a, b) => users(b[0]) - users(a[0]));
+  const list = relayList.concat(extra);
   list.forEach(([cc, n], rank) => {
     const a = ANCHOR.get(cc);
     if (!a || NO_PLACE.has(cc)) return;
     const el = document.createElement('div');
     el.className = rank < 10 || LABEL_ALWAYS.includes(cc) ? 'lb' : 'lb sm'; // 前段用亮字，長尾壓暗
-    el.innerHTML = `${cc.toUpperCase()}<i>${n.toLocaleString()}</i>`;
+    // 沒有中繼就只留國碼。掛一個「0」會讓人以為那是量測到的數字，
+    // 實際上是「這裡沒有中繼」，而卡片裡才有它真正的內容。
+    el.innerHTML = cc.toUpperCase() + (n ? `<i>${n.toLocaleString()}</i>` : '');
     el.dataset.cc = cc;
     box.appendChild(el);
     const c = a.cl || a.ll;
@@ -2570,31 +2589,53 @@ function buildStats(snap) {
   CC_STATS = { mix, w, totalN, totalW, rankN, rankW, conc, cnt: cntByCC, exitShare: exitAll / totalN };
 }
 
+// 這個國家在中繼以外的資料裡有沒有東西。
+//
+// 中繼分布是這張圖的主軸，但不是唯一的內容。這個站真正在講的那些地方，
+// 伊朗、緬甸、敘利亞、北韓，全都沒有中繼，卻有 OONI 的連線受阻觀測與斷網紀錄。
+// 只用中繼決定「哪些國家點得到」，等於把最相關的那批國家鎖在畫面外。
+function hasCountryData(cc) {
+  if (OONI && OONI.cc && OONI.cc[cc] && OONI.cc[cc][0]) return true;
+  if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) return true;
+  if (TORUSERS && TORUSERS.bridge && (TORUSERS.bridge[cc] || []).length) return true;
+  return false;
+}
+
 function showCountry(cc) {
   const card = $('cc-card');
   if (!card || !CC_STATS) return;
   const r = CC_STATS.mix.get(cc);
-  if (!r) return;
-  const t = r[0] + r[1] + r[2] + r[3];
-  const wShare = (CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100;
-  const exitPct = (r[2] + r[3]) / t * 100;
+  // 沒有中繼也要開得起來，只要別的資料裡有它。全部都沒有才不開。
+  if (!r && !hasCountryData(cc)) return;
+  const t = r ? r[0] + r[1] + r[2] + r[3] : 0;
   $('cc-code').textContent = cc.toUpperCase();
-  $('cc-sub').textContent = S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) });
-  $('cc-bar').hidden = false;   // 設施卡片可能把它收起來過
-  $('cc-bar').innerHTML = [2, 3, 1, 0]
-    .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
-    .join('');
+  $('cc-sub').textContent = r
+    ? S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) })
+    : S('cardNoRelay');
+  // 角色比例條沒有中繼就沒有東西可畫，整條收掉而不是留一截空軌
+  $('cc-bar').hidden = !r;
+  if (r) {
+    $('cc-bar').innerHTML = [2, 3, 1, 0]
+      .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
+      .join('');
+  }
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
-  $('cc-body').innerHTML =
-    // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
-    S('cardShare', {
-      share: pct(t / CC_STATS.totalN * 100), w: pct(wShare), wrank: CC_STATS.rankW.get(cc),
-      exit: Math.round(exitPct), all: Math.round(CC_STATS.exitShare * 100),
+  // 中繼相關的那幾段沒有中繼就整批跳過，其餘（使用者、OONI、橋接、斷網）照樣接上
+  const relayPart = r
+    ? S('cardShare', {
+      share: pct(t / CC_STATS.totalN * 100),
+      w: pct((CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100),
+      wrank: CC_STATS.rankW.get(cc),
+      exit: Math.round((r[2] + r[3]) / t * 100), all: Math.round(CC_STATS.exitShare * 100),
     })
     + versionPart(cc)
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
+    : '';
+  $('cc-body').innerHTML =
+    // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
+    relayPart
     + usersLine(cc, t)
     + hostingLine(cc, t)
     + ooniLine(cc)

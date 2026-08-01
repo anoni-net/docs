@@ -132,6 +132,7 @@ const ZH_TW = {
   noteShutdown: '{y0} 到 {y1} 年間全球 {total} 筆紀錄，由 Access Now 的 #KeepItOn 聯盟人工查證。成因以武裝衝突 {conflict} 次最多，其次是抗議活動 {protest} 次與資訊管制 {info} 次。也有為了防止考試作弊 {exam} 次與官員視察期間 {visit} 次而關閉的紀錄。武裝衝突與族群衝突未必是政府主動下令，戰事打壞基礎設施也算在內，所以國家卡片另外標出屬於資訊管制類的件數。另外印度的紀錄多半是單一邦或單一地區的斷網，跟上面那些全國性受阻的情況性質不同。',
 
   // ---- 國家卡片 ----
+  cardNoRelay: '沒有運作中的中繼',
   cardSub: '{n} 台，台數排名第 {rank}',
   cardShare: '佔全網 <b>{share}%</b>，權重 <b>{w}%</b>（第 {wrank}），出口 <b>{exit}%</b>（全網 {all}%）',
   cardVersion: '，已安裝官方建議版本 <b>{ok}/{tot}</b>（{pct}%）',
@@ -311,6 +312,7 @@ const EN = {
   noteShutdown: '{total} records worldwide between {y0} and {y1}, verified by hand by the Access Now #KeepItOn coalition. Armed conflict is the most common cause at {conflict} events, followed by protests at {protest} and information control at {info}. There are also {exam} shutdowns to stop exam cheating and {visit} during visits by government officials. Armed conflict and communal violence are not necessarily ordered by a government, since infrastructure damaged in fighting counts too, which is why the country cards break out the information-control cases separately. India\'s records are also mostly state-level or district-level shutdowns, different in kind from the nationwide disruption listed above.',
 
   // ---- 國家卡片 ----
+  cardNoRelay: 'no relays running',
   cardSub: '{n} relays, ranked {rank} by count',
   cardShare: '<b>{share}%</b> of all relays, <b>{w}%</b> of weight (rank {wrank}), exit <b>{exit}%</b> (global {all}%)',
   cardVersion: ', recommended version installed on <b>{ok}/{tot}</b> ({pct}%)',
@@ -489,6 +491,7 @@ const ZH_CN = {
   noteShutdown: '{y0} 到 {y1} 年间全球 {total} 笔记录，由 Access Now 的 #KeepItOn 联盟人工查证。成因以武装冲突 {conflict} 次最多，其次是抗议活动 {protest} 次与信息管制 {info} 次。也有为了防止考试作弊 {exam} 次与官员视察期间 {visit} 次而关闭的记录。武装冲突与族群冲突未必是政府主动下令，战事打坏基础设施也算在内，所以国家卡片另外标出属于信息管制类的件数。另外印度的记录多半是单一邦或单一地区的断网，跟上面那些全国性受阻的情况性质不同。',
 
   // ---- 國家卡片 ----
+  cardNoRelay: '没有运作中的中继',
   cardSub: '{n} 台，台数排名第 {rank}',
   cardShare: '占全网 <b>{share}%</b>，权重 <b>{w}%</b>（第 {wrank}），出口 <b>{exit}%</b>（全网 {all}%）',
   cardVersion: '，已安装官方建议版本 <b>{ok}/{tot}</b>（{pct}%）',
