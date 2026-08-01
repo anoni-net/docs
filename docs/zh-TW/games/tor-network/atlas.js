@@ -2454,6 +2454,115 @@ function radarLine(cc) {
 
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 
+// ── 點台灣的設施看細節 ────────────────────────────────────────────
+//
+// 電廠、變電所、海纜登陸點都是 InstancedMesh 上的小點，畫在螢幕上只有幾個像素。
+// 用 Raycaster 對那些八面體做精確命中，實際上很難點得到，會變成一直點不中的挫折。
+//
+// 改成螢幕空間的最近命中：把候選點投影到畫面座標，取離游標最近且在門檻內的那一個。
+// 命中範圍固定是像素，不隨縮放變化，手感一致。判正反面沿用 updateLabels 那套
+// nearZ 門檻，背面的點不該被點到。
+//
+// 輸電線是線段不是點，用 Raycaster 配 Line.threshold，那個本來就是為線設計的。
+// 線的優先序放最後，點壓在線上的時候應該選點。
+const PICK_PX = 16;        // 點的命中半徑（像素）
+const PICK_LINE = 0.035;   // 線的命中門檻（世界單位）
+const pickRay = new THREE.Raycaster();
+const pickV = new THREE.Vector3();
+const pickNdc = new THREE.Vector2();
+
+function projectPoint(lat, lon, r, nearZ) {
+  llToVec(lat, lon, r, pickV);
+  pickV.applyMatrix4(globe.matrixWorld);
+  if (pickV.z <= nearZ) return null;          // 在地球背面
+  pickV.project(camera);
+  return { x: (pickV.x * 0.5 + 0.5) * innerWidth, y: (-pickV.y * 0.5 + 0.5) * innerHeight };
+}
+
+/** 回傳 {kind, data} 或 null。kind 是 plant / sub / landing / line。 */
+function pickFeature(sx, sy) {
+  if (twSwapT() <= 0.05) return null;         // 這幾層還沒淡入，不該點得到
+  globe.updateMatrixWorld();
+  camera.updateMatrixWorld();
+  const nearZ = R * R / camera.position.z;
+  let best = null;
+  const consider = (kind, data, lat, lon, r) => {
+    const p = projectPoint(lat, lon, r, nearZ);
+    if (!p) return;
+    const d = Math.hypot(p.x - sx, p.y - sy);
+    if (d > PICK_PX) return;
+    // 同樣距離時照 kind 的順序決定，電廠優先於變電所優先於登陸點
+    if (!best || d < best.d) best = { kind, data, d };
+  };
+  for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
+  for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
+  for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * 1.011);
+  if (best) return best;
+
+  // 沒點到點才輪到線
+  if (!gridLineMat || !GRID || !GRID.lines || !GRID.lines.length) return null;
+  pickNdc.set((sx / innerWidth) * 2 - 1, -(sy / innerHeight) * 2 + 1);
+  pickRay.setFromCamera(pickNdc, camera);
+  pickRay.params.Line = { threshold: PICK_LINE };
+  const seg = globe.children.find((o) => o.isLineSegments && o.material === gridLineMat);
+  if (!seg) return null;
+  const hit = pickRay.intersectObject(seg, false)[0];
+  if (!hit) return null;
+  // Raycaster 給的是第幾個頂點，換算回是第幾條線再查名稱
+  let idx = (hit.index !== undefined ? hit.index : 0), acc = 0;
+  for (const ln of GRID.lines) {
+    const verts = (ln.p.length / 2 - 1) * 2;   // 每段兩個頂點
+    if (idx < acc + verts) return { kind: 'line', data: ln, d: 0 };
+    acc += verts;
+  }
+  return { kind: 'line', data: GRID.lines[0], d: 0 };
+}
+
+function showFeature(hit) {
+  const card = $('cc-card');
+  if (!card) return;
+  const d = hit.data;
+  const zh = LANG !== 'en';
+  const num = (x) => (x === null || x === undefined ? '–' : Math.round(x * 10) / 10);
+  let code = '', sub = '', body = '';
+  if (hit.kind === 'plant') {
+    const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+    code = d.name;
+    sub = table[d.type] || d.type;
+    const duty = d.cap > 0 ? (d.out / d.cap * 100).toFixed(0) : null;
+    body = S('pkPlant', {
+      units: d.units, cap: num(d.cap).toLocaleString(), out: num(d.out).toLocaleString(),
+      duty: duty === null ? '–' : duty,
+    });
+  } else if (hit.kind === 'sub') {
+    code = d.name;
+    sub = countyName(d.county);
+    body = (d.solo ? S('pkSubSolo', { cap: num(d.cap), load: num(d.load) })
+      : S('pkSub', {
+        cap: num(d.cap), rel: num(d.rel), load: num(d.load),
+        ratio: d.ratio === null ? '–' : Math.round(d.ratio * 100),
+      }))
+      + (d.area ? '<br>' + S('pkSubArea', { area: d.area }) : '');
+  } else if (hit.kind === 'landing') {
+    code = LANG === 'en' ? d.en : (LANG === 'zh-cn' ? d.zhCn : d.zh);
+    sub = LANG === 'en' ? d.adminEn : (LANG === 'zh-cn' ? d.adminZhCn : d.admin);
+    const meta = LP_PREC[d.precision];
+    body = S('pkLanding', {
+      prec: meta ? S(meta.key) : d.precision,
+      cables: d.cables && d.cables.length ? d.cables.join(S('listSep')) : S('lpNoCable'),
+    });
+  } else {
+    code = d.name || S('pkLineNoName');
+    sub = `${(parseInt(d.volt, 10) || 0) / 1000} kV`;
+    body = S('pkLine', { circuits: d.circuits || '–' });
+  }
+  $('cc-code').textContent = code;
+  $('cc-sub').textContent = sub;
+  $('cc-bar').innerHTML = '';   // 這張卡沒有角色比例條，清掉上一次國家卡片留下的
+  $('cc-body').innerHTML = body;
+  card.hidden = false;
+}
+
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
 // 角色分布那四個 chip 直接當按鈕用，點下去地球就換成那個角色的色調。
 function modeRamp(mode) { return MODES[(mode === 'all-weight' || mode === 'all-count') ? 'all' : mode]; }
@@ -3106,7 +3215,24 @@ async function main() {
   }
   $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
-  renderer.domElement.addEventListener('pointerdown', hideCountry); // 轉動地球就把卡片收掉
+  // 點地球上的設施看細節。
+  //
+  // 按下去先把卡片收掉（轉動地球本來就該收），放開時如果幾乎沒有移動、時間也短，
+  // 才當成點擊去試命中。不這樣分的話拖曳結束會誤觸，轉一下地球就跳出一張卡片。
+  let pressAt = null;
+  renderer.domElement.addEventListener('pointerdown', (e) => {
+    hideCountry();
+    pressAt = { x: e.clientX, y: e.clientY, t: performance.now() };
+  });
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    if (!pressAt) return;
+    const moved = Math.hypot(e.clientX - pressAt.x, e.clientY - pressAt.y);
+    const held = performance.now() - pressAt.t;
+    pressAt = null;
+    if (moved > 6 || held > 600 || pointers.size > 0) return;
+    const hit = pickFeature(e.clientX, e.clientY);
+    if (hit) showFeature(hit);
+  });
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
   $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
