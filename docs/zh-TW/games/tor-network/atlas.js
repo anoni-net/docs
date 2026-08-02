@@ -302,6 +302,83 @@ const TW_LAT = 23.75, TW_LON = 121.0;
 // 東西給到 3.0 度是為了讓澎湖（119.5E，離中心 1.5 度）留在畫面裡。
 const TW_SPAN_LAT = 4.6, TW_SPAN_LON = 3.0;
 
+// 網址上的關注區域。#tw 或 #focus=tw 都認得，載入時直接飛過去。分享連結時就能指定
+// 對方一開啟先看哪一塊，不必再叫人自己去按按鈕。按下「關注台灣」也會把 #tw 寫回網址，
+// 複製網址列就是那條分享連結。
+//
+// 用 hash 不用 query。hash 改了不會重新載入，按鈕與網址才能雙向同步，語意上它講的
+// 也正是「文件裡的哪個位置」，跟 lang、backend 那種設定型參數分得開。
+//
+// key 是 ISO 3166-1 alpha-2 小寫，跟 ANCHOR 與 countries.json 同一套。未來要加別的
+// 國家，在 FOCUS 補一行手調的取景就好。沒補的也已經能用，會照國界自己算。
+const FOCUS = new Map([
+  ['tw', { lat: TW_LAT, lon: TW_LON, spanLat: TW_SPAN_LAT, spanLon: TW_SPAN_LON }],
+]);
+
+// 自動取景的留邊與下限。自動算出來的台灣是 3.54 × 1.96 度，比手調的 4.6 × 3.0 緊，
+// 澎湖會被切掉，所以手調的那一份優先。留邊讓國土不要頂到畫面邊緣。
+const FOCUS_PAD = 1.25;
+// 跨幅下限。再小就會鑽到比縣市界還近的距離，而那一層只有台灣有東西可看。
+const FOCUS_MIN = 2.5;
+
+/** 網址上的 key 換成取景參數。認不得的回 null，網址亂打不該讓畫面壞掉。 */
+function focusTarget(key) {
+  const k = String(key || '').trim().toLowerCase();
+  if (!k || NO_PLACE.has(k)) return null;
+  if (FOCUS.has(k)) return FOCUS.get(k);
+  const a = ANCHOR.get(k);
+  if (!a || !a.ll) return null;
+  const [lat, lon] = a.ll;
+  if (!a.rings) return { lat, lon, spanLat: FOCUS_MIN, spanLon: FOCUS_MIN };
+  // 以標籤點為中心量最遠的國界點。經度差要繞回 [-180, 180]，否則跨換日線的俄羅斯、
+  // 斐濟、南極會量出 360 度。直接取 bounding box 也會踩到同一個坑，而且像美國、
+  // 法國那種有遠方屬地的，box 的中心跟標籤點差很遠，框出來的不是國土。
+  let dLat = 0, dLon = 0;
+  for (const ring of a.rings) {
+    for (let i = 0; i < ring.length; i += 2) {
+      let dl = ring[i] - lon;
+      while (dl > 180) dl -= 360;
+      while (dl < -180) dl += 360;
+      dLon = Math.max(dLon, Math.abs(dl));
+      dLat = Math.max(dLat, Math.abs(ring[i + 1] - lat));
+    }
+  }
+  // 上限 180 度。南極環繞極點，量出來是 359 度，再乘留邊就變成繞了一圈半，那是
+  // 沒有意義的數字。180 度已經是「整個看得到的半球」，再大也不會框得更廣。
+  const span = (d) => clamp(d * 2 * FOCUS_PAD, FOCUS_MIN, 180);
+  return { lat, lon, spanLat: span(dLat), spanLon: span(dLon) };
+}
+
+/** 從 hash 取出 key。#tw 與 #focus=tw 都認。 */
+function focusKey() {
+  let h = location.hash || '';
+  try { h = decodeURIComponent(h); } catch { /* 壞掉的 escape 就照原樣當 key，反正查不到 */ }
+  h = h.replace(/^#/, '');
+  return h.startsWith('focus=') ? h.slice(6) : h;
+}
+
+/** 照網址上的 key 飛過去。飛了回 true。 */
+function applyFocus() {
+  const t = focusTarget(focusKey());
+  if (!t) return false;
+  flyTo(t.lat, t.lon, t.spanLat, t.spanLon);
+  return true;
+}
+
+/** 按鈕與網址同步。replaceState 不留歷史紀錄，上一頁不會變成在原地跳來跳去。 */
+function goFocus(key) {
+  const t = focusTarget(key);
+  if (!t) return;
+  flyTo(t.lat, t.lon, t.spanLat, t.spanLon);
+  history.replaceState(null, '', '#' + key);
+}
+
+// 使用者自己轉走之後網址就不再代表畫面。留著的話複製出去的連結跟對方看到的對不上。
+function clearFocus() {
+  if (!location.hash) return;
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
 /** 讓畫面至少涵蓋 latDeg 的南北與 lonDeg 的東西所需的 zoom。
  *
  * 不能只看短邊。直式手機的短邊是寬度，而台灣是南北狹長的島，照短邊框會把島縮得
@@ -3381,7 +3458,7 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX);
+      if (pinchStart > 0) { view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX); clearFocus(); }
       return;
     }
     if (!last) return;
@@ -3389,6 +3466,9 @@ function bindControls(dom) {
     const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
+    // 視角真的動了才清網址上的關注區域。掛在 pointerdown 的話，點一下開變電所卡片
+    // 也會清掉，可是那時畫面根本沒動，網址反而變得比原本更不準。
+    clearFocus();
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
@@ -3433,13 +3513,14 @@ function bindControls(dom) {
   }
 
   const twBtn = $('btn-tw');
-  if (twBtn) twBtn.addEventListener('click', () => flyTo(TW_LAT, TW_LON, TW_SPAN_LAT, TW_SPAN_LON));
+  if (twBtn) twBtn.addEventListener('click', () => goFocus('tw'));
 
   const spinBtn = $('btn-spin');
   if (spinBtn) {
     spinBtn.addEventListener('click', () => {
       setSpin(true);
       spin.rx = spin.ry = 0; // 別讓上一次拖曳殘留的滑行速度疊在自轉上
+      clearFocus();          // 轉起來之後就不是網址指的那一塊了
     });
   }
 
@@ -3467,6 +3548,7 @@ function bindControls(dom) {
     const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
     view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
     fly = null;
+    clearFocus();
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
   }, { passive: false });
 }
@@ -3733,6 +3815,10 @@ async function main() {
   $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
   const load = $('loading');
   if (load) load.classList.add('done');
+  // 網址帶著 #tw 之類的關注區域就直接飛過去。要等 ANCHOR 建好、相機的長寬比也定了
+  // 才算得出取景，所以擺在這裡而不是更早。
+  applyFocus();
+  addEventListener('hashchange', applyFocus);
   renderer.setAnimationLoop(animate);
 }
 main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });

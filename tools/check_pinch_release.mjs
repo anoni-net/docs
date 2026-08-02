@@ -74,6 +74,8 @@ const harness = `
   const setSpin = (on) => { spinOn = on; btn.hidden = on; };
   const stopSpin = () => setSpin(false);
   const pauseSpin = () => setSpin(false);
+  // 滾輪與 pointerdown 現在會清掉網址上的關注區域，這裡不驗那件事，給個空的就好
+  const clearFocus = () => {};
   ${body}
   const H = {};
   const dom = {
