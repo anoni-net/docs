@@ -12,6 +12,19 @@ import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+
+// 資料欄位拼進 innerHTML 之前先跳脫。
+//
+// i18n 的字串本來就帶 <b> 與 <a>，那是我們自己寫的，不能跳脫。要跳脫的是從資料檔與
+// API 進來的欄位：AS 的註冊名稱是持有人自己申報的自由文字，Onionoo 原樣轉發，即時
+// 更新那條路等於把第三方可寫的字串拼進頁面。台灣那幾份雖然是自己產的，但一起跳脫
+// 才不用每加一個欄位就重新判斷一次「這個來源可不可信」。
+//
+// 這頁的威脅模型讓後果比一般網站嚴重：真的做成 XSS，攻擊者就能讓瀏覽器對任意網域
+// 發請求，等於繞開 offlineFirst() 擋的那件事。
+const esc = (v) => String(v == null ? '' : v)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 // html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
 document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
 
@@ -1568,13 +1581,24 @@ function fillSeacable() {
         return a.length ? S('scAlt', { list: a.join(S('listSep')) }) : ''; })(),
     ].filter(Boolean).join('　');
     return `<div class="sc-row"><div class="sc-top">`
-      + `<span class="sc-ab">${f.abbr || f.name}</span>`
+      + `<span class="sc-ab">${esc(f.abbr || f.name)}</span>`
       + `<span class="sc-loc">${where}</span>`
       + `<span class="sc-st">${f.start ? S('scStart', { d: f.start }) : ''}</span></div>`
       + (sub ? `<div class="sc-sub">${sub}</div>` : '') + `</div>`;
   }).join('');
   if (note) note.innerHTML = S('noteSeacable');
 }
+
+// 台灣那幾層的疊放順序明確指定，不要靠 three.js 的內部排序。
+//
+// 這幾個都是 InstancedMesh，位置寫在 instanceMatrix 裡，mesh 本身留在原點。透明物件
+// 排序看的是 geometry 的 bounding sphere 中心，於是四層算出來的深度全都一樣，只好
+// 退回比較物件 id，也就是「誰先建出來誰先畫」。那不是我們想表達的關係。
+//
+// 由下而上：變電所、再生能源場址、電廠、登陸點。跟各層的離地半徑同序。電廠要壓在
+// 場址之上，因為有幾座太陽能就座落在大電廠的廠區裡，大的畫在上面比較讀得出來。
+// 都排在極光（40）與電路（45）之下，那兩層是全球尺度的效果，不該被台灣的點蓋掉。
+const RO_SUB = 11, RO_RENEW = 12, RO_PLANT = 13, RO_LANDING = 14;
 
 // 台灣的海纜登陸點。跟其他圖層不同，這一份是自建的，資料來源逐筆記在
 // tools/data/tw_landing.toml，產生器是 tools/gen_tw_landing.py。
@@ -1617,12 +1641,12 @@ function fillLanding() {
     const nm = LANG === 'en' ? p.en : (LANG === 'zh-cn' ? p.zhCn : p.zh);
     const ad = LANG === 'en' ? p.adminEn : (LANG === 'zh-cn' ? p.adminZhCn : p.admin);
     const cb = p.cables && p.cables.length
-      ? `<span class="lp-cb">${p.cables.join(S('listSep'))}</span>`
+      ? `<span class="lp-cb">${esc(p.cables.join(S('listSep')))}</span>`
       : `<span class="lp-cb none">${S('lpNoCable')}</span>`;
     return `<div class="lp-row"><div class="lp-top">`
-      + `<span class="lp-nm">${nm}</span>`
-      + `<span class="lp-ad">${ad}</span>`
-      + `<span class="lp-pr" data-p="${p.precision}">${prec}</span></div>`
+      + `<span class="lp-nm">${esc(nm)}</span>`
+      + `<span class="lp-ad">${esc(ad)}</span>`
+      + `<span class="lp-pr" data-p="${esc(p.precision)}">${esc(prec)}</span></div>`
       + `<div class="lp-sub">${cb}</div></div>`;
   }).join('');
   if (note) note.innerHTML = S('noteLanding');
@@ -1663,6 +1687,7 @@ function buildLanding() {
   }
   mesh.instanceMatrix.needsUpdate = true;
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  mesh.renderOrder = RO_LANDING;
   globe.add(mesh);
   landingMesh = mesh;
 }
@@ -1807,6 +1832,7 @@ function buildPower() {
   }
   powerMesh.instanceMatrix.needsUpdate = true;
   if (powerMesh.instanceColor) powerMesh.instanceColor.needsUpdate = true;
+  powerMesh.renderOrder = RO_SUB;
   globe.add(powerMesh);
 }
 
@@ -1943,6 +1969,7 @@ function buildGrid() {
   }
   plantMesh.instanceMatrix.needsUpdate = true;
   if (plantMesh.instanceColor) plantMesh.instanceColor.needsUpdate = true;
+  plantMesh.renderOrder = RO_PLANT;
   globe.add(plantMesh);
 }
 
@@ -2047,6 +2074,7 @@ function buildRenew() {
   }
   renewMesh.instanceMatrix.needsUpdate = true;
   if (renewMesh.instanceColor) renewMesh.instanceColor.needsUpdate = true;
+  renewMesh.renderOrder = RO_RENEW;
   globe.add(renewMesh);
 }
 
@@ -2901,16 +2929,16 @@ function showFeature(hit) {
     const ratio = d.ratio === null ? '–' : Math.round(d.ratio * 100);
     body = (d.solo ? S('pkSubSolo', { cap: num(d.cap), load: num(d.load) })
       : S(d.cap - d.rel < 1e-9 ? 'pkSubFlat' : 'pkSub', { ratio }))
-      + (d.area ? '<br>' + S('pkSubArea', { area: d.area }) : '');
+      + (d.area ? '<br>' + S('pkSubArea', { area: esc(d.area) }) : '');
   } else if (hit.kind === 'renew') {
     const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
     code = d.name;
     sub = table[d.type] || d.type;
     body = S('pkRenew', {
       cap: num(d.cap).toLocaleString(),
-      model: d.model || '–',
+      model: esc(d.model) || '–',
       units: d.units || '–',
-      addr: d.addr,
+      addr: esc(d.addr),
       prec: d.precision,
     });
   } else if (hit.kind === 'landing') {
@@ -3006,7 +3034,7 @@ function fillAsn(snap) {
   const tot = snap.sampled || snap.total || 1;
   const max = snap.asnTop[0][2] || 1;
   box.innerHTML = snap.asnTop.slice(0, 8).map(([id, nm, n]) =>
-    `<div class="mix-row"><span class="as-nm" title="${id}">${nm || id}</span>`
+    `<div class="mix-row"><span class="as-nm" title="${esc(id)}">${esc(nm || id)}</span>`
     + `<span class="tot">${n.toLocaleString()}</span>`
     + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#c47ad8"></span></span>`
     + `<span class="n">${(n / tot * 100).toFixed(1)}%</span></div>`).join('');

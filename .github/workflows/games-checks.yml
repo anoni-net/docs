@@ -1,0 +1,59 @@
+# 「Tor 中繼地球儀」的回歸測試。
+#
+# 這四支驗的都是實際踩過的 bug，不是為了覆蓋率補的：捏合放開之後地球彈開、iOS Safari
+# 在物件上點兩下觸發整頁放大、變電所容量計的刻度標籤在英文版擠成一團、關注區域對
+# 有海外屬地的國家框出大半個地球。每一支都做過突變實驗，故意改壞被測程式確認會轉紅。
+#
+# 手法是把函式從 atlas.js 原地抽出來注入假相依重放，或開 headless Chrome 量 DOM。
+# 驗的是真程式碼，不是複製一份。所以只要有人改了 atlas.js 對應的地方，這裡就會知道。
+#
+# 這幾支的相依是 node 與（其中一支）google-chrome，ubuntu runner 兩個都內建。
+# check_sub_gauge 找不到 chrome 時會自己跳過並回 0，本機沒裝也不會擋人。
+#
+# 這是 blocking 的。docs-style-lint 那支是 warn 階段，因為文字規則有誤報空間；
+# 這四支驗的是行為，紅了就是真的壞了。
+name: games-checks
+
+on:
+  pull_request:
+    paths:
+      - "docs/zh-TW/games/tor-network/**"
+      - "tools/check_*.mjs"
+      - ".github/workflows/games-checks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 確認 headless Chrome 在
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            google-chrome --version
+          else
+            echo "::warning::找不到 google-chrome，容量計的版面檢查會自己跳過"
+          fi
+
+      # 分開跑而不是串成一行，哪一支紅的在 GitHub 的步驟清單上直接看得出來
+      - name: 捏合放開不彈開
+        run: node tools/check_pinch_release.mjs
+
+      - name: 擋掉 iOS Safari 的雙擊放大
+        run: node tools/check_double_tap.mjs
+
+      - name: 網址關注區域的解析與取景
+        run: node tools/check_focus.mjs
+
+      - name: 變電所容量計的版面（280 座 × 三語系 × 寬窄兩種視窗）
+        run: node tools/check_sub_gauge.mjs
