@@ -63,8 +63,6 @@ Landmass brightness switches between four metrics. Relay count is the obvious on
 
     That led to looking for cable landing points, the most fragile part of any cable and a live topic for Taiwan. OpenStreetMap does not have them. This is absence, not a failed download: a taginfo query for `man_made=cable_landing_point`, `seamark:type=landing_point` and three other candidates returns `0` worldwide for every one of them. Landing point coordinates are part of the TeleGeography product just as the cable geometry is, which is the same wall as above.
 
-    The globe also gained ocean currents. That layer is not in the table because it is not data. The names, paths and warm/cold classification of the major current systems are public oceanographic knowledge and the coordinates are drawn by hand from it, with no flow-field dataset involved. Real flow fields (NOAA RTOFS, NASA OSCAR) are openly licensed. What stopped us there was format: both would mean decoding GRIB2 on the server, which breaks this project's rule of depending on nothing but python3 and curl.
-
 ## Deliberate restraint in what gets drawn
 
 OONI's data shows the trade-off best. It gives a per-country anomaly rate for the Tor test, and the numbers look like enough to draw a global censorship map. The middle of the range is measurement noise. Switzerland measures `22.2%`, Canada `21.2%`, New Zealand `41.1%`, and none of these countries has a censorship problem. Colouring the mid-range would amount to accusing them on the strength of noise.
