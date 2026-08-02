@@ -227,7 +227,7 @@ const EN = {
     '民營電廠-燃氣': 'IPP gas', '民營電廠-燃煤': 'IPP coal',
   },
   pkPlant: '{units} generating units, {cap} MW installed. Net output at the time of the snapshot was <b>{out}</b> MW, or {duty}% of installed capacity.',
-  pkSub: 'Peak load in the preceding year is <b>{ratio}%</b> of reliable capacity. The hatched band above is the largest main transformer: what the rest can still carry when it fails is the reliable capacity. Fill crossing that tick means losing one transformer at peak would leave the rest short, which is a separate question from whether the site is overloaded today.',
+  pkSub: 'Peak load in the preceding year is <b>{ratio}%</b> of reliable capacity. The hatched band above represents the largest main transformer: what the rest can still carry when it fails is the reliable capacity. When the fill crosses that tick, losing one transformer at peak would leave the rest short, which is a separate question from whether the site is overloaded today.',
   pkSubFlat: 'Peak load in the preceding year is <b>{ratio}%</b> of reliable capacity. Taipower records this site with reliable capacity equal to installed capacity, so there is no reserve band to draw and the tick sits at the far end.',
   gLoad: 'Peak <b>{v}</b>',
   gRel: 'Reliable <b>{v}</b>',

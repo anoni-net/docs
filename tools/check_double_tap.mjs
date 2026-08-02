@@ -102,6 +102,8 @@ const harness = `
   const pointers = new Map();
   const spin = { rx: 0, ry: 0 };
   let last = null, pinchStart = 0, zoomStart = 1;
+  let dragFrom = null;
+  const DRAG_DEAD_PX = 6;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const ZOOM_MIN = 0.42, ZOOM_MAX = 1.6;
   const dragRate = () => 0.006;

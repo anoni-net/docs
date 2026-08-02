@@ -62,6 +62,8 @@ const harness = `
   const pointers = new Map();
   const spin = { rx: 0, ry: 0 };
   let last = null, pinchStart = 0, zoomStart = 1;
+  let dragFrom = null;
+  const DRAG_DEAD_PX = 6;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const ZOOM_MIN = 0.42, ZOOM_MAX = 1.6;
   const dragRate = () => ${DRAG_K};
@@ -145,6 +147,30 @@ scenario('放開第一根、留第二根', (c) => pinchThenLift(c, 1));
   const z1 = c.peek().zoom;
   if (!(z1 < z0)) fail.push(`✗ 捏合沒有產生縮放（${z0} → ${z1}），前面兩個情境等於沒測到東西`);
   else ok.push(`✓ 捏合有縮放：zoom ${z0.toFixed(3)} → ${z1.toFixed(3)}`);
+}
+
+// 三指收到剩兩指時，捏合的基準距離也要重取。
+//
+// 這條分支原本沒有任何情境走到。把它改成空操作之後全部測試照樣綠燈，等於沒在防守。
+// 漏掉的話是跟「放開一根手指地球彈開」同一類的 bug：基準沒重取，下一個 pointermove
+// 算出來的縮放比是拿舊的指距去除新的指距，縮放會瞬間跳掉。
+{
+  const c = new Function(harness)();
+  c.fire('pointerdown', P(1, 300, 430));
+  c.fire('pointerdown', P(2, 400, 430));   // 這時 pinchStart = 100
+  c.fire('pointerdown', P(3, 500, 430));
+  // 三指狀態下把前兩指撐開。撐開之後指距是 500，跟當初的 100 差五倍。
+  c.fire('pointermove', P(1, 100, 430));
+  c.fire('pointermove', P(2, 600, 430));
+  c.fire('pointerup', P(3, 500, 430));     // 收成兩指，基準應該在這裡重取
+  const before = c.peek().zoom;
+  c.fire('pointermove', P(2, 700, 430));   // 再撐開 100px，指距 500 → 600
+  const after = c.peek().zoom;
+  // 基準有重取的話 zoom 是 before × 500/600，變化兩成以內。沒重取的話會拿 100/600 去算，
+  // 直接掉到下限。留一點餘裕取三成。
+  const jump = Math.abs(after - before) / before;
+  if (jump > 0.3) fail.push(`✗ 三指收到兩指之後縮放跳了 ${(jump * 100).toFixed(0)}%，捏合基準沒有重取`);
+  else ok.push(`✓ 三指收到兩指之後縮放只變 ${(jump * 100).toFixed(0)}%，捏合基準有重取`);
 }
 
 // 單指拖曳照舊要能動，別為了修 bug 把正常的拖曳擋掉

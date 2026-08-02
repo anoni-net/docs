@@ -124,8 +124,15 @@ const PROBE = `(function () {
       if (r.width < 1 || r.left < tr.left - 0.5 || r.right > tr.right + 0.5) bad.push('刻度被切掉');
     }
     const n1 = bar.querySelector('.n1');
-    if (n1) out.push({ nm, bad, n1: n1.getBoundingClientRect().width / tr.width, two: bar.classList.contains('two') });
-    else out.push({ nm, bad, n1: null, two: bar.classList.contains('two') });
+    // 填色分兩段，第二段是越過可靠容量刻度的部分。那一段的有無與寬度就是這張圖
+    // 在講的事，要單獨量，不能只靠通用檢查帶過。
+    const fills = [...bar.querySelectorAll('.tr > span')].filter((e) => !e.className);
+    out.push({
+      nm, bad, two: bar.classList.contains('two'),
+      n1: n1 ? n1.getBoundingClientRect().width / tr.width : null,
+      nFill: fills.length,
+      over: fills.length > 1 ? fills[1].getBoundingClientRect().width / tr.width : 0,
+    });
   }
   return JSON.stringify(out);
 })()`;
@@ -181,17 +188,25 @@ for (const lang of LANGS) {
   // 斜紋帶寬度要等於「裝置容量減可靠容量」佔軸長的比例，那是這張圖的意義所在
   const geo = rows.filter((r) => {
     const d = subs.find((s) => s.name === r.nm);
-    if (!d || d.solo || r.n1 === null) return false;
-    const want = (d.cap - d.rel) / Math.max(d.cap, d.load);
-    return Math.abs(r.n1 - want) > 0.005;
+    if (!d) return false;
+    const scale = Math.max(d.cap, d.load);
+    if (d.solo) return r.nFill !== 1 || r.n1 !== null;   // solo 只有一段填色，沒有餘裕帶
+    if (r.n1 === null) return true;
+    if (Math.abs(r.n1 - (d.cap - d.rel) / scale) > 0.005) return true;
+    // 尖峰負載超過可靠容量的那 64 座要多一段填色，寬度是超出的部分
+    const wantOver = d.load > d.rel ? (d.load - d.rel) / scale : 0;
+    if ((r.nFill > 1) !== (wantOver > 0)) return true;
+    return Math.abs(r.over - wantOver) > 0.005;
   });
   const tag = `${view.nm} ${lang}`;
   for (const r of bad.slice(0, 8)) fail.push(`✗ ${tag} ${r.nm}：${r.bad.join('、')}`);
   if (bad.length > 8) fail.push(`  ⋯ ${tag} 另有 ${bad.length - 8} 張同類問題`);
-  for (const r of geo.slice(0, 5)) fail.push(`✗ ${tag} ${r.nm}：斜紋帶寬度不等於裝置容量減可靠容量`);
+  for (const r of geo.slice(0, 5)) fail.push(`✗ ${tag} ${r.nm}：填色或斜紋帶的寬度跟資料對不起來`);
+  if (geo.length > 5) fail.push(`  ⋯ ${tag} 另有 ${geo.length - 5} 張同類問題`);
   if (!bad.length && !geo.length) {
     console.log(`  ✓ ${tag}：${rows.length} 座全部沒有標籤重疊、越界或刻度被切，`
-      + `斜紋帶寬度都對（${rows.filter((r) => r.two).length} 座需要換兩行）`);
+      + `斜紋帶與填色的寬度都對（${rows.filter((r) => r.over > 0).length} 座有越線的溢出段、`
+      + `${rows.filter((r) => r.two).length} 座需要換兩行）`);
   }
 }
 }

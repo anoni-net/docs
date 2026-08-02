@@ -70,10 +70,17 @@ const harness = `
   ${decl(/^const FOCUS_PAD = [^;]+;/m)}
   ${decl(/^const FOCUS_MIN = [^;]+;/m)}
   const ANCHOR = new Map();
-  // 照 atlas.js 的 paintEarth：ll 取 c.m 的 [lat, lon]，rings 直接掛 c.p
+  // 照 atlas.js 的 buildEarth：先用 CENTROID 灌一輪，paintEarth 再疊上多邊形。
+  // 少了 CENTROID 那一圈，hk、sg、mt 這種有手調座標但沒有國界多邊形的國家在這裡
+  // 會查不到，focusTarget 的「沒有 rings」那條分支就永遠測不到。
+  ${decl(/^const CENTROID = \{[\s\S]*?\n\};/m)}
+  for (const k in CENTROID) ANCHOR.set(k, { ll: CENTROID[k] });
   for (const c of ${JSON.stringify(world.c)}) {
     if (!c.k) continue;
-    ANCHOR.set(c.k, { ll: [c.m[1], c.m[0]], rings: c.p });
+    if (!ANCHOR.has(c.k)) ANCHOR.set(c.k, { ll: [c.m[1], c.m[0]] });
+    const a = ANCHOR.get(c.k);
+    a.ll = [c.m[1], c.m[0]];
+    a.rings = c.p;
   }
   ${extractFn(atlas, 'function focusTarget(key)')}
   ${extractFn(atlas, 'function focusKey()')}
@@ -112,7 +119,9 @@ const ok = [];
 {
   const bad = [];
   let n = 0;
+  const NO_PLACE = new Set(['eu', 'xx', '??', '']);
   for (const cc of M.ANCHOR.keys()) {
+    if (NO_PLACE.has(cc)) continue;   // 這幾個是非地理的彙總碼，回 null 才對
     const t = M.focusTarget(cc);
     if (!t) { bad.push(`${cc} 回 null`); continue; }
     n++;
@@ -124,6 +133,68 @@ const ok = [];
   }
   if (bad.length) fail.push('✗ ' + bad.slice(0, 6).join('、') + (bad.length > 6 ? ` 等 ${bad.length} 項` : ''));
   else ok.push(`✓ ${n} 個國家都給得出座標與跨幅在合理範圍的取景`);
+}
+
+// --- 有手調座標但沒有國界多邊形的國家 ----------------------------------------
+// hk、sg、mt 這幾個在 countries.json 裡沒有多邊形，只有 CENTROID 的手調座標。
+// 它們走的是 focusTarget 的第三條路：直接給 FOCUS_MIN 的跨幅。對香港與新加坡這種
+// 城市規模的地方，2.5 度本來就是合理的取景，不必另外手調。
+{
+  const skip = new Set(['eu', 'xx', '??', '']);
+  const noPoly = [...M.ANCHOR.keys()].filter((k) => !M.ANCHOR.get(k).rings && !skip.has(k));
+  if (!noPoly.length) fail.push('✗ 沒有任何國家走到「沒有國界多邊形」那條分支，那條分支等於沒被測到');
+  else {
+    const bad = noPoly.filter((k) => {
+      const t = M.focusTarget(k);
+      return !t || t.spanLat !== M.FOCUS_MIN || t.spanLon !== M.FOCUS_MIN;
+    });
+    if (bad.length) fail.push(`✗ 沒有國界多邊形的國家取景不對：${bad.join('、')}`);
+    else ok.push(`✓ ${noPoly.length} 個沒有國界多邊形的國家（${noPoly.slice(0, 4).join('、')} 等）都退回 ${M.FOCUS_MIN} 度的取景`);
+  }
+  // 這個站的受眾裡香港與新加坡都是重點，分享連結指得到才有意義
+  for (const k of ['hk', 'sg']) {
+    if (!M.focusTarget(k)) fail.push(`✗ #${k} 查不到取景，分享連結指不過去`);
+  }
+  if (M.focusTarget('hk') && M.focusTarget('sg')) ok.push('✓ #hk 與 #sg 都指得過去');
+}
+
+// --- 只框主陸塊，不被海外屬地拉大 --------------------------------------------
+// 量遍所有 ring 的話，法國會連著法屬圭亞那量成 111 度 × 142 度，等於大半個地球，
+// 進場之後畫面幾乎沒動。這一項驗的是有沒有只取標籤點所在的那一塊陸地。
+{
+  const want = { fr: 30, us: 100, id: 30, my: 20, nz: 20 };
+  const bad = [];
+  for (const [cc, cap] of Object.entries(want)) {
+    const t = M.focusTarget(cc);
+    if (!t) { bad.push(`${cc} 查不到`); continue; }
+    if (t.spanLon > cap) bad.push(`${cc} 經度跨幅 ${t.spanLon.toFixed(0)} 度，超過 ${cap}，像是把海外屬地也框進去了`);
+  }
+  if (bad.length) fail.push('✗ ' + bad.join('、'));
+  else {
+    const fr = M.focusTarget('fr');
+    ok.push(`✓ 有海外屬地的國家只框主陸塊，fr 是 ${fr.spanLat.toFixed(0)}° × ${fr.spanLon.toFixed(0)}°（量遍所有 ring 會是 111 × 142）`);
+  }
+
+  // 「取外接框含住標籤點的那個 ring」這條篩選，在現行的 175 國資料上跟「取外接框
+  // 最大的 ring」結果完全一樣，量過確認零差異。也就是說它今天測不到，是為了國界
+  // 資料換版而留的保護：萬一某國多出一個又大又遠的 ring，沒有這條就會框到那邊去。
+  // 所以拿合成資料驗它，不然它就是一段沒人守得住的程式碼。
+  {
+    // 標籤點在小島上，另有一塊面積大得多但離很遠的 ring
+    M.ANCHOR.set('zz', {
+      ll: [0, 0],
+      rings: [
+        [-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5],           // 含標籤點，1 度見方
+        [60, 40, 80, 40, 80, 60, 60, 60],                       // 遠方的大塊，20 度見方
+      ],
+    });
+    const t = M.focusTarget('zz');
+    M.ANCHOR.delete('zz');
+    if (!t) fail.push('✗ 合成的雙 ring 國家查不到取景');
+    else if (t.spanLon > 10) {
+      fail.push(`✗ 合成資料裡框到了遠方那塊大 ring（經度跨幅 ${t.spanLon.toFixed(0)} 度），含標籤點的篩選沒有生效`);
+    } else ok.push(`✓ 遠方有更大的 ring 時仍然只框標籤點所在那塊（合成資料，跨幅 ${t.spanLon.toFixed(1)} 度）`);
+  }
 }
 
 // --- 認不得的 key 不能讓畫面壞掉 ---------------------------------------------
@@ -162,6 +233,8 @@ const ok = [];
     const pointers = new Map();
     const spin = { rx: 0, ry: 0 };
     let last = null, pinchStart = 0, zoomStart = 1;
+    let dragFrom = null;
+    ${decl(/^const DRAG_DEAD_PX = [^;]+;/m)}
     const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
     const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
     const dragRate = () => 0.006;
@@ -232,6 +305,11 @@ const ok = [];
     W.fire('pointerdown', P(1, 400, 300));
     if (W.hash() !== '#tw') fail.push('✗ 只是按下去還沒移動就把網址清掉了，點一下開卡片也會誤清');
     else ok.push('✓ 按下去還沒移動時網址留著，點一下開卡片不會誤清');
+    // 觸控面板點一下常帶一兩像素的晃動，那不該把網址清掉。畫面看不出變化，
+    // 網址卻悄悄失效，使用者不會發現分享出去的連結已經指不到原本那一塊。
+    W.fire('pointermove', P(1, 402, 302));
+    if (W.hash() !== '#tw') fail.push('✗ 點一下帶 3 像素晃動就把網址清掉了，觸控裝置上會常態誤清');
+    else ok.push('✓ 3 像素的晃動不清網址，死區擋得住觸控的抖動');
     W.fire('pointermove', P(1, 460, 300));
     if (W.hash() !== '') fail.push(`✗ 拖曳之後網址還是 ${JSON.stringify(W.hash())}，應該清掉`);
     else ok.push('✓ 拖曳轉走之後網址清掉了');

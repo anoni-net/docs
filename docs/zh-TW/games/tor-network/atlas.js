@@ -320,19 +320,41 @@ function focusTarget(key) {
   if (!a || !a.ll) return null;
   const [lat, lon] = a.ll;
   if (!a.rings) return { lat, lon, spanLat: FOCUS_MIN, spanLon: FOCUS_MIN };
-  // 以標籤點為中心量最遠的國界點。經度差要繞回 [-180, 180]，否則跨換日線的俄羅斯、
-  // 斐濟、南極會量出 360 度。直接取 bounding box 也會踩到同一個坑，而且像美國、
-  // 法國那種有遠方屬地的，box 的中心跟標籤點差很遠，框出來的不是國土。
-  let dLat = 0, dLon = 0;
-  for (const ring of a.rings) {
-    for (let i = 0; i < ring.length; i += 2) {
-      let dl = ring[i] - lon;
-      while (dl > 180) dl -= 360;
-      while (dl < -180) dl += 360;
-      dLon = Math.max(dLon, Math.abs(dl));
-      dLat = Math.max(dLat, Math.abs(ring[i + 1] - lat));
+  // 以標籤點為中心量國界，經度差要繞回 [-180, 180]。少了這一步，跨換日線的俄羅斯、
+  // 斐濟、南極會量出 360 度，斐濟其實只有五度寬。直接取 bounding box 也踩同一個坑。
+  //
+  // 只量標籤點所在的那一塊陸地。量遍全部 ring 的話，有海外屬地的國家會被拉到沒有
+  // 意義的尺度：法國連著法屬圭亞那量出來是 111 度 × 142 度，等於大半個地球，
+  // 進場之後畫面幾乎沒動，說是「飛到法國」名不符實。改成只框主陸塊之後是 11 × 17 度。
+  // 美國從 80 × 182 收到 36 × 80，印尼從 25 × 99 收到 15 × 16。
+  //
+  // 標籤點本來就是各國主要陸塊上的代表點，取外接框含住它的那個 ring 就對了。
+  // 幾個 ring 都含住時取面積最大的，那是外圍的主體而不是內部的洞。
+  const measure = (rings, need) => {
+    let best = null;
+    for (const ring of rings) {
+      let lo0 = Infinity, lo1 = -Infinity, la0 = Infinity, la1 = -Infinity;
+      for (let i = 0; i < ring.length; i += 2) {
+        let dl = ring[i] - lon;
+        while (dl > 180) dl -= 360;
+        while (dl < -180) dl += 360;
+        if (dl < lo0) lo0 = dl;
+        if (dl > lo1) lo1 = dl;
+        const db = ring[i + 1] - lat;
+        if (db < la0) la0 = db;
+        if (db > la1) la1 = db;
+      }
+      if (need && (lo0 > 0 || lo1 < 0 || la0 > 0 || la1 < 0)) continue;  // 沒含住標籤點
+      const area = (lo1 - lo0) * (la1 - la0);
+      if (!best || area > best.area) best = { area, dLat: Math.max(-la0, la1), dLon: Math.max(-lo0, lo1) };
     }
-  }
+    return best;
+  };
+  // 實測 175 國都找得到含住標籤點的 ring。退路留著是因為國界資料換版之後不保證還成立，
+  // 那時框得太大也好過整個查不到位置。
+  const m = measure(a.rings, true) || measure(a.rings, false);
+  if (!m) return { lat, lon, spanLat: FOCUS_MIN, spanLon: FOCUS_MIN };
+  const dLat = m.dLat, dLon = m.dLon;
   // 上限 180 度。南極環繞極點，量出來是 359 度，再乘留邊就變成繞了一圈半，那是
   // 沒有意義的數字。180 度已經是「整個看得到的半球」，再大也不會框得更廣。
   const span = (d) => clamp(d * 2 * FOCUS_PAD, FOCUS_MIN, 180);
@@ -3270,11 +3292,14 @@ async function fetchLive(btn) {
 const pointers = new Map();
 const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
+let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
+const DRAG_DEAD_PX = 6; // 跟挑選設施那條死區同一個值
 function bindControls(dom) {
   dom.addEventListener('pointerdown', (e) => {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
+    dragFrom = { x: e.clientX, y: e.clientY };
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
@@ -3291,9 +3316,14 @@ function bindControls(dom) {
     const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
-    // 視角真的動了才清網址上的關注區域。掛在 pointerdown 的話，點一下開變電所卡片
-    // 也會清掉，可是那時畫面根本沒動，網址反而變得比原本更不準。
-    clearFocus();
+    // 視角真的動了才清網址上的關注區域，而且要動得夠多。掛在 pointerdown 的話，
+    // 點一下開變電所卡片也會清掉，可是那時畫面根本沒動，網址反而變得比原本更不準。
+    //
+    // 光是「有 pointermove」還不夠。觸控面板即使只是點一下，回報的座標也常有一兩個
+    // 像素的晃動，那會發出 pointermove，網址就悄悄被清掉，畫面卻看不出變化。使用者
+    // 這時複製網址分享出去，對方開起來不會落在原本那一塊。門檻沿用挑選設施那條
+    // 6 像素死區，同一個問題同一個尺度，而且要從按下的那一刻起算，不是跟上一個 move 比。
+    if (dragFrom && Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > DRAG_DEAD_PX) clearFocus();
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
