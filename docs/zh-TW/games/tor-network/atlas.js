@@ -2806,8 +2806,6 @@ function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
 //
 // 輸電線是線段不是點，用 Raycaster 配 Line.threshold，那個本來就是為線設計的。
 // 線的優先序放最後，點壓在線上的時候應該選點。
-// 卡片上那條負載率比例條的滿格。全台最高 2.09，留一點餘裕。
-const CARD_R_MAX = 2.2;
 const PICK_PX = 16;        // 點的命中半徑（像素）
 const PICK_LINE = 0.035;   // 線的命中門檻（世界單位）
 const pickRay = new THREE.Raycaster();
@@ -2862,6 +2860,72 @@ function pickFeature(sx, sy) {
   return { kind: 'line', data: GRID.lines[0], d: 0 };
 }
 
+// 變電所卡片上的容量計。裝置容量、可靠容量、尖峰負載三個數字都是 MVA，擺在同一條
+// 軸上，N-1 的定義就變成看得到的幾何：可靠容量那道刻度到裝置容量之間的斜紋帶，
+// 寬度正好是最大那一台主變壓器，故障時消失的就是那一段。負載填色越過刻度，
+// 意思是尖峰時掉一台會撐不住。
+//
+// 軸長取 max(裝置容量, 尖峰負載)。全台只有光洲一座的尖峰負載超過裝置容量，多 4.4%，
+// 軸長若固定在裝置容量，那一座的填色會直接撞頂看不出溢出。所以軸長跟著放大，
+// 裝置容量改用刻度標出來，其餘 262 座的裝置容量刻度就落在軌道尾端。
+function subGauge(d) {
+  const one = (x) => Math.round(x * 10) / 10;
+  const hex = (n) => '#' + n.toString(16).padStart(6, '0');
+  const scale = Math.max(d.cap, d.load) || 1;
+  const pct = (v) => (v / scale * 100).toFixed(2);
+  const over = !d.solo && d.load > d.rel;
+  // 裝置容量的刻度貼在尾端時不必畫，軌道邊界本身就是它
+  const capInside = d.cap / scale < 0.985;
+  // 可靠容量與裝置容量太靠近時只留一個標籤，兩個疊在一起誰都讀不到。台電那份有
+  // 七座把可靠容量填得跟裝置容量一樣，那幾座的斜紋帶是零寬。
+  const relLabel = (d.cap - d.rel) / scale > 0.09;
+
+  const seg = [];
+  // 刻度貼在尾端時改成靠右對齊。left:100% 的那 2px 會整條被軌道的 overflow:hidden
+  // 切掉，可靠容量等於裝置容量的那七座就看不到刻度，文字卻說刻度落在尾端。
+  const tick = (v) => `<span class="tk" style="${v / scale > 0.995 ? 'right:0' : `left:${pct(v)}%`}"></span>`;
+  // 標籤貼著軸上的位置走。置中在兩端會溢出卡片，所以靠邊時改成貼邊對齊，
+  // 標籤的邊界就落在刻度上，指向關係不會跑掉。
+  const anchor = (v) => {
+    const t = v / scale;
+    if (t < 0.12) return 'left:0';
+    if (t > 0.88) return `right:${(100 - t * 100).toFixed(2)}%`;
+    return `left:${pct(v)}%;transform:translateX(-50%)`;
+  };
+  const lab = [];
+  if (d.solo) {
+    // 只有一台主變的站，沒有 N-1 可言，只畫負載對裝置容量。顏色沿用地圖上給
+    // 這類站的灰，一眼就知道它不在負載率的色階裡。
+    seg.push(`<span style="left:0;width:${pct(d.load)}%;background:${hex(COL.powSolo)}"></span>`);
+    lab.push(`<span style="left:0">${S('gLoad', { v: one(d.load) })}</span>`);
+  } else {
+    seg.push(`<span style="left:0;width:${pct(Math.min(d.load, d.rel))}%;background:${hex(COL.powLo)}"></span>`);
+    if (over) seg.push(`<span style="left:${pct(d.rel)}%;width:${pct(d.load - d.rel)}%;background:${hex(COL.powHi)}"></span>`);
+    seg.push(`<span class="n1" style="left:${pct(d.rel)}%;width:${pct(d.cap - d.rel)}%"></span>`);
+    seg.push(tick(d.rel));
+    lab.push(`<span style="left:0${over ? `;color:${hex(COL.powHi)}` : ''}">${S('gLoad', { v: one(d.load) })}</span>`);
+    if (relLabel) lab.push(`<span style="${anchor(d.rel)}">${S('gRel', { v: one(d.rel) })}</span>`);
+  }
+  if (capInside) seg.push(tick(d.cap));
+  lab.push(`<span style="${capInside ? anchor(d.cap) : 'right:0'}">${S('gCap', { v: one(d.cap) })}</span>`);
+
+  return `<div class="tr">${seg.join('')}</div><div class="sc">${lab.join('')}</div>`;
+}
+
+// 刻度標籤會不會擠在一起，跟語言與字型都有關，用字數估不準。實測 rel/cap 為 0.75
+// 的那 29 座只在英文版擠到，0.8333 的那一座三種語言都擠。所以渲染完直接量 bounding
+// box，真的疊到才把裝置容量挪到第二行，橫向位置保持不動，指向的刻度才不會跑掉。
+// 卡片要先顯示出來才量得到，隱藏中的元素 getBoundingClientRect 全是零。
+function fitGaugeScale(bar) {
+  if (!bar || !bar.classList.contains('gauge')) return;
+  bar.classList.remove('two');
+  const ls = [...bar.querySelectorAll('.sc > span')];
+  for (let i = 1; i < ls.length; i++) {
+    const a = ls[i - 1].getBoundingClientRect(), b = ls[i].getBoundingClientRect();
+    if (b.left < a.right + 6) { bar.classList.add('two'); return; }
+  }
+}
+
 function showFeature(hit) {
   const card = $('cc-card');
   if (!card) return;
@@ -2881,11 +2945,11 @@ function showFeature(hit) {
   } else if (hit.kind === 'sub') {
     code = d.name;
     sub = countyName(d.county);
+    // 三個數字都在圖上的標籤裡了，文字只講怎麼讀那張圖。
+    // 可靠容量等於裝置容量的那七座沒有餘裕帶可指，換一段說明。
+    const ratio = d.ratio === null ? '–' : Math.round(d.ratio * 100);
     body = (d.solo ? S('pkSubSolo', { cap: num(d.cap), load: num(d.load) })
-      : S('pkSub', {
-        cap: num(d.cap), rel: num(d.rel), load: num(d.load),
-        ratio: d.ratio === null ? '–' : Math.round(d.ratio * 100),
-      }))
+      : S(d.cap - d.rel < 1e-9 ? 'pkSubFlat' : 'pkSub', { ratio }))
       + (d.area ? '<br>' + S('pkSubArea', { area: d.area }) : '');
   } else if (hit.kind === 'renew') {
     const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
@@ -2918,28 +2982,22 @@ function showFeature(hit) {
   const bar = $('cc-bar');
   const hex = (n) => '#' + n.toString(16).padStart(6, '0');
   if (bar) {
-    let html = '';
-    if (hit.kind === 'sub' && !d.solo && d.ratio !== null) {
-      // 分兩段：可靠容量以內的部分與超出的部分。兩段的交界就是 100%，
-      // 有沒有越線一眼看得出來，不必另外畫刻度。
-      //
-      // 滿格用 CARD_R_MAX 而不是地圖色階的 POW_R_HI。色階的上限是為了跨站比較，
-      // 1.4 以上一律同色沒關係。但卡片講的是這一座，撞頂的話 182% 跟 147% 會長得
-      // 一模一樣。實測全台的負載率最高 2.09，取 2.2 讓每一座都分得出來。
-      const okW = Math.min(d.ratio, 1) / CARD_R_MAX * 100;
-      const overW = Math.max(0, Math.min(d.ratio, CARD_R_MAX) - 1) / CARD_R_MAX * 100;
-      html = `<span style="width:${okW.toFixed(1)}%;background:${hex(COL.powLo)}"></span>`
-        + (overW > 0 ? `<span style="width:${overW.toFixed(1)}%;background:${hex(COL.powHi)}"></span>` : '');
+    let html = '', gauge = false;
+    if (hit.kind === 'sub' && d.cap > 0 && (d.solo || d.ratio !== null)) {
+      html = subGauge(d);
+      gauge = true;
     } else if (hit.kind === 'plant' && d.cap > 0) {
       // 當下出力佔裝置容量多少
       const w = clamp(d.out / d.cap, 0, 1) * 100;
       html = `<span style="width:${w.toFixed(1)}%;background:${hex(COL.plant)}"></span>`;
     }
+    bar.classList.toggle('gauge', gauge);
     bar.innerHTML = html;
     bar.hidden = !html;
   }
   $('cc-body').innerHTML = body;
   card.hidden = false;
+  fitGaugeScale(bar);
 }
 
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
@@ -3604,6 +3662,9 @@ async function main() {
     renderer.setSize(innerWidth, innerHeight);
     refreshUIBoxes(); // 距離由 targetDist() 依新的畫面比例自動貼合，這裡不用另外算
     measureLabels();
+    // 卡片寬度是 min(94vw, 470px)，轉向或改視窗大小都會變。容量計的刻度標籤擠不擠
+    // 得下跟寬度直接相關，窄螢幕上原本放得下的會擠在一起，要重新量一次。
+    fitGaugeScale($('cc-bar'));
   });
   bindControls(renderer.domElement);
   // 即時更新的按鈕從一開始就在位子上，只是停用著，等這裡才放行。

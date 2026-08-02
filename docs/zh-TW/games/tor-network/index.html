@@ -309,6 +309,34 @@
     #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
     #cc-bar span { display: block; height: 100%; }
     #cc-bar[hidden] { display: none; }
+    /* 變電所的容量計。裝置容量、可靠容量、尖峰負載三個數字都是 MVA，同一條軸就放得
+       下，N-1 的定義也就不必只靠文字解釋。可靠容量那道刻度到裝置容量之間的斜紋帶，
+       就是最大那一台主變壓器，故障時消失的正是那一段。負載填色越過刻度，代表尖峰時
+       掉一台會撐不住。
+       原本畫的是「負載除以可靠容量」，滿格 220%，100% 那條線落在軌道的 45.5% 卻沒有
+       任何標記，四分之三的站都在線內，看到的只是一截藍條，讀不出離線多遠。裝置容量
+       更是完全沒出現在圖上。 */
+    #cc-bar.gauge { display: block; position: relative; height: 29px; border-radius: 0;
+                    overflow: visible; background: none; margin: 9px 0 4px; }
+    #cc-bar.gauge .tr { position: absolute; left: 0; right: 0; top: 0; height: 13px;
+                        border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.06); }
+    #cc-bar.gauge .tr > span { position: absolute; top: 0; height: 100%; display: block; }
+    /* 斜紋畫在填色之上，負載吃進餘裕時兩件事要同時看得到：這一段有負載，而這一段
+       故障時會消失 */
+    #cc-bar.gauge .n1 { background-image: repeating-linear-gradient(115deg,
+                        rgba(255,255,255,.34) 0 2px, rgba(255,255,255,0) 2px 6px); }
+    #cc-bar.gauge .tk { width: 2px; background: #eaf4ff; }
+    #cc-bar.gauge .sc { position: absolute; left: 0; right: 0; top: 17px; height: 12px;
+                        font-size: 9.5px; line-height: 12px; color: #7d93a6; }
+    /* 高度要寫死。基礎規則 #cc-bar span 有 height:100%，換兩行時 .sc 撐到 24px，
+       標籤就跟著變 24px 高，兩行會疊在一起，看起來像換行沒生效。 */
+    #cc-bar.gauge .sc span { position: absolute; top: 0; height: 12px; white-space: nowrap; }
+    #cc-bar.gauge .sc b { font-weight: 700; color: #a8c4da; }
+    /* 可靠容量與裝置容量兩個標籤擠在一起時，把裝置容量落到第二行。橫向位置不動，
+       它指的還是同一道刻度。實測只有 rel/cap 偏高的少數幾座會走到這裡。 */
+    #cc-bar.gauge.two { height: 41px; }
+    #cc-bar.gauge.two .sc { height: 24px; }
+    #cc-bar.gauge.two .sc > span:last-child { top: 12px; }
     .cc-roles { display: flex; flex-wrap: nowrap; gap: 5px; margin-top: 8px; }
     .cc-sub2 { margin-top: 7px; font-size: 11px; line-height: 1.6; }
     .cc-sub2 .dim, #cc-body .dim { color: #7d93a6; }
