@@ -660,7 +660,28 @@ async function getJSON(url, opt) {
 // 注意 assets.anoni.net 必須回 Access-Control-Allow-Origin，這是跨來源請求，
 // 沒有這個 header 瀏覽器會直接擋掉，每次載入都會走到退回那條路。
 const ASSETS = 'https://assets.anoni.net/games/';
+
+// 這一份是不是在「不該對 clearnet 打電話回家」的情境下開的。
+//
+// onion 上打 clearnet 端點會脫離 onion 的保護範圍，而且會把「有人在看這個 onion
+// service」跟「有人在存取 assets.anoni.net」在時間上關聯起來。IPFS 版本的定位是
+// 離線也能看，對外連線跟那個定位相衝，透過公開網關開的話那條連線還會直接走使用者
+// 自己的網路，真實 IP 就交出去了，那正是選這個版本想避免的事。
+//
+// 原本只有「即時更新」那顆按鈕看這個判斷，頁面載入時抓 assets 的那三份完全沒看，
+// 等於防了使用者主動觸發的那條路，卻放著自動觸發的那三條不管。
+function offlineFirst() {
+  const h = location.hostname || '';
+  if (h.endsWith('.onion')) return true;
+  if (/(^|[.-])ipfs[.-]|(^|[.-])ipns[.-]|\.eth\.(link|limo)$/.test(h)) return true;
+  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return true;   // 公開網關的路徑式位址
+  return false;
+}
+
 async function getJSONAsset(name, opt) {
+  // 這幾份站上都有一份，抓 assets 只是為了拿比較新的。換不到新的頂多是舊一點，
+  // 拿隱私換那點新鮮度不划算。
+  if (offlineFirst()) return getJSON('./' + name, opt);
   try {
     return await getJSON(ASSETS + name, { ...opt, mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
   } catch (e) {
@@ -2746,7 +2767,10 @@ function projectPoint(lat, lon, r, nearZ) {
 
 /** 回傳 {kind, data} 或 null。kind 是 plant / sub / landing / line。 */
 function pickFeature(sx, sy) {
-  if (twSwapT() <= 0.05) return null;         // 這幾層還沒淡入，不該點得到
+  // 還沒淡入的層不該點得到，但登陸點不在那批裡。它的材質 opacity 寫死 0.85，
+  // 從太空視角就一直看得見（那是刻意的，海岸邊幾點微光）。一律擋掉的話會變成
+  // 螢幕上明明有一個亮點，點下去卻毫無反應，而且沒有任何提示說明為什麼。
+  const deep = twSwapT() > 0.05;
   globe.updateMatrixWorld();
   camera.updateMatrixWorld();
   const nearZ = R * R / camera.position.z;
@@ -2759,13 +2783,16 @@ function pickFeature(sx, sy) {
     // 同樣距離時照 kind 的順序決定，電廠優先於變電所優先於登陸點
     if (!best || d < best.d) best = { kind, data, d };
   };
-  for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
-  for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
+  if (deep) {
+    for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
+    for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
+    for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * 1.0095);
+  }
   for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * 1.011);
-  for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * 1.0095);
   if (best) return best;
 
   // 沒點到點才輪到線
+  if (!deep) return null;
   if (!gridLineMat || !GRID || !GRID.lines || !GRID.lines.length) return null;
   pickNdc.set((sx / innerWidth) * 2 - 1, -(sy / innerHeight) * 2 + 1);
   pickRay.setFromCamera(pickNdc, camera);
@@ -3149,11 +3176,7 @@ const AS_TOP_PER_COUNTRY = 3, AS_TOP_GLOBAL = 15, AS_NAME_MAX = 26;
 // .onion 與 IPFS 版本不給這個按鈕。onion 上打 clearnet 端點會脫離 onion 的保護範圍，
 // IPFS 版本的定位是離線也能看，對外連線跟那個定位相衝。
 function liveAllowed() {
-  const h = location.hostname || '';
-  if (h.endsWith('.onion')) return false;
-  if (/(^|\.)ipfs\.|(^|\.)ipns\.|\.eth\.(link|limo)$/.test(h)) return false;
-  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return false; // 公開網關的路徑式位址
-  return true;
+  return !offlineFirst();
 }
 
 // AS 的註冊名稱不一定是公司。個人申請的 AS 登記的就是持有人本名，把它印在畫面上等於

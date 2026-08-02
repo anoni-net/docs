@@ -163,6 +163,63 @@ def geocode(addr, cache):
     return None, None, "查無"
 
 
+def in_ring(flat, lon, lat):
+    """射線法。flat 是扁平化的 lon/lat 陣列，跟 tw-admin.json 的 p 同格式。"""
+    hit = False
+    n = len(flat)
+    j = n - 2
+    for i in range(0, n, 2):
+        yi, yj = flat[i + 1], flat[j + 1]
+        if (yi > lat) != (yj > lat):
+            if lon < (flat[j] - flat[i]) * (lat - yi) / (yj - yi) + flat[i]:
+                hit = not hit
+        j = i
+    return hit
+
+
+def load_county_polys():
+    """讀 gen_tw_admin.py 產出的縣市界，用來驗地理編碼的結果真的落在該縣市。
+
+    county_of() 只是拿地址字串的前綴對縣市清單，那驗的是「台電怎麼寫」，不是
+    「Nominatim 把它放到哪裡」。地址寫新北市而編碼結果掉到桃園，字串比對看不出來。
+    這道檢查才是真的在驗座標。
+
+    產不出來就跳過並提醒，不要因為少一個檔就整支失敗。
+    """
+    p = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-admin.json")
+    if not os.path.exists(p):
+        print(f"  提醒：找不到 {p}，跳過座標與縣市的一致性檢查。"
+              f"先跑 tools/gen_tw_admin.py 會比較安心。", file=sys.stderr)
+        return None
+    with open(p, encoding="utf-8") as f:
+        d = json.load(f)
+    return {norm(c["zh"]): c["p"] for c in d.get("c", [])}
+
+
+def verify_counties(sites, polys):
+    """把落在所述縣市之外的座標丟掉。回傳丟掉幾筆。
+
+    寧可沒有座標也不要錯的座標。畫錯位置比不畫更糟，因為看的人不會知道它是錯的。
+    """
+    if not polys:
+        return 0
+    bad = 0
+    for s in sites:
+        if s["lat"] is None or not s["county"]:
+            continue
+        rings = polys.get(norm(s["county"]))
+        if not rings:
+            continue
+        if any(in_ring(r, s["lon"], s["lat"]) for r in rings):
+            continue
+        print(f"  丟掉 {s['name']}：編碼到 {s['lat']:.5f},{s['lon']:.5f}，"
+              f"不在台電所述的 {s['county']} 境內", file=sys.stderr)
+        s["lat"] = s["lon"] = None
+        s["precision"] = "縣市界驗證未通過"
+        bad += 1
+    return bad
+
+
 def build_sites(cache):
     rows = rows_of(DS_SITE)
     if len(rows) < MIN_SITES:
@@ -274,6 +331,10 @@ def main():
 
     print("  取再生能源各場址並地理編碼（每秒一次，約兩分鐘）…", file=sys.stderr)
     sites, skipped, unlocated = build_sites(cache)
+    # 地理編碼完就驗座標落在台電所述的縣市裡。這道檢查一直寫在 NOTICE 與畫面的
+    # 來源說明裡，但先前只有 gen_tw_power.py 真的做，這支沒有，說明與實作對不上。
+    dropped = verify_counties(sites, load_county_polys())
+    unlocated += dropped
     if cache_path:
         with open(cache_path, "w", encoding="utf-8") as f:
             json.dump(cache, f, ensure_ascii=False)
@@ -323,6 +384,9 @@ def main():
     print(f"寫出 {out}")
     print(f"  再生能源場址 {st['n']} 處（跳過 {skipped} 列小計），合計 {st['cap']:,.1f} MW")
     print(f"    定位到 {st['located']} 處，{unlocated} 處沒有（多半是離岸或地址查不到）")
+    print(f"    縣市界驗證：{st['located']} 處全部落在台電所述的縣市內"
+          if not dropped else
+          f"    縣市界驗證：丟掉 {dropped} 處落在別的縣市的座標")
     print(f"  用電統計 {demand['label']}，{len(demand['counties'])} 個縣市，"
           f"資料涵蓋 {demand['months']} 個月")
     print(f"  備轉容量率 {reserve['from']} 到 {reserve['to']}，"

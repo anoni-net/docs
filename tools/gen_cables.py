@@ -240,8 +240,12 @@ def main():
         "note": "seamark:type=cable_submarine。OSM 的海纜覆蓋仍不完整，這是底圖不是完整清單。",
         "lines": flat,
     }
-    with open(out, "w", encoding="utf-8") as f:
+    # 先寫暫存再換掉。中途失敗（被 kill、磁碟滿）不會留下半截的 json 蓋掉本來好的
+    # 那一份。這支原本是全部產生器裡唯一直接寫進目標路徑的。
+    tmp = out + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, separators=(",", ":"), ensure_ascii=False)
+    os.replace(tmp, out)
     print(f"DONE → {out}（{time.time() - t0:.0f} 秒）")
     print(f"  {len(flat)} 條線，{total_pts:,} 個座標點，{os.path.getsize(out):,} bytes")
 
