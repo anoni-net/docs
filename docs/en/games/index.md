@@ -1,6 +1,6 @@
 ---
 title: "Interactive: 3D Tor network visualisations and games"
-description: Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor - a puzzle that walks you through three-hop onion routing, a live view of traffic meeting at rendezvous points, and a relay globe built from six public datasets.
+description: Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor - a puzzle that walks you through three-hop onion routing, a live view of traffic meeting at rendezvous points, and a relay globe built from more than a dozen public datasets, which at Taiwan scale adds cable landing points and the power grid.
 icon: material/cube-outline
 social:
   cards: false
@@ -41,7 +41,7 @@ All three pieces have an English interface. The three language editions share on
 
     ---
 
-    A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates five more datasets: connection-blocking measurements, user estimates, shutdown records and submarine cables.
+    A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates connection-blocking measurements, user estimates, shutdown records, submarine cables and internet-usage rates. Zoom in on Taiwan and it adds county boundaries, cable landing points, substations, power plants and the transmission grid.
 
     <a href="../../games/tor-network/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
 
@@ -61,7 +61,7 @@ These pieces are an entry point, not a replacement for the documentation. They m
 
 ## What the globe brings together
 
-Of the three works, the globe pulls in the most data. It puts public datasets scattered across different organisations onto one sphere, so that "where relays can be run" and "where Tor can be reached" can be read side by side.
+Of the three works, the globe pulls in the most data. It puts public datasets scattered across different organisations onto one sphere, so that "where relays can be run" and "where Tor can be reached" can be read side by side. Zoom in on Taiwan and one more layer appears: the physical infrastructure those connections actually depend on.
 
 ### Relay distribution (Onionoo, CC0 1.0)
 
@@ -94,6 +94,22 @@ Internet shutdowns from `2009` to `2025`, compiled and verified case by case, co
 
 The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth.
 
+### Internet usage rate (World Bank CC BY 4.0, Ministry of Digital Affairs)
+
+The internet usage rate on each country card exists to serve as a denominator. "How many people in this country use Tor" is in large part a comparison of population size; knowing what share of a country is online is what tells you whether a gap between two countries reflects demand or just headcount. The World Bank series covers 208 economies but not Taiwan, so the Taiwanese figure comes from the Ministry of Digital Affairs' national digital access survey instead. The two use different methods — one aggregates national reporting through the ITU, the other is a telephone sample of people aged 12 and over — and the card says so, because they should not be compared directly.
+
+### Taiwan's infrastructure (Open Government Data License, OpenStreetMap ODbL)
+
+Zooming in on Taiwan brings up five more layers. It is the only region on this globe drawn down to county scale.
+
+- **County boundaries** — the Ministry of the Interior's municipality and county boundaries, 22 counties across 84 rings. It doubles as Taiwan's coastline, because the global coastline is too coarse at this scale, so the rough outline is swapped for it as you approach.
+- **Cable landing points** — 14 of them, a dataset we built ourselves. Landing point coordinates are part of TeleGeography's commercial product and OpenStreetMap does not carry them, so we took the Ministry of Digital Affairs' public cable list as the spine and cross-checked each coordinate, recording a precision grade and its own sources for every entry. This v1 is incomplete and the gaps are listed in the header of the source file.
+- **Substations** — Taipower's installed and reliable capacity for secondary substation main transformers, 280 sites, 201 of which can be placed on the map. The gauge on the card turns N-1 into visible geometry: the hatched band between the reliable-capacity tick and installed capacity is exactly the largest main transformer, the part that disappears when it fails. Nationwide, 64 sites have a peak load above their reliable capacity, which means losing one transformer at peak would leave the rest short. That is a separate question from whether the site is overloaded today.
+- **Power plants and the 345 kV backbone** — 105 plants and 242 transmission segments. Only 17 plants can be located, but those 17 already account for 71% of installed capacity; the ones that cannot are mostly offshore wind and small hydro. Nothing below 161 kV is drawn at all, so this is not a complete grid.
+- **Demand and renewables** — 93 Taipower-owned renewable sites, 124 months of county-level electricity demand, and 212 days of this year's daily peak operating reserve margin. Demand can be viewed either as total consumption or as the industrial share, and switching to the latter makes the science parks visible.
+
+The left-hand panel groups everything Taiwan-related together, and the "Focus Taiwan" button flies straight there. Adding `#tw` to the URL does the same thing, so a shared link can decide what the recipient sees first; other country codes such as `#jp` work the same way. Plants, substations, renewable sites, landing points and transmission lines can all be clicked for detail.
+
 Every data file carries `source`, `sourceUrl`, `license` and `licenseUrl` fields, and the corresponding credits are listed below the globe. The full licence list lives in `NOTICE` at the root of the project.
 
 ## What moves on the globe
@@ -114,11 +130,11 @@ These pages cover concepts that show up in the current works.
 
 ## Want to help build them
 
-The source for all three pieces lives in the [anoni-net/docs](https://github.com/anoni-net/docs) repository under `docs/zh-TW/games/`, roughly 4,300 lines of JavaScript in total. There is no build step: the browser loads ES modules directly, so you edit a file, save, and reload. three.js is vendored locally, which keeps the onion and IPFS editions free of any external CDN.
+The source for all three pieces lives in the [anoni-net/docs](https://github.com/anoni-net/docs) repository under `docs/zh-TW/games/`, roughly 6,300 lines of JavaScript in total, of which the globe accounts for 4,300. There is no build step: the browser loads ES modules directly, so you edit a file, save, and reload. three.js is vendored locally, which keeps the onion and IPFS editions free of any external CDN.
 
 The documentation content on this site is under [CC BY 4.0](https://github.com/anoni-net/docs/blob/main/LICENSE), and because the source for these three pieces sits under `docs/`, the same licence applies to it. The external datasets behind the globe keep their original licences, listed in `NOTICE` at the root of the repository. One of them, OONI, is CC BY-NC-SA 4.0 and prohibits commercial use.
 
-Knowing JavaScript is enough to work on the copy, the level design and the interaction logic. Touching the rendering takes some three.js or WebGPU experience. The six `gen_*.py` data generation scripts sit in `tools/` and use only the Python standard library plus curl. The same directory also holds a Node.js helper that nudges the cable corridors off land, and a shell script that publishes the data. None of them need anything installed.
+Knowing JavaScript is enough to work on the copy, the level design and the interaction logic. Touching the rendering takes some three.js or WebGPU experience. The fourteen `gen_*.py` data generation scripts sit in `tools/` and use only the Python standard library plus curl, with no GIS dependency at all: even the county-boundary shapefile is parsed by hand with `struct`. The same directory holds four regression checks that lift functions straight out of `atlas.js` and replay events against them, or measure the rendered layout in headless Chrome, and CI runs them whenever the relevant files change. There is also a helper that nudges the cable corridors off land, and a shell script that publishes the data. None of them need anything installed.
 
 ## What comes next
 
@@ -138,7 +154,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
       "@id": "https://anoni.net/docs/en/games/#collection",
       "name": "Interactive",
       "url": "https://anoni.net/docs/en/games/",
-      "description": "Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor.",
+      "description": "Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor, and the globe integrates more than a dozen public datasets.",
       "inLanguage": "en",
       "publisher": { "@id": "https://anoni.net/#organization" },
       "mainEntity": { "@id": "https://anoni.net/docs/en/games/#works" }
@@ -184,7 +200,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
             "url": "https://anoni.net/docs/games/tor-network/?lang=en",
             "image": "https://assets.anoni.net/games/tor-network.png",
             "applicationCategory": "EducationalApplication",
-            "description": "A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, layered with connectivity observations, user estimates, shutdown records and submarine cables."
+            "description": "A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, layered with connectivity observations, user estimates, shutdown records, submarine cables and internet-usage rates, plus county boundaries, cable landing points, substations, power plants and the grid at Taiwan scale."
           }
         }
       ]
