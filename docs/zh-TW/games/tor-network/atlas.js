@@ -7,13 +7,51 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
-import { pickLang, t, langLinksHTML } from './i18n.js';
+import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
 const S = (k, v) => t(LANG, k, v);
+
+// 資料欄位拼進 innerHTML 之前先跳脫。
+//
+// i18n 的字串本來就帶 <b> 與 <a>，那是我們自己寫的，不能跳脫。要跳脫的是從資料檔與
+// API 進來的欄位：AS 的註冊名稱是持有人自己申報的自由文字，Onionoo 原樣轉發，即時
+// 更新那條路等於把第三方可寫的字串拼進頁面。台灣那幾份雖然是自己產的，但一起跳脫
+// 才不用每加一個欄位就重新判斷一次「這個來源可不可信」。
+//
+// 這頁的威脅模型讓後果比一般網站嚴重：真的做成 XSS，攻擊者就能讓瀏覽器對任意網域
+// 發請求，等於繞開 offlineFirst() 擋的那件事。
+const esc = (v) => String(v == null ? '' : v)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 // html 的 lang 要跟著換，螢幕閱讀器與瀏覽器的自動翻譯都靠它判斷這頁是什麼語言
 document.documentElement.lang = LANG === 'zh-TW' ? 'zh-Hant' : (LANG === 'zh-cn' ? 'zh-Hans' : 'en');
+
+// 把收合鍵的寬度釘住。
+//
+// 它在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），寬度會跟著變，
+// 英文實測 35.4 與 49.3，切換狀態時整排會跳一下。取兩者較寬的當 min-width 就不動了。
+//
+// 收合鍵是 .title-row::after 的偽元素，JS 量不到也設不了它的寬度，所以量一個離屏探針再把
+// 結果寫進 CSS 變數。字重用 800，跟偽元素一致。
+//
+// 即時更新鍵不吃這個值，讓它依自己的內容撐開就好。
+function sizeToggle() {
+  const title = document.querySelector('.title-row');
+  if (!title) return;
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:11px;font-weight:800;';
+  title.appendChild(probe);
+  let w = 0;
+  for (const k of ['toggleOpen', 'toggleClosed']) {
+    probe.textContent = S(k);
+    w = Math.max(w, probe.getBoundingClientRect().width);
+  }
+  probe.remove();
+  // 左右內距 9px 加各 1px 框線，box-sizing 是 border-box 所以要含進去
+  document.documentElement.style.setProperty('--toggle-w', `${Math.ceil(w) + 20}px`);
+}
 
 // 把畫面上的靜態文字換成目前語言。HTML 裡留繁中當 fallback，載入前不會空白。
 function applyI18n() {
@@ -28,11 +66,15 @@ function applyI18n() {
     if (!el) return;
     if (html) el.innerHTML = S(key); else el.textContent = S(key);
   };
-  set('title', 'pageTitle');
+  // 換的是標題那一段文字，不是整個 summary。summary 裡還有即時更新的按鈕，
+  // 對 #title 下 textContent 會把按鈕一起洗掉。
+  set('title-text', 'pageTitle');
   set('unit-relays', 'unitRelays');
   set('snapshot-at', 'snapshotAt');
   set('btn-live', 'btnLive');
-  set('live-note', 'liveNote');
+  // 停用期間給個 title，滑過去看得出來是還沒好而不是壞了。放行時會清掉。
+  const lb0 = $('btn-live');
+  if (lb0 && lb0.disabled) lb0.title = S('loading');
   set('lbl-roles', 'lblRoles');
   set('lbl-brightness', 'lblBrightness');
   set('mode-count', 'modeCount');
@@ -46,19 +88,35 @@ function applyI18n() {
   set('lbl-users', 'lblUsers');
   set('lbl-ooni', 'lblOoni');
   set('lbl-shutdown', 'lblShutdown');
+  set('lbl-seacable', 'lblSeacable');
+  set('tw-title', 'twTitle');
+  set('btn-tw', 'btnTw');
+  set('lbl-grid', 'lblGrid');
+  set('lbl-energy', 'lblEnergy');
+  set('use-total', 'useTotal');
+  set('use-ind', 'useInd');
+  set('lbl-power', 'lblPower');
+  set('lbl-landing', 'lblLanding');
   set('note', 'note');
   set('credit-title', 'creditTitle');
   set('credit-onionoo', 'creditOnionoo', true);
   set('credit-metrics', 'creditMetrics', true);
   set('credit-ooni', 'creditOoni', true);
   set('credit-accessnow', 'creditAccessNow', true);
+  set('credit-seacable', 'creditSeacable', true);
+  set('credit-energy', 'creditEnergy', true);
+  set('credit-grid', 'creditGrid', true);
+  set('credit-power', 'creditPower', true);
+  set('credit-landing', 'creditLanding', true);
+  set('credit-twadmin', 'creditTwAdmin', true);
   set('credit-ne', 'creditNaturalEarth', true);
   set('credit-osm', 'creditOsm', true);
-  set('circ-tag', 'circTag');
+  set('credit-netusers', 'creditNetUsers', true);
   set('cc-close', 'ccClose');
   set('loading', 'loading');
   set('hint-wide', 'hintWide');
   set('hint-narrow', 'hintNarrow');
+  set('btn-spin', 'btnSpin');
   set('hint-close', 'hintClose');
   set('backend', 'backendDetecting');
   const bu = $('btn-users');
@@ -66,6 +124,7 @@ function applyI18n() {
   // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
   document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
   document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
+  sizeToggle();
 }
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -81,10 +140,44 @@ const COL = {
   cable: 0x2f7fa8, // 海底電纜。壓得比海岸線還低，只是讓海面不要一片空白
   blocked: 0xff5a6e, // OONI 觀測到 Tor 連線大量失敗的國家。紅色系跟四個角色色都拉開
   border: 0x4f88b4,  // 國界。壓在海岸線之下一階，讓海陸交界仍然是最清楚的那條線
+  // 台灣海纜登陸點。要跟 cable 的鋼藍拉開（那是同一個主題的鄰居圖層），也要避開
+  // 四個角色色與 blocked 的紅。留在青綠這一側，亮度夠高，讀得出是資料層。
+  landing: 0x63d6c0,
+  // 台灣縣市界線。跟 border 的藍同一族但亮一階，讀得出是「更細一級的行政界線」，
+  // 又不會跟 landing 的青綠或中繼點的角色色打架。只在貼近地表時才畫。
+  twAdmin: 0x7fb8dd,
+  // 變電所的負載率色階。紫到洋紅這一段目前沒有別的圖層在用，跟四個角色色、
+  // blocked 的警示紅、landing 的青綠都拉得開。刻意不用綠到紅那套交通號誌配色：
+  // 紅在這張圖上已經是「OONI 觀測到大量連線失敗」的意思，再用一次會混淆。
+  //
+  // 低端刻意比背景亮一階。第一版用 0x5f7fd8，亮度 0.23，壓在縣市界的 0.44 之下，
+  // 結果整層看起來只有洋紅那幾顆存在，餘裕還夠的那些融進深藍背景裡看不見。
+  powLo: 0x7ea8e0,   // 備援餘裕還夠。L=0.38，比海（0.01）與陸地（0.03）亮得多
+  powHi: 0xe8559a,   // 尖峰時掉一台主變就撐不住
+  // 單一主變沒有 N-1 可言，不屬於上面那條色階，所以跳出冷暖兩端用暖白，
+  // 讀起來是「另一類」而不是「更嚴重」或「更輕微」。
+  powSolo: 0xd9d3c0,
+  // 發電與電網。變電所已經占掉藍到洋紅那一段，登陸點是青綠，所以這一層走暖橙。
+  // 跟 exit 中繼的琥珀色相近，但那是點、這是線與較大的點，而且只在貼近台灣時出現，
+  // 那個距離下畫面上的中繼點只有個位數，實際不會混淆。
+  gridLine: 0xc86a3a, // 345kV 骨幹
+  plant: 0xffa050,    // 發電廠
+  // 台電自建的再生能源場址。純黃色目前沒有別的圖層在用，跟 exit 的琥珀、
+  // guard 的綠都拉得開，而且黃色讀起來就是太陽能與風力那一類。
+  renew: 0xf0e050,
+
+
 };
 // 底圖貼圖用色（畫在 canvas 上，走 CSS 色字串）
 const MAP = {
-  sea: '#06182c',       // 海
+  sea: '#06182c',       // 海。深海的底色，等深線讀不到時整片海就是這個顏色
+  // 海底地形的五階，由淺到深：大陸棚、200-1000、1000-3000、3000-5000、5000 以下。
+  // 最深那階刻意等於 sea，這樣沒有 bathymetry.json 時畫面跟以前一模一樣，
+  // 有的時候也只是把靠岸的那一圈提亮，大洋主體不動。
+  //
+  // 幅度壓得很克制。陸地亮度是資料（中繼數），海底地形是背景，海的階差要是拉得跟
+  // 陸地的色階一樣明顯，讀者會以為海面上那幾階也在講什麼數字。
+  seaRamp: ['#083350', '#082b44', '#07223a', '#061c31', '#06182c'],
   land: '#16334e',      // 陸地本色，各國一致
   glowLo: '#0d2c46',    // 有中繼，最少
   glowHi: '#3d87bd',    // 有中繼，最多。壓著上限走，底圖只是提示，主角是上面的中繼點
@@ -145,7 +238,21 @@ let renderer, scene, camera, post, globe, sun;
 // ry 跟經度的換算：llToVec 的慣例下，要讓經度 L 面向鏡頭得設 ry = (-L - 90) 度。
 // 2.28 rad 約當經度 141，日本本州正對畫面中心。
 const view = { zoom: 1, rx: 0.45, ry: 2.28, spin: true };
-const ZOOM_MIN = 0.42, ZOOM_MAX = 1.4;
+// zoom 現在是「離地高度」的倍率，不是「離球心距離」的倍率。
+//
+// 舊的算法是 fitDist * zoom，那個在鏡頭靠近地表時會塌掉：涵蓋的地表角度隨距離
+// 漸近趨近零，整個縮放範圍的九成六只涵蓋 180 度到 4 度，剩下四趴要塞 4 度到 0.5 度。
+// 想看到縣市層級（一度地表大約 111 公里）相機得壓到離球心 5.1，那時 zoom 只剩
+// 0.331 到 0.351 那一小段，滾一格就從整個台灣跳到一個鄉鎮。
+//
+// 改成 R + (fitDist - R) * zoom 之後 zoom 正比於離地高度，深層變成近乎線性：
+// 桌機 zoom 0.0101 對到一度、0.0051 對到半度，乘法式的滾輪與捏合一路都是同樣手感。
+// zoom = 1 兩種算法給的距離一樣，進場的視角完全沒變。
+//
+// ZOOM_MIN 停在 0.004（桌機約 0.4 度、44 公里）。再下去就會看到縣市界線被
+// Douglas-Peucker 簡化掉的痕跡，那份資料的容差是 0.0006 度、約 67 公尺，
+// 0.3 度視野下剛好是一個像素。工具能給的精度到哪，這裡就停在哪。
+const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
 
 // 整顆地球完整入鏡所需的距離。直式手機的水平視野比垂直窄很多，固定距離會把地球裁掉大半。
 function fitDist() {
@@ -153,7 +260,322 @@ function fitDist() {
   const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
   return R * 1.18 / Math.sin(Math.min(vFov, hFov) / 2);
 }
-function targetDist() { return fitDist() * view.zoom; }
+function targetDist() { return R + (fitDist() - R) * view.zoom; }
+
+// 從「太空視角」過渡到「地圖視角」的程度，0 是太空、1 是貼著地表。
+//
+// 這底下幾層是為了太空視角存在的，鏡頭壓到地表附近時它們只會擋路：大氣層的殼在
+// R*1.045，相機低於那個高度會鑽進殼裡。極光的簾幕頂端到 R*1.172，示意路徑的弧線
+// 最高拱到 R*1.2。反過來縣市界線只有貼近了才有意義，遠看是一團糾結的線。
+// 兩邊都吃這一個值，一個往下淡出、一個往上淡入。
+// 畫面短邊涵蓋多少度地表。所有「現在算遠看還是近看」的判斷都吃這個值。
+//
+// 原本這幾個轉換是用離地高度判斷的，改掉是因為深處要縮窄視角讓畫面變平，而縮窄
+// 視角之後同樣的涵蓋度需要站得更遠。用高度判斷的話會變成：視角一窄、高度就升，
+// 判斷就退回遠看，視角又放寬，來回震盪。改用涵蓋度就沒有這個回饋，而且「螢幕上
+// 看得到多少地表」本來就比「離地多高」更貼近這幾個轉換真正想表達的事。
+function coverDeg(dist) {
+  const d = dist === undefined ? camera.position.z : dist;
+  const vFov = camera.fov * Math.PI / 180;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  const th = Math.min(vFov, hFov) / 2;
+  const disc = d * d * Math.cos(th) ** 2 - d * d + R * R;
+  if (disc < 0) return 180;                       // 視線掃出球外，整顆入鏡
+  const t = d * Math.cos(th) - Math.sqrt(disc);
+  return 2 * Math.asin(Math.min(1, t * Math.sin(th) / R)) * 180 / Math.PI;
+}
+
+const DEEP_HI = 14.7;  // 短邊涵蓋大於這麼多度，完全是太空視角
+const DEEP_LO = 3.3;   // 小於這麼多度，完全是地圖視角
+const deepU = uniform(0);
+function deepT() {
+  return clamp((DEEP_HI - coverDeg()) / (DEEP_HI - DEEP_LO), 0, 1);
+}
+
+// 「關注台灣」的飛行定位。
+//
+// 目標經緯度是台灣本島的中心。涵蓋度用解的不用寫死 zoom，因為 zoom 是相對於
+// fitDist 的倍率，而 fitDist 隨畫面長寬比變動很大（桌機 15.4、手機直式 31.4）。
+// 同一個 zoom 在兩種螢幕上看到的地表範圍差好幾倍，寫死的話手機會太遠或桌機會太近。
+//
+// 5.5 度大約是本島填滿畫面、澎湖還看得到的程度。要連馬祖與金門一起入鏡得拉到 8 度
+// 以上，那時本島就變小了，取捨之後選前者。
+const TW_LAT = 23.75, TW_LON = 121.0;
+// 要框住的地表範圍。本島南北 3.6 度、東西 2.0 度，各留一點邊。
+// 東西給到 3.0 度是為了讓澎湖（119.5E，離中心 1.5 度）留在畫面裡。
+const TW_SPAN_LAT = 4.6, TW_SPAN_LON = 3.0;
+
+// 網址上的關注區域。#tw 或 #focus=tw 都認得，載入時直接飛過去。分享連結時就能指定
+// 對方一開啟先看哪一塊，不必再叫人自己去按按鈕。按下「關注台灣」也會把 #tw 寫回網址，
+// 複製網址列就是那條分享連結。
+//
+// 用 hash 不用 query。hash 改了不會重新載入，按鈕與網址才能雙向同步，語意上它講的
+// 也正是「文件裡的哪個位置」，跟 lang、backend 那種設定型參數分得開。
+//
+// key 是 ISO 3166-1 alpha-2 小寫，跟 ANCHOR 與 countries.json 同一套。未來要加別的
+// 國家，在 FOCUS 補一行手調的取景就好。沒補的也已經能用，會照國界自己算。
+const FOCUS = new Map([
+  ['tw', { lat: TW_LAT, lon: TW_LON, spanLat: TW_SPAN_LAT, spanLon: TW_SPAN_LON }],
+]);
+
+// 自動取景的留邊與下限。自動算出來的台灣是 3.54 × 1.96 度，比手調的 4.6 × 3.0 緊，
+// 澎湖會被切掉，所以手調的那一份優先。留邊讓國土不要頂到畫面邊緣。
+const FOCUS_PAD = 1.25;
+// 跨幅下限。再小就會鑽到比縣市界還近的距離，而那一層只有台灣有東西可看。
+const FOCUS_MIN = 2.5;
+
+/** 網址上的 key 換成取景參數。認不得的回 null，網址亂打不該讓畫面壞掉。 */
+function focusTarget(key) {
+  const k = String(key || '').trim().toLowerCase();
+  if (!k || NO_PLACE.has(k)) return null;
+  if (FOCUS.has(k)) return FOCUS.get(k);
+  const a = ANCHOR.get(k);
+  if (!a || !a.ll) return null;
+  const [lat, lon] = a.ll;
+  if (!a.rings) return { lat, lon, spanLat: FOCUS_MIN, spanLon: FOCUS_MIN };
+  // 以標籤點為中心量國界，經度差要繞回 [-180, 180]。少了這一步，跨換日線的俄羅斯、
+  // 斐濟、南極會量出 360 度，斐濟其實只有五度寬。直接取 bounding box 也踩同一個坑。
+  //
+  // 只量標籤點所在的那一塊陸地。量遍全部 ring 的話，有海外屬地的國家會被拉到沒有
+  // 意義的尺度：法國連著法屬圭亞那量出來是 111 度 × 142 度，等於大半個地球，
+  // 進場之後畫面幾乎沒動，說是「飛到法國」名不符實。改成只框主陸塊之後是 11 × 17 度。
+  // 美國從 80 × 182 收到 36 × 80，印尼從 25 × 99 收到 15 × 16。
+  //
+  // 標籤點本來就是各國主要陸塊上的代表點，取外接框含住它的那個 ring 就對了。
+  // 幾個 ring 都含住時取面積最大的，那是外圍的主體而不是內部的洞。
+  const measure = (rings, need) => {
+    let best = null;
+    for (const ring of rings) {
+      let lo0 = Infinity, lo1 = -Infinity, la0 = Infinity, la1 = -Infinity;
+      for (let i = 0; i < ring.length; i += 2) {
+        let dl = ring[i] - lon;
+        while (dl > 180) dl -= 360;
+        while (dl < -180) dl += 360;
+        if (dl < lo0) lo0 = dl;
+        if (dl > lo1) lo1 = dl;
+        const db = ring[i + 1] - lat;
+        if (db < la0) la0 = db;
+        if (db > la1) la1 = db;
+      }
+      if (need && (lo0 > 0 || lo1 < 0 || la0 > 0 || la1 < 0)) continue;  // 沒含住標籤點
+      const area = (lo1 - lo0) * (la1 - la0);
+      if (!best || area > best.area) best = { area, dLat: Math.max(-la0, la1), dLon: Math.max(-lo0, lo1) };
+    }
+    return best;
+  };
+  // 實測 175 國都找得到含住標籤點的 ring。退路留著是因為國界資料換版之後不保證還成立，
+  // 那時框得太大也好過整個查不到位置。
+  const m = measure(a.rings, true) || measure(a.rings, false);
+  if (!m) return { lat, lon, spanLat: FOCUS_MIN, spanLon: FOCUS_MIN };
+  const dLat = m.dLat, dLon = m.dLon;
+  // 上限 180 度。南極環繞極點，量出來是 359 度，再乘留邊就變成繞了一圈半，那是
+  // 沒有意義的數字。180 度已經是「整個看得到的半球」，再大也不會框得更廣。
+  const span = (d) => clamp(d * 2 * FOCUS_PAD, FOCUS_MIN, 180);
+  return { lat, lon, spanLat: span(dLat), spanLon: span(dLon) };
+}
+
+/** 從 hash 取出 key。#tw 與 #focus=tw 都認。 */
+function focusKey() {
+  let h = location.hash || '';
+  try { h = decodeURIComponent(h); } catch { /* 壞掉的 escape 就照原樣當 key，反正查不到 */ }
+  h = h.replace(/^#/, '');
+  return h.startsWith('focus=') ? h.slice(6) : h;
+}
+
+/** 照網址上的 key 飛過去。飛了回 true。 */
+function applyFocus() {
+  const t = focusTarget(focusKey());
+  if (!t) return false;
+  flyTo(t.lat, t.lon, t.spanLat, t.spanLon);
+  return true;
+}
+
+/** 按鈕與網址同步。replaceState 不留歷史紀錄，上一頁不會變成在原地跳來跳去。 */
+function goFocus(key) {
+  const t = focusTarget(key);
+  if (!t) return;
+  flyTo(t.lat, t.lon, t.spanLat, t.spanLon);
+  history.replaceState(null, '', '#' + key);
+}
+
+// 使用者自己轉走之後網址就不再代表畫面。留著的話複製出去的連結跟對方看到的對不上。
+function clearFocus() {
+  if (!location.hash) return;
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
+/** 讓畫面至少涵蓋 latDeg 的南北與 lonDeg 的東西所需的 zoom。
+ *
+ * 不能只看短邊。直式手機的短邊是寬度，而台灣是南北狹長的島，照短邊框會把島縮得
+ * 很小（實測只佔畫面高度的三成）。反過來只看高度的話，直式手機的水平視野會窄到
+ * 把澎湖切掉。所以兩個方向各解一次，取比較遠的那個，兩邊都框得住。
+ *
+ * 涵蓋度沒有解析反函數，用二分。
+ */
+function zoomForExtent(latDeg, lonDeg) {
+  const vFov = camera.fov * Math.PI / 180;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  const f = fitDist();
+  const solve = (halfFov, deg) => {
+    const cov = (d) => {
+      const disc = d * d * Math.cos(halfFov) ** 2 - d * d + R * R;
+      if (disc < 0) return 999;                      // 視線掃出球外，整顆入鏡
+      const t = d * Math.cos(halfFov) - Math.sqrt(disc);
+      return 2 * Math.asin(Math.min(1, t * Math.sin(halfFov) / R)) * 180 / Math.PI;
+    };
+    let lo = ZOOM_MIN, hi = 1;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (cov(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
+    }
+    return (lo + hi) / 2;
+  };
+  // 兩個方向都要滿足，取比較遠的（zoom 較大的）那一個
+  return clamp(Math.max(solve(vFov / 2, latDeg), solve(hFov / 2, lonDeg)), ZOOM_MIN, ZOOM_MAX);
+}
+
+// 貼近地表時把鏡頭從廣角換成望遠，畫面就會平掉。
+//
+// 45 度廣角貼在球面上看，畫面上下緣那條視線打到地表時的入射角是 24.8 度，很斜，
+// 讀起來就是一顆球。同樣涵蓋南北 4.6 度，把視角縮到 18 度、相機退到三倍遠之後，
+// 入射角剩 11.3 度，接近正射，看起來就是一張平面地圖。
+//
+// 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦，所以
+// 換視角的同時要補償 zoom，讓涵蓋度不變，否則按下「關注台灣」之後畫面會自己再縮一段。
+const FOV_FAR = 45;    // 太空視角
+const FOV_NEAR = 18;   // 地圖視角
+const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
+
+// 換鏡頭的區間，用畫面短邊的涵蓋度界定。
+//
+// 這件事本質上是變焦推軌：鏡頭縮窄的同時相機後退，中心的比例不變但畫面邊緣會脹縮。
+// 那個扭曲感是這種手法本來就有的，消不掉，只能挑一個不礙事的地方讓它發生。
+//
+// 第一版跟著 deepU 走，也就是涵蓋度 14.7 度到 3.3 度之間換，那正好是使用者在看
+// 縣市界、變電所、電廠的範圍，一邊看一邊扭很不自然。
+//
+// 改成在遠處就換完：涵蓋度 90 度到 30 度之間完成，那一段是從整顆地球往下衝的過程，
+// 畫面本來就變化很快，扭曲被蓋過去。到了 30 度以內鏡頭就固定在 18 度不再動，
+// 整個細看的範圍都是同一顆鏡頭。整顆地球入鏡時涵蓋度是飽和的 180 度，維持 45 度廣角，
+// 進場的樣子完全沒變。
+const FOV_HI_COVER = 90;
+const FOV_LO_COVER = 30;
+
+/** 換鏡頭的進度。頭尾用 smoothstep 抹平，線性斜坡在兩端有硬轉折，看得出來。 */
+function fovT() {
+  const t = clamp((FOV_HI_COVER - coverDeg(targetDist())) / (FOV_HI_COVER - FOV_LO_COVER), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
+/** 解出在現在的 fov 與長寬比下，短邊涵蓋 deg 度所需的 zoom */
+function zoomForCover(deg) {
+  const f = fitDist();
+  let lo = ZOOM_MIN, hi = ZOOM_MAX;
+  for (let i = 0; i < 50; i++) {
+    const mid = (lo + hi) / 2;
+    if (coverDeg(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
+  }
+  return clamp((lo + hi) / 2, ZOOM_MIN, ZOOM_MAX);
+}
+
+function updateFov() {
+  const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * fovT();
+  if (Math.abs(camera.fov - want) < FOV_STEP) return;
+  // 換鏡頭前先記下要看到多少地表，換完把 zoom 調回同樣的涵蓋度。
+  // 不補償的話，視角一窄畫面就會自己往裡縮，使用者會覺得縮放失控。
+  //
+  // 這裡要拿「目標距離」的涵蓋度，不是相機當下位置的。相機是平滑趨近目標的，
+  // 滾輪剛改完 view.zoom 的那幾幀相機還沒動到位，用當下位置算的話等於每一幀都把
+  // view.zoom 拉回相機現在所在的地方，滾輪的輸入就被抵消掉了。
+  //
+  // 實測那個 bug 的樣子：視角開始收窄之前每四格滾輪涵蓋度縮 1.45 倍，之後掉到
+  // 1.10 倍，滾很多圈才動一點。
+  //
+  // 飛行目標也要一起換算，而且要在改 fov 之前先用舊的 fov 算出它的涵蓋度，
+  // 改完之後再解回新的 zoom。順序反過來的話等於原地繞一圈，什麼都沒補到。
+  const keep = coverDeg(targetDist());
+  const flyKeep = fly ? coverDeg(R + (fitDist() - R) * fly.zoom) : null;
+  camera.fov = want;
+  camera.updateProjectionMatrix();
+  if (keep < 179) view.zoom = zoomForCover(keep);
+  if (fly && flyKeep !== null && flyKeep < 179) fly.zoom = zoomForCover(flyKeep);
+}
+
+// 縮放讀數。網址加 ?debug 才出現。
+//
+// 調鏡頭與縮放手感的時候，光靠「某一段怪怪的」很難定位，有個數字可以指就快得多。
+// 顯示的是短邊涵蓋多少度地表（換算公里）、zoom、視角、離地高，以及驅動圖層淡入
+// 淡出的那兩個過渡值。
+const DBG = new URLSearchParams(location.search).has('debug');
+let dbgEl = null, dbgAcc = 0;
+function updateDbg(dt) {
+  if (!DBG) return;
+  if (!dbgEl) { dbgEl = $('dbg'); if (!dbgEl) return; dbgEl.hidden = false; }
+  dbgAcc += dt;
+  if (dbgAcc < 0.1) return;          // 每秒更新十次就夠，不必每幀重排文字
+  dbgAcc = 0;
+  const c = coverDeg();
+  const tc = coverDeg(targetDist());
+  const km = (x) => (x >= 180 ? '整顆' : `${Math.round(x * 111).toLocaleString()} km`);
+  dbgEl.textContent =
+    `涵蓋 ${c >= 180 ? '整顆' : c.toFixed(2) + '°'}  ${km(c)}\n`
+    + `目標 ${tc >= 180 ? '整顆' : tc.toFixed(2) + '°'}\n`
+    + `zoom ${view.zoom.toFixed(5)}\n`
+    + `fov  ${camera.fov.toFixed(1)}°\n`
+    + `離地 ${(camera.position.z - R).toFixed(3)}\n`
+    + `deep ${deepU.value.toFixed(2)}  swap ${twSwapT().toFixed(2)}`;
+}
+
+// 飛行中的目標。null 代表沒有在飛。
+let fly = null;
+function flyTo(lat, lon, spanLat, spanLon) {
+  // ry 是繞 Y 軸的角度，正負無界。目標要換算到離現在最近的那一圈，
+  // 否則從 ry = 7.5 飛到 -0.6 會沿著長邊繞大半圈。
+  const wantRy = -lon * Math.PI / 180 - Math.PI / 2;
+  const k = Math.round((view.ry - wantRy) / (Math.PI * 2));
+  fly = {
+    ry: wantRy + k * Math.PI * 2,
+    rx: clamp(lat * Math.PI / 180, -1.2, 1.2),
+    zoom: zoomForExtent(spanLat, spanLon),
+  };
+  setSpin(false);              // 飛過去之後不該又自己轉走
+  spin.rx = spin.ry = 0;
+  hideCountry();
+}
+
+// 台灣那一圈粗輪廓換成縣市界的交接，用自己的一條曲線，比 deepU 早。
+//
+// 兩件事該分開。deepU 管的是大氣層、極光那些太空視角專屬的層什麼時候退場，那要等到
+// 真的很貼近地表。而粗輪廓跟細輪廓的矛盾出現得早得多：台灣高約 3.5 度，畫面涵蓋
+// 35 度的時候它就有九十幾個像素高，那個 9 點的八邊形跟實測輪廓錯開多少已經看得出來。
+//
+// 兩層共用這一條，一個往下淡出一個往上淡入，交接才會是一次乾淨的替換。用同一條
+// deepU 的話會出現兩個台灣同時半透明疊著的那一段。
+const SWAP_HI = 36;    // 短邊涵蓋大於這麼多度，只畫粗輪廓
+const SWAP_LO = 9.7;   // 小於這麼多度，只畫縣市界
+function twSwapT() {
+  return clamp((SWAP_HI - coverDeg()) / (SWAP_HI - SWAP_LO), 0, 1);
+}
+
+// 拖曳的靈敏度。每像素轉多少弧度，正比於相機到球面前緣的距離。
+//
+// 固定係數的話放大之後會失控：同樣一個弧度，鏡頭近時球面在螢幕上跑的距離大得多。
+// 實測桌機從 zoom 1.0 拉到 0.42，同樣的拖曳在螢幕上的位移差了七倍，手指動一點點
+// 地球就飛過去。
+//
+// 螢幕位移正比於 R / (d - R)，其中 d 是相機距離。所以角度要正比於 (d - R) 才會抵銷，
+// 拖一個像素、球面就跟著走固定的像素數，不論縮到多近。
+//
+// 基準取 zoom = 1（fitDist - R），那是進場時的距離，係數維持原本調好的 0.006，
+// 預設視角的手感不變，只有放大縮小時才修正。
+//
+// 用 camera.position.z 而不是 targetDist()，因為 animate 是平滑趨近目標距離的，
+// 拖曳當下看到的是相機實際在哪，靈敏度要跟畫面一致而不是跟目標值一致。
+const DRAG_K = 0.006;
+function dragRate() {
+  const ref = Math.max(1e-3, fitDist() - R);
+  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref;
+}
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
@@ -251,7 +673,28 @@ async function getJSON(url, opt) {
 // 注意 assets.anoni.net 必須回 Access-Control-Allow-Origin，這是跨來源請求，
 // 沒有這個 header 瀏覽器會直接擋掉，每次載入都會走到退回那條路。
 const ASSETS = 'https://assets.anoni.net/games/';
+
+// 這一份是不是在「不該對 clearnet 打電話回家」的情境下開的。
+//
+// onion 上打 clearnet 端點會脫離 onion 的保護範圍，而且會把「有人在看這個 onion
+// service」跟「有人在存取 assets.anoni.net」在時間上關聯起來。IPFS 版本的定位是
+// 離線也能看，對外連線跟那個定位相衝，透過公開網關開的話那條連線還會直接走使用者
+// 自己的網路，真實 IP 就交出去了，那正是選這個版本想避免的事。
+//
+// 原本只有「即時更新」那顆按鈕看這個判斷，頁面載入時抓 assets 的那三份完全沒看，
+// 等於防了使用者主動觸發的那條路，卻放著自動觸發的那三條不管。
+function offlineFirst() {
+  const h = location.hostname || '';
+  if (h.endsWith('.onion')) return true;
+  if (/(^|[.-])ipfs[.-]|(^|[.-])ipns[.-]|\.eth\.(link|limo)$/.test(h)) return true;
+  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return true;   // 公開網關的路徑式位址
+  return false;
+}
+
 async function getJSONAsset(name, opt) {
+  // 這幾份站上都有一份，抓 assets 只是為了拿比較新的。換不到新的頂多是舊一點，
+  // 拿隱私換那點新鮮度不划算。
+  if (offlineFirst()) return getJSON('./' + name, opt);
   try {
     return await getJSON(ASSETS + name, { ...opt, mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
   } catch (e) {
@@ -395,6 +838,10 @@ function paintGlow(values, canvas, ramp) {
 // 大國（RU、CN）就只是一圈內鑲邊。這個差異是想要的：面積小的國家本來就該整塊讀得出來。
 const BLOCK_INWARD = 26;
 const BLOCK_PEAK = 0.6;  // 貼著邊界那一格的強度，往內線性衰減到 0
+// 海的自發光係數。夜側 base 只乘 0.15，海的色階窄，乘完差距不到一階色。
+// 這一層只有海，所以係數可以拉高而不影響陸地。0.55 之後陸棚在夜側讀得出來，
+// 最深那階仍然接近黑，日夜的分界也還在。
+const SEA_EMIT = 0.55;
 const BLOCK_EMIT = 0.5;  // emissive 係數。紅色轉線性後 luminance 約 0.30，乘完約 0.15，
                          // 離 bloom 門檻 0.72 還有距離，不會把這幾國暈成白斑
 function paintBlocked(canvas) {
@@ -424,12 +871,45 @@ function paintBlocked(canvas) {
   }
 }
 
+// 海底地形。先鋪最淺的那階當底，再由淺到深一階一階疊上去，沒有被任何一階蓋到的
+// 就是大陸棚。海纜幾乎都沿著陸棚鋪、避開深海盆，所以陸棚那圈亮起來之後，海纜層
+// 的走向就有了解釋。抓不到資料時退回單色，跟以前一樣。
+//
+// 一階的所有環合成一個 Path2D 一次填。evenodd 是為了讓環裡的洞不被塗成深海，
+// 洞代表「這一塊比周圍淺」，中洋脊就是那種形狀而且面積很大。實測大西洋中洋脊在
+// 3000 公尺那層的穿越數是 2，巴倫支海在 200 公尺層也是 2，都靠 evenodd 判成外面。
+// 同一階的外環之間不會重疊，所以 evenodd 不會誤消掉別的地方。
+function paintSeaFloor(ctx) {
+  ctx.fillStyle = BATHY && BATHY.levels ? MAP.seaRamp[0] : MAP.sea;
+  ctx.fillRect(0, 0, TEX_W, TEX_H);
+  if (!BATHY || !BATHY.levels) return;
+  BATHY.levels.forEach((lv, i) => {
+    const path = new Path2D();
+    for (const ring of lv.p) {
+      path.moveTo(texX(ring[0]), texY(ring[1]));
+      for (let k = 2; k < ring.length; k += 2) path.lineTo(texX(ring[k]), texY(ring[k + 1]));
+      path.closePath();
+    }
+    ctx.fillStyle = MAP.seaRamp[Math.min(i + 1, MAP.seaRamp.length - 1)];
+    ctx.fill(path, 'evenodd');
+  });
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
   const base = mk(), glow = mk(), block = mk();
-  const g = base.getContext('2d'), gg = glow.getContext('2d');
-  g.fillStyle = MAP.sea;
-  g.fillRect(0, 0, TEX_W, TEX_H);
+  // 夜側專用的海。base 的自發光只有 0.15，海的色階本來就窄，乘完之後差距不到一階色，
+  // 實測夜側整片海是 (0,0,3)，等深線等於只在白天看得見。這一層只放海、陸地塗黑，
+  // 用高一點的係數疊回去，海就整圈都保得住深淺，陸地的日夜對比完全不受影響。
+  //
+  // 解析度砍一半就夠。等深線是大尺度的形狀，不像國界那樣需要銳利的邊，而且再多一張
+  // 全尺寸貼圖是多 8 MB 的顯存。
+  const sea = document.createElement('canvas');
+  sea.width = TEX_W >> 1; sea.height = TEX_H >> 1;
+  const g = base.getContext('2d'), gg = glow.getContext('2d'), gsea = sea.getContext('2d');
+  gsea.scale(0.5, 0.5); // 之後都用 TEX_W/TEX_H 的座標畫，跟其他幾張共用同一套 texX/texY
+  paintSeaFloor(g);
+  paintSeaFloor(gsea);
   gg.fillStyle = '#000';
   gg.fillRect(0, 0, TEX_W, TEX_H);
 
@@ -437,6 +917,7 @@ function paintEarth(world, counts) {
   g.strokeStyle = MAP.border;
   g.lineWidth = 1.6;
   g.fillStyle = MAP.land;
+  gsea.fillStyle = '#000'; // 夜側那層的陸地
   for (const c of world.c) {
     let lo0 = 999, lo1 = -999, la0 = 999, la1 = -999;
     const path = new Path2D();
@@ -450,6 +931,7 @@ function paintEarth(world, counts) {
       }
     }
     g.fill(path);
+    gsea.fill(path); // 夜側那層把陸地塗黑，讓它只負責海，陸地的明暗仍然只由日照決定
     // 國界不在這裡描了。貼圖只有 2048×1024，放大之後邊界是鋸齒，改用 buildBorders
     // 畫成 3D 線段。這裡若同時描一次，兩條線會因為解析度不同而錯開。
     // 順手把國界留著，切換指標重畫發光層時不必再解析一次多邊形
@@ -470,7 +952,7 @@ function paintEarth(world, counts) {
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
   paintGlow(counts, glow);
   paintBlocked(block); // 要在上面填完 COUNTRY_PATH 之後才有國土路徑可以 clip
-  return { base, glow, block };
+  return { base, glow, block, sea };
 }
 
 function buildEarth(world, counts) {
@@ -487,11 +969,13 @@ function buildEarth(world, counts) {
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${MAP.glowLo} 14%, ${MAP.glowHi})`;
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
+  const seaTex = toTex(painted.sea);
   GLOW = { canvas: painted.glow, tex: glowTex };
   const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   // 受阻漸層另存一層，切換「台數、共識權重」時 paintGlow 只重畫 glow，這一層不受影響
   mat.emissiveNode = texture(baseTex).mul(0.15)
+    .add(texture(seaTex).mul(SEA_EMIT))
     .add(texture(glowTex).mul(0.5))
     .add(texture(blockTex).mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
@@ -576,6 +1060,10 @@ const TRUNK = [
   [[-33.9,18.42],[-34.44,18.37],[-34.64,18.92],[-34.89,19.85],[-34.69,21.64],[-34.8,25],[-32.84,28.56],[-31.55,30.09],[-29.87,31.05],[-28.96,32.26],[-27.66,32.93],[-25.1,34.17],[-24.2,35.48],[-23.47,35.89],[-22.68,35.65],[-20,36.5],[-17.16,38.86],[-16.73,39.79],[-15.85,40.3],[-14.96,40.78],[-14.42,41.02],[-13.96,40.64],[-10.27,40.55],[-8.43,40.2],[-6.8,39.28],[-4.04,39.66],[2,45.5],[2.75,46.75],[3.94,47.59],[4.94,48.66],[6.28,49.24],[8.77,50.64],[11.5,51.5],[12.03,51.4],[12.13,50.87],[12.21,49.98],[12.32,48.3],[12.5,45],[11.6,43.15]],
   [[-33,-71.6],[-12,-77.1],[-11.07,-78.19],[-9.77,-78.78],[-7.23,-79.91],[-6.33,-81.27],[-4.75,-81.63],[-1.81,-80.99],[9,-79.5]],
 ];
+const TRUNK_OP = 0.20;   // 走廊示意線在太空視角下的不透明度
+const BORDER_OP = 0.72;  // 國界
+const COAST_OP = 0.17;   // 海岸線
+let trunkMat = null;
 
 function buildTrunks() {
   const pos = [];
@@ -608,7 +1096,10 @@ function buildTrunks() {
   // 實測線集中在北海、地中海那種疊了幾十條的地方，走廊線在太平洋往往是方圓幾千公里
   // 只有孤零零一條。同樣的 alpha 疊起來的視覺重量差一個量級，稀疏那邊要拉高才看得見。
   // 想調的話兩個數字要分開試，統一成同一個值會有一邊壞掉。
-  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.20, depthWrite: false });
+  // 這一層是示意，只有走向可信。地圖視角下線條會變粗變顯眼，看起來像實測路由，
+  // 那是誤導，所以貼近地表時淡出。每幀由 animate 寫 opacity。
+  const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: TRUNK_OP, depthWrite: false });
+  trunkMat = m;
   globe.add(new THREE.LineSegments(g, m));
 }
 
@@ -666,17 +1157,52 @@ function ringSegments(world, pick, height) {
 // 國界。原本只描在 2048×1024 的貼圖上，赤道處一個像素就是二十公里，放大之後邊界糊成
 // 一片鋸齒。改成 3D 線段之後是向量的，放多大都還是一條線。
 // 代價是 17,000 個線段，比海岸線那層的 5,000 多，但一樣是單一 draw call。
+// 台灣的縣市界線。內政部國土測繪中心的資料，簡化到 12,955 點。
+//
+// 走向量線不是貼圖。底圖是一張 2048x1024 的 canvas，每度只有 5.7 個像素，台灣本島
+// 在上面只有 14 像素寬。畫面涵蓋 1 度地表時那 14 像素要撐滿螢幕，放大 158 倍，
+// 縣市界線用貼圖畫不出來。線段不論放到多近都是銳利的。
+//
+// 縣市多邊形的外圍就是海岸線，而且是實測等級的。continents.json 那條海岸線來自
+// Natural Earth 110m，一度才一個點，在縣市尺度下完全不能看。所以貼近台灣的時候，
+// 實際上是這一層在同時提供縣市界與可用的海岸線。
+//
+// 遠看時整個台灣只有幾十個像素，二十二個縣市的線會糊成一團亮斑，反而讓台灣變得
+// 比周圍國家醒目，那是視覺上的偏袒。所以跟著 deepU 淡入，太空視角下完全不畫。
+let twAdminMat = null;
+function buildTwAdmin(admin) {
+  if (!admin || !admin.c || !admin.c.length) return;
+  // 高度壓在中繼點（1.012）與登陸點（1.011）之下，那兩層是資料，界線是底圖。
+  // 但要高過國界（1.0036）與海岸線（1.004），重疊時看到的是比較細的這一條。
+  const pos = ringSegments(admin, () => true, R * 1.005);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  twAdminMat = new THREE.LineBasicMaterial({
+    color: COL.twAdmin, transparent: true, opacity: 0, depthWrite: false,
+  });
+  globe.add(new THREE.LineSegments(g, twAdminMat));
+}
+
+// 國界同樣分兩份。台灣那一圈是 9 個點的八邊形，貼近了跟縣市界對不上，要退場。
+// 這裡靠 c.k === 'tw' 直接挑，比座標比對更直接。
+let borderTwMat = null;
 function buildBorders(world) {
   if (!world) return;
   // 高度壓在海岸線（1.004）之下。沿海國家的國界跟海岸線本來就重疊，讓海岸線畫在上面，
   // 重疊處看到的是比較亮的那條，海陸交界仍然是最清楚的線。
-  const pos = ringSegments(world, (c) => !!c.k, R * 1.0036);
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-  // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
-  // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
-  const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: 0.72, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  const mk = (pick) => {
+    const pos = ringSegments(world, pick, R * 1.0036);
+    if (!pos.length) return null;
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+    // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
+    // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
+    const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: BORDER_OP, depthWrite: false });
+    globe.add(new THREE.LineSegments(g, m));
+    return m;
+  };
+  mk((c) => !!c.k && c.k !== 'tw');
+  borderTwMat = mk((c) => c.k === 'tw');
 }
 
 function buildBlocked(world) {
@@ -713,7 +1239,9 @@ function buildAtmosphere() {
   const viewDir = cameraPosition.sub(positionWorld).normalize();
   const rim = oneMinus(saturate(dot(normalWorld, viewDir))).pow(RIM_POWER);
   mat.colorNode = vec3(0x6f / 255, 0xc0 / 255, 0xee / 255); // 沿用海岸線的藍，跟現有冷色系一致
-  mat.opacityNode = rim.mul(RIM_INTENSITY);
+  // 貼近地表時淡出。殼在 R*1.045，相機低於那個高度會鑽進去，從裡面看邊緣輝光
+  // 會變成整片糊在鏡頭上的藍霧。真實世界從十公里高空也看不到地球的邊緣輝光。
+  mat.opacityNode = rim.mul(RIM_INTENSITY).mul(oneMinus(deepU));
   const mesh = new THREE.Mesh(new THREE.SphereGeometry(R * 1.045, 48, 32), mat);
   // 這幾層透明物件都以地球球心為中心，包圍球中心到相機的距離幾乎打平，
   // 預設排序會不穩定（哪層蓋在哪層可能逐幀跳動），所以明確指定順序。
@@ -776,10 +1304,69 @@ function buildAurora() {
   // 綠佔大部分，紫只在最頂端。從赤道視角看，簾幕底部被地球擋住，線性漸層會讓露出來的
   // 那截幾乎全是紫的，看起來不像極光。用次方讓綠色一路撐到高處。
   mat.colorNode = mix(vec3(0.10, 0.95, 0.55), vec3(0.55, 0.30, 0.95), vv.pow(2.6).clamp(0, 1));
-  mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY);
+  // 簾幕頂端到 R*1.172，鏡頭壓低之後會橫在畫面上，跟著 deepU 淡出
+  mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY).mul(oneMinus(deepU));
   const mesh = new THREE.Mesh(g, mat);
   mesh.renderOrder = 40; // 這幾層同心透明物件的預設排序不穩定，明確指定
   globe.add(mesh);
+}
+
+// 畫面右下的訊息串。新的一則從底下進來，把舊的往上頂。
+//
+// 這是通用的，任何想在畫面上講一句話的功能都可以呼叫，不限三跳路徑。所以這裡不碰
+// 任何跟電路有關的東西，只管排版與生命週期。
+//
+// 上限壓在 FEED_MAX。三跳每一兩秒就生一條，不設限的話高樓會蓋到畫面外。滿了就把最舊
+// 的那則（DOM 上的第一個）提前收掉。
+const FEED_MAX = 6;      // 安全上限。正常退場靠各自的到期時間，這只是防呆
+const FEED_TTL = 25;     // 一則活多久，單位是「動畫秒」不是真實秒，見下方說明
+const FEED_OUT = 450;    // 淡出動畫的長度，要跟 CSS 的 transition 對得上
+
+// 到期時間用動畫時鐘算，不用 setTimeout。
+//
+// 三跳路徑的節奏由 animate 的模擬時間驅動，而 dt 夾在 0.05 秒，幀率低於 20 時模擬時間
+// 會落後真實時間。用 setTimeout 的話兩個時鐘會分家：實測 headless 只有 2.5 fps，模擬
+// 時間只跑真實時間的 0.13 倍，十秒一條變成七十幾秒一條，而 45 秒的真實時間 ttl 早就
+// 到期，畫面上永遠只剩一則。改用同一個時鐘之後，不論裝置快慢，「幾條之內會消失」
+// 這件事都成立。
+//
+// 代價是分頁切到背景時 rAF 停掉、時鐘也跟著停，回來時那幾則還在。那反而是想要的：
+// 使用者沒看到的那段時間不該算進壽命裡。
+const feedItems = [];
+
+function notify(html, ttl = FEED_TTL) {
+  const box = $('feed');
+  if (!box) return null;
+  const el = document.createElement('div');
+  el.className = 'feed-item';
+  el.innerHTML = html;
+  box.appendChild(el);
+  // 先進 DOM 再加 class，讓瀏覽器有一幀的機會套用起始狀態，否則沒有過場直接就位
+  requestAnimationFrame(() => el.classList.add('in'));
+  const drop = () => {
+    if (!el.isConnected) return;
+    el.classList.remove('in');
+    el.classList.add('out');
+    setTimeout(() => el.remove(), FEED_OUT);
+  };
+  el._drop = drop;
+  feedItems.push({ el, dieAt: clockT.value + ttl });
+  // 超額的先收。drop 是延遲移除，收的當下 DOM 還在，所以要照索引取而不是反覆讀
+  // firstElementChild，否則同一則會被拿到很多次。
+  const kids = [...box.children];
+  for (let i = 0; i < kids.length - FEED_MAX; i++) {
+    if (kids[i]._drop) kids[i]._drop(); else kids[i].remove();
+  }
+  return el;
+}
+
+// 每幀掃一次到期的。由 animate 呼叫，跟 clockT 同步。
+function updateFeed() {
+  for (let i = feedItems.length - 1; i >= 0; i--) {
+    const it = feedItems[i];
+    if (!it.el.isConnected) { feedItems.splice(i, 1); continue; }
+    if (clockT.value >= it.dieAt) { it.el._drop(); feedItems.splice(i, 1); }
+  }
 }
 
 // Tor 的三跳路徑。偶爾畫一條從 guard 經 middle 到 exit 的弧線，讓「訊息被轉了三手」
@@ -789,16 +1376,29 @@ function buildAurora() {
 // 中繼分布。但三點的組合本身不是真實電路：Tor 選路徑要看子網、家族、頻寬權重，這裡
 // 完全沒有模擬，飛行節奏也不對應真實電路約十分鐘的輪替。畫面上必須一直掛著「示意」
 // 兩個字，不能只寫在面板裡，因為動畫短暫又吸睛，沒人會在那幾秒去翻長篇說明。
-const CIRC_N = 3;          // 同時最多三條
+const CIRC_N = 1;          // 同時只畫一條
 const CIRC_FLY = 3.4;      // 一條飛完幾秒
 const CIRC_FADE = 1.1;     // 飛完之後淡出
 // 下一條的間隔，隨機取樣。固定週期會變成節拍器，所以取區間不取定值。
-// 一條的生命是 FLY + FADE = 4.5 秒。照狀態機模擬三千秒的結果：
-//   舊的 N=2、gap[3.5,8]   平均同時 0.88 條，三分之一的時間畫面上一條都沒有
-//   現在 N=3、gap[0.9,2.8] 平均同時 2.0 條，三條同時佔 36%，空場 0%（瀏覽器實測）
-// 再縮間隔就會變成連續不斷的流動，「偶爾轉了三手」那個語氣會消失。
-const CIRC_GAP = [0.9, 2.8];
+//
+// 一條的生命是 FLY + FADE = 4.5 秒，加上這段間隔就是整個週期。取 4 到 7 秒，
+// 週期落在 8.5 到 11.5 秒，平均 10 秒一條。
+//
+// 早先是 N=3、gap[0.9,2.8]，平均同時兩條、空場 0%，畫面上幾乎一直有東西在飛。
+// 那個密度會讓弧線變成背景動態，而不是「偶爾轉了三手」的一次示範。改成一次一條、
+// 十秒一次之後，每一條都看得完整，中間的空檔也讓中繼點與海面自己被看見。
+const CIRC_GAP = [4.0, 7.0];
 const CIRC_SEG = 96;       // 每條路徑的取樣點數
+// 三跳的角色色各自放大到這個線性亮度。這個值對齊原本那條近白光點的 luminance（0.95），
+// 換色之後光點的存在感不變，也還在 bloom 門檻（0.72）之上。
+//
+// 一開始是把角色色往白色混，那是錯的：ACES tonemap 對高亮度本來就會往白色壓，再混白
+// 等於壓兩次。實測混白 0.45 之後三個顏色變成 #d4e6dc、#d1dee7、#ebe1d3，三個淡灰白，
+// 畫面上就是一條白線，等於沒上色。改成乘倍率，通道比例不變，色相就留得住。
+//
+// 逐色正規化而不是一律乘同一個倍率，是因為三個角色色本身的亮度差很多（guard 0.51、
+// middle 0.31、exit 0.54）。乘同一個數的話 middle 那一段會明顯比兩端暗，看起來像瑕疵。
+const CIRC_LUM = 0.95;
 const circuits = [];
 
 // 從某個角色的點裡隨機挑一個。guard 收 role 1 與 3，exit 收 2 與 3，both 兩邊都算。
@@ -853,8 +1453,28 @@ function buildCircuits() {
     const head = smoothstep(-0.012, 0.0, d);              // 頭部前方乾淨切掉
     const tail = oneMinus(d.div(TRAIL).clamp(0, 1));      // 往後線性衰減
     const bright = head.mul(tail).pow(1.6);
-    mat.colorNode = vec3(0.88, 0.97, 1.0); // 近白偏青。四個角色色與警示紅都不能借用
-    mat.opacityNode = bright.mul(uAlpha);
+    // 沿著弧線把三跳的角色色接起來：起點 guard、中點 middle、終點 exit，跟右下角
+    // 訊息串那三個國碼用同一組色。同一條電路在畫面上與文字上講的是同一件事。
+    //
+    // 這裡原本刻意避開四個角色色（怕跟中繼點混淆），現在反過來用是因為訊息串已經先用
+    // 這組色標了三跳，兩邊不一致才是真的會搞混。弧線是會動的線、中繼點是靜止的點，
+    // 形態本來就分得開。警示紅仍然不碰。
+    //
+    // 純角色色轉線性之後 luminance 只有 0.31 到 0.54，低於 bloom 的 0.72 門檻，直接用
+    // 會讓光點失去現在的亮度。往白色靠一點把亮度拉回門檻附近，色相仍然讀得出來。
+    // THREE.Color 會把 sRGB 的色碼轉成線性工作空間，這裡的 r/g/b 已經是線性值
+    const hop = (hex) => {
+      const c = new THREE.Color(hex);
+      const l = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+      const k = CIRC_LUM / Math.max(l, 1e-4);
+      return vec3(c.r * k, c.g * k, c.b * k);
+    };
+    // au 是 0 到 1 的弧長比例，0.5 正好是中點那一跳（arcInto 前後各鋪一半）
+    mat.colorNode = mix(
+      mix(hop(COL.guard), hop(COL.mid), au.mul(2).clamp(0, 1)),
+      hop(COL.exit), au.sub(0.5).mul(2).clamp(0, 1));
+    // 弧線最高拱到 R*1.2，地圖視角下只會從頭頂掃過去擋畫面，一起淡出
+    mat.opacityNode = bright.mul(uAlpha).mul(oneMinus(deepU));
 
     const line = new THREE.Line(geo, mat);
     line.frustumCulled = false;
@@ -871,11 +1491,26 @@ function buildCircuits() {
 }
 
 // 挑三個端點，把兩段弧接成一條連續的線。挑不到就這輪跳過。
+// 三跳的國碼依角色上色，沿用中繼點那組色。這樣一行字同時講了走哪三國與誰是哪一跳，
+// 不必再多寫一行解釋。「示意」兩個字要留著，這條路徑不是真實電路。
+function hopsHTML(g, m, e) {
+  const cell = (n, col) => `<span class="hop" style="color:${roleHex(col)}">${(n.cc || '??').toUpperCase()}</span>`;
+  const sep = '<span class="sep">→</span>';
+  return `${S('circTag')}　${cell(g, 1)}${sep}${cell(m, 0)}${sep}${cell(e, 2)}`;
+}
+
 function spawnCircuit(c) {
   const g = pickRelay([1, 3]);   // guard
   const m = pickRelay([0]);      // middle
   const e = pickRelay([2, 3]);   // exit
   if (!g || !m || !e) return false;
+  // 訊息刻意活得比弧線久。一次只畫一條的話，訊息跟著弧線收掉就永遠只有一則，
+  // 右下角那疊「蓋高樓」的效果會整個消失。這一區的定位是最近幾條路徑的紀錄，
+  // 不是當下狀態的鏡子。
+  //
+  // 用預設的 FEED_TTL（38 動畫秒）。十秒一條的節奏下畫面上會維持三到四則，
+  // 每一則都是自己到期淡出，不是被新的擠掉。
+  notify(hopsHTML(g, m, e));
   const pos = c.geo.attributes.position.array;
   const half = CIRC_SEG >> 1;
   arcInto(g, m, pos, 0, half);
@@ -887,7 +1522,6 @@ function spawnCircuit(c) {
 
 function updateCircuits(dt) {
   if (!circuits.length) return;
-  let anyOn = false;
   for (const c of circuits) {
     c.t += dt;
     if (c.state === 'wait') {
@@ -912,27 +1546,636 @@ function updateCircuits(dt) {
         c.wait = CIRC_GAP[0] + Math.random() * (CIRC_GAP[1] - CIRC_GAP[0]);
       }
     }
-    if (c.state !== 'wait') anyOn = true;
   }
-  const tag = $('circ-tag');
-  if (tag) tag.classList.toggle('on', anyOn);
 }
 
-function buildCoastline(coast) {
+// 連到台灣的海纜障礙。跟 OONI 與斷網事件並列，都是「網路怎麼壞掉」的不同面向，
+// 差別在這一份是實體基礎建設而不是政策或封鎖。
+//
+// 沒有畫在地球上，只在面板裡列。公告給的位置是「距某地約 N 公里」，有距離沒有方位，
+// 真正的斷點在那個地點周圍的一圈上而不是一個點。畫成點會讓人以為我們知道得比實際多，
+// 畫成圈又會蓋掉一大片海面，而且 0.6 公里那筆畫出來根本看不到。
+//
+// 資料檔沒有的時候連標題一起收掉，跟 fillShutdowns 同一個做法。
+function fillSeacable() {
+  const box = $('stat-seacable');
+  const lbl = $('lbl-seacable');
+  const note = $('seacable-note');
+  const cr = $('credit-seacable');
+  const list = SEACABLE && SEACABLE.faults;
+  if (!box || !list || !list.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    // 來源聲明也要收。留著會變成一段說「資料來自數位發展部」卻沒有那份資料的敘述。
+    if (cr) cr.hidden = true;
+    return;
+  }
+  box.innerHTML = list.map((f) => {
+    const where = f.where
+      ? S('scFrom', { from: f.where.from, km: f.where.km })
+      : S('scNoWhere');
+    const sub = [
+      f.fix ? S('scFix', { d: f.fix }) : '',
+      // 優先用英文簡稱。中文全名在簡中與英文版會夾一段繁體，對照表對不到才退回原名。
+      (() => { const a = (f.altAbbr && f.altAbbr.length ? f.altAbbr : f.alt) || [];
+        return a.length ? S('scAlt', { list: a.join(S('listSep')) }) : ''; })(),
+    ].filter(Boolean).join('　');
+    return `<div class="sc-row"><div class="sc-top">`
+      + `<span class="sc-ab">${esc(f.abbr || f.name)}</span>`
+      + `<span class="sc-loc">${where}</span>`
+      + `<span class="sc-st">${f.start ? S('scStart', { d: f.start }) : ''}</span></div>`
+      + (sub ? `<div class="sc-sub">${sub}</div>` : '') + `</div>`;
+  }).join('');
+  if (note) note.innerHTML = S('noteSeacable');
+}
+
+// 台灣那幾層的疊放順序明確指定，不要靠 three.js 的內部排序。
+//
+// 這幾個都是 InstancedMesh，位置寫在 instanceMatrix 裡，mesh 本身留在原點。透明物件
+// 排序看的是 geometry 的 bounding sphere 中心，於是四層算出來的深度全都一樣，只好
+// 退回比較物件 id，也就是「誰先建出來誰先畫」。那不是我們想表達的關係。
+//
+// 由下而上：變電所、再生能源場址、電廠、登陸點。跟各層的離地半徑同序。電廠要壓在
+// 場址之上，因為有幾座太陽能就座落在大電廠的廠區裡，大的畫在上面比較讀得出來。
+// 都排在極光（40）與電路（45）之下，那兩層是全球尺度的效果，不該被台灣的點蓋掉。
+const RO_SUB = 11, RO_RENEW = 12, RO_PLANT = 13, RO_LANDING = 14;
+
+// 台灣的海纜登陸點。跟其他圖層不同，這一份是自建的，資料來源逐筆記在
+// tools/data/tw_landing.toml，產生器是 tools/gen_tw_landing.py。
+//
+// 精度差很多，而且那個差別本身就是資訊。頭城與枋山是 OSM 明確標註的海纜站建物，
+// 而且有海纜線段端點在數十公尺內佐證。東引、南竿只查得到鄉鎮級地名，座標是取
+// 鄉鎮中心。畫成一模一樣的點會讓人以為我們對每一筆的把握都相同，所以標記大小
+// 與亮度都照精度分級，面板上也直接把精度標出來。
+//
+// 資料檔沒有的時候整段收掉，跟 fillSeacable 同一個做法。
+let landingMesh = null, lastLandingK = 1;
+const LP_PREC = {
+  '站址':   { key: 'lpAt',       size: 0.018, alpha: 1.00 },
+  '設施':   { key: 'lpFacility', size: 0.022, alpha: 0.72 },
+  '端點':   { key: 'lpEnd',      size: 0.022, alpha: 0.72 },
+  '里':     { key: 'lpVillage',  size: 0.028, alpha: 0.52 },
+  '鄉鎮':   { key: 'lpTown',     size: 0.034, alpha: 0.42 },
+};
+
+function fillLanding() {
+  const box = $('stat-landing');
+  const lbl = $('lbl-landing');
+  const note = $('landing-note');
+  const cr = $('credit-landing');
+  const list = LANDING && LANDING.points;
+  if (!box || !list || !list.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  // 精度高的排前面，讀者先看到最可靠的那幾筆
+  const order = Object.keys(LP_PREC);
+  const rows = list.slice().sort((a, b) => order.indexOf(a.precision) - order.indexOf(b.precision));
+  box.innerHTML = rows.map((p) => {
+    const meta = LP_PREC[p.precision];
+    const prec = meta ? S(meta.key) : p.precision;
+    // LANG 的三個值是 zh-TW、zh-cn、en，簡中那個是小寫，別寫成 zh-CN。
+    // 三語形式都在資料裡，這份是自建的，沒有理由讓英文版夾一段繁體。
+    const nm = LANG === 'en' ? p.en : (LANG === 'zh-cn' ? p.zhCn : p.zh);
+    const ad = LANG === 'en' ? p.adminEn : (LANG === 'zh-cn' ? p.adminZhCn : p.admin);
+    const cb = p.cables && p.cables.length
+      ? `<span class="lp-cb">${esc(p.cables.join(S('listSep')))}</span>`
+      : `<span class="lp-cb none">${S('lpNoCable')}</span>`;
+    return `<div class="lp-row"><div class="lp-top">`
+      + `<span class="lp-nm">${esc(nm)}</span>`
+      + `<span class="lp-ad">${esc(ad)}</span>`
+      + `<span class="lp-pr" data-p="${esc(p.precision)}">${esc(prec)}</span></div>`
+      + `<div class="lp-sub">${cb}</div></div>`;
+  }).join('');
+  if (note) note.innerHTML = S('noteLanding');
+}
+
+// 標記畫成一顆顆小球，半徑照精度放大。精度低的畫得大而暗，看起來就像一片模糊的
+// 範圍而不是一個確定的點，這是刻意的。台灣在全球尺度下很小，這一層要放大到台灣
+// 附近才看得見，平常只是海岸邊幾點微光。
+//
+// 不要用 AdditiveBlending。這 14 個點全擠在台灣周邊幾度之內，淡水、八里、草漯在
+// 放大到台灣的視角下只差幾個像素，馬祖三個點也是，additive 會把重疊處一路疊到爆白，
+// 精度分級就整個讀不出來了（實測過）。一般混色不會疊，維持得住分級。
+//
+// 顏色走 instanceColor 而不是 colorNode。NodeMaterial 的 colorNode 跟 instanceColor
+// 是相乘的，設了 colorNode 之後 instanceColor 仍然有效，但這裡不需要，直接把
+// 「顏色乘上精度亮度」算好寫進 instanceColor 就好。
+function buildLanding() {
+  const list = LANDING && LANDING.points;
+  if (!list || !list.length) return;
+  const geo = new THREE.OctahedronGeometry(1, 2); // 細分兩階，貼近看才不會露出多邊形的邊
+  const mat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  mat.opacity = 0.85;
+  const mesh = new THREE.InstancedMesh(geo, mat, list.length);
+  mesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const base = new THREE.Color(COL.landing);
+  const col = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
+    llToVec(p.lat, p.lon, R * 1.011, v);
+    m.makeScale(meta.size, meta.size, meta.size);
+    m.setPosition(v);
+    mesh.setMatrixAt(i, m);
+    col.copy(base).multiplyScalar(meta.alpha);
+    mesh.setColorAt(i, col);
+  }
+  mesh.instanceMatrix.needsUpdate = true;
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  mesh.renderOrder = RO_LANDING;
+  globe.add(mesh);
+  landingMesh = mesh;
+}
+
+// 登陸點標記要跟中繼點一樣做螢幕尺寸補償。
+//
+// 標記的世界尺寸 0.018 到 0.034，換算到地表是半徑 23 到 43 公里。太空視角下那是
+// 幾個像素的小點，但畫面涵蓋 2 度（222 公里）的時候，一個鄉鎮級的標記會脹成螢幕
+// 的五分之一，一整片綠色蓋掉底下的縣市界。實測看到的就是這個。
+//
+// 精度分級的意思是「我們對這一筆的把握有多少」，用螢幕上的大小表達就夠了，
+// 不需要讓它在地表上真的占那麼大一塊。
+function rescaleLanding(k) {
+  const list = LANDING && LANDING.points;
+  if (!landingMesh || !list) return;
+  if (Math.abs(k - lastLandingK) < DOT_STEP) return;
+  lastLandingK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
+    const sz = meta.size * k;
+    llToVec(p.lat, p.lon, R * 1.011, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    landingMesh.setMatrixAt(i, m);
+  }
+  landingMesh.instanceMatrix.needsUpdate = true;
+}
+
+// 台灣那一圈粗輪廓的頂點。countries.json 裡的台灣只有 9 個點，continents.json 在
+// 那一帶的 8 條海岸線線段用的是同一組點，兩者畫出來是同一個歪掉的八邊形。
+//
+// 用頂點比對而不是畫一個框，因為框會誤傷。那一帶 117E 到 124E 之間還有三條線段是
+// 福建的海岸，框到就會把中國的海岸線一起弄不見，而那邊我們沒有更好的資料可以接手。
+// 比對頂點是精確的：這幾條線段本來就是同一份資料的同一組座標。
+function twOutlineKeys(world) {
+  const tw = world && world.c && world.c.find((c) => c.k === 'tw');
+  const set = new Set();
+  if (!tw) return set;
+  for (const ring of tw.p) {
+    for (let i = 0; i + 1 < ring.length; i += 2) set.add(`${ring[i]},${ring[i + 1]}`);
+  }
+  return set;
+}
+
+// 海岸線分兩份幾何：台灣那一段跟其他地方。
+//
+// 貼近台灣的時候，那 8 條線段畫出來的八邊形會橫跨整座島，跟縣市界那份 12,955 點的
+// 實測輪廓完全對不上，看起來像兩個台灣疊在一起。所以台灣那一段跟著 deepU 淡出，
+// 由縣市界接手，其他地方的海岸線一律不動。
+let coastTwMat = null;
+// 台灣的變電所。台灣電力公司的二次變電所清單（政府資料開放授權條款-第1版）
+// 加上 OpenStreetMap 的座標（ODbL），產生器是 tools/gen_tw_power.py。
+//
+// === 負載率的口徑，改文案前先讀 ===
+//
+// 「可靠容量」是 N-1 容量：最大的那台主變壓器故障時，剩下的還能供多少。所以
+// 「最大負載 ÷ 可靠容量」超過 100% 的意思是「尖峰時如果掉一台主變，剩下的撐不住」，
+// 不是「現在就過載」。280 座裡有 64 座是這樣。這兩件事差很多，畫面上不能寫成
+// 「過載」或「超載」，那是把備援餘裕講成當下的故障。
+//
+// 另外 17 座的可靠容量是 0，那是只有一台主變的站，沒有 N-1 可言。它們不是負載率
+// 無限大，是本來就沒有備援，所以另外給一個顏色，不排進負載率的名次裡。
+//
+// 280 座裡只有 201 座畫得出來，OSM 沒收錄的那 79 座沒有座標。面板的統計用全部
+// 280 座，地圖上少掉的那些要在說明裡講清楚，不能讓人以為地圖上就是全部。
+// 比中繼點大一些。這一層要讀的是顏色（負載率），太小就只剩下「有一個點」，
+// 分不出藍紫還是洋紅。實測 0.012 到 0.026 在貼近台灣時只有兩三個像素，看不出色差。
+const POW_SIZE_MIN = 0.019;   // 25 MVA 的小站
+const POW_SIZE_SPAN = 0.020;  // 加上去的部分，175 MVA 吃滿
+const POW_SIZE_REF = 175;
+const POW_R_LO = 0.5;         // 負載率色階的兩端，低於這個一律最冷
+const POW_R_HI = 1.4;         // 高於這個一律最熱
+let powerMat = null, powerMesh = null, lastPowerK = 1;
+
+// 縣市名的語系對照。tw-admin.json 本來就帶了三語，台電那份只有繁中，
+// 直接印出去的話英文版與簡中版都會夾一段繁體，跟先前登陸點踩過的是同一個坑。
+// 台電混用「台」與「臺」，兩邊都正規化成「臺」再對。
+function countyName(zh) {
+  const key = (zh || '').replace(/台/g, '臺');
+  const list = TWADMIN && TWADMIN.c;
+  const hit = list && list.find((c) => c.zh.replace(/台/g, '臺') === key);
+  if (!hit) return zh;
+  return LANG === 'en' ? hit.en : (LANG === 'zh-cn' ? hit.zhCn : hit.zh);
+}
+
+function powerPoints() {
+  const list = POWER && POWER.subs;
+  return list ? list.filter((s) => s.lat !== null && s.lon !== null) : [];
+}
+
+// 色階的兩端拉成一樣亮，讓色相帶訊息而不是亮度。
+//
+// 沒有正規化的話洋紅（L=0.26）對深藍海面（L=0.01）的對比遠高於淡藍那端，畫面上
+// 洋紅整個蓋過去，看起來像大多數變電所都沒有備援餘裕。實際上 263 座可算的裡面
+// 只有 64 座是那樣，四分之一不到。亮度差造成的視覺誇大要在色階這一層解掉。
+// 示意路徑的三跳角色色也是同一個做法。
+const POW_LUM = 0.40;
+const lumOf = (c) => 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+function evenLum(hex) {
+  const c = new THREE.Color(hex);
+  return c.multiplyScalar(POW_LUM / Math.max(lumOf(c), 1e-4));
+}
+const POW_C_LO = evenLum(COL.powLo);
+const POW_C_HI = evenLum(COL.powHi);
+const POW_C_SOLO = evenLum(COL.powSolo);
+
+function powerColor(s, out) {
+  if (s.solo) return out.copy(POW_C_SOLO);
+  const t = clamp(((s.ratio || 0) - POW_R_LO) / (POW_R_HI - POW_R_LO), 0, 1);
+  return out.copy(POW_C_LO).lerp(POW_C_HI, t);
+}
+
+function powerSize(s) {
+  const t = Math.min(1, (s.cap || 0) / POW_SIZE_REF);
+  return POW_SIZE_MIN + POW_SIZE_SPAN * t;
+}
+
+function buildPower() {
+  const list = powerPoints();
+  if (!list.length) return;
+  const geo = new THREE.OctahedronGeometry(1, 2);
+  powerMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  powerMat.opacity = 0; // 由 animate 跟著 twSwapT 淡入
+  powerMesh = new THREE.InstancedMesh(geo, powerMat, list.length);
+  powerMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const c = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    // 壓在中繼點（1.012）與登陸點（1.011）之下、縣市界（1.005）之上。
+    // 電力是這一層要講的主題，但中繼點仍然是這張圖的主角。
+    llToVec(s.lat, s.lon, R * 1.009, v);
+    const sz = powerSize(s);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    powerMesh.setMatrixAt(i, m);
+    powerMesh.setColorAt(i, powerColor(s, c));
+  }
+  powerMesh.instanceMatrix.needsUpdate = true;
+  if (powerMesh.instanceColor) powerMesh.instanceColor.needsUpdate = true;
+  powerMesh.renderOrder = RO_SUB;
+  globe.add(powerMesh);
+}
+
+// 跟中繼點與登陸點吃同一個補償係數，三層的相對大小才不會隨縮放亂跑
+function rescalePower(k) {
+  const list = powerPoints();
+  if (!powerMesh || !list.length) return;
+  if (Math.abs(k - lastPowerK) < DOT_STEP) return;
+  lastPowerK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    const sz = powerSize(s) * k;
+    llToVec(s.lat, s.lon, R * 1.009, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    powerMesh.setMatrixAt(i, m);
+  }
+  powerMesh.instanceMatrix.needsUpdate = true;
+}
+
+function fillPower() {
+  const box = $('stat-power');
+  const lbl = $('lbl-power');
+  const note = $('power-note');
+  const cr = $('credit-power');
+  if (!box || !POWER || !POWER.counties || !POWER.counties.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const t = POWER.total;
+  // 縣市照最大負載排。條長度用負載率，超過 100% 的那一段特別標出來。
+  const rows = POWER.counties.slice(0, 10).map((c) => {
+    const r = c.ratio || 0;
+    const pct = Math.min(100, r * 100 / POW_R_HI); // 滿格用跟地圖色階同一個上限
+    const over = r > 1;
+    return `<div class="pw-row"><b>${countyName(c.county)}</b>`
+      + `<i><s style="width:${Math.min(100, pct)}%" class="${over ? 'over' : ''}"></s></i>`
+      + `<em>${Math.round(r * 100)}%</em>`
+      + `<u>${c.n} ${S('pwUnit')}</u></div>`;
+  }).join('');
+  box.innerHTML = rows;
+  if (note) {
+    note.innerHTML = S('notePower', {
+      n: t.n, located: t.located, tight: t.tight, ratable: t.ratable, solo: t.solo,
+      cap: Math.round(t.cap).toLocaleString(),
+      load: Math.round(t.load).toLocaleString(),
+    });
+  }
+}
+
+// 發電廠與 345kV 電網骨幹。台電的即時發電資訊（政府資料開放授權條款-第1版）
+// 加上 OpenStreetMap 的位置與線路幾何（ODbL），產生器是 tools/gen_tw_grid.py。
+//
+// === 只有骨幹，不是完整電網 ===
+//
+// 畫的是 345kV 這一層。不限電壓抓 OSM 的輸電線，一度見方的格子在 Overpass 主站與
+// 鏡像都會超時，抓不動。而 345kV 剛好就是台灣電網的骨幹，南電北送走的是這一層。
+// 161kV 以下的配電網完全沒有畫，面板說明要講清楚，不要讓人以為看到的是全部。
+//
+// === 發電廠只有一部分畫得出來 ===
+//
+// 台電那份沒有座標，靠名稱跟 OSM 對。82 座裡只有 17 座對得到，但那 17 座佔了
+// 全部裝置容量的七成一，因為大型電廠 OSM 都有收，對不到的多半是離岸風場、
+// 小水力，還有「電池」「汽電共生」這種本來就不是單一廠址的分類。
+//
+// 另外還有一塊完全沒有位置可言：「其它購電太陽能」一列就 15,175 MW，那是全台
+// 分散式光電的總和。它不在地圖上，但量比任何一座電廠都大，面板要單獨列出來，
+// 否則讀者會以為地圖上的點加起來就是台灣的發電量。
+const PLANT_SIZE_MIN = 0.016;
+const PLANT_SIZE_SPAN = 0.030;
+const PLANT_CAP_REF = 7000;   // 大潭 7,544 MW，到這裡吃滿
+let gridLineMat = null, plantMat = null, plantMesh = null, lastPlantK = 1;
+
+function gridPlants() {
+  const list = GRID && GRID.plants;
+  return list ? list.filter((p) => p.lat !== null && p.lon !== null) : [];
+}
+
+function plantSize(p) {
+  // 容量差三個數量級（0.5 MW 到 7,544 MW），開根號壓一下，小廠才不會變成看不見的點
+  const t = Math.min(1, Math.sqrt(Math.max(0, p.cap) / PLANT_CAP_REF));
+  return PLANT_SIZE_MIN + PLANT_SIZE_SPAN * t;
+}
+
+function buildGrid() {
+  if (!GRID) return;
+  // 345kV 線。壓在變電所（1.009）之下、縣市界（1.005）之上，它是背景不是主角。
+  const lines = GRID.lines || [];
+  if (lines.length) {
+    const pos = [];
+    const v = new THREE.Vector3(), prev = new THREE.Vector3();
+    for (const ln of lines) {
+      const p = ln.p;
+      for (let i = 0; i + 3 < p.length; i += 2) {
+        llToVec(p[i + 1], p[i], R * 1.007, prev);
+        pos.push(prev.x, prev.y, prev.z);
+        llToVec(p[i + 3], p[i + 2], R * 1.007, v);
+        pos.push(v.x, v.y, v.z);
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+    gridLineMat = new THREE.LineBasicMaterial({
+      color: COL.gridLine, transparent: true, opacity: 0, depthWrite: false,
+    });
+    globe.add(new THREE.LineSegments(g, gridLineMat));
+  }
+  // 發電廠
+  const list = gridPlants();
+  if (!list.length) return;
+  plantMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  plantMat.opacity = 0;
+  plantMesh = new THREE.InstancedMesh(new THREE.OctahedronGeometry(1, 2), plantMat, list.length);
+  plantMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const base = new THREE.Color(COL.plant);
+  const c = new THREE.Color();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    // 抬到變電所之上。發電廠比變電所少得多也大得多，疊在一起時它該在上面。
+    llToVec(p.lat, p.lon, R * 1.010, v);
+    const sz = plantSize(p);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    plantMesh.setMatrixAt(i, m);
+    // 亮度帶當下的出力比例，暗的是停機或低載。色相不變，避免再開一組語意。
+    const duty = p.cap > 0 ? clamp(p.out / p.cap, 0, 1) : 0;
+    plantMesh.setColorAt(i, c.copy(base).multiplyScalar(0.45 + 0.55 * duty));
+  }
+  plantMesh.instanceMatrix.needsUpdate = true;
+  if (plantMesh.instanceColor) plantMesh.instanceColor.needsUpdate = true;
+  plantMesh.renderOrder = RO_PLANT;
+  globe.add(plantMesh);
+}
+
+function rescalePlants(k) {
+  const list = gridPlants();
+  if (!plantMesh || !list.length) return;
+  if (Math.abs(k - lastPlantK) < DOT_STEP) return;
+  lastPlantK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    const sz = plantSize(p) * k;
+    llToVec(p.lat, p.lon, R * 1.010, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    plantMesh.setMatrixAt(i, m);
+  }
+  plantMesh.instanceMatrix.needsUpdate = true;
+}
+
+function fillGrid() {
+  const box = $('stat-grid');
+  const lbl = $('lbl-grid');
+  const note = $('grid-note');
+  const cr = $('credit-grid');
+  if (!box || !GRID || !GRID.byType || !GRID.byType.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const t = GRID.total;
+  const max = Math.max(...GRID.byType.map((x) => x.cap), t.distCap);
+  const row = (label, cap, cls) =>
+    `<div class="pw-row"><b>${label}</b>`
+    + `<i><s style="width:${Math.round(cap / max * 100)}%" class="${cls || ''}"></s></i>`
+    + `<em>${Math.round(cap).toLocaleString()}</em><u>MW</u></div>`;
+  // 分散式那一塊沒有位置，但量比任何一座電廠都大，放在同一張圖裡才不會被忽略
+  // 發電類型走 i18n 的對照表，對不到就原樣輸出
+  // t() 是做字串代換的，取不了物件，所以這裡直接讀 STR
+  const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+  const tyName = (k) => table[k] || k;
+  const rows = GRID.byType.slice(0, 7).map((x) => row(tyName(x.type), x.cap)).join('')
+    + row(S('gridDist'), t.distCap, 'dist');
+  box.innerHTML = rows;
+  if (note) {
+    note.innerHTML = S('noteGrid', {
+      plants: t.plants, located: t.located, lines: t.lines,
+      cap: Math.round(t.cap).toLocaleString(),
+      out: Math.round(t.out).toLocaleString(),
+      distCap: Math.round(t.distCap).toLocaleString(),
+      commissioning: t.commissioning || 0,
+      stamp: (GRID.stamp || '').replace('T', ' '),
+    });
+  }
+}
+
+// 台電自建的再生能源場址。跟上面那批電廠分開一層，因為位置的來源不一樣：
+// 電廠是靠名稱對 OpenStreetMap，這一批是把台電給的地址拿去地理編碼。
+//
+// 精度差很多而且逐筆不同，93 處裡面門牌級 22、里級 56、鄉鎮級 14。點的大小照容量走，
+// 不要另外用大小表達精度，那會跟電廠那層的尺寸語意打架。精度寫在卡片上。
+//
+// 離岸一期的地址是「彰化縣芳苑鄉外海7.2-8.7公里處」，那不是地址，產生器直接留 null
+// 而不是退到芳苑鄉的陸地上。畫面上就會少那一個點，說明文字有交代。
+const RENEW_SIZE_MIN = 0.010;
+const RENEW_SIZE_SPAN = 0.016;
+const RENEW_CAP_REF = 120;   // 陸域風力最大的場址約 110 MW
+let renewMat = null, renewMesh = null, lastRenewK = 1;
+
+function renewSites() {
+  const list = ENERGY && ENERGY.sites;
+  return list ? list.filter((s) => s.lat !== null && s.lon !== null) : [];
+}
+
+function renewSize(s) {
+  const t = Math.min(1, Math.sqrt(Math.max(0, s.cap) / RENEW_CAP_REF));
+  return RENEW_SIZE_MIN + RENEW_SIZE_SPAN * t;
+}
+
+function buildRenew() {
+  const list = renewSites();
+  if (!list.length) return;
+  renewMat = new THREE.MeshBasicNodeMaterial({ transparent: true, depthWrite: false });
+  renewMat.opacity = 0;
+  renewMesh = new THREE.InstancedMesh(new THREE.OctahedronGeometry(1, 2), renewMat, list.length);
+  renewMesh.frustumCulled = false;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  const c = new THREE.Color(COL.renew);
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    // 壓在電廠（1.010）之下、變電所（1.009）之上。這些場址多半很小，
+    // 有幾座太陽能就蓋在大電廠的廠區裡，讓大的畫在上面比較好讀。
+    llToVec(s.lat, s.lon, R * 1.0095, v);
+    const sz = renewSize(s);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    renewMesh.setMatrixAt(i, m);
+    renewMesh.setColorAt(i, c);
+  }
+  renewMesh.instanceMatrix.needsUpdate = true;
+  if (renewMesh.instanceColor) renewMesh.instanceColor.needsUpdate = true;
+  renewMesh.renderOrder = RO_RENEW;
+  globe.add(renewMesh);
+}
+
+function rescaleRenew(k) {
+  const list = renewSites();
+  if (!renewMesh || !list.length) return;
+  if (Math.abs(k - lastRenewK) < DOT_STEP) return;
+  lastRenewK = k;
+  const m = new THREE.Matrix4();
+  const v = new THREE.Vector3();
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    const sz = renewSize(s) * k;
+    llToVec(s.lat, s.lon, R * 1.0095, v);
+    m.makeScale(sz, sz, sz);
+    m.setPosition(v);
+    renewMesh.setMatrixAt(i, m);
+  }
+  renewMesh.instanceMatrix.needsUpdate = true;
+}
+
+// 用電量與備轉容量率。前者是需求面，跟變電所那一段的供給面配成一對，
+// 後者是「電網每天離極限多近」，台電自己的橙燈門檻是 10%。
+let USE_MODE = 'total';
+function fillEnergy() {
+  const box = $('stat-energy');
+  const lbl = $('lbl-energy');
+  const note = $('energy-note');
+  const cr = $('credit-energy');
+  if (!box || !ENERGY || !ENERGY.demand || !ENERGY.demand.counties.length) {
+    if (lbl) lbl.hidden = true;
+    if (note) note.hidden = true;
+    if (cr) cr.hidden = true;
+    return;
+  }
+  const d = ENERGY.demand;
+  // 兩種看法。看售電量六都在前面，看工業用電佔比新竹會跳到第一，那才是科學園區
+  // 在這份資料裡真正的樣子。新竹縣與新竹市在行政上是分開的兩列，看總量的時候
+  // 園區的用電會被切成兩半，看佔比就不受影響。
+  const indPct = (c) => (c.total ? (c.sectors['工業'] || 0) / c.total * 100 : 0);
+  const byInd = USE_MODE === 'ind';
+  const list = (byInd ? d.counties.slice().sort((a, b) => indPct(b) - indPct(a)) : d.counties)
+    .slice(0, 8);
+  const max = byInd ? 100 : (d.counties[0].total || 1);
+  // 度換算成該語系的單位。中文是億度，英文是 TWh，倍率跟單位一起放在 i18n。
+  const scale = parseFloat(S('unitYiScale')) || 1;
+  const rows = list.map((c) => {
+    const v = byInd ? indPct(c) : c.total / 1e8 * scale;
+    const w = byInd ? indPct(c) : c.total / max * 100;
+    return `<div class="pw-row"><b>${countyName(c.county)}</b>`
+      + `<i><s style="width:${Math.round(w)}%" class="${byInd ? 'ind' : 'use'}"></s></i>`
+      + `<em>${byInd ? v.toFixed(1) : v.toFixed(v < 10 ? 2 : 1)}</em>`
+      + `<u>${byInd ? '%' : S('unitYi')}</u></div>`;
+  }).join('');
+  // 備轉容量率的走勢。一天一根細條，低於 10% 的換色，看得出吃緊集中在哪幾段。
+  const rv = ENERGY.reserve;
+  const spark = rv && rv.days.length
+    ? `<div class="rv-spark" role="img" aria-label="${S('rvAria', { n: rv.days.length })}">`
+      + rv.days.map(([, p]) =>
+        `<s style="height:${Math.round(clamp(p / 40, 0.05, 1) * 100)}%" class="${p < 10 ? 'tight' : ''}"></s>`).join('')
+      + '</div>'
+    : '';
+  box.innerHTML = rows + spark;
+  if (note) {
+    note.innerHTML = S(byInd ? 'noteEnergyInd' : 'noteEnergy', {
+      label: d.label, months: d.months,
+      sites: (ENERGY.siteTotal || {}).n || 0,
+      located: (ENERGY.siteTotal || {}).located || 0,
+      siteCap: Math.round((ENERGY.siteTotal || {}).cap || 0).toLocaleString(),
+      min: rv ? rv.min : '–', median: rv ? rv.median : '–', tight: rv ? rv.tight : 0,
+      days: rv ? rv.days.length : 0,
+    });
+  }
+}
+
+function buildCoastline(coast, world) {
   const seg = coast.seg;
   const n = seg.length / 4;
-  const pos = new Float32Array(n * 2 * 3);
+  const keys = twOutlineKeys(world);
   const v = new THREE.Vector3();
+  const main = [], twPart = [];
   for (let i = 0; i < n; i++) {
-    llToVec(seg[i * 4 + 1], seg[i * 4], R * 1.004, v);
-    pos[i * 6] = v.x; pos[i * 6 + 1] = v.y; pos[i * 6 + 2] = v.z;
-    llToVec(seg[i * 4 + 3], seg[i * 4 + 2], R * 1.004, v);
-    pos[i * 6 + 3] = v.x; pos[i * 6 + 4] = v.y; pos[i * 6 + 5] = v.z;
+    const x0 = seg[i * 4], y0 = seg[i * 4 + 1], x1 = seg[i * 4 + 2], y1 = seg[i * 4 + 3];
+    // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
+    const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
+    const out = isTw ? twPart : main;
+    llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
+    llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
   }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const m = new THREE.LineBasicMaterial({ color: COL.coast, transparent: true, opacity: 0.17, blending: THREE.AdditiveBlending, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  const mk = (arr, opacity) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(arr), 3));
+    const m = new THREE.LineBasicMaterial({
+      color: COL.coast, transparent: true, opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    globe.add(new THREE.LineSegments(g, m));
+    return m;
+  };
+  if (main.length) mk(main, COAST_OP);
+  if (twPart.length) coastTwMat = mk(twPart, COAST_OP);
 }
 
 // 射線法：點是否落在該國的任一個外環內
@@ -1050,7 +2293,8 @@ function buildRelays(snap, counts) {
     if (!a || NO_PLACE.has(country)) continue;
     sampleIn(a, ll);
     llToVec(ll[0], ll[1], R * 1.012, tmp);
-    groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w) });
+    // cc 帶著走，訊息串要拿它顯示三跳落在哪幾國
+    groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w), cc: country });
     total++;
   }
   if (!total) return 0;
@@ -1151,13 +2395,32 @@ const LABEL_ALWAYS = ['tw'];
 function buildLabels(snap) {
   const box = $('labels');
   if (!box) return;
-  const list = snap.countries || snap.topCountries || [];
+  const relayList = snap.countries || snap.topCountries || [];
+  // 有中繼的排前面（照台數），後面接上「沒有中繼但別的資料裡有」的那些。
+  //
+  // 只用中繼決定標籤的話，這個站真正在講的那幾個地方會整批消失：實測 OONI 有觀測
+  // 但沒有中繼的 95 國、有斷網紀錄但沒有中繼的 35 國，伊朗、緬甸、敘利亞都在裡面。
+  // 點不到國碼就看不到那些資訊，等於資料在檔案裡但使用者拿不到。
+  //
+  // 後面那批照使用者數排，人多的先卡位。標籤本來就有碰撞閃避與距離分級，
+  // 多出來的候選只是「放大之後才浮出來」，遠看的畫面不會變擠。
+  const seen = new Set(relayList.map(([cc]) => cc));
+  const extra = [];
+  for (const cc of ANCHOR.keys()) {
+    if (seen.has(cc) || NO_PLACE.has(cc) || !hasCountryData(cc)) continue;
+    extra.push([cc, 0]);
+  }
+  const users = (c) => (USERS_MAP && USERS_MAP.get(c)) || 0;
+  extra.sort((a, b) => users(b[0]) - users(a[0]));
+  const list = relayList.concat(extra);
   list.forEach(([cc, n], rank) => {
     const a = ANCHOR.get(cc);
     if (!a || NO_PLACE.has(cc)) return;
     const el = document.createElement('div');
     el.className = rank < 10 || LABEL_ALWAYS.includes(cc) ? 'lb' : 'lb sm'; // 前段用亮字，長尾壓暗
-    el.innerHTML = `${cc.toUpperCase()}<i>${n.toLocaleString()}</i>`;
+    // 沒有中繼就只留國碼。掛一個「0」會讓人以為那是量測到的數字，
+    // 實際上是「這裡沒有中繼」，而卡片裡才有它真正的內容。
+    el.innerHTML = cc.toUpperCase() + (n ? `<i>${n.toLocaleString()}</i>` : '');
     el.dataset.cc = cc;
     box.appendChild(el);
     const c = a.cl || a.ll;
@@ -1266,7 +2529,7 @@ let SNAP_ASN = null, SNAP_VER = null, SNAP_ASN_TOP = null;
 let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
-let TORUSERS = null, SHUTDOWNS = null;
+let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null, GRID = null, ENERGY = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -1299,30 +2562,53 @@ function buildStats(snap) {
   CC_STATS = { mix, w, totalN, totalW, rankN, rankW, conc, cnt: cntByCC, exitShare: exitAll / totalN };
 }
 
+// 這個國家在中繼以外的資料裡有沒有東西。
+//
+// 中繼分布是這張圖的主軸，但不是唯一的內容。這個站真正在講的那些地方，
+// 伊朗、緬甸、敘利亞、北韓，全都沒有中繼，卻有 OONI 的連線受阻觀測與斷網紀錄。
+// 只用中繼決定「哪些國家點得到」，等於把最相關的那批國家鎖在畫面外。
+function hasCountryData(cc) {
+  if (OONI && OONI.cc && OONI.cc[cc] && OONI.cc[cc][0]) return true;
+  if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) return true;
+  if (TORUSERS && TORUSERS.bridge && (TORUSERS.bridge[cc] || []).length) return true;
+  return false;
+}
+
 function showCountry(cc) {
   const card = $('cc-card');
   if (!card || !CC_STATS) return;
   const r = CC_STATS.mix.get(cc);
-  if (!r) return;
-  const t = r[0] + r[1] + r[2] + r[3];
-  const wShare = (CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100;
-  const exitPct = (r[2] + r[3]) / t * 100;
+  // 沒有中繼也要開得起來，只要別的資料裡有它。全部都沒有才不開。
+  if (!r && !hasCountryData(cc)) return;
+  const t = r ? r[0] + r[1] + r[2] + r[3] : 0;
   $('cc-code').textContent = cc.toUpperCase();
-  $('cc-sub').textContent = S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) });
-  $('cc-bar').innerHTML = [2, 3, 1, 0]
-    .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
-    .join('');
+  $('cc-sub').textContent = r
+    ? S('cardSub', { n: t.toLocaleString(), rank: CC_STATS.rankN.get(cc) })
+    : S('cardNoRelay');
+  // 角色比例條沒有中繼就沒有東西可畫，整條收掉而不是留一截空軌
+  $('cc-bar').hidden = !r;
+  if (r) {
+    $('cc-bar').innerHTML = [2, 3, 1, 0]
+      .map((i) => (r[i] ? `<span style="width:${(r[i] / t * 100).toFixed(1)}%;background:${roleHex(i)}"></span>` : ''))
+      .join('');
+  }
   const pct = (x) => (x < 1 ? x.toFixed(2) : x.toFixed(1));
-  $('cc-body').innerHTML =
-    // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
-    S('cardShare', {
-      share: pct(t / CC_STATS.totalN * 100), w: pct(wShare), wrank: CC_STATS.rankW.get(cc),
-      exit: Math.round(exitPct), all: Math.round(CC_STATS.exitShare * 100),
+  // 中繼相關的那幾段沒有中繼就整批跳過，其餘（使用者、OONI、橋接、斷網）照樣接上
+  const relayPart = r
+    ? S('cardShare', {
+      share: pct(t / CC_STATS.totalN * 100),
+      w: pct((CC_STATS.w.get(cc) || 0) / CC_STATS.totalW * 100),
+      wrank: CC_STATS.rankW.get(cc),
+      exit: Math.round((r[2] + r[3]) / t * 100), all: Math.round(CC_STATS.exitShare * 100),
     })
     + versionPart(cc)
     + `<div class="cc-roles">`
     + [1, 3, 2, 0].map((k) => `<span class="chip" style="--c:${roleHex(k)}">${ROLE_NAME[k]} ${r[k].toLocaleString()}</span>`).join('')
     + `</div>`
+    : '';
+  $('cc-body').innerHTML =
+    // 卡片會長到十幾行，能併一行的就別換行。三段各自很短，接起來還在一行內
+    relayPart
     + usersLine(cc, t)
     + hostingLine(cc, t)
     + ooniLine(cc)
@@ -1372,6 +2658,25 @@ function ooniLine(cc) {
 }
 
 // 這一國有多少人在用。中繼數是供給端，這是需求端，兩個數字擺在一起才看得出落差。
+// 這一國有多少人上網。用途是給上面那個 Tor 使用者數當脈絡：兩國的 Tor 人數差很多時，
+// 先看得出來是不是單純因為一邊上網的人本來就少。
+//
+// 刻意只呈現比例，不換算成「每十萬上網人口有幾人用 Tor」。Tor 的人數本身是估計值，
+// 信心區間寬到上下差好幾倍，除以人口之後不確定性一點都沒少，卻會長得像一個精確的比值。
+// 分子分母各自呈現，讓讀的人自己拿捏，比端出一個假精確的數字誠實。
+//
+// 回傳 [片語, 是否來自替代來源]。台灣走的是 alt 那條，World Bank 沒有收錄台灣。
+function netPctLine(cc) {
+  if (!NETUSERS) return null;
+  const main = NETUSERS.pct && NETUSERS.pct[cc];
+  if (main) return [S('cardNetPct', { pct: main[0], year: main[1] }), false];
+  const alt = NETUSERS.alt && NETUSERS.alt.pct && NETUSERS.alt.pct[cc];
+  // 機關名走 i18n，不要直接內插 NETUSERS.alt.source。那個欄位是資料檔裡寫死的繁中，
+  // 內插進去英文版會變成一句英文中間夾一段繁體中文的機關名。
+  if (alt) return [S('cardNetPctAlt', { pct: alt[0], year: alt[1], src: S('netAltSource') }), true];
+  return null;
+}
+
 // 措辭要留住「估計」兩個字，Tor Metrics 是用中繼收到的目錄請求反推的，信心區間很寬
 // （台灣 10,585 人的區間是 3,722 到 21,578），寫成確定數字是騙人的。
 function usersLine(cc, relays) {
@@ -1381,9 +2686,11 @@ function usersLine(cc, relays) {
   const [cur, avg] = u;
   // 每台中繼「服務」多少使用者。這不是真的負載，只是兩個數字的比值，用來凸顯落差。
   const per = relays ? Math.round(cur / relays) : 0;
+  const net = netPctLine(cc);
   return `<div class="cc-sub2">`
     + S('cardUsers', { n: cur.toLocaleString(), days: TORUSERS.days, avg: avg.toLocaleString() })
-    + (per ? S('cardUsersPer', { n: per.toLocaleString() }) : '') + `</div>`;
+    + (per ? S('cardUsersPer', { n: per.toLocaleString() }) : '')
+    + (net ? net[0] : '') + `</div>`;
 }
 
 // 這一國的人用什麼方式繞過封鎖。跟 ooni.json 那層是一組的：OONI 說連不上，這裡說改用什麼。
@@ -1427,6 +2734,9 @@ function shutdownLine(cc) {
 function cardNote(cc) {
   const bits = [];
   if (TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push(S('cardNoteUsers'));
+  // 上網比例走替代來源的那幾筆（目前只有台灣）要講一句，方法論跟其他國家不同。
+  const net = netPctLine(cc);
+  if (net && net[1] && TORUSERS && TORUSERS.users && TORUSERS.users[cc]) bits.push(S('cardNoteNetAlt'));
   if (OONI && OONI.cc && OONI.cc[cc]) bits.push(S('cardNoteOoni'));
   if (SHUTDOWNS && SHUTDOWNS.cc && SHUTDOWNS.cc[cc]) bits.push(S('cardNoteShutdown'));
   return bits.length ? `<div class="cc-sub2 tiny dim">${bits.join('。')}。</div>` : '';
@@ -1457,6 +2767,217 @@ function radarLine(cc) {
 }
 
 function hideCountry() { const c = $('cc-card'); if (c) c.hidden = true; }
+
+// ── 點台灣的設施看細節 ────────────────────────────────────────────
+//
+// 電廠、變電所、海纜登陸點都是 InstancedMesh 上的小點，畫在螢幕上只有幾個像素。
+// 用 Raycaster 對那些八面體做精確命中，實際上很難點得到，會變成一直點不中的挫折。
+//
+// 改成螢幕空間的最近命中：把候選點投影到畫面座標，取離游標最近且在門檻內的那一個。
+// 命中範圍固定是像素，不隨縮放變化，手感一致。判正反面沿用 updateLabels 那套
+// nearZ 門檻，背面的點不該被點到。
+//
+// 輸電線是線段不是點，用 Raycaster 配 Line.threshold，那個本來就是為線設計的。
+// 線的優先序放最後，點壓在線上的時候應該選點。
+const PICK_PX = 16;        // 點的命中半徑（像素）
+const PICK_LINE = 0.035;   // 線的命中門檻（世界單位）
+const pickRay = new THREE.Raycaster();
+const pickV = new THREE.Vector3();
+const pickNdc = new THREE.Vector2();
+
+function projectPoint(lat, lon, r, nearZ) {
+  llToVec(lat, lon, r, pickV);
+  pickV.applyMatrix4(globe.matrixWorld);
+  if (pickV.z <= nearZ) return null;          // 在地球背面
+  pickV.project(camera);
+  return { x: (pickV.x * 0.5 + 0.5) * innerWidth, y: (-pickV.y * 0.5 + 0.5) * innerHeight };
+}
+
+/** 回傳 {kind, data} 或 null。kind 是 plant / sub / landing / line。 */
+function pickFeature(sx, sy) {
+  // 還沒淡入的層不該點得到，但登陸點不在那批裡。它的材質 opacity 寫死 0.85，
+  // 從太空視角就一直看得見（那是刻意的，海岸邊幾點微光）。一律擋掉的話會變成
+  // 螢幕上明明有一個亮點，點下去卻毫無反應，而且沒有任何提示說明為什麼。
+  const deep = twSwapT() > 0.05;
+  globe.updateMatrixWorld();
+  camera.updateMatrixWorld();
+  const nearZ = R * R / camera.position.z;
+  let best = null;
+  const consider = (kind, data, lat, lon, r) => {
+    const p = projectPoint(lat, lon, r, nearZ);
+    if (!p) return;
+    const d = Math.hypot(p.x - sx, p.y - sy);
+    if (d > PICK_PX) return;
+    // 同樣距離時照 kind 的順序決定，電廠優先於變電所優先於登陸點
+    if (!best || d < best.d) best = { kind, data, d };
+  };
+  if (deep) {
+    for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
+    for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
+    for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * 1.0095);
+  }
+  for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * 1.011);
+  if (best) return best;
+
+  // 沒點到點才輪到線
+  if (!deep) return null;
+  if (!gridLineMat || !GRID || !GRID.lines || !GRID.lines.length) return null;
+  pickNdc.set((sx / innerWidth) * 2 - 1, -(sy / innerHeight) * 2 + 1);
+  pickRay.setFromCamera(pickNdc, camera);
+  pickRay.params.Line = { threshold: PICK_LINE };
+  const seg = globe.children.find((o) => o.isLineSegments && o.material === gridLineMat);
+  if (!seg) return null;
+  const hit = pickRay.intersectObject(seg, false)[0];
+  if (!hit) return null;
+  // Raycaster 給的是第幾個頂點，換算回是第幾條線再查名稱
+  let idx = (hit.index !== undefined ? hit.index : 0), acc = 0;
+  for (const ln of GRID.lines) {
+    const verts = (ln.p.length / 2 - 1) * 2;   // 每段兩個頂點
+    if (idx < acc + verts) return { kind: 'line', data: ln, d: 0 };
+    acc += verts;
+  }
+  return { kind: 'line', data: GRID.lines[0], d: 0 };
+}
+
+// 變電所卡片上的容量計。裝置容量、可靠容量、尖峰負載三個數字都是 MVA，擺在同一條
+// 軸上，N-1 的定義就變成看得到的幾何：可靠容量那道刻度到裝置容量之間的斜紋帶，
+// 寬度正好是最大那一台主變壓器，故障時消失的就是那一段。負載填色越過刻度，
+// 意思是尖峰時掉一台會撐不住。
+//
+// 軸長取 max(裝置容量, 尖峰負載)。全台只有光洲一座的尖峰負載超過裝置容量，多 4.4%，
+// 軸長若固定在裝置容量，那一座的填色會直接撞頂看不出溢出。所以軸長跟著放大，
+// 裝置容量改用刻度標出來，其餘 262 座的裝置容量刻度就落在軌道尾端。
+function subGauge(d) {
+  const one = (x) => Math.round(x * 10) / 10;
+  const hex = (n) => '#' + n.toString(16).padStart(6, '0');
+  const scale = Math.max(d.cap, d.load) || 1;
+  const pct = (v) => (v / scale * 100).toFixed(2);
+  const over = !d.solo && d.load > d.rel;
+  // 裝置容量的刻度貼在尾端時不必畫，軌道邊界本身就是它
+  const capInside = d.cap / scale < 0.985;
+  // 可靠容量與裝置容量太靠近時只留一個標籤，兩個疊在一起誰都讀不到。台電那份有
+  // 七座把可靠容量填得跟裝置容量一樣，那幾座的斜紋帶是零寬。
+  const relLabel = (d.cap - d.rel) / scale > 0.09;
+
+  const seg = [];
+  // 刻度貼在尾端時改成靠右對齊。left:100% 的那 2px 會整條被軌道的 overflow:hidden
+  // 切掉，可靠容量等於裝置容量的那七座就看不到刻度，文字卻說刻度落在尾端。
+  const tick = (v) => `<span class="tk" style="${v / scale > 0.995 ? 'right:0' : `left:${pct(v)}%`}"></span>`;
+  // 標籤貼著軸上的位置走。置中在兩端會溢出卡片，所以靠邊時改成貼邊對齊，
+  // 標籤的邊界就落在刻度上，指向關係不會跑掉。
+  const anchor = (v) => {
+    const t = v / scale;
+    if (t < 0.12) return 'left:0';
+    if (t > 0.88) return `right:${(100 - t * 100).toFixed(2)}%`;
+    return `left:${pct(v)}%;transform:translateX(-50%)`;
+  };
+  const lab = [];
+  if (d.solo) {
+    // 只有一台主變的站，沒有 N-1 可言，只畫負載對裝置容量。顏色沿用地圖上給
+    // 這類站的灰，一眼就知道它不在負載率的色階裡。
+    seg.push(`<span style="left:0;width:${pct(d.load)}%;background:${hex(COL.powSolo)}"></span>`);
+    lab.push(`<span style="left:0">${S('gLoad', { v: one(d.load) })}</span>`);
+  } else {
+    seg.push(`<span style="left:0;width:${pct(Math.min(d.load, d.rel))}%;background:${hex(COL.powLo)}"></span>`);
+    if (over) seg.push(`<span style="left:${pct(d.rel)}%;width:${pct(d.load - d.rel)}%;background:${hex(COL.powHi)}"></span>`);
+    seg.push(`<span class="n1" style="left:${pct(d.rel)}%;width:${pct(d.cap - d.rel)}%"></span>`);
+    seg.push(tick(d.rel));
+    lab.push(`<span style="left:0${over ? `;color:${hex(COL.powHi)}` : ''}">${S('gLoad', { v: one(d.load) })}</span>`);
+    if (relLabel) lab.push(`<span style="${anchor(d.rel)}">${S('gRel', { v: one(d.rel) })}</span>`);
+  }
+  if (capInside) seg.push(tick(d.cap));
+  lab.push(`<span style="${capInside ? anchor(d.cap) : 'right:0'}">${S('gCap', { v: one(d.cap) })}</span>`);
+
+  return `<div class="tr">${seg.join('')}</div><div class="sc">${lab.join('')}</div>`;
+}
+
+// 刻度標籤會不會擠在一起，跟語言與字型都有關，用字數估不準。實測 rel/cap 為 0.75
+// 的那 29 座只在英文版擠到，0.8333 的那一座三種語言都擠。所以渲染完直接量 bounding
+// box，真的疊到才把裝置容量挪到第二行，橫向位置保持不動，指向的刻度才不會跑掉。
+// 卡片要先顯示出來才量得到，隱藏中的元素 getBoundingClientRect 全是零。
+function fitGaugeScale(bar) {
+  if (!bar || !bar.classList.contains('gauge')) return;
+  bar.classList.remove('two');
+  const ls = [...bar.querySelectorAll('.sc > span')];
+  for (let i = 1; i < ls.length; i++) {
+    const a = ls[i - 1].getBoundingClientRect(), b = ls[i].getBoundingClientRect();
+    if (b.left < a.right + 6) { bar.classList.add('two'); return; }
+  }
+}
+
+function showFeature(hit) {
+  const card = $('cc-card');
+  if (!card) return;
+  const d = hit.data;
+  const zh = LANG !== 'en';
+  const num = (x) => (x === null || x === undefined ? '–' : Math.round(x * 10) / 10);
+  let code = '', sub = '', body = '';
+  if (hit.kind === 'plant') {
+    const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+    code = d.name;
+    sub = table[d.type] || d.type;
+    const duty = d.cap > 0 ? (d.out / d.cap * 100).toFixed(0) : null;
+    body = S('pkPlant', {
+      units: d.units, cap: num(d.cap).toLocaleString(), out: num(d.out).toLocaleString(),
+      duty: duty === null ? '–' : duty,
+    });
+  } else if (hit.kind === 'sub') {
+    code = d.name;
+    sub = countyName(d.county);
+    // 三個數字都在圖上的標籤裡了，文字只講怎麼讀那張圖。
+    // 可靠容量等於裝置容量的那七座沒有餘裕帶可指，換一段說明。
+    const ratio = d.ratio === null ? '–' : Math.round(d.ratio * 100);
+    body = (d.solo ? S('pkSubSolo', { cap: num(d.cap), load: num(d.load) })
+      : S(d.cap - d.rel < 1e-9 ? 'pkSubFlat' : 'pkSub', { ratio }))
+      + (d.area ? '<br>' + S('pkSubArea', { area: esc(d.area) }) : '');
+  } else if (hit.kind === 'renew') {
+    const table = (STR[LANG] || STR['zh-TW']).genTypes || {};
+    code = d.name;
+    sub = table[d.type] || d.type;
+    body = S('pkRenew', {
+      cap: num(d.cap).toLocaleString(),
+      model: esc(d.model) || '–',
+      units: d.units || '–',
+      addr: esc(d.addr),
+      prec: d.precision,
+    });
+  } else if (hit.kind === 'landing') {
+    code = LANG === 'en' ? d.en : (LANG === 'zh-cn' ? d.zhCn : d.zh);
+    sub = LANG === 'en' ? d.adminEn : (LANG === 'zh-cn' ? d.adminZhCn : d.admin);
+    const meta = LP_PREC[d.precision];
+    body = S('pkLanding', {
+      prec: meta ? S(meta.key) : d.precision,
+      cables: d.cables && d.cables.length ? d.cables.join(S('listSep')) : S('lpNoCable'),
+    });
+  } else {
+    code = d.name || S('pkLineNoName');
+    sub = `${(parseInt(d.volt, 10) || 0) / 1000} kV`;
+    body = S('pkLine', { circuits: d.circuits || '–' });
+  }
+  $('cc-code').textContent = code;
+  $('cc-sub').textContent = sub;
+  // 那條比例條要嘛有內容要嘛整條收掉。留一條空的會變成一截灰軌，看起來像壞掉的
+  // 進度條，實際上是上一張國家卡片留下的空殼。
+  const bar = $('cc-bar');
+  const hex = (n) => '#' + n.toString(16).padStart(6, '0');
+  if (bar) {
+    let html = '', gauge = false;
+    if (hit.kind === 'sub' && d.cap > 0 && (d.solo || d.ratio !== null)) {
+      html = subGauge(d);
+      gauge = true;
+    } else if (hit.kind === 'plant' && d.cap > 0) {
+      // 當下出力佔裝置容量多少
+      const w = clamp(d.out / d.cap, 0, 1) * 100;
+      html = `<span style="width:${w.toFixed(1)}%;background:${hex(COL.plant)}"></span>`;
+    }
+    bar.classList.toggle('gauge', gauge);
+    bar.innerHTML = html;
+    bar.hidden = !html;
+  }
+  $('cc-body').innerHTML = body;
+  card.hidden = false;
+  fitGaugeScale(bar);
+}
 
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
 // 角色分布那四個 chip 直接當按鈕用，點下去地球就換成那個角色的色調。
@@ -1513,7 +3034,7 @@ function fillAsn(snap) {
   const tot = snap.sampled || snap.total || 1;
   const max = snap.asnTop[0][2] || 1;
   box.innerHTML = snap.asnTop.slice(0, 8).map(([id, nm, n]) =>
-    `<div class="mix-row"><span class="as-nm" title="${id}">${nm || id}</span>`
+    `<div class="mix-row"><span class="as-nm" title="${esc(id)}">${esc(nm || id)}</span>`
     + `<span class="tot">${n.toLocaleString()}</span>`
     + `<span class="mix-bar"><span style="width:${(n / max * 100).toFixed(1)}%;background:#c47ad8"></span></span>`
     + `<span class="n">${(n / tot * 100).toFixed(1)}%</span></div>`).join('');
@@ -1683,11 +3204,7 @@ const AS_TOP_PER_COUNTRY = 3, AS_TOP_GLOBAL = 15, AS_NAME_MAX = 26;
 // .onion 與 IPFS 版本不給這個按鈕。onion 上打 clearnet 端點會脫離 onion 的保護範圍，
 // IPFS 版本的定位是離線也能看，對外連線跟那個定位相衝。
 function liveAllowed() {
-  const h = location.hostname || '';
-  if (h.endsWith('.onion')) return false;
-  if (/(^|\.)ipfs\.|(^|\.)ipns\.|\.eth\.(link|limo)$/.test(h)) return false;
-  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return false; // 公開網關的路徑式位址
-  return true;
+  return !offlineFirst();
 }
 
 // AS 的註冊名稱不一定是公司。個人申請的 AS 登記的就是持有人本名，把它印在畫面上等於
@@ -1790,7 +3307,14 @@ function applySnapshot(snap) {
 
 async function fetchLive(btn) {
   const status = $('live-status');
-  const say = (t, cls) => { if (status) { status.textContent = t; status.className = cls || ''; } };
+  // live-box 只裝狀態文字，沒東西時不要先佔一段空白，第一次有狀態才露出來
+  const say = (t, cls) => {
+    if (!status) return;
+    status.textContent = t;
+    status.className = cls || '';
+    const box = $('live-box');
+    if (box) box.hidden = false;
+  };
   btn.disabled = true;
   say(S('liveConnecting'));
   try {
@@ -1819,11 +3343,14 @@ async function fetchLive(btn) {
 const pointers = new Map();
 const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
+let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
+const DRAG_DEAD_PX = 6; // 跟挑選設施那條死區同一個值
 function bindControls(dom) {
   dom.addEventListener('pointerdown', (e) => {
     dom.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
+    dragFrom = { x: e.clientX, y: e.clientY };
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
   dom.addEventListener('pointermove', (e) => {
@@ -1832,37 +3359,147 @@ function bindControls(dom) {
     if (pointers.size === 2) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (pinchStart > 0) view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX);
+      if (pinchStart > 0) { view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX); clearFocus(); }
       return;
     }
     if (!last) return;
-    const dry = (e.clientX - last.x) * 0.006, drx = (e.clientY - last.y) * 0.006;
+    const k = dragRate();
+    const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
+    // 視角真的動了才清網址上的關注區域，而且要動得夠多。掛在 pointerdown 的話，
+    // 點一下開變電所卡片也會清掉，可是那時畫面根本沒動，網址反而變得比原本更不準。
+    //
+    // 光是「有 pointermove」還不夠。觸控面板即使只是點一下，回報的座標也常有一兩個
+    // 像素的晃動，那會發出 pointermove，網址就悄悄被清掉，畫面卻看不出變化。使用者
+    // 這時複製網址分享出去，對方開起來不會落在原本那一塊。門檻沿用挑選設施那條
+    // 6 像素死區，同一個問題同一個尺度，而且要從按下的那一刻起算，不是跟上一個 move 比。
+    if (dragFrom && Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > DRAG_DEAD_PX) clearFocus();
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
-  const up = (e) => { pointers.delete(e.pointerId); if (pointers.size === 0) { last = null; pauseSpin(); } if (pointers.size < 2) pinchStart = 0; };
+  // 放開手指時要把拖曳的基準點重新對齊到還按著的那一根。
+  //
+  // 捏合期間 pointermove 走的是 size === 2 提早 return 那條路，last 從第二根手指
+  // 按下之後就沒有再更新過。少了這個重新對齊，放開一根之後剩下那根只要動一下，
+  // dry 算的就是「這根的現在位置」減「另一根當初按下的位置」，也就是捏合張開的
+  // 那段距離，幾百像素，地球會瞬間彈到別的地方。而且同一個值會寫進 spin 當成
+  // 滑行速度，以 0.92 每幀衰減，放開後還會繼續飛四十幾幀才停。
+  const up = (e) => {
+    pointers.delete(e.pointerId);
+    const n = pointers.size;
+    if (n === 0) { last = null; pauseSpin(); return; }
+    const p = [...pointers.values()];
+    if (n === 1) {
+      pinchStart = 0;
+      last = { x: p[0].x, y: p[0].y }; // 對齊到剩下的那一根，位移從這裡重新起算
+      spin.rx = spin.ry = 0;           // 捏合不該留下滑行速度
+      return;
+    }
+    // 三指收到剩兩指，捏合的基準距離也要重取，否則縮放會跟著跳
+    if (n === 2) { pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
+  };
   dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
+  // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
+  // 而 iOS Safari 從 10 開始也忽略 viewport 的 user-scalable=no。所以整頁鎖縮放
+  // 這件事在 Safari 上只能靠攔這三個事件，跟 index.html 的 viewport 是一組的，
+  // 兩個都要有，各瀏覽器的行為才一致。
+  //
+  // 掛在 document 而不是畫布上。只擋畫布的話 Safari 在面板上仍然縮得動，
+  // 那會變成同一個手勢在螢幕不同位置有不同結果，比全鎖更難預期。
+  for (const g of ['gesturestart', 'gesturechange', 'gestureend']) {
+    document.addEventListener(g, (e) => e.preventDefault(), { passive: false });
+  }
+  for (const el of document.querySelectorAll('[data-use]')) {
+    el.addEventListener('click', () => {
+      USE_MODE = el.dataset.use;
+      for (const o of document.querySelectorAll('[data-use]')) o.classList.toggle('on', o === el);
+      fillEnergy();
+    });
+  }
+
+  const twBtn = $('btn-tw');
+  if (twBtn) twBtn.addEventListener('click', () => goFocus('tw'));
+
+  const spinBtn = $('btn-spin');
+  if (spinBtn) {
+    spinBtn.addEventListener('click', () => {
+      setSpin(true);
+      spin.rx = spin.ry = 0; // 別讓上一次拖曳殘留的滑行速度疊在自轉上
+      clearFocus();          // 轉起來之後就不是網址指的那一塊了
+    });
+  }
+
+  // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字。
+  //
+  // dblclick 那一行擋不住 iOS Safari 的點兩下放大，因為 dblclick 是在瀏覽器已經
+  // 決定要縮放之後才發出來的。真正管用的是在第二次 touchend 上 preventDefault，
+  // 那是 iOS 上唯一攔得到的時機。CSS 那邊的 touch-action: manipulation 是主要手段，
+  // 這裡是保險，兩個都留著才在各版本 Safari 上一致。
+  //
+  // 只掛在畫布上不掛 document。preventDefault 會連帶取消那一次的相容滑鼠事件，
+  // 掛太廣會讓面板上的按鈕連按兩下時第二下沒反應。畫布上的互動全走 pointer 事件，
+  // 取消相容事件沒有影響。
+  let lastTapT = 0;
+  dom.addEventListener('touchend', (e) => {
+    const now = performance.now();
+    if (now - lastTapT < 350 && e.touches.length === 0) e.preventDefault();
+    lastTapT = now;
+  }, { passive: false });
+  dom.addEventListener('dblclick', (e) => e.preventDefault());
   dom.addEventListener('wheel', (e) => {
     e.preventDefault();
     // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
     const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
     const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
     view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    fly = null;
+    clearFocus();
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
   }, { passive: false });
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
-let spinTimer = 0;
-function stopSpin() { view.spin = false; clearTimeout(spinTimer); }
-function pauseSpin() { stopSpin(); spinTimer = setTimeout(() => { if (pointers.size === 0) view.spin = true; }, 3500); }
+// 自轉的開關。
+//
+// 原本是放開之後三秒半自己轉回來。那個在使用者只是想看一眼的時候還行，但要對著
+// 台灣看縣市或變電所的時候很煩：手一離開就開始飄，得一直重新對位。
+//
+// 改成一動就停，而且停住不自己恢復，改用一顆按鈕明講。停的時候按鈕出現，
+// 按下去恢復自轉、按鈕收起來。
+//
+// REDUCED（prefers-reduced-motion）下本來就不自轉，那顆按鈕也不該出現，
+// 否則按了什麼都不會動。
+function setSpin(on) {
+  view.spin = on && !REDUCED;
+  const b = $('btn-spin');
+  if (b) b.hidden = view.spin || REDUCED;
+}
+function stopSpin() { setSpin(false); }
+// 名字保留。呼叫端的語意是「使用者動了，別再自己轉」，跟 stopSpin 一樣，
+// 但保留兩個名字讓呼叫處讀得出當初的意圖（按下去 vs 放開）。
+function pauseSpin() { setSpin(false); }
 
 let prevNow = performance.now();
 async function animate() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
+  // 飛行定位。三個量一起用同一個係數趨近，到位就把 fly 清掉交還給使用者。
+  // 0.09 比相機距離的 0.12 慢一點，轉動與縮放同時發生時看起來比較穩。
+  // REDUCED 下直接跳過去，那個模式的使用者不想看到大幅度的動畫。
+  if (fly) {
+    if (REDUCED) {
+      view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
+    } else {
+      view.ry += (fly.ry - view.ry) * 0.09;
+      view.rx += (fly.rx - view.rx) * 0.09;
+      view.zoom += (fly.zoom - view.zoom) * 0.09;
+      if (Math.abs(fly.ry - view.ry) < 1e-3 && Math.abs(fly.rx - view.rx) < 1e-3
+          && Math.abs(fly.zoom - view.zoom) < 1e-4) {
+        view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
+      }
+    }
+  }
   if (view.spin && !REDUCED) view.ry += dt * 0.06;
   else if (!REDUCED && pointers.size === 0 && (Math.abs(spin.ry) > 2e-4 || Math.abs(spin.rx) > 2e-4)) {
     view.ry += spin.ry;
@@ -1873,7 +3510,29 @@ async function animate() {
   globe.rotation.x = view.rx;
   updateSun(); // 直射點每小時移 15 度，每幀重算的成本是幾個三角函數，不值得另外做節流
   camera.position.z += (targetDist() - camera.position.z) * 0.12;
+  // 近裁面要跟著高度縮。原本寫死 0.1，而 ZOOM_MIN 對到的相機離地表只有 0.042，
+  // 整顆地球會被切在裁面外面直接消失。取離地高度的十分之一，留一個下限避免
+  // near 太小把深度精度吃光。
+  const near = Math.max(0.002, (camera.position.z - R) * 0.1);
+  if (Math.abs(camera.near - near) > near * 0.05) {
+    camera.near = near;
+    camera.updateProjectionMatrix();
+  }
   camera.lookAt(0, 0, 0);
+  deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
+  updateFov();           // 貼近地表時換成望遠鏡頭，畫面才會平
+  updateDbg(dt);         // ?debug 時右上角的縮放讀數
+  // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
+  // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
+  const swap = twSwapT();
+  if (twAdminMat) twAdminMat.opacity = swap * 0.85;
+  if (powerMat) powerMat.opacity = swap * 0.9;
+  if (gridLineMat) gridLineMat.opacity = swap * 0.55;
+  if (plantMat) plantMat.opacity = swap * 0.95;
+  if (renewMat) renewMat.opacity = swap * 0.9;
+  if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
+  if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
+  if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
   // 遠看時歐洲十幾個國家團擠在很小的螢幕範圍內，怎麼排都糊。讓點隨距離退成底噪，
   // 陸地色階與國家標籤接手講「集中在哪」，放大之後再把個別中繼交出來。
@@ -1881,9 +3540,15 @@ async function animate() {
   const lod = clamp((ZOOM_MAX - view.zoom) / (ZOOM_MAX - 0.7), 0, 1);
   const wantOp = pointsIn * (0.5 + 0.5 * lod);
   for (const m of pointMats) m.opacity = wantOp;
-  rescaleDots(Math.pow(view.zoom, DOT_EXP)); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  const dotK = Math.pow(view.zoom, DOT_EXP); // zoom 是相對於完整入鏡的倍率，愈小代表鏡頭愈近
+  rescaleDots(dotK);
+  rescaleLanding(dotK); // 登陸點跟中繼點用同一個補償，兩層的相對大小才不會隨縮放亂跑
+  rescalePower(dotK);
+  rescalePlants(dotK);
+  rescaleRenew(dotK);
   clockT.value += dt; // 呼吸與極光共用。REDUCED 時兩者都沒掛上去，推了也沒作用
   updateCircuits(dt);
+  updateFeed();
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
   updateLabels();
   try {
@@ -1897,7 +3562,7 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns] = await Promise.all([
+  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power, grid, energy] = await Promise.all([
     getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
     getJSON('./countries.json'),
     getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
@@ -1907,10 +3572,36 @@ async function main() {
     // 但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。
     getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
+    getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
+    getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
+    // 海纜障礙可選。由 publish_games_data.sh 定期重生並發布到 assets，所以走
+    // getJSONAsset 而不是站台自己的路徑，更新不必等文件站重建。
+    // 障礙的存續期是月為單位，assets 的 12 小時快取夠新鮮，不必額外帶 no-cache。
+    // 取不到的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
+    getJSONAsset('seacable.json').catch(() => null),
+    // 台灣海纜登陸點。自建資料，跟站台一起發布而不是走 assets，因為它是人工維護的，
+    // 改動頻率是「查到新來源才動」，沒有定期重生的必要。
+    getJSON('./tw-landing.json').catch(() => null),
+    // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟站台一起發布。
+    getJSON('./tw-admin.json').catch(() => null),
+    // 台灣變電所的容量與負載。跟縣市界一樣是人工跑產生器更新的。
+    getJSON('./tw-power.json').catch(() => null),
+    // 發電廠與 345kV 電網骨幹。含即時發電量的快照，時間戳在 stamp 欄位。
+    getJSON('./tw-grid.json').catch(() => null),
+    // 再生能源場址、各縣市用電量、每日備轉容量率，三份都是台電的。
+    getJSON('./tw-energy.json').catch(() => null),
   ]);
   OONI = ooni;
   TORUSERS = torusers;
   SHUTDOWNS = shutdowns;
+  NETUSERS = netusers;
+  BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
+  SEACABLE = seacable;
+  LANDING = landing;
+  POWER = power;
+  GRID = grid;
+  ENERGY = energy;
+  TWADMIN = twAdmin;
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
@@ -1924,7 +3615,12 @@ async function main() {
   buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
-  if (coast) buildCoastline(coast);
+  if (coast) buildCoastline(coast, world);
+  buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
+  buildPower();                    // 變電所，跟縣市界同一個時機淡入
+  buildGrid();                     // 345kV 骨幹與發電廠
+  buildRenew();                    // 台電自建的再生能源場址
+  buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
   if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
   const drawn = buildRelays(snap, counts);
   buildLabels(snap);
@@ -1937,6 +3633,11 @@ async function main() {
   fillUsers(snap);
   fillOoni(snap);
   fillShutdowns();
+  fillSeacable();
+  fillLanding();
+  fillPower();
+  fillGrid();
+  fillEnergy();
   buildStats(snap);
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
@@ -1948,13 +3649,32 @@ async function main() {
     renderer.setSize(innerWidth, innerHeight);
     refreshUIBoxes(); // 距離由 targetDist() 依新的畫面比例自動貼合，這裡不用另外算
     measureLabels();
+    // 卡片寬度是 min(94vw, 470px)，轉向或改視窗大小都會變。容量計的刻度標籤擠不擠
+    // 得下跟寬度直接相關，窄螢幕上原本放得下的會擠在一起，要重新量一次。
+    fitGaugeScale($('cc-bar'));
   });
   bindControls(renderer.domElement);
-  // 即時更新的按鈕預設藏著，只在 clearnet 版本露出來
+  // 即時更新的按鈕從一開始就在位子上，只是停用著，等這裡才放行。
+  // 版面不會在載入完成的瞬間跳一下，使用者也一開始就知道有這個功能。
+  // onion 與 IPFS 版本整顆收掉，那兩種情境下連出去會把 IP 交出去，違背使用者選它的理由。
+  // 按鈕在 summary 裡跟收合鈕並排，狀態文字與隱私說明留在面板內文。
   const liveBtn = $('btn-live');
   if (liveBtn && liveAllowed()) {
-    $('live-box').hidden = false;
-    liveBtn.addEventListener('click', () => fetchLive(liveBtn));
+    liveBtn.disabled = false;
+    liveBtn.removeAttribute('title');
+    liveBtn.addEventListener('click', (e) => {
+      // summary 底下的點擊預設會開合 details，按這顆鍵不應該連帶把面板收起來
+      e.preventDefault();
+      e.stopPropagation();
+      // 狀態文字（連線中、已更新、失敗原因）在面板內文裡，收合時看不到，
+      // 按了會像沒反應。先展開再取資料。
+      // 這裡不必自己叫 refreshUIBoxes，設 open 會觸發 toggle，那邊已經掛了。
+      const info = $('info');
+      if (info && !info.open) info.open = true;
+      fetchLive(liveBtn);
+    });
+  } else if (liveBtn) {
+    liveBtn.hidden = true;
   }
   $('labels').addEventListener('click', (e) => {
     const el = e.target.closest('.lb');
@@ -1974,12 +3694,36 @@ async function main() {
   }
   $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
-  renderer.domElement.addEventListener('pointerdown', hideCountry); // 轉動地球就把卡片收掉
+  // 點地球上的設施看細節。
+  //
+  // 按下去先把卡片收掉（轉動地球本來就該收），放開時如果幾乎沒有移動才當成點擊。
+  //
+  // 只看位移不看時間。第一版還加了「按住不超過 600 毫秒」，實測會擋掉正常的點擊：
+  // 慢慢按下再放開很容易超過，卡片就不出來，而且失敗得很安靜。拖曳本來就會產生位移，
+  // 位移那一關擋得住，時間那一關只是多一個會誤傷的條件。
+  let pressAt = null;
+  renderer.domElement.addEventListener('pointerdown', (e) => {
+    hideCountry();
+    fly = null;   // 使用者接手，飛行中途也要能打斷
+    pressAt = { x: e.clientX, y: e.clientY };
+  });
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    if (!pressAt) return;
+    const moved = Math.hypot(e.clientX - pressAt.x, e.clientY - pressAt.y);
+    pressAt = null;
+    if (moved > 6 || pointers.size > 0) return;
+    const hit = pickFeature(e.clientX, e.clientY);
+    if (hit) showFeature(hit);
+  });
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
   $('hint-close') && $('hint-close').addEventListener('click', () => { $('hint').classList.add('hidden'); refreshUIBoxes(); });
   const load = $('loading');
   if (load) load.classList.add('done');
+  // 網址帶著 #tw 之類的關注區域就直接飛過去。要等 ANCHOR 建好、相機的長寬比也定了
+  // 才算得出取景，所以擺在這裡而不是更早。
+  applyFocus();
+  addEventListener('hashchange', applyFocus);
   renderer.setAnimationLoop(animate);
 }
 main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });

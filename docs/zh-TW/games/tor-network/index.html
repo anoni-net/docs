@@ -2,7 +2,12 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- 鎖住瀏覽器縮放。這頁是一個佔滿畫面的互動場景，雙指的意思是把地球拉近，
+       讓它同時觸發整頁縮放只會兩邊都不對。代價是面板裡最小 10.5px 的字沒辦法
+       用瀏覽器放大，這是刻意的取捨。
+       iOS Safari 從 10 開始就忽略 user-scalable 與 maximum-scale，那邊靠
+       atlas.js 攔 gesture 事件達成同樣效果，兩個一起才在各瀏覽器上一致。 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Tor 中繼地球儀 · anoni.net</title>
   <meta name="description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
   <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
@@ -24,7 +29,7 @@
   <meta property="twitter:description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
   <meta property="twitter:image" content="https://assets.anoni.net/games/tor-network.png" />
   <!-- 結構化資料。與 OG 同樣寫死，理由相同：這頁不經 mkdocs 模板，抓取的爬蟲不執行 JS。
-       isBasedOn 逐筆列出六份外部資料，讓來源與授權在畫面之外也能被機器讀到，
+       isBasedOn 逐筆列出所有外部資料，讓來源與授權在畫面之外也能被機器讀到，
        內容要與畫面下方的來源聲明和根目錄 NOTICE 保持一致。 -->
   <script type="application/ld+json">
   {
@@ -92,10 +97,95 @@
           },
           {
             "@type": "Dataset",
-            "name": "Natural Earth 國界與海岸線",
+            "name": "OpenStreetMap 變電所與電廠位置、345kV 輸電線幾何",
+            "url": "https://www.openstreetmap.org/copyright",
+            "license": "https://opendatacommons.org/licenses/odbl/",
+            "creator": { "@type": "Organization", "name": "OpenStreetMap contributors" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "OpenStreetMap Nominatim 地理編碼（再生能源場址座標）",
+            "url": "https://www.openstreetmap.org/copyright",
+            "license": "https://opendatacommons.org/licenses/odbl/",
+            "creator": { "@type": "Organization", "name": "OpenStreetMap contributors" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Natural Earth 國界、海岸線與海底等深線",
             "url": "https://www.naturalearthdata.com/",
             "license": "https://www.naturalearthdata.com/about/terms-of-use/",
             "creator": { "@type": "Organization", "name": "Natural Earth" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "World Bank Individuals using the Internet",
+            "url": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "creator": { "@type": "Organization", "name": "World Bank" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "國家數位近用調查",
+            "url": "https://moda.gov.tw/digital-affairs/digital-service/operations/208",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "數位發展部" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣電力公司再生能源各場址資料",
+            "url": "https://data.gov.tw/dataset/17141",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "台灣電力股份有限公司" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣電力公司各縣市住宅、服務業及機關用電統計資料",
+            "url": "https://data.gov.tw/dataset/29935",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "台灣電力股份有限公司" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣電力公司本年度每日尖峰備轉容量率",
+            "url": "https://data.gov.tw/dataset/25850",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "台灣電力股份有限公司" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣電力公司各機組發電量即時資訊（含外購電力）",
+            "url": "https://data.gov.tw/dataset/8931",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "台灣電力股份有限公司" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣電力公司二次變電所主變壓器裝置容量及負載",
+            "url": "https://data.gov.tw/dataset/16960",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "台灣電力股份有限公司" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "鄉鎮市區界線（TWD97 經緯度）",
+            "url": "https://data.gov.tw/dataset/7441",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "內政部國土測繪中心" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "直轄市、縣市界線（TWD97 經緯度）",
+            "url": "https://data.gov.tw/dataset/7442",
+            "license": "https://data.gov.tw/license",
+            "creator": { "@type": "Organization", "name": "內政部國土測繪中心" }
+          },
+          {
+            "@type": "Dataset",
+            "name": "台灣海纜登陸點",
+            "description": "本專案自建，座標主要取自 OpenStreetMap，登陸地名取自政府公告與公開報導，每一筆的出處記在 tools/data/tw_landing.toml。",
+            "url": "https://anoni.net/docs/games/tor-network/tw-landing.json",
+            "license": "https://opendatacommons.org/licenses/odbl/",
+            "creator": { "@type": "Organization", "name": "匿名網路社群 anoni.net" }
           }
         ]
       },
@@ -128,23 +218,48 @@
       --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; }
+    /* touch-action 要鋪開，不能只設在 canvas 上。
+       iOS Safari 的「點兩下放大」是獨立於捏合手勢的另一套機制，gesturestart 那三個
+       事件擋不到它，viewport 的 user-scalable=no 從 iOS 10 起也被忽略。真正管得到的
+       是 touch-action：manipulation 的定義就是「允許平移與捏合，但不要點兩下放大」。
+       原本只有 canvas 設了 none，所以在面板、國家標籤、卡片、按鈕上點兩下照樣會縮放。
+       touch-action 沿著祖先鏈取交集，設在 html/body 與兩個 fixed 容器上就涵蓋得到
+       底下所有元素，面板本身仍然捲得動。 */
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; touch-action: manipulation; }
     body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
     canvas { display: block; position: fixed; inset: 0; touch-action: none; }
 
     .panel {
-      position: fixed; z-index: 10; background: var(--panel);
+      position: fixed; z-index: 10; background: var(--panel); touch-action: manipulation;
       border: 1px solid var(--panel-b); border-radius: 14px;
       backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
     }
-    #top { left: 14px; top: 14px; max-width: min(94vw, 340px); max-height: calc(100vh - 28px); overflow-y: auto; padding: 12px 15px; }
-    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    /* 高度先寫 vh 再寫 dvh。手機瀏覽器的 100vh 指的是工具列收起來時的高度，
+       工具列出現時面板會比可見區還高，最後一行就被蓋住。dvh 會跟著縮，
+       不支援的瀏覽器落回上面那行。 */
+    #top { left: 14px; top: 14px; max-width: min(94vw, 340px); overflow-y: auto;
+           max-height: calc(100vh - 28px);
+           max-height: calc(100dvh - 28px);
+           padding: 12px 15px calc(12px + env(safe-area-inset-bottom, 0px)); }
+    /* 中繼台數搬進 summary，收合時仍然看得到。那是這顆地球儀最想先講的一個數字，
+       收起來只剩標題就等於什麼都沒說。資料快照以下才是收合的範圍。 */
+    #title { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .3px; cursor: pointer; list-style: none; }
+    .title-row { display: flex; align-items: center; gap: 8px; }
+    /* 標題文字吃掉剩下的空間並可縮。窄螢幕與英文版的字串比較長，不讓它縮的話
+       右邊的按鈕與收合鈕會被擠出面板。 */
+    #title-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     #title::-webkit-details-marker { display: none; }
-    #title::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); }
-    #info:not([open]) > #title::after { content: var(--toggle-closed, '▸ 詳情'); }
-    .body { margin-top: 9px; }
-    #big { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1; }
+    /* 收合鍵掛在 .title-row 上，掛在 #title 會排到台數那一行底下 */
+    /* 收合鍵在展開與收合兩種狀態下的文字不一樣（收合／詳情、Hide／Details），
+       寬度會跟著變，切換時整排會跳。--toggle-w 取兩者較寬的當下限把它釘住。
+       這個值只給收合鍵，即時更新鍵依自己的內容撐開，不互相對齊。 */
+    .title-row::after { content: var(--toggle-open, '▾ 收合'); flex: none; color: var(--cyan); font-size: 11px; font-weight: 800; padding: 3px 9px; line-height: 1; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(0, 174, 255, .12); min-width: var(--toggle-w, auto); text-align: center; }
+    #info:not([open]) .title-row::after { content: var(--toggle-closed, '▸ 詳情'); }
+    .body { margin-top: 3px; }
+    /* flex 是給「繼續轉動」用的，它靠 margin-left:auto 推到這一行的右端 */
+    #big { margin-top: 9px; font-size: 27px; font-weight: 800; color: #fff; line-height: 1.1;
+           display: flex; align-items: baseline; gap: 6px; }
     #big small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
     #pub { color: var(--muted); font-size: 11px; margin: 3px 0 10px; }
     .row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
@@ -176,18 +291,24 @@
 
     #live-box { margin: 0 0 10px; }
     #live-box[hidden] { display: none; }
-    #btn-live { font: inherit; font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 999px; cursor: pointer;
+    /* 按鈕在 summary 裡，跟收合鈕並排。flex: none 讓它不被標題文字擠扁。 */
+    /* line-height 要跟 #title::after 一樣寫死 1。font: inherit 會把 body 的 1.6 帶進來，
+       兩顆並排時按鈕會高出約 6px。 */
+    #btn-live { flex: none; font: inherit; font-size: 11px; font-weight: 700; line-height: 1; padding: 3px 9px;
+                border-radius: 999px; cursor: pointer;
                 border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
-    #btn-live:disabled { opacity: .5; cursor: default; }
+    /* 資料還沒備妥時按鈕就在位子上，只是按不動。這樣版面不會在載入完成的瞬間跳一下，
+       使用者也一開始就知道有這個功能。 */
+    #btn-live:disabled { opacity: .45; cursor: default; }
+    #btn-live[hidden] { display: none; }
     #btn-live:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
-    #live-status { margin-left: 7px; font-size: 10.5px; color: var(--muted); }
+    #live-status { font-size: 10.5px; color: var(--muted); }
     #live-status.ok { color: #57e39a; }
     #live-status.err { color: #ff8a99; }
-    #live-note { margin-top: 5px; color: #6b8296; font-size: 10px; line-height: 1.5; }
     #ramp { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
     #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
 
-    #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; }
+    #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; touch-action: manipulation; }
     .lb.on { pointer-events: auto; cursor: pointer; }
     .lb.on:hover, .lb.on:focus-visible { color: #fff; text-shadow: 0 0 6px var(--cyan), 0 0 12px #04060d; outline: none; }
     /* 點國家看細節。球面上讀不出來的數字，點一下就給 */
@@ -201,6 +322,35 @@
     #cc-body b { color: var(--ink); font-weight: 700; }
     #cc-bar { display: flex; height: 9px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.05); margin: 7px 0 5px; }
     #cc-bar span { display: block; height: 100%; }
+    #cc-bar[hidden] { display: none; }
+    /* 變電所的容量計。裝置容量、可靠容量、尖峰負載三個數字都是 MVA，同一條軸就放得
+       下，N-1 的定義也就不必只靠文字解釋。可靠容量那道刻度到裝置容量之間的斜紋帶，
+       就是最大那一台主變壓器，故障時消失的正是那一段。負載填色越過刻度，代表尖峰時
+       掉一台會撐不住。
+       原本畫的是「負載除以可靠容量」，滿格 220%，100% 那條線落在軌道的 45.5% 卻沒有
+       任何標記，四分之三的站都在線內，看到的只是一截藍條，讀不出離線多遠。裝置容量
+       更是完全沒出現在圖上。 */
+    #cc-bar.gauge { display: block; position: relative; height: 29px; border-radius: 0;
+                    overflow: visible; background: none; margin: 9px 0 4px; }
+    #cc-bar.gauge .tr { position: absolute; left: 0; right: 0; top: 0; height: 13px;
+                        border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.06); }
+    #cc-bar.gauge .tr > span { position: absolute; top: 0; height: 100%; display: block; }
+    /* 斜紋畫在填色之上，負載吃進餘裕時兩件事要同時看得到：這一段有負載，而這一段
+       故障時會消失 */
+    #cc-bar.gauge .n1 { background-image: repeating-linear-gradient(115deg,
+                        rgba(255,255,255,.34) 0 2px, rgba(255,255,255,0) 2px 6px); }
+    #cc-bar.gauge .tk { width: 2px; background: #eaf4ff; }
+    #cc-bar.gauge .sc { position: absolute; left: 0; right: 0; top: 17px; height: 12px;
+                        font-size: 9.5px; line-height: 12px; color: #7d93a6; }
+    /* 高度要寫死。基礎規則 #cc-bar span 有 height:100%，換兩行時 .sc 撐到 24px，
+       標籤就跟著變 24px 高，兩行會疊在一起，看起來像換行沒生效。 */
+    #cc-bar.gauge .sc span { position: absolute; top: 0; height: 12px; white-space: nowrap; }
+    #cc-bar.gauge .sc b { font-weight: 700; color: #a8c4da; }
+    /* 可靠容量與裝置容量兩個標籤擠在一起時，把裝置容量落到第二行。橫向位置不動，
+       它指的還是同一道刻度。實測只有 rel/cap 偏高的少數幾座會走到這裡。 */
+    #cc-bar.gauge.two { height: 41px; }
+    #cc-bar.gauge.two .sc { height: 24px; }
+    #cc-bar.gauge.two .sc > span:last-child { top: 12px; }
     .cc-roles { display: flex; flex-wrap: nowrap; gap: 5px; margin-top: 8px; }
     .cc-sub2 { margin-top: 7px; font-size: 11px; line-height: 1.6; }
     .cc-sub2 .dim, #cc-body .dim { color: #7d93a6; }
@@ -211,17 +361,56 @@
     .lb.sm { font-size: 9.5px; font-weight: 700; color: #a8c4da; }
     .lb.sm i { color: #7695ad; margin-left: 4px; }
 
-    /* 三跳路徑飛過去時掛在畫面上的說明。動畫只有幾秒，說明寫在面板裡沒人會去看 */
-    #circ-tag { position: fixed; right: 16px; bottom: 18px; z-index: 9; padding: 5px 11px;
-                border-radius: 999px; background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
-                color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
-                opacity: 0; transition: opacity .5s; pointer-events: none;
-                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-    #circ-tag.on { opacity: 1; }
-    @media (max-width: 680px) { #circ-tag { right: 10px; bottom: 62px; font-size: 10px; } }
+    /* 訊息串。新的一則從底下進來，把舊的往上頂，蓋高樓那樣。
+       這一區是通用的，任何想在畫面上講一句話的功能都可以往這裡丟，不限三跳路徑。 */
+    #feed { position: fixed; right: 16px; bottom: 18px; z-index: 9; pointer-events: none;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+    .feed-item { padding: 5px 11px; border-radius: 999px;
+                 background: rgba(9,16,26,.72); border: 1px solid rgba(120,200,255,.22);
+                 color: #9fd4ee; font-size: 10.5px; line-height: 1.5; letter-spacing: .2px;
+                 white-space: nowrap; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+                 opacity: 0; transform: translateY(8px); transition: opacity .45s, transform .45s; }
+    .feed-item.in { opacity: 1; transform: none; }
+    .feed-item.out { opacity: 0; transform: translateY(-4px); }
+    /* 三跳的國碼依角色上色，沿用中繼點那組色，不必另外寫一行字解釋誰是誰 */
+    .feed-item .hop { font-weight: 700; }
+    .feed-item .sep { opacity: .5; margin: 0 3px; }
+    @media (max-width: 680px) { #feed { right: 10px; bottom: 62px; } .feed-item { font-size: 10px; } }
+    @media (prefers-reduced-motion: reduce) { .feed-item { transition: opacity .2s; transform: none; } }
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
+    /* 繼續轉動。使用者一動地球就停下來，這顆才出現，按了就消失。
+       不做成浮在地球上的按鈕：試過左下角，被展開的面板蓋住吃掉點擊，而手機上
+       面板寬 340px、高到貼齊下緣，畫面四角沒有一處是面板不會覆蓋的。
+       放在面板裡就不會被蓋，收合時那兩列也還看得到。
+       擺第二列不擺標題列，因為標題列已經有即時更新與收合兩顆，再塞一顆會把
+       標題擠成「Tor 中...」。中繼台數那一行右邊是空的。 */
+    #btn-spin { margin-left: auto; align-self: center; flex: none;
+                font: inherit; font-size: 11px; font-weight: 700; line-height: 1;
+                padding: 3px 9px; border-radius: 999px; cursor: pointer;
+                border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-spin[hidden] { display: none; }
+    #btn-spin:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    /* 台灣專區。用一條左側細線與縮排跟上面的全球資料分開，不另外加背景框，
+       面板本來就已經有一層框了，再套一層會太重。 */
+    #tw-group { margin: 12px 0 4px; padding-left: 9px; border-left: 2px solid rgba(0,174,255,.35); }
+    #tw-head { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; }
+    #tw-title { font-size: 12.5px; font-weight: 800; color: var(--ink); letter-spacing: .5px; }
+    #btn-tw { margin-left: auto; flex: none; font: inherit; font-size: 11px; font-weight: 700;
+              line-height: 1; padding: 4px 10px; border-radius: 999px; cursor: pointer;
+              border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
+    #btn-tw:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    /* 縮放讀數。網址加 ?debug 才出現，一般使用者看不到。
+       調鏡頭與縮放手感時要能一眼看到現在的數字，不然只能憑感覺describe「某一段怪」。
+       放右上角：面板在左上、訊息串在右下、提示在下緣中間，這裡是空的。 */
+    #dbg { position: fixed; right: 12px; top: 12px; z-index: 16;
+           padding: 7px 10px; border-radius: 8px;
+           font: 11px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+           color: #bfe0ff; background: rgba(9,16,26,.82); border: 1px solid var(--panel-b);
+           backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+           white-space: pre; pointer-events: none; }
+    #dbg[hidden] { display: none; }
     #fatal { position: fixed; z-index: 20; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(86vw, 360px); padding: 14px 18px; text-align: center; font-size: 13.5px; line-height: 1.7; color: #ffe0e0; background: rgba(34,10,12,.92); border: 1px solid rgba(255,90,90,.45); border-radius: 12px; backdrop-filter: blur(6px); }
     #fatal[hidden] { display: none; }
     #loading { position: fixed; z-index: 12; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 12.5px; letter-spacing: 1px; animation: breathe 1.6s ease-in-out infinite; }
@@ -242,24 +431,69 @@
     .mix-row .n { width: 52px; text-align: right; flex: none; }
     .mix-row .as-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
     .mix-row.hi .cc, .mix-row.hi .tot { color: var(--cyan); }
-    #stat-asn .mix-bar, #stat-asia .mix-bar { flex: 0 0 52px; }
+    /* 托管商那區的業者名稱是彈性欄（.as-nm），長條要固定寬才不會被擠掉。
+       亞洲那區沒有那個欄位，長條跟其他區一樣撐滿剩下的空間就好。 */
+    #stat-asn .mix-bar { flex: 0 0 52px; }
     #stat-asn .n { width: 44px; }
     #stat-asia .n { width: 88px; }
     #mix-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
     #asn-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
-    #ooni-note, #users-note, #shutdown-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    #ooni-note, #users-note, #shutdown-note, #seacable-note, #landing-note, #power-note, #grid-note, #energy-note { margin: 6px 0 9px; color: #7d93a6; font-size: 10.5px; line-height: 1.55; }
+    /* 海纜障礙是事件清單，沒有可以畫成長條的量值，所以不用 mix-row 那套。
+       一筆兩行：上行講在哪、何時起，下行講備援與預計修復。 */
+    .sc-row { margin: 4px 0 6px; font-size: 10.5px; line-height: 1.5; }
+    .sc-row .sc-top { display: flex; align-items: baseline; gap: 6px; color: var(--ink); }
+    .sc-row .sc-ab { font-weight: 800; color: var(--cyan); flex: none; }
+    .sc-row .sc-loc { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sc-row .sc-st { flex: none; color: var(--muted); }
+    .sc-row .sc-sub { margin-left: 2px; color: var(--muted); }
+    .sc-row .sc-sub b { color: #9fb6c8; font-weight: 600; }
+    .pw-row { display: flex; align-items: center; gap: 7px; margin: 3px 0; font-size: 10.5px; }
+    /* 中文縣市名三個字，英文的 New Taipei City 長得多，給彈性並在放不下時截斷，
+       不要把長條擠掉 */
+    .pw-row b { flex: 0 1 auto; min-width: 42px; max-width: 44%; font-weight: 700;
+                overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pw-row i { flex: 1 1 auto; height: 7px; background: rgba(255,255,255,.07); border-radius: 4px; overflow: hidden; }
+    .pw-row i s { display: block; height: 100%; background: #7ea8e0; text-decoration: none; }
+    /* 超過可靠容量的那幾個縣市換色，跟地圖上的色階同一套 */
+    .pw-row i s.over { background: #e8559a; }
+    /* 分散式光電沒有位置，畫不到地圖上，用暗橙標出來跟有廠址的區隔 */
+    .pw-row i s.dist { background: #c86a3a; }
+    .pw-row em { flex: 0 0 34px; text-align: right; font-style: normal; color: var(--ink); }
+    /* 單位欄。中文「億度」「座」很短，英文的 TWh、sites 長一些，給到 52px */
+    .pw-row u { flex: 0 0 52px; text-align: right; text-decoration: none; color: var(--muted); }
+    /* 用電量的長條跟發電那組區隔，用中性的藍灰，那是需求不是供給 */
+    .pw-row i s.use { background: #6f8fae; }
+    /* 工業用電佔比。跟售電量那個藍灰分開，讀得出來是不同的量。 */
+    .pw-row i s.ind { background: #b98fd0; }
+    /* 備轉容量率的走勢，一天一根。低於 10% 是台電的橙燈門檻，換成警示色。 */
+    .rv-spark { display: flex; align-items: flex-end; gap: 1px; height: 34px; margin: 8px 0 2px; }
+    .rv-spark s { flex: 1 1 0; min-width: 0; background: #4a7fa8; text-decoration: none; border-radius: 1px 1px 0 0; }
+    .rv-spark s.tight { background: #e8955a; }
+    .lp-row { margin: 4px 0 6px; font-size: 10.5px; line-height: 1.5; }
+    .lp-row .lp-top { display: flex; align-items: baseline; gap: 6px; color: var(--ink); }
+    .lp-row .lp-nm { font-weight: 700; flex: none; }
+    .lp-row .lp-ad { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); }
+    /* 精度用邊框深淺分級。站址等級最實，鄉鎮等級最虛，讀得出來哪幾筆是推的 */
+    .lp-row .lp-pr { flex: none; font-size: 9.5px; padding: 0 4px; border-radius: 3px; border: 1px solid; }
+    .lp-row .lp-pr[data-p="站址"] { color: #7fd8c4; border-color: #2f6d61; }
+    .lp-row .lp-pr[data-p="設施"], .lp-row .lp-pr[data-p="端點"] { color: #8fb4c9; border-color: #2f5568; }
+    .lp-row .lp-pr[data-p="里"], .lp-row .lp-pr[data-p="鄉鎮"] { color: #7d93a6; border-color: #33465a; }
+    .lp-row .lp-sub { margin-left: 2px; }
+    .lp-row .lp-cb { color: var(--cyan); font-weight: 700; }
+    .lp-row .lp-cb.none { color: var(--muted); font-weight: 400; }
     #stat-users .n, #stat-shutdown .n { width: 74px; }
     .chip2 { display: inline-block; padding: 0 6px; margin: 0 0 0 4px; border-radius: 9px;
              background: rgba(120,170,210,.13); color: #b9d3e6; font-size: 10.5px; }
     /* 同一類資訊寫成一句話，放不下時讓瀏覽器自己折，不要拆成兩段各佔一行 */
     .cc-sub2 .tiny, .cc-sub2.tiny { font-size: 10px; color: #6b8296; line-height: 1.5; }
-    #metric-sw { flex-wrap: wrap; }
-    #metric-sw button { flex: 1 1 44%; }
+    #metric-sw, .metric-sw { flex-wrap: wrap; }
+    #metric-sw button, .metric-sw button { flex: 1 1 44%; }
     /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
-    #metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
-    #metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
-    #metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
-    #metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+    #metric-sw, .metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
+    #metric-sw button, .metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
+    #metric-sw button.on, .metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
+    #metric-sw button:focus-visible, .metric-sw button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     /* 角色 chip 直接當按鈕：點下去地球換成那個角色的色調 */
     .chip.act { cursor: pointer; border: 1px solid transparent; }
     .chip.act:hover { background: rgba(255,255,255,.12); }
@@ -276,6 +510,14 @@
       #hint .wide { display: none; }
       #hint .narrow { display: inline; }
       #big { font-size: 24px; } .lb { font-size: 10px; }
+      /* 底部多留一段。除了瀏覽器工具列，畫面下緣還有 #hint 那條提示是固定定位的
+         （bottom: 12px、約 46px 高，合計佔掉下緣約 58px），會壓在面板最後幾行上面。
+         58 再加 26 的呼吸空間，讓最後一行離提示條與可見區下緣都有餘裕。
+
+         掛在 .body 而不是 #top 上。#top 在收合狀態也存在，留白會變成標題底下一段
+         沒有內容的空白；.body 是 details 的內容區，收起來就不佔位。
+         #top 自己那 12px 的下內距仍然生效，所以這裡只補到 72。 */
+      .body { padding-bottom: 72px; }
     }
   </style>
   <script type="importmap">
@@ -290,12 +532,13 @@
 <body>
   <div id="top" class="panel">
     <details id="info" open>
-      <summary id="title">Tor 中繼地球儀</summary>
+      <summary id="title">
+        <div class="title-row"><span id="title-text">Tor 中繼地球儀</span><button id="btn-live" disabled>即時更新</button></div>
+        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small><button id="btn-spin" type="button" hidden>繼續轉動</button></div>
+      </summary>
       <div class="body">
-        <div id="big"><span id="stat-total">–</span> <small id="unit-relays">台運作中的中繼</small></div>
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
-        <div id="live-box" hidden><button id="btn-live">即時更新</button><span id="live-status"></span>
-          <div id="live-note">畫面預設只連本站與 assets.anoni.net，兩者都是我們自己的主機，取得的靜態快照對所有人都一樣。按下這個鍵會多連一台 onionoo.anoni.net 即時取資料，那台伺服器會看到你的 IP。</div>
+        <div id="live-box" hidden><span id="live-status"></span>
         </div>
         <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
@@ -319,16 +562,51 @@
         <div class="lbl" id="lbl-shutdown">網路被整個關掉的地方（Access Now 紀錄）</div>
         <div id="stat-shutdown"></div>
         <div id="shutdown-note"></div>
+        <!-- 台灣專區。這幾層跟上面那些全球資料的性質不同：範圍只有台灣，而且要放大到
+             台灣才畫得出來，所以集中在一起並給一個帶按鈕的標頭，按了直接飛過去。
+             區塊順序照「電從哪來、怎麼送、怎麼出海」排：發電與電網骨幹、變電所、
+             海纜登陸點、海纜障礙。 -->
+        <div id="tw-group">
+          <div id="tw-head">
+            <span id="tw-title">台灣</span>
+            <button id="btn-tw" type="button">關注台灣</button>
+          </div>
+          <div class="lbl" id="lbl-grid">台灣的發電與電網骨幹（台電）</div>
+          <div id="stat-grid"></div>
+          <div id="grid-note"></div>
+          <div class="lbl" id="lbl-energy">台灣的用電與備轉容量（台電）</div>
+          <!-- 兩種看法。看總量六都在前面，看工業佔比新竹會跳到第一，那才是科學園區
+               在這份資料裡真正的樣子。新竹縣市在行政上是分開的兩列，總量會被切一半。 -->
+          <div id="use-sw" class="metric-sw"><button data-use="total" class="on" id="use-total">售電量</button><button data-use="ind" id="use-ind">工業用電佔比</button></div>
+          <div id="stat-energy"></div>
+          <div id="energy-note"></div>
+          <div class="lbl" id="lbl-power">台灣的變電所負載（台電）</div>
+          <div id="stat-power"></div>
+          <div id="power-note"></div>
+          <div class="lbl" id="lbl-landing">台灣的海纜登陸點（自建資料）</div>
+          <div id="stat-landing"></div>
+          <div id="landing-note"></div>
+          <div class="lbl" id="lbl-seacable">連到台灣的海纜障礙（數位發展部）</div>
+          <div id="stat-seacable"></div>
+          <div id="seacable-note"></div>
+        </div>
         <div id="note">陸地的亮度代表該國有多少台中繼，愈亮的國家托管的中繼愈多。角色分布那四個標籤點下去，地球會只留那一種角色，深淺一樣是數量。點國家標籤可以看那一國的細節。近萬台中繼看似遍布全球，實際高度集中在美國、德國、荷蘭這幾塊亮起來的地方，這個順序照台數排。換成頻寬排，前三名會變成德國、荷蘭、美國，美國的中繼台數最多，單台扛的流量比較小。Onionoo 只給到國別，沒有更精確的位置，地圖上呈現的是國家層級的數量。遠看時地球上只畫其中一部分的點，放大會逐步補齊到全部，要讀密度請看陸地亮度，那個一直是全部的台數。</div>
         <div id="gap"></div>
         <div id="credit">
           <p><b id="credit-title">資料來源</b></p>
-          <p id="credit-onionoo">中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。</p>
-          <p id="credit-metrics">使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
-          <p id="credit-ooni">Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
-          <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
-          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>（public domain，110m 比例尺）。</p>
-          <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
+          <p id="credit-onionoo">中繼資料來自 <a href="https://metrics.torproject.org/onionoo.html" rel="noopener noreferrer">Onionoo</a>，經自架的 onionoo.anoni.net 取回。只取到國家層級的聚合，沒有個別中繼的識別資訊。</p>
+          <p id="credit-metrics">使用者估計與橋接統計來自 <a href="https://metrics.torproject.org/" rel="noopener noreferrer">Tor Metrics</a>，授權 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener noreferrer">CC0 1.0</a>。人數是用中繼收到的目錄請求反推的估計值，信心區間相當寬，不是普查。</p>
+          <p id="credit-ooni">Tor 連線觀測來自 <a href="https://ooni.org/" rel="noopener noreferrer">OONI</a>（Open Observatory of Network Interference），授權 <a href="https://github.com/ooni/license/blob/master/data/LICENSE.md" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>。畫面呈現的是 tor 測試近 30 天各國沒有照預期完成的比率，OONI 稱為 anomaly，成因包含連線被擋、網路不穩與 ISP 故障。</p>
+          <p id="credit-accessnow">網路關閉事件來自 <a href="https://www.accessnow.org/keepiton-data-dashboard/" rel="noopener noreferrer">Access Now #KeepItOn</a> 的 STOP 資料集，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer">CC BY 4.0</a>。每筆事件的成因由該聯盟人工查證後標註，更新是不定期的，不是即時狀態。</p>
+          <p id="credit-seacable">連到台灣的海纜障礙狀況來自<a href="https://moda.gov.tw/major-policies/subseacable/fault/1749" rel="noopener noreferrer">數位發展部</a>公布的表格。該頁面的示意圖來自 TeleGeography 並採 CC BY-SA 4.0，這裡只取表格不含圖。表格本身未標示授權。</p>
+          <p id="credit-energy">台灣的再生能源場址、各縣市用電量與每日尖峰備轉容量率，三份都來自台灣電力公司，授權<a href="https://data.gov.tw/license" rel="noopener noreferrer">政府資料開放授權條款-第1版</a>，分別是<a href="https://data.gov.tw/dataset/17141" rel="noopener noreferrer">再生能源各場址資料</a>、<a href="https://data.gov.tw/dataset/29935" rel="noopener noreferrer">各縣市住宅、服務業及機關用電統計</a>與<a href="https://data.gov.tw/dataset/25850" rel="noopener noreferrer">本年度每日尖峰備轉容量率</a>。場址那份只有地址沒有座標，經 <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> 的 Nominatim 地理編碼（ODbL）。</p>
+          <p id="credit-grid">發電廠的裝置容量與當下淨發電量來自<a href="https://data.gov.tw/dataset/8931" rel="noopener noreferrer">台灣電力公司各機組發電量即時資訊</a>，授權<a href="https://data.gov.tw/license" rel="noopener noreferrer">政府資料開放授權條款-第1版</a>，每十分鐘更新，畫面上是產生資料當下的快照。電廠位置與 345kV 輸電線的走向來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> 貢獻者（ODbL）。</p>
+          <p id="credit-power">台灣的變電所容量與負載來自<a href="https://data.gov.tw/dataset/16960" rel="noopener noreferrer">台灣電力公司二次變電所主變壓器裝置容量及負載</a>，授權<a href="https://data.gov.tw/license" rel="noopener noreferrer">政府資料開放授權條款-第1版</a>。座標另外取自 <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> 貢獻者（ODbL），台電那份沒有座標。縣市判定用<a href="https://data.gov.tw/dataset/7441" rel="noopener noreferrer">內政部國土測繪中心的鄉鎮市區界線</a>。</p>
+          <p id="credit-landing">台灣的海纜登陸點是這個專案自己建的，沒有使用 TeleGeography 的資料。座標與設施位置來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> 貢獻者（ODbL），登陸地名來自農業部漁業署的航行通告與海纜事件的公開報導，纜線清單對照<a href="https://moda.gov.tw/major-policies/subseacable/1747" rel="noopener noreferrer">數位發展部</a>的海纜清單。每一筆的出處逐條記在 tools/data/tw_landing.toml。</p>
+          <p id="credit-twadmin">貼近台灣時出現的細界線是縣市界，來自<a href="https://data.gov.tw/dataset/7442" rel="noopener noreferrer">內政部國土測繪中心的直轄市、縣市界線</a>，授權<a href="https://data.gov.tw/license" rel="noopener noreferrer">政府資料開放授權條款-第1版</a>。原始資料 33 萬個點，這裡簡化到 1 萬 3 千個，容差約 67 公尺。這一層同時也是台灣的海岸線，全球那份海岸線的比例尺在縣市尺度下不夠用。釣魚台列嶼、東沙島與南沙太平島照原資料所屬縣市收錄。</p>
+          <p id="credit-ne">國界輪廓來自 <a href="https://www.naturalearthdata.com/" rel="noopener noreferrer">Natural Earth</a>（public domain，110m 比例尺）。海面的深淺是同一來源的等深線（10m 比例尺），只取 200、1000、3000、5000 公尺四層，最淺那階就是大陸棚。海底電纜幾乎都沿著陸棚鋪、避開深海盆，兩層對照著看得出來為什麼纜線走那些路徑。</p>
+          <p id="credit-osm">海面上看得比較清楚的細線是海底電纜，來自 <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> 貢獻者（ODbL），收錄以歐洲、地中海與大西洋較完整。最淡的一層是主要跨洋走廊的示意，取兩端公開的登陸地點拉出大圓弧，只有走向可信，實際路由要看專門的海纜地圖。</p>
+          <p id="credit-netusers">國家卡片上的上網人口比例來自 <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" rel="noopener noreferrer">World Bank</a> 的 Individuals using the Internet，授權 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer">CC BY 4.0</a>，各國最新有值的年份不同，所以每一筆都標了年份。World Bank 沒有收錄台灣，台灣那一筆改用<a href="https://moda.gov.tw/digital-affairs/digital-service/operations/208" rel="noopener noreferrer">數位發展部的國家數位近用調查</a>（政府資料開放授權條款-第1版），那是對 12 歲以上人口的電話抽樣，跟其他國家的來源不是同一種調查，卡片上會另外標出來。</p>
         </div>
         <div id="backend">偵測中…</div>
         <div id="langs"></div>
@@ -340,8 +618,10 @@
   </div>
   <script>if (window.matchMedia('(max-width:680px)').matches) document.getElementById('info').open = false;</script>
 
-  <div id="circ-tag">示意路徑　guard → middle → exit</div>
+  <div id="feed"></div>
   <div id="labels"></div>
+
+  <div id="dbg" hidden></div>
 
   <div id="cc-card" class="panel" hidden>
     <div id="cc-head"><span id="cc-code"></span><span id="cc-sub"></span><span id="cc-close" role="button" tabindex="0">關閉</span></div>
@@ -353,7 +633,7 @@
   <div id="loading">載入中…</div>
 
   <div id="hint" class="panel">
-    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤 · 放開後自動轉</span>
+    <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤</span>
     <span class="narrow" id="hint-narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
     <span id="hint-close">知道了</span>
   </div>

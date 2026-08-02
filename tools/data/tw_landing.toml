@@ -1,0 +1,347 @@
+# 台灣海纜登陸點：自建資料集
+#
+# 這份是人工維護的來源檔，每一筆都要標註可查證的出處。gen_tw_landing.py 讀這個檔，
+# 再跟數位發展部的海纜清單合併，輸出地球儀用的 JSON。
+#
+# === 為什麼要自己建 ===
+#
+# 海纜登陸點座標從來沒有進過任何開放資料庫。OSM 查過，五個候選標籤全是 0 筆。
+# Wikidata 的海底通訊電纜（Q506572）底下 190 個項目只有 1 個帶座標。唯一完整的是
+# TeleGeography，而他們 2022 年底之後把資料收回，改成年費授權。
+#
+# 網路上流通的 CC BY-NC-SA 3.0 快照（stevesong/open_undersea_cable_map 是其中授權
+# 主張最清楚的一份）只有台灣 6 個登陸點，現行版有 21 個，差的那 15 個正好是馬祖、
+# 澎湖、金門這些離島。台灣海纜脆弱性最有話講的部分，剛好是那份快照沒有的。
+#
+# 所以這裡不碰 TeleGeography 的任何資料，從公開文獻與 OSM 自己建。範圍只有台灣，
+# 量級是幾十個點而不是兩千個，做得完。
+#
+# === 精度標示（precision）===
+#
+#   站址   OSM 有明確標註為海纜站的建物或園區，且有海纜線段端點佐證
+#   設施   OSM 標為電信機房且位置合理，但沒有標明是海纜站
+#   端點   OSM 海纜線段的端點，但附近沒有對應的建物標註
+#   里     只查到里級地名，座標取該里的中心
+#   鄉鎮   只查到鄉鎮級地名，座標取該鄉鎮的中心
+#
+# 精度會原樣輸出到 JSON，畫面上要據此決定標示的口徑。站址等級可以說「登陸站」，
+# 鄉鎮等級只能說「在這一帶登陸」。
+#
+# === 授權 ===
+#
+# OSM 來源採 ODbL，使用時標註「© OpenStreetMap contributors」。政府公告與新聞報導
+# 引用的是其中的事實（哪條纜線連哪兩地），事實不受著作權保護。座標的彙整與精度判斷
+# 是我們自己做的。
+
+# === 已知缺口 ===
+#
+# 這份是 v1，不完整，補的時候照樣要標來源。目前缺的：
+#
+#   澎湖側的登陸點。臺澎二號、臺澎三號只查到台灣側（好美里、北門），澎湖那一端
+#     還沒找到具體地名。澎金一號、澎金三號兩端都缺。
+#   臺金二號的台灣側。OSM 的線段畫到 [24.4175, 118.9174] 就停在海上。
+#   苑裡（苗栗）。文獻提到它是國內海纜登陸點之一，但沒查到是哪一條纜線。
+#   大武（台東）。中央社提到它是登陸點，沒查到對應纜線與確切位置。
+#   16 條國際海纜裡只有 APRICOT 對得上登陸站。其餘要逐條找 NCC 許可公告或
+#     環評書件才能建立對應，那批文件多半是 PDF，得一份份讀。
+#
+# 補資料的順序建議照「對台灣的意義」排，離島優先於國際纜線，因為離島斷纜的
+# 影響是整座島失聯，國際纜線斷掉多半只是繞路。
+
+[meta]
+updated = "2026-08-01"
+note = "自建資料集，未使用 TeleGeography 的任何資料。v1 不完整，缺口見檔頭。"
+osm_snapshot = "2026-06-01"
+
+
+# ─── 本島國際海纜登陸站 ───────────────────────────────────────────
+
+[[point]]
+id = "toucheng"
+name_zh = "頭城海纜登陸站"
+name_zh_cn = "头城海缆登陆站"
+name_en = "Toucheng Cable Landing Station"
+admin = "宜蘭縣頭城鎮大坑里"
+admin_zh_cn = "宜兰县头城镇大坑里"
+admin_en = "Dakeng, Toucheng, Yilan County"
+lat = 24.85354
+lon = 121.83051
+precision = "站址"
+operator = "中華電信"
+sources = [
+  "OSM way/714386507「中華電信頭城海纜站」landuse=industrial（ODbL）",
+  "OSM way/1416683286 海纜線段 seamark:name=APRICOT-S6，端點距站址 4 公尺（ODbL）",
+  "OSM way/826833554 海纜線段，端點距站址 35 公尺，另一端往南至 20.30N/123.94E（ODbL）",
+]
+
+[[point]]
+id = "fangshan"
+name_zh = "枋山海纜登陸站"
+name_zh_cn = "枋山海缆登陆站"
+name_en = "Fangshan Cable Landing Station"
+admin = "屏東縣獅子鄉內獅村"
+admin_zh_cn = "屏东县狮子乡内狮村"
+admin_en = "Neishi, Shizi, Pingtung County"
+lat = 22.26952
+lon = 120.65376
+precision = "站址"
+operator = "中華電信"
+sources = [
+  "OSM way/429055992「光纖海纜管制處」，位於「枋山海纜通信衛星中心」園區內（ODbL）",
+  "OSM way/559037067「海纜站機房」[22.27322, 120.65673]（ODbL）",
+  "OSM way/1334156414 海纜線段 seamark:name=S5A，端點距此 171 公尺（ODbL）",
+]
+
+[[point]]
+id = "tamsui"
+name_zh = "淡水沙崙"
+name_zh_cn = "淡水沙仑"
+name_en = "Tamsui Shalun"
+admin = "新北市淡水區沙崙里"
+admin_zh_cn = "新北市淡水区沙仑里"
+admin_en = "Shalun, Tamsui, New Taipei City"
+lat = 25.18334
+lon = 121.41968
+precision = "設施"
+operator = "中華電信"
+sources = [
+  "OSM way/1046192814「沙崙機房」office=telecommunication、operator=中華電信，地址新北市淡水區沙崙里中正路二段52號（ODbL）",
+  "OSM way/1334156416 海纜線段 seamark:name=S5，端點距此 685 公尺（ODbL）",
+  "數位發展部海纜障礙狀況表以「距淡水沙崙約N公里處」描述障礙位置，可見沙崙是官方採用的距離參照點",
+]
+
+[[point]]
+id = "bali"
+name_zh = "八里"
+name_zh_cn = "八里"
+name_en = "Bali"
+admin = "新北市八里區"
+admin_zh_cn = "新北市八里区"
+admin_en = "Bali, New Taipei City"
+lat = 25.14916
+lon = 121.40181
+precision = "設施"
+operator = "中華電信"
+sources = [
+  "OSM way/714659303「八里機房」office=telecommunication、operator=中華電信（ODbL）",
+  "中央社 2025-01-10「海纜安全危機4」：台灣至少 7 座海纜登陸站，新北淡水 2、新北八里 1、宜蘭頭城 2、屏東枋山 2",
+]
+
+
+# ─── 離島海纜的兩端 ──────────────────────────────────────────────
+
+[[point]]
+id = "dongyin"
+name_zh = "東引"
+name_zh_cn = "东引"
+name_en = "Dongyin"
+admin = "連江縣東引鄉"
+admin_zh_cn = "连江县东引乡"
+admin_en = "Dongyin, Lienchiang County"
+lat = 26.36682
+lon = 120.49042
+precision = "鄉鎮"
+operator = "中華電信"
+sources = [
+  "農業部漁業署航行通告（台馬第二及第三海纜搶修作業）載明臺馬二號為「淡水至東引」，臺馬三號另有「北竿至東引段」",
+  "OSM relation/3339731 東引鄉界，座標取其中心（ODbL）",
+]
+
+[[point]]
+id = "nangan"
+name_zh = "南竿"
+name_zh_cn = "南竿"
+name_en = "Nangan"
+admin = "連江縣南竿鄉"
+admin_zh_cn = "连江县南竿乡"
+admin_en = "Nangan, Lienchiang County"
+lat = 26.15308
+lon = 119.93863
+precision = "鄉鎮"
+operator = "中華電信"
+sources = [
+  "農業部漁業署航行通告載明臺馬三號為「草漯至南竿」",
+  "OSM way/1358412741「中華電信馬祖綜合大樓」[26.15723, 119.94170]（ODbL）",
+  "OSM relation/3178907 南竿鄉界，座標取其中心（ODbL）",
+]
+
+[[point]]
+id = "beigan"
+name_zh = "北竿"
+name_zh_cn = "北竿"
+name_en = "Beigan"
+admin = "連江縣北竿鄉"
+admin_zh_cn = "连江县北竿乡"
+admin_en = "Beigan, Lienchiang County"
+lat = 26.22505
+lon = 119.99733
+precision = "鄉鎮"
+operator = "中華電信"
+sources = [
+  "農業部漁業署航行通告載明臺馬三號有「北竿至東引段」",
+  "OSM way/1362546008「中華電信」[26.22536, 119.99701]（ODbL）",
+  "OSM relation/3339721 北竿鄉界，座標取其中心（ODbL）",
+]
+
+[[point]]
+id = "caolu"
+name_zh = "草漯"
+name_zh_cn = "草漯"
+name_en = "Caolu"
+admin = "桃園市觀音區草漯里"
+admin_zh_cn = "桃园市观音区草漯里"
+admin_en = "Caolu, Guanyin, Taoyuan City"
+lat = 25.04486
+lon = 121.13561
+precision = "里"
+operator = "中華電信"
+sources = [
+  "農業部漁業署航行通告載明臺馬三號為「草漯至南竿」",
+  "OSM 草漯里範圍內的地標，座標取該里中心（ODbL）",
+]
+
+[[point]]
+id = "haomei"
+name_zh = "好美里"
+name_zh_cn = "好美里"
+name_en = "Haomei"
+admin = "嘉義縣布袋鎮好美里"
+admin_zh_cn = "嘉义县布袋镇好美里"
+admin_en = "Haomei, Budai, Chiayi County"
+lat = 23.34943
+lon = 120.13636
+precision = "里"
+operator = "中華電信"
+sources = [
+  "臺澎二號海纜搶修報導提到嘉義好美里為其近岸端",
+  "OSM relation/9799769 好美里界，座標取其中心（ODbL）",
+]
+
+[[point]]
+id = "beimen"
+name_zh = "北門"
+name_zh_cn = "北门"
+name_en = "Beimen"
+admin = "臺南市北門區"
+admin_zh_cn = "台南市北门区"
+admin_en = "Beimen, Tainan City"
+lat = 23.26792
+lon = 120.12572
+precision = "鄉鎮"
+operator = "中華電信"
+sources = [
+  "臺澎三號海纜 2025-02-25 全斷事件報導提到北門端搶修",
+  "OSM relation/2417980 北門區界，座標取其中心（ODbL）",
+]
+
+[[point]]
+id = "kinmen-tk2"
+name_zh = "金門（臺金二號端）"
+name_zh_cn = "金门（台金二号端）"
+name_en = "Kinmen (TK2 terminus)"
+admin = "金門縣"
+admin_zh_cn = "金门县"
+admin_en = "Kinmen County"
+lat = 24.42600
+lon = 118.45580
+precision = "端點"
+operator = "中華電信"
+sources = [
+  "OSM way/1127946465「臺金二號海纜」communication=line、operator=中華電信、telecom:medium=fibre，此為其金門側端點（ODbL）",
+]
+
+[[point]]
+id = "liuqiu-a"
+name_zh = "小琉球（北側登陸點）"
+name_zh_cn = "小琉球（北侧登陆点）"
+name_en = "Liuqiu (north terminus)"
+admin = "屏東縣琉球鄉"
+admin_zh_cn = "屏东县琉球乡"
+admin_en = "Liuqiu, Pingtung County"
+lat = 22.34850
+lon = 120.38840
+precision = "端點"
+operator = "中華電信"
+sources = [
+  "OSM way/775335814 海纜線段 operator=CHT、telecom:medium=fibre 的小琉球側端點（ODbL）",
+]
+
+[[point]]
+id = "liuqiu-b"
+name_zh = "小琉球（南側登陸點）"
+name_zh_cn = "小琉球（南侧登陆点）"
+name_en = "Liuqiu (south terminus)"
+admin = "屏東縣琉球鄉"
+admin_zh_cn = "屏东县琉球乡"
+admin_en = "Liuqiu, Pingtung County"
+lat = 22.33730
+lon = 120.37770
+precision = "端點"
+operator = "中華電信"
+sources = [
+  "OSM way/775335813 海纜線段 operator=CHT、telecom:medium=fibre 的小琉球側端點（ODbL）",
+]
+
+[[point]]
+id = "linbian"
+name_zh = "屏東本島（小琉球海纜端）"
+name_zh_cn = "屏东本岛（小琉球海缆端）"
+name_en = "Pingtung mainland (Liuqiu cable terminus)"
+admin = "屏東縣"
+admin_zh_cn = "屏东县"
+admin_en = "Pingtung County"
+lat = 22.41750
+lon = 120.50690
+precision = "端點"
+operator = "中華電信"
+sources = [
+  "OSM way/775335813 海纜線段的本島側端點，另一條 way/775335814 的本島側端點在 [22.4272, 120.4891]（ODbL）",
+]
+
+
+# ─── 纜線與登陸點的對應 ────────────────────────────────────────────
+#
+# 只寫查得到出處的。moda 的清單有 26 條，這裡對得上的只是其中一部分，對不上的
+# 不要用推測補。gen_tw_landing.py 會檢查 cable 欄位的代號是否存在於 moda 清單。
+
+[[link]]
+cable = "APRICOT"
+points = ["toucheng"]
+confidence = "高"
+note = "OSM 線段 seamark:name=APRICOT-S6 的端點距頭城海纜站 4 公尺。"
+sources = ["OSM way/1416683286（ODbL）"]
+
+[[link]]
+cable = "TDM2"
+points = ["tamsui", "dongyin"]
+confidence = "高"
+note = "臺馬二號。漁業署航行通告直接寫「淡水至東引」。"
+sources = ["農業部漁業署航行通告（台馬第二及第三海纜搶修作業）"]
+
+[[link]]
+cable = "TM3"
+points = ["caolu", "nangan", "beigan", "dongyin"]
+confidence = "高"
+note = "臺馬三號。主段草漯至南竿，另有北竿至東引段。"
+sources = ["農業部漁業署航行通告（台馬第二及第三海纜搶修作業）"]
+
+[[link]]
+cable = "TP2"
+points = ["haomei"]
+confidence = "中"
+note = "臺澎二號。只查到嘉義好美里這個近岸端，澎湖側還沒查到具體地點。"
+sources = ["臺澎海纜搶修相關報導"]
+
+[[link]]
+cable = "TP3"
+points = ["beimen"]
+confidence = "中"
+note = "臺澎三號。只查到北門這個搶修端，澎湖側還沒查到具體地點。"
+sources = ["2025-02-25 臺澎三號全斷事件報導"]
+
+[[link]]
+cable = "TK2"
+points = ["kinmen-tk2"]
+confidence = "中"
+note = "臺金二號。OSM 的線段只畫到 [24.4175, 118.9174] 就結束，還在海上，台灣側端點缺。"
+sources = ["OSM way/1127946465（ODbL）"]

@@ -45,6 +45,24 @@ The Onionoo snapshot is distilled down to country-level aggregates, with no fing
 
 Landmass brightness switches between four metrics. Relay count is the obvious one. Consensus weight shows the share of traffic a country actually carries, which often diverges from the raw count. Single-provider concentration is the fraction of a country's relays sitting with its largest hosting provider: the higher it goes, the more that country's anonymous traffic depends on one facility staying up and staying cooperative. The user estimate is a demand-side figure, and the gap between it and the three supply-side metrics is itself informative.
 
+!!! info "Addendum, 2026-07-31: three more"
+
+    Three more datasets went into the globe after this post was published. All of them cleared the same licence bar.
+
+    | Data | Source | Licence |
+    |------|--------|---------|
+    | Share of population online | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS) | CC BY 4.0 |
+    | Same figure for Taiwan | [Ministry of Digital Affairs National Digital Access Survey](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | Open Government Data Licence, version 1 |
+    | Sea floor depth | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
+
+    The share of population online is there as a denominator. The globe used to say only "this many people use Tor here", and that number largely tracks population size. Knowing how many people are online at all is what lets you tell whether a gap between two countries is really about Tor.
+
+    The World Bank figures have a gap that is awkward for a site based in Taiwan: Taiwan is not among the 217 economies. So that one figure comes from Taiwan's own government survey instead. The two are not the same kind of measurement, one is ITU compiling national reports and the other is a telephone survey of people aged 12 and over, and the globe says so where it shows the number. That is data politics of a different kind from the licence walls above, and it lands on downstream users just the same.
+
+    Sea floor depth comes from the source already in the table, so there was no new licence to handle. Four contours at 200, 1000, 3000 and 5000 metres, the shallowest of which is the continental shelf. It is what gives the cable layer its meaning: submarine cables mostly follow the shelf and avoid the deep basins, and with both layers up you can see why the cables run where they do.
+
+    That led to looking for cable landing points, the most fragile part of any cable and a live topic for Taiwan. OpenStreetMap does not have them. This is absence, not a failed download: a taginfo query for `man_made=cable_landing_point`, `seamark:type=landing_point` and three other candidates returns `0` worldwide for every one of them. Landing point coordinates are part of the TeleGeography product just as the cable geometry is, which is the same wall as above.
+
 ## Deliberate restraint in what gets drawn
 
 OONI's data shows the trade-off best. It gives a per-country anomaly rate for the Tor test, and the numbers look like enough to draw a global censorship map. The middle of the range is measurement noise. Switzerland measures `22.2%`, Canada `21.2%`, New Zealand `41.1%`, and none of these countries has a censorship problem. Colouring the mid-range would amount to accusing them on the strength of noise.
