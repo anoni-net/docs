@@ -204,12 +204,19 @@
       --panel: rgba(9, 16, 26, .78); --panel-b: rgba(0, 174, 255, .26);
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; }
+    /* touch-action 要鋪開，不能只設在 canvas 上。
+       iOS Safari 的「點兩下放大」是獨立於捏合手勢的另一套機制，gesturestart 那三個
+       事件擋不到它，viewport 的 user-scalable=no 從 iOS 10 起也被忽略。真正管得到的
+       是 touch-action：manipulation 的定義就是「允許平移與捏合，但不要點兩下放大」。
+       原本只有 canvas 設了 none，所以在面板、國家標籤、卡片、按鈕上點兩下照樣會縮放。
+       touch-action 沿著祖先鏈取交集，設在 html/body 與兩個 fixed 容器上就涵蓋得到
+       底下所有元素，面板本身仍然捲得動。 */
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #04060d; touch-action: manipulation; }
     body { font: 14px/1.6 -apple-system, "Noto Sans TC", "PingFang TC", system-ui, sans-serif; color: var(--ink); }
     canvas { display: block; position: fixed; inset: 0; touch-action: none; }
 
     .panel {
-      position: fixed; z-index: 10; background: var(--panel);
+      position: fixed; z-index: 10; background: var(--panel); touch-action: manipulation;
       border: 1px solid var(--panel-b); border-radius: 14px;
       backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
       box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
@@ -287,7 +294,7 @@
     #ramp { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 10.5px; color: var(--muted); }
     #ramp i { flex: 1; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #173553 0 14%, #1e4468 14%, #5b93c2); }
 
-    #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; }
+    #labels { position: fixed; inset: 0; z-index: 8; pointer-events: none; touch-action: manipulation; }
     .lb.on { pointer-events: auto; cursor: pointer; }
     .lb.on:hover, .lb.on:focus-visible { color: #fff; text-shadow: 0 0 6px var(--cyan), 0 0 12px #04060d; outline: none; }
     /* 點國家看細節。球面上讀不出來的數字，點一下就給 */

@@ -3385,7 +3385,22 @@ function bindControls(dom) {
     });
   }
 
-  // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字
+  // 畫布上的雙指與雙擊都由這支自己處理，交給瀏覽器就會變成縮放或選字。
+  //
+  // dblclick 那一行擋不住 iOS Safari 的點兩下放大，因為 dblclick 是在瀏覽器已經
+  // 決定要縮放之後才發出來的。真正管用的是在第二次 touchend 上 preventDefault，
+  // 那是 iOS 上唯一攔得到的時機。CSS 那邊的 touch-action: manipulation 是主要手段，
+  // 這裡是保險，兩個都留著才在各版本 Safari 上一致。
+  //
+  // 只掛在畫布上不掛 document。preventDefault 會連帶取消那一次的相容滑鼠事件，
+  // 掛太廣會讓面板上的按鈕連按兩下時第二下沒反應。畫布上的互動全走 pointer 事件，
+  // 取消相容事件沒有影響。
+  let lastTapT = 0;
+  dom.addEventListener('touchend', (e) => {
+    const now = performance.now();
+    if (now - lastTapT < 350 && e.touches.length === 0) e.preventDefault();
+    lastTapT = now;
+  }, { passive: false });
   dom.addEventListener('dblclick', (e) => e.preventDefault());
   dom.addEventListener('wheel', (e) => {
     e.preventDefault();
