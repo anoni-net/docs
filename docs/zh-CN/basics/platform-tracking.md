@@ -122,6 +122,7 @@ EFF 那份报告指出，平均一个网页会把数据分享给数十个第三�
 - [威胁模型如何建立](./threat-model.md)：平台收集属于哪一级对手，你需要付出多少成本对应
 - [怎么维持多个网络身分](./multiple-identities.md)：把不同用途的账号切开，减少跨站关联
 - [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：换工具不等于减少观察者，同一个判断方式也适用于本页
+- [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：把同一套「这些数据流向谁」的问法用在 AI 服务上
 
 [^eff]: [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} - Electronic Frontier Foundation，2019 年 12 月。第三方追踪技术的完整整理，包含追踪像素、浏览器指纹、移动端追踪与数据掮客生态。
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} - Apple Newsroom，2019 年 8 月。Apple 官方说明 grading 程序、抽样比例、暂停与后续改为选择加入的经过。

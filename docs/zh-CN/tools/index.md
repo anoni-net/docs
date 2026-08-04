@@ -48,3 +48,4 @@ icon: material/toolbox-outline
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
 - [Asian Diceware 密语字典](./asian-diceware.md)：社群参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。
 - [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。
+- [用 AI 工作时怎么避免数据外泄](./ai-privacy.md)：贴进去的内容去了哪里、消费版与企业版的分野、删除对话为什么不等于数据消失，以及该问供应商哪些问题。

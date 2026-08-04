@@ -14,7 +14,7 @@ This page is **not** a per-country data table. It works for **any destination**:
     We deliberately do **not** run this as an "enter a destination, get an answer" service. For this audience, the query itself — "I'm going to country X, I'm a journalist, dates are Y" — is sensitive intelligence. On any server it gets logged and could be subpoenaed or leaked. By having you copy text and ask **your own** AI, **your destination and identity never reach us**. The trade-off is that answer quality depends on which AI you use — so always cross-check against the primary sources at the bottom of this page.
 
 !!! tip "Pasting into a cloud AI still leaks to that provider"
-    Even though it doesn't go through us, pasting your query into a cloud AI (ChatGPT, Claude, Gemini, etc.) still lets that provider see it. For **sensitive destinations**, use a local/self-hosted model, or at least use the "low-data" priming prompt below: fill in only the country, never your name, organization, or exact dates.
+    Even though it doesn't go through us, pasting your query into a cloud AI (ChatGPT, Claude, Gemini, etc.) still lets that provider see it. For **sensitive destinations**, use a local/self-hosted model, or at least use the "low-data" priming prompt below: fill in only the country, never your name, organization, or exact dates. How providers differ on retention and training is in [using AI at work without leaking data](../tools/ai-privacy.md).
 
 ## How to use it
 
@@ -201,6 +201,7 @@ After running the items above, copy the key contacts from section 4 (emergency c
 
 ## See also
 
+- [Using AI at work without leaking data](../tools/ai-privacy.md) — the fuller version of the caution above: tier differences, retention periods, and what to ask a provider
 - [Regional observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [onionoo MCP — a query service for Tor relays](../community/onionoo-mcp.md) — hand "Digital 2" above to the AI directly. Connect this URL and your assistant can answer how many Tor relays a country has, how much bandwidth, and which networks host them, with numbers straight from Tor Project's Onionoo.
 - [Basics: networked freedom](../basics/internet-freedom.md) — the conceptual frame behind these scenarios.

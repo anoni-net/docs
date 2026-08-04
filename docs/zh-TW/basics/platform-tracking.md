@@ -122,6 +122,7 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 - [威脅模型如何建立](./threat-model.md)：平台收集屬於哪一級對手，你需要付出多少成本對應
 - [怎麼維持多個網路身分](./multiple-identities.md)：把不同用途的帳號切開，減少跨站關聯
 - [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：換工具不等於減少觀察者，同一個判斷方式也適用於本頁
+- [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)：把同一套「這些資料流向誰」的問法用在 AI 服務上
 
 [^eff]: [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} - Electronic Frontier Foundation，2019 年 12 月。第三方追蹤技術的完整整理，包含追蹤像素、瀏覽器指紋、行動端追蹤與資料掮客生態。
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} - Apple Newsroom，2019 年 8 月。Apple 官方說明 grading 程序、抽樣比例、暫停與後續改為選擇加入的經過。
