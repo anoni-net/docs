@@ -1,6 +1,6 @@
 ---
 title: Device minimization and border crossings in Asia
-description: A general device-minimization and border OPSEC guide plus Asia-specific border-search context, because EFF's gold-standard crossing guide describes only US law and misleads travelers in Asia.
+description: A general device-minimization and border OPSEC guide plus Asia-specific border-search context and the burner question (buying abroad, bringing it home), because EFF's gold-standard crossing guide describes only US law and misleads travelers in Asia.
 icon: material/bag-suitcase-outline
 ---
 
@@ -82,6 +82,26 @@ The SIM in your phone carries a record, and the question is who holds it and whe
 - **Data-only eSIM with no local number**: there's no local-SIM layer at all; your identity mostly lives with the eSIM provider and your payment record.
 
 For the threat of *destination surveillance*, roaming and data-only eSIMs keep the identity mapping outside the destination, which makes on-the-spot attribution harder. A long-term personal SIM crossing into a hostile jurisdiction is the opposite: it carries your telco history and prior locations with it. Buy a local real-name SIM only when you genuinely need a local number (for example to receive a verification code), and weigh that against the on-arrival registration it triggers. One caveat to the eSIM advantage: real-name registration is spreading even to data-only eSIMs in some places, so verify the destination's current rule rather than assuming an eSIM is anonymous.
+
+## Buying a burner abroad, and taking it home
+
+Two questions come up often enough to answer directly: can you buy an anonymous phone or SIM while traveling, and what changes when you bring it back.
+
+**Separate the handset from the number.** "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
+
+**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the effective move is keeping the identity mapping outside the country (roaming or a data-only eSIM), not buying locally.
+
+**What changes when you take it home.**
+
+- **A foreign number roaming at home** reports your location to the foreign carrier, so attribution generally requires a cross-border request. The trade-off is that a foreign roaming number sitting near your home address for months is itself a pattern.
+- **Prepaid validity** runs out. A 30-day tourist SIM is not a long-term second line.
+- **Swapping in a domestic SIM** binds that handset to your local identity, which is exactly what the clean device was avoiding.
+- **The IMEI links both numbers.** One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
+- **Customs.** Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
+
+**The practical shape.** Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
+
+**What a burner does not fix.** Signing into your everyday email, social, or cloud accounts on the clean device defeats it entirely. So does contacting the same people, keeping the same hours, and appearing in the same places. Carrying both phones powered on at once lets cell-tower records pair them. The device is one layer; the account layer is in [maintaining multiple online identities](../basics/multiple-identities.md).
 
 ## Per-jurisdiction border context (Asia)
 
