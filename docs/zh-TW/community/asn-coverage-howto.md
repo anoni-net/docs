@@ -117,7 +117,7 @@ python3 ./ripe.py save --loc=TW
 
 `ooni.py` 現階段只做覆蓋率統計，取用範圍有三個邊界值得知道：
 
-- **只讀 `webconnectivity` 目錄**。同一小時底下其他十幾個測項沒有納入，`tor`、`telegram`、`signal` 等測項的觀測不會出現在統計裡。
+- **只讀 `webconnectivity` 目錄**。同一小時底下其他十幾個測項沒有納入，`tor`、`telegram`、`signal` 等測項的觀測不會出現在統計裡。各測項分別測什麼見 [OONI 測項速查表](./ooni-nettests-map.md)。
 - **每筆測量只取兩個欄位**，`probe_asn` 與 `annotations.network_type`。判定結果所在的 `test_keys` 完全沒有讀取，因此輸出能回答「哪些 ASN 有人在測、測了幾次」，無法回答「測量看到了什麼」。
 - **只取 `.jsonl.gz`**，同目錄的 `.tar.gz` 會跳過。
 
@@ -135,6 +135,7 @@ python3 ./ripe.py save --loc=TW
 
 - [:material-code-json: OONI 測量資料結構導覽](./ooni-data-format.md)
 - [:material-shield-search: OONI 怎麼判定一個網站被封鎖](./ooni-blocking-determination.md)
+- [:material-table-search: OONI 測項速查表](./ooni-nettests-map.md)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
 - [:octicons-mark-github-24: 專案研究預先準備](./setup-repo.md)
 - [:material-hand-heart: 如何參與與認領主題](./how-to-contribute.md)

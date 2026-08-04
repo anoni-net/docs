@@ -132,6 +132,7 @@ OONI 在資料集層級也處理同一類問題，作法可參考 [OONI 如何�
 <div class="grid cards" markdown>
 
 - [:material-code-json: OONI 測量資料結構導覽](./ooni-data-format.md)
+- [:material-table-search: OONI 測項速查表](./ooni-nettests-map.md)
 - [:material-database-search: ASN 觀測資料擷取與分析](./asn-coverage-howto.md)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
 - [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)

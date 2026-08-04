@@ -147,6 +147,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 <div class="grid cards" markdown>
 
 - [:material-shield-search: OONI 怎麼判定一個網站被封鎖](./ooni-blocking-determination.md)
+- [:material-table-search: OONI 測項速查表](./ooni-nettests-map.md)
 - [:material-access-point-network: 什麼是 OONI](../tools/what-is-ooni.md)
 - [:material-database-search: ASN 觀測資料擷取與分析](./asn-coverage-howto.md)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
