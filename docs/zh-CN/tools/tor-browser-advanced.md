@@ -62,7 +62,7 @@ Tor Browser 提供两种身份切换，效果不同：
 
 何时用哪个：
 
-- 跨身份操作之前用 **New Identity**。刚逛完 A 账号要切去 B 账号时，必须完整切换，否则 cookies 与浏览器状态会把两个身份连起来。
+- 跨身份操作之前用 **New Identity**。刚逛完 A 账号要切去 B 账号时，必须完整切换，否则 cookies 与浏览器状态会把两个身份连起来。浏览器以外还要顾的分层设定见 [怎么维持多个网络身分](../basics/multiple-identities.md)。
 - 单一网站连不上、CAPTCHA 不停跳、想换出口国家的时候用 **New Circuit**。保留登录，只换中间与出口节点。
 
 Tor Browser 默认启用 First Party Isolation，每个分页的 cookies、cache、storage 都依域名隔离，跨站追踪难度提高。

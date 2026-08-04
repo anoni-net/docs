@@ -108,6 +108,7 @@ icon: material/shield-account-outline
 
 ## 相关阅读
 
-- [LGBTQ+ 与性少数的匿名社交](./lgbtq.md)：身分区隔、家人控管下的本机痕迹管理
+- [怎么维持多个网络身分](../basics/multiple-identities.md)：建立一组加害者完全不知道的新账号，以及避免新旧身分被平台串起来
+- [LGBTQ+ 与性少数的匿名社交](./lgbtq.md)：家人控管下的本机痕迹管理
 - [社运行动者的数位准备](./activist.md)：行动现场、被临检时的装置与通讯应对
 - [威胁模型如何建立](../basics/threat-model.md)：判断「保护什么、防谁、能付多少成本」的整体框架

@@ -205,5 +205,6 @@ icon: material/newspaper-variant-outline
 
 - [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能取得什么
 - [Metadata 为什么重要](../basics/metadata.md)：理解文件隐含的元数据风险
+- [怎么维持多个网络身分](../basics/multiple-identities.md)：采访联络用的身分要跟署名发稿的身分切开，这页是设定与长期维持的做法
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [社群自架服务](../community/tools.md)：anoni.net 提供给公益用途的协作工具入口
