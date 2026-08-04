@@ -126,6 +126,7 @@ tunnel 在 I2P 是单向的，outbound 送出去、inbound 收进来，每个参
 
 - [:material-incognito-circle: 匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)
 - [:material-file-tree: Metadata 是什么，为什么重要](../basics/metadata.md)
+- [:material-radar: 社群平台怎么收集你的数据](../basics/platform-tracking.md)
 - [:material-vpn: VPN 的风险与选择](../tools/vpn-guide.md)
 
 </div>

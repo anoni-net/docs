@@ -27,7 +27,7 @@ icon: material/shield-lock-outline
 
 社群依「[指南](../guides/index.md)」的分层结构，把隐私主题分散到不同层次：
 
-- 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)、[怎么维持多个网络身分](../basics/multiple-identities.md)
+- 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)、[社群平台怎么收集你的数据](../basics/platform-tracking.md)、[怎么维持多个网络身分](../basics/multiple-identities.md)
 - 工具：[什么是 Tor](../tools/what-is-tor.md)、[什么是 Tails](../tools/what-is-tails.md)、[Tor Browser 进阶设定](../tools/tor-browser-advanced.md)、[匿名操作系统比较](../tools/tails-vs-whonix-vs-qubes.md)、[消息工具比较](../tools/messaging-comparison.md)、[密码管理器入门](../tools/password-manager.md)
 - 场景：[记者保护消息来源](../scenarios/journalist.md)、[社运行动者的数位准备](../scenarios/activist.md)、[家暴幸存者的数位准备](../scenarios/domestic-violence.md)、[LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)
 - 进阶：[端对端加密如何运作](../advanced/e2ee.md)、[常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)

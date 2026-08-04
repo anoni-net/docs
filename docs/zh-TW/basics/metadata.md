@@ -124,6 +124,7 @@ Metadata 是各種日常行為的副產品，散佈在各處，沒有單一集�
 
 - 把 metadata 這個維度帶進 [威脅模型如何建立](./threat-model.md)，問自己「我的對手能看到什麼樣的 metadata」
 - 看 [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md)，理解為什麼「機密 ≠ 匿名」
+- 平台主動收集的行為訊號跟這頁互補，見 [社群平台怎麼收集你的資料](./platform-tracking.md)
 - 想知道金流也是 metadata 的一種，請見 [為什麼匿名支付重要](./payments-anonymity.md)
 - 工具層的 [什麼是 Tor](../tools/what-is-tor.md)、[什麼是 Tails](../tools/what-is-tails.md) 是減少網路 metadata 的兩個關鍵工具
 - 想知道加密 DNS、IPFS 這類工具各自減少了哪一種 metadata、又留下哪一種，見 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
