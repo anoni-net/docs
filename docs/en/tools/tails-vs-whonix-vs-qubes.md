@@ -50,6 +50,7 @@ If your only machine is an Apple Silicon Mac, the practical options narrow sharp
 
 This page is the comparison. For what each system *is* and how to install it, the projects' own documentation is the authority, and we don't try to duplicate it.
 
+- [Maintaining multiple online identities](../basics/multiple-identities.md) for the account-level version of the same idea: which accounts belong to which layer, and what they must never share. Qubes takes that principle down to the operating system.
 - [Privacy Guides: Desktop/PC](https://www.privacyguides.org/en/desktop/){target="_blank"} for the broader, regularly maintained recommendation set across operating systems.
 - [Tails documentation](https://tails.net/doc/){target="_blank"} and the [Tails installation guide](https://tails.net/install/){target="_blank"} for getting a verified USB running.
 - [Whonix wiki](https://www.whonix.org/wiki/Documentation){target="_blank"} and its [download page](https://www.whonix.org/wiki/Download){target="_blank"}; the VirtualBox path is the simplest first install.

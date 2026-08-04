@@ -16,6 +16,7 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 - [Anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md) — four words used interchangeably that protect different things; a single side-by-side comparison for picking the right tool, with Asia-Pacific examples.
 - [Metadata, and why it matters](./metadata.md) — the data about your communication (who, when, how often, where) that encryption does not hide, with the regional twist that real-name SIM regimes tie it to a legal identity.
 - [Threat modeling](./threat-model.md) — the five questions to ask before picking a tool, and why the adversary and the stakes shift as you move across the region. We point to EFF's canonical guide for the walkthrough.
+- [Maintaining multiple online identities](./multiple-identities.md) — how many layers you need, the tool boundary for each, how observers correlate accounts, and the long-haul maintenance and exit that most introductory material stops short of.
 
 ## Where to go from here
 

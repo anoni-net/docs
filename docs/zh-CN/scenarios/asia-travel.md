@@ -49,7 +49,7 @@ icon: material/bag-suitcase-outline
 - **出发前装好并测试规避工具**。VPN、Tor Browser 与桥接都要在家里先装好、连一次确认可用。到了审查严的地方，App 商店与工具官网本身就连不上，落地才想下载通常来不及。Tor 的桥接设定见 [Tor Snowflake 桥接点](../tools/tor-snowflake.md) 与 [Tor Browser 进阶设定](../tools/tor-browser-advanced.md)，自架桥接见 [如何架设 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
 - **准备两种以上的连接方式**。单一 VPN 协议常被封，多带一两款备援。多数目的地用一般 VPN 就够，只有中国、缅甸这种强封锁地，标准的 WireGuard、OpenVPN 几秒内就被封，要改用有混淆（obfuscation，把 VPN 流量伪装成一般 HTTPS）功能的方案。具备这类混淆的服务，例如 Proton VPN（Stealth 协议）、Mullvad（混淆、Shadowsocks 桥接）、ExpressVPN（自动混淆，Lightway 协议）、NordVPN（NordWhisper）、Surfshark（Camouflage Mode）、Astrill（StealthVPN）。哪些「现在能用」会随封锁更新而变，出发前查当地最新回报并先测试一次。怎么挑一个值得信任的 VPN（审计、所有权、匿名付款）见 [VPN 的风险与选择](../tools/vpn-guide.md)。
 - **敏感通讯改用端对端加密工具**。Signal 是常见选择，但部分地区会封锁，出发前确认目的地能不能连，连不上时改走 Tor 或 VPN。团队出差可事先约好主要与备用管道。
-- **账号分流**。研讨会社交、商务联络与个人账号分开，减少一个被盯上时牵连到其他身份。
+- **账号分流**。研讨会社交、商务联络与个人账号分开，减少一个被盯上时牵连到其他身份。每一层要准备哪些独立的 email、浏览器 profile 与两阶段验证，见 [怎么维持多个网络身分](../basics/multiple-identities.md)。
 - **SIM 用漫游或纯数据 eSIM**。三种方式都会留下某种身份记录，差别在这份记录落在谁手上、当地政府能不能直接把号码对应到你本人：
     - **落地办实名卡**：护照（部分地区还加人脸）与这个本地号码，直接登进当地电信商与政府的数据库，当地执法即查即得，且常长期留存。
     - **本国号码漫游**：登记你身份的是家乡的电信商，当地只看到一个外国漫游号码的连接与位置，要对应到本人通常得走跨境调取。

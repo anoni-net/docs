@@ -88,6 +88,7 @@ icon: material/shield-account-outline
 ## 相關閱讀
 
 - [緊急求救](../help/index.md)：帳號被盜、裝置遺失、跟蹤騷擾、被斷網的綜合應對清單
-- [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：身分區隔、家人控管下的本機痕跡管理
+- [怎麼維持多個網路身分](../basics/multiple-identities.md)：建立一組加害者完全不知道的新帳號，以及避免新舊身分被平台串起來
+- [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：家人控管下的本機痕跡管理
 - [社運行動者的數位準備](./activist.md)：行動現場、被臨檢時的裝置與通訊應對
 - [威脅模型如何建立](../basics/threat-model.md)：判斷「保護什麼、防誰、能付多少成本」的整體框架

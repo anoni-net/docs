@@ -32,4 +32,5 @@ Local organizations that once absorbed this kind of risk, the Civil Human Rights
 - [Attending a Protest](https://ssd.eff.org/module/attending-protest){target="_blank"} — the canonical guide, in multiple languages
 - [Cross-border travel and device searches](./asia-travel.md) — for organizers moving across the region
 - [Threat modeling](../basics/threat-model.md) — run the five questions for your specific action
+- [Maintaining multiple online identities](../basics/multiple-identities.md) — separating an organizing identity from a day job, and how to retire it afterwards
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if you or someone in your network is detained or a device is seized

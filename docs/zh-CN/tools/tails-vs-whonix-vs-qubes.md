@@ -162,7 +162,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 Tails 的完整介绍与安装步骤在 [什么是 Tails](./what-is-tails.md)。Whonix 从 [官方下载页](https://www.whonix.org/wiki/Download){target="_blank"} 起步，VirtualBox 路径最简单。Qubes 的硬件门槛高，建议先到 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"} 确认手边机器能不能执行，再去抓 [安装镜像](https://www.qubes-os.org/downloads/){target="_blank"}。
 
-整机隔离只是匿名实践的一块。连线层的 [Tor](./what-is-tor.md)、浏览器层的 [Tor Browser 进阶设定](./tor-browser-advanced.md)、档案传输的 [OnionShare](./onionshare.md) 都是配套，要看自己的威胁模型整体配。
+整机隔离只是匿名实践的一块。连线层的 [Tor](./what-is-tor.md)、浏览器层的 [Tor Browser 进阶设定](./tor-browser-advanced.md)、档案传输的 [OnionShare](./onionshare.md) 都是配套，要看自己的威胁模型整体配。账号层的分舱（哪些账号属于哪一层、彼此不共用什么）见 [怎么维持多个网络身分](../basics/multiple-identities.md)，Qubes 的 compartmentalization 是把同一个想法做到操作系统等级。
 
 ## :material-chat-question: 一同了解
 

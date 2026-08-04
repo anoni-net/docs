@@ -313,6 +313,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 
 - [威胁模型如何建立](../basics/threat-model.md)：每场行动前先盘点对手与资产
 - [Metadata 是什么](../basics/metadata.md)：理解照片、文件背后的元数据
+- [怎么维持多个网络身分](../basics/multiple-identities.md)：动员角色跟本业账号的分层设定，以及行动结束后怎么收尾
 - [记者保护消息来源](./journalist.md)：跟记者对接时双方都要做的整理
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同场景的取舍
 - [密码管理器入门](../tools/password-manager.md)：行动前的账号卫生基础

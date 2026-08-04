@@ -37,32 +37,11 @@ Think of your accounts in three layers:
 
 Not everyone needs all three. Most readers should start by separating the everyday and community layers, and revisit the exploration layer once that's habitual.
 
-### Tool boundaries per layer
+### What each layer needs
 
-Each layer should at minimum have its own:
+Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md).
 
-- **Email**: Don't register community-layer accounts with a work email or a shared family inbox. ProtonMail or Tuta are reasonable privacy-respecting providers; a fresh, phone-unlinked Gmail also works.
-- **Browser profile**: Firefox and Chrome both support multiple profiles, each with its own cookies, login state, and bookmarks. Open the community-layer profile only for community-layer accounts; don't run both profiles logged in simultaneously.
-- **Password-manager vault**: Bitwarden and 1Password support collections / vaults. Put the community layer in its own vault; if your main account is breached, the community layer doesn't fall with it. For background, see [Privacy Guides — password managers](https://www.privacyguides.org/en/passwords/){target="_blank"}.
-- **Two-factor authentication**: Aegis (Android) and Raivo / 2FAS (iOS) can group accounts. Don't put community-layer TOTPs in the same group as your work email on the same handset. Twilio retired Authy's desktop client in 2024; new adopters should pick one of the alternatives above.
-
-### Alt-account hygiene
-
-"Alt accounts" are the standard pattern in the community layer, and they leak in surprisingly consistent ways:
-
-- **Same phone number**: Instagram, X / Twitter, and TikTok do "people you may know" recommendations using contact graphs and registration phone numbers. A phone number that touched both accounts can correlate them.
-- **Reused profile photo**: A single selfie or pet photo, reverse-imaged, links two accounts in one search.
-- **Username pattern**: `tomtom_official` and `tomtom_pride` are one word apart. Searching for the prefix is enough.
-- **Activity time overlap**: Two accounts active in the same hours, plotted, look like one person.
-- **Mutual follows or interactions**: An alt that likes or comments on the main account collapses the separation.
-
-In practice:
-
-- Register alts using a virtual phone number (services like MySudo or TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale recently — verify before relying on one. JusTalk, once a common recommendation, was found in 2022 to have fake E2EE: millions of plaintext messages and virtual-number mappings were exposed online[^13]; avoid.
-- Use a non-face image for the alt: a pseudonym graphic, an abstract image, or a back / silhouette / pet photo
-- Make the username structurally different — don't use shared initials with a suffix
-- Stagger posting times deliberately (main during the day, alt in the evening)
-- Don't follow each other; don't comment on each other's posts
+Two points deserve extra care in this context. Dating-app accounts belong to the exploration layer and should be separate from the community layer as well, covered in the next section. And a community-layer profile photo should never be an image that appears anywhere family or colleagues can see, because a reverse-image hit costs more here than in most situations.
 
 ### This applies after coming out too
 
@@ -73,6 +52,16 @@ People who have already disclosed to family or close friends still have reasons 
 - **Per-platform pace**: LinkedIn neutral, Instagram private close-friends, Threads public advocacy — each platform with its own disclosure pace
 
 Coming out is a series of decisions across people and contexts, not a single switch. Account separation is the infrastructure that supports those decisions over time.
+
+## When you're already being targeted
+
+If you find a stranger adding your alt with your main account's full name in the message, or you receive threats containing your home address, or you've been doxxed — you're past prevention:
+
+- Document the threats (screenshots, original message text, timestamps)
+- Don't delete the harassment — it's your evidence later
+- Move social media to friends-only, but don't mass-delete posts (often read as guilt)
+- Local helplines are listed in the regional context section below
+- For severe cases, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual) for emergency digital-safety support
 
 ## Dating apps and location metadata
 
@@ -115,45 +104,6 @@ Across apps:
 ### Move conversations off in-app chat
 
 In-app messaging is rarely end-to-end encrypted, and is accessible to the platform side. After basic trust is established, move continuing conversations to [Signal](https://signal.org/){target="_blank"}, [SimpleX](https://simplex.chat/){target="_blank"}, or [Briar](https://briarproject.org/){target="_blank"}. SimpleX is particularly suitable when neither party wants to exchange phone numbers; QR-based onboarding works without identifiers.
-
-## Cross-platform identity correlation
-
-The most-overlooked direction in deanonymization is when *external observers* connect two accounts the user thought were separate. Common paths:
-
-### Reverse-image search of profile photos
-
-Google Images, Yandex, TinEye, and PimEyes can reverse a single image, including a face, against the indexed web. PimEyes states it searches the open web only and excludes social media and video platforms, but combined with reverse-image search and username matching it can still surface linked accounts. Practically:
-
-- Public-account and alt-account profile photos must never overlap
-- Test by saving the photo and running it through [Google Images](https://images.google.com/){target="_blank"} reverse search before posting
-- Use drawn / abstract / no-face images on the alt
-- When taking new profile photos, avoid identifiable backgrounds (your front door, a regular café, your office signage)
-
-### Reused usernames
-
-`@tomtom_taipei` reused across Instagram, X, Bluesky, and Reddit is a single search away from a complete identity graph. Each platform should have a structurally distinct username; even shared digit suffixes correlate. [Whatsmyname](https://whatsmyname.app/){target="_blank"} searches a list of platforms by username and is useful for self-auditing.
-
-### Posting-time overlap
-
-Two accounts active in tightly overlapping windows are statistically suspicious. Researchers, journalists, and marketing analysts use this technique routinely. Stagger posting times where the platform allows, and don't post from both accounts within the same hour. Travel timezone shifts that move in lockstep are another fingerprint.
-
-### Stylometry — writing style and emoji
-
-Vocabulary, punctuation habits, and emoji use are individually distinctive. Entry-level stylometry tools can recognize the same author across pseudonyms. The goal is to be aware of these patterns rather than to perform a different identity:
-
-- Use shorter sentences with fewer specifics in the alt
-- Deliberately use a different emoji set on the alt (😂 vs. 🤣, etc.)
-- When restating views from the main account, paraphrase rather than copy-paste
-
-### When you're already being targeted
-
-If you find a stranger adding your alt with your main account's full name in the message, or you receive threats containing your home address, or you've been doxxed — you're past prevention:
-
-- Document the threats (screenshots, original message text, timestamps)
-- Don't delete the harassment — it's your evidence later
-- Move social media to friends-only, but don't mass-delete posts (often read as guilt)
-- Local helplines are listed in the regional context section below
-- For severe cases, contact [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual) for emergency digital-safety support
 
 ## Family-controlled traces on personal devices
 
@@ -302,7 +252,7 @@ Most directly relevant to digital identity management:
 
 - **Post-2020 environment**: Following the National Security Law, civic space has contracted. Some LGBTQ+ advocacy organizations have adjusted operating models or paused activity.
 - **Electronic identity expansion**: iAMSmart and related government e-identity services have expanded service integration; cross-service identity correlation is increasing.
-- **Legal framework**: The 2023 Court of Final Appeal ruling gave the government two years to establish an alternative legal framework for same-sex partnerships[^6]. That deadline passed in September 2025, when the Legislative Council voted down the government's own Registration of Same-Sex Partnerships Bill 71 votes to nil, the first government bill defeated since the 2021 electoral overhaul[^14]. Hong Kong has no employment anti-discrimination law covering sexual orientation. The 2018 QT case established that foreign-spouse visas may not discriminate against same-sex partners.
+- **Legal framework**: The 2023 Court of Final Appeal ruling gave the government two years to establish an alternative legal framework for same-sex partnerships[^6]. That deadline passed in September 2025, when the Legislative Council voted down the government's own Registration of Same-Sex Partnerships Bill 71 votes to nil, the first government bill defeated since the 2021 electoral overhaul[^13]. Hong Kong has no employment anti-discrimination law covering sexual orientation. The 2018 QT case established that foreign-spouse visas may not discriminate against same-sex partners.
 - **No dedicated anti-stalking law**: Hong Kong has never enacted an anti-stalking offense; a 2000 Law Reform Commission proposal was shelved. Someone stalked or doxxed (personal data published without consent and with intent to cause harm) has to rely on civil tort, sexual-harassment law, or a 2021 doxxing offense rather than a purpose-built remedy, a narrower backstop than Taiwan's Stalking and Harassment Prevention Act provides.
 - **Cross-strait device-search environment**: Travel between Hong Kong, Macau, mainland China, and Taiwan involves multiple customs checkpoints with different search standards. A device audit before departure is sensible.
 - **Help channels**: GENDR (女同學社), Rainbow Action (彩虹行動), and the BGCA "Sexuality Without Limits" project are still operating, alongside Tung Wah Group of Hospitals' 24-hour "Rainbow Line" (同・一線) support line for sexual and gender minorities at 2217 5959, and [Rainbow of Hong Kong](https://www.rainbowhk.org/){target="_blank"}; contact channels and program rhythms shift, check current status.
@@ -350,6 +300,7 @@ Common threads when moving across the region:
 
 ## Where to go from here
 
+- [Maintaining multiple online identities](../basics/multiple-identities.md) — the full account-layering setup, correlation paths, and long-term maintenance
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame this guide builds on
 - [Regional Observatory](../regional/index.md) — the empirical regional work
 - [Privacy Guides — messaging comparison](https://www.privacyguides.org/en/real-time-communication/){target="_blank"} — Signal, SimpleX, Briar, Matrix at a glance
@@ -368,5 +319,4 @@ Common threads when moving across the region:
 [^10]: [Taiwan Tongzhi Hotline Association](https://hotline.org.tw/){target="_blank"} — emotional support, coming-out counseling, family help.
 [^11]: [Marriage Equality Coalition Taiwan](https://equallove.tw/){target="_blank"} — policy advocacy and rights work.
 [^12]: [Taiwan LGBT Family Rights Advocacy](https://www.lgbtfamily.org.tw/){target="_blank"} — counseling on LGBT families and same-sex marriage.
-[^13]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the millions of plaintext messages and virtual-number mappings exposed online.
-[^14]: [Registration of Same-sex Partnerships Bill](https://en.wikipedia.org/wiki/Registration_of_Same-sex_Partnerships_Bill){target="_blank"} — Wikipedia, on the Legislative Council's rejection of the bill in September 2025.
+[^13]: [Registration of Same-sex Partnerships Bill](https://en.wikipedia.org/wiki/Registration_of_Same-sex_Partnerships_Bill){target="_blank"} — Wikipedia, on the Legislative Council's rejection of the bill in September 2025.

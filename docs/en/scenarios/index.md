@@ -16,7 +16,7 @@ Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the 
 
 ## :material-check-circle-outline: Available now
 
-- [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account separation, dating-app risk, cross-platform correlation, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora.
+- [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account layering paced to disclosure, dating-app risk, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora. The general layering setup is in [maintaining multiple online identities](../basics/multiple-identities.md).
 - [Domestic violence and tech-enabled abuse](./domestic-violence.md) — how abusers use shared accounts, location tracking, and stalkerware, how to check and respond without escalating, and why leaving is the highest-risk moment; written for survivors and the people helping them, with regional helplines.
 - [Journalists and source protection](./journalist.md) — the source-protection lifecycle and why communication metadata can burn a source even when content is encrypted; concise, routing depth to Freedom of the Press Foundation and EFF, with the regional angle of sources inside less open jurisdictions.
 - [Activists and protest digital safety](./activist.md) — a brief regional companion to EFF's protest guide: real-name SIM, border device searches, network-level observation, and coordination metadata.

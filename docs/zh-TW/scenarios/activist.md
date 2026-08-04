@@ -313,6 +313,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 
 - [威脅模型如何建立](../basics/threat-model.md)：每場行動前先盤點對手與資產
 - [Metadata 是什麼](../basics/metadata.md)：理解照片、文件背後的元資料
+- [怎麼維持多個網路身分](../basics/multiple-identities.md)：動員角色跟本業帳號的分層設定，以及行動結束後怎麼收尾
 - [記者保護消息來源](./journalist.md)：跟記者對接時雙方都要做的整理
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同場景的取捨
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：會場、飯店公共網路上的連線層防護與服務選擇
