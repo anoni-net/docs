@@ -14,7 +14,7 @@ icon: material/shield-airplane-outline
     我们刻意**不**做成一个「输入目的地就回答」的服务。因为对这群使用者来说，「我要去 X 国、我是记者、日期是 Y」这组查询本身就是敏感情资，放上任何服务器都会留下纪录（log）、可能被调阅或泄漏。改成你复制文字、回去问**自己的** AI，**你的目的地与身分就不会经过我们**。代价是答案的质量取决于你用哪个 AI，所以请务必对照本页底部的「一手来源」自行核对。
 
 !!! tip "贴进云端 AI 仍会泄漏给该供应商"
-    就算不经过我们，把 query 贴进云端 AI（ChatGPT、Claude、Gemini 等）还是会让那家供应商看到。**目的地敏感**时，建议用自架、本地模型，或至少用下方「低资料版」开场 prompt，只填到国家层级、不要写自己的名字、组织、精确日期。
+    就算不经过我们，把 query 贴进云端 AI（ChatGPT、Claude、Gemini 等）还是会让那家供应商看到。**目的地敏感**时，建议用自架、本地模型，或至少用下方「低资料版」开场 prompt，只填到国家层级、不要写自己的名字、组织、精确日期。各家服务对输入内容的处理与保留差异，见 [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)。
 
 ## 怎么用
 
@@ -193,6 +193,7 @@ CIVICUS Monitor 评级。是否有 foreign-agent／NGO 注册法、诽谤或冒�
 
 - [出差与研讨会的数字准备（东亚与东南亚）](./asia-travel.md)：十四地已预填好审查、VPN、SIM 与入境查机，只去东亚东南亚、或赶时间不想自行架设 prompt 时，直接查那篇更快。
 - [威胁模型](../basics/threat-model.md)：先想清楚对手是谁、能取得什么。
+- [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：这页的两个提醒框在那边有完整版，包含消费版与企业版的分野、数据保留期限与该问供应商的问题。
 - [什么是 OONI](../tools/what-is-ooni.md)、[什么是 Tor](../tools/what-is-tor.md)、[Snowflake](../tools/tor-snowflake.md)、[通讯软件比较](../tools/messaging-comparison.md)
 - [onionoo MCP：Tor 中继节点查询服务](../community/onionoo-mcp.md)：把上面【数字环境 2】那题交给 AI 自己查。接上这个网址，AI 助理就能用中文问出某地有几个 Tor 节点、带宽多少、落在哪些电信网络，数字来自 Tor Project 官方 Onionoo。
 - [这页背后的想法（blog）](../blog/posts/travel-ai-briefing.md)：为什么把该问的问题打包成 prompt，带回去问你自己信任的 AI。
