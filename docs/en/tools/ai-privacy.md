@@ -30,6 +30,32 @@ The practical consequence: set the training controls when you open the account, 
 
 **Your employer can see the business-tier logs.** A business tier solves the vendor-training problem, not internal visibility. Administrators can typically access usage records, which is necessary for compliance and is a separate exposure for you. Using the company AI account for personal matters is the same category of mistake as using the company laptop for them.
 
+## Services inside mainland China run on a different framework
+
+The consumer-versus-business split above describes services outside mainland China. Generative AI offered inside the mainland — DeepSeek, Doubao, Kimi, Tongyi and the rest — operates under separate rules, and the reasoning above does not transfer.
+
+The Interim Measures for the Management of Generative AI Services took effect on 15 August 2023, issued by the Cyberspace Administration with six other agencies[^cn-genai]. Three points bear on work use:
+
+- **Users are verified.** Providers must confirm user identity, so your prompts there are not pseudonymous.
+- **Inputs and outputs are retained.** The rules require keeping records of user input and generated content. That is categorically different from a vendor setting you can switch off: one is a product option, the other a legal obligation.
+- **Services with "public opinion attributes or social mobilization capacity" require a security assessment and algorithm filing**, with content moderation built in.
+
+So the question changes. Outside the mainland you ask whether input trains the model and how long it is kept. Inside, the first question is whether you are willing for this content to be tied to your verified identity and retained. A business tier and a DPA solve the vendor-training problem elsewhere; they do not address statutory retention and lawful access here. For sensitive material, local or self-hosted models are worth considerably more in this context than outside it.
+
+The same reasoning covers AI features embedded in domestic platforms: office suites, input methods, in-browser assistants.
+
+## What you never pasted, but sent anyway
+
+The sections above assume you copy and paste. The more common leak is the material you never consciously submitted:
+
+- **Browser AI extensions** generally need to read the current page, which includes internal systems, customer records, and admin panels you happen to have open.
+- **Editor and IDE assistants** send surrounding code, sometimes the whole repository, as context — keys, internal hostnames, and client names included.
+- **Meeting transcription and summary tools** capture the entire conversation once enabled, including small talk you didn't expect on the record and other participants who never agreed to be recorded.
+- **Predictive and rewriting features in keyboards** send what you type to a server.
+- **Assistants built into office software** take your documents, mail, and spreadsheets as default input.
+
+These are configuration problems rather than habit problems: check what an extension reads before installing, disable it on specific sites or repositories, and ask the room before turning on a transcriber. For organizations, this category deserves an inventory before anyone worries about staff pasting by hand.
+
 ## What should not go in
 
 - **Unpublished business information**: financials, deals, product specs, internal strategy
@@ -87,6 +113,7 @@ AI terms and settings change quickly. Verified 2026-08. The mechanisms and the q
 - [Threat modeling](../basics/threat-model.md) — decide the adversary before deciding the tier
 - [Journalists and source protection](../scenarios/journalist.md) — why source material is the clearest case of data you cannot consent to share
 
+[^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} — China Law Translate. In force 15 August 2023, issued by the CAC with six other agencies; covers identity verification, retention of input and output records, and security assessment plus algorithm filing for services with public-opinion attributes. Verified 2026-08.
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} — OpenAI, on the consumer/business distinction (ChatGPT Team, Enterprise, and the API excluded by default) and where the data controls sit. Verified 2026-08.
 [^anthropic]: [Anthropic Privacy Center](https://privacy.anthropic.com/){target="_blank"} — Anthropic, on commercial services not being used for training, consumer services being a user choice, and de-identified content persisting up to five years in training pipelines once opted in. Verified 2026-08.
 [^google]: [Gemini Apps Privacy Hub](https://support.google.com/gemini/answer/13594961){target="_blank"} — Google, on the scope of human review, disconnection from the account before review, and human-reviewed conversations being retained up to three years regardless of activity deletion. Verified 2026-08.

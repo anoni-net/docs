@@ -76,6 +76,19 @@ These are described to make the trade-offs legible, not as an operational guide.
 
 **Archiving outside the jurisdiction** before publishing, so a copy survives deletion. Lowest cost, most certain effect, and the subject of the next section.
 
+## Talking to people you know
+
+The "with ordinary people" half of the question mostly happens offline and one to one. It is a different situation from public posting, with a different risk structure.
+
+- **Exposure is far smaller, but not zero.** Their handset, their retelling to a third person, their mention of it in a group chat are all routes out. You control only your own end.
+- **Don't pull the other person into your risk.** Their job, family, and political exposure differ from yours. Some people feel burdened by what you tell them.
+- **Their willingness comes first.** One-way persuasion changes nobody's mind and spends the relationship. When someone signals they don't want the conversation, stop.
+- **In person beats online**, with attention to the venue and who else is present. Not at their workplace, and don't arrange the topic over a messaging app.
+- **Leave no record of who.** Names of people you have talked to belong on no list, including on your own device.
+- **One person at a time beats broadcasting.** Group forwarding puts everyone in the same risk pool and usually works less well.
+
+The reasoning matches source protection: see [journalists and source protection](./journalist.md) on consent and on keeping people apart.
+
 ## Work already being carried
 
 Archiving and research do not have to be re-attempted from scratch by each person at their own risk:

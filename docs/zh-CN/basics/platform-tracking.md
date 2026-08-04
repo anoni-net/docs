@@ -49,6 +49,18 @@ EFF 那份报告指出，平均一个网页会把数据分享给数十个第三�
 - **数据掮客**：专门买卖个人资料的公司，把来自不同来源的记录拼在一起再卖出
 - **实体通路**：会员卡、消费记录、信用卡交易数据，有些会与线上广告系统对接
 
+## 中国境内平台多出来的一层
+
+上面的机制对全球平台通用。微信、抖音、小红书、微博这类在中国境内营运的平台，有三件事不一样。
+
+**账号直接对应到法律身份。** 境内平台的账号绑手机号、手机号绑证件，这条链路存在多年，2025 年 7 月起再加上国家网络身份认证的网号与网证。广告档案在其他地方是一团假名数据，在这里是一个具名的人。
+
+**数据落在境内法域，而且可被依法调取。** 全球平台的最坏情况通常是数据被卖给数据掮客。境内平台的数据存放在境内，除了商业使用之外，还在依法配合调取的范围内。这是性质上的差别，不是程度上的。
+
+**内容本身同时被审查。** Citizen Lab 对微信的研究显示三件事。关键词过滤只对中国大陆手机号注册的账号启用，而且即使之后改绑国际号码仍然持续。图片有 OCR 与视觉相似度两套算法。被挡不会通知发送者，你会以为已经传出去了。更值得注意的是，非中国注册账号之间传输的内容也被分析，并用于训练审查系统[^wechat]。
+
+实际意义：关掉广告识别码、拒绝追踪这些做法，对境内平台的效果比对全球平台小得多，因为问题不在广告追踪那一层。要处理的话，见 [怎么维持多个网络身分](./multiple-identities.md) 的分层，以及 [在中国大陆的公开平台传播信息](../scenarios/mainland-speech.md) 的完整脉络。
+
 ## 精准广告怎么算出来的
 
 关键在于平台不需要知道你想买什么，只需要知道跟你相似的人买了什么。
@@ -145,6 +157,7 @@ EFF 那份报告指出，平均一个网页会把数据分享给数十个第三�
 [^eff]: [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} - Electronic Frontier Foundation，2019 年 12 月。第三方追踪技术的完整整理，包含追踪像素、浏览器指纹、移动端追踪与数据掮客生态。
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} - Apple Newsroom，2019 年 8 月。Apple 官方说明 grading 程序、抽样比例、暂停与后续改为选择加入的经过。
 [^panoptispy]: [Panoptispy: Characterizing Audio and Video Exfiltration from Android Applications](https://petsymposium.org/popets/2018/popets-2018-0030.php){target="_blank"} - Proceedings on Privacy Enhancing Technologies 2018，Pan、Ren、Lindorfer、Wilson、Choffnes（Northeastern University 与 UC Santa Barbara）。17,260 个 Android app 的自动化分析。
+[^wechat]: [One App, Two Systems](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"}、[How WeChat Filters Images for One Billion Users](https://citizenlab.ca/2018/08/how-wechat-filters-images-for-one-billion-users/){target="_blank"} 与 [We Chat, They Watch](https://citizenlab.ca/2020/05/we-chat-they-watch/){target="_blank"} - The Citizen Lab。
 [^cmg]: [Here's the Pitch Deck for 'Active Listening' Ad Targeting](https://www.404media.co/heres-the-pitch-deck-for-active-listening-ad-targeting/){target="_blank"} - 404 Media，2024 年 8 月取得的 Cox Media Group 推销简报。查证日 2026-08。
 [^apple-dot]: [关于 iPhone 状态栏中的橙色和绿色指示灯](https://support.apple.com/zh-cn/108331){target="_blank"} - Apple 支持。
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} - Apple 支持。关闭后 app 无法取得 IDFA。

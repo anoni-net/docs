@@ -148,6 +148,19 @@ Put these in a calendar and answer them every few months. It is far cheaper than
 - Has follower overlap between layers increased?
 - Does this layer still need to exist? If not, use the exit below.
 
+## When the layers are already mixed
+
+Most people arrive at this page with layers that have already touched: signed in on the same handset once, followed each other, registered with the same email. The unwelcome part first: existing overlap is largely irreversible. Platform-side records, other people's screenshots, and search-engine caches do not disappear because you tidy up now.
+
+What remains is triage:
+
+1. **Establish how far it goes.** Run the self-checks above and see which links between the layers are still visible.
+2. **Cut what is still live.** Unfollow, remove shared emails and phone numbers, and retire any browser profile that was used for both.
+3. **Decide whether the layer is salvageable.** If the overlap ran for a long time, or the adversary can obtain platform-side data, the honest answer is that this layer no longer works as a separate identity, and opening a new one is more reliable than patching the old.
+4. **Retire the old layer properly**, per the next section.
+
+That judgment call goes back to [how to build a threat model](./threat-model.md): a casual observer and an adversary who can compel platform records give completely different answers.
+
 ## Retiring an identity
 
 Deleting an account outright is usually the worst option. Disappearing is itself an event: anyone watching notes the date and compares it against changes elsewhere. Deletion also does nothing about platform-side records or the screenshots other people already hold.
