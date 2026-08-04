@@ -1,6 +1,6 @@
 ---
 title: 记者保护消息来源
-description: 从第一次接触、文件交换到报导刊出后的数位足迹处理。
+description: 从第一次接触、引用层级与知情同意、文件交换到多来源区隔与报导刊出后的数位足迹处理，含台湾、香港与中国大陆的脉络。
 icon: material/newspaper-variant-outline
 ---
 
@@ -8,7 +8,7 @@ icon: material/newspaper-variant-outline
 
 调查报导的风险，最重的一端往往落在消息来源，而不是记者。记者就算被盯上，背后通常还有编辑部、媒体律师、业界同行的支援。消息来源就不一定，可能是公司内部的中阶员工、政府机关的承办、被监控的社运参与者，他们暴露的代价远比记者高。
 
-这篇文章从一个常见流程出发：第一次接触的安全管道、确认对方身份、敏感文件交换、访谈记录保存、报导刊出后双方都需要做的数位整理。每一步都对应到具体的工具与威胁模型，并引用台湾与东南亚调查报导圈常见的实务做法。
+这篇文章从一个常见流程出发：第一次接触的安全管道、确认对方身份、谈定引用层级与知情同意、敏感文件交换、访谈记录保存、多个来源之间的区隔、报导刊出后双方都需要做的数位整理。另外处理两种常见但少被写到的情况：来源不熟悉数位工具，以及采访涉及中国大陆。每一步都对应到具体的工具与威胁模型，并引用台湾与东南亚调查报导圈常见的实务做法。
 
 要先理解为什么这些步骤存在，可以回头看 [威胁模型](../basics/threat-model.md) 与 [Metadata 为什么重要](../basics/metadata.md)。
 
@@ -145,7 +145,7 @@ icon: material/newspaper-variant-outline
 
 ### 文件与记录由记者处理
 
-- 对方给的照片、文件由你来清 metadata，不要教他做
+- 对方给的照片、文件由你来清 metadata，不要教他做。工具与做法见下方的 [去除 metadata](#去除-metadata)
 - 对方用手机拍的文件，原档留在他手机里也是风险，离开前提醒他删掉，必要时陪他一起删
 - 帮对方操作他的装置要谨慎。你碰过的地方会留下痕迹，之后装置若被检查，你的操作也在里面
 
@@ -210,6 +210,8 @@ icon: material/newspaper-variant-outline
 录完尽快上传到加密容器，再从原装置删除。报导刊出后评估是否销毁原档。
 
 打字记录：用 Cryptpad 或本地加密笔记，不要用 Google Docs、Notion 等云端服务（即使免费版加密，metadata 仍可能被调阅）。
+
+用 AI 转逐字稿或做摘要之前要先想清楚，那等于把来源的原话交给第三方服务，各家的保留与训练政策差很多，见 [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)。
 
 ### 对方信息的最小化
 
@@ -303,19 +305,19 @@ icon: material/newspaper-variant-outline
 - 部分台湾媒体日益重视记者与消息来源的数位安全（报导者长期有资讯安全相关报导），但是否设有专责的数位安全编制或外部顾问，各家不一
 - 跨境议题（中国、东南亚）通常会跟国际组织合作（OCCRP、Forbidden Stories），他们有自己的安全标准
 
-### 求助管道
+### 台湾的求助渠道
 
 - 报导者基金会数位安全资源：[https://www.twreporter.org/](https://www.twreporter.org/){target="_blank"}
-- Access Now Helpline（24/7 国际数位安全求助）：[https://www.accessnow.org/help/](https://www.accessnow.org/help/){target="_blank"}
-- Citizen Lab（装置鑑识与监控分析）：[https://citizenlab.ca/](https://citizenlab.ca/){target="_blank"}
 - 紧急情况见 [紧急求救](../help/index.md)
+
+国际组织不分地区都适用，列在下方的〈国际求助渠道〉。
 
 ## 香港的脉络
 
 中段的技术操作（SecureDrop、metadata 清除、独立录音机、代号对应表隔离）通用，但香港记者面对的对手层级与求助资源跟台湾不同。
 
 - **对手是「国家」级**：2024 年《维护国家安全条例》（SNSO）设有「窃取国家机密」、「境外干预」等罪，未经授权揭露被认定为国家机密的信息，消息来源本人可能直接触犯窃密罪，记者收受、发布也可能被视为共谋，风险远高于台湾通保法、揭弊者保护法的框架。香港记者协会（HKJA）虽仍运作，但持续遭受组织性骚扰，无法简单当成「找 NGO 就安全」的安全网。
-- **求助资源以国际组织为主**：[RSF 无国界记者](https://rsf.org/en){target="_blank"}、[CPJ 保护记者委员会](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多语），装置鑑识找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。
+- **求助资源以国际组织为主**：本地 NGO 不能当成安全网，改用下方〈国际求助渠道〉列的组织。
 
 查证来源（2026-07）：[Article 23: Hong Kong's 2024 security law](https://hongkongfp.com/article23-security-law/){target="_blank"} - Hong Kong Free Press。
 
@@ -358,19 +360,30 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 - 对方主动联系时，先确认是不是本人在操作
 - 评估对方是否需要暂时离开，判断交给有在地经验的组织，不要自己下结论
 
-### 求助管道
+### 求助渠道
 
-境内事件的协助资源以国际组织为主。[RSF 无国界记者](https://rsf.org/en){target="_blank"}、[CPJ 保护记者委员会](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多语），装置鑑识找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。跨境调查通常跟 OCCRP、Forbidden Stories 这类国际组织合作，他们有自己的安全标准与在地网络。
+中国境内事件的协助资源全部落在境外，见下方〈国际求助渠道〉。跨境调查通常跟 OCCRP、Forbidden Stories 这类国际组织合作，他们有自己的安全标准与在地网络。
 
 境内受访者或协作者本身也在公开平台发声时，另见 [在中国大陆的公开平台传播信息](./mainland-speech.md)。
 
 查证来源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。
+
+## 国际求助渠道
+
+不分地区都适用，事前存好，出事的当下没有时间找：
+
+- **[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}**：24/7 多语的数位安全求助
+- **[RSF 无国界记者](https://rsf.org/en){target="_blank"}** 与 **[CPJ 保护记者委员会](https://cpj.org/){target="_blank"}**：记者受到威胁、拘留或法律追诉时
+- **[Citizen Lab](https://citizenlab.ca/){target="_blank"}**：设备鉴识，怀疑被植入监控软件时
+
+台湾本地的求助渠道见上方的台湾脉络一节。
 
 ## 接下来
 
 - [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能取得什么
 - [Metadata 为什么重要](../basics/metadata.md)：理解文件隐含的元数据风险
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：采访联络用的身分要跟署名发稿的身分切开，这页是设定与长期维持的做法
+- [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：逐字稿、翻译、摘要都可能把来源的原话送给第三方，贴进去之前要先判断
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [出差与研讨会的数位准备](./asia-travel.md)：前往中国大陆或东南亚采访前的逐地审查、SIM 实名与入境查机现况
 - [社群自架服务](../community/tools.md)：anoni.net 提供给公益用途的协作工具入口

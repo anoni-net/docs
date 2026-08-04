@@ -22,7 +22,7 @@ icon: material/compass-outline
 
 - [:material-account-group-outline: 场景](../scenarios/index.md)
 
-    特定角色或情境的应用：记者、社运参与者、家暴幸存者、LGBTQ+ 与性少数、选举观察员、匿名捐款。
+    特定角色或情境的应用：记者、社运参与者、家暴幸存者、LGBTQ+ 与性少数、选举观察员、匿名捐款、出差与跨境、在中国大陆的公开平台发声。
 
 - [:material-lock-outline: 进阶](../advanced/index.md)
 

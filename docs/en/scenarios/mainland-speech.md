@@ -8,7 +8,7 @@ icon: material/broadcast
 
 !!! danger "Assess the risk of reading this page"
 
-    The environment described here applies to reading this page. Reaching this site from inside mainland China requires circumvention, and the access itself can leave a record. If your situation is sensitive, read on a device outside the jurisdiction, use a browsing mode that leaves no local trace, or save the content offline and read it disconnected.
+    The environment described here applies to reading this page. Reaching this site from inside mainland China requires circumvention, and the access itself can leave a record. If your situation is sensitive, read on a device outside the jurisdiction, or use a browsing mode that leaves no local trace. If you save it offline, remember the file itself is a record: clear it along with your browsing history afterwards, and keep it out of cloud sync and your photo library.
 
 This page does not argue about whether to post, and does not evaluate anyone's choice. Civil-society work pushes against existing boundaries by definition, and whether a specific action is worth it belongs to the person taking it. What this page does is lay out the cost: what the environment looks like now, where the risk lands, what the established practices actually buy and give up, and which work is already being carried by others.
 
@@ -39,6 +39,14 @@ The last point deserves a pause: international users who assume they are outside
 
 The target set is widening. Campaigns from 2025 onward have covered "spreading pessimism" and economic rumors alongside the established political categories, reaching trending topics, comment sections, and short video. Circumvention tool availability has declined over the same period. Current blocking conditions are in the mainland China section of [cross-border travel and device searches](./asia-travel.md).
 
+## Where the risk lands
+
+- **Account level.** Suspension, muting, throttling, plus knock-on effects to other accounts tied to the same verified identity.
+- **Traceability.** Deleted content is not gone. Platform-side records, your own device, cloud backups, and other people's screenshots are all copies. Deleting later limits further spread; it does not recall what already happened.
+- **Personal.** From a summons and a written undertaking through administrative measures to criminal process. Intensity varies sharply with topic, scale, and timing, and tolerance drops during sensitive periods.
+- **Collective.** Group administrators carry responsibility for group content. Family members and employers are contacted as a pressure route. Other members of the same group can be affected. Each person who forwards carries their own act.
+- **Onward spread.** Once others forward, screenshot, or remix your content, scale leaves your control while attribution can still return to the origin. This is routinely underweighted when deciding whether to post at all.
+
 ## Reach and safety pull against each other
 
 Most people want both "it spreads" and "nothing happens to me." In this environment those goals conflict at four specific points:
@@ -51,14 +59,6 @@ Most people want both "it spreads" and "nothing happens to me." In this environm
 | To reach more people | The larger the spread, the closer it comes to the thresholds that trigger enforcement attention |
 
 There is no configuration that satisfies all four. The workable move is deciding, per action, which side you are on: preserving a record (prioritize getting the material archived outside the jurisdiction, keep the publisher's profile minimal), persuading specific people (go private and small, give up scale), or maximizing spread (accept higher exposure for the publisher, or route the material to a channel already carrying that risk).
-
-## Where the risk lands
-
-- **Account level.** Suspension, muting, throttling, plus knock-on effects to other accounts tied to the same verified identity.
-- **Traceability.** Deleted content is not gone. Platform-side records, your own device, cloud backups, and other people's screenshots are all copies. Deleting later limits further spread; it does not recall what already happened.
-- **Personal.** From a summons and a written undertaking through administrative measures to criminal process. Intensity varies sharply with topic, scale, and timing, and tolerance drops during sensitive periods.
-- **Collective.** Group administrators carry responsibility for group content. Family members and employers are contacted as a pressure route. Other members of the same group can be affected. Each person who forwards carries their own act.
-- **Onward spread.** Once others forward, screenshot, or remix your content, scale leaves your control while attribution can still return to the origin. This is routinely underweighted when deciding whether to post at all.
 
 ## Established practices and what each costs
 
@@ -87,13 +87,26 @@ Archiving and research do not have to be re-attempted from scratch by each perso
 
 Submitting material to these projects usually preserves it more reliably than reposting it into domestic platforms, at far lower exposure.
 
+## What this page can give you
+
+The material above condenses into four things you can act on now:
+
+1. **Archive outside the jurisdiction before you publish**, so a copy survives deletion
+2. **Decide which side you're on this time** — preserving a record, persuading specific people, or maximizing spread — because the costs differ
+3. **Route material to projects already carrying the risk** rather than reposting it yourself
+4. **Save the help contacts in advance**, because there is no time to look them up when it matters
+
+## Getting help
+
+- **[Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}** — 24/7, multilingual; the first contact for a compromised account, a seized device, or a targeted attack
+- **[Citizen Lab](https://citizenlab.ca/){target="_blank"}** — device forensics, if you suspect surveillance software
+- If you have already been summoned, told to delete a post, or asked to sign an undertaking, the records are evidence. Don't clear them first; see [activists and protest digital safety](./activist.md) on preserving material when legal process is plausible
+
 ## What this page does not do
 
 - **No circumvention playbook.** Variation techniques change quickly and date badly, and a specific list leads people to overestimate their safety while they, not we, carry the outcome.
 - **No judgment of anyone's choice.** Whether and how to publish belongs to the person in the situation.
 - **No safety guarantee.** This describes known mechanisms and observed responses in an environment that keeps changing.
-
-For urgent individual support, the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages, and [Citizen Lab](https://citizenlab.ca/){target="_blank"} handles device forensics.
 
 ## Where to go from here
 

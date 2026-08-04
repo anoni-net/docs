@@ -49,13 +49,9 @@ And apply one test: if this text appeared in public search results tomorrow, wha
 
 ## Local models
 
-Running a model on your own machine keeps content on the device, which suits genuinely sensitive work: client data, unpublished material, source-related content, or an environment where sending data abroad is itself the risk. The costs are real hardware requirements, quality below the contemporary large commercial models, and setup you maintain yourself.
+Running a model on your own machine keeps content on the device, which suits genuinely sensitive work: client data, unpublished material, source-related content, or an environment where sending data abroad is itself the risk. The costs are real hardware requirements (memory is the practical ceiling), quality below the contemporary large commercial models, and setup you maintain yourself.
 
 Local is not automatically safe. The conversation log still sits on your machine and is exposed if the device is seized or compromised, so full-disk encryption and device hygiene still apply. Self-hosted or organization-hosted deployments sit between the two options, moving the trust boundary from an external vendor to your own operations team.
-
-## Confabulation is also a safety problem
-
-Beyond leakage, wrong answers cause harm. Language models state incorrect things confidently, and phone numbers, statute numbers, tariffs, and emergency contacts are where this bites hardest. Treat output as a list of things to verify, and check each against a primary source. [Pre-departure digital safety](../scenarios/travel-ai-briefing.md) works through this in detail with copy-paste prompts.
 
 ## The regional angle
 
@@ -75,6 +71,10 @@ Beyond leakage, wrong answers cause harm. Language models state incorrect things
 | Is a business tier with a DPA available? | Commercial terms |
 
 Official entry points for the three largest: [OpenAI's data usage policy](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"}, [Anthropic's Privacy Center](https://privacy.anthropic.com/){target="_blank"}, and the [Gemini Apps Privacy Hub](https://support.google.com/gemini/answer/13594961){target="_blank"}. For any other service, find the equivalent page; the absence of a clear public one is itself a signal.
+
+## Confabulation is also a safety problem
+
+Beyond leakage, wrong answers cause harm. Language models state incorrect things confidently, and phone numbers, statute numbers, tariffs, and emergency contacts are where this bites hardest. Treat output as a list of things to verify, and check each against a primary source. [Pre-departure digital safety](../scenarios/travel-ai-briefing.md) works through this in detail with copy-paste prompts.
 
 ## This page will age
 

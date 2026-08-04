@@ -25,7 +25,7 @@ The adversaries differ. The work is largely the same, and the setup below applie
 
 ## Decide how many layers first
 
-Most failures start with over-segmentation. Every additional layer adds rules to remember daily, and a scheme you cannot sustain for three months gets quietly abandoned — usually by using the wrong account on a tired evening. Go back to the three questions in [how to build a threat model](./threat-model.md) before choosing.
+Most failures start with over-segmentation. Every additional layer adds rules to remember daily, and a scheme you cannot sustain for three months gets quietly abandoned — usually by using the wrong account on a tired evening. Go back to the three questions in [how to build a threat model](./threat-model.md) (what are you protecting, from whom, at what cost) before choosing.
 
 ### Layer count by situation
 
@@ -64,7 +64,7 @@ When the separation needs to reach the operating system, [Tails vs Whonix vs Qub
 During registration and early use, the correlations that matter are the ones the platform can see and you cannot:
 
 - **A shared phone number or email**: Instagram, X, and TikTok build "people you may know" from contact graphs and registration identifiers. A number that touched both accounts can join them.
-- **Contact upload**: the "find friends" prompt on first launch uploads your entire address book, which drops the new identity straight into the old social graph.
+- **Contact upload**: the "find friends" prompt on first launch uploads your entire address book, which drops the new identity straight into the old social graph. How platforms use that for reverse matching is in [how platforms collect your data](./platform-tracking.md).
 - **Mutual follows and interactions**: two accounts liking or replying to each other collapse the separation on the platform's side in one query.
 
 In practice:
@@ -122,9 +122,7 @@ One credit card, one bank account, or one wallet binds two layers directly, and 
 
 ### Schedule and timezone
 
-Watch any account long enough and its active hours reveal a timezone, a working day, and a weekend pattern. Two layers that go quiet at the same midnight and wake at the same 8am share an identifying signature, and travelling shifts both at once.
-
-You cannot fully suppress this, so reduce the observable sample instead: post less often on secondary layers, use scheduling to break up publication times, and let secondary layers go quiet while travelling.
+The detection mechanism is covered under correlation above; what long-term maintenance has to handle is that you cannot suppress it. Reduce the observable sample instead: post less often on secondary layers, delay posts by hand rather than authorizing a third-party scheduler (which adds another service holding credentials for that layer), and let secondary layers go quiet while travelling.
 
 ### Device and browser fingerprints
 
@@ -160,7 +158,7 @@ A steadier sequence:
 2. **Remove the material that supports reverse lookup**: profile photo, locations and occupations in the bio, EXIF-bearing photos, links pointing at other layers
 3. **Unbind**: move the address to an email used only by this identity and never again, then remove the phone number and third-party login grants
 4. **Check for dependencies**: is any other service using this address for account recovery?
-5. **Keep the shell or delete it, as the risk warrants**: a low-risk layer costs nothing left standing, and an account still wired into recovery flows should certainly not be deleted
+5. **Keep the shell or delete it, as the risk warrants**: a dormant account still costs you a password and a 2FA entry to maintain, and the platform keeps associating it. An account still wired into recovery flows should certainly not be deleted
 
 One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
 

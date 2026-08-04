@@ -89,7 +89,7 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 
 **Separate the handset from the number.** "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
 
-**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the effective move is keeping the identity mapping outside the country (roaming or a data-only eSIM), not buying locally.
+**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the move is the one already covered in the SIM section above: keep the identity mapping outside the country with roaming or a data-only eSIM. Buying locally does not buy anonymity.
 
 **What changes when you take it home.**
 

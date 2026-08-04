@@ -41,7 +41,7 @@ icon: material/toolbox-outline
 
 ## 日常隱私基本功
 
-想從通訊、協作、帳號、金流先補齊基礎的人，從這群開始。五篇主題彼此獨立，不必照順序。
+想從通訊、協作、帳號、金流、AI 使用先補齊基礎的人，從這群開始。各篇主題彼此獨立，不必照順序。
 
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
 - [什麼是 CryptPad](./what-is-cryptpad.md)：伺服器讀不到內容的線上協作辦公套件，文件在瀏覽器端就完成加密，社群自架站台有完整正體中文介面。

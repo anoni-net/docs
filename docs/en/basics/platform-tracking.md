@@ -8,7 +8,7 @@ icon: material/radar
 
 You mention something to a friend, and the ad shows up the next day. The experience is common enough that "my phone is listening" has become the default explanation.
 
-This page does two things. It points to the canonical account of how third-party tracking actually works, and it addresses the microphone question directly, because that one is asked constantly and answered badly.
+This page does two things. It points to the canonical account of how third-party tracking actually works, and it addresses the microphone question directly, because that one is asked constantly and answered badly. Metadata your own communications and files carry is a separate topic, covered in [metadata](./metadata.md); this page is about what platforms actively collect.
 
 !!! info "We point outward on the mechanics"
 
