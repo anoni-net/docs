@@ -192,6 +192,7 @@ Google 图片搜寻、Yandex、TinEye 都能用一张照片找出网络上其他
 - [匿名、隐私、假名、机密性的差别](./anonymity-vs-privacy.md)：先把匿名与假名的界线画清楚
 - [威胁模型如何建立](./threat-model.md)：决定要几层之前，先回答保护什么、防谁、能付多少成本
 - [Metadata 是什么，为什么重要](./metadata.md)：时间、位置、设备这些外围资讯怎么把两层接起来
+- [社群平台怎么收集你的数据](./platform-tracking.md)：平台侧用哪些讯号把两个账号放进同一个档案
 - [为什么匿名支付重要](./payments-anonymity.md)：金流是最难切干净的一条线
 - [LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)：出柜节奏下的分层实例，含交友 app 与家人共用设备的处理
 
