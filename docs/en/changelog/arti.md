@@ -31,6 +31,15 @@ Legend: ✅ Done　🟡 In development　⬜ Not implemented
 
 On the client side, Arti's capabilities are now largely on par with c-tor: it works as a SOCKS proxy, connects to and hosts onion services, and runs over bridges and pluggable transports. The project's current focus is the relay side. Relay and directory authority support are still under development, so you cannot yet run a Tor relay with Arti, which still requires c-tor. Arti replaces c-tor's control port with the RPC interface, a different design approach.
 
+## Arti 2.5.1
+
+> 2026-08-03 · [Official CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- Fixed an important performance bug: `XON` messages were interpreting bytes-per-second as bits-per-second, causing Arti to send 8x less data than allowed. This is now corrected.
+- Onion services can now be configured to connect to `AF_UNIX` addresses.
+- Clients and onion services can negotiate congestion control and Counter Galois Onion (CGO) encryption with each other when the experimental `hsc-negotiate-extensions` and `hss-negotiate-extensions` features are enabled.
+- Continued progress toward "Arti as a Tor relay," adding infrastructure for validating and handling incoming relay messages.
+
 ## Arti 2.5.0
 
 > 2026-06-30 · [Upstream announcement](https://blog.torproject.org/arti_2_5_0_released/){target="_blank"}
