@@ -77,7 +77,7 @@ icon: material/code-json
 
     `blocking` 有值只代表該筆測量觀測到與對照組不一致，判斷是否真的存在網路干預需要更多佐證。以上表那筆為例，Probe 對 `ntc.party` 的 A 與 AAAA 查詢都回報 `dns_nxdomain_error`（網域不存在），但撰稿時從多個公開 DNS 解析器查詢，該網域可解析到 IPv6 位址。單筆測量無法區分網路干預、解析器當下的暫時狀態，以及網域本身的設定變動。
 
-    要下封鎖結論，需要跨時間、跨 ASN、跨解析器的多筆測量交叉比對。誤判的成因與辨識方式可參考 [OONI 談測量結果失準](../blog/posts/2026-ooni-faulty-measurements.md)。
+    要下封鎖結論，需要跨時間、跨 ASN、跨解析器的多筆測量交叉比對。判定機制的完整拆解與常見誤判來源見 [OONI 怎麼判定一個網站被封鎖](./ooni-blocking-determination.md)，資料集層級的品質控制則可參考 [OONI 談測量結果失準](../blog/posts/2026-ooni-faulty-measurements.md)。
 
 ## 證據：支撐結論的原始紀錄
 
@@ -146,6 +146,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
 <div class="grid cards" markdown>
 
+- [:material-shield-search: OONI 怎麼判定一個網站被封鎖](./ooni-blocking-determination.md)
 - [:material-access-point-network: 什麼是 OONI](../tools/what-is-ooni.md)
 - [:material-database-search: ASN 觀測資料擷取與分析](./asn-coverage-howto.md)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
