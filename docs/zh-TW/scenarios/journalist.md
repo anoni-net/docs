@@ -362,6 +362,8 @@ fixer、翻譯、司機、幫忙介紹受訪者的朋友，法律風險不比受
 
 境內事件的協助資源以國際組織為主。[RSF 無國界記者](https://rsf.org/en){target="_blank"}、[CPJ 保護記者委員會](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多語），裝置鑑識找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。跨境調查通常跟 OCCRP、Forbidden Stories 這類國際組織合作，他們有自己的安全標準與在地網絡。
 
+境內受訪者或協作者本身也在公開平台發聲時，另見 [在中國大陸的公開平台傳播資訊](./mainland-speech.md)。
+
 查證來源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。防火長城的技術本體與對外輸出見 [網路政變報告](../reports/interseclab-network-coup/index.md)。
 
 ## 接下來
