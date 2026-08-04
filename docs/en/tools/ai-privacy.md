@@ -32,9 +32,9 @@ The practical consequence: set the training controls when you open the account, 
 
 ## Services inside mainland China run on a different framework
 
-The consumer-versus-business split above describes services outside mainland China. Generative AI offered inside the mainland — DeepSeek, Doubao, Kimi, Tongyi and the rest — operates under separate rules, and the reasoning above does not transfer.
+Generative AI offered inside mainland China — DeepSeek, Doubao, Kimi, Tongyi and the rest — falls under the Interim Measures for the Management of Generative AI Services, and the "which tier are you on" reasoning above does not transfer.
 
-The Interim Measures for the Management of Generative AI Services took effect on 15 August 2023, issued by the Cyberspace Administration with six other agencies[^cn-genai]. Three points bear on work use:
+The measures took effect on 15 August 2023, issued by the Cyberspace Administration with six other agencies[^cn-genai]. Three points bear on work use:
 
 - **Users are verified.** Providers must confirm user identity, so your prompts there are not pseudonymous.
 - **Inputs and outputs are retained.** The rules require keeping records of user input and generated content. That is categorically different from a vendor setting you can switch off: one is a product option, the other a legal obligation.
@@ -66,7 +66,7 @@ The sections above assume you copy and paste. The more common leak is the materi
 
 - **Browser AI extensions** generally need to read the current page, which includes internal systems, customer records, and admin panels you happen to have open.
 - **Editor and IDE assistants** send surrounding code, sometimes the whole repository, as context — keys, internal hostnames, and client names included.
-- **Meeting transcription and summary tools** capture the entire conversation once enabled, including small talk you didn't expect on the record and other participants who never agreed to be recorded.
+- **Meeting transcription and summary tools** capture the whole conversation once enabled. Other people in the room may not have agreed to that.
 - **Predictive and rewriting features in keyboards** send what you type to a server.
 - **Assistants built into office software** take your documents, mail, and spreadsheets as default input.
 

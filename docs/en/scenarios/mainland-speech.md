@@ -1,6 +1,6 @@
 ---
 title: Posting on mainland Chinese platforms
-description: The environment after real-name registration and the 2025 national Cyberspace ID, why reach and safety pull against each other, where the risk actually lands, and the archiving work others already carry.
+description: The environment after real-name registration and the 2025 national Cyberspace ID, where the risk lands, why reach and safety pull against each other, talking to people you know, and the archiving work others already carry.
 icon: material/broadcast
 ---
 
@@ -80,9 +80,9 @@ These are described to make the trade-offs legible, not as an operational guide.
 
 The "with ordinary people" half of the question mostly happens offline and one to one. It is a different situation from public posting, with a different risk structure.
 
-- **Exposure is far smaller, but not zero.** Their handset, their retelling to a third person, their mention of it in a group chat are all routes out. You control only your own end.
-- **Don't pull the other person into your risk.** Their job, family, and political exposure differ from yours. Some people feel burdened by what you tell them.
-- **Their willingness comes first.** One-way persuasion changes nobody's mind and spends the relationship. When someone signals they don't want the conversation, stop.
+Exposure is far smaller than public posting, though not zero: their handset, their retelling to a third person, their mention of it in a group chat are all routes out, and the only end you control is your own. Think about their position before you start, since their job, family, and political exposure differ from yours, and some people feel burdened by what they are told. One-way persuasion also changes nobody's mind, so when someone signals they don't want the conversation, stop.
+
+A few specifics:
 - **In person beats online**, provided you have chosen both the venue and who else is present. Their workplace is unsuitable, and both handsets, the car, and any smart speaker are present too. Don't use WeChat for the conversation or for arranging it, for the reasons in the mechanics section above.
 - **Leave no record of who.** Names of people you have talked to belong on no list, including on your own device.
 - **Agree the terms beforehand.** Ask them not to raise it in group chats, not to forward, and what to say if asked. This is the cheapest step in the whole scenario and the one with the most certain effect.
