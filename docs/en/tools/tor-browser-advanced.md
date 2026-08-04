@@ -56,7 +56,7 @@ Two controls reset your connection, and they are not interchangeable[^6]:
 - **New Identity** (hamburger menu) closes every tab and window, clears cookies and history, and builds new circuits for everything. It is a clean break, for when nothing you do next should be linkable to what you just did.
 - **New Tor Circuit for this Site** (the shield in the address bar) rebuilds only the current tab's path through the network, keeping your tabs and logins intact. Reach for it when an exit relay is failing to load a site or a CAPTCHA loop won't clear, and you want a different route.
 
-If you're switching between two separate personas, **New Identity** is the one you want. New Circuit alone leaves cookies and browser state in place, and that residue is enough to tie the personas together.
+If you're switching between two separate personas, **New Identity** is the one you want. New Circuit alone leaves cookies and browser state in place, and that residue is enough to tie the personas together. Everything outside the browser that also has to stay separated is in [maintaining multiple online identities](../basics/multiple-identities.md).
 
 ## The mistakes that actually deanonymize you
 

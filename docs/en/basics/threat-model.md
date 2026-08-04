@@ -32,4 +32,5 @@ For the vocabulary the five questions assume, see [anonymity, privacy, pseudonym
 
 - [Your Security Plan](https://ssd.eff.org/module/your-security-plan){target="_blank"} — the canonical walkthrough, in multiple languages
 - [Anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md) — the four properties a plan trades between
+- [Maintaining multiple online identities](./multiple-identities.md) — when the plan says some activity has to be kept off your named identity, this decides how many layers and how to sustain them
 - [Scenarios](../scenarios/index.md) — worked threat models for specific roles and situations

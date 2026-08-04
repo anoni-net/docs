@@ -128,6 +128,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — generate a destination-specific censorship, legal, SIM, and emergency-contact briefing for any country, with no query reaching us.
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.
 - [Threat modeling](../basics/threat-model.md) — the five questions to ask before deciding how far to minimize for a given trip.
+- [Maintaining multiple online identities](../basics/multiple-identities.md) — keeping business contacts, conference socializing, and personal accounts on separate layers, so one being flagged doesn't reach the others.
 - [Regional Observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [EFF — Things to Consider When Crossing the U.S. Border](https://ssd.eff.org/module/things-consider-when-crossing-us-border){target="_blank"} — the canonical US-border guide, and EFF's deeper [Digital Privacy at the U.S. Border](https://www.eff.org/wp/digital-privacy-us-border-2017){target="_blank"} whitepaper.
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if a device is seized or you're detained.
