@@ -52,10 +52,10 @@ Whatever the count, three rules hold:
 
 Each layer should at minimum have its own:
 
-- **Email**: don't register a secondary-layer account with a work address or a shared family inbox. ProtonMail or Tuta are reasonable privacy-respecting providers; a fresh, phone-unlinked Gmail also works.
+- **Email**: don't register a secondary-layer account with a work address or a shared family inbox. ProtonMail or Tuta are reasonable privacy-respecting providers. Mainstream free providers generally demand phone verification at signup, and accounts opened from the same device and IP may be linked by the provider regardless, so expect that if you use one for a secondary layer.
 - **Browser profile**: Firefox and Chrome both support multiple profiles, each with its own cookies, login state, and bookmarks. Open a layer's profile only for that layer, and don't run two profiles logged in simultaneously.
 - **Password-manager vault**: Bitwarden and 1Password support collections and separate vaults. Put each layer in its own, so a breach of the main account doesn't take the rest with it. For background, see [Privacy Guides — password managers](https://www.privacyguides.org/en/passwords/){target="_blank"}.
-- **Two-factor authentication**: Aegis (Android) and Raivo / 2FAS (iOS) can group accounts. Don't put a secondary layer's TOTP secrets in the same group as your work email on the same handset. Twilio retired Authy's desktop client in 2024; new adopters should pick one of the alternatives above.
+- **Two-factor authentication**: Aegis (Android) and 2FAS (cross-platform) can group accounts. Don't put a secondary layer's TOTP secrets in the same group as your work email on the same handset. Judge a TOTP app on three things: open source, exportable backups, and stable ownership. Twilio retired Authy's desktop client in 2024, and Raivo was acquired by Mobime in July 2023, after which the privacy policy took on advertising trackers and log collection[^raivo]; neither is a good pick for new adopters.
 
 When the separation needs to reach the operating system, [Tails vs Whonix vs Qubes](../tools/tails-vs-whonix-vs-qubes.md) covers Qubes' VM compartmentalization and Tails' amnesic model, and which threat each one fits.
 
@@ -69,7 +69,7 @@ During registration and early use, the correlations that matter are the ones the
 
 In practice:
 
-- Register with a virtual number (MySudo, TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale — verify before relying on one. JusTalk, once a common recommendation, was found in 2022 to have fake E2EE, with millions of plaintext messages and virtual-number-to-real-number mappings exposed online[^justalk]; avoid it.
+- Register with a virtual number (MySudo, TextNow) rather than your real SIM. WhatsApp has been blocking VoIP numbers at scale — verify before relying on one. Two consequences are routinely missed: paid virtual numbers are bought with a card, which reconnects the layers through the money (see the payments section below), and virtual numbers get recycled to another customer later, who can then reset your accounts by SMS. Never set one as a recovery channel. JusTalk, once a common recommendation, was found in 2022 to have fake E2EE, with millions of plaintext messages and virtual-number-to-real-number mappings exposed online[^justalk]; avoid it.
 - Use a non-face image: a pseudonym graphic, an abstract image, or a back / silhouette / pet photo
 - Make the username structurally different, not a variation on shared initials
 - Stagger posting times deliberately
@@ -112,7 +112,7 @@ Setup can be done from a checklist. Maintenance cannot. An identity that runs fo
 
 Two layers opened in the same browser profile share a cookie jar and login state. No clever analysis is required: one cookie, one session, one device fingerprint is enough to file both accounts together.
 
-- Never open two layers in one profile; on mobile, separate them into different browser apps
+- Never open two layers in one profile; on mobile, separate them into different browser apps. Social apps are harder to separate than browsers: Android offers a work profile or vendor app-cloning, iOS has no system-level multi-user, so in practice a second handset is often the only clean answer
 - "Sign in with Google" and "Sign in with Apple" are particularly dangerous, since one tap binds both layers to a single identity. Register secondary layers with email and a password.
 - When you need stronger isolation, [Tor Browser](../tools/tor-browser-advanced.md)'s New Identity clears current state and builds a fresh circuit, which suits disposable layers
 
@@ -146,7 +146,7 @@ Put these in a calendar and answer them every few months. It is far cheaper than
 
 - Has this layer acquired any email, phone number, or payment method shared with another layer in the last three months?
 - Run the current username through Whatsmyname. Any unexpected hits?
-- Reverse-image the profile photo. Does it reach another layer?
+- Reverse-image the profile photo. Does it reach another layer? Run both of these self-checks from a clean browser profile or Tor Browser, never from the browser where your named accounts are signed in
 - Has follower overlap between layers increased?
 - Does this layer still need to exist? If not, use the exit below.
 
@@ -180,4 +180,5 @@ One situation inverts this. If you are already being harassed or threatened, or 
 - [Why anonymous payment matters](./payments-anonymity.md) — the hardest link to cut
 - [Speaking online from Singapore and Malaysia](../scenarios/singapore-malaysia-speech.md) — where real-name identity layers make separation harder to sustain
 
+[^raivo]: [PSA: Raivo OTP for iOS was acquired by Mobime a few months ago](https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/){target="_blank"} — gHacks, December 2023. Privacy Guides community discussion at the time noted the new owner's policy covering Facebook and Google AdMob trackers and IP logging. Verified 2026-08.
 [^justalk]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} — TechCrunch, July 2022, on JusTalk's false E2EE claims and the millions of plaintext messages and virtual-number mappings exposed online.
