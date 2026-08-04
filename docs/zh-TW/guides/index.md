@@ -18,7 +18,7 @@ icon: material/compass-outline
 
 - [:material-toolbox-outline: 工具](../tools/index.md)
 
-    具體工具的介紹與比較：Tor、Tails、OONI、Tor Browser、訊息工具、密碼管理器、加密貨幣隱私光譜。
+    具體工具的介紹與比較：Tor、Tails、OONI、Tor Browser、訊息工具、密碼管理器、加密貨幣隱私光譜、AI 服務的資料風險。
 
 - [:material-account-group-outline: 場景](../scenarios/index.md)
 
