@@ -176,6 +176,7 @@ One situation inverts this. If you are already being harassed or threatened, or 
 - [Anonymity, privacy, pseudonymity, confidentiality](./anonymity-vs-privacy.md) — draw the line between anonymity and pseudonymity first
 - [How to build a threat model](./threat-model.md) — answer what, from whom, and at what cost before picking a layer count
 - [What metadata is and why it matters](./metadata.md) — the timing, location, and device traces that join two layers
+- [How platforms collect your data](./platform-tracking.md) — the signals platforms use to file two accounts together
 - [Why anonymous payment matters](./payments-anonymity.md) — the hardest link to cut
 - [Speaking online from Singapore and Malaysia](../scenarios/singapore-malaysia-speech.md) — where real-name identity layers make separation harder to sustain
 

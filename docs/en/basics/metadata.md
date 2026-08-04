@@ -37,6 +37,8 @@ You cannot eliminate metadata, but knowing it exists changes how you reason abou
 
 ## Where to go from here
 
+- [How platforms collect your data](./platform-tracking.md) — the platform-side counterpart: what companies actively collect, rather than what your communications leak
+
 - [Why Metadata Matters](https://ssd.eff.org/module/why-metadata-matters){target="_blank"} — EFF Surveillance Self-Defense, the canonical explainer, available in several regional languages.
 - [Anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md) — why confidential content is not the same as an anonymous identity.
 - [Your Security Plan](https://ssd.eff.org/module/your-security-plan){target="_blank"} — EFF SSD, to turn "what can the metadata reveal?" into a concrete plan.
