@@ -31,6 +31,15 @@ Arti 是 Tor Project 從 2021 年開始的計畫，把原本用 C 寫成的 Tor�
 
 用戶端這一側的能力已大致對齊 c-tor，能當 SOCKS 代理、連線與架設 onion 服務、走橋接與 pluggable transports。計畫現在的主力放在中繼端，relay 與 directory authority 仍在開發，還無法用 Arti 架設 Tor 中繼，這部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 介面取代，設計取向不同。
 
+## Arti 2.5.1
+
+> 2026-08-03 · [官方 CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- 修補一個影響效能的重要錯誤：`XON` 訊息原本把「每秒位元組」誤判為「每秒位元」，導致允許傳輸的資料量少了 8 倍，現已修正。
+- Onion 服務新增可設定連到 `AF_UNIX` 位址。
+- 用戶端與 onion 服務之間，在啟用實驗性 feature（`hsc-negotiate-extensions`、`hss-negotiate-extensions`）時，可協商壅塞控制與 Counter Galois Onion（CGO）加密。
+- 持續往「Arti 作為 Tor 中繼」開發，新增驗證與處理傳入中繼訊息的基礎設施。
+
 ## Arti 2.5.0
 
 > 2026-06-30 · [上游公告](https://blog.torproject.org/arti_2_5_0_released/){target="_blank"}
