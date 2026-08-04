@@ -75,5 +75,6 @@ icon: material/incognito-circle
 
 - 帶這四個概念去走一次 [威脅模型如何建立](./threat-model.md)，把抽象詞彙變成「我具體要保護什麼、防誰」的清單
 - 想知道為什麼「機密 ≠ 匿名」，請進一步閱讀 [Metadata 是什麼](./metadata.md)
+- 想把假名真的維持住，見 [怎麼維持多個網路身分](./multiple-identities.md)，處理的正是「同一個假名下的行為會被連結」這件事
 - 想看具體場景下這四個概念如何選用，可以看 [場景層](../scenarios/index.md) 的各篇文章
 - 想看「加密了」、「去中心化了」這兩種說法各自不等於匿名的具體例子，見 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
