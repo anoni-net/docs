@@ -362,6 +362,8 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 
 境内事件的协助资源以国际组织为主。[RSF 无国界记者](https://rsf.org/en){target="_blank"}、[CPJ 保护记者委员会](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多语），装置鑑识找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。跨境调查通常跟 OCCRP、Forbidden Stories 这类国际组织合作，他们有自己的安全标准与在地网络。
 
+境内受访者或协作者本身也在公开平台发声时，另见 [在中国大陆的公开平台传播信息](./mainland-speech.md)。
+
 查证来源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。
 
 ## 接下来

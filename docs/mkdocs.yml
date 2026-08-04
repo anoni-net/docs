@@ -51,6 +51,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/mainland-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
       - !ENV [NAV_ADVANCED, "進階"]:

@@ -146,7 +146,7 @@ burner 这个俗称把两件事混在一起，它们的风险来源不同：
 
 ### 中国大陆
 
-防火长城（Great Firewall）长期完整封锁 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 与全语系 Wikipedia，外媒多数被封。手法含 DNS 污染、SNI 过滤与深度封包检测（DPI，逐笔分析连接判断是否放行的技术）。个人翻墙属违法灰色地带，2025 年底国安部公开警告会究责。VPN 要选有强混淆的方案、入境前装好至少两款。Tor 直连在中国无法使用，obfs4 桥接长期被封。Tor Project 对中国目前建议优先用 WebTunnel，Snowflake、meek 作为备选，但可用性会随封锁更新大幅波动，出发前务必先测试，并多备几种桥接。SIM 自 2019 年底起强制实名加人脸，外籍旅客同样适用。2024 年 7 月起新规授权国安人员检查个人电子装置，深圳、上海有海关抽查手机与笔电的报告。查证来源（2026-06）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 对中国的连接指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}。
+防火长城（Great Firewall）长期完整封锁 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 与全语系 Wikipedia，外媒多数被封。手法含 DNS 污染、SNI 过滤与深度封包检测（DPI，逐笔分析连接判断是否放行的技术）。个人翻墙属违法灰色地带，2025 年底国安部公开警告会究责。VPN 要选有强混淆的方案、入境前装好至少两款。Tor 直连在中国无法使用，obfs4 桥接长期被封。Tor Project 对中国目前建议优先用 WebTunnel，Snowflake、meek 作为备选，但可用性会随封锁更新大幅波动，出发前务必先测试，并多备几种桥接。SIM 自 2019 年底起强制实名加人脸，外籍旅客同样适用。2024 年 7 月起新规授权国安人员检查个人电子装置，深圳、上海有海关抽查手机与笔电的报告。在境内平台发表内容的风险与既有实践，见 [在中国大陆的公开平台传播信息](./mainland-speech.md)。查证来源（2026-06）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 对中国的连接指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}。
 
 ### 香港
 
