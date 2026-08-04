@@ -83,11 +83,13 @@ The "with ordinary people" half of the question mostly happens offline and one t
 - **Exposure is far smaller, but not zero.** Their handset, their retelling to a third person, their mention of it in a group chat are all routes out. You control only your own end.
 - **Don't pull the other person into your risk.** Their job, family, and political exposure differ from yours. Some people feel burdened by what you tell them.
 - **Their willingness comes first.** One-way persuasion changes nobody's mind and spends the relationship. When someone signals they don't want the conversation, stop.
-- **In person beats online**, with attention to the venue and who else is present. Not at their workplace, and don't arrange the topic over a messaging app.
+- **In person beats online**, provided you have chosen both the venue and who else is present. Their workplace is unsuitable, and both handsets, the car, and any smart speaker are present too. Don't use WeChat for the conversation or for arranging it, for the reasons in the mechanics section above.
 - **Leave no record of who.** Names of people you have talked to belong on no list, including on your own device.
+- **Agree the terms beforehand.** Ask them not to raise it in group chats, not to forward, and what to say if asked. This is the cheapest step in the whole scenario and the one with the most certain effect.
+- **Work out in advance how to answer "where did you see this".** That question almost always comes, and the answer exposes what you read and what you use to read it. Grounding it in something they can look up themselves is safer than describing your channel.
 - **One person at a time beats broadcasting.** Group forwarding puts everyone in the same risk pool and usually works less well.
 
-The reasoning matches source protection: see [journalists and source protection](./journalist.md) on consent and on keeping people apart.
+For the *effective* half, the reframing described under established practices applies here too: starting from something they already care about, and using material from official outlets or verifiable local facts, works better than citing foreign reporting and exposes less.
 
 ## Work already being carried
 
@@ -100,26 +102,23 @@ Archiving and research do not have to be re-attempted from scratch by each perso
 
 Submitting material to these projects usually preserves it more reliably than reposting it into domestic platforms, at far lower exposure.
 
-## What this page can give you
+## What this page does not do
 
-The material above condenses into four things you can act on now:
+- **No circumvention playbook.** Variation techniques change quickly and date badly, and a specific list leads people to overestimate their safety while they, not we, carry the outcome.
+- **No judgment of anyone's choice.** Whether and how to publish belongs to the person in the situation.
+- **No safety guarantee.** This describes known mechanisms and observed responses in an environment that keeps changing.
 
-1. **Archive outside the jurisdiction before you publish**, so a copy survives deletion
-2. **Decide which side you're on this time** — preserving a record, persuading specific people, or maximizing spread — because the costs differ
-3. **Route material to projects already carrying the risk** rather than reposting it yourself
-4. **Save the help contacts in advance**, because there is no time to look them up when it matters
+## Three things you can do now
+
+1. **Decide which side you're on before acting** — preserving a record, persuading specific people, or maximizing spread — because the costs differ
+2. **To make material survive, submit it to the archiving projects above.** That step also needs circumvention and its exposure has to be counted in, but it is more reliable than reposting into domestic platforms yourself
+3. **Save the help contacts below in advance**, because there is no time to look them up when it matters
 
 ## Getting help
 
 - **[Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}** — 24/7, multilingual; the first contact for a compromised account, a seized device, or a targeted attack
 - **[Citizen Lab](https://citizenlab.ca/){target="_blank"}** — device forensics, if you suspect surveillance software
 - If you have already been summoned, told to delete a post, or asked to sign an undertaking, the records are evidence. Don't clear them first; see [activists and protest digital safety](./activist.md) on preserving material when legal process is plausible
-
-## What this page does not do
-
-- **No circumvention playbook.** Variation techniques change quickly and date badly, and a specific list leads people to overestimate their safety while they, not we, carry the outcome.
-- **No judgment of anyone's choice.** Whether and how to publish belongs to the person in the situation.
-- **No safety guarantee.** This describes known mechanisms and observed responses in an environment that keeps changing.
 
 ## Where to go from here
 

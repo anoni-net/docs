@@ -99,6 +99,10 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 - **The IMEI links both numbers.** One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
 - **Customs.** Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
 
+!!! warning "Returning to mainland China inverts several of these"
+
+    A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry, since state-security officers have had explicit authority to check personal electronic devices since July 2024, and the jurisdiction sits at the top tier of the border-inspection column in the table above. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
+
 **The practical shape.** Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
 
 **What a burner does not fix.** Signing into your everyday email, social, or cloud accounts on the clean device defeats it entirely. So does contacting the same people, keeping the same hours, and appearing in the same places. Carrying both phones powered on at once lets cell-tower records pair them. The device is one layer; the account layer is in [maintaining multiple online identities](../basics/multiple-identities.md).

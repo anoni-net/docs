@@ -156,7 +156,7 @@ What remains is triage:
 
 1. **Establish how far it goes.** Run the self-checks above and see which links between the layers are still visible.
 2. **Cut what is still live.** Unfollow, remove shared emails and phone numbers, and retire any browser profile that was used for both.
-3. **Decide whether the layer is salvageable.** If the overlap ran for a long time, or the adversary can obtain platform-side data, the honest answer is that this layer no longer works as a separate identity, and opening a new one is more reliable than patching the old.
+3. **Decide whether the layer can still hold separation.** Against an acquaintance or a curious stranger, cutting the live links and letting time pass is usually enough, and reopening is unnecessary. Where the overlap ran for a long time and the adversary can obtain platform-side data, the answer is usually that it no longer works as a separate identity, and opening a new one beats patching the old — at the cost of the relationships, followers, and content you would start over.
 4. **Retire the old layer properly**, per the next section.
 
 That judgment call goes back to [how to build a threat model](./threat-model.md): a casual observer and an adversary who can compel platform records give completely different answers.

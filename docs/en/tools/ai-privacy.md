@@ -42,7 +42,23 @@ The Interim Measures for the Management of Generative AI Services took effect on
 
 So the question changes. Outside the mainland you ask whether input trains the model and how long it is kept. Inside, the first question is whether you are willing for this content to be tied to your verified identity and retained. A business tier and a DPA solve the vendor-training problem elsewhere; they do not address statutory retention and lawful access here. For sensitive material, local or self-hosted models are worth considerably more in this context than outside it.
 
-The same reasoning covers AI features embedded in domestic platforms: office suites, input methods, in-browser assistants.
+The same reasoning covers AI features embedded in domestic platforms: office suites, in-browser assistants, and input methods. Input methods deserve separate mention: their exposure is an order of magnitude larger, since they see every sentence you type in every app, and cloud prediction is usually on by default.
+
+Also separate the service from the model. DeepSeek and others both operate a domestic service and publish open weights; using the hosted service and running the weights on your own machine are entirely different acts.
+
+### Three routes, and what each costs
+
+Once you have made that judgment, three options remain, none of them free:
+
+| Route | Main barrier |
+|---|---|
+| Keep using domestic services | Verified identity, statutory retention, moderation built in. Acceptable for work that isn't sensitive |
+| Switch to services outside the mainland | You need circumvention to reach them. Personal circumvention sits in a legally grey area domestically, and the Ministry of State Security issued a public warning in late 2025 that it would be pursued. Registration usually requires a foreign number and foreign payment method, both of which leave records of their own |
+| Local models or self-hosting | Content stays on the device, but the main sources for model weights are unreachable domestically, self-hosted servers fall under filing requirements, and the hardware floor is in the local-models section below |
+
+**Reachable does not mean safe.** Circumvention that keeps working invites people to treat the problem as solved. Reachability is something the other side can change unilaterally: working today does not mean working tomorrow, and going unblocked for a long time is not the same as going unrecorded. The connection pattern is itself a record, and in some situations the act of using circumvention draws more attention than the content of the query.
+
+What counts as "sensitive" shifts too. Outside the mainland you largely judge that yourself; inside, it is determined afterwards by someone else, over a wider range than the list above covers — political topics, cross-border ties, labor disputes, and religion all fall inside it.
 
 ## What you never pasted, but sent anyway
 

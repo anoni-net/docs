@@ -56,7 +56,9 @@ WeChat, Douyin, Xiaohongshu, and Weibo differ from the global platforms above in
 
 **The content is simultaneously censored.** Citizen Lab's WeChat research found that keyword filtering is enabled only for accounts registered with a mainland phone number and persists after relinking to an international one, that images are filtered by both OCR and visual-similarity matching, and that blocking is invisible to the sender. Content between non-mainland accounts is analyzed as well, and has been used to train the censorship system[^wechat].
 
-The practical consequence: turning off the advertising identifier and refusing tracking does much less here, because the problem is not in the ad-tracking layer. See [maintaining multiple online identities](./multiple-identities.md) and [posting on mainland Chinese platforms](../scenarios/mainland-speech.md).
+The practical consequence: turning off the advertising identifier and refusing tracking does much less here, because the problem is not in the ad-tracking layer. Account layering is similarly limited — the methods in [maintaining multiple online identities](./multiple-identities.md) assume services outside the mainland, and the real-name chain cancels most of the benefit. What still works is behavioral separation: not reusing one account across purposes, and not cross-referencing between them. Full context in [posting on mainland Chinese platforms](../scenarios/mainland-speech.md).
+
+Quitting is not an option for most people. If you keep using them, these adjustments are cheap and their effect is certain: restrict who can see your posts and history, revoke contacts and location permissions, reduce your visibility inside group chats (member lists, nickname, avatar are visible to strangers, and groups carry administrator liability), and keep sensitive matters off the platform entirely, including arranging when and what to discuss.
 
 ## What actually helps
 
@@ -76,7 +78,7 @@ Opening your own file beats trusting any explanation. Most platforms are require
 
 The export itself is highly sensitive personal data. Store it encrypted, and keep it out of your downloads folder and cloud sync.
 
-Note what this list does not claim: none of it stops behavioral profiling inside a platform you use, and revoking microphone access changes none of the mechanisms in the first section.
+Note what this list does not claim: none of it stops behavioral profiling inside a platform you use, and revoking microphone access changes none of the mechanisms in the first section. It also assumes your jurisdiction does not restrict these tools; Tor cannot be reached directly from inside mainland China, and using circumvention carries its own risk there.
 
 ## This page will age
 
