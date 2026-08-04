@@ -11,8 +11,8 @@
  * 換版後 activate 階段會清除舊快取。
  *
  * manifest 的 id：docs/zh-TW/manifest.webmanifest 同時被 run.sh（輸出到 /docs/）
- * 與 run_zh-tw.sh（輸出到 /docs/zh-tw/）使用，兩棵樹的內容逐位元組相同。裡面的
- * id 寫成 "/docs/"，而規格上 id 是相對 origin 解析，所以兩棵樹都會得到
+ * 與 run_zh-tw.sh（輸出到 /docs/zh-tw/）使用，兩個輸出目錄的內容逐位元組相同。
+ * 裡面的 id 寫成 "/docs/"，而規格上 id 是相對 origin 解析，所以兩邊都會得到
  * https://anoni.net/docs/，瀏覽器視為同一個 App。這是刻意的：同一份內容不該
  * 出現兩個可安裝項目。en 與 zh-cn 各自有獨立的 manifest 與 id，不受影響。
  *
@@ -34,7 +34,8 @@ const SCOPE_PATH = new URL(self.registration.scope).pathname;
 
 // 各語系 build 的根路徑前綴（相對於 scope）。預設 build（zh-TW）在根。
 //
-// 這裡不放 "zh-tw/"。站台會建置四棵樹，但根路徑與 /zh-tw/ 是同一份 zh-TW 內容，
+// 這裡不放 "zh-tw/"。站台跑四次 mkdocs build（run.sh、run_zh-tw.sh、run_zh-cn.sh、
+// run_en.sh），但 run.sh 輸出的根路徑與 run_zh-tw.sh 輸出的 /zh-tw/ 是同一份內容，
 // 兩邊都預快取等於同樣的四十幾頁抓兩次。實測整份 precache 是 21.3 MB，其中
 // 6.8 MB（31%）就是這份重複。讀者很可能在受限或計量的網路下第一次造訪，這個
 // 浪費是實打實的。/zh-tw/ 的頁面若真的被造訪，runtime 快取仍會接住。
@@ -122,6 +123,8 @@ const CORE_PAGES_ZH = [
   "taiwan/tor-relay-watcher/",
   // community（社群，選錄離線可讀的工具頁）
   "community/onionoo-mcp/",
+  // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
+  "games/",
 ];
 
 // en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、taiwan/、advanced/、help/）。
@@ -138,6 +141,76 @@ const CORE_PAGES_EN = [
   "community/onionoo-mcp/",
   "regional/",
   "regional/tor-relay-watcher/",
+  "games/",
+];
+
+// 三件互動作品的本體。
+//
+// 跟核心章節不同，這一批只放一份，不跟著 LANG_PREFIXES 複製。三個語系的 games
+// 索引頁各自存在，但作品本身只由 run.sh 建置到根路徑 /docs/games/，其他語系是用
+// ?lang= 連過去共用同一份程式。跟著前綴複製的話，另外兩個語系會抓到 404，白繞一圈。
+//
+// 為什麼值得預快取：這是站上唯一「已經做好、有人在用，卻沒被離線策略蓋到」的東西。
+// 實際會用到的離線情境是工作坊沒有 wifi、教學現場網路很差，而那些場合正是要把畫面
+// 翻給人看的時候。網頁載得出來但地球儀空白，比整頁打不開更難解釋。
+//
+// 成本：28 個檔案、2.33 MB。加進來之前整份預快取是 14.74 MB，所以這是 +15.8%。
+// 拆開來看：
+//
+//   three.js vendor 1.05 MB（三件共用）
+//   地球儀的資料檔   0.86 MB
+//   地球儀的程式     0.30 MB
+//   另外兩件         0.12 MB
+//
+// bathymetry.json 那 426 KB 刻意不放。它是海底等深線畫出來的深淺底色，是整批裡最大
+// 的一份，而 atlas.js 抓它時帶 .catch(() => null)，最深那階的顏色又刻意等於海面的
+// 單色，所以離線時少了它畫面跟以前一模一樣，不會看起來像壞掉。用最大的檔案換一層
+// 純裝飾的質感，這個交換划算。
+//
+// 再往下砍就沒有這麼乾淨了。tw-admin（215 KB）與 countries（136 KB）是次大的兩份，
+// 但前者拿掉就沒有縣市界、放大台灣只剩空白，後者是必要的，缺了整顆球都畫不出來。
+// 那時畫面看起來像壞掉而不像少了東西，比整個不快取更糟。
+//
+// 數字用 tools/check_precache.mjs 量的，那支讀的是 apparent size，也就是實際要傳輸的
+// 位元組。不要用 du 量，這台的檔案系統會共用 extent，du report 出來只有一半。
+//
+// 身分敏感度：照 CORE_PAGES_ZH 那條判準（讀者是不是特定受威脅身分）檢查過。這三件
+// 是教學性質的視覺化，跟已經在預快取裡的 tools/what-is-tor/ 同一類，不指向特定身分，
+// 所以可以放。
+//
+// 維護：新增作品或地球儀多一份資料檔時要補進這裡，漏了的話那一份會在離線時抓不到。
+// seacable.json 刻意不在清單裡，那份沒有落地到 repo。
+const GAME_APPS = [
+  "games/onion-routing/index.html",
+  "games/onion-routing/game.js",
+  "games/onion-routing/i18n.js",
+  "games/onion-routing/levels.js",
+  "games/onion-rendezvous/index.html",
+  "games/onion-rendezvous/scene.js",
+  "games/onion-rendezvous/i18n.js",
+  "games/tor-network/index.html",
+  "games/tor-network/atlas.js",
+  "games/tor-network/i18n.js",
+  "games/tor-network/cables.json",
+  "games/tor-network/continents.json",
+  "games/tor-network/countries.json",
+  "games/tor-network/netusers.json",
+  "games/tor-network/ooni.json",
+  "games/tor-network/shutdowns.json",
+  "games/tor-network/snapshot.json",
+  "games/tor-network/torusers.json",
+  "games/tor-network/tw-admin.json",
+  "games/tor-network/tw-energy.json",
+  "games/tor-network/tw-grid.json",
+  "games/tor-network/tw-landing.json",
+  "games/tor-network/tw-power.json",
+  // three.js 是本地 vendor 的，三件共用。core 沒有寫在 importmap 裡，
+  // 是被 webgpu 那份 import 進去的，少了它三件都起不來。
+  "games/vendor/three.webgpu.min.js",
+  "games/vendor/three.core.min.js",
+  "games/vendor/three.tsl.min.js",
+  "games/vendor/jsm/tsl/display/BloomNode.js",
+  "games/vendor/jsm/tsl/display/AfterImageNode.js",
 ];
 
 // 各語系前綴對應的核心章節清單
@@ -157,6 +230,10 @@ function precacheUrls() {
     for (const asset of SHELL_ASSETS) {
       urls.push(SCOPE_PATH + prefix + asset);
     }
+  }
+  // 作品本體只在根路徑 /docs/games/ 底下，所以擺在前綴迴圈外面
+  for (const asset of GAME_APPS) {
+    urls.push(SCOPE_PATH + asset);
   }
   return urls;
 }
@@ -194,9 +271,9 @@ self.addEventListener("activate", (event) => {
 
 function offlinePathFor(pathname) {
   const rel = pathname.slice(SCOPE_PATH.length);
-  // 這裡沒有 "zh-tw/"。zh-tw 樹跟根路徑是同一份內容，precache 只收根路徑那份，
-  // 導向 /zh-tw/offline/ 會落到一個不存在於快取的頁面，讀者就吃到瀏覽器原生
-  // 的錯誤畫面。落到最後的預設值（根路徑的 offline 頁）內容完全一樣。
+  // 這裡沒有 "zh-tw/"。run_zh-tw.sh 輸出的 /zh-tw/ 跟根路徑是同一份內容，precache
+  // 只收根路徑那份，導向 /zh-tw/offline/ 會落到一個不存在於快取的頁面，讀者就吃到
+  // 瀏覽器原生的錯誤畫面。落到最後的預設值（根路徑的 offline 頁）內容完全一樣。
   for (const prefix of ["zh-cn/", "en/"]) {
     if (rel.startsWith(prefix)) return SCOPE_PATH + prefix + "offline/";
   }
