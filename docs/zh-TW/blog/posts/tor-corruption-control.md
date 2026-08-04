@@ -23,7 +23,7 @@ description: "自網路在土庫曼開始普及以來，就一直受到嚴格的
 
 ![](https://forum.torproject.org/uploads/default/original/2X/f/f0a900173e408d4d9f15f346fa3b5b7750efce96.png)
 
-2021 年 7 月，一個關於 Tor 使用量在土庫曼驟降的現象[引起了我們的注意](https://archive.is/5Kp4s){target="_blank"}。Tor 後來了解到，這標誌著這個後蘇聯國家進入了審查與限制的新時代。不過讓我們倒退回去看整件事情的起源...
+2021 年 7 月，一個關於 Tor 使用量在土庫曼驟降的現象[引起了我們的注意](https://archive.is/5Kp4s){target="_blank"}。Tor 後來了解到，驟降標誌著這個後蘇聯國家進入了審查與限制的新時代。不過讓我們倒退回去看整件事情的起源...
 
 Tor 社群長期以來致力於捍衛網路自由，運營中繼節點並[提供橋接服務以對抗網路審查](https://blog.torproject.org/2024-defend-internet-freedom-during-elections/){target="_blank"}。多年來，Tor 專案呼籲更多人加入[架設橋接](https://forum.torproject.org/t/tor-relays-help-turkmens-to-bypass-internet-censorship-run-an-obfs4-bridge/7002){target="_blank"}、使用 Snowflake 代理，同時我們也調查並調整我們的反審查策略，並分享有關土庫曼網路審查的訊息。
 
@@ -49,7 +49,7 @@ Tor 社群長期以來致力於捍衛網路自由，運營中繼節點並[提供
 
 ## 網路審查與對抗網際網路
 
-自網路在土庫曼開始普及以來，就一直受到嚴格的限制和審查。整個國家的電信產業要麼由政府直接掌控，要麼由與統治家族有關聯的人士持有。儘管前總統在 2013 年通過了一項[法律禁止新聞審查](https://cpj.org/2013/02/turkmenistan-opens-up-media-in-name-only/){target="_blank"}，但這部法律僅存在於文件上。在實際運作中，幾乎所有的社群網站和消息應用程式都被封鎖。像 YouTube、Facebook、Instagram、WhatsApp、TikTok、Discord、Signal、[IMO](https://www.rferl.org/a/turkmenistan-last-messaging-app-internet/32535618.html){target="_blank"} 和 Telegram 這樣的熱門服務在該國都是無法訪問的。根據 Progres 基金會的報告，這樣的網路封鎖可能使土庫曼的年度 [GDP 損失高達 8%](https://progres.online/reports/internet-freedom/what-does-internet-shutdown-cost-the-turkmen-economy){target="_blank"}。
+自網路在土庫曼開始普及以來，就一直受到嚴格的限制和審查。整個國家的電信產業要麼由政府直接掌控，要麼由與統治家族有關聯的人士持有。儘管前總統在 2013 年通過了一項[法律禁止新聞審查](https://cpj.org/2013/02/turkmenistan-opens-up-media-in-name-only/){target="_blank"}，但這部法律僅存在於文件上。在實際運作中，幾乎所有的社群網站和消息應用程式都被封鎖。YouTube、Facebook、Instagram、WhatsApp、TikTok、Discord、Signal、[IMO](https://www.rferl.org/a/turkmenistan-last-messaging-app-internet/32535618.html){target="_blank"} 和 Telegram 等熱門服務在該國都是無法訪問的。根據 Progres 基金會的報告，這樣的網路封鎖可能使土庫曼的年度 [GDP 損失高達 8%](https://progres.online/reports/internet-freedom/what-does-internet-shutdown-cost-the-turkmen-economy){target="_blank"}。
 
 2021 年，公民甚至被強迫[對著古蘭經發誓不使用 VPN](https://www.rferl.org/a/turkmenistan-vpn-koran-ban/31402718.html){target="_blank"}。如果被抓到使用 VPN，罰款為 1,500 馬納特（按市場匯率約 80 美元），這大約相當於一個月的平均薪水。然而，數年來並沒有官方的封鎖網站列表。
 
@@ -81,4 +81,4 @@ Tor 社群長期以來致力於捍衛網路自由，運營中繼節點並[提供
 
 ## 審查無國界、請分享這個故事
 
-這是一個報導不足，但影響遠超出一國範疇的故事。了解更多關於《[土庫曼網路安全部門人員公然在線銷售 VPN 服務](https://turkmen.news/dilery-upravleniya-kiberbezopasnosti-turkmenistana-otkryto-torguyut-vpn-servisami-online/){target="_blank"}》的資訊，並分享這篇文章，支持那些追究權力責任的記者。擴大他們的報導能幫助增加公眾壓力，確保這些重要的故事不被默默消失。
+土庫曼的情況報導不足，但影響遠超出一國範疇。了解更多關於《[土庫曼網路安全部門人員公然在線銷售 VPN 服務](https://turkmen.news/dilery-upravleniya-kiberbezopasnosti-turkmenistana-otkryto-torguyut-vpn-servisami-online/){target="_blank"}》的資訊，並分享這篇文章，支持那些追究權力責任的記者。擴大他們的報導能幫助增加公眾壓力，確保這些重要的故事不被默默消失。

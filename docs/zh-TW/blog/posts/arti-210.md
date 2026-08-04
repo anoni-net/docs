@@ -106,7 +106,7 @@ Arti 2.1.0 代表的是：我們正在穩定前進，離**「Arti 可以作為�
 
 ## 致謝與贊助
 
-我們要感謝所有為 Arti 2.1.0 做出貢獻的人，包括 Niel Duysters、Nihal、Nuhiat-Arefin、Robert Bartlensky、carti-it、hjrgrn、moumenalaoui、robertb 與 sjcobb！沒有這些貢獻者持續的投入，Arti 不可能走到今天這一步。
+我們要感謝所有為 Arti 2.1.0 做出貢獻的人，包括 Niel Duysters、Nihal、Nuhiat-Arefin、Robert Bartlensky、carti-it、hjrgrn、moumenalaoui、robertb 與 sjcobb！沒有他們持續的投入，Arti 不可能走到今天這一步。
 
 同時，我們也衷心感謝各位贊助者對 Arti 開發工作的資助與支持。正因為有這些贊助，我們才能在中繼支援、RPC 開發、設定系統重構以及整體穩定性上持續前進，讓更多重視隱私的使用者與開發者能在未來受惠於 Arti 與 Tor 網路所提供的保護。
 

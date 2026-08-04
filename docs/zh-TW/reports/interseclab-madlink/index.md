@@ -36,7 +36,7 @@ description: InterSecLab 揭露台灣公司凌華科技於 2019 至 2020 年出�
 
 ## 參與討論
 
-這份報告與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論延用同一個頻道，可透過這裡加入（需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號）。
+這份報告與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論延用同一個頻道，可透過以下連結加入（需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號）。
 
 * :material-chat-processing-outline: <https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net>{target="_blank"}
 

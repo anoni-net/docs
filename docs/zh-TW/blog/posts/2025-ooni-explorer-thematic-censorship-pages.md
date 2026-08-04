@@ -69,9 +69,9 @@ description: "發佈全新 OONI Explorer 主題審查頁面！全球社群媒體
 - 基於 OONI 觀察資料記錄相關封鎖的[長篇研究報告](https://ooni.org/reports/){target="_blank"}
 - 涵蓋每個主題（社群媒體、新聞媒體、翻牆工具）的**最新 OONI 資料數據圖表**
 
-這些圖表預設是根據三個國家篩選的：中國、伊朗和俄羅斯。我們選擇這些國家是因為它們擁有穩定的 OONI 測量覆蓋和高層級的網路審查，相較於其他國家提供了呈現更具意義圖表的機會。大多數國家都有 OONI 測量覆蓋，您可以透過更改國家和日期範圍（預設設定為過去一個月）來調整這些頁面上的圖表。若要更好地理解這些圖表，請參考我們的 [OONI 觀測資料數據解讀文件](https://ooni.org/support/interpreting-ooni-data/){target="_blank"}。
+這些圖表預設是根據三個國家篩選的：中國、伊朗和俄羅斯。我們選擇的原因是，它們擁有穩定的 OONI 測量覆蓋和高層級的網路審查，相較於其他國家提供了呈現更具意義圖表的機會。大多數國家都有 OONI 測量覆蓋，您可以透過更改國家和日期範圍（預設設定為過去一個月）來調整這些頁面上的圖表。若要更好地理解圖表內容，請參考我們的 [OONI 觀測資料數據解讀文件](https://ooni.org/support/interpreting-ooni-data/){target="_blank"}。
 
-這三個主題（社群媒體、新聞媒體、翻牆工具）是根據使用者研究中蒐集的社群回饋，以及社群媒體、新聞媒體和翻牆工具在全球經常被封鎖的事實所決定的，這也影響到人權。因此我們希望這些新頁面能呼應全球的 [#KeepItOn 運動](https://www.accessnow.org/campaign/keepiton/){target="_blank"}和其他全球倡議。
+這三個主題（社群媒體、新聞媒體、翻牆工具）是根據使用者研究中蒐集的社群回饋，以及社群媒體、新聞媒體和翻牆工具在全球經常被封鎖、並因此影響人權的事實所決定的。因此我們希望這些新頁面能呼應全球的 [#KeepItOn 運動](https://www.accessnow.org/campaign/keepiton/){target="_blank"}和其他全球倡議。
 
 ### 社群媒體和即時通訊應用程式的封鎖
 
@@ -80,7 +80,7 @@ description: "發佈全新 OONI Explorer 主題審查頁面！全球社群媒體
   <figcaption>圖片來源：<a target="_blank" href="https://explorer.ooni.org/social-media">OONI Explorer Social Media page</a></figcaption>
 </figure>
 
-社群媒體平台在全球各地[經常被封鎖](https://ooni.org/documents/2022-ooni-submission-ohchr-report-internet-shutdowns.pdf){target="_blank"}，特別是在選舉期間和大型抗議活動中。透過新的 OONI Explorer 社群媒體頁面，我們分享根據 OONI 觀測資料數據記錄的全球社群媒體和即時通訊應用程式封鎖的**（[短篇](https://explorer.ooni.org/findings?theme=social_media){target="_blank"}和[長篇](https://ooni.org/reports/social-media-im){target="_blank"}）報告**。我們還分享包含最新 OONI 觀測資料的**圖表**，這些資料數據與受測的熱門社群網站及以下即時通訊應用程式有關：[WhatsApp](https://ooni.org/nettest/whatsapp/){target="_blank"}、[Facebook Messenger](https://ooni.org/nettest/facebook-messenger/){target="_blank"}、[Telegram](https://ooni.org/nettest/telegram/){target="_blank"} 和 [Signal](https://ooni.org/nettest/signal/){target="_blank"}（這些是我們唯一特別進行的 [OONI Probe 實驗](https://ooni.org/nettest/){target="_blank"}即時通訊應用程式）。
+社群媒體平台在全球各地[經常被封鎖](https://ooni.org/documents/2022-ooni-submission-ohchr-report-internet-shutdowns.pdf){target="_blank"}，特別是在選舉期間和大型抗議活動中。透過新的 OONI Explorer 社群媒體頁面，我們分享根據 OONI 觀測資料數據記錄的全球社群媒體和即時通訊應用程式封鎖的**（[短篇](https://explorer.ooni.org/findings?theme=social_media){target="_blank"}和[長篇](https://ooni.org/reports/social-media-im){target="_blank"}）報告**。我們還分享包含最新 OONI 觀測資料的**圖表**，這些資料數據與受測的熱門社群網站及以下即時通訊應用程式有關：[WhatsApp](https://ooni.org/nettest/whatsapp/){target="_blank"}、[Facebook Messenger](https://ooni.org/nettest/facebook-messenger/){target="_blank"}、[Telegram](https://ooni.org/nettest/telegram/){target="_blank"} 和 [Signal](https://ooni.org/nettest/signal/){target="_blank"}（目前只有上述四款即時通訊應用程式有專屬的 [OONI Probe 實驗](https://ooni.org/nettest/){target="_blank"}）。
 
 我們選擇特定社群媒體網域是基於其全球相關性、使用情況、全球 OONI 測量覆蓋，以及它們是否被封鎖（或可能被封鎖）。我們避免在新的社群媒體頁面中包括所有被測社群媒體網域的圖表，以提高其易用性。如果您有興趣查看社群媒體頁面上未列出的[其他社群媒體網域](https://explorer.ooni.org/social-media){target="_blank"}的 OONI 觀測資料數據，您可以透過 OONI Explorer [搜尋工具](https://explorer.ooni.org/search){target="_blank"}或[測量資料彙整工具包（MAT）](https://explorer.ooni.org/chart/mat){target="_blank"}來進行。
 

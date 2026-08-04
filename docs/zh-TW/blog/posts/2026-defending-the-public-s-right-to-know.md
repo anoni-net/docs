@@ -41,7 +41,7 @@ description: "Tor Project 部落格上的一篇文章，整理 OONI 觀測資料
 
 OONI 的觀測資料是[全球最大的網路審查開放資料集](https://explorer.ooni.org/){target="_blank"}，自 2012 年以來已累積數十億筆量測，涵蓋 245 個國家與地區、數萬個網路。這些資料能存在，是因為全球各地有人在使用 [OONI Probe](https://ooni.org/install/){target="_blank"}（一款免費的網路測量工具，桌面版與手機版都有，按一下就對你所在的網路執行一輪連線測試），把自己連線的網路狀況回報上來。每一筆新的量測，都會加進這份公共紀錄。
 
-這份資料集之所以受到引用，原因同時來自規模與方法論。網路審查常常以「讓干擾看不出來」的方式進行，被封鎖的網站看起來像壞掉了、被限速的應用程式看起來不穩定、整段網路關閉看起來像是技術故障。在 OONI 採用的[公開量測方法論](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}、同儕審查、專家回饋與對照組量測的基礎上，這些手段可以在資料層面被識別出來，「網路被審查了」這類主張因此可以被檢驗、被挑戰、被驗證。
+這份資料集之所以受到引用，原因同時來自規模與方法論。網路審查常常以「讓干擾看不出來」的方式進行，被封鎖的網站看起來像壞掉了、被限速的應用程式看起來不穩定、整段網路關閉看起來像是技術故障。在 OONI 採用的[公開量測方法論](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}、同儕審查、專家回饋與對照組量測的基礎上，干擾手段可以在資料層面被識別出來，「網路被審查了」的主張因此可以被檢驗、被挑戰、被驗證。
 
 為了降低查資料的門檻，OONI Explorer 上線了[主題式頁面](https://ooni.org/post/2025-ooni-explorer-thematic-censorship-pages/){target="_blank"}，聚焦在最常被審查的幾個領域，包括社群媒體與即時通訊應用程式、新聞媒體、翻牆工具。每個頁面都收錄短篇報告、長篇研究報告，以及帶最新 OONI 資料的圖表。
 
@@ -60,13 +60,13 @@ OONI 的觀測資料是[全球最大的網路審查開放資料集](https://expl
     <figcaption>OONI Explorer 的截圖，顯示 dw.com 在俄羅斯、中國、伊朗被封鎖的情形。圖片來源：<a target="_blank" href="https://blog.torproject.org/Defending-the-right-to-know/">Tor Project Blog</a>。</figcaption>
 </figure>
 
-2025 年，俄羅斯流亡媒體中相當知名的 [Meduza](https://meduza.io/en){target="_blank"} [發表了一篇文章介紹 OONI 工具](https://meduza.io/cards/tsenzury-v-runete-vse-bolshe-kak-mozhno-otslezhivat-blokirovki){target="_blank"}，邀讀者實際試用。從 Meduza 這個案例可以看到，新聞編輯室除了用網路審查量測來寫報導，也可以把它當作公共教育的一環，讓讀者理解網路干擾是如何運作的、可以如何被記錄下來、自己又能如何貢獻到這份證據基礎裡。
+2025 年，俄羅斯流亡媒體中相當知名的 [Meduza](https://meduza.io/en){target="_blank"} [發表了一篇文章介紹 OONI 工具](https://meduza.io/cards/tsenzury-v-runete-vse-bolshe-kak-mozhno-otslezhivat-blokirovki){target="_blank"}，邀讀者實際試用。從 Meduza 的做法可以看到，新聞編輯室除了用網路審查量測來寫報導，也可以把它當作公共教育的一環，讓讀者理解網路干擾是如何運作的、可以如何被記錄下來、自己又能如何貢獻到這份證據基礎裡。
 
 新聞網站被封鎖，影響從來不只是技術層面，代表的是大眾失去取得報導的管道、社群失去即時資訊、記者失去他們的讀者。只有當這件事被記錄成可以被引用、可以被分析的資料，後續行動才有立足點。
 
 最具體的串接案例發生在肯亞。OONI 觀測資料被當作證據，用在一場挑戰「非法切斷網路連線」的公共利益訴訟。[這場訴訟由一個聯盟提出](https://blog.bake.co.ke/2025/05/14/bake-6-other-organizations-challenge-internet-shutdowns-in-kenya-in-landmark-public-interest-case/){target="_blank"}，成員包括 BAKE、ICJ Kenya、Paradigm Initiative、肯亞記者工會（Kenya Union of Journalists）、Katiba Institute、肯亞律師公會（Law Society of Kenya）和 CIPESA。為了支援這份提交給肯亞高等法院（High Court of Kenya）的聲請，OONI 以專家意見的形式產出了一份[詳細的研究報告](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}，記錄 Telegram 在肯亞 2023 與 2024 年 KCSE 全國性大考（肯亞的中學畢業會考，當局以防堵考題外洩為由，在考試期間限制社群與通訊軟體）期間被封鎖的情形。
 
-在這個案子裡，記者工會、數位人權組織、法律倡議者與技術研究者從同一份資料集出發，把「網路被中斷」推升為公共利益議題。這也是區域上重要的先例，坦尚尼亞的律師後來主動聯絡 OONI 索取資料，用來支持當地挑戰封鎖 Twitter/X 的法律行動，OONI 也因此發表了一份[記錄這次封鎖的研究報告](https://ooni.org/post/2025-tanzania-blocked-twitter/){target="_blank"}。
+在肯亞的訴訟裡，記者工會、數位人權組織、法律倡議者與技術研究者從同一份資料集出發，把「網路被中斷」推升為公共利益議題。這也是區域上重要的先例，坦尚尼亞的律師後來主動聯絡 OONI 索取資料，用來支持當地挑戰封鎖 Twitter/X 的法律行動，OONI 也因此發表了一份[記錄該次封鎖的研究報告](https://ooni.org/post/2025-tanzania-blocked-twitter/){target="_blank"}。
 
 ## 為共同的網際網路集體行動
 

@@ -23,7 +23,7 @@ icon: material/account-group-outline
 
 ## 撰寫中（2026 Q3 完成）
 
-下列場景已上線骨架條列，內文預計 2026 Q3 補完整版。如果你身在這些情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
+下列場景已上線骨架條列，內文預計 2026 Q3 補完整版。如果你身在其中任一情境、或正在協助這些族群的工作者，歡迎到 Matrix 公開 room 表達想看的角度，或認領 issue 一起寫：
 
 - [家暴受害者的數位準備](./domestic-violence.md)：在離開加害者前後重建數位界線（[issue #33](https://github.com/anoni-net/docs/issues/33)）
 - [選舉觀察員的自保](./election-observer.md)：站點觀察、資料記錄、安全聯繫的基本守則（[issue #35](https://github.com/anoni-net/docs/issues/35)）

@@ -33,7 +33,7 @@ CryptPad 採用 zero-knowledge（零知識）架構。具體地說：
 
 **即便我們想看，也看不到。**
 
-這層保證的代價是兩個現實限制。第一，**密碼或鑰匙遺失就無法復原內容**。CryptPad 不能幫你 reset。第二，**全文搜尋、內容索引、AI 摘要這類需要伺服器讀內容的功能不存在**。對於需要長期保密的工作來說，這通常是可以接受的取捨。
+這層保證的代價是兩個現實限制。第一，**密碼或鑰匙遺失就無法復原內容**。CryptPad 不能幫你 reset。第二，**全文搜尋、內容索引、AI 摘要這類需要伺服器讀內容的功能不存在**。對於需要長期保密的工作來說，取捨通常可以接受。
 
 技術細節可參考 [CryptPad Whitepaper](https://blog.cryptpad.org/2023/02/02/CryptPad-Whitepaper/){target="_blank"} 與 [How CryptPad's encryption works](https://cryptpad.org/what-is-cryptpad/){target="_blank"}。
 
