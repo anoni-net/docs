@@ -21,7 +21,7 @@ OONI Probe 的觀測資料會回傳到 OONI 的 [AWS S3 Open Data](https://regis
 - 直接讀 [OONI Docs](https://docs.ooni.org/data){target="_blank"} 介紹的擷取方式
 - 或透過 [anoni-net/docs 的 asn_coverage 程式](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} 來操作
 
-資料欄位結構參考 [ooni/spec](https://github.com/ooni/spec){target="_blank"}。
+抓下來的資料每一行是一筆測量，欄位怎麼讀見 [OONI 測量資料結構導覽](./ooni-data-format.md)，該頁用兩筆台灣的真實測量對照說明各欄位含義，並對應到上游 [ooni/spec](https://github.com/ooni/spec){target="_blank"} 的規格文件。
 
 ## 擷取與分析指令
 
