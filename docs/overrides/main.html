@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{# 維護公告：8/13 18:00（台灣時間）過後移除，屆時另開 PR #}
+{% block announce %}
+  公告：社群自架服務（Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks）將於台灣時間 2026/8/12 22:00 至 8/13 18:00 停機維護，本站內容不受影響。
+{% endblock %}
+
 {% block site_meta %}
   {% if page.meta and page.meta.og and page.meta.og.enabled %}
     {% set page_title = page.meta.get("title", page.title) %}
