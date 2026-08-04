@@ -20,6 +20,15 @@ description: "翻譯 Tor Project 官方公告，介紹新上線的 Snowflake Vol
 
     - [Snowflake Volunteer, an Android app to help people bypass censorship | August 3, 2026](https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/){target="_blank"}
 
+<figure markdown="span">
+    <a href="https://forum.torproject.org/uploads/default/original/2X/c/c9143874b416a1c6e0d676145c11846ad63bad39.jpeg" target="_blank">
+        <img src="https://forum.torproject.org/uploads/default/original/2X/c/c9143874b416a1c6e0d676145c11846ad63bad39.jpeg"
+            alt="Snowflake Volunteer 官方宣傳圖，畫面中多支手機顯示 App 的啟用開關、設定選項與統計畫面"
+            style="border-radius: 10px;">
+    </a>
+    <figcaption>圖片來源：<a target="_blank" href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/">Tor Project Blog</a>。</figcaption>
+</figure>
+
 Tor Project 在 2026 年 8 月 3 日發布 [Snowflake Volunteer](https://f-droid.org/en/packages/io.bloco.snowflake/){target="_blank"}，一支專門讓人用 Android 手機當 [Snowflake](../../tools/tor-snowflake.md) 志工橋接的獨立 App。過去要貢獻 Snowflake 橋接，需透過瀏覽器擴充功能、網站內嵌 widget、桌機命令列工具，或 Android 上的 [Orbot Kindness Mode](https://orbot.app/en/kindness/){target="_blank"}。新 App 把「當志工橋接」獨立成一個單一用途的應用程式，介面與流程都只為此設計。
 
 <!-- more -->
@@ -35,6 +44,15 @@ Snowflake 的原理是把使用者的流量偽裝成視訊通話的樣子，再�
 Bloco 站在 [Guardian Project](https://guardianproject.info){target="_blank"} 既有的行動端 Tor 生態基礎上開發，特別是 [IPtProxy](https://github.com/tladesignz/IPtProxy){target="_blank"} 這個函式庫，把 Tor 整合進行動 App 所需的工具與 pluggable transport 整合在一起。有這層基礎，Bloco 就能把心力集中在三件事。第一是讓 App 能長時間在背景穩定運作、盡量省電。第二是把使用者體驗做對，讓每個人都看得懂 App 在做什麼、能照自己的網路狀況正確設定。第三是用統計數字持續呈現志工幫上了多少忙，維持參與的動力。
 
 成果是 Snowflake Volunteer，一支把「什麼時候貢獻、貢獻多少」的控制權交給志工自己的單一用途 App。使用者可以讓它在背景執行、限制只在 Wi-Fi（非計量網路）下運作、設定只在充電時執行，也可以設定同時能幫幾個連線。啟用後，App 會自動跟需要 Snowflake 橋接的使用者配對，協助把對方的連線導向 Tor 網路。
+
+<figure markdown="span">
+    <a href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/features-overview.png" target="_blank">
+        <img src="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/features-overview.png"
+            alt="Snowflake Volunteer App 三個畫面的截圖：啟用中的主畫面顯示幫助人數與流量統計、設定頁可調整背景執行與限制 Wi-Fi 或充電時執行、統計頁列出逐日的連線數與流量"
+            style="border-radius: 10px;">
+    </a>
+    <figcaption>App 的主畫面、設定頁與統計頁截圖。圖片來源：<a target="_blank" href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/">Tor Project Blog</a>。</figcaption>
+</figure>
 
 ## 上線後的成效
 
