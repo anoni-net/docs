@@ -24,7 +24,7 @@ description: "完整翻譯 A Server That Forgets: Exploring Stateless Relays，�
 
 [![A Server That Forgets](https://forum.torproject.org/uploads/default/original/2X/e/ee9375b0ec3906d4a0338bc230d97d0a659d996a.jpeg){style="border-radius: 10px;"}](https://blog.torproject.org/exploring-stateless-relays/){target="_blank"}
 
-營運 Tor relay 需要長期對抗敵手，這些敵手可能來自私人勢力，也可能來自國家級體系，目標是破壞整體網路，由攻擊其中的節點開始。此外，有些營運者還得面對扣押、搜查，或硬體遭到直接實體接觸。這些情況在[奧地利](https://www.zdnet.com/article/austrian-man-raided-for-operating-tor-exit-node/){target="_blank"}、[德國](https://forum.torproject.org/t/tor-relays-artikel-5-e-v-another-police-raid-in-germany-general-assembly-on-sep-21st-2024/14533){target="_blank"}、[美國](https://www.npr.org/sections/alltechconsidered/2016/04/04/472992023/when-a-dark-web-volunteer-gets-raided-by-the-police){target="_blank"}、[俄羅斯](https://torservers.net/blog/2017-04-14-freebogatov-relaymob/){target="_blank"} 都有先例，也很可能不只這些地方。在這些案例裡，伺服器本身就可能變成風險來源。
+營運 Tor relay 需要長期對抗敵手，來源可能是私人勢力，也可能是國家級體系，目標是破壞整體網路，由攻擊其中的節點開始。此外，有些營運者還得面對扣押、搜查，或硬體遭到直接實體接觸。同樣的情況在[奧地利](https://www.zdnet.com/article/austrian-man-raided-for-operating-tor-exit-node/){target="_blank"}、[德國](https://forum.torproject.org/t/tor-relays-artikel-5-e-v-another-police-raid-in-germany-general-assembly-on-sep-21st-2024/14533){target="_blank"}、[美國](https://www.npr.org/sections/alltechconsidered/2016/04/04/472992023/when-a-dark-web-volunteer-gets-raided-by-the-police){target="_blank"}、[俄羅斯](https://torservers.net/blog/2017-04-14-freebogatov-relaymob/){target="_blank"} 都有先例，也很可能不只這些地方。在上述案例裡，伺服器本身就可能變成風險來源。
 
 Tor 之所以存在，是因為我們希望保護網路使用者，免於不必要的監控。Tor 網路的設計前提是：任何單一營運者或單一伺服器，都不應該能重建「誰正在和誰通訊」。記者、行動者、吹哨者都仰賴這個前提成立。若 relay 被扣押後可交出內容，就會侵蝕整個系統所依賴的信任，而這正是我們想解決的問題。
 
@@ -83,7 +83,7 @@ TPM 不是萬靈丹。Tor 使用的 ed25519 金鑰並不受 TPM 晶片原生支�
 
 ### 更新後重新 sealing
 
-當軟體堆疊改變，TPM 的量測狀態也會改變。如何自動化這件事，也就是預測更新後開機量測值，仍是最難的未解題之一。像 systemd-pcrlock 這類工具正在往這方向前進，但還不到開箱即用。
+當軟體堆疊改變，TPM 的量測狀態也會改變。如何自動化預測更新後的開機量測值，仍是最難的未解題之一。像 systemd-pcrlock 這類工具正在往該方向前進，但還不到開箱即用。
 
 ### 無狀態重開機與升級衝突
 

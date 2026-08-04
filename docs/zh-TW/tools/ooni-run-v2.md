@@ -37,7 +37,7 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 ## anoni.net 如何使用
 
-社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前納入 anoni.net 的官網、Cryptpad、Etherpad、SearXNG、Send、Matrix 與 docs 站。協助者用 OONI Probe 安裝這條連結後，每次執行測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
+社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前納入 anoni.net 的官網、Cryptpad、Etherpad、SearXNG、Send、Matrix 與 docs 站。協助者用 OONI Probe 安裝連結後，每次執行測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
 
 連結之外，[OONI 網站檢測清單](../taiwan/ooni-checklist.md) 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助執行這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
 
@@ -57,7 +57,7 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 !!! info "關於電子郵件地址"
 
-    當你登入時，OONI 網站不會儲存電子郵件地址，只有在你建立 OONI Run 連結時才會儲存。OONI 網站儲存你的電子郵件地址，這樣當 OONI Probe 使用者收到你發送的 OONI Run 連結時，可以根據你的電子郵件地址來信任該連結（這會顯示在你建立的 OONI Run 連結中），有助於降低執行惡意連結的風險。
+    當你登入時，OONI 網站不會儲存電子郵件地址，只有在你建立 OONI Run 連結時才會儲存。OONI 網站儲存你的電子郵件地址，用意是當 OONI Probe 使用者收到你發送的 OONI Run 連結時，可以根據你的電子郵件地址來信任該連結（這會顯示在你建立的 OONI Run 連結中），有助於降低執行惡意連結的風險。
 
 送出後請到信箱中找到 OONI 團隊寄來的信件：
 
@@ -85,7 +85,7 @@ The link can be used on multiple devices and will expire in 24 hours.
 
 * **步驟 5.** 為你的 OONI Run 連結建立一個標題。你也可以選擇性地為你的標題增加翻譯。「標題」將會顯示在測試者安裝於其 OONI Probe 行動應用程式內的 OONI Run 連結卡片中。建議使用一個簡短且能清晰傳達測試類型的標題。在上述範例中，我們將標題設為「**匿名網路社群 anoni.net**」，因為我們希望在 OONI Run 連結中納入社群所建立的服務網站進行測試。
 * **步驟 6.** 為你的 OONI Run 連結新增一個簡短的描述。你也可以選擇性地增加多語言的翻譯。在上述範例中，我們已指定計劃新增到 OONI Run 連結中的網站服務，並請求 OONI Probe 行動應用程式使用者進行測試。我們建議具體標明測試的平台或新增其他有用的內容，以鼓勵進行測試。
-* **步驟 7.** 為你的 OONI Run 連結新增一個「較長的」描述。透過這樣的方式來詳細說明測試內容，以及為什麼這些測試很重要。你也可以選擇性地增加翻譯。
+* **步驟 7.** 為你的 OONI Run 連結新增一個「較長的」描述。在描述裡詳細說明測試內容，以及為什麼這些測試很重要。你也可以選擇性地增加翻譯。
 
 <figure markdown="span">
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-5.png" alt="新增到期日期、檢測網址" style="width:80%">

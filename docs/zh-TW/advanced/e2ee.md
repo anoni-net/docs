@@ -108,7 +108,7 @@ Signal 在 2025 年加入加密訊息備份（Secure Backups）[^4]，採取「�
 - **Signal**：一對一與小群組首選，UX 接近 Line，門檻低。
 - **Matrix**（如 anoni.net 自建的伺服器）：開源、聯邦化、可自架，群組與社群討論為主。
 
-香港的起點不同。當地最普及的即時通訊工具是 WhatsApp（非 LINE），2019 年反送中運動期間，Telegram、Signal 因為群組動員與較強的加密特性被大量採用。《國安法》之後，通訊與社群平台上的紀錄成為國安、煽動案件的證據來源[^hk]。對香港讀者，Signal 與 Matrix 的價值同樣落在群組加密與 metadata 這兩層，差別在於，這裡的威脅模型要對應國安監控，不只是一般的司法協助請求。
+香港的起點不同。當地最普及的即時通訊工具是 WhatsApp（非 LINE），2019 年反送中運動期間，Telegram、Signal 因為群組動員與較強的加密特性被大量採用。《國安法》之後，通訊與社群平台上的紀錄成為國安、煽動案件的證據來源[^hk]。對香港讀者，Signal 與 Matrix 的價值同樣落在群組加密與 metadata 兩層，差別在於，這裡的威脅模型要對應國安監控，不只是一般的司法協助請求。
 
 在敏感工作情境（記者保護消息來源、社運行動現場、家暴受害者尋求協助）下，這兩條路的差異會繼續展開到 [scenarios/journalist.md](../scenarios/journalist.md)、[scenarios/activist.md](../scenarios/activist.md) 與 [scenarios/domestic-violence.md](../scenarios/domestic-violence.md)。
 
