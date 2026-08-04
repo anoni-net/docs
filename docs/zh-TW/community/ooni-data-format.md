@@ -8,9 +8,9 @@ icon: material/code-json
 
 [ASN 觀測資料擷取與分析](./asn-coverage-howto.md) 說明了怎麼把 OONI 公開資料抓下來，抓下來之後會遇到下一個問題：一筆測量有二十多個頂層欄位，`test_keys` 裡還有二十幾個，該看哪一個。
 
-這頁用兩筆台灣的真實測量對照，說明一筆 web_connectivity 測量的組成，以及每個欄位對應到上游 [ooni/spec](https://github.com/ooni/spec){target="_blank"} 的哪份規格。看懂之後，你可以自己判斷一筆測量說了什麼，也能決定分析程式該取哪些欄位。
+以下用兩筆台灣的真實測量對照，說明一筆 web_connectivity 測量的組成，以及每個欄位對應到上游 [ooni/spec](https://github.com/ooni/spec){target="_blank"} 的哪份規格。看懂之後，你可以自己判斷一筆測量說了什麼，也能決定分析程式該取哪些欄位。
 
-!!! info "這頁的範例資料"
+!!! info "範例資料來源"
 
     兩筆都是 2026-08-04 由台灣的 OONI Probe 產生的公開資料，可在 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} 查到原始內容。
 
@@ -24,14 +24,14 @@ icon: material/code-json
 不用一開始就記住所有欄位。一筆測量可以拆成三層來讀：
 
 1. **外殼**：誰在哪裡、用什麼軟體、什麼時候測的。所有測項共用同一套欄位，規格是 [df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"}。
-2. **判定**：這次測量的結論。欄位隨測項而異，全部收在 `test_keys` 底下，web_connectivity 的定義在 [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"}。
+2. **判定**：測量得出的結論。欄位隨測項而異，全部收在 `test_keys` 底下，web_connectivity 的定義在 [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"}。
 3. **證據**：支撐結論的原始紀錄，包含每一次 DNS 查詢、TCP 連線、TLS 握手與 HTTP 請求。同樣放在 `test_keys` 底下，各自對應一份 `df-` 開頭的規格。
 
 判定層告訴你結論，證據層讓你驗證結論。兩者分開看，資料就不會亂。
 
 ## 外殼：誰在哪裡測的
 
-外殼層的欄位在所有測項中都一樣。實務上最常用到的是這幾個：
+外殼層的欄位在所有測項中都一樣，實務上最常用到的欄位如下：
 
 | 欄位 | 正常通過那筆 | 判定異常那筆 | 說明 |
 |---|---|---|---|
@@ -40,20 +40,20 @@ icon: material/code-json
 | `probe_network_name` | `Chunghwa Telecom Co., Ltd.` | `Chunghwa Telecom Co., Ltd.` | 該 ASN 的組織名稱 |
 | `resolver_asn` | `AS3462` | `AS13335` | 測量時實際使用的 DNS 解析器所屬 ASN |
 | `resolver_network_name` | `Chunghwa Telecom Co., Ltd.` | `Cloudflare Inc` | 解析器的組織名稱 |
-| `input` | `http://presidentlee.tw/` | `https://ntc.party/` | 這次測量的對象 |
+| `input` | `http://presidentlee.tw/` | `https://ntc.party/` | 測量對象的網址 |
 | `test_name` | `web_connectivity` | `web_connectivity` | 測項名稱 |
-| `software_name` | `ooniprobe-cli` | `ooniprobe-desktop-unattended` | 產生這筆資料的 Probe 種類 |
+| `software_name` | `ooniprobe-cli` | `ooniprobe-desktop-unattended` | 產生資料的 Probe 種類 |
 | `software_version` | `3.29.1` | `3.26.0` | Probe 版本 |
 | `measurement_start_time` | `2026-08-04 08:59:30` | `2026-08-04 08:45:45` | 測量開始時間（UTC）|
 | `report_id` | `20260804T062033Z_webconnectivity_TW_3462_n4_uEH5rGoD07cN2oYQ` | `20260804T084446Z_webconnectivity_TW_3462_n4_dFfWCDrwouM0TsT2` | 同一次執行產生的多筆測量共用此值 |
 
-`probe_asn` 與 `resolver_asn` 可能不同，上表就是實例。兩筆都在中華電信的網路上執行，但其中一筆的使用者把 DNS 指向了 Cloudflare。做 ASN 分析時這兩個欄位要分開看，混用會讓「哪家電信商的網路上看到什麼」失準。
+`probe_asn` 與 `resolver_asn` 可能不同，上表就是實例。兩筆都在中華電信的網路上執行，但其中一筆的使用者把 DNS 指向了 Cloudflare。做 ASN 分析時兩個欄位要分開看，混用會讓「哪家電信商的網路上看到什麼」失準。
 
 !!! note "`probe_ip` 永遠是 `127.0.0.1`"
 
-    OONI 刻意不收集測量者的真實 IP，這個欄位固定寫入本機位址。想追測量來源只能靠 `probe_asn` 加時間，這也是 [OONI Run v2 操作說明](../tools/ooni-run-v2.md) 提醒協助者注意的隱私邊界。
+    OONI 刻意不收集測量者的真實 IP，`probe_ip` 固定寫入本機位址。想追測量來源只能靠 `probe_asn` 加時間，[OONI Run v2 操作說明](../tools/ooni-run-v2.md) 也提醒協助者注意同樣的隱私邊界。
 
-## 判定：這次測量的結論
+## 判定：測量得出的結論
 
 `test_keys` 底下有八個欄位負責 web_connectivity 的判定。把兩筆並排，差異一眼可見：
 
@@ -75,7 +75,7 @@ icon: material/code-json
 
 !!! warning "異常不等於封鎖"
 
-    `blocking` 有值只代表這次測量觀測到與對照組不一致，判斷是否真的存在網路干預需要更多佐證。以上表那筆為例，Probe 對 `ntc.party` 的 A 與 AAAA 查詢都回報 `dns_nxdomain_error`（網域不存在），但撰稿時從多個公開 DNS 解析器查詢，該網域可解析到 IPv6 位址。單筆測量無法區分網路干預、解析器當下的暫時狀態，以及網域本身的設定變動。
+    `blocking` 有值只代表該筆測量觀測到與對照組不一致，判斷是否真的存在網路干預需要更多佐證。以上表那筆為例，Probe 對 `ntc.party` 的 A 與 AAAA 查詢都回報 `dns_nxdomain_error`（網域不存在），但撰稿時從多個公開 DNS 解析器查詢，該網域可解析到 IPv6 位址。單筆測量無法區分網路干預、解析器當下的暫時狀態，以及網域本身的設定變動。
 
     要下封鎖結論，需要跨時間、跨 ASN、跨解析器的多筆測量交叉比對。誤判的成因與辨識方式可參考 [OONI 談測量結果失準](../blog/posts/2026-ooni-faulty-measurements.md)。
 
@@ -116,7 +116,7 @@ icon: material/code-json
 
 ## 版本與相容性
 
-讀 spec 之前先確認版本，這能省下不少困惑：
+讀 spec 之前先確認版本，能省下不少困惑：
 
 - **`data_format_version` 目前是 `0.2.0`**。外殼層的欄位定義穩定，[df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"} 可以直接對照。
 - **web_connectivity 實際流通的 `test_version` 是 `0.4.3`**。[ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} 的規格內容已更新為描述 v0.5 演算法，但生產環境仍以 v0.4 為主。spec 明訂新版演算法必須使用不同的 test_keys 欄位，v0.4 的欄位定義保持相容，因此上表的欄位讀法對兩個版本都適用。
@@ -138,7 +138,7 @@ curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_conne
 curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement_uid>"
 ```
 
-加上 `anomaly=true` 可以只列出被判定異常的測量，適合用來找對照範例。把 `probe_cc` 換成自己所在地區、`probe_asn` 換成自己的 ASN，就能看到自己這條網路上的觀測紀錄。
+加上 `anomaly=true` 可以只列出被判定異常的測量，適合用來找對照範例。把 `probe_cc` 換成自己所在地區、`probe_asn` 換成自己的 ASN，就能看到自己網路上的觀測紀錄。
 
 需要批次處理大量資料時，改走 AWS S3 公開資料集會更有效率，作法見 [ASN 觀測資料擷取與分析](./asn-coverage-howto.md)。
 
