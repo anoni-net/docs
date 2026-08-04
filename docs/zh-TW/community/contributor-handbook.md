@@ -6,7 +6,7 @@ icon: material/book-open-variant
 
 # :material-book-open-variant: 貢獻者百科
 
-社群協作久了會累積許多不成文規定：標題該如何下、檔名如何命名、PR 描述要寫什麼、Issue 如何分類、新貢獻者第一週會碰到的疑問。這份貢獻者百科把這些散落在 README、Issue 留言、Matrix 對話裡的內容整合成一頁，方便新成員一次看完，也讓資深成員有共同對話的依據。
+社群協作久了會累積許多不成文規定：標題該如何下、檔名如何命名、PR 描述要寫什麼、Issue 如何分類、新貢獻者第一週會碰到的疑問。貢獻者百科把散落在 README、Issue 留言、Matrix 對話裡的內容整合成一頁，方便新成員一次看完，也讓資深成員有共同對話的依據。
 
 如果你是第一次參與，建議先看 [如何參與與認領主題](./how-to-contribute.md) 決定方向，再回來這頁查具體做法。完整的工具入口與帳號申請見 [社群自架服務](./tools.md)。
 
@@ -235,4 +235,4 @@ zh-TW 是 single source of truth，zh-CN 與 en 從 zh-TW 同步。詳細流程�
 
 ## 這份百科是活文件
 
-新貢獻者遇到不在這頁的問題、發現某個流程其實沒寫清楚，歡迎提案改這頁。改 contributor-handbook 本身就是一個 good first issue 的好題目。
+新貢獻者遇到本頁沒有涵蓋的問題、發現某個流程其實沒寫清楚，歡迎提案修改本頁。改 contributor-handbook 本身就是一個 good first issue 的好題目。

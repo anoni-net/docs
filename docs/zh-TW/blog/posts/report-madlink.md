@@ -27,7 +27,7 @@ description: "InterSecLab MADLink 報告中譯上線。Geedge 第一代防火牆
 
 凌華的硬體還出現在 Geedge 部署於緬甸的 EtherFabric 之中。EtherFabric 是一款客製化的網路封包經紀（network packet broker，NPB），用來在多個 TSG 節點之間做流量負載平衡。外洩文件中的一組 MAC 位址可追溯到凌華，這顯示凌華在 Geedge 產品線中的影響並非單筆 CSA-7400 交易那麼簡單。
 
-Geedge 目前這一代的 TSG 部署在衣索比亞、巴基斯坦和緬甸，伺服器來自中科曙光（Sugon，已遭美國制裁）旗下的 Nettrix，儲存來自浪潮（Inspur）。這些是標準 x86 元件，即便直接採購受限，仍可從次級市場取得。報告認為，這類為監控用途設計的專用硬體（CSA-7400、EtherFabric 中使用的凌華元件），才是出口管制最能發揮效果的對象。
+Geedge 現行世代的 TSG 部署在衣索比亞、巴基斯坦和緬甸，伺服器來自中科曙光（Sugon，已遭美國制裁）旗下的 Nettrix，儲存來自浪潮（Inspur）。這些是標準 x86 元件，即便直接採購受限，仍可從次級市場取得。報告認為，為監控用途量身設計的專用硬體（CSA-7400、EtherFabric 中使用的凌華元件），才是出口管制最能發揮效果的對象。
 
 ## 翻譯版的閱讀路徑
 
@@ -45,7 +45,7 @@ Geedge 目前這一代的 TSG 部署在衣索比亞、巴基斯坦和緬甸，�
 
 ## 這次跟上一份報告不同的地方：編輯觀察頁
 
-上一份《The Internet Coup》翻譯時，我們的工作止於忠實中譯。MADLink 這次點名了一家台灣上市公司，理論上會引發本地媒體追問、立委質詢、主管機關回應這樣的循環，但截至 2026-05-20 的觀察，台灣中文公共領域明顯安靜。這個現象本身就是觀察素材，所以多寫了一頁：[編輯觀察：台灣對 MADLink 報告的後續反應](../../reports/interseclab-madlink/index_6.md){target="_blank"}。
+上一份《The Internet Coup》翻譯時，我們的工作止於忠實中譯。MADLink 這次點名了一家台灣上市公司，理論上會引發本地媒體追問、立委質詢、主管機關回應的循環，但截至 2026-05-20 的觀察，台灣中文公共領域明顯安靜。安靜本身就是觀察素材，所以多寫了一頁：[編輯觀察：台灣對 MADLink 報告的後續反應](../../reports/interseclab-madlink/index_6.md){target="_blank"}。
 
 這頁明確標示為 anoni.net 編輯團隊的整理，不屬於 InterSecLab 原報告。內容分成五個區塊：
 

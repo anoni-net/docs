@@ -15,7 +15,7 @@ description: "邀請您於 2026 年 1 月 25 日 g0v Hackath71n 零時政府第 
 
 ![g0v hackath71n / 零時政府第 71 次 黑客松](https://assets.anoni.net/blog/g0v-hackath71n.webp)
 
-這一次我們要南下[高雄](https://zh.wikipedia.org/zh-tw/%E9%AB%98%E9%9B%84%E5%B8%82){target="_blank"}（Kaohsiung、打狗）參與「[g0v Hackath71n 零時政府第 71 次黑客松](https://jothon.g0v.tw/){target="_blank"}」活動，如果您這段時間在南部或是也想要一起南下到高雄，**順便旅行、遠端工作**個幾天參與活動的話，可以來黑客松活動找我們，我們也有報名一攤來推進「匿名網路社群」[2026](./2025to2026.md) 的進度！
+這一次我們要南下[高雄](https://zh.wikipedia.org/zh-tw/%E9%AB%98%E9%9B%84%E5%B8%82){target="_blank"}（Kaohsiung、打狗）參與「[g0v Hackath71n 零時政府第 71 次黑客松](https://jothon.g0v.tw/){target="_blank"}」活動，如果您活動期間人在南部，或是也想要一起南下到高雄，**順便旅行、遠端工作**個幾天參與活動的話，可以來黑客松活動找我們，我們也有報名一攤來推進「匿名網路社群」[2026](./2025to2026.md) 的進度！
 
 目前看起來活動還有一點點名額，如果對於我們的專案有興趣、想要做出貢獻的話，歡迎在活動當天加入我們（不論你來自什麼背景、專業）！
 

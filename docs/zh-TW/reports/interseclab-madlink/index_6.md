@@ -16,7 +16,7 @@ icon: material/eye-outline
 
 MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本地公司供應監控與審查設備給威權政府的供應鏈。當報告點名了一家台灣上市公司，理論上會引發本地媒體追問、立委質詢、主管機關回應這樣的循環。
 
-但這份報告發布後，台灣中文公共領域的反應明顯偏少。這種「沒有反應」本身就是觀察素材，它顯示報告所指出的制度缺口可能不只在法規層面，也在政治關注與媒體議題化的層面。記錄這個狀態，是為了讓後續查找這份報告的人能看到當下的接收脈絡，也讓社群有一個追蹤的起點。
+但報告發布後，台灣中文公共領域的反應明顯偏少。這種「沒有反應」本身就是觀察素材，它顯示報告所指出的制度缺口可能不只在法規層面，也在政治關注與媒體議題化的層面。記錄這個狀態，是為了讓後續查找 MADLink 報告的人能看到當下的接收脈絡，也讓社群有一個追蹤的起點。
 
 ## 外部交叉驗證
 
@@ -24,7 +24,7 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 ### 報告核心事證
 
-**IEEE OUI `00:30:64` 確實登記在 ADLINK Technology, Inc. 名下。** 這是報告把 EtherFabric 與凌華關聯起來的硬體指紋，也是整份報告最容易自行驗證的一條線索。透過 macvendors.com（[`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}）或 macvendorlookup.com（[`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}）查詢，兩個獨立來源都回傳「ADLINK TECHNOLOGY, INC.」，註冊地址為新北中和區建一路 166 號 9 樓（凌華舊址）。這從硬體層級確認了「EtherFabric 管理介面 MAC 位址來自凌華設備」這項主張屬實。
+**IEEE OUI `00:30:64` 確實登記在 ADLINK Technology, Inc. 名下。** 這是報告把 EtherFabric 與凌華關聯起來的硬體指紋，也是整份報告最容易自行驗證的一條線索。透過 macvendors.com（[`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}）或 macvendorlookup.com（[`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}）查詢，兩個獨立來源都回傳「ADLINK TECHNOLOGY, INC.」，註冊地址為新北中和區建一路 166 號 9 樓（凌華舊址）。查詢結果從硬體層級確認了「EtherFabric 管理介面 MAC 位址來自凌華設備」的主張屬實。
 
 **CSA-7400 被凌華自家行銷成 DPI 與防火牆設備。** 報告反駁凌華「通用平台」說法的核心，就是這款產品本身的市場定位。在凌華中英文官網[產品頁](https://www.adlinktech.com/Products/Network_Security_Appliance/4UNetworkAppliance/CSA-7400?lang=en){target="_blank"}上，CSA-7400 明確被分類在「Network Security Appliance」底下，行銷為「DPI、IDS/IPS、DDoS、NGFW」carrier-grade 設備。manualzz 上的 [Quick Start Manual](https://manualzz.com/doc/55701658/adlink-technology-csa-7400-quick-start-manual){target="_blank"} 也載明出貨預載 CentOS 7，與報告描述 TSG-OS 早期基於 CentOS 的細節一致。
 
@@ -68,7 +68,7 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 **既有政治攻防焦點與此案不重疊。** 對綠營來說，這個案子拉出來會打到「台灣公司助中國輸出審查」的尷尬位置。對藍營來說，戳這個議題容易被定位成「配合美國打台灣業者」。雙方都沒有主動放大的政治誘因。
 
-**公民社會的議題分配。** 台灣資訊類公民團體近年主要關注中國對台資訊戰、假訊息治理與數位平台責任，較少有 NGO 把「監控科技出口的人權審查」當主戰場。這也是 anoni.net 翻譯這份報告想補上的位置。
+**公民社會的議題分配。** 台灣資訊類公民團體近年主要關注中國對台資訊戰、假訊息治理與數位平台責任，較少有 NGO 把「監控科技出口的人權審查」當主戰場。這也是 anoni.net 翻譯 MADLink 報告想補上的位置。
 
 ## 制度面缺口仍在
 

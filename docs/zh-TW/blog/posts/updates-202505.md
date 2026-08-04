@@ -18,7 +18,7 @@ description: "專案目前近況與更新 2025/05"
 
 ## 匿名網路工作坊（籌備）
 
-即將在 2025/08 於 COSCUP 開源人年會上舉辦的「[匿名網路工作坊](../../event-workshop-2025-prepare.md)」活動，目前我們在 5/18 舉辦了第一次線上籌備會議，會議記錄可以參考[這份](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感謝許多夥伴來報名這次的活動。下次開會時間在 2025/06/08 21:00 `UTC+8`，預計討論培訓時間、活動籌備...等事宜。
+即將在 2025/08 於 COSCUP 開源人年會上舉辦的「[匿名網路工作坊](../../event-workshop-2025-prepare.md)」活動，目前我們在 5/18 舉辦了第一次線上籌備會議，會議記錄可以參考[共筆頁面](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感謝許多夥伴來報名這次的活動。下次開會時間在 2025/06/08 21:00 `UTC+8`，預計討論培訓時間、活動籌備...等事宜。
 
 教材目前也正在[翻譯中](https://docs.google.com/presentation/d/16XWWrSX8DqmZ9uEORiaI-jT0RpquswXFDbzvr6srYjA/edit){target="_blank"}，我們使用 Tor/Tails 的教材先以不調整架構、僅翻譯為華文的方式，將教材轉變為適合華語方式進行。培訓小幫手的部分報名很踴躍，活動協助的部分還需要一些志工夥伴幫忙，例如活動宣傳、報名頁面、當天活動的籌劃 ... 等。如果您還有興趣，[歡迎報名](../../event-workshop-2025-prepare.md){target="_blank"}（請見頁內「報名工作人員」段落）。
 
