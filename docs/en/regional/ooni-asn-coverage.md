@@ -106,6 +106,9 @@ If you want to retrieve and analyse OONI's public data to calculate ASN coverage
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI Website Testing List](./ooni-checklist.md) — the list these measurements are collected against, and how to help maintain it
+- [:material-code-json: Reading an OONI measurement](../community/ooni-data-format.md) — what the fields in a single measurement mean
+- [:material-shield-search: How OONI decides a site is blocked](../community/ooni-blocking-determination.md) — how the verdict is computed, and why a value is not a confirmed block
+- [:material-table-search: OONI nettest quick reference](../community/ooni-nettests-map.md) — what each nettest measures and which still produce data
 - [:material-radar: Regional Observatory](./index.md) — the rest of what we measure and publish
 - [:octicons-mark-github-24: Development environment setup](../community/setup-repo.md) — set up the environment to run the analysis yourself
 

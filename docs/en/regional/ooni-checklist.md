@@ -62,7 +62,9 @@ List maintenance is a good entry point for new contributors. It needs no program
 Where to start:
 
 - **To help with list maintenance:** say so in the anoni-net public space on Matrix, see [Community](../community/index.md) for how to join. Someone will help you pick a slice to work on.
-- **To help with the data analysis side:** see [ASN observation data analysis](./ooni-asn-coverage.md)
+- **To help with the data analysis side:** see [ASN observation data analysis](./ooni-asn-coverage.md) and [ASN observation data retrieval and analysis](../community/asn-coverage-howto.md)
+- **To read the measurement data itself:** see [Reading an OONI measurement](../community/ooni-data-format.md) and [How OONI decides a site is blocked](../community/ooni-blocking-determination.md)
+- **To see what gets measured beyond this list:** see [OONI nettest quick reference](../community/ooni-nettests-map.md)
 - **To understand how the community works:** see [How to contribute](../community/how-to-contribute.md)
 
 ## :fontawesome-solid-diagram-project: Where to go from here

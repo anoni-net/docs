@@ -74,6 +74,9 @@ nav:
       - community/i18n.md
       - community/setup-repo.md
       - community/asn-coverage-howto.md
+      - community/ooni-data-format.md
+      - community/ooni-blocking-determination.md
+      - community/ooni-nettests-map.md
       - community/setup-tor-relay.md
       - community/setup-tor-webtunnel.md
       - community/onionoo-mcp.md

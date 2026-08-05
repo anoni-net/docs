@@ -51,6 +51,8 @@ miniooni's `-i` treats the URL you give it as a descriptor-JSON endpoint and GET
 <div class="grid cards" markdown>
 
 - [:material-access-point-network: Regional observatory](../regional/index.md)
+- [:material-table-search: OONI nettest quick reference](../community/ooni-nettests-map.md)
+- [:material-code-json: Reading an OONI measurement](../community/ooni-data-format.md)
 - [:material-snowflake: Tor Snowflake](./tor-snowflake.md)
 - [:material-web: OONI](https://ooni.org/){target="_blank"}
 

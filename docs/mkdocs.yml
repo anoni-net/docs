@@ -120,6 +120,9 @@ nav:
           - community/campus-relay-faq.md
           - community/onionoo-mcp.md
           - community/asn-coverage-howto.md
+          - community/ooni-data-format.md
+          - community/ooni-blocking-determination.md
+          - community/ooni-nettests-map.md
           - community/upload-sensitive.md
           - community/pin-ipfs-mirror.md
           - community/brand-assets.md

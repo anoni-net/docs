@@ -27,14 +27,14 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
     </a>
 </figure>
 
-- **Probe：**OONI 检测观察程序。
+- **Probe：**OONI 检测观察程序，检测对象包含网站、通讯软件连线、VPN 连线、连线效能等。
 - **Censor：**资料传输过程中的监控者，可能是公司 IT 网络、电信公司、国家级网络架构。网路干预可透过以下方式进行，结果与目的都是阻止检视网站内容：
     1. DNS 篡改（DNS tampering、DNS 异常）
     2. IP 封锁（DNS tampering、TCP/IP 异常）
     3. HTTP 封锁（HTTP blocking，例如：封锁页面）
     4. 基于 TLS 的干扰（例如 TLS 握手期间 ClientHello 信息后出现连线重置或连线逾时（timeout））
 - **Tor：**[洋葱路由网络](https://zh.wikipedia.org/zh-cn/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1){target="_blank"}，将连线请求透过三层节点的转介传送取得资讯。
-- **Helper：**检测目标对象，可能是网站、通讯软件连线、VPN 连线、连线效能等。
+- **Helper：**OONI 架设在外部网络的测量服务器（test helper）。Probe 测完一个网址后，helper 会从未受干预的网络对同一个网址再测一次，两边结果的差异才是判定依据。完整判定机制见 [OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)。
 
 !!! info "anoni.net 是台湾的社群"
 
@@ -151,5 +151,16 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 - [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
 - [:material-access-point-network: ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)
 - [:material-server-network: Tor Relay 观测点](../taiwan/tor-relay-watcher.md)
+
+</div>
+
+## :material-code-json: 想读懂测量资料
+
+<div class="grid cards" markdown>
+
+- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
+- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
+- [:material-database-search: ASN 观测资料撷取与分析](../community/asn-coverage-howto.md)
 
 </div>
