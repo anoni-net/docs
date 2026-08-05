@@ -50,6 +50,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 | `ai-opener` | error | 句首「值得注意的是/總的來說/綜上所述」|
 | `frontmatter-missing` | error | blog post 缺 date/slug/categories/authors |
 | `definition-phrasing` | warn | 「談的是/指的是/涵蓋的是」|
+| `zhe-repeat` | warn | 「這／这」同句堆疊（3 次以上，或相鄰兩個相隔不到 9 個字）|
 | `colloquial-jiang` | warn | 口語「講」（已扣除演講/講座等正當詞）|
 | `colloquial-run` | warn | 口語「跑」當執行軟體用（已扣除跑步/賽跑等正當詞）|
 | `colloquial-get` | warn | 「拿到」，改用「取得」|
@@ -63,7 +64,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 這些規則需要語意判斷，正則做不準，刻意不在此掃，避免假裝涵蓋了。校稿或 review 時仍要靠人或 AI 輔助：
 
-- 去 AI 味：開場鋪陳句（meta scaffolding）、「這…」開頭、抽象改具體、去誇飾
+- 去 AI 味：開場鋪陳句（meta scaffolding）、「這…」開頭、抽象改具體、去誇飾（「這」的同句堆疊已由 `zhe-repeat` 攔下，跨段落的整體密度仍要人工看）
 - 過度對稱的三段結構
 - 安全寫作：不提供可被濫用的全量枚舉、逐一抓取等操作配方
 - 隱私：不揭露個別操作者的個人帳號 / handle，用地區或角色代稱
@@ -74,6 +75,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 - `em-dash`：若破折號出現在外部專有名詞的連結文字（例 `[Cloudflare Radar — Iran](...)`），會被標記。必要時改寫標籤或人工放行。表格空資料格 `| — |`（整格只有一個破折號）已自動放行，破折號跟其他文字混在同一格仍會被標記。
 - `colloquial-jiang`、`definition-phrasing`：列為 warn 而非 error，因為「講清楚」、「指的是什麼呢」等仍有正當用法，只當提醒。
+- `zhe-repeat`：刻意的排比句會被標記，例如「這個 ASN、這個時段、這個網站」。多數情況把後面幾個「這個」拿掉會更好讀，真的要保留就用 `disable-line`。距離門檻 8 個字是對全 429 篇校準的，放寬會開始收進正當用法。
 - `colloquial-*` 系列：一律 warn 而非 error，因為替換詞要看語境（「跑」依情況是執行、架設、運作或營運），機器不宜直接改。照錄他人說法時（例：把讀者感受寫成「跑很慢」）屬正當用法，已列入例外，其餘情況請人工判斷後改寫。
 
 ## 關閉特定檢查
