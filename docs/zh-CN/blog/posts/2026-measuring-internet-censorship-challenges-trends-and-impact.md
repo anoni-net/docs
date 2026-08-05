@@ -94,7 +94,7 @@ OONI 的[长期数据](https://ooni.org/data){target="_blank"}揭示了几项全
 
 OONI 数据集的规模也强化了倡议价值。自 2012 年起，已从 245 个国家与地区、30,000 个网络收集到[超过 30 亿笔测量](https://explorer.ooni.org/){target="_blank"}，[OONI 数据](https://ooni.org/data){target="_blank"}是同类型中全球最大的网络审查公开数据集。每个月都有数千万笔新的测量从约 180 个国家收进来，每天则持续以即时方式发布来自世界各地的新测量。
 
-OONI 数据是一份等待被探索的[丰富数据集](https://ooni.org/data){target="_blank"}。它的广度与深度能支持研究，即时发布的特性则能支持倡议与快速响应行动。它也定期被收进 [ISOC 的 Pulse Shutdown 项目](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用来记录全球的社交媒体封锁。你也可以使用这份数据，[加入这个社群](https://ooni.org/get-involved/){target="_blank"}，一起捍卫自由开放的网络。
+OONI 数据是一份等待被探索的[丰富数据集](https://ooni.org/data){target="_blank"}。它的广度与深度能支持研究，即时发布的特性则能支持倡议与快速响应行动。它也定期被收进 [ISOC 的 Pulse Shutdown 项目](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用来记录全球的社交媒体封锁。你也可以使用这份数据，[加入社群](https://ooni.org/get-involved/){target="_blank"}，一起捍卫自由开放的网络。
 
 ## 简体中文使用者地区的观察
 

@@ -98,7 +98,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 - **颜色 + 视窗边框**：不同信任等级的 qube 视觉上分明，避免「我以为这是工作 qube 结果是个人 qube」的混淆。
 - **sys-net、sys-firewall、sys-usb**：网络、防火墙、USB 三个系统 qube 各自隔离，恶意 USB 进来只能影响 sys-usb，没办法跨到工作 qube。
 
-**Qubes 与 Whonix 的组合**：Qubes 默认不强制流量走 Tor，但官方支持 [安装 Whonix template](https://www.whonix.org/wiki/Qubes){target="_blank"}，把 Whonix Gateway 与 Workstation 包进 Qubes 的 qube 框架。这是技术上「最强隔离 + Tor 整合」的组合，多数需要这层保护的人会走这条路。
+**Qubes 与 Whonix 的组合**：Qubes 默认不强制流量走 Tor，但官方支持 [安装 Whonix template](https://www.whonix.org/wiki/Qubes){target="_blank"}，把 Whonix Gateway 与 Workstation 包进 Qubes 的 qube 框架。在技术上，Qubes + Whonix 是「最强隔离 + Tor 整合」的组合，需要最高强度隔离的人多半会走这条路。
 
 **适合**：
 
@@ -109,7 +109,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 **限制**：
 
 - 对硬件挑剔。CPU 必须支持 VT-x 与 VT-d，内存建议 16 GB 以上，需要 SSD。买机前一定要查 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"}。
-- 学习曲线陡。第一周会在「我这个档案要在哪个 qube 开」、「这个 USB 要怎么跨 qube 传档」这类操作上摸索。
+- 学习曲线陡。第一周会在「我这个档案要在哪个 qube 开」、「USB 要怎么跨 qube 传档」等操作上摸索。
 - 默认无 Tor 整合，要 Tor 必须额外装 Whonix template。
 - 不支持 Apple Silicon。
 
