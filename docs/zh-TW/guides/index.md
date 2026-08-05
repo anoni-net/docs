@@ -22,7 +22,7 @@ icon: material/compass-outline
 
 - [:material-account-group-outline: 場景](../scenarios/index.md)
 
-    特定角色或情境的應用：記者、社運參與者、家暴倖存者、LGBTQ+ 與性少數、選舉觀察員、匿名捐款、出差與跨境、在中國大陸的公開平台發聲。
+    特定角色或情境的應用：一般人的日常基線、記者、社運參與者、家暴倖存者、LGBTQ+ 與性少數、選舉觀察員、匿名捐款、出差與跨境、在中國大陸的公開平台發聲。
 
 - [:material-lock-outline: 進階](../advanced/index.md)
 
@@ -38,6 +38,7 @@ icon: material/compass-outline
 
 不必照順序讀完全部 5 個分類，幾種切入方式：
 
+- **想先知道該做什麼，之後再讀原理**：從 [一般人平常該做到什麼](../scenarios/everyday-baseline.md) 開始，做法按實際效果排序
 - **第一次接觸匿名網路**：從 [概念](../basics/index.md) 開始，依序讀完建立詞彙與動機
 - **想找特定工具**：直接到 [工具](../tools/index.md) 找對應工具的介紹與威脅模型
 - **有具體需求**：到 [場景](../scenarios/index.md) 找最接近自己的角色，看完整流程

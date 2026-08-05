@@ -82,6 +82,7 @@ For the travel side of this, [pre-departure digital safety](./travel-ai-briefing
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Freedom of the Press Foundation — digital security guides](https://freedom.press/digisec/guides/){target="_blank"} — the source-protection, secure-communication, and reporting-in-the-field collections; the canonical reporter playbook (English and Spanish).
 - [EFF Surveillance Self-Defense — Journalist on the Move](https://ssd.eff.org/playlist/journalist-move){target="_blank"} — threat modeling, secure communication, and circumventing censorship, available in 14 languages including Thai, Vietnamese, and Burmese, which makes it directly usable for sources across the region.
 - [Why metadata matters](../basics/metadata.md) — the concept that drives most source-protection practice.

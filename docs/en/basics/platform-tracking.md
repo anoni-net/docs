@@ -86,6 +86,7 @@ Platform settings and policies change every few months. The mechanisms are durab
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](../scenarios/everyday-baseline.md) — puts this page's collection thread back into the overall ordering, next to fraud and targeted investigation
 - [Metadata, and why it matters](./metadata.md) — the communication-side counterpart to platform-side collection
 - [Threat modeling](./threat-model.md) — where "platform business model" sits as an adversary, and what it's worth spending to counter it
 - [Maintaining multiple online identities](./multiple-identities.md) — separating contexts so one profile doesn't absorb everything

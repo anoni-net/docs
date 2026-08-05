@@ -122,6 +122,7 @@ Submitting material to these projects usually preserves it more reliably than re
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Speaking online from Singapore and Malaysia](./singapore-malaysia-speech.md) — the same question under a different legal frame
 - [Journalists and source protection](./journalist.md) — including the mainland China section on interviewees and in-country collaborators
 - [Cross-border travel and device searches](./asia-travel.md) — blocking conditions, SIM registration, and border inspection

@@ -62,6 +62,7 @@ Start from [how to build a threat model](../basics/threat-model.md): name who yo
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Posting on mainland Chinese platforms](./mainland-speech.md) — the same question under the mainland's real-name and filtering regime, which works differently from the speech-law model described here
 - [Regional observatory](../regional/index.md): what is actually reachable, and where, in the region.
 - [Activists and protest digital safety](./activist.md): when speech turns into coordinated organizing.

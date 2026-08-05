@@ -200,6 +200,7 @@ Google 圖片搜尋、Yandex、TinEye 都能用一張照片找出網路上其他
 
 ## 接下來
 
+- [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：不分身分的共同基線，本頁是其中的一項
 - [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md)：先把匿名與假名的界線畫清楚
 - [威脅模型如何建立](./threat-model.md)：決定要幾層之前，先回答保護什麼、防誰、能付多少成本
 - [Metadata 是什麼，為什麼重要](./metadata.md)：時間、位置、裝置這些外圍資訊怎麼把兩層接起來

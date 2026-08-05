@@ -184,6 +184,7 @@ One situation inverts this. If you are already being harassed or threatened, or 
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](../scenarios/everyday-baseline.md) — the shared baseline this page is one component of
 - [Anonymity, privacy, pseudonymity, confidentiality](./anonymity-vs-privacy.md) — draw the line between anonymity and pseudonymity first
 - [How to build a threat model](./threat-model.md) — answer what, from whom, and at what cost before picking a layer count
 - [What metadata is and why it matters](./metadata.md) — the timing, location, and device traces that join two layers

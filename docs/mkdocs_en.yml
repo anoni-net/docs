@@ -39,6 +39,7 @@ nav:
           - tools/ooni-run-v2.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
+          - scenarios/everyday-baseline.md
           - scenarios/lgbtq.md
           - scenarios/domestic-violence.md
           - scenarios/journalist.md

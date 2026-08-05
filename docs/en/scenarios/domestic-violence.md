@@ -129,6 +129,7 @@ Multi-generational households and shared family devices are common, which widens
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Threat modeling](../basics/threat-model.md) — how to reason about "who has access to what, and what is the consequence," which is the spine of every decision on this page
 - [Anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md) — the vocabulary for what separate accounts and devices actually buy you
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — building a set of accounts the abuser knows nothing about, and keeping platforms from correlating them with the old ones

@@ -10,12 +10,15 @@ Tools are neither good nor bad in the abstract. Their value depends on whether t
 
 Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the [regional observatory](../regional/index.md) to specific lived practice.
 
+If none of them matches your situation, [what an ordinary person should actually do](./everyday-baseline.md) is the baseline the rest of this section builds on, and it lists what should make you escalate to a specific scenario.
+
 !!! note "Hong Kong and Macau readers: expect a higher risk tier"
 
     Most of the scenarios below default to Taiwan or general Sinophone Asia-Pacific examples. Read that framing as a floor, not a ceiling, for Hong Kong. Since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, national-security offenses carry sentences measured in years rather than fines, national-security police can seize and forensically examine a device under warrant, and the local civil-society organizations that once absorbed this kind of risk have largely dissolved since 2021. Where a scenario below assumes a functioning local NGO safety net, that assumption often no longer holds; the [activists](./activist.md) and [journalists](./journalist.md) pages route Hong Kong readers to international organizations instead. Macau's environment differs again and is comparatively under-documented here.
 
 ## :material-check-circle-outline: Available now
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — start here if none of the roles below is yours. Three kinds of adversary and why they need different answers, the common advice ordered by how much it actually blocks, what is overrated, and the triggers that mean you should move to one of the pages below.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account layering paced to disclosure, dating-app risk, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora. The general layering setup is in [maintaining multiple online identities](../basics/multiple-identities.md).
 - [Domestic violence and tech-enabled abuse](./domestic-violence.md) — how abusers use shared accounts, location tracking, and stalkerware, how to check and respond without escalating, and why leaving is the highest-risk moment; written for survivors and the people helping them, with regional helplines.
 - [Journalists and source protection](./journalist.md) — the source-protection lifecycle and why communication metadata can burn a source even when content is encrypted; consent and what a source actually agreed to, sources who can't use the standard tools, and keeping multiple sources apart from each other; concise, routing depth to Freedom of the Press Foundation and EFF, with the regional angle of sources inside less open jurisdictions including mainland China.
