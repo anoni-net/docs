@@ -1,6 +1,6 @@
 ---
 title: 記者保護消息來源
-description: 從第一次接觸、檔案交換到報導刊出後的數位足跡處理。
+description: 從第一次接觸、引用層級與知情同意、檔案交換到多來源區隔與報導刊出後的數位足跡處理，含台灣、香港與中國大陸的脈絡。
 icon: material/newspaper-variant-outline
 ---
 
@@ -8,7 +8,7 @@ icon: material/newspaper-variant-outline
 
 調查報導的風險，最重的一端往往落在消息來源，而不是記者。記者就算被盯上，背後通常還有編輯部、媒體律師、業界同行的支援。消息來源就不一定，可能是公司內部的中階員工、政府機關的承辦、被監控的社運參與者，他們暴露的代價遠比記者高。
 
-這篇文章從一個常見流程出發：第一次接觸的安全管道、確認對方身分、敏感檔案交換、訪談紀錄保存、報導刊出後雙方都需要做的數位整理。每一步都對應到具體的工具與威脅模型，並引用台灣與東南亞調查報導圈常見的實務做法。
+這篇文章從一個常見流程出發：第一次接觸的安全管道、確認對方身分、談定引用層級與知情同意、敏感檔案交換、訪談紀錄保存、多個來源之間的區隔、報導刊出後雙方都需要做的數位整理。另外處理兩種常見但少被寫到的情況：來源不熟悉數位工具，以及採訪涉及中國大陸。每一步都對應到具體的工具與威脅模型，並引用台灣與東南亞調查報導圈常見的實務做法。
 
 要先理解為什麼這些步驟存在，可以回頭看 [威脅模型](../basics/threat-model.md) 與 [Metadata 為什麼重要](../basics/metadata.md)。
 
@@ -145,7 +145,7 @@ icon: material/newspaper-variant-outline
 
 ### 檔案與紀錄由記者處理
 
-- 對方給的照片、文件由你來清 metadata，不要教他做
+- 對方給的照片、文件由你來清 metadata，不要教他做。工具與做法見下方的 [去除 metadata](#去除-metadata)
 - 對方用手機拍的文件，原檔留在他手機裡也是風險，離開前提醒他刪掉，必要時陪他一起刪
 - 幫對方操作他的裝置要謹慎。你碰過的地方會留下痕跡，之後裝置若被檢查，你的操作也在裡面
 
@@ -210,6 +210,8 @@ icon: material/newspaper-variant-outline
 錄完盡快上傳到加密容器，再從原裝置刪除。報導刊出後評估是否銷毀原檔。
 
 打字記錄：用 Cryptpad 或本地加密筆記，不要用 Google Docs、Notion 等雲端服務（即使免費版加密，metadata 仍可能被調閱）。
+
+用 AI 轉逐字稿或做摘要之前要先想清楚，那等於把來源的原話交給第三方服務，各家的保留與訓練政策差很多，見 [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)。
 
 ### 對方資訊的最小化
 
@@ -303,19 +305,18 @@ icon: material/newspaper-variant-outline
 - 部分台灣媒體日益重視記者與消息來源的數位安全（報導者長期有資訊安全相關報導），但是否設有專責的數位安全編制或外部顧問，各家不一
 - 跨境議題（中國、東南亞）通常會跟國際組織合作（OCCRP、Forbidden Stories），他們有自己的安全標準
 
-### 求助管道
+### 台灣的求助管道
 
 - 報導者基金會數位安全資源：[https://www.twreporter.org/](https://www.twreporter.org/){target="_blank"}
-- Access Now Helpline（24/7 國際數位安全求助）：[https://www.accessnow.org/help/](https://www.accessnow.org/help/){target="_blank"}
-- Citizen Lab（裝置鑑識與監控分析）：[https://citizenlab.ca/](https://citizenlab.ca/){target="_blank"}
 - 緊急情況見 [緊急求救](../help/index.md)
+
+國際組織不分地區都適用，列在下方的〈國際求助管道〉。
 
 ## 香港的脈絡
 
 中段的技術操作（SecureDrop、metadata 清除、獨立錄音機、代號對應表隔離）通用，但香港記者面對的對手層級與求助資源跟台灣不同。
 
-- **對手是「國家」級**：2024 年《維護國家安全條例》（SNSO）設有「竊取國家機密」、「境外干預」等罪，未經授權揭露被認定為國家機密的資訊，消息來源本人可能直接觸犯竊密罪，記者收受、發布也可能被視為共謀，風險遠高於台灣通保法、揭弊者保護法的框架。香港記者協會（HKJA）雖仍運作，但持續遭受組織性騷擾，無法簡單當成「找 NGO 就安全」的安全網。
-- **求助資源以國際組織為主**：[RSF 無國界記者](https://rsf.org/en){target="_blank"}、[CPJ 保護記者委員會](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多語），裝置鑑識找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。
+- **對手是「國家」級**：2024 年《維護國家安全條例》（SNSO）設有「竊取國家機密」、「境外干預」等罪，未經授權揭露被認定為國家機密的資訊，消息來源本人可能直接觸犯竊密罪，記者收受、發布也可能被視為共謀，風險遠高於台灣通保法、揭弊者保護法的框架。香港記者協會（HKJA）雖仍運作，但持續遭受組織性騷擾，無法簡單當成「找 NGO 就安全」的安全網，求助資源見下方的〈國際求助管道〉。
 
 查證來源（2026-07）：[Article 23: Hong Kong's 2024 security law](https://hongkongfp.com/article23-security-law/){target="_blank"} - Hong Kong Free Press。
 
@@ -358,19 +359,30 @@ fixer、翻譯、司機、幫忙介紹受訪者的朋友，法律風險不比受
 - 對方主動聯繫時，先確認是不是本人在操作
 - 評估對方是否需要暫時離開，判斷交給有在地經驗的組織，不要自己下結論
 
-### 求助管道
+### 跨境合作與求助
 
-境內事件的協助資源以國際組織為主。[RSF 無國界記者](https://rsf.org/en){target="_blank"}、[CPJ 保護記者委員會](https://cpj.org/){target="_blank"}、[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}（24/7 多語），裝置鑑識找 [Citizen Lab](https://citizenlab.ca/){target="_blank"}。跨境調查通常跟 OCCRP、Forbidden Stories 這類國際組織合作，他們有自己的安全標準與在地網絡。
+中國境內事件的協助資源全部落在境外，見下方〈國際求助管道〉。跨境調查通常跟 OCCRP、Forbidden Stories 這類國際組織合作，他們有自己的安全標準與在地網絡。
 
 境內受訪者或協作者本身也在公開平台發聲時，另見 [在中國大陸的公開平台傳播資訊](./mainland-speech.md)。
 
 查證來源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。防火長城的技術本體與對外輸出見 [網路政變報告](../reports/interseclab-network-coup/index.md)。
+
+## 國際求助管道
+
+不分地區都適用，行動之前先存好：
+
+- **[Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}**：24/7 多語的數位安全求助
+- **[RSF 無國界記者](https://rsf.org/en){target="_blank"}** 與 **[CPJ 保護記者委員會](https://cpj.org/){target="_blank"}**：記者受到威脅、拘留或法律追訴時
+- **[Citizen Lab](https://citizenlab.ca/){target="_blank"}**：裝置鑑識，懷疑被植入監控軟體時
+
+台灣本地的求助管道見上方的台灣脈絡一節。
 
 ## 接下來
 
 - [威脅模型](../basics/threat-model.md)：寫報導前，先盤點誰是對手、能取得什麼
 - [Metadata 為什麼重要](../basics/metadata.md)：理解檔案隱含的元資料風險
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：採訪聯絡用的身分要跟署名發稿的身分切開，這頁是設定與長期維持的做法
+- [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)：逐字稿、翻譯、摘要都可能把來源的原話送給第三方，貼進去之前要先判斷
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同場景的取捨
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：公開 Wi-Fi 採訪、傳稿時的連線層防護與服務選擇
 - [出差與研討會的數位準備](./asia-travel.md)：前往中國大陸或東南亞採訪前的逐地審查、SIM 實名與入境查機現況

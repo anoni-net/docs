@@ -8,7 +8,7 @@ icon: material/radar
 
 You mention something to a friend, and the ad shows up the next day. The experience is common enough that "my phone is listening" has become the default explanation.
 
-This page does two things. It points to the canonical account of how third-party tracking actually works, and it addresses the microphone question directly, because that one is asked constantly and answered badly.
+This page does two things. It points to the canonical account of how third-party tracking actually works, and it addresses the microphone question directly, because that one is asked constantly and answered badly. Metadata your own communications and files carry is a separate topic, covered in [metadata](./metadata.md); this page is about what platforms actively collect.
 
 !!! info "We point outward on the mechanics"
 
@@ -46,6 +46,20 @@ The tracking mechanics are global. What differs across Sinophone Asia-Pacific is
 - **The data can be compelled, not just sold.** In the commercial-surveillance frame that most English-language guidance assumes, the worst case is a data broker. Where platforms operate under local data-localization and disclosure obligations, the same profile is reachable by legal process.
 - **Contact upload spreads exposure to people who never consented.** Your phone number can already sit in a platform's graph because someone else uploaded their address book, which matters more where a number maps to an identity document.
 
+### Mainland Chinese platforms add a further layer
+
+WeChat, Douyin, Xiaohongshu, and Weibo differ from the global platforms above in three ways, and this applies to diaspora users of those apps too.
+
+**The account resolves to a legal person.** Accounts bind to a phone number and the number to an identity document, with the national Cyberspace ID added on top since July 2025. An ad profile that is a pseudonymous blob elsewhere is a named individual here.
+
+**The data sits in-jurisdiction and is reachable by legal process.** For global platforms the worst case is usually a data broker. For mainland platforms the data is held domestically and is also within scope of lawful access requests. That is a difference in kind, not degree.
+
+**The content is simultaneously censored.** Citizen Lab's WeChat research found that keyword filtering is enabled only for accounts registered with a mainland phone number and persists after relinking to an international one, that images are filtered by both OCR and visual-similarity matching, and that blocking is invisible to the sender. Content between non-mainland accounts is analyzed as well, and has been used to train the censorship system[^wechat].
+
+The practical consequence: turning off the advertising identifier and refusing tracking does much less here, because the problem is not in the ad-tracking layer. Account layering is similarly limited — the methods in [maintaining multiple online identities](./multiple-identities.md) assume services outside the mainland, and the real-name chain cancels most of the benefit. What still works is behavioral separation: not reusing one account across purposes, and not cross-referencing between them. Full context in [posting on mainland Chinese platforms](../scenarios/mainland-speech.md).
+
+Quitting is not an option for most people. If you keep using them, these adjustments are cheap and their effect is certain: restrict who can see your posts and history, revoke contacts and location permissions, reduce your visibility inside group chats (member lists, nickname, avatar are visible to strangers, and groups carry administrator liability), and keep sensitive matters off the platform entirely, including arranging when and what to discuss.
+
 ## What actually helps
 
 - **Turn off the advertising identifier.** On iPhone, Settings → Privacy & Security → Tracking, then switch off "Allow Apps to Request to Track"; apps that ask are then denied the IDFA[^apple-att]. On Android 12 and later you can delete the advertising ID outright, after which apps receive a string of zeros[^google-adid].
@@ -64,7 +78,7 @@ Opening your own file beats trusting any explanation. Most platforms are require
 
 The export itself is highly sensitive personal data. Store it encrypted, and keep it out of your downloads folder and cloud sync.
 
-Note what this list does not claim: none of it stops behavioral profiling inside a platform you use, and revoking microphone access changes none of the mechanisms in the first section.
+Note what this list does not claim: none of it stops behavioral profiling inside a platform you use, and revoking microphone access changes none of the mechanisms in the first section. It also assumes your jurisdiction does not restrict these tools; Tor cannot be reached directly from inside mainland China, and using circumvention carries its own risk there.
 
 ## This page will age
 
@@ -80,6 +94,7 @@ Platform settings and policies change every few months. The mechanisms are durab
 
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} — Apple Newsroom, August 2019, on the grading program, the sampling rate, its suspension, and the move to opt-in.
 [^panoptispy]: [Panoptispy: Characterizing Audio and Video Exfiltration from Android Applications](https://petsymposium.org/popets/2018/popets-2018-0030.php){target="_blank"} — Proceedings on Privacy Enhancing Technologies 2018; Pan, Ren, Lindorfer, Wilson, and Choffnes (Northeastern University and UC Santa Barbara), an automated analysis of 17,260 Android apps.
+[^wechat]: [One App, Two Systems](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"}, [How WeChat Filters Images for One Billion Users](https://citizenlab.ca/2018/08/how-wechat-filters-images-for-one-billion-users/){target="_blank"}, and [We Chat, They Watch](https://citizenlab.ca/2020/05/we-chat-they-watch/){target="_blank"} — The Citizen Lab.
 [^cmg]: [Here's the Pitch Deck for 'Active Listening' Ad Targeting](https://www.404media.co/heres-the-pitch-deck-for-active-listening-ad-targeting/){target="_blank"} — 404 Media, August 2024, on the Cox Media Group pitch deck. Verified 2026-08.
 [^apple-dot]: [About the orange and green indicators in your iPhone status bar](https://support.apple.com/en-us/108331){target="_blank"} — Apple Support.
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} — Apple Support.

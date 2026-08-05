@@ -25,7 +25,7 @@ The adversaries differ. The work is largely the same, and the setup below applie
 
 ## Decide how many layers first
 
-Most failures start with over-segmentation. Every additional layer adds rules to remember daily, and a scheme you cannot sustain for three months gets quietly abandoned — usually by using the wrong account on a tired evening. Go back to the three questions in [how to build a threat model](./threat-model.md) before choosing.
+Most failures start with over-segmentation. Every additional layer adds rules to remember daily, and a scheme you cannot sustain for three months gets quietly abandoned — usually by using the wrong account on a tired evening. Go back to the three questions in [how to build a threat model](./threat-model.md) (what are you protecting, from whom, at what cost) before choosing.
 
 ### Layer count by situation
 
@@ -64,7 +64,7 @@ When the separation needs to reach the operating system, [Tails vs Whonix vs Qub
 During registration and early use, the correlations that matter are the ones the platform can see and you cannot:
 
 - **A shared phone number or email**: Instagram, X, and TikTok build "people you may know" from contact graphs and registration identifiers. A number that touched both accounts can join them.
-- **Contact upload**: the "find friends" prompt on first launch uploads your entire address book, which drops the new identity straight into the old social graph.
+- **Contact upload**: the "find friends" prompt on first launch uploads your entire address book, which drops the new identity straight into the old social graph. How platforms use that for reverse matching is in [how platforms collect your data](./platform-tracking.md).
 - **Mutual follows and interactions**: two accounts liking or replying to each other collapse the separation on the platform's side in one query.
 
 In practice:
@@ -122,9 +122,7 @@ One credit card, one bank account, or one wallet binds two layers directly, and 
 
 ### Schedule and timezone
 
-Watch any account long enough and its active hours reveal a timezone, a working day, and a weekend pattern. Two layers that go quiet at the same midnight and wake at the same 8am share an identifying signature, and travelling shifts both at once.
-
-You cannot fully suppress this, so reduce the observable sample instead: post less often on secondary layers, use scheduling to break up publication times, and let secondary layers go quiet while travelling.
+The detection mechanism is covered under correlation above; what long-term maintenance has to handle is that you cannot suppress it. Reduce the observable sample instead: post less often on secondary layers, delay posts by hand rather than authorizing a third-party scheduler (which adds another service holding credentials for that layer), and let secondary layers go quiet while travelling.
 
 ### Device and browser fingerprints
 
@@ -150,6 +148,19 @@ Put these in a calendar and answer them every few months. It is far cheaper than
 - Has follower overlap between layers increased?
 - Does this layer still need to exist? If not, use the exit below.
 
+## When the layers are already mixed
+
+Most people arrive at this page with layers that have already touched: signed in on the same handset once, followed each other, registered with the same email. The unwelcome part first: existing overlap is largely irreversible. Platform-side records, other people's screenshots, and search-engine caches do not disappear because you tidy up now.
+
+What remains is triage:
+
+1. **Establish how far it goes.** Run the self-checks above and see which links between the layers are still visible.
+2. **Cut what is still live.** Unfollow, remove shared emails and phone numbers, and retire any browser profile that was used for both.
+3. **Decide whether the layer can still hold separation.** Against an acquaintance or a curious stranger, cutting the live links and letting time pass is usually enough, and reopening is unnecessary. Where the overlap ran for a long time and the adversary can obtain platform-side data, the answer is usually that it no longer works as a separate identity, and opening a new one beats patching the old — at the cost of the relationships, followers, and content you would start over.
+4. **Retire the old layer properly**, per the next section.
+
+That judgment call goes back to [how to build a threat model](./threat-model.md): a casual observer and an adversary who can compel platform records give completely different answers.
+
 ## Retiring an identity
 
 Deleting an account outright is usually the worst option. Disappearing is itself an event: anyone watching notes the date and compares it against changes elsewhere. Deletion also does nothing about platform-side records or the screenshots other people already hold.
@@ -160,7 +171,7 @@ A steadier sequence:
 2. **Remove the material that supports reverse lookup**: profile photo, locations and occupations in the bio, EXIF-bearing photos, links pointing at other layers
 3. **Unbind**: move the address to an email used only by this identity and never again, then remove the phone number and third-party login grants
 4. **Check for dependencies**: is any other service using this address for account recovery?
-5. **Keep the shell or delete it, as the risk warrants**: a low-risk layer costs nothing left standing, and an account still wired into recovery flows should certainly not be deleted
+5. **Keep the shell or delete it, as the risk warrants**: a dormant account still costs you a password and a 2FA entry to maintain, and the platform keeps associating it. An account still wired into recovery flows should certainly not be deleted
 
 One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
 

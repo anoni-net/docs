@@ -89,7 +89,7 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 
 **Separate the handset from the number.** "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
 
-**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the effective move is keeping the identity mapping outside the country (roaming or a data-only eSIM), not buying locally.
+**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the move is the one already covered in the SIM section above: keep the identity mapping outside the country with roaming or a data-only eSIM. Buying locally does not buy anonymity.
 
 **What changes when you take it home.**
 
@@ -98,6 +98,10 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 - **Swapping in a domestic SIM** binds that handset to your local identity, which is exactly what the clean device was avoiding.
 - **The IMEI links both numbers.** One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
 - **Customs.** Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
+
+!!! warning "Returning to mainland China inverts several of these"
+
+    A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry, since state-security officers have had explicit authority to check personal electronic devices since July 2024, and the jurisdiction sits at the top tier of the border-inspection column in the table above. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
 
 **The practical shape.** Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
 
