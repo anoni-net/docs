@@ -6,6 +6,20 @@ on:
       - "docs"
   workflow_dispatch:
 
+# 最後兩步是先 `aws s3 rm --recursive` 清空 docs prefix，再 `s3 sync` 上傳。兩個 run
+# 重疊時，後者的清空會發生在前者上傳到一半，S3 會有一段內容不完整的空窗。連續合併
+# 幾個 PR 再同步 docs 分支就會踩到。
+#
+# 全域一組（不帶 ref），因為 workflow_dispatch 可以從任何分支觸發，而所有 run 都寫
+# 同一個 bucket prefix，要序列化的是 S3 寫入本身。
+#
+# 用 false 而非 true：run 被中途取消有機會停在 `s3 rm` 之後、`s3 sync` 之前，那會留下
+# 一個空的 bucket。排隊比取消安全。排隊中的 run 若被更新的 run 取代，它還沒開始執行，
+# 不會碰到 S3。
+concurrency:
+  group: build-docs-s3
+  cancel-in-progress: false
+
 jobs:
   build:
     strategy:
