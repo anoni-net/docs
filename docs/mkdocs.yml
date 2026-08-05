@@ -45,6 +45,7 @@ nav:
           - tools/ai-privacy.md
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
+          - scenarios/everyday-baseline.md
           - scenarios/journalist.md
           - scenarios/activist.md
           - scenarios/lgbtq.md
