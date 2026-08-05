@@ -6,9 +6,9 @@ icon: material/code-json
 
 # :material-code-json: Reading an OONI measurement
 
-[ASN observation data retrieval and analysis](./asn-coverage-howto.md) covers how to pull OONI's public data. Once you have it, the next problem shows up: a single measurement carries more than twenty top-level fields, with another twenty-odd inside `test_keys`. Which ones matter?
+A single OONI measurement carries more than twenty top-level fields, with another twenty-odd inside `test_keys`. [ASN observation data retrieval and analysis](./asn-coverage-howto.md) covers how to pull this public data; this page covers how to read it once retrieved.
 
-Below, two real measurements from Taiwan are compared side by side to explain how a Web Connectivity (`web_connectivity`) measurement is put together, and which upstream [ooni/spec](https://github.com/ooni/spec){target="_blank"} document defines each field. Once the layout is clear you can judge for yourself what a measurement says, and decide which fields your analysis code needs to read.
+Two real measurements from Taiwan are compared side by side below to set out how a Web Connectivity (`web_connectivity`) measurement is put together, and which upstream [ooni/spec](https://github.com/ooni/spec){target="_blank"} document defines each field.
 
 !!! info "Where these examples come from"
 
@@ -21,17 +21,17 @@ Below, two real measurements from Taiwan are compared side by side to explain ho
 
 ## Three layers in one measurement
 
-There is no need to memorise every field up front. A measurement reads as three layers:
+A measurement divides into three layers:
 
 1. **The envelope**: who measured, from where, with which software, and when. Every nettest shares this same set of fields, defined in [df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"}.
 2. **The verdict**: the conclusion the measurement reached. These fields vary by nettest and all live under `test_keys`. For `web_connectivity` they are defined in [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"}.
 3. **The evidence**: the raw record behind the conclusion, covering every DNS query, TCP connection, TLS handshake and HTTP request, plus the control's equivalent records. Also under `test_keys`, each with its own `df-` specification.
 
-The verdict layer tells you the conclusion. The evidence layer lets you check it. Read them separately and each field's role becomes clear.
+The verdict layer states the conclusion; the evidence layer holds the records supporting it.
 
-## Pull one for yourself
+## Retrieving a measurement
 
-Following along with a sample in hand is much faster. You do not need a local environment first, since the public API returns a single measurement directly. Start by listing measurements that match your criteria:
+The public API returns a single measurement directly, with no local environment required. Start by listing measurements that match your criteria:
 
 ```bash title="List recent Web Connectivity measurements from Taiwan"
 curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&limit=5" \
@@ -77,7 +77,7 @@ Envelope fields are identical across every nettest. These are the ones you reach
 
 Verdict fields all live under `test_keys`. One thing to know before reading them: `web_connectivity` reaches its verdict by comparison. After the Probe finishes, an OONI test helper on an unrestricted network measures the same URL again, and the difference between the two sides is what the verdict is built from. The test helper's side is recorded under `test_keys.control`, which is what "the control" refers to below.
 
-Eight fields carry the verdict and the content comparison. Side by side, the difference is obvious:
+Eight fields carry the verdict and the content comparison, shown side by side below:
 
 | Field | Passed | Flagged as anomalous | Meaning |
 |---|---|---|---|

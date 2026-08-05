@@ -98,7 +98,7 @@ An Egyptian measurement of `http://www.newipnow.com/` came back as `http-diff`, 
 | Probe | `520` | `newipnow.com \| 520: Web server is returning an unknown error` |
 | test helper | `200` | `Buy Private Proxies: $0.88 per Dedicated Premium IP - NewIPNow` |
 
-`520` is the error page Cloudflare returns when the origin server in front of the target site misbehaves, which means the site itself was failing at the time and Egyptian network controls had nothing to do with it. Worth noting too: that measurement's `probe_asn` is `AS13335` (Cloudflare), so the measuring end was also running on Cloudflare's network, which falls under the second category below.
+`520` is the error page Cloudflare returns when the origin server in front of the target site misbehaves, which means the site itself was failing at the time and Egyptian network controls had nothing to do with it. That measurement's `probe_asn` is `AS13335` (Cloudflare), so the measuring end was also running on Cloudflare's network, which falls under the second category below.
 
 Common sources of misreading group into a few kinds:
 
