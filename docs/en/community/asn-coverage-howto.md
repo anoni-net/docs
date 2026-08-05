@@ -28,7 +28,7 @@ OONI's observation data has three entry points serving quite different purposes.
 
 ## What the scripts can answer
 
-Know the tool's boundaries before starting. `ooni.py` currently produces coverage and verdict-distribution statistics, and its retrieval scope has three limits:
+`ooni.py` currently produces coverage and verdict-distribution statistics. Its retrieval scope has three limits:
 
 - **It reads the `webconnectivity` directory only.** The dozen-plus other nettests in the same hour are not included, so observations from `tor`, `telegram`, `signal` and the rest never reach the statistics. For what each nettest measures, see [OONI nettest quick reference](./ooni-nettests-map.md).
 - **It takes three fields per measurement**, `probe_asn`, `annotations.network_type` and `test_keys.blocking`. It never reads the evidence layer (`queries`, `tcp_connect`, `requests`), so the output can answer "which ASNs have someone measuring, how often, and how the verdicts break down" but not "what does the evidence for one measurement look like".

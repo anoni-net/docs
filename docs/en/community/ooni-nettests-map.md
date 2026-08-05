@@ -18,9 +18,9 @@ This page condenses all 41 into one reference table, noting each one's upstream 
 
     **Taiwan** comes from the S3 public dataset, spot-checking the nettest directories that appeared under Taiwan across five time slots on 2026-08-03.
 
-## First, one thing: a status marker is not a data supply
+## A status marker is not a data supply
 
-Specification markers and actual data do disagree. Before the tables below, note the gap runs in both directions:
+Specification markers and actual data do disagree, and the gap runs in both directions:
 
 - **Marked `current` with no data to be found**: `tlsmiddlebox`, `portfiltering` and `captiveportal`.
 - **Marked `experimental` with data every day**: `dnscheck`, `echcheck`, `openvpn`, `stunreachability` and `vanilla_tor` among others, at volumes comparable to some `current` nettests.
@@ -29,7 +29,7 @@ Specification markers and actual data do disagree. Before the tables below, note
 
 ## Grouped by purpose
 
-Arriving with a question about what to observe, pick a direction here first and then check the tables for detail:
+The groupings below are by observation purpose; the tables that follow carry the detail:
 
 - **Website blocking detection**: `web_connectivity`
 - **Middleboxes and interference techniques**: `http_header_field_manipulation`, `http_invalid_request_line`, `sni_blocking`, `echcheck`
@@ -40,7 +40,7 @@ Arriving with a question about what to observe, pick a direction here first and 
 
 ## Nettests still producing data
 
-Every nettest below had public measurements available on the day of writing. These are the ones you meet most often when reading OONI data.
+Every nettest below had public measurements available on the day of writing, and these are also the ones encountered most often when reading OONI data.
 
 | Nettest | What it measures | Spec status | Taiwan |
 |---|---|---|---|

@@ -6,11 +6,11 @@ icon: material/table-search
 
 # :material-table-search: OONI 测项速查表
 
-[ooni/spec](https://github.com/ooni/spec/tree/master/nettests){target="_blank"} 的 `nettests` 目录收录 41 份测项规格，其中有相当比例已经停止使用。要挑测项或解读手上的资料时，先知道哪些还在产出资料，比逐份读规格有效率。
+[ooni/spec](https://github.com/ooni/spec/tree/master/nettests){target="_blank"} 的 `nettests` 目录收录 41 份测项规格，其中有相当比例已停止使用。挑选测项或解读既有资料时，先确认哪些仍在产出资料，效率高于逐份阅读规格。
 
-本页把 41 份规格整理成一张对照表，标注上游规格的状态、实际是否还有公开资料，以及台湾观测到哪几个。
+本页将 41 份规格整理成一张对照表，标注上游规格的状态、实际是否仍有公开资料，以及台湾观测到的项目。
 
-!!! info "状态栏位怎么读"
+!!! info "状态栏位的定义"
 
     **spec 状态**取自各份规格开头的 `_status_` 标记，分为 `current`、`experimental`、`obsolete` 三种，反映上游对该测项的定位。
 
@@ -18,18 +18,18 @@ icon: material/table-search
 
     **台湾**栏位来自 S3 公开资料集，抽查 2026-08-03 五个时段台湾底下出现过的测项目录。
 
-## 先看一件事：状态标记不等于实际有资料
+## 状态标记不等于实际有资料
 
-规格标记与实际资料不一致的情况存在，看下面的表格前先知道两个方向的落差：
+规格标记与实际资料不一致的情况确实存在，落差有两个方向：
 
 - **标为 `current` 却查不到资料**：`tlsmiddlebox`、`portfiltering`、`captiveportal` 三个。
 - **标为 `experimental` 却每日都有资料**：`dnscheck`、`echcheck`、`openvpn`、`stunreachability`、`vanilla_tor` 等，资料量与部分 `current` 测项相当。
 
-`experimental` 只反映规格本身的成熟度，与资料量多寡没有必然关系。要判断某个测项是否适合用于分析，直接查 API 是否有资料，比看状态标记可靠。
+`experimental` 仅反映规格本身的成熟度，与资料量多寡没有必然关系。判断测项是否适合用于分析，直接查询 API 是否有资料，较状态标记可靠。
 
 ## 依用途分群
 
-带着「我想观测什么」进来的话，先从下面挑方向，再到表格查细节：
+以下依观测目的分群，细节再对照后方表格：
 
 - **网站封锁侦测**：`web_connectivity`
 - **中间设备与干扰手法**：`http_header_field_manipulation`、`http_invalid_request_line`、`sni_blocking`、`echcheck`
@@ -40,9 +40,9 @@ icon: material/table-search
 
 ## 仍在产出资料的测项
 
-以下测项在撰稿当日都查得到公开测量，是解读 OONI 资料时最常遇到的一批。
+以下测项在撰稿当日皆查得到公开测量，也是解读 OONI 资料时最常遇到的测项。
 
-| 测项 | 测什么 | spec 状态 | 台湾 |
+| 测项 | 量测内容 | spec 状态 | 台湾 |
 |---|---|---|---|
 | [`web_connectivity`](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} | 网站可达性与封锁判定，资料量最大的测项 | current | 有 |
 | [`tor`](https://github.com/ooni/spec/blob/master/nettests/ts-023-tor.md){target="_blank"} | Tor 目录权威节点与桥接的可达性 | current | 有 |
@@ -75,16 +75,16 @@ icon: material/table-search
 
 ## 偶尔才有资料的测项
 
-| 测项 | 测什么 | spec 状态 | 最近一笔 |
+| 测项 | 量测内容 | spec 状态 | 最近一笔 |
 |---|---|---|---|
 | [`quicping`](https://github.com/ooni/spec/blob/master/nettests/ts-031-quicping.md){target="_blank"} | QUIC 协定的可达性 | experimental | 2026-07-30 |
 | [`sni_blocking`](https://github.com/ooni/spec/blob/master/nettests/ts-024-sni-blocking.md){target="_blank"} | 针对 TLS SNI 栏位的封锁侦测 | experimental | 2026-07-20 |
 
 ## 查不到公开资料的测项
 
-以下七个测项在 API 查不到公开测量。规格仍在上游仓库里，设计新测项或研究方法时可以参考。
+以下七个测项在 API 查不到公开测量。规格仍保留在上游仓库，可供设计新测项或研究方法时参考。
 
-| 测项 | 测什么 | spec 状态 |
+| 测项 | 量测内容 | spec 状态 |
 |---|---|---|
 | [`tlsmiddlebox`](https://github.com/ooni/spec/blob/master/nettests/ts-037-tlsmiddlebox.md){target="_blank"} | TLS 连线路径上的中间设备行为 | current |
 | [`portfiltering`](https://github.com/ooni/spec/blob/master/nettests/ts-038-port-filtering.md){target="_blank"} | 特定连接埠是否被过滤 | current |
@@ -96,7 +96,7 @@ icon: material/table-search
 
 ## 标记为 obsolete 的历史测项
 
-上游标为 `obsolete` 的有 12 份，多数功能已被 `web_connectivity` 吸收，或随着测量方法演进而退场。处理历史资料时可能会遇到它们的纪录，规划新的观测时没有理由采用它们。
+上游标为 `obsolete` 的有 12 份，多数功能已被 `web_connectivity` 吸收，或随测量方法演进而退场。处理历史资料时仍可能遇到这些测项的纪录，规划新的观测则无采用的理由。
 
 | 测项 | 规格 |
 |---|---|
@@ -115,17 +115,17 @@ icon: material/table-search
 
 !!! note "编号重复的两份 OpenVPN 规格"
 
-    上游有两份规格都编为 `ts-016`，分别是上表标为 `obsolete` 的 `ts-016-openvpn.md` 与标为 `experimental` 的 `ts-016-vanilla-tor.md`。现行的 OpenVPN 测项规格是 `ts-040-openvpn.md`，引用时留意不要取到旧的那份。
+    上游有两份规格同编为 `ts-016`，分别是上表标为 `obsolete` 的 `ts-016-openvpn.md` 与标为 `experimental` 的 `ts-016-vanilla-tor.md`。现行的 OpenVPN 测项规格是 `ts-040-openvpn.md`，引用时须留意勿取到旧版。
 
 ## 台湾观测到哪些测项
 
 抽查 2026-08-03 五个时段，台湾底下出现过 17 个测项（以下用 API 的下划线写法）：`web_connectivity`、`tor`、`vanilla_tor`、`telegram`、`whatsapp`、`signal`、`facebook_messenger`、`dnscheck`、`echcheck`、`http_header_field_manipulation`、`http_invalid_request_line`、`openvpn`、`psiphon`、`riseupvpn`、`stunreachability`、`ndt`、`dash`。
 
-S3 上的目录名与 `test_name` 写法不同，目录名没有下划线（`webconnectivity`、`vanillator`、`facebookmessenger`），API 查询要用下划线形式（`web_connectivity`、`vanilla_tor`、`facebook_messenger`）。取用路径的细节见 [ASN 观测资料撷取与分析](./asn-coverage-howto.md)。
+S3 上的目录名与 `test_name` 写法不同，目录名没有下划线（`webconnectivity`、`vanillator`、`facebookmessenger`），API 查询须用下划线形式（`web_connectivity`、`vanilla_tor`、`facebook_messenger`）。取用路径的细节见 [ASN 观测资料撷取与分析](./asn-coverage-howto.md)。
 
-台湾目前的观测集中在 `web_connectivity`，其他测项的样本量偏小。想扩充在地观测的涵盖面，`tor` 与 `dnscheck` 是与社群既有主题最接近的两个方向。
+台湾目前的观测集中在 `web_connectivity`，其他测项的样本量偏小。扩充在地观测的涵盖面时，`tor` 与 `dnscheck` 是与社群既有主题最接近的两个方向。
 
-实际执行特定测项有两条路径。用 [OONI Probe](https://ooni.org/install/){target="_blank"} 桌面或行动版，在设置里挑选要启用的测项。想邀请其他人一起测固定的网址清单，改用 [OONI Run v2](../tools/ooni-run-v2.md) 建立连结分享，社群目前维运的连结 ID 是 `10328`。
+执行特定测项有两条路径。[OONI Probe](https://ooni.org/install/){target="_blank"} 桌面或行动版可在设置中挑选启用的测项。若要邀集他人共同测试固定的网址清单，则以 [OONI Run v2](../tools/ooni-run-v2.md) 建立连结分享，社群目前维运的连结 ID 是 `10328`。
 
 ## 延伸阅读
 
