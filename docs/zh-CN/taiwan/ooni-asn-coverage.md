@@ -166,6 +166,10 @@ python3 ./ripe.py save --loc=TW
 
 <div class="grid cards" markdown>
 
+- [:material-database-search: ASN 观测资料撷取与分析](../community/asn-coverage-howto.md)
+- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
+- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 

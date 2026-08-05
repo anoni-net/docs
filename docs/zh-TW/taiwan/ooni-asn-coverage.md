@@ -50,7 +50,7 @@ icon: material/access-point-network
 
 ## 如何解讀單筆測量資料（進階）
 
-這一節示範如何讀懂一筆原始測量紀錄，適合想自己著手分析的人，一般讀者可以直接跳到下一節。想了解單筆 OONI 測量的內容如何判讀，從 OONI Probe 操作開始：
+以下示範如何讀懂一筆原始測量紀錄，適合想自己著手分析的人，一般讀者可以直接跳到下一節。最快的入門路徑是先產生一筆屬於自己的資料，從 OONI Probe 操作開始：
 
 1. 下載 [OONI Probe](https://ooni.org/install/){target="_blank"}（行動裝置或桌面版本）
 2. 開啟 OONI Probe、選擇「網站」項目並執行檢測
@@ -62,7 +62,7 @@ icon: material/access-point-network
 
 此筆結果為「在 AS3462 上執行檢測失敗」，失敗訊息 `unknown_failure: dial tcp [scrubbed]: connect: host is down`，可斷定為網站已不提供服務。在「DNS 查詢」段落可看到 `www.asap.com.tw` 設定 DNS `A` 指向 `60.250.151.72 (AS3462 (Chunghwa Telecom Co., Ltd.)`，其來自 Cloudflare DNS 的查詢結果。
 
-「原始測量資料」會列出所有檢測項目的細節，有些不會完整顯示在結果頁面，但可從這裡找到更多分析素材。
+「原始測量資料」會列出所有檢測項目的細節，有些不會完整顯示在結果頁面，可從該處找到更多分析素材。
 
 <figure markdown="span">
     <a target="_blank"
@@ -77,9 +77,19 @@ icon: material/access-point-network
 
 !!! question "AS 與 DNS 的差異"
 
-    OONI Probe 會將檢測過程都記錄下來。這個範例顯示：即使透過中華電信網路上網，DNS 查詢服務卻是用 Cloudflare 的。
+    OONI Probe 會將檢測過程都記錄下來。上面的範例顯示，即使透過中華電信網路上網，DNS 查詢服務卻是用 Cloudflare 的。對應到原始資料，`probe_asn` 與 `resolver_asn` 分屬兩個不同的 ASN。
 
     - 問題：網站受到阻擋無法連線存取，是 AS 還是 DNS 的問題呢？
+
+每個欄位分別代表什麼、判定結果又是怎麼算出來的，另有三篇技術文件接續說明：
+
+<div class="grid cards" markdown>
+
+- [:material-code-json: OONI 測量資料結構導覽](../community/ooni-data-format.md)
+- [:material-shield-search: OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)
+- [:material-table-search: OONI 測項速查表](../community/ooni-nettests-map.md)
+
+</div>
 
 ## 想著手分析？
 
