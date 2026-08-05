@@ -17,6 +17,7 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 - [Metadata, and why it matters](./metadata.md) — the data about your communication (who, when, how often, where) that encryption does not hide, with the regional twist that real-name SIM regimes tie it to a legal identity.
 - [Threat modeling](./threat-model.md) — the five questions to ask before picking a tool, and why the adversary and the stakes shift as you move across the region. We point to EFF's canonical guide for the walkthrough.
 - [How platforms collect your data, and the microphone question](./platform-tracking.md) — what social platforms actually collect, why targeted ads feel like eavesdropping, what the research says about apps recording your microphone, and why real-name registration makes an ad profile resolve to a named person here.
+- [What surveillance can actually do](./surveillance-capability.md) — a layer-by-layer account of what platforms, telecoms, states, and commercial spyware can and cannot currently do, each claim dated and sourced, with a table of which measure stops which layer.
 - [Maintaining multiple online identities](./multiple-identities.md) — how many layers you need, the tool boundary for each, how observers correlate accounts, and the long-haul maintenance and exit that most introductory material stops short of.
 
 ## Where to go from here

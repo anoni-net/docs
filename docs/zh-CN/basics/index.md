@@ -19,5 +19,6 @@ icon: material/school-outline
 - [威胁模型如何建立](./threat-model.md)：保护什么、防谁、能付出多少成本，三个问题搭起判断框架。
 - [Metadata 是什么，为什么重要](./metadata.md)：通话没被监听，为什么还是会被知道你联系了谁。
 - [社群平台怎么收集你的数据](./platform-tracking.md)：平台实际取得哪些数据、精准广告怎么算出来的、「手机在偷听我说话」的感觉从哪里来，以及境内平台另有的一套。
+- [监控现在做得到什么](./surveillance-capability.md)：按平台、电信、国家、商用间谍软件四层盘点能力边界，每一条标出证据与日期。
 - [怎么维持多个网络身分](./multiple-identities.md)：要几层身分、每层的工具边界、被反查的途径，以及长期维持与收尾。
 - [为什么匿名支付重要](./payments-anonymity.md)：金流如何变成最黏的 metadata，现金为什么是最成熟的匿名支付。

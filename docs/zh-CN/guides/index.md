@@ -14,7 +14,7 @@ icon: material/compass-outline
 
 - [:material-school-outline: 概念](../basics/index.md)
 
-    匿名与隐私的核心思考工具：词汇厘清、威胁模型、Metadata、平台数据收集、多重身分、网络自由、匿名支付。从这里建立共同的动机与词汇。
+    匿名与隐私的核心思考工具：词汇厘清、威胁模型、Metadata、平台数据收集、监控能力现况、多重身分、网络自由、匿名支付。从这里建立共同的动机与词汇。
 
 - [:material-toolbox-outline: 工具](../tools/index.md)
 

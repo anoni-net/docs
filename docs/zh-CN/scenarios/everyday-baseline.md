@@ -208,6 +208,7 @@ Signal 这类工具保护的是内容，不保护「谁在什么时候联系谁�
 
 - [威胁模型如何建立](../basics/threat-model.md)：保护什么、防谁、能付出多少成本，本页的判断依据
 - [社群平台怎么收集你的数据](../basics/platform-tracking.md)：商业数据收集这一条线的完整版
+- [监控现在做得到什么](../basics/surveillance-capability.md)：本页三种对手各自的能力边界，含电信保存期限与商用间谍软件
 - [密码管理器入门](../tools/password-manager.md)：第一层前两项的工具选择与备援
 - [Metadata 是什么，为什么重要](../basics/metadata.md)：为什么内容加密之后仍然留下大量信息
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：账号分层与身分退场
