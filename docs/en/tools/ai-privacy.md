@@ -41,7 +41,7 @@ The practical consequence: set the training controls when you open the account, 
 
 ## Before you paste
 
-De-identify: real names to labels, company names to sector descriptions, exact figures to magnitudes, precise dates to relative ones, addresses to city level, and strip endpoints, keys, and internal hostnames from code. Then reread what's left and check whether it still points back to the source.
+De-identify: real names to labels, company names to sector descriptions, exact figures to magnitudes, precise dates to relative ones, addresses to city level, and strip endpoints, keys, and internal hostnames from code. Then reread what's left and check whether it still points back to the source. Note that de-identification treats the content, not the account: the provider still knows it is you asking, and the subject of the question is itself information.
 
 Paste only the passage the task needs, rather than the whole document.
 

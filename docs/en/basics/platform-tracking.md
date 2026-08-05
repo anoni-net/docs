@@ -34,6 +34,8 @@ None of that requires a microphone.
 
 That second finding is the useful one. The collection that is genuinely happening does not need the microphone, and triggers no permission prompt.
 
+**"No evidence found" is not "proven absent."** That study sampled Android in 2018 and its coverage of encrypted traffic was limited. In August 2024, 404 Media obtained a pitch deck from the US advertiser Cox Media Group claiming its "Active Listening" product could capture conversations through smart-device microphones for ad targeting, naming Facebook, Google, and Amazon as partners. Google dropped the company from its partner program when asked, and the company denied listening to conversations[^cmg]. What that establishes is that someone is selling the concept, not that the technique operates at scale.
+
 **You can check for yourself.** On iOS 14 and later, an orange dot in the status bar means an app is using the microphone and a green dot means the camera[^apple-dot]; swipe down from Control Center to see which app. Android 12 and later shows the equivalent indicators plus a Privacy Dashboard listing microphone and camera access over the past 24 hours. If you suspect a specific app, watching the indicator for a few days beats speculating.
 
 ## The regional angle
@@ -52,6 +54,16 @@ The tracking mechanics are global. What differs across Sinophone Asia-Pacific is
 - **Separate browsing contexts**, block third-party cookies and trackers, and avoid federated "sign in with" buttons, which join two records together.
 - **Separate accounts** for genuinely distinct purposes, covered in [maintaining multiple online identities](./multiple-identities.md).
 
+### See what a platform actually holds on you
+
+Opening your own file beats trusting any explanation. Most platforms are required to offer data export and ad-preference pages:
+
+- **Inferred ad interests**: Google's My Ad Center and Meta's ad preferences both list the topics the system thinks you care about. Reading that list usually lands harder than any description of the mechanism.
+- **Data export**: Google Takeout, and "download your information" on Meta and Instagram, cover posts, searches, location, and ad interactions.
+- **Login and device history**: most security settings include a list of devices and locations that have signed in.
+
+The export itself is highly sensitive personal data. Store it encrypted, and keep it out of your downloads folder and cloud sync.
+
 Note what this list does not claim: none of it stops behavioral profiling inside a platform you use, and revoking microphone access changes none of the mechanisms in the first section.
 
 ## This page will age
@@ -68,6 +80,7 @@ Platform settings and policies change every few months. The mechanisms are durab
 
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} — Apple Newsroom, August 2019, on the grading program, the sampling rate, its suspension, and the move to opt-in.
 [^panoptispy]: [Panoptispy: Characterizing Audio and Video Exfiltration from Android Applications](https://petsymposium.org/popets/2018/popets-2018-0030.php){target="_blank"} — Proceedings on Privacy Enhancing Technologies 2018; Pan, Ren, Lindorfer, Wilson, and Choffnes (Northeastern University and UC Santa Barbara), an automated analysis of 17,260 Android apps.
+[^cmg]: [Here's the Pitch Deck for 'Active Listening' Ad Targeting](https://www.404media.co/heres-the-pitch-deck-for-active-listening-ad-targeting/){target="_blank"} — 404 Media, August 2024, on the Cox Media Group pitch deck. Verified 2026-08.
 [^apple-dot]: [About the orange and green indicators in your iPhone status bar](https://support.apple.com/en-us/108331){target="_blank"} — Apple Support.
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} — Apple Support.
 [^google-adid]: [Advertising ID](https://support.google.com/googleplay/android-developer/answer/6048248){target="_blank"} — Google Play Help; deletable from Android 12, after which apps receive zeros.
