@@ -117,59 +117,32 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 !!! question "检测发现 AS 与 DNS 的差异"
 
-    在这个示例说明过程中，可以发现 OONI Probe 会将检测过程记录下来。例如，我们可以发现即使通过中华电信的网络上网，但是在查询 DNS 服务时使用的是 Cloudflare 的 DNS 查询。
+    在上面的示例说明过程中，可以发现 OONI Probe 会将检测过程记录下来。例如即使通过中华电信的网络上网，查询 DNS 服务时使用的却是 Cloudflare 的 DNS 查询。对应到原始资料，`probe_asn` 与 `resolver_asn` 分属两个不同的 ASN。
 
     - 问题：网站受到阻挡无法连接访问，是 AS 问题还是 DNS 问题呢？
 
-### 数据获取
+每个栏位分别代表什么、判定结果又是怎么算出来的，另有三篇技术文件接续说明：
 
-通过 OONI Probe 的检测，观测数据会上传到 OONI 的 [AWS S3 Open Data](https://registry.opendata.aws/ooni/){target="_blank"} 中储存。在 [OONI Docs](https://docs.ooni.org/data){target="_blank"} 中有简单的数据获取教程，或者可以使用我们已经完成的[获取程序](https://github.com/anoni-net/docs/blob/main/asn_coverage/ooni.py){target="_blank"}，数据的字段结构可以参考 [ooni/spec](https://github.com/ooni/spec){target="_blank"}。
+<div class="grid cards" markdown>
 
-以下将通过[获取程序](https://github.com/anoni-net/docs/blob/main/asn_coverage/ooni.py){target="_blank"}来演示如何获取检测观测数据。
+- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
+- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
 
-??? question "如何设置项目环境？"
+</div>
 
-    如何设置项目环境与安装所需的套件，请参考「项目研究预先准备」章节，接下来的说明将会省略前置准备过程。
+### 想着手分析？
 
-```bash title="回看观测资料"
+如果你想自己撷取与分析 OONI 公开资料，计算特定区域的 ASN 覆盖率，相关工具设置与指令见：
 
-python3 ./ooni.py lookback [--unit=36] [--loc=TW] [--frame=hours]
-```
-
-区间单位为 `小时`，默认设定为 `36` 个单位（36 小时），区域为台湾（`TW`）。执行后将以单位储存以下格式的文件。
-
-- `lookback_{loc}_{YYYYMMDD}_{units}_{frame}.csv`
-
-```bash title="取得区间数据"
-python3 ./ooni.py span --start=YYYY/MM/DD --end=YYYY/MM/DD [--loc=TW]
-```
-
-区间单位为 `小时`，带入开始时间（`start`）与结束时间（`end`），获取台湾（`TW`）在这一期间的各小时区间的数据。
-
-```bash title="转换为试算表数据"
-python3 ./ooni.py sheetrow --path={数据路径}
-```
-
-将已获取的数据展开后，为方便在试算表中进行计算操作，另存一份以 `rows_` 开头的数据文件。
-
-建议使用「取得区间数据」加上「转换为试算表数据」后，就可以统计各 ASNs 出现的次数与进行不重复统计计算。再获取目前台湾所有的 ASNs 数据，即可进行占比等统计分析。
-
-```bash title="计算统计 ASNs"
-python3 ./ripe.py save --loc=TW
-```
-
-详细的计算统计可以参考以下资料：
-
-[:material-google-spreadsheet: 20230901-20231204-TW](https://docs.google.com/spreadsheets/d/1lMDsqX8Oa3GKW68y8TuFeKQW2nKM7X0u4z-RopfJIaA/){ .md-button .md-button--primary target="_blank" }
+[:material-database-search: ASN 观测资料撷取与分析](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
 
 ## :fontawesome-solid-diagram-project: 下一步
 
 <div class="grid cards" markdown>
 
-- [:material-database-search: ASN 观测资料撷取与分析](../community/asn-coverage-howto.md)
-- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
-- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
+- [:material-list-status: OONI 网站检测清单](./ooni-checklist.md)
+- [:material-chart-bar: Tor Relay 观测点](./tor-relay-watcher.md)
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 
