@@ -2,3 +2,9 @@
 *jsonl
 *jsonl.gz
 *tar.gz
+
+# 程式輸出的 CSV，ooni.py 的 lookback/span/sheetrow 與 ripe.py 的 save
+lookback_*.csv
+span_*.csv
+rows_*.csv
+asns_*.csv
