@@ -101,6 +101,7 @@ icon: material/vote-outline
 
 ## 相关阅读
 
+- [一般人平常该做到什么](./everyday-baseline.md)：不分身分的共同基线，这一页假设你已经做到
 - [社运行动者的数位准备](./activist.md)：行动现场与被临检时的装置与通讯应对
 - [记者保护消息来源](./journalist.md)：敏感档案交换与访谈记录保存
 - [威胁模型如何建立](../basics/threat-model.md)：跨境任务的威胁模型如何建立

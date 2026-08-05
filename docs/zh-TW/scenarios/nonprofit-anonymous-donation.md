@@ -234,6 +234,7 @@ icon: material/hand-coin-outline
 
 ## 接下來
 
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
 - [為什麼匿名支付重要](../basics/payments-anonymity.md)：金流為什麼是 metadata 的獨立維度
 - [加密貨幣的隱私光譜](../tools/crypto-privacy-spectrum.md)：BTC、ETH、Monero、Zcash、穩定幣的隱私差異
 - [台灣 VASP 法 2026](../taiwan/vasp-2026.md)：草案架構、罰則、對組織的影響

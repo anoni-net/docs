@@ -196,6 +196,7 @@ CIVICUS Monitor 評級。是否有 foreign-agent／NGO 註冊法、誹謗或冒�
 - [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)：這頁的兩個提醒框在那邊有完整版，包含消費版與企業版的分野、資料保留期限與該問供應商的問題。
 - [什麼是 OONI](../tools/what-is-ooni.md)、[什麼是 Tor](../tools/what-is-tor.md)、[Snowflake](../tools/tor-snowflake.md)、[通訊軟體比較](../tools/messaging-comparison.md)
 - [onionoo MCP：Tor 中繼節點查詢服務](../community/onionoo-mcp.md)：把上面【數位環境 2】那題交給 AI 自己查。接上這個網址，AI 助理就能用中文問出某地有幾個 Tor 節點、頻寬多少、落在哪些電信網路，數字來自 Tor Project 官方 Onionoo。
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
 - [這頁背後的想法（blog）](../blog/posts/travel-ai-briefing.md)：為什麼把該問的問題打包成 prompt，帶回去問你自己信任的 AI。
 
 ---

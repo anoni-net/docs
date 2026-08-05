@@ -87,6 +87,7 @@ icon: material/shield-account-outline
 
 ## 相關閱讀
 
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
 - [緊急求救](../help/index.md)：帳號被盜、裝置遺失、跟蹤騷擾、被斷網的綜合應對清單
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：建立一組加害者完全不知道的新帳號，以及避免新舊身分被平台串起來
 - [LGBTQ+ 與性少數的匿名社交](./lgbtq.md)：家人控管下的本機痕跡管理

@@ -124,6 +124,7 @@ This is the point where individual self-protection runs into the mission's colle
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Threat modeling](../basics/threat-model.md) — run the five questions for your specific role, jurisdiction, and mission before you prepare anything else.
 - [Metadata, and why it matters](../basics/metadata.md) — the concept behind the photo, file, and reporting-channel handling on this page.
 - [Journalists and source protection](./journalist.md) — overlapping discipline for protecting the people in your records, with a fuller file-handling and first-contact treatment.

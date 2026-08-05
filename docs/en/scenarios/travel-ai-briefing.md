@@ -201,6 +201,7 @@ After running the items above, copy the key contacts from section 4 (emergency c
 
 ## See also
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Using AI at work without leaking data](../tools/ai-privacy.md) — the fuller version of the caution above: tier differences, retention periods, and what to ask a provider
 - [Regional observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [onionoo MCP — a query service for Tor relays](../community/onionoo-mcp.md) — hand "Digital 2" above to the AI directly. Connect this URL and your assistant can answer how many Tor relays a country has, how much bandwidth, and which networks host them, with numbers straight from Tor Project's Onionoo.

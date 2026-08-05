@@ -281,7 +281,7 @@ LGBTQ+ 在不同國家的法律處境差異極大。依 ILGA World 2025 年統�
 
 ## 接下來
 
-- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，本頁只寫這個場景額外要做的
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：帳號分層的完整設定、反查手法與長期維持
 - [匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)：理解四種屬性各自保護的對象
 - [威脅模型如何建立](../basics/threat-model.md)：每個情境前先盤點對手與資產

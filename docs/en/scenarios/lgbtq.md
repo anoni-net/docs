@@ -300,7 +300,7 @@ Common threads when moving across the region:
 
 ## Where to go from here
 
-- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario; this page only covers what this situation adds
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — the full account-layering setup, correlation paths, and long-term maintenance
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame this guide builds on
 - [Regional Observatory](../regional/index.md) — the empirical regional work

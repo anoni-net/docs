@@ -192,6 +192,7 @@ The universal principle underneath all of them: check your own jurisdiction's ch
 
 ## What's next
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Why anonymous payments matter](../basics/payments-anonymity.md): why the money trail is a distinct, sticky dimension of metadata.
 - [How to build a threat model](../basics/threat-model.md): start by naming your adversary and the money-trail clues they can see.
 - [The cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md): how BTC, ETH, Monero, Zcash, and stablecoins differ on privacy.
