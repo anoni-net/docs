@@ -28,7 +28,7 @@ The widest layer. Everyone is in it.
 
 ### What it can do
 
-**Infer attributes you never disclosed.** In June 2023 The Markup analysed a database of 650,000 advertising audience segments and found segments covering reproductive health, including heavy purchasers of pregnancy tests and groups tied to contraception and infertility[^markup]. The input is behavioral records, not anything you filled in.
+**Infer attributes you never disclosed.** In June 2023 The Markup obtained the audience-segment list of the ad exchange Xandr: 650,000 segments, supplied by companies including Oracle, Experian, and Acxiom, with Oracle alone accounting for 36% of them[^markup]. Most are mundane to the point of comedy — "Heavy Purchaser – Meat Pies – Refrigeration", "Indulgent Dog Owners", "Tattoo Addicts", "Past Purchases > Autos > Makes > Subaru", "Newly Engaged". Others are less funny: "Credit Crunched – City Families", "Tough Times" (the list's own gloss: older, lower income, ethnically diverse singles), "Neuroticism – Easily Deflated", "I generally get a raw deal out of life", and health segments broken down by medication and diagnosis. The input is behavioral records, not anything you filled in.
 
 **Join you together across apps and devices.** Phone numbers and email addresses are the usual join keys, and contact-list uploads pull in people who never created an account. The mechanics are in [how platforms collect your data](./platform-tracking.md).
 
@@ -114,7 +114,7 @@ Both capability and law keep moving, and the facial-recognition legislative trac
 - [Threat modeling](./threat-model.md) — turning these capability limits into your own judgement
 - [Why metadata matters](./metadata.md) — why communication records are often worth more than content
 
-[^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} — The Markup, 8 June 2023. Verified 2026-08.
+[^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} — The Markup, 8 June 2023. The reporting is based on the audience-segment list of the ad exchange Xandr, drawn from close to a hundred data suppliers. Segment names are quoted as they appear in that list. Verified 2026-08.
 
 [^telecom]: Taiwan's [Regulations on Telecom Enterprises Handling Agency Inquiries into Communication Records](https://law.moj.gov.tw/LawClass/LawAll.aspx?PCODE=K0060030){target="_blank"}, Article 5, as amended 15 June 2017: three months for local, six months for domestic long-distance, international, and mobile. Verified 2026-08.
 

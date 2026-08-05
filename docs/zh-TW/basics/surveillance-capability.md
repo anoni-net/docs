@@ -24,7 +24,7 @@ icon: material/cctv
 
 ### 做得到
 
-**從行為推論你沒有說出口的屬性。** The Markup 在 2023 年 6 月分析一份含 65 萬個廣告受眾分類的資料庫，其中包含生殖健康相關的分類，例如驗孕商品的重度購買者、避孕與不孕相關族群[^markup]。分類的依據是行為紀錄，不是你填過的表單。
+**從行為推論你沒有說出口的屬性。** The Markup 在 2023 年 6 月取得廣告交易平台 Xandr 的受眾分類清單，共 65 萬個分類，供應者包含 Oracle、Experian、Acxiom 等公司，其中 Oracle 一家就佔 36%[^markup]。多數分類平凡到有點好笑，例如「冷藏肉派的重度購買者」、「寵狗成癡的飼主」、「刺青上癮者」、「開速霸陸的車主」、「剛訂婚」。另外幾類就沒那麼好笑：「信貸吃緊的城市家庭」、「日子難過」（清單自己的描述是年長、低收入、族裔多元的單身者）、「容易洩氣的神經質」、「覺得人生虧待自己」，健康類還有依用藥與診斷細分的分類。分類的依據是行為紀錄，不是你填過的表單。
 
 **把不同 app、不同裝置上的你接起來。** 手機號碼與 email 是最常見的接點，通訊錄上傳則讓沒有帳號的人也進入資料庫。機制見 [社群平台怎麼收集你的資料](./platform-tracking.md)。
 
@@ -118,7 +118,7 @@ icon: material/cctv
 - [Metadata 是什麼，為什麼重要](./metadata.md)：為什麼通聯紀錄常常比內容更有價值
 - [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：換工具不等於減少觀察者
 
-[^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} - The Markup，2023 年 6 月 8 日。查證日期 2026-08。
+[^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} - The Markup，2023 年 6 月 8 日。報導依據的是廣告交易平台 Xandr 的受眾分類清單，資料供應者近百家。文中引用的分類名稱為該清單原文的中譯。查證日期 2026-08。
 
 [^telecom]: [電信事業處理有關機關查詢電信通信紀錄實施辦法](https://law.moj.gov.tw/LawClass/LawAll.aspx?PCODE=K0060030){target="_blank"} 第 5 條，2017 年 6 月 15 日修正。第一類電信事業的保存期限為市內通信最近三個月以內，國際、國內長途通信與行動通信最近六個月以內。查證日期 2026-08。
 
