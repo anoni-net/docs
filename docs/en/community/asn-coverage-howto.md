@@ -28,13 +28,15 @@ OONI's observation data has three entry points serving quite different purposes.
 
 ## What the scripts can answer
 
-Know the tool's boundaries before starting. `ooni.py` currently does coverage statistics only, and its retrieval scope has three limits:
+Know the tool's boundaries before starting. `ooni.py` currently produces coverage and verdict-distribution statistics, and its retrieval scope has three limits:
 
 - **It reads the `webconnectivity` directory only.** The dozen-plus other nettests in the same hour are not included, so observations from `tor`, `telegram`, `signal` and the rest never reach the statistics. For what each nettest measures, see [OONI nettest quick reference](./ooni-nettests-map.md).
-- **It takes two fields per measurement**, `probe_asn` and `annotations.network_type`. It never reads `test_keys`, where the verdict lives, so the output can answer "which ASNs have someone measuring, and how often" but not "what did the measurements see".
+- **It takes three fields per measurement**, `probe_asn`, `annotations.network_type` and `test_keys.blocking`. It never reads the evidence layer (`queries`, `tcp_connect`, `requests`), so the output can answer "which ASNs have someone measuring, how often, and how the verdicts break down" but not "what does the evidence for one measurement look like".
 - **It takes `.jsonl.gz` only**, skipping the `.tar.gz` files in the same directory.
 
-The smallest useful extension is to also read `test_keys.blocking` while parsing each line, which takes the statistics from "measurement counts" to "anomaly distribution per ASN". Note that `blocking` is the boolean `false` when no interference was observed and a string when there was, so normalise the type before counting. For how to read those verdicts, see [How OONI decides a site is blocked](./ooni-blocking-determination.md).
+`blocking` is the boolean `false` when no interference was observed and a string when there was. The tool normalises both into one key space before counting and records measurements with no verdict as `none`, so each ASN's verdict counts always add up to its measurement count. For how to read those verdicts, see [How OONI decides a site is blocked](./ooni-blocking-determination.md).
+
+Going a layer deeper means pulling evidence-layer fields and comparing measurement by measurement, which needs a different storage design than plain counters can carry.
 
 ## How the S3 dataset is laid out
 
@@ -106,21 +108,29 @@ Files produced by `lookback` and `span` have four fields, one row per hour:
 | `hour` | Hour as `HH`, UTC |
 | `statistics` | That hour's statistics, held as a JSON string |
 
-`statistics` holds two counts: `counts` tallies measurements per ASN, and `network_type` tallies by connection type. Taking real data from hour `00` in Taiwan on 2026-08-04, with 551 measurements in that hour:
+`statistics` holds three counts: `counts` tallies measurements per ASN, `network_type` tallies by connection type, and `blocking` tallies the verdict distribution per ASN. Taking real data from hour `00` in Taiwan on 2026-08-04, with 551 measurements in that hour:
 
 ```json title="The statistics field expanded"
 {"counts": {"AS3462": 300, "AS17716": 100, "AS18419": 100, "AS24158": 51},
- "network_type": {"mobile": 44, "no_internet": 7}}
+ "network_type": {"mobile": 44, "no_internet": 7},
+ "blocking": {"AS3462": {"false": 294, "dns": 1, "tcp_ip": 1, "none": 4},
+              "AS17716": {"false": 94, "none": 6},
+              "AS18419": {"false": 99, "none": 1},
+              "AS24158": {"false": 51}}}
 ```
 
-The two counts not adding up to the same total is normal. `network_type` is annotated by the Probe itself, which mobile apps generally write and CLI and desktop versions mostly do not. Only 51 of the 551 measurements above carry the annotation, and the scripts skip measurements without one. Within that, `no_internet` means the Probe judged itself to be offline at measurement time. With annotation coverage below ten percent, the field suits trends rather than serving as a mobile-versus-fixed-line ratio.
+`counts` and `blocking` reconcile per ASN. `network_type` does not, and that is normal. It is annotated by the Probe itself, which mobile apps generally write and CLI and desktop versions mostly do not. Only 51 of the 551 measurements above carry the annotation, and the scripts skip measurements without one. Within that, `no_internet` means the Probe judged itself to be offline at measurement time. With annotation coverage below ten percent, the field suits trends rather than serving as a mobile-versus-fixed-line ratio.
+
+`none` inside `blocking` means no verdict was recorded, covering both a missing `test_keys` and a `null` blocking. Eleven of the 551 measurements above fall into it. The share is small but it shows up in every ASN, so an anomaly-rate calculation has to decide whether those belong in the denominator.
 
 Nested JSON is awkward to work with in a spreadsheet, which is what `sheetrow` flattens into one row per ASN:
 
-| `loc` | `date` | `hour` | `asn` | `count` |
-|---|---|---|---|---|
-| `TW` | `2026/08/04` | `00` | `AS3462` | `300` |
-| `TW` | `2026/08/04` | `00` | `AS17716` | `100` |
+| `loc` | `date` | `hour` | `asn` | `count` | `anomaly` | `blocking_false` | `blocking_dns` | `blocking_tcp_ip` |
+|---|---|---|---|---|---|---|---|---|
+| `TW` | `2026/08/04` | `00` | `AS3462` | `300` | `2` | `294` | `1` | `1` |
+| `TW` | `2026/08/04` | `00` | `AS17716` | `100` | `0` | `94` | `0` | `0` |
+
+The remaining columns are `blocking_http_failure`, `blocking_http_diff`, `blocking_none` and `blocking_other`, trimmed from the table above for width. `anomaly` sums the four interference types and can serve directly as the numerator in a spreadsheet. `blocking_other` catches values ts-017 does not define yet, so it should read `0`, and anything else means upstream has added a verdict type.
 
 A worked example of the resulting spreadsheet (2023-09 to 2023-12):
 

@@ -66,7 +66,7 @@ test helper 从外部连 `80` 埠同样逾时，代表该网站的 `80` 埠从�
 
 ### `http-diff`：取得的内容不一致
 
-台湾目前的公开资料里查不到同类样态（见文末台湾现况），以下改用印尼的测量说明。
+台湾的资料里有 `http-diff`，但样态与封锁告示页不同（见文末台湾现况），以下改用印尼的测量说明典型的告示页长什么样。
 
 四种类型里只有 `http-diff` 会让四个 `*_match` 栏位派上用场。印尼 `http://www.sportsinteraction.com/` 的测量是典型例子：
 
@@ -126,21 +126,41 @@ OONI 在资料集层级也处理同一类问题，作法可参考 [OONI 如何�
 
 ## 台湾现况
 
-撰稿时抽样观察台湾的 `web_connectivity` 资料，纪录到两个现象：
+以下数字取自 2026-08-05 往前 24 小时的台湾 `web_connectivity` 全量资料，共 22,105 笔测量。统计方式是把该区间 S3 上的每一笔逐行解析，取 `test_keys.blocking` 依 ASN 累计：
 
-- **抽查 100 笔异常测量，`confirmed` 为 `true` 的有 0 笔**，与 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 长期以来的描述一致。
-- **抽查 40 笔异常测量的判定分布，`dns` 31 笔、`tcp_ip` 6 笔、`http-failure` 3 笔、`http-diff` 0 笔**。台湾目前的公开观测资料里没有出现重导向到封锁告示页的样态，前面的 `http-diff` 范例才需要引用印尼与埃及的资料。
+| 判定 | 笔数 | 占比 |
+|---|---|---|
+| `false`（未观测到干预） | 21,029 | 95.13% |
+| `none`（没有判定结果） | 512 | 2.32% |
+| `tcp_ip` | 312 | 1.41% |
+| `dns` | 150 | 0.68% |
+| `http-failure` | 67 | 0.30% |
+| `http-diff` | 35 | 0.16% |
 
-两组样本都取自 measurements API 的异常清单，查询条件如下，你可以自行重新执行确认结论是否仍成立：
+四种干预类型合计 564 笔，占全部测量的 2.55%。`none` 是缺 `test_keys` 或 `blocking` 为 `null` 的测量，做异常率统计时要先决定放进分母或排除。
+
+另外抽查 100 笔异常测量，`confirmed` 为 `true` 的有 0 笔，与 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 长期以来的描述一致。
+
+!!! warning "小样本会给出错误的分布"
+
+    本页初稿曾以 measurements API 异常清单的 40 笔抽样估计判定分布，得到 `dns` 最多、`http-diff` 挂零的结论。改用全量统计后两点都不成立：实际上 `tcp_ip` 是 `dns` 的两倍以上，`http-diff` 也确实存在。API 的异常清单有自己的排序，直接当随机样本用会失准。要看分布请走全量统计，作法见 [ASN 观测资料撷取与分析](./asn-coverage-howto.md)。
+
+台湾的 `http-diff` 与前面印尼的例子不是同一回事。抽查 4 小时区间内的 15 笔，`body_proportion` 全部落在 `0.004` 到 `0.21`，Probe 取到的内容远短于对照组，与封锁告示页那种逼近 `1` 的样态相反。内容极短通常指向错误页或空回应，成因需要逐笔查验证据层才能判断，本页不下结论。
+
+要自己重跑上面的统计：
+
+```bash title="取得判定分布"
+uv run python ooni.py lookback --units=24 --loc=TW --frame=hours
+```
+
+指令会印出 `blocking` 的合计，并把逐 ASN 的分布写进 CSV。单笔查验仍走 API：
 
 ```bash title="列出台湾的异常测量"
 curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
   | python3 -m json.tool | head -40
 ```
 
-判定分布需要逐笔取 `raw_measurement` 后统计 `test_keys.blocking`，前述 40 笔即以此方式取得。
-
-以上是特定时间点的抽样，样本量小，仅供理解资料样态，不足以当作长期趋势的结论。要做有代表性的统计，需要涵盖更长时间与更多 ASN，而台湾的观测本身就存在 ASN 集中度过高的限制，细节见前面提到的 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)。
+以上是单一 24 小时区间的快照，反映的是当日样态，不足以当作长期趋势的结论。要看趋势需要涵盖更长时间，而台湾的观测本身就存在 ASN 集中度过高的限制，细节见前面提到的 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)。
 
 ## 延伸阅读
 
