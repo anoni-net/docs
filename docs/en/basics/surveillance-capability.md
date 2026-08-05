@@ -20,7 +20,7 @@ Three things first.
 
 !!! warning "The legal layer does not transfer across jurisdictions"
 
-    The warrant thresholds, retention periods, and facial-recognition status below use Taiwan as the worked example, because that is this site's primary context. They are illustrative, not universal — check your own jurisdiction. Where real-name registration, statutory retention, and platform-level content moderation are in place, the third layer's threshold drops sharply and public speech alone can trigger it; see [posting on mainland Chinese platforms](../scenarios/mainland-speech.md) and [speaking online from Singapore and Malaysia](../scenarios/singapore-malaysia-speech.md). The platform and spyware layers do transfer.
+    The warrant thresholds, retention periods, and facial-recognition status below use Taiwan as the worked example, because that is this site's primary context. They are illustrative, not universal — check your own jurisdiction. Where real-name registration, statutory retention, and platform-level content moderation are in place, the third layer's threshold drops sharply and public speech alone can trigger it; see [posting on mainland Chinese platforms](../scenarios/mainland-speech.md) and [speaking online from Singapore and Malaysia](../scenarios/singapore-malaysia-speech.md). Hong Kong has measured national-security sentences in years since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, and since March 2026 refusing to surrender a device password during a national-security investigation is itself an offense, including for passengers merely transiting through the airport; see the Hong Kong section of [cross-border travel and device searches](../scenarios/asia-travel.md). The platform and spyware layers do transfer.
 
 ## Platforms and advertisers
 
@@ -36,7 +36,7 @@ The widest layer. Everyone is in it.
 
 ### What there is no evidence for
 
-**Routine covert audio recording.** An automated analysis of 17,260 Android apps found no evidence of covert audio exfiltration; what it did find was screen recording sent to third parties. The full account, including the 2024 pitch-deck episode, is in [how platforms collect your data](./platform-tracking.md).
+**Routine covert audio recording.** An automated analysis of 17,260 Android apps found no evidence of covert audio exfiltration; what it did find was screen recording sent to third parties. Targeting gets its accuracy from the two capabilities above, behavioral records and cross-device joining, neither of which needs a microphone or trips any permission prompt. The full account, including the 2024 pitch-deck episode, is in [how platforms collect your data](./platform-tracking.md).
 
 ### Where the boundary sits
 
@@ -70,7 +70,7 @@ Taiwan's Judicial Yuan publishes [annual communication-surveillance statistics](
 
 ### Facial recognition
 
-Taiwan's National Police Agency ran a live facial-matching function in its M-Police system, drawing on household-registration photographs. In December 2021 the function was suspended over questions of authority and legal basis, with the agency stating at the time that it would resume once the legal framework was completed[^mpolice]. No public announcement of resumption was found at the time of verification; treat the agency's own notices as authoritative.
+Taiwan's National Police Agency ran a live facial-matching function in its M-Police system, drawing on household-registration photographs. In December 2021 the function was suspended over questions of authority and legal basis, with the agency stating at the time that it would resume once the legal framework was completed[^mpolice]. No public announcement of resumption was found at the time of verification; treat the agency's own notices as authoritative. What was suspended is live matching against household-registration photographs. Street camera networks operate under separate legal bases and are outside this section.
 
 ## Commercial spyware
 
@@ -78,7 +78,7 @@ Highest cost, fewest targets, and the highest capability ceiling of the four.
 
 ### What it can do
 
-**Compromise a device without you tapping anything.** Zero-click exploits remove the need for victim interaction. Once installed, the implant reads content that has already been decrypted on the device, so end-to-end encryption offers no protection at this layer: the message is read at the same moment you can read it.
+**Compromise a device without you tapping anything.** Zero-click exploits remove the need for victim interaction. Once a device is compromised, end-to-end encryption stops protecting anything, because the implant reads content that has already been decrypted on the device: the message is read at the same moment you can read it.
 
 In July 2026 Amnesty International published a full analysis of Pegasus's architecture, drawing on internal marketing and technical documents disclosed in WhatsApp's litigation against NSO Group[^amnesty]. In the same month, Citizen Lab reported that a former Member of the European Parliament's iPhone had been infected with Pegasus at least three times across 2022 and 2023[^citizenlab].
 
@@ -88,20 +88,24 @@ Licences are expensive and operating the tooling takes staff, so operators choos
 
 ### Can it be detected
 
-Yes, with the right tools and knowledge. Amnesty maintains the open-source Mobile Verification Toolkit (MVT), which checks iOS backups or Android forensic images against known indicators of compromise. If you suspect an implant, [Citizen Lab](https://citizenlab.ca/){target="_blank"} and the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} provide forensic help. Most Pegasus infection chains lack persistence, so a reboot clears that particular implant, though it does not prevent reinfection.
+Yes, with the right tools and knowledge. Amnesty maintains the open-source Mobile Verification Toolkit (MVT), which checks a phone backup against known traces of compromise. If you suspect an implant, [Citizen Lab](https://citizenlab.ca/){target="_blank"} and the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} provide forensic help. Most Pegasus infection chains do not persist, so a reboot clears that particular implant. What it clears is only that one instance; the same chain can reinfect immediately, so rebooting is not a defence.
 
 ## Which measure stops which layer
 
-| Measure | Platforms & ads | Telecom | Legal process | Commercial spyware |
+Read it this way. The two left-hand columns are the ones you are most likely to face, and the first four rows are largely effective there. The rightmost column costs too much to be aimed at most people; treat it as the ceiling on capability rather than as your expected risk.
+
+The table covers communication and account measures only. Facial recognition and physical camera networks are not on it, and the equivalent for fraud and account takeover is in [what an ordinary person should actually do](../scenarios/everyday-baseline.md).
+
+| Measure | Platforms & ads | Telecom | State & law enforcement | Commercial spyware |
 |---|---|---|---|---|
-| End-to-end encryption | Content protected | Content protected, records still generated | Content protected, records still obtainable | No protection, decrypted on device |
-| VPN | Hides the connection from your ISP; the account is still you | Substitutes part of the connection record | No help against account-level requests | No protection |
-| Tor | Breaks source-IP correlation | Carrier sees only that you use Tor | No help against account-level requests | No protection |
+| End-to-end encryption | Message content protected; behavioral signals and linkage still collected | Content protected, records still generated | Content protected, records still obtainable | No protection, decrypted on device |
+| VPN | Substitutes the source IP the platform sees; the account is still you | Your carrier sees only that you connect to a VPN; call records and cell-site data are unaffected | No help against account-level requests | No protection |
+| Tor | Breaks source-IP correlation; once you log in it is still you | Carrier sees only that you use Tor | No help against account-level requests | No protection |
 | Ad ID and permissions off | Reduces cross-app linkage | Not applicable | Not applicable | Not applicable |
 | Account layering | Cuts some linkage | Not applicable | Raises the cost of correlation | No protection |
 | Staying updated | Not applicable | Not applicable | Not applicable | Raises cost; no help against zero-days |
 
-How to read the table: nothing works across every column, and the rightmost column is almost entirely "no protection". That does not make the other columns pointless. It means the layer you defend has to match the layer you actually face. The framework for deciding that is in [threat modeling](./threat-model.md).
+The layer you defend has to match the layer you actually face. The framework for deciding that is in [threat modeling](./threat-model.md).
 
 ## This page will age
 
