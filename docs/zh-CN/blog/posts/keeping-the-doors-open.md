@@ -38,7 +38,7 @@ description: "Unredacted 用 300+ 台服务器执行 FreeSocks、Tor bridges、S
 
 这份工作大部分都是看不见的，包括数据中心作业、硬件、自动化、开源软件、带宽、滥用通报处理、监控警报，以及为了让这一切持续运作而熬过的深夜。
 
-我们做的事情分成三个方向。**Censorship Evasion**（绕过审查）这一块是 Unredacted Door，我们把所有用来绕过封锁的服务都收在这个名字底下。**Secure Infrastructure**（安全基础设施）承载的是像 [XMPP.is](https://xmpp.is/){target="_blank"}、自家的 Matrix 家用服务器，还有其他以安全与隐私为前提的免费服务。**Unredacted Education** 是写作与文件这一块，给想理解这份工作、想自己复制一遍的人读的指南与说明。在这三块之外，**Unredacted Labs** 是实验区，运作还没到正式上线等级的基础设施想法。GreenWare 就是其中一项，目的是用不太耗电的硬件扛起真实的网络容量。
+我们做的事情分成三个方向。**Censorship Evasion**（绕过审查）这一块是 Unredacted Door，我们把所有用来绕过封锁的服务都收在这个名字底下。**Secure Infrastructure**（安全基础设施）承载的是像 [XMPP.is](https://xmpp.is/){target="_blank"}、自家的 Matrix 家用服务器，还有其他以安全与隐私为前提的免费服务。**Unredacted Education** 是写作与文件的部分，给想理解这份工作、想自己复制一遍的人读的指南与说明。在这三块之外，**Unredacted Labs** 是实验区，运作还没到正式上线等级的基础设施想法。GreenWare 就是其中一项，目的是用不太耗电的硬件扛起真实的网络容量。
 
 ## Unredacted Door
 

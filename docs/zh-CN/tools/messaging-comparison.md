@@ -60,7 +60,7 @@ icon: material/message-text-outline
 **限制**：
 
 - 注册仍需手机号码，虽然能加 username，初次验证仍有电话这层
-- Sealed Sender 隐藏单则消息的寄件人，不隐藏「这个账号存在」这件事
+- Sealed Sender 隐藏单则消息的寄件人，不隐藏「账号存在」这件事
 - 多装置靠 device linking，新装置看不到旧消息（除非开启 2024 年加入的加密消息备份）
 - 客户端 UX 偏「美式」，部分功能（已读回条、群组权限）跟亚洲使用者习惯不一致
 - 在中国大陆被「长城防火墙」（Great Firewall, GFW）封锁（约 2021 年起），需透过 Tor Snowflake、WebTunnel 等桥接才能稳定连接

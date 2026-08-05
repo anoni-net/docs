@@ -55,7 +55,7 @@ Tor 的节点分两类：公开的中继点（Relay）与隐藏的桥接点（Br
 桥接点还可以搭配 **Pluggable Transports** 进一步伪装流量：
 
 - **Obfs4**：把 Tor 流量看起来像随机乱码，避免被 DPI 直接特征识别。
-- **meek**：把流量包装成连到 Microsoft Azure 这类大型云端服务（早年也用过 Google、Cloudflare，后来这些业者陆续关闭了 domain fronting），审查者要嘛全挡这些服务，要嘛放行。
+- **meek**：把流量包装成连到 Microsoft Azure 这类大型云端服务（早年也用过 Google、Cloudflare，后来陆续关闭了 domain fronting），审查者要嘛全挡、要嘛放行。
 - **[Snowflake](./tor-snowflake.md)**：把流量包装成 WebRTC（视讯会议常用协议），由全球志工的浏览器分页临时当桥接。
 
 !!! info "anoni.net 是台湾的社群"

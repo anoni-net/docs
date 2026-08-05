@@ -8,7 +8,7 @@ icon: simple/tails
 
 [Tails](https://tails.net/){target="_blank"}（The Amnesic Incognito Live System，无记忆的匿踪系统）是一个从 USB 随身碟或外接硬盘启动的操作系统。它把 Tor、加密邮件、密码管理器、档案 Metadata 清除工具预先打包好，关机后整个内存被清空，不留下任何使用痕迹。
 
-Tails 解决的场景很具体：采访敏感议题的记者要保护消息来源、研究员要处理外来档案而不污染主机、行动现场要在不熟悉的网路环境工作、机敏档案要审阅但不希望留在笔电上。这些场景下，「我这台日常电脑」的长期使用痕迹是个大破口，Tails 把任务切到一个临时的干净环境，做完抽 USB 走人。
+Tails 解决的场景很具体：采访敏感议题的记者要保护消息来源、研究员要处理外来档案而不污染主机、行动现场要在不熟悉的网路环境工作、机敏档案要审阅但不希望留在笔电上。这些场景下，「我的日常电脑」的长期使用痕迹是个大破口，Tails 把任务切到一个临时的干净环境，做完抽 USB 走人。
 
 Tails 基于 [Debian Linux](https://zh.wikipedia.org/zh-cn/Debian){target="_blank"}，由独立非营利组织开发，跟 Tor Project 长期合作。
 

@@ -55,6 +55,20 @@ PROSE_RULES = [
 AI_OPENERS = ["值得注意的是", "總的來說", "綜上所述"]
 AI_OPENER_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS) + r")")
 
+# 「這／这」密集重複。貢獻者百科已有「避免『這…』開頭」，但沒有密度標準，實際校稿
+# 時反覆處理的是同一句裡連著出現的指代堆疊，例：
+#
+#     這件事說明有人在賣這個概念，不等於這套技術已經在大規模運作
+#
+# 判定分兩種，命中任一就報：同一句 3 次以上，或相鄰兩個之間隔不到 ZHE_GAP + 1 個字。
+# 距離門檻取 8，是對全站 429 篇試跑校準出來的，再放寬會開始收進正當用法（相隔十幾
+# 個字的兩個「這」指涉不同對象，讀起來不重複）。改法要看語境（換成它指的名詞、拆句、
+# 或整句重寫），機器不宜代勞，列 warn。
+ZHE_RE = re.compile(r"[這这]")
+ZHE_GAP = 8
+# 句子單位。表格的 | 也算分隔，同一列不同格是獨立內容，不該互相累計。
+ZHE_SPLIT = re.compile(r"[。！？|]")
+
 # 口語「講」，扣掉常見正當詞。繁簡兩種寫法都收。
 #
 # 原本只比對正體「講」，zh-CN 完全不受檢查。實測 zh-CN 全站 86 個「讲」裡
@@ -191,6 +205,34 @@ def in_link_text(clean: str, pos: int) -> bool:
     return right + 1 < len(clean) and clean[right + 1] == "("
 
 
+def iter_sentences(clean: str):
+    """把一行切成句子單位，回傳 (該句在行內的起始位移, 句子文字)。
+
+    strip_noise 保持長度不變，所以位移可以直接拿去索引原始行，用來取 snippet。
+    """
+    start = 0
+    for m in ZHE_SPLIT.finditer(clean):
+        yield start, clean[start:m.start()]
+        start = m.end()
+    yield start, clean[start:]
+
+
+def check_zhe_repeat(raw: str, clean: str):
+    """回傳該行所有「這」密集重複的 (訊息, snippet)，一個句子單位最多報一次。"""
+    out = []
+    for off, sent in iter_sentences(clean):
+        pos = [m.start() for m in ZHE_RE.finditer(sent)]
+        if len(pos) >= 3:
+            reason = f"同一句出現 {len(pos)} 次"
+        elif any(b - a <= ZHE_GAP for a, b in zip(pos, pos[1:])):
+            reason = f"相鄰兩個相隔不到 {ZHE_GAP + 1} 個字"
+        else:
+            continue
+        snippet = raw[off + pos[0]: off + pos[-1] + 6].strip()
+        out.append((f"「這」密集重複（{reason}），改成它指的名詞或拆句重寫", snippet[:40]))
+    return out
+
+
 def is_english_doc(path: Path) -> bool:
     """en 文件採英文排版，破折號 — 屬正常用法，不套用 em-dash 規則。
 
@@ -264,6 +306,8 @@ def lint_file(path: Path):
         if AI_OPENER_RE.search(clean):
             findings.append((i, ERROR, "ai-opener",
                              "避免以「值得注意的是/總的來說/綜上所述」開頭", raw.strip()[:24]))
+        for msg, snippet in check_zhe_repeat(raw, clean):
+            findings.append((i, WARN, "zhe-repeat", msg, snippet))
         for m in JIANG_RE.finditer(clean):
             around = clean[max(0, m.start() - 1): m.start() + 2]
             if not JIANG_ALLOW.search(around):
