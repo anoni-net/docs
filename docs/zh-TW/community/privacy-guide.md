@@ -27,7 +27,7 @@ icon: material/shield-lock-outline
 
 社群依「[指南](../guides/index.md)」的分層結構，把隱私主題分散到不同層次：
 
-- 概念：[匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)、[威脅模型如何建立](../basics/threat-model.md)、[Metadata 是什麼](../basics/metadata.md)、[社群平台怎麼收集你的資料](../basics/platform-tracking.md)、[怎麼維持多個網路身分](../basics/multiple-identities.md)
+- 概念：[匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)、[威脅模型如何建立](../basics/threat-model.md)、[Metadata 是什麼](../basics/metadata.md)、[社群平台怎麼收集你的資料](../basics/platform-tracking.md)、[監控現在做得到什麼](../basics/surveillance-capability.md)、[怎麼維持多個網路身分](../basics/multiple-identities.md)
 - 工具：[什麼是 Tor](../tools/what-is-tor.md)、[什麼是 Tails](../tools/what-is-tails.md)、[Tor Browser 進階設定](../tools/tor-browser-advanced.md)、[匿名作業系統比較](../tools/tails-vs-whonix-vs-qubes.md)、[訊息工具比較](../tools/messaging-comparison.md)、[密碼管理器入門](../tools/password-manager.md)、[用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)
 - 場景：[一般人平常該做到什麼](../scenarios/everyday-baseline.md)、[記者保護消息來源](../scenarios/journalist.md)、[社運行動者的數位準備](../scenarios/activist.md)、[家暴倖存者的數位準備](../scenarios/domestic-violence.md)、[LGBTQ+ 與性少數的匿名社交](../scenarios/lgbtq.md)
 - 進階：[端對端加密如何運作](../advanced/e2ee.md)、[常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)

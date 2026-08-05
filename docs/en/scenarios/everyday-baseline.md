@@ -198,6 +198,7 @@ The baseline above assumes no specific adversary. When one of the following beco
 
 - [Threat modeling](../basics/threat-model.md) — what to protect, from whom, at what cost; the basis for the ordering on this page
 - [How platforms collect your data](../basics/platform-tracking.md) — the full version of the commercial-collection thread
+- [What surveillance can actually do](../basics/surveillance-capability.md) — capability limits for the commercial-collection and targeted-investigation adversaries above, plus telecom retention and commercial spyware
 - [Why metadata matters](../basics/metadata.md) — why encrypting content still leaves a great deal behind
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — account layering and retiring an identity
 - [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} — the canonical general-audience guide, available in 14 languages

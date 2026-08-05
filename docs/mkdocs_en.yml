@@ -23,6 +23,7 @@ nav:
           - basics/metadata.md
           - basics/threat-model.md
           - basics/platform-tracking.md
+          - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "Tools"]:

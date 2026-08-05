@@ -14,7 +14,7 @@ icon: material/compass-outline
 
 - [:material-school-outline: 概念](../basics/index.md)
 
-    匿名與隱私的核心思考工具：詞彙釐清、威脅模型、Metadata、平台資料收集、多重身分、網路自由、匿名支付。從這裡建立共同的動機與詞彙。
+    匿名與隱私的核心思考工具：詞彙釐清、威脅模型、Metadata、平台資料收集、監控能力現況、多重身分、網路自由、匿名支付。從這裡建立共同的動機與詞彙。
 
 - [:material-toolbox-outline: 工具](../tools/index.md)
 
