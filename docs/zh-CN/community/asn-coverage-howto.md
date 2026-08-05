@@ -28,13 +28,15 @@ OONI 的观测资料有三个入口，用途差异很大，先选对再着手：
 
 ## 程序能回答什么
 
-着手之前先确认工具的边界，`ooni.py` 现阶段只做覆盖率统计，取用范围有三个限制：
+着手之前先确认工具的边界，`ooni.py` 现阶段做覆盖率与判定分布统计，取用范围有三个限制：
 
 - **只读 `webconnectivity` 目录**。同一小时底下其他十几个测项没有纳入，`tor`、`telegram`、`signal` 等测项的观测不会出现在统计里。各测项分别测什么见 [OONI 测项速查表](./ooni-nettests-map.md)。
-- **每笔测量只取两个栏位**，`probe_asn` 与 `annotations.network_type`。判定结果所在的 `test_keys` 没有读取，因此输出能回答「哪些 ASN 有人在测、测了几次」，无法回答「测量看到了什么」。
+- **每笔测量只取三个栏位**，`probe_asn`、`annotations.network_type` 与 `test_keys.blocking`。证据层的 `queries`、`tcp_connect`、`requests` 没有读取，因此输出能回答「哪些 ASN 有人在测、测了几次、判定结果的分布」，无法回答「某一笔测量的证据长什么样」。
 - **只取 `.jsonl.gz`**，同目录的 `.tar.gz` 会跳过。
 
-若要扩充，最小的一步是在逐行解析时多取 `test_keys.blocking`，统计就能从「测量笔数」延伸到「各 ASN 的异常分布」。`blocking` 未观测到干预时是布尔值 `false`、有干预时是字串，统计前要先统一类型。判读前提见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)。
+`blocking` 未观测到干预时是布尔值 `false`、有干预时是字串，程序在计数前已统一为同一组键，没有判定结果的测量记为 `none`，因此每个 ASN 的判定分布加总必然等于测量笔数。判读前提见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)。
+
+想再往下一层，下一步是取证据层的栏位逐笔比对，那需要另外设计储存方式，单纯的计数统计装不下。
 
 ## S3 资料集的摆放方式
 
@@ -106,21 +108,29 @@ uv run python ooni.py sheetrow --path=./span_TW_20260801_20260803.csv
 | `hour` | 小时，格式 `HH`，UTC |
 | `statistics` | 该小时的统计结果，内容是一段 JSON |
 
-`statistics` 内含两份计数，`counts` 依 ASN 统计测量笔数，`network_type` 依连线类型统计。以 2026-08-04 台湾 `00` 时的实际资料为例，该小时共 551 笔测量：
+`statistics` 内含三份计数，`counts` 依 ASN 统计测量笔数，`network_type` 依连线类型统计，`blocking` 依 ASN 统计判定结果的分布。以 2026-08-04 台湾 `00` 时的实际资料为例，该小时共 551 笔测量：
 
 ```json title="statistics 栏位展开"
 {"counts": {"AS3462": 300, "AS17716": 100, "AS18419": 100, "AS24158": 51},
- "network_type": {"mobile": 44, "no_internet": 7}}
+ "network_type": {"mobile": 44, "no_internet": 7},
+ "blocking": {"AS3462": {"false": 294, "dns": 1, "tcp_ip": 1, "none": 4},
+              "AS17716": {"false": 94, "none": 6},
+              "AS18419": {"false": 99, "none": 1},
+              "AS24158": {"false": 51}}}
 ```
 
-两份计数的总和不一致属于正常现象。`network_type` 由 Probe 自行标记，行动版 App 通常会写入，CLI 与桌面版多半不会，上例 551 笔中只有 51 笔带标记，程序会跳过没有标记的测量。其中 `no_internet` 代表 Probe 在测量当下判定自身没有连线。标记涵盖率不到一成，适合看趋势，不适合当作行动与固网的比例依据。
+`counts` 与 `blocking` 的加总逐 ASN 相等，`network_type` 则不会对上。`network_type` 由 Probe 自行标记，行动版 App 通常会写入，CLI 与桌面版多半不会，上例 551 笔中只有 51 笔带标记，程序会跳过没有标记的测量。其中 `no_internet` 代表 Probe 在测量当下判定自身没有连线。标记涵盖率不到一成，适合看趋势，不适合当作行动与固网的比例依据。
+
+`blocking` 里的 `none` 代表该笔没有判定结果，缺 `test_keys` 或 `blocking` 为 `null` 都算。上例 551 笔中有 11 笔属于此类，占比不高但每个 ASN 都出现，做异常率统计时要决定放进分母或排除。
 
 巢状 JSON 不易在试算表里计算，`sheetrow` 的作用就是把它摊平成一列一个 ASN：
 
-| `loc` | `date` | `hour` | `asn` | `count` |
-|---|---|---|---|---|
-| `TW` | `2026/08/04` | `00` | `AS3462` | `300` |
-| `TW` | `2026/08/04` | `00` | `AS17716` | `100` |
+| `loc` | `date` | `hour` | `asn` | `count` | `anomaly` | `blocking_false` | `blocking_dns` | `blocking_tcp_ip` |
+|---|---|---|---|---|---|---|---|---|
+| `TW` | `2026/08/04` | `00` | `AS3462` | `300` | `2` | `294` | `1` | `1` |
+| `TW` | `2026/08/04` | `00` | `AS17716` | `100` | `0` | `94` | `0` | `0` |
+
+完整栏位还有 `blocking_http_failure`、`blocking_http_diff`、`blocking_none` 与 `blocking_other`，上表为版面只列前几栏。`anomaly` 是四种干预类型的加总，可以直接在试算表当分子用。`blocking_other` 收 ts-017 尚未定义的值，正常情况下应为 `0`，出现非零代表上游新增了判定类型。
 
 实际分析输出的试算表范例（2023-09 至 2023-12）：
 

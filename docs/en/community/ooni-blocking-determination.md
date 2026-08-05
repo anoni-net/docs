@@ -66,7 +66,7 @@ A working connection layer with a failing application layer is common with serve
 
 ### `http-diff`: the content differs
 
-Taiwan's public data currently contains no measurement of this shape (see "What Taiwan's data looks like" below), so the example here comes from Indonesia.
+Taiwan's data does contain `http-diff`, though not in this shape (see "What Taiwan's data looks like" below), so the example here comes from Indonesia to show what a block page looks like.
 
 Of the four types only `http-diff` puts the four `*_match` fields to work. A measurement of `http://www.sportsinteraction.com/` in Indonesia is a textbook case:
 
@@ -126,21 +126,41 @@ To run comparisons across time or across ASNs yourself, [ASN observation data re
 
 ## What Taiwan's data looks like
 
-A sampled look at Taiwan's `web_connectivity` data at the time of writing recorded two things:
+The figures below come from the full 24 hours of Taiwanese `web_connectivity` data ending 2026-08-05, 22,105 measurements in total. Every measurement in that window was parsed line by line from S3 and its `test_keys.blocking` tallied per ASN:
 
-- **Of 100 anomalous measurements checked, 0 had `confirmed` set to `true`**, consistent with what [ASN observation data analysis](../regional/ooni-asn-coverage.md) has described all along.
-- **Of 40 anomalous measurements checked for verdict distribution, 31 were `dns`, 6 `tcp_ip`, 3 `http-failure` and 0 `http-diff`.** Taiwan's public observation data currently shows no redirection to a block notice page, which is why the `http-diff` examples above have to come from Indonesia and Egypt.
+| Verdict | Measurements | Share |
+|---|---|---|
+| `false` (no interference observed) | 21,029 | 95.13% |
+| `none` (no verdict recorded) | 512 | 2.32% |
+| `tcp_ip` | 312 | 1.41% |
+| `dns` | 150 | 0.68% |
+| `http-failure` | 67 | 0.30% |
+| `http-diff` | 35 | 0.16% |
 
-Both samples came from the measurements API's anomaly listing. The query is below, and you can rerun it to check whether the conclusions still hold:
+The four interference types add up to 564 measurements, 2.55% of the total. `none` covers measurements with missing `test_keys` or a `null` blocking, so an anomaly-rate calculation has to decide whether they belong in the denominator.
+
+Separately, of 100 anomalous measurements checked, 0 had `confirmed` set to `true`, consistent with what [ASN observation data analysis](../regional/ooni-asn-coverage.md) has described all along.
+
+!!! warning "A small sample gives the wrong distribution"
+
+    An earlier draft of this page estimated the verdict distribution from 40 measurements sampled off the measurements API's anomaly listing, concluding that `dns` dominated and `http-diff` was absent. Full-population statistics contradict both: `tcp_ip` runs more than double `dns`, and `http-diff` does occur. The API's anomaly listing has its own ordering and does not behave as a random sample. For distributions, run the full-population count, as described in [ASN observation data retrieval and analysis](./asn-coverage-howto.md).
+
+Taiwan's `http-diff` is not the same phenomenon as the Indonesian example above. Across 15 of them sampled from a four-hour window, `body_proportion` ran between `0.004` and `0.21`, meaning the Probe retrieved far less content than the control, the opposite of the block page pattern that sits close to `1`. Very short content usually points at an error page or an empty response. Establishing the cause needs the evidence layer checked measurement by measurement, which this page does not attempt.
+
+To rerun the statistics above yourself:
+
+```bash title="Get the verdict distribution"
+uv run python ooni.py lookback --units=24 --loc=TW --frame=hours
+```
+
+The command prints the `blocking` totals and writes the per-ASN distribution into the CSV. Individual measurements still come from the API:
 
 ```bash title="List anomalous measurements from Taiwan"
 curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
   | python3 -m json.tool | head -40
 ```
 
-The verdict distribution needs `raw_measurement` fetched per measurement and `test_keys.blocking` tallied, which is how the 40 above were obtained.
-
-These are point-in-time samples with small sample sizes, useful for understanding the shape of the data and not enough to conclude anything about longer trends. Representative statistics need a longer span and more ASNs, and Taiwan's observations carry their own limitation in how concentrated they are across ASNs. For detail, see [ASN observation data analysis](../regional/ooni-asn-coverage.md).
+This is a snapshot of a single 24-hour window, reflecting that day's shape and not enough to conclude anything about longer trends. Trends need a longer span, and Taiwan's observations carry their own limitation in how concentrated they are across ASNs. For detail, see [ASN observation data analysis](../regional/ooni-asn-coverage.md).
 
 ## Where to go from here
 

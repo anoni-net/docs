@@ -16,7 +16,7 @@ ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Ope
 ## 📊 研究方法
 
 1. **資料採集**: 從 OONI AWS S3 公開資料集下載指定時間與地區的測量資料
-2. **ASN 統計**: 統計每個 ASN 的測量次數與網路類型分布
+2. **ASN 統計**: 統計每個 ASN 的測量次數、網路類型分布與 `test_keys.blocking` 判定分布
 3. **資料比對**: 與 RIPE 全球 ASN 列表進行比對，識別缺失的網路
 4. **報告生成**: 輸出 CSV 格式分析報告，支援時間序列分析
 
@@ -110,11 +110,12 @@ rows_lookback_TW_20260208_36_hours.csv
 
 **行格式範例：**
 ```csv
-loc,date,hour,asn,count
-TW,2026/02/08,00,AS3462,150
-TW,2026/02/08,00,AS9924,89
-TW,2026/02/08,01,AS3462,142
+loc,date,hour,asn,count,anomaly,blocking_false,blocking_dns,blocking_tcp_ip,blocking_http_failure,blocking_http_diff,blocking_none,blocking_other
+TW,2026/08/05,04,AS149791,583,14,558,1,12,1,0,11,0
+TW,2026/08/05,04,AS131584,884,26,823,0,21,3,2,35,0
 ```
+
+`anomaly` 是 `dns`、`tcp_ip`、`http-failure`、`http-diff` 四欄的加總，方便直接在試算表做樞紐分析。`blocking_none` 是沒有判定結果的測量（缺 `test_keys` 或 `blocking` 為 `null`），`blocking_other` 收 ts-017 尚未定義的值。七個 blocking 欄位加總等於 `count`。
 
 #### 4. 獲取 ASN 資訊
 
@@ -175,19 +176,21 @@ asn_coverage/
 **CSV 輸出格式（原始格式）：**
 ```csv
 loc,date,hour,statistics
-TW,2026/02/08,00,"{""counts"":{""AS3462"":150,""AS9924"":89},""network_type"":{""wifi"":120,""mobile"":119}}"
+TW,2026/08/05,04,"{""counts"":{""AS3462"":200},""network_type"":{""mobile"":94},""blocking"":{""AS3462"":{""false"":192,""dns"":2,""tcp_ip"":1,""http-failure"":1,""none"":4}}}"
 ```
 
 **CSV 輸出格式（行格式）：**
 ```csv
-loc,date,hour,asn,count
-TW,2026/02/08,00,AS3462,150
-TW,2026/02/08,00,AS9924,89
+loc,date,hour,asn,count,anomaly,blocking_false,blocking_dns,blocking_tcp_ip,blocking_http_failure,blocking_http_diff,blocking_none,blocking_other
+TW,2026/08/05,04,AS3462,200,4,192,2,1,1,0,4,0
 ```
 
 **統計資訊包含：**
 - `counts`: 每個 ASN 的測量次數
 - `network_type`: 網路類型分布（wifi, mobile 等）
+- `blocking`: 每個 ASN 的 `test_keys.blocking` 判定分布
+
+`blocking` 依 [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md) 的定義分類。該欄位未觀測到干預時是布林值 `false`、有干預時是字串，程式在計數前統一為同一組鍵。沒有判定結果的測量記為 `none`，不會被丟棄，因此每個 ASN 的 blocking 加總必然等於 `counts`。
 
 ## 💡 使用案例
 
@@ -332,7 +335,7 @@ ASN Coverage is a data analysis tool for the anoni.net project, designed to pars
 ## 📊 Research Methodology
 
 1. **Data Collection**: Download measurement data for specific times and regions from OONI AWS S3 public dataset
-2. **ASN Statistics**: Count measurements per ASN and network type distribution
+2. **ASN Statistics**: Count measurements per ASN, network type distribution, and the `test_keys.blocking` verdict distribution
 3. **Data Comparison**: Compare with RIPE global ASN list to identify missing networks
 4. **Report Generation**: Output CSV format analysis reports supporting time series analysis
 
@@ -426,11 +429,12 @@ rows_lookback_TW_20260208_36_hours.csv
 
 **Row Format Example:**
 ```csv
-loc,date,hour,asn,count
-TW,2026/02/08,00,AS3462,150
-TW,2026/02/08,00,AS9924,89
-TW,2026/02/08,01,AS3462,142
+loc,date,hour,asn,count,anomaly,blocking_false,blocking_dns,blocking_tcp_ip,blocking_http_failure,blocking_http_diff,blocking_none,blocking_other
+TW,2026/08/05,04,AS149791,583,14,558,1,12,1,0,11,0
+TW,2026/08/05,04,AS131584,884,26,823,0,21,3,2,35,0
 ```
+
+`anomaly` sums the `dns`, `tcp_ip`, `http-failure` and `http-diff` columns, so a spreadsheet pivot can use it directly. `blocking_none` covers measurements with no verdict (missing `test_keys`, or `blocking` set to `null`), and `blocking_other` catches values ts-017 does not define yet. The seven blocking columns add up to `count`.
 
 #### 4. Retrieve ASN Information
 
@@ -491,19 +495,21 @@ asn_coverage/
 **CSV Output Format (Raw):**
 ```csv
 loc,date,hour,statistics
-TW,2026/02/08,00,"{""counts"":{""AS3462"":150,""AS9924"":89},""network_type"":{""wifi"":120,""mobile"":119}}"
+TW,2026/08/05,04,"{""counts"":{""AS3462"":200},""network_type"":{""mobile"":94},""blocking"":{""AS3462"":{""false"":192,""dns"":2,""tcp_ip"":1,""http-failure"":1,""none"":4}}}"
 ```
 
 **CSV Output Format (Row):**
 ```csv
-loc,date,hour,asn,count
-TW,2026/02/08,00,AS3462,150
-TW,2026/02/08,00,AS9924,89
+loc,date,hour,asn,count,anomaly,blocking_false,blocking_dns,blocking_tcp_ip,blocking_http_failure,blocking_http_diff,blocking_none,blocking_other
+TW,2026/08/05,04,AS3462,200,4,192,2,1,1,0,4,0
 ```
 
 **Statistics Include:**
 - `counts`: Number of measurements per ASN
 - `network_type`: Network type distribution (wifi, mobile, etc.)
+- `blocking`: The `test_keys.blocking` verdict distribution per ASN
+
+`blocking` follows the categories defined in [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md). That field is the boolean `false` when no interference was observed and a string when there was, so the tool normalises both into one key space before counting. Measurements with no verdict are recorded as `none` rather than dropped, which is why each ASN's blocking counts always add up to `counts`.
 
 ## 💡 Use Cases
 
