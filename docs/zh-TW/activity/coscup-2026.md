@@ -66,7 +66,7 @@ og:
 | 13:40-14:10<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一組密碼學原語組出能通過 KYC，卻不讓伺服器看到身分資料的流程 | ryanycw（Ryan Wang） |
 | 14:20-14:50<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **從不可連結性出發：隱匿地址如何解決鏈上金融隱私（以 Fluidkey 為例）**<br>:material-arrow-right-bottom: 用隱匿地址讓同一人每次收款都落在不相關的位址，外部串不成同一身分 | Jennifer HSU |
 | 15:00-15:30<br>30 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗錢，為何要理解匿名支付？從零開始介紹隱私加密金流交易**<br>:material-arrow-right-bottom: 為什麼倡議組織與捐款人也該懂加密貨幣金流的隱私風險，用白話走過幾套解法 | 黃豆泥 mashbean |
-| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機示範 Tornado Cash 與 Privacy Pool 的用法，不用自己實際操作、跟著看就好 | Liangcc |
+| 15:40-16:30<br>50 分鐘 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隱私支付實作工作坊：從龍捲風現金到隱私池**<br>:material-arrow-right-bottom: 用道具與實機示範 Tornado Cash 與 Privacy Pool 的用法，現場備有模擬網路，有機會的話可帶電腦來玩 | Liangcc |
 
 ### Day 2：2026/08/09（日）
 
@@ -173,7 +173,7 @@ og:
 
     工作坊從使用者視角出發，介紹龍捲風現金（Tornado Cash）的設計哲學，以及隱私池（Privacy Pool）在它之上的改進。
 
-    現場會用道具與實機操作示範兩樣工具如何操作，不需自備電腦或自行撰寫程式，跟著看就好，你能帶走的是實際使用上的隱私眉角，密碼學細節則點到為止。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
+    現場會用道具與實機操作示範兩樣工具如何操作，有機會的話，帶電腦來玩。現場備有模擬網路可以操作。時間允許的話，也會談這些工具的沿革與在現實世界造成的衝擊。
 
     :material-open-in-new: [COSCUP 官方議程頁](https://pretalx.coscup.org/coscup-2026/talk/3WHJYA/){target="_blank"}
 
