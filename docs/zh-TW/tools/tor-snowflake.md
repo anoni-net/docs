@@ -81,7 +81,7 @@ icon: material/snowflake
 
 ??? question "手機可以開嗎？"
 
-    可以，但效果有限。手機網路常變動 IP，App 進入背景後系統會中斷 WebRTC 連線。長時間貢獻建議用桌面或筆電。
+    瀏覽器分頁版本效果有限：手機網路常變動 IP，分頁進入背景後系統經常會中斷 WebRTC 連線，長時間貢獻建議用桌面或筆電。想用手機長期貢獻，可以改用官方推出的獨立 App [Snowflake Volunteer](https://f-droid.org/en/packages/io.bloco.snowflake/){target="_blank"}，它用的是背景服務而非瀏覽器分頁，不受這個限制，詳見[介紹文章](../blog/posts/snowflake-volunteer-android-app.md)。
 
 ??? question "跟架 Tor Relay 比，貢獻有差嗎？"
 

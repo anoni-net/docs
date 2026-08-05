@@ -7,7 +7,7 @@ description: 關於中國網路防火牆服務輸出到其他國家，希望引�
 
 ![](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius: 10px;"}
 
-當前的全球網路安全和**隱私問題**日益受到關注，而數位威權主義的擴散更是加劇了這些挑戰。為了讓華語地區的讀者能更深入了解這份影響深遠的報告，我們將其翻譯成正體中文（臺灣用語）。這份翻譯希望引起各界對**網路自由**和**網路治理**的反思和警覺，不只是純粹的技術分析。我們的目標是確保這些重要資訊能在更多不同文化和語言環境中被廣泛了解和討論。透過這項翻譯，我們希望促進更多的對話和合作，共同應對來自數位時代的挑戰。
+當前的全球網路安全和**隱私問題**日益受到關注，而數位威權主義的擴散更是加劇了這些挑戰。為了讓華語地區的讀者能更深入了解這份影響深遠的報告，我們將其翻譯成正體中文（臺灣用語）。翻譯的用意是引起各界對**網路自由**和**網路治理**的反思和警覺，不只是純粹的技術分析。我們的目標是確保報告中的重要資訊能在更多不同文化和語言環境中被廣泛了解和討論。透過翻譯，我們希望促進更多的對話和合作，共同應對來自數位時代的挑戰。
 
 本篇**研選報告**翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
 
@@ -24,7 +24,7 @@ description: 關於中國網路防火牆服務輸出到其他國家，希望引�
 
 ## 參與討論
 
-針對這份報告，我們有開一個討論頻道，可以透過這裡加入（需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號）。
+針對本報告，我們有開一個討論頻道，可以透過這裡加入（需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號）。
 
 * :material-chat-processing-outline: <https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net>{target="_blank"}
 

@@ -22,7 +22,7 @@ description: "專案目前近況與更新 2025/03"
 
 RightsCon 2025 順利在二月最後一週舉辦完畢，我們在活動前一天與 Tor/Tails、OONI 團隊[一同舉辦](./rightscon25-pre-event.md){target="_blank"}工作坊活動，總參加人次達三百多人，是一個稍微有點意外報名人數如此踴躍的活動，也感謝 Tor/Tails、OONI 團隊的支援。而這次活動也感謝志工夥伴的協助，開放文化基金會的其他夥伴都分別協助 RightsCon 的支援，在人手不夠的狀態下給予我們有力的協助！
 
-活動後，我們整理了這場工作坊、講座的重點摘要文章、簡報蒐集，不論你當天是否有參與或是想要回顧活動內容的，都可以參考[這篇文章](./rightscon25-tor-tails-ooni-after.md){target="_blank"}的內容。
+活動後，我們整理了工作坊、講座的重點摘要文章、簡報蒐集，不論你當天是否有參與或是想要回顧活動內容，都可以參考[這篇文章](./rightscon25-tor-tails-ooni-after.md){target="_blank"}的內容。
 
 ### 工作坊的延續
 
@@ -54,7 +54,7 @@ COSCUP 預計 8/9、10 於臺灣科技大學舉辦，我們會在這兩天的其
 
 在專案頁面新增一個 [Tor Relays 觀察站](../../taiwan/tor-relay-watcher.md){target="_blank"}，這頁面主要是觀察目前臺灣的 Tor Relays 中繼站的數量、運作狀況。Tor 官方網站提供一個 [Tor Metrics](https://metrics.torproject.org/){target="_blank"} 的查詢網站，我們每小時會透過擷取網站上的紀錄資訊、回來整理成好閱讀的圖表資訊，方便我們在推廣時能有一個較好說故事的版面。
 
-目前這個頁面還在開發與嘗試中，不保證 24 小時都會運作（我們正在解決穩定性問題 XD），開發的程式碼也還沒有合併到主線上，有興趣的夥伴可以參考 [pulse](https://github.com/anoni-net/docs/compare/main...pulse?expand=1){target="_blank"} 與 [api](https://github.com/anoni-net/docs/compare/main...api?expand=1){target="_blank"} 這兩個分支，或是可以直接在 [API 文件頁面](https://anoni.net/api/readme){target="_blank"}隨意嘗試，目前用到 Python 語言的 [FastAPI](https://fastapi.tiangolo.com/){target="_blank"}、[Pydantic](https://docs.pydantic.dev/latest/){target="_blank"} 作為開發的框架。
+頁面目前還在開發與嘗試中，不保證 24 小時都會運作（我們正在解決穩定性問題 XD），開發的程式碼也還沒有合併到主線上，有興趣的夥伴可以參考 [pulse](https://github.com/anoni-net/docs/compare/main...pulse?expand=1){target="_blank"} 與 [api](https://github.com/anoni-net/docs/compare/main...api?expand=1){target="_blank"} 這兩個分支，或是可以直接在 [API 文件頁面](https://anoni.net/api/readme){target="_blank"}隨意嘗試，目前用到 Python 語言的 [FastAPI](https://fastapi.tiangolo.com/){target="_blank"}、[Pydantic](https://docs.pydantic.dev/latest/){target="_blank"} 作為開發的框架。
 
 當然，我們也在找熟悉大量處理資料的夥伴，有興趣也可以直接與[我們聯絡](../../contact.md){target="_blank"}！
 

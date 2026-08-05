@@ -42,7 +42,7 @@ icon: material/currency-btc
 - **圖譜**：A 跟 B 之間的轉帳路徑。比特幣可重建完整圖譜，以太坊類似，Monero 用環簽名製造誘餌，Zcash 遮蔽池內部不可見。
 - **Metadata**：交易由哪個 IP、哪個錢包客戶端、什麼時間送出。所有鏈都依賴 P2P 網路層的隱私（搭配 Tor、Dandelion++）。
 
-四個維度的內部機制與鏈上分析的能與不能，在 [零知識身分驗證與支付](../advanced/zk-identity-payments.md) 有完整討論。這頁只用這四個維度當作後續比較的尺。
+四個維度的內部機制與鏈上分析的能與不能，在 [零知識身分驗證與支付](../advanced/zk-identity-payments.md) 有完整討論。本頁只用這四個維度當作後續比較的尺。
 
 ## 對應你的情境
 

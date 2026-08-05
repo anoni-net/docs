@@ -131,6 +131,7 @@ Multi-generational households and shared family devices are common, which widens
 
 - [Threat modeling](../basics/threat-model.md) — how to reason about "who has access to what, and what is the consequence," which is the spine of every decision on this page
 - [Anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md) — the vocabulary for what separate accounts and devices actually buy you
+- [Maintaining multiple online identities](../basics/multiple-identities.md) — building a set of accounts the abuser knows nothing about, and keeping platforms from correlating them with the old ones
 - [LGBTQ+ digital safety](./lgbtq.md) — the section on family-controlled traces on personal devices overlaps heavily with shared-household abuse
 - [Safety Net Project — resources for survivors](https://www.techsafety.org/resources-survivors){target="_blank"} — the canonical, detailed English-language guide to technology safety in abusive situations (US NNEDV)
 - [Coalition Against Stalkerware — information for survivors](https://stopstalkerware.org/information-for-survivors/){target="_blank"} — detection, safe removal, and the escalation risks of removing monitoring

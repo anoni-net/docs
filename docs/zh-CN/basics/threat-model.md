@@ -119,5 +119,7 @@ icon: material/shield-search
 
 - 把 [匿名、隐私、假名、机密性的差别](./anonymity-vs-privacy.md) 带进你的威胁模型，帮你选词汇
 - 看看 [Metadata 是什么](./metadata.md)，理解很多时候威胁不在内容而在外围
+- 对手是「平台业者」这一级时，[社群平台怎么收集你的数据](./platform-tracking.md) 说明他们实际取得什么
+- 威胁模型指向「要把某些活动跟本名切开」时，接着看 [怎么维持多个网络身分](./multiple-identities.md) 决定要几层与怎么维持
 - 回头看 [网络自由为什么重要](./internet-freedom.md)，你所在地区的网络自由处境正是你建立威胁模型的情境依据
 - 进入 [工具层](../tools/index.md) 挑对应的工具，记得回到这份威胁模型验证选择

@@ -77,6 +77,7 @@ Before choosing a tool, ask what *this* task needs to protect, then decide the t
 
 - Take these four concepts through EFF's [Your Security Plan](https://ssd.eff.org/module/your-security-plan){target="_blank"} to turn the abstract vocabulary into a concrete list of what you're protecting and from whom.
 - Read [Why Metadata Matters](https://ssd.eff.org/module/why-metadata-matters){target="_blank"} for why "confidential" is not the same as "anonymous."
+- To actually sustain a pseudonym, see [Maintaining multiple online identities](./multiple-identities.md), which deals with exactly the property that pseudonymity carries: actions under one name stay linkable to each other.
 - See the [Scenarios](../scenarios/index.md) section for how these four play out for specific people: [LGBTQ+ digital safety](../scenarios/lgbtq.md) is a worked example.
 - For how anoni.net frames all of this regionally, see [Why networked freedom matters](./internet-freedom.md).
 

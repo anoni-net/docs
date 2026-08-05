@@ -20,6 +20,8 @@ nav:
           - basics/anonymity-vs-privacy.md
           - basics/threat-model.md
           - basics/metadata.md
+          - basics/platform-tracking.md
+          - basics/multiple-identities.md
           - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
@@ -40,6 +42,7 @@ nav:
           - tools/password-manager.md
           - tools/asian-diceware.md
           - tools/crypto-privacy-spectrum.md
+          - tools/ai-privacy.md
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/journalist.md
@@ -48,6 +51,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/mainland-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
       - !ENV [NAV_ADVANCED, "進階"]:

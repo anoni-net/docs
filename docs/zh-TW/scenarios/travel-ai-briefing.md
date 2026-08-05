@@ -11,10 +11,10 @@ icon: material/shield-airplane-outline
 這一頁**不是**一份各國資料表。那種預先整理好的版本請看 [出差與研討會的數位準備（東亞與東南亞）](./asia-travel.md)。這一頁適用**任何目的地**，我們給你一組可複製的提問（prompt），你把它貼進**自己的 AI**，由 AI 幫你產生一份行前的數位與人身安全概況。
 
 !!! note "為什麼不做成線上查詢工具"
-    我們刻意**不**做成一個「輸入目的地就回答」的服務。因為對這群使用者來說，「我要去 X 國、我是記者、日期是 Y」這組查詢本身就是敏感情資，放上任何伺服器都會留下紀錄（log）、可能被調閱或外洩。改成你複製文字、回去問**自己的** AI，**你的目的地與身分就不會經過我們**。代價是答案的品質取決於你用哪個 AI，所以請務必對照本頁底部的「一手來源」自行核對。
+    我們刻意**不**做成一個「輸入目的地就回答」的服務。因為「我要去 X 國、我是記者、日期是 Y」這組查詢本身就是敏感情資，放上任何伺服器都會留下紀錄（log）、可能被調閱或外洩。改成你複製文字、回去問**自己的** AI，**你的目的地與身分就不會經過我們**。代價是答案的品質取決於你用哪個 AI，所以請務必對照本頁底部的「一手來源」自行核對。
 
 !!! tip "貼進雲端 AI 仍會洩漏給該供應商"
-    就算不經過我們，把 query 貼進雲端 AI（ChatGPT、Claude、Gemini 等）還是會讓那家供應商看到。**目的地敏感**時，建議用自架、本地模型，或至少用下方「低資料版」開場 prompt，只填到國家層級、不要寫自己的名字、組織、精確日期。
+    就算不經過我們，把 query 貼進雲端 AI（ChatGPT、Claude、Gemini 等）還是會讓那家供應商看到。**目的地敏感**時，建議用自架、本地模型，或至少用下方「低資料版」開場 prompt，只填到國家層級、不要寫自己的名字、組織、精確日期。各家服務對輸入內容的處理與保留差異，見 [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)。
 
 ## 怎麼用
 
@@ -78,7 +78,7 @@ icon: material/shield-airplane-outline
 ```
 
 !!! tip "（進階）想讓 AI 查到真實的 Tor 節點數字，可接 onionoo MCP"
-    這題問的 relay、bridge 數量與頻寬，AI 若沒有外部資料來源，很可能憑記憶編一個給你（就是這頁開頭警告的那種錯）。如果你用的是 claude.ai 這類支援 MCP（讓 AI 連到外部即時資料源的標準介面）的助理，可以接上社群自架的 [onionoo MCP](../community/onionoo-mcp.md)，它把 Tor Project 的 Onionoo 公開資料接成一個網址，AI 就能查到當下、可引用的真實數字。只用 ChatGPT 網頁版的話，跳過這段即可，記得拿 AI 的回答去對照本頁底部的 Tor Metrics。
+    本題問的 relay、bridge 數量與頻寬，AI 若沒有外部資料來源，很可能憑記憶編一個給你（就是本頁開頭警告的那種錯）。如果你用的是 claude.ai 這類支援 MCP（讓 AI 連到外部即時資料源的標準介面）的助理，可以接上社群自架的 [onionoo MCP](../community/onionoo-mcp.md)，它把 Tor Project 的 Onionoo 公開資料接成一個網址，AI 就能查到當下、可引用的真實數字。只用 ChatGPT 網頁版的話，跳過這段即可，記得拿 AI 的回答去對照本頁底部的 Tor Metrics。
 
 ```text
 【數位環境 3／VPN 合法性與可用性】在目的地使用 VPN 是否合法？WireGuard、
@@ -193,6 +193,7 @@ CIVICUS Monitor 評級。是否有 foreign-agent／NGO 註冊法、誹謗或冒�
 
 - [出差與研討會的數位準備（東亞與東南亞）](./asia-travel.md)：十四地已預填好審查、VPN、SIM 與入境查機，只去東亞東南亞、或趕時間不想自行架設 prompt 時，直接查那篇更快。
 - [威脅模型](../basics/threat-model.md)：先想清楚對手是誰、能取得什麼。
+- [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)：這頁的兩個提醒框在那邊有完整版，包含消費版與企業版的分野、資料保留期限與該問供應商的問題。
 - [什麼是 OONI](../tools/what-is-ooni.md)、[什麼是 Tor](../tools/what-is-tor.md)、[Snowflake](../tools/tor-snowflake.md)、[通訊軟體比較](../tools/messaging-comparison.md)
 - [onionoo MCP：Tor 中繼節點查詢服務](../community/onionoo-mcp.md)：把上面【數位環境 2】那題交給 AI 自己查。接上這個網址，AI 助理就能用中文問出某地有幾個 Tor 節點、頻寬多少、落在哪些電信網路，數字來自 Tor Project 官方 Onionoo。
 - [這頁背後的想法（blog）](../blog/posts/travel-ai-briefing.md)：為什麼把該問的問題打包成 prompt，帶回去問你自己信任的 AI。

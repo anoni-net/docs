@@ -41,10 +41,11 @@ icon: material/toolbox-outline
 
 ## 日常隱私基本功
 
-想從通訊、協作、帳號、金流先補齊基礎的人，從這群開始。五篇主題彼此獨立，不必照順序。
+想從通訊、協作、帳號、金流、AI 使用先補齊基礎的人，從這群開始。各篇主題彼此獨立，不必照順序。
 
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
 - [什麼是 CryptPad](./what-is-cryptpad.md)：伺服器讀不到內容的線上協作辦公套件，文件在瀏覽器端就完成加密，社群自架站台有完整正體中文介面。
 - [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。
 - [Asian Diceware 密語字典](./asian-diceware.md)：社群參考 EFF 做的 7776 字密語詞表，混入亞洲外來語，教你怎麼用骰子或安全亂數產生好記又夠強的密語。
 - [加密貨幣的隱私光譜](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、穩定幣的隱私差異與自管錢包、multisig。
+- [用 AI 工作時怎麼避免資料外洩](./ai-privacy.md)：貼進去的內容去了哪裡、消費版與企業版的分野、刪除對話為什麼不等於資料消失、你沒有主動貼卻也送出去的那些，以及中國境內服務的另一套框架。

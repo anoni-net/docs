@@ -15,7 +15,7 @@ description: "OONI 整理出全球網路審查正在變得更精細、更難偵�
 
 !!! info ""
 
-    **翻譯備註：**這篇文章由 OONI 的 Maria Xynou 撰寫，原刊於 Internet Society 的 Pulse blog，後由 OONI 轉貼。OONI 是目前全球規模最大的網路審查觀測公開資料集，本文整理了測量網路審查的方法挑戰、近年觀察到的審查趨勢，以及這些資料如何被用在數位人權的倡議行動。對中文讀者來說，這份脈絡有助於理解為什麼「網路看起來能用」不等於「沒有被審查」，以及為什麼台灣的網路韌性議題也需要持續的觀測資料來支撐。
+    **翻譯備註：**這篇文章由 OONI 的 Maria Xynou 撰寫，原刊於 Internet Society 的 Pulse blog，後由 OONI 轉貼。OONI 是目前全球規模最大的網路審查觀測公開資料集，本文整理了測量網路審查的方法挑戰、近年觀察到的審查趨勢，以及觀測資料如何被用在數位人權的倡議行動。對中文讀者來說，這份脈絡有助於理解為什麼「網路看起來能用」不等於「沒有被審查」，以及為什麼台灣的網路韌性議題也需要持續的觀測資料來支撐。
 
     以下內容原文翻譯來自：
 
@@ -50,7 +50,7 @@ description: "OONI 整理出全球網路審查正在變得更精細、更難偵�
 
 OONI 正是依此運作。世界各地的人們執行 [OONI Probe](https://ooni.org/install/){target="_blank"}，從他們所連的網路上貢獻量測。[資料](https://ooni.org/data){target="_blank"}的取得仰賴志工選擇測什麼、何時、何地，因此各國的涵蓋率差異很大，同一個國家的不同網路之間也會有落差。涵蓋率不均是一項重要挑戰，要可靠地偵測（並確認）審查，需要持續的資料來累積信心。
 
-審查事件常發生在高風險情境，例如反政府抗爭期間。在這些時刻進行測試，會讓貢獻者承擔實際的[風險](https://ooni.org/about/risks/){target="_blank"}，這也讓量測與審查偵測變得更困難。在 OONI，使用者安全是優先事項，所有貢獻量測的人都會經過[知情同意](https://ooni.org/support/ooni-probe-desktop#onboarding-informed-consent){target="_blank"}的程序，在 [OONI Probe App](https://ooni.org/install/){target="_blank"} 中以小測驗的形式確認。
+審查事件常發生在高風險情境，例如反政府抗爭期間。在這些時刻進行測試，會讓貢獻者承擔實際的[風險](https://ooni.org/about/risks/){target="_blank"}，也讓量測與審查偵測變得更困難。在 OONI，使用者安全是優先事項，所有貢獻量測的人都會經過[知情同意](https://ooni.org/support/ooni-probe-desktop#onboarding-informed-consent){target="_blank"}的程序，在 [OONI Probe App](https://ooni.org/install/){target="_blank"} 中以小測驗的形式確認。
 
 ## 浮現中的網路審查趨勢
 
@@ -70,7 +70,7 @@ OONI 的[長期資料](https://ooni.org/data){target="_blank"}揭示了幾項全
 
 ### 加密化網路中越來越不透明的審查
 
-隨著越來越多網站採用 HTTPS 與加密標準，審查反而變得更不可見。傳統的[封鎖頁面（block page）](https://ooni.org/support/glossary/#block-page){target="_blank"}會告知使用者「這個站點被刻意限制」，但這類頁面如今已經少見。政府改採直接干擾 TLS（Transport Layer Security）協定本身的手段，通常使用 DPI（Deep Packet Inspection，深度封包檢測）這類進階設備。OONI 的[資料顯示](https://ooni.org/reports/){target="_blank"}，TLS 層級的干擾在許多國家被記錄下來，這也反映出全球審查技術產業正在擴張。遇到 TLS 干擾時，使用者通常只會看到一般的連線錯誤，而非封鎖頁面，因此很難分辨這是刻意的審查、還是網路故障或其他技術問題。加密化原本是要保護使用者，反過來卻讓審查變得更不透明。
+隨著越來越多網站採用 HTTPS 與加密標準，審查反而變得更不可見。傳統的[封鎖頁面（block page）](https://ooni.org/support/glossary/#block-page){target="_blank"}會告知使用者「這個站點被刻意限制」，但如今已經少見。政府改採直接干擾 TLS（Transport Layer Security）協定本身的手段，通常使用 DPI（Deep Packet Inspection，深度封包檢測）等進階設備。OONI 的[資料顯示](https://ooni.org/reports/){target="_blank"}，TLS 層級的干擾在許多國家被記錄下來，也反映出全球審查技術產業正在擴張。遇到 TLS 干擾時，使用者通常只會看到一般的連線錯誤，而非封鎖頁面，因此很難分辨這是刻意的審查、還是網路故障或其他技術問題。加密化原本是要保護使用者，反過來卻讓審查變得更不透明。
 
 ### 流量限速與服務劣化
 
@@ -94,7 +94,7 @@ OONI 的[長期資料](https://ooni.org/data){target="_blank"}揭示了幾項全
 
 OONI 資料集的規模也強化了倡議價值。自 2012 年起，已從 245 個國家與地區、30,000 個網路收集到[超過 30 億筆量測](https://explorer.ooni.org/){target="_blank"}，[OONI 資料](https://ooni.org/data){target="_blank"}是同類型中全球最大的網路審查公開資料集。每個月都有數千萬筆新的量測從約 180 個國家收進來，每天則持續以即時方式發佈來自世界各地的新量測。
 
-OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){target="_blank"}。它的廣度與深度能支援研究，即時發佈的特性則能支援倡議與快速反應行動。它也定期被收進 [ISOC 的 Pulse Shutdown 專案](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用來記錄全球的社群媒體封鎖。你也可以使用這份資料，[加入這個社群](https://ooni.org/get-involved/){target="_blank"}，一起捍衛自由開放的網路。
+OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){target="_blank"}。它的廣度與深度能支援研究，即時發佈的特性則能支援倡議與快速反應行動。它也定期被收進 [ISOC 的 Pulse Shutdown 專案](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用來記錄全球的社群媒體封鎖。你也可以使用這份資料，[加入 OONI 社群](https://ooni.org/get-involved/){target="_blank"}，一起捍衛自由開放的網路。
 
 ## 台灣觀點
 
@@ -104,7 +104,7 @@ OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){t
 
 ### 反詐騙阻擋與「合理執法」的界線
 
-台灣近年來陸續出現針對境外詐騙、賭博、未授權內容平台的網路層阻擋。這些措施在程序上通常透過警政、NCC 或 ISP 的合作執行，目的具有公共政策正當性，執行細節、阻擋清單、誤擋的爭議與救濟機制，往往缺乏對外可驗證的透明度。本文討論的 TLS 干擾、流量限速、加密 DNS 封鎖等手段，在民主國家也有採用，「合理執法」與「不透明審查」之間的界線必須持續被檢視。OONI Probe 這類獨立觀測工具，正是讓這條界線可以被驗證的關鍵基礎建設。
+台灣近年來陸續出現針對境外詐騙、賭博、未授權內容平台的網路層阻擋。這些措施在程序上通常透過警政、NCC 或 ISP 的合作執行，目的具有公共政策正當性，執行細節、阻擋清單、誤擋的爭議與救濟機制，往往缺乏對外可驗證的透明度。本文討論的 TLS 干擾、流量限速、加密 DNS 封鎖等手段，在民主國家也有採用，「合理執法」與「不透明審查」之間的界線必須持續被檢視。OONI Probe 等獨立觀測工具，正是讓這條界線可以被驗證的關鍵基礎建設。
 
 ### 在台灣推廣 OONI Probe 與測量貢獻者社群
 

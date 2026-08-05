@@ -1,6 +1,6 @@
 ---
 title: Device minimization and border crossings in Asia
-description: A general device-minimization and border OPSEC guide plus Asia-specific border-search context, because EFF's gold-standard crossing guide describes only US law and misleads travelers in Asia.
+description: A general device-minimization and border OPSEC guide plus Asia-specific border-search context and the burner question (buying abroad, bringing it home), because EFF's gold-standard crossing guide describes only US law and misleads travelers in Asia.
 icon: material/bag-suitcase-outline
 ---
 
@@ -83,6 +83,30 @@ The SIM in your phone carries a record, and the question is who holds it and whe
 
 For the threat of *destination surveillance*, roaming and data-only eSIMs keep the identity mapping outside the destination, which makes on-the-spot attribution harder. A long-term personal SIM crossing into a hostile jurisdiction is the opposite: it carries your telco history and prior locations with it. Buy a local real-name SIM only when you genuinely need a local number (for example to receive a verification code), and weigh that against the on-arrival registration it triggers. One caveat to the eSIM advantage: real-name registration is spreading even to data-only eSIMs in some places, so verify the destination's current rule rather than assuming an eSIM is anonymous.
 
+## Buying a burner abroad, and taking it home
+
+Two questions come up often enough to answer directly: can you buy an anonymous phone or SIM while traveling, and what changes when you bring it back.
+
+**Separate the handset from the number.** "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
+
+**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the move is the one already covered in the SIM section above: keep the identity mapping outside the country with roaming or a data-only eSIM. Buying locally does not buy anonymity.
+
+**What changes when you take it home.**
+
+- **A foreign number roaming at home** reports your location to the foreign carrier, so attribution generally requires a cross-border request. The trade-off is that a foreign roaming number sitting near your home address for months is itself a pattern.
+- **Prepaid validity** runs out. A 30-day tourist SIM is not a long-term second line.
+- **Swapping in a domestic SIM** binds that handset to your local identity, which is exactly what the clean device was avoiding.
+- **The IMEI links both numbers.** One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
+- **Customs.** Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
+
+!!! warning "Returning to mainland China inverts several of these"
+
+    A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry, since state-security officers have had explicit authority to check personal electronic devices since July 2024, and the jurisdiction sits at the top tier of the border-inspection column in the table above. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
+
+**The practical shape.** Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
+
+**What a burner does not fix.** Signing into your everyday email, social, or cloud accounts on the clean device defeats it entirely. So does contacting the same people, keeping the same hours, and appearing in the same places. Carrying both phones powered on at once lets cell-tower records pair them. The device is one layer; the account layer is in [maintaining multiple online identities](../basics/multiple-identities.md).
+
 ## Per-jurisdiction border context (Asia)
 
 The notes below cover border *device-search* powers specifically, with two reference points (US and UK) that many travelers already half-know but routinely misapply to Asia. **This is general framing as of mid-2026, not legal advice.** Verify against official sources before you travel; these powers are exactly where wrong specifics are dangerous.
@@ -127,6 +151,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — generate a destination-specific censorship, legal, SIM, and emergency-contact briefing for any country, with no query reaching us.
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.
 - [Threat modeling](../basics/threat-model.md) — the five questions to ask before deciding how far to minimize for a given trip.
+- [Maintaining multiple online identities](../basics/multiple-identities.md) — keeping business contacts, conference socializing, and personal accounts on separate layers, so one being flagged doesn't reach the others.
 - [Regional Observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [EFF — Things to Consider When Crossing the U.S. Border](https://ssd.eff.org/module/things-consider-when-crossing-us-border){target="_blank"} — the canonical US-border guide, and EFF's deeper [Digital Privacy at the U.S. Border](https://www.eff.org/wp/digital-privacy-us-border-2017){target="_blank"} whitepaper.
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if a device is seized or you're detained.

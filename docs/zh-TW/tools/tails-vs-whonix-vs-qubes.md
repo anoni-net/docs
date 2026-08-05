@@ -98,7 +98,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 - **顏色 + 視窗邊框**：不同信任等級的 qube 視覺上分明，避免「我以為這是工作 qube 結果是個人 qube」的混淆。
 - **sys-net、sys-firewall、sys-usb**：網路、防火牆、USB 三個系統 qube 各自隔離，惡意 USB 進來只能影響 sys-usb，沒辦法跨到工作 qube。
 
-**Qubes 與 Whonix 的組合**：Qubes 預設不強制流量走 Tor，但官方支援 [安裝 Whonix template](https://www.whonix.org/wiki/Qubes){target="_blank"}，把 Whonix Gateway 與 Workstation 包進 Qubes 的 qube 框架。這是技術上「最強隔離 + Tor 整合」的組合，多數需要這層保護的人會走這條路。
+**Qubes 與 Whonix 的組合**：Qubes 預設不強制流量走 Tor，但官方支援 [安裝 Whonix template](https://www.whonix.org/wiki/Qubes){target="_blank"}，把 Whonix Gateway 與 Workstation 包進 Qubes 的 qube 框架。在技術上，Qubes + Whonix 是「最強隔離 + Tor 整合」的組合，需要最高強度隔離的人多半會走這條路。
 
 **適合**：
 
@@ -109,7 +109,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 **限制**：
 
 - 對硬體挑剔。CPU 必須支援 VT-x 與 VT-d（處理器的硬體虛擬化功能，讓多台虛擬機安全並行），記憶體建議 16 GB 以上，需要 SSD。買機前一定要查 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"}。
-- 學習曲線陡。第一週會在「我這個檔案要在哪個 qube 開」、「這個 USB 要怎麼跨 qube 傳檔」這類操作上摸索。
+- 學習曲線陡。第一週會在「我這個檔案要在哪個 qube 開」、「USB 要怎麼跨 qube 傳檔」等操作上摸索。
 - 預設無 Tor 整合，要 Tor 必須額外裝 Whonix template。
 - 不支援 Apple Silicon。
 
@@ -134,7 +134,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 ??? question "我只是想匿名瀏覽，需要這麼複雜嗎？"
 
-    多數情境不需要。[Tor Browser](./what-is-tor.md) 在你日常電腦上裝起來，就能解決「不洩漏 IP、不洩漏瀏覽身分」這層需求。會走到整機隔離這套討論，通常是因為「我電腦上其他應用、其他檔案會跟敏感任務交叉」、「我不信任手邊這台電腦」、「我長期維持一個跟日常身分切開的工作流」。如果你的需求是單次匿名瀏覽，不必動到 Tails、Whonix、Qubes 任何一套。
+    多數情境不需要。[Tor Browser](./what-is-tor.md) 在你日常電腦上裝起來，就能解決「不洩漏 IP、不洩漏瀏覽身分」這層需求。會走到整機隔離的討論，通常是因為「我電腦上其他應用、其他檔案會跟敏感任務交叉」、「我不信任手邊這台電腦」、「我長期維持一個跟日常身分切開的工作流」。如果你的需求是單次匿名瀏覽，不必動到 Tails、Whonix、Qubes 任何一套。
 
 ??? question "Tails 上能不能也執行 Whonix？"
 
@@ -160,7 +160,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 Tails 的完整介紹與安裝步驟在 [什麼是 Tails](./what-is-tails.md)。Whonix 從 [官方下載頁](https://www.whonix.org/wiki/Download){target="_blank"} 起步，VirtualBox 路徑最簡單。Qubes 的硬體門檻高，建議先到 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"} 確認手邊機器能不能執行，再去抓 [安裝鏡像](https://www.qubes-os.org/downloads/){target="_blank"}。
 
-整機隔離只是匿名實踐的一塊。連線層的 [Tor](./what-is-tor.md)、瀏覽器層的 [Tor Browser 進階設定](./tor-browser-advanced.md)、檔案傳輸的 [OnionShare](./onionshare.md) 都是配套，要看自己的威脅模型整體配。
+整機隔離只是匿名實踐的一塊。連線層的 [Tor](./what-is-tor.md)、瀏覽器層的 [Tor Browser 進階設定](./tor-browser-advanced.md)、檔案傳輸的 [OnionShare](./onionshare.md) 都是配套，要看自己的威脅模型整體配。帳號層的分艙（哪些帳號屬於哪一層、彼此不共用什麼）見 [怎麼維持多個網路身分](../basics/multiple-identities.md)，Qubes 的 compartmentalization 是把同一個想法做到作業系統等級。
 
 ## :material-chat-question: 一同瞭解
 

@@ -18,7 +18,7 @@ description: "差分隱私是什麼？從再識別攻擊的歷史到 Google RAPP
 
     - [What is Differential Privacy?, fria, 2025-09-30](https://www.privacyguides.org/articles/2025/09/30/differential-privacy/){target="_blank"}
 
-是否有可能從大量人群中蒐集資料，同時又保護每個個體的隱私？在這篇關於隱私增強技術（Privacy-Enhancing Technologies）系列的文章中，我們要討論**差分隱私（Differential Privacy）**，以及它如何做到這一點。
+是否有可能從大量人群中蒐集資料，同時又保護每個個體的隱私？在我們的隱私增強技術（Privacy-Enhancing Technologies）系列文章中，本篇要討論**差分隱私（Differential Privacy）**，以及它如何做到這一點。
 
 <!-- more -->
 

@@ -8,6 +8,17 @@ icon: simple/torbrowser
 
 Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tor Browser 16.0a9 (alpha)
+
+> 2026-07-23 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a9/){target="_blank"}
+
+- The alpha channel is for testing only; regular users should stay on the stable channel (15.x).
+- Major rebase of the Firefox base onto 153.0esr (up from 140.0esr); Android GeckoView also moved to 153.0esr (tor-browser#45101).
+- The Tor Project announced the alpha channel will now track Firefox beta releases and rebase incrementally, instead of jumping a full year of Firefox versions at once, aiming to ship Tor Browser 16.0 stable a month early in September.
+- NoScript updated to 13.6.30.90201984, Go to 1.26.5, and libevent to 2.1.13 in the build toolchain.
+- Android's omni.ja now uses xz compression, saving about 3 MB; only one tracking-related dependency remains, Mozilla Telemetry (disabled by default).
+- Known issues: Firefox branding still appears in some places, and the Android address bar icon currently always shows "insecure" — tap it to verify the certificate manually.
+
 ## Tor Browser 15.0.19
 
 > 2026-07-21 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15019/){target="_blank"}
