@@ -1,5 +1,6 @@
 ---
 date: 2025-01-06
+slug: project-relaunch-2025
 authors:
     - anoni-net
 categories:
