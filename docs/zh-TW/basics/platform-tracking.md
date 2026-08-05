@@ -8,7 +8,7 @@ icon: material/radar
 
 跟朋友聊到某個東西，隔天社群就推那個東西的廣告。多數人都遇過，最直覺的解釋是手機在偷聽。
 
-先看平台實際取得哪些資料，再回頭檢驗麥克風的解釋。真正在發生的收集比偷聽更全面，也更難察覺。
+先看平台實際取得哪些資料，再回頭檢驗麥克風的解釋。真正在發生的收集比偷聽更全面，也更難察覺。通訊與檔案本身附帶的元資料屬於另一個主題，見 [Metadata 是什麼，為什麼重要](./metadata.md)，本頁只談平台主動收集的部分。
 
 ## 平台實際取得什麼
 
@@ -86,25 +86,44 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 
 如果你的懷疑是特定某個 app，觀察幾天指示燈比推測有效。
 
-### 直接看平台手上有什麼
+### 把注意力放在麥克風的代價
+
+把注意力放在麥克風，代價是忽略真正在運作的那一套。關掉麥克風權限不會減少行為訊號、跨站追蹤、通訊錄比對與相似受眾推算，而後面這些才是廣告精準的來源。
+
+## 直接看平台手上有什麼
 
 比起相信任何說明，打開自己的檔案看更有說服力。多數平台依法規提供資料匯出與廣告偏好頁面：
 
-- **廣告興趣分類**：Google 的「我的廣告中心」、Meta 的廣告偏好設定，都列出系統推測你感興趣的主題。看到裡面有什麼，通常比讀十段機制說明更清楚
+- **廣告興趣分類**：Google 的「我的廣告中心」、Meta 的廣告偏好設定，都列出系統推測你感興趣的主題。看過裡面的分類，通常比看機制說明更直接
 - **資料匯出**：Google Takeout、Meta 與 Instagram 的「下載你的資訊」，可以匯出貼文、搜尋、位置、廣告互動紀錄
 - **登入與裝置紀錄**：各平台的安全設定裡通常有一份曾經登入的裝置與地點清單
 
 匯出的檔案本身是高度敏感的個人資料，下載後存在加密的位置，不要留在下載資料夾或同步到雲端。
 
-### 把注意力放在麥克風的代價
+## 中國境內平台另有一套
 
-把注意力放在麥克風，代價是忽略真正在運作的那一套。關掉麥克風權限不會減少行為訊號、跨站追蹤、通訊錄比對與相似受眾推算，而後面這些才是廣告精準的來源。
+前面的機制對全球平台通用。微信、抖音、小紅書、微博等在中國境內營運的平台上，帳號、資料落點與內容審查三件事都另有一套，台灣使用者裝了同樣的 app 一樣適用。本節的「境內」以中國為界。
+
+**帳號直接對應到法律身分。** 帳號綁手機號、手機號綁證件，鏈路存在多年，2025 年 7 月起再加上國家網路身分認證的網號與網證。同一份廣告檔案在其他地方掛在一組假名底下，在這裡掛在一個具名的人身上。
+
+**資料落在中國法域，而且可被依法調取。** 全球平台的最壞情況通常是資料被賣給資料掮客。這些平台的資料存放在中國境內，除了商業使用之外，還在依法配合調取的範圍內。差別在性質，不在程度。
+
+**內容本身同時被審查。** Citizen Lab 的實證研究指出，微信的關鍵詞過濾只對中國大陸手機號註冊的帳號啟用，改綁國際號碼之後仍然持續，圖片另有 OCR 與視覺相似度兩套演算法，被擋時發送者不會收到通知[^wechat]。機制的完整拆解見 [在中國大陸的公開平台傳播資訊](../scenarios/mainland-speech.md)。
+
+實際意義：關掉廣告識別碼、拒絕追蹤等做法，對這些平台的效果比對全球平台小得多，因為問題不在廣告追蹤那一層。帳號分層也一樣，[怎麼維持多個網路身分](./multiple-identities.md) 的方法以境外服務為前提，實名鏈路會抵銷掉大部分效果，在這裡真正用得上的是行為層的分開，也就是不同用途不共用同一個帳號、不互相引用。
+
+停用不是多數人的選項，仍在用的話，這幾項調整的成本低、效果確定：
+
+- **限縮可見範圍**。朋友圈與動態的可見對象、是否允許陌生人查看、歷史內容的保留期限，都在隱私設定裡
+- **關掉通訊錄與位置權限**。通訊錄上傳同時暴露你的聯絡人，位置權限多數功能用不到
+- **降低自己在群聊裡的可見度**。群成員名單、暱稱、頭像會被不認識的人看到，群組本身也在審查與管理責任的範圍內
+- **敏感的事不在上面談**，包含不用它約時間與主題
 
 ## 你能做什麼
 
 依成本分三級，不必一次做完。
 
-每一級都標出擋不掉什麼，因為做完清單就安全是最常見的誤解。
+每一級後面都標出擋不掉什麼，三級是累積的，做到哪一級就少掉哪一層關聯。
 
 ### 低成本，現在就能做
 
@@ -113,7 +132,7 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 - **關掉精確位置**，多數 app 用大略位置就能運作
 - **檢查權限清單**，麥克風、相機、位置、通訊錄逐項看過，用不到的關掉
 
-這一級擋不掉的是：你在平台內部的行為訊號、平台之間靠 email 與手機號做的比對、以及別人上傳通訊錄時帶進去的你。
+擋不掉的部分：你在平台內部的行為訊號、平台之間靠 email 與手機號做的比對，以及別人上傳通訊錄時帶進去的你。
 
 ### 中成本，要花一點時間
 
@@ -122,7 +141,7 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 - **DNS 層過濾**，見 [加密 DNS 怎麼選、怎麼確認真的生效](../tools/encrypted-dns.md)
 - **少用整合登入**。「用某某帳號登入」會把兩邊的紀錄接起來
 
-這一級擋不掉的是：你主動登入使用的那個平台本身，它看得到的東西沒有因此減少。
+這一級處理掉上一級的跨站關聯。擋不掉你主動登入使用的那個平台，它看得到的東西沒有因此減少。
 
 ### 高成本，特定情境才需要
 
@@ -130,9 +149,11 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 - **裝置分開**，敏感用途用另一台機器
 - **連線層匿名**，見 [什麼是 Tor](../tools/what-is-tor.md)。要注意 Tor 保護的是連線來源，你登入的帳號仍然是你
 
-這一級擋不掉的是：你自願交出去的內容。分層與換裝置改變的是關聯，不是你在單一平台上留下的東西。
+你自願交出去的內容擋不掉。分層與換裝置改變的是關聯，單一平台上留下的東西沒有變少。
 
-## 這頁會過期
+這三級假設你所在的法域不限制這些工具。中國境內的可用性與法律狀況另見上方的〈中國境內平台另有一套〉，Tor 直連在當地無法使用，使用規避工具本身也有風險。
+
+## 本頁會過期
 
 平台的設定介面與政策每幾個月就改版，法規也在變。本頁寫的是機制與方向，實際操作前請以各平台當下的官方隱私設定頁為準。發現描述已經跟現況不符，歡迎到 [社群 Matrix 公開 room](../community/tools.md) 回報。
 
@@ -147,6 +168,7 @@ EFF 那份報告指出，平均一個網頁會把資料分享給數十個第三�
 [^eff]: [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} - Electronic Frontier Foundation，2019 年 12 月。第三方追蹤技術的完整整理，包含追蹤像素、瀏覽器指紋、行動端追蹤與資料掮客生態。
 [^apple-siri]: [Improving Siri's privacy protections](https://www.apple.com/newsroom/2019/08/improving-siris-privacy-protections/){target="_blank"} - Apple Newsroom，2019 年 8 月。Apple 官方說明 grading 程序、抽樣比例、暫停與後續改為選擇加入的經過。
 [^panoptispy]: [Panoptispy: Characterizing Audio and Video Exfiltration from Android Applications](https://petsymposium.org/popets/2018/popets-2018-0030.php){target="_blank"} - Proceedings on Privacy Enhancing Technologies 2018，Pan、Ren、Lindorfer、Wilson、Choffnes（Northeastern University 與 UC Santa Barbara）。17,260 個 Android app 的自動化分析。
+[^wechat]: [One App, Two Systems](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"}、[How WeChat Filters Images for One Billion Users](https://citizenlab.ca/2018/08/how-wechat-filters-images-for-one-billion-users/){target="_blank"} 與 [We Chat, They Watch](https://citizenlab.ca/2020/05/we-chat-they-watch/){target="_blank"} - The Citizen Lab。
 [^cmg]: [Here's the Pitch Deck for 'Active Listening' Ad Targeting](https://www.404media.co/heres-the-pitch-deck-for-active-listening-ad-targeting/){target="_blank"} - 404 Media，2024 年 8 月取得的 Cox Media Group 推銷簡報。查證日 2026-08。
 [^apple-dot]: [關於 iPhone 狀態列上的橙色和綠色指示燈](https://support.apple.com/zh-tw/108331){target="_blank"} - Apple 支援。
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} - Apple 支援。關閉後 app 無法取得 IDFA。
