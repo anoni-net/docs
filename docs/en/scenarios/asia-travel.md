@@ -148,6 +148,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario; this page only covers what this situation adds
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — generate a destination-specific censorship, legal, SIM, and emergency-contact briefing for any country, with no query reaching us.
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.
 - [Threat modeling](../basics/threat-model.md) — the five questions to ask before deciding how far to minimize for a given trip.

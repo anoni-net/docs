@@ -29,6 +29,7 @@ Local organizations that once absorbed this kind of risk, the Civil Human Rights
 
 ## Where to go from here
 
+- [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario; this page only covers what this situation adds
 - [Attending a Protest](https://ssd.eff.org/module/attending-protest){target="_blank"} — the canonical guide, in multiple languages
 - [Cross-border travel and device searches](./asia-travel.md) — for organizers moving across the region
 - [Threat modeling](../basics/threat-model.md) — run the five questions for your specific action

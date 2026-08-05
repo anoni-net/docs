@@ -311,6 +311,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 
 ## 接下來
 
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，本頁只寫這個場景額外要做的
 - [威脅模型如何建立](../basics/threat-model.md)：每場行動前先盤點對手與資產
 - [Metadata 是什麼](../basics/metadata.md)：理解照片、文件背後的元資料
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：動員角色跟本業帳號的分層設定，以及行動結束後怎麼收尾

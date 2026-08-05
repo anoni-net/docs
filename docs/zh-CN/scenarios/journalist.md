@@ -379,6 +379,7 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 
 ## 接下来
 
+- [一般人平常该做到什么](./everyday-baseline.md)：不分身分的共同基线，本页只写这个场景额外要做的
 - [威胁模型](../basics/threat-model.md)：写报导前，先盘点谁是对手、能取得什么
 - [Metadata 为什么重要](../basics/metadata.md)：理解文件隐含的元数据风险
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：采访联络用的身分要跟署名发稿的身分切开，这页是设定与长期维持的做法

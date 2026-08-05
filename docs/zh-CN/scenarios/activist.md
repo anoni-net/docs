@@ -311,6 +311,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 
 ## 接下来
 
+- [一般人平常该做到什么](./everyday-baseline.md)：不分身分的共同基线，本页只写这个场景额外要做的
 - [威胁模型如何建立](../basics/threat-model.md)：每场行动前先盘点对手与资产
 - [Metadata 是什么](../basics/metadata.md)：理解照片、文件背后的元数据
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：动员角色跟本业账号的分层设定，以及行动结束后怎么收尾
