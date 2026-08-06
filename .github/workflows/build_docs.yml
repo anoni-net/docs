@@ -127,6 +127,15 @@ jobs:
         if: matrix.variant == 'onion'
         run: cp ./robots_onion.txt ./output/robots.txt
 
+      # service worker 只在 clearnet 註冊：overrides/base.html 用 `host === "anoni.net"`
+      # 擋著，onion 主機上兩個分支都不會進，這支檔案永遠不會被要求。留著只是兩份各
+      # 14KB 的死重量，而且它的註解提到 aa.anoni.net，會讓下一步的驗證誤判。
+      #
+      # 這也是 m6 上 onion 產物本來就沒有 sw.js 的原因，刪掉是回到既有行為。
+      - name: Drop service worker from onion build
+        if: matrix.variant == 'onion'
+        run: find ./output -name 'sw.js' -delete
+
       # replace_sitename_anoni_onion.sh 靠 GNU sed 的就地改寫，但它的結束碼來自最後
       # 那行診斷用的 grep，改寫整批失敗也一樣回 0（在 BSD sed 上實測過，全部沒改到、
       # 依然 exit 0）。沒驗的話這一格會把 clearnet 內容推上 docs-onion/，m6 同步過去
