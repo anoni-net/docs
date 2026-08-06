@@ -6,12 +6,13 @@ on:
       - "docs"
   workflow_dispatch:
 
-# 最後兩步是先 `aws s3 rm --recursive` 清空 docs prefix，再 `s3 sync` 上傳。兩個 run
+# 最後兩步是先 `aws s3 rm --recursive` 清空該 prefix，再 `s3 sync` 上傳。兩個 run
 # 重疊時，後者的清空會發生在前者上傳到一半，S3 會有一段內容不完整的空窗。連續合併
 # 幾個 PR 再同步 docs 分支就會踩到。
 #
 # 全域一組（不帶 ref），因為 workflow_dispatch 可以從任何分支觸發，而所有 run 都寫
-# 同一個 bucket prefix，要序列化的是 S3 寫入本身。
+# 同一個 bucket，要序列化的是 S3 寫入本身。standard 與 onion 是同一個 run 裡的兩格，
+# 寫的是不同 prefix，彼此平行跑沒有問題，要擋的是 run 與 run 之間。
 #
 # 用 false 而非 true：run 被中途取消有機會停在 `s3 rm` 之後、`s3 sync` 之前，那會留下
 # 一個空的 bucket。排隊比取消安全。排隊中的 run 若被更新的 run 取代，它還沒開始執行，
@@ -23,10 +24,19 @@ concurrency:
 jobs:
   build:
     strategy:
+      # onion 那格失敗不要連帶取消 clearnet 的部署，兩份是各自獨立的產物。
+      fail-fast: false
       matrix:
         os: ["ubuntu-24.04"]
         python-version: ["3.12"]
+        # standard = clearnet（anoni.net/docs）。
+        # onion = docs.<onion>，站內絕對網址改寫成 onion，並拿掉只在 clearnet 生效的
+        # 分析區塊，等同 m6 上手動跑的 build_docs_anoni_onion.sh。
+        variant: ["standard", "onion"]
     runs-on: ${{ matrix.os }}
+    env:
+      # clearnet 產物維持在既有的 docs/，onion 產物放同一個 bucket 的 docs-onion/。
+      S3_PREFIX: ${{ matrix.variant == 'onion' && 'docs-onion' || 'docs' }}
     defaults:
       run:
         working-directory: ./docs
@@ -35,6 +45,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      # onion 版的改寫是就地 sed 整個工作目錄，所以一定要在任何 mkdocs build 之前跑。
+      # 擺在 uv sync 之前是刻意的：那支腳本用 `find ./ -type f -exec sed -i`，.venv 一旦
+      # 建好就是上萬個檔案要被逐一重寫，既慢又沒有意義（第三方套件不含站內網址）。
+      - name: Rewrite URLs for onion
+        if: matrix.variant == 'onion'
+        run: sh ./replace_sitename_anoni_onion.sh
+
       - name: Update libs
         run: sudo apt-get update
       - name: Install ca
@@ -62,12 +80,17 @@ jobs:
       #
       # 注意：快取全新或被 LRU 淘汰時（首次建置、長期沒跑）仍然要重新下載，
       # 那種情況下這層保護不存在。要根治得把外部圖片鏡像到 assets.anoni.net。
+      #
+      # 兩格會同時跑，共用同一把 key 會互相覆寫（後寫的那個拿到 "cache already exists"）。
+      # 依 variant 分開存，最後再留一層不分 variant 的 fallback：鏡像的是第三方外部
+      # 資產，兩個變體抓到的內容其實一樣，新增的 onion 格不必從零開始重抓一輪。
       - name: Cache privacy plugin external assets
         uses: actions/cache@v4
         with:
           path: docs/.cache/plugin/privacy
-          key: mkdocs-privacy-${{ github.sha }}
+          key: mkdocs-privacy-${{ matrix.variant }}-${{ github.sha }}
           restore-keys: |
+            mkdocs-privacy-${{ matrix.variant }}-
             mkdocs-privacy-
 
       - name: Install mkdocs-material social dependencies
@@ -97,13 +120,45 @@ jobs:
           done
       - name: Inject PWA build version
         run: find ./output -name 'sw.js' -exec sed -i "s/__BUILD_VERSION__/$(date +%Y%m%d%H%M)/" {} \;
+
+      # onion 站的 robots 指向 onion 的 sitemap，跟 clearnet 那份不同。對齊 m6 上
+      # build_docs_anoni_onion.sh 最後那步 `cp ./robots_onion.txt <root>/robots.txt`。
+      - name: Onion robots.txt
+        if: matrix.variant == 'onion'
+        run: cp ./robots_onion.txt ./output/robots.txt
+
+      # replace_sitename_anoni_onion.sh 靠 GNU sed 的就地改寫，但它的結束碼來自最後
+      # 那行診斷用的 grep，改寫整批失敗也一樣回 0（在 BSD sed 上實測過，全部沒改到、
+      # 依然 exit 0）。沒驗的話這一格會把 clearnet 內容推上 docs-onion/，m6 同步過去
+      # 之後 onion 站就開始送 clearnet 網址跟 clearnet 的分析端點，而且不會有人發現。
+      #
+      # 兩個方向都要驗：只驗「沒有 clearnet 殘留」的話，產物是空的也會過關。
+      - name: Verify onion output
+        if: matrix.variant == 'onion'
+        run: |
+          onion='docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion'
+          leftover=0
+          for pattern in 'https://anoni.net/docs' 'aa.anoni.net'; do
+            n=$(grep -rl "$pattern" ./output/ | wc -l)
+            echo "clearnet 殘留 $pattern：$n 個檔案"
+            [ "$n" -eq 0 ] || leftover=1
+          done
+          rewritten=$(grep -rl "$onion" ./output/ | wc -l)
+          echo "含 onion 網址：$rewritten 個檔案"
+          if [ "$leftover" -ne 0 ] || [ "$rewritten" -eq 0 ]; then
+            echo "::error::onion 產物驗證失敗，中止上傳"
+            exit 1
+          fi
+
       - name: Clean the all files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
-        run: source ./.venv/bin/activate; aws s3 rm s3://${{ secrets.DOC_BUCKET }}/docs --recursive
+        # 結尾的斜線不能省。`s3://bucket/docs` 是前綴比對，會連 `docs-onion/` 底下的
+        # 物件一起刪掉，兩格同時跑就會互相清空。
+        run: source ./.venv/bin/activate; aws s3 rm "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --recursive
       - name: Upload to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
-        run: source ./.venv/bin/activate; aws s3 sync ./output s3://${{ secrets.DOC_BUCKET }}/docs/ --acl public-read
+        run: source ./.venv/bin/activate; aws s3 sync ./output "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --acl public-read
