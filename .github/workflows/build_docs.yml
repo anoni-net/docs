@@ -127,6 +127,29 @@ jobs:
         if: matrix.variant == 'onion'
         run: cp ./robots_onion.txt ./output/robots.txt
 
+      # replace_sitename_anoni_onion.sh 靠 GNU sed 的就地改寫，但它的結束碼來自最後
+      # 那行診斷用的 grep，改寫整批失敗也一樣回 0（在 BSD sed 上實測過，全部沒改到、
+      # 依然 exit 0）。沒驗的話這一格會把 clearnet 內容推上 docs-onion/，m6 同步過去
+      # 之後 onion 站就開始送 clearnet 網址跟 clearnet 的分析端點，而且不會有人發現。
+      #
+      # 兩個方向都要驗：只驗「沒有 clearnet 殘留」的話，產物是空的也會過關。
+      - name: Verify onion output
+        if: matrix.variant == 'onion'
+        run: |
+          onion='docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion'
+          leftover=0
+          for pattern in 'https://anoni.net/docs' 'aa.anoni.net'; do
+            n=$(grep -rl "$pattern" ./output/ | wc -l)
+            echo "clearnet 殘留 $pattern：$n 個檔案"
+            [ "$n" -eq 0 ] || leftover=1
+          done
+          rewritten=$(grep -rl "$onion" ./output/ | wc -l)
+          echo "含 onion 網址：$rewritten 個檔案"
+          if [ "$leftover" -ne 0 ] || [ "$rewritten" -eq 0 ]; then
+            echo "::error::onion 產物驗證失敗，中止上傳"
+            exit 1
+          fi
+
       - name: Clean the all files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
