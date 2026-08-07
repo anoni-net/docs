@@ -61,6 +61,12 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
+      # 擺在建置與上傳之前，映射邏輯壞掉時在碰到 S3 之前就失敗。純 stdlib、不連網，
+      # 跑起來不到一秒。清除範圍算錯不會讓建置變紅燈，只能靠這裡擋。
+      - name: Test cache purge script
+        if: matrix.variant == 'standard'
+        run: python3 ../tools/test_cf_purge.py
+
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
       - name: Sync Packages
@@ -180,10 +186,10 @@ jobs:
       # 只在 standard 這格跑。onion 是 m6 上的獨立 server block，走 .onion 位址，
       # 不經過 Cloudflare，沒有可清的 edge 快取。
       #
-      # 用 purge_everything 而不是逐 URL：overrides 的改動（置頂公告、footer、分析
-      # 區塊）會同時影響每一頁，挑幾個 URL 清一定會漏。purge by prefix 與 by hostname
-      # 都是 Enterprise 功能，本 zone 是 Pro，逐 URL 又有單次 30 條的上限，湊不齊
-      # 整個 docs 站。清整個 zone 的代價是主站與其他子網域一起回源重抓，量很小。
+      # 清除範圍限這次產出的 /docs/ 網址，不用 purge_everything：同一個 zone 底下還有
+      # 主站、pad、form、search，沒有理由為了換 docs 的內容把它們一起清掉。
+      # purge by prefix 與 by hostname 是 Enterprise 功能，本 zone 是 Pro，所以由
+      # tools/cf_purge.py 把產物映射回網址逐批清（每批 30 條，約 48 次呼叫）。
       #
       # 沒設 secret 時只警告不失敗，讓還沒配 token 的環境（例如 fork）照樣能部署。
       # 設了但 API 回錯就要 fail，否則會安靜地留下舊內容，跟沒清一樣難發現。
@@ -192,20 +198,4 @@ jobs:
         env:
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
           CF_PURGE_TOKEN: ${{ secrets.CF_PURGE_TOKEN }}
-        run: |
-          if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_PURGE_TOKEN" ]; then
-            echo "::warning::CF_ZONE_ID 或 CF_PURGE_TOKEN 未設定，略過快取清除。S3 已更新，但站上可能還是舊內容。"
-            exit 0
-          fi
-          resp=$(curl -sS -X POST \
-            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
-            -H "Authorization: Bearer ${CF_PURGE_TOKEN}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}')
-          if echo "$resp" | jq -e '.success == true' > /dev/null 2>&1; then
-            echo "Cloudflare 快取已清除（zone 全清）"
-          else
-            echo "::error::Cloudflare 快取清除失敗，站上可能仍是舊內容"
-            echo "$resp" | jq -c '.errors // .' 2>/dev/null || echo "$resp"
-            exit 1
-          fi
+        run: python3 ../tools/cf_purge.py --output ./output
