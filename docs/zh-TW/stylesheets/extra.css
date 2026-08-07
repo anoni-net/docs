@@ -362,3 +362,56 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   font-weight: 700;
   line-height: 1.3;
 }
+
+/* ==========================================================================
+   語言切換選單：窄螢幕改成靠右展開，修掉整頁的橫向溢出
+   Material 預設用 left: 50% 搭配 translate3d(-50%, 0.3rem, 0)，把
+   .md-select__inner 置中掛在按鈕下方。三個語言標籤的中文字面讓選單有 177px
+   寬，窄螢幕時按鈕又貼近視窗右緣，選單會往右頂出約 14px。收合時 max-height
+   是 0 看不見，可是版面寬度已經被撐開，整頁能往右滑，露出置頂公告與 header
+   底色蓋不到的白色空白。
+   實測 959px 以下每個寬度都會發生，960px 起按鈕離右緣夠遠沒有這個問題，所以
+   只在 Material 的 59.984375em 斷點以下覆寫，桌面維持原本的置中展開。
+   靠右展開同時讓選單完整留在畫面內，窄螢幕原本會被視窗右緣切掉一截。
+   ========================================================================== */
+
+@media screen and (max-width: 59.984375em) {
+  .md-select__inner {
+    left: auto;
+    right: 0;
+    transform: translate3d(0, 0.3rem, 0);
+  }
+
+  .md-select:focus-within .md-select__inner,
+  .md-select:hover .md-select__inner {
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* 指向按鈕的小箭頭一併改成靠右定位。按鈕寬 2.4rem，中心距選單右緣 1.2rem，
+     箭頭本身寬 0.4rem，所以右側留 1rem */
+  .md-select__inner::after {
+    left: auto;
+    margin-left: 0;
+    right: 1rem;
+  }
+}
+
+/* ==========================================================================
+   置頂公告的連結色
+   .md-banner 在兩種主題都是深底，淺色主題疊合後是 rgb(33, 33, 33)，深色主題是
+   rgb(23, 25, 31)。可是裡面的連結沿用 Material 的 --md-typeset-a-color，也就是
+   主色 #006d99，深藍配黑底在淺色主題只有 2.79:1，遠低於 WCAG AA 要求的 4.5:1，
+   字幾乎融進黑底看不出來是連結。
+   改用品牌 cyan-300，淺色主題 7.83:1、深色主題 8.54:1，兩邊都達 AAA。這也是本檔
+   既有的深底用色，見 --guide-basics-d 與 slate 的 sess-tag 覆寫。
+   hover 與 focus 再亮一階到 cyan-200，維持狀態變化看得出來。
+   ========================================================================== */
+
+.md-banner__inner a {
+  color: var(--brand-cyan-300);
+}
+
+.md-banner__inner a:focus,
+.md-banner__inner a:hover {
+  color: var(--brand-cyan-200);
+}
