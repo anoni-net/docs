@@ -91,7 +91,7 @@ jobs:
       # 依 variant 分開存，最後再留一層不分 variant 的 fallback：鏡像的是第三方外部
       # 資產，兩個變體抓到的內容其實一樣，新增的 onion 格不必從零開始重抓一輪。
       - name: Cache privacy plugin external assets
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: docs/.cache/plugin/privacy
           key: mkdocs-privacy-${{ matrix.variant }}-${{ github.sha }}
