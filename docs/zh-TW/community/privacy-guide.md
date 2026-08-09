@@ -6,7 +6,7 @@ icon: material/shield-lock-outline
 
 # :material-shield-lock-outline: 個人隱私指引研究專題
 
-個人隱私指引是匿名網路社群 anoni.net 2026 的三大主題之一，跟「Tor Relay 校園建立」、「匿名支付」並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、相關文章索引、目前進度，以及如何加入社群討論。
+個人隱私指引是匿名網路社群 anoni.net 2026 的三大主題之一，跟 [Tor Relay 校園建立](./relay-on-campus.md)、[匿名支付](./payments-research.md) 並列為今年的重點推進項目。這頁是研究專題的對外入口，整理研究目標、相關文章索引、目前進度，以及如何加入社群討論。年度整體規劃與季度節奏見 [2026 年度路線圖](./roadmap-2026.md)。
 
 ## 為什麼把個人隱私指引獨立成一個主題
 
@@ -18,7 +18,7 @@ icon: material/shield-lock-outline
 
 - **三級威脅模型框架**：把日常使用、敏感工作、高風險情境三種等級的對應工具與步驟整理成參考表
 - **概念到實作的橋**：在威脅模型與工具操作之間補上判斷流程（什麼時候該升級、什麼時候不必過度防護）
-- **常見誤區整理**：VPN ≠ 匿名、HTTPS ≠ 安全、私密模式 ≠ 隱私、去中心化 ≠ 匿名等高頻誤解的拆解
+- **常見誤區整理**：VPN ≠ 匿名、HTTPS ≠ 安全、私密模式 ≠ 隱私、去中心化 ≠ 匿名等高頻誤解的拆解。VPN 與去中心化兩項已有專篇（[VPN 的風險與選擇](../tools/vpn-guide.md)、[常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)），HTTPS 與私密模式待補
 - **場景指引落地**：給記者、社運參與者、家暴倖存者、LGBTQ+ 等具體角色的實作流程
 - **跨主題串接**：把個資、金流、連線層三個面向（見 [網路自由為什麼重要](../basics/internet-freedom.md)）整合進個人隱私的整體規劃
 - **教材化**：把研究產出整理成可用於工作坊、小聚的教材，方便對外推廣
@@ -28,16 +28,16 @@ icon: material/shield-lock-outline
 社群依「[指南](../guides/index.md)」的分層結構，把隱私主題分散到不同層次：
 
 - 概念：[匿名、隱私、假名、機密性的差別](../basics/anonymity-vs-privacy.md)、[威脅模型如何建立](../basics/threat-model.md)、[Metadata 是什麼](../basics/metadata.md)、[社群平台怎麼收集你的資料](../basics/platform-tracking.md)、[監控現在做得到什麼](../basics/surveillance-capability.md)、[怎麼維持多個網路身分](../basics/multiple-identities.md)
-- 工具：[什麼是 Tor](../tools/what-is-tor.md)、[什麼是 Tails](../tools/what-is-tails.md)、[Tor Browser 進階設定](../tools/tor-browser-advanced.md)、[匿名作業系統比較](../tools/tails-vs-whonix-vs-qubes.md)、[訊息工具比較](../tools/messaging-comparison.md)、[密碼管理器入門](../tools/password-manager.md)、[用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)
-- 場景：[一般人平常該做到什麼](../scenarios/everyday-baseline.md)、[記者保護消息來源](../scenarios/journalist.md)、[社運行動者的數位準備](../scenarios/activist.md)、[家暴倖存者的數位準備](../scenarios/domestic-violence.md)、[LGBTQ+ 與性少數的匿名社交](../scenarios/lgbtq.md)
-- 進階：[端對端加密如何運作](../advanced/e2ee.md)、[常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
+- 工具：[什麼是匿名網路](../tools/what-is-anonymity-network.md)、[什麼是 Tor](../tools/what-is-tor.md)、[什麼是 Tails](../tools/what-is-tails.md)、[Tor Browser 進階設定](../tools/tor-browser-advanced.md)、[Tor Snowflake 橋接點](../tools/tor-snowflake.md)、[匿名作業系統比較](../tools/tails-vs-whonix-vs-qubes.md)、[GrapheneOS 行動作業系統](../tools/grapheneos.md)、[訊息工具比較](../tools/messaging-comparison.md)、[OnionShare 匿名傳輸](../tools/onionshare.md)、[什麼是 CryptPad](../tools/what-is-cryptpad.md)、[密碼管理器入門](../tools/password-manager.md)、[Asian Diceware 密語字典](../tools/asian-diceware.md)、[VPN 的風險與選擇](../tools/vpn-guide.md)、[加密 DNS 怎麼選](../tools/encrypted-dns.md)、[用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)
+- 場景：[一般人平常該做到什麼](../scenarios/everyday-baseline.md)、[記者保護消息來源](../scenarios/journalist.md)、[社運行動者的數位準備](../scenarios/activist.md)、[家暴倖存者的數位準備](../scenarios/domestic-violence.md)、[LGBTQ+ 與性少數的匿名社交](../scenarios/lgbtq.md)、[選舉觀察員的自保](../scenarios/election-observer.md)、[在中國大陸的公開平台傳播資訊](../scenarios/mainland-speech.md)、[出差與研討會的數位準備](../scenarios/asia-travel.md)、[出國前用 AI 產生目的地概況](../scenarios/travel-ai-briefing.md)
+- 進階：[端對端加密如何運作](../advanced/e2ee.md)、[常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)、[後量子密碼概觀](../advanced/post-quantum.md)、[去中心化網站發布](../advanced/dweb-ipfs-onion.md)
 - 在地：[台灣個資法 2025 修法](../taiwan/pdpa-2025.md)、[揭弊者保護法的技術觀察](../taiwan/whistleblower-law.md)
 
 以上文章初稿多已上線，仍會依季度節奏持續校訂與補充。
 
 ## 已完成的事
 
-- **概念層五篇上線**：[網路自由為什麼重要](../basics/internet-freedom.md)、[匿名/隱私/假名/機密性的差別](../basics/anonymity-vs-privacy.md)、[威脅模型如何建立](../basics/threat-model.md)、[Metadata 是什麼](../basics/metadata.md)、[為什麼匿名支付重要](../basics/payments-anonymity.md)
+- **概念層八篇上線**：[網路自由為什麼重要](../basics/internet-freedom.md)、[匿名/隱私/假名/機密性的差別](../basics/anonymity-vs-privacy.md)、[威脅模型如何建立](../basics/threat-model.md)、[Metadata 是什麼](../basics/metadata.md)、[為什麼匿名支付重要](../basics/payments-anonymity.md)、[社群平台怎麼收集你的資料](../basics/platform-tracking.md)、[監控現在做得到什麼](../basics/surveillance-capability.md)、[怎麼維持多個網路身分](../basics/multiple-identities.md)
 - **三大面向框架**：在 [網路自由為什麼重要](../basics/internet-freedom.md) 確立「連線層 / 個資與身分 / 金流」三面向，作為個人隱私指引的整體骨架
 - **在地法規參考**：[個資法 2025](../taiwan/pdpa-2025.md)、[揭弊者保護法](../taiwan/whistleblower-law.md) 兩篇完整上線
 - **寫作規範與分類**：sitemap 7 大分類落地，[指南](../guides/index.md) 入口頁建立，閱讀路徑明確化
@@ -45,6 +45,7 @@ icon: material/shield-lock-outline
 ## 進行中與待完成
 
 - 工具層、場景層、進階層各篇初稿已上線，持續依讀者回饋校訂與補充
+- 常見誤區補完：HTTPS ≠ 安全、私密模式 ≠ 隱私兩項尚未有專篇
 - **三級隱私指引合集**（本主題的核心交付物，預計 Q3 整合上述各層內容）
 - 工作坊教材：把研究產出轉成可用於工作坊、小聚的講義
 - 翻譯候選報告（候選清單見下方）
