@@ -51,8 +51,10 @@ pin 要能抓齊內容，本機就得有一個持續運作的 IPFS daemon。下�
     安裝 [kubo](https://docs.ipfs.tech/install/command-line/){target="_blank"}（IPFS 官方的命令列版本）。macOS 可以用 Homebrew：
 
     ```bash
-    brew install ipfs
+    brew install kubo
     ```
+
+    Homebrew 的套件名已從 `ipfs` 改為 `kubo`，舊名還是裝得起來，但後面設定服務要用 `kubo` 這個名字。Intel 與 Apple Silicon 都支援。
 
     Linux 依 [官方說明](https://docs.ipfs.tech/install/command-line/){target="_blank"} 下載對應架構的 kubo。裝好後初始化並啟動 daemon：
 
@@ -61,7 +63,13 @@ pin 要能抓齊內容，本機就得有一個持續運作的 IPFS daemon。下�
     ipfs daemon
     ```
 
-    要讓 daemon 長時間常駐，Linux 建議做成 systemd user service，macOS 可以用 `brew services` 或 launchd。臨時測試時，直接讓 `ipfs daemon` 在背景執行也可以。
+    要讓 daemon 長時間常駐，Linux 建議做成 systemd user service。macOS 用 Homebrew 安裝的話，套件本身附了服務定義，一行就會常駐並在登入時自動啟動：
+
+    ```bash
+    brew services start kubo
+    ```
+
+    臨時測試時，直接讓 `ipfs daemon` 在背景執行也可以。
 
 === "Windows"
 
@@ -187,7 +195,7 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 ## 維護與注意事項
 
 - **會自動跟上新版**：文件站換 CID 後，下一次排程就會 pin 新版、放掉舊版，你不用做任何事。
-- **磁碟不會一直長大**：腳本 unpin 舊版後會執行一次垃圾回收，只留最新版本佔空間。文件站是純靜態網站，體積不大。
+- **磁碟不會一直長大**：腳本 unpin 舊版後會執行一次垃圾回收，只留最新版本佔空間。一份完整鏡像約 220 MB（2026 年 8 月實測）。
 - **不會弄丟你手上的版本**：腳本先確認新版 pin 成功才放掉舊版，解析或下載失敗時會保留現有複本。
 - **想停止幫忙**：unpin 目前版本、把排程移除即可，不影響其他節點。
 - **隱私與風險**：你 pin 的是公開文件，沒有隱私顧慮。提供 IPFS pin 在不同司法管轄下的風險不同，相關限制見 [去中心化網站發布](../advanced/dweb-ipfs-onion.md) 的「已知限制與風險」。
