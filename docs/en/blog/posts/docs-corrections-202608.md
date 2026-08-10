@@ -1,5 +1,5 @@
 ---
-date: 2026-08-07
+date: 2026-08-10
 authors:
     - anoni-net
 categories:
@@ -7,15 +7,15 @@ categories:
     - Community
 slug: docs-corrections-202608
 image: "assets/images/post-update.png"
-summary: "Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan was withdrawn, a 2FA app we recommended had changed owners, and a distribution drawn from 40 samples was overturned by the full dataset. The docs site merged 45 pull requests between 27 July and 7 August, a sizeable share of them fixing what we had already published. Here is what changed on each page, the evidence behind it, and the five things to do if you followed the old guidance."
-description: "Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan was withdrawn, a 2FA app we recommended had changed owners, and a distribution drawn from 40 samples was overturned by the full dataset. The docs site merged 45 pull requests between 27 July and 7 August, a sizeable share of them fixing what we had already published. Here is what changed on each page, the evidence behind it, and the five things to do if you followed the old guidance."
+summary: "Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan was withdrawn, a 2FA app we recommended had changed owners, and a distribution drawn from 40 samples was overturned by the full dataset. The docs site merged 50 pull requests between 27 July and 10 August, a sizeable share of them fixing what we had already published. Here is what changed on each page, the evidence behind it, and the five things to do if you followed the old guidance."
+description: "Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan was withdrawn, a 2FA app we recommended had changed owners, and a distribution drawn from 40 samples was overturned by the full dataset. The docs site merged 50 pull requests between 27 July and 10 August, a sizeable share of them fixing what we had already published. Here is what changed on each page, the evidence behind it, and the five things to do if you followed the old guidance."
 ---
 
 # Retracting what we published: what changed on the docs site in the past two weeks
 
 ![What changed on the docs site](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-Several pages changed over the past two weeks, and in most cases the change was to withdraw a passage rather than extend it. Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan came out, a 2FA app we recommended turned out to have changed owners, and a blocking distribution drawn from 40 samples was recomputed over all 22,105. The site merged 45 pull requests between 27 July and 7 August, and a sizeable share of them went into corrections of this kind. What follows is page by page: what changed, what the evidence was, and a checklist in the middle for anyone who already prepared using the old guidance.
+Several pages changed over the past two weeks, and in most cases the change was to withdraw a passage rather than extend it. Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan came out, a 2FA app we recommended turned out to have changed owners, and a blocking distribution drawn from 40 samples was recomputed over all 22,105. The site merged 50 pull requests between 27 July and 10 August, and a sizeable share of them went into corrections of this kind. What follows is page by page: what changed, what the evidence was, and a checklist in the middle for anyone who already prepared using the old guidance.
 
 <!-- more -->
 
@@ -104,9 +104,29 @@ While closing another pull request the same week, we found that the matching rul
 
 An earlier site-wide clean-up had already rewritten 266 paragraphs across 99 files for overuse of the character 這. In early August we added the density standard behind it, because the criteria actually used during copy-editing existed only in a commit message and would not apply the next time someone wrote a new page. They went into the contributor handbook, and the machine-checkable part became the `zhe-repeat` rule. The 8-character distance threshold was calibrated against 429 pages, widening it to 10 would start catching legitimate usage, and whole-document density needs semantic judgement and was deliberately left to humans.
 
+## Two pages had drifted from their own current state
+
+The [personal privacy guide](https://anoni.net/docs/community/privacy-guide/){target="_blank"} (Mandarin only) gained a "related articles" index on 6 August, and the progress section further down was never updated to match, so one page said two different things. The index listed eight concept-layer articles while the section below still read "five concept-layer articles published" and listed only the original five. The per-layer indexes had fallen behind as well: 18 tools articles with 7 listed, 10 scenario articles with 5, 5 advanced articles with 2. Fourteen were added back.
+
+The same page lists four common misconceptions in a way that reads as though none had been started. Two were already written and simply never linked: "VPN ≠ anonymity" has a full article in the [VPN guide](../../tools/vpn-guide.md), and "decentralised ≠ anonymous" is covered for IPFS, Yggdrasil, DN42 and I2P in [Technologies mistaken for anonymity](https://anoni.net/docs/advanced/mistaken-for-anonymity/){target="_blank"} (Mandarin only). The other two have genuinely not been started, and the page now says so.
+
+[Help pin the site's IPFS mirror](../../community/pin-ipfs-mirror.md) had three passages that no longer matched reality, two of them found by readers who actually followed the instructions.
+
+The macOS section said `brew install ipfs`. The Homebrew formula has since been renamed to `kubo`. The old name still installs it, but `brew services` matches on the real formula name, so anyone who installed via the old instructions and then tried to set up a persistent daemon hit a name mismatch. The persistence advice said only "use `brew services` or launchd" without giving a command, when the formula itself already defines a service and `brew services start kubo` keeps it resident and starts it at login.
+
+The second was a contributor who wanted to configure the community node as a fixed peer and put the page's IPNS name into kubo's `Peering.Peers`, which the tool rejected outright. The page explained CID and IPNS names and never mentioned the node's own Peer ID. All three identifiers look alike: the base36 form of the node Peer ID shares its first 12 characters with the site's IPNS name, both being public-key fingerprints in the same encoding, one pointing at content that changes and the other at a machine. The page now carries a comparison table for all three, plus an optional peering section.
+
+The third was the opening line, "right now only the community's own node does". A DHT lookup found another provider serving the site's content from a third-party network, either someone else's mirror or a public gateway that had fetched the content and announced it. Either way the sentence no longer held, and it now reads that few nodes currently serve the mirror, with the community's own carrying most of it. No exact count is given, because `findprovs` is best-effort and returns whatever it finds before the query times out, so "only N" would be its own kind of inaccuracy.
+
+## A white strip on narrow screens traced back to the language switcher
+
+A reader reported a blank strip appearing to the right of the pinned announcement. Measurement showed the announcement was not the cause: with it hidden entirely, `documentElement.scrollWidth` still exceeded the viewport by 14px. Hiding candidate elements one at a time located the language switcher in the header, where the Chinese labels give the collapsed menu a width of 177px. On narrow screens the button sits close to the right edge, so the menu pushes the layout outwards. The announcement's dark background and the header's blue are only as wide as the viewport, so scrolling right exposes white underneath. The breakpoint falls exactly at 960px, where the header switches to its desktop layout. The fix anchors the menu to the button's right edge below that breakpoint and leaves the desktop centring alone. The same change raised the contrast of links inside the pinned announcement in light theme, previously `2.79:1` against the dark background.
+
+Separately, two GitHub Actions were still on the Node 20 runtime, and the runner printed a deprecation warning on every run. `actions/cache` went from v4 to v6 and `actions/setup-node` from v4 to v7, with the release notes read version by version first to confirm that neither set of breaking changes reaches how this project uses them.
+
 ## Thanks to two community contributors
 
-Two of the 45 pull requests came from community members.
+Two of the 50 pull requests came from community members.
 
 [wu858430049](https://github.com/wu858430049){target="_blank"} contributed the Simplified Chinese edition of the [BECOME_ANONI](https://anoni.net/docs/zh-cn/community/become-anoni/){target="_blank"} protocol. The canonical file sits in the repository root mirroring the zh-TW layout, the docs page embeds it through snippets to keep a single source, and the same pull request fixed two configuration problems that were preventing the page from rendering. Translation is a long-standing gap here, with many pages still missing a Simplified Chinese or English counterpart.
 
@@ -126,3 +146,4 @@ The same period also added a Taiwan infrastructure layer in the [Interactive](..
 - [Reading an OONI measurement](../../community/ooni-data-format.md): the version after the field tally was completed
 - [Device minimization and border crossings in Asia](../../scenarios/asia-travel.md): current guidance after the Hong Kong correction
 - [Maintaining multiple online identities](../../basics/multiple-identities.md): TOTP app guidance is now criteria-based rather than brand-based
+- [Help pin the site's IPFS mirror](../../community/pin-ipfs-mirror.md): the three-identifier comparison table and the new peering section
