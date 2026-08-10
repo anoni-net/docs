@@ -29,6 +29,18 @@ anoni.net 文件站除了主站，還有一份 IPFS 鏡像，讓文件在主站�
 
 結論就是這支腳本要做的事：先把 IPNS 換算成當前的 CID，再 pin 那個新 CID，然後放掉舊的。因為 CID 會變，換算與 pin 要定期重新執行，所以需要排程。
 
+### 三串識別碼不要混用
+
+IPFS 上有三種長相接近的識別碼，用途各自不同，貼錯欄位時工具會直接報錯。
+
+| 識別碼 | 開頭 | 會不會變 | 用途 |
+|---|---|---|---|
+| CID | `bafybei…` | 每次發布都變 | 指定某一版內容 |
+| IPNS 名稱 | `k51qzi…` | 固定 | 取得最新版，本頁 pin 用這個 |
+| Peer ID | `12D3KooW…` | 固定 | 指定要連到哪一個節點 |
+
+pin 文件站只會用到 IPNS 名稱。Peer ID 要到想讓自己的節點跟社群節點保持固定連線時才用得上，做法見下面的〈進階：跟社群節點保持常連〉。
+
 ## 運作原理（為什麼排程就夠，不用等通知）
 
 你不需要社群通知你「換新版了」。IPNS 就是大家共用的同步點，你的腳本自己去解析就拿得到最新 CID。文件站發布時只是照常更新 IPNS，你這邊每隔幾小時解析一次、發現變了就 pin 新版，全程不用人工協調。
@@ -38,6 +50,7 @@ anoni.net 文件站除了主站，還有一份 IPFS 鏡像，讓文件在主站�
     文件站的 IPFS 座標（公開值，可以直接用）：
 
     - IPNS 名稱：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
+    - 節點 Peer ID：`__PEER_ID__`（設定 peering 時才會用到）
     - 瀏覽器打開看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 腳本每次執行的動作是：解析 IPNS 取得當前 CID，pin 新 CID，unpin 上次那版，回收空間。腳本先確認新版 pin 成功，才會放掉舊版。萬一解析失敗或抓不到內容，它會保留你手上現有的複本，不會讓你的節點變空。
@@ -191,6 +204,30 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 ```
 
 也可以在本機 gateway 開起來看，內容正常顯示就成功了：`http://127.0.0.1:8080${CID}/`。Docker 使用者把上面的 `ipfs` 換成 `docker exec ipfs_host ipfs`。
+
+## 進階：跟社群節點保持常連（選用）
+
+pin 只靠 IPNS 名稱就能完成，內容交給 DHT 去找。第一次要把整份鏡像抓齊，碰上 DHT 查詢慢或查不到的時候會拖很久。想讓自己的節點跟來源節點維持固定連線，可以設定 kubo 的 peering。
+
+編輯 `~/.ipfs/config`，在最外層加入 `Peering` 區塊：
+
+```json
+"Peering": {
+  "Peers": [
+    { "ID": "__PEER_ID__" }
+  ]
+}
+```
+
+`Addrs` 可以省略，kubo 會自己向 DHT 查位址。改完重啟 daemon 生效。Docker 使用者要改的是 `./ipfs-data/config`，接著執行 `docker compose restart`。
+
+確認連上了：
+
+```bash
+ipfs swarm peers | grep __PEER_ID__
+```
+
+peering 是單向設定，社群節點那端沒有對應條目，連線的保活責任落在你這邊。[kubo 官方文件](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒過，單向 peering 會佔用對方節點的連線資源，鏡像數量變多之後負擔會集中在同一台。建議實際遇到抓取不順再開，平常運作正常就跳過。
 
 ## 維護與注意事項
 
