@@ -53,9 +53,9 @@ VPN、Tailscale 這類會改變連線出口的軟體也要先關閉。流量繞�
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe 的效能頁面，上方標示預估用量 5 到 200 MB、約 1 分 30 秒，中央為執行按鈕，下方為上次測試結果" style="width:50%">
 </figure>
 
-!!! tip "請不要用 OONI Run 連結"
+!!! tip "這次為什麼不另外發 OONI Run 連結"
 
-    直覺會想發一條 [OONI Run v2](../../tools/ooni-run-v2.md) 連結給大家點，本次請避免。OONI Run v2 目前僅支援 Android，iOS 使用者無法開啟。內建的「效能」測試兩個平台皆可使用。
+    [OONI Run v2](../../tools/ooni-run-v2.md) 可以把指定的測項打包成一條連結，Android 與 iOS 都能開啟。效能測試本來就是 App 內建的一組，直接請大家點「效能」少一個安裝步驟，所以這次沒有另外建立連結。想收集其他測項的人可以自己建一條，做法見那一頁。
 
 ### 三、三個時間點各執行一次
 

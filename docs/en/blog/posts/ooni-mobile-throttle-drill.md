@@ -53,9 +53,9 @@ Open the app, tap Tests, choose Performance, tick the tests you want, then tap r
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
 </figure>
 
-!!! tip "Please do not use an OONI Run link"
+!!! tip "Why there is no OONI Run link for this"
 
-    The instinct is to share an [OONI Run v2](../../tools/ooni-run-v2.md) link. Please avoid it this time. OONI Run v2 is currently Android-only, so iOS users cannot open it. The built-in Performance tests work on both platforms.
+    [OONI Run v2](../../tools/ooni-run-v2.md) can bundle a chosen set of tests into a single link, and it opens on both Android and iOS. The Performance tests are already a built-in group, so pointing people straight at Performance saves an install step, which is why no link was created for this campaign. Anyone wanting a different set of tests can create one; that page explains how.
 
 ### Three: run it at all three times
 
