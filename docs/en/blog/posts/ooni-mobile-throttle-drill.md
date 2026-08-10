@@ -6,14 +6,14 @@ categories:
     - Community
     - OONI
 slug: ooni-mobile-throttle-drill
-image: "assets/images/og_home.png"
+image: "assets/images/ooni-run-v2.webp"
 summary: "On Thursday 13 August, 14:30–15:00 Taipei time (06:30–07:00 UTC), mobile networks across seven counties in northern Taiwan will be throttled for 30 minutes as part of a national civil-defence exercise. The government published the window and the area, but not the target speed. Taiwan's OONI data is dominated by fixed-line broadband: HiNet alone accounts for 39.5% of measurements and all three mobile carriers together for 3.6%, with FarEasTone producing 4 performance measurements in the last 30 days. During the identical drill in central Taiwan on 10 August, not one performance measurement was recorded on a mobile network anywhere in the country. This post covers what to run, the privacy trade-off to understand first, why all three carriers matter, and what the resulting dataset can and cannot support."
 description: "On Thursday 13 August, 14:30–15:00 Taipei time (06:30–07:00 UTC), mobile networks across seven counties in northern Taiwan will be throttled for 30 minutes as part of a national civil-defence exercise. The government published the window and the area, but not the target speed. Taiwan's OONI data is dominated by fixed-line broadband: HiNet alone accounts for 39.5% of measurements and all three mobile carriers together for 3.6%, with FarEasTone producing 4 performance measurements in the last 30 days. During the identical drill in central Taiwan on 10 August, not one performance measurement was recorded on a mobile network anywhere in the country. This post covers what to run, the privacy trade-off to understand first, why all three carriers matter, and what the resulting dataset can and cannot support."
 ---
 
 # A Pre-announced 30-Minute Throttle With No Published Target Speed: Help Measure All Three Carriers on 13 August
 
-![Measuring Taiwan's mobile network throttling drill](./assets/images/og_home.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Measuring Taiwan's mobile network throttling drill](./assets/images/ooni-run-v2.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 On Thursday 13 August, from 14:30 to 15:00 Taipei time (UTC+8), mobile networks in Keelung, Taipei, New Taipei, Taoyuan, Hsinchu City, Hsinchu County, and Yilan will be throttled for thirty minutes. The throttle is part of Taiwan's Urban Resilience Exercise, executed simultaneously by all three major carriers. Official announcements state that voice calls, SMS, and cell broadcast continue to work, and that high-bandwidth services degrade: video streaming, video calls, mobile payments, cloud sync.
 
