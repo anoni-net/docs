@@ -27,7 +27,19 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
 - IPNS（InterPlanetary Name System）是一个固定不变的名字，永远指向「目前最新」的那个 CID。文件站的 IPNS 名字就是下面那串 `k51…`。
 - pin 的意思是「保证留住某个 CID 的内容」。pin 绑在 CID 上，不会自己跟着 IPNS 走。所以文件站一发新版，你上次 pin 的还是旧 CID。
 
-结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，这件事要定期重新执行，这就是为什么要设定时任务。
+结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，换算与 pin 要定期重新执行，所以需要定时任务。
+
+### 三串标识符不要混用
+
+IPFS 上有三种长相接近的标识符，用途各自不同，贴错字段时工具会直接报错。
+
+| 标识符 | 开头 | 会不会变 | 用途 |
+|---|---|---|---|
+| CID | `bafybei…` | 每次发布都变 | 指定某一版内容 |
+| IPNS 名称 | `k51qzi…` | 固定 | 取得最新版，本页 pin 用这个 |
+| Peer ID | `12D3KooW…` | 固定 | 指定要连到哪一个节点 |
+
+pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟社群节点保持固定连接时才用得上，做法见下面的〈进阶：跟社群节点保持常连〉。
 
 ## 运作原理（为什么定时就够，不用等通知）
 
@@ -38,6 +50,7 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
     文件站的 IPFS 坐标（公开值，可以直接用）：
 
     - IPNS 名称：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
+    - 节点 Peer ID：`__PEER_ID__`（设定 peering 时才会用到）
     - 浏览器打开看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 脚本每次执行的动作是：解析 IPNS 取得当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
@@ -183,6 +196,30 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 ```
 
 也可以在本机 gateway 打开看，内容正常显示就成功了：`http://127.0.0.1:8080${CID}/`。Docker 用户把上面的 `ipfs` 换成 `docker exec ipfs_host ipfs`。
+
+## 进阶：跟社群节点保持常连（选用）
+
+pin 只靠 IPNS 名称就能完成，内容交给 DHT 去找。第一次要把整份镜像抓齐，碰上 DHT 查询慢或查不到的时候会拖很久。想让自己的节点跟来源节点维持固定连接，可以设定 kubo 的 peering。
+
+编辑 `~/.ipfs/config`，在最外层加入 `Peering` 区块：
+
+```json
+"Peering": {
+  "Peers": [
+    { "ID": "__PEER_ID__" }
+  ]
+}
+```
+
+`Addrs` 可以省略，kubo 会自己向 DHT 查地址。改完重启 daemon 生效。Docker 用户要改的是 `./ipfs-data/config`，接着执行 `docker compose restart`。
+
+确认连上了：
+
+```bash
+ipfs swarm peers | grep __PEER_ID__
+```
+
+peering 是单向设定，社群节点那端没有对应条目，连接的保活责任落在你这边。[kubo 官方文档](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒过，单向 peering 会占用对方节点的连接资源，镜像数量变多之后负担会集中在同一台。建议实际遇到抓取不顺再开，平常运作正常就跳过。
 
 ## 维护与注意事项
 
