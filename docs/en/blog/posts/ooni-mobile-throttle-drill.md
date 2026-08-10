@@ -17,7 +17,7 @@ description: "On Thursday 13 August, 14:30–15:00 Taipei time (06:30–07:00 UT
 
 On Thursday 13 August, from 14:30 to 15:00 Taipei time (UTC+8), mobile networks in Keelung, Taipei, New Taipei, Taoyuan, Hsinchu City, Hsinchu County, and Yilan will be throttled for thirty minutes. The throttle is part of Taiwan's Urban Resilience Exercise, executed simultaneously by all three major carriers. Official announcements state that voice calls, SMS, and cell broadcast continue to work, and that high-bandwidth services degrade: video streaming, video calls, mobile payments, cloud sync.
 
-No announcement states the target speed. Chunghwa Telecom's drill notice contains no throughput figure anywhere, and neither does the Executive Yuan's. Right now, only the three carriers know what those thirty minutes actually look like.
+The announcements from the Executive Yuan, the NCC, and the carriers all set out the window and the affected services, and none of them contains a throughput figure. Chunghwa Telecom's and Taiwan Mobile's drill notices never state how far the speed drops, and the NCC's public description goes no further than "simulating restricted mobile network use". Right now, only the three carriers know what those thirty minutes actually look like.
 
 <!-- more -->
 
@@ -59,9 +59,9 @@ Open the app, select the Performance card, tap run. The card contains `ndt` (con
 | `14:35` | `06:35` | during the throttle |
 | `15:10` | `07:10` | after recovery |
 
-Take all three from the same location, on the same handset and the same subscription, and stay put between runs. If the location or serving cell changes, the difference between 14:15 and 14:35 can no longer be attributed to the throttle.
+What matters most is using the same handset and the same subscription for all three, and completing every run on mobile data. Staying in one place makes the results easier to compare, but moving between runs does not disqualify anything, as long as the phone has not slipped back onto Wi-Fi.
 
-If you can spare one more, run the Performance card at `14:35` on Wednesday 12 August from the same spot. One extra measurement gives the following day's comparison a same-time, same-place reference at no additional effort.
+If you can spare one more, run the Performance card at `14:35` on Wednesday 12 August. One extra measurement gives the following day's comparison a same-time reference at no additional effort.
 
 !!! note "Catching only one of the three still helps"
 
@@ -131,7 +131,7 @@ Within those limits, three carriers facing one instruction in one thirty-minute 
 
 **A reference baseline for Taiwan's mobile networks.** Once normal and throttled conditions are both on record, a future unexpected degradation has something to be compared against. This value scales with participation: 30 phones is an anecdote, 300 starts to be a dataset.
 
-**Partial verification of the official claim.** The announcements say voice, SMS, and cell broadcast keep working and only high-bandwidth services degrade. `ndt` and `dash` can only examine the high-bandwidth side, since neither test touches voice, SMS, or cell broadcast. One edge of the stated boundary is checkable, and checking it is still worth doing. Civil society being able to verify the real effect of a public measure is part of resilience.
+**Partial verification of the official claim.** The announcements say voice, SMS, and cell broadcast keep working and only high-bandwidth services degrade. The descriptions do not entirely agree with one another: Taiwan Mobile's notice lists messaging apps such as LINE, WhatsApp, and M+ among the services expected to see delays and instability, while the Executive Yuan's version has text transmission working normally. `ndt` and `dash` can only examine the high-bandwidth side, since neither test touches voice, SMS, or cell broadcast. One edge of the stated boundary is checkable, and checking it is still worth doing. Civil society being able to verify the real effect of a public measure is part of resilience.
 
 **Whether circumvention tools survive.** Whether Tor and Psiphon can still establish connections under constrained bandwidth is a long-standing question for this community, and this half hour is a ready-made test bed.
 
@@ -165,4 +165,4 @@ Exercise details follow the [Executive Yuan announcement](https://www.ey.gov.tw/
 
 ---
 
-**Sources**: OONI aggregation and measurements API (queried 2026-08-10, measurement data licensed [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md){target="_blank"}); ASN names from [RIPEstat](https://stat.ripe.net/){target="_blank"}; M-Lab data handling from the [M-Lab privacy policy](https://www.measurementlab.net/privacy/){target="_blank"}; exercise details from the Executive Yuan and [Chunghwa Telecom's drill notice](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"}.
+**Sources**: OONI aggregation and measurements API (queried 2026-08-10, measurement data licensed [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md){target="_blank"}); ASN names from [RIPEstat](https://stat.ripe.net/){target="_blank"}; M-Lab data handling from the [M-Lab privacy policy](https://www.measurementlab.net/privacy/){target="_blank"}; exercise details from the Executive Yuan, the NCC, [Taiwan Mobile](https://www.taiwanmobile.com/csonline/service/ann/ann3_20260722_103509.html){target="_blank"}, and [Chunghwa Telecom's drill notice](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"}.
