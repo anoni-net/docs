@@ -17,7 +17,9 @@ description: "On Thursday 13 August, 14:30–15:00 Taipei time (06:30–07:00 UT
 
 On Thursday 13 August, from 14:30 to 15:00 Taipei time (UTC+8), mobile networks in Keelung, Taipei, New Taipei, Taoyuan, Hsinchu City, Hsinchu County, and Yilan will be throttled for thirty minutes. The throttle is part of Taiwan's Urban Resilience Exercise, executed simultaneously by all three major carriers. Official announcements state that voice calls, SMS, and cell broadcast continue to work, and that high-bandwidth services degrade: video streaming, video calls, mobile payments, cloud sync.
 
-The announcements from the Executive Yuan, the NCC, and the carriers all set out the window and the affected services, and none of them contains a throughput figure. Chunghwa Telecom's and Taiwan Mobile's drill notices never state how far the speed drops, and the NCC's public description goes no further than "simulating restricted mobile network use". Right now, only the three carriers know what those thirty minutes actually look like.
+The announcements from the Executive Yuan, the NCC, and the carriers all set out the window and the affected services, and none of them contains a throughput figure. Chunghwa Telecom's and Taiwan Mobile's drill notices never state how far the speed drops, and the NCC's public description goes no further than "simulating restricted mobile network use".
+
+One figure is in circulation. [The Record reported](https://therecord.media/taiwan-mobile-5g-speed-reductions-han-kuang){target="_blank"} that speeds will drop to about 1% of normal capacity, citing local media citing government planning documents. It has not been officially confirmed and appears in none of the announcements. What those thirty minutes will actually look like has no verifiable public record.
 
 <!-- more -->
 
@@ -52,10 +54,6 @@ Open the app, tap Tests, choose Performance, tick the tests you want, then tap r
 <figure markdown="span">
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
 </figure>
-
-!!! tip "Why there is no OONI Run link for this"
-
-    [OONI Run v2](../../tools/ooni-run-v2.md) can bundle a chosen set of tests into a single link, and it opens on both Android and iOS. The Performance tests are already a built-in group, so pointing people straight at Performance saves an install step, which is why no link was created for this campaign. Anyone wanting a different set of tests can create one; that page explains how.
 
 ### Three: run it at all three times
 
@@ -119,7 +117,9 @@ Most of the remaining 60% is also fixed line: Taiwan Intelligent Fiber Optic Net
 
 For the performance tests this drill calls for, the numbers are much smaller. The last 30 days produced 1,025 `ndt` measurements nationwide, of which Chunghwa Telecom Mobile accounts for 16 and FarEasTone for 4, against 658,037 `web_connectivity` measurements over the same period.
 
-So any current statement about the state of Taiwan's network rests on data that mostly describes residential fixed broadband. Taiwan has over 30 million mobile subscriptions, and most people spend the larger part of their day online through a mobile network, which is close to absent from public measurement data.
+So any current statement about the state of Taiwan's network rests on data that mostly describes residential fixed broadband. [NCC figures](https://www.ncc.gov.tw/chncc/app/data/list?id=570){target="_blank"} put Taiwan at roughly 28.33 million mobile subscriptions in Q1 2026, and most people spend the larger part of their day online through a mobile network, which is close to absent from public measurement data.
+
+The three carriers are comparable in size over the same period, at roughly 11.29 million for Chunghwa Telecom, 8.94 million for Taiwan Mobile, and 8.14 million for FarEasTone. Their OONI measurement counts run in the opposite direction: Chunghwa Telecom, the largest, has 2,375; FarEasTone, the smallest, has 595; Taiwan Mobile has 20,481.
 
 Two limits belong alongside those figures. The public aggregation API reports measurement counts and not device counts, so the table above cannot rule out a small number of devices measuring repeatedly. Separately, Taiwan Mobile operates both mobile and fixed-line services, and so does Chunghwa Telecom, so a single measurement tagged `AS24158` cannot be sorted into phone or home router from the data alone.
 
@@ -133,7 +133,7 @@ Within those limits, three carriers facing one instruction in one thirty-minute 
 
 ## What the dataset can support
 
-The hardest part of studying network throttling is not knowing when it began, when it ended, or how far it reached. In most cases users notice slowness first and researchers reconstruct the timeline afterwards, leaving the boundaries fuzzy. Here the government pre-announced the date, the window, the counties, and the carriers, so the thirty-minute edges are sharp. The known part covers when and where the policy takes effect; it does not cover treatment intensity, since no target speed was published. Pre-announced shutdowns are not new elsewhere, exam-period national shutdowns being the familiar example. What is less common is a pre-announced *throttle* with per-carrier granularity.
+The hardest part of studying network throttling is not knowing when it began, when it ended, or how far it reached. In most cases users notice slowness first and researchers reconstruct the timeline afterwards, leaving the boundaries fuzzy. Here the government pre-announced the date, the window, the counties, and the carriers, so the thirty-minute edges are sharp. The known part covers when and where the policy takes effect; it does not cover treatment intensity, since officials published no target speed. The reported 1% figure is concrete enough to test, and the measurements will either support it or contradict it, which is a sharper task than open-ended exploration. Pre-announced shutdowns are not new elsewhere, exam-period national shutdowns being the familiar example. What is less common is a pre-announced *throttle* with per-carrier granularity.
 
 Once normal and throttled conditions are both on record, Taiwan's mobile networks gain a reference baseline, and a future unexpected degradation has something to be compared against. This value scales with participation: 30 phones is an anecdote, 300 starts to be a dataset.
 
