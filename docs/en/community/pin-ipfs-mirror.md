@@ -6,7 +6,7 @@ icon: simple/ipfs
 
 # :simple-ipfs: Help pin the site's IPFS mirror
 
-Alongside the main site, the anoni.net docs are also published as an IPFS mirror, so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and right now only the community's own node does. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
+Alongside the main site, the anoni.net docs are also published as an IPFS mirror, so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and only a handful of nodes currently serve this mirror, with the community's own node carrying most of it. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
 
 This page walks you through running one always-on IPFS node plus a small scheduled script that keeps up with the latest version automatically. It works the same on Windows, Linux, and macOS, with or without Docker.
 
