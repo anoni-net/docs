@@ -19,7 +19,7 @@ On Thursday 13 August, from 14:30 to 15:00 Taipei time (UTC+8), mobile networks 
 
 The announcements from the Executive Yuan, the NCC, and the carriers all set out the window and the affected services, and none of them contains a throughput figure. Chunghwa Telecom's and Taiwan Mobile's drill notices never state how far the speed drops, and the NCC's public description goes no further than "simulating restricted mobile network use".
 
-One figure is in circulation. [The Record reported](https://therecord.media/taiwan-mobile-5g-speed-reductions-han-kuang){target="_blank"} that speeds will drop to about 1% of normal capacity, citing local media citing government planning documents. It has not been officially confirmed and appears in none of the announcements. What those thirty minutes will actually look like has no verifiable public record.
+One figure is in circulation. [The Record reported](https://therecord.media/taiwan-mobile-5g-speed-reductions-han-kuang){target="_blank"} that speeds will drop to about 1% of normal capacity, citing local media citing government planning documents. It has not been officially confirmed and appears in none of the announcements. What those thirty minutes will actually look like has no verifiable public record. This post is about whether a public measure can be verified, not about whether the exercise itself is warranted.
 
 <!-- more -->
 
@@ -37,19 +37,19 @@ Then set three alarms for `14:15`, `14:35`, and `15:10`. The real obstacle is re
 
 Fixed lines and Wi-Fi are entirely unaffected by the drill, so a measurement taken over Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting.
 
-Turn off VPNs and tools like Tailscale that change where your traffic exits. With a VPN in the path, the test measures the provider's link rather than your carrier's, and the recorded ASN becomes theirs, so the throttle never shows up.
+Turn any VPN off. With a VPN in the path, the test measures the provider's link rather than your carrier's, and the recorded ASN becomes theirs, so the throttle never shows up. Tailscale by default only carries traffic between your own devices and leaves ordinary outbound traffic alone, but switch it off too if you use an exit node.
 
-After a run completes, the results page shows the network name and ASN (the carrier's network number), which confirms the measurement ran on mobile and on your own carrier.
+After a run completes, the results page shows the network name and ASN (the global number for an autonomous network, held by carriers, companies, and universities alike), which confirms the measurement ran on mobile and on your own carrier.
 
 !!! warning "Check your mobile data allowance first"
 
-    The `ndt` test inside the Performance group measures throughput, so it deliberately saturates whatever bandwidth is available. The app states an estimate before you start, currently 5 to 200 MB and about 1 minute 30 seconds, with the actual figure scaling with connection speed. The 14:15 run before the throttle is the most expensive one; the 14:35 run during the throttle uses far less, because bandwidth is already constrained.
+    The `ndt` test inside the Performance group measures throughput, so it deliberately saturates whatever bandwidth is available. The app states an estimate before you start, currently 5 to 200 MB and about 1 minute 30 seconds, with the actual figure scaling with connection speed. The 14:35 run during the throttle costs least, because bandwidth is already constrained. Both 14:15 and 15:10 run at normal speed and will land at the top of that estimate.
 
-    On a metered plan, running only 14:35 and 15:10 is still a real contribution.
+    On a metered plan, run 14:35 and pick either 14:15 or 15:10 as the comparison; two runs are enough to compare.
 
 ### Two: run the built-in Performance tests
 
-Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (video streaming quality), which are the two tests this needs, and it is available on both Android and iOS.
+Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (which probes available bandwidth the way an adaptive video stream would), which are the two tests this needs, and it is available on both Android and iOS.
 
 <figure markdown="span">
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
@@ -79,13 +79,13 @@ If you want to contribute more, add a run of the Circumvention group at 14:35. I
 
 ## The privacy trade-off, before you tap run
 
-OONI's published measurements are all public. They include the ASN you are on and a timestamp, and they do not include your personal IP address.
+Two separate databases are involved, and the distinction decides whether you want to run this. OONI's own published measurements are all public, and they include the ASN you are on and a timestamp but not your personal IP address. The `ndt` test in the Performance group additionally sends data to [M-Lab](https://www.measurementlab.net/){target="_blank"}, a different organisation with a different dataset and different rules.
 
-The Performance group carries one additional exposure that deserves its own paragraph. The `ndt` test measures against [M-Lab](https://www.measurementlab.net/){target="_blank"} servers, and M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study. The public dataset is not anonymised unless an individual exercises their right to erasure under GDPR or LGPD.
+M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study, without anonymising the public dataset. The erasure route the policy offers runs through GDPR and LGPD, which cover data subjects in the EU and Brazil; users in Taiwan fall outside both, and whether an equivalent request would be honoured is unclear. The app's own Performance screen carries a matching disclaimer, noting that these tests run through third-party servers and that your IP address cannot be guaranteed to stay uncollected.
 
-Running `ndt` therefore writes your current public IP address into a permanently retained public dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Even so, whether to leave that record is your decision, and it is one to make before tapping run rather than after.
+Running `ndt` therefore writes your current public IP address into a public, long-retained dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Whether to leave that record is your decision.
 
-The app's own Performance screen carries a disclaimer to the same effect, noting that these tests run through third-party servers and that your IP address cannot be guaranteed to stay uncollected. Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
+Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
 
 ## The central Taiwan drill already showed what happens
 
@@ -94,7 +94,7 @@ The same throttle ran in seven central counties on 10 August, 14:30 to 15:00 Tai
 | Test | Measurements, whole country | Network |
 |---|---|---|
 | `ndt` (connection speed) | 1 | `AS131584` Taiwan Intelligent Fiber Optic Network, fixed line |
-| `dash` (video streaming quality) | 1 | same fixed-line ASN |
+| `dash` (streaming bandwidth probe) | 1 | same fixed-line ASN |
 | `web_connectivity` (site reachability) | 803 | almost entirely fixed line, 593 of them HiNet |
 
 Chunghwa Telecom Mobile (`AS17421`) recorded zero. FarEasTone (`AS9674`) recorded zero.
@@ -143,6 +143,8 @@ The throttle's reach into circumvention tools is a separate question. Whether To
 
 One caveat for interpretation: `ndt` measures against M-Lab servers, so the resulting figure includes both the last mile and the international path to the nearest M-Lab node, and a single measurement cannot separate the two.
 
+One more variable shapes the outcome. The official announcements list affected service types, which reads like application-class traffic management, while the reported 1% figure reads like a blanket bandwidth cap. The two mean different things here: under a blanket cap, `ndt` measures the throttle directly; under service classification, `ndt` traffic to M-Lab may not fall into a restricted class and could come back near normal speed. That cannot be settled in advance, and the measurements themselves will show which it is.
+
 ## Join in
 
 Three things can be done right now: install [OONI Probe](https://ooni.org/install/){target="_blank"} and run it once, set alarms for `14:15`, `14:35`, and `15:10`, and pass this on to anyone living or working in the seven northern counties. Chunghwa Telecom and FarEasTone subscribers are especially welcome, since both carriers have almost no performance measurements at all. At the current density, ten phones per carrier would already be an order-of-magnitude improvement.
@@ -156,14 +158,15 @@ Afterwards you can find your own measurement in [OONI Explorer](https://explorer
 This campaign addresses one event, but the method is reusable. OONI data has three entry points, serving quite different purposes:
 
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**: a web interface for inspecting individual measurements and country or ASN trends, with no code required.
-- **Aggregation API**: `https://api.ooni.org/api/v1/aggregation`, no authentication and no key, sliceable by country, test, ASN, and time. Every figure in this post came from it. Query times are always UTC, which is Taipei time minus eight hours.
+- **Aggregation API**: `https://api.ooni.org/api/v1/aggregation`, no authentication and no key, sliceable by country, test, and ASN. The 30-day ASN distribution and shares in this post come from it. Its `since` and `until` accept dates only, and passing a time returns a `date_from_datetime_inexact` error, so it suits day-level trends and coarser.
+- **Measurements API**: `https://api.ooni.org/api/v1/measurements`, also unauthenticated, accepts second-precision windows and returns individual records. The central Taiwan 30-minute table in this post comes from it.
 - **AWS S3 public dataset**: `ooni-data-eu-fra`, raw per-measurement JSON, for research needing measurement internals or large-scale analysis. Raw data lands in S3 with a lag of several hours to about a day. Access paths and CSV output formats are documented in [ASN observation data extraction and analysis](../../community/asn-coverage-howto.md), along with the community-maintained tooling.
 
-For this drill specifically, the query is `probe_cc=TW`, `test_name=ndt` (or `dash`), `since=2026-08-13T06:00:00Z`, `until=2026-08-13T08:00:00Z`, split by `probe_asn` into `24158`, `17421`, and `9674`. To work out which test answers a given question, the [OONI nettest reference](../../community/ooni-nettests-map.md) lists what each test measures, its spec status, and whether Taiwan has data for it.
+For this drill specifically, a 30-minute window needs the measurements endpoint: `probe_cc=TW`, `test_name=ndt` (or `dash`), `since=2026-08-13T06:00:00Z`, `until=2026-08-13T08:00:00Z`. Each returned record carries `probe_asn`, which you then group into `24158`, `17421`, and `9674`. All times are UTC, which is Taipei time minus eight hours. To work out which test answers a given question, the [OONI nettest reference](../../community/ooni-nettests-map.md) lists what each test measures, its spec status, and whether Taiwan has data for it.
 
 Two things to keep in mind when using this data.
 
-The most common misreading is treating an anomaly as a block. OONI's `anomaly` flag only means a test did not complete as expected, and the causes include censorship, an unstable network, a transient ISP fault, and bugs in the test itself, so treating anomaly rates as blocking rates produces false accusations. Over the last 30 days the `tor` test recorded `21.2%` in Canada, `22.2%` in Switzerland, and `41.1%` in New Zealand, none of which censor. Mid-range values are noise, and only the extreme high end corresponds to reality.
+The most common misreading is treating an anomaly as a block. OONI's `anomaly` flag only means a test did not complete as expected, and the causes include censorship, an unstable network, a transient ISP fault, and bugs in the test itself, so treating anomaly rates as blocking rates produces false accusations. Over the last 30 days the `tor` test recorded `16.3%` in Canada, `22.0%` in Switzerland, and `20.2%` in New Zealand, none of which censor. Mid-range values are noise, and only the extreme high end corresponds to reality.
 
 On licensing, OONI's published measurement data is CC BY-NC-SA 4.0, which prohibits commercial use and requires derivative works to be released under the same licence. Cite the source when quoting figures, and note that merging OONI data with other sources into a new dataset brings the whole result under that licence.
 
