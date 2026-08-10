@@ -37,7 +37,7 @@ description: "8 月 13 日周四 14:30 到 15:00，台湾北部七县市的移�
 
 固网与 Wi-Fi 在演练中完全不受影响，测量若在 Wi-Fi 上完成，结果等于零。手机常会自动回连办公室或住家的 Wi-Fi，执行前请先确认已切到移动数据。
 
-VPN 也要先关闭。流量绕经 VPN 之后，测量结果只反映 VPN 运营商那段线路，记录下来的 ASN 也会变成对方的，测不到运营商的降速。Tailscale 预设只处理自己设备之间的流量，不影响一般对外连接，若有启用 exit node 则要一并关掉。
+VPN 与 Tailscale 都要先关闭。一般 VPN 会把流量绕出去，测量结果只反映 VPN 运营商那段线路，记录下来的 ASN 也会变成对方的。Tailscale 就算没有启用 exit node，在 iOS 与 Android 上仍是透过系统的 VPN 机制运作，OONI Probe 会把网络类型记成 `vpn` 而不是 `mobile`，那笔数据就标不出是移动网络测到的。App 侦测到 VPN 时会跳出提醒，看到提醒请先关掉再运行。
 
 测量完成后可在结果页看到网络名称与 ASN（自治网络的全域编号，运营商、企业、学校都有各自的号码），确认那笔确实在移动网络上完成，名称为自己的运营商。
 
@@ -155,7 +155,7 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 ## 延伸：之后如何用 OONI 佐证研究
 
-本次号召针对单一事件，方法本身可以重复使用。OONI 的数据有三个入口，用途各不相同：
+本次号召针对单一事件，方法本身可以重复使用。OONI 的数据有四个入口，用途各不相同：
 
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：网页界面，适合查单笔测量、看某个国家或 ASN 的趋势，无须写程序。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免验证免密钥，可依国家、测项、ASN 切分做统计。本文的 30 天 ASN 分布与比率出自这里。`since` 与 `until` 只接受日期，带上时间会回 `date_from_datetime_inexact` 错误，所以它适合看天级以上的趋势。

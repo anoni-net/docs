@@ -37,7 +37,7 @@ description: "8 月 13 日週四 14:30 到 15:00，北部七縣市的行動網�
 
 固網與 Wi-Fi 在演練中完全不受影響，量測若在 Wi-Fi 上完成，結果等於零。手機常會自動回連辦公室或住家的 Wi-Fi，執行前請先確認已切到行動數據。
 
-VPN 也要先關閉。流量繞經 VPN 之後，量測結果只反映 VPN 業者那段線路，紀錄下來的 ASN 也會變成對方的，量不到電信商的降速。Tailscale 預設只處理自己裝置之間的流量，不影響一般對外連線，若有啟用 exit node 則要一併關掉。
+VPN 與 Tailscale 都要先關閉。一般 VPN 會把流量繞出去，量測結果只反映 VPN 業者那段線路，紀錄下來的 ASN 也會變成對方的。Tailscale 就算沒有啟用 exit node，在 iOS 與 Android 上仍是透過系統的 VPN 機制運作，OONI Probe 會把網路類型記成 `vpn` 而不是 `mobile`，那筆資料就標不出是行動網路量到的。App 偵測到 VPN 時會跳出提醒，看到提醒請先關掉再執行。
 
 量測完成後可在結果頁看到網路名稱與 ASN（自治網路的全域編號，電信商、企業、學校都有各自的號碼），確認那筆確實在行動網路上完成，名稱為自己的電信商。
 
@@ -155,7 +155,7 @@ M-Lab 的[隱私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 ## 延伸：之後如何用 OONI 佐證研究
 
-本次號召針對單一事件，方法本身可以重複使用。OONI 的資料有三個入口，用途各不相同：
+本次號召針對單一事件，方法本身可以重複使用。OONI 的資料有四個入口，用途各不相同：
 
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：網頁介面，適合查單筆量測、看某個國家或 ASN 的趨勢，無須寫程式。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免驗證免金鑰，可依國家、測項、ASN 切分做統計。本文的 30 天 ASN 分布與比率出自這裡。`since` 與 `until` 只接受日期，帶上時間會回 `date_from_datetime_inexact` 錯誤，所以它適合看天級以上的趨勢。

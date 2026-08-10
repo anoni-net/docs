@@ -37,7 +37,7 @@ Then set three alarms for `14:15`, `14:35`, and `15:10`. The real obstacle is re
 
 Fixed lines and Wi-Fi are entirely unaffected by the drill, so a measurement taken over Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting.
 
-Turn any VPN off. With a VPN in the path, the test measures the provider's link rather than your carrier's, and the recorded ASN becomes theirs, so the throttle never shows up. Tailscale by default only carries traffic between your own devices and leaves ordinary outbound traffic alone, but switch it off too if you use an exit node.
+Turn off both VPNs and Tailscale. A VPN routes traffic elsewhere, so the test measures the provider's link and records their ASN instead of your carrier's. Tailscale runs through the system VPN mechanism on iOS and Android even without an exit node, so OONI Probe records the network type as `vpn` rather than `mobile`, and the measurement can no longer be identified as coming from a mobile network. The app raises a warning when it detects a VPN, so switch it off before running if you see one.
 
 After a run completes, the results page shows the network name and ASN (the global number for an autonomous network, held by carriers, companies, and universities alike), which confirms the measurement ran on mobile and on your own carrier.
 
@@ -155,7 +155,7 @@ Afterwards you can find your own measurement in [OONI Explorer](https://explorer
 
 ## Appendix: using OONI as research evidence
 
-This campaign addresses one event, but the method is reusable. OONI data has three entry points, serving quite different purposes:
+This campaign addresses one event, but the method is reusable. OONI data has four entry points, serving quite different purposes:
 
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**: a web interface for inspecting individual measurements and country or ASN trends, with no code required.
 - **Aggregation API**: `https://api.ooni.org/api/v1/aggregation`, no authentication and no key, sliceable by country, test, and ASN. The 30-day ASN distribution and shares in this post come from it. Its `since` and `until` accept dates only, and passing a time returns a `date_from_datetime_inexact` error, so it suits day-level trends and coarser.
