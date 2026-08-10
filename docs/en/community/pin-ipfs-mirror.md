@@ -50,7 +50,7 @@ Nobody has to tell you "a new version is out." IPNS is the shared sync point, an
     The site's IPFS coordinates (public values, use them directly):
 
     - IPNS name: `k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
-    - Node Peer ID: `__PEER_ID__` (only needed if you set up peering)
+    - Node Peer ID: `12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9` (only needed if you set up peering)
     - Open in a browser: [https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 Each run does this: resolve IPNS to the current CID, pin the new CID, unpin the previous one, reclaim space. The script confirms the new version pinned successfully *before* dropping the old one. If resolving or fetching fails, it keeps the copy you already have and never empties your node.
@@ -214,7 +214,7 @@ Edit `~/.ipfs/config` and add a `Peering` block at the top level:
 ```json
 "Peering": {
   "Peers": [
-    { "ID": "__PEER_ID__" }
+    { "ID": "12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9" }
   ]
 }
 ```
@@ -224,7 +224,7 @@ Edit `~/.ipfs/config` and add a `Peering` block at the top level:
 Check that it connected:
 
 ```bash
-ipfs swarm peers | grep __PEER_ID__
+ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 Peering here is one-way: the community node has no matching entry, so keeping the connection alive is your side's job. The [kubo config docs](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} warn that one-way peering consumes connection resources on the other node, and that load concentrates on a single machine as the number of mirrors grows. Turn it on if you actually hit slow fetches, and skip this section if things already work.

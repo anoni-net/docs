@@ -50,7 +50,7 @@ pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟�
     文件站的 IPFS 坐标（公开值，可以直接用）：
 
     - IPNS 名称：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
-    - 节点 Peer ID：`__PEER_ID__`（设定 peering 时才会用到）
+    - 节点 Peer ID：`12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9`（设定 peering 时才会用到）
     - 浏览器打开看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 脚本每次执行的动作是：解析 IPNS 取得当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
@@ -214,7 +214,7 @@ pin 只靠 IPNS 名称就能完成，内容交给 DHT 去找。第一次要把�
 ```json
 "Peering": {
   "Peers": [
-    { "ID": "__PEER_ID__" }
+    { "ID": "12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9" }
   ]
 }
 ```
@@ -224,7 +224,7 @@ pin 只靠 IPNS 名称就能完成，内容交给 DHT 去找。第一次要把�
 确认连上了：
 
 ```bash
-ipfs swarm peers | grep __PEER_ID__
+ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 peering 是单向设定，社群节点那端没有对应条目，连接的保活责任落在你这边。[kubo 官方文档](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒过，单向 peering 会占用对方节点的连接资源，镜像数量变多之后负担会集中在同一台。建议实际遇到抓取不顺再开，平常运作正常就跳过。
