@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 專案概述
 
-此專案是「匿名網路社群 anoni.net」的文件系統，主要包含三個子專案：
+此專案是「匿名網路社群 anoni.net」的文件系統，主要包含三個子專案與一組共用腳本：
 
 1. **docs/** - MkDocs 驅動的多語系文件網站（zh-TW, zh-CN, en）
 2. **pulse/** - Tor 中繼監控系統（FastAPI + PostgreSQL）
 3. **asn_coverage/** - OONI 觀測資料與 ASN 涵蓋率分析工具
+4. **tools/** - 跨子專案的共用腳本（文件編輯標準掃描、快取清除、地球儀資料與版面檢查）
 
 ### 整體架構
 
@@ -16,7 +17,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 anoni-net-docs/
 ├── docs/           # 文件網站 (MkDocs Material)
 ├── pulse/          # Tor 監控系統 (FastAPI backend + PostgreSQL)
-└── asn_coverage/   # OONI ASN 分析工具 (Python CLI)
+├── asn_coverage/   # OONI ASN 分析工具 (Python CLI)
+└── tools/          # 共用腳本 (docs linter、快取清除、games 資料與檢查)
 ```
 
 ### 授權一覽
@@ -38,6 +40,15 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 |------|------|----------|
 | `pulse/backend/ooni.py` | Pulse 服務內建的 **OONI API** 客戶端（與監控後端一併部署） | OONI API |
 | `asn_coverage/ooni.py` | **批次**下載 S3 觀測資料、ASN 涵蓋分析 CLI | OONI AWS S3 公開資料集 |
+
+### tools/ 共用腳本
+
+| 群組 | 檔案 | 用途 |
+|------|------|------|
+| 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。只掃 zh-TW 與 zh-CN，英文版的破折號與分號屬正常用法，不在範圍內。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
+| 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，逐批清除 Cloudflare 快取（每批 30 條）|
+| 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
+| 地球儀版面檢查 | `check_*.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
 
 ## 開發環境設置
 
@@ -229,11 +240,27 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 使用 GitHub Actions 自動建置與部署：
 
-- **build_docs.yml**: 建置多語系文件並上傳至 S3
+- **build_docs.yml**: 建置多語系文件並發布
   - 觸發條件: push to `docs` branch 或手動觸發
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
-  - 清理並上傳至 S3
+  - 清理並上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`
+  - 上傳後由 `tools/cf_purge.py` 清除這次產出網址的 Cloudflare 快取，範圍限 `/docs/`，不動 zone 內其他服務
+
+  **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 跑完，內容就已經上線，不需要額外的手動發布步驟。發布指令：
+
+  ```bash
+  git push origin origin/main:refs/heads/docs
+  ```
+
+- **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 跑 `tools/docs_style_lint.py`
+  - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md` 與 linter 本身，英文版不在範圍內
+  - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
+  - 目前是 warn 階段，問題以 annotation 標在變更行上，`continue-on-error` 讓 job 維持綠燈。要改成 blocking 需拿掉 `continue-on-error` 並在 repo 設定加上 branch protection
+
+- **games-checks.yml**: 「Tor 中繼地球儀」的互動與版面檢查（headless Chrome）
+  - 觸發路徑：`docs/zh-TW/games/tor-network/**`、`tools/check_*.mjs`
+  - 檢查項目：捏合放開不彈開、擋掉 iOS Safari 雙擊放大、網址關注區域的取景、變電所容量計版面（280 座 × 三語系 × 寬窄視窗）
 
 - **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
   - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
@@ -248,6 +275,9 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - 部落格文章放在 `docs/{lang}/blog/posts/` 目錄
 - 使用 YAML front matter 設定文章 metadata（title, date, categories）
 - 支援 Vega-Lite 圖表（使用 ````vegalite` code fence）
+- 寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)（原始檔 `docs/zh-TW/community/contributor-handbook.md`）的「寫作風格規範」一節。要新增或修改規則先改那裡
+- 送 PR 前可先跑 `python3 tools/docs_style_lint.py <path>` 自檢，CI 會對變更的中文 Markdown 跑同一支
+- 語系的資料夾與對外 URL 規則不同：`docs/zh-TW/` 對應 `https://anoni.net/docs/`（預設語系不帶語系區段），`docs/zh-CN/` 對應 `/docs/zh-cn/`（URL 小寫），`docs/en/` 對應 `/docs/en/`
 
 ### 修改 API 時
 
@@ -274,5 +304,6 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 行長度: 100 字元
   - 啟用規則: E (錯誤), F (pyflakes), I (import sorting)
 
+- 中文文件：使用 `tools/docs_style_lint.py`，規則出自貢獻者百科，目前為 warn 階段不擋 merge
 - 使用 uv 管理所有 Python 專案依賴
 - 所有專案使用 Python 3.12+
