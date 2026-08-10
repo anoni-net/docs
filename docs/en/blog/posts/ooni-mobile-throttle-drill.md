@@ -21,6 +21,8 @@ The announcements from the Executive Yuan, the NCC, and the carriers all set out
 
 One figure is in circulation. [The Record reported](https://therecord.media/taiwan-mobile-5g-speed-reductions-han-kuang){target="_blank"} that speeds will drop to about 1% of normal capacity, citing local media citing government planning documents. It has not been officially confirmed and appears in none of the announcements. What those thirty minutes will actually look like has no verifiable public record. This post is about whether a public measure can be verified, not about whether the exercise itself is warranted.
 
+If you are in one of those seven counties, your phone is going to slow down for that half hour regardless. Rather than just waiting it out, you might as well leave a record behind.
+
 <!-- more -->
 
 ## What to do on 13 August
@@ -31,13 +33,13 @@ All times are Taipei time (UTC+8), with UTC in the tables. The drill window is *
 
 Install [OONI Probe](https://ooni.org/install/){target="_blank"}: free and open source, on the App Store, Google Play, and F-Droid. It is built by OONI to turn network interference and connection quality into verifiable public data ([more about the project](https://ooni.org/about/){target="_blank"}). First launch runs through an onboarding flow, so installing on the day itself is cutting it too fine. Run it once after installing to confirm it completes normally.
 
-Then set three alarms for `14:15`, `14:35`, and `15:10`. The real obstacle is remembering mid-afternoon, not the tapping.
+Then set an alarm for `14:35`, the run that matters most, and add `14:15` and `15:10` if you can. The real obstacle is remembering mid-afternoon, not the tapping.
 
 ### One: turn Wi-Fi and any VPN off, use mobile data
 
 Fixed lines and Wi-Fi are entirely unaffected by the drill, so a measurement taken over Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting.
 
-Turn off both VPNs and Tailscale. A VPN routes traffic elsewhere, so the test measures the provider's link and records their ASN instead of your carrier's. Tailscale runs through the system VPN mechanism on iOS and Android even without an exit node, so OONI Probe records the network type as `vpn` rather than `mobile`, and the measurement can no longer be identified as coming from a mobile network. The app raises a warning when it detects a VPN, so switch it off before running if you see one.
+Turn off both VPNs and Tailscale. A VPN routes traffic elsewhere, so the test measures the provider's link and records their ASN instead of your carrier's. Tailscale runs through the system VPN mechanism on iOS and Android even without an exit node, so OONI Probe records the network type as `vpn` rather than `mobile`, and the measurement can no longer be identified as coming from a mobile network. The app raises a warning when it detects a VPN, so switch it off before running if you see one. Remember to turn Tailscale back on afterwards, which is easy to forget if you rely on it to reach a work network.
 
 After a run completes, the results page shows the network name and ASN (the global number for an autonomous network, held by carriers, companies, and universities alike), which confirms the measurement ran on mobile and on your own carrier.
 
@@ -55,21 +57,23 @@ Open the app, tap Tests, choose Performance, tick the tests you want, then tap r
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
 </figure>
 
-### Three: run it at all three times
+### Three: run 14:35 at minimum
 
-| Taipei (UTC+8) | UTC | Purpose |
-|---|---|---|
-| `14:15` | `06:15` | reference point before the throttle |
-| `14:35` | `06:35` | during the throttle |
-| `15:10` | `07:10` | after recovery |
+The run during the throttle, at 14:35, matters most. That one alone is worth submitting, since it compares against other participants and against the same hour the day before. Add the other two when time allows, because a single phone's own before-and-after is the cleanest comparison.
+
+| Taipei (UTC+8) | UTC | Purpose | Priority |
+|---|---|---|---|
+| `14:35` | `06:35` | during the throttle | essential |
+| `14:15` | `06:15` | reference point before the throttle | if you can |
+| `15:10` | `07:10` | after recovery | if you can |
 
 What matters most is using the same handset and the same subscription for all three, and completing every run on mobile data. Staying in one place makes the results easier to compare, but moving between runs does not disqualify anything, as long as the phone has not slipped back onto Wi-Fi.
 
 If you can spare one more, run the Performance card at `14:35` on Wednesday 12 August. One extra measurement gives the following day's comparison a same-time reference at no additional effort.
 
-!!! note "Catching only one of the three still helps"
+!!! note "Reading this after 14:30"
 
-    If you are reading this at or after 14:30, run 14:35 first and add 15:10 afterwards. A single time point still compares against other participants and against the previous day's run at the same hour.
+    Run 14:35 straight away, or 15:10 if that window has passed. A single measurement is still worth submitting.
 
 !!! note "Upload failures during the throttle are expected"
 
@@ -79,13 +83,13 @@ If you want to contribute more, add a run of the Circumvention group at 14:35. I
 
 ## The privacy trade-off, before you tap run
 
-Two separate databases are involved, and the distinction decides whether you want to run this. OONI's own published measurements are all public, and they include the ASN you are on and a timestamp but not your personal IP address. The `ndt` test in the Performance group additionally sends data to [M-Lab](https://www.measurementlab.net/){target="_blank"}, a different organisation with a different dataset and different rules.
+The short version: the performance tests leave your current public IP in M-Lab's public dataset, while mobile IP addresses are dynamic and tied to no account, which makes linking a record to a person difficult in practice. If you would rather not leave that record, run the Websites group (`web_connectivity`) instead, which does not involve M-Lab. The full explanation follows.
+
+Two separate databases are involved. OONI's own published measurements are all public, and they include the ASN you are on and a timestamp but not your personal IP address. The `ndt` test in the Performance group additionally sends data to [M-Lab](https://www.measurementlab.net/){target="_blank"}, a different organisation with a different dataset and different rules.
 
 M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study, without anonymising the public dataset. The erasure route the policy offers runs through GDPR and LGPD, which cover data subjects in the EU and Brazil; users in Taiwan fall outside both, and whether an equivalent request would be honoured is unclear. The app's own Performance screen carries a matching disclaimer, noting that these tests run through third-party servers and that your IP address cannot be guaranteed to stay uncollected.
 
 Running `ndt` therefore writes your current public IP address into a public, long-retained dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Whether to leave that record is your decision.
-
-Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
 
 ## The central Taiwan drill already showed what happens
 
@@ -145,9 +149,11 @@ One caveat for interpretation: `ndt` measures against M-Lab servers, so the resu
 
 One more variable shapes the outcome. The official announcements list affected service types, which reads like application-class traffic management, while the reported 1% figure reads like a blanket bandwidth cap. The two mean different things here: under a blanket cap, `ndt` measures the throttle directly; under service classification, `ndt` traffic to M-Lab may not fall into a restricted class and could come back near normal speed. That cannot be settled in advance, and the measurements themselves will show which it is.
 
+Participation density is a variable too. `ndt` saturates the available bandwidth, so several phones on the same cell running it in the same minute compete for whatever throughput remains, and part of any low reading would come from participants crowding each other rather than from the carrier. At the scale this campaign targets, ten phones per carrier spread across seven counties, collisions are unlikely, but the number of concurrent participants should still be recorded alongside the results.
+
 ## Join in
 
-Three things can be done right now: install [OONI Probe](https://ooni.org/install/){target="_blank"} and run it once, set alarms for `14:15`, `14:35`, and `15:10`, and pass this on to anyone living or working in the seven northern counties. Chunghwa Telecom and FarEasTone subscribers are especially welcome, since both carriers have almost no performance measurements at all. At the current density, ten phones per carrier would already be an order-of-magnitude improvement.
+Three things can be done right now: install [OONI Probe](https://ooni.org/install/){target="_blank"} and run it once, set an alarm for `14:35`, and pass this on to anyone living or working in the seven northern counties. Chunghwa Telecom and FarEasTone subscribers are especially welcome, since both carriers have almost no performance measurements at all. At the current density, ten phones per carrier would already be an order-of-magnitude improvement.
 
 People outside the seven counties can measure at the same times too. Measurements from outside the throttled area act as a control group, helping separate changes caused by the drill from ordinary variation on the day.
 
