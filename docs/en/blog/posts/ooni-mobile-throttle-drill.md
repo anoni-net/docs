@@ -31,25 +31,27 @@ Install [OONI Probe](https://ooni.org/install/){target="_blank"}: free and open 
 
 Then set three alarms for `14:15`, `14:35`, and `15:10`. The real obstacle is remembering mid-afternoon, not the tapping.
 
-### One: turn Wi-Fi off, use mobile data
+### One: turn Wi-Fi and any VPN off, use mobile data
 
 Fixed lines and Wi-Fi are entirely unaffected by the drill, so a measurement taken over Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting.
 
-After a run completes, the results page shows the network name and ASN (the carrier's network number), which confirms the measurement was taken on mobile.
+Turn off VPNs and tools like Tailscale that change where your traffic exits. With a VPN in the path, the test measures the provider's link rather than your carrier's, and the recorded ASN becomes theirs, so the throttle never shows up.
+
+After a run completes, the results page shows the network name and ASN (the carrier's network number), which confirms the measurement ran on mobile and on your own carrier.
 
 !!! warning "Check your mobile data allowance first"
 
-    The `ndt` test inside the Performance card measures throughput, so it deliberately saturates whatever bandwidth is available. How much data that consumes scales with connection speed, and OONI publishes no fixed figure. The 14:15 run before the throttle is the most expensive one; the 14:35 run during the throttle uses far less, because bandwidth is already constrained.
+    The `ndt` test inside the Performance group measures throughput, so it deliberately saturates whatever bandwidth is available. How much data that consumes scales with connection speed, and OONI publishes no fixed figure. The 14:15 run before the throttle is the most expensive one; the 14:35 run during the throttle uses far less, because bandwidth is already constrained.
 
     On a metered plan, running only 14:35 and 15:10 is still a real contribution.
 
-### Two: run the built-in Performance card
+### Two: run the built-in Performance tests
 
-Open the app, select the Performance card, tap run. The card contains `ndt` (connection speed) and `dash` (video streaming quality), which are the two tests this needs, and it is available on both Android and iOS.
+Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (video streaming quality), which are the two tests this needs, and it is available on both Android and iOS.
 
 !!! tip "Please do not use an OONI Run link"
 
-    The instinct is to share an [OONI Run v2](../../tools/ooni-run-v2.md) link. Please avoid it this time. OONI Run v2 is currently Android-only, so iOS users cannot open it. The built-in Performance card works on both platforms.
+    The instinct is to share an [OONI Run v2](../../tools/ooni-run-v2.md) link. Please avoid it this time. OONI Run v2 is currently Android-only, so iOS users cannot open it. The built-in Performance tests work on both platforms.
 
 ### Three: run it at all three times
 
@@ -71,17 +73,17 @@ If you can spare one more, run the Performance card at `14:35` on Wednesday 12 A
 
     Results have to be uploaded, and bandwidth is deliberately constrained during the window, so the upload may stall or fail. There is no need to run the test again. OONI Probe queues results and submits them once the network recovers.
 
-If you want to contribute more, add a run of the Circumvention card at 14:35. It includes Tor and Psiphon connectivity tests, which show whether the throttle reaches circumvention tools.
+If you want to contribute more, add a run of the Circumvention group at 14:35. It includes Tor and Psiphon connectivity tests, which show whether the throttle reaches circumvention tools.
 
 ## The privacy trade-off, before you tap run
 
 OONI's published measurements are all public. They include the ASN you are on and a timestamp, and they do not include your personal IP address.
 
-The Performance card carries one additional exposure that deserves its own paragraph. The `ndt` test measures against [M-Lab](https://www.measurementlab.net/){target="_blank"} servers, and M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study. The public dataset is not anonymised unless an individual exercises their right to erasure under GDPR or LGPD.
+The Performance group carries one additional exposure that deserves its own paragraph. The `ndt` test measures against [M-Lab](https://www.measurementlab.net/){target="_blank"} servers, and M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study. The public dataset is not anonymised unless an individual exercises their right to erasure under GDPR or LGPD.
 
 Running `ndt` therefore writes your current public IP address into a permanently retained public dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Even so, whether to leave that record is your decision, and it is one to make before tapping run rather than after.
 
-Anyone who wants to contribute reachability data without leaving an IP record can run the Websites card instead, which does not involve M-Lab.
+Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
 
 ## The central Taiwan drill already showed what happens
 
