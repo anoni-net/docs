@@ -229,11 +229,18 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 使用 GitHub Actions 自動建置與部署：
 
-- **build_docs.yml**: 建置多語系文件並上傳至 S3
+- **build_docs.yml**: 建置多語系文件並發布
   - 觸發條件: push to `docs` branch 或手動觸發
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
-  - 清理並上傳至 S3
+  - 清理並上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`
+  - 上傳後由 `tools/cf_purge.py` 清除這次產出網址的 Cloudflare 快取，範圍限 `/docs/`，不動 zone 內其他服務
+
+  **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 跑完，內容就已經上線，不需要額外的手動發布步驟。發布指令：
+
+  ```bash
+  git push origin origin/main:refs/heads/docs
+  ```
 
 - **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
   - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
