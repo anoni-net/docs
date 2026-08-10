@@ -6,7 +6,7 @@ icon: simple/ipfs
 
 # :simple-ipfs: Help pin the site's IPFS mirror
 
-Alongside the main site, the anoni.net docs are also published as an IPFS mirror, so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and right now only the community's own node does. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
+Alongside the main site, the anoni.net docs are also published as an IPFS mirror, so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and only a handful of nodes currently serve this mirror, with the community's own node carrying most of it. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
 
 This page walks you through running one always-on IPFS node plus a small scheduled script that keeps up with the latest version automatically. It works the same on Windows, Linux, and macOS, with or without Docker.
 
@@ -29,6 +29,18 @@ If IPFS is new to you, one idea makes the rest of this page make sense. For the 
 
 That is exactly what the script does: resolve IPNS to the current CID, pin that new CID, then drop the old one. Because the CID changes, this has to run periodically, which is why it's scheduled.
 
+### Three lookalike identifiers
+
+IPFS has three identifiers that look alike and do different jobs. Paste one into the wrong field and the tool rejects it outright.
+
+| Identifier | Starts with | Changes? | What it's for |
+|---|---|---|---|
+| CID | `bafybei…` | New one every publish | Pointing at one specific version |
+| IPNS name | `k51qzi…` | Fixed | Getting the latest version, which is what pinning uses |
+| Peer ID | `12D3KooW…` | Fixed | Pointing at one specific node |
+
+Pinning the docs site only needs the IPNS name. The Peer ID comes up when you want your own node to hold a steady connection to the community node, covered under "Advanced: keep a steady connection to the community node" below.
+
 ## How it works (why a schedule is enough, no notification needed)
 
 Nobody has to tell you "a new version is out." IPNS is the shared sync point, and your script resolves it to get the latest CID by itself. When the site publishes, it just updates IPNS as usual; your side resolves every few hours, notices the change, and pins the new version. No manual coordination anywhere.
@@ -38,6 +50,7 @@ Nobody has to tell you "a new version is out." IPNS is the shared sync point, an
     The site's IPFS coordinates (public values, use them directly):
 
     - IPNS name: `k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
+    - Node Peer ID: `12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9` (only needed if you set up peering)
     - Open in a browser: [https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 Each run does this: resolve IPNS to the current CID, pin the new CID, unpin the previous one, reclaim space. The script confirms the new version pinned successfully *before* dropping the old one. If resolving or fetching fails, it keeps the copy you already have and never empties your node.
@@ -51,8 +64,10 @@ For pinning to fetch the content, your machine needs a continuously running IPFS
     Install [kubo](https://docs.ipfs.tech/install/command-line/){target="_blank"}, IPFS's official command-line implementation. On macOS you can use Homebrew:
 
     ```bash
-    brew install ipfs
+    brew install kubo
     ```
+
+    The Homebrew formula was renamed from `ipfs` to `kubo`. The old name still installs it, but the service commands below need the `kubo` name. Both Intel and Apple Silicon are supported.
 
     On Linux, download the kubo build for your architecture from the [official guide](https://docs.ipfs.tech/install/command-line/){target="_blank"}. Then initialize and start the daemon:
 
@@ -61,7 +76,13 @@ For pinning to fetch the content, your machine needs a continuously running IPFS
     ipfs daemon
     ```
 
-    To keep the daemon running long-term, use a systemd user service on Linux, or `brew services` / launchd on macOS. For a quick test, running `ipfs daemon` in the background is fine.
+    To keep the daemon running long-term, use a systemd user service on Linux. On macOS the Homebrew formula ships a service definition, so a single command keeps it resident and starts it at login:
+
+    ```bash
+    brew services start kubo
+    ```
+
+    For a quick test, running `ipfs daemon` in the background is fine.
 
 === "Windows"
 
@@ -184,10 +205,34 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 You can also open it on your local gateway and check it renders: `http://127.0.0.1:8080${CID}/`. Docker users: replace `ipfs` above with `docker exec ipfs_host ipfs`.
 
+## Advanced: keep a steady connection to the community node (optional)
+
+Pinning works off the IPNS name alone, and the DHT takes care of finding the content. Fetching a full mirror for the first time can drag on when DHT lookups are slow or come back empty. To hold a fixed connection between your node and the source node, configure kubo's peering.
+
+Edit `~/.ipfs/config` and add a `Peering` block at the top level:
+
+```json
+"Peering": {
+  "Peers": [
+    { "ID": "12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9" }
+  ]
+}
+```
+
+`Addrs` can be omitted, and kubo will look the addresses up in the DHT. Restart the daemon to apply. Docker users edit `./ipfs-data/config` instead, then run `docker compose restart`.
+
+Check that it connected:
+
+```bash
+ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
+```
+
+Peering here is one-way: the community node has no matching entry, so keeping the connection alive is your side's job. The [kubo config docs](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} warn that one-way peering consumes connection resources on the other node, and that load concentrates on a single machine as the number of mirrors grows. Turn it on if you actually hit slow fetches, and skip this section if things already work.
+
 ## Maintenance and notes
 
 - **It keeps up automatically.** When the site changes its CID, the next scheduled run pins the new version and drops the old one. You do nothing.
-- **Disk use stays flat.** After unpinning the old version the script runs a garbage collection, so only the latest version takes space. The site is a plain static site and isn't large.
+- **Disk use stays flat.** After unpinning the old version the script runs a garbage collection, so only the latest version takes space. A full mirror is about 220 MB (measured August 2026).
 - **It won't lose the copy you have.** The script pins the new version successfully before dropping the old one, and keeps your existing copy if resolving or downloading fails.
 - **To stop helping:** unpin the current version and remove the schedule. It doesn't affect any other node.
 - **Privacy and risk:** what you pin is public documentation, so there's no privacy concern. Offering IPFS pinning carries different legal risk across jurisdictions, so weigh that for where you operate.

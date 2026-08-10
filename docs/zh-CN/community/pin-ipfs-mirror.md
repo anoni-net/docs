@@ -6,7 +6,7 @@ icon: simple/ipfs
 
 # :simple-ipfs: 帮忙 pin 文件站的 IPFS 镜像
 
-anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站被封锁或下架时仍然读得到。IPFS 上的内容要有节点 pin 才会存活，目前只有社群自己的节点在 pin。你多架设一个节点帮忙 pin，网络上就多一份完整副本，抗删除的底气更足。
+anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站被封锁或下架时仍然读得到。IPFS 上的内容要有节点 pin 才会存活，目前提供文件站内容的节点很少，社群自己那台是主力。你多架设一个节点帮忙 pin，网络上就多一份完整副本，抗删除的底气更足。
 
 这页教你用一个常驻的 IPFS 节点，加一支自动跟上最新版本的定时脚本。整个过程对 Windows、Linux、macOS 都适用，有没有用 Docker 都可以。
 
@@ -27,7 +27,19 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
 - IPNS（InterPlanetary Name System）是一个固定不变的名字，永远指向「目前最新」的那个 CID。文件站的 IPNS 名字就是下面那串 `k51…`。
 - pin 的意思是「保证留住某个 CID 的内容」。pin 绑在 CID 上，不会自己跟着 IPNS 走。所以文件站一发新版，你上次 pin 的还是旧 CID。
 
-结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，这件事要定期重新执行，这就是为什么要设定时任务。
+结论就是这支脚本要做的事：先把 IPNS 换算成当前的 CID，再 pin 那个新 CID，然后放掉旧的。因为 CID 会变，换算与 pin 要定期重新执行，所以需要定时任务。
+
+### 三串标识符不要混用
+
+IPFS 上有三种长相接近的标识符，用途各自不同，贴错字段时工具会直接报错。
+
+| 标识符 | 开头 | 会不会变 | 用途 |
+|---|---|---|---|
+| CID | `bafybei…` | 每次发布都变 | 指定某一版内容 |
+| IPNS 名称 | `k51qzi…` | 固定 | 取得最新版，本页 pin 用这个 |
+| Peer ID | `12D3KooW…` | 固定 | 指定要连到哪一个节点 |
+
+pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟社群节点保持固定连接时才用得上，做法见下面的〈进阶：跟社群节点保持常连〉。
 
 ## 运作原理（为什么定时就够，不用等通知）
 
@@ -38,6 +50,7 @@ anoni.net 文件站除了主站，还有一份 IPFS 镜像，让文件在主站�
     文件站的 IPFS 坐标（公开值，可以直接用）：
 
     - IPNS 名称：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
+    - 节点 Peer ID：`12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9`（设定 peering 时才会用到）
     - 浏览器打开看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
 
 脚本每次执行的动作是：解析 IPNS 取得当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
@@ -51,8 +64,10 @@ pin 要能抓齐内容，本机就得有一个持续运作的 IPFS daemon。下�
     安装 [kubo](https://docs.ipfs.tech/install/command-line/){target="_blank"}（IPFS 官方的命令行版本）。macOS 可以用 Homebrew：
 
     ```bash
-    brew install ipfs
+    brew install kubo
     ```
+
+    Homebrew 的包名已从 `ipfs` 改为 `kubo`，旧名还是装得起来，但后面设定服务要用 `kubo` 这个名字。Intel 与 Apple Silicon 都支持。
 
     Linux 依 [官方说明](https://docs.ipfs.tech/install/command-line/){target="_blank"} 下载对应架构的 kubo。装好后初始化并启动 daemon：
 
@@ -61,7 +76,13 @@ pin 要能抓齐内容，本机就得有一个持续运作的 IPFS daemon。下�
     ipfs daemon
     ```
 
-    要让 daemon 长时间常驻，Linux 建议做成 systemd user service，macOS 可以用 `brew services` 或 launchd。临时测试时，直接让 `ipfs daemon` 在后台执行也可以。
+    要让 daemon 长时间常驻，Linux 建议做成 systemd user service。macOS 用 Homebrew 安装的话，包本身附了服务定义，一行就会常驻并在登录时自动启动：
+
+    ```bash
+    brew services start kubo
+    ```
+
+    临时测试时，直接让 `ipfs daemon` 在后台执行也可以。
 
 === "Windows"
 
@@ -184,10 +205,34 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 也可以在本机 gateway 打开看，内容正常显示就成功了：`http://127.0.0.1:8080${CID}/`。Docker 用户把上面的 `ipfs` 换成 `docker exec ipfs_host ipfs`。
 
+## 进阶：跟社群节点保持常连（选用）
+
+pin 只靠 IPNS 名称就能完成，内容交给 DHT 去找。第一次要把整份镜像抓齐，碰上 DHT 查询慢或查不到的时候会拖很久。想让自己的节点跟来源节点维持固定连接，可以设定 kubo 的 peering。
+
+编辑 `~/.ipfs/config`，在最外层加入 `Peering` 区块：
+
+```json
+"Peering": {
+  "Peers": [
+    { "ID": "12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9" }
+  ]
+}
+```
+
+`Addrs` 可以省略，kubo 会自己向 DHT 查地址。改完重启 daemon 生效。Docker 用户要改的是 `./ipfs-data/config`，接着执行 `docker compose restart`。
+
+确认连上了：
+
+```bash
+ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
+```
+
+peering 是单向设定，社群节点那端没有对应条目，连接的保活责任落在你这边。[kubo 官方文档](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒过，单向 peering 会占用对方节点的连接资源，镜像数量变多之后负担会集中在同一台。建议实际遇到抓取不顺再开，平常运作正常就跳过。
+
 ## 维护与注意事项
 
 - **会自动跟上新版**：文件站换 CID 后，下一次定时任务就会 pin 新版、放掉旧版，你不用做任何事。
-- **硬盘不会一直变大**：脚本 unpin 旧版后会执行一次垃圾回收，只留最新版本占空间。文件站是纯静态网站，体积不大。
+- **硬盘不会一直变大**：脚本 unpin 旧版后会执行一次垃圾回收，只留最新版本占空间。一份完整镜像约 220 MB（2026 年 8 月实测）。
 - **不会弄丢你手上的版本**：脚本先确认新版 pin 成功才放掉旧版，解析或下载失败时会保留现有副本。
 - **想停止帮忙**：unpin 目前版本、把定时任务移除即可，不影响其他节点。
 - **隐私与风险**：你 pin 的是公开文件，没有隐私顾虑。提供 IPFS pin 在不同司法管辖下的风险不同，相关限制见 [去中心化网站发布](../advanced/dweb-ipfs-onion.md) 的「已知限制与风险」。
