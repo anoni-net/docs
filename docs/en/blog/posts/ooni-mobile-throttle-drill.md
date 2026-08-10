@@ -41,13 +41,17 @@ After a run completes, the results page shows the network name and ASN (the carr
 
 !!! warning "Check your mobile data allowance first"
 
-    The `ndt` test inside the Performance group measures throughput, so it deliberately saturates whatever bandwidth is available. How much data that consumes scales with connection speed, and OONI publishes no fixed figure. The 14:15 run before the throttle is the most expensive one; the 14:35 run during the throttle uses far less, because bandwidth is already constrained.
+    The `ndt` test inside the Performance group measures throughput, so it deliberately saturates whatever bandwidth is available. The app states an estimate before you start, currently 5 to 200 MB and about 1 minute 30 seconds, with the actual figure scaling with connection speed. The 14:15 run before the throttle is the most expensive one; the 14:35 run during the throttle uses far less, because bandwidth is already constrained.
 
     On a metered plan, running only 14:35 and 15:10 is still a real contribution.
 
 ### Two: run the built-in Performance tests
 
 Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (video streaming quality), which are the two tests this needs, and it is available on both Android and iOS.
+
+<figure markdown="span">
+    <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
+</figure>
 
 !!! tip "Please do not use an OONI Run link"
 
@@ -83,7 +87,7 @@ The Performance group carries one additional exposure that deserves its own para
 
 Running `ndt` therefore writes your current public IP address into a permanently retained public dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Even so, whether to leave that record is your decision, and it is one to make before tapping run rather than after.
 
-Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
+The app's own Performance screen carries a disclaimer to the same effect, noting that these tests run through third-party servers and that your IP address cannot be guaranteed to stay uncollected. Anyone who wants to contribute reachability data without leaving an IP record can run the Websites group (`web_connectivity`) instead, which does not involve M-Lab.
 
 ## The central Taiwan drill already showed what happens
 
