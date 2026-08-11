@@ -43,7 +43,7 @@ All times are Taipei time (UTC+8), with UTC in the tables. The drill window is *
 
 Install [OONI Probe](https://ooni.org/install/){target="_blank"}: free and open source, on the App Store, Google Play, and F-Droid. It is built by OONI to turn network interference and connection quality into verifiable public data ([more about the project](https://ooni.org/about/){target="_blank"}). First launch runs through an onboarding flow, so installing on the day itself is cutting it too fine. Run it once after installing to confirm it completes normally.
 
-Then set an alarm for `14:35`, the run that matters most, and add `14:15` and `15:10` if you can. The real obstacle is remembering mid-afternoon, not the tapping.
+Then set an alarm for `14:35`, the run that matters most, and add `14:15` and `15:10` if you can. The real obstacle is remembering mid-afternoon, not the tapping. Missing it entirely is fine too: take the `15:10` run instead, and a single measurement is still worth submitting.
 
 ### Step one: turn Wi-Fi and any VPN off, use mobile data
 
@@ -101,9 +101,9 @@ Two separate databases are involved. OONI's own published measurements are all p
 
 M-Lab's [privacy policy](https://www.measurementlab.net/privacy/){target="_blank"} states that test data is made public, that the disclosed data includes your IP address along with date and time, and that M-Lab retains collected data indefinitely for longitudinal study, without anonymising the public dataset. The erasure route the policy offers is framed around GDPR and LGPD, aimed primarily at data subjects in the EU and Brazil. M-Lab states the policy applies to users in all regions, but the text does not address standing for requests from third jurisdictions such as Taiwan, so whether such a request would be honoured in practice is unclear. The app's own Performance screen carries a matching disclaimer, noting that these tests run through third-party servers and that your IP address cannot be guaranteed to stay uncollected.
 
-Running `ndt` therefore writes your current public IP address into a public, long-retained dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so relating a record to a specific individual is difficult in practice. Whether to leave that record is your decision.
+Running `ndt` therefore writes your current public IP address into a public, long-retained dataset. M-Lab does not authenticate users, does not keep per-user test histories, and mobile IP addresses are typically dynamic, so a third-party researcher or ordinary querier has a hard time relating a single IP back to an individual. That covers the M-Lab and OONI side of the question. Your own carrier can already map connection records to your subscription and IP, a record that exists regardless of whether you measure and that taking part does not add to. Whether to leave that record is your decision.
 
-## During the central Taiwan drill, the mobile side recorded nothing
+## During the central Taiwan drill, mobile networks recorded no performance measurement
 
 The same throttle ran in seven central counties on 10 August, 14:30 to 15:00 Taipei time (`06:30`–`07:00` UTC). After it ended, we queried OONI's public database for what Taiwan recorded during that window.
 
@@ -239,7 +239,7 @@ For this drill specifically, a 30-minute window needs the measurements endpoint:
 
 Two things to keep in mind when using this data.
 
-The most common misreading is treating an anomaly as a block. OONI's `anomaly` flag only means a test did not complete as expected, and the causes include censorship, an unstable network, a transient ISP fault, and bugs in the test itself, so treating anomaly rates as blocking rates produces false accusations. Over the same period the `tor` test recorded `16.3%` in Canada (n=14,042), `22.1%` in Switzerland (n=3,231), and `20.1%` in New Zealand (n=562), none of which censor. Mid-range values are noise, and only the extreme high end corresponds to reality.
+The most common misreading is treating an anomaly as a block. OONI's `anomaly` flag only means a test did not complete as expected, and the causes include censorship, an unstable network, a transient ISP fault, and bugs in the test itself, so treating anomaly rates as blocking rates produces false accusations. Over the 30 days from 2026-07-12 to 2026-08-12 the `tor` test recorded `16.3%` in Canada (n=14,042), `22.1%` in Switzerland (n=3,231), and `20.1%` in New Zealand (n=562), none of which censor. That window differs from the 90-day one used for `ndt` and `dash` in the previous paragraph, so re-running these figures needs the 30-day parameters. Mid-range values are noise, and only the extreme high end corresponds to reality.
 
 That applies only to tests that perform blocking determination. The performance tests have almost no `anomaly` logic implemented in the backend: worldwide over the last 90 days, 200,000 `ndt` measurements and 198,000 `dash` measurements both return an anomaly count of 0. To judge whether this drill throttled anything, read the throughput values directly rather than the `anomaly` flag.
 
