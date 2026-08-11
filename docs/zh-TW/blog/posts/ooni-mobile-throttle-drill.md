@@ -27,6 +27,14 @@ description: "8 月 13 日週四 14:30 到 15:00，北部七縣市的行動網�
 
 <!-- more -->
 
+??? info "為什麼要演練行動網路降速，給不在台灣的讀者"
+
+    行政院對這場演練的說明是「模擬極端情境，驗證政府在有限通訊環境下之應變能力」，設想的狀況包含天災、大規模網路攻擊與複合式災害，目標是提升整體通訊與社會防衛韌性[^1]。公告本身沒有提到戰時或軍事演習，框架放在民防與備援。
+
+    對台灣來說，通訊中斷不是假設性的問題。台灣是島嶼，對外連線依賴海底電纜，數位發展部設有「海纜障礙狀況」的公開頁面，逐條列出故障位置、替代路由與預計修復時間[^7]。以 2026 年 7 月 28 日的更新為例，當時有四條海纜處於故障狀態，最近的一筆發生在 7 月 14 日，預計修復日期落在 8 月 14 日，也就是演習的同一週。想看這些纜線的實際走向，可以開[ Tor 中繼地球儀](../../games/tor-network/index.html)，上面標了 228 條海纜線段與台灣周邊的障礙狀態。
+
+    真實事故的規模比演練大得多。演練只降速 30 分鐘、限定十四個縣市、語音與簡訊照常。海纜中斷則可能持續數週，影響整個區域的對外連線。演練的用意在驗證備援機制與宣導準備，不是重現事故。
+
 ## 8 月 13 日要做的三件事
 
 全部時間為台灣時間（UTC+8）。演練時段是 **14:30 到 15:00**。
@@ -241,7 +249,7 @@ M-Lab 的[隱私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 ---
 
-**資料來源**：OONI aggregation 與 measurements API（2026-08-11 查詢，30 天統計的視窗為 2026-07-12 至 2026-08-11，量測資料授權 [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md){target="_blank"}）、ASN 名稱取自 [RIPEstat](https://stat.ripe.net/){target="_blank"}、M-Lab 資料處理方式取自 [M-Lab 隱私政策](https://www.measurementlab.net/privacy/){target="_blank"}、演習資訊取自行政院、NCC、[台灣大哥大](https://www.taiwanmobile.com/csonline/service/ann/ann3_20260722_103509.html){target="_blank"}與[中華電信演練公告](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"}。
+**資料來源**：OONI aggregation 與 measurements API（查詢條件見上方的資料與前提，量測資料授權 [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md){target="_blank"}）、ASN 名稱取自 [RIPEstat](https://stat.ripe.net/){target="_blank"}、M-Lab 的資料處理方式取自 [M-Lab 隱私政策](https://www.measurementlab.net/privacy/){target="_blank"}。演習相關的官方與媒體來源見下方腳註。
 
 [^1]: [2026城鎮韌性（防空）演習：行動網路降速演練](https://www.ey.gov.tw/Page/9277F759E41CCD91/66c2bed1-6ca3-4c30-ba7c-4fa0f90e00ec){target="_blank"} - 行政院
 [^2]: [韌性演習行動網路降速 NCC籲預先為離線情境做準備](https://www.cna.com.tw/news/ahel/202607220157.aspx){target="_blank"} - 中央社
@@ -249,3 +257,4 @@ M-Lab 的[隱私政策](https://www.measurementlab.net/privacy/){target="_blank"
 [^4]: [配合政府115年城鎮韌性防空演習，中區、北區行動通訊網路降速說明](https://www.taiwanmobile.com/csonline/service/ann/ann3_20260722_103509.html){target="_blank"} - 台灣大哥大
 [^5]: [2026城鎮韌性(防空)演習行動網路降速演練](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"} - 中華電信
 [^6]: [#KeepItOn](https://www.accessnow.org/campaign/keepiton/){target="_blank"} - Access Now
+[^7]: [海纜障礙狀況](https://moda.gov.tw/major-policies/subseacable/fault/1749){target="_blank"} - 數位發展部
