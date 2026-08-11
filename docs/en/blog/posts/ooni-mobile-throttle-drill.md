@@ -35,7 +35,7 @@ Install [OONI Probe](https://ooni.org/install/){target="_blank"}: free and open 
 
 Then set an alarm for `14:35`, the run that matters most, and add `14:15` and `15:10` if you can. The real obstacle is remembering mid-afternoon, not the tapping.
 
-### One: turn Wi-Fi and any VPN off, use mobile data
+### Step one: turn Wi-Fi and any VPN off, use mobile data
 
 Fixed lines and Wi-Fi are entirely unaffected by the drill, so a measurement taken over Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting.
 
@@ -49,7 +49,7 @@ After a run completes, the results page shows the network name and ASN (the glob
 
     On a metered plan, run 14:35 and pick either 14:15 or 15:10 as the comparison; two runs are enough to compare.
 
-### Two: run the built-in Performance tests
+### Step two: run the built-in Performance tests
 
 Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (which probes available bandwidth the way an adaptive video stream would), which are the two tests this needs, and it is available on both Android and iOS.
 
@@ -57,7 +57,7 @@ Open the app, tap Tests, choose Performance, tick the tests you want, then tap r
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
 </figure>
 
-### Three: run 14:35 at minimum
+### Step three: run 14:35 at minimum
 
 The run during the throttle, at 14:35, matters most. That one alone is worth submitting, since it compares against other participants and against the same hour the day before. Add the other two when time allows, because a single phone's own before-and-after is the cleanest comparison.
 
