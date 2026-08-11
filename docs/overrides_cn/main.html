@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{# 活动公告：COSCUP 2026 结束（2026/8/9）后移除，届时另开 PR #}
+{# 活动公告：8/13 降速演练结束后移除，届时另开 PR #}
 {% block announce %}
-  COSCUP 2026 匿名网络社群议程轨 8/08、8/09 在台湾科技大学 <code>TR-510</code> 开讲，免报名，当天到场即可参与。<a href="{{ 'activity/coscup-2026/' | url }}">看两天完整议程</a>。现场网络壅塞时不好查资料，建议先<a href="{{ 'help/' | url }}#趁有网络时把文档站装成离线-App">把文档站装成离线 App</a>，信号不好也能翻议程表。
+  8/13（四）14:30 到 15:00，台湾北部七县市的移动网络会降速 30 分钟，官方公布的目标是把下载速率压到 <code>256KB</code>，还没有人测过。<a href="{{ 'blog/2026/08/ooni-mobile-throttle-drill/' | url }}">一起用 OONI Probe 测三家电信</a>，在 14:35 到 14:55 之间运行一次「性能」测试即可。降速期间查资料会很慢，建议先<a href="{{ 'help/' | url }}#趁有网络时把文档站装成离线-App">把文档站装成离线 App</a>。
 {% endblock %}
 
 {% block site_meta %}

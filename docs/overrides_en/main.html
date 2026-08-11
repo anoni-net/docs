@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{# Event notice: remove after COSCUP 2026 ends (2026-08-09), via a follow-up PR #}
+{# Event notice: remove after the 13 August throttling drill, via a follow-up PR #}
 {% block announce %}
-  Our Anonymity Networks Community track at COSCUP 2026 runs on 8 and 9 August at NTUST in Taipei, room <code>TR-510</code>. Entry is free and no registration is needed. <a href="{{ 'activity/coscup-2026/' | url }}">See the two-day schedule</a>, and <a href="{{ 'offline-install/' | url }}">install this site for offline use</a> so you can still read the schedule when the venue network is congested.
+  On Thursday 13 August, 14:30–15:00 Taipei time (06:30–07:00 UTC), mobile networks across seven counties in northern Taiwan will be throttled for 30 minutes. The official target is <code>256KB</code> and nobody has measured it yet. <a href="{{ 'blog/2026/08/ooni-mobile-throttle-drill/' | url }}">Help measure all three carriers with OONI Probe</a>: one run of the Performance tests between 14:35 and 14:55 is enough. Reading anything will be slow during the throttle, so <a href="{{ 'offline-install/' | url }}">install this site for offline use</a> first.
 {% endblock %}
 
 {% block site_meta %}
