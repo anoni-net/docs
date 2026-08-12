@@ -227,6 +227,7 @@ Signal 的关联设备（linked device），也就是桌面版与 iPad 版，与
 对应的操作是定期打开设置里的「已关联设备」，确认清单上每一项你都认得。密钥透明度不会替你看这一项。至于要不要解除不认得的关联、什么时候解除，在加害者可能就在身边的情况下需要先想过后果，后面「对方就在你身边时」那一则会谈到。
 
 查证来源（2026-08）：[Signals of Trouble: Multiple Russia-Aligned Threat Actors Actively Targeting Signal Messenger](https://cloud.google.com/blog/topics/threat-intelligence/russia-targeting-signal-messenger){target="_blank"} - Google Threat Intelligence Group，2025-02-20。
+{: .source-note }
 
 ### 篡改终究会被发现，但不会当场被挡下
 

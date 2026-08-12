@@ -227,6 +227,7 @@ Signal 的連結裝置（linked device），也就是桌面版與 iPad 版，與
 對應的操作是定期打開設定裡的「已連結裝置」，確認清單上每一項你都認得。金鑰透明度不會替你看這一項。至於要不要解除不認得的連結、什麼時候解除，在加害者可能就在身邊的情況下需要先想過後果，後面「對方就在你身邊時」那一則會談到。
 
 查證來源（2026-08）：[Signals of Trouble: Multiple Russia-Aligned Threat Actors Actively Targeting Signal Messenger](https://cloud.google.com/blog/topics/threat-intelligence/russia-targeting-signal-messenger){target="_blank"} - Google Threat Intelligence Group，2025-02-20。
+{: .source-note }
 
 ### 竄改終究會被發現，但不會當場被擋下
 
