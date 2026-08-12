@@ -218,6 +218,9 @@ Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳�
 
 把 Signal 群組當成協作骨幹的社群，務實的做法是分層。核心決策的少數幾人值得逐一驗證，人數多、流動快的執行層改用社會性的確認，由信任的人親自介紹、當面拉進群組。站上的[社運行動者的數位準備](../../scenarios/activist.md)有更完整的分層設計。
 
+查證來源（2026-08）：[values-zh-rTW/strings.xml](https://github.com/signalapp/Signal-Android/blob/main/app/src/main/res/values-zh-rTW/strings.xml){target="_blank"} - Signal-Android，字串 `preferences_automatic_key_verification_body`。
+{: .source-note }
+
 ### 連結裝置是它看不到的地方
 
 Signal 的連結裝置（linked device），也就是桌面版與 iPad 版，與手機共用同一把身分金鑰。攻擊者若誘使你掃過一次惡意的連結 QR code，他的裝置會掛進你的帳號、同步收到後續訊息，而你的身分金鑰完全沒有改變。安全碼不變，日誌裡不會多出任何一頁，金鑰透明度從頭到尾看不到，綠色勾號會一直亮著。
@@ -226,6 +229,7 @@ Signal 的連結裝置（linked device），也就是桌面版與 iPad 版，與
 
 對應的操作是定期打開設定裡的「已連結裝置」，確認清單上每一項你都認得。金鑰透明度不會替你看這一項。至於要不要解除不認得的連結、什麼時候解除，在加害者可能就在身邊的情況下需要先想過後果，後面「對方就在你身邊時」那一則會談到。
 
+查證來源（2026-08）：[Provisioning.proto](https://github.com/signalapp/Signal-Android/blob/main/lib/libsignal-service/src/main/protowire/Provisioning.proto){target="_blank"} - Signal-Android，`ProvisionMessage` 帶有 `aciIdentityKeyPrivate`，連結新裝置時主裝置會交出帳號的身分私鑰。  
 查證來源（2026-08）：[Signals of Trouble: Multiple Russia-Aligned Threat Actors Actively Targeting Signal Messenger](https://cloud.google.com/blog/topics/threat-intelligence/russia-targeting-signal-messenger){target="_blank"} - Google Threat Intelligence Group，2025-02-20。
 {: .source-note }
 
@@ -296,6 +300,13 @@ Signal 把限制處理成「功能不可用」而非「降級驗證」，選擇�
 通訊軟體的第一個大規模部署來自 WhatsApp，2023 年 4 月上線並開源 AKD，當時的定位是讓任何人都能自行驗證。Cloudflare 接手擔任第三方稽核者，是一年五個月之後的 2024 年 9 月，兩件事常被壓成同一件。Apple 的 iMessage Contact Key Verification 在 2023 年底推出，走的是另一條路線，由使用者裝置自己驗證一致性證明。
 
 IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-architecture/){target="_blank"}把部署方式分成三種模式，聯絡人監測（contact monitoring）、第三方管理（third-party management）與第三方稽核（third-party auditing），差別在於由誰負責察覺日誌分岔。草案本身只定義模式，沒有點名哪一家系統落在哪一格，常見的對照表出自工作組簡報與各家自己的說明。Signal 這次以第三方稽核為主，同時要求用戶端對自己的識別碼做監測，兩者互補的理由在原文的「監測」一節說得很清楚。
+
+查證來源（2026-08）：[CONIKS: Bringing Key Transparency to End Users](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/melara){target="_blank"} - USENIX Security 2015。  
+查證來源（2026-08）：[SEEMless: Secure End-to-End Encrypted Messaging with less trust](https://eprint.iacr.org/2018/607){target="_blank"} - Chase、Deshpande、Ghosh、Malvai，ACM CCS 2019。  
+查證來源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程式庫見 [facebook/akd](https://github.com/facebook/akd){target="_blank"}。  
+查證來源（2026-08）：[Cloudflare helps verify the security of end-to-end encrypted messages by auditing key transparency for WhatsApp](https://blog.cloudflare.com/key-transparency/){target="_blank"} - Cloudflare，2024-09-24。  
+查證來源（2026-08）：[Advancing iMessage security: iMessage Contact Key Verification](https://security.apple.com/blog/imessage-contact-key-verification){target="_blank"} - Apple Security Research，2023-10-27。
+{: .source-note }
 
 ### 在台灣與周邊的脈絡
 
