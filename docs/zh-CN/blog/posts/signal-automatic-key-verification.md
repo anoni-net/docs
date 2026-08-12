@@ -224,9 +224,9 @@ Signal 的关联设备（linked device），也就是桌面版与 iPad 版，与
 
 2025 年 2 月 Google Threat Intelligence Group 记录了实际的攻击。针对乌克兰军方人员、政治人物与记者的攻击者，把设备关联用的 QR code 伪装成 Signal 群组邀请页面，或乌克兰军方使用的应用程序页面，诱导目标把攻击者的设备连上自己的 Signal 账号。报告的说法是，攻击成功之后消息会即时同步给受害者与攻击者双方，形成持续窃听的通道，过程中不需要完整攻陷设备。
 
-查证来源（2026-08）：[Signals of Trouble: Multiple Russia-Aligned Threat Actors Actively Targeting Signal Messenger](https://cloud.google.com/blog/topics/threat-intelligence/russia-targeting-signal-messenger){target="_blank"} - Google Threat Intelligence Group，2025-02-20。
-
 对应的操作是定期打开设置里的「已关联设备」，确认清单上每一项你都认得。密钥透明度不会替你看这一项。至于要不要解除不认得的关联、什么时候解除，在加害者可能就在身边的情况下需要先想过后果，后面「对方就在你身边时」那一则会谈到。
+
+查证来源（2026-08）：[Signals of Trouble: Multiple Russia-Aligned Threat Actors Actively Targeting Signal Messenger](https://cloud.google.com/blog/topics/threat-intelligence/russia-targeting-signal-messenger){target="_blank"} - Google Threat Intelligence Group，2025-02-20。
 
 ### 篡改终究会被发现，但不会当场被挡下
 
