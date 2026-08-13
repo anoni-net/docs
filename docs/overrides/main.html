@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 
-{# 活動公告：8/13 降速演練結束後移除，屆時另開 PR #}
-{% block announce %}
-  8/13（四）14:30 到 15:00，北部七縣市的行動網路會降速 30 分鐘，時間、地點與業者都預先公開，是難得能留下紀錄的半小時，官方公布的下載速率上限是 <code>256KB</code>。<a href="{{ 'blog/2026/08/ooni-mobile-throttle-drill/' | url }}">一起用 OONI Probe 測三家電信</a>，在 14:35 到 14:55 之間執行一次「效能」測試即可。降速期間查資料會很慢，建議先<a href="{{ 'help/' | url }}#趁有網路時把文件站裝成離線-App">把文件站裝成離線 App</a>。
-{% endblock %}
-
 {% block site_meta %}
   {% if page.meta and page.meta.og and page.meta.og.enabled %}
     {% set page_title = page.meta.get("title", page.title) %}
