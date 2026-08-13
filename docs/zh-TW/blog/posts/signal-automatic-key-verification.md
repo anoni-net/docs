@@ -200,7 +200,7 @@ Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳�
 
 !!! note "以下為 anoni.net 社群補充，非 Signal 原文內容"
 
-    原文的比喻寫得完整，技術脈絡與取捨留在文外。以下先給三條結論，接著十三則補充，最後是常見問題與延伸閱讀。
+    原文的比喻寫得完整，技術脈絡與取捨留在文外。以下先給三條結論，接著十三則補充，再一節發布後的後續補充，最後是常見問題與延伸閱讀。
 
 ### 只想知道結論的話
 
@@ -210,7 +210,7 @@ Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳�
 - 收到「安全碼已變更」的通知就停下來，換一條管道確認過再繼續談敏感的事。
 - 每隔一段時間打開設定裡的「已連結裝置」，看清單上有沒有你不認得的項目。
 
-日常使用看完上面三條，再看接下來四則就夠。需要保護消息來源、在組織裡管對外帳號、經常跨境或裝置可能離開視線、加害者可能就在身邊的讀者，往後幾則是為你們寫的。最後三則談金鑰透明度怎麼設計出來，不影響操作。
+日常使用看完上面三條，再看接下來四則就夠。需要保護消息來源、在組織裡管對外帳號、經常跨境或裝置可能離開視線、加害者可能就在身邊的讀者，往後幾則是為你們寫的。最後三則談金鑰透明度怎麼設計出來，不影響操作。發布之後另外補了一節，談稽核鏈的形狀、勾號會被讀成什麼、匿名查詢的雙向性，以及可驗證性到哪裡為止。
 
 ### 綠色勾號保證什麼，不保證什麼
 
@@ -311,7 +311,7 @@ Signal 遇到限制時直接讓功能不可用，選擇是對的，寧可讓按�
 
 功能引進了兩個新的外部角色，Cloudflare 與 Trail of Bits。兩家都無法讀到明文資料，公開識別碼經過可驗證隨機函數處理，對應值由帶金鑰的雜湊函數保護。稽核者能確認日誌前後一致、沒有被回頭改寫，看不到日誌裡究竟是誰。
 
-多一位獨立稽核者通常讓信任假設變弱，從「必須相信 Signal 沒有作惡」放寬成「至少要有一位稽核者是誠實的」，方向要說清楚。Signal 沒有說明用戶端驗證時要求幾份簽章，兩家都要簽或任一份即可，安全強度會有差別，想追下去的人可以從開源的金鑰透明度伺服器與 IETF 草案著手。
+多一位獨立稽核者通常讓信任假設變弱，從「必須相信 Signal 沒有作惡」放寬成「至少要有一位稽核者是誠實的」，方向要說清楚。用戶端實際要求三份簽章，Signal 自己營運一份，Cloudflare 與 Trail of Bits 各一份，缺任何一份都會跳警告、讓自動金鑰驗證失敗。每份簽章有七天效期，全惡意的伺服器因此最多維持一週的分岔視圖。原文只寫了 Cloudflare 與 Trail of Bits 兩家，第三份自簽要看 Trail of Bits 自己的說明才知道，後面「後續補充」那一節接著談。
 
 完全不接受第三方假設的使用者，Signal 留了關閉開關，設定路徑在隱私權、進階、自動金鑰驗證。關閉之後回到手動的安全碼驗證。
 
@@ -338,6 +338,49 @@ IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-key
 查證來源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程式庫見 [facebook/akd](https://github.com/facebook/akd){target="_blank"}，儲存庫 2021 年 6 月建立。  
 查證來源（2026-08）：[Cloudflare helps verify the security of end-to-end encrypted messages by auditing key transparency for WhatsApp](https://blog.cloudflare.com/key-transparency/){target="_blank"} - Cloudflare，2024-09-24。  
 查證來源（2026-08）：[Advancing iMessage security: iMessage Contact Key Verification](https://security.apple.com/blog/imessage-contact-key-verification){target="_blank"} - Apple Security Research，2023-10-27。
+{: .source-note }
+
+### 後續補充（2026-08-13）
+
+文章發布當天，Trail of Bits 也貼出自己那一側的說明，裡面有 Signal 原文沒寫的稽核細節。以下四則按幾位不同專業背景的讀者的提問整理，查證日期都在 2026-08。
+
+#### 稽核的獨立性建立在跨組織，不在跨法律管轄
+
+用戶端要求的三份簽章，分別由 Signal、Cloudflare 與 Trail of Bits 營運，三家都是美國實體。跨組織的分散做到了，跨法律管轄沒有。一份強制令同時觸及三個簽章者，在美國境內是可以想像的路徑，對身處與美國沒有對等司法互助機制地區的使用者，這層保證的實際強度目前沒有先例可查。
+
+Trail of Bits 那一側的做法值得記一筆。他們照規格從頭寫了一套稽核器，沒有沿用 Signal 的參考實作，理由是獨立實作才抓得到共病的錯誤，程式碼開源在 trailofbits/signal-auditor。他們也寫明不向 Signal 或任何一方收費。這些選擇讓第三方稽核不只是掛名。
+
+現行設計把察覺日誌分岔的責任交給少數幾個稽核者，學界對這個結構有意見。2026 年的 MINGLE 提出讓用戶端在通訊時順便交換彼此看到的日誌狀態，論文摘要直接點名現行部署把偵測委託給少數第三方稽核者，形成可被施壓、被攻陷或無法持續稽核的中心化瓶頸。Signal 目前沒有這層用戶端之間的交叉比對。
+
+#### 綠色勾號會被讀成什麼，空白又會被讀成什麼
+
+安全指示器的既有研究對這顆勾號的預測不太樂觀。正面圖示長期被讀得比技術定義寬，工程團隊寫的是「識別碼與金鑰在日誌裡一致」，使用者看到的是「這個人安全」。
+
+空白狀態更值得留意。2007 年一項針對網路銀行的研究把使用者原本設定的個人化安全圖片拿掉，用自己帳號操作的二十五人裡有二十三人照樣輸入了密碼。預期中的正面提示消失，多數人不會提高警覺，多半根本沒注意到。套到這裡，自動金鑰驗證因為對方只有使用者名稱或號碼過期而不可用時，比較可能發生的是使用者直接略過。
+
+驗證變便宜之後還有一層代價。自動化研究反覆觀察到，手邊有低成本管道可以依賴時，需要主動投入的人工檢查會系統性減少。願意約時間當面掃 QR code 的人只會愈來愈少，而當面核對正好涵蓋自動驗證覆蓋不到的那一塊，帳號被完整接管的情境。
+
+#### 匿名查詢的保護是雙向的
+
+查詢日誌的請求不帶身分驗證，設計目的是讓伺服器無法把查詢綁回你的帳號。同一個設計讓查詢你的人也享有一樣的匿名。
+
+只要對方原本就知道你的電話號碼，就能反覆查詢你的識別碼在日誌裡的紀錄，觀察你何時換機、換號或重新註冊。過程不必碰你的裝置，你也不會收到任何通知，原文沒有描述任何會告知被查詢者的機制。
+
+對前面「對方就在你身邊時」那一則來說，這是實質的補充。離開一段有控制關係的關係之後，對方手上通常還留著你的號碼。換號碼本身會在日誌裡留下一筆可被觀察的變更，時間點對盯著看的人是有意義的訊號。
+
+#### 可驗證性到你的手機就斷了
+
+稽核者簽的是伺服器上那份日誌的結構，簽章不涵蓋你手機裡的 App 有沒有誠實執行驗證、畫面上那顆勾號有沒有如實反映結果。那是另一條信任鏈。
+
+要核對手上的 App 與公開原始碼一致，Android 版有可重現建置的流程與自動化檢查，社群也有人持續重現 Play Store 的版本。iOS 版沒有對應的建置說明，限制來自 App Store 的簽署流程。
+
+外部複驗的工具也還沒跟上。Cloudflare 在 2024 年為 WhatsApp 的稽核做了一套任何人都能執行的複驗工具，目前收錄的仍是 WhatsApp 那組，沒有 Signal 的對應項目。想自己複驗 Signal 稽核結果的研究者，現階段得從頭做起。
+
+查證來源（2026-08）：[How Trail of Bits helps verify the integrity of your Signal chats](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"} - Trail of Bits，2026-08-11。三份簽章、七天效期、稽核器開源與不收費均出自此文。  
+查證來源（2026-08）：[Signal and Ready to MINGLE: In-Band Gossip for Key Transparency Split-View Detection in E2EE Messengers](https://eprint.iacr.org/2026/1010){target="_blank"} - IACR ePrint 2026/1010。  
+查證來源（2026-08）：[The Emperor's New Security Indicators](https://stuartschechter.org/papers/emperor.pdf){target="_blank"} - Schechter、Dhamija、Ozment、Fischer，IEEE Symposium on Security and Privacy 2007，論文摘要記為 25 人中 23 人。  
+查證來源（2026-08）：[trailofbits/signal-auditor](https://github.com/trailofbits/signal-auditor){target="_blank"} 與 [cloudflare/plexi](https://github.com/cloudflare/plexi){target="_blank"}，後者的說明文件目前只列 WhatsApp 的 namespace。  
+查證來源（2026-08）：Signal-Android 的 [reproducible-builds](https://github.com/signalapp/Signal-Android/tree/main/reproducible-builds){target="_blank"} 說明，Signal-iOS 儲存庫無對應目錄。
 {: .source-note }
 
 ### 常見問題
