@@ -21,6 +21,8 @@ description: "Signal 推出「自动密钥验证」，底层是密钥透明度�
 
     - [Introducing Automatic Key Verification, Katherine Yen 2026-08-11](https://signal.org/blog/automatic-key-verification/){target="_blank"}
 
+    **文末有编辑注解：**译文结束后接着[编辑注解](#编辑注解)，内容是 anoni.net 社群的补充，包含三条给非技术读者的结论、十三则说明、一节发布后的后续补充，最后是常见问题与延伸阅读。想先看社群观点的读者可以直接跳到那一节。
+
 [![介绍 Signal 自动密钥验证](https://signal.org/blog/images/key-transparency-header.png){style="border-radius: 10px;"}](https://signal.org/blog/images/key-transparency-header.png){target="_blank"}
 
 Signal 现在提供一项名为「自动密钥验证」的功能，用来补强既有的[安全码机制](https://signal.org/blog/safety-number-updates/){target="_blank"}。Signal 的通讯一律采端到端加密，自动密钥验证多提供一条简便的途径，让你确认端到端加密会话的两端之间没有非预期的第三方介入。

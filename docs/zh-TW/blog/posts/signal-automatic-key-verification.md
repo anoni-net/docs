@@ -21,6 +21,8 @@ description: "Signal 推出「自動金鑰驗證」，底層是金鑰透明度�
 
     - [Introducing Automatic Key Verification, Katherine Yen 2026-08-11](https://signal.org/blog/automatic-key-verification/){target="_blank"}
 
+    **文末有編輯註解：**譯文結束後接著[編輯註解](#編輯註解)，內容是 anoni.net 社群的補充，包含三條給非技術讀者的結論、十三則說明、一節發布後的後續補充，最後是常見問題與延伸閱讀。想先看社群觀點的讀者可以直接跳到那一節。
+
 [![介紹 Signal 自動金鑰驗證](https://signal.org/blog/images/key-transparency-header.png){style="border-radius: 10px;"}](https://signal.org/blog/images/key-transparency-header.png){target="_blank"}
 
 Signal 現在提供一項名為「自動金鑰驗證」的功能，用來補強既有的[安全碼機制](https://signal.org/blog/safety-number-updates/){target="_blank"}。Signal 的通訊一律採端對端加密，自動金鑰驗證多提供一條簡便的途徑，讓你確認端對端加密工作階段的兩端之間沒有非預期的第三方介入。
