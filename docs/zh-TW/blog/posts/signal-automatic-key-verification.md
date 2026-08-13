@@ -132,7 +132,7 @@ Alice 與 Bob 需要一位獨立的見證者，讓職員不敢造假。
 
 稽核者對每一頁與每一本索引本只會簽名一次，所以職員若想把第 50 版索引本的不同版本分別展示給 Alice 與 Bob，只有其中一個版本拿得出有效的稽核者簽名。透過檢查與驗證稽核者簽名，Alice 與 Bob 可以確信職員只維護一本帳本與一套對應的索引本，兩人看到的是同一批記錄。
 
-在 Signal 的金鑰透明度實作中，由 [Cloudflare](https://www.cloudflare.com/){target="_blank"} 與 [Trail of Bits](https://trailofbits.com/){target="_blank"} 擔任受信任的第三方稽核者。
+在 Signal 的金鑰透明度實作中，由 [Cloudflare](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"} 與 [Trail of Bits](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"} 擔任受信任的第三方稽核者。
 
 #### 監測
 
@@ -154,7 +154,7 @@ Alice 按固定節奏做自我檢查，Bob 依自己的步調查帳本，兩人�
 
 在 Signal 裡，你可以選擇讓別人用電話號碼[找到你](https://support.signal.org/hc/en-us/articles/6829998083994-Phone-Number-Privacy-and-Usernames-Deeper-Dive){target="_blank"}，也可以建立使用者名稱，讓別人用名稱找到你。決定開放電話號碼或使用者名稱之後，別人就能在 Signal 輸入你的號碼或名稱，發起訊息邀請。Signal 保有一份[中央目錄](https://signal.org/blog/building-faster-oram/){target="_blank"}，最終把這些公開識別碼對應到使用者的公開金鑰，就像信箱比喻裡的「姓名」與「地址」。
 
-Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳號時，Signal 會把變更記在一棵日誌樹（也就是「帳本」）裡，並用前綴樹（也就是「索引本」）協助在日誌樹中搜尋。[Cloudflare](https://www.cloudflare.com/){target="_blank"} 與 [Trail of Bits](https://trailofbits.com/){target="_blank"} 各自擔任兩種樹的獨立稽核者，兩種樹合起來構成金鑰透明度日誌。
+Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳號時，Signal 會把變更記在一棵日誌樹（也就是「帳本」）裡，並用前綴樹（也就是「索引本」）協助在日誌樹中搜尋。[Cloudflare](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"} 與 [Trail of Bits](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"} 各自擔任兩種樹的獨立稽核者，兩種樹合起來構成金鑰透明度日誌。
 
 日誌裡所有的使用者資料都經過密碼學處理而無法辨識，公開識別碼會先通過[可驗證隨機函數](https://en.wikipedia.org/wiki/Verifiable_random_function){target="_blank"}，識別碼對應到的值則由[帶金鑰的雜湊函數](https://en.wikipedia.org/wiki/HMAC){target="_blank"}保護，因此稽核者從來看不到任何明文的使用者資料。
 
@@ -164,7 +164,7 @@ Signal 使用者註冊、變更電話號碼或使用者名稱、重新建立帳�
 
 ## 金鑰透明度目前的實際樣貌
 
-金鑰透明度能說明的是，Signal 生態系裡所有裝置對「識別碼與其公開加密金鑰的對應關係」抱持同一份視角。它不驗證掌控某個電話號碼或使用者名稱的人究竟是誰。具體來說，Alice 與 Bob 可以透過金鑰透明度檢查，確保各自持有某個帳號正確的公開金鑰，若 Mallory 已經完全接管 Alice 的帳號，要察覺仍需仰賴額外的驗證，例如在安全碼變動後主動追問。
+金鑰透明度顯示，Signal 生態系裡所有裝置對「識別碼與其公開加密金鑰的對應關係」抱持同一份視角。它不驗證掌控某個電話號碼或使用者名稱的人究竟是誰。具體來說，Alice 與 Bob 可以透過金鑰透明度檢查，確保各自持有某個帳號正確的公開金鑰，若 Mallory 已經完全接管 Alice 的帳號，要察覺仍需仰賴額外的驗證，例如在安全碼變動後主動追問。
 
 目前你的 Signal App 會自動驗證日誌裡屬於你自己的電話號碼與使用者名稱資料。要替別人做同樣的驗證，你必須有對方的電話號碼。也就是說，你若是透過使用者名稱在 Signal 上與某人建立聯繫，彼此沒有交換電話號碼，也無從得知對方的號碼，就無法驗證對方。
 
@@ -277,13 +277,13 @@ Signal 的連結裝置（linked device），也就是桌面版與 iPad 版，與
 
 原文的敘事是 Bob 去驗證 Alice，實際的信任鏈常常反過來。公開身分的人，例如記者、組織的對外窗口，被鎖定的機率比多數聯絡人高，而看著綠色勾號決定要不要信任的，是來找你的那一方。你自己的帳號沒有守好，所有信任那顆勾號的人會一起被誤導。註冊鎖與已連結裝置的檢查，優先順序排在逐一驗證每個聯絡人之前。
 
-Signal 把限制處理成「功能不可用」而非「降級驗證」，選擇是對的，寧可讓按鈕消失，也不要給出一個看起來成功、實際上沒有意義的綠色勾號。純使用者名稱的聯絡人目前仍請沿用安全碼，掃 QR code 那條路一直都在。只是當面核對本身也有代價，被看到跟某個人有聯繫，對還沒出櫃的伴侶或需要保護的消息來源就是一次額外的曝光。當面核對留給真正需要的時刻，例如收到安全碼變動通知之後，不必變成常態。
+Signal 遇到限制時直接讓功能不可用，選擇是對的，寧可讓按鈕消失，也不要給出一個看起來成功、實際上沒有意義的綠色勾號。純使用者名稱的聯絡人目前仍請沿用安全碼，掃 QR code 那條路一直都在。只是當面核對本身也有代價，被看到跟某個人有聯繫，對還沒出櫃的伴侶或需要保護的消息來源就是一次額外的曝光。當面核對留給真正需要的時刻，例如收到安全碼變動通知之後，不必變成常態。
 
 ### 帳號背後換了人，金鑰不會變
 
 金鑰透明度綁定識別碼與金鑰的對應，不綁定識別碼背後是哪一個人。前面談帳號接管時，落差表現成攻擊，在組織裡則是日常運作的一部分。
 
-對外窗口、客服、專案聯絡人等角色帳號，操作的人會換。交接若做得規矩，沿用同一台裝置，或用註冊鎖的 PIN 重新註冊，金鑰完全不會變動，安全碼也不會變。一年前驗證過那個帳號的人，不會收到任何技術訊號告訴他們操作的人換了。與其說是漏洞，比較接近金鑰透明度本來就沒有要回答的問題。
+對外窗口、客服、專案聯絡人等角色帳號，操作的人會換。交接若做得規矩，沿用同一台裝置，或用註冊鎖的 PIN 重新註冊，金鑰完全不會變動，安全碼也不會變。一年前驗證過那個帳號的人，不會收到任何技術訊號告訴他們操作的人換了。金鑰透明度本來就沒有要回答帳號背後是誰在操作的問題。
 
 角色帳號還有兩件事跟個人帳號不同。第一，「已連結裝置清單上每一項你都認得」那條建議假定只有一個人在管帳號，多人輪值時要改成比對一份內部名冊，靠記憶不可行。第二，組織門號的簡訊驗證碼可能不只一個人收得到，辦公室轉接線、IT 管理的 eSIM、帳單持有人都可能在鏈上，註冊鎖的 PIN 要當成組織的共用機敏憑證管理，存放與輪替的做法見站上的[密碼管理器入門](../../tools/password-manager.md)。
 
@@ -327,15 +327,15 @@ Signal 把限制處理成「功能不可用」而非「降級驗證」，選擇�
 
 ### 金鑰透明度不是 Signal 首創
 
-概念上金鑰透明度延伸自憑證透明度（Certificate Transparency），把 HTTPS 憑證的公開日誌與稽核機制搬到即時通訊的公開金鑰上。學術脈絡可以再往前拉，2015 年的 CONIKS 提出讓使用者自行監測目錄的設計，2019 年的 SEEMless 補上隱私與效率，Meta 後來把相關想法做成開源的 Auditable Key Directory（AKD）程式庫。
+概念上金鑰透明度延伸自憑證透明度（Certificate Transparency），把 HTTPS 憑證的公開日誌與稽核機制搬到即時通訊的公開金鑰上。學術脈絡可以再往前拉，2015 年的 CONIKS 提出讓使用者自行監測目錄的設計，2019 年的 SEEMless 補上隱私與效率，Meta 在 2021 年把相關想法做成開源的 Auditable Key Directory（AKD）程式庫。
 
-通訊軟體的第一個大規模部署來自 WhatsApp，2023 年 4 月上線並開源 AKD，當時的定位是讓任何人都能自行驗證。Cloudflare 接手擔任第三方稽核者，是一年五個月之後的 2024 年 9 月，兩件事常被壓成同一件。Apple 的 iMessage Contact Key Verification 在 2023 年底推出，走另一條路線，由使用者裝置自己驗證一致性證明。
+通訊軟體的第一個大規模部署來自 WhatsApp，2023 年 4 月上線，底層用的就是 AKD，當時的定位是讓任何人都能自行驗證。Cloudflare 接手擔任第三方稽核者，是一年五個月之後的 2024 年 9 月，兩件事常被壓成同一件。Apple 的 iMessage Contact Key Verification 在 2023 年底推出，走另一條路線，由使用者裝置自己驗證一致性證明。
 
 IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-architecture/){target="_blank"}把部署方式分成三種模式，聯絡人監測（contact monitoring）、第三方管理（third-party management）與第三方稽核（third-party auditing），差別在於由誰負責察覺日誌分岔。草案本身只定義模式，沒有點名哪一家系統落在哪一格，常見的對照表出自工作組簡報與各家自己的說明。Signal 這次以第三方稽核為主，同時要求用戶端對自己的識別碼做監測，互補的理由在原文的「監測」一節說得很清楚。
 
 查證來源（2026-08）：[CONIKS: Bringing Key Transparency to End Users](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/melara){target="_blank"} - USENIX Security 2015。  
 查證來源（2026-08）：[SEEMless: Secure End-to-End Encrypted Messaging with less trust](https://eprint.iacr.org/2018/607){target="_blank"} - Chase、Deshpande、Ghosh、Malvai，ACM CCS 2019。  
-查證來源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程式庫見 [facebook/akd](https://github.com/facebook/akd){target="_blank"}。  
+查證來源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程式庫見 [facebook/akd](https://github.com/facebook/akd){target="_blank"}，儲存庫 2021 年 6 月建立。  
 查證來源（2026-08）：[Cloudflare helps verify the security of end-to-end encrypted messages by auditing key transparency for WhatsApp](https://blog.cloudflare.com/key-transparency/){target="_blank"} - Cloudflare，2024-09-24。  
 查證來源（2026-08）：[Advancing iMessage security: iMessage Contact Key Verification](https://security.apple.com/blog/imessage-contact-key-verification){target="_blank"} - Apple Security Research，2023-10-27。
 {: .source-note }
@@ -364,7 +364,7 @@ IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-key
 
 ??? question "我驗證了某位聯絡人，對方會知道嗎"
 
-    原文說所有向日誌查詢識別碼的請求都不帶身分驗證，不會跟特定使用者帳號綁在一起，伺服器因此無從得知是誰在查。原文也沒有描述任何會通知對方的機制。原文沒有正面交代，處境對此特別敏感的人，保守假設比較安全。
+    原文說所有向日誌查詢識別碼的請求都不帶身分驗證，不會跟特定使用者帳號綁在一起。保證的範圍到這裡為止，查詢不會被綁到你的帳號，連線來源與時序仍然握在伺服器手上，推不出伺服器完全無從關聯。原文也沒有描述任何會通知對方的機制，同樣沒有正面交代，處境對此特別敏感的人，保守假設比較安全。
 
 ??? question "我換了新號碼，為什麼舊聯絡人驗證不了我"
 
@@ -396,7 +396,7 @@ IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-key
 
 ??? question "Signal 的伺服器被入侵，我會收到通知嗎"
 
-    不會有一則寫著「伺服器被入侵」的通知。你會看到安全碼變動的提示，或是自動驗證失敗。金鑰透明度的設計目標是讓竄改留下無法抹除的證據，並非即時警報。發現的時間點落在你或對方下一次檢查的時候。
+    不會有一則寫著「伺服器被入侵」的通知。你會看到安全碼變動的提示，或是自動驗證失敗。金鑰透明度的設計目標是讓竄改留下無法抹除的證據，做不到即時警報。發現的時間點落在你或對方下一次檢查的時候。
 
 ??? question "跟 WhatsApp、iMessage 的同類功能差在哪"
 
@@ -420,6 +420,8 @@ IETF 的 [KeyTrans 架構草案](https://datatracker.ietf.org/doc/draft-ietf-key
 站外：
 
 - [Signal 的金鑰透明度伺服器原始碼](https://github.com/signalapp/key-transparency-server){target="_blank"}，Signal 的實作依據 IETF 草案並做了調整。
+- [Cloudflare 談與 Signal 合作稽核金鑰透明度](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"}，兩位稽核者之一對這次合作的說明。
+- [Trail of Bits 談如何驗證 Signal 對話的完整性](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"}，另一位稽核者的技術說明。
 - [IETF KeyTrans 協定草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-protocol/){target="_blank"}與[架構草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-architecture/){target="_blank"}，標準化工作仍在進行。
 - [CONIKS: Bringing Key Transparency to End Users](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/melara){target="_blank"}，2015 年提出讓使用者自行監測目錄的設計。
 - [SEEMless: Secure End-to-End Encrypted Messaging with less trust](https://eprint.iacr.org/2018/607){target="_blank"}，後續在隱私與效率上的改進。

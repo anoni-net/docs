@@ -132,7 +132,7 @@ Alice 与 Bob 需要一位独立的见证者，让职员不敢造假。
 
 审计方对每一页与每一本索引本只会签名一次，所以职员若想把第 50 版索引本的不同版本分别展示给 Alice 与 Bob，只有其中一个版本拿得出有效的审计方签名。通过检查与验证审计方签名，Alice 与 Bob 可以确信职员只维护一本账本与一套对应的索引本，两人看到的是同一批记录。
 
-在 Signal 的密钥透明度实现中，由 [Cloudflare](https://www.cloudflare.com/){target="_blank"} 与 [Trail of Bits](https://trailofbits.com/){target="_blank"} 担任受信任的第三方审计方。
+在 Signal 的密钥透明度实现中，由 [Cloudflare](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"} 与 [Trail of Bits](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"} 担任受信任的第三方审计方。
 
 #### 监测
 
@@ -154,7 +154,7 @@ Alice 按固定节奏做自我检查，Bob 依自己的步调查账本，两人�
 
 在 Signal 里，你可以选择让别人用电话号码[找到你](https://support.signal.org/hc/en-us/articles/6829998083994-Phone-Number-Privacy-and-Usernames-Deeper-Dive){target="_blank"}，也可以建立用户名，让别人用名称找到你。决定开放电话号码或用户名之后，别人就能在 Signal 输入你的号码或名称，发起消息邀请。Signal 保有一份[中央目录](https://signal.org/blog/building-faster-oram/){target="_blank"}，最终把这些公开标识符对应到用户的公钥，就像信箱比喻里的「姓名」与「地址」。
 
-Signal 用户注册、变更电话号码或用户名、重新建立账号时，Signal 会把变更记在一棵日志树（也就是「账本」）里，并用前缀树（也就是「索引本」）协助在日志树中查找。[Cloudflare](https://www.cloudflare.com/){target="_blank"} 与 [Trail of Bits](https://trailofbits.com/){target="_blank"} 各自担任两种树的独立审计方，两种树合起来构成密钥透明度日志。
+Signal 用户注册、变更电话号码或用户名、重新建立账号时，Signal 会把变更记在一棵日志树（也就是「账本」）里，并用前缀树（也就是「索引本」）协助在日志树中查找。[Cloudflare](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"} 与 [Trail of Bits](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"} 各自担任两种树的独立审计方，两种树合起来构成密钥透明度日志。
 
 日志里所有的用户数据都经过密码学处理而无法辨识，公开标识符会先通过[可验证随机函数](https://en.wikipedia.org/wiki/Verifiable_random_function){target="_blank"}，标识符对应到的值则由[带密钥的哈希函数](https://en.wikipedia.org/wiki/HMAC){target="_blank"}保护，因此审计方从来看不到任何明文的用户数据。
 
@@ -164,7 +164,7 @@ Signal 用户注册、变更电话号码或用户名、重新建立账号时，S
 
 ## 密钥透明度目前的实际样貌
 
-密钥透明度能说明的是，Signal 生态系统里所有设备对「标识符与其公钥的对应关系」抱持同一份视角。它不验证掌控某个电话号码或用户名的人究竟是谁。具体来说，Alice 与 Bob 可以通过密钥透明度检查，确保各自持有某个账号正确的公钥，若 Mallory 已经完全接管 Alice 的账号，要察觉仍需仰赖额外的验证，例如在安全码变动后主动追问。
+密钥透明度显示，Signal 生态系统里所有设备对「标识符与其公钥的对应关系」抱持同一份视角。它不验证掌控某个电话号码或用户名的人究竟是谁。具体来说，Alice 与 Bob 可以通过密钥透明度检查，确保各自持有某个账号正确的公钥，若 Mallory 已经完全接管 Alice 的账号，要察觉仍需仰赖额外的验证，例如在安全码变动后主动追问。
 
 目前你的 Signal App 会自动验证日志里属于你自己的电话号码与用户名数据。要替别人做同样的验证，你必须有对方的电话号码。也就是说，你若是通过用户名在 Signal 上与某人建立联系，彼此没有交换电话号码，也无从得知对方的号码，就无法验证对方。
 
@@ -277,13 +277,13 @@ Signal 的关联设备（linked device），也就是桌面版与 iPad 版，与
 
 原文的叙事是 Bob 去验证 Alice，实际的信任链常常反过来。公开身份的人，例如记者、组织的对外窗口，被锁定的概率比多数联系人高，而看着绿色对勾决定要不要信任的，是来找你的那一方。你自己的账号没有守好，所有信任那个对勾的人会一起被误导。注册锁定与已关联设备的检查，优先顺序排在逐一验证每个联系人之前。
 
-Signal 把限制处理成「功能不可用」而非「降级验证」，选择是对的，宁可让按钮消失，也不要给出一个看起来成功、实际上没有意义的绿色对勾。纯用户名的联系人目前仍请沿用安全码，扫 QR code 那条路一直都在。只是当面核对本身也有代价，被看到跟某个人有联系，对还没出柜的伴侣或需要保护的消息来源就是一次额外的曝光。当面核对留给真正需要的时刻，例如收到安全码变动通知之后，不必变成常态。
+Signal 遇到限制时直接让功能不可用，选择是对的，宁可让按钮消失，也不要给出一个看起来成功、实际上没有意义的绿色对勾。纯用户名的联系人目前仍请沿用安全码，扫 QR code 那条路一直都在。只是当面核对本身也有代价，被看到跟某个人有联系，对还没出柜的伴侣或需要保护的消息来源就是一次额外的曝光。当面核对留给真正需要的时刻，例如收到安全码变动通知之后，不必变成常态。
 
 ### 账号背后换了人，密钥不会变
 
 密钥透明度绑定标识符与密钥的对应，不绑定标识符背后是哪一个人。前面谈账号接管时，落差表现成攻击，在组织里则是日常运作的一部分。
 
-对外窗口、客服、项目联系人等角色账号，操作的人会换。交接若做得规矩，沿用同一台设备，或用注册锁定的 PIN 重新注册，密钥完全不会变动，安全码也不会变。一年前验证过那个账号的人，不会收到任何技术讯号告诉他们操作的人换了。与其说是漏洞，比较接近密钥透明度本来就没有要回答的问题。
+对外窗口、客服、项目联系人等角色账号，操作的人会换。交接若做得规矩，沿用同一台设备，或用注册锁定的 PIN 重新注册，密钥完全不会变动，安全码也不会变。一年前验证过那个账号的人，不会收到任何技术讯号告诉他们操作的人换了。密钥透明度本来就没有要回答账号背后是谁在操作的问题。
 
 角色账号还有两件事跟个人账号不同。第一，「已关联设备清单上每一项你都认得」那条建议假定只有一个人在管账号，多人轮值时要改成比对一份内部名册，靠记忆不可行。第二，组织号码的短信验证码可能不只一个人收得到，办公室转接线、IT 管理的 eSIM、账单持有人都可能在链上，注册锁定的 PIN 要当成组织的共用机敏凭证管理，存放与轮替的做法见站上的[密码管理器入门](../../tools/password-manager.md)。
 
@@ -327,15 +327,15 @@ Signal 把限制处理成「功能不可用」而非「降级验证」，选择�
 
 ### 密钥透明度不是 Signal 首创
 
-概念上密钥透明度延伸自证书透明度（Certificate Transparency），把 HTTPS 证书的公开日志与审计机制搬到即时通讯的公钥上。学术脉络可以再往前拉，2015 年的 CONIKS 提出让用户自行监测目录的设计，2019 年的 SEEMless 补上隐私与效率，Meta 后来把相关想法做成开源的 Auditable Key Directory（AKD）程序库。
+概念上密钥透明度延伸自证书透明度（Certificate Transparency），把 HTTPS 证书的公开日志与审计机制搬到即时通讯的公钥上。学术脉络可以再往前拉，2015 年的 CONIKS 提出让用户自行监测目录的设计，2019 年的 SEEMless 补上隐私与效率，Meta 在 2021 年把相关想法做成开源的 Auditable Key Directory（AKD）程序库。
 
-通讯软件的第一个大规模部署来自 WhatsApp，2023 年 4 月上线并开源 AKD，当时的定位是让任何人都能自行验证。Cloudflare 接手担任第三方审计方，是一年五个月之后的 2024 年 9 月，两件事常被压成同一件。Apple 的 iMessage Contact Key Verification 在 2023 年底推出，走另一条路线，由用户设备自己验证一致性证明。
+通讯软件的第一个大规模部署来自 WhatsApp，2023 年 4 月上线，底层用的就是 AKD，当时的定位是让任何人都能自行验证。Cloudflare 接手担任第三方审计方，是一年五个月之后的 2024 年 9 月，两件事常被压成同一件。Apple 的 iMessage Contact Key Verification 在 2023 年底推出，走另一条路线，由用户设备自己验证一致性证明。
 
 IETF 的 [KeyTrans 架构草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-architecture/){target="_blank"}把部署方式分成三种模式，联系人监测（contact monitoring）、第三方管理（third-party management）与第三方审计（third-party auditing），差别在于由谁负责察觉日志分叉。草案本身只定义模式，没有点名哪一家系统落在哪一格，常见的对照表出自工作组简报与各家自己的说明。Signal 这次以第三方审计为主，同时要求客户端对自己的标识符做监测，互补的理由在原文的「监测」一节说得很清楚。
 
 查证来源（2026-08）：[CONIKS: Bringing Key Transparency to End Users](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/melara){target="_blank"} - USENIX Security 2015。  
 查证来源（2026-08）：[SEEMless: Secure End-to-End Encrypted Messaging with less trust](https://eprint.iacr.org/2018/607){target="_blank"} - Chase、Deshpande、Ghosh、Malvai，ACM CCS 2019。  
-查证来源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程序库见 [facebook/akd](https://github.com/facebook/akd){target="_blank"}。  
+查证来源（2026-08）：[Deploying key transparency at WhatsApp](https://engineering.fb.com/2023/04/13/security/whatsapp-key-transparency/){target="_blank"} - Meta Engineering，2023-04-13。AKD 程序库见 [facebook/akd](https://github.com/facebook/akd){target="_blank"}，仓库 2021 年 6 月建立。  
 查证来源（2026-08）：[Cloudflare helps verify the security of end-to-end encrypted messages by auditing key transparency for WhatsApp](https://blog.cloudflare.com/key-transparency/){target="_blank"} - Cloudflare，2024-09-24。  
 查证来源（2026-08）：[Advancing iMessage security: iMessage Contact Key Verification](https://security.apple.com/blog/imessage-contact-key-verification){target="_blank"} - Apple Security Research，2023-10-27。
 {: .source-note }
@@ -364,7 +364,7 @@ IETF 的 [KeyTrans 架构草案](https://datatracker.ietf.org/doc/draft-ietf-key
 
 ??? question "我验证了某位联系人，对方会知道吗"
 
-    原文说所有向日志查询标识符的请求都不带身份验证，不会跟特定用户账号绑在一起，服务器因此无从得知是谁在查。原文也没有描述任何会通知对方的机制。原文没有正面交代，处境对此特别敏感的人，保守假设比较安全。
+    原文说所有向日志查询标识符的请求都不带身份验证，不会跟特定用户账号绑在一起。保证的范围到这里为止，查询不会被绑到你的账号，连接来源与时序仍然握在服务器手上，推不出服务器完全无从关联。原文也没有描述任何会通知对方的机制，同样没有正面交代，处境对此特别敏感的人，保守假设比较安全。
 
 ??? question "我换了新号码，为什么旧联系人验证不了我"
 
@@ -396,7 +396,7 @@ IETF 的 [KeyTrans 架构草案](https://datatracker.ietf.org/doc/draft-ietf-key
 
 ??? question "Signal 的服务器被入侵，我会收到通知吗"
 
-    不会有一则写着「服务器被入侵」的通知。你会看到安全码变动的提示，或是自动验证失败。密钥透明度的设计目标是让篡改留下无法抹除的证据，并非即时警报。发现的时间点落在你或对方下一次检查的时候。
+    不会有一则写着「服务器被入侵」的通知。你会看到安全码变动的提示，或是自动验证失败。密钥透明度的设计目标是让篡改留下无法抹除的证据，做不到即时警报。发现的时间点落在你或对方下一次检查的时候。
 
 ??? question "跟 WhatsApp、iMessage 的同类功能差在哪"
 
@@ -420,6 +420,8 @@ IETF 的 [KeyTrans 架构草案](https://datatracker.ietf.org/doc/draft-ietf-key
 站外：
 
 - [Signal 的密钥透明度服务器源代码](https://github.com/signalapp/key-transparency-server){target="_blank"}，Signal 的实现依据 IETF 草案并做了调整。
+- [Cloudflare 谈与 Signal 合作审计密钥透明度](https://www.cloudflare.com/press/press-releases/2026/signal-taps-cloudflare-to-help-protect-the-privacy-of-hundreds-of-millions-of-users-through-key-transparency/){target="_blank"}，两位审计方之一对这次合作的说明。
+- [Trail of Bits 谈如何验证 Signal 对话的完整性](https://blog.trailofbits.com/2026/08/11/how-trail-of-bits-helps-verify-the-integrity-of-your-signal-chats/){target="_blank"}，另一位审计方的技术说明。
 - [IETF KeyTrans 协议草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-protocol/){target="_blank"}与[架构草案](https://datatracker.ietf.org/doc/draft-ietf-keytrans-architecture/){target="_blank"}，标准化工作仍在进行。
 - [CONIKS: Bringing Key Transparency to End Users](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/melara){target="_blank"}，2015 年提出让用户自行监测目录的设计。
 - [SEEMless: Secure End-to-End Encrypted Messaging with less trust](https://eprint.iacr.org/2018/607){target="_blank"}，后续在隐私与效率上的改进。
