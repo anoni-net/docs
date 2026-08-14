@@ -65,6 +65,12 @@ AI_OPENER_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS) + r")")
 # 個字的兩個「這」指涉不同對象，讀起來不重複）。改法要看語境（換成它指的名詞、拆句、
 # 或整句重寫），機器不宜代勞，列 warn。
 ZHE_RE = re.compile(r"[這这]")
+# 「那」套同一組門檻。兩個字分別計數，「這份文件提到那個結論」各一次，不算堆疊。
+NA_RE = re.compile(r"[那]")
+DEMONSTRATIVE_RULES = (
+    ("zhe-repeat", ZHE_RE, "這"),
+    ("na-repeat", NA_RE, "那"),
+)
 ZHE_GAP = 8
 # 句子單位。表格的 | 也算分隔，同一列不同格是獨立內容，不該互相累計。
 ZHE_SPLIT = re.compile(r"[。！？|]")
@@ -217,11 +223,14 @@ def iter_sentences(clean: str):
     yield start, clean[start:]
 
 
-def check_zhe_repeat(raw: str, clean: str):
-    """回傳該行所有「這」密集重複的 (訊息, snippet)，一個句子單位最多報一次。"""
+def check_zhe_repeat(raw: str, clean: str, rx: re.Pattern = ZHE_RE, word: str = "這"):
+    """回傳該行所有指示詞密集重複的 (訊息, snippet)，一個句子單位最多報一次。
+
+    rx 與 word 決定掃哪個字，「這」與「那」各掃一輪，彼此不累計。
+    """
     out = []
     for off, sent in iter_sentences(clean):
-        pos = [m.start() for m in ZHE_RE.finditer(sent)]
+        pos = [m.start() for m in rx.finditer(sent)]
         if len(pos) >= 3:
             reason = f"同一句出現 {len(pos)} 次"
         elif any(b - a <= ZHE_GAP for a, b in zip(pos, pos[1:])):
@@ -229,7 +238,7 @@ def check_zhe_repeat(raw: str, clean: str):
         else:
             continue
         snippet = raw[off + pos[0]: off + pos[-1] + 6].strip()
-        out.append((f"「這」密集重複（{reason}），改成它指的名詞或拆句重寫", snippet[:40]))
+        out.append((f"「{word}」密集重複（{reason}），改成它指的名詞或拆句重寫", snippet[:40]))
     return out
 
 
@@ -306,8 +315,9 @@ def lint_file(path: Path):
         if AI_OPENER_RE.search(clean):
             findings.append((i, ERROR, "ai-opener",
                              "避免以「值得注意的是/總的來說/綜上所述」開頭", raw.strip()[:24]))
-        for msg, snippet in check_zhe_repeat(raw, clean):
-            findings.append((i, WARN, "zhe-repeat", msg, snippet))
+        for code, rx, word in DEMONSTRATIVE_RULES:
+            for msg, snippet in check_zhe_repeat(raw, clean, rx, word):
+                findings.append((i, WARN, code, msg, snippet))
         for m in JIANG_RE.finditer(clean):
             around = clean[max(0, m.start() - 1): m.start() + 2]
             if not JIANG_ALLOW.search(around):
