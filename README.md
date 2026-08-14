@@ -107,6 +107,45 @@ uv sync
 uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 ```
 
+### 本地建置排錯
+
+#### 圖表在本地是空白的，線上卻正常
+
+先看頁面原始碼裡載入 vega-embed 的那行。壞掉時長這樣：
+
+```
+../../../../https:/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+正常時會指向本地副本：
+
+```
+../../../../assets/external/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+Material 的 privacy plugin 會把 `mkdocs.yml` 裡 `extra_javascript` 的 CDN 資源下載到 `docs/.cache/plugin/privacy/`。當某個資源的 URL 從無子路徑改成有子路徑時，舊快取會擋住新的目錄：
+
+```yaml
+- https://cdn.jsdelivr.net/npm/vega-embed@6                          # 舊：快取存成一個檔案
+- https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js  # 新：快取需要一個同名目錄
+```
+
+同名的舊檔案佔住路徑，目錄建不起來，下載落空，URL 也就沒被改寫成本地路徑，`https://` 被當成相對路徑接在頁面路徑後面。CI 每次都是乾淨 checkout，不會有舊快取，所以只有本地會壞。`mkdocs build` 的產出同樣會壞，不只是 `mkdocs serve`。
+
+刪掉擋路的那一項後重建：
+
+```bash
+rm docs/.cache/plugin/privacy/assets/external/cdn.jsdelivr.net/npm/vega-embed@6
+```
+
+不確定是哪一項時，整包刪掉重建也可以，代價是下次建置要重新下載：
+
+```bash
+rm -rf docs/.cache/plugin/privacy
+```
+
+`docs/.cache/` 已列入 `docs/.gitignore`，屬於本地快取，刪掉不影響版本控制。往後任何 `extra_javascript` 的 CDN 網址改變路徑結構，都可能再遇到，處理方式相同。
+
 ## 📖 文件與資源
 
 - **線上文件**: [https://anoni.net/docs/](https://anoni.net/docs/)
@@ -254,6 +293,45 @@ uv sync
 # Lookback recent 36 hours of TW measurement data
 uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 ```
+
+### Local Build Troubleshooting
+
+#### Charts are blank locally but fine in production
+
+Check the script tag that loads vega-embed in the page source. When broken, it looks like this:
+
+```
+../../../../https:/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+When working, it points at the local copy:
+
+```
+../../../../assets/external/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+Material's privacy plugin downloads the CDN resources listed under `extra_javascript` in `mkdocs.yml` into `docs/.cache/plugin/privacy/`. When a resource's URL changes from having no sub-path to having one, the stale cache entry blocks the new directory:
+
+```yaml
+- https://cdn.jsdelivr.net/npm/vega-embed@6                          # old: cached as a file
+- https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js  # new: cache needs a directory of the same name
+```
+
+The old file occupies the path, the directory cannot be created, the download silently fails, and the URL is never rewritten to a local path — so `https://` gets appended to the page path as if it were relative. CI always starts from a clean checkout and has no stale cache, so only local builds break. This affects `mkdocs build` output as well, not just `mkdocs serve`.
+
+Delete the blocking entry and rebuild:
+
+```bash
+rm docs/.cache/plugin/privacy/assets/external/cdn.jsdelivr.net/npm/vega-embed@6
+```
+
+If you are not sure which entry is at fault, dropping the whole cache is safe — the cost is re-downloading on the next build:
+
+```bash
+rm -rf docs/.cache/plugin/privacy
+```
+
+`docs/.cache/` is already listed in `docs/.gitignore`, so removing it has no effect on version control. Any future `extra_javascript` CDN URL that changes its path structure can hit the same issue, with the same fix.
 
 ## 📖 Documentation & Resources
 

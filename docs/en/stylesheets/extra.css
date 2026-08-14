@@ -416,3 +416,41 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .md-banner__inner a:hover {
   color: var(--brand-cyan-200);
 }
+
+/* ==========================================================================
+   .source-note — 查證來源、出處註記
+   用法（段落之後另起一行，注意是冒號形式的區塊語法）：
+     查證來源（2026-08）：[標題](url){target="_blank"} - 出處單位，2025-02-20。
+     {: .source-note }
+   出處註記不是內文層級，字級與顏色各降一階，左側細線與正文拉開。
+   顏色與框線用 Material 的 --md-default-fg-color--light 與 --lighter，兩者在
+   slate 主題會自動換成淺色前景，因此不需要另寫 [data-md-color-scheme="slate"]
+   覆寫。淺色主題下 --light 疊在白底是 4.61:1，小字仍達 WCAG AA 的 4.5:1。
+   左框線刻意用 2px，與 Material blockquote 的 4px 拉開，避免看成引言。
+   ========================================================================== */
+
+.md-typeset .source-note {
+  border-left: 2px solid var(--md-default-fg-color--lighter);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.85em;
+  line-height: 1.6;
+  margin-top: 1.2em;
+  padding-left: 0.8em;
+}
+
+/* ==========================================================================
+   Table width
+
+   Material does not set a width on tables, so each one is only as wide as its
+   content. Within a single page this leaves tables at differing widths, all
+   flush left, with right edges that never line up with the surrounding text.
+   Filling the content area gives tables and paragraphs the same left and right
+   boundaries.
+
+   Tables with few columns get stretched. Right-align numeric columns with ---:
+   in Markdown so the figures stay grouped and remain easy to compare.
+   ========================================================================== */
+
+.md-typeset table:not([class]) {
+  width: 100%;
+}
