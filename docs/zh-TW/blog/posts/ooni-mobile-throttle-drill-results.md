@@ -174,7 +174,7 @@ https://api.ooni.org/api/v1/measurements?probe_cc=TW&test_name=ndt
 
 列表本身不含吞吐量，要再開每一筆回傳的 `measurement_url`。連線速度測試的數值在 `test_keys.summary`，包含下載（`download`）、上傳（`upload`）、最小往返延遲（`min_rtt`）、平均往返延遲（`avg_rtt`）與重傳率（`retransmit_rate`）。影音串流測試的數值在 `test_keys.simple`，包含位元率中位數（`median_bitrate`）與播放等待時間（`min_playout_delay`）。
 
-### 第三步，篩掉不是行動網路的量測
+### 第三步，剔除非行動網路的量測
 
 原始 JSON 的網路類型欄位（`annotations.network_type`）會標記行動網路（`mobile`）、Wi-Fi（`wifi`）、有線（`wired_ethernet`）或 VPN（`vpn`）。當天 238 筆連線速度測試裡，只有 170 筆標記為行動網路。少了篩選，家用光纖與 VPN 的量測會混進來，而兩者本來就不在降速範圍內。
 
@@ -270,7 +270,7 @@ OONI 記錄國家與 ASN，不記錄縣市，也不記錄基地台位置。從�
 
 **吞吐量、往返延遲與裝置識別**取自每筆量測的原始 JSON，經由 measurements 回傳的 `measurement_url` 取得，欄位位置見上方的觀察流程。本文的行動網路量測僅計入網路類型為 `mobile` 者，排除 Wi-Fi 與 VPN。裝置以 `probe_id` 去重，部分量測沒有帶值，未帶值者不計入裝置數。當天三家的筆數為該 ASN 的全部量測，與前 30 天基準採同一種計算方式，扣掉 2 筆 VPN 與 3 筆未標記網路類型後，行動網路上完成的分別是 67、50 與 52 筆。行動網路的 170 筆裡另有 1 筆來自 `AS9416`，不屬於三家全國性業者，未列入業者表格。
 
-**前 30 天的行動網路基準**（564 筆、中位 `12,425` kbit/s、低於 `2,000` kbit/s 的 4 筆、中華電信行動最低 `42,197` kbit/s）用 measurements 端點，`probe_cc=TW`、`test_name=ndt`、`since=2026-07-13T16:00:00Z`、`until=2026-08-12T16:00:00Z`，對應台灣時間 7 月 14 日到 8 月 12 日，`probe_asn` 分別為 `AS24158`、`AS17421`、`AS9674`，同樣逐筆取原始 JSON 後篩行動網路。
+**前 30 天的行動網路基準**（564 筆、中位 `12,425` kbit/s、低於 `2,000` kbit/s 的 4 筆、中華電信行動最低 `42,197` kbit/s）用 measurements 端點，`probe_cc=TW`、`test_name=ndt`、`since=2026-07-13T16:00:00Z`、`until=2026-08-12T16:00:00Z`，對應台灣時間 7 月 14 日到 8 月 12 日，`probe_asn` 分別為 `AS24158`、`AS17421`、`AS9674`，同樣逐筆取原始 JSON 後剔除非行動網路的量測。
 
 **對照日**用同樣的 measurements 參數，日期換成 2026-08-10、2026-08-11 與 2026-08-12，時間區間為 UTC `05:30` 到 `07:30`。
 
