@@ -162,9 +162,11 @@ icon: material/book-open-variant
 
 ### Branch 命名
 
-- `docs/<short-slug>` 處理文件變動（例：`docs/vasp-2026-rewrite`）
-- `feat/<short-slug>` 處理新功能或新分類（例：`feat/payments-stubs`）
-- `fix/<short-slug>` 處理 bug 修正
+- `blog/<short-slug>` 處理 blog 文章（例：`blog/throttle-drill-results`）
+- `feat/<short-slug>` 處理新功能、新分類、寫作規範，以及既有文件的大幅改寫（例：`feat/title-colon-rule`）
+- `fix/<short-slug>` 處理 bug、樣式與小幅修正（例：`fix/table-width`）
+
+`docs/` 不能當前綴。`docs` 本身是建置觸發分支，git 不允許同一個名稱同時是 ref 與 ref 的目錄，`git switch -c docs/vasp-2026-rewrite` 會回報 `cannot lock ref`。
 
 ### Commit 訊息格式
 
