@@ -132,6 +132,8 @@ OONI 的多數測項在做封鎖判定，例如網路連線測試、Telegram、S
 
 號召文事前只請大家執行效能測試，原因也在於此。限速期間執行有封鎖判定的測項，手機端大量逾時而輔助伺服器一切正常，比對出來會被標成封鎖的簽名，等於在台灣的公開資料裡注入一批看起來像審查的紀錄。當天的結果顯示假訊號沒有出現。
 
+兩種樣態都可以自行查看。台灣 8 月 13 日的[逐小時分布](https://explorer.ooni.org/chart/mat?probe_cc=TW&test_name=web_connectivity&since=2026-08-13&until=2026-08-14&axis_x=measurement_start_day&time_grain=hour){target="_blank"}裡，確認封鎖整天維持在 `0`，降速的那一個小時也是。OONI 團隊查證過的封鎖事件收在 [Findings](https://explorer.ooni.org/findings){target="_blank"}，每則都連著對應的量測資料，可以看到確認封鎖的筆數在事件期間如何上升。兩邊查的是同一個資料庫、同一組欄位，差別只在數值。
+
 ## 結論怎麼從公開資料得出
 
 **第一步，把時間窗內的量測撈出來。** measurements 端點免驗證，接受精確到秒的時間窗。
