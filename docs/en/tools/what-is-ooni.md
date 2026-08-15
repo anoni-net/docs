@@ -38,13 +38,15 @@ Running measurements adds your own network's observations to the public dataset.
 
 ### Blocking is not always censorship, and the data does not pretend to know
 
-One reason this site treats OONI as a regional instrument rather than an activism tool is that the same measurement means different things in different places. Taiwan is a useful demonstration because most of the DNS-layer blocking that shows up there is uncontroversial: Chunghwa Telecom's family filtering service, ad and malware blocking through [AdGuard](https://adguard.com/){target="_blank"} or [Pi-hole](https://pi-hole.net/){target="_blank"}, and the domain blocking the Ministry of Digital Affairs and the Taiwan Network Information Center (TWNIC) run against fraud sites through DNS response policy zones. All of it registers as DNS anomaly in OONI data. None of it is a political blocking event.
+One reason this site treats OONI as a regional instrument rather than an activism tool is that the same measurement means different things in different places. Taiwan is a useful demonstration because most of the DNS-layer blocking that shows up there is uncontroversial: Chunghwa Telecom's opt-in paid content filtering subscription for households, ad and malware blocking through [AdGuard](https://adguard.com/){target="_blank"} or [Pi-hole](https://pi-hole.net/){target="_blank"}, and the DNS response policy zone mechanism that the Taiwan Network Information Center (TWNIC) coordinates and participating ISPs execute against fraud domains, under orders from agencies including the Criminal Investigation Bureau. All of it can register as a DNS anomaly. None of it is political blocking.
 
 Compare that with Mainland China, where the Great Firewall's interference spans DNS tampering, IP blocking, and TLS interruption at national scale, or with jurisdictions where specific statutes drive selective blocking of individual URLs. The measurement technique is identical. The interpretation is entirely contextual, and OONI deliberately leaves that interpretation to people.
 
 !!! question "Is the network we are on actually free?"
 
-    The examples above are mostly benign blocking aimed at malicious sites, ads, and phishing. The harder question is what happens when blocking is deliberate, or when it comes from an ASN nobody is measuring. **Current data for Taiwan shows no large-scale blocking**, and the observations are heavily concentrated on one carrier, Chunghwa Telecom ([AS3462](https://radar.cloudflare.com/as3462){target="_blank"}). That lack of diversity is exactly what the [ASN coverage](../regional/ooni-asn-coverage.md) work exists to address, by identifying which ASNs in Taiwan still have no vantage point at all.
+    The examples above are mostly benign blocking aimed at malicious sites, ads, and phishing. The harder question is what happens when blocking is deliberate, or when it comes from an ASN nobody is measuring. **Current data for Taiwan shows no large-scale blocking**, with anomalies at roughly 3% and confirmed blocking well under 0.01% of web measurements over the past year. The largest single share of observations comes from one carrier, Chunghwa Telecom ([`AS3462`](https://radar.cloudflare.com/as3462){target="_blank"}), at about a third of the total, with a long tail of networks contributing far less. Evening out that distribution is what the [ASN coverage](../regional/ooni-asn-coverage.md) work exists to address, by identifying which networks in Taiwan still have no vantage point at all.
+
+    Worth keeping apart: the fraud domains handled through DNS RPZ are not on OONI's test list for Taiwan, so that mechanism does not appear in these figures at all. No large-scale blocking is an accurate reading. No blocking would not be.
 
 ## What OONI is good for, and what it is not
 
@@ -124,7 +126,7 @@ Measurements return to OONI's database and can be analyzed by region and by test
 
 ??? question "TWNIC's DNS blocking targets fraud sites. Does OONI count that as censorship?"
 
-    OONI observes and records rather than adjudicates. It writes down that a given site showed a DNS anomaly on a given ASN at a given time. Whether that is censorship, and whether it is reasonable, is for people to interpret. Fraud-site blocking appears in the data as a DNS anomaly and is not automatically labelled censorship. That is precisely where the value of the data lies: it is public and reproducible, rather than resting on anyone's authority.
+    OONI observes and records rather than adjudicates. A given site showing a DNS anomaly on a given network at a given time is what gets written down. Whether that is censorship, and whether it is reasonable, is for people to interpret. Fraud-domain blocking would appear in the data as a DNS anomaly and is not automatically labelled censorship, and in practice those domains are not on the test list, so they rarely appear at all. That is precisely where the value of the data lies: it is public and reproducible, rather than resting on anyone's authority.
 
 ??? question "Can I run OONI Probe and Tor at the same time?"
 

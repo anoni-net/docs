@@ -18,9 +18,9 @@ icon: material/share-circle
 
 - **Your IP address is not exposed to the other party.** Traffic goes through Tor and they see only the `.onion` address
 - **The session leaves nothing behind.** Closing the window takes the service down, and the Tor network keeps no record that the onion existed
-- **You have to deliver the address through a secure channel.** OnionShare does not distribute it for you. Sending the address over an insecure messaging app makes that hop non-anonymous. Signal, CryptPad, or saying it in person are the usual approaches
+- **You have to deliver the address through a secure channel.** OnionShare does not distribute it for you. Sending the address over an insecure messaging app, which in this region usually means LINE or WeChat, makes that hop non-anonymous. Signal, CryptPad, or saying it in person are the usual approaches
 - **The other person needs Tor Browser.** If they cannot or will not use Tor, OnionShare is the wrong tool. Use [send.anoni.net](https://send.anoni.net/){target="_blank"} or PGP-encrypted email instead
-- **A long-running intake box wants dedicated hardware.** Leaving it on your main computer 24/7 makes that machine an attack surface. A Tails USB or a dedicated Linux box is better
+- **A long-running intake box needs dedicated hardware.** Leaving it on your main computer 24/7 makes that machine an attack surface. A Tails USB or a dedicated Linux box is better
 - **It uses your own bandwidth.** A large download consumes your upload capacity, and speed is bounded by current Tor network conditions
 
 ## Four modes
@@ -32,7 +32,7 @@ icon: material/share-circle
             title="The four mode tabs in the OnionShare main window"
             class="brand-frame">
     </a>
-    <figcaption>The four mode tabs in the OnionShare main window: Share Files, Receive Files, Host a Website, and Chat Anonymously.</figcaption>
+    <figcaption>The four mode tabs in the OnionShare main window: Share Files, Receive Files and Messages, Host a Website, and Chat Anonymously.</figcaption>
 </figure>
 
 ### Share Files
@@ -62,7 +62,7 @@ Drop files into OnionShare, which produces a `.onion` address. Deliver the addre
     <figcaption>Opening the .onion address in Tor Browser gives the recipient an ordinary-looking download page, with nothing new to learn.</figcaption>
 </figure>
 
-### Receive Files
+### Receive Files and Messages
 
 Open an upload interface at a `.onion` address. The sender opens it in Tor Browser, uploads, and the files arrive on your machine.
 
@@ -95,7 +95,7 @@ A multi-party encrypted chat room running in memory with no persistent record. W
 | Tool | Fits | How it differs from OnionShare |
 |---|---|---|
 | [send.anoni.net](https://send.anoni.net/){target="_blank"} | One-off encrypted transfer from an ordinary browser | Neither party needs Tor, so the barrier is low. Files pass through an anoni.net server (end-to-end encrypted, password-protectable, auto-expiring), which is a larger trust boundary than OnionShare |
-| [SecureDrop](https://securedrop.org/){target="_blank"} | An institutional intake system for news organizations | Requires professional deployment and ongoing operation, and is used by large international outlets. OnionShare's Receive mode is the lightweight version an individual journalist can run |
+| [SecureDrop](https://securedrop.org/){target="_blank"} | An institutional intake system for news organizations | Requires professional deployment and ongoing operation, and is used by large international outlets including the New York Times, the Guardian, and the Washington Post. OnionShare's Receive mode is the lightweight version an individual journalist can run |
 | Signal attachments | Transfer between parties who already trust each other | Signal is tied to a phone number, which the other party may not want to expose before first contact. OnionShare has no account and no identifier, which suits first contact |
 
 The decision:
@@ -113,7 +113,7 @@ The decision:
 
 ??? question "How do I confirm they got the right address and it was not substituted?"
 
-    Along with the address, OnionShare produces a private key or public key fingerprint. Deliver the address and the fingerprint through two separate channels, and have them verify the fingerprint when opening it in Tor Browser. The GUI also supports requiring a password before download, which is worth enabling for sensitive material.
+    Along with the address, OnionShare produces a private key, which Tor calls client authentication. Deliver the address and the private key through two separate channels, for example the address over Signal and the key in person, so that compromising one channel is not enough. Passwords were removed in OnionShare 2.4 and replaced by this mechanism, so there is no password option to enable. A service can be made public, disabling the private key, through the "This is a public OnionShare service" checkbox or `--public` on the command line, which is the setting you do **not** want for sensitive material.
 
 ??? question "How large a file can Receive mode take?"
 
@@ -125,7 +125,7 @@ The decision:
 
 ??? question "Does it work on a phone?"
 
-    There is an official Android app, on Google Play and F-Droid, still in beta, and an iOS app in development as of 2026. The mature mobile use is as the receiving side, opening someone's `.onion` address in Tor Browser for Android or Onion Browser for iOS. For the sending side, use a desktop or Tails.
+    There is an official Android app on Google Play and F-Droid, still in beta, and an iOS app that has been on the App Store since 2023. The most reliable mobile use is still as the receiving side, opening someone's `.onion` address in Tor Browser for Android or Onion Browser for iOS. For the sending side, a desktop or Tails is the safer choice.
 
 ??? question "Is OnionShare related to Tor bridges or Snowflake?"
 

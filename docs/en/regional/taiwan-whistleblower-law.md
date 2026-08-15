@@ -14,7 +14,7 @@ This is not legal advice. For the operative provisions and their scope, the auth
 
 !!! info "Why an international reader might care"
 
-    Taiwan passed its first dedicated whistleblower statute at the end of 2024, well after the EU's Directive 2019/1937 and the UK's Public Interest Disclosure Act, and it covers only the public sector. Reading which parts Taiwan adopted and which it left out shows what a late-arriving democracy considers politically achievable, and the gap it leaves is precisely where technical anonymity has to carry the weight. That pattern repeats across the region, in jurisdictions with far less legal protection than Taiwan's.
+    Taiwan passed its first dedicated whistleblower statute at the end of 2024 and brought it into force in July 2025, well after the EU's Directive 2019/1937 and the UK's Public Interest Disclosure Act. It covers the public sector, state-owned and government-controlled entities, and government contractors, leaving employees of purely private companies outside its protection. Reading which parts Taiwan adopted and which it left out shows what a late-arriving democracy considers politically achievable, and the gap it leaves is precisely where technical anonymity has to carry the weight. That pattern repeats across the region, in jurisdictions with far less legal protection than Taiwan's.
 
 ## The seam between institutions and technology
 
@@ -47,7 +47,7 @@ PIWPA applies to the **broader public sector**:
 - Employees of state-owned enterprises
 - Enterprises, organizations, and institutions under government control
 
-**Private sector employees are not covered.** Including private companies was discussed during the legislative process, including an amendment from the Taiwan People's Party caucus that would have covered the private sector while exempting small and medium enterprises capitalized under NT$100 million. It did not pass, and the version that reached third reading remains public-sector. That is the largest gap in the regime, discussed separately below.
+**Employees of purely private companies are not covered**, though the boundary is less clean than the summaries suggest. The Act reaches contractors and their employees engaged by government agencies, and people providing paid services to state-owned and government-controlled entities, with the second category limited to a narrower list of reportable wrongdoing. Extending it to the private sector proper was debated, including an amendment that would have covered private companies while exempting small and medium enterprises capitalized under NT$100 million. It did not pass. That gap is the largest in the regime, discussed separately below.
 
 ### What can be disclosed
 
@@ -74,7 +74,7 @@ Where a disclosure leads to unlawful conduct being established, the whistleblowe
 
 ## Where the law does not reach
 
-- **Private sector employees**: the largest gap, covering ordinary private companies, Taiwan branches of foreign companies, and civil society organizations not under government control
+- **Employees of purely private companies**: the largest gap, covering ordinary private companies, Taiwan branches of foreign companies, and civil society organizations neither controlled nor funded by government. Contractors working for government agencies are inside the Act, so the line runs between who your employer works for rather than between public and private employment as such
 - **Retirees**: the Act protects serving employees, and retrospective protection for disclosure after retirement is not clearly addressed
 - **Disclosure inside NGOs**: many advocacy organizations are themselves the subject of disclosures, and internal whistleblowing there has no protection
 - **Cross-domain disclosure**: where the content touches national security, military matters, or trade secrets, it runs into the Classified National Security Information Protection Act, the Trade Secrets Act, and the National Intelligence Services Act
