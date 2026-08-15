@@ -27,11 +27,11 @@ Every one of these starts with saying hello on Matrix. The community works async
 
 Traditional Chinese (`docs/zh-TW`) is the source of truth for the site, and its style rules cover Chinese punctuation, classifier repetition, register, and translated terminology. Those rules do not transfer, and several are actively wrong when applied to English. Em dashes, for example, are banned in Chinese body text and are ordinary English typography.
 
-What follows is the English rule set. If you are writing or reviewing Chinese, use the [Chinese contributor handbook](https://anoni.net/docs/community/contributor-handbook/){target="_blank"} instead, which is the authority for `zh-TW` and `zh-CN`.
+What follows is the English rule set. If you are writing or reviewing Chinese, use the [Chinese contributor handbook](https://anoni.net/docs/community/contributor-handbook/){target="_blank"} (in Chinese) instead, which is the authority for `zh-TW` and `zh-CN`. The automated style linter in CI only covers `docs/zh-TW` and `docs/zh-CN`, so the English rules below rest on human review.
 
 ### Voice and positioning
 
-The English site speaks to international peers, researchers, journalists, and English-preferring readers across the Sinophone Asia-Pacific. It is written by people working inside the region, and the prose should sound like it.
+The English site is written for international peers, researchers, journalists, and English-preferring readers across the Sinophone Asia-Pacific, by people working inside the region. The prose should sound like it.
 
 - Refer to ourselves as "we, a community based in Taiwan". Avoid "In Taiwan, we...", which addresses the reader as though they were also in Taiwan.
 - Where a passage is specific to Taiwan, add the regional comparison rather than leaving Taiwan as the implied default. Mainland China, Hong Kong and Macau, Singapore, Malaysia, and the diaspora each have their own picture.
@@ -41,7 +41,7 @@ The English site speaks to international peers, researchers, journalists, and En
 
 - Write regulatory short names out in full on first use: PDPA becomes "the Personal Data Protection Act of Taiwan", VASP becomes "the virtual asset service provider regime".
 - Write institution names out in full: 金管會 becomes "the Financial Supervisory Commission (FSC)".
-- Give technical names a short expansion on first use: Tor (anonymous routing network), Tails (amnesic live operating system), OONI (Open Observatory of Network Interference).
+- Give technical names a short expansion on first use: Tor (onion routing network), Tails (amnesic live operating system), OONI (Open Observatory of Network Interference).
 - Cite English-language primary sources in footnotes. Do not cite the Chinese translation of a piece that exists in English.
 
 ### Headings
@@ -59,6 +59,7 @@ The English site speaks to international peers, researchers, journalists, and En
 - Do not end every paragraph with a summarizing sentence. Let paragraphs stop when they are finished.
 - Avoid openers like "It is worth noting that", "In conclusion", and "All in all".
 - Avoid the over-symmetrical three-part structure that reads as machine-generated.
+- Define a concept by stating it completely. Constructions like "what this is about is" or "this refers to" push the definition out of focus without adding anything.
 
 ### No animacy for things that are not people
 
@@ -91,7 +92,7 @@ Mark list numbers, IDs, and serial numbers as inline code (`10006`, `10298`), so
 
 Anonymity and privacy are the subject of this site, and the writing has to hold the same line:
 
-- Do not publish recipes that can be misused. Even where the data and APIs are public, we do not walk readers through full enumeration or bulk scraping. State the result instead: `we took a snapshot of the full list on a given day`, rather than printing the command that iterates every identifier.
+- Do not publish recipes that can be misused. Even where the data and APIs are public, we do not walk readers through full enumeration, bulk scraping, de-anonymization, or bypassing a security control. State the result instead: `we took a snapshot of the full list on a given day`, rather than printing the command that iterates every identifier.
 - Do not expose individual operators' accounts or handles. Refer to someone's observations by region or role (`an observer in Thailand`), and name people only when they are already public and naming them is necessary.
 - Material involving victims, unpublished research, or personal data goes through [Sending us sensitive material](./upload-sensitive.md).
 
@@ -149,7 +150,7 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 
 Linking to a page that exists only in Chinese is the one case where you write a full URL, because the language sites build separately and no relative path reaches across them. Use `https://anoni.net/docs/community/privacy-guide/` and mark it `(in Chinese)` so the reader knows what they are clicking. The default language, zh-TW, carries no language segment in its URLs. zh-CN uses lowercase `https://anoni.net/docs/zh-cn/...` and English uses `https://anoni.net/docs/en/...`, while the source directories keep their original casing.
 
-Ending an article with a short "Related" section linking two to four other pages helps. Sideways links between concepts, tools, scenarios, and advanced material are worth more than one-directional references.
+Ending an article with a short "Related" section linking two to four other pages helps. Sideways links between concepts, tools, scenarios, and regional material are worth more than one-directional references.
 
 ## Pull requests
 

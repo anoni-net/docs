@@ -8,6 +8,8 @@ icon: material/server-network-outline
 
 The community self-hosts six services (Matrix, CryptPad, Etherpad, SearXNG, Send, and Formbricks) and uses an external Jitsi for video calls. We run them ourselves to reduce our dependence on third parties and keep control of our own data, and to give community discussion and sensitive collaboration a foundation we can vouch for.
 
+Three of them (Matrix, CryptPad, and the Formbricks backend) need an account issued by a person, so write to <whisper@anoni.net> and expect a reply within a day or two. The community works asynchronously and nobody is watching the inbox around the clock.
+
 For why we self-host Matrix in particular, and the privacy trade-offs behind that decision, see [Why we self-host Matrix, starting from Discord's age verification](../blog/posts/2026-discord-matrix-statement.md).
 
 ## Real-time discussion and long-term collaboration
@@ -31,7 +33,7 @@ For why we self-host Matrix in particular, and the privacy trade-offs behind tha
 - **Use**: collaborative writing, event planning, and collaboration on material that needs encryption at rest
 - **Entry point**: the community [CryptPad instance](https://cryptpad.anoni.net/)
 - **Getting an account**: CryptPad accounts are also issued on request to <whisper@anoni.net>. The default quota is 50 MB and can be adjusted later.
-- **Interface languages**: CryptPad ships in a wide range of languages, switchable from the settings page or by adding `?lang=` to the URL. Traditional Chinese (`zh_Hant`) became a built-in locale in CryptPad 2026.5.0 after two and a half years of upstream translation work by this community, which is written up in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md).
+- **Interface languages**: CryptPad ships in a wide range of languages, switchable from the settings page or by appending `?lang=zh_Hant` or `?lang=zh_Hans` to the URL. Both Traditional Chinese (`zh_Hant`) and Simplified Chinese (`zh_Hans`) became built-in locales in CryptPad 2026.5.0, along with a locale alias system, after two and a half years of upstream translation work by this community. The story is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md).
 - **How to use it**: once you have an account you can create pads, share links, and set permissions (view-only or editable). Links to event pads are usually posted in Matrix.
 
 ### Etherpad (lightweight shared notes)
@@ -40,7 +42,7 @@ For why we self-host Matrix in particular, and the privacy trade-offs behind tha
 - **Entry point**: [https://pad.anoni.net/](https://pad.anoni.net/){target="_blank"}
 - **Getting an account**: none needed. Create a pad and share the link.
 - **How to use it**: good for public, disposable content. Switch to CryptPad when you need the material to persist or to be encrypted.
-- **As a throwaway chat**: when you meet someone in person and neither of you wants to exchange app accounts, open a new pad and hand over the URL. The built-in chat sidebar works as a one-off conversation space. Close the tab and clear the pad when you are done, keeping in mind that the content is unencrypted and the server can in principle see it.
+- **As a throwaway chat**: when you meet someone in person and neither of you wants to exchange app accounts, open a new pad and hand over the URL. The built-in chat sidebar works as a one-off conversation space. Close the tab and clear the pad when you are done, keeping in mind that the content is unencrypted and remains technically visible on the server side.
 
 ## Personal privacy tools
 

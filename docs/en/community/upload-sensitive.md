@@ -5,7 +5,7 @@ icon: material/file-lock
 ---
 # :material-file-lock: Sending Us Sensitive Material
 
-When you need to send personal data, source material, or sensitive collaboration files to a community member, and you want the transfer to stay out of reach of anyone who does not need to see it, the steps below give you a link that expires on its own and leaves nothing behind.
+When you need to send personal data, leaked material, or sensitive collaboration files to a community member, and you want the transfer to stay out of reach of anyone who does not need to see it, the steps below give you a link that expires on its own and leaves nothing behind.
 
 ## Upload steps
 
@@ -41,8 +41,8 @@ Copy the link and send it to the recipient.
 
 Send runs on infrastructure the community operates, which means you are trusting us with the fact that a transfer happened, even though the file contents are encrypted in your browser before upload. For most collaboration material that trade-off is fine. Two cases where it is not:
 
-- **You need the recipient not to learn your network location, or you need to stay anonymous to us.** Use [OnionShare](https://onionshare.org/){target="_blank"} over Tor instead. It serves the file directly from your own machine through an onion service, so no third party holds the file at any point.
-- **The material would put someone at risk if the transfer itself were discovered.** Raise it in Matrix first without the details, so we can agree on a channel before anything moves. Contact routes are on the [Community services](./tools.md) page.
+- **Anonymity from the recipient or from us**: use [OnionShare](https://onionshare.org/){target="_blank"} over Tor instead. It serves the file directly from your own machine through an onion service, so no third party holds the file at any point.
+- **Risk if the transfer itself were discovered**: raise it in Matrix first without the details, so we can agree on a channel before anything moves. Contact routes are on the [Community services](./tools.md) page.
 
 ## Related
 

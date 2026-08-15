@@ -20,7 +20,7 @@ The research track's entry point, article index, and current status are on [the 
 
 ### Tor relays on university campuses
 
-This track follows from the [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}, run by EFF with the Tor Project, which aims to get stable relays running at higher education institutions. Taiwan already has one: the Computer Science and Information Engineering department's IT centre at National Taiwan Normal University operates a Tor relay, set up after a community member worked the proposal through faculty and staff. The account of how that went is in [an interview with NZ at NTNU](../blog/posts/ntnu-nz.md).
+This track follows from the [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}, an EFF campaign to get stable relays running at higher education institutions. Taiwan already has one: the Computer Science and Information Engineering department's IT centre at National Taiwan Normal University operates a Tor relay, set up after a community member worked the proposal through faculty and staff. The account of how that went is in [an interview with NZ at NTNU](../blog/posts/ntnu-nz.md).
 
 In 2025 we completed the Traditional Chinese translation of the Tor University Challenge site. In 2026 we are taking the process onto campuses.
 
@@ -34,9 +34,11 @@ The track entry point, article index, and current status are on [the anonymous p
 
 ## Documentation build-out
 
-The documentation site is the community's main instrument for both advocacy and accumulated knowledge. The structure has been reorganized into seven top-level sections, with the Guides area covering five of them (Concepts, Tools, Scenarios, Advanced, and Reports). The build-out schedule for the year, and where it currently stands:
+The documentation site is the community's main instrument for both advocacy and accumulated knowledge. The structure has been reorganized into seven top-level sections, with a further five sub-groups under Guides.
 
-- **Q1 (complete)**: core [concepts](../basics/index.md) first, local regulatory coverage ([the 2025 PDPA amendment](https://anoni.net/docs/taiwan/pdpa-2025/){target="_blank"}, [VASP 2026](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}, both in Chinese), the emergency help page, community governance, and this roadmap
+The schedule below covers the site as a whole, where Traditional Chinese is the source of truth. The English site is a curated track carrying a subset of it, so several items land in Chinese first and reach English in a later batch. Where a section named here has no English equivalent yet, that is why.
+
+- **Q1 (complete)**: core [concepts](../basics/index.md) first, local regulatory coverage (the 2025 amendment to [the Personal Data Protection Act of Taiwan](https://anoni.net/docs/taiwan/pdpa-2025/){target="_blank"}, the 2026 [virtual asset service provider regime](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}, both in Chinese), the emergency help page, community governance, and this roadmap
 - **Q2 (in progress)**: the tools layer (Tor Browser advanced settings, anonymity OS comparison, messaging tool comparison, password managers, the cryptocurrency privacy spectrum) and end-to-end encryption in the advanced layer, all with first drafts published and revisions ongoing
 - **Q3 (not started)**: the scenarios layer (journalists, activists, domestic violence survivors, LGBTQ+ people, election observers, among others), post-quantum cryptography and decentralized publishing in the advanced layer, and coverage of the whistleblower protection act
 - **Q4 (not started)**: the governance charter, the contributor handbook, and the annual retrospective
@@ -47,7 +49,7 @@ Actual progress depends on volunteer writing capacity.
 
 ### COSCUP 2026
 
-Building on our 2025 experience at COSCUP, the community is running a track again in 2026, with a session on anonymous payments organized jointly with [ETHTaipei](https://ethtaipei.org/){target="_blank"}. The joint anonymous payments session is on day two (9 August). The call for proposals is at [COSCUP 2026 open call](../activity/coscup-2026-cfp.md).
+Building on our 2025 experience at COSCUP (the Conference for Open Source Coders, Users, and Promoters, Taiwan's largest annual open source conference), the community ran a track again on 8 and 9 August 2026 at National Taiwan University of Science and Technology. The anonymous payments session, organized jointly with [ETHTaipei](https://ethtaipei.org/){target="_blank"}, ran on the afternoon of 8 August in room `TR-511`. The full program is on the [COSCUP 2026 track page](../activity/coscup-2026.md), and the call for proposals that preceded it is at [COSCUP 2026 open call](../activity/coscup-2026-cfp.md).
 
 ### Workshops and meetups
 
@@ -57,7 +59,7 @@ Following the workshop we ran at National Taiwan University of Science and Techn
 
 ### Research and report translation
 
-In the second half of 2025 we completed the Chinese translation and annotation of [InterSecLab's research on the export of China's censorship technology](../reports/index.md). Through 2026 we continue to select international reports with local relevance for translation and annotation, collected under [Curated Reports](../reports/index.md).
+In the second half of 2025 we completed and published the Chinese translation of [InterSecLab's research on the export of China's censorship technology](../reports/index.md). Through 2026 we continue to select international reports with local relevance for translation and annotation, collected under [Curated Reports](../reports/index.md).
 
 ### Showing up at other people's events
 
@@ -69,7 +71,7 @@ Beyond the documentation site, the community maintains several technical sub-pro
 
 - **Pulse**: real-time Tor relay monitoring (FastAPI and PostgreSQL), the data source behind the charts on the [Tor relay observatory](../regional/tor-relay-watcher.md) page
 - **ASN Coverage**: a batch analysis tool over OONI's public data, feeding the [ASN coverage analysis](../regional/ooni-asn-coverage.md) page
-- **Asian Diceware**: an EFF-compatible 7776-word passphrase list that blends in dictionary-attested Asian loanwords, built partly to prepare for a future community-run anonymous service platform along the lines of AnonTicket that would need to generate account codes. See [Asian Diceware](../tools/asian-diceware.md).
+- **Asian Diceware**: an EFF-compatible 7776-word passphrase list that blends in dictionary-attested Asian loanwords, built partly to prepare for a future community-run anonymous service platform along the lines of [AnonTicket](https://anonticket.torproject.org/){target="_blank"}, the Tor Project's anonymous support ticketing service, which would need to generate account codes. See [Asian Diceware](../tools/asian-diceware.md).
 
 Pulse and ASN Coverage live with their issue trackers in [anoni-net/docs on GitHub](https://github.com/anoni-net/docs){target="_blank"}. Asian Diceware has its own repository at [anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. How the two observation tools connect to the Tor Project's upstream network-health work is covered on [the Tor Project ecosystem page](https://anoni.net/docs/community/tor-project-ecosystem/){target="_blank"} (in Chinese).
 
@@ -88,4 +90,4 @@ Discussion happens mainly on Matrix (homeserver `im.anoni.net`), collaborative w
 
 This roadmap is a living document, reviewed and adjusted at the end of each quarter. Significant changes go through the community proposal process and are announced on Matrix.
 
-**Last updated**: June 2026 (Q2 in progress).
+**Last updated**: June 2026, when Q2 was in progress. Q3 has been under way since July and the quarterly status above has not been revised since. The next review is at the end of Q3.
