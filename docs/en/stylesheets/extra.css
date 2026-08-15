@@ -437,3 +437,20 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   margin-top: 1.2em;
   padding-left: 0.8em;
 }
+
+/* ==========================================================================
+   Table width
+
+   Material does not set a width on tables, so each one is only as wide as its
+   content. Within a single page this leaves tables at differing widths, all
+   flush left, with right edges that never line up with the surrounding text.
+   Filling the content area gives tables and paragraphs the same left and right
+   boundaries.
+
+   Tables with few columns get stretched. Right-align numeric columns with ---:
+   in Markdown so the figures stay grouped and remain easy to compare.
+   ========================================================================== */
+
+.md-typeset table:not([class]) {
+  width: 100%;
+}
