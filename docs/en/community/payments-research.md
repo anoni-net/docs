@@ -28,7 +28,7 @@ Cash is the most mature form of anonymous payment, with clear limits when money 
 - **Concepts**: [why anonymous payments matter](../basics/payments-anonymity.md)
 - **Tools**: [the cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md)
 - **Scenarios**: [anonymous donation channels for advocacy organizations](../scenarios/nonprofit-anonymous-donation.md)
-- **Advanced**: [zero-knowledge identity and payments](https://anoni.net/docs/advanced/zk-identity-payments/){target="_blank"} (in Chinese)
+- **Advanced**: [zero-knowledge identity and payments](../advanced/zk-identity-payments.md)
 - **Regional**: [Taiwan's 2026 Virtual Asset Service Act](../regional/taiwan-vasp-2026.md)
 
 ## Done so far

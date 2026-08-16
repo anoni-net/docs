@@ -17,7 +17,7 @@ hide:
 
 We combine OONI network measurements, Tor relay monitoring, and on-the-ground community context, written by people working inside the region. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the Sinophone diaspora.
 
-This is not a privacy 101 site. For introductory material on Tor, Tails, OONI, Signal, or general digital safety, well-established English resources include [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, and the [Tor Project Support Portal](https://support.torproject.org/){target="_blank"}. Where we try to add something is the regional context and on-the-ground observation those sites are not set up to produce.
+For general digital safety guidance written for a global audience, well-established English resources include [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, and the [Tor Project Support Portal](https://support.torproject.org/){target="_blank"}, and we link to them rather than duplicating them. What we add is the regional layer those sites are not set up to produce: how a tool behaves in Mainland China versus Taiwan, what a local statute changes about the threat model, and measurement from inside the region. Our introductions to Tor, Tails, OONI, and CryptPad are written with that context built in rather than as generic explainers.
 
 ## :material-target: Three ways to use this site
 
@@ -27,7 +27,7 @@ This is not a privacy 101 site. For introductory material on Tor, Tails, OONI, S
 
     ---
 
-    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN coverage analysis tool over OONI public data, and have published one full Chinese translation of a regional report (InterSecLab Geedge / MESA, 2025). Regulatory explainers (Taiwan PDPA / VASP / whistleblower) are in active drafting.
+    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN coverage analysis tool over OONI public data, and have published full Chinese translations of two regional reports (InterSecLab's Geedge / MESA leak and MADLink, both 2025). English regulatory explainers covering Taiwan's data protection overhaul, the Virtual Asset Service Act, and whistleblower protection are published.
 
     [:octicons-arrow-right-24: Regional observatory](./regional/index.md)
 

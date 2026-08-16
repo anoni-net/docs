@@ -11,6 +11,7 @@ export NAV_COMMUNITY="Community"
 export NAV_GUIDES='Guides'
 export NAV_BASICS='Concepts'
 export NAV_SCENARIOS='Scenarios'
+export NAV_ADVANCED='Advanced'
 export NAV_REGIONAL='Regional'
 export NAV_REPORTS='Reports'
 export NAV_EVENT='Events'

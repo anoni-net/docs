@@ -15,7 +15,9 @@ nav:
   - !ENV [NAV_ABOUT, "About"]:
       - about/index.md
       - contact.md
+      - help/index.md
   - !ENV [NAV_GUIDES, "Guides"]:
+      - guides/index.md
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -59,6 +61,13 @@ nav:
           - scenarios/nonprofit-anonymous-donation.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
+      - !ENV [NAV_ADVANCED, "Advanced"]:
+          - advanced/index.md
+          - advanced/e2ee.md
+          - advanced/post-quantum.md
+          - advanced/dweb-ipfs-onion.md
+          - advanced/zk-identity-payments.md
+          - advanced/mistaken-for-anonymity.md
       - !ENV [NAV_REPORTS, "Reports"]:
           - reports/index.md
   - !ENV [NAV_REGIONAL, "Regional"]:
@@ -72,6 +81,7 @@ nav:
   - !ENV [NAV_GAMES, "Interactive"]: games/index.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
+      - upstream-translations.md
       - !ENV [NAV_CHANGELOG, "Software Changelog"]:
           - changelog/index.md
           - changelog/tor.md
@@ -211,11 +221,7 @@ plugins:
         'about/community/communication-tools.md': 'community/index.md'
         'about/community/participate.md': 'community/index.md'
         'about/send-censorship.md': 'about/index.md'
-        'advanced.md': 'basics/index.md'
-        'advanced/dweb-ipfs-onion.md': 'basics/index.md'
-        'advanced/e2ee.md': 'basics/index.md'
-        'advanced/post-quantum.md': 'basics/index.md'
-        'advanced/zk-identity-payments.md': 'basics/index.md'
+        'advanced.md': 'advanced/index.md'
         'blog/2025/01/專案重啟-2025.md': 'blog/index.md'
         'blog/2025/01/项目重启-2025.md': 'blog/index.md'
         'blog/2025/02/g0v-hackath65n.md': 'blog/index.md'
