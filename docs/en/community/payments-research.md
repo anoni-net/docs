@@ -33,7 +33,7 @@ Cash is the most mature form of anonymous payment, with clear limits when money 
 
 ## Done so far
 
-- **VASP legal observation**: after the Executive Yuan approved the draft Virtual Asset Service Act in April 2026 and sent it to the Legislative Yuan, the community published a [first blog observation](../blog/posts/2026-taiwan-vasp-draft-cabinet.md) covering the draft's structure, penalties, and the role of industry associations at the public hearing, then developed it into a [long-term reference](../regional/taiwan-vasp-2026.md). In May 2026 the accounting and internal control guidance for listed companies from the stock exchange and the Taipei Exchange was added
+- **VASP legal observation**: after the Executive Yuan approved the draft Virtual Asset Service Act in April 2026 and sent it to the Legislative Yuan, the community published a [first blog observation](../blog/posts/2026-taiwan-vasp-draft-cabinet.md) covering its structure, penalties, and the role of industry associations at the public hearing, then developed it into a [long-term reference](../regional/taiwan-vasp-2026.md) that now tracks the Act as passed on 30 June 2026. In May 2026 the accounting and internal control guidance for listed companies from the stock exchange and the Taipei Exchange was added
 - **g0v Hackath71n proposal**: the community proposed anonymous payments as a discussion topic at g0v Hackath71n in Kaohsiung in January 2026, gathering initial interest
 - **COSCUP 2026 programming partnership**: with [ETHTaipei](https://ethtaipei.org/){target="_blank"}, a joint anonymous payments session ran on the afternoon of 8 August 2026. The call for proposals and joint review arrangement are in [COSCUP 2026 open call](../activity/coscup-2026-cfp.md)
 - **Structural placement**: payments has a defined position within the site's seven sections rather than a separate category of its own
@@ -64,7 +64,7 @@ Discussion happens on Matrix (homeserver `im.anoni.net`), in the relevant rooms 
 Backgrounds we would particularly welcome:
 
 - Industry experience with cryptocurrencies or stablecoins, sharing compliance and implementation observations
-- Legal or accounting expertise, commenting on the VASP draft, anti-money-laundering and know-your-customer requirements, and tax detail
+- Legal or accounting expertise, commenting on the Virtual Asset Service Act, anti-money-laundering and know-your-customer requirements, and tax detail
 - Experience running an advocacy organization or civil society group, knowing what donation channels actually run into
 - Cryptography background, reviewing material on zero-knowledge proofs and ring signatures
 

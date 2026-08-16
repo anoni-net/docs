@@ -1,6 +1,6 @@
 ---
 title: Taiwan's 2026 Virtual Asset Service Act
-description: The Executive Yuan's draft Virtual Asset Service Act — licensing rather than registration, a stablecoin chapter, criminal penalties, and the transition period, plus what it means for individuals and organizations.
+description: Taiwan's Virtual Asset Service Act, passed on 30 June 2026 — licensing rather than registration, a stablecoin chapter, criminal penalties, and the transition period, plus what it means for individuals and organizations.
 icon: material/scale-balance
 ---
 
@@ -8,17 +8,17 @@ icon: material/scale-balance
 
 The Virtual Asset Service Act passed its third reading in the Legislative Yuan on 30 June 2026, having been approved by the Executive Yuan that April. It marks Taiwan's shift in crypto-asset regulation from registration under anti-money-laundering law to licensing under a dedicated financial statute. Commencement follows promulgation and the date the Executive Yuan designates, so the obligations below are not all running yet. What it reaches goes beyond centralized exchanges to stablecoin issuers, organizations that accept cryptocurrency donations, and, at the margins, ordinary users holding assets in self-custody.
 
-This page covers the draft's structure, the provisions that matter, the penalty design, and the effect on different kinds of reader, and tracks the legislature's progress. It is not legal advice. For the operative requirements, sentences, and scope, the authority is the text as passed on third reading and the secondary legislation the competent authority issues.
+This page covers the Act's structure, the provisions that matter, the penalty design, and the effect on different kinds of reader, and tracks what remains before it fully takes effect. It is not legal advice. For the operative requirements, sentences, and scope, the authority is the text as passed on third reading and the secondary legislation the competent authority issues.
 
 !!! info "Why an international reader might care"
 
-    Taiwan is running this reform in the open, on a visible legislative timeline, in a jurisdiction where crypto adoption is high and the regulator is explicit about following the international direction of travel. For anyone comparing regimes across the Asia-Pacific, the useful contrast is with Singapore's Payment Services Act licensing regime (in force since January 2020, tightened in 2024 and again with the digital token service provider regime from June 2025), Hong Kong's two-pillar arrangement where the Securities and Futures Commission licenses virtual asset trading platforms and the Monetary Authority licenses fiat-referenced stablecoin issuance under the Stablecoins Ordinance from August 2025, and Mainland China's comprehensive ban on crypto business activity and mining, which stops short of criminalizing personal holding. Taiwan is arriving at licensing later than Singapore and Hong Kong, which means the draft can and does borrow from what those regimes learned.
+    Taiwan is running this reform in the open, on a visible legislative timeline, in a jurisdiction where crypto adoption is high and the regulator is explicit about following the international direction of travel. For anyone comparing regimes across the Asia-Pacific, the useful contrast is with Singapore's Payment Services Act licensing regime (in force since January 2020, tightened in 2024 and again with the digital token service provider regime from June 2025), Hong Kong's two-pillar arrangement where the Securities and Futures Commission licenses virtual asset trading platforms and the Monetary Authority licenses fiat-referenced stablecoin issuance under the Stablecoins Ordinance from August 2025, and Mainland China's comprehensive ban on crypto business activity and mining, which stops short of criminalizing personal holding. Taiwan is arriving at licensing later than Singapore and Hong Kong, which means its provisions can and do draw on experience already visible in those regimes.
 
 ## From registration to licensing
 
-The current regime brings virtual asset service providers under the Money Laundering Control Act as a matter of declaration and registration, focused on customer due diligence (KYC) and suspicious transaction reporting. The draft moves to the licensing model familiar from other financial statutes: a provider must obtain the competent authority's licence before operating, and detailed requirements attach to corporate form, capital, custody of customer assets, and permitted business types. The regulatory density rises substantially.
+The current regime brings virtual asset service providers under the Money Laundering Control Act as a matter of declaration and registration, focused on customer due diligence (KYC) and suspicious transaction reporting. The Act moves to the licensing model familiar from other financial statutes: a provider must obtain the competent authority's licence before operating, and detailed requirements attach to corporate form, capital, custody of customer assets, and permitted business types. The regulatory density rises substantially.
 
-For users, the number of compliant providers falls, while each of them has passed prior review and remains under continuing supervision. Providers operating without a licence fall within the draft's criminal provisions.
+For users, the number of compliant providers falls, while each of them has passed prior review and remains under continuing supervision. Providers operating without a licence fall within the Act's criminal provisions.
 
 !!! tip "Find the part that applies to you"
 
@@ -26,9 +26,9 @@ For users, the number of compliant providers falls, while each of them has passe
     - **You run an exchange, issue a stablecoin, or take crypto donations for an organization**: read "What this means for organizations" and "Listed companies holding crypto".
     - **You follow global regulatory trends without a stake in this one**: skip the detail and read "International comparison".
 
-## Structure of the draft (56 articles)
+## Structure of the Act (56 articles)
 
-Per the Executive Yuan's published explanatory statement, the draft runs to 56 articles:
+Per the Executive Yuan's published explanatory statement, the Act runs to 56 articles:
 
 - **General provisions** (Articles 1 to 5): legislative purpose, competent authority, definitions, the innovation sandbox, international cooperation
 - **Virtual asset service providers** (Articles 6 to 28): business types, licensing, dedicated and concurrent operation, corporate form and capital
@@ -42,7 +42,7 @@ The competent authority is the Financial Supervisory Commission (FSC). Providers
 
 ## Defining "virtual asset", and where NFTs sit
 
-The draft spends considerable space on the definition, and on whether non-fungible tokens (NFTs) fall inside the regime. The explanatory statement says that whether a given instrument is a virtual asset under this Act comes back to the statutory definition and to the competent authority's determination in the individual case. What the press calls a thing does not settle whether the Act applies. For NFT creators, issuance platforms, and secondary-market operators, that boundary decides whether the business needs a licence.
+The Act spends considerable space on the definition, and on whether non-fungible tokens (NFTs) fall inside the regime. The explanatory statement says that whether a given instrument is a virtual asset under this Act comes back to the statutory definition and to the competent authority's determination in the individual case. What the press calls a thing does not settle whether the Act applies. For NFT creators, issuance platforms, and secondary-market operators, that boundary decides whether the business needs a licence.
 
 ## Why the stablecoin chapter draws attention
 
@@ -69,7 +69,7 @@ Providers registered under the current anti-money-laundering regime, and financi
 
 ## What this means for individual users
 
-The draft aims at providers offering services to the public, receiving customer assets, or conducting transactions, and at stablecoin issuers. An individual using a self-custody wallet and moving their own assets on-chain does not necessarily fall within "operating a virtual asset service business". The question to hold onto is whether what you are doing amounts to a business requiring prior authorization:
+The Act aims at providers offering services to the public, receiving customer assets, or conducting transactions, and at stablecoin issuers. An individual using a self-custody wallet and moving their own assets on-chain does not necessarily fall within "operating a virtual asset service business". The question to hold onto is whether what you are doing amounts to a business requiring prior authorization:
 
 - **Occasional personal transfers on-chain**: generally not a business
 - **Holding assets for others, or managing them for a fee over time**: potentially within "offering services to the public", with the boundary depending on the specific facts and the authority's determination
@@ -81,7 +81,7 @@ This page does not determine individual cases. If your activity sits between per
 
 - **Centralized exchanges**: compliance burden rises from registration to prior review under licensing, with requirements on corporate form, capital, and custody of customer assets. The barrier to entry goes up
 - **Stablecoin issuers**: newly and explicitly regulated under the dedicated chapter
-- **Non-profits accepting cryptocurrency donations**: the draft's focus is not the act of receiving donations, but an organization that holds donors' assets on their behalf, provides conversion, or offers other services may fall within the provider definition. Map your actual operational flow against the provisions and confirm with an accountant and counsel
+- **Non-profits accepting cryptocurrency donations**: the Act's focus is not the act of receiving donations, but an organization that holds donors' assets on their behalf, provides conversion, or offers other services may fall within the provider definition. Map your actual operational flow against the provisions and confirm with an accountant and counsel
 
 ## Listed companies holding crypto: the exchange's accounting and internal control guidance (May 2026)
 
@@ -109,15 +109,15 @@ The mechanism matches the decade and more of financial censorship cases document
 
 Taiwan's move from AML registration to licensing under a financial statute overlaps in problem definition with the US market structure legislation of the same period. On 17 July 2025 the House of Representatives passed three crypto bills in three days, which the industry and press called Crypto Week.
 
-- **GENIUS Act** (S.1582, stablecoins): passed the House 308-122, signed by President Trump on 18 July 2025 (Pub. L. 119-27). The effective date is set separately in the text, at 18 months after enactment or 120 days after federal agencies publish final implementing rules, whichever is earlier. It requires 100% reserves in fiat or short-term Treasuries, monthly public reserve disclosure, federal or state licensing of issuers, anti-money-laundering obligations under the Bank Secrecy Act, and prohibits paying interest or yield to holders. This is the counterpart to the Taiwanese draft's stablecoin chapter (Articles 34 to 41)
-- **CLARITY Act** (H.R.3633, market structure): passed the House 294-134 on 17 July 2025, and a revised version cleared the Senate Banking Committee 15-9 on a bipartisan vote on 14 May 2026, awaiting a full Senate vote. It divides the long-overlapping SEC and CFTC jurisdiction over crypto assets, giving the CFTC exclusive authority over digital commodity spot markets while the SEC keeps investment contract assets, and establishes registration for exchanges, brokers, and dealers. The problem it solves, the bifurcated SEC and CFTC jurisdiction, has no Taiwanese counterpart. At the level of establishing a registration or licensing regime for providers, it compares to Articles 6 to 28 of the Taiwanese draft
+- **GENIUS Act** (S.1582, stablecoins): passed the House 308-122, signed by President Trump on 18 July 2025 (Pub. L. 119-27). The effective date is set separately in the text, at 18 months after enactment or 120 days after federal agencies publish final implementing rules, whichever is earlier. It requires 100% reserves in fiat or short-term Treasuries, monthly public reserve disclosure, federal or state licensing of issuers, anti-money-laundering obligations under the Bank Secrecy Act, and prohibits paying interest or yield to holders. This is the counterpart to the Taiwanese Act's stablecoin chapter (Articles 34 to 41)
+- **CLARITY Act** (H.R.3633, market structure): passed the House 294-134 on 17 July 2025, and a revised version cleared the Senate Banking Committee 15-9 on a bipartisan vote on 14 May 2026, awaiting a full Senate vote. It divides the long-overlapping SEC and CFTC jurisdiction over crypto assets, giving the CFTC exclusive authority over digital commodity spot markets while the SEC keeps investment contract assets, and establishes registration for exchanges, brokers, and dealers. The problem it solves, the bifurcated SEC and CFTC jurisdiction, has no Taiwanese counterpart. At the level of establishing a registration or licensing regime for providers, it compares to Articles 6 to 28 of the Taiwanese Act
 - **Anti-CBDC Surveillance State Act** (H.R.1919): passed the House 219-210 on 17 July 2025 (Roll Call 201), with S.1124 pending in the Senate. It bars the Federal Reserve from issuing a central bank digital currency directly or through intermediaries. There is no Taiwanese counterpart, and it reflects US legislators positioning public digital currency as a surveillance instrument
 
-| Dimension | US GENIUS Act | Taiwan draft, stablecoin chapter |
+| Dimension | US GENIUS Act | Taiwan's Act, stablecoin chapter |
 |---|---|---|
 | Reserves | 100% fiat or short-term Treasuries, monthly public disclosure | Reserves backing the peg to fiat (ratio and disclosure frequency to be set in secondary legislation) |
 | Who may issue | Subsidiaries of insured depository institutions, federally approved non-bank issuers, state-approved issuers (under US$1 billion) | Providers licensed by the competent authority |
-| Paying interest | Expressly prohibited | Not expressly addressed in the draft, pending secondary legislation |
+| Paying interest | Expressly prohibited | Not expressly addressed, pending secondary legislation |
 | AML obligations | Bank Secrecy Act applies directly | Carried over from the Money Laundering Control Act |
 | Supervisor | Federal or state financial regulators | Financial Supervisory Commission |
 
@@ -127,14 +127,14 @@ The community tracks these three because global stablecoin and market structure 
 
 ## Progress in the Legislative Yuan
 
-### After the Executive Yuan's approval (from April 2026)
+### From cabinet approval to third reading
 
 The Finance Committee completed its article-by-article review on 3 June 2026 and reported the bill to the full chamber, which passed it on third reading on 30 June 2026. Versions and developments during review, with attribution and figures following the Legislative Yuan's own bill records:
 
-- **Several competing versions**: besides the Executive Yuan version drafted by the FSC, there are versions from the Taiwan People's Party caucus and from DPP and KMT legislators (including Lin Chu-yin, Lin Ssu-ming, and Ko Ju-chun), with more than ten proposals consolidated for joint review by the Finance Committee. There is cross-party agreement that a dedicated statute is needed, while the specific provisions remain under negotiation
+- **Several competing versions**: besides the Executive Yuan version drafted by the FSC, there were versions from the Taiwan People's Party caucus and from DPP and KMT legislators (including Lin Chu-yin, Lin Ssu-ming, and Ko Ju-chun), with more than ten proposals consolidated for joint review by the Finance Committee. Cross-party agreement that a dedicated statute was needed came earlier than agreement on the specific provisions
 - **FSC chairperson's report (7 May 2026)**: Peng Chin-lung reported to the Finance Committee on the development of financial technology, listing stablecoin reserves and the prohibition on paying interest as the two main directions, echoing the GENIUS Act's design of the same period. The same session covered virtual asset custody pilots, real-world asset tokenization, AI supervision, and financial large language models, with stablecoins one item among them
-- **Six categories of business**: the draft allows licensed providers to conduct virtual asset exchange, platform operation, transfer, custody, underwriting, and lending
-- **Transition period differs by version**: the Executive Yuan version allows 9 months to apply and 18 months to obtain the licence, while some legislators' versions argue for a shorter licensing deadline. The industry association has asked for a longer transition and for explicit provisions on what happens to those who fail review
+- **Six categories of business**: licensed providers may conduct virtual asset exchange, platform operation, transfer, custody, underwriting, and lending
+- **Transition period**: the Executive Yuan version allowed 9 months to apply and 18 months to obtain the licence, with some legislators' versions arguing for a shorter deadline. The industry association asked for a longer transition and for explicit provisions on what happens to those who fail review. The operative figures follow the text as passed
 
 Three dates stay worth keeping apart: the third reading on 30 June 2026, the presidential promulgation that follows, and the commencement date the Executive Yuan designates separately. The Act is not fully in effect until the last of them.
 
