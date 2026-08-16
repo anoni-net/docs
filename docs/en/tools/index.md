@@ -6,7 +6,9 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: Tools
 
-Like the [Concepts](../basics/index.md) section, this one is deliberately thin on introductions. For what a tool *is* and how to install it, the project's own documentation is the authority, and it is kept current in a way we can't match. We send you straight there:
+This section has two kinds of page. The introductions cover what a tool is and why it matters here, written from the vantage point of the Sinophone Asia-Pacific, so the configuration that works in Mainland China, the legal exposure in Hong Kong, and what is unremarkable in Taiwan are part of the explanation rather than a footnote. The comparisons and hardening guidance cover decisions that span several tools, where no single project's documentation can help.
+
+For installation steps and the current state of any individual tool, the project's own documentation is the authority and stays fresher than ours:
 
 - **Tor** — [Tor Project Support](https://support.torproject.org/){target="_blank"} and the [Tor Browser manual](https://tb-manual.torproject.org/){target="_blank"}
 - **Tails** — [Tails documentation](https://tails.net/doc/){target="_blank"}
@@ -15,9 +17,20 @@ Like the [Concepts](../basics/index.md) section, this one is deliberately thin o
 - **GrapheneOS** — [GrapheneOS](https://grapheneos.org/){target="_blank"} and [Privacy Guides](https://www.privacyguides.org/en/android/){target="_blank"}
 - **CryptPad** — [CryptPad](https://cryptpad.org/){target="_blank"}
 
-What we publish here is the layer the single-tool docs don't cover: **cross-tool comparisons** for the decisions you have to make across competing products, and **hardening guidance** where the regional threat picture changes the advice. These are the cases where no single project's documentation can help, because the question spans several of them.
+## Start here
 
-## Articles
+Introductions with the regional context built in, for readers new to a tool or working out whether it fits their situation:
+
+- [What is an anonymity network?](./what-is-anonymity-network.md) — the hub page, covering how anonymity, privacy, and circumvention differ, how the tool families divide the work, and what each of them means across the region.
+- [What is Tor?](./what-is-tor.md) — onion routing, relays and bridges, which configuration works where in the region, and the situations Tor is wrong for.
+- [What is Tails?](./what-is-tails.md) — the amnesic live operating system, its three design decisions, and the tasks it fits.
+- [What is OONI?](./what-is-ooni.md) — turning censorship into citable measurement, and why the same DNS anomaly means different things in Taipei and in Beijing.
+- [What is CryptPad?](./what-is-cryptpad.md) — zero-knowledge collaborative documents, the sharing model, and the Traditional Chinese localization this community contributed upstream.
+- [OnionShare](./onionshare.md) — temporary onion services for sending files, receiving files, hosting, and one-off chat.
+- [GrapheneOS](./grapheneos.md) — hardened, de-Googled Android, what it protects, and where the line at anonymity sits.
+- [Getting started with password managers](./password-manager.md) — the four categories, TOTP, passkeys, hardware keys, and the regional situations international guides skip.
+
+## Comparisons and hardening
 
 - [Secure messaging compared](./messaging-comparison.md) — Signal, SimpleX, Session, Briar, and Matrix against a threat-model checklist (metadata, identifiers, network resistance), with the regional twist that phone-number registration ties to a legal identity.
 - [Asian Diceware passphrase wordlist](./asian-diceware.md) — a community-made, EFF-compatible Diceware list that blends in dictionary-attested Asian loanwords; how to roll up a memorable-yet-strong passphrase with dice or a secure RNG.

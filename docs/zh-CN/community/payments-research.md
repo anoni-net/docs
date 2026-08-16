@@ -39,7 +39,7 @@ icon: material/folder-search-outline
 
 - **VASP 法律观察**：行政院 2026 年 4 月通过《虚拟资产服务法》草案、送立法院审议后，社群完成首篇 [blog 观察文](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)，整理草案架构、罚则、与业界公协会在公听会的角色，并进一步把它整理为 [长期参考文件](../taiwan/vasp-2026.md)。
 - **g0v Hackath71n 议题提案**：社区在 2026/01 的 g0v Hackath71n（高雄）提出匿名支付主题讨论，集结初步参与意愿。
-- **COSCUP 2026 议程合作**：与 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 达成议程合作，第二天（8/9）会联合举办匿名支付主题场次，征稿与联合审稿说明见 [COSCUP 2026 公开征稿](../activity/coscup-2026-cfp.md)。
+- **COSCUP 2026 议程合作**：与 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 达成议程合作，第一天（8/08）下午联合举办匿名支付主题场次，征稿与联合审稿说明见 [COSCUP 2026 公开征稿](../activity/coscup-2026-cfp.md)。
 - **架构落地**：在文件站的 7 大分类中明确分配支付主题的位置，避免另开独立分类造成结构碎裂。
 - **金融审查角度的点火文**：2026/05 blog 发了 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md)，把 EFF Transaction Denied 与台湾 PayPal 2017 关闭境内交易、Stripe 至今未开放，以及华语六地区（香港 2019 后冻结、中国大陆「保护性冻结」、新马 KYC 收紧）的同样故事串起来，作为「匿名支付」主题的动机面补强。
 

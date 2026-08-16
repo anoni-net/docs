@@ -86,15 +86,13 @@ Three threads run through the regional observation:
 
 **Measurement we run or contribute to.** The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
 
-**Regulation we track.** Where local laws shape the threat model, we publish English-language explainers of the law as it actually operates: PDPA 2025, VASP 2026, whistleblower protection, with cross-references to comparable frameworks elsewhere in the region (POFMA, NSL, Section 377). These are Tier 2 articles in active drafting.
+**Regulation we track.** Where local laws shape the threat model, we publish English-language explainers of the law as it actually operates: the 2025 Personal Data Protection Act overhaul, the 2026 Virtual Asset Service Act, and the Public Interest Whistleblower Protection Act, with cross-references to comparable frameworks elsewhere in the region (POFMA, the National Security Law, Section 377).
 
-**One translated report so far.** We have produced one full Traditional Chinese translation of regional research to date: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}. An English curated index pointing readers to InterSecLab's English original is in Tier 2 drafting. We do not have a curated reports library beyond that single piece of work; future translations will be added case-by-case when the report fills a Chinese-language gap.
+**Translated reports.** We have produced full Traditional Chinese translations of two pieces of regional research: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} and the MADLink report on the Taiwanese link in the Geedge supply chain. The English [curated index](../reports/index.md) points readers to InterSecLab's English originals alongside our Chinese translations. Future translations get added case by case, when a report fills a Chinese-language gap.
 
 ## :material-file-document-outline: Articles in this section
 
-Tier 1 of the English site (the version you are reading) ships the regional framing, a showcase scenario, and our measurement-coverage work. The remaining regional explainers below are in Tier 2 drafting and will appear here as they land.
-
-**Now**:
+**Measurement and framing**:
 
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
 - [Tor relay watcher](./tor-relay-watcher.md) — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
@@ -102,13 +100,15 @@ Tier 1 of the English site (the version you are reading) ships the regional fram
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](../scenarios/lgbtq.md) — the showcase scenario, with the full multi-region context section.
 
-**In Tier 2 drafting**:
+**Taiwan's regulatory environment**, the three threads we track in detail:
 
-- Taiwan PDPA 2025 — observation
-- Taiwan VASP Act 2026 — observation
-- Taiwan whistleblower-protection law — technical observations
+- [Taiwan's 2025 data protection overhaul](./taiwan-pdpa-2025.md) — the Personal Data Protection Act amendments, the Commission that has not yet been established, and what that gap means in practice.
+- [Taiwan's 2026 Virtual Asset Service Act](./taiwan-vasp-2026.md) — the shift from registration to licensing, the stablecoin chapter, and the over-compliance side effect that catches cross-border donors.
+- [Taiwan's Whistleblower Protection Act, from a technical angle](./taiwan-whistleblower-law.md) — what the Act covers, the digital traces a disclosure leaves, and why anonymous disclosure sits outside the protection entirely.
+
+**Still to come**:
+
 - ASN coverage — cross-region comparison (TW / HK / JP / KR / SG / MY)
-- InterSecLab Geedge / MESA — English curated index
 
 **Public sources we read and cite (no affiliation implied)**:
 

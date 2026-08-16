@@ -28,6 +28,14 @@ nav:
           - basics/payments-anonymity.md
       - !ENV [NAV_TOOLS, "Tools"]:
           - tools/index.md
+          - tools/what-is-anonymity-network.md
+          - tools/what-is-tor.md
+          - tools/what-is-tails.md
+          - tools/what-is-ooni.md
+          - tools/what-is-cryptpad.md
+          - tools/onionshare.md
+          - tools/grapheneos.md
+          - tools/password-manager.md
           - tools/messaging-comparison.md
           - tools/asian-diceware.md
           - tools/crypto-privacy-spectrum.md
@@ -58,6 +66,9 @@ nav:
       - regional/tor-relay-watcher.md
       - regional/ooni-asn-coverage.md
       - regional/ooni-checklist.md
+      - regional/taiwan-pdpa-2025.md
+      - regional/taiwan-vasp-2026.md
+      - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_GAMES, "Interactive"]: games/index.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
@@ -78,6 +89,15 @@ nav:
       - community/tools.md
       - community/upload-sensitive.md
       - community/become-anoni.md
+      - community/privacy-guide.md
+      - community/relay-on-campus.md
+      - community/payments-research.md
+      - community/campus-tor-relay-proposal.md
+      - community/campus-tor-relay-sop.md
+      - community/campus-relay-faq.md
+      - community/tor-project-ecosystem.md
+      - community/zh-hant-naming.md
+      - community/brand-assets.md
       - community/setup-repo.md
       - community/asn-coverage-howto.md
       - community/ooni-data-format.md
@@ -174,11 +194,11 @@ plugins:
         # to the nearest live section index.
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'intro/index.md': 'basics/index.md'
-        'what-is-tails.md': 'tools/tails-vs-whonix-vs-qubes.md'
-        'what-is-tor.md': 'tools/tor-browser-advanced.md'
-        'what-is-anonymous-network.md': 'basics/anonymity-vs-privacy.md'
+        'what-is-tails.md': 'tools/what-is-tails.md'
+        'what-is-tor.md': 'tools/what-is-tor.md'
+        'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'
         'tor-snowflake.md': 'tools/tor-snowflake.md'
-        'what-is-ooni.md': 'regional/index.md'
+        'what-is-ooni.md': 'tools/what-is-ooni.md'
         'ooni-asns-coverage.md': 'regional/ooni-asn-coverage.md'
         'ooni-weblists.md': 'regional/ooni-checklist.md'
         'watcher-tor-relays.md': 'regional/tor-relay-watcher.md'
@@ -217,14 +237,6 @@ plugins:
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
         'blog/2026/03/arti_2_1_0_released.md': 'blog/index.md'
         'blog/2026/04/ooni-probe-desktop-beta-2026.md': 'blog/index.md'
-        'community/brand-assets.md': 'community/index.md'
-        'community/campus-relay-faq.md': 'community/index.md'
-        'community/campus-tor-relay-proposal.md': 'community/index.md'
-        'community/campus-tor-relay-sop.md': 'community/index.md'
-        'community/payments-research.md': 'community/index.md'
-        'community/privacy-guide.md': 'community/index.md'
-        'community/relay-on-campus.md': 'community/index.md'
-        'community/tor-project-ecosystem.md': 'community/index.md'
         'report/interseclab-the-internet-coup.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'
@@ -244,17 +256,10 @@ plugins:
         'taiwan.md': 'regional/index.md'
         'taiwan/ooni-asn-coverage.md': 'regional/ooni-asn-coverage.md'
         'taiwan/ooni-checklist.md': 'regional/ooni-checklist.md'
-        'taiwan/pdpa-2025.md': 'regional/index.md'
+        'taiwan/pdpa-2025.md': 'regional/taiwan-pdpa-2025.md'
         'taiwan/tor-relay-watcher.md': 'regional/tor-relay-watcher.md'
-        'taiwan/vasp-2026.md': 'regional/index.md'
-        'taiwan/whistleblower-law.md': 'regional/index.md'
-        'tools/onionshare.md': 'tools/index.md'
-        'tools/password-manager.md': 'tools/index.md'
-        'tools/what-is-anonymity-network.md': 'tools/index.md'
-        'tools/what-is-cryptpad.md': 'tools/index.md'
-        'tools/what-is-ooni.md': 'tools/index.md'
-        'tools/what-is-tails.md': 'tools/index.md'
-        'tools/what-is-tor.md': 'tools/index.md'
+        'taiwan/vasp-2026.md': 'regional/taiwan-vasp-2026.md'
+        'taiwan/whistleblower-law.md': 'regional/taiwan-whistleblower-law.md'
   - social:
       cards_layout_options:
         font_family: Public Sans
