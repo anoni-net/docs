@@ -50,4 +50,4 @@ description: "匿名網路工作坊招募活動籌備人員與培訓小幫手！
 | 2025/07 | 活動宣傳與報名。                     |
 | 2025/08 | 活動日與會後紀錄與通知。             |
 
-[查看工作坊招募頁面說明](../../event-workshop-2025.md){ .md-button .md-button--primary }
+[查看工作坊招募頁面說明](../../event-workshop-2025-prepare.md){ .md-button .md-button--primary }
