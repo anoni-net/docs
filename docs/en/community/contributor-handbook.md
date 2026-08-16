@@ -132,6 +132,17 @@ When you move, rename, or delete a page that is already live, add the redirect i
 - Keep existing redirects. People keep arriving at old URLs. The one case for revisiting an entry is when its target page has itself been removed and the redirect now dead-ends.
 - When you add a page at a path that an existing redirect points *away* from, remove that redirect entry in the same PR. Otherwise the redirect shadows the new page.
 
+### Splitting or moving content needs the inbound links checked
+
+A redirect handles a URL that disappears. It does nothing for the case where a page stays put and the content moves out of it, which is what a page split produces. The old page still returns 200, so nothing reports an error, while every button and link pointing at it now promises material that has gone somewhere else.
+
+When you split a page, or move a section from one page to another, search the site for links to the source page in the same PR and repoint the ones whose text refers to what moved. Two things to know about this check:
+
+- **Neither strict build nor the style linter catches it.** Both target files exist and both links resolve, so the failure is in what the link means rather than whether it works. Only reading the link text against the destination finds it.
+- **Dated blog posts count.** A post that was accurate when published keeps its text, and a button in it is a functional entry point rather than part of the record. Repointing the button does not alter what the post said at the time, and leaving it broken means a reader following it lands somewhere that no longer holds what they were promised.
+
+This came up in August 2026: a May 2025 split moved the workshop recruitment content into its own page, and two earlier posts kept pointing at the original, where the material no longer was.
+
 ## Images and assets
 
 - Images go in `docs/en/assets/images/`.
