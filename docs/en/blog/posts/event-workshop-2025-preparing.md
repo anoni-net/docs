@@ -50,4 +50,4 @@ The "Workshop Helper" will have training courses to elevate skills to **Basic L3
 | 2025/07 | Event promotion and registration.                           |
 | 2025/08 | Event day execution, post-event records, and notifications. |
 
-[View the Instructions on the Workshop Recruitment Page](../../event-workshop-2025.md){ .md-button .md-button--primary }
+[View the Instructions on the Workshop Recruitment Page](../../event-workshop-2025-prepare.md){ .md-button .md-button--primary }
