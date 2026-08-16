@@ -69,10 +69,15 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      - community/roadmap-2026.md
       - community/how-to-contribute.md
+      - community/contributor-handbook.md
       - community/skill-level.md
       - community/governance.md
       - community/i18n.md
+      - community/tools.md
+      - community/upload-sensitive.md
+      - community/become-anoni.md
       - community/setup-repo.md
       - community/asn-coverage-howto.md
       - community/ooni-data-format.md
@@ -212,19 +217,14 @@ plugins:
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
         'blog/2026/03/arti_2_1_0_released.md': 'blog/index.md'
         'blog/2026/04/ooni-probe-desktop-beta-2026.md': 'blog/index.md'
-        'community/become-anoni.md': 'community/index.md'
         'community/brand-assets.md': 'community/index.md'
         'community/campus-relay-faq.md': 'community/index.md'
         'community/campus-tor-relay-proposal.md': 'community/index.md'
         'community/campus-tor-relay-sop.md': 'community/index.md'
-        'community/contributor-handbook.md': 'community/index.md'
         'community/payments-research.md': 'community/index.md'
         'community/privacy-guide.md': 'community/index.md'
         'community/relay-on-campus.md': 'community/index.md'
-        'community/roadmap-2026.md': 'community/index.md'
-        'community/tools.md': 'community/index.md'
         'community/tor-project-ecosystem.md': 'community/index.md'
-        'community/upload-sensitive.md': 'community/index.md'
         'report/interseclab-the-internet-coup.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'
@@ -306,7 +306,8 @@ markdown_extensions:
         - name: vegalite
           class: vegalite
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: [".", ".."]
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:

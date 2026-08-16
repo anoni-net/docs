@@ -47,7 +47,7 @@ icon: material/road-variant
 
 ### COSCUP 2026
 
-社群延續 2025 年的 COSCUP 經驗，2026 年再度開設社群議程軌，並與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 合作匿名支付主題場次。第二天（8/9）安排匿名支付聯合議程。徵稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
+社群延續 2025 年的 COSCUP 經驗，2026 年再度開設社群議程軌，並與 [ETHTaipei](https://ethtaipei.org/){target="_blank"} 合作匿名支付主題場次。8/08、8/09 兩天在臺科大舉辦，第一天（8/08）下午的匿名支付聯合議程在 `TR-511`。完整議程見 [COSCUP 2026 議程](../activity/coscup-2026.md)，先前的徵稿說明見 [COSCUP 2026 公開徵稿](../activity/coscup-2026-cfp.md)。
 
 ### 工作坊與小聚
 
