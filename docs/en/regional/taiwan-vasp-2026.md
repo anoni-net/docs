@@ -56,12 +56,12 @@ This part touches technical design and accounting practice, and will still need 
 
 ## Penalties, and what the sentences actually say
 
-Two provisions carry the criminal weight:
+Two provisions carry the criminal weight. **Article numbering below follows the Executive Yuan version**, since the text as passed on third reading may renumber or adjust them, and the operative provisions are the promulgated ones:
 
 - **Article 47**: violating Article 42(1) or 42(4), covering fraud and manipulation in virtual assets, carries imprisonment of not less than 3 years and not more than 10 years, and may carry a fine of not less than NT$10 million and not more than NT$200 million. The legislative reasoning draws the analogy to the Securities and Exchange Act and the Futures Trading Act, and to the need for deterrence where civil and administrative measures fall short
 - **Article 48**: violating Article 7(1), 7(3), or 34(1), covering operating without a licence or issuing a stablecoin without one, carries imprisonment of up to 7 years and may carry a fine of up to NT$100 million, with joint liability for the legal person
 
-Other provisions cover custody of customer assets and false statements in applications, at lower sentences or as administrative penalties. Where a headline emphasizes the maximum sentence, it is usually taking the ceilings from these two articles. Reading the elements of the offence tells you which conduct the legislature intends to deter, which is a separate question from whether the text survives third reading unchanged.
+Other provisions cover custody of customer assets and false statements in applications, at lower sentences or as administrative penalties. Where a headline emphasizes the maximum sentence, it is usually taking the ceilings from these two articles. Reading the elements of the offence tells you which conduct the legislature set out to deter, and checking the promulgated text tells you what survived.
 
 ## The transition
 
@@ -133,7 +133,7 @@ The Finance Committee completed its article-by-article review on 3 June 2026 and
 
 - **Several competing versions**: besides the Executive Yuan version drafted by the FSC, there were versions from the Taiwan People's Party caucus and from DPP and KMT legislators (including Lin Chu-yin, Lin Ssu-ming, and Ko Ju-chun), with more than ten proposals consolidated for joint review by the Finance Committee. Cross-party agreement that a dedicated statute was needed came earlier than agreement on the specific provisions
 - **FSC chairperson's report (7 May 2026)**: Peng Chin-lung reported to the Finance Committee on the development of financial technology, listing stablecoin reserves and the prohibition on paying interest as the two main directions, echoing the GENIUS Act's design of the same period. The same session covered virtual asset custody pilots, real-world asset tokenization, AI supervision, and financial large language models, with stablecoins one item among them
-- **Six categories of business**: licensed providers may conduct virtual asset exchange, platform operation, transfer, custody, underwriting, and lending
+- **Six categories of business**: the Executive Yuan version set out virtual asset exchange, platform operation, transfer, custody, underwriting, and lending as the permitted activities for licensed providers
 - **Transition period**: the Executive Yuan version allowed 9 months to apply and 18 months to obtain the licence, with some legislators' versions arguing for a shorter deadline. The industry association asked for a longer transition and for explicit provisions on what happens to those who fail review. The operative figures follow the text as passed
 
 Three dates stay worth keeping apart: the third reading on 30 June 2026, the presidential promulgation that follows, and the commencement date the Executive Yuan designates separately. The Act is not fully in effect until the last of them.
