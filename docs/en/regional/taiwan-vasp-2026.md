@@ -56,7 +56,7 @@ This part touches technical design and accounting practice, and will still need 
 
 ## Penalties, and what the sentences actually say
 
-Two provisions carry the criminal weight. **Article numbering below follows the Executive Yuan version**, since the text as passed on third reading may renumber or adjust them, and the operative provisions are the promulgated ones:
+Two provisions carry the criminal weight. **Article numbering below follows the Executive Yuan version.** The version passed on third reading may renumber these or alter their content, so check the promulgated text before citing an article number:
 
 - **Article 47**: violating Article 42(1) or 42(4), covering fraud and manipulation in virtual assets, carries imprisonment of not less than 3 years and not more than 10 years, and may carry a fine of not less than NT$10 million and not more than NT$200 million. The legislative reasoning draws the analogy to the Securities and Exchange Act and the Futures Trading Act, and to the need for deterrence where civil and administrative measures fall short
 - **Article 48**: violating Article 7(1), 7(3), or 34(1), covering operating without a licence or issuing a stablecoin without one, carries imprisonment of up to 7 years and may carry a fine of up to NT$100 million, with joint liability for the legal person
