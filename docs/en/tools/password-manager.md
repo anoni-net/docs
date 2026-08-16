@@ -158,7 +158,7 @@ Several situations recur across the region that international guides do not usua
 - **SIM swap has become common.** Ask your carrier to require an in-person visit plus additional verification for number changes, so an attacker cannot move your number by calling support
 - **Certificate-based identity**: the PINs and recovery codes for the Citizen Digital Certificate, its mobile equivalent, and the health insurance card can live in the vault, while the master password stays separate from all of them
 - **Apple ID is a critical account.** Sign in with Apple fronts many services, so a compromised Apple ID cascades. Two-factor and Recovery Contacts are not optional
-- **After a compromise**: the account compromise section of the [emergency help page](https://anoni.net/docs/help/){target="_blank"} (in Chinese) covers recovery. This page is prevention
+- **After a compromise**: the account compromise section of the [emergency help page](../help/index.md) covers recovery. This page is prevention
 
 **Hong Kong**:
 

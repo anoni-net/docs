@@ -30,6 +30,6 @@ We have set up an event page for the workshop, where the preparation tasks, sche
 
 We also hope to enhance the knowledge of those interested in Tor/Tails and OONI through this workshop! We designed a skill grading chart, and our future training hopes to elevate everyone to **Basic Level 3**!
 
-[Learn about the details!](../../event-workshop-2025.md){ .md-button .md-button--primary }
+[Learn about the details!](../../event-workshop-2025-prepare.md){ .md-button .md-button--primary }
 
 If you're interested in preparing for the workshop and training helpers, feel free to reply to me directly. The recruitment information for the workshop is also [simultaneously announced](https://volunteer.ocf.tw/blog/) by the Open Culture Foundation's volunteer recruitment.
