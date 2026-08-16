@@ -115,7 +115,7 @@ icon: material/share-circle
 
 ??? question "怎么确认对方取得的是正确网址、没被替换？"
 
-    OnionShare 产生网址的同时会给一个 private key 或 public key 指纹。把网址跟指纹分开两个管道交给对方（例如网址用 Signal、指纹用当面口头），对方在 Tor Browser 开启时验证指纹。OnionShare GUI 也支援「需要对方输入 password 才能下载」，敏感场景建议启用。
+    OnionShare 产生网址的同时会给一个 private key，Tor 把这个机制叫做 client authentication。把网址跟 private key 分开两个管道交给对方（例如网址走 Signal、private key 当面口头），单一管道被攻破就不足以取得内容。密码保护选项在 OnionShare 2.4（2021）已经移除，由 private key 取代，所以现在没有密码可以设。要让服务公开、停用 private key，是勾选「This is a public OnionShare service」或在命令列加 `--public`，敏感场景**不要**开这个设定。
 
 ??? question "Receive 模式可以收多大的文件？"
 
@@ -127,7 +127,7 @@ icon: material/share-circle
 
 ??? question "手机可以用吗？"
 
-    OnionShare 有官方 Android app（Google Play 与 F-Droid 可装，仍是 beta），iOS app 仍在开发中（截至 2026 年）。手机端较成熟的用法仍是当「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 开启对方提供的 `.onion` 网址。要当发送方建议用桌面或 Tails。
+    OnionShare 有官方 Android app（Google Play 与 F-Droid 可装，仍是 beta），iOS app 自 2023 年 2 月 10 日起已在 App Store 上架。手机端最可靠的用法仍是当「接收方」，用 Tor Browser for Android 或 Onion Browser for iOS 开启对方提供的 `.onion` 网址。要当发送方，桌面或 Tails 比较稳妥。
 
 ??? question "OnionShare 跟 Tor Bridge、Snowflake 有关系吗？"
 

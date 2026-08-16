@@ -38,7 +38,7 @@ IPFS（InterPlanetary File System）的核心是內容定址（content addressin
 
 - **內容存活靠 pin**：沒有節點主動 pin 的內容會在垃圾回收中消失。「上 IPFS」不等於「永久保存」。
 - **DHT 查詢延遲**：第一次取得內容比 HTTP 慢。
-- **網關依賴**：多數使用者透過公開網關（ipfs.io、cf-ipfs.com）讀取，網關被封等於連不上。
+- **網關依賴**：多數使用者透過公開網關（例如 ipfs.io）讀取，網關被封等於連不上。公開網關的數量本身也在減少，Cloudflare 的 cf-ipfs.com 已於 2024 年 8 月除役。
 - **動態內容受限**：IPFS 適合靜態，動態功能需要額外層。
 
 ## Onion 服務設計核心
