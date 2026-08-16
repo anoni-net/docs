@@ -78,10 +78,10 @@ Multi-device is the part of E2EE that gets least attention. When a phone, tablet
 Three strategies:
 
 - **Device linking** (Signal, WhatsApp): each device has its own keys, and a new device syncs history from the primary through a QR code. Strong on privacy, higher sync cost, and a new device cannot see old messages unless the primary re-sends them
-- **Encrypted cloud backup** (WhatsApp, Telegram secret chats, iMessage): message history encrypted under a user-set password and stored in the cloud. Convenient when changing phones, with strength bounded by the password, and a breach at the provider concentrates the exposure
+- **Encrypted cloud backup** (WhatsApp, iMessage): message history encrypted under a user-set password or key and stored in the cloud. Telegram's secret chats work the opposite way, staying on the two devices involved with no cloud backup at all. Convenient when changing phones, with strength bounded by the password, and a breach at the provider concentrates the exposure
 - **A shared root key across devices** (early iMessage, some enterprise platforms): all devices share one long-term key, which makes sync simple and means one stolen device loses everything
 
-Signal added encrypted backups in 2025[^4], built around a long user-held passphrase the provider does not know, an attempt at balancing convenience against privacy.
+Signal added encrypted backups in beta on Android in September 2025 and across platforms with Signal 8.0 in February 2026[^4]. The backup is protected by a 64-character recovery key generated on the device, which the user records and the provider never sees.
 
 ## Four protocols compared
 
@@ -97,13 +97,13 @@ Their trade-offs:
 - **Signal**: mature, widely adopted, with a user experience close to mainstream messaging. Registration requires a phone number, and Sealed Sender hides the sender of an individual message rather than the account's metadata
 - **MLS**: standardized at the protocol layer and being adopted, with few complete client implementations so far. It suits organizational settings
 - **SimpleX**: having no user identifier is its largest design difference, and it is strong against metadata surveillance. The costs are a small ecosystem and an evolving user experience
-- **Session**: routing over a Tor-like network reduces metadata, and a mnemonic makes multi-device access easy. The costs are higher message latency, and older protocol versions lacked forward secrecy, with migration to newer versions ongoing
+- **Session**: routing over a Tor-like network reduces metadata, and a mnemonic makes multi-device access easy. The costs are higher message latency, and the move from the Signal Protocol to its own Session Protocol removed forward secrecy, which the released versions still lack pending a protocol revision
 
 ## What this looks like across the region
 
 Messaging in this region concentrates in a small number of applications, and which one dominates changes the question entirely.
 
-**Taiwan and Japan** run on LINE. Letter Sealing, LINE's end-to-end encryption, has been on by default since 2021, having launched for one-to-one chats in 2015 and extended to groups in 2016[^5]. The limits are what matter: large groups above the member threshold, and rooms containing an official account or bot, fall back to transport-layer encryption only, where the operator can provide contents in response to a legal request. The client is not open source, key management cannot be independently audited, and metadata passes through the servers regardless. Group voice and video calls, and LINE Meeting, are covered by transport encryption rather than end-to-end encryption.
+**Taiwan and Japan** run on LINE. Letter Sealing, LINE's end-to-end encryption, launched for one-to-one chats in 2015, extended to groups in 2016, and has been on by default on the main clients since July 2016, with the option to disable it removed in 2021[^5]. One-to-one voice and video calls are covered. The limits are what matter: groups above 50 members, and rooms containing an official account or bot, fall back to transport-layer encryption only, where the operator can provide contents in response to a legal request. The client is not open source, key management cannot be independently audited, and metadata passes through the servers regardless. Group voice and video calls, and LINE Meeting, are covered by transport encryption rather than end-to-end encryption.
 
 **Hong Kong** runs on WhatsApp rather than LINE. During the 2019 protests, Telegram and Signal saw heavy adoption for group coordination and stronger encryption. Since the National Security Law, records on messaging and social platforms have become evidence in national security and sedition cases[^hk]. The value of Signal and Matrix is the same two layers, group encryption and metadata, against a threat model of national security surveillance rather than ordinary legal process.
 

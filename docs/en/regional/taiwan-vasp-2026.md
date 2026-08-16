@@ -6,7 +6,7 @@ icon: material/scale-balance
 
 # :material-scale-balance: Taiwan's 2026 Virtual Asset Service Act
 
-In April 2026 the Executive Yuan approved the draft Virtual Asset Service Act and sent it to the Legislative Yuan. It marks Taiwan's shift in crypto-asset regulation from registration under anti-money-laundering law to licensing under a dedicated financial statute. What it reaches goes beyond centralized exchanges to stablecoin issuers, organizations that accept cryptocurrency donations, and, at the margins, ordinary users holding assets in self-custody.
+The Virtual Asset Service Act passed its third reading in the Legislative Yuan on 30 June 2026, having been approved by the Executive Yuan that April. It marks Taiwan's shift in crypto-asset regulation from registration under anti-money-laundering law to licensing under a dedicated financial statute. Commencement follows promulgation and the date the Executive Yuan designates, so the obligations below are not all running yet. What it reaches goes beyond centralized exchanges to stablecoin issuers, organizations that accept cryptocurrency donations, and, at the margins, ordinary users holding assets in self-custody.
 
 This page covers the draft's structure, the provisions that matter, the penalty design, and the effect on different kinds of reader, and tracks the legislature's progress. It is not legal advice. For the operative requirements, sentences, and scope, the authority is the text as passed on third reading and the secondary legislation the competent authority issues.
 
@@ -129,14 +129,14 @@ The community tracks these three because global stablecoin and market structure 
 
 ### After the Executive Yuan's approval (from April 2026)
 
-The Finance Committee completed its article-by-article review on 3 June 2026 and reported the bill to the full chamber. Second and third readings and inter-party negotiation are pending. Versions and developments during review, with attribution and figures following the Legislative Yuan's own bill records:
+The Finance Committee completed its article-by-article review on 3 June 2026 and reported the bill to the full chamber, which passed it on third reading on 30 June 2026. Versions and developments during review, with attribution and figures following the Legislative Yuan's own bill records:
 
 - **Several competing versions**: besides the Executive Yuan version drafted by the FSC, there are versions from the Taiwan People's Party caucus and from DPP and KMT legislators (including Lin Chu-yin, Lin Ssu-ming, and Ko Ju-chun), with more than ten proposals consolidated for joint review by the Finance Committee. There is cross-party agreement that a dedicated statute is needed, while the specific provisions remain under negotiation
 - **FSC chairperson's report (7 May 2026)**: Peng Chin-lung reported to the Finance Committee on the development of financial technology, listing stablecoin reserves and the prohibition on paying interest as the two main directions, echoing the GENIUS Act's design of the same period. The same session covered virtual asset custody pilots, real-world asset tokenization, AI supervision, and financial large language models, with stablecoins one item among them
 - **Six categories of business**: the draft allows licensed providers to conduct virtual asset exchange, platform operation, transfer, custody, underwriting, and lending
 - **Transition period differs by version**: the Executive Yuan version allows 9 months to apply and 18 months to obtain the licence, while some legislators' versions argue for a shorter licensing deadline. The industry association has asked for a longer transition and for explicit provisions on what happens to those who fail review
 
-What the Cabinet approved is a draft. Legislative review, inter-party negotiation, possible amendment, third reading, and a promulgated commencement date all come before it fully takes effect.
+Three dates stay worth keeping apart: the third reading on 30 June 2026, the presidential promulgation that follows, and the commencement date the Executive Yuan designates separately. The Act is not fully in effect until the last of them.
 
 ### The public hearing on the pre-announced version (June 2025)
 

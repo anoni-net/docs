@@ -101,7 +101,7 @@ Publish the main site to the ordinary web, and alongside it:
 - **An IPFS mirror**, with a CID for each release that community volunteers can pin. The instructions are in [pinning the documentation site's IPFS mirror](../community/pin-ipfs-mirror.md)
 - **An onion mirror**, carrying the same content and offering anonymous access
 
-EFF, Proton, the New York Times, the BBC, and the CIA have all run official onion mirrors[^2]. Cloudflare also offers onion routing, where a site behind Cloudflare can have Tor Browser visitors routed to a Cloudflare `.onion` endpoint rather than through an exit relay[^3].
+EFF and Proton run official onion mirrors, and the New York Times ran one until closing it in March 2025[^2]. Cloudflare also offers onion routing, where a site behind Cloudflare can have Tor Browser visitors routed to a Cloudflare `.onion` endpoint rather than through an exit relay[^3].
 
 ### IPFS plus a naming layer
 

@@ -15,12 +15,12 @@ Harvest now, decrypt later (HNDL) is the motivation behind the whole migration. 
 Who does this threat actually apply to?
 
 - **Data with long-lived value**: government secrets, medical records, commercial intelligence, and long-term identifiers such as passport and national identity numbers
-- **Attackers with storage capacity**: state intelligence agencies are widely assumed to be doing this
+- **Attackers with storage capacity**: state intelligence agencies, with facilities such as the NSA's Bluffdale data centre widely assumed to be used this way
 - **Content that cannot be re-encrypted today**: once ciphertext has left, it cannot be recalled, so future decryption is a certainty rather than a risk
 
 For personal real-time chat and short-lived session tokens, HNDL risk is low, since the content expires. For financial identity documents, medical imaging, and a human rights worker's interview records, it is high.
 
-NIST's IR 8547 sets 2030 for deprecating the old algorithms and 2035 for prohibiting them entirely, and the NSA's CNSA 2.0 and ENISA's roadmap centre on the same two years[^1]. That timeline means new deployments should be planning a PQC path now.
+NIST's IR 8547, still an initial public draft, proposes deprecating the old algorithms in 2030 and disallowing them by 2035, with the deprecation date applying to 112-bit security and the 2035 date applying across the board. ENISA's roadmap works to the same two years, and the NSA's CNSA 2.0 sets its own deadlines of 2030 and 2033[^1]. That timeline means new deployments should be planning a PQC path now.
 
 <figure markdown="span">
     <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="Post-quantum migration timeline: Signal PQXDH in 2023, NIST FIPS standards and browser rollout in 2024, major systems expected to complete migration between 2030 and 2035, hard deadline for legacy cryptography by 2040">
@@ -49,21 +49,21 @@ NIST opened its PQC competition in 2016, made preliminary selections in 2022, an
 - A fallback for ML-DSA, with security resting only on the collision resistance of hash functions, which is the most conservative mathematical basis available
 - Signatures run roughly 8 to 50 KB depending on parameter set, and signing is slow, which suits long-lived certificates rather than high-frequency signing
 
-NIST's fourth round continued evaluating code-based algorithms as a long-term fallback, selecting HQC in 2025 as a fourth standardized KEM. The only isogeny-based candidate, SIKE, was broken and withdrawn in 2022[^2]. In the near term, ML-KEM with ML-DSA is what the industry is deploying.
+NIST's fourth round continued evaluating code-based algorithms as a long-term fallback, selecting HQC in March 2025 as a backup KEM to ML-KEM. It is selected rather than standardized, with the draft standard expected around 2027. The only isogeny-based candidate, SIKE, was broken and withdrawn in 2022[^2]. In the near term, ML-KEM with ML-DSA is what the industry is deploying.
 
 ## Where real systems have got to
 
 ### Browsers and TLS
 
-- **Chrome 124** (April 2024): X25519MLKEM768 hybrid key exchange on by default
-- **Firefox 132** (October 2024): the same, on by default
+- **Chrome 124** (April 2024): the draft X25519Kyber768Draft00 hybrid on by default, replaced by the standardized X25519MLKEM768 in **Chrome 131** (November 2024). The two use different TLS code points and are not wire-compatible, which is worth knowing when reading older coverage
+- **Firefox 132** (October 2024): X25519MLKEM768 on by default
 - **Safari**: following
 
 Hybrid means performing both a classical ECDH exchange and an ML-KEM exchange and combining the results. If ML-KEM turns out to have a flaw, classical ECDH still protects the connection. This is the industry's standard insurance policy.
 
 ### Cloud providers
 
-- Cloudflare has enabled post-quantum key agreement for connections to customer origins since 2022, completing the move from draft Kyber to standardized ML-KEM in 2024[^3], and is among the most aggressive deployments anywhere
+- Cloudflare has enabled post-quantum key agreement for inbound connections to sites behind it since 2022, added it for connections onward to customer origins in 2023, and completed the move from draft Kyber to standardized ML-KEM in 2024[^3]. It is among the most aggressive deployments anywhere
 - AWS enabled ML-KEM for TLS connections to KMS, ACM, and Secrets Manager in April 2025[^4]
 - Google Cloud offers PQC options to enterprise customers
 
@@ -97,11 +97,11 @@ Needing active planning:
 
 Regulatory timelines here largely follow NIST and ENISA.
 
-**Taiwan**: no agency has published a definitive PQC transition timeline for government communications. In finance, the Financial Supervisory Commission has established a pilot group building a technical inventory and expects to publish migration guidance for the financial sector in 2026, with formal regulatory requirements not yet scheduled[^5]. Healthcare may be the sector with the most immediate need, since the Medical Care Act requires records to be kept for at least seven years and imaging and follow-up data often considerably longer, which is precisely the profile HNDL targets.
+**Taiwan**: the Financial Supervisory Commission published post-quantum migration guidance for the financial sector in June 2026, following a pilot group that built the technical inventory. Formal regulatory requirements are not yet scheduled, and no agency has published a timeline for government communications generally. Healthcare may be the sector with the most immediate need, since the Medical Care Act requires records to be kept for at least seven years and imaging and follow-up data often considerably longer, which is precisely the profile HNDL targets.
 
-**Hong Kong**: the corresponding regulators are the Monetary Authority and the Securities and Futures Commission, with different retention rules for medical and financial records, and no published PQC migration timeline found so far.
+**Hong Kong**: the Monetary Authority published a quantum readiness white paper and index in July 2026. The Securities and Futures Commission is the other relevant regulator, and retention rules for medical and financial records differ from Taiwan's.
 
-**Singapore**: the Monetary Authority issued an advisory on quantum risk to financial institutions, which puts it ahead of most of the region on formal guidance.
+**Singapore**: the Monetary Authority issued an advisory on quantum risk to financial institutions in February 2024, which was the region's first. It is advisory rather than mandatory and sets no deadline.
 
 Across jurisdictions, the transferable judgement stays the same: follow the NIST and ENISA timelines, and handle the long-lived data with high HNDL exposure first.
 

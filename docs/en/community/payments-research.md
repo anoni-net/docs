@@ -50,7 +50,7 @@ Cash is the most mature form of anonymous payment, with clear limits when money 
 
 - **Privacy coin design**: the Monero and Zcash whitepapers and technical documentation
 - **Stablecoin regulation**: FATF policy recommendations and comparative studies across jurisdictions
-- **Chain analysis**: public reports from Chainalysis and TRM Labs, and academic criticism of on-chain privacy
+- **Chain analysis**: public reports from Chainalysis, Elliptic, and TRM Labs, and academic criticism of on-chain privacy
 - **The Tornado Cash sanctions**: a timeline of the US OFAC sanctions, the subsequent litigation, and the technical community's response
 - **Cross-border donations**: case studies on how advocacy organizations accept cryptocurrency donations within compliance
 - **Financial censorship**: Rainey Reitman's *Transaction Denied* (Beacon Press, 2026), documenting more than a decade of financial intermediaries acting as speech censors

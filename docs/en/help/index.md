@@ -20,11 +20,14 @@ This is not legal advice and does not replace professional help. If the situatio
 
 Free to call, and most offer anonymous consultation.
 
-- **`113`**: the national protection line for domestic violence, sexual assault, and child protection, run by the Ministry of Health and Welfare
+- **`113`**: the national protection line run by the Ministry of Health and Welfare, covering domestic violence, sexual assault, sexual harassment, and the protection of children, older people, and people with disabilities. Interpretation is available in English, Vietnamese, Indonesian, Thai, and Japanese, which matters if Mandarin is not your first language
 - **`110`**: police, for immediate threats to physical safety and crimes in progress
-- **`165`**: anti-fraud advice, for verifying a suspected scam. **If money has already left your account, call this immediately**, and see the timing below
-- **`1995`**: mental health support and suicide prevention
-- **iWIN**: the reporting channel for online harms involving people under 18, at [i.win.org.tw](https://i.win.org.tw/){target="_blank"}
+- **`165`**: anti-fraud advice, for verifying a suspected scam. **If money has already left your account, call this immediately**, and see the timing below. Free from a landline, and one NT dollar per minute from most mobile carriers. Reports can also be filed at [165.npa.gov.tw](https://165.npa.gov.tw){target="_blank"}
+- **`1925`**: the Ministry of Health and Welfare's 24-hour mental health and suicide prevention line, free of charge. `1995` is a separate service run by Lifeline Taiwan, a non-governmental organization
+
+Not a 24-hour line, and worth knowing about:
+
+- **iWIN**: the reporting channel for online harms involving people under 18, at [i.win.org.tw](https://i.win.org.tw/){target="_blank"}. Reports are filed online, and the phone line operates on weekdays only during office hours
 
 ### Finding the equivalent where you are
 
@@ -35,6 +38,8 @@ Emergency numbers, domestic violence lines, and anti-fraud reporting differ by j
 !!! danger "Call `165` first, read afterwards"
 
     The legal window for freezing the funds is 24 hours from the moment they are held, and the time spent reading this counts against it.
+
+    **This section describes Taiwan's mechanism specifically**, both the number and the 24-hour statutory window. Elsewhere, call your bank's fraud line immediately, which is printed on the back of your card, and ask whether your jurisdiction has an equivalent short window for freezing a transfer. Most do, and the length differs.
 
 ### Immediately
 
@@ -54,7 +59,7 @@ This is why calling and going to the station later does not work. Filing the rep
 
 It depends on whether the funds are still in the account. Where they remain and have not been withdrawn, the Fraud Crime Hazard Prevention Act provides a route for the financial institution to return the remaining balance on notification from the judicial police, which is currently the only path with a clear statutory basis. Where the funds have already been withdrawn or moved on, which is standard practice for organized fraud, the chances drop sharply and what remains is civil action.
 
-The same Act contains provisions most people do not know about and worth asking the officer handling your case about: judicial personnel are required to advise you whether you qualify for legal aid, civil claims for damages by victims are exempt from court and enforcement fees, and multiple victims may consolidate their claims.
+The same Act contains provisions most people do not know about and worth asking the officer handling your case about: judicial personnel are required to advise you whether you qualify for legal aid, victims bringing civil claims for damages are temporarily excused from paying court and enforcement fees in advance, and multiple victims may consolidate their claims.
 
 ### Afterwards
 
@@ -95,7 +100,7 @@ The same Act contains provisions most people do not know about and worth asking 
 
 ### Reporting it
 
-- File a police report and obtain the acknowledgement, which carriers and insurers often require
+- File a police report, in Taiwan by calling `110` or going to a local station, and obtain the acknowledgement, which carriers and insurers often require
 - Provide the device serial number and IMEI to police and your carrier. Storing those somewhere in advance saves time you will not have
 
 ### Afterwards
@@ -114,7 +119,7 @@ The same Act contains provisions most people do not know about and worth asking 
 
 ### Getting help
 
-In Taiwan, `113` provides consultation and assessment and can refer you to social workers. Protective orders are applied for through the police, social services, or the family court, and an emergency order can be issued within hours. The Stalking and Harassment Prevention Act, in force since 2022, provides a basis for criminal prosecution of unwanted approaches, following, harassing calls, and unsolicited deliveries.
+In Taiwan, `113` provides consultation and assessment and can refer you to social workers. Ordinary and temporary protective orders can be applied for by the person at risk, through the family court. An **emergency** protective order works differently: under the Domestic Violence Prevention Act only a prosecutor, the police, or the municipal competent authority can apply for one, so the route to it is through the police rather than the court directly, and the court has to issue it within four hours of receiving the application. The Stalking and Harassment Prevention Act, in force since 2022, provides a basis for criminal prosecution of unwanted approaches, following, harassing calls, and unsolicited deliveries.
 
 Local support organizations in Taiwan include the [Modern Women's Foundation](https://www.38.org.tw/){target="_blank"}, the [Garden of Hope Foundation](https://www.goh.org.tw/){target="_blank"}, and the [Taipei Women's Rescue Foundation](https://www.twrf.org.tw/){target="_blank"}, alongside each municipality's domestic violence and sexual assault prevention centre.
 
@@ -142,8 +147,8 @@ What follows is the digital preparation for someone who has not yet left, or is 
 
 - **A specific site will not load**: check with OONI Probe or [OONI Explorer](https://explorer.ooni.org/){target="_blank"} whether it is individual or regional. [ASN observation coverage](../regional/ooni-asn-coverage.md) shows the current measurement picture
 - **The whole home connection is down**: first establish whether it is a carrier fault by calling their support. If you suspect it is targeted, record the time, IP address, service name, and screenshots
-- **Cross-border connections are restricted**: try Tor Browser with a built-in bridge (obfs4, Snowflake, WebTunnel). [Tor Snowflake](../tools/tor-snowflake.md) covers running one yourself
-- **Tor will not connect at all**: request unlisted bridges by email from [bridges@torproject.org](mailto:bridges@torproject.org)
+- **Cross-border connections are restricted**: try Tor Browser with a built-in bridge (obfs4, Snowflake, meek-azure). [Tor Snowflake](../tools/tor-snowflake.md) covers running one yourself
+- **Tor will not connect at all**: request unlisted bridges from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"}, or by emailing [bridges@torproject.org](mailto:bridges@torproject.org) with `get transport obfs4` in the body. The email request only works from a Riseup or Gmail address. WebTunnel bridges, which look like ordinary HTTPS traffic, are requested this way rather than found in the browser's built-in list
 
 ## Install this site as an offline app while you still have connectivity
 
@@ -159,7 +164,7 @@ Open [anoni.net/docs](../index.md) in an ordinary browser rather than Tor Browse
 - **Desktop** (Chrome, Edge): an install icon appears at the right of the address bar, or use Install from the menu
 - **iPhone and iPad** (Safari): tap Share, then Add to Home Screen
 
-Once installed, the core concept, tool, and scenario sections download immediately and read offline, pages you have visited stay available, and anything not cached shows an offline notice pointing back to what is stored. Refreshing after connectivity returns brings everything up to date.
+Once installed, pages you have visited stay available offline, and anything not cached shows an offline notice pointing back to what is stored. Refreshing after connectivity returns brings everything up to date. Note that the set of pages pre-cached at install time is currently smaller on the English edition than on the Chinese one and does not yet include this page, so **open the sections you expect to need while you still have a connection**, which puts them in the cache.
 
 Note that Tor Browser and the onion and IPFS versions do not offer offline installation, since they do not register a background service worker, which is a deliberate privacy decision. Install from an ordinary browser for the offline copy and use Tor Browser for anonymous reading.
 
@@ -169,7 +174,7 @@ Note that Tor Browser and the onion and IPFS versions do not offer offline insta
 
 1. Screenshot the evidence, including the URL, the time of posting, and who posted it
 2. Report it to the platform, attaching the evidence and stating clearly that it infringes personal data
-3. Where the platform does not respond, your jurisdiction's data protection authority is the next step. In Taiwan that is the [Personal Data Protection Commission](https://www.pdpc.gov.tw/){target="_blank"} (in Chinese), and for material involving people under 18, [iWIN](https://i.win.org.tw/){target="_blank"}
+3. Where the platform does not respond, your jurisdiction's data protection authority is the next step. In Taiwan that is the [Personal Data Protection Commission's preparatory office](https://www.pdpc.gov.tw/){target="_blank"} (in Chinese), the Commission itself not yet being formally established, and for material involving people under 18, [iWIN](https://i.win.org.tw/){target="_blank"}
 4. Consider consulting a lawyer about civil or criminal action
 
 ### Alongside
@@ -181,7 +186,7 @@ Note that Tor Browser and the onion and IPFS versions do not offer offline insta
 ## Travelling or working across borders
 
 - **Access Now Digital Security Helpline**: [accessnow.org/help](https://www.accessnow.org/help/){target="_blank"}, digital security support for journalists, human rights defenders, and activists, in multiple languages, from anywhere
-- **Your own foreign ministry's emergency assistance line**, which for Taiwanese nationals abroad is `+886-800-085-095`
+- **Your own foreign ministry's emergency assistance line.** For Taiwanese nationals, the Ministry of Foreign Affairs emergency centre is `0800-085-095` free of charge within Taiwan, or `+886-800-085-095` from abroad at your own cost. A separate toll-free line for nationals overseas, `800-0885-0885`, works from 22 countries and territories and is the one to use if you have no money on the phone
 - Your embassy or representative office, and local police channels, both worth looking up before travelling
 
 ## After it is over

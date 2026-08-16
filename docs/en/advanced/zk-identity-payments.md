@@ -33,7 +33,7 @@ Monero's design comes from the 2013 CryptoNote whitepaper, with three mechanisms
 
 Together, what appears on the chain is that a one-time address received a hidden amount, sent by one of 16 possible senders. There is no notion of named parties. Against the four layers, stealth addresses cover accounts, RingCT covers amounts, ring signatures obscure the graph, and metadata still needs Tor.
 
-The costs are a larger blockchain, heavier verification, and transactions that are difficult to reconcile with know-your-customer requirements. Exchanges requiring KYC began delisting Monero from 2021, with the largest wave across 2023 and 2024[^1].
+The costs are a larger blockchain, heavier verification, and transactions that are difficult to reconcile with know-your-customer requirements. Exchanges requiring KYC began delisting Monero from 2021, with the largest wave across 2023 and 2024, including Binance, OKX, and Kraken in Europe[^1].
 
 ## How Zcash does it
 
@@ -59,7 +59,7 @@ Zcash's long-running problem has been usage. The shielded pool saw far fewer use
 
 ## What chain analysis can and cannot do
 
-Chain analysis is an industry built around tracing cryptocurrency flows for governments and financial institutions, turning on-chain data into intelligence that supports prosecution, freezing, and tracing. What these firms publicly claim:
+Chain analysis is an industry built around tracing cryptocurrency flows for governments and financial institutions, with firms such as Chainalysis, Elliptic, and TRM Labs turning on-chain data into intelligence that supports prosecution, freezing, and tracing. What they publicly claim:
 
 **Achievable**:
 
@@ -70,7 +70,7 @@ Chain analysis is an industry built around tracing cryptocurrency flows for gove
 
 **Not achievable**:
 
-- Identifying the true sender on Monero at the current ring size, where no effective published method exists
+- Identifying the true sender on Monero with certainty at the current ring size. Probabilistic work does better than chance: Monero's own OSPEAD research published in April 2025 found a decoder that identifies the real spend roughly one time in four against the one in sixteen a random guess would give, which is a meaningful erosion of the guarantee without being identification
 - Recovering fully shielded Zcash transactions
 - Activity that never reaches a public chain, such as direct peer-to-peer trades or the interior of payment channels
 
@@ -91,10 +91,10 @@ For example:
 Systems in development:
 
 - **World ID**: uses an iris scan to generate a uniqueness credential, with the user proving personhood through a zero-knowledge proof rather than revealing the iris data
-- **Polygon ID**: built on the Iden3 framework, turning verifiable credentials issued by governments, banks, and healthcare institutions into zero-knowledge proofs
+- **Privado ID**, formerly Polygon ID: built on the Iden3 framework, turning verifiable credentials issued by governments, banks, and healthcare institutions into zero-knowledge proofs
 - **Anon Aadhaar**: a zero-knowledge wrapper around India's national identity system, letting a user prove they hold a valid credential without revealing the number
 
-Maturity varies widely. Polygon ID has the most complete ecosystem and requires decentralized identifier infrastructure. Anon Aadhaar serves one national system. World ID is the most general and its iris scanning is the most contested. No jurisdiction in the Sinophone Asia-Pacific currently has an equivalent local service.
+Maturity varies widely. Polygon ID has the most complete ecosystem and requires decentralized identifier infrastructure. Anon Aadhaar serves one national system. World ID is the most general and its iris scanning is the most contested. Taiwan currently has no equivalent local service.
 
 What these share is separating "I prove X" from "I disclose X to you". Traditional know-your-customer is handing over a passport copy and letting the other party decide whether to trust it. Zero-knowledge identity is handing over a proof they can verify without obtaining the underlying data.
 
@@ -109,15 +109,15 @@ Clean in theory, and the practical bottleneck is that the verifier has to trust 
 
 ## What this looks like across the region
 
-**Taiwan.** The [Virtual Asset Service Act](../regional/taiwan-vasp-2026.md), a 2026 draft, would push KYC and the Travel Rule down to the exchange level. It passed the Executive Yuan in April 2026 and cleared committee review in June, without a third reading yet[^4]. If enacted, three effects on private payments:
+**Taiwan.** The [Virtual Asset Service Act](../regional/taiwan-vasp-2026.md) pushes KYC and the Travel Rule down to the exchange level. It passed the Executive Yuan in April 2026, cleared committee review in June, and passed its third reading on 30 June 2026[^4]. Three effects on private payments:
 
 1. **Exchanges**: local platforms offering privacy features such as Monero or Zcash shielded transactions face clear regulatory pressure, and delisting or restriction is likely
 2. **Users**: holding privacy coins through decentralized exchanges or peer-to-peer remains open, and converting to and from local currency narrows
 3. **Advocacy organizations**: an NGO accepting crypto donations has to balance donor anonymity against accounting disclosure. A group wanting to accept Monero donations to protect its funders will find most local exchanges have already delisted it, leaving overseas platforms or peer-to-peer conversion, and accounting for the total to regulators becomes awkward. Zero-knowledge identity could become an option here, where a donor proves a lawful deductible amount while the organization still discloses the total, and the ecosystem is not there yet
 
-**Hong Kong.** The framework and the risk level are different. Virtual asset trading platform licensing has been in force since June 2023 under the Securities and Futures Commission, retail users can only trade eligible tokens on licensed platforms, and privacy coins conflict with anti-money-laundering and KYC requirements to the point of being practically unlistable[^hk].
+**Hong Kong.** The framework and the risk level are different. Virtual asset trading platform licensing has been in force since June 2023 under the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, administered by the Securities and Futures Commission, with fiat-referenced stablecoin issuance licensed separately by the Monetary Authority since August 2025. Retail users can only trade eligible tokens on licensed platforms, and privacy coins conflict with anti-money-laundering and KYC requirements to the point of being practically unlistable[^hk].
 
-The core risk for donation-based advocacy there is not the payment mechanism. It is that the purpose of the funds may itself be characterized as endangering national security. In the case of a humanitarian fund supporting people arrested during the 2019 protests, the fund was investigated and ceased operating, and five trustees were arrested under the National Security Law before ultimately being convicted under the Societies Ordinance for failing to register. What zero-knowledge identity offers is keeping a donor's identity out of records that a security investigation could later reach. What it cannot do is address the characterization of the funds themselves, and no amount of clean technology substitutes for a legal risk assessment.
+The core risk for donation-based advocacy there is not the payment mechanism. It is that the purpose of the funds may itself be characterized as endangering national security. In the case of the 612 Humanitarian Relief Fund, which supported people arrested during the 2019 protests, the fund was investigated and ceased operating. Five trustees, among them Cardinal Joseph Zen, were arrested under Article 29 of the National Security Law, and six defendants were ultimately convicted under the Societies Ordinance for failing to register the fund, with fines rather than custodial sentences. An appeal was argued in December 2025 and judgment is pending. What zero-knowledge identity offers is keeping a donor's identity out of records that a security investigation could later reach. What it cannot do is address the characterization of the funds themselves, and no amount of clean technology substitutes for a legal risk assessment.
 
 **Mainland China.** Crypto business activity is comprehensively banned, which puts the question outside the regulatory frame entirely rather than inside a stricter version of it.
 
