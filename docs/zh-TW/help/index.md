@@ -180,7 +180,7 @@ icon: material/lifebuoy
 
 1. 截圖保留證據（含 URL、發布時間、發布者）
 2. 對該平台提出檢舉，附上證據與「侵害個人資料」的明確主張
-3. 對特定平台不應的情況下，可向 [iWIN](https://i.win.org.tw/){target="_blank"}（兒少相關）或 [個人資料保護委員會](https://www.pdpc.gov.tw/){target="_blank"} 提出協助申請
+3. 平台不回應時，可向 [iWIN](https://i.win.org.tw/){target="_blank"}（兒少相關）或 [個人資料保護委員會籌備處](https://www.pdpc.gov.tw/){target="_blank"} 提出協助申請。委員會本體還在等組織法三讀，目前對外掛牌與受理的是籌備處
 4. 諮詢專業律師考慮民事或刑事追訴
 
 ### 同步保護

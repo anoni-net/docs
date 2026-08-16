@@ -55,9 +55,9 @@ GrapheneOS 的功能可以分成三组：缩减攻击面、减少对 Google 的�
 
 ## 为什么几乎只支援 Pixel
 
-GrapheneOS 对硬件的要求很严格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解锁、刷完客制系统后还能重新锁回（重锁才能完整启用 verified boot）、要有安全晶片提供的 StrongBox keystore 与硬件金钥验证、韧体与作业系统都要 A/B 双槽更新加上防回滚保护、原厂还要给够长的安全更新（GrapheneOS 要求至少 5 年，Pixel 目前提供 7 年）。
+GrapheneOS 对硬件的要求很严格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解锁、刷完客制系统后还能重新锁回（重锁才能完整启用 verified boot）、要有安全晶片提供的 StrongBox keystore 与硬件金钥验证、韧体与作业系统都要 A/B 双槽更新加上防回滚保护、原厂还要给够长的安全更新（GrapheneOS 要求至少 5 年）。Pixel 8 以后的机型是 7 年，仍在支援清单上的 Pixel 6、7 系列是 5 年，两者不同。
 
-目前同时满足这些条件的消费级手机几乎只有 Google Pixel。Pixel 从第 6 代起搭载 Titan M2 安全晶片（第 3 到 5 代是第一代 Titan M），这颗晶片是金钥保护与硬件验证的信任根。
+目前同时满足这些条件的消费级手机几乎只有 Google Pixel。Pixel 从第 6 代到第 10 代搭载 Titan M2 安全晶片，第 11 代换成 Titan M3，第 3 到 5 代是第一代 Titan M。这颗晶片是金钥保护与硬件验证的信任根。
 
 GrapheneOS 目前只能运作于 Google 自家的 Pixel 上，但它要对付的，正是 Google 服务对手机的渗透。Google 对 Pixel 与 Android 的每一个政策调整，都会直接影响 GrapheneOS 的处境，而 Android 17 之后，Google 收紧的力道越来越强。
 
@@ -65,7 +65,7 @@ GrapheneOS 目前只能运作于 Google 自家的 Pixel 上，但它要对付的
 
 2025 年起，Google 连续两步垫高了第三方系统的开发成本。先是在 2025 年 3 月把 Android 开发移进内部分支，只在版本发布时才把原始码推上 AOSP，开发过程不再公开可追（仍是开源，但外部看不到中间的演进）。接着在 2025 年 6 月发布 Android 16 时，不再把 Pixel 的 device tree（描述机型硬件、让系统能驱动它的设定档）放进 AOSP，第三方开发者只能靠反推补回这些资料。
 
-即使如此，GrapheneOS 在 2026 年 6 月 16 日 Android 17 发布当天就完成移植，韧性还在。它同时开始替 Pixel 找替代出路，2026 年 3 月与 Motorola 宣布长期合作，第一次把硬件选项铺到 Pixel 以外（具体机型与时间官方尚未公布）。
+即使如此，GrapheneOS 在 2026 年 6 月 16 日 Android 17 发布当天就完成移植，韧性还在。它同时开始替 Pixel 找替代出路，2026 年 3 月与 Motorola 宣布长期合作，第一次把硬件选项铺到 Pixel 以外。官方说明目标是 2027 年的硬件，因为 2026 年的 Motorola 机型都不符合要求，具体机型仍未公布。
 
 另一条压力来自 attestation（装置认证，由 app 在背景检查你的手机是不是「原厂认可」的状态）。Google 的 Play Integrity 把非官方系统判为不合格，连带让部分银行、企业 app 拒绝在 GrapheneOS 上执行，即使它比原厂更安全。
 
@@ -76,14 +76,14 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 - **取得管道**：Pixel 在不少地区没有官方销售（中国大陆、台湾、港澳等都买不到行货），多数人透过水货、海外代购或出国时自行购入。买之前先到官方 [FAQ](https://grapheneos.org/faq){target="_blank"} 确认那台是 GrapheneOS 支援的型号，二手机要特别确认 bootloader 没有被锁死（电信商绑约机常锁住 bootloader，一旦锁住就无法解锁刷机）。
 - **app 锁定的实际冲击**：银行、政府、企业验证类 app 越来越常用 attestation 检查装置，GrapheneOS 使用者可能遇到某些 app 拒绝执行。对把手机当主要上网装置的人，转用前要先确认每天必用的 app 有哪些可能受影响、自己能否接受，再决定是否转移。
 - **在中国大陆的情境不同**：Google 服务在中国大陆本就难以使用，degoogle 与 sandboxed Google Play 的意义跟海外不一样，但「装什么系统、装什么 app 由谁决定」的问题一样存在，甚至更尖锐。本地大量 app 同时走自家的装置认证与实名要求，非官方系统一样容易被挡。
-- **侧载限制正在逼近**：Android 17 新增的应用程式侧载「开发者验证」流程，2026 年先在巴西、印尼、新加坡、泰国试行，2027 年扩大。APAC 是第一批试验场，华语地区多数不在首批，但这类政策通常会逐步扩大。
+- **侧载限制正在逼近**：Google 在 2025 年 8 月宣布对侧载应用程式要求「开发者验证」，执行方式是认证装置上的 Play services 元件，涵盖 Android 7 以上，不绑定单一 Android 版本。2026 年 9 月 30 日先在巴西、印尼、新加坡、泰国生效，2027 年推向全球。首批四国有两个在这个区域，华语地区多数不在首批，但这类政策通常会逐步扩大。
 - 取得管道、app 锁定、侧载限制，指向的都是同一件事，谁有权决定你买来的手机上能执行什么系统、能装什么 app。GrapheneOS 让使用者在原厂系统之外仍然有选择。
 
 ## 常见问题
 
 ??? question "我一定要买 Pixel 吗？"
 
-    目前实务上几乎是。只有 Pixel 同时满足 GrapheneOS 要求的可重锁 bootloader、安全晶片、完整 verified boot 与长期更新。2026 年 3 月宣布的 Motorola 合作可能在未来提供 Pixel 以外的选项，但具体机型与上市时间还没公布，现在要用 GrapheneOS 仍要准备一台支援的 Pixel。
+    目前实务上几乎是。只有 Pixel 同时满足 GrapheneOS 要求的可重锁 bootloader、安全晶片、完整 verified boot 与长期更新。2026 年 3 月宣布的 Motorola 合作目标是 2027 年的硬件，具体机型还没公布，现在要用 GrapheneOS 仍要准备一台支援的 Pixel。
 
 ??? question "安装 GrapheneOS 后，还能使用 Google 地图、Gmail 吗？"
 
@@ -99,7 +99,7 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 
 ??? question "与 LineageOS、CalyxOS、/e/OS 有什么不同？"
 
-    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 预设的安全保护。/e/OS 以延续旧硬件可用为主，漏洞缓解的等级最低。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
+    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线，选用前值得知道它从 2025 年 8 月起暂停开发、2026 年 7 月恢复，目前重新处于积极维护状态。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 预设的安全保护。/e/OS 以延续旧硬件可用与去 Google 化的预设值为主，没有公布可与其他几套相比的 hardening 说明。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
 
 ## 接下来
 
