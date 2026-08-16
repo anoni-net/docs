@@ -224,7 +224,7 @@ zh-TW is the single source of truth. zh-CN and en are derived from it. The full 
 - zh-CN uses tool-assisted first drafts plus human adjustment for vocabulary differences
 - en takes more human work, because the cultural context has to be re-framed rather than converted
 - zh-CN and en do not have to ship together with zh-TW. They roll out as people are available
-- When reviewing an English page that derives from a zh-TW original, the class of error to look for is named information being replaced by a category term. [What goes missing when an English page derives from zh-TW](./i18n.md#what-goes-missing-when-an-english-page-derives-from-zh-tw) has the test and how to run it
+- When reviewing an English page that derives from a zh-TW original, the class of error to look for is named information being replaced by a category term. [What goes missing when an English page derives from zh-TW](./i18n.md#What-goes-missing-when-an-English-page-derives-from-zh-TW) has the test and how to run it
 
 The English site is a rewrite, not a word-for-word translation. A page whose value is entirely in its Chinese-language context does not automatically get an English version, and an English page can carry regional comparisons its Chinese source does not have. Where an upstream English original already exists, as with translated Tor Project, OONI, Tails, and Signal blog posts, the English site links to the original instead of translating it back.
 
