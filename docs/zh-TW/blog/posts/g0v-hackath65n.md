@@ -42,7 +42,7 @@ description: "邀請您於 2025 年 2 月 22 日 g0v Hackath65n 零時政府第 
 
 針對 OONI 觀測資料多樣性不足的問題，我們要如何隨時監控資料的品質呢？是否可以透過某種量化指標或數字來快速掌握狀況？要如何將其實作並建立起來呢？在這次活動，我們將討論資料流架構、自動化分析等相關問題。最後，我們也需要思考如何吸引更多人參與 OONI 觀察資料的蒐集。
 
-[:material-arrow-right-circle-outline: 瞭解此專案目前的進度](../../taiwan/ooni-checklist.md){ .md-button target="_blank" }
+[:material-arrow-right-circle-outline: 瞭解此專案目前的進度](../../taiwan/ooni-asn-coverage.md){ .md-button target="_blank" }
 
 ### 中文化與詞彙校閱
 

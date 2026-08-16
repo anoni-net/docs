@@ -34,6 +34,6 @@ description: "项目当前近况与更新 2025/04"
 
 也希望通过这次的工作坊，与对此议题感兴趣的人一起提升对于 Tor/Tails、OONI 等知识！我们设计了一个技能分级表，后续的培训希望把大家提升到 **Basic Level 3** 的层级！
 
-[了解「匿名网络工作坊」筹备事项！](../../event-workshop-2025.md){ .md-button .md-button--primary }
+[了解「匿名网络工作坊」筹备事项！](../../event-workshop-2025-prepare.md){ .md-button .md-button--primary }
 
 如果你对工作坊筹备与培训小助手感兴趣，欢迎直接回信给我。另外，开放文化基金会的志工招募也已[同步公告](https://volunteer.ocf.tw/blog/)工作坊招募信息。

@@ -187,7 +187,7 @@ icon: material/lifebuoy
 
 1. 截图保留证据（含 URL、发布时间、发布者）
 2. 对该平台提出检举，附上证据与「侵害个人资料」的明确主张
-3. 对特定平台不应的情况下，可向 [iWIN](https://i.win.org.tw/){target="_blank"}（儿少相关）或 [个人资料保护委员会](https://www.pdpc.gov.tw/){target="_blank"} 提出协助申请
+3. 平台不回应时，可向 [iWIN](https://i.win.org.tw/){target="_blank"}（儿少相关）或 [个人资料保护委员会筹备处](https://www.pdpc.gov.tw/){target="_blank"} 提出协助申请。委员会本体还在等组织法三读，目前对外挂牌与受理的是筹备处
 4. 咨询专业律师考虑民事或刑事追诉
 
 ### 同步保护
