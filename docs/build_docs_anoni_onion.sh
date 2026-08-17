@@ -4,7 +4,6 @@ rm -rf ./output/*
 rm -rf .cache/plugin/privacy
 sh ./run.sh
 sh ./run_en.sh
-sh ./run_zh-tw.sh
 sh ./run_zh-cn.sh
 sh ./replace_og.sh
 rm -rf /srv/ooni-docs-output/*

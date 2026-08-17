@@ -166,8 +166,9 @@ theme:
     - content.footnote.tooltips
 extra:
   alternate:
+    # zh-TW 是站台預設語系，建在根路徑，沒有獨立語系區段。理由見 mkdocs.yml 的註解。
     - name: 臺灣正體（zh-TW）
-      link: /docs/zh-tw/
+      link: /docs/
       lang: zh-TW
     - name: 简体中文（zh-CN）
       link: /docs/zh-cn/

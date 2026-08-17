@@ -23,20 +23,13 @@ find ./ -path './onion' -prune -o \
 find .. -maxdepth 1 -type f -name '*.md' \
 	-exec sed -i 's|https://anoni.net/docs|https://anoni-net.ipns.dweb.link|g' {} +
 
+# 語言選單（extra.alternate）的 link 是站台根相對路徑，IPFS 鏡像換成 IPNS gateway 的
+# 絕對網址。一條規則涵蓋三個語系：/docs/ → gateway 根（zh-TW 預設語系建在根路徑）、
+# /docs/zh-cn/ → gateway 的 /zh-cn/、/docs/en/ → gateway 的 /en/。
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/zh-tw/|link: https://anoni-net.ipns.dweb.link/zh-tw/|g' {} +
-
-find ./ -path './onion' -prune -o \
-	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \
-	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/zh-cn/|link: https://anoni-net.ipns.dweb.link/zh-cn/|g' {} +
-
-find ./ -path './onion' -prune -o \
-	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \
-	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/en/|link: https://anoni-net.ipns.dweb.link/en/|g' {} +
+	-exec sed -i 's|link: /docs/|link: https://anoni-net.ipns.dweb.link/|g' {} +
 
 find ./output \
 	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \

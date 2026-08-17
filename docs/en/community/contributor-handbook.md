@@ -126,7 +126,7 @@ If you are not sure where an article belongs, ask on Matrix before opening a PR,
 
 When you move, rename, or delete a page that is already live, add the redirect in the same PR so the old URL does not turn into a 404. Old URLs live on in search engines, bookmarks, and other people's links.
 
-- Redirects go in `plugins.redirects.redirect_maps` in the three mkdocs configs: `mkdocs.yml` for zh-TW (covering both `/docs/` and `/docs/zh-tw/`), `mkdocs_en.yml` for en, and `mkdocs_cn.yml` for zh-cn.
+- Redirects go in `plugins.redirects.redirect_maps` in the three mkdocs configs: `mkdocs.yml` for zh-TW (`/docs/`), `mkdocs_en.yml` for en, and `mkdocs_cn.yml` for zh-cn.
 - The format is `old path: new path`, relative to each language's docs directory, without the `docs/<lang>/` prefix. For example, `'tools/what-is-ooni.md': 'tools/index.md'`.
 - Where there is no one-to-one replacement, point at the section index (`community/index.md`, `tools/index.md`).
 - Keep existing redirects. People keep arriving at old URLs. The one case for revisiting an entry is when its target page has itself been removed and the redirect now dead-ends.

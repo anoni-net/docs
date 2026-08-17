@@ -9,7 +9,7 @@
 #   1. 確認 working tree clean（避免 replace_sitename in-place 改動污染未提交修改）
 #   2. 設 trap，任何狀況退出都 git restore 還原 source
 #   3. 跑 replace_sitename_anoni_ipfs.sh 把 source URL 改成 IPFS URL（in-place）
-#   4. mkdocs build 三語 + 主站，產物匯到 ./anoni-net-docs-ipfs/
+#   4. mkdocs build 三語（zh-TW 建在根路徑，en 與 zh-CN 各自語系區段），產物匯到 ./anoni-net-docs-ipfs/
 #   5. sanity check 確認鏡像內無殘留 https://anoni.net/docs URL
 #   6. (預設) 跑 upload_to_ipfs.sh 上傳 + publish IPNS
 
@@ -68,7 +68,6 @@ rm -rf .cache/plugin/privacy
 RUN replace_sitename_anoni_ipfs.sh
 RUN run.sh
 RUN run_en.sh
-RUN run_zh-tw.sh
 RUN run_zh-cn.sh
 mkdir -p ./anoni-net-docs-ipfs
 rm -rf ./anoni-net-docs-ipfs/*
