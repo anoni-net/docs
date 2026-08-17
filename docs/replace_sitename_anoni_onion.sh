@@ -41,14 +41,14 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i 's|https://pad.anoni.net|http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
 
-# 圖片主機。assets.anoni.net 是 clearnet 網域，onion 鏡像原樣留著的話，讀者的
-# Tor Browser 得繞出口去抓圖，慢又等於把「我在看這頁」透露給出口與 CDN。
-# 主站的 onion vhost 有 location /assets 指到同一顆 /srv/images-anoni-net/，
-# 換過去就走完整的 onion 路徑。docs onion 自己沒有 /assets，所以指的是主站那個。
-find ./ -path './onion' -prune -o \
-	-type f ! -name 'replace_sitename.sh' \
-	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|https://assets.anoni.net/|http://anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/assets/|g' {} +
+# assets.anoni.net 刻意不改寫。這裡曾經加過一條把它換成 onion /assets 的規則，
+# 理由是「onion 讀者不該繞出口抓圖」，那個前提是錯的：mkdocs 的 privacy plugin
+# 本來就會在建置時把外部資源抓下來鏡像進站內，產出的 HTML 指向
+# assets/external/assets.anoni.net/...，三個版本都一樣，onion 讀者拿到的一直是本機檔案。
+#
+# 換成 .onion 之後反而會壞：這支在 mkdocs build 之前跑，privacy plugin 接著要去下載
+# 那些網址，CI runner 解析不了 .onion，抓不到就在寫鏡像檔時 FileNotFoundError 中止。
+# 詳見 run 32053989479。要動 assets 的話請改 privacy plugin 的 assets_exclude，不要在這裡 sed。
 
 # 語言選單（extra.alternate）的 link 是站台根相對路徑，clearnet 掛在 /docs/ 底下，
 # onion 站的 docs 就是自己的根，把前綴整段拔掉。一條規則涵蓋三個語系：
