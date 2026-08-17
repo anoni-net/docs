@@ -101,10 +101,12 @@ jobs:
 
       - name: Install mkdocs-material social dependencies
         run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+      # zh-TW 只建一份，就在根路徑。曾經另外跑 run_zh-tw.sh 建一棵 /docs/zh-tw/，
+      # 內容與根路徑逐位元組相同，只為了讓語言選單有對稱的網址。兩棵樹各自
+      # self-canonical 又各自進 sitemap，等於自己製造重複內容。選單改填 /docs/ 之後
+      # 那棵樹沒有存在理由。舊網址由 Cloudflare Redirect Rule 301 導回 /docs/。
       - name: Build Docs (/)
         run: source ./.venv/bin/activate; sh ./run.sh;
-      - name: Build Docs (/zh-tw)
-        run: source ./.venv/bin/activate; sh ./run_zh-tw.sh;
       - name: Build Docs (/zh-cn)
         run: source ./.venv/bin/activate; sh ./run_zh-cn.sh;
       - name: Build Docs (/en)
@@ -112,14 +114,13 @@ jobs:
       - name: Replace OG images
         run: |
           # output 結構已改為依年份 blog/YYYY/MM/
-          for base in ./output ./output/zh-tw ./output/en; do
+          for base in ./output ./output/en; do
             [ -d "$base" ] || continue
             mkdir -p "$base/assets/images/social/blog/2025/02" "$base/assets/images/social/blog/2025/03"
           done
           wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-zh-tw.png -O ./output/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
-          [ -d ./output/zh-tw ] && wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-zh-tw.png -O ./output/zh-tw/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
           [ -d ./output/en ] && wget -q https://assets.anoni.net/og/rightscon25-tor-tails-ooni-en.png -O ./output/en/assets/images/social/blog/2025/02/rightscon25-tor-tails-ooni.png
-          for base in ./output ./output/zh-tw ./output/en; do
+          for base in ./output ./output/en; do
             [ -d "$base" ] || continue
             [ -f "$base/blog/assets/images/g0v-hackath65n.webp" ] && cp "$base/blog/assets/images/g0v-hackath65n.webp" "$base/assets/images/social/blog/2025/02/g0v-hackath65n.png"
             [ -f "$base/blog/assets/images/tor-tails-workshop-slide.webp" ] && cp "$base/blog/assets/images/tor-tails-workshop-slide.webp" "$base/assets/images/social/blog/2025/03/rightscon25-tor-tails-ooni-after.png"

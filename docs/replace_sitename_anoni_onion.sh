@@ -41,20 +41,13 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i 's|https://pad.anoni.net|http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
 
+# 語言選單（extra.alternate）的 link 是站台根相對路徑，clearnet 掛在 /docs/ 底下，
+# onion 站的 docs 就是自己的根，把前綴整段拔掉。一條規則涵蓋三個語系：
+# /docs/ → /（zh-TW 預設語系建在根路徑）、/docs/zh-cn/ → /zh-cn/、/docs/en/ → /en/。
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/zh-tw/|link: /zh-tw/|g' {} +
-
-find ./ -path './onion' -prune -o \
-	-type f ! -name 'replace_sitename.sh' \
-	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/zh-cn/|link: /zh-cn/|g' {} +
-
-find ./ -path './onion' -prune -o \
-	-type f ! -name 'replace_sitename.sh' \
-	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|link: /docs/en/|link: /en/|g' {} +
+	-exec sed -i 's|link: /docs/|link: /|g' {} +
 
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \

@@ -98,7 +98,7 @@ icon: material/book-open-variant
 
 移动、改名或删除已上线的页面时，在同一个 PR 补上 redirect，让旧网址不会变成 404。旧网址会长期活在搜索引擎、书签与外部链接里，少了 redirect 就流失既有读者与累积的 SEO 权重。
 
-- redirect 写在三支 mkdocs 设定的 `plugins.redirects.redirect_maps`：`mkdocs.yml` 对应 zh-TW（同时涵盖 `/docs/` 与 `/docs/zh-tw/`）、`mkdocs_en.yml` 对应 en、`mkdocs_cn.yml` 对应 zh-cn。
+- redirect 写在三支 mkdocs 设定的 `plugins.redirects.redirect_maps`：`mkdocs.yml` 对应 zh-TW（`/docs/`）、`mkdocs_en.yml` 对应 en、`mkdocs_cn.yml` 对应 zh-cn。
 - 格式是「旧路径: 新路径」，路径相对各语系的 docs 目录，不含 `docs/<lang>/` 前缀。例：`'tools/what-is-ooni.md': 'tools/index.md'`。
 - 找不到一对一的新页时，导向所属分类的 index 页（`community/index.md`、`tools/index.md` 等）。
 - 既有 redirect 保留不删，旧网址会一直有人点进来。唯一要回头改的情况：某条的目标页自己也被移掉，redirect 变成断链。

@@ -187,8 +187,11 @@ theme:
     - content.footnote.tooltips
 extra:
   alternate:
+    # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是站台預設語系，run.sh 直接把它建在
+    # 根路徑，沒有獨立的語系區段。填 /docs/ 讓 hreflang 有 self-reference（Google 要求
+    # 一組 annotation 內每個網址都指回自己），語言選單也直接落在正式網址上。
     - name: 臺灣正體（zh-TW）
-      link: /docs/zh-tw/
+      link: /docs/
       lang: zh-TW
     - name: 簡體中文（zh-CN）
       link: /docs/zh-cn/
@@ -228,7 +231,7 @@ plugins:
         'report/interseclab-the-internet-coup/index_6.md': 'reports/interseclab-network-coup/index_6.md'
         'report/interseclab-the-internet-coup/index_7.md': 'reports/interseclab-network-coup/index_7.md'
         'report/interseclab-the-internet-coup/index_8.md': 'reports/interseclab-network-coup/index_8.md'
-        # 2026 扁平結構 → 7 分類改版（ddad3ca）舊網址止血，同時覆蓋 /docs/ 與 /docs/zh-tw/
+        # 2026 扁平結構 → 7 分類改版（ddad3ca）舊網址止血
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'intro/index.md': 'basics/index.md'
         'intro/ooni-run-v2.md': 'tools/ooni-run-v2.md'

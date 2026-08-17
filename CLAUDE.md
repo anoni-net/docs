@@ -78,8 +78,7 @@ source .venv/bin/activate
 mkdocs serve
 
 # 或使用腳本啟動不同語言版本
-sh run.sh          # zh-TW (預設)
-sh run_zh-tw.sh    # zh-TW
+sh run.sh          # zh-TW（預設語系，建在根路徑）
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
@@ -278,6 +277,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - 寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)（原始檔 `docs/zh-TW/community/contributor-handbook.md`）的「寫作風格規範」一節。要新增或修改規則先改那裡
 - 送 PR 前可先跑 `python3 tools/docs_style_lint.py <path>` 自檢，CI 會對變更的中文 Markdown 跑同一支
 - 語系的資料夾與對外 URL 規則不同：`docs/zh-TW/` 對應 `https://anoni.net/docs/`（預設語系不帶語系區段），`docs/zh-CN/` 對應 `/docs/zh-cn/`（URL 小寫），`docs/en/` 對應 `/docs/en/`
+- `/docs/zh-tw/` 是已停用的舊網址，由 Cloudflare Redirect Rule 301 導回 `/docs/`。它曾經是 `run_zh-tw.sh` 建出來的第二棵樹，內容與根路徑完全相同，兩邊各自 self-canonical 又各自進 sitemap，等於自製重複內容。語言選單的 zh-TW 項填 `/docs/` 就夠，不要再加回那份建置
 
 ### 修改 API 時
 

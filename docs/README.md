@@ -30,8 +30,7 @@ mkdocs serve   # 預設 zh-TW
 或使用腳本啟動不同語言版本：
 
 ```bash
-sh run.sh          # zh-TW（預設）
-sh run_zh-tw.sh    # zh-TW
+sh run.sh          # zh-TW（預設語系，建在根路徑）
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
@@ -104,8 +103,7 @@ mkdocs serve   # Default: zh-TW
 Or use scripts to serve a specific language:
 
 ```bash
-sh run.sh          # zh-TW (default)
-sh run_zh-tw.sh    # zh-TW
+sh run.sh          # zh-TW (default language, built at the site root)
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
