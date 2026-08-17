@@ -28,7 +28,7 @@ Building on the 2023 and 2024 research project "[ASN Autonomous Network Observat
 
 We plan to establish a data pipeline architecture for automating the data collection and organization process during research, potentially allowing real-time presentation of results with OONI Data.
 
-[:material-arrow-right-circle-outline: Learn more about this project](../../regional/index.md){ .md-button target="_blank" }
+[:material-arrow-right-circle-outline: Learn more about this project](../../regional/ooni-asn-coverage.md){ .md-button target="_blank" }
 
 ??? note "Data Pipeline Architecture"
 

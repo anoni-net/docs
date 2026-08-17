@@ -58,9 +58,64 @@ PROSE_RULES = [
      "段落開頭不要用粗體整句，並列項目升成小標題，單獨一段改寫成正常句子"),
 ]
 
+# docs/en 的規則集。英文版的編輯標準見 docs/en/community/contributor-handbook.md
+# 的 Writing style 一節，跟中文那套是兩組獨立規則，不是翻譯：破折號與分號在英文
+# 是正常標點，「不是…而是…」「這」堆疊這類判準在英文不存在。
+#
+# 這裡只實作能用純模式判斷的兩條。擬人化（文件說話、軟體「看到」）與翻漏（zh-TW
+# 具名資訊在 en 被換成上位詞）都要理解語意，不適合寫成 regex，前者靠人工 review，
+# 後者的判準寫在 docs/zh-TW/community/i18n.md。
+PROSE_RULES_EN = [
+    # 中文那條以「。」為判準，英文版換成句點。清單標籤（**Data source**: …）與
+    # 句子成分（the **control day** uses …）都不帶句點，不會命中。
+    ("bold-lead-sentence", WARN, re.compile(r"^\*\*[^*\n]+\.\*\*"),
+     "段落開頭不要用粗體整句，並列項目升成小標題，單獨一段改寫成正常句子"),
+    # 機器欄位名，中英通用
+    ("machine-field", WARN, re.compile(r"\bweb_connectivity\b"),
+     "機器欄位名請人性化並附原文，例：Web Connectivity"),
+]
+
+# 標題的「主題：說明」冒號句構。中英兩邊的貢獻者百科都有這條規則，但這裡只對
+# docs/en 生效。
+#
+# 理由是既有內容的量差很多：en 是 2026-08 新建的，127 處命中都在這批新頁裡，
+# 邊寫邊修成本低。zh 有 194 處既有命中，而百科那條規則本身寫著「既有文章不必
+# 回頭改寫，新文章與大幅改版時套用」，掃描器全面報警跟那個但書對不上。
+#
+# zh 要不要一起納入是 zh 側的決定，改法是把下面呼叫處的 english 條件拿掉。
+#
+# 照錄外部來源原始標題時是例外（翻譯文章的連結文字），機器判斷不出來，列 warn。
+#
+# 站上幾乎每個標題都以 Material 圖示開頭（# :material-lock-outline: 標題），那對
+# 冒號在語法上不是句構的一部分，檢查前要先剝掉，否則整站的標題都會誤報。
+HEADING_RE = re.compile(r"^#{1,6}\s+(.*)$")
+MD_ICON_RE = re.compile(r":[a-z0-9_-]+:")
+# 冒號後要有內容才算，「## Note:」這種行尾冒號不命中。
+# 半形冒號要求後面有空白，避免命中 a:b 這類非句構寫法；全形冒號本身就帶字距，
+# 中文標題「標題：說明」不會有空白。
+TITLE_COLON_BODY_RE = re.compile(r"\S:\s+\S|\S：\s*\S")
+# 編號式標題不算冒號句構：Workshop 1: …、Step 2: …、第 3 天：…。那是列舉的序號，
+# 不是拿冒號代替一句完整的話。判準是冒號前只有一個詞加一個數字。
+NUMBERED_HEADING_RE = re.compile(r"^\s*\S{1,12}\s*\d+\s*[:：]")
+
+
+def has_title_colon(clean: str) -> bool:
+    """標題行剝掉 Material 圖示後，是否仍是「主題：說明」的冒號句構。"""
+    m = HEADING_RE.match(clean)
+    if not m:
+        return False
+    heading = MD_ICON_RE.sub("", m.group(1))
+    if NUMBERED_HEADING_RE.match(heading):
+        return False
+    return bool(TITLE_COLON_BODY_RE.search(heading))
+
 # 句首 AI 套語（套用在剝除後、每行去掉清單/引言標記後的開頭）
 AI_OPENERS = ["值得注意的是", "總的來說", "綜上所述"]
 AI_OPENER_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS) + r")")
+
+# 英文的對應套語，同樣列在百科的 Paragraph voice 一節
+AI_OPENERS_EN = ["It is worth noting that", "In conclusion", "All in all"]
+AI_OPENER_EN_RE = re.compile(r"^[\s>*\-+]*(" + "|".join(AI_OPENERS_EN) + r")", re.I)
 
 # 「這／这」密集重複。貢獻者百科已有「避免『這…』開頭」，但沒有密度標準，實際校稿
 # 時反覆處理的是同一句裡連著出現的指代堆疊，例：
@@ -250,10 +305,11 @@ def check_zhe_repeat(raw: str, clean: str, rx: re.Pattern = ZHE_RE, word: str = 
 
 
 def is_english_doc(path: Path) -> bool:
-    """en 文件採英文排版，破折號 — 屬正常用法，不套用 em-dash 規則。
+    """en 文件套 PROSE_RULES_EN，中文那組規則不適用。
 
-    對應 CI 既有設定（docs-style-lint.yml 只掃 docs/zh-TW、docs/zh-CN）。手動對含
-    docs/en 的路徑掃描時，這裡確保 en 不被 em-dash 規則誤判。
+    英文的編輯標準是獨立的一套（見 docs/en/community/contributor-handbook.md），
+    破折號與分號在英文是正常標點，中文的句型與指代判準在英文不存在。CI 從 2026-08
+    起同時掃 docs/en。
     """
     return "/en/" in path.as_posix()
 
@@ -307,9 +363,7 @@ def lint_file(path: Path):
         clean = strip_noise(raw, state)
         if not clean.strip():
             continue
-        for code, sev, rx, msg in PROSE_RULES:
-            if code == "em-dash" and english:
-                continue
+        for code, sev, rx, msg in (PROSE_RULES_EN if english else PROSE_RULES):
             for m in rx.finditer(clean):
                 # em-dash 放行：表格空資料格（| — |）與引用的連結標題（[原文標題](url)）
                 if code == "em-dash" and (
@@ -319,9 +373,18 @@ def lint_file(path: Path):
                     continue
                 snippet = raw[max(0, m.start() - 8): m.start() + 12].strip()
                 findings.append((i, sev, code, msg, snippet))
-        if AI_OPENER_RE.search(clean):
+        if english:
+            if AI_OPENER_EN_RE.search(clean):
+                findings.append((i, ERROR, "ai-opener",
+                                 "避免以 It is worth noting that / In conclusion / All in all 開頭",
+                                 raw.strip()[:32]))
+        elif AI_OPENER_RE.search(clean):
             findings.append((i, ERROR, "ai-opener",
                              "避免以「值得注意的是/總的來說/綜上所述」開頭", raw.strip()[:24]))
+        if english and has_title_colon(clean):
+            findings.append((i, WARN, "title-colon",
+                             "標題不用「主題：說明」的冒號句構，改寫成一句完整的話"
+                             "（照錄外部來源原始標題時不在此限）", raw.strip()[:40]))
         for code, rx, word in DEMONSTRATIVE_RULES:
             for msg, snippet in check_zhe_repeat(raw, clean, rx, word):
                 findings.append((i, WARN, code, msg, snippet))

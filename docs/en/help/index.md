@@ -164,7 +164,9 @@ Open [anoni.net/docs](../index.md) in an ordinary browser rather than Tor Browse
 - **Desktop** (Chrome, Edge): an install icon appears at the right of the address bar, or use Install from the menu
 - **iPhone and iPad** (Safari): tap Share, then Add to Home Screen
 
-Once installed, pages you have visited stay available offline, and anything not cached shows an offline notice pointing back to what is stored. Refreshing after connectivity returns brings everything up to date. Note that the set of pages pre-cached at install time is currently smaller on the English edition than on the Chinese one and does not yet include this page, so **open the sections you expect to need while you still have a connection**, which puts them in the cache.
+Once installed, the concepts, tools, advanced, and regional sections download immediately along with this page, and read offline. Pages you have visited stay available too, and anything not cached shows an offline notice pointing back to what is stored. Refreshing after connectivity returns brings everything up to date.
+
+Some pages are deliberately left out of that automatic download, and it is worth knowing why. A guide written for one specific group of people at risk becomes evidence in itself once it is sitting in a device's storage, showing that this device downloaded the full protection guide for that group. Those pages teach readers to clear traces and expect device inspection, so the site does not push them onto a device without being asked. They cache when you open them yourself, which is your decision rather than ours. If you expect to need one of them offline, open it while you still have a connection.
 
 Note that Tor Browser and the onion and IPFS versions do not offer offline installation, since they do not register a background service worker, which is a deliberate privacy decision. Install from an ordinary browser for the offline copy and use Tor Browser for anonymous reading.
 
