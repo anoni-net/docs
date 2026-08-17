@@ -120,20 +120,74 @@ const CORE_PAGES_ZH = [
   "games/",
 ];
 
-// en 是策展型原創軌道，頁面集合與 zh 版不同（沒有 tools/、taiwan/、advanced/、help/）。
-// 只預快取目前實際存在的核心頁，en 之後新增核心頁時記得補進來。
+// en 是策展型原創軌道，章節名稱與 zh 版不同（在地脈絡叫 regional/ 不叫 taiwan/），
+// 但 2026-08 補齊後兩邊的覆蓋範圍已經接近，所以選錄邏輯跟 CORE_PAGES_ZH 一致：
+// 完整指南集加緊急頁，身分敏感的頁面排除。
+//
+// 身分敏感度的判準與理由見 CORE_PAGES_ZH 上方那段長註解，新增頁面時照那個問，
+// 不要只看它放在哪個資料夾。依那條判準，這裡排除了 scenarios 的 journalist、
+// activist、lgbtq、domestic-violence、election-observer、mainland-speech、
+// singapore-malaysia-speech、nonprofit-anonymous-donation，以及
+// regional/taiwan-whistleblower-law（它放在法規資料夾，但整篇是揭弊者本人的
+// 行動準備清單，按資料夾掃會漏掉，跟 zh 版排除 taiwan/whistleblower-law 同一個理由）。
 const CORE_PAGES_EN = [
   "",
   "offline/",
   "about/",
+  "guides/",
+  "help/",
+  // basics（概念，全部）
   "basics/",
   "basics/internet-freedom/",
-  // scenarios/lgbtq 同樣不預快取，理由見 CORE_PAGES_ZH 的說明
+  "basics/anonymity-vs-privacy/",
+  "basics/threat-model/",
+  "basics/metadata/",
+  "basics/payments-anonymity/",
+  "basics/platform-tracking/",
+  "basics/surveillance-capability/",
+  "basics/multiple-identities/",
+  // tools（工具，全部）
+  "tools/",
+  "tools/what-is-anonymity-network/",
+  "tools/what-is-tor/",
+  "tools/what-is-tails/",
+  "tools/what-is-ooni/",
+  "tools/what-is-cryptpad/",
+  "tools/tor-browser-advanced/",
+  "tools/tor-snowflake/",
+  "tools/onionshare/",
+  "tools/grapheneos/",
+  "tools/ooni-run-v2/",
+  "tools/tails-vs-whonix-vs-qubes/",
+  "tools/messaging-comparison/",
+  "tools/password-manager/",
+  "tools/asian-diceware/",
+  "tools/crypto-privacy-spectrum/",
+  "tools/encrypted-dns/",
+  "tools/vpn-guide/",
+  "tools/ai-privacy/",
+  // scenarios（場景，只留不指向特定受威脅身分的）
   "scenarios/",
+  "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
-  "community/onionoo-mcp/",
+  // advanced（進階，全部）
+  "advanced/",
+  "advanced/e2ee/",
+  "advanced/post-quantum/",
+  "advanced/dweb-ipfs-onion/",
+  "advanced/zk-identity-payments/",
+  "advanced/mistaken-for-anonymity/",
+  // regional（在地脈絡。taiwan-whistleblower-law 依上面的判準排除，不是漏掉。
+  // ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
   "regional/",
+  "regional/ooni-checklist/",
+  "regional/taiwan-pdpa-2025/",
+  "regional/taiwan-vasp-2026/",
+  "regional/ooni-asn-coverage/",
   "regional/tor-relay-watcher/",
+  // community（社群，選錄離線可讀的工具頁）
+  "community/onionoo-mcp/",
+  // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
   "games/",
 ];
 
