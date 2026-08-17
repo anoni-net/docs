@@ -84,29 +84,31 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
-      - "开始参与":
+      - "加入社群":
           - community/how-to-contribute.md
-          - community/skill-level.md
-          - community/contributor-handbook.md
-          - community/become-anoni.md
-          - community/tor-project-ecosystem.md
-          - community/governance.md
-      - "动手实作":
           - community/tools.md
-          - community/setup-repo.md
+          - community/skill-level.md
+          - community/tor-project-ecosystem.md
+          - community/upload-sensitive.md
+          - community/governance.md
+      - "文档与开发":
+          - community/contributor-handbook.md
           - community/i18n.md
           - community/zh-hant-naming.md
+          - community/become-anoni.md
+          - community/setup-repo.md
+          - community/brand-assets.md
+      - "架设节点":
           - community/setup-tor-relay.md
           - community/setup-tor-webtunnel.md
-          - community/onionoo-mcp.md
-          - community/asn-coverage-howto.md
+          - community/pin-ipfs-mirror.md
+      - "读懂观测资料":
           - community/ooni-data-format.md
           - community/ooni-blocking-determination.md
           - community/ooni-nettests-map.md
-          - community/upload-sensitive.md
-          - community/pin-ipfs-mirror.md
-          - community/brand-assets.md
-      - "推动主题":
+          - community/asn-coverage-howto.md
+          - community/onionoo-mcp.md
+      - "2026 主题":
           - community/roadmap-2026.md
           - community/privacy-guide.md
           - community/relay-on-campus.md

@@ -102,32 +102,34 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
-      - "開始參與":
+      - "加入社群":
           - community/how-to-contribute.md
-          - community/skill-level.md
-          - community/contributor-handbook.md
-          - community/become-anoni.md
-          - community/tor-project-ecosystem.md
-          - community/governance.md
-      - "動手實作":
           - community/tools.md
-          - community/setup-repo.md
+          - community/skill-level.md
+          - community/tor-project-ecosystem.md
+          - community/upload-sensitive.md
+          - community/governance.md
+      - "文件與開發":
+          - community/contributor-handbook.md
           - community/i18n.md
           - community/zh-hant-naming.md
+          - community/become-anoni.md
+          - community/setup-repo.md
+          - community/brand-assets.md
+      - "架設節點":
           - community/setup-tor-relay.md
           - community/setup-tor-webtunnel.md
           - community/campus-tor-relay-proposal.md
           - community/campus-tor-relay-sop.md
           - community/campus-relay-faq.md
-          - community/onionoo-mcp.md
-          - community/asn-coverage-howto.md
+          - community/pin-ipfs-mirror.md
+      - "讀懂觀測資料":
           - community/ooni-data-format.md
           - community/ooni-blocking-determination.md
           - community/ooni-nettests-map.md
-          - community/upload-sensitive.md
-          - community/pin-ipfs-mirror.md
-          - community/brand-assets.md
-      - "推動主題":
+          - community/asn-coverage-howto.md
+          - community/onionoo-mcp.md
+      - "2026 主題":
           - community/roadmap-2026.md
           - community/privacy-guide.md
           - community/relay-on-campus.md
