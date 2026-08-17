@@ -90,33 +90,38 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
-      - community/roadmap-2026.md
-      - community/how-to-contribute.md
-      - community/contributor-handbook.md
-      - community/skill-level.md
-      - community/governance.md
-      - community/i18n.md
-      - community/tools.md
-      - community/upload-sensitive.md
-      - community/become-anoni.md
-      - community/privacy-guide.md
-      - community/relay-on-campus.md
-      - community/payments-research.md
-      - community/campus-tor-relay-proposal.md
-      - community/campus-tor-relay-sop.md
-      - community/campus-relay-faq.md
-      - community/tor-project-ecosystem.md
-      - community/zh-hant-naming.md
-      - community/brand-assets.md
-      - community/setup-repo.md
-      - community/asn-coverage-howto.md
-      - community/ooni-data-format.md
-      - community/ooni-blocking-determination.md
-      - community/ooni-nettests-map.md
-      - community/setup-tor-relay.md
-      - community/setup-tor-webtunnel.md
-      - community/onionoo-mcp.md
-      - community/pin-ipfs-mirror.md
+      - "Get Involved":
+          - community/how-to-contribute.md
+          - community/tools.md
+          - community/skill-level.md
+          - community/tor-project-ecosystem.md
+          - community/upload-sensitive.md
+          - community/governance.md
+      - "Docs and Development":
+          - community/contributor-handbook.md
+          - community/i18n.md
+          - community/zh-hant-naming.md
+          - community/become-anoni.md
+          - community/setup-repo.md
+          - community/brand-assets.md
+      - "Run a Node":
+          - community/setup-tor-relay.md
+          - community/setup-tor-webtunnel.md
+          - community/campus-tor-relay-proposal.md
+          - community/campus-tor-relay-sop.md
+          - community/campus-relay-faq.md
+          - community/pin-ipfs-mirror.md
+      - "Reading Measurement Data":
+          - community/ooni-data-format.md
+          - community/ooni-blocking-determination.md
+          - community/ooni-nettests-map.md
+          - community/asn-coverage-howto.md
+          - community/onionoo-mcp.md
+      - "2026 Themes":
+          - community/roadmap-2026.md
+          - community/privacy-guide.md
+          - community/relay-on-campus.md
+          - community/payments-research.md
   - !ENV [NAV_EVENT, "Events"]:
       - activity/index.md
       - activity/coscup-2026-cfp.md
