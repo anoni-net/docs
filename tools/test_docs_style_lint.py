@@ -126,10 +126,73 @@ BLOCK_CASE = (
 SUMMARY = re.compile(r"總計：(\d+) error、(\d+) warn")
 
 
-def run_lint(body: str, tmpdir: pathlib.Path) -> int:
-    """回傳 error + warn 的總數。"""
-    f = tmpdir / "case.md"
+def run_lint(body: str, tmpdir: pathlib.Path, english: bool = False) -> int:
+    """回傳 error + warn 的總數。
+
+    english=True 時把檔案寫進含 /en/ 的路徑，linter 會據此改套 PROSE_RULES_EN。
+    判斷邏輯在 docs_style_lint.is_english_doc。
+    """
+    d = tmpdir / "en" if english else tmpdir
+    d.mkdir(exist_ok=True)
+    f = d / "case.md"
     f.write_text(f"---\ntitle: t\n---\n\n# t\n\n{body}\n", encoding="utf-8")
+    out = subprocess.run(
+        [sys.executable, str(LINT), str(f)], capture_output=True, text=True
+    ).stdout
+    m = SUMMARY.search(out)
+    if not m:
+        raise AssertionError(f"無法解析 linter 輸出：\n{out}")
+    return int(m.group(1)) + int(m.group(2))
+
+
+# docs/en 的案例。跑在含 /en/ 的路徑上，套 PROSE_RULES_EN。
+# (本文, 應該被攔下來嗎, 說明)
+EN_CASES: list[tuple[str, bool, str]] = [
+    # --- bold-lead-sentence 英文版（warn）---
+    ("**Even if we wanted to read it, we could not.** The server only holds ciphertext.",
+     True, "en 粗體整句開頭"),
+    ("**Data source**: the OONI public dataset.", False, "en 清單標籤不帶句點"),
+    ("The **control day** uses the same parameters.", False, "en 粗體詞當句子成分"),
+
+    # --- ai-opener 英文版（error）---
+    ("It is worth noting that the exit relay sees the destination.",
+     True, "en AI 套語開頭"),
+    ("The exit relay sees the destination.", False, "en 直述開頭"),
+
+    # --- em-dash 在英文是正常標點，不應攔 ---
+    ("The relay — the middle one — sees neither end.", False, "en 破折號屬正常排版"),
+
+    # --- 中文專屬規則不應套到 en ---
+    ("The tools are listed here; the comparison follows.", False, "en 半形分號正常"),
+]
+
+# title-colon 檢查的是標題行，不是內文，所以獨立成一組，直接把整份文件餵進去。
+# (整份文件, 應該被攔下來嗎, 說明)
+HEADING_CASES: list[tuple[str, bool, str]] = [
+    ("## What it protects: the core design\n\nText.", True, "冒號句構標題"),
+    ("## 標題：說明\n\n內文。", True, "全形冒號句構標題"),
+    ("## What GrapheneOS protects\n\nText.", False, "完整陳述句標題"),
+    ("## :material-lock-outline: What it protects\n\nText.",
+     False, "Material 圖示的冒號不算句構"),
+    ("### Workshop 1: Circumventing censorship\n\nText.",
+     False, "編號式標題是列舉序號"),
+    ("## Note:\n\nText.", False, "行尾冒號沒有說明部分"),
+]
+
+# title-colon 只對 docs/en 生效，zh 側維持原樣。這條驗證範圍沒有溢出。
+# (整份文件, 應該被攔下來嗎, 說明)
+ZH_HEADING_CASES: list[tuple[str, bool, str]] = [
+    ("## 一對一通訊：Diffie-Hellman 金鑰交換\n\n內文。",
+     False, "zh 的冒號標題不由 linter 攔（見 docs_style_lint 的說明）"),
+]
+
+
+def run_lint_raw(doc: str, tmpdir: pathlib.Path, english: bool = False) -> int:
+    """跟 run_lint 一樣，但不自動補標題，整份內容照原樣寫入。"""
+    d = tmpdir / "raw" / ("en" if english else "zh")
+    d.mkdir(parents=True, exist_ok=True)
+    f = d / "case.md"
+    f.write_text(f"---\ntitle: t\n---\n\n{doc}\n", encoding="utf-8")
     out = subprocess.run(
         [sys.executable, str(LINT), str(f)], capture_output=True, text=True
     ).stdout
@@ -151,7 +214,35 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
             )
 
-    total = len(CASES) + 1
+    for body, should_flag, label in EN_CASES:
+        n = run_lint(body, tmpdir, english=True)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
+            )
+
+    for doc, should_flag, label in HEADING_CASES:
+        n = run_lint_raw(doc, tmpdir, english=True)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
+            )
+
+    for doc, should_flag, label in ZH_HEADING_CASES:
+        n = run_lint_raw(doc, tmpdir)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
+            )
+
+    total = (len(CASES) + 1 + len(EN_CASES) + len(HEADING_CASES)
+             + len(ZH_HEADING_CASES))
     if failures:
         print(f"失敗 {len(failures)} / {total}\n")
         print("\n".join(failures))

@@ -1,5 +1,12 @@
-# 編輯標準掃描器（Tier 1）。只掃這個 PR 變更到的「中文」docs Markdown（zh-TW、zh-CN）。
-# 英文版（docs/en）的標點規則不同（破折號、分號在英文是正常的），不在此掃。
+# 編輯標準掃描器（Tier 1）。只掃這個 PR 變更到的 docs Markdown。
+#
+# 三個語系都掃，但套用的規則不同。中文那組是標點與句型（破折號、分號、不是…而是、
+# 「這」堆疊），英文那組獨立（見 docs/en/community/contributor-handbook.md 的
+# Writing style），因為破折號與分號在英文是正常標點。linter 依路徑自動選規則集，
+# 見 tools/docs_style_lint.py 的 is_english_doc。
+#
+# en 是 2026-08 納入的。在那之前英文規則純靠人工，而補齊英文站的三個批次顯示
+# 人工在那個規模守不住，同一類違反（粗體整句開頭、冒號標題）三批都出現。
 #
 # 目前是 warn 階段：問題以 annotation 標在 PR 變更行上，但 continue-on-error 讓 job
 # 維持綠燈，不擋 merge。收斂誤報後要改 blocking，只要拿掉下面的 continue-on-error，
@@ -11,6 +18,7 @@ on:
     paths:
       - "docs/zh-TW/**/*.md"
       - "docs/zh-CN/**/*.md"
+      - "docs/en/**/*.md"
       - "tools/docs_style_lint.py"
       - "tools/test_docs_style_lint.py"
       - ".github/workflows/docs-style-lint.yml"
@@ -42,7 +50,7 @@ jobs:
         continue-on-error: true
         run: |
           base="${{ github.event.pull_request.base.sha }}"
-          mapfile -t files < <(git diff --name-only --diff-filter=ACM "$base" HEAD -- docs/zh-TW docs/zh-CN \
+          mapfile -t files < <(git diff --name-only --diff-filter=ACM "$base" HEAD -- docs/zh-TW docs/zh-CN docs/en \
             | grep -E '\.md$' || true)
           if [ ${#files[@]} -eq 0 ]; then
             echo "沒有變更的 Markdown，略過。"
