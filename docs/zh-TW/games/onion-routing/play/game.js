@@ -85,7 +85,7 @@ function nodeLabel(n) {
   if (n.role === 'dest') return S('legendDest');
   if (n.bridge) return `${n.transport}${S('sepBar')}${S('legendBridge')}`;
   const rg = REGIONS[n.region];
-  let s = `${rg.place} ${rg.asn}`;
+  let s = `${S(rg.placeKey)} ${rg.asn}`;
   if (n.surveilled) s += `（${S('legendSurveilled')}）`;
   if (n.blocked) s += `（${S('legendBlocked')}）`;
   return s;
