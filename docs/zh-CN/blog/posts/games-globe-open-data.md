@@ -16,7 +16,7 @@ description: "文档站新增「互动与呈现」区，用 3D 画面呈现匿�
 
 ![Tor 中继地球仪](https://assets.anoni.net/games/tor-network.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-文档站新增了[互动与呈现](../../games/index.md)区，目前放了三件作品，都以 Tor 为题。其中数据量最大的是 <a href="../../../../../games/tor-network/index.html?lang=zh-cn">Tor 中继地球仪</a>，把全球近万台运作中的中继标到球面上，超过六成集中在美国、德国、荷兰三个国家。
+文档站新增了[互动与呈现](../../games/index.md)区，目前放了三件作品，都以 Tor 为题。其中数据量最大的是 <a href="../../../../../games/tor-network/play/index.html?lang=zh-cn">Tor 中继地球仪</a>，把全球近万台运作中的中继标到球面上，超过六成集中在美国、德国、荷兰三个国家。
 
 做这颗地球仪的过程中，我们查了二十几份公开数据，最后能用的只有六份。卡住的原因几乎都跟技术无关。API 大多打得通，数据格式也干净，挡下来的是条款不给我们把它再发出去。
 
@@ -117,9 +117,9 @@ Freedom House 的 Freedom on the Net 与无国界记者的新闻自由指数，�
 
 ## 其他两件作品
 
-<a href="../../../../../games/onion-routing/index.html?lang=zh-cn">Tor 路由解谜</a>让你自己挑三个中继组成 guard、middle、exit 路径，过程中要避开被监听的节点、把三跳分散到不同 ASN，遇到封锁改走网桥。看着电路因为三跳挤在同一个 ASN 而失败，比读十次「要分散」有效。
+<a href="../../../../../games/onion-routing/play/index.html?lang=zh-cn">Tor 路由解谜</a>让你自己挑三个中继组成 guard、middle、exit 路径，过程中要避开被监听的节点、把三跳分散到不同 ASN，遇到封锁改走网桥。看着电路因为三跳挤在同一个 ASN 而失败，比读十次「要分散」有效。
 
-<a href="../../../../../games/onion-rendezvous/index.html?lang=zh-cn">Tor 连线流量</a>用发光粒子呈现两种路径的差异。连线 .onion 服务时双方各建一条三跳电路，在随机挑出的会合点相遇。连线明网网站则走三跳到出口后原路往返。
+<a href="../../../../../games/onion-rendezvous/play/index.html?lang=zh-cn">Tor 连线流量</a>用发光粒子呈现两种路径的差异。连线 .onion 服务时双方各建一条三跳电路，在随机挑出的会合点相遇。连线明网网站则走三跳到出口后原路往返。
 
 三件作品都以 three.js 在浏览器中运行，免安装，支持正体中文、简体中文与英文。源代码在 [anoni-net/docs](https://github.com/anoni-net/docs) 的 `docs/zh-TW/games/` 底下，没有构建流程，改完保存刷新就看得到。
 

@@ -84,18 +84,18 @@ const ZH_TW = {
   regionUS: '美國',
   regionSE: '瑞典',
   sepBar: '｜',
-  // 遊戲只有一份，永遠跑在 /docs/games/onion-routing/，所以 ../../ 是 /docs/。
+  // 遊戲只有一份，永遠跑在 /docs/games/onion-routing/play/，所以 ../../../ 是 /docs/。
   // en 站沒有 what-is-tor 與 ooni-asn-coverage，改指向英文站真的有、主題也對得上的頁。
   // tor-snowflake 原本也沒有，PR #153 合併時 main 上已經補上英文版，所以接回真正對題的那篇。
   // 總覽頁是靜態 mkdocs 頁，掛 ?lang= 沒有作用，要直接連到各語系自己那份。
-  docOverview: '../',
-  docTor: '../../tools/what-is-tor/',
-  docAsn: '../../taiwan/ooni-asn-coverage/',
-  docSnowflake: '../../tools/tor-snowflake/',
+  docOverview: '../../',
+  docTor: '../../../tools/what-is-tor/',
+  docAsn: '../../../taiwan/ooni-asn-coverage/',
+  docSnowflake: '../../../tools/tor-snowflake/',
 
   // 面板底部的返回列，整段連同連結一起換語言。網址與上面的 doc* 重複，但這裡要的是
   // 一段可以直接寫進 innerHTML 的完整片語，拆開組裝反而更難讀。改連結時兩邊都要動。
-  backlink: '← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../taiwan/ooni-asn-coverage/">台灣 ASN 觀測涵蓋</a>',
+  backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../../taiwan/ooni-asn-coverage/">台灣 ASN 觀測涵蓋</a>',
 };
 
 const EN = {
@@ -180,13 +180,13 @@ const EN = {
   regionUS: 'United States',
   regionSE: 'Sweden',
   sepBar: ' | ',
-  docOverview: '../../en/games/',
-  docTor: '../../en/basics/anonymity-vs-privacy/',
-  docAsn: '../../en/regional/tor-relay-watcher/',
-  docSnowflake: '../../en/tools/tor-snowflake/',
+  docOverview: '../../../en/games/',
+  docTor: '../../../en/basics/anonymity-vs-privacy/',
+  docAsn: '../../../en/regional/tor-relay-watcher/',
+  docSnowflake: '../../../en/tools/tor-snowflake/',
 
   // 英文站沒有 what-is-tor 與 ASN 涵蓋那兩頁，所以延伸閱讀改指實際存在的英文頁。
-  backlink: '← <a href="../../en/games/">Interactive</a>　Further reading: <a href="../../en/basics/anonymity-vs-privacy/">Anonymity vs privacy</a>, <a href="../../en/regional/tor-relay-watcher/">Tor relay watcher</a>',
+  backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/basics/anonymity-vs-privacy/">Anonymity vs privacy</a>, <a href="../../../en/regional/tor-relay-watcher/">Tor relay watcher</a>',
 };
 
 const ZH_CN = {
@@ -271,12 +271,12 @@ const ZH_CN = {
   regionUS: '美国',
   regionSE: '瑞典',
   sepBar: '｜',
-  docOverview: '../../zh-cn/games/',
-  docTor: '../../zh-cn/tools/what-is-tor/',
-  docAsn: '../../zh-cn/taiwan/ooni-asn-coverage/',
-  docSnowflake: '../../zh-cn/tools/tor-snowflake/',
+  docOverview: '../../../zh-cn/games/',
+  docTor: '../../../zh-cn/tools/what-is-tor/',
+  docAsn: '../../../zh-cn/taiwan/ooni-asn-coverage/',
+  docSnowflake: '../../../zh-cn/tools/tor-snowflake/',
 
-  backlink: '← <a href="../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="../../zh-cn/taiwan/ooni-asn-coverage/">ASNs 自治网络观测数据分析</a>',
+  backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="../../../zh-cn/taiwan/ooni-asn-coverage/">ASNs 自治网络观测数据分析</a>',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };

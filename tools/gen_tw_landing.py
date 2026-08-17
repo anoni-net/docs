@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生台灣海纜登陸點資料（docs/zh-TW/games/tor-network/tw-landing.json）。
+"""產生台灣海纜登陸點資料（docs/zh-TW/games/tor-network/play/tw-landing.json）。
 
 把人工維護的 tools/data/tw_landing.toml 跟數位發展部的海纜清單合併起來，
 輸出地球儀要用的 JSON。
@@ -40,7 +40,7 @@ import tomllib
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SRC = os.path.join(HERE, "data", "tw_landing.toml")
-DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-landing.json")
+DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-landing.json")
 
 PRECISION = ("站址", "設施", "端點", "里", "鄉鎮")
 # 台灣範圍：涵蓋本島、澎湖、金門、馬祖、蘭嶼、小琉球

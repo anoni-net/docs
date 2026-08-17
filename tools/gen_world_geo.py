@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的世界底圖資料（docs/zh-TW/games/tor-network/）。
+"""產生「Tor 中繼地球儀」的世界底圖資料（docs/zh-TW/games/tor-network/play/）。
 
 資料來源：Natural Earth 110m（public domain），從 nvkelso/natural-earth-vector 取 GeoJSON。
 
@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 BASE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/"
-OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW", "games", "tor-network")
+OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW", "games", "tor-network", "play")
 
 
 def fetch(name):

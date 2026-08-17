@@ -16,7 +16,7 @@ description: "The docs site now has an Interactive section that renders anonymit
 
 ![Tor Relay Globe](https://assets.anoni.net/games/tor-network.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-The docs site now has an [Interactive](../../games/index.md) section holding three pieces, all centred on Tor. The one carrying the most data is the <a href="../../../../../games/tor-network/index.html?lang=en">Tor Relay Globe</a>, which plots nearly ten thousand running relays onto a sphere. Over sixty percent of them sit in the United States, Germany and the Netherlands.
+The docs site now has an [Interactive](../../games/index.md) section holding three pieces, all centred on Tor. The one carrying the most data is the <a href="../../../../../games/tor-network/play/index.html?lang=en">Tor Relay Globe</a>, which plots nearly ten thousand running relays onto a sphere. Over sixty percent of them sit in the United States, Germany and the Netherlands.
 
 Building it meant checking more than twenty public datasets. Six made it in. Almost nothing failed for technical reasons: the APIs mostly worked and the formats were clean. What stopped us was terms that do not allow redistribution.
 
@@ -115,9 +115,9 @@ One technical detail is worth recording separately. OONI's data is CC BY-NC-SA 4
 
 ## The other two pieces
 
-<a href="../../../../../games/onion-routing/index.html?lang=en">Tor Routing Puzzle</a> has you pick three relays to form a guard, middle and exit path, avoiding surveilled nodes, spreading the hops across different ASNs, and switching to bridges when blocked. Watching a circuit fail because all three hops landed in the same ASN sticks better than reading "spread them out" ten times.
+<a href="../../../../../games/onion-routing/play/index.html?lang=en">Tor Routing Puzzle</a> has you pick three relays to form a guard, middle and exit path, avoiding surveilled nodes, spreading the hops across different ASNs, and switching to bridges when blocked. Watching a circuit fail because all three hops landed in the same ASN sticks better than reading "spread them out" ten times.
 
-<a href="../../../../../games/onion-rendezvous/index.html?lang=en">Tor Traffic Flow</a> uses glowing particles to show the difference between the two paths. Connecting to a .onion service has both sides build a three-hop circuit and meet at a randomly chosen rendezvous point. Connecting to the clear web runs three hops out to an exit and back the same way.
+<a href="../../../../../games/onion-rendezvous/play/index.html?lang=en">Tor Traffic Flow</a> uses glowing particles to show the difference between the two paths. Connecting to a .onion service has both sides build a three-hop circuit and meet at a randomly chosen rendezvous point. Connecting to the clear web runs three hops out to an exit and back the same way.
 
 All three pieces run in the browser with three.js, need no install, and support Traditional Chinese, Simplified Chinese and English. The source lives in [anoni-net/docs](https://github.com/anoni-net/docs) under `docs/zh-TW/games/`, with no build step, so you edit a file, save, and reload.
 

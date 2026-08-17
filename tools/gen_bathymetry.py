@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的海底地形（docs/zh-TW/games/tor-network/bathymetry.json）。
+"""產生「Tor 中繼地球儀」的海底地形（docs/zh-TW/games/tor-network/play/bathymetry.json）。
 
 資料來源：Natural Earth 10m bathymetry（public domain），從 nvkelso/natural-earth-vector
 取 GeoJSON，跟 gen_world_geo.py 同一個 repo、同一種取法。
@@ -60,7 +60,7 @@ TOLER = 0.18      # Douglas-Peucker 容差（度）。約等於貼圖一個像�
 MIN_SPAN = 0.8    # 外接框長寬都小於這個度數的環就丟，貼圖上不到五個像素
 MIN_PTS = 4       # 少於這麼多點的環構不成面
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "bathymetry.json")
+                           "games", "tor-network", "play", "bathymetry.json")
 
 
 def write_atomic(out, data):

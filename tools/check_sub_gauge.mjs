@@ -36,7 +36,7 @@ import { spawn, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network');
+const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play');
 const PORT_CDP = 9412;
 const LANGS = ['zh-TW', 'zh-cn', 'en'];
 // 桌機寬度與手機寬度都要驗。卡片寬 min(94vw, 470px)，390px 的手機只剩 366px，

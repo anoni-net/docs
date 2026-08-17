@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的台灣縣市界線（docs/zh-TW/games/tor-network/tw-admin.json）。
+"""產生「Tor 中繼地球儀」的台灣縣市界線（docs/zh-TW/games/tor-network/play/tw-admin.json）。
 
 資料來源：內政部國土測繪中心「直轄市、縣市界線(TWD97經緯度)」，
 政府資料開放平臺 dataset 7442，授權政府資料開放授權條款-第1版。
@@ -58,7 +58,7 @@ import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-admin.json")
+DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-admin.json")
 
 DATASET = os.environ.get("MOI_COUNTY_DATASET", "7442")
 API = f"https://data.gov.tw/api/v2/rest/dataset/{DATASET}"

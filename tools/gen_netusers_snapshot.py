@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的上網人口比例（docs/zh-TW/games/tor-network/netusers.json）。
+"""產生「Tor 中繼地球儀」的上網人口比例（docs/zh-TW/games/tor-network/play/netusers.json）。
 
 這份資料的用途是當分母。地球儀原本只講「這一國有幾人用 Tor」，那個數字幾乎等於在比
 人口大小，印度一定贏過愛沙尼亞。除以該國實際上網的人口之後，比較的才是「在能上網的人
@@ -57,7 +57,7 @@ YEAR_FROM = 2015          # 往前抓這麼多年，逐國取最新有值的那�
 MODA_CSV = "https://www-api.moda.gov.tw/File/Get/moda/zh-tw/1Mo5V2PopJbp81g"
 MODA_PAGE = "https://moda.gov.tw/digital-affairs/digital-service/operations/208"
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "netusers.json")
+                           "games", "tor-network", "play", "netusers.json")
 
 
 def write_atomic(out, data):

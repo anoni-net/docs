@@ -194,7 +194,7 @@ const CORE_PAGES_EN = [
 // 三件互動作品的本體。
 //
 // 跟核心章節不同，這一批只放一份，不跟著 LANG_PREFIXES 複製。三個語系的 games
-// 索引頁各自存在，但作品本身只由 run.sh 建置到根路徑 /docs/games/，其他語系是用
+// 索引頁各自存在，但作品本身只由 run.sh 建置到根路徑 /docs/games/<slug>/play/，其他語系是用
 // ?lang= 連過去共用同一份程式。跟著前綴複製的話，另外兩個語系會抓到 404，白繞一圈。
 //
 // 為什麼值得預快取：這是站上唯一「已經做好、有人在用，卻沒被離線策略蓋到」的東西。
@@ -228,29 +228,29 @@ const CORE_PAGES_EN = [
 // 維護：新增作品或地球儀多一份資料檔時要補進這裡，漏了的話那一份會在離線時抓不到。
 // seacable.json 刻意不在清單裡，那份沒有落地到 repo。
 const GAME_APPS = [
-  "games/onion-routing/index.html",
-  "games/onion-routing/game.js",
-  "games/onion-routing/i18n.js",
-  "games/onion-routing/levels.js",
-  "games/onion-rendezvous/index.html",
-  "games/onion-rendezvous/scene.js",
-  "games/onion-rendezvous/i18n.js",
-  "games/tor-network/index.html",
-  "games/tor-network/atlas.js",
-  "games/tor-network/i18n.js",
-  "games/tor-network/cables.json",
-  "games/tor-network/continents.json",
-  "games/tor-network/countries.json",
-  "games/tor-network/netusers.json",
-  "games/tor-network/ooni.json",
-  "games/tor-network/shutdowns.json",
-  "games/tor-network/snapshot.json",
-  "games/tor-network/torusers.json",
-  "games/tor-network/tw-admin.json",
-  "games/tor-network/tw-energy.json",
-  "games/tor-network/tw-grid.json",
-  "games/tor-network/tw-landing.json",
-  "games/tor-network/tw-power.json",
+  "games/onion-routing/play/index.html",
+  "games/onion-routing/play/game.js",
+  "games/onion-routing/play/i18n.js",
+  "games/onion-routing/play/levels.js",
+  "games/onion-rendezvous/play/index.html",
+  "games/onion-rendezvous/play/scene.js",
+  "games/onion-rendezvous/play/i18n.js",
+  "games/tor-network/play/index.html",
+  "games/tor-network/play/atlas.js",
+  "games/tor-network/play/i18n.js",
+  "games/tor-network/play/cables.json",
+  "games/tor-network/play/continents.json",
+  "games/tor-network/play/countries.json",
+  "games/tor-network/play/netusers.json",
+  "games/tor-network/play/ooni.json",
+  "games/tor-network/play/shutdowns.json",
+  "games/tor-network/play/snapshot.json",
+  "games/tor-network/play/torusers.json",
+  "games/tor-network/play/tw-admin.json",
+  "games/tor-network/play/tw-energy.json",
+  "games/tor-network/play/tw-grid.json",
+  "games/tor-network/play/tw-landing.json",
+  "games/tor-network/play/tw-power.json",
   // three.js 是本地 vendor 的，三件共用。core 沒有寫在 importmap 裡，
   // 是被 webgpu 那份 import 進去的，少了它三件都起不來。
   "games/vendor/three.webgpu.min.js",

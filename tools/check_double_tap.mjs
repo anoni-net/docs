@@ -43,7 +43,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network');
+const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play');
 const html = fs.readFileSync(path.join(DIR, 'index.html'), 'utf8');
 const atlas = fs.readFileSync(path.join(DIR, 'atlas.js'), 'utf8');
 
