@@ -1,5 +1,5 @@
 ---
-title: Tor 路由解谜：自己挑三跳，把消息送到对岸
+title: Tor 路由解谜
 description: 可操作的解谜。自行挑选 3 个中继组成 Tor 的 guard、middle、exit 路径，避开被监听的节点、把 3 跳分散到不同 ASN，遇到封锁改走网桥。四个关卡各对应一项真实的选路考量。
 icon: material/shuffle-variant
 social:

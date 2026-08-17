@@ -1,5 +1,5 @@
 ---
-title: Tor 连线流量：连 .onion 与连明网，两种路径长得不一样
+title: Tor 连线流量
 description: 以观看为主的呈现。用发光粒子与残影表现 Tor 流量的两种路径，连线 .onion 服务时双方各建一条 3 跳电路在会合点相遇，连线明网网站则经 3 跳出口后原路往返。
 icon: material/lan
 social:

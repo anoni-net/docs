@@ -1,5 +1,5 @@
 ---
-title: "Tor Traffic Flow: two paths that look nothing alike"
+title: Tor Traffic Flow
 description: A watch-first visualisation. Glowing particles and afterimages trace Tor's two traffic paths: a .onion connection where both sides build a 3-hop circuit and meet at a rendezvous point, and a clear web connection that goes 3 hops to an exit and back.
 icon: material/lan
 social:

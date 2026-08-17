@@ -1,5 +1,5 @@
 ---
-title: "Tor Routing Puzzle: pick your own three hops"
+title: Tor Routing Puzzle
 description: A hands-on puzzle. Pick 3 relays to form Tor's guard, middle and exit path, avoid surveilled nodes, spread the 3 hops across different ASNs, and switch to bridges when blocked. Each of the four levels maps to a real path-selection constraint.
 icon: material/shuffle-variant
 social:

@@ -1,5 +1,5 @@
 ---
-title: "Tor Relay Globe: ten thousand relays and a dozen public datasets on one sphere"
+title: Tor Relay Globe
 description: A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, with censorship observations, user estimates, shutdown records, submarine cables and internet usage layered on top, plus county boundaries, cable landing points, substations, power plants and the grid when you zoom in on Taiwan.
 icon: material/earth
 social:

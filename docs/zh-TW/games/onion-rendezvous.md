@@ -1,5 +1,5 @@
 ---
-title: Tor 連線流量：連 .onion 與連明網，兩種路徑長得不一樣
+title: Tor 連線流量
 description: 以觀看為主的呈現。用發光粒子與殘影表現 Tor 流量的兩種路徑，連線 .onion 服務時雙方各建一條 3 跳電路在會合點相遇，連線明網網站則經 3 跳出口後原路往返。
 icon: material/lan
 social:
