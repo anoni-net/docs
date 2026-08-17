@@ -34,7 +34,7 @@ We are a group of volunteers who care about anonymity networks and internet free
 
 The community counts from the [anonymity network workshop](../../event-workshop-2025.md) we ran in August 2025, where the first group of members came together. Three threads are open in 2026, with practical privacy guides sorted by scenario for everyday life, sensitive work, and high risk, campus Tor relays pushed forward together with EFF and the Tor Project and one already running at National Taiwan Normal University, and the anonymous payment work we are bringing to the booth.
 
-Others across the Asia-Pacific work on the same problems, and so far each side has not known the other exists. Sinophone communities are spread across Taiwan, Hong Kong, China, and Southeast Asia, the situations they run into are connected, and opportunities to compare experiences are rare.
+Others across the Asia-Pacific work on the same problems, and so far each side has not known the other exists. Sinophone communities are spread across Taiwan, Hong Kong, China, Japan, and Southeast Asia, the situations they run into are connected, and opportunities to compare experiences are rare.
 
 The other purpose is taking part in coordination across the region, since internet freedom work is rarely something a single community can finish, what any one of us can observe and maintain has limits, and most of these problems need more than one region to cover them properly. Establishing contact first is what makes working together possible later.
 
