@@ -27,7 +27,8 @@ All three pieces have an English interface. The three language editions share on
 
     A hands-on puzzle. Get a message from you to a recipient across the water by picking 3 relays to form Tor's guard → middle → exit path, avoiding surveilled nodes, spreading the hops across different ASNs, and switching to bridges when blocked. Each of the four levels maps to a real path-selection concern.
 
-    <a href="../../games/onion-routing/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Play</a>
+    [:octicons-arrow-right-24: Read more](onion-routing.md){ .md-button .md-button--primary }
+    <a href="../../games/onion-routing/play/index.html?lang=en" class="md-button">Play</a>
 
 -   :material-lan:{ .lg .middle } __Tor Traffic Flow__
 
@@ -35,7 +36,8 @@ All three pieces have an English interface. The three language editions share on
 
     A view to watch. Glowing particles and afterimages show the two shapes Tor traffic takes: connections to .onion services have both sides build a 3-hop circuit and meet at a randomly chosen rendezvous point, while connections to the clear web run out through a 3-hop exit and return the same way. Relay count, circuit count, already-flagged hostile nodes and traffic volume are all adjustable live.
 
-    <a href="../../games/onion-rendezvous/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Watch</a>
+    [:octicons-arrow-right-24: Read more](onion-rendezvous.md){ .md-button .md-button--primary }
+    <a href="../../games/onion-rendezvous/play/index.html?lang=en" class="md-button">Watch</a>
 
 -   :material-earth:{ .lg .middle } __Tor Relay Globe__
 
@@ -43,7 +45,8 @@ All three pieces have an English interface. The three language editions share on
 
     A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates connection-blocking measurements, user estimates, shutdown records, submarine cables and internet-usage rates. Zoom in on Taiwan and it adds county boundaries, cable landing points, substations, power plants and the transmission grid.
 
-    <a href="../../games/tor-network/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
+    [:octicons-arrow-right-24: Read more](tor-network.md){ .md-button .md-button--primary }
+    <a href="../../games/tor-network/play/index.html?lang=en" class="md-button">Explore</a>
 
 </div>
 
@@ -58,67 +61,6 @@ Scale is even harder to convey in words. "Nearly ten thousand relays, heavily co
 Games add a third thing: trade-offs. An ASN is an Autonomous System, roughly a stretch of network run by one organisation or individual. The docs say "spread the three hops across different ASNs" and you read past it. Pick three relays yourself, watch the circuit fail because all three landed in the same ASN, and you will remember the reason next time.
 
 These pieces are an entry point, not a replacement for the documentation. They make the abstract concrete first, and each one offers the matching further reading when you finish.
-
-## What the globe brings together
-
-Of the three works, the globe pulls in the most data. It puts public datasets scattered across different organisations onto one sphere, so that "where relays can be run" and "where Tor can be reached" can be read side by side. Zoom in on Taiwan and one more layer appears: the physical infrastructure those connections actually depend on.
-
-### Relay distribution (Onionoo, CC0 1.0)
-
-The main layer comes from an Onionoo relay snapshot, distilled down to country-level aggregates only, with no fingerprints, nicknames, IP addresses or contact details. It currently covers nearly ten thousand running relays across around eighty countries and more than nine hundred hosting providers, with the United States, Germany and the Netherlands together accounting for over sixty percent. These figures come from the most recent snapshot, whose generation time is shown on screen.
-
-Each relay is one dot on the sphere, coloured by its four possible roles (guard, middle, exit, and guard plus exit) and sized by bandwidth. Landmass brightness switches between four metrics:
-
-- **Relay count**: how many relays the country hosts
-- **Consensus weight**: the share of traffic the country actually carries in the Tor network, which often diverges noticeably from the raw count
-- **Single-provider concentration**: what fraction of a country's relays sit with its largest hosting provider, showing how dependent it is on one operator
-- **User estimate**: the estimated number of Tor users, a demand-side figure
-
-Clicking any country opens an information card with its role mix, bandwidth share, the proportion running the officially recommended version, its main hosting providers, and how it appears in the other datasets.
-
-Pressing "Live update" makes your browser fetch and recompute the data directly from onionoo.anoni.net instead of reading the snapshot hosted here. That request lets the server see your IP address, so it is off by default and the choice is yours.
-
-### Where connections run into trouble (OONI, CC BY-NC-SA 4.0)
-
-Drawn from OONI's tor test results, this is the share of tests per country over the past 30 days that did not complete as expected, which OONI calls an anomaly. Causes include blocking, unstable networks and ISP faults, and the rate alone cannot separate them. The globe therefore marks only the few countries above an `85%` anomaly rate with a sufficient sample, and leaves mid-range values uncoloured entirely. The threshold sits that high because countries with no censorship concerns, such as Switzerland and Canada, routinely land around twenty percent, and colouring the middle of the range would amount to accusing them on the strength of noise. Marked countries are drawn with a red gradient fading inward from the border, so a neighbouring country that is not marked cannot be misread as equally affected.
-
-### Users and bridges (Tor Metrics, CC0 1.0)
-
-Two figures. One is the estimated number of Tor users per country, the other is bridge users broken down by pluggable transport into obfs4, snowflake, webtunnel and others, covering more than two hundred countries. Reading them together often reveals a meaningful gap: where direct connections are blocked, the bridge numbers run noticeably high.
-
-### Shutdown records (Access Now #KeepItOn, CC BY 4.0)
-
-Internet shutdowns from `2009` to `2025`, compiled and verified case by case, covering over fifty countries. This dataset differs in kind from OONI: every entry has a verified cause, so it can state plainly that a deliberate shutdown occurred. Outages caused by armed conflict or communal violence do not necessarily follow a government decision and may result from infrastructure damage, so the globe keeps them separate from information-control cases.
-
-### Submarine cables and base geography (OpenStreetMap ODbL, Natural Earth public domain)
-
-The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth.
-
-### Internet usage rate (World Bank CC BY 4.0, Ministry of Digital Affairs)
-
-The internet usage rate on each country card exists to serve as a denominator. "How many people in this country use Tor" is in large part a comparison of population size; knowing what share of a country is online is what tells you whether a gap between two countries reflects demand or just headcount. The World Bank series covers 208 economies but not Taiwan, so the Taiwanese figure comes from the Ministry of Digital Affairs' national digital access survey instead. The two use different methods — one aggregates national reporting through the ITU, the other is a telephone sample of people aged 12 and over — and the card says so, because they should not be compared directly.
-
-### Taiwan's infrastructure (Open Government Data License, OpenStreetMap ODbL)
-
-Zooming in on Taiwan brings up five more layers. It is the only region on this globe drawn down to county scale.
-
-- **County boundaries** — the Ministry of the Interior's municipality and county boundaries, 22 counties across 84 rings. It doubles as Taiwan's coastline, because the global coastline is too coarse at this scale, so the rough outline is swapped for it as you approach.
-- **Cable landing points** — 14 of them, a dataset we built ourselves. Landing point coordinates are part of TeleGeography's commercial product and OpenStreetMap does not carry them, so we took the Ministry of Digital Affairs' public cable list as the spine and cross-checked each coordinate, recording a precision grade and its own sources for every entry. This v1 is incomplete and the gaps are listed in the header of the source file.
-- **Substations** — Taipower's installed and reliable capacity for secondary substation main transformers, 280 sites, 201 of which can be placed on the map. The gauge on the card turns N-1 into visible geometry: the hatched band between the reliable-capacity tick and installed capacity is exactly the largest main transformer, the part that disappears when it fails. Nationwide, 64 sites have a peak load above their reliable capacity, which means losing one transformer at peak would leave the rest short. That is a separate question from whether the site is overloaded today.
-- **Power plants and the 345 kV backbone** — 105 plants and 242 transmission segments. Only 17 plants can be located, but those 17 already account for 71% of installed capacity; the ones that cannot are mostly offshore wind and small hydro. Nothing below 161 kV is drawn at all, so this is not a complete grid.
-- **Demand and renewables** — 93 Taipower-owned renewable sites, 124 months of county-level electricity demand, and 212 days of this year's daily peak operating reserve margin. Demand can be viewed either as total consumption or as the industrial share, and switching to the latter makes the science parks visible.
-
-The left-hand panel groups everything Taiwan-related together, and the "Focus Taiwan" button flies straight there. Adding `#tw` to the URL does the same thing, so a shared link can decide what the recipient sees first; other country codes such as `#jp` work the same way. Plants, substations, renewable sites, landing points and transmission lines can all be clicked for detail.
-
-Every data file carries `source`, `sourceUrl`, `license` and `licenseUrl` fields, and the corresponding credits are listed below the globe. The full licence list lives in `NOTICE` at the root of the project.
-
-## What moves on the globe
-
-Beyond the datasets above, a few more layers are rendered rather than fetched.
-
-The day-night terminator follows the subsolar point computed from UTC, so it tracks real time and the seasonal variation in day length falls out automatically, with no external request involved. There are also auroras, atmospheric rim light and stars.
-
-The occasional Tor three-hop path animation sits between the two categories. Its endpoints are taken from real relay positions, so which countries get picked reflects the real distribution, but the combination of the three points is illustrative and does not model Tor's actual path-selection rules.
 
 ## Prefer to read first
 

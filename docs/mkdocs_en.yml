@@ -78,7 +78,11 @@ nav:
       - regional/taiwan-pdpa-2025.md
       - regional/taiwan-vasp-2026.md
       - regional/taiwan-whistleblower-law.md
-  - !ENV [NAV_GAMES, "Interactive"]: games/index.md
+  - !ENV [NAV_GAMES, "Interactive"]:
+      - games/index.md
+      - games/onion-routing.md
+      - games/onion-rendezvous.md
+      - games/tor-network.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
       - upstream-translations.md

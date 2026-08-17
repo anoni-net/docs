@@ -41,6 +41,15 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i 's|https://pad.anoni.net|http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
 
+# 圖片主機。assets.anoni.net 是 clearnet 網域，onion 鏡像原樣留著的話，讀者的
+# Tor Browser 得繞出口去抓圖，慢又等於把「我在看這頁」透露給出口與 CDN。
+# 主站的 onion vhost 有 location /assets 指到同一顆 /srv/images-anoni-net/，
+# 換過去就走完整的 onion 路徑。docs onion 自己沒有 /assets，所以指的是主站那個。
+find ./ -path './onion' -prune -o \
+	-type f ! -name 'replace_sitename.sh' \
+	-type f ! -name 'replace_sitename_anoni_onion.sh' \
+	-exec sed -i 's|https://assets.anoni.net/|http://anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/assets/|g' {} +
+
 # 語言選單（extra.alternate）的 link 是站台根相對路徑，clearnet 掛在 /docs/ 底下，
 # onion 站的 docs 就是自己的根，把前綴整段拔掉。一條規則涵蓋三個語系：
 # /docs/ → /（zh-TW 預設語系建在根路徑）、/docs/zh-cn/ → /zh-cn/、/docs/en/ → /en/。
