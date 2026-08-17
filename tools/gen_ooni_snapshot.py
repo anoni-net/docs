@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的 OONI 觀測快照（docs/zh-TW/games/tor-network/ooni.json）。
+"""產生「Tor 中繼地球儀」的 OONI 觀測快照（docs/zh-TW/games/tor-network/play/ooni.json）。
 
 資料來源：OONI（Open Observatory of Network Interference）的 aggregation API，
 免驗證、免金鑰。取 tor 測試近 30 天各國的測試數與異常數。
@@ -43,7 +43,7 @@ DAYS = 30
 MIN_MEASURE = 300     # 測試數太少的國家，比率沒有意義（幾十次測試一個壞探針就爆表）
 BLOCK_PCT = 85        # 標成「明顯受阻」的門檻。壓這麼高是因為中段全是雜訊
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "ooni.json")
+                           "games", "tor-network", "play", "ooni.json")
 
 
 def fetch(since, until):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的使用者面資料（docs/zh-TW/games/tor-network/torusers.json）。
+"""產生「Tor 中繼地球儀」的使用者面資料（docs/zh-TW/games/tor-network/play/torusers.json）。
 
 資料來源：Tor Metrics 的兩份 CSV，免驗證、免金鑰。
 
@@ -77,7 +77,7 @@ BRIDGE_DAYS = 5        # 橋接只要最新一天，多抓幾天是因為最新�
 MIN_USERS = 50         # 少於這個數的國家不存，估計值在這個量級沒有意義
 TOP_TRANSPORT = 4      # 每國留幾種規避協定
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "torusers.json")
+                           "games", "tor-network", "play", "torusers.json")
 
 
 def fetch_csv(name, start, end):

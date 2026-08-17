@@ -39,7 +39,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network');
+const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play');
 const atlas = fs.readFileSync(path.join(DIR, 'atlas.js'), 'utf8');
 const world = JSON.parse(fs.readFileSync(path.join(DIR, 'countries.json'), 'utf8'));
 
@@ -244,7 +244,7 @@ const ok = [];
     const pauseSpin = () => {};
     globalThis.performance = { now: () => 0 };
     // 網址的假身。goFocus 與 clearFocus 用的是真的那兩支，只有 history 與 location 是假的。
-    let URL_ = { path: '/games/tor-network/', search: '?lang=en', hash: '' };
+    let URL_ = { path: '/games/tor-network/play/', search: '?lang=en', hash: '' };
     globalThis.location = {
       get pathname() { return URL_.path; },
       get search() { return URL_.search; },

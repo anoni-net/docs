@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的靜態 snapshot.json（docs/zh-TW/games/tor-network/）。
+"""產生「Tor 中繼地球儀」的靜態 snapshot.json（docs/zh-TW/games/tor-network/play/）。
 
 資料來源：自架的 onionoo.anoni.net MCP（Streamable HTTP，無需驗證），它是 Onionoo 的
 read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份靜態快照，不在瀏覽器
@@ -25,7 +25,7 @@ read-only proxy。用意是讓 clearnet/onion/IPFS 三種 build 都讀同一份�
 
 用法：
   python3 tools/gen_tor_snapshot.py [輸出路徑]
-  預設輸出 docs/zh-TW/games/tor-network/snapshot.json
+  預設輸出 docs/zh-TW/games/tor-network/play/snapshot.json
 """
 import json, os, re, subprocess, sys, time
 from collections import Counter, defaultdict
@@ -76,7 +76,7 @@ def is_person_name(name):
 # Onionoo 給的這幾種國別沒有明確位置（eu 泛指歐洲、?? 未知），country 參數也查不到，
 # 地球上本來就不畫，逐台取回時直接跳過。
 NO_PLACE = {"eu", "??", "xx", ""}
-DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW", "games", "tor-network", "snapshot.json")
+DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW", "games", "tor-network", "play", "snapshot.json")
 
 _SID = None
 

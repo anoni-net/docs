@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生台灣的發電廠與電網骨幹（docs/zh-TW/games/tor-network/tw-grid.json）。
+"""產生台灣的發電廠與電網骨幹（docs/zh-TW/games/tor-network/play/tw-grid.json）。
 
 資料來源三份：
 
@@ -60,7 +60,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-grid.json")
+DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-grid.json")
 
 GEN_URL = os.environ.get(
     "TP_GEN_URL", "https://service.taipower.com.tw/data/opendata/apply/file/d006001/001.json")

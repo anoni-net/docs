@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的斷網事件資料（docs/zh-TW/games/tor-network/shutdowns.json）。
+"""產生「Tor 中繼地球儀」的斷網事件資料（docs/zh-TW/games/tor-network/play/shutdowns.json）。
 
 資料來源：Access Now 的 #KeepItOn STOP（Shutdown Tracker Optimization Project），
 由 #KeepItOn 聯盟人工彙整、逐筆查證的全球網路關閉事件庫，公開在 Google Sheet。
@@ -47,7 +47,7 @@ from collections import Counter, defaultdict
 SHEET = ("https://docs.google.com/spreadsheets/d/"
          "1DvPAuHNLp5BXGb0nnZDGNoiIwEeu2ogdXEIDvT4Hyfk/export?format=csv")
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "shutdowns.json")
+                           "games", "tor-network", "play", "shutdowns.json")
 
 # 資料裡的國名是 UN 全稱，要對成地球儀用的 ISO2。沒有 pycountry 可用，而且只有 52 個，
 # 手工對照反而好審。新增國家時這裡會噴警告，不會安靜漏掉。

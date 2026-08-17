@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生台灣變電所的容量與負載資料（docs/zh-TW/games/tor-network/tw-power.json）。
+"""產生台灣變電所的容量與負載資料（docs/zh-TW/games/tor-network/play/tw-power.json）。
 
 資料來源三份，各自的授權不同，輸出裡逐項標明：
 
@@ -59,7 +59,7 @@ import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-power.json")
+DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-power.json")
 
 DS_POWER = os.environ.get("TP_SUB_DATASET", "16960")
 DS_TOWN = os.environ.get("MOI_TOWN_DATASET", "7441")
@@ -288,7 +288,7 @@ def load_county_polys():
 
     產不出來就跳過這道檢查並提醒，不要因為少一個檔就整支失敗。
     """
-    p = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-admin.json")
+    p = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-admin.json")
     if not os.path.exists(p):
         print(f"  提醒：找不到 {p}，跳過座標與縣市的一致性檢查。"
               f"先跑 tools/gen_tw_admin.py 會比較安心。", file=sys.stderr)

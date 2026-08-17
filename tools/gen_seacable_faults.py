@@ -62,7 +62,7 @@ NEED = ("海纜名稱", "障礙", "修復")
 # 零筆障礙是合法狀態，代表當下沒有海纜在修，不是剖析失敗。把關的是表頭那幾個關鍵字，
 # 表頭認得出來就代表版面沒變，這時候沒有資料列就是真的沒有障礙。
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "seacable.json")
+                           "games", "tor-network", "play", "seacable.json")
 
 
 class TableParser(HTMLParser):

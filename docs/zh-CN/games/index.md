@@ -27,7 +27,7 @@ og:
 
     可操作的解谜。将消息从你送到对岸的收件人，自行挑选 3 个中继组成 Tor 的 guard → middle → exit 路径，过程中要避开被监听的节点、将 3 跳分散到不同 ASN，遇到封锁则改走网桥。四个关卡各对应一项真实的选路考量。
 
-    <a href="../../games/onion-routing/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始游戏</a>
+    <a href="../../games/onion-routing/play/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始游戏</a>
 
 -   :material-lan:{ .lg .middle } __Tor 连线流量__
 
@@ -35,7 +35,7 @@ og:
 
     以观看为主的呈现。用细小发光粒子与残影表现 Tor 流量的两种路径：连线 .onion 服务时双方各建一条 3 跳电路，在随机挑出的会合点相遇，连线明网网站则经 3 跳出口后原路往返。relay 数、电路数、已被标记的有害节点、流量都能实时调整。
 
-    <a href="../../games/onion-rendezvous/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始观看</a>
+    <a href="../../games/onion-rendezvous/play/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始观看</a>
 
 -   :material-earth:{ .lg .middle } __Tor 中继地球仪__
 
@@ -43,7 +43,7 @@ og:
 
     以真实数据构成的地球仪。将全球正在运作的近万台 Tor 中继落在各自的国界之内，颜色区分 guard、middle、exit，大小对应带宽，陆地亮度依指标上色。除了中继分布，另外整合连线受阻观测、用户估计、断网事件、海底电缆与上网人口。放大到台湾会再多出县市界、海缆登陆点、变电站、发电厂与电网。
 
-    <a href="../../games/tor-network/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始探索</a>
+    <a href="../../games/tor-network/play/index.html?lang=zh-cn" class="md-button md-button--primary">:octicons-arrow-right-24: 开始探索</a>
 
 </div>
 

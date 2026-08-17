@@ -32,7 +32,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ATLAS = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'atlas.js');
+const ATLAS = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play', 'atlas.js');
 
 const DRAG_K = 0.006;   // 跟 atlas.js 的 DRAG_K 一致，換算「幾像素等於幾弧度」用
 const NUDGE = 5;        // 放開一根之後，剩下那根微幅移動幾像素

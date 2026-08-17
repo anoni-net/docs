@@ -27,7 +27,7 @@ All three pieces have an English interface. The three language editions share on
 
     A hands-on puzzle. Get a message from you to a recipient across the water by picking 3 relays to form Tor's guard → middle → exit path, avoiding surveilled nodes, spreading the hops across different ASNs, and switching to bridges when blocked. Each of the four levels maps to a real path-selection concern.
 
-    <a href="../../games/onion-routing/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Play</a>
+    <a href="../../games/onion-routing/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Play</a>
 
 -   :material-lan:{ .lg .middle } __Tor Traffic Flow__
 
@@ -35,7 +35,7 @@ All three pieces have an English interface. The three language editions share on
 
     A view to watch. Glowing particles and afterimages show the two shapes Tor traffic takes: connections to .onion services have both sides build a 3-hop circuit and meet at a randomly chosen rendezvous point, while connections to the clear web run out through a 3-hop exit and return the same way. Relay count, circuit count, already-flagged hostile nodes and traffic volume are all adjustable live.
 
-    <a href="../../games/onion-rendezvous/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Watch</a>
+    <a href="../../games/onion-rendezvous/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Watch</a>
 
 -   :material-earth:{ .lg .middle } __Tor Relay Globe__
 
@@ -43,7 +43,7 @@ All three pieces have an English interface. The three language editions share on
 
     A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates connection-blocking measurements, user estimates, shutdown records, submarine cables and internet-usage rates. Zoom in on Taiwan and it adds county boundaries, cable landing points, substations, power plants and the transmission grid.
 
-    <a href="../../games/tor-network/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
+    <a href="../../games/tor-network/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
 
 </div>
 

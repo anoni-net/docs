@@ -16,7 +16,7 @@ description: "文件站新增「互動與呈現」區，用 3D 畫面呈現匿�
 
 ![Tor 中繼地球儀](https://assets.anoni.net/games/tor-network.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-文件站新增了[互動與呈現](../../games/index.md)區，目前放了三件作品，都以 Tor 為題。其中資料量最大的是 [Tor 中繼地球儀](../../games/tor-network/index.html)，把全球近萬台運作中的中繼標到球面上，超過六成集中在美國、德國、荷蘭三個國家。
+文件站新增了[互動與呈現](../../games/index.md)區，目前放了三件作品，都以 Tor 為題。其中資料量最大的是 [Tor 中繼地球儀](../../games/tor-network/play/index.html)，把全球近萬台運作中的中繼標到球面上，超過六成集中在美國、德國、荷蘭三個國家。
 
 做這顆地球儀的過程中，我們查了二十幾份公開資料，最後能用的只有六份。卡住的原因幾乎都跟技術無關。API 大多打得通，資料格式也乾淨，擋下來的是條款不給我們把它再發出去。
 
@@ -117,9 +117,9 @@ Freedom House 的 Freedom on the Net 與無國界記者的新聞自由指數，�
 
 ## 其他兩件作品
 
-[Tor 路由解謎](../../games/onion-routing/index.html)讓你自己挑三個中繼組成 guard、middle、exit 路徑，過程中要避開被監聽的節點、把三跳分散到不同 ASN，遇到封鎖改走橋接。看著電路因為三跳擠在同一個 ASN 而失敗，比讀十次「要分散」有效。
+[Tor 路由解謎](../../games/onion-routing/play/index.html)讓你自己挑三個中繼組成 guard、middle、exit 路徑，過程中要避開被監聽的節點、把三跳分散到不同 ASN，遇到封鎖改走橋接。看著電路因為三跳擠在同一個 ASN 而失敗，比讀十次「要分散」有效。
 
-[Tor 連線流量](../../games/onion-rendezvous/index.html)用發光粒子呈現兩種路徑的差異。連線 .onion 服務時雙方各建一條三跳電路，在隨機挑出的會合點相遇。連線明網網站則走三跳到出口後原路往返。
+[Tor 連線流量](../../games/onion-rendezvous/play/index.html)用發光粒子呈現兩種路徑的差異。連線 .onion 服務時雙方各建一條三跳電路，在隨機挑出的會合點相遇。連線明網網站則走三跳到出口後原路往返。
 
 三件作品都以 three.js 在瀏覽器中執行，免安裝，支援正體中文、簡體中文與英文。原始碼在 [anoni-net/docs](https://github.com/anoni-net/docs) 的 `docs/zh-TW/games/` 底下，沒有建置流程，改完存檔重新整理就看得到。
 

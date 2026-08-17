@@ -10,10 +10,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Tor 中繼地球儀 · anoni.net</title>
   <meta name="description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
-  <!-- 這頁在建置後會同時出現在 /docs/games/ 與 /docs/zh-tw/games/ 兩個網址，
-       兩份內容完全相同。canonical 指向前者，把權重集中到一個網址上。
+  <!-- 作品本體在 /docs/games/tor-network/play/，說明頁在 /docs/games/tor-network/。
+       canonical 指向本體自己的網址，說明頁另有自己的 canonical。
        語言由 ?lang= 決定，同一份檔案服務三個語系，所以正規網址不帶參數。 -->
-  <link rel="canonical" href="https://anoni.net/docs/games/tor-network/" />
+  <link rel="canonical" href="https://anoni.net/docs/games/tor-network/play/" />
   <!-- OG 寫死在這裡，因為這頁不經過 mkdocs 的模板。三個語系共用同一份程式，
        抓取預覽的爬蟲不會執行 JS，所以這裡固定用預設語系 zh-TW 的文案與正規網址。 -->
   <meta property="og:type" content="website" />
@@ -23,7 +23,7 @@
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="2993" />
   <meta property="og:image:height" content="1713" />
-  <meta property="og:url" content="https://anoni.net/docs/games/tor-network/" />
+  <meta property="og:url" content="https://anoni.net/docs/games/tor-network/play/" />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content="Tor 中繼地球儀 · anoni.net" />
   <meta property="twitter:description" content="把全球近萬台運作中的 Tor 中繼灑進各自的國界，另外疊上連線受阻觀測、使用者估計、斷網事件與海底電纜。three.js 在瀏覽器裡跑，免安裝。" />
@@ -40,7 +40,7 @@
         "@id": "https://anoni.net/docs/games/tor-network/#work",
         "name": "Tor 中繼地球儀",
         "alternateName": ["Tor Relay Globe", "Tor 中继地球仪"],
-        "url": "https://anoni.net/docs/games/tor-network/",
+        "url": "https://anoni.net/docs/games/tor-network/play/",
         "description": "以真實資料構成的地球儀。將全球正在運作的近萬台 Tor 中繼落在各自的國界之內，顏色區分 guard、middle、exit，大小對應頻寬，陸地亮度依指標上色。除了中繼分布，另外整合了連線受阻觀測、使用者估計、斷網事件與海底電纜等外部資料。",
         "image": "https://assets.anoni.net/games/tor-network.png",
         "inLanguage": ["zh-Hant", "zh-Hans", "en"],
@@ -54,6 +54,7 @@
         "author": { "@id": "https://anoni.net/#organization" },
         "publisher": { "@id": "https://anoni.net/#organization" },
         "isPartOf": { "@id": "https://anoni.net/docs/games/#collection" },
+        "mainEntityOfPage": "https://anoni.net/docs/games/tor-network/",
         "about": [
           { "@type": "Thing", "name": "Tor", "sameAs": "https://www.torproject.org/" },
           { "@type": "Thing", "name": "Tor 中繼", "sameAs": "https://community.torproject.org/relay/" },
@@ -183,7 +184,7 @@
             "@type": "Dataset",
             "name": "台灣海纜登陸點",
             "description": "本專案自建，座標主要取自 OpenStreetMap，登陸地名取自政府公告與公開報導，每一筆的出處記在 tools/data/tw_landing.toml。",
-            "url": "https://anoni.net/docs/games/tor-network/tw-landing.json",
+            "url": "https://anoni.net/docs/games/tor-network/play/tw-landing.json",
             "license": "https://opendatacommons.org/licenses/odbl/",
             "creator": { "@type": "Organization", "name": "匿名網路社群 anoni.net" }
           }
@@ -206,7 +207,8 @@
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "文件", "item": "https://anoni.net/docs/" },
           { "@type": "ListItem", "position": 2, "name": "互動與呈現", "item": "https://anoni.net/docs/games/" },
-          { "@type": "ListItem", "position": 3, "name": "Tor 中繼地球儀" }
+          { "@type": "ListItem", "position": 3, "name": "Tor 中繼地球儀", "item": "https://anoni.net/docs/games/tor-network/" },
+          { "@type": "ListItem", "position": 4, "name": "開始探索" }
         ]
       }
     ]
@@ -522,10 +524,10 @@
   </style>
   <script type="importmap">
   { "imports": {
-      "three": "../vendor/three.webgpu.min.js",
-      "three/webgpu": "../vendor/three.webgpu.min.js",
-      "three/tsl": "../vendor/three.tsl.min.js",
-      "three/addons/": "../vendor/jsm/"
+      "three": "../../vendor/three.webgpu.min.js",
+      "three/webgpu": "../../vendor/three.webgpu.min.js",
+      "three/tsl": "../../vendor/three.tsl.min.js",
+      "three/addons/": "../../vendor/jsm/"
   } }
   </script>
 </head>
@@ -612,7 +614,7 @@
         <div id="langs"></div>
         <!-- 這頁的連結原本全部指向站外的資料來源，站內一條都沒有，權重只出不進。
              靜態寫死 zh-TW 版本讓爬蟲讀得到，其他語系由 i18n 換掉整段（含連結網址）。 -->
-        <div id="backlink">← <a href="../">互動與呈現</a>　延伸閱讀 <a href="../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../tools/what-is-tor/">什麼是 Tor</a></div>
+        <div id="backlink">← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a></div>
       </div>
     </details>
   </div>

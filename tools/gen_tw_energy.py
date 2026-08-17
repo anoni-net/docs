@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生台灣的能源三件套（docs/zh-TW/games/tor-network/tw-energy.json）。
+"""產生台灣的能源三件套（docs/zh-TW/games/tor-network/play/tw-energy.json）。
 
 三份都來自台灣電力公司，都採政府資料開放授權條款-第1版：
 
@@ -53,7 +53,7 @@ import urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-energy.json")
+DEFAULT_OUT = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-energy.json")
 
 DS_SITE = os.environ.get("TP_SITE_DATASET", "17141")
 DS_USE = os.environ.get("TP_USE_DATASET", "29935")
@@ -186,7 +186,7 @@ def load_county_polys():
 
     產不出來就跳過並提醒，不要因為少一個檔就整支失敗。
     """
-    p = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "tw-admin.json")
+    p = os.path.join(ROOT, "docs", "zh-TW", "games", "tor-network", "play", "tw-admin.json")
     if not os.path.exists(p):
         print(f"  提醒：找不到 {p}，跳過座標與縣市的一致性檢查。"
               f"先跑 tools/gen_tw_admin.py 會比較安心。", file=sys.stderr)

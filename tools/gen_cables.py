@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""產生「Tor 中繼地球儀」的海底電纜底圖（docs/zh-TW/games/tor-network/cables.json）。
+"""產生「Tor 中繼地球儀」的海底電纜底圖（docs/zh-TW/games/tor-network/play/cables.json）。
 
 資料來源：OpenStreetMap，經 Overpass API 取 seamark:type=cable_submarine 的線段。
 海纜在 OSM 主要是用航海圖那套 seamark 標籤在記（海纜關係到船隻拋錨），數量是
@@ -109,7 +109,7 @@ MIN_POINTS = 2
 MIN_LEN_KM = 15        # 太短的多半是港內或登陸段，畫在地球儀上只是雜點
 STITCH_KM = 40         # 端點相距這個距離以內就接起來，OSM 把一條電纜拆成多個 way
 DEFAULT_OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "zh-TW",
-                           "games", "tor-network", "cables.json")
+                           "games", "tor-network", "play", "cables.json")
 
 
 def overpass(lon0, lon1):

@@ -27,7 +27,7 @@ og:
 
     可操作的解謎。將訊息從你送到對岸的收件人，自行挑選 3 個中繼組成 Tor 的 guard → middle → exit 路徑，過程中要避開被監聽的節點、將 3 跳分散到不同 ASN，遇到封鎖則改走橋接。四個關卡各對應一項真實的選路考量。
 
-    [:octicons-arrow-right-24: 開始遊戲](onion-routing/index.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-24: 開始遊戲](onion-routing/play/index.html){ .md-button .md-button--primary }
 
 -   :material-lan:{ .lg .middle } __Tor 連線流量__
 
@@ -35,7 +35,7 @@ og:
 
     以觀看為主的呈現。用細小發光粒子與殘影表現 Tor 流量的兩種路徑：連線 .onion 服務時雙方各建一條 3 跳電路，在隨機挑出的會合點相遇，連線明網網站則經 3 跳出口後原路往返。relay 數、電路數、已被標記的有害節點、流量都能即時調整。
 
-    [:octicons-arrow-right-24: 開始觀看](onion-rendezvous/index.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-24: 開始觀看](onion-rendezvous/play/index.html){ .md-button .md-button--primary }
 
 -   :material-earth:{ .lg .middle } __Tor 中繼地球儀__
 
@@ -43,7 +43,7 @@ og:
 
     以真實資料構成的地球儀。將全球正在運作的近萬台 Tor 中繼落在各自的國界之內，顏色區分 guard、middle、exit，大小對應頻寬，陸地亮度依指標上色。除了中繼分布，另外整合連線受阻觀測、使用者估計、斷網事件、海底電纜與上網人口。放大到台灣會再多出縣市界、海纜登陸點、變電所、發電廠與電網。
 
-    [:octicons-arrow-right-24: 開始探索](tor-network/index.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-24: 開始探索](tor-network/play/index.html){ .md-button .md-button--primary }
 
 </div>
 
