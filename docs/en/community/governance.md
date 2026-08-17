@@ -1,6 +1,6 @@
 ---
 title: Governance Charter
-description: How the anoni.net community makes decisions: roles, consensus and voting, dispute resolution, code of conduct, and how the charter itself is amended.
+description: "How the anoni.net community makes decisions: roles, consensus and voting, dispute resolution, code of conduct, and how the charter itself is amended."
 icon: material/gavel
 ---
 
