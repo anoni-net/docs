@@ -1,6 +1,6 @@
 ---
 title: ASN observation data analysis
-description: A coverage audit of OONI measurement data for Taiwan: 78.94% of observations come from just two ASNs and only 7.32% of the country's roughly 437 ASNs appear at all. Explains why ASN diversity limits what censorship measurement can show, and how to run the same audit for your own country.
+description: "A coverage audit of OONI measurement data for Taiwan: 78.94% of observations come from just two ASNs and only 7.32% of the country's roughly 437 ASNs appear at all. Explains why ASN diversity limits what censorship measurement can show, and how to run the same audit for your own country."
 icon: material/access-point-network
 ---
 

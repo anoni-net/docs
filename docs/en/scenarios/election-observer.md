@@ -1,6 +1,6 @@
 ---
 title: Election observer self-protection
-description: An individual operational-security guide for the person doing election observation: device prep, secure reporting, seized-device exposure, harassment, and cross-border accreditation, with Asia-Pacific framing.
+description: "An individual operational-security guide for the person doing election observation: device prep, secure reporting, seized-device exposure, harassment, and cross-border accreditation, with Asia-Pacific framing."
 icon: material/vote-outline
 ---
 
