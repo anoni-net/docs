@@ -21,6 +21,7 @@ nav:
           - basics/threat-model.md
           - basics/metadata.md
           - basics/platform-tracking.md
+          - basics/browser-fingerprinting.md
           - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
