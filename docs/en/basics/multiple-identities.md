@@ -96,7 +96,7 @@ Google Images, Yandex, TinEye, and PimEyes can reverse a single image, including
 
 Two accounts active in tightly overlapping windows are statistically suspicious, and researchers, journalists, and marketing analysts use this routinely. Stagger posting times, avoid posting from both accounts within the same hour, and note that travel timezone shifts moving in lockstep are their own fingerprint.
 
-### Stylometry: writing style and emoji
+### Stylometry picks up writing style and emoji
 
 Vocabulary, punctuation habits, and emoji use are individually distinctive, and entry-level stylometry tools can recognize the same author across pseudonyms. The goal is awareness rather than performing a different person:
 
@@ -173,7 +173,7 @@ A steadier sequence:
 4. **Check for dependencies**: is any other service using this address for account recovery?
 5. **Keep the shell or delete it, as the risk warrants**: a dormant account still costs you a password and a 2FA entry to maintain, and the platform keeps associating it. An account still wired into recovery flows should certainly not be deleted
 
-One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
+One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Emergency help](../help/index.md) covers the immediate steps, and [activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
 
 ## Common misconceptions
 
