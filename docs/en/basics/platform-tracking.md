@@ -58,11 +58,11 @@ The tracking mechanics are global. What differs across Sinophone Asia-Pacific is
 
 WeChat, Douyin, Xiaohongshu, and Weibo differ from the global platforms above in three ways, and this applies to diaspora users of those apps too.
 
-- **The account resolves to a legal person**. Accounts bind to a phone number and the number to an identity document, with the national Cyberspace ID added on top since July 2025. An ad profile that is a pseudonymous blob elsewhere is a named individual here.
+- **The account resolves to a legal person**: accounts bind to a phone number and the number to an identity document, with the national Cyberspace ID added on top since July 2025. An ad profile that is a pseudonymous blob elsewhere is a named individual here.
 
-- **The data sits in-jurisdiction and is reachable by legal process**. For global platforms the worst case is usually a data broker. For mainland platforms the data is held domestically and is also within scope of lawful access requests. That is a difference in kind, not degree.
+- **The data sits in-jurisdiction and is reachable by legal process**: for global platforms the worst case is usually a data broker. For mainland platforms the data is held domestically and is also within scope of lawful access requests. That is a difference in kind, not degree.
 
-- **The content is simultaneously censored**. Citizen Lab's WeChat research found that keyword filtering is enabled only for accounts registered with a mainland phone number and persists after relinking to an international one, that images are filtered by both OCR and visual-similarity matching, and that blocking is invisible to the sender. Content between non-mainland accounts is analyzed as well, and has been used to train the censorship system[^wechat].
+- **The content is simultaneously censored**: Citizen Lab's WeChat research found that keyword filtering is enabled only for accounts registered with a mainland phone number and persists after relinking to an international one, that images are filtered by both OCR and visual-similarity matching, and that blocking is invisible to the sender. Content between non-mainland accounts is analyzed as well, and has been used to train the censorship system[^wechat].
 
 The practical consequence: turning off the advertising identifier and refusing tracking does much less here, because the problem is not in the ad-tracking layer. Account layering is similarly limited — the methods in [maintaining multiple online identities](./multiple-identities.md) assume services outside the mainland, and the real-name chain cancels most of the benefit. What still works is behavioral separation: not reusing one account across purposes, and not cross-referencing between them. Full context in [posting on mainland Chinese platforms](../scenarios/mainland-speech.md).
 

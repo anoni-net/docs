@@ -105,25 +105,25 @@ Each tier notes what it leaves untouched.
 
 ### Low effort
 
-- **Switch to a browser that handles this by default**. Brave works out of the box, Firefox needs Enhanced Tracking Protection set to Strict, and Safari has a setting that extends the advanced protections to all browsing
-- **Do not stack up privacy extensions that alter fingerprint values**. A disguise with gaps produces a distinctive combination and works against the goal
+- **Switch to a browser that handles this by default**: Brave works out of the box, Firefox needs Enhanced Tracking Protection set to Strict, and Safari has a setting that extends the advanced protections to all browsing
+- **Do not stack up privacy extensions that alter fingerprint values**: a disguise with gaps produces a distinctive combination and works against the goal
 
-Left untouched: any account you sign into. Fingerprinting defenses address unnamed cross-site correlation, and signing in tells the site who you are directly.
+Any account you sign into is left untouched, because fingerprinting defenses address unnamed cross-site correlation and signing in tells the site who you are directly.
 
 ### Moderate effort
 
-- **Separate purposes across different browsers**. Separate profiles within one browser do nothing here, because the hardware and system signals are identical across them
+- **Separate purposes across different browsers**: separate profiles within one browser do nothing here, because the hardware and system signals are identical across them
 - **Block third-party scripts** with something like uBlock Origin, which reduces how many parties get to measure you at all
 - **Reduce what can be enumerated** by removing fonts and extensions you don't need
 
-This tier handles part of the cross-site correlation. It does not stop first-party measurement by the site you are actually visiting.
+This tier handles part of the cross-site correlation, and leaves first-party measurement by the site you are actually visiting untouched.
 
 ### High effort
 
 - **Use Tor Browser and leave the settings alone**, covered in [Tor Browser advanced settings](../tools/tor-browser-advanced.md)
 - **Use a separate device** for sensitive work
 
-Left untouched: anything you hand over voluntarily. Changing devices and tools changes what can be correlated, not what a single site accumulates about you.
+Anything you hand over voluntarily is left untouched, since changing devices and tools changes what can be correlated rather than what a single site accumulates about you.
 
 All three assume your jurisdiction permits the tools. Direct Tor connections are blocked in mainland China and require bridges or another entry method, and in several jurisdictions across the region the use of circumvention tools carries its own risk. [Threat modeling](./threat-model.md) covers how to weigh that.
 
