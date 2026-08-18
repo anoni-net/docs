@@ -22,9 +22,20 @@
  * 那個組合會把時鐘快轉，地球儀的 JSON 還沒抓完就被截走，圖上停在「載入中…」。
  * 所以改用 CDP：導頁、輪詢 ready 判斷式、跑完 actions、等 settle、才 captureScreenshot。
  *
+ * === 三個語系各截一份 ===
+ *
+ * 作品的介面語言看網址參數（i18n.js 的 pickLang），不看 navigator.language，
+ * 所以 headless 也能穩定指定。zh-TW 是預設值不帶參數，檔名也不加後綴，站上既有的
+ * zh-TW 圖網址不用動。en 與 zh-cn 各自加後綴，說明頁依語系引用自己那份。
+ *
+ * 外層迴圈跑鏡頭、內層跑語系，同一張圖的三個語言版本會在幾十秒內連續截完。
+ * 地球儀讀的是 assets.anoni.net 每小時重生的 snapshot.json，反過來寫的話
+ * 一輪跑十分鐘就可能跨過整點，同一張圖的三語版本會出現不一樣的數字。
+ *
  * 用法：
- *   node tools/shoot_games.mjs                 # 全部重截
+ *   node tools/shoot_games.mjs                 # 三語系全部重截
  *   node tools/shoot_games.mjs tor-network     # 只截名稱含這段字的
+ *   node tools/shoot_games.mjs --lang=en       # 只截某個語系
  *   node tools/shoot_games.mjs --no-webp       # 只留 PNG
  *
  * 產物在 tools/.shots/，PNG 與 WebP 各一份。確認過畫面才發布：
@@ -45,6 +56,7 @@ const W = 1280, H = 720;                                // 16:9，縮圖與 OG �
 
 const args = process.argv.slice(2);
 const NO_WEBP = args.includes('--no-webp');
+const LANG_ARG = (args.find((a) => a.startsWith('--lang=')) || '').split('=')[1] || '';
 const ONLY = args.filter((a) => !a.startsWith('--'));
 
 /**
@@ -132,6 +144,21 @@ const SHOTS = [
   },
 ];
 
+// zh-TW 不帶參數也不加後綴，維持正規網址與既有檔名
+// html 欄位是三件作品啟動時寫進 <html lang> 的值，截圖前拿它確認語系真的切過去了
+const LANGS = [
+  { code: 'zh-TW', q: null, sfx: '', html: 'zh-Hant' },
+  { code: 'zh-cn', q: 'zh-cn', sfx: '-zh-cn', html: 'zh-Hans' },
+  { code: 'en', q: 'en', sfx: '-en', html: 'en' },
+];
+
+/** ?lang= 要插在 hash 前面。地球儀用 #tw 指定開場國家，順序反了參數會被當成 hash 的一部分 */
+function withLang(url, q) {
+  if (!q) return url;
+  const [p, h] = url.split('#');
+  return `${p}${p.includes('?') ? '&' : '?'}lang=${q}${h ? '#' + h : ''}`;
+}
+
 if (!fs.existsSync(ROOT)) { console.error(`找不到 ${ROOT}`); process.exit(1); }
 try { execFileSync('bash', ['-c', 'command -v google-chrome'], { stdio: 'ignore' }); }
 catch { console.error('找不到 google-chrome'); process.exit(1); }
@@ -193,48 +220,58 @@ async function clickXY(x, y) {
 
 const todo = SHOTS.filter((s) => !ONLY.length || ONLY.some((o) => s.nm.includes(o)));
 if (!todo.length) { console.error(`沒有符合 ${ONLY.join(', ')} 的項目`); process.exit(1); }
+const langs = LANGS.filter((l) => !LANG_ARG || l.code.toLowerCase() === LANG_ARG.toLowerCase());
+if (!langs.length) { console.error(`--lang 只收 ${LANGS.map((l) => l.code).join('、')}`); process.exit(1); }
+console.log(`${todo.length} 個鏡頭 × ${langs.length} 個語系 = ${todo.length * langs.length} 張\n`);
 
 let bad = 0;
 for (const s of todo) {
-  const t0 = Date.now(); errs = [];
-  await send('Emulation.setEmulatedMedia', s.reduced
-    ? { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] } : { features: [] });
-  await send('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: SCALE, mobile: false });
-  // 同一個網址只有 hash 不同時 navigate 不會重載，先清掉再導
-  await send('Page.navigate', { url: 'about:blank' });
-  await sleep(200);
-  await send('Page.navigate', { url: base + s.url });
-  await sleep(1500);
+  for (const L of langs) {
+    const nm = s.nm + L.sfx;
+    const t0 = Date.now(); errs = [];
+    await send('Emulation.setEmulatedMedia', s.reduced
+      ? { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] } : { features: [] });
+    await send('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: SCALE, mobile: false });
+    // 同一個網址只有 hash 不同時 navigate 不會重載，先清掉再導
+    await send('Page.navigate', { url: 'about:blank' });
+    await sleep(200);
+    await send('Page.navigate', { url: base + withLang(s.url, L.q) });
+    await sleep(1500);
 
-  let ok = true;
-  if (s.ready) {
-    ok = false;
-    for (let i = 0; i < 240 && !ok; i++) { ok = await ev(s.ready); if (!ok) await sleep(500); }
-  }
-  if (!ok) { console.log(`✗ ${s.nm}：等不到就緒`); bad++; continue; }
+    let ok = true;
+    if (s.ready) {
+      ok = false;
+      for (let i = 0; i < 240 && !ok; i++) { ok = await ev(s.ready); if (!ok) await sleep(500); }
+    }
+    if (!ok) { console.log(`✗ ${nm}：等不到就緒`); bad++; continue; }
 
-  for (const [kind, a, b] of (s.actions || [])) {
-    if (kind === 'sel') await ev(`document.querySelector(${JSON.stringify(a)})?.click()`);
-    else if (kind === 'eval') await ev(a);
-    else if (kind === 'xy') await clickXY(a, b);
-    else if (kind === 'wait') await sleep(a);
-    await sleep(150);
-  }
-  await sleep(s.settle ?? 3000);
+    for (const [kind, a, b] of (s.actions || [])) {
+      if (kind === 'sel') await ev(`document.querySelector(${JSON.stringify(a)})?.click()`);
+      else if (kind === 'eval') await ev(a);
+      else if (kind === 'xy') await clickXY(a, b);
+      else if (kind === 'wait') await sleep(a);
+      await sleep(150);
+    }
+    await sleep(s.settle ?? 3000);
 
-  const { data } = await send('Page.captureScreenshot', { format: 'png' });
-  const png = path.join(OUT, `${s.nm}.png`);
-  fs.writeFileSync(png, Buffer.from(data, 'base64'));
-  let note = `${(fs.statSync(png).size / 1024).toFixed(0)} KB`;
-  if (!NO_WEBP) {
-    const webp = png.replace(/\.png$/, '.webp');
-    try {
-      execFileSync('cwebp', ['-quiet', '-q', '82', png, '-o', webp]);
-      note += ` → webp ${(fs.statSync(webp).size / 1024).toFixed(0)} KB`;
-    } catch { note += '（cwebp 失敗，只留 PNG）'; }
+    // 免得參數打錯還安靜產出三份一樣的圖
+    const got = await ev(`document.documentElement.lang || ''`);
+    if (got !== L.html) console.log(`  ⚠ ${nm}：頁面 lang 是 ${got}，預期 ${L.html}`);
+
+    const { data } = await send('Page.captureScreenshot', { format: 'png' });
+    const png = path.join(OUT, `${nm}.png`);
+    fs.writeFileSync(png, Buffer.from(data, 'base64'));
+    let note = `${(fs.statSync(png).size / 1024).toFixed(0)} KB`;
+    if (!NO_WEBP) {
+      const webp = png.replace(/\.png$/, '.webp');
+      try {
+        execFileSync('cwebp', ['-quiet', '-q', '82', png, '-o', webp]);
+        note += ` → webp ${(fs.statSync(webp).size / 1024).toFixed(0)} KB`;
+      } catch { note += '（cwebp 失敗，只留 PNG）'; }
+    }
+    console.log(`✓ ${nm.padEnd(32)} ${note}  ${((Date.now() - t0) / 1000).toFixed(1)}s`);
+    if (errs.length) console.log(`  ⚠ 頁面丟出例外：${errs[0]}`);
   }
-  console.log(`✓ ${s.nm.padEnd(26)} ${note}  ${((Date.now() - t0) / 1000).toFixed(1)}s`);
-  if (errs.length) console.log(`  ⚠ 頁面丟出例外：${errs[0]}`);
 }
 
 ws.close();

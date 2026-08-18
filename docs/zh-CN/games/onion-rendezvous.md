@@ -13,7 +13,7 @@ og:
 
 # :material-lan: Tor 连线流量
 
-![Tor 连线流量的画面，多条发光曲线在深色背景中交织，白色的会合点与红色的有害节点散布其间](https://assets.anoni.net/games/onion-rendezvous-flow.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor 连线流量的画面，多条发光曲线在深色背景中交织，白色的会合点与红色的有害节点散布其间](https://assets.anoni.net/games/onion-rendezvous-flow-zh-cn.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 不用操作也能看的一件作品。画面上呈现的是 Tor 的两种流量路径，用细小的发光粒子与残影画出来，看得出数据包在哪几站之间移动。
 

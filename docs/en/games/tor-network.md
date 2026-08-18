@@ -13,7 +13,7 @@ og:
 
 # :material-earth: Tor Relay Globe
 
-![The Tor Relay Globe with the sphere turned to Asia, relays drawn as coloured dots inside their borders, and the left panel listing relay counts per country and a hosting provider ranking](https://assets.anoni.net/games/tor-network-globe.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![The Tor Relay Globe with the sphere turned to Asia, relays drawn as coloured dots inside their borders, and the left panel listing relay counts per country and a hosting provider ranking](https://assets.anoni.net/games/tor-network-globe-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 Of the three works, the globe pulls in the most data. It puts public datasets scattered across different organisations onto one sphere, so that "where relays can be run" and "where Tor can be reached" can be read side by side. Zoom in on Taiwan and one more layer appears: the physical infrastructure those connections actually depend on.
 
@@ -27,7 +27,7 @@ Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding 
 
 ### Landmass brightness switches between four metrics
 
-![Landmass brightness switched to consensus weight, with country labels now showing percentages, Germany at 29.1% and Sweden at 6.1%](https://assets.anoni.net/games/tor-network-weight.webp){style="border-radius: 10px;"}
+![Landmass brightness switched to consensus weight, with country labels now showing percentages, Germany at 29.5% and Sweden at 6.1%](https://assets.anoni.net/games/tor-network-weight-en.webp){style="border-radius: 10px;"}
 
 - **Relay count**: how many relays the country hosts
 - **Consensus weight**: the share of traffic the country actually carries in the Tor network, which often diverges noticeably from the raw count
@@ -38,7 +38,7 @@ The gap between count and weight is worth switching over to see once. The United
 
 ### Clicking a country label opens its card
 
-![Germany's information card, showing 1,706 relays, 16.8% of the network, 29.1% consensus weight, the role mix, hosting providers and OONI test results](https://assets.anoni.net/games/tor-network-country.webp){style="border-radius: 10px;"}
+![Germany's information card, showing 1,715 relays, 16.9% of the network, 29.5% consensus weight, the role mix, hosting providers and OONI test results](https://assets.anoni.net/games/tor-network-country-en.webp){style="border-radius: 10px;"}
 
 The card carries its role mix, bandwidth share, the proportion running the officially recommended version, its main hosting providers, and how the country appears in the other datasets: user estimates, the OONI anomaly rate, and the pluggable transport breakdown of bridge usage.
 
@@ -72,7 +72,7 @@ The internet usage rate on each country card exists to serve as a denominator. "
 
 ## Zooming in on Taiwan
 
-![The globe zoomed to Taiwan, with county boundaries and 345 kV transmission lines over the island and relays concentrated down the western half](https://assets.anoni.net/games/tor-network-taiwan.webp){style="border-radius: 10px;"}
+![The globe zoomed to Taiwan, with county boundaries and 345 kV transmission lines over the island and relays concentrated down the western half](https://assets.anoni.net/games/tor-network-taiwan-en.webp){style="border-radius: 10px;"}
 
 Taiwan is the only region on this globe drawn down to county scale, and approaching it brings up five more layers. The left-hand panel groups everything Taiwan-related together, and the "Focus Taiwan" button flies straight there.
 
@@ -86,7 +86,7 @@ Plants, substations, renewable sites, landing points and transmission lines can 
 
 ### Demand reads two ways
 
-![The left panel switched to industrial share, with Hsinchu County first at 80.4%, Tainan at 78.5% and Miaoli at 77.9% behind it](https://assets.anoni.net/games/tor-network-industry.webp){style="border-radius: 10px;"}
+![The left panel switched to industrial share, with Hsinchu County first at 80.4%, Tainan at 78.5% and Miaoli at 77.9% behind it](https://assets.anoni.net/games/tor-network-industry-en.webp){style="border-radius: 10px;"}
 
 By total consumption the six special municipalities lead. Switch to industrial share and Hsinchu County jumps to the top, which is what the science parks look like in this dataset. The park straddles East District in Hsinchu City and Baoshan Township in Hsinchu County, two separate administrative rows, so a total splits it in half while a share does not.
 

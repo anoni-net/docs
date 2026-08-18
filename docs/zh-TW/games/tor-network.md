@@ -27,7 +27,7 @@ og:
 
 ### 陸地亮度可以換四種指標
 
-![陸地亮度切換到共識權重之後的畫面，國家標籤改成顯示百分比，德國 29.1%、瑞典 6.1%](https://assets.anoni.net/games/tor-network-weight.webp){style="border-radius: 10px;"}
+![陸地亮度切換到共識權重之後的畫面，國家標籤改成顯示百分比，德國 29.5%、瑞典 6.1%](https://assets.anoni.net/games/tor-network-weight.webp){style="border-radius: 10px;"}
 
 - **中繼台數**：該國託管的中繼數量
 - **共識權重**：該國在 Tor 網路中實際承擔的流量比重，與台數常有明顯落差
@@ -38,7 +38,7 @@ og:
 
 ### 點國家標籤展開資訊卡
 
-![點開德國的資訊卡，列出 1706 台、佔全網 16.8%、權重 29.1%、角色組成、托管商與 OONI 測試結果](https://assets.anoni.net/games/tor-network-country.webp){style="border-radius: 10px;"}
+![點開德國的資訊卡，列出 1715 台、佔全網 16.9%、權重 29.5%、角色組成、托管商與 OONI 測試結果](https://assets.anoni.net/games/tor-network-country.webp){style="border-radius: 10px;"}
 
 卡片內容包含角色組成、頻寬佔比、執行官方建議版本的比例、主要托管商，以及該國在其他幾份資料中的狀況：使用者估計、OONI 的異常率、橋接繞道的 pluggable transport 分布。
 
