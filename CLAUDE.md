@@ -255,7 +255,8 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 跑 `tools/docs_style_lint.py`
   - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md`、`docs/en/**/*.md` 與 linter 本身
   - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
-  - 目前是 warn 階段，問題以 annotation 標在變更行上，`continue-on-error` 讓 job 維持綠燈。要改成 blocking 需拿掉 `continue-on-error` 並在 repo 設定加上 branch protection
+  - 這個 job 會擋 merge。error 級規則讓 linter 回 exit 1，job 就紅；warn 級規則仍只以 annotation 標在變更行上，不影響 exit code
+  - 待辦：repo 設定尚未把這個 check 列為 branch protection 必過，所以目前擋得住 PR 的紅燈，擋不住有權限的人直接合併
 
 - **games-checks.yml**: 「Tor 中繼地球儀」的互動與版面檢查（headless Chrome）
   - 觸發路徑：`docs/zh-TW/games/tor-network/**`、`tools/check_*.mjs`
@@ -304,6 +305,6 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 行長度: 100 字元
   - 啟用規則: E (錯誤), F (pyflakes), I (import sorting)
 
-- 中文文件：使用 `tools/docs_style_lint.py`，規則出自貢獻者百科，目前為 warn 階段不擋 merge
+- 文件：使用 `tools/docs_style_lint.py`，規則出自貢獻者百科，三語系都掃。error 級擋 merge，warn 級只提醒
 - 使用 uv 管理所有 Python 專案依賴
 - 所有專案使用 Python 3.12+
