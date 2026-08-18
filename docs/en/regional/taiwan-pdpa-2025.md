@@ -61,7 +61,7 @@ Powers currently spread across the FSC, the Ministry of Health and Welfare, the 
 
 ## Cross-border transfers
 
-**Status: new obligation, effective only after the Commission is established and the Executive Yuan designates the commencement date.** Organizations can align contracts and technical design ahead of time. Individuals cannot invoke the corresponding remedies until then.
+This is a new obligation, effective only after the Commission is established and the Executive Yuan designates the commencement date. Organizations can align contracts and technical design ahead of time. Individuals cannot invoke the corresponding remedies until then.
 
 The conditions become more explicit:
 
@@ -83,7 +83,7 @@ Specific amounts and calculation methods follow the operative text and the Commi
 
 ## Breach notification
 
-**Status: new obligation, effective only after establishment and the designated commencement date.** Organizations can build detection and notification procedures ahead of time rather than scrambling when the law starts running.
+This is a new obligation, effective only after establishment and the designated commencement date. Organizations can build detection and notification procedures ahead of time rather than scrambling when the law starts running.
 
 Two layers of duty become explicit:
 

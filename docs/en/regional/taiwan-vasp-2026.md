@@ -83,7 +83,7 @@ This page does not determine individual cases. If your activity sits between per
 - **Stablecoin issuers**: newly and explicitly regulated under the dedicated chapter
 - **Non-profits accepting cryptocurrency donations**: the Act's focus is not the act of receiving donations, but an organization that holds donors' assets on their behalf, provides conversion, or offers other services may fall within the provider definition. Map your actual operational flow against the provisions and confirm with an accountant and counsel
 
-## Listed companies holding crypto: the exchange's accounting and internal control guidance (May 2026)
+## The exchange's accounting and internal control guidance for listed companies holding crypto (May 2026)
 
 On 29 May 2026, the Taiwan Stock Exchange and the Taipei Exchange jointly commissioned the Accounting Research and Development Foundation to produce two sets of guidance for listed companies: guidance on accounting for stablecoin transactions, and guidance on internal controls for holding cryptocurrency. Where the sections above concern the issuance side that the FSC and the central bank regulate, these two address the corporate side: how a listed company records crypto assets once it holds them, and how risk control is implemented.
 
@@ -105,7 +105,7 @@ Over-compliance is itself lawful. Facing ambiguous rules, a provider minimizing 
 
 The mechanism matches the decade and more of financial censorship cases documented by Rainey Reitman, former EFF Activism Director and Chief Program Officer, in *Transaction Denied*. What is particular about Taiwan's position is that it holds both ends: affected donors, and providers carrying the added compliance load. The cases are in [When financial companies act as censors](../blog/posts/2026-financial-companies-as-censors.md), and the operational guidance for advocacy organizations is in [Anonymous donation channels for advocacy organizations](../scenarios/nonprofit-anonymous-donation.md).
 
-## International comparison: the US "Crypto Week" bills of 2025
+## How the US "Crypto Week" bills of 2025 compare
 
 Taiwan's move from AML registration to licensing under a financial statute overlaps in problem definition with the US market structure legislation of the same period. On 17 July 2025 the House of Representatives passed three crypto bills in three days, which the industry and press called Crypto Week.
 
