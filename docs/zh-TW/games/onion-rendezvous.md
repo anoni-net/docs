@@ -7,8 +7,8 @@ social:
 og:
   enabled: true
   image: https://assets.anoni.net/games/onion-rendezvous.png
-  image_width: 2990
-  image_height: 1706
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-lan: Tor 連線流量

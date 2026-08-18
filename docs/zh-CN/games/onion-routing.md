@@ -6,14 +6,14 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-routing.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-routing-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-shuffle-variant: Tor 路由解谜
 
-![Tor 路由解谜的起始盘面，左侧是发件端，右侧是收件人，中间浮着五个颜色不同的中继](https://assets.anoni.net/games/onion-routing-board.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor 路由解谜的起始盘面，左侧是发件端，右侧是收件人，中间浮着五个颜色不同的中继](https://assets.anoni.net/games/onion-routing-board-zh-cn.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 把消息从左边的你送到右边的收件人，中间要自己挑 3 个中继组成路径。四个关卡各挡一次，每一关挡的都是 Tor 选路时真的要处理的一项限制。
 
@@ -23,7 +23,7 @@ og:
 
 画面上浮着的球是中继，颜色代表它所在的 ASN。依序点三个，就会照点选顺序组成 guard、middle、exit 三跳，再点一次可以取消。拖曳能旋转视角，滚轮或双指缩放。挑好之后按「发送消息」，消息会沿着你画出的路径走一遍。
 
-![选好三跳之后的画面，一条曲线从发件端串过三个中继连到收件人，下方显示台湾 AS3462、日本 AS2914、荷兰 AS16276](https://assets.anoni.net/games/onion-routing-path.webp){style="border-radius: 10px;"}
+![选好三跳之后的画面，一条曲线从发件端串过三个中继连到收件人，下方显示台湾 AS3462、日本 AS2914、荷兰 AS16276](https://assets.anoni.net/games/onion-routing-path-zh-cn.webp){style="border-radius: 10px;"}
 
 下方三格会显示每一跳落在哪里与它的 ASN。三跳都填满才发得出去，路径不合规则的话会挡下来并说明原因。
 
@@ -39,7 +39,7 @@ og:
 
 ### 关卡 3：三跳要分散到不同 ASN
 
-![三跳全挑了台湾的中继，三格都显示台湾 AS3462，下方红字说明这 3 跳没有分散到 3 个不同的 ASN](https://assets.anoni.net/games/onion-routing-asn.webp){style="border-radius: 10px;"}
+![三跳全挑了台湾的中继，三格都显示台湾 AS3462，下方红字说明这 3 跳没有分散到 3 个不同的 ASN](https://assets.anoni.net/games/onion-routing-asn-zh-cn.webp){style="border-radius: 10px;"}
 
 同色代表同一个 ASN。ASN 是自治系统（Autonomous System），可以粗略理解成一个组织或个人掌管的一段网络。三跳落在同一个 ASN 的话，对手只要盯住那一个 ASN，就同时看得到入口与出口的流量，中间绕了几站都没有意义。
 
@@ -47,7 +47,7 @@ og:
 
 ### 关卡 4：封锁时走网桥
 
-![关卡 4 的盘面，两个中继被红圈标记为封锁，左侧出现两个菱形的网桥节点](https://assets.anoni.net/games/onion-routing-bridge.webp){style="border-radius: 10px;"}
+![关卡 4 的盘面，两个中继被红圈标记为封锁，左侧出现两个菱形的网桥节点](https://assets.anoni.net/games/onion-routing-bridge-zh-cn.webp){style="border-radius: 10px;"}
 
 直连的入口被封锁了，画面上用红圈标出来，第一跳必须改用菱形的网桥节点。网桥是没有公开在目录里的入口，封锁方拿不到完整清单，所以挡不干净。盘面上两个网桥分别标了 Snowflake 与 obfs4，那是两种 pluggable transport，差别在于流量伪装成什么样子。
 
@@ -81,7 +81,7 @@ og:
       "url": "https://anoni.net/docs/games/onion-routing/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/onion-routing/",
       "description": "可操作的解谜。自行挑选 3 个中继组成 Tor 的 guard、middle、exit 路径，避开被监听的节点、将 3 跳分散到不同 ASN，遇到封锁则改走网桥。四个关卡各对应一项真实的选路考量。",
-      "image": "https://assets.anoni.net/games/onion-routing.png",
+      "image": "https://assets.anoni.net/games/onion-routing-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "genre": ["解谜", "教育"],
       "applicationCategory": "GameApplication",
