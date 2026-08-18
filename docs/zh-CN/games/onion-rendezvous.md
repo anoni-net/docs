@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-rendezvous.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-rendezvous-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-lan: Tor 连线流量
@@ -68,7 +68,7 @@ og:
       "url": "https://anoni.net/docs/games/onion-rendezvous/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/onion-rendezvous/",
       "description": "以观看为主的呈现。用发光粒子与残影表现 Tor 流量的两种路径，连线 .onion 服务时双方各建一条 3 跳电路，在随机挑出的会合点相遇。",
-      "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+      "image": "https://assets.anoni.net/games/onion-rendezvous-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "需要支持 WebGPU 或 WebGL2 的浏览器，免安装",

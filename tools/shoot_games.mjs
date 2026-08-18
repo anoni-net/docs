@@ -38,8 +38,9 @@
  *   node tools/shoot_games.mjs --lang=en       # 只截某個語系
  *   node tools/shoot_games.mjs --no-webp       # 只留 PNG
  *
- * 產物在 tools/.shots/，PNG 與 WebP 各一份。確認過畫面才發布：
- *   rsync -av tools/.shots/*.webp m6_tailscale:/srv/images-anoni-net/games/
+ * 產物在 tools/.shots/，PNG 與 WebP 各一份，OG 卡片另外複製到 tools/.shots/og/。
+ * 確認過畫面才發布：
+ *   rsync -av tools/.shots/*.webp tools/.shots/og/*.png m6_tailscale:/srv/images-anoni-net/games/
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -50,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..', 'docs', 'zh-TW');   // 作品本體只有這一棵樹有
 const OUT = path.join(HERE, '.shots');
+const OUT_OG = path.join(OUT, 'og');       // OG 卡片，檔名就是圖床上的名字
 const PORT_CDP = 9455;
 const SCALE = 2;                                        // 輸出兩倍圖，站上再縮
 const W = 1280, H = 720;                                // 16:9，縮圖與 OG 都好排
@@ -66,6 +68,8 @@ const ONLY = args.filter((a) => !a.startsWith('--'));
  *            開了才不會每次截到不同角度。另外兩件靠它撐畫面，不能開
  *   actions  ['sel', 選擇器] 點 DOM、['xy', x, y] 點畫布、['eval', 程式碼]、['wait', 毫秒]
  *   settle   動作跑完再等幾毫秒，讓動畫走到好看的狀態
+ *   ogAs     這一張同時當某頁的 OG 卡片，把 PNG 另存一份到 .shots/og/，檔名用這個值。
+ *            社群平台抓的是 PNG，LinkedIn 這類抓取器對 WebP 的支援仍不一致
  */
 // 送出訊息之後電路動畫跑 3.2 秒，再 0.45 秒才彈出教學卡，等 5 秒穩妥
 const SEND_NEXT = [['sel', '#btn-send'], ['wait', 5000], ['sel', '#btn-next'], ['wait', 1500]];
@@ -82,7 +86,7 @@ const SHOTS = [
   // 節點座標寫死在 levels.js，相機初始角度固定，所以畫布上的位置每次都一樣。
   // 這裡的 xy 是量出來的，關卡定義改了要重量。閒置 6 秒會自轉，所以要開 reduced。
   {
-    nm: 'onion-routing-board', url: GAME, reduced: true,
+    nm: 'onion-routing-board', url: GAME, reduced: true, ogAs: 'onion-routing',
     actions: [['sel', '#hint-close']], settle: 2500,
   },
   {
@@ -112,12 +116,12 @@ const SHOTS = [
   // 粒子與殘影是這件作品的主體，不能開 reduced，等久一點讓電路鋪滿畫面
   {
     nm: 'onion-rendezvous-flow', url: '/games/onion-rendezvous/play/index.html',
-    actions: [['sel', '#hint-close']], settle: 12000,
+    ogAs: 'onion-rendezvous', actions: [['sel', '#hint-close']], settle: 12000,
   },
 
   // ── Tor 中繼地球儀 ──
   {
-    nm: 'tor-network-globe', url: GLOBE, ready: GLOBE_READY,
+    nm: 'tor-network-globe', url: GLOBE, ready: GLOBE_READY, ogAs: 'tor-network',
     actions: [['sel', '#hint-close']], settle: 9000,
   },
   {
@@ -209,6 +213,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 await send('Runtime.enable'); await send('Page.enable');
 fs.mkdirSync(OUT, { recursive: true });
+fs.mkdirSync(OUT_OG, { recursive: true });
 
 /** 點畫布。作品聽的是 pointerdown，CDP 的 mouse 事件會一併產生 pointer 事件 */
 async function clickXY(x, y) {
@@ -262,6 +267,10 @@ for (const s of todo) {
     const png = path.join(OUT, `${nm}.png`);
     fs.writeFileSync(png, Buffer.from(data, 'base64'));
     let note = `${(fs.statSync(png).size / 1024).toFixed(0)} KB`;
+    if (s.ogAs) {
+      fs.copyFileSync(png, path.join(OUT_OG, `${s.ogAs}${L.sfx}.png`));
+      note += ` → og/${s.ogAs}${L.sfx}.png`;
+    }
     if (!NO_WEBP) {
       const webp = png.replace(/\.png$/, '.webp');
       try {
@@ -276,5 +285,5 @@ for (const s of todo) {
 
 ws.close();
 console.log(`\n產物在 ${path.relative(process.cwd(), OUT)}/，看過畫面再發布：`);
-console.log('  rsync -av tools/.shots/*.webp m6_tailscale:/srv/images-anoni-net/games/');
+console.log('  rsync -av tools/.shots/*.webp tools/.shots/og/*.png m6_tailscale:/srv/images-anoni-net/games/');
 process.exit(bad ? 1 : 0);

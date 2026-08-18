@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-routing.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-routing-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-shuffle-variant: Tor 路由解谜
@@ -81,7 +81,7 @@ og:
       "url": "https://anoni.net/docs/games/onion-routing/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/onion-routing/",
       "description": "可操作的解谜。自行挑选 3 个中继组成 Tor 的 guard、middle、exit 路径，避开被监听的节点、将 3 跳分散到不同 ASN，遇到封锁则改走网桥。四个关卡各对应一项真实的选路考量。",
-      "image": "https://assets.anoni.net/games/onion-routing.png",
+      "image": "https://assets.anoni.net/games/onion-routing-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "genre": ["解谜", "教育"],
       "applicationCategory": "GameApplication",

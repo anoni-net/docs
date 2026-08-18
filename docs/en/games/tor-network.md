@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image: https://assets.anoni.net/games/tor-network-en.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-earth: Tor Relay Globe
@@ -123,7 +123,7 @@ Every data file carries `source`, `sourceUrl`, `license` and `licenseUrl` fields
       "url": "https://anoni.net/docs/games/tor-network/play/?lang=en",
       "mainEntityOfPage": "https://anoni.net/docs/en/games/tor-network/",
       "description": "A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, with censorship observations, user estimates, shutdown records, submarine cables and internet usage layered on top, plus county boundaries, cable landing points, substations, power plants and the grid when you zoom in on Taiwan.",
-      "image": "https://assets.anoni.net/games/tor-network.png",
+      "image": "https://assets.anoni.net/games/tor-network-en.png",
       "inLanguage": ["en", "zh-Hant", "zh-Hans"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "A browser with WebGPU or WebGL2 support, no installation needed",

@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image: https://assets.anoni.net/games/tor-network-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-earth: Tor 中继地球仪
@@ -123,7 +123,7 @@ og:
       "url": "https://anoni.net/docs/games/tor-network/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/tor-network/",
       "description": "以真实数据构成的地球仪。将全球正在运作的近万台 Tor 中继落在各自的国界之内，另外整合连线受阻观测、用户估计、断网事件、海底电缆与上网人口，放大到台湾还有县市界、海缆登陆点、变电站、发电厂与电网。",
-      "image": "https://assets.anoni.net/games/tor-network.png",
+      "image": "https://assets.anoni.net/games/tor-network-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "需要支持 WebGPU 或 WebGL2 的浏览器，免安装",

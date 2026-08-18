@@ -7,8 +7,8 @@ social:
 og:
   enabled: true
   image: https://assets.anoni.net/games/onion-routing.png
-  image_width: 2990
-  image_height: 1706
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-shuffle-variant: Tor 路由解謎

@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-routing.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-routing-en.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-shuffle-variant: Tor Routing Puzzle
@@ -81,7 +81,7 @@ All three language versions share one program. The language is set by a URL para
       "url": "https://anoni.net/docs/games/onion-routing/play/?lang=en",
       "mainEntityOfPage": "https://anoni.net/docs/en/games/onion-routing/",
       "description": "A hands-on puzzle. Pick 3 relays to form Tor's guard, middle and exit path, avoid surveilled nodes, spread the 3 hops across different ASNs, and switch to bridges when blocked. Each of the four levels maps to a real path-selection constraint.",
-      "image": "https://assets.anoni.net/games/onion-routing.png",
+      "image": "https://assets.anoni.net/games/onion-routing-en.png",
       "inLanguage": ["en", "zh-Hant", "zh-Hans"],
       "genre": ["Puzzle", "Educational"],
       "applicationCategory": "GameApplication",

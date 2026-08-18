@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-rendezvous.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-rendezvous-en.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-lan: Tor Traffic Flow
@@ -68,7 +68,7 @@ Red nodes represent relays already flagged as problematic. Real Tor path selecti
       "url": "https://anoni.net/docs/games/onion-rendezvous/play/?lang=en",
       "mainEntityOfPage": "https://anoni.net/docs/en/games/onion-rendezvous/",
       "description": "A watch-first visualisation. Glowing particles and afterimages trace Tor's two traffic paths, with a .onion connection having both sides build a 3-hop circuit and meet at a randomly chosen rendezvous point.",
-      "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+      "image": "https://assets.anoni.net/games/onion-rendezvous-en.png",
       "inLanguage": ["en", "zh-Hant", "zh-Hans"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "A browser with WebGPU or WebGL2 support, no installation needed",
