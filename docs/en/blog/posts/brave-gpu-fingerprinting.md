@@ -12,7 +12,7 @@ description: "Brave 1.93 flattens the graphics-card details leaked through WebGL
 
 # :material-fingerprint: Brave flattens GPU fingerprints two opposite ways
 
-Open a web page and the JavaScript on it can read your graphics card model, its driver details, and which hardware features it supports. Those answers barely change on a given machine, so a tracking company can combine them with other device traits into an identifier that needs no cookie, asks for no consent, and follows you between sites.
+Open a web page and the JavaScript on it can read your graphics card model, its driver details, and the hardware features it supports. Those answers barely change on a given machine, so a tracking company can combine them with other device traits into an identifier that needs no cookie, asks for no consent, and follows you between sites.
 
 The graphics card is one source among many. Font lists, screen dimensions, time zone, and audio processing all feed the same identifier. [A browser fingerprint cannot be cleared the way a cookie can](../../basics/browser-fingerprinting.md) covers how the whole mechanism works, why clearing cookies does nothing, and where each browser currently stands. This piece stays with the graphics card.
 
@@ -24,7 +24,7 @@ The first two make every user look alike. The third makes one user look differen
 
 ## A graphics card makes an unusually good fingerprint
 
-WebGL and WebGPU give sites hardware-accelerated graphics, which maps, games, and data visualization all depend on. So that a site can adapt its rendering to the hardware, both APIs also expose low-level hardware detail to JavaScript.
+WebGL and WebGPU give sites hardware-accelerated graphics, which maps, games, and data visualization all depend on. To let a site adapt its rendering to the hardware, both APIs also expose low-level hardware detail to JavaScript.
 
 Three kinds of information are available to a site[^brave]:
 
@@ -44,11 +44,11 @@ Brave ran a small-scale web crawl, analyzing the call stack behind each invocati
 | WebGPU adapter description | `vendor`, `architecture`, and `device` cleared | Uniformity |
 | WebGL extension list | Noise added, differing per session, per site (eTLD+1), and per storage partition | Randomization |
 
-The third protection reuses farbling, which Brave already had. The 2020 update that introduced it defined the technique as "slightly randomizing the output of semi-identifying browser features, in a way that's difficult for websites to detect, but doesn't break benign websites"[^farbling].
+The third protection reuses farbling, which Brave already had. In the 2020 update that introduced it, the technique is defined as "slightly randomizing the output of semi-identifying browser features, in a way that's difficult for websites to detect, but doesn't break benign, user-serving websites"[^farbling].
 
 ## The farbling seed changes per session and per site
 
-How the seed is generated determines what farbling does. On startup the browser generates a random session token, then mixes it with each first-party domain it visits through HMAC256, producing a per-domain token that lives as long as the session[^farbling]. Measure the same site twice within one session and the values match exactly; move to another site and they differ; start a new session and all of them change. Third-party frames and scripts inherit the top-level eTLD+1 seed[^farbling], so embedding third-party content offers no way around it.
+How the seed is generated determines what farbling does. On startup the browser generates a random session token, then mixes it with each first-party, top-frame domain it visits through HMAC256, producing a per-domain token that lives as long as the session[^farbling]. Measure the same site twice within one session and the values match exactly; move to another site and they differ; start a new session and all of them change. Third-party frames and scripts inherit the top-level eTLD+1 seed[^farbling], so embedding third-party content offers no way around it.
 
 A fingerprinter hashes many semi-identifying traits into a single identifier, and randomizing any one of them poisons the whole hash. The technique traces back to two research papers, PriVaricator (Nikiforakis and colleagues, WWW 2015) and FPRandom (Laperdrix and colleagues, ESSoS 2017)[^farbling].
 
@@ -60,25 +60,25 @@ Vendor and renderer strings mostly serve performance tuning and hardware blockli
 
 The extension list serves feature negotiation. A site checks whether a given extension is present before enabling a rendering path or choosing a fallback. Hand it a uniform list that does not match the hardware and the site may pick a path the hardware cannot support, or abandon acceleration that was actually available. That leaves adding noise while preserving usability, which keeps the resulting hash unstable.
 
-The two techniques also aim at different things. Uniformity reduces entropy, stripping a trait of its power to distinguish, with every Brave user in the world ideally identical on that field. Added noise attacks linkability instead: the value still carries information, but it differs on every site and every time, so a tracker cannot join the you on one site to the you on another.
+The two techniques differ in what they protect against. Uniformity reduces entropy, stripping a trait of its power to distinguish, with every Brave user in the world ideally identical on that field. Added noise undermines linkability instead: the value still carries information, but it differs on every site and every time, so a tracker cannot link what it sees on one site to what it sees on another.
 
 ## Tor Browser takes uniformity all the way
 
-The fingerprinting introduction Pierre Laperdrix wrote for the Tor Project in 2019 opens with the position that all Tor users should have exactly the same fingerprint. The measures described there include reporting one operating system across every platform, normalizing the time zone and screen resolution, and letterboxing, which pads content with grey margins so the viewport snaps to fixed dimensions and a maximized window stops revealing the screen size[^tor].
+Pierre Laperdrix wrote the fingerprinting introduction for the Tor Project in 2019. Its opening position is that all Tor users should have exactly the same fingerprint. The measures described there include reporting one operating system across every platform, normalizing the time zone and screen resolution, and letterboxing, which pads content with gray margins so the viewport snaps to fixed dimensions and a maximized window stops revealing the screen size[^tor].
 
-Laperdrix also names the risk in randomization, the Paradox of Fingerprintable Privacy Enhancing Technologies. His example is an extension that rewrites a batch of values but misses `navigator.platform`, producing a combination of traits that exists nowhere in reality and leaving the user easier to identify than before[^tor]. Randomization done properly needs thorough coverage, which is why Brave keeps extending the list of endpoints farbling touches.
+Laperdrix also names the risk in randomization, citing what Eckersley called the Paradox of Fingerprintable Privacy Enhancing Technologies. His example is an extension that rewrites a batch of values but misses `navigator.platform`, producing a combination of traits that exists nowhere in reality and leaving the user easier to identify than before[^tor]. Randomization done properly needs thorough coverage, which is why Brave keeps extending the list of endpoints farbling touches.
 
-Firefox handles it a third way. With `privacy.resistFingerprinting` on, the `WEBGL_debug_renderer_info` extension is disabled outright and a site cannot call it[^mdn]. That preference is off unless a user turns it on in `about:config`, and [A browser fingerprint cannot be cleared the way a cookie can](../../basics/browser-fingerprinting.md) has the full comparison of what each browser does by default. Disabling and returning a generic value each cost something: with the extension gone a site gets nothing and has to handle the empty case, while a generic value is indistinguishable from real hardware and lets the site carry on. Brave chose the latter, consistent with keeping breakage as low as possible. Another position in the announcement is that protection should be on by default rather than hidden behind a special mode or a flag[^brave].
+Firefox handles it a third way, in that with `privacy.resistFingerprinting` on, the `WEBGL_debug_renderer_info` extension is disabled outright and a site cannot call it[^mdn]. That preference is off unless a user turns it on in `about:config`, and [A browser fingerprint cannot be cleared the way a cookie can](../../basics/browser-fingerprinting.md) has the full comparison of what each browser does by default. Disabling and returning a generic value each cost something: with the extension gone a site gets nothing and has to handle the empty case, while a generic value is indistinguishable from real hardware and lets the site carry on. Brave chose the latter, consistent with keeping breakage as low as possible. Another position in the announcement is that protection should be on by default rather than hidden behind a special mode or a flag[^brave].
 
-Brave's own documentation draws the boundary. The 2020 farbling update recommends that users facing targeted attacks switch to Tor Browser[^farbling]. Randomization holds up against broadly deployed commercial tracking, and it provides no anonymity set.
+That boundary sits in Brave's own documentation: for users facing targeted attacks, the recommendation in the 2020 farbling update is to switch to Tor Browser[^farbling]. Randomization holds up against broadly deployed commercial tracking, and it provides no anonymity set.
 
 ## Which one to use depends on your threat model
 
-For everyday browsing, shipping on by default is the practical value here. Most people will not edit `about:config`, switch to a special mode, or install an extension for privacy, and the announcement notes that extensions carry their own security and privacy problems[^brave]. The protection works from installation, with a threshold close to zero.
+For everyday browsing, shipping on by default is the practical value here. Most people will not edit `about:config`, switch to a special mode, or install an extension for privacy, and extensions carry their own security and privacy problems, a point the announcement also makes[^brave]. The protection works from installation, with a threshold close to zero.
 
-Anything that calls for anonymity still calls for Tor Browser. Brave's randomization addresses cross-site correlation only. The IP address still goes straight to the site, and an observer on the network path still sees where the connection went. Journalists, activists, and anyone handling sensitive material work under a different threat model and pick different tools; [threat modeling](../../basics/threat-model.md) covers how to make that call.
+Anything that calls for anonymity still calls for Tor Browser, because Brave's randomization addresses cross-site correlation only. The IP address still goes straight to the site, and an observer on the network path still sees where the connection went. Journalists, activists, and anyone handling sensitive material work under a different threat model and pick different tools; [threat modeling](../../basics/threat-model.md) covers how to make that call.
 
-Availability varies by jurisdiction and belongs in the same calculation. Direct Tor connections are blocked in mainland China and need bridges or another entry method, and in several jurisdictions across the region the use of circumvention tools carries risk in itself. Brave's fingerprinting protection is a browser feature that touches none of that, and it works from installation.
+Availability varies by jurisdiction and belongs in the same calculation. Direct Tor connections are blocked in mainland China, where connecting needs bridges or another entry method, and in several jurisdictions across the region the use of circumvention tools carries risk in itself. Brave's fingerprinting protection is a browser feature that touches none of that, and it works from installation.
 
 Anyone using Tor Browser should remember that the uniformity route depends on everyone staying uniform. Installing extensions, maximizing the window, or changing font settings all make you stand out, and [Tor Browser advanced settings](../../tools/tor-browser-advanced.md) covers the specifics. The same action costs little in Brave and undermines the entire premise in Tor Browser.
 
@@ -86,11 +86,11 @@ To see what your own browser gives away, EFF's [Cover Your Tracks](https://cover
 
 ## Parts of the problem stay open
 
-The list of supported WebGPU extensions is not randomized yet, and Brave's announcement says that is planned[^brave]. Graphics APIs remain an active area of fingerprinting research, and new leak channels keep appearing.
+The list of supported WebGPU extensions is not randomized yet, and Brave's announcement says that change is planned[^brave]. Graphics APIs remain an active area of fingerprinting research, and new leak channels keep appearing.
 
-Site breakage is still under observation. Brave kept the ability to adjust protection per site, so a user meeting a site that genuinely will not work can disable graphics protection for that site, disable fingerprinting protection, or turn off Shields entirely[^brave]. Keeping those switches means the trade-off is still live, and neither uniformity nor added noise can guarantee that every site behaves as before.
+Brave kept the ability to adjust protection per site while site breakage is still under observation, so a user meeting a site that genuinely will not work can disable graphics protection for that site, disable fingerprinting protection, or turn off Shields entirely[^brave]. Keeping those switches means the trade-off is still live, and neither uniformity nor added noise can guarantee that every site behaves as before.
 
-Fingerprinting does not end with one browser update. With the graphics card handled, font lists, canvas rendering output, and audio processing traits are all still there. Signals that can safely collapse to a constant should collapse; signals tied to feature negotiation get noise instead. That dividing line works just as well for examining any other tool that claims fingerprinting resistance.
+Fingerprinting does not end with one browser update, and with the graphics card handled, font lists, canvas rendering output, and audio processing traits are all still there. Signals that can safely collapse to a constant should collapse; signals tied to feature negotiation get noise instead. That dividing line works just as well for examining any other tool that claims fingerprinting resistance.
 
 ## Where to go from here
 
@@ -100,6 +100,6 @@ Fingerprinting does not end with one browser update. With the graphics card hand
 - [Threat modeling](../../basics/threat-model.md) — establish who you are defending against before picking tools
 
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} — Brave privacy update 38. Source for the three protections, the crawl observation, the compatibility handling, and the plans described here. Verified 2026-08-14.
-[^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} — Brave privacy update 4, 2020. Source for the definition of farbling, the HMAC256 seed mechanism, and the research lineage. The note that third-party frames inherit the top-level seed also appears in Brave's [Fingerprinting Protections wiki](https://github.com/brave/brave-browser/wiki/Fingerprinting-Protections){target="_blank"}.
-[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} — Pierre Laperdrix, The Tor Project blog, 4 September 2019. Source for the uniformity route, letterboxing, and the Paradox of Fingerprintable Privacy Enhancing Technologies. The specific measures described there match the Tor Browser version current at the time of writing.
-[^mdn]: [WEBGL_debug_renderer_info](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info){target="_blank"} — MDN Web Docs. Source for the definitions of both constants and for Firefox disabling the extension when `privacy.resistFingerprinting` is true.
+[^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} — Brave privacy update 4, 2020. Source for the definition of farbling, the HMAC256 seed mechanism, and the research lineage. The note that third-party frames inherit the top-level seed also appears in Brave's [Fingerprinting Protections wiki](https://github.com/brave/brave-browser/wiki/Fingerprinting-Protections){target="_blank"}, a page subject to ongoing edits. Verified 2026-08-18.
+[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} — Pierre Laperdrix, The Tor Project blog, 4 September 2019. Source for the uniformity route, letterboxing, and the Paradox of Fingerprintable Privacy Enhancing Technologies. The specific measures described there match the Tor Browser version current at the time of writing. The paradox itself is credited there to Eckersley, PETS 2010. Verified 2026-08-18.
+[^mdn]: [WEBGL_debug_renderer_info](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info){target="_blank"} — MDN Web Docs. Source for the definitions of both constants and for Firefox disabling the extension when `privacy.resistFingerprinting` is true. Verified 2026-08-18.
