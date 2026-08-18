@@ -11,7 +11,7 @@ summary: "On Thursday 13 August, 14:30-15:00 Taipei time (06:30-07:00 UTC), mobi
 description: "On Thursday 13 August, 14:30-15:00 Taipei time (06:30-07:00 UTC), mobile networks across seven counties in northern Taiwan will be throttled for 30 minutes. The date, the window, the counties, the carriers, and the treatment intensity are all public in advance, and network throttling research rarely gets boundaries this sharp. The Executive Yuan describes the method as core-network rate limiting with downloads capped at 256KB, which gives a figure to expect when reading the data. Those thirty minutes can show whether the limiting sits at the bandwidth layer or the application layer, whether all three carriers drop by a similar order, whether Tor and Psiphon still connect under constrained bandwidth, and how fast speeds recover afterwards. This post covers what to run, the privacy trade-off to understand first, and what the resulting data can support. Of Taiwan's 548 mobile-side OONI performance measurements, 528 come from Taiwan Mobile alone, against 16 for Chunghwa Telecom Mobile and 4 for FarEasTone."
 ---
 
-# A Throttle Announced in Advance: Recording 30 Minutes of Northern Taiwan's Mobile Networks on 13 August
+# Recording 30 Minutes of Northern Taiwan's Mobile Networks During an Announced Throttle on 13 August
 
 ![Measuring Taiwan's mobile network throttling drill](./assets/images/ooni-run-v2.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
@@ -45,7 +45,7 @@ Install [OONI Probe](https://ooni.org/install/){target="_blank"}: free and open 
 
 Then set an alarm for `14:35`, the run that matters most, and add `14:15` and `15:10` if you can. The real obstacle is remembering mid-afternoon, not the tapping. Missing it entirely is fine too: take the `15:10` run instead, and a single measurement is still worth submitting.
 
-### Step one: turn Wi-Fi and any VPN off, use mobile data
+### Step one, turn Wi-Fi and any VPN off and use mobile data
 
 Wi-Fi served by a fixed line is unaffected by the drill, so a measurement taken over that kind of Wi-Fi contributes nothing. Phones routinely reconnect to office or home Wi-Fi on their own, so confirm you are on mobile data before starting. A hotspot shared from another phone runs over mobile underneath, but OONI still records the network type as Wi-Fi, so avoid that too.
 
@@ -59,7 +59,7 @@ After a run completes, the results page shows the network name and ASN (the glob
 
     On a metered plan, run the one during the throttle and pick either 14:15 or 15:10 as the comparison; two runs are enough to compare.
 
-### Step two: run the built-in Performance tests
+### Step two, run the built-in Performance tests
 
 Open the app, tap Tests, choose Performance, tick the tests you want, then tap run. The Performance group contains `ndt` (connection speed) and `dash` (which simulates adaptive video streaming and estimates the achievable bitrate), which are the two tests this needs, and it is available on both Android and iOS.
 
@@ -67,7 +67,7 @@ Open the app, tap Tests, choose Performance, tick the tests you want, then tap r
     <img class="brand-frame" src="https://assets.anoni.net/blog/ooni-performance.png" alt="OONI Probe's Performance screen, showing an estimate of 5 to 200 MB and about 1 minute 30 seconds, the run button, and the previous test result" style="width:50%">
 </figure>
 
-### Step three: run once between 14:35 and 14:55 at minimum
+### Step three, run at least once between 14:35 and 14:55
 
 The run taken during the throttle matters most. The drill starts at 14:30 and ends at 15:00, and leaving five minutes at each end avoids the ramp-up and recovery transitions, so any start between 14:35 and 14:55 works. `ndt` takes about 1 minute 30 seconds, so starting as late as 14:55 still finishes before the window closes.
 
@@ -226,7 +226,7 @@ The OONI figures in this post fall into three groups, all queried on 2026-08-11.
 
 These counts keep accumulating, so a later query returns slightly higher values while the shape of the distribution stays stable.
 
-## Appendix: using OONI as research evidence
+## Appendix on using OONI as research evidence
 
 This campaign addresses one event, but the method is reusable. OONI data has four entry points, serving quite different purposes:
 

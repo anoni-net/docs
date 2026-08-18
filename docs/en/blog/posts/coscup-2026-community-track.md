@@ -11,7 +11,7 @@ summary: "The Anonymity Networks Community runs a two-day track at COSCUP 2026 (
 description: "The Anonymity Networks Community runs a two-day track at COSCUP 2026 (Aug 8–9, NTUST, Taipei): Tor, Tails, OONI, browser tracking, campus Tor nodes, data-privacy rights, a privacy guide, and anonymous payments, with a session co-organized with ETHTaipei. COSCUP is free with no registration, so you can walk in and attend anonymously."
 ---
 
-# COSCUP 2026 Anonymity Networks Community track: two days, Aug 8–9, free entry, just walk in
+# COSCUP 2026 Anonymity Networks Community track runs two days, Aug 8–9, free entry, just walk in
 
 ![COSCUP 2026 Anonymity Networks Community track hero image](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
@@ -38,11 +38,17 @@ The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work 
 
 The program is deliberately designed to run from entry-level to protocol-level (the lower-level technical implementation), so you can pick sessions based on your own background. All sixteen sessions and their summaries live on the [event page](../../activity/coscup-2026.md).
 
-**Aug 8 morning: four open-source anonymity primers (`TR-510`).** The first three are led by community members and the fourth is an invited talk, pitched as entry-level and well suited to civil-society groups, news media, and independent journalists, and to anyone meeting these topics for the first time. The four talks cover who the Anonymity Networks Community is and what it does, how to use threat models and metadata (records of who contacted whom, and when) to work out who you're defending against, which open-source tools journalists and NGOs actually use, and how open-standard verifiable credentials let someone prove they qualify without revealing who they are.
+#### Aug 8 morning, four open-source anonymity primers (`TR-510`)
 
-**Aug 8 afternoon: the ETHTaipei co-organized anonymous-payments session (`TR-511`).** Five talks push the technical depth to the protocol level, from zero-knowledge proofs with the Citizen Digital Certificate, privacy-preserving KYC, and on-chain stealth addresses, through to private crypto flows and a hands-on workshop. These are on the technical side, so if you have no blockchain background, start with the plain-language morning talks and decide from there. The morning primers cover "why you'd use this" and these afternoon talks carry on into "how it's built": NGOs and journalists can learn the privacy risks in donations and money flows, developers get the protocol-level implementations, and you are welcome to move between the two tracks.
+The first three are led by community members and the fourth is an invited talk, pitched as entry-level and well suited to civil-society groups, news media, and independent journalists, and to anyone meeting these topics for the first time. The four talks cover who the Anonymity Networks Community is and what it does, how to use threat models and metadata (records of who contacted whom, and when) to work out who you're defending against, which open-source tools journalists and NGOs actually use, and how open-standard verifiable credentials let someone prove they qualify without revealing who they are.
 
-**Aug 9 all day: seven accepted talks (`TR-510`).** Topics run from how the internet and censorship work, through OpenWRT (an open-source router OS) home networks, the NTNU campus Tor node, browser-fingerprint tracking, and the right to opt out of the national health-insurance database, to a 2026 privacy guide that spans individuals and organizations. Technical sessions alternate with everyday ones, so developers, journalists, and civil-society groups can all find something that fits.
+#### Aug 8 afternoon, the ETHTaipei co-organized anonymous-payments session (`TR-511`)
+
+Five talks push the technical depth to the protocol level, from zero-knowledge proofs with the Citizen Digital Certificate, privacy-preserving KYC, and on-chain stealth addresses, through to private crypto flows and a hands-on workshop. These are on the technical side, so if you have no blockchain background, start with the plain-language morning talks and decide from there. The morning primers cover "why you'd use this" and these afternoon talks carry on into "how it's built": NGOs and journalists can learn the privacy risks in donations and money flows, developers get the protocol-level implementations, and you are welcome to move between the two tracks.
+
+#### Aug 9 all day, seven accepted talks (`TR-510`)
+
+Topics run from how the internet and censorship work, through OpenWRT (an open-source router OS) home networks, the NTNU campus Tor node, browser-fingerprint tracking, and the right to opt out of the national health-insurance database, to a 2026 privacy guide that spans individuals and organizations. Technical sessions alternate with everyday ones, so developers, journalists, and civil-society groups can all find something that fits.
 
 ## Where to start, by who you are
 

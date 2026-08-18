@@ -138,7 +138,7 @@ OONI 的公開資料目前沒有被大量惡意污染，看到的異常多半來
 |---|---|
 | 啟發式（heuristic） | 一組簡單、成本低的判斷規則，不追求完美，先把可疑的量測篩出來 |
 | OONI Probe | OONI 的手機與桌面 app，會去連一份網站清單、回報每個網站在當地連不連得上 |
-| probe | 執行量測的那台裝置或那支程式 |
+| probe | 執行量測的裝置或程式 |
 | `probe_cc` | probe 回報的國碼（country code） |
 | `probe_asn` | probe 回報的 ASN |
 | ASN | 自治系統編號（Autonomous System Number），一段 IP 位址的管理單位，通常對應一家 ISP 或機構 |
