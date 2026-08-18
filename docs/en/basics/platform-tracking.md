@@ -26,6 +26,20 @@ The inference does not need your voice. A few of the mechanisms that produce the
 
 None of that requires a microphone.
 
+## Data brokers have names and enforcement records
+
+The EFF report linked above is from 2019, and the enforcement record has filled in since. The US Federal Trade Commission (FTC) has acted against five location brokers since 2022, each over data that traced people to sensitive places[^ftc-brokers]:
+
+- Kochava, sued in August 2022 over location data the FTC alleged came from hundreds of millions of mobile devices, settled in May 2026 with a ban on selling location data without affirmative express consent
+- X-Mode Social and Outlogic, January 2024, the FTC's first order prohibiting the sale of sensitive location data, with deletion of the historical datasets required
+- InMarket Media, January 2024, for embedding location SDKs in its own and third-party apps
+- Gravy Analytics and Venntel, December 2024
+- Mobilewalla, December 2024
+
+Gravy Analytics was itself breached in January 2025. An attacker reached the company's AWS environment through a misappropriated key, the intrusion was identified on 4 January, and the database covered billions of devices worldwide. At least 30 million location points leaked publicly, with coordinates at the White House, the Kremlin, Vatican City, and military bases, from apps including Tinder, Grindr, Candy Crush, MyFitnessPal, and FlightRadar[^gravy].
+
+Much of that location data came through the real-time bidding (RTB) ad auction, and some was inferred from IP addresses[^gravy]. An embedded SDK is only one of the routes. On the RTB path, an app's own developers need not know where their users' coordinates end up, no permission prompt covers that layer, and resetting an advertising identifier does not close it.
+
 ## What the evidence on microphones actually says
 
 ### Human review of voice assistants is real, and narrower than the rumor
@@ -51,7 +65,7 @@ On iOS 14 and later, an orange dot in the status bar means an app is using the m
 The tracking mechanics are global. What differs across Sinophone Asia-Pacific is how directly the collected profile resolves to a legal person.
 
 - **Real-name registration closes the gap.** Where SIM cards and major platform accounts are bound to identity documents by law, an advertising profile is not a pseudonymous blob; it attaches to a named individual whom local authorities can query. See [metadata](./metadata.md) for the same point about communication records.
-- **The data can be compelled, not just sold.** In the commercial-surveillance frame that most English-language guidance assumes, the worst case is a data broker. Where platforms operate under local data-localization and disclosure obligations, the same profile is reachable by legal process.
+- **The data can be compelled, not just sold**: in the commercial-surveillance frame that most English-language guidance assumes, the worst case is a data broker. Where platforms operate under local data-localization and disclosure obligations, the same profile is reachable by legal process.
 - **Contact upload spreads exposure to people who never consented.** Your phone number can already sit in a platform's graph because someone else uploaded their address book, which matters more where a number maps to an identity document.
 
 ### Mainland Chinese platforms add a further layer
@@ -110,3 +124,5 @@ Platform settings and policies change every few months. The mechanisms are durab
 [^apple-dot]: [About the orange and green indicators in your iPhone status bar](https://support.apple.com/en-us/108331){target="_blank"} — Apple Support.
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} — Apple Support.
 [^google-adid]: [Advertising ID](https://support.google.com/googleplay/android-developer/answer/6048248){target="_blank"} — Google Play Help; deletable from Android 12, after which apps receive zeros.
+[^ftc-brokers]: The five FTC actions: [FTC Sues Kochava](https://www.ftc.gov/news-events/news/press-releases/2022/08/ftc-sues-kochava-selling-data-tracks-people-reproductive-health-clinics-places-worship-other){target="_blank"} (29 August 2022) and [FTC to Ban Kochava and Subsidiary](https://www.ftc.gov/news-events/news/press-releases/2026/05/ftc-ban-kochava-subsidiary-selling-sensitive-location-data){target="_blank"} (settlement, 7 May 2026); [X-Mode Social and Outlogic](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data){target="_blank"} (January 2024); [InMarket Media](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-will-ban-inmarket-selling-precise-consumer-location-data){target="_blank"} (January 2024); [Gravy Analytics and Venntel](https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-takes-action-against-gravy-analytics-venntel-unlawfully-selling-location-data-tracking-consumers){target="_blank"} (December 2024); [Mobilewalla](https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-takes-action-against-mobilewalla-collecting-selling-sensitive-location-data){target="_blank"} (December 2024). EFF's [Federal Regulators Limit Location Brokers from Selling Your Whereabouts](https://www.eff.org/deeplinks/2024/12/federal-regulators-limit-location-brokers-selling-your-whereabouts-2024-review){target="_blank"} reviews the set. Verified 2026-08-18.
+[^gravy]: [Gravy Analytics data broker breach threatens the privacy of millions](https://techcrunch.com/2025/01/13/gravy-analytics-data-broker-breach-trove-of-location-data-threatens-privacy-millions/){target="_blank"} — Zack Whittaker, TechCrunch, 13 January 2025. Source for the breach account, the leaked volume, the apps involved, and the real-time-bidding and IP-inference collection routes. Verified 2026-08-18.
