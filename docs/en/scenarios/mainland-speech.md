@@ -64,17 +64,29 @@ There is no configuration that satisfies all four. The workable move is deciding
 
 These are described to make the trade-offs legible, not as an operational guide.
 
-**Linguistic and format variation** (homophones, character splitting, coded terms, text rendered as images) is the best-known family. It costs readability, which keeps it inside the bubble, and its effectiveness is declining, since the OCR and visual-similarity matching described above already cover most variants. Treating it as reliable protection produces false confidence, and the person acting on that confidence carries the consequence.
+#### Linguistic and format variation
 
-**Private and small-scale distribution** exposes far less than public posting and is the most balanced option on risk against effect, bounded by limited scale and by group administrator liability.
+Homophones, character splitting, coded terms, and text rendered as images make up the best-known family. It costs readability, which keeps it inside the bubble, and its effectiveness is declining, since the OCR and visual-similarity matching described above already cover most variants. Treating it as reliable protection produces false confidence, and the person acting on that confidence carries the consequence.
 
-**Delay.** Scrutiny and attention both peak during a news cycle, so waiting reduces risk at the cost of the timeliness that gives material its reach.
+#### Private and small-scale distribution
 
-**Reframing** in officially acceptable terms (consumer rights, public safety, regulatory enforcement) improves survival and reception, at the cost of narrowing the issue until some of it can no longer be said.
+Sharing one-to-one or in small groups exposes far less than public posting and is the most balanced option on risk against effect, bounded by limited scale and by group administrator liability.
 
-**Routing to an existing channel.** Giving material to an account or outlet that already carries this risk keeps the original source out of view. It is among the lowest-exposure options, provided you trust their operational security and understand that the material itself may carry markers pointing to you. See [journalists and source protection](./journalist.md) on consent and on keeping sources apart.
+#### Delay
 
-**Archiving outside the jurisdiction** before publishing, so a copy survives deletion. Lowest cost, most certain effect, and the subject of the next section.
+Scrutiny and attention both peak during a news cycle, so waiting reduces risk at the cost of the timeliness that gives material its reach.
+
+#### Reframing
+
+Putting the same thing in officially acceptable terms (consumer rights, public safety, regulatory enforcement) improves survival and reception, at the cost of narrowing the issue until some of it can no longer be said.
+
+#### Routing to an existing channel
+
+Giving material to an account or outlet that already carries this risk keeps the original source out of view. It is among the lowest-exposure options, provided you trust their operational security and understand that the material itself may carry markers pointing to you. See [journalists and source protection](./journalist.md) on consent and on keeping sources apart.
+
+#### Archiving outside the jurisdiction
+
+Storing a copy outside the jurisdiction before publishing means it survives deletion. Lowest cost, most certain effect, and the subject of the next section.
 
 ## Talking to people you know
 
@@ -128,6 +140,7 @@ Submitting material to these projects usually preserves it more reliably than re
 - [Journalists and source protection](./journalist.md) — including the mainland China section on interviewees and in-country collaborators
 - [Cross-border travel and device searches](./asia-travel.md) — blocking conditions, SIM registration, and border inspection
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — what changing accounts does and does not cover
+- [How platforms collect your data](../basics/platform-tracking.md) — the platform-side collection and behavioral signals underneath all of this
 - [Threat modeling](../basics/threat-model.md) — the adversary and the cost you can absorb, per action
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} — US Library of Congress, Global Legal Monitor, July 2025. Translated measures at [China Law Translate](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"}. Verified 2026-08.
