@@ -94,9 +94,11 @@ MD_ICON_RE = re.compile(r":[a-z0-9_-]+:")
 # 半形冒號要求後面有空白，避免命中 a:b 這類非句構寫法；全形冒號本身就帶字距，
 # 中文標題「標題：說明」不會有空白。
 TITLE_COLON_BODY_RE = re.compile(r"\S:\s+\S|\S：\s*\S")
-# 編號式標題不算冒號句構：Workshop 1: …、Step 2: …、第 3 天：…。那是列舉的序號，
-# 不是拿冒號代替一句完整的話。判準是冒號前只有一個詞加一個數字。
-NUMBERED_HEADING_RE = re.compile(r"^\s*\S{1,12}\s*\d+\s*[:：]")
+# 編號式標題不算冒號句構：Workshop 1: …、Step 2: …、第 3 天：…、步驟一：…、
+# Option A: …。那是列舉的序號，不是拿冒號代替一句完整的話。判準是冒號前只有一個
+# 詞加一個序號，序號可以是阿拉伯數字、中文數字，或單一個大寫拉丁字母。
+NUMBERED_HEADING_RE = re.compile(
+    r"^\s*\S{1,12}\s*(?:\d+|[一二三四五六七八九十百]+|[A-Z])\s*[:：]")
 
 
 def has_title_colon(clean: str) -> bool:

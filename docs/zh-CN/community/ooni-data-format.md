@@ -49,7 +49,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
 批次处理大量资料时，AWS S3 公开资料集的效率较高，作法见 [ASN 观测资料撷取与分析](./asn-coverage-howto.md)。
 
-## 外壳：谁在哪里测的
+## 外壳记录谁在哪里测的
 
 外壳层的栏位在所有测项中一致，其中常用者如下：
 
@@ -73,7 +73,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
     OONI 刻意不收集测量者的真实 IP，`probe_ip` 固定写入本机位址。回溯测量来源只能仰赖 `probe_asn` 与时间，[OONI Run v2 操作说明](../tools/ooni-run-v2.md) 针对同一条隐私边界另有提醒。
 
-## 判定：测量得出的结论
+## 判定是测量得出的结论
 
 判定栏位全部收在 `test_keys` 底下，其计算基础是双边对照。Probe 测完之后，OONI 架设在外部网络的测量服务器（test helper）会对同一个网址再测一次，两边结果的差异即为判定依据。test helper 那一侧的纪录收在 `test_keys.control`，下表的「对照组」即指该侧纪录。
 
@@ -114,7 +114,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
     认定封锁需以跨时间、跨 ASN、跨解析器的多笔测量交叉比对。判定机制的完整拆解与常见误判来源见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)，资料集层级的品质控制见 [OONI 如何分辨坏掉的量测资料](../blog/posts/2026-ooni-faulty-measurements.md)。
 
-## 证据：支撑结论的原始纪录
+## 证据是支撑结论的原始纪录
 
 `test_keys` 底下另有数个栏位，纪录测量过程中的每一次网络操作，各对应一份规格：
 

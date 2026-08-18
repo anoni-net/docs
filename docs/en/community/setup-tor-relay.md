@@ -10,7 +10,7 @@ How to install and run a Tor middle relay, written from the operating experience
 
 !!! warning "Considerations before you start"
 
-    If you are not yet familiar with how Tor works, start with [What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"} and [Types of relays on the Tor network](https://community.torproject.org/relay/types-of-relays/){target="_blank"} on the Tor Project's own site. They keep those current in a way we cannot match.
+    If you are not yet familiar with how Tor works, start with [What is Tor?](../tools/what-is-tor.md) and [Types of relays on the Tor network](https://community.torproject.org/relay/types-of-relays/){target="_blank"} on the Tor Project's own site. They keep those current in a way we cannot match.
 
     <figure markdown="span">
         <a target="_blank"

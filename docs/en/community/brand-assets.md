@@ -268,7 +268,7 @@ Two fields in drawio Desktop's save dialog matter:
 | Filename | `xxx.drawio.svg`, the conventional double extension |
 | Format dropdown | **Editable Vector Image (.drawio.svg)** |
 
-**The format dropdown is what decides.** A filename ending `.drawio.svg` saved with the format set to plain SVG produces a file that looks right and has no XML. This is the easiest mistake to make.
+The format dropdown is what decides. A filename ending `.drawio.svg` saved with the format set to plain SVG produces a file that looks right and has no XML. This is the easiest mistake to make.
 
 drawio Desktop usually defaults to `.drawio`, which is pure XML that browsers cannot display, so switch the format manually when creating a file, or change the default permanently in Preferences.
 

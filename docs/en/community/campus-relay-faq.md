@@ -1,10 +1,10 @@
 ---
-title: "Campus Tor Relay: An FAQ for University Administrators and Legal Counsel"
+title: Campus Tor Relay, an FAQ for university administrators and legal counsel
 description: The ten concerns IT centres, legal offices, and network administrators raise about running a Tor relay on campus, with suggested responses. Attach it to a proposal, or send it ahead of a meeting.
 icon: material/chat-question-outline
 ---
 
-# :material-chat-question-outline: Campus Tor Relay: An FAQ for University Administrators and Legal Counsel
+# :material-chat-question-outline: Campus Tor Relay, an FAQ for university administrators and legal counsel
 
 This FAQ collects the ten questions university IT centres, legal offices, and network administrators most often raise about running a Tor relay on campus. It derives from the [campus Tor relay proposal template](./campus-tor-relay-proposal.md), and works as an appendix to a proposal or as reading sent ahead of a meeting.
 
