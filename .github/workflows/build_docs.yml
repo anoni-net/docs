@@ -41,7 +41,21 @@ jobs:
       run:
         working-directory: ./docs
     steps:
+      # 每個會連網的步驟各自設 timeout-minutes，把建置的上界壓在正常耗時（約 5 分鐘）
+      # 的數倍以內。2026-08-18 有一次 `apt-get update` 卡了兩小時，workflow 當時沒有
+      # 任何上界，那個 run 就一直佔著 build-docs-s3 這組 concurrency，期間所有發布都
+      # 排隊卡死，最後靠人工察覺才取消。GitHub 預設的 360 分鐘等於沒有保護。
+      #
+      # 刻意不用 job 層的 timeout-minutes：job 層逾時可能落在 `Clean the all files`
+      # 與 `Upload to S3` 之間，那正是上面 concurrency 註解要避開的狀況，會留下一個
+      # 空的 bucket。逐步設定的話，逾時只會發生在碰 S3 之前，最壞是這次沒部署成功，
+      # 站上維持上一版。
+      #
+      # 碰 S3 的兩步與其後的 Cloudflare 清除不設上界，理由同上，寧可讓它們跑完。
+      # 純本機運算的步驟（Test cache purge script、Show packages、Verify onion output
+      # 等）也不設，它們沒有卡住的來源，設了只是雜訊。
       - name: Checkout
+        timeout-minutes: 10
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -54,10 +68,13 @@ jobs:
         run: sh ./replace_sitename_anoni_onion.sh
 
       - name: Update libs
+        timeout-minutes: 5
         run: sudo apt-get update
       - name: Install ca
+        timeout-minutes: 5
         run: sudo apt-get install ca-certificates
       - name: Set up Python
+        timeout-minutes: 10
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
@@ -68,8 +85,10 @@ jobs:
         run: python3 ../tools/test_cf_purge.py
 
       - name: Install uv
+        timeout-minutes: 10
         uses: astral-sh/setup-uv@v8.1.0
       - name: Sync Packages
+        timeout-minutes: 10
         run: uv sync --group=dev
       - name: Show packages
         run: uv tree
@@ -91,6 +110,7 @@ jobs:
       # 依 variant 分開存，最後再留一層不分 variant 的 fallback：鏡像的是第三方外部
       # 資產，兩個變體抓到的內容其實一樣，新增的 onion 格不必從零開始重抓一輪。
       - name: Cache privacy plugin external assets
+        timeout-minutes: 10
         uses: actions/cache@v6
         with:
           path: docs/.cache/plugin/privacy
@@ -100,18 +120,23 @@ jobs:
             mkdocs-privacy-
 
       - name: Install mkdocs-material social dependencies
+        timeout-minutes: 10
         run: sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
       # zh-TW 只建一份，就在根路徑。曾經另外跑 run_zh-tw.sh 建一棵 /docs/zh-tw/，
       # 內容與根路徑逐位元組相同，只為了讓語言選單有對稱的網址。兩棵樹各自
       # self-canonical 又各自進 sitemap，等於自己製造重複內容。選單改填 /docs/ 之後
       # 那棵樹沒有存在理由。舊網址由 Cloudflare Redirect Rule 301 導回 /docs/。
       - name: Build Docs (/)
+        timeout-minutes: 20
         run: source ./.venv/bin/activate; sh ./run.sh;
       - name: Build Docs (/zh-cn)
+        timeout-minutes: 20
         run: source ./.venv/bin/activate; sh ./run_zh-cn.sh;
       - name: Build Docs (/en)
+        timeout-minutes: 20
         run: source ./.venv/bin/activate; sh ./run_en.sh;
       - name: Replace OG images
+        timeout-minutes: 10
         run: |
           # output 結構已改為依年份 blog/YYYY/MM/
           for base in ./output ./output/en; do
