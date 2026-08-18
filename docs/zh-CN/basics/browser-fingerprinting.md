@@ -43,7 +43,7 @@ EFF 在 2010 年的 Panopticlick 研究收集了 470,161 个浏览器样本，�
 
 ### 伪装做不完整反而更好认
 
-Pierre Laperdrix 替 Tor Project 写的指纹介绍文章把问题称为可指纹化的隐私增强技术悖论（Paradox of Fingerprintable Privacy Enhancing Technologies）。举的例子是某个扩展程序改掉一批数值，却漏改 `navigator.platform`，造出一组现实中不存在的特征组合，用户反而更容易被辨认出来[^tor]。
+Pierre Laperdrix 替 Tor Project 写的指纹介绍文章引用 Eckersley 的说法，把问题称为可指纹化的隐私增强技术悖论（Paradox of Fingerprintable Privacy Enhancing Technologies）。举的例子是某个扩展程序改掉一批数值，却漏改 `navigator.platform`，造出一组现实中不存在的特征组合，用户反而更容易被辨认出来[^tor]。
 
 ### 跟踪者用的是模糊比对
 
@@ -148,9 +148,9 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 [^google2019]: [Building a more private web](https://blog.google/products-and-platforms/products/chrome/building-a-more-private-web/){target="_blank"} - Justin Schuh，Google，2019 年 8 月 22 日。原文为「Unlike cookies, users cannot clear their fingerprint, and therefore cannot control how their information is collected. We think this subverts user choice and is wrong.」查证日 2026-08-18。
 [^eckersley]: [How Unique Is Your Web Browser?](https://coveryourtracks.eff.org/static/browser-uniqueness.pdf){target="_blank"} - Peter Eckersley，Electronic Frontier Foundation，PETS 2010。470,161 个样本、83.6% 唯一、18.1 bits 熵的数字出自此文。
-[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} - Pierre Laperdrix，The Tor Project，2019 年 9 月 4 日。一致化路线、letterboxing 与可指纹化隐私增强技术悖论出自此文，文中的具体做法对应撰文当时的 Tor Browser 版本。
+[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} - Pierre Laperdrix，The Tor Project，2019 年 9 月 4 日。一致化路线与 letterboxing 出自此文，该悖论一词由此文引自 Eckersley 的 PETS 2010 论文。文中的具体做法对应撰文当时的 Tor Browser 版本。
 [^fpstalker]: [FP-STALKER: Tracking Browser Fingerprint Evolutions](https://inria.hal.science/hal-01652021v1){target="_blank"} - Vastel、Laperdrix、Rudametkin、Rouvoy，IEEE S&P 2018。近十万组指纹、1,900 个浏览器实例、平均跟踪 54.48 天的数字出自此文。
-[^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隐私更新第 4 篇，2020 年。farbling 的定义与种子机制出自此文。
+[^farbling]: [Fingerprinting defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隐私更新第 4 篇，2020 年。farbling 的定义与种子机制出自此文。
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} - Brave 隐私更新第 38 篇。`1.93` 版的三项防护出自此文。
 [^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} - WebKit Blog，2024 年 7 月 16 日。Safari `17.0` 起的进阶指纹防护、噪声注入范围与屏幕尺寸对齐的说明出自此文。
 [^webkit26]: [WebKit Features in Safari 26.0](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/){target="_blank"} - WebKit Blog，2025 年 9 月 15 日。指纹脚本拦截挡下的 API 清单出自此文，该层属于智能防跟踪、由「防止跨网站跟踪」控制的说明来自 Apple 工程师的公开回复，见 [Safari 26 advanced fingerprinting protection](https://lapcatsoftware.com/articles/2025/9/4.html){target="_blank"} 的追查记录。查证日 2026-08-18。
