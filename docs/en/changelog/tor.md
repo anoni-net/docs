@@ -8,6 +8,17 @@ icon: simple/torbrowser
 
 Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tor Browser 15.0.20
+
+> 2026-08-18 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}
+
+- A small release focused on Firefox security fixes.
+- Rebased the Firefox base onto 140.14.0esr (tor-browser#45204); desktop and Android GeckoView also moved to 140.14.0esr.
+- Backported security fixes from Firefox 154 (tor-browser#45219).
+- Updated libevent to 2.1.13 in the build toolchain (tor-browser-build#41839).
+- Updated Go to 1.25.13 for Windows, Linux, and Android builds.
+- Updated the torbrowser.gpg keyring with a new subkey and a revised expiration date for the main key (tor-browser-build#41850).
+
 ## Tor Browser 16.0a9 (alpha)
 
 > 2026-07-23 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a9/){target="_blank"}

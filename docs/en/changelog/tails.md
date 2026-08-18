@@ -8,6 +8,17 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.10.1
+
+> 2026-08-05 · [Upstream announcement](https://tails.net/news/version_7.10.1/){target="_blank"}
+
+- Emergency security release fixing critical flaws in the Linux kernel and the expat XML library.
+- The kernel is updated to 6.12.100, fixing CVE-2026-64560, which could let Tor Browser inside Tails gain administrator privileges. A malicious website that exploits it could fully compromise Tails and deanonymize the user. The attack is unlikely and would take a strong adversary such as a government or a hacking firm; no active exploitation has been observed.
+- The expat XML library is updated to 2.8.2, fixing DSA-6404-1, a set of flaws that could let applications using expat gain administrator privileges. Opening a malicious file in LibreOffice, Audacity, or Git could lead to the same full compromise and deanonymization. No active exploitation has been observed.
+- USB images and automatic upgrades are 70 MB smaller after removing unused firmware.
+- Automatic upgrades are now compressed with zstd for a faster startup, matching what the USB image has done since Tails 7.0.
+- This is a security-only release that keeps 7.10's software set. Automatic upgrades are available from Tails 7.0 or later.
+
 ## Tails 7.10
 
 > 2026-07-23 · [Upstream announcement](https://tails.net/news/version_7.10/){target="_blank"}

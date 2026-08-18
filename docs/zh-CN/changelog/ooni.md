@@ -8,6 +8,20 @@ icon: material/access-point-network
 
 [OONI](../tools/what-is-ooni.md) Probe、Explorer、Run 等网络审查观测工具的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## OONI Probe 6.2.0
+
+> 2026-08-13 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.0){target="_blank"}
+
+- 量测引擎升至 OONI Probe CLI v3.30.0，是 6.x 系列首次更动引擎版本，先前各版皆停在 v3.29.0。
+- Android 版新增 app 内语言切换，与桌面版在 6.1.1 已有的功能对齐。
+- 强化离线处理与重试机制。量测提交遇到无法解析的报告会妥善处理，写文件改为原子操作。
+- 匿名凭证（anonymous credentials）新增管理界面与重置功能。
+- Passport 升至 0.1.5，支持 proxy 与超时设定。
+- macOS 与 iOS 的 secure storage 补上错误处理与重试机制。
+- 新增未读完成结果的计数查询索引。
+- 依赖项更新，Kotlin 升至 2.4.10，Android Gradle Plugin 升至 9.1.1。
+- 翻译更新。
+
 ## OONI Probe 6.1.1
 
 > 2026-07-07 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.1){target="_blank"}
