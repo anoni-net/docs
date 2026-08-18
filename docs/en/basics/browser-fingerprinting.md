@@ -6,9 +6,9 @@ icon: material/fingerprint
 
 # :material-fingerprint: A browser fingerprint cannot be cleared the way a cookie can
 
-Clear your cookies, open a private window, sign in with a different account, and a site can still recognise the machine. Nothing it relies on to do that is stored on your computer.
+Clear your cookies, open a private window, sign in with a different account, and a site can still recognize the machine. Nothing it relies on to do that is stored on your computer.
 
-Every time your browser loads a page, the JavaScript on that page can ask it dozens of questions. How large is the screen, which time zone is set, which fonts are installed, which graphics card is present, which features it supports. Each individual answer is shared with a lot of other people. The combination is often shared with nobody.
+Every time your browser loads a page, the JavaScript on that page can ask it dozens of questions. How large is the screen, which time zone is set, which fonts are installed, which graphics card is present, which features are supported. Each individual answer is shared with a lot of other people. The combination is often shared with nobody.
 
 !!! info "Start with Cover Your Tracks if the concept is new"
 
@@ -24,7 +24,7 @@ Chrome's own engineering leadership described the gap in 2019. Justin Schuh, the
 
 ## Dozens of small signals add up to one identifier
 
-- **Screen and window**: resolution, colour depth, window size, device pixel ratio
+- **Screen and window**: resolution, color depth, window size, device pixel ratio
 - **System settings**: time zone, language, operating system and version
 - **Font list**: every font you have installed can be enumerated, which makes designers' and developers' machines especially distinctive
 - **Graphics hardware**: GPU vendor and model, and the list of supported features, exposed through WebGL and WebGPU
@@ -39,7 +39,7 @@ Peter Eckersley's 2010 Panopticlick study collected 470,161 browser samples. Amo
 
 ### Websites need the same data the trackers use
 
-Font lists, screen dimensions, and graphics capability feed real decisions about layout and rendering. Refuse to answer any of it and some sites stop working. Every defence has to trade usability against identifying power, and where it draws that line decides how much it can accomplish.
+Font lists, screen dimensions, and graphics capability feed real decisions about layout and rendering. Refuse to answer any of it and some sites stop working. Usability and identifying power trade off in every defense, and where that line falls sets a ceiling on what the defense can do.
 
 ### Incomplete disguises make you easier to spot
 
@@ -51,19 +51,19 @@ Fingerprints shift as browsers update, screens change, and fonts get installed. 
 
 Changing one or two signals does not reliably break the link.
 
-## Two defences point in opposite directions
+## Three approaches exist, and two of them point in opposite directions
 
 ### Uniformity removes the entropy
 
-Report the same value for every user and that signal's identifying power drops to zero. Tor Browser takes this route, reporting one operating system across all platforms, normalising the time zone, and using letterboxing to pad content with grey margins so the viewport snaps to fixed dimensions rather than revealing the screen size[^tor].
+Report the same value for every user and that signal's identifying power drops to zero. Tor Browser takes this route, reporting one operating system across all platforms, normalizing the time zone, and using letterboxing to pad content with grey margins so the viewport snaps to fixed dimensions rather than revealing the screen size[^tor].
 
-It works only if the population is large and genuinely uniform, which is what an anonymity set means. The cost lands on the user: changing settings, installing extensions, or maximising the window all make you stand out from the crowd you depend on.
+It works only if the population is large and genuinely uniform, which is what an anonymity set means. The cost lands on the user: changing settings, installing extensions, or maximizing the window all make you stand out from the crowd you depend on.
 
 ### Randomization breaks the linkability
 
 Return a different value to every site, in every session. The value still carries information, but two sites cannot line up what they received, which defeats linkability rather than entropy. Brave's farbling and Safari's noise injection both work this way.
 
-Coverage has to be thorough for it to hold. Any signal left untouched becomes a stable anchor that undoes the randomised ones.
+Coverage has to be thorough for it to hold. Any signal left untouched becomes a stable anchor that undoes the randomized ones.
 
 ### Limiting the answer is a third option
 
@@ -73,11 +73,11 @@ Refuse to answer, or answer coarsely. Firefox disables the `WEBGL_debug_renderer
 
 | Browser | Default state | Main approach |
 |---------|---------------|---------------|
-| Tor Browser | Active in normal use | Uniformity |
-| Brave | Active in normal windows | Mostly randomization, uniformity for some fields |
+| Tor Browser | On in normal use | Uniformity |
+| Brave | On in normal windows | Mostly randomization, uniformity for some fields |
 | Safari | On in Private Browsing, optional for all browsing | Noise injection plus limited reporting |
 | Firefox | On in private windows and Strict mode | Script blocking plus limited reporting |
-| Chrome | No built-in protection in normal windows | None |
+| Chrome | Off, with no built-in protection in normal windows | None |
 
 **Tor Browser** pushes uniformity furthest, and the protection applies to everyone using it. The cost is a fixed window size and a slower connection, in exchange for anonymity at the connection layer that no other browser offers.
 
@@ -85,11 +85,11 @@ Refuse to answer, or answer coarsely. Firefox disables the `WEBGL_debug_renderer
 
 **Safari** has shipped advanced fingerprinting protection since `17.0`, adding small amounts of noise to canvas, WebGL readback, and WebAudio. It is on by default in Private Browsing, and a setting extends it to all browsing[^webkit].
 
-**Firefox** added a second layer in version `145`. Known fingerprinting scripts are blocked through the same list that powers Enhanced Tracking Protection, and scripts not on that list are handled by limiting API output instead. Both are on by default in private windows and in Enhanced Tracking Protection's Strict mode. Mozilla's own measurement puts the drop in users seen as unique at close to half, and enabling the protections for everyone is still in progress[^mozilla]. A separate preference, `privacy.resistFingerprinting`, follows Tor Browser's uniformity approach, and it is off unless a user turns it on in `about:config`.
+**Firefox** added a second layer in version `145`. Known fingerprinting scripts are blocked through the same list that powers Enhanced Tracking Protection, and scripts not on that list are handled by limiting API output instead. Both are on by default in private windows and in Enhanced Tracking Protection's Strict mode. Users seen as unique fall by close to half, according to Mozilla's own measurement, and enabling the protections for everyone is still in progress[^mozilla]. A separate preference, `privacy.resistFingerprinting`, follows Tor Browser's uniformity approach, and it is off unless a user turns it on in `about:config`.
 
 **Chrome** ships no fingerprinting protection in ordinary windows. IP Protection, rolling out from July 2025, applies to Incognito only, masks the IP address in third-party contexts, and explicitly does not address device fingerprinting[^ipprotection]. Privacy Sandbox, launched in 2019 with fingerprinting named as a problem to solve, wound down in April 2025 without shipping a fingerprinting-specific mitigation[^register].
 
-One policy shift is worth holding onto alongside that. On 18 December 2024, Google announced a change to its advertising platform policies that removed the prohibition on device fingerprinting, effective 16 February 2025[^policy]. The UK Information Commissioner's Office (ICO) responded the following day, calling the decision irresponsible and setting out that advertisers deploying fingerprinting still have to demonstrate transparency, freely given consent, and respect for erasure rights under data protection law[^ico].
+The same company's advertising policy moved in the opposite direction. On 18 December 2024, Google announced a change to its advertising platform policies that removed the prohibition on device fingerprinting, effective 16 February 2025[^policy]. In a response published the following day, the UK Information Commissioner's Office (ICO) called the decision irresponsible and set out that advertisers deploying fingerprinting still have to demonstrate transparency, freely given consent, and respect for erasure rights under data protection law[^ico].
 
 ## Measure your own browser first
 
@@ -108,7 +108,7 @@ Each tier notes what it leaves untouched.
 - **Switch to a browser that handles this by default**. Brave works out of the box, Firefox needs Enhanced Tracking Protection set to Strict, and Safari has a setting that extends the advanced protections to all browsing
 - **Do not stack up privacy extensions that alter fingerprint values**. A disguise with gaps produces a distinctive combination and works against the goal
 
-Left untouched: any account you sign into. Fingerprinting defences address unnamed cross-site correlation, and signing in tells the site who you are directly.
+Left untouched: any account you sign into. Fingerprinting defenses address unnamed cross-site correlation, and signing in tells the site who you are directly.
 
 ### Moderate effort
 
@@ -152,7 +152,7 @@ Browsers ship every few weeks, and defaults and feature names move with them. Wh
 [^fpstalker]: [FP-STALKER: Tracking Browser Fingerprint Evolutions](https://inria.hal.science/hal-01652021v1){target="_blank"} — Vastel, Laperdrix, Rudametkin, and Rouvoy, IEEE S&P 2018. Source for the sample size, the rate of fingerprint change, and the 54.48-day average tracking duration.
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} — Brave privacy update 4, 2020. Source for the definition of farbling and the seed mechanism.
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} — Brave privacy update 38. Source for the three protections shipped in version `1.93`.
-[^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} — WebKit Blog, 16 July 2024. Source for Safari's advanced fingerprinting protection from `17.0`, the scope of noise injection, and the screen-dimension normalisation.
+[^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} — WebKit Blog, 16 July 2024. Source for Safari's advanced fingerprinting protection from `17.0`, the scope of noise injection, and the screen-dimension normalization.
 [^mozilla]: [Firefox expands fingerprint protections: advancing towards a more private web](https://blog.mozilla.org/en/firefox/fingerprinting-protections/){target="_blank"} — The Mozilla Blog, 10 November 2025. Source for the two layers shipped in Firefox `145`, the modes they are enabled in, and the near-halving of users seen as unique.
 [^ipprotection]: [IP Protection](https://github.com/GoogleChrome/ip-protection/blob/main/README.md){target="_blank"} — GoogleChrome/ip-protection explainer. Scope limited to Incognito, masking the IP address in third-party contexts, with device fingerprinting out of scope. Verified 2026-08-18.
 [^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/){target="_blank"} — The Register, 16 April 2026. The claim that Privacy Sandbox shipped no fingerprinting mitigation is attributed there to privacy consultant Alexander Hanff; Google declined to comment.
