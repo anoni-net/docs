@@ -1,0 +1,30 @@
+{
+  "name": "anoni.net Docs 日本語版",
+  "id": "/docs/ja/",
+  "short_name": "anoni.net Docs",
+  "description": "台湾を拠点とするボランティア観測コミュニティ。OONI 観測、Tor リレー監視、現地の文脈をアジア太平洋の中国語圏から発信しています。",
+  "lang": "ja",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#00aeff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
