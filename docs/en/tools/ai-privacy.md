@@ -12,17 +12,17 @@ Specific policies change every few months, so the durable part is the set of que
 
 ## Where the text goes
 
-#### The provider sees plaintext
+### The provider sees plaintext
 
 A cloud model has to process your input to answer it. TLS protects the path, not the service. This is a different model from end-to-end encrypted messaging, where the operator cannot read content at all.
 
-#### Whether it trains the model depends on your tier
+### Whether it trains the model depends on your tier
 
 This is the distinction that decides most of the risk, and the major providers converge on it: consumer and free tiers may use your content for model improvement, usually with a setting to turn it off; business, team, and API tiers default to no training and offer a data processing agreement. OpenAI states that consumer service content may be used for training while ChatGPT Team, Enterprise, and the API are excluded by default[^openai]. Anthropic states that commercial services (Claude for Work, the API) do not use inputs or outputs for training, with consumer services offered as a user choice[^anthropic]. Google's Gemini Apps have their own activity and improvement controls[^google].
 
 Signing in with a company account on a business tier and signing in with a personal account on a free tier are materially different acts. The first is covered by a contract; the second is not.
 
-#### Deleting the conversation does not delete the data
+### Deleting the conversation does not delete the data
 
 This one is widely misunderstood, and the published retention periods make the point concretely:
 
@@ -32,11 +32,11 @@ This one is widely misunderstood, and the published retention periods make the p
 
 The practical consequence: set the training controls when you open the account, not after you've pasted something sensitive.
 
-#### Human review is normal
+### Human review is normal
 
 Quality evaluation and abuse detection generally involve people. Google states that a subset of conversations is reviewed by humans, including trained service providers, with chats disconnected from the account before review[^google]. The arrangement is reasonable; the assumption that "only a machine sees it" is not.
 
-#### Your employer can see the business-tier logs
+### Your employer can see the business-tier logs
 
 A business tier solves the vendor-training problem, not internal visibility. Administrators can typically access usage records, which is necessary for compliance and is a separate exposure for you. Using the company AI account for personal matters is the same category of mistake as using the company laptop for them.
 

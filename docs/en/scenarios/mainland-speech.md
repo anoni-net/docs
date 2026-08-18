@@ -64,27 +64,27 @@ There is no configuration that satisfies all four. The workable move is deciding
 
 These are described to make the trade-offs legible, not as an operational guide.
 
-#### Linguistic and format variation
+### Linguistic and format variation
 
 Homophones, character splitting, coded terms, and text rendered as images make up the best-known family. It costs readability, which keeps it inside the bubble, and its effectiveness is declining, since the OCR and visual-similarity matching described above already cover most variants. Treating it as reliable protection produces false confidence, and the person acting on that confidence carries the consequence.
 
-#### Private and small-scale distribution
+### Private and small-scale distribution
 
 Sharing one-to-one or in small groups exposes far less than public posting and is the most balanced option on risk against effect, bounded by limited scale and by group administrator liability.
 
-#### Delay
+### Delay
 
 Scrutiny and attention both peak during a news cycle, so waiting reduces risk at the cost of the timeliness that gives material its reach.
 
-#### Reframing
+### Reframing
 
 Putting the same thing in officially acceptable terms (consumer rights, public safety, regulatory enforcement) improves survival and reception, at the cost of narrowing the issue until some of it can no longer be said.
 
-#### Routing to an existing channel
+### Routing to an existing channel
 
 Giving material to an account or outlet that already carries this risk keeps the original source out of view. It is among the lowest-exposure options, provided you trust their operational security and understand that the material itself may carry markers pointing to you. See [journalists and source protection](./journalist.md) on consent and on keeping sources apart.
 
-#### Archiving outside the jurisdiction
+### Archiving outside the jurisdiction
 
 Storing a copy outside the jurisdiction before publishing means it survives deletion. Lowest cost, most certain effect, and the subject of the next section.
 

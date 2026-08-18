@@ -28,21 +28,21 @@ None of that requires a microphone.
 
 ## What the evidence on microphones actually says
 
-#### Human review of voice assistants is real, and narrower than the rumor
+### Human review of voice assistants is real, and narrower than the rumor
 
 Apple's August 2019 statement acknowledged that its Siri quality-evaluation process, which it calls grading, had contractors review under 0.2 percent of Siri request audio, including recordings produced by accidental activations. Apple suspended grading after the reporting, then made it opt-in, limited to Apple employees, with inadvertent-trigger recordings deleted[^apple-siri]. Amazon and Google ran comparable review programs in the same period. This is a real privacy failure, and it concerns a feature you deliberately authorized to listen for a wake word. It is not evidence that social apps record you continuously.
 
-#### Large-scale testing found no covert audio recording
+### Large-scale testing found no covert audio recording
 
 A 2018 study published in PETS instrumented 17,260 Android apps and looked for exactly this: apps enabling the microphone and exfiltrating audio without the user's knowledge. It found no evidence of that. What it did find was several apps recording the user's *screen* and sending the video to third parties, a behavior that required no permission on Android at the time[^panoptispy].
 
 That second finding is the useful one. The collection that is genuinely happening does not need the microphone, and triggers no permission prompt.
 
-#### "No evidence found" is not "proven absent"
+### "No evidence found" is not "proven absent"
 
 That study sampled Android in 2018 and its coverage of encrypted traffic was limited. In August 2024, 404 Media obtained a pitch deck from the US advertiser Cox Media Group claiming its "Active Listening" product could capture conversations through smart-device microphones for ad targeting, naming Facebook, Google, and Amazon as partners. Google dropped the company from its partner program when asked, and the company denied listening to conversations[^cmg]. What that establishes is that someone is selling the concept, not that the technique operates at scale.
 
-#### You can check for yourself
+### You can check for yourself
 
 On iOS 14 and later, an orange dot in the status bar means an app is using the microphone and a green dot means the camera[^apple-dot]; swipe down from Control Center to see which app. Android 12 and later shows the equivalent indicators plus a Privacy Dashboard listing microphone and camera access over the past 24 hours. If you suspect a specific app, watching the indicator for a few days beats speculating.
 
@@ -58,15 +58,15 @@ The tracking mechanics are global. What differs across Sinophone Asia-Pacific is
 
 WeChat, Douyin, Xiaohongshu, and Weibo differ from the global platforms above in three ways, and this applies to diaspora users of those apps too.
 
-#### The account resolves to a legal person
+### The account resolves to a legal person
 
 Accounts bind to a phone number and the number to an identity document, with the national Cyberspace ID added on top since July 2025. An ad profile that is a pseudonymous blob elsewhere is a named individual here.
 
-#### The data sits in-jurisdiction and is reachable by legal process
+### The data sits in-jurisdiction and is reachable by legal process
 
 For global platforms the worst case is usually a data broker. For mainland platforms the data is held domestically and is also within scope of lawful access requests. That is a difference in kind, not degree.
 
-#### The content is simultaneously censored
+### The content is simultaneously censored
 
 Citizen Lab's WeChat research found that keyword filtering is enabled only for accounts registered with a mainland phone number and persists after relinking to an international one, that images are filtered by both OCR and visual-similarity matching, and that blocking is invisible to the sender. Content between non-mainland accounts is analyzed as well, and has been used to train the censorship system[^wechat].
 

@@ -47,19 +47,19 @@ There is also ODoH (Oblivious DoH, `RFC 9230`), aimed squarely at the problem in
 
 Once queries are encrypted, one company receives all of them and knows who asked, what, and when.
 
-#### Jurisdiction
+### Jurisdiction
 
 Who can compel the operator to hand over data or to block a domain depends on where it is incorporated and where the servers sit. There is a real test case here: Quad9 has faced two European actions demanding it block domains — the German case brought by Sony Music ran until a favourable result in December 2023, and in December 2024 Canal+ filed a new one in France[^quad9-press]. Being registered in Switzerland does not confer immunity from another country's court order.
 
-#### What is logged and for how long
+### What is logged and for how long
 
 The specifics matter more than the phrase "we don't log". Cloudflare's stated commitments for `1.1.1.1` include not selling or sharing users' personal data, not using it to target advertising, not storing the user's IP address in non-volatile storage, and deleting the relevant logs within 25 hours[^cf-privacy].
 
-#### Whether anyone independent checked
+### Whether anyone independent checked
 
 A claim and an audited claim differ. Cloudflare states it retained one of the top four accounting firms to audit the practice and publish a report[^cf-privacy]. Reports of that kind assess stated practice at a point in time; they are not a continuing guarantee.
 
-#### Whether it filters
+### Whether it filters
 
 See below.
 
@@ -126,29 +126,29 @@ Firefox also has a mechanism by which a network can signal it to disable encrypt
 
 ## How to check you got it right
 
-#### Look at the shape of what you entered
+### Look at the shape of what you entered
 
 Against the table above: a hostname, a URL, or an IP decides whether it is encrypted. Windows is the exception, where what matters is the encryption dropdown.
 
-#### Look at which layer you changed
+### Look at which layer you changed
 
 System and browser settings are independent — a browser with DoH on leaves every other app on the system resolver. The home router and DHCP are a third layer, and putting `9.9.9.9` into a router gives zero encryption, because most consumer routers will not do DoT or DoH on your behalf and the LAN hop to the router was never encrypted anyway. Covering a whole home or office means confirming that the device itself supports an encrypted upstream.
 
-#### Test it once
+### Test it once
 
 The first two checks tell you what you typed; they cannot catch a silent fallback, a browser running its own resolver, or an app with one hardcoded. All three operators publish a check page: Cloudflare's [1.1.1.1/help](https://1.1.1.1/help){target="_blank"}, Quad9's [on.quad9.net](https://on.quad9.net/){target="_blank"}, and Mullvad's [connection check](https://mullvad.net/en/check){target="_blank"}. What you want is the resolver and encryption status it reports matching the operator you configured. Test once in your everyday browser and once outside it, since the two can differ.
 
 ## When it breaks
 
-#### Enterprise and campus networks
+### Enterprise and campus networks
 
 Internal domains only resolve against internal DNS, so sending queries outside makes internal resources vanish. Most operating systems allow disabling encrypted DNS per network or routing specific domains to an internal resolver; at organisational scale the right answer is conditional forwarding or split-horizon resolution, not telling everyone to switch it off.
 
-#### Captive portals
+### Captive portals
 
 Hotel and airport Wi-Fi that requires a login page relies on the network blocking outbound traffic before you authenticate, so encrypted DNS cannot resolve and the login page never appears. Most operating systems now detect and handle this. If you do have to turn it off manually, remember two things: while it is off your queries are fully readable to that network, so avoid anything sensitive during that window, and confirm you turned it back on the moment you are through — this step is easy to forget.
 
-#### Encrypted DNS blocked outright
+### Encrypted DNS blocked outright
 
 DoT's port 853 is trivially blocked. DoH is harder to block by port, but a network operator can still block a specific resolver's IPs and domains.
 
