@@ -43,7 +43,7 @@ Font lists, screen dimensions, and graphics capability feed real decisions about
 
 ### Incomplete disguises make you easier to spot
 
-Pierre Laperdrix, writing for the Tor Project, named this the Paradox of Fingerprintable Privacy Enhancing Technologies. His example is an extension that rewrites a batch of values but misses `navigator.platform`, producing a combination of traits that exists nowhere in reality and leaving the user easier to pick out than before[^tor].
+Pierre Laperdrix, writing for the Tor Project, cites what Eckersley called the Paradox of Fingerprintable Privacy Enhancing Technologies. His example is an extension that rewrites a batch of values but misses `navigator.platform`, producing a combination of traits that exists nowhere in reality and leaving the user easier to pick out than before[^tor].
 
 ### Trackers link fingerprints that have changed
 
@@ -148,7 +148,7 @@ Browsers ship every few weeks, and defaults and feature names move with them. Wh
 
 [^google2019]: [Building a more private web](https://blog.google/products-and-platforms/products/chrome/building-a-more-private-web/){target="_blank"} — Justin Schuh, Google, 22 August 2019. "Unlike cookies, users cannot clear their fingerprint, and therefore cannot control how their information is collected. We think this subverts user choice and is wrong." Verified 2026-08-18.
 [^eckersley]: [How Unique Is Your Web Browser?](https://coveryourtracks.eff.org/static/browser-uniqueness.pdf){target="_blank"} — Peter Eckersley, Electronic Frontier Foundation, PETS 2010. Source for the 470,161 samples, the 83.6% unique share, and the 18.1 bits of entropy.
-[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} — Pierre Laperdrix, The Tor Project, 4 September 2019. Source for the uniformity approach, letterboxing, and the Paradox of Fingerprintable Privacy Enhancing Technologies. The specific measures described there match the Tor Browser version current at the time of writing.
+[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} — Pierre Laperdrix, The Tor Project, 4 September 2019. Source for the uniformity approach and letterboxing, and for the Paradox of Fingerprintable Privacy Enhancing Technologies, which that piece credits to Eckersley, PETS 2010. The specific measures described there match the Tor Browser version current at the time of writing.
 [^fpstalker]: [FP-STALKER: Tracking Browser Fingerprint Evolutions](https://inria.hal.science/hal-01652021v1){target="_blank"} — Vastel, Laperdrix, Rudametkin, and Rouvoy, IEEE S&P 2018. Source for the sample size, the rate of fingerprint change, and the 54.48-day average tracking duration.
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} — Brave privacy update 4, 2020. Source for the definition of farbling and the seed mechanism.
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} — Brave privacy update 38. Source for the three protections shipped in version `1.93`.

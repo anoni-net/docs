@@ -41,7 +41,7 @@ EFF 在 2010 年的 Panopticlick 研究收集了 470,161 個瀏覽器樣本，�
 
 ### 偽裝做不完整反而更好認
 
-Pierre Laperdrix 替 Tor Project 寫的指紋介紹文章把問題稱為可指紋化的隱私增強技術悖論（Paradox of Fingerprintable Privacy Enhancing Technologies）。舉的例子是某個擴充套件改掉一批數值，卻漏改 `navigator.platform`，造出一組現實中不存在的特徵組合，使用者反而更容易被辨認出來[^tor]。
+Pierre Laperdrix 替 Tor Project 寫的指紋介紹文章引用 Eckersley 的說法，把問題稱為可指紋化的隱私增強技術悖論（Paradox of Fingerprintable Privacy Enhancing Technologies）。舉的例子是某個擴充套件改掉一批數值，卻漏改 `navigator.platform`，造出一組現實中不存在的特徵組合，使用者反而更容易被辨認出來[^tor]。
 
 ### 追蹤者用的是模糊比對
 
@@ -146,7 +146,7 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 [^google2019]: [Building a more private web](https://blog.google/products-and-platforms/products/chrome/building-a-more-private-web/){target="_blank"} - Justin Schuh，Google，2019 年 8 月 22 日。原文為「Unlike cookies, users cannot clear their fingerprint, and therefore cannot control how their information is collected. We think this subverts user choice and is wrong.」查證日 2026-08-18。
 [^eckersley]: [How Unique Is Your Web Browser?](https://coveryourtracks.eff.org/static/browser-uniqueness.pdf){target="_blank"} - Peter Eckersley，Electronic Frontier Foundation，PETS 2010。470,161 個樣本、83.6% 唯一、18.1 bits 熵的數字出自此文。
-[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} - Pierre Laperdrix，The Tor Project，2019 年 9 月 4 日。一致化路線、letterboxing 與可指紋化隱私增強技術悖論出自此文，文中的具體做法對應撰文當時的 Tor Browser 版本。
+[^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} - Pierre Laperdrix，The Tor Project，2019 年 9 月 4 日。一致化路線與 letterboxing 出自此文，該悖論一詞由此文引自 Eckersley 的 PETS 2010 論文。文中的具體做法對應撰文當時的 Tor Browser 版本。
 [^fpstalker]: [FP-STALKER: Tracking Browser Fingerprint Evolutions](https://inria.hal.science/hal-01652021v1){target="_blank"} - Vastel、Laperdrix、Rudametkin、Rouvoy，IEEE S&P 2018。近十萬組指紋、1,900 個瀏覽器實例、平均追蹤 54.48 天的數字出自此文。
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隱私更新第 4 篇，2020 年。farbling 的定義與種子機制出自此文。
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} - Brave 隱私更新第 38 篇。`1.93` 版的三項防護出自此文。
