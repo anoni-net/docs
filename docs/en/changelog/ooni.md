@@ -8,6 +8,20 @@ icon: material/access-point-network
 
 [OONI](https://ooni.org/){target="_blank"} Probe, Explorer, and Run release summaries. Newest at the top. Each entry links back to the full translation.
 
+## OONI Probe 6.2.0
+
+> 2026-08-13 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.0){target="_blank"}
+
+- Measurement engine moves to OONI Probe CLI v3.30.0, the first engine bump of the 6.x series after every earlier release stayed on v3.29.0.
+- Android adds in-app language selection, matching what desktop gained in 6.1.1.
+- Improved offline handling and retry logic. Unparseable reports are handled gracefully during submission, and file writes are now atomic.
+- Anonymous credentials gain a management UI and a reset function.
+- Passport updated to 0.1.5, with support for proxies and timeouts.
+- Secure storage on macOS and iOS gains error handling and a retry mechanism.
+- Added an indexed query for counting unviewed completed results.
+- Dependency updates: Kotlin to 2.4.10 and the Android Gradle Plugin to 9.1.1.
+- Updated translations.
+
 ## OONI Probe 6.1.1
 
 > 2026-07-07 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.1){target="_blank"}

@@ -8,6 +8,17 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 作業系統的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。
 
+## Tails 7.10.1
+
+> 2026-08-05 · [上游公告](https://tails.net/news/version_7.10.1/){target="_blank"}
+
+- 緊急安全更新，修補 Linux 核心與 expat XML 函式庫的重大漏洞。
+- 核心升至 6.12.100，修補 CVE-2026-64560。此漏洞可讓 Tails 內的 Tor Browser 取得管理員權限，造訪的惡意網站若成功利用，可能完整接管 Tails 並進行去匿名化。攻擊難度高，具備政府或商業駭客團隊等級的資源才辦得到，目前尚未發現實際被利用案例。
+- expat XML 函式庫升至 2.8.2，修補 DSA-6404-1 這組漏洞。使用 expat 的應用程式（LibreOffice、Audacity、Git 等）被誘導開啟惡意檔案時，可能被用來取得管理員權限，後續同樣可能導致接管與去匿名化。目前尚未發現實際被利用案例。
+- 移除未使用的 firmware，USB image 與自動升級檔各縮小 70 MB。
+- 自動升級改用 zstd 壓縮加快啟動，與 Tails 7.0 起 USB image 的做法一致。
+- 此版為安全專用釋出，沿用 7.10 的軟體組合。可從 Tails 7.0 以後版本自動升級。
+
 ## Tails 7.10
 
 > 2026-07-23 · [上游公告](https://tails.net/news/version_7.10/){target="_blank"}
