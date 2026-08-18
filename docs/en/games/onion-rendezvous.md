@@ -52,6 +52,7 @@ Red nodes represent relays already flagged as problematic. Real Tor path selecti
 
 ## Further reading
 
+- How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
 - Getting through when Tor is blocked: [Tor Snowflake bridges](../tools/tor-snowflake.md)
 - The other two works: [Interactive](index.md)
