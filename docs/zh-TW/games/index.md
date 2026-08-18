@@ -7,8 +7,8 @@ social:
 og:
   enabled: true
   image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-cube-outline: 互動與呈現

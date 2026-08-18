@@ -49,6 +49,20 @@ EFF 那份报告指出，平均一个网页会把数据分享给数十个第三�
 - **数据掮客**：专门买卖个人资料的公司，把来自不同来源的记录拼在一起再卖出
 - **实体通路**：会员卡、消费记录、信用卡交易数据，有些会与线上广告系统对接
 
+### 位置数据流到掮客手上的三条管道
+
+数据掮客是一整个产业。美国联邦贸易委员会（Federal Trade Commission，FTC）从 2022 年起对五家位置数据掮客执法，五件案子加起来可以看出三条取得管道，其中只有一条是用户看得到的[^ftc-brokers]。
+
+第一条是 SDK。X-Mode Social 把定位代码包进大约 400 个 app，其中包含祈祷 app Muslim Pro。X-Mode 的律师证实公司透过国防承包商把美国境内的手机数据卖给美军客户，Muslim Pro 由新加坡公司营运、下载数超过 9,800 万，在 Motherboard 报道后终止合作并否认把数据卖给军方[^xmode]。FTC 2024 年 1 月对 X-Mode 与 Outlogic 下的命令，是它第一次直接禁止一家公司贩售敏感位置数据，InMarket Media 同月因为同一类做法被处理。Kochava 是最早的一案，2022 年 8 月被起诉，理由是贩售的位置数据精确到可以追出谁去过生殖健康诊所、宗教场所这类地点，2026 年 5 月和解，往后未取得明确同意不得再贩售位置数据。
+
+第二条是广告竞价。app 把一个广告版位丢上实时竞价（real-time bidding，RTB）交易所拍卖时，出价请求会把设备的精确位置与广告标识符广播给每一个竞价方。Mobilewalla 从 2018 年 1 月到 2020 年 6 月收集到超过 5 亿组广告标识符与精确位置的配对，其中六成来自 RTB，出价没有中标的那些请求，数据照样留下来。FTC 2024 年 12 月的命令是它第一次认定留存未中标的竞价数据本身就构成不公平行为[^ftc-brokers]。
+
+第三条是直接批货。Gravy Analytics 向其他供应商成批买进位置数据，再用地理围栏圈出造访医疗机构与宗教场所的人做成名单卖出，子公司 Venntel 的客户是公部门与政府承包商。2025 年 1 月 Gravy 自己被黑，攻击者用盗用的密钥进入母公司 Unacast 的 AWS 环境，公开外流至少 3,000 万笔位置点，来源 app 包括 Tinder、Grindr、Candy Crush、MyFitnessPal 与 FlightRadar[^gravy]。
+
+三条管道里，app 开发者只能决定第一条，也就是要不要嵌入 SDK。走 RTB 与批货那两条的时候，开发者未必知道自己的用户被谁记录，设备上也不会跳出任何提示。Gravy 外泄的数据还有一部分是从 IP 地址推算的，那条路连 app 配合都不需要。下面〈你能做什么〉提到的关掉广告标识符，缩小的是你在整套系统里的轮廓，没办法把它关掉。
+
+台湾没有规模对应的裁罚记录可以对照。执法权目前分散在各目的事业主管机关，个人资料保护委员会还卡在组织法尚未三读，进度见 [2025 年个资法修法](../taiwan/pdpa-2025.md)。
+
 ## 精准广告怎么算出来的
 
 关键在于平台不需要知道你想买什么，只需要知道跟你相似的人买了什么。
@@ -116,13 +130,15 @@ EFF 那份报告指出，平均一个网页会把数据分享给数十个第三�
 
 Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆手机号注册的账号启用，改绑国际号码之后仍然持续，图片另有 OCR 与视觉相似度两套算法，被挡时发送者不会收到通知[^wechat]。机制的完整拆解见 [在中国大陆的公开平台传播信息](../scenarios/mainland-speech.md)。
 
-实际意义：关掉广告识别码、拒绝追踪等做法，对这些平台的效果比对境外平台小得多，因为问题不在广告追踪那一层。账号分层也一样，[怎么维持多个网络身分](./multiple-identities.md) 的方法以境外服务为前提，实名链路会抵销掉大部分效果，在这里真正用得上的是行为层的分开，也就是不同用途不共用同一个账号、不互相引用。
+### 这些差别的实际意义
+
+关掉广告识别码、拒绝追踪等做法，对这些平台的效果比对境外平台小得多，因为问题不在广告追踪那一层。账号分层也一样，[怎么维持多个网络身分](./multiple-identities.md) 的方法以境外服务为前提，实名链路会抵销掉大部分效果，在这里真正用得上的是行为层的分开，也就是不同用途不共用同一个账号、不互相引用。
 
 停用不是多数人的选项，仍在用的话，这几项调整的成本低、效果确定：
 
-- **限缩可见范围**。朋友圈与动态的可见对象、是否允许陌生人查看、历史内容的保留期限，都在隐私设定里
-- **关掉通讯录与位置权限**。通讯录上传同时暴露你的联系人，位置权限多数功能用不到
-- **降低自己在群聊里的可见度**。群成员名单、昵称、头像会被不认识的人看到，群组本身也在审查与管理责任的范围内
+- **限缩可见范围**：朋友圈与动态的可见对象、是否允许陌生人查看、历史内容的保留期限，都在隐私设定里
+- **关掉通讯录与位置权限**：通讯录上传同时暴露你的联系人，位置权限多数功能用不到
+- **降低自己在群聊里的可见度**：群成员名单、昵称、头像会被不认识的人看到，群组本身也在审查与管理责任的范围内
 - **敏感的事不在上面谈**，包含不用它约时间与主题
 
 ## 你能做什么
@@ -131,8 +147,8 @@ Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆�
 
 ### 低成本，现在就能做
 
-- **关掉广告识别码**。iPhone 走「设定 → 隐私与安全性 → 追踪」，关掉「允许 App 请求追踪」，之后请求追踪的 app 都取不到 IDFA[^apple-att]。Android 12 起可以直接删除广告 ID，删除后回传的是一串零[^google-adid]
-- **关掉通讯录上传**。同时保护你的联系人，他们没有同意被上传
+- **关掉广告识别码**：iPhone 走「设定 → 隐私与安全性 → 追踪」，关掉「允许 App 请求追踪」，之后请求追踪的 app 都取不到 IDFA[^apple-att]。Android 12 起可以直接删除广告 ID，删除后回传的是一串零[^google-adid]
+- **关掉通讯录上传**：同时保护你的联系人，他们没有同意被上传
 - **关掉精确位置**，多数 app 用大略位置就能运作
 - **检查权限清单**，麦克风、相机、位置、通讯录逐项看过，用不到的关掉
 
@@ -140,10 +156,10 @@ Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆�
 
 ### 中成本，要花一点时间
 
-- **浏览器隔离**。不同用途用不同浏览器 profile，挡掉一部分跨站关联，做法见 [怎么维持多个网络身分](./multiple-identities.md)
-- **挡第三方 cookie 与追踪器**。Firefox 的加强型追踪保护、Safari 的智慧型防追踪都是默认可用的选项
+- **浏览器隔离**：不同用途用不同浏览器 profile，挡掉一部分跨站关联，做法见 [怎么维持多个网络身分](./multiple-identities.md)
+- **挡第三方 cookie 与追踪器**：Firefox 的加强型追踪保护、Safari 的智慧型防追踪都是默认可用的选项
 - **DNS 层过滤**，见 [加密 DNS 怎么选、怎么确认真的生效](../tools/encrypted-dns.md)
-- **少用整合登入**。「用某某账号登入」会把两边的记录接起来
+- **少用整合登入**：「用某某账号登入」会把两边的记录接起来
 
 这一级处理掉上一级的跨站关联。挡不掉你主动登入使用的那个平台，它看得到的东西没有因此减少。
 
@@ -163,6 +179,7 @@ Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆�
 
 ## 接下来
 
+- [浏览器指纹是什么，为什么很难摆脱](./browser-fingerprinting.md)：把本页〈设备与连接〉那一段展开，说明指纹为什么清不掉、各家浏览器现在做到哪里
 - [监控现在做得到什么](./surveillance-capability.md)：把本页的平台层放进四层对照，说明各层实际做得到与做不到什么
 - [一般人平常该做到什么](../scenarios/everyday-baseline.md)：把本页的平台这一条线放回整体排序，对照诈骗与针对性调查两种对手
 - [Metadata 是什么，为什么重要](./metadata.md)：通讯与文件本身带的元数据，跟本页的平台侧收集互补
@@ -179,3 +196,6 @@ Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆�
 [^apple-dot]: [关于 iPhone 状态栏中的橙色和绿色指示灯](https://support.apple.com/zh-cn/108331){target="_blank"} - Apple 支持。
 [^apple-att]: [If an app asks to track your activity](https://support.apple.com/en-us/102420){target="_blank"} - Apple 支持。关闭后 app 无法取得 IDFA。
 [^google-adid]: [Advertising ID](https://support.google.com/googleplay/android-developer/answer/6048248){target="_blank"} - Google Play 说明。Android 12 起可删除广告 ID，删除后应用程序取得的是一串零。
+[^ftc-brokers]: FTC 的五次行动：[FTC Sues Kochava](https://www.ftc.gov/news-events/news/press-releases/2022/08/ftc-sues-kochava-selling-data-tracks-people-reproductive-health-clinics-places-worship-other){target="_blank"}（2022 年 8 月 29 日）与 [FTC to Ban Kochava and Subsidiary](https://www.ftc.gov/news-events/news/press-releases/2026/05/ftc-ban-kochava-subsidiary-selling-sensitive-location-data){target="_blank"}（2026 年 5 月 4 日和解）、[X-Mode Social 与 Outlogic](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data){target="_blank"}（2024 年 1 月）、[InMarket Media](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-will-ban-inmarket-selling-precise-consumer-location-data){target="_blank"}（2024 年 1 月）、[Gravy Analytics 与 Venntel](https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-takes-action-against-gravy-analytics-venntel-unlawfully-selling-location-data-tracking-consumers){target="_blank"}（2024 年 12 月）、[Mobilewalla](https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-takes-action-against-mobilewalla-collecting-selling-sensitive-location-data){target="_blank"}（2024 年 12 月）。RTB 机制的拆解见 FTC 技术博客 [Unpacking Real Time Bidding through FTC's case on Mobilewalla](https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/12/unpacking-real-time-bidding-through-ftcs-case-mobilewalla){target="_blank"}，5 亿组配对与六成来自 RTB 的数字见 [MediaPost 的报道](https://www.mediapost.com/publications/article/401568/ftc-restricts-mobilewalla-from-collecting-rtb-loca.html){target="_blank"}。整体回顾见 EFF 的 [Federal Regulators Limit Location Brokers from Selling Your Whereabouts](https://www.eff.org/deeplinks/2024/12/federal-regulators-limit-location-brokers-selling-your-whereabouts-2024-review){target="_blank"}。查证日 2026-08-18。
+[^xmode]: [Muslim Pro Stops Sharing Location Data After Motherboard Investigation](https://www.vice.com/en/article/muslim-pro-location-data-military-xmode/){target="_blank"} 与 [How the U.S. Military Buys Location Data from Ordinary Apps](https://www.vice.com/en/article/us-military-location-data-xmode-locate-x/){target="_blank"} - Motherboard，Vice，2020 年 11 月。X-Mode 的 SDK 涵盖约 400 个 app、Muslim Pro 传送位置数据、X-Mode 律师证实透过国防承包商卖给美军客户，以及 Muslim Pro 终止合作并否认的说明，出自这两篇报道。查证日 2026-08-18。
+[^gravy]: [Gravy Analytics data broker breach threatens the privacy of millions](https://techcrunch.com/2025/01/13/gravy-analytics-data-broker-breach-trove-of-location-data-threatens-privacy-millions/){target="_blank"} - Zack Whittaker，TechCrunch，2025 年 1 月 13 日。外泄经过、外流规模、涉及的 app，以及位置数据经由实时竞价与 IP 推算取得的说明出自此文。查证日 2026-08-18。

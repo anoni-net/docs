@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image: https://assets.anoni.net/games/tor-network-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-cube-outline: 互动与呈现
@@ -114,7 +114,7 @@ og:
             "@id": "https://anoni.net/docs/games/onion-routing/#work",
             "name": "Tor 路由解谜",
             "url": "https://anoni.net/docs/games/onion-routing/?lang=zh-cn",
-            "image": "https://assets.anoni.net/games/onion-routing.png",
+            "image": "https://assets.anoni.net/games/onion-routing-zh-cn.png",
             "description": "可操作的解谜。自行挑选 3 个中继组成 Tor 的 guard、middle、exit 路径，避开被监听的节点、将 3 跳分散到不同 ASN，遇到封锁则改走网桥。"
           }
         },
@@ -126,7 +126,7 @@ og:
             "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
             "name": "Tor 连线流量",
             "url": "https://anoni.net/docs/games/onion-rendezvous/?lang=zh-cn",
-            "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+            "image": "https://assets.anoni.net/games/onion-rendezvous-zh-cn.png",
             "applicationCategory": "EducationalApplication",
             "description": "以观看为主的呈现。用发光粒子与残影表现 Tor 流量的两种路径，连线 .onion 服务时双方各建一条 3 跳线路，在随机挑出的会合点相遇。"
           }
@@ -139,7 +139,7 @@ og:
             "@id": "https://anoni.net/docs/games/tor-network/#work",
             "name": "Tor 中继地球仪",
             "url": "https://anoni.net/docs/games/tor-network/?lang=zh-cn",
-            "image": "https://assets.anoni.net/games/tor-network.png",
+            "image": "https://assets.anoni.net/games/tor-network-zh-cn.png",
             "applicationCategory": "EducationalApplication",
             "description": "以真实数据构成的地球仪。将全球正在运行的近万台 Tor 中继落在各自的国界之内，另外整合连线受阻观测、用户估计、断网事件、海底电缆与上网人口，放大到台湾还有县市界、海缆登陆点、变电站、发电厂与电网。"
           }

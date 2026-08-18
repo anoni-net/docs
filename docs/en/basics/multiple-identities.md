@@ -96,7 +96,7 @@ Google Images, Yandex, TinEye, and PimEyes can reverse a single image, including
 
 Two accounts active in tightly overlapping windows are statistically suspicious, and researchers, journalists, and marketing analysts use this routinely. Stagger posting times, avoid posting from both accounts within the same hour, and note that travel timezone shifts moving in lockstep are their own fingerprint.
 
-### Stylometry picks up writing style and emoji
+### Stylometry recognizes the same author across pseudonyms
 
 Vocabulary, punctuation habits, and emoji use are individually distinctive, and entry-level stylometry tools can recognize the same author across pseudonyms. The goal is awareness rather than performing a different person:
 
@@ -126,7 +126,7 @@ The detection mechanism is covered under correlation above; what long-term maint
 
 ### Device and browser fingerprints
 
-The font list, screen resolution, timezone, and language settings a browser reports combine into a fingerprint that usually identifies a specific machine. Changing accounts without changing devices is changing the name but not the face. [VPN: risks and how to choose](../tools/vpn-guide.md) explains why a new IP does nothing for a fingerprint, and [Tor](https://www.torproject.org/){target="_blank"} takes the opposite approach by making all users look alike.
+The font list, screen resolution, timezone, and language settings a browser reports combine into a fingerprint that usually identifies a specific machine. Changing accounts without changing devices is changing the name but not the face. [A browser fingerprint cannot be cleared the way a cookie can](./browser-fingerprinting.md) covers what the fingerprint is made of and what each browser does about it. [VPN: risks and how to choose](../tools/vpn-guide.md) explains why a new IP does nothing for a fingerprint, and [Tor](https://www.torproject.org/){target="_blank"} takes the opposite approach by making all users look alike.
 
 A dedicated device for the highest-risk layer is expensive and still the most reliable isolation available.
 

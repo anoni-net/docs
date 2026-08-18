@@ -6,14 +6,14 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image: https://assets.anoni.net/games/tor-network-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-earth: Tor 中继地球仪
 
-![Tor 中继地球仪的画面，地球转到亚洲一侧，中继以彩色点分布在各国界内，左侧面板列出各国中继数与托管商排行](https://assets.anoni.net/games/tor-network-globe.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor 中继地球仪的画面，地球转到亚洲一侧，中继以彩色点分布在各国界内，左侧面板列出各国中继数与托管商排行](https://assets.anoni.net/games/tor-network-globe-zh-cn.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 三件作品之中数据最多的一件。它把散落在不同机构的公开数据放到同一颗球上，让「哪里架得起中继」与「哪里连得上 Tor」两件事得以并置对照。放大到台湾之后还多出一层，那些连线实际上依赖哪些实体设施。
 
@@ -27,7 +27,7 @@ og:
 
 ### 陆地亮度可以换四种指标
 
-![陆地亮度切换到共识权重之后的画面，国家标签改成显示百分比，德国 29.1%、瑞典 6.1%](https://assets.anoni.net/games/tor-network-weight.webp){style="border-radius: 10px;"}
+![陆地亮度切换到共识权重之后的画面，国家标签改成显示百分比，德国 29.5%、瑞典 6.1%](https://assets.anoni.net/games/tor-network-weight-zh-cn.webp){style="border-radius: 10px;"}
 
 - **中继台数**：该国托管的中继数量
 - **共识权重**：该国在 Tor 网络中实际承担的流量比重，与台数常有明显落差
@@ -38,7 +38,7 @@ og:
 
 ### 点国家标签展开信息卡
 
-![点开德国的信息卡，列出 1706 台、占全网 16.8%、权重 29.1%、角色组成、托管商与 OONI 测试结果](https://assets.anoni.net/games/tor-network-country.webp){style="border-radius: 10px;"}
+![点开德国的信息卡，列出 1715 台、占全网 16.9%、权重 29.5%、角色组成、托管商与 OONI 测试结果](https://assets.anoni.net/games/tor-network-country-zh-cn.webp){style="border-radius: 10px;"}
 
 卡片内容包含角色组成、带宽占比、运行官方建议版本的比例、主要托管商，以及该国在其他几份数据中的状况：用户估计、OONI 的异常率、网桥绕道的 pluggable transport 分布。
 
@@ -72,7 +72,7 @@ og:
 
 ## 放大到台湾
 
-![地球仪放大到台湾，县市界线与 345kV 输电线叠在岛上，中继以彩色点集中在西半部](https://assets.anoni.net/games/tor-network-taiwan.webp){style="border-radius: 10px;"}
+![地球仪放大到台湾，县市界线与 345kV 输电线叠在岛上，中继以彩色点集中在西半部](https://assets.anoni.net/games/tor-network-taiwan-zh-cn.webp){style="border-radius: 10px;"}
 
 台湾是这颗地球仪唯一做到县市尺度的地区，贴近之后会多出五层。左侧面板把台湾相关的信息独立成一区，按「关注台湾」会直接飞过去。
 
@@ -86,7 +86,7 @@ og:
 
 ### 用电那段可以换两种看法
 
-![左侧面板切到工业用电占比，新竹县以 80.4% 排在第一，台南市 78.5%、苗栗县 77.9% 跟在后面](https://assets.anoni.net/games/tor-network-industry.webp){style="border-radius: 10px;"}
+![左侧面板切到工业用电占比，新竹县以 80.4% 排在第一，台南市 78.5%、苗栗县 77.9% 跟在后面](https://assets.anoni.net/games/tor-network-industry-zh-cn.webp){style="border-radius: 10px;"}
 
 看售电量的话六都排在前面，换成工业用电占比，新竹县会跳到第一，科学园区的形状就出来了。园区横跨新竹市东区与新竹县宝山乡，行政上是分开的两列，看总量会被切成两半，看占比则不受影响。
 
@@ -123,7 +123,7 @@ og:
       "url": "https://anoni.net/docs/games/tor-network/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/tor-network/",
       "description": "以真实数据构成的地球仪。将全球正在运作的近万台 Tor 中继落在各自的国界之内，另外整合连线受阻观测、用户估计、断网事件、海底电缆与上网人口，放大到台湾还有县市界、海缆登陆点、变电站、发电厂与电网。",
-      "image": "https://assets.anoni.net/games/tor-network.png",
+      "image": "https://assets.anoni.net/games/tor-network-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "需要支持 WebGPU 或 WebGL2 的浏览器，免安装",

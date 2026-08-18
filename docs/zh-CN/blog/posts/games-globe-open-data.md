@@ -7,14 +7,14 @@ categories:
     - 技术
     - Tor
 slug: games-globe-open-data
-image: "https://assets.anoni.net/games/tor-network.png"
+image: "https://assets.anoni.net/games/tor-network-zh-cn.png"
 summary: "文档站新增「互动与呈现」区，用 3D 画面呈现匿名网络的基础建设。做地球仪的过程中查了二十几份公开数据，能用的只有六份。卡住的原因几乎都跟技术无关，API 大多打得通，挡下来的是条款不给再散布。这篇记录那些能用与不能用的数据，以及为什么开放许可比开放 API 更关键。"
 description: "文档站新增「互动与呈现」区，用 3D 画面呈现匿名网络的基础建设。做地球仪的过程中查了二十几份公开数据，能用的只有六份。卡住的原因几乎都跟技术无关，API 大多打得通，挡下来的是条款不给再散布。这篇记录那些能用与不能用的数据，以及为什么开放许可比开放 API 更关键。"
 ---
 
 # 把匿名网络画成一颗地球：互动区上线，以及我们在开放数据上撞到的墙
 
-![Tor 中继地球仪](https://assets.anoni.net/games/tor-network.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor 中继地球仪](https://assets.anoni.net/games/tor-network-zh-cn.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 文档站新增了[互动与呈现](../../games/index.md)区，目前放了三件作品，都以 Tor 为题。其中数据量最大的是 <a href="../../../../../games/tor-network/play/index.html?lang=zh-cn">Tor 中继地球仪</a>，把全球近万台运作中的中继标到球面上，超过六成集中在美国、德国、荷兰三个国家。
 

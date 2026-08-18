@@ -6,14 +6,14 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-rendezvous.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-rendezvous-zh-cn.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-lan: Tor 连线流量
 
-![Tor 连线流量的画面，多条发光曲线在深色背景中交织，白色的会合点与红色的有害节点散布其间](https://assets.anoni.net/games/onion-rendezvous-flow.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor 连线流量的画面，多条发光曲线在深色背景中交织，白色的会合点与红色的有害节点散布其间](https://assets.anoni.net/games/onion-rendezvous-flow-zh-cn.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 不用操作也能看的一件作品。画面上呈现的是 Tor 的两种流量路径，用细小的发光粒子与残影画出来，看得出数据包在哪几站之间移动。
 
@@ -68,7 +68,7 @@ og:
       "url": "https://anoni.net/docs/games/onion-rendezvous/play/?lang=zh-cn",
       "mainEntityOfPage": "https://anoni.net/docs/zh-cn/games/onion-rendezvous/",
       "description": "以观看为主的呈现。用发光粒子与残影表现 Tor 流量的两种路径，连线 .onion 服务时双方各建一条 3 跳电路，在随机挑出的会合点相遇。",
-      "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+      "image": "https://assets.anoni.net/games/onion-rendezvous-zh-cn.png",
       "inLanguage": ["zh-Hans", "zh-Hant", "en"],
       "applicationCategory": "EducationalApplication",
       "browserRequirements": "需要支持 WebGPU 或 WebGL2 的浏览器，免安装",

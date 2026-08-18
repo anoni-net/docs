@@ -7,14 +7,14 @@ categories:
     - Tech
     - Tor
 slug: games-globe-open-data
-image: "https://assets.anoni.net/games/tor-network.png"
+image: "https://assets.anoni.net/games/tor-network-en.png"
 summary: "The docs site now has an Interactive section that renders anonymity network infrastructure as 3D visuals. Building the relay globe meant checking more than twenty public datasets, of which only six were usable. Almost nothing failed for technical reasons - the endpoints worked, the terms did not allow redistribution. This is a record of what we could and could not use, and why an open licence matters more than an open API."
 description: "The docs site now has an Interactive section that renders anonymity network infrastructure as 3D visuals. Building the relay globe meant checking more than twenty public datasets, of which only six were usable. Almost nothing failed for technical reasons - the endpoints worked, the terms did not allow redistribution. This is a record of what we could and could not use, and why an open licence matters more than an open API."
 ---
 
 # Drawing an anonymity network onto a globe, the Interactive section and the open-data walls we hit
 
-![Tor Relay Globe](https://assets.anoni.net/games/tor-network.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![Tor Relay Globe](https://assets.anoni.net/games/tor-network-en.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 The docs site now has an [Interactive](../../games/index.md) section holding three pieces, all centred on Tor. The one carrying the most data is the <a href="../../../../../games/tor-network/play/index.html?lang=en">Tor Relay Globe</a>, which plots nearly ten thousand running relays onto a sphere. Over sixty percent of them sit in the United States, Germany and the Netherlands.
 

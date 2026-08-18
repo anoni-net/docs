@@ -6,14 +6,14 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/onion-routing.png
-  image_width: 2990
-  image_height: 1706
+  image: https://assets.anoni.net/games/onion-routing-en.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-shuffle-variant: Tor Routing Puzzle
 
-![The opening board of the Tor Routing Puzzle, with the sender on the left, the recipient on the right, and five differently coloured relays floating in between](https://assets.anoni.net/games/onion-routing-board.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![The opening board of the Tor Routing Puzzle, with the sender on the left, the recipient on the right, and five differently coloured relays floating in between](https://assets.anoni.net/games/onion-routing-board-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 Send a message from you on the left to the recipient on the right, choosing 3 relays to form the path. Each of the four levels blocks you once, and what it blocks is a constraint Tor genuinely has to handle when it selects a path.
 
@@ -23,7 +23,7 @@ Send a message from you on the left to the recipient on the right, choosing 3 re
 
 The floating spheres are relays, coloured by the ASN they sit in. Click three in order and they become the guard, middle and exit hops in that order; click one again to deselect it. Drag to rotate the view, scroll or pinch to zoom. Press "Send message" and the message travels along the path you drew.
 
-![Three hops selected, with a curve running from the sender through three relays to the recipient, and the slots below reading Taiwan AS3462, Japan AS2914 and Netherlands AS16276](https://assets.anoni.net/games/onion-routing-path.webp){style="border-radius: 10px;"}
+![Three hops selected, with a curve running from the sender through three relays to the recipient, and the slots below reading Taiwan AS3462, Japan AS2914 and Netherlands AS16276](https://assets.anoni.net/games/onion-routing-path-en.webp){style="border-radius: 10px;"}
 
 The three slots at the bottom show where each hop lands and which ASN it belongs to. All three must be filled before the message can go, and a path that breaks the rules is stopped with an explanation.
 
@@ -39,7 +39,7 @@ Red relays appear on the board, marking ones known to be watched. Pick a path th
 
 ### Level 3: spread the hops across ASNs
 
-![All three hops picked from Taiwan, with all three slots reading Taiwan AS3462 and a red message below explaining that the hops are not spread across three different ASNs](https://assets.anoni.net/games/onion-routing-asn.webp){style="border-radius: 10px;"}
+![All three hops picked from Taiwan, with all three slots reading Taiwan AS3462 and a red message below explaining that the hops are not spread across three different ASNs](https://assets.anoni.net/games/onion-routing-asn-en.webp){style="border-radius: 10px;"}
 
 Matching colours mean the same ASN. An ASN (Autonomous System) can be read loosely as a stretch of network under one organisation or person. If all three hops land in the same ASN, an adversary watching that one ASN sees both entry and exit traffic at once, and the stops in between stop mattering.
 
@@ -47,7 +47,7 @@ Documentation says "spread the three hops across different ASNs" and it reads st
 
 ### Level 4: use a bridge when blocked
 
-![The level 4 board, with two relays ringed in red to mark them as blocked and two diamond-shaped bridge nodes on the left](https://assets.anoni.net/games/onion-routing-bridge.webp){style="border-radius: 10px;"}
+![The level 4 board, with two relays ringed in red to mark them as blocked and two diamond-shaped bridge nodes on the left](https://assets.anoni.net/games/onion-routing-bridge-en.webp){style="border-radius: 10px;"}
 
 Direct entry is blocked, marked with red rings, and the first hop has to be one of the diamond-shaped bridge nodes. Bridges are entry points that are not published in the directory, so whoever is doing the blocking cannot get a complete list and cannot block them cleanly. The two bridges on the board are labelled Snowflake and obfs4, two pluggable transports that differ in what the traffic is disguised as.
 
@@ -82,7 +82,7 @@ All three language versions share one program. The language is set by a URL para
       "url": "https://anoni.net/docs/games/onion-routing/play/?lang=en",
       "mainEntityOfPage": "https://anoni.net/docs/en/games/onion-routing/",
       "description": "A hands-on puzzle. Pick 3 relays to form Tor's guard, middle and exit path, avoid surveilled nodes, spread the 3 hops across different ASNs, and switch to bridges when blocked. Each of the four levels maps to a real path-selection constraint.",
-      "image": "https://assets.anoni.net/games/onion-routing.png",
+      "image": "https://assets.anoni.net/games/onion-routing-en.png",
       "inLanguage": ["en", "zh-Hant", "zh-Hans"],
       "genre": ["Puzzle", "Educational"],
       "applicationCategory": "GameApplication",

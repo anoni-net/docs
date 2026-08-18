@@ -6,9 +6,9 @@ social:
   cards: false
 og:
   enabled: true
-  image: https://assets.anoni.net/games/tor-network.png
-  image_width: 2993
-  image_height: 1713
+  image: https://assets.anoni.net/games/tor-network-en.png
+  image_width: 2560
+  image_height: 1440
 ---
 
 # :material-cube-outline: Interactive
@@ -116,7 +116,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
             "@id": "https://anoni.net/docs/games/onion-routing/#work",
             "name": "Tor Routing Puzzle",
             "url": "https://anoni.net/docs/games/onion-routing/?lang=en",
-            "image": "https://assets.anoni.net/games/onion-routing.png",
+            "image": "https://assets.anoni.net/games/onion-routing-en.png",
             "description": "A playable puzzle. Pick three relays to form a Tor guard, middle and exit path, avoid monitored nodes, spread the three hops across different ASNs, and switch to a bridge when blocked."
           }
         },
@@ -128,7 +128,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
             "@id": "https://anoni.net/docs/games/onion-rendezvous/#work",
             "name": "Tor Traffic Flow",
             "url": "https://anoni.net/docs/games/onion-rendezvous/?lang=en",
-            "image": "https://assets.anoni.net/games/onion-rendezvous.png",
+            "image": "https://assets.anoni.net/games/onion-rendezvous-en.png",
             "applicationCategory": "EducationalApplication",
             "description": "A piece to watch rather than play. Glowing particles trace the two shapes Tor traffic takes, with .onion connections meeting at a rendezvous point picked at random."
           }
@@ -141,7 +141,7 @@ These are the first three pieces, all focused on Tor. Plenty of other privacy to
             "@id": "https://anoni.net/docs/games/tor-network/#work",
             "name": "Tor Relay Globe",
             "url": "https://anoni.net/docs/games/tor-network/?lang=en",
-            "image": "https://assets.anoni.net/games/tor-network.png",
+            "image": "https://assets.anoni.net/games/tor-network-en.png",
             "applicationCategory": "EducationalApplication",
             "description": "A globe built from real data. Nearly ten thousand running Tor relays placed inside their own borders, layered with connectivity observations, user estimates, shutdown records, submarine cables and internet-usage rates, plus county boundaries, cable landing points, substations, power plants and the grid at Taiwan scale."
           }
