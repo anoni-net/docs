@@ -8,7 +8,7 @@ icon: material/key-chain-variant
 
 End-to-end encryption (E2EE) comes down to keys: who generates them, who holds them, and when they change. The same algorithms, in different protocols, defend against entirely different adversaries. This page starts from Diffie-Hellman key exchange in one-to-one messaging, explains forward secrecy and the Double Ratchet, covers the two approaches to group messaging and the trade-offs in multi-device sync, and finishes by comparing four protocols.
 
-## One-to-one: Diffie-Hellman key exchange
+## Diffie-Hellman key exchange in one-to-one chat
 
 Can two people who have never met, and who can only pass messages through someone listening, agree on a key that only they know? Diffie-Hellman key exchange, proposed in 1976, answers yes.
 
@@ -22,7 +22,7 @@ In practice, modern protocols use X25519, an elliptic-curve key exchange that is
 
 Diffie-Hellman settles how to agree on a shared key. On its own it is not enough: once a key is long-lived, stealing it one day decrypts every message before and after. That is the next problem.
 
-## Forward secrecy: why yesterday's messages survive today's key theft
+## Why forward secrecy lets yesterday's messages survive today's key theft
 
 Forward secrecy ensures that recorded ciphertext stays unreadable even if an attacker later obtains the long-term key.
 
@@ -30,7 +30,7 @@ The mechanism is an ephemeral key for each connection, or each period, used to d
 
 TLS 1.3 enables forward secrecy by default, and the old RSA key exchange without it has been retired. E2EE messaging protocols go further, changing keys not just per connection but per message. That is the Double Ratchet.
 
-## The Double Ratchet: one key per message
+## The Double Ratchet gives every message its own key
 
 The Double Ratchet is the core of the Signal Protocol, named for two key-update mechanisms running at once. A ratchet advances in one direction only, and old keys do not come back:
 

@@ -214,10 +214,10 @@ Signal 這類工具保護的是內容，不保護「誰在什麼時候聯繫誰�
 
 [^165]: 數字取自內政部警政署 [165 打詐儀錶板](https://165dashboard.tw/){target="_blank"}，2025 年全年受理 16.2 萬件、財損 893.26 億元。媒體整理見 [2025 年全台詐騙財損近 900 億](https://news.ttv.com.tw/news/11501190003200W){target="_blank"} - 台視新聞（2026-01-19）。查證日期 2026-08。
 
-[^tsa]: [通訊保障及監察法第 11-1 條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"}。原則上檢察官須以書面向法院聲請調取票，但同條第 3 項對最輕本刑三年以上有期徒刑之罪，以及強盜、搶奪、詐欺、恐嚇、擄人勒贖、毒品、洗錢等列舉罪名設有例外，檢察官或經其許可的司法警察官得逕行調取。監聽的門檻見同法第 5 條。查證日期 2026-08。
+[^tsa]: [通訊保障及監察法第 11-1 條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"}。原則上檢察官須以書面向法院聲請調取票，但同條第 4 項對最輕本刑十年以上有期徒刑之罪，以及強盜、搶奪、詐欺、恐嚇、擄人勒贖、毒品、洗錢等列舉罪名設有例外，檢察官或經其許可的司法警察官得逕行調取。監聽的門檻見同法第 5 條。查證日期 2026-08。
 
 [^yubikey]: [YubiKey 5 NFC](https://www.yubico.com/product/yubikey-5-series/yubikey-5-nfc/){target="_blank"} 官方定價 58 美元，同系列其他型號價格不同。台灣可透過授權經銷商購買，實際售價以通路為準。查證日期 2026-08。
 
 [^passkey-census]: Tranco 前 10 萬站台的 passkey 支援普查，資料為 2025 年 3 月的快照。整體支援率 11.3%，前 100 名 20%，排名 5 萬至 10 萬為 6.9%。論文同時記載「External IdPs 偵測到 75.2%」與「75.2% 的站台整合 Google SSO」，兩種敘述並列，因此本文只寫「很高比例」，不押在單一讀法。見 [State of Passkey Authentication in the Wild: A Census of the Top 100K sites](https://arxiv.org/html/2602.15135v2){target="_blank"}。查證日期 2026-08。
 
-[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"} 數位身分指引，第 4 版於 2024 年 9 月定案、2025 年 8 月撤回前版。明文規定驗證方不得要求定期更換密碼（`SHALL NOT require periodic rotation`），只在有跡象顯示已遭破解時才要求更換。查證日期 2026-08。
+[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"} 數位身分指引，第 4 版於 2025 年 7 月 31 日定案，取代 2020 年的前一版（2024 年 8 月的是第二次公開草案）。明文規定驗證方不得要求定期更換密碼（`SHALL NOT require periodic rotation`），只在有跡象顯示已遭破解時才要求更換。查證日期 2026-08。

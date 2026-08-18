@@ -2,7 +2,7 @@
 
 把公開[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)「寫作風格規範」裡可機器判斷的硬規則做成檢查，輸出 `file:line` 與規則代碼。
 
-編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。規則是中文寫作規範，套用在 zh-TW 與 zh-CN，不掃英文版（docs/en 的破折號、分號等在英文是正常的）。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的中文 Markdown 自動跑，目前為 warn 階段（提醒不擋）。
+編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。三個語系都掃，但套用的規則不同。中文那組是標點與句型，套用在 zh-TW 與 zh-CN。英文那組獨立（破折號與分號在英文是正常標點），2026-08 起納入 docs/en，目前實作 `bold-lead-sentence`、`title-colon` 與 `machine-field` 三條。linter 依路徑自動選規則集，見 `is_english_doc`。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的 Markdown 自動跑，目前為 warn 階段（提醒不擋）。
 
 ## 用法
 

@@ -1,10 +1,10 @@
 ---
-title: "GrapheneOS: A Hardened Mobile Operating System"
+title: GrapheneOS, a hardened mobile operating system
 description: GrapheneOS hardens Android substantially and removes the Google binding, making it the most thoroughly hardened mobile operating system available. As Google tightens AOSP and app vendors use attestation to lock out unofficial systems, it keeps a phone you control.
 icon: material/cellphone-lock
 ---
 
-# :material-cellphone-lock: GrapheneOS: A Hardened Mobile Operating System
+# :material-cellphone-lock: GrapheneOS, a hardened mobile operating system
 
 A phone is the device closest to us: carried everywhere, connected constantly, holding location, contacts, messages, photos, and health records. Stock Android binds to a Google account by default, reports telemetry continuously in the background, and most applications collect identifying information of their own. For taking that device back, deciding for yourself which services it connects to and what leaves it, [GrapheneOS](https://grapheneos.org/){target="_blank"} is what the community most often recommends.
 
@@ -17,7 +17,7 @@ GrapheneOS is a mobile operating system based on the Android Open Source Project
     - **What it does not**: GrapheneOS is not an anonymity tool and cannot stop your carrier locating you by cell tower. Anonymity still means [Tor](./what-is-tor.md)
     - **Hardware**: effectively Google Pixel only, since it is the one line offering a re-lockable bootloader, a secure element, and long-term updates together
 
-## What it protects: the core design
+## What the core design protects
 
 The features fall into three groups: shrinking the attack surface, reducing dependence on Google, and accounting for physical and coercion risk. The descriptions below follow the official [features page](https://grapheneos.org/features){target="_blank"}.
 
@@ -43,7 +43,7 @@ The features fall into three groups: shrinking the attack surface, reducing depe
 - **Auto-reboot**: after 18 hours without an unlock, the device reboots into the encrypted before-first-unlock state, where data is considerably harder for forensic tools to extract. The interval is adjustable between 10 minutes and 72 hours, or can be disabled
 - **USB-C control**: charging only while locked, by default, narrowing attacks through the port
 
-## What it does not solve: the line at anonymity
+## What it does not solve, and the line at anonymity
 
 The line between privacy and anonymity matters here. GrapheneOS is about privacy and security. It makes your phone harder to compromise and makes it harder for apps to collect data about you. It does not claim to make you anonymous.
 
@@ -59,7 +59,7 @@ Google Pixel is effectively the only consumer phone line meeting all of these. P
 
 There is an irony worth naming: GrapheneOS runs only on Google's own hardware while the thing it addresses is Google services' reach into the phone. Every policy change Google makes to Pixel and Android lands directly on GrapheneOS, and since Android 17 the tightening has accelerated.
 
-## Since Android 17: Google tightening AOSP and Pixel data
+## Since Android 17, Google has tightened AOSP and Pixel data
 
 From 2025, Google raised the cost of third-party system development in two steps. In March 2025 it moved Android development to an internal branch, publishing source to AOSP only at release, so the development process is no longer publicly traceable. It remains open source, and the intermediate evolution is no longer visible from outside. Then with the Android 16 release in June 2025, it stopped publishing Pixel device trees, the configuration describing a model's hardware so the system can drive it, leaving third-party developers to reconstruct them.
 

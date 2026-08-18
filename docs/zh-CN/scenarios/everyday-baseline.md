@@ -216,10 +216,10 @@ Signal 这类工具保护的是内容，不保护「谁在什么时候联系谁�
 
 [^165]: 数字取自台湾内政部警政署 [165 打诈仪表板](https://165dashboard.tw/){target="_blank"}，2025 年全年受理 16.2 万件、财损 893.26 亿元新台币。媒体整理见 [2025 年全台诈骗财损近 900 亿](https://news.ttv.com.tw/news/11501190003200W){target="_blank"} - 台视新闻（2026-01-19）。查证日期 2026-08。
 
-[^tsa]: [台湾通讯保障及监察法第 11-1 条](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"}。原则上检察官须以书面向法院声请调取票，但同条第 3 项对最轻本刑三年以上有期徒刑之罪，以及强盗、抢夺、诈欺、恐吓、掳人勒赎、毒品、洗钱等列举罪名设有例外，检察官或经其许可的司法警察官得迳行调取。监听的门槛见同法第 5 条。查证日期 2026-08。
+[^tsa]: [台湾通讯保障及监察法第 11-1 条](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"}。原则上检察官须以书面向法院声请调取票，但同条第 4 项对最轻本刑十年以上有期徒刑之罪，以及强盗、抢夺、诈欺、恐吓、掳人勒赎、毒品、洗钱等列举罪名设有例外，检察官或经其许可的司法警察官得迳行调取。监听的门槛见同法第 5 条。查证日期 2026-08。
 
 [^yubikey]: [YubiKey 5 NFC](https://www.yubico.com/product/yubikey-5-series/yubikey-5-nfc/){target="_blank"} 官方定价 58 美元，同系列其他型号价格不同。实际售价以当地通路为准。查证日期 2026-08。
 
 [^passkey-census]: Tranco 前 10 万站点的 passkey 支持普查，数据为 2025 年 3 月的快照。整体支持率 11.3%，前 100 名 20%，排名 5 万至 10 万为 6.9%。论文同时记载「External IdPs 侦测到 75.2%」与「75.2% 的站点整合 Google SSO」，两种叙述并列，因此本文只写「很高比例」，不押在单一读法。见 [State of Passkey Authentication in the Wild: A Census of the Top 100K sites](https://arxiv.org/html/2602.15135v2){target="_blank"}。查证日期 2026-08。
 
-[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"} 数位身分指引，第 4 版于 2024 年 9 月定案、2025 年 8 月撤回前版。明文规定验证方不得要求定期更换密码（`SHALL NOT require periodic rotation`），只在有迹象显示已遭破解时才要求更换。查证日期 2026-08。
+[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"} 数字身份指引，第 4 版于 2025 年 7 月 31 日定案，取代 2020 年的前一版（2024 年 8 月的是第二次公开草案）。明文规定验证方不得要求定期更换密码（`SHALL NOT require periodic rotation`），只在有迹象显示已遭破解时才要求更换。查证日期 2026-08。

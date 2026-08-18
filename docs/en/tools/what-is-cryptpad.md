@@ -29,7 +29,7 @@ The community instance at [cryptpad.anoni.net](https://cryptpad.anoni.net/){targ
 - **The key lives in the URL fragment.** The key that decrypts a pad sits after the `#` in the URL, and that portion is never sent to the server. Sharing the link is sharing the key, so whether the key leaks depends on how you transmit the URL
 - **Collaboration stays encrypted.** When someone joins through your share link, their browser obtains the same key and decrypts and re-encrypts every change locally
 
-**Even if we wanted to read it, we could not.**
+Even if we wanted to read it, we could not.
 
 The guarantee costs two things. First, **losing the password or key means the content cannot be recovered**, and CryptPad cannot reset it for you. Second, **full-text search, content indexing, and AI summarization do not exist**, because all of them require the server to read the content. For work that has to stay confidential over time, that trade is usually acceptable.
 

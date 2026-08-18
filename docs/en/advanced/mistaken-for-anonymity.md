@@ -93,7 +93,7 @@ The picture changes across the region. In Mainland China, DNS tampering is one l
 
 What DNS-layer protections you give up by switching, and how to configure a device before running OONI Probe, are in [encrypted DNS](../tools/encrypted-dns.md). The [ASN coverage](../regional/ooni-asn-coverage.md) work the community maintains depends on those measurements.
 
-## Back to the threat model: four questions
+## Four questions that bring it back to the threat model
 
 Each column of the table above turns into a question you can ask of any tool claiming to protect privacy.
 
