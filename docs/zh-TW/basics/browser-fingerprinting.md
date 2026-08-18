@@ -29,9 +29,9 @@ Google 2019 年的部落格文章裡寫過同一個落差，使用者無法清�
 - **canvas 與音訊**：請瀏覽器畫一段圖形或運算一段音訊，不同硬體與驅動算出來的結果有微小差異，把結果 hash 成一組值
 - **瀏覽器本身**：版本、支援哪些 API、安裝了哪些擴充套件、字型渲染方式
 
-衡量的單位是熵（entropy），也就是一項特徵能把人群切成多少份。時區把台灣使用者切在同一格，識別力很低。完整的字型清單常常一次就把範圍縮到個位數。
+衡量的單位是熵（entropy），也就是一項特徵能把人群切成多少份。時區把整個東亞時區的使用者切在同一格，數以億計的人落在同一個值上，識別力很低。完整的字型清單常常一次就把範圍縮到個位數。
 
-EFF 在 2010 年的 Panopticlick 研究收集了 470,161 個瀏覽器樣本，其中 83.6% 的指紋是唯一的，裝有 Flash 或 Java 的樣本達 94.2%，整體分布至少帶有 18.1 bits 的熵[^eckersley]。樣本來自主動造訪測試站的人，唯一的比例會比真實母體偏高。十六年前的量測已經足以說明問題的規模。
+EFF 在 2010 年的 Panopticlick 研究收集了 470,161 個瀏覽器樣本，其中 83.6% 的指紋是唯一的，在裝有 Flash 或 Java 的樣本裡唯一比例升到 94.2%，整體分布至少帶有 18.1 bits 的熵[^eckersley]。樣本來自主動造訪測試站的人，唯一的比例會比真實母體偏高。十六年前的量測已經足以說明問題的規模。
 
 ## 為什麼結構上難以規避
 
@@ -73,21 +73,21 @@ Pierre Laperdrix 替 Tor Project 寫的指紋介紹文章把問題稱為可指�
 |--------|----------|----------|
 | Tor Browser | 一般使用即生效 | 一致化 |
 | Brave | 一般視窗即生效 | 隨機化為主，部分欄位一致化 |
-| Safari | 無痕視窗預設開啟，一般瀏覽可手動開啟 | 雜訊注入加上限制回報 |
+| Safari | 分兩層，指紋腳本封鎖在一般瀏覽預設開啟，雜訊注入預設限無痕視窗 | 腳本封鎖加上雜訊注入與限制回報 |
 | Firefox | 無痕視窗與嚴格模式預設開啟 | 腳本封鎖加上限制回報 |
 | Chrome | 一般視窗沒有內建防護 | 無 |
 
 **Tor Browser** 的一致化做得最徹底，防護對所有使用者一律生效。代價是要接受固定的視窗尺寸與較慢的連線，換來的是連線層的匿名，其他瀏覽器都沒有提供。
 
-**Brave** 從 2020 年起用 farbling 對半識別性的 API 輸出做輕微隨機化，種子每個瀏覽階段與每個站台各不相同[^farbling]。`1.93` 版把顯示卡資訊納入，WebGL 廠商與繪圖器字串換成通用值，WebGL 擴充清單注入雜訊[^brave]。防護預設開啟，一般視窗就生效。
+**Brave** 從 2020 年起用 farbling 對半識別性的 API 輸出做輕微隨機化，種子每個瀏覽階段與每個站台各不相同[^farbling]。`1.93` 版把顯示卡資訊納入，WebGL 廠商與繪圖器字串換成通用值，WebGPU 的硬體描述欄位清空，WebGL 擴充清單注入雜訊[^brave]。防護預設開啟，一般視窗就生效。
 
-**Safari** 從 `17.0` 起提供進階指紋防護，對 canvas、WebGL 讀回與 WebAudio 注入少量雜訊。無痕視窗預設開啟，設定裡可以套用到一般瀏覽[^webkit]。
+**Safari** 的防護分兩層。`17.0` 起的進階指紋防護對 canvas、WebGL 讀回與 WebAudio 注入少量雜訊，預設只在無痕視窗開啟，設定裡可以套用到一般瀏覽[^webkit]。`26.0` 起另外加了一層指紋腳本封鎖，擋掉已知的指紋腳本讀取螢幕尺寸、處理器核心數、語音清單、Apple Pay 能力、WebAudio 讀回與 2D canvas，也擋它們寫入長效儲存。Apple 工程師說明這一層屬於智慧型防追蹤的一部分，由「防止跨網站追蹤」這個設定控制，而該設定在一般瀏覽本來就預設開啟[^webkit26]。
 
 **Firefox** 在 `145` 版補上第二階段防護。已知的指紋腳本沿用加強型追蹤保護（Enhanced Tracking Protection）的清單封鎖，未列名的則改用限制 API 輸出的方式處理，兩項都在無痕視窗與加強型追蹤保護的嚴格模式預設開啟。Mozilla 的公告寫著被判定為唯一的使用者比例因此接近減半，全域預設開啟仍在進行中[^mozilla]。另外一個開關 `privacy.resistFingerprinting` 沿用 Tor Browser 的一致化路線，預設關閉，需要自行到 `about:config` 開啟。
 
 **Chrome** 的一般視窗沒有針對指紋的內建防護。無痕視窗有 IP Protection，2025 年 7 月起推送，遮蔽的是第三方情境下的 IP 位址，處理範圍不含裝置指紋[^ipprotection]。2019 年啟動的 Privacy Sandbox 把指紋識別列為要解決的問題，到 2025 年 4 月計畫收束為止，沒有推出針對指紋的防護措施[^register]。
 
-同一家公司的廣告政策走向相反。Google 在 2024 年 12 月 18 日公告修改廣告平台政策，移除禁止使用裝置指紋的條款，2025 年 2 月 16 日生效[^policy]。英國資訊委員辦公室（Information Commissioner's Office, ICO）隔日發布的回應寫著該決定不負責任，使用指紋識別的業者仍須證明符合資料保護法在透明、同意與可刪除等方面的要求[^ico]。
+同一家公司的廣告政策走向相反。Google 在 2024 年 12 月 18 日公告修改廣告平台政策，移除禁止使用裝置指紋的條款，2025 年 2 月 16 日生效[^policy]。英國資訊專員辦公室（Information Commissioner's Office, ICO）隔日發布的回應寫著該決定不負責任，使用指紋識別的業者仍須證明符合資料保護法在透明、同意與可刪除等方面的要求[^ico]。
 
 ## 自己測一次
 
@@ -103,7 +103,7 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 ### 低成本
 
-- **換一個預設就處理指紋的瀏覽器**：Brave 安裝完即生效，Firefox 把加強型追蹤保護切到嚴格模式，Safari 在設定裡把進階防護套用到一般瀏覽
+- **換一個預設就處理指紋的瀏覽器**：Brave 安裝完即生效，Firefox 把加強型追蹤保護切到嚴格模式，Safari 在設定裡把 `17.0` 那層進階防護也套用到一般瀏覽
 - **不要為了隱私安裝一堆改指紋的擴充套件**：覆蓋不完整的偽裝會製造出獨特的組合，效果與目標相反
 
 你主動登入的帳號擋不掉，指紋防護處理的是不具名的跨站關聯，登入行為本身直接告訴網站你是誰。
@@ -122,6 +122,8 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 - **敏感用途換一台裝置**
 
 換裝置與換工具改變的是關聯，你在單一網站上留下的內容沒有因此減少，自願交出去的資訊也一樣。
+
+這三級都假設你所在的法域不限制這些工具。中國大陸的 Tor 直連無法使用，需要 bridge 或其他接入方式，區域內也有幾個法域把使用規避工具本身列入風險，取捨見 [威脅模型如何建立](./threat-model.md)。
 
 ## 幾個沒有幫助的做法
 
@@ -149,8 +151,9 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隱私更新第 4 篇，2020 年。farbling 的定義與種子機制出自此文。
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} - Brave 隱私更新第 38 篇。`1.93` 版的三項防護出自此文。
 [^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} - WebKit Blog，2024 年 7 月 16 日。Safari `17.0` 起的進階指紋防護、雜訊注入範圍與螢幕尺寸對齊的說明出自此文。
+[^webkit26]: [WebKit Features in Safari 26.0](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/){target="_blank"} - WebKit Blog，2025 年 9 月 15 日。指紋腳本封鎖擋下的 API 清單出自此文，該層屬於智慧型防追蹤、由「防止跨網站追蹤」控制的說明來自 Apple 工程師的公開回覆，見 [Safari 26 advanced fingerprinting protection](https://lapcatsoftware.com/articles/2025/9/4.html){target="_blank"} 的追查紀錄。查證日 2026-08-18。
 [^mozilla]: [Firefox expands fingerprint protections: advancing towards a more private web](https://blog.mozilla.org/en/firefox/fingerprinting-protections/){target="_blank"} - The Mozilla Blog，2025 年 11 月 10 日。Firefox `145` 的兩層防護、預設開啟的範圍與唯一比例接近減半的數字出自此文。
 [^ipprotection]: [IP Protection](https://github.com/GoogleChrome/ip-protection/blob/main/README.md){target="_blank"} - GoogleChrome/ip-protection，說明文件。適用範圍限無痕視窗、遮蔽第三方情境下的 IP 位址，不處理裝置指紋。查證日 2026-08-18。
-[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/){target="_blank"} - The Register，2026 年 4 月 16 日。Privacy Sandbox 未推出指紋防護的說法引自隱私顧問 Alexander Hanff，Google 未對報導回應。
+[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/5229136){target="_blank"} - The Register，2026 年 4 月 16 日。Privacy Sandbox 未推出指紋防護的說法引自隱私顧問 Alexander Hanff，Google 未對報導回應。
 [^policy]: [Google to lift fingerprinting restrictions amid privacy concerns](https://ppc.land/google-to-lift-fingerprinting-restrictions-amid-privacy-concerns/){target="_blank"} - PPC Land，2024 年 12 月。政策公告日 2024-12-18、生效日 2025-02-16，原政策中「Google doesn't allow fingerprinting」條款被移除的分析另見 [Lukasz Olejnik 的說明](https://blog.lukaszolejnik.com/biggest-privacy-erosion-in-10-years-on-googles-policy-change-towards-fingerprinting/){target="_blank"}。
 [^ico]: [Our response to Google's policy change on fingerprinting](https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2024/12/our-response-to-google-s-policy-change-on-fingerprinting/){target="_blank"} - Information Commissioner's Office，2024 年 12 月 19 日。

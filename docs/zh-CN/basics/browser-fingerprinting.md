@@ -31,9 +31,9 @@ Google 2019 年的博客文章里写过同一个落差，用户无法清除指�
 - **canvas 与音频**：请浏览器画一段图形或运算一段音频，不同硬件与驱动算出来的结果有微小差异，把结果 hash 成一组值
 - **浏览器本身**：版本、支持哪些 API、安装了哪些扩展程序、字体渲染方式
 
-衡量的单位是熵（entropy），也就是一项特征能把人群切成多少份。时区把整个东八区的用户归到同一格，识别力很低。完整的字体清单常常一次就把范围缩到个位数。
+衡量的单位是熵（entropy），也就是一项特征能把人群切成多少份。时区把整个东八区的用户归到同一格，数以亿计的人落在同一个值上，识别力很低。完整的字体清单常常一次就把范围缩到个位数。
 
-EFF 在 2010 年的 Panopticlick 研究收集了 470,161 个浏览器样本，其中 83.6% 的指纹是唯一的，装有 Flash 或 Java 的样本达 94.2%，整体分布至少带有 18.1 bits 的熵[^eckersley]。样本来自主动造访测试站的人，唯一的比例会比真实母体偏高。十六年前的测量已经足以说明问题的规模。
+EFF 在 2010 年的 Panopticlick 研究收集了 470,161 个浏览器样本，其中 83.6% 的指纹是唯一的，在装有 Flash 或 Java 的样本里唯一比例升到 94.2%，整体分布至少带有 18.1 bits 的熵[^eckersley]。样本来自主动造访测试站的人，唯一的比例会比真实母体偏高。十六年前的测量已经足以说明问题的规模。
 
 ## 为什么结构上难以规避
 
@@ -75,15 +75,15 @@ Pierre Laperdrix 替 Tor Project 写的指纹介绍文章把问题称为可指�
 |--------|----------|----------|
 | Tor Browser | 一般使用即生效 | 一致化 |
 | Brave | 一般窗口即生效 | 随机化为主，部分字段一致化 |
-| Safari | 无痕窗口默认开启，一般浏览可手动开启 | 噪声注入加上限制回报 |
+| Safari | 分两层，指纹脚本拦截在一般浏览默认开启，噪声注入默认限无痕窗口 | 脚本拦截加上噪声注入与限制回报 |
 | Firefox | 无痕窗口与严格模式默认开启 | 脚本拦截加上限制回报 |
 | Chrome | 一般窗口没有内建防护 | 无 |
 
 **Tor Browser** 的一致化做得最彻底，防护对所有用户一律生效。代价是要接受固定的窗口尺寸与较慢的连接，换来的是连接层的匿名，其他浏览器都没有提供。
 
-**Brave** 从 2020 年起用 farbling 对半识别性的 API 输出做轻微随机化，种子每个会话与每个站点各不相同[^farbling]。`1.93` 版把显卡信息纳入，WebGL 厂商与渲染器字符串换成通用值，WebGL 扩展清单注入噪声[^brave]。防护默认开启，一般窗口就生效。
+**Brave** 从 2020 年起用 farbling 对半识别性的 API 输出做轻微随机化，种子每个会话与每个站点各不相同[^farbling]。`1.93` 版把显卡信息纳入，WebGL 厂商与渲染器字符串换成通用值，WebGPU 的硬件描述字段清空，WebGL 扩展清单注入噪声[^brave]。防护默认开启，一般窗口就生效。
 
-**Safari** 从 `17.0` 起提供进阶指纹防护，对 canvas、WebGL 读回与 WebAudio 注入少量噪声。无痕窗口默认开启，设置里可以套用到一般浏览[^webkit]。
+**Safari** 的防护分两层。`17.0` 起的进阶指纹防护对 canvas、WebGL 读回与 WebAudio 注入少量噪声，默认只在无痕窗口开启，设置里可以套用到一般浏览[^webkit]。`26.0` 起另外加了一层指纹脚本拦截，挡掉已知的指纹脚本读取屏幕尺寸、处理器核心数、语音清单、Apple Pay 能力、WebAudio 读回与 2D canvas，也挡它们写入长效存储。Apple 工程师说明这一层属于智能防跟踪的一部分，由「防止跨网站跟踪」这个设置控制，而该设置在一般浏览本来就默认开启[^webkit26]。
 
 **Firefox** 在 `145` 版补上第二阶段防护。已知的指纹脚本沿用增强型跟踪保护（Enhanced Tracking Protection）的清单拦截，未列名的则改用限制 API 输出的方式处理，两项都在无痕窗口与增强型跟踪保护的严格模式默认开启。Mozilla 的公告写着被判定为唯一的用户比例因此接近减半，全局默认开启仍在进行中[^mozilla]。另外一个开关 `privacy.resistFingerprinting` 沿用 Tor Browser 的一致化路线，默认关闭，需要自行到 `about:config` 开启。
 
@@ -105,7 +105,7 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 ### 低成本
 
-- **换一个默认就处理指纹的浏览器**：Brave 安装完即生效，Firefox 把增强型跟踪保护切到严格模式，Safari 在设置里把进阶防护套用到一般浏览
+- **换一个默认就处理指纹的浏览器**：Brave 安装完即生效，Firefox 把增强型跟踪保护切到严格模式，Safari 在设置里把 `17.0` 那层进阶防护也套用到一般浏览
 - **不要为了隐私安装一堆改指纹的扩展程序**：覆盖不完整的伪装会制造出独特的组合，效果与目标相反
 
 你主动登录的账号挡不掉，指纹防护处理的是不具名的跨站关联，登录行为本身直接告诉网站你是谁。
@@ -153,8 +153,9 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隐私更新第 4 篇，2020 年。farbling 的定义与种子机制出自此文。
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} - Brave 隐私更新第 38 篇。`1.93` 版的三项防护出自此文。
 [^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} - WebKit Blog，2024 年 7 月 16 日。Safari `17.0` 起的进阶指纹防护、噪声注入范围与屏幕尺寸对齐的说明出自此文。
+[^webkit26]: [WebKit Features in Safari 26.0](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/){target="_blank"} - WebKit Blog，2025 年 9 月 15 日。指纹脚本拦截挡下的 API 清单出自此文，该层属于智能防跟踪、由「防止跨网站跟踪」控制的说明来自 Apple 工程师的公开回复，见 [Safari 26 advanced fingerprinting protection](https://lapcatsoftware.com/articles/2025/9/4.html){target="_blank"} 的追查记录。查证日 2026-08-18。
 [^mozilla]: [Firefox expands fingerprint protections: advancing towards a more private web](https://blog.mozilla.org/en/firefox/fingerprinting-protections/){target="_blank"} - The Mozilla Blog，2025 年 11 月 10 日。Firefox `145` 的两层防护、默认开启的范围与唯一比例接近减半的数字出自此文。
 [^ipprotection]: [IP Protection](https://github.com/GoogleChrome/ip-protection/blob/main/README.md){target="_blank"} - GoogleChrome/ip-protection，说明文件。适用范围限无痕窗口、遮蔽第三方情境下的 IP 地址，不处理设备指纹。查证日 2026-08-18。
-[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/){target="_blank"} - The Register，2026 年 4 月 16 日。Privacy Sandbox 未推出指纹防护的说法引自隐私顾问 Alexander Hanff，Google 未对报道回应。
+[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/5229136){target="_blank"} - The Register，2026 年 4 月 16 日。Privacy Sandbox 未推出指纹防护的说法引自隐私顾问 Alexander Hanff，Google 未对报道回应。
 [^policy]: [Google to lift fingerprinting restrictions amid privacy concerns](https://ppc.land/google-to-lift-fingerprinting-restrictions-amid-privacy-concerns/){target="_blank"} - PPC Land，2024 年 12 月。政策公告日 2024-12-18、生效日 2025-02-16，原政策中「Google doesn't allow fingerprinting」条款被移除的分析另见 [Lukasz Olejnik 的说明](https://blog.lukaszolejnik.com/biggest-privacy-erosion-in-10-years-on-googles-policy-change-towards-fingerprinting/){target="_blank"}。
 [^ico]: [Our response to Google's policy change on fingerprinting](https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2024/12/our-response-to-google-s-policy-change-on-fingerprinting/){target="_blank"} - Information Commissioner's Office，2024 年 12 月 19 日。

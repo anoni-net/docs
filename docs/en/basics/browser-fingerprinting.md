@@ -31,7 +31,7 @@ Chrome's own engineering leadership described the gap in 2019. Justin Schuh, the
 - **Canvas and audio**: ask the browser to draw a shape or process an audio buffer, and small differences between hardware and drivers produce a stable hash
 - **The browser itself**: version, which APIs it supports, which extensions are installed, how it renders text
 
-The unit of measurement is entropy, meaning how finely a single signal divides the population. A time zone shared across East Asia puts hundreds of millions of people in the same bucket, so it carries very little. A complete font list frequently narrows the field to single digits on its own.
+The unit of measurement is entropy, meaning how finely a single signal divides the population. A time zone shared across East Asia puts hundreds of millions of people in the same bucket, so it carries very little on its own. A complete font list frequently narrows the field to single digits on its own.
 
 Peter Eckersley's 2010 Panopticlick study collected 470,161 browser samples. Among them, 83.6% of fingerprints were unique, rising to 94.2% for samples with Flash or Java installed, and the distribution carried at least 18.1 bits of entropy[^eckersley]. Visitors to a test site select themselves, so the share of unique results runs higher than it would across the general population. Even with that caveat, a measurement from sixteen years ago is enough to establish the scale.
 
@@ -75,15 +75,15 @@ Refuse to answer, or answer coarsely. Firefox disables the `WEBGL_debug_renderer
 |---------|---------------|---------------|
 | Tor Browser | On in normal use | Uniformity |
 | Brave | On in normal windows | Mostly randomization, uniformity for some fields |
-| Safari | On in Private Browsing, optional for all browsing | Noise injection plus limited reporting |
+| Safari | Two layers: script blocking on in normal browsing, noise injection limited to Private Browsing | Script blocking plus noise injection and limited reporting |
 | Firefox | On in private windows and Strict mode | Script blocking plus limited reporting |
 | Chrome | Off, with no built-in protection in normal windows | None |
 
 **Tor Browser** pushes uniformity furthest, and the protection applies to everyone using it. The cost is a fixed window size and a slower connection, in exchange for anonymity at the connection layer that no other browser offers.
 
-**Brave** has used farbling since 2020 to add slight randomization to the output of semi-identifying APIs, with a seed that differs per session and per site[^farbling]. Version `1.93` brought graphics into scope, replacing the WebGL vendor and renderer strings with generic values and adding noise to the WebGL extension list[^brave]. It is on by default in ordinary windows.
+**Brave** has used farbling since 2020 to add slight randomization to the output of semi-identifying APIs, with a seed that differs per session and per site[^farbling]. Version `1.93` brought graphics into scope, replacing the WebGL vendor and renderer strings with generic values, clearing the WebGPU adapter description fields, and adding noise to the WebGL extension list[^brave]. It is on by default in ordinary windows.
 
-**Safari** has shipped advanced fingerprinting protection since `17.0`, adding small amounts of noise to canvas, WebGL readback, and WebAudio. It is on by default in Private Browsing, and a setting extends it to all browsing[^webkit].
+**Safari** protects in two layers. Advanced fingerprinting protection, shipped in `17.0`, adds small amounts of noise to canvas, WebGL readback, and WebAudio; it defaults to Private Browsing only, and a setting extends it to all browsing[^webkit]. Version `26.0` added fingerprinting script blocking, which stops known fingerprinting scripts from reading screen dimensions, hardware concurrency, the SpeechSynthesis voice list, Apple Pay capabilities, WebAudio readback, and 2D canvas, and from writing long-lived storage. An Apple engineer has said this layer belongs to Intelligent Tracking Prevention and is governed by the "Prevent cross-site tracking" setting, which is on by default in normal browsing[^webkit26].
 
 **Firefox** added a second layer in version `145`. Known fingerprinting scripts are blocked through the same list that powers Enhanced Tracking Protection, and scripts not on that list are handled by limiting API output instead. Both are on by default in private windows and in Enhanced Tracking Protection's Strict mode. Users seen as unique fall by close to half, according to Mozilla's own measurement, and enabling the protections for everyone is still in progress[^mozilla]. A separate preference, `privacy.resistFingerprinting`, follows Tor Browser's uniformity approach, and it is off unless a user turns it on in `about:config`.
 
@@ -105,7 +105,7 @@ Each tier notes what it leaves untouched.
 
 ### Low effort
 
-- **Switch to a browser that handles this by default**: Brave works out of the box, Firefox needs Enhanced Tracking Protection set to Strict, and Safari has a setting that extends the advanced protections to all browsing
+- **Switch to a browser that handles this by default**: Brave works out of the box, Firefox needs Enhanced Tracking Protection set to Strict, and Safari has a setting that extends the `17.0` protections to all browsing
 - **Do not stack up privacy extensions that alter fingerprint values**: a disguise with gaps produces a distinctive combination and works against the goal
 
 Any account you sign into is left untouched, because fingerprinting defenses address unnamed cross-site correlation and signing in tells the site who you are directly.
@@ -153,8 +153,9 @@ Browsers ship every few weeks, and defaults and feature names move with them. Wh
 [^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} — Brave privacy update 4, 2020. Source for the definition of farbling and the seed mechanism.
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} — Brave privacy update 38. Source for the three protections shipped in version `1.93`.
 [^webkit]: [Private Browsing 2.0](https://webkit.org/blog/15697/private-browsing-2-0/){target="_blank"} — WebKit Blog, 16 July 2024. Source for Safari's advanced fingerprinting protection from `17.0`, the scope of noise injection, and the screen-dimension normalization.
+[^webkit26]: [WebKit Features in Safari 26.0](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/){target="_blank"} — WebKit Blog, 15 September 2025. Source for the list of APIs closed to known fingerprinting scripts. The attribution of that layer to Intelligent Tracking Prevention, governed by "Prevent cross-site tracking", comes from an Apple engineer's public reply, recorded in [Safari 26 advanced fingerprinting protection](https://lapcatsoftware.com/articles/2025/9/4.html){target="_blank"}. Verified 2026-08-18.
 [^mozilla]: [Firefox expands fingerprint protections: advancing towards a more private web](https://blog.mozilla.org/en/firefox/fingerprinting-protections/){target="_blank"} — The Mozilla Blog, 10 November 2025. Source for the two layers shipped in Firefox `145`, the modes they are enabled in, and the near-halving of users seen as unique.
 [^ipprotection]: [IP Protection](https://github.com/GoogleChrome/ip-protection/blob/main/README.md){target="_blank"} — GoogleChrome/ip-protection explainer. Scope limited to Incognito, masking the IP address in third-party contexts, with device fingerprinting out of scope. Verified 2026-08-18.
-[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/){target="_blank"} — The Register, 16 April 2026. The claim that Privacy Sandbox shipped no fingerprinting mitigation is attributed there to privacy consultant Alexander Hanff; Google declined to comment.
+[^register]: [Google Chrome lacks browser fingerprinting defenses](https://www.theregister.com/security/2026/04/16/google-chrome-lacks-browser-fingerprinting-defenses/5229136){target="_blank"} — The Register, 16 April 2026. The claim that Privacy Sandbox shipped no fingerprinting mitigation is attributed there to privacy consultant Alexander Hanff; Google declined to comment.
 [^policy]: [Google to lift fingerprinting restrictions amid privacy concerns](https://ppc.land/google-to-lift-fingerprinting-restrictions-amid-privacy-concerns/){target="_blank"} — PPC Land, December 2024, for the 18 December 2024 announcement and the 16 February 2025 effective date. [Lukasz Olejnik's analysis](https://blog.lukaszolejnik.com/biggest-privacy-erosion-in-10-years-on-googles-policy-change-towards-fingerprinting/){target="_blank"} covers the removal of the "Google doesn't allow fingerprinting" clause.
 [^ico]: [Our response to Google's policy change on fingerprinting](https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2024/12/our-response-to-google-s-policy-change-on-fingerprinting/){target="_blank"} — Information Commissioner's Office, 19 December 2024.
