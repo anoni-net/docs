@@ -45,9 +45,9 @@ description: "近期社群活動更新資訊"
 
 ## 匿名搜尋 SearXNG
 
-<center>
-    <img width="50%" src="https://search.anoni.net/static/themes/simple/img/searxng.png" title="SearXNG" alt="SearXNG">
-</center>
+<figure markdown="span">
+    ![SearXNG](../../assets/images/searxng.png){width="50%" title="SearXNG"}
+</figure>
 
 [SearXNG](https://searxng.org/){target="_blank"} 是一個開源的隱私網路搜尋引擎，主要是保護使用者的隱私。SearXNG 從多個搜尋網站來源彙整搜尋結果、但不追蹤使用者，也不蒐集個人資料。SearXNG 可以自行架設，增加隱私保護，並支援客製化設定，讓使用者選擇想要的搜尋引擎及過濾規則。
 

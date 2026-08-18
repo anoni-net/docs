@@ -42,9 +42,9 @@ Additionally, we noticed that [The MIT Press Reader](https://thereader.mitpress.
 
 ## SearXNG
 
-<center>
-    <img width="50%" src="https://search.anoni.net/static/themes/simple/img/searxng.png" title="SearXNG" alt="SearXNG">
-</center>
+<figure markdown="span">
+    ![SearXNG](../../assets/images/searxng.png){width="50%" title="SearXNG"}
+</figure>
 
 [SearXNG](https://searxng.org/){target="_blank"} is an open-source privacy-focused search engine designed to protect user privacy. It aggregates search results from various search sources without tracking users or collecting personal data. SearXNG can be self-hosted to enhance privacy protection and supports customizable settings, allowing users to choose their preferred search engines and filtering rules.
 
