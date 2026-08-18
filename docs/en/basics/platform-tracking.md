@@ -114,6 +114,7 @@ Platform settings and policies change every few months. The mechanisms are durab
 - [Metadata, and why it matters](./metadata.md) — the communication-side counterpart to platform-side collection
 - [Threat modeling](./threat-model.md) — where "platform business model" sits as an adversary, and what it's worth spending to counter it
 - [Maintaining multiple online identities](./multiple-identities.md) — separating contexts so one profile doesn't absorb everything
+- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md) — changing tools does not by itself reduce the number of observers, and the same test applies here
 - [Using AI at work without leaking data](../tools/ai-privacy.md) — the same question applied to AI assistants: where the text goes, and who keeps it
 - [Privacy Guides](https://www.privacyguides.org/){target="_blank"} — maintained tool recommendations, which we don't duplicate
 

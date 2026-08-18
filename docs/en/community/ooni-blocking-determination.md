@@ -10,7 +10,7 @@ icon: material/shield-search
 
 `blocking` only records that one measurement disagreed with its control, which is several steps short of a confirmed block. Below: how the verdict is reached, what evidence backs each of the four types, and what has to be added before a single measurement supports a credible conclusion.
 
-## The basis of the verdict: a two-sided comparison
+## The verdict rests on a two-sided comparison
 
 A Probe measuring a site on its own cannot tell "the site is being interfered with" apart from "the site is down". `web_connectivity` handles this by measuring the same URL twice, once from the Probe's network and once via an OONI test helper on an unrestricted network, then comparing the two.
 

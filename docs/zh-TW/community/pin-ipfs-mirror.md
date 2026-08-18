@@ -205,7 +205,7 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 也可以在本機 gateway 開起來看，內容正常顯示就成功了：`http://127.0.0.1:8080${CID}/`。Docker 使用者把上面的 `ipfs` 換成 `docker exec ipfs_host ipfs`。
 
-## 進階：跟社群節點保持常連（選用）
+## 進階用法是跟社群節點保持常連（選用）
 
 pin 只靠 IPNS 名稱就能完成，內容交給 DHT 去找。第一次要把整份鏡像抓齊，碰上 DHT 查詢慢或查不到的時候會拖很久。想讓自己的節點跟來源節點維持固定連線，可以設定 kubo 的 peering。
 
@@ -237,7 +237,7 @@ peering 是單向設定，社群節點那端沒有對應條目，連線的保活
 - **想停止幫忙**：unpin 目前版本、把排程移除即可，不影響其他節點。
 - **隱私與風險**：你 pin 的是公開文件，沒有隱私顧慮。提供 IPFS pin 在不同司法管轄下的風險不同，相關限制見 [去中心化網站發布](../advanced/dweb-ipfs-onion.md) 的「已知限制與風險」。
 
-## 不想自架節點：用 pinning service 代 pin
+## 不想自架節點時改用 pinning service 代 pin
 
 不想維護 daemon 與排程的話，可以改用 [Pinata](https://www.pinata.cloud/){target="_blank"}、[Storacha](https://storacha.network/){target="_blank"} 這類 pinning service。在它們的介面直接貼上當前 CID 手動 pin，或用它們的 API 寫個排程餵新 CID，邏輯跟本頁腳本一樣（解析 IPNS 拿 CID，再送給服務 pin）。
 

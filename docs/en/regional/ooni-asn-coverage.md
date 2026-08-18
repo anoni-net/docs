@@ -36,7 +36,7 @@ For OONI measurement, the ASN is the smallest useful unit of "which network did 
 
     See Cloudflare Learning on [what an autonomous system is](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/){target="_blank"} and [what BGP is](https://www.cloudflare.com/learning/security/glossary/what-is-bgp/){target="_blank"}.
 
-## Taiwan: measurement concentrated in a few carriers
+## Measurement in Taiwan concentrates in a few carriers
 
 [OONI](https://ooni.org/){target="_blank"} is supported by a global network of volunteers who use [OONI Probe](https://ooni.org/install/){target="_blank"} to detect issues like internet blocking and content censorship in their regions. The test results from OONI Probe are uploaded to the project's [open data repository](https://registry.opendata.aws/ooni/){target="_blank"} for record-keeping and further analysis and use.
 

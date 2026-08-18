@@ -27,7 +27,7 @@ The same post that is unremarkable elsewhere can carry legal risk under a specif
 - **A real-name substrate.** National digital identity (Singpass in Singapore, MyKad and MyDigital ID in Malaysia) and mandatory SIM registration in both mean the account, the device, and the payment often already resolve to a legal name.
 - **Visibility and organizing scale the risk.** A low-reach post, a viral post, and a coordinated campaign sit at different risk tiers. Most enforcement documented below lands on public figures, activists, and organizers, or on posts that travel; an ordinary low-visibility post is less likely to be acted on, though "less likely" is not "safe," and the 2026 trend is toward more prosecution, not less.
 
-## Singapore: the legal landscape
+## The legal landscape in Singapore
 
 Treat this as the set of laws to check against, not an exhaustive list:
 
@@ -36,7 +36,7 @@ Treat this as the set of laws to check against, not an exhaustive list:
 - **Defamation and contempt.** Civil and criminal defamation, plus the Administration of Justice (Protection) Act on contempt of court, are live constraints on commentary about officials and ongoing cases.
 - **Public assembly.** The Public Order Act defines assembly broadly and can reach online organizing; a live-streamed indoor forum has been treated as an illegal assembly.
 
-## Malaysia: the legal landscape
+## The legal landscape in Malaysia
 
 - **Communications and Multimedia Act 1998, Section 233.** The most frequently used provision against online speech. Since the February 2025 amendment it covers content that is "obscene, indecent, false, menacing or **grossly** offensive in character with intent to annoy, abuse, threaten or harass," and the penalty ceiling rose sharply, to a fine up to RM500,000 or up to two years' imprisonment (higher where a minor is involved).[^cma] Two qualifiers matter: it reaches reposts and comments, not only original posts; but a 2026 Federal Court decision requires prosecutors to prove real intent to annoy, so the statute's wide wording does not mean any post is automatically an offence.[^heidy]
 - **Sedition Act 1948.** A colonial-era law still in force and still actively enforced, applied to speech touching the "3R" sensitivities (race, religion, royalty); social-media posts about royalty have drawn charges and convictions as recently as 2026.[^sedition]

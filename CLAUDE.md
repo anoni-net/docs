@@ -45,7 +45,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 
 | 群組 | 檔案 | 用途 |
 |------|------|------|
-| 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。只掃 zh-TW 與 zh-CN，英文版的破折號與分號屬正常用法，不在範圍內。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
+| 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，逐批清除 Cloudflare 快取（每批 30 條）|
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
 | 地球儀版面檢查 | `check_*.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
@@ -253,7 +253,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   ```
 
 - **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 跑 `tools/docs_style_lint.py`
-  - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md` 與 linter 本身，英文版不在範圍內
+  - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md`、`docs/en/**/*.md` 與 linter 本身
   - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
   - 目前是 warn 階段，問題以 annotation 標在變更行上，`continue-on-error` 讓 job 維持綠燈。要改成 blocking 需拿掉 `continue-on-error` 並在 repo 設定加上 branch protection
 

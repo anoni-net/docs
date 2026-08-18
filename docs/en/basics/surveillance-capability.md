@@ -18,9 +18,9 @@ What follows covers four layers: platforms and data brokers, telecom carriers, s
 - **Capability moves fast, institutions move slowly.** Retention periods and warrant thresholds are more stable than the technical picture, so weight them more heavily when judging long-term risk.
 - **Absence of evidence is not evidence of absence.** Only claims with a public record appear here. Where nothing could be verified, the page says so.
 
-**Two adversaries this page does not cover.** Fraud and account takeover cost ordinary people the most money in practice; see [what an ordinary person should actually do](../scenarios/everyday-baseline.md). An employer-issued device, or tracking software a partner or parent installs on your phone, costs a few dollars or is built in already, and sits far closer to most people than any state-level capability; see [domestic violence and tech-enabled abuse](../scenarios/domestic-violence.md).
+Two adversaries fall outside this page. Fraud and account takeover cost ordinary people the most money in practice; see [what an ordinary person should actually do](../scenarios/everyday-baseline.md). An employer-issued device, or tracking software a partner or parent installs on your phone, costs a few dollars or is built in already, and sits far closer to most people than any state-level capability; see [domestic violence and tech-enabled abuse](../scenarios/domestic-violence.md).
 
-**How this maps to the other groupings on this site.** [Threat modeling](./threat-model.md) sorts adversaries into six tiers and [what an ordinary person should actually do](../scenarios/everyday-baseline.md) into three kinds. Layer one here corresponds to their "platform operators" and "commercial data collection", layers three and four to "national law enforcement" and "targeted investigation", and telecom is the shared infrastructure underneath the first two.
+The other groupings on this site line up with these layers. [Threat modeling](./threat-model.md) sorts adversaries into six tiers and [what an ordinary person should actually do](../scenarios/everyday-baseline.md) into three kinds. Layer one here corresponds to their "platform operators" and "commercial data collection", layers three and four to "national law enforcement" and "targeted investigation", and telecom is the shared infrastructure underneath the first two.
 
 !!! warning "The legal layer does not transfer across jurisdictions"
 
@@ -32,17 +32,23 @@ The widest layer. Marginal cost per person is close to zero, so everyone is in i
 
 ### What it can do
 
-**Infer attributes you never disclosed.** In June 2023 The Markup obtained the audience-segment list of the ad exchange Xandr: 650,000 segments, supplied by data brokers including Oracle, Experian, and Acxiom — companies that run no website or app of their own and whose business is collecting and selling personal data — with Oracle alone accounting for 36% of them[^markup]. Most are mundane to the point of comedy: "Heavy Purchaser – Meat Pies – Refrigeration", "Indulgent Dog Owners", "Tattoo Addicts", "Past Purchases > Autos > Makes > Subaru", "Newly Engaged". Others are less funny: "Credit Crunched – City Families", "Tough Times" (the list's own gloss: older, lower income, ethnically diverse singles), "Neuroticism – Easily Deflated", "I generally get a raw deal out of life", and health segments broken down by medication and diagnosis. The input is behavioral records, not anything you filled in.
+#### Infer attributes you never disclosed
+
+In June 2023 The Markup obtained the audience-segment list of the ad exchange Xandr: 650,000 segments, supplied by data brokers including Oracle, Experian, and Acxiom — companies that run no website or app of their own and whose business is collecting and selling personal data — with Oracle alone accounting for 36% of them[^markup]. Most are mundane to the point of comedy: "Heavy Purchaser – Meat Pies – Refrigeration", "Indulgent Dog Owners", "Tattoo Addicts", "Past Purchases > Autos > Makes > Subaru", "Newly Engaged". Others are less funny: "Credit Crunched – City Families", "Tough Times" (the list's own gloss: older, lower income, ethnically diverse singles), "Neuroticism – Easily Deflated", "I generally get a raw deal out of life", and health segments broken down by medication and diagnosis. The input is behavioral records, not anything you filled in.
 
 That particular list is a US-market artifact, and no comparable public list exists for most other countries. The same brokers operate elsewhere, but the scale and segment detail are not on the public record.
 
-**Join you together across apps and devices.** Phone numbers and email addresses are the usual join keys, and contact-list uploads pull in people who never created an account. The mechanics are in [how platforms collect your data](./platform-tracking.md).
+#### Join you together across apps and devices
 
-**Know roughly where you are after you turn location off.** IP addresses, previously joined Wi-Fi networks, and cell towers all yield an approximate position. Turning off GPS removes meter-level precision, and the position is still derivable.
+Phone numbers and email addresses are the usual join keys, and contact-list uploads pull in people who never created an account. The mechanics are in [how platforms collect your data](./platform-tracking.md).
+
+#### Know roughly where you are after you turn location off
+
+IP addresses, previously joined Wi-Fi networks, and cell towers all yield an approximate position. Turning off GPS removes meter-level precision, and the position is still derivable.
 
 ### What there is no evidence for
 
-**Routine covert audio recording.** An automated analysis of 17,260 Android apps found no evidence of covert audio exfiltration; what it did find was screen recording sent to third parties. Targeting gets its accuracy from the two capabilities above, behavioral records and cross-device joining, neither of which needs a microphone or trips any permission prompt. The full account, including the 2024 pitch-deck episode, is in [how platforms collect your data](./platform-tracking.md).
+Routine covert audio recording belongs here. An automated analysis of 17,260 Android apps found no evidence of covert audio exfiltration; what it did find was screen recording sent to third parties. Targeting gets its accuracy from the two capabilities above, behavioral records and cross-device joining, neither of which needs a microphone or trips any permission prompt. The full account, including the 2024 pitch-deck episode, is in [how platforms collect your data](./platform-tracking.md).
 
 ### Where the boundary sits
 
@@ -54,9 +60,13 @@ Covers everyone with a phone number. The records are generated automatically, wi
 
 ### What it can do
 
-**Communication records.** Content is not in them; nearly everything else is. One entry looks roughly like this: on a given day at 21:04, your number dialled another number, the call lasted 4 minutes 12 seconds, and the handset was attached to a particular cell tower. Tower precision depends on density, from a few hundred meters in a city to several kilometers in rural areas. Encryption of content does not affect this layer, because the record is generated on the network side.
+#### Communication records
 
-**How far back it reaches is set by statutory retention.** Taiwan's rule is three months for local calls and six months for domestic long-distance, international, and mobile communications[^telecom]. In plain terms: going back six months, what time you leave home, where you go at weekends, and which week you suddenly started calling someone frequently are all reconstructable. Past that window the carrier must respond in writing that the records cannot be provided, so the retention period is the ceiling on any after-the-fact investigation. Periods vary widely by country, so check the rule where you live.
+Content is not in them; nearly everything else is. One entry looks roughly like this: on a given day at 21:04, your number dialled another number, the call lasted 4 minutes 12 seconds, and the handset was attached to a particular cell tower. Tower precision depends on density, from a few hundred meters in a city to several kilometers in rural areas. Encryption of content does not affect this layer, because the record is generated on the network side.
+
+#### How far back it reaches is set by statutory retention
+
+Taiwan's rule is three months for local calls and six months for domestic long-distance, international, and mobile communications[^telecom]. In plain terms: going back six months, what time you leave home, where you go at weekends, and which week you suddenly started calling someone frequently are all reconstructable. Past that window the carrier must respond in writing that the records cannot be provided, so the retention period is the ceiling on any after-the-fact investigation. Periods vary widely by country, so check the rule where you live.
 
 ### What it cannot do
 
@@ -74,7 +84,7 @@ Interception requires a judge-issued warrant, generally limited to offenses carr
 
 ### Retrieving communication records
 
-A tier lower. A court-issued retrieval order is the default. The same statute, however, carves out an exception: offenses carrying a minimum sentence of three years, plus an enumerated list that includes robbery, fraud, extortion, kidnapping for ransom, narcotics, and money laundering. For those, a prosecutor or an authorized judicial police officer may retrieve records without going to a court[^tsa]. Fraud sits inside that exception, and it is the case type an ordinary person is most likely to touch.
+A tier lower. A court-issued retrieval order is the default. The same statute, however, carves out an exception: offenses carrying a minimum sentence of ten years, plus an enumerated list that includes robbery, snatching, fraud, extortion, kidnapping for ransom, narcotics, and money laundering. For those, a prosecutor or an authorized judicial police officer may retrieve records without going to a court[^tsa]. Fraud sits inside that exception, and it is the case type an ordinary person is most likely to touch.
 
 ### Actual scale
 
@@ -102,7 +112,7 @@ Highest cost, fewest targets, and the highest capability ceiling of the four.
 
 ### What it can do
 
-**Zero-click exploits compromise a device without you tapping anything.** Once a device is compromised, end-to-end encryption stops protecting anything, because the implant reads content that has already been decrypted on the device: the message is read at the same moment you can read it.
+Zero-click exploits compromise a device without you tapping anything. Once a device is compromised, end-to-end encryption stops protecting anything, because the implant reads content that has already been decrypted on the device: the message is read at the same moment you can read it.
 
 In July 2026 Amnesty International published a full analysis of Pegasus's architecture, drawing on internal marketing and technical documents disclosed in WhatsApp's litigation against NSO Group[^amnesty]. In the same month, Citizen Lab reported that the iPhone of a former Member of the European Parliament had been infected with Pegasus at least three times across 2022 and 2023[^citizenlab].
 
@@ -156,6 +166,7 @@ Both capability and law keep moving, and the facial-recognition legislative trac
 - [How platforms collect your data](./platform-tracking.md) — the full mechanics of the first layer
 - [Threat modeling](./threat-model.md) — turning these capability limits into your own judgment
 - [Why metadata matters](./metadata.md) — why communication records are often worth more than content
+- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md) — changing tools does not by itself reduce the number of observers
 - [VPN risks and how to choose one](../tools/vpn-guide.md) — what the VPN row in the table above does and does not buy you
 
 [^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} — The Markup, 8 June 2023. The reporting is based on the audience-segment list of the ad exchange Xandr, drawn from close to a hundred data suppliers. Segment names are quoted as they appear in that list. Verified 2026-08.
@@ -166,14 +177,14 @@ Both capability and law keep moving, and the facial-recognition legislative trac
 
 [^telecom]: Taiwan's [Regulations on Telecom Enterprises Handling Agency Inquiries into Communication Records](https://law.moj.gov.tw/LawClass/LawAll.aspx?PCODE=K0060030){target="_blank"}, Article 5, as amended 15 June 2017: three months for local, six months for domestic long-distance, international, and mobile. Verified 2026-08.
 
-[^tsa]: Taiwan's [Communication Security and Surveillance Act](https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0060044){target="_blank"}. The interception threshold is Article 5; retrieval of communication records and its exceptions are Article 11-1. Verified 2026-08.
+[^tsa]: Taiwan's [Communication Security and Surveillance Act](https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0060044){target="_blank"}. The interception threshold is Article 5. Retrieval of communication records is Article 11-1, paragraphs 2 and 3, and the exception permitting retrieval without a court order is paragraph 4. Verified 2026-08.
 
 [^tsa15]: [Article 15 of Taiwan's Communication Security and Surveillance Act](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=15){target="_blank"}. The executing agency must report after surveillance ends and the court notifies the person surveilled; deferral requires stated grounds, reassessment every three months, and notice once the grounds lapse. Verified 2026-08.
 
 [^mpolice]: [Police agency takes M-Police facial matching offline pending regulatory work](https://news.ltn.com.tw/news/society/breakingnews/3780906){target="_blank"} — Liberty Times, December 2021 (in Chinese). For the human rights analysis, see [Privacy issues in public-sector use of facial recognition and CCTV](https://www.tahr.org.tw/news/3111){target="_blank"} — Taiwan Association for Human Rights. Verified 2026-08; no public announcement of resumption found.
 
-[^amnesty]: [The Pegasus Project](https://securitylab.amnesty.org/case-study-the-pegasus-project/){target="_blank"} — Amnesty International Security Lab. Architecture analysis published 16 July 2026 from internal documents disclosed in WhatsApp's litigation against NSO Group. Verified 2026-08.
+[^amnesty]: [Inside Pegasus: The evolution of the world's most notorious spyware system](https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/){target="_blank"} — Amnesty International Security Lab. Architecture analysis published 16 July 2026 from internal documents disclosed in WhatsApp's litigation against NSO Group. Verified 2026-08.
 
-[^citizenlab]: [Citizen Lab](https://citizenlab.ca/){target="_blank"}, 3 July 2026, reporting that former MEP Stelios Kouloglou's iPhone was infected with Pegasus at least three times across 2022 and 2023. Verified 2026-08.
+[^citizenlab]: [Espionage Against the European Parliament: Member of Committee Investigating Spyware Hacked with Pegasus](https://citizenlab.ca/research/member-of-committee-investigating-spyware-hacked-with-pegasus/){target="_blank"}, 3 July 2026, reporting that former MEP Stelios Kouloglou's iPhone was infected with Pegasus at least three times across 2022 and 2023. Verified 2026-08.
 
 [^lockdown]: [About Lockdown Mode](https://support.apple.com/en-us/105120){target="_blank"} — Apple Support. Apple describes it as an extreme, optional protection that most people will never need, intended for individuals who may be personally targeted by state-level or mercenary spyware. The Android counterpart is Advanced Protection. Verified 2026-08.

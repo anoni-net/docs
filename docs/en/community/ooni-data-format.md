@@ -12,7 +12,7 @@ Two real measurements from Taiwan are compared side by side below to set out how
 
 !!! info "Where these examples come from"
 
-    Both are public measurements produced by OONI Probe in Taiwan on 2026-08-04. You can look up the raw content on [OONI Explorer](https://explorer.ooni.org/){target="_blank"}.
+    Both are public measurements produced by OONI Probe in Taiwan on 2026-08-04. For what OONI is and why it measures, see [What is OONI?](../tools/what-is-ooni.md). You can look up the raw content on [OONI Explorer](https://explorer.ooni.org/){target="_blank"}.
 
     | | Passed | Flagged as anomalous |
     |---|---|---|
@@ -49,7 +49,7 @@ The raw response is one long unbroken string, which is painful to read in a term
 
 For bulk processing, the AWS S3 public dataset is far more efficient. See [ASN observation data retrieval and analysis](./asn-coverage-howto.md).
 
-## The envelope: who measured from where
+## The envelope records who measured from where
 
 Envelope fields are identical across every nettest. These are the ones you reach for most often:
 
@@ -73,7 +73,7 @@ Envelope fields are identical across every nettest. These are the ones you reach
 
     OONI deliberately does not collect the measurer's real IP, so `probe_ip` is hardcoded to the loopback address. Tracing a measurement back to its source relies on `probe_asn` plus timing. The same privacy boundary is why [OONI Run v2 for regional measurement](../tools/ooni-run-v2.md) asks people to think about what they are asking helpers to run.
 
-## The verdict: what the measurement concluded
+## The verdict is what the measurement concluded
 
 Verdict fields all live under `test_keys`. One thing to know before reading them: `web_connectivity` reaches its verdict by comparison. After the Probe finishes, an OONI test helper on an unrestricted network measures the same URL again, and the difference between the two sides is what the verdict is built from. The test helper's side is recorded under `test_keys.control`, which is what "the control" refers to below.
 
@@ -114,7 +114,7 @@ All four `*_match` fields are `null` in the anomalous measurement, because the D
 
     Concluding that something is blocked needs measurements cross-referenced over time, across ASNs and across resolvers. For the full breakdown of the verdict mechanism and where misreadings come from, see [How OONI decides a site is blocked](./ooni-blocking-determination.md). For quality control at the dataset level, see [OONI is guarding its data against bad measurements](../blog/posts/2026-ooni-faulty-measurements.md).
 
-## The evidence: the raw record behind the verdict
+## The evidence is the raw record behind the verdict
 
 Several more fields under `test_keys` record every network operation the measurement performed. Each has its own specification:
 

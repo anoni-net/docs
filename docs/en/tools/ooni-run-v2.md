@@ -54,6 +54,10 @@ miniooni's `-i` treats the URL you give it as a descriptor-JSON endpoint and GET
 - [:material-table-search: OONI nettest quick reference](../community/ooni-nettests-map.md)
 - [:material-code-json: Reading an OONI measurement](../community/ooni-data-format.md)
 - [:material-snowflake: Tor Snowflake](./tor-snowflake.md)
+- [:material-chat-question: What is OONI?](./what-is-ooni.md)
+- [:material-chat-question: What is Tor?](./what-is-tor.md)
+- [:material-chat-question: Why networked freedom matters](../basics/internet-freedom.md)
+- [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
 - [:material-web: OONI](https://ooni.org/){target="_blank"}
 
 </div>

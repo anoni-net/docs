@@ -1,10 +1,10 @@
 ---
-title: "Encrypted DNS: how to choose, and how to check it actually works"
+title: How to choose encrypted DNS, and how to check it actually works
 description: Typing 1.1.1.1 into Wi-Fi settings is not encrypted DNS — it swaps which server answers while the query still goes out in plaintext. DoH, DoT and DoQ; how to judge a resolver operator; what each platform's field accepts; which defaults silently fall back to plaintext; and how to test.
 icon: material/dns
 ---
 
-# :material-dns: Encrypted DNS: how to choose, and how to check it actually works
+# :material-dns: How to choose encrypted DNS, and how to check it actually works
 
 Filling `1.1.1.1` into the DNS field of your phone's Wi-Fi settings is, for many people, the first privacy setting they ever change. It swaps which server answers you. The query still leaves your device in plaintext, and every device along the path still reads the full domain name.
 
@@ -47,13 +47,21 @@ There is also ODoH (Oblivious DoH, `RFC 9230`), aimed squarely at the problem in
 
 Once queries are encrypted, one company receives all of them and knows who asked, what, and when.
 
-**Jurisdiction.** Who can compel the operator to hand over data or to block a domain depends on where it is incorporated and where the servers sit. There is a real test case here: Quad9 has faced two European actions demanding it block domains — the German case brought by Sony Music ran until a favourable result in December 2023, and in December 2024 Canal+ filed a new one in France[^quad9-press]. Being registered in Switzerland does not confer immunity from another country's court order.
+### Jurisdiction
 
-**What is logged and for how long.** The specifics matter more than the phrase "we don't log". Cloudflare's stated commitments for `1.1.1.1` include not selling or sharing users' personal data, not using it to target advertising, not storing the user's IP address in non-volatile storage, and deleting the relevant logs within 25 hours[^cf-privacy].
+Who can compel the operator to hand over data or to block a domain depends on where it is incorporated and where the servers sit. There is a real test case here: Quad9 has faced two European actions demanding it block domains — the German case brought by Sony Music ran until a favourable result in December 2023, and in December 2024 Canal+ filed a new one in France[^quad9-press]. Being registered in Switzerland does not confer immunity from another country's court order.
 
-**Whether anyone independent checked.** A claim and an audited claim differ. Cloudflare states it retained one of the top four accounting firms to audit the practice and publish a report[^cf-privacy]. Reports of that kind assess stated practice at a point in time; they are not a continuing guarantee.
+### What is logged and for how long
 
-**Whether it filters.** See below.
+The specifics matter more than the phrase "we don't log". Cloudflare's stated commitments for `1.1.1.1` include not selling or sharing users' personal data, not using it to target advertising, not storing the user's IP address in non-volatile storage, and deleting the relevant logs within 25 hours[^cf-privacy].
+
+### Whether anyone independent checked
+
+A claim and an audited claim differ. Cloudflare states it retained one of the top four accounting firms to audit the practice and publish a report[^cf-privacy]. Reports of that kind assess stated practice at a point in time; they are not a continuing guarantee.
+
+### Whether it filters
+
+See below.
 
 ### Filtering resolvers cut both ways
 
@@ -118,21 +126,33 @@ Firefox also has a mechanism by which a network can signal it to disable encrypt
 
 ## How to check you got it right
 
-**Look at the shape of what you entered.** Against the table above: a hostname, a URL, or an IP decides whether it is encrypted. Windows is the exception, where what matters is the encryption dropdown.
+### Look at the shape of what you entered
 
-**Look at which layer you changed.** System and browser settings are independent — a browser with DoH on leaves every other app on the system resolver. The home router and DHCP are a third layer, and putting `9.9.9.9` into a router gives zero encryption, because most consumer routers will not do DoT or DoH on your behalf and the LAN hop to the router was never encrypted anyway. Covering a whole home or office means confirming that the device itself supports an encrypted upstream.
+Against the table above: a hostname, a URL, or an IP decides whether it is encrypted. Windows is the exception, where what matters is the encryption dropdown.
 
-**Test it once.** The first two checks tell you what you typed; they cannot catch a silent fallback, a browser running its own resolver, or an app with one hardcoded. All three operators publish a check page: Cloudflare's [1.1.1.1/help](https://1.1.1.1/help){target="_blank"}, Quad9's [on.quad9.net](https://on.quad9.net/){target="_blank"}, and Mullvad's [connection check](https://mullvad.net/en/check){target="_blank"}. What you want is the resolver and encryption status it reports matching the operator you configured. Test once in your everyday browser and once outside it, since the two can differ.
+### Look at which layer you changed
+
+System and browser settings are independent — a browser with DoH on leaves every other app on the system resolver. The home router and DHCP are a third layer, and putting `9.9.9.9` into a router gives zero encryption, because most consumer routers will not do DoT or DoH on your behalf and the LAN hop to the router was never encrypted anyway. Covering a whole home or office means confirming that the device itself supports an encrypted upstream.
+
+### Test it once
+
+The first two checks tell you what you typed; they cannot catch a silent fallback, a browser running its own resolver, or an app with one hardcoded. All three operators publish a check page: Cloudflare's [1.1.1.1/help](https://1.1.1.1/help){target="_blank"}, Quad9's [on.quad9.net](https://on.quad9.net/){target="_blank"}, and Mullvad's [connection check](https://mullvad.net/en/check){target="_blank"}. What you want is the resolver and encryption status it reports matching the operator you configured. Test once in your everyday browser and once outside it, since the two can differ.
 
 ## When it breaks
 
-**Enterprise and campus networks.** Internal domains only resolve against internal DNS, so sending queries outside makes internal resources vanish. Most operating systems allow disabling encrypted DNS per network or routing specific domains to an internal resolver; at organisational scale the right answer is conditional forwarding or split-horizon resolution, not telling everyone to switch it off.
+### Enterprise and campus networks
 
-**Captive portals.** Hotel and airport Wi-Fi that requires a login page relies on the network blocking outbound traffic before you authenticate, so encrypted DNS cannot resolve and the login page never appears. Most operating systems now detect and handle this. If you do have to turn it off manually, remember two things: while it is off your queries are fully readable to that network, so avoid anything sensitive during that window, and confirm you turned it back on the moment you are through — this step is easy to forget.
+Internal domains only resolve against internal DNS, so sending queries outside makes internal resources vanish. Most operating systems allow disabling encrypted DNS per network or routing specific domains to an internal resolver; at organisational scale the right answer is conditional forwarding or split-horizon resolution, not telling everyone to switch it off.
 
-**Encrypted DNS blocked outright.** DoT's port 853 is trivially blocked. DoH is harder to block by port, but a network operator can still block a specific resolver's IPs and domains.
+### Captive portals
 
-## Regional context: measurement in the Asia-Pacific
+Hotel and airport Wi-Fi that requires a login page relies on the network blocking outbound traffic before you authenticate, so encrypted DNS cannot resolve and the login page never appears. Most operating systems now detect and handle this. If you do have to turn it off manually, remember two things: while it is off your queries are fully readable to that network, so avoid anything sensitive during that window, and confirm you turned it back on the moment you are through — this step is easy to forget.
+
+### Encrypted DNS blocked outright
+
+DoT's port 853 is trivially blocked. DoH is harder to block by port, but a network operator can still block a specific resolver's IPs and domains.
+
+## Regional context on measurement in the Asia-Pacific
 
 Across the region the common reasons for changing DNS are speed and reachability — some domain does not resolve on the ISP's resolver. That second motive depends on which layer the blocking sits at: DNS-layer blocking is defeated by changing resolver, blocking at the IP or SNI layer is not, whoever answers you.
 
@@ -194,6 +214,7 @@ Before running OONI Probe, run them in reverse: turn off every third-party resol
 
 <div class="grid cards" markdown>
 
+- [:material-incognito-off: Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md)
 - [:material-file-tree: What metadata is and why it matters](../basics/metadata.md)
 - [:material-vpn: VPN: risks and how to choose](./vpn-guide.md)
 - [:material-chat-question: Building a threat model](../basics/threat-model.md)
@@ -204,7 +225,8 @@ Before running OONI Probe, run them in reverse: turn off every third-party resol
 
 <div class="grid cards" markdown>
 
-- [:material-access-point-network: OONI Run v2 for regional measurement](./ooni-run-v2.md)
+- [:material-access-point-network: What is OONI?](./what-is-ooni.md)
+- [:material-help-network: OONI Run v2 for regional measurement](./ooni-run-v2.md)
 - [:material-chart-bar: Tor relay watcher](../regional/tor-relay-watcher.md)
 - [:material-snowflake: Tor Snowflake](./tor-snowflake.md)
 

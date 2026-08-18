@@ -31,7 +31,7 @@ Put differently, a donor's identifying information is tied to their politics, se
 
     Source (reviewed 2026-07): [Hong Kong court convicts Cardinal Zen and 5 others over failing to register protester relief fund as society](https://hongkongfp.com/2022/11/25/breaking-hong-kong-court-convicts-cardinal-zen-and-5-others-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"}, Hong Kong Free Press.
 
-## Organizer side: build an optional anonymous channel
+## Organizers can build an optional anonymous channel
 
 The word *optional* is the core of the design. People who want anonymity have a path, and people who want to be named can still be named; the two run in parallel. In practice most donors take the named path (for a receipt, for membership), and a minority take the anonymous path for the sensitive reasons above. Preparing both is more respectful of your supporters' circumstances than forcing everyone down one road.
 
@@ -56,7 +56,7 @@ Settle these before you accept the first anonymous donation, not after:
 
 Write these into your internal charter as a standing rule.
 
-## Organizer side: cash and prepaid combinations
+## Organizers can combine cash and prepaid cards
 
 Not every organization needs, or is suited to, accepting crypto. For a small domestic group, cash plus prepaid is often the most practical default, and most groups can stop here.
 
@@ -64,7 +64,7 @@ Not every organization needs, or is suited to, accepting crypto. For a small dom
 - **Convenience-store payment codes.** Through a third-party payment processor, issue a payment code that a donor pays in cash at a store; the organization sees only the code, not a name. Limits: the platform layer may still keep a record, and per-transaction caps usually apply.
 - **Prepaid gift cards for cross-border giving.** When supporting an organization abroad, prepaid gift cards are sometimes one of the few workable options: the donor buys a card with cash and sends the serial number over an encrypted channel (Signal, OnionShare). This method has a strong association with scams, so explain the intended use clearly when you publish it.
 
-## Organizer side: accepting cryptocurrency donations
+## How organizers accept cryptocurrency donations
 
 Most groups will be fine with the cash-and-prepaid combination above. This section is for organizations that genuinely need cross-border reach or scale, which is where crypto does the most work and also carries the highest skill and compliance load. The example below assumes a small advocacy organization that does have a cross-border need.
 
@@ -96,7 +96,7 @@ Handling crypto after receipt is where the real compliance difficulty lives:
 
 Large crypto donations also carry a due-diligence dimension over the *source* of funds, which we return to in the Tornado Cash section below.
 
-## Organizer side: common first-time mistakes
+## Common first-time mistakes organizers make
 
 - **Listing only a crypto address with no usage note.** A donor seeing a string of characters does not know whether you can actually use it, whether you convert immediately, or whether you reconcile. Put a short note next to the address (use, reconciliation cadence, whether a receipt is available).
 - **Concentrating all multisig keys in the executive team.** A 2-of-3 where all three signers sit in the same office is not risk distribution. At least one key must go to someone outside the executive team.
@@ -106,7 +106,7 @@ Large crypto donations also carry a due-diligence dimension over the *source* of
 
 The common root of these mistakes is "build the tech first, think about policy and process later." Reverse the order: decide who you serve, which regulators you face, and how you separate internal authority, then decide whether and how to build the optional anonymous channel.
 
-## Donor side: choosing a channel without exposing yourself
+## Donors can choose a channel without exposing themselves
 
 Switch to the donor's point of view. For the same organization offering the same rails, the best channel differs from one donor to the next.
 
@@ -130,7 +130,7 @@ Write the answers down before you pick a channel. Skip this step and most people
 
 One trap in that table: Zcash only hides a transaction if you use a *shielded* (z-address) transaction. An ordinary transparent Zcash transaction is as visible as Bitcoin, so choosing Zcash without choosing the shielded path gives you no privacy.
 
-### Worked flow: a small privacy-coin donation
+### A worked flow for a small privacy-coin donation
 
 First, to be clear: for small domestic support, cash, a store code, or a prepaid card is the least trouble, and you do not need to reach for cryptocurrency. The privacy-coin flow below is for the case of "supporting an organization abroad while maximizing anonymity," and the bar is noticeably higher.
 
@@ -142,7 +142,7 @@ Say a donor wants to give a small amount (roughly USD 15 to 150) to an advocacy 
 
 The step most often underestimated is the first, acquiring the coin without leaving an identity trail. Many donors reach it, find the bar too high, and give up, which is exactly why low-barrier rails like prepaid cards and cash cannot be fully replaced by crypto.
 
-## The Tornado Cash sanctions case: where the legal line sits
+## Where the Tornado Cash sanctions case puts the legal line
 
 The most important recent indicator of the legal risk around crypto anonymity tools is Tornado Cash. This is a US case, but it matters well beyond the US: major exchanges apply OFAC sanctions globally, and regulators elsewhere often reason from the same precedents. For an advocacy organization it is not technical gossip; it is a concrete reference for judging whether what you are doing crosses a line.
 
@@ -174,7 +174,7 @@ Lawful, auditable, and protective of the vulnerable have to be true at the same 
 
 These are not mutually exclusive. A well-designed anonymous channel satisfies all three; drop any one and the value of the other two is discounted.
 
-## Regional context: Sinophone Asia-Pacific
+## Regional context across Sinophone Asia-Pacific
 
 Statutory detail is where "anonymous donation" stops being universal. We have first-hand standing in only one jurisdiction and are following the rest, so read this section as a map of where to look, not as the law itself.
 
@@ -198,3 +198,5 @@ The universal principle underneath all of them: check your own jurisdiction's ch
 - [The cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md): how BTC, ETH, Monero, Zcash, and stablecoins differ on privacy.
 - [Secure messaging compared](../tools/messaging-comparison.md): for the encrypted channel you use to send a prepaid serial or coordinate quietly.
 - [When financial companies act as censors](../blog/posts/2026-financial-companies-as-censors.md): why a payment rail can be severed, and why a fallback matters.
+- [The anonymous payments track](../community/payments-research.md): the community entry point, resources awaiting translation, and conference collaboration.
+- [Emergency help](../help/index.md): if a receiving channel has already been frozen or an organizer is under pressure.

@@ -3,7 +3,7 @@ title: OnionShare
 description: Spin up a temporary onion service to send files, receive files, host a site, or chat, all over Tor. The session disappears when you close it, and no third-party server is involved.
 icon: material/share-circle
 ---
-# :material-share-circle: OnionShare: Anonymous Transfer over Tor
+# :material-share-circle: OnionShare, anonymous transfer over Tor
 
 [OnionShare](https://onionshare.org/){target="_blank"} is an open source tool that starts a temporary Tor onion service on your own computer, letting you send files, receive files, host a site, or chat with someone anonymously. Nothing goes to the cloud, no account is created, and the traffic runs through Tor's layered encryption. Close the window and the onion service disappears with it.
 

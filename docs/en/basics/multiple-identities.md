@@ -173,7 +173,7 @@ A steadier sequence:
 4. **Check for dependencies**: is any other service using this address for account recovery?
 5. **Keep the shell or delete it, as the risk warrants**: a dormant account still costs you a password and a 2FA entry to maintain, and the platform keeps associating it. An account still wired into recovery flows should certainly not be deleted
 
-One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
+One situation inverts this. If you are already being harassed or threatened, or legal proceedings are plausible, the records are evidence and should be preserved. [Emergency help](../help/index.md) covers the immediate steps, and [activists and protest digital safety](../scenarios/activist.md) makes the related point that a pre-agreed disappearing-message policy reads very differently from a sudden deletion after the fact. For urgent digital-security support, [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"} operates 24/7 in multiple languages.
 
 ## Common misconceptions
 

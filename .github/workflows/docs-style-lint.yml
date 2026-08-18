@@ -8,9 +8,12 @@
 # en 是 2026-08 納入的。在那之前英文規則純靠人工，而補齊英文站的三個批次顯示
 # 人工在那個規模守不住，同一類違反（粗體整句開頭、冒號標題）三批都出現。
 #
-# 目前是 warn 階段：問題以 annotation 標在 PR 變更行上，但 continue-on-error 讓 job
-# 維持綠燈，不擋 merge。收斂誤報後要改 blocking，只要拿掉下面的 continue-on-error，
-# 並在 repo 設定把這個 check 設為 branch protection 必過即可。
+# 這個 job 會擋 merge。error 級規則（破折號、分號、不是…而是、並列引號、AI 開頭語、
+# blog frontmatter）讓 linter 回 exit 1，job 就紅。warn 級規則仍只標 annotation，
+# 不影響 exit code，改法要看語境，機器不宜代勞。
+#
+# 要讓 warn 也擋，得先把對應規則升成 error，那是規則本身的決定，不是這裡改。
+# 另需在 repo 設定把這個 check 設為 branch protection 必過，workflow 擋不到那一層。
 name: docs-style-lint
 
 on:
@@ -40,14 +43,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      # 規則本身的回歸測試。內容掃描是 warn 階段不擋 merge，但「規則有沒有壞掉」
-      # 是二元的，所以這一步會擋。實際踩過兩次：簡體「讲」完全沒被檢查、
+      # 規則本身的回歸測試。內容掃描只擋 error，但「規則有沒有壞掉」是二元的，
+      # 所以這一步一定要擋。實際踩過兩次：簡體「讲」完全沒被檢查、
       # 「得先」的例外字集繁簡不對稱導致誤報，都是抽樣看不出來的覆蓋缺口。
       - name: 測試 linter 規則
         run: python3 tools/test_docs_style_lint.py
 
-      - name: 掃描變更的 Markdown（warn 階段，不擋 merge）
-        continue-on-error: true
+      - name: 掃描變更的 Markdown
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           mapfile -t files < <(git diff --name-only --diff-filter=ACM "$base" HEAD -- docs/zh-TW docs/zh-CN docs/en \

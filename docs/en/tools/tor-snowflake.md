@@ -51,7 +51,7 @@ A few things to understand before you start Snowflake:
     - Try switching to a network without a forced captive portal (home, mobile).
     - Switch to the browser-extension version (see below).
 
-## Better for an always-on machine: the browser extension
+## The browser extension suits an always-on machine
 
 If your computer is on for long stretches, the extension version is better than a tab:
 
@@ -98,6 +98,8 @@ If your computer is on for long stretches, the extension version is better than 
 <div class="grid cards" markdown>
 
 - [:material-chat-question: Why networked freedom matters](../basics/internet-freedom.md)
+- [:material-chat-question: What is Tor?](./what-is-tor.md)
+- [:material-chat-question: What is an anonymity network?](./what-is-anonymity-network.md)
 - [:material-web: Tor Project Support](https://support.torproject.org/){target="_blank"}
 - [:material-toolbox-outline: Tools overview](./index.md)
 
@@ -108,6 +110,8 @@ If your computer is on for long stretches, the extension version is better than 
 <div class="grid cards" markdown>
 
 - [:material-tunnel-outline: How to run a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md)
+- [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
+- [:material-school-outline: Running a Tor relay on campus](../community/relay-on-campus.md)
 - [:material-server-network: Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"}
 - [:material-translate-variant: Localization and doc translation](../community/i18n.md)
 

@@ -50,7 +50,7 @@ Portuguese app studio [Bloco](https://www.bloco.io/){target="_blank"} noticed ho
 
 The result gives volunteers real control: run only in the background, restrict to unmetered Wi-Fi, run only while charging, or cap how many people it helps at once.
 
-## The number that matters: +29% in a month
+## The number that matters is +29% in a month
 
 Snowflake Volunteer launched publicly in April after a round of community testing. Daily unique volunteer IPs went from about 1,300 in May to about 1,700 in June, a 29% increase in one month, with single-day peaks above 2,100. That's a meaningful jump for a channel that previously only existed as a browser extension, a website widget, a desktop CLI tool, or Orbot's Kindness Mode. It suggests a chunk of would-be volunteers were simply waiting for an option that fit how they actually use their devices, phone-first, not desktop-first.
 

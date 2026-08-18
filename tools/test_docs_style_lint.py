@@ -176,6 +176,10 @@ HEADING_CASES: list[tuple[str, bool, str]] = [
      False, "Material 圖示的冒號不算句構"),
     ("### Workshop 1: Circumventing censorship\n\nText.",
      False, "編號式標題是列舉序號"),
+    ("### Option A: Nginx and Onionoo\n\nText.",
+     False, "單一大寫字母的選項序號也算編號式標題"),
+    ("### Optional: turn on the bridge\n\nText.",
+     True, "Optional 不是序號，仍是冒號句構"),
     ("## Note:\n\nText.", False, "行尾冒號沒有說明部分"),
 ]
 

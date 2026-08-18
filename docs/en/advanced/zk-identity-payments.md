@@ -78,7 +78,7 @@ The effectiveness of blending depends on how many people are doing it. When ever
 
 Chain analysis has boundaries, and compliance requirements do not go away. Separating proving that you comply from disclosing who you are is exactly where zero-knowledge proofs apply to identity.
 
-## Zero-knowledge identity: proving an attribute without revealing it
+## Zero-knowledge identity proves an attribute without revealing it
 
 zk-SNARKs are not limited to payments. Applied to identity, they produce a capability that did not previously exist: proving you have an attribute without revealing its value.
 
@@ -109,17 +109,23 @@ Clean in theory, and the practical bottleneck is that the verifier has to trust 
 
 ## What this looks like across the region
 
-**Taiwan.** The [Virtual Asset Service Act](../regional/taiwan-vasp-2026.md) pushes KYC and the Travel Rule down to the exchange level. It passed the Executive Yuan in April 2026, cleared committee review in June, and passed its third reading on 30 June 2026[^4]. Three effects on private payments:
+### Taiwan
+
+The [Virtual Asset Service Act](../regional/taiwan-vasp-2026.md) pushes KYC and the Travel Rule down to the exchange level. It passed the Executive Yuan in April 2026, cleared committee review in June, and passed its third reading on 30 June 2026, with the commencement date still to be set by the Executive Yuan[^4]. Three effects on private payments:
 
 1. **Exchanges**: local platforms offering privacy features such as Monero or Zcash shielded transactions face clear regulatory pressure, and delisting or restriction is likely
 2. **Users**: holding privacy coins through decentralized exchanges or peer-to-peer remains open, and converting to and from local currency narrows
 3. **Advocacy organizations**: an NGO accepting crypto donations has to balance donor anonymity against accounting disclosure. A group wanting to accept Monero donations to protect its funders will find most local exchanges have already delisted it, leaving overseas platforms or peer-to-peer conversion, and accounting for the total to regulators becomes awkward. Zero-knowledge identity could become an option here, where a donor proves a lawful deductible amount while the organization still discloses the total, and the ecosystem is not there yet
 
-**Hong Kong.** The framework and the risk level are different. Virtual asset trading platform licensing has been in force since June 2023 under the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, administered by the Securities and Futures Commission, with fiat-referenced stablecoin issuance licensed separately by the Monetary Authority since August 2025. Retail users can only trade eligible tokens on licensed platforms, and privacy coins conflict with anti-money-laundering and KYC requirements to the point of being practically unlistable[^hk].
+### Hong Kong
+
+The framework and the risk level are different. Virtual asset trading platform licensing has been in force since June 2023 under the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, administered by the Securities and Futures Commission, with fiat-referenced stablecoin issuance licensed separately by the Monetary Authority since August 2025. Retail users can only trade eligible tokens on licensed platforms, and privacy coins conflict with anti-money-laundering and KYC requirements to the point of being practically unlistable[^hk].
 
 The core risk for donation-based advocacy there is not the payment mechanism. It is that the purpose of the funds may itself be characterized as endangering national security. In the case of the 612 Humanitarian Relief Fund, which supported people arrested during the 2019 protests, the fund was investigated and ceased operating. Five trustees, among them Cardinal Joseph Zen, were arrested under Article 29 of the National Security Law, and six defendants were ultimately convicted under the Societies Ordinance for failing to register the fund, with fines rather than custodial sentences. An appeal was argued in December 2025 and judgment is pending. What zero-knowledge identity offers is keeping a donor's identity out of records that a security investigation could later reach. What it cannot do is address the characterization of the funds themselves, and no amount of clean technology substitutes for a legal risk assessment.
 
-**Mainland China.** Crypto business activity is comprehensively banned, which puts the question outside the regulatory frame entirely rather than inside a stricter version of it.
+### Mainland China
+
+Crypto business activity is comprehensively banned, which puts the question outside the regulatory frame entirely rather than inside a stricter version of it.
 
 For why anonymous payments matter to advocacy work generally, see [why anonymous payments matter](../basics/payments-anonymity.md). The community tracks this area in the [anonymous payments track](../community/payments-research.md).
 

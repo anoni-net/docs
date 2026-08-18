@@ -125,7 +125,7 @@ Directory names on S3 differ from `test_name`. Directory names carry no undersco
 
 Taiwan's observations concentrate on `web_connectivity`, with small sample sizes for everything else. For widening local coverage, `tor` and `dnscheck` sit closest to the community's existing themes.
 
-There are two ways to run a specific nettest. With [OONI Probe](https://ooni.org/install/){target="_blank"} on desktop or mobile, choose which nettests to enable in the settings. To invite others to measure a fixed list of URLs, use [OONI Run v2](../tools/ooni-run-v2.md) to create a shareable link. The link ID the community currently maintains is `10328`.
+If OONI itself is new to you, start with [What is OONI?](../tools/what-is-ooni.md). There are two ways to run a specific nettest. With [OONI Probe](https://ooni.org/install/){target="_blank"} on desktop or mobile, choose which nettests to enable in the settings. To invite others to measure a fixed list of URLs, use [OONI Run v2](../tools/ooni-run-v2.md) to create a shareable link. The link ID the community currently maintains is `10328`.
 
 ## Where to go from here
 

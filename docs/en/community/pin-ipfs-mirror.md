@@ -6,7 +6,7 @@ icon: simple/ipfs
 
 # :simple-ipfs: Help pin the site's IPFS mirror
 
-Alongside the main site, the anoni.net docs are also published as an IPFS mirror, so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and only a handful of nodes currently serve this mirror, with the community's own node carrying most of it. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
+Alongside the main site, the anoni.net docs are also published as an IPFS mirror (the design is explained in [decentralized website publishing](../advanced/dweb-ipfs-onion.md)), so the content stays readable when the main site is blocked or taken down. Content on IPFS only survives while some node pins it, and only a handful of nodes currently serve this mirror, with the community's own node carrying most of it. Every extra node that helps pin is one more complete copy on the network, and more resistance to takedown.
 
 This page walks you through running one always-on IPFS node plus a small scheduled script that keeps up with the latest version automatically. It works the same on Windows, Linux, and macOS, with or without Docker.
 
@@ -16,7 +16,7 @@ This page walks you through running one always-on IPFS node plus a small schedul
     - IPFS installed (this page shows you how).
     - A scheduled script that pins the latest version every few hours.
 
-    Can't run a node? The "No node" section at the end covers pinning through a service instead.
+    Can't run a node? The last section covers pinning through a service instead.
 
 ## Why the CID changes every time (30-second IPFS primer)
 
@@ -205,7 +205,7 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 You can also open it on your local gateway and check it renders: `http://127.0.0.1:8080${CID}/`. Docker users: replace `ipfs` above with `docker exec ipfs_host ipfs`.
 
-## Advanced: keep a steady connection to the community node (optional)
+## Advanced usage keeps a steady connection to the community node (optional)
 
 Pinning works off the IPNS name alone, and the DHT takes care of finding the content. Fetching a full mirror for the first time can drag on when DHT lookups are slow or come back empty. To hold a fixed connection between your node and the source node, configure kubo's peering.
 
@@ -237,7 +237,7 @@ Peering here is one-way: the community node has no matching entry, so keeping th
 - **To stop helping:** unpin the current version and remove the schedule. It doesn't affect any other node.
 - **Privacy and risk:** what you pin is public documentation, so there's no privacy concern. Offering IPFS pinning carries different legal risk across jurisdictions, so weigh that for where you operate.
 
-## No node: pin through a service instead
+## Pinning through a service instead of running a node
 
 If you'd rather not maintain a daemon and a schedule, use a pinning service like [Pinata](https://www.pinata.cloud/){target="_blank"} or [Storacha](https://storacha.network/){target="_blank"}. Paste the current CID into their interface to pin it manually, or script their API to feed it new CIDs, with the same logic as this page (resolve IPNS to a CID, hand the CID to the service).
 

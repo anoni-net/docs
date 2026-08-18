@@ -11,7 +11,7 @@ summary: "Hong Kong moved from medium to high risk for device inspection, the ex
 description: "Hong Kong moved from medium to high risk for device inspection, the exemption for eSIMs bought outside Japan was withdrawn, a 2FA app we recommended had changed owners, and a distribution drawn from 40 samples was overturned by the full dataset. The docs site merged 50 pull requests between 27 July and 10 August, a sizeable share of them fixing what we had already published. Here is what changed on each page, the evidence behind it, and the five things to do if you followed the old guidance."
 ---
 
-# Retracting what we published: what changed on the docs site in the past two weeks
+# Retracting what we published, and what changed on the docs site in the past two weeks
 
 ![What changed on the docs site](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 

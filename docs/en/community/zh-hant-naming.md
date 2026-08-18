@@ -12,7 +12,7 @@ In our own writing, translations, and upstream contributions, the community uses
 
 ## The position
 
-**Where we can use 正體 in our own content, we do.**
+Where we can use 正體 in our own content, we do.
 
 - Documentation, blog posts, and community discussion: 正體中文
 - Upstream translations such as CryptPad, Tor documentation, and OONI: strings we can change become 中文(正體)
@@ -33,7 +33,7 @@ In Taiwan, Hong Kong, and Macau, this script is the continuation of the Han char
 - In 1956 the People's Republic of China published its character simplification scheme, followed by the complete list of simplified characters in 1964, systematically simplifying character forms
 - The contrast between "complex" and "simplified" only exists after that scheme
 
-**Naming the pre-existing script "complex" applies a label backwards, from the perspective of a later comparison.**
+Naming the pre-existing script "complex" applies a label backwards, from the perspective of a later comparison.
 
 ### Naming shapes understanding
 

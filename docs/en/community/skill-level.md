@@ -28,8 +28,9 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     - [ ] I can describe differences in internet freedom across regions and give specific examples.
 
     ??? tip "Not there yet? Start here."
-        1. Read "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" (about 5–10 minutes)
-        2. Read "[Anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md)"
+        1. Read "[What is Tor?](../tools/what-is-tor.md)" (about 5–10 minutes)
+        2. Read "[What is an anonymity network?](../tools/what-is-anonymity-network.md)"
+        3. Read "[Anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md)"
         3. Read "[Why networked freedom matters](../basics/internet-freedom.md)"
         4. Come back and check the items above to confirm your understanding.
 
@@ -37,7 +38,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "How Tor works"
 
-            Start with "[What is Tor?](https://support.torproject.org/about/what-is-tor/){target="_blank"}" on the official Tor Project site.
+            Start with "[What is Tor?](../tools/what-is-tor.md)".
 
             Tor refers to "The Onion Router," which relays network connections randomly through three nodes. The "Tor Browser" is built by the Tor team on top of Firefox ESR and is designed for connecting to `.onion` websites.
 
@@ -244,7 +245,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     - [ ] I can describe the current state of internet freedom in my region. (Same as Tor Awareness)
 
     ??? tip "Not there yet? Start here."
-        1. Visit [tails.net](https://tails.net/){target="_blank"} and read the introductory documentation (about 5–10 minutes).
+        1. Read "[What is Tails?](../tools/what-is-tails.md)" (about 5–10 minutes), then [tails.net](https://tails.net/){target="_blank"} for the upstream documentation.
         2. The background knowledge on internet freedom and anonymous networks is the same as the Tor Awareness level. Complete the [Tor skills](#Tor-skills) section first, then come back.
         3. Come back and check the items above to confirm your understanding.
 
@@ -322,7 +323,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "Share files with OnionShare"
 
-            - OnionShare is a tool for securely sharing files over the Tor network. It comes pre-installed in Tails.
+            - OnionShare is a tool for securely sharing files over the Tor network, covered in full in [OnionShare](../tools/onionshare.md). It comes pre-installed in Tails.
             - Open OnionShare from the Applications menu.
             - Drag and drop files into OnionShare, or select them manually.
             - After starting the share, OnionShare generates a `.onion` URL. Share it with trusted people so they can download the files using Tor Browser.
@@ -405,7 +406,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     - [ ] I can describe differences in network surveillance and censorship across regions.
 
     ??? tip "Not there yet? Start here."
-        1. Read "[What is OONI?](https://ooni.org/about/){target="_blank"}" (about 5–10 minutes)
+        1. Read "[What is OONI?](../tools/what-is-ooni.md)" (about 5–10 minutes)
         2. Read "[Why networked freedom matters](../basics/internet-freedom.md)"
         3. Come back and check the items above to confirm your understanding.
 
@@ -413,7 +414,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
         ??? question "What is OONI?"
 
-            Start with "[What is OONI?](https://ooni.org/about/){target="_blank"}".
+            Start with "[What is OONI?](../tools/what-is-ooni.md)".
 
         ??? question "Network surveillance vs. network censorship"
 
@@ -547,7 +548,7 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
 
 This form is for your own reference. Nobody collects the results, so just pick your next step from where you landed:
 
-- **Awareness level:** subscribe to the [newsletter](../contact.md) to follow what the community is doing, or work through [Concepts](../basics/index.md) to fill in the gaps.
+- **Awareness level:** subscribe to the [newsletter](../contact.md) to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
 - **Hands-on level:** follow the "Not there yet? Start here." steps under each tool and actually install and use it. Bring problems to Matrix.
 - **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](./index.md) for how to join.
 

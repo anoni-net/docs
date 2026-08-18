@@ -12,7 +12,7 @@ The common advice is ordered below by how much it actually blocks, and each item
 
 !!! tip "If something has already happened"
 
-    An account compromised, a device lost, ongoing stalking, money already transferred — this page is not what you need right now. Contact the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual).
+    An account compromised, a device lost, ongoing stalking, money already transferred — this page is not what you need right now. Go to [emergency help](../help/index.md), or contact the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} (24/7, multilingual).
 
 ## Do these four today
 
@@ -27,11 +27,11 @@ Start with email, then online banking, then the messaging app you actually use d
 
 They differ in intensity, in how often they show up, and in what they cost you, so they call for different defenses.
 
-**Commercial data collection.** Platforms, ad networks, and data brokers do this continuously. It isn't aimed at you personally; the goal is classification and ad delivery. The feeling that recommendations are unnervingly accurate comes from here, and the collection behind it is real. What it produces is differential treatment once you have been sorted — insurance pricing, credit limits, which job ads you see — accumulating slowly and diffusely, and tier two is where you address it. The mechanics are in [how platforms collect your data](../basics/platform-tracking.md).
+**Commercial data collection**. Platforms, ad networks, and data brokers do this continuously. It isn't aimed at you personally; the goal is classification and ad delivery. The feeling that recommendations are unnervingly accurate comes from here, and the collection behind it is real. What it produces is differential treatment once you have been sorted — insurance pricing, credit limits, which job ads you see — accumulating slowly and diffusely, and tier two is where you address it. The mechanics are in [how platforms collect your data](../basics/platform-tracking.md).
 
-**Fraud and account takeover.** Mostly automated and untargeted, occasionally aimed at a specific person. This is the one that actually costs people money. For scale: in a population of 23 million, Taiwan recorded 162,000 reported fraud cases in 2025, with losses of NT$89.3 billion (roughly US$2.8 billion)[^165].
+**Fraud and account takeover**. Mostly automated and untargeted, occasionally aimed at a specific person. This is the one that actually costs people money. For scale: in a population of 23 million, Taiwan recorded 162,000 reported fraud cases in 2025, with losses of NT$89.3 billion (roughly US$2.8 billion)[^165].
 
-**Targeted investigation.** An adversary with legal process or technical resources behind it. Where the rule of law holds there is a real threshold, though it is lower than most people assume. Taiwan is a useful illustration: interception requires a judge-issued warrant and is generally limited to offenses carrying a minimum sentence of three years or to an enumerated list, with time limits and reporting duties — but retrieval of communication *records* carries a statutory exception, and for fraud, robbery, drug, and money-laundering cases prosecutors and authorized police can obtain them without going to a court at all[^tsa]. Cost and procedure still keep the target list short, so most people are not on it, but the triggers are covered in [when to raise your standard](#When-to-raise-your-standard).
+**Targeted investigation**. An adversary with legal process or technical resources behind it. Where the rule of law holds there is a real threshold, though it is lower than most people assume. Taiwan is a useful illustration: interception requires a judge-issued warrant and is generally limited to offenses carrying a minimum sentence of three years or to an enumerated list, with time limits and reporting duties — but retrieval of communication *records* carries a statutory exception, and for fraud, robbery, drug, and money-laundering cases prosecutors and authorized police can obtain them without going to a court at all[^tsa]. Cost and procedure still keep the target list short, so most people are not on it, but the triggers are covered in [when to raise your standard](#When-to-raise-your-standard).
 
 Putting all your effort into the third adversary does nothing about the losses the second one causes, and the reverse holds too.
 
@@ -39,7 +39,7 @@ Putting all your effort into the third adversary does nothing about the losses t
 
     The ranking below assumes targeted investigation is expensive and therefore rare. In mainland China, mandatory real-name registration, statutory data retention, and content moderation built into the platform layer drop that threshold sharply, and public speech alone can trigger it. Hong Kong has measured national-security sentences in years since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, and since March 2026 refusing to surrender a device password during a national-security investigation is itself an offense. The first two tiers still apply, but the premise that "most people are not on the list" needs re-examining. See [posting on mainland Chinese platforms](./mainland-speech.md), [speaking online from Singapore and Malaysia](./singapore-malaysia-speech.md), and the Hong Kong section of [cross-border travel and device searches](./asia-travel.md).
 
-## Tier one: blocking most account takeover and fraud loss
+## Tier one blocks most account takeover and fraud loss
 
 These four target the second adversary, the one that actually costs money. Commercial data collection is handled from tier two onward.
 
@@ -57,7 +57,7 @@ If you have never used one, the manager built into your phone is enough to start
 
 A password manager has a second, less-discussed effect: it only autofills when the domain matches. On a lookalike phishing site it stays silent, and that silence is the warning.
 
-What it doesn't block: you copying the password out and pasting it into the fake site yourself. EFF's [Surveillance Self-Defense](https://ssd.eff.org/module/creating-strong-passwords){target="_blank"} covers tool selection and recovery planning.
+What it doesn't block: you copying the password out and pasting it into the fake site yourself. Tool selection and recovery planning are in [getting started with password managers](../tools/password-manager.md).
 
 ### Two-factor authentication, as strong as the site allows
 
@@ -76,7 +76,7 @@ Plenty of banks and government services still offer nothing but SMS. Upgrade wha
 
 Where the bank's login method can't be improved, other things still can: lower the transfer limit to what you actually need, disable transfers to unregistered accounts where that option exists, and turn on a push or SMS alert for every transaction. Those set the ceiling on what a takeover costs you.
 
-**Save the recovery codes first.** When you enable two-factor authentication the service issues one-time recovery codes, and they are how you get back in after losing or replacing the phone. Print them or write them on paper and put them in a drawer or a safe, rather than leaving them only on the same device. Locking yourself out is the most common thing that actually goes wrong after switching 2FA on.
+Save the recovery codes first. When you enable two-factor authentication the service issues one-time recovery codes, and they are how you get back in after losing or replacing the phone. Print them or write them on paper and put them in a drawer or a safe, rather than leaving them only on the same device. Locking yourself out is the most common thing that actually goes wrong after switching 2FA on.
 
 Passkey coverage is worth one honest sentence. An independent census found adoption far below the impression vendor reports give, and a high share of the sites that do support passkeys get that capability by wiring in Google sign-in[^passkey-census]. A meaningful number of "sign in with a passkey" buttons are really "sign in with Google," which concentrates the linkage into a single account rather than removing it. Enable them where they exist, and keep the password manager.
 
@@ -98,7 +98,7 @@ The previous three stop your account being taken. This one stops you being talke
 
 It does not block a fake site you go looking for — a fake support page in a search engine's ad slot, for instance. Reach official channels by typing the address or using a bookmark.
 
-## Tier two: worth the time
+## Tier two is worth the time
 
 This is where the first adversary gets addressed — the one behind recommendations that feel too accurate.
 
@@ -132,13 +132,13 @@ Dormant accounts are a common leak source, and you won't notice when one is comp
 
 Whatever has already been taken stays taken. Deletion stops future accumulation.
 
-## Tier three: only for specific situations
+## Tier three is only for specific situations
 
 With tiers one and two done, most of the everyday exposure surface is handled. What remains is behavioral profiling inside the platforms you use, their historical records, and whatever you hand over voluntarily.
 
 - **Account layering**, keeping separate purposes on separate identities — see [maintaining multiple online identities](../basics/multiple-identities.md)
 - **Separate devices** for sensitive work
-- **Connection-layer anonymity** with Tor — [Tor Project Support](https://support.torproject.org/){target="_blank"} for the basics, [Tor Browser advanced settings](../tools/tor-browser-advanced.md) once you are using it. Tor changes where the connection appears to come from; the account you log into is still yours
+- **Connection-layer anonymity** with Tor — [what Tor is](../tools/what-is-tor.md) for the basics, [Tor Browser advanced settings](../tools/tor-browser-advanced.md) once you are using it. Tor changes where the connection appears to come from; the account you log into is still yours
 
 The first two overlap with the last items in [how platforms collect your data](../basics/platform-tracking.md), which covers them from the collection side. What differs here is the reason to reach for them, and that is what [when to raise your standard](#When-to-raise-your-standard) covers.
 
@@ -206,10 +206,10 @@ The baseline above assumes no specific adversary. When one of the following beco
 
 [^165]: Figures from Taiwan's National Police Agency [165 anti-fraud dashboard](https://165dashboard.tw/){target="_blank"}: 162,000 cases and NT$89.326 billion in losses for calendar year 2025. Press summary: [Nationwide fraud losses approached NT$90 billion in 2025](https://news.ttv.com.tw/news/11501190003200W){target="_blank"} — TTV News, 19 January 2026. Verified 2026-08.
 
-[^tsa]: [Communication Security and Surveillance Act, Article 11-1](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"} (Taiwan). Prosecutors must normally apply in writing to the court for a retrieval order, but paragraph 3 carves out offenses carrying a minimum sentence of three years, along with an enumerated list including robbery, fraud, extortion, kidnapping for ransom, narcotics, and money laundering, for which a prosecutor or an authorized judicial police officer may retrieve records directly. The interception threshold is in Article 5. Verified 2026-08.
+[^tsa]: [Communication Security and Surveillance Act, Article 11-1](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0060044&flno=11-1){target="_blank"} (Taiwan). Prosecutors must normally apply in writing to the court for a retrieval order, but paragraph 4 carves out offenses carrying a minimum sentence of ten years, along with an enumerated list including robbery, snatching, fraud, extortion, kidnapping for ransom, narcotics, and money laundering, for which a prosecutor or an authorized judicial police officer may retrieve records directly. The interception threshold is in Article 5. Verified 2026-08.
 
 [^yubikey]: The [YubiKey 5 NFC](https://www.yubico.com/product/yubikey-5-series/yubikey-5-nfc/){target="_blank"} lists at US$58; other models in the series are priced differently. Verified 2026-08.
 
 [^passkey-census]: Census of passkey support across the Tranco top 100K, based on a March 2025 snapshot: 11.3% overall, 20% among the top 100, and 6.9% at ranks 50K–100K. The paper reports both "External IdPs (transitive passkey support via OAuth) detected 75.2%" and "75.2% of all passkey-supporting sites integrate Google SSO," so this page says "a high share" rather than committing to one reading. See [State of Passkey Authentication in the Wild: A Census of the Top 100K sites](https://arxiv.org/html/2602.15135v2){target="_blank"}. Verified 2026-08.
 
-[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"}, Digital Identity Guidelines. Revision 4 was finalized in September 2024 and the previous revision withdrawn in August 2025. It states that verifiers `SHALL NOT require periodic rotation`, requiring a change only on evidence of compromise. Verified 2026-08.
+[^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"}, Digital Identity Guidelines. Revision 4 was finalized on 31 July 2025, superseding the 2020 revision; the August 2024 document was the second public draft. It states that verifiers `SHALL NOT require periodic rotation`, requiring a change only on evidence of compromise. Verified 2026-08.

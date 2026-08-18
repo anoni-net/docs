@@ -11,7 +11,7 @@ summary: "The Anonymity Networks Community is looking for three on-site crew for
 description: "The Anonymity Networks Community is looking for three on-site crew for its COSCUP 2026 track (Aug 8–9, NTUST, Taipei): one for recording, one front-of-room runner, one door runner. No Tor or privacy-tech background needed, there is an online briefing beforehand, and you are free to sit in on talks when you are off shift."
 ---
 
-# COSCUP 2026 Anonymity Networks Community track needs on-site crew: three roles, Aug 8–9
+# COSCUP 2026 Anonymity Networks Community track needs on-site crew for three roles, Aug 8–9
 
 ![COSCUP 2026 Anonymity Networks Community track hero image](https://assets.anoni.net/event/anoni-net-eth-taipei.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
