@@ -12,13 +12,19 @@ Specific policies change every few months, so the durable part is the set of que
 
 ## Where the text goes
 
-**The provider sees plaintext.** A cloud model has to process your input to answer it. TLS protects the path, not the service. This is a different model from end-to-end encrypted messaging, where the operator cannot read content at all.
+#### The provider sees plaintext
 
-**Whether it trains the model depends on your tier.** This is the distinction that decides most of the risk, and the major providers converge on it: consumer and free tiers may use your content for model improvement, usually with a setting to turn it off; business, team, and API tiers default to no training and offer a data processing agreement. OpenAI states that consumer service content may be used for training while ChatGPT Team, Enterprise, and the API are excluded by default[^openai]. Anthropic states that commercial services (Claude for Work, the API) do not use inputs or outputs for training, with consumer services offered as a user choice[^anthropic]. Google's Gemini Apps have their own activity and improvement controls[^google].
+A cloud model has to process your input to answer it. TLS protects the path, not the service. This is a different model from end-to-end encrypted messaging, where the operator cannot read content at all.
+
+#### Whether it trains the model depends on your tier
+
+This is the distinction that decides most of the risk, and the major providers converge on it: consumer and free tiers may use your content for model improvement, usually with a setting to turn it off; business, team, and API tiers default to no training and offer a data processing agreement. OpenAI states that consumer service content may be used for training while ChatGPT Team, Enterprise, and the API are excluded by default[^openai]. Anthropic states that commercial services (Claude for Work, the API) do not use inputs or outputs for training, with consumer services offered as a user choice[^anthropic]. Google's Gemini Apps have their own activity and improvement controls[^google].
 
 Signing in with a company account on a business tier and signing in with a personal account on a free tier are materially different acts. The first is covered by a contract; the second is not.
 
-**Deleting the conversation does not delete the data.** This one is widely misunderstood, and the published retention periods make the point concretely:
+#### Deleting the conversation does not delete the data
+
+This one is widely misunderstood, and the published retention periods make the point concretely:
 
 - Google states that conversations reviewed by human reviewers, along with related data such as language, device type, and location, are *not* deleted when you delete your activity, and are retained for up to three years[^google].
 - Anthropic states that when a user opts in, de-identified content can persist in model training pipelines for up to five years[^anthropic].
@@ -26,9 +32,13 @@ Signing in with a company account on a business tier and signing in with a perso
 
 The practical consequence: set the training controls when you open the account, not after you've pasted something sensitive.
 
-**Human review is normal.** Quality evaluation and abuse detection generally involve people. Google states that a subset of conversations is reviewed by humans, including trained service providers, with chats disconnected from the account before review[^google]. The arrangement is reasonable; the assumption that "only a machine sees it" is not.
+#### Human review is normal
 
-**Your employer can see the business-tier logs.** A business tier solves the vendor-training problem, not internal visibility. Administrators can typically access usage records, which is necessary for compliance and is a separate exposure for you. Using the company AI account for personal matters is the same category of mistake as using the company laptop for them.
+Quality evaluation and abuse detection generally involve people. Google states that a subset of conversations is reviewed by humans, including trained service providers, with chats disconnected from the account before review[^google]. The arrangement is reasonable; the assumption that "only a machine sees it" is not.
+
+#### Your employer can see the business-tier logs
+
+A business tier solves the vendor-training problem, not internal visibility. Administrators can typically access usage records, which is necessary for compliance and is a separate exposure for you. Using the company AI account for personal matters is the same category of mistake as using the company laptop for them.
 
 ## Services inside mainland China run on a different framework
 
@@ -56,7 +66,7 @@ Once you have made that judgment, three options remain, none of them free:
 | Switch to services outside the mainland | You need circumvention to reach them. Personal circumvention sits in a legally grey area domestically, and the Ministry of State Security issued a public warning in late 2025 that it would be pursued. Registration usually requires a foreign number and foreign payment method, both of which leave records of their own |
 | Local models or self-hosting | Content stays on the device, but the main sources for model weights are unreachable domestically, self-hosted servers fall under filing requirements, and the hardware floor is in the local-models section below |
 
-**Reachable does not mean safe.** Circumvention that keeps working invites people to treat the problem as solved. Reachability is something the other side can change unilaterally: working today does not mean working tomorrow, and going unblocked for a long time is not the same as going unrecorded. The connection pattern is itself a record, and in some situations the act of using circumvention draws more attention than the content of the query.
+Reachable does not mean safe. Circumvention that keeps working invites people to treat the problem as solved. Reachability is something the other side can change unilaterally: working today does not mean working tomorrow, and going unblocked for a long time is not the same as going unrecorded. The connection pattern is itself a record, and in some situations the act of using circumvention draws more attention than the content of the query.
 
 What counts as "sensitive" shifts too. Outside the mainland you largely judge that yourself; inside, it is determined afterwards by someone else, over a wider range than the list above covers — political topics, cross-border ties, labor disputes, and religion all fall inside it.
 
