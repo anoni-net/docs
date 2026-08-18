@@ -6,13 +6,15 @@ categories:
     - 技術
     - 隱私
 slug: brave-gpu-fingerprinting
-summary: "Brave 從 1.93 版起預設擋下 WebGL 與 WebGPU 洩漏的顯示卡資訊，桌面版與 Android 版都會分批收到。做法有三項，廠商與繪圖器字串換成所有使用者一致的通用值、WebGPU 的 adapter 描述欄位清空、WebGL 擴充清單注入雜訊，每個 session、每個站台（eTLD+1）、每個儲存區看到的都不同。同一次更新裡同時出現一致化與隨機化兩種相反手法，分工的理由在於改動不同資料對網站功能的衝擊差距很大，防護目標也不同，一致化降低的是熵，注入雜訊破壞的是可連結性。本文拆解 WEBGL_debug_renderer_info 洩漏什麼、Brave 的 farbling 種子怎麼運作，並對照 Tor Browser 全面一致化的路線與 Firefox 直接停用擴充的做法，最後說明台灣讀者在日常瀏覽與需要匿名的情境該怎麼選。"
+summary: "Brave 從 1.93 版起預設抹平 WebGL 與 WebGPU 洩漏的顯示卡資訊。同一次更新裡同時用了一致化與隨機化兩種相反手法，分工的界線落在改動哪一項資料會弄壞網站功能"
 description: "Brave 1.93 起預設抹平 WebGL 與 WebGPU 洩漏的顯示卡資訊。本文拆解三項防護的技術細節，說明一致化與隨機化為什麼在同一次更新裡分工，並對照 Tor Browser 與 Firefox 的做法。"
 ---
 
 # :material-fingerprint: Brave 用兩種相反的手法抹平 GPU 指紋
 
 打開一個網頁，網頁上的 JavaScript 就能取得你的顯示卡型號、驅動資訊，以及硬體支援哪些功能。答案在同一台電腦上幾乎不會變，追蹤公司把它們跟其他裝置特徵組合起來，就是一組不需要 cookie、不需要你同意、跨網站跟著你走的識別碼。
+
+顯示卡是瀏覽器指紋的其中一項來源，字型清單、螢幕尺寸、時區、音訊運算結果同樣算在裡面。整套機制怎麼運作、為什麼清 cookie 沒有作用、各家瀏覽器的預設狀態差在哪，見 [瀏覽器指紋是什麼，為什麼很難擺脫](../../basics/browser-fingerprinting.md)。本文只處理顯示卡這一塊。
 
 Brave 從 `1.93` 版起處理這組訊號，桌面版與 Android 版都預設開啟，分批推送[^brave]。做法有三項，WebGL 的廠商與繪圖器字串換成所有 Brave 使用者一致的通用字串、WebGPU 的硬體描述欄位清空、WebGL 支援的擴充清單注入雜訊。
 
@@ -44,6 +46,8 @@ Brave 執行了一次小規模的網路爬取，分析每次呼叫前的呼叫�
 
 第三項沿用 Brave 既有的 farbling 機制，2020 年的更新裡寫下的定義是「對半識別性的瀏覽器功能輸出做輕微隨機化，讓網站難以偵測，又不影響正常運作的網站」[^farbling]。
 
+## farbling 的種子怎麼運作
+
 種子的產生方式決定 farbling 的行為。瀏覽器啟動時產生一組隨機的 session token，與造訪的每個第一方網域經 HMAC256 混合，得出每個網域一組、壽命與 session 相同的 token[^farbling]。同一個網站在同一個 session 內重複量測會取得完全相同的值，換一個網站取得不同的值，下一個 session 再全部換過。第三方 frame 與 script 沿用頂層 eTLD+1 的種子[^farbling]，嵌入第三方內容不會成為繞道。
 
 指紋器會把大量半識別特徵 hash 成單一識別碼，只要其中一項被隨機化，整組 hash 就被汙染。技術源頭是 PriVaricator（Nikiforakis 等人，WWW 2015）與 FPRandom（Laperdrix 等人，ESSoS 2017）兩項研究[^farbling]。
@@ -64,7 +68,7 @@ Pierre Laperdrix 2019 年替 Tor Project 寫的指紋介紹文章，開宗明義
 
 Laperdrix 也點出隨機化的風險，稱為「可指紋化的隱私增強技術悖論」（Paradox of Fingerprintable Privacy Enhancing Technologies）。舉的例子是某個擴充套件改掉一批數值，卻漏改 `navigator.platform`，於是造出一組現實中不存在的特徵組合，使用者反而更容易被辨認出來[^tor]。隨機化要做對，覆蓋範圍必須夠完整，Brave 持續擴充 farbling 的端點清單也是同一個原因。
 
-Firefox 系的處理方式又是另一種。`privacy.resistFingerprinting` 開啟時，`WEBGL_debug_renderer_info` 這個擴充直接停用，網站呼叫不到[^mdn]。停用與回傳通用值各有代價，停用之後網站取不到值，需要自行處理空值的情況，回傳通用值則讓網站收到的資料與真實硬體無異，照常運作。Brave 選後者，一貫把功能損壞的風險壓到最低。公告裡另一項主張是防護要預設開啟，不藏在特殊模式或旗標後面[^brave]。
+Firefox 系的處理方式又是另一種。`privacy.resistFingerprinting` 開啟時，`WEBGL_debug_renderer_info` 這個擴充直接停用，網站呼叫不到[^mdn]。該開關預設關閉，需要使用者自行到 `about:config` 開啟，各家瀏覽器預設做到哪裡的完整對照見 [瀏覽器指紋是什麼，為什麼很難擺脫](../../basics/browser-fingerprinting.md)。停用與回傳通用值各有代價，停用之後網站取不到值，需要自行處理空值的情況，回傳通用值則讓網站收到的資料與真實硬體無異，照常運作。Brave 選後者，一貫把功能損壞的風險壓到最低。公告裡另一項主張是防護要預設開啟，不藏在特殊模式或旗標後面[^brave]。
 
 界線在 Brave 的文件裡也寫得清楚。2020 年說明 farbling 的更新裡有一句建議，需要對抗定向攻擊的使用者應該改用 Tor Browser[^farbling]。隨機化擋得住被廣泛部署的商業追蹤，不提供匿名集（anonymity set）。
 
@@ -84,10 +88,11 @@ WebGPU 支援的擴充清單目前還沒納入隨機化，公告裡寫了之後�
 
 網站功能受損的情況還在觀察期。Brave 保留了逐站調整防護的能力，遇到確實無法正常運作的網站，使用者可以單站關閉圖形防護、關閉指紋防護，或整個關掉 Shields[^brave]。保留這些開關代表取捨仍在，一致化與注入雜訊都無法保證所有網站維持原本的行為。
 
-指紋識別不會因為一次瀏覽器更新而結束。能安全收斂成常數的訊號就收斂，牽涉功能協商的訊號就注入雜訊，這條分工線也適用於檢視其他標榜指紋抗性的工具。
+指紋識別不會因為一次瀏覽器更新而結束。顯示卡這一項被處理掉之後，字型清單、canvas 繪圖結果、音訊運算特徵仍在原地。能安全收斂成常數的訊號就收斂，牽涉功能協商的訊號就注入雜訊，這條分工線也適用於檢視其他標榜指紋抗性的工具。
 
 ## 延伸閱讀
 
+- [瀏覽器指紋是什麼，為什麼很難擺脫](../../basics/browser-fingerprinting.md)：指紋由哪些特徵組成、為什麼結構上難以規避，以及各家瀏覽器的預設狀態
 - [平台知道你多少事](../../basics/platform-tracking.md)：裝置指紋在整套追蹤生態裡的位置
 - [Tor Browser 進階設定](../../tools/tor-browser-advanced.md)：指紋抗性與視窗大小的實際操作
 - [威脅模型如何建立](../../basics/threat-model.md)：先確認在抗誰，再選工具
