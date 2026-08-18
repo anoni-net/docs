@@ -78,7 +78,7 @@ Firefox 系的处理方式又是另一种。`privacy.resistFingerprinting` 开�
 
 需要匿名的情境仍然要用 Tor Browser。Brave 的随机化只处理跨站串接，IP 地址仍然直接暴露给网站，网络路径上的观察者也看得到你连了哪里。记者、行动者、处理敏感题材的工作者，威胁模型不同，工具选择也跟着不同，可以回头看 [威胁模型如何建立](../../basics/threat-model.md)。
 
-境内的 Tor 直连无法使用，需要网桥或其他接入方式，使用规避工具本身也有风险，这一层取舍需先纳入考量。相对地，Brave 的指纹防护属于浏览器内建功能，不涉及接入方式，装完就生效。
+Tor 的可达性因地而异。境内重度封锁，需要网桥或其他接入方式，台湾、香港、澳门、新加坡、马来西亚一般都可以直连，限制转移到你发表了什么与 SIM 实名登记留下的记录，香港另有 2026 年 3 月起在国安调查中要求交出设备密码的义务，连转机旅客都适用。逐地的可达性与法规细节见 [出差与研讨会的数位准备](../../scenarios/asia-travel.md)。相对地，Brave 的指纹防护属于浏览器内建功能，不涉及接入方式，装完就生效。
 
 用 Tor Browser 的人要记得一致化路线靠整体一致性维持。安装扩展程序、最大化窗口、改动字体设置，都会让你从人群里凸出来，细节见 [Tor Browser 进阶设置](../../tools/tor-browser-advanced.md)。同一个动作在 Brave 上影响有限，在 Tor Browser 上会直接破坏防护的前提。
 
@@ -100,6 +100,6 @@ WebGPU 支持的扩展清单目前还没纳入随机化，公告里写了之后�
 - [威胁模型如何建立](../../basics/threat-model.md)：先确认在抗谁，再选工具
 
 [^brave]: [Brave improves protections against GPU fingerprinting](https://brave.com/privacy-updates/38-webgl-webgpu-fingerprinting-protections/){target="_blank"} - Brave 隐私更新第 38 篇。本文引用的三项防护、爬取观察、兼容处理与后续规划皆出自此文。查证日 2026-08-14。
-[^farbling]: [Fingerprinting Defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隐私更新第 4 篇，2020 年。farbling 的定义、HMAC256 种子机制与研究出处出自此文，第三方 frame 沿用顶层种子的说明另见 Brave 的 [Fingerprinting Protections wiki](https://github.com/brave/brave-browser/wiki/Fingerprinting-Protections){target="_blank"}。wiki 页面会被持续编辑，查证日 2026-08-18。
+[^farbling]: [Fingerprinting defenses 2.0](https://brave.com/privacy-updates/4-fingerprinting-defenses-2.0/){target="_blank"} - Brave 隐私更新第 4 篇，2020 年。farbling 的定义、HMAC256 种子机制与研究出处出自此文，第三方 frame 沿用顶层种子的说明另见 Brave 的 [Fingerprinting Protections wiki](https://github.com/brave/brave-browser/wiki/Fingerprinting-Protections){target="_blank"}。wiki 页面会被持续编辑，查证日 2026-08-18。
 [^tor]: [Browser Fingerprinting: An Introduction and the Challenges Ahead](https://blog.torproject.org/browser-fingerprinting-introduction-and-challenges-ahead/){target="_blank"} - Pierre Laperdrix，The Tor Project 博客，2019 年 9 月 4 日。一致化路线、letterboxing 与可指纹化隐私增强技术悖论的说明出自此文，文中的具体做法对应撰文当时的 Tor Browser 版本，该悖论一词出自 Eckersley 的 PETS 2010 论文，由本文引用。查证日 2026-08-18。
 [^mdn]: [WEBGL_debug_renderer_info](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info){target="_blank"} - MDN Web Docs。两个常数的定义，以及 Firefox 在 `privacy.resistFingerprinting` 为 true 时停用此扩展的说明。查证日 2026-08-18。
