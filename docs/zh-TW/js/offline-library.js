@@ -84,6 +84,47 @@
       flex: 1 1 auto; min-width: 0;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    #offline-library .ol-danger {
+      border-color: var(--md-typeset-del-color, #f44336);
+      color: #c62828;
+    }
+    #offline-library .ol-danger:hover:not(:disabled) {
+      background: #c62828; border-color: #c62828; color: #fff;
+    }
+    /* 進度條。原本把進度寫在按鈕文字上，一邊跑一邊改字會讓按鈕寬度跟著跳。 */
+    #offline-library .ol-progress { margin: .2rem 0 1rem; }
+    #offline-library .ol-progress__track {
+      height: .2rem; border-radius: .1rem; overflow: hidden;
+      background: var(--md-default-fg-color--lightest);
+    }
+    #offline-library .ol-progress__fill {
+      height: 100%; width: 0;
+      background: var(--md-accent-fg-color); transition: width .2s ease;
+    }
+    #offline-library .ol-progress__track--idle .ol-progress__fill {
+      width: 30%; animation: ol-sweep 1.1s ease-in-out infinite;
+    }
+    #offline-library .ol-progress__text {
+      margin: .3rem 0 0; font-size: .7rem; opacity: .8;
+    }
+    @keyframes ol-sweep {
+      0% { margin-left: -30%; }
+      100% { margin-left: 100%; }
+    }
+    /* 做完的訊息閃一下。原本靜靜出現在狀態列下面，捲過去就看不到，
+       按了半天不知道有沒有成功。 */
+    @keyframes ol-flash {
+      from { background: var(--md-accent-fg-color); filter: opacity(0.18); }
+      to { background: transparent; }
+    }
+    #offline-library .ol-message { animation: ol-flash 1.4s ease-out; }
+    @media (prefers-reduced-motion: reduce) {
+      #offline-library .ol-message { animation: none; }
+      #offline-library .ol-progress__fill { transition: none; }
+      #offline-library .ol-progress__track--idle .ol-progress__fill {
+        width: 100%; animation: none;
+      }
+    }
     #offline-library .ol-primary {
       border-color: var(--md-primary-fg-color);
       background: var(--md-primary-fg-color);
@@ -121,7 +162,10 @@
       refresh: "更新已存的內容",
       refreshing: "更新中",
       clear: "清除所有離線內容",
-      clearAgain: "再按一次就清除",
+      clearConfirm: "確定清除",
+      cancel: "取消",
+      refreshEmpty: "你還沒有自己選存頁面。站台自動存的那批會在站上有新版本時一起更新。",
+      failed: "沒有完成。可能是連線中斷，稍後再試一次。",
       clearing: "清除中",
       cleared: "已清除，自動存下章節也一併關掉了。下次連上網時會補回這一頁本身與它需要的樣式（約 0.5 MB），讓你在沒有網路時仍進得來。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
       apply: "套用變更",
@@ -151,7 +195,10 @@
       refresh: "更新已存的内容",
       refreshing: "更新中",
       clear: "清除所有离线内容",
-      clearAgain: "再按一次就清除",
+      clearConfirm: "确定清除",
+      cancel: "取消",
+      refreshEmpty: "你还没有自己选存页面。站台自动存的那批会在站上有新版本时一起更新。",
+      failed: "没有完成。可能是连接中断，稍后再试一次。",
       clearing: "清除中",
       cleared: "已清除，自动存下章节也一并关掉了。下次连上网时会补回这一页本身与它需要的样式（约 0.5 MB），让你在没有网络时仍进得来。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
       apply: "应用变更",
@@ -181,7 +228,10 @@
       refresh: "Update what is stored",
       refreshing: "Updating",
       clear: "Clear all offline content",
-      clearAgain: "Press again to clear",
+      clearConfirm: "Yes, clear",
+      cancel: "Cancel",
+      refreshEmpty: "You have not picked any pages yet. What the site stores automatically updates when a new version of the site arrives.",
+      failed: "That did not complete. The connection may have dropped. Try again in a moment.",
       clearing: "Clearing",
       cleared: "Cleared, and automatic storage of chapters is off. Next time you are online, this page itself and the styles it needs come back (about 0.5 MB) so you can still reach it without a network. Browsing history, DNS cache and files you downloaded are not covered here. Handle those in your browser or system settings.",
       apply: "Apply changes",
@@ -306,6 +356,12 @@
     remove: new Set(),
     // 展開中的章節。勾一個項目就整頁重畫，沒記著的話會全部收合回去
     open: new Set(),
+    // 「清除所有離線內容」按過第一次了沒。這個要跨重繪保留，不然按下去整頁一畫
+    // 就退回未確認的樣子，讀者會以為沒作用。
+    armedClear: false,
+    // 正在跑的工作，有的話動作列停用並顯示進度條
+    task: null,
+    busy: false,
     // service worker 那半回來了沒。沒回來之前清單照樣可以看、可以勾，
     // 只是不知道裝置上已經有哪些。
     swReady: false,
@@ -438,11 +494,10 @@
 
   function renderApply() {
     const bar = el("p", "ol-apply");
-    bar.appendChild(
-      button(t.apply, "ol-primary", function () {
+    const applyButton = button(t.apply, "ol-primary", () => {
         const toAdd = Array.from(state.add);
         const toRemove = Array.from(state.remove);
-        runTask(this, t.applying, (report) =>
+        runTask(t.applying, toAdd.length, (report) =>
           Promise.resolve()
             .then(() =>
               toRemove.length
@@ -463,9 +518,10 @@
                     : ""),
               }))
             )
-        );
-      })
-    );
+      );
+    });
+    applyButton.disabled = state.busy;
+    bar.appendChild(applyButton);
     bar.appendChild(
       el("span", "ol-meta", fill("pending", { add: state.add.size, remove: state.remove.size }))
     );
@@ -475,7 +531,13 @@
   function render(message) {
     root.textContent = "";
     root.appendChild(renderStatus());
-    if (message) root.appendChild(el("p", "ol-message", message));
+    if (message) {
+      const line = el("p", "ol-message", message);
+      root.appendChild(line);
+      // 捲過去看一眼。訊息在狀態列下面，讀者按完按鈕時往往人在清單中段，
+      // 訊息靜靜出現在畫面外，就會覺得按了沒事發生。
+      if (line.scrollIntoView) line.scrollIntoView({ block: "nearest" });
+    }
 
     if (state.swMissing) return renderSections();
 
@@ -493,33 +555,80 @@
     root.appendChild(autoLabel);
     root.appendChild(el("p", "ol-hint", t.autoHint));
 
-    const actions = el("p", "ol-actions");
-    actions.appendChild(
-      button(t.refresh, null, function () {
-        const paths = Array.from(state.saved);
-        if (!paths.length) return;
-        runTask(this, t.refreshing, (report) =>
-          ask({ type: "OFFLINE_ADD", paths: paths, refresh: true }, report)
-        );
-      })
-    );
-    let armed = false;
-    actions.appendChild(
-      button(t.clear, null, function () {
-        if (!armed) {
-          armed = true;
-          this.textContent = t.clearAgain;
-          return;
-        }
-        runTask(this, t.clearing, () =>
-          ask({ type: "OFFLINE_CLEAR" }).then(() => ({ message: t.cleared }))
-        );
-      })
-    );
-    root.appendChild(actions);
+    root.appendChild(renderActions());
+    if (state.task) root.appendChild(renderProgress());
 
     renderSections();
     if (state.add.size || state.remove.size) root.appendChild(renderApply());
+  }
+
+  function renderActions() {
+    const wrap = el("div");
+    const row = el("p", "ol-actions");
+
+    // 更新的對象是讀者自己勾存的那批。站台自動存的那批跟著站台版本走，讀者
+    // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
+    const refresh = button(t.refresh, null, () =>
+      runTask(t.refreshing, Array.from(state.saved).length, (report) =>
+        ask({ type: "OFFLINE_ADD", paths: Array.from(state.saved), refresh: true }, report)
+      )
+    );
+    refresh.disabled = state.busy || state.saved.size === 0;
+    row.appendChild(refresh);
+
+    if (!state.armedClear) {
+      const clear = button(t.clear, null, () => {
+        state.armedClear = true;
+        render();
+      });
+      clear.disabled = state.busy;
+      row.appendChild(clear);
+    } else {
+      // 兩段式確認。原本是同一顆按鈕換文字，讀者不見得注意到字變了，
+      // 這裡改成兩顆並排，要按的那顆帶危險色。
+      const confirm = button(t.clearConfirm, "ol-danger", () =>
+        runTask(t.clearing, 0, () =>
+          ask({ type: "OFFLINE_CLEAR" }).then(() => ({ message: t.cleared }))
+        )
+      );
+      confirm.disabled = state.busy;
+      row.appendChild(confirm);
+      const cancel = button(t.cancel, null, () => {
+        state.armedClear = false;
+        render();
+      });
+      cancel.disabled = state.busy;
+      row.appendChild(cancel);
+    }
+
+    wrap.appendChild(row);
+    if (state.saved.size === 0) wrap.appendChild(el("p", "ol-hint", t.refreshEmpty));
+    return wrap;
+  }
+
+  function renderProgress() {
+    const wrap = el("div", "ol-progress");
+    const track = el("div", "ol-progress__track");
+    const fillBar = el("div", "ol-progress__fill");
+    const task = state.task;
+    if (task.total > 0) {
+      fillBar.style.width = Math.round((task.done / task.total) * 100) + "%";
+    } else {
+      // 清除這種沒有頁數可數的工作，用來回掃動表示還在跑
+      track.classList.add("ol-progress__track--idle");
+    }
+    track.appendChild(fillBar);
+    wrap.appendChild(track);
+    wrap.appendChild(
+      el(
+        "p",
+        "ol-progress__text",
+        task.total > 0
+          ? task.label + "　" + fill("progress", { done: task.done, total: task.total })
+          : task.label
+      )
+    );
+    return wrap;
   }
 
   function renderSections() {
@@ -561,20 +670,42 @@
     }
   }
 
-  // 動作跑起來之後停用按鈕、顯示進度，做完重讀狀態再整頁重畫
-  function runTask(button, label, run) {
-    const original = button.textContent;
-    button.disabled = true;
-    button.textContent = label;
+  // 工作跑起來之後停用動作、顯示進度，做完重讀狀態再整頁重畫。
+  //
+  // 進度顯示在獨立的進度條上，不去改按鈕文字。原本邊跑邊改按鈕文字，按鈕寬度會
+  // 跟著跳，而清除那種沒有頁數可數的工作根本沒東西可顯示，按下去看起來就像沒反應。
+  function runTask(label, total, run) {
+    state.busy = true;
+    state.task = { label: label, done: 0, total: total };
+    render();
+
     const report = (data) => {
-      button.textContent =
-        label + " " + fill("progress", { done: data.done, total: data.total });
+      state.task.done = data.done;
+      state.task.total = data.total;
+      // 只動進度條本身，不整頁重畫。逐頁重畫的話勾選與展開狀態都會閃。
+      const bar = root.querySelector(".ol-progress__fill");
+      if (bar && data.total) {
+        bar.style.width = Math.round((data.done / data.total) * 100) + "%";
+      }
+      const line = root.querySelector(".ol-progress__text");
+      if (line) {
+        line.textContent =
+          label + "　" + fill("progress", { done: data.done, total: data.total });
+      }
     };
+
     return run(report)
-      .then((result) => refreshStatus().then(() => render(result && result.message)))
+      .then((result) => {
+        state.busy = false;
+        state.task = null;
+        state.armedClear = false;
+        return refreshStatus().then(() => render(result && result.message));
+      })
       .catch(() => {
-        button.disabled = false;
-        button.textContent = original;
+        state.busy = false;
+        state.task = null;
+        state.armedClear = false;
+        render(t.failed);
       });
   }
 
