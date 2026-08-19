@@ -1,5 +1,6 @@
 ---
 title: 互動與呈現：Tor 網路的 3D 視覺化與互動遊戲
+subtitle: 用 3D 與遊戲理解 Tor
 description: 以 3D 影像與可操作的遊戲呈現隱私與匿名技術。目前三件作品都以 Tor 為題：走一遍三跳洋蔥路由的解謎、連線流量在會合點相遇的動態呈現、整合十餘份公開資料的全球中繼地球儀，後者放大到台灣還有海纜登陸點與電網。
 icon: material/cube-outline
 social:

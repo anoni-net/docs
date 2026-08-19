@@ -1,5 +1,6 @@
 ---
 title: 進階層
+subtitle: 加密協議與去中心化發布
 description: 端對端加密、後量子密碼、去中心化網站發布等進階主題。
 icon: material/lock-outline
 ---

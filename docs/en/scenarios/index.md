@@ -1,5 +1,6 @@
 ---
 title: Scenarios
+subtitle: By role and situation
 description: Practical guides for specific situations and roles, written with Sinophone Asia-Pacific regional context that global English-language privacy sites do not cover.
 icon: material/account-group-outline
 ---

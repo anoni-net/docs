@@ -1,5 +1,6 @@
 ---
 title: "Interactive: 3D Tor network visualisations and games"
+subtitle: Tor explained in 3D
 description: Privacy and anonymity technology presented as 3D visuals and playable pieces. All three current works centre on Tor - a puzzle that walks you through three-hop onion routing, a live view of traffic meeting at rendezvous points, and a relay globe built from more than a dozen public datasets, which at Taiwan scale adds cable landing points and the power grid.
 icon: material/cube-outline
 social:

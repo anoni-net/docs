@@ -1,5 +1,6 @@
 ---
 title: Advanced
+subtitle: Crypto and decentralized publishing
 description: End-to-end encryption, post-quantum cryptography, decentralized publishing, and what separates a network that provides anonymity from one that does not.
 icon: material/lock-outline
 ---

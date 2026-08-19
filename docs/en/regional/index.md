@@ -1,5 +1,6 @@
 ---
 title: Regional Observatory
+subtitle: Sinophone Asia-Pacific observatory
 description: A Taiwan-anchored observatory of networked freedom across the Sinophone Asia-Pacific — Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora.
 icon: material/map-outline
 ---

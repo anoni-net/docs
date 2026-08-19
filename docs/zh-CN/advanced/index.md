@@ -1,5 +1,6 @@
 ---
 title: 进阶层
+subtitle: 加密协议与去中心化发布
 description: 端对端加密、后量子密码、去中心化网站发布等进阶主题。
 icon: material/lock-outline
 ---

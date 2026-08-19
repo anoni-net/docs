@@ -1,5 +1,6 @@
 ---
 title: 概念层
+subtitle: 工具之前的词汇与框架
 description: 进入匿名网络前的关键概念，从网络自由的在地处境开始，展开匿名与隐私的差异、威胁模型、Metadata、平台数据收集、多重身分与匿名支付。
 icon: material/school-outline
 ---

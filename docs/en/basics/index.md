@@ -1,5 +1,6 @@
 ---
 title: Concepts
+subtitle: Vocabulary and framing before tools
 description: Conceptual entry points for understanding networked freedom in the Sinophone Asia-Pacific region — what we observe and why it matters.
 icon: material/lightbulb-outline
 ---
