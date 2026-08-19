@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """offline_index hook 的回歸測試。
 
-這支 hook 決定「離線內容管理頁上列出哪些東西」。錯了不會讓建置變紅燈：漏掉章節
-就是讀者在管理頁上找不到那些頁面（而管理頁存在的理由正是讓讀者拿到預設不下載的
-那幾頁），多列聚合頁則是讓人下載到一堆重複的摘要，還把估算的大小灌水。
+這支 hook 決定「離線內容管理頁上列出哪些東西、照什麼順序」。錯了不會讓建置變紅燈：
+漏掉章節就是讀者在管理頁上找不到那些頁面（而管理頁存在的理由正是讓讀者拿到預設
+不下載的那幾頁），順序亂掉則是整份清單跟側邊欄對不起來，打開不知道從何看起。
 
-分組規則改動時，請一併在這裡補上對應案例。不跑 mkdocs，只測純邏輯。
+分組與排序規則改動時，請一併在這裡補上對應案例。不跑 mkdocs，只測純邏輯。
 """
 
 from __future__ import annotations
@@ -32,121 +32,162 @@ def check(label: str, got, want) -> None:
         failures.append(f"{label}\n    got:  {got!r}\n    want: {want!r}")
 
 
-class FakeSection:
-    def __init__(self, title, parent=None):
-        self.title = title
-        self.parent = parent
-
-
 class FakePage:
-    def __init__(self, url, title, parent=None):
+    is_section = False
+    is_page = True
+
+    def __init__(self, url, title):
         self.url = url
         self.title = title
-        self.parent = parent
+        self.parent = None
 
 
-def build(pages, html="x"):
-    """把一串 (url, title, parent) 餵過 hook，回傳寫出來的 JSON。"""
+class FakeSection:
+    is_section = True
+    is_page = False
+
+    def __init__(self, title, children):
+        self.title = title
+        self.children = list(children)
+        self.parent = None
+        for child in self.children:
+            child.parent = self
+
+
+class FakeNav:
+    def __init__(self, items):
+        self.items = list(items)
+
+
+def build(nav, pages, html="x"):
+    """跑一輪 hook，回傳寫出來的 JSON。
+
+    pages 是 mkdocs 實際處理頁面的順序，跟 nav 的順序不同（mkdocs 照檔案路徑的
+    字母序跑），測試刻意傳打亂的順序，驗輸出仍照 nav。
+    """
     offline_index._pages.clear()
+    offline_index._order.clear()
+    offline_index.on_nav(nav, None)
     for page in pages:
         offline_index.on_post_page(html, page, None)
     with tempfile.TemporaryDirectory() as tmp:
-        config = {"site_dir": tmp, "theme": {"language": "zh-TW"}}
-        offline_index.on_post_build(config)
+        offline_index.on_post_build({"site_dir": tmp, "theme": {"language": "zh-TW"}})
         target = pathlib.Path(tmp) / offline_index.OUTPUT_NAME
-        if not target.exists():
-            return None
-        return json.loads(target.read_text(encoding="utf-8"))
+        return json.loads(target.read_text(encoding="utf-8")) if target.exists() else None
 
 
-def keys_of(index):
-    return [section["key"] for section in index["sections"]]
+def titles(index):
+    return [(s["group"], s["title"], len(s["pages"])) for s in index["sections"]]
 
 
-def section_by_key(index, key):
-    for section in index["sections"]:
-        if section["key"] == key:
-            return section
-    # 找不到時回一份空的而不是 None。分組壞掉時整個 key 會消失，直接取欄位會讓
-    # 這支腳本崩在 TypeError 上，看不到是哪一項對不起來。
-    return {"key": key, "title": None, "bytes": 0, "pages": []}
+# --- 順序照 nav，不是照頁面被處理的先後 ---
 
+home = FakePage("", "首頁")
+guides_index = FakePage("guides/", "指南")
+basics_index = FakePage("basics/", "概念層")
+basics_page = FakePage("basics/metadata/", "Metadata")
+tools_index = FakePage("tools/", "工具層")
+tools_deep = FakePage("tools/what-is-tor/", "什麼是 Tor")
+about = FakePage("about/", "關於我們")
+contact = FakePage("contact/", "持續關注")
 
-# --- 分組 key ---
+nav = FakeNav([
+    home,
+    FakeSection("指南", [
+        guides_index,
+        FakeSection("概念", [basics_index, basics_page]),
+        # 第三層：nav 上「工具」底下還有「連線層」這種子分組
+        FakeSection("工具", [tools_index, FakeSection("連線層", [tools_deep])]),
+    ]),
+    FakeSection("關於我們", [about, contact]),
+])
 
-index = build(
-    [
-        FakePage("", "首頁"),
-        FakePage("about/", "關於我們"),
-        FakePage("tools/", "工具層"),
-        FakePage("tools/what-is-tor/", "什麼是 Tor"),
-        FakePage("blog/2026/04/x/", "某篇文章"),
-    ]
+# 刻意用字母序餵進去，那是 mkdocs 實際的處理順序
+index = build(nav, [about, basics_index, basics_page, contact, guides_index, home, tools_index, tools_deep])
+check(
+    "順序照 nav 而不是字母序",
+    titles(index),
+    [("", "首頁", 1), ("指南", "指南", 1), ("指南", "概念", 2), ("指南", "工具", 2), ("關於我們", "關於我們", 2)],
 )
-# 章節的 index 頁（tools/）與底下的內容（tools/x/）要落在同一組
-check("key 分組", keys_of(index), ["", "about", "tools", "blog"])
-check("index 頁與內容同組", len(section_by_key(index, "tools")["pages"]), 2)
-check("首頁自成一組", len(section_by_key(index, "")["pages"]), 1)
 
-# --- 章節標題 ---
+# 第三層的頁面併回第二層。全展開會變成三十組，其中好幾組只有兩三頁。
+check("第三層併回第二層", [p["url"] for p in index["sections"][3]["pages"]], ["tools/", "tools/what-is-tor/"])
 
-# nav 的頂層標題在這個站分不出組（tools、basics、scenarios 都掛在「指南」底下），
-# 所以標題優先取該章節 index 頁的標題
-guides = FakeSection("指南")
-index = build(
-    [
-        FakePage("tools/", "工具層", parent=guides),
-        FakePage("tools/what-is-tor/", "什麼是 Tor", parent=guides),
-        FakePage("basics/", "概念層", parent=guides),
-    ]
+# 站台的「關於我們」底下是 about/ 與 contact.md 兩個不同目錄，照 URL 分會變成
+# 兩組各一頁，在側邊欄上它們本來就是同一節
+check("同一節的不同目錄合併", len(index["sections"][4]["pages"]), 2)
+
+# --- nav 上沒有的插回同一個頂層的尾巴 ---
+
+posts_index = FakePage("blog/", "資訊更新")
+changelog = FakePage("changelog/", "軟體更新日誌")
+community = FakePage("community/", "社群")
+# blog 外掛的文章在 on_nav 之後才進 nav，hook 走 nav 時看不到
+article = FakePage("blog/2026/04/x/", "某篇文章")
+article.parent = FakeSection("近期公告", [])
+article.parent.parent = FakeSection("資訊更新", [])
+
+nav2 = FakeNav([
+    FakeSection("資訊更新", [posts_index, FakeSection("軟體更新日誌", [changelog])]),
+    FakeSection("社群", [community]),
+])
+index2 = build(nav2, [article, changelog, community, posts_index])
+# 一律附在最後的話，「近期公告」會離它的「資訊更新」隔著整個社群
+check(
+    "nav 上沒有的插回同一個頂層的尾巴",
+    titles(index2),
+    [("資訊更新", "資訊更新", 1), ("資訊更新", "軟體更新日誌", 1), ("資訊更新", "近期公告", 1), ("社群", "社群", 1)],
 )
-check("章節標題取 index 頁", section_by_key(index, "tools")["title"], "工具層")
-check("同一個 nav 標題也分得開", section_by_key(index, "basics")["title"], "概念層")
-
-# 沒有 index 頁時退回 nav 的頂層標題
-nested = FakeSection("在地脈絡", parent=None)
-child = FakeSection("子章節", parent=nested)
-index = build([FakePage("taiwan/pdpa-2025/", "個資法", parent=child)])
-check("沒有 index 頁時用 nav 頂層標題", section_by_key(index, "taiwan")["title"], "在地脈絡")
-
-# 兩者都沒有時退回 key，管理頁至少還分得出組
-index = build([FakePage("reports/x/", "某份報告")])
-check("都沒有時退回 key", section_by_key(index, "reports")["title"], "reports")
 
 # --- 排除 ---
 
-index = build(
-    [
-        FakePage("blog/2026/04/x/", "某篇文章"),
-        FakePage("blog/page/2/", "第 2 頁"),
-        FakePage("blog/archive/2025/", "2025 年"),
-        FakePage("blog/category/updates/", "更新"),
-        FakePage("offline/", "離線閱讀"),
-        FakePage("404.html", "找不到"),
-    ]
-)
+post = FakePage("blog/2026/04/x/", "某篇文章")
+section = FakeSection("資訊更新", [post])
+skipped = [
+    FakePage("blog/page/2/", "第 2 頁"),
+    FakePage("blog/archive/2025/", "2025 年"),
+    FakePage("blog/category/updates/", "更新"),
+    FakePage("offline/", "離線閱讀"),
+    FakePage("404.html", "找不到"),
+]
+for page in skipped:
+    page.parent = section
+index3 = build(FakeNav([section]), [post] + skipped)
 # 聚合頁的內容都在個別文章裡，讓讀者勾只會下載到一堆重複的摘要
-check("只留真正的文章", [page["url"] for page in section_by_key(index, "blog")["pages"]], ["blog/2026/04/x/"])
-check("管理頁與 404 不列", keys_of(index), ["blog"])
+check("只留真正的文章", [p["url"] for p in index3["sections"][0]["pages"]], ["blog/2026/04/x/"])
+check("管理頁與 404 不列", len(index3["sections"]), 1)
 
 # --- 大小 ---
 
-index = build([FakePage("tools/", "工具層"), FakePage("tools/x/", "某頁")], html="12345")
-check("章節大小是頁面加總", section_by_key(index, "tools")["bytes"], 10)
-check("單頁大小是 HTML 位元組數", section_by_key(index, "tools")["pages"][0]["bytes"], 5)
+a = FakePage("tools/", "工具層")
+b = FakePage("tools/x/", "某頁")
+index4 = build(FakeNav([FakeSection("工具", [a, b])]), [a, b], html="12345")
+check("章節大小是頁面加總", index4["sections"][0]["bytes"], 10)
+check("單頁大小是 HTML 位元組數", index4["sections"][0]["pages"][0]["bytes"], 5)
 
 # 中文是多位元組，算的要是位元組不是字元數
-index = build([FakePage("tools/", "工具層")], html="中文")
-check("中文算位元組", section_by_key(index, "tools")["bytes"], 6)
+c = FakePage("tools/", "工具層")
+index5 = build(FakeNav([FakeSection("工具", [c])]), [c], html="中文")
+check("中文算位元組", index5["sections"][0]["bytes"], 6)
+
+# --- 不在 nav 裡的頁面 ---
+
+orphan = FakePage("strays/x/", "孤兒頁")
+index6 = build(FakeNav([]), [orphan])
+# 標題退回頁面自己的標題，至少列得出來
+check("不在 nav 裡的頁面照樣收錄", titles(index6), [("", "孤兒頁", 1)])
 
 # --- 全空 ---
 
-check("沒有任何頁面時不產生檔案", build([]), None)
+check("沒有任何頁面時不產生檔案", build(FakeNav([]), []), None)
 
 # --- 語系 ---
 
+d = FakePage("tools/", "Tools")
 offline_index._pages.clear()
-offline_index.on_post_page("x", FakePage("tools/", "Tools"), None)
+offline_index._order.clear()
+offline_index.on_nav(FakeNav([FakeSection("Guides", [d])]), None)
+offline_index.on_post_page("x", d, None)
 with tempfile.TemporaryDirectory() as tmp:
     offline_index.on_post_build({"site_dir": tmp, "theme": {"language": "en"}})
     written = json.loads((pathlib.Path(tmp) / offline_index.OUTPUT_NAME).read_text(encoding="utf-8"))

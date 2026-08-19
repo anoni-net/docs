@@ -46,6 +46,13 @@
     #offline-library .ol-actions {
       display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.2rem;
     }
+    #offline-library .ol-group {
+      margin: 1.4rem 0 .1rem; font-weight: 700; font-size: .72rem;
+      opacity: .7; letter-spacing: .04em;
+    }
+    #offline-library .ol-group:first-of-type { margin-top: .6rem; }
+    /* 頂層章節底下只有一組時不掛標題，改用留白分隔，否則它會看起來像上一組的一部分 */
+    #offline-library .ol-section--gap { margin-top: 1.4rem; }
     #offline-library .ol-section {
       border-bottom: .05rem solid var(--md-default-fg-color--lightest);
     }
@@ -125,6 +132,7 @@
       removed: "已移除 {n} 頁。",
       selectAll: "整章勾選",
       pages: "{n} 頁",
+      overview: "總覽",
       badgeAuto: "站台已存",
       progress: "{done} / {total}",
     },
@@ -154,6 +162,7 @@
       removed: "已移除 {n} 页。",
       selectAll: "整章勾选",
       pages: "{n} 页",
+      overview: "总览",
       badgeAuto: "站台已存",
       progress: "{done} / {total}",
     },
@@ -183,6 +192,7 @@
       removed: "{n} pages removed.",
       selectAll: "Select whole section",
       pages: "{n} pages",
+      overview: "Overview",
       badgeAuto: "stored by the site",
       progress: "{done} / {total}",
     },
@@ -349,7 +359,7 @@
     return status;
   }
 
-  function renderSection(section) {
+  function renderSection(section, label) {
     const stored = section.pages.filter((page) => isStored(page.url)).length;
     const wrapper = el("div", "ol-section");
     const open = state.open.has(section.key);
@@ -363,7 +373,7 @@
     // 展開指示自己畫。material 的箭頭是 summary::after，這裡沒有 summary 可用，
     // 而 ::before/::after 在 md-typeset 底下容易被 theme 的規則波及。
     toggle.appendChild(el("span", "ol-mark", open ? "▾" : "▸"));
-    toggle.appendChild(el("span", "ol-name", section.title));
+    toggle.appendChild(el("span", "ol-name", label));
     toggle.appendChild(
       el("span", "ol-meta", fill("pages", { n: section.pages.length }) + "・" + size(section.bytes))
     );
@@ -501,11 +511,38 @@
       root.appendChild(el("p", null, t.noIndex));
       return;
     }
-    // 頁數多的排前面。讀者要找的多半是章節，零星的單頁擺後面不礙事。
-    const sections = state.index.sections
-      .slice()
-      .sort((a, b) => b.pages.length - a.pages.length);
-    for (const section of sections) root.appendChild(renderSection(section));
+    // 照 offline-index.json 給的順序，那是 nav 的順序，不另外排。原本按頁數排，
+    // 結果是「近期公告」七十篇擺最上面、指南的章節散在中間，跟讀者在側邊欄記得的
+    // 位置完全對不上，一打開不知道從何看起。
+    const sections = state.index.sections;
+    const perGroup = {};
+    for (const section of sections) {
+      const group = section.group || "";
+      perGroup[group] = (perGroup[group] || 0) + 1;
+    }
+
+    let lastGroup = null;
+    let first = true;
+    for (const section of sections) {
+      const group = section.group || "";
+      const changed = group !== lastGroup;
+      // 一個頂層章節底下只有一組時不另外掛標題，兩行寫同一個名字沒有意義
+      const titled = group && perGroup[group] > 1;
+      if (titled && changed) root.appendChild(el("p", "ol-group", group));
+
+      // 只有一頁又跟頂層同名的，那是這一節的總覽頁，照原名列會跟頂層標題重複
+      const label =
+        titled && section.title === group && section.pages.length === 1
+          ? t.overview
+          : section.title;
+      const node = renderSection(section, label);
+      // 沒有標題可以分隔時改用留白，不然它會看起來像上一組的最後一項
+      if (changed && !titled && !first) node.classList.add("ol-section--gap");
+      root.appendChild(node);
+
+      lastGroup = group;
+      first = false;
+    }
   }
 
   // 動作跑起來之後停用按鈕、顯示進度，做完重讀狀態再整頁重畫
