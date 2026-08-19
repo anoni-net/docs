@@ -7,7 +7,7 @@ categories:
     - 隐私
     - 社区
 slug: tianjian-digital-privacy
-image: "assets/images/tianjian-digital-privacy.webp"
+image: "https://assets.anoni.net/blog/tianjian-digital-privacy.webp"
 summary: "《田间》的「数位安全与隐私保护系列」两场线上课，8/12 我们分享记者的数字安全入门，8/26 由黄豆泥接续谈平台中介者，免费线上参加"
 description: "《田间》的「数位安全与隐私保护系列」两场线上课，8/12 我们分享记者的数字安全入门，8/26 由黄豆泥接续谈平台中介者，免费线上参加"
 ---
@@ -15,7 +15,7 @@ description: "《田间》的「数位安全与隐私保护系列」两场线上
 # 在田间学的两场数字安全线上课，8/26 这场还能报名
 
 <figure markdown="span">
-  ![数位安全与隐私保护系列活动主视觉](./assets/images/tianjian-digital-privacy.webp){ style="border-radius: 10px;" }
+  ![数位安全与隐私保护系列活动主视觉](https://assets.anoni.net/blog/tianjian-digital-privacy.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
   <figcaption>活动主视觉由《田间》制作，来源：[在田间学活动页面](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
 </figure>
 

@@ -7,7 +7,7 @@ categories:
     - Privacy
     - Community
 slug: tianjian-digital-privacy
-image: "assets/images/tianjian-digital-privacy.webp"
+image: "https://assets.anoni.net/blog/tianjian-digital-privacy.webp"
 summary: "Tian Jian's two-session series on digital security and privacy for journalists. We gave the first session on 12 August, and Mashbean takes the second on 26 August. Free, online, and still open for registration."
 description: "Tian Jian's two-session series on digital security and privacy for journalists. We gave the first session on 12 August, and Mashbean takes the second on 26 August. Free, online, and still open for registration."
 ---
@@ -15,7 +15,7 @@ description: "Tian Jian's two-session series on digital security and privacy for
 # Two online sessions on digital security with Tian Jian, and the 26 August one is still open
 
 <figure markdown="span">
-  ![Poster for the digital security and privacy series](./assets/images/tianjian-digital-privacy.webp){ style="border-radius: 10px;" }
+  ![Poster for the digital security and privacy series](https://assets.anoni.net/blog/tianjian-digital-privacy.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
   <figcaption>Series poster by Tian Jian. Source: [TJ Field School event page](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
 </figure>
 

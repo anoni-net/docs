@@ -7,7 +7,7 @@ categories:
     - 隱私
     - 社群
 slug: tianjian-digital-privacy
-image: "assets/images/tianjian-digital-privacy.webp"
+image: "https://assets.anoni.net/blog/tianjian-digital-privacy.webp"
 summary: "《田間》的「數位安全與隱私保護系列」兩場線上課，8/12 我們分享記者的數位安全入門，8/26 由黃豆泥接續談平台中介者，免費線上參加"
 description: "《田間》的「數位安全與隱私保護系列」兩場線上課，8/12 我們分享記者的數位安全入門，8/26 由黃豆泥接續談平台中介者，免費線上參加"
 ---
@@ -15,7 +15,7 @@ description: "《田間》的「數位安全與隱私保護系列」兩場線上
 # 在田間學的兩場數位安全線上課，8/26 這場還能報名
 
 <figure markdown="span">
-  ![數位安全與隱私保護系列活動主視覺](./assets/images/tianjian-digital-privacy.webp){ style="border-radius: 10px;" }
+  ![數位安全與隱私保護系列活動主視覺](https://assets.anoni.net/blog/tianjian-digital-privacy.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
   <figcaption>活動主視覺由《田間》製作，來源：[在田間學活動頁面](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
 </figure>
 
