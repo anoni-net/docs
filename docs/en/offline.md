@@ -21,6 +21,8 @@ The first time you open this site in an ordinary browser, the core chapters for 
 
 Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours.
 
+The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
+
 To clear this, remove the site data for this site in your browser. In Chrome this is Clear browsing data with "Cookies and other site data" selected. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove this kind of storage.
 
 ## When the site has a new version
