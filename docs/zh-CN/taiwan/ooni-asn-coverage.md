@@ -16,7 +16,7 @@ icon: material/access-point-network
             title="ASNs 在实际网络上串联在一起，图示来源：https://www.cloudflare.com/zh-cn/learning/network-layer/what-is-an-autonomous-system/"
         >
     </a>
-    <figcaption>ASNs 在实际网络上串联在一起（[图示来源](https://www.cloudflare.com/zh-cn/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}）。</figcaption>
+    <figcaption markdown="span">ASNs 在实际网络上串联在一起（[图示来源](https://www.cloudflare.com/zh-cn/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}）。</figcaption>
 </figure>
 
 大家每日使用的网络可以简单地理解为一个由许多互相连接的设备与系统组成的整体，这些设备包括电脑、移动设备、服务器、路由器及交换器等，主要功能是让数据可以在彼此之间进行交换与传输。

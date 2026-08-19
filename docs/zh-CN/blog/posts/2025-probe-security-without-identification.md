@@ -27,7 +27,7 @@ description: "OONI 预计实施匿名凭证以减缓虚假观测数据对观测�
             title="Security without identification: transaction systems to make big brother obsolete"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
     </a>
-    <figcaption>在他那篇具有开创性的论文《[没有身份识别的安全性：使老大哥过时的交易系统](https://dl.acm.org/doi/10.1145/4372.4373){target="_blank"}》中，Chaum 构想了一个用户可以使用单一数字钱包匿名与多个组织互动的未来，即使这些组织互相勾结。</figcaption>
+    <figcaption markdown="span">在他那篇具有开创性的论文《[没有身份识别的安全性：使老大哥过时的交易系统](https://dl.acm.org/doi/10.1145/4372.4373){target="_blank"}》中，Chaum 构想了一个用户可以使用单一数字钱包匿名与多个组织互动的未来，即使这些组织互相勾结。</figcaption>
 </figure>
 
 为了提升 OONI 观测数据的可信度，并防止故意或无意上传的错误测量结果对 OONI 数据库的影响，我们正在考虑在 OONI Probe 中设计和实施匿名凭证。在这篇文章中，我们提供了匿名凭证的现有文献回顾。这是为了让对密码学领域不太熟悉但又好奇的读者能够深入了解其所依据的协议。

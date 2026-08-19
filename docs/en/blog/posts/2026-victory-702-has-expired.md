@@ -20,7 +20,7 @@ description: "A Sinophone Asia-Pacific read of the Section 702 lapse: what warra
             alt="EFF's NSA eagle graphic, reworking the NSA seal into an eagle plugging its talons into telecom lines, representing warrantless mass surveillance"
             style="border-radius: 10px;">
     </a>
-    <figcaption>Image: EFF designer Hugh D'Andrade's "NSA eagle," which reworks the NSA seal into an eagle plugging its talons into the nation's telecom lines. From [EFF's NSA spying work](https://www.eff.org/nsa-spying){target="_blank"}, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img].</figcaption>
+    <figcaption markdown="span">Image: EFF designer Hugh D'Andrade's "NSA eagle," which reworks the NSA seal into an eagle plugging its talons into the nation's telecom lines. From [EFF's NSA spying work](https://www.eff.org/nsa-spying){target="_blank"}, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img].</figcaption>
 </figure>
 
 !!! info ""

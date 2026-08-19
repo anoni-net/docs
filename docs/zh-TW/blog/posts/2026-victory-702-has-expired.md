@@ -20,7 +20,7 @@ description: "FISA Section 702 讓美國情報機構不需令狀就能蒐集境�
             alt="EFF 的 NSA eagle 圖，把 NSA 標誌改畫成一隻老鷹用爪子接上電信線路，象徵無令狀的大規模監控"
             style="border-radius: 10px;">
     </a>
-    <figcaption>圖片為 EFF 設計師 Hugh D'Andrade 繪製的「NSA eagle」，把 NSA 標誌改畫成老鷹用爪子接上電信線路，象徵無令狀的大規模監控。出自 [EFF 的 NSA 監控專題](https://www.eff.org/nsa-spying){target="_blank"}，授權為 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img]。</figcaption>
+    <figcaption markdown="span">圖片為 EFF 設計師 Hugh D'Andrade 繪製的「NSA eagle」，把 NSA 標誌改畫成老鷹用爪子接上電信線路，象徵無令狀的大規模監控。出自 [EFF 的 NSA 監控專題](https://www.eff.org/nsa-spying){target="_blank"}，授權為 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img]。</figcaption>
 </figure>
 
 你寄一封信到 Gmail、用 iMessage 跟在美國的朋友聊天、用 WhatsApp 聯絡海外的家人，這些通訊只要有一端落在美國的服務或網路上，原本就可能被美國情報機構在不需令狀的情況下蒐集。提供授權的法律叫 FISA Section 702（《外國情報監控法》第 702 條）。2026 年 6 月 12 日午夜，該授權在美國國會的僵局中到期[^1]。

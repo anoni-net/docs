@@ -21,7 +21,7 @@ The internet is a mesh of interconnected Autonomous Systems (AS). Each AS is a g
             alt="How ASNs interconnect on the real network, diagram from cloudflare.com"
             title="How ASNs interconnect on the real network, diagram from cloudflare.com">
     </a>
-    <figcaption>How ASNs interconnect on the real network ([image source](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}).</figcaption>
+    <figcaption markdown="span">How ASNs interconnect on the real network ([image source](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/){target="_blank"}).</figcaption>
 </figure>
 
 For OONI measurement, the ASN is the smallest useful unit of "which network did we see this censorship on". The same website may be unreachable on one carrier and fine on another, and you cannot tell those apart without breaking the data down by ASN. That is why OONI analysis keeps asking how many distinct ASNs a region's measurements come from. The higher that share, the better the data reflects the region's actual connectivity.
