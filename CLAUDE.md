@@ -242,7 +242,8 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 使用 GitHub Actions 自動建置與部署：
 
 - **build_docs.yml**: 建置多語系文件並發布
-  - 觸發條件: push to `docs` branch 或手動觸發
+  - 觸發條件: push to `docs` branch 且變更落在會改變產物的路徑（`docs/**`、根目錄的 `BECOME_ANONI*.md`、`tools/cf_purge.py` 與其測試、workflow 自己），或手動觸發
+  - 只動 `tools/` 其他檔案或 CI 設定時推 `docs` 不會建置，那是刻意的，產物沒有變。真的需要重跑從 Actions 頁面用 `workflow_dispatch`
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
   - 清理並上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`
@@ -265,6 +266,11 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_cf_purge.py`（快取清除映射）
   - 不需要建置產物，跑完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 跑
   - `check_precache.mjs` 需要 `docs/output`，沒進 CI，改 `sw.js` 時手動跑一次
+
+- **check-ripe.yml** 與 **lookback-ooni.yml**: `asn_coverage/` 的資料抓取
+  - 觸發路徑：`asn_coverage/**` 與各自的 workflow。原本任何 main 的 push 都觸發，2026-08-19 一天被 docs 的 PR 觸發 18 次，每次四個 job（2 OS × 2 Python），把並行額度佔滿，連 BuildDocs 都排不進去
+  - `timeout-minutes: 30` 與 `concurrency` 的 `cancel-in-progress`。同一天有六個 run 卡在 `apt-get update`（runner 的 apt mirror 沒有回應），沒有 timeout 就會佔著 runner 到預設的六小時
+  - 憑證那一步改成 `continue-on-error`，runner image 本來就帶 ca-certificates，那一步失敗不該擋住整個 job
 
 - **games-checks.yml**: 「Tor 中繼地球儀」的互動與版面檢查（headless Chrome）
   - 觸發路徑：`docs/zh-TW/games/tor-network/**`、`tools/check_*.mjs`

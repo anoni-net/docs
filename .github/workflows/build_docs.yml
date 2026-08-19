@@ -1,9 +1,22 @@
 name: BuildDocs
 
+# paths 列的是「會改變產物的東西」。docs/ 之外還有兩處：repo 根目錄的
+# BECOME_ANONI*.md 由 pymdownx.snippets 嵌進文件（base_path 含 ".."），
+# tools/cf_purge.py 與它的測試是部署最後一步在跑的。
+#
+# 漏列會變成推了 docs 分支卻沒有建置，站上維持舊內容而沒有任何錯誤訊息。新增
+# 這一類 docs/ 之外的相依時要一併補進來。真的遇到沒觸發，從 Actions 頁面用
+# workflow_dispatch 手動跑一次就好。
 on:
   push:
     branches:
       - "docs"
+    paths:
+      - "docs/**"
+      - "BECOME_ANONI*.md"
+      - "tools/cf_purge.py"
+      - "tools/test_cf_purge.py"
+      - ".github/workflows/build_docs.yml"
   workflow_dispatch:
 
 # 最後兩步是先 `aws s3 rm --recursive` 清空該 prefix，再 `s3 sync` 上傳。兩個 run
