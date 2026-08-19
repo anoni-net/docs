@@ -14,6 +14,13 @@
  * 寫成 "/docs/"。規格上 id 相對 origin 解析，結果是 https://anoni.net/docs/。
  * en 與 zh-cn 各自有獨立的 manifest 與 id。
  *
+ * manifest 的 scope：zh-TW 寫 "."（解析成 /docs/），en 與 zh-cn 寫 ".."（退一層，同樣
+ * 是 /docs/）。JSON 沒地方寫註解，理由記在這裡：三件互動作品只建置一份在根路徑
+ * /docs/games/，en 與 zh-cn 用 ?lang= 連過去共用同一份。那兩份 scope 若寫 "."，就只
+ * 涵蓋自己的語系前綴（/docs/en/），讀者在已安裝的 app 裡點進作品會離開 scope，
+ * Android Chrome 會掛出網址列，看起來像掉出 app。用相對值而不是寫死 "/docs/"，
+ * 本地 mkdocs serve 在 "/" 底下跑的時候一樣解析得出有效的 scope。
+ *
  * 注意：theme 資產的 hash 檔名需與 overrides/base.html 同步，
  * 升級 mkdocs-material 時要一併更新。
  */
@@ -22,8 +29,14 @@ const VERSION = "__BUILD_VERSION__";
 const PRECACHE = "anoni-docs-precache-" + VERSION;
 // runtime 拆兩個。原本導覽頁與圖片、字型共用同一個 200 筆上限，
 // 圖多的頁面逛幾輪就會把讀者想留著離線看的頁面擠掉。
-const RUNTIME_PAGES = "anoni-docs-pages-" + VERSION;
-const RUNTIME_ASSETS = "anoni-docs-assets-" + VERSION;
+//
+// 這兩個名稱刻意不帶 VERSION。VERSION 是分鐘級時間戳，每次部署必定改變，而
+// activate 會刪掉所有不在保留名單裡的快取，等於讀者累積的離線頁面每次部署都
+// 被清空一次，接著又要把整份預快取重下載一遍。頁面的新鮮度由 network-first
+// 維持，不需要靠換快取名稱來換版。PRECACHE 保留版本後綴，那批是 hash 檔名的
+// app shell，換版後舊的確實該整批丟掉。
+const RUNTIME_PAGES = "anoni-docs-pages";
+const RUNTIME_ASSETS = "anoni-docs-assets";
 const PAGES_MAX_ENTRIES = 120;
 const ASSETS_MAX_ENTRIES = 200;
 
@@ -221,6 +234,11 @@ const CORE_PAGES_EN = [
 // 數字用 tools/check_precache.mjs 量的，那支讀的是 apparent size，也就是實際要傳輸的
 // 位元組。不要用 du 量，這台的檔案系統會共用 extent，du report 出來只有一半。
 //
+// 上面那組數字是作品加進來當時量的。2026-08 重量一次，整份預快取已經到 25.05 MB，
+// 三件作品的 2.33 MB 佔比降到 9.3%。變大的原因是三個語系各存一份完整章節，而 en
+// 那份在 2026-08 補齊之後跟 zh 差不多厚了。要縮的話該從「只預快取讀者當下的語系」
+// 著手，砍作品這一批省不到多少。
+//
 // 身分敏感度：照 CORE_PAGES_ZH 那條判準（讀者是不是特定受威脅身分）檢查過。這三件
 // 是教學性質的視覺化，跟已經在預快取裡的 tools/what-is-tor/ 同一類，不指向特定身分，
 // 所以可以放。
@@ -300,9 +318,41 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// 一次性遷移：把帶版本後綴的舊 runtime 快取搬進不帶版本的新快取。
+//
+// 這次改動之前每次部署都換快取名稱，activate 會把讀者累積的離線頁面整批刪掉。修法
+// 如果照舊直接刪，等於在升級的當下再清空一次，所以先搬過來。頁面與資產都要搬：舊頁面
+// 引用的是舊 hash 的 CSS 與 JS，只搬頁面的話離線開起來會沒有樣式。
+//
+// 讀者都升過一輪之後（大約兩三次部署）這段就不會再命中任何東西，可以移除。
+async function migrateLegacyRuntime() {
+  const keys = await caches.keys();
+  for (const [legacyPrefix, target] of [
+    ["anoni-docs-pages-", RUNTIME_PAGES],
+    ["anoni-docs-assets-", RUNTIME_ASSETS],
+  ]) {
+    const legacyKeys = keys.filter((key) => key.startsWith(legacyPrefix));
+    if (!legacyKeys.length) continue;
+    const cache = await caches.open(target);
+    for (const key of legacyKeys) {
+      const legacy = await caches.open(key);
+      for (const request of await legacy.keys()) {
+        // 新快取已經有的就不覆蓋，那份比較新
+        if (await cache.match(request)) continue;
+        const response = await legacy.match(request);
+        if (response) await cache.put(request, response);
+      }
+      await caches.delete(key);
+    }
+  }
+  await trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES);
+  await trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES);
+}
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
+      await migrateLegacyRuntime();
       const keys = await caches.keys();
       await Promise.all(
         keys
@@ -316,12 +366,42 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-function offlinePathFor(pathname) {
-  const rel = pathname.slice(SCOPE_PATH.length);
+// 同一份 HTML 會被連成不同形狀的網址。互動作品的索引頁，zh-TW 連的是
+// games/x/play/，en 與 zh-cn 連的是 games/x/play/index.html?lang=en，指的是同一個
+// 檔案。Cache Storage 比對的是完整網址字串，形狀差一點就 miss，而預快取一份頁面
+// 只能存一種形狀。離線時依序試這幾種，讓三個語系都命中同一份。
+function cacheKeyCandidates(pathname) {
+  if (pathname.endsWith("/index.html")) {
+    return [pathname, pathname.slice(0, -"index.html".length)];
+  }
+  if (pathname.endsWith("/")) {
+    return [pathname, pathname + "index.html"];
+  }
+  return [pathname];
+}
+
+// 離線時替一個導覽請求找出對應的快取。ignoreSearch 讓帶 ?lang= 或分享參數的網址
+// 也命中，站上的 query 一律只由 client 端 JS 讀取，同一個路徑回傳的 HTML 是同一份。
+async function matchCachedPage(request) {
+  const url = new URL(request.url);
+  for (const pathname of cacheKeyCandidates(url.pathname)) {
+    const hit = await caches.match(url.origin + pathname, { ignoreSearch: true });
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
+function offlinePathFor(url) {
+  const rel = url.pathname.slice(SCOPE_PATH.length);
   // 只列有前綴的兩語，zh-TW 落到最後的預設值（根路徑的 offline 頁）。
   for (const prefix of ["zh-cn/", "en/"]) {
     if (rel.startsWith(prefix)) return SCOPE_PATH + prefix + "offline/";
   }
+  // 路徑上沒有語系前綴時才看 query。三件互動作品只建置一份在根路徑，語系靠 ?lang=
+  // 傳，只看路徑的話英文讀者離線點進作品會掉到中文的離線頁。前綴比 query 可靠，
+  // 所以擺在後面補位。
+  const lang = url.searchParams.get("lang");
+  if (lang === "en" || lang === "zh-cn") return SCOPE_PATH + lang + "/offline/";
   return SCOPE_PATH + "offline/";
 }
 
@@ -353,9 +433,9 @@ async function networkFirst(request, event) {
     }
     return response;
   } catch (err) {
-    const cached = await caches.match(request);
+    const cached = await matchCachedPage(request);
     if (cached) return cached;
-    const offline = await caches.match(offlinePathFor(new URL(request.url).pathname));
+    const offline = await caches.match(offlinePathFor(new URL(request.url)));
     if (offline) return offline;
     throw err;
   }
