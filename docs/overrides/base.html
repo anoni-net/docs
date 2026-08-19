@@ -75,8 +75,15 @@
           flex-direction: column;
           align-items: center;
           gap: .4rem;
+          /*
+            四邊都留出來。iPhone 這類圓角螢幕會把貼邊的卡片切掉一角，貼著底部
+            還會壓到 home indicator。底部給得比其他邊多一些，加上系統回報的
+            safe-area，橫置時左右的瀏海也讓開。
+          */
           padding: .6rem;
-          padding-bottom: calc(.6rem + env(safe-area-inset-bottom, 0px));
+          padding-left: calc(.8rem + env(safe-area-inset-left, 0px));
+          padding-right: calc(.8rem + env(safe-area-inset-right, 0px));
+          padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
           /* 卡片以外的地方要點得穿，不然底部整條都擋住內容 */
           pointer-events: none;
         }
@@ -87,7 +94,7 @@
           max-width: 34rem;
           padding: .55rem .8rem;
           border: .05rem solid var(--md-default-fg-color--lighter);
-          border-radius: .2rem;
+          border-radius: .4rem;
           background: var(--md-default-bg-color);
           color: var(--md-default-fg-color);
           /* z3 而不是 z2。卡片是白底浮在白底內容上，陰影淡一點就分不出邊界 */
@@ -106,15 +113,50 @@
         @media (prefers-reduced-motion: reduce) {
           .anoni-toast { animation: none; }
         }
+        .anoni-toast__actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: .35rem;
+          margin-top: .5rem;
+        }
         .anoni-banner-action {
+          display: inline-flex;
+          align-items: center;
+          min-height: 1.7rem;
+          padding: .25rem .7rem;
+          border: .05rem solid var(--md-default-fg-color--lighter);
+          border-radius: .15rem;
           background: none;
-          border: 0;
-          padding: 0;
-          margin: 0 .4rem;
+          color: inherit;
           font: inherit;
-          color: var(--md-accent-fg-color);
-          text-decoration: underline;
+          line-height: 1.3;
           cursor: pointer;
+        }
+        /*
+          觸控裝置把按鈕加大。桌面用滑鼠點得準，緊湊一點比較不佔卡片版面，
+          手指沒有那個精度，44 CSS px 是 Apple 的建議值。
+        */
+        @media (pointer: coarse) {
+          .anoni-banner-action {
+            min-height: 2.2rem;
+            padding: .4rem .85rem;
+          }
+        }
+        .anoni-banner-action:hover,
+        .anoni-banner-action:focus-visible {
+          border-color: var(--md-accent-fg-color);
+          color: var(--md-accent-fg-color);
+        }
+        .anoni-banner-action--primary {
+          border-color: var(--md-primary-fg-color);
+          background: var(--md-primary-fg-color);
+          color: var(--md-primary-bg-color);
+        }
+        .anoni-banner-action--primary:hover,
+        .anoni-banner-action--primary:focus-visible {
+          border-color: var(--md-accent-fg-color);
+          background: var(--md-accent-fg-color);
+          color: var(--md-accent-bg-color);
         }
       </style>
     {% endblock %}
@@ -384,10 +426,11 @@
             if (reloadOnTakeover) location.reload();
           });
 
-          function linkButton(label, onClick) {
+          function actionButton(label, primary, onClick) {
             var button = document.createElement("button");
             button.type = "button";
-            button.className = "anoni-banner-action";
+            button.className =
+              "anoni-banner-action" + (primary ? " anoni-banner-action--primary" : "");
             button.textContent = label;
             button.addEventListener("click", onClick);
             return button;
@@ -407,11 +450,14 @@
 
             var line = document.createElement("p");
             line.appendChild(document.createTextNode(t.text));
-            line.appendChild(linkButton(t.update, function () {
+
+            var actions = document.createElement("div");
+            actions.className = "anoni-toast__actions";
+            actions.appendChild(actionButton(t.update, true, function () {
               reloadOnTakeover = true;
               waiting.postMessage({ type: "SKIP_WAITING" });
             }));
-            line.appendChild(linkButton(t.later, function () {
+            actions.appendChild(actionButton(t.later, false, function () {
               try {
                 sessionStorage.setItem(DISMISS_KEY, "1");
               } catch (err) {
@@ -421,6 +467,7 @@
             }));
 
             banner.appendChild(line);
+            banner.appendChild(actions);
             dismiss = window.__anoniToast(banner);
           }
 
@@ -571,15 +618,26 @@
             return button;
           }
 
+          var actions = document.createElement("div");
+          actions.className = "anoni-toast__actions";
+
+          // 卡片上的按鈕不需要語言代碼，那是給開發者看的。剝掉結尾的括號，三個
+          // 語言在手機上才排得進一行。header 的切換器維持完整名稱。剝完是空的就
+          // 退回原名，免得 extra.alternate 換了寫法之後按鈕變成空白。
+          function shortName(name) {
+            var short = name.replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim();
+            return short || name;
+          }
+
           links.forEach(function (link) {
-            line.appendChild(action(link.name, function () {
+            actions.appendChild(action(shortName(link.name), function () {
               writePref(link.lang);
               if (current && link.lang === current.lang) dismiss();
               else location.assign(link.href);
             }));
           });
 
-          line.appendChild(action(t.later, function () {
+          actions.appendChild(action(t.later, function () {
             try {
               sessionStorage.setItem(ASKED_KEY, "1");
             } catch (err) {
@@ -589,6 +647,7 @@
           }));
 
           banner.appendChild(line);
+          banner.appendChild(actions);
           dismiss = window.__anoniToast(banner);
         })();
       </script>
