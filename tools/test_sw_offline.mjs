@@ -99,6 +99,19 @@ class FakeCacheStorage {
 }
 
 const harness = `
+  ${grab(/^const VERSION = .*$/m)}
+  ${grab(/^const PRECACHE = .*$/m)}
+  ${grab(/^const LANG_PREFIXES = \[[^\]]*\];/m)}
+  ${grab(/^const SHELL_ASSETS = \[[\s\S]*?\n\];/m)}
+  ${grab(/^const CORE_PAGES_ZH = \[[\s\S]*?\n\];/m)}
+  ${grab(/^const CORE_PAGES_EN = \[[\s\S]*?\n\];/m)}
+  ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
+  ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
+  ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const precachedPrefixes = .*$/m)}
+  ${grab(/^async function precacheFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function langPrefixOf\(url\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function guessLangPrefix\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const RUNTIME_PAGES = .*$/m)}
   ${grab(/^const RUNTIME_ASSETS = .*$/m)}
   ${grab(/^const PAGES_MAX_ENTRIES = .*$/m)}
@@ -109,16 +122,34 @@ const harness = `
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   return {
-    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES,
+    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
+    langPrefixOf, precacheUrlsFor, precacheFor, guessLangPrefix,
   };
 `;
 
-/** 每個測試拿一組乾淨的快取，避免互相污染 */
-const load = () => {
+/**
+ * 每個測試拿一組乾淨的快取，避免互相污染。
+ *
+ * opts.clients 是「目前開著的分頁網址」，guessLangPrefix 會讀它。
+ * 回傳的 fetched 是這一輪實際抓過的網址，用來驗預快取只下了該下的那些。
+ */
+const load = (opts = {}) => {
   const caches = new FakeCacheStorage();
-  const sw = new Function('caches', 'SCOPE_PATH', harness)(caches, SCOPE_PATH);
-  return { sw, caches };
+  const fetched = [];
+  const fetchStub = async (url) => {
+    fetched.push(url);
+    return { ok: !(opts.notFound || []).includes(url), url };
+  };
+  const selfStub = {
+    clients: {
+      matchAll: async () => (opts.clients || []).map((url) => ({ url })),
+    },
+  };
+  const sw = new Function('caches', 'SCOPE_PATH', 'fetch', 'self', harness)(
+    caches, SCOPE_PATH, fetchStub, selfStub
+  );
+  return { sw, caches, fetched };
 };
 
 const req = (pathname) => ({ url: ORIGIN + pathname });
@@ -129,7 +160,8 @@ let failed = 0;
 const tests = [];
 const test = (name, fn) => tests.push([name, fn]);
 
-test('cacheKeyCandidates 補上另一種網址形狀', ({ sw }) => {
+test('cacheKeyCandidates 補上另一種網址形狀', (load) => {
+  const { sw } = load();
   assert.deepEqual(sw.cacheKeyCandidates('/docs/games/tor-network/play/'), [
     '/docs/games/tor-network/play/',
     '/docs/games/tor-network/play/index.html',
@@ -144,7 +176,8 @@ test('cacheKeyCandidates 補上另一種網址形狀', ({ sw }) => {
   ]);
 });
 
-test('三個語系連出去的形狀都命中同一份預快取', async ({ sw, caches }) => {
+test('三個語系連出去的形狀都命中同一份預快取', async (load) => {
+  const { sw, caches } = load();
   const precache = await caches.open('anoni-docs-precache-202601010000');
   await precache.put('/docs/games/tor-network/play/index.html', 'GLOBE');
 
@@ -163,7 +196,8 @@ test('三個語系連出去的形狀都命中同一份預快取', async ({ sw, c
   assert.equal(await sw.matchCachedPage(req('/docs/basics/metadata/')), undefined);
 });
 
-test('分享網址帶的參數不影響命中', async ({ sw, caches }) => {
+test('分享網址帶的參數不影響命中', async (load) => {
+  const { sw, caches } = load();
   const pages = await caches.open('anoni-docs-pages');
   await pages.put('/docs/tools/what-is-tor/', 'TOR');
   assert.equal(
@@ -172,13 +206,15 @@ test('分享網址帶的參數不影響命中', async ({ sw, caches }) => {
   );
 });
 
-test('離線頁依語系前綴挑', ({ sw }) => {
+test('離線頁依語系前綴挑', (load) => {
+  const { sw } = load();
   assert.equal(sw.offlinePathFor(u('/docs/tools/what-is-tor/')), '/docs/offline/');
   assert.equal(sw.offlinePathFor(u('/docs/en/tools/what-is-tor/')), '/docs/en/offline/');
   assert.equal(sw.offlinePathFor(u('/docs/zh-cn/tools/what-is-tor/')), '/docs/zh-cn/offline/');
 });
 
-test('作品在根路徑，離線頁改看 ?lang=', ({ sw }) => {
+test('作品在根路徑，離線頁改看 ?lang=', (load) => {
+  const { sw } = load();
   assert.equal(
     sw.offlinePathFor(u('/docs/games/tor-network/play/index.html?lang=en')),
     '/docs/en/offline/'
@@ -191,12 +227,14 @@ test('作品在根路徑，離線頁改看 ?lang=', ({ sw }) => {
   assert.equal(sw.offlinePathFor(u('/docs/games/tor-network/play/')), '/docs/offline/');
 });
 
-test('路徑上的語系前綴比 query 優先', ({ sw }) => {
+test('路徑上的語系前綴比 query 優先', (load) => {
+  const { sw } = load();
   // 前綴是站台建出來的，query 誰都能加。兩邊打架時信前綴。
   assert.equal(sw.offlinePathFor(u('/docs/en/tools/what-is-tor/?lang=zh-cn')), '/docs/en/offline/');
 });
 
-test('舊的帶版本快取搬進不帶版本的新快取', async ({ sw, caches }) => {
+test('舊的帶版本快取搬進不帶版本的新快取', async (load) => {
+  const { sw, caches } = load();
   const legacyPages = await caches.open('anoni-docs-pages-202601010000');
   await legacyPages.put('/docs/basics/metadata/', 'OLD-META');
   await legacyPages.put('/docs/tools/what-is-tor/', 'OLD-TOR');
@@ -219,7 +257,8 @@ test('舊的帶版本快取搬進不帶版本的新快取', async ({ sw, caches 
   assert.equal(await caches.has('anoni-docs-assets-202601010000'), false);
 });
 
-test('遷移不會把自己當成舊快取刪掉', async ({ sw, caches }) => {
+test('遷移不會把自己當成舊快取刪掉', async (load) => {
+  const { sw, caches } = load();
   // RUNTIME_PAGES 是 anoni-docs-pages，舊的是 anoni-docs-pages-<版本>，
   // 名稱只差一個連字號，判斷寫鬆一點就會把讀者的離線內容整份刪掉
   const pages = await caches.open(sw.RUNTIME_PAGES);
@@ -232,7 +271,99 @@ test('遷移不會把自己當成舊快取刪掉', async ({ sw, caches }) => {
   assert.equal(await survived.match('/docs/basics/metadata/'), 'KEEP');
 });
 
-test('搬進來超過上限時會裁到上限', async ({ sw, caches }) => {
+test('語系前綴從網址判斷，scope 外回 null', (load) => {
+  const { sw } = load();
+  assert.equal(sw.langPrefixOf(u('/docs/tools/what-is-tor/')), '');
+  assert.equal(sw.langPrefixOf(u('/docs/en/tools/what-is-tor/')), 'en/');
+  assert.equal(sw.langPrefixOf(u('/docs/zh-cn/tools/what-is-tor/')), 'zh-cn/');
+  // 作品在根路徑，語系在 query 裡
+  assert.equal(sw.langPrefixOf(u('/docs/games/tor-network/play/?lang=en')), 'en/');
+  assert.equal(sw.langPrefixOf(u('/docs/games/tor-network/play/')), '');
+  // query 的值直接拿去組路徑會變成穿越漏洞，只認白名單裡的
+  assert.equal(sw.langPrefixOf(u('/docs/games/tor-network/play/?lang=../../etc')), '');
+  // scope 外
+  assert.equal(sw.langPrefixOf(u('/send/')), null);
+});
+
+test('預快取清單只含指定語系，作品本體三語共用', (load) => {
+  const { sw } = load();
+  const zh = sw.precacheUrlsFor('');
+  const en = sw.precacheUrlsFor('en/');
+
+  assert.ok(zh.includes('/docs/tools/what-is-tor/'));
+  assert.ok(!zh.some((url) => url.startsWith('/docs/en/')));
+  assert.ok(!zh.some((url) => url.startsWith('/docs/zh-cn/')));
+
+  assert.ok(en.includes('/docs/en/tools/what-is-tor/'));
+  assert.ok(!en.includes('/docs/tools/what-is-tor/'));
+
+  // 作品只建置一份在根路徑，兩個清單都指向同一批
+  assert.ok(zh.includes('/docs/games/tor-network/play/index.html'));
+  assert.ok(en.includes('/docs/games/tor-network/play/index.html'));
+});
+
+test('一次只抓一個語系的量', async (load) => {
+  const { sw, fetched } = load();
+  await sw.precacheFor('en/');
+  assert.equal(fetched.length, sw.precacheUrlsFor('en/').length);
+  assert.ok(
+    fetched.every((url) => url.startsWith('/docs/en/') || url.startsWith('/docs/games/'))
+  );
+});
+
+test('換語系時不重抓已經有的東西', async (load) => {
+  const { sw, fetched } = load();
+  await sw.precacheFor('');
+  const firstRound = fetched.length;
+  fetched.length = 0;
+
+  await sw.precacheFor('en/');
+  // 作品本體第一輪就抓過了，第二輪只補 en 自己那一份
+  assert.ok(fetched.every((url) => url.startsWith('/docs/en/')));
+  assert.ok(fetched.length < firstRound);
+  assert.equal(
+    fetched.length,
+    sw.precacheUrlsFor('en/').filter((url) => url.startsWith('/docs/en/')).length
+  );
+});
+
+test('install 從開著的分頁推語系', async (load) => {
+  const guess = (clients) => load({ clients }).sw.guessLangPrefix();
+  assert.equal(await guess(['https://anoni.net/docs/en/guides/']), 'en/');
+  assert.equal(await guess(['https://anoni.net/docs/zh-cn/guides/']), 'zh-cn/');
+  assert.equal(await guess(['https://anoni.net/docs/guides/']), '');
+  // 一個站內分頁都找不到時回 null，install 據此決定先不抓，不要瞎猜一個語系下載
+  assert.equal(await guess([]), null);
+  assert.equal(await guess(['https://anoni.net/send/']), null);
+  // scope 外的分頁不算數，往後找到第一個站內的
+  assert.equal(await guess(['https://anoni.net/send/', 'https://anoni.net/docs/en/']), 'en/');
+});
+
+test('同一個語系不會在每次導覽都重跑一輪', async (load) => {
+  const { sw, fetched } = load();
+  await sw.precacheFor('en/');
+  const first = fetched.length;
+  assert.ok(first > 0);
+
+  // client 每次頁面載入都會送 PRECACHE_LANG，這裡模擬連續幾次
+  fetched.length = 0;
+  await sw.precacheFor('en/');
+  await sw.precacheFor('en/');
+  assert.equal(fetched.length, 0);
+});
+
+test('個別頁面 404 不會讓整批預快取失敗', async (load) => {
+  const missing = '/docs/zh-cn/tools/what-is-cryptpad/';
+  const { sw, caches } = load({ notFound: [missing] });
+  await sw.precacheFor('zh-cn/');
+  const cache = await caches.open(sw.PRECACHE);
+  assert.equal(await cache.match(missing), undefined);
+  // 同一批的其他頁面照樣進快取
+  assert.notEqual(await cache.match('/docs/zh-cn/tools/what-is-tor/'), undefined);
+});
+
+test('搬進來超過上限時會裁到上限', async (load) => {
+  const { sw, caches } = load();
   const legacy = await caches.open('anoni-docs-pages-202601010000');
   for (let i = 0; i < sw.PAGES_MAX_ENTRIES + 10; i++) {
     await legacy.put(`/docs/p${i}/`, `P${i}`);
@@ -244,7 +375,7 @@ test('搬進來超過上限時會裁到上限', async ({ sw, caches }) => {
 
 for (const [name, fn] of tests) {
   try {
-    await fn(load());
+    await fn(load);
     passed++;
     console.log('  ✓ ' + name);
   } catch (err) {

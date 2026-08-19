@@ -254,16 +254,119 @@
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}
-      {# PWA: service worker 只在 clearnet 註冊。Tor Browser 停用 SW、IPFS gateway hostname 不符，皆自動跳過 #}
+      {#
+        PWA: service worker 只在 clearnet 註冊。Tor Browser 停用 SW、IPFS gateway hostname
+        不符，皆自動跳過。
+
+        這段刻意 inline 而不拆成獨立的 .js：三個語系是三次獨立的 mkdocs build，拆檔案
+        就要處理三份路徑（sw.js 走絕對路徑那招在這裡行不通，本地 serve 的根路徑不同），
+        而 gzip 後這段約 1.8 KB，省下的一個請求對慢速連線更划算。
+      #}
       <script>
         (function () {
           if (!("serviceWorker" in navigator)) return;
+
+          var script, options;
           var host = location.hostname;
           if (host === "anoni.net") {
-            navigator.serviceWorker.register("/docs/sw.js", { scope: "/docs/" });
+            script = "/docs/sw.js";
+            options = { scope: "/docs/" };
           } else if (host === "localhost" || host === "127.0.0.1") {
-            navigator.serviceWorker.register("/sw.js");
+            script = "/sw.js";
+            options = {};
+          } else {
+            return;
           }
+
+          // 換版提示的文案。document.documentElement.lang 在 zh-CN 版是 "zh"
+          // （mkdocs_cn.yml 的 theme.language），對不到 zh-CN 這個代碼。
+          var STRINGS = {
+            "zh-TW": { text: "站台內容有新版本。", update: "立即更新", later: "稍後" },
+            "zh": { text: "站点内容有新版本。", update: "立即更新", later: "稍后" },
+            "en": { text: "A new version of this site is available.", update: "Update", later: "Later" }
+          };
+          var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
+          var DISMISS_KEY = "anoni-docs-update-dismissed";
+
+          // 只有讀者按下更新才重新載入。首次安裝時 SW 的 clients.claim() 一樣會觸發
+          // controllerchange，那時重載會讓人莫名其妙看到畫面閃一下。
+          var reloadOnTakeover = false;
+          navigator.serviceWorker.addEventListener("controllerchange", function () {
+            if (reloadOnTakeover) location.reload();
+          });
+
+          function linkButton(label, onClick) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.textContent = label;
+            button.style.cssText =
+              "background:none;border:0;padding:0;margin:0 .4rem;font:inherit;" +
+              "color:var(--md-accent-fg-color);text-decoration:underline;cursor:pointer";
+            button.addEventListener("click", onClick);
+            return button;
+          }
+
+          function showUpdateBanner(waiting) {
+            if (document.getElementById("__sw-update")) return;
+            try {
+              if (sessionStorage.getItem(DISMISS_KEY)) return;
+            } catch (err) {
+              // 隱私模式或擋掉 storage 的環境讀不到，忽略之後照常顯示
+            }
+
+            var banner = document.createElement("aside");
+            banner.id = "__sw-update";
+            banner.className = "md-banner";
+
+            var inner = document.createElement("div");
+            inner.className = "md-banner__inner md-grid md-typeset";
+
+            var line = document.createElement("p");
+            line.appendChild(document.createTextNode(t.text));
+            line.appendChild(linkButton(t.update, function () {
+              reloadOnTakeover = true;
+              waiting.postMessage({ type: "SKIP_WAITING" });
+            }));
+            line.appendChild(linkButton(t.later, function () {
+              try {
+                sessionStorage.setItem(DISMISS_KEY, "1");
+              } catch (err) {
+                // 存不進去就只是這次關掉，換頁會再出現
+              }
+              banner.remove();
+            }));
+
+            inner.appendChild(line);
+            banner.appendChild(inner);
+            document.body.insertBefore(banner, document.body.firstChild);
+          }
+
+          navigator.serviceWorker.register(script, options).then(function (registration) {
+            // 告訴 SW 這頁是哪個語系，它據此補齊該語系的預快取。送的是網址不是語系
+            // 代碼，判斷邏輯只留在 sw.js 的 langPrefixOf 一處，也繞開 zh-CN 版的
+            // lang 屬性是 "zh" 這件事。
+            navigator.serviceWorker.ready.then(function (ready) {
+              if (ready.active) {
+                ready.active.postMessage({ type: "PRECACHE_LANG", url: location.href });
+              }
+            });
+
+            // 上一次沒按更新，新版還停在 waiting
+            if (registration.waiting && navigator.serviceWorker.controller) {
+              showUpdateBanner(registration.waiting);
+            }
+
+            registration.addEventListener("updatefound", function () {
+              var installing = registration.installing;
+              if (!installing) return;
+              installing.addEventListener("statechange", function () {
+                // 有 controller 才代表這是換版。沒有的話是首次安裝，沒什麼好提示的。
+                if (installing.state === "installed" && navigator.serviceWorker.controller) {
+                  showUpdateBanner(installing);
+                }
+              });
+            });
+          });
         })();
       </script>
     {% endblock %}
