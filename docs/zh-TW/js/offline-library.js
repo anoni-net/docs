@@ -101,6 +101,7 @@
   const STRINGS = {
     "zh-TW": {
       loading: "讀取中",
+      preparing: "離線功能還在準備，裝置上的狀態稍後才會顯示。",
       noSupport:
         "這個瀏覽器沒有提供離線儲存，或者停用了 Service Worker（Tor Browser 屬於後者，onion 版本也不啟用）。這一頁其他段落的說明仍然適用。",
       noIndex: "讀不到頁面清單，可能是目前離線且這份清單還沒被存下來。恢復連線後重新整理即可。",
@@ -129,6 +130,7 @@
     },
     zh: {
       loading: "读取中",
+      preparing: "离线功能还在准备，设备上的状态稍后才会显示。",
       noSupport:
         "这个浏览器没有提供离线存储，或者停用了 Service Worker（Tor Browser 属于后者，onion 版本也不启用）。这一页其他段落的说明仍然适用。",
       noIndex: "读不到页面清单，可能是当前离线且这份清单还没有被存下来。恢复连接后刷新即可。",
@@ -157,6 +159,7 @@
     },
     en: {
       loading: "Loading",
+      preparing: "Offline support is still starting up. What is on this device will show shortly.",
       noSupport:
         "This browser has no offline storage available, or Service Workers are disabled (Tor Browser is the latter case, and the onion version does not enable them either). The rest of this page still applies.",
       noIndex: "The page list could not be loaded. You may be offline and it has not been stored yet. Reload once you are back online.",
@@ -215,10 +218,32 @@
     return;
   }
 
+  // service worker 準備好了沒。
+  //
+  // 不能直接用 navigator.serviceWorker.ready：首次造訪時 install 要把整個語系的核心
+  // 章節抓完（約十 MB）才會 activate，ready 也才 resolve，行動網路上那是好幾分鐘。
+  // 這一頁的清單不需要等那個，所以拆成兩段，索引先畫、狀態晚點補。
+  //
+  // 先讓出一輪再問有沒有 registration：base.html 的註冊碼在 body 尾端，比這支晚執行，
+  // 太早問會拿到 undefined。問得到才等 ready，問不到就是這個環境不註冊（onion 版與
+  // 停用 Service Worker 的瀏覽器），沒必要一直等下去。
+  let readyPromise = null;
+  function whenReady() {
+    if (!readyPromise) {
+      readyPromise = new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => navigator.serviceWorker.getRegistration())
+        .then((registration) => {
+          if (!registration) throw new Error("no-service-worker-registration");
+          return navigator.serviceWorker.ready;
+        });
+    }
+    return readyPromise;
+  }
+
   // 一次請求一個 MessageChannel。下載類的指令會在同一個 port 上多次回報進度，
   // 最後一則不是 progress，那時才算結束。
   function ask(message, onProgress) {
-    return navigator.serviceWorker.ready.then(
+    return whenReady().then(
       (registration) =>
         new Promise((resolve, reject) => {
           const worker = registration.active;
@@ -255,6 +280,10 @@
     remove: new Set(),
     // 展開中的章節。勾一個項目就整頁重畫，沒記著的話會全部收合回去
     open: new Set(),
+    // service worker 那半回來了沒。沒回來之前清單照樣可以看、可以勾，
+    // 只是不知道裝置上已經有哪些。
+    swReady: false,
+    swMissing: false,
   };
 
   function refreshStatus() {
@@ -290,6 +319,14 @@
 
   function renderStatus() {
     const status = el("p", "ol-status");
+    if (state.swMissing) {
+      status.textContent = t.noSupport;
+      return status;
+    }
+    if (!state.swReady) {
+      status.textContent = t.preparing;
+      return status;
+    }
     status.appendChild(
       document.createTextNode(fill("savedCount", { n: state.saved.size }))
     );
@@ -336,13 +373,15 @@
     if (!open) return wrapper;
 
     const body = el("div", "ol-body");
-    body.appendChild(
-      button(t.selectAll, null, () => {
+    if (!state.swMissing) {
+      body.appendChild(
+        button(t.selectAll, null, () => {
         const wanted = section.pages.some((page) => !willBeStored(page.url));
-        for (const page of section.pages) setWanted(page.url, wanted);
-        render();
-      })
-    );
+          for (const page of section.pages) setWanted(page.url, wanted);
+          render();
+        })
+      );
+    }
 
     const list = el("ul", "ol-pages");
     for (const page of section.pages) {
@@ -352,7 +391,7 @@
       box.type = "checkbox";
       box.checked = willBeStored(page.url);
       // 站台自動存的那批由上面的開關統一管，個別勾選沒有意義
-      box.disabled = state.precached.has(page.url);
+      box.disabled = state.swMissing || state.precached.has(page.url);
       box.addEventListener("change", () => {
         setWanted(page.url, box.checked);
         render();
@@ -412,6 +451,8 @@
     root.appendChild(renderStatus());
     if (message) root.appendChild(el("p", "ol-message", message));
 
+    if (state.swMissing) return renderSections();
+
     const autoLabel = el("label", "ol-auto");
     const autoBox = document.createElement("input");
     autoBox.type = "checkbox";
@@ -451,18 +492,20 @@
     );
     root.appendChild(actions);
 
+    renderSections();
+    if (state.add.size || state.remove.size) root.appendChild(renderApply());
+  }
+
+  function renderSections() {
     if (!state.index) {
       root.appendChild(el("p", null, t.noIndex));
       return;
     }
-
     // 頁數多的排前面。讀者要找的多半是章節，零星的單頁擺後面不礙事。
     const sections = state.index.sections
       .slice()
       .sort((a, b) => b.pages.length - a.pages.length);
     for (const section of sections) root.appendChild(renderSection(section));
-
-    if (state.add.size || state.remove.size) root.appendChild(renderApply());
   }
 
   // 動作跑起來之後停用按鈕、顯示進度，做完重讀狀態再整頁重畫
@@ -484,15 +527,23 @@
 
   note(t.loading);
 
-  Promise.all([
-    refreshStatus(),
-    fetch(indexUrl, { credentials: "same-origin" })
-      .then((response) => (response.ok ? response.json() : null))
-      .catch(() => null),
-  ])
-    .then((results) => {
-      state.index = results[1];
+  // 索引不經過 service worker，來了就先把清單畫出來
+  fetch(indexUrl, { credentials: "same-origin" })
+    .then((response) => (response.ok ? response.json() : null))
+    .catch(() => null)
+    .then((index) => {
+      state.index = index;
+      render();
+    });
+
+  whenReady()
+    .then(refreshStatus)
+    .then(() => {
+      state.swReady = true;
       render();
     })
-    .catch(() => note(t.noSupport));
+    .catch(() => {
+      state.swMissing = true;
+      render();
+    });
 })();
