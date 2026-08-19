@@ -228,24 +228,40 @@
     return;
   }
 
-  // service worker 準備好了沒。
+  // 等 registration 出現。
+  //
+  // 不能只等一小段固定時間就下判斷。Chrome 會把 register() 排到頁面 load 之後才真的
+  // 跑，而這一頁要載完 material 的 bundle 與字型，正式站實測 getRegistration() 到
+  // 十二秒才回得出東西。等太短就會對著一個好好的瀏覽器說「這裡沒有離線儲存」。
+  //
+  // 反過來，真的不註冊的環境（onion 版、IPFS gateway、停用 Service Worker 的瀏覽器）
+  // 由 base.html 把 window.__anoniServiceWorker 設成 false，看到就直接放棄，不用空等。
+  // 那支在 body 尾端，比這支晚執行，所以第一輪拿到 undefined 是正常的，繼續等就是。
+  function waitForRegistration() {
+    const deadline = Date.now() + 30000;
+    const attempt = () => {
+      if (window.__anoniServiceWorker === false) return Promise.resolve(null);
+      return navigator.serviceWorker.getRegistration().then((registration) => {
+        if (registration) return registration;
+        if (Date.now() > deadline) return null;
+        return new Promise((resolve) => setTimeout(resolve, 500)).then(attempt);
+      });
+    };
+    return attempt();
+  }
+
+  // service worker 可以收指令了沒。
   //
   // 不能直接用 navigator.serviceWorker.ready：首次造訪時 install 要把整個語系的核心
   // 章節抓完（約十 MB）才會 activate，ready 也才 resolve，行動網路上那是好幾分鐘。
   // 這一頁的清單不需要等那個，所以拆成兩段，索引先畫、狀態晚點補。
-  //
-  // 先讓出一輪再問有沒有 registration：base.html 的註冊碼在 body 尾端，比這支晚執行，
-  // 太早問會拿到 undefined。問得到才等 ready，問不到就是這個環境不註冊（onion 版與
-  // 停用 Service Worker 的瀏覽器），沒必要一直等下去。
   let readyPromise = null;
   function whenReady() {
     if (!readyPromise) {
-      readyPromise = new Promise((resolve) => setTimeout(resolve, 1200))
-        .then(() => navigator.serviceWorker.getRegistration())
-        .then((registration) => {
-          if (!registration) throw new Error("no-service-worker-registration");
-          return navigator.serviceWorker.ready;
-        });
+      readyPromise = waitForRegistration().then((registration) => {
+        if (!registration) throw new Error("no-service-worker-registration");
+        return navigator.serviceWorker.ready;
+      });
     }
     return readyPromise;
   }
