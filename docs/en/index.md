@@ -147,11 +147,6 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
 !!! tip "Latest"
 
-    - `New`{style="color: var(--brand-cyan-600);"}: [Brief yourself before you travel — take the right questions to your own AI](./blog/posts/travel-ai-briefing.md) — 2026-06-10
-    - `New`{style="color: var(--brand-cyan-600);"}: [We surveyed all 336 OONI Run v2 links, and three of them drive 72% of all measurements](./blog/posts/2026-ooni-run-v2-usage-patterns.md) — 2026-06-02
-    - `Update`{style="color: var(--cat-privacy);"}: [How Unredacted Helps People in Censored Regions Reach the Open Internet](./blog/posts/keeping-the-doors-open.md) — 2026-06-01
-    - `Update`{style="color: var(--cat-privacy);"}: [After Iran's 80-day blackout, traffic surged through our community's Tor WebTunnel bridge](./blog/posts/iran-blackout-webtunnel.md) — 2026-05-28
-    - `New`{style="color: var(--brand-cyan-600);"}: [CryptPad 2026.5.0: zh_Hant Lands as a Built-in Locale After Two and a Half Years Upstream](./blog/posts/2026-cryptpad-zh-hant.md) — 2026-05-25
-    - `Event`{style="color: var(--accent-action);"}: [COSCUP 2026 Call for Proposals](./activity/coscup-2026-cfp.md) — 2026-04-08
+    <!-- latest-posts:5 -->
 
     More at [:material-bullhorn-outline: Updates](./blog/index.md).
