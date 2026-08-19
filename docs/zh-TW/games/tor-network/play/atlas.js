@@ -665,7 +665,7 @@ async function getJSON(url, opt) {
 }
 
 // snapshot 與 torusers 由 tools/publish_games_data.sh 在正式機上定期重生，發布到 assets，
-// 不隨文件站一起走版。其餘五份變動以季或年計，跟著站台發布就好，維持相對路徑。
+// 不隨文件站一起走版。其餘五份變動以季或年計，跟著文件站發布就好，維持相對路徑。
 //
 // 先打 assets，任何原因失敗就退回站上那一份。assets 掛掉、CORS 沒設好、或使用者的網路
 // 擋掉那個網域時，地球儀仍然畫得出來，只是資料是隨站發布的那一版，不會整顆球變空。
@@ -3572,17 +3572,17 @@ async function main() {
     // 但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。
     getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
     getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
-    getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟站台一起發布
+    getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟文件站一起發布
     getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
     // 海纜障礙可選。由 publish_games_data.sh 定期重生並發布到 assets，所以走
-    // getJSONAsset 而不是站台自己的路徑，更新不必等文件站重建。
+    // getJSONAsset 而不是文件站自己的路徑，更新不必等文件站重建。
     // 障礙的存續期是月為單位，assets 的 12 小時快取夠新鮮，不必額外帶 no-cache。
     // 取不到的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
     getJSONAsset('seacable.json').catch(() => null),
-    // 台灣海纜登陸點。自建資料，跟站台一起發布而不是走 assets，因為它是人工維護的，
+    // 台灣海纜登陸點。自建資料，跟文件站一起發布而不是走 assets，因為它是人工維護的，
     // 改動頻率是「查到新來源才動」，沒有定期重生的必要。
     getJSON('./tw-landing.json').catch(() => null),
-    // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟站台一起發布。
+    // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟文件站一起發布。
     getJSON('./tw-admin.json').catch(() => null),
     // 台灣變電所的容量與負載。跟縣市界一樣是人工跑產生器更新的。
     getJSON('./tw-power.json').catch(() => null),

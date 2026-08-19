@@ -30,7 +30,7 @@ def check(label: str, got, want) -> None:
 
 def test_to_url() -> None:
     cases = [
-        # 首頁的 index.html 收斂成站台根路徑，不是 /docs//
+        # 首頁的 index.html 收斂成網站根路徑，不是 /docs//
         ("index.html", f"{BASE}/"),
         # 一般頁面用目錄式網址，結尾要有斜線
         ("basics/index.html", f"{BASE}/basics/"),

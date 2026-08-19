@@ -154,7 +154,7 @@
         "這個瀏覽器沒有提供離線儲存，或者停用了 Service Worker（Tor Browser 屬於後者，onion 版本也不啟用）。這一頁其他段落的說明仍然適用。",
       noIndex: "讀不到頁面清單，可能是目前離線且這份清單還沒被存下來。恢復連線後重新整理即可。",
       savedCount: "你自己選存的 {n} 頁",
-      autoCount: "站台自動存的 {n} 頁",
+      autoCount: "網站自動存的 {n} 頁",
       usage: "本站在這台裝置上佔用 {used}",
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
       autoLabel: "自動存下目前語言的核心章節",
@@ -164,7 +164,7 @@
       clear: "清除所有離線內容",
       clearConfirm: "確定清除",
       cancel: "取消",
-      refreshEmpty: "你還沒有自己選存頁面。站台自動存的那批會在站上有新版本時一起更新。",
+      refreshEmpty: "你還沒有自己選存頁面。網站自動存的那批會在網站有新版本時一起更新。",
       failed: "沒有完成。可能是連線中斷，稍後再試一次。",
       clearing: "清除中",
       cleared: "已清除，自動存下章節也一併關掉了。下次連上網時會補回這一頁本身與它需要的樣式（約 0.5 MB），讓你在沒有網路時仍進得來。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
@@ -177,7 +177,7 @@
       selectAll: "整章勾選",
       pages: "{n} 頁",
       overview: "總覽",
-      badgeAuto: "站台已存",
+      badgeAuto: "網站已存",
       progress: "{done} / {total}",
     },
     zh: {
@@ -187,7 +187,7 @@
         "这个浏览器没有提供离线存储，或者停用了 Service Worker（Tor Browser 属于后者，onion 版本也不启用）。这一页其他段落的说明仍然适用。",
       noIndex: "读不到页面清单，可能是当前离线且这份清单还没有被存下来。恢复连接后刷新即可。",
       savedCount: "你自己选存的 {n} 页",
-      autoCount: "站台自动存的 {n} 页",
+      autoCount: "网站自动存的 {n} 页",
       usage: "本站在这台设备上占用 {used}",
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
       autoLabel: "自动存下当前语言的核心章节",
@@ -197,7 +197,7 @@
       clear: "清除所有离线内容",
       clearConfirm: "确定清除",
       cancel: "取消",
-      refreshEmpty: "你还没有自己选存页面。站台自动存的那批会在站上有新版本时一起更新。",
+      refreshEmpty: "你还没有自己选存页面。网站自动存的那批会在网站有新版本时一起更新。",
       failed: "没有完成。可能是连接中断，稍后再试一次。",
       clearing: "清除中",
       cleared: "已清除，自动存下章节也一并关掉了。下次连上网时会补回这一页本身与它需要的样式（约 0.5 MB），让你在没有网络时仍进得来。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
@@ -210,7 +210,7 @@
       selectAll: "整章勾选",
       pages: "{n} 页",
       overview: "总览",
-      badgeAuto: "站台已存",
+      badgeAuto: "网站已存",
       progress: "{done} / {total}",
     },
     en: {
@@ -380,7 +380,7 @@
     });
   }
 
-  // 站台自動存的那批也算在裝置上，勾選框對它們沒有意義，顯示成已存並停用
+  // 網站自動存的那批也算在裝置上，勾選框對它們沒有意義，顯示成已存並停用
   const isStored = (path) => state.saved.has(path) || state.precached.has(path);
   const willBeStored = (path) =>
     state.add.has(path) || (isStored(path) && !state.remove.has(path));
@@ -472,7 +472,7 @@
       const box = document.createElement("input");
       box.type = "checkbox";
       box.checked = willBeStored(page.url);
-      // 站台自動存的那批由上面的開關統一管，個別勾選沒有意義
+      // 網站自動存的那批由上面的開關統一管，個別勾選沒有意義
       box.disabled = state.swMissing || state.precached.has(page.url);
       box.addEventListener("change", () => {
         setWanted(page.url, box.checked);
@@ -566,7 +566,7 @@
     const wrap = el("div");
     const row = el("p", "ol-actions");
 
-    // 更新的對象是讀者自己勾存的那批。站台自動存的那批跟著站台版本走，讀者
+    // 更新的對象是讀者自己勾存的那批。網站自動存的那批跟著網站版本走，讀者
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
     const refresh = button(t.refresh, null, () =>
       runTask(t.refreshing, Array.from(state.saved).length, (report) =>

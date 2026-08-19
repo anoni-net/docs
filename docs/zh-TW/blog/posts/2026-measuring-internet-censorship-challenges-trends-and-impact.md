@@ -32,7 +32,7 @@ description: "OONI 整理出全球網路審查正在變得更精細、更難偵�
 
 網路審查正在變得更精細、更難被偵測，「透明度」這件事比以往更迫切。
 
-[俄羅斯](https://ooni.org/post/2024-russia-report/){target="_blank"}、[哈薩克](https://ooni.org/post/2024-kazakhstan-report/){target="_blank"}等國家正在封鎖大量獨立新聞媒體，[選舉與抗爭期間針對社群媒體的限制](https://ooni.org/reports/social-media-im/){target="_blank"}在全球各地也越來越常見。連民主國家也在擴張審查做法。舉例來說，[阿爾巴尼亞去年封鎖了 TikTok](https://explorer.ooni.org/findings/274282914400){target="_blank"}，西班牙則[間歇性封鎖了部分網路](https://www.techradar.com/vpn/vpn-privacy-security/la-ligas-war-on-piracy-is-breaking-the-internet-in-spain-and-your-vpn-could-be-the-next-target){target="_blank"}，做法是針對 LaLiga 直播站台所使用的 Cloudflare 基礎設施下手。
+[俄羅斯](https://ooni.org/post/2024-russia-report/){target="_blank"}、[哈薩克](https://ooni.org/post/2024-kazakhstan-report/){target="_blank"}等國家正在封鎖大量獨立新聞媒體，[選舉與抗爭期間針對社群媒體的限制](https://ooni.org/reports/social-media-im/){target="_blank"}在全球各地也越來越常見。連民主國家也在擴張審查做法。舉例來說，[阿爾巴尼亞去年封鎖了 TikTok](https://explorer.ooni.org/findings/274282914400){target="_blank"}，西班牙則[間歇性封鎖了部分網路](https://www.techradar.com/vpn/vpn-privacy-security/la-ligas-war-on-piracy-is-breaking-the-internet-in-spain-and-your-vpn-could-be-the-next-target){target="_blank"}，做法是針對 LaLiga 直播網站所使用的 Cloudflare 基礎設施下手。
 
 這些案例都由 [Open Observatory of Network Interference（OONI）](https://ooni.org/){target="_blank"}記錄下來。OONI 是一個非營利組織，維護[全球最大的網路審查公開資料集](https://ooni.org/data/){target="_blank"}，資料來自群眾外包的測量。本文簡要討論測量網路審查的挑戰、正在浮現的審查趨勢，以及網路觀測如何推動人權倡議。
 

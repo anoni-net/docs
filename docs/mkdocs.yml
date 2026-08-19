@@ -209,7 +209,7 @@ theme:
     - content.footnote.tooltips
 extra:
   alternate:
-    # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是站台預設語系，run.sh 直接把它建在
+    # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是網站預設語系，run.sh 直接把它建在
     # 根路徑，沒有獨立的語系區段。填 /docs/ 讓 hreflang 有 self-reference（Google 要求
     # 一組 annotation 內每個網址都指回自己），語言選單也直接落在正式網址上。
     - name: 臺灣正體（zh-TW）

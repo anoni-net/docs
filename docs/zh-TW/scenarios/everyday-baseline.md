@@ -78,9 +78,9 @@ icon: material/account-outline
 
 **備援碼要先存好**。開啟兩步驟驗證時服務會給一組一次性的備援碼，手機遺失或換機時要靠它才能登入。列印出來或抄在紙上，收進抽屜或保險箱，不要只留在同一支手機裡。一般人開了兩步驟驗證之後最常出的意外，是換機之後無法登入自己的帳號。
 
-passkey 值得補一句現況。獨立普查顯示它的覆蓋率遠低於廠商報告給人的印象，而且有支援的站台裡，很高比例是接上 Google 登入才取得 passkey 能力[^passkey-census]。畫面上的「用 passkey 登入」相當比例是「用 Google 帳號登入」，把關聯集中到同一個帳號上。有支援就開啟，密碼管理器仍需保留。
+passkey 值得補一句現況。獨立普查顯示它的覆蓋率遠低於廠商報告給人的印象，而且有支援的網站裡，很高比例是接上 Google 登入才取得 passkey 能力[^passkey-census]。畫面上的「用 passkey 登入」相當比例是「用 Google 帳號登入」，把關聯集中到同一個帳號上。有支援就開啟，密碼管理器仍需保留。
 
-兩步驟驗證擋掉的是密碼外洩之後的直接登入。即時轉發型的釣魚它擋不掉，攻擊者會把你輸入的驗證碼轉到真站台。passkey 與硬體金鑰因為綁定網域可以擋這一種，TOTP 與簡訊不行。
+兩步驟驗證擋掉的是密碼外洩之後的直接登入。即時轉發型的釣魚它擋不掉，攻擊者會把你輸入的驗證碼轉到真網站。passkey 與硬體金鑰因為綁定網域可以擋這一種，TOTP 與簡訊不行。
 
 ### 系統與瀏覽器保持更新
 
@@ -218,6 +218,6 @@ Signal 這類工具保護的是內容，不保護「誰在什麼時候聯繫誰�
 
 [^yubikey]: [YubiKey 5 NFC](https://www.yubico.com/product/yubikey-5-series/yubikey-5-nfc/){target="_blank"} 官方定價 58 美元，同系列其他型號價格不同。台灣可透過授權經銷商購買，實際售價以通路為準。查證日期 2026-08。
 
-[^passkey-census]: Tranco 前 10 萬站台的 passkey 支援普查，資料為 2025 年 3 月的快照。整體支援率 11.3%，前 100 名 20%，排名 5 萬至 10 萬為 6.9%。論文同時記載「External IdPs 偵測到 75.2%」與「75.2% 的站台整合 Google SSO」，兩種敘述並列，因此本文只寫「很高比例」，不押在單一讀法。見 [State of Passkey Authentication in the Wild: A Census of the Top 100K sites](https://arxiv.org/html/2602.15135v2){target="_blank"}。查證日期 2026-08。
+[^passkey-census]: Tranco 前 10 萬網站的 passkey 支援普查，資料為 2025 年 3 月的快照。整體支援率 11.3%，前 100 名 20%，排名 5 萬至 10 萬為 6.9%。論文同時記載「External IdPs 偵測到 75.2%」與「75.2% 的網站整合 Google SSO」，兩種敘述並列，因此本文只寫「很高比例」，不押在單一讀法。見 [State of Passkey Authentication in the Wild: A Census of the Top 100K sites](https://arxiv.org/html/2602.15135v2){target="_blank"}。查證日期 2026-08。
 
 [^nist]: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html){target="_blank"} 數位身分指引，第 4 版於 2025 年 7 月 31 日定案，取代 2020 年的前一版（2024 年 8 月的是第二次公開草案）。明文規定驗證方不得要求定期更換密碼（`SHALL NOT require periodic rotation`），只在有跡象顯示已遭破解時才要求更換。查證日期 2026-08。
