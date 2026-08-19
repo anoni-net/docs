@@ -143,6 +143,7 @@ nav:
       - about/index.md
       - contact.md
       - help/index.md
+      - offline.md
 theme:
   name: material
   logo: assets/images/logo-white.svg
@@ -214,6 +215,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
 hooks:
   - hooks/latest_posts.py
+  - hooks/offline_index.py
 plugins:
   - search:
       lang:

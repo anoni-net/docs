@@ -112,6 +112,16 @@ const harness = `
   ${grab(/^async function precacheFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function langPrefixOf\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function guessLangPrefix\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const LIBRARY = .*$/m)}
+  ${grab(/^const SETTINGS = .*$/m)}
+  ${grab(/^const AUTO_PRECACHE_URL = .*$/m)}
+  ${grab(/^async function autoPrecacheEnabled\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function setAutoPrecache\(enabled\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function libraryEntries\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function addToLibrary\(paths, refresh, report\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function removeFromLibrary\(paths\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function clearAllOffline\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function handleLibraryMessage\(data, port\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const RUNTIME_PAGES = .*$/m)}
   ${grab(/^const RUNTIME_ASSETS = .*$/m)}
   ${grab(/^const PAGES_MAX_ENTRIES = .*$/m)}
@@ -122,9 +132,11 @@ const harness = `
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   return {
-    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE,
+    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, precacheFor, guessLangPrefix,
+    autoPrecacheEnabled, setAutoPrecache, libraryEntries, addToLibrary,
+    removeFromLibrary, clearAllOffline, handleLibraryMessage,
   };
 `;
 
@@ -146,8 +158,9 @@ const load = (opts = {}) => {
       matchAll: async () => (opts.clients || []).map((url) => ({ url })),
     },
   };
-  const sw = new Function('caches', 'SCOPE_PATH', 'fetch', 'self', harness)(
-    caches, SCOPE_PATH, fetchStub, selfStub
+  const navigatorStub = { storage: { estimate: async () => ({ usage: 1024, quota: 4096 }) } };
+  const sw = new Function('caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', harness)(
+    caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub
   );
   return { sw, caches, fetched };
 };
@@ -371,6 +384,129 @@ test('搬進來超過上限時會裁到上限', async (load) => {
   await sw.migrateLegacyRuntime();
   const pages = await caches.open(sw.RUNTIME_PAGES);
   assert.equal((await pages.keys()).length, sw.PAGES_MAX_ENTRIES);
+});
+
+test('自動預快取預設開著，關掉之後記得住', async (load) => {
+  const { sw } = load();
+  assert.equal(await sw.autoPrecacheEnabled(), true);
+  await sw.setAutoPrecache(false);
+  assert.equal(await sw.autoPrecacheEnabled(), false);
+  await sw.setAutoPrecache(true);
+  assert.equal(await sw.autoPrecacheEnabled(), true);
+});
+
+test('讀者勾選的頁面存進 library，回相對路徑', async (load) => {
+  const { sw, caches, fetched } = load();
+  await sw.addToLibrary(['scenarios/journalist/', 'scenarios/activist/'], false, () => {});
+
+  assert.deepEqual(fetched, ['/docs/scenarios/journalist/', '/docs/scenarios/activist/']);
+  assert.deepEqual((await sw.libraryEntries()).sort(), [
+    'scenarios/activist/',
+    'scenarios/journalist/',
+  ]);
+  // 跟預設下載那批分開放，才不會被 runtime 的筆數上限擠掉
+  const library = await caches.open(sw.LIBRARY);
+  assert.notEqual(await library.match('/docs/scenarios/journalist/'), undefined);
+});
+
+test('已經存過的不重抓，refresh 才強制重來', async (load) => {
+  const { sw, fetched } = load();
+  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  fetched.length = 0;
+
+  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  assert.deepEqual(fetched, []);
+
+  await sw.addToLibrary(['scenarios/journalist/'], true, () => {});
+  assert.deepEqual(fetched, ['/docs/scenarios/journalist/']);
+});
+
+test('下載過程逐頁回報進度', async (load) => {
+  const { sw } = load();
+  const seen = [];
+  await sw.addToLibrary(['a/', 'b/', 'c/'], false, (data) => seen.push(data.done));
+  // 整批可能要好幾分鐘，沒有進度讀者只會看到一個不動的按鈕
+  assert.deepEqual(seen, [1, 2, 3]);
+});
+
+test('移除只動 library，數得出移掉幾頁', async (load) => {
+  const { sw } = load();
+  await sw.addToLibrary(['a/', 'b/'], false, () => {});
+  const result = await sw.removeFromLibrary(['a/', 'never-stored/']);
+  assert.equal(result.removed, 1);
+  assert.deepEqual(await sw.libraryEntries(), ['b/']);
+});
+
+test('清除會清光所有快取，並把自動預快取關掉', async (load) => {
+  const { sw, caches } = load();
+  await sw.precacheFor('');
+  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/basics/metadata/', 'VISITED');
+
+  await sw.clearAllOffline();
+
+  assert.deepEqual(await sw.libraryEntries(), []);
+  assert.equal((await (await caches.open(sw.PRECACHE)).keys()).length, 0);
+  assert.equal((await (await caches.open(sw.RUNTIME_PAGES)).keys()).length, 0);
+  // 按這顆的人多半是因為裝置可能被檢查。下次導覽又自動下載回來的話這顆等於沒作用
+  assert.equal(await sw.autoPrecacheEnabled(), false);
+});
+
+test('清除之後不會馬上被自動下載回來', async (load) => {
+  const { sw, fetched } = load();
+  await sw.clearAllOffline();
+  fetched.length = 0;
+
+  // 模擬下一次導覽送 PRECACHE_LANG 過來
+  if (await sw.autoPrecacheEnabled()) await sw.precacheFor('');
+  assert.deepEqual(fetched, []);
+
+  // 讀者自己在管理頁打開才恢復
+  await sw.setAutoPrecache(true);
+  if (await sw.autoPrecacheEnabled()) await sw.precacheFor('');
+  assert.ok(fetched.length > 0);
+});
+
+test('狀態查詢回得出已存的、站台存的與空間用量', async (load) => {
+  const { sw } = load();
+  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+
+  const replies = [];
+  await sw.handleLibraryMessage(
+    { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/offline/' },
+    { postMessage: (data) => replies.push(data) }
+  );
+
+  assert.equal(replies.length, 1);
+  const status = replies[0];
+  assert.equal(status.type, 'status');
+  assert.deepEqual(status.saved, ['scenarios/journalist/']);
+  // 站台預設存的只回頁面，app shell 與作品本體混進去只會讓數字虛胖
+  assert.ok(status.precached.includes('tools/what-is-tor/'));
+  assert.ok(!status.precached.some((path) => path.startsWith('assets/')));
+  assert.ok(!status.precached.some((path) => path.startsWith('games/onion-routing/')));
+  assert.equal(status.autoPrecache, true);
+  assert.equal(status.estimate.usage, 1024);
+});
+
+test('狀態查詢依網址挑對語系的預設清單', async (load) => {
+  const { sw } = load();
+  const replies = [];
+  await sw.handleLibraryMessage(
+    { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/en/offline/' },
+    { postMessage: (data) => replies.push(data) }
+  );
+  // en 的章節路徑跟 zh 不同（在地脈絡叫 regional/ 不叫 taiwan/）
+  assert.ok(replies[0].precached.includes('regional/ooni-checklist/'));
+  assert.ok(!replies[0].precached.includes('taiwan/ooni-checklist/'));
+});
+
+test('認不得的指令會回錯誤，不會靜靜沒反應', async (load) => {
+  const { sw } = load();
+  const replies = [];
+  await sw.handleLibraryMessage({ type: 'NOPE' }, { postMessage: (d) => replies.push(d) });
+  assert.equal(replies[0].type, 'error');
 });
 
 for (const [name, fn] of tests) {

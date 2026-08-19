@@ -40,6 +40,19 @@ const RUNTIME_ASSETS = "anoni-docs-assets";
 const PAGES_MAX_ENTRIES = 120;
 const ASSETS_MAX_ENTRIES = 200;
 
+// 讀者在離線內容管理頁自己勾選留下的頁面。跟 runtime 快取分開放，才不會被那邊的
+// 筆數上限擠掉，也不跟著 PRECACHE 的版本走。讀者刻意留的東西不該因為站台換版就
+// 消失，內容的新鮮度由管理頁的「更新」按鈕與 network-first 負責。
+const LIBRARY = "anoni-docs-library";
+
+// 設定值。目前只有一項：要不要自動預快取。
+//
+// 存在 Cache Storage 而不是 localStorage，因為 install 階段的 SW 讀不到 localStorage，
+// 而「讀者清空過離線內容」這件事必須在下一次部署的 install 也記得，否則清完隔天
+// 就被自動下載回來，等於沒清。
+const SETTINGS = "anoni-docs-settings";
+const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
+
 // SW scope 在正式站是 /docs/，本地開發（mkdocs serve）是 /
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
 
@@ -50,7 +63,9 @@ const SCOPE_PATH = new URL(self.registration.scope).pathname;
 // 來源，langPrefixOf 與 tools/check_precache.mjs 都讀它。
 const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 
-// theme app shell（hash 檔名與 overrides/base.html 同步）
+// 每個語系各一份的資產：theme app shell（hash 檔名與 overrides/base.html 同步），
+// 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
+// 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
 const SHELL_ASSETS = [
   "assets/stylesheets/main.484c7ddc.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -59,6 +74,9 @@ const SHELL_ASSETS = [
   "assets/images/logo-white.svg",
   "assets/images/favicon.svg",
   "assets/images/icon-192.png",
+  // 離線內容管理頁（hooks/offline_index.py 產生索引，js 是三語系共用的 symlink）
+  "offline-index.json",
+  "js/offline-library.js",
 ];
 
 // zh 版（zh-TW 根、/zh-cn/）章節結構一致，預快取完整指南集 + 緊急頁。
@@ -368,6 +386,7 @@ async function guessLangPrefix() {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
+      if (!(await autoPrecacheEnabled())) return;
       const prefix = await guessLangPrefix();
       if (prefix !== null) await precacheFor(prefix);
       // 這裡刻意不呼叫 skipWaiting。原本一裝好就搶著接管，讀者正在讀的分頁會在毫無
@@ -376,6 +395,130 @@ self.addEventListener("install", (event) => {
     })()
   );
 });
+
+// === 離線內容管理 ===
+//
+// 讀者在 offline 頁勾選要留在裝置上的頁面，這幾支負責實際存取。預設下載的那批由
+// precacheFor 處理，兩者分開放在不同的 cache，讀者才分得清「站台幫我存的」與
+// 「我自己選的」，清除時也能各自處理。
+
+async function autoPrecacheEnabled() {
+  const cache = await caches.open(SETTINGS);
+  const hit = await cache.match(AUTO_PRECACHE_URL);
+  // 沒設定過就是開著。只有讀者明確關掉或清空過內容才會有這筆。
+  if (!hit) return true;
+  return (await hit.text()) !== "off";
+}
+
+async function setAutoPrecache(enabled) {
+  const cache = await caches.open(SETTINGS);
+  await cache.put(AUTO_PRECACHE_URL, new Response(enabled ? "on" : "off"));
+}
+
+// 讀者自己存下來的頁面，回相對於 scope 的路徑，跟 offline-index.json 的 url 對得上
+async function libraryEntries() {
+  const cache = await caches.open(LIBRARY);
+  const keys = await cache.keys();
+  return keys.map((request) => new URL(request.url).pathname.slice(SCOPE_PATH.length));
+}
+
+// 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
+// refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
+async function addToLibrary(paths, refresh, report) {
+  const cache = await caches.open(LIBRARY);
+  let ok = 0;
+  let failed = 0;
+  let done = 0;
+  for (const path of paths) {
+    const url = SCOPE_PATH + path;
+    try {
+      if (!refresh && (await cache.match(url))) {
+        ok += 1;
+      } else {
+        const response = await fetch(url, { credentials: "same-origin" });
+        if (response.ok) {
+          await cache.put(url, response);
+          ok += 1;
+        } else {
+          failed += 1;
+        }
+      }
+    } catch (err) {
+      failed += 1;
+    }
+    done += 1;
+    // 逐頁回報。整批下載可能要好幾分鐘，沒有進度的話讀者只會看到一個不動的按鈕。
+    report({ type: "progress", done: done, total: paths.length, ok: ok, failed: failed });
+  }
+  return { ok: ok, failed: failed };
+}
+
+async function removeFromLibrary(paths) {
+  const cache = await caches.open(LIBRARY);
+  let removed = 0;
+  for (const path of paths) {
+    if (await cache.delete(SCOPE_PATH + path)) removed += 1;
+  }
+  return { removed: removed };
+}
+
+// 清掉裝置上所有跟這個站有關的快取，包含站台自動存的那批。
+//
+// 清完把自動預快取關掉。讀者按這顆按鈕多半是因為裝置可能被檢查，如果下一次導覽
+// 又把九 MB 自動下載回來，這顆按鈕等於沒有作用。要恢復得回管理頁自己打開。
+async function clearAllOffline() {
+  for (const key of await caches.keys()) {
+    await caches.delete(key);
+  }
+  precachedPrefixes.clear();
+  await setAutoPrecache(false);
+}
+
+async function handleLibraryMessage(data, port) {
+  const reply = (message) => port.postMessage(message);
+
+  if (data.type === "OFFLINE_STATUS") {
+    const prefix = typeof data.url === "string" ? langPrefixOf(new URL(data.url)) : "";
+    reply({
+      type: "status",
+      saved: await libraryEntries(),
+      // 站台預設存的那批，管理頁用它標出「已經在裝置上、不必再勾」的頁面。
+      // 只回頁面，app shell 與作品本體不是讀者會勾的東西，混進去只會讓數字虛胖。
+      precached: prefix === null ? [] : CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH,
+      autoPrecache: await autoPrecacheEnabled(),
+      estimate: navigator.storage && navigator.storage.estimate
+        ? await navigator.storage.estimate()
+        : null,
+    });
+    return;
+  }
+
+  if (data.type === "OFFLINE_ADD" && Array.isArray(data.paths)) {
+    const result = await addToLibrary(data.paths, data.refresh === true, reply);
+    reply({ type: "done", ok: result.ok, failed: result.failed });
+    return;
+  }
+
+  if (data.type === "OFFLINE_REMOVE" && Array.isArray(data.paths)) {
+    const result = await removeFromLibrary(data.paths);
+    reply({ type: "done", removed: result.removed });
+    return;
+  }
+
+  if (data.type === "OFFLINE_CLEAR") {
+    await clearAllOffline();
+    reply({ type: "done", cleared: true });
+    return;
+  }
+
+  if (data.type === "OFFLINE_AUTO" && typeof data.enabled === "boolean") {
+    await setAutoPrecache(data.enabled);
+    reply({ type: "done", autoPrecache: data.enabled });
+    return;
+  }
+
+  reply({ type: "error", reason: "unknown-command" });
+}
 
 // client 送過來的指令。唯一的來源是 overrides/base.html 裡的 PWA script。
 self.addEventListener("message", (event) => {
@@ -393,8 +536,21 @@ self.addEventListener("message", (event) => {
   // 直接對得到 /docs/zh-cn/。判斷邏輯也就只留在 langPrefixOf 一處。
   if (data.type === "PRECACHE_LANG" && typeof data.url === "string") {
     const prefix = langPrefixOf(new URL(data.url));
-    if (prefix !== null) event.waitUntil(precacheFor(prefix));
+    if (prefix !== null) {
+      event.waitUntil(
+        (async () => {
+          if (await autoPrecacheEnabled()) await precacheFor(prefix);
+        })()
+      );
+    }
+    return;
   }
+
+  // 離線內容管理頁的指令。回應走 MessageChannel 的 port，一次請求一個 port，
+  // 下載類的指令會在同一個 port 上多次回報進度，最後一則帶 done。
+  const port = event.ports && event.ports[0];
+  if (!port) return;
+  event.waitUntil(handleLibraryMessage(data, port));
 });
 
 // 一次性遷移：把帶版本後綴的舊 runtime 快取搬進不帶版本的新快取。
@@ -432,13 +588,12 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       await migrateLegacyRuntime();
+      // LIBRARY 與 SETTINGS 都不帶版本，換版時要留著。前者是讀者自己勾選存下來的
+      // 頁面，後者記著他有沒有把自動預快取關掉。任何一個被清掉，讀者的選擇就作廢。
+      const keep = [PRECACHE, RUNTIME_PAGES, RUNTIME_ASSETS, LIBRARY, SETTINGS];
       const keys = await caches.keys();
       await Promise.all(
-        keys
-          .filter(
-            (key) => key !== PRECACHE && key !== RUNTIME_PAGES && key !== RUNTIME_ASSETS
-          )
-          .map((key) => caches.delete(key))
+        keys.filter((key) => keep.indexOf(key) === -1).map((key) => caches.delete(key))
       );
       await self.clients.claim();
     })()

@@ -45,11 +45,12 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 
 | 群組 | 檔案 | 用途 |
 |------|------|------|
+| 離線內容索引 | `docs/hooks/offline_index.py` | mkdocs hook，建置時產出各語系的 `offline-index.json`（有哪些頁面、屬於哪個章節、多大）。離線內容管理頁 `docs/<lang>/offline.md` 用它列出可勾選的清單，介面在 `docs/zh-TW/js/offline-library.js`（另兩語是 symlink）|
 | 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，逐批清除 Cloudflare 快取（每批 30 條）|
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
 | 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
-| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。另外兩支把函式從 `docs/zh-TW/sw.js` 與 `docs/overrides/base.html` 原地抽出來單元測試，不需要建置。三支都沒進 CI，改動那兩個檔案時手動跑 |
+| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。其餘三支把函式從 `docs/zh-TW/sw.js`、`docs/overrides/base.html` 與 `docs/hooks/offline_index.py` 原地抽出來單元測試，不需要建置。四支都沒進 CI，改動那幾個檔案時手動跑 |
 
 ## 開發環境設置
 
