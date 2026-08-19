@@ -48,7 +48,8 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 | 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，逐批清除 Cloudflare 快取（每批 30 條）|
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
-| 地球儀版面檢查 | `check_*.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
+| 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
+| PWA 離線 | `check_precache.mjs`、`test_sw_offline.mjs` | 前者比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。後者把 `sw.js` 的離線函式抽出來單元測試，不需要建置。兩支都沒進 CI，改動 `docs/zh-TW/sw.js` 時手動跑 |
 
 ## 開發環境設置
 

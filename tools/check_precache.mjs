@@ -21,7 +21,7 @@
  * URL 對檔案的規則跟靜態站一樣：結尾是 / 的找 index.html，其餘直接找該檔。
  *
  * 用法：
- *   cd docs && sh run.sh && sh run_zh-tw.sh && sh run_zh-cn.sh && sh run_en.sh
+ *   cd docs && sh run.sh && sh run_zh-cn.sh && sh run_en.sh
  *   node tools/check_precache.mjs
  * 找不到 docs/output 時跳過並回 0（沒建置過就不該擋人）。
  */
@@ -57,9 +57,10 @@ const harness = `
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrls\(\) \{[\s\S]*?\n\}/m)}
-  return { urls: precacheUrls(), games: GAME_APPS.length };
+  ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
+  return { urls: precacheUrls(), games: GAME_APPS.length, cacheKeyCandidates };
 `;
-const { urls, games } = new Function(harness)();
+const { urls, games, cacheKeyCandidates } = new Function(harness)();
 
 /** URL 換成 docs/output 底下的實際檔案路徑 */
 function resolve(url) {
@@ -86,12 +87,47 @@ const gameBytes = urls
   .reduce((a, u) => a + (fs.existsSync(resolve(u)) ? fs.statSync(resolve(u)).size : 0), 0);
 console.log(`  其中三件互動作品 ${mb(gameBytes)}`);
 
+// 索引頁連出去的網址形狀，要能命中預快取的 key
+//
+// 預快取存的是 games/x/play/index.html，而 zh-TW 的互動作品索引頁連的是
+// games/x/play/，en 與 zh-cn 連的是 games/x/play/index.html?lang=en。Cache Storage
+// 比對的是完整網址字串，形狀不同就是不同的 key。這種錯配用上面那道「檔案存不存在」
+// 驗不出來，兩種形狀都指得到同一個檔案，只有離線的讀者會發現作品打不開。
+// sw.js 的 cacheKeyCandidates 負責在離線時補上另一種形狀，這裡驗它真的補得到。
+const cachedKeys = new Set(urls);
+const INDEX_PAGES = [
+  ['games/index.html', '/docs/games/'],
+  ['en/games/index.html', '/docs/en/games/'],
+  ['zh-cn/games/index.html', '/docs/zh-cn/games/'],
+];
+const unreachable = [];
+for (const [file, base] of INDEX_PAGES) {
+  const indexFile = path.join(OUT, file);
+  if (!fs.existsSync(indexFile)) continue;
+  const html = fs.readFileSync(indexFile, 'utf8');
+  const hrefs = new Set(
+    [...html.matchAll(/href="([^"]*\/play\/[^"]*)"/g)].map((m) => m[1])
+  );
+  for (const href of hrefs) {
+    const { pathname } = new URL(href, 'https://anoni.net' + base);
+    if (!cacheKeyCandidates(pathname).some((c) => cachedKeys.has(c))) {
+      unreachable.push(`${base} 連到 ${pathname}`);
+    }
+  }
+}
+
 if (missing.length) {
   console.error(`\n✗ ${missing.length} 個 URL 在 docs/output 裡找不到對應檔案：`);
   for (const u of missing.slice(0, 20)) console.error('  ' + u);
   if (missing.length > 20) console.error(`  ⋯ 另有 ${missing.length - 20} 個`);
   console.error('\nsw.js 的 install 用 allSettled 容忍失敗，所以這些會被靜默跳過，');
   console.error('線上看起來正常，只有離線的人會遇到破圖或空白。');
-  process.exit(1);
 }
-console.log('\n預快取清單裡的每個 URL 都對得到檔案。');
+if (unreachable.length) {
+  console.error(`\n✗ ${unreachable.length} 個索引頁連出去的網址對不到預快取的 key：`);
+  for (const u of unreachable) console.error('  ' + u);
+  console.error('\n檔案本身存在，線上一切正常，只有離線的讀者會打不開。');
+  console.error('修法是讓 GAME_APPS 與索引頁的連結形狀一致，或補進 cacheKeyCandidates。');
+}
+if (missing.length || unreachable.length) process.exit(1);
+console.log('\n預快取清單裡的每個 URL 都對得到檔案，索引頁連出去的網址也都命中。');
