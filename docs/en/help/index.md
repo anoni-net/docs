@@ -158,17 +158,7 @@ When the connection is gone, so is this page. While you can still reach it, inst
 
     This is preparation. Installing it after the connection drops is too late, and it takes a minute.
 
-Open [anoni.net/docs](../index.md) in an ordinary browser rather than Tor Browser, for the reason below:
-
-- **Android** (Chrome, Edge): open the browser menu and choose Install app or Add to Home screen
-- **Desktop** (Chrome, Edge): an install icon appears at the right of the address bar, or use Install from the menu
-- **iPhone and iPad** (Safari): tap Share, then Add to Home Screen
-
-Once installed, the concepts, tools, advanced, and regional sections download immediately along with this page, and read offline. Pages you have visited stay available too, and anything not cached shows an offline notice pointing back to what is stored. Refreshing after connectivity returns brings everything up to date.
-
-Some pages are deliberately left out of that automatic download, and it is worth knowing why. A guide written for one specific group of people at risk becomes evidence in itself once it is sitting in a device's storage, showing that this device downloaded the full protection guide for that group. Those pages teach readers to clear traces and expect device inspection, so the site does not push them onto a device without being asked. They cache when you open them yourself, which is your decision rather than ours. If you expect to need one of them offline, open it while you still have a connection.
-
-Note that Tor Browser and the onion and IPFS versions do not offer offline installation, since they do not register a background service worker, which is a deliberate privacy decision. Install from an ordinary browser for the offline copy and use Tor Browser for anonymous reading.
+Installation steps, what ends up on the device, and how to pick what to keep are all on [Offline reading](../offline.md). That page is also where you land when there is no connection.
 
 ## Personal data exposed or published (doxxing)
 

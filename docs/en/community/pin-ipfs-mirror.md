@@ -248,7 +248,7 @@ The trade-off is that survival now depends on a third-party provider rather than
 <div class="grid cards" markdown>
 
 - [:material-tunnel-outline: Set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md)
-- [:material-download: Install the site as an offline app](../offline-install.md)
+- [:material-wifi-off: Offline reading](../offline.md)
 - [:material-hand-heart-outline: How to contribute](./how-to-contribute.md)
 
 </div>
