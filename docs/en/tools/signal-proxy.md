@@ -16,7 +16,7 @@ Signal's server addresses are fixed, which makes it straightforward to block. Th
 Known blocking milestones:
 
 - **Iran** — blocked at scale from February 2021. Signal responded by [asking the community to run proxies](https://signal.org/blog/help-iran-reconnect/){target="_blank"}.
-- **China** — needs a proxy or other circumvention since March 2021, and the app was pulled from the China App Store.
+- **China** — needs a proxy or other circumvention since March 2021. In April 2024 the app was also pulled from the China App Store at the regulator's request.
 - **Russia** — restricted by the regulator from August 2024.
 
 A proxy addresses the connection, nothing else. Registration needs an SMS code that travels over the mobile network, which a proxy cannot help with. The main case is someone who already has an account and needs to reach the service again from a censored network.
@@ -31,7 +31,7 @@ End-to-end encryption is untouched throughout. Messages are encrypted on your de
 
 ### Which kinds of blocking it defeats
 
-A TLS proxy answers the "Signal's server addresses are blocked" family of censorship. When the system identifies destinations through DNS, IP blacklists, or SNI filtering, pointing the connection at a host that isn't on any list yet is enough to get around it.
+A TLS proxy answers the "Signal's server addresses are blocked" family of censorship. When censors identify destinations through DNS, IP blacklists, or SNI filtering, pointing the connection at a host that isn't on any list yet is enough to get around it.
 
 Stronger censorship needs a separate assessment. China's Great Firewall performs active probing — connecting to suspicious hosts to test whether they are proxies — and its DPI is more capable than most. A Signal Proxy is not guaranteed to work there, and users in that situation need fallbacks: see [WebTunnel bridges](../community/setup-tor-webtunnel.md), [Tor Snowflake](./tor-snowflake.md), and the obfuscation-protocol section of [VPN: risks and how to choose](./vpn-guide.md).
 
@@ -118,9 +118,9 @@ At community scale the approach is several hosts across different network provid
 
 A Signal Proxy forwards traffic only to Signal's servers, never to arbitrary destinations. That puts its legal exposure far below a [Tor exit relay](../community/setup-tor-relay.md), where arbitrary traffic from arbitrary users leaves under your IP. With a single fixed destination, the room for abuse is much smaller.
 
-In a jurisdiction without censorship mandates — Taiwan, for instance — nothing currently restricts individuals or organizations from offering this kind of relay, and the practical constraints are your hosting provider's terms of service and the bandwidth allowance on your plan. In jurisdictions that regulate circumvention tools, the assessment is a different one and does not carry over.
+As far as we know, a jurisdiction without censorship mandates — Taiwan, for instance — places no restriction on individuals or organizations offering this kind of relay, though this is a community summary rather than legal advice. The practical constraints are your hosting provider's terms of service and the bandwidth allowance on your plan, so check the provider's stated policy on proxy and VPN services before you sign up. In jurisdictions that regulate circumvention tools, the assessment is a different one and does not carry over.
 
-## Questions
+## Common questions
 
 ??? question "How is this different from a VPN?"
 
