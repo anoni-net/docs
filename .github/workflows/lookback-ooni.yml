@@ -1,14 +1,28 @@
 name: Lookback OONI Data
+# 這支跑的是 asn_coverage/ooni.py 的資料抓取，跟 docs/ 的內容無關。原本任何 main 的 push 都觸發，
+# 2026-08-19 一天下來被 docs 的 PR 觸發 18 次，每次四個 job，把並行額度佔滿，
+# 連 BuildDocs 都排不進去。改成只在 asn_coverage/ 真的變動時跑，每日 cron 照舊。
 on:
   push:
     branches:
       - main
+    paths:
+      - "asn_coverage/**"
+      - ".github/workflows/lookback-ooni.yml"
   workflow_dispatch:
   schedule:
     - cron: "20 0 * * *"
 
+# 同一分支的新 push 取消還在跑的，不要疊在一起
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check_list:
+    # 沒有這一行時 job 會用預設的六小時上限。2026-08-19 有六個 run 卡在
+    # apt-get update（runner 的 apt mirror 沒有回應），一路佔著 runner 不放。
+    timeout-minutes: 30
     strategy:
       matrix:
         os: ["ubuntu-22.04", "ubuntu-24.04"]
@@ -20,10 +34,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Update libs
-        run: sudo apt-get update
+      # runner image 本來就帶著 ca-certificates，這一步只是保險。失敗不該擋住整個
+      # job，2026-08-19 卡死的六個 run 全部都停在這裡。
       - name: Install certificates
-        run: sudo apt-get install ca-certificates
+        timeout-minutes: 5
+        continue-on-error: true
+        run: |
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y ca-certificates
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
