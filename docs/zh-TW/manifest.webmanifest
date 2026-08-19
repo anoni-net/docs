@@ -26,5 +26,19 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "離線閱讀",
+      "description": "管理留在這台裝置上的離線內容",
+      "url": "offline/",
+      "icons": [
+        {
+          "src": "assets/images/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

@@ -1,29 +1,34 @@
 ---
-title: You are offline
-description: Placeholder page shown without a network connection. Cached pages remain readable offline.
+title: Offline reading
+description: Manage what this site keeps on your device, and the page you land on when there is no connection.
 icon: material/wifi-off
-search:
-  exclude: true
 hide:
   - navigation
-  - toc
 ---
 
-# :material-wifi-off: You are offline
+# :material-wifi-off: Offline reading
 
-Your device has no network connection right now, and this page has not been cached yet.
+If you were brought here because there is no network connection, the page you wanted has not been stored on this device yet. Pages you visited before are still readable, so go back or start from the [home page](index.md).
 
-Pages you visited before are stored on your device. Go back or start from the home page to keep reading offline.
+This page is also where offline content is managed. Below you can see what is currently stored on the device, pick what to keep, or clear all of it.
+
+## Offline content on this device
+
+<div id="offline-library"></div>
+
+<script src="../js/offline-library.js"></script>
 
 ## What gets stored on your device
 
 The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well.
 
-Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours.
+Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored.
 
 The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
 
-To clear this, remove the site data for this site in your browser. In Chrome this is Clear browsing data with "Cookies and other site data" selected. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove this kind of storage.
+"Clear all offline content" above removes both what the site stored and what you picked, and stops the site from storing anything new. Turn the switch back on above to resume automatic storage.
+
+What that button does not cover: browsing history, DNS cache, and files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
 
 ## When the site has a new version
 
