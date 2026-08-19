@@ -18,25 +18,80 @@
 
   // 樣式跟著這支走。三個語系的 stylesheets/extra.css 是各自獨立的檔案，寫在那裡
   // 要維護三份，而這些規則只有這一頁用得到。
+  //
+  // 章節列表刻意不用 <details> 也不用 .md-button。mkdocs-material 把每個原生
+  // <details> 當成 admonition 渲染：藍色外框、note 圖示、展開箭頭、font-size .64rem，
+  // 而那個圖示是絕對定位在 left .6rem 的 ::before，蓋在標題文字上。十八個章節排下來
+  // 就是十八個警告框。這裡改用 div 加 button 自己畫，跟 theme 的元件樣式脫鉤。
   const CSS = `
-    #offline-library details { margin: .5rem 0; }
-    #offline-library summary { cursor: pointer; padding: .2rem 0; }
-    #offline-library .offline-library__pages {
-      list-style: none; margin: .3rem 0 .6rem 1.2rem; padding: 0;
+    #offline-library { margin: 1em 0; }
+    #offline-library button {
+      font: inherit; color: inherit; cursor: pointer; background: none;
+      border: .05rem solid var(--md-default-fg-color--lighter);
+      border-radius: .1rem; padding: .3rem .7rem;
     }
-    #offline-library .offline-library__pages li { margin: .15rem 0; }
-    #offline-library .offline-library__size,
-    #offline-library .offline-library__badge { opacity: .6; font-size: .78em; }
-    #offline-library .offline-library__hint {
-      opacity: .75; font-size: .85em; margin-top: -.5rem;
+    #offline-library button:hover:not(:disabled) {
+      border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
     }
-    #offline-library .offline-library__auto { cursor: pointer; }
-    #offline-library .offline-library__message {
-      border-left: .2rem solid var(--md-accent-fg-color); padding-left: .6rem;
+    #offline-library button:disabled { opacity: .5; cursor: default; }
+    #offline-library .ol-status { line-height: 1.8; margin: .4rem 0; }
+    #offline-library .ol-message {
+      border-left: .15rem solid var(--md-accent-fg-color);
+      margin: .8rem 0; padding: .1rem 0 .1rem .6rem;
     }
-    #offline-library .md-button { margin: .2rem .4rem .2rem 0; padding: .3rem .8rem; }
-    #offline-library .offline-library__all {
-      font-size: .75em; margin-left: 1.2rem; padding: .1rem .6rem;
+    #offline-library .ol-auto { display: block; cursor: pointer; margin: 1em 0 .2rem; }
+    #offline-library .ol-hint {
+      margin: 0 0 1em 1.4rem; opacity: .7; font-size: .7rem; line-height: 1.6;
+    }
+    #offline-library .ol-actions {
+      display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.2rem;
+    }
+    #offline-library .ol-section {
+      border-bottom: .05rem solid var(--md-default-fg-color--lightest);
+    }
+    #offline-library .ol-toggle {
+      display: flex; align-items: baseline; flex-wrap: nowrap; gap: .5rem;
+      width: 100%; border: 0; border-radius: 0; padding: .45rem .2rem; text-align: left;
+    }
+    #offline-library .ol-toggle:hover:not(:disabled) {
+      background: var(--md-default-fg-color--lightest); color: inherit;
+    }
+    #offline-library .ol-mark { flex: 0 0 .8rem; opacity: .55; }
+    #offline-library .ol-name {
+      flex: 1 1 auto; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    #offline-library .ol-meta, #offline-library .ol-count,
+    #offline-library .ol-size, #offline-library .ol-badge {
+      flex: none; opacity: .6; font-size: .7rem;
+    }
+    #offline-library .ol-count { font-variant-numeric: tabular-nums; opacity: .85; }
+    #offline-library .ol-body { padding: 0 0 .8rem 1.3rem; }
+    #offline-library .ol-pages { list-style: none; margin: .5rem 0 0; padding: 0; }
+    #offline-library .ol-pages li { margin: 0 0 .25rem; }
+    #offline-library .ol-pages label {
+      display: flex; align-items: baseline; gap: .4rem; cursor: pointer;
+    }
+    #offline-library .ol-pages input { flex: none; }
+    #offline-library .ol-title {
+      flex: 1 1 auto; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    #offline-library .ol-primary {
+      border-color: var(--md-primary-fg-color);
+      background: var(--md-primary-fg-color);
+      color: var(--md-primary-bg-color);
+    }
+    @media screen and (max-width: 44.9375em) {
+      #offline-library .ol-badge { display: none; }
+      #offline-library .ol-body { padding-left: .6rem; }
+    }
+    #offline-library .ol-apply {
+      position: sticky; bottom: 0; z-index: 1;
+      display: flex; align-items: center; flex-wrap: wrap; gap: .6rem;
+      background: var(--md-default-bg-color);
+      border-top: .05rem solid var(--md-default-fg-color--lighter);
+      margin: 0; padding: .7rem 0;
     }
   `;
   const style = document.createElement("style");
@@ -137,7 +192,8 @@
       t[key]
     );
 
-  const mb = (bytes) => {
+  const size = (bytes) => {
+    if (bytes >= 1024 * 1024 * 1024) return (bytes / 1024 / 1024 / 1024).toFixed(1) + " GB";
     if (bytes >= 1024 * 1024) return (bytes / 1024 / 1024).toFixed(1) + " MB";
     return Math.round(bytes / 1024) + " KB";
   };
@@ -197,6 +253,8 @@
     // 讀者這一輪勾選的變動，套用之前不動快取
     add: new Set(),
     remove: new Set(),
+    // 展開中的章節。勾一個項目就整頁重畫，沒記著的話會全部收合回去
+    open: new Set(),
   };
 
   function refreshStatus() {
@@ -216,18 +274,22 @@
   const willBeStored = (path) =>
     state.add.has(path) || (isStored(path) && !state.remove.has(path));
 
-  function toggle(path, wanted) {
+  function setWanted(path, wanted) {
     state.add.delete(path);
     state.remove.delete(path);
     if (wanted && !isStored(path)) state.add.add(path);
     if (!wanted && state.saved.has(path)) state.remove.add(path);
   }
 
-  function render(message) {
-    root.textContent = "";
+  function button(label, className, onClick) {
+    const node = el("button", className, label);
+    node.type = "button";
+    node.addEventListener("click", onClick);
+    return node;
+  }
 
-    // --- 狀態 ---
-    const status = el("p");
+  function renderStatus() {
+    const status = el("p", "ol-status");
     status.appendChild(
       document.createTextNode(fill("savedCount", { n: state.saved.size }))
     );
@@ -236,146 +298,86 @@
       document.createTextNode(fill("autoCount", { n: state.precached.size }))
     );
     if (state.estimate && state.estimate.usage) {
-      const free =
-        state.estimate.quota && state.estimate.quota > state.estimate.usage
-          ? state.estimate.quota - state.estimate.usage
-          : null;
+      const quota = state.estimate.quota;
+      const free = quota && quota > state.estimate.usage ? quota - state.estimate.usage : null;
       status.appendChild(document.createElement("br"));
       status.appendChild(
         document.createTextNode(
           free === null
-            ? fill("usage", { used: mb(state.estimate.usage) })
-            : fill("usageFree", { used: mb(state.estimate.usage), free: mb(free) })
+            ? fill("usage", { used: size(state.estimate.usage) })
+            : fill("usageFree", { used: size(state.estimate.usage), free: size(free) })
         )
       );
     }
-    root.appendChild(status);
+    return status;
+  }
 
-    if (message) {
-      const line = el("p", "offline-library__message", message);
-      root.appendChild(line);
-    }
+  function renderSection(section) {
+    const stored = section.pages.filter((page) => isStored(page.url)).length;
+    const wrapper = el("div", "ol-section");
+    const open = state.open.has(section.key);
 
-    // --- 自動下載開關 ---
-    const autoLabel = el("label", "offline-library__auto");
-    const autoBox = document.createElement("input");
-    autoBox.type = "checkbox";
-    autoBox.checked = state.autoPrecache;
-    autoBox.addEventListener("change", () => {
-      ask({ type: "OFFLINE_AUTO", enabled: autoBox.checked })
-        .then(refreshStatus)
-        .then(() => render());
+    const toggle = button("", "ol-toggle", () => {
+      if (open) state.open.delete(section.key);
+      else state.open.add(section.key);
+      render();
     });
-    autoLabel.appendChild(autoBox);
-    autoLabel.appendChild(document.createTextNode(" " + t.autoLabel));
-    root.appendChild(autoLabel);
-    root.appendChild(el("p", "offline-library__hint", t.autoHint));
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    // 展開指示自己畫。material 的箭頭是 summary::after，這裡沒有 summary 可用，
+    // 而 ::before/::after 在 md-typeset 底下容易被 theme 的規則波及。
+    toggle.appendChild(el("span", "ol-mark", open ? "▾" : "▸"));
+    toggle.appendChild(el("span", "ol-name", section.title));
+    toggle.appendChild(
+      el("span", "ol-meta", fill("pages", { n: section.pages.length }) + "・" + size(section.bytes))
+    );
+    toggle.appendChild(el("span", "ol-count", stored + " / " + section.pages.length));
+    wrapper.appendChild(toggle);
 
-    // --- 整體動作 ---
-    const actions = el("p", "offline-library__actions");
-    const refreshButton = el("button", "md-button", t.refresh);
-    refreshButton.type = "button";
-    refreshButton.addEventListener("click", () => {
-      const paths = Array.from(state.saved);
-      if (!paths.length) return;
-      runTask(refreshButton, t.refreshing, (report) =>
-        ask({ type: "OFFLINE_ADD", paths: paths, refresh: true }, report)
-      );
-    });
-    actions.appendChild(refreshButton);
+    if (!open) return wrapper;
 
-    const clearButton = el("button", "md-button", t.clear);
-    clearButton.type = "button";
-    let armed = false;
-    clearButton.addEventListener("click", () => {
-      if (!armed) {
-        armed = true;
-        clearButton.textContent = t.clearAgain;
-        return;
-      }
-      runTask(clearButton, t.clearing, () =>
-        ask({ type: "OFFLINE_CLEAR" }).then(() => ({ message: t.cleared }))
-      );
-    });
-    actions.appendChild(clearButton);
-    root.appendChild(actions);
-
-    if (!state.index) {
-      root.appendChild(el("p", null, t.noIndex));
-      return;
-    }
-
-    // --- 章節 ---
-    const sections = state.index.sections
-      .slice()
-      .sort((a, b) => b.pages.length - a.pages.length);
-
-    for (const section of sections) {
-      const stored = section.pages.filter((page) => isStored(page.url)).length;
-      const details = document.createElement("details");
-      const summary = document.createElement("summary");
-      summary.appendChild(
-        document.createTextNode(
-          section.title +
-            "　" +
-            fill("pages", { n: section.pages.length }) +
-            "・" +
-            mb(section.bytes) +
-            "　" +
-            stored +
-            " / " +
-            section.pages.length
-        )
-      );
-      details.appendChild(summary);
-
-      const selectAll = el("button", "md-button offline-library__all", t.selectAll);
-      selectAll.type = "button";
-      selectAll.addEventListener("click", () => {
+    const body = el("div", "ol-body");
+    body.appendChild(
+      button(t.selectAll, null, () => {
         const wanted = section.pages.some((page) => !willBeStored(page.url));
-        for (const page of section.pages) toggle(page.url, wanted);
+        for (const page of section.pages) setWanted(page.url, wanted);
+        render();
+      })
+    );
+
+    const list = el("ul", "ol-pages");
+    for (const page of section.pages) {
+      const item = document.createElement("li");
+      const label = document.createElement("label");
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.checked = willBeStored(page.url);
+      // 站台自動存的那批由上面的開關統一管，個別勾選沒有意義
+      box.disabled = state.precached.has(page.url);
+      box.addEventListener("change", () => {
+        setWanted(page.url, box.checked);
         render();
       });
-      details.appendChild(selectAll);
-
-      const list = el("ul", "offline-library__pages");
-      for (const page of section.pages) {
-        const item = document.createElement("li");
-        const label = document.createElement("label");
-        const box = document.createElement("input");
-        box.type = "checkbox";
-        box.checked = willBeStored(page.url);
-        // 站台自動存的那批由上面的開關統一管，個別勾選沒有意義
-        box.disabled = state.precached.has(page.url);
-        box.addEventListener("change", () => {
-          toggle(page.url, box.checked);
-          render();
-        });
-        label.appendChild(box);
-        label.appendChild(document.createTextNode(" " + page.title + " "));
-        const size = el("span", "offline-library__size", mb(page.bytes));
-        label.appendChild(size);
-        if (state.precached.has(page.url)) {
-          label.appendChild(
-            el("span", "offline-library__badge", "（" + t.badgeAuto + "）")
-          );
-        }
-        item.appendChild(label);
-        list.appendChild(item);
+      label.appendChild(box);
+      label.appendChild(el("span", "ol-title", page.title));
+      label.appendChild(el("span", "ol-size", size(page.bytes)));
+      if (state.precached.has(page.url)) {
+        label.appendChild(el("span", "ol-badge", t.badgeAuto));
       }
-      details.appendChild(list);
-      root.appendChild(details);
+      item.appendChild(label);
+      list.appendChild(item);
     }
+    body.appendChild(list);
+    wrapper.appendChild(body);
+    return wrapper;
+  }
 
-    // --- 套用 ---
-    if (state.add.size || state.remove.size) {
-      const applyBar = el("p", "offline-library__apply");
-      const applyButton = el("button", "md-button md-button--primary", t.apply);
-      applyButton.type = "button";
-      applyButton.addEventListener("click", () => {
+  function renderApply() {
+    const bar = el("p", "ol-apply");
+    bar.appendChild(
+      button(t.apply, "ol-primary", function () {
         const toAdd = Array.from(state.add);
         const toRemove = Array.from(state.remove);
-        runTask(applyButton, t.applying, (report) =>
+        runTask(this, t.applying, (report) =>
           Promise.resolve()
             .then(() =>
               toRemove.length
@@ -397,15 +399,70 @@
               }))
             )
         );
-      });
-      applyBar.appendChild(applyButton);
-      applyBar.appendChild(
-        document.createTextNode(
-          "　" + fill("pending", { add: state.add.size, remove: state.remove.size })
-        )
-      );
-      root.appendChild(applyBar);
+      })
+    );
+    bar.appendChild(
+      el("span", "ol-meta", fill("pending", { add: state.add.size, remove: state.remove.size }))
+    );
+    return bar;
+  }
+
+  function render(message) {
+    root.textContent = "";
+    root.appendChild(renderStatus());
+    if (message) root.appendChild(el("p", "ol-message", message));
+
+    const autoLabel = el("label", "ol-auto");
+    const autoBox = document.createElement("input");
+    autoBox.type = "checkbox";
+    autoBox.checked = state.autoPrecache;
+    autoBox.addEventListener("change", () => {
+      ask({ type: "OFFLINE_AUTO", enabled: autoBox.checked })
+        .then(refreshStatus)
+        .then(() => render());
+    });
+    autoLabel.appendChild(autoBox);
+    autoLabel.appendChild(document.createTextNode(" " + t.autoLabel));
+    root.appendChild(autoLabel);
+    root.appendChild(el("p", "ol-hint", t.autoHint));
+
+    const actions = el("p", "ol-actions");
+    actions.appendChild(
+      button(t.refresh, null, function () {
+        const paths = Array.from(state.saved);
+        if (!paths.length) return;
+        runTask(this, t.refreshing, (report) =>
+          ask({ type: "OFFLINE_ADD", paths: paths, refresh: true }, report)
+        );
+      })
+    );
+    let armed = false;
+    actions.appendChild(
+      button(t.clear, null, function () {
+        if (!armed) {
+          armed = true;
+          this.textContent = t.clearAgain;
+          return;
+        }
+        runTask(this, t.clearing, () =>
+          ask({ type: "OFFLINE_CLEAR" }).then(() => ({ message: t.cleared }))
+        );
+      })
+    );
+    root.appendChild(actions);
+
+    if (!state.index) {
+      root.appendChild(el("p", null, t.noIndex));
+      return;
     }
+
+    // 頁數多的排前面。讀者要找的多半是章節，零星的單頁擺後面不礙事。
+    const sections = state.index.sections
+      .slice()
+      .sort((a, b) => b.pages.length - a.pages.length);
+    for (const section of sections) root.appendChild(renderSection(section));
+
+    if (state.add.size || state.remove.size) root.appendChild(renderApply());
   }
 
   // 動作跑起來之後停用按鈕、顯示進度，做完重讀狀態再整頁重畫
