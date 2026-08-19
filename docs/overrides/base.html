@@ -55,6 +55,22 @@
         <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.ab4e12ef.min.css' | url }}">
       {% endif %}
       {% include "partials/icons.html" %}
+      {#
+        換版提示與語言選擇兩條橫幅共用的按鈕樣式。三個語系的 stylesheets/extra.css
+        是各自獨立的檔案，樣式寫在這裡只要維護一份，跟著 base.html 的 symlink 走。
+      #}
+      <style>
+        .anoni-banner-action {
+          background: none;
+          border: 0;
+          padding: 0;
+          margin: 0 .4rem;
+          font: inherit;
+          color: var(--md-accent-fg-color);
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      </style>
     {% endblock %}
     {% block libs %}
       {% for script in config.extra.polyfills %}
@@ -298,10 +314,8 @@
           function linkButton(label, onClick) {
             var button = document.createElement("button");
             button.type = "button";
+            button.className = "anoni-banner-action";
             button.textContent = label;
-            button.style.cssText =
-              "background:none;border:0;padding:0;margin:0 .4rem;font:inherit;" +
-              "color:var(--md-accent-fg-color);text-decoration:underline;cursor:pointer";
             button.addEventListener("click", onClick);
             return button;
           }
@@ -367,6 +381,149 @@
               });
             });
           });
+        })();
+      </script>
+      {#
+        語言偏好：讀者自己選過的閱讀語言。站台不看 navigator.language，也不看
+        Accept-Language。Tor Browser 預設開 privacy.spoof_english，那兩個值一律回報
+        en-US，照著猜會把整批用 Tor 的台灣讀者丟到英文版。沒有偏好就什麼都不做。
+      #}
+      <script>
+        (function () {
+          var PREF_KEY = "anoni-docs-lang";
+          var ASKED_KEY = "anoni-docs-lang-asked";
+          var IS_HOME = {{ 'true' if page and page.is_homepage else 'false' }};
+          {#
+            建在根路徑、網址上沒有語系區段的那一個語系，取 extra.alternate 的第一筆。
+            調整 alternate 的順序時這裡會跟著變，兩者本來就該一致。
+          #}
+          var DEFAULT_LANG = {{ ((config.extra.alternate | first).lang if config.extra.alternate else "zh-TW") | tojson }};
+
+          var STRINGS = {
+            "zh-TW": { ask: "選擇你的閱讀語言", later: "稍後" },
+            "zh": { ask: "选择你的阅读语言", later: "稍后" },
+            "en": { ask: "Choose your reading language", later: "Later" }
+          };
+          var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
+
+          // 決定首頁要不要依讀者選過的語言換一份，要換就回那個語系代碼。
+          //
+          // 只在預設語系的首頁套用。網址上沒有語系區段的那個入口才是「沒指定語言」，
+          // /docs/en/ 這種是讀者自己或分享的連結明確指定的，不該被偏好蓋過去。
+          //
+          // 抽成純函式是為了能在 Node 裡驗，見 tools/test_lang_preference.mjs。
+          function langRedirectTo(isHome, currentLang, prefLang, defaultLang) {
+            if (!isHome) return null;
+            if (!prefLang || prefLang === currentLang) return null;
+            if (currentLang !== defaultLang) return null;
+            return prefLang;
+          }
+
+          function readPref() {
+            try {
+              return localStorage.getItem(PREF_KEY);
+            } catch (err) {
+              return null;
+            }
+          }
+
+          function writePref(lang) {
+            try {
+              localStorage.setItem(PREF_KEY, lang);
+            } catch (err) {
+              // 隱私模式或擋掉 storage 的環境記不住，那就每次都問
+            }
+          }
+
+          // header 的語系切換器。連結由 partials/alternate.html 產生，指向同一頁的
+          // 其他語系，路徑是建置時算好的，所以 clearnet、onion 與本地 serve 各自都對。
+          var links = Array.prototype.map.call(
+            document.querySelectorAll(".md-header__option .md-select__link"),
+            function (a) {
+              return {
+                lang: a.getAttribute("hreflang"),
+                href: a.href,
+                path: a.pathname,
+                name: a.textContent.trim()
+              };
+            }
+          ).filter(function (link, index, all) {
+            // 每個語系只留第一個。material 哪天在 drawer 也渲一份切換器的話，
+            // 選擇列才不會冒出兩組一樣的按鈕。
+            return link.lang && all.findIndex(function (other) {
+              return other.lang === link.lang;
+            }) === index;
+          });
+          if (!links.length) return;
+
+          // 切語言是最明確的一次選擇，記下來就不用再問
+          document.addEventListener("click", function (event) {
+            var link = event.target.closest(".md-header__option .md-select__link");
+            if (link && link.getAttribute("hreflang")) {
+              writePref(link.getAttribute("hreflang"));
+            }
+          });
+
+          var current = links.filter(function (link) {
+            return link.path === location.pathname;
+          })[0];
+          var pref = readPref();
+          var goTo = langRedirectTo(IS_HOME, current && current.lang, pref, DEFAULT_LANG);
+          if (goTo) {
+            var target = links.filter(function (link) {
+              return link.lang === goTo;
+            })[0];
+            if (target) {
+              // replace 而不是 assign，讓上一頁還是讀者原本來的地方
+              location.replace(target.href);
+              return;
+            }
+          }
+
+          if (!IS_HOME || pref) return;
+          try {
+            if (sessionStorage.getItem(ASKED_KEY)) return;
+          } catch (err) {
+            // 讀不到就照常問
+          }
+
+          // 沒有偏好，問一次。選項與順序跟著 extra.alternate 走，跟 header 的切換器同一份。
+          var banner = document.createElement("aside");
+          banner.className = "md-banner";
+          var inner = document.createElement("div");
+          inner.className = "md-banner__inner md-grid md-typeset";
+          var line = document.createElement("p");
+          line.appendChild(document.createTextNode(t.ask));
+
+          function action(label, onClick) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "anoni-banner-action";
+            button.textContent = label;
+            button.addEventListener("click", onClick);
+            return button;
+          }
+
+          links.forEach(function (link) {
+            line.appendChild(action(link.name, function () {
+              writePref(link.lang);
+              if (current && link.lang === current.lang) banner.remove();
+              else location.assign(link.href);
+            }));
+          });
+
+          line.appendChild(action(t.later, function () {
+            try {
+              sessionStorage.setItem(ASKED_KEY, "1");
+            } catch (err) {
+              // 記不住就下次再問
+            }
+            banner.remove();
+          }));
+
+          inner.appendChild(line);
+          banner.appendChild(inner);
+          document.body.insertBefore(banner, document.body.firstChild);
         })();
       </script>
     {% endblock %}
