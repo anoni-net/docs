@@ -67,12 +67,29 @@ jobs:
         if: matrix.variant == 'onion'
         run: sh ./replace_sitename_anoni_onion.sh
 
+      # runner 的 apt sources 走內建的 mirrorlist（/etc/apt/apt-mirrors.txt），第一順位
+      # 是 azure.archive.ubuntu.com。2026-08-19 的發布連兩次卡死在這一步：那台 mirror
+      # 連不上，apt 對每個 index 檔重試到預設上限才 fallback 到 archive.ubuntu.com，
+      # 光重試就吃掉四分半，剩下的時間抓不完，兩次都撞上 5 分鐘的 timeout。第三次重跑
+      # 才過，clearnet 因此比 onion 晚了快 20 分鐘上線。
+      #
+      # 兩層處理。先把 mirrorlist 裡的 azure 換成 archive.ubuntu.com，不再依賴 apt 自己
+      # 的 fallback。這步只是 apt-get update 加 ca-certificates，archive.ubuntu.com 抓
+      # InRelease 也就十幾秒，跨區慢一點無所謂。再壓低重試次數與單次連線逾時，讓萬一
+      # archive 也出狀況時能快速失敗，而不是把 timeout 耗光。
+      #
+      # mirrorlist 的路徑是 runner 映像的實作細節，未來可能改。用 if 包住，檔案不在就
+      # 略過，行為退回現況而不是讓整步失敗。
       - name: Update libs
         timeout-minutes: 5
-        run: sudo apt-get update
+        run: |
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' /etc/apt/apt-mirrors.txt
+          fi
+          sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 update
       - name: Install ca
         timeout-minutes: 5
-        run: sudo apt-get install ca-certificates
+        run: sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 install ca-certificates
       - name: Set up Python
         timeout-minutes: 10
         uses: actions/setup-python@v6
