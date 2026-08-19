@@ -60,6 +60,52 @@
         是各自獨立的檔案，樣式寫在這裡只要維護一份，跟著 base.html 的 symlink 走。
       #}
       <style>
+        /*
+          換版提示與語言選擇從底部浮出，不再插在 body 最前面。置頂那種做法有兩個
+          問題：卡片一插進來整頁內容往下推，讀者正在讀的位置就跑掉了。而讀者的
+          視線多半在內容區，捲動過之後頂端那條根本不在視野裡，等於沒出現過。
+        */
+        #__anoni-toasts {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 6;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: .4rem;
+          padding: .6rem;
+          padding-bottom: calc(.6rem + env(safe-area-inset-bottom, 0px));
+          /* 卡片以外的地方要點得穿，不然底部整條都擋住內容 */
+          pointer-events: none;
+        }
+        .anoni-toast {
+          pointer-events: auto;
+          box-sizing: border-box;
+          width: 100%;
+          max-width: 34rem;
+          padding: .55rem .8rem;
+          border: .05rem solid var(--md-default-fg-color--lighter);
+          border-radius: .2rem;
+          background: var(--md-default-bg-color);
+          color: var(--md-default-fg-color);
+          /* z3 而不是 z2。卡片是白底浮在白底內容上，陰影淡一點就分不出邊界 */
+          box-shadow: var(--md-shadow-z3);
+          font-size: .7rem;
+          line-height: 1.7;
+          animation: anoni-toast-in .28s ease-out;
+        }
+        .anoni-toast p {
+          margin: 0;
+        }
+        @keyframes anoni-toast-in {
+          from { transform: translateY(130%); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .anoni-toast { animation: none; }
+        }
         .anoni-banner-action {
           background: none;
           border: 0;
@@ -271,6 +317,28 @@
         {{ script | script_tag }}
       {% endfor %}
       {#
+        底部浮出卡片的共用容器。換版提示與語言選擇各自在獨立的 IIFE 裡，這支掛在
+        window 上讓兩邊都用得到，也讓兩張卡片同時出現時能疊在一起而不是互相蓋掉。
+      #}
+      <script>
+        window.__anoniToast = function (card) {
+          var host = document.getElementById("__anoni-toasts");
+          if (!host) {
+            host = document.createElement("div");
+            host.id = "__anoni-toasts";
+            document.body.appendChild(host);
+          }
+          card.className = card.className
+            ? "anoni-toast " + card.className
+            : "anoni-toast";
+          host.appendChild(card);
+          return function () {
+            card.remove();
+            if (!host.childElementCount) host.remove();
+          };
+        };
+      </script>
+      {#
         PWA: service worker 只在 clearnet 註冊。Tor Browser 停用 SW、IPFS gateway hostname
         不符，皆自動跳過。
 
@@ -335,10 +403,7 @@
 
             var banner = document.createElement("aside");
             banner.id = "__sw-update";
-            banner.className = "md-banner";
-
-            var inner = document.createElement("div");
-            inner.className = "md-banner__inner md-grid md-typeset";
+            var dismiss;
 
             var line = document.createElement("p");
             line.appendChild(document.createTextNode(t.text));
@@ -352,12 +417,11 @@
               } catch (err) {
                 // 存不進去就只是這次關掉，換頁會再出現
               }
-              banner.remove();
+              dismiss();
             }));
 
-            inner.appendChild(line);
-            banner.appendChild(inner);
-            document.body.insertBefore(banner, document.body.firstChild);
+            banner.appendChild(line);
+            dismiss = window.__anoniToast(banner);
           }
 
           navigator.serviceWorker.register(script, options).then(function (registration) {
@@ -494,9 +558,7 @@
 
           // 沒有偏好，問一次。選項與順序跟著 extra.alternate 走，跟 header 的切換器同一份。
           var banner = document.createElement("aside");
-          banner.className = "md-banner";
-          var inner = document.createElement("div");
-          inner.className = "md-banner__inner md-grid md-typeset";
+          var dismiss;
           var line = document.createElement("p");
           line.appendChild(document.createTextNode(t.ask));
 
@@ -512,7 +574,7 @@
           links.forEach(function (link) {
             line.appendChild(action(link.name, function () {
               writePref(link.lang);
-              if (current && link.lang === current.lang) banner.remove();
+              if (current && link.lang === current.lang) dismiss();
               else location.assign(link.href);
             }));
           });
@@ -523,12 +585,11 @@
             } catch (err) {
               // 記不住就下次再問
             }
-            banner.remove();
+            dismiss();
           }));
 
-          inner.appendChild(line);
-          banner.appendChild(inner);
-          document.body.insertBefore(banner, document.body.firstChild);
+          banner.appendChild(line);
+          dismiss = window.__anoniToast(banner);
         })();
       </script>
     {% endblock %}
