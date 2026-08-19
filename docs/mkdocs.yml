@@ -31,6 +31,7 @@ nav:
           - tools/what-is-tor.md
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
+          - tools/signal-proxy.md
           - tools/onionshare.md
           - tools/vpn-guide.md
           - tools/encrypted-dns.md
