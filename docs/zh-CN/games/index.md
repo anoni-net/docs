@@ -1,5 +1,6 @@
 ---
 title: 互动与呈现：Tor 网络的 3D 可视化与互动游戏
+subtitle: 用 3D 与游戏理解 Tor
 description: 以 3D 影像与可操作的游戏呈现隐私与匿名技术。目前三件作品都以 Tor 为题：走一遍三跳洋葱路由的解谜、连线流量在会合点相遇的动态呈现、整合十余份公开数据的全球中继地球仪，后者放大到台湾还有海缆登陆点与电网。
 icon: material/cube-outline
 social:

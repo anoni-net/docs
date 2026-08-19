@@ -25,39 +25,48 @@ nav:
           - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
+      # 子分组沿用 tools/index.md 的四层分法，侧边栏与索引页看到的是同一套结构。
+      # 改这里的分组时同步改那一页，不要各写各的。
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
           - tools/what-is-anonymity-network.md
-          - tools/what-is-tor.md
-          - tools/tor-browser-advanced.md
-          - tools/tor-snowflake.md
-          - tools/signal-proxy.md
-          - tools/onionshare.md
-          - tools/vpn-guide.md
-          - tools/encrypted-dns.md
-          - tools/what-is-tails.md
-          - tools/tails-vs-whonix-vs-qubes.md
-          - tools/grapheneos.md
-          - tools/what-is-ooni.md
-          - tools/ooni-run-v2.md
-          - tools/what-is-cryptpad.md
-          - tools/messaging-comparison.md
-          - tools/password-manager.md
-          - tools/asian-diceware.md
-          - tools/crypto-privacy-spectrum.md
-          - tools/ai-privacy.md
+          - "连线层：Tor 工具家族":
+              - tools/what-is-tor.md
+              - tools/tor-browser-advanced.md
+              - tools/tor-snowflake.md
+              - tools/signal-proxy.md
+              - tools/onionshare.md
+              - tools/vpn-guide.md
+              - tools/encrypted-dns.md
+          - "环境层：匿名作业系统":
+              - tools/what-is-tails.md
+              - tools/tails-vs-whonix-vs-qubes.md
+              - tools/grapheneos.md
+          - "观测层：审查的可验证记录":
+              - tools/what-is-ooni.md
+              - tools/ooni-run-v2.md
+          - "日常隐私基本功":
+              - tools/messaging-comparison.md
+              - tools/what-is-cryptpad.md
+              - tools/password-manager.md
+              - tools/asian-diceware.md
+              - tools/crypto-privacy-spectrum.md
+              - tools/ai-privacy.md
+      # 顺序与分组跟着 scenarios/index.md 的「已上线」「撰写中」两节走。撰写中的页面
+      # 目前是大纲加可用段落，收进独立分组让读者点进去之前就知道。写完了就移上来。
       - !ENV [NAV_SCENARIOS, "场景"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
           - scenarios/journalist.md
           - scenarios/activist.md
           - scenarios/lgbtq.md
-          - scenarios/domestic-violence.md
-          - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
           - scenarios/mainland-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
+          - "撰写中（2026 Q3）":
+              - scenarios/domestic-violence.md
+              - scenarios/election-observer.md
       - !ENV [NAV_ADVANCED, "进阶"]:
           - advanced/index.md
           - advanced/e2ee.md
@@ -67,14 +76,18 @@ nav:
           - advanced/mistaken-for-anonymity.md
       - !ENV [NAV_REPORTS, "报告"]:
           - reports/index.md
+  # taiwan/index.md 把法规那三篇分成「个资与身分」「金流」「制度与技术交界」，各自
+  # 只有一篇。侧边栏做成三个单页分组只会更难扫，所以合并成「法规与制度」一组。
   - !ENV [NAV_TAIWAN, "在地脉络"]:
       - taiwan/index.md
-      - taiwan/ooni-checklist.md
-      - taiwan/ooni-asn-coverage.md
-      - taiwan/tor-relay-watcher.md
-      - taiwan/pdpa-2025.md
-      - taiwan/vasp-2026.md
-      - taiwan/whistleblower-law.md
+      - "连线层的在地观测":
+          - taiwan/ooni-checklist.md
+          - taiwan/ooni-asn-coverage.md
+          - taiwan/tor-relay-watcher.md
+      - "法规与制度":
+          - taiwan/pdpa-2025.md
+          - taiwan/vasp-2026.md
+          - taiwan/whistleblower-law.md
   - !ENV [NAV_GAMES, "互动"]:
       - games/index.md
       - games/onion-routing.md
@@ -199,6 +212,8 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/vega@5
   - https://cdn.jsdelivr.net/npm/vega-lite@5
   - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+hooks:
+  - hooks/latest_posts.py
 plugins:
   - search:
       lang:

@@ -1,5 +1,6 @@
 ---
 title: Tools
+subtitle: Comparisons and hardening
 description: Cross-tool comparisons and hardening guidance the single-tool docs don't give you, with Asia-Pacific framing; for what each tool is, we send you to the projects' own documentation.
 icon: material/toolbox-outline
 ---

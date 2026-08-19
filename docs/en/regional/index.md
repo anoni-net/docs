@@ -1,5 +1,6 @@
 ---
 title: Regional Observatory
+subtitle: Sinophone Asia-Pacific observatory
 description: A Taiwan-anchored observatory of networked freedom across the Sinophone Asia-Pacific — Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora.
 icon: material/map-outline
 ---
@@ -84,11 +85,17 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
 Three threads run through the regional observation:
 
-**Measurement we run or contribute to.** The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
+### Measurement we run or contribute to
 
-**Regulation we track.** Where local laws shape the threat model, we publish English-language explainers of the law as it actually operates: the 2025 Personal Data Protection Act overhaul, the 2026 Virtual Asset Service Act, and the Public Interest Whistleblower Protection Act, with cross-references to comparable frameworks elsewhere in the region (POFMA, the National Security Law, Section 377).
+The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
 
-**Translated reports.** We have produced full Traditional Chinese translations of two pieces of regional research: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} and the MADLink report on the Taiwanese link in the Geedge supply chain. The English [curated index](../reports/index.md) points readers to InterSecLab's English originals alongside our Chinese translations. Future translations get added case by case, when a report fills a Chinese-language gap.
+### Regulation we track
+
+Where local laws shape the threat model, we publish English-language explainers of the law as it actually operates: the 2025 Personal Data Protection Act overhaul, the 2026 Virtual Asset Service Act, and the Public Interest Whistleblower Protection Act, with cross-references to comparable frameworks elsewhere in the region (POFMA, the National Security Law, Section 377).
+
+### Translated reports
+
+We have produced full Traditional Chinese translations of two pieces of regional research: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} and the MADLink report on the Taiwanese link in the Geedge supply chain. The English [curated index](../reports/index.md) points readers to InterSecLab's English originals alongside our Chinese translations. Future translations get added case by case, when a report fills a Chinese-language gap.
 
 ## :material-file-document-outline: Articles in this section
 
