@@ -108,6 +108,7 @@ const harness = `
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const precachedPrefixes = .*$/m)}
   ${grab(/^async function precacheFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function langPrefixOf\(url\) \{[\s\S]*?\n\}/m)}
@@ -131,12 +132,14 @@ const harness = `
   ${grab(/^function offlinePathFor\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   return {
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
-    langPrefixOf, precacheUrlsFor, precacheFor, guessLangPrefix,
+    langPrefixOf, precacheUrlsFor, essentialUrlsFor, precacheFor, guessLangPrefix,
     autoPrecacheEnabled, setAutoPrecache, libraryEntries, addToLibrary,
-    removeFromLibrary, clearAllOffline, handleLibraryMessage,
+    removeFromLibrary, clearAllOffline, handleLibraryMessage, networkFirst,
   };
 `;
 
@@ -149,8 +152,10 @@ const harness = `
 const load = (opts = {}) => {
   const caches = new FakeCacheStorage();
   const fetched = [];
+  const net = { offline: !!opts.offline };
   const fetchStub = async (url) => {
     fetched.push(url);
+    if (net.offline) throw new TypeError("Failed to fetch");
     return { ok: !(opts.notFound || []).includes(url), url };
   };
   const selfStub = {
@@ -162,7 +167,7 @@ const load = (opts = {}) => {
   const sw = new Function('caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', harness)(
     caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub
   );
-  return { sw, caches, fetched };
+  return { sw, caches, fetched, net };
 };
 
 const req = (pathname) => ({ url: ORIGIN + pathname });
@@ -453,19 +458,44 @@ test('清除會清光所有快取，並把自動預快取關掉', async (load) =
   assert.equal(await sw.autoPrecacheEnabled(), false);
 });
 
-test('清除之後不會馬上被自動下載回來', async (load) => {
+test('清除之後只補離線提示頁那一批，章節不會整包抓回來', async (load) => {
   const { sw, fetched } = load();
   await sw.clearAllOffline();
   fetched.length = 0;
 
   // 模擬下一次導覽送 PRECACHE_LANG 過來
-  if (await sw.autoPrecacheEnabled()) await sw.precacheFor('');
-  assert.deepEqual(fetched, []);
+  await sw.precacheFor('');
+  assert.deepEqual(fetched.slice().sort(), sw.essentialUrlsFor('').slice().sort());
+  assert.ok(fetched.length < sw.precacheUrlsFor('').length);
+  assert.ok(!fetched.includes('/docs/tools/what-is-tor/'));
 
-  // 讀者自己在管理頁打開才恢復
+  // 讀者自己在管理頁把開關打開才恢復完整
   await sw.setAutoPrecache(true);
-  if (await sw.autoPrecacheEnabled()) await sw.precacheFor('');
-  assert.ok(fetched.length > 0);
+  fetched.length = 0;
+  await sw.precacheFor('');
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('清除過的裝置離線時仍看得到離線提示頁', async (load) => {
+  // 這一批底線存在的理由。少了它，沒快取過的網址在離線時會一路走到 networkFirst
+  // 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面，不是站台的說明，而那一頁
+  // 正好就是離線內容管理頁，想清東西的人往往正好連不上網。
+  const { sw, net } = load();
+  await sw.clearAllOffline();
+  await sw.precacheFor('');
+  net.offline = true;
+
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
+  assert.equal(response.url, '/docs/offline/');
+});
+
+test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
+  const { sw, net } = load();
+  await sw.setAutoPrecache(false);
+  await sw.precacheFor('');
+  net.offline = true;
+
+  assert.equal((await sw.networkFirst(req('/docs/basics/metadata/'), null)).url, '/docs/offline/');
 });
 
 test('狀態查詢回得出已存的、站台存的與空間用量', async (load) => {
@@ -507,6 +537,41 @@ test('認不得的指令會回錯誤，不會靜靜沒反應', async (load) => {
   const replies = [];
   await sw.handleLibraryMessage({ type: 'NOPE' }, { postMessage: (d) => replies.push(d) });
   assert.equal(replies[0].type, 'error');
+});
+
+test('離線時沒快取過的頁面會落到離線頁', async (load) => {
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/offline/', 'ZH-OFFLINE');
+
+  const response = await sw.networkFirst(req('/docs/basics/metadata/'), null);
+  // 走到這裡代表 networkFirst 沒有把錯誤往外丟。丟出去的話 respondWith 會 reject，
+  // 讀者看到的是瀏覽器自己的網路錯誤畫面，站台的離線頁等於白做。
+  assert.equal(response, 'ZH-OFFLINE');
+});
+
+test('離線時快取過的頁面直接回快取，不落到離線頁', async (load) => {
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/offline/', 'ZH-OFFLINE');
+  await precache.put('/docs/tools/what-is-tor/', 'TOR');
+
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'TOR');
+});
+
+test('離線時各語系落到自己的離線頁', async (load) => {
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/offline/', 'ZH-OFFLINE');
+  await precache.put('/docs/en/offline/', 'EN-OFFLINE');
+
+  assert.equal(await sw.networkFirst(req('/docs/en/basics/metadata/'), null), 'EN-OFFLINE');
+  assert.equal(await sw.networkFirst(req('/docs/basics/metadata/'), null), 'ZH-OFFLINE');
+});
+
+test('連離線頁都沒快取到時才把錯誤丟出去', async (load) => {
+  const { sw } = load({ offline: true });
+  await assert.rejects(() => sw.networkFirst(req('/docs/basics/metadata/'), null));
 });
 
 for (const [name, fn] of tests) {

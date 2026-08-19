@@ -328,6 +328,22 @@ function precacheUrlsFor(prefix) {
   return urls;
 }
 
+// 沒有網路時至少要有的那一小批：離線提示頁本身，加上撐得起它的 app shell。
+//
+// 為什麼不受「自動存下核心章節」的開關管：那一頁就是離線內容管理頁。讀者想清掉
+// 裝置上的東西、或想知道自己還有哪些內容可讀，往往正好是連不上網的時候，那一頁
+// 進不去的話整個功能等於不存在。少了它，沒快取過的網址在離線時會一路走到
+// networkFirst 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面。
+//
+// 這一批約 0.5 MB，相對於完整章節的十 MB 是可以接受的底線。
+function essentialUrlsFor(prefix) {
+  const urls = [SCOPE_PATH + prefix + "offline/"];
+  for (const asset of SHELL_ASSETS) {
+    urls.push(SCOPE_PATH + prefix + asset);
+  }
+  return urls;
+}
+
 // 這個 SW 生命週期內已經補過的語系。每次導覽 client 都會送 PRECACHE_LANG 過來，
 // 沒有這層就要對七十幾個網址各做一次 cache.match 才知道沒事可做。SW 被瀏覽器終止
 // 後清空，下次重跑一輪也只是白查一次，不會抓重複的東西。
@@ -336,12 +352,15 @@ const precachedPrefixes = new Set();
 // 補齊某個語系的預快取。已經在快取裡的跳過，所以換語系時只會抓新的那一份，作品
 // 本體與抓過的東西不重來。
 async function precacheFor(prefix) {
-  if (precachedPrefixes.has(prefix)) return;
-  precachedPrefixes.add(prefix);
+  // 讀者關掉自動存或清空過內容時只補底線那一批，不抓完整章節
+  const full = await autoPrecacheEnabled();
+  const done = prefix + (full ? " full" : " essential");
+  if (precachedPrefixes.has(done)) return;
+  precachedPrefixes.add(done);
   const cache = await caches.open(PRECACHE);
   // 逐一快取並容忍個別失敗（本地開發只有單一語系，其他語系路徑會 404）
   await Promise.allSettled(
-    precacheUrlsFor(prefix).map(async (url) => {
+    (full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix)).map(async (url) => {
       if (await cache.match(url)) return;
       const response = await fetch(url, { credentials: "same-origin" });
       if (response.ok) await cache.put(url, response);
@@ -386,7 +405,6 @@ async function guessLangPrefix() {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      if (!(await autoPrecacheEnabled())) return;
       const prefix = await guessLangPrefix();
       if (prefix !== null) await precacheFor(prefix);
       // 這裡刻意不呼叫 skipWaiting。原本一裝好就搶著接管，讀者正在讀的分頁會在毫無
@@ -537,11 +555,7 @@ self.addEventListener("message", (event) => {
   if (data.type === "PRECACHE_LANG" && typeof data.url === "string") {
     const prefix = langPrefixOf(new URL(data.url));
     if (prefix !== null) {
-      event.waitUntil(
-        (async () => {
-          if (await autoPrecacheEnabled()) await precacheFor(prefix);
-        })()
-      );
+      event.waitUntil(precacheFor(prefix));
     }
     return;
   }
