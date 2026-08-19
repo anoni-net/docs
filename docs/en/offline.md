@@ -18,6 +18,23 @@ This page is also where offline content is managed. Below you can see what is cu
 
 <script src="../js/offline-library.js"></script>
 
+## Install this site as an offline app
+
+Installing is not required for offline reading. Opening the site in an ordinary browser already stores the content listed above. What installing changes is the way in: the app gets its own icon and window, so with no connection you tap it directly instead of opening a browser and hunting for a bookmark.
+
+!!! tip "Do it while you still have a connection"
+    This is preparation. Installing after the network is already down is too late. One minute now keeps an offline copy of the guide on your device.
+
+Open [anoni.net/docs](index.md) in an ordinary browser rather than Tor Browser, for the reason below:
+
+- **Android (Chrome, Edge, etc.)**: open the browser menu and choose "Install app" or "Add to Home screen".
+- **Desktop (Chrome, Edge)**: an install icon appears at the right end of the address bar, or choose "Install anoni.net Docs" from the menu.
+- **iPhone, iPad (Safari)**: tap "Share", then "Add to Home Screen".
+
+Once installed, long-press the app icon and the shortcut menu has "Offline reading", which opens this page directly.
+
+Tor Browser and the onion and IPFS builds do not offer offline installation, for privacy reasons: those builds do not register a background Service Worker. Install from an ordinary browser on anoni.net when you need an offline fallback, and go back to Tor Browser for everyday anonymous reading.
+
 ## What gets stored on your device
 
 The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well.

@@ -224,6 +224,8 @@ plugins:
         - en
   - redirects:
       redirect_maps:
+        # offline-install 併進 offline（安裝說明與離線內容管理收成一頁）
+        'offline-install.md': 'offline.md'
         # 2026 flat → categorised restructure (3aa2a65). Pages whose English content
         # still exists point at the article; only genuinely dropped pages fall back
         # to the nearest live section index.
