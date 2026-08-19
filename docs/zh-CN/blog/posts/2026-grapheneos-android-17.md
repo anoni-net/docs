@@ -19,7 +19,7 @@ description: "Android 17 上线后 GrapheneOS 的处境：Google 收紧 AOSP、a
             alt="Android 17 上线后的 GrapheneOS：谁决定手机上能执行什么系统"
             style="border-radius: 5px;">
     </a>
-    <figcaption>图片：智能手机被锁链缠绕，象征装置被外部规则锁住。摄影 Towfiqu barbhuiya，来源 [Pexels](https://www.pexels.com/photo/close-up-of-a-smart-phone-with-a-lock-11391947/){target="_blank"}（Pexels License）。</figcaption>
+    <figcaption markdown="span">图片：智能手机被锁链缠绕，象征装置被外部规则锁住。摄影 Towfiqu barbhuiya，来源 [Pexels](https://www.pexels.com/photo/close-up-of-a-smart-phone-with-a-lock-11391947/){target="_blank"}（Pexels License）。</figcaption>
 </figure>
 
 手机是你花钱买的，但它能装什么、能执行什么系统，越来越不是你能决定的。这个问题平常不会浮上台面，直到你想换一套更保护隐私的系统，却发现某些 app 因为「侦测到非原厂系统」而拒绝执行，或是你信任的开源系统因为得不到硬件资料而越来越难维护。Android 17 在 2026 年 6 月 16 日上线[^1]，把这个问题又往前推了一步。

@@ -19,7 +19,7 @@ description: "An anoni.net take on Android 17 and GrapheneOS: Google's AOSP sque
             alt="Android 17 and GrapheneOS: who decides what runs on the phone you bought"
             style="border-radius: 5px;">
     </a>
-    <figcaption>Image: a smartphone wrapped in a chain and padlock, standing in for a device locked down by outside rules. Photo by Towfiqu barbhuiya, via [Pexels](https://www.pexels.com/photo/close-up-of-a-smart-phone-with-a-lock-11391947/){target="_blank"} (Pexels License).</figcaption>
+    <figcaption markdown="span">Image: a smartphone wrapped in a chain and padlock, standing in for a device locked down by outside rules. Photo by Towfiqu barbhuiya, via [Pexels](https://www.pexels.com/photo/close-up-of-a-smart-phone-with-a-lock-11391947/){target="_blank"} (Pexels License).</figcaption>
 </figure>
 
 You paid for the phone, but what it can run and what it can install is increasingly **not yours to decide**. That question stays invisible until an app refuses to open because it "detected a non-stock OS," or an open-source OS you rely on gets harder to maintain because the hardware data behind it stops being public. [Android 17](https://source.android.com/docs/whatsnew/android-17-release){target="_blank"} landed on **2026-06-16**, and it pushed that question one step further.

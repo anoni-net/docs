@@ -20,7 +20,7 @@ description: "FISA Section 702 让美国情报机构不需令状就能收集境�
             alt="EFF 的 NSA eagle 图，把 NSA 标志改画成一只老鹰用爪子接上电信线路，象征无令状的大规模监控"
             style="border-radius: 10px;">
     </a>
-    <figcaption>图片为 EFF 设计师 Hugh D'Andrade 绘制的「NSA eagle」，把 NSA 标志改画成老鹰用爪子接上电信线路，象征无令状的大规模监控。出自 [EFF 的 NSA 监控专题](https://www.eff.org/nsa-spying){target="_blank"}，授权为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img]。</figcaption>
+    <figcaption markdown="span">图片为 EFF 设计师 Hugh D'Andrade 绘制的「NSA eagle」，把 NSA 标志改画成老鹰用爪子接上电信线路，象征无令状的大规模监控。出自 [EFF 的 NSA 监控专题](https://www.eff.org/nsa-spying){target="_blank"}，授权为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}[^img]。</figcaption>
 </figure>
 
 你寄一封信到 Gmail、用 iMessage 跟在美国的朋友聊天、用 WhatsApp 联络海外的家人，这些通信只要有一端落在美国的服务或网络上，本来就可能被美国情报机构在不需令状的情况下收集。授权这件事的法律叫 FISA Section 702（《外国情报监控法》第 702 条）。2026 年 6 月 12 日午夜，这条授权在美国国会的僵局中到期[^1]。

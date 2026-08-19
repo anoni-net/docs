@@ -16,7 +16,7 @@ description: "Tian Jian's two-session series on digital security and privacy for
 
 <figure markdown="span">
   ![Poster for the digital security and privacy series](https://assets.anoni.net/blog/tianjian-digital-privacy.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
-  <figcaption>Series poster by Tian Jian. Source: [TJ Field School event page](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
+  <figcaption markdown="span">Series poster by Tian Jian. Source: [TJ Field School event page](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
 </figure>
 
 Tian Jian's learning platform TJ Field School is running a two-session series on digital security and privacy. Toomore from our community gave the first session on 12 August, and Mashbean takes the second on 26 August. Registration is still open.

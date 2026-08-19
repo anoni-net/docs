@@ -20,7 +20,7 @@ description: "A Sinophone Asia-Pacific reading of EFF's Transaction Denied: Taiw
             alt="A piggy bank with its mouth taped shut, representing payment rails severed by financial intermediaries"
             style="border-radius: 10px;">
     </a>
-    <figcaption>Image from EFF Deeplinks article [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} (EFF Financial Censorship banner library), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}.</figcaption>
+    <figcaption markdown="span">Image from EFF Deeplinks article [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} (EFF Financial Censorship banner library), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}.</figcaption>
 </figure>
 
 On **9 May 2017**, the cross-border electronic payment service **PayPal** closed all domestic transaction functions in Taiwan. Two PayPal Taiwan accounts could no longer send money to each other. Cross-border transfers kept working. The streamer economy took the worst hit. Twitch Cheer, YouTube Super Chat, StreamLabs, and NightDev — tools that processed local audience tips through PayPal — went dark on the same day. Small organizations and independent media that relied on PayPal for domestic flows lost a payment rail overnight[^8].

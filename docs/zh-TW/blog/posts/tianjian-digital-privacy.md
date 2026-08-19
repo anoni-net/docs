@@ -16,7 +16,7 @@ description: "《田間》的「數位安全與隱私保護系列」兩場線上
 
 <figure markdown="span">
   ![數位安全與隱私保護系列活動主視覺](https://assets.anoni.net/blog/tianjian-digital-privacy.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
-  <figcaption>活動主視覺由《田間》製作，來源：[在田間學活動頁面](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
+  <figcaption markdown="span">活動主視覺由《田間》製作，來源：[在田間學活動頁面](https://tian-jian.org/tj-field-school/event/digital-privacy/){target="_blank"}</figcaption>
 </figure>
 
 《田間》在「在田間學」開了「數位安全與隱私保護系列」，兩場免費線上課程。8/12 的第一場由我們社群的 Toomore 分享，8/26 的第二場由黃豆泥（Mashbean）接續，現在還可以報名。

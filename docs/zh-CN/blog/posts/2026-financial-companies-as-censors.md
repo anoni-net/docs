@@ -20,7 +20,7 @@ description: "2017 年 5 月 9 日 PayPal 关闭台湾境内交易，2026 年的
             alt="被胶带封口的存钱猪，象征被金融中介切断的支付管道"
             style="border-radius: 10px;">
     </a>
-    <figcaption>图片来自 EFF Deeplinks 文章 [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} 的社交卡片（EFF Financial Censorship banner 图库），授权为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}。</figcaption>
+    <figcaption markdown="span">图片来自 EFF Deeplinks 文章 [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} 的社交卡片（EFF Financial Censorship banner 图库），授权为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}。</figcaption>
 </figure>
 
 2017 年 5 月 9 日，美国的跨境电子支付服务 PayPal 全数关闭台湾境内交易功能，两个 PayPal Taiwan 账号之间不能再收付款，跨境收付款则维持运作。受冲击最大的是刚起步的实况产业，Twitch Cheer、YouTube Super Chat、StreamLabs、NightDev 这些依赖 PayPal 处理本地观众赞助的工具集体中断，小型组织与独立媒体的本地金流也跟着受影响[^9]。
