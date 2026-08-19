@@ -6,7 +6,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具層
 
-這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。16 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
+這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。19 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
 
 ## 先看這篇
 
@@ -14,11 +14,12 @@ icon: material/toolbox-outline
 
 ## 連線層：Tor 工具家族
 
-想匿名瀏覽、傳檔、或貢獻網路自由基礎建設的人，從這群開始。最後一篇介紹 VPN，它不屬於 Tor 家族，卻是多數人最先碰到的連線工具，放這裡跟 Tor 對照著讀。
+想匿名瀏覽、傳檔、或貢獻網路自由基礎建設的人，從這群開始。其中 Signal Proxy 與 VPN 兩篇不屬於 Tor 家族，同樣是繞行封鎖會用到的連線工具，放這裡對照著讀。
 
 - [什麼是 Tor](./what-is-tor.md)：Tor 如何使用、跟 VPN 差在哪、什麼時候不該用。
 - [Tor Browser 進階設定](./tor-browser-advanced.md)：橋接、安全等級、Onion 站點與身分隔離。
 - [Tor Snowflake](./tor-snowflake.md)：開瀏覽器分頁，幫受審查地區的使用者連上 Tor，台灣門檻最低的網路自由貢獻方式。
+- [Signal Proxy](./signal-proxy.md)：Signal 被封鎖的地區怎麼用 proxy 連回服務，以及在台灣架一台提供出去的門檻與風險。
 - [OnionShare](./onionshare.md)：透過 Tor 起臨時 onion service，匿名傳檔、收檔、架站、聊天。
 - [VPN 的風險與選擇](./vpn-guide.md)：VPN 的具體風險、怎麼挑值得信任的服務、各地能不能用，以及什麼時候該改用 Tor。
 - [加密 DNS 怎麼選、怎麼確認真的生效](./encrypted-dns.md)：DoH、DoT、DoQ 的差別，resolver 業者的挑選準則，各平台的欄位收什麼、失敗時會不會靜默退回明文。

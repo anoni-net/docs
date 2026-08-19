@@ -46,6 +46,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 Two hands-on guides that fit this site's regional-observatory work rather than the comparison table above:
 
 - [Tor Snowflake](./tor-snowflake.md) — if your connectivity is open and unfiltered, the lowest-barrier way to help Tor users in censored regions connect, from a single browser tab.
+- [Signal Proxy](./signal-proxy.md) — how people reach Signal where it is blocked, and what it takes to run a proxy from an unfiltered network for people whose network is not.
 - [OONI Run v2 for regional measurement](./ooni-run-v2.md) — how a shared, dynamic test list lets a community observe whether specific sites are censored across a region, plus the one CLI gotcha we hit.
 
 ## Where to go from here
