@@ -1,0 +1,59 @@
+# tools/ 底下那幾支測試的 CI。全部零外部相依，不需要建置產物，跑完不到十秒。
+#
+# 為什麼值得掛上來：這幾支守的都是「只在特定情境才會出錯、平常看不出來」的行為，
+# 而那正是抽樣測試守不住的一類。實際踩過的：
+#
+#   - service worker 的離線 fallback 整條鏈沒有測試，結果「清除所有離線內容」把
+#     離線提示頁一起清掉，之後任何沒快取的網址在離線時都掉到瀏覽器的錯誤畫面
+#   - 預快取清單與索引頁連出去的網址形狀對不上，線上一切正常，只有離線的人打不開
+#   - 離線內容管理頁的分組與排序改動，錯了是整份清單跟側邊欄對不起來
+#   - 部署後要清哪些網址，漏清是訪客看到舊內容，多清是波及 zone 內其他服務
+#
+# tools/test_docs_style_lint.py 不在這裡，它由 docs-style-lint.yml 跑，那支 workflow
+# 本來就要先確認規則沒壞掉才有資格擋 PR。
+name: tools-tests
+
+on:
+  pull_request:
+    paths:
+      - "tools/**"
+      - "docs/zh-TW/sw.js"
+      - "docs/overrides/base.html"
+      - "docs/hooks/**"
+      - ".github/workflows/tools-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # service worker 的離線行為：網址形狀、語系、預快取範圍、library 與清除
+      - name: sw.js 離線路徑
+        run: node tools/test_sw_offline.mjs
+
+      # 語言偏好只在預設語系的首頁套用，其餘一律不動
+      - name: 語言偏好導向規則
+        run: node tools/test_lang_preference.mjs
+
+      # 離線內容管理頁的章節分組與排序，照 nav 而不是檔案的字母序
+      - name: 離線內容索引
+        run: python3 tools/test_offline_index.py
+
+      # 部署後要清除的 Cloudflare 快取網址
+      - name: Cloudflare 快取清除映射
+        run: python3 tools/test_cf_purge.py
