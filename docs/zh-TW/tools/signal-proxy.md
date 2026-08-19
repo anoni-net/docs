@@ -29,6 +29,12 @@ Signal 官方的做法叫做 TLS proxy，跟一般的 HTTP proxy 有明顯差別
 
 端對端加密在這個過程中完全不受影響。訊息在你的裝置上加密、在對方裝置上解密，proxy 中間看到的是一段它讀不了的 TLS 流量。
 
+### 擋得住哪一種封鎖
+
+TLS proxy 對付的是「Signal 的伺服器位址被封」這一類手法。審查系統靠 DNS、IP 黑名單、SNI 過濾認出目的地時，把連線導向一台還沒被列管的伺服器就繞得過去。
+
+審查強度更高的環境要另外評估。中國的防火長城會做主動探測（active probing，主動連向可疑的伺服器測試它是不是代理），DPI 的辨識能力也比多數地區強，Signal Proxy 在這種環境不保證能用。當地使用者手邊需要有備援方案，可以看 [WebTunnel 橋接](../community/setup-tor-webtunnel.md)、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的風險與選擇](./vpn-guide.md) 裡的混淆協議一節。
+
 ## 使用者怎麼套用 proxy
 
 ### 用分享連結一鍵設定

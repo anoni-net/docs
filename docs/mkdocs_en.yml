@@ -46,6 +46,7 @@ nav:
           - tools/tails-vs-whonix-vs-qubes.md
           - tools/tor-browser-advanced.md
           - tools/tor-snowflake.md
+          - tools/signal-proxy.md
           - tools/vpn-guide.md
           - tools/encrypted-dns.md
           - tools/ooni-run-v2.md
