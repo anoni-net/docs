@@ -57,12 +57,14 @@ const harness = `
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
   // 執行期一次只預快取一個語系，檢查要涵蓋全部，所以逐一跑過再合併
   const byPrefix = LANG_PREFIXES.map((prefix) => [prefix, precacheUrlsFor(prefix)]);
-  return { byPrefix, games: GAME_APPS.length, cacheKeyCandidates };
+  const essential = essentialUrlsFor("");
+  return { byPrefix, essential, games: GAME_APPS.length, cacheKeyCandidates };
 `;
-const { byPrefix, games, cacheKeyCandidates } = new Function(harness)();
+const { byPrefix, essential, games, cacheKeyCandidates } = new Function(harness)();
 // 作品本體每個語系的清單裡都有，合併時去重
 const urls = [...new Set(byPrefix.flatMap(([, list]) => list))];
 
@@ -98,6 +100,9 @@ for (const [prefix, list] of byPrefix) {
 // 作品本體單獨報一次，那是最容易漏補的一批
 const gameUrls = urls.filter((u) => u.startsWith('/docs/games/') && !u.endsWith('/games/'));
 console.log(`  其中三件互動作品 ${mb(sizeOf(gameUrls))}（${games} 個檔案，三語共用）`);
+// 讀者關掉自動存或清空過內容時只會有這一批。少了它離線就沒有站台的說明頁可看，
+// 落到瀏覽器自己的錯誤畫面，所以它不受那個開關管。
+console.log(`  關掉自動存時仍保留的底線 ${mb(sizeOf(essential))}（${essential.length} 個 URL）`);
 console.log(`  全部語系去重後 ${mb(bytes)}，這是底下兩道檢查涵蓋的範圍`);
 
 // 索引頁連出去的網址形狀，要能命中預快取的 key
