@@ -192,7 +192,7 @@ extra:
     - name: English (en-US)
       link: /docs/en/
       lang: en
-    # zh-TW 是站台預設語系，建在根路徑，沒有獨立語系區段。理由見 mkdocs.yml 的註解。
+    # zh-TW 是網站預設語系，建在根路徑，沒有獨立語系區段。理由見 mkdocs.yml 的註解。
     - name: 臺灣正體（zh-TW）
       link: /docs/
       lang: zh-TW

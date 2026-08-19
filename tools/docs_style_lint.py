@@ -150,6 +150,13 @@ JIANG_ALLOW = re.compile(
     r"|演讲|讲座|讲师|讲者|讲习|讲义|讲堂|讲稿|讲话|讲求|讲究|讲评|宣讲|主讲|开讲|听讲|合讲|讲演)"
 )
 
+# 兩岸用詞差異（貢獻者百科「用詞跟著臺灣走」）。跟口語詞用同一套比對，一起跑。
+# 正體與簡體都掃：「站台」在簡體讀者那邊也不是慣用詞，兩版都該用「網站／网站」。
+REGIONAL_RULES = [
+    ("regional-term-site", re.compile(r"站台"), None,
+     "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）"),
+]
+
 # 其餘口語詞（貢獻者百科「口語字改書面語」）。比對方式與 JIANG 相同：
 # 取命中處前後各 2 字的視窗去對例外清單，避開正當複合詞。繁簡兩種寫法都收。
 # 全部列為 warn，因為替換詞要看語境（跑 → 執行／架設／運作／營運），不宜機器直接改。
@@ -395,7 +402,7 @@ def lint_file(path: Path):
             if not JIANG_ALLOW.search(around):
                 findings.append((i, WARN, "colloquial-jiang",
                                  "口語「講」建議改書面語（提到、說明）", raw[max(0, m.start() - 6): m.start() + 6].strip()))
-        for code, rx, allow, msg in COLLOQUIAL_RULES:
+        for code, rx, allow, msg in COLLOQUIAL_RULES + REGIONAL_RULES:
             for m in rx.finditer(clean):
                 around = clean[max(0, m.start() - 2): m.end() + 2]
                 if allow is not None and allow.search(around):

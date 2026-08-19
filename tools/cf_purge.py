@@ -58,7 +58,7 @@ def to_url(rel_path: Path, base_url: str) -> str:
 
 
 def collect_urls(output_dir: Path, base_url: str) -> list[str]:
-    """列出這份產物對應的所有網址，含不帶結尾斜線的站台根路徑。"""
+    """列出這份產物對應的所有網址，含不帶結尾斜線的網站根路徑。"""
     base_url = base_url.rstrip("/")
     urls = {
         to_url(p.relative_to(output_dir), base_url)

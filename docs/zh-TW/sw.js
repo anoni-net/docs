@@ -41,7 +41,7 @@ const PAGES_MAX_ENTRIES = 120;
 const ASSETS_MAX_ENTRIES = 200;
 
 // 讀者在離線內容管理頁自己勾選留下的頁面。跟 runtime 快取分開放，才不會被那邊的
-// 筆數上限擠掉，也不跟著 PRECACHE 的版本走。讀者刻意留的東西不該因為站台換版就
+// 筆數上限擠掉，也不跟著 PRECACHE 的版本走。讀者刻意留的東西不該因為網站換版就
 // 消失，內容的新鮮度由管理頁的「更新」按鈕與 network-first 負責。
 const LIBRARY = "anoni-docs-library";
 
@@ -56,7 +56,7 @@ const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
 // SW scope 在正式站是 /docs/，本地開發（mkdocs serve）是 /
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
 
-// 各語系 build 的根路徑前綴（相對於 scope）。站台跑三次 mkdocs build（run.sh、
+// 各語系 build 的根路徑前綴（相對於 scope）。網站跑三次 mkdocs build（run.sh、
 // run_zh-cn.sh、run_en.sh），預設語系 zh-TW 由 run.sh 建在根路徑，另兩語各有前綴。
 //
 // 執行期一次只預快取其中一個（見 precacheUrlsFor）。這份清單是語系有哪些的單一
@@ -114,14 +114,14 @@ const CORE_PAGES_ZH = [
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
   // 有些頁面一旦躺在裝置的 Cache Storage 裡，本身就是指向性證據，會顯示
   // 「這台裝置下載過某某族群的保護指南全文」。這些文章自己就在教讀者清
-  // 瀏覽器痕跡、提防裝置被檢查，站台不該一邊這樣教、一邊把文章推進讀者裝置。
+  // 瀏覽器痕跡、提防裝置被檢查，網站不該一邊這樣教、一邊把文章推進讀者裝置。
   //
   // 判準（新增頁面時照這個問，不要只看它放在哪個資料夾）：
   //   這頁是不是用第二人稱或隱含第二人稱，指導「唯一一種身分的人」在採取
   //   某個具體行動前後該做什麼準備？
   //
   // 是的話就不要放進 CORE_PAGES。讀者主動點開時 runtime 快取仍會存下來離線
-  // 可讀，那是他自己的選擇，不是站台替他決定的。
+  // 可讀，那是他自己的選擇，不是網站替他決定的。
   //
   // 依這個判準，這次移除了 scenarios 的 journalist、activist、lgbtq，以及
   // taiwan/whistleblower-law（它放在法規資料夾，但整篇是揭弊者本人的行動準備
@@ -371,7 +371,7 @@ async function precacheFor(prefix) {
 // 網址對到建置路徑的語系前綴。zh-TW 由 run.sh 建在根路徑，另外兩語各有前綴。
 // 不在 scope 內時回 null。
 //
-// 路徑前綴優先於 query。前綴是站台建出來的，query 誰都能加。三件互動作品只建置
+// 路徑前綴優先於 query。前綴是網站建出來的，query 誰都能加。三件互動作品只建置
 // 一份在根路徑，語系靠 ?lang= 傳，所以路徑上沒有前綴時才看 query。
 function langPrefixOf(url) {
   if (!url.pathname.startsWith(SCOPE_PATH)) return null;
@@ -417,7 +417,7 @@ self.addEventListener("install", (event) => {
 // === 離線內容管理 ===
 //
 // 讀者在 offline 頁勾選要留在裝置上的頁面，這幾支負責實際存取。預設下載的那批由
-// precacheFor 處理，兩者分開放在不同的 cache，讀者才分得清「站台幫我存的」與
+// precacheFor 處理，兩者分開放在不同的 cache，讀者才分得清「網站幫我存的」與
 // 「我自己選的」，清除時也能各自處理。
 
 async function autoPrecacheEnabled() {
@@ -480,7 +480,7 @@ async function removeFromLibrary(paths) {
   return { removed: removed };
 }
 
-// 清掉裝置上所有跟這個站有關的快取，包含站台自動存的那批。
+// 清掉裝置上所有跟這個站有關的快取，包含網站自動存的那批。
 //
 // 清完把自動預快取關掉。讀者按這顆按鈕多半是因為裝置可能被檢查，如果下一次導覽
 // 又把九 MB 自動下載回來，這顆按鈕等於沒有作用。要恢復得回管理頁自己打開。
@@ -500,7 +500,7 @@ async function handleLibraryMessage(data, port) {
     reply({
       type: "status",
       saved: await libraryEntries(),
-      // 站台預設存的那批，管理頁用它標出「已經在裝置上、不必再勾」的頁面。
+      // 網站預設存的那批，管理頁用它標出「已經在裝置上、不必再勾」的頁面。
       // 只回頁面，app shell 與作品本體不是讀者會勾的東西，混進去只會讓數字虛胖。
       precached: prefix === null ? [] : CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH,
       autoPrecache: await autoPrecacheEnabled(),

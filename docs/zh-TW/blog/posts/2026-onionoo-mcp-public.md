@@ -15,7 +15,7 @@ description: "anoni.net 社群把 Tor Project 的 Onionoo 包成 MCP server 與�
 
 ![onionoo MCP 上線](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-匿名網路社群自架的 `onionoo-fastapi` 服務以 v1.0.0 對外公開，站台位於 <https://onionoo.anoni.net>。它把 Tor Project 官方的 [Onionoo](https://metrics.torproject.org/onionoo.html){target="_blank"} API 包成兩種介面，一個是補上 OpenAPI 規格的語義化 HTTP API，一個是 Model Context Protocol（MCP）server。
+匿名網路社群自架的 `onionoo-fastapi` 服務以 v1.0.0 對外公開，網站位於 <https://onionoo.anoni.net>。它把 Tor Project 官方的 [Onionoo](https://metrics.torproject.org/onionoo.html){target="_blank"} API 包成兩種介面，一個是補上 OpenAPI 規格的語義化 HTTP API，一個是 Model Context Protocol（MCP）server。
 
 接上 Claude Desktop、Cursor、Claude Code 等支援 MCP 的客戶端後，用一句中文就能問「臺灣目前有幾個 Tor 中繼節點，總頻寬多少，前五大 ASN 是哪些」。AI 代理會自己拆問題、選工具、查資料、整理出可讀報告，不必先學 Onionoo 的欄位定義才能開始研究。
 

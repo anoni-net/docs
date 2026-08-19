@@ -7,7 +7,7 @@
 排除的判準寫在 `docs/zh-TW/sw.js` 的 `CORE_PAGES_ZH` 上方：指導單一受威脅身分的
 頁面不進預設下載，因為 Cache Storage 裡躺著那些頁面本身就是指向性證據。這份索引
 不重複那條判準，它列出全部頁面，「預設下載了哪些」由 service worker 回答，管理頁
-把兩邊疊起來呈現。站台不替讀者決定，讀者自己知情選擇。
+把兩邊疊起來呈現。網站不替讀者決定，讀者自己知情選擇。
 
 三語系是三次獨立的 mkdocs 執行，各自產出自己那一份，寫進各自的 site_dir 根目錄。
 
@@ -113,7 +113,7 @@ def on_post_build(config, **kwargs):
         log.warning("offline_index: 沒有收集到任何頁面，不產生 %s", OUTPUT_NAME)
         return
 
-    # 依 nav 的章節分組。用 (頂層, 所屬章節) 當依據而不是 URL 的第一段：站台的
+    # 依 nav 的章節分組。用 (頂層, 所屬章節) 當依據而不是 URL 的第一段：網站的
     # 「關於我們」底下是 about/、contact.md 與 help/ 三個不同目錄，照 URL 分會變成
     # 三組各一頁，散在清單裡不知道從何看起，而在側邊欄上它們本來就是同一節。
     groups = {}

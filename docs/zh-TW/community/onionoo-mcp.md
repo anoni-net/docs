@@ -112,7 +112,7 @@ icon: material/api
 
 服務本身**不儲存**任何 Onionoo 資料，只負責轉發與重新包裝回應。上游資料來自 <https://onionoo.torproject.org>。
 
-- **服務站台**：<https://onionoo.anoni.net>
+- **服務網址**：<https://onionoo.anoni.net>
 - **Swagger UI**：<https://onionoo.anoni.net/docs>
 - **MCP 端點**：`https://onionoo.anoni.net/mcp`（Streamable HTTP）
 - **原始碼**：<https://github.com/anoni-net/onionoo-fastapi>（MIT 授權，目前版本 v1.0.0）

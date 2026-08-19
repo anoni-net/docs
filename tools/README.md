@@ -53,6 +53,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 | `frontmatter-missing` | error | blog post 缺 date/slug/categories/authors |
 | `definition-phrasing` | warn | 「談的是/指的是/涵蓋的是」|
 | `zhe-repeat` | warn | 「這／这」同句堆疊（3 次以上，或相鄰兩個相隔不到 9 個字）|
+| `regional-term-site` | warn | 「站台」（中國慣用詞，臺灣用「網站」）|
 | `colloquial-jiang` | warn | 口語「講」（已扣除演講/講座等正當詞）|
 | `colloquial-run` | warn | 口語「跑」當執行軟體用（已扣除跑步/賽跑等正當詞）|
 | `colloquial-get` | warn | 「拿到」，改用「取得」|

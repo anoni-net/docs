@@ -113,7 +113,7 @@ check(
 # 第三層的頁面併回第二層。全展開會變成三十組，其中好幾組只有兩三頁。
 check("第三層併回第二層", [p["url"] for p in index["sections"][3]["pages"]], ["tools/", "tools/what-is-tor/"])
 
-# 站台的「關於我們」底下是 about/ 與 contact.md 兩個不同目錄，照 URL 分會變成
+# 網站的「關於我們」底下是 about/ 與 contact.md 兩個不同目錄，照 URL 分會變成
 # 兩組各一頁，在側邊欄上它們本來就是同一節
 check("同一節的不同目錄合併", len(index["sections"][4]["pages"]), 2)
 

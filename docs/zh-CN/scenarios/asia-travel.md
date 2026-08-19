@@ -67,7 +67,7 @@ icon: material/bag-suitcase-outline
 
 ### 低风险：台湾（参照）、日本、南韩
 
-台湾、日本、南韩接近完全开放的网络环境，用平常的工具即可。主要记得办 SIM 要带护照，日本把数据 SIM 纳入实名的修法已完成、施行日待定。南韩有内容过滤与较强的通讯拦截法制，2026 年起又把封锁推进到 CDN 层，过度封锁波及正常网站的机会变高，处理敏感数据或遇到连不上的站台时自备 VPN。
+台湾、日本、南韩接近完全开放的网络环境，用平常的工具即可。主要记得办 SIM 要带护照，日本把数据 SIM 纳入实名的修法已完成、施行日待定。南韩有内容过滤与较强的通讯拦截法制，2026 年起又把封锁推进到 CDN 层，过度封锁波及正常网站的机会变高，处理敏感数据或遇到连不上的网站时自备 VPN。
 
 ### 中风险：菲律宾、马来西亚、新加坡、印尼、澳门
 
@@ -181,7 +181,7 @@ burner 这个俗称把两件事混在一起，风险来源并不相同：
 
 主流外站不封锁，旅客一般浏览不受影响。但有系统性的内容过滤，审议机关（原 KCSC，2025 年 10 月改组为방송미디어통신심의위원회）对色情、赌博、北韩宣传等类别封锁，官方统计的年度通讯审议案件从 2008 年的 2 万 9 千余件增至 2024 年的 35 万 6 千余件，其中实际下架或封锁的数量另计。技术上采 SNI 过滤（监看 HTTPS 连接中未加密的域名字段来比对黑名单），等于 ISP 拿得到你造访的域名清单。VPN 合法，常被用来绕过过滤。Tor 直连一般可用。SIM 须出示护照实名，观光 eSIM 较宽松但仍绑护照。南韩通讯拦截法制偏强，《通讯秘密保护法》授权即时拦截，处理敏感数据者宜纳入威胁模型。
 
-依 2025 年 5 月施行的非法信息接取阻断技术义务化规定，主管机关于 2025 年 9 月行文要求 Cloudflare 配合封锁指定域名，2026 年 5 月 1 日起经 Cloudflare 代管的目标站台对韩国连接直接回 HTTP `451`，封锁层级从 ISP 端推进到全球 CDN 业者端。同年 5 月 11 日再上路著作权侵害网站的紧急阻断制度，由文化体育观光部长先命令 ISP 封锁、著作权保护审议委员会五日内事后审议，首日就对 34 个站台发出命令。CDN 端执行的封锁改 DNS 规避不了，有报导指出过去在 ISP 端有效的规避工具也一并失效，这点目前缺少公开的实测验证。对商务旅客而言真正的风险是误封，已有二次元同人站、烟品经销这类与色情赌博无关的合法站台被一并封锁的用户回报，行程仰赖特定服务时先备好 VPN。查证来源（2026-08）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer、[行政审查统计与制度批评](https://www.opennetkorea.org/en/wp/5153){target="_blank"} - Open Net Korea、[主管机关要求 Cloudflare 封锁的原始通知](https://lumendatabase.org/notices/73101162){target="_blank"} - Lumen Database、[文化体育观光部依新法对 34 站发出紧急阻断命令](https://www.koreatimes.co.kr/entertainment/20260511/culture-minister-blocks-access-to-illegal-sites-under-new-anti-piracy-law){target="_blank"} - Korea Times。最新观测：[OONI Explorer 南韩](https://explorer.ooni.org/zh-CN/country/KR){target="_blank"}。
+依 2025 年 5 月施行的非法信息接取阻断技术义务化规定，主管机关于 2025 年 9 月行文要求 Cloudflare 配合封锁指定域名，2026 年 5 月 1 日起经 Cloudflare 代管的目标网站对韩国连接直接回 HTTP `451`，封锁层级从 ISP 端推进到全球 CDN 业者端。同年 5 月 11 日再上路著作权侵害网站的紧急阻断制度，由文化体育观光部长先命令 ISP 封锁、著作权保护审议委员会五日内事后审议，首日就对 34 个网站发出命令。CDN 端执行的封锁改 DNS 规避不了，有报导指出过去在 ISP 端有效的规避工具也一并失效，这点目前缺少公开的实测验证。对商务旅客而言真正的风险是误封，已有二次元同人站、烟品经销这类与色情赌博无关的合法网站被一并封锁的用户回报，行程仰赖特定服务时先备好 VPN。查证来源（2026-08）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer、[行政审查统计与制度批评](https://www.opennetkorea.org/en/wp/5153){target="_blank"} - Open Net Korea、[主管机关要求 Cloudflare 封锁的原始通知](https://lumendatabase.org/notices/73101162){target="_blank"} - Lumen Database、[文化体育观光部依新法对 34 站发出紧急阻断命令](https://www.koreatimes.co.kr/entertainment/20260511/culture-minister-blocks-access-to-illegal-sites-under-new-anti-piracy-law){target="_blank"} - Korea Times。最新观测：[OONI Explorer 南韩](https://explorer.ooni.org/zh-CN/country/KR){target="_blank"}。
 
 ### 台湾（参照）
 

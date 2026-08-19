@@ -412,8 +412,8 @@
           // 換版提示的文案。document.documentElement.lang 在 zh-CN 版是 "zh"
           // （mkdocs_cn.yml 的 theme.language），對不到 zh-CN 這個代碼。
           var STRINGS = {
-            "zh-TW": { text: "站台內容有新版本。", update: "立即更新", later: "稍後" },
-            "zh": { text: "站点内容有新版本。", update: "立即更新", later: "稍后" },
+            "zh-TW": { text: "網站內容有新版本。", update: "立即更新", later: "稍後" },
+            "zh": { text: "网站内容有新版本。", update: "立即更新", later: "稍后" },
             "en": { text: "A new version of this site is available.", update: "Update", later: "Later" }
           };
           var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
@@ -500,7 +500,7 @@
         })();
       </script>
       {#
-        語言偏好：讀者自己選過的閱讀語言。站台不看 navigator.language，也不看
+        語言偏好：讀者自己選過的閱讀語言。網站不看 navigator.language，也不看
         Accept-Language。Tor Browser 預設開 privacy.spoof_english，那兩個值一律回報
         en-US，照著猜會把整批用 Tor 的台灣讀者丟到英文版。沒有偏好就什麼都不做。
       #}

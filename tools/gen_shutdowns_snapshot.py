@@ -4,7 +4,7 @@
 資料來源：Access Now 的 #KeepItOn STOP（Shutdown Tracker Optimization Project），
 由 #KeepItOn 聯盟人工彙整、逐筆查證的全球網路關閉事件庫，公開在 Google Sheet。
 
-授權：CC BY 4.0（accessnow.org 的 #KeepItOn 資料頁標示）。跟站台的 CC-BY 4.0 相容，
+授權：CC BY 4.0（accessnow.org 的 #KeepItOn 資料頁標示）。跟網站的 CC-BY 4.0 相容，
 但仍另存一個檔案，跟 CC0 的 Tor Metrics 與 CC BY-NC-SA 的 OONI 分開，這樣每份資料
 受哪個授權拘束不會講不清楚。
 
