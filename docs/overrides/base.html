@@ -280,6 +280,10 @@
       #}
       <script>
         (function () {
+          // 這個環境到底會不會註冊 service worker，只有這裡知道。離線內容管理頁
+          // 靠這個旗標判斷要不要等，不然它只能空等到超時，才對著一個根本不會註冊的
+          // 瀏覽器說「這裡沒有離線儲存」。
+          window.__anoniServiceWorker = false;
           if (!("serviceWorker" in navigator)) return;
 
           var script, options;
@@ -293,6 +297,7 @@
           } else {
             return;
           }
+          window.__anoniServiceWorker = true;
 
           // 換版提示的文案。document.documentElement.lang 在 zh-CN 版是 "zh"
           // （mkdocs_cn.yml 的 theme.language），對不到 zh-CN 這個代碼。
