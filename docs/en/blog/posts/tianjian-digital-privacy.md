@@ -27,7 +27,9 @@ Both sessions are conducted in Mandarin Chinese.
 
 ## About Tian Jian and TJ Field School
 
-Tian Jian is a platform covering the development of and challenges facing Chinese-language media worldwide, and encouraging exchange across media circles. TJ Field School is its learning platform for Chinese-language journalists and content creators, and both courses and events are free. The series description on the event page reads: "In an age where security risks are everywhere, a personal digital footprint matters especially to news workers. This series starts from taking stock of your own devices, and moves on to how platform intermediaries can become a shield that protects information flow and supports safe collaboration."
+Tian Jian is the Chinese-language publication of the China Media Project, an independent research project founded in 2004 at the Journalism and Media Studies Centre of the University of Hong Kong, now based in the United States with a research centre in Taipei. It covers the development of and challenges facing Chinese-language media worldwide, and encourages exchange across media circles. Its [about page](https://tian-jian.org/information#about){target="_blank"} reads: "We firmly believe in press freedom, and we work towards a democratic and open society across the Chinese-speaking world." The core team is three people: Heng Yu Chien as chief editor, Su Hsiao Fan as reporter, and Lu Yihsuan as investigations coordinator. An editorial advisory board sits alongside them, including an independent journalist, the chair of the Hong Kong Journalists Association, an associate professor at the School of Journalism and Communication at CUHK, and the founder of the fact-checking project FactLink.
+
+TJ Field School is its learning platform for Chinese-language journalists and content creators, and both courses and events are free. The series description on the event page reads: "In an age where security risks are everywhere, a personal digital footprint matters especially to news workers. This series starts from taking stock of your own devices, and moves on to how platform intermediaries can become a shield that protects information flow and supports safe collaboration."
 
 The split between the two sessions is clear. The first covers the devices and accounts a journalist holds, and the second covers the platforms a journalist depends on.
 
@@ -38,11 +40,11 @@ The split between the two sessions is clear. The first covers the devices and ac
 
 The session began by taking stock of personal privacy: reviewing location permissions on your phone, assessing where your current protections stand, and handling incidents that come up in reporting work.
 
-Su Hsiao-fan, a reporter at Tian Jian, wrote up the session in a set of notes published on 18 August 2026 (in Chinese):
+Su Hsiao Fan, a reporter at Tian Jian, wrote up the session in a set of notes published on 18 August 2026 (in Chinese):
 
 [:material-arrow-right-circle-outline: 【在田間學】數位資安與隱私保護系列課程](https://tian-jian.org/digital-security-and-privacy-class/){ .md-button target="_blank" }
 
-(By Su Hsiao-fan, Tian Jian, 18 August 2026)
+(By Su Hsiao Fan, Tian Jian, 18 August 2026)
 
 The notes are organized into six parts: a personal privacy checkup, contacts and calendars, accounts and passwords, WiFi and mobile devices, reaching sources, and recommended tools. The write-up is easier to follow than the session was live, so if you missed it or want to review it, that article is the fastest way to catch up. One line from the notes works well as a starting point: "try not to let your apps touch your address book."
 
