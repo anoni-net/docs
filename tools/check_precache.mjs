@@ -56,11 +56,15 @@ const harness = `
   ${grab(/^const CORE_PAGES_EN = \[[\s\S]*?\n\];/m)}
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
-  ${grab(/^function precacheUrls\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
-  return { urls: precacheUrls(), games: GAME_APPS.length, cacheKeyCandidates };
+  // 執行期一次只預快取一個語系，檢查要涵蓋全部，所以逐一跑過再合併
+  const byPrefix = LANG_PREFIXES.map((prefix) => [prefix, precacheUrlsFor(prefix)]);
+  return { byPrefix, games: GAME_APPS.length, cacheKeyCandidates };
 `;
-const { urls, games, cacheKeyCandidates } = new Function(harness)();
+const { byPrefix, games, cacheKeyCandidates } = new Function(harness)();
+// 作品本體每個語系的清單裡都有，合併時去重
+const urls = [...new Set(byPrefix.flatMap(([, list]) => list))];
 
 /** URL 換成 docs/output 底下的實際檔案路徑 */
 function resolve(url) {
@@ -78,14 +82,23 @@ for (const url of urls) {
 }
 
 const mb = (n) => (n / 1024 / 1024).toFixed(2) + ' MB';
-console.log(`  預快取 ${urls.length} 個 URL，其中作品本體 ${games} 個`);
-console.log(`  合計 ${mb(bytes)}（不含 runtime 快取）`);
+const sizeOf = (list) =>
+  list.reduce((a, u) => {
+    const f = resolve(u);
+    return a + (fs.existsSync(f) && fs.statSync(f).isFile() ? fs.statSync(f).size : 0);
+  }, 0);
+
+// 讀者一次只下自己那個語系，所以分語系報比報總和有意義
+console.log('  預快取（讀者只會下到自己那個語系那一份）');
+for (const [prefix, list] of byPrefix) {
+  const name = (prefix || 'zh-TW/').replace(/\/$/, '');
+  console.log(`    ${name.padEnd(6)} ${mb(sizeOf(list))}（${list.length} 個 URL）`);
+}
 
 // 作品本體單獨報一次，那是最容易漏補的一批
-const gameBytes = urls
-  .filter((u) => u.startsWith('/docs/games/') && !u.endsWith('/games/'))
-  .reduce((a, u) => a + (fs.existsSync(resolve(u)) ? fs.statSync(resolve(u)).size : 0), 0);
-console.log(`  其中三件互動作品 ${mb(gameBytes)}`);
+const gameUrls = urls.filter((u) => u.startsWith('/docs/games/') && !u.endsWith('/games/'));
+console.log(`  其中三件互動作品 ${mb(sizeOf(gameUrls))}（${games} 個檔案，三語共用）`);
+console.log(`  全部語系去重後 ${mb(bytes)}，這是底下兩道檢查涵蓋的範圍`);
 
 // 索引頁連出去的網址形狀，要能命中預快取的 key
 //
