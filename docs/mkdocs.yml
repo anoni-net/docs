@@ -25,39 +25,48 @@ nav:
           - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
+      # 子分組沿用 tools/index.md 的四層分法，側邊欄與索引頁看到的是同一套結構。
+      # 改這裡的分組時同步改那一頁，不要各寫各的。
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
           - tools/what-is-anonymity-network.md
-          - tools/what-is-tor.md
-          - tools/tor-browser-advanced.md
-          - tools/tor-snowflake.md
-          - tools/signal-proxy.md
-          - tools/onionshare.md
-          - tools/vpn-guide.md
-          - tools/encrypted-dns.md
-          - tools/what-is-tails.md
-          - tools/tails-vs-whonix-vs-qubes.md
-          - tools/grapheneos.md
-          - tools/what-is-ooni.md
-          - tools/ooni-run-v2.md
-          - tools/what-is-cryptpad.md
-          - tools/messaging-comparison.md
-          - tools/password-manager.md
-          - tools/asian-diceware.md
-          - tools/crypto-privacy-spectrum.md
-          - tools/ai-privacy.md
+          - "連線層：Tor 工具家族":
+              - tools/what-is-tor.md
+              - tools/tor-browser-advanced.md
+              - tools/tor-snowflake.md
+              - tools/signal-proxy.md
+              - tools/onionshare.md
+              - tools/vpn-guide.md
+              - tools/encrypted-dns.md
+          - "環境層：匿名作業系統":
+              - tools/what-is-tails.md
+              - tools/tails-vs-whonix-vs-qubes.md
+              - tools/grapheneos.md
+          - "觀測層：審查的可驗證紀錄":
+              - tools/what-is-ooni.md
+              - tools/ooni-run-v2.md
+          - "日常隱私基本功":
+              - tools/messaging-comparison.md
+              - tools/what-is-cryptpad.md
+              - tools/password-manager.md
+              - tools/asian-diceware.md
+              - tools/crypto-privacy-spectrum.md
+              - tools/ai-privacy.md
+      # 順序與分組跟著 scenarios/index.md 的「已上線」「撰寫中」兩節走。撰寫中的頁面
+      # 目前是大綱加可用段落，收進獨立分組讓讀者點進去之前就知道。寫完了就移上來。
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
           - scenarios/journalist.md
           - scenarios/activist.md
           - scenarios/lgbtq.md
-          - scenarios/domestic-violence.md
-          - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
           - scenarios/mainland-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
+          - "撰寫中（2026 Q3）":
+              - scenarios/domestic-violence.md
+              - scenarios/election-observer.md
       - !ENV [NAV_ADVANCED, "進階"]:
           - advanced/index.md
           - advanced/e2ee.md
@@ -85,14 +94,18 @@ nav:
               - reports/interseclab-madlink/index_4.md
               - reports/interseclab-madlink/index_5.md
               - reports/interseclab-madlink/index_6.md
+  # taiwan/index.md 把法規那三篇分成「個資與身分」「金流」「制度與技術交界」，各自
+  # 只有一篇。側邊欄做成三個單頁分組只會更難掃，所以合併成「法規與制度」一組。
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
       - taiwan/index.md
-      - taiwan/ooni-checklist.md
-      - taiwan/ooni-asn-coverage.md
-      - taiwan/tor-relay-watcher.md
-      - taiwan/pdpa-2025.md
-      - taiwan/vasp-2026.md
-      - taiwan/whistleblower-law.md
+      - "連線層的在地觀測":
+          - taiwan/ooni-checklist.md
+          - taiwan/ooni-asn-coverage.md
+          - taiwan/tor-relay-watcher.md
+      - "法規與制度":
+          - taiwan/pdpa-2025.md
+          - taiwan/vasp-2026.md
+          - taiwan/whistleblower-law.md
   - !ENV [NAV_GAMES, "互動"]:
       - games/index.md
       - games/onion-routing.md

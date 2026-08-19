@@ -29,27 +29,33 @@ nav:
           - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
+      # Groups mirror the three sections in tools/index.md. The en split is its own
+      # (Start here / Comparisons / Contribute), not a translation of the zh-TW
+      # four-layer one; keep this in step with that page rather than with mkdocs.yml.
       - !ENV [NAV_TOOLS, "Tools"]:
           - tools/index.md
-          - tools/what-is-anonymity-network.md
-          - tools/what-is-tor.md
-          - tools/what-is-tails.md
-          - tools/what-is-ooni.md
-          - tools/what-is-cryptpad.md
-          - tools/onionshare.md
-          - tools/grapheneos.md
-          - tools/password-manager.md
-          - tools/messaging-comparison.md
-          - tools/asian-diceware.md
-          - tools/crypto-privacy-spectrum.md
-          - tools/ai-privacy.md
-          - tools/tails-vs-whonix-vs-qubes.md
-          - tools/tor-browser-advanced.md
-          - tools/tor-snowflake.md
-          - tools/signal-proxy.md
-          - tools/vpn-guide.md
-          - tools/encrypted-dns.md
-          - tools/ooni-run-v2.md
+          - "Start here":
+              - tools/what-is-anonymity-network.md
+              - tools/what-is-tor.md
+              - tools/what-is-tails.md
+              - tools/what-is-ooni.md
+              - tools/what-is-cryptpad.md
+              - tools/onionshare.md
+              - tools/grapheneos.md
+              - tools/password-manager.md
+          - "Comparisons and hardening":
+              - tools/messaging-comparison.md
+              - tools/asian-diceware.md
+              - tools/ai-privacy.md
+              - tools/crypto-privacy-spectrum.md
+              - tools/tails-vs-whonix-vs-qubes.md
+              - tools/tor-browser-advanced.md
+              - tools/vpn-guide.md
+              - tools/encrypted-dns.md
+          - "Contribute and measure":
+              - tools/tor-snowflake.md
+              - tools/signal-proxy.md
+              - tools/ooni-run-v2.md
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
@@ -72,14 +78,17 @@ nav:
           - advanced/mistaken-for-anonymity.md
       - !ENV [NAV_REPORTS, "Reports"]:
           - reports/index.md
+  # Groups follow the article list in regional/index.md.
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
-      - regional/tor-relay-watcher.md
-      - regional/ooni-asn-coverage.md
-      - regional/ooni-checklist.md
-      - regional/taiwan-pdpa-2025.md
-      - regional/taiwan-vasp-2026.md
-      - regional/taiwan-whistleblower-law.md
+      - "Measurement and framing":
+          - regional/tor-relay-watcher.md
+          - regional/ooni-asn-coverage.md
+          - regional/ooni-checklist.md
+      - "Taiwan's regulatory environment":
+          - regional/taiwan-pdpa-2025.md
+          - regional/taiwan-vasp-2026.md
+          - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_GAMES, "Interactive"]:
       - games/index.md
       - games/onion-routing.md
