@@ -433,22 +433,57 @@ async function setAutoPrecache(enabled) {
   await cache.put(AUTO_PRECACHE_URL, new Response(enabled ? "on" : "off"));
 }
 
-// 讀者自己存下來的頁面，回相對於 scope 的路徑，跟 offline-index.json 的 url 對得上
-async function libraryEntries() {
+// 訊息裡帶的頁面網址落在哪個語系。
+//
+// 管理頁送過來的路徑取自 offline-index.json，那份索引的網址相對於各語系自己的建置
+// 根目錄，en 版寫的是 `tools/` 而不是 `en/tools/`。三個語系共用同一個 SW scope
+// （都是 /docs/），所以語系前綴要在這裡補回去，否則 en 與 zh-cn 的讀者勾一頁下來，
+// 存進裝置的是 zh-TW 那一版。
+//
+// 舊版的管理頁只在 OFFLINE_STATUS 帶 url，其他指令沒有。收不到就退回根路徑，行為
+// 跟補這段之前一樣，讀者按下更新換到新版的管理頁就會正確。
+function messagePrefix(data) {
+  if (typeof data.url !== "string") return "";
+  return langPrefixOf(new URL(data.url)) || "";
+}
+
+// 讀者自己存下來的頁面，回相對於該語系建置根目錄的路徑，跟 offline-index.json 的
+// url 對得上。別的語系存的不列進來，管理頁一次只呈現讀者當下讀的這一個語系。
+async function libraryEntries(prefix) {
   const cache = await caches.open(LIBRARY);
   const keys = await cache.keys();
-  return keys.map((request) => new URL(request.url).pathname.slice(SCOPE_PATH.length));
+  const entries = [];
+  for (const request of keys) {
+    const url = new URL(request.url);
+    if (langPrefixOf(url) !== prefix) continue;
+    entries.push(url.pathname.slice(SCOPE_PATH.length + prefix.length));
+  }
+  return entries;
+}
+
+// 網站自動存的那批，實際在裝置上的有哪些。
+//
+// 原本直接回 CORE_PAGES_BY_PREFIX 那份硬編清單，那是「打算要下載的」而不是「已經
+// 下載到的」。讀者關掉自動下載或按過清除之後，管理頁照樣顯示那幾十頁已存，而且
+// 那些頁的勾選框是停用的，想自己補存也按不動。
+async function precachedEntries(prefix) {
+  const cache = await caches.open(PRECACHE);
+  const stored = new Set(
+    (await cache.keys()).map((request) => new URL(request.url).pathname)
+  );
+  const pages = CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH;
+  return pages.filter((page) => stored.has(SCOPE_PATH + prefix + page));
 }
 
 // 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
 // refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
-async function addToLibrary(paths, refresh, report) {
+async function addToLibrary(prefix, paths, refresh, report) {
   const cache = await caches.open(LIBRARY);
   let ok = 0;
   let failed = 0;
   let done = 0;
   for (const path of paths) {
-    const url = SCOPE_PATH + path;
+    const url = SCOPE_PATH + prefix + path;
     try {
       if (!refresh && (await cache.match(url))) {
         ok += 1;
@@ -471,11 +506,11 @@ async function addToLibrary(paths, refresh, report) {
   return { ok: ok, failed: failed };
 }
 
-async function removeFromLibrary(paths) {
+async function removeFromLibrary(prefix, paths) {
   const cache = await caches.open(LIBRARY);
   let removed = 0;
   for (const path of paths) {
-    if (await cache.delete(SCOPE_PATH + path)) removed += 1;
+    if (await cache.delete(SCOPE_PATH + prefix + path)) removed += 1;
   }
   return { removed: removed };
 }
@@ -496,13 +531,13 @@ async function handleLibraryMessage(data, port) {
   const reply = (message) => port.postMessage(message);
 
   if (data.type === "OFFLINE_STATUS") {
-    const prefix = typeof data.url === "string" ? langPrefixOf(new URL(data.url)) : "";
+    const prefix = messagePrefix(data);
     reply({
       type: "status",
-      saved: await libraryEntries(),
+      saved: await libraryEntries(prefix),
       // 網站預設存的那批，管理頁用它標出「已經在裝置上、不必再勾」的頁面。
       // 只回頁面，app shell 與作品本體不是讀者會勾的東西，混進去只會讓數字虛胖。
-      precached: prefix === null ? [] : CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH,
+      precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
       estimate: navigator.storage && navigator.storage.estimate
         ? await navigator.storage.estimate()
@@ -512,13 +547,15 @@ async function handleLibraryMessage(data, port) {
   }
 
   if (data.type === "OFFLINE_ADD" && Array.isArray(data.paths)) {
-    const result = await addToLibrary(data.paths, data.refresh === true, reply);
+    const result = await addToLibrary(
+      messagePrefix(data), data.paths, data.refresh === true, reply
+    );
     reply({ type: "done", ok: result.ok, failed: result.failed });
     return;
   }
 
   if (data.type === "OFFLINE_REMOVE" && Array.isArray(data.paths)) {
-    const result = await removeFromLibrary(data.paths);
+    const result = await removeFromLibrary(messagePrefix(data), data.paths);
     reply({ type: "done", removed: result.removed });
     return;
   }

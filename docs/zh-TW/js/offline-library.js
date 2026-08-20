@@ -75,15 +75,22 @@
     #offline-library .ol-count { font-variant-numeric: tabular-nums; opacity: .85; }
     #offline-library .ol-body { padding: 0 0 .8rem 1.3rem; }
     #offline-library .ol-pages { list-style: none; margin: .5rem 0 0; padding: 0; }
-    #offline-library .ol-pages li { margin: 0 0 .25rem; }
-    #offline-library .ol-pages label {
-      display: flex; align-items: baseline; gap: .4rem; cursor: pointer;
+    #offline-library .ol-pages li {
+      display: flex; align-items: baseline; gap: .4rem; margin: 0 0 .25rem;
     }
-    #offline-library .ol-pages input { flex: none; }
+    /* 勾選框的觸控範圍。撐開之後用負 margin 收回，免得每一列都變高 */
+    #offline-library .ol-pick {
+      flex: none; display: inline-flex; align-items: center;
+      padding: .35rem .25rem; margin: -.35rem 0; cursor: pointer;
+    }
+    #offline-library .ol-pages input { flex: none; margin: 0; }
     #offline-library .ol-title {
       flex: 1 1 auto; min-width: 0;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    /* 還沒存下來的。連結留著，線上時點得開，視覺上退一階 */
+    #offline-library .ol-title--absent { color: inherit; opacity: .55; }
+    #offline-library .ol-filter { display: block; cursor: pointer; margin: 1.4rem 0 .2rem; }
     #offline-library .ol-danger {
       border-color: var(--md-typeset-del-color, #f44336);
       color: #c62828;
@@ -178,6 +185,9 @@
       pages: "{n} 頁",
       overview: "總覽",
       badgeAuto: "網站已存",
+      onlyStored: "只列已經存下來的",
+      onlyStoredEmpty: "這個語言目前沒有存下任何頁面。",
+      notStored: "還沒存到這台裝置，沒有網路時打不開",
       progress: "{done} / {total}",
     },
     zh: {
@@ -211,6 +221,9 @@
       pages: "{n} 页",
       overview: "总览",
       badgeAuto: "网站已存",
+      onlyStored: "只列已经存下来的",
+      onlyStoredEmpty: "这个语言目前没有存下任何页面。",
+      notStored: "还没存到这台设备，没有网络时打不开",
       progress: "{done} / {total}",
     },
     en: {
@@ -244,6 +257,9 @@
       pages: "{n} pages",
       overview: "Overview",
       badgeAuto: "stored by the site",
+      onlyStored: "Only show what is stored",
+      onlyStoredEmpty: "Nothing is stored for this language yet.",
+      notStored: "Not on this device yet, so it will not open without a network",
       progress: "{done} / {total}",
     },
   };
@@ -356,6 +372,8 @@
     remove: new Set(),
     // 展開中的章節。勾一個項目就整頁重畫，沒記著的話會全部收合回去
     open: new Set(),
+    // 只列已經存下來的頁面。斷網進來時預設打開，見下方 applyOfflineDefault。
+    onlyStored: false,
     // 「清除所有離線內容」按過第一次了沒。這個要跨重繪保留，不然按下去整頁一畫
     // 就退回未確認的樣子，讀者會以為沒作用。
     armedClear: false,
@@ -431,8 +449,13 @@
     return status;
   }
 
-  function renderSection(section, label) {
-    const stored = section.pages.filter((page) => isStored(page.url)).length;
+  // 索引裡的網址相對於該語系的建置根目錄，管理頁自己在那個根目錄的 offline/ 底下，
+  // 所以往上一層。跟 indexUrl 同一個算法。
+  const pageHref = (url) => new URL("../" + url, location.href).href;
+
+  function renderSection(section, label, pages) {
+    const stored = pages.filter((page) => isStored(page.url)).length;
+    const bytes = pages.reduce((total, page) => total + page.bytes, 0);
     const wrapper = el("div", "ol-section");
     const open = state.open.has(section.key);
 
@@ -447,28 +470,36 @@
     toggle.appendChild(el("span", "ol-mark", open ? "▾" : "▸"));
     toggle.appendChild(el("span", "ol-name", label));
     toggle.appendChild(
-      el("span", "ol-meta", fill("pages", { n: section.pages.length }) + "・" + size(section.bytes))
+      el("span", "ol-meta", fill("pages", { n: pages.length }) + "・" + size(bytes))
     );
-    toggle.appendChild(el("span", "ol-count", stored + " / " + section.pages.length));
+    toggle.appendChild(el("span", "ol-count", stored + " / " + pages.length));
     wrapper.appendChild(toggle);
 
     if (!open) return wrapper;
 
     const body = el("div", "ol-body");
-    if (!state.swMissing) {
+    // 整章都是網站自動存的那批時不畫這顆。那些頁的勾選框本來就停用，按下去什麼
+    // 都不會變，只是多一顆按不動的東西。斷網進來時篩選預設打開，看到的多半正好
+    // 是這種章節。
+    const pickable = pages.some((page) => !state.precached.has(page.url));
+    if (!state.swMissing && pickable) {
       body.appendChild(
         button(t.selectAll, null, () => {
-        const wanted = section.pages.some((page) => !willBeStored(page.url));
-          for (const page of section.pages) setWanted(page.url, wanted);
+          const wanted = pages.some((page) => !willBeStored(page.url));
+          for (const page of pages) setWanted(page.url, wanted);
           render();
         })
       );
     }
 
     const list = el("ul", "ol-pages");
-    for (const page of section.pages) {
+    for (const page of pages) {
       const item = document.createElement("li");
-      const label = document.createElement("label");
+
+      // 勾選框自己一塊。原本整列是一個 label，點文字就切換勾選，那時候標題還只是
+      // 一段文字。標題改成連結之後兩個動作會打架，所以把可點的範圍分開：這一塊
+      // 管勾選，標題管開頁。外圍的 padding 是給手指的，勾選框本身在手機上太小。
+      const pick = el("label", "ol-pick");
       const box = document.createElement("input");
       box.type = "checkbox";
       box.checked = willBeStored(page.url);
@@ -478,13 +509,22 @@
         setWanted(page.url, box.checked);
         render();
       });
-      label.appendChild(box);
-      label.appendChild(el("span", "ol-title", page.title));
-      label.appendChild(el("span", "ol-size", size(page.bytes)));
+      pick.appendChild(box);
+      item.appendChild(pick);
+
+      // 標題是連結。這一頁是斷網時的落腳處，讀者到這裡最想做的就是找一篇現在讀得到
+      // 的，而原本整份清單一頁都點不開，只能回首頁自己碰運氣。已存的照一般連結畫，
+      // 沒存的淡一階並在 title 上註明，離線時點下去只會被帶回這一頁。
+      const inCache = isStored(page.url);
+      const title = el("a", inCache ? "ol-title" : "ol-title ol-title--absent", page.title);
+      title.href = pageHref(page.url);
+      if (!inCache) title.title = t.notStored;
+      item.appendChild(title);
+
+      item.appendChild(el("span", "ol-size", size(page.bytes)));
       if (state.precached.has(page.url)) {
-        label.appendChild(el("span", "ol-badge", t.badgeAuto));
+        item.appendChild(el("span", "ol-badge", t.badgeAuto));
       }
-      item.appendChild(label);
       list.appendChild(item);
     }
     body.appendChild(list);
@@ -501,12 +541,12 @@
           Promise.resolve()
             .then(() =>
               toRemove.length
-                ? ask({ type: "OFFLINE_REMOVE", paths: toRemove })
+                ? ask({ type: "OFFLINE_REMOVE", url: location.href, paths: toRemove })
                 : { removed: 0 }
             )
             .then((removeResult) =>
               (toAdd.length
-                ? ask({ type: "OFFLINE_ADD", paths: toAdd }, report)
+                ? ask({ type: "OFFLINE_ADD", url: location.href, paths: toAdd }, report)
                 : Promise.resolve({ ok: 0, failed: 0 })
               ).then((addResult) => ({
                 message:
@@ -558,6 +598,7 @@
     root.appendChild(renderActions());
     if (state.task) root.appendChild(renderProgress());
 
+    if (state.index && state.swReady) root.appendChild(renderFilter());
     renderSections();
     if (state.add.size || state.remove.size) root.appendChild(renderApply());
   }
@@ -570,7 +611,15 @@
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
     const refresh = button(t.refresh, null, () =>
       runTask(t.refreshing, Array.from(state.saved).length, (report) =>
-        ask({ type: "OFFLINE_ADD", paths: Array.from(state.saved), refresh: true }, report)
+        ask(
+          {
+            type: "OFFLINE_ADD",
+            url: location.href,
+            paths: Array.from(state.saved),
+            refresh: true,
+          },
+          report
+        )
       )
     );
     refresh.disabled = state.busy || state.saved.size === 0;
@@ -606,6 +655,20 @@
     return wrap;
   }
 
+  function renderFilter() {
+    const label = el("label", "ol-filter");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = state.onlyStored;
+    box.addEventListener("change", () => {
+      setOnlyStored(box.checked);
+      render();
+    });
+    label.appendChild(box);
+    label.appendChild(document.createTextNode(" " + t.onlyStored));
+    return label;
+  }
+
   function renderProgress() {
     const wrap = el("div", "ol-progress");
     const track = el("div", "ol-progress__track");
@@ -639,16 +702,26 @@
     // 照 offline-index.json 給的順序，那是 nav 的順序，不另外排。原本按頁數排，
     // 結果是「近期公告」七十篇擺最上面、指南的章節散在中間，跟讀者在側邊欄記得的
     // 位置完全對不上，一打開不知道從何看起。
-    const sections = state.index.sections;
+    //
+    // 篩選開著時整章都沒東西的就不畫，連帶頂層標題的計數也要照篩過的算，否則會
+    // 留下一個底下什麼都沒有的章節名。
+    const sections = state.index.sections
+      .map((section) => ({ section: section, pages: visiblePages(section) }))
+      .filter((entry) => entry.pages.length);
+    if (!sections.length) {
+      root.appendChild(el("p", null, state.onlyStored ? t.onlyStoredEmpty : t.noIndex));
+      return;
+    }
     const perGroup = {};
-    for (const section of sections) {
-      const group = section.group || "";
+    for (const entry of sections) {
+      const group = entry.section.group || "";
       perGroup[group] = (perGroup[group] || 0) + 1;
     }
 
     let lastGroup = null;
     let first = true;
-    for (const section of sections) {
+    for (const entry of sections) {
+      const section = entry.section;
       const group = section.group || "";
       const changed = group !== lastGroup;
       // 一個頂層章節底下只有一組時不另外掛標題，兩行寫同一個名字沒有意義
@@ -660,13 +733,29 @@
         titled && section.title === group && section.pages.length === 1
           ? t.overview
           : section.title;
-      const node = renderSection(section, label);
+      const node = renderSection(section, label, entry.pages);
       // 沒有標題可以分隔時改用留白，不然它會看起來像上一組的最後一項
       if (changed && !titled && !first) node.classList.add("ol-section--gap");
       root.appendChild(node);
 
       lastGroup = group;
       first = false;
+    }
+  }
+
+  function visiblePages(section) {
+    if (!state.onlyStored) return section.pages;
+    return section.pages.filter((page) => isStored(page.url));
+  }
+
+  // 切換「只列已存的」。開的時候順手把有東西的章節展開，斷網的讀者要的就是一份
+  // 攤開來、現在讀得到的清單，還要一章一章點開找就失去意義了。
+  function setOnlyStored(on) {
+    state.onlyStored = on;
+    state.open.clear();
+    if (!on || !state.index) return;
+    for (const section of state.index.sections) {
+      if (visiblePages(section).length) state.open.add(section.key);
     }
   }
 
@@ -717,6 +806,9 @@
     .catch(() => null)
     .then((index) => {
       state.index = index;
+      // 索引跟 service worker 那半是各跑各的，誰先到都有可能。篩選先開起來的話
+      // 那時還沒有章節可以展開，索引到了補做一次。
+      if (state.onlyStored) setOnlyStored(true);
       render();
     });
 
@@ -724,6 +816,10 @@
     .then(refreshStatus)
     .then(() => {
       state.swReady = true;
+      // 斷網進來的讀者是被 service worker 帶到這一頁的，他要找的是現在還讀得到的
+      // 東西。navigator.onLine 回 false 時是可信的（回 true 才不可信），拿來決定
+      // 預設值剛好。讀者隨時可以自己關掉。
+      if (navigator.onLine === false) setOnlyStored(true);
       render();
     })
     .catch(() => {
