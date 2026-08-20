@@ -8,7 +8,7 @@ hide:
 
 # :material-wifi-off: Offline reading
 
-If you were brought here because there is no network connection, the page you wanted has not been stored on this device yet. Pages you visited before are still readable, so go back or start from the [home page](index.md).
+If you were brought here because there is no network connection, the page you wanted has not been stored on this device yet. The list below shows what is still readable on this device, and the titles open. Without a network the list hides what was never stored, leaving only what you can read now.
 
 This page is also where offline content is managed. Below you can see what is currently stored on the device, pick what to keep, or clear all of it.
 

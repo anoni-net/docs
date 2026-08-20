@@ -118,9 +118,11 @@ const harness = `
   ${grab(/^const AUTO_PRECACHE_URL = .*$/m)}
   ${grab(/^async function autoPrecacheEnabled\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function setAutoPrecache\(enabled\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function libraryEntries\(\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function addToLibrary\(paths, refresh, report\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function removeFromLibrary\(paths\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function messagePrefix\(data\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function libraryEntries\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function precachedEntries\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function addToLibrary\(prefix, paths, refresh, report\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function removeFromLibrary\(prefix, paths\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function clearAllOffline\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function handleLibraryMessage\(data, port\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const RUNTIME_PAGES = .*$/m)}
@@ -138,8 +140,9 @@ const harness = `
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, precacheFor, guessLangPrefix,
-    autoPrecacheEnabled, setAutoPrecache, libraryEntries, addToLibrary,
-    removeFromLibrary, clearAllOffline, handleLibraryMessage, networkFirst,
+    autoPrecacheEnabled, setAutoPrecache, libraryEntries, precachedEntries,
+    messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
+    handleLibraryMessage, networkFirst,
   };
 `;
 
@@ -402,10 +405,10 @@ test('自動預快取預設開著，關掉之後記得住', async (load) => {
 
 test('讀者勾選的頁面存進 library，回相對路徑', async (load) => {
   const { sw, caches, fetched } = load();
-  await sw.addToLibrary(['scenarios/journalist/', 'scenarios/activist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/', 'scenarios/activist/'], false, () => {});
 
   assert.deepEqual(fetched, ['/docs/scenarios/journalist/', '/docs/scenarios/activist/']);
-  assert.deepEqual((await sw.libraryEntries()).sort(), [
+  assert.deepEqual((await sw.libraryEntries('')).sort(), [
     'scenarios/activist/',
     'scenarios/journalist/',
   ]);
@@ -416,42 +419,108 @@ test('讀者勾選的頁面存進 library，回相對路徑', async (load) => {
 
 test('已經存過的不重抓，refresh 才強制重來', async (load) => {
   const { sw, fetched } = load();
-  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
   fetched.length = 0;
 
-  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
   assert.deepEqual(fetched, []);
 
-  await sw.addToLibrary(['scenarios/journalist/'], true, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], true, () => {});
   assert.deepEqual(fetched, ['/docs/scenarios/journalist/']);
 });
 
 test('下載過程逐頁回報進度', async (load) => {
   const { sw } = load();
   const seen = [];
-  await sw.addToLibrary(['a/', 'b/', 'c/'], false, (data) => seen.push(data.done));
+  await sw.addToLibrary('', ['a/', 'b/', 'c/'], false, (data) => seen.push(data.done));
   // 整批可能要好幾分鐘，沒有進度讀者只會看到一個不動的按鈕
   assert.deepEqual(seen, [1, 2, 3]);
 });
 
 test('移除只動 library，數得出移掉幾頁', async (load) => {
   const { sw } = load();
-  await sw.addToLibrary(['a/', 'b/'], false, () => {});
-  const result = await sw.removeFromLibrary(['a/', 'never-stored/']);
+  await sw.addToLibrary('', ['a/', 'b/'], false, () => {});
+  const result = await sw.removeFromLibrary('', ['a/', 'never-stored/']);
   assert.equal(result.removed, 1);
-  assert.deepEqual(await sw.libraryEntries(), ['b/']);
+  assert.deepEqual(await sw.libraryEntries(''), ['b/']);
+});
+
+test('en 讀者勾的頁面存進 en 的路徑，不是 zh-TW 那一版', async (load) => {
+  // offline-index.json 的網址相對於各語系自己的建置根目錄，en 版寫的是
+  // scenarios/journalist/ 而不是 en/scenarios/journalist/。三個語系共用同一個 scope，
+  // 前綴沒補回去的話 en 讀者勾一頁下來存到的是 zh-TW 那一版，離線時導覽到
+  // /docs/en/scenarios/journalist/ 依然落空，而管理頁上那一列還顯示已存。
+  const { sw, caches } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/en/offline/',
+      paths: ['scenarios/journalist/'],
+    },
+    { postMessage: () => {} }
+  );
+
+  const library = await caches.open(sw.LIBRARY);
+  assert.ok(await library.match('/docs/en/scenarios/journalist/'));
+  assert.equal(await library.match('/docs/scenarios/journalist/'), undefined);
+});
+
+test('狀態只回當下語系存的，別的語系不混進來', async (load) => {
+  const { sw } = load();
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('en/', ['scenarios/activist/'], false, () => {});
+
+  assert.deepEqual(await sw.libraryEntries(''), ['scenarios/journalist/']);
+  assert.deepEqual(await sw.libraryEntries('en/'), ['scenarios/activist/']);
+});
+
+test('移除也照語系走，不會誤刪另一個語系的同名頁', async (load) => {
+  const { sw } = load();
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('en/', ['scenarios/journalist/'], false, () => {});
+
+  assert.equal((await sw.removeFromLibrary('en/', ['scenarios/journalist/'])).removed, 1);
+  assert.deepEqual(await sw.libraryEntries(''), ['scenarios/journalist/']);
+  assert.deepEqual(await sw.libraryEntries('en/'), []);
+});
+
+test('網站自動存的回實際在裝置上的，不是那份硬編清單', async (load) => {
+  // 原本直接回 CORE_PAGES_BY_PREFIX，那是「打算要下載的」。讀者關掉自動下載或按過
+  // 清除之後，管理頁照樣顯示幾十頁已存，而且那些頁的勾選框是停用的，想自己補存
+  // 也按不動。管理頁把這份清單當成「哪些頁點得開」用，謊報就是給出打不開的連結。
+  const { sw } = load();
+  await sw.setAutoPrecache(false);
+  await sw.precacheFor('');
+
+  const essential = await sw.precachedEntries('');
+  assert.ok(essential.includes('offline/'));
+  assert.ok(!essential.includes('tools/what-is-tor/'));
+
+  await sw.setAutoPrecache(true);
+  await sw.precacheFor('');
+  assert.ok((await sw.precachedEntries('')).includes('tools/what-is-tor/'));
+});
+
+test('舊版管理頁不帶網址時退回根路徑，zh-TW 讀者不受影響', async (load) => {
+  // 管理頁的 js 是預快取的一部分，讀者按下更新之前用的還是舊版，那一版只有
+  // OFFLINE_STATUS 帶網址。收不到就當根路徑，跟補這段之前的行為一樣。
+  const { sw } = load();
+  assert.equal(sw.messagePrefix({ type: 'OFFLINE_ADD', paths: [] }), '');
+  assert.equal(sw.messagePrefix({ url: 'https://anoni.net/docs/offline/' }), '');
+  assert.equal(sw.messagePrefix({ url: 'https://anoni.net/docs/en/offline/' }), 'en/');
+  assert.equal(sw.messagePrefix({ url: 'https://anoni.net/docs/zh-cn/offline/' }), 'zh-cn/');
 });
 
 test('清除會清光所有快取，並把自動預快取關掉', async (load) => {
   const { sw, caches } = load();
   await sw.precacheFor('');
-  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
   const pages = await caches.open(sw.RUNTIME_PAGES);
   await pages.put('/docs/basics/metadata/', 'VISITED');
 
   await sw.clearAllOffline();
 
-  assert.deepEqual(await sw.libraryEntries(), []);
+  assert.deepEqual(await sw.libraryEntries(''), []);
   assert.equal((await (await caches.open(sw.PRECACHE)).keys()).length, 0);
   assert.equal((await (await caches.open(sw.RUNTIME_PAGES)).keys()).length, 0);
   // 按這顆的人多半是因為裝置可能被檢查。下次導覽又自動下載回來的話這顆等於沒作用
@@ -498,9 +567,10 @@ test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
   assert.equal((await sw.networkFirst(req('/docs/basics/metadata/'), null)).url, '/docs/offline/');
 });
 
-test('狀態查詢回得出已存的、站台存的與空間用量', async (load) => {
+test('狀態查詢回得出已存的、網站存的與空間用量', async (load) => {
   const { sw } = load();
-  await sw.addToLibrary(['scenarios/journalist/'], false, () => {});
+  await sw.precacheFor('');
+  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
 
   const replies = [];
   await sw.handleLibraryMessage(
@@ -512,7 +582,7 @@ test('狀態查詢回得出已存的、站台存的與空間用量', async (load
   const status = replies[0];
   assert.equal(status.type, 'status');
   assert.deepEqual(status.saved, ['scenarios/journalist/']);
-  // 站台預設存的只回頁面，app shell 與作品本體混進去只會讓數字虛胖
+  // 網站預設存的只回頁面，app shell 與作品本體混進去只會讓數字虛胖
   assert.ok(status.precached.includes('tools/what-is-tor/'));
   assert.ok(!status.precached.some((path) => path.startsWith('assets/')));
   assert.ok(!status.precached.some((path) => path.startsWith('games/onion-routing/')));
@@ -522,6 +592,7 @@ test('狀態查詢回得出已存的、站台存的與空間用量', async (load
 
 test('狀態查詢依網址挑對語系的預設清單', async (load) => {
   const { sw } = load();
+  await sw.precacheFor('en/');
   const replies = [];
   await sw.handleLibraryMessage(
     { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/en/offline/' },
