@@ -144,11 +144,19 @@
     }
     #offline-library .ol-apply {
       position: sticky; bottom: 0; z-index: 1;
-      display: flex; align-items: center; flex-wrap: wrap; gap: .6rem;
       background: var(--md-default-bg-color);
       border-top: .05rem solid var(--md-default-fg-color--lighter);
       margin: 0; padding: .7rem 0;
+      /* 清除完成那則訊息有好幾行，不讓它吃掉整個畫面 */
+      max-height: 45vh; overflow-y: auto;
     }
+    #offline-library .ol-apply__row {
+      display: flex; align-items: center; flex-wrap: wrap; gap: .6rem;
+    }
+    /* 進度條與訊息本來在文件流裡各自留了外距，進到這條就不需要了 */
+    #offline-library .ol-apply .ol-progress,
+    #offline-library .ol-apply .ol-message { margin: 0; }
+    #offline-library .ol-apply .ol-apply__row + .ol-message { margin-top: .6rem; }
   `;
   const style = document.createElement("style");
   style.textContent = CSS;
@@ -536,8 +544,23 @@
     return wrapper;
   }
 
+  // 底部那條。套用按鈕、進度條與完成訊息都放這裡，因為它 sticky 在畫面下緣，
+  // 一定在視野內。原本進度與訊息畫在頁面頂端，而讀者按下套用時人在清單中段甚至
+  // 更下面，按完畫面上什麼都沒發生，只能猜它到底有沒有在跑。
+  function renderDock(message) {
+    const dock = el("div", "ol-apply");
+
+    if (state.task) {
+      dock.appendChild(renderProgress());
+    } else if (state.add.size || state.remove.size) {
+      dock.appendChild(renderApply());
+    }
+    if (message) dock.appendChild(el("p", "ol-message", message));
+    return dock;
+  }
+
   function renderApply() {
-    const bar = el("p", "ol-apply");
+    const bar = el("div", "ol-apply__row");
     const applyButton = button(t.apply, "ol-primary", () => {
         const toAdd = Array.from(state.add);
         const toRemove = Array.from(state.remove);
@@ -575,13 +598,6 @@
   function render(message) {
     root.textContent = "";
     root.appendChild(renderStatus());
-    if (message) {
-      const line = el("p", "ol-message", message);
-      root.appendChild(line);
-      // 捲過去看一眼。訊息在狀態列下面，讀者按完按鈕時往往人在清單中段，
-      // 訊息靜靜出現在畫面外，就會覺得按了沒事發生。
-      if (line.scrollIntoView) line.scrollIntoView({ block: "nearest" });
-    }
 
     if (state.swMissing) return renderSections();
 
@@ -600,14 +616,15 @@
     root.appendChild(el("p", "ol-hint", t.autoHint));
 
     root.appendChild(renderActions());
-    if (state.task) root.appendChild(renderProgress());
 
     if (state.index && state.swReady) {
       root.appendChild(renderFilter());
       root.appendChild(el("p", "ol-hint ol-legend", t.legend));
     }
     renderSections();
-    if (state.add.size || state.remove.size) root.appendChild(renderApply());
+    if (state.task || message || state.add.size || state.remove.size) {
+      root.appendChild(renderDock(message));
+    }
   }
 
   function renderActions() {

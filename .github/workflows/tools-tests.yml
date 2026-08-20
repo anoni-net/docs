@@ -7,6 +7,8 @@
 #     離線提示頁一起清掉，之後任何沒快取的網址在離線時都掉到瀏覽器的錯誤畫面
 #   - 預快取清單與索引頁連出去的網址形狀對不上，線上一切正常，只有離線的人打不開
 #   - 離線內容管理頁的分組與排序改動，錯了是整份清單跟側邊欄對不起來
+#   - 離線內容管理頁的介面畫錯，讀者按了沒反應或看不到回應。2026-08-20 改那一頁的
+#     sticky 版面時 CI 一個都沒跑，paths 漏了 js/offline-library.js
 #   - 部署後要清哪些網址，漏清是訪客看到舊內容，多清是波及 zone 內其他服務
 #
 # tools/test_docs_style_lint.py 不在這裡，它由 docs-style-lint.yml 跑，那支 workflow
@@ -18,6 +20,7 @@ on:
     paths:
       - "tools/**"
       - "docs/zh-TW/sw.js"
+      - "docs/zh-TW/js/offline-library.js"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
       - ".github/workflows/tools-tests.yml"
@@ -53,6 +56,10 @@ jobs:
       # 離線內容管理頁的章節分組與排序，照 nav 而不是檔案的字母序
       - name: 離線內容索引
         run: python3 tools/test_offline_index.py
+
+      # 離線內容管理頁的介面：畫出來的結構、順序、連結，以及送給 SW 的指令
+      - name: 離線內容管理頁介面
+        run: node tools/test_offline_library.mjs
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
