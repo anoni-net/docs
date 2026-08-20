@@ -411,10 +411,22 @@
 
           // 換版提示的文案。document.documentElement.lang 在 zh-CN 版是 "zh"
           // （mkdocs_cn.yml 的 theme.language），對不到 zh-CN 這個代碼。
+          // 「有新版本」對讀者來說資訊不完整：他線上看到的一直都是最新內容，會變舊的
+          // 是裝置上那份離線副本。而按下更新會重新載入這一頁，正在讀的位置就沒了，
+          // 那是唯一會讓人意外的地方，寫在卡片上。
           var STRINGS = {
-            "zh-TW": { text: "網站內容有新版本。", update: "立即更新", later: "稍後" },
-            "zh": { text: "网站内容有新版本。", update: "立即更新", later: "稍后" },
-            "en": { text: "A new version of this site is available.", update: "Update", later: "Later" }
+            "zh-TW": {
+              text: "離線存的內容有新版本。更新會重新載入這一頁。",
+              update: "更新", later: "稍後"
+            },
+            "zh": {
+              text: "离线存的内容有新版本。更新会重新加载这一页。",
+              update: "更新", later: "稍后"
+            },
+            "en": {
+              text: "A newer version is available for offline reading. Updating reloads this page.",
+              update: "Update", later: "Later"
+            }
           };
           var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
           var DISMISS_KEY = "anoni-docs-update-dismissed";
@@ -477,7 +489,21 @@
             // lang 屬性是 "zh" 這件事。
             navigator.serviceWorker.ready.then(function (ready) {
               if (ready.active) {
-                ready.active.postMessage({ type: "PRECACHE_LANG", url: location.href });
+                // 讀者選過閱讀語言了沒。service worker 讀不到 localStorage，這件事
+                // 只有這裡說得出來，而它決定了要現在下整個語系還是先等一等。key 跟
+                // 下面那段語言偏好的 PREF_KEY 是同一個，兩段是各自獨立的 IIFE，
+                // 改動時要一起改。
+                var settled = false;
+                try {
+                  settled = !!localStorage.getItem("anoni-docs-lang");
+                } catch (err) {
+                  // 隱私模式或擋掉 storage 的環境讀不到，當作還沒選
+                }
+                ready.active.postMessage({
+                  type: "PRECACHE_LANG",
+                  url: location.href,
+                  settled: settled,
+                });
               }
             });
 
@@ -507,6 +533,10 @@
       <script>
         (function () {
           var PREF_KEY = "anoni-docs-lang";
+          // 問過了沒。存 localStorage 而不是 sessionStorage：standalone 的 PWA 每次
+          // 啟動都是新的 session，start_url 又是首頁，按過「稍後」的讀者每開一次 app
+          // 就被問一次。按下那顆是一個決定，記著它。想改語言的話 header 上的切換器
+          // 一直都在，切過去就會寫下偏好。
           var ASKED_KEY = "anoni-docs-lang-asked";
           var IS_HOME = {{ 'true' if page and page.is_homepage else 'false' }};
           {#
@@ -598,7 +628,7 @@
 
           if (!IS_HOME || pref) return;
           try {
-            if (sessionStorage.getItem(ASKED_KEY)) return;
+            if (localStorage.getItem(ASKED_KEY)) return;
           } catch (err) {
             // 讀不到就照常問
           }
@@ -639,7 +669,7 @@
 
           actions.appendChild(action(t.later, function () {
             try {
-              sessionStorage.setItem(ASKED_KEY, "1");
+              localStorage.setItem(ASKED_KEY, "1");
             } catch (err) {
               // 記不住就下次再問
             }

@@ -51,7 +51,7 @@ What that button does not cover: browsing history, DNS cache, and files you down
 
 ## When the site has a new version
 
-When a new version of the site is available, a notice appears at the top of the page, and it is applied only after you press Update. This keeps the content from being swapped out while you are reading. Ignoring the notice is fine: browsing online always gives you the latest content, and the offline copy on your device stays as it is until you press Update.
+When a new version of the site is available, a notice slides up from the bottom of the screen, and it is applied only after you press Update, which reloads the page you are on. This keeps the content from being swapped out while you are reading. Ignoring the notice is fine: browsing online always gives you the latest content, and the offline copy on your device stays as it is until you press Update.
 
 ## Things to try
 

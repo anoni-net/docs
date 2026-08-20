@@ -91,6 +91,7 @@
     /* 還沒存下來的。連結留著，線上時點得開，視覺上退一階 */
     #offline-library .ol-title--absent { color: inherit; opacity: .55; }
     #offline-library .ol-filter { display: block; cursor: pointer; margin: 1.4rem 0 .2rem; }
+    #offline-library .ol-legend { margin-bottom: .4rem; }
     #offline-library .ol-danger {
       border-color: var(--md-typeset-del-color, #f44336);
       color: #c62828;
@@ -186,6 +187,7 @@
       overview: "總覽",
       badgeAuto: "網站已存",
       onlyStored: "只列已經存下來的",
+      legend: "淡色的標題還沒存到這台裝置，沒有網路時打不開。勾選框是灰的表示那一頁由上面的開關統一管，不用個別勾。",
       onlyStoredEmpty: "這個語言目前沒有存下任何頁面。",
       notStored: "還沒存到這台裝置，沒有網路時打不開",
       progress: "{done} / {total}",
@@ -222,6 +224,7 @@
       overview: "总览",
       badgeAuto: "网站已存",
       onlyStored: "只列已经存下来的",
+      legend: "淡色的标题还没存到这台设备，没有网络时打不开。勾选框是灰的表示那一页由上面的开关统一管，不用个别勾。",
       onlyStoredEmpty: "这个语言目前没有存下任何页面。",
       notStored: "还没存到这台设备，没有网络时打不开",
       progress: "{done} / {total}",
@@ -258,6 +261,7 @@
       overview: "Overview",
       badgeAuto: "stored by the site",
       onlyStored: "Only show what is stored",
+      legend: "Faded titles are not on this device yet and will not open without a network. A greyed-out checkbox means the toggle above covers that page, so you do not need to tick it.",
       onlyStoredEmpty: "Nothing is stored for this language yet.",
       notStored: "Not on this device yet, so it will not open without a network",
       progress: "{done} / {total}",
@@ -598,7 +602,10 @@
     root.appendChild(renderActions());
     if (state.task) root.appendChild(renderProgress());
 
-    if (state.index && state.swReady) root.appendChild(renderFilter());
+    if (state.index && state.swReady) {
+      root.appendChild(renderFilter());
+      root.appendChild(el("p", "ol-hint ol-legend", t.legend));
+    }
     renderSections();
     if (state.add.size || state.remove.size) root.appendChild(renderApply());
   }
