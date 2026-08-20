@@ -755,9 +755,16 @@ async function trimCache(cacheName, maxEntries) {
   }
 }
 
+// 導覽請求等網路多久，超過就先給裝置上那一份。
+//
+// 完全斷線時 fetch 立刻就失敗，這個值用不到。它是為了「連得上但很慢」與「連線被
+// 干擾」那種狀態：讀者手上明明有離線副本，卻要陪著瀏覽器一路等到它自己放棄，
+// 而那種網路正是這個網站的讀者比別人更常遇到的。
+const NAVIGATE_TIMEOUT_MS = 3000;
+
 async function networkFirst(request, event) {
-  try {
-    const response = await fetch(request);
+  // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取
+  const network = fetch(request).then(async (response) => {
     if (response.ok) {
       const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
@@ -767,13 +774,31 @@ async function networkFirst(request, event) {
       keepAlive(event, trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES));
     }
     return response;
-  } catch (err) {
-    const cached = await matchCachedPage(request);
-    if (cached) return cached;
-    const offline = await caches.match(offlinePathFor(new URL(request.url)));
-    if (offline) return offline;
-    throw err;
+  });
+
+  const cached = await matchCachedPage(request);
+  if (!cached) {
+    // 裝置上沒有這一頁，等網路是唯一的選擇，慢也要等
+    try {
+      return await network;
+    } catch (err) {
+      const offline = await caches.match(offlinePathFor(new URL(request.url)));
+      if (offline) return offline;
+      throw err;
+    }
   }
+
+  // 有副本就跟網路賽跑。網路先到就用網路的，讀者拿到的是最新內容。
+  const raced = await Promise.race([
+    network.catch(() => null),
+    new Promise((resolve) => setTimeout(() => resolve(null), NAVIGATE_TIMEOUT_MS)),
+  ]);
+  if (raced) return raced;
+
+  // 網路太慢或失敗，先給讀者看得到的那一份。網路那邊還在跑，回來時照樣寫進快取，
+  // 下一次導覽拿到的就是新的。SW 要活到那時候，所以掛在 waitUntil 上。
+  keepAlive(event, network.catch(() => {}));
+  return cached;
 }
 
 async function staleWhileRevalidate(request, event) {

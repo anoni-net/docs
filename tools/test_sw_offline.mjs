@@ -140,6 +140,7 @@ const harness = `
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const NAVIGATE_TIMEOUT_MS = .*$/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   return {
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
@@ -148,7 +149,7 @@ const harness = `
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
-    handleLibraryMessage, networkFirst,
+    handleLibraryMessage, networkFirst, NAVIGATE_TIMEOUT_MS,
   };
 `;
 
@@ -162,10 +163,15 @@ const load = (opts = {}) => {
   const caches = new FakeCacheStorage();
   const fetched = [];
   const net = { offline: !!opts.offline };
-  const fetchStub = async (url) => {
+  // 真的 Response 有 clone()，networkFirst 存快取時會用到
+  const makeResponse = (url, ok) => ({ ok, url, clone: () => makeResponse(url, ok) });
+  const fetchStub = async (input) => {
+    const url = typeof input === 'string' ? input : input.url;
     fetched.push(url);
     if (net.offline) throw new TypeError("Failed to fetch");
-    return { ok: !(opts.notFound || []).includes(url), url };
+    // 「連得上但很慢」。networkFirst 的逾時要比這個短才有得比。
+    if (opts.networkDelay) await new Promise((r) => setTimeout(r, opts.networkDelay));
+    return makeResponse(url, !(opts.notFound || []).includes(url));
   };
   const selfStub = {
     clients: {
@@ -173,9 +179,12 @@ const load = (opts = {}) => {
     },
   };
   const navigatorStub = { storage: { estimate: async () => ({ usage: 1024, quota: 4096 }) } };
-  const sw = new Function('caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', harness)(
-    caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub
-  );
+  // NAVIGATE_TIMEOUT_MS 那個 setTimeout 由外面給。fastTimeout 讓它立刻觸發，
+  // 配上 networkDelay 就能在幾十毫秒內驗完「網路太慢」那條路。
+  const setTimeoutStub = opts.fastTimeout ? (fn) => setTimeout(fn, 0) : setTimeout;
+  const sw = new Function(
+    'caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', 'setTimeout', harness
+  )(caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub, setTimeoutStub);
   return { sw, caches, fetched, net };
 };
 
@@ -685,6 +694,58 @@ test('認不得的指令會回錯誤，不會靜靜沒反應', async (load) => {
   const replies = [];
   await sw.handleLibraryMessage({ type: 'NOPE' }, { postMessage: (d) => replies.push(d) });
   assert.equal(replies[0].type, 'error');
+});
+
+test('網路太慢時先給裝置上那一份，不陪著等到瀏覽器放棄', async (load) => {
+  // 完全斷線時 fetch 立刻失敗，逾時用不到。這條是為了「連得上但很慢」與「連線被
+  // 干擾」那種狀態，而那正是這個網站的讀者比別人更常遇到的網路。
+  const { sw, caches } = load({ networkDelay: 40, fastTimeout: true });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'CACHED');
+});
+
+test('網路來得及就用網路那份，不會拿舊的給讀者', async (load) => {
+  const { sw, caches } = load();
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'STALE');
+
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
+  assert.notEqual(response, 'STALE');
+  assert.equal(response.url, ORIGIN + '/docs/tools/what-is-tor/');
+});
+
+test('先給舊的之後，網路那份回來照樣寫進快取', async (load) => {
+  // 逾時只是不讓讀者等，不是放棄這次更新。下一次導覽要拿到新的。
+  const { sw, caches } = load({ networkDelay: 40, fastTimeout: true });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'CACHED');
+  await new Promise((resolve) => setTimeout(resolve, 120));
+  assert.notEqual(await pages.match('/docs/tools/what-is-tor/'), 'CACHED');
+});
+
+test('逾時之後把網路那條掛在 waitUntil 上，SW 才活得到它回來', async (load) => {
+  // 少了這一步，SW 有機會在網路那份回來之前就被瀏覽器終止，快取永遠停在舊的。
+  const { sw, caches } = load({ networkDelay: 40, fastTimeout: true });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  const kept = [];
+  const event = { waitUntil: (promise) => kept.push(promise) };
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), event), 'CACHED');
+  assert.equal(kept.length, 1);
+  await Promise.all(kept);
+});
+
+test('裝置上沒有的頁面照樣等網路，慢也要等', async (load) => {
+  // 快取裡什麼都沒有時逾時沒有意義，早早放棄只會把讀者丟到離線頁，
+  // 而網路其實只是慢，再等一下就回來了。
+  const { sw } = load({ networkDelay: 40, fastTimeout: true });
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
+  assert.equal(response.url, ORIGIN + '/docs/tools/what-is-tor/');
 });
 
 test('離線時沒快取過的頁面會落到離線頁', async (load) => {
