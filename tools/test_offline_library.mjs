@@ -182,6 +182,7 @@ const makeServiceWorker = (opts) => {
     saved: [...(opts.saved || [])],
     precached: [...(opts.precached || [])],
     autoPrecache: opts.autoPrecache !== false,
+    precacheImages: opts.precacheImages === true,
   };
   const active = {
     postMessage(message, ports) {
@@ -196,6 +197,7 @@ const makeServiceWorker = (opts) => {
             saved: [...state.saved],
             precached: [...state.precached],
             autoPrecache: state.autoPrecache,
+            precacheImages: state.precacheImages,
             estimate: opts.estimate || null,
           });
         } else if (message.type === 'OFFLINE_ADD') {
@@ -210,6 +212,9 @@ const makeServiceWorker = (opts) => {
           const before = state.saved.length;
           state.saved = state.saved.filter((p) => !message.paths.includes(p));
           reply({ type: 'done', removed: before - state.saved.length });
+        } else if (message.type === 'OFFLINE_IMAGES') {
+          state.precacheImages = message.enabled;
+          reply({ type: 'done', precacheImages: message.enabled });
         } else if (message.type === 'OFFLINE_AUTO') {
           state.autoPrecache = message.enabled;
           reply({ type: 'done', autoPrecache: message.enabled });
@@ -217,6 +222,7 @@ const makeServiceWorker = (opts) => {
           state.saved = [];
           state.precached = [];
           state.autoPrecache = false;
+          state.precacheImages = false;
           reply({ type: 'done', cleared: true });
         } else {
           reply({ type: 'error', reason: 'unknown-command' });
@@ -241,6 +247,11 @@ const makeServiceWorker = (opts) => {
 
 const INDEX = {
   lang: 'zh-TW',
+  // 資產大小的全域表，管理頁算「勾這幾頁實際會下載多少」時去重後查它
+  assets: {
+    'img/shared.png': 51200,
+    'img/journalist.png': 51200,
+  },
   sections: [
     {
       key: '|',
@@ -263,10 +274,23 @@ const INDEX = {
       key: '指南|場景',
       title: '場景',
       group: '指南',
-      bytes: 500,
+      bytes: 204800,
+      assetBytes: 102400,
       pages: [
-        { url: 'scenarios/journalist/', title: '記者保護消息來源', bytes: 200 },
-        { url: 'scenarios/activist/', title: '社運行動者的數位準備', bytes: 300 },
+        {
+          url: 'scenarios/journalist/',
+          title: '記者保護消息來源',
+          bytes: 102400,
+          assets: ['img/shared.png', 'img/journalist.png'],
+          assetBytes: 102400,
+        },
+        {
+          url: 'scenarios/activist/',
+          title: '社運行動者的數位準備',
+          bytes: 102400,
+          assets: ['img/shared.png'],
+          assetBytes: 51200,
+        },
       ],
     },
   ],
@@ -453,6 +477,66 @@ test('套用把勾選的頁面送給 service worker，指令帶上這一頁的�
   assert.deepEqual(sw.state.saved.sort(), ['scenarios/activist/', 'scenarios/journalist/']);
 });
 
+test('套用時把那些頁面需要的資產一起送出，去重', async () => {
+  // 只抓 HTML 的話讀者離線打開會缺圖，互動類的頁面連跑都跑不起來
+  const { root, sw } = await load();
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  clickButton(sec, '整章勾選');
+  clickButton(root, '套用變更');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.deepEqual(add.paths.sort(), ['scenarios/activist/', 'scenarios/journalist/']);
+  // 兩頁共用的那張只送一次
+  assert.deepEqual(add.assets.sort(), ['img/journalist.png', 'img/shared.png']);
+});
+
+test('移除頁面時，別頁還要用的資產不送去刪', async () => {
+  // 移掉一篇文章不能把另一篇還在用的圖也刪了，那會變破圖
+  const { root, sw } = await load({
+    saved: ['scenarios/journalist/', 'scenarios/activist/'],
+  });
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  const box = sec.querySelectorAll('input')[0];
+  box.checked = false;
+  box.fire('change');
+  clickButton(root, '套用變更');
+  await tick(30);
+
+  const remove = sw.sent.find((m) => m.type === 'OFFLINE_REMOVE');
+  assert.deepEqual(remove.paths, ['scenarios/journalist/']);
+  assert.deepEqual(remove.assets, ['img/journalist.png']);
+});
+
+test('「更新已存的內容」連資產一起更新', async () => {
+  const { root, sw } = await load({ saved: ['scenarios/journalist/'] });
+  clickButton(root, '更新已存的內容');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD' && m.refresh);
+  assert.deepEqual(add.paths, ['scenarios/journalist/']);
+  assert.deepEqual(add.assets.sort(), ['img/journalist.png', 'img/shared.png']);
+});
+
+test('大小含資產，章節的部分去重', async () => {
+  // 場景章：HTML 兩頁各 100 KB，資產去重後 100 KB，合計 300 KB。
+  // 不去重的話會是 350 KB，讀者以為要下載的比實際多。
+  const { root } = await load();
+  const meta = root
+    .querySelectorAll('.ol-toggle')
+    .find((n) => n.textContent.includes('場景'))
+    .querySelector('.ol-meta');
+  assert.ok(meta.textContent.includes('300 KB'), `章節大小是 ${meta.textContent}`);
+
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  const sizes = sec.querySelectorAll('.ol-size').map((n) => n.textContent);
+  // 個別頁面照自己的算，記者那頁 100 KB 內文加 100 KB 圖
+  assert.deepEqual(sizes, ['200 KB', '150 KB']);
+});
+
 test('進度與完成訊息都在底部那條裡，不是散在頁面頂端', async () => {
   // 那條 sticky 在畫面下緣，而套用按鈕就在上面。進度畫在頁面頂端的話，讀者按完
   // 什麼都看不到。位置本身要靠實機截圖，這裡守的是「它是那條的子節點」。
@@ -531,6 +615,35 @@ test('自動存的開關切下去會送出指令並重讀狀態', async () => {
   assert.ok(cmd);
   assert.equal(cmd.enabled, false);
   assert.equal(root.querySelector('.ol-auto').querySelector('input').checked, false);
+});
+
+test('圖片開關預設關著，切下去會送出指令', async () => {
+  // 核心章節那批圖有七 MB，預設下載的量會多六成，而多數讀者在行動網路上
+  const { root, sw } = await load({ precached: ['basics/'] });
+  const boxes = root.querySelectorAll('.ol-auto').map((l) => l.querySelector('input'));
+  assert.equal(boxes.length, 2, '自動存與圖片各一個開關');
+  assert.equal(boxes[1].checked, false);
+
+  boxes[1].checked = true;
+  boxes[1].fire('change');
+  await tick(20);
+
+  const cmd = sw.sent.find((m) => m.type === 'OFFLINE_IMAGES');
+  assert.ok(cmd);
+  assert.equal(cmd.enabled, true);
+  assert.equal(cmd.url, 'https://anoni.net/docs/offline/');
+  assert.equal(
+    root.querySelectorAll('.ol-auto')[1].querySelector('input').checked,
+    true
+  );
+});
+
+test('自動存關掉時，圖片開關跟著停用', async () => {
+  // 章節本身都不存了，只補它們的圖沒有意義
+  const { root } = await load({ autoPrecache: false });
+  const boxes = root.querySelectorAll('.ol-auto').map((l) => l.querySelector('input'));
+  assert.equal(boxes[0].checked, false);
+  assert.equal(boxes[1].disabled, true);
 });
 
 test('讀不到索引時說明原因，不是空白一片', async () => {

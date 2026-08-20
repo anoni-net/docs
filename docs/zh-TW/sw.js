@@ -45,6 +45,11 @@ const ASSETS_MAX_ENTRIES = 200;
 // 消失，內容的新鮮度由管理頁的「更新」按鈕與 network-first 負責。
 const LIBRARY = "anoni-docs-library";
 
+// 讀者勾的那些頁面自己引用的圖與程式。跟頁面分開放，libraryEntries 才數得出
+// 「你自己選存的 N 頁」，不會把幾十張圖也算成頁數。哪些資產屬於哪一頁由
+// offline-index.json 說了算，管理頁送過來之前已經去重。
+const LIBRARY_ASSETS = "anoni-docs-library-assets";
+
 // 設定值。目前只有一項：要不要自動預快取。
 //
 // 存在 Cache Storage 而不是 localStorage，因為 install 階段的 SW 讀不到 localStorage，
@@ -52,6 +57,10 @@ const LIBRARY = "anoni-docs-library";
 // 就被自動下載回來，等於沒清。
 const SETTINGS = "anoni-docs-settings";
 const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
+
+// 核心章節的內文圖要不要一起存。預設不存：那批圖有七 MB，會讓自動下載的量從
+// 十一 MB 變成十八 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
+const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 
 // SW scope 在正式站是 /docs/，本地開發（mkdocs serve）是 /
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
@@ -328,6 +337,38 @@ function precacheUrlsFor(prefix) {
   return urls;
 }
 
+// 核心章節那幾頁自己的內文圖。
+//
+// 預快取原本只抓 HTML，所以網站自動存的那四十幾頁離線打開全部缺圖。像「什麼是
+// Tor？」那種以圖解為主的頁面，少了圖等於沒有存。
+//
+// 清單來自 offline-index.json，那是唯一知道哪一頁引用哪些圖的地方（hooks/
+// offline_index.py 建置時算出來，並且已經濾掉每頁都載入的全站腳本）。這裡不重複
+// 一份寫死的清單，圖換了、頁面改了都不必回來改 sw.js。
+//
+// 讀者自己勾的頁面走的是另一條，由管理頁把資產一起送進 LIBRARY_ASSETS。
+async function corePageAssets(prefix) {
+  try {
+    const response = await fetch(SCOPE_PATH + prefix + "offline-index.json", {
+      credentials: "same-origin",
+    });
+    if (!response.ok) return [];
+    const index = await response.json();
+    const core = new Set(CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH);
+    const assets = new Set();
+    for (const section of index.sections || []) {
+      for (const page of section.pages || []) {
+        if (!core.has(page.url)) continue;
+        for (const asset of page.assets || []) assets.add(asset);
+      }
+    }
+    return [...assets].map((asset) => SCOPE_PATH + prefix + asset);
+  } catch (err) {
+    // 索引抓不到就只是這一輪沒補圖，頁面本身照樣存得下來
+    return [];
+  }
+}
+
 // 沒有網路時至少要有的那一小批：離線提示頁本身，加上撐得起它的 app shell。
 //
 // 為什麼不受「自動存下核心章節」的開關管：那一頁就是離線內容管理頁。讀者想清掉
@@ -389,9 +430,13 @@ async function precacheFor(prefix, wantFull) {
   if (precachedPrefixes.has(done)) return;
   precachedPrefixes.add(done);
   const cache = await caches.open(PRECACHE);
+  let urls = full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix);
+  if (full && (await precacheImagesEnabled())) {
+    urls = urls.concat(await corePageAssets(prefix));
+  }
   // 逐一快取並容忍個別失敗（本地開發只有單一語系，其他語系路徑會 404）
   await Promise.allSettled(
-    (full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix)).map(async (url) => {
+    urls.map(async (url) => {
       if (await cache.match(url)) return;
       const response = await fetch(url, { credentials: "same-origin" });
       if (response.ok) await cache.put(url, response);
@@ -488,6 +533,21 @@ async function setAutoPrecache(enabled) {
   await cache.put(AUTO_PRECACHE_URL, new Response(enabled ? "on" : "off"));
 }
 
+async function precacheImagesEnabled() {
+  const cache = await caches.open(SETTINGS);
+  const hit = await cache.match(PRECACHE_IMAGES_URL);
+  // 沒設定過就是關著，跟 autoPrecache 相反
+  if (!hit) return false;
+  return (await hit.text()) === "on";
+}
+
+async function setPrecacheImages(enabled) {
+  const cache = await caches.open(SETTINGS);
+  await cache.put(PRECACHE_IMAGES_URL, new Response(enabled ? "on" : "off"));
+  // 這一輪已經補過的記錄要作廢，下一次導覽才會照新的設定重跑一遍
+  precachedPrefixes.clear();
+}
+
 // 訊息裡帶的頁面網址落在哪個語系。
 //
 // 管理頁送過來的路徑取自 offline-index.json，那份索引的網址相對於各語系自己的建置
@@ -532,20 +592,26 @@ async function precachedEntries(prefix) {
 
 // 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
 // refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
-async function addToLibrary(prefix, paths, refresh, report) {
-  const cache = await caches.open(LIBRARY);
+async function addToLibrary(prefix, paths, assets, refresh, report) {
+  const pageCache = await caches.open(LIBRARY);
+  const assetCache = await caches.open(LIBRARY_ASSETS);
+  // 頁面先抓完再抓資產。中途斷線的話，讀者手上是幾頁完整的內容加幾頁缺圖的，
+  // 比反過來（一堆圖但沒有半頁可讀）有用。
+  const targets = paths
+    .map((path) => ({ path: path, cache: pageCache }))
+    .concat((assets || []).map((path) => ({ path: path, cache: assetCache })));
   let ok = 0;
   let failed = 0;
   let done = 0;
-  for (const path of paths) {
-    const url = SCOPE_PATH + prefix + path;
+  for (const target of targets) {
+    const url = SCOPE_PATH + prefix + target.path;
     try {
-      if (!refresh && (await cache.match(url))) {
+      if (!refresh && (await target.cache.match(url))) {
         ok += 1;
       } else {
         const response = await fetch(url, { credentials: "same-origin" });
         if (response.ok) {
-          await cache.put(url, response);
+          await target.cache.put(url, response);
           ok += 1;
         } else {
           failed += 1;
@@ -555,17 +621,23 @@ async function addToLibrary(prefix, paths, refresh, report) {
       failed += 1;
     }
     done += 1;
-    // 逐頁回報。整批下載可能要好幾分鐘，沒有進度的話讀者只會看到一個不動的按鈕。
-    report({ type: "progress", done: done, total: paths.length, ok: ok, failed: failed });
+    // 逐項回報。整批下載可能要好幾分鐘，沒有進度的話讀者只會看到一個不動的按鈕。
+    report({ type: "progress", done: done, total: targets.length, ok: ok, failed: failed });
   }
   return { ok: ok, failed: failed };
 }
 
-async function removeFromLibrary(prefix, paths) {
-  const cache = await caches.open(LIBRARY);
+async function removeFromLibrary(prefix, paths, assets) {
+  const pageCache = await caches.open(LIBRARY);
+  const assetCache = await caches.open(LIBRARY_ASSETS);
   let removed = 0;
   for (const path of paths) {
-    if (await cache.delete(SCOPE_PATH + prefix + path)) removed += 1;
+    if (await pageCache.delete(SCOPE_PATH + prefix + path)) removed += 1;
+  }
+  // 資產由管理頁挑過，別的已存頁面還用得到的不會出現在這份清單裡。
+  // 回報的數字只算頁面，那才是讀者在畫面上勾掉的東西。
+  for (const path of assets || []) {
+    await assetCache.delete(SCOPE_PATH + prefix + path);
   }
   return { removed: removed };
 }
@@ -580,6 +652,7 @@ async function clearAllOffline() {
   }
   precachedPrefixes.clear();
   await setAutoPrecache(false);
+  await setPrecacheImages(false);
 }
 
 async function handleLibraryMessage(data, port) {
@@ -594,6 +667,7 @@ async function handleLibraryMessage(data, port) {
       // 只回頁面，app shell 與作品本體不是讀者會勾的東西，混進去只會讓數字虛胖。
       precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
+      precacheImages: await precacheImagesEnabled(),
       estimate: navigator.storage && navigator.storage.estimate
         ? await navigator.storage.estimate()
         : null,
@@ -603,14 +677,14 @@ async function handleLibraryMessage(data, port) {
 
   if (data.type === "OFFLINE_ADD" && Array.isArray(data.paths)) {
     const result = await addToLibrary(
-      messagePrefix(data), data.paths, data.refresh === true, reply
+      messagePrefix(data), data.paths, data.assets, data.refresh === true, reply
     );
     reply({ type: "done", ok: result.ok, failed: result.failed });
     return;
   }
 
   if (data.type === "OFFLINE_REMOVE" && Array.isArray(data.paths)) {
-    const result = await removeFromLibrary(messagePrefix(data), data.paths);
+    const result = await removeFromLibrary(messagePrefix(data), data.paths, data.assets);
     reply({ type: "done", removed: result.removed });
     return;
   }
@@ -618,6 +692,12 @@ async function handleLibraryMessage(data, port) {
   if (data.type === "OFFLINE_CLEAR") {
     await clearAllOffline();
     reply({ type: "done", cleared: true });
+    return;
+  }
+
+  if (data.type === "OFFLINE_IMAGES" && typeof data.enabled === "boolean") {
+    await setPrecacheImages(data.enabled);
+    reply({ type: "done", precacheImages: data.enabled });
     return;
   }
 

@@ -36,10 +36,11 @@ class FakePage:
     is_section = False
     is_page = True
 
-    def __init__(self, url, title):
+    def __init__(self, url, title, meta=None):
         self.url = url
         self.title = title
         self.parent = None
+        self.meta = meta or {}
 
 
 class FakeSection:
@@ -59,18 +60,32 @@ class FakeNav:
         self.items = list(items)
 
 
-def build(nav, pages, html="x"):
+def build(nav, pages, html="x", files=None):
     """跑一輪 hook，回傳寫出來的 JSON。
 
     pages 是 mkdocs 實際處理頁面的順序，跟 nav 的順序不同（mkdocs 照檔案路徑的
     字母序跑），測試刻意傳打亂的順序，驗輸出仍照 nav。
+
+    html 可以是字串（所有頁面共用）或 {url: html}。files 是要在假的 site_dir 裡
+    造出來的檔案 {路徑: 大小}，hook 靠它算資產大小。
     """
     offline_index._pages.clear()
     offline_index._order.clear()
     offline_index.on_nav(nav, None)
     for page in pages:
-        offline_index.on_post_page(html, page, None)
+        body = html.get(page.url, "x") if isinstance(html, dict) else html
+        offline_index.on_post_page(body, page, None)
     with tempfile.TemporaryDirectory() as tmp:
+        for path, size in (files or {}).items():
+            target = pathlib.Path(tmp) / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(b"x" * size)
+        # 資產從建置產物解析，所以每一頁的 HTML 也要真的寫出來
+        for page in pages:
+            body = html.get(page.url, "x") if isinstance(html, dict) else html
+            target = pathlib.Path(tmp) / page.url / "index.html"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(body, encoding="utf-8")
         offline_index.on_post_build({"site_dir": tmp, "theme": {"language": "zh-TW"}})
         target = pathlib.Path(tmp) / offline_index.OUTPUT_NAME
         return json.loads(target.read_text(encoding="utf-8")) if target.exists() else None
@@ -192,6 +207,74 @@ with tempfile.TemporaryDirectory() as tmp:
     offline_index.on_post_build({"site_dir": tmp, "theme": {"language": "en"}})
     written = json.loads((pathlib.Path(tmp) / offline_index.OUTPUT_NAME).read_text(encoding="utf-8"))
 check("帶上語系", written["lang"], "en")
+
+
+# --- 頁面自己引用的資產 ---
+#
+# 存離線副本只抓 HTML 的話，讀者離線打開會缺圖，而互動類的頁面（小工具）連跑都
+# 跑不起來，它的程式與資料就在這些資產裡。
+
+parsed = offline_index._page_assets(
+    '<img src="../../assets/images/a.webp">'
+    '<script src="../js/tool.js"></script>'
+    '<script src="../../assets/javascripts/bundle.min.js"></script>'
+    '<img src="https://example.com/x.png">'
+    '<img src="data:image/png;base64,AAAA">',
+    "tools/what-is-tor/",
+    None,
+)
+# 相對路徑正規化成相對建置根目錄，theme 的 app shell 與外部網址都不列
+check("資產：解析並正規化", parsed, ["assets/images/a.webp", "tools/js/tool.js"])
+
+# JS 裡 fetch 的東西不會出現在 HTML 標籤上，由該頁的 frontmatter 自己宣告
+declared = offline_index._page_assets(
+    "<p>沒有任何標籤</p>",
+    "utils/passphrase/",
+    {"offline_assets": ["utils/asian-diceware-7776.txt"]},
+)
+check("資產：frontmatter 宣告得出來", declared, ["utils/asian-diceware-7776.txt"])
+
+# 每頁都載入的東西不算在個別頁面頭上（實際案例是 mkdocs-charts-plugin 那組 Vega，
+# 每頁 808 KB 而真正畫圖表的只有三篇）
+shared_nav = FakeNav([FakePage("a/", "A"), FakePage("b/", "B"), FakePage("c/", "C")])
+shared_pages = [FakePage("a/", "A"), FakePage("b/", "B"), FakePage("c/", "C")]
+vega = '<script src="../vendor/vega.js"></script>'
+index = build(
+    shared_nav,
+    shared_pages,
+    html={
+        "a/": vega + '<img src="../img/only-a.png">',
+        "b/": vega,
+        "c/": vega,
+    },
+    files={"vendor/vega.js": 800, "img/only-a.png": 100},
+)
+by_url = {p["url"]: p for s in index["sections"] for p in s["pages"]}
+check("資產：過半頁面共用的不列進個別頁面", by_url["a/"]["assets"], ["img/only-a.png"])
+check("資產：共用的那個誰也沒有", by_url["b/"]["assets"], [])
+check("資產：大小從建置產物量", by_url["a/"]["assetBytes"], 100)
+
+# 章節的資產大小要去重，同一張圖在這一章出現幾次都只算一次。
+# 四頁裡兩頁共用，沒有超過「過半」那道門檻，所以不會被當成全站資產濾掉。
+dup_nav = FakeNav(
+    [FakeSection("章", [FakePage(u, u) for u in ("a/", "b/", "c/", "d/")])]
+)
+dup_pages = [FakePage(u, u) for u in ("a/", "b/", "c/", "d/")]
+same = '<img src="../img/same.png">'
+index = build(
+    dup_nav,
+    dup_pages,
+    html={"a/": same, "b/": same, "c/": "x", "d/": "x"},
+    files={"img/same.png": 500},
+)
+section = index["sections"][0]
+check("資產：章節大小去重", section["assetBytes"], 500)
+check("資產：索引給出全域大小表", index["assets"], {"img/same.png": 500})
+check(
+    "資產：頁面各自照列",
+    [p["assetBytes"] for p in section["pages"]],
+    [500, 500, 0, 0],
+)
 
 
 if __name__ == "__main__":
