@@ -50,7 +50,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，逐批清除 Cloudflare 快取（每批 30 條）。測試由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發 |
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
 | 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
-| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。其餘三支把函式從 `docs/zh-TW/sw.js`、`docs/overrides/base.html` 與 `docs/hooks/offline_index.py` 原地抽出來單元測試，不需要建置。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發，`check_precache.mjs` 需要建置產物所以沒進 CI，改 `docs/zh-TW/sw.js` 時手動跑一次 |
+| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py`、`test_offline_library.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。其餘四支把原始碼原地抽出來單元測試，不需要建置：`test_sw_offline.mjs` 測 `docs/zh-TW/sw.js` 的離線路徑，`test_lang_preference.mjs` 測 `docs/overrides/base.html` 的語言導向，`test_offline_index.py` 測 `docs/hooks/offline_index.py` 的分組，`test_offline_library.mjs` 餵一組最小 DOM 替身把 `docs/zh-TW/js/offline-library.js` 整份跑起來，驗它畫出來的結構與送給 service worker 的指令（版面與樣式驗不到，那要靠實機）。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發，`check_precache.mjs` 需要建置產物所以沒進 CI，改 `docs/zh-TW/sw.js` 時手動跑一次 |
 
 ## 開發環境設置
 
@@ -263,7 +263,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 - **tools-tests.yml**: 跑 `tools/` 底下那幾支零相依的測試
   - 觸發路徑：`tools/**`、`docs/zh-TW/sw.js`、`docs/overrides/base.html`、`docs/hooks/**`
-  - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_cf_purge.py`（快取清除映射）
+  - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_offline_library.mjs`（離線內容管理頁的介面）、`test_cf_purge.py`（快取清除映射）
   - 不需要建置產物，跑完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 跑
   - `check_precache.mjs` 需要 `docs/output`，沒進 CI，改 `sw.js` 時手動跑一次
 

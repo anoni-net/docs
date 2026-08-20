@@ -1,0 +1,583 @@
+#!/usr/bin/env node
+/**
+ * 離線內容管理頁（docs/zh-TW/js/offline-library.js）的單元測試。
+ *
+ * === 為什麼需要這支 ===
+ *
+ * 那一頁是斷網時的落腳處，而它的行為只在「讀者手上有／沒有某些頁面」的組合下才
+ * 分得出對錯，用瀏覽器點一輪要先把快取喬成特定狀態，成本高到不會有人每次改都做。
+ * 實際踩過的：
+ *
+ *   - 「更新已存的內容」按下去沒反應，因為自選清單是空的就直接 return
+ *   - 章節照頁數排序，跟讀者在側邊欄記得的位置完全對不上
+ *   - 清單裡的頁面標題是純文字，斷網時一頁都點不開
+ *   - 進度與完成訊息畫在頁面頂端，而按鈕 sticky 在底部，按完看不到任何回應
+ *
+ * === 這支守得住什麼、守不住什麼 ===
+ *
+ * 守得住：畫出來的節點結構、順序、連結、停用狀態、送給 service worker 的指令內容。
+ * 守不住：版面與樣式。替身沒有 layout，「看不看得到」量不出來，那要靠實機截圖。
+ * 上面第四項在這裡驗的是「進度條是不是底部那條的子節點」，位置本身仍要人看。
+ *
+ * === 怎麼驗 ===
+ *
+ * 跟 test_sw_offline.mjs 同一套做法：原始碼整份原地執行，不重寫一份邏輯。那支是
+ * 抽函式，這支是 IIFE 又吃 DOM，所以改成餵一組最小替身進去。替身只實作這份原始碼
+ * 真正用到的那些 API（見下方 FakeElement），不是通用 DOM。
+ *
+ * 用法：
+ *   node tools/test_offline_library.mjs
+ * 不需要建置產物，也沒有外部相依。
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const SRC = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'offline-library.js');
+const src = fs.readFileSync(SRC, 'utf8');
+
+// ---------------------------------------------------------------------------
+// 最小 DOM 替身
+// ---------------------------------------------------------------------------
+
+class FakeElement {
+  constructor(tag) {
+    this.tagName = String(tag).toUpperCase();
+    this.children = [];
+    this.parent = null;
+    this._text = '';
+    this.className = '';
+    this.attributes = {};
+    this.listeners = {};
+    this.style = {};
+    this.disabled = false;
+    this.checked = false;
+    // 真的 DOM 上這幾個設 property 會同步到 attribute（a.href = x 之後
+    // getAttribute('href') 拿得到），替身照做，測試兩種寫法都能用
+    for (const name of ['href', 'title', 'id']) {
+      Object.defineProperty(this, name, {
+        get: () => this.attributes[name],
+        set: (value) => {
+          this.attributes[name] = String(value);
+        },
+        enumerable: true,
+        configurable: true,
+      });
+    }
+    this.classList = {
+      add: (...names) => {
+        const have = this.className ? this.className.split(/\s+/) : [];
+        for (const n of names) if (!have.includes(n)) have.push(n);
+        this.className = have.join(' ');
+      },
+      contains: (name) => (this.className || '').split(/\s+/).includes(name),
+    };
+  }
+  get classes() {
+    return (this.className || '').split(/\s+/).filter(Boolean);
+  }
+  appendChild(node) {
+    node.parent = this;
+    this.children.push(node);
+    return node;
+  }
+  removeChild(node) {
+    this.children = this.children.filter((c) => c !== node);
+  }
+  remove() {
+    if (this.parent) this.parent.removeChild(this);
+  }
+  setAttribute(name, value) {
+    this.attributes[name] = String(value);
+  }
+  getAttribute(name) {
+    return name in this.attributes ? this.attributes[name] : null;
+  }
+  addEventListener(type, fn) {
+    (this.listeners[type] = this.listeners[type] || []).push(fn);
+  }
+  // 測試用：觸發事件。真的 DOM 上 label 包 input 時點文字也會切換勾選，
+  // 那層轉發這裡不做，測試直接對 input 本身操作。
+  fire(type) {
+    for (const fn of this.listeners[type] || []) fn({ target: this });
+  }
+  click() {
+    this.fire('click');
+  }
+  set textContent(value) {
+    this._text = String(value);
+    // root.textContent = "" 是這份原始碼清空重畫的方式
+    this.children = [];
+  }
+  get textContent() {
+    if (this.children.length) return this.children.map((c) => c.textContent).join('');
+    return this._text;
+  }
+  get descendants() {
+    const out = [];
+    const walk = (node) => {
+      for (const c of node.children) {
+        out.push(c);
+        walk(c);
+      }
+    };
+    walk(this);
+    return out;
+  }
+  // 只支援 ".cls"、"tag"、"tag.cls"，測試與原始碼用到的就這幾種
+  matches(selector) {
+    for (const part of selector.trim().split(/\s+/).slice(-1)) {
+      const m = part.match(/^([a-zA-Z]+)?((?:\.[\w-]+)*)$/);
+      if (!m) throw new Error(`替身不支援的 selector：${selector}`);
+      if (m[1] && this.tagName !== m[1].toUpperCase()) return false;
+      for (const cls of (m[2] || '').split('.').filter(Boolean)) {
+        if (!this.classList.contains(cls)) return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  querySelectorAll(selector) {
+    return this.descendants.filter((n) => n.matches(selector));
+  }
+  querySelector(selector) {
+    return this.querySelectorAll(selector)[0] || null;
+  }
+}
+
+class FakeText extends FakeElement {
+  constructor(text) {
+    super('#text');
+    this._text = text;
+  }
+  set textContent(v) {
+    this._text = String(v);
+  }
+  get textContent() {
+    return this._text;
+  }
+}
+
+const makeDocument = (root, lang) => ({
+  documentElement: { lang },
+  head: new FakeElement('head'),
+  getElementById: (id) => (id === 'offline-library' ? root : null),
+  createElement: (tag) => new FakeElement(tag),
+  createTextNode: (text) => new FakeText(text),
+});
+
+// ---------------------------------------------------------------------------
+// service worker 替身
+// ---------------------------------------------------------------------------
+
+/**
+ * 一個假的 service worker，收得懂管理頁送的四種指令。
+ * opts.saved / opts.precached 決定它回報裝置上有什麼。
+ */
+const makeServiceWorker = (opts) => {
+  const sent = [];
+  const state = {
+    saved: [...(opts.saved || [])],
+    precached: [...(opts.precached || [])],
+    autoPrecache: opts.autoPrecache !== false,
+  };
+  const active = {
+    postMessage(message, ports) {
+      sent.push(message);
+      const port = ports && ports[0];
+      if (!port) return;
+      const reply = (data) => port.onmessage && port.onmessage({ data });
+      queueMicrotask(() => {
+        if (message.type === 'OFFLINE_STATUS') {
+          reply({
+            type: 'status',
+            saved: [...state.saved],
+            precached: [...state.precached],
+            autoPrecache: state.autoPrecache,
+            estimate: opts.estimate || null,
+          });
+        } else if (message.type === 'OFFLINE_ADD') {
+          let done = 0;
+          for (const p of message.paths) {
+            done += 1;
+            if (!state.saved.includes(p)) state.saved.push(p);
+            reply({ type: 'progress', done, total: message.paths.length });
+          }
+          reply({ type: 'done', ok: message.paths.length, failed: 0 });
+        } else if (message.type === 'OFFLINE_REMOVE') {
+          const before = state.saved.length;
+          state.saved = state.saved.filter((p) => !message.paths.includes(p));
+          reply({ type: 'done', removed: before - state.saved.length });
+        } else if (message.type === 'OFFLINE_AUTO') {
+          state.autoPrecache = message.enabled;
+          reply({ type: 'done', autoPrecache: message.enabled });
+        } else if (message.type === 'OFFLINE_CLEAR') {
+          state.saved = [];
+          state.precached = [];
+          state.autoPrecache = false;
+          reply({ type: 'done', cleared: true });
+        } else {
+          reply({ type: 'error', reason: 'unknown-command' });
+        }
+      });
+    },
+  };
+  const registration = { active };
+  return {
+    sent,
+    state,
+    api: {
+      getRegistration: async () => (opts.noRegistration ? null : registration),
+      ready: Promise.resolve(registration),
+    },
+  };
+};
+
+// ---------------------------------------------------------------------------
+// 載入被測的原始碼
+// ---------------------------------------------------------------------------
+
+const INDEX = {
+  lang: 'zh-TW',
+  sections: [
+    {
+      key: '|',
+      title: '首頁',
+      group: '',
+      bytes: 100,
+      pages: [{ url: '', title: '首頁', bytes: 100 }],
+    },
+    {
+      key: '指南|概念',
+      title: '概念',
+      group: '指南',
+      bytes: 300,
+      pages: [
+        { url: 'basics/', title: '概念層', bytes: 100 },
+        { url: 'basics/metadata/', title: 'Metadata 是什麼', bytes: 200 },
+      ],
+    },
+    {
+      key: '指南|場景',
+      title: '場景',
+      group: '指南',
+      bytes: 500,
+      pages: [
+        { url: 'scenarios/journalist/', title: '記者保護消息來源', bytes: 200 },
+        { url: 'scenarios/activist/', title: '社運行動者的數位準備', bytes: 300 },
+      ],
+    },
+  ],
+};
+
+const tick = (n = 6) =>
+  new Promise((resolve) => {
+    let left = n;
+    const step = () => (left-- <= 0 ? resolve() : queueMicrotask(step));
+    step();
+  });
+
+/**
+ * 跑一次那份原始碼，回傳 root 與幾個探針。
+ *
+ * opts.saved      讀者自己選存的（相對該語系根目錄的路徑）
+ * opts.precached  網站自動存的
+ * opts.online     navigator.onLine，預設 true
+ * opts.noIndex    讓 offline-index.json 抓不到
+ */
+const load = async (opts = {}) => {
+  const root = new FakeElement('div');
+  const document = makeDocument(root, opts.lang || 'zh-TW');
+  const sw = makeServiceWorker(opts);
+  const navigator = {
+    serviceWorker: sw.api,
+    onLine: opts.online !== false,
+  };
+  const window = { __anoniServiceWorker: opts.swFlag !== false };
+  const location = { href: 'https://anoni.net/docs/offline/' };
+  const fetched = [];
+  const fetchStub = async (url) => {
+    fetched.push(url);
+    if (opts.noIndex) return { ok: false };
+    return { ok: true, json: async () => JSON.parse(JSON.stringify(INDEX)) };
+  };
+  // MessageChannel：port2 交給 worker，worker 回話走 port1.onmessage
+  class MessageChannelStub {
+    constructor() {
+      const port1 = { onmessage: null };
+      this.port1 = port1;
+      this.port2 = {
+        get onmessage() {
+          return port1.onmessage;
+        },
+        set onmessage(fn) {
+          port1.onmessage = fn;
+        },
+      };
+      // worker 端拿到的 port 要能 postMessage 回來
+      this.port2.postMessage = (data) => port1.onmessage && port1.onmessage({ data });
+      Object.defineProperty(this.port2, 'onmessage', {
+        get: () => port1.onmessage,
+        set: (fn) => {
+          port1.onmessage = fn;
+        },
+      });
+    }
+  }
+  new Function(
+    'document', 'window', 'navigator', 'location', 'fetch', 'MessageChannel', 'setTimeout', 'URL',
+    src
+  )(document, window, navigator, location, fetchStub, MessageChannelStub, setTimeout, URL);
+
+  await tick(12);
+  return { root, sw, fetched, document };
+};
+
+// 幾個常用探針
+const sections = (root) => root.querySelectorAll('.ol-section');
+const sectionNames = (root) => root.querySelectorAll('.ol-name').map((n) => n.textContent);
+const expand = (root, name) => {
+  const t = root.querySelectorAll('.ol-toggle').find((n) => n.textContent.includes(name));
+  assert.ok(t, `找不到章節「${name}」`);
+  t.click();
+};
+const clickButton = (root, text) => {
+  const b = root.querySelectorAll('button').find((n) => n.textContent.includes(text));
+  assert.ok(b, `找不到按鈕「${text}」`);
+  b.click();
+  return b;
+};
+const findButton = (root, text) =>
+  root.querySelectorAll('button').find((n) => n.textContent.includes(text));
+
+// ---------------------------------------------------------------------------
+// 測試
+// ---------------------------------------------------------------------------
+
+let passed = 0;
+let failed = 0;
+const tests = [];
+const test = (name, fn) => tests.push([name, fn]);
+
+test('章節照索引給的順序畫，不另外排', async () => {
+  const { root } = await load();
+  // INDEX 裡「場景」的 bytes 比「概念」大，照頁數或大小排都會換位置
+  assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
+  assert.equal(sections(root).length, 3);
+});
+
+test('頂層章節有兩組以上才掛標題', async () => {
+  const { root } = await load();
+  const groups = root.querySelectorAll('.ol-group').map((n) => n.textContent);
+  // 「指南」底下有概念與場景兩組，「首頁」那組只有自己
+  assert.deepEqual(groups, ['指南']);
+});
+
+test('頁面標題是連結，已存的與沒存的分得出來', async () => {
+  const { root } = await load({ precached: ['basics/', 'basics/metadata/'] });
+  expand(root, '概念');
+  expand(root, '場景');
+  const links = root.querySelectorAll('a');
+  const byTitle = Object.fromEntries(links.map((a) => [a.textContent, a]));
+
+  assert.equal(byTitle['概念層'].getAttribute('href'), 'https://anoni.net/docs/basics/');
+  assert.ok(!byTitle['概念層'].classList.contains('ol-title--absent'));
+  // 沒存的照樣是連結（線上點得開），但淡一階並註明
+  assert.ok(byTitle['記者保護消息來源'].classList.contains('ol-title--absent'));
+  assert.ok(byTitle['記者保護消息來源'].getAttribute('title'));
+});
+
+test('網站自動存的那批不給個別勾選', async () => {
+  const { root } = await load({ precached: ['basics/', 'basics/metadata/'] });
+  expand(root, '概念');
+  expand(root, '場景');
+  const boxes = root.querySelectorAll('input');
+  const inSection = (name) => {
+    const sec = sections(root).find((s) => s.textContent.includes(name));
+    return sec.querySelectorAll('input');
+  };
+  assert.ok(inSection('概念').every((b) => b.disabled), '自動存的應該停用');
+  assert.ok(inSection('場景').every((b) => !b.disabled), '沒存的應該可以勾');
+  assert.ok(boxes.length > 0);
+});
+
+test('整章都是網站自動存的就不畫「整章勾選」', async () => {
+  // 那顆按下去什麼都不會變，留著只是一顆按不動的東西
+  const { root } = await load({ precached: ['basics/', 'basics/metadata/'] });
+  expand(root, '概念');
+  assert.equal(findButton(root, '整章勾選'), undefined);
+  expand(root, '場景');
+  assert.ok(findButton(root, '整章勾選'));
+});
+
+test('沒有自選頁面時「更新已存的內容」停用並說明原因', async () => {
+  // 原本按下去直接 return，讀者只看到一顆沒反應的按鈕
+  const { root } = await load({ precached: ['basics/'] });
+  assert.equal(findButton(root, '更新已存的內容').disabled, true);
+  assert.ok(root.textContent.includes('你還沒有自己選存頁面'));
+});
+
+test('有自選頁面時「更新已存的內容」可以按', async () => {
+  const { root } = await load({ saved: ['scenarios/journalist/'] });
+  assert.equal(findButton(root, '更新已存的內容').disabled, false);
+});
+
+test('勾選之後才出現套用，計數跟著勾選走', async () => {
+  const { root } = await load();
+  assert.equal(findButton(root, '套用變更'), undefined);
+
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  sec.querySelectorAll('input')[0].checked = true;
+  sec.querySelectorAll('input')[0].fire('change');
+
+  assert.ok(findButton(root, '套用變更'));
+  assert.ok(root.querySelector('.ol-apply').textContent.includes('待新增 1 頁'));
+});
+
+test('套用把勾選的頁面送給 service worker，指令帶上這一頁的網址', async () => {
+  // 網址是 sw.js 用來補語系前綴的依據，少了它 en 與 zh-cn 會存到 zh-TW 那一版
+  const { root, sw } = await load();
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  clickButton(sec, '整章勾選');
+  clickButton(root, '套用變更');
+  await tick(20);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.ok(add, '沒有送出 OFFLINE_ADD');
+  assert.equal(add.url, 'https://anoni.net/docs/offline/');
+  assert.deepEqual(add.paths.sort(), ['scenarios/activist/', 'scenarios/journalist/']);
+  assert.deepEqual(sw.state.saved.sort(), ['scenarios/activist/', 'scenarios/journalist/']);
+});
+
+test('進度與完成訊息都在底部那條裡，不是散在頁面頂端', async () => {
+  // 那條 sticky 在畫面下緣，而套用按鈕就在上面。進度畫在頁面頂端的話，讀者按完
+  // 什麼都看不到。位置本身要靠實機截圖，這裡守的是「它是那條的子節點」。
+  const { root } = await load();
+  expand(root, '場景');
+  const sec = sections(root).find((s) => s.textContent.includes('場景'));
+  clickButton(sec, '整章勾選');
+  clickButton(root, '套用變更');
+
+  const dock = root.querySelector('.ol-apply');
+  assert.ok(dock.querySelector('.ol-progress'), '進度條不在底部那條裡');
+  assert.equal(root.querySelectorAll('.ol-progress').length, 1);
+
+  await tick(20);
+  const after = root.querySelector('.ol-apply');
+  assert.ok(after, '完成之後那條應該還在，訊息要有地方放');
+  assert.ok(after.querySelector('.ol-message').textContent.includes('完成'));
+  assert.equal(root.querySelectorAll('.ol-message').length, 1);
+});
+
+test('清除要按兩次，中途可以取消', async () => {
+  const { root, sw } = await load({ saved: ['scenarios/journalist/'] });
+  clickButton(root, '清除所有離線內容');
+  assert.ok(findButton(root, '確定清除'), '第一次按下應該換成兩顆並排');
+  assert.ok(findButton(root, '取消'));
+
+  clickButton(root, '取消');
+  assert.equal(findButton(root, '確定清除'), undefined);
+  assert.equal(sw.sent.filter((m) => m.type === 'OFFLINE_CLEAR').length, 0);
+
+  clickButton(root, '清除所有離線內容');
+  clickButton(root, '確定清除');
+  await tick(20);
+  assert.equal(sw.sent.filter((m) => m.type === 'OFFLINE_CLEAR').length, 1);
+  assert.deepEqual(sw.state.saved, []);
+  assert.equal(sw.state.autoPrecache, false);
+});
+
+test('「只列已存的」把沒存的收起來，並展開有東西的章節', async () => {
+  const { root } = await load({ precached: ['basics/'], saved: ['scenarios/journalist/'] });
+  const filter = root.querySelector('.ol-filter').querySelector('input');
+  filter.checked = true;
+  filter.fire('change');
+
+  const names = sectionNames(root);
+  assert.deepEqual(names, ['概念', '場景'], '首頁沒存，整章不該出現');
+  // 收起來之後那兩章只剩存過的那一頁
+  const titles = root.querySelectorAll('a').map((a) => a.textContent);
+  assert.deepEqual(titles.sort(), ['概念層', '記者保護消息來源']);
+  assert.equal(root.querySelectorAll('.ol-title--absent').length, 0);
+  // 有東西的章節自動展開，斷網的讀者要的是攤開的清單
+  assert.equal(root.querySelectorAll('.ol-body').length, 2);
+});
+
+test('斷網進來預設只列已存的', async () => {
+  const { root } = await load({ online: false, precached: ['basics/'] });
+  assert.equal(root.querySelector('.ol-filter').querySelector('input').checked, true);
+  assert.deepEqual(sectionNames(root), ['概念']);
+});
+
+test('線上進來不套篩選', async () => {
+  const { root } = await load({ precached: ['basics/'] });
+  assert.equal(root.querySelector('.ol-filter').querySelector('input').checked, false);
+  assert.equal(sectionNames(root).length, 3);
+});
+
+test('自動存的開關切下去會送出指令並重讀狀態', async () => {
+  const { root, sw } = await load({ precached: ['basics/'] });
+  const auto = root.querySelector('.ol-auto').querySelector('input');
+  assert.equal(auto.checked, true);
+  auto.checked = false;
+  auto.fire('change');
+  await tick(20);
+
+  const cmd = sw.sent.find((m) => m.type === 'OFFLINE_AUTO');
+  assert.ok(cmd);
+  assert.equal(cmd.enabled, false);
+  assert.equal(root.querySelector('.ol-auto').querySelector('input').checked, false);
+});
+
+test('讀不到索引時說明原因，不是空白一片', async () => {
+  const { root } = await load({ noIndex: true });
+  assert.ok(root.textContent.includes('讀不到頁面清單'));
+});
+
+test('環境不註冊 service worker 時直接說明，不畫按了沒用的東西', async () => {
+  // Tor Browser、onion 版與 IPFS gateway 都走這條。base.html 把旗標設成 false，
+  // 這一頁看到就放棄，不用空等三十秒才對著一個好好的瀏覽器說話。
+  const { root } = await load({ swFlag: false });
+  assert.ok(root.querySelector('.ol-status').textContent.includes('沒有提供離線儲存'));
+  assert.equal(root.querySelectorAll('input').length, 0, '沒有 SW 就不該有勾選框');
+  assert.equal(findButton(root, '清除所有離線內容'), undefined);
+  // 清單本身還是畫出來，線上讀者仍可以拿它當目錄
+  assert.ok(sectionNames(root).length > 0);
+});
+
+test('service worker 還在準備時，清單先畫出來不必等它', async () => {
+  // ready 要等 install 把整個語系抓完，行動網路上那是好幾分鐘。索引跟它是兩條路。
+  const { root } = await load({ noRegistration: true });
+  assert.ok(root.querySelector('.ol-status').textContent.includes('還在準備'));
+  assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
+});
+
+test('三個語系各自挑到自己那組字串', async () => {
+  for (const [lang, needle] of [['zh-TW', '網站自動存的'], ['zh', '网站自动存的'], ['en', 'stored automatically']]) {
+    const { root } = await load({ lang, precached: ['basics/'] });
+    assert.ok(
+      root.querySelector('.ol-status').textContent.includes(needle),
+      `${lang} 應該看到「${needle}」`
+    );
+  }
+});
+
+// ---------------------------------------------------------------------------
+
+for (const [name, fn] of tests) {
+  try {
+    await fn();
+    console.log(`  ✓ ${name}`);
+    passed += 1;
+  } catch (err) {
+    console.log(`  ✗ ${name}`);
+    console.log(`    ${err.message.split('\n').slice(0, 6).join('\n    ')}`);
+    failed += 1;
+  }
+}
+console.log(`\n${passed} 通過，${failed} 失敗`);
+process.exit(failed ? 1 : 0);
