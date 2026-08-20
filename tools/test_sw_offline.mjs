@@ -110,9 +110,14 @@ const harness = `
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const precachedPrefixes = .*$/m)}
-  ${grab(/^async function precacheFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const VISITS_URL = .*$/m)}
+  ${grab(/^async function noteVisit\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function hadFullPrecache\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function precacheFor\(prefix, wantFull\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function precacheOnNavigation\(prefix, settled\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function langPrefixOf\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function guessLangPrefix\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function installPrecache\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const LIBRARY = .*$/m)}
   ${grab(/^const SETTINGS = .*$/m)}
   ${grab(/^const AUTO_PRECACHE_URL = .*$/m)}
@@ -140,6 +145,7 @@ const harness = `
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, precacheFor, guessLangPrefix,
+    noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
     handleLibraryMessage, networkFirst,
@@ -323,9 +329,80 @@ test('預快取清單只含指定語系，作品本體三語共用', (load) => {
   assert.ok(en.includes('/docs/games/tor-network/play/index.html'));
 });
 
+test('首次造訪只抓底線那批，不在讀者選語言之前下整個語系', async (load) => {
+  // install 幾乎是註冊完就開跑，而底部那張語言卡片要等 DOM 與 script 跑完才浮出來。
+  // 讀者按下「English」的那幾秒，網站已經在下 zh-TW 的四十幾頁了，接著又下一份 en。
+  const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.installPrecache();
+  await sw.precacheOnNavigation('', false);
+
+  assert.deepEqual(fetched.slice().sort(), sw.essentialUrlsFor('').slice().sort());
+  assert.ok(!fetched.includes('/docs/tools/what-is-tor/'));
+  assert.ok(fetched.length < sw.precacheUrlsFor('').length);
+});
+
+test('同一個語系導覽到第二頁才下整份', async (load) => {
+  const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.installPrecache();
+  await sw.precacheOnNavigation('', false);
+  fetched.length = 0;
+
+  // 讀者點進第二頁，client 又送一次 PRECACHE_LANG
+  await sw.precacheOnNavigation('', false);
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('install 自己不算一次造訪，否則門檻等於不存在', async (load) => {
+  // 首次造訪是 install 加上第一次導覽兩次呼叫。計數放在 precacheFor 裡的話，
+  // 讀者還沒翻第二頁就湊滿了。
+  const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.installPrecache();
+  await sw.precacheOnNavigation('', false);
+  assert.ok(!fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('讀者選過閱讀語言就不用再等第二頁', async (load) => {
+  const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.installPrecache();
+  await sw.precacheOnNavigation('', true);
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('造訪次數分語系算，換一個語系要重新累積', async (load) => {
+  const { sw } = load();
+  assert.equal(await sw.noteVisit(''), 1);
+  assert.equal(await sw.noteVisit('en/'), 1);
+  assert.equal(await sw.noteVisit(''), 2);
+});
+
+test('install 在新裝置上只補底線，在換版的裝置上照舊補完整', async (load) => {
+  // 讀者按下更新之後 activate 會清掉舊的 PRECACHE。換版也只抓底線的話，他原本
+  // 存著的四十幾頁要等再導覽兩次才回得來，中間斷網就什麼都沒有。
+  const here = ['https://anoni.net/docs/guides/'];
+
+  const fresh = load({ clients: here });
+  assert.equal(await fresh.sw.installPrecache(), '');
+  assert.ok(!fresh.fetched.includes('/docs/tools/what-is-tor/'));
+  assert.deepEqual(fresh.fetched.slice().sort(), fresh.sw.essentialUrlsFor('').slice().sort());
+
+  const upgrade = load({ clients: here });
+  await (await upgrade.caches.open('anoni-docs-precache-202601010000')).put('/docs/', 'HOME');
+  assert.equal(await upgrade.sw.hadFullPrecache(''), true);
+  assert.equal(await upgrade.sw.installPrecache(), '');
+  assert.ok(upgrade.fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('只存過底線那批的裝置不算有完整章節', async (load) => {
+  const { sw, caches } = load();
+  const previous = await caches.open('anoni-docs-precache-202601010000');
+  for (const url of sw.essentialUrlsFor('')) await previous.put(url, 'X');
+
+  assert.equal(await sw.hadFullPrecache(''), false);
+});
+
 test('一次只抓一個語系的量', async (load) => {
   const { sw, fetched } = load();
-  await sw.precacheFor('en/');
+  await sw.precacheFor('en/', true);
   assert.equal(fetched.length, sw.precacheUrlsFor('en/').length);
   assert.ok(
     fetched.every((url) => url.startsWith('/docs/en/') || url.startsWith('/docs/games/'))
@@ -334,11 +411,11 @@ test('一次只抓一個語系的量', async (load) => {
 
 test('換語系時不重抓已經有的東西', async (load) => {
   const { sw, fetched } = load();
-  await sw.precacheFor('');
+  await sw.precacheFor('', true);
   const firstRound = fetched.length;
   fetched.length = 0;
 
-  await sw.precacheFor('en/');
+  await sw.precacheFor('en/', true);
   // 作品本體第一輪就抓過了，第二輪只補 en 自己那一份
   assert.ok(fetched.every((url) => url.startsWith('/docs/en/')));
   assert.ok(fetched.length < firstRound);
@@ -362,21 +439,21 @@ test('install 從開著的分頁推語系', async (load) => {
 
 test('同一個語系不會在每次導覽都重跑一輪', async (load) => {
   const { sw, fetched } = load();
-  await sw.precacheFor('en/');
+  await sw.precacheFor('en/', true);
   const first = fetched.length;
   assert.ok(first > 0);
 
   // client 每次頁面載入都會送 PRECACHE_LANG，這裡模擬連續幾次
   fetched.length = 0;
-  await sw.precacheFor('en/');
-  await sw.precacheFor('en/');
+  await sw.precacheFor('en/', true);
+  await sw.precacheFor('en/', true);
   assert.equal(fetched.length, 0);
 });
 
 test('個別頁面 404 不會讓整批預快取失敗', async (load) => {
   const missing = '/docs/zh-cn/tools/what-is-cryptpad/';
   const { sw, caches } = load({ notFound: [missing] });
-  await sw.precacheFor('zh-cn/');
+  await sw.precacheFor('zh-cn/', true);
   const cache = await caches.open(sw.PRECACHE);
   assert.equal(await cache.match(missing), undefined);
   // 同一批的其他頁面照樣進快取
@@ -497,7 +574,7 @@ test('網站自動存的回實際在裝置上的，不是那份硬編清單', as
   assert.ok(!essential.includes('tools/what-is-tor/'));
 
   await sw.setAutoPrecache(true);
-  await sw.precacheFor('');
+  await sw.precacheFor('', true);
   assert.ok((await sw.precachedEntries('')).includes('tools/what-is-tor/'));
 });
 
@@ -513,7 +590,7 @@ test('舊版管理頁不帶網址時退回根路徑，zh-TW 讀者不受影響',
 
 test('清除會清光所有快取，並把自動預快取關掉', async (load) => {
   const { sw, caches } = load();
-  await sw.precacheFor('');
+  await sw.precacheFor('', true);
   await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
   const pages = await caches.open(sw.RUNTIME_PAGES);
   await pages.put('/docs/basics/metadata/', 'VISITED');
@@ -541,7 +618,7 @@ test('清除之後只補離線提示頁那一批，章節不會整包抓回來',
   // 讀者自己在管理頁把開關打開才恢復完整
   await sw.setAutoPrecache(true);
   fetched.length = 0;
-  await sw.precacheFor('');
+  await sw.precacheFor('', true);
   assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
 });
 
@@ -569,7 +646,7 @@ test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
 
 test('狀態查詢回得出已存的、網站存的與空間用量', async (load) => {
   const { sw } = load();
-  await sw.precacheFor('');
+  await sw.precacheFor('', true);
   await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
 
   const replies = [];
@@ -592,7 +669,7 @@ test('狀態查詢回得出已存的、網站存的與空間用量', async (load
 
 test('狀態查詢依網址挑對語系的預設清單', async (load) => {
   const { sw } = load();
-  await sw.precacheFor('en/');
+  await sw.precacheFor('en/', true);
   const replies = [];
   await sw.handleLibraryMessage(
     { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/en/offline/' },
