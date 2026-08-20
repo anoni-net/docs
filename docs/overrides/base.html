@@ -477,7 +477,21 @@
             // lang 屬性是 "zh" 這件事。
             navigator.serviceWorker.ready.then(function (ready) {
               if (ready.active) {
-                ready.active.postMessage({ type: "PRECACHE_LANG", url: location.href });
+                // 讀者選過閱讀語言了沒。service worker 讀不到 localStorage，這件事
+                // 只有這裡說得出來，而它決定了要現在下整個語系還是先等一等。key 跟
+                // 下面那段語言偏好的 PREF_KEY 是同一個，兩段是各自獨立的 IIFE，
+                // 改動時要一起改。
+                var settled = false;
+                try {
+                  settled = !!localStorage.getItem("anoni-docs-lang");
+                } catch (err) {
+                  // 隱私模式或擋掉 storage 的環境讀不到，當作還沒選
+                }
+                ready.active.postMessage({
+                  type: "PRECACHE_LANG",
+                  url: location.href,
+                  settled: settled,
+                });
               }
             });
 

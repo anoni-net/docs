@@ -349,11 +349,42 @@ function essentialUrlsFor(prefix) {
 // 後清空，下次重跑一輪也只是白查一次，不會抓重複的東西。
 const precachedPrefixes = new Set();
 
+// 讀者在某個語系底下導覽過幾次。存進 Cache Storage 的理由跟 AUTO_PRECACHE_URL 一樣：
+// SW 讀不到 localStorage，而這個數字要跨 SW 重啟與跨部署留著。
+const VISITS_URL = "/__anoni-settings/visits/";
+
+async function noteVisit(prefix) {
+  const cache = await caches.open(SETTINGS);
+  const url = VISITS_URL + (prefix || "root");
+  const hit = await cache.match(url);
+  const count = hit ? parseInt(await hit.text(), 10) || 0 : 0;
+  await cache.put(url, new Response(String(count + 1)));
+  return count + 1;
+}
+
+// 這台裝置上一版有沒有存過這個語系的完整章節。
+//
+// 換版時用得到：讀者按下更新，activate 會清掉舊的 PRECACHE，如果新的 install 只抓了
+// 底線那一批，讀者原本存著的四十幾頁會憑空消失一段時間。上一版有的，這一版照樣補齊。
+async function hadFullPrecache(prefix) {
+  const pages = CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH;
+  // 挑一個不在底線那批裡的頁面當探針，有它就代表上一版下的是完整章節
+  const probe = SCOPE_PATH + prefix + pages.find((page) => page !== "offline/");
+  for (const name of await caches.keys()) {
+    if (!name.startsWith("anoni-docs-precache-")) continue;
+    if (await (await caches.open(name)).match(probe)) return true;
+  }
+  return false;
+}
+
 // 補齊某個語系的預快取。已經在快取裡的跳過，所以換語系時只會抓新的那一份，作品
 // 本體與抓過的東西不重來。
-async function precacheFor(prefix) {
-  // 讀者關掉自動存或清空過內容時只補底線那一批，不抓完整章節
-  const full = await autoPrecacheEnabled();
+//
+// wantFull 由呼叫端決定要不要下完整章節，見 installPrecache 與 precacheOnNavigation。
+// 這裡只再 AND 上一個條件：讀者關掉自動存或清空過內容時，一律只補底線那一批。
+async function precacheFor(prefix, wantFull) {
+  if (precachedPrefixes.has(prefix + " full")) return;
+  const full = wantFull && (await autoPrecacheEnabled());
   const done = prefix + (full ? " full" : " essential");
   if (precachedPrefixes.has(done)) return;
   precachedPrefixes.add(done);
@@ -402,16 +433,40 @@ async function guessLangPrefix() {
   return null;
 }
 
+// install 階段要抓的那一批。抽成具名函式是為了能在 Node 裡驗，事件回呼裡的
+// 匿名 async 函式測不到，見 tools/test_sw_offline.mjs。
+//
+// 上一版已經有完整章節的裝置照樣補齊。那是換版，讀者按下更新之後 activate 會清掉
+// 舊的 PRECACHE，只抓底線那批的話他存著的四十幾頁會憑空少掉一段時間，斷網就什麼
+// 都沒有。沒有的就是首次安裝，先抓底線，等讀者確定要讀哪個語言再下整份。
+async function installPrecache() {
+  const prefix = await guessLangPrefix();
+  if (prefix === null) return null;
+  await precacheFor(prefix, await hadFullPrecache(prefix));
+  return prefix;
+}
+
+// 一次導覽觸發的預快取。
+//
+// 完整那一批要等讀者確定了要讀哪個語言才下。首次造訪時 install 幾乎是立刻開跑，
+// 而底部那張語言卡片要等 DOM 與 script 跑完才浮出來，讀者按下「English」的那幾秒，
+// 網站已經在下 zh-TW 的四十幾頁了，接著又下一份 en，兩份並存到下次部署才清掉。
+// 從搜尋引擎落在內頁的讀者更是從頭到尾沒被問過，十 MB 就這樣進了他的行動網路帳單。
+//
+// 兩個條件任一成立就算讀者確定了：client 說他選過閱讀語言，或者他在同一個語系底下
+// 翻到了第二頁。看一頁就走的人只會用掉底線那 0.5 MB。
+//
+// 計數刻意不放在 precacheFor 裡。install 也會呼叫那一支，算進去的話首次造訪光是
+// install 加上第一次導覽就湊滿兩次，門檻等於不存在。
+async function precacheOnNavigation(prefix, settled) {
+  await precacheFor(prefix, settled || (await noteVisit(prefix)) >= 2);
+}
+
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    (async () => {
-      const prefix = await guessLangPrefix();
-      if (prefix !== null) await precacheFor(prefix);
-      // 這裡刻意不呼叫 skipWaiting。原本一裝好就搶著接管，讀者正在讀的分頁會在毫無
-      // 徵兆的情況下換掉腳下的 SW，而 activate 又會清掉不在保留名單裡的快取。改成
-      // 停在 waiting，等讀者在換版提示上按下更新，收到 SKIP_WAITING 才接管。
-    })()
-  );
+  // 這裡刻意不呼叫 skipWaiting。原本一裝好就搶著接管，讀者正在讀的分頁會在毫無
+  // 徵兆的情況下換掉腳下的 SW，而 activate 又會清掉不在保留名單裡的快取。改成
+  // 停在 waiting，等讀者在換版提示上按下更新，收到 SKIP_WAITING 才接管。
+  event.waitUntil(installPrecache());
 });
 
 // === 離線內容管理 ===
@@ -592,7 +647,10 @@ self.addEventListener("message", (event) => {
   if (data.type === "PRECACHE_LANG" && typeof data.url === "string") {
     const prefix = langPrefixOf(new URL(data.url));
     if (prefix !== null) {
-      event.waitUntil(precacheFor(prefix));
+      // 已經下過整份就什麼都不用做，也不用再為了數次數寫一次 Cache Storage
+      if (!precachedPrefixes.has(prefix + " full")) {
+        event.waitUntil(precacheOnNavigation(prefix, data.settled === true));
+      }
     }
     return;
   }
