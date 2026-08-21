@@ -28,6 +28,10 @@ icon: material/tools
 
     列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道那些防护实际上做了什么。
 
+-   :material-link-variant-off: **[网址清理器](clean-url.md)**
+
+    把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。顺便拆掉 Google 与 Facebook 的转址包装。
+
 </div>
 
 ## 要离线带着走
