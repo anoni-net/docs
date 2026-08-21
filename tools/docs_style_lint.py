@@ -151,29 +151,35 @@ JIANG_ALLOW = re.compile(
 )
 
 # 兩岸用詞差異（貢獻者百科「用詞跟著臺灣走」）。跟口語詞用同一套比對，一起跑。
-# 正體與簡體都掃：「站台」在簡體讀者那邊也不是慣用詞，兩版都該用「網站／网站」。
+#
+# 最後一個欄位是「簡體版也掃」。預設 False，因為這組規則的用意是「zh-TW 不要用中國
+# 慣用詞」，zh-CN 本來就該用那些詞，對簡體版報「硬件要改成硬體」是反過來的。
+#
+# 原本這裡沒有這個欄位，靠的是 regex 多半用正體專有字形（「網絡」「服務器」「緩存」
+# 「軟件」的第一個字簡體都不同形），簡體檔案碰巧不會命中。但「硬件」「端口」「兼容」
+# 三個詞簡繁同形，zh-CN 全站因此吃到 137 個誤報。靠字形巧合擋不住，改成明講。
 REGIONAL_RULES = [
+    # 「站台」是少數兩岸都不慣用的：臺灣用「網站」，簡體那邊用「网站」，所以兩版都掃
     ("regional-term-site", re.compile(r"站台"), None,
-     "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）"),
-    # 簡體那邊寫「纠错」，這條 regex 是正體寫法，所以 zh-CN 的檔案不會被誤判
+     "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）", True),
     ("regional-term-ecc", re.compile(r"糾錯"), None,
-     "「糾錯」是中國慣用詞，臺灣用「容錯度」（error correction 的等級）"),
+     "「糾錯」是中國慣用詞，臺灣用「容錯度」（error correction 的等級）", False),
     # 中國法律與新加坡法案的正式譯名照錄，那不是用詞選擇
     # 例外比對的視窗是命中處前後各兩字，「安全法」的「法」落在視窗外，所以只取「安全」
     ("regional-term-network", re.compile(r"網絡"), re.compile(r"(安全|謠言|法案)"),
-     "「網絡」是中國慣用詞，臺灣用「網路」（照錄法案或機構的正式名稱時不在此限）"),
+     "「網絡」是中國慣用詞，臺灣用「網路」（照錄法案或機構的正式名稱時不在此限）", False),
     ("regional-term-server", re.compile(r"服務器"), None,
-     "「服務器」是中國慣用詞，臺灣用「伺服器」"),
+     "「服務器」是中國慣用詞，臺灣用「伺服器」", False),
     ("regional-term-port", re.compile(r"端口"), None,
-     "「端口」是中國慣用詞，臺灣用「連接埠」或直接寫 port"),
+     "「端口」是中國慣用詞，臺灣用「連接埠」或直接寫 port", False),
     ("regional-term-compat", re.compile(r"兼容"), None,
-     "「兼容」是中國慣用詞，臺灣用「相容」"),
+     "「兼容」是中國慣用詞，臺灣用「相容」", False),
     ("regional-term-cache", re.compile(r"緩存"), None,
-     "「緩存」是中國慣用詞，臺灣用「快取」"),
+     "「緩存」是中國慣用詞，臺灣用「快取」", False),
     ("regional-term-hardware", re.compile(r"硬件"), None,
-     "「硬件」是中國慣用詞，臺灣用「硬體」"),
+     "「硬件」是中國慣用詞，臺灣用「硬體」", False),
     ("regional-term-software", re.compile(r"軟件"), None,
-     "「軟件」是中國慣用詞，臺灣用「軟體」"),
+     "「軟件」是中國慣用詞，臺灣用「軟體」", False),
 ]
 
 # 掃過一遍全站之後刻意沒有收進來的詞，記在這裡免得有人以為是漏掉的：
@@ -370,6 +376,14 @@ def is_english_doc(path: Path) -> bool:
     return "/en/" in path.as_posix()
 
 
+def is_simplified_doc(path: Path) -> bool:
+    """zh-CN 文件不套兩岸用詞規則（標成「簡體版也掃」的那幾條除外）。
+
+    那組規則的判準是「臺灣用什麼」，對簡體版沒有意義。
+    """
+    return "/zh-CN/" in path.as_posix()
+
+
 def lint_file(path: Path):
     findings = []
     try:
@@ -395,6 +409,7 @@ def lint_file(path: Path):
                              "blog post 建議有 summary 或 description", ""))
 
     english = is_english_doc(path)
+    simplified = is_simplified_doc(path)
     state = {}
     in_fm = bool(fm_lines)
     fm_end_line = body_start  # 1-based 行號：front matter 結尾的 --- 行
@@ -455,13 +470,20 @@ def lint_file(path: Path):
             for m in rx.finditer(raw):
                 findings.append((i, ERROR, code, msg,
                                  raw[max(0, m.start() - 6): m.start() + 6].strip()))
-        for code, rx, allow, msg in COLLOQUIAL_RULES + REGIONAL_RULES:
+        def scan_terms(code, rx, allow, msg):
             for m in rx.finditer(clean):
                 around = clean[max(0, m.start() - 2): m.end() + 2]
                 if allow is not None and allow.search(around):
                     continue
                 findings.append((i, WARN, code, msg,
                                  raw[max(0, m.start() - 6): m.start() + 6].strip()))
+
+        for code, rx, allow, msg in COLLOQUIAL_RULES:
+            scan_terms(code, rx, allow, msg)
+        for code, rx, allow, msg, both_scripts in REGIONAL_RULES:
+            if simplified and not both_scripts:
+                continue
+            scan_terms(code, rx, allow, msg)
     return findings
 
 
