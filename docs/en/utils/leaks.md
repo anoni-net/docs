@@ -36,7 +36,7 @@ As with the rest of this section, the page still works with the network off, whi
 
 ### About the requests you will see in devtools
 
-Open the network tab and you will find this page contacting `aa.anoni.net`. That is our self-hosted site analytics, and it records that someone viewed a page. It has nothing to do with the values above: it neither receives them nor wants them.
+Open the network tab and you will find this page contacting a subdomain of anoni.net. That is our self-hosted site analytics, and it records that someone viewed a page. It has nothing to do with the values above: it neither receives them nor wants them. The onion build loads no analytics at all, so that version does not even make this one request.
 
 Telling those two apart is exactly what this page is for. One site can both count how many people visited and identify who you are, and the first needs far less data than the second. To avoid the question entirely, turn the network off and use this page then. No requests happen at all.
 

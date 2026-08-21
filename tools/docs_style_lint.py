@@ -157,6 +157,22 @@ REGIONAL_RULES = [
      "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）"),
 ]
 
+# 會讓 onion 建置的驗證步驟中止上傳的字串。
+#
+# build_docs.yml 的 Verify onion output 會 grep 產物裡有沒有 aa.anoni.net，有就整格
+# 失敗。replace_sitename_anoni_onion.sh 只刪掉 overrides 裡的分析區塊，內文寫到的
+# 字串它不管。2026-08-21 踩過一次：clearnet 那格上傳成功而 onion 那格中止，站上兩個
+# 版本的內容一整段時間不一致，直到補完才推得上去。
+#
+# 而且 onion 版根本不載入分析，「你會看到這個請求」那種敘述在那個版本本來就不成立。
+# 要在文章裡提到的話，用「anoni.net 底下的子網域」這種寫法。
+#
+# 這一條是 error：它不是文風問題，是推不上去。
+DEPLOY_RULES = [
+    ("onion-unsafe-host", re.compile(r"aa\.anoni\.net"),
+     "內文寫出分析端點的主機名，onion 建置的驗證會中止上傳。改用「anoni.net 底下的子網域」"),
+]
+
 # 其餘口語詞（貢獻者百科「口語字改書面語」）。比對方式與 JIANG 相同：
 # 取命中處前後各 2 字的視窗去對例外清單，避開正當複合詞。繁簡兩種寫法都收。
 # 全部列為 warn，因為替換詞要看語境（跑 → 執行／架設／運作／營運），不宜機器直接改。
@@ -402,6 +418,12 @@ def lint_file(path: Path):
             if not JIANG_ALLOW.search(around):
                 findings.append((i, WARN, "colloquial-jiang",
                                  "口語「講」建議改書面語（提到、說明）", raw[max(0, m.start() - 6): m.start() + 6].strip()))
+        # 用 raw 而不是 clean：主機名多半寫在 code span 裡，而 strip_noise 會把那些
+        # 剝掉，剝完就抓不到了，可是產物裡它照樣在。
+        for code, rx, msg in DEPLOY_RULES:
+            for m in rx.finditer(raw):
+                findings.append((i, ERROR, code, msg,
+                                 raw[max(0, m.start() - 6): m.start() + 6].strip()))
         for code, rx, allow, msg in COLLOQUIAL_RULES + REGIONAL_RULES:
             for m in rx.finditer(clean):
                 around = clean[max(0, m.start() - 2): m.end() + 2]
