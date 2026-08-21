@@ -286,3 +286,6 @@ OONI 记录国家与 ASN，不记录县市，也不记录基站位置。从数�
 
 [^1]: [2026城镇韧性（防空）演习：移动网络降速演练](https://www.ey.gov.tw/Page/9277F759E41CCD91/66c2bed1-6ca3-4c30-ba7c-4fa0f90e00ec){target="_blank"} - 行政院
 [^2]: [行政院补充降速做法](https://www.cna.com.tw/news/aipl/202608100327.aspx){target="_blank"} - 中央社
+
+
+--8<-- "snippets/vega.md"

@@ -219,10 +219,15 @@ extra:
       link: https://form.anoni.net/s/cmc9ceju1000dlj017fiathzq
 extra_css:
   - stylesheets/extra.css
+# vega 三件套（約 820 KB）不放在這裡。放進 extra_javascript 等於全站每一頁都載，
+# 而全站 198 頁裡只有 3 頁畫圖表。改成那三頁各自在內文裡引用，見 snippets/vega.md。
+# privacy plugin 照樣會把它們抓成本地檔案，只是現在只有需要的頁面才連過去。
+#
+# 底下這一個檔案的檔名同時含 vega、vega-lite、vega-embed，是為了通過
+# mkdocs-charts-plugin 在 on_config 的相依檢查，理由寫在那個檔案裡。
+# tools/test_chart_assets.mjs 守著這個安排。
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/vega@5
-  - https://cdn.jsdelivr.net/npm/vega-lite@5
-  - https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+  - js/vega-vega-lite-vega-embed-ondemand.js
 hooks:
   - hooks/latest_posts.py
   - hooks/offline_index.py
