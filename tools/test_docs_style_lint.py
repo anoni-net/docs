@@ -112,6 +112,10 @@ CASES: list[tuple[str, bool, str]] = [
 
     # --- 抑制指示 ---
     ("這是一段話——插入語。 <!-- docs-style-lint: disable-line -->", False, "disable-line 抑制"),
+    # onion 建置的驗證會 grep 產物裡的分析端點主機名，出現就中止上傳
+    ("你會看到這一頁連了 `aa.anoni.net` 那個端點。", True, "內文寫出分析端點主機名"),
+    ("你會看到這一頁連了一個 anoni.net 底下的子網域。", False, "改成描述性的寫法"),
+
 ]
 
 BLOCK_CASE = (
