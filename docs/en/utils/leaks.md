@@ -20,9 +20,13 @@ This is browser fingerprinting. It needs no cookies and clearing your browsing d
 
 ## Open this again in another browser
 
-Comparison is what makes this page useful. Look at it in your usual browser, note a few values, then open the same page in [Tor Browser](../tools/what-is-tor.md).
+Comparison is what makes this page useful, and there are two ways to do it.
 
-The time zone becomes UTC, the language becomes en-US, the graphics card turns into a generic string, and the font list shrinks to a fixed set. Tor Browser is not withholding something from you: it makes every user look alike, so sites cannot tell them apart. Each item is annotated with what it does.
+The eight-character code at the top folds together the stable values below it. **Open the same page in another browser and compare only that code** to see whether anything changed. Values that drift, such as window size and storage quota, are left out, so the same browser gives the same code every time. That code is itself an identifier, which is exactly the point: these values together are enough to recognise you.
+
+To find out which item changed, read the reference line under each value. The time zone entry says "Tor Browser shows: UTC" rather than "this gets normalised", so you can check it on the spot.
+
+Open this page in [Tor Browser](../tools/what-is-tor.md) and the time zone really does become UTC, the language en-US, the graphics card a generic string, and the font list one fixed set. Tor Browser is not withholding something from you: it makes every user look alike, so sites cannot tell them apart.
 
 To adjust that behaviour, see [Tor Browser advanced settings](../tools/tor-browser-advanced.md).
 

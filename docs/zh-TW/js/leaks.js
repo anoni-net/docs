@@ -42,6 +42,21 @@
     return widths.some((w, i) => Math.abs(w - baselines[i]) > 0.5);
   }
 
+  // 把幾項穩定的值揉成一個短碼，讓讀者換瀏覽器只要比對這一個，不必記住十幾個值。
+  //
+  // 只收 stable 的項目。視窗尺寸拉一下就變、儲存配額會漂移、裝置插拔會變，那些混
+  // 進來的話同一個瀏覽器每次開都給出不同的碼，比對就失去意義。
+  //
+  // 這個碼本身是指紋，所以跟其他數值一樣只顯示在畫面上，不儲存也不匯出。它的用途
+  // 是讓讀者理解「這些值加起來就是一個識別碼」，親眼看到比讀說明有效。
+  function digestOf(entries) {
+    const parts = entries
+      .filter((entry) => entry.stable)
+      .sort((a, b) => (a.key < b.key ? -1 : 1))
+      .map((entry) => `${entry.key}=${entry.value === null ? "" : entry.value}`);
+    return shortHash(parts.join("\n"));
+  }
+
   // 幾項數值湊出來的組合有多少種可能，用來說明「單看不起眼，加起來就認得出人」。
   // 只算我們列出來的這幾項，不是全網統計，所以文案上說的是「這幾項加起來」。
   function combinations(counts) {
@@ -57,6 +72,7 @@
     {
       key: "timezone",
       needsPermission: false,
+      stable: true,
       read: (t) => {
         const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
         const offset = -new Date().getTimezoneOffset() / 60;
@@ -66,17 +82,22 @@
     {
       key: "language",
       needsPermission: false,
+      stable: true,
       read: () => (navigator.languages || [navigator.language]).join(", "),
     },
     {
       key: "screen",
       needsPermission: false,
+      stable: true,
       read: (t) =>
         t.fmt.screen(screen.width, screen.height, window.innerWidth, window.innerHeight, window.devicePixelRatio),
+      // 視窗尺寸讀者一拉就變，摘要碼只取螢幕本身，不然每次開視窗大小不同就對不起來
+      digest: () => `${screen.width}x${screen.height}x${window.devicePixelRatio}`,
     },
     {
       key: "hardware",
       needsPermission: false,
+      stable: true,
       read: (t) =>
         t.fmt.hardware(
           navigator.hardwareConcurrency || "?",
@@ -87,6 +108,7 @@
     {
       key: "webgl",
       needsPermission: false,
+      stable: true,
       read: () => {
         const canvas = document.createElement("canvas");
         const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
@@ -103,6 +125,7 @@
     {
       key: "canvas",
       needsPermission: false,
+      stable: true,
       read: () => {
         const canvas = document.createElement("canvas");
         canvas.width = 240;
@@ -121,6 +144,7 @@
     {
       key: "fonts",
       needsPermission: false,
+      stable: true,
       read: () => {
         // 拿一段文字分別用備援字型與「目標字型加備援」量寬度。裝了目標字型的話
         // 寬度會跟三種備援都不一樣。
@@ -147,6 +171,7 @@
     {
       key: "preferences",
       needsPermission: false,
+      stable: true,
       read: (t) => {
         const asks = [
           ["prefers-color-scheme: dark", "dark"],
@@ -168,6 +193,88 @@
         const { quota } = await navigator.storage.estimate();
         if (!quota) return null;
         return t.fmt.storage((quota / 1024 / 1024 / 1024).toFixed(1));
+      },
+    },
+    {
+      key: "clientHints",
+      needsPermission: false,
+      stable: true,
+      read: async (t) => {
+        const data = navigator.userAgentData;
+        if (!data || !data.getHighEntropyValues) return null;
+        const hints = await data.getHighEntropyValues([
+          "platform", "platformVersion", "model", "architecture", "bitness",
+        ]);
+        return [
+          hints.platform && hints.platformVersion
+            ? `${hints.platform} ${hints.platformVersion}`
+            : hints.platform,
+          hints.model || null,
+          hints.architecture && hints.bitness
+            ? `${hints.architecture} ${hints.bitness} 位元`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(t.fmt.listSeparator);
+      },
+    },
+    {
+      key: "clientRects",
+      needsPermission: false,
+      stable: true,
+      read: () => {
+        // 量一個帶小數尺寸的元素。同樣的 CSS，不同的字型堆疊與縮放會算出不同的
+        // 小數位，而那幾位小數就是識別碼。
+        const probe = document.createElement("div");
+        probe.style.cssText =
+          "position:absolute;left:-9999px;top:-9999px;width:12.3456px;height:7.891px;" +
+          "font:11.7px 'Arial';padding:0.13em;transform:rotate(0.37deg);";
+        probe.textContent = "anoni";
+        document.body.appendChild(probe);
+        const rect = probe.getBoundingClientRect();
+        probe.remove();
+        return shortHash([rect.width, rect.height, rect.x, rect.y].join(","));
+      },
+    },
+    {
+      key: "audio",
+      needsPermission: false,
+      stable: true,
+      read: async () => {
+        const Ctx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        if (!Ctx) return null;
+        const ctx = new Ctx(1, 44100, 44100);
+        const osc = ctx.createOscillator();
+        osc.type = "triangle";
+        osc.frequency.value = 10000;
+        const compressor = ctx.createDynamicsCompressor();
+        compressor.threshold.value = -50;
+        compressor.knee.value = 40;
+        compressor.ratio.value = 12;
+        compressor.attack.value = 0;
+        compressor.release.value = 0.25;
+        osc.connect(compressor);
+        compressor.connect(ctx.destination);
+        osc.start(0);
+        const rendered = await ctx.startRendering();
+        const data = rendered.getChannelData(0);
+        // 取中段一小片就夠，整段四萬多個樣本沒有必要
+        let sum = "";
+        for (let i = 4500; i < 5000; i += 1) sum += Math.abs(data[i]).toFixed(8);
+        return shortHash(sum);
+      },
+    },
+    {
+      key: "donottrack",
+      needsPermission: false,
+      stable: true,
+      read: (t) => {
+        const dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1";
+        const gpc = navigator.globalPrivacyControl === true;
+        if (!dnt && !gpc) return null;
+        return [dnt ? "Do Not Track" : null, gpc ? "Global Privacy Control" : null]
+          .filter(Boolean)
+          .join(t.fmt.listSeparator);
       },
     },
     {
@@ -216,6 +323,13 @@
       padding: .7rem 0;
     }
     #leaks-tool .lk-name { font-weight: 700; font-size: .78rem; }
+    #leaks-tool .lk-summary { margin: 0 0 1.2rem; }
+    #leaks-tool .lk-code {
+      font-family: var(--md-code-font-family, monospace);
+      font-size: 1.4rem; letter-spacing: .1em; margin: 0;
+    }
+    #leaks-tool .lk-code-why { font-size: .7rem; opacity: .75; line-height: 1.6; margin: .2rem 0 0; }
+    #leaks-tool .lk-tor-label { opacity: .7; }
     #leaks-tool .lk-value {
       font-family: var(--md-code-font-family, monospace);
       font-size: .74rem; word-break: break-word; margin: .25rem 0;
@@ -288,6 +402,8 @@
   const STRINGS = {
     "zh-TW": {
       fmt: FMT_ZH_TW,
+      torLabel: "Tor Browser 會顯示",
+      summary: "上面 {n} 項穩定的值揉成的短碼。換一個瀏覽器打開這一頁，比對這一個就知道有沒有變。它本身就是一個識別碼，所以只出現在畫面上，沒有存起來也沒有匯出。",
       unavailable: "這個瀏覽器沒有提供",
       denied: "你拒絕了，或者系統擋住了",
       askTitle: "下面這一項要你按了才會問",
@@ -299,6 +415,10 @@
         timezone: "時區", language: "語言偏好", screen: "螢幕與視窗", hardware: "硬體",
         webgl: "顯示卡", canvas: "Canvas 指紋", fonts: "裝了哪些字型",
         preferences: "系統偏好設定", storage: "可用的儲存空間", devices: "影音裝置數量",
+        clientHints: "Client Hints",
+        clientRects: "元素位置的小數位",
+        audio: "音訊指紋",
+        donottrack: "追蹤偏好訊號",
         location: "地理位置",
       },
       why: {
@@ -312,24 +432,34 @@
         preferences: "無障礙設定也是指紋。開了輔助功能的人反而更容易被認出來。",
         storage: "配額跟裝置的可用空間有關，是一個會慢慢變動的粗略指標。",
         devices: "不需要授權就數得出你有幾個相機與麥克風，數量組合本身就是指紋的一部分。",
+        clientHints: "Chrome 用來取代 User-Agent 的機制，拿得到作業系統版本、機型與位元數，比原本的 User-Agent 更精確。它被稱為隱私友善的替代方案，而網站不必問你就讀得到。",
+        clientRects: "同一段 CSS 畫出來的方塊，在不同的字型堆疊與縮放下算出來的小數位不一樣。連一個看不見的方塊落在畫面上哪個位置都能當識別碼。",
+        audio: "產生一段聽不到的音訊再取數值特徵。不同的音訊處理實作算出來的浮點數有細微差異，跟 canvas 是同一類手法，但更少人知道。",
+        donottrack: "你送出的「請不要追蹤我」訊號。實務上幾乎沒有網站遵守，而送出這個訊號的人相對少，反而讓你更容易被認出來。",
         location: "最直接的一項，精確到公尺。這一項要授權，其他項目都不用。",
       },
       tor: {
-        timezone: "Tor Browser 一律回報 UTC。",
-        language: "Tor Browser 預設一律回報 en-US，所以這個網站不看這個值來決定語言。",
-        screen: "Tor Browser 把視窗尺寸固定成幾種常見值，並用 letterboxing 補上留白。",
-        hardware: "Tor Browser 統一回報 2 核心，並且不提供 deviceMemory。",
-        webgl: "Tor Browser 把廠商與型號換成通用字串。Brave 1.93 起也做了同樣的事。",
-        canvas: "Tor Browser 預設擋掉 canvas 讀取，需要時會問你。Brave 改用加雜訊的做法。",
-        fonts: "Tor Browser 只讓網站看到一組固定的內建字型。",
-        preferences: "Tor Browser 一律回報淺色、不減少動態，讓所有人看起來一樣。",
-        storage: "Tor Browser 把配額回報成固定值。",
-        devices: "Tor Browser 不提供裝置清單。",
-        location: "Tor Browser 直接停用地理位置 API，連問都不會問。",
+        timezone: "UTC",
+        language: "en-US（所以這個網站不看這個值來決定語言）",
+        screen: "固定成幾種常見尺寸，其餘用留白補齊",
+        hardware: "2 核心，不提供記憶體大小",
+        webgl: "通用字串，看不出實際型號（Brave 1.93 起也是）",
+        canvas: "預設擋掉，需要時會問你（Brave 改用加雜訊）",
+        fonts: "一組固定的內建字型，所有人都一樣",
+        preferences: "淺色、不減少動態，所有人都一樣",
+        storage: "固定值",
+        devices: "不提供",
+        clientHints: "不提供，那個 API 在 Tor Browser 上不存在",
+        clientRects: "加了雜訊，每個瀏覽階段的值都不同",
+        audio: "加了雜訊，每個瀏覽階段的值都不同",
+        donottrack: "預設送出 Do Not Track，所有使用者一致",
+        location: "停用，連問都不會問",
       },
     },
     zh: {
       fmt: FMT_ZH,
+      torLabel: "Tor Browser 会显示",
+      summary: "上面 {n} 项稳定的值揉成的短码。换一个浏览器打开这一页，比对这一个就知道有没有变。它本身就是一个识别码，所以只出现在画面上，没有存起来也没有导出。",
       unavailable: "这个浏览器没有提供",
       denied: "你拒绝了，或者系统挡住了",
       askTitle: "下面这一项要你按了才会问",
@@ -341,6 +471,10 @@
         timezone: "时区", language: "语言偏好", screen: "屏幕与窗口", hardware: "硬件",
         webgl: "显卡", canvas: "Canvas 指纹", fonts: "装了哪些字体",
         preferences: "系统偏好设置", storage: "可用的存储空间", devices: "影音设备数量",
+        clientHints: "Client Hints",
+        clientRects: "元素位置的小数位",
+        audio: "音频指纹",
+        donottrack: "追踪偏好信号",
         location: "地理位置",
       },
       why: {
@@ -354,24 +488,34 @@
         preferences: "无障碍设置也是指纹。开了辅助功能的人反而更容易被认出来。",
         storage: "配额跟设备的可用空间有关，是一个会慢慢变动的粗略指标。",
         devices: "不需要授权就数得出你有几个相机与麦克风，数量组合本身就是指纹的一部分。",
+        clientHints: "Chrome 用来取代 User-Agent 的机制，拿得到操作系统版本、机型与位数，比原本的 User-Agent 更精确。它被称为隐私友善的替代方案，而网站不必问你就读得到。",
+        clientRects: "同一段 CSS 画出来的方块，在不同的字体堆叠与缩放下算出来的小数位不一样。连一个看不见的方块落在画面上哪个位置都能当识别码。",
+        audio: "生成一段听不到的音频再取数值特征。不同的音频处理实作算出来的浮点数有细微差异，跟 canvas 是同一类手法，但更少人知道。",
+        donottrack: "你送出的「请不要追踪我」信号。实务上几乎没有网站遵守，而送出这个信号的人相对少，反而让你更容易被认出来。",
         location: "最直接的一项，精确到米。这一项要授权，其他项目都不用。",
       },
       tor: {
-        timezone: "Tor Browser 一律回报 UTC。",
-        language: "Tor Browser 预设一律回报 en-US，所以这个网站不看这个值来决定语言。",
-        screen: "Tor Browser 把窗口尺寸固定成几种常见值，并用 letterboxing 补上留白。",
-        hardware: "Tor Browser 统一回报 2 核心，并且不提供 deviceMemory。",
-        webgl: "Tor Browser 把厂商与型号换成通用字符串。Brave 1.93 起也做了同样的事。",
-        canvas: "Tor Browser 预设挡掉 canvas 读取，需要时会问你。Brave 改用加噪声的做法。",
-        fonts: "Tor Browser 只让网站看到一组固定的内建字体。",
-        preferences: "Tor Browser 一律回报浅色、不减少动态，让所有人看起来一样。",
-        storage: "Tor Browser 把配额回报成固定值。",
-        devices: "Tor Browser 不提供设备清单。",
-        location: "Tor Browser 直接停用地理位置 API，连问都不会问。",
+        timezone: "UTC",
+        language: "en-US（所以这个网站不看这个值来决定语言）",
+        screen: "固定成几种常见尺寸，其余用留白补齐",
+        hardware: "2 核心，不提供内存大小",
+        webgl: "通用字符串，看不出实际型号（Brave 1.93 起也是）",
+        canvas: "预设挡掉，需要时会问你（Brave 改用加噪声）",
+        fonts: "一组固定的内建字体，所有人都一样",
+        preferences: "浅色、不减少动态，所有人都一样",
+        storage: "固定值",
+        devices: "不提供",
+        clientHints: "不提供，那个 API 在 Tor Browser 上不存在",
+        clientRects: "加了噪声，每个浏览阶段的值都不同",
+        audio: "加了噪声，每个浏览阶段的值都不同",
+        donottrack: "预设送出 Do Not Track，所有使用者一致",
+        location: "停用，连问都不会问",
       },
     },
     en: {
       fmt: FMT_EN,
+      torLabel: "Tor Browser shows",
+      summary: "A short code folded from the {n} stable values above. Open this page in another browser and compare just this one to see whether anything changed. The code is itself an identifier, so it appears on screen only, with nothing stored and nothing exported.",
       unavailable: "not available in this browser",
       denied: "you declined, or the system blocked it",
       askTitle: "This one only runs when you press the button",
@@ -383,7 +527,10 @@
         timezone: "Time zone", language: "Language preferences", screen: "Screen and window",
         hardware: "Hardware", webgl: "Graphics card", canvas: "Canvas fingerprint",
         fonts: "Installed fonts", preferences: "System preferences",
-        storage: "Available storage", devices: "Audio and video devices", location: "Location",
+        storage: "Available storage", devices: "Audio and video devices",
+        clientHints: "Client Hints", clientRects: "Sub-pixel element geometry",
+        audio: "Audio fingerprint", donottrack: "Tracking preference signals",
+        location: "Location",
       },
       why: {
         timezone: "Your time zone points at roughly which longitude you are on, and a VPN does not change it because it comes from the operating system.",
@@ -396,25 +543,39 @@
         preferences: "Accessibility settings are a fingerprint too. Turning assistive features on makes you easier to recognise, not harder.",
         storage: "The quota relates to free space on the device, a coarse signal that drifts slowly over time.",
         devices: "No permission is needed to count your cameras and microphones, and that combination is part of the fingerprint.",
+        clientHints: "Client Hints",
+        clientRects: "Sub-pixel element geometry",
+        audio: "Audio fingerprint",
+        donottrack: "Tracking preference signals",
+        clientHints: "Chrome's replacement for the User-Agent string. It exposes the operating system version, device model and word size, which is more precise than the header it replaces. It is presented as the privacy-friendly option, and sites read it without asking.",
+        clientRects: "The same CSS produces boxes whose sub-pixel dimensions differ across font stacks and scaling. Even where an invisible box lands on screen works as an identifier.",
+        audio: "Render an inaudible tone and take numeric features of the result. Different audio implementations produce slightly different floating point values. Same family as canvas, far less well known.",
+        donottrack: "The signal that asks sites not to track you. Almost nothing honours it in practice, and relatively few people send it, so it makes you easier to pick out rather than harder.",
         location: "The most direct one, accurate to metres. This is the only item here that asks permission.",
       },
       tor: {
-        timezone: "Tor Browser always reports UTC.",
-        language: "Tor Browser reports en-US by default, which is why this site does not use that value to pick a language.",
-        screen: "Tor Browser rounds the window to a small set of common sizes and pads the rest with letterboxing.",
-        hardware: "Tor Browser reports 2 cores for everyone and does not expose deviceMemory.",
-        webgl: "Tor Browser replaces vendor and model with generic strings. Brave has done the same since 1.93.",
-        canvas: "Tor Browser blocks canvas reads by default and asks when a site needs one. Brave adds noise instead.",
-        fonts: "Tor Browser exposes only a fixed set of bundled fonts.",
-        preferences: "Tor Browser reports light mode and no reduced motion for everyone.",
-        storage: "Tor Browser reports a fixed quota.",
-        devices: "Tor Browser does not expose the device list.",
-        location: "Tor Browser disables the geolocation API outright and never even asks.",
+        timezone: "UTC",
+        language: "en-US, which is why this site does not use it to pick a language",
+        screen: "rounded to a few common sizes, the rest padded with letterboxing",
+        hardware: "2 cores, with no memory figure",
+        webgl: "a generic string that reveals no model (Brave does the same since 1.93)",
+        canvas: "blocked by default, with a prompt when a site needs it (Brave adds noise instead)",
+        fonts: "one fixed set of bundled fonts, identical for everyone",
+        preferences: "light mode and no reduced motion, identical for everyone",
+        storage: "a fixed quota",
+        devices: "not exposed",
+        clientHints: "not available, the API does not exist in Tor Browser",
+        clientRects: "noised, differing every browsing session",
+        audio: "noised, differing every browsing session",
+        donottrack: "Do Not Track is sent by default, identically for every user",
+        location: "disabled, without even asking",
       },
     },
   };
 
   const t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
+  const fill = (key, vars) =>
+    t[key].replace(/\{(\w+)\}/g, (_, name) => String(vars[name]));
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -433,13 +594,25 @@
     } else {
       item.appendChild(el("p", "lk-value", value));
     }
+    // 對照值排在自己的值正下方，換瀏覽器時一眼看得出哪一項會變。原本只寫「Tor
+    // Browser 會統一掉」，讀者得自己去記十幾個值才比對得起來。
+    const tor = el("p", "lk-tor");
+    tor.appendChild(el("span", "lk-tor-label", t.torLabel + "："));
+    tor.appendChild(document.createTextNode(t.tor[probe.key]));
+    item.appendChild(tor);
     item.appendChild(el("p", "lk-why", t.why[probe.key]));
-    item.appendChild(el("p", "lk-tor", t.tor[probe.key]));
     return item;
   }
 
+  // 摘要碼要等所有項目都讀完才算得出來，先放一個占位，收集齊了再填。
+  const summary = el("div", "lk-summary");
+  root.appendChild(summary);
+
   const list = el("div");
   root.appendChild(list);
+
+  const collected = [];
+  const pending = [];
 
   for (const probe of PROBES) {
     if (probe.needsPermission) continue;
@@ -449,16 +622,45 @@
     } catch (err) {
       value = null;
     }
+    const record = (resolved) => {
+      // 摘要用 digest()，沒給就用畫面上那個值。screen 那一項的顯示值含視窗尺寸，
+      // 讀者拉一下視窗就變，所以它另外給了一個只含螢幕的版本。
+      let digestValue = resolved;
+      if (probe.digest) {
+        try {
+          digestValue = probe.digest();
+        } catch (err) {
+          digestValue = null;
+        }
+      }
+      collected.push({ key: probe.key, stable: probe.stable === true, value: digestValue });
+    };
     if (value && typeof value.then === "function") {
       const holder = el("div");
       list.appendChild(holder);
-      value
-        .then((resolved) => holder.replaceWith(renderItem(probe, resolved)))
-        .catch(() => holder.replaceWith(renderItem(probe, null)));
+      pending.push(
+        value
+          .then((resolved) => {
+            holder.replaceWith(renderItem(probe, resolved));
+            record(resolved);
+          })
+          .catch(() => {
+            holder.replaceWith(renderItem(probe, null));
+            record(null);
+          })
+      );
     } else {
       list.appendChild(renderItem(probe, value));
+      record(value);
     }
   }
+
+  Promise.all(pending).then(() => {
+    const code = digestOf(collected);
+    const counted = collected.filter((entry) => entry.stable).length;
+    summary.appendChild(el("p", "lk-code", code));
+    summary.appendChild(el("p", "lk-code-why", fill("summary", { n: counted })));
+  });
 
   // 要授權的那些單獨放，按了才跑，而且按之前先說會拿到什麼
   const gated = PROBES.filter((probe) => probe.needsPermission);

@@ -43,13 +43,14 @@ const grab = (re) => {
 const harness = `
   ${grab(/^  function shortHash\(text\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function fontDetected\(widths, baselines\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function digestOf\(entries\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function combinations\(counts\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const PROBES = \[[\s\S]*?\n  \];/m)}
   ${grab(/^  const FMT_ZH_TW = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const FMT_ZH = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const FMT_EN = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { shortHash, fontDetected, combinations, PROBES, STRINGS };
+  return { shortHash, fontDetected, digestOf, combinations, PROBES, STRINGS };
 `;
 const mod = new Function(harness)();
 
@@ -142,6 +143,58 @@ test('沒有記憶體資訊時不留下空欄位', () => {
   assert.ok(withMemory.includes('16 GB'));
   assert.ok(!without.includes('GB'), without);
   assert.ok(!without.includes('，，'), without);
+});
+
+test('摘要碼只收穩定的項目', () => {
+  // 換瀏覽器比對摘要碼是這一頁的主要用法。混進會漂移的值，同一個瀏覽器每次開都
+  // 給出不同的碼，比對就失去意義。
+  const base = [
+    { key: 'timezone', stable: true, value: 'Asia/Taipei' },
+    { key: 'storage', stable: false, value: '10.0 GB' },
+  ];
+  const drifted = [
+    { key: 'timezone', stable: true, value: 'Asia/Taipei' },
+    { key: 'storage', stable: false, value: '7.4 GB' },
+  ];
+  assert.equal(mod.digestOf(base), mod.digestOf(drifted));
+});
+
+test('穩定的值變了摘要碼就跟著變', () => {
+  const a = mod.digestOf([{ key: 'timezone', stable: true, value: 'Asia/Taipei' }]);
+  const b = mod.digestOf([{ key: 'timezone', stable: true, value: 'UTC' }]);
+  assert.notEqual(a, b, '換到 Tor Browser 之後這個碼要看得出不一樣');
+});
+
+test('摘要碼跟項目回來的先後無關', () => {
+  // 有幾項是 async，完成順序每次都可能不同
+  const one = [
+    { key: 'timezone', stable: true, value: 'UTC' },
+    { key: 'canvas', stable: true, value: 'abc123' },
+  ];
+  assert.equal(mod.digestOf(one), mod.digestOf([...one].reverse()));
+});
+
+test('會漂移的項目沒有被標成穩定', () => {
+  for (const key of ['storage', 'devices', 'location']) {
+    const probe = mod.PROBES.find((p) => p.key === key);
+    assert.ok(probe, `找不到 ${key}`);
+    assert.ok(!probe.stable, `${key} 會變，不該進摘要碼`);
+  }
+});
+
+test('視窗尺寸不進摘要碼，只取螢幕本身', () => {
+  // 讀者拉一下視窗，畫面上的值就變了，但那不代表換了瀏覽器
+  const screen = mod.PROBES.find((p) => p.key === 'screen');
+  assert.ok(screen.stable);
+  assert.ok(screen.digest, 'screen 要另外給一個只含螢幕的版本');
+});
+
+test('每一項都有對照值可以比，不只是說明', () => {
+  // 原本只寫「Tor Browser 會統一掉」，讀者換瀏覽器得自己記十幾個值
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    assert.ok(mod.STRINGS[lang].torLabel, `${lang} 少了對照值的標題`);
+    assert.ok(mod.STRINGS[lang].summary, `${lang} 少了摘要碼的說明`);
+  }
 });
 
 test('雜湊穩定、同輸入同輸出、不同輸入不同輸出', () => {
