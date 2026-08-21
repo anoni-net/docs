@@ -28,9 +28,9 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Turn onion addresses, Tor bridges and other long, easily mistyped strings into a QR code the person in front of you can read with a camera, without anything passing through a server. Downloadable as SVG for printing.
 
--   :material-eye-outline: **[What your browser gives away](leaks.md)**
+-   :material-qrcode-scan: **[QR code reader](qr-read.md)**
 
-    Lists what any site can read without asking, annotated with how Tor Browser normalises each one. Open it in a second browser to see what those defences actually do.
+    Read what is inside a QR code image without the image leaving your device. URLs get their hostname shown separately, and there is no open button.
 
 -   :material-image-off-outline: **[Photo metadata remover](strip-metadata.md)**
 
@@ -44,9 +44,9 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Find zero-width characters, bidirectional controls and homoglyphs hiding in text, with positions marked and each class explained. Both document leak tracking and phishing URLs rely on these.
 
--   :material-qrcode-scan: **[QR code reader](qr-read.md)**
+-   :material-eye-outline: **[What your browser gives away](leaks.md)**
 
-    Read what is inside a QR code image without the image leaving your device. URLs get their hostname shown separately, and there is no open button.
+    Lists what any site can read without asking, annotated with how Tor Browser normalises each one. Open it in a second browser to see what those defences actually do.
 
 </div>
 
