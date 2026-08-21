@@ -26,6 +26,97 @@ This is not hypothetical. Scan a document before forwarding it.
 
 A right-to-left override in source code makes what a human sees in the editor differ from what the compiler reads. A comment appears to enclose a block of code while doing nothing of the sort. The technique has a name: Trojan Source.
 
+## Situations where this actually comes up
+
+### Verifying a leak with the organisation it came from
+
+A journalist receives an internal document. Putting it to the organisation for comment is a professional requirement, and the natural way to do that is to show the document, or to quote an exact passage and ask whether it is genuine.
+
+If that document is one of twenty copies each marked differently, this hands the source to the people looking for them. Every step was done properly, and the source is burned at the moment of verification.
+
+The order of operations:
+
+1. Scan the document on arrival, before reading it through
+2. If anything turns up, clean a working copy and file the original separately
+3. Put the substance to the organisation in your own words rather than showing the document
+4. When an exact quote is needed, retype it rather than copying and pasting
+
+Step four is the one that gets missed. Zero-width characters travel with copy and paste, so pasting the passage into your email pastes the marking along with it.
+
+The reverse holds too. Copy sent to the desk inside a newsroom, and embargoed releases sent to a press list, can carry the same markings, used to establish who published early. Anyone receiving an embargoed release is inside this problem.
+
+For the wider context, see [journalists protecting sources](../scenarios/journalist.md).
+
+### Documents circulating between organisations
+
+A draft joint statement going back and forth between several groups, an advocacy coalition's internal memo, background papers a government body sends to its advisory committee.
+
+What these have in common is that they get forwarded repeatedly, and every forward preserves the original invisible characters intact. The fifth person to receive it has no idea what the first copy carried, or who they will be traced to when they pass it on.
+
+Scan before forwarding to a partner organisation. It costs ten seconds.
+
+### Bridge lines and onion addresses you were sent
+
+Someone posts an obfs4 bridge line in a chat room, or an announcement includes an onion address. Both are long, impossible to memorise and only ever handled by copy and paste, which makes them a convenient place to hide characters.
+
+An onion address is base32: only `a` to `z` and `2` to `7`. Cyrillic letters and invisible characters are not in that set, so pasting a tampered address into Tor Browser usually fails to connect rather than connecting somewhere else. Bridge lines are the more realistic risk: a long configuration string with an invisible character in the middle can fail to parse, or be truncated during forwarding into a different set of parameters that still looks plausible.
+
+The attack that genuinely does connect you somewhere else is one this page cannot catch. An adversary can compute a legitimate onion address whose prefix closely resembles the real one. It contains no hidden characters at all; every character is valid base32. Telling them apart means comparing all 56 characters, or fetching the address again from a source you trust.
+
+## Screenshots are cleaner than copy and paste, at a price
+
+Zero-width characters travel with copy and paste. They do not travel with a screenshot. So when passing on a piece of text whose origin you do not know, a screenshot is the cleaner option.
+
+There are three costs, and all of them count:
+
+- A screenshot is not searchable. Whoever receives it cannot search it, or copy a phrase out of it to check
+- Screen readers cannot read text in an image, which is a real accessibility regression
+- The screenshot itself carries metadata, and very easily captures the notification bar, other conversation windows, or filenames on your desktop
+
+The third is fixable: strip the EXIF with the [photo metadata remover](strip-metadata.md), and look at what else is on screen before you capture. The first two are not fixable, so the trade-off depends on the situation.
+
+For sensitive content going to one person, a screenshot makes sense. For anything meant to be published and found, retyping beats screenshotting.
+
+## Instructions for language models, hidden in the text
+
+Invisible characters can carry an entire set of instructions inside a document, a GitHub issue or a commit message that looks completely ordinary. People cannot read them. Models can.
+
+The tag character block is particularly suited to this. `U+E0020` through `U+E007E` map one to one onto ASCII `0x20` through `0x7E`, so any English instruction can be encoded as a sequence that displays as nothing at all, at any length. This page flags characters in that block as suspicious, because ordinary text has no use for them.
+
+Why this matters to people who are not developers: when you paste text of unknown origin into an AI assistant, anything hidden inside it becomes part of the model's input. Such an instruction can tell the model to disregard what came before, shift the stance of a summary, or work a particular link into the answer. You see ordinary text. The model sees ordinary text plus an instruction.
+
+Worth noting that the reverse is also in use: some tools watermark AI-generated text with zero-width characters, to establish afterwards whether a passage came from a model. The same characters serve as a covert instruction in one direction and a marker in the other.
+
+## What this page cannot prove
+
+If your conclusion after using this tool is "I scanned it, it is safe to forward", the tool has left you worse off than not using it.
+
+Zero-width characters are the crudest way to mark a document, and it is precisely their crudeness that makes them detectable. Anyone seriously trying to trace a leak has options this page will never see:
+
+- Swap a few synonyms per copy: "immediately" against "right away", "approximately" against "about"
+- Vary the number of blank lines between paragraphs, or where lines break
+- Adjust punctuation, a comma in one copy and a semicolon in another
+- Adjust the spacing between individual characters in a PDF, invisible to the eye and a different number in the file
+- Place visual markings that are hard to see, such as one character a shade off in colour
+
+And some markings are not in the text at all. Colour laser printers lay down a grid of yellow dots on every page, encoding the printer's serial number and the time of printing. The scheme is called Machine Identification Code. Print a document and scan it back in, and the copy in your hands can still be traced.
+
+### This page can prove presence, not absence
+
+Something turning up means the document was marked. Nothing turning up only means it was not marked in these particular ways, and not that it is clean.
+
+For genuinely sensitive documents, the correct handling is to retype the content or convey it in your own words, rather than passing on the original file.
+
+## Detection, not insertion
+
+One technique, two uses. An organisation wanting to keep internal documents from leaking is a legitimate need; the same zero-width characters used to identify a whistleblower are an instrument of coercion. The technique cannot tell those apart. The people using it can.
+
+The position of this page is to explain how the technique works, so that whoever receives a document can protect themselves, while providing no way to produce marked copies.
+
+Specifically not built: a generator that adds invisible markings to a piece of text, a tool that produces multiple differently-marked copies in bulk, or worked examples of insertion. Anyone wanting to check what this page catches can use the cases in the test file (`tools/test_invisible.mjs`), which exist to verify detection rather than to be repurposed for marking documents.
+
+This is a community position, written down here so that later discussions have something to refer to.
+
 ## False positives are what this tool has to get right
 
 Not every invisible character is a problem.
