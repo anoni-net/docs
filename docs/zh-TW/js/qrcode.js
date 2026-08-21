@@ -81,7 +81,12 @@
     #qrcode-tool { margin: 1em 0; }
     #qrcode-tool textarea {
       width: 100%; box-sizing: border-box; font: inherit;
-      font-family: var(--md-code-font-family, monospace); font-size: .78rem;
+      font-family: var(--md-code-font-family, monospace);
+      /* iOS Safari 在輸入框字級小於 16px 時，一聚焦就把整頁放大，而且不會縮回去。
+         material 的 rem 基準是 20px，.78rem 只有 15.6px 剛好踩到。用 max 撐到 16px，
+         桌機上的差別看不出來。不改 viewport 的 user-scalable，那會讓需要放大的人
+         沒辦法放大。 */
+      font-size: max(16px, .78rem);
       border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; padding: .6rem; min-height: 5rem; resize: vertical;
       background: var(--md-default-bg-color); color: var(--md-default-fg-color);
@@ -94,8 +99,12 @@
       border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; padding: .35rem .8rem;
     }
-    #qrcode-tool button:hover:not(:disabled) {
+    /* 同 passphrase.js：填了底色的按鈕不套這條，不然選中之後文字會看不見 */
+    #qrcode-tool button:hover:not(:disabled):not([aria-pressed="true"]) {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
+    }
+    #qrcode-tool button[aria-pressed="true"]:hover:not(:disabled) {
+      filter: brightness(1.1);
     }
     #qrcode-tool button:disabled { opacity: .5; cursor: default; }
     #qrcode-tool button[aria-pressed="true"] {
