@@ -378,6 +378,113 @@
     bytes[at + 3] = value & 0xff;
   }
 
+  // --- PDF ---
+  //
+  // PDF 跟前面幾種格式不一樣，不能直接把某一段剪掉。每個物件在交叉索引表裡都記著
+  // 自己在檔案裡的位元組位置，拿掉一段之後後面全部位移，整張表要重算。PDF 1.5
+  // 之後常見的物件流還會把好幾個物件壓進同一段壓縮資料，從外面根本看不到內容。
+  //
+  // 所以這裡交給 pdf-lib（vendor/pdf-lib.min.js，MIT）。它負責解析與重寫，這一段
+  // 只決定拿掉哪些欄位。
+  const PDF_FIELDS = [
+    ["Title", "setTitle", "getTitle"],
+    ["Author", "setAuthor", "getAuthor"],
+    ["Subject", "setSubject", "getSubject"],
+    ["Creator", "setCreator", "getCreator"],
+    ["Producer", "setProducer", "getProducer"],
+  ];
+
+  function pdfLib() {
+    return typeof window !== "undefined" ? window.PDFLib : null;
+  }
+
+  async function stripPdf(bytes) {
+    const lib = pdfLib();
+    if (!lib) return { ok: false, reason: "pdfLibMissing" };
+    let doc;
+    try {
+      doc = await lib.PDFDocument.load(bytes, {
+        updateMetadata: false,
+        ignoreEncryption: true,
+      });
+    } catch (err) {
+      return { ok: false, reason: "broken" };
+    }
+    if (doc.isEncrypted) return { ok: false, reason: "encrypted" };
+
+    const removed = [];
+    for (const [label, setter, getter] of PDF_FIELDS) {
+      try {
+        const value = doc[getter] ? doc[getter]() : null;
+        if (value) removed.push({ label: "pdf" + label, marker: label, bytes: String(value).length });
+        doc[setter]("");
+      } catch (err) {
+        // 有些欄位型別怪異，讀不到就跳過，不要讓整份檔案處理不了
+      }
+    }
+    try {
+      if (doc.getKeywords && doc.getKeywords()) {
+        removed.push({ label: "pdfKeywords", marker: "Keywords", bytes: 0 });
+      }
+      doc.setKeywords([]);
+    } catch (err) { /* 同上 */ }
+
+    const epoch = new Date(0);
+    try {
+      if (doc.getCreationDate()) removed.push({ label: "pdfDates", marker: "CreationDate", bytes: 0 });
+      doc.setCreationDate(epoch);
+      doc.setModificationDate(epoch);
+    } catch (err) { /* 同上 */ }
+
+    // XMP 是另一個地方。pdf-lib 的那幾個 setter 只動 Info，這一段要自己拆。
+    //
+    // 而且光把引用拿掉不夠：pdf-lib 儲存時會寫出所有註冊過的物件，那段 XMP 照樣
+    // 留在檔案裡，只是沒有人指向它。實測過這個狀況，內容一字不差還在。要從
+    // context 刪掉才算真的清除。
+    const META = lib.PDFName.of("Metadata");
+    const dropMeta = (holder) => {
+      const ref = holder.get(META);
+      if (!ref) return false;
+      holder.delete(META);
+      if (ref instanceof lib.PDFRef) doc.context.delete(ref);
+      return true;
+    };
+    if (dropMeta(doc.catalog)) {
+      removed.push({ label: "pdfXmp", marker: "XMP", bytes: 0 });
+    }
+    let pageMeta = 0;
+    for (const page of doc.getPages()) {
+      if (dropMeta(page.node)) pageMeta += 1;
+    }
+    if (pageMeta) {
+      removed.push({ label: "pdfXmpPage", marker: "XMP", bytes: pageMeta });
+    }
+
+    let data;
+    try {
+      // 不用物件流。壓成流之後讀者拿文字搜尋工具自己核對就看不到東西了，
+      // 而這一頁的立場是讓人驗得動。
+      data = await doc.save({ useObjectStreams: false });
+    } catch (err) {
+      return { ok: false, reason: "broken" };
+    }
+
+    // 這一頁動不到的地方要說出來，不能讓讀者以為整份檔案都乾淨了
+    const notes = [];
+    if (doc.getPages().length) {
+      const hints = [];
+      for (const page of doc.getPages()) {
+        const annots = page.node.get(lib.PDFName.of("Annots"));
+        if (annots) { hints.push("annots"); break; }
+      }
+      const names = doc.catalog.get(lib.PDFName.of("Names"));
+      if (names) hints.push("names");
+      if (hints.length) notes.push({ label: "pdfLeftovers", detail: "" });
+    }
+
+    return { ok: true, data: data, removed: removed, kept: [], notes: notes };
+  }
+
   function detect(bytes) {
     if (bytes.length >= 2 && bytes[0] === 0xff && bytes[1] === 0xd8) return "jpeg";
     if (bytes.length >= 8) {
@@ -398,9 +505,13 @@
       if (riff === "RIFF" && webp === "WEBP") return "webp";
     }
     if (bytes.length >= 3 && bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) return "gif";
+    if (bytes.length >= 5 && bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 &&
+        bytes[3] === 0x46 && bytes[4] === 0x2d) return "pdf";
     return "unknown";
   }
 
+  // PDF 的處理是非同步的（pdf-lib 的 API 如此），所以不走這一支。
+  // 這一支保持同步，tools/test_stripmeta.mjs 原地抽出來測的就是它。
   function strip(bytes) {
     const kind = detect(bytes);
     if (kind === "jpeg") return Object.assign({ kind: kind }, stripJpeg(bytes));
@@ -486,6 +597,15 @@
       kept: "留著沒動",
       sizeLine: "原始 {a}，清完 {b}",
       labels: {
+        pdfTitle: "文件標題",
+        pdfAuthor: "作者",
+        pdfSubject: "主旨",
+        pdfCreator: "製作這份文件的軟體，常含作業系統與版本",
+        pdfProducer: "轉存成 PDF 的軟體",
+        pdfKeywords: "關鍵字",
+        pdfDates: "建立與修改時間",
+        pdfXmp: "XMP 描述區：地點、作者、編輯歷史都可能記在這裡",
+        pdfXmpPage: "分頁各自的 XMP 描述區",
         userdata: "影片的使用者資料區：標題、作者、拍攝地點座標、裝置型號都放在這裡",
         meta: "另一個放描述欄位的地方",
         padding: "空白填充，本來就沒有內容",
@@ -502,11 +622,15 @@
         jfif: "JFIF 基本資訊：少了它有些看圖程式會抱怨",
       },
       notes: {
+        pdfLeftovers: "這份 PDF 裡還有註解或附件之類的東西，那些可能各自帶著作者與時間。這一頁只處理文件層級的描述欄位，沒有動它們。",
         encoderInData: "壓縮資料本身還帶著編碼器的版本字串，那不是 metadata，是影音資料的一部分。要清掉只能重新編碼，而重新編碼會損失畫質，也會換上新編碼器的痕跡。這一頁不做那件事。",
       },
+      pdf: "這是 PDF。文件層級的描述欄位與 XMP 描述區會被拿掉，頁面內容不會重新排版。",
       mp4: "這是 MP4 或 MOV，處理的是容器裡的描述欄位。壓縮過的影音資料一個位元都不會動。",
       nothing: "這個檔案裡沒有找到可以拿掉的欄位，本來就是乾淨的。",
       errors: {
+        pdfLibMissing: "處理 PDF 需要的函式庫還沒載入完，稍等一下再試一次。",
+        encrypted: "這份 PDF 有加密保護，要先解除才能處理。",
         heic: "這是 HEIC/HEIF。iPhone 預設拍出來就是這個格式，它的容器結構複雜得多，這一頁還做不到。在 iPhone 上可以到「設定 → 相機 → 格式」選「最相容」，之後拍的就是 JPEG。已經拍好的可以用 AirDrop 或郵件傳給自己，那個過程多半會轉成 JPEG。",
         webp: "WebP 這一頁還不支援，目前只處理 JPEG 與 PNG。",
         gif: "GIF 這一頁還不支援，目前只處理 JPEG 與 PNG。",
@@ -527,6 +651,15 @@
       kept: "留着没动",
       sizeLine: "原始 {a}，清完 {b}",
       labels: {
+        pdfTitle: "文档标题",
+        pdfAuthor: "作者",
+        pdfSubject: "主题",
+        pdfCreator: "制作这份文档的软件，常含操作系统与版本",
+        pdfProducer: "转存成 PDF 的软件",
+        pdfKeywords: "关键词",
+        pdfDates: "创建与修改时间",
+        pdfXmp: "XMP 描述区：地点、作者、编辑历史都可能记在这里",
+        pdfXmpPage: "分页各自的 XMP 描述区",
         userdata: "视频的用户数据区：标题、作者、拍摄地点坐标、设备型号都放在这里",
         meta: "另一个放描述字段的地方",
         padding: "空白填充，本来就没有内容",
@@ -543,11 +676,15 @@
         jfif: "JFIF 基本信息：少了它有些看图程序会抱怨",
       },
       notes: {
+        pdfLeftovers: "这份 PDF 里还有注释或附件之类的东西，那些可能各自带着作者与时间。这一页只处理文档层级的描述字段，没有动它们。",
         encoderInData: "压缩数据本身还带着编码器的版本字符串，那不是 metadata，是影音数据的一部分。要清掉只能重新编码，而重新编码会损失画质，也会换上新编码器的痕迹。这一页不做那件事。",
       },
+      pdf: "这是 PDF。文档层级的描述字段与 XMP 描述区会被拿掉，页面内容不会重新排版。",
       mp4: "这是 MP4 或 MOV，处理的是容器里的描述字段。压缩过的影音数据一个比特都不会动。",
       nothing: "这个文件里没有找到可以拿掉的字段，本来就是干净的。",
       errors: {
+        pdfLibMissing: "处理 PDF 需要的函式库还没加载完，稍等一下再试一次。",
+        encrypted: "这份 PDF 有加密保护，要先解除才能处理。",
         heic: "这是 HEIC/HEIF。iPhone 默认拍出来就是这个格式，它的容器结构复杂得多，这一页还做不到。在 iPhone 上可以到「设置 → 相机 → 格式」选「最兼容」，之后拍的就是 JPEG。已经拍好的可以用 AirDrop 或邮件传给自己，那个过程多半会转成 JPEG。",
         webp: "WebP 这一页还不支持，目前只处理 JPEG 与 PNG。",
         gif: "GIF 这一页还不支持，目前只处理 JPEG 与 PNG。",
@@ -568,6 +705,15 @@
       kept: "Kept as is",
       sizeLine: "{a} originally, {b} after cleaning",
       labels: {
+        pdfTitle: "Document title",
+        pdfAuthor: "Author",
+        pdfSubject: "Subject",
+        pdfCreator: "The software that produced the document, often including the operating system and version",
+        pdfProducer: "The software that exported it to PDF",
+        pdfKeywords: "Keywords",
+        pdfDates: "Creation and modification times",
+        pdfXmp: "The XMP block: location, author and editing history can all be recorded here",
+        pdfXmpPage: "Per-page XMP blocks",
         userdata: "The video's user data area: title, author, capture coordinates and device model all live here",
         meta: "Another place descriptive fields are kept",
         padding: "Blank padding, empty to begin with",
@@ -584,11 +730,15 @@
         jfif: "JFIF basics: some viewers complain without it",
       },
       notes: {
+        pdfLeftovers: "This PDF also contains annotations or attachments, which can carry their own authors and timestamps. This page only handles document-level descriptive fields and leaves those alone.",
         encoderInData: "The compressed data itself still carries the encoder's version string. That is not metadata; it is part of the audio and video data. Removing it means re-encoding, which costs quality and substitutes a new encoder's traces for the old ones. This page does not do that.",
       },
+      pdf: "This is a PDF. Document-level descriptive fields and the XMP block come out. The page content is not re-laid out.",
       mp4: "This is an MP4 or MOV. What gets handled is the descriptive fields in the container. Not one byte of the compressed audio or video is touched.",
       nothing: "No removable fields were found in this file. It was already clean.",
       errors: {
+        pdfLibMissing: "The library needed for PDFs has not finished loading. Wait a moment and try again.",
+        encrypted: "This PDF is encrypted. Remove the protection before processing it.",
         heic: "This is HEIC/HEIF. It is what an iPhone shoots by default, and its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.",
         webp: "WebP is not supported yet. This page handles JPEG and PNG.",
         gif: "GIF is not supported yet. This page handles JPEG and PNG.",
@@ -648,7 +798,7 @@
 
   function renderFile(item) {
     const row = el("div", "sm-file " + (item.ok ? "sm-file--ok" : "sm-file--bad"));
-    if (item.url && item.ok && item.kind !== "mp4") {
+    if (item.url && item.ok && item.kind !== "mp4" && item.kind !== "pdf") {
       const thumb = el("img", "sm-thumb");
       thumb.src = item.url;
       thumb.alt = "";
@@ -666,6 +816,7 @@
     body.appendChild(el("p", "sm-size",
       t.sizeLine.replace("{a}", humanSize(item.originalSize)).replace("{b}", humanSize(item.cleanSize))));
     if (item.kind === "mp4") body.appendChild(el("p", "sm-size", t.mp4));
+    if (item.kind === "pdf") body.appendChild(el("p", "sm-size", t.pdf));
 
     if (item.removed.length) body.appendChild(listOf(t.removed, item.removed));
     else body.appendChild(el("p", "sm-size", t.nothing));
@@ -696,7 +847,7 @@
 
     const picker = document.createElement("input");
     picker.type = "file";
-    picker.accept = "image/jpeg,image/png,video/mp4,video/quicktime";
+    picker.accept = "image/jpeg,image/png,video/mp4,video/quicktime,application/pdf";
     picker.multiple = true;
     picker.addEventListener("change", () => handle(picker.files));
 
@@ -746,6 +897,17 @@
         URL.revokeObjectURL(url);
         resolve(null);
       };
+      if (kind === "pdf") {
+        // PDF 沒辦法丟給 img 或 video，改成用同一個函式庫重新讀一次。
+        // 結構被改壞的話這一步會丟例外。
+        const lib = pdfLib();
+        if (!lib) return resolve(url);
+        blob.arrayBuffer()
+          .then((buf) => lib.PDFDocument.load(new Uint8Array(buf), { ignoreEncryption: true }))
+          .then((doc) => (doc.getPageCount() > 0 ? resolve(url) : fail()))
+          .catch(fail);
+        return;
+      }
       if (kind === "mp4") {
         const video = document.createElement("video");
         video.preload = "metadata";
@@ -769,7 +931,10 @@
   async function handleOne(file) {
     const buffer = await file.arrayBuffer();
     const bytes = new Uint8Array(buffer);
-    const result = strip(bytes);
+    const kind = detect(bytes);
+    const result = kind === "pdf"
+      ? Object.assign({ kind: kind }, await stripPdf(bytes))
+      : strip(bytes);
     if (!result.ok) {
       return {
         ok: false, name: file.name,
@@ -777,7 +942,7 @@
           ? result.kind : result.reason,
       };
     }
-    const TYPES = { png: "image/png", jpeg: "image/jpeg", mp4: "video/mp4" };
+    const TYPES = { png: "image/png", jpeg: "image/jpeg", mp4: "video/mp4", pdf: "application/pdf" };
     const blob = new Blob([result.data], { type: TYPES[result.kind] || "application/octet-stream" });
     const url = await verify(blob, result.kind);
     if (!url) return { ok: false, name: file.name, reason: "verify" };
@@ -793,7 +958,9 @@
     if (!list || !list.length) return;
     release();
     for (const file of list) {
-      if (file.type && file.type.indexOf("image/") !== 0 && file.type.indexOf("video/") !== 0) {
+      const okType = !file.type || file.type.indexOf("image/") === 0 ||
+        file.type.indexOf("video/") === 0 || file.type === "application/pdf";
+      if (!okType) {
         files.push({ ok: false, name: file.name, reason: "notImage" });
         continue;
       }
