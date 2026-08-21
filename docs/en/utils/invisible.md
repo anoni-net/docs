@@ -81,11 +81,11 @@ For sensitive content going to one person, a screenshot makes sense. For anythin
 
 Invisible characters can carry an entire set of instructions inside a document, a GitHub issue or a commit message that looks completely ordinary. People cannot read them. Models can.
 
-The tag character block is particularly suited to this. `U+E0020` through `U+E007E` map one to one onto ASCII `0x20` through `0x7E`, so any English instruction can be encoded as a sequence that displays as nothing at all, at any length. This page flags characters in that block as suspicious, because ordinary text has no use for them.
+The tag character block is particularly suited to this. It can encode English one character at a time into something that displays as nothing at all, at any length, so an entire instruction fits. This page flags characters in that block as suspicious, because ordinary text has no use for them.
 
 Why this matters to people who are not developers: when you paste text of unknown origin into an AI assistant, anything hidden inside it becomes part of the model's input. Such an instruction can tell the model to disregard what came before, shift the stance of a summary, or work a particular link into the answer. You see ordinary text. The model sees ordinary text plus an instruction.
 
-Worth noting that the reverse is also in use: some tools watermark AI-generated text with zero-width characters, to establish afterwards whether a passage came from a model. The same characters serve as a covert instruction in one direction and a marker in the other.
+The reverse is also in use: some tools watermark AI-generated text with zero-width characters, to establish afterwards whether a passage came from a model. The same characters serve as a covert instruction in one direction and a marker in the other.
 
 ## What this page cannot prove
 
@@ -118,6 +118,12 @@ Specifically not built: a generator that adds invisible markings to a piece of t
 "Load the sample text" gives you one fixed passage, and you cannot substitute your own. It contains two zero-width spaces, one Cyrillic letter impersonating part of a URL, and four tag characters, which is enough to see what a detection result looks like. That is all the teaching needs, and it cannot be turned on a real document. Anyone wanting to check the detection range more thoroughly can use the cases in the test file (`tools/test_invisible.mjs`).
 
 This is a community position, written down here so that later discussions have something to refer to.
+
+## Checking suspicious content in Tor Browser
+
+Setting [Tor Browser's security level](../tools/tor-browser-advanced.md) to Safest disables JavaScript, and this page stops responding, which is awkward because receiving something of unknown origin is precisely when that page recommends raising the level.
+
+Keep the suspicious site and this page apart. Copy the text at the higher level, switch back to Standard, paste it here and scan, then raise the level again. This page makes no outbound connections; the scan happens on your device.
 
 ## False positives are what this tool has to get right
 

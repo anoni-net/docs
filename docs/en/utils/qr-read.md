@@ -17,11 +17,16 @@ Someone sends you a screenshot of a QR code, or you photograph one on a wall. Yo
 
 This page reads it in your browser. The image does not leave your device.
 
+Two that come up in practice:
+
+- **A QR code sticker on a parking meter** that looks just like the original payment code. Check here first: if the hostname does not match the official one, that sticker is a problem.
+- **Someone you just met hands you a card with a QR code**, saying scan this to add me. Look at what is actually inside before deciding whether to add them.
+
 ## This page will not open the link for you
 
 QR codes are a common phishing vector. A sticker over a payment code, a swapped image on a poster: the text looks like an official site while the host is something else. A camera app follows it immediately, leaving you no chance to check.
 
-So when the contents are a URL, this page shows the **hostname separately** and deliberately offers no open button. Check the host, then open it yourself.
+So when the contents are a URL, this page shows the hostname separately and deliberately offers no open button. Check the host, then open it yourself.
 
 A hostname containing non-Latin letters appears in its `xn--` form. That usually means letters shaped like others are impersonating a different domain, the same homoglyph problem covered by the [invisible character detector](invisible.md).
 
@@ -52,7 +57,7 @@ A few combinations get an extra warning:
 
 The password in the field list shows as `••••••••`. Press "Show" to reveal it. People stand near you when you scan things, so exposing it by default makes no sense.
 
-The raw content above is never masked. That is this tool's promise: you have to be able to confirm exactly what was decoded. So before screenshotting this page for someone, check what that box holds. The `otpauth:` secret is the one exception, left out of the field list entirely.
+The raw content above is never masked, so that you can confirm exactly what was decoded. So before screenshotting this page for someone, check what that box holds. The `otpauth:` secret is the one exception, left out of the field list entirely.
 
 ## What you can do with the result
 
@@ -61,6 +66,12 @@ If it is a URL, this page counts how many tracking parameters it carries, and th
 If it is text, the [invisible character detector](invisible.md) checks whether anything is hiding in it.
 
 The precision figure for coordinates is calculated: each additional decimal place narrows the area tenfold. The fourth decimal place is roughly 11 metres of latitude, enough to point at one building. That is the other side of the location leak described in [what your browser reveals](leaks.md).
+
+## Scanning a suspicious code in Tor Browser
+
+Setting [Tor Browser's security level](../tools/tor-browser-advanced.md) to Safest disables JavaScript, and this page stops responding, which is awkward because receiving a QR code of unknown origin is precisely when that page recommends raising the level.
+
+Save the image first, switch back to Standard to read it, then raise the level again. This page makes no outbound connections; the image is decoded on your device.
 
 ## When it will not read
 

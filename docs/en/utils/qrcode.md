@@ -21,6 +21,10 @@ You need to hand someone a long string that is easy to mistype, and passing it o
 
 The other person points a camera at your screen and has it. Nothing passes through a server, and no message log is left behind.
 
+One situation from practice: someone running a workshop needs to give participants a Tor bridge line, reads it aloud, and neither side is sure whether that character was a capital O or a zero. Nothing they type afterwards connects. Showing a QR code to scan gets it right first time.
+
+To confirm the code you generated holds what you meant, read it back with the [QR code reader](qr-read.md).
+
 ## What is inside a QR code is in the clear
 
 This gets misunderstood often. A QR code is not encryption. It is a way of drawing text as squares. Anyone who photographs it can read the contents: the camera on the wall, the other person's photo backup, whoever is standing behind you.
@@ -46,14 +50,14 @@ Download SVG saves a vector file, so it stays sharp at any size and prints clean
 
 For anything printed or turned into a sticker, raise the level to Q or H. Paper creases and gets dirty.
 
-## Works offline
-
-Like the rest of this section, the code is stored on your device and runs without a network. Try it with the network off: it still draws, which also means what you typed cannot have been sent anywhere.
-
-To take this page with you, see [offline reading](../offline.md).
-
 ## Whose code does the encoding
 
 Encoding is handled by [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} (MIT), placed unmodified under `utils/vendor/`. Getting QR encoding wrong typically produces a code that scans but carries the wrong content, which is worse than one that fails outright, so a mature implementation beats rewriting it.
 
 We wrote a separate decoder inside the test suite that reads the generated image back into text and compares, so the way we call the library is covered. That test caught a real defect while it was being written: the library treats strings as Latin-1 by default, which mangles anything outside ASCII.
+
+## Works offline
+
+Like the rest of this section, the code is stored on your device and runs without a network. Try it with the network off: it still draws, which also means what you typed cannot have been sent anywhere.
+
+To take this page with you, see [offline reading](../offline.md).

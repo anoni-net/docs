@@ -10,6 +10,8 @@ icon: material/link-variant-off
 
 <script src="../../js/cleanurl.js"></script>
 
+另一种常见的场合：NGO 的工作人员把捐款页面的网址贴进 LINE 群组，那个网址是从电子报里复制出来的，带着 `utm_source` 与 `mc_eid`。收到的人点进去，后台看到的不只是有人捐款，还包括是哪一封信、经过谁转发。清过的网址捐款照样成立，只是少了那一层可以回溯到谁的痕迹。
+
 ## 那串参数在告诉谁什么
 
 你从 Facebook 点开一篇文章再复制网址，得到的东西长这样：
@@ -18,7 +20,7 @@ icon: material/link-variant-off
 https://example.com/article?fbclid=IwAR3xK9mQ...
 ```
 
-`fbclid` 是 Meta 给那一次点击的识别码。你把它贴进群组，每个点进去的人都会带着同一个 ID 回到 Meta，于是 Meta 知道**这则链接是谁分享的、有多少人点、那些人是谁**。你以为只是分享一篇文章，实际上把整个群组串了起来。
+`fbclid` 是 Meta 给那一次点击的识别码。你把它贴进群组，每个点进去的人都会带着同一个 ID 回到 Meta，于是同一个 ID 把整串点击记录串回 Meta，看得出这则链接是谁分享的、有多少人点、那些人是谁。你以为只是分享一篇文章，实际上把整个群组串了起来。
 
 电子报的 `utm_source` 也一样，转发出去等于告诉收件人你订了哪份电子报。`mc_eid` 更直接，那是 Mailchimp 的收件人识别码，对得回你的电子邮件地址。
 

@@ -10,6 +10,11 @@ icon: material/image-off-outline
 
 <script src="../../js/stripmeta.js"></script>
 
+Two situations that come up:
+
+- **You have just moved somewhere new and want to send a friend a photo to say you are safe.** Phones write GPS coordinates into the file by default. Your friend sees a photo; anyone looking for you sees a coordinate. Strip it before sending and the picture is unaffected.
+- **You photographed something at an event and want to submit it to a newsroom.** The capture time and coordinates together point at who was standing where, and when. Strip them and the desk still receives the same image.
+
 ## When this helps
 
 [What metadata is](../basics/metadata.md) notes that photos carry capture time, camera model and GPS coordinates, and that stripping EXIF before uploading is something anyone can do today at almost no cost.
@@ -20,28 +25,30 @@ This page edits the file in your browser. Nothing leaves your device. The cleane
 
 ## What comes out, what stays
 
-A JPEG keeps its metadata in marker segments near the start of the file; a PNG keeps its in separate chunks. Either way, whole segments are dropped and the image itself is not touched.
+Inside a photo file, the image itself and the descriptive fields are stored separately. This page drops the descriptive part whole and does not touch a single byte of the image.
 
 | Removed | What is inside |
 |---|---|
-| EXIF (JPEG `APP1`, PNG `eXIf`) | Capture time, camera model, GPS coordinates, and a thumbnail that may never have been cropped |
+| EXIF | Capture time, camera model, GPS coordinates, and a thumbnail that may never have been cropped |
 | XMP | Descriptions written by Adobe software, often including location and author |
-| IPTC and Photoshop fields (`APP13`) | Caption, author, keywords |
-| Comment fields (JPEG `0xFFFE`, PNG `tEXt`, `zTXt`, `iTXt`) | Arbitrary text carried inside the file |
-| Modification time (PNG `tIME`) | When the file was last saved |
+| IPTC and Photoshop fields | Caption, author, keywords |
+| Comment fields | Arbitrary text carried inside the file |
+| Modification time | When the file was last saved |
 
 | Kept | Why |
 |---|---|
-| ICC colour profile | Removing it shifts the colours. These profiles are usually standard ones such as sRGB, which identify very little |
-| Adobe colour transform marker (`APP14`) | Without it, a CMYK JPEG comes out inverted |
-| JFIF basics (`APP0`) | Some viewers complain without it |
-| PNG image chunks (`IHDR`, `PLTE`, `IDAT`, `tRNS`, `gAMA`, `sRGB`, `iCCP` and so on) | These are the image. Removing them breaks it |
+| Colour profile | Removing it shifts the colours. These are usually standard profiles such as sRGB, which identify very little |
+| Colour transform marker | Without it, a CMYK file destined for print comes out inverted |
+| Basic compatibility information | Some viewers complain without it |
+| The image itself | Removing it breaks the file |
 
-Every segment is listed on screen with its marker and byte count, kept and removed alike. The tool does not decide these details on your behalf without showing you.
+That uncropped thumbnail deserves its own mention. Crop half a photo away and send it, and the thumbnail inside the EXIF may still hold the original full frame.
+
+The tool lists every item removed and kept on screen, with the byte count of each and the segment identifier the file format uses. It does not decide these details on your behalf without showing you.
 
 ## The cleaned image is identical to the original
 
-This page does not re-encode. In a JPEG, everything from the SOS marker to the end of the file is copied byte for byte.
+This page does not re-encode. The image data starts at a fixed point in the file and is copied byte for byte from there to the end.
 
 Re-encoding tools cannot make that claim. Each pass loses quality, and each leaves its own processing signature in the output, which is itself a distinguishing feature. A file cleaned with mat2 is recognisably a file cleaned with mat2.
 
