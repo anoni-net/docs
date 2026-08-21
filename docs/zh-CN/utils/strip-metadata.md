@@ -2,13 +2,16 @@
 title: 文件 metadata 清除器
 description: 拿掉照片、视频与 PDF 里的 EXIF、GPS、设备型号、制作软件与注释字段，文件不离开你的设备。照片与视频的压缩数据一个比特都没动。
 icon: material/image-off-outline
+offline_assets:
+  # 這一份改成遇到 PDF 才動態載入，頁面裡沒有 script 標籤了。離線副本仍然要包含它，
+  # 不然存下這一頁的人在斷網時處理不了 PDF。
+  - utils/vendor/pdf-lib.min.js
 ---
 
 # :material-image-off-outline: 文件 metadata 清除器
 
 <div id="stripmeta-tool"></div>
 
-<script src="../vendor/pdf-lib.min.js"></script>
 <script src="../../js/stripmeta.js"></script>
 
 ## 什么时候用得上

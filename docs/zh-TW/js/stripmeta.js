@@ -553,12 +553,38 @@
     ["Producer", "setProducer", "getProducer"],
   ];
 
+  // pdf-lib 有五百多 KB，是這一頁最大的一塊。放在頁面裡用 script 標籤載，等於每個
+  // 打開這一頁的人都要先等它下載完，而六種格式裡只有 PDF 需要它。改成真的遇到
+  // PDF 才去拿。
+  //
+  // 離線副本仍然包含它：那個檔案列在這一頁 frontmatter 的 offline_assets 裡，
+  // 讀者存下這一頁的時候會一起存，斷網時這裡取到的是 service worker 的快取。
+  let pdfLibLoading = null;
+
   function pdfLib() {
     return typeof window !== "undefined" ? window.PDFLib : null;
   }
 
+  function loadPdfLib() {
+    if (pdfLib()) return Promise.resolve(pdfLib());
+    if (!pdfLibLoading) {
+      pdfLibLoading = new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = new URL("../vendor/pdf-lib.min.js", location.href).href;
+        script.onload = () => resolve(pdfLib());
+        script.onerror = () => {
+          // 失敗就讓下一次重試，不要卡在一個永遠不會完成的 promise 上
+          pdfLibLoading = null;
+          resolve(null);
+        };
+        document.head.appendChild(script);
+      });
+    }
+    return pdfLibLoading;
+  }
+
   async function stripPdf(bytes) {
-    const lib = pdfLib();
+    const lib = await loadPdfLib();
     if (!lib) return { ok: false, reason: "pdfLibMissing" };
     let doc;
     try {
@@ -747,6 +773,10 @@
     #stripmeta-tool button:hover, #stripmeta-tool a.sm-dl:hover {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
     }
+    #stripmeta-tool .sm-loading {
+      font-size: .78rem; line-height: 1.8; margin: .8rem 0 0;
+      border-left: .15rem solid var(--md-primary-fg-color); padding-left: .6rem;
+    }
     #stripmeta-tool .sm-formats {
       font-size: .72rem; opacity: .8; line-height: 2; margin: .6rem 0 0;
     }
@@ -809,6 +839,7 @@
         verify: "清完的檔案解不開，這是這一頁的問題。原始檔沒有被動到，請不要用清完的那一份，並且回報這個狀況。",
       },
       supports: "吃得下這些：",
+      loadingLib: "第一次處理 PDF 要先把解析用的程式抓回來，大約半 MB，抓完就會留在裝置上。",
       note: "檔案在你的瀏覽器裡改，沒有上傳到任何地方。斷網時照樣可以用。清完的是新的一份，原始檔不會被動到。",
     },
     zh: {
@@ -862,6 +893,7 @@
         verify: "清完的文件解不开，这是这一页的问题。原始文件没有被动到，请不要用清完的那一份，并且回报这个状况。",
       },
       supports: "吃得下这些：",
+      loadingLib: "第一次处理 PDF 要先把解析用的程序抓回来，大约半 MB，抓完就会留在设备上。",
       note: "文件在你的浏览器里改，没有上传到任何地方。断网时照样可以用。清完的是新的一份，原始文件不会被动到。",
     },
     en: {
@@ -915,6 +947,7 @@
         verify: "The cleaned file will not open. That is a fault in this page. Your original was not touched. Please do not use the cleaned copy, and report this.",
       },
       supports: "Handles:",
+      loadingLib: "Handling a PDF for the first time fetches the parsing library, about half a megabyte. It stays on your device afterwards.",
       note: "Files are modified in your browser and never uploaded. This works with the network off. The cleaned file is a new copy; your original is not touched.",
     },
   };
@@ -936,6 +969,8 @@
 
   // 每個處理過的檔案一列。物件 URL 留著給下載與縮圖用，換一批的時候一起收掉。
   const files = [];
+  // 第一次遇到 PDF 要先把函式庫抓回來，那段時間畫面要說一聲
+  let loadingLib = false;
 
   function release() {
     for (const item of files) {
@@ -1047,6 +1082,7 @@
     }
     root.appendChild(formats);
 
+    if (loadingLib) root.appendChild(el("p", "sm-loading", t.loadingLib));
     for (const item of files) root.appendChild(renderFile(item));
 
     if (files.length) {
@@ -1076,7 +1112,8 @@
       };
       if (kind === "pdf") {
         // PDF 沒辦法丟給 img 或 video，改成用同一個函式庫重新讀一次。
-        // 結構被改壞的話這一步會丟例外。
+        // 結構被改壞的話這一步會丟例外。走到這裡函式庫一定已經載好了，
+        // 因為前一步就是用它處理的。
         const lib = pdfLib();
         if (!lib) return resolve(url);
         blob.arrayBuffer()
@@ -1134,6 +1171,17 @@
   async function handle(list) {
     if (!list || !list.length) return;
     release();
+    // 第一次遇到 PDF 要先把函式庫抓回來，那要一點時間。先讓畫面說一聲，
+    // 不然讀者只會看到一個沒有反應的頁面。
+    for (const file of list) {
+      if (file.type === "application/pdf" && !pdfLib()) {
+        loadingLib = true;
+        render();
+        // 交還主執行緒，讓那行字先畫出來
+        await new Promise((next) => setTimeout(next, 0));
+        break;
+      }
+    }
     for (const file of list) {
       const okType = !file.type || file.type.indexOf("image/") === 0 ||
         file.type.indexOf("video/") === 0 || file.type === "application/pdf";
@@ -1143,6 +1191,7 @@
       }
       files.push(await handleOne(file));
     }
+    loadingLib = false;
     render();
   }
 
