@@ -20,6 +20,10 @@ icon: material/tools
 
     用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会告诉你这组密码的熵有多少。
 
+-   :material-qrcode: **[QR code 生成器](qrcode.md)**
+
+    把 onion 网址、Tor bridge 这类很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
+
 </div>
 
 ## 要离线带着走

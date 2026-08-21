@@ -1,0 +1,1 @@
+../../zh-TW/js/qrcode.js

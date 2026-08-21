@@ -93,6 +93,7 @@ nav:
   - !ENV [NAV_UTILS, "Tools"]:
       - utils/index.md
       - utils/passphrase.md
+      - utils/qrcode.md
   - !ENV [NAV_GAMES, "Interactive"]:
       - games/index.md
       - games/onion-routing.md

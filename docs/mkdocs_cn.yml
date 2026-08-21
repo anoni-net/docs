@@ -91,6 +91,7 @@ nav:
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
       - utils/passphrase.md
+      - utils/qrcode.md
   - !ENV [NAV_GAMES, "互动"]:
       - games/index.md
       - games/onion-routing.md

@@ -11,6 +11,8 @@
 #     sticky 版面時 CI 一個都沒跑，paths 漏了 js/offline-library.js
 #   - 密碼產生器的取樣有偏差、熵算錯、詞表少幾個字。這一類錯誤畫面上完全正常，
 #     照樣吐出一串看起來很隨機的字，而受害的讀者不會知道自己受害
+#   - QR code 產生出「掃得出來但內容錯」的碼。人眼讀不了 QR，這種錯只有把碼解回
+#     文字才驗得到
 #   - 部署後要清哪些網址，漏清是訪客看到舊內容，多清是波及 zone 內其他服務
 #
 # tools/test_docs_style_lint.py 不在這裡，它由 docs-style-lint.yml 跑，那支 workflow
@@ -24,6 +26,7 @@ on:
       - "docs/zh-TW/sw.js"
       - "docs/zh-TW/js/offline-library.js"
       - "docs/zh-TW/js/passphrase.js"
+      - "docs/zh-TW/js/qrcode.js"
       - "docs/zh-TW/utils/**"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
@@ -68,6 +71,10 @@ jobs:
       # 密語與密碼產生器：取樣有沒有偏差、熵算得對不對、詞表有沒有壞掉
       - name: 密語與密碼產生器
         run: node tools/test_passphrase.mjs
+
+      # QR code：產生的碼用獨立寫的解碼器讀回文字比對，驗的是「掃得出來而且內容對」
+      - name: QR code 產生器
+        run: node tools/test_qrcode.mjs
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
