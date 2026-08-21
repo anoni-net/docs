@@ -165,6 +165,165 @@
     return out;
   }
 
+  // 支援的格式。畫面上那張表、拖放區的說明、還有測試，全部從這一份讀，
+  // 三個地方各寫一份的話遲早會對不起來，而文案宣稱支援、程式其實不支援是最糟的。
+  const SUPPORTED = [
+    { kind: "jpeg", ext: ".jpg", lossless: true },
+    { kind: "png", ext: ".png", lossless: true },
+    { kind: "webp", ext: ".webp", lossless: true },
+    { kind: "gif", ext: ".gif", lossless: true },
+    { kind: "mp4", ext: ".mp4 .mov", lossless: true },
+    { kind: "pdf", ext: ".pdf", lossless: false },
+  ];
+
+  // --- WebP ---
+  //
+  // RIFF 容器：檔頭之後是一連串 chunk，每個 chunk 是 4 個字母的代號、4 個位元組的
+  // 長度、內容，長度是奇數的話後面補一個位元組。metadata 在 EXIF 與 XMP 這兩個
+  // chunk 裡，整段拿掉就好。
+  //
+  // 有一個地方漏掉會讓檔案自相矛盾：VP8X 那個 chunk 的第一個位元組是一組旗標，
+  // 記著這個檔案有沒有 EXIF、有沒有 XMP。chunk 拿掉了旗標卻還立著，解碼器會去找
+  // 一個不存在的東西。
+  const WEBP_DROP = { EXIF: "exif", "XMP ": "xmp" };
+
+  function stripWebp(bytes) {
+    if (bytes.length < 16) return { ok: false, reason: "broken" };
+    const riffSize = readUint32LE(bytes, 4);
+    if (riffSize + 8 > bytes.length) return { ok: false, reason: "broken" };
+
+    const head = [bytes.subarray(0, 12)];
+    const parts = [];
+    const removed = [];
+    let at = 12;
+    let vp8xAt = -1;
+
+    while (at + 8 <= bytes.length) {
+      const fourcc = String.fromCharCode(bytes[at], bytes[at + 1], bytes[at + 2], bytes[at + 3]);
+      const size = readUint32LE(bytes, at + 4);
+      const padded = size + (size & 1);
+      if (at + 8 + padded > bytes.length) return { ok: false, reason: "broken" };
+      if (WEBP_DROP[fourcc]) {
+        removed.push({ label: WEBP_DROP[fourcc], marker: fourcc.trim(), bytes: 8 + padded });
+      } else {
+        if (fourcc === "VP8X") vp8xAt = 12 + parts.reduce((n, p) => n + p.length, 0);
+        parts.push(bytes.subarray(at, at + 8 + padded));
+      }
+      at += 8 + padded;
+    }
+    if (!parts.length) return { ok: false, reason: "broken" };
+
+    const body = concat(parts);
+    const data = concat([head[0], body]);
+    // RIFF 的長度欄位算的是它後面所有東西，也就是 "WEBP" 那四個字母加上全部 chunk
+    writeUint32LE(data, 4, data.length - 8);
+
+    // 旗標要跟實際的內容一致。EXIF 是第 3 位，XMP 是第 2 位。
+    if (vp8xAt > 0 && removed.length) {
+      const flagsAt = vp8xAt + 8;
+      data[flagsAt] = data[flagsAt] & ~0x0c;
+    }
+    return { ok: true, data: data, removed: removed, kept: [] };
+  }
+
+  function readUint32LE(bytes, at) {
+    return (bytes[at] | (bytes[at + 1] << 8) | (bytes[at + 2] << 16) | (bytes[at + 3] << 24)) >>> 0;
+  }
+
+  function writeUint32LE(bytes, at, value) {
+    bytes[at] = value & 0xff;
+    bytes[at + 1] = (value >>> 8) & 0xff;
+    bytes[at + 2] = (value >>> 16) & 0xff;
+    bytes[at + 3] = (value >>> 24) & 0xff;
+  }
+
+  // --- GIF ---
+  //
+  // 一連串區塊：0x21 開頭的是擴充區塊，0x2C 是影像，0x3B 是結尾。metadata 住在
+  // 註解擴充（0xFE）與應用程式擴充（0xFF）裡，XMP 也是用後者夾帶的。
+  //
+  // 應用程式擴充不能全部拿掉：NETSCAPE2.0 那一個記著動畫要循環幾次，拿掉之後
+  // 動圖只會播一次。
+  const GIF_KEEP_APPS = ["NETSCAPE2.0", "ANIMEXTS1.0"];
+
+  function stripGif(bytes) {
+    if (bytes.length < 13) return { ok: false, reason: "broken" };
+    const sig = String.fromCharCode(bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5]);
+    if (sig !== "GIF87a" && sig !== "GIF89a") return { ok: false, reason: "broken" };
+
+    let at = 13;
+    // 全域調色盤，大小記在 Logical Screen Descriptor 的旗標裡
+    const packed = bytes[10];
+    if (packed & 0x80) at += 3 * (1 << ((packed & 0x07) + 1));
+    if (at > bytes.length) return { ok: false, reason: "broken" };
+
+    const parts = [bytes.subarray(0, at)];
+    const removed = [];
+
+    // 資料子區塊：一個長度位元組加那麼多內容，長度 0 表示結束
+    const skipSubBlocks = (from) => {
+      let cursor = from;
+      while (cursor < bytes.length) {
+        const len = bytes[cursor];
+        cursor += 1 + len;
+        if (len === 0) return cursor;
+      }
+      return -1;
+    };
+
+    while (at < bytes.length) {
+      const marker = bytes[at];
+      if (marker === 0x3b) {
+        parts.push(bytes.subarray(at, at + 1));
+        at += 1;
+        break;
+      }
+      if (marker === 0x21) {
+        const label = bytes[at + 1];
+        // 擴充區塊的第三個位元組就是第一個子區塊的長度，所有類型都從那裡開始走。
+        // 應用程式擴充的第一個子區塊剛好是 11 個位元組的識別字串，一樣走得過去。
+        const end = skipSubBlocks(at + 2);
+        if (end < 0) return { ok: false, reason: "broken" };
+
+        let drop = label === 0xfe || label === 0x01;
+        if (label === 0xff) {
+          let name = "";
+          for (let i = 0; i < 11 && at + 3 + i < bytes.length; i += 1) {
+            name += String.fromCharCode(bytes[at + 3 + i]);
+          }
+          drop = GIF_KEEP_APPS.indexOf(name) < 0;
+        }
+        if (drop) {
+          removed.push({
+            label: label === 0xfe ? "comment" : "application",
+            marker: label === 0xfe ? "comment" : "app",
+            bytes: end - at,
+          });
+        } else {
+          parts.push(bytes.subarray(at, end));
+        }
+        at = end;
+        continue;
+      }
+      if (marker === 0x2c) {
+        // 影像描述子 10 個位元組，可能跟著區域調色盤，然後是 LZW 資料
+        let cursor = at + 10;
+        const localFlags = bytes[at + 9];
+        if (localFlags & 0x80) cursor += 3 * (1 << ((localFlags & 0x07) + 1));
+        cursor += 1; // LZW 最小碼長度
+        const end = skipSubBlocks(cursor);
+        if (end < 0) return { ok: false, reason: "broken" };
+        parts.push(bytes.subarray(at, end));
+        at = end;
+        continue;
+      }
+      // 認不得的位元組，結構跟預期不同，不要硬猜
+      return { ok: false, reason: "broken" };
+    }
+
+    return { ok: true, data: concat(parts), removed: removed, kept: [] };
+  }
+
   // --- MP4 與 MOV ---
   //
   // 這種檔案是一層包一層的 box：長度(4) 型別(4) 內容。metadata 住在 moov 底下的
@@ -512,11 +671,20 @@
 
   // PDF 的處理是非同步的（pdf-lib 的 API 如此），所以不走這一支。
   // 這一支保持同步，tools/test_stripmeta.mjs 原地抽出來測的就是它。
+  function isSupported(kind) {
+    for (const item of SUPPORTED) {
+      if (item.kind === kind) return true;
+    }
+    return false;
+  }
+
   function strip(bytes) {
     const kind = detect(bytes);
     if (kind === "jpeg") return Object.assign({ kind: kind }, stripJpeg(bytes));
     if (kind === "png") return Object.assign({ kind: kind }, stripPng(bytes));
     if (kind === "mp4") return Object.assign({ kind: kind }, stripMp4(bytes));
+    if (kind === "webp") return Object.assign({ kind: kind }, stripWebp(bytes));
+    if (kind === "gif") return Object.assign({ kind: kind }, stripGif(bytes));
     return { ok: false, kind: kind, reason: "unsupported" };
   }
 
@@ -579,6 +747,9 @@
     #stripmeta-tool button:hover, #stripmeta-tool a.sm-dl:hover {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
     }
+    #stripmeta-tool .sm-formats {
+      font-size: .72rem; opacity: .8; line-height: 2; margin: .6rem 0 0;
+    }
     #stripmeta-tool .sm-note { font-size: .7rem; opacity: .75; line-height: 1.7; margin: .8rem 0 0; }
     @media (pointer: coarse) { #stripmeta-tool button, #stripmeta-tool a.sm-dl { min-height: 2.2rem; } }
   `;
@@ -632,13 +803,12 @@
         pdfLibMissing: "處理 PDF 需要的函式庫還沒載入完，稍等一下再試一次。",
         encrypted: "這份 PDF 有加密保護，要先解除才能處理。",
         heic: "這是 HEIC/HEIF。iPhone 預設拍出來就是這個格式，它的容器結構複雜得多，這一頁還做不到。在 iPhone 上可以到「設定 → 相機 → 格式」選「最相容」，之後拍的就是 JPEG。已經拍好的可以用 AirDrop 或郵件傳給自己，那個過程多半會轉成 JPEG。",
-        webp: "WebP 這一頁還不支援，目前只處理 JPEG 與 PNG。",
-        gif: "GIF 這一頁還不支援，目前只處理 JPEG 與 PNG。",
-        unsupported: "認不出這個格式。這一頁處理 JPEG 與 PNG。",
+        unsupported: "認不出這個格式，或者這一頁還不處理它。支援的格式列在下面。",
         notImage: "這不是圖片檔。",
         broken: "這個檔案的結構讀不下去，可能已經損壞，或是副檔名跟實際格式對不上。",
         verify: "清完的檔案解不開，這是這一頁的問題。原始檔沒有被動到，請不要用清完的那一份，並且回報這個狀況。",
       },
+      supports: "吃得下這些：",
       note: "檔案在你的瀏覽器裡改，沒有上傳到任何地方。斷網時照樣可以用。清完的是新的一份，原始檔不會被動到。",
     },
     zh: {
@@ -686,13 +856,12 @@
         pdfLibMissing: "处理 PDF 需要的函式库还没加载完，稍等一下再试一次。",
         encrypted: "这份 PDF 有加密保护，要先解除才能处理。",
         heic: "这是 HEIC/HEIF。iPhone 默认拍出来就是这个格式，它的容器结构复杂得多，这一页还做不到。在 iPhone 上可以到「设置 → 相机 → 格式」选「最兼容」，之后拍的就是 JPEG。已经拍好的可以用 AirDrop 或邮件传给自己，那个过程多半会转成 JPEG。",
-        webp: "WebP 这一页还不支持，目前只处理 JPEG 与 PNG。",
-        gif: "GIF 这一页还不支持，目前只处理 JPEG 与 PNG。",
-        unsupported: "认不出这个格式。这一页处理 JPEG 与 PNG。",
+        unsupported: "认不出这个格式，或者这一页还不处理它。支持的格式列在下面。",
         notImage: "这不是图片文件。",
         broken: "这个文件的结构读不下去，可能已经损坏，或是扩展名跟实际格式对不上。",
         verify: "清完的文件解不开，这是这一页的问题。原始文件没有被动到，请不要用清完的那一份，并且回报这个状况。",
       },
+      supports: "吃得下这些：",
       note: "文件在你的浏览器里改，没有上传到任何地方。断网时照样可以用。清完的是新的一份，原始文件不会被动到。",
     },
     en: {
@@ -740,13 +909,12 @@
         pdfLibMissing: "The library needed for PDFs has not finished loading. Wait a moment and try again.",
         encrypted: "This PDF is encrypted. Remove the protection before processing it.",
         heic: "This is HEIC/HEIF. It is what an iPhone shoots by default, and its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.",
-        webp: "WebP is not supported yet. This page handles JPEG and PNG.",
-        gif: "GIF is not supported yet. This page handles JPEG and PNG.",
-        unsupported: "The format was not recognised. This page handles JPEG and PNG.",
+        unsupported: "The format was not recognised, or this page does not handle it yet. The supported formats are listed below.",
         notImage: "That is not an image file.",
         broken: "The structure of this file could not be read. It may be damaged, or the extension may not match the actual format.",
         verify: "The cleaned file will not open. That is a fault in this page. Your original was not touched. Please do not use the cleaned copy, and report this.",
       },
+      supports: "Handles:",
       note: "Files are modified in your browser and never uploaded. This works with the network off. The cleaned file is a new copy; your original is not touched.",
     },
   };
@@ -869,6 +1037,15 @@
     });
     root.appendChild(picker);
     root.appendChild(drop);
+
+    // 讀者選檔案之前就該知道這一頁吃什麼。清單從 SUPPORTED 讀，不另外寫一份。
+    const formats = el("p", "sm-formats");
+    formats.appendChild(document.createTextNode(t.supports + "　"));
+    for (let i = 0; i < SUPPORTED.length; i += 1) {
+      if (i) formats.appendChild(document.createTextNode("　"));
+      formats.appendChild(el("code", "sm-tag", SUPPORTED[i].ext));
+    }
+    root.appendChild(formats);
 
     for (const item of files) root.appendChild(renderFile(item));
 

@@ -24,6 +24,21 @@ The difficulty is how. Online strippers almost all require uploading the file fi
 
 This page edits the file in your browser. Nothing leaves your device. The cleaned file is a new copy; your original is not touched.
 
+## Which files this handles
+
+| Format | What comes out | Image data |
+|---|---|---|
+| `.jpg` | EXIF, XMP, IPTC and Photoshop fields, comments | Not one byte touched |
+| `.png` | EXIF, text fields, modification time | Not one byte touched |
+| `.webp` | EXIF, XMP | Not one byte touched |
+| `.gif` | Comments, application extensions (the animation loop setting stays) | Not one byte touched |
+| `.mp4` `.mov` | User data area, encoder name, track handler name | Not one byte touched |
+| `.pdf` | Title, author, authoring software, timestamps, XMP | Rewritten in full, see below |
+
+For the first five, the descriptive sections come out whole and not one byte of the compressed image or media is touched, so the cleaned file decodes identically to the original. PDFs cannot carry that guarantee, for the reason given further down.
+
+**Not handled**: HEIC/HEIF (what an iPhone shoots by default), TIFF, RAW, MKV, WebM, AVI and Office documents. When a file is not recognised the page says so, rather than quietly handing back something it did not process.
+
 ## What comes out, what stays
 
 Inside a photo file, the image itself and the descriptive fields are stored separately. This page drops the descriptive part whole and does not touch a single byte of the image.
@@ -104,7 +119,7 @@ Because it is lossless, the file barely shrinks. A 630 KB photo comes out at 629
 
 **HEIC/HEIF**: what an iPhone shoots by default. Its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.
 
-**WebP and GIF**: not supported yet.
+**Beyond HEIC/HEIF**, TIFF, RAW, MKV, WebM, AVI and Office documents are not handled either.
 
 ## What this page does not do
 

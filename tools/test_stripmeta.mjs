@@ -39,7 +39,7 @@ const grab = (re) => {
 const harness = `
   ${grab(/^  const JPEG_KEEP = \{[\s\S]*?\n  function cleanName\(name\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { strip, detect, cleanName, stripJpeg, stripPng, stripMp4, mp4Boxes, STRINGS, JPEG_KEEP, PNG_DROP, MP4_DROP };
+  return { strip, detect, cleanName, stripJpeg, stripPng, stripMp4, mp4Boxes, stripWebp, stripGif, SUPPORTED, isSupported, STRINGS, JPEG_KEEP, PNG_DROP, MP4_DROP };
 `;
 const tool = new Function(harness)();
 
@@ -541,6 +541,170 @@ test('vendor 裡的 pdf-lib 與授權都在', () => {
   assert.ok(fs.existsSync(path.join(dir, 'pdf-lib-LICENSE.txt')), 'MIT 授權要求散布時附上副本');
   const readme = fs.readFileSync(path.join(dir, 'README.md'), 'utf8');
   assert.ok(readme.includes('pdf-lib'), 'vendor 的 README 沒有登記這一份');
+});
+
+// --- WebP 與 GIF 素材 ---
+const le32 = (n) => new Uint8Array([n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >> 24) & 255]);
+const riffChunk = (fourcc, payload) => {
+  const body = typeof payload === 'string' ? Buffer.from(payload, 'latin1') : payload;
+  const pad = body.length & 1 ? [0] : [];
+  return u8(fourcc, le32(body.length), body, pad);
+};
+const makeWebp = ({ exif = true, xmp = true, vp8x = true } = {}) => {
+  const chunks = [];
+  if (vp8x) {
+    const flags = (exif ? 0x08 : 0) | (xmp ? 0x04 : 0);
+    chunks.push(riffChunk('VP8X', u8([flags, 0, 0, 0], [199, 0, 0], [149, 0, 0])));
+  }
+  chunks.push(riffChunk('VP8 ', 'IMAGEDATA'));
+  if (exif) chunks.push(riffChunk('EXIF', 'Exif\x00\x00GPS:25.033 Wang Ming'));
+  if (xmp) chunks.push(riffChunk('XMP ', '<x:xmpmeta>Taipei</x:xmpmeta>'));
+  const body = u8(...chunks);
+  return u8('RIFF', le32(4 + body.length), 'WEBP', body);
+};
+
+const gifExt = (label, ...blocks) => {
+  const parts = [u8([0x21, label])];
+  for (const b of blocks) {
+    const body = typeof b === 'string' ? Buffer.from(b, 'latin1') : b;
+    parts.push(u8([body.length], body));
+  }
+  parts.push(u8([0]));
+  return u8(...parts);
+};
+const makeGif = ({ comment = true, netscape = true, xmpApp = true } = {}) => {
+  const parts = [u8('GIF89a', [4, 0, 4, 0, 0x00, 0, 0])];   // 沒有全域調色盤
+  if (netscape) parts.push(gifExt(0xff, 'NETSCAPE2.0', u8([1, 0, 0])));
+  if (xmpApp) parts.push(gifExt(0xff, 'XMP DataXMP', 'Wang Ming Taipei'));
+  if (comment) parts.push(gifExt(0xfe, 'internal draft do not share'));
+  // 影像：描述子(10) + LZW 最小碼長度 + 子區塊
+  parts.push(u8([0x2c, 0, 0, 0, 0, 4, 0, 4, 0, 0x00], [2], [3], 'ABC', [0]));
+  parts.push(u8([0x3b]));
+  return u8(...parts);
+};
+
+test('WebP 的 EXIF 與 XMP 整段拿掉', () => {
+  const result = tool.strip(makeWebp());
+  assert.equal(result.kind, 'webp');
+  assert.ok(result.ok, `失敗：${result.reason}`);
+  const text = asText(result.data);
+  for (const needle of ['GPS:25.033', 'Wang Ming', 'Taipei']) {
+    assert.ok(!text.includes(needle), `${needle} 還留著`);
+  }
+  assert.ok(text.includes('IMAGEDATA'), '影像資料被動到了');
+  assert.equal(result.removed.length, 2);
+});
+
+test('WebP 的 RIFF 長度欄位要跟著改', () => {
+  // 長度沒改的話後面多出一段垃圾，有些解碼器會拒絕
+  const result = tool.strip(makeWebp());
+  const dv = new DataView(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+  assert.equal(dv.getUint32(4, true), result.data.length - 8,
+               'RIFF 長度欄位跟實際檔案大小對不上');
+});
+
+test('WebP 的 VP8X 旗標要跟著清掉', () => {
+  // 旗標說有 EXIF、chunk 卻不在，檔案自相矛盾
+  const result = tool.strip(makeWebp());
+  let at = 12;
+  const dv = new DataView(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+  while (at + 8 <= result.data.length) {
+    const fourcc = asText(result.data.subarray(at, at + 4));
+    const size = dv.getUint32(at + 4, true);
+    if (fourcc === 'VP8X') {
+      const flags = result.data[at + 8];
+      assert.equal(flags & 0x08, 0, 'EXIF 旗標還立著');
+      assert.equal(flags & 0x04, 0, 'XMP 旗標還立著');
+      return;
+    }
+    at += 8 + size + (size & 1);
+  }
+  assert.fail('找不到 VP8X');
+});
+
+test('本來就乾淨的 WebP 不會被動到', () => {
+  const clean = makeWebp({ exif: false, xmp: false });
+  const result = tool.strip(clean);
+  assert.equal(result.removed.length, 0);
+  assert.deepEqual(Array.from(result.data), Array.from(clean));
+});
+
+test('GIF 的註解與夾帶 XMP 的應用程式擴充都拿掉', () => {
+  const result = tool.strip(makeGif());
+  assert.equal(result.kind, 'gif');
+  assert.ok(result.ok, `失敗：${result.reason}`);
+  const text = asText(result.data);
+  for (const needle of ['internal draft', 'Wang Ming', 'Taipei', 'XMP DataXMP']) {
+    assert.ok(!text.includes(needle), `${needle} 還留著`);
+  }
+});
+
+test('GIF 的動畫循環設定不能拿掉', () => {
+  // NETSCAPE2.0 記著要循環幾次，拿掉之後動圖只會播一次
+  const result = tool.strip(makeGif());
+  assert.ok(asText(result.data).includes('NETSCAPE2.0'), '循環設定被拿掉了');
+  assert.ok(asText(result.data).includes('ABC'), '影像資料被動到了');
+});
+
+test('GIF 的結尾標記還在，而且只有一個', () => {
+  const result = tool.strip(makeGif());
+  assert.equal(result.data[result.data.length - 1], 0x3b, '結尾標記不見了');
+});
+
+test('壞掉的 WebP 與 GIF 回錯誤', () => {
+  for (const bad of [
+    u8('RIFF', le32(999), 'WEBP'),                 // 長度超出檔案
+    u8('RIFF', le32(4), 'XXXX'),                   // 不是 WEBP
+    u8('GIF89a'),                                   // 只有簽章
+    u8('GIF89a', [4, 0, 4, 0, 0, 0, 0], [0x99]),   // 認不得的區塊
+  ]) {
+    assert.equal(tool.strip(bad).ok, false, '壞掉的檔案卻回成功');
+  }
+});
+
+test('支援清單跟程式實際處理的格式完全一致', () => {
+  // 文案宣稱支援、程式其實不支援，那比不支援更糟。這一項把兩邊綁在一起。
+  const samples = {
+    jpeg: makeJpeg([EXIF]),
+    png: makePng([pngChunk('tEXt', 'Author\x00X')]),
+    webp: makeWebp(),
+    gif: makeGif(),
+    mp4: makeMp4(),
+  };
+  for (const item of tool.SUPPORTED) {
+    if (item.kind === 'pdf') continue;   // PDF 走非同步那條路，另外測
+    const sample = samples[item.kind];
+    assert.ok(sample, `清單裡有 ${item.kind}，但測試沒有對應的樣本`);
+    assert.equal(tool.detect(sample), item.kind, `${item.kind} 認不出來`);
+    assert.equal(tool.strip(sample).ok, true, `清單說支援 ${item.kind}，實際上處理失敗`);
+  }
+  // 反過來：detect 認得的格式，除了明確不支援的那幾種，都要在清單裡
+  assert.equal(tool.isSupported('heic'), false, 'HEIC 不該出現在支援清單裡');
+  assert.equal(tool.isSupported('unknown'), false);
+  for (const kind of ['jpeg', 'png', 'webp', 'gif', 'mp4', 'pdf']) {
+    assert.equal(tool.isSupported(kind), true, `${kind} 不在支援清單裡`);
+  }
+});
+
+test('頁面上那張表列的格式跟程式一致', () => {
+  // 表格是手寫的，程式改了表格沒改就會騙人
+  const page = fs.readFileSync(path.join(HERE, '..', 'docs', 'zh-TW', 'utils', 'strip-metadata.md'), 'utf8');
+  const table = page.slice(page.indexOf('## 支援哪些檔案'), page.indexOf('## 拿掉什麼'));
+  for (const item of tool.SUPPORTED) {
+    for (const ext of item.ext.split(' ')) {
+      assert.ok(table.includes('`' + ext + '`'), `頁面的表格少了 ${ext}`);
+    }
+  }
+  // 不支援的不該出現在表格裡
+  for (const ext of ['.heic', '.tiff', '.mkv']) {
+    assert.ok(!table.includes('`' + ext + '`'), `表格裡有 ${ext}，但程式不支援`);
+  }
+});
+
+test('三個語系都有支援清單的說明文字', () => {
+  for (const [lang, strings] of Object.entries(tool.STRINGS)) {
+    assert.ok(strings.supports, `${lang} 少了拖放區的格式說明`);
+  }
 });
 
 for (const [name, fn] of tests) {
