@@ -34,7 +34,26 @@ The obvious worry about any password generator is whether the site quietly sends
 
 The answer here is that **it keeps working with the network off**. A browser with no network cannot send anything, and the tool still produces passphrases, because the word list and the code are already stored on your device (see [offline reading](../offline.md)). No amount of reassuring text can match that.
 
-If you would rather not trust even this, roll physical dice and look the words up as described in [asian-diceware](../tools/asian-diceware.md). That depends on no software at all and is how Diceware was meant to work. This tool is for when you are in a hurry or have no dice at hand, and it does not replace that.
+If you would rather not trust even this, switch to the physical dice mode.
+
+## Physical dice, with nothing to trust on this machine
+
+Diceware was always a dice method. The order of the wordlist is itself the encoding: the first word is `11111`, the last is `66666`, and everything between counts in base six.
+
+Roll five dice, press the faces in the order you rolled them, and five presses look up one word. Repeat for as many words as you want.
+
+In this mode the randomness comes from your hands rather than from this machine. Whether `crypto.getRandomValues` can be trusted, whether this page's code has been swapped out: neither question matters any more, because all the page does is look words up.
+
+You can check that part too. "Download the full table" gives you a plain text file, 7776 lines, each one an encoding and its word. Print it or file it away, and this page stops being necessary.
+
+A few practical notes:
+
+- Dice should be fair. Cheap plastic dice are biased; casino-grade precision dice are the ones that are genuinely uniform. Ordinary dice are good enough for everyday use, but it is worth knowing the difference.
+- Do not use a dice-rolling app. That loops straight back to trusting software.
+- Rolling five dice at once beats rolling one five times, but you need to keep track of the order. Different coloured dice help.
+- The entropy matches the generated mode exactly: each roll is log2(6^5), the same as drawing once from 7776 words, about 12.9 bits.
+
+For where the list came from and how words were chosen, see [Asian Diceware](../tools/asian-diceware.md).
 
 ## Clear the clipboard afterwards
 
