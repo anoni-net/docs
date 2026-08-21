@@ -24,6 +24,10 @@ icon: material/tools
 
     把 onion 网址、Tor bridge 这类很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
 
+-   :material-eye-outline: **[你的浏览器透露了什么](leaks.md)**
+
+    列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道那些防护实际上做了什么。
+
 </div>
 
 ## 要离线带着走

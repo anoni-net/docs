@@ -110,6 +110,7 @@ nav:
       - utils/index.md
       - utils/passphrase.md
       - utils/qrcode.md
+      - utils/leaks.md
   - !ENV [NAV_GAMES, "互動"]:
       - games/index.md
       - games/onion-routing.md
