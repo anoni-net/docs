@@ -155,7 +155,38 @@ JIANG_ALLOW = re.compile(
 REGIONAL_RULES = [
     ("regional-term-site", re.compile(r"站台"), None,
      "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）"),
+    # 簡體那邊寫「纠错」，這條 regex 是正體寫法，所以 zh-CN 的檔案不會被誤判
+    ("regional-term-ecc", re.compile(r"糾錯"), None,
+     "「糾錯」是中國慣用詞，臺灣用「容錯度」（error correction 的等級）"),
+    # 中國法律與新加坡法案的正式譯名照錄，那不是用詞選擇
+    # 例外比對的視窗是命中處前後各兩字，「安全法」的「法」落在視窗外，所以只取「安全」
+    ("regional-term-network", re.compile(r"網絡"), re.compile(r"(安全|謠言|法案)"),
+     "「網絡」是中國慣用詞，臺灣用「網路」（照錄法案或機構的正式名稱時不在此限）"),
+    ("regional-term-server", re.compile(r"服務器"), None,
+     "「服務器」是中國慣用詞，臺灣用「伺服器」"),
+    ("regional-term-port", re.compile(r"端口"), None,
+     "「端口」是中國慣用詞，臺灣用「連接埠」或直接寫 port"),
+    ("regional-term-compat", re.compile(r"兼容"), None,
+     "「兼容」是中國慣用詞，臺灣用「相容」"),
+    ("regional-term-cache", re.compile(r"緩存"), None,
+     "「緩存」是中國慣用詞，臺灣用「快取」"),
+    ("regional-term-hardware", re.compile(r"硬件"), None,
+     "「硬件」是中國慣用詞，臺灣用「硬體」"),
+    ("regional-term-software", re.compile(r"軟件"), None,
+     "「軟件」是中國慣用詞，臺灣用「軟體」"),
 ]
+
+# 掃過一遍全站之後刻意沒有收進來的詞，記在這裡免得有人以為是漏掉的：
+#
+#   數據、崩潰、優化   臺灣完全通用，「資料」「當機」「最佳化」只是另一種說法
+#   信息               站上出現的都是中國公司與機構的正式名稱（積至（海南）信息技術）
+#   比特               站上出現的都是「比特幣」
+#   登錄               臺灣的「登錄」是登記、註冊的意思，跟 login 無關，誤判率太高
+#   進程               既指 process 也指進度，站上兩種都有
+#   智能               「智能合約」與「智慧合約」臺灣都通行
+#   用戶               臺灣的電信與服務業講「用戶」是正常的（中華電信的用戶、用戶條款），
+#                      「用戶端」更是標準譯法。只有指軟體 user 時才該寫「使用者」，
+#                      機器分不出來
 
 # 會讓 onion 建置的驗證步驟中止上傳的字串。
 #

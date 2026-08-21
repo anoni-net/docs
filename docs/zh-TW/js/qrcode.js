@@ -24,7 +24,7 @@
     return new TextEncoder().encode(text).length;
   }
 
-  // 各糾錯等級能修復多少比例的碼字，用來跟讀者說明取捨。
+  // 各容錯度能修復多少比例的碼字，用來跟讀者說明取捨。
   const ERROR_LEVELS = { L: 7, M: 15, Q: 25, H: 30 };
 
   // 規範要求四格留白。少了它有些掃描器對不到邊界，尤其是把 QR 直接貼在深色背景上時。
@@ -120,6 +120,8 @@
       border: .05rem solid var(--md-default-fg-color--lightest);
     }
     #qrcode-tool .qr-meta { font-size: .7rem; opacity: .75; text-align: center; margin: 0 0 1rem; }
+    /* 容錯度的說明貼著按鈕那一列，靠左讀起來才順 */
+    #qrcode-tool .qr-level-hint { text-align: left; margin: -.4rem 0 1rem; }
     #qrcode-tool .qr-error {
       border-left: .15rem solid var(--md-typeset-del-color, #f44336);
       padding: .1rem 0 .1rem .6rem; margin: 1rem 0;
@@ -134,7 +136,7 @@
   const STRINGS = {
     "zh-TW": {
       placeholder: "貼上要傳出去的文字，例如 onion 網址或一行 bridge",
-      level: "糾錯",
+      level: "容錯度",
       levelHint: "{level} 級，髒污或遮住 {percent}% 以內還讀得出來",
       empty: "上面輸入內容之後就會出現 QR code。",
       tooLong: "內容太長，QR code 裝不下。目前 {bytes} 個位元組，最多 {max} 個。分成兩段或改用別的方式傳。",
@@ -274,13 +276,15 @@
       });
       levels.appendChild(node);
     }
-    levels.appendChild(
-      el("span", "qr-meta", fill("levelHint", {
+    root.appendChild(levels);
+    // 說明自己一行。跟四顆按鈕擠在同一列的話，手機上會折成很窄的兩三行，
+    // 而它是要讀的句子不是標籤。
+    root.appendChild(
+      el("p", "qr-meta qr-level-hint", fill("levelHint", {
         level: state.level,
         percent: ERROR_LEVELS[state.level],
       }))
     );
-    root.appendChild(levels);
 
     root.appendChild(el("div", "qr-out"));
     root.appendChild(el("p", "qr-meta"));

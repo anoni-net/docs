@@ -160,7 +160,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 
 ??? question "在中國大陸能用嗎？"
 
-    `cryptpad.anoni.net` 與 `cryptpad.org` 都沒有針對中國大陸的特別託管，在大陸網路環境下可能會連線不穩或被阻斷。建議搭配 [Tor Browser](https://www.torproject.org/zh-TW/download/){target="_blank"} 與 [Snowflake 橋接](./tor-snowflake.md)，或在 [Tails](./what-is-tails.md) 環境內使用。CryptPad 內容是 E2EE 的，無論你的連線管道是 Tor、VPN 或直連，服務器都看不到你的內容，差別只在於能不能連上。
+    `cryptpad.anoni.net` 與 `cryptpad.org` 都沒有針對中國大陸的特別託管，在大陸網路環境下可能會連線不穩或被阻斷。建議搭配 [Tor Browser](https://www.torproject.org/zh-TW/download/){target="_blank"} 與 [Snowflake 橋接](./tor-snowflake.md)，或在 [Tails](./what-is-tails.md) 環境內使用。CryptPad 內容是 E2EE 的，無論你的連線管道是 Tor、VPN 或直連，伺服器都看不到你的內容，差別只在於能不能連上。
 
 ??? question "CryptPad 跟 Etherpad 該選哪個？"
 

@@ -128,7 +128,7 @@ TSG 的沿路注入功能系統能針對特定使用者進行精確針對性的�
 
 這一功能的存在意味著，當國家防火牆可以封鎖國內公民無法訪問的網站時，DLL Active Defence 功能則可以使該網站對全球所有網路使用者都無法訪問，而不僅僅是在國家防火牆範圍內。
 
-DLL 透過網路掃描來識別流量放大點，比如遞迴 DNS 服務器，這些可以用作反射型拒絕服務攻擊的發起點。它利用 TSG 中的沿路注入功能，有效地將毫無防備的使用者電腦招募為攻擊的一部分，從而建立一個僵屍網路。這是首次確認有資安公司向其客戶提供實質上作為 DDoS 租用的「booter」解決方案。
+DLL 透過網路掃描來識別流量放大點，比如遞迴 DNS 伺服器，這些可以用作反射型拒絕服務攻擊的發起點。它利用 TSG 中的沿路注入功能，有效地將毫無防備的使用者電腦招募為攻擊的一部分，從而建立一個僵屍網路。這是首次確認有資安公司向其客戶提供實質上作為 DDoS 租用的「booter」解決方案。
 
 <figure markdown="span">
   [![圖片於報告 23 頁](https://assets.anoni.net/the-internet-coup/index-5-23-1.png)](https://assets.anoni.net/the-internet-coup/index-5-23-1.png){target="_blank"}
@@ -156,7 +156,7 @@ TSG 叢集中的節點透過一個名為中央管理系統（Central Management,
 
 Geedge 的軟體開發實踐顯得非常現代化。TSG 採用了內部開發的作業系統，稱為 TSG-OS，這個系統基於 Red Hat Enterprise Linux，並使用 Open Network Install Environment（ONIE）進行初始設置。TSG-OS 使用了現代 DevOps 工具包開發，運用 Ansible 進行部署和宣告式設定，而 TSG 的各個組件則使用 Docker 和 K3s（輕量級 Kubernetes）進行容器化。這種架構顯示出與許多西方傳統網路供應商的做法有重大不同，後者的代碼庫往往包含數十年的遺留複雜性。Geedge Networks 成立於 2018 年，其提供的軟體在現代化程度上顯著對比。
 
-TSG-OS 也能運行在標準商用硬體上或作為虛擬設備。例如，在巴基斯坦的初期運作中，TSG-OS 部署在來自加拿大公司 Sandvine 的改裝 ActiveLogic 硬體上。這家公司之前因向包括埃及在內的威權政權提供深度封包檢測技術而受到關注和美國政府的制裁。在 Sandvine 於 2024 年清理其業務操作並解除制裁後，Geedge Networks 可能看到商機，為受到制裁影響的政權提供替代的作業系統和支援合約。Geedge 進入巴基斯坦市場，協助他們透過改裝 Sandvine 的現有硬件設施以降低成本。我們在下面的巴基斯坦部署章節中會更詳細地討論這一點。
+TSG-OS 也能運行在標準商用硬體上或作為虛擬設備。例如，在巴基斯坦的初期運作中，TSG-OS 部署在來自加拿大公司 Sandvine 的改裝 ActiveLogic 硬體上。這家公司之前因向包括埃及在內的威權政權提供深度封包檢測技術而受到關注和美國政府的制裁。在 Sandvine 於 2024 年清理其業務操作並解除制裁後，Geedge Networks 可能看到商機，為受到制裁影響的政權提供替代的作業系統和支援合約。Geedge 進入巴基斯坦市場，協助他們透過改裝 Sandvine 的現有硬體設施以降低成本。我們在下面的巴基斯坦部署章節中會更詳細地討論這一點。
 
 <figure markdown="span">
   [![圖片於報告 25 頁](https://assets.anoni.net/the-internet-coup/index-5-25-1.png)](https://assets.anoni.net/the-internet-coup/index-5-25-1.png){target="_blank"}
