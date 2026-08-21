@@ -230,6 +230,7 @@
       copyAll: "複製清掉全部隱形字元的版本",
       copied: "已複製",
       stripNote: "同形字不會被自動換掉。那是可見的字，換掉會改變原意，而你可能正在處理一段真的俄文。",
+      sample: "載入示範文字",
       note: "全部在你的瀏覽器裡處理，文字沒有送到任何地方，也沒有寫進任何儲存。斷網時照樣可以用。",
       kinds: {
         zwsp: "零寬空格",
@@ -279,6 +280,7 @@
       copyAll: "复制清掉全部隐形字符的版本",
       copied: "已复制",
       stripNote: "同形字不会被自动换掉。那是可见的字，换掉会改变原意，而你可能正在处理一段真的俄文。",
+      sample: "载入示范文字",
       note: "全部在你的浏览器里处理，文字没有送到任何地方，也没有写进任何存储。断网时照样可以用。",
       kinds: {
         zwsp: "零宽空格",
@@ -328,6 +330,7 @@
       copyAll: "Copy with all invisible characters removed",
       copied: "Copied",
       stripNote: "Homoglyphs are not replaced automatically. They are visible characters, replacing them changes the meaning, and you may be working with genuine Russian.",
+      sample: "Load the sample text",
       note: "Everything happens in your browser. The text is not sent anywhere and not written to storage. It works with the network off.",
       kinds: {
         zwsp: "ZWSP",
@@ -378,6 +381,22 @@
     return node;
   };
 
+  // 示範文字。固定的一段，讀者不能換成自己的文字。
+  //
+  // 這一頁不提供把標記放進任意文字的功能，理由寫在 utils/invisible.md 的
+  // 「教偵測，不教植入」那一節：同一套手法，保護內部文件是合理需求，拿來找出
+  // 吹哨者就是壓迫工具。一段固定的示範讓讀者看到偵測結果長什麼樣，那個教育效果
+  // 拿不去標記真實的文件。
+  //
+  // 裡面有三類東西：兩個零寬空格（外流追蹤最常見的做法）、一個西里爾的 а 冒充
+  // 網址裡的 a、四個標籤字元。標籤字元的編碼是 U+E0000 加 ASCII，這裡編的是
+  // DEMO 四個字母，工具不解碼它們，只標出位置。
+  const SAMPLES = {
+    "zh-TW": "\u{6703}\u{8b70}\u{7d00}\u{9304}\u{200b}\u{8acb}\u{52ff}\u{5916}\u{50b3}\u{3002}\u{7d30}\u{7bc0}\u{898b} \u{0430}noni.net/internal \u{7684}\u{8aaa}\u{660e}\u{200b}\u{3002}\u{e0044}\u{e0045}\u{e004d}\u{e004f}",
+    zh: "\u{4f1a}\u{8bae}\u{8bb0}\u{5f55}\u{200b}\u{8bf7}\u{52ff}\u{5916}\u{4f20}\u{3002}\u{7ec6}\u{8282}\u{89c1} \u{0430}noni.net/internal \u{7684}\u{8bf4}\u{660e}\u{200b}\u{3002}\u{e0044}\u{e0045}\u{e004d}\u{e004f}",
+    en: "Minutes attached\u{200b}, please do not forward. Details at \u{0430}noni.net/internal\u{200b}.\u{e0044}\u{e0045}\u{e004d}\u{e004f}",
+  };
+
   const state = { input: "", copied: "" };
 
   function render() {
@@ -392,6 +411,19 @@
       update();
     });
     root.appendChild(box);
+
+    // 讀者手邊多半沒有帶標記的文字，看不到這一頁實際在做什麼。給一段固定的示範。
+    const demoRow = el("div", "iv-row");
+    const demo = el("button", null, t.sample);
+    demo.type = "button";
+    demo.addEventListener("click", () => {
+      state.input = SAMPLES[document.documentElement.lang] || SAMPLES["zh-TW"];
+      state.copied = "";
+      render();
+    });
+    demoRow.appendChild(demo);
+    root.appendChild(demoRow);
+
     root.appendChild(el("div", "iv-body"));
     root.appendChild(el("p", "iv-note", t.note));
     update();
