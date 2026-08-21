@@ -32,6 +32,10 @@ icon: material/tools
 
     列出任何網站不必問你就拿得到的資訊，並標出 Tor Browser 會把哪些統一掉。換個瀏覽器再看一次，就知道那些防護實際上做了什麼。
 
+-   :material-image-off-outline: **[照片 metadata 清除器](strip-metadata.md)**
+
+    拿掉照片裡的 EXIF、GPS、相機型號與註解欄位，檔案不離開裝置。壓縮資料一個位元都沒動，清完的圖跟原圖完全一樣，每一段的去留都列給你看。
+
 -   :material-link-variant-off: **[網址清理器](clean-url.md)**
 
     把網址裡的追蹤參數挑出來並移除，每一個都說明是誰在追。順便拆掉 Google 與 Facebook 的轉址包裝。
