@@ -9,19 +9,19 @@ icon: material/share-circle
 
 ## Why use it
 
-- **No third-party platform to trust.** Files go from your computer to the other person's Tor Browser. No Google Drive, no Dropbox, and no anoni.net in between
-- **No account, no identifier.** What the other person receives is a `.onion` address. They do not learn who you are or what your IP address is, and you do not learn who they are
-- **The session is disposable.** Closing OnionShare takes the onion service offline and the address stops working. No backend logs, no metadata landing anywhere
-- **Cross-platform.** GUI on macOS, Windows, Linux, and Tails, plus a command-line version for running a long-lived intake box on a server
+- **No third-party platform to trust**: Files go from your computer to the other person's Tor Browser. No Google Drive, no Dropbox, and no anoni.net in between
+- **No account, no identifier**: What the other person receives is a `.onion` address. They do not learn who you are or what your IP address is, and you do not learn who they are
+- **The session is disposable**: Closing OnionShare takes the onion service offline and the address stops working. No backend logs, no metadata landing anywhere
+- **Cross-platform**: GUI on macOS, Windows, Linux, and Tails, plus a command-line version for running a long-lived intake box on a server
 
 ## Before you start
 
-- **Your IP address is not exposed to the other party.** Traffic goes through Tor and they see only the `.onion` address
-- **The session leaves nothing behind.** Closing the window takes the service down, and the Tor network keeps no record that the onion existed
-- **You have to deliver the address through a secure channel.** OnionShare does not distribute it for you. Sending the address over an insecure messaging app, which in this region usually means LINE or WeChat, makes that hop non-anonymous. Signal, CryptPad, or saying it in person are the usual approaches
-- **The other person needs Tor Browser.** If they cannot or will not use Tor, OnionShare is the wrong tool. Use [send.anoni.net](https://send.anoni.net/){target="_blank"} or PGP-encrypted email instead
-- **A long-running intake box needs dedicated hardware.** Leaving it on your main computer 24/7 makes that machine an attack surface. A Tails USB or a dedicated Linux box is better
-- **It uses your own bandwidth.** A large download consumes your upload capacity, and speed is bounded by current Tor network conditions
+- **Your IP address is not exposed to the other party**: Traffic goes through Tor and they see only the `.onion` address
+- **The session leaves nothing behind**: Closing the window takes the service down, and the Tor network keeps no record that the onion existed
+- **You have to deliver the address through a secure channel**: OnionShare does not distribute it for you. Sending the address over an insecure messaging app, which in this region usually means LINE or WeChat, makes that hop non-anonymous. Signal, CryptPad, or saying it in person are the usual approaches
+- **The other person needs Tor Browser**: If they cannot or will not use Tor, OnionShare is the wrong tool. Use [send.anoni.net](https://send.anoni.net/){target="_blank"} or PGP-encrypted email instead
+- **A long-running intake box needs dedicated hardware**: Leaving it on your main computer 24/7 makes that machine an attack surface. A Tails USB or a dedicated Linux box is better
+- **It uses your own bandwidth**: A large download consumes your upload capacity, and speed is bounded by current Tor network conditions
 
 ## Four modes
 

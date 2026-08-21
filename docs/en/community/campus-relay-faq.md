@@ -55,7 +55,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
     Tor's mission is to advance human rights and to let people resist mass surveillance and censorship through free, open source technology. The Tor community condemns unlawful use of the tools.
 
-    **Criminal intent belongs to people, not to tools.** Encryption, telephones, and cash are all used maliciously, and Tor is no different. Removing Tor moves malicious actors to other tools rather than stopping them.
+    **Criminal intent belongs to people, not to tools**: Encryption, telephones, and cash are all used maliciously, and Tor is no different. Removing Tor moves malicious actors to other tools rather than stopping them.
 
     At the same time, Tor and other privacy tools protect the people who need them, including protection against identity theft and physical stalking, and they support law enforcement investigations and victims.
 

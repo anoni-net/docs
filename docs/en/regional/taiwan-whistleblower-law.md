@@ -145,9 +145,9 @@ Whistleblowers rarely act alone, and journalists and lawyers are the two nodes t
 
 Advocating for Tor, Tails, SecureDrop, encrypted messaging, and threat modelling puts us at a different node of the same chain:
 
-- **Institutions and technology each cover one segment, and are used together.** PIWPA covers the public sector whistleblower's position after identification. Anonymity tools cover the ability to avoid identification during the act
-- **The private sector gap is where policy advocacy has room to work.** Comparatively, EU Directive 2019/1937 and the UK's Public Interest Disclosure Act both cover the private sector, and the US Sarbanes-Oxley Act covers employees of listed companies and their contractors. Taiwan's next round of amendments is worth tracking
-- **Whistleblower protection is personal data and identity in a concrete setting.** It lands squarely on the ground covered in [why networked freedom matters](../basics/internet-freedom.md), where a technical community's tools and its policy advocacy meet
+- **Institutions and technology each cover one segment, and are used together**: PIWPA covers the public sector whistleblower's position after identification. Anonymity tools cover the ability to avoid identification during the act
+- **The private sector gap is where policy advocacy has room to work**: Comparatively, EU Directive 2019/1937 and the UK's Public Interest Disclosure Act both cover the private sector, and the US Sarbanes-Oxley Act covers employees of listed companies and their contractors. Taiwan's next round of amendments is worth tracking
+- **Whistleblower protection is personal data and identity in a concrete setting**: It lands squarely on the ground covered in [why networked freedom matters](../basics/internet-freedom.md), where a technical community's tools and its policy advocacy meet
 
 ## Sources
 

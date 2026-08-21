@@ -79,11 +79,11 @@ When a code does not read, this page does not stop at one attempt. It tries seve
 
 If it still will not read, these are in order of how much they help:
 
-- **Crop away everything but the code.** This helps most. Phone photos are often four thousand pixels wide, and a code on a wall may occupy only a small patch of that. Cropped, it fills the frame
+- **Crop away everything but the code**: This helps most. Phone photos are often four thousand pixels wide, and a code on a wall may occupy only a small patch of that. Cropped, it fills the frame
 - **Retake it closer**, so the code covers more than half the frame
-- **Avoid glare.** A highlight over one of the finder patterns cannot be recovered
-- **Shoot it square on.** A slight angle is fine; a steep one is not
-- **The white margin is part of the code.** Leave a border. Cropping tight to the edge breaks it
+- **Avoid glare**: A highlight over one of the finder patterns cannot be recovered
+- **Shoot it square on**: A slight angle is fine; a steep one is not
+- **The white margin is part of the code**: Leave a border. Cropping tight to the edge breaks it
 
 For a code on a screen, take a screenshot rather than photographing the display. The moiré pattern from a photographed screen is hard to work with.
 

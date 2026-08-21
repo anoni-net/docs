@@ -259,11 +259,11 @@ Handling these first saves a lot of back and forth:
 
 From the first case, the places people get stuck:
 
-- **Assuming technical correctness is enough.** On an academic network, the institution decides the outcome more often than the technology does. Patience with the paperwork is the skill
-- **Underestimating oversight of the academic network.** Most institutions block by default, and an exception has to fit the reporting process
-- **Not planning maintenance and accounts.** Account permissions after graduation directly determine whether the node survives. **Do not tie `ContactInfo` to a personal address**
-- **Overselling it.** Do not describe Tor as something edgy or radical. Use language the institution can work with, and remember the goal is that whoever approves it can answer for it later
-- **Not distinguishing a relay from an exit node.** This is the single most important thing to get across. State explicitly that it is a **non-exit relay**
+- **Assuming technical correctness is enough**: On an academic network, the institution decides the outcome more often than the technology does. Patience with the paperwork is the skill
+- **Underestimating oversight of the academic network**: Most institutions block by default, and an exception has to fit the reporting process
+- **Not planning maintenance and accounts**: Account permissions after graduation directly determine whether the node survives. **Do not tie `ContactInfo` to a personal address**
+- **Overselling it**: Do not describe Tor as something edgy or radical. Use language the institution can work with, and remember the goal is that whoever approves it can answer for it later
+- **Not distinguishing a relay from an exit node**: This is the single most important thing to get across. State explicitly that it is a **non-exit relay**
 
 !!! tip "Next step"
 
@@ -289,6 +289,6 @@ This template comes from community member NZ, who provided the original proposal
 
     NZ has published the original folder, [Tor relay deployment at NTNU](https://drive.google.com/drive/folders/1B9ysi2ELC9w46bD3o7TMsnv55nupI1nz){target="_blank"}, containing the original proposal document, slides from an internal presentation in December 2025, and photographs.
 
-    **Adapt the placeholder version on this page rather than forking the original.** The original contains NZ's personal email address, supervisor details, and campus IP ranges, and missing one of those when submitting is an easy mistake. The archive is there so you can see what a real version looks like and learn the structure and register.
+    **Adapt the placeholder version on this page rather than forking the original**: The original contains NZ's personal email address, supervisor details, and campus IP ranges, and missing one of those when submitting is an easy mistake. The archive is there so you can see what a real version looks like and learn the structure and register.
 
 If you get a relay running at your own institution using this template, **tell us**. We will add your case to the [Tor relays on campus track](./relay-on-campus.md) so the third and fourth have more to work from. Contact routes are on [Community services](./tools.md).

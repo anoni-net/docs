@@ -45,8 +45,8 @@ Emergency numbers, domestic violence lines, and anti-fraud reporting differ by j
 
 1. **Call `165`** and give three things: what happened, the recipient account, and the amount and time of the transfer. `165` notifies the receiving financial institution to hold the funds, stopping withdrawal and onward transfer
 2. **Or go to any bank branch** and tell the counter you have been defrauded. Once staff confirm your identity and the transfer record, they call `165` on your behalf, and police attend the branch within two hours to take the report. If you are away from home without the paperwork, having bank staff make the call is faster
-3. **Then complete the report at a police station as soon as possible.** A phone call alone, without a filed report, means the hold lapses when the 24 hours expire
-4. **Stop contacting the other party.** An offer to refund you after one more fee is the standard follow-up scam
+3. **Then complete the report at a police station as soon as possible**: A phone call alone, without a filed report, means the hold lapses when the 24 hours expire
+4. **Stop contacting the other party**: An offer to refund you after one more fee is the standard follow-up scam
 5. **Keep all the evidence**: transfer records or screenshots, message history, the account details, and the site or app screens. Do not delete anything yet
 
 ### What the 24 hours means
@@ -178,7 +178,7 @@ Installation steps, what ends up on the device, and how to pick what to keep are
 ## Travelling or working across borders
 
 - **Access Now Digital Security Helpline**: [accessnow.org/help](https://www.accessnow.org/help/){target="_blank"}, digital security support for journalists, human rights defenders, and activists, in multiple languages, from anywhere
-- **Your own foreign ministry's emergency assistance line.** For Taiwanese nationals, the Ministry of Foreign Affairs emergency centre is `0800-085-095` free of charge within Taiwan, or `+886-800-085-095` from abroad at your own cost. A separate toll-free line for nationals overseas, `800-0885-0885`, works from 22 countries and territories and is the one to use if you have no money on the phone
+- **Your own foreign ministry's emergency assistance line**: For Taiwanese nationals, the Ministry of Foreign Affairs emergency centre is `0800-085-095` free of charge within Taiwan, or `+886-800-085-095` from abroad at your own cost. A separate toll-free line for nationals overseas, `800-0885-0885`, works from 22 countries and territories and is the one to use if you have no money on the phone
 - Your embassy or representative office, and local police channels, both worth looking up before travelling
 
 ## After it is over

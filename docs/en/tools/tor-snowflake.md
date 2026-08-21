@@ -25,11 +25,11 @@ If your own connectivity is open and unfiltered, this is the lowest-barrier way 
 
 A few things to understand before you start Snowflake:
 
-- **It does not leak your real IP to the destination.** After a Tor user in a censored region connects through you, their requests pass through Tor's layered encryption and leave from a Tor exit node. The destination site sees the exit node, not your IP.
-- **You cannot see what anyone is doing.** Traffic is only relayed in your browser; the content is already Tor-encrypted and unreadable.
-- **Your IP is not published as a fixed bridge, but the connecting client sees it during pairing.** Snowflake uses short-lived pairing, unlike the public list of traditional Tor bridges, so IPs churn. Its aim is to stay off public bridge lists, not to make your IP fully invisible; the client you pair with still sees your IP at that moment. (This is the fact the Hong Kong note above turns on.)
-- **Bandwidth impact is small.** The default is barely noticeable for everyday browsing. The extension lets you cap traffic.
-- **Check the policy on corporate or campus networks first.** Running Snowflake on a work or school network uses that network's IP to forward third-party traffic. In environments with strict information policy (finance, government, research), ask IT first.
+- **It does not leak your real IP to the destination**: After a Tor user in a censored region connects through you, their requests pass through Tor's layered encryption and leave from a Tor exit node. The destination site sees the exit node, not your IP.
+- **You cannot see what anyone is doing**: Traffic is only relayed in your browser; the content is already Tor-encrypted and unreadable.
+- **Your IP is not published as a fixed bridge, but the connecting client sees it during pairing**: Snowflake uses short-lived pairing, unlike the public list of traditional Tor bridges, so IPs churn. Its aim is to stay off public bridge lists, not to make your IP fully invisible; the client you pair with still sees your IP at that moment. (This is the fact the Hong Kong note above turns on.)
+- **Bandwidth impact is small**: The default is barely noticeable for everyday browsing. The extension lets you cap traffic.
+- **Check the policy on corporate or campus networks first**: Running Snowflake on a work or school network uses that network's IP to forward third-party traffic. In environments with strict information policy (finance, government, research), ask IT first.
 
 ## Start a browser-tab bridge
 

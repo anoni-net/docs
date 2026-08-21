@@ -18,11 +18,11 @@ This page explains how anoni.net thinks about the concept, and why it is worth t
 
 Networked freedom is rarely contested at one layer alone. We frame it in three:
 
-**The connection layer.** Whether you can reach the services you want, using tools you trust, without leaving traces that identify you. This is the layer where the Great Firewall, ISP-level filtering, deep packet inspection, and Tor / OONI / Snowflake circumvention work all live. Most measurement on this site is connection-layer measurement.
+**The connection layer**: Whether you can reach the services you want, using tools you trust, without leaving traces that identify you. This is the layer where the Great Firewall, ISP-level filtering, deep packet inspection, and Tor / OONI / Snowflake circumvention work all live. Most measurement on this site is connection-layer measurement.
 
-**The personal-data and identity layer.** Whether you can know where data about you flows, who holds it, on what timeline it can be deleted, and to what extent you can influence those answers. Real-name infrastructure (Singpass, iAMSmart, mainland Chinese phone-ID binding), platform takedown rules, electronic-identity expansion, and data-protection law (Taiwan's PDPA 2025, comparable frameworks regionally) all sit here.
+**The personal-data and identity layer**: Whether you can know where data about you flows, who holds it, on what timeline it can be deleted, and to what extent you can influence those answers. Real-name infrastructure (Singpass, iAMSmart, mainland Chinese phone-ID binding), platform takedown rules, electronic-identity expansion, and data-protection law (Taiwan's PDPA 2025, comparable frameworks regionally) all sit here.
 
-**The financial-flow layer.** Whether a payment can be made without unnecessarily binding the transaction to a real-name identity, a long retention window, and cross-institution correlation. Card payments leak more behavioral metadata than messages do; regulating that metadata is increasingly contested. Taiwan's [VASP Act 2026](../regional/index.md) is one regional case; Singapore's banking-Singpass integration is another shape.
+**The financial-flow layer**: Whether a payment can be made without unnecessarily binding the transaction to a real-name identity, a long retention window, and cross-institution correlation. Card payments leak more behavioral metadata than messages do; regulating that metadata is increasingly contested. Taiwan's [VASP Act 2026](../regional/index.md) is one regional case; Singapore's banking-Singpass integration is another shape.
 
 These three layers are how the site is organized, and how the [Regional Observatory](../regional/index.md) is structured.
 

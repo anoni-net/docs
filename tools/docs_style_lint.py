@@ -54,8 +54,11 @@ PROSE_RULES = [
     # 粗體詞當句子成分（**對照日**用同樣的參數）與清單標籤（**資料來源**：…）不在
     # 此限，兩者都不帶句號，regex 因此以「。」為判準。改法要看語境（並列的升成小
     # 標題，單獨一段改寫成正常句子），機器不宜代勞，列 warn。
-    ("bold-lead-sentence", WARN, re.compile(r"^\*\*[^*\n]+。\*\*"),
-     "段落開頭不要用粗體整句，並列項目升成小標題，單獨一段改寫成正常句子"),
+    # 前面那一段可選的清單符號是後來補的。原本只錨在行首，清單項目前面的「- 」
+    # 會把整條規則擋掉，而並列項目正是最常寫成粗體整句的地方。全站掃出來 386 處，
+    # 其中 344 處在清單裡，等於這條規則有九成的時間是沒有作用的。
+    ("bold-lead-sentence", WARN, re.compile(r"^(?:[-*+]\s+|\d+\.\s+)?\*\*[^*\n]+。\*\*"),
+     "段落開頭不要用粗體整句，並列項目改成「**標籤**：內文」或升成小標題"),
 ]
 
 # docs/en 的規則集。英文版的編輯標準見 docs/en/community/contributor-handbook.md
@@ -68,8 +71,8 @@ PROSE_RULES = [
 PROSE_RULES_EN = [
     # 中文那條以「。」為判準，英文版換成句點。清單標籤（**Data source**: …）與
     # 句子成分（the **control day** uses …）都不帶句點，不會命中。
-    ("bold-lead-sentence", WARN, re.compile(r"^\*\*[^*\n]+\.\*\*"),
-     "段落開頭不要用粗體整句，並列項目升成小標題，單獨一段改寫成正常句子"),
+    ("bold-lead-sentence", WARN, re.compile(r"^(?:[-*+]\s+|\d+\.\s+)?\*\*[^*\n]+\.\*\*"),
+     "段落開頭不要用粗體整句，並列項目改成「**標籤**：內文」或升成小標題"),
     # 機器欄位名，中英通用
     ("machine-field", WARN, re.compile(r"\bweb_connectivity\b"),
      "機器欄位名請人性化並附原文，例：Web Connectivity"),

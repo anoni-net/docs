@@ -42,7 +42,7 @@ Bitcoin and Ethereum keep a public ledger. Hand anyone an address and they can p
 
 This is the point most "pay in crypto" advice misses entirely:
 
-**The on-ramp and off-ramp KYC layer, plus address reuse, deanonymize people far more often than the chain's cryptography does.** The single most identifying event in most people's crypto history is the withdrawal from the exchange where they verified a passport, because it welds the on-chain identity to the legal one. Reusing one address across donations, subscriptions, and savings then knits those activities into one profile. No privacy coin fixes a habit of cashing out at a KYC desk and reusing addresses.
+**The on-ramp and off-ramp KYC layer, plus address reuse, deanonymize people far more often than the chain's cryptography does**: The single most identifying event in most people's crypto history is the withdrawal from the exchange where they verified a passport, because it welds the on-chain identity to the legal one. Reusing one address across donations, subscriptions, and savings then knits those activities into one profile. No privacy coin fixes a habit of cashing out at a KYC desk and reusing addresses.
 
 How an asset is acquired shapes how traceable it is:
 
@@ -60,8 +60,8 @@ That choice is exactly the weakness. For most of Zcash's life the shielded pool 
 
 Two things have shifted since:
 
-- **Adoption is rising.** Reporting in late 2025 put 20–30% of circulating ZEC in shielded addresses, a meaningful jump from the single-digit and low-teens era.[^3] A larger anonymity set raises the practical difficulty of analysis. Because the figure moves, check current on-chain data before relying on it.
-- **Halo 2 removed the trusted setup.** Zcash's earlier zk-SNARK construction needed a one-time "ceremony" whose secret data, if it leaked, could have allowed undetectable counterfeiting. The Halo 2 system used by the current shielded pool eliminates that trusted-setup requirement, a real piece of cryptographic-engineering progress.[^4]
+- **Adoption is rising**: Reporting in late 2025 put 20–30% of circulating ZEC in shielded addresses, a meaningful jump from the single-digit and low-teens era.[^3] A larger anonymity set raises the practical difficulty of analysis. Because the figure moves, check current on-chain data before relying on it.
+- **Halo 2 removed the trusted setup**: Zcash's earlier zk-SNARK construction needed a one-time "ceremony" whose secret data, if it leaked, could have allowed undetectable counterfeiting. The Halo 2 system used by the current shielded pool eliminates that trusted-setup requirement, a real piece of cryptographic-engineering progress.[^4]
 
 The lesson generalizes past Zcash: optional privacy with low uptake protects you less than the math suggests, because anonymity is a property of the crowd, not of one transaction.
 

@@ -32,9 +32,9 @@ Can you collect data from a large group of people while still protecting each in
 
 The Privacy Guides explainer walks through the full arc of privacy-preserving data collection:
 
-**The core problem.** Even seemingly harmless data points can identify individuals. Latanya Sweeney showed in 2000 that 87% of Americans can be re-identified from just three fields: ZIP code, date of birth, and sex.
+**The core problem**: Even seemingly harmless data points can identify individuals. Latanya Sweeney showed in 2000 that 87% of Americans can be re-identified from just three fields: ZIP code, date of birth, and sex.
 
-**Failed approaches.** Before differential privacy, techniques like k-anonymity (every row has at least k-1 identical rows) and simple name-removal were considered sufficient. They weren't. The AOL search log release (2006) and the Strava heatmap incident (2018) are two famous examples of "anonymized" data that was trivially re-identified. In the Strava case, the platform did not deliberately expose anyone — aggregating millions of individual routes simply revealed patterns that only specific people would repeat. That is precisely the problem differential privacy is designed to prevent.
+**Failed approaches**: Before differential privacy, techniques like k-anonymity (every row has at least k-1 identical rows) and simple name-removal were considered sufficient. They weren't. The AOL search log release (2006) and the Strava heatmap incident (2018) are two famous examples of "anonymized" data that was trivially re-identified. In the Strava case, the platform did not deliberately expose anyone — aggregating millions of individual routes simply revealed patterns that only specific people would repeat. That is precisely the problem differential privacy is designed to prevent.
 
 For k-anonymity specifically, researchers demonstrated the attack mechanism against the Harvard/MIT EdX dataset: they identified quasi-identifier combinations (course enrollment records) that resisted generalization, then matched them against publicly available LinkedIn profiles to narrow the candidate list to specific individuals. Cross-referencing with external data is k-anonymity's fundamental blind spot.
 
@@ -42,13 +42,13 @@ For k-anonymity specifically, researchers demonstrated the attack mechanism agai
 
 **Differential privacy** (Dwork et al., 2006) formalized this idea. It adds calibrated noise to data such that the output of any query looks essentially the same whether or not any particular individual's data was included. The privacy guarantee is controlled by ε (epsilon, the "privacy budget"): smaller ε means stronger privacy but less accurate results.
 
-**Local vs. Central DP.** Central DP adds noise after data is collected, requiring trust in the central authority. Local DP (as implemented by Google's RAPPOR in 2014) adds noise on the device before transmission, eliminating the need to trust any server.
+**Local vs. Central DP**: Central DP adds noise after data is collected, requiring trust in the central authority. Local DP (as implemented by Google's RAPPOR in 2014) adds noise on the device before transmission, eliminating the need to trust any server.
 
 **Real deployments** include Google Chrome and Maps (RAPPOR), Apple's keyboard and emoji telemetry (Sketch/Matrix), Mozilla Firefox telemetry (Prio), and the U.S. 2020 Census Disclosure Avoidance System. Neither Google nor Apple publicly discloses the ε values used in their deployments. "We use local differential privacy" can be verified from published papers and code; "our ε is strong enough to protect you" remains a claim users cannot independently audit.
 
 **OpenDP**, developed at Harvard, provides an open-source toolkit for applying differential privacy to arbitrary datasets.
 
-**Where research is heading.** Machine learning models trained on personal data can leak information about their training set through *membership inference attacks* — an adversary probes the model to determine whether a specific record was included in the training data. Applying differential privacy during model training is the strongest known defense with formal guarantees. As AI systems increasingly rely on sensitive personal data, this application of differential privacy is growing in importance alongside the classical data-release use cases covered in the original article.
+**Where research is heading**: Machine learning models trained on personal data can leak information about their training set through *membership inference attacks* — an adversary probes the model to determine whether a specific record was included in the training data. Applying differential privacy during model training is the strongest known defense with formal guarantees. As AI systems increasingly rely on sensitive personal data, this application of differential privacy is growing in importance alongside the classical data-release use cases covered in the original article.
 
 The full article is detailed, well-structured, and accessible to non-specialists — making it an excellent reference for anyone explaining privacy-enhancing technologies to a general audience.
 

@@ -29,6 +29,10 @@ LINT = pathlib.Path(__file__).with_name("docs_style_lint.py")
 
 # (本文, 應該被攔下來嗎, 說明)
 CASES: list[tuple[str, bool, str]] = [
+    # --- bold-lead-sentence 在清單項目裡（warn）---
+    ("- **這是一個完整的句子。** 後面接說明。", True, "中文清單項目裡的粗體整句"),
+    ("1. **這是一個完整的句子。** 後面接說明。", True, "中文編號清單裡的粗體整句"),
+    ("- **資料來源**：這種標籤形式是允許的。", False, "中文粗體標籤加冒號"),
     # --- em-dash（error）---
     ("這是一段話——插入語——後面接著。", True, "em-dash 雙破折號"),
     ("這是一段話：後面接著。", False, "冒號取代破折號"),
@@ -209,6 +213,17 @@ CN_CASES: list[tuple[str, bool, str]] = [
 # docs/en 的案例。跑在含 /en/ 的路徑上，套 PROSE_RULES_EN。
 # (本文, 應該被攔下來嗎, 說明)
 EN_CASES: list[tuple[str, bool, str]] = [
+    # --- bold-lead-sentence 在清單項目裡（warn）---
+    # regex 原本只錨在行首，「- 」會把整條規則擋掉，而並列項目正是最常寫成粗體
+    # 整句的地方。全站掃出來 386 處，其中 344 處在清單裡。
+    ("- **This is a complete sentence.** Then the explanation follows.", True,
+     "清單項目裡的粗體整句"),
+    ("1. **This is a complete sentence.** Then more text.", True,
+     "編號清單裡的粗體整句"),
+    ("- **Data source**: the label form is what the handbook allows.", False,
+     "粗體標籤加冒號是允許的"),
+    ("- The **control day** uses the same parameters.", False,
+     "句子中間的粗體不算"),
     # --- bold-lead-sentence 英文版（warn）---
     ("**Even if we wanted to read it, we could not.** The server only holds ciphertext.",
      True, "en 粗體整句開頭"),

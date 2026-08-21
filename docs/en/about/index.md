@@ -12,10 +12,10 @@ This page is written for international peer organizations, journalists, research
 
 ## What we are
 
-- **A volunteer community.** No salaried staff. The site, the Pulse measurement system, the ASN coverage tooling, and the regional translations are produced by community contributors on their own time, sometimes under pseudonyms.
-- **Based in Taiwan.** The active core is in Taipei. We hope to bring in regional contributors over time but currently have only occasional informal exchange with collaborators elsewhere in the region.
-- **Anchored in self-hosted infrastructure.** We run our own Matrix homeserver (`im.anoni.net`), a Cryptpad instance, an Etherpad, a Send instance, a SearXNG instance, and a Formbricks instance. Internal coordination happens on these tools rather than on third-party platforms.
-- **Originally a Chinese-language community.** The Traditional Chinese (zh-TW) edition is the source of truth. A re-localized Simplified Chinese (zh-CN) edition exists. This English edition is being rebuilt as a regional observatory for international readers, not as a one-to-one translation.
+- **A volunteer community**: No salaried staff. The site, the Pulse measurement system, the ASN coverage tooling, and the regional translations are produced by community contributors on their own time, sometimes under pseudonyms.
+- **Based in Taiwan**: The active core is in Taipei. We hope to bring in regional contributors over time but currently have only occasional informal exchange with collaborators elsewhere in the region.
+- **Anchored in self-hosted infrastructure**: We run our own Matrix homeserver (`im.anoni.net`), a Cryptpad instance, an Etherpad, a Send instance, a SearXNG instance, and a Formbricks instance. Internal coordination happens on these tools rather than on third-party platforms.
+- **Originally a Chinese-language community**: The Traditional Chinese (zh-TW) edition is the source of truth. A re-localized Simplified Chinese (zh-CN) edition exists. This English edition is being rebuilt as a regional observatory for international readers, not as a one-to-one translation.
 
 ## What we publish
 

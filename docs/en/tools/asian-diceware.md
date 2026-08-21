@@ -39,7 +39,7 @@ Asian loanwords are only about 3.8% of the list, so a six-word passphrase carrie
     Pushing much higher (say 10%, ≈ 778 words) would force one of two things, and we want neither:
 
     - **Flooding the list with obscure words** (`puttee`, `howdah`, `nilgai`, `maund`) that most people can't spell, say, or recall. That breaks the EFF property this list exists to keep: a passphrase you can write down and read back without errors.
-    - **Switching to romanized Mandarin or Zhuyin syllables.** That is a separate project — Hanyu Pinyin, Wade-Giles, and Tongyong all coexist, so spellings collide and turn ambiguous.
+    - **Switching to romanized Mandarin or Zhuyin syllables**: That is a separate project — Hanyu Pinyin, Wade-Giles, and Tongyong all coexist, so spellings collide and turn ambiguous.
 
     A higher percentage does not make the passphrase stronger. Every word carries the same weight whether it is `tofu` or `the`; the entropy comes from the list being exactly 7,776 words with each die roll uniform, never from where the words came from. So unlike beer, "higher proof" buys you nothing here, and usability wins when it conflicts with cultural coverage.
 
@@ -49,7 +49,7 @@ The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0);
 
 Rolling dice against a table is the most direct way; a handful of dice plus one table is enough, no coding required. There are two ways to get the table: print the A5 booklet ([download the PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}; see [Print a booklet](#Print-a-booklet) below), or open the dice file [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"} on GitHub.
 
-**Method 1 — physical dice.** Roll 5 dice and read them left to right as a five-digit number (each die 1–6). The table is sorted in numeric order (from 11111 to 66666), so you can flip close to your number, or search for the line that starts with your five digits; the word after it is the one you drew. Repeat six times and join them with `-`. For example, rolling `6 3 4 4 4` reads as `63444`, which maps to `tofu`. After six rolls you might hold a passphrase like `tofu-oolong-gecko-mango-bazaar-haiku` — easy to read out and copy down, far more memorable than a random string.
+**Method 1 — physical dice**: Roll 5 dice and read them left to right as a five-digit number (each die 1–6). The table is sorted in numeric order (from 11111 to 66666), so you can flip close to your number, or search for the line that starts with your five digits; the word after it is the one you drew. Repeat six times and join them with `-`. For example, rolling `6 3 4 4 4` reads as `63444`, which maps to `tofu`. After six rolls you might hold a passphrase like `tofu-oolong-gecko-mango-bazaar-haiku` — easy to read out and copy down, far more memorable than a random string.
 
 No dice? They are cheap: stationery shops, convenience stores, and game shops all carry them, a set costs next to nothing, or you can borrow a few. Alternatively, use an offline dice-roll app (turn off the network first). Dice plus a table — print a booklet and you are set — is the complete method, with no computer needed at any point. Only if you want to skip the dice and you can code a little do you need the shortcuts below.
 

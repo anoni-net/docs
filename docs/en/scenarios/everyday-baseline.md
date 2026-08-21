@@ -175,9 +175,9 @@ Not a redo. Just work through these questions once a year.
 
 The figures cited here are Taiwanese because that is where this site is based. The categories transfer; the specific institutions do not. Wherever you are, it is worth knowing three things before you need them.
 
-- **The national fraud reporting line and its published statistics.** Taiwan's is `165`, and its [public dashboard](https://165dashboard.tw/){target="_blank"} breaks down case counts and losses by fraud type, which is a fast way to see what is currently common. Many jurisdictions publish something comparable
+- **The national fraud reporting line and its published statistics**: Taiwan's is `165`, and its [public dashboard](https://165dashboard.tw/){target="_blank"} breaks down case counts and losses by fraud type, which is a fast way to see what is currently common. Many jurisdictions publish something comparable
 - **Your data protection authority**, and whether it can actually act on a complaint
-- **How fast your bank can freeze a transfer.** When money has already moved, call the fraud line and the bank at the same time with the transfer time and the receiving account. That interval decides whether anything is recoverable
+- **How fast your bank can freeze a transfer**: When money has already moved, call the fraud line and the bank at the same time with the transfer time and the receiving account. That interval decides whether anything is recoverable
 
 ## When to raise your standard
 

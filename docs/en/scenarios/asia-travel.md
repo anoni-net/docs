@@ -58,7 +58,7 @@ If a clean device isn't practical, the fallback is a thorough pre-trip cleanup o
 - **Sign out of all accounts**, including alt accounts on Instagram, Threads, Bluesky, and the like. Officers commonly look at what's currently signed in, which is far easier than searching a wiped device.
 - **Clear browser history, bookmarks, and cookies** across every browser on the device.
 - **Back up and delete sensitive conversations** (Signal, Telegram, LINE, WeChat) to your home backup first, then remove them from the travel device.
-- **Audit the camera roll and cloud photo libraries.** Sensitive images can be moved to encrypted storage and re-downloaded after the trip.
+- **Audit the camera roll and cloud photo libraries**: Sensitive images can be moved to encrypted storage and re-downloaded after the trip.
 - **Check the small stuff**: email signatures, wallet/loyalty cards, lock-screen wallpaper. Identity leaks through details.
 
 For LGBTQ+ travelers specifically, the [border section of our LGBTQ+ guide](./lgbtq.md) covers the same cleanup with attention to dating apps, community-app traces, and destinations that criminalize same-sex conduct.
@@ -67,11 +67,11 @@ For LGBTQ+ travelers specifically, the [border section of our LGBTQ+ guide](./lg
 
 How you carry the device through the checkpoint matters as much as what's on it. A few habits, none of which require special tools:
 
-- **Use a strong passcode, not biometrics, at the border.** A 6-or-more-digit PIN (better, an alphanumeric passphrase) is what protects the device. Turn off Face ID and fingerprint before you reach the checkpoint. A face or finger can be applied to a phone in seconds, sometimes without your active cooperation; a passcode you have to type is harder to compel and, in some jurisdictions, better protected legally[^2].
-- **Power the device fully off before arrival.** A phone that has been unlocked since boot sits in an "after first unlock" state, where much of its data is decrypted in memory and far easier for forensic tools to extract. A full power-off returns it to the "before first unlock" state, where file-based encryption keeps data locked until the passcode is entered, and clears any in-memory unlock state[^3]. Powering off also disables biometrics on both iOS and Android until the next PIN entry.
-- **Stay calm and don't volunteer.** Don't offer to unlock, don't narrate what's on the device, don't hand over passwords unasked. Comply only with an explicit, lawful request, and know that the consequence of refusing varies enormously by jurisdiction (see below).
-- **Know the trade-off of refusing.** In some places refusal means denied entry; in others, device seizure; in a growing number, a criminal charge. Decide your line before you're at the desk, not in the moment.
-- **Have a fallback contact.** If a device is seized or you're detained, you want a way to reach a colleague, a lawyer, or a helpline. The [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} is 24/7 and multilingual; contact them before travel if you expect real exposure.
+- **Use a strong passcode, not biometrics, at the border**: A 6-or-more-digit PIN (better, an alphanumeric passphrase) is what protects the device. Turn off Face ID and fingerprint before you reach the checkpoint. A face or finger can be applied to a phone in seconds, sometimes without your active cooperation; a passcode you have to type is harder to compel and, in some jurisdictions, better protected legally[^2].
+- **Power the device fully off before arrival**: A phone that has been unlocked since boot sits in an "after first unlock" state, where much of its data is decrypted in memory and far easier for forensic tools to extract. A full power-off returns it to the "before first unlock" state, where file-based encryption keeps data locked until the passcode is entered, and clears any in-memory unlock state[^3]. Powering off also disables biometrics on both iOS and Android until the next PIN entry.
+- **Stay calm and don't volunteer**: Don't offer to unlock, don't narrate what's on the device, don't hand over passwords unasked. Comply only with an explicit, lawful request, and know that the consequence of refusing varies enormously by jurisdiction (see below).
+- **Know the trade-off of refusing**: In some places refusal means denied entry; in others, device seizure; in a growing number, a criminal charge. Decide your line before you're at the desk, not in the moment.
+- **Have a fallback contact**: If a device is seized or you're detained, you want a way to reach a colleague, a lawyer, or a helpline. The [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} is 24/7 and multilingual; contact them before travel if you expect real exposure.
 
 ## SIM, eSIM, and the history that travels with you
 
@@ -87,25 +87,25 @@ For the threat of *destination surveillance*, roaming and data-only eSIMs keep t
 
 Two questions come up often enough to answer directly: can you buy an anonymous phone or SIM while traveling, and what changes when you bring it back.
 
-**Separate the handset from the number.** "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
+**Separate the handset from the number**: "Burner" collapses two things with different exposures. The handset carries an IMEI, a hardware identifier the network sees no matter which SIM is in it. The SIM carries the registration that binds a number to a legal identity. Once you separate them, the answer for most trips is a reusable clean device plus whatever number the destination requires, rather than discarding both after every crossing.
 
-**Buying abroad is not buying anonymity.** Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the move is the one already covered in the SIM section above: keep the identity mapping outside the country with roaming or a data-only eSIM. Buying locally does not buy anonymity.
+**Buying abroad is not buying anonymity**: Across this region, a SIM bought on arrival is registered to your passport in almost every jurisdiction, and in mainland China and Thailand to your face as well — Thailand has required biometric liveness checks for SIM registration since August 2025. Tourist SIMs also expire quickly, often in 30 to 60 days. If the threat you're managing is *destination* surveillance, the move is the one already covered in the SIM section above: keep the identity mapping outside the country with roaming or a data-only eSIM. Buying locally does not buy anonymity.
 
-**What changes when you take it home.**
+### What changes when you take it home
 
 - **A foreign number roaming at home** reports your location to the foreign carrier, so attribution generally requires a cross-border request. The trade-off is that a foreign roaming number sitting near your home address for months is itself a pattern.
 - **Prepaid validity** runs out. A 30-day tourist SIM is not a long-term second line.
 - **Swapping in a domestic SIM** binds that handset to your local identity, which is exactly what the clean device was avoiding.
-- **The IMEI links both numbers.** One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
-- **Customs.** Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
+- **The IMEI links both numbers**: One handset that carried a foreign SIM and then a domestic one shows the carrier a single device with two numbers under it.
+- **Customs**: Carrying more than one phone is not itself unlawful in most of the region, but it invites questions. A plain reason (a work phone and a personal one) travels better than concealment.
 
 !!! warning "Returning to mainland China inverts several of these"
 
     A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry, since state-security officers have had explicit authority to check personal electronic devices since July 2024, and the jurisdiction sits at the top tier of the border-inspection column in the table above. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
 
-**The practical shape.** Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
+**The practical shape**: Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
 
-**What a burner does not fix.** Signing into your everyday email, social, or cloud accounts on the clean device defeats it entirely. So does contacting the same people, keeping the same hours, and appearing in the same places. Carrying both phones powered on at once lets cell-tower records pair them. The device is one layer; the account layer is in [maintaining multiple online identities](../basics/multiple-identities.md).
+**What a burner does not fix**: Signing into your everyday email, social, or cloud accounts on the clean device defeats it entirely. So does contacting the same people, keeping the same hours, and appearing in the same places. Carrying both phones powered on at once lets cell-tower records pair them. The device is one layer; the account layer is in [maintaining multiple online identities](../basics/multiple-identities.md).
 
 ## Per-jurisdiction border context (Asia)
 

@@ -18,11 +18,11 @@ This page does two things. It points to the canonical account of how third-party
 
 The inference does not need your voice. A few of the mechanisms that produce the "it heard me" effect:
 
-- **Lookalike audiences.** An advertiser uploads a customer list and the platform finds people with similar behavior. You may never have expressed interest in anything; you simply resemble people who bought.
-- **The social graph.** A friend searched for it, a friend bought it, or a friend's device sat on the same Wi-Fi as yours. The association doesn't have to originate with you.
-- **Co-location.** Two devices repeatedly in the same place at the same time is itself a commercially valuable relationship.
-- **Shared triggers.** You and your friend discussed the thing because you both saw the same news, event, or seasonal prompt. The ad system reacted to the same trigger, which reads as if it overheard the conversation.
-- **Behavioral signals you don't think of as signals.** Dwell time on a post you didn't like, scroll-back, typing you deleted before sending, screenshots, and the hours you open the app.
+- **Lookalike audiences**: An advertiser uploads a customer list and the platform finds people with similar behavior. You may never have expressed interest in anything; you simply resemble people who bought.
+- **The social graph**: A friend searched for it, a friend bought it, or a friend's device sat on the same Wi-Fi as yours. The association doesn't have to originate with you.
+- **Co-location**: Two devices repeatedly in the same place at the same time is itself a commercially valuable relationship.
+- **Shared triggers**: You and your friend discussed the thing because you both saw the same news, event, or seasonal prompt. The ad system reacted to the same trigger, which reads as if it overheard the conversation.
+- **Behavioral signals you don't think of as signals**: Dwell time on a post you didn't like, scroll-back, typing you deleted before sending, screenshots, and the hours you open the app.
 
 None of that requires a microphone.
 
@@ -64,9 +64,9 @@ On iOS 14 and later, an orange dot in the status bar means an app is using the m
 
 The tracking mechanics are global. What differs across Sinophone Asia-Pacific is how directly the collected profile resolves to a legal person.
 
-- **Real-name registration closes the gap.** Where SIM cards and major platform accounts are bound to identity documents by law, an advertising profile is not a pseudonymous blob; it attaches to a named individual whom local authorities can query. See [metadata](./metadata.md) for the same point about communication records.
+- **Real-name registration closes the gap**: Where SIM cards and major platform accounts are bound to identity documents by law, an advertising profile is not a pseudonymous blob; it attaches to a named individual whom local authorities can query. See [metadata](./metadata.md) for the same point about communication records.
 - **The data can be compelled, not just sold**: in the commercial-surveillance frame that most English-language guidance assumes, the worst case is a data broker. Where platforms operate under local data-localization and disclosure obligations, the same profile is reachable by legal process.
-- **Contact upload spreads exposure to people who never consented.** Your phone number can already sit in a platform's graph because someone else uploaded their address book, which matters more where a number maps to an identity document.
+- **Contact upload spreads exposure to people who never consented**: Your phone number can already sit in a platform's graph because someone else uploaded their address book, which matters more where a number maps to an identity document.
 
 ### Mainland Chinese platforms add a further layer
 
@@ -84,8 +84,8 @@ Quitting is not an option for most people. If you keep using them, these adjustm
 
 ## What actually helps
 
-- **Turn off the advertising identifier.** On iPhone, Settings → Privacy & Security → Tracking, then switch off "Allow Apps to Request to Track"; apps that ask are then denied the IDFA[^apple-att]. On Android 12 and later you can delete the advertising ID outright, after which apps receive a string of zeros[^google-adid].
-- **Turn off contact upload.** This one protects your contacts, who never agreed to be uploaded.
+- **Turn off the advertising identifier**: On iPhone, Settings → Privacy & Security → Tracking, then switch off "Allow Apps to Request to Track"; apps that ask are then denied the IDFA[^apple-att]. On Android 12 and later you can delete the advertising ID outright, after which apps receive a string of zeros[^google-adid].
+- **Turn off contact upload**: This one protects your contacts, who never agreed to be uploaded.
 - **Turn off precise location** where an approximate one will do, and review which apps hold microphone, camera, location, and contacts permissions.
 - **Separate browsing contexts**, block third-party cookies and trackers, and avoid federated "sign in with" buttons, which join two records together.
 - **Separate accounts** for genuinely distinct purposes, covered in [maintaining multiple online identities](./multiple-identities.md).

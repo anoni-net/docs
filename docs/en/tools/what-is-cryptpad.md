@@ -24,10 +24,10 @@ The community instance at [cryptpad.anoni.net](https://cryptpad.anoni.net/){targ
 
 ## What zero-knowledge means here
 
-- **Encryption happens in the browser.** What you type, the images you paste, and every collaborative edit are encrypted before they leave your computer
-- **The server only sees ciphertext.** CryptPad's operators, the anoni.net maintainers, and any intermediary on the path all see an unreadable stream
-- **The key lives in the URL fragment.** The key that decrypts a pad sits after the `#` in the URL, and that portion is never sent to the server. Sharing the link is sharing the key, so whether the key leaks depends on how you transmit the URL
-- **Collaboration stays encrypted.** When someone joins through your share link, their browser obtains the same key and decrypts and re-encrypts every change locally
+- **Encryption happens in the browser**: What you type, the images you paste, and every collaborative edit are encrypted before they leave your computer
+- **The server only sees ciphertext**: CryptPad's operators, the anoni.net maintainers, and any intermediary on the path all see an unreadable stream
+- **The key lives in the URL fragment**: The key that decrypts a pad sits after the `#` in the URL, and that portion is never sent to the server. Sharing the link is sharing the key, so whether the key leaks depends on how you transmit the URL
+- **Collaboration stays encrypted**: When someone joins through your share link, their browser obtains the same key and decrypts and re-encrypts every change locally
 
 Even if we wanted to read it, we could not.
 

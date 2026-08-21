@@ -16,10 +16,10 @@ Digital preparation for protests and mobilization, what to bring, what to leave 
 
 A few things the general guides under-weight for this region:
 
-- **Real-name SIM registration.** Across most of the region the SIM in your phone is tied to your legal identity, so "burner" expectations from other contexts don't hold. A cheap second handset with a prepaid SIM still carries a registered identity in many jurisdictions.
-- **Device search at borders and checkpoints.** For cross-border organizers the device-search risk is often higher leaving or entering than at the event itself. See the [cross-border travel](./asia-travel.md) guide.
-- **Network-level observation.** Deep packet inspection and lawful-intercept tooling documented in the region (see the [Regional Observatory](../regional/index.md)) means network surveillance belongs in the threat model, not just on-the-ground policing.
-- **Coordination metadata.** Group-chat membership is itself sensitive: who is in the room, who joined when. Content encryption alone does not cover it. See [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md).
+- **Real-name SIM registration**: Across most of the region the SIM in your phone is tied to your legal identity, so "burner" expectations from other contexts don't hold. A cheap second handset with a prepaid SIM still carries a registered identity in many jurisdictions.
+- **Device search at borders and checkpoints**: For cross-border organizers the device-search risk is often higher leaving or entering than at the event itself. See the [cross-border travel](./asia-travel.md) guide.
+- **Network-level observation**: Deep packet inspection and lawful-intercept tooling documented in the region (see the [Regional Observatory](../regional/index.md)) means network surveillance belongs in the threat model, not just on-the-ground policing.
+- **Coordination metadata**: Group-chat membership is itself sensitive: who is in the room, who joined when. Content encryption alone does not cover it. See [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md).
 
 ## Hong Kong: a sharper risk tier
 

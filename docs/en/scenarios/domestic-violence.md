@@ -54,11 +54,11 @@ This is the part where caution matters most. **Removing or disabling monitoring 
 
 What to do, in order:
 
-1. **Do the checking from a safe device where possible.** If you suspect your own phone is monitored, research first on a device the abuser cannot reach.
-2. **Look, do not yet touch.** On your phone, you can quietly review which apps have location and accessibility permissions (Settings → Privacy on both iOS and Android), which devices are signed into your Apple ID or Google account, and what is sharing your location in Find My or Google Maps. Note what you find. Do not change anything yet.
-3. **Assume removal is visible.** Deleting a stalkerware app, signing a device out, or turning off a location share may alert the abuser. The Coalition Against Stalkerware is explicit that you should only attempt removal if you believe it is safe, and that you should make a safety plan first.[^5]
-4. **Talk to an advocate before acting.** A domestic-violence advocate can help you sequence changes so that the abuser does not notice until you are safe. In Taiwan, the 113 Protection Hotline offers anonymous consultation and referral. International digital-safety help is available from the [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}.
-5. **Consider a clean device as the safer path.** Rather than cleaning a compromised phone, it is often safer to obtain a new, inexpensive device the abuser has never seen and never had access to, set up with fresh accounts, kept somewhere they cannot find it. This sidesteps the "they will know I removed it" problem entirely.
+1. **Do the checking from a safe device where possible**: If you suspect your own phone is monitored, research first on a device the abuser cannot reach.
+2. **Look, do not yet touch**: On your phone, you can quietly review which apps have location and accessibility permissions (Settings → Privacy on both iOS and Android), which devices are signed into your Apple ID or Google account, and what is sharing your location in Find My or Google Maps. Note what you find. Do not change anything yet.
+3. **Assume removal is visible**: Deleting a stalkerware app, signing a device out, or turning off a location share may alert the abuser. The Coalition Against Stalkerware is explicit that you should only attempt removal if you believe it is safe, and that you should make a safety plan first.[^5]
+4. **Talk to an advocate before acting**: A domestic-violence advocate can help you sequence changes so that the abuser does not notice until you are safe. In Taiwan, the 113 Protection Hotline offers anonymous consultation and referral. International digital-safety help is available from the [Access Now Helpline](https://www.accessnow.org/help/){target="_blank"}.
+5. **Consider a clean device as the safer path**: Rather than cleaning a compromised phone, it is often safer to obtain a new, inexpensive device the abuser has never seen and never had access to, set up with fresh accounts, kept somewhere they cannot find it. This sidesteps the "they will know I removed it" problem entirely.
 
 For step-by-step detection guidance, the Safety Net Project's [spyware and phone surveillance](https://www.techsafety.org/spyware-and-stalkerware-phone-surveillance){target="_blank"} pages and the Coalition Against Stalkerware's [survivor information](https://stopstalkerware.org/information-for-survivors/){target="_blank"} are the references to follow.
 
@@ -69,7 +69,7 @@ Rebuilding a private digital life means new accounts that the abuser has no path
 ### Build the new identity off to the side
 
 - **Create a fresh email account** on a device and network the abuser cannot see, and do not link it to your existing phone number or recovery email. Use it as the recovery anchor for everything new.
-- **Get a phone number the abuser does not know about.** A prepaid SIM or a second number kept on a separate device keeps your real-time location and call records away from a shared carrier account. Note the regional constraint below: in much of Asia-Pacific, SIM registration is tied to a real identity by law.[^6]
+- **Get a phone number the abuser does not know about**: A prepaid SIM or a second number kept on a separate device keeps your real-time location and call records away from a shared carrier account. Note the regional constraint below: in much of Asia-Pacific, SIM registration is tied to a real identity by law.[^6]
 - **Use a password manager** so the new accounts have strong, unique passwords you never have to reuse or remember. See [Privacy Guides — password managers](https://www.privacyguides.org/en/passwords/){target="_blank"} for options. Set the manager up in the new identity, not the old one.
 
 ### Replace accounts in priority order
@@ -77,7 +77,7 @@ Rebuilding a private digital life means new accounts that the abuser has no path
 When you are ready, and ideally with a plan in place, change credentials in this order, because the first two are the keys that unlock everything else:
 
 1. **Email and cloud account** (the recovery anchor). Change the password, remove the abuser's devices, and replace any shared recovery phone or email.
-2. **Move two-factor authentication off SMS.** SMS codes go to a number the abuser may control or be able to read. Switch to an authenticator app (Aegis on Android, 2FAS or Raivo on iOS) or a hardware key.
+2. **Move two-factor authentication off SMS**: SMS codes go to a number the abuser may control or be able to read. Switch to an authenticator app (Aegis on Android, 2FAS or Raivo on iOS) or a hardware key.
 3. **Banking and financial accounts**, watching for shared statements and joint cards that reveal new purchases or a new address.
 4. **Social media**, then shopping and streaming.
 
@@ -89,11 +89,11 @@ Signing out of a shared Apple ID, leaving a family plan, or removing a location 
 
 Evidence supports protection orders, custody decisions, and criminal complaints. Collect it in a way that does not itself become a risk.
 
-- **Preserve, do not delete.** Threatening messages, location-tracking screenshots, and call logs are your evidence later. Do not mass-delete harassment to "clean up," and do not delete the original messages.
-- **Capture full context.** Screenshot the message, the sender, the timestamp, and any surrounding thread. Where the platform allows it, export the original. A photo of one screen taken with a second camera is better than nothing.
-- **Store it off the shared cloud.** Do not back up evidence to an iCloud or Google account the abuser can see. Keep it on a device or storage they cannot reach, or send it to a trusted person or advocate.
-- **Keep a dated log.** A simple running record of incidents, dates, and what happened is itself useful in legal proceedings, and is easier to maintain than perfect screenshots of everything.
-- **Get advice before confronting.** Showing the abuser that you have collected evidence can escalate the situation. Share it with an advocate, lawyer, or the police, not with the abuser.
+- **Preserve, do not delete**: Threatening messages, location-tracking screenshots, and call logs are your evidence later. Do not mass-delete harassment to "clean up," and do not delete the original messages.
+- **Capture full context**: Screenshot the message, the sender, the timestamp, and any surrounding thread. Where the platform allows it, export the original. A photo of one screen taken with a second camera is better than nothing.
+- **Store it off the shared cloud**: Do not back up evidence to an iCloud or Google account the abuser can see. Keep it on a device or storage they cannot reach, or send it to a trusted person or advocate.
+- **Keep a dated log**: A simple running record of incidents, dates, and what happened is itself useful in legal proceedings, and is easier to maintain than perfect screenshots of everything.
+- **Get advice before confronting**: Showing the abuser that you have collected evidence can escalate the situation. Share it with an advocate, lawyer, or the police, not with the abuser.
 
 ## The safety-planning principle: leaving is the highest-risk moment
 

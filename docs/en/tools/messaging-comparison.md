@@ -18,13 +18,13 @@ This page compares the tools against a threat-model checklist rather than a feat
 
 Before the table, here is what each column is asking and why it changes your risk.
 
-- **Identifier to register.** A phone number, an email, a random ID, or nothing at all. This is the column that decides whether the tool is an *anonymity* tool or only a *confidentiality* tool. Read the regional note below before you skip it.
-- **Metadata exposure.** Whether the operator can see who-talks-to-whom, when, and how often. Strong content encryption with weak metadata protection still hands an adversary your social graph. This is the [metadata](../basics/metadata.md) problem.
-- **E2EE by default.** Whether end-to-end encryption is always on, or a mode you have to switch into per chat. An opt-in scheme that most users never enable protects almost no one.
-- **Forward secrecy.** Whether a compromised key exposes only a narrow window of past messages or the whole history. Modern protocols rotate keys constantly so that yesterday's stolen key can't decrypt last month's messages.
-- **Network and censorship resistance.** Whether it runs over Tor, survives a network shutdown peer-to-peer (like Briar over Bluetooth), and how easily a national firewall can block it.
-- **Centralization.** One operator, a federation of independent servers, a decentralized routing network, or no server at all. This decides who can be subpoenaed and who can pull the plug.
-- **Multi-device and disappearing messages.** Practical hygiene: can you read on a laptop and a phone, and can messages auto-delete on a timer.
+- **Identifier to register**: A phone number, an email, a random ID, or nothing at all. This is the column that decides whether the tool is an *anonymity* tool or only a *confidentiality* tool. Read the regional note below before you skip it.
+- **Metadata exposure**: Whether the operator can see who-talks-to-whom, when, and how often. Strong content encryption with weak metadata protection still hands an adversary your social graph. This is the [metadata](../basics/metadata.md) problem.
+- **E2EE by default**: Whether end-to-end encryption is always on, or a mode you have to switch into per chat. An opt-in scheme that most users never enable protects almost no one.
+- **Forward secrecy**: Whether a compromised key exposes only a narrow window of past messages or the whole history. Modern protocols rotate keys constantly so that yesterday's stolen key can't decrypt last month's messages.
+- **Network and censorship resistance**: Whether it runs over Tor, survives a network shutdown peer-to-peer (like Briar over Bluetooth), and how easily a national firewall can block it.
+- **Centralization**: One operator, a federation of independent servers, a decentralized routing network, or no server at all. This decides who can be subpoenaed and who can pull the plug.
+- **Multi-device and disappearing messages**: Practical hygiene: can you read on a laptop and a phone, and can messages auto-delete on a timer.
 
 ## At a glance
 

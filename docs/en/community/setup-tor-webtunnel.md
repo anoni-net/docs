@@ -24,10 +24,10 @@ This guide walks you through standing up a WebTunnel bridge on a small VPS using
 
 ## Why we need more WebTunnel bridges
 
-- **Places with low censorship and plenty of bandwidth make good bridge sources.** Free, well-connected outbound access is what a bridge needs.
-- **IP and ASN diversity is valuable.** Censors block the bridge IPs they already know about, so the more bridges spread across different countries and network providers, the more entry points people on the ground can use.
-- **It's cheaper than running a relay.** A VPS with 512MB to 1GB of RAM is enough, with lower cost and upkeep than a Tor relay.
-- **It answers a real need.** In 2026 Iran cut its internet for nearly three months during military operations, and after reopening, traffic poured into volunteer-run WebTunnel bridges. Under extreme censorship, bridges like these are what decide whether people there can reach Tor at all.
+- **Places with low censorship and plenty of bandwidth make good bridge sources**: Free, well-connected outbound access is what a bridge needs.
+- **IP and ASN diversity is valuable**: Censors block the bridge IPs they already know about, so the more bridges spread across different countries and network providers, the more entry points people on the ground can use.
+- **It's cheaper than running a relay**: A VPS with 512MB to 1GB of RAM is enough, with lower cost and upkeep than a Tor relay.
+- **It answers a real need**: In 2026 Iran cut its internet for nearly three months during military operations, and after reopening, traffic poured into volunteer-run WebTunnel bridges. Under extreme censorship, bridges like these are what decide whether people there can reach Tor at all.
 
 ## What to prepare before you start
 

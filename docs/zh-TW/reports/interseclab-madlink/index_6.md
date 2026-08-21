@@ -24,21 +24,21 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 ### 報告核心事證
 
-**IEEE OUI `00:30:64` 確實登記在 ADLINK Technology, Inc. 名下。** 這是報告把 EtherFabric 與凌華關聯起來的硬體指紋，也是整份報告最容易自行驗證的一條線索。透過 macvendors.com（[`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}）或 macvendorlookup.com（[`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}）查詢，兩個獨立來源都回傳「ADLINK TECHNOLOGY, INC.」，註冊地址為新北中和區建一路 166 號 9 樓（凌華舊址）。查詢結果從硬體層級確認了「EtherFabric 管理介面 MAC 位址來自凌華設備」的主張屬實。
+**IEEE OUI `00:30:64` 確實登記在 ADLINK Technology, Inc. 名下**：這是報告把 EtherFabric 與凌華關聯起來的硬體指紋，也是整份報告最容易自行驗證的一條線索。透過 macvendors.com（[`api.macvendors.com/00:30:64`](https://api.macvendors.com/00:30:64){target="_blank"}）或 macvendorlookup.com（[`api.macvendorlookup.com/api/v2/003064`](https://www.macvendorlookup.com/api/v2/003064){target="_blank"}）查詢，兩個獨立來源都回傳「ADLINK TECHNOLOGY, INC.」，註冊地址為新北中和區建一路 166 號 9 樓（凌華舊址）。查詢結果從硬體層級確認了「EtherFabric 管理介面 MAC 位址來自凌華設備」的主張屬實。
 
-**CSA-7400 被凌華自家行銷成 DPI 與防火牆設備。** 報告反駁凌華「通用平台」說法的核心，就是這款產品本身的市場定位。在凌華中英文官網[產品頁](https://www.adlinktech.com/Products/Network_Security_Appliance/4UNetworkAppliance/CSA-7400?lang=en){target="_blank"}上，CSA-7400 明確被分類在「Network Security Appliance」底下，行銷為「DPI、IDS/IPS、DDoS、NGFW」carrier-grade 設備。manualzz 上的 [Quick Start Manual](https://manualzz.com/doc/55701658/adlink-technology-csa-7400-quick-start-manual){target="_blank"} 也載明出貨預載 CentOS 7，與報告描述 TSG-OS 早期基於 CentOS 的細節一致。
+**CSA-7400 被凌華自家行銷成 DPI 與防火牆設備**：報告反駁凌華「通用平台」說法的核心，就是這款產品本身的市場定位。在凌華中英文官網[產品頁](https://www.adlinktech.com/Products/Network_Security_Appliance/4UNetworkAppliance/CSA-7400?lang=en){target="_blank"}上，CSA-7400 明確被分類在「Network Security Appliance」底下，行銷為「DPI、IDS/IPS、DDoS、NGFW」carrier-grade 設備。manualzz 上的 [Quick Start Manual](https://manualzz.com/doc/55701658/adlink-technology-csa-7400-quick-start-manual){target="_blank"} 也載明出貨預載 CentOS 7，與報告描述 TSG-OS 早期基於 CentOS 的細節一致。
 
-**積至（海南）信息技術有限公司由方濱興於 2018 年在海南創立。** 維基百科[积至信息](https://zh.wikipedia.org/wiki/%E7%A7%AF%E8%87%B3%E4%BF%A1%E6%81%AF){target="_blank"}、[大紀元 2025-09-13 報導](https://www.epochtimes.com/b5/25/9/13/n14593857.htm){target="_blank"}、[新唐人](https://www.ntdtv.com/b5/2025/09/13/a104019706.html){target="_blank"} 互相印證該公司基本資訊、創辦人身分，以及與中科院信息工程研究所 MESA 實驗室的同根關係。
+**積至（海南）信息技術有限公司由方濱興於 2018 年在海南創立**：維基百科[积至信息](https://zh.wikipedia.org/wiki/%E7%A7%AF%E8%87%B3%E4%BF%A1%E6%81%AF){target="_blank"}、[大紀元 2025-09-13 報導](https://www.epochtimes.com/b5/25/9/13/n14593857.htm){target="_blank"}、[新唐人](https://www.ntdtv.com/b5/2025/09/13/a104019706.html){target="_blank"} 互相印證該公司基本資訊、創辦人身分，以及與中科院信息工程研究所 MESA 實驗室的同根關係。
 
-**New Bloom Magazine 2026-04-29 那篇報導真實存在。** 標題「[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}」，發佈時間 2026-04-29 07:41 UTC。這是目前唯一明確聚焦凌華與 Geedge 連結的台灣相關英文媒體報導。
+**New Bloom Magazine 2026-04-29 那篇報導真實存在**：標題「[Taiwanese Company Implicated in Great Firewall Supply Chain By Report](https://newbloommag.net/2026/04/29/tw-adlink-geedge/){target="_blank"}」，發佈時間 2026-04-29 07:41 UTC。這是目前唯一明確聚焦凌華與 Geedge 連結的台灣相關英文媒體報導。
 
 ### 編輯觀察自身
 
-**「台灣中文主流媒體零覆蓋」的判斷有跨來源支持。** 用「凌華 Geedge」、「MADLink 凌華」、「凌華 哈薩克」等關鍵字跨媒體搜尋，截至 2026-05-20 沒有任何一則台灣中文主流報導直接聚焦這條供應鏈線。同期凌華自家中文新聞版面在邊緣 AI、Taiwan Excellence 獎項、CYBERSEC 2026 參展等業務話題上。
+**「台灣中文主流媒體零覆蓋」的判斷有跨來源支持**：用「凌華 Geedge」、「MADLink 凌華」、「凌華 哈薩克」等關鍵字跨媒體搜尋，截至 2026-05-20 沒有任何一則台灣中文主流報導直接聚焦這條供應鏈線。同期凌華自家中文新聞版面在邊緣 AI、Taiwan Excellence 獎項、CYBERSEC 2026 參展等業務話題上。
 
-**「沈伯洋無公開發言」的判斷可重現。** 搜尋他在立法院議事系統、社群平台與媒體採訪的近期版面，找不到他就此議題的進一步發聲。他目前公開版面被「中國紅色通緝令」、「徵召選台北市長」、「凌濤揭沈父親公司與中國有商業往來」等議題佔據。
+**「沈伯洋無公開發言」的判斷可重現**：搜尋他在立法院議事系統、社群平台與媒體採訪的近期版面，找不到他就此議題的進一步發聲。他目前公開版面被「中國紅色通緝令」、「徵召選台北市長」、「凌濤揭沈父親公司與中國有商業往來」等議題佔據。
 
-**「凌華未發布相關重大訊息」的判斷可重現。** 在 [公開資訊觀測站](https://mopsov.twse.com.tw/){target="_blank"} 以代號 6166 查詢，截至 2026-05-20 沒有針對 Geedge、CSA-7400 出貨案、內部稽核啟動的公開重大訊息公告。
+**「凌華未發布相關重大訊息」的判斷可重現**：在 [公開資訊觀測站](https://mopsov.twse.com.tw/){target="_blank"} 以代號 6166 查詢，截至 2026-05-20 沒有針對 Geedge、CSA-7400 出貨案、內部稽核啟動的公開重大訊息公告。
 
 ## 媒體覆蓋對比
 
@@ -60,15 +60,15 @@ MADLink 報告的核心問題，是台灣現行出口管制制度能否阻止本
 
 以下是編輯團隊整理的可能因素，這是觀察而非定論，歡迎社群補充與挑戰。
 
-**技術門檻高、議題框架難建立。** 一般財經、政治記者要把 CSA-7400、深度封包檢測、Geedge TSG、出口管制這條技術線串起來不容易，缺少在地的 brief 與翻譯，要寫出一則符合台灣讀者語境的報導成本相當高。
+**技術門檻高、議題框架難建立**：一般財經、政治記者要把 CSA-7400、深度封包檢測、Geedge TSG、出口管制這條技術線串起來不容易，缺少在地的 brief 與翻譯，要寫出一則符合台灣讀者語境的報導成本相當高。
 
-**資安媒體聚焦企業市場，較少寫人權與出口管制議題。** iThome、資安人這類媒體焦點在企業資安採購與技術趨勢，「台灣零組件用於威權監控」的議題框架不在其報導習慣中。
+**資安媒體聚焦企業市場，較少寫人權與出口管制議題**：iThome、資安人這類媒體焦點在企業資安採購與技術趨勢，「台灣零組件用於威權監控」的議題框架不在其報導習慣中。
 
-**2025-09 的外洩事件熱度已過。** MADLink 在 2026-04 才把凌華具體點名出來，但 Geedge 外洩事件本身的新聞熱度在 2025 年底就已消退，當下台灣媒體沒有把這條線當成「未完待續」的素材在追。
+**2025-09 的外洩事件熱度已過**：MADLink 在 2026-04 才把凌華具體點名出來，但 Geedge 外洩事件本身的新聞熱度在 2025 年底就已消退，當下台灣媒體沒有把這條線當成「未完待續」的素材在追。
 
-**既有政治攻防焦點與此案不重疊。** 對綠營來說，這個案子拉出來會打到「台灣公司助中國輸出審查」的尷尬位置。對藍營來說，戳這個議題容易被定位成「配合美國打台灣業者」。雙方都沒有主動放大的政治誘因。
+**既有政治攻防焦點與此案不重疊**：對綠營來說，這個案子拉出來會打到「台灣公司助中國輸出審查」的尷尬位置。對藍營來說，戳這個議題容易被定位成「配合美國打台灣業者」。雙方都沒有主動放大的政治誘因。
 
-**公民社會的議題分配。** 台灣資訊類公民團體近年主要關注中國對台資訊戰、假訊息治理與數位平台責任，較少有 NGO 把「監控科技出口的人權審查」當主戰場。這也是 anoni.net 翻譯 MADLink 報告想補上的位置。
+**公民社會的議題分配**：台灣資訊類公民團體近年主要關注中國對台資訊戰、假訊息治理與數位平台責任，較少有 NGO 把「監控科技出口的人權審查」當主戰場。這也是 anoni.net 翻譯 MADLink 報告想補上的位置。
 
 ## 制度面缺口仍在
 
