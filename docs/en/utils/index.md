@@ -36,6 +36,10 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Find zero-width characters, bidirectional controls and homoglyphs hiding in text, with positions marked and each class explained. Both document leak tracking and phishing URLs rely on these.
 
+-   :material-qrcode-scan: **[QR code reader](qr-read.md)**
+
+    Read what is inside a QR code image without the image leaving your device. URLs get their hostname shown separately, and there is no open button.
+
 </div>
 
 ## Taking them offline

@@ -32,6 +32,7 @@ on:
       - "docs/zh-TW/js/leaks.js"
       - "docs/zh-TW/js/cleanurl.js"
       - "docs/zh-TW/js/invisible.js"
+      - "docs/zh-TW/js/qrread.js"
       - "docs/zh-TW/utils/**"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
@@ -92,6 +93,10 @@ jobs:
       # 隱形字元偵測：誤判與漏報一樣糟，兩組案例的數量刻意相當
       - name: 隱形字元偵測
         run: node tools/test_invisible.mjs
+
+      # QR code 讀取器：產生器產生、讀取器讀回，兩個獨立的函式庫互相驗證
+      - name: QR code 讀取器
+        run: node tools/test_qrread.mjs
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
