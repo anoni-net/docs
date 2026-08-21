@@ -26,8 +26,8 @@ icon: simple/torproject
     以下的教學僅使用入口節點與中間節點作為範例，如果你想要進階的節點建立操作，請思考以下問題並評估可承擔的風險：
 
     - 你想要建立一個 Tor 出口節點還是非出口（橋接、中間）節點？
-    - 如果你想建立一個出口節點：你要在出口政策中允許哪些連線埠？更多的連線埠通常代表可能會有更多的濫用或違法投訴。
-    - 你希望使用哪個外部 TCP 連線埠來接受 Tor 連接？`ORPort` 設定：如果你的伺服器上沒有其他服務佔用此連線埠，我們建議使用 443 連線埠。推薦使用 `ORPort 443`，是因為這通常是公共 Wi-Fi 網絡中少數幾個開放的端口之一。連線埠 9001 也是另一個常用的 `ORPort`。
+    - 如果你想建立一個出口節點：你要在出口政策中允許哪些連接埠？更多的連接埠通常代表可能會有更多的濫用或違法投訴。
+    - 你希望使用哪個外部 TCP 連接埠來接受 Tor 連接？`ORPort` 設定：如果你的伺服器上沒有其他服務佔用此連接埠，我們建議使用 443 連接埠。推薦使用 `ORPort 443`，是因為這通常是公共 Wi-Fi 網路中少數幾個開放的連接埠之一。連接埠 9001 也是另一個常用的 `ORPort`。
     - 你將使用哪個電子郵件作為節點的聯絡訊息 `ContactInfo` 欄位？這個資訊將會公開。
     - 你希望允許多少頻寬、每月流量用於 Tor 流量？
     - 伺服器是否允許 IPv6 地址？
@@ -106,7 +106,7 @@ tor-instance-create tor@mytor2
 新的設定檔位置在 `/var/lib/tor-instances/mytor2/torrc`，在設定檔中，你可以設定各種參數，例如：
 
 ```bash
-ORPort 9002  # 設定新的 ORPort，確保每個 instance 使用不同的端口
+ORPort 9002  # 設定新的 ORPort，確保每個 instance 使用不同的連接埠
 DataDirectory /var/lib/tor-instances/mytor2/data
 Log notice file /var/lib/tor-instances/mytor2/notice.log
 ```
@@ -134,7 +134,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "使用家庭網路搭建可行嗎？"
 
-    透過家庭網路（例如：中華電信家用光世代、有線電視網路⋯等類似網路）搭建可能會需要調整電信公司所提供的路由器，會有一定的技術門檻需要跨越，如果能手動設定調整路由器等設定，也請注意開啟防火牆與限定連入連線埠，預設路由器會關閉所有連入的連線埠。
+    透過家庭網路（例如：中華電信家用光世代、有線電視網路⋯等類似網路）搭建可能會需要調整電信公司所提供的路由器，會有一定的技術門檻需要跨越，如果能手動設定調整路由器等設定，也請注意開啟防火牆與限定連入連接埠，預設路由器會關閉所有連入的連接埠。
 
 ??? question "我為什麼要運行一個 Tor Relay？"
 
@@ -142,11 +142,11 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "我能從運行 Tor Relay 中獲得什麼樣的好處？"
 
-    雖然運行 Tor Relay 通常不會帶來直接的經濟利益，但可以幫助促進網絡自由，支持全球的言論自由、網路自由和隱私權。此外，它讓你成為開源社群的一部分，促進匿名網際網路的基礎架構安全。
+    雖然運行 Tor Relay 通常不會帶來直接的經濟利益，但可以幫助促進網路自由，支持全球的言論自由、網路自由和隱私權。此外，它讓你成為開源社群的一部分，促進匿名網際網路的基礎架構安全。
 
 ??? question "運行 Tor Relay 需要很多技術知識嗎？"
 
-    不一定。雖然基本的網路知識（如 IP 位址、連線埠設定）會有用，但 Tor 官方提供詳細的安裝指南，各大社群論壇也積極提供幫助。任何有興趣的人都可以學習並建立運作一個 Relay。
+    不一定。雖然基本的網路知識（如 IP 位址、連接埠設定）會有用，但 Tor 官方提供詳細的安裝指南，各大社群論壇也積極提供幫助。任何有興趣的人都可以學習並建立運作一個 Relay。
 
 ??? question "運行 Tor Relay 是否合法？"
 
@@ -154,11 +154,11 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 ??? question "運作 Tor Relay 有什麼要求？"
 
-    建立 Tor Relay 前，確保你的網路有穩定的上傳和下載速度。Tor Project 官方建議中繼至少具備 10 Mbit/s（約 1.25 MB/s）的上傳與下載頻寬（見 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。頻寬不足 10 Mbit/s 但仍有 1 Mbit/s 以上時，官方建議改執行 obfs4 橋接而非中繼。另需有固定的 IP 位址。此外，確認你的 ISP 允許這類流量，並且你的網路設備（如防火牆和路由器）可正確設定所需的連線埠轉發。
+    建立 Tor Relay 前，確保你的網路有穩定的上傳和下載速度。Tor Project 官方建議中繼至少具備 10 Mbit/s（約 1.25 MB/s）的上傳與下載頻寬（見 [Relay requirements](https://community.torproject.org/relay/relays-requirements/){target="_blank"}）。頻寬不足 10 Mbit/s 但仍有 1 Mbit/s 以上時，官方建議改執行 obfs4 橋接而非中繼。另需有固定的 IP 位址。此外，確認你的 ISP 允許這類流量，並且你的網路設備（如防火牆和路由器）可正確設定所需的連接埠轉發。
 
 ??? question "Tor Relay 會影響我的網速嗎？"
 
-    Tor Relay 使用你設定的最大頻寬，因此不會占用所有的網絡資源。不過，你可能會注意到在高負載時，網速稍有降低。你可以根據需要調整設定中的頻寬限制參數。
+    Tor Relay 使用你設定的最大頻寬，因此不會占用所有的網路資源。不過，你可能會注意到在高負載時，網速稍有降低。你可以根據需要調整設定中的頻寬限制參數。
 
 ??? question "如何保護運作 Tor Relay 時的隱私？"
 

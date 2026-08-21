@@ -51,7 +51,7 @@ https://signal.tube/#proxy.example.com
 
 取得的是主機名稱而非連結時，在 Signal 設定裡找到代理伺服器（Proxy）欄位填入。Android 在「資料與儲存空間」底下，iOS 在「隱私權」的「進階」底下。App 版本改版時選單位置可能調整，找不到的話以官方的 [Proxy Support 說明](https://support.signal.org/hc/en-us/articles/360056052052-Proxy-Support){target="_blank"} 為準。
 
-填的內容只有主機名稱（`proxy.example.com`），不要加 `https://` 或連線埠。存檔後 App 會嘗試連線，接上以後主畫面上方會出現連線標示。
+填的內容只有主機名稱（`proxy.example.com`），不要加 `https://` 或連接埠。存檔後 App 會嘗試連線，接上以後主畫面上方會出現連線標示。
 
 ### 取得連結之後
 
@@ -80,7 +80,7 @@ Signal 官方維護 [Signal-TLS-Proxy](https://github.com/signalapp/Signal-TLS-P
 
 ### 需要準備的東西
 
-- 一台 VPS，`80` 與 `443` 兩個連線埠都要能對外開放。
+- 一台 VPS，`80` 與 `443` 兩個連接埠都要能對外開放。
 - 一個網域或子網域，A record 指到這台 VPS 的 IP。
 - 主機上裝好 Docker。
 

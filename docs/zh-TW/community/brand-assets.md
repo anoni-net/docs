@@ -6,7 +6,7 @@ icon: material/palette-outline
 
 # :material-palette-outline: 品牌素材
 
-anoni.net 的 logo 由三個六角形組成，呼應「節點網絡」與「多層級觀測」的意象，從 Material `hexagon-multiple-outline` 圖示衍生定色而成。三個六角形排列成上、中、下，分別對應社群關注的「概念」、「工具」與「在地脈絡」三層閱讀路徑。
+anoni.net 的 logo 由三個六角形組成，呼應「節點網路」與「多層級觀測」的意象，從 Material `hexagon-multiple-outline` 圖示衍生定色而成。三個六角形排列成上、中、下，分別對應社群關注的「概念」、「工具」與「在地脈絡」三層閱讀路徑。
 
 製作活動文宣、SNS 卡片、簡報、印刷品時，請依背景色與情境從下方三個變體取用，避免另自定色或變形。
 

@@ -34,7 +34,7 @@ Arti 是我們正在進行中的專案，用於使用 Rust 開發新一代的 To
 
 ## 補充 1.4.0 更新
 
-此版本提供了一個全新的 [RPC 介面](https://gitlab.torproject.org/tpo/core/arti/-/tree/main/doc/dev/rpc-book/src){target="_blank"}，是 Arti 取代 C Tor [控制端口](https://spec.torproject.org/control-spec/index.html){target="_blank"}的替代方案，並帶來了許多改進。此外，還進行了大量關於支援中繼節點的準備工作、錯誤修復，以及針對服務端洋蔥服務的抗拒絕服務攻擊的相關開發。
+此版本提供了一個全新的 [RPC 介面](https://gitlab.torproject.org/tpo/core/arti/-/tree/main/doc/dev/rpc-book/src){target="_blank"}，是 Arti 取代 C Tor [控制埠](https://spec.torproject.org/control-spec/index.html){target="_blank"}的替代方案，並帶來了許多改進。此外，還進行了大量關於支援中繼節點的準備工作、錯誤修復，以及針對服務端洋蔥服務的抗拒絕服務攻擊的相關開發。
 
 若想了解我們完成的所有細節，以及許多較小且不那麼顯眼的更動資訊，請參閱 [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md#arti-140--7-february-2025){target="_blank"}。
 
@@ -61,12 +61,12 @@ Lunar 的離去對我們的社群以及他所參與的眾多其他社群都帶�
 
 隨著此版本的釋出，Arti 的 [RPC 介面](https://gitlab.torproject.org/tpo/core/arti/-/tree/main/doc/dev/rpc-book/src){target="_blank"}現已可供使用。
 
-Arti 的 RPC 介面取代了 C Tor 的[控制端口（control port）](https://spec.torproject.org/control-spec/index.html){target="_blank"}，並帶來以下多項改進：
+Arti 的 RPC 介面取代了 C Tor 的[控制埠（control port）](https://spec.torproject.org/control-spec/index.html){target="_blank"}，並帶來以下多項改進：
 
 - 協議基於 JSON，減少了開發人員對自定義剖析器（parser）和編碼器（encoder）的需求。
 - 協議採用以能力（capabilities）為基礎的設計，以避免應用程式彼此之間無意間影響對 Arti 的使用。
 - 協議更明確地支援擴展，並清楚規範了使用者端與 Arti 如何處理非預期的訊息、參數與資料。
-- 提供一個[發現機制](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/doc/dev/rpc-book/src/rpc-connect-spec.md){target="_blank"}，讓應用程式更容易找到並設定 RPC 端口的使用。
+- 提供一個[發現機制](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/doc/dev/rpc-book/src/rpc-connect-spec.md){target="_blank"}，讓應用程式更容易找到並設定 RPC 連接埠的使用。
 - 協議支持在單一連線上處理多個同時進行的請求。
 - 我們提供了一個預設的使用者端函式庫，並附有 [C](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/crates/arti-rpc-client-core/arti-rpc-client-core.h?ref_type=heads){target="_blank"} 和 [Python](https://gitlab.torproject.org/tpo/core/arti/-/tree/main/python/arti_rpc?ref_type=heads){target="_blank"} 包裝器，以免應用程式開發人員需要自行實作相關邏輯。
 

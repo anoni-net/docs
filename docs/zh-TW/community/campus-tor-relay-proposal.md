@@ -93,7 +93,7 @@ icon: material/file-document-edit-outline
     - **教育意義**：學生能親身學習資訊安全與匿名網路的運作
     - **提升能見度**：彰顯本校重視資訊自由與隱私保護，與國際接軌
     - **學術研究**：可作為資訊工程系網路研究與課程案例
-    - **社群連結**：透過 EFF Tor University Challenge 加入全球大學校園網絡
+    - **社群連結**：透過 EFF Tor University Challenge 加入全球大學校園網路
 
     ### 伍、計畫流程
 

@@ -33,7 +33,7 @@ WebTunnel 是 Tor 目前抗審查能力最強的橋接方式之一。它把 Tor 
 
 - 一台 VPS（Debian 或 Ubuntu，512MB RAM 以上，建議 1GB 讓 Tor 進程有餘裕）。
 - 一個網域或子網域，並能編輯它的 DNS。
-- 對外開放 443 連線埠（WebTunnel 走標準 HTTPS 埠才像正常網站）。
+- 對外開放 443 連接埠（WebTunnel 走標準 HTTPS 埠才像正常網站）。
 - 一個聯絡用 email，會公開在橋接的 `ContactInfo`。
 
 !!! tip "網域與營運隱私"
@@ -189,7 +189,7 @@ docker compose exec webtunnel-bridge get-bridge-line.sh
 
 ### 防火牆
 
-只開必要的連線埠。WebTunnel 對外只需要 443（HTTPS），SSH 視管理需求保留。橋接監聽的 `15000` 綁在 `127.0.0.1`，不要對外開放。
+只開必要的連接埠。WebTunnel 對外只需要 443（HTTPS），SSH 視管理需求保留。橋接監聽的 `15000` 綁在 `127.0.0.1`，不要對外開放。
 
 ```bash
 ufw allow 443/tcp
