@@ -155,6 +155,9 @@ JIANG_ALLOW = re.compile(
 REGIONAL_RULES = [
     ("regional-term-site", re.compile(r"站台"), None,
      "「站台」是中國慣用詞，臺灣用「網站」（指這個站自己時也可以寫「文件站」）"),
+    # 簡體那邊寫「纠错」，這條 regex 是正體寫法，所以 zh-CN 的檔案不會被誤判
+    ("regional-term-ecc", re.compile(r"糾錯"), None,
+     "「糾錯」是中國慣用詞，臺灣用「容錯度」（error correction 的等級）"),
 ]
 
 # 會讓 onion 建置的驗證步驟中止上傳的字串。

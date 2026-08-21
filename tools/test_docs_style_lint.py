@@ -116,6 +116,10 @@ CASES: list[tuple[str, bool, str]] = [
     ("你會看到這一頁連了 `aa.anoni.net` 那個端點。", True, "內文寫出分析端點主機名"),
     ("你會看到這一頁連了一個 anoni.net 底下的子網域。", False, "改成描述性的寫法"),
 
+    # 兩岸用詞：error correction 的等級
+    ("把糾錯等級調到最高。", True, "「糾錯」是中國慣用詞"),
+    ("把容錯度調到最高。", False, "臺灣用「容錯度」"),
+
 ]
 
 BLOCK_CASE = (
