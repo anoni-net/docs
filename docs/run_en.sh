@@ -15,6 +15,7 @@ export NAV_ADVANCED='Advanced'
 export NAV_REGIONAL='Regional'
 export NAV_REPORTS='Reports'
 export NAV_EVENT='Events'
+export NAV_UTILS='Tools'
 export NAV_POST='Updates'
 export NAV_EVENT_PREPARE="Pre-Event"
 export CATE_NAME='Categories'

@@ -10,6 +10,7 @@ export NAV_ABOUT='关于我们'
 export NAV_COMMUNITY="社群参与"
 export NAV_INTRO='认识匿名网络'
 export NAV_EVENT='活动参与'
+export NAV_UTILS='小工具'
 export NAV_PP='参与项目'
 export NAV_PPP='参与准备'
 export NAV_POST='信息更新'
