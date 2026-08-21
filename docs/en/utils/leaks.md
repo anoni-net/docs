@@ -44,6 +44,88 @@ Open the network tab and you will find this page contacting a subdomain of anoni
 
 Telling those two apart is exactly what this page is for. One site can both count how many people visited and identify who you are, and the first needs far less data than the second. To avoid the question entirely, turn the network off and use this page then. No requests happen at all.
 
+## What you can actually do
+
+Of the fifteen items above, only three are ones you can switch off on your own device. Ordinary browsers offer no control over the rest. That is not an oversight on our part: those values are part of how the web platform works.
+
+Menu paths shift between system and browser versions. Searching the settings for a keyword is usually faster than following a path.
+
+### The single most effective step is changing browser
+
+One action covers more items than anything else: use a browser with built-in defences.
+
+[Tor Browser](../tools/what-is-tor.md) normalises nearly every item above, at the cost of slower connections and some sites refusing to load. Brave adds noise or normalisation for canvas, WebGL, fonts and audio, with far less disruption to everyday browsing. Firefox has `privacy.resistFingerprinting`, close to Tor Browser's approach, though it is off by default and breaks the layout of some sites once enabled.
+
+The comparison in [browser fingerprinting](../basics/browser-fingerprinting.md) is worth reading first.
+
+### Turning off location
+
+This is the only item that raises a permission prompt, and the only one you can disable at system level.
+
+=== "iOS and iPadOS"
+
+    Settings → Privacy & Security → Location Services → find your browser → Never.
+
+    Turning Location Services off entirely also works, but Maps and photo location tagging go with it.
+
+=== "Android"
+
+    Settings → Apps → your browser → Permissions → Location → Don't allow.
+
+    Also inside the browser: Settings → Site settings → Location → off.
+
+=== "macOS"
+
+    System Settings → Privacy & Security → Location Services → untick your browser.
+
+=== "Windows"
+
+    Settings → Privacy & security → Location → turn off "Let apps access your location".
+
+=== "Linux"
+
+    Most desktop environments have no system-level location service, so the browser's own permission is all there is. The icon at the left of the address bar revokes permissions already granted.
+
+Whatever the system setting, the browser asks every time. Decline, and the choice is remembered.
+
+### Changing language preferences
+
+The language list you send is yours to set, and narrowing it to one language leaks a little less.
+
+=== "Chrome and Edge"
+
+    Settings → Languages → remove the ones you do not need, leaving one.
+
+=== "Firefox"
+
+    Settings → General → scroll to Language → Choose → leave one.
+
+=== "Safari"
+
+    Safari follows the system language. On macOS: System Settings → General → Language & Region. On iOS: Settings → General → Language & Region.
+
+The cost is that multilingual sites may serve you a version you did not want.
+
+### Think before enabling Do Not Track and GPC
+
+Both signals are switchable in browser settings, but **enabling them may not work in your favour**.
+
+Almost nothing honours Do Not Track in practice, and relatively few people send it, so it becomes a distinguishing feature instead. Global Privacy Control carries legal weight in several US states and behaves much like DNT elsewhere.
+
+If you want them: Chrome under Settings → Privacy and security, Firefox under Settings → Privacy & Security. Safari has removed the option.
+
+### Time zone and system preferences are changeable but costly
+
+Time zone follows the operating system. Setting it to UTC does remove one signal, and it also makes every app show the wrong time. Dark mode and reduced motion are accessibility settings, and turning them off affects your daily use directly.
+
+For these two, the right answer is a browser that normalises them, not giving up how you use your device.
+
+### Why the rest cannot be switched off
+
+Screen resolution, CPU core count, graphics card model, the rendering differences behind canvas and audio, which fonts you have, Client Hints, sub-pixel element geometry: none of these has a switch, because they are not settings. They are capabilities the web platform hands to sites. Drawing needs to know what the graphics card can do; laying out text needs to measure it.
+
+Removing those capabilities breaks sites, so browsers do not let you turn them off individually. Browsers with defences take a different route: rather than removing the capability, they make everyone report the same value, or add noise that differs every session. That is what the "Tor Browser shows" line under each item describes.
+
 ## Two things left out on purpose
 
 ### No export button

@@ -72,6 +72,7 @@
     {
       key: "timezone",
       needsPermission: false,
+      control: "system",
       stable: true,
       read: (t) => {
         const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -82,12 +83,14 @@
     {
       key: "language",
       needsPermission: false,
+      control: "browser",
       stable: true,
       read: () => (navigator.languages || [navigator.language]).join(", "),
     },
     {
       key: "screen",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: (t) =>
         t.fmt.screen(screen.width, screen.height, window.innerWidth, window.innerHeight, window.devicePixelRatio),
@@ -97,6 +100,7 @@
     {
       key: "hardware",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: (t) =>
         t.fmt.hardware(
@@ -108,6 +112,7 @@
     {
       key: "webgl",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: () => {
         const canvas = document.createElement("canvas");
@@ -125,6 +130,7 @@
     {
       key: "canvas",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: () => {
         const canvas = document.createElement("canvas");
@@ -144,6 +150,7 @@
     {
       key: "fonts",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: () => {
         // 拿一段文字分別用備援字型與「目標字型加備援」量寬度。裝了目標字型的話
@@ -171,6 +178,7 @@
     {
       key: "preferences",
       needsPermission: false,
+      control: "system",
       stable: true,
       read: (t) => {
         const asks = [
@@ -188,6 +196,7 @@
     {
       key: "storage",
       needsPermission: false,
+      control: "none",
       read: async (t) => {
         if (!navigator.storage || !navigator.storage.estimate) return null;
         const { quota } = await navigator.storage.estimate();
@@ -198,6 +207,7 @@
     {
       key: "clientHints",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: async (t) => {
         const data = navigator.userAgentData;
@@ -221,6 +231,7 @@
     {
       key: "clientRects",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: () => {
         // 量一個帶小數尺寸的元素。同樣的 CSS，不同的字型堆疊與縮放會算出不同的
@@ -239,6 +250,7 @@
     {
       key: "audio",
       needsPermission: false,
+      control: "none",
       stable: true,
       read: async () => {
         const Ctx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
@@ -267,6 +279,7 @@
     {
       key: "donottrack",
       needsPermission: false,
+      control: "browser",
       stable: true,
       read: (t) => {
         const dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1";
@@ -280,6 +293,7 @@
     {
       key: "devices",
       needsPermission: false,
+      control: "none",
       read: async () => {
         if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return null;
         const list = await navigator.mediaDevices.enumerateDevices();
@@ -290,6 +304,7 @@
     {
       key: "location",
       needsPermission: true,
+      control: "permission",
       read: (t) =>
         new Promise((resolve, reject) => {
           if (!navigator.geolocation) {
@@ -330,6 +345,18 @@
     }
     #leaks-tool .lk-code-why { font-size: .7rem; opacity: .75; line-height: 1.6; margin: .2rem 0 0; }
     #leaks-tool .lk-tor-label { opacity: .7; }
+    #leaks-tool .lk-control {
+      font-size: .7rem; line-height: 1.6; margin: .2rem 0 0;
+      border-left: .15rem solid var(--md-default-fg-color--lighter);
+      padding-left: .5rem;
+    }
+    #leaks-tool .lk-control-label { opacity: .7; }
+    /* 自己關得掉的用綠色，只能換瀏覽器的維持中性。不用紅色：那些項目不是錯誤，
+       是這個生態的現況，標成紅的只會讓整頁看起來像在恐嚇。 */
+    #leaks-tool .lk-control--browser, #leaks-tool .lk-control--permission {
+      border-left-color: #2e7d32;
+    }
+    #leaks-tool .lk-control--system { border-left-color: #ef6c00; }
     #leaks-tool .lk-value {
       font-family: var(--md-code-font-family, monospace);
       font-size: .74rem; word-break: break-word; margin: .25rem 0;
@@ -402,6 +429,13 @@
   const STRINGS = {
     "zh-TW": {
       fmt: FMT_ZH_TW,
+      controlLabel: "你能做什麼",
+      controls: {
+        permission: "可以拒絕授權，也可以在系統設定裡整個關掉，步驟見下方",
+        browser: "可以在瀏覽器設定裡改，步驟見下方",
+        system: "改得到，但要動系統設定，會影響其他 App，取捨見下方",
+        none: "一般瀏覽器沒有提供開關。這一項只能靠換瀏覽器處理",
+      },
       torLabel: "Tor Browser 會顯示",
       summary: "上面 {n} 項穩定的值揉成的短碼。換一個瀏覽器打開這一頁，比對這一個就知道有沒有變。它本身就是一個識別碼，所以只出現在畫面上，沒有存起來也沒有匯出。",
       unavailable: "這個瀏覽器沒有提供",
@@ -458,6 +492,13 @@
     },
     zh: {
       fmt: FMT_ZH,
+      controlLabel: "你能做什么",
+      controls: {
+        permission: "可以拒绝授权，也可以在系统设置里整个关掉，步骤见下方",
+        browser: "可以在浏览器设置里改，步骤见下方",
+        system: "改得到，但要动系统设置，会影响其他 App，取舍见下方",
+        none: "一般浏览器没有提供开关。这一项只能靠换浏览器处理",
+      },
       torLabel: "Tor Browser 会显示",
       summary: "上面 {n} 项稳定的值揉成的短码。换一个浏览器打开这一页，比对这一个就知道有没有变。它本身就是一个识别码，所以只出现在画面上，没有存起来也没有导出。",
       unavailable: "这个浏览器没有提供",
@@ -514,6 +555,13 @@
     },
     en: {
       fmt: FMT_EN,
+      controlLabel: "What you can do",
+      controls: {
+        permission: "you can decline the prompt, or turn it off entirely in system settings, steps below",
+        browser: "changeable in your browser's settings, steps below",
+        system: "changeable, but it means altering a system setting that affects other apps, trade-offs below",
+        none: "ordinary browsers offer no switch for this. Only a different browser addresses it",
+      },
       torLabel: "Tor Browser shows",
       summary: "A short code folded from the {n} stable values above. Open this page in another browser and compare just this one to see whether anything changed. The code is itself an identifier, so it appears on screen only, with nothing stored and nothing exported.",
       unavailable: "not available in this browser",
@@ -600,6 +648,12 @@
     tor.appendChild(el("span", "lk-tor-label", t.torLabel + "："));
     tor.appendChild(document.createTextNode(t.tor[probe.key]));
     item.appendChild(tor);
+    // 讀者自己做得到什麼。大部分項目在一般瀏覽器上根本沒有開關，那件事要講明白，
+    // 不然這一頁看起來像「照著關一關就沒事了」，而那是假的安全感。
+    const control = el("p", "lk-control lk-control--" + probe.control);
+    control.appendChild(el("span", "lk-control-label", t.controlLabel + "："));
+    control.appendChild(document.createTextNode(t.controls[probe.control]));
+    item.appendChild(control);
     item.appendChild(el("p", "lk-why", t.why[probe.key]));
     return item;
   }
