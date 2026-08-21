@@ -63,6 +63,23 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 The code and data behind these tools are stored along with the page. Tick this section in the [offline reading](../offline.md) list and they will open without a network afterwards.
 
+## Whose code this uses
+
+Most of the code in this section is our own, under [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}. Four things come from elsewhere, included unmodified:
+
+| Component | Used by | Licence | Where the licence text is |
+|---|---|---|---|
+| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code generator](qrcode.md) | MIT | [the header at the top of the file](vendor/qrcode-generator.js) |
+| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code reader](qr-read.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
+| [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | The PDF part of the [file metadata remover](strip-metadata.md) | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
+| The 7776-word list from [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} | [Passphrase and password generator](passphrase.md) | Word data CC-BY-4.0, code MIT | [the upstream repository](https://github.com/anoni-net/asian-diceware){target="_blank"} |
+
+The `pdf-lib.min.js` build also bundles Microsoft's tslib (Apache-2.0), whose copyright header survives in the file rather than being stripped by the minifier.
+
+Leaving these unmodified is deliberate. Editing them would forfeit the "this is the upstream file" property, leaving readers who want to check with nothing but our word for it. The files sit under `utils/vendor/` and can be diffed against upstream.
+
+Why each of these is not written from scratch is explained at the bottom of the relevant page. The shared reason is that getting them wrong does not crash anything; it produces output that looks right and is not, which is harder to notice than a failure.
+
 ## What is not here
 
 Anything that needs an external service to work stays out, because that conflicts with both rules above. For network measurement use [OONI Probe](../tools/what-is-ooni.md), which is built for the job and documents what happens to the data.

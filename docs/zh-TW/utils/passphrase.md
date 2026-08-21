@@ -19,7 +19,7 @@ offline_assets:
 
 ## 這一頁在做什麼
 
-「密語」模式從 [asian-diceware](../tools/asian-diceware.md) 的 7776 字詞表裡獨立抽幾個字串起來。那份詞表是社群參考 EFF Diceware 做的版本，混進了 `oolong`、`boba`、`tofu` 這類已經進英文字典的亞洲外來語，對在台灣與亞洲各地生活的人更好認、更好記。
+「密語」模式從 [asian-diceware](../tools/asian-diceware.md) 的 7776 字詞表裡獨立抽幾個字串起來。那份詞表是社群自己做的，資料採 CC-BY-4.0，完整版與產生它的程式在 [GitHub](https://github.com/anoni-net/asian-diceware){target="_blank"}。那份詞表是社群參考 EFF Diceware 做的版本，混進了 `oolong`、`boba`、`tofu` 這類已經進英文字典的亞洲外來語，對在台灣與亞洲各地生活的人更好認、更好記。
 
 「隨機密碼」模式從你勾選的字元集裡逐字抽。適合用密碼管理器保管、不需要用手打的場合。
 

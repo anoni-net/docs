@@ -71,7 +71,7 @@ PDF 也在範圍裡，但做法跟前面兩種不同。
 
 照片與影片可以直接把某一段剪掉，PDF 不行。那個格式的每個物件在交叉索引表裡都記著自己在檔案裡的位置，拿掉一段之後後面全部位移，整張表要重算。而且 PDF 1.5 之後常見的做法是把好幾個物件壓進同一段壓縮資料，從外面連內容都看不到。
 
-所以這一部分交給 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授權，原封不動放在 `utils/vendor/` 底下），由它負責解析與重寫，這一頁只決定拿掉哪些欄位。
+所以這一部分交給 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授權，[授權全文](vendor/pdf-lib-LICENSE.txt)），原封不動放在 `utils/vendor/` 底下，由它負責解析與重寫，這一頁只決定拿掉哪些欄位。
 
 清掉的是：
 
