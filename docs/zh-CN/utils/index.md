@@ -28,9 +28,9 @@ icon: material/tools
 
     把 onion 网址、Tor bridge 这类很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
 
--   :material-eye-outline: **[你的浏览器透露了什么](leaks.md)**
+-   :material-qrcode-scan: **[QR code 读取器](qr-read.md)**
 
-    列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道那些防护实际上做了什么。
+    读出图片里 QR code 的内容，图片不离开设备。解出来是网址时把主机独立标出来，并且不提供打开按钮。
 
 -   :material-image-off-outline: **[照片 metadata 清除器](strip-metadata.md)**
 
@@ -44,9 +44,9 @@ icon: material/tools
 
     找出文字里看不见的零宽字符、方向控制与同形字，标出位置并说明每一类是什么。文件外流追踪与钓鱼网址都靠这些东西。
 
--   :material-qrcode-scan: **[QR code 读取器](qr-read.md)**
+-   :material-eye-outline: **[你的浏览器透露了什么](leaks.md)**
 
-    读出图片里 QR code 的内容，图片不离开设备。解出来是网址时把主机独立标出来，并且不提供打开按钮。
+    列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道那些防护实际上做了什么。
 
 </div>
 

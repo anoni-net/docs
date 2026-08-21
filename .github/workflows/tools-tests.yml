@@ -102,6 +102,10 @@ jobs:
       - name: QR code 讀取器
         run: node tools/test_qrread.mjs
 
+      # 小工具索引頁的卡片順序：跟 nav 不一致時沒有任何錯誤訊息，只有讀者會覺得東西換位置
+      - name: 小工具索引順序
+        run: node tools/test_utils_index_order.mjs
+
       # 圖表函式庫按需載入：放回 extra_javascript 不會有錯誤訊息，只是全站變慢
       - name: 圖表函式庫按需載入
         run: node tools/test_chart_assets.mjs
