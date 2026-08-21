@@ -1,10 +1,10 @@
 ---
-title: Photo metadata remover
-description: Strip EXIF, GPS, camera model and comment fields from photos without the file leaving your device. The compressed image data is untouched, so the cleaned file is identical to the original.
+title: Photo and video metadata remover
+description: Strip EXIF, GPS, device model and comment fields from photos and videos without the file leaving your device. The compressed data is untouched, so the cleaned file is identical to the original.
 icon: material/image-off-outline
 ---
 
-# :material-image-off-outline: Photo metadata remover
+# :material-image-off-outline: Photo and video metadata remover
 
 <div id="stripmeta-tool"></div>
 
@@ -46,9 +46,27 @@ That uncropped thumbnail deserves its own mention. Crop half a photo away and se
 
 The tool lists every item removed and kept on screen, with the byte count of each and the segment identifier the file format uses. It does not decide these details on your behalf without showing you.
 
+## Video works the same way
+
+MP4 and MOV are handled too. A video shot on a phone records the location, device model and time just as a photo does, and it usually goes unnoticed for longer, because few people think to check a video's properties.
+
+These files are containers nested one inside another, with the descriptive fields living in one of the layers. Dropping that layer whole requires no contact with the compressed audio or video, exactly as with photos, and the cleaned file decodes byte for byte identically to the original.
+
+Three things come out:
+
+- The user data area: title, author, capture coordinates, device model
+- Encoder name and version, which points at the software or the phone model that processed the file
+- The track's handler name, written differently by each platform, which amounts to a platform fingerprint
+
+### One trace cannot be removed
+
+Encoders write their own version into the compressed data itself. That is not a descriptive field; it is part of the audio and video data, interleaved with the picture.
+
+Removing it means re-encoding, which costs quality and merely substitutes a new encoder's traces for the old ones. This page does not do that, but it does list what it found, so that you are not left believing the file came out clean.
+
 ## The cleaned image is identical to the original
 
-This page does not re-encode. The image data starts at a fixed point in the file and is copied byte for byte from there to the end.
+This page does not re-encode. Image and media data start at a fixed point in the file and are copied byte for byte from there.
 
 Re-encoding tools cannot make that claim. Each pass loses quality, and each leaves its own processing signature in the output, which is itself a distinguishing feature. A file cleaned with mat2 is recognisably a file cleaned with mat2.
 
@@ -58,7 +76,7 @@ Because it is lossless, the file barely shrinks. A 630 KB photo comes out at 629
 
 **HEIC/HEIF**: what an iPhone shoots by default. Its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.
 
-**WebP, GIF, PDF, video**: none of these are supported. This page handles JPEG and PNG. PDF metadata is scattered across several places and video metadata sits in the container structure; both need separate handling.
+**WebP, GIF, PDF**: none of these are supported. PDF metadata is scattered across several places, some of it compressed inside streams within the file, and needs separate handling.
 
 ## What this page does not do
 
@@ -68,7 +86,7 @@ Also worth saying: removing metadata does not make a photo safe. Street signs, d
 
 ## The cleaned file is opened once before you get it
 
-Every cleaned file is loaded in the browser before it is handed to you. If this page's code has damaged it, that step catches it and says so plainly rather than leaving you with a photo that will not open. Your original is untouched throughout.
+Every cleaned file is loaded in the browser before it is handed to you. For video it waits until the duration reads back, which is the symptom a damaged video shows first. If this page's code has damaged it, that step catches it and says so plainly rather than leaving you with a photo that will not open. Your original is untouched throughout.
 
 ## Works offline
 
