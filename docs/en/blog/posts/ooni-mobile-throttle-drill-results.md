@@ -286,3 +286,6 @@ Details of the exercise follow the [Executive Yuan announcement](https://www.ey.
 
 [^1]: [2026 Urban Resilience (Air Defence) Exercise: mobile network throttling drill](https://www.ey.gov.tw/Page/9277F759E41CCD91/66c2bed1-6ca3-4c30-ba7c-4fa0f90e00ec){target="_blank"} - Executive Yuan
 [^2]: [Executive Yuan elaborates on the throttling method](https://www.cna.com.tw/news/aipl/202608100327.aspx){target="_blank"} - CNA
+
+
+--8<-- "snippets/vega.md"

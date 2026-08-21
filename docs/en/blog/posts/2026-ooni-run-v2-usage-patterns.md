@@ -157,3 +157,6 @@ This report's data is a snapshot taken on 2026-06-01, pulled link by link from O
 - [onionoo MCP is now public: query the Tor relay network in plain language](./2026-onionoo-mcp-public.md)
 
 [^1]: [OONI API (aggregation endpoint)](https://api.ooni.org/){target="_blank"} - OONI
+
+
+--8<-- "snippets/vega.md"

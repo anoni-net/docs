@@ -371,3 +371,6 @@ Latest-day running and stopped counts across all four watched regions, side by s
 [^4]: Daily unique ASN count: number of distinct autonomous systems hosting Tor relays in the region per day. Higher numbers indicate more dispersion across providers, which generally reflects healthier decentralization.
 [^5]: Node-type distribution: counts by relay role (guard, middle, exit, etc.) per day. Hourly samples de-duplicated.
 [^6]: Flag distribution: counts of relay capability flags per day. Flags are not mutually exclusive — one relay may carry several.
+
+
+--8<-- "snippets/vega.md"

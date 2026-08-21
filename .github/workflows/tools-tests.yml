@@ -36,6 +36,8 @@ on:
       - "docs/zh-TW/js/threatmodel.js"
       - "docs/zh-TW/js/stripmeta.js"
       - "docs/zh-TW/utils/**"
+      - "docs/mkdocs*.yml"
+      - "docs/snippets/**"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
       - ".github/workflows/tools-tests.yml"
@@ -99,6 +101,10 @@ jobs:
       # QR code 讀取器：產生器產生、讀取器讀回，兩個獨立的函式庫互相驗證
       - name: QR code 讀取器
         run: node tools/test_qrread.mjs
+
+      # 圖表函式庫按需載入：放回 extra_javascript 不會有錯誤訊息，只是全站變慢
+      - name: 圖表函式庫按需載入
+        run: node tools/test_chart_assets.mjs
 
       # Metadata 清除器：漏清跟改壞一樣糟，兩種都直接在輸出的位元組上驗
       - name: 照片 metadata 清除器

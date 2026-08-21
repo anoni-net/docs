@@ -157,3 +157,6 @@ anoni.net 社区把这套做法整理在 [issue #78](https://github.com/anoni-ne
 - [onionoo MCP 上线：用一句中文问 Tor 中继节点现况](./2026-onionoo-mcp-public.md)
 
 [^1]: [OONI API（aggregation 端点）](https://api.ooni.org/){target="_blank"} - OONI
+
+
+--8<-- "snippets/vega.md"
