@@ -193,6 +193,16 @@ test('接的是真的亂數源，而且分布沒有明顯偏斜', () => {
   }
 });
 
+test('選中的模式按鈕不會被 hover 規則蓋掉文字色', () => {
+  // 通用 hover 把文字色換成 accent，特異性又比填色那條高。選中之後滑鼠停在上面，
+  // 字就跟藍底融在一起。觸控裝置點完會停在 hover 狀態，所以手機上是按一下就消失。
+  assert.ok(
+    src.includes('button:hover:not(:disabled):not([aria-pressed="true"])'),
+    'hover 規則要排除選中的按鈕'
+  );
+  assert.ok(src.includes('button[aria-pressed="true"]:hover'), '選中的按鈕要有自己的 hover 回饋');
+});
+
 for (const [name, fn] of tests) {
   try {
     fn();

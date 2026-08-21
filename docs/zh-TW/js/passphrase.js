@@ -96,8 +96,15 @@
       border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; padding: .35rem .8rem;
     }
-    #passphrase-tool button:hover:not(:disabled) {
+    /* 填了底色的按鈕不套這條。accent 色的字在 primary 底上對比不夠，讀者看到的
+       是「選中之後把滑鼠放上去，字就不見了」。觸控裝置點完會停在 hover 狀態，
+       所以手機上是按一下就消失。 */
+    #passphrase-tool button:hover:not(:disabled):not([aria-pressed="true"]) {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
+    }
+    /* 選中的按鈕改用亮度變化當回饋，文字色不動 */
+    #passphrase-tool button[aria-pressed="true"]:hover:not(:disabled) {
+      filter: brightness(1.1);
     }
     #passphrase-tool button:disabled { opacity: .5; cursor: default; }
     #passphrase-tool button[aria-pressed="true"] {

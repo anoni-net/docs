@@ -37,6 +37,10 @@ const VENDOR = path.join(HERE, '..', 'docs', 'zh-TW', 'utils', 'vendor', 'qrcode
 const src = fs.readFileSync(SRC, 'utf8');
 const qrcode = createRequire(import.meta.url)(VENDOR);
 
+// 掃描用的版本：剝掉註解。註解本來就在說明「不會出現哪些東西」，寫出那些名字才
+// 講得清楚，而註解裡的字不該讓自我檢查失效。跟 test_leaks.mjs 同一個做法。
+const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
 const grab = (re) => {
   const m = src.match(re);
   if (!m) throw new Error(`qrcode.js 裡找不到 ${re}`);
@@ -361,6 +365,22 @@ test('同一列連續的黑格併成一個 rect', () => {
 
 test('糾錯等級的說明數字沒有寫反', () => {
   assert.deepEqual(tool.ERROR_LEVELS, { L: 7, M: 15, Q: 25, H: 30 });
+});
+
+test('選中的等級按鈕不會被 hover 規則蓋掉文字色', () => {
+  assert.ok(
+    src.includes('button:hover:not(:disabled):not([aria-pressed="true"])'),
+    'hover 規則要排除選中的按鈕'
+  );
+  assert.ok(src.includes('button[aria-pressed="true"]:hover'));
+});
+
+test('輸入框的字級撐到 16px，iOS 才不會一聚焦就放大整頁', () => {
+  // iOS Safari 在輸入框字級小於 16px 時聚焦會自動放大，而且不會縮回去。
+  // material 的 rem 基準是 20px，.78rem 只有 15.6px 剛好踩到。
+  assert.ok(src.includes('font-size: max(16px'), '輸入框字級要用 max 撐到 16px');
+  // 不要改 viewport 的 user-scalable，那會讓需要放大的人沒辦法放大
+  assert.ok(!code.includes('user-scalable'));
 });
 
 test('留白留了規範要求的四格', () => {

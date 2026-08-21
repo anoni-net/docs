@@ -30,8 +30,12 @@
       border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; padding: .3rem .7rem;
     }
-    #offline-library button:hover:not(:disabled) {
+    /* 填了底色的「套用變更」不套這條，不然滑鼠放上去文字就看不見了 */
+    #offline-library button:hover:not(:disabled):not(.ol-primary) {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
+    }
+    #offline-library .ol-primary:hover:not(:disabled) {
+      filter: brightness(1.1);
     }
     #offline-library button:disabled { opacity: .5; cursor: default; }
     #offline-library .ol-status { line-height: 1.8; margin: .4rem 0; }

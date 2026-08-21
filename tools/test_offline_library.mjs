@@ -537,6 +537,17 @@ test('大小含資產，章節的部分去重', async () => {
   assert.deepEqual(sizes, ['200 KB', '150 KB']);
 });
 
+test('填了底色的按鈕不會被 hover 規則蓋掉文字色', () => {
+  // 通用 hover 把文字色換成 accent，而它的特異性比 .ol-primary 高。實際效果是
+  // 「套用變更」按下去之後滑鼠停在上面，字就跟藍底融在一起看不見了。
+  // 觸控裝置點完會停在 hover 狀態，所以手機上是按一下就消失。
+  assert.ok(
+    src.includes('button:hover:not(:disabled):not(.ol-primary)'),
+    'hover 規則要排除填了底色的按鈕'
+  );
+  assert.ok(src.includes('.ol-primary:hover'), '填色按鈕要有自己的 hover 回饋');
+});
+
 test('進度與完成訊息都在底部那條裡，不是散在頁面頂端', async () => {
   // 那條 sticky 在畫面下緣，而套用按鈕就在上面。進度畫在頁面頂端的話，讀者按完
   // 什麼都看不到。位置本身要靠實機截圖，這裡守的是「它是那條的子節點」。
