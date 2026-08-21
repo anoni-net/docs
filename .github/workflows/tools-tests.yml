@@ -31,6 +31,7 @@ on:
       - "docs/zh-TW/js/qrcode.js"
       - "docs/zh-TW/js/leaks.js"
       - "docs/zh-TW/js/cleanurl.js"
+      - "docs/zh-TW/js/invisible.js"
       - "docs/zh-TW/utils/**"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
@@ -87,6 +88,10 @@ jobs:
       # 網址清理器：守的是「必要參數不能被誤刪」，那比漏刪追蹤參數更難發現
       - name: 網址清理器
         run: node tools/test_cleanurl.mjs
+
+      # 隱形字元偵測：誤判與漏報一樣糟，兩組案例的數量刻意相當
+      - name: 隱形字元偵測
+        run: node tools/test_invisible.mjs
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
