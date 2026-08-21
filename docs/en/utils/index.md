@@ -32,6 +32,10 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Lists what any site can read without asking, annotated with how Tor Browser normalises each one. Open it in a second browser to see what those defences actually do.
 
+-   :material-image-off-outline: **[Photo metadata remover](strip-metadata.md)**
+
+    Strip EXIF, GPS, camera model and comment fields from photos without the file leaving your device. The compressed data is untouched, so the cleaned image is identical to the original, and every segment kept or removed is listed for you.
+
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 
     Pick out and remove the tracking parameters in a URL, each annotated with who is doing the tracking. Unwraps Google and Facebook redirect wrappers too.
