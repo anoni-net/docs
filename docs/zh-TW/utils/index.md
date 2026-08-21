@@ -16,6 +16,10 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
+-   :material-clipboard-check-outline: **[威脅模型清單](threat-model.md)**
+
+    把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡撐不住的組合。答案不存起來，重新整理就沒了。
+
 -   :material-dice-multiple-outline: **[密語與密碼產生器](passphrase.md)**
 
     用 asian-diceware 的 7776 字詞表抽密語，或從你選的字元集抽隨機密碼。亂數來自瀏覽器的 `crypto.getRandomValues`，並且會告訴你這組密碼的熵有多少。

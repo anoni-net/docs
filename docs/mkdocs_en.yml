@@ -92,6 +92,7 @@ nav:
           - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_UTILS, "Tools"]:
       - utils/index.md
+      - utils/threat-model.md
       - utils/passphrase.md
       - utils/qrcode.md
       - utils/qr-read.md

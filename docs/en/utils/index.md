@@ -16,6 +16,10 @@ The articles on this site explain how to protect yourself. This section holds th
 
 <div class="grid cards" markdown>
 
+-   :material-clipboard-check-outline: **[Threat model checklist](threat-model.md)**
+
+    Answer the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the combinations that will not hold flagged. Nothing is saved; reloading clears it.
+
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.

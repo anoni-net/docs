@@ -22,6 +22,8 @@ EFF frames threat modeling as five questions, worth keeping on a single sheet of
 - How bad are the consequences if I fail?
 - How much trouble am I willing to go through to prevent those?
 
+The [threat model checklist](../utils/threat-model.md) turns questions one, two and five into something you can click through, and flags the combinations that will not hold. It runs in your browser, saves nothing, and works offline. Questions three and four stay yours to judge, and the section below is why.
+
 ## Why the adversary is regional
 
 The reason this matters on a Sinophone Asia-Pacific site: the adversary in question 2 changes shape across jurisdictions, and so does the cost in question 4. The same action, using a pseudonymous account, carrying a phone across a border, reaching a blocked service, carries very different consequences in Taipei, Hong Kong, Kuala Lumpur, or across the Myanmar border. A threat model built for one jurisdiction does not transfer unchanged to the next. When you move across the region, re-run the five questions for where you are now.
