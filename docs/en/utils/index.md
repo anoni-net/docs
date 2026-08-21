@@ -20,6 +20,10 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
 
+-   :material-qrcode: **[QR code generator](qrcode.md)**
+
+    Turn onion addresses, Tor bridges and other long, easily mistyped strings into a QR code the person in front of you can read with a camera, without anything passing through a server. Downloadable as SVG for printing.
+
 </div>
 
 ## Taking them offline
