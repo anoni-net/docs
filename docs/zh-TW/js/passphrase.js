@@ -74,6 +74,59 @@
     return out;
   }
 
+  // --- 實體骰子 ---
+  //
+  // Diceware 原本就是擲骰子的方法，詞表的順序本身就是編碼：第一個字是 11111，
+  // 最後一個是 66666，中間按六進位排。這一段把那個對應算出來，讓讀者拿真骰子擲，
+  // 自己查表。
+  //
+  // 這樣做的意義在信任鏈。上面那些函式再怎麼寫對，讀者也只能相信
+  // crypto.getRandomValues 可不可信、相信這一頁的程式沒有被換掉。擲實體骰子的
+  // 話，隨機性來自讀者自己的手，這一頁只剩查表的工作，而那份表可以下載下來離線核對。
+  const DICE = 5;
+  const FACES = 6;
+
+  // [3,1,6,2,4] → 詞表裡的位置。六進位，第一顆骰子是最高位。
+  function diceToIndex(dice) {
+    if (!dice || dice.length !== DICE) return -1;
+    let index = 0;
+    for (const face of dice) {
+      if (!(face >= 1 && face <= FACES)) return -1;
+      index = index * FACES + (face - 1);
+    }
+    return index;
+  }
+
+  // 反過來：詞表位置 → 五顆骰子。產生對照表時用得到。
+  function indexToDice(index) {
+    if (!(index >= 0)) return null;
+    const out = [];
+    let rest = index;
+    for (let i = 0; i < DICE; i += 1) {
+      out.unshift((rest % FACES) + 1);
+      rest = Math.floor(rest / FACES);
+    }
+    return rest === 0 ? out : null;
+  }
+
+  function wordForDice(words, dice) {
+    const index = diceToIndex(dice);
+    if (index < 0 || !words || index >= words.length) return null;
+    return words[index];
+  }
+
+  // 完整對照表，一行一個「編碼 詞」。讀者下載之後可以離線核對，也可以印出來，
+  // 從頭到尾不需要這一頁。
+  function diceTableText(words) {
+    const lines = [];
+    for (let i = 0; i < words.length; i += 1) {
+      const dice = indexToDice(i);
+      if (!dice) break;
+      lines.push(dice.join("") + "\t" + words[i]);
+    }
+    return lines.join("\n") + "\n";
+  }
+
   // 熵落在哪一級。數字本身對多數人沒有意義，要有一句話說它夠不夠用。
   // 分界取自 EFF 對 Diceware 的建議（六個字約 77 bits）與 NIST SP 800-63B 的討論。
   function strengthOf(bits) {
@@ -135,6 +188,25 @@
     #passphrase-tool .pp-fair span { background: #ef6c00; }
     #passphrase-tool .pp-good span { background: #2e7d32; }
     #passphrase-tool .pp-strong span { background: var(--md-primary-fg-color); }
+    #passphrase-tool .pp-dice { margin: 0 0 1rem; }
+    #passphrase-tool .pp-faces { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0; }
+    #passphrase-tool .pp-faces button {
+      min-width: 2.6rem; font-variant-numeric: tabular-nums; font-size: .9rem;
+    }
+    #passphrase-tool .pp-slots { font-size: .76rem; opacity: .8; margin: .4rem 0 0; }
+    /* 字距只給數字。套在整行上會把中文標籤也拉開成一個字一格 */
+    #passphrase-tool .pp-slots .pp-digits {
+      font-family: var(--md-code-font-family, monospace); font-size: .95rem;
+      letter-spacing: .3em; margin-left: .5rem; opacity: 1;
+    }
+    #passphrase-tool .pp-slots em { font-style: normal; opacity: .3; }
+    #passphrase-tool .pp-words { list-style: none; margin: .6rem 0 0; padding: 0; font-size: .76rem; }
+    #passphrase-tool .pp-words li { margin: 0 0 .2rem; line-height: 1.7; }
+    #passphrase-tool .pp-words code {
+      font-family: var(--md-code-font-family, monospace);
+      background: var(--md-default-fg-color--lightest); padding: 0 .2rem;
+      border-radius: .1rem; margin-right: .4rem;
+    }
     #passphrase-tool .pp-note {
       font-size: .7rem; opacity: .7; line-height: 1.6; margin: .8rem 0 0;
     }
@@ -152,6 +224,16 @@
       failed: "詞表載入失敗。連上網重新整理一次，之後這一頁離線也能用。",
       modePhrase: "密語",
       modePassword: "隨機密碼",
+      modeDice: "實體骰子",
+      diceIntro: "擲五顆骰子，照擲出的順序按下去。湊滿五顆就查出一個字，重複到你要的字數。",
+      diceSlots: "這一輪擲到",
+      diceUndo: "退一顆",
+      diceClear: "全部清掉",
+      diceTable: "下載完整對照表",
+      diceTableNote: "對照表是純文字，7776 行，可以印出來。有了它，這一頁就不是必要的。",
+      diceEmpty: "還沒有字。擲骰子開始。",
+      diceWord: "第 {n} 個字",
+      diceTrust: "這個模式下隨機性來自你的手，不來自這台電腦。這一頁只做查表，而那份表你可以下載下來自己核對。",
       words: "字數",
       length: "長度",
       separator: "分隔",
@@ -171,6 +253,16 @@
       failed: "词表加载失败。连上网刷新一次，之后这一页离线也能用。",
       modePhrase: "密语",
       modePassword: "随机密码",
+      modeDice: "实体骰子",
+      diceIntro: "掷五颗骰子，照掷出的顺序按下去。凑满五颗就查出一个字，重复到你要的字数。",
+      diceSlots: "这一轮掷到",
+      diceUndo: "退一颗",
+      diceClear: "全部清掉",
+      diceTable: "下载完整对照表",
+      diceTableNote: "对照表是纯文字，7776 行，可以打印出来。有了它，这一页就不是必要的。",
+      diceEmpty: "还没有字。掷骰子开始。",
+      diceWord: "第 {n} 个字",
+      diceTrust: "这个模式下随机性来自你的手，不来自这台电脑。这一页只做查表，而那份表你可以下载下来自己核对。",
       words: "字数",
       length: "长度",
       separator: "分隔",
@@ -190,6 +282,16 @@
       failed: "The word list could not be loaded. Reload once while online and this page will work offline afterwards.",
       modePhrase: "Passphrase",
       modePassword: "Random password",
+      modeDice: "Physical dice",
+      diceIntro: "Roll five dice and press the faces in the order you rolled them. Five presses look up one word. Repeat for as many words as you want.",
+      diceSlots: "This roll",
+      diceUndo: "Undo one",
+      diceClear: "Clear all",
+      diceTable: "Download the full table",
+      diceTableNote: "The table is plain text, 7776 lines, and prints fine. With it in hand, this page is no longer necessary.",
+      diceEmpty: "No words yet. Roll to begin.",
+      diceWord: "Word {n}",
+      diceTrust: "In this mode the randomness comes from your hands, not from this computer. All this page does is look words up, and you can download the table and check it yourself.",
       words: "Words",
       length: "Length",
       separator: "Separator",
@@ -225,6 +327,9 @@
   const state = {
     words: null,
     mode: "phrase",
+    // 骰子模式的暫存。pending 是這一輪還沒湊滿五顆的點數，rolled 是查出來的字。
+    pending: [],
+    rolled: [],
     wordCount: 6,
     separator: "-",
     length: 20,
@@ -234,6 +339,12 @@
   };
 
   function generate() {
+    if (state.mode === "dice") {
+      // 這個模式的值完全由讀者擲出來的結果決定，程式不插手
+      state.value = state.rolled.join(state.separator);
+      state.copied = false;
+      return;
+    }
     if (state.mode === "phrase") {
       if (!state.words) return;
       state.value = pickWords(state.words, state.wordCount, randomUint32).join(
@@ -249,6 +360,14 @@
   }
 
   function currentEntropy() {
+    if (state.mode === "dice") {
+      // 每擲一輪五顆骰子是 log2(6^5) = 12.9 bits，跟從 7776 個字抽一次完全相同
+      return {
+        bits: entropyBits(state.words ? state.words.length : 0, state.rolled.length),
+        pool: state.words ? state.words.length : 0,
+        count: state.rolled.length,
+      };
+    }
     if (state.mode === "phrase") {
       return {
         bits: entropyBits(state.words ? state.words.length : 0, state.wordCount),
@@ -290,6 +409,13 @@
         render();
       }, state.mode === "password")
     );
+    modes.appendChild(
+      button(t.modeDice, () => {
+        state.mode = "dice";
+        generate();
+        render();
+      }, state.mode === "dice")
+    );
     root.appendChild(modes);
 
     if (state.mode === "phrase") {
@@ -321,7 +447,7 @@
         );
       }
       root.appendChild(sep);
-    } else {
+    } else if (state.mode === "password") {
       const row = el("div", "pp-row");
       row.appendChild(el("span", null, t.length));
       const slider = document.createElement("input");
@@ -361,8 +487,89 @@
       root.appendChild(sets);
     }
 
+    if (state.mode === "dice") {
+      const box = el("div", "pp-dice");
+      box.appendChild(el("p", "pp-meta", t.diceIntro));
+
+      // 六個面各一顆按鈕。手機上按按鈕比打字容易，而且不會輸入到 7 這種點數。
+      const faces = el("div", "pp-faces");
+      for (let face = 1; face <= FACES; face += 1) {
+        faces.appendChild(button(String(face), () => {
+          state.pending.push(face);
+          if (state.pending.length === DICE) {
+            const word = wordForDice(state.words, state.pending);
+            if (word) state.rolled.push(word);
+            state.pending = [];
+          }
+          generate();
+          render();
+        }));
+      }
+      box.appendChild(faces);
+
+      const slots = el("p", "pp-slots");
+      slots.appendChild(document.createTextNode(t.diceSlots));
+      const digits = el("span", "pp-digits");
+      for (let i = 0; i < DICE; i += 1) {
+        if (i < state.pending.length) {
+          digits.appendChild(document.createTextNode(String(state.pending[i])));
+        } else {
+          digits.appendChild(el("em", null, "\u00b7"));
+        }
+      }
+      slots.appendChild(digits);
+      box.appendChild(slots);
+
+      const row = el("div", "pp-row");
+      const undo = button(t.diceUndo, () => {
+        if (state.pending.length) state.pending.pop();
+        else if (state.rolled.length) state.rolled.pop();
+        generate();
+        render();
+      });
+      undo.disabled = !state.pending.length && !state.rolled.length;
+      row.appendChild(undo);
+      const clear = button(t.diceClear, () => {
+        state.pending = [];
+        state.rolled = [];
+        generate();
+        render();
+      });
+      clear.disabled = !state.pending.length && !state.rolled.length;
+      row.appendChild(clear);
+
+      // 對照表下載。有了它讀者可以離線查，完全不需要這一頁。
+      const table = button(t.diceTable, () => {
+        if (!state.words) return;
+        const blob = new Blob([diceTableText(state.words)], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "diceware-7776.txt";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+      table.disabled = !state.words;
+      row.appendChild(table);
+      box.appendChild(row);
+
+      if (state.rolled.length) {
+        const list = el("ul", "pp-words");
+        for (let i = 0; i < state.rolled.length; i += 1) {
+          const li = el("li");
+          li.appendChild(el("code", null, t.diceWord.replace("{n}", String(i + 1))));
+          li.appendChild(document.createTextNode(state.rolled[i]));
+          list.appendChild(li);
+        }
+        box.appendChild(list);
+      }
+      root.appendChild(box);
+    }
+
     const out = el("div", "pp-out");
-    if (state.mode === "phrase" && !state.words) {
+    if (state.mode === "dice" && !state.rolled.length) {
+      out.textContent = state.words === false ? t.failed : t.diceEmpty;
+    } else if (state.mode === "phrase" && !state.words) {
       out.textContent = state.words === false ? t.failed : t.loading;
     } else if (!state.value && state.mode === "password") {
       out.textContent = t.charsetEmpty;
@@ -393,12 +600,16 @@
     }
 
     const actions = el("div", "pp-row");
-    const regenerate = button(t.generate, () => {
-      generate();
-      render();
-    });
-    regenerate.disabled = !state.value;
-    actions.appendChild(regenerate);
+    // 骰子模式不放「重新產生」。那顆按鈕在這裡沒有意義，值是讀者擲出來的，
+    // 程式沒有立場重抽一次。
+    if (state.mode !== "dice") {
+      const regenerate = button(t.generate, () => {
+        generate();
+        render();
+      });
+      regenerate.disabled = !state.value;
+      actions.appendChild(regenerate);
+    }
 
     const copy = button(state.copied ? t.copied : t.copy, () => {
       if (!state.value || !navigator.clipboard) return;
@@ -411,7 +622,12 @@
     actions.appendChild(copy);
     root.appendChild(actions);
 
-    root.appendChild(el("p", "pp-note", t.note));
+    if (state.mode === "dice") {
+      root.appendChild(el("p", "pp-note", t.diceTrust));
+      root.appendChild(el("p", "pp-note", t.diceTableNote));
+    } else {
+      root.appendChild(el("p", "pp-note", t.note));
+    }
   }
 
   render();
