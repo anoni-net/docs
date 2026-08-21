@@ -10,6 +10,8 @@ icon: material/link-variant-off
 
 <script src="../../js/cleanurl.js"></script>
 
+Another common situation: someone at an NGO pastes a donation page URL into a group chat, having copied it out of a newsletter, so it still carries `utm_source` and `mc_eid`. When people click through, the back end sees not only that someone donated but which email it came from and who forwarded it. The cleaned URL still works for donations, minus the layer that traces back to a person.
+
 ## What that string of parameters tells whom
 
 Open an article from Facebook, copy the URL, and you get something like this:

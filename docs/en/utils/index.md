@@ -6,11 +6,20 @@ icon: material/tools
 
 # :material-tools: Tools
 
-The articles on this site explain how to protect yourself. This section holds the things you can actually press. Three rules apply to all of them:
+The articles on this site explain how to protect yourself. This section holds the things you can actually press. Four rules apply to all of them:
 
 - Everything is computed in your browser, and nothing is sent anywhere
 - Once stored on your device they work with the network off, and working offline is itself the proof that nothing is being sent
 - The source is in [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}, so anyone who reads code can check
+- All of them need JavaScript enabled, because the computation happens on your device
+
+## One conflict to know about if you use Tor Browser
+
+Setting [Tor Browser's security level](../tools/tor-browser-advanced.md) to Safest disables JavaScript entirely, and the tools in this section stop responding.
+
+The conflict is that the same page recommends raising the level for "unfamiliar onion sites, links of unknown origin, unfamiliar domains", and receiving a suspicious link is exactly when you would want the [invisible character detector](invisible.md) or the [QR code reader](qr-read.md).
+
+Handle the two separately. Open the suspicious site at the higher level, copy out the text or image you want to check, switch back to Standard to examine it, then raise the level again. The tools here make no outbound connections, so opening them at Standard does not add to your exposure on that site.
 
 ## Available now
 
@@ -18,7 +27,7 @@ The articles on this site explain how to protect yourself. This section holds th
 
 -   :material-clipboard-check-outline: **[Threat model checklist](threat-model.md)**
 
-    Answer the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the combinations that will not hold flagged. Nothing is saved; reloading clears it.
+    Answer the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches in your answers flagged. Nothing is saved; reloading clears it.
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 

@@ -12,6 +12,11 @@ offline_assets:
 
 <script src="../../js/passphrase.js"></script>
 
+Two situations where this comes up:
+
+- **You just set up a password manager and need a master password.** That one password is the door to every other one. Typing something off the top of your head is common, and nobody can tell whether it is strong enough. Draw six words and the page tells you the entropy outright.
+- **You suspect the computer in front of you has been tampered with.** Switch to physical dice mode, where the randomness comes from your hands rather than from the machine.
+
 ## What this does
 
 Passphrase mode draws words independently from the 7776-word [asian-diceware](../tools/asian-diceware.md) list. That list is the community's take on the EFF Diceware wordlist, mixing in loanwords that already sit in English dictionaries, such as `oolong`, `boba` and `tofu`, so that readers around Taiwan and the wider region find them easier to recognise and remember.
@@ -51,7 +56,7 @@ A few practical notes:
 - Dice should be fair. Cheap plastic dice are biased; casino-grade precision dice are the ones that are genuinely uniform. Ordinary dice are good enough for everyday use, but it is worth knowing the difference.
 - Do not use a dice-rolling app. That loops straight back to trusting software.
 - Rolling five dice at once beats rolling one five times, but you need to keep track of the order. Different coloured dice help.
-- The entropy matches the generated mode exactly: each roll is log2(6^5), the same as drawing once from 7776 words, about 12.9 bits.
+- The entropy matches the generated mode exactly: each roll is equivalent to drawing once from 7776 words, about 12.9 bits.
 
 For where the list came from and how words were chosen, see [Asian Diceware](../tools/asian-diceware.md).
 
@@ -66,3 +71,9 @@ Be extra careful on phones, where the clipboard is often shared across apps.
 - Somewhere to keep what you generated: [password managers](../tools/password-manager.md)
 - How the list was built and what the selection rules were: [Asian Diceware](../tools/asian-diceware.md)
 - Taking this page with you: [offline reading](../offline.md)
+
+## Works offline
+
+Like the rest of this section, the code is stored on your device and runs without a network. The wordlist is stored alongside it, so passphrases still come out with the network off, which is the most direct proof that nothing generated here is being sent anywhere.
+
+To take this page with you, see [offline reading](../offline.md).

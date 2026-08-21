@@ -1,16 +1,25 @@
 ---
 title: 小工具
-description: 在瀏覽器裡直接跑的小工具，全部不送出任何資料，存進裝置之後沒有網路也能用。
+description: 在瀏覽器裡直接執行的小工具，全部不送出任何資料，存進裝置之後沒有網路也能用。
 icon: material/tools
 ---
 
 # :material-tools: 小工具
 
-站上的文章說明怎麼保護自己，這一區放的是可以直接按的東西。共同的規則有三條：
+站上的文章說明怎麼保護自己，這一區放的是可以直接按的東西。共同的規則有四條：
 
 - 全部在你的瀏覽器裡運算，不送出任何資料
 - 存進裝置之後沒有網路也能用，斷網可用本身就是「沒有偷送東西」的證明
 - 原始碼在 [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}，看得懂的人可以自己驗
+- 都需要瀏覽器開著 JavaScript，因為運算是在你的裝置上做的
+
+## 用 Tor Browser 的話有一個衝突要知道
+
+[Tor Browser 的安全等級](../tools/tor-browser-advanced.md)調到 Safest 會把 JavaScript 全部關掉，這一區的工具就整頁不動。
+
+衝突在於，那篇建議「來路不明的釣魚連結、不熟悉的網域」時把等級調高，而收到可疑連結正是最需要用[隱形字元偵測](invisible.md)或 [QR code 讀取器](qr-read.md)查一下的時候。
+
+處理方式是把兩件事分開。可疑的網站用高安全等級去開，把要查的文字或圖片複製出來之後切回 Standard，查完再調回去。這一區的工具不連外，在 Standard 等級下打開它們不會增加你在那個可疑網站上的暴露。
 
 ## 目前有的
 
@@ -18,7 +27,7 @@ icon: material/tools
 
 -   :material-clipboard-check-outline: **[威脅模型清單](threat-model.md)**
 
-    把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡撐不住的組合。答案不存起來，重新整理就沒了。
+    把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡的錯配。答案不存起來，重新整理就沒了。
 
 -   :material-dice-multiple-outline: **[密語與密碼產生器](passphrase.md)**
 
@@ -42,7 +51,7 @@ icon: material/tools
 
 -   :material-format-letter-matches: **[隱形字元偵測](invisible.md)**
 
-    找出文字裡看不見的零寬字元、方向控制與同形字，標出位置並說明每一類是什麼。文件外流追蹤與釣魚網址都靠這些東西。
+    找出文字裡看不見的零寬字元、方向控制、標籤字元與同形字，標出位置並說明每一類是什麼。文件外流追蹤、釣魚網址，還有藏給 AI 讀的指令，都靠這些東西。
 
 -   :material-eye-outline: **[你的瀏覽器透露了什麼](leaks.md)**
 
