@@ -9,6 +9,8 @@
 #   - 離線內容管理頁的分組與排序改動，錯了是整份清單跟側邊欄對不起來
 #   - 離線內容管理頁的介面畫錯，讀者按了沒反應或看不到回應。2026-08-20 改那一頁的
 #     sticky 版面時 CI 一個都沒跑，paths 漏了 js/offline-library.js
+#   - 密碼產生器的取樣有偏差、熵算錯、詞表少幾個字。這一類錯誤畫面上完全正常，
+#     照樣吐出一串看起來很隨機的字，而受害的讀者不會知道自己受害
 #   - 部署後要清哪些網址，漏清是訪客看到舊內容，多清是波及 zone 內其他服務
 #
 # tools/test_docs_style_lint.py 不在這裡，它由 docs-style-lint.yml 跑，那支 workflow
@@ -21,6 +23,8 @@ on:
       - "tools/**"
       - "docs/zh-TW/sw.js"
       - "docs/zh-TW/js/offline-library.js"
+      - "docs/zh-TW/js/passphrase.js"
+      - "docs/zh-TW/utils/**"
       - "docs/overrides/base.html"
       - "docs/hooks/**"
       - ".github/workflows/tools-tests.yml"
@@ -60,6 +64,10 @@ jobs:
       # 離線內容管理頁的介面：畫出來的結構、順序、連結，以及送給 SW 的指令
       - name: 離線內容管理頁介面
         run: node tools/test_offline_library.mjs
+
+      # 密語與密碼產生器：取樣有沒有偏差、熵算得對不對、詞表有沒有壞掉
+      - name: 密語與密碼產生器
+        run: node tools/test_passphrase.mjs
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射

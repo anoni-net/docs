@@ -88,6 +88,9 @@ nav:
           - taiwan/pdpa-2025.md
           - taiwan/vasp-2026.md
           - taiwan/whistleblower-law.md
+  - !ENV [NAV_UTILS, "小工具"]:
+      - utils/index.md
+      - utils/passphrase.md
   - !ENV [NAV_GAMES, "互动"]:
       - games/index.md
       - games/onion-routing.md
