@@ -94,6 +94,7 @@ nav:
       - utils/index.md
       - utils/passphrase.md
       - utils/qrcode.md
+      - utils/qr-read.md
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md
