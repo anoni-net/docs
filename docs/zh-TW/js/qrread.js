@@ -561,22 +561,108 @@
 
   // 圖片畫進 canvas 取像素。大圖先縮到合理尺寸，不然手機拍的照片動輒四千萬像素，
   // 解起來會卡住整個分頁。
+  // 讀不到的時候換一種方式再試一次，而不是直接放棄。
+  //
+  // 原本只縮到 1600 像素試一次。手機拍的照片動輒四千像素寬，牆上那張 QR 在畫面裡
+  // 可能只佔一小塊，縮完之後每個模組剩不到兩個像素，jsQR 就對不到定位圖樣了。
+  // 實測一張 4000×3000 的照片，裡面的 QR 原本 150 像素：縮到 1600 讀不出來，
+  // 縮到 2400 或不縮都讀得出來。
+  //
+  // 所以改成一階一階試。第一階最快，多數照片在那裡就解完了，只有解不出來的才會
+  // 往下走，慢的成本只落在本來就要失敗的那些。
+  const ATTEMPTS = [
+    // 第一階最快，清楚的照片在這裡就結束
+    { max: 1600, crop: 0 },
+    // 拍照的人多半把 QR 放在畫面中間。裁掉外圍等於把它放大，順便丟掉外圈的雜訊，
+    // 對顆粒粗的照片特別有效。實測一張雜訊很重的圖，整張掃要四秒還讀不出來，
+    // 裁過之後兩百毫秒就解開了，所以這一階排在前面。
+    { max: 2600, crop: 0.6 },
+    // 保留更多細節。模組太小的情況多半在這裡解開
+    { max: 2600, crop: 0 },
+    // 原尺寸，但擋住超大圖。四千像素大約 220 毫秒，再大就不划算
+    { max: 4200, crop: 0 },
+    // 逆光或反光的照片對比不夠，先拉開黑白再解
+    { max: 2600, crop: 0, contrast: true },
+  ];
+
+  // 整支最多花多久。jsQR 在雜訊很重的圖上單次就要好幾秒，五階全跑完可能超過十秒，
+  // 而讀者盯著一個沒有反應的畫面十秒鐘會以為壞了。時間到就停在已經試過的結果上。
+  const DECODE_BUDGET_MS = 6000;
+
+  // 把像素推向純黑與純白。灰階值取 RGB 的簡單平均就夠，QR 只有兩種顏色。
+  function boostContrast(pixels) {
+    const data = pixels.data;
+    let total = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      total += (data[i] + data[i + 1] + data[i + 2]) / 3;
+    }
+    const mid = total / (data.length / 4);
+    for (let i = 0; i < data.length; i += 4) {
+      const value = (data[i] + data[i + 1] + data[i + 2]) / 3 < mid ? 0 : 255;
+      data[i] = value;
+      data[i + 1] = value;
+      data[i + 2] = value;
+    }
+    return pixels;
+  }
+
+  // 這一階實際會畫成多大。原圖比上限小的時候，兩個不同的上限會算出同一個尺寸，
+  // 那就是把同一件事做兩次，而慢的圖上那是好幾秒。
+  function planSize(image, plan) {
+    const sw = plan.crop ? Math.round(image.width * plan.crop) : image.width;
+    const sh = plan.crop ? Math.round(image.height * plan.crop) : image.height;
+    const scale = plan.crop
+      ? Math.min(plan.max / Math.max(sw, sh), 4)
+      : Math.min(1, plan.max / Math.max(image.width, image.height));
+    return {
+      sx: Math.round((image.width - sw) / 2),
+      sy: Math.round((image.height - sh) / 2),
+      sw: sw,
+      sh: sh,
+      w: Math.max(1, Math.round(sw * scale)),
+      h: Math.max(1, Math.round(sh * scale)),
+    };
+  }
+
+  function drawAndRead(image, plan, box) {
+    const canvas = document.createElement("canvas");
+    canvas.width = box.w;
+    canvas.height = box.h;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(image, box.sx, box.sy, box.sw, box.sh, 0, 0, box.w, box.h);
+    let pixels = ctx.getImageData(0, 0, box.w, box.h);
+    if (plan.contrast) pixels = boostContrast(pixels);
+    return window.jsQR ? window.jsQR(pixels.data, box.w, box.h) : null;
+  }
+
   function decode(source) {
     return new Promise((resolve) => {
       const image = new Image();
-      image.onload = () => {
-        const max = 1600;
-        const ratio = Math.min(1, max / Math.max(image.width, image.height));
-        const w = Math.max(1, Math.round(image.width * ratio));
-        const h = Math.max(1, Math.round(image.height * ratio));
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-        const ctx = canvas.getContext("2d", { willReadFrequently: true });
-        ctx.drawImage(image, 0, 0, w, h);
-        const pixels = ctx.getImageData(0, 0, w, h);
+      image.onload = async () => {
         URL.revokeObjectURL(image.src);
-        resolve(window.jsQR ? window.jsQR(pixels.data, w, h) : null);
+        const started = Date.now();
+        const tried = [];
+        for (const plan of ATTEMPTS) {
+          const box = planSize(image, plan);
+          const key = box.w + "x" + box.h + (plan.contrast ? "c" : "");
+          if (tried.indexOf(key) >= 0) continue;
+          tried.push(key);
+          // 交還主執行緒，讓「解讀中」那行字畫得出來。少了這一步，慢的圖會讓
+          // 整個分頁凍住，讀者只看到一個沒有反應的畫面。
+          await new Promise((next) => setTimeout(next, 0));
+          let found = null;
+          try {
+            found = drawAndRead(image, plan, box);
+          } catch (err) {
+            found = null;
+          }
+          if (found && found.data) {
+            resolve(found);
+            return;
+          }
+          if (Date.now() - started > DECODE_BUDGET_MS) break;
+        }
+        resolve(null);
       };
       image.onerror = () => resolve(null);
       image.src = URL.createObjectURL(source);

@@ -43,12 +43,17 @@ const grab = (re) => {
 // DANGEROUS 到 classify 結尾是一整段沒有 DOM 相依的純邏輯，整段抽出來比逐個
 // 函式抽穩，新增一個 parseXxx 不用回頭改這裡。STRINGS 另外抽，用來驗三語系文案沒漏。
 const harness = `
+  ${grab(/^  const ATTEMPTS = \[[\s\S]*?\n  \];/m)}
+  ${grab(/^  const DECODE_BUDGET_MS = .*$/m)}
+  ${grab(/^  function boostContrast\(pixels\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function planSize\(image, plan\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const SCALE = .*$/m)}
   ${grab(/^  const QUIET = .*$/m)}
   ${grab(/^  const DANGEROUS = [\s\S]*?\n  function classify\(text\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const DOTS = [\s\S]*?\n  function maskRaw\(text, info\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { SCALE, QUIET, classify, maskRaw, STRINGS, SHORTENERS, TRACKERS };
+  return { SCALE, QUIET, classify, maskRaw, STRINGS, SHORTENERS, TRACKERS,
+           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize };
 `;
 const tool = new Function(harness)();
 
@@ -409,6 +414,83 @@ test('沒有敏感內容的就原樣顯示，不要多此一舉', () => {
                       'mailto:a@b.c?subject=hi', 'WIFI:S:FreeWiFi;T:nopass;;']) {
     assert.equal(tool.maskRaw(text, tool.classify(text)), text, `${text.slice(0, 20)} 被動到了`);
   }
+});
+
+test('讀不到的時候會換方式再試，不是試一次就放棄', () => {
+  // 原本只縮到 1600 試一次。手機拍的照片動輒四千像素寬，牆上那張 QR 縮完之後
+  // 每個模組剩不到兩個像素，就對不到定位圖樣了。
+  assert.ok(tool.ATTEMPTS.length >= 4, `只有 ${tool.ATTEMPTS.length} 種嘗試`);
+  const maxes = tool.ATTEMPTS.map((a) => a.max);
+  assert.ok(Math.max(...maxes) >= 4000, '沒有一階保留原始尺寸，大照片裡的小 QR 讀不到');
+  assert.ok(tool.ATTEMPTS.some((a) => a.crop), '沒有裁切中央那一階');
+  assert.ok(tool.ATTEMPTS.some((a) => a.contrast), '沒有拉對比那一階');
+});
+
+test('第一階要是最快的那個，清楚的照片不該被拖慢', () => {
+  assert.equal(tool.ATTEMPTS[0].max, 1600, '第一階不是最小的尺寸');
+  assert.ok(!tool.ATTEMPTS[0].crop, '第一階就裁切的話，QR 不在中央的照片會先失敗一次');
+  assert.ok(!tool.ATTEMPTS[0].contrast, '第一階不該花時間處理像素');
+});
+
+test('裁切那一階排在放大原圖之前', () => {
+  // 實測一張雜訊很重的圖，整張掃四秒還讀不出來，裁過之後兩百毫秒就解開。
+  // 順序反過來的話那張圖要多等四秒。
+  const cropAt = tool.ATTEMPTS.findIndex((a) => a.crop);
+  const fullAt = tool.ATTEMPTS.findIndex((a) => !a.crop && a.max >= 4000);
+  assert.ok(cropAt >= 0 && fullAt >= 0);
+  assert.ok(cropAt < fullAt, '裁切那一階排在原尺寸後面，慢的圖會多等好幾秒');
+});
+
+test('算出同樣尺寸的階段不重跑', () => {
+  // 原圖比上限小的時候，兩個不同的上限會算出同一個尺寸。慢的圖上那是白等好幾秒。
+  const image = { width: 2000, height: 1500 };
+  const seen = new Set();
+  let dupes = 0;
+  for (const plan of tool.ATTEMPTS) {
+    const box = tool.planSize(image, plan);
+    const key = box.w + 'x' + box.h + (plan.contrast ? 'c' : '');
+    if (seen.has(key)) dupes += 1;
+    seen.add(key);
+  }
+  assert.ok(dupes > 0, '這張測試圖沒有製造出重複，換一組尺寸再驗');
+  // 實作要真的跳過，掃原始碼確認
+  assert.ok(/tried\.indexOf\(key\) >= 0/.test(code), '沒有跳過重複的尺寸');
+});
+
+test('裁切會放大，不是單純切一塊', () => {
+  // 裁掉外圍之後畫得比原本大，才等於提高了 QR 的有效解析度
+  const image = { width: 4000, height: 3000 };
+  const plain = tool.planSize(image, { max: 2600, crop: 0 });
+  const crop = tool.planSize(image, { max: 2600, crop: 0.6 });
+  assert.ok(crop.sw < plain.sw, '沒有裁掉外圍');
+  assert.ok(crop.w / crop.sw > plain.w / plain.sw, '裁切之後沒有放大，那就白裁了');
+});
+
+test('有總時間上限，不會讓人對著沒反應的畫面等下去', () => {
+  assert.ok(tool.DECODE_BUDGET_MS > 0, '沒有時間上限');
+  assert.ok(tool.DECODE_BUDGET_MS <= 10000, `上限 ${tool.DECODE_BUDGET_MS} 毫秒太久`);
+  assert.ok(/Date\.now\(\) - started > DECODE_BUDGET_MS/.test(code), '上限沒有被檢查');
+});
+
+test('每一階之間會把主執行緒交還給畫面', () => {
+  // 少了這一步，慢的圖會讓整個分頁凍住，讀者只看到一個沒有反應的畫面
+  const fn = code.slice(code.indexOf('image.onload = async'));
+  const body = fn.slice(0, fn.indexOf('image.onerror'));
+  assert.ok(/await new Promise\(\(next\) => setTimeout\(next, 0\)\)/.test(body),
+            '階段之間沒有讓出主執行緒');
+});
+
+test('拉對比是把像素推到純黑與純白', () => {
+  // 中間值取平均，比固定門檻更能適應逆光的照片
+  const pixels = { data: new Uint8ClampedArray([
+    10, 10, 10, 255,   200, 200, 200, 255,
+    30, 30, 30, 255,   240, 240, 240, 255,
+  ]) };
+  const out = tool.boostContrast(pixels);
+  assert.deepEqual(Array.from(out.data), [
+    0, 0, 0, 255,   255, 255, 255, 255,
+    0, 0, 0, 255,   255, 255, 255, 255,
+  ]);
 });
 
 for (const [name, fn] of tests) {
