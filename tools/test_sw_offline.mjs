@@ -109,6 +109,7 @@ const harness = `
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function corePageAssets\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const precachedPrefixes = .*$/m)}
   ${grab(/^const VISITS_URL = .*$/m)}
   ${grab(/^async function noteVisit\(prefix\) \{[\s\S]*?\n\}/m)}
@@ -123,11 +124,15 @@ const harness = `
   ${grab(/^const AUTO_PRECACHE_URL = .*$/m)}
   ${grab(/^async function autoPrecacheEnabled\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function setAutoPrecache\(enabled\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const PRECACHE_IMAGES_URL = .*$/m)}
+  ${grab(/^async function precacheImagesEnabled\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function setPrecacheImages\(enabled\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function messagePrefix\(data\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function libraryEntries\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precachedEntries\(prefix\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function addToLibrary\(prefix, paths, refresh, report\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function removeFromLibrary\(prefix, paths\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const LIBRARY_ASSETS = .*$/m)}
+  ${grab(/^async function addToLibrary\(prefix, paths, assets, refresh, report\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function removeFromLibrary\(prefix, paths, assets\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function clearAllOffline\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function handleLibraryMessage\(data, port\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const RUNTIME_PAGES = .*$/m)}
@@ -143,11 +148,12 @@ const harness = `
   ${grab(/^const NAVIGATE_TIMEOUT_MS = .*$/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   return {
-    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, SETTINGS,
+    RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, LIBRARY_ASSETS, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
-    langPrefixOf, precacheUrlsFor, essentialUrlsFor, precacheFor, guessLangPrefix,
+    langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
-    autoPrecacheEnabled, setAutoPrecache, libraryEntries, precachedEntries,
+    autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
+    libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
     handleLibraryMessage, networkFirst, NAVIGATE_TIMEOUT_MS,
   };
@@ -171,6 +177,18 @@ const load = (opts = {}) => {
     if (net.offline) throw new TypeError("Failed to fetch");
     // 「連得上但很慢」。networkFirst 的逾時要比這個短才有得比。
     if (opts.networkDelay) await new Promise((r) => setTimeout(r, opts.networkDelay));
+    // 預快取會去讀索引，從裡面挑核心章節那幾頁的內文圖
+    if (url.endsWith('offline-index.json')) {
+      if ((opts.notFound || []).includes(url)) return makeResponse(url, false);
+      if (opts.brokenIndex) {
+        return {
+          ok: true, url, clone: () => makeResponse(url, true),
+          json: async () => { throw new SyntaxError('unexpected token'); },
+        };
+      }
+      const index = opts.index || { sections: [] };
+      return { ok: true, url, json: async () => index, clone: () => makeResponse(url, true) };
+    }
     return makeResponse(url, !(opts.notFound || []).includes(url));
   };
   const selfStub = {
@@ -412,7 +430,10 @@ test('只存過底線那批的裝置不算有完整章節', async (load) => {
 test('一次只抓一個語系的量', async (load) => {
   const { sw, fetched } = load();
   await sw.precacheFor('en/', true);
-  assert.equal(fetched.length, sw.precacheUrlsFor('en/').length);
+  const want = sw.precacheUrlsFor('en/');
+  assert.ok(want.every((url) => fetched.includes(url)));
+  // 內文圖預設不補，所以這一輪連 offline-index.json 都不會去讀
+  assert.equal(fetched.length, want.length);
   assert.ok(
     fetched.every((url) => url.startsWith('/docs/en/') || url.startsWith('/docs/games/'))
   );
@@ -459,6 +480,79 @@ test('同一個語系不會在每次導覽都重跑一輪', async (load) => {
   assert.equal(fetched.length, 0);
 });
 
+test('核心章節的內文圖跟著預快取一起下', async (load) => {
+  // 預快取原本只抓 HTML，網站自動存的那四十幾頁離線打開全部缺圖。像「什麼是
+  // Tor？」那種以圖解為主的頁面，少了圖等於沒有存。
+  const { sw, fetched } = load({
+    index: {
+      sections: [
+        {
+          pages: [
+            { url: 'tools/what-is-tor/', assets: ['assets/images/tor.webp'] },
+            // 不在核心清單裡的那些不下，那是讀者自己去勾的
+            { url: 'scenarios/journalist/', assets: ['assets/images/j.png'] },
+          ],
+        },
+      ],
+    },
+  });
+
+  // 預設不補。那批圖有七 MB，會讓自動下載從十一 MB 變成十八 MB。
+  await sw.precacheFor('', true);
+  assert.ok(!fetched.includes('/docs/assets/images/tor.webp'));
+
+  // 讀者自己打開才補，而且只補核心章節那幾頁的
+  await sw.setPrecacheImages(true);
+  fetched.length = 0;
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/assets/images/tor.webp'));
+  assert.ok(!fetched.includes('/docs/assets/images/j.png'));
+});
+
+test('圖片開關切換之後，下一次導覽才照新設定重跑', async (load) => {
+  // 那一輪已經補過的記錄不作廢的話，開關打開也不會有動靜
+  const { sw, fetched } = load({
+    index: { sections: [{ pages: [{ url: '', assets: ['assets/images/home.png'] }] }] },
+  });
+  await sw.precacheFor('', true);
+  await sw.setPrecacheImages(true);
+  fetched.length = 0;
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/assets/images/home.png'));
+});
+
+test('清除連圖片開關也一起關掉', async (load) => {
+  const { sw } = load();
+  await sw.setPrecacheImages(true);
+  await sw.clearAllOffline();
+  assert.equal(await sw.precacheImagesEnabled(), false);
+});
+
+test('底線那批不補圖，關掉自動存的人只留得下離線閱讀頁本身', async (load) => {
+  const { sw, fetched } = load({
+    index: {
+      sections: [{ pages: [{ url: '', assets: ['assets/images/home.png'] }] }],
+    },
+  });
+  await sw.setPrecacheImages(true);
+  await sw.precacheFor('', false);
+  assert.ok(!fetched.includes('/docs/assets/images/home.png'));
+});
+
+test('索引抓不到就只是這一輪沒補圖，頁面照樣存得下來', async (load) => {
+  const { sw, fetched } = load({ notFound: ['/docs/offline-index.json'] });
+  await sw.setPrecacheImages(true);
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('索引內容壞掉也一樣，不會讓整批預快取跟著陣亡', async (load) => {
+  const { sw, fetched } = load({ brokenIndex: true });
+  await sw.setPrecacheImages(true);
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
+});
+
 test('個別頁面 404 不會讓整批預快取失敗', async (load) => {
   const missing = '/docs/zh-cn/tools/what-is-cryptpad/';
   const { sw, caches } = load({ notFound: [missing] });
@@ -491,7 +585,7 @@ test('自動預快取預設開著，關掉之後記得住', async (load) => {
 
 test('讀者勾選的頁面存進 library，回相對路徑', async (load) => {
   const { sw, caches, fetched } = load();
-  await sw.addToLibrary('', ['scenarios/journalist/', 'scenarios/activist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/', 'scenarios/activist/'], [], false, () => {});
 
   assert.deepEqual(fetched, ['/docs/scenarios/journalist/', '/docs/scenarios/activist/']);
   assert.deepEqual((await sw.libraryEntries('')).sort(), [
@@ -505,30 +599,93 @@ test('讀者勾選的頁面存進 library，回相對路徑', async (load) => {
 
 test('已經存過的不重抓，refresh 才強制重來', async (load) => {
   const { sw, fetched } = load();
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
   fetched.length = 0;
 
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
   assert.deepEqual(fetched, []);
 
-  await sw.addToLibrary('', ['scenarios/journalist/'], true, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], true, () => {});
   assert.deepEqual(fetched, ['/docs/scenarios/journalist/']);
 });
 
 test('下載過程逐頁回報進度', async (load) => {
   const { sw } = load();
   const seen = [];
-  await sw.addToLibrary('', ['a/', 'b/', 'c/'], false, (data) => seen.push(data.done));
+  await sw.addToLibrary('', ['a/', 'b/', 'c/'], [], false, (data) => seen.push(data.done));
   // 整批可能要好幾分鐘，沒有進度讀者只會看到一個不動的按鈕
   assert.deepEqual(seen, [1, 2, 3]);
 });
 
 test('移除只動 library，數得出移掉幾頁', async (load) => {
   const { sw } = load();
-  await sw.addToLibrary('', ['a/', 'b/'], false, () => {});
-  const result = await sw.removeFromLibrary('', ['a/', 'never-stored/']);
+  await sw.addToLibrary('', ['a/', 'b/'], [], false, () => {});
+  const result = await sw.removeFromLibrary('', ['a/', 'never-stored/'], []);
   assert.equal(result.removed, 1);
   assert.deepEqual(await sw.libraryEntries(''), ['b/']);
+});
+
+test('頁面的資產存進另一個 cache，不會讓「你自己選存的 N 頁」虛胖', async (load) => {
+  const { sw, caches } = load();
+  await sw.addToLibrary('', ['tools/what-is-tor/'], ['assets/images/tor.webp'], false, () => {});
+
+  assert.deepEqual(await sw.libraryEntries(''), ['tools/what-is-tor/']);
+  const assets = await caches.open(sw.LIBRARY_ASSETS);
+  assert.ok(await assets.match('/docs/assets/images/tor.webp'));
+  const pages = await caches.open(sw.LIBRARY);
+  assert.equal(await pages.match('/docs/assets/images/tor.webp'), undefined);
+});
+
+test('資產跟著語系走，跟頁面同一套路徑規則', async (load) => {
+  const { sw, caches } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/en/offline/',
+      paths: ['tools/what-is-tor/'],
+      assets: ['assets/images/tor.webp'],
+    },
+    { postMessage: () => {} }
+  );
+  const assets = await caches.open(sw.LIBRARY_ASSETS);
+  assert.ok(await assets.match('/docs/en/assets/images/tor.webp'));
+  assert.equal(await assets.match('/docs/assets/images/tor.webp'), undefined);
+});
+
+test('進度把資產也算進去，讀者才知道還剩多少', async (load) => {
+  const { sw } = load();
+  const totals = [];
+  await sw.addToLibrary('', ['a/', 'b/'], ['x.png', 'y.png', 'z.png'], false, (d) =>
+    totals.push(d.total)
+  );
+  assert.deepEqual(totals, [5, 5, 5, 5, 5]);
+});
+
+test('頁面先抓完才抓資產，中途斷線至少有幾頁是完整的', async (load) => {
+  const { sw, fetched } = load();
+  await sw.addToLibrary('', ['a/', 'b/'], ['x.png'], false, () => {});
+  assert.deepEqual(fetched, ['/docs/a/', '/docs/b/', '/docs/x.png']);
+});
+
+test('離線時拿得到自己存下來的資產', async (load) => {
+  // 少了這一條，讀者勾的頁面離線打開會缺圖，互動類的頁面連跑都跑不起來
+  const { sw, caches, net } = load();
+  await sw.addToLibrary('', ['tools/what-is-tor/'], ['assets/images/tor.webp'], false, () => {});
+  net.offline = true;
+  assert.ok(await caches.match('/docs/assets/images/tor.webp'));
+});
+
+test('移除頁面時只刪管理頁挑過的那些資產', async (load) => {
+  // 兩頁共用一張圖，移掉其中一頁不能把圖也刪了，另一頁會變破圖。
+  // 哪些能刪由管理頁算（它才知道讀者手上還留著什麼），SW 照單執行。
+  const { sw, caches } = load();
+  await sw.addToLibrary('', ['a/', 'b/'], ['shared.png', 'only-a.png'], false, () => {});
+  const result = await sw.removeFromLibrary('', ['a/'], ['only-a.png']);
+
+  assert.equal(result.removed, 1, '回報的數字只算頁面');
+  const assets = await caches.open(sw.LIBRARY_ASSETS);
+  assert.ok(await assets.match('/docs/shared.png'), '別頁還要用的圖不該被刪');
+  assert.equal(await assets.match('/docs/only-a.png'), undefined);
 });
 
 test('en 讀者勾的頁面存進 en 的路徑，不是 zh-TW 那一版', async (load) => {
@@ -553,8 +710,8 @@ test('en 讀者勾的頁面存進 en 的路徑，不是 zh-TW 那一版', async 
 
 test('狀態只回當下語系存的，別的語系不混進來', async (load) => {
   const { sw } = load();
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
-  await sw.addToLibrary('en/', ['scenarios/activist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
+  await sw.addToLibrary('en/', ['scenarios/activist/'], [], false, () => {});
 
   assert.deepEqual(await sw.libraryEntries(''), ['scenarios/journalist/']);
   assert.deepEqual(await sw.libraryEntries('en/'), ['scenarios/activist/']);
@@ -562,10 +719,10 @@ test('狀態只回當下語系存的，別的語系不混進來', async (load) =
 
 test('移除也照語系走，不會誤刪另一個語系的同名頁', async (load) => {
   const { sw } = load();
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
-  await sw.addToLibrary('en/', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
+  await sw.addToLibrary('en/', ['scenarios/journalist/'], [], false, () => {});
 
-  assert.equal((await sw.removeFromLibrary('en/', ['scenarios/journalist/'])).removed, 1);
+  assert.equal((await sw.removeFromLibrary('en/', ['scenarios/journalist/'], [])).removed, 1);
   assert.deepEqual(await sw.libraryEntries(''), ['scenarios/journalist/']);
   assert.deepEqual(await sw.libraryEntries('en/'), []);
 });
@@ -600,7 +757,7 @@ test('舊版管理頁不帶網址時退回根路徑，zh-TW 讀者不受影響',
 test('清除會清光所有快取，並把自動預快取關掉', async (load) => {
   const { sw, caches } = load();
   await sw.precacheFor('', true);
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
   const pages = await caches.open(sw.RUNTIME_PAGES);
   await pages.put('/docs/basics/metadata/', 'VISITED');
 
@@ -656,7 +813,7 @@ test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
 test('狀態查詢回得出已存的、網站存的與空間用量', async (load) => {
   const { sw } = load();
   await sw.precacheFor('', true);
-  await sw.addToLibrary('', ['scenarios/journalist/'], false, () => {});
+  await sw.addToLibrary('', ['scenarios/journalist/'], [], false, () => {});
 
   const replies = [];
   await sw.handleLibraryMessage(

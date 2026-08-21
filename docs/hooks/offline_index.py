@@ -18,9 +18,47 @@
 
 import json
 import logging
+import posixpath
+import re
+from collections import Counter
 from pathlib import Path
 
 log = logging.getLogger("mkdocs.hooks.offline_index")
+
+# 頁面自己引用的資產。存離線副本時只抓 HTML 的話，讀者離線打開會缺圖，而互動類的
+# 頁面（小工具）連跑都跑不起來，它的程式與資料就在這裡面。
+#
+# 抓 <img> 與 <script>。theme 的 CSS 與 JS 不列，那批 app shell 已經在預快取裡。
+_ASSET_PATTERNS = (
+    re.compile(r'<img[^>]+src="([^"]+)"'),
+    re.compile(r'<script[^>]+src="([^"]+)"'),
+)
+_ASSET_SKIP_PREFIXES = ("assets/javascripts/", "assets/stylesheets/")
+
+# 頁面用得到但沒寫在 HTML 標籤裡的東西（例如小工具在 JS 裡 fetch 的字典），
+# 由該頁的 frontmatter 自己宣告：
+#
+#     ---
+#     offline_assets:
+#       - utils/asian-diceware-7776.txt
+#     ---
+_ASSET_META_KEY = "offline_assets"
+
+
+def _page_assets(html, url, meta):
+    """這一頁引用到的站內資產，回相對於該語系建置根目錄的路徑。"""
+    found = set()
+    for pattern in _ASSET_PATTERNS:
+        for raw in pattern.findall(html):
+            if raw.startswith(("http://", "https://", "//", "data:")):
+                continue
+            path = posixpath.normpath(posixpath.join(url, raw)).lstrip("/")
+            if path.startswith(_ASSET_SKIP_PREFIXES):
+                continue
+            found.add(path)
+    for declared in (meta or {}).get(_ASSET_META_KEY, []) or []:
+        found.add(str(declared).lstrip("/"))
+    return sorted(found)
 
 OUTPUT_NAME = "offline-index.json"
 
@@ -103,15 +141,60 @@ def on_post_page(output, page, config, **kwargs):
             "group": group,
             "section": section,
             "bytes": len(output.encode("utf-8")),
+            # 資產等 on_post_build 再從寫出來的 HTML 解析，理由見 _collect_assets
+            "meta": dict(getattr(page, "meta", None) or {}),
         }
     )
     return output
+
+
+def _collect_assets(site_dir):
+    """從建置產物解析每一頁引用的資產。
+
+    不在 on_post_page 做，因為那時看到的還不是最終的 HTML。material 的 privacy
+    外掛會把外部圖片下載到本地再改寫網址，而它跑在這支之後，所以那個階段看到的
+    `assets/external/...` 還是原本的 https://github.com/... ，會被當成外部網址濾掉。
+    實測有兩張圖就是這樣漏掉的。改讀寫出來的檔案，看到的跟讀者拿到的是同一份。
+    """
+    for entry in _pages:
+        target = site_dir / entry["url"] / "index.html"
+        try:
+            html = target.read_text(encoding="utf-8")
+        except OSError:
+            entry["assets"] = []
+            continue
+        entry["assets"] = _page_assets(html, entry["url"], entry["meta"])
 
 
 def on_post_build(config, **kwargs):
     if not _pages:
         log.warning("offline_index: 沒有收集到任何頁面，不產生 %s", OUTPUT_NAME)
         return
+
+    site_dir = Path(config["site_dir"])
+    _collect_assets(site_dir)
+
+    # 每頁都載入的東西不算在個別頁面頭上。目前是 mkdocs-charts-plugin 那組 Vega：
+    # 每頁 808 KB，而真正畫圖表的只有三篇。那種東西跟頁面內容無關，讀者勾一頁就
+    # 揹一份不合理。門檻取一半，只有真的全站共用才會落進來。
+    counts = Counter()
+    for entry in _pages:
+        counts.update(entry["assets"])
+    shared = {path for path, n in counts.items() if n > len(_pages) / 2}
+    if shared:
+        log.info(
+            "offline_index: %d 個資產出現在過半頁面，不列進個別頁面（%s）",
+            len(shared),
+            "、".join(sorted(shared)[:3]),
+        )
+
+    def asset_size(path):
+        try:
+            return (site_dir / path).stat().st_size
+        except OSError:
+            # 建置產物裡找不到就當 0。少算大小總比讓整份索引產不出來好，
+            # 真的漏了會在 check_precache.mjs 那邊現形。
+            return 0
 
     # 依 nav 的章節分組。用 (頂層, 所屬章節) 當依據而不是 URL 的第一段：網站的
     # 「關於我們」底下是 about/、contact.md 與 help/ 三個不同目錄，照 URL 分會變成
@@ -128,8 +211,17 @@ def on_post_build(config, **kwargs):
                 "pages": [],
             },
         )
+        assets = [path for path in entry["assets"] if path not in shared]
         group["pages"].append(
-            {"url": entry["url"], "title": entry["title"], "bytes": entry["bytes"]}
+            {
+                "url": entry["url"],
+                "title": entry["title"],
+                "bytes": entry["bytes"],
+                "assets": assets,
+                # 這一頁自己的資產加起來多大。同一張圖被多頁引用時各頁都會算一次，
+                # 實際存下來只有一份，去重是管理頁的事（它才知道讀者勾了哪些）。
+                "assetBytes": sum(asset_size(path) for path in assets),
+            }
         )
 
     # nav 走過的先排。nav 上沒有的插回同一個頂層章節的尾巴，不要一律丟到最後：
@@ -153,12 +245,29 @@ def on_post_build(config, **kwargs):
                 "title": group["title"] or group["group"] or group["pages"][0]["title"],
                 "group": group["group"],
                 "bytes": sum(page["bytes"] for page in group["pages"]),
+                # 章節的資產大小去重，同一張圖在這一章出現幾次都只算一次
+                "assetBytes": sum(
+                    asset_size(path)
+                    for path in {
+                        asset for page in group["pages"] for asset in page["assets"]
+                    }
+                ),
                 "pages": group["pages"],
             }
         )
 
+    every_asset = {
+        asset
+        for section in sections
+        for page in section["pages"]
+        for asset in page["assets"]
+    }
     index = {
         "lang": config["theme"]["language"],
+        # 每個資產多大。管理頁要算的是「勾這幾頁實際會下載多少」，資產要先去重才
+        # 知道，所以給一張全域的表。只有每頁的合計是不夠的：同一張圖被三頁引用時，
+        # 管理頁沒有辦法從合計裡把它拆出來，只能估，而估出來會差到兩倍以上。
+        "assets": {path: asset_size(path) for path in sorted(every_asset)},
         "sections": sections,
     }
     target = Path(config["site_dir"]) / OUTPUT_NAME
@@ -167,6 +276,11 @@ def on_post_build(config, **kwargs):
     )
     total = sum(len(section["pages"]) for section in sections)
     log.info(
-        "offline_index: %s 收錄 %d 頁、%d 個章節", OUTPUT_NAME, total, len(sections)
+        "offline_index: %s 收錄 %d 頁、%d 個章節、%d 個資產（去重後 %.1f MB）",
+        OUTPUT_NAME,
+        total,
+        len(sections),
+        len(every_asset),
+        sum(asset_size(path) for path in every_asset) / 1024 / 1024,
     )
     _pages.clear()

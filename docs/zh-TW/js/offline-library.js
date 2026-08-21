@@ -175,6 +175,8 @@
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
       autoLabel: "自動存下目前語言的核心章節",
       autoHint: "關掉之後就不再自動存章節。這一頁本身與它需要的樣式仍會留著（約 0.5 MB），沒有網路時你才進得來。你自己勾的頁面不受影響。",
+      imagesLabel: "連同核心章節的內文圖一起存",
+      imagesHint: "網站自動存的那批章節預設只存文字，離線打開會缺圖。打開這個選項會連內文圖一起下載，大約多 7 MB，下次連上網時開始補。你自己勾的頁面本來就會連圖一起存。",
       refresh: "更新已存的內容",
       refreshing: "更新中",
       clear: "清除所有離線內容",
@@ -212,6 +214,8 @@
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
       autoLabel: "自动存下当前语言的核心章节",
       autoHint: "关掉之后就不再自动存章节。这一页本身与它需要的样式仍会留着（约 0.5 MB），没有网络时你才进得来。你自己勾的页面不受影响。",
+      imagesLabel: "连同核心章节的内文图一起存",
+      imagesHint: "网站自动存的那批章节预设只存文字，离线打开会缺图。打开这个选项会连内文图一起下载，大约多 7 MB，下次连上网时开始补。你自己勾的页面本来就会连图一起存。",
       refresh: "更新已存的内容",
       refreshing: "更新中",
       clear: "清除所有离线内容",
@@ -249,6 +253,8 @@
       usageFree: "This site uses {used} on this device, with {free} still available",
       autoLabel: "Automatically store the core chapters for the current language",
       autoHint: "Turning this off stops the site from storing chapters. This page itself and the styles it needs stay (about 0.5 MB), so you can still get here without a network. Pages you ticked are unaffected.",
+      imagesLabel: "Also store the images in the core chapters",
+      imagesHint: "The chapters the site stores automatically are text only, so they lose their images offline. Turning this on downloads those images too, about 7 MB more, starting the next time you are online. Pages you tick already come with their images.",
       refresh: "Update what is stored",
       refreshing: "Updating",
       clear: "Clear all offline content",
@@ -378,6 +384,7 @@
     saved: new Set(),
     precached: new Set(),
     autoPrecache: true,
+    precacheImages: false,
     estimate: null,
     // 讀者這一輪勾選的變動，套用之前不動快取
     add: new Set(),
@@ -404,6 +411,7 @@
       state.saved = new Set(data.saved || []);
       state.precached = new Set(data.precached || []);
       state.autoPrecache = data.autoPrecache !== false;
+      state.precacheImages = data.precacheImages === true;
       state.estimate = data.estimate || null;
       state.add.clear();
       state.remove.clear();
@@ -465,9 +473,55 @@
   // 所以往上一層。跟 indexUrl 同一個算法。
   const pageHref = (url) => new URL("../" + url, location.href).href;
 
+  // 網址對到索引裡那一筆。勾一次就掃一遍整份索引太浪費，建一次表用到底，
+  // 索引重讀時由 setIndex 清掉。
+  let pageIndex = null;
+  function pageFor(url) {
+    if (!pageIndex) {
+      pageIndex = new Map();
+      for (const section of (state.index && state.index.sections) || []) {
+        for (const page of section.pages) pageIndex.set(page.url, page);
+      }
+    }
+    return pageIndex.get(url);
+  }
+
+  // 這批頁面需要哪些資產，去重。同一張圖被好幾頁引用時只會出現一次。
+  function assetsOf(paths) {
+    const out = new Set();
+    for (const path of paths) {
+      const page = pageFor(path);
+      for (const asset of (page && page.assets) || []) out.add(asset);
+    }
+    return out;
+  }
+
+  // 一批頁面連同資產實際要下載多少。資產去重，頁面照 HTML 大小加總。
+  function weightOf(paths) {
+    let total = 0;
+    for (const path of paths) {
+      const page = pageFor(path);
+      if (page) total += page.bytes || 0;
+    }
+    for (const asset of assetsOf(paths)) {
+      // 索引沒有逐一資產的大小，只有每頁的合計，這裡用該頁的平均值估。
+      // 差距只影響顯示，實際下載的是同一批檔案。
+      total += assetWeight(asset);
+    }
+    return total;
+  }
+
+  // 資產多大，讀索引給的那張全域表。原本從每頁的合計除以資產數去估，同一張圖被
+  // 好幾頁引用時會取到最大的那個估計值，實測差到兩倍以上，畫面上的數字對不起來。
+  function assetWeight(asset) {
+    const table = (state.index && state.index.assets) || {};
+    return table[asset] || 0;
+  }
+
   function renderSection(section, label, pages) {
     const stored = pages.filter((page) => isStored(page.url)).length;
-    const bytes = pages.reduce((total, page) => total + page.bytes, 0);
+    // 章節大小含資產，資產去重。讀者看到的要是「勾這一章實際會下載多少」。
+    const bytes = weightOf(pages.map((page) => page.url));
     const wrapper = el("div", "ol-section");
     const open = state.open.has(section.key);
 
@@ -533,7 +587,7 @@
       if (!inCache) title.title = t.notStored;
       item.appendChild(title);
 
-      item.appendChild(el("span", "ol-size", size(page.bytes)));
+      item.appendChild(el("span", "ol-size", size(page.bytes + (page.assetBytes || 0))));
       if (state.precached.has(page.url)) {
         item.appendChild(el("span", "ol-badge", t.badgeAuto));
       }
@@ -564,16 +618,37 @@
     const applyButton = button(t.apply, "ol-primary", () => {
         const toAdd = Array.from(state.add);
         const toRemove = Array.from(state.remove);
-        runTask(t.applying, toAdd.length, (report) =>
+        // 移掉一頁不代表它的圖可以丟。留著的頁面還用得到的就不動，
+        // 不然讀者移掉一篇文章，另一篇引用同一張圖的就變成破圖。
+        const staying = new Set(state.saved);
+        for (const path of toRemove) staying.delete(path);
+        for (const path of toAdd) staying.add(path);
+        const keep = assetsOf(Array.from(staying));
+        const dropAssets = Array.from(assetsOf(toRemove)).filter((a) => !keep.has(a));
+        const addAssets = Array.from(assetsOf(toAdd));
+        runTask(t.applying, toAdd.length + addAssets.length, (report) =>
           Promise.resolve()
             .then(() =>
               toRemove.length
-                ? ask({ type: "OFFLINE_REMOVE", url: location.href, paths: toRemove })
+                ? ask({
+                    type: "OFFLINE_REMOVE",
+                    url: location.href,
+                    paths: toRemove,
+                    assets: dropAssets,
+                  })
                 : { removed: 0 }
             )
             .then((removeResult) =>
               (toAdd.length
-                ? ask({ type: "OFFLINE_ADD", url: location.href, paths: toAdd }, report)
+                ? ask(
+                    {
+                      type: "OFFLINE_ADD",
+                      url: location.href,
+                      paths: toAdd,
+                      assets: addAssets,
+                    },
+                    report
+                  )
                 : Promise.resolve({ ok: 0, failed: 0 })
               ).then((addResult) => ({
                 message:
@@ -589,8 +664,10 @@
     });
     applyButton.disabled = state.busy;
     bar.appendChild(applyButton);
+    const pending = fill("pending", { add: state.add.size, remove: state.remove.size });
+    const weight = weightOf(Array.from(state.add));
     bar.appendChild(
-      el("span", "ol-meta", fill("pending", { add: state.add.size, remove: state.remove.size }))
+      el("span", "ol-meta", weight ? pending + "・" + size(weight) : pending)
     );
     return bar;
   }
@@ -615,6 +692,23 @@
     root.appendChild(autoLabel);
     root.appendChild(el("p", "ol-hint", t.autoHint));
 
+    // 圖片是另一個開關。預設只存文字，那批圖有七 MB，會讓自動下載的量多六成，
+    // 而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
+    const imagesLabel = el("label", "ol-auto");
+    const imagesBox = document.createElement("input");
+    imagesBox.type = "checkbox";
+    imagesBox.checked = state.precacheImages;
+    imagesBox.disabled = !state.autoPrecache;
+    imagesBox.addEventListener("change", () => {
+      ask({ type: "OFFLINE_IMAGES", url: location.href, enabled: imagesBox.checked })
+        .then(refreshStatus)
+        .then(() => render());
+    });
+    imagesLabel.appendChild(imagesBox);
+    imagesLabel.appendChild(document.createTextNode(" " + t.imagesLabel));
+    root.appendChild(imagesLabel);
+    root.appendChild(el("p", "ol-hint", t.imagesHint));
+
     root.appendChild(renderActions());
 
     if (state.index && state.swReady) {
@@ -633,19 +727,22 @@
 
     // 更新的對象是讀者自己勾存的那批。網站自動存的那批跟著網站版本走，讀者
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
-    const refresh = button(t.refresh, null, () =>
-      runTask(t.refreshing, Array.from(state.saved).length, (report) =>
+    const refresh = button(t.refresh, null, () => {
+      const paths = Array.from(state.saved);
+      const assets = Array.from(assetsOf(paths));
+      return runTask(t.refreshing, paths.length + assets.length, (report) =>
         ask(
           {
             type: "OFFLINE_ADD",
             url: location.href,
-            paths: Array.from(state.saved),
+            paths: paths,
+            assets: assets,
             refresh: true,
           },
           report
         )
-      )
-    );
+      );
+    });
     refresh.disabled = state.busy || state.saved.size === 0;
     row.appendChild(refresh);
 
@@ -830,6 +927,7 @@
     .catch(() => null)
     .then((index) => {
       state.index = index;
+      pageIndex = null;
       // 索引跟 service worker 那半是各跑各的，誰先到都有可能。篩選先開起來的話
       // 那時還沒有章節可以展開，索引到了補做一次。
       if (state.onlyStored) setOnlyStored(true);

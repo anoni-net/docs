@@ -41,6 +41,10 @@ The first time you open this site in an ordinary browser, the core chapters for 
 
 Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored.
 
+The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
+
+Pages you tick yourself are not affected by that option. They always come with their images, and the size shown on screen already counts them.
+
 The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
 
 "Clear all offline content" above removes both what the site stored and what you picked, and stops the site from storing new chapters. Turn the switch back on above to resume.
