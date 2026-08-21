@@ -173,6 +173,39 @@ def run_lint(body: str, tmpdir: pathlib.Path, english: bool = False) -> int:
     return int(m.group(1)) + int(m.group(2))
 
 
+def run_lint_cn(body: str, tmpdir: pathlib.Path) -> int:
+    """把檔案寫進含 /zh-CN/ 的路徑，兩岸用詞規則會據此放行。
+
+    判斷邏輯在 docs_style_lint.is_simplified_doc。
+    """
+    d = tmpdir / "zh-CN"
+    d.mkdir(exist_ok=True)
+    f = d / "case.md"
+    f.write_text(f"---\ntitle: t\n---\n\n# t\n\n{body}\n", encoding="utf-8")
+    out = subprocess.run(
+        [sys.executable, str(LINT), str(f)], capture_output=True, text=True
+    ).stdout
+    m = SUMMARY.search(out)
+    if not m:
+        raise AssertionError(f"無法解析 linter 輸出：\n{out}")
+    return int(m.group(1)) + int(m.group(2))
+
+
+# zh-CN 的案例。兩岸用詞那組規則的判準是「臺灣用什麼」，對簡體版沒有意義，
+# 所以預設不套。例外是兩岸都不慣用的詞（目前只有「站台」）。
+#
+# 這幾條原本靠 regex 多半用正體專有字形碰巧擋住，簡繁同形的「硬件」「端口」
+# 「兼容」漏掉了，zh-CN 全站因此吃到 137 個誤報。
+# (本文, 應該被攔下來嗎, 說明)
+CN_CASES: list[tuple[str, bool, str]] = [
+    ("这台设备的硬件规格。", False, "簡繁同形的「硬件」不該對 zh-CN 誤報"),
+    ("把端口设定改掉。", False, "簡繁同形的「端口」不該對 zh-CN 誤報"),
+    ("这个格式跟旧版兼容。", False, "簡繁同形的「兼容」不該對 zh-CN 誤報"),
+    ("这个站台的说明。", True, "「站台」兩岸都不慣用，簡體版照樣要攔"),
+    ("拿到之后就可以用。", True, "口語詞規則兩版都適用，不受這次改動影響"),
+]
+
+
 # docs/en 的案例。跑在含 /en/ 的路徑上，套 PROSE_RULES_EN。
 # (本文, 應該被攔下來嗎, 說明)
 EN_CASES: list[tuple[str, bool, str]] = [
@@ -246,6 +279,15 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
             )
 
+    for body, should_flag, label in CN_CASES:
+        n = run_lint_cn(body, tmpdir)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
+            )
+
     for body, should_flag, label in EN_CASES:
         n = run_lint(body, tmpdir, english=True)
         flagged = n > 0
@@ -273,7 +315,7 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
             )
 
-    total = (len(CASES) + 1 + len(EN_CASES) + len(HEADING_CASES)
+    total = (len(CASES) + 1 + len(CN_CASES) + len(EN_CASES) + len(HEADING_CASES)
              + len(ZH_HEADING_CASES))
     if failures:
         print(f"失敗 {len(failures)} / {total}\n")
