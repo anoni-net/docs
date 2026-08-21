@@ -51,11 +51,11 @@ The full audit report is available here: [torvpn_cure53_audit.pdf](https://blog.
 
 ## Why this matters specifically in Taiwan
 
-**Independent audits are how trust is built, not assumed.** Taiwan has a technically engaged digital-rights and civic tech community — groups like g0v contributors, COSCUP participants, and digital journalists who recommend tools to people with real exposure. For those communities, "Tor is secure" is not a sufficient answer. A PDF with specific vulnerability IDs and a remediation roadmap is. This audit provides that foundation.
+**Independent audits are how trust is built, not assumed**: Taiwan has a technically engaged digital-rights and civic tech community — groups like g0v contributors, COSCUP participants, and digital journalists who recommend tools to people with real exposure. For those communities, "Tor is secure" is not a sufficient answer. A PDF with specific vulnerability IDs and a remediation roadmap is. This audit provides that foundation.
 
-**DNS manipulation is not a hypothetical.** The DNS handling weakness identified in this audit is particularly worth noting in Taiwan's context. OONI measurement data from Taiwan shows that DNS interference does occur — not at the scale seen in heavily censored environments, but enough that understanding how a privacy tool behaves under DNS pressure has practical meaning.
+**DNS manipulation is not a hypothetical**: The DNS handling weakness identified in this audit is particularly worth noting in Taiwan's context. OONI measurement data from Taiwan shows that DNS interference does occur — not at the scale seen in heavily censored environments, but enough that understanding how a privacy tool behaves under DNS pressure has practical meaning.
 
-**Plaintext configuration storage is a legal and practical concern.** Taiwan's Personal Data Protection Act places obligations on how applications handle user data stored on devices. The audit finding that TorVPN stores configuration in plaintext isn't just a technical footnote — it's a compliance-adjacent concern worth factoring into deployment recommendations, especially for users in higher-risk scenarios like journalists or activists.
+**Plaintext configuration storage is a legal and practical concern**: Taiwan's Personal Data Protection Act places obligations on how applications handle user data stored on devices. The audit finding that TorVPN stores configuration in plaintext isn't just a technical footnote — it's a compliance-adjacent concern worth factoring into deployment recommendations, especially for users in higher-risk scenarios like journalists or activists.
 
 !!! info "Source"
 

@@ -12,8 +12,8 @@ icon: material/clipboard-check-outline
 
 Two situations that bring people here:
 
-- **Preparing to leave a controlling relationship while still living there.** The other person can still reach your phone and laptop during that period. Answering the three questions makes it plain: the device you are protecting and the person you are protecting against are under the same roof, and the budget question is really about not being noticed.
-- **Newly joined an organisation and told to take security seriously, with no idea where to start.** Answer the questions, then read the mismatch section. Most people find they picked a pile of adversaries without a matching budget. That list is the starting point.
+- **Preparing to leave a controlling relationship while still living there**: The other person can still reach your phone and laptop during that period. Answering the three questions makes it plain: the device you are protecting and the person you are protecting against are under the same roof, and the budget question is really about not being noticed.
+- **Newly joined an organisation and told to take security seriously, with no idea where to start**: Answer the questions, then read the mismatch section. Most people find they picked a pile of adversaries without a matching budget. That list is the starting point.
 
 ## What this page does
 

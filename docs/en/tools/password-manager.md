@@ -129,11 +129,11 @@ Where to use one: high-sensitivity accounts, meaning personal email, banking, go
 
 ## Common mistakes
 
-- **Forgetting to delete the export.** Exports from a browser or an old manager are plaintext CSV or JSON. Leaving the file behind after importing means it is sitting there when the machine is stolen or the file leaks
-- **Two vaults, unsynchronized.** One vault on a home device, another at work, new entries added to only one. Pick one
-- **Reusing the master password.** Even something similar to an old account's password counts as reuse
-- **Vault files in unencrypted shared storage.** `.kdbx` is encrypted, and a shared cloud folder still widens exposure. Add your own layer of encryption
-- **No two-factor on the password manager account itself.** Bitwarden and 1Password accounts need two-factor, ideally a hardware key
+- **Forgetting to delete the export**: Exports from a browser or an old manager are plaintext CSV or JSON. Leaving the file behind after importing means it is sitting there when the machine is stolen or the file leaks
+- **Two vaults, unsynchronized**: One vault on a home device, another at work, new entries added to only one. Pick one
+- **Reusing the master password**: Even something similar to an old account's password counts as reuse
+- **Vault files in unencrypted shared storage**: `.kdbx` is encrypted, and a shared cloud folder still widens exposure. Add your own layer of encryption
+- **No two-factor on the password manager account itself**: Bitwarden and 1Password accounts need two-factor, ideally a hardware key
 
 ## Backup and recovery
 
@@ -160,10 +160,10 @@ Several situations recur across the region that international guides do not usua
 
 **Taiwan**:
 
-- **SMS two-factor is the norm and is not safe.** Banking (online banking, card OTP) and government services mostly rely on SMS. Switch to TOTP wherever a service supports it and keep the recovery codes in the vault
-- **SIM swap has become common.** Ask your carrier to require an in-person visit plus additional verification for number changes, so an attacker cannot move your number by calling support
+- **SMS two-factor is the norm and is not safe**: Banking (online banking, card OTP) and government services mostly rely on SMS. Switch to TOTP wherever a service supports it and keep the recovery codes in the vault
+- **SIM swap has become common**: Ask your carrier to require an in-person visit plus additional verification for number changes, so an attacker cannot move your number by calling support
 - **Certificate-based identity**: the PINs and recovery codes for the Citizen Digital Certificate, its mobile equivalent, and the health insurance card can live in the vault, while the master password stays separate from all of them
-- **Apple ID is a critical account.** Sign in with Apple fronts many services, so a compromised Apple ID cascades. Two-factor and Recovery Contacts are not optional
+- **Apple ID is a critical account**: Sign in with Apple fronts many services, so a compromised Apple ID cascades. Two-factor and Recovery Contacts are not optional
 - **After a compromise**: the account compromise section of the [emergency help page](../help/index.md) covers recovery. This page is prevention
 
 **Hong Kong**:

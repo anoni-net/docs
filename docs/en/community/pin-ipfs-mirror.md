@@ -231,9 +231,9 @@ Peering here is one-way: the community node has no matching entry, so keeping th
 
 ## Maintenance and notes
 
-- **It keeps up automatically.** When the site changes its CID, the next scheduled run pins the new version and drops the old one. You do nothing.
-- **Disk use stays flat.** After unpinning the old version the script runs a garbage collection, so only the latest version takes space. A full mirror is about 220 MB (measured August 2026).
-- **It won't lose the copy you have.** The script pins the new version successfully before dropping the old one, and keeps your existing copy if resolving or downloading fails.
+- **It keeps up automatically**: When the site changes its CID, the next scheduled run pins the new version and drops the old one. You do nothing.
+- **Disk use stays flat**: After unpinning the old version the script runs a garbage collection, so only the latest version takes space. A full mirror is about 220 MB (measured August 2026).
+- **It won't lose the copy you have**: The script pins the new version successfully before dropping the old one, and keeps your existing copy if resolving or downloading fails.
 - **To stop helping:** unpin the current version and remove the schedule. It doesn't affect any other node.
 - **Privacy and risk:** what you pin is public documentation, so there's no privacy concern. Offering IPFS pinning carries different legal risk across jurisdictions, so weigh that for where you operate.
 

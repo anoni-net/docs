@@ -86,11 +86,11 @@ For deletion resistance, IPFS. For connection anonymity, onion. For both, mirror
 
 Before picking a combination, two places where the decentralization promise does not fully hold:
 
-- **IPFS provides no connection anonymity at all.** The PeerID is long-lived, DHT lookups happen on the public network, and third parties can see which IP address is looking for which CID. This page is about how a publisher chooses to host. The full exposure analysis is in [networks mistaken for anonymity](./mistaken-for-anonymity.md)
-- **IPFS content survives only while pinned.** Centralized pinning services, or decentralized storage protocols requiring token incentives, both put "permanent" back in the hands of a third party
-- **Onion services depend on Tor.** Heavy blocking of relays, or the Tor Project ceasing operation, would affect the whole ecosystem
-- **The entry points are mostly still centralized services.** People arrive through a public gateway or Tor Browser, and those entry points are themselves attack surface
-- **Legal grey areas.** Running a Tor exit node or offering IPFS pinning carries different risk in different jurisdictions
+- **IPFS provides no connection anonymity at all**: The PeerID is long-lived, DHT lookups happen on the public network, and third parties can see which IP address is looking for which CID. This page is about how a publisher chooses to host. The full exposure analysis is in [networks mistaken for anonymity](./mistaken-for-anonymity.md)
+- **IPFS content survives only while pinned**: Centralized pinning services, or decentralized storage protocols requiring token incentives, both put "permanent" back in the hands of a third party
+- **Onion services depend on Tor**: Heavy blocking of relays, or the Tor Project ceasing operation, would affect the whole ecosystem
+- **The entry points are mostly still centralized services**: People arrive through a public gateway or Tor Browser, and those entry points are themselves attack surface
+- **Legal grey areas**: Running a Tor exit node or offering IPFS pinning carries different risk in different jurisdictions
 
 ## Combinations that work
 

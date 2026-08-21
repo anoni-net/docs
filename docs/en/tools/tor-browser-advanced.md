@@ -30,9 +30,9 @@ Tor hides which network path your traffic takes. It does nothing about a website
 
 Tor Browser's answer is to make its users hard to tell apart. Rather than making everyone literally identical (impractical), it reduces the number of distinguishable "buckets" for each measurable trait, and standardizes the obvious giveaways like the User-Agent string so a large set of users reports the same thing[^2]. The protection only holds if you don't break out of the crowd. The mistakes that do:
 
-- **Don't install extensions.** Add-ons beyond what ships built in make your browser a near-unique combination almost immediately. The fingerprinting risk outweighs nearly any feature an extension adds.
-- **Don't maximize or manually resize the window.** Window dimensions are a strong fingerprint. Tor Browser uses **letterboxing**, adding gray margins so the content area rounds to a multiple of 200×100 pixels and you share a size bucket with other users[^2]. It activates automatically when you resize, but the safest move is to leave the default window alone rather than rely on it.
-- **Don't change fonts or zoom level.** Both are readable by sites and both make you more distinguishable. The defaults are part of the shared profile.
+- **Don't install extensions**: Add-ons beyond what ships built in make your browser a near-unique combination almost immediately. The fingerprinting risk outweighs nearly any feature an extension adds.
+- **Don't maximize or manually resize the window**: Window dimensions are a strong fingerprint. Tor Browser uses **letterboxing**, adding gray margins so the content area rounds to a multiple of 200×100 pixels and you share a size bucket with other users[^2]. It activates automatically when you resize, but the safest move is to leave the default window alone rather than rely on it.
+- **Don't change fonts or zoom level**: Both are readable by sites and both make you more distinguishable. The defaults are part of the shared profile.
 
 The rule of thumb: the more you personalize Tor Browser, the more personally identifiable it becomes. Leave it boring.
 
@@ -62,9 +62,9 @@ If you're switching between two separate personas, **New Identity** is the one y
 
 Most people who lose anonymity on Tor don't lose it to a broken setting. They lose it to behavior the browser can't fix:
 
-- **Logging into an account tied to your real name.** A personal Gmail, a real-name social account, a bank login: the instant you sign in, that session and everything around it attach to your identity. Logging in over Tor is fine when the account *is* a pseudonym you mean to use; the danger is mixing a real-name account into anonymous activity.
-- **Mixing identities in one session.** Acting as persona A and persona B without a New Identity in between lets cookies and state link them. Keep personas in separate, deliberately reset sessions.
-- **Downloading a document and opening it outside Tor.** A PDF or office file can fetch remote content when opened in a normal application, reaching out over your ordinary connection and revealing your real IP. If you must open downloaded documents, do it offline, or on a system built for it such as [Tails or Qubes](./tails-vs-whonix-vs-qubes.md). The Tor Project warns about this directly on the download screen.
+- **Logging into an account tied to your real name**: A personal Gmail, a real-name social account, a bank login: the instant you sign in, that session and everything around it attach to your identity. Logging in over Tor is fine when the account *is* a pseudonym you mean to use; the danger is mixing a real-name account into anonymous activity.
+- **Mixing identities in one session**: Acting as persona A and persona B without a New Identity in between lets cookies and state link them. Keep personas in separate, deliberately reset sessions.
+- **Downloading a document and opening it outside Tor**: A PDF or office file can fetch remote content when opened in a normal application, reaching out over your ordinary connection and revealing your real IP. If you must open downloaded documents, do it offline, or on a system built for it such as [Tails or Qubes](./tails-vs-whonix-vs-qubes.md). The Tor Project warns about this directly on the download screen.
 
 These come back to the same idea covered in [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md): Tor protects the *who-talked-to-what* of a connection, and you give that away the moment your own actions reattach a name to it.
 

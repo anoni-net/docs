@@ -46,8 +46,8 @@ Generative AI offered inside mainland China — DeepSeek, Doubao, Kimi, Tongyi a
 
 The measures took effect on 15 August 2023, issued by the Cyberspace Administration with six other agencies[^cn-genai]. Three points bear on work use:
 
-- **Users are verified.** Providers must confirm user identity, so your prompts there are not pseudonymous.
-- **Inputs and outputs are retained.** The rules require keeping records of user input and generated content. That is categorically different from a vendor setting you can switch off: one is a product option, the other a legal obligation.
+- **Users are verified**: Providers must confirm user identity, so your prompts there are not pseudonymous.
+- **Inputs and outputs are retained**: The rules require keeping records of user input and generated content. That is categorically different from a vendor setting you can switch off: one is a product option, the other a legal obligation.
 - **Services with "public opinion attributes or social mobilization capacity" require a security assessment and algorithm filing**, with content moderation built in.
 
 So the question changes. Outside the mainland you ask whether input trains the model and how long it is kept. Inside, the first question is whether you are willing for this content to be tied to your verified identity and retained. A business tier and a DPA solve the vendor-training problem elsewhere; they do not address statutory retention and lawful access here. For sensitive material, local or self-hosted models are worth considerably more in this context than outside it.
@@ -87,9 +87,9 @@ These are configuration problems rather than habit problems: check what an exten
 - **Unpublished business information**: financials, deals, product specs, internal strategy
 - **Credentials and keys**: API keys, passwords, connection strings, certificates. Treat anything pasted as burned and rotate it.
 - **Personal data of customers and colleagues**: names, national ID numbers, addresses, medical and financial records
-- **Material other people entrusted to you.** The most-overlooked item. You can decide to hand over your own data; you have no standing to consent on a third party's behalf. Sources, clients, interviewees, and people who came to you for help are the clearest cases. See [journalists and source protection](../scenarios/journalist.md) on the consent question.
+- **Material other people entrusted to you**: The most-overlooked item. You can decide to hand over your own data; you have no standing to consent on a third party's behalf. Sources, clients, interviewees, and people who came to you for help are the clearest cases. See [journalists and source protection](../scenarios/journalist.md) on the consent question.
 - **Legally or contractually protected material**: medical records, case files, anything under an NDA
-- **Combinations that re-identify.** Individually innocuous details that together point to one person.
+- **Combinations that re-identify**: Individually innocuous details that together point to one person.
 
 ## Before you paste
 
@@ -107,9 +107,9 @@ Local is not automatically safe. The conversation log still sits on your machine
 
 ## The regional angle
 
-- **Jurisdiction of storage matters as much as the policy.** A provider's promise not to train on your data says nothing about which government can compel disclosure from the servers holding it. For cross-border work, check the data processing agreement and subprocessor list, not just the privacy page.
-- **Reaching the service can itself be the exposure.** Where major AI services are blocked, users route around the block, and in some jurisdictions the circumvention carries more legal risk than the content of the query. See [cross-border travel and device searches](../scenarios/asia-travel.md).
-- **A sensitive query is sensitive before it is answered.** "How do I protect a source in country X" reveals the work in progress regardless of what comes back. This is the reasoning behind keeping such queries on local or self-hosted models.
+- **Jurisdiction of storage matters as much as the policy**: A provider's promise not to train on your data says nothing about which government can compel disclosure from the servers holding it. For cross-border work, check the data processing agreement and subprocessor list, not just the privacy page.
+- **Reaching the service can itself be the exposure**: Where major AI services are blocked, users route around the block, and in some jurisdictions the circumvention carries more legal risk than the content of the query. See [cross-border travel and device searches](../scenarios/asia-travel.md).
+- **A sensitive query is sensitive before it is answered**: "How do I protect a source in country X" reveals the work in progress regardless of what comes back. This is the reasoning behind keeping such queries on local or self-hosted models.
 
 ## What to ask a provider
 

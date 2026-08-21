@@ -154,9 +154,9 @@ Laying the two measurements' `queries` side by side shows exactly what the verdi
 
 Checking versions before reading the spec saves a good deal of confusion:
 
-- **`data_format_version` is currently `0.2.0`.** Envelope field definitions are stable, so [df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"} can be read directly against real data.
-- **The `test_version` actually in circulation for `web_connectivity` is `0.4.3`.** [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} has been updated to describe the v0.5 algorithm, while production still runs mostly on v0.4. The spec requires a new algorithm to use different test_keys fields, so the v0.4 definitions stay compatible and the field readings above apply to both versions.
-- **Fields starting with `x_` are not in the spec.** Real data contains `x_dns_runtime`, `x_status`, `x_th_runtime` and others. They are experimental implementation extensions that come and go between versions, so analysis code should not depend on them.
+- **`data_format_version` is currently `0.2.0`**: Envelope field definitions are stable, so [df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"} can be read directly against real data.
+- **The `test_version` actually in circulation for `web_connectivity` is `0.4.3`**: [ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} has been updated to describe the v0.5 algorithm, while production still runs mostly on v0.4. The spec requires a new algorithm to use different test_keys fields, so the v0.4 definitions stay compatible and the field readings above apply to both versions.
+- **Fields starting with `x_` are not in the spec**: Real data contains `x_dns_runtime`, `x_status`, `x_th_runtime` and others. They are experimental implementation extensions that come and go between versions, so analysis code should not depend on them.
 
 The spec's master branch has had no new merges since 2025-06, though issues and pull requests are still under discussion, including proposals for an ICMP data format and a DPI fragmentation nettest. The spec works well as a stable reference for now. Link back to the upstream text when citing it, rather than copying specification content that will drift once upstream moves.
 

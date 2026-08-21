@@ -16,12 +16,12 @@ This is not legal advice. Charitable-solicitation, political-donation, anti-mone
 
 "Isn't a donation just an account number and a receipt?" For neutral causes (disaster relief, education, animal medical care) that is roughly true. The situations below are not:
 
-- **The cause itself is sensitive.** Human rights, gender and sexuality, labor rights, indigenous land, cross-strait issues: donors worry their stance will be seen by an employer, family, or elders.
-- **A small community supporting a small cause.** Ethnic minorities, sexual minorities, parent networks for minor children: if a donor list leaks, the re-identification risk is far higher than for a general-purpose charity.
-- **Cross-border support for a persecuted group abroad.** Giving to a Hong Kong journalists' fund, or to groups supporting people in Myanmar or Xinjiang, can put a donor's money trail in reach of a foreign jurisdiction's investigators. Hong Kong readers should also see the warning box below.
-- **Internal supporters who cannot be seen.** Civil servants, teachers, and senior corporate staff may be unable to back a cause publicly but want to express support with money.
-- **The reverse risk of a data breach.** Even if an organization protects its donor roster perfectly, one security incident can expose every supporter at once.
-- **Payment processors can cut a channel off unilaterally.** PayPal, Stripe, and Patreon have repeatedly closed advocacy and creator accounts under vague rules, and some markets carry structural exclusion on top of that. Beyond anonymity, plan a fallback in case your main rail gets cut off: see [when financial companies act as censors](../blog/posts/2026-financial-companies-as-censors.md).
+- **The cause itself is sensitive**: Human rights, gender and sexuality, labor rights, indigenous land, cross-strait issues: donors worry their stance will be seen by an employer, family, or elders.
+- **A small community supporting a small cause**: Ethnic minorities, sexual minorities, parent networks for minor children: if a donor list leaks, the re-identification risk is far higher than for a general-purpose charity.
+- **Cross-border support for a persecuted group abroad**: Giving to a Hong Kong journalists' fund, or to groups supporting people in Myanmar or Xinjiang, can put a donor's money trail in reach of a foreign jurisdiction's investigators. Hong Kong readers should also see the warning box below.
+- **Internal supporters who cannot be seen**: Civil servants, teachers, and senior corporate staff may be unable to back a cause publicly but want to express support with money.
+- **The reverse risk of a data breach**: Even if an organization protects its donor roster perfectly, one security incident can expose every supporter at once.
+- **Payment processors can cut a channel off unilaterally**: PayPal, Stripe, and Patreon have repeatedly closed advocacy and creator accounts under vague rules, and some markets carry structural exclusion on top of that. Beyond anonymity, plan a fallback in case your main rail gets cut off: see [when financial companies act as censors](../blog/posts/2026-financial-companies-as-censors.md).
 
 Put differently, a donor's identifying information is tied to their politics, sexuality, family structure, and community relationships, which makes it far more sensitive than an ordinary purchase record. Offering an optional anonymous channel is a basic form of respect for the people who support you. Everything below serves three requirements that have to hold at the same time — lawful, auditable, and protective of the vulnerable — which we return to at the end.
 
@@ -49,10 +49,10 @@ Every rail is a trade-off; there is no single "most anonymous" option. In practi
 
 Settle these before you accept the first anonymous donation, not after:
 
-- **A public acceptance policy.** What sources you accept, what you refuse, and who has the final call. Common refusal conditions: an unusually large amount from an unknown source, a donor clearly at odds with the organization's values, or any source your local political-donation or charitable-solicitation law forbids.
-- **Separation of ledger and wallet authority.** Who can see amounts, who can move private keys, who is responsible for disclosure. For crypto, use at least a 2-of-3 multisig (a wallet that needs 2 of 3 held keys to move any funds), and make sure at least one key-holder is outside the executive team (a board member or an external accountant).
-- **An external transparency report.** Publish aggregate income and spending; do not disclose individual donors. The more solid this report is, the stronger the legitimacy of the anonymous channel when a regulator or a journalist asks.
-- **A plan for compelled disclosure.** Decide in advance what you would do if a court or regulator ordered you to hand over donor identities: what you actually hold, what you genuinely do not hold, and who calls a lawyer. Designing the channel so that you *cannot* identify anonymous donors is stronger protection than promising that you will not, because there is then nothing to compel.
+- **A public acceptance policy**: What sources you accept, what you refuse, and who has the final call. Common refusal conditions: an unusually large amount from an unknown source, a donor clearly at odds with the organization's values, or any source your local political-donation or charitable-solicitation law forbids.
+- **Separation of ledger and wallet authority**: Who can see amounts, who can move private keys, who is responsible for disclosure. For crypto, use at least a 2-of-3 multisig (a wallet that needs 2 of 3 held keys to move any funds), and make sure at least one key-holder is outside the executive team (a board member or an external accountant).
+- **An external transparency report**: Publish aggregate income and spending; do not disclose individual donors. The more solid this report is, the stronger the legitimacy of the anonymous channel when a regulator or a journalist asks.
+- **A plan for compelled disclosure**: Decide in advance what you would do if a court or regulator ordered you to hand over donor identities: what you actually hold, what you genuinely do not hold, and who calls a lawyer. Designing the channel so that you *cannot* identify anonymous donors is stronger protection than promising that you will not, because there is then nothing to compel.
 
 Write these into your internal charter as a standing rule.
 
@@ -60,9 +60,9 @@ Write these into your internal charter as a standing rule.
 
 Not every organization needs, or is suited to, accepting crypto. For a small domestic group, cash plus prepaid is often the most practical default, and most groups can stop here.
 
-- **Public mailbox, on-site anonymous box.** Set out a physical donation box, opened after an event by two or more people who count on the spot and record immediately. Depending on your jurisdiction, a public box may fall under "soliciting from the general public" and require prior permission, so check first.
-- **Convenience-store payment codes.** Through a third-party payment processor, issue a payment code that a donor pays in cash at a store; the organization sees only the code, not a name. Limits: the platform layer may still keep a record, and per-transaction caps usually apply.
-- **Prepaid gift cards for cross-border giving.** When supporting an organization abroad, prepaid gift cards are sometimes one of the few workable options: the donor buys a card with cash and sends the serial number over an encrypted channel (Signal, OnionShare). This method has a strong association with scams, so explain the intended use clearly when you publish it.
+- **Public mailbox, on-site anonymous box**: Set out a physical donation box, opened after an event by two or more people who count on the spot and record immediately. Depending on your jurisdiction, a public box may fall under "soliciting from the general public" and require prior permission, so check first.
+- **Convenience-store payment codes**: Through a third-party payment processor, issue a payment code that a donor pays in cash at a store; the organization sees only the code, not a name. Limits: the platform layer may still keep a record, and per-transaction caps usually apply.
+- **Prepaid gift cards for cross-border giving**: When supporting an organization abroad, prepaid gift cards are sometimes one of the few workable options: the donor buys a card with cash and sends the serial number over an encrypted channel (Signal, OnionShare). This method has a strong association with scams, so explain the intended use clearly when you publish it.
 
 ## How organizers accept cryptocurrency donations
 
@@ -70,8 +70,8 @@ Most groups will be fine with the cash-and-prepaid combination above. This secti
 
 ### Self-custody versus custodial
 
-- **Self-custody.** The organization holds its own private keys; common implementations are Bitcoin Core, Electrum, or Sparrow (BTC), MetaMask, Frame, or Rabby (ETH and stablecoins), and Cake Wallet or Feather (Monero). Pick one your team can actually operate, and for an organization holding funds as a treasury, keep the signing keys on hardware wallets (Ledger, Trezor, or Coldcard) rather than in a browser or phone hot wallet. Upside: no third-party dependence and no KYC (the identity verification a financial service requires, which leaves a record of the donor). Downside: key management is entirely the organization's responsibility, and a lost key means lost funds.
-- **Custodial.** The organization receives donations through a regulated exchange's institutional account, then moves them to self-custody. Upside: support desk and insurance. Downside: the receiving account has been through KYC, and donor information may be retained by the exchange.
+- **Self-custody**: The organization holds its own private keys; common implementations are Bitcoin Core, Electrum, or Sparrow (BTC), MetaMask, Frame, or Rabby (ETH and stablecoins), and Cake Wallet or Feather (Monero). Pick one your team can actually operate, and for an organization holding funds as a treasury, keep the signing keys on hardware wallets (Ledger, Trezor, or Coldcard) rather than in a browser or phone hot wallet. Upside: no third-party dependence and no KYC (the identity verification a financial service requires, which leaves a record of the donor). Downside: key management is entirely the organization's responsibility, and a lost key means lost funds.
+- **Custodial**: The organization receives donations through a regulated exchange's institutional account, then moves them to self-custody. Upside: support desk and insurance. Downside: the receiving account has been through KYC, and donor information may be retained by the exchange.
 
 The practical recommendation is self-custody as the default, custodial as a backup: small everyday amounts to a self-custody wallet, large amounts or fast fiat conversion through an institutional account.
 
@@ -81,28 +81,28 @@ Multisig is the keyword here. A 2-of-3 design splits keys across three roles (fo
 
 How you publish the donation address on your own site is an easily overlooked design question:
 
-- **HTTPS is the baseline, an onion mirror is the upgrade.** When a donor connects to your site from abroad, or on a monitored network, HTTPS protects the content but not the fact that they connected to *you*. An onion mirror makes the connection itself anonymous (anoni.net's own site has an onion entry point).
-- **Do not hard-code the address into an image.** A QR-code image generated once is painful to change years later. Publish plain text plus a dynamically generated QR code rendered from your database. If you do not have the engineering resources for that, the low-tech fallback is to publish a small number of addresses as plain text and update them by hand on a set schedule, and never bake an address into an image you cannot easily edit.
-- **Give a fresh address each time (HD wallet).** BTC and ETH both support hierarchical wallets; a distinct address per donor avoids the correlation that address reuse invites. This raises your reconciliation burden, so confirm your accounting tooling can keep up first.
-- **Plan reconciliation in advance.** Real-time notification helps (Mempool.space offers WebSocket address subscriptions; Etherscan has no native webhook, so you either poll it or use a third-party service such as Alchemy or Moralis). Without engineering resources, the low-tech fallback is a person checking a block explorer against your reconciliation list on a fixed schedule, say weekly.
+- **HTTPS is the baseline, an onion mirror is the upgrade**: When a donor connects to your site from abroad, or on a monitored network, HTTPS protects the content but not the fact that they connected to *you*. An onion mirror makes the connection itself anonymous (anoni.net's own site has an onion entry point).
+- **Do not hard-code the address into an image**: A QR-code image generated once is painful to change years later. Publish plain text plus a dynamically generated QR code rendered from your database. If you do not have the engineering resources for that, the low-tech fallback is to publish a small number of addresses as plain text and update them by hand on a set schedule, and never bake an address into an image you cannot easily edit.
+- **Give a fresh address each time (HD wallet)**: BTC and ETH both support hierarchical wallets; a distinct address per donor avoids the correlation that address reuse invites. This raises your reconciliation burden, so confirm your accounting tooling can keep up first.
+- **Plan reconciliation in advance**: Real-time notification helps (Mempool.space offers WebSocket address subscriptions; Etherscan has no native webhook, so you either poll it or use a third-party service such as Alchemy or Moralis). Without engineering resources, the low-tech fallback is a person checking a block explorer against your reconciliation list on a fixed schedule, say weekly.
 
 ### Conversion and accounting
 
 Handling crypto after receipt is where the real compliance difficulty lives:
 
-- **When to convert.** Volatility is high; not converting could mean a gain or a loss of half the value. Many small organizations set a default policy of converting to fiat within seven days of receipt, then adjust case by case.
-- **Recognition timing and valuation.** Under ordinary accounting, the recognition point for crypto received is the fair market value in local currency at the moment of actual receipt. Keep the transaction screenshot, block-explorer link, and the exchange-rate source at that time.
-- **Receipts.** When a donor chooses anonymity, the organization usually cannot issue a receipt eligible for a tax deduction. State this plainly on the public donation page: choosing anonymity means no named receipt, and donors who want a deduction should use the bank-transfer path.
+- **When to convert**: Volatility is high; not converting could mean a gain or a loss of half the value. Many small organizations set a default policy of converting to fiat within seven days of receipt, then adjust case by case.
+- **Recognition timing and valuation**: Under ordinary accounting, the recognition point for crypto received is the fair market value in local currency at the moment of actual receipt. Keep the transaction screenshot, block-explorer link, and the exchange-rate source at that time.
+- **Receipts**: When a donor chooses anonymity, the organization usually cannot issue a receipt eligible for a tax deduction. State this plainly on the public donation page: choosing anonymity means no named receipt, and donors who want a deduction should use the bank-transfer path.
 
 Large crypto donations also carry a due-diligence dimension over the *source* of funds, which we return to in the Tornado Cash section below.
 
 ## Common first-time mistakes organizers make
 
-- **Listing only a crypto address with no usage note.** A donor seeing a string of characters does not know whether you can actually use it, whether you convert immediately, or whether you reconcile. Put a short note next to the address (use, reconciliation cadence, whether a receipt is available).
-- **Concentrating all multisig keys in the executive team.** A 2-of-3 where all three signers sit in the same office is not risk distribution. At least one key must go to someone outside the executive team.
-- **Opening an anonymous channel without talking to the regulator first.** In the grey zones of solicitation and political-donation law, explaining after the fact costs far more than consulting beforehand. Depending on your jurisdiction, the relevant body may be the charity or societies registrar, the tax authority, or the financial regulator; a half-hour call can save months of administrative back-and-forth.
+- **Listing only a crypto address with no usage note**: A donor seeing a string of characters does not know whether you can actually use it, whether you convert immediately, or whether you reconcile. Put a short note next to the address (use, reconciliation cadence, whether a receipt is available).
+- **Concentrating all multisig keys in the executive team**: A 2-of-3 where all three signers sit in the same office is not risk distribution. At least one key must go to someone outside the executive team.
+- **Opening an anonymous channel without talking to the regulator first**: In the grey zones of solicitation and political-donation law, explaining after the fact costs far more than consulting beforehand. Depending on your jurisdiction, the relevant body may be the charity or societies registrar, the tax authority, or the financial regulator; a half-hour call can save months of administrative back-and-forth.
 - **Assuming "anonymous" means "no record."** Your external financial report, your internal reconciliation, and the public-by-design blockchain all leave records. Anonymity only reaches "we do not identify who the individual donor is"; the money still exists in the report, the reconciliation, and on-chain.
-- **Ignoring whether the recipient can lawfully receive the money in cross-border giving.** Before sending money abroad, confirm the recipient can lawfully receive it under their local rules. A permissive home jurisdiction does not mean the other side is the same.
+- **Ignoring whether the recipient can lawfully receive the money in cross-border giving**: Before sending money abroad, confirm the recipient can lawfully receive it under their local rules. A permissive home jurisdiction does not mean the other side is the same.
 
 The common root of these mistakes is "build the tech first, think about policy and process later." Reverse the order: decide who you serve, which regulators you face, and how you separate internal authority, then decide whether and how to build the optional anonymous channel.
 
@@ -136,9 +136,9 @@ First, to be clear: for small domestic support, cash, a store code, or a prepaid
 
 Say a donor wants to give a small amount (roughly USD 15 to 150) to an advocacy organization abroad while maximizing anonymity:
 
-1. **Acquire the privacy coin, carefully.** This is the hardest step, and the one that most often quietly breaks the anonymity of everything after it. If you buy mainstream coins (BTC, ETH) through a KYC exchange and then convert, that purchase already ties the coins to your identity. To avoid that, acquire Monero (XMR) through a decentralized exchange (Bisq or Haveno, which route trades over Tor and hold no custody of your funds) or a local peer-to-peer swap; peer-to-peer options change over time, so check current community discussion. A simpler alternative that shifts the work to the recipient: ask the organization to accept Bitcoin directly and let them convert it on their end.
-2. **Initialize a self-custody wallet.** Install Cake Wallet or Feather (both community-recommended Monero clients), write the 25-word seed down offline, and store it somewhere it will not be stumbled upon. Do not keep the seed in the cloud or in a password manager linked to your main accounts.
-3. **Send.** Get the organization's Monero address. If they also offer an onion mirror, connect over Tor Browser (see [Tor Browser advanced settings](../tools/tor-browser-advanced.md)) to the onion version to confirm the address and avoid a man-in-the-middle. Note the transaction hash and time, but you do not need to tell the organization.
+1. **Acquire the privacy coin, carefully**: This is the hardest step, and the one that most often quietly breaks the anonymity of everything after it. If you buy mainstream coins (BTC, ETH) through a KYC exchange and then convert, that purchase already ties the coins to your identity. To avoid that, acquire Monero (XMR) through a decentralized exchange (Bisq or Haveno, which route trades over Tor and hold no custody of your funds) or a local peer-to-peer swap; peer-to-peer options change over time, so check current community discussion. A simpler alternative that shifts the work to the recipient: ask the organization to accept Bitcoin directly and let them convert it on their end.
+2. **Initialize a self-custody wallet**: Install Cake Wallet or Feather (both community-recommended Monero clients), write the 25-word seed down offline, and store it somewhere it will not be stumbled upon. Do not keep the seed in the cloud or in a password manager linked to your main accounts.
+3. **Send**: Get the organization's Monero address. If they also offer an onion mirror, connect over Tor Browser (see [Tor Browser advanced settings](../tools/tor-browser-advanced.md)) to the onion version to confirm the address and avoid a man-in-the-middle. Note the transaction hash and time, but you do not need to tell the organization.
 
 The step most often underestimated is the first, acquiring the coin without leaving an identity trail. Many donors reach it, find the bar too high, and give up, which is exactly why low-barrier rails like prepaid cards and cash cannot be fully replaced by crypto.
 
@@ -158,9 +158,9 @@ The most important recent indicator of the legal risk around crypto anonymity to
 
 ### Three takeaways for advocacy organizations
 
-- **A "mixer" and a "privacy coin" are two different legal categories.** Tornado Cash obscures the source after the fact (a mixer); Monero has privacy by design at the protocol layer. The former is more readily characterized as "helping to conceal the source of funds"; the latter more often reads as simply using a tool that happens to offer privacy. This line is not written in statute; it is a judgment built from case law and administrative practice.
-- **A recipient's due-diligence duty over the source of funds.** When your organization receives a large crypto donation, even if you cannot technically identify the donor, you may still be expected to make a reasonable judgment about the source. A policy of "an unusual amount triggers internal review" is safer than pretending not to see.
-- **Tool neutrality is not user neutrality.** A privacy tool is lawful in most jurisdictions, but using it for a specific act can be unlawful. Receiving small donations from ordinary supporters with Monero is neutral use; receiving laundering proceeds at scale with the same tool is not. What determines the legal risk is what you did with the tool.
+- **A "mixer" and a "privacy coin" are two different legal categories**: Tornado Cash obscures the source after the fact (a mixer); Monero has privacy by design at the protocol layer. The former is more readily characterized as "helping to conceal the source of funds"; the latter more often reads as simply using a tool that happens to offer privacy. This line is not written in statute; it is a judgment built from case law and administrative practice.
+- **A recipient's due-diligence duty over the source of funds**: When your organization receives a large crypto donation, even if you cannot technically identify the donor, you may still be expected to make a reasonable judgment about the source. A policy of "an unusual amount triggers internal review" is safer than pretending not to see.
+- **Tool neutrality is not user neutrality**: A privacy tool is lawful in most jurisdictions, but using it for a specific act can be unlawful. Receiving small donations from ordinary supporters with Monero is neutral use; receiving laundering proceeds at scale with the same tool is not. What determines the legal risk is what you did with the tool.
 
 These are US-derived judgments. Whether the same reasoning applies where you are is a question for a local lawyer. For ongoing legal analysis, follow [Coin Center](https://www.coincenter.org/){target="_blank"} and [EFF](https://www.eff.org/){target="_blank"}.
 
@@ -168,9 +168,9 @@ These are US-derived judgments. Whether the same reasoning applies where you are
 
 Lawful, auditable, and protective of the vulnerable have to be true at the same time:
 
-- **Lawful.** Disclose what should be disclosed to regulators. AML, tax, solicitation, and political-donation rules all carry reporting duties; do not break them for the sake of anonymity.
-- **Auditable.** An external transparency report for your community and donors: publish aggregate income and spending, categorize use clearly, disclose no individual donor. The better this report is, the more stable the legitimacy of the anonymous channel.
-- **Protective of the vulnerable.** Individual donors are not identified. This is the reason the anonymous channel exists, and every design choice comes back to it.
+- **Lawful**: Disclose what should be disclosed to regulators. AML, tax, solicitation, and political-donation rules all carry reporting duties; do not break them for the sake of anonymity.
+- **Auditable**: An external transparency report for your community and donors: publish aggregate income and spending, categorize use clearly, disclose no individual donor. The better this report is, the more stable the legitimacy of the anonymous channel.
+- **Protective of the vulnerable**: Individual donors are not identified. This is the reason the anonymous channel exists, and every design choice comes back to it.
 
 These are not mutually exclusive. A well-designed anonymous channel satisfies all three; drop any one and the value of the other two is discounted.
 
@@ -182,7 +182,7 @@ Statutory detail is where "anonymous donation" stops being universal. We have fi
 - **Hong Kong & Macau** (followed, highest risk). See the warning box above. Since the 2020 National Security Law, the binding constraint is the *purpose* of the funds, not the cleanliness of the channel, and cross-border donors should weigh extraterritorial reach. Where a scenario assumes a functioning local NGO safety net, that assumption often no longer holds; route instead to international organizations, as the [activist](./activist.md) and [journalist](./journalist.md) scenarios do.
 - **Singapore** (followed, in-region verification wanted). Charitable fundraising and political donations are separately regulated, foreign political donations are restricted, and Singpass, a deeply integrated national digital identity, means a domestic electronic rail is rarely as anonymous as it looks. Treat the specifics as pending confirmation by someone on the ground.
 - **Malaysia** (followed, in-region verification wanted). Societies registration and the enforcement environment are the threads that matter for an advocacy organization here; the practical detail needs an in-region co-author.
-- **The diaspora and cross-border givers.** Often the most relevant layer for English-preferring readers: your money may cross two or three jurisdictions, and the strictest one governs. For example, a donor in Malaysia giving to a Hong Kong organization through a US-based exchange touches three legal regimes at once. See [cross-border travel and device searches in Asia](./asia-travel.md) for the adjacent OPSEC.
+- **The diaspora and cross-border givers**: Often the most relevant layer for English-preferring readers: your money may cross two or three jurisdictions, and the strictest one governs. For example, a donor in Malaysia giving to a Hong Kong organization through a US-based exchange touches three legal regimes at once. See [cross-border travel and device searches in Asia](./asia-travel.md) for the adjacent OPSEC.
 
 The universal principle underneath all of them: check your own jurisdiction's charitable-solicitation and political-donation statutes, and remember that *anonymous does not mean unreported*. The organization still reports aggregate anonymous income even when it cannot name the donor.
 

@@ -20,11 +20,11 @@ Version 2, [launched in October 2024](https://ooni.org/post/2024-launch-ooni-run
 
 Before you create or share an OONI Run link, a few things make it safer:
 
-- **The creator's email is bound to the link.** OONI uses the creator's email as the basis for helpers to trust the link's origin; it is shown on the link card and stored on the backend. Use an address you are willing to have associated with the campaign.
-- **Results are fully public.** Every measurement appears on OONI Explorer, including the helper's ASN and a timestamp. OONI does not publish individual IPs, but ASN plus time can already suggest a helper's rough location.
-- **Do not casually hand the link to helpers in high-censorship regions.** Before sharing, assess whether running OONI Probe is lawful where the helper is, whether their network operator might flag the traffic, and whether the helper understands that their ASN and a timestamp become public.
-- **A VPN or Tor left on will not give you "local" results.** OONI measures the network the test device actually uses; with a VPN on you measure the VPN provider's location, and over Tor you measure the exit node's network, neither of which reflects the helper's local blocking.
-- **Data persists after the link expires.** The link is a distribution mechanism; once expired, helpers can no longer join, but measurements already collected stay in OONI's public database permanently.
+- **The creator's email is bound to the link**: OONI uses the creator's email as the basis for helpers to trust the link's origin; it is shown on the link card and stored on the backend. Use an address you are willing to have associated with the campaign.
+- **Results are fully public**: Every measurement appears on OONI Explorer, including the helper's ASN and a timestamp. OONI does not publish individual IPs, but ASN plus time can already suggest a helper's rough location.
+- **Do not casually hand the link to helpers in high-censorship regions**: Before sharing, assess whether running OONI Probe is lawful where the helper is, whether their network operator might flag the traffic, and whether the helper understands that their ASN and a timestamp become public.
+- **A VPN or Tor left on will not give you "local" results**: OONI measures the network the test device actually uses; with a VPN on you measure the VPN provider's location, and over Tor you measure the exit node's network, neither of which reflects the helper's local blocking.
+- **Data persists after the link expires**: The link is a distribution mechanism; once expired, helpers can no longer join, but measurements already collected stay in OONI's public database permanently.
 
 To assess these risks more systematically, see [how to build a threat model](../basics/threat-model.md).
 

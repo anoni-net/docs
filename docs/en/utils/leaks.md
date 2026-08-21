@@ -18,7 +18,7 @@ A new phone, a fresh reinstall, or someone telling you a particular browser is s
 
 - **After leaving a relationship where you were monitored**, you have a new device and want to know whether you still look like the person you were. Open this page and note the short code at the top, then open it on the old device and compare. Different codes mean the two devices do not match on fingerprinting.
 - **After a digital security workshop** where the trainer said Tor Browser is safer but did not say how. Note the time zone and fonts in your usual browser, then open the same page in Tor Browser. The time zone becomes UTC and the font list collapses to one set. You see the difference yourself.
-- **Explaining to someone else why this matters.** Having this page open beats a slide deck. Every number on screen came from their own device.
+- **Explaining to someone else why this matters**: Having this page open beats a slide deck. Every number on screen came from their own device.
 
 ## Individually dull, collectively identifying
 

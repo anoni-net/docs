@@ -28,9 +28,9 @@ Censorship is not one action. At least four operate at once: pre-publication fil
 
 Citizen Lab's empirical work on WeChat has established several mechanics that cut against common assumptions:
 
-- **Keyword filtering follows the registration origin.** Accounts registered with a mainland phone number have censorship enabled, and it persists even after the account is later linked to an international number[^one-app].
-- **Images are not a safe carrier.** WeChat runs two filtering algorithms in parallel, one using OCR to catch text inside images, another matching visual similarity against a blacklist[^image-filter].
-- **Blocking is silent.** The sender receives no indication that a message failed to arrive, so you believe it went through[^image-filter].
+- **Keyword filtering follows the registration origin**: Accounts registered with a mainland phone number have censorship enabled, and it persists even after the account is later linked to an international number[^one-app].
+- **Images are not a safe carrier**: WeChat runs two filtering algorithms in parallel, one using OCR to catch text inside images, another matching visual similarity against a blacklist[^image-filter].
+- **Blocking is silent**: The sender receives no indication that a message failed to arrive, so you believe it went through[^image-filter].
 - **Content between non-mainland accounts is analyzed too**, and that content has been used to train the censorship system applied to mainland users[^they-watch].
 
 The last point deserves a pause: international users who assume they are outside the system have been supplying its training data.
@@ -41,11 +41,11 @@ The target set is widening. Campaigns from 2025 onward have covered "spreading p
 
 ## Where the risk lands
 
-- **Account level.** Suspension, muting, throttling, plus knock-on effects to other accounts tied to the same verified identity.
-- **Traceability.** Deleted content is not gone. Platform-side records, your own device, cloud backups, and other people's screenshots are all copies. Deleting later limits further spread; it does not recall what already happened.
-- **Personal.** From a summons and a written undertaking through administrative measures to criminal process. Intensity varies sharply with topic, scale, and timing, and tolerance drops during sensitive periods.
-- **Collective.** Group administrators carry responsibility for group content. Family members and employers are contacted as a pressure route. Other members of the same group can be affected. Each person who forwards carries their own act.
-- **Onward spread.** Once others forward, screenshot, or remix your content, scale leaves your control while attribution can still return to the origin. This is routinely underweighted when deciding whether to post at all.
+- **Account level**: Suspension, muting, throttling, plus knock-on effects to other accounts tied to the same verified identity.
+- **Traceability**: Deleted content is not gone. Platform-side records, your own device, cloud backups, and other people's screenshots are all copies. Deleting later limits further spread; it does not recall what already happened.
+- **Personal**: From a summons and a written undertaking through administrative measures to criminal process. Intensity varies sharply with topic, scale, and timing, and tolerance drops during sensitive periods.
+- **Collective**: Group administrators carry responsibility for group content. Family members and employers are contacted as a pressure route. Other members of the same group can be affected. Each person who forwards carries their own act.
+- **Onward spread**: Once others forward, screenshot, or remix your content, scale leaves your control while attribution can still return to the origin. This is routinely underweighted when deciding whether to post at all.
 
 ## Reach and safety pull against each other
 
@@ -97,10 +97,10 @@ Exposure is far smaller than public posting, though not zero: their handset, the
 A few specifics:
 
 - **In person beats online**, provided you have chosen both the venue and who else is present. Their workplace is unsuitable, and both handsets, the car, and any smart speaker are present too. Don't use WeChat for the conversation or for arranging it, for the reasons in the mechanics section above.
-- **Leave no record of who.** Names of people you have talked to belong on no list, including on your own device.
-- **Agree the terms beforehand.** Ask them not to raise it in group chats, not to forward, and what to say if asked. This is the cheapest step in the whole scenario and the one with the most certain effect.
-- **Work out in advance how to answer "where did you see this".** That question almost always comes, and the answer exposes what you read and what you use to read it. Grounding it in something they can look up themselves is safer than describing your channel.
-- **One person at a time beats broadcasting.** Group forwarding puts everyone in the same risk pool and usually works less well.
+- **Leave no record of who**: Names of people you have talked to belong on no list, including on your own device.
+- **Agree the terms beforehand**: Ask them not to raise it in group chats, not to forward, and what to say if asked. This is the cheapest step in the whole scenario and the one with the most certain effect.
+- **Work out in advance how to answer "where did you see this"**: That question almost always comes, and the answer exposes what you read and what you use to read it. Grounding it in something they can look up themselves is safer than describing your channel.
+- **One person at a time beats broadcasting**: Group forwarding puts everyone in the same risk pool and usually works less well.
 
 For the *effective* half, the reframing described under established practices applies here too: starting from something they already care about, and using material from official outlets or verifiable local facts, works better than citing foreign reporting and exposes less.
 
@@ -117,14 +117,14 @@ Submitting material to these projects usually preserves it more reliably than re
 
 ## What this page does not do
 
-- **No circumvention playbook.** Variation techniques change quickly and date badly, and a specific list leads people to overestimate their safety while they, not we, carry the outcome.
-- **No judgment of anyone's choice.** Whether and how to publish belongs to the person in the situation.
-- **No safety guarantee.** This describes known mechanisms and observed responses in an environment that keeps changing.
+- **No circumvention playbook**: Variation techniques change quickly and date badly, and a specific list leads people to overestimate their safety while they, not we, carry the outcome.
+- **No judgment of anyone's choice**: Whether and how to publish belongs to the person in the situation.
+- **No safety guarantee**: This describes known mechanisms and observed responses in an environment that keeps changing.
 
 ## Three things you can do now
 
 1. **Decide which side you're on before acting** — preserving a record, persuading specific people, or maximizing spread — because the costs differ
-2. **To make material survive, submit it to the archiving projects above.** That step also needs circumvention and its exposure has to be counted in, but it is more reliable than reposting into domestic platforms yourself
+2. **To make material survive, submit it to the archiving projects above**: That step also needs circumvention and its exposure has to be counted in, but it is more reliable than reposting into domestic platforms yourself
 3. **Save the help contacts below in advance**, because there is no time to look them up when it matters
 
 ## Getting help

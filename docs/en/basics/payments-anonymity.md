@@ -24,9 +24,9 @@ The community's stance on anonymous payment has always been clear: lawfulness is
 
 A money trail is a particularly "sticky" kind of metadata:
 
-- **It is inseparably tied to a real identity.** Opening a bank account, a credit card, or an e-payment account all require a real name and proof of identity, the legally mandated KYC (Know Your Customer, the identity check a financial institution runs when you open an account).
-- **It is retained for a long time.** Financial institutions are legally required to keep transaction records for years, far longer than you could ever manage to erase other kinds of metadata.
-- **It cross-references across institutions.** The party you transfer to also leaves a record at their bank; both directions are logged.
+- **It is inseparably tied to a real identity**: Opening a bank account, a credit card, or an e-payment account all require a real name and proof of identity, the legally mandated KYC (Know Your Customer, the identity check a financial institution runs when you open an account).
+- **It is retained for a long time**: Financial institutions are legally required to keep transaction records for years, far longer than you could ever manage to erase other kinds of metadata.
+- **It cross-references across institutions**: The party you transfer to also leaves a record at their bank; both directions are logged.
 - **It can be produced under legal process** — pulled from the institution once authorities have the right paperwork.
 
 Together, these four properties make money-trail metadata harder to erase than communication metadata or browsing metadata. You can hide your connection with Tor, encrypt your messages with Signal, leave no device trace with Tails, and yet the subscription you buy to keep a Tor-related service running, the donation to a developer, the consultation fee to a lawyer, each one leaves a record that maps back to you.
@@ -52,10 +52,10 @@ Go back to the era before electronic payment, and cash's anonymity is actually c
 
 This is anonymous-payment infrastructure that humans have quietly enjoyed for two centuries, but it has been narrowing in recent years:
 
-- **Cashless policy.** Some countries (Sweden, Norway) have sharply reduced everyday cash use.
-- **Large-amount limits.** Many jurisdictions require cash transactions above a threshold to be reported.
-- **Convenience crowding cash out.** QR-code payment, card rewards, and e-receipt lottery registration lead users to give up anonymity voluntarily; India's UPI boom is the largest example, adding enormous digital-payment volume on top of an economy that still runs on cash.
-- **No use for remote and online payments.** Streaming subscriptions, software, and cross-border purchases cannot use cash.
+- **Cashless policy**: Some countries (Sweden, Norway) have sharply reduced everyday cash use.
+- **Large-amount limits**: Many jurisdictions require cash transactions above a threshold to be reported.
+- **Convenience crowding cash out**: QR-code payment, card rewards, and e-receipt lottery registration lead users to give up anonymity voluntarily; India's UPI boom is the largest example, adding enormous digital-payment volume on top of an economy that still runs on cash.
+- **No use for remote and online payments**: Streaming subscriptions, software, and cross-border purchases cannot use cash.
 
 ## What cash cannot do
 

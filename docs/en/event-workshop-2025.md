@@ -109,7 +109,7 @@ This workshop will be supported and guided by the local open-source community "[
 
 !!! warning "Reminder"
 
-    - **A laptop is required during the event.** Please remember to bring your device when registering for this workshop. There will be temporary internet access available on-site for use during the workshop.
+    - **A laptop is required during the event**: Please remember to bring your device when registering for this workshop. There will be temporary internet access available on-site for use during the workshop.
 
 ### Workshop Lecture
 

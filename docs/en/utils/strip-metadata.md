@@ -13,8 +13,8 @@ icon: material/image-off-outline
 
 Two situations that come up:
 
-- **You have just moved somewhere new and want to send a friend a photo to say you are safe.** Phones write GPS coordinates into the file by default. Your friend sees a photo; anyone looking for you sees a coordinate. Strip it before sending and the picture is unaffected.
-- **You photographed something at an event and want to submit it to a newsroom.** The capture time and coordinates together point at who was standing where, and when. Strip them and the desk still receives the same image.
+- **You have just moved somewhere new and want to send a friend a photo to say you are safe**: Phones write GPS coordinates into the file by default. Your friend sees a photo; anyone looking for you sees a coordinate. Strip it before sending and the picture is unaffected.
+- **You photographed something at an event and want to submit it to a newsroom**: The capture time and coordinates together point at who was standing where, and when. Strip them and the desk still receives the same image.
 
 ## When this helps
 

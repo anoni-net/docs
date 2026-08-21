@@ -17,7 +17,7 @@ This page does not walk through per-platform setup screens; those steps change w
     - Encrypted DNS needs a hostname or a URL. Most platforms' ordinary DNS field only takes an IP, and an IP means plaintext. Windows is the exception — it matches the IP against a built-in list of known DoH servers
     - After encryption, the party seeing your queries moves from your ISP to the resolver operator. It gets smaller, not zero
     - Choosing a resolver means choosing whose logs you are comfortable being in: jurisdiction, retention, independent audit, and whether it filters
-    - **"Enabled" in the UI does not mean encrypted right now.** The default modes in Windows, Firefox and Chrome all fall back to plaintext on failure, without telling you
+    - **"Enabled" in the UI does not mean encrypted right now**: The default modes in Windows, Firefox and Chrome all fall back to plaintext on failure, without telling you
     - System-level and browser-level are separate settings. Changing one leaves the other alone
     - Test after you set it. Looking at what you typed cannot detect a silent fallback
 

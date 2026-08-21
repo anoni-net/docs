@@ -59,10 +59,10 @@ A proxy's IP goes on a blacklist once censors find it, so it is worth holding tw
 
 ## What to know before using one
 
-- **The operator can see your IP and connection times.** They cannot see message content, who you talk to, or group membership — all of that is inside end-to-end encryption. Whose proxy you use decides who holds the record that "this IP connected to Signal at this time."
-- **A proxy does not hide that you use Signal.** To your ISP the traffic looks like an ordinary website, but where using Signal at all is the risk, a proxy does not solve that problem. Hiding the behaviour itself calls for [Tor Browser](./tor-browser-advanced.md) or Orbot on mobile.
-- **Publicly posted links have short lives.** Signal's own advice is to announce publicly that you run a proxy and hand out the address by direct message. An address that circulates widely on social platforms usually gets blocked quickly.
-- **Provenance matters.** Anyone can run a proxy, so an address should come from an organization or person you recognize rather than an anonymous list.
+- **The operator can see your IP and connection times**: They cannot see message content, who you talk to, or group membership — all of that is inside end-to-end encryption. Whose proxy you use decides who holds the record that "this IP connected to Signal at this time."
+- **A proxy does not hide that you use Signal**: To your ISP the traffic looks like an ordinary website, but where using Signal at all is the risk, a proxy does not solve that problem. Hiding the behaviour itself calls for [Tor Browser](./tor-browser-advanced.md) or Orbot on mobile.
+- **Publicly posted links have short lives**: Signal's own advice is to announce publicly that you run a proxy and hand out the address by direct message. An address that circulates widely on social platforms usually gets blocked quickly.
+- **Provenance matters**: Anyone can run a proxy, so an address should come from an organization or person you recognize rather than an anonymous list.
 
 ## The anoni.net community proxy
 

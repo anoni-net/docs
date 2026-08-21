@@ -14,9 +14,9 @@ What follows covers four layers: platforms and data brokers, telecom carriers, s
 
 ## How to read this page
 
-- **Capability is not the same as being used on you.** Cost per target differs by orders of magnitude across these four layers. Commercial collection is close to free, so it covers everyone; a commercial spyware licence runs to tens of thousands of dollars, so the target list is short.
-- **Capability moves fast, institutions move slowly.** Retention periods and warrant thresholds are more stable than the technical picture, so weight them more heavily when judging long-term risk.
-- **Absence of evidence is not evidence of absence.** Only claims with a public record appear here. Where nothing could be verified, the page says so.
+- **Capability is not the same as being used on you**: Cost per target differs by orders of magnitude across these four layers. Commercial collection is close to free, so it covers everyone; a commercial spyware licence runs to tens of thousands of dollars, so the target list is short.
+- **Capability moves fast, institutions move slowly**: Retention periods and warrant thresholds are more stable than the technical picture, so weight them more heavily when judging long-term risk.
+- **Absence of evidence is not evidence of absence**: Only claims with a public record appear here. Where nothing could be verified, the page says so.
 
 Two adversaries fall outside this page. Fraud and account takeover cost ordinary people the most money in practice; see [what an ordinary person should actually do](../scenarios/everyday-baseline.md). An employer-issued device, or tracking software a partner or parent installs on your phone, costs a few dollars or is built in already, and sits far closer to most people than any state-level capability; see [domestic violence and tech-enabled abuse](../scenarios/domestic-violence.md).
 
@@ -122,9 +122,9 @@ Licenses are expensive and operating the tooling takes staff, so buyers choose t
 
 ### Common misconceptions
 
-- **Turning it off and on fixes it.** Most infection chains do not persist, so a reboot clears that particular implant. What it clears is only that one instance; the same chain can reinfect immediately, so rebooting is not a defence.
-- **A new phone means a clean slate.** Replacing the handset deals with the implant already on it, not with being targeted again.
-- **Antivirus software will catch it.** Consumer antivirus does nothing at this layer.
+- **Turning it off and on fixes it**: Most infection chains do not persist, so a reboot clears that particular implant. What it clears is only that one instance; the same chain can reinfect immediately, so rebooting is not a defence.
+- **A new phone means a clean slate**: Replacing the handset deals with the implant already on it, not with being targeted again.
+- **Antivirus software will catch it**: Consumer antivirus does nothing at this layer.
 
 ### The one thing an ordinary person can do
 
@@ -134,10 +134,10 @@ Lockdown Mode on iPhone and Advanced Protection on Android switch off a batch of
 
 Each layer has one action you can take yourself.
 
-- **Platform layer.** Open Google's My Ad Center and Meta's ad preferences to see the topics the system thinks you care about, then use data export for the full record. The steps are in [how platforms collect your data](./platform-tracking.md). Nothing else on this site shows you your own profile as directly.
-- **Telecom layer.** Request your own call detail records from your carrier; the scope is broadly what a retrieval order would produce.
-- **State and law enforcement layer.** Under Article 15 of Taiwan's Communication Security and Surveillance Act, the executing agency must report after surveillance ends and the court notifies the person who was surveilled. Notification can be deferred where it would defeat the purpose, but the grounds must be reassessed every three months and notice must still follow once they lapse[^tsa15]. Lawful interception, in other words, has a built-in path to being told afterwards. Whether an equivalent exists where you live is worth checking.
-- **Device layer.** Review the active-session list on each service and turn on unknown-tracker alerts for AirTags and on Android. If you suspect commercial spyware, [Citizen Lab](https://citizenlab.ca/){target="_blank"} and the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} both provide forensic help. Amnesty's open-source [Mobile Verification Toolkit](https://github.com/mvt-project/mvt){target="_blank"} (MVT) checks a phone backup against known traces of compromise, and takes some technical background to run.
+- **Platform layer**: Open Google's My Ad Center and Meta's ad preferences to see the topics the system thinks you care about, then use data export for the full record. The steps are in [how platforms collect your data](./platform-tracking.md). Nothing else on this site shows you your own profile as directly.
+- **Telecom layer**: Request your own call detail records from your carrier; the scope is broadly what a retrieval order would produce.
+- **State and law enforcement layer**: Under Article 15 of Taiwan's Communication Security and Surveillance Act, the executing agency must report after surveillance ends and the court notifies the person who was surveilled. Notification can be deferred where it would defeat the purpose, but the grounds must be reassessed every three months and notice must still follow once they lapse[^tsa15]. Lawful interception, in other words, has a built-in path to being told afterwards. Whether an equivalent exists where you live is worth checking.
+- **Device layer**: Review the active-session list on each service and turn on unknown-tracker alerts for AirTags and on Android. If you suspect commercial spyware, [Citizen Lab](https://citizenlab.ca/){target="_blank"} and the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} both provide forensic help. Amnesty's open-source [Mobile Verification Toolkit](https://github.com/mvt-project/mvt){target="_blank"} (MVT) checks a phone backup against known traces of compromise, and takes some technical background to run.
 
 ## Which measure stops which layer
 

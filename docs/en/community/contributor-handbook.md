@@ -138,8 +138,8 @@ A redirect handles a URL that disappears. It does nothing for the case where a p
 
 When you split a page, or move a section from one page to another, search the site for links to the source page in the same PR and repoint the ones whose text refers to what moved. Two things to know about this check:
 
-- **Neither strict build nor the style linter catches it.** Both target files exist and both links resolve, so the failure is in what the link means rather than whether it works. Only reading the link text against the destination finds it.
-- **Dated blog posts count.** A post that was accurate when published keeps its text, and a button in it is a functional entry point rather than part of the record. Repointing the button does not alter what the post said at the time, and leaving it broken means a reader following it lands somewhere that no longer holds what they were promised.
+- **Neither strict build nor the style linter catches it**: Both target files exist and both links resolve, so the failure is in what the link means rather than whether it works. Only reading the link text against the destination finds it.
+- **Dated blog posts count**: A post that was accurate when published keeps its text, and a button in it is a functional entry point rather than part of the record. Repointing the button does not alter what the post said at the time, and leaving it broken means a reader following it lands somewhere that no longer holds what they were promised.
 
 This came up in August 2026: a May 2025 split moved the workshop recruitment content into its own page, and two earlier posts kept pointing at the original, where the material no longer was.
 
