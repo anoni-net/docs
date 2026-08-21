@@ -79,7 +79,7 @@ QR codes carry error correction, but a blurred photo, a steep angle or too littl
 
 ## Whose code does the decoding
 
-Decoding is handled by [jsQR](https://github.com/cozmo/jsQR){target="_blank"} (Apache-2.0), placed unmodified under `utils/vendor/` with the full licence text alongside it.
+Decoding is handled by [jsQR](https://github.com/cozmo/jsQR){target="_blank"} (Apache-2.0, [full licence text](vendor/jsQR-LICENSE.txt)), placed unmodified under `utils/vendor/`. Everything third-party in this section is listed on the [tools index](index.md#whose-code-this-uses).
 
 Decoding involves locating the code, correcting perspective and applying error correction, a considerably larger job than encoding. The tests generate codes with known contents using qrcode-generator from the [generator](qrcode.md) page and read them back with jsQR, so two independent libraries check each other.
 

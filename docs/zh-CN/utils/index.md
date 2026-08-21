@@ -63,6 +63,23 @@ icon: material/tools
 
 这些工具的程序与数据会跟页面一起存下来。在[离线阅读](../offline.md)的清单里勾起这一区的页面，之后没有网络也打得开。
 
+## 用了谁的程序
+
+这一区大部分的程序是自己写的，放在 [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"} 底下。有四样东西来自别人，原封不动放进来，不做任何修改：
+
+| 组件 | 用在 | 授权 | 授权文字在哪 |
+|---|---|---|---|
+| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code 生成器](qrcode.md) | MIT | [文件开头的标头](vendor/qrcode-generator.js) |
+| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code 读取器](qr-read.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
+| [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | [文件 metadata 清除器](strip-metadata.md)的 PDF 部分 | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
+| [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} 的 7776 字词表 | [密语与密码生成器](passphrase.md) | 词表数据 CC-BY-4.0，程序 MIT | [上游的 repo](https://github.com/anoni-net/asian-diceware){target="_blank"} |
+
+`pdf-lib.min.js` 那一份里面还打包了微软的 tslib（Apache-2.0），它的版权标头跟着留在文件里，没有被压缩工具剥掉。
+
+不做修改是刻意的。改过就失去「这是上游那一份」的可审性，读者要验的时候只能相信我们的说法。文件都在 `utils/vendor/` 底下，可以自己跟上游的版本比对。
+
+为什么这几样不自己写，每一页最后那一节有说明。共通的理由是那些东西写错不会崩溃，只会产生看起来正常但实际上错的结果，而那比坏掉更难发现。
+
 ## 没有收进来的东西
 
 需要连到外部服务才能运作的功能不会放在这里，那跟「离线可用」与「不送出数据」两条规则冲突。网络测量请用 [OONI Probe](../tools/what-is-ooni.md)，那是设计来做这件事的工具，数据的处理方式也公开。

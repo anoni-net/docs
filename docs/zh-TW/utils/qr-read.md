@@ -79,7 +79,7 @@ QR code 有容錯能力，但照片太模糊、角度太斜、周圍留白不夠
 
 ## 解碼用的是誰的程式
 
-解碼交給 [jsQR](https://github.com/cozmo/jsQR){target="_blank"}（Apache-2.0 授權），原封不動放在 `utils/vendor/` 底下，授權全文也在同一個目錄。
+解碼交給 [jsQR](https://github.com/cozmo/jsQR){target="_blank"}（Apache-2.0 授權，[授權全文](vendor/jsQR-LICENSE.txt)），原封不動放在 `utils/vendor/` 底下。這一區用到的第三方元件都列在[小工具首頁](index.md#用了誰的程式)。
 
 那要處理定位、透視校正與容錯還原，比編碼更大的工程。測試用[產生器](qrcode.md)那邊的 qrcode-generator 產生已知內容的碼，再交給 jsQR 讀回來比對，兩個各自獨立的函式庫互相驗證。
 
