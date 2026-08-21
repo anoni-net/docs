@@ -189,6 +189,42 @@ test('視窗尺寸不進摘要碼，只取螢幕本身', () => {
   assert.ok(screen.digest, 'screen 要另外給一個只含螢幕的版本');
 });
 
+test('每一項都標了讀者自己做得到什麼', () => {
+  // 不標的話這一頁看起來像「照著關一關就沒事了」，而十五項裡真正關得掉的只有三項
+  const levels = new Set(['permission', 'browser', 'system', 'none']);
+  for (const probe of mod.PROBES) {
+    assert.ok(levels.has(probe.control), `${probe.key} 的 control 是 ${probe.control}`);
+  }
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const t = mod.STRINGS[lang];
+    assert.ok(t.controlLabel, `${lang} 少了「你能做什麼」的標題`);
+    for (const level of levels) {
+      assert.ok(t.controls[level], `${lang} 少了 ${level} 的說明`);
+    }
+  }
+});
+
+test('關得掉與關不掉的分類沒有寫反', () => {
+  const of = (key) => mod.PROBES.find((p) => p.key === key).control;
+  // 位置是唯一會跳授權視窗的，也是唯一能整個關掉的
+  assert.equal(of('location'), 'permission');
+  // 這兩項在瀏覽器設定裡改得到
+  assert.equal(of('language'), 'browser');
+  assert.equal(of('donottrack'), 'browser');
+  // 這兩項要動系統設定，會影響其他 App
+  assert.equal(of('timezone'), 'system');
+  assert.equal(of('preferences'), 'system');
+  // 其餘在一般瀏覽器上沒有開關，這件事要誠實標出來
+  for (const key of ['screen', 'hardware', 'webgl', 'canvas', 'fonts', 'clientHints', 'clientRects', 'audio']) {
+    assert.equal(of(key), 'none', `${key} 標錯了，一般瀏覽器關不掉`);
+  }
+});
+
+test('關不掉的項目佔多數，文案不該說得像關一關就好', () => {
+  const none = mod.PROBES.filter((p) => p.control === 'none').length;
+  assert.ok(none > mod.PROBES.length / 2, `只有 ${none} 項標成關不掉，跟實情不符`);
+});
+
 test('每一項都有對照值可以比，不只是說明', () => {
   // 原本只寫「Tor Browser 會統一掉」，讀者換瀏覽器得自己記十幾個值
   for (const lang of ['zh-TW', 'zh', 'en']) {
