@@ -32,6 +32,10 @@ icon: material/tools
 
     把網址裡的追蹤參數挑出來並移除，每一個都說明是誰在追。順便拆掉 Google 與 Facebook 的轉址包裝。
 
+-   :material-format-letter-matches: **[隱形字元偵測](invisible.md)**
+
+    找出文字裡看不見的零寬字元、方向控制與同形字，標出位置並說明每一類是什麼。文件外流追蹤與釣魚網址都靠這些東西。
+
 </div>
 
 ## 要離線帶著走

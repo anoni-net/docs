@@ -93,6 +93,7 @@ nav:
       - utils/passphrase.md
       - utils/qrcode.md
       - utils/clean-url.md
+      - utils/invisible.md
       - utils/leaks.md
   - !ENV [NAV_GAMES, "互动"]:
       - games/index.md

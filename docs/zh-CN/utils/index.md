@@ -32,6 +32,10 @@ icon: material/tools
 
     把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。顺便拆掉 Google 与 Facebook 的转址包装。
 
+-   :material-format-letter-matches: **[隐形字符检测](invisible.md)**
+
+    找出文字里看不见的零宽字符、方向控制与同形字，标出位置并说明每一类是什么。文件外流追踪与钓鱼网址都靠这些东西。
+
 </div>
 
 ## 要离线带着走

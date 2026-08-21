@@ -32,6 +32,10 @@ The articles on this site explain how to protect yourself. This section holds th
 
     Pick out and remove the tracking parameters in a URL, each annotated with who is doing the tracking. Unwraps Google and Facebook redirect wrappers too.
 
+-   :material-format-letter-matches: **[Invisible character detector](invisible.md)**
+
+    Find zero-width characters, bidirectional controls and homoglyphs hiding in text, with positions marked and each class explained. Both document leak tracking and phishing URLs rely on these.
+
 </div>
 
 ## Taking them offline
