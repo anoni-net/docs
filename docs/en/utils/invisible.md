@@ -113,7 +113,9 @@ One technique, two uses. An organisation wanting to keep internal documents from
 
 The position of this page is to explain how the technique works, so that whoever receives a document can protect themselves, while providing no way to produce marked copies.
 
-Specifically not built: a generator that adds invisible markings to a piece of text, a tool that produces multiple differently-marked copies in bulk, or worked examples of insertion. Anyone wanting to check what this page catches can use the cases in the test file (`tools/test_invisible.mjs`), which exist to verify detection rather than to be repurposed for marking documents.
+Specifically not built: a generator that adds invisible markings to a piece of text, or a tool that produces multiple differently-marked copies in bulk.
+
+"Load the sample text" gives you one fixed passage, and you cannot substitute your own. It contains two zero-width spaces, one Cyrillic letter impersonating part of a URL, and four tag characters, which is enough to see what a detection result looks like. That is all the teaching needs, and it cannot be turned on a real document. Anyone wanting to check the detection range more thoroughly can use the cases in the test file (`tools/test_invisible.mjs`).
 
 This is a community position, written down here so that later discussions have something to refer to.
 

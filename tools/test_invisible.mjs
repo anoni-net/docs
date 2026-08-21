@@ -46,7 +46,8 @@ const harness = `
   ${grab(/^  function homoglyphVerdict\(text, findings\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function strip\(text\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function stripSuspect\(text\) \{[\s\S]*?\n  \}/m)}
-  return { HIDDEN, BIDI, HOMOGLYPHS, isEmojiLike, scan, homoglyphVerdict, strip, stripSuspect };
+  ${grab(/^  const SAMPLES = \{[\s\S]*?\n  \};/m)}
+  return { HIDDEN, BIDI, HOMOGLYPHS, isEmojiLike, scan, homoglyphVerdict, strip, stripSuspect, SAMPLES };
 `;
 const tool = new Function(harness)();
 
@@ -193,6 +194,42 @@ test('字元表用跳脫寫法，不放裸字元', () => {
   const table = src.match(/const HIDDEN = \{[\s\S]*?\n  \};/)[0];
   assert.ok(table.includes('\\u200B'), '零寬空格要寫成跳脫');
   assert.ok(!/[​-‏⁠﻿]/.test(table), '表裡出現了裸的隱形字元');
+});
+
+test('示範文字三個語系都有，而且三類東西都在裡面', () => {
+  // 讀者手邊多半沒有帶標記的文字，這一段是他唯一看得到偵測結果的機會。
+  // 少了哪一類，那一類的說明在頁面上就沒有對應的畫面。
+  const langs = Object.keys(tool.SAMPLES).sort();
+  assert.deepEqual(langs, ['en', 'zh', 'zh-TW'], `語系是 ${langs}`);
+  for (const [lang, text] of Object.entries(tool.SAMPLES)) {
+    const kinds = {};
+    for (const f of tool.scan(text)) kinds[f.kind] = (kinds[f.kind] || 0) + 1;
+    assert.ok(kinds.zwsp >= 2, `${lang} 的示範少了零寬空格`);
+    assert.ok(kinds.homoglyph >= 1, `${lang} 的示範少了同形字`);
+    assert.ok(kinds.tag >= 4, `${lang} 的示範少了標籤字元`);
+  }
+});
+
+test('示範文字清完只剩同形字，那是刻意留的', () => {
+  // strip 不換同形字：那是可見的字，換掉會改變原意，讀者可能正在處理一段真的俄文。
+  // 示範文字正好讓這個設計在畫面上看得到，所以順便釘住它。
+  for (const [lang, text] of Object.entries(tool.SAMPLES)) {
+    const left = tool.scan(tool.strip(text));
+    assert.ok(left.length > 0, `${lang} 的示範清完連同形字都沒了`);
+    assert.ok(left.every((f) => f.kind === 'homoglyph'),
+              `${lang} 的示範清完還剩 ${left.map((f) => f.kind).join('、')}`);
+  }
+});
+
+test('這一頁不提供把標記放進讀者文字的功能', () => {
+  // 立場寫在 utils/invisible.md 的「教偵測，不教植入」。示範是固定的一段，
+  // 不接受外部輸入，也沒有反方向的函式。
+  const from = code.indexOf('const SAMPLES');
+  const block = code.slice(from, code.indexOf('const state =', from));
+  assert.ok(!/state\.input|function |=>/.test(block), 'SAMPLES 那一段有可執行的東西');
+  for (const needle of ['function insert', 'function mark', 'function embed', 'addMarking', 'function taint']) {
+    assert.ok(!code.includes(needle), `出現了 ${needle}，這一頁不做植入`);
+  }
 });
 
 for (const [name, fn] of tests) {
