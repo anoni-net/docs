@@ -41,9 +41,9 @@ icon: material/tools
 
     讀出圖片裡 QR code 的內容，圖片不離開裝置。解出來是網址時把主機獨立標出來，並且不提供開啟按鈕。
 
--   :material-image-off-outline: **[照片與影片 metadata 清除器](strip-metadata.md)**
+-   :material-image-off-outline: **[檔案 metadata 清除器](strip-metadata.md)**
 
-    拿掉照片與影片裡的 EXIF、GPS、裝置型號與註解欄位，檔案不離開裝置。壓縮資料一個位元都沒動，清完的檔案跟原檔完全一樣，每一段的去留都列給你看。
+    拿掉照片、影片與 PDF 裡的 EXIF、GPS、裝置型號、製作軟體與註解欄位，檔案不離開裝置。照片與影片的壓縮資料一個位元都沒動，每一段的去留都列給你看。
 
 -   :material-link-variant-off: **[網址清理器](clean-url.md)**
 

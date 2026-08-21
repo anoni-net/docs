@@ -481,6 +481,68 @@ test('原始資料不會被就地改掉', () => {
   assert.deepEqual(Array.from(src), before, '呼叫端的資料被改了');
 });
 
+test('PDF 認得出來，而且不會被當成別的格式', () => {
+  assert.equal(tool.detect(u8('%PDF-1.7\n')), 'pdf');
+  assert.equal(tool.detect(u8('%PDF-1.4\n%\xe2\xe3')), 'pdf');
+  assert.equal(tool.detect(u8('%PDX-1.7\n')), 'unknown');
+});
+
+test('PDF 走非同步那條路，不從同步的 strip 出去', () => {
+  // pdf-lib 的 API 是非同步的。同步那一支要明確不處理 PDF，否則會回一個
+  // 看起來成功、實際上沒有資料的結果
+  const result = tool.strip(u8('%PDF-1.7\n', new Uint8Array(64)));
+  assert.equal(result.ok, false, '同步的 strip 不該處理 PDF');
+  assert.equal(result.kind, 'pdf', '格式還是要認得出來');
+});
+
+test('拿掉 XMP 的引用之後，那個物件本身也要刪掉', () => {
+  // 這是最容易做半套的地方。只 delete 引用的話，pdf-lib 儲存時照樣把那段 XMP
+  // 寫進檔案，只是沒有人指向它，用文字搜尋工具打開還是找得到作者跟地點。
+  const fn = code.slice(code.indexOf('const dropMeta ='));
+  const body = fn.slice(0, fn.indexOf('let data;'));
+  assert.ok(body.includes('holder.delete(META)'), '沒有拿掉引用');
+  assert.ok(/context\.delete\(ref\)/.test(body), '沒有把物件本身從文件裡刪掉');
+});
+
+test('PDF 存檔不用物件流', () => {
+  // 壓成物件流之後，讀者拿文字搜尋工具自己核對就看不到東西了。
+  // 這一頁的立場是讓人驗得動。
+  assert.ok(/useObjectStreams:\s*false/.test(code), '存檔時把內容壓進物件流了');
+});
+
+test('PDF 的驗證步驟不能用 img 或 video', () => {
+  const verify = code.slice(code.indexOf('function verify(blob, kind)'));
+  const body = verify.slice(0, verify.indexOf('async function handleOne'));
+  const pdfPart = body.slice(body.indexOf('kind === "pdf"'), body.indexOf('kind === "mp4"'));
+  assert.ok(pdfPart.includes('PDFDocument.load'), 'PDF 沒有用同一個函式庫重新讀一次');
+  assert.ok(pdfPart.includes('getPageCount'), '沒有確認頁面還在');
+});
+
+test('加密的 PDF 要擋下來，不要產出一份殘缺的檔案', () => {
+  assert.ok(/doc\.isEncrypted/.test(code), '沒有檢查加密');
+  assert.ok(/reason: "encrypted"/.test(code), '沒有回報加密的情況');
+});
+
+test('每個 PDF 欄位三個語系都有說明', () => {
+  const fields = ['pdfTitle', 'pdfAuthor', 'pdfSubject', 'pdfCreator', 'pdfProducer',
+                  'pdfKeywords', 'pdfDates', 'pdfXmp', 'pdfXmpPage'];
+  for (const [lang, strings] of Object.entries(tool.STRINGS)) {
+    for (const f of fields) assert.ok(strings.labels[f], `${lang} 少了「${f}」`);
+    assert.ok(strings.notes.pdfLeftovers, `${lang} 少了註解與附件的提醒`);
+    assert.ok(strings.errors.encrypted, `${lang} 少了加密的訊息`);
+    assert.ok(strings.errors.pdfLibMissing, `${lang} 少了函式庫沒載入的訊息`);
+    assert.ok(strings.pdf, `${lang} 少了 PDF 的格式說明`);
+  }
+});
+
+test('vendor 裡的 pdf-lib 與授權都在', () => {
+  const dir = path.join(HERE, '..', 'docs', 'zh-TW', 'utils', 'vendor');
+  assert.ok(fs.existsSync(path.join(dir, 'pdf-lib.min.js')), 'pdf-lib.min.js 不見了');
+  assert.ok(fs.existsSync(path.join(dir, 'pdf-lib-LICENSE.txt')), 'MIT 授權要求散布時附上副本');
+  const readme = fs.readFileSync(path.join(dir, 'README.md'), 'utf8');
+  assert.ok(readme.includes('pdf-lib'), 'vendor 的 README 沒有登記這一份');
+});
+
 for (const [name, fn] of tests) {
   try {
     fn();

@@ -7,6 +7,7 @@
 |---|---|---|---|
 | `qrcode-generator.js` | [kazuhikoarase/qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) | 1.4.4 | MIT |
 | `jsQR.js` | [cozmo/jsQR](https://github.com/cozmo/jsQR) | 1.4.0 | Apache-2.0，授權全文見 `jsQR-LICENSE.txt` |
+| `pdf-lib.min.js` | [Hopding/pdf-lib](https://github.com/Hopding/pdf-lib) | 1.17.1 | MIT，授權全文見 `pdf-lib-LICENSE.txt` |
 
 ## 為什麼不自己寫
 
@@ -21,4 +22,10 @@ QR 編碼寫錯的典型後果是產生一個「掃得出來但內容錯」的�
 更大的工程，自己寫不切實際。`tools/test_qrread.mjs` 用 `qrcode-generator` 產生已知內容
 的碼、算成像素、再交給 jsQR 讀回來比對，兩個各自獨立的函式庫互相驗證。
 
-Apache-2.0 要求散布時附上授權副本，所以 `jsQR-LICENSE.txt` 也在這個目錄裡，不要刪。
+`pdf-lib.min.js` 處理的是 PDF。那個格式的每個物件在交叉索引表裡都記著位元組位置，
+拿掉一段東西之後整張表要重算，而 PDF 1.5 之後常見的物件流還會把好幾個物件壓進同一段
+壓縮資料裡。自己寫一個能正確處理這些的解析器不切實際，寫半套的後果是「宣告清乾淨、
+內容還在」，那比不清更危險。
+
+Apache-2.0 與 MIT 都要求散布時附上授權副本，所以 `jsQR-LICENSE.txt` 與
+`pdf-lib-LICENSE.txt` 也在這個目錄裡，不要刪。

@@ -1,13 +1,14 @@
 ---
-title: Photo and video metadata remover
-description: Strip EXIF, GPS, device model and comment fields from photos and videos without the file leaving your device. The compressed data is untouched, so the cleaned file is identical to the original.
+title: File metadata remover
+description: Strip EXIF, GPS, device model, authoring software and comment fields from photos, videos and PDFs without the file leaving your device. For photos and videos, not one byte of compressed data is touched.
 icon: material/image-off-outline
 ---
 
-# :material-image-off-outline: Photo and video metadata remover
+# :material-image-off-outline: File metadata remover
 
 <div id="stripmeta-tool"></div>
 
+<script src="../vendor/pdf-lib.min.js"></script>
 <script src="../../js/stripmeta.js"></script>
 
 Two situations that come up:
@@ -64,6 +65,33 @@ Encoders write their own version into the compressed data itself. That is not a 
 
 Removing it means re-encoding, which costs quality and merely substitutes a new encoder's traces for the old ones. This page does not do that, but it does list what it found, so that you are not left believing the file came out clean.
 
+## PDFs work differently
+
+PDFs are handled too, but not the same way.
+
+With photos and videos you can cut a section straight out. With a PDF you cannot. Every object in the format records its own byte position in a cross-reference table, so removing anything shifts everything after it and the whole table has to be rebuilt. Since PDF 1.5 it has also been common to compress several objects into a single stream, where the contents are not visible from outside at all.
+
+So this part is handled by [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} (MIT, placed unmodified under `utils/vendor/`). It does the parsing and rewriting; this page only decides which fields come out.
+
+What is removed:
+
+- Document title, author, subject, keywords
+- The software that produced the document, a field that often includes the operating system and version. Printing to PDF from a browser puts the full browser identification string here
+- Creation and modification times
+- The XMP block, where location, author and editing history can all be recorded
+
+### Removing the reference is not removing the content
+
+The XMP part holds a trap worth describing. Delete the reference that points to the XMP block from the document catalogue, save the file, and that content is still there in full. Nothing points at it, but open the file in a text search tool and the author and location are still findable.
+
+Removing it properly means deleting the object itself from the document, which is what this tool does. One test in `tools/test_stripmeta.mjs` guards exactly that.
+
+### PDFs come with no lossless guarantee
+
+For photos and videos, not one byte of compressed data is touched and the cleaned file decodes identically to the original. PDFs cannot carry that guarantee, because the whole file is rewritten.
+
+In testing, page content is not re-laid out and the rendered result is pixel-identical to the original. But if your PDF has forms, digital signatures or unusual interactive elements, a rewrite may not preserve them exactly. Keep the original of anything important.
+
 ## The cleaned image is identical to the original
 
 This page does not re-encode. Image and media data start at a fixed point in the file and are copied byte for byte from there.
@@ -76,13 +104,15 @@ Because it is lossless, the file barely shrinks. A 630 KB photo comes out at 629
 
 **HEIC/HEIF**: what an iPhone shoots by default. Its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.
 
-**WebP, GIF, PDF**: none of these are supported. PDF metadata is scattered across several places, some of it compressed inside streams within the file, and needs separate handling.
+**WebP and GIF**: not supported yet.
 
 ## What this page does not do
 
 No face blurring. That requires a face detection model and is an entirely different job, one that should not ride along under the same tool's name.
 
-Also worth saying: removing metadata does not make a photo safe. Street signs, door numbers, uniforms, the view through a window are all in the image itself, and this page does not touch them. Look at the picture before you send it.
+Annotations and attachments inside a PDF can carry their own authors and timestamps. This page handles document-level descriptive fields only and says so on screen when it meets such a file.
+
+Also worth saying: removing metadata does not make a file safe. Street signs, door numbers, uniforms, the view through a window are all in the image itself, and this page does not touch them. Look at the picture before you send it.
 
 ## The cleaned file is opened once before you get it
 
