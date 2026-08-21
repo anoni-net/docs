@@ -41,9 +41,9 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Read what is inside a QR code image without the image leaving your device. URLs get their hostname shown separately, and there is no open button.
 
--   :material-image-off-outline: **[Photo metadata remover](strip-metadata.md)**
+-   :material-image-off-outline: **[Photo and video metadata remover](strip-metadata.md)**
 
-    Strip EXIF, GPS, camera model and comment fields from photos without the file leaving your device. The compressed data is untouched, so the cleaned image is identical to the original, and every segment kept or removed is listed for you.
+    Strip EXIF, GPS, device model and comment fields from photos and videos without the file leaving your device. The compressed data is untouched, so the cleaned file is identical to the original, and every segment kept or removed is listed for you.
 
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 

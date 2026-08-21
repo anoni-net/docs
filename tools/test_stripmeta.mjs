@@ -39,7 +39,7 @@ const grab = (re) => {
 const harness = `
   ${grab(/^  const JPEG_KEEP = \{[\s\S]*?\n  function cleanName\(name\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { strip, detect, cleanName, stripJpeg, stripPng, STRINGS, JPEG_KEEP, PNG_DROP };
+  return { strip, detect, cleanName, stripJpeg, stripPng, stripMp4, mp4Boxes, STRINGS, JPEG_KEEP, PNG_DROP, MP4_DROP };
 `;
 const tool = new Function(harness)();
 
@@ -303,9 +303,182 @@ test('沒有任何網路請求，檔案不上傳', () => {
 });
 
 test('清完之後會實際載入一次，確認沒有把檔案改壞', () => {
-  assert.ok(/function verify\(blob\)/.test(code), '沒有驗證步驟');
-  assert.ok(/image\.onerror/.test(code), '沒有處理載入失敗');
+  assert.ok(/function verify\(blob, kind\)/.test(code), '沒有驗證步驟');
+  assert.ok(/image\.onerror/.test(code), '圖片沒有處理載入失敗');
   assert.ok(/reason: "verify"/.test(code), '驗證失敗時沒有回報給讀者');
+});
+
+test('影片要用 video 元素驗，而且要看時間長度', () => {
+  // 用 Image 驗影片永遠會失敗，用 video 但不看 duration 又會放過改壞的檔案。
+  // 改壞影片最典型的症狀就是時間長度變成 0 或 NaN
+  const verify = code.slice(code.indexOf('function verify(blob, kind)'));
+  const body = verify.slice(0, verify.indexOf('async function handleOne'));
+  assert.ok(body.includes('createElement("video")'), '影片沒有用 video 元素驗');
+  assert.ok(body.includes('onloadedmetadata'), '沒有等到 metadata 讀出來');
+  assert.ok(/isFinite\(seconds\)|isFinite\(video\.duration\)/.test(body),
+            '沒有檢查時間長度是不是有效的數字');
+});
+
+// --- MP4 素材 ---
+// box：size(4) type(4) payload。這裡手工組一個最小但結構完整的檔案。
+const box = (type, ...payload) => {
+  const body = u8(...payload);
+  const out = new Uint8Array(8 + body.length);
+  const dv = new DataView(out.buffer);
+  dv.setUint32(0, out.length);
+  out.set(Buffer.from(type, 'latin1'), 4);
+  out.set(body, 8);
+  return out;
+};
+const u32 = (n) => { const b = new Uint8Array(4); new DataView(b.buffer).setUint32(0, n); return b; };
+
+// stco 裡放一個 chunk offset，指向 mdat 的資料起點
+const makeMp4 = ({ moovFirst = false, udta = true, chunkOffset = 0 } = {}) => {
+  const stco = box('stco', [0,0,0,0], u32(1), u32(chunkOffset));
+  const stbl = box('stbl', stco);
+  const minf = box('minf', stbl);
+  const hdlr = box('hdlr', [0,0,0,0], [0,0,0,0], 'vide', new Uint8Array(12), 'VideoHandler\x00');
+  const mdia = box('mdia', hdlr, minf);
+  const trak = box('trak', mdia);
+  const parts = [box('mvhd', new Uint8Array(8)), trak];
+  if (udta) parts.push(box('udta', box('meta', 'GPS:25.033 Wang Ming secret')));
+  const moov = box('moov', ...parts);
+  const mdat = box('mdat', 'PAYLOADPAYLOAD');
+  const ftyp = box('ftyp', 'isomisom');
+  return moovFirst ? u8(ftyp, moov, mdat) : u8(ftyp, mdat, moov);
+};
+
+test('MP4 的使用者資料區整段拿掉，敏感字串不留', () => {
+  const result = tool.strip(makeMp4());
+  assert.equal(result.kind, 'mp4');
+  assert.ok(result.ok, `失敗：${result.reason}`);
+  const text = asText(result.data);
+  for (const needle of ['GPS:25.033', 'Wang Ming', 'secret']) {
+    assert.ok(!text.includes(needle), `${needle} 還留在輸出裡`);
+  }
+  assert.ok(result.removed.some((r) => r.marker === 'udta'), 'udta 沒有被記錄成拿掉的東西');
+});
+
+test('外層 box 的長度跟著改，不然檔案就壞了', () => {
+  // 巢狀是 MP4 跟 JPEG 最大的不同：拿掉內層，外面每一層的長度都要減
+  const result = tool.strip(makeMp4());
+  const top = tool.mp4Boxes(result.data, 0, result.data.length);
+  assert.ok(top, '輸出解析不了');
+  const moov = top.find((b) => b.type === 'moov');
+  assert.ok(moov, '找不到 moov');
+  // moov 宣告的長度要跟它實際佔的位元組一致，逐層往下都要成立
+  const walk = (start, end) => {
+    const list = tool.mp4Boxes(result.data, start, end);
+    assert.ok(list, `${start}-${end} 這一段解析不了，長度對不上`);
+    let sum = 0;
+    for (const b of list) {
+      sum += b.size;
+      if (['moov', 'trak', 'mdia', 'minf', 'stbl'].includes(b.type)) walk(b.at + b.header, b.at + b.size);
+    }
+    assert.equal(sum, end - start, `${start}-${end} 的子 box 加起來是 ${sum}，應該是 ${end - start}`);
+  };
+  walk(0, result.data.length);
+});
+
+test('moov 排在前面時，影像資料的位置表要跟著改', () => {
+  // 這是最容易漏掉的一步。漏了的話檔案資訊讀得出來、時間長度也對，播下去才碎掉
+  const src = makeMp4({ moovFirst: true, chunkOffset: 1000 });
+  const result = tool.strip(src);
+  assert.ok(result.ok);
+  const delta = src.length - result.data.length;
+  assert.ok(delta > 0, '沒有拿掉任何東西，這個案例就驗不到位移');
+
+  const findStco = (bytes, start, end) => {
+    for (const b of tool.mp4Boxes(bytes, start, end) || []) {
+      if (b.type === 'stco') return b;
+      if (['moov', 'trak', 'mdia', 'minf', 'stbl'].includes(b.type)) {
+        const found = findStco(bytes, b.at + b.header, b.at + b.size);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+  const stco = findStco(result.data, 0, result.data.length);
+  assert.ok(stco, '找不到 stco');
+  const dv = new DataView(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+  assert.equal(dv.getUint32(stco.at + 16), 1000 - delta,
+               `chunk offset 應該從 1000 減到 ${1000 - delta}`);
+});
+
+test('moov 排在後面時不要亂改位置表', () => {
+  // 影像資料在前面，沒有被推動，改了反而是錯的
+  const src = makeMp4({ moovFirst: false, chunkOffset: 40 });
+  const result = tool.strip(src);
+  const findStco = (bytes, start, end) => {
+    for (const b of tool.mp4Boxes(bytes, start, end) || []) {
+      if (b.type === 'stco') return b;
+      if (['moov', 'trak', 'mdia', 'minf', 'stbl'].includes(b.type)) {
+        const found = findStco(bytes, b.at + b.header, b.at + b.size);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+  const stco = findStco(result.data, 0, result.data.length);
+  const dv = new DataView(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+  assert.equal(dv.getUint32(stco.at + 16), 40, 'chunk offset 不該被動到');
+});
+
+test('軌道的處理器名稱清成空的，長度不變', () => {
+  const src = makeMp4({ udta: false });
+  const result = tool.strip(src);
+  assert.ok(!asText(result.data).includes('VideoHandler'), '處理器名稱還在');
+  assert.equal(result.data.length, src.length, '清名稱不該改變檔案長度');
+});
+
+test('壓縮資料裡的編碼器痕跡要如實回報，不能默默留著', () => {
+  // 那一段不是 metadata 而是影音資料的一部分，清不掉。讀者以為清乾淨了才危險
+  const withMark = u8(
+    box('ftyp', 'isomisom'),
+    box('mdat', 'xxxx Lavc60.31.102 xxxx'),
+    box('moov', box('mvhd', new Uint8Array(8)), box('udta', box('meta', 'title'))),
+  );
+  const result = tool.strip(withMark);
+  assert.ok(result.ok);
+  assert.ok((result.notes || []).some((n) => n.label === 'encoderInData'),
+            '沒有回報壓縮資料裡的編碼器痕跡');
+  assert.ok(result.notes[0].detail.includes('Lavc'), '沒有指出是哪一個字串');
+});
+
+test('乾淨的 MP4 不會被亂改', () => {
+  const clean = makeMp4({ udta: false });
+  const result = tool.strip(clean);
+  assert.ok(result.ok);
+  // 只有處理器名稱被清空，長度必須一樣
+  assert.equal(result.data.length, clean.length);
+});
+
+test('HEIC 跟 MP4 都是 ftyp 開頭，要分得出來', () => {
+  // 分錯的話 iPhone 的照片會被當成影片去拆 box
+  assert.equal(tool.detect(u8([0,0,0,24], 'ftypheic')), 'heic');
+  assert.equal(tool.detect(u8([0,0,0,24], 'ftypmif1')), 'heic');
+  assert.equal(tool.detect(u8([0,0,0,24], 'ftypisom')), 'mp4');
+  assert.equal(tool.detect(u8([0,0,0,24], 'ftypqt  ')), 'mp4');
+  assert.equal(tool.detect(u8([0,0,0,24], 'ftypmp42')), 'mp4');
+});
+
+test('壞掉的 MP4 回錯誤，不會產出半個檔', () => {
+  for (const bad of [
+    u8(box('ftyp', 'isomisom'), [0xff, 0xff, 0xff, 0xff], 'moov'),   // 長度爆掉
+    u8(box('ftyp', 'isomisom')),                                      // 沒有 moov
+    u8([0,0,0,24], 'ftypisom'),                                       // 只有頭
+  ]) {
+    const result = tool.strip(bad);
+    assert.equal(result.ok, false, '壞掉的檔案卻回成功');
+  }
+});
+
+test('原始資料不會被就地改掉', () => {
+  // stco 那一段是原地寫入，動到呼叫端的 buffer 會很難查
+  const src = makeMp4({ moovFirst: true, chunkOffset: 1000 });
+  const before = Array.from(src);
+  tool.strip(src);
+  assert.deepEqual(Array.from(src), before, '呼叫端的資料被改了');
 });
 
 for (const [name, fn] of tests) {
