@@ -93,8 +93,26 @@ def resource_url(dataset, want="CSV"):
     raise SystemExit(f"dataset {dataset} 沒有 {want}，只有：{have}")
 
 
+# 政府開放資料的欄位裡混過零寬空格。肉眼看不出來，str.strip() 也清不掉，卻足以讓
+# 地址比對不到縣市、geocode 查不到座標，最後原封不動寫進 JSON。字元集合對齊
+# docs/zh-TW/js/invisible.js 的 strip()，兩邊對「隱形字元」的定義保持一致。
+#
+# 一律用跳脫寫法。直接放字元的話，任何一次複製貼上或編輯器清理都可能把它們吃掉，
+# 而吃掉之後這條規則看起來完全正常。
+INVISIBLE = re.compile(
+    r"[\u00ad\u180e\u200b-\u200f\u202a-\u202e\u2060-\u2064\u2066-\u2069"
+    r"\ufe00-\ufe0f\ufeff\U000e0000-\U000e007f]"
+)
+
+
+def clean(v):
+    return INVISIBLE.sub("", v) if isinstance(v, str) else v
+
+
 def rows_of(dataset):
-    return list(csv.DictReader(io.StringIO(curl(resource_url(dataset)))))
+    """讀一份資料集。欄名與欄值在這裡就清掉隱形字元，下游一律拿到乾淨的字串。"""
+    rows = csv.DictReader(io.StringIO(curl(resource_url(dataset))))
+    return [{clean(k): clean(v) for k, v in r.items()} for r in rows]
 
 
 def num(x):

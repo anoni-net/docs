@@ -51,14 +51,14 @@ const harness = `
 `;
 const tool = new Function(harness)();
 
-const ZWSP = '​';
-const ZWJ = '‍';
-const ZWNJ = '‌';
-const BOM = '﻿';
-const RLO = '‮';
-const PDF = '‬';
-const RLM = '‏';
-const VS16 = '️';
+const ZWSP = '\u200B';
+const ZWJ = '\u200D';
+const ZWNJ = '\u200C';
+const BOM = '\uFEFF';
+const RLO = '\u202E';
+const PDF = '\u202C';
+const RLM = '\u200F';
+const VS16 = '\uFE0F';
 const TAG_A = '\u{E0061}';
 
 const kinds = (text) => tool.scan(text).map((f) => f.kind);
@@ -193,7 +193,20 @@ test('字元表用跳脫寫法，不放裸字元', () => {
   // 而吃掉之後這份表看起來完全正常
   const table = src.match(/const HIDDEN = \{[\s\S]*?\n  \};/)[0];
   assert.ok(table.includes('\\u200B'), '零寬空格要寫成跳脫');
-  assert.ok(!/[​-‏⁠﻿]/.test(table), '表裡出現了裸的隱形字元');
+  assert.ok(!/[\u200B-\u200F\u2060\uFEFF]/.test(table), '表裡出現了裸的隱形字元');
+});
+
+test('這份測試自己也不放裸字元', () => {
+  // 上一個測試守的是 invisible.js 的表，守不到這個檔案自己的常數與正規表示式。
+  // 那些地方放裸字元的話，被編輯器清理過一次就會靜靜失效：ZWSP 變成空字串，
+  // 測試照樣全綠，偵測功能卻不再被驗證。
+  //
+  // 用 scan 掃自己，判斷跟站上工具一致：註解裡 👨‍👩‍👧 的 ZWJ 是 emoji 組字元件會被放過，
+  // 同形字是看得見的字元，不在這一條要管的範圍。
+  const self = fs.readFileSync(fileURLToPath(import.meta.url), 'utf8');
+  const bare = tool.scan(self).filter((f) => f.kind !== 'homoglyph');
+  assert.deepEqual(bare.map((f) => f.kind), [],
+    `裸的隱形字元：${bare.map((f) => `${f.kind}@${f.index}`).join(' ')}`);
 });
 
 test('示範文字三個語系都有，而且三類東西都在裡面', () => {
