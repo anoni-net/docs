@@ -17,7 +17,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import cf_purge  # noqa: E402
-from cf_purge import BATCH_SIZE, batched, collect_urls, to_url  # noqa: E402
+from cf_purge import BATCH_SIZE, batched, collect_urls, to_url, to_urls  # noqa: E402
 
 BASE = "https://anoni.net/docs"
 
@@ -70,6 +70,26 @@ def test_to_url_encodes_special_chars() -> None:
     )
 
 
+def test_to_urls_covers_both_shapes() -> None:
+    """index.html 有兩個網址指向同一份內容，只清一個另一個會留著舊的。
+
+    2026-08-22 抽驗正式站時撞到：目錄式網址與新產物一致，檔案式的同一頁還是上一版，
+    cf-cache-status 是 HIT。站內連結都是目錄式，所以平常看不出來。
+    """
+    import pathlib as _p
+    check("首頁兩種形式", to_urls(_p.Path("index.html"), BASE),
+          [f"{BASE}/", f"{BASE}/index.html"])
+    check("一般頁面兩種形式", to_urls(_p.Path("basics/index.html"), BASE),
+          [f"{BASE}/basics/", f"{BASE}/basics/index.html"])
+    check("多層路徑", to_urls(_p.Path("zh-cn/utils/qrcode/index.html"), BASE),
+          [f"{BASE}/zh-cn/utils/qrcode/", f"{BASE}/zh-cn/utils/qrcode/index.html"])
+    # 不是 index.html 的只有一個網址，不能無中生有
+    check("404.html 只有一個", to_urls(_p.Path("404.html"), BASE), [f"{BASE}/404.html"])
+    check("靜態資產只有一個", to_urls(_p.Path("assets/x.css"), BASE), [f"{BASE}/assets/x.css"])
+    # to_url 仍然回目錄式那一個，它是站內連結用的正規形式
+    check("to_url 維持正規形式", to_url(_p.Path("basics/index.html"), BASE), f"{BASE}/basics/")
+
+
 def test_collect_urls() -> None:
     with tempfile.TemporaryDirectory() as td:
         root = pathlib.Path(td)
@@ -97,6 +117,11 @@ def test_collect_urls() -> None:
                 f"{BASE}/basics/",
                 f"{BASE}/zh-cn/",
                 f"{BASE}/en/",
+                # 每個 index.html 的檔案式網址是獨立的快取項目，見 to_urls
+                f"{BASE}/index.html",
+                f"{BASE}/basics/index.html",
+                f"{BASE}/zh-cn/index.html",
+                f"{BASE}/en/index.html",
                 f"{BASE}/404.html",
                 f"{BASE}/stylesheets/extra.css",
                 f"{BASE}/assets/stylesheets/main.484c7ddc.min.css",
@@ -178,6 +203,7 @@ def main() -> int:
     for fn in [
         test_to_url,
         test_to_url_encodes_special_chars,
+        test_to_urls_covers_both_shapes,
         test_collect_urls,
         test_batched,
         test_run_batches_sends_every_batch,

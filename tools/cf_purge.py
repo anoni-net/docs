@@ -62,13 +62,35 @@ def to_url(rel_path: Path, base_url: str) -> str:
     return f"{base_url}/{tail}"
 
 
+def to_urls(rel_path: Path, base_url: str) -> list[str]:
+    """一個產物檔案對應的所有網址形式。
+
+    `index.html` 有兩個網址指向同一份內容：目錄式的 `/a/b/` 與檔案式的
+    `/a/b/index.html`。Cloudflare 把它們當成兩個獨立的快取項目，只清一個，另一個
+    會無限期留著舊內容。
+
+    站內連結全是目錄式的，所以檔案式那個平常沒人打得到，問題出在搜尋引擎收錄過、
+    或有人存了舊書籤。2026-08-22 抽驗正式站時就撞到：目錄式網址與新產物一致，
+    檔案式的同一頁還是上一版，`cf-cache-status` 是 HIT。
+
+    無結尾斜線的 `/a/b` 不在這裡，nginx 對它發 302 轉到目錄式網址，轉址的目標
+    每次都會被清，內容不會過期。
+    """
+    canonical = to_url(rel_path, base_url)
+    parts = list(rel_path.parts)
+    if parts and parts[-1] == "index.html":
+        return [canonical, canonical + "index.html"]
+    return [canonical]
+
+
 def collect_urls(output_dir: Path, base_url: str) -> list[str]:
     """列出這份產物對應的所有網址，含不帶結尾斜線的網站根路徑。"""
     base_url = base_url.rstrip("/")
     urls = {
-        to_url(p.relative_to(output_dir), base_url)
+        url
         for p in output_dir.rglob("*")
         if p.is_file()
+        for url in to_urls(p.relative_to(output_dir), base_url)
     }
     # nginx 對 `/docs`（無結尾斜線）自己發 301，那個回應也會進 edge 快取。
     urls.add(base_url)
