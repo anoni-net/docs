@@ -402,6 +402,13 @@
       dropOver: "放開就開始解讀",
       reading: "解讀中",
       notFound: "這張圖裡找不到 QR code。試試裁掉周圍、或換一張更清楚的。",
+      cantOpen: "你的瀏覽器打不開這張圖，所以還沒開始找 QR code。",
+      cantOpenHint: {
+        heic: "這是 iPhone 預設的 HEIC 格式，Safari 以外的瀏覽器多半解不開。到「設定 → 相機 → 格式」選「最相容」，之後拍的就是 JPEG。已經拍好的用 AirDrop 或郵件傳給自己，那個過程多半會轉成 JPEG。",
+        avif: "這是 AVIF 格式，較舊的瀏覽器還不支援。用看圖程式另存成 JPEG 或 PNG 再試。",
+        tiff: "這是 TIFF 格式，瀏覽器一律不顯示。用看圖程式另存成 JPEG 或 PNG 再試。",
+        jp2: "這是 JPEG 2000 格式，瀏覽器一律不顯示。用看圖程式另存成 JPEG 或 PNG 再試。",
+      },
       notImage: "那不是圖片檔。",
       copy: "複製內容",
       copyFull: "複製完整內容",
@@ -452,6 +459,13 @@
       dropOver: "放开就开始解读",
       reading: "解读中",
       notFound: "这张图里找不到 QR code。试试裁掉周围、或换一张更清楚的。",
+      cantOpen: "你的浏览器打不开这张图，所以还没开始找 QR code。",
+      cantOpenHint: {
+        heic: "这是 iPhone 默认的 HEIC 格式，Safari 以外的浏览器多半解不开。到「设置 → 相机 → 格式」选「最兼容」，之后拍的就是 JPEG。已经拍好的用 AirDrop 或邮件传给自己，那个过程多半会转成 JPEG。",
+        avif: "这是 AVIF 格式，较旧的浏览器还不支持。用看图程序另存为 JPEG 或 PNG 再试。",
+        tiff: "这是 TIFF 格式，浏览器一律不显示。用看图程序另存为 JPEG 或 PNG 再试。",
+        jp2: "这是 JPEG 2000 格式，浏览器一律不显示。用看图程序另存为 JPEG 或 PNG 再试。",
+      },
       notImage: "那不是图片文件。",
       copy: "复制内容",
       copyFull: "复制完整内容",
@@ -502,6 +516,13 @@
       dropOver: "Release to read it",
       reading: "Reading",
       notFound: "No QR code found in that image. Try cropping the surroundings, or use a sharper photo.",
+      cantOpen: "Your browser cannot open that image, so the search for a QR code never started.",
+      cantOpenHint: {
+        heic: "That is HEIC, the iPhone default, which browsers other than Safari mostly cannot decode. Under Settings \u2192 Camera \u2192 Formats, choose \"Most Compatible\" and new photos will be JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.",
+        avif: "That is AVIF, which older browsers do not support yet. Re-save it as JPEG or PNG in an image viewer and try again.",
+        tiff: "That is TIFF, which browsers never display. Re-save it as JPEG or PNG in an image viewer and try again.",
+        jp2: "That is JPEG 2000, which browsers never display. Re-save it as JPEG or PNG in an image viewer and try again.",
+      },
       notImage: "That is not an image file.",
       copy: "Copy contents",
       copyFull: "Copy full contents",
@@ -557,7 +578,15 @@
     return node;
   };
 
-  const state = { status: "idle", text: "", info: null, copied: false, revealed: false };
+  const state = {
+    status: "idle",
+    text: "",
+    info: null,
+    copied: false,
+    revealed: false,
+    // 瀏覽器打不開的時候，從檔頭認出來的格式代號，見 sniffFormat
+    format: null,
+  };
 
   // 圖片畫進 canvas 取像素。大圖先縮到合理尺寸，不然手機拍的照片動輒四千萬像素，
   // 解起來會卡住整個分頁。
@@ -662,11 +691,59 @@
           }
           if (Date.now() - started > DECODE_BUDGET_MS) break;
         }
-        resolve(null);
+        resolve({ notFound: true });
       };
-      image.onerror = () => resolve(null);
+      // 瀏覽器解不開這張圖。iPhone 預設拍出來的 HEIC 在 Safari 以外多半是這一條，
+      // 跟「圖裡沒有 QR code」是兩件不同的事，訊息要分開，見 handle。
+      image.onerror = () => {
+        URL.revokeObjectURL(image.src);
+        resolve({ unreadable: true });
+      };
       image.src = URL.createObjectURL(source);
     });
+  }
+
+  // 從檔頭認格式。副檔名與 MIME 都是別人給的，遇到「瀏覽器打不開」的時候，
+  // 能講出它實際是什麼格式，讀者才知道下一步要做什麼。
+  //
+  // 只認幾種真的會被拿來拍照或轉存的：HEIC 是 iPhone 的預設，AVIF 越來越常見，
+  // TIFF 與 JPEG 2000 偶爾從掃描器或舊系統流出來。認不出來就回 null，訊息退回
+  // 一般說法。
+  function sniffFormat(bytes) {
+    const ascii = (from, len) =>
+      String.fromCharCode.apply(null, bytes.subarray(from, from + len));
+    if (bytes.length >= 12 && ascii(4, 4) === "ftyp") {
+      const brand = ascii(8, 4);
+      if (/^(heic|heix|heim|heis|hevc|hevx|mif1|msf1)$/.test(brand)) return "heic";
+      if (/^(avif|avis)$/.test(brand)) return "avif";
+    }
+    if (bytes.length >= 4) {
+      const head = bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3];
+      if (head === 0x49492a00 || head === 0x4d4d002a) return "tiff";
+      if (head === 0x0000000c && ascii(4, 4) === "jP  ") return "jp2";
+    }
+    return null;
+  }
+
+  function readHead(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(new Uint8Array(reader.result));
+      reader.onerror = () => resolve(new Uint8Array(0));
+      reader.readAsArrayBuffer(file.slice(0, 16));
+    });
+  }
+
+  // decode 的結果對到畫面狀態。
+  //
+  // 「瀏覽器打不開這張圖」與「圖裡沒有 QR code」原本共用 notFound 一個狀態，讀者
+  // 拿到的建議是「裁掉周圍、換一張更清楚的」，而那張圖從頭到尾沒有被解開過，照著
+  // 做幾次都不會成功。抽成具名函式是為了能在 Node 裡驗，decode 需要 Image 與
+  // canvas，測不到，見 tools/test_qrread.mjs。
+  function statusFor(result) {
+    if (result && result.unreadable) return "cantOpen";
+    if (result && result.data) return "done";
+    return "notFound";
   }
 
   function handle(file) {
@@ -676,10 +753,19 @@
       return;
     }
     state.status = "reading";
+    state.format = null;
     render();
-    decode(file).then((result) => {
-      if (!result || !result.data) {
-        state.status = "notFound";
+    decode(file).then(async (result) => {
+      const status = statusFor(result);
+      if (status === "cantOpen") {
+        // 認得出格式就講清楚是哪一種，認不出來只說打不開
+        state.format = sniffFormat(await readHead(file));
+        state.status = status;
+        render();
+        return;
+      }
+      if (status === "notFound") {
+        state.status = status;
         render();
         return;
       }
@@ -720,8 +806,13 @@
     root.appendChild(picker);
     root.appendChild(drop);
 
-    if (state.status === "notFound" || state.status === "notImage") {
-      root.appendChild(el("p", "qd-error", t[state.status]));
+    if (state.status === "notFound" || state.status === "notImage" || state.status === "cantOpen") {
+      // cantOpen 分兩段：第一句說瀏覽器打不開，第二句依格式給下一步。
+      // 認不出格式就只有第一句，不會擺一句猜的建議在那裡。
+      const detail = state.status === "cantOpen" && state.format
+        ? t.cantOpenHint[state.format]
+        : null;
+      root.appendChild(el("p", "qd-error", t[state.status] + (detail ? " " + detail : "")));
     }
 
     if (state.status === "done") {
