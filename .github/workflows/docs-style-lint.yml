@@ -22,6 +22,9 @@ on:
       - "docs/zh-TW/**/*.md"
       - "docs/zh-CN/**/*.md"
       - "docs/en/**/*.md"
+      # 小工具區的 UI 字串寫在 js 的 STRINGS 物件裡，跟正文同一套編輯標準。
+      # 2026-08-22 之前不在掃描範圍內，見 tools/docs_style_lint.py 的 lint_js_file。
+      - "docs/zh-TW/js/*.js"
       - "tools/docs_style_lint.py"
       - "tools/test_docs_style_lint.py"
       - ".github/workflows/docs-style-lint.yml"
@@ -49,13 +52,13 @@ jobs:
       - name: 測試 linter 規則
         run: python3 tools/test_docs_style_lint.py
 
-      - name: 掃描變更的 Markdown
+      - name: 掃描變更的 Markdown 與 UI 字串
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           mapfile -t files < <(git diff --name-only --diff-filter=ACM "$base" HEAD -- docs/zh-TW docs/zh-CN docs/en \
-            | grep -E '\.md$' || true)
+            | grep -E '\.md$|^docs/zh-TW/js/[^/]+\.js$' || true)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "沒有變更的 Markdown，略過。"
+            echo "沒有變更的 Markdown 或 UI 字串，略過。"
             exit 0
           fi
           echo "掃描 ${#files[@]} 個變更檔："

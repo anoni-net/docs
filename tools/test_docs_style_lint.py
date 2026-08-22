@@ -299,6 +299,102 @@ def run_lint_raw(doc: str, tmpdir: pathlib.Path, english: bool = False) -> int:
     return int(m.group(1)) + int(m.group(2))
 
 
+
+def run_lint_js(body: str, tmpdir: pathlib.Path) -> int:
+    """掃一段 JS 原始碼，回傳 error + warn 的總數。
+
+    語系從 STRINGS 的 key 判斷，不是從路徑，所以這裡不需要像 run_lint_cn 那樣安排
+    目錄。判斷邏輯在 docs_style_lint.extract_js_strings。
+    """
+    d = tmpdir / "js"
+    d.mkdir(exist_ok=True)
+    f = d / "case.js"
+    f.write_text(body, encoding="utf-8")
+    out = subprocess.run(
+        [sys.executable, str(LINT), str(f)], capture_output=True, text=True
+    ).stdout
+    m = SUMMARY.search(out)
+    return int(m.group(1)) + int(m.group(2)) if m else 0
+
+
+def _js(zh_tw: str = "", zh: str = "", en: str = "", extra: str = "") -> str:
+    """包成一支有 STRINGS 的 js，三個語系各放一條字串。"""
+    return (
+        "(function () {\n"
+        "  const STRINGS = {\n"
+        f'    "zh-TW": {{ a: "{zh_tw or "支援的格式："}" }},\n'
+        f'    zh: {{ a: "{zh or "支持的格式："}" }},\n'
+        f'    en: {{ a: "{en or "Handles:"}" }},\n'
+        "  };\n"
+        f"{extra}"
+        "})();\n"
+    )
+
+
+# JS 裡的 UI 字串。小工具區的按鈕、提示與錯誤訊息都寫在 js 的 STRINGS 物件裡，
+# 讀者直接看得到，但 walk 原本只收 .md，那些字從來沒被規範檢查過。2026-08-22 把
+# stripmeta.js 的「吃得下這些：」改成書面語時才發現這個死角。
+#
+# 語系要從 STRINGS 的 key 判斷而不是路徑：三個語系並列在同一個檔案裡，用路徑判斷
+# 會讓 zh-CN 的字串套到正體規則，「最兼容」這種正確用詞就會被誤報。
+# (JS 原始碼, 應該被攔下來嗎, 說明)
+JS_CASES: list[tuple[str, bool, str]] = [
+    (_js(), False, "三個語系都合規的字串不該被攔"),
+    (_js(zh_tw="這個工具吃得下哪些格式。"), True, "zh-TW 區塊的口語詞要攔"),
+    (_js(zh="这个工具吃得下哪些格式。"), True, "zh 區塊的口語詞一樣要攔"),
+    # zh 區塊套簡體規則，「兼容」是正確用詞
+    (_js(zh="选「最兼容」，之后拍的就是 JPEG。"), False, "zh 的「兼容」不該被當成中國用詞誤報"),
+    # 同一個詞寫在 zh-TW 區塊就該攔
+    (_js(zh_tw="選「最兼容」，之後拍的就是 JPEG。"), True, "zh-TW 的「兼容」要攔"),
+    # 破折號在英文是正常標點
+    (_js(en="This is a sentence\u2014with an em dash."), False, "en 區塊不套中文的破折號規則"),
+    (_js(zh_tw="這是一段話——插入語——後面接著。"), True, "zh-TW 區塊的破折號要攔"),
+    # STRINGS 以外的字串不掃，那些是 CSS、選擇器、格式代號
+    (_js(extra='  const CSS = ".x { color: red }";\n'
+               '  const OTHER = "這個字串不在 STRINGS 裡，吃得下。";\n'),
+     False, "STRINGS 以外的字串不掃"),
+    # 巢狀物件（例如 qrread.js 的 cantOpenHint）要能穿過去，語系不變
+    ("(function () {\n"
+     "  const STRINGS = {\n"
+     '    "zh-TW": { hint: { heic: "這個格式吃得下嗎。" } },\n'
+     "    zh: { hint: { heic: \"这个格式支持吗。\" } },\n"
+     "    en: { hint: { heic: \"Supported.\" } },\n"
+     "  };\n"
+     "})();\n", True, "巢狀物件裡的字串照樣掃"),
+    ("const x = \"這個檔案沒有 STRINGS，吃得下。\";\n", False, "沒有 STRINGS 的 js 不掃"),
+    # 內容含雙引號時 JS 那邊會改用單引號包。threatmodel.js 的英文版就有兩條這樣寫，
+    # 只認雙引號會整條漏掉，而漏掉的字串照樣顯示在畫面上。
+    ("(function () {\n"
+     "  const STRINGS = {\n"
+     "    \"zh-TW\": { a: '按下「產生摘要」，這個工具吃得下。' },\n"
+     "    zh: { a: \"支持的格式：\" },\n"
+     "    en: { a: \"Handles:\" },\n"
+     "  };\n"
+     "})();\n", True, "單引號包的字串也要掃"),
+    # 跨行的巢狀物件。qrread.js 的 cantOpenHint 就是這樣寫的，語系必須穿過內層的
+    # 大括號，中途被清掉的話裡面的字串會全部沒人掃。
+    ("(function () {\n"
+     "  const STRINGS = {\n"
+     '    "zh-TW": {\n'
+     "      a: \"支援的格式：\",\n"
+     "      hint: {\n"
+     "        heic: \"這個格式吃得下嗎。\",\n"
+     "      },\n"
+     "    },\n"
+     "    zh: { a: \"支持的格式：\" },\n"
+     "    en: { a: \"Handles:\" },\n"
+     "  };\n"
+     "})();\n", True, "跨行巢狀物件裡的字串照樣掃"),
+    # 空字串沒有內容可掃，但不能讓它把後面的抽取弄亂
+    ("(function () {\n"
+     "  const STRINGS = {\n"
+     "    \"zh-TW\": { a: \"\", b: \"這個工具吃得下。\" },\n"
+     "    zh: { a: \"\" },\n"
+     "    en: { a: \"\" },\n"
+     "  };\n"
+     "})();\n", True, "空字串不影響同一行後面的抽取"),
+]
+
 def main() -> int:
     tmpdir = pathlib.Path(tempfile.mkdtemp())
     failures = []
@@ -338,6 +434,15 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
             )
 
+    for body, should_flag, label in JS_CASES:
+        n = run_lint_js(body, tmpdir)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
+            )
+
     for doc, should_flag, label in ZH_HEADING_CASES:
         n = run_lint_raw(doc, tmpdir)
         flagged = n > 0
@@ -348,7 +453,7 @@ def main() -> int:
             )
 
     total = (len(CASES) + 1 + len(CN_CASES) + len(EN_CASES) + len(HEADING_CASES)
-             + len(ZH_HEADING_CASES))
+             + len(ZH_HEADING_CASES) + len(JS_CASES))
     if failures:
         print(f"失敗 {len(failures)} / {total}\n")
         print("\n".join(failures))

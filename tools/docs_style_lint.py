@@ -392,6 +392,165 @@ def is_simplified_doc(path: Path) -> bool:
     return "/zh-CN/" in path.as_posix()
 
 
+# 小工具區的 UI 字串。九支 js 各有一個 STRINGS 物件，三個語系並列：
+#
+#     const STRINGS = {
+#       "zh-TW": { key: "值", ... },
+#       zh: { ... },
+#       en: { ... },
+#     };
+#
+# 語系 key 的寫法固定（"zh-TW" 帶引號，zh 與 en 不帶），縮排也固定，所以不需要
+# 真的解析 JS。巢狀物件（例如 qrread.js 的 cantOpenHint）要能穿過去，語系不變。
+JS_STRINGS_START_RE = re.compile(r"^\s*const STRINGS = \{\s*$")
+# 語系 key 不強制獨佔一行。`zh: {` 與 `zh: { a: "x" },` 都要認得，不然短的區塊
+# 寫成一行就會整段被跳過，而那種寫法完全合法。
+JS_LOCALE_KEY_RE = re.compile(r'(?:^|[{,])\s*(?:"([a-zA-Z-]+)"|([a-zA-Z-]+))\s*:\s*\{')
+# key: "值"。單引號也要認：內容本身含雙引號時 JS 那邊會改用單引號包，
+# threatmodel.js 的英文版就有兩條這樣寫，只認雙引號會整條漏掉。
+# 值裡的跳脫字元要吃掉，不然遇到 \" 會提早結束。用 finditer，一行可能有多筆。
+JS_ENTRY_RE = re.compile(
+    r'(?:^|[{,])\s*(?:"[\w-]+"|[\w$]+)\s*:\s*'
+    r'(?:"((?:[^"\\]|\\.)*)"|\'((?:[^\'\\]|\\.)*)\')'
+)
+
+# STRINGS 裡的語系 key 對到規則集。zh 是 zh-CN 版的 key，見各支 js 的 pickLang。
+JS_LOCALES = {"zh-TW": ("zh", False), "zh": ("zh", True), "zh-CN": ("zh", True), "en": ("en", False)}
+
+
+def extract_js_strings(text: str):
+    """從 JS 的 STRINGS 物件抽出 (行號, 語系, 字串內容)。
+
+    只認 STRINGS 這一個物件。JS 檔裡其他地方的字串是 CSS、選擇器、格式代號那類
+    不是給人讀的東西，掃它們只會製造雜訊。
+    """
+    out = []
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines) and not JS_STRINGS_START_RE.match(lines[i]):
+        i += 1
+    if i >= len(lines):
+        return out
+    depth = 1  # 已經進到 STRINGS 的大括號裡
+    locale = None
+    locale_depth = None
+    i += 1
+    while i < len(lines) and depth > 0:
+        raw = lines[i]
+        if locale is None and depth == 1:
+            for m in JS_LOCALE_KEY_RE.finditer(raw):
+                name = m.group(1) or m.group(2)
+                if name in JS_LOCALES:
+                    locale = name
+                    locale_depth = depth
+                    break
+        if locale is not None:
+            for m in JS_ENTRY_RE.finditer(raw):
+                # 空字串也照抽。過濾留給 lint_line，它本來就會對空內容直接返回，
+                # 抽取這一層忠實一點，帳才對得起來。
+                value = m.group(1) if m.group(1) is not None else m.group(2)
+                out.append((i + 1, locale, value))
+        depth += raw.count("{") - raw.count("}")
+        if locale is not None and depth <= locale_depth:
+            locale = None
+            locale_depth = None
+        i += 1
+    return out
+
+
+def lint_js_file(path: Path):
+    """掃 JS 裡的 UI 字串。
+
+    這些字串是讀者在小工具頁面上直接看到的按鈕、提示與錯誤訊息，跟 Markdown 正文
+    同一套編輯標準，卻一直不在掃描範圍內（walk 只收 .md）。2026-08-22 把
+    stripmeta.js 的「吃得下這些：」改成書面語時才發現這個死角，順手抽出來跑一次，
+    648 條字串裡有 2 個 error、16 個 warn 從來沒有人看過。
+
+    語系從 STRINGS 的 key 判斷，不是從路徑。同一個檔案裡三個語系並列，用路徑判斷
+    會讓 zh-CN 的字串套到正體規則，「最兼容」這種正確用詞就會被誤報。
+    """
+    findings = []
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as e:
+        return [(0, ERROR, "read-error", str(e), "")]
+    for lineno, locale, value in extract_js_strings(text):
+        script, simplified = JS_LOCALES[locale]
+        english = script == "en"
+        # 字串裡的 \n 是換行跳脫，不是內容，換成空白才不會讓規則看到怪東西
+        raw = value.replace("\\n", " ")
+        clean = strip_noise(raw, {})
+        findings.extend(lint_line(lineno, raw, clean, english, simplified))
+    return findings
+
+
+def lint_line(i: int, raw: str, clean: str, english: bool, simplified: bool):
+    """對一行（或一條 UI 字串）套用所有正文規則。
+
+    抽成獨立函式是為了讓 Markdown 與 JS 裡的 UI 字串共用同一套判準。小工具區的
+    按鈕、提示與錯誤訊息都是 JS 字串，那些字讀者直接看得到，卻一直沒被規範檢查過，
+    見 lint_js_file。
+
+    english 與 simplified 由呼叫端決定。Markdown 看路徑，JS 看那條字串屬於 STRINGS
+    裡的哪一個語系。
+    """
+    findings = []
+    if not clean.strip():
+        return findings
+    for code, sev, rx, msg in (PROSE_RULES_EN if english else PROSE_RULES):
+        for m in rx.finditer(clean):
+            # em-dash 放行：表格空資料格（| — |）與引用的連結標題（[原文標題](url)）
+            if code == "em-dash" and (
+                in_empty_table_cell(clean, m.start())
+                or in_link_text(clean, m.start())
+            ):
+                continue
+            snippet = raw[max(0, m.start() - 8): m.start() + 12].strip()
+            findings.append((i, sev, code, msg, snippet))
+    if english:
+        if AI_OPENER_EN_RE.search(clean):
+            findings.append((i, ERROR, "ai-opener",
+                             "避免以 It is worth noting that / In conclusion / All in all 開頭",
+                             raw.strip()[:32]))
+    elif AI_OPENER_RE.search(clean):
+        findings.append((i, ERROR, "ai-opener",
+                         "避免以「值得注意的是/總的來說/綜上所述」開頭", raw.strip()[:24]))
+    if english and has_title_colon(clean):
+        findings.append((i, WARN, "title-colon",
+                         "標題不用「主題：說明」的冒號句構，改寫成一句完整的話"
+                         "（照錄外部來源原始標題時不在此限）", raw.strip()[:40]))
+    for code, rx, word in DEMONSTRATIVE_RULES:
+        for msg, snippet in check_zhe_repeat(raw, clean, rx, word):
+            findings.append((i, WARN, code, msg, snippet))
+    for m in JIANG_RE.finditer(clean):
+        around = clean[max(0, m.start() - 1): m.start() + 2]
+        if not JIANG_ALLOW.search(around):
+            findings.append((i, WARN, "colloquial-jiang",
+                             "口語「講」建議改書面語（提到、說明）", raw[max(0, m.start() - 6): m.start() + 6].strip()))
+    # 用 raw 而不是 clean：主機名多半寫在 code span 裡，而 strip_noise 會把那些
+    # 剝掉，剝完就抓不到了，可是產物裡它照樣在。
+    for code, rx, msg in DEPLOY_RULES:
+        for m in rx.finditer(raw):
+            findings.append((i, ERROR, code, msg,
+                             raw[max(0, m.start() - 6): m.start() + 6].strip()))
+    def scan_terms(code, rx, allow, msg):
+        for m in rx.finditer(clean):
+            around = clean[max(0, m.start() - 2): m.end() + 2]
+            if allow is not None and allow.search(around):
+                continue
+            findings.append((i, WARN, code, msg,
+                             raw[max(0, m.start() - 6): m.start() + 6].strip()))
+
+    for code, rx, allow, msg in COLLOQUIAL_RULES:
+        scan_terms(code, rx, allow, msg)
+    for code, rx, allow, msg, both_scripts in REGIONAL_RULES:
+        if simplified and not both_scripts:
+            continue
+        scan_terms(code, rx, allow, msg)
+
+    return findings
+
+
 def lint_file(path: Path):
     findings = []
     try:
@@ -440,59 +599,15 @@ def lint_file(path: Path):
         if disabled:
             continue
         clean = strip_noise(raw, state)
-        if not clean.strip():
-            continue
-        for code, sev, rx, msg in (PROSE_RULES_EN if english else PROSE_RULES):
-            for m in rx.finditer(clean):
-                # em-dash 放行：表格空資料格（| — |）與引用的連結標題（[原文標題](url)）
-                if code == "em-dash" and (
-                    in_empty_table_cell(clean, m.start())
-                    or in_link_text(clean, m.start())
-                ):
-                    continue
-                snippet = raw[max(0, m.start() - 8): m.start() + 12].strip()
-                findings.append((i, sev, code, msg, snippet))
-        if english:
-            if AI_OPENER_EN_RE.search(clean):
-                findings.append((i, ERROR, "ai-opener",
-                                 "避免以 It is worth noting that / In conclusion / All in all 開頭",
-                                 raw.strip()[:32]))
-        elif AI_OPENER_RE.search(clean):
-            findings.append((i, ERROR, "ai-opener",
-                             "避免以「值得注意的是/總的來說/綜上所述」開頭", raw.strip()[:24]))
-        if english and has_title_colon(clean):
-            findings.append((i, WARN, "title-colon",
-                             "標題不用「主題：說明」的冒號句構，改寫成一句完整的話"
-                             "（照錄外部來源原始標題時不在此限）", raw.strip()[:40]))
-        for code, rx, word in DEMONSTRATIVE_RULES:
-            for msg, snippet in check_zhe_repeat(raw, clean, rx, word):
-                findings.append((i, WARN, code, msg, snippet))
-        for m in JIANG_RE.finditer(clean):
-            around = clean[max(0, m.start() - 1): m.start() + 2]
-            if not JIANG_ALLOW.search(around):
-                findings.append((i, WARN, "colloquial-jiang",
-                                 "口語「講」建議改書面語（提到、說明）", raw[max(0, m.start() - 6): m.start() + 6].strip()))
-        # 用 raw 而不是 clean：主機名多半寫在 code span 裡，而 strip_noise 會把那些
-        # 剝掉，剝完就抓不到了，可是產物裡它照樣在。
-        for code, rx, msg in DEPLOY_RULES:
-            for m in rx.finditer(raw):
-                findings.append((i, ERROR, code, msg,
-                                 raw[max(0, m.start() - 6): m.start() + 6].strip()))
-        def scan_terms(code, rx, allow, msg):
-            for m in rx.finditer(clean):
-                around = clean[max(0, m.start() - 2): m.end() + 2]
-                if allow is not None and allow.search(around):
-                    continue
-                findings.append((i, WARN, code, msg,
-                                 raw[max(0, m.start() - 6): m.start() + 6].strip()))
-
-        for code, rx, allow, msg in COLLOQUIAL_RULES:
-            scan_terms(code, rx, allow, msg)
-        for code, rx, allow, msg, both_scripts in REGIONAL_RULES:
-            if simplified and not both_scripts:
-                continue
-            scan_terms(code, rx, allow, msg)
+        findings.extend(lint_line(i, raw, clean, english, simplified))
     return findings
+
+
+def _safe_read(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return ""
 
 
 def iter_md(paths):
@@ -500,13 +615,15 @@ def iter_md(paths):
         p = Path(p)
         if p.is_dir():
             yield from sorted(p.rglob("*.md"))
-        elif p.suffix == ".md":
+            # 只收有 STRINGS 的那幾支。sw.js 與 vendor 底下的第三方程式沒有 UI 字串。
+            yield from sorted(q for q in p.rglob("*.js") if "STRINGS = {" in _safe_read(q))
+        elif p.suffix in (".md", ".js"):
             yield p
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="anoni.net/docs 編輯標準掃描器（Tier 1）")
-    ap.add_argument("paths", nargs="+", help="要掃描的 .md 檔或目錄")
+    ap.add_argument("paths", nargs="+", help="要掃描的 .md／.js 檔或目錄")
     ap.add_argument("--no-warn", action="store_true", help="只顯示 error")
     ap.add_argument("--include-rule-docs", action="store_true",
                     help="連規則文件本身（貢獻者百科等）一起掃")
@@ -521,7 +638,7 @@ def main(argv=None):
             n_skipped += 1
             continue
         n_files += 1
-        items = lint_file(f)
+        items = lint_js_file(f) if f.suffix == ".js" else lint_file(f)
         if args.no_warn:
             items = [x for x in items if x[1] == ERROR]
         if not items:
