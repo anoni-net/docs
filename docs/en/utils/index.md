@@ -6,18 +6,18 @@ icon: material/tools
 
 # :material-tools: Tools
 
-The articles on this site explain how to protect yourself. This section holds the things you can actually press. Four rules apply to all of them:
+The articles on this site explain how to protect yourself. This section holds the tools you can use directly. Four rules apply to all of them:
 
 - Everything is computed in your browser, and nothing is sent anywhere
 - Once stored on your device they work with the network off, and working offline is itself the proof that nothing is being sent
-- The source is in [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}, so anyone who reads code can check
+- The source is in [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}, so anyone who can read code can verify it
 - All of them need JavaScript enabled, because the computation happens on your device
 
 ## One conflict to know about if you use Tor Browser
 
 Setting [Tor Browser's security level](../tools/tor-browser-advanced.md) to Safest disables JavaScript entirely, and the tools in this section stop responding.
 
-The conflict is that the same page recommends raising the level for "unfamiliar onion sites, links of unknown origin, unfamiliar domains", and receiving a suspicious link is exactly when you would want the [invisible character detector](invisible.md) or the [QR code reader](qr-read.md).
+The conflict is that the same page's guidance is to raise the level for "unfamiliar onion sites, links of unknown origin, unfamiliar domains", and receiving a suspicious link is exactly when you would want the [invisible character detector](invisible.md) or the [QR code reader](qr-read.md).
 
 Handle the two separately. Open the suspicious site at the higher level, copy out the text or image you want to check, switch back to Standard to examine it, then raise the level again. The tools here make no outbound connections, so opening them at Standard does not add to your exposure on that site.
 
@@ -27,7 +27,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-clipboard-check-outline: **[Threat model checklist](threat-model.md)**
 
-    Answer the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches in your answers flagged. Nothing is saved; reloading clears it.
+    Turn your answers to the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches flagged. Nothing is saved, and reloading clears it.
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
@@ -61,7 +61,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 ## Taking them offline
 
-The code and data behind these tools are stored along with the page. Tick this section in the [offline reading](../offline.md) list and they will open without a network afterwards.
+The code and data behind these tools are stored along with the page. Tick this section in the [offline reading](../offline.md) list and the pages will open without a network afterwards.
 
 ## Whose code this uses
 
@@ -76,10 +76,10 @@ Most of the code in this section is our own, under [anoni-net/docs](https://gith
 
 The `pdf-lib.min.js` build also bundles Microsoft's tslib (Apache-2.0), whose copyright header survives in the file rather than being stripped by the minifier.
 
-Leaving these unmodified is deliberate. Editing them would forfeit the "this is the upstream file" property, leaving readers who want to check with nothing but our word for it. The files sit under `utils/vendor/` and can be diffed against upstream.
+Leaving these unmodified is deliberate. Editing them would forfeit their upstream provenance, leaving readers who want to check with nothing but our word for it. The files sit under `utils/vendor/` and can be diffed against upstream.
 
-Why each of these is not written from scratch is explained at the bottom of the relevant page. The shared reason is that getting them wrong does not crash anything; it produces output that looks right and is not, which is harder to notice than a failure.
+Why each of these is not written from scratch is explained at the bottom of the relevant page. The shared reason is that getting them wrong does not crash anything. It produces output that looks right and is not, which is harder to notice than a failure, and the QR code generator page records one such case we hit ourselves.
 
 ## What is not here
 
-Anything that needs an external service to work stays out, because that conflicts with both rules above. For network measurement use [OONI Probe](../tools/what-is-ooni.md), which is built for the job and documents what happens to the data.
+Anything that needs an external service to work stays out, because the connection itself breaks both the offline rule and the no-data rule. For network measurement use [OONI Probe](../tools/what-is-ooni.md), which is built for network measurement and documents what happens to the data.

@@ -70,10 +70,9 @@ Be extra careful on phones, where the clipboard is often shared across apps.
 
 - Somewhere to keep what you generated: [password managers](../tools/password-manager.md)
 - How the list was built and what the selection rules were: [Asian Diceware](../tools/asian-diceware.md)
-- Taking this page with you: [offline reading](../offline.md)
 
 ## Works offline
 
-Like the rest of this section, the code is stored on your device and runs without a network. The wordlist is stored alongside it, so passphrases still come out with the network off, which is the most direct proof that nothing generated here is being sent anywhere.
+Like the rest of this section, the code is stored on your device and runs without a network. The wordlist is stored alongside it, so passphrases still come out with the network off.
 
 To take this page with you, see [offline reading](../offline.md).
