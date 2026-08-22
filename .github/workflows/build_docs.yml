@@ -19,17 +19,16 @@ on:
       - ".github/workflows/build_docs.yml"
   workflow_dispatch:
 
-# 最後兩步是先 `aws s3 rm --recursive` 清空該 prefix，再 `s3 sync` 上傳。兩個 run
-# 重疊時，後者的清空會發生在前者上傳到一半，S3 會有一段內容不完整的空窗。連續合併
-# 幾個 PR 再同步 docs 分支就會踩到。
+# 最後一步是 `aws s3 sync --delete`。兩個 run 重疊時，兩份不同 commit 的產物會交錯
+# 寫進同一個 prefix，而 `--delete` 會讓後到的那份刪掉前一份剛上傳、自己沒有的物件，
+# 結果是誰都不完整。連續合併幾個 PR 再同步 docs 分支就會踩到。
 #
 # 全域一組（不帶 ref），因為 workflow_dispatch 可以從任何分支觸發，而所有 run 都寫
 # 同一個 bucket，要序列化的是 S3 寫入本身。standard 與 onion 是同一個 run 裡的兩格，
 # 寫的是不同 prefix，彼此平行跑沒有問題，要擋的是 run 與 run 之間。
 #
-# 用 false 而非 true：run 被中途取消有機會停在 `s3 rm` 之後、`s3 sync` 之前，那會留下
-# 一個空的 bucket。排隊比取消安全。排隊中的 run 若被更新的 run 取代，它還沒開始執行，
-# 不會碰到 S3。
+# 用 false 而非 true：中途取消會停在 sync 跑到一半，站上留下新舊混合的一份。排隊比
+# 取消安全。排隊中的 run 若被更新的 run 取代，它還沒開始執行，不會碰到 S3。
 concurrency:
   group: build-docs-s3
   cancel-in-progress: false
@@ -59,12 +58,11 @@ jobs:
       # 任何上界，那個 run 就一直佔著 build-docs-s3 這組 concurrency，期間所有發布都
       # 排隊卡死，最後靠人工察覺才取消。GitHub 預設的 360 分鐘等於沒有保護。
       #
-      # 刻意不用 job 層的 timeout-minutes：job 層逾時可能落在 `Clean the all files`
-      # 與 `Upload to S3` 之間，那正是上面 concurrency 註解要避開的狀況，會留下一個
-      # 空的 bucket。逐步設定的話，逾時只會發生在碰 S3 之前，最壞是這次沒部署成功，
-      # 站上維持上一版。
+      # 刻意不用 job 層的 timeout-minutes：job 層逾時可能落在 `Upload to S3` 跑到一半，
+      # 站上會留下新舊混合的一份。逐步設定的話，逾時只會發生在碰 S3 之前，最壞是這次
+      # 沒部署成功，站上維持上一版。
       #
-      # 碰 S3 的兩步與其後的 Cloudflare 清除不設上界，理由同上，寧可讓它們跑完。
+      # 碰 S3 那一步與其後的 Cloudflare 清除不設上界，理由同上，寧可讓它們跑完。
       # 純本機運算的步驟（Test cache purge script、Show packages、Verify onion output
       # 等）也不設，它們沒有卡住的來源，設了只是雜訊。
       - name: Checkout
@@ -221,18 +219,27 @@ jobs:
             exit 1
           fi
 
-      - name: Clean the all files
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
-        # 結尾的斜線不能省。`s3://bucket/docs` 是前綴比對，會連 `docs-onion/` 底下的
-        # 物件一起刪掉，兩格同時跑就會互相清空。
-        run: source ./.venv/bin/activate; aws s3 rm "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --recursive
+      # `--delete` 取代了原本「先 `aws s3 rm --recursive` 清空、再 `s3 sync` 上傳」的
+      # 兩步。舊做法每次部署都會在清空與上傳完成之間留下一段站上內容不完整的空窗，
+      # 實測清空 46 秒、上傳 87 秒，那個窗口就是一分半。改成單一步的 sync 之後，
+      # 每個物件是逐一被覆寫的，任何時刻站上都有完整的一份。
+      #
+      # 刪除的語意沒有變：本機沒有的物件照樣會從 bucket 移除，只是跟上傳合併成一次
+      # 掃描，不再需要先把整個 prefix 清掉。
+      #
+      # 有一個前提要記著。`aws s3 sync` 判斷要不要上傳，看的是檔案大小與修改時間，
+      # 不是內容。實測「內容不同但大小相同、而且本機檔案不比遠端新」的組合會被靜靜
+      # 跳過。這裡不會踩到，因為每次 run 都是全新 checkout 加重新建置，產出檔案的
+      # 時間一定晚於上一次部署。要是哪天改成沿用快取的產出目錄，這個前提就不成立，
+      # 得換成比對內容的工具。
+      #
+      # 結尾的斜線不能省。`s3://bucket/docs` 是前綴比對，會連 `docs-onion/` 底下的
+      # 物件一起刪掉，兩格同時跑就會互相清空。
       - name: Upload to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
-        run: source ./.venv/bin/activate; aws s3 sync ./output "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --acl public-read
+        run: source ./.venv/bin/activate; aws s3 sync ./output "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --acl public-read --delete
 
       # S3 換好之後 Cloudflare edge 還是握著舊的 HTML，站上看到的仍是上一版。origin
       # 送的是 `max-age=14400, must-revalidate`，但實測 age 超過 45000 秒依然回 HIT，

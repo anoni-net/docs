@@ -247,7 +247,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 只動 `tools/` 其他檔案或 CI 設定時推 `docs` 不會建置，那是刻意的，產物沒有變。真的需要重跑從 Actions 頁面用 `workflow_dispatch`
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
-  - 清理並上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`
+  - 以 `aws s3 sync --delete` 上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`。單一步覆寫，站上任何時刻都有完整的一份，不再有先清空再上傳造成的空窗
   - 上傳後由 `tools/cf_purge.py` 清除這次產出網址的 Cloudflare 快取，範圍限 `/docs/`，不動 zone 內其他服務
 
   **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 跑完，內容就已經上線，不需要額外的手動發布步驟。發布指令：
