@@ -16,6 +16,7 @@ import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import cf_purge  # noqa: E402
 from cf_purge import BATCH_SIZE, batched, collect_urls, to_url  # noqa: E402
 
 BASE = "https://anoni.net/docs"
@@ -120,12 +121,68 @@ def test_batched() -> None:
     check("batched 空清單", list(batched([], BATCH_SIZE)), [])
 
 
+# === 並行送出 ===
+#
+# 逐批循序呼叫時，四十幾批每批往返一秒多，光清快取就吃掉部署的五分之一。改成並行
+# 之後，「錯一批就整支失敗」與「每一批都送到」這兩件事要有測試守著，不然清一半
+# 也會是綠燈，而漏清的症狀是訪客看到舊內容，不會有人立刻發現。
+
+def _fake_purge(sent, fail_on=()):
+    import threading
+    lock = threading.Lock()
+
+    def fake(zone, token, urls, attempts=3):
+        with lock:
+            sent.append(tuple(urls))
+        if urls[0] in fail_on:
+            raise RuntimeError("boom")
+
+    return fake
+
+
+def _run(batches, fail_on=()):
+    sent = []
+    original = cf_purge.purge_batch
+    cf_purge.purge_batch = _fake_purge(sent, fail_on)
+    try:
+        code = cf_purge.run_batches("z", "t", batches, sum(len(b) for b in batches), BASE)
+    finally:
+        cf_purge.purge_batch = original
+    return code, sent
+
+
+def test_run_batches_sends_every_batch() -> None:
+    batches = [[f"{BASE}/p{i}/"] for i in range(50)]
+    code, sent = _run(batches)
+    check("全部成功時回 0", code, 0)
+    check("每一批都送到", len(sent), 50)
+    check("沒有漏件", sorted(x for c in sent for x in c),
+          sorted(x for c in batches for x in c))
+
+
+def test_run_batches_fails_when_any_batch_fails() -> None:
+    batches = [[f"{BASE}/p{i}/"] for i in range(20)]
+    code, sent = _run(batches, fail_on={f"{BASE}/p7/"})
+    check("有一批失敗就回 1", code, 1)
+    # 已經送出去的讓它跑完，中途硬停只會讓清除範圍更難講清楚
+    check("其餘批次照樣送完", len(sent), 20)
+
+
+def test_run_batches_empty() -> None:
+    code, sent = _run([])
+    check("沒有東西要清時回 0", code, 0)
+    check("沒有呼叫", sent, [])
+
+
 def main() -> int:
     for fn in [
         test_to_url,
         test_to_url_encodes_special_chars,
         test_collect_urls,
         test_batched,
+        test_run_batches_sends_every_batch,
+        test_run_batches_fails_when_any_batch_fails,
+        test_run_batches_empty,
     ]:
         fn()
     if failures:

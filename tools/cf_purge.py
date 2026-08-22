@@ -31,6 +31,7 @@ anoni.net 這個 zone 底下還有主站、pad、form、search 等服務，`purg
 from __future__ import annotations
 
 import argparse
+import concurrent.futures as futures
 import json
 import os
 import sys
@@ -42,6 +43,10 @@ from urllib.parse import quote
 
 # Pro 方案 purge by URL 的單次上限。Enterprise 是 500，改方案時記得一起調。
 BATCH_SIZE = 30
+
+# 同時送幾批。Cloudflare 的 purge_cache 限制是每個 zone 每分鐘 1000 次呼叫，站上
+# 四十幾批離上限很遠，這個數字是為了不要在對方那邊排隊，不是為了逼近限制。
+MAX_WORKERS = 6
 API = "https://api.cloudflare.com/client/v4/zones/{zone}/purge_cache"
 DEFAULT_BASE_URL = "https://anoni.net/docs"
 
@@ -143,15 +148,41 @@ def main() -> int:
         )
         return 0
 
-    for i, chunk in enumerate(batches, 1):
-        try:
-            purge_batch(zone, token, chunk)
-        except RuntimeError as exc:
-            print(f"::error::第 {i}/{len(batches)} 批清除失敗：{exc}", file=sys.stderr)
-            return 1
-        print(f"  第 {i}/{len(batches)} 批完成（{len(chunk)} 條）")
+    return run_batches(zone, token, batches, len(urls), args.base_url)
 
-    print(f"Cloudflare 快取已清除，共 {len(urls)} 個 {args.base_url} 底下的網址")
+
+def run_batches(zone: str, token: str, batches, url_count: int, base_url: str) -> int:
+    """把每一批送出去，錯一批就整支失敗。
+
+    原本是逐批循序呼叫。四十幾批、每批往返一秒多，光清快取就花掉部署的五分之一。
+    改成同時送幾批，實際的清除工作在 Cloudflare 那邊本來就是各自獨立的。
+
+    失敗的處理跟循序版一樣：任何一批失敗就回 1，讓建置變紅燈。差別是已經送出去的
+    批次會讓它跑完再回報，中途硬停只會讓清除的範圍更難講清楚。
+    """
+    failed: list[str] = []
+    done = 0
+    with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+        pending = {
+            pool.submit(purge_batch, zone, token, chunk): (i, chunk)
+            for i, chunk in enumerate(batches, 1)
+        }
+        for fut in futures.as_completed(pending):
+            i, chunk = pending[fut]
+            done += 1
+            try:
+                fut.result()
+            except RuntimeError as exc:
+                failed.append(f"第 {i}/{len(batches)} 批清除失敗：{exc}")
+                continue
+            print(f"  {done}/{len(batches)} 批完成（第 {i} 批，{len(chunk)} 條）")
+
+    if failed:
+        for line in failed:
+            print(f"::error::{line}", file=sys.stderr)
+        return 1
+
+    print(f"Cloudflare 快取已清除，共 {url_count} 個 {base_url} 底下的網址")
     return 0
 
 
