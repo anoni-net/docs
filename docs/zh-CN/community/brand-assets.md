@@ -270,7 +270,7 @@ drawio Desktop 的 Save 对话框有两个关键栏位：
 
 **Format dropdown 才是决定性的设定**。如果 Filename 取 `xxx.drawio.svg` 但 Format 选了「SVG (.svg)」，会得到一个文件名长得像 `.drawio.svg`、但实际没 XML 的纯 SVG。最容易踩的雷。
 
-drawio Desktop 默认 format 通常是 `.drawio`（纯 XML，浏览器看不到图），新建档时记得手动切到「Editable Vector Image」。或在 Preferences 改 Default save format 永久预设 `.drawio.svg`。
+drawio Desktop 默认 format 通常是 `.drawio`（纯 XML，浏览器看不到图），新建档时记得手动切到「Editable Vector Image」。或在 Preferences 改 Default save format 永久默认 `.drawio.svg`。
 
 ### 不要用 Export
 

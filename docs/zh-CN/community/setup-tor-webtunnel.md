@@ -104,7 +104,7 @@ location = /$PATH {
 
     **把秘密路径藏得更彻底**
 
-    预设情况下，对秘密路径送一个没有 WebSocket 握手的普通请求，会被转发给桥接，而桥接的回应可能跟站上其他路径长得不一样，反而暴露出这个路径的存在。加一行，让没有 Upgrade 标头的请求一律回 404，这个路径就跟站上任何不存在的网址没有两样：
+    默认情况下，对秘密路径送一个没有 WebSocket 握手的普通请求，会被转发给桥接，而桥接的回应可能跟站上其他路径长得不一样，反而暴露出这个路径的存在。加一行，让没有 Upgrade 标头的请求一律回 404，这个路径就跟站上任何不存在的网址没有两样：
 
     ```nginx
     location = /$PATH {
@@ -119,7 +119,7 @@ location = /$PATH {
 
     **不要让 nginx 切断长连线**
 
-    nginx 的 `proxy_read_timeout` 预设只有 60 秒，连线超过 60 秒没有资料流动就会被切掉，对长时间挂着的 Tor 电路会造成莫名的断线。把 `location` 区块里的逾时拉长，并开启 TCP keepalive：
+    nginx 的 `proxy_read_timeout` 默认只有 60 秒，连线超过 60 秒没有资料流动就会被切掉，对长时间挂着的 Tor 电路会造成莫名的断线。把 `location` 区块里的逾时拉长，并开启 TCP keepalive：
 
     ```nginx
         proxy_read_timeout 86400s;
@@ -161,7 +161,7 @@ echo "GENEDORPORT=4$(cat /dev/urandom | tr -cd '0987654321'|head -c 4)" >> .env
 curl https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel/-/raw/main/release/container/docker-compose.yml?inline=false > docker-compose.yml
 ```
 
-这份 compose 预设开启自动更新，桥接会自己更新到新版，不需要额外动作。接着启动：
+这份 compose 默认开启自动更新，桥接会自己更新到新版，不需要额外动作。接着启动：
 
 ```bash
 docker compose up -d
@@ -183,7 +183,7 @@ docker compose exec webtunnel-bridge get-bridge-line.sh
     docker exec webtunnelBridge get-bridge-line.sh
     ```
 
-桥接行里的 IP（特别是 IPv6）是随机产生的占位符，不会真的被使用，这是 pluggable transport 规格要求那个位置要有 IP 而已。实际连接是靠你的域名与秘密路径。预设情况下，你的桥接会透过 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 自动分发给需要的使用者。
+桥接行里的 IP（特别是 IPv6）是随机产生的占位符，不会真的被使用，这是 pluggable transport 规格要求那个位置要有 IP 而已。实际连接是靠你的域名与秘密路径。默认情况下，你的桥接会透过 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 自动分发给需要的使用者。
 
 ## 进阶维运
 
@@ -200,7 +200,7 @@ ufw status
 
 ### 伪装页设计
 
-根路径那个「无害页面」是伪装的一部分。建议放一个有实际内容、不会引人怀疑的静态页（个人作品集、技术笔记、放置中页面都行），避免空白页或预设的 nginx 欢迎页，那反而显眼。
+根路径那个「无害页面」是伪装的一部分。建议放一个有实际内容、不会引人怀疑的静态页（个人作品集、技术笔记、放置中页面都行），避免空白页或默认的 nginx 欢迎页，那反而显眼。
 
 ### 监控与健康检查
 
@@ -216,7 +216,7 @@ ufw status
 
 ### 软件更新
 
-compose 预设自动更新桥接本体。系统层的 Docker、nginx、certbot 仍要定期 `apt update && apt upgrade`，TLS 证书续期则交给 certbot timer。
+compose 默认自动更新桥接本体。系统层的 Docker、nginx、certbot 仍要定期 `apt update && apt upgrade`，TLS 证书续期则交给 certbot timer。
 
 ### 事件处置 runbook
 

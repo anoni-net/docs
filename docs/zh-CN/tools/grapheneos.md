@@ -6,7 +6,7 @@ icon: material/cellphone-lock
 
 # :material-cellphone-lock: GrapheneOS：高度隐私的行动作业系统
 
-手机是我们身上最贴身的一台装置，随身携带、长时间连网，里面有定位、通讯录、讯息、相簿、健康记录。原厂 Android 预设绑一个 Google 账号，在背景持续回传遥测资料（装置状态与使用情形），多数应用程式又各自蒐集可识别你的资讯。想重新掌握这台手机，自行决定它连接哪些服务、向外送出哪些资料，[GrapheneOS](https://grapheneos.org/){target="_blank"} 是目前社区最常推荐的选择。
+手机是我们身上最贴身的一台装置，随身携带、长时间连网，里面有定位、通讯录、讯息、相簿、健康记录。原厂 Android 默认绑一个 Google 账号，在背景持续回传遥测资料（装置状态与使用情形），多数应用程式又各自蒐集可识别你的资讯。想重新掌握这台手机，自行决定它连接哪些服务、向外送出哪些资料，[GrapheneOS](https://grapheneos.org/){target="_blank"} 是目前社区最常推荐的选择。
 
 GrapheneOS 是一套以 AOSP（Android Open Source Project，Android 的开源核心）为基底、把安全防护大幅强化并移除 Google 绑定的行动作业系统，由非营利的 GrapheneOS Foundation 维护、开源开发。它缩小一台 Android 手机的攻击面、补强容易外泄资料的环节，同时把是否使用 Google 服务、以及使用方式的选择权交还给你。它的重点是安全与隐私，不在于让桌面更好看。
 
@@ -26,24 +26,24 @@ GrapheneOS 的功能可以分成三组：缩减攻击面、减少对 Google 的�
 ### 缩减攻击面
 
 - **hardened_malloc**：GrapheneOS 自制的内存分配器，针对最常见的一类漏洞（内存破坏）做防御，从底层降低被攻破的机会。
-- **MTE（Memory Tagging Extension，内存标记）**：ARM 的硬件功能，能在程式误用内存时当场拦截，把可能的入侵挡在造成伤害之前。需要 Pixel 8 系列之后的 ARMv9 晶片才支援。在支援的机型上，系统层预设启用。含原生代码（native code）的第三方 app 则预设不开，使用者可自行到 Settings 开启。
-- **Vanadium 浏览器**：强化版的 Chromium，预设关闭 JavaScript JIT（一种把网页程式即时编译加速的机制，也是常见的攻击入口），可逐站打开。少数互动密集的网页速度会略慢，可针对该网站单独开启。
+- **MTE（Memory Tagging Extension，内存标记）**：ARM 的硬件功能，能在程式误用内存时当场拦截，把可能的入侵挡在造成伤害之前。需要 Pixel 8 系列之后的 ARMv9 晶片才支援。在支援的机型上，系统层默认启用。含原生代码（native code）的第三方 app 则默认不开，使用者可自行到 Settings 开启。
+- **Vanadium 浏览器**：强化版的 Chromium，默认关闭 JavaScript JIT（一种把网页程式即时编译加速的机制，也是常见的攻击入口），可逐站打开。少数互动密集的网页速度会略慢，可针对该网站单独开启。
 - **verified boot 与重锁 bootloader**：安装完成后，GrapheneOS 会引导你把 bootloader 重新锁回并关掉 OEM 解锁，完整启用 verified boot（开机时逐层验证系统没被窜改）。
 - **Auditor app**：用手机的安全晶片，对韧体与系统的真伪和完整性做硬件层级的验证，确认没被动过手脚。
 
 ### 减少对 Google 的依赖
 
-- **预设完全不含 Google 服务**：开机就是一套不向 Google 报到的系统（俗称 degoogled）。
+- **默认完全不含 Google 服务**：开机就是一套不向 Google 报到的系统（俗称 degoogled）。
 - **sandboxed Google Play**：需要用到 Google app 时，GrapheneOS 把整套 Google Play 服务（Google Play 服务、Play 商店、服务框架）当成一般、无特权的应用程式，关进标准的应用程式沙箱执行。官方说明 Google Play 在 GrapheneOS 上「完全无法取得任何特殊存取或权限」。
 - **逐 app 的 Network 权限**：可以对单一 app 整个断网。关闭后系统对它回报「网络不通」，连间接的网络存取也一并阻挡。
 - **逐 app 的 Sensors 权限**：关闭后，该 app 无法存取加速度计、陀螺仪、指南针、气压计、温度计这些 Android 原本没有独立权限控管的传感器。
-- **Storage Scopes 与 Contact Scopes**：不必把整个储存空间或整本通讯录交给一个 app，可以只授权它看你指定的档案或联络人。Contact Scopes 预设让 app 读到的通讯录是空的。
+- **Storage Scopes 与 Contact Scopes**：不必把整个储存空间或整本通讯录交给一个 app，可以只授权它看你指定的档案或联络人。Contact Scopes 默认让 app 读到的通讯录是空的。
 
 ### 纳入实体与胁迫风险
 
-- **duress PIN/password（胁迫密码）**：选择性功能，预设不启用，不设定就不会误触。启用后你会多一组密码，在任何要求解锁的画面输入它，会不可逆地抹除整台装置（连已安装的 eSIM 一起），用在被迫交出手机的情境。
-- **auto-reboot（自动重开机）**：预设 18 小时没有解锁就自动重开机，回到开机后尚未首次解锁的加密状态（BFU，Before First Unlock）。资料在这个状态下更难被鉴识工具取出。时间可在 10 分钟到 72 小时之间调整或关闭。
-- **USB-C 控制**：预设「锁定时只充电、不传资料」，缩小用 USB 连接埠攻击的缝隙。
+- **duress PIN/password（胁迫密码）**：选择性功能，默认不启用，不设定就不会误触。启用后你会多一组密码，在任何要求解锁的画面输入它，会不可逆地抹除整台装置（连已安装的 eSIM 一起），用在被迫交出手机的情境。
+- **auto-reboot（自动重开机）**：默认 18 小时没有解锁就自动重开机，回到开机后尚未首次解锁的加密状态（BFU，Before First Unlock）。资料在这个状态下更难被鉴识工具取出。时间可在 10 分钟到 72 小时之间调整或关闭。
+- **USB-C 控制**：默认「锁定时只充电、不传资料」，缩小用 USB 连接埠攻击的缝隙。
 
 ## 它不解决什么：与匿名的界线
 
@@ -99,7 +99,7 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 
 ??? question "与 LineageOS、CalyxOS、/e/OS 有什么不同？"
 
-    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线，选用前值得知道它从 2025 年 8 月起暂停开发、2026 年 7 月恢复，目前重新处于积极维护状态。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 预设的安全保护。/e/OS 以延续旧硬件可用与去 Google 化的预设值为主，没有公布可与其他几套相比的 hardening 说明。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
+    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线，选用前值得知道它从 2025 年 8 月起暂停开发、2026 年 7 月恢复，目前重新处于积极维护状态。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 默认的安全保护。/e/OS 以延续旧硬件可用与去 Google 化的默认值为主，没有公布可与其他几套相比的 hardening 说明。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
 
 ## 接下来
 
