@@ -24,7 +24,7 @@ The articles on this site explain how to protect yourself. The [tools section](.
 
 [What metadata is](../../basics/metadata.md) covers how a photograph carries capture time, camera model and GPS coordinates, and how stripping EXIF before uploading is the cheapest protection available to anyone today.
 
-The problem is how to strip it. Almost every online remover asks you to upload the file first, and the people who need one are the people who should least be handing over an original. Password generators, QR code readers and URL cleaners share the same contradiction: the thing you want to process is the thing that should not leave your hands.
+Almost every online remover asks you to upload the file first, and the people who need one are the people who should least be handing over an original. Password generators, QR code readers and URL cleaners share the same contradiction: the thing you want to process is the thing that should not leave your hands.
 
 Moving the computation into the reader's own browser resolves it, at the cost of staying inside what a browser can do. Anything that needs an external service to work stays out of this section. For network measurement use [OONI Probe](../../tools/what-is-ooni.md), which is built for that purpose and publishes how it handles the data.
 
@@ -117,7 +117,7 @@ The [file metadata stripper](../../utils/strip-metadata.md) removes EXIF, XMP, I
 
 For photos and video the compressed data is copied byte for byte from a fixed offset through to the end of the file, so the result decodes identically to the original. Re-encoding tools cannot make that claim: every recompression costs quality and leaves the tool's own processing signature in the output, which is why a file cleaned with mat2 is recognisably mat2-cleaned.
 
-The uncropped thumbnail inside EXIF deserves its own mention. Crop half the photo away, send it, and the thumbnail may still hold the original full frame. The page lists each item removed and kept, with byte counts and the segment markers used by the file format.
+EXIF also carries an uncropped thumbnail. Crop half the photo away, send it, and the thumbnail may still hold the original full frame. The page lists each item removed and kept, with byte counts and the segment markers used by the file format.
 
 HEIC, which is what an iPhone produces by default, is not handled yet. On iOS, Settings, Camera, Formats, Most Compatible switches capture to JPEG. TIFF, RAW, MKV, WebM, AVI and Office documents are also out of scope. The tool does no face blurring, and street numbers, road signs, uniforms and the view out of the window all live in the image itself, so look at what you are sharing before you share it.
 
