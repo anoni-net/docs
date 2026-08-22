@@ -30,11 +30,11 @@ This is browser fingerprinting. It needs no cookies and clearing your browsing d
 
 Comparison is what makes this page useful, and there are two ways to do it.
 
-The eight-character code at the top folds together the stable values below it. **Open the same page in another browser and compare only that code** to see whether anything changed. Values that drift, such as window size and storage quota, are left out, so the same browser gives the same code every time. That code is itself an identifier, which is exactly the point: these values together are enough to recognise you.
+The eight-character code at the top folds together the stable values below it. **Open the same page in another browser and compare the code** to see whether anything changed. Values that drift, such as window size and storage quota, are left out, so the same browser gives the same code every time. The code is itself an identifier: these values together are enough to recognise you.
 
 To find out which item changed, read the reference line under each value. The time zone entry says "Tor Browser shows: UTC" rather than "this gets normalised", so you can check it on the spot.
 
-Open this page in [Tor Browser](../tools/what-is-tor.md) and the time zone really does become UTC, the language en-US, the graphics card a generic string, and the font list one fixed set. Tor Browser is not withholding something from you: it makes every user look alike, so sites cannot tell them apart.
+Open this page in [Tor Browser](../tools/what-is-tor.md) and the time zone really does become UTC, the language en-US, the graphics card a generic string, and the font list one fixed set. Tor Browser normalises every user so they all look alike, and sites cannot tell them apart.
 
 To adjust that behaviour, see [Tor Browser advanced settings](../tools/tor-browser-advanced.md).
 
@@ -44,15 +44,15 @@ This page is deliberately built as a fingerprint collector, so you should be ask
 
 The answer: every value appears on screen and nowhere else. Nothing is sent and nothing is written to storage. The [code is here](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/leaks.js){target="_blank"}, and one test scans that source specifically, turning CI red if any means of sending data or writing to storage appears in it.
 
-### About the requests you will see in devtools
+### About the request you will see in devtools
 
-Open the network tab and you will find this page contacting a subdomain of anoni.net. That is our self-hosted site analytics, and it records that someone viewed a page. It has nothing to do with the values above: it neither receives them nor wants them. The onion build loads no analytics at all, so that version does not even make this one request.
+Open the network tab and you will find this page contacting a subdomain of anoni.net. That is our self-hosted site analytics, and it records that someone viewed a page. It has nothing to do with the values above, which it never reads. The onion build loads no analytics at all, so it makes no such request.
 
-Telling those two apart is exactly what this page is for. One site can both count how many people visited and identify who you are, and the first needs far less data than the second. To avoid the question entirely, turn the network off and use this page then. No requests happen at all.
+One site can both count how many people visited and identify who you are, and the first needs far less data than the second, which is the distinction that matters. To avoid the question entirely, turn the network off before opening the page. No requests happen at all.
 
 ## What you can actually do
 
-Of the fifteen items above, only three are ones you can switch off on your own device. Ordinary browsers offer no control over the rest. That is not an oversight on our part: those values are part of how the web platform works.
+Of the fifteen items above, only three are ones you can switch off on your own device. Ordinary browsers offer no control over the rest, because those values are part of how the web platform works.
 
 Menu paths shift between system and browser versions. Searching the settings for a keyword is usually faster than following a path.
 
@@ -128,9 +128,9 @@ For these two, the right answer is a browser that normalises them, not giving up
 
 ### Why the rest cannot be switched off
 
-Screen resolution, CPU core count, graphics card model, the rendering differences behind canvas and audio, which fonts you have, Client Hints, sub-pixel element geometry: none of these has a switch, because they are not settings. They are capabilities the web platform hands to sites. Drawing needs to know what the graphics card can do; laying out text needs to measure it.
+Screen resolution, CPU core count, graphics card model, the rendering differences behind canvas and audio, which fonts you have, Client Hints, sub-pixel element geometry: none of these has a switch, because they are capabilities the web platform hands to sites rather than something a user can disable individually. Drawing requires the graphics card to report what it can do, and laying out text requires measuring it.
 
-Removing those capabilities breaks sites, so browsers do not let you turn them off individually. Browsers with defences take a different route: rather than removing the capability, they make everyone report the same value, or add noise that differs every session. That is what the "Tor Browser shows" line under each item describes.
+Removing those capabilities breaks sites, so browsers do not let you turn them off individually. Browsers with defences take a different route: rather than removing the capability, they make everyone report the same value, or add noise that differs every session.
 
 ## Two things left out on purpose
 
@@ -144,12 +144,12 @@ A figure like "you are more unique than 99.x% of visitors" requires a population
 
 ## About the location item
 
-Location is the only one behind a button, because it triggers a permission prompt. Everything else is readable without asking, which is the point this page is making.
+Location is the only one behind a button, because it triggers a permission prompt. Everything else is readable without asking.
 
 Pressing it shows your latitude, longitude and accuracy, usually within a few tens of metres. Those numbers stay on screen like the rest and disappear on reload. Tor Browser disables the API outright and never asks.
 
 ## Works offline
 
-Like the rest of this section, the code is stored on your device and runs without a network. Every item listed here is read from your own device, and it still reads with the network off, which is the most direct proof that none of these values are being sent anywhere.
+Like the rest of this section, the code is stored on your device and runs without a network. Every item listed here is read from your own device, and it still reads with the network off.
 
 To take this page with you, see [offline reading](../offline.md).
