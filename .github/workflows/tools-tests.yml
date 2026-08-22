@@ -125,3 +125,8 @@ jobs:
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
         run: python3 tools/test_cf_purge.py
+
+      # 部署時哪些檔案不用重傳。判錯的方向不對稱：該傳的沒傳會讓站上留著舊內容，
+      # 而且不會有任何一步變紅燈。
+      - name: S3 略過未變動檔案
+        run: python3 tools/test_s3_restore_mtime.py

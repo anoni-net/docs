@@ -16,6 +16,8 @@ on:
       - "BECOME_ANONI*.md"
       - "tools/cf_purge.py"
       - "tools/test_cf_purge.py"
+      - "tools/s3_restore_mtime.py"
+      - "tools/test_s3_restore_mtime.py"
       - ".github/workflows/build_docs.yml"
   workflow_dispatch:
 
@@ -219,6 +221,25 @@ jobs:
             exit 1
           fi
 
+      # sync 判斷要不要上傳看的是大小與修改時間，不是內容，而每次 run 都是全新
+      # checkout 加重新建置，兩千多個產出檔案的時間戳一律是「現在」，於是每次都重傳
+      # 全部，實測 76 秒。這一步先比對 MD5 與 S3 的 ETag，內容相同的把時間戳調回遠端
+      # 那一版，下一步的 sync 就會跳過它們。詳細理由見 tools/s3_restore_mtime.py 的
+      # 檔頭。實測沒有內容改動的部署從上傳 2260 個變成 6 個（三語系各兩個嵌了時間戳
+      # 的 RSS feed）。
+      #
+      # 讀不到清單或出任何狀況都退回什麼都不做，讓 sync 照原本的方式完整上傳。
+      - name: Skip unchanged files
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
+        run: |
+          source ./.venv/bin/activate
+          python3 ../tools/s3_restore_mtime.py \
+            --bucket "${{ secrets.DOC_BUCKET }}" \
+            --prefix "${S3_PREFIX}/" \
+            --root ./output
+
       # `--delete` 取代了原本「先 `aws s3 rm --recursive` 清空、再 `s3 sync` 上傳」的
       # 兩步。舊做法每次部署都會在清空與上傳完成之間留下一段站上內容不完整的空窗，
       # 實測清空 46 秒、上傳 87 秒，那個窗口就是一分半。改成單一步的 sync 之後，
@@ -226,12 +247,6 @@ jobs:
       #
       # 刪除的語意沒有變：本機沒有的物件照樣會從 bucket 移除，只是跟上傳合併成一次
       # 掃描，不再需要先把整個 prefix 清掉。
-      #
-      # 有一個前提要記著。`aws s3 sync` 判斷要不要上傳，看的是檔案大小與修改時間，
-      # 不是內容。實測「內容不同但大小相同、而且本機檔案不比遠端新」的組合會被靜靜
-      # 跳過。這裡不會踩到，因為每次 run 都是全新 checkout 加重新建置，產出檔案的
-      # 時間一定晚於上一次部署。要是哪天改成沿用快取的產出目錄，這個前提就不成立，
-      # 得換成比對內容的工具。
       #
       # 結尾的斜線不能省。`s3://bucket/docs` 是前綴比對，會連 `docs-onion/` 底下的
       # 物件一起刪掉，兩格同時跑就會互相清空。
