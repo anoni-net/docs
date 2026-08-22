@@ -14,6 +14,8 @@ description: "文档站新增小工具区，八个工具全部在读者的浏览
 
 # 文档站新增八个小工具，全部在读者自己的浏览器里执行
 
+我们是一群关心匿名网络与网络自由的志工，从台湾出发，维运[文档站](../../index.md)，把个人隐私与匿名的做法依日常、敏感工作与高风险三种情境整理成可以照着操作的指引。
+
 站上的文章说明怎么保护自己，[小工具区](../../utils/index.md)放的是可以直接按的东西。八个工具都在读者的浏览器里完成运算，不送出任何数据，存进设备之后没有网络也能用。
 
 ![小工具索引页的八张卡片，每张写着工具名称与一句用途说明](https://assets.anoni.net/blog/utils-index-cn.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
@@ -27,6 +29,8 @@ description: "文档站新增小工具区，八个工具全部在读者的浏览
 在线的清除工具几乎都需要先把文件传上去，而需要清除 metadata 的人，正是最不该把原始文件交出去的人。密码生成器、QR code 读取器与网址清理器都有同样的矛盾，要用的东西本身就是不该外流的东西。
 
 把运算放回读者自己的浏览器可以解决矛盾，代价是功能受限于浏览器能做到的范围。需要连到外部服务才能运作的功能不会放进来，网络测量请用 [OONI Probe](../../tools/what-is-ooni.md)，那是专门为测量设计的工具，数据的处理方式也公开。
+
+八个工具看起来各做各的，收进来的判准只有一条：处理的东西本身就不该外流。照片里的坐标、刚生成的主密码、还没确认过的 QR code、可能被标记过的文件、答完就显示你在防谁的清单，交给任何一台服务器都说不过去。威胁模型清单与隐形字符检测离清除 metadata 这个起点比较远，收进来的理由相同。
 
 ## 八个工具共同的四条规则
 
@@ -163,7 +167,7 @@ XMP 另有一个陷阱，把文档目录里指向 XMP 的引用删掉、重新�
 
 自动保存的章节默认只存文字，离线打开会缺图。页面上有一个选项可以连同核心章节的正文图一起保存，大约多 7 MB。默认关着是因为多数人在移动网络上，而缺图仍然读得懂大部分内容。自行勾选的页面不受该选项影响，一律连正文图一起保存。
 
-文档站可以安装成离线 App，Android 与桌面浏览器在菜单里选安装，iPhone 与 iPad 用 Safari 的分享钮加入主屏幕。安装后长按图标，快捷方式菜单里有离线阅读可以直接打开。Tor Browser 以及 onion、IPFS 版基于隐私考量不注册后台的 Service Worker，需要离线备援时用一般浏览器在 anoni.net 安装，平时的匿名浏览再回到 Tor Browser。
+文档站也可以安装成离线 App，Android、桌面浏览器与 iOS 的逐步操作写在[离线阅读](../../offline.md)页。Tor Browser 以及 onion、IPFS 版基于隐私考量不注册后台的 Service Worker，需要离线备援时用一般浏览器在 anoni.net 安装，平时的匿名浏览再回到 Tor Browser。
 
 ## 用了谁的程序
 
@@ -177,6 +181,14 @@ XMP 另有一个陷阱，把文档目录里指向 XMP 的引用删掉、重新�
 | [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} 的 7776 字词表 | 密语与密码生成器 | 词表 CC-BY-4.0，程序 MIT |
 
 不做修改是刻意的，改过就失去「这是上游那一份」的可审性，读者要验的时候只能相信我们的说法。文件都在 `utils/vendor/` 底下，可以自己跟上游的版本比对。共通的理由是组件写错不会崩溃，只会产生看起来正常但实际上错的结果，那比坏掉更难发现。
+
+## 想一起做的话
+
+工具是纯前端，没有构建流程，程序在 [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"} 的 `docs/zh-TW/js/` 底下，一个工具一支 JS。改完要在本机看效果，执行 `cd docs && uv sync && mkdocs serve` 即可。
+
+八个工具各有一支测试，执行方式是 `node tools/test_<名称>.mjs`，不需要安装任何包，每一支都在 CI 里执行。测试守的是画面看起来正常、结果却是错的那几种情况：取样有没有偏差、生成的 QR code 扫回来内容对不对、指纹示范页有没有偷偷送出数据、网址清理有没有误删必要参数、威胁模型的答案有没有被写进存储。
+
+目前缺的东西列在各工具页的不支持清单里，HEIC、TIFF、RAW、MKV、WebM、AVI 与 Office 文档都还没有人做。着手之前先开一个 issue 或到 Matrix room 说一声，避免两个人做同一件事。流程见 [CONTRIBUTING](https://github.com/anoni-net/docs/blob/main/CONTRIBUTING.md){target="_blank"} 与[如何参与与认领主题](../../community/how-to-contribute.md)。
 
 ## 接下来
 

@@ -14,6 +14,8 @@ description: "The docs site has a new tools section. All eight tools compute in 
 
 # Eight new tools on the docs site, all running in the reader's own browser
 
+We are a group of volunteers working on anonymity networks and internet freedom, based in Taiwan. We maintain [this documentation site](../../index.md), a practical guide to privacy and anonymity sorted by scenario for everyday life, sensitive work and high risk.
+
 The articles on this site explain how to protect yourself. The [tools section](../../utils/index.md) holds the things you can actually press. All eight compute in the reader's browser, send nothing anywhere, and keep working with the network off once stored on a device.
 
 ![The tools index, eight cards each naming a tool and what it is for](https://assets.anoni.net/blog/utils-index-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
@@ -27,6 +29,8 @@ The articles on this site explain how to protect yourself. The [tools section](.
 Almost every online remover asks you to upload the file first, and the people who need one are the people who should least be handing over an original. Password generators, QR code readers and URL cleaners share the same contradiction: the thing you want to process is the thing that should not leave your hands.
 
 Moving the computation into the reader's own browser resolves it, at the cost of staying inside what a browser can do. Anything that needs an external service to work stays out of this section. For network measurement use [OONI Probe](../../tools/what-is-ooni.md), which is built for that purpose and publishes how it handles the data.
+
+The eight look unrelated, and one test decides what gets in: the thing being processed is itself something that should not leave your hands. Coordinates inside a photo, a master password just generated, a QR code nobody has checked, a document that may carry a mark, a checklist that states who you are defending against, none of them belong on someone else's server. The threat model checklist and the invisible character detector sit further from the metadata starting point, and they are in for the same reason.
 
 ## Four rules that apply to all eight
 
@@ -163,7 +167,7 @@ Scenario pages for journalists, activists, LGBTQ readers and domestic abuse are 
 
 Automatically stored chapters hold text only, so images are missing offline. A switch on that page adds the images in the core chapters, roughly 7 MB more. It is off by default because most people are on mobile data and most of the content still reads fine without pictures. Pages ticked by hand ignore that switch and always store their images.
 
-The site installs as an offline app: Android and desktop browsers offer it in the menu, and iPhone and iPad use Safari's share button and Add to Home Screen. Once installed, long-pressing the icon offers Offline reading as a shortcut. Tor Browser and the onion and IPFS versions register no background Service Worker for privacy reasons, so the pattern is installing from anoni.net in an ordinary browser for the offline copy and returning to Tor Browser for anonymous reading.
+The site also installs as an offline app, and the steps for Android, desktop browsers and iOS are on the [offline reading](../../offline.md) page. Tor Browser and the onion and IPFS versions register no background Service Worker for privacy reasons, so the pattern is installing from anoni.net in an ordinary browser for the offline copy and returning to Tor Browser for anonymous reading.
 
 ## Whose code is in here
 
@@ -177,6 +181,14 @@ Most of the code in this section is written by the community. Four things come f
 | The 7776-word list from [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} | Passphrase and password generator | Word data CC-BY-4.0, code MIT |
 
 Leaving them unmodified is deliberate. Once patched they stop being "the upstream copy", and a reader wanting to verify has only our word for it. The files sit under `utils/vendor/`, ready to be diffed against upstream. The common reason for not writing these ourselves is that getting them wrong does not crash anything, it produces output that looks right and is not, which is harder to catch than a failure.
+
+## Working on this with us
+
+The tools are plain front-end code with no build step. Each one is a single JS file under `docs/zh-TW/js/` in [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}, and `cd docs && uv sync && mkdocs serve` gets a local copy running.
+
+Each of the eight has a test, run with `node tools/test_<name>.mjs`, with nothing to install, and every one of them runs in CI. The tests guard the failures that look fine on screen and are wrong underneath: sampling bias, a generated QR code that scans back as something else, the fingerprint page quietly sending data, the URL cleaner stripping a parameter the page needs, threat model answers reaching storage.
+
+What is missing is listed as the unsupported formats on each tool page: HEIC, TIFF, RAW, MKV, WebM, AVI and Office documents all have nobody on them. Open an issue or say so in the Matrix room before starting, so two people do not build the same thing. The process is in [CONTRIBUTING](https://github.com/anoni-net/docs/blob/main/CONTRIBUTING.md){target="_blank"} and [how to take part](../../community/how-to-contribute.md).
 
 ## What comes next
 
