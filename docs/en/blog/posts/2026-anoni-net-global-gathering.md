@@ -6,8 +6,8 @@ categories:
     - News
     - Community
 slug: 2026-anoni-net-global-gathering
-summary: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth will host a Who's Here board and an Asia-Pacific Coordination Gaps wall, and will collect real cases of anonymous payment. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
-description: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth will host a Who's Here board and an Asia-Pacific Coordination Gaps wall, and will collect real cases of anonymous payment. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
+summary: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
+description: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
 ---
 
 # The Anonymity Networks Community Is Going to Global Gathering 2026
@@ -40,15 +40,22 @@ The other purpose is taking part in coordination across the region, since intern
 
 For the 30 minutes of mobile throttling in northern Taiwan on 13 August, we turned OONI's public data into [a guided tour of what it recorded](./ooni-mobile-throttle-drill-results.md). Taiwan logged 238 connection speed tests from 47 devices that day, one of which saw its median download fall from `132,096` kbit/s to `1,223` kbit/s, and every query in the write-up runs without a key so anyone can recheck it. That record comes along to Estoril, and if anyone there is working on shutdowns or throttling, it is available for comparison.
 
-## Come and find us at the booth
+## We are bringing anonymous payment to the booth
 
-Please just walk up during the booth slot, with no appointment and no prepared topic needed, and there are three things we can do together.
+The agenda went up in late August, and across the three days it covers shutdown response, circumvention tools, platform accountability, AI governance, and journalist safety. Having gone through the Circles, Villages, and Booths one by one, we found no session that takes financial privacy as its subject. Donor anonymity, cross-border disbursement, and what sanctions and currency controls do to civil society appear in no session title or description. A few sessions do take fundraising strategy and grant applications as their subject, where the focus is getting money in. How a payment reaches its recipient without exposing them goes unaddressed.
 
-- Leave the topic you are working on and a way to be reached on the Who's Here board, so that anyone passing by can see who from the Asia-Pacific is in the room.
-- Write down a gap you have run into on the Asia-Pacific Coordination Gaps wall, such as tools that misread Chinese-language context, cross-border requests for help that find no one to receive them, and regions that funding never reaches.
-- Talk to us about anonymous payment, since an at-risk recipient and a cross-border donor need money to arrive without leaving an identifying trail, we are researching how that can work, and we would really like to hear how other regions handle it.
+Sanctions lists, banks refusing to do business, donation records being subpoenaed: these are day-to-day realities for many organisations, with no matching discussion anywhere on the agenda.
 
-The booth is meant to work as a regional meeting point, and all three exist so that people in the room can find each other.
+We are making anonymous payment the main topic at our booth. As a community we are still at the research stage, gathering real situations, including who needs an anonymous money trail and under what circumstances, where current practice breaks down, and what limits regulation and compliance impose.
+
+The people we would especially like to talk to:
+
+- **Operators with cross-border disbursement experience**: particularly where the recipient sits in a high-risk or sanctioned region.
+- **Organisations that have dealt with donor anonymity**: who know where the current tools fall short.
+- **Projects blocked by financial controls**: unable to receive support because a bank refused them or currency rules got in the way.
+- **Anyone following the topic in research or advocacy**: the regulatory side included.
+
+Please just walk up during the booth slot, with no appointment and no prepared topic needed, and topics other than anonymous payment are just as welcome. The booth is meant to work as a regional meeting point, so that people in the room can find each other.
 
 ## Sessions on the agenda that overlap with our work
 
@@ -63,7 +70,7 @@ On anonymity and circumvention:
 On measurement and regional coordination:
 
 - Strengthening Rapid Response Efforts to Censorship Events covers how groups around the world coordinate when censorship events emerge, including OONI's tools and methods for rapid response. We work with OONI's public data, and the August throttling write-up came out of the same methods.
-- Asia Meetup (4 September, `12:00` to `13:00`) is a connection point for people working across the Asia region, and some of the names we hope to gather on the Who's Here board will be there.
+- Asia Meetup (4 September, `12:00` to `13:00`) is a connection point for people working across the Asia region, and it is where we hope to meet others nearby working on adjacent problems.
 - Internet Shutdown Contingency Planning Help Desk builds a shutdown contingency plan around your own threat model, using the BRACE framework. Taiwan runs drills every year that give us something to compare against, and which parts of the framework connect is what we need to work out.
 - We See, We Archive, We Remember addresses how public-interest information can be preserved when it is being erased, drawing on archival work from Hong Kong, China, Iran, and Palestine.
 
@@ -86,13 +93,13 @@ Our booth is on the final day, which leaves no fixed spot for the first two days
 - Two sessions on 4 September are ones we will be attending, the Asia Meetup (`12:00` to `13:00`) and the Technologist Meetup (`16:30` to `17:30`), so meeting there works directly.
 - We will most likely be around for the Networking Hour, `12:00` to `13:00` each day, though plans may still shift, so a quick check in that room beforehand helps.
 - We will be at the venue for most of the three days, with anoni.net and a handle on our badges, so please do say hello.
-- The booth slot on 6 September, `13:00` to `15:00`, is the easiest place to find us, where giving the name you go by is enough to get a spot on the board.
+- The booth slot on 6 September, `13:00` to `15:00`, is the easiest place to find us, and giving the name you go by is enough.
 
 ## Taking part without travelling
 
 Most people will not be travelling to Portugal, and there are still two things we can do together.
 
-Please write down a coordination gap you have run into and send it to us, and it will go on the wall alongside entries from other regions. Observations from Taiwan do not surface often at international events, and describing one concrete situation carries further than an abstract overview.
+Please write down a coordination gap you have run into and send it to us, and we will take it along to compare against what other regions are seeing. Observations from Taiwan do not surface often at international events, and describing one concrete situation carries further than an abstract overview.
 
 We would also like to hear real experiences of anonymous payment, so if you or an organisation you know has dealt with small cross-border support, the trade-off between donation receipts and identity disclosure, or a recipient put at risk because a money trail identified them, that experience is what the booth needs. Anything you would rather not attach your name to can go to the anonymous mailbox below, which is checked at any hour.
 
@@ -104,7 +111,7 @@ The booth runs for one slot only, and whether the right people walk past depends
 
 ## After the event
 
-Whatever the booth collects will be written up and published in a later newsletter and on this docs site. We look at the situation a case arose in, and the people and the region involved stay out of anything published. Both the list of gaps from the wall and the anonymous payment cases are de-identified first.
+Whatever the booth collects will be written up and published in a later newsletter and on this docs site. We look at the situation a case arose in, and the people and the region involved stay out of anything published. Both the list of coordination gaps and the anonymous payment cases are de-identified first.
 
 ## Channels
 
