@@ -52,10 +52,30 @@ const harness = `
   ${grab(/^  const DANGEROUS = [\s\S]*?\n  function classify\(text\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const DOTS = [\s\S]*?\n  function maskRaw\(text, info\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
+  ${grab(/^  function sniffFormat\(bytes\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function statusFor\(result\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function drawAndRead\(image, plan, box\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function decode\(source\) \{[\s\S]*?\n  \}/m)}
   return { SCALE, QUIET, classify, maskRaw, STRINGS, SHORTENERS, TRACKERS,
-           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize };
+           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize, sniffFormat, statusFor, decode };
 `;
-const tool = new Function(harness)();
+// decode 需要 Image 與 URL。這裡只驗「瀏覽器打不開這張圖」那一條，替身讓
+// image.src 一被設定就觸發 onerror，跟 Chrome 拿到 HEIC 時的行為一樣。
+const revoked = [];
+class FailingImage {
+  set src(value) {
+    this._src = value;
+    setTimeout(() => this.onerror && this.onerror(), 0);
+  }
+  get src() { return this._src; }
+}
+// 繼承真的 URL，classify 也靠它解析網址，換成普通物件會把那一整組測試弄壞
+class URLStub extends URL {}
+URLStub.createObjectURL = () => 'blob:stub';
+URLStub.revokeObjectURL = (u) => revoked.push(u);
+const tool = new Function('Image', 'URL', 'document', 'window', harness)(
+  FailingImage, URLStub, { createElement: () => { throw new Error('不該畫布'); } }, {}
+);
 
 // 依 key 取欄位，測試裡到處要用
 const field = (info, key) => (info.fields || []).find((f) => f.key === key);
@@ -90,6 +110,7 @@ const roundTrip = (text, level) => {
   const result = jsQR(img.data, img.width, img.height);
   return result ? result.data : null;
 };
+
 
 let passed = 0;
 let failed = 0;
@@ -493,9 +514,111 @@ test('拉對比是把像素推到純黑與純白', () => {
   ]);
 });
 
+
+// === 瀏覽器打不開的圖 ===
+//
+// iPhone 預設拍的是 HEIC，Safari 以外的瀏覽器多半解不開。原本這條路徑跟「圖裡
+// 沒有 QR code」共用同一句訊息，讀者照著「裁掉周圍、換一張更清楚的」做，做幾次
+// 都不會成功，因為那張圖從頭到尾沒有被解開過。
+
+const bytesOf = (...parts) => {
+  const out = [];
+  for (const part of parts) {
+    if (typeof part === 'string') for (const ch of part) out.push(ch.charCodeAt(0));
+    else out.push(part);
+  }
+  return new Uint8Array(out);
+};
+// ISO-BMFF：前四個 byte 是 box 長度，接著 "ftyp"，再接 brand
+const ftyp = (brand) => bytesOf(0, 0, 0, 0x18, 'ftyp', brand, 0, 0, 0, 0);
+
+test('瀏覽器打不開圖片時，decode 回報的是「打不開」而不是空結果', async () => {
+  // Chrome 拿到 HEIC 就是走這一條：image.onerror 觸發，一個像素都沒讀到。
+  // 回 null 的話 handle 會歸到 notFound，讀者就拿到「裁掉周圍」那句沒用的建議。
+  revoked.length = 0;
+  const result = await tool.decode({});
+  assert.deepEqual(result, { unreadable: true });
+  assert.equal(tool.statusFor(result), 'cantOpen');
+  // 順手驗物件網址有收回去，那一條原本只在 onload 收，onerror 會漏掉
+  assert.deepEqual(revoked, ['blob:stub']);
+});
+
+test('打不開的圖與沒有 QR code 是兩個不同的狀態', () => {
+  assert.equal(tool.statusFor({ unreadable: true }), 'cantOpen');
+  assert.equal(tool.statusFor({ notFound: true }), 'notFound');
+  assert.equal(tool.statusFor(null), 'notFound');
+  assert.equal(tool.statusFor({ data: 'https://anoni.net/' }), 'done');
+});
+
+test('打不開的圖不會退回叫人裁圖的那條訊息', () => {
+  // 這是整個修法的重點：decode 走 onerror 的時候，畫面不能再說「找不到 QR code」
+  const status = tool.statusFor({ unreadable: true });
+  assert.notEqual(status, 'notFound');
+  assert.ok(tool.STRINGS['zh-TW'][status], '狀態要有對應的訊息');
+});
+
+test('iPhone 的 HEIC 認得出來', () => {
+  for (const brand of ['heic', 'heix', 'mif1', 'hevc']) {
+    assert.equal(tool.sniffFormat(ftyp(brand)), 'heic', brand);
+  }
+});
+
+test('AVIF 跟 HEIC 同一種容器，brand 不同要分得開', () => {
+  assert.equal(tool.sniffFormat(ftyp('avif')), 'avif');
+  assert.equal(tool.sniffFormat(ftyp('avis')), 'avif');
+});
+
+test('同一種容器裡的影片不會被當成圖片格式', () => {
+  // mp4 與 HEIC 都是 ISO-BMFF，只有 brand 分得出來
+  assert.equal(tool.sniffFormat(ftyp('isom')), null);
+  assert.equal(tool.sniffFormat(ftyp('mp42')), null);
+});
+
+test('TIFF 兩種位元組順序都認得', () => {
+  assert.equal(tool.sniffFormat(bytesOf(0x49, 0x49, 0x2a, 0x00, 0, 0, 0, 0)), 'tiff');
+  assert.equal(tool.sniffFormat(bytesOf(0x4d, 0x4d, 0x00, 0x2a, 0, 0, 0, 0)), 'tiff');
+});
+
+test('JPEG 2000 認得出來', () => {
+  assert.equal(tool.sniffFormat(bytesOf(0, 0, 0, 0x0c, 'jP  ', 0x0d, 0x0a, 0x87, 0x0a)), 'jp2');
+});
+
+test('瀏覽器打得開的格式不會被誤認', () => {
+  assert.equal(tool.sniffFormat(bytesOf(0xff, 0xd8, 0xff, 0xe0, 0, 0, 0, 0)), null, 'JPEG');
+  assert.equal(tool.sniffFormat(bytesOf(0x89, 'PNG', 0x0d, 0x0a, 0x1a, 0x0a)), null, 'PNG');
+  assert.equal(tool.sniffFormat(bytesOf('GIF89a', 0, 0)), null, 'GIF');
+  assert.equal(tool.sniffFormat(bytesOf('RIFF', 0, 0, 0, 0, 'WEBP')), null, 'WebP');
+});
+
+test('檔頭太短不會爆掉', () => {
+  assert.equal(tool.sniffFormat(new Uint8Array(0)), null);
+  assert.equal(tool.sniffFormat(bytesOf(0xff, 0xd8)), null);
+});
+
+test('三個語系都有打不開時的訊息與各格式的下一步', () => {
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const s = tool.STRINGS[lang];
+    assert.ok(s.cantOpen && s.cantOpen.length > 10, lang + ' cantOpen');
+    for (const fmt of ['heic', 'avif', 'tiff', 'jp2']) {
+      assert.ok(s.cantOpenHint[fmt] && s.cantOpenHint[fmt].length > 10, lang + ' ' + fmt);
+    }
+    // 這一句不該再叫讀者去裁圖，那是 notFound 的建議
+    assert.ok(!/裁|crop/i.test(s.cantOpen), lang + ' 不該叫人裁圖');
+  }
+});
+
+test('HEIC 的下一步要講得出 iPhone 的設定路徑', () => {
+  assert.match(tool.STRINGS['zh-TW'].cantOpenHint.heic, /設定.*相機.*格式/);
+  assert.match(tool.STRINGS['zh'].cantOpenHint.heic, /设置.*相机.*格式/);
+  assert.match(tool.STRINGS['en'].cantOpenHint.heic, /Settings.*Camera.*Formats/);
+});
+
+// await 是必要的。原本寫 fn()，非同步的測試函式回一個 promise 就被當成通過，
+// 斷言失敗變成 unhandled rejection，整支測試照樣印綠色。這個檔案是 ESM，
+// 頂層 await 可以直接用。
 for (const [name, fn] of tests) {
   try {
-    fn();
+    await fn();
     console.log(`  ✓ ${name}`);
     passed += 1;
   } catch (err) {
