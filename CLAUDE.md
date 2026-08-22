@@ -46,7 +46,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 | 群組 | 檔案 | 用途 |
 |------|------|------|
 | 離線內容索引 | `docs/hooks/offline_index.py` | mkdocs hook，建置時產出各語系的 `offline-index.json`（有哪些頁面、屬於哪個章節、多大）。離線內容管理頁 `docs/<lang>/offline.md` 用它列出可勾選的清單，介面在 `docs/zh-TW/js/offline-library.js`（另兩語是 symlink）|
-| 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
+| 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。除了 Markdown，也掃 `docs/zh-TW/js/*.js` 裡 `STRINGS` 物件的 UI 字串，語系從物件的 key 判斷而不是路徑。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
 | 小工具 | `test_passphrase.mjs`、`test_qrcode.mjs`、`test_leaks.mjs`、`test_cleanurl.mjs`、`test_invisible.mjs`、`test_qrread.mjs` | `docs/zh-TW/js/passphrase.js` 的取樣、熵計算、字元集與詞表完整性。取樣那幾項刻意構造出「直接取模」與「拒絕重抽」會給出不同答案的輸入，寫回 `% n` 就會紅。這類錯誤畫面上完全正常，照樣吐出看起來很隨機的字，而受害的讀者不會知道自己受害。`test_qrcode.mjs` 另外寫了一個獨立的 QR 解碼器，把產生的矩陣讀回字串再比對，驗的是「掃得出來而且內容對」，人眼讀不了 QR，這種錯只有解回文字才驗得到。`test_leaks.mjs` 掃指紋示範頁的原始碼，出現任何送資料或寫入儲存的手段就紅，那一頁的整個立論建立在「什麼都不送」上。`test_cleanurl.mjs` 守的是網址清理器「必要參數不能被誤刪」，刪掉 `?v=` 讀者只會覺得對方給錯連結，不會怪到工具頭上。`test_invisible.mjs` 的誤判案例跟偵測案例一樣多，emoji 裡的 ZWJ、RTL 文字裡的方向標記、整段俄文裡的西里爾字母都不該報，全部報成可疑的話那支工具會變成狼來了 |
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，分批並行清除 Cloudflare 快取（每批 30 條，同時 6 批）。測試由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發 |
 | 部署 | `s3_restore_mtime.py`、`test_s3_restore_mtime.py` | 上傳前比對 MD5 與 S3 的 ETag，內容沒變的把時間戳調回遠端版本，讓 `aws s3 sync` 跳過。`sync` 只看大小與時間，不看內容 |
@@ -257,7 +257,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   git push origin origin/main:refs/heads/docs
   ```
 
-- **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 跑 `tools/docs_style_lint.py`
+- **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 與小工具區的 UI 字串跑 `tools/docs_style_lint.py`
   - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md`、`docs/en/**/*.md` 與 linter 本身
   - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
   - 這個 job 會擋 merge。error 級規則讓 linter 回 exit 1，job 就紅；warn 級規則仍只以 annotation 標在變更行上，不影響 exit code
