@@ -64,7 +64,7 @@ OONI 的观测数据是[全球最大的网络审查开放数据集](https://expl
 
 新闻网站被封锁，影响从来不只是技术层面，代表的是大众失去取得报道的管道、社群失去即时信息、记者失去他们的读者。只有当这件事被记录成可以被引用、可以被分析的数据，后续行动才有立足点。
 
-最具体的串接案例发生在肯尼亚。OONI 观测数据被当作证据，用在一场挑战「非法切断网络连线」的公益诉讼。[这场诉讼由一个联盟提出](https://blog.bake.co.ke/2025/05/14/bake-6-other-organizations-challenge-internet-shutdowns-in-kenya-in-landmark-public-interest-case/){target="_blank"}，成员包括 BAKE、ICJ Kenya、Paradigm Initiative、肯尼亚记者工会（Kenya Union of Journalists）、Katiba Institute、肯尼亚律师协会（Law Society of Kenya）和 CIPESA。为了支援这份提交给肯尼亚高等法院（High Court of Kenya）的声请，OONI 以专家意见的形式产出了一份[详细的研究报告](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}，记录 Telegram 在肯尼亚 2023 与 2024 年 KCSE 全国性大考（肯尼亚的中学毕业会考，当局以防堵考题外泄为由，在考试期间限制社交与通讯软件）期间被封锁的情形。
+最具体的串接案例发生在肯尼亚。OONI 观测数据被当作证据，用在一场挑战「非法切断网络连线」的公益诉讼。[这场诉讼由一个联盟提出](https://blog.bake.co.ke/2025/05/14/bake-6-other-organizations-challenge-internet-shutdowns-in-kenya-in-landmark-public-interest-case/){target="_blank"}，成员包括 BAKE、ICJ Kenya、Paradigm Initiative、肯尼亚记者工会（Kenya Union of Journalists）、Katiba Institute、肯尼亚律师协会（Law Society of Kenya）和 CIPESA。为了支持这份提交给肯尼亚高等法院（High Court of Kenya）的声请，OONI 以专家意见的形式产出了一份[详细的研究报告](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}，记录 Telegram 在肯尼亚 2023 与 2024 年 KCSE 全国性大考（肯尼亚的中学毕业会考，当局以防堵考题外泄为由，在考试期间限制社交与通讯软件）期间被封锁的情形。
 
 在这个案子里，记者工会、数字人权组织、法律倡导者与技术研究者从同一份数据集出发，把「网络被中断」推升为公共利益议题。这也是区域上重要的先例，坦桑尼亚的律师后来主动联系 OONI 索取数据，用来支持当地挑战封锁 Twitter/X 的法律行动，OONI 也因此发表了一份[记录这次封锁的研究报告](https://ooni.org/post/2025-tanzania-blocked-twitter/){target="_blank"}。
 

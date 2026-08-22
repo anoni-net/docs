@@ -12,14 +12,14 @@ icon: material/shield-lock-outline
 
 社群推广 Tor、Tails、OONI 多年，最常被问的问题是「我下一步该怎么做才能让自己更安全」。这个提问背后缺的，是一套**可实际操作、依情境分级**的隐私指引。
 
-现有的中文资源多半停留在「介绍某个工具」或「列举一堆技巧」，缺少把概念、工具、场景三层串起来的桥梁。读者学完工具不知道对应到什么风险，看完场景不知道从哪开始实作，看完概念不知道如何落地。社群想做的是把这三层接起来，让「个人隐私」可以从「知道工具名称」一路走到「在自己的情境下实际采用」。
+现有的中文资源多半停留在「介绍某个工具」或「列举一堆技巧」，缺少把概念、工具、场景三层串起来的桥梁。读者学完工具不知道对应到什么风险，看完场景不知道从哪开始实现，看完概念不知道如何落地。社群想做的是把这三层接起来，让「个人隐私」可以从「知道工具名称」一路走到「在自己的情境下实际采用」。
 
 ## 2026 研究目标
 
 - **三级威胁模型框架**：把日常使用、敏感工作、高风险情境三种等级的对应工具与步骤整理成参考表
-- **概念到实作的桥**：在威胁模型与工具操作之间补上判断流程（什么时候该升级、什么时候不必过度防护）
+- **概念到实现的桥**：在威胁模型与工具操作之间补上判断流程（什么时候该升级、什么时候不必过度防护）
 - **常见误区整理**：VPN ≠ 匿名、HTTPS ≠ 安全、私密模式 ≠ 隐私、去中心化 ≠ 匿名等高频误解的拆解。VPN 与去中心化两项已有专篇（[VPN 的风险与选择](../tools/vpn-guide.md)、[常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)），HTTPS 与私密模式待补
-- **场景指引落地**：给记者、社运参与者、家暴幸存者、LGBTQ+ 等具体角色的实作流程
+- **场景指引落地**：给记者、社运参与者、家暴幸存者、LGBTQ+ 等具体角色的实现流程
 - **跨主题串接**：把个资、金流、连线层三个面向（见 [网络自由为什么重要](../basics/internet-freedom.md)）整合进个人隐私的整体规划
 - **教材化**：把研究产出整理成可用于工作坊、小聚的教材，方便对外推广
 
@@ -29,7 +29,7 @@ icon: material/shield-lock-outline
 
 - 概念：[匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)、[威胁模型如何建立](../basics/threat-model.md)、[Metadata 是什么](../basics/metadata.md)、[社群平台怎么收集你的数据](../basics/platform-tracking.md)、[监控现在做得到什么](../basics/surveillance-capability.md)、[怎么维持多个网络身分](../basics/multiple-identities.md)
 - 工具：[什么是匿名网络](../tools/what-is-anonymity-network.md)、[什么是 Tor](../tools/what-is-tor.md)、[什么是 Tails](../tools/what-is-tails.md)、[Tor Browser 进阶设定](../tools/tor-browser-advanced.md)、[Tor Snowflake 桥接点](../tools/tor-snowflake.md)、[匿名操作系统比较](../tools/tails-vs-whonix-vs-qubes.md)、[GrapheneOS 行动作业系统](../tools/grapheneos.md)、[消息工具比较](../tools/messaging-comparison.md)、[OnionShare 匿名传输](../tools/onionshare.md)、[什么是 CryptPad](../tools/what-is-cryptpad.md)、[密码管理器入门](../tools/password-manager.md)、[Asian Diceware 密语字典](../tools/asian-diceware.md)、[VPN 的风险与选择](../tools/vpn-guide.md)、[加密 DNS 怎么选](../tools/encrypted-dns.md)、[用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)
-- 场景：[一般人平常该做到什么](../scenarios/everyday-baseline.md)、[记者保护消息来源](../scenarios/journalist.md)、[社运行动者的数位准备](../scenarios/activist.md)、[家暴幸存者的数位准备](../scenarios/domestic-violence.md)、[LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)、[选举观察员的自保](../scenarios/election-observer.md)、[在中国大陆的公开平台传播信息](../scenarios/mainland-speech.md)、[出差与研讨会的数位准备](../scenarios/asia-travel.md)、[出国前用 AI 生成目的地概况](../scenarios/travel-ai-briefing.md)
+- 场景：[一般人平常该做到什么](../scenarios/everyday-baseline.md)、[记者保护消息来源](../scenarios/journalist.md)、[社运行动者的数字准备](../scenarios/activist.md)、[家暴幸存者的数字准备](../scenarios/domestic-violence.md)、[LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)、[选举观察员的自保](../scenarios/election-observer.md)、[在中国大陆的公开平台传播信息](../scenarios/mainland-speech.md)、[出差与研讨会的数字准备](../scenarios/asia-travel.md)、[出国前用 AI 生成目的地概况](../scenarios/travel-ai-briefing.md)
 - 进阶：[端对端加密如何运作](../advanced/e2ee.md)、[常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)、[后量子密码概观](../advanced/post-quantum.md)、[去中心化网站发布](../advanced/dweb-ipfs-onion.md)
 - 在地：[台湾个资法 2025 修法](../taiwan/pdpa-2025.md)、[揭弊者保护法的技术观察](../taiwan/whistleblower-law.md)
 
@@ -57,12 +57,12 @@ icon: material/shield-lock-outline
 - [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}：EFF 的个人安全自卫指南，有完整的威胁模型分级与工具教学
 - [Privacy Guides](https://www.privacyguides.org/){target="_blank"}：开源社群维护的隐私工具推荐清单
 - [The Citizen Lab](https://citizenlab.ca/){target="_blank"}：对监控软件、跨境威胁的具体研究
-- [Security in a Box](https://securityinabox.org/){target="_blank"}：给 NGO 与行动者的数位安全工具箱
+- [Security in a Box](https://securityinabox.org/){target="_blank"}：给 NGO 与行动者的数字安全工具箱
 - Tor Project 的 [用户教学文件](https://support.torproject.org/zh-CN/){target="_blank"}
 
 ## 如何加入讨论
 
-社群讨论在 Matrix（家服务器 `im.anoni.net`）。个人隐私指引主题目前以社群 Public Space 中的相关 room 为主要沟通管道。共笔协作使用 Cryptpad，定期视讯使用 Jitsi。账号申请与服务入口请见 [社群自架服务](./tools.md)。
+社群讨论在 Matrix（家服务器 `im.anoni.net`）。个人隐私指引主题目前以社群 Public Space 中的相关 room 为主要沟通管道。共笔协作使用 Cryptpad，定期视频使用 Jitsi。账号申请与服务入口请见 [社群自架服务](./tools.md)。
 
 如果你有以下任一背景，特别欢迎加入：
 

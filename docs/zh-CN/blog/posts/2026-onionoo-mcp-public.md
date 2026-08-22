@@ -17,7 +17,7 @@ description: "anoni.net 社区把 Tor Project 的 Onionoo 包成 MCP server 与�
 
 匿名网络社区自架的 `onionoo-fastapi` 服务以 v1.0.0 对外公开，站点位于 <https://onionoo.anoni.net>。它把 Tor Project 官方的 [Onionoo](https://metrics.torproject.org/onionoo.html){target="_blank"} API 包成两种接口，一个是补上 OpenAPI 规范的语义化 HTTP API，一个是 Model Context Protocol（MCP）server。
 
-接上 Claude Desktop、Cursor、Claude Code 等支持 MCP 的客户端后，用一句中文就能问「台湾目前有几个 Tor 中继节点，总带宽多少，前五大 ASN 是哪些」。AI 代理会自己拆问题、选工具、查资料、整理出可读报告，不必先学 Onionoo 的字段定义才能开始研究。
+接上 Claude Desktop、Cursor、Claude Code 等支持 MCP 的客户端后，用一句中文就能问「台湾目前有几个 Tor 中继节点，总带宽多少，前五大 ASN 是哪些」。AI 代理会自己拆问题、选工具、查数据、整理出可读报告，不必先学 Onionoo 的字段定义才能开始研究。
 
 <!-- more -->
 
@@ -77,7 +77,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
 
 ### 给写程序直接调用的用户
 
-每个端点都会回传语义化 JSON，可以直接用 `curl` 调用。
+每个端点都会返回语义化 JSON，可以直接用 `curl` 调用。
 
 ```bash
 # 列出台湾的 relay，依 consensus weight 排序前 5 名

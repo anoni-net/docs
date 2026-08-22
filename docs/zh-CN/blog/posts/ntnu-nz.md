@@ -11,7 +11,7 @@ summary: "一位资工系学生，如何在学术网络体制内，让匿名网�
 description: "一位资工系学生，如何在学术网络体制内，让匿名网络真正上线运作"
 ---
 
-# 在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验
+# 在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验
 
 ## 前言：为什么在校园谈匿名网络？
 
@@ -27,7 +27,7 @@ description: "一位资工系学生，如何在学术网络体制内，让匿名
 
     ![NZ 苏恩立](https://assets.anoni.net/blog/nz.jpg){ align=left width="30%" style="border-radius: 5px;"}
 
-    苏恩立（NZ），现就读于国立台湾师范大学资讯工程学系三年级。对信息安全与网络治理深感兴趣，目前负责维护台湾学术网络（TANet）[首个 Tor 节点](https://metrics.torproject.org/rs.html#search/as:AS1659){target="_blank"}。除技术实作外，亦致力于知识共享，于 GDGoC NTNU 学校社团担任匿名网络课程讲师，也长期参与台湾开源与资安社区，曾多次担任 SITCON、HITCON 及 COSCUP 等大型技术年会志工，具备社区服务经验与技术热忱。
+    苏恩立（NZ），现就读于国立台湾师范大学资讯工程学系三年级。对信息安全与网络治理深感兴趣，目前负责维护台湾学术网络（TANet）[首个 Tor 节点](https://metrics.torproject.org/rs.html#search/as:AS1659){target="_blank"}。除技术实现外，亦致力于知识共享，于 GDGoC NTNU 学校社团担任匿名网络课程讲师，也长期参与台湾开源与资安社区，曾多次担任 SITCON、HITCON 及 COSCUP 等大型技术年会志工，具备社区服务经验与技术热忱。
 
 <!-- more -->
 

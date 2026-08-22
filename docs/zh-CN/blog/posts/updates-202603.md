@@ -17,7 +17,7 @@ description: "2026/03 社区近况：Tor Project 客座文章、COSCUP 2026 议�
 
 感谢 Tor Project 的邀约，让我们匿名网络社区有机会分享在学术网络上架设 Tor Relay（中继节点）的经验。
 
-Tor Project 官方网站 Blog 文章 [Setting up a Tor Relay at a university in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} 中，我们分享了在台湾师范大学架设 Tor Relay 的经验，以及如何与学校沟通、留下可能性的实作经验。
+Tor Project 官方网站 Blog 文章 [Setting up a Tor Relay at a university in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} 中，我们分享了在台湾师范大学架设 Tor Relay 的经验，以及如何与学校沟通、留下可能性的实现经验。
 
 感谢来自 Tor Project 的 Pavel 与 Roger 给予我们的帮助，让我们有这个机会通过客座文章的方式分享我们的经验。
 
@@ -37,7 +37,7 @@ Tor Project 官方网站 Blog 文章 [Setting up a Tor Relay at a university in 
 
 讨论过程中，我们也聚焦在合规与技术之间的张力。实务上，许多支付与转账流程会经过中心化交易所，而交易所通常必须遵循 AML/KYC 与跨境监管要求，进而带来个人信息披露与交易可追踪性的风险。这些限制不只影响工具可行性，也会直接改变用户在不同地区的实际选择。
 
-因此，在那次黑客松活动中将「匿名支付」定位为研究与讨论导向的项目。先整理风险、限制与法规疑虑，再逐步形成可持续深化的研究方向。接下来我们也会持续与本地社区协作，将讨论转化为更具体、可验证的实作路线。
+因此，在那次黑客松活动中将「匿名支付」定位为研究与讨论导向的项目。先整理风险、限制与法规疑虑，再逐步形成可持续深化的研究方向。接下来我们也会持续与本地社区协作，将讨论转化为更具体、可验证的实现路线。
 
 活动的协作笔记讨论记录可以参考[这份文件](https://cryptpad.anoni.net/pad/#/2/pad/view/3XxPju-P5tDaPaVclZUwhWvx5uA8CVZv7+8T7uiLqFE/){target="_blank"}。
 

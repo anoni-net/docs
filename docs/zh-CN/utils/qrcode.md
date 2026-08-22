@@ -52,9 +52,9 @@ QR code 有内建的纠错能力，弄脏或遮住一部分还读得出来。等
 
 ## 编码用的是谁的程序
 
-QR 编码交给 [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"}（MIT 授权），原封不动放在 `utils/vendor/` 底下。编码写错的典型后果是生成一个扫得出来但内容错的码，比坏掉更糟，所以用成熟的实作而不是自己重写。
+QR 编码交给 [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"}（MIT 授权），原封不动放在 `utils/vendor/` 底下。编码写错的典型后果是生成一个扫得出来但内容错的码，比坏掉更糟，所以用成熟的实现而不是自己重写。
 
-我们另外写了一个独立的解码器放在测试里，把生成出来的图读回文字再比对，所以「调用的方式对不对」有测试守着。写测试的过程中就抓到一个真的缺陷：函式库默认把字符串当 Latin-1 处理，中文会被截断成乱码。
+我们另外写了一个独立的解码器放在测试里，把生成出来的图读回文字再比对，所以「调用的方式对不对」有测试守着。写测试的过程中就抓到一个真的缺陷：函数库默认把字符串当 Latin-1 处理，中文会被截断成乱码。
 
 ## 离线可用
 

@@ -12,7 +12,7 @@ anoni.net 的文件站、Pulse、ASN Coverage 都放在 GitHub（[anoni-net/docs
 - 一个 [GitHub 账号](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github){target="_blank"}
 - 本机装好 git、Python、uv 与一个编辑器（下面逐项说明）
 
-没用过 git 或 GitHub 也没关系，不必先变成高手。先看懂「fork 别人的 repo、开分支、commit、发 PR」这一条流程就能开始贡献。下面几份入门资料够用。
+没用过 git 或 GitHub 也没关系，不必先变成高手。先看懂「fork 别人的 repo、开分支、commit、发 PR」这一条流程就能开始贡献。下面几份入门数据够用。
 
 !!! info "git / GitHub 入门"
 

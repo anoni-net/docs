@@ -19,13 +19,13 @@ og:
 
 记者要保护消息来源、公民团体要守住成员与捐款人的安全、开发者想确认手上的工具真的挡得住监控，还有被诈骗短信吓过、被广告持续追踪而想拿回一点主导权的一般人。在审查与监控扩散的环境里，这些需求都落在同一组风险上，通信可能被拦截、身份可能被追踪、一笔转账的时间与金额足以反推出整张关系网，组织的成员名单与金流甚至可能在你不知情时就被摊开。
 
-匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实作经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到现实世界的开源隐私工具、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
+匿名网络社群 anoni.net 把这一年在 [Tor](../tools/what-is-tor.md)、[Tails](../tools/what-is-tails.md)、[OONI](../tools/what-is-ooni.md)、个人隐私与匿名支付累积的实现经验，带进 COSCUP 2026 的开源社群现场。两天的议程从网络与审查如何运作开始，一路到现实世界的开源隐私工具、校园 Tor 节点、浏览器追踪、健保数据库的个资权利，以及与 ETHTaipei 合办的匿名支付场。不论你是来找马上能用的工具，还是想一起贡献开源项目，都能挑到对应的场次。
 
 !!! info "活动信息"
 
     - 日期：2026/08/08（六）、2026/08/09（日）
     - 地点：国立台湾科技大学（NTUST），社群议程轨在 `TR-510`，8/08 下午与 ETHTaipei 合办场在 `TR-511`
-    - 形式：社群议程、实作工作坊、与 ETHTaipei 合办的匿名支付场
+    - 形式：社群议程、实现工作坊、与 ETHTaipei 合办的匿名支付场
     - 入场：COSCUP 免费入场，社群议程轨不需另外报名，当天到场即可参与（议程时间到活动前仍可能微调，以 COSCUP 官方议程为准）
 
 [前往 COSCUP 2026 议程](#议程总览){ .md-button .md-button--primary }
@@ -66,7 +66,7 @@ og:
 | 13:40-14:10<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-account-check-outline: **The Privacy-preserving Identity Pipeline in KYC**<br>:material-arrow-right-bottom: 用一组密码学原语组出能通过 KYC，却不让服务器看到身份数据的流程 | ryanycw（Ryan Wang） |
 | 14:20-14:50<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-link-off: **从不可链接性出发：隐匿地址如何解决链上金融隐私（以 Fluidkey 为例）**<br>:material-arrow-right-bottom: 用隐匿地址让同一人每次收款都落在不相关的地址，外部串不成同一身份 | Jennifer HSU |
 | 15:00-15:30<br>30 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-bitcoin: **我不洗钱，为何要理解匿名支付？从零开始介绍隐私加密金流交易**<br>:material-arrow-right-bottom: 为什么倡议组织与捐款人也该懂加密货币金流的隐私风险，用白话走过几套解法 | 黄豆泥 mashbean |
-| 15:40-16:30<br>50 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隐私支付实作工作坊：从龙卷风现金到隐私池**<br>:material-arrow-right-bottom: 用道具与实机示范 Tornado Cash 与 Privacy Pool 的用法，现场备有模拟网络，有机会的话可带电脑来玩 | Liangcc |
+| 15:40-16:30<br>50 分钟 | <span class="sess-tag sess-tag--payments">匿名支付</span> :material-hammer-wrench: **隐私支付实现工作坊：从龙卷风现金到隐私池**<br>:material-arrow-right-bottom: 用道具与实机示范 Tornado Cash 与 Privacy Pool 的用法，现场备有模拟网络，有机会的话可带电脑来玩 | Liangcc |
 
 ### Day 2：2026/08/09（日）
 
@@ -126,7 +126,7 @@ og:
 
     讲者从《我们与恶的距离》谈起，问的是看完那部戏之后，我们对善恶边界为何仍然这么有把握。同一件事物换一套规则就被归成两种性质，标题的「毒品非毒、洗钱非洗钱」把这个落差直接写了出来。接着才是这场的核心提问，在全面实名监控与无须许可的匿名服务之间，还有没有第三条路。
 
-    这个提问在技术上对应到资格验证，证明一个人符合某项条件，而不必一并揭露身分。W3C 的可验证凭证（Verifiable Credentials，VC）这类开放标准搭配选择性披露（selective disclosure），让持有者只出示「已成年」这一项，其余数据验证方看不到。开放标准的作用在于验证规则不由单一厂商定义，任何人都能自己实作钱包或验证端，而使用者手上那一端是否开源可稽核，决定了你能不能确认它没有多送东西出去。听完你会分得出证明资格与证明身分是两件事，也会拿到一把尺去量各种实名制方案。
+    这个提问在技术上对应到资格验证，证明一个人符合某项条件，而不必一并揭露身分。W3C 的可验证凭证（Verifiable Credentials，VC）这类开放标准搭配选择性披露（selective disclosure），让持有者只出示「已成年」这一项，其余数据验证方看不到。开放标准的作用在于验证规则不由单一厂商定义，任何人都能自己实现钱包或验证端，而使用者手上那一端是否开源可稽核，决定了你能不能确认它没有多送东西出去。听完你会分得出证明资格与证明身分是两件事，也会拿到一把尺去量各种实名制方案。
 
     OONI 为了让测量数据可信、又不追踪回报者，用的是同一类思路的匿名凭证（anonymous credentials），设计与取舍写在 [OONI 全新的匿名凭证系统](../blog/posts/2026-ooni-anonymous-credentials.md)。讲者在 8/09 的 Open Source Policy 议程轨另有一场与黄豆泥 mashbean 合讲的[年龄验证、数字监控、隐私权，讨论这些以前，不妨先开源吧](https://pretalx.coscup.org/coscup-2026/talk/JSMGDZ/){target="_blank"}，会分析欧盟正在开源开发的年龄验证 App。这场适合关心数字身分、实名制争议与匿名服务治理的听众，不需要密码学背景。
 
@@ -135,7 +135,7 @@ og:
 
 ### Day 1（8/08 下午）：ETHTaipei 合办「匿名支付」场
 
-13:00-16:30 为与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）合办的「匿名支付」主题场，在 `TR-511` 教室进行，议程由 ETHTaipei 安排，共五场。上午的导论从公民与倡议视角谈隐私工具与匿名的资格验证，白话、不深入密码学细节。下午前两场正好把资格验证接到金流上，用零知识证明搭自然人凭证向服务证明「我是台湾公民」、用 zkKYC 证明「已成年、与上个月注册的是同一人」，都是上午那句「证明符合条件而不揭露身分」的协议层实作，接着三场再从链上隐匿地址谈到隐私加密金流与实作工作坊。两个社群在匿名支付主题上各有切入角度，分工与背景见[跨社群合作](#跨社群合作)。
+13:00-16:30 为与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）合办的「匿名支付」主题场，在 `TR-511` 教室进行，议程由 ETHTaipei 安排，共五场。上午的导论从公民与倡议视角谈隐私工具与匿名的资格验证，白话、不深入密码学细节。下午前两场正好把资格验证接到金流上，用零知识证明搭自然人凭证向服务证明「我是台湾公民」、用 zkKYC 证明「已成年、与上个月注册的是同一人」，都是上午那句「证明符合条件而不揭露身分」的协议层实现，接着三场再从链上隐匿地址谈到隐私加密金流与实现工作坊。两个社群在匿名支付主题上各有切入角度，分工与背景见[跨社群合作](#跨社群合作)。
 
 ??? abstract ":material-card-account-details-outline: 零知识证明与自然人凭证身份验证（Ya-wen Jeng，30 分钟）"
 
@@ -163,13 +163,13 @@ og:
 
 ??? abstract ":material-bitcoin: 我不洗钱，为何要理解匿名支付？从零开始介绍隐私加密金流交易（黄豆泥 mashbean，30 分钟）"
 
-    很多人以为加密货币是匿名的，事实正好相反，只要知道一个钱包地址，就能在公开链上看到对方完整的金流、社会关系与行动轨迹，对倡议组织、跨境协作的公民团体、需要保护身份的捐款人与受助者来说，这是被严重低估的风险。用最白话的方式走过链上隐私金流的设计逻辑，对照近年区块链社群发展出的三套风格迥异的方案，从被美国制裁、开发者遭起诉的混币器 Tornado Cash，到走白名单路线、把合规与隐私放进同一个架构协商的 Privacy Pool，再到以黑名单搭配冷却期与集体侦测、在 2025 年挡下 zkLend 黑客约 950 万美元洗钱的 Railgun，以及把隐私设为所有钱包默认值的 Kohaku。
+    很多人以为加密货币是匿名的，事实正好相反，只要知道一个钱包地址，就能在公开链上看到对方完整的金流、社会关系与行动轨迹，对倡议组织、跨境协作的公民团体、需要保护身份的捐款人与受助者来说，这是被严重低估的风险。用最白话的方式走过链上隐私金流的设计逻辑，对照近年区块链社群发展出的三套风格迥异的方案，从被美国制裁、开发者遭起诉的混币器 Tornado Cash，到走白名单路线、把合规与隐私放进同一个架构协商的 Privacy Pool，再到以黑名单搭配冷却期与集体检测、在 2025 年挡下 zkLend 黑客约 950 万美元洗钱的 Railgun，以及把隐私设为所有钱包默认值的 Kohaku。
 
     离开时你会带走一个比技术更难的问题，当隐私从技术问题延伸成**治理问题**，由谁来定义好人与坏人？这场适合关心数字人权与公民安全的工作者、想了解加密货币合规边界的法遵与会计人员，以及对「我又没做坏事，为什么要在乎隐私」这句话感到不太对劲的人。
 
     :material-open-in-new: [COSCUP 官方议程页](https://pretalx.coscup.org/coscup-2026/talk/QGUGMK/){target="_blank"}
 
-??? abstract ":material-hammer-wrench: 隐私支付实作工作坊：从龙卷风现金到隐私池（Liangcc，50 分钟）"
+??? abstract ":material-hammer-wrench: 隐私支付实现工作坊：从龙卷风现金到隐私池（Liangcc，50 分钟）"
 
     工作坊从用户视角出发，介绍龙卷风现金（Tornado Cash）的设计哲学，以及隐私池（Privacy Pool）在它之上的改进。
 
@@ -239,7 +239,7 @@ og:
 
 ## :material-handshake: 跨社群合作：匿名网络社群 × ETHTaipei { #跨社群合作 }
 
-今年社群与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）展开议程合作，8/08 下午的「匿名支付」合办场把关心数字人权的社群和区块链开发者带到同一个房间。NGO 与记者能在这里了解捐款与金流的隐私风险，开发者则能听到协议层的零知识证明与隐匿地址实作。应用导向、科普类稿件安排在匿名网络社群议程轨，技术、协议层稿件可能调整到 ETHTaipei 区块链议程轨（见[征稿与联合审稿安排](./coscup-2026-cfp.md#anoni-netxETHTaipei)），欢迎在两个议程轨之间跨场。
+今年社群与 [ETHTaipei](https://ethtaipei.org/){target="_blank"}（台北以太坊社群）展开议程合作，8/08 下午的「匿名支付」合办场把关心数字人权的社群和区块链开发者带到同一个房间。NGO 与记者能在这里了解捐款与金流的隐私风险，开发者则能听到协议层的零知识证明与隐匿地址实现。应用导向、科普类稿件安排在匿名网络社群议程轨，技术、协议层稿件可能调整到 ETHTaipei 区块链议程轨（见[征稿与联合审稿安排](./coscup-2026-cfp.md#anoni-netxETHTaipei)），欢迎在两个议程轨之间跨场。
 
 ## :material-account-voice: 讲者简介 { #讲者简介 }
 
@@ -254,8 +254,8 @@ og:
 - **[Ya-wen Jeng（Vivian Jeng）](https://pretalx.coscup.org/coscup-2026/speaker/KBPWBX/){target="_blank"}**：任职 Ethereum Foundation 的 Privacy Stewards of Ethereum 团队，专注零知识证明与隐私技术推广，主导 Mopro、Unirep 等开源工具开发。主讲「零知识证明与自然人凭证身份验证」。
 - **[ryanycw（Ryan Wang）](https://pretalx.coscup.org/coscup-2026/speaker/8WM9UR/){target="_blank"}**：DeFi 开发者，ETHTaipei 共同主办，关注隐私、技术与以太坊。主讲「The Privacy-preserving Identity Pipeline in KYC」。
 - **[Jennifer HSU](https://pretalx.coscup.org/coscup-2026/speaker/ZJ98MX/){target="_blank"}**：任职自托管隐私钱包 Fluidkey，台湾开发者社群 XueDAO 创办人，推广区块链技术。主讲「从不可链接性出发：隐匿地址如何解决链上金融隐私」。
-- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数字发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主讲「我不洗钱，为何要理解匿名支付？」。
-- **[Liangcc（CC）](https://pretalx.coscup.org/coscup-2026/speaker/UYKEPE/){target="_blank"}**：在以太坊生态开发零知识应用，关注人文、经济与密码学证明。带领「隐私支付实作工作坊：从龙卷风现金到隐私池」。
+- **[黄豆泥 mashbean](https://pretalx.coscup.org/coscup-2026/speaker/ZMHFCQ/){target="_blank"}**：专注分布式科技与数字自主权，Matters 总经理，曾任数位发展部资安制度工程师（推动数字凭证皮夹与开放网络标准、参与 W3C），现为哈佛大学政策访问研究员与以太坊基金会 Silviculture 成员。主讲「我不洗钱，为何要理解匿名支付？」。
+- **[Liangcc（CC）](https://pretalx.coscup.org/coscup-2026/speaker/UYKEPE/){target="_blank"}**：在以太坊生态开发零知识应用，关注人文、经济与密码学证明。带领「隐私支付实现工作坊：从龙卷风现金到隐私池」。
 
 **8/09 Day 2 议程**
 

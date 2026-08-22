@@ -89,7 +89,7 @@ QR code 里放得进的不只网址。扫到之后直接动作的 App 不会先�
 
 解码交给 [jsQR](https://github.com/cozmo/jsQR){target="_blank"}（Apache-2.0 授权，[授权全文](vendor/jsQR-LICENSE.txt)），原封不动放在 `utils/vendor/` 底下。这一区用到的第三方组件都列在[小工具首页](index.md#用了谁的程序)。
 
-解码要抓出 QR code 在画面里的位置、把歪斜的角度校正回来，还要还原被遮住或脏污的部分，比编码大得多。测试用[生成器](qrcode.md)页面的 qrcode-generator 生成已知内容的码，再交给 jsQR 读回来比对，两个各自独立的函式库互相验证。
+解码要抓出 QR code 在画面里的位置、把歪斜的角度校正回来，还要还原被遮住或脏污的部分，比编码大得多。测试用[生成器](qrcode.md)页面的 qrcode-generator 生成已知内容的码，再交给 jsQR 读回来比对，两个各自独立的函数库互相验证。
 
 ## 离线可用
 

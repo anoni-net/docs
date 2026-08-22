@@ -22,7 +22,7 @@ icon: material/key-variant
 
 主密码是整套系统的单一支点，值得花一点时间想清楚。
 
-**用 passphrase，不要用单字密码**。Passphrase 是 4 到 6 个随机英文单字串成的句子（例如 `correct horse battery staple`），熵比短而复杂的密码高得多，也比较好记。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。社群也做了一份带亚洲味、与 EFF 相容的 [Asian Diceware 密语字典](./asian-diceware.md)，附 A5 小册与掷骰、安全随机数的产生教学。
+**用 passphrase，不要用单字密码**。Passphrase 是 4 到 6 个随机英文单字串成的句子（例如 `correct horse battery staple`），熵比短而复杂的密码高得多，也比较好记。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。社群也做了一份带亚洲味、与 EFF 兼容的 [Asian Diceware 密语字典](./asian-diceware.md)，附 A5 小册与掷骰、安全随机数的产生教学。
 
 **主密码不要重用**。这个密码一旦曝露，等于你所有的账号全部曝露。除了密码管理器，其他任何服务都不能用这组密码。
 
@@ -38,7 +38,7 @@ icon: material/key-variant
 
 [Tails 7.6](../blog/posts/2026-tails-7-6.md) 起预装 GNOME Secrets 取代 KeePassXC，使用相同的 `.kdbx` 格式，原本的密钥库文件可以直接开启。
 
-`.kdbx` 是公开格式，2017 年后陆续有新一代客户端从零开始实作、能开同一个密钥库：Apple 平台原生 SwiftUI 的 [KeePassium](https://keepassium.com/){target="_blank"} 与 [Strongbox](https://strongboxsafe.com/){target="_blank"}（GPL）、跨平台 Flutter 的 [AuthPass](https://authpass.app/){target="_blank"}。换 client 不用搬资料，密钥库格式跟着你走，不被任何一家绑死。
+`.kdbx` 是公开格式，2017 年后陆续有新一代客户端从零开始实现、能开同一个密钥库：Apple 平台原生 SwiftUI 的 [KeePassium](https://keepassium.com/){target="_blank"} 与 [Strongbox](https://strongboxsafe.com/){target="_blank"}（GPL）、跨平台 Flutter 的 [AuthPass](https://authpass.app/){target="_blank"}。换 client 不用搬数据，密钥库格式跟着你走，不被任何一家绑死。
 
 适合：自己掌握储存的人、Tails 用户、不想依赖厂商云端的人。
 
@@ -54,11 +54,11 @@ icon: material/key-variant
 
 ### 云端同步：Bitwarden
 
-[Bitwarden](https://bitwarden.com/){target="_blank"} 是开源密码管理器，厂商提供云端储存与同步，端对端加密由厂商实作。免费版功能齐全（无限项目、无限装置、无限平台），Premium 每年 19.80 美元（2026 年 1 月调涨，实际以官网为准），加上 TOTP 整合、进阶报告、优先支援。
+[Bitwarden](https://bitwarden.com/){target="_blank"} 是开源密码管理器，厂商提供云端储存与同步，端对端加密由厂商实现。免费版功能齐全（无限项目、无限装置、无限平台），Premium 每年 19.80 美元（2026 年 1 月调涨，实际以官网为准），加上 TOTP 整合、进阶报告、优先支持。
 
-技术上，Bitwarden 有公开的第三方安全 audit，源代码开放。如果你不信任 Bitwarden 公司本身，可以自架 [Vaultwarden](https://github.com/dani-garcia/vaultwarden){target="_blank"}（社群重写的相容后端），客户端不变。
+技术上，Bitwarden 有公开的第三方安全 audit，源代码开放。如果你不信任 Bitwarden 公司本身，可以自架 [Vaultwarden](https://github.com/dani-garcia/vaultwarden){target="_blank"}（社群重写的兼容后端），客户端不变。
 
-信任前提是：厂商不被攻破、E2EE 实作正确。即使厂商被攻破，攻击者取得的也是加密过的密钥库，需要再破解你的主密码。但 LastPass 2022 的事件提醒：密钥库的元数据（网站 URL 等栏位）并未加密，攻击者能据此规划针对性钓鱼。
+信任前提是：厂商不被攻破、E2EE 实现正确。即使厂商被攻破，攻击者取得的也是加密过的密钥库，需要再破解你的主密码。但 LastPass 2022 的事件提醒：密钥库的元数据（网站 URL 等栏位）并未加密，攻击者能据此规划针对性钓鱼。
 
 适合：跨多装置、多平台使用、能接受厂商依赖的人。
 
@@ -72,7 +72,7 @@ icon: material/key-variant
 
 ### 系统整合：Apple Passwords / iCloud Keychain
 
-iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https://support.apple.com/zh-cn/guide/passwords/welcome/mac){target="_blank"} app，跨 Apple 装置自动同步、支援 passkey 与 TOTP，整合到系统 autofill。
+iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https://support.apple.com/zh-cn/guide/passwords/welcome/mac){target="_blank"} app，跨 Apple 装置自动同步、支持 passkey 与 TOTP，整合到系统 autofill。
 
 限制：Android 与 Windows 上的跨平台体验弱（只能用 [iCloud for Windows](https://support.apple.com/zh-cn/guide/icloud-windows/welcome/icloud){target="_blank"} 或 web 接口），不适合多平台用户。同步绑 Apple ID，威胁模型要把「Apple ID 失守 = 密码全失守」算进去。
 
@@ -84,12 +84,12 @@ iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https:
 
 存放策略上有两派：
 
-- **同密钥库存 TOTP**：KeePassXC、Bitwarden（Premium）、1Password 都支援。方便、跨装置同步自动处理。缺点是主密码曝露 = TOTP 也曝露，等于两步验证变成一步
+- **同密钥库存 TOTP**：KeePassXC、Bitwarden（Premium）、1Password 都支持。方便、跨装置同步自动处理。缺点是主密码曝露 = TOTP 也曝露，等于两步验证变成一步
 - **独立 app 存 TOTP**：Android 用 [Aegis](https://getaegis.app/){target="_blank"}、iOS 用 [Raivo](https://raivo-otp.com/){target="_blank"} 或 [Ente Auth](https://ente.io/auth/){target="_blank"}（跨平台）。多一道分层，安全多一道
 
 社群建议：高敏感账号（Email、银行、云端服务）用独立 app，其他可以同密钥库图方便。
 
-短信 2FA 在台湾的银行、政府服务还是常态，但 SIM swap 攻击在台近年也常见，只要服务支援 TOTP 一律改 TOTP。TOTP 的 recovery codes（救援码）要跟主密码分开存，不要一起放在密钥库里，否则密钥库一掉就全部都掉。
+短信 2FA 在台湾的银行、政府服务还是常态，但 SIM swap 攻击在台近年也常见，只要服务支持 TOTP 一律改 TOTP。TOTP 的 recovery codes（救援码）要跟主密码分开存，不要一起放在密钥库里，否则密钥库一掉就全部都掉。
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/pm-bitwarden-totp.png" target="_blank">
@@ -103,13 +103,13 @@ iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https:
 
 ## Passkeys：取代密码的新方案
 
-Passkey 是基于 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target="_blank"} 标准的无密码登录方式。2026 年已经在主流服务（Google、Apple、Microsoft、GitHub、PayPal）广泛支援。
+Passkey 是基于 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target="_blank"} 标准的无密码登录方式。2026 年已经在主流服务（Google、Apple、Microsoft、GitHub、PayPal）广泛支持。
 
 运作上：你的装置产生一对公私钥，公钥交给服务，私钥存在你的密码管理器或硬件密钥上。登录时用生物辨识（Face ID、指纹）解锁私钥签名挑战。没有打字输入的密码，自然就没有 phishing 风险。
 
 哪些密码管理器存得了 passkey：Bitwarden、1Password、Apple Passwords，KeePassXC 透过 plugin 也可以。
 
-过渡期建议：能用 passkey 就用，但保留密码加 TOTP 作为备援。不是每个服务都支援 passkey，更不是每台装置都能扫指纹。如果常切换不同人的装置（公用电脑、家人装置），passkey 的同步机制要先弄清楚。
+过渡期建议：能用 passkey 就用，但保留密码加 TOTP 作为备援。不是每个服务都支持 passkey，更不是每台装置都能扫指纹。如果常切换不同人的装置（公用电脑、家人装置），passkey 的同步机制要先弄清楚。
 
 跟匿名情境的取舍：passkey 跟生物辨识与装置绑定，在纯匿名浏览（例如用 Tor Browser 开不同身份）的情境下难用。请依 [威胁模型](../basics/threat-model.md) 判断。
 
@@ -119,7 +119,7 @@ Passkey 是基于 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target=
 
 主流产品：[YubiKey](https://www.yubico.com/){target="_blank"}（含 NFC 版本，能跟手机配合）、[Solo](https://solokeys.com/){target="_blank"}（开源硬件）。透过 USB、NFC、Lightning 与装置沟通。
 
-适合放在谁身上：高敏感账号（个人 Email、银行、政府服务、GitHub 开发者账号）。Bitwarden、1Password、Google、GitHub、Microsoft、Apple ID 都支援硬件密钥当作 2FA。
+适合放在谁身上：高敏感账号（个人 Email、银行、政府服务、GitHub 开发者账号）。Bitwarden、1Password、Google、GitHub、Microsoft、Apple ID 都支持硬件密钥当作 2FA。
 
 **至少买两支**：一支日常用、一支备用（锁在家里的保险柜或信任的家人那边）。只买一支遗失就被锁死，要走服务的「账号回复」流程，那是你不会想经历的麻烦。
 

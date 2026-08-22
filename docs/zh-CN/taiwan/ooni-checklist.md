@@ -52,7 +52,7 @@ OONI Probe 每次检测都依据一份事先列举的网站清单，逐一检查
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
-- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-code-json: OONI 测量数据结构导览](../community/ooni-data-format.md)
 - [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
 - [:material-chat-question: 网络自由为什么重要](../basics/internet-freedom.md)
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)

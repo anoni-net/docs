@@ -28,7 +28,7 @@ icon: material/road-variant
 
 ### 匿名支付探索
 
-现金是最成熟的匿名支付方式，但跨境、线上、组织收受捐款等情境下有明显限制。社群会在合法前提下探索链上工具的可行性，包含加密货币、稳定币、零知识身份验证、多重签署等实作面向。这个主题还在起步阶段，目前尚未看到完整且系统性的中文资源，社群想逐步把实作指引建构起来。
+现金是最成熟的匿名支付方式，但跨境、线上、组织收受捐款等情境下有明显限制。社群会在合法前提下探索链上工具的可行性，包含加密货币、稳定币、零知识身份验证、多重签署等实现面向。这个主题还在起步阶段，目前尚未看到完整且系统性的中文资源，社群想逐步把实现指引建构起来。
 
 研究专题入口、文章索引与目前进度请见 [匿名支付研究专题](./payments-research.md)。
 
@@ -68,8 +68,8 @@ icon: material/road-variant
 文件站之外，社群也维运几个与 Tor、OONI、密码安全相关的技术子项目：
 
 - **Pulse**：Tor 中继即时监控（FastAPI + PostgreSQL），对应 [Tor Relays 观测点](../taiwan/tor-relay-watcher.md) 页面的图表来源
-- **ASN Coverage**：OONI 公开资料的批次分析工具，对应 [ASN 观测资料分析](../taiwan/ooni-asn-coverage.md)
-- **Asian Diceware**：EFF 相容的 7776 字密语词表，混入有字典背书的亚洲外来语，为社群未来自建类似 AnonTicket 的匿名服务平台、产生账号代码做准备，对应 [Asian Diceware 密语字典](../tools/asian-diceware.md)
+- **ASN Coverage**：OONI 公开数据的批次分析工具，对应 [ASN 观测数据分析](../taiwan/ooni-asn-coverage.md)
+- **Asian Diceware**：EFF 兼容的 7776 字密语词表，混入有字典背书的亚洲外来语，为社群未来自建类似 AnonTicket 的匿名服务平台、产生账号代码做准备，对应 [Asian Diceware 密语字典](../tools/asian-diceware.md)
 
 Pulse 与 ASN Coverage 的程序码与议题追踪在 [GitHub anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}，Asian Diceware 独立放在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。
 
@@ -82,7 +82,7 @@ Pulse 与 ASN Coverage 的程序码与议题追踪在 [GitHub anoni-net/docs](ht
 - 想评估自己的技术涉入程度：见 [自我技能评估表](./skill-level.md)
 - 想了解沟通协作工具：见 [社群自架服务](./tools.md)
 
-社群讨论主要在 Matrix（家服务器 `im.anoni.net`），共笔使用 Cryptpad，视讯使用 Jitsi。账号申请与入口设定都整理在 [社群自架服务](./tools.md)。
+社群讨论主要在 Matrix（家服务器 `im.anoni.net`），共笔使用 Cryptpad，视频使用 Jitsi。账号申请与入口设定都整理在 [社群自架服务](./tools.md)。
 
 ## 路线图更新
 

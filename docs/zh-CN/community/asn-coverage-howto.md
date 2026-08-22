@@ -1,12 +1,12 @@
 ---
-title: ASN 观测资料撷取与分析
-description: anoni-net/docs 提供的 OONI 资料撷取程序如何设置与使用，包含 S3 公开资料集的路径结构、三种取用路径的取舍、程序输出的 CSV 栏位格式，以及覆盖率的计算方式。
+title: ASN 观测数据提取与分析
+description: anoni-net/docs 提供的 OONI 数据提取程序如何设置与使用，包含 S3 公开数据集的路径结构、三种取用路径的取舍、程序输出的 CSV 栏位格式，以及覆盖率的计算方式。
 icon: material/database-search
 ---
 
-# :material-database-search: ASN 观测资料撷取与分析
+# :material-database-search: ASN 观测数据提取与分析
 
-本页是 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 的技术延伸，说明 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的撷取程序如何设置与使用，用于撷取 OONI 公开资料并计算特定区域 ASN 的观测覆盖率。
+本页是 [ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 的技术延伸，说明 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的提取程序如何设置与使用，用于提取 OONI 公开数据并计算特定区域 ASN 的观测覆盖率。
 
 开始前建议先读 [项目研究预先准备](./setup-repo.md) 建置开发环境。
 
@@ -16,15 +16,15 @@ icon: material/database-search
 
 ## 三种取用路径
 
-OONI 的观测资料有三个入口，用途差异很大，着手前需先选定：
+OONI 的观测数据有三个入口，用途差异很大，着手前需先选定：
 
 | 入口 | 适合的情境 | 限制 |
 |---|---|---|
-| [AWS S3 公开资料集](https://registry.opendata.aws/ooni/){target="_blank"} | 批次分析、全量统计、跨时间比对 | 需自行解析，下载量以 GB 计 |
-| [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"} | 依条件筛选、取单笔完整测量 | 单次回传笔数有上限 |
+| [AWS S3 公开数据集](https://registry.opendata.aws/ooni/){target="_blank"} | 批次分析、全量统计、跨时间比对 | 需自行解析，下载量以 GB 计 |
+| [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"} | 依条件筛选、取单笔完整测量 | 单次返回笔数有上限 |
 | [OONI Explorer](https://explorer.ooni.org/){target="_blank"} | 人工查阅、确认个别测量 | 不适合程序化取用 |
 
-`asn_coverage` 采用 S3 路径，目的是统计覆盖率而非查询单笔。单笔查询与小量筛选的 API 用法见 [OONI 测量资料结构导览](./ooni-data-format.md)。
+`asn_coverage` 采用 S3 路径，目的是统计覆盖率而非查询单笔。单笔查询与小量筛选的 API 用法见 [OONI 测量数据结构导览](./ooni-data-format.md)。
 
 ## 程序能回答什么
 
@@ -38,7 +38,7 @@ OONI 的观测资料有三个入口，用途差异很大，着手前需先选定
 
 再往下一层须取证据层的栏位逐笔比对，该作法需要另行设计储存方式，单纯的计数统计无法容纳。
 
-## S3 资料集的摆放方式
+## S3 数据集的摆放方式
 
 Bucket 名称是 `ooni-data-eu-fra`，位于 `eu-central-1`，公开读取不需认证凭证。路径依「日期、小时、国码、测项」分成四层：
 
@@ -61,41 +61,41 @@ curl -s "https://ooni-data-eu-fra.s3.eu-central-1.amazonaws.com/?list-type=2&pre
 
 回应是未断行的 XML，上例接 `grep` 只取出目录名称。台湾在单一小时内通常有十几个测项目录，`webconnectivity` 仅为其中之一，同层还有 `tor`、`telegram`、`signal`、`whatsapp`、`dnscheck`、`echcheck`、`openvpn`、`psiphon`、`ndt`、`dash` 等。
 
-每个测项目录底下同一批资料有两种封装，`.jsonl.gz` 与 `.tar.gz`。`.jsonl.gz` 解开后一行一笔测量，适合逐行解析，程序取用的即为 `.jsonl.gz`。以 2026-08-04 台湾的 `webconnectivity` 为例，单一文件约 10 MB，换算成整月全国资料相当可观，执行前应先估算频宽与执行时间。程序采串流处理，原始文件不会落地保存，最终只输出 CSV。
+每个测项目录底下同一批数据有两种封装，`.jsonl.gz` 与 `.tar.gz`。`.jsonl.gz` 解开后一行一笔测量，适合逐行解析，程序取用的即为 `.jsonl.gz`。以 2026-08-04 台湾的 `webconnectivity` 为例，单一文件约 10 MB，换算成整月全国数据相当可观，执行前应先估算频宽与执行时间。程序采串流处理，原始文件不会落地保存，最终只输出 CSV。
 
-各栏位的判读方式见 [OONI 测量资料结构导览](./ooni-data-format.md)，判定栏位的含义见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)。
+各栏位的判读方式见 [OONI 测量数据结构导览](./ooni-data-format.md)，判定栏位的含义见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)。
 
-## 撷取与分析指令
+## 提取与分析指令
 
-### 回看观察资料
+### 回看观察数据
 
 ```bash title="回看最近 36 小时"
 uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
 ```
 
-三个参数均可省略，默认值即为上例。`--frame` 决定回溯总长度的单位，可填 `hours`、`days`、`weeks` 等，无论何者，资料一律按小时切分。输出文件名格式：
+三个参数均可省略，默认值即为上例。`--frame` 决定回溯总长度的单位，可填 `hours`、`days`、`weeks` 等，无论何者，数据一律按小时切分。输出文件名格式：
 
 - `lookback_{loc}_{YYYYMMDD}_{units}_{frame}.csv`
 
-文件名中的 `{YYYYMMDD}` 是执行当日的 UTC 日期，并非资料涵盖的区间，实际范围须查看文件内容。文件写入当前的工作目录。
+文件名中的 `{YYYYMMDD}` 是执行当日的 UTC 日期，并非数据涵盖的区间，实际范围须查看文件内容。文件写入当前的工作目录。
 
-### 取得区间资料
+### 取得区间数据
 
 ```bash title="取得指定区间"
 uv run python ooni.py span --start=2026/08/01 --end=2026/08/03 --loc=TW --chunk=40
 ```
 
-带入开始时间（`start`）与结束时间（`end`），取得该期间各小时区间的资料。`--chunk` 控制同时处理的小时数，默认 `40`，网络或内存不足时应调小。输出文件名格式：
+带入开始时间（`start`）与结束时间（`end`），取得该期间各小时区间的数据。`--chunk` 控制同时处理的小时数，默认 `40`，网络或内存不足时应调小。输出文件名格式：
 
 - `span_{loc}_{开始YYYYMMDD}_{结束YYYYMMDD}.csv`
 
-### 转换为试算表资料
+### 转换为试算表数据
 
 ```bash title="展开为试算表格式"
 uv run python ooni.py sheetrow --path=./span_TW_20260801_20260803.csv
 ```
 
-将已撷取的资料展开，便于在试算表中计算。输出文件名为原文件名前加上 `rows_`，上例即 `rows_span_TW_20260801_20260803.csv`。
+将已提取的数据展开，便于在试算表中计算。输出文件名为原文件名前加上 `rows_`，上例即 `rows_span_TW_20260801_20260803.csv`。
 
 ## 输出的 CSV 栏位格式
 
@@ -108,7 +108,7 @@ uv run python ooni.py sheetrow --path=./span_TW_20260801_20260803.csv
 | `hour` | 小时，格式 `HH`，UTC |
 | `statistics` | 该小时的统计结果，内容是一段 JSON |
 
-`statistics` 内含三份计数，`counts` 依 ASN 统计测量笔数，`network_type` 依连线类型统计，`blocking` 依 ASN 统计判定结果的分布。以 2026-08-04 台湾 `00` 时的实际资料为例，该小时共 551 笔测量：
+`statistics` 内含三份计数，`counts` 依 ASN 统计测量笔数，`network_type` 依连线类型统计，`blocking` 依 ASN 统计判定结果的分布。以 2026-08-04 台湾 `00` 时的实际数据为例，该小时共 551 笔测量：
 
 ```json title="statistics 栏位展开"
 {"counts": {"AS3462": 300, "AS17716": 100, "AS18419": 100, "AS24158": 51},
@@ -138,7 +138,7 @@ uv run python ooni.py sheetrow --path=./span_TW_20260801_20260803.csv
 
 ## 计算 ASN 覆盖率
 
-覆盖率需要两份数字，观测资料中出现过的不重复 ASN 数，以及该区域登记在案的 ASN 总数。前者由上一节摊平后的 CSV 以枢纽分析取得，后者以 `ripe.py` 向 RIPE NCC 索取：
+覆盖率需要两份数字，观测数据中出现过的不重复 ASN 数，以及该区域登记在案的 ASN 总数。前者由上一节摊平后的 CSV 以枢纽分析取得，后者以 `ripe.py` 向 RIPE NCC 索取：
 
 ```bash title="取得该区域的全量 ASN 清单"
 uv run python ripe.py save --loc=TW
@@ -148,7 +148,7 @@ uv run python ripe.py save --loc=TW
 
 !!! warning "两边的 ASN 格式不同，比对前须先统一"
 
-    `ripe.py` 输出的 `no` 栏位是纯数字（`3462`），OONI 资料的 `probe_asn` 带 `AS` 前缀（`AS3462`）。迳以 VLOOKUP 比对会全部落空，须先为其中一边补上或去除 `AS`。
+    `ripe.py` 输出的 `no` 栏位是纯数字（`3462`），OONI 数据的 `probe_asn` 带 `AS` 前缀（`AS3462`）。迳以 VLOOKUP 比对会全部落空，须先为其中一边补上或去除 `AS`。
 
 两份数字备齐后即可计算：
 
@@ -156,18 +156,18 @@ uv run python ripe.py save --loc=TW
 覆盖率 = 观测资料中出现的不重复 ASN 数 ÷ 该区域登记的 ASN 总数
 ```
 
-以 [ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 引用的 2023-12 报告为例，台湾当时约有 437 组 ASN，观测资料涵盖的不重复 ASN 占 7.32%。同一算式可用于重算近期区间，对照覆盖率是否改善。
+以 [ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 引用的 2023-12 报告为例，台湾当时约有 437 组 ASN，观测数据涵盖的不重复 ASN 占 7.32%。同一算式可用于重算近期区间，对照覆盖率是否改善。
 
 ## 下一步
 
-取得资料之后，接续判读各栏位的内容。
+取得数据之后，接续判读各栏位的内容。
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 测量资料结构导览](./ooni-data-format.md)
+- [:material-code-json: OONI 测量数据结构导览](./ooni-data-format.md)
 - [:material-shield-search: OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)
 - [:material-table-search: OONI 测项速查表](./ooni-nettests-map.md)
-- [:material-access-point-network: ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-access-point-network: ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
 - [:octicons-mark-github-24: 项目研究预先准备](./setup-repo.md)
 - [:material-hand-heart: 如何参与与认领主题](./how-to-contribute.md)
 

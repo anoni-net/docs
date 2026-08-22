@@ -146,7 +146,7 @@ Firefox 另外有一个机制，网络可以透过一个特定的查询回应让
 
 ### 登录页拦截（captive portal）
 
-旅馆、机场的 Wi-Fi 要先开启一个页面登录，登录前网络多半挡掉往外的连接，加密 DNS 因此解析不出来，登录页也就无法出现。现在多数操作系统会自己侦测并处理这种情况，真的需要手动关掉时要记得两件事：关掉期间你的查询对这个网络完全可读，不要在那段时间做敏感操作。登录完立刻确认已经开回来，这一步很容易忘记。
+旅馆、机场的 Wi-Fi 要先开启一个页面登录，登录前网络多半挡掉往外的连接，加密 DNS 因此解析不出来，登录页也就无法出现。现在多数操作系统会自己检测并处理这种情况，真的需要手动关掉时要记得两件事：关掉期间你的查询对这个网络完全可读，不要在那段时间做敏感操作。登录完立刻确认已经开回来，这一步很容易忘记。
 
 ### 加密 DNS 本身被封锁
 
@@ -156,7 +156,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 
 台湾读者换掉 DNS 的常见动机是解析比较快，或者某些域名在运营商的 resolver 上连不到。第二个动机要看封锁发生在哪一层，DNS 层的封锁换 resolver 有用，IP 或 SNI 层的封锁换谁回答你都连不上。
 
-换掉之前值得知道你会一并失去什么，中华电信的色情守门员、数字发展部与 TWNIC 的打诈域名封锁，都是在 DNS 这一层运作的，站上 [什么是 OONI](./what-is-ooni.md) 对这些机制与它们在观测数据里的样子有完整说明。换到境外 resolver 之后这几层一起失效，换来的是查询不被运营商看到，失去的是那些封锁原本挡下的钓鱼与诈骗域名。家里有长辈或小孩的话，这个取舍要自己衡量，过滤型 resolver 是一个折衷。
+换掉之前值得知道你会一并失去什么，中华电信的色情守门员、数位发展部与 TWNIC 的打诈域名封锁，都是在 DNS 这一层运作的，站上 [什么是 OONI](./what-is-ooni.md) 对这些机制与它们在观测数据里的样子有完整说明。换到境外 resolver 之后这几层一起失效，换来的是查询不被运营商看到，失去的是那些封锁原本挡下的钓鱼与诈骗域名。家里有长辈或小孩的话，这个取舍要自己衡量，过滤型 resolver 是一个折衷。
 
 想留在台湾境内的话，TWNIC 营运的 Quad101 是目前唯一的公共选项，地址 `101.101.101.101` 与 `101.102.103.104`，启用 DNSSEC 验证[^quad101]。用这页的四项准则看它，有三件事应先了解。
 
@@ -238,7 +238,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 [^quad9]: [Service Addresses and Features](https://quad9.net/service/service-addresses-and-features/){target="_blank"} - Quad9 官方站。
 [^quad9-press]: [Quad9 Press](https://quad9.net/news/press/){target="_blank"} - Quad9 官方新闻稿，其中提到德国 Sony Music 案于 2023 年 12 月取得有利结果，以及 2024 年 12 月来自法国 Canal+ 的新诉讼。
 [^mullvad]: [Mullvad DNS over HTTPS and DNS over TLS](https://mullvad.net/en/help/dns-over-https-and-dns-over-tls){target="_blank"} - Mullvad 官方说明。
-[^android]: [Change your Android device's Private DNS settings](https://support.google.com/android/answer/9089903){target="_blank"} - Google 支援文档。
+[^android]: [Change your Android device's Private DNS settings](https://support.google.com/android/answer/9089903){target="_blank"} - Google 支持文档。
 [^android-dot]: [DNS over TLS support in Android P](https://android-developers.googleblog.com/2018/04/dns-over-tls-support-in-android-p.html){target="_blank"} - Android Developers Blog，自动升级与指定主机名称两种模式的差别在此页。
 [^google-dot]: [DNS-over-TLS](https://developers.google.com/speed/public-dns/docs/dns-over-tls){target="_blank"} - Google Public DNS 文档，Android 9 起支持 DoT 的说明在此页。
 [^ms-doh]: [Secure DNS Client over HTTPS (DoH)](https://learn.microsoft.com/en-us/windows-server/networking/dns/doh-client-support){target="_blank"} - Microsoft Learn，已知 DoH 服务器清单与三种加密设置的说明在此页。

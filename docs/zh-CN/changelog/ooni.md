@@ -41,7 +41,7 @@ icon: material/access-point-network
 - 新增匿名凭证（anonymous credentials）支持，整合 passport 机制。
 - 桌面版新增「开机时启动」偏好设置。
 - macOS 桌面版打包并签署 JavaFX 原生库，JavaFX 改为桌面发行版的可选组件。
-- 桌面版数据库存取固定在单一专用线程，提升稳定性。
+- 桌面版数据库访问固定在单一专用线程，提升稳定性。
 - descriptors 界面新增手动刷新按钮。
 - 翻译更新，升级 Kotlin、Compose 等依赖项目。
 - 多项 bug 修正与稳定性提升。

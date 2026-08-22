@@ -143,4 +143,4 @@ AI 生成示意图
 
 ## 作者简介
 
-[Ben Collier](https://www.sps.ed.ac.uk/staff/ben-collier){target="_blank"}是[爱丁堡大学](https://www.ed.ac.uk/){target="_blank"}[社会与政治科学学院科学、技术与创新研究系](https://www.sps.ed.ac.uk/science-technology-and-innovation-studies){target="_blank"}的数字方法资深讲师。他著有[《Tor：从暗网到隐私的未来》](https://mitpress.mit.edu/9780262548182/tor/){target="_blank"}（"Tor: From the Dark Web to the Future of Privacy.", ISBN: 9780262548182）。该书的开放存取版本可以在此[免费下载](https://direct.mit.edu/books/oa-monograph/5761/TorFrom-the-Dark-Web-to-the-Future-of-Privacy){target="_blank"}。
+[Ben Collier](https://www.sps.ed.ac.uk/staff/ben-collier){target="_blank"}是[爱丁堡大学](https://www.ed.ac.uk/){target="_blank"}[社会与政治科学学院科学、技术与创新研究系](https://www.sps.ed.ac.uk/science-technology-and-innovation-studies){target="_blank"}的数字方法资深讲师。他著有[《Tor：从暗网到隐私的未来》](https://mitpress.mit.edu/9780262548182/tor/){target="_blank"}（"Tor: From the Dark Web to the Future of Privacy.", ISBN: 9780262548182）。该书的开放获取版本可以在此[免费下载](https://direct.mit.edu/books/oa-monograph/5761/TorFrom-the-Dark-Web-to-the-Future-of-Privacy){target="_blank"}。

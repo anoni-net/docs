@@ -12,7 +12,7 @@ Tor Browser 的默认值已能涵盖大部分日常情境，但在被封锁的�
 
 ## 连线：Connection Assist 与桥接
 
-Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：侦测你的地区与连线状况，自动选择合适的桥接（bridge）配置。在台湾多数情境不需要桥接，网络自由度高、ISP 不主动封锁 Tor 入口节点。出国（中国、伊朗、缅甸这类审查地区）才需要手动启用桥接。
+Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：检测你的地区与连线状况，自动选择合适的桥接（bridge）配置。在台湾多数情境不需要桥接，网络自由度高、ISP 不主动封锁 Tor 入口节点。出国（中国、伊朗、缅甸这类审查地区）才需要手动启用桥接。
 
 可选的桥接类型：
 
@@ -101,7 +101,7 @@ Tor Browser 默认启用 First Party Isolation，每个分页的 cookies、cache
 
 许多媒体与服务提供 onion 对应版本（DuckDuckGo、ProPublica、Facebook、Reuters 都有）。网站透过 `.onion-Location` HTTP header 宣告自己的 onion 地址，Tor Browser 会在顶端跳出提示横幅，让你一键跳到 onion 版本。
 
-可以到 `about:preferences#privacy` 开启「Always Prioritize .onion sites」，之后 Tor Browser 侦测到对应的 onion 站点会自动跳转，省下手动切换。
+可以到 `about:preferences#privacy` 开启「Always Prioritize .onion sites」，之后 Tor Browser 检测到对应的 onion 站点会自动跳转，省下手动切换。
 
 验证 onion 指纹很重要。onion 字串长且不易辨识（v3 onion 是 56 字元 base32），人眼难以逐字验证。从不可信来源拿 onion 链接，社交工程风险高，建议：
 

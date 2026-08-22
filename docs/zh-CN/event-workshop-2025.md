@@ -29,13 +29,13 @@ icon: material/calendar-star
 - 基础的威胁模型评估：认识你的对手、风险与对应行动
 - 使用桥接器（Bridges）与 [Snowflake](./tools/tor-snowflake.md){target="_blank"} 绕过封锁国家或环境的网络审查
 
-**:tools: 实作能力与工具掌握**
+**:tools: 实现能力与工具掌握**
 
 - 使用 Tails 制作**便携式匿名操作系统**，在公共或不可信设备上安全工作
 - 学习 [OONI Probe](https://ooni.org/install/){target="_blank"} 如何测量网络审查与服务封锁，并回报全球开源数据库
 - 使用 [TorBrowser](https://www.torproject.org/zh-CN/download/){target="_blank"} 和 [OnionShare](https://onionshare.org/){target="_blank"} 进行安全的文件分享与协作
 
-**:jigsaw: 社群支援与持续学习**
+**:jigsaw: 社群支持与持续学习**
 
 - 认识台湾本地的[匿名网络社区](https://anoni.net/){target="_blank"}
 - 了解如何参与国际开源项目（如 Tor/Tails 或 OONI）的贡献模式
@@ -43,7 +43,7 @@ icon: material/calendar-star
 
 **:speech_balloon: 适用场景与应用领域**
 
-- 适用于采访敏感议题、[连接](https://zh.wikipedia.org/zh-cn/%E5%90%B9%E5%93%A8%E4%BA%BA){target="_blank"}**揭弊者**、**吹哨者**、协作跨境核实资料的情境
+- 适用于采访敏感议题、[连接](https://zh.wikipedia.org/zh-cn/%E5%90%B9%E5%93%A8%E4%BA%BA){target="_blank"}**揭弊者**、**吹哨者**、协作跨境核实数据的情境
 - NGO 跨国合作或受阻国家地区倡议时的匿名通信与行动管道建置
 - 组织内部数字安全训练与 SOP 制定的基础参考
 

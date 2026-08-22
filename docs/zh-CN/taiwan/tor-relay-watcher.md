@@ -347,7 +347,7 @@ Tor 软件版本的更新状况，以及各节点所具备的能力标签分布�
   </tbody>
 </table>
 
-!!! example "想实作？"
+!!! example "想实现？"
 
     - :material-server-network: **想自己架 Tor relay**：见 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校园架 relay 是 anoni.net 2026 三大主题之一，可看 [Tor Relay 校园建立](../community/relay-on-campus.md)。
     - :material-chart-bar: **观测数据来源**：本页图表通过 [Pulse 后端 API](https://anoni.net/api/readme){target="_blank"} 提供，观察项目与数据服务都还在持续调整中。

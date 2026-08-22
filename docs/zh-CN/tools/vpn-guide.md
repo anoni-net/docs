@@ -15,7 +15,7 @@ icon: material/vpn
     - VPN 换掉的是「谁能看到你的流量」，把信任从 ISP 移到 VPN 业者，它不会让你匿名。
     - 日常防公共 Wi-Fi 窃听、解地理限制，挑一个经独立审计、所有权透明的服务就够，没头绪就先看 Mullvad 或 Proton VPN。
     - 要对抗能传唤业者的对手、或保护消息来源，VPN 不够，改用 [Tor](./what-is-tor.md)。
-    - 人在审查严的地方（中国、缅甸等），要选有混淆功能的方案、出发前先测，逐地状况见 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)。
+    - 人在审查严的地方（中国、缅甸等），要选有混淆功能的方案、出发前先测，逐地状况见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)。
 
 ## VPN 到底改变了什么
 
@@ -29,11 +29,11 @@ VPN 确实能做到的事：
 
 VPN 做不到的事：
 
-- 让你匿名。你登入的 Google、Facebook、银行账号照样认得你，浏览器指纹、cookie、登入状态都还在
+- 让你匿名。你登录的 Google、Facebook、银行账号照样认得你，浏览器指纹、cookie、登录状态都还在
 - 对 VPN 业者本身隐藏行踪。业者是新的单点，它的记录、它的司法管辖、它的诚实程度，全部变成你的风险
 - 挡掉恶意程序、钓鱼，或设备本身被入侵的问题
 
-就算用了 VPN，连接的时间、流量大小、你登入的账号与浏览器指纹这些 metadata 都还在，VPN 处理的只有连接层。这层为什么是独立的风险见 [Metadata 是什么](../basics/metadata.md)。
+就算用了 VPN，连接的时间、流量大小、你登录的账号与浏览器指纹这些 metadata 都还在，VPN 处理的只有连接层。这层为什么是独立的风险见 [Metadata 是什么](../basics/metadata.md)。
 
 这跟 Tor 的差别在信任如何分配。Tor 把连接经过三个互相独立的中继（relay，由志愿者运作的中转节点），没有任何一个节点同时知道你是谁、你连去哪，所以你不需要信任任何单一节点。VPN 把信任集中在一家业者身上，匿名性取决于这家业者有没有说谎、会不会被传唤。完整对照见 [什么是匿名网络](./what-is-anonymity-network.md)。
 
@@ -42,10 +42,10 @@ VPN 做不到的事：
 - **信任集中**：不记录不等于不能记录。VPN 业者技术上看得到你的全部流量。多数业者宣称 no-log（不记录使用记录），但宣称与实际做到之间仍有距离。没有独立审计、没有真实案例验证的「不记录」，只是营销文案。少数业者有真实事件作为佐证，2023 年 4 月瑞典警方持搜索令到 Mullvad 办公室，要查扣含用户数据的电脑，因这类数据根本不存在而空手离去[^mullvad-raid]。能在被搜索后仍无数据可交，才是 no-log 的实质意义。
 - **司法管辖与数据留存法**：业者所在国的法律决定它能不能、必须不必须交出数据。部分国家有强制数据留存规范（例如越南的网安法要求境内业者留存数据），落在这些管辖区的服务，无论如何宣称 no-log，仍受当地法律约束。挑服务时要看公司注册在哪、服务器在哪。
 - **所有权不透明**：很多看似独立的品牌同属一家母集团。Kape Technologies（前身是 Crossrider，其开发平台被大量滥用来散布 adware 与不受欢迎软件，2018 年更名[^kape]）目前拥有 ExpressVPN、CyberGhost、Private Internet Access、ZenMate，还买下多个 VPN 评测网站，等于同时当球员与裁判。NordVPN 与 Surfshark 在 2022 年并进同一个母集团 Nord Security[^nord]。这不代表服务一定不安全，但「我比较了好几家才选」的安全感，可能只是同一家公司的不同招牌。
-- **免费 VPN 的商业模式**：免费 VPN 要从别处赚钱。2016 年一份分析 Google Play 上 283 个 VPN App 的学术研究发现，38% 被多家防毒引擎标记含某种恶意程序、18% 完全不加密流量、84% 会泄漏 IPv6 流量，且 75% 内嵌第三方追踪函式库[^free-vpn]。这份研究是 2016 年的数据，但免费 VPN 靠用户数据或广告获利的商业模式，至今没有改变。要免费又可信，看后面非营利导向的选项。
+- **免费 VPN 的商业模式**：免费 VPN 要从别处赚钱。2016 年一份分析 Google Play 上 283 个 VPN App 的学术研究发现，38% 被多家防毒引擎标记含某种恶意程序、18% 完全不加密流量、84% 会泄漏 IPv6 流量，且 75% 内嵌第三方追踪函数库[^free-vpn]。这份研究是 2016 年的数据，但免费 VPN 靠用户数据或广告获利的商业模式，至今没有改变。要免费又可信，看后面非营利导向的选项。
 - **付款会留下身分轨迹**：用绑定真实姓名的信用卡订阅 VPN，等于在业者那里留下这个账号是谁的对应。真的要把匿名性算进威胁模型，付款方式（现金，或 Monero 这种设计上难以追踪资金流的加密货币）跟注册时要不要 email 一样重要。注册用的 email 若跟其他敏感服务共用，账号之间会被串连，建议用独立 email 加上 [密码管理器](./password-manager.md) 隔离。
 - **连接泄漏**：就算开了 VPN，真实 IP 还是可能从几个缝隙漏出去。常见的是 DNS 查询（把网址转成 IP 的查询）没走进 VPN 隧道、IPv6（较新的 IP 地址格式）流量没被隧道接管、浏览器的 WebRTC（浏览器做实时通讯用的连接技术）直接暴露本机 IP。一个合格的 VPN 客户端应具备 kill switch（VPN 断线时立刻切断所有流量的开关），避免 VPN 中断的瞬间真实 IP 暴露。装好后值得用在线 leak test 工具实测一次，怎么测见最后的常见问题。
-- **在审查国使用 VPN 本身就是风险**：在强审查地区，VPN 流量会被 DPI（深度封包检测，逐笔分析连接判断是否放行的技术）辨识出来、进而封锁，使用本身甚至可能违法。缅甸 2025 年 1 月通过、7 月生效的 Cybersecurity Law 把未经授权提供 VPN 服务入罪化，最高可判 1 至 6 个月徒刑或并科罚款、并具域外效力。法律主要针对未授权的 VPN 服务提供者，个人使用是否适用仍有疑义[^myanmar]。中国对个人翻墙长期属法律灰色地带，2025 年底官方公开示警翻墙会被究责[^china]。这些地方需要具备混淆（obfuscation，把 VPN 流量伪装成一般 HTTPS）功能的方案，各地详情见后面的地区章节与 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)。
+- **在审查国使用 VPN 本身就是风险**：在强审查地区，VPN 流量会被 DPI（深度封包检测，逐笔分析连接判断是否放行的技术）辨识出来、进而封锁，使用本身甚至可能违法。缅甸 2025 年 1 月通过、7 月生效的 Cybersecurity Law 把未经授权提供 VPN 服务入罪化，最高可判 1 至 6 个月徒刑或并科罚款、并具域外效力。法律主要针对未授权的 VPN 服务提供者，个人使用是否适用仍有疑义[^myanmar]。中国对个人翻墙长期属法律灰色地带，2025 年底官方公开示警翻墙会被究责[^china]。这些地方需要具备混淆（obfuscation，把 VPN 流量伪装成一般 HTTPS）功能的方案，各地详情见后面的地区章节与 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)。
 - **把 VPN 当匿名工具是最危险的误解**：VPN 提供的是隐私（内容加密、遮蔽 IP）。要匿名请用 Tor。把 VPN 当匿名工具用于高风险情境，等于把自身安全完全托付给一家公司的诚信记录。
 
 ## 怎么选一个值得信任的 VPN
@@ -77,7 +77,7 @@ VPN 做不到的事：
 
 ### 混淆能力为什么越来越重要
 
-混淆是目前最该优先确认的一栏。审查方挡 VPN 的手法，已经从早期的封掉 VPN 服务器 IP，进化到直接看流量长相。标准的 WireGuard、OpenVPN 连接在刚建立时带有固定、可辨识的特征，DPI 一眼就认得出这是 VPN 并切断。混淆把 VPN 流量包装成一般 HTTPS 网页浏览的样子，让侦测系统无法辨识。有没有混淆，往往直接决定你在强审查地区连不连得上。
+混淆是目前最该优先确认的一栏。审查方挡 VPN 的手法，已经从早期的封掉 VPN 服务器 IP，进化到直接看流量长相。标准的 WireGuard、OpenVPN 连接在刚建立时带有固定、可辨识的特征，DPI 一眼就认得出这是 VPN 并切断。混淆把 VPN 流量包装成一般 HTTPS 网页浏览的样子，让检测系统无法辨识。有没有混淆，往往直接决定你在强审查地区连不连得上。
 
 混淆不是越多越好的设定，要不要开取决于你人在哪、面对哪类审查。在没有系统性封锁的环境（多数民主国家），不需要混淆，标准协议速度更快、也更稳定。混淆是给中国、缅甸、伊朗这种 DPI 强的环境用的，代价是速度通常会掉一些。
 
@@ -87,7 +87,7 @@ VPN 做不到的事：
 - 把 WireGuard 包进 TLS 的伪装（Proton VPN 的 Stealth）
 - 各家自有名称：ExpressVPN 的自动混淆、NordVPN 的 NordWhisper、Surfshark 的 Camouflage Mode、Astrill 的 StealthVPN
 
-两点提醒。第一，强审查系统会主动探测（active probing，主动连向可疑服务器、测试它是不是 VPN 或 proxy，中国的防火长城就会这样做），耐得住探测的混淆才顶得住。第二，混淆没有一劳永逸，审查方会持续更新侦测，今天能用的协议下个月可能就被封，所以要备两种以上并在出发前实际测试（详情见后面的地区章节）。若混淆协议也遭封锁，可改用 Tor 的 [WebTunnel](../community/setup-tor-webtunnel.md) 或 [Snowflake](./tor-snowflake.md) 桥接作为备援。
+两点提醒。第一，强审查系统会主动探测（active probing，主动连向可疑服务器、测试它是不是 VPN 或 proxy，中国的防火长城就会这样做），耐得住探测的混淆才顶得住。第二，混淆没有一劳永逸，审查方会持续更新检测，今天能用的协议下个月可能就被封，所以要备两种以上并在出发前实际测试（详情见后面的地区章节）。若混淆协议也遭封锁，可改用 Tor 的 [WebTunnel](../community/setup-tor-webtunnel.md) 或 [Snowflake](./tor-snowflake.md) 桥接作为备援。
 
 下面逐一介绍符合上述准则的服务，照你的威胁模型挑一个就好，不必全部看完。没有特别技术背景、预算有限的话，从 Proton VPN 的免费方案或 Mullvad 开始最简便。
 
@@ -116,7 +116,7 @@ VPN 做不到的事：
 
 ### IVPN
 
-[IVPN](https://www.ivpn.net/){target="_blank"} 是直布罗陀的老牌服务，严格 no-log、接受 Monero 与现金、支援多跳，客户端以 GPLv3 开源，每年由 Cure53 审计。它刻意拿掉联盟营销与限时促销，避免用营销话术扭曲用户判断。
+[IVPN](https://www.ivpn.net/){target="_blank"} 是直布罗陀的老牌服务，严格 no-log、接受 Monero 与现金、支持多跳，客户端以 GPLv3 开源，每年由 Cure53 审计。它刻意拿掉联盟营销与限时促销，避免用营销话术扭曲用户判断。
 
 **适合谁**：重视透明与审计记录、不想被营销牵着走、需要多跳的进阶用户。
 
@@ -140,7 +140,7 @@ VPN 做不到的事：
 
 ### 主流商用服务（ExpressVPN、NordVPN、Surfshark 等）
 
-这些大厂的优势在速度、相容性（解地理限制、看串流）、客服与一键混淆，也都做过第三方审计。取舍在所有权集中与营销导向：ExpressVPN 属 Kape（同时经营 VPN 评测网站），NordVPN 与 Surfshark 同属 Nord Security。日常防公共 Wi-Fi 窃听、解地理限制够用，但真正高敏感、出错赌不起的场景，可信度与透明度不如前面几家。
+这些大厂的优势在速度、兼容性（解地理限制、看串流）、客服与一键混淆，也都做过第三方审计。取舍在所有权集中与营销导向：ExpressVPN 属 Kape（同时经营 VPN 评测网站），NordVPN 与 Surfshark 同属 Nord Security。日常防公共 Wi-Fi 窃听、解地理限制够用，但真正高敏感、出错赌不起的场景，可信度与透明度不如前面几家。
 
 ### 红旗：这几种要避开
 
@@ -186,7 +186,7 @@ Tor Project 自己也做了一个叫 Tor VPN 的 app。它以系统的 VPN 机�
 
 ## 各地区能不能用：先评估，不要落地才试
 
-VPN 在某地能不能用没有全球通用答案，会随地区与时间变。出国或在当地工作前，用下面的框架评估，逐地细节查 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md) 与 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 的当下观测。
+VPN 在某地能不能用没有全球通用答案，会随地区与时间变。出国或在当地工作前，用下面的框架评估，逐地细节查 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md) 与 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 的当下观测。
 
 合法性大致分四级（用来判断风险，不是法律意见）：
 
@@ -205,7 +205,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 审查国的额外风险：
 
 - 使用 VPN 本身可能被 DPI 辨识、被标记。
-- 街头临检与入境查机可能搜查设备里的 VPN App 与社群内容，缅甸与部分地区已有案例（详见 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)）。
+- 街头临检与入境查机可能搜查设备里的 VPN App 与社群内容，缅甸与部分地区已有案例（详见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)）。
 - 高敏感任务带干净设备（一台没有平常账号、没有个人数据的专用机，例如重设出厂或另外准备的手机），全程假设受监控。VPN 连不上时改走 Tor 的 WebTunnel、Snowflake 桥接，设定见 [Tor Snowflake](./tor-snowflake.md) 与 [如何架设 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
 
 ## VPN 还是 Tor
@@ -219,7 +219,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 
 ## 连接遮得住，身分遮不住
 
-真正要顾的往往是你在账号里留了什么、发表了什么，连接本身反而其次。VPN 把来源 IP 换掉，遮不住你登入的身分。这层差别见 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)，逐地的合法性与在地风险见 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)。
+真正要顾的往往是你在账号里留了什么、发表了什么，连接本身反而其次。VPN 把来源 IP 换掉，遮不住你登录的身分。这层差别见 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)，逐地的合法性与在地风险见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)。
 
 ## 常见问题
 
@@ -229,7 +229,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 
 ??? question "用了 VPN 我就匿名了吗"
 
-    不会。VPN 换掉的是看得到你流量的人，不会让你登入的网站、浏览器指纹、cookie 消失，你连 VPN 业者也得信任。要匿名请用 Tor，概念差别见 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)。
+    不会。VPN 换掉的是看得到你流量的人，不会让你登录的网站、浏览器指纹、cookie 消失，你连 VPN 业者也得信任。要匿名请用 Tor，概念差别见 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)。
 
 ??? question "VPN 跟 Tor 要不要叠着用"
 
@@ -241,7 +241,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 
 ??? question "在中国、缅甸这种地方该用哪种"
 
-    要有强混淆的方案，入境前装好至少两款并测试。中国 Tor 直连不通，优先用 WebTunnel、Snowflake、meek 当备援。缅甸连 VPN 服务与 Tor 都被当封锁目标，使用本身可能触法，要假设全程受监控、带干净设备。可用性随封锁天天变，务必出发前查最新回报，逐地见 [亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)。
+    要有强混淆的方案，入境前装好至少两款并测试。中国 Tor 直连不通，优先用 WebTunnel、Snowflake、meek 当备援。缅甸连 VPN 服务与 Tor 都被当封锁目标，使用本身可能触法，要假设全程受监控、带干净设备。可用性随封锁天天变，务必出发前查最新回报，逐地见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)。
 
 ??? question "怎么知道我的 VPN 有没有泄漏"
 
@@ -257,7 +257,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 
 - [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-incognito-circle: 匿名与隐私的差别](../basics/anonymity-vs-privacy.md)
-- [:material-airplane: 亚洲出差与研讨会的数位准备](../scenarios/asia-travel.md)
+- [:material-airplane: 亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)
 - [:material-incognito-off: 常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)
 
 </div>
@@ -283,8 +283,8 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 [^pg]: [VPN Services](https://www.privacyguides.org/zh-Hant/vpn/){target="_blank"} - Privacy Guides（非商业、不收广告主的开源隐私工具索引）
 [^algo]: [trailofbits/algo](https://github.com/trailofbits/algo){target="_blank"} - Trail of Bits（GitHub）
 [^outline]: [Introducing the Outline Foundation: An Independent Home for Outline](https://medium.com/jigsaw/introducing-the-outline-foundation-an-independent-home-for-outline-39fba2ab4e25){target="_blank"} - Jigsaw。记者应用案例见 [Google has a new tool to outsmart authoritarian internet censorship](https://www.technologyreview.com/2023/09/13/1079381/google-jigsaw-outline-vpn-internet-censorship/){target="_blank"} - MIT Technology Review
-[^torvpn-about]: [About Tor VPN](https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/){target="_blank"} - Tor Project 官方支援文件（含 Beta 警语）
-[^torvpn-install]: [Download and Install - Tor VPN](https://support.torproject.org/tor-vpn/getting-started/download-and-install/){target="_blank"} - Tor Project 官方支援文件。BSD 3-Clause 授权见 [Tor VPN Beta on F-Droid](https://f-droid.org/en/packages/org.torproject.vpn/){target="_blank"} - F-Droid
-[^torvpn-intro]: [Tor VPN Threat Model](https://support.torproject.org/tor-vpn/security/threat-model/){target="_blank"} - Tor Project 官方支援文件（每个 app 独立 circuit 与信任模型）
+[^torvpn-about]: [About Tor VPN](https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/){target="_blank"} - Tor Project 官方支持文件（含 Beta 警语）
+[^torvpn-install]: [Download and Install - Tor VPN](https://support.torproject.org/tor-vpn/getting-started/download-and-install/){target="_blank"} - Tor Project 官方支持文件。BSD 3-Clause 授权见 [Tor VPN Beta on F-Droid](https://f-droid.org/en/packages/org.torproject.vpn/){target="_blank"} - F-Droid
+[^torvpn-intro]: [Tor VPN Threat Model](https://support.torproject.org/tor-vpn/security/threat-model/){target="_blank"} - Tor Project 官方支持文件（每个 app 独立 circuit 与信任模型）
 [^torvpn-orbot]: [What's the difference between TorVPN and Orbot](https://forum.torproject.org/t/whats-the-difference-between-torvpn-and-orbot/21204){target="_blank"} - Tor Project 官方论坛（社群讨论）。Orbot 底层为 C-tor，见 [orbot-android](https://github.com/guardianproject/orbot-android){target="_blank"} - Guardian Project
 [^ios-tor]: iOS 官方推荐 Onion Browser 见 [Tor Project download page](https://www.torproject.org/download/){target="_blank"} - Tor Project。搭配 Orbot 强化防漏的建议见 [Onion Browser Review](https://www.privacyguides.org/articles/2024/09/18/onion-browser-review/){target="_blank"} - Privacy Guides

@@ -91,7 +91,7 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 2. 打开 OONI Probe，选择「网站」项目并「执行」检测。
 3. 检测完成后前往「测试结果」，找到刚刚完成的「网站」检测结果，查看是否有「！」或「？」的项目。
 4. 点击任一有「！」或「？」的检测项目查看可能的检测问题。其中可以看到「数据」、「在 OONI Explorer 中显示」的链接按钮。
-5. 点击任一链接即可查看原始数据资料的检测结果。
+5. 点击任一链接即可查看原始数据数据的检测结果。
 
 ### 如何检视检测数据？
 
@@ -101,23 +101,23 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 以此示例结果呈现为`在 AS3462 上执行检测失败`，失败的信息为 `unknown_failure: dial tcp [scrubbed]: connect: host is down`，可以判断为网站已不再提供服务并断线。而在「DNS 查询」的段落可以看到是 `www.asap.com.tw` 设置了 DNS `A` 记录指向 `60.250.151.72 (AS3462 (Chunghwa Telecom Co., Ltd.)`，其来源于 `162.158.242.36` Cloudflare DNS 的查询结果。
 
-最后可以在「原始测量数据」中看到所有检测项目的原始资料，有些资料不会完整呈现在结果网页上，但可以从「原始测量数据」中找到更多的信息进行收集与分析。
+最后可以在「原始测量数据」中看到所有检测项目的原始数据，有些数据不会完整呈现在结果网页上，但可以从「原始测量数据」中找到更多的信息进行收集与分析。
 
 <figure markdown="span">
     <a target="_blank"
        href="../assets/images/ooni_raw_data.png">
         <img src="../assets/images/ooni_raw_data.png"
-            alt="OONI Probe 「原始测量资料」的信息。"
-            title="OONI Probe 「原始测量资料」的信息。"
+            alt="OONI Probe 「原始测量数据」的信息。"
+            title="OONI Probe 「原始测量数据」的信息。"
             style="border: 1px solid #000000; border-radius: 10px;"
         >
     </a>
-    <figcaption>OONI Probe 「原始测量资料」的信息。</figcaption>
+    <figcaption>OONI Probe 「原始测量数据」的信息。</figcaption>
 </figure>
 
 !!! question "检测发现 AS 与 DNS 的差异"
 
-    在上面的示例说明过程中，可以发现 OONI Probe 会将检测过程记录下来。例如即使通过中华电信的网络上网，查询 DNS 服务时使用的却是 Cloudflare 的 DNS 查询。对应到原始资料，`probe_asn` 与 `resolver_asn` 分属两个不同的 ASN。
+    在上面的示例说明过程中，可以发现 OONI Probe 会将检测过程记录下来。例如即使通过中华电信的网络上网，查询 DNS 服务时使用的却是 Cloudflare 的 DNS 查询。对应到原始数据，`probe_asn` 与 `resolver_asn` 分属两个不同的 ASN。
 
     - 问题：网站受到阻挡无法连接访问，是 AS 问题还是 DNS 问题呢？
 
@@ -125,7 +125,7 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-code-json: OONI 测量数据结构导览](../community/ooni-data-format.md)
 - [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
 - [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
 
@@ -133,9 +133,9 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 ### 想着手分析？
 
-如果你想自己撷取与分析 OONI 公开资料，计算特定区域的 ASN 覆盖率，相关工具设置与指令见：
+如果你想自己提取与分析 OONI 公开数据，计算特定区域的 ASN 覆盖率，相关工具设置与指令见：
 
-[:material-database-search: ASN 观测资料撷取与分析](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
+[:material-database-search: ASN 观测数据提取与分析](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
 
 ## :fontawesome-solid-diagram-project: 下一步
 

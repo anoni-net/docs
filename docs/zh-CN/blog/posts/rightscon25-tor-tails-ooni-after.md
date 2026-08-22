@@ -23,7 +23,7 @@ description: "在 2025/02/23 活动结束后，关于工作坊 Tor/Tails, OONI, 
     - Raya, Education Coordinator @ The Tor Project
     - Gus, Community Team Lead @ The Tor Project
 
-2. 工作坊 18:00 – 19:00 如何使用 OONI 侦测与观察网络审查状况
+2. 工作坊 18:00 – 19:00 如何使用 OONI 检测与观察网络审查状况
     - Elizaveta Yachmeneva, Research & Community Coordinator @ OONI
     - Maria Xynou, Director of Strategic Engagement @ OONI
 
@@ -50,7 +50,7 @@ Tails 是一个操作系统，可以安装在 USB 随身碟中于笔记本或桌
 
 Tails 项目启动于 2009，直到 2024 [合并](https://blog.torproject.org/tor-tails-join-forces/){target="_blank"}到 Tor Project 子项目中，共享开发与社区资源。
 
-虽然 Tails 每次启动都是一个全新的环境，但也提供加密的存取空间方便使用，可以在启动时选择挂载该磁区，即使环境恢复到原始状态，但数据还是可以随时存取编辑。
+虽然 Tails 每次启动都是一个全新的环境，但也提供加密的访问空间方便使用，可以在启动时选择挂载该磁区，即使环境恢复到原始状态，但数据还是可以随时访问编辑。
 
 在 Tails 中也包含许多注重安全的开源软件，进入到 Tails 后可以直接使用（方便完全离线的情境）。由于遵循[基于安全的设计](https://zh.wikipedia.org/zh-tw/%E5%9F%BA%E6%96%BC%E5%AE%89%E5%85%A8%E7%9A%84%E8%A8%AD%E8%A8%88){target="_blank"}（Security by Design），某些常用的软件可能短时间内还不能在 Tails 中使用，团队也在努力中进行调整或是改用其他的技术达到符合匿名、匿踪的条件。
 

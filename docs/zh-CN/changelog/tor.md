@@ -38,7 +38,7 @@ icon: simple/torbrowser
 - Firefox 基底 rebase 至 140.13.0esr（tor-browser#45117），桌面版与 Android 版 GeckoView 同步升至 140.13.0esr。
 - 从 Firefox 153 backport 安全修补（tor-browser#45124）。
 - NoScript 升至 13.6.31.1984。
-- 还原先前 Funding the Commons 相关的实作变更（tor-browser#44748）。
+- 还原先前 Funding the Commons 相关的实现变更（tor-browser#44748）。
 
 ## Tor Browser 15.0.18
 

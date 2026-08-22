@@ -77,7 +77,7 @@ og:
 
 站上的文档内容采用 [CC BY 4.0](https://github.com/anoni-net/docs/blob/main/LICENSE)，这三件作品的源代码放在 `docs/` 底下，同样适用这份许可。地球仪用到的外部数据各自沿用原本的许可，清单在 repo 根目录的 `NOTICE`，其中 OONI 那一份是 CC BY-NC-SA 4.0，禁止商业使用。
 
-会 JavaScript 就能改文案、关卡设计与互动逻辑，动到画面呈现则需要一些 three.js 或 WebGPU 的经验。产生数据的十四支 `gen_*.py` 在 `tools/` 底下，只用 Python 标准库加 curl，不引入 GIS 套件，连县市界的 SHP 都是用 `struct` 自己解的。同一个目录另有四支回归测试，把函式从 `atlas.js` 原地抽出来重放事件或开 headless Chrome 量版面，改到相关的地方时 CI 会执行它们。另有修正海缆走廊坐标的辅助脚本与发布数据用的 shell 脚本，都不需要额外安装套件。
+会 JavaScript 就能改文案、关卡设计与互动逻辑，动到画面呈现则需要一些 three.js 或 WebGPU 的经验。产生数据的十四支 `gen_*.py` 在 `tools/` 底下，只用 Python 标准库加 curl，不引入 GIS 套件，连县市界的 SHP 都是用 `struct` 自己解的。同一个目录另有四支回归测试，把函数从 `atlas.js` 原地抽出来重放事件或开 headless Chrome 量版面，改到相关的地方时 CI 会执行它们。另有修正海缆走廊坐标的辅助脚本与发布数据用的 shell 脚本，都不需要额外安装套件。
 
 ## 接下来
 

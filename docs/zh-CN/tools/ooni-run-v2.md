@@ -10,7 +10,7 @@ description: 如何建立动态的 OONI Probe 检测名单，协助观察特定�
 
 你想追踪一批网站是否被特定地区封锁，但又无法亲自到当地测试。OONI Run v2 的解法是：建立一个移动装置链接、把要测的网站列进去、分享给当地协助者，协助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 开启链接就能执行测试，结果即时上传到 [OONI](./what-is-ooni.md) 的公开数据库。
 
-[OONI Run](https://run.ooni.org/){target="_blank"} 是这个流程的入口。委内瑞拉、马来西亚、印度等地的社群长期[用它做审查测量活动](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把当地的封锁事件即时观测下来。OONI 团队根据 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社群回馈，于 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，链接变短、可动态更新、协助者已安装过就会自动同步新加的网站，不用重发。测量结果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 用链接 ID 搜寻。
+[OONI Run](https://run.ooni.org/){target="_blank"} 是这个流程的入口。委内瑞拉、马来西亚、印度等地的社群长期[用它做审查测量活动](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把当地的封锁事件即时观测下来。OONI 团队根据 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社群回馈，于 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，链接变短、可动态更新、协助者已安装过就会自动同步新加的网站，不用重发。测量结果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 用链接 ID 搜索。
 
 ## OONI Run v2 适合谁
 
@@ -31,7 +31,7 @@ OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个�
 - **测试结果完全公开**。所有测量会出现在 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，含协助者所在的 ASN 与时间戳。OONI 不公开个人 IP，但 ASN 加时间已可推断协助者大致位置。
 - **不要随便把链接传给高审查地区的协助者**。运行 OONI Probe 在某些地区可能违法或引起 ISP 注意，当地是否能安全运行请先评估。
 - **VPN、Tor 同时开不会得到「当地的」测试结果**。OONI 测量的是测试装置实际走的网络，VPN 开着会测到 VPN 业者所在地的网络，不是协助者本地的封锁状况。
-- **链接到期后资料仍保留**。OONI Run 链接是分发机制，到期后协助者就无法再加入测试，但已收集的测量资料留在 OONI 公开数据库永久保存。
+- **链接到期后数据仍保留**。OONI Run 链接是分发机制，到期后协助者就无法再加入测试，但已收集的测量数据留在 OONI 公开数据库永久保存。
 
 要更系统地评估这些风险，可参考 [威胁模型如何建立](../basics/threat-model.md)。
 
@@ -39,13 +39,13 @@ OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个�
 
 社群维运的 OONI Run 链接 ID 是 `10328`，网址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前纳入 anoni.net 的官网、Cryptpad、Etherpad、SearXNG、Send、Matrix 与 docs 站。协助者用 OONI Probe 安装这条链接后，每次执行测试都会把这几个自架服务的可达性回传到 OONI 公开数据库。对社群来说，这是长期确认「我们的服务在台湾不同电信商眼中还连得上」的低成本方式。
 
-链接之外，[OONI 网站检测清单](../taiwan/ooni-checklist.md) 整理了台湾脉络下值得长期观测的网站清单，配套的 [ASNs 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部结果按 ASN 切开，看不同电信商连到不同国际服务的状况。如果你想协助执行这条链接的测试，移动装置安装 OONI Probe 后点上面的网址即可。
+链接之外，[OONI 网站检测清单](../taiwan/ooni-checklist.md) 整理了台湾脉络下值得长期观测的网站清单，配套的 [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部结果按 ASN 切开，看不同电信商连到不同国际服务的状况。如果你想协助执行这条链接的测试，移动装置安装 OONI Probe 后点上面的网址即可。
 
 ## 操作说明
 
 ### 建立和分享链接
 
-要开始使用 OONI Run v2，请连结到 OONI Run 网站：<https://run.ooni.org/>{target="_blank"}
+要开始使用 OONI Run v2，请访问 OONI Run 网站：<https://run.ooni.org/>{target="_blank"}
 
 你可以透过以下步骤来建立和分享 OONI Run v2 链接。
 
@@ -77,7 +77,7 @@ The link can be used on multiple devices and will expire in 24 hours.
 
 ![取得 Log in 链接](https://assets.anoni.net/docs/ooni-run-v2-2.png){.brand-frame}
 
-你可以随意的透过挑选图标、颜色来自定义你的 OONI Run 链接。并完成页面中必要的资料栏位填写。
+你可以随意的透过挑选图标、颜色来自定义你的 OONI Run 链接。并完成页面中必要的数据栏位填写。
 
 <figure markdown="span">
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-4.png" alt="填写标题、说明文字" style="width:80%">
@@ -100,7 +100,7 @@ The link can be used on multiple devices and will expire in 24 hours.
 
         * 网站是使用 **HTTP** 还是 **HTTPS**？如果是后者，请在 `http` 后加一个 `s`。
         * 域名是否包含 `www`？如果有，请一并加上。
-        * 如果网站是使用 HTTPS（例如：`https://www.hrw.org/`），你不需要指定网页（例如：`https://www.hrw.org/publications`），因为当网站使用 HTTPS 托管时，互联网服务提供商（ISP）通常无法只封锁特定网页。他们必须封锁整个网站的存取。
+        * 如果网站是使用 HTTPS（例如：`https://www.hrw.org/`），你不需要指定网页（例如：`https://www.hrw.org/publications`），因为当网站使用 HTTPS 托管时，互联网服务提供商（ISP）通常无法只封锁特定网页。他们必须封锁整个网站的访问。
 
         为了确保每个网址输入正确，**请从浏览器中复制贴上**。
 
@@ -112,7 +112,7 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-6.png" alt="建立完成的 OONI Run 链接页面">
 </figure>
 
-* **步骤 11.** 如果你想编辑你的 OONI Run 链接，请点击右上角的「Edit」按钮。或者，点击链接到期日期旁的「**Update Now**」按钮。这两种操作都能让你编辑你的 OONI Run 链接中的资料。
+* **步骤 11.** 如果你想编辑你的 OONI Run 链接，请点击右上角的「Edit」按钮。或者，点击链接到期日期旁的「**Update Now**」按钮。这两种操作都能让你编辑你的 OONI Run 链接中的数据。
 * **步骤 12.** 要**分享**你的 OONI Run 链接，在「**Share this link**」部分，点击你的 OONI Run 链接旁的「**:material-content-copy: 复制图标**」。然后将复制的链接分享给你想要进行测试的 OONI Probe 用户。
 
 ### 使用链接
@@ -149,18 +149,18 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 
 桌面版与移动 App 不受这个限制影响，操作系统会把 `https://run.ooni.org/v2/<ID>` 交给 OONI Probe 自行处理。这个限制目前只影响 miniooni CLI，upstream 已有 [TODO 标注](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，后续可能会补上自动转换。
 
-## 观察资料
+## 观察数据
 
-所有的检测资料最后都会上传到 OONI 的公开数据库中，在 [OONI Explorer](https://explorer.ooni.org/zh-Hans/chart/mat?test_name=web_connectivity&axis_x=measurement_start_day&since=2025-09-01&until=2025-10-16&time_grain=day&ooni_run_link_id=10328){target="_blank"} 的搜寻接口中，可以直接在「OONI Run Link ID」栏位输入分享链接的编号，例如范例为 `https://run.ooni.org/v2/10328`，其编码为 `10328`，就可以输入此编码搜寻协助者的检测结果。
+所有的检测数据最后都会上传到 OONI 的公开数据库中，在 [OONI Explorer](https://explorer.ooni.org/zh-Hans/chart/mat?test_name=web_connectivity&axis_x=measurement_start_day&since=2025-09-01&until=2025-10-16&time_grain=day&ooni_run_link_id=10328){target="_blank"} 的搜索接口中，可以直接在「OONI Run Link ID」栏位输入分享链接的编号，例如范例为 `https://run.ooni.org/v2/10328`，其编码为 `10328`，就可以输入此编码搜索协助者的检测结果。
 
 <figure markdown="span">
-    <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-8.png" alt="OONI Explorer 用 OONI Run Link ID 搜寻的结果">
+    <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-8.png" alt="OONI Explorer 用 OONI Run Link ID 搜索的结果">
 </figure>
 
-可以透过图表上的「[检视测量资料 >](https://explorer.ooni.org/search?since=2025-09-15&until=2026-04-16&test_name=web_connectivity&failure=true&ooni_run_link_id=10328){target="_blank"}」，输入 `10328` 后看到每一笔检测结果的详细资料。
+可以透过图表上的「[检视测量数据 >](https://explorer.ooni.org/search?since=2025-09-15&until=2026-04-16&test_name=web_connectivity&failure=true&ooni_run_link_id=10328){target="_blank"}」，输入 `10328` 后看到每一笔检测结果的详细数据。
 
 <figure markdown="span">
-    <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-9.png" alt="OONI Explorer 列出每一笔检测结果的详细资料">
+    <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-9.png" alt="OONI Explorer 列出每一笔检测结果的详细数据">
 </figure>
 
 ## 常见问题
@@ -199,9 +199,9 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
-- [:material-access-point-network: ASNs 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
 - [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
-- [:material-code-json: OONI 测量资料结构导览](../community/ooni-data-format.md)
+- [:material-code-json: OONI 测量数据结构导览](../community/ooni-data-format.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 
 </div>
