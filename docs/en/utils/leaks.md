@@ -70,7 +70,14 @@ Menu paths shift between system and browser versions. Searching the settings for
 
 ### The single most effective step is changing browser
 
-One action covers more items than anything else: use a browser with built-in defences.
+One action covers more items than anything else: use a browser with built-in defences. Three choices, for three situations:
+
+| Your situation | Choice | Cost |
+|---|---|---|
+| An adversary able to spend resources on a specific target | [Tor Browser](../tools/what-is-tor.md) | Slower connections, some sites refuse to load |
+| Leaving fewer traces in everyday browsing | Brave | Noise or normalisation for canvas, WebGL, fonts and audio, far less disruption |
+| Staying on the Firefox you already use | Turn on `privacy.resistFingerprinting` | Only reachable through `about:config`, and it breaks the layout of some sites |
+
 
 [Tor Browser](../tools/what-is-tor.md) normalises nearly every item above, at the cost of slower connections and some sites refusing to load. Brave adds noise or normalisation for canvas, WebGL, fonts and audio, with far less disruption to everyday browsing. Firefox has `privacy.resistFingerprinting`, close to Tor Browser's approach. It only appears if you type `about:config` into the address bar, and it is off by default. That settings page opens with a warning of its own, and changing other entries there can affect how the browser behaves elsewhere, so if `about:config` is unfamiliar territory, Tor Browser or Brave is the simpler route. Enabling it also breaks the layout of some sites.
 
