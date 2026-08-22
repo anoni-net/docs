@@ -109,9 +109,9 @@ CryptPad 界面选单最早写的是「中文(繁体)」。我们在 PR #1329 �
 
 `cryptpad.anoni.net` 与 `cryptpad.org` 都没有针对中国大陆使用者做特别托管，在大陆网络环境下访问可能会有连线不稳或被阻断的情况。建议方式：
 
-- **使用 [Tor Browser](https://www.torproject.org/zh-CN/download/){target="_blank"}**：透过 Tor 网络访问 cryptpad.anoni.net，预设走 HTTPS。如果直接连不上 Tor 网络，可使用 [Snowflake](../../tools/tor-snowflake.md) 或 [obfs4 桥接](https://bridges.torproject.org/){target="_blank"}。
+- **使用 [Tor Browser](https://www.torproject.org/zh-CN/download/){target="_blank"}**：透过 Tor 网络访问 cryptpad.anoni.net，默认走 HTTPS。如果直接连不上 Tor 网络，可使用 [Snowflake](../../tools/tor-snowflake.md) 或 [obfs4 桥接](https://bridges.torproject.org/){target="_blank"}。
 - **使用任何你信任的 VPN**：注意 VPN 服务商本身能看到你的连线 metadata，但 CryptPad 端对端加密的特性确保内容不会被任何中间方读取。
-- **使用 [Tails](../../tools/what-is-tails.md)**：把整个操作环境放进 Tails，所有流量预设走 Tor，关机后不留痕迹。适合敏感度较高的协作场景。
+- **使用 [Tails](../../tools/what-is-tails.md)**：把整个操作环境放进 Tails，所有流量默认走 Tor，关机后不留痕迹。适合敏感度较高的协作场景。
 
 CryptPad 本身是 E2EE 的，无论你的连线管道是 Tor、VPN 或直连，服务器都看不到你的内容。但**能不能稳定连上** cryptpad.anoni.net 与你所处的网络环境有关。如果常态在中国大陆使用，建议优先以 Tor + Snowflake 或 Tails 为基础。
 
@@ -120,7 +120,7 @@ CryptPad 本身是 E2EE 的，无论你的连线管道是 Tor、VPN 或直连，
 上手方式：
 
 - **入口**：[https://cryptpad.anoni.net/](https://cryptpad.anoni.net/){target="_blank"}
-- **帐号申请**：写信到 <whisper@anoni.net> 申请注册码。预设容量 50 MB，后续可调整。注册时不要求邮箱、不绑定实名，跟 Matrix 的申请流程一致。
+- **帐号申请**：写信到 <whisper@anoni.net> 申请注册码。默认容量 50 MB，后续可调整。注册时不要求邮箱、不绑定实名，跟 Matrix 的申请流程一致。
 - **切换语系**：升级后右上角设定页可选「中文(正体)」或「中文(简体)」。网址加 `?lang=zh_Hant` 或 `?lang=zh_Hans` 也能切换。
 - **完整工具清单**：见 [沟通与协作工具](../../community/tools.md)。
 

@@ -60,7 +60,7 @@ icon: material/eye-outline
 
 单一动作能处理最多项目的，是改用有内建防护的浏览器。
 
-[Tor Browser](../tools/what-is-tor.md) 把上面几乎每一项都统一掉，代价是连接较慢与部分网站会挡。Brave 对 canvas、WebGL、字体、audio 都加了噪声或统一化，日常浏览的代价小得多。Firefox 有 `privacy.resistFingerprinting`，效果接近 Tor Browser 的做法，要在地址栏输入 `about:config` 才找得到，预设是关的。那个设置页本身会先跳出警告，改到其他项目可能影响浏览器的其他功能，不熟悉 about:config 的话，直接用 Tor Browser 或 Brave 更单纯。开了之后部分网站会排版错乱。
+[Tor Browser](../tools/what-is-tor.md) 把上面几乎每一项都统一掉，代价是连接较慢与部分网站会挡。Brave 对 canvas、WebGL、字体、audio 都加了噪声或统一化，日常浏览的代价小得多。Firefox 有 `privacy.resistFingerprinting`，效果接近 Tor Browser 的做法，要在地址栏输入 `about:config` 才找得到，默认是关的。那个设置页本身会先跳出警告，改到其他项目可能影响浏览器的其他功能，不熟悉 about:config 的话，直接用 Tor Browser 或 Brave 更单纯。开了之后部分网站会排版错乱。
 
 先看看[浏览器指纹是什么](../basics/browser-fingerprinting.md)那篇的比较再决定。
 

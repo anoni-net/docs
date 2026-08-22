@@ -15,7 +15,7 @@ description: "从 Discord 年龄验证谈起：我们为什么自架 Matrix，�
 
 ![从 Discord 年龄验证谈起：我们为什么自架 Matrix，以及如何兼顾隐私与社群品质](https://assets.anoni.net/blog/2026-discord-matrix-statement.png){style="border-radius: 5px;"}
 
-2026/02/09，[Discord 宣布在全球推出「teen-by-default」设定](https://discord.com/press-releases/discord-launches-teen-by-default-settings-globally){target="_blank"}，并强化年龄验证机制（台湾报导（繁体中文）见 [巴哈姆特 GNN：Discord 宣布 3 月起全球实施「青少年保护」措施](https://gnn.gamer.com.tw/detail.php?sn=299872){target="_blank"}）。新用户与既有用户将预设进入以青少年为考量的体验，若要解除部分内容过滤或存取年龄分级空间，需透过脸部年龄估计或提交证件等方式完成验证。Discord 强调这是为了青少年安全与 Safer Internet Day 的承诺，也提到会引入「年龄推论模型」在背景协助判断帐号是否属于成人。
+2026/02/09，[Discord 宣布在全球推出「teen-by-default」设定](https://discord.com/press-releases/discord-launches-teen-by-default-settings-globally){target="_blank"}，并强化年龄验证机制（台湾报导（繁体中文）见 [巴哈姆特 GNN：Discord 宣布 3 月起全球实施「青少年保护」措施](https://gnn.gamer.com.tw/detail.php?sn=299872){target="_blank"}）。新用户与既有用户将默认进入以青少年为考量的体验，若要解除部分内容过滤或存取年龄分级空间，需透过脸部年龄估计或提交证件等方式完成验证。Discord 强调这是为了青少年安全与 Safer Internet Day 的承诺，也提到会引入「年龄推论模型」在背景协助判断帐号是否属于成人。
 
 我们无意批评 Discord 的初衷，青少年保护与合规是严肃议题。但这类机制也代表一件事：**大型平台会需要更多个人资料与行为讯息来「分类」使用者**。不论是脸部影像、证件、或是演算法推论，最终都是把「你是谁、你几岁、你在哪里」交给平台与其合作厂商。对许多只想安心聊天、玩游戏、或参与专案的人来说，这可能是可接受的取舍。对另一群人来说，却会开始思考：有没有别的路？
 

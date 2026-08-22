@@ -168,7 +168,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ### QQ
 
-[QQ](https://im.qq.com/){target="_blank"} 跟微信同属 Tencent，无 E2EE、同样实名制，差别在 QQ 的聊天历史云端保存习惯比微信更明显（旧版预设全部上云），30 岁以上的使用者比较多。
+[QQ](https://im.qq.com/){target="_blank"} 跟微信同属 Tencent，无 E2EE、同样实名制，差别在 QQ 的聊天历史云端保存习惯比微信更明显（旧版默认全部上云），30 岁以上的使用者比较多。
 
 ### 钉钉
 
@@ -176,11 +176,11 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ### LINE
 
-[LINE](https://line.me/){target="_blank"} 在中国大陆被封锁，是港、台、日、东南亚的主流 IM。即便能连入，E2EE 设计仍受限：Letter Sealing（2015 年推出，自 2021 年起预设开启、无法手动关闭）只覆盖一对一对话与部分群组消息，server 端在司法协助请求下可提供未加密内容。
+[LINE](https://line.me/){target="_blank"} 在中国大陆被封锁，是港、台、日、东南亚的主流 IM。即便能连入，E2EE 设计仍受限：Letter Sealing（2015 年推出，自 2021 年起默认开启、无法手动关闭）只覆盖一对一对话与部分群组消息，server 端在司法协助请求下可提供未加密内容。
 
 ### Telegram
 
-[Telegram](https://telegram.org/){target="_blank"} 在中国大陆被封锁（2015 年起），需桥接才能连入。即便能用，预设非 E2EE 这一事实仍然成立：
+[Telegram](https://telegram.org/){target="_blank"} 在中国大陆被封锁（2015 年起），需桥接才能连入。即便能用，默认非 E2EE 这一事实仍然成立：
 
 - **Secret Chat**：唯一走 E2EE 的模式，需要手动开启，限一对一，不能跨装置同步
 - **一般对话、群组、频道**：走 client-server 加密，Telegram server 看得到所有内容
