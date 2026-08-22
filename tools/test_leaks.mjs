@@ -90,6 +90,15 @@ test('沒有匯出或下載的路徑', () => {
   }
 });
 
+test('短碼可以整段選取，剩下的複製動作留給讀者', () => {
+  // 頁面寫著「點一下短碼會整段選取」，靠的是 CSS 而不是 clipboard API。拿掉
+  // user-select 之後那句話就變成假的，而改用 clipboard 會踩到上面那條線。
+  assert.ok(
+    /\.lk-code\s*\{[^}]*user-select:\s*all/s.test(code),
+    '.lk-code 少了 user-select: all，短碼會變回要逐字抄'
+  );
+});
+
 test('只有地理位置需要授權', () => {
   const gated = mod.PROBES.filter((p) => p.needsPermission).map((p) => p.key);
   assert.deepEqual(gated, ['location']);

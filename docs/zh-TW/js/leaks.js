@@ -342,6 +342,9 @@
     #leaks-tool .lk-code {
       font-family: var(--md-code-font-family, monospace);
       font-size: 1.4rem; letter-spacing: .1em; margin: 0;
+      /* 點一下整段選取，讀者要比對兩台裝置時不必逐字抄。複製由讀者自己按，
+         這一頁不碰剪貼簿，tools/test_leaks.mjs 守著這條線。 */
+      user-select: all; -webkit-user-select: all; cursor: text;
     }
     #leaks-tool .lk-code-why { font-size: .7rem; opacity: .75; line-height: 1.6; margin: .2rem 0 0; }
     #leaks-tool .lk-tor-label { opacity: .7; }
@@ -437,7 +440,7 @@
         none: "一般瀏覽器沒有提供開關。這一項只能靠換瀏覽器處理",
       },
       torLabel: "Tor Browser 會顯示",
-      summary: "上面 {n} 項穩定的值揉成的短碼。換一個瀏覽器打開，比對短碼就知道有沒有變。它本身就是一個識別碼，所以只出現在畫面上，沒有存起來也沒有匯出。",
+      summary: "上面 {n} 項穩定的值揉成的短碼。換一個瀏覽器打開，比對短碼就知道有沒有變，點一下短碼會整段選取，方便自己複製下來。它本身就是一個識別碼，所以只出現在畫面上，沒有存起來也沒有匯出。",
       unavailable: "這個瀏覽器沒有提供",
       denied: "你拒絕了，或者系統擋住了",
       askTitle: "下面這一項要你按了才會問",
@@ -500,7 +503,7 @@
         none: "一般浏览器没有提供开关。这一项只能靠换浏览器处理",
       },
       torLabel: "Tor Browser 会显示",
-      summary: "上面 {n} 项稳定的值揉成的短码。换一个浏览器打开，比对短码就知道有没有变。它本身就是一个识别码，所以只出现在画面上，没有存起来也没有导出。",
+      summary: "上面 {n} 项稳定的值揉成的短码。换一个浏览器打开，比对短码就知道有没有变，点一下短码会整段选取，方便自己复制下来。它本身就是一个识别码，所以只出现在画面上，没有存起来也没有导出。",
       unavailable: "这个浏览器没有提供",
       denied: "你拒绝了，或者系统挡住了",
       askTitle: "下面这一项要你按了才会问",
@@ -563,7 +566,7 @@
         none: "ordinary browsers offer no switch for this. Only a different browser addresses it",
       },
       torLabel: "Tor Browser shows",
-      summary: "A short code folded from the {n} stable values above. Open this page in another browser and compare just this one to see whether anything changed. The code is itself an identifier, so it appears on screen only, with nothing stored and nothing exported.",
+      summary: "A short code folded from the {n} stable values above. Open this page in another browser and compare just this one to see whether anything changed; clicking the code selects all of it, ready for you to copy yourself. The code is itself an identifier, so it appears on screen only, with nothing stored and nothing exported.",
       unavailable: "not available in this browser",
       denied: "you declined, or the system blocked it",
       askTitle: "This one only runs when you press the button",

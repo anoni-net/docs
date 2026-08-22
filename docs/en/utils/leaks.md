@@ -38,6 +38,18 @@ Open this page in [Tor Browser](../tools/what-is-tor.md) and the time zone reall
 
 To adjust that behaviour, see [Tor Browser advanced settings](../tools/tor-browser-advanced.md).
 
+## When to come back to this page
+
+Fingerprints change, and usually without telling you. Moments worth checking the short code again:
+
+- **After a new device or a clean install**: confirm whether the old and new machines look like the same person to a site
+- **After leaving a monitored relationship**: the other person may remember the old code, and the new device needs to not match it
+- **After installing a browser extension**: extensions change how pages behave, and some change the fingerprint outright
+- **After changing system language, time zone or screen resolution**: all three feed the short code
+- **Before explaining to someone why any of this matters**: every number on screen comes from their own device
+
+The code is eight characters. Writing it on paper or in a note is enough, and there is no need to keep the whole page of values. Clicking the code selects all of it, the copying is yours to do, and this page never touches the clipboard.
+
 ## We are not collecting any of this
 
 This page is deliberately built as a fingerprint collector, so you should be asking.
