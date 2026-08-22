@@ -37,7 +37,7 @@ Tor Browser and the onion and IPFS builds do not offer offline installation, for
 
 ## What gets stored on your device
 
-The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well.
+The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
 
 Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored.
 
@@ -47,7 +47,7 @@ Pages you tick yourself are not affected by that option. They always come with t
 
 The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
 
-"Clear all offline content" above removes both what the site stored and what you picked, and stops the site from storing new chapters. Turn the switch back on above to resume.
+"Clear all offline content" above removes both what the site stored and what you picked, and turns off automatic storage, so the pages you read after clearing do not stay on the device either. Turn the switch back on above to resume.
 
 This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 0.5 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
 
