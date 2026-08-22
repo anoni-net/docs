@@ -1,6 +1,6 @@
 ---
 title: 严选报告
-description: 社群挑选与翻译的外部研究报告，重点摆在跟匿名网络、网络自由、数位威权主义有关的长篇分析。中译版补上华语读者可参照的脉络。
+description: 社群挑选与翻译的外部研究报告，重点摆在跟匿名网络、网络自由、数字威权主义有关的长篇分析。中译版补上华语读者可参照的脉络。
 icon: material/file-pdf-box
 ---
 
@@ -18,7 +18,7 @@ icon: material/file-pdf-box
 
 ### The Internet Coup / 网络政变
 
-InterSecLab, 2025-09-12。InterSecLab 针对泄漏的 500G 文件资料分析 Geedge Networks（积至公司，积至（海南）信息技术有限公司）如何搭建中国防火长城服务、运作与技术输出到其他国家落地。
+InterSecLab, 2025-09-12。InterSecLab 针对泄漏的 500G 文件数据分析 Geedge Networks（积至公司，积至（海南）信息技术有限公司）如何搭建中国防火长城服务、运作与技术输出到其他国家落地。
 
 * 原报告：[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes - InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}
 * zh-TW 翻译版本（含 8 个章节）：[anoni.net/docs/reports/interseclab-network-coup/](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}

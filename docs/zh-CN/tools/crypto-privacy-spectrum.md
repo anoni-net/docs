@@ -86,7 +86,7 @@ icon: material/currency-btc
 
 ## CoinJoin 与 mixers：为什么社群不再主推
 
-CoinJoin 是比特币早期的隐私强化路线：多名用户把交易合并成一笔，外界无法分辨哪个输入对应哪个输出。代表性实作有 Wasabi Wallet、Samourai Wallet 的 Whirlpool 服务，以及在以太坊上的 Tornado Cash。
+CoinJoin 是比特币早期的隐私强化路线：多名用户把交易合并成一笔，外界无法分辨哪个输入对应哪个输出。代表性实现有 Wasabi Wallet、Samourai Wallet 的 Whirlpool 服务，以及在以太坊上的 Tornado Cash。
 
 !!! warning "法律风险：2024 年后的三件事"
 
@@ -166,7 +166,7 @@ multisig 对隐私与安全的价值：
 各币种对 multisig 的支持度不同：
 
 - **比特币**：支持度最完整，Sparrow、Caravan、Specter 提供易用界面，社群成熟。
-- **以太坊**：透过智能合约实作（Safe，前 Gnosis Safe），是 Web3 组织钱包的事实标准。
+- **以太坊**：透过智能合约实现（Safe，前 Gnosis Safe），是 Web3 组织钱包的事实标准。
 - **Monero**：协议层支持，钱包软件支持度与工具成熟度远低于 BTC、ETH。实务上组织用 Monero 做 multisig 的案例不多。
 - **Zcash**：屏蔽池目前不支持 multisig，透明池可用但失去隐私优势。
 
@@ -176,7 +176,7 @@ multisig 的常见坑：
 - **社工攻击**：攻击者不必取得所有钥匙，只要说服 N 个钥匙持有人签署一笔恶意交易即可。
 - **协作摩擦**：每次动用资金都要 N 个人协调，日常小额支付用不上。
 
-组织端的具体实作建议见 [倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)。
+组织端的具体实现建议见 [倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)。
 
 ## 法规与在地
 

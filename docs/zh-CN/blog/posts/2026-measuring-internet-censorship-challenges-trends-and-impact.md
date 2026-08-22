@@ -44,7 +44,7 @@ description: "OONI 整理出全球网络审查正在变得更精细、更难检�
 
 [误报（false positives）](https://ooni.org/support/faq/#what-are-false-positives){target="_blank"}很常见。挑战更进一步来自审查做法的多样性，从 DNS 操纵、IP 封锁，到更隐蔽的流量限速或注入伪造响应都有。同一个网站可能在某个网络能用、在另一个网络被挡，因此需要广泛、去中心化的测试才有机会做出可靠判断。
 
-[OONI](https://ooni.org/){target="_blank"} 用几个方式来面对这些挑战。一是开发[公开的测量方法论](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}并鼓励同行评议与专家反馈，并利用对照测量（control measurements）作为基准。OONI 也使用一套[概率式指标](https://docs.ooni.org/data/pipeline-design/){target="_blank"}估计某个资源在特定网络与时间区间内被限制的可能性。这套方法在 [OONI Pipeline v5](https://github.com/ooni/data){target="_blank"} 上实作，会比对测量结果并套用启发式规则，把结果分类为「blocked」、「down」或「OK」，并附上一定信心度的估计。
+[OONI](https://ooni.org/){target="_blank"} 用几个方式来面对这些挑战。一是开发[公开的测量方法论](https://github.com/ooni/spec/tree/master/nettests){target="_blank"}并鼓励同行评议与专家反馈，并利用对照测量（control measurements）作为基准。OONI 也使用一套[概率式指标](https://docs.ooni.org/data/pipeline-design/){target="_blank"}估计某个资源在特定网络与时间区间内被限制的可能性。这套方法在 [OONI Pipeline v5](https://github.com/ooni/data){target="_blank"} 上实现，会比对测量结果并套用启发式规则，把结果分类为「blocked」、「down」或「OK」，并附上一定信心度的估计。
 
 直接从本地网络收集到的测量，比远程测试更有价值，因为它反映了用户真实的审查体验。当志愿者根据他们实际遇到的封锁内容、在自己所在的脉络下执行测试时，这些数据比较有机会捕捉到突发、情境特定的审查事件。
 
@@ -88,9 +88,9 @@ OONI 的[长期数据](https://ooni.org/data){target="_blank"}揭示了几项全
 
 ## 从测量到倡议
 
-对网络进行测量，能让我们观察到网络流量在实务上是如何被处理的。审查经常在网络层被实作，这类测量可以揭示「什么」被封锁、「如何」被封锁、「何时」被封锁，以及是「哪一个网络」执行的。这个层级的洞察可以提供审查的证据，使得网络测量成为捍卫开放网络的有力倡议工具。
+对网络进行测量，能让我们观察到网络流量在实务上是如何被处理的。审查经常在网络层被实现，这类测量可以揭示「什么」被封锁、「如何」被封锁、「何时」被封锁，以及是「哪一个网络」执行的。这个层级的洞察可以提供审查的证据，使得网络测量成为捍卫开放网络的有力倡议工具。
 
-也因为这个理由，OONI 从 2016 年起就是全球 [#KeepItOn 行动](https://www.accessnow.org/keepiton){target="_blank"}的活跃成员，协助全世界数百个人权组织用 [OONI 数据](https://ooni.org/data/){target="_blank"}去倡议反对网络关闭。OONI 数据因此支援了多国挑战社交媒体封锁的倡议行动，包括[加蓬](https://www.accessnow.org/press-release/keepiton-social-media-restore-access-in-gabon/){target="_blank"}、[坦桑尼亚](https://www.accessnow.org/press-release/keepiton-tanzanian-authorities-and-meta-must-reverse-course-and-respect-human-rights/){target="_blank"}、[尼泊尔](https://www.accessnow.org/press-release/access-nows-statement-on-nepals-escalating-digital-repression-and-deadly-crackdown/){target="_blank"}、[多哥](https://www.accessnow.org/press-release/keepiton-togolese-authorities-must-uphold-human-rights-online-and-off-during-protests/){target="_blank"}与[莫桑比克](https://www.hrw.org/news/2024/11/06/mozambique-post-election-internet-restrictions-hinder-rights){target="_blank"}，也用在政策与法律介入上，例如[巴基斯坦](https://web.archive.org/web/20190322194634/pakistantoday.com.pk/2019/03/21/submit-reply-or-face-contempt-ihc-tells-pta-chairman/){target="_blank"}与[肯尼亚](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}的高等法院申请案。
+也因为这个理由，OONI 从 2016 年起就是全球 [#KeepItOn 行动](https://www.accessnow.org/keepiton){target="_blank"}的活跃成员，协助全世界数百个人权组织用 [OONI 数据](https://ooni.org/data/){target="_blank"}去倡议反对网络关闭。OONI 数据因此支持了多国挑战社交媒体封锁的倡议行动，包括[加蓬](https://www.accessnow.org/press-release/keepiton-social-media-restore-access-in-gabon/){target="_blank"}、[坦桑尼亚](https://www.accessnow.org/press-release/keepiton-tanzanian-authorities-and-meta-must-reverse-course-and-respect-human-rights/){target="_blank"}、[尼泊尔](https://www.accessnow.org/press-release/access-nows-statement-on-nepals-escalating-digital-repression-and-deadly-crackdown/){target="_blank"}、[多哥](https://www.accessnow.org/press-release/keepiton-togolese-authorities-must-uphold-human-rights-online-and-off-during-protests/){target="_blank"}与[莫桑比克](https://www.hrw.org/news/2024/11/06/mozambique-post-election-internet-restrictions-hinder-rights){target="_blank"}，也用在政策与法律介入上，例如[巴基斯坦](https://web.archive.org/web/20190322194634/pakistantoday.com.pk/2019/03/21/submit-reply-or-face-contempt-ihc-tells-pta-chairman/){target="_blank"}与[肯尼亚](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}的高等法院申请案。
 
 OONI 数据集的规模也强化了倡议价值。自 2012 年起，已从 245 个国家与地区、30,000 个网络收集到[超过 30 亿笔测量](https://explorer.ooni.org/){target="_blank"}，[OONI 数据](https://ooni.org/data){target="_blank"}是同类型中全球最大的网络审查公开数据集。每个月都有数千万笔新的测量从约 180 个国家收进来，每天则持续以即时方式发布来自世界各地的新测量。
 
@@ -100,7 +100,7 @@ OONI 数据是一份等待被探索的[丰富数据集](https://ooni.org/data){t
 
 ### 文章描述的多数现象在中国大陆是长期常态
 
-本文整理的多项手段，包括 DNS 操纵、IP 封锁、TLS 干扰、加密 DNS 与 ECH 封锁，以及走向白名单式国家内网的做法，在中国大陆是长期存在的网络治理实践。OONI 在大陆的长期测量数据，是研究人员理解这套体系如何演变的重要资料。对身在大陆的读者，本文也是「为什么常见的工具会突然失效」这件事的技术背景。
+本文整理的多项手段，包括 DNS 操纵、IP 封锁、TLS 干扰、加密 DNS 与 ECH 封锁，以及走向白名单式国家内网的做法，在中国大陆是长期存在的网络治理实践。OONI 在大陆的长期测量数据，是研究人员理解这套体系如何演变的重要数据。对身在大陆的读者，本文也是「为什么常见的工具会突然失效」这件事的技术背景。
 
 ### 港澳、新马等地区的网络层介入呈现不同形态
 

@@ -106,7 +106,7 @@ description: "发布全新 OONI Explorer 专题审查页面！全球社交媒体
 
 我们选择这些特定翻墙工具域名是基于其全球相关性、使用情况、全球 OONI 测量覆盖，以及它们是否被封锁（或可能被封锁）。我们避免在[新的翻墙工具页面中](https://explorer.ooni.org/circumvention)包括所有被测翻墙工具域名的图表，以提高易用性。如果您有兴趣查看翻墙工具页面上未列出的其他翻墙工具网站的 OONI 观测数据，您可以通过 OONI Explorer [搜索工具](https://explorer.ooni.org/search)或[测量数据汇整工具包（MAT）](https://explorer.ooni.org/chart/mat)来进行。
 
-检视图表时，请注意[异常测量](https://ooni.org/support/interpreting-ooni-data/#anomalous-measurements)的存在**并不**总是意味着封锁，因为可能会出现[误判](https://ooni.org/support/interpreting-ooni-data/#false-positives)。此外，翻墙工具通常内建规避审查的技术。因此，我们建议参考 [Tor Metrics](https://metrics.torproject.org/) 和 [Psiphon Data Engine](https://psix.ca/) 以查看使用情况统计资料，并更全面地了解这些工具在各国的有效性。
+检视图表时，请注意[异常测量](https://ooni.org/support/interpreting-ooni-data/#anomalous-measurements)的存在**并不**总是意味着封锁，因为可能会出现[误判](https://ooni.org/support/interpreting-ooni-data/#false-positives)。此外，翻墙工具通常内建规避审查的技术。因此，我们建议参考 [Tor Metrics](https://metrics.torproject.org/) 和 [Psiphon Data Engine](https://psix.ca/) 以查看使用情况统计数据，并更全面地了解这些工具在各国的有效性。
 
 ## 感谢
 

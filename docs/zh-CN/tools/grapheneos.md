@@ -6,9 +6,9 @@ icon: material/cellphone-lock
 
 # :material-cellphone-lock: GrapheneOS：高度隐私的行动作业系统
 
-手机是我们身上最贴身的一台装置，随身携带、长时间连网，里面有定位、通讯录、讯息、相簿、健康记录。原厂 Android 默认绑一个 Google 账号，在背景持续回传遥测资料（装置状态与使用情形），多数应用程式又各自蒐集可识别你的资讯。想重新掌握这台手机，自行决定它连接哪些服务、向外送出哪些资料，[GrapheneOS](https://grapheneos.org/){target="_blank"} 是目前社区最常推荐的选择。
+手机是我们身上最贴身的一台装置，随身携带、长时间连网，里面有定位、通讯录、消息、相簿、健康记录。原厂 Android 默认绑一个 Google 账号，在背景持续回传遥测数据（装置状态与使用情形），多数应用程序又各自蒐集可识别你的资讯。想重新掌握这台手机，自行决定它连接哪些服务、向外送出哪些数据，[GrapheneOS](https://grapheneos.org/){target="_blank"} 是目前社区最常推荐的选择。
 
-GrapheneOS 是一套以 AOSP（Android Open Source Project，Android 的开源核心）为基底、把安全防护大幅强化并移除 Google 绑定的行动作业系统，由非营利的 GrapheneOS Foundation 维护、开源开发。它缩小一台 Android 手机的攻击面、补强容易外泄资料的环节，同时把是否使用 Google 服务、以及使用方式的选择权交还给你。它的重点是安全与隐私，不在于让桌面更好看。
+GrapheneOS 是一套以 AOSP（Android Open Source Project，Android 的开源核心）为基底、把安全防护大幅强化并移除 Google 绑定的行动作业系统，由非营利的 GrapheneOS Foundation 维护、开源开发。它缩小一台 Android 手机的攻击面、补强容易外泄数据的环节，同时把是否使用 Google 服务、以及使用方式的选择权交还给你。它的重点是安全与隐私，不在于让桌面更好看。
 
 !!! tip "30 秒结论"
 
@@ -26,44 +26,44 @@ GrapheneOS 的功能可以分成三组：缩减攻击面、减少对 Google 的�
 ### 缩减攻击面
 
 - **hardened_malloc**：GrapheneOS 自制的内存分配器，针对最常见的一类漏洞（内存破坏）做防御，从底层降低被攻破的机会。
-- **MTE（Memory Tagging Extension，内存标记）**：ARM 的硬件功能，能在程式误用内存时当场拦截，把可能的入侵挡在造成伤害之前。需要 Pixel 8 系列之后的 ARMv9 晶片才支援。在支援的机型上，系统层默认启用。含原生代码（native code）的第三方 app 则默认不开，使用者可自行到 Settings 开启。
-- **Vanadium 浏览器**：强化版的 Chromium，默认关闭 JavaScript JIT（一种把网页程式即时编译加速的机制，也是常见的攻击入口），可逐站打开。少数互动密集的网页速度会略慢，可针对该网站单独开启。
+- **MTE（Memory Tagging Extension，内存标记）**：ARM 的硬件功能，能在程序误用内存时当场拦截，把可能的入侵挡在造成伤害之前。需要 Pixel 8 系列之后的 ARMv9 晶片才支持。在支持的机型上，系统层默认启用。含原生代码（native code）的第三方 app 则默认不开，使用者可自行到 Settings 开启。
+- **Vanadium 浏览器**：强化版的 Chromium，默认关闭 JavaScript JIT（一种把网页程序即时编译加速的机制，也是常见的攻击入口），可逐站打开。少数互动密集的网页速度会略慢，可针对该网站单独开启。
 - **verified boot 与重锁 bootloader**：安装完成后，GrapheneOS 会引导你把 bootloader 重新锁回并关掉 OEM 解锁，完整启用 verified boot（开机时逐层验证系统没被窜改）。
 - **Auditor app**：用手机的安全晶片，对韧体与系统的真伪和完整性做硬件层级的验证，确认没被动过手脚。
 
 ### 减少对 Google 的依赖
 
 - **默认完全不含 Google 服务**：开机就是一套不向 Google 报到的系统（俗称 degoogled）。
-- **sandboxed Google Play**：需要用到 Google app 时，GrapheneOS 把整套 Google Play 服务（Google Play 服务、Play 商店、服务框架）当成一般、无特权的应用程式，关进标准的应用程式沙箱执行。官方说明 Google Play 在 GrapheneOS 上「完全无法取得任何特殊存取或权限」。
-- **逐 app 的 Network 权限**：可以对单一 app 整个断网。关闭后系统对它回报「网络不通」，连间接的网络存取也一并阻挡。
-- **逐 app 的 Sensors 权限**：关闭后，该 app 无法存取加速度计、陀螺仪、指南针、气压计、温度计这些 Android 原本没有独立权限控管的传感器。
-- **Storage Scopes 与 Contact Scopes**：不必把整个储存空间或整本通讯录交给一个 app，可以只授权它看你指定的档案或联络人。Contact Scopes 默认让 app 读到的通讯录是空的。
+- **sandboxed Google Play**：需要用到 Google app 时，GrapheneOS 把整套 Google Play 服务（Google Play 服务、Play 商店、服务框架）当成一般、无特权的应用程序，关进标准的应用程序沙箱执行。官方说明 Google Play 在 GrapheneOS 上「完全无法取得任何特殊访问或权限」。
+- **逐 app 的 Network 权限**：可以对单一 app 整个断网。关闭后系统对它回报「网络不通」，连间接的网络访问也一并阻挡。
+- **逐 app 的 Sensors 权限**：关闭后，该 app 无法访问加速度计、陀螺仪、指南针、气压计、温度计这些 Android 原本没有独立权限控管的传感器。
+- **Storage Scopes 与 Contact Scopes**：不必把整个储存空间或整本通讯录交给一个 app，可以只授权它看你指定的文件或联络人。Contact Scopes 默认让 app 读到的通讯录是空的。
 
 ### 纳入实体与胁迫风险
 
 - **duress PIN/password（胁迫密码）**：选择性功能，默认不启用，不设定就不会误触。启用后你会多一组密码，在任何要求解锁的画面输入它，会不可逆地抹除整台装置（连已安装的 eSIM 一起），用在被迫交出手机的情境。
-- **auto-reboot（自动重开机）**：默认 18 小时没有解锁就自动重开机，回到开机后尚未首次解锁的加密状态（BFU，Before First Unlock）。资料在这个状态下更难被鉴识工具取出。时间可在 10 分钟到 72 小时之间调整或关闭。
-- **USB-C 控制**：默认「锁定时只充电、不传资料」，缩小用 USB 连接埠攻击的缝隙。
+- **auto-reboot（自动重开机）**：默认 18 小时没有解锁就自动重开机，回到开机后尚未首次解锁的加密状态（BFU，Before First Unlock）。数据在这个状态下更难被鉴识工具取出。时间可在 10 分钟到 72 小时之间调整或关闭。
+- **USB-C 控制**：默认「锁定时只充电、不传数据」，缩小用 USB 连接埠攻击的缝隙。
 
 ## 它不解决什么：与匿名的界线
 
-隐私与匿名的界线对 anoni.net 的读者特别重要。GrapheneOS 把重点放在 privacy（隐私）与 security（安全），它让别人更难入侵你的手机、更难从你的 app 蒐集资料，但它不宣称让你匿名。
+隐私与匿名的界线对 anoni.net 的读者特别重要。GrapheneOS 把重点放在 privacy（隐私）与 security（安全），它让别人更难入侵你的手机、更难从你的 app 蒐集数据，但它不宣称让你匿名。
 
 只要连上电信商的行动网络，你就必然要向电信商表明身分，GrapheneOS 无法改变这一点，唯一能避免基地台层级定位的方式是开飞航模式。要在网络层匿名（不泄漏真实 IP、不被绑定浏览身分），仍要靠 [Tor](./what-is-tor.md)。GrapheneOS 官方也把内建的 DNS-over-TLS 明提到成「不是 Tor 或 VPN 的替代品」。
 
 操作前先读 [匿名与隐私的差别](../basics/anonymity-vs-privacy.md)，确认你要的是哪一种保护，再用 [威胁模型如何建立](../basics/threat-model.md) 厘清自己在抗谁。桌面端的整机隔离方案见 [Tails、Whonix、Qubes 的差别](./tails-vs-whonix-vs-qubes.md)，行动端的 OS 强化跟桌面端的匿名作业系统处理的是不同层次的问题，依威胁模型搭配使用。
 
-## 为什么几乎只支援 Pixel
+## 为什么几乎只支持 Pixel
 
-GrapheneOS 对硬件的要求很严格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解锁、刷完客制系统后还能重新锁回（重锁才能完整启用 verified boot）、要有安全晶片提供的 StrongBox keystore 与硬件金钥验证、韧体与作业系统都要 A/B 双槽更新加上防回滚保护、原厂还要给够长的安全更新（GrapheneOS 要求至少 5 年）。Pixel 8 以后的机型是 7 年，仍在支援清单上的 Pixel 6、7 系列是 5 年，两者不同。
+GrapheneOS 对硬件的要求很严格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解锁、刷完客制系统后还能重新锁回（重锁才能完整启用 verified boot）、要有安全晶片提供的 StrongBox keystore 与硬件金钥验证、韧体与作业系统都要 A/B 双槽更新加上防回滚保护、原厂还要给够长的安全更新（GrapheneOS 要求至少 5 年）。Pixel 8 以后的机型是 7 年，仍在支持清单上的 Pixel 6、7 系列是 5 年，两者不同。
 
 目前同时满足这些条件的消费级手机几乎只有 Google Pixel。Pixel 从第 6 代到第 10 代搭载 Titan M2 安全晶片，第 11 代换成 Titan M3，第 3 到 5 代是第一代 Titan M。这颗晶片是金钥保护与硬件验证的信任根。
 
 GrapheneOS 目前只能运作于 Google 自家的 Pixel 上，但它要对付的，正是 Google 服务对手机的渗透。Google 对 Pixel 与 Android 的每一个政策调整，都会直接影响 GrapheneOS 的处境，而 Android 17 之后，Google 收紧的力道越来越强。
 
-## Android 17 之后：Google 收紧 AOSP 与 Pixel 资料的开放程度
+## Android 17 之后：Google 收紧 AOSP 与 Pixel 数据的开放程度
 
-2025 年起，Google 连续两步垫高了第三方系统的开发成本。先是在 2025 年 3 月把 Android 开发移进内部分支，只在版本发布时才把原始码推上 AOSP，开发过程不再公开可追（仍是开源，但外部看不到中间的演进）。接着在 2025 年 6 月发布 Android 16 时，不再把 Pixel 的 device tree（描述机型硬件、让系统能驱动它的设定档）放进 AOSP，第三方开发者只能靠反推补回这些资料。
+2025 年起，Google 连续两步垫高了第三方系统的开发成本。先是在 2025 年 3 月把 Android 开发移进内部分支，只在版本发布时才把原始码推上 AOSP，开发过程不再公开可追（仍是开源，但外部看不到中间的演进）。接着在 2025 年 6 月发布 Android 16 时，不再把 Pixel 的 device tree（描述机型硬件、让系统能驱动它的设定档）放进 AOSP，第三方开发者只能靠反推补回这些数据。
 
 即使如此，GrapheneOS 在 2026 年 6 月 16 日 Android 17 发布当天就完成移植，韧性还在。它同时开始替 Pixel 找替代出路，2026 年 3 月与 Motorola 宣布长期合作，第一次把硬件选项铺到 Pixel 以外。官方说明目标是 2027 年的硬件，因为 2026 年的 Motorola 机型都不符合要求，具体机型仍未公布。
 
@@ -73,17 +73,17 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 
 ## 实务补充与地区差异
 
-- **取得管道**：Pixel 在台湾有官方销售，Google 商店与中华电信、台湾大哥大、神脑、momo、PChome、虾皮等通路都买得到。中国大陆与港澳没有行货，多数人透过水货、海外代购或出国时自行购入。买之前先到官方 [FAQ](https://grapheneos.org/faq){target="_blank"} 确认那台是 GrapheneOS 支援的型号，二手机要特别确认 bootloader 没有被锁死（电信商绑约机常锁住 bootloader，一旦锁住就无法解锁刷机）。
+- **取得管道**：Pixel 在台湾有官方销售，Google 商店与中华电信、台湾大哥大、神脑、momo、PChome、虾皮等通路都买得到。中国大陆与港澳没有行货，多数人透过水货、海外代购或出国时自行购入。买之前先到官方 [FAQ](https://grapheneos.org/faq){target="_blank"} 确认那台是 GrapheneOS 支持的型号，二手机要特别确认 bootloader 没有被锁死（电信商绑约机常锁住 bootloader，一旦锁住就无法解锁刷机）。
 - **app 锁定的实际冲击**：银行、政府、企业验证类 app 越来越常用 attestation 检查装置，GrapheneOS 使用者可能遇到某些 app 拒绝执行。对把手机当主要上网装置的人，转用前要先确认每天必用的 app 有哪些可能受影响、自己能否接受，再决定是否转移。
 - **在中国大陆的情境不同**：Google 服务在中国大陆本就难以使用，degoogle 与 sandboxed Google Play 的意义跟海外不一样，但「装什么系统、装什么 app 由谁决定」的问题一样存在，甚至更尖锐。本地大量 app 同时走自家的装置认证与实名要求，非官方系统一样容易被挡。
-- **侧载限制正在逼近**：Google 在 2025 年 8 月宣布对侧载应用程式要求「开发者验证」，执行方式是认证装置上的 Play services 元件，涵盖 Android 7 以上，不绑定单一 Android 版本。2026 年 9 月 30 日先在巴西、印尼、新加坡、泰国生效，2027 年推向全球。首批四国有两个在这个区域，华语地区多数不在首批，但这类政策通常会逐步扩大。
+- **侧载限制正在逼近**：Google 在 2025 年 8 月宣布对侧载应用程序要求「开发者验证」，执行方式是认证装置上的 Play services 元件，涵盖 Android 7 以上，不绑定单一 Android 版本。2026 年 9 月 30 日先在巴西、印尼、新加坡、泰国生效，2027 年推向全球。首批四国有两个在这个区域，华语地区多数不在首批，但这类政策通常会逐步扩大。
 - 取得管道、app 锁定、侧载限制，指向的都是同一件事，谁有权决定你买来的手机上能执行什么系统、能装什么 app。GrapheneOS 让使用者在原厂系统之外仍然有选择。
 
 ## 常见问题
 
 ??? question "我一定要买 Pixel 吗？"
 
-    目前实务上几乎是。只有 Pixel 同时满足 GrapheneOS 要求的可重锁 bootloader、安全晶片、完整 verified boot 与长期更新。2026 年 3 月宣布的 Motorola 合作目标是 2027 年的硬件，具体机型还没公布，现在要用 GrapheneOS 仍要准备一台支援的 Pixel。
+    目前实务上几乎是。只有 Pixel 同时满足 GrapheneOS 要求的可重锁 bootloader、安全晶片、完整 verified boot 与长期更新。2026 年 3 月宣布的 Motorola 合作目标是 2027 年的硬件，具体机型还没公布，现在要用 GrapheneOS 仍要准备一台支持的 Pixel。
 
 ??? question "安装 GrapheneOS 后，还能使用 Google 地图、Gmail 吗？"
 
@@ -95,11 +95,11 @@ Google 收紧 AOSP、attestation 锁定非官方系统的完整时间轴与分�
 
 ??? question "银行 app、政府 app 能正常使用吗？"
 
-    视 app 类别而定。通讯、浏览与多数一般 app 透过 sandboxed Google Play 大多正常运作。最容易被挡下的是用 Play Integrity 之类 attestation 检查装置的银行、政府、支付 app，它们可能把 GrapheneOS 判为不合格而拒绝执行。各地常用 app 的社区回报还不齐，最稳的做法是先列出自己「不能没有」的 app 清单，到 [GrapheneOS 官方论坛](https://discuss.grapheneos.org/){target="_blank"} 搜寻有没有人回报过，或先保留一支旧手机备用，确认关键 app 均可正常运作后再全面转移。
+    视 app 类别而定。通讯、浏览与多数一般 app 透过 sandboxed Google Play 大多正常运作。最容易被挡下的是用 Play Integrity 之类 attestation 检查装置的银行、政府、支付 app，它们可能把 GrapheneOS 判为不合格而拒绝执行。各地常用 app 的社区回报还不齐，最稳的做法是先列出自己「不能没有」的 app 清单，到 [GrapheneOS 官方论坛](https://discuss.grapheneos.org/){target="_blank"} 搜索有没有人回报过，或先保留一支旧手机备用，确认关键 app 均可正常运作后再全面转移。
 
 ??? question "与 LineageOS、CalyxOS、/e/OS 有什么不同？"
 
-    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实作）加上重锁 bootloader 的实用中间路线，选用前值得知道它从 2025 年 8 月起暂停开发、2026 年 7 月恢复，目前重新处于积极维护状态。LineageOS 支援的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 默认的安全保护。/e/OS 以延续旧硬件可用与去 Google 化的默认值为主，没有公布可与其他几套相比的 hardening 说明。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
+    四套的取舍不同。GrapheneOS 是 hardening 最彻底的一套，要求在 Pixel 上重锁 bootloader 以维持完整的安全模型。CalyxOS 走 microG（一套开源的 Google 服务替代实现）加上重锁 bootloader 的实用中间路线，选用前值得知道它从 2025 年 8 月起暂停开发、2026 年 7 月恢复，目前重新处于积极维护状态。LineageOS 支持的机型最广，但不提供同等的安全强化，而且在很多机型上解锁 bootloader 后就削弱了 Android 默认的安全保护。/e/OS 以延续旧硬件可用与去 Google 化的默认值为主，没有公布可与其他几套相比的 hardening 说明。要最高的安全与隐私选 GrapheneOS，要照顾更多旧机型或想更简便，可以看其他几套。
 
 ## 接下来
 

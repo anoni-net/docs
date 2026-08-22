@@ -31,7 +31,7 @@ description: "8 月 13 日周四 14:30 到 15:00，台湾北部七县市的移�
 
     行政院对演练的说明是「模拟极端情境，验证政府在有限通讯环境下之应变能力」，设想的状况包含天灾、大规模网络攻击与复合式灾害，目标是提升整体通讯与社会防卫韧性[^1]。公告本身没有提到战时或军事演习，框架放在民防与备援。移动网络降速是参考日本、韩国、北欧等国经验后「首度加入」的项目[^1]，范围限于台湾首度，不是国际首例。
 
-    对台湾来说，通讯中断不是假设性的问题。台湾是岛屿，对外连接依赖海底电缆，数字发展部设有「海缆障碍状况」的公开页面，逐条列出故障位置、替代路由与预计修复时间[^7]。以 2026 年 7 月 28 日的更新为例，当时有四条海缆处于故障状态，最近的一笔发生在 7 月 14 日，预计修复日期落在 8 月 14 日，也就是演习的同一周。想看这些缆线的实际走向，可以打开 <a href="../../../../../games/tor-network/play/index.html?lang=zh-cn">Tor 中继地球仪</a>，上面标了 228 条海缆线段与台湾周边的障碍状态。
+    对台湾来说，通讯中断不是假设性的问题。台湾是岛屿，对外连接依赖海底电缆，数位发展部设有「海缆障碍状况」的公开页面，逐条列出故障位置、替代路由与预计修复时间[^7]。以 2026 年 7 月 28 日的更新为例，当时有四条海缆处于故障状态，最近的一笔发生在 7 月 14 日，预计修复日期落在 8 月 14 日，也就是演习的同一周。想看这些缆线的实际走向，可以打开 <a href="../../../../../games/tor-network/play/index.html?lang=zh-cn">Tor 中继地球仪</a>，上面标了 228 条海缆线段与台湾周边的障碍状态。
 
     真实事故的规模比演练大得多。演练只降速 30 分钟、限定十四个县市、语音与短信照常。海缆中断则可能持续数周，影响整个区域的对外连接。演练的用意在验证备援机制与宣导准备，不是重现事故。
 
@@ -49,7 +49,7 @@ description: "8 月 13 日周四 14:30 到 15:00，台湾北部七县市的移�
 
 透过固网连接的 Wi-Fi 在演练中不受影响，测量若在固网的 Wi-Fi 上完成，结果等于零。手机常会自动回连办公室或住家的 Wi-Fi，运行前请先确认已切到移动数据。手机分享出来的热点虽然底层走移动网络，OONI 仍会把网络类型记成 Wi-Fi，一样不要用。
 
-VPN 与 Tailscale 都要先关闭。一般 VPN 会把流量绕出去，测量结果只反映 VPN 运营商的线路，记录下来的 ASN 也会变成对方的。Tailscale 就算没有启用 exit node，在 iOS 与 Android 上仍是透过系统的 VPN 机制运作，OONI Probe 会把网络类型记成 `vpn` 而不是 `mobile`，测量数据就标不出是移动网络测到的。App 侦测到 VPN 时会跳出提醒，看到提醒请先关掉再运行。测量结束后记得把 Tailscale 开回来，靠它连公司内网的人特别容易忘记。
+VPN 与 Tailscale 都要先关闭。一般 VPN 会把流量绕出去，测量结果只反映 VPN 运营商的线路，记录下来的 ASN 也会变成对方的。Tailscale 就算没有启用 exit node，在 iOS 与 Android 上仍是透过系统的 VPN 机制运作，OONI Probe 会把网络类型记成 `vpn` 而不是 `mobile`，测量数据就标不出是移动网络测到的。App 检测到 VPN 时会跳出提醒，看到提醒请先关掉再运行。测量结束后记得把 Tailscale 开回来，靠它连公司内网的人特别容易忘记。
 
 测量完成后可在结果页看到网络名称与 ASN（自治网络的全域编号，运营商、企业、学校都有各自的号码），确认测量确实在移动网络上完成，名称为自己的运营商。
 
@@ -150,7 +150,7 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 ## 降速的 30 分钟可以观察到什么
 
-行政院说明的做法是核心网络限流加上固定的下载速率上限，属于无差别的带宽管制，`ndt` 应可测到。不过公告另外列的受影响服务类型（视频流、视频通话、移动支付、云端同步）读起来像依应用层分类，三家运营商对受影响范围的描述也各自不同。台湾大哥大把 LINE、WhatsApp、M+ 等通讯软件列进会出现连接延迟与不稳定的范围[^4]，中华电信写的是「影音、视讯连线、行动上网及部分物联网应用」[^5]，行政院的版本则是文字传输正常[^1]。限流若落在带宽层，`ndt` 会直接反映。若偏向应用层分类，`ndt` 对 M-Lab 的流量特征未必被归进受限类别，可能测到接近平常的速度。测量结果本身就能分辨属于哪一种，也是降速期间最值得观察的一项。
+行政院说明的做法是核心网络限流加上固定的下载速率上限，属于无差别的带宽管制，`ndt` 应可测到。不过公告另外列的受影响服务类型（视频流、视频通话、移动支付、云端同步）读起来像依应用层分类，三家运营商对受影响范围的描述也各自不同。台湾大哥大把 LINE、WhatsApp、M+ 等通讯软件列进会出现连接延迟与不稳定的范围[^4]，中华电信写的是「影音、视频连线、行动上网及部分物联网应用」[^5]，行政院的版本则是文字传输正常[^1]。限流若落在带宽层，`ndt` 会直接反映。若偏向应用层分类，`ndt` 对 M-Lab 的流量特征未必被归进受限类别，可能测到接近平常的速度。测量结果本身就能分辨属于哪一种，也是降速期间最值得观察的一项。
 
 带宽被压低时 Tor 与 Psiphon 能否建立连接，是社区长期关注的题目，周四下午正好是现成的测试场。降速结束后速度回复所需的时间，则由 15:10 那一笔回答。
 
@@ -178,7 +178,7 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
     以 `web_connectivity` 为例，判定方式是拿手机端的结果跟 OONI 的测试辅助服务器比对。手机在限速下大量逾时，辅助服务器在数据中心运作一切正常，比对出来会被标成 `tcp_ip` 或 `http-failure`，也就是封锁的判定签名。几百人同时在限速下运行有封锁判定的测项，等于在台湾的公开数据里注入一批看起来像审查的记录。
 
-    性能组不会产生误判的封锁信号。`ndt` 与 `dash` 在后端没有实作封锁判定，全球近 90 天各 20 万笔测量的 anomaly 都是 0，只会留下吞吐量的数值。
+    性能组不会产生误判的封锁信号。`ndt` 与 `dash` 在后端没有实现封锁判定，全球近 90 天各 20 万笔测量的 anomaly 都是 0，只会留下吞吐量的数值。
 
     时间也不允许。性能组约 1 分 30 秒，稳稳落在区间内。网站那组是一份网址清单，正常网络下就要数分钟才能完成，在限速下很可能跨过 15:00，把降速中与恢复后混进同一份报告。
 
@@ -218,7 +218,7 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 文中的 OONI 数字分成三组，查询日皆为 2026-08-11，端点与参数如下，读者可自行重新查询。
 
-**中部场 30 分钟窗口**（表格中的 902、803、593 与两笔性能测量）用 measurements 端点，`probe_cc=TW`、`since=2026-08-10T06:30:00Z`、`until=2026-08-10T07:00:00Z`，逐一查 `test_name` 为 `ndt`、`dash`、`web_connectivity`，回传的每笔都带 `probe_asn`。
+**中部场 30 分钟窗口**（表格中的 902、803、593 与两笔性能测量）用 measurements 端点，`probe_cc=TW`、`since=2026-08-10T06:30:00Z`、`until=2026-08-10T07:00:00Z`，逐一查 `test_name` 为 `ndt`、`dash`、`web_connectivity`，返回的每笔都带 `probe_asn`。
 
 **30 天的 ASN 分布**（645,039、253,546、191,257、23,010 与三家移动运营商的细项）用 aggregation 端点，`probe_cc=TW`、`test_name=web_connectivity`、`axis_x=probe_asn`、`since=2026-07-12`、`until=2026-08-12`。性能测项的 1,008、548、528、16、4 用同一组参数，`test_name` 换成 `ndt`。aggregation 的 `until` 不含当日，所以 `until=2026-08-12` 涵盖到 8 月 11 日。
 
@@ -232,14 +232,14 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：网页界面，适合查单笔测量、看某个国家或 ASN 的趋势，无须写程序。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免验证免密钥，可依国家、测项、ASN 切分做统计。本文的 30 天 ASN 分布与比率出自此端点。`since` 与 `until` 只接受日期，带上时间会回 `date_from_datetime_inexact` 错误，所以它适合看天级以上的趋势。
-- **Measurements API**：`https://api.ooni.org/api/v1/measurements`，同样免验证，接受精确到秒的时间窗，回传逐笔记录。本文中部场 30 分钟的表格出自此端点。
-- **AWS S3 公开数据集**：`ooni-data-eu-fra`，逐笔原始 JSON，适合需要检视测量细节或做大规模分析的研究。原始数据以整点批次上传，落地 S3 的延迟约在半小时到一两小时之间，取用方式与 CSV 输出格式写在 [ASN 观测数据撷取与分析](../../community/asn-coverage-howto.md)，社区维护的撷取程序也在该页。
+- **Measurements API**：`https://api.ooni.org/api/v1/measurements`，同样免验证，接受精确到秒的时间窗，返回逐笔记录。本文中部场 30 分钟的表格出自此端点。
+- **AWS S3 公开数据集**：`ooni-data-eu-fra`，逐笔原始 JSON，适合需要检视测量细节或做大规模分析的研究。原始数据以整点批次上传，落地 S3 的延迟约在半小时到一两小时之间，取用方式与 CSV 输出格式写在 [ASN 观测数据提取与分析](../../community/asn-coverage-howto.md)，社区维护的提取程序也在该页。
 
-以本次演练为例，30 分钟的时间窗要用 measurements 端点：`probe_cc=TW`、`test_name=ndt`（或 `dash`）、`since=2026-08-13T06:00:00Z`、`until=2026-08-13T08:00:00Z`，回传的每一笔都带 `probe_asn`，再自行归到 `24158`、`17421`、`9674` 三组。所有时间一律使用 UTC，台湾时间需减 8 小时。要判断某个问题该用哪个测项，[OONI 测项速查表](../../community/ooni-nettests-map.md)整理了每个测项测量什么、规格状态，以及台湾是否有数据。台湾的 ASN 覆盖现况见 [ASN 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)。
+以本次演练为例，30 分钟的时间窗要用 measurements 端点：`probe_cc=TW`、`test_name=ndt`（或 `dash`）、`since=2026-08-13T06:00:00Z`、`until=2026-08-13T08:00:00Z`，返回的每一笔都带 `probe_asn`，再自行归到 `24158`、`17421`、`9674` 三组。所有时间一律使用 UTC，台湾时间需减 8 小时。要判断某个问题该用哪个测项，[OONI 测项速查表](../../community/ooni-nettests-map.md)整理了每个测项测量什么、规格状态，以及台湾是否有数据。台湾的 ASN 覆盖现况见 [ASN 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)。
 
 最常见的误解是把异常（anomaly）当成封锁。OONI 的 `anomaly` 只代表测试未照预期完成，成因包含审查、网络不稳、ISP 暂时故障，以及测试程序本身的问题，将 `anomaly` 比率直接视为封锁率会产生假指控。以 `tor` 测项的实测为例，取 2026-07-12 到 2026-08-12 这 30 天，加拿大 `16.3%`（母数 14,042）、瑞士 `22.1%`（母数 3,231）、新西兰 `20.1%`（母数 562），皆为没有审查的国家。前一段 90 天的 `ndt` 与 `dash` 用的是另一个时间窗，复查三国的比率要换成 30 天的参数。中段数值属于噪声，只有比率极端高的少数国家与现实相符。
 
-以上只适用于有做封锁判定的测项。性能测项的 `anomaly` 目前在后端几乎没有实作，全球近 90 天的 `ndt` 20 万笔与 `dash` 19.8 万笔，`anomaly` 都是 0。判断演练期间是否降速，要直接看吞吐量的数值，不能看 `anomaly`。
+以上只适用于有做封锁判定的测项。性能测项的 `anomaly` 目前在后端几乎没有实现，全球近 90 天的 `ndt` 20 万笔与 `dash` 19.8 万笔，`anomaly` 都是 0。判断演练期间是否降速，要直接看吞吐量的数值，不能看 `anomaly`。
 
 授权方面，OONI 发布的测量数据采 CC BY-NC-SA 4.0，禁止商业使用，衍生内容需以相同授权释出。引用数据时要标注来源，将 OONI 数据与其他来源合并产生新的数据档，会让整份成品都受同一授权拘束。
 
@@ -249,10 +249,10 @@ M-Lab 的[隐私政策](https://www.measurementlab.net/privacy/){target="_blank"
 
 **数据来源**：OONI aggregation 与 measurements API（查询条件见上方的数据与前提，测量数据授权 [CC BY-NC-SA 4.0](https://github.com/ooni/license/blob/master/data/LICENSE.md){target="_blank"}）、ASN 名称取自 [RIPEstat](https://stat.ripe.net/){target="_blank"}、M-Lab 的数据处理方式取自 [M-Lab 隐私政策](https://www.measurementlab.net/privacy/){target="_blank"}。演习相关的官方与媒体来源见下方脚注。
 
-[^1]: [2026城镇韧性（防空）演习：行动网路降速演练](https://www.ey.gov.tw/Page/9277F759E41CCD91/66c2bed1-6ca3-4c30-ba7c-4fa0f90e00ec){target="_blank"} - 行政院
-[^2]: [韧性演习行动网路降速 NCC吁预先为离线情境做准备](https://www.cna.com.tw/news/ahel/202607220157.aspx){target="_blank"} - 中央社
+[^1]: [2026城镇韧性（防空）演习：行动网络降速演练](https://www.ey.gov.tw/Page/9277F759E41CCD91/66c2bed1-6ca3-4c30-ba7c-4fa0f90e00ec){target="_blank"} - 行政院
+[^2]: [韧性演习行动网络降速 NCC吁预先为离线情境做准备](https://www.cna.com.tw/news/ahel/202607220157.aspx){target="_blank"} - 中央社
 [^3]: [2026城镇韧性（防空）演习期程规划表](https://adma.mnd.gov.tw/unit/100005/8182){target="_blank"} - 全民防卫动员署
-[^4]: [配合政府115年城镇韧性防空演习，中区、北区行动通讯网路降速说明](https://www.taiwanmobile.com/csonline/service/ann/ann3_20260722_103509.html){target="_blank"} - 台湾大哥大
-[^5]: [2026城镇韧性(防空)演习行动网路降速演练](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"} - 中华电信
+[^4]: [配合政府115年城镇韧性防空演习，中区、北区行动通讯网络降速说明](https://www.taiwanmobile.com/csonline/service/ann/ann3_20260722_103509.html){target="_blank"} - 台湾大哥大
+[^5]: [2026城镇韧性(防空)演习行动网络降速演练](https://www.cht.com.tw/home/consumer/customer-service/announce/urban-resilience-exercise){target="_blank"} - 中华电信
 [^6]: [#KeepItOn](https://www.accessnow.org/campaign/keepiton/){target="_blank"} - Access Now
-[^7]: [海缆障碍状况](https://moda.gov.tw/major-policies/subseacable/fault/1749){target="_blank"} - 数字发展部
+[^7]: [海缆障碍状况](https://moda.gov.tw/major-policies/subseacable/fault/1749){target="_blank"} - 数位发展部

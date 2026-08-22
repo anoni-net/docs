@@ -49,7 +49,7 @@ description: "近期社区活动更新信息"
     ![SearXNG](../../assets/images/searxng.png){width="50%" title="SearXNG"}
 </figure>
 
-[SearXNG](https://searxng.org/){target="_blank"} 是一个开源的隐私网络搜索引擎，主要用于保护用户的隐私。SearXNG 从多个搜索网站来源汇总搜索结果，但不追踪用户，也不收集个人资料。SearXNG 可以自建服务器，增加隐私保护，并支持自定义设置，让用户选择想要的搜索引擎及过滤规则。
+[SearXNG](https://searxng.org/){target="_blank"} 是一个开源的隐私网络搜索引擎，主要用于保护用户的隐私。SearXNG 从多个搜索网站来源汇总搜索结果，但不追踪用户，也不收集个人数据。SearXNG 可以自建服务器，增加隐私保护，并支持自定义设置，让用户选择想要的搜索引擎及过滤规则。
 
 鉴于目前[公开的](https://searx.space/){target="_blank"}服务器列表中，位于亚洲地区的服务器服务不多，我们在一周前已经把 SearXNG [架设起来](https://search.anoni.net/){target="_blank"}，并[申请](https://github.com/searxng/searx-instances/issues/738){target="_blank"}成为公开服务器服务，基本的技术要求已经通过，进入到两周的观察期。也欢迎协助我们测试，在这两周的观察期间，确认主机能承受日常的使用。
 

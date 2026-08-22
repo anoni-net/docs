@@ -6,14 +6,14 @@ icon: material/compare-horizontal
 
 # :material-compare-horizontal: Tails、Whonix、Qubes 的差别
 
-多数匿名浏览需求，装 [Tor Browser](./what-is-tor.md) 就够用。但有些工作会把整台电脑的安全前提一起拖下水：审阅外来机敏档案、长期维持一个跟你日常身分切开的工作流、要在不信任的硬件上做敏感任务。这时要连操作系统一起切。
+多数匿名浏览需求，装 [Tor Browser](./what-is-tor.md) 就够用。但有些工作会把整台电脑的安全前提一起拖下水：审阅外来机敏文件、长期维持一个跟你日常身分切开的工作流、要在不信任的硬件上做敏感任务。这时要连操作系统一起切。
 
 社群最常被一起提到的三套匿名操作系统是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它们的设计目标不同，适合的情境也不同。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md)，把「我在抗谁、能投入多少」厘清，比直接挑工具更重要。
 
 !!! tip "30 秒结论"
 
     - **短期高敏任务、不信任手边电脑**：Tails。U 盘开机、关机遗忘，1 小时上手。
-    - **长期需要 Tor 工作流、希望保留设定与档案**：Whonix。双虚拟机运作于你日常操作系统里，跨平台。
+    - **长期需要 Tor 工作流、希望保留设定与文件**：Whonix。双虚拟机运作于你日常操作系统里，跨平台。
     - **愿意付学习成本、要做严格 compartmentalization**：Qubes OS。整台电脑切成多个隔离 qube，IT 阵营与高敏感长期任务首选。
 
     展开细节见下方各节。
@@ -51,17 +51,17 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 **适合**：
 
-- 记者采访敏感议题，要保护消息来源、处理外来机敏档案。
+- 记者采访敏感议题，要保护消息来源、处理外来机敏文件。
 - 社运参与者在行动现场使用陌生网络、共用空间电脑。
 - 家暴幸存者准备离开时，需要在加害者看不到的环境中联系支援机构。
-- 跟记者、爆料者初次接触与档案交换（搭配 [OnionShare](./onionshare.md)）。
+- 跟记者、爆料者初次接触与文件交换（搭配 [OnionShare](./onionshare.md)）。
 - 不信任手边电脑的单次任务（合作夥伴的笔电、出差住宿提供的工作站）。
 
 **限制**：
 
 - 不适合当日常操作系统。每次开机重置，要重设 Wi-Fi、重装书签、重做设定。
 - 不支持 Apple Silicon（M1 到 M4），要找 Intel 时代的旧 Mac 或 PC。
-- 默认无持久状态，要做长期工作必须开 Persistent Storage（加密区），密码遗失就资料全失。
+- 默认无持久状态，要做长期工作必须开 Persistent Storage（加密区），密码遗失就数据全失。
 - 对固件层攻击（BIOS、Intel ME）跟硬件键盘侧录器无防御。
 
 ## Whonix
@@ -75,7 +75,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 **适合**：
 
-- 长期需要维持一个跟主机切开的 Tor 工作流（每天开机就有同样的书签、设定、档案）。
+- 长期需要维持一个跟主机切开的 Tor 工作流（每天开机就有同样的书签、设定、文件）。
 - 已经会 VirtualBox 或 KVM 的 IT 从业者、开发者，导入成本低。
 - 跨平台需求：Windows、macOS、Linux 主机都能执行。
 - 不方便找 Intel x86-64 PC、但手边有现成笔电的使用者，Whonix 是切进整机隔离的折衷选项。
@@ -94,7 +94,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 设计重点：
 
 - **Template VM**：一个基底（例如 Debian、Fedora），所有衍生 qube 共享这个 template 的应用程序，但各自有独立的 home。修补一次 template，所有衍生 qube 一起更新。
-- **Disposable VM**（dispVM）：开启可疑档案、浏览不信任网站时，建立一次性 qube，关闭时自动销毁。
+- **Disposable VM**（dispVM）：开启可疑文件、浏览不信任网站时，建立一次性 qube，关闭时自动销毁。
 - **颜色 + 视窗边框**：不同信任等级的 qube 视觉上分明，避免「我以为这是工作 qube 结果是个人 qube」的混淆。
 - **sys-net、sys-firewall、sys-usb**：网络、防火墙、USB 三个系统 qube 各自隔离，恶意 USB 进来只能影响 sys-usb，没办法跨到工作 qube。
 
@@ -109,7 +109,7 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 **限制**：
 
 - 对硬件挑剔。CPU 必须支持 VT-x 与 VT-d，内存建议 16 GB 以上，需要 SSD。买机前一定要查 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"}。
-- 学习曲线陡。第一周会在「我这个档案要在哪个 qube 开」、「USB 要怎么跨 qube 传档」等操作上摸索。
+- 学习曲线陡。第一周会在「我这个文件要在哪个 qube 开」、「USB 要怎么跨 qube 传档」等操作上摸索。
 - 默认无 Tor 整合，要 Tor 必须额外装 Whonix template。
 - 不支持 Apple Silicon。
 
@@ -118,8 +118,8 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 依 [威胁模型](../basics/threat-model.md) 的角色思考：
 
 - **一般使用者**（没有特别敏感工作）：通常不需要这三套任何一套，[Tor Browser](./what-is-tor.md) + [密码管理器](./password-manager.md) 已经涵盖多数场景。
-- **记者**（保护消息来源）：默认 Tails。详细工作流见 [记者保护消息来源](../scenarios/journalist.md)。长期进行很多采访、累积大量档案，可考虑升级到 Whonix（搭配 [上传机敏资讯流程](../community/upload-sensitive.md)）。
-- **社运参与者**：行动现场 Tails（U 盘带着走，被临检时抽出来），长期协作回家用一般笔电 + Signal。详细场景见 [社运行动者的数位准备](../scenarios/activist.md)。
+- **记者**（保护消息来源）：默认 Tails。详细工作流见 [记者保护消息来源](../scenarios/journalist.md)。长期进行很多采访、累积大量文件，可考虑升级到 Whonix（搭配 [上传机敏资讯流程](../community/upload-sensitive.md)）。
+- **社运参与者**：行动现场 Tails（U 盘带着走，被临检时抽出来），长期协作回家用一般笔电 + Signal。详细场景见 [社运行动者的数字准备](../scenarios/activist.md)。
 - **家暴幸存者**（准备离开）：Tails 在加害者看不到的环境（图书馆、咖啡店）使用，避免家庭网络与共用装置上留下任何痕迹。
 - **IT 从业者、安全研究员**：依硬件与时间投入挑 Whonix（低门槛）或 Qubes（高隔离）。需要把 work / personal / banking 严格分开的选 Qubes。
 - **跨平台 macOS 使用者**：Apple Silicon 机型实际可选的只有 Whonix on UTM（仍实验性）。要做严肃的整机隔离工作，多数人会准备一台 Intel PC。
@@ -129,14 +129,14 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
     下面这段反映 anoni.net 在台湾的社群实践与硬件取得脉络，其他简中读者可以对照当地情境参考。
 
     - **取得管道**：Tails、Whonix、Qubes 三套官网在台湾都直连无问题，下载速度可考虑 [Tails 镜像清单](https://tails.net/install/index.en.html){target="_blank"}。Tor Browser 不必桥接就能下载，这层门槛比审查地区低得多。
-    - **硬件取得**：台湾常见的 Intel-based ThinkPad（X、T、P 系列）多数在 Qubes HCL 上有相容纪录。Apple Silicon 在 Tails 与 Qubes 上不可用，买机前一定先查 [HCL 官方页](https://www.qubes-os.org/hcl/){target="_blank"}。Whonix 跨平台灵活，现有笔电多半可执行。
+    - **硬件取得**：台湾常见的 Intel-based ThinkPad（X、T、P 系列）多数在 Qubes HCL 上有兼容纪录。Apple Silicon 在 Tails 与 Qubes 上不可用，买机前一定先查 [HCL 官方页](https://www.qubes-os.org/hcl/){target="_blank"}。Whonix 跨平台灵活，现有笔电多半可执行。
     - **社群实践**：anoni.net 社群长期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)。Whonix、Qubes 在台湾社群既有经验较少，如果你长期使用任一套，欢迎到 [Matrix 公开 room](../community/tools.md) 分享经验。
 
 ## 常见问题
 
 ??? question "我只是想匿名浏览，需要这么复杂吗？"
 
-    多数情境不需要。[Tor Browser](./what-is-tor.md) 在你日常电脑上装起来，就能解决「不洩漏 IP、不洩漏浏览身分」这层需求。会走到整机隔离这套讨论，通常是因为「我电脑上其他应用、其他档案会跟敏感任务交叉」、「我不信任手边这台电脑」、「我长期维持一个跟日常身分切开的工作流」。如果你的需求是单次匿名浏览，不必动到 Tails、Whonix、Qubes 任何一套。
+    多数情境不需要。[Tor Browser](./what-is-tor.md) 在你日常电脑上装起来，就能解决「不洩漏 IP、不洩漏浏览身分」这层需求。会走到整机隔离这套讨论，通常是因为「我电脑上其他应用、其他文件会跟敏感任务交叉」、「我不信任手边这台电脑」、「我长期维持一个跟日常身分切开的工作流」。如果你的需求是单次匿名浏览，不必动到 Tails、Whonix、Qubes 任何一套。
 
 ??? question "Tails 上能不能也执行 Whonix？"
 
@@ -156,13 +156,13 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 
 ??? question "我已经会 Linux，能跳过 Tails 直接学 Qubes 吗？"
 
-    可以，但要评估三件事：硬件成本（Qubes-相容机可能要新买）、学习投入（一周内无法上手）、实际使用频率（装起来放着不用会浪费）。如果你的需求是「短期高敏任务」，跳过 Tails 直接 Qubes 过头。如果你的需求是「长期严格 compartmentalization」，跳 Tails 直接 Qubes 是合理的。中间地带可以从 Whonix 过渡。
+    可以，但要评估三件事：硬件成本（Qubes-兼容机可能要新买）、学习投入（一周内无法上手）、实际使用频率（装起来放着不用会浪费）。如果你的需求是「短期高敏任务」，跳过 Tails 直接 Qubes 过头。如果你的需求是「长期严格 compartmentalization」，跳 Tails 直接 Qubes 是合理的。中间地带可以从 Whonix 过渡。
 
 ## 接下来
 
 Tails 的完整介绍与安装步骤在 [什么是 Tails](./what-is-tails.md)。Whonix 从 [官方下载页](https://www.whonix.org/wiki/Download){target="_blank"} 起步，VirtualBox 路径最简单。Qubes 的硬件门槛高，建议先到 [Hardware Compatibility List](https://www.qubes-os.org/hcl/){target="_blank"} 确认手边机器能不能执行，再去抓 [安装镜像](https://www.qubes-os.org/downloads/){target="_blank"}。
 
-整机隔离只是匿名实践的一块。连线层的 [Tor](./what-is-tor.md)、浏览器层的 [Tor Browser 进阶设定](./tor-browser-advanced.md)、档案传输的 [OnionShare](./onionshare.md) 都是配套，要看自己的威胁模型整体配。账号层的分舱（哪些账号属于哪一层、彼此不共用什么）见 [怎么维持多个网络身分](../basics/multiple-identities.md)，Qubes 的 compartmentalization 是把同一个想法做到操作系统等级。
+整机隔离只是匿名实践的一块。连线层的 [Tor](./what-is-tor.md)、浏览器层的 [Tor Browser 进阶设定](./tor-browser-advanced.md)、文件传输的 [OnionShare](./onionshare.md) 都是配套，要看自己的威胁模型整体配。账号层的分舱（哪些账号属于哪一层、彼此不共用什么）见 [怎么维持多个网络身分](../basics/multiple-identities.md)，Qubes 的 compartmentalization 是把同一个想法做到操作系统等级。
 
 ## :material-chat-question: 一同了解
 
@@ -180,6 +180,6 @@ Tails 的完整介绍与安装步骤在 [什么是 Tails](./what-is-tails.md)。
 
 - [:material-newspaper-variant-outline: 记者保护消息来源](../scenarios/journalist.md)
 - [:material-upload-outline: 上传机敏资讯流程](../community/upload-sensitive.md)
-- [:material-account-group-outline: 社运行动者的数位准备](../scenarios/activist.md)
+- [:material-account-group-outline: 社运行动者的数字准备](../scenarios/activist.md)
 
 </div>

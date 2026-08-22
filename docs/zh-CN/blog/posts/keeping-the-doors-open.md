@@ -30,7 +30,7 @@ description: "Unredacted 用 300+ 台服务器执行 FreeSocks、Tor bridges、S
 
 > 「你们帮了很多很多人翻过防火长城。如果没有你们的帮助，我会被困在完全的黑暗里，被洗脑。」
 
-我们很少听到使用我们服务的人发声。他们大多没有办法、或不觉得自己能安全地传讯息出来。每当有一条讯息穿越过来，就提醒我们这件事真正关系到什么。
+我们很少听到使用我们服务的人发声。他们大多没有办法、或不觉得自己能安全地传消息出来。每当有一条消息穿越过来，就提醒我们这件事真正关系到什么。
 
 <!-- more -->
 
@@ -44,7 +44,7 @@ description: "Unredacted 用 300+ 台服务器执行 FreeSocks、Tor bridges、S
 
 名字就是字面的意思。当通往开放网络的入口被墙封起来，人们就需要另一条进入的路径。
 
-Unredacted Door 把好几项绕行审查的服务收在一起：FreeSocks、Signal 与 Telegram 的讯息代理、Tor bridges、Snowflake 代理。在最近的 30 天里，这些服务替数万名在自己国家绕行审查的用户承载了将近 300 TiB 的流量，大约相当于播好几万小时 4K 视频所需的带宽。需求没有减缓，我们得持续架更多。每一条新过滤规则、每一条新法律、每一波打着「为了你的安全」名号的措施，都会把更多人推向尚未被审查者发现的路。
+Unredacted Door 把好几项绕行审查的服务收在一起：FreeSocks、Signal 与 Telegram 的消息代理、Tor bridges、Snowflake 代理。在最近的 30 天里，这些服务替数万名在自己国家绕行审查的用户承载了将近 300 TiB 的流量，大约相当于播好几万小时 4K 视频所需的带宽。需求没有减缓，我们得持续架更多。每一条新过滤规则、每一条新法律、每一波打着「为了你的安全」名号的措施，都会把更多人推向尚未被审查者发现的路。
 
 Unredacted Door 里最大的一块是 FreeSocks，给审查严重地区的用户用的免费代理。如果你没接触过，代理就是一个转接点：你的应用程序连的是这台转接的服务器，由它把连接带过你跟外面网络之间那层过滤，再接到你真正想连的被封锁服务。
 
@@ -82,7 +82,7 @@ Tor 网络靠愿意替它运维基础设施的人与组织撑起。Exit 是这�
 
 Unredacted 文章里那位中国用户的话格外少见，因为身处审查环境的人多半没有管道、也难以安全地对外发声。anoni.net 是一个台湾的匿名网络社群，写这篇补充的视角来自这里。台湾的网络环境相对自由，没有 GFW、没有强制 VPN 注册、ISP 也没有国家审查命令。也因为如此，台湾这类对外连接自由的地区，有条件替被封锁地区架设 Tor 中继与桥接，分担一部分抗审查基础建设的工作。在中国大陆、伊朗这类重度审查地区的人，正是这些基础设施服务的对象。在新加坡、马来西亚、海外华人所在地这些对外连接同样自由的地方，也都适合成为架设来源地。
 
-匿名网络社群 anoni.net 一直通过 [Pulse 即时观测](https://api.anoni.net/api/readme){target="_blank"} 追踪台湾 Tor 中继节点的数量与分布。截至 2026-05-31，台湾境内 Onionoo（Tor 官方的中继资料查询服务）看得到的、运作中的中继节点是 12 个，其中具有 Exit 旗标的只有 3 个（initramfs、GuruKopi、jerryrelay）。对照 Unredacted 一个组织就执行 123 个 exit relay、30 天承载近 300 TiB 流量，台湾的全国 exit 规模还不到他们的 3%。我们在 [Tor Relays 观测点](../../taiwan/tor-relay-watcher.md) 持续更新这个数字，并在 [ASN 观测资料分析](../../taiwan/ooni-asn-coverage.md) 补上 OONI 对台湾与邻近地区的审查观测。
+匿名网络社群 anoni.net 一直通过 [Pulse 即时观测](https://api.anoni.net/api/readme){target="_blank"} 追踪台湾 Tor 中继节点的数量与分布。截至 2026-05-31，台湾境内 Onionoo（Tor 官方的中继数据查询服务）看得到的、运作中的中继节点是 12 个，其中具有 Exit 旗标的只有 3 个（initramfs、GuruKopi、jerryrelay）。对照 Unredacted 一个组织就执行 123 个 exit relay、30 天承载近 300 TiB 流量，台湾的全国 exit 规模还不到他们的 3%。我们在 [Tor Relays 观测点](../../taiwan/tor-relay-watcher.md) 持续更新这个数字，并在 [ASN 观测数据分析](../../taiwan/ooni-asn-coverage.md) 补上 OONI 对台湾与邻近地区的审查观测。
 
 香港、澳门以及使用中文的东南亚华语用户，在 2020 年后实际的翻墙需求增加，而简体与正体中文的抗审查资源相对稀缺。anoni.net 的工作之一是把这套中文资源补起来，包括 [什么是 Tor](../../tools/what-is-tor.md)、[Tor Snowflake 桥接点](../../tools/tor-snowflake.md)、[什么是 OONI](../../tools/what-is-ooni.md) 等基础文件，跟 Unredacted 的 Unredacted Education 走在同一条路上。
 
@@ -92,7 +92,7 @@ Unredacted 把 123 个 exit relays 运作于 400W 上，这个数字换算成运
 
 关键在硬件规模化的设计。Raspberry Pi 5 对各地 maker 社群都不陌生，PoE+ HAT 与 PoE 交换机在常见零售管道都能买到（台湾如 Cytron、群创、PChome，其他地区可循当地电子零售管道）。ComputeBlade（20 模组 1U 机箱）目前零售管道较少，可以通过官方海外订购或社群代购取得。机构机房比家用网络更适合做这件事，原因有三：固定 IP、机构网络带宽、有人巡检机器。
 
-Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md) 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实作经验](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
+Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md) 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
 
 对想参与的个人或小团体，从 Snowflake proxy 开始（浏览器扩展或 Docker）几乎没有电费负担，是进入抗审查基础建设最低门槛的入口（见 [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)）。
 
@@ -113,7 +113,7 @@ Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把
 - [什么是 OONI](../../tools/what-is-ooni.md)
 - [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md)
 - [Tor Relays 观测点](../../taiwan/tor-relay-watcher.md)
-- [ASN 观测资料分析](../../taiwan/ooni-asn-coverage.md)
+- [ASN 观测数据分析](../../taiwan/ooni-asn-coverage.md)
 - 同系列：[Defending the public's right to know（OONI）](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}、[Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}
 
-[^1]: 台电 2026 年平均电价为每度 NT$ 3.7823（经济部 2026-03-27 电价审议会决议，4–9 月维持平均电价），实际每度单价依用电种类与时间电价（尖峰、离峰）而有差异。资料来源：[台湾电力公司电价表](https://www.taipower.com.tw/2289/2290/46940/){target="_blank"}。
+[^1]: 台电 2026 年平均电价为每度 NT$ 3.7823（经济部 2026-03-27 电价审议会决议，4–9 月维持平均电价），实际每度单价依用电种类与时间电价（尖峰、离峰）而有差异。数据来源：[台湾电力公司电价表](https://www.taipower.com.tw/2289/2290/46940/){target="_blank"}。

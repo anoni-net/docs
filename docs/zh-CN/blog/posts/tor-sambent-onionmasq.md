@@ -24,7 +24,7 @@ _OnionMasq 透过将应用程序置于内核隔离的沙箱中，只存在经由
 
 ![Tor OnionMasq: Hiding in Plain Sight / Tor OnionMasq：隐身于无形之中](https://www.sambent.com/content/images/size/w2000/2025/09/onion-masq-1.jpg){style="border-radius: 10px;"}
 
-[OnionMasq](https://gitlab.torproject.org/tpo/core/onionmasq){target="_blank"} 是 Tor 项目试图解决一个基本问题：让您的应用程序的每个数据封包都无例外地通过 Tor。它是一个实验性隧道接口，针对 [Arti](https://blog.torproject.org/arti_1_4_0_released/){target="_blank"}（以 Rust 实作的 Tor），透过内核级别的网络隔离来创造类似 VPN 的行为。
+[OnionMasq](https://gitlab.torproject.org/tpo/core/onionmasq){target="_blank"} 是 Tor 项目试图解决一个基本问题：让您的应用程序的每个数据封包都无例外地通过 Tor。它是一个实验性隧道接口，针对 [Arti](https://blog.torproject.org/arti_1_4_0_released/){target="_blank"}（以 Rust 实现的 Tor），透过内核级别的网络隔离来创造类似 VPN 的行为。
 
 这项技术透过建立一个只存在于沙箱内的虚拟网络卡来实现。您的应用程序会将这个假网络接口视为正常使用，而 OnionMasq 拦截所有内容并将其经由 Tor 的加密路由。
 
@@ -44,7 +44,7 @@ OnionMasq 将透过移至 Linux 内核本身来消除这些失败模式。
 
 Linux **命名空间** 是限制进程可见与可访问对象的隔离容器。网络环境的命名空间在 2000 年左右引入，创建了独立的网络环境，让进程只能使用特定的接口。
 
-实作 OnionMasq 的命令列工具 [Oniux](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/){target="_blank"} 遵循以下步骤：
+实现 OnionMasq 的命令列工具 [Oniux](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/){target="_blank"} 遵循以下步骤：
 
 * **建立隔离环境**：Oniux 使用 `clone(2)` 系统调用将您的应用程序放在网络、挂载、PID 和用户命名空间中，应用程序在一个封闭的容器中运行。
 * **移除对真实网络的访问**：在命名空间内，您的应用程序看不到 `eth0`、`wlan0` 或任何实体网络接口，正常的互联网并不存在。
@@ -86,7 +86,7 @@ oniux bash
 
 在 Tor 环境中，DNS 解析需要特别处理。Oniux 在命名空间内建立了一个自定义的 `/etc/resolv.conf`，指向与 Tor 兼容的名称解析，防止 DNS 查询通过您的正常解析器泄漏。
 
-技术实作使用 `rtnetlink(7)` 操作来配置虚拟接口，分配 IP 地址和设定路由表。OnionMasq 随后使用 Unix 域通讯端（Unix domain socket）在程序之间传递 TUN 接口文件描述符。
+技术实现使用 `rtnetlink(7)` 操作来配置虚拟接口，分配 IP 地址和设定路由表。OnionMasq 随后使用 Unix 域通讯端（Unix domain socket）在程序之间传递 TUN 接口文件描述符。
 
 在底层，OnionMasq 通过建立的接口与 Arti 进行通讯。Arti 构建 Tor 连线、加密流量并处理匿名路由。OnionMasq 只是提供隧道管道，让这些流程建立对应用程序来说是无须关注的。
 
@@ -94,7 +94,7 @@ oniux bash
 
 OnionMasq 的**实验性**状态是有原因的。Tor 项目明确表示，这不是一个已准备好可正式使用的软件。[当前限制](./oniux-kernel-level-tor.md){target="_blank"}包括：
 
-* **平台支援有限**：仅适用于 Linux，没有计划支持 Windows 或 macOS。
+* **平台支持有限**：仅适用于 Linux，没有计划支持 Windows 或 macOS。
 * **新代码库风险**：虽然 torsocks 已经过 15 年的实战考验，但 OnionMasq 构建在最近的 Rust 元件上，尚未经过真实世界同等级的压力测试。
 * **潜在的效能开销**：为每一个应用程序建立隔离命名空间可能消耗比基于代理的方法更多的系统资源。
 * **功能集不完整**：与已建立的工具相比，进阶 Tor 功能和极端案例可能无法正常运作。

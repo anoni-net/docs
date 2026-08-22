@@ -7,8 +7,8 @@ categories:
     - 社区
 slug: rightscon25-tor-tails-ooni
 image: "assets/images/tor-pre-event.webp"
-summary: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活动，专注于线上隐私、规避审查及审查监测。本次免费的前期活动由开放文化基金会、OONI 和 The Tor Project 合办，包含实作工作坊及 The Tor Project 共同创办人 Roger Dingledine 的公开主题演讲。"
-description: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活动，专注于线上隐私、规避审查及审查监测。本次免费的前期活动由开放文化基金会、OONI 和 The Tor Project 合办，包含实作工作坊及 The Tor Project 共同创办人 Roger Dingledine 的公开主题演讲。"
+summary: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活动，专注于线上隐私、规避审查及审查监测。本次免费的前期活动由开放文化基金会、OONI 和 The Tor Project 合办，包含实现工作坊及 The Tor Project 共同创办人 Roger Dingledine 的公开主题演讲。"
+description: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活动，专注于线上隐私、规避审查及审查监测。本次免费的前期活动由开放文化基金会、OONI 和 The Tor Project 合办，包含实现工作坊及 The Tor Project 共同创办人 Roger Dingledine 的公开主题演讲。"
 ---
 
 # 网络自由工作坊：Tor、Tails、OONI
@@ -26,7 +26,7 @@ description: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活�
 活动日期：2025/02/23
 
 1. 工作坊 14:00 – 17:30 如何使用 Tor 避开审查并匿名浏览
-2. 工作坊 18:00 – 19:00 如何使用 OONI 侦测与观察网络审查状况
+2. 工作坊 18:00 – 19:00 如何使用 OONI 检测与观察网络审查状况
 3. 演讲座 19:30 – 21:00 Tor 在网络监控的世界中捍卫个人线上隐私权
 
 [:material-arrow-right-circle-outline: 前往报名页面](https://kktix.com/events/internetfreedom-tor-tails-ooni-2025/registrations/new){ .md-button target="_blank" }
@@ -70,7 +70,7 @@ description: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活�
 !!! warning "推荐、保留名额"
     这场工作坊有保留名额给从事**新闻记者**与**公民团体**的伙伴，请注意！在 KKTIX 平台完成注册此议程后，请稍候，我们会手动审核申请。对参加者进行基本的资格确认，以确保参与者都有一个舒适的体验。我们将优先考虑人权捍卫者（HRDs）、新闻记者相关领域的参与者，请在报名时使用所服务单位的邮件信箱注明或其他可证明的方式，非常感谢！
 
-### 工作坊 #2：如何使用 OONI 侦测与观察网络审查状况
+### 工作坊 #2：如何使用 OONI 检测与观察网络审查状况
 
 - 日期：2025/02/23 18:00 - 19:00、语言：英文
 - 地点：台北科技大学
@@ -79,7 +79,7 @@ description: "邀请您于 2025 年 2 月 23 日在台北参加一场全天活�
   - Maria Xynou, Director of Strategic Engagement @ OONI
   - Elizaveta Yachmeneva, Research & Community Coordinator @ OONI
 
-在这场工作坊中，参加者将亲身体验使用 OONI（网络干扰开放观测站）侦测、监控及观察网络审查。
+在这场工作坊中，参加者将亲身体验使用 OONI（网络干扰开放观测站）检测、监控及观察网络审查。
 
 您将学到的内容：
 

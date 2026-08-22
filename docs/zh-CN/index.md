@@ -61,7 +61,7 @@ hide:
 
     ---
 
-    探索现金以外情境下的匿名支付（稳定币、区块链应用），含法规（VASP 法 2026）、技术与实作面向。
+    探索现金以外情境下的匿名支付（稳定币、区块链应用），含法规（VASP 法 2026）、技术与实现面向。
 
     [:octicons-arrow-right-24: 研究专题](./community/payments-research.md)
 
@@ -119,7 +119,7 @@ hide:
 
     ---
 
-    在信息安全与法律支援有限时，更仰赖匿名网络与以隐私为重的使用环境完成调查与联系。
+    在信息安全与法律支持有限时，更仰赖匿名网络与以隐私为重的使用环境完成调查与联系。
 
 - :material-account-group-outline:{ .lg .middle style="color: var(--neutral-muted);" } **公民团体**
 

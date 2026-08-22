@@ -1,6 +1,6 @@
 ---
 title: 选举观察员的自保
-description: 投开票所现场与跨境选举观察任务的数位准备：记录工具、回报通道、设备出入境、被盘查时的应对，以及任务结束后的资料销毁政策。对应 OSCE/ODIHR、Carter Center 国际标准的在地版本。
+description: 投开票所现场与跨境选举观察任务的数字准备：记录工具、回报通道、设备出入境、被盘查时的应对，以及任务结束后的数据销毁政策。对应 OSCE/ODIHR、Carter Center 国际标准的在地版本。
 icon: material/vote-outline
 ---
 
@@ -9,7 +9,7 @@ icon: material/vote-outline
 !!! info "本页完整版撰写中（2026 Q3）：现在就能用的内容在这里"
     完整文章还在准备中，下方「将涵盖的章节」目前是大纲。需要现在就能用的内容，请看本页下方「暂时可以参考的内容」与「相关阅读」。欢迎到 [Matrix 社群](../community/tools.md) 表达想看的角度，或参与撰写，见 [如何参与](../community/how-to-contribute.md)。社群追踪 [issue #35](https://github.com/anoni-net/docs/issues/35)。
 
-选举观察员经常要在敏感时间、敏感地点记录与回报资讯，数位安全与人身安全同样重要。这篇文章面向两种角色，准备强度差很多。本地担任投开票所观察员的志工，是戴证件、合法公开的身分，多数时间不需要强匿名，重点在「拍到投票人的脸会不会违法」、「能不能用手机回报票数」这类现场分寸，下方大纲里的 burner 手机、卫星通讯、海关搜查这些多半用不到。外派到他国执行国际观察任务的成员，才需要评估护照风险、跨境通讯监控与设备出入境。内容包含现场记录的工具选择、回报通道的安全设计、设备出入境的注意事项、被盘查时的应对，以及任务结束后资料保存与销毁的政策。引用 OSCE/ODIHR、Carter Center 等国际选举观察组织的标准作法，并对照 [威胁模型](../basics/threat-model.md) 给出在地版本的建议。
+选举观察员经常要在敏感时间、敏感地点记录与回报资讯，数字安全与人身安全同样重要。这篇文章面向两种角色，准备强度差很多。本地担任投开票所观察员的志工，是戴证件、合法公开的身分，多数时间不需要强匿名，重点在「拍到投票人的脸会不会违法」、「能不能用手机回报票数」这类现场分寸，下方大纲里的 burner 手机、卫星通讯、海关搜查这些多半用不到。外派到他国执行国际观察任务的成员，才需要评估护照风险、跨境通讯监控与设备出入境。内容包含现场记录的工具选择、回报通道的安全设计、设备出入境的注意事项、被盘查时的应对，以及任务结束后数据保存与销毁的政策。引用 OSCE/ODIHR、Carter Center 等国际选举观察组织的标准作法，并对照 [威胁模型](../basics/threat-model.md) 给出在地版本的建议。
 
 !!! warning "香港读者：本页框架不适用香港现行选制"
 
@@ -34,7 +34,7 @@ icon: material/vote-outline
 
 - 现场拍照、录影、表单记录的工具选择：时间戳、地理位置、可验证的离线备份
 - Metadata 的取舍：要保留时间地点当作证据，还是去识别化保护现场人员
-- 观察票数作业的记录格式与后续资料整合：Cryptpad、自架表单、纸本对照
+- 观察票数作业的记录格式与后续数据整合：Cryptpad、自架表单、纸本对照
 - 站点对外即时回报跟总部的同步通道，断网时的备援
 
 ### 被盘查与被扣留时的应对
@@ -44,10 +44,10 @@ icon: material/vote-outline
 - 跟所属机构（观察团、媒体、NGO）的紧急联系流程
 - 国际观察任务时当地大使馆、国际同事、安全联络人的串连顺序
 
-### 任务结束的资料处理
+### 任务结束的数据处理
 
 - 观察报告完成后的原始素材保存政策：保留多久、由谁保管、加密金钥如何分管
-- 受访者资料的去识别化处理流程
+- 受访者数据的去识别化处理流程
 - 设备归还或重置：磁碟覆写、云端账号清理、个人资讯回收
 
 ## 在地脉络
@@ -88,20 +88,20 @@ icon: material/vote-outline
 
 完整文章还没上线之前，下面几篇可以拼出大致轮廓：
 
-- [社运行动者的数位准备](./activist.md) 中「行动现场」、「被盘查时的应对」两节，跟选举观察员的现场处境共用许多技巧。
-- [记者保护消息来源](./journalist.md) 中「敏感档案交换」、「访谈记录保存」两节，可对应到观察员的受访者资料保护。
-- [Tails](../tools/what-is-tails.md) 在不信任当地网路或共用装置时的角色。完整选择逻辑见 [匿名作业系统比较](../tools/tails-vs-whonix-vs-qubes.md)。
+- [社运行动者的数字准备](./activist.md) 中「行动现场」、「被盘查时的应对」两节，跟选举观察员的现场处境共用许多技巧。
+- [记者保护消息来源](./journalist.md) 中「敏感文件交换」、「访谈记录保存」两节，可对应到观察员的受访者数据保护。
+- [Tails](../tools/what-is-tails.md) 在不信任当地网络或共用装置时的角色。完整选择逻辑见 [匿名作业系统比较](../tools/tails-vs-whonix-vs-qubes.md)。
 - [Metadata 是什么](../basics/metadata.md) 解释现场照片、影片、表单留下的位置与时间资讯风险。
 
 英文资源可参考：
 
 - [OSCE/ODIHR Election Observation Handbooks](https://www.osce.org/odihr/elections/handbooks){target="_blank"}：欧安组织的选举观察员标准作业手册。
 - [Carter Center Election Standards](https://www.cartercenter.org/peace/democracy/observed.html){target="_blank"}：卡特中心的国际观察标准与工具集。
-- [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境观察任务遇到紧急数位安全问题时的多语求助管道。
+- [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境观察任务遇到紧急数字安全问题时的多语求助管道。
 
 ## 相关阅读
 
 - [一般人平常该做到什么](./everyday-baseline.md)：不分身分的共同基线，这一页假设你已经做到
-- [社运行动者的数位准备](./activist.md)：行动现场与被临检时的装置与通讯应对
-- [记者保护消息来源](./journalist.md)：敏感档案交换与访谈记录保存
+- [社运行动者的数字准备](./activist.md)：行动现场与被临检时的装置与通讯应对
+- [记者保护消息来源](./journalist.md)：敏感文件交换与访谈记录保存
 - [威胁模型如何建立](../basics/threat-model.md)：跨境任务的威胁模型如何建立

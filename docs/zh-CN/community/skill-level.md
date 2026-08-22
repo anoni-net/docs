@@ -84,7 +84,7 @@ icon: octicons/paste-24
             **值得关注的事件**
 
             1. **2021 年缅甸军事政变**：对该国网络自由的冲击。
-            2. **新加坡防止网络谣言法案（POFMA）**：假讯息法案的实施效果。
+            2. **新加坡防止网络谣言法案（POFMA）**：假消息法案的实施效果。
             3. **泰国街头示威与王室批评**：政府对网络言论的压制。
             4. **越南的内容封锁措施**：具体的网络使用控制案例。
 
@@ -354,7 +354,7 @@ icon: octicons/paste-24
 
         ??? question "更新 Tails 到最新版本。"
 
-            - Tails 内建自动侦测更新的功能。启动 Tails 后，如果有新版本可用，系统会在桌面通知你。
+            - Tails 内建自动检测更新的功能。启动 Tails 后，如果有新版本可用，系统会在桌面通知你。
             - 依照提示执行更新，更新过程需要另一个 USB 随身碟来完成（从旧版克隆到新版）。
             - 详细步骤可参考 [Tails 官方更新说明](https://tails.net/doc/upgrade/index.en.html){target="_blank"}。
 
@@ -557,7 +557,7 @@ icon: octicons/paste-24
 
             1. 数据存放于 S3 bucket `ooni-data-eu-fra`（eu-central-1 区域）。
             2. 格式为 `raw/{date}/{hour}/{country}/webconnectivity/*.jsonl.gz`。
-            3. 本项目的 [ASN 涵盖分析工具](../taiwan/ooni-asn-coverage.md){target="_blank"} 提供了下载与分析的范例，可参考 `asn_coverage/ooni.py` 的实作方式。
+            3. 本项目的 [ASN 涵盖分析工具](../taiwan/ooni-asn-coverage.md){target="_blank"} 提供了下载与分析的范例，可参考 `asn_coverage/ooni.py` 的实现方式。
             4. 原始数据可用于分析特定 ASN 的观测涵盖率、追踪特定网站在不同时间点的封锁状态，以及进行跨地区比较。
 
 ## 评估完之后
@@ -565,5 +565,5 @@ icon: octicons/paste-24
 这份量表是自我参照用的，勾选结果不用回报给谁，直接照结果挑下一步就好：
 
 - **认识层**：先订阅 [电子报](../contact.md) 跟读社群动态，或到 [指南](../guides/index.md) 把概念补齐。
-- **实作层**：照各工具分级下的「从这里开始」实际操作安装、日常操作，遇到问题到 Matrix 发问。
+- **实现层**：照各工具分级下的「从这里开始」实际操作安装、日常操作，遇到问题到 Matrix 发问。
 - **贡献层**：到 [如何参与与认领主题](./how-to-contribute.md) 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社群会协助你接上手。账号申请与服务入口见 [社群自架服务](./tools.md)。

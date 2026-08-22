@@ -62,7 +62,7 @@ Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世�
 
 观测与区域协作的部分：
 
-- 审查事件的快速应对（Strengthening Rapid Response Efforts to Censorship Events）讨论各地在审查事件发生时如何协作应对，并介绍 OONI 用于快速应对的工具与方法。我们长期使用 OONI 公开数据，8 月那份降速观测即为同一套方法的实作。
+- 审查事件的快速应对（Strengthening Rapid Response Efforts to Censorship Events）讨论各地在审查事件发生时如何协作应对，并介绍 OONI 用于快速应对的工具与方法。我们长期使用 OONI 公开数据，8 月那份降速观测即为同一套方法的实现。
 - 亚洲聚会（Asia Meetup，9 月 4 日 `12:00` 到 `13:00`）是亚洲区域工作者的连接场合，签到板上希望收集的名字，有一部分会在此处出现。
 - 断网应对计划服务台（Internet Shutdown Contingency Planning Help Desk）以 BRACE 框架协助组织依自身的威胁模型拟定断网时的应对计划。台湾每年有演习情境可以对照，框架能接上哪些部分是我们要理清的。
 - 数字证据的保存（We See, We Archive, We Remember）以香港、中国、伊朗、巴勒斯坦的档案工作为基础，讨论公共利益信息在遭到抹除时如何保存。

@@ -54,7 +54,7 @@ Onionoo 的中继快照经过蒸馏，只保留国家层级的聚合，内容不
     | 数据 | 来源 | 许可 |
     |------|------|------|
     | 上网人口比例 | [World Bank](https://data.worldbank.org/indicator/IT.NET.USER.ZS) | CC BY 4.0 |
-    | 台湾的上网人口比例 | [数位发展部 国家数位近用调查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | 政府资料开放授权条款-第1版 |
+    | 台湾的上网人口比例 | [数位发展部 国家数位近用调查](https://moda.gov.tw/digital-affairs/digital-service/operations/208) | 政府数据开放授权条款-第1版 |
     | 海底地形 | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 
     上网人口比例是拿来当分母的。画面原本只呈现一个数字，这一国有几人用 Tor，而那个数字很大一部分是在比人口大小。知道该国有多少比例的人上网，才判断得出两国的落差是不是单纯因为一边上网的人本来就少。
@@ -83,7 +83,7 @@ Access Now 的断网事件则相反，每一笔都经过人工查证，成因清
 
 台湾的[海缆动态地图](https://smc.peering.tw/)的做法值得记下来，也是许可不明朗时最务实的选择：源代码采 MIT 开源，但几何数据放在另一个 repo，对外是 404。主 repo 的 README 直接写「You can leave the folder empty」。
 
-那颗地球仪上的海缆最后取自 OpenStreetMap 贡献者标注的路径，`228` 段。覆盖以欧洲、地中海与大西洋较完整，太平洋中段几乎是空的。翻出 OSM 社群 [2011 年的讨论串](https://lists.openstreetmap.org/pipermail/talk/2011-October/060415.html)，当年有人提议把 TeleGeography 的数据并进 OSM，社群成员的判断是那份许可禁止商业使用与改作，跟 ODbL 不相容，那则提议没有下文。十五年过去，太平洋还是空的。
+那颗地球仪上的海缆最后取自 OpenStreetMap 贡献者标注的路径，`228` 段。覆盖以欧洲、地中海与大西洋较完整，太平洋中段几乎是空的。翻出 OSM 社群 [2011 年的讨论串](https://lists.openstreetmap.org/pipermail/talk/2011-October/060415.html)，当年有人提议把 TeleGeography 的数据并进 OSM，社群成员的判断是那份许可禁止商业使用与改作，跟 ODbL 不兼容，那则提议没有下文。十五年过去，太平洋还是空的。
 
 ### 网络基础建设
 
@@ -91,7 +91,7 @@ Access Now 的断网事件则相反，每一笔都经过人工查证，成因清
 
 [RIPE Atlas](https://atlas.ripe.net/) 部署在各地的探针（probe）数据很漂亮，`2026` 年 7 月查询时全球有近六万个探针，含经纬度与 ASN，API 直接回得出来。但服务条款写明商业使用需另外取得 RIPE NCC 许可，没有开放许可声明。PeeringDB 的 API 一样打得通，但可接受使用政策写明不可整批转散布给第三方。Packet Clearing House 的 IXP 目录是 CC BY-NC-SA 3.0，Cloudflare Radar 是 CC BY-NC 4.0，两者的非商业条款都会传染到我们的内容上。
 
-[IODA](https://ioda.inetintel.cc.gatech.edu/) 是这里面最可惜的一份。它以 BGP 路由撤除、主动探测与 darknet 流量异常侦测各国的网络中断，是真测量，主题跟这个站高度吻合。API 回得出数据，但回应本身就带着一行 `Copyright (c) 2021-2025 Georgia Tech Research Corporation. All Rights Reserved.`。
+[IODA](https://ioda.inetintel.cc.gatech.edu/) 是这里面最可惜的一份。它以 BGP 路由撤除、主动探测与 darknet 流量异常检测各国的网络中断，是真测量，主题跟这个站高度吻合。API 回得出数据，但回应本身就带着一行 `Copyright (c) 2021-2025 Georgia Tech Research Corporation. All Rights Reserved.`。
 
 还有一类更麻烦：条款完全不存在。各 RIR 的 delegated stats 文件下载得到，开头只有免责声明，没有一个字提到许可。root-servers.org 的节点清单有 JSON 端点，整站找不到许可声明。沉默无法解读成允许，比明文禁止更难处理，因为连判断的依据都没有。这一节的每一份都是同样的组合，端点开放、数据拿得到、许可不给再散布。
 
@@ -113,7 +113,7 @@ Freedom House 的 Freedom on the Net 与无国界记者的新闻自由指数，�
 
 反过来看，地球仪能做出来，很大程度是因为 Tor Project 把 Onionoo 与 Tor Metrics 都放成 CC0，Natural Earth 放成公有领域。当年那可能只是一行设定，却让十几年后一个不相干的社群能够直接拿去用，不必写信谈许可，也不必担心哪天被要求下架。
 
-有一个技术细节值得另外记下来。OONI 那份是 CC BY-NC-SA 4.0，其中的相同方式分享（ShareAlike）跟网站的 CC BY 4.0 互不相容。处理方式是让 `ooni.json` 保持独立的一份，不把它的内容并进其他数据文件，画面上也只跟其他来源并列，让整体属于 CC 定义的「集合」，相同方式分享的范围停在那一份文件身上。前提已经写进 `NOTICE`，否则哪天有人把 OONI 的字段并进中继快照，整份衍生物就落入相同方式分享了。
+有一个技术细节值得另外记下来。OONI 那份是 CC BY-NC-SA 4.0，其中的相同方式分享（ShareAlike）跟网站的 CC BY 4.0 互不兼容。处理方式是让 `ooni.json` 保持独立的一份，不把它的内容并进其他数据文件，画面上也只跟其他来源并列，让整体属于 CC 定义的「集合」，相同方式分享的范围停在那一份文件身上。前提已经写进 `NOTICE`，否则哪天有人把 OONI 的字段并进中继快照，整份衍生物就落入相同方式分享了。
 
 ## 其他两件作品
 

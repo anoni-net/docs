@@ -23,7 +23,7 @@ icon: material/share-circle
 - **网址要透过安全管道交给对方**。OnionShare 不负责配送网址。如果你用 LINE 把网址传给对方，那一段就不再匿名。常见做法是 Signal、Cryptpad 或当面口头交换。
 - **对方需要 Tor Browser**。如果对方完全不会用 Tor，OnionShare 不适合。改用 [send.anoni.net](https://send.anoni.net/){target="_blank"} 或 PGP 加密邮件。
 - **长期 Receive 收件箱建议用独立硬件**。挂在主力电脑 24/7 容易被当作攻击面，建议用 Tails USB 或专用 Linux box。
-- **流量会用到你的网络带宽**。对方下载大档时，你的网络上传会被占用，速度也受限于 Tor 网络（速度受 Tor 网路当下壅塞情况影响，可能偏慢）。
+- **流量会用到你的网络带宽**。对方下载大档时，你的网络上传会被占用，速度也受限于 Tor 网络（速度受 Tor 网络当下壅塞情况影响，可能偏慢）。
 
 ## 四种使用模式
 
@@ -75,7 +75,7 @@ icon: material/share-circle
 
 把一份 HTML、CSS、JS 丢进去，OnionShare 会起一个 onion 静态站。
 
-- **适用**：临时公布敏感内容、活动期间限定资料、无法上 clearnet 的研究草稿、给特定对象看的 preview 页。
+- **适用**：临时公布敏感内容、活动期间限定数据、无法上 clearnet 的研究草稿、给特定对象看的 preview 页。
 - **限制**：纯静态，没有后端、没有数据库。流量上限受限于你的网络带宽。
 
 ### Chat（一次性聊天室）
@@ -119,7 +119,7 @@ icon: material/share-circle
 
 ??? question "Receive 模式可以收多大的文件？"
 
-    技术上没有文件大小限制，实务上受限于三个因素，你的网络上传带宽、Tor 网络速度（速度受 Tor 网路当下壅塞情况影响，可能偏慢）、你愿意把 OnionShare 开多久。超过 1 GB 的文件建议拆段或改用其他管道。
+    技术上没有文件大小限制，实务上受限于三个因素，你的网络上传带宽、Tor 网络速度（速度受 Tor 网络当下壅塞情况影响，可能偏慢）、你愿意把 OnionShare 开多久。超过 1 GB 的文件建议拆段或改用其他管道。
 
 ??? question "Chat 模式跟 Signal、SimpleX 有什么差？"
 

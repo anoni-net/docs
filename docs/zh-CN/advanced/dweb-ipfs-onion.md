@@ -6,7 +6,7 @@ icon: material/web-box
 
 # :material-web-box: 去中心化网站发布
 
-「网站如何发布」这件事，过去十年多了不少选择。传统的「自架服务器 + DNS」之外，CDN 把内容快取到全球节点降低延迟，IPFS 用内容定址让文件在多个节点之间流通，Tor Onion 服务则让网站直接以 .onion 域名运作于 Tor 网络。后两者常被一起讨论，但问题意识不同：IPFS 着重抵抗删除与审查，Onion 着重连线匿名与管制规避。这篇文章对照两者的设计差异、真实世界的合用组合，并以 anoni.net 文件站的部署作为实例。
+「网站如何发布」这件事，过去十年多了不少选择。传统的「自架服务器 + DNS」之外，CDN 把内容缓存到全球节点降低延迟，IPFS 用内容定址让文件在多个节点之间流通，Tor Onion 服务则让网站直接以 .onion 域名运作于 Tor 网络。后两者常被一起讨论，但问题意识不同：IPFS 着重抵抗删除与审查，Onion 着重连线匿名与管制规避。这篇文章对照两者的设计差异、真实世界的合用组合，并以 anoni.net 文件站的部署作为实例。
 
 ## 「网站如何发布」的选择空间
 
@@ -31,8 +31,8 @@ IPFS（InterPlanetary File System）的核心是内容定址（content addressin
 对网站发布的意义：
 
 1. **没有单一可下架的位置**：只要有任何节点 pin 着这个 CID，内容就存活。
-2. **内容窜改可被侦测**：CID 是 hash，任何窜改都会改变 CID，可被验证。
-3. **跨节点重复利用**：同一文件不管被多少站引用，CID 唯一，可共用快取。
+2. **内容窜改可被检测**：CID 是 hash，任何窜改都会改变 CID，可被验证。
+3. **跨节点重复利用**：同一文件不管被多少站引用，CID 唯一，可共用缓存。
 
 设计上的限制：
 
@@ -127,7 +127,7 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 
 - **IPFS pin 与内容存活**：社群成员可协助 pin 增加存活率（[操作指南](../community/pin-ipfs-mirror.md)），没有官方保证。
 - **Onion 镜像延迟**：Tor 的延迟让 SPA 或大型 JS 套件 UX 较差，所以文件站走纯静态 + minimal JS。
-- **三套域名的 SEO 与 trust 处理**：搜寻引擎主要索引 anoni.net 主站，IPFS 与 Onion 是备援与抗封锁层。
+- **三套域名的 SEO 与 trust 处理**：搜索引擎主要索引 anoni.net 主站，IPFS 与 Onion 是备援与抗封锁层。
 
 实际运作的限制：
 
@@ -135,7 +135,7 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 - Onion 镜像的更新频率比主站慢一拍（部署流程较重）。
 - 多语系资源在 IPFS 上会放大 CID 数量，pin 列表变长。
 
-关于 Tor 网络本身的设计与威胁，见 [什么是 Tor](../tools/what-is-tor.md)。InterSecLab 对中国防火长城资料外泄的分析（[网络政变报告](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}）也说明了「集中化的审查基础建设」如何成为去中心化策略的对手。
+关于 Tor 网络本身的设计与威胁，见 [什么是 Tor](../tools/what-is-tor.md)。InterSecLab 对中国防火长城数据外泄的分析（[网络政变报告](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}）也说明了「集中化的审查基础建设」如何成为去中心化策略的对手。
 
 ## :material-chat-question: 一同了解
 

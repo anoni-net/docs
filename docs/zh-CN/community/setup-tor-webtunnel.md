@@ -41,7 +41,7 @@ WebTunnel 是 Tor 目前抗审查能力最强的桥接方式之一。它把 Tor 
     WebTunnel 的伪装效果靠「这个域名看起来就是个普通网站」。建议：
 
     - 用一个不会一眼看出是 Tor 桥接的域名或子域名。
-    - 根路径（`/`）放一个无害的页面（个人首页、放置页、简单部落格都可以），让扫描者看到的是一个普通网站。
+    - 根路径（`/`）放一个无害的页面（个人首页、放置页、简单博客都可以），让扫描者看到的是一个普通网站。
     - 在低风险环境，用既有域名的子域名通常没问题。若你想要更高的营运隐私，再考虑用匿名注册的独立域名。
 
 整个流程分两部分：先把域名、TLS、反向代理这层架好（让服务器看起来像个正常 HTTPS 网站），再用 Docker 把桥接架起来。
@@ -119,7 +119,7 @@ location = /$PATH {
 
     **不要让 nginx 切断长连线**
 
-    nginx 的 `proxy_read_timeout` 默认只有 60 秒，连线超过 60 秒没有资料流动就会被切掉，对长时间挂着的 Tor 电路会造成莫名的断线。把 `location` 区块里的逾时拉长，并开启 TCP keepalive：
+    nginx 的 `proxy_read_timeout` 默认只有 60 秒，连线超过 60 秒没有数据流动就会被切掉，对长时间挂着的 Tor 电路会造成莫名的断线。把 `location` 区块里的逾时拉长，并开启 TCP keepalive：
 
     ```nginx
         proxy_read_timeout 86400s;
@@ -127,7 +127,7 @@ location = /$PATH {
         proxy_socket_keepalive on;
     ```
 
-根路径 `location /` 维持回传一个正常网页，让服务器整体看起来像普通网站，只有知道秘密路径的 Tor 客户端会走到桥接。改完测试设定并重新载入：
+根路径 `location /` 维持返回一个正常网页，让服务器整体看起来像普通网站，只有知道秘密路径的 Tor 客户端会走到桥接。改完测试设定并重新载入：
 
 ```bash
 nginx -t && systemctl reload nginx
@@ -229,7 +229,7 @@ compose 默认自动更新桥接本体。系统层的 Docker、nginx、certbot �
 
 ??? question "WebTunnel 跟 Snowflake、obfs4 有什么不同？"
 
-    三者都是帮人绕过审查连上 Tor 的桥接。Snowflake 走 WebRTC（浏览器做视讯通话用的那种即时连接技术）、开浏览器就能执行，但易被侦测。obfs4 把流量变成随机噪声，但 DPI 仍可能辨识出它不像 HTTPS 而封锁。WebTunnel 把流量包进真正的 HTTPS 连接，审查者要封它就得连带封掉大量正常网站，因此在中国、伊朗、哈萨克这类 DPI 严格的地方最有效。
+    三者都是帮人绕过审查连上 Tor 的桥接。Snowflake 走 WebRTC（浏览器做视频通话用的那种即时连接技术）、开浏览器就能执行，但易被检测。obfs4 把流量变成随机噪声，但 DPI 仍可能辨识出它不像 HTTPS 而封锁。WebTunnel 把流量包进真正的 HTTPS 连接，审查者要封它就得连带封掉大量正常网站，因此在中国、伊朗、哈萨克这类 DPI 严格的地方最有效。
 
 ??? question "营运 WebTunnel 桥接合法吗？会被追究吗？"
 

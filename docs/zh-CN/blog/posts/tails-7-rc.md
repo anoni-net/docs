@@ -58,7 +58,7 @@ Tails 团队已经用与正式版本一样详尽的自动与手动测试流程�
 - 将文字编辑从 43.2 更新至 48.3。
 - 将文件扫描从 42.5 更新至 46.0。
 
-### 移除的软体
+### 移除的软件
 
 - 移除 `unar`。（[#20946](https://gitlab.tails.boum.org/tails/tails/-/issues/20946){target="_blank"}）
 - 移除 `aircrack-ng`。（[#21044](https://gitlab.tails.boum.org/tails/tails/-/issues/21044){target="_blank"}）

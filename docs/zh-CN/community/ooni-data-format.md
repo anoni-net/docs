@@ -1,18 +1,18 @@
 ---
-title: OONI 测量资料结构导览
-description: 一笔 OONI 测量资料由哪些栏位组成，怎么从中读出「谁在哪里测的」与「测出什么结果」。用两笔台湾的真实测量对照说明，并对应到上游 ooni/spec 的规格文件。
+title: OONI 测量数据结构导览
+description: 一笔 OONI 测量数据由哪些栏位组成，怎么从中读出「谁在哪里测的」与「测出什么结果」。用两笔台湾的真实测量对照说明，并对应到上游 ooni/spec 的规格文件。
 icon: material/code-json
 ---
 
-# :material-code-json: OONI 测量资料结构导览
+# :material-code-json: OONI 测量数据结构导览
 
-一笔 OONI 测量有二十多个顶层栏位，`test_keys` 底下还有二十几个。[ASN 观测资料撷取与分析](./asn-coverage-howto.md) 说明撷取公开资料的方法，本页接续说明撷取之后如何判读栏位。
+一笔 OONI 测量有二十多个顶层栏位，`test_keys` 底下还有二十几个。[ASN 观测数据提取与分析](./asn-coverage-howto.md) 说明提取公开数据的方法，本页接续说明提取之后如何判读栏位。
 
 以下以两笔台湾的真实测量对照，拆解网络连线测试（`web_connectivity`）的组成，并标出各栏位对应上游 [ooni/spec](https://github.com/ooni/spec){target="_blank"} 的哪份规格。
 
-!!! info "范例资料来源"
+!!! info "范例数据来源"
 
-    两笔都是 2026-08-04 由台湾的 OONI Probe 产生的公开资料，可在 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查到原始内容。
+    两笔都是 2026-08-04 由台湾的 OONI Probe 产生的公开数据，可在 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查到原始内容。
 
     | | 正常通过 | 判定异常 |
     |---|---|---|
@@ -47,7 +47,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
 原始回应是未断行的长字串，上面两段接 `python3 -m json.tool` 排版后才易于阅读。查询参数加上 `anomaly=true` 可筛出判定异常的测量，适合用于寻找对照范例。改写 `probe_cc` 与 `probe_asn` 即可查询指定地区与网络的观测纪录。
 
-批次处理大量资料时，AWS S3 公开资料集的效率较高，作法见 [ASN 观测资料撷取与分析](./asn-coverage-howto.md)。
+批次处理大量数据时，AWS S3 公开数据集的效率较高，作法见 [ASN 观测数据提取与分析](./asn-coverage-howto.md)。
 
 ## 外壳记录谁在哪里测的
 
@@ -62,7 +62,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 | `resolver_network_name` | `Chunghwa Telecom Co., Ltd.` | `Cloudflare Inc` | 解析器的组织名称 |
 | `input` | `http://presidentlee.tw/` | `https://ntc.party/` | 测量对象的网址 |
 | `test_name` | `web_connectivity` | `web_connectivity` | 测项名称 |
-| `software_name` | `ooniprobe-cli` | `ooniprobe-desktop-unattended` | 产生资料的 Probe 种类 |
+| `software_name` | `ooniprobe-cli` | `ooniprobe-desktop-unattended` | 产生数据的 Probe 种类 |
 | `software_version` | `3.29.1` | `3.26.0` | Probe 版本 |
 | `measurement_start_time` | `2026-08-04 08:59:30` | `2026-08-04 08:45:45` | 测量开始时间（UTC）|
 | `report_id` | `20260804T062033Z_webconnectivity_TW_3462_n4_uEH5rGoD07cN2oYQ` | `20260804T084446Z_webconnectivity_TW_3462_n4_dFfWCDrwouM0TsT2` | 同一次执行产生的多笔测量共用此值 |
@@ -112,7 +112,7 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
     `blocking` 有值仅代表该笔测量的结果与对照组不一致，确认是否存在网络干预需要更多佐证。以判定异常那笔为例，Probe 对 `ntc.party` 的 A 与 AAAA 查询都回报 `dns_nxdomain_error`（域名不存在），但撰稿时以多个公开 DNS 解析器查询，该域名可解析到 IPv6 位址。单笔测量无法区分网络干预、解析器的暂时状态与域名自身的设置变动。
 
-    认定封锁需以跨时间、跨 ASN、跨解析器的多笔测量交叉比对。判定机制的完整拆解与常见误判来源见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)，资料集层级的品质控制见 [OONI 如何分辨坏掉的量测资料](../blog/posts/2026-ooni-faulty-measurements.md)。
+    认定封锁需以跨时间、跨 ASN、跨解析器的多笔测量交叉比对。判定机制的完整拆解与常见误判来源见 [OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)，数据集层级的品质控制见 [OONI 如何分辨坏掉的量测数据](../blog/posts/2026-ooni-faulty-measurements.md)。
 
 ## 证据是支撑结论的原始纪录
 
@@ -150,15 +150,15 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 
 判定层的 `dns_consistency` 是结论，`queries` 与 `control` 是其依据。判定是否合理，查验证据层即可确认。
 
-## 版本与相容性
+## 版本与兼容性
 
 对照 spec 前需先确认版本：
 
 - **`data_format_version` 目前是 `0.2.0`**。外壳层的栏位定义稳定，[df-000-base](https://github.com/ooni/spec/blob/master/data-formats/df-000-base.md){target="_blank"} 可以直接对照。
-- **`web_connectivity` 实际流通的 `test_version` 是 `0.4.3`**。[ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} 的规格内容已更新为描述 v0.5 演算法，但生产环境仍以 v0.4 为主。spec 明订新版演算法必须使用不同的 test_keys 栏位，v0.4 的栏位定义保持相容，因此上表的栏位读法对两个版本都适用。
-- **`x_` 开头的栏位不在 spec 内**。实际资料中会看到 `x_dns_runtime`、`x_status`、`x_th_runtime` 等栏位，属于实作端的实验性扩充，随版本增减，分析程序不应依赖它们。
+- **`web_connectivity` 实际流通的 `test_version` 是 `0.4.3`**。[ts-017](https://github.com/ooni/spec/blob/master/nettests/ts-017-web-connectivity.md){target="_blank"} 的规格内容已更新为描述 v0.5 算法，但生产环境仍以 v0.4 为主。spec 明订新版算法必须使用不同的 test_keys 栏位，v0.4 的栏位定义保持兼容，因此上表的栏位读法对两个版本都适用。
+- **`x_` 开头的栏位不在 spec 内**。实际数据中会看到 `x_dns_runtime`、`x_status`、`x_th_runtime` 等栏位，属于实现端的实验性扩充，随版本增减，分析程序不应依赖它们。
 
-上游 spec 的 master 分支自 2025-06 起没有新的合并，但 issue 与 PR 讨论持续进行（进行中的提案包含 ICMP 资料格式与 DPI 分片测项）。spec 现阶段可作为稳定参考。引用时应连回上游原文，避免复制规格内容后因上游更新而失准。
+上游 spec 的 master 分支自 2025-06 起没有新的合并，但 issue 与 PR 讨论持续进行（进行中的提案包含 ICMP 数据格式与 DPI 分片测项）。spec 现阶段可作为稳定参考。引用时应连回上游原文，避免复制规格内容后因上游更新而失准。
 
 ## 延伸阅读
 
@@ -169,10 +169,10 @@ curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement
 - [:material-shield-search: OONI 怎么判定一个网站被封锁](./ooni-blocking-determination.md)
 - [:material-table-search: OONI 测项速查表](./ooni-nettests-map.md)
 - [:material-access-point-network: 什么是 OONI](../tools/what-is-ooni.md)
-- [:material-database-search: ASN 观测资料撷取与分析](./asn-coverage-howto.md)
-- [:material-access-point-network: ASN 自治网络观测资料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-database-search: ASN 观测数据提取与分析](./asn-coverage-howto.md)
+- [:material-access-point-network: ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
 - [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
 
 </div>
 
-上游规格的完整目录在 [ooni/spec](https://github.com/ooni/spec){target="_blank"}，其中 [data-formats](https://github.com/ooni/spec/tree/master/data-formats){target="_blank"} 收录资料格式、[nettests](https://github.com/ooni/spec/tree/master/nettests){target="_blank"} 收录各测项的演算法定义。
+上游规格的完整目录在 [ooni/spec](https://github.com/ooni/spec){target="_blank"}，其中 [data-formats](https://github.com/ooni/spec/tree/master/data-formats){target="_blank"} 收录数据格式、[nettests](https://github.com/ooni/spec/tree/master/nettests){target="_blank"} 收录各测项的算法定义。

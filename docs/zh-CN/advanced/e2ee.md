@@ -14,7 +14,7 @@ icon: material/key-chain-variant
 
 直观的比喻是混色。Alice 与 Bob 都从一个公开的「基底色」出发，各自加入只有自己知道的「秘密色」混合，再把混合后的颜色透过公开管道交给对方。双方再把对方送来的混合色加上自己的秘密色。最后两人手上的颜色相同，但监听者只看到中间的混合色，没办法在合理时间内反推出秘密色。在数学上，这个「合理时间内无法反推」依赖于离散对数问题的困难度。
 
-实作上，现代协议普遍使用 X25519（一套基于椭圆曲线的密钥交换算法），比早期的有限体版本更小、更快，设计上也降低了侧信道攻击的风险（side channel，从运算时间、功耗等物理迹象侧面反推密钥）。Signal、Tor、TLS 1.3、大多数现代 SSH 实作（如 OpenSSH）默认或优先使用 X25519。
+实现上，现代协议普遍使用 X25519（一套基于椭圆曲线的密钥交换算法），比早期的有限体版本更小、更快，设计上也降低了侧信道攻击的风险（side channel，从运算时间、功耗等物理迹象侧面反推密钥）。Signal、Tor、TLS 1.3、大多数现代 SSH 实现（如 OpenSSH）默认或优先使用 X25519。
 
 <figure markdown="span">
     <img class="brand-frame" src="../../assets/images/dh-exchange.drawio.svg" alt="Diffie-Hellman 密钥交换流程：Alice 与 Bob 各自挑秘密 a、b，交换 G^a、G^b，双方各自算出共同密钥 G^ab，Eve 即使看到中间消息也无法在合理时间内反推">
@@ -65,11 +65,11 @@ Double Ratchet 在 2014 年被 Open Whisper Systems 整合进 Signal Protocol[^1
 
 ### MLS（Messaging Layer Security，IETF RFC 9420）
 
-MLS 用树状密钥结构（TreeKEM）让加入、退出、密钥更新的成本在没有大量并发更新时压在 O(log n)，理论上可支援上万人群组仍维持 PCS。设计目标是把 E2EE 从「两三百人就吃力」推到「企业级群组」。
+MLS 用树状密钥结构（TreeKEM）让加入、退出、密钥更新的成本在没有大量并发更新时压在 O(log n)，理论上可支持上万人群组仍维持 PCS。设计目标是把 E2EE 从「两三百人就吃力」推到「企业级群组」。
 
 2023 年 IETF 正式发布 RFC 9420[^2]。Cisco Webex、Discord（DAVE 协议）已采用或宣布采用 MLS 做群组密钥交换[^3]。
 
-两条路的取舍：Sender Keys 简单、实作成熟、适合 Signal 规模。MLS 复杂、规模上更乾净、适合需要管理大型工作群组的场景。
+两条路的取舍：Sender Keys 简单、实现成熟、适合 Signal 规模。MLS 复杂、规模上更乾净、适合需要管理大型工作群组的场景。
 
 ## 多装置同步的取舍
 
@@ -88,7 +88,7 @@ Signal 在 2025 年加入加密消息备份（Secure Backups）[^4]，采取「�
 | 协议 | 一对一 | 群组 | 多装置 | metadata 揭露 | 开源 |
 |---|---|---|---|---|---|
 | **Signal** | Double Ratchet | Sender Keys | Device linking + 加密备份 | Sealed Sender 隐藏寄件人 | ✅ |
-| **MLS** | TreeKEM | TreeKEM（核心优势） | 视实作 | 视实作 | ✅（IETF 标准） |
+| **MLS** | TreeKEM | TreeKEM（核心优势） | 视实现 | 视实现 | ✅（IETF 标准） |
 | **SimpleX** | Double Ratchet 变体 | 双层 ratchet | 无中央账号，凭卡联系 | 无 user identifier | ✅ |
 | **Session** | Onion routing + 对等加密 | 半中心化 | 13 字 mnemonic 跨装置 | 走 Tor-like 网络降低 metadata | ✅ |
 
@@ -112,7 +112,7 @@ Signal 在 2025 年加入加密消息备份（Secure Backups）[^4]，采取「�
 
 在敏感工作情境（记者保护消息来源、社运行动现场、家暴受害者寻求协助）下，这两条路的差异会继续展开到 [scenarios/journalist.md](../scenarios/journalist.md)、[scenarios/activist.md](../scenarios/activist.md) 与 [scenarios/domestic-violence.md](../scenarios/domestic-violence.md)。
 
-E2EE 的概念到工具实作之间还隔着一段「该选哪个」的决策，[匿名通讯比较](../tools/messaging-comparison.md) 会接着做这层比较。
+E2EE 的概念到工具实现之间还隔着一段「该选哪个」的决策，[匿名通讯比较](../tools/messaging-comparison.md) 会接着做这层比较。
 
 ## :material-chat-question: 一同了解
 
@@ -130,7 +130,7 @@ E2EE 的概念到工具实作之间还隔着一段「该选哪个」的决策，
 <div class="grid cards" markdown>
 
 - [:material-newspaper-variant-outline: 记者保护消息来源](../scenarios/journalist.md)
-- [:material-account-edit-outline: 社运行动者的数位准备](../scenarios/activist.md)
+- [:material-account-edit-outline: 社运行动者的数字准备](../scenarios/activist.md)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>
