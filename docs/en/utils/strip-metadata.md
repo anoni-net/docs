@@ -2,13 +2,16 @@
 title: File metadata remover
 description: Strip EXIF, GPS, device model, authoring software and comment fields from photos, videos and PDFs without the file leaving your device. For photos and videos, not one byte of compressed data is touched.
 icon: material/image-off-outline
+offline_assets:
+  # 這一份改成遇到 PDF 才動態載入，頁面裡沒有 script 標籤了。離線副本仍然要包含它，
+  # 不然存下這一頁的人在斷網時處理不了 PDF。
+  - utils/vendor/pdf-lib.min.js
 ---
 
 # :material-image-off-outline: File metadata remover
 
 <div id="stripmeta-tool"></div>
 
-<script src="../vendor/pdf-lib.min.js"></script>
 <script src="../../js/stripmeta.js"></script>
 
 Two situations that come up:

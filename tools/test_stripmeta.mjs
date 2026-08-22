@@ -707,6 +707,49 @@ test('三個語系都有支援清單的說明文字', () => {
   }
 });
 
+test('pdf-lib 不放在頁面裡用 script 標籤載', () => {
+  // 那一份有五百多 KB，是這一頁最大的一塊。放在頁面裡等於每個打開這一頁的人
+  // 都要先等它下載完，而六種格式裡只有 PDF 需要它。
+  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
+    const page = fs.readFileSync(path.join(HERE, '..', 'docs', lang, 'utils', 'strip-metadata.md'), 'utf8');
+    assert.ok(!/<script[^>]*pdf-lib/.test(page), `${lang} 的頁面還在用 script 標籤載 pdf-lib`);
+  }
+  assert.ok(/function loadPdfLib\(\)/.test(code), '沒有動態載入的路徑');
+  assert.ok(/createElement\("script"\)/.test(code), '沒有動態插入 script');
+});
+
+test('離線副本仍然包含 pdf-lib', () => {
+  // 頁面裡沒有 script 標籤之後，offline_index 的資產掃描就看不到它了。
+  // 漏掉的話，存下這一頁的人在斷網時處理不了 PDF，而且不會有任何錯誤訊息。
+  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
+    const page = fs.readFileSync(path.join(HERE, '..', 'docs', lang, 'utils', 'strip-metadata.md'), 'utf8');
+    const front = page.slice(0, page.indexOf('\n---', 4));
+    assert.ok(front.includes('offline_assets'), `${lang} 沒有宣告 offline_assets`);
+    assert.ok(front.includes('utils/vendor/pdf-lib.min.js'), `${lang} 的 offline_assets 少了 pdf-lib`);
+  }
+});
+
+test('載入函式庫的時候畫面要說一聲', () => {
+  // 半 MB 在慢一點的網路上要等好幾秒，沒有回饋的話讀者會以為卡住了
+  assert.ok(/loadingLib = true/.test(code), '沒有進入載入狀態');
+  assert.ok(/sm-loading/.test(code), '沒有把載入狀態畫出來');
+  for (const [lang, strings] of Object.entries(tool.STRINGS)) {
+    assert.ok(strings.loadingLib, `${lang} 少了載入中的文字`);
+  }
+  // 設了旗標之後要讓出主執行緒，那行字才畫得出來
+  const handle = code.slice(code.indexOf('async function handle(list)'));
+  const guard = handle.slice(0, handle.indexOf('files.push'));
+  assert.ok(/loadingLib = true[\s\S]*?render\(\)[\s\S]*?setTimeout/.test(guard),
+            '設了載入狀態卻沒有讓畫面有機會更新');
+});
+
+test('函式庫載入失敗時不會卡在一個永遠不完成的等待上', () => {
+  const fn = code.slice(code.indexOf('function loadPdfLib()'));
+  const body = fn.slice(0, fn.indexOf('async function stripPdf'));
+  assert.ok(/onerror[\s\S]*?pdfLibLoading = null/.test(body),
+            '載入失敗沒有把 promise 清掉，下一次會直接拿到失敗的結果');
+});
+
 for (const [name, fn] of tests) {
   try {
     fn();
