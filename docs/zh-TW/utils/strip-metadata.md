@@ -100,7 +100,7 @@ MP4 與 MOV 是一層包一層的結構，描述欄位住在其中一層，整�
 
 照片與影片可以直接把某一段剪掉，PDF 不行。PDF 每個物件在檔案裡的位置都記在交叉索引表（cross-reference table）上，拿掉一段之後後面全部位移，整張表要重算。PDF 1.5 之後常見的做法還會把好幾個物件壓進同一段壓縮資料，從外面連內容都讀不到。
 
-解析與重寫交給 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授權，[授權全文](vendor/pdf-lib-LICENSE.txt)），原封不動放在 `utils/vendor/` 底下，頁面只決定拿掉哪些欄位。
+解析與重寫交給 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授權，[授權全文](vendor/pdf-lib-LICENSE.txt)），原封不動放在 `utils/vendor/` 底下。要拿掉哪些欄位則在頁面這邊指定。
 
 清掉的是：
 

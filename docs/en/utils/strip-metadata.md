@@ -101,7 +101,7 @@ Removing it would require re-encoding, which costs quality and only swaps the ol
 
 A photo or a video can have a section cut straight out. A PDF cannot. The position of every object in a PDF is held in the cross-reference table, so removing a section shifts everything after it and the whole table has to be recalculated. Since PDF 1.5 it is also common to compress several objects into a single stream, where the contents cannot be read from the outside at all.
 
-Parsing and rewriting are handled by [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} (MIT licence, [full text](vendor/pdf-lib-LICENSE.txt)), placed unmodified under `utils/vendor/`. This page only decides which fields come out.
+Parsing and rewriting are handled by [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} (MIT licence, [full text](vendor/pdf-lib-LICENSE.txt)), placed unmodified under `utils/vendor/`. Which fields come out is specified here on the page.
 
 What is removed:
 

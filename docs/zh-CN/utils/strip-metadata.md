@@ -100,7 +100,7 @@ MP4 与 MOV 是一层包一层的结构，描述字段住在其中一层，整�
 
 照片与视频可以直接把某一段剪掉，PDF 不行。PDF 每个对象在文件里的位置都记在交叉引用表（cross-reference table）上，拿掉一段之后后面全部位移，整张表要重算。PDF 1.5 之后常见的做法还会把好几个对象压进同一段压缩数据，从外面连内容都读不到。
 
-解析与重写交给 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授权，[授权全文](vendor/pdf-lib-LICENSE.txt)），原封不动放在 `utils/vendor/` 底下，页面只决定拿掉哪些字段。
+解析与重写交给 [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"}（MIT 授权，[授权全文](vendor/pdf-lib-LICENSE.txt)），原封不动放在 `utils/vendor/` 底下。要拿掉哪些字段则在页面这边指定。
 
 清掉的是：
 
