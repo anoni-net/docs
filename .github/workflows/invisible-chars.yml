@@ -1,0 +1,48 @@
+# 全站隱形字元掃描。看不見的字元進到 repo 裡，code review 是擋不住的。
+#
+# 2026-08 第一次掃全站，三處有。三處的來源都不一樣，而共通點是肉眼與 review 都看不出來：
+#
+#   - 部落格文章兩個段落的行尾各有兩個不斷行空白。原本想寫的是 Markdown 硬換行的
+#     兩個半形空格，貼進來的卻是 U+00A0
+#   - 遊戲資料檔的地址欄位有一個零寬空格，從政府開放資料的 CSV 直接帶進來，
+#     而產生腳本的 str.strip() 不把它當空白
+#   - tools/test_invisible.mjs 自己的常數放的是裸字元，跟同一個檔案寫的紀律相反。
+#     那個檔案被編輯器清理過一次就會靜靜失效，測試照樣全綠
+#
+# 零寬字元組合是文件外流追蹤的實際手法，方向控制字元會讓人看到的順序跟程式讀到的
+# 不一樣（Trojan Source）。這類字元出現在 repo 裡，最好的情況是雜訊。
+#
+# 這個 job 會擋 merge。suspect 級（零寬字元、BOM、標籤字元、Markdown 裡的不斷行空白）
+# 讓掃描器回 exit 1，job 就紅。context 級（有 RTL 文字的段落裡的方向標記那一類）
+# 只出 annotation，不影響 exit code，改法要看語境，機器不宜代勞。
+#
+# 判斷邏輯是從 docs/zh-TW/js/invisible.js 原地抽出來的，跟站上那頁工具完全一致。
+# 誤判的處理（emoji 家族中間的 ZWJ、接在 emoji 後面的變體選擇器、RTL 標記）因此
+# 一併繼承，不必維護第二份規則。規則本身的回歸測試由 tools-tests.yml 的
+# tools/test_invisible.mjs 負責。
+name: invisible-chars
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "tools/**"
+      - ".github/workflows/invisible-chars.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: 全站隱形字元掃描
+        run: node tools/check_invisible_chars.mjs --format github
