@@ -35,6 +35,10 @@ const PRECACHE = "anoni-docs-precache-" + VERSION;
 // 被清空一次，接著又要把整份預快取重下載一遍。頁面的新鮮度由 network-first
 // 維持，不需要靠換快取名稱來換版。PRECACHE 保留版本後綴，那批是 hash 檔名的
 // app shell，換版後舊的確實該整批丟掉。
+// 這兩個快取只在「自動存下內容」開著的時候寫。原本是無條件寫的，結果是讀者按了
+// 「清除所有離線內容」之後，每讀一頁就又被存回裝置一頁，上限 120 頁加 200 個資產，
+// 而管理頁上的說明只講會補回 0.5 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
+// 說了不留就不該留。
 const RUNTIME_PAGES = "anoni-docs-pages";
 const RUNTIME_ASSETS = "anoni-docs-assets";
 const PAGES_MAX_ENTRIES = 120;
@@ -520,15 +524,22 @@ self.addEventListener("install", (event) => {
 // precacheFor 處理，兩者分開放在不同的 cache，讀者才分得清「網站幫我存的」與
 // 「我自己選的」，清除時也能各自處理。
 
+// 這個設定值 fetch handler 每一個請求都要問一次，每次都去讀 Cache Storage 太浪費，
+// 所以在 SW 這一輪生命週期內記著。setAutoPrecache 會把它作廢，另一個分頁改了設定也
+// 會走那一支，因為設定只能從管理頁改，而管理頁的指令由同一個 SW 處理。
+let autoPrecacheMemo = null;
+
 async function autoPrecacheEnabled() {
+  if (autoPrecacheMemo !== null) return autoPrecacheMemo;
   const cache = await caches.open(SETTINGS);
   const hit = await cache.match(AUTO_PRECACHE_URL);
   // 沒設定過就是開著。只有讀者明確關掉或清空過內容才會有這筆。
-  if (!hit) return true;
-  return (await hit.text()) !== "off";
+  autoPrecacheMemo = hit ? (await hit.text()) !== "off" : true;
+  return autoPrecacheMemo;
 }
 
 async function setAutoPrecache(enabled) {
+  autoPrecacheMemo = enabled;
   const cache = await caches.open(SETTINGS);
   await cache.put(AUTO_PRECACHE_URL, new Response(enabled ? "on" : "off"));
 }
@@ -642,15 +653,52 @@ async function removeFromLibrary(prefix, paths, assets) {
   return { removed: removed };
 }
 
+// 這個站自己開的快取。名稱一律以此開頭，含帶版本後綴的 PRECACHE 與已經淘汰的
+// 舊 runtime 快取。caches.keys() 回的是整個 origin 的，anoni.net 底下未來要是有
+// 別的東西也用 Cache Storage，清除與計算容量都不該掃到它。
+const OWN_CACHE_PREFIX = "anoni-docs-";
+
+async function ownCacheNames() {
+  return (await caches.keys()).filter((name) => name.startsWith(OWN_CACHE_PREFIX));
+}
+
+// 這個站在裝置上實際佔用多少 byte。
+//
+// 不用 navigator.storage.estimate() 的 usage，有兩個理由。它算的是整個 origin，
+// 不只離線內容。更要命的是它跟 caches.delete() 之間有落差：實測清空之後那個數字
+// 要四十幾秒才跟上，讀者按完「清除所有離線內容」看到的還是按之前的數字，會以為
+// 沒清掉。管理頁報的是「本站佔用」，那就照著自己的快取算。
+//
+// 有 content-length 就用它。實測線上快取的一百多筆裡九成有這個標頭，而且跟 body
+// 實際大小一個 byte 都不差。少數沒有的才把 body 讀出來量，那條路要真的讀磁碟。
+async function cacheUsage() {
+  let bytes = 0;
+  for (const name of await ownCacheNames()) {
+    const cache = await caches.open(name);
+    for (const request of await cache.keys()) {
+      const response = await cache.match(request);
+      if (!response) continue;
+      const declared = response.headers && response.headers.get("content-length");
+      if (declared !== null && declared !== undefined && declared !== "") {
+        bytes += Number(declared);
+      } else if (typeof response.blob === "function") {
+        bytes += (await response.blob()).size;
+      }
+    }
+  }
+  return bytes;
+}
+
 // 清掉裝置上所有跟這個站有關的快取，包含網站自動存的那批。
 //
 // 清完把自動預快取關掉。讀者按這顆按鈕多半是因為裝置可能被檢查，如果下一次導覽
 // 又把九 MB 自動下載回來，這顆按鈕等於沒有作用。要恢復得回管理頁自己打開。
 async function clearAllOffline() {
-  for (const key of await caches.keys()) {
+  for (const key of await ownCacheNames()) {
     await caches.delete(key);
   }
   precachedPrefixes.clear();
+  // 設定那個 cache 也在剛才刪掉的名單裡，這一行把它連同記憶體裡的值一起重建。
   await setAutoPrecache(false);
   await setPrecacheImages(false);
 }
@@ -668,6 +716,9 @@ async function handleLibraryMessage(data, port) {
       precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
       precacheImages: await precacheImagesEnabled(),
+      // 本站佔用自己算，見 cacheUsage。estimate 只拿來報「裝置還剩多少空間」，
+      // 那是配額問題，本來就該問瀏覽器。
+      usage: await cacheUsage(),
       estimate: navigator.storage && navigator.storage.estimate
         ? await navigator.storage.estimate()
         : null,
@@ -773,17 +824,30 @@ async function migrateLegacyRuntime() {
   await trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES);
 }
 
+// 換版後清掉用不到的快取。
+//
+// LIBRARY、LIBRARY_ASSETS 與 SETTINGS 都不帶版本，換版時要留著。前兩個是讀者自己
+// 勾選存下來的頁面與那些頁面引用的圖與程式，後者記著他有沒有把自動存下內容關掉。
+// 任何一個被清掉，讀者的選擇就作廢。少了 LIBRARY_ASSETS 更難查：頁面還在，離線
+// 打開卻沒有樣式也沒有圖，而下一次部署又會再發生一次。
+//
+// 抽成具名函式是為了能在 Node 裡驗，事件回呼裡的匿名 async 函式測不到，
+// 見 tools/test_sw_offline.mjs。
+async function purgeStaleCaches() {
+  const keep = [
+    PRECACHE, RUNTIME_PAGES, RUNTIME_ASSETS, LIBRARY, LIBRARY_ASSETS, SETTINGS,
+  ];
+  const keys = await ownCacheNames();
+  await Promise.all(
+    keys.filter((key) => keep.indexOf(key) === -1).map((key) => caches.delete(key))
+  );
+}
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       await migrateLegacyRuntime();
-      // LIBRARY 與 SETTINGS 都不帶版本，換版時要留著。前者是讀者自己勾選存下來的
-      // 頁面，後者記著他有沒有把自動預快取關掉。任何一個被清掉，讀者的選擇就作廢。
-      const keep = [PRECACHE, RUNTIME_PAGES, RUNTIME_ASSETS, LIBRARY, SETTINGS];
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.filter((key) => keep.indexOf(key) === -1).map((key) => caches.delete(key))
-      );
+      await purgeStaleCaches();
       await self.clients.claim();
     })()
   );
@@ -845,7 +909,7 @@ const NAVIGATE_TIMEOUT_MS = 3000;
 async function networkFirst(request, event) {
   // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取
   const network = fetch(request).then(async (response) => {
-    if (response.ok) {
+    if (response.ok && (await autoPrecacheEnabled())) {
       const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
       // 用 waitUntil 而不是 await。純 fire-and-forget 的話 SW 可能在裁剪跑完前
@@ -885,7 +949,7 @@ async function staleWhileRevalidate(request, event) {
   const cached = await caches.match(request);
   const fetchPromise = fetch(request)
     .then(async (response) => {
-      if (response.ok) {
+      if (response.ok && (await autoPrecacheEnabled())) {
         const cache = await caches.open(RUNTIME_ASSETS);
         await cache.put(request, response.clone());
         keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));

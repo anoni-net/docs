@@ -122,6 +122,7 @@ const harness = `
   ${grab(/^const LIBRARY = .*$/m)}
   ${grab(/^const SETTINGS = .*$/m)}
   ${grab(/^const AUTO_PRECACHE_URL = .*$/m)}
+  ${grab(/^let autoPrecacheMemo = .*$/m)}
   ${grab(/^async function autoPrecacheEnabled\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function setAutoPrecache\(enabled\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const PRECACHE_IMAGES_URL = .*$/m)}
@@ -133,6 +134,9 @@ const harness = `
   ${grab(/^const LIBRARY_ASSETS = .*$/m)}
   ${grab(/^async function addToLibrary\(prefix, paths, assets, refresh, report\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function removeFromLibrary\(prefix, paths, assets\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const OWN_CACHE_PREFIX = .*$/m)}
+  ${grab(/^async function ownCacheNames\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function cacheUsage\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function clearAllOffline\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function handleLibraryMessage\(data, port\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const RUNTIME_PAGES = .*$/m)}
@@ -147,6 +151,8 @@ const harness = `
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const NAVIGATE_TIMEOUT_MS = .*$/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
   return {
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, LIBRARY_ASSETS, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
@@ -155,7 +161,8 @@ const harness = `
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
     libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
-    handleLibraryMessage, networkFirst, NAVIGATE_TIMEOUT_MS,
+    handleLibraryMessage, networkFirst, staleWhileRevalidate, NAVIGATE_TIMEOUT_MS,
+    OWN_CACHE_PREFIX, ownCacheNames, cacheUsage, purgeStaleCaches,
   };
 `;
 
@@ -169,8 +176,22 @@ const load = (opts = {}) => {
   const caches = new FakeCacheStorage();
   const fetched = [];
   const net = { offline: !!opts.offline };
-  // 真的 Response 有 clone()，networkFirst 存快取時會用到
-  const makeResponse = (url, ok) => ({ ok, url, clone: () => makeResponse(url, ok) });
+  // 真的 Response 有 clone()，networkFirst 存快取時會用到。headers 與 blob 是給
+  // cacheUsage 量大小用的：線上多數項目有 content-length，少數沒有的走 blob。
+  // opts.noContentLength 讓整輪的回應都不帶那個標頭，用來驗退路那一條。
+  const bytesOf = (url) => (opts.responseBytes === undefined ? 1024 : opts.responseBytes);
+  const makeResponse = (url, ok) => ({
+    ok,
+    url,
+    headers: {
+      get: (name) =>
+        name.toLowerCase() === 'content-length' && !opts.noContentLength
+          ? String(bytesOf(url))
+          : null,
+    },
+    blob: async () => ({ size: bytesOf(url) }),
+    clone: () => makeResponse(url, ok),
+  });
   const fetchStub = async (input) => {
     const url = typeof input === 'string' ? input : input.url;
     fetched.push(url);
@@ -181,13 +202,12 @@ const load = (opts = {}) => {
     if (url.endsWith('offline-index.json')) {
       if ((opts.notFound || []).includes(url)) return makeResponse(url, false);
       if (opts.brokenIndex) {
-        return {
-          ok: true, url, clone: () => makeResponse(url, true),
+        return Object.assign(makeResponse(url, true), {
           json: async () => { throw new SyntaxError('unexpected token'); },
-        };
+        });
       }
       const index = opts.index || { sections: [] };
-      return { ok: true, url, json: async () => index, clone: () => makeResponse(url, true) };
+      return Object.assign(makeResponse(url, true), { json: async () => index });
     }
     return makeResponse(url, !(opts.notFound || []).includes(url));
   };
@@ -938,6 +958,169 @@ test('離線時各語系落到自己的離線頁', async (load) => {
 test('連離線頁都沒快取到時才把錯誤丟出去', async (load) => {
   const { sw } = load({ offline: true });
   await assert.rejects(() => sw.networkFirst(req('/docs/basics/metadata/'), null));
+});
+
+// === 裝置佔用量 ===
+//
+// 管理頁上那行「本站在這台裝置上佔用」原本讀 navigator.storage.estimate().usage。
+// 那個數字算的是整個 origin，而且跟 caches.delete() 之間有落差：實測按下「清除所有
+// 離線內容」之後它要四十幾秒才跟上，讀者看到的是按之前的數字，合理的結論是沒清掉。
+
+test('佔用量只算自己的快取，同一個 origin 上別人的不算', async (load) => {
+  const { sw, caches } = load({ responseBytes: 500 });
+  await sw.precacheFor('', false);
+  const mine = (await (await caches.open(sw.PRECACHE)).keys()).length;
+
+  const stranger = await caches.open('someone-elses-cache');
+  await stranger.put('/whatever', { headers: { get: () => '999999' } });
+
+  assert.equal(await sw.cacheUsage(), mine * 500);
+});
+
+test('佔用量沒有 content-length 時把 body 讀出來量', async (load) => {
+  const { sw, caches } = load({ responseBytes: 300, noContentLength: true });
+  await sw.precacheFor('', false);
+  const n = (await (await caches.open(sw.PRECACHE)).keys()).length;
+  assert.ok(n > 0);
+  assert.equal(await sw.cacheUsage(), n * 300);
+});
+
+test('清除之後佔用量立刻歸零，不必等瀏覽器回收', async (load) => {
+  const { sw } = load({ responseBytes: 4096 });
+  await sw.precacheFor('', true);
+  await sw.addToLibrary('', ['scenarios/journalist/'], ['assets/x.png'], false, () => {});
+  assert.ok((await sw.cacheUsage()) > 0);
+
+  await sw.clearAllOffline();
+
+  // 剩下的只有 clearAllOffline 自己寫回去的兩筆設定，各是三個 byte 的 "off"。
+  // 管理頁的 size() 以 KB 為單位四捨五入，讀者看到的是「佔用 0 KB」。
+  const left = await sw.cacheUsage();
+  assert.ok(left < 1024, `清完應該不到 1 KB，實際 ${left}`);
+});
+
+test('清除不動同一個 origin 上別人的快取', async (load) => {
+  const { sw, caches } = load();
+  await (await caches.open('anoni-site-shell')).put('/index.html', 'HOME');
+
+  await sw.clearAllOffline();
+
+  // 事後重新 open，不沿用先前那個物件。假的 Cache Storage 刪掉的是名字，
+  // 先前拿到的參照還握著同一份資料，拿它來斷言等於什麼都沒驗到。
+  assert.equal(await caches.has('anoni-site-shell'), true);
+  assert.equal(await (await caches.open('anoni-site-shell')).match('/index.html'), 'HOME');
+});
+
+test('狀態回覆帶著佔用量', async (load) => {
+  const { sw } = load({ responseBytes: 2048 });
+  await sw.precacheFor('', false);
+  const sent = [];
+  await sw.handleLibraryMessage(
+    { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/offline/' },
+    { postMessage: (m) => sent.push(m) }
+  );
+  assert.equal(sent.length, 1);
+  assert.equal(typeof sent[0].usage, 'number');
+  assert.ok(sent[0].usage > 0);
+  assert.equal(sent[0].usage, await sw.cacheUsage());
+});
+
+// === 讀過的頁面要不要留在裝置上 ===
+//
+// runtime 快取原本無條件寫。讀者按了「清除所有離線內容」之後每讀一頁就又被存回去
+// 一頁，上限 120 頁加 200 個資產，而管理頁只說會補回 0.5 MB。按那顆的人多半是因為
+// 裝置可能被檢查，說了不留就不該留。
+
+test('自動存下內容開著時，讀過的頁面留在裝置上', async (load) => {
+  const { sw, caches } = load();
+  await sw.networkFirst(req('/docs/basics/metadata/'), null);
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  assert.ok(await pages.match('/docs/basics/metadata/'));
+});
+
+test('自動存下內容關掉之後，讀過的頁面不留在裝置上', async (load) => {
+  const { sw, caches } = load();
+  await sw.setAutoPrecache(false);
+
+  const response = await sw.networkFirst(req('/docs/basics/metadata/'), null);
+
+  // 頁面照樣送到讀者眼前，只是不寫進快取
+  assert.ok(response.ok);
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  assert.equal(await pages.match('/docs/basics/metadata/'), undefined);
+});
+
+test('圖與樣式跟著同一個開關，關掉就不留', async (load) => {
+  const { sw, caches } = load();
+  await sw.staleWhileRevalidate(req('/docs/assets/logo.png'), null);
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  assert.ok(await assets.match('/docs/assets/logo.png'));
+
+  await sw.setAutoPrecache(false);
+  await sw.staleWhileRevalidate(req('/docs/assets/other.png'), null);
+  assert.equal(await assets.match('/docs/assets/other.png'), undefined);
+});
+
+test('清除之後讀過的頁面也不留，直到讀者自己打開開關', async (load) => {
+  const { sw, caches } = load();
+  await sw.clearAllOffline();
+  await sw.networkFirst(req('/docs/basics/metadata/'), null);
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  assert.equal(await pages.match('/docs/basics/metadata/'), undefined);
+
+  await sw.setAutoPrecache(true);
+  await sw.networkFirst(req('/docs/basics/metadata/'), null);
+  assert.ok(await pages.match('/docs/basics/metadata/'));
+});
+
+test('設定改了記憶體那份也跟著改', async (load) => {
+  // fetch handler 每一個請求都要問一次這個設定，所以在 SW 這輪生命週期內記著。
+  // 忘了作廢的話讀者關掉開關之後，同一輪還是照存不誤。
+  const { sw } = load();
+  assert.equal(await sw.autoPrecacheEnabled(), true);
+  await sw.setAutoPrecache(false);
+  assert.equal(await sw.autoPrecacheEnabled(), false);
+  await sw.setAutoPrecache(true);
+  assert.equal(await sw.autoPrecacheEnabled(), true);
+});
+
+// === 換版時清哪些快取 ===
+
+test('換版留下讀者自己勾的頁面，連同那些頁面的圖與程式', async (load) => {
+  // LIBRARY_ASSETS 原本不在保留名單裡，每次部署都被清掉。頁面還在，離線打開卻
+  // 沒有樣式也沒有圖，而下一次部署又會再發生一次。
+  const { sw, caches } = load();
+  await sw.addToLibrary('', ['scenarios/journalist/'], ['assets/photo.png'], false, () => {});
+
+  await sw.purgeStaleCaches();
+
+  assert.deepEqual(await sw.libraryEntries(''), ['scenarios/journalist/']);
+  const assets = await caches.open(sw.LIBRARY_ASSETS);
+  assert.ok(await assets.match('/docs/assets/photo.png'));
+});
+
+test('換版清掉上一版的預快取，設定與 runtime 快取留著', async (load) => {
+  const { sw, caches } = load();
+  const stale = await caches.open('anoni-docs-precache-200001010000');
+  await stale.put('/docs/old/', 'OLD');
+  await sw.setAutoPrecache(false);
+  await (await caches.open(sw.RUNTIME_PAGES)).put('/docs/basics/metadata/', 'VISITED');
+
+  await sw.purgeStaleCaches();
+
+  assert.equal(await caches.has('anoni-docs-precache-200001010000'), false);
+  assert.equal(await sw.autoPrecacheEnabled(), false);
+  assert.equal(await (await caches.open(sw.RUNTIME_PAGES)).match('/docs/basics/metadata/'), 'VISITED');
+});
+
+test('換版不動同一個 origin 上別人的快取', async (load) => {
+  const { sw, caches } = load();
+  await (await caches.open('anoni-site-shell')).put('/index.html', 'HOME');
+
+  await sw.purgeStaleCaches();
+
+  assert.equal(await caches.has('anoni-site-shell'), true);
+  assert.equal(await (await caches.open('anoni-site-shell')).match('/index.html'), 'HOME');
 });
 
 for (const [name, fn] of tests) {

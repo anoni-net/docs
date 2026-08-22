@@ -177,8 +177,8 @@
       autoCount: "網站自動存的 {n} 頁",
       usage: "本站在這台裝置上佔用 {used}",
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
-      autoLabel: "自動存下目前語言的核心章節",
-      autoHint: "關掉之後就不再自動存章節。這一頁本身與它需要的樣式仍會留著（約 0.5 MB），沒有網路時你才進得來。你自己勾的頁面不受影響。",
+      autoLabel: "自動存下核心章節與你讀過的頁面",
+      autoHint: "關掉之後網站不再自動存任何內容，你讀過的頁面也不會留在裝置上。這一頁本身與它需要的樣式仍會留著（約 0.5 MB），沒有網路時你才進得來。你自己勾的頁面不受影響。",
       imagesLabel: "連同核心章節的內文圖一起存",
       imagesHint: "網站自動存的那批章節預設只存文字，離線打開會缺圖。打開這個選項會連內文圖一起下載，大約多 7 MB，下次連上網時開始補。你自己勾的頁面本來就會連圖一起存。",
       refresh: "更新已存的內容",
@@ -189,7 +189,7 @@
       refreshEmpty: "你還沒有自己選存頁面。網站自動存的那批會在網站有新版本時一起更新。",
       failed: "沒有完成。可能是連線中斷，稍後再試一次。",
       clearing: "清除中",
-      cleared: "已清除，自動存下章節也一併關掉了。下次連上網時會補回這一頁本身與它需要的樣式（約 0.5 MB），讓你在沒有網路時仍進得來。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
+      cleared: "已清除，自動存下內容也一併關掉了，接下來你讀過的頁面不會留在裝置上。下次連上網時會補回這一頁本身與它需要的樣式（約 0.5 MB），讓你在沒有網路時仍進得來。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
       apply: "套用變更",
       applying: "處理中",
       pending: "待新增 {add} 頁，待移除 {remove} 頁",
@@ -216,8 +216,8 @@
       autoCount: "网站自动存的 {n} 页",
       usage: "本站在这台设备上占用 {used}",
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
-      autoLabel: "自动存下当前语言的核心章节",
-      autoHint: "关掉之后就不再自动存章节。这一页本身与它需要的样式仍会留着（约 0.5 MB），没有网络时你才进得来。你自己勾的页面不受影响。",
+      autoLabel: "自动存下核心章节与你读过的页面",
+      autoHint: "关掉之后网站不再自动存任何内容，你读过的页面也不会留在设备上。这一页本身与它需要的样式仍会留着（约 0.5 MB），没有网络时你才进得来。你自己勾的页面不受影响。",
       imagesLabel: "连同核心章节的内文图一起存",
       imagesHint: "网站自动存的那批章节预设只存文字，离线打开会缺图。打开这个选项会连内文图一起下载，大约多 7 MB，下次连上网时开始补。你自己勾的页面本来就会连图一起存。",
       refresh: "更新已存的内容",
@@ -228,7 +228,7 @@
       refreshEmpty: "你还没有自己选存页面。网站自动存的那批会在网站有新版本时一起更新。",
       failed: "没有完成。可能是连接中断，稍后再试一次。",
       clearing: "清除中",
-      cleared: "已清除，自动存下章节也一并关掉了。下次连上网时会补回这一页本身与它需要的样式（约 0.5 MB），让你在没有网络时仍进得来。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
+      cleared: "已清除，自动存下内容也一并关掉了，接下来你读过的页面不会留在设备上。下次连上网时会补回这一页本身与它需要的样式（约 0.5 MB），让你在没有网络时仍进得来。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
       apply: "应用变更",
       applying: "处理中",
       pending: "待新增 {add} 页，待移除 {remove} 页",
@@ -255,8 +255,8 @@
       autoCount: "{n} pages stored automatically",
       usage: "This site uses {used} on this device",
       usageFree: "This site uses {used} on this device, with {free} still available",
-      autoLabel: "Automatically store the core chapters for the current language",
-      autoHint: "Turning this off stops the site from storing chapters. This page itself and the styles it needs stay (about 0.5 MB), so you can still get here without a network. Pages you ticked are unaffected.",
+      autoLabel: "Automatically store the core chapters and the pages you read",
+      autoHint: "Turning this off stops the site from storing anything automatically, including the pages you read. This page itself and the styles it needs stay (about 0.5 MB), so you can still get here without a network. Pages you ticked are unaffected.",
       imagesLabel: "Also store the images in the core chapters",
       imagesHint: "The chapters the site stores automatically are text only, so they lose their images offline. Turning this on downloads those images too, about 7 MB more, starting the next time you are online. Pages you tick already come with their images.",
       refresh: "Update what is stored",
@@ -267,7 +267,7 @@
       refreshEmpty: "You have not picked any pages yet. What the site stores automatically updates when a new version of the site arrives.",
       failed: "That did not complete. The connection may have dropped. Try again in a moment.",
       clearing: "Clearing",
-      cleared: "Cleared, and automatic storage of chapters is off. Next time you are online, this page itself and the styles it needs come back (about 0.5 MB) so you can still reach it without a network. Browsing history, DNS cache and files you downloaded are not covered here. Handle those in your browser or system settings.",
+      cleared: "Cleared, and automatic storage is off, so the pages you read from now on do not stay on this device. Next time you are online, this page itself and the styles it needs come back (about 0.5 MB) so you can still reach it without a network. Browsing history, DNS cache and files you downloaded are not covered here. Handle those in your browser or system settings.",
       apply: "Apply changes",
       applying: "Working",
       pending: "{add} to add, {remove} to remove",
@@ -389,6 +389,9 @@
     precached: new Set(),
     autoPrecache: true,
     precacheImages: false,
+    // 本站在裝置上佔用多少 byte，由 SW 量自己的快取算出來
+    usage: null,
+    // 瀏覽器給的配額，只用來算「還剩多少空間」
     estimate: null,
     // 讀者這一輪勾選的變動，套用之前不動快取
     add: new Set(),
@@ -416,6 +419,7 @@
       state.precached = new Set(data.precached || []);
       state.autoPrecache = data.autoPrecache !== false;
       state.precacheImages = data.precacheImages === true;
+      state.usage = typeof data.usage === "number" ? data.usage : null;
       state.estimate = data.estimate || null;
       state.add.clear();
       state.remove.clear();
@@ -458,15 +462,18 @@
     status.appendChild(
       document.createTextNode(fill("autoCount", { n: state.precached.size }))
     );
-    if (state.estimate && state.estimate.usage) {
-      const quota = state.estimate.quota;
-      const free = quota && quota > state.estimate.usage ? quota - state.estimate.usage : null;
+    // 佔用量由 SW 直接量自己的快取，見 sw.js 的 cacheUsage。可用空間仍舊問瀏覽器，
+    // 那是整台裝置的配額，本來就不是這個站算得出來的，慢個幾十秒才更新也沒差。
+    if (typeof state.usage === "number") {
+      const est = state.estimate;
+      const free =
+        est && est.quota && est.quota > est.usage ? est.quota - est.usage : null;
       status.appendChild(document.createElement("br"));
       status.appendChild(
         document.createTextNode(
           free === null
-            ? fill("usage", { used: size(state.estimate.usage) })
-            : fill("usageFree", { used: size(state.estimate.usage), free: size(free) })
+            ? fill("usage", { used: size(state.usage) })
+            : fill("usageFree", { used: size(state.usage), free: size(free) })
         )
       );
     }
