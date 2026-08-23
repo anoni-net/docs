@@ -59,14 +59,49 @@
 
 {% block scripts %}
   {{ super() }}
-<!-- Cloudflare Web Analytics -->
+<!-- anoni-analytics-start (standard build only; stripped by replace_sitename_anoni_ipfs.sh / replace_sitename_anoni_onion.sh) -->
+<!-- Cloudflare Web Analytics。原本擺在這個區塊外面，所以 onion 與 IPFS 版照樣會去
+     載入這支 clearnet 的 beacon，跟 replace_sitename_anoni_onion.sh 開頭寫的
+     「避免 Onion 使用者連到 clearnet endpoint」相反，也跟 utils/leaks 那頁寫的
+     「onion 版完全不載入分析」不符。移進來之後兩者才一致。 -->
 <script
   defer
   src="https://static.cloudflareinsights.com/beacon.min.js"
   data-cf-beacon='{"token": "f38275e7514d451096b184304b1a7e81"}'
 ></script>
-<!-- End Cloudflare Web Analytics -->
-<!-- anoni-analytics-start (standard build only; stripped by replace_sitename_anoni_ipfs.sh / replace_sitename_anoni_onion.sh) -->
 <script defer src="https://aa.anoni.net/script.js" data-website-id="2b8d98c3-5bc4-45ef-958f-6cd9b770502e"></script>
+<!-- 讀者是把站台當 app 開，還是在瀏覽器分頁裡看。這個數字用來決定離線閱讀、
+     小工具與版面要往哪個方向做，例如 standalone 沒有網址列，釣魚網址的判讀就
+     少了一個線索，QR code 讀取器那類工具的提示要寫得更完整。
+
+     送出去的只有一個列舉值（standalone、browser 這幾種其中之一），沒有其他欄位。
+     揭露寫在 utils/leaks 那頁的「我們沒有在收集這些」一節。
+
+     umami 被擋掉或還沒載入完就什麼都不做。整段在 onion 與 IPFS 版會被 sed 掉。 -->
+<script>
+  window.addEventListener("load", function () {
+    if (!window.umami || typeof window.umami.track !== "function") return;
+    var mode = "browser";
+    if (document.referrer.indexOf("android-app://") === 0) {
+      mode = "twa";
+    } else if (window.navigator.standalone === true) {
+      // iOS 加到主畫面。舊版 Safari 不支援 display-mode 媒體查詢，只有這個旗標
+      mode = "ios-standalone";
+    } else {
+      var modes = ["window-controls-overlay", "fullscreen", "standalone", "minimal-ui"];
+      for (var i = 0; i < modes.length; i++) {
+        if (window.matchMedia("(display-mode: " + modes[i] + ")").matches) {
+          mode = modes[i];
+          break;
+        }
+      }
+    }
+    try {
+      window.umami.track("display-mode", { mode: mode });
+    } catch (err) {
+      // 分析壞掉不該影響頁面
+    }
+  });
+</script>
 <!-- anoni-analytics-end -->
 {% endblock %}

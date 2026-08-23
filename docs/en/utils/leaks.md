@@ -56,11 +56,35 @@ This page is deliberately built as a fingerprint collector, so you should be ask
 
 The answer: every value appears on screen and nowhere else. Nothing is sent and nothing is written to storage. The [code is here](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/leaks.js){target="_blank"}, and one test scans that source specifically, turning CI red if any means of sending data or writing to storage appears in it.
 
-### About the request you will see in devtools
+### About the two requests you will see in devtools
 
-Open the network tab and you will find this page contacting a subdomain of anoni.net. That is our self-hosted site analytics, and it records that someone viewed a page. It has nothing to do with the values above, which it never reads. The onion build loads no analytics at all, so it makes no such request.
+Open the network tab and the clearnet build contacts two places.
 
-One site can both count how many people visited and identify who you are, and the first needs far less data than the second, which is the distinction that matters. To avoid the question entirely, turn the network off before opening the page. No requests happen at all.
+**A subdomain of anoni.net** is our self-hosted Umami. It records which page was viewed, where the visit came from, the broad category of browser and operating system, a bucketed screen size, and the country. It sets no cookies and does no cross-site tracking.
+
+**static.cloudflareinsights.com** is Cloudflare Web Analytics. Also traffic statistics, but third party: the data goes to Cloudflare rather than to our machine. The site already sits behind Cloudflare, so that company sees your request regardless; what this beacon adds for them is page-level performance and view counts.
+
+Neither reads any of the values listed on this page.
+
+### We do send one device detail, the display mode
+
+To the self-hosted endpoint, each full page load sends one extra value, the "Display mode" row in the table above: whether you are reading in a browser tab or have installed the site as an app. That single enumerated value is all that goes, with no other fields.
+
+Why we want the number: interface decisions depend on it. A standalone window has no address bar, which removes one of the cues for judging whether a link is genuine, so the wording in tools like the QR code reader and the invisible character detector has to carry more weight. How much content offline reading should store by default also depends on how many people genuinely use the site as an app. Without the number those decisions are guesswork.
+
+The cost, stated plainly: few people install a site as an app, so the value on its own is a fairly distinguishing signal, the same kind of thing as everything else in the table. That is exactly why it is listed there rather than hidden.
+
+Three ways to stay out of the count. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
+
+### The onion build has none of this
+
+The onion build strips the whole analytics block, so neither the self-hosted analytics nor the Cloudflare beacon is present, and no display mode is sent.
+
+Before 2026-08-23 the Cloudflare beacon sat outside the block that gets stripped, so the onion build loaded it anyway. That contradicted what this page said about the onion build loading no analytics. It was our oversight and it has been corrected.
+
+### Counting visitors and identifying them
+
+One site can both count how many people visited and identify who you are, and the first needs far less data than the second, which is the distinction that matters.
 
 ## What you can actually do
 
