@@ -1150,6 +1150,14 @@
       ? Object.assign({ kind: kind }, await stripPdf(bytes))
       : strip(bytes);
     if (!result.ok) {
+      // 送出格式代號，讓「該不該支援 HEIC」這種決定有依據可看。detect() 本來就分得出
+      // heic，只是不支援，那個資訊過去直接被丟掉。認不出來的送 unknown。
+      //
+      // 只有代號，沒有檔名也沒有內容。揭露見 utils/leaks 的「我們送出的裝置與使用
+      // 資訊」一節。
+      if (result.reason === "unsupported" && window.anoniTrack) {
+        window.anoniTrack("stripmeta-unsupported", { kind: result.kind || "unknown" });
+      }
       return {
         ok: false, name: file.name,
         reason: result.kind && result.kind !== "unknown" && t.errors[result.kind]
@@ -1159,7 +1167,12 @@
     const TYPES = { png: "image/png", jpeg: "image/jpeg", mp4: "video/mp4", pdf: "application/pdf" };
     const blob = new Blob([result.data], { type: TYPES[result.kind] || "application/octet-stream" });
     const url = await verify(blob, result.kind);
-    if (!url) return { ok: false, name: file.name, reason: "verify" };
+    if (!url) {
+      // 清完的檔案打不開就是這一頁的 bug。預期量極低，每一筆都值得看，等於一個
+      // 沒有摩擦的回報管道。
+      if (window.anoniTrack) window.anoniTrack("stripmeta-verify-fail", { kind: result.kind });
+      return { ok: false, name: file.name, reason: "verify" };
+    }
     return {
       ok: true, name: file.name, cleanName: cleanName(file.name),
       originalSize: bytes.length, cleanSize: result.data.length,

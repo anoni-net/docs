@@ -130,3 +130,8 @@ jobs:
       # 而且不會有任何一步變紅燈。
       - name: S3 略過未變動檔案
         run: python3 tools/test_s3_restore_mtime.py
+
+      # 埋在小工具裡的分析事件只准送列舉值。站上對讀者的承諾寫在 utils/leaks，
+      # 而新增一個事件只要一行，多送一個變數看起來跟少送一個沒有差別。
+      - name: 分析事件不夾帶內容
+        run: node tools/test_analytics_events.mjs

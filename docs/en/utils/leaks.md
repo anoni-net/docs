@@ -66,7 +66,7 @@ Open the network tab and the clearnet build contacts two places.
 
 Neither reads any of the values listed on this page.
 
-### We do send one device detail, the display mode
+### What we do send about your device and usage
 
 To the self-hosted endpoint, each full page load sends one extra value, the "Display mode" row in the table above: whether you are reading in a browser tab or have installed the site as an app. That single enumerated value is all that goes, with no other fields.
 
@@ -74,7 +74,48 @@ Why we want the number: interface decisions depend on it. A standalone window ha
 
 The cost, stated plainly: few people install a site as an app, so the value on its own is a fairly distinguishing signal, the same kind of thing as everything else in the table. That is exactly why it is listed there rather than hidden.
 
-Three ways to stay out of the count. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
+#### How the tools are used
+
+The tools section sends six further events. They all serve the same purpose: knowing what is broken and where to spend effort. What goes out is always a fixed code, never a filename, a URL, or anything you typed or decoded.
+
+| Event | When | Value |
+|---|---|---|
+| `stripmeta-unsupported` | The metadata stripper meets a format it cannot handle | A format code such as `heic`, `pdf`, `unknown` |
+| `stripmeta-verify-fail` | A cleaned file will not open | A format code |
+| `qrread-fail` | A QR code could not be read | `cantOpen` or `notFound`, plus a format code |
+| `qrread-kind` | A QR code was read | A coarse category of the contents, see below |
+| `offline-action` | An action on the offline reading page | `add`, `remove`, `clear`, `auto-on`, `auto-off`, `images-on`, `images-off` |
+| `display-mode` | Each full page load | The display mode described above |
+
+A recent example shows why the numbers matter. For a while the QR code reader failed completely on HEIC photos from an iPhone. The screen said "No QR code found", so people cropped and re-shot the picture, which could never work, because the image had never been decoded at all. Nobody knew how long that had been happening until someone reported it. `qrread-fail` counts "the browser could not open the image" separately from "the image really has no code", so the next occurrence surfaces on its own.
+
+`stripmeta-unsupported` answers whether HEIC support is worth building. The code already recognises the format and simply declines it; that information used to be discarded.
+
+The offline actions decide defaults. Automatic storage is on by default with a budget of about 29.5 MB. How many people turn it off, and how many press clear, tells us directly whether those two defaults are right.
+
+#### The content categories are deliberately coarse
+
+`qrread-kind` sends a category rather than the actual protocol:
+
+| Category | Covers |
+|---|---|
+| `credential` | Two-factor secrets, Wi-Fi passwords |
+| `network` | Onion addresses, Tor bridges |
+| `contact` | Contacts, email, SMS, telephone |
+| `location` | Coordinates |
+| `link` | Ordinary URLs |
+| `danger` | Protocols that execute directly |
+| `text` | Everything else |
+
+The merging is deliberate. Sent as exact types, one `otp` event would mean "this person just scanned a two-factor secret" and one `wifi` event would mean "this person is joining a network". Merged into `credential`, the question we need answered (which category needs better explanation) has the same answer, while a single event no longer points at a specific situation.
+
+`danger` stays on its own: how often people scan a directly-executing protocol is itself a safety signal.
+
+#### Staying out of the count
+
+Three ways. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
+
+No tool calls the analytics directly. They all go through one shared entry point, and that entry point lives in the same block as the analytics script, which the onion and IPFS builds strip out entirely. In those builds the tools have no way to send anything.
 
 ### The onion build has none of this
 

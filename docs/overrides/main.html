@@ -84,6 +84,21 @@
 
      umami 被擋掉或還沒載入完就什麼都不做。整段在 onion 與 IPFS 版會被 sed 掉。 -->
 <script>
+  // 小工具用的送出口。定義在這裡而不是各工具裡面，有兩個作用：整段在 onion 與
+  // IPFS 版會被 sed 掉，那兩版的工具因此自動什麼都不送；工具那邊也不必各自去碰
+  // umami，只要檢查這個函式在不在。
+  //
+  // 只收列舉值。每一種送出去的東西都寫在 utils/leaks 那頁，值有哪幾種也列在那裡，
+  // 讀者用開發者工具自己對得起來。
+  window.anoniTrack = function (name, data) {
+    if (!window.umami || typeof window.umami.track !== "function") return;
+    try {
+      window.umami.track(name, data);
+    } catch (err) {
+      // 分析壞掉不該影響工具
+    }
+  };
+
   window.addEventListener("load", function () {
     if (!window.umami || typeof window.umami.track !== "function") return;
     var mode = "browser";

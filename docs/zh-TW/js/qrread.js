@@ -734,6 +734,27 @@
     });
   }
 
+  // 解出來的內容屬於哪一大類。送出去的是這個粗分類，不是 classify 的細類。
+  //
+  // 細類會透露太多：otp 等於「這個人掃了一組兩步驟驗證密鑰」，wifi 等於「這個人在
+  // 連某個網路」。合併成 credential 之後，能回答的問題（哪一類的說明該加強）不變，
+  // 但單筆事件不再指向一個具體處境。
+  //
+  // danger 單獨留著。那是「掃到會直接執行的協定」，多久發生一次本身就是安全訊號。
+  const KIND_GROUPS = {
+    otp: "credential", wifi: "credential",
+    bridge: "network", onion: "network",
+    contact: "contact", mail: "contact", sms: "contact", tel: "contact",
+    geo: "location",
+    url: "link",
+    danger: "danger",
+    text: "text",
+  };
+
+  function kindGroup(kind) {
+    return KIND_GROUPS[kind] || "text";
+  }
+
   // decode 的結果對到畫面狀態。
   //
   // 「瀏覽器打不開這張圖」與「圖裡沒有 QR code」原本共用 notFound 一個狀態，讀者
@@ -761,17 +782,32 @@
         // 認得出格式就講清楚是哪一種，認不出來只說打不開
         state.format = sniffFormat(await readHead(file));
         state.status = status;
+        // 兩種失敗要分開數。cantOpen 代表瀏覽器連圖都沒解開（HEIC 多半在這裡），
+        // notFound 才是解碼能力不足。混在一起看就會像 2026-08 那次一樣，把格式問題
+        // 誤判成辨識率問題。
+        if (window.anoniTrack) {
+          window.anoniTrack("qrread-fail", {
+            reason: "cantOpen",
+            format: state.format || "unknown",
+          });
+        }
         render();
         return;
       }
       if (status === "notFound") {
         state.status = status;
+        if (window.anoniTrack) {
+          window.anoniTrack("qrread-fail", { reason: "notFound", format: "n/a" });
+        }
         render();
         return;
       }
       state.status = "done";
       state.text = result.data;
       state.info = classify(result.data);
+      if (window.anoniTrack) {
+        window.anoniTrack("qrread-kind", { group: kindGroup(state.info && state.info.kind) });
+      }
       state.copied = false;
       state.revealed = false;
       render();
