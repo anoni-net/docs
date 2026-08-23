@@ -60,7 +60,13 @@ The answer: every value appears on screen and nowhere else. Nothing is sent and 
 
 Open the network tab and the clearnet build contacts two places.
 
-**A subdomain of anoni.net** is our self-hosted Umami. It records which page was viewed, where the visit came from, the broad category of browser and operating system, a bucketed screen size, and the country. It sets no cookies and does no cross-site tracking.
+**A subdomain of anoni.net** is our self-hosted Umami. It records which page was viewed, where the visit came from, the broad category of browser and operating system, a bucketed screen size, the country, and how fast the page loaded. It sets no cookies and does no cross-site tracking.
+
+The screen size only became genuinely bucketed on 2026-08-23. This page had said "bucketed" for a while before that, while the exact width and height were what actually went out. Now every value is rounded down to the nearest hundred before sending, so 1440x900 leaves as 1400x900. This page teaches you that screen resolution is part of a fingerprint, and collecting the exact value ourselves does not square with that.
+
+Load speed started on the same day. It covers a few standard measurements: First Contentful Paint, Largest Contentful Paint, and Cumulative Layout Shift. The reason is concrete: the English search index is 1.8 MB, and the first time you press search you download all of it. On a constrained or high-latency connection that hurts, and right now there is no number to say whether it is worth changing.
+
+Every record also carries a build tag such as `21eb17c`, the commit that produced the page you are reading. It keeps figures from before and after a change apart, so when something says "this got slower" we know which change did it. The tag says nothing about you. Every reader of the same build shares it.
 
 **static.cloudflareinsights.com** is Cloudflare Web Analytics. Also traffic statistics, but third party: the data goes to Cloudflare rather than to our machine. The site already sits behind Cloudflare, so that company sees your request regardless; what this beacon adds for them is page-level performance and view counts.
 
@@ -76,10 +82,11 @@ The cost, stated plainly: few people install a site as an app, so the value on i
 
 #### How the tools are used
 
-The tools section sends six further events. They all serve the same purpose: knowing what is broken and where to spend effort. What goes out is always a fixed code, never a filename, a URL, or anything you typed or decoded.
+The tools section sends seven further events. They all serve the same purpose: knowing what is broken and where to spend effort. What goes out is always a fixed code, never a filename, a URL, or anything you typed or decoded.
 
 | Event | When | Value |
 |---|---|---|
+| `stripmeta-ok` | Metadata stripping succeeded | A format code |
 | `stripmeta-unsupported` | The metadata stripper meets a format it cannot handle | A format code such as `heic`, `pdf`, `unknown` |
 | `stripmeta-verify-fail` | A cleaned file will not open | A format code |
 | `qrread-fail` | A QR code could not be read | `cantOpen` or `notFound`, plus a format code |
@@ -89,7 +96,9 @@ The tools section sends six further events. They all serve the same purpose: kno
 
 A recent example shows why the numbers matter. For a while the QR code reader failed completely on HEIC photos from an iPhone. The screen said "No QR code found", so people cropped and re-shot the picture, which could never work, because the image had never been decoded at all. Nobody knew how long that had been happening until someone reported it. `qrread-fail` counts "the browser could not open the image" separately from "the image really has no code", so the next occurrence surfaces on its own.
 
-`stripmeta-unsupported` answers whether HEIC support is worth building. The code already recognises the format and simply declines it; that information used to be discarded.
+`stripmeta-unsupported` answers whether HEIC support is worth building. The code already recognises the format and simply declines it, and that information used to be discarded.
+
+`stripmeta-ok` was added on 2026-08-23 to serve as the denominator. Before it, only failures were counted, so "30 unsupported this month" gave no way to tell whether that was a lot or a little. A success count is what makes a failure rate computable.
 
 The offline actions decide defaults. Automatic storage is on by default with a budget of about 29.5 MB. How many people turn it off, and how many press clear, tells us directly whether those two defaults are right.
 
@@ -111,11 +120,47 @@ The merging is deliberate. Sent as exact types, one `otp` event would mean "this
 
 `danger` stays on its own: how often people scan a directly-executing protocol is itself a safety signal.
 
+#### Five site-wide events
+
+Five more started on 2026-08-23. These answer how the documentation itself should be written.
+
+| Event | When it is sent | Value |
+|---|---|---|
+| `search-used` | Someone used site search | Length bucket `short`, `medium`, `long` |
+| `search-zero` | That search returned nothing | Same |
+| `search-hit` | A search result was clicked | `first`, `top3`, `rest` |
+| `lang-switch` | The language menu was used | Source and target language codes |
+| `read-depth` | You reached a quarter, half, three quarters, or the bottom | `25`, `50`, `75`, `100` |
+
+Not a single character of your search terms is sent. You might be searching for "Great Firewall" or "circumvention", and a record of that is a risk wherever it sits, including in our own database. A length bucket is enough to answer whether the index works, and the terms themselves would answer nothing further. The share of zero-result searches points at missing content, and click position points at whether ranking is any good.
+
+Switch counts are the only signal that tells us whether a translation is being read at all, because the site ignores your browser's language setting and follows only what you picked. Readers moving from one language to another usually means the translation or the terminology has a problem, which is a pointer back to the content.
+
+Read depth answers whether an article should be split. Pages shorter than the viewport are skipped, since such a page is at the bottom the moment it loads and counting it would only inflate the average.
+
 #### Staying out of the count
 
-Three ways. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
+On the clearnet build you can simply switch it off. The button below writes `umami.disabled` into this device's localStorage, and the Umami script checks that key before every send, refusing to send anything while it is set. The setting stays on this device, and clearing browser data resets it.
+
+<div id="anoni-optout"></div>
+
+If you see no button, you are most likely reading the onion build, which never loads the analytics script at all, so there is nothing to switch off.
+
+Three further ways. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
+
+If your browser sends Do Not Track or Global Privacy Control, we send nothing at all as of 2026-08-23. The section "Think before enabling Do Not Track and GPC" below has the details.
 
 No tool calls the analytics directly. They all go through one shared entry point, and that entry point lives in the same block as the analytics script, which the onion and IPFS builds strip out entirely. In those builds the tools have no way to send anything.
+
+### The search-term leak we fixed
+
+Before 2026-08-23, clicking through from a site search result carried what you had typed into our analytics database.
+
+Two individually reasonable defaults stacked up. The documentation site has search highlighting enabled, so Material writes the matched terms into the `?h=` parameter of every search result link. Umami sends the full URL by default, including everything after the question mark. Stacked together, your search terms left your browser.
+
+Every record now passes an allowlist before it is sent. A URL keeps only four campaign parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`), every other query parameter and anything after `#` is stripped, and any event whose name or values fall outside the list is dropped whole. The allowlist lives in [main.html](https://github.com/anoni-net/docs/blob/main/docs/overrides/main.html){target="_blank"}, and a [test](https://github.com/anoni-net/docs/blob/main/tools/test_before_send.mjs){target="_blank"} checks it line by line, starting with this exact leak.
+
+Records from before 2026-08-23 still hold those parameters. What to do about them is a separate decision.
 
 ### The onion build has none of this
 
@@ -201,6 +246,8 @@ The cost is that multilingual sites may serve you a version you did not want.
 Both signals are switchable in browser settings, but **enabling them may not work in your favour**.
 
 Almost nothing honours Do Not Track in practice, and relatively few people send it, so it becomes a distinguishing feature instead. Global Privacy Control carries legal weight in several US states and behaves much like DNT elsewhere.
+
+This site honours both as of 2026-08-23. With either signal on, our analytics sends nothing at all. Keep in mind that most other sites will not do the same, so elsewhere the signal usually buys you only that distinguishing feature.
 
 If you want them: Chrome under Settings → Privacy and security, Firefox under Settings → Privacy & Security. Safari has removed the option.
 

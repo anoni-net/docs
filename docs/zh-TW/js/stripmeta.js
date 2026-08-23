@@ -1173,6 +1173,15 @@
       if (window.anoniTrack) window.anoniTrack("stripmeta-verify-fail", { kind: result.kind });
       return { ok: false, name: file.name, reason: "verify" };
     }
+    // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
+    // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
+    if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
+    // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
+    // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
+    if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
+    // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
+    // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
+    if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
     return {
       ok: true, name: file.name, cleanName: cleanName(file.name),
       originalSize: bytes.length, cleanSize: result.data.length,

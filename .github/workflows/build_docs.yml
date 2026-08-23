@@ -158,13 +158,13 @@ jobs:
       # 那棵樹沒有存在理由。舊網址由 Cloudflare Redirect Rule 301 導回 /docs/。
       - name: Build Docs (/)
         timeout-minutes: 20
-        run: source ./.venv/bin/activate; sh ./run.sh;
+        run: source ./.venv/bin/activate; BUILD_TAG="${GITHUB_SHA:0:7}" sh ./run.sh;
       - name: Build Docs (/zh-cn)
         timeout-minutes: 20
-        run: source ./.venv/bin/activate; sh ./run_zh-cn.sh;
+        run: source ./.venv/bin/activate; BUILD_TAG="${GITHUB_SHA:0:7}" sh ./run_zh-cn.sh;
       - name: Build Docs (/en)
         timeout-minutes: 20
-        run: source ./.venv/bin/activate; sh ./run_en.sh;
+        run: source ./.venv/bin/activate; BUILD_TAG="${GITHUB_SHA:0:7}" sh ./run_en.sh;
       - name: Replace OG images
         timeout-minutes: 10
         run: |

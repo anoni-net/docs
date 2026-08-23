@@ -5,6 +5,10 @@ sed -i '/anoni-analytics-start/,/anoni-analytics-end/d' \
 	./overrides_en/main.html \
 	./overrides_cn/main.html
 
+# 站台層量測腳本同樣只給 standard 版。main.html 裡的引用已經跟著 anoni-analytics 區塊
+# 一起被刪掉，這裡把檔案本身也拿掉，產物裡才不會留一支載不到也用不到的 analytics.js。
+rm -f ./zh-TW/js/analytics.js ./zh-CN/js/analytics.js ./en/js/analytics.js
+
 find ./output -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_ipfs.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
