@@ -362,6 +362,16 @@ JS_CASES: list[tuple[str, bool, str]] = [
      "  };\n"
      "})();\n", True, "巢狀物件裡的字串照樣掃"),
     ("const x = \"這個檔案沒有 STRINGS，吃得下。\";\n", False, "沒有 STRINGS 的 js 不掃"),
+    # 產物裡不可以出現的主機名，寫在註解裡照樣會被複製進 output。2026-08-23 的 onion
+    # 建置就是這樣紅燈的：leaks.js 一行註解寫出分析端點的主機名，symlink 進三個語系，
+    # 產物裡 3 個檔案命中，Verify onion output 中止上傳，而 clearnet 已經傳完，站台停在
+    # 半部署狀態。當時 js 只掃 STRINGS 裡的字串，看不到註解。
+    (_js(extra='  // 分析走 aa.anoni.net，這行註解會被複製進產物\n'),
+     True, "js 註解裡的分析主機名要攔"),
+    (_js(extra='  const URL = "https://aa.anoni.net/script.js";\n'),
+     True, "STRINGS 以外的字串裡出現主機名也要攔"),
+    (_js(extra='  // 分析走 anoni.net 底下的子網域\n'),
+     False, "改用子網域的說法不該被攔"),
     # 內容含雙引號時 JS 那邊會改用單引號包。threatmodel.js 的英文版就有兩條這樣寫，
     # 只認雙引號會整條漏掉，而漏掉的字串照樣顯示在畫面上。
     ("(function () {\n"

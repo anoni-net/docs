@@ -474,6 +474,21 @@ def lint_js_file(path: Path):
         text = path.read_text(encoding="utf-8")
     except (OSError, UnicodeDecodeError) as e:
         return [(0, ERROR, "read-error", str(e), "")]
+
+    # DEPLOY_RULES 掃整份檔案，不只 UI 字串。這幾條管的是「產物裡不可以出現的主機
+    # 名」，而 js 的程式碼註解一樣會被複製進 output，onion 建置的 Verify onion output
+    # 會因此中止上傳。
+    #
+    # 2026-08-23 就是這樣壞掉的：leaks.js 的一行註解寫出了分析端點的主機名，leaks.js
+    # 被 symlink 進三個語系，產物裡剛好 3 個檔案命中，onion 那格紅燈，clearnet 已經
+    # 上傳完成，站台停在半部署狀態。PR 的 lint 沒擋下來，因為當時 js 只掃 STRINGS
+    # 裡的字串，看不到註解。
+    for i, raw in enumerate(text.splitlines(), start=1):
+        for code, rx, msg in DEPLOY_RULES:
+            for m in rx.finditer(raw):
+                findings.append((i, ERROR, code, msg,
+                                 raw[max(0, m.start() - 6): m.start() + 6].strip()))
+
     for lineno, locale, value in extract_js_strings(text):
         script, simplified = JS_LOCALES[locale]
         english = script == "en"
