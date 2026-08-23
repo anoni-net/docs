@@ -62,11 +62,11 @@ Open the network tab and the clearnet build contacts two places.
 
 **A subdomain of anoni.net** is our self-hosted Umami. It records which page was viewed, where the visit came from, the broad category of browser and operating system, a bucketed screen size, the country, and how fast the page loaded. It sets no cookies and does no cross-site tracking.
 
-The screen size only became genuinely bucketed on 2026-08-23. This page had said "bucketed" for a while before that, while the exact width and height were what actually went out. Now every value is rounded down to the nearest hundred before sending, so 1440x900 leaves as 1400x900. This page teaches you that screen resolution is part of a fingerprint, and collecting the exact value ourselves does not square with that.
+The screen size only became genuinely bucketed on 2026-08-23. This page had said "bucketed" for a while before that, while the exact width and height were what actually went out. Now every value is rounded down to the nearest hundred before sending, so 1440x900 leaves as 1400x900. This page explains that screen resolution is part of a fingerprint, which is inconsistent with collecting the exact value ourselves.
 
-Load speed started on the same day. It covers a few standard measurements: First Contentful Paint, Largest Contentful Paint, and Cumulative Layout Shift. The reason is concrete: the English search index is 1.8 MB, and the first time you press search you download all of it. On a constrained or high-latency connection that hurts, and right now there is no number to say whether it is worth changing.
+Load speed started on the same day. It covers a few standard measurements: First Contentful Paint, Largest Contentful Paint, and Cumulative Layout Shift. The English search index is 1.8 MB, and the first time you press search you download all of it. On a constrained or high-latency connection the wait is substantial, and right now there is no number to say whether reducing it is worthwhile.
 
-Every record also carries a build tag such as `21eb17c`, the commit that produced the page you are reading. It keeps figures from before and after a change apart, so when something says "this got slower" we know which change did it. The tag says nothing about you. Every reader of the same build shares it.
+Every record also carries a build tag such as `21eb17c`, the commit that produced the page you are reading. It keeps figures from before and after a change apart, so when load times get worse we can trace which change caused it. The tag says nothing about you. Every reader of the same build shares it.
 
 **static.cloudflareinsights.com** is Cloudflare Web Analytics. Also traffic statistics, but third party: the data goes to Cloudflare rather than to our machine. The site already sits behind Cloudflare, so that company sees your request regardless; what this beacon adds for them is page-level performance and view counts.
 
@@ -98,7 +98,7 @@ A recent example shows why the numbers matter. For a while the QR code reader fa
 
 `stripmeta-unsupported` answers whether HEIC support is worth building. The code already recognises the format and simply declines it, and that information used to be discarded.
 
-`stripmeta-ok` was added on 2026-08-23 to serve as the denominator. Before it, only failures were counted, so "30 unsupported this month" gave no way to tell whether that was a lot or a little. A success count is what makes a failure rate computable.
+`stripmeta-ok` was added on 2026-08-23 to serve as the denominator. Before it, only failures were counted, so "30 unsupported this month" gave no basis for judging whether that was a high or low share. A success count is what makes a failure rate computable.
 
 The offline actions decide defaults. Automatic storage is on by default with a budget of about 29.5 MB. How many people turn it off, and how many press clear, tells us directly whether those two defaults are right.
 
@@ -132,7 +132,7 @@ Five more started on 2026-08-23. These answer how the documentation itself shoul
 | `lang-switch` | The language menu was used | Source and target language codes |
 | `read-depth` | You reached a quarter, half, three quarters, or the bottom | `25`, `50`, `75`, `100` |
 
-Not a single character of your search terms is sent. You might be searching for "Great Firewall" or "circumvention", and a record of that is a risk wherever it sits, including in our own database. A length bucket is enough to answer whether the index works, and the terms themselves would answer nothing further. The share of zero-result searches points at missing content, and click position points at whether ranking is any good.
+Not a single character of your search terms is sent. You might be searching for "Great Firewall" or "circumvention", and a record of that is a risk wherever it sits, including in our own database. A length bucket is enough to answer whether the index is usable, and the terms themselves would answer nothing further. The share of zero-result searches indicates which content is missing, and click position reflects whether the ranking is sound.
 
 Switch counts are the only signal that tells us whether a translation is being read at all, because the site ignores your browser's language setting and follows only what you picked. Readers moving from one language to another usually means the translation or the terminology has a problem, which is a pointer back to the content.
 
@@ -156,11 +156,11 @@ No tool calls the analytics directly. They all go through one shared entry point
 
 Before 2026-08-23, clicking through from a site search result carried what you had typed into our analytics database.
 
-Two individually reasonable defaults stacked up. The documentation site has search highlighting enabled, so Material writes the matched terms into the `?h=` parameter of every search result link. Umami sends the full URL by default, including everything after the question mark. Stacked together, your search terms left your browser.
+Two individually reasonable defaults combined. The documentation site has search highlighting enabled, so Material writes the matched terms into the `?h=` parameter of every search result link. Umami sends the full URL by default, including the query parameters after the question mark. Together they carried your search terms out of your browser.
 
-Every record now passes an allowlist before it is sent. A URL keeps only four campaign parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`), every other query parameter and anything after `#` is stripped, and any event whose name or values fall outside the list is dropped whole. The allowlist lives in [main.html](https://github.com/anoni-net/docs/blob/main/docs/overrides/main.html){target="_blank"}, and a [test](https://github.com/anoni-net/docs/blob/main/tools/test_before_send.mjs){target="_blank"} checks it line by line, starting with this exact leak.
+Every record now passes an allowlist before it is sent. A URL keeps only four campaign parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`), every other query parameter and anything after `#` is stripped, and any event whose name or values fall outside the list is dropped whole. The allowlist lives in [main.html](https://github.com/anoni-net/docs/blob/main/docs/overrides/main.html){target="_blank"}, and a [test](https://github.com/anoni-net/docs/blob/main/tools/test_before_send.mjs){target="_blank"} checks it line by line, starting with the leak described above.
 
-Records from before 2026-08-23 still hold those parameters. What to do about them is a separate decision.
+Records from before 2026-08-23 still hold those search terms. What to do about them has not been decided.
 
 ### The onion build has none of this
 
@@ -247,7 +247,7 @@ Both signals are switchable in browser settings, but **enabling them may not wor
 
 Almost nothing honours Do Not Track in practice, and relatively few people send it, so it becomes a distinguishing feature instead. Global Privacy Control carries legal weight in several US states and behaves much like DNT elsewhere.
 
-This site honours both as of 2026-08-23. With either signal on, our analytics sends nothing at all. Keep in mind that most other sites will not do the same, so elsewhere the signal usually buys you only that distinguishing feature.
+This site honours both as of 2026-08-23. With either signal on, our analytics sends nothing at all. Most other sites will not follow suit, so elsewhere the signal usually leaves you with only that distinguishing feature.
 
 If you want them: Chrome under Settings → Privacy and security, Firefox under Settings → Privacy & Security. Safari has removed the option.
 

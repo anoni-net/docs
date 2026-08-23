@@ -4,7 +4,7 @@
  *
  * === 為什麼需要這支 ===
  *
- * 2026-08 發現 mkdocs.yml 開著 search.highlight，Material 因此把讀者打的字寫進每一條
+ * 2026-08 發現 mkdocs.yml 開著 search.highlight，Material 因此把讀者輸入的文字寫進每一條
  * 搜尋結果連結的 ?h= 參數，而 umami 的 exclude-search 預設關閉，query string 原樣送出。
  * 讀者從搜尋結果點進任何一頁，搜尋詞就跟著 pageview 進了分析資料庫。這個站的讀者
  * 可能正在搜「防火長城」，那種記錄留在哪裡都是風險。

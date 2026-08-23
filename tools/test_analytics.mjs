@@ -132,7 +132,7 @@ await check('一屏看得完的頁面不量深度', () => {
   assert.equal(M.worthMeasuring(800, 900), false);
   assert.equal(M.worthMeasuring(800, 1200), false);
   assert.equal(M.worthMeasuring(800, 1300), true);
-  // 比視窗還短的頁面若照量，載入當下就是 100，平均值會被灌爆
+  // 比視窗還短的頁面若照樣計數，載入當下就是 100，平均值會失真
   assert.equal(M.depthReached(0, 800, 600), 100, '比視窗短的頁面一載入就是 100');
 });
 
