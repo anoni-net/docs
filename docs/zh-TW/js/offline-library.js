@@ -412,6 +412,15 @@
     swMissing: false,
   };
 
+  // 離線內容的操作。你們剛在這一塊投了不少工作，而「預快取預設開著、預算 29.5 MB」
+  // 這兩個決定目前沒有任何數據支撐。清除的頻率與自動存被關掉的比例，直接告訴我們
+  // 預設值對不對。
+  //
+  // 只送動作代號，不送勾了哪幾頁。那份清單等於閱讀偏好，是這一頁最不該外流的東西。
+  function trackOffline(action) {
+    if (window.anoniTrack) window.anoniTrack("offline-action", { action: action });
+  }
+
   function refreshStatus() {
     return ask({ type: "OFFLINE_STATUS", url: location.href }).then((data) => {
       if (data.type !== "status") throw new Error("bad-status");
@@ -637,6 +646,9 @@
         const keep = assetsOf(Array.from(staying));
         const dropAssets = Array.from(assetsOf(toRemove)).filter((a) => !keep.has(a));
         const addAssets = Array.from(assetsOf(toAdd));
+        // 只送有沒有做這個動作，不送勾了幾頁也不送勾了哪些
+        if (toAdd.length) trackOffline("add");
+        if (toRemove.length) trackOffline("remove");
         runTask(t.applying, toAdd.length + addAssets.length, (report) =>
           Promise.resolve()
             .then(() =>
@@ -694,6 +706,7 @@
     autoBox.type = "checkbox";
     autoBox.checked = state.autoPrecache;
     autoBox.addEventListener("change", () => {
+      trackOffline(autoBox.checked ? "auto-on" : "auto-off");
       ask({ type: "OFFLINE_AUTO", enabled: autoBox.checked })
         .then(refreshStatus)
         .then(() => render());
@@ -711,6 +724,7 @@
     imagesBox.checked = state.precacheImages;
     imagesBox.disabled = !state.autoPrecache;
     imagesBox.addEventListener("change", () => {
+      trackOffline(imagesBox.checked ? "images-on" : "images-off");
       ask({ type: "OFFLINE_IMAGES", url: location.href, enabled: imagesBox.checked })
         .then(refreshStatus)
         .then(() => render());
@@ -769,7 +783,10 @@
       // 這裡改成兩顆並排，要按的那顆帶危險色。
       const confirm = button(t.clearConfirm, "ol-danger", () =>
         runTask(t.clearing, 0, () =>
-          ask({ type: "OFFLINE_CLEAR" }).then(() => ({ message: t.cleared }))
+          ask({ type: "OFFLINE_CLEAR" }).then(() => {
+            trackOffline("clear");
+            return { message: t.cleared };
+          })
         )
       );
       confirm.disabled = state.busy;

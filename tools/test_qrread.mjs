@@ -54,10 +54,12 @@ const harness = `
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  function sniffFormat\(bytes\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function statusFor\(result\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  const KIND_GROUPS = \{[\s\S]*?\n  \};/m)}
+  ${grab(/^  function kindGroup\(kind\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function drawAndRead\(image, plan, box\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function decode\(source\) \{[\s\S]*?\n  \}/m)}
   return { SCALE, QUIET, classify, maskRaw, STRINGS, SHORTENERS, TRACKERS,
-           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize, sniffFormat, statusFor, decode };
+           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize, sniffFormat, statusFor, decode, kindGroup, KIND_GROUPS };
 `;
 // decode 需要 Image 與 URL。這裡只驗「瀏覽器打不開這張圖」那一條，替身讓
 // image.src 一被設定就觸發 onerror，跟 Chrome 拿到 HEIC 時的行為一樣。
@@ -541,6 +543,40 @@ test('瀏覽器打不開圖片時，decode 回報的是「打不開」而不是�
   assert.equal(tool.statusFor(result), 'cantOpen');
   // 順手驗物件網址有收回去，那一條原本只在 onload 收，onerror 會漏掉
   assert.deepEqual(revoked, ['blob:stub']);
+});
+
+// === 送到分析的粗分類 ===
+//
+// 細類會透露太多：otp 等於「這個人掃了一組兩步驟驗證密鑰」，wifi 等於「這個人在連
+// 某個網路」。合併之後能回答的問題不變，單筆事件不再指向一個具體處境。
+
+test('憑證類的細分被合併掉，單筆事件看不出掃了什麼', () => {
+  assert.equal(tool.kindGroup('otp'), 'credential');
+  assert.equal(tool.kindGroup('wifi'), 'credential');
+  // 合併後這兩者在事件裡無法區分，那正是重點
+  assert.equal(tool.kindGroup('otp'), tool.kindGroup('wifi'));
+});
+
+test('每一個 classify 認得的類型都對得到一個粗分類', () => {
+  const kinds = ['url', 'onion', 'bridge', 'wifi', 'otp', 'geo', 'mail', 'sms', 'tel',
+                 'contact', 'text', 'danger'];
+  for (const k of kinds) {
+    assert.ok(tool.kindGroup(k), `${k} 對不到粗分類`);
+  }
+  // 認不出來的落到 text，不會變成 undefined 送出去
+  assert.equal(tool.kindGroup(undefined), 'text');
+  assert.equal(tool.kindGroup('something-new'), 'text');
+});
+
+test('danger 單獨保留，那是安全訊號不是內容類型', () => {
+  assert.equal(tool.kindGroup('danger'), 'danger');
+});
+
+test('粗分類的值是固定的一小組，不會夾帶內容', () => {
+  const groups = new Set(Object.values(tool.KIND_GROUPS));
+  groups.add(tool.kindGroup('unknown-kind'));
+  assert.deepEqual([...groups].sort(),
+    ['contact', 'credential', 'danger', 'link', 'location', 'network', 'text']);
 });
 
 test('打不開的圖與沒有 QR code 是兩個不同的狀態', () => {
