@@ -194,6 +194,29 @@
       },
     },
     {
+      // 站台是被當成 app 開著，還是在瀏覽器分頁裡。跟上面那組系統偏好一樣是媒體
+      // 查詢，網站不必問就讀得到。
+      //
+      // 這一項站方自己也在用：aa.anoni.net 的分析會送出一次這個值，用來決定離線
+      // 閱讀與小工具往哪個方向做。既然拿了，就該跟其他項目並列在這裡，說明寫在
+      // utils/leaks 那頁的「我們沒有在收集這些」一節。
+      key: "displayMode",
+      needsPermission: false,
+      control: "none",
+      stable: true,
+      read: (t) => {
+        if (document.referrer.indexOf("android-app://") === 0) return t.modes.twa;
+        if (window.navigator.standalone === true) return t.modes.standalone;
+        const modes = ["window-controls-overlay", "fullscreen", "standalone", "minimal-ui"];
+        for (const mode of modes) {
+          if (window.matchMedia("(display-mode: " + mode + ")").matches) {
+            return t.modes[mode.replace(/-([a-z])/g, (m, c) => c.toUpperCase())];
+          }
+        }
+        return t.modes.browser;
+      },
+    },
+    {
       key: "storage",
       needsPermission: false,
       control: "none",
@@ -448,7 +471,13 @@
       askNote: "按下去瀏覽器會跳出授權視窗。允許之後畫面上會顯示你的經緯度與誤差範圍，只顯示在畫面上，不會送出也不會存起來。重新整理就沒了。",
       note: "以上全部在你的瀏覽器裡取得，沒有送出任何一項，也沒有寫進任何儲存。斷網時照樣讀得出來，沒有網路，這些值當然無處可送。刻意不提供匯出，匯出的檔案本身就是一份完整的指紋。",
       prefs: { dark: "深色模式", motion: "減少動態", contrast: "高對比", forced: "強制色彩" },
+      modes: {
+        browser: "瀏覽器分頁", standalone: "已安裝成 app（獨立視窗）",
+        minimalUi: "已安裝成 app（保留少量瀏覽器介面）", fullscreen: "全螢幕",
+        windowControlsOverlay: "已安裝成 app（自訂標題列）", twa: "從 Android app 開啟",
+      },
       names: {
+        displayMode: "顯示模式",
         timezone: "時區", language: "語言偏好", screen: "螢幕與視窗", hardware: "硬體",
         webgl: "顯示卡", canvas: "Canvas 指紋", fonts: "裝了哪些字型",
         preferences: "系統偏好設定", storage: "可用的儲存空間", devices: "影音裝置數量",
@@ -459,6 +488,7 @@
         location: "地理位置",
       },
       why: {
+        displayMode: "把網站安裝成 app 的人比例低，所以這個值本身就是一個區分度不小的特徵。它也會影響你看到的畫面，獨立視窗沒有網址列，判斷連結真假時少了一個線索。",
         timezone: "時區直接指出你大概在哪個經度，而且換 VPN 換不掉，它來自作業系統設定。",
         language: "語言清單的組合比想像中獨特，尤其同時裝了幾種語言的人。",
         screen: "視窗尺寸每個人都不一樣，而且你調整視窗大小它就跟著變，可以用來確認前後是同一個人。",
@@ -476,6 +506,7 @@
         location: "最直接的一項，精確到公尺。這一項要授權，其他項目都不用。",
       },
       tor: {
+        displayMode: "照實回報，Tor Browser 沒有統一這一項",
         timezone: "UTC",
         language: "en-US（所以網站不看這個值來決定語言）",
         screen: "固定成幾種常見尺寸，其餘用留白補齊",
@@ -511,7 +542,13 @@
       askNote: "按下去浏览器会跳出授权窗口。允许之后画面上会显示你的经纬度与误差范围，只显示在画面上，不会送出也不会存起来。刷新就没了。",
       note: "以上全部在你的浏览器里取得，没有送出任何一项，也没有写进任何存储。断网时照样读得出来，没有网络，这些值当然无处可送。刻意不提供导出，导出的文件本身就是一份完整的指纹。",
       prefs: { dark: "深色模式", motion: "减少动态", contrast: "高对比", forced: "强制色彩" },
+      modes: {
+        browser: "浏览器标签页", standalone: "已安装成 app（独立窗口）",
+        minimalUi: "已安装成 app（保留少量浏览器界面）", fullscreen: "全屏",
+        windowControlsOverlay: "已安装成 app（自定义标题栏）", twa: "从 Android app 打开",
+      },
       names: {
+        displayMode: "显示模式",
         timezone: "时区", language: "语言偏好", screen: "屏幕与窗口", hardware: "硬件",
         webgl: "显卡", canvas: "Canvas 指纹", fonts: "装了哪些字体",
         preferences: "系统偏好设置", storage: "可用的存储空间", devices: "影音设备数量",
@@ -522,6 +559,7 @@
         location: "地理位置",
       },
       why: {
+        displayMode: "把网站安装成 app 的人比例低，所以这个值本身就是一个区分度不小的特征。它也会影响你看到的画面，独立窗口没有地址栏，判断链接真假时少了一个线索。",
         timezone: "时区直接指出你大概在哪个经度，而且换 VPN 换不掉，它来自操作系统设置。",
         language: "语言清单的组合比想象中独特，尤其同时装了几种语言的人。",
         screen: "窗口尺寸每个人都不一样，而且你调整窗口大小它就跟着变，可以用来确认前后是同一个人。",
@@ -539,6 +577,7 @@
         location: "最直接的一项，精确到米。这一项要授权，其他项目都不用。",
       },
       tor: {
+        displayMode: "照实回报，Tor Browser 没有统一这一项",
         timezone: "UTC",
         language: "en-US（所以网站不看这个值来决定语言）",
         screen: "固定成几种常见尺寸，其余用留白补齐",
@@ -574,7 +613,13 @@
       askNote: "Pressing this brings up the browser's permission prompt. If you allow it, this page receives your latitude, longitude and accuracy, shows them on screen, and neither sends nor stores them. Reload and they are gone.",
       note: "Everything above was read inside your browser. None of it was sent anywhere and none of it was written to storage. This page still works with the network off, which is itself the proof that nothing is being sent. There is deliberately no export button: such a file would be a complete fingerprint sitting on your device.",
       prefs: { dark: "dark mode", motion: "reduced motion", contrast: "high contrast", forced: "forced colours" },
+      modes: {
+        browser: "Browser tab", standalone: "Installed as an app (own window)",
+        minimalUi: "Installed as an app (minimal browser UI)", fullscreen: "Fullscreen",
+        windowControlsOverlay: "Installed as an app (custom title bar)", twa: "Opened from an Android app",
+      },
       names: {
+        displayMode: "Display mode",
         timezone: "Time zone", language: "Language preferences", screen: "Screen and window",
         hardware: "Hardware", webgl: "Graphics card", canvas: "Canvas fingerprint",
         fonts: "Installed fonts", preferences: "System preferences",
@@ -584,6 +629,7 @@
         location: "Location",
       },
       why: {
+        displayMode: "Few people install a site as an app, so the value on its own is a fairly distinguishing signal. It also changes what you see: a standalone window has no address bar, which removes one of the cues for judging whether a link is genuine.",
         timezone: "Your time zone points at roughly which longitude you are on, and a VPN does not change it because it comes from the operating system.",
         language: "The combination of languages is more distinctive than people expect, especially for anyone with several installed.",
         screen: "Window size differs from person to person, and it changes as you resize, which makes it useful for confirming you are the same visitor as before.",
@@ -605,6 +651,7 @@
         location: "The most direct one, accurate to metres. This is the only item here that asks permission.",
       },
       tor: {
+        displayMode: "Reported as it is; Tor Browser does not normalise this one",
         timezone: "UTC",
         language: "en-US, which is why this site does not use it to pick a language",
         screen: "rounded to a few common sizes, the rest padded with letterboxing",

@@ -52,7 +52,17 @@ const harness = `
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
   return { shortHash, fontDetected, digestOf, combinations, PROBES, STRINGS };
 `;
-const mod = new Function(harness)();
+const load = (opts = {}) => {
+  // displayMode 的 read 要用 matchMedia、navigator.standalone 與 document.referrer。
+  // 替身讓每種情況都測得到：matched 是「哪一個 display-mode 會回 true」。
+  const windowStub = {
+    matchMedia: (q) => ({ matches: !!opts.matched && q.includes("display-mode: " + opts.matched) }),
+    navigator: { standalone: opts.iosStandalone === true },
+  };
+  const documentStub = { referrer: opts.referrer || "" };
+  return new Function("window", "document", harness)(windowStub, documentStub);
+};
+const mod = load();
 
 let passed = 0;
 let failed = 0;
@@ -270,6 +280,54 @@ test('組合數是相乘不是相加', () => {
   assert.equal(mod.combinations([2, 0, 3]), 6);
   assert.equal(mod.combinations([]), 1);
 });
+
+// === 顯示模式 ===
+//
+// 站方自己的分析（aa.anoni.net）會送出一次這個值，用來決定離線閱讀與小工具的方向。
+// 既然拿了就要跟其他項目並列在這一頁，不然「我們沒有在收集這些」那一節會說不過去。
+
+test('顯示模式跟其他項目一樣，不需要授權就讀得到', () => {
+  const probe = mod.PROBES.find((p) => p.key === 'displayMode');
+  assert.ok(probe, 'PROBES 裡沒有 displayMode');
+  assert.equal(probe.needsPermission, false);
+});
+
+test('六種顯示模式三個語系都有標籤', () => {
+  const keys = ['browser', 'standalone', 'minimalUi', 'fullscreen', 'windowControlsOverlay', 'twa'];
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    for (const k of keys) {
+      assert.ok(mod.STRINGS[lang].modes[k], `${lang} 少了 ${k} 的標籤`);
+    }
+  }
+});
+
+test('一般分頁回瀏覽器，裝成 app 回對應的模式', () => {
+  const read = (opts) => {
+    const m = load(opts);
+    const probe = m.PROBES.find((p) => p.key === 'displayMode');
+    return probe.read(m.STRINGS['zh-TW']);
+  };
+  const t = mod.STRINGS['zh-TW'];
+  assert.equal(read({}), t.modes.browser, '沒有任何 display-mode 命中時該回瀏覽器分頁');
+  assert.equal(read({ matched: 'standalone' }), t.modes.standalone);
+  assert.equal(read({ matched: 'minimal-ui' }), t.modes.minimalUi);
+  assert.equal(read({ matched: 'fullscreen' }), t.modes.fullscreen);
+  assert.equal(read({ matched: 'window-controls-overlay' }), t.modes.windowControlsOverlay);
+});
+
+test('iOS 加到主畫面與 Android TWA 各有自己的判斷', () => {
+  const read = (opts) => {
+    const m = load(opts);
+    return m.PROBES.find((p) => p.key === 'displayMode').read(m.STRINGS['zh-TW']);
+  };
+  const t = mod.STRINGS['zh-TW'];
+  // 舊版 iOS Safari 不支援 display-mode 媒體查詢，只有 navigator.standalone
+  assert.equal(read({ iosStandalone: true }), t.modes.standalone);
+  // Android 的 TWA 從 referrer 認，而且要優先於其他判斷
+  assert.equal(read({ referrer: 'android-app://net.anoni.docs/' }), t.modes.twa);
+  assert.equal(read({ referrer: 'android-app://x/', matched: 'standalone' }), t.modes.twa);
+});
+
 
 for (const [name, fn] of tests) {
   try {
