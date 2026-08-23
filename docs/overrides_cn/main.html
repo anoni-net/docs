@@ -69,8 +69,129 @@
   src="https://static.cloudflareinsights.com/beacon.min.js"
   data-cf-beacon='{"token": "f38275e7514d451096b184304b1a7e81"}'
 ></script>
-<script defer src="https://aa.anoni.net/script.js" data-website-id="2b8d98c3-5bc4-45ef-958f-6cd9b770502e"></script>
-<!-- 讀者是把站台當 app 開，還是在瀏覽器分頁裡看。這個數字用來決定離線閱讀、
+<script>
+  // 送出前的最後一道關卡。umami 的每一筆 payload 都會先經過這個函式，回傳 falsy
+  // 就整筆不送。加這一層的直接原因是 2026-08 發現的一個外洩：
+  //
+  // mkdocs.yml 開了 search.highlight，Material 因此把讀者輸入的文字寫進每一條搜尋結果
+  // 連結的 ?h= 參數。umami 的 exclude-search 預設關閉，query string 原樣送出，所以
+  // 讀者從搜尋結果點進任何一頁，搜尋詞就跟著 pageview 進了分析資料庫。對這個站的
+  // 讀者來說那正好是最不該留下的一類記錄。
+  //
+  // 直接開 exclude-search 也能擋掉，代價是它把整串 query 清空（實作是 e.search = ""），
+  // 連 utm_ 一起沒有，郵件與社群活動的來源就看不出來了。改成在這裡做白名單，兩件事
+  // 可以同時成立。
+  //
+  // 這一層跟 tools/test_analytics_events.mjs 的分工：那支在原始碼層擋「工具裡寫錯」，
+  // 這支在執行期擋「任何管道送出的東西」，包含 umami 自己產生的 pageview。
+  (function () {
+    // 允許送出的事件名稱。跟 tools/test_analytics_events.mjs 的 ALLOWED 是同一份，
+    // 那支測試會比對兩邊，改一邊沒改另一邊會紅燈。
+    var EVENTS = [
+      "display-mode",
+      "stripmeta-unsupported",
+      "stripmeta-verify-fail",
+      "stripmeta-ok",
+      "qrread-fail",
+      "qrread-kind",
+      "offline-action",
+      "search-used",
+      "search-zero",
+      "search-hit",
+      "lang-switch",
+      "read-depth",
+    ];
+
+    // 只留這四個。utm_term 刻意排除：它在廣告場景裝的是關鍵字，我們從來不設它，
+    // 留著只會多一個外站可以塞內容進來的欄位。
+    var UTM = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+
+    // 列舉代號長這樣。現有最長的是 window-controls-overlay（23），上限給 32。
+    var VALUE_RE = /^[A-Za-z0-9/_-]{1,32}$/;
+
+    function scrubUrl(url) {
+      if (typeof url !== "string" || !url) return url;
+      var hash = url.indexOf("#");
+      if (hash >= 0) url = url.slice(0, hash);
+      var q = url.indexOf("?");
+      if (q < 0) return url;
+      var kept = [];
+      var parts = url.slice(q + 1).split("&");
+      for (var i = 0; i < parts.length; i++) {
+        var name = parts[i].split("=")[0];
+        // 值也限長。外站塞一長串進 utm_campaign 的話，留下的也只有前 64 字元
+        if (UTM.indexOf(name) >= 0 && parts[i].length <= 64) kept.push(parts[i]);
+      }
+      return kept.length ? url.slice(0, q) + "?" + kept.join("&") : url.slice(0, q);
+    }
+
+    // 螢幕尺寸無條件捨去到百位。utils/leaks 那一頁教讀者螢幕解析度是指紋的一環，
+    // 我們自己卻收精確值，前後並不一致。捨去到百位之後 umami 判斷裝置類別照樣準。
+    function coarseScreen(screen) {
+      if (typeof screen !== "string") return screen;
+      var m = screen.match(/^(\d+)x(\d+)$/);
+      if (!m) return screen;
+      var floor100 = function (n) { return Math.max(100, Math.floor(n / 100) * 100); };
+      return floor100(+m[1]) + "x" + floor100(+m[2]);
+    }
+
+    function scrubData(data) {
+      if (!data || typeof data !== "object") return undefined;
+      var out = {};
+      var count = 0;
+      for (var key in data) {
+        if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
+        if (count >= 4) break;
+        if (!/^[a-z][a-zA-Z]{0,15}$/.test(key)) continue;
+        if (typeof data[key] !== "string" || !VALUE_RE.test(data[key])) continue;
+        out[key] = data[key];
+        count += 1;
+      }
+      return count ? out : undefined;
+    }
+
+    window.anoniBeforeSend = function (type, payload) {
+      // umami 的 data-do-not-track 只看 doNotTrack 那三個舊欄位，沒看 GPC。
+      // Global Privacy Control 是同一件事的新寫法，一併尊重。
+      if (window.navigator && window.navigator.globalPrivacyControl === true) return null;
+
+      // event 是 pageview 與自訂事件，performance 是 Web Vitals。
+      // identify 會把讀者標上持久識別，我們沒有呼叫它，這裡再擋一次。
+      if (type !== "event" && type !== "performance") return null;
+      if (!payload || typeof payload !== "object") return null;
+
+      var out = {};
+      for (var key in payload) {
+        if (Object.prototype.hasOwnProperty.call(payload, key)) out[key] = payload[key];
+      }
+
+      out.url = scrubUrl(out.url);
+      out.referrer = scrubUrl(out.referrer);
+      out.screen = coarseScreen(out.screen);
+
+      if (typeof out.name === "string") {
+        if (EVENTS.indexOf(out.name) < 0) return null;
+        out.data = scrubData(out.data);
+        if (!out.data) delete out.data;
+      } else {
+        // pageview 與 performance 不該帶 data
+        delete out.data;
+        delete out.name;
+      }
+      return out;
+    };
+  })();
+</script>
+<script
+  defer
+  src="https://aa.anoni.net/script.js"
+  data-website-id="2b8d98c3-5bc4-45ef-958f-6cd9b770502e"
+  data-before-send="anoniBeforeSend"
+  data-do-not-track="true"
+  data-performance="true"
+  data-tag="{{ config.extra.build_tag }}"
+></script>
+<!-- 讀者是把網站當 app 開，還是在瀏覽器分頁裡看。這個數字用來決定離線閱讀、
      小工具與版面要往哪個方向做，例如 standalone 沒有網址列，釣魚網址的判讀就
      少了一個線索，QR code 讀取器那類工具的提示要寫得更完整。
 
@@ -118,5 +239,8 @@
     }
   });
 </script>
+<!-- 整站共通的行為量測（搜尋、語系切換、閱讀深度）。放在這個區塊裡面，onion 與
+     IPFS 版連載入都不會發生。內容與可送出的值見 js/analytics.js 開頭的說明。 -->
+<script defer src="{{ 'js/analytics.js' | url }}"></script>
 <!-- anoni-analytics-end -->
 {% endblock %}

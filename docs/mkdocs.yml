@@ -218,6 +218,9 @@ theme:
     - content.code.copy
     - content.footnote.tooltips
 extra:
+  # 每一筆分析資料都帶著這個標籤，改版前後才比較得出來。CI 由 build_docs.yml
+  # 帶 commit 短碼進來，本機建置就是 dev。
+  build_tag: !ENV [BUILD_TAG, "dev"]
   alternate:
     # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是網站預設語系，run.sh 直接把它建在
     # 根路徑，沒有獨立的語系區段。填 /docs/ 讓 hreflang 有 self-reference（Google 要求

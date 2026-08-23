@@ -198,6 +198,9 @@ theme:
     - content.code.copy
     - content.footnote.tooltips
 extra:
+  # 每一筆分析資料都帶著這個標籤，改版前後才比較得出來。CI 由 build_docs.yml
+  # 帶 commit 短碼進來，本機建置就是 dev。
+  build_tag: !ENV [BUILD_TAG, "dev"]
   alternate:
     - name: English (en-US)
       link: /docs/en/

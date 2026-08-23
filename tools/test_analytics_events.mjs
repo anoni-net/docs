@@ -32,9 +32,15 @@ const ALLOWED = new Set([
   'display-mode',
   'stripmeta-unsupported',
   'stripmeta-verify-fail',
+  'stripmeta-ok',
   'qrread-fail',
   'qrread-kind',
   'offline-action',
+  'search-used',
+  'search-zero',
+  'search-hit',
+  'lang-switch',
+  'read-depth',
 ]);
 
 // data 裡允許出現的值。字面字串、或這幾個回傳固定列舉的函式與欄位。
@@ -47,6 +53,10 @@ const SAFE_VALUES = [
   /^kindGroup\([^)]*\)$/,                   // 粗分類函式
   /^action$/,                               // trackOffline 的參數，呼叫端已檢查
   /^mode$/,                                 // display-mode
+  /^queryBucket\([^)]*\)$/,                 // 搜尋字數級距，只回 short/medium/long
+  /^rankBucket\([^)]*\)$/,                  // 點擊位置級距，只回 first/top3/rest
+  /^from$|^to$/,                            // normalizeLang 的回傳，語系代號
+  /^String\(marks\[i\]\)$/,                  // 閱讀深度，25/50/75/100
 ];
 
 let passed = 0;
@@ -60,7 +70,15 @@ const files = fs.readdirSync(JS_DIR).filter((f) => f.endsWith('.js'));
 const sources = files.map((f) => [f, fs.readFileSync(path.join(JS_DIR, f), 'utf8')]);
 
 // anoniTrack("name", { key: value, ... })
-const CALL_RE = /anoniTrack\(\s*"([a-z-]+)"\s*,\s*\{([^}]*)\}\s*\)/g;
+//
+// 也要認得 const track = window.anoniTrack 這種別名。analytics.js 用了別名，而這支
+// 原本只比對 anoniTrack(，那一整批事件因此完全沒被掃到，白名單等於對它不存在。
+// 掃不到的規則跟沒有規則一樣，而且更糟，因為看起來像有守著。
+const CALL_RE = /(?:window\.anoniTrack|\btrack)\(\s*"([a-z-]+)"\s*,\s*\{([^}]*)\}\s*\)/g;
+
+// 整支檔案開頭就擋掉的寫法。analytics.js 是 if (typeof window.anoniTrack !== "function") return;
+// 這種形式，後面每個呼叫都不必再檢查一次。
+const FILE_GUARD_RE = /typeof\s+window\.anoniTrack\s*!==\s*["']function["'][\s\S]{0,40}?return/;
 
 check('事件名稱都在白名單裡', () => {
   for (const [name, src] of sources) {
@@ -92,6 +110,8 @@ check('data 只送列舉值，沒有夾帶檔名、網址或內容', () => {
 
 check('呼叫前都確認過送出口存在（onion 版沒有）', () => {
   for (const [name, src] of sources) {
+    // 檔案開頭已經擋過的就不必逐行再要求一次
+    if (FILE_GUARD_RE.test(src)) continue;
     const lines = src.split('\n');
     lines.forEach((line, i) => {
       if (!/anoniTrack\(\s*"/.test(line)) return;
@@ -105,6 +125,19 @@ check('呼叫前都確認過送出口存在（onion 版沒有）', () => {
         `onion 與 IPFS 版整段分析會被 sed 掉，那兩版會炸在這一行。`);
     });
   }
+});
+
+check('這份白名單跟 main.html 的 EVENTS 是同一份', () => {
+  // 白名單有兩份：這裡擋原始碼寫錯，main.html 的 anoniBeforeSend 擋執行期送出。
+  // 兩份分開放是必要的（一份要在瀏覽器裡跑），分開就會走偏。改一邊漏另一邊的後果
+  // 是安靜的：事件照送，畫面正常，資料庫裡什麼都沒有，要到有人翻報表才發現。
+  const html = fs.readFileSync(path.join(HERE, '..', 'docs', 'overrides', 'main.html'), 'utf8');
+  const block = html.match(/^    var EVENTS = \[([\s\S]*?)\n    \];/m);
+  assert.ok(block, 'main.html 裡找不到 EVENTS 陣列');
+  const inHtml = [...block[1].matchAll(/"([a-z-]+)"/g)].map((m) => m[1]).sort();
+  const inTest = [...ALLOWED].sort();
+  assert.deepEqual(inHtml, inTest,
+    `兩份白名單對不上。\n    main.html 有：${inHtml.join(', ')}\n    這支有：${inTest.join(', ')}`);
 });
 
 check('沒有工具直接碰 umami，一律走送出口', () => {

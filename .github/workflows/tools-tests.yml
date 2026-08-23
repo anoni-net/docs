@@ -26,19 +26,23 @@ on:
     paths:
       - "tools/**"
       - "docs/zh-TW/sw.js"
-      - "docs/zh-TW/js/offline-library.js"
-      - "docs/zh-TW/js/passphrase.js"
-      - "docs/zh-TW/js/qrcode.js"
-      - "docs/zh-TW/js/leaks.js"
-      - "docs/zh-TW/js/cleanurl.js"
-      - "docs/zh-TW/js/invisible.js"
-      - "docs/zh-TW/js/qrread.js"
-      - "docs/zh-TW/js/threatmodel.js"
-      - "docs/zh-TW/js/stripmeta.js"
+      # 這裡原本逐一列出每一支 js。漏一支的代價上面第 10 行已經寫過一次
+      # （改 offline-library.js 那次 CI 一個都沒跑）。改成整個目錄，新增檔案不必記得
+      # 回來加，這幾支測試跑完不到十秒，多跑幾次的成本可以忽略。
+      #
+      # 三個語系都要納入：test_analytics.mjs 會比對三份 analytics.js 逐位元組相同，
+      # 只改 zh-CN 那份的話，不掃就抓不到。
+      - "docs/zh-TW/js/**"
+      - "docs/zh-CN/js/**"
+      - "docs/en/js/**"
       - "docs/zh-TW/utils/**"
       - "docs/mkdocs*.yml"
       - "docs/snippets/**"
+      # overrides 的 main.html 是 test_before_send.mjs 的來源，送出前的白名單寫在裡面
       - "docs/overrides/base.html"
+      - "docs/overrides/main.html"
+      - "docs/overrides_cn/main.html"
+      - "docs/overrides_en/main.html"
       - "docs/hooks/**"
       - ".github/workflows/tools-tests.yml"
 
@@ -135,3 +139,14 @@ jobs:
       # 而新增一個事件只要一行，多送一個變數看起來跟少送一個沒有差別。
       - name: 分析事件不夾帶內容
         run: node tools/test_analytics_events.mjs
+
+      # 送出前的白名單。2026-08 發現 search.highlight 把讀者打的字寫進 ?h=，而 umami
+      # 預設把完整網址送出去，兩個預設疊起來讓搜尋詞進了分析資料庫。修法就是這道
+      # 白名單，它失效的方式一樣安靜，所以每一條規則都要有測試盯著。
+      - name: 送出前的白名單擋得住
+        run: node tools/test_before_send.mjs
+
+      # 整站共通的量測腳本站在搜尋框旁邊。承諾是關鍵字一個字都不送，只送字數級距，
+      # 而把 queryBucket(q.length) 寫成 q 只差幾個字元，畫面上看不出差別。
+      - name: 量測腳本不外洩搜尋詞
+        run: node tools/test_analytics.mjs
