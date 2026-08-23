@@ -97,9 +97,12 @@ test('索引頁沒有多出 nav 以外的卡片', () => {
   }
 });
 
+// await 是必要的。原本寫 fn()，非同步的測試函式回一個 promise 就被當成通過，斷言
+// 失敗變成 unhandled rejection，整支測試照樣印綠色。這個檔案是 ESM，頂層 await 可以
+// 直接用。2026-08 在 test_qrread.mjs 先踩到一次，這裡是把同一個缺陷補齊。
 for (const [name, fn] of tests) {
   try {
-    fn();
+    await fn();
     console.log(`  ✓ ${name}`);
     passed += 1;
   } catch (err) {
