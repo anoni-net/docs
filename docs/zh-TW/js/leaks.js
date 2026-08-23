@@ -68,6 +68,30 @@
   // 每一項都要有 tor（Tor Browser 怎麼處理）與 why（為什麼這算指紋）。
   // 少了任何一個，測試會紅：只丟一堆數值給讀者而不說明，這一頁就只是在嚇人。
 
+  // GeolocationPositionError 的 code：1 拒絕、2 定位拿不到、3 逾時。三種的處置不同，
+  // 都寫成「你拒絕了」會讓逾時的人去翻權限設定，而那裡根本沒有東西可以改。
+  const GEO_REASONS = { 1: "denied", 2: "positionUnavailable", 3: "timeout" };
+
+  // 一個探測的回傳值該顯示成什麼。抽成具名函式是為了能在 Node 裡驗，renderItem 要
+  // DOM，測不到，而這裡正是出過事的地方，見 tools/test_leaks.mjs。
+  //
+  // muted 表示這一格不是實際讀到的值，畫面上會用淡色。
+  function valueText(value, t) {
+    if (value === null || value === undefined) return { text: t.unavailable, muted: true };
+    if (value instanceof Error) return { text: t[value.reason] || t.denied, muted: true };
+    // 不該發生，但發生過：GeolocationPositionError 不是 Error 的子類別，接不到就會
+    // 被當字串印成 [object ...]。任何非字串一律退回「沒有提供」，畫面上寧可少一項，
+    // 也不要出現一串對讀者沒有意義的內部型別名稱。
+    if (typeof value !== "string") return { text: t.unavailable, muted: true };
+    return { text: value, muted: false };
+  }
+
+  function geolocationError(err) {
+    const error = new Error("geolocation");
+    error.reason = (err && GEO_REASONS[err.code]) || "denied";
+    return error;
+  }
+
   const PROBES = [
     {
       key: "timezone",
@@ -341,7 +365,11 @@
                 t.fmt.location(latitude.toFixed(5), longitude.toFixed(5), Math.round(accuracy))
               );
             },
-            (err) => reject(err),
+            // GeolocationPositionError 不是 Error 的子類別，直接丟出去的話
+            // renderItem 的 `value instanceof Error` 接不到它，會掉進渲染分支把
+            // 物件當字串印出來，畫面上就是 [object GeolocationPositionError]。
+            // 在來源轉成 Error，並把 code 帶著，讓畫面分得出是哪一種失敗。
+            (err) => reject(geolocationError(err)),
             { enableHighAccuracy: true, timeout: 15000 }
           );
         }),
@@ -466,6 +494,8 @@
       summary: "上面 {n} 項穩定的值揉成的短碼。換一個瀏覽器打開，比對短碼就知道有沒有變，點一下短碼會整段選取，方便自己複製下來。它本身就是一個識別碼，所以只出現在畫面上，沒有存起來也沒有匯出。",
       unavailable: "這個瀏覽器沒有提供",
       denied: "你拒絕了，或者系統擋住了",
+      positionUnavailable: "你允許了，但裝置這時候定不出位置",
+      timeout: "你允許了，但等了十五秒還沒定出位置",
       askTitle: "下面這一項要你按了才會問",
       askButton: "顯示我的位置",
       askNote: "按下去瀏覽器會跳出授權視窗。允許之後畫面上會顯示你的經緯度與誤差範圍，只顯示在畫面上，不會送出也不會存起來。重新整理就沒了。",
@@ -537,6 +567,8 @@
       summary: "上面 {n} 项稳定的值揉成的短码。换一个浏览器打开，比对短码就知道有没有变，点一下短码会整段选取，方便自己复制下来。它本身就是一个识别码，所以只出现在画面上，没有存起来也没有导出。",
       unavailable: "这个浏览器没有提供",
       denied: "你拒绝了，或者系统挡住了",
+      positionUnavailable: "你允许了，但设备这时候定不出位置",
+      timeout: "你允许了，但等了十五秒还没定出位置",
       askTitle: "下面这一项要你按了才会问",
       askButton: "显示我的位置",
       askNote: "按下去浏览器会跳出授权窗口。允许之后画面上会显示你的经纬度与误差范围，只显示在画面上，不会送出也不会存起来。刷新就没了。",
@@ -608,6 +640,8 @@
       summary: "A short code folded from the {n} stable values above. Open this page in another browser and compare just this one to see whether anything changed; clicking the code selects all of it, ready for you to copy yourself. The code is itself an identifier, so it appears on screen only, with nothing stored and nothing exported.",
       unavailable: "not available in this browser",
       denied: "you declined, or the system blocked it",
+      positionUnavailable: "you allowed it, but the device could not get a fix",
+      timeout: "you allowed it, but no fix arrived within fifteen seconds",
       askTitle: "This one only runs when you press the button",
       askButton: "Show my location",
       askNote: "Pressing this brings up the browser's permission prompt. If you allow it, this page receives your latitude, longitude and accuracy, shows them on screen, and neither sends nor stores them. Reload and they are gone.",
@@ -685,13 +719,8 @@
   function renderItem(probe, value) {
     const item = el("div", "lk-item");
     item.appendChild(el("p", "lk-name", t.names[probe.key]));
-    if (value === null || value === undefined) {
-      item.appendChild(el("p", "lk-value lk-none", t.unavailable));
-    } else if (value instanceof Error) {
-      item.appendChild(el("p", "lk-value lk-none", t.denied));
-    } else {
-      item.appendChild(el("p", "lk-value", value));
-    }
+    const shown = valueText(value, t);
+    item.appendChild(el("p", shown.muted ? "lk-value lk-none" : "lk-value", shown.text));
     // 對照值排在自己的值正下方，換瀏覽器時一眼看得出哪一項會變。原本只寫「Tor
     // Browser 會統一掉」，讀者得自己去記十幾個值才比對得起來。
     const tor = el("p", "lk-tor");

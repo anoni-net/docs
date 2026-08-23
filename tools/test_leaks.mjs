@@ -45,12 +45,15 @@ const harness = `
   ${grab(/^  function fontDetected\(widths, baselines\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function digestOf\(entries\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function combinations\(counts\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  const GEO_REASONS = \{[^}]*\};/m)}
+  ${grab(/^  function valueText\(value, t\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function geolocationError\(err\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const PROBES = \[[\s\S]*?\n  \];/m)}
   ${grab(/^  const FMT_ZH_TW = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const FMT_ZH = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const FMT_EN = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { shortHash, fontDetected, digestOf, combinations, PROBES, STRINGS };
+  return { shortHash, fontDetected, digestOf, combinations, PROBES, STRINGS, geolocationError, GEO_REASONS, valueText };
 `;
 const load = (opts = {}) => {
   // displayMode 的 read 要用 matchMedia、navigator.standalone 與 document.referrer。
@@ -60,7 +63,18 @@ const load = (opts = {}) => {
     navigator: { standalone: opts.iosStandalone === true },
   };
   const documentStub = { referrer: opts.referrer || "" };
-  return new Function("window", "document", harness)(windowStub, documentStub);
+  // location 探測要 navigator.geolocation。geoError 給的是瀏覽器那種
+  // GeolocationPositionError 形狀的物件：有 code，但不是 Error。
+  const navigatorStub = {
+    standalone: opts.iosStandalone === true,
+    geolocation: opts.geoError === undefined ? undefined : {
+      getCurrentPosition: (ok, fail) => fail(opts.geoError),
+    },
+  };
+  windowStub.navigator = navigatorStub;
+  return new Function("window", "document", "navigator", harness)(
+    windowStub, documentStub, navigatorStub
+  );
 };
 const mod = load();
 
@@ -329,9 +343,90 @@ test('iOS 加到主畫面與 Android TWA 各有自己的判斷', () => {
 });
 
 
+// === 地理位置失敗時的訊息 ===
+//
+// GeolocationPositionError 不是 Error 的子類別。原本 read 直接 reject(err)，而
+// renderItem 用 `value instanceof Error` 判斷，接不到它，於是掉進渲染分支把物件當
+// 字串印出來，讀者在畫面上看到的是 [object GeolocationPositionError]。
+
+test('原始的 GeolocationPositionError 不會被印成 [object ...]', async () => {
+  // 這就是讀者回報的畫面。瀏覽器丟的那個物件不是 Error，read 直接 reject 它的話，
+  // 顯示層接不到，就會把物件當字串印出來。
+  const raw = { code: 1, message: 'User denied Geolocation' };
+  const m = load({ geoError: raw });
+  const probe = m.PROBES.find((p) => p.key === 'location');
+  const t = m.STRINGS['zh-TW'];
+  const err = await probe.read(t).then(() => null, (e) => e);
+  const shown = m.valueText(err, t);
+  assert.ok(!/\[object/.test(shown.text), `畫面上出現了 ${shown.text}`);
+  assert.equal(shown.text, t.denied);
+  assert.equal(shown.muted, true);
+});
+
+test('三種 code 一路走到畫面都是不同的說法', async () => {
+  const t = mod.STRINGS['zh-TW'];
+  const shownFor = async (code) => {
+    const m = load({ geoError: { code } });
+    const probe = m.PROBES.find((p) => p.key === 'location');
+    const err = await probe.read(m.STRINGS['zh-TW']).then(() => null, (e) => e);
+    return m.valueText(err, m.STRINGS['zh-TW']).text;
+  };
+  assert.equal(await shownFor(1), t.denied);
+  assert.equal(await shownFor(2), t.positionUnavailable);
+  assert.equal(await shownFor(3), t.timeout);
+});
+
+test('任何非字串的值都不會直接渲染', () => {
+  const t = mod.STRINGS['zh-TW'];
+  for (const bad of [{}, [], 42, true, { code: 1 }, new Date(0)]) {
+    const shown = mod.valueText(bad, t);
+    assert.equal(shown.text, t.unavailable, `${JSON.stringify(bad)} 被直接渲染了`);
+    assert.equal(shown.muted, true);
+  }
+  // 正常的字串照樣顯示
+  assert.deepEqual(mod.valueText('UTC+8', t), { text: 'UTC+8', muted: false });
+});
+
+test('地理位置的錯誤轉成 Error，畫面才接得到', () => {
+  // 替身模擬瀏覽器的 GeolocationPositionError：不是 Error，只有 code 與 message
+  const raw = { code: 1, message: 'User denied Geolocation' };
+  assert.ok(!(raw instanceof Error), '前提：瀏覽器丟的那個物件不是 Error');
+  const err = mod.geolocationError(raw);
+  assert.ok(err instanceof Error, '轉出來的必須是 Error，renderItem 才判斷得到');
+});
+
+test('三種失敗各自對到不同的說法', () => {
+  const t = mod.STRINGS['zh-TW'];
+  const msg = (code) => t[mod.geolocationError({ code }).reason];
+  assert.equal(msg(1), t.denied);
+  assert.equal(msg(2), t.positionUnavailable);
+  assert.equal(msg(3), t.timeout);
+  // 逾時說成「你拒絕了」會讓人去翻權限設定，而那裡沒有東西可以改
+  assert.notEqual(msg(3), t.denied);
+  assert.notEqual(msg(2), t.denied);
+});
+
+test('認不得的 code 退回「拒絕」而不是 undefined', () => {
+  assert.equal(mod.geolocationError({ code: 99 }).reason, 'denied');
+  assert.equal(mod.geolocationError(null).reason, 'denied');
+  assert.equal(mod.geolocationError(undefined).reason, 'denied');
+});
+
+test('三個語系都有三種失敗的說法', () => {
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    for (const key of ['denied', 'positionUnavailable', 'timeout']) {
+      assert.ok(mod.STRINGS[lang][key], `${lang} 少了 ${key}`);
+    }
+  }
+});
+
+
+// await 是必要的。原本寫 fn()，非同步的測試函式回一個 promise 就被當成通過，斷言
+// 失敗變成 unhandled rejection，整支測試照樣印綠色。這個檔案是 ESM，頂層 await 可以
+// 直接用。2026-08 在 test_qrread.mjs 先踩到一次，這裡是把同一個缺陷補齊。
 for (const [name, fn] of tests) {
   try {
-    fn();
+    await fn();
     console.log(`  ✓ ${name}`);
     passed += 1;
   } catch (err) {
