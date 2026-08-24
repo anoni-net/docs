@@ -12,18 +12,33 @@ from enum import Enum
 from typing import Any
 
 from cachetools import TTLCache
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Depends, Response, status
 from pydantic import BaseModel, Field
 
 from pgdb import PGConn
 
-_cache: TTLCache = TTLCache(maxsize=128, ttl=300)
+CACHE_TTL_SECONDS = 300
+
+_cache: TTLCache = TTLCache(maxsize=128, ttl=CACHE_TTL_SECONDS)
+
+
+def cache_headers(response: Response) -> None:
+    """
+    Advertise the same TTL the in-process cache uses.
+
+    Without a Cache-Control header the CDN falls back to the zone default,
+    which is measured in hours. The collector writes hourly, so an edge copy
+    that old shows stale charts long after the data is back.
+    """
+    response.headers["Cache-Control"] = f"public, max-age={CACHE_TTL_SECONDS}"
+
 
 router = APIRouter(
     prefix="/vega",
     tags=[
         "vega",
     ],
+    dependencies=[Depends(cache_headers)],
     responses={status.HTTP_404_NOT_FOUND: {"description": "Not found"}},
 )
 

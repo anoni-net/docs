@@ -67,7 +67,9 @@ backend/
 
 **API 路由前綴**：`root_path="/api"`，所有端點實際路徑加 `/api`。Swagger UI 在 `GET /api/readme`。
 
-**健康檢查分工**：`/api/healthz` 只回應用程式版本，`/api/readyz` 每次呼叫都開一條 PostgreSQL 連線，連不上回 503。compose 裡 api 的 healthcheck 探測 `readyz`。判斷「圖表沒資料」時看 `readyz`，`healthz` 綠燈只代表 process 還活著。
+**健康檢查分工**：`/api/healthz` 只回應用程式版本，`/api/readyz` 每次呼叫都開一條 PostgreSQL 連線，連不上回 503。compose 裡 api 的 healthcheck 探測 `readyz`。判斷「圖表沒資料」時看 `readyz`，`healthz` 綠燈只代表 process 還活著。兩支都送 `Cache-Control: no-store`，否則 CDN 會把某一刻的健康狀態存起來，監控讀到的是過期答案。
+
+**快取兩層**：`vega.py` 的 `TTLCache` 是行程內快取，`cache_headers` 依賴項讓五個圖表端點都送 `Cache-Control: public, max-age=300`，兩者共用 `CACHE_TTL_SECONDS`。沒有這個 header 時 CDN 會套用 zone 預設值（anoni.net 是 4 小時），收集器每小時寫一次，edge 上那份會讓圖表在資料恢復後繼續顯示舊值好幾個小時。查「資料是不是真的沒更新」時先繞過 CDN 打 origin，或加一個隨機查詢參數。
 
 **Vega 端點**：共 5 個，均接受 `country`（TW/JP/KR/HK enum）和 `limit=45` 參數，回傳 Pydantic model 的 JSON 陣列。
 

@@ -125,6 +125,7 @@ docker-compose down
 - **健康檢查**:
   - `/api/healthz`: 基本健康檢查，只回應用程式版本，不連資料庫
   - `/api/readyz`: 每次呼叫都連線資料庫，連不上回 503。容器 healthcheck 探測這一支
+  - 兩支都送 `Cache-Control: no-store`，避免 CDN 把健康狀態存起來
 
 ## 🔧 API 端點
 
@@ -132,6 +133,8 @@ docker-compose down
 
 - `GET /api/healthz` - 基本健康檢查，只回版本，不連資料庫
 - `GET /api/readyz` - 就緒檢查，連線資料庫，連不上回 503
+
+圖表端點送 `Cache-Control: public, max-age=300`，與 `vega.py` 行程內的 `TTLCache` 同一個 TTL。健康檢查端點送 `no-store`。
 
 ### Vega-Lite 圖表資料
 
@@ -396,6 +399,7 @@ docker-compose down
 - **Health Checks**:
   - `/api/healthz`: Basic health check, reports the app version only, never touches the database
   - `/api/readyz`: Opens a database connection on every call, answers 503 when it fails. The container healthcheck probes this one
+  - Both send `Cache-Control: no-store` so a CDN never serves a stale health verdict
 
 ## 🔧 API Endpoints
 
@@ -403,6 +407,8 @@ docker-compose down
 
 - `GET /api/healthz` - Basic health check, version only, never touches the database
 - `GET /api/readyz` - Readiness check, opens a database connection, answers 503 when it fails
+
+Chart endpoints send `Cache-Control: public, max-age=300`, the same TTL as the in-process `TTLCache` in `vega.py`. Health endpoints send `no-store`.
 
 ### Vega-Lite Chart Data
 

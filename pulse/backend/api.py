@@ -88,7 +88,8 @@ async def main():
 
 
 @app.get("/healthz")
-async def healthz():
+async def healthz(response: Response):
+    response.headers["Cache-Control"] = "no-store"
     return {"status": "ok", "version": app.version}
 
 
@@ -101,6 +102,7 @@ async def readyz(response: Response):
     healthchecks and uptime monitors see the failure. A 200 here means the
     vega endpoints can actually serve data.
     """
+    response.headers["Cache-Control"] = "no-store"
     if not PG_CONN:
         return {"status": "ok", "db": "skipped"}
     try:
