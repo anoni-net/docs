@@ -17,7 +17,7 @@ description: "From Discord's age verification to why we self-host Matrix: balanc
 
 On 2026/02/09, [Discord announced a global “teen-by-default” rollout](https://discord.com/press-releases/discord-launches-teen-by-default-settings-globally){target="_blank"} and stronger age verification (English coverage: [BBC](https://www.bbc.com/news/articles/c1d67vdlk1ko){target="_blank"}, [Medianama](https://www.medianama.com/2026/02/223-discord-teen-by-default-settings-globally-next-month/){target="_blank"}). New and existing users will default to a teen-oriented experience; to relax content filters or access age-gated spaces, users must complete verification via facial age estimation or by submitting ID. Discord frames this as a commitment to teen safety and Safer Internet Day, and will use an “age inference model” in the background to help assign age groups.
 
-We are not dismissing Discord’s intent—youth protection and compliance are serious. But such measures also mean one thing: **large platforms will need more personal data and behavioural signals to “classify” users**. Whether via face scans, ID documents, or algorithmic inference, the result is handing over “who you are, how old you are, where you are” to the platform and its partners. For many people who just want to chat, game, or collaborate, that may be an acceptable trade-off; for others, it raises the question: is there another way?
+We are not dismissing Discord’s intent—youth protection and compliance are serious. But such measures also mean one thing: **large platforms will need more personal data and behavioral signals to “classify” users**. Whether via face scans, ID documents, or algorithmic inference, the result is handing over “who you are, how old you are, where you are” to the platform and its partners. For many people who just want to chat, game, or collaborate, that may be an acceptable trade-off; for others, it raises the question: is there another way?
 
 ## What we care about: who decides the rules, who holds the data
 
@@ -39,7 +39,7 @@ The benefits of self-hosting and this flow are straightforward:
 - **No real-name or verification requirement**: no mandatory ID upload, no phone or email—just a registration code to sign up.
 - **Policies designed for sensitive topics and anonymous research**: whether you work on anonymous networks, censorship measurement, or other high-sensitivity areas, you don’t have to worry about account exposure; we will adjust policy as the community needs.
 
-So **we chose Matrix not simply because Discord is “bad”**—rather, large platforms must serve business and the general public, while we need a space where we decide the rules, minimise data collection, and prioritise anonymity and privacy.
+So **we chose Matrix not simply because Discord is “bad”**—rather, large platforms must serve business and the general public, while we need a space where we decide the rules, minimize data collection, and prioritize anonymity and privacy.
 
 ## Between privacy and community quality: why we use an application process
 

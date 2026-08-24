@@ -61,7 +61,7 @@ Please just walk up during the booth slot, with no appointment and no prepared t
 
 On anonymity and circumvention:
 
-- Technologist Meetup (4 September, `16:30` to `17:30`) is where technologists working in digital rights and public interest technology get to know each other, hosted in the Circumvention Tech Village, and we are looking for people with experience maintaining measurement tools or self-hosted services.
+- Technologist Meetup (4 September, `13:30` to `14:30`) is where technologists working in digital rights and public interest technology get to know each other, hosted in the Circumvention Tech Village, and we are looking for people with experience maintaining measurement tools or self-hosted services.
 - Cross-Borders Storytelling: Device Searches, Metadata, and Collective Preparation compares experiences of device searches and metadata scrutiny across regions, and covers digital, legal, physical, and psychosocial preparation. Sinophone journalists cross jurisdictions often, and how others prepare is something we can put to use.
 - Can Signal Become Phishing-Resistant? addresses phishing aimed at journalists and activists, where the attacks abuse Signal's legitimate account recovery and device-linking workflows, with no software vulnerability required. How to write the risk in account recovery into a privacy guide is what we are after in this session.
 - Lights in the Tunnel: Co-Creating an Accountability Framework for VPN Transparency starts drafting a methodology for assessing VPN transparency and accountability, along with the providers to be evaluated. People keep asking us which VPN they can trust, so we want to know how that methodology turns into advice a user can act on.
@@ -80,7 +80,7 @@ On measurement and regional coordination:
 - Lockdown Systems brings OnionShare, which shares files, hosts websites, and runs chat anonymously over the Tor network, alongside Cyd for backing up and deleting social media history, and where a source gets stuck the first time they use it is exactly the kind of detail our privacy guides need.
 - Air Messenger is built on the MLS protocol, combining end-to-end encryption, low metadata, and a federated architecture, and since we run a Matrix home server ourselves, we want to know how far a federated setup can push metadata down.
 - Amnezia VPN shows their research on VPN blocking and DPI filtering, along with Amnezia Pulse for tracking shutdowns, and we want to compare our August throttling data against how they decide a shutdown is happening.
-- LEAP's MANTA measures tunnel health in censored environments, and we want to find out whether the same measurement approach fits the connectivity we see in Taiwan.
+- LEAP's MANTA measures tunnel health in censored environments, and we want to find out whether the same measurement approach fits the connectivity we see in Taiwan. Their booth (Booth `21`) is open on 4 September only, `15:30` to `17:30`, and a MANTA session runs in the Circumvention Tech Village earlier that day, `15:00` to `16:00`.
 - po1ytech's polymorphic is an automated mirror system that keeps blocked independent media reachable, and we want to ask how much staffing it takes to keep running, because a volunteer community has limited capacity and sustainability comes first when choosing tools.
 
 The full agenda is at [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}, and it runs far wider than what is listed here.
@@ -90,8 +90,8 @@ The full agenda is at [Global Gathering 2026](https://wiki.digitalrights.communi
 Our booth is on the final day, which leaves no fixed spot for the first two days. Any of the following will reach us.
 
 - The Matrix room set up for the event is the most reliable, at [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, where a message is enough to arrange a time and place, no phone numbers need to change hands, and we will reply as soon as we can during the event. Any Matrix account can join, so a free `matrix.org` account works and takes a couple of minutes to set up. Times in that room are in WEST unless someone says otherwise. Accounts on `im.anoni.net` are issued by a person and take a day or two, which is too slow for meeting someone at the venue, so do not wait on one.
-- Two sessions on 4 September are ones we will be attending, the Asia Meetup (`12:00` to `13:00` WEST) and the Technologist Meetup (`16:30` to `17:30` WEST), so meeting there works directly.
-- We will most likely be around for the Networking Hour, `12:00` to `13:00` WEST each day, though plans may still shift, so checking that room before you leave for Estoril helps.
+- Two sessions on 4 September are ones we will be attending, the Asia Meetup (`12:00` to `13:00` WEST) and the Technologist Meetup (`13:30` to `14:30` WEST), so meeting there works directly.
+- We will most likely be around for the Networking Hour, `12:00` to `13:00` WEST each day, though plans may still shift, so checking that room before you leave for Estoril helps. On 4 September that hour is where the Asia Meetup above sits, so it is one slot rather than two.
 - We will be at the venue for most of the three days, with anoni.net and a handle on our badges, so please do say hello.
 - The booth slot on 6 September, `13:00` to `15:00` WEST, is the easiest place to find us, and giving the name you go by is enough.
 

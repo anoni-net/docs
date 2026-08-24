@@ -61,7 +61,7 @@ Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世�
 
 匿名与规避审查的部分：
 
-- 技术工作者聚会（Technologist Meetup，9 月 4 日 `16:30` 到 `17:30`）是各地投入数字权利与公共利益技术的人互相认识的场合，排在规避审查技术村，我们想找有维护测量工具或自建服务经验的人。
+- 技术工作者聚会（Technologist Meetup，9 月 4 日 `13:30` 到 `14:30`）是各地投入数字权利与公共利益技术的人互相认识的场合，排在规避审查技术村，我们想找有维护测量工具或自建服务经验的人。
 - 跨境叙事的设备检查与 metadata（Cross-Borders Storytelling: Device Searches, Metadata, and Collective Preparation）比较各地在过境时遭遇设备检查与 metadata 审视的经验，并讨论数字、法律、实体与心理层面的准备。华语记者往返不同司法管辖区的频率高，别人的准备方式我们用得上。
 - Signal 能否抵抗钓鱼（Can Signal Become Phishing-Resistant?）处理针对记者与行动者的钓鱼，攻击者滥用 Signal 账号救援与设备连接的正常流程，不需要软件漏洞。账号救援的风险要怎么写进隐私指引，我们想在这场找答案。
 - VPN 透明度的问责框架（Lights in the Tunnel: Co-Creating an Accountability Framework for VPN Transparency）着手草拟评估 VPN 透明度与问责的方法论，并选定要评估的服务商。社区常被问哪一家 VPN 可信，我们想知道这套方法怎么变成使用者看得懂的建议。
@@ -80,7 +80,7 @@ Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世�
 - Lockdown Systems 带着 OnionShare，通过 Tor 网络匿名分享文件、搭建网站与聊天，另有备份与删除社交媒体记录的 Cyd。消息来源第一次使用时容易卡在哪里，隐私指引正需要这类细节。
 - Air Messenger 以 MLS 协议为基础，结合端到端加密、低 metadata 与联邦式架构，我们自己运维 Matrix 家服务器，想知道联邦式架构能把 metadata 压到什么程度。
 - Amnezia VPN 展示 VPN 封锁与 DPI 过滤的研究，以及追踪断网的 Amnezia Pulse，我们想用 8 月那份降速观测与他们的断网判定方法对照。
-- LEAP 的 MANTA 测量规避通道在受审查环境中的健康程度，我们想了解同一套测量方法是否适用于台湾的连接环境。
+- LEAP 的 MANTA 测量规避通道在受审查环境中的健康程度，我们想了解同一套测量方法是否适用于台湾的连接环境。他们的展位（Booth `21`）只在 9 月 4 日 `15:30` 到 `17:30` 开放，同一天 `15:00` 到 `16:00` 在规避审查技术村另有一场 MANTA 的讨论。
 - po1ytech 的 polymorphic 是自动镜像系统，让遭到封锁的独立媒体维持可达，我们想问维持这套系统需要多少人力，志愿者社区的规模有限，可持续性是选工具时的前提。
 
 完整议程见 [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}，场次数量远多于此处列出的部分。
@@ -90,8 +90,8 @@ Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世�
 我们的展位排在最后一天，前两天没有固定据点，以下几种方式都可以找到我们。
 
 - 活动专用的 Matrix room 最可靠，地址是 [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}，在里面留言即可约定时间与地点，不需要交换电话号码，活动期间我们会尽快回复。任何 Matrix 账号都能加入，没有账号的人申请一个 `matrix.org` 账号，几分钟就好。房间里的时间若没有特别注明，一律指 WEST。`im.anoni.net` 的账号由人工开通，需要一到两天，现场找人来不及等，不需要为了进这个房间去申请。
-- 9 月 4 日有两场我们会参加的场次，亚洲聚会（`12:00` 到 `13:00` WEST）与技术工作者聚会（`16:30` 到 `17:30` WEST），直接在现场会合即可。
-- 每天 `12:00` 到 `13:00` WEST 的 Networking Hour 我们多半会出现，行程仍有变动，出发前可先在该 room 确认。
+- 9 月 4 日有两场我们会参加的场次，亚洲聚会（`12:00` 到 `13:00` WEST）与技术工作者聚会（`13:30` 到 `14:30` WEST），直接在现场会合即可。
+- 每天 `12:00` 到 `13:00` WEST 的 Networking Hour 我们多半会出现，行程仍有变动，出发前可先在该 room 确认。9 月 4 日的这个小时就是上面那场亚洲聚会，两者是同一个时段。
 - 三天大多数时间我们都在会场，名牌上会写 anoni.net 与昵称，看到请直接打招呼。
 - 9 月 6 日 `13:00` 到 `15:00` WEST 的展位时段最容易找到人，到展位时报上昵称即可。
 
