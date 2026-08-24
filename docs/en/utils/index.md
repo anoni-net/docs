@@ -1,10 +1,10 @@
 ---
-title: Tools
+title: Utilities
 description: Small tools that run in your browser. Nothing is sent anywhere, and once stored on your device they work with the network off.
 icon: material/tools
 ---
 
-# :material-tools: Tools
+# :material-tools: Utilities
 
 The articles on this site explain how to protect yourself. This section holds the tools you can use directly. Four rules apply to all of them:
 

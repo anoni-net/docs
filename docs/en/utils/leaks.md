@@ -82,7 +82,7 @@ The cost, stated plainly: few people install a site as an app, so the value on i
 
 #### How the tools are used
 
-The tools section sends seven further events. They all serve the same purpose: knowing what is broken and where to spend effort. What goes out is always a fixed code, never a filename, a URL, or anything you typed or decoded.
+The Utilities section sends seven further events. They all serve the same purpose: knowing what is broken and where to spend effort. What goes out is always a fixed code, never a filename, a URL, or anything you typed or decoded.
 
 | Event | When | Value |
 |---|---|---|

@@ -90,7 +90,7 @@ nav:
           - regional/taiwan-pdpa-2025.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
-  - !ENV [NAV_UTILS, "Tools"]:
+  - !ENV [NAV_UTILS, "Utilities"]:
       - utils/index.md
       - utils/threat-model.md
       - utils/passphrase.md
