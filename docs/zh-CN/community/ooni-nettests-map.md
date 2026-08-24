@@ -14,7 +14,7 @@ icon: material/table-search
 
     **spec 状态**取自各份规格开头的 `_status_` 标记，分为 `current`、`experimental`、`obsolete` 三种，反映上游对该测项的定位。
 
-    **数据流通**是实测结果，以撰稿当日（2026-08-04）为快照，透过 [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"} 盘点各测项最近的公开测量。
+    **数据流通**是实测结果，以撰稿当日（2026-08-04）为快照，透过 [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"} 盘点各测项最近的公开测量。
 
     **台湾**栏位来自 S3 公开数据集，抽查 2026-08-03 五个时段台湾底下出现过的测项目录。
 

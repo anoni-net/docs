@@ -268,7 +268,7 @@ From the first case, the places people get stuck:
 
 !!! tip "Next step"
 
-    1. **[The FAQ for administrators and legal counsel](./campus-relay-faq.md)**: read the ten questions so a meeting does not catch you out, and attach it as appendix one
+    1. **[The FAQ for administrators and legal counsel](./campus-relay-faq.md)**: read the eleven questions so a meeting does not catch you out, and attach it as appendix one
     2. **[The deployment SOP](./campus-tor-relay-sop.md)**: once approved and once you have the IP address and rack space, deploy from there
 
     Suggested order: **proposal template, then FAQ, then SOP**.

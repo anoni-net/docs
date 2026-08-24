@@ -34,14 +34,14 @@ icon: material/code-json
 公开 API 可直接取得单笔测量，不需事先架设环境。先列出符合条件的测量：
 
 ```bash title="列出台湾最近的网络连线测试"
-curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&limit=5" \
+curl -s "https://api.ooni.org/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&limit=5" \
   | python3 -m json.tool | head -40
 ```
 
 回应中的 `measurement_uid` 可以换取完整内容：
 
 ```bash title="取得单笔完整测量资料"
-curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement_uid>" \
+curl -s "https://api.ooni.org/api/v1/raw_measurement?measurement_uid=<measurement_uid>" \
   | python3 -m json.tool | head -60
 ```
 

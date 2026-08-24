@@ -6,7 +6,7 @@ icon: material/chat-question-outline
 
 # :material-chat-question-outline: Campus Tor Relay, an FAQ for university administrators and legal counsel
 
-This FAQ collects the ten questions university IT centres, legal offices, and network administrators most often raise about running a Tor relay on campus. It derives from the [campus Tor relay proposal template](./campus-tor-relay-proposal.md), and works as an appendix to a proposal or as reading sent ahead of a meeting.
+This FAQ collects the eleven questions university IT centres, legal offices, and network administrators most often raise about running a Tor relay on campus. It derives from the [campus Tor relay proposal template](./campus-tor-relay-proposal.md), and works as an appendix to a proposal or as reading sent ahead of a meeting.
 
 It differs from the operator-facing FAQ at the end of [how to run a Tor relay](./setup-tor-relay.md). This page assumes the reader is **university administration, legal counsel, or network operations**, so it focuses on institutional risk assessment and on how to answer when someone else asks.
 
@@ -33,7 +33,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
     A non-exit relay's footprint is small enough that most campus IT departments can absorb it into what they already run: one low-power machine, one IPv4 address, and a bandwidth allocation you set yourself. The [deployment SOP](./campus-tor-relay-sop.md) caps the relay with `RelayBandwidthRate` and `RelayBandwidthBurst`, so the ceiling is a number you agree with the IT centre in advance rather than something the Tor network decides for you.
 
-    Ask for existing rack space and an existing bandwidth allocation, not a new budget line. Bring three figures to the meeting: the machine's power draw, the bandwidth ceiling you plan to set, and who owns the hardware if the project ends. Working those out during the meeting is what turns a short conversation into a deferred one.
+    Ask for existing rack space and an existing bandwidth allocation, not a new budget line. Bring three figures to the meeting: the machine's power draw, the bandwidth ceiling you plan to set, and who owns the hardware if the project ends. Have them ready beforehand, because working them out in the room is what turns a short conversation into a deferred one.
 
     **Regional note**
 
@@ -238,4 +238,4 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
 ## Sources and acknowledgements
 
-The ten questions come from community member NZ, drawn from the original proposal document at National Taiwan Normal University. The regional notes were added by anoni.net. The original material is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"} with NZ's agreement.
+The eleven questions come from community member NZ, drawn from the original proposal document at National Taiwan Normal University. The regional notes were added by anoni.net. The original material is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"} with NZ's agreement.
