@@ -132,6 +132,7 @@ nav:
       - "架设节点":
           - community/setup-tor-relay.md
           - community/setup-tor-webtunnel.md
+          - community/setup-onion-service.md
           - community/pin-ipfs-mirror.md
       - "读懂观测资料":
           - community/ooni-data-format.md
