@@ -15,7 +15,7 @@ import logging
 import os
 
 import psycopg
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers import vega
@@ -93,7 +93,14 @@ async def healthz():
 
 
 @app.get("/readyz")
-async def readyz():
+async def readyz(response: Response):
+    """
+    Readiness probe. Connects to PostgreSQL on every call.
+
+    Returns 503 when the database is unreachable so that container
+    healthchecks and uptime monitors see the failure. A 200 here means the
+    vega endpoints can actually serve data.
+    """
     if not PG_CONN:
         return {"status": "ok", "db": "skipped"}
     try:
@@ -102,4 +109,5 @@ async def readyz():
         return {"status": "ok", "db": "ok"}
     except Exception:
         logger.exception("DB readiness check failed")
+        response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
         return {"status": "error", "db": "error"}
