@@ -90,7 +90,7 @@ nav:
           - regional/taiwan-pdpa-2025.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
-  - !ENV [NAV_UTILS, "Tools"]:
+  - !ENV [NAV_UTILS, "Utilities"]:
       - utils/index.md
       - utils/threat-model.md
       - utils/passphrase.md
@@ -148,13 +148,13 @@ nav:
           - community/privacy-guide.md
           - community/relay-on-campus.md
           - community/payments-research.md
-  - !ENV [NAV_EVENT, "Events"]:
-      - activity/index.md
-      - activity/coscup-2026-cfp.md
-      - activity/coscup-2026.md
-      - event-workshop-2025.md
-      - !ENV [NAV_EVENT_PREPARE, "Pre-Event"]:
-          - event-workshop-2025-prepare.md
+      - !ENV [NAV_EVENT, "Events"]:
+          - activity/index.md
+          - activity/coscup-2026-cfp.md
+          - activity/coscup-2026.md
+          - event-workshop-2025.md
+          - !ENV [NAV_EVENT_PREPARE, "Pre-Event"]:
+              - event-workshop-2025-prepare.md
 theme:
   name: material
   logo: assets/images/logo-white.svg

@@ -98,7 +98,7 @@ nav:
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md
-  - !ENV [NAV_GAMES, "互动"]:
+  - !ENV [NAV_GAMES, "互动与呈现"]:
       - games/index.md
       - games/onion-routing.md
       - games/onion-rendezvous.md
@@ -142,13 +142,13 @@ nav:
           - community/privacy-guide.md
           - community/relay-on-campus.md
           - community/payments-research.md
-  - !ENV [NAV_EVENT, "活动参与"]:
-      - activity/index.md
-      - activity/coscup-2026-cfp.md
-      - activity/coscup-2026.md
-      - event-workshop-2025.md
-      - !ENV [NAV_EVENT_PREPARE, "筹备页面"]:
-          - event-workshop-2025-prepare.md
+      - !ENV [NAV_EVENT, "活动参与"]:
+          - activity/index.md
+          - activity/coscup-2026-cfp.md
+          - activity/coscup-2026.md
+          - event-workshop-2025.md
+          - !ENV [NAV_EVENT_PREPARE, "筹备页面"]:
+              - event-workshop-2025-prepare.md
   - !ENV [NAV_ABOUT, "关于我们"]:
       - about/index.md
       - contact.md
