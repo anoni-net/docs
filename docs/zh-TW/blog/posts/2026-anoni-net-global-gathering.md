@@ -6,8 +6,8 @@ categories:
     - 公告
     - 社群
 slug: 2026-anoni-net-global-gathering
-summary: "Team CommUNITY 主辦的 Global Gathering 2026 於 9 月 4 日到 6 日在葡萄牙 Estoril 舉行，匿名網路社群申請到一個攤位，排在 9 月 6 日當地時間 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 號攤位，攤位名稱為 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。這是社群第一次參加，主要希望認識開發匿名網路與規避審查工具的技術工作者，以及同在亞洲區域的夥伴，並參與區域之間的協作。攤位的主題是匿名支付，議程上沒有任何一場以金流隱私為題，現場收集實際的使用情境。本文列出議程上與社群工作重疊的九場討論、會前往交流的六個攤位與各自想問的問題、活動前兩天找到我們的五種方式，以及無法到場的人可以參與的方式。8 月 13 日北部行動網路降速的觀測紀錄會一併帶往現場，作為與其他地區對照的案例。"
-description: "Team CommUNITY 主辦的 Global Gathering 2026 於 9 月 4 日到 6 日在葡萄牙 Estoril 舉行，匿名網路社群申請到一個攤位，排在 9 月 6 日當地時間 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 號攤位，攤位名稱為 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。這是社群第一次參加，主要希望認識開發匿名網路與規避審查工具的技術工作者，以及同在亞洲區域的夥伴，並參與區域之間的協作。攤位的主題是匿名支付，議程上沒有任何一場以金流隱私為題，現場收集實際的使用情境。本文列出議程上與社群工作重疊的九場討論、會前往交流的六個攤位與各自想問的問題、活動前兩天找到我們的五種方式，以及無法到場的人可以參與的方式。8 月 13 日北部行動網路降速的觀測紀錄會一併帶往現場，作為與其他地區對照的案例。"
+summary: "Team CommUNITY 主辦的 Global Gathering 2026 於 9 月 4 日到 6 日在葡萄牙 Estoril 舉行，匿名網路社群申請到一個攤位，排在 9 月 6 日當地時間 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 號攤位，攤位名稱為 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。這是社群第一次參加，主要希望認識開發匿名網路與規避審查工具的技術工作者，以及同在亞洲區域的夥伴，並參與區域之間的協作。攤位的主題是匿名支付，議程上沒有任何一場以金流隱私為題，現場收集實際的使用情境。另一組來自台灣的團隊 Cofacts 也在同一個時段設攤，位置是 Booth 10。本文列出議程上與社群工作重疊的九場討論、會前往交流的六個攤位與各自想問的問題、活動前兩天找到我們的五種方式，以及無法到場的人可以參與的方式。8 月 13 日北部行動網路降速的觀測紀錄會一併帶往現場，作為與其他地區對照的案例。"
+description: "Team CommUNITY 主辦的 Global Gathering 2026 於 9 月 4 日到 6 日在葡萄牙 Estoril 舉行，匿名網路社群申請到一個攤位，排在 9 月 6 日當地時間 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 號攤位，攤位名稱為 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。這是社群第一次參加，主要希望認識開發匿名網路與規避審查工具的技術工作者，以及同在亞洲區域的夥伴，並參與區域之間的協作。攤位的主題是匿名支付，議程上沒有任何一場以金流隱私為題，現場收集實際的使用情境。另一組來自台灣的團隊 Cofacts 也在同一個時段設攤，位置是 Booth 10。本文列出議程上與社群工作重疊的九場討論、會前往交流的六個攤位與各自想問的問題、活動前兩天找到我們的五種方式，以及無法到場的人可以參與的方式。8 月 13 日北部行動網路降速的觀測紀錄會一併帶往現場，作為與其他地區對照的案例。"
 ---
 
 # 匿名網路社群前往 Global Gathering 2026
@@ -57,11 +57,17 @@ Global Gathering 是 Team CommUNITY 主辦的年度聚會，參加者來自世�
 
 攤位時段歡迎直接走過來，不用預約也不用準備話題，匿名支付以外的題目一樣可以聊。攤位的用意是當一個區域的會面點，讓在場的人彼此找得到。
 
+## 另一組來自台灣的團隊也在現場
+
+Cofacts 也到了 Estoril，攤位是 Booth `10`，9 月 6 日 `13:00` 到 `15:00` WEST，與我們同一個時段。他們這次展示 [Cofacts.ai](https://cofacts.ai/){target="_blank"}，一套建立在多年協作查核社群與聊天機器人之上的多代理（multi-agent）AI 框架。
+
+兩邊關心的事情會在同一個地方交會。公共討論需要可以查證的訊息，也需要一個承載訊息卻不會讓傳遞者曝光的網路。兩個攤位開放同一個下午，歡迎兩邊都來。
+
 ## 議程上與我們相關的討論
 
 匿名與規避審查的部分：
 
-- 技術工作者聚會（Technologist Meetup，9 月 4 日 `16:30` 到 `17:30`）是各地投入數位人權與公共利益技術的人互相認識的場合，排在規避審查技術村，我們想找有維護測量工具或自架服務經驗的人。
+- 技術工作者聚會（Technologist Meetup，9 月 4 日 `13:30` 到 `14:30`）是各地投入數位人權與公共利益技術的人互相認識的場合，排在規避審查技術村，我們想找有維護測量工具或自架服務經驗的人。
 - 跨境敘事的裝置檢查與 metadata（Cross-Borders Storytelling: Device Searches, Metadata, and Collective Preparation）比較各地在過境時遭遇裝置檢查與 metadata 審視的經驗，並討論數位、法律、實體與心理層面的準備。華語記者往返不同司法管轄區的頻率高，別人的準備方式我們用得上。
 - Signal 能否抵抗釣魚（Can Signal Become Phishing-Resistant?）處理針對記者與行動者的釣魚，攻擊者濫用 Signal 帳號救援與裝置連結的正常流程，不需要軟體漏洞。帳號救援的風險要怎麼寫進隱私指引，我們想在這場找答案。
 - VPN 透明度的問責框架（Lights in the Tunnel: Co-Creating an Accountability Framework for VPN Transparency）著手草擬評估 VPN 透明度與問責的方法論，並選定要評估的業者。社群常被問哪一家 VPN 可信，我們想知道這套方法怎麼變成使用者看得懂的建議。
@@ -80,7 +86,7 @@ Global Gathering 是 Team CommUNITY 主辦的年度聚會，參加者來自世�
 - Lockdown Systems 帶著 OnionShare，透過 Tor 網路匿名分享檔案、架設網站與聊天，另有備份與刪除社群媒體紀錄的 Cyd。消息來源第一次使用時容易卡在哪裡，隱私指引正需要這類細節。
 - Air Messenger 以 MLS 協定為基礎，結合端對端加密、低 metadata 與聯邦式架構，我們自己維運 Matrix 家伺服器，想知道聯邦式架構能把 metadata 壓到什麼程度。
 - Amnezia VPN 展示 VPN 封鎖與 DPI 過濾的研究，以及追蹤斷網的 Amnezia Pulse，我們想用 8 月那份降速觀測與他們的斷網判定方法對照。
-- LEAP 的 MANTA 測量規避通道在受審查環境中的健康程度，我們想了解同一套量測方法是否適用於台灣的連線環境。
+- LEAP 的 MANTA 測量規避通道在受審查環境中的健康程度，我們想了解同一套量測方法是否適用於台灣的連線環境。他們的攤位（Booth `21`）只在 9 月 4 日 `15:30` 到 `17:30` 開放，同一天 `15:00` 到 `16:00` 在規避審查技術村另有一場 MANTA 的討論。
 - po1ytech 的 polymorphic 是自動鏡像系統，讓遭到封鎖的獨立媒體維持可達，我們想問維持這套系統需要多少人力，志工社群的規模有限，可持續性是選工具時的前提。
 
 完整議程見 [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}，場次數量遠多於此處列出的部分。
@@ -90,8 +96,8 @@ Global Gathering 是 Team CommUNITY 主辦的年度聚會，參加者來自世�
 我們的攤位排在最後一天，前兩天沒有固定據點，以下幾種方式都可以找到我們。
 
 - 活動專用的 Matrix room 最可靠，位址是 [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}，在裡面留言即可約定時間與地點，不需要交換電話號碼，活動期間我們會盡快回覆。任何 Matrix 帳號都能加入，沒有帳號的人申請一個 `matrix.org` 帳號，幾分鐘就好。房間裡的時間若沒有特別註明，一律指 WEST。`im.anoni.net` 的帳號由人工開通，需要一到兩天，現場找人來不及等，不需要為了進這個房間去申請。
-- 9 月 4 日有兩場我們會參加的場次，亞洲聚會（`12:00` 到 `13:00` WEST）與技術工作者聚會（`16:30` 到 `17:30` WEST），直接在現場會合即可。
-- 每天 `12:00` 到 `13:00` WEST 的 Networking Hour 我們多半會出現，行程仍有變動，出發前可先在該 room 確認。
+- 9 月 4 日有兩場我們會參加的場次，亞洲聚會（`12:00` 到 `13:00` WEST）與技術工作者聚會（`13:30` 到 `14:30` WEST），直接在現場會合即可。
+- 每天 `12:00` 到 `13:00` WEST 的 Networking Hour 我們多半會出現，行程仍有變動，出發前可先在該 room 確認。9 月 4 日的這個小時就是上面那場亞洲聚會，兩者是同一個時段。
 - 三天大多數時間我們都在會場，名牌上會寫 anoni.net 與暱稱，看到請直接打招呼。
 - 9 月 6 日 `13:00` 到 `15:00` WEST 的攤位時段最容易找到人，到攤位時報上暱稱即可。
 

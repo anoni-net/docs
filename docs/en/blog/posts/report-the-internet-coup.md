@@ -11,7 +11,7 @@ summary: "How a Chinese Company Exports Great Firewall Services to Authoritarian
 description: "How a Chinese Company Exports Great Firewall Services to Authoritarian Regimes "
 ---
 
-# Report: The Internet Coup
+# The Internet Coup documents how a Chinese company exports the Great Firewall
 
 ![](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius:10px;"}
 
@@ -25,7 +25,9 @@ Although we (Anonymous Network Community) did not assist in the initial stages, 
 
 ## Details
 
-For more detailed information about the leaked data and the operational aspects of China's Great Firewall, you can refer to the report we have translated into [Mandarin](https://anoni.net/docs/report/interseclab-the-internet-coup/){target="_blank"} (Taiwanese terminology, zh-TW). The layout of this translated report follows the INDEX section from the original report, presented as chapters (a total of eight chapters). We hope that this format will allow you to easily cross-reference with the sections in the original report while reading.
+If you read English, the primary source is InterSecLab's own report, [The Internet Coup](https://interseclab.org/research/the-internet-coup/){target="_blank"}, which covers the leaked data and the operational side of the Great Firewall in full. Our work here is the translation, not a separate analysis.
+
+The [Mandarin translation](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} (Taiwanese terminology, zh-TW) is for Chinese-reading audiences. Its layout follows the INDEX section of the original, split into eight chapters so a reader can cross-reference against the source while going through it.
 
 ## Acknowledgments
 
