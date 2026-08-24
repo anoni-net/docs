@@ -59,7 +59,7 @@ Please just walk up during the booth slot, with no appointment and no prepared t
 
 ## Another team from Taiwan is at the Gathering
 
-Cofacts is here too, at Booth `10` on 6 September, `13:00` to `15:00` WEST, the same two hours as our own slot. They are showing [Cofacts.ai](https://en.cofacts.tw/){target="_blank"}, a multi-agent AI framework built on top of the crowdsourced fact-checking community and chatbot they have run for years.
+Cofacts is here too, at Booth `10` on 6 September, `13:00` to `15:00` WEST, the same two hours as our own slot. They are showing [Cofacts.ai](https://cofacts.ai/){target="_blank"}, a multi-agent AI framework built on top of the crowdsourced fact-checking community and chatbot they have run for years.
 
 The two subjects meet in the same place. A public sphere needs information that can be checked, and it needs a network that carries that information without exposing the people passing it along. Both booths are open the same afternoon, so please come to both.
 

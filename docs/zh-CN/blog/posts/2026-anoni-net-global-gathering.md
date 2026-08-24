@@ -59,7 +59,7 @@ Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世�
 
 ## 另一组来自台湾的团队也在现场
 
-Cofacts 也到了 Estoril，展位是 Booth `10`，9 月 6 日 `13:00` 到 `15:00` WEST，与我们同一个时段。他们这次展示 [Cofacts.ai](https://en.cofacts.tw/){target="_blank"}，一套建立在多年协作查核社群与聊天机器人之上的多代理（multi-agent）AI 框架。
+Cofacts 也到了 Estoril，展位是 Booth `10`，9 月 6 日 `13:00` 到 `15:00` WEST，与我们同一个时段。他们这次展示 [Cofacts.ai](https://cofacts.ai/){target="_blank"}，一套建立在多年协作查核社群与聊天机器人之上的多代理（multi-agent）AI 框架。
 
 两边关心的事情会在同一个地方交会。公共讨论需要可以查证的信息，也需要一个承载信息却不会让传递者曝光的网络。两个展位开放同一个下午，欢迎两边都来。
 
