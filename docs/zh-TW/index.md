@@ -13,125 +13,109 @@ hide:
 
 [:material-account-group: 認識社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 訂閱電子報](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/feed_rss_created.xml){ .md-button }
 
-## :material-account-multiple-outline: 我們是誰、為誰寫
+一群關注匿名網路、隱私與網路自由的在地社群成員。長期推廣 Tor、Tails、OONI 等開源工具，維運在地的網路觀測，追蹤台灣的個資與加密支付法規，並與 EFF、Tor Project、OONI 合作把全球議題帶回台灣脈絡討論。完整介紹見 [關於我們](./about/index.md)。
 
-<div class="grid cards" markdown>
-
-- :material-account-group-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們是誰**
-
-    ---
-
-    一群關注匿名網路、隱私與網路自由的在地社群成員。長期推廣 Tor、Tails、OONI 等開源工具，並與 EFF、Tor Project、OONI 等國際組織合作，把全球議題帶回台灣脈絡討論。
-
-- :material-target:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們在做什麼**
-
-    ---
-
-    維運在地的網路觀測（OONI 檢測清單、ASN 覆蓋分析、Tor Relay 觀測）、追蹤台灣個資與加密支付法規動態、舉辦工作坊與社群小聚，並翻譯國際研究報告。所有產出都以 [anoni.net Docs](./guides/index.md) 為文件中心。
-
-- :material-account-supervisor-circle-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我們為誰寫**
-
-    ---
-
-    新聞媒體、獨立記者、公民團體、開源科技社群。這些參與者實務上常面對消息來源保護、跨境查證與封鎖規避的挑戰，匿名網路與隱私工具能補足現有制度的缺口。完整說明見 [什麼是匿名網路？各參與者為何會用到](./tools/what-is-anonymity-network.md#stakeholders-why)。
-
-</div>
-
-## :material-flag-checkered: 2026 三大主題
-
-<div class="grid cards" markdown>
-
-- :material-shield-lock-outline:{ .lg .middle style="color: var(--cat-privacy);" } **個人隱私指引**
-
-    ---
-
-    整理可實際操作的隱私保護指引，依情境（日常、敏感工作、高風險）提供工具與步驟，搭配威脅模型評估。
-
-    [:octicons-arrow-right-24: 研究專題](./community/privacy-guide.md)
-
-- :material-server-network:{ .lg .middle style="color: var(--cat-relay);" } **Tor Relay 校園建立**
-
-    ---
-
-    與 EFF、Tor Project 合作推動校園中繼節點。台師大已有成功案例，目標整理申請流程與活動企劃供其他學校參考。
-
-    [:octicons-arrow-right-24: 研究專題](./community/relay-on-campus.md)
-
-- :material-cash-multiple:{ .lg .middle style="color: var(--cat-payments);" } **匿名支付**
-
-    ---
-
-    探索現金以外情境下的匿名支付（穩定幣、區塊鏈應用），含法規（VASP 法 2026）、技術與實作面向。
-
-    [:octicons-arrow-right-24: 研究專題](./community/payments-research.md)
-
-</div>
+2026 年社群投入三個主題，個人隱私指引、Tor Relay 校園建立、匿名支付，進度與參與方式見 [社群](./community/index.md)。
 
 ## :material-rocket-launch-outline: 從這裡開始
 
 <div class="grid cards" markdown>
 
-- :material-compass-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **指南**
+- :material-check-circle-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我該先做什麼**
 
     ---
 
-    從概念、工具、場景到進階與報告，5 個閱讀層次。
+    不想先讀原理，只想知道現在該調整哪些設定。一篇讀完就能開始操作。
 
-    [:octicons-arrow-right-24: 五個層次](./guides/index.md)
+    [:octicons-arrow-right-24: 一般人平常該做到什麼](./scenarios/everyday-baseline.md)
 
-- :material-island:{ .lg .middle style="color: var(--brand-cyan-500);" } **在地脈絡**
-
-    ---
-
-    台灣的網路觀測、個資法、VASP 法、揭弊者保護法。
-
-    [:octicons-arrow-right-24: 切入觀察](./taiwan/index.md)
-
-- :material-account-group:{ .lg .middle style="color: var(--brand-cyan-500);" } **社群參與**
+- :material-book-open-variant:{ .lg .middle style="color: var(--brand-cyan-500);" } **這些名詞是什麼**
 
     ---
 
-    2026 三大主題、如何加入、Matrix 與協作工具。
+    匿名與隱私差在哪、metadata 洩漏什麼、威脅模型怎麼評估。第一次接觸從這裡建立詞彙。
 
-    [:octicons-arrow-right-24: 加入我們](./community/index.md)
+    [:octicons-arrow-right-24: 概念](./basics/index.md)
 
-- :material-lifebuoy:{ .lg .middle style="color: var(--accent-emergency);" } **緊急求救**
+- :material-tools:{ .lg .middle style="color: var(--brand-cyan-500);" } **我要用哪個工具**
 
     ---
 
-    帳號被盜、裝置遺失、跟蹤騷擾的緊急應對。
+    Tor、Tails、OONI、通訊軟體、密碼管理。每個工具的用途、限制與適用的威脅模型。
 
-    [:octicons-arrow-right-24: 取得協助](./help/index.md)
+    [:octicons-arrow-right-24: 工具](./tools/index.md)
+
+- :material-island:{ .lg .middle style="color: var(--brand-cyan-500);" } **台灣現在什麼狀況**
+
+    ---
+
+    OONI 觀測資料、Tor Relay 分布、個資法與 VASP 法、揭弊者保護法的技術面。
+
+    [:octicons-arrow-right-24: 在地脈絡](./taiwan/index.md)
 
 </div>
 
-## :material-account-supervisor-outline: 我們關注的參與者
+## :material-account-switch-outline: 換個處境看看
+
+同一套工具在不同處境下的用法差很多。這幾篇從具體的人與具體的風險寫起，讀完會比較知道自己需要保護什麼。
 
 <div class="grid cards" markdown>
 
-- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--neutral-muted);" } **新聞媒體**
+- :material-shield-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **一般人平常該做到什麼**
 
     ---
 
-    降低採編過程中身分與流量被比對、追蹤的風險，連線受阻時仍能查證與對外說明。
+    沒有特殊處境，只是不想被平台與廣告商過度側寫。從最低成本的調整開始。
 
-- :material-account-edit-outline:{ .lg .middle style="color: var(--neutral-muted);" } **獨立記者**
+    [:octicons-arrow-right-24: 日常基準](./scenarios/everyday-baseline.md)
 
-    ---
-
-    在資安與法律支援有限時，更仰賴匿名網路與以隱私為重的使用環境完成調查與聯繫。
-
-- :material-account-group-outline:{ .lg .middle style="color: var(--neutral-muted);" } **公民團體**
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--cat-privacy);" } **記者保護消息來源**
 
     ---
 
-    倡議與聯絡對象需要保護，官網、社群帳號等組織服務也可能成為被鎖定的對象。
+    採訪到發稿的每一段都可能留下比對得出來的痕跡。從聯繫、收檔案到刊出後的完整流程。
 
-- :material-source-branch:{ .lg .middle style="color: var(--neutral-muted);" } **開源科技社群**
+    [:octicons-arrow-right-24: 記者情境](./scenarios/journalist.md)
+
+- :material-bag-suitcase-outline:{ .lg .middle style="color: var(--cat-privacy);" } **出差與研討會的數位準備**
 
     ---
 
-    透過中繼（Relay）、測試與文件翻譯等貢獻，強化匿名網路基礎建設的可用性。
+    入境查驗裝置、當地網路不可信、回國後的清理。東亞與東南亞逐地整理。
+
+    [:octicons-arrow-right-24: 出差準備](./scenarios/asia-travel.md)
+
+- :material-hand-coin-outline:{ .lg .middle style="color: var(--cat-payments);" } **倡議組織的匿名捐款管道**
+
+    ---
+
+    捐款人不想被查到、組織仍需開立收據。含公益勸募條例與洗錢防制的限制。
+
+    [:octicons-arrow-right-24: 匿名捐款](./scenarios/nonprofit-anonymous-donation.md)
+
+</div>
+
+還有社運行動者、選舉觀察員、家暴倖存者、LGBTQ+ 與性少數等處境，見 [場景](./scenarios/index.md)。
+
+## :material-gamepad-variant-outline: 實際操作看看
+
+<div class="grid cards" markdown>
+
+- :material-cube-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **互動與呈現**
+
+    ---
+
+    用 3D 影像與可操作的遊戲理解 Tor。走一遍三跳洋蔥路由，看流量在會合點怎麼相遇。
+
+    [:octicons-arrow-right-24: 玩玩看](./games/index.md)
+
+- :material-tools:{ .lg .middle style="color: var(--brand-cyan-500);" } **小工具**
+
+    ---
+
+    在瀏覽器裡直接執行，不送出任何資料。清除圖片 metadata、產生密語、檢查連線洩漏。
+
+    [:octicons-arrow-right-24: 直接使用](./utils/index.md)
 
 </div>
 
@@ -142,3 +126,7 @@ hide:
     <!-- latest-posts:5 -->
 
     更多公告請見 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
+
+---
+
+帳號被盜、錢已經匯給詐騙、裝置遺失、跟蹤騷擾或突然被斷網，[緊急求救](./help/index.md) 整理了台灣的求助專線與現場能做的事。那頁不取代專業協助，情境急迫時請優先撥打頁面上列出的專線。
