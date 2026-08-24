@@ -23,7 +23,7 @@ This page works alongside the conceptual frame in [Why networked freedom matters
 
 The adversaries differ; the underlying problem is shared: *which of your digital traces, if connected, would link two identities you do not want connected?* The sections below break that question into operationally usable pieces.
 
-## Account separation: everyday, community, exploration
+## Separate the everyday, community, and exploration layers
 
 Identity separation starts with not sharing email addresses, usernames, browsers, or password-manager vaults across layers. It sounds tedious; in practice it is a one-time setup that runs itself afterward.
 
@@ -168,11 +168,11 @@ If a family member has found evidence (an app, a conversation), you're past prev
 - If the situation might escalate to abuse (verbal threats, confinement, financial coercion), think ahead about device and account separation as part of an exit plan
 - Mental-health support: country-specific hotlines and counseling services are in the regional section
 
-## Cross-border travel: preparing for less-friendly jurisdictions
+## Preparing to cross into a less friendly jurisdiction
 
 LGBTQ+ legal status varies dramatically by country. Per ILGA World's 2025 data, 64 UN member states still criminalize same-sex intimate conduct (7 with the death penalty as a possible punishment, 5 where the law is unclear), and several criminalize "LGBTQ+ propaganda"[^1]. Before travel to such jurisdictions, the digital identity on your devices needs separate handling.
 
-### Before you go: audit the destination
+### Audit the destination before you go
 
 An hour of research before departure:
 
@@ -202,7 +202,7 @@ For the highest-risk trips (full criminalization, sensitive work travel), consid
 
 Higher cost, but more reliable than wiping the main phone before each trip.
 
-### iMessage and Signal cloud backups: a double edge
+### iMessage and Signal cloud backups cut both ways
 
 Cloud backups speed recovery on return; they also create risk during travel:
 

@@ -95,7 +95,7 @@ Evidence supports protection orders, custody decisions, and criminal complaints.
 - **Keep a dated log**: A simple running record of incidents, dates, and what happened is itself useful in legal proceedings, and is easier to maintain than perfect screenshots of everything.
 - **Get advice before confronting**: Showing the abuser that you have collected evidence can escalate the situation. Share it with an advocate, lawyer, or the police, not with the abuser.
 
-## The safety-planning principle: leaving is the highest-risk moment
+## Leaving is the highest-risk moment, which is what safety planning exists for
 
 The most important thing on this page is not a technical step. **The period around leaving an abusive relationship is the most dangerous time**, and digital changes that are safe in the abstract can be the trigger that exposes a plan. This is why advocates emphasize safety planning: sequencing every move, including the digital ones, so that the abuser does not learn you are leaving until you are safe.
 
