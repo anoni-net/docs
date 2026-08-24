@@ -30,7 +30,7 @@ pulse/
 - **完整資料儲存**: PostgreSQL 資料庫儲存中繼節點詳細資訊與歷史紀錄
 - **RESTful API**: FastAPI 提供高效能 REST API
 - **視覺化支援**: Vega-Lite 格式圖表資料端點
-- **健康檢查**: 內建 `/api/healthz` 和 `/api/readyz` 端點（`root_path="/api"`）
+- **健康檢查**: 內建 `/api/healthz` 與 `/api/readyz` 端點（`root_path="/api"`），容器 healthcheck 探測 `/api/readyz`
 - **CORS 支援**: 可配置跨域請求設定
 - **Docker 部署**: 一鍵啟動完整服務
 
@@ -123,15 +123,15 @@ docker-compose down
 - **端點路徑**: `/api/*` (配置 `root_path="/api"`)
 - **文件**: `/api/readme` (Swagger UI)
 - **健康檢查**:
-  - `/api/healthz`: 基本健康檢查
-  - `/api/readyz`: 包含資料庫連線檢查
+  - `/api/healthz`: 基本健康檢查，只回應用程式版本，不連資料庫
+  - `/api/readyz`: 每次呼叫都連線資料庫，連不上回 503。容器 healthcheck 探測這一支
 
 ## 🔧 API 端點
 
 ### 健康檢查
 
-- `GET /api/healthz` - 基本健康檢查
-- `GET /api/readyz` - 就緒檢查（含資料庫連線）
+- `GET /api/healthz` - 基本健康檢查，只回版本，不連資料庫
+- `GET /api/readyz` - 就緒檢查，連線資料庫，連不上回 503
 
 ### Vega-Lite 圖表資料
 
@@ -301,7 +301,7 @@ pulse/
 - **Complete Data Storage**: PostgreSQL database stores relay node details and historical records
 - **RESTful API**: High-performance REST API provided by FastAPI
 - **Visualization Support**: Vega-Lite format chart data endpoints
-- **Health Checks**: Built-in `/healthz` and `/readyz` endpoints
+- **Health Checks**: Built-in `/api/healthz` and `/api/readyz` endpoints; the container healthcheck probes `/api/readyz`
 - **CORS Support**: Configurable cross-origin request settings
 - **Docker Deployment**: One-click launch of complete services
 
@@ -394,15 +394,15 @@ docker-compose down
 - **Endpoint Path**: `/api/*` (configured with `root_path="/api"`)
 - **Documentation**: `/api/readme` (Swagger UI)
 - **Health Checks**:
-  - `/api/healthz`: Basic health check
-  - `/api/readyz`: Readiness check (includes database connection)
+  - `/api/healthz`: Basic health check, reports the app version only, never touches the database
+  - `/api/readyz`: Opens a database connection on every call, answers 503 when it fails. The container healthcheck probes this one
 
 ## 🔧 API Endpoints
 
 ### Health Checks
 
-- `GET /api/healthz` - Basic health check
-- `GET /api/readyz` - Readiness check (includes database connection)
+- `GET /api/healthz` - Basic health check, version only, never touches the database
+- `GET /api/readyz` - Readiness check, opens a database connection, answers 503 when it fails
 
 ### Vega-Lite Chart Data
 

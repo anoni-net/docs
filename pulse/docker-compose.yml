@@ -84,8 +84,11 @@ services:
       CORS_ALLOW_CREDENTIALS: "${CORS_ALLOW_CREDENTIALS:-false}"
     healthcheck:
       # Note: FastAPI is configured with root_path="/api", so health endpoints live under /api/*.
-      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/api/healthz\", timeout=2).read()'"]
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 10s
+      # Probe readyz, not healthz: healthz only reports the app version and stays
+      # green while PostgreSQL is unreachable. readyz opens a real connection and
+      # answers 503 when it fails, which urlopen surfaces as a non-zero exit.
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/api/readyz\", timeout=5).read()'"]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 15s

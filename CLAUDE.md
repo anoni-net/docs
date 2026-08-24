@@ -300,7 +300,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 - FastAPI 使用 `root_path="/api"` 設定，所有端點需加上 `/api` 前綴
 - CORS 設定透過環境變數 `CORS_ALLOW_ORIGINS` 和 `CORS_ALLOW_CREDENTIALS` 控制
-- 健康檢查端點：`/api/healthz` (基礎健康) 和 `/api/readyz` (含資料庫檢查)
+- 健康檢查端點：`/api/healthz`（只回版本，不連資料庫）與 `/api/readyz`（每次呼叫都連資料庫，連不上回 503）。容器 healthcheck 探測 `/api/readyz`，`healthz` 綠燈不代表資料查得到
 
 ### 資料庫操作
 

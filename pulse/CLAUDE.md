@@ -67,6 +67,8 @@ backend/
 
 **API 路由前綴**：`root_path="/api"`，所有端點實際路徑加 `/api`。Swagger UI 在 `GET /api/readme`。
 
+**健康檢查分工**：`/api/healthz` 只回應用程式版本，`/api/readyz` 每次呼叫都開一條 PostgreSQL 連線，連不上回 503。compose 裡 api 的 healthcheck 探測 `readyz`。判斷「圖表沒資料」時看 `readyz`，`healthz` 綠燈只代表 process 還活著。
+
 **Vega 端點**：共 5 個，均接受 `country`（TW/JP/KR/HK enum）和 `limit=45` 參數，回傳 Pydantic model 的 JSON 陣列。
 
 **Cron 設定**：Dockerfile 建置時寫入 `/etc/crontabs/root`，`5 * * * *` 執行四次（各地區），容器重啟時 `@reboot` 也觸發一次。
