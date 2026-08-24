@@ -226,7 +226,7 @@ def on_post_build(config, **kwargs):
 
     # nav 走過的先排。nav 上沒有的插回同一個頂層章節的尾巴，不要一律丟到最後：
     # blog 外掛的文章結構在 on_nav 之後才建，一律附在後面的話「近期公告」會離它的
-    # 「資訊更新」隔著整個社群與活動參與，讀者不會知道那兩者是同一節。
+    # 「資訊更新」隔著整個社群，讀者不會知道那兩者是同一節。
     ordered = [groups.pop(key) for key in _order if key in groups]
     for group in groups.values():
         at = len(ordered)
