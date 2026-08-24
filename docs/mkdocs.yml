@@ -50,6 +50,7 @@ nav:
               - tools/what-is-cryptpad.md
               - tools/password-manager.md
               - tools/asian-diceware.md
+              - tools/email-alias.md
               - tools/crypto-privacy-spectrum.md
               - tools/ai-privacy.md
       # 順序與分組跟著 scenarios/index.md 的「已上線」「撰寫中」兩節走。撰寫中的頁面

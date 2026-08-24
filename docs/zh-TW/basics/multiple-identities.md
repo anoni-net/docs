@@ -52,7 +52,7 @@ icon: material/account-multiple-outline
 
 每一層至少要有自己的：
 
-- **獨立 email 帳號**：不要用工作 email 或家人共用 email 註冊次要層的帳號。建議次要層用 ProtonMail、Tuta 這類隱私郵件。主流免費信箱多半在註冊階段就要求手機驗證，同一台裝置與同一個 IP 開出來的帳號也可能被服務商自行關聯，拿它開次要層要先有這個預期
+- **獨立 email 帳號**：不要用工作 email 或家人共用 email 註冊次要層的帳號。建議次要層用 ProtonMail、Tuta 這類隱私郵件。主流免費信箱多半在註冊階段就要求手機驗證，同一台裝置與同一個 IP 開出來的帳號也可能被服務商自行關聯，拿它開次要層要先有這個預期。層數多到信箱開不完時，改用郵件別名從同一個信箱長出多個對外地址，做法與代價見 [郵件別名怎麼用，以及它把信任交給誰](../tools/email-alias.md)
 - **獨立瀏覽器 profile**：Firefox 與 Chrome 都支援多 profile，每個 profile 有獨立的 cookies、登入狀態、書籤。次要層的帳號只在自己的 profile 開啟，不要跟本名層 profile 同時登入
 - **獨立密碼管理器資料夾**：Bitwarden、1Password 都支援 collection 或 vault 分組，次要層帳號的密碼放獨立 vault，避免主帳號被入侵時連帶外洩
 - **獨立兩階段驗證**：Aegis（Android）、2FAS（跨平台）可以為不同帳號分組，但不要把次要層的 TOTP（會定時跳出 6 位數驗證碼的那種兩階段驗證）跟工作 email 綁在同一支手機的同一個 app 群組。挑 TOTP app 看三件事：開源、能自己匯出備份、經營者沒有換手。Authy 桌面版已於 2024 年停止維護，Raivo 在 2023 年 7 月被 Mobime 收購後，新的隱私政策納入廣告追蹤器與 log 收集[^raivo]，兩者都不建議新採用
