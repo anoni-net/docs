@@ -46,7 +46,9 @@ HiddenServicePort 80 unix:/var/run/tor/my-website.sock
 
 The official guide says one thing about this: the directory must be "readable/writeable by the user that will be running Tor". It gives no specific permission values.
 
-In practice only Tor's own user may read or write that directory. Loosen it so that the group or others can read, and Tor refuses to start and says so in its log. Packaged installs typically run as `debian-tor` or `tor`, and the service unit for your distribution will tell you which.
+In practice only Tor's own user may read or write that directory. By default, loosening it makes Tor refuse to start and say so in its log. Packaged installs typically run as `debian-tor` or `tor`, and the service unit for your distribution will tell you which.
+
+If another process needs to read `hostname`, `torrc` has `HiddenServiceDirGroupReadable 1`, which lets the filesystem group read the directory and the `hostname` file. The default is `0`. The key files do not become group-readable through it.
 
 When Tor will not start, the owner and mode of this directory is the first thing to check.
 
@@ -79,6 +81,30 @@ server {
 ```
 
 `server_name` must carry the actual onion address. Without it the request lands on nginx's default server and usually returns the wrong content or a placeholder page.
+
+### Using a Unix socket instead
+
+If `torrc` points at a `unix:` path, nginx has to listen on that same socket, which keeps the backend off TCP entirely.
+
+```nginx
+server {
+    listen unix:/var/run/tor/my-website.sock;
+    server_name <your-address>.onion;
+
+    root /var/www/site;
+    index index.html;
+}
+```
+
+The two paths must match exactly: the `unix:` path in `HiddenServicePort` and the one in nginx's `listen unix:`.
+
+nginx creates the socket and Tor connects to it, so Tor's user has to be able to write to it. The `listen` directive has no parameter for the socket's owner, group, or mode, so this can only be handled from the filesystem side:
+
+- Put the socket in a directory that only nginx and Tor can enter
+- After reloading nginx, check the socket's actual owner and mode rather than assuming the default works
+- When Tor cannot connect, its log shows a connection refused message, which is usually a permission problem
+
+The `GroupWritable` and `WorldWritable` flags in `torrc` do not apply here. Those govern sockets Tor creates itself, such as `ControlSocket` and `SocksPort`.
 
 ### Do not add HTTPS on top
 

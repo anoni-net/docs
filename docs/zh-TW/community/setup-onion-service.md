@@ -46,7 +46,9 @@ HiddenServicePort 80 unix:/var/run/tor/my-website.sock
 
 官方文件對這點只寫了一句，目錄要「readable/writeable by the user that will be running Tor」，沒有給出具體的權限數值。
 
-實務上這個目錄必須只有 Tor 的執行身分能讀寫。權限放寬到同群組或其他人可讀時，Tor 會拒絕啟動並在日誌裡說明原因。套件安裝的 `tor` 通常以 `debian-tor` 或 `tor` 這個使用者執行，確認方式是看發行版的 service 設定。
+實務上這個目錄必須只有 Tor 的執行身分能讀寫，預設情況下權限放寬會讓 Tor 拒絕啟動並在日誌裡說明原因。套件安裝的 `tor` 通常以 `debian-tor` 或 `tor` 這個使用者執行，確認方式是看發行版的 service 設定。
+
+如果有其他程序需要讀取 `hostname`，`torrc` 有 `HiddenServiceDirGroupReadable 1` 可以開放同群組讀取目錄與 `hostname` 檔，預設是 `0`。金鑰檔本身不會因此變成群組可讀。
 
 如果 Tor 起不來，第一個要看的就是這個目錄的擁有者與權限。
 
@@ -79,6 +81,30 @@ server {
 ```
 
 `server_name` 要填入實際的 onion 位址。沒有填的話請求會落到 nginx 的 default server，通常會取得錯誤的內容或預設頁。
+
+### 改用 Unix socket
+
+`torrc` 那邊寫成 `unix:` 的話，nginx 這邊要對應改成監聽同一個 socket，後端就完全不在 TCP 上出現。
+
+```nginx
+server {
+    listen unix:/var/run/tor/my-website.sock;
+    server_name <你的位址>.onion;
+
+    root /var/www/site;
+    index index.html;
+}
+```
+
+兩邊的路徑必須完全一致，也就是 `HiddenServicePort` 裡的 `unix:` 路徑與 nginx `listen unix:` 的路徑。
+
+socket 由 nginx 建立，Tor 是連過去的一方，所以那個 socket 必須讓 Tor 的執行身分寫得進去。nginx 的 `listen` 指令沒有任何設定 socket 擁有者、群組或權限的參數，這件事只能從檔案系統這一側處理：
+
+- 把 socket 放在一個只有 nginx 與 Tor 兩個身分能進入的目錄
+- nginx 重新載入之後，實際確認 socket 的擁有者與模式，不要假設預設值可用
+- Tor 連不上時，日誌會出現連線被拒的訊息，那通常就是權限問題
+
+`torrc` 的 `GroupWritable` 與 `WorldWritable` 旗標對這裡沒有作用。那兩個是給 Tor 自己建立的 socket 用的，例如 `ControlSocket` 與 `SocksPort`。
 
 ### 不要在 onion 上另外啟用 HTTPS
 
