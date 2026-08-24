@@ -19,7 +19,7 @@ On 2026/02/09, [Discord announced a global “teen-by-default” rollout](https:
 
 We are not dismissing Discord’s intent—youth protection and compliance are serious. But such measures also mean one thing: **large platforms will need more personal data and behavioral signals to “classify” users**. Whether via face scans, ID documents, or algorithmic inference, the result is handing over “who you are, how old you are, where you are” to the platform and its partners. For many people who just want to chat, game, or collaborate, that may be an acceptable trade-off; for others, it raises the question: is there another way?
 
-## What we care about: who decides the rules, who holds the data
+## The rules and the data belong to whoever runs the server
 
 Commercial chat platforms have their own rules: terms of service, product direction, what data is retained, how algorithms and policies work—mostly driven by the company and shareholders, with little say for ordinary users and little visibility into how their data is used. This isn’t about “who is worse”; it’s about **who gets to decide**.
 
@@ -41,7 +41,7 @@ The benefits of self-hosting and this flow are straightforward:
 
 So **we chose Matrix not simply because Discord is “bad”**—rather, large platforms must serve business and the general public, while we need a space where we decide the rules, minimize data collection, and prioritize anonymity and privacy.
 
-## Between privacy and community quality: why we use an application process
+## Accounts need a registration code, and that is a deliberate trade-off
 
 So **Matrix (im.anoni.net) and [Cryptpad](https://cryptpad.anoni.net/) accounts both require a registration code**, which you get by emailing `whisper@anoni.net` or through another trusted channel. We (or that channel) reply with instructions or the code, and you then complete registration in the client. We do not allow open one-click signup, so we can reduce abuse while keeping “no identity stored at registration” as above.
 

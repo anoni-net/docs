@@ -11,7 +11,7 @@ summary: "How a Chinese Company Exports Great Firewall Services to Authoritarian
 description: "How a Chinese Company Exports Great Firewall Services to Authoritarian Regimes "
 ---
 
-# Report: The Internet Coup
+# The Internet Coup documents how a Chinese company exports the Great Firewall
 
 ![](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius:10px;"}
 
