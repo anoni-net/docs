@@ -19,7 +19,7 @@ We combine OONI network measurements, Tor relay monitoring, and on-the-ground co
 
 For general digital safety guidance written for a global audience, well-established English resources include [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, and the [Tor Project Support Portal](https://support.torproject.org/){target="_blank"}, and we link to them rather than duplicating them. What we add is the regional layer those sites are not set up to produce: how a tool behaves in Mainland China versus Taiwan, what a local statute changes about the threat model, and measurement from inside the region. Our introductions to Tor, Tails, OONI, and CryptPad are written with that context built in rather than as generic explainers.
 
-## :material-target: Three ways to use this site
+## :material-target: Four ways to use this site
 
 <div class="grid cards" markdown>
 
@@ -43,9 +43,17 @@ For general digital safety guidance written for a global audience, well-establis
 
     ---
 
-    Diaspora, cross-border travelers, and people whose families remain in less open jurisdictions. The first scenario guide is up; more are queued. The regional context is what global English-language privacy sites do not cover.
+    Diaspora, cross-border travelers, and people whose families remain in less open jurisdictions. Eleven guides are published, covering border crossings, source protection, speaking online from Singapore and Malaysia, and posting on mainland Chinese platforms. The regional context is what global English-language privacy sites do not cover.
 
     [:octicons-arrow-right-24: Scenarios](./scenarios/index.md)
+
+- :material-tools:{ .lg .middle style="color: var(--brand-cyan-500);" } **Start protecting yourself**
+
+    ---
+
+    You are not here to cite us or work with us, you just want to know what to actually do. Start with what an ordinary person should change first, then read the tool introductions, each written with the regional context built in.
+
+    [:octicons-arrow-right-24: What to do first](./scenarios/everyday-baseline.md)
 
 </div>
 
@@ -119,27 +127,67 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
 </div>
 
-## :material-account-supervisor-outline: Who we write for
+## :material-account-switch-outline: The same tools, different situations
+
+How a tool is used changes a lot with the situation it is used in. These guides start from a specific person and a specific risk, which makes it easier to work out what you need to protect.
 
 <div class="grid cards" markdown>
 
-- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--neutral-muted);" } **International rights organizations**
+- :material-shield-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **What an ordinary person should actually do**
 
     ---
 
-    Rights advocacy, anti-surveillance, and anti-censorship organizations covering the Asia-Pacific that may use this site for regional context and citable observations. Documented partners are listed on the [About page](./about/index.md).
+    No particular exposure, just no wish to be profiled by platforms and ad networks. Starts with the changes that cost the least.
 
-- :material-account-edit-outline:{ .lg .middle style="color: var(--neutral-muted);" } **Journalists & academic researchers**
+    [:octicons-arrow-right-24: Everyday baseline](./scenarios/everyday-baseline.md)
 
-    ---
-
-    Reporters and researchers covering Internet freedom, surveillance, and platform regulation in the Asia-Pacific who need regional context that complements the upstream English literature.
-
-- :material-airplane-takeoff:{ .lg .middle style="color: var(--neutral-muted);" } **The English-preferring Sinophone diaspora**
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--cat-privacy);" } **Journalists and source protection**
 
     ---
 
-    People with family or networks in the region who read English more comfortably than Chinese, particularly post-NSL diaspora, students abroad, and second-generation readers.
+    Every stage from first contact to publication can leave something that correlates back to a source. Covers contact, receiving files, and what happens after the story runs.
+
+    [:octicons-arrow-right-24: Source protection](./scenarios/journalist.md)
+
+- :material-bag-suitcase-outline:{ .lg .middle style="color: var(--cat-privacy);" } **Device minimization and border crossings**
+
+    ---
+
+    Device inspection at the border, local networks you cannot trust, and cleaning up after you return. Written jurisdiction by jurisdiction across Asia.
+
+    [:octicons-arrow-right-24: Crossing borders](./scenarios/asia-travel.md)
+
+- :material-hand-coin-outline:{ .lg .middle style="color: var(--cat-payments);" } **Anonymous donation channels**
+
+    ---
+
+    A donor who does not want to be traced, an organization that still has to issue receipts. Covers what fundraising and anti-money-laundering rules allow.
+
+    [:octicons-arrow-right-24: Anonymous donations](./scenarios/nonprofit-anonymous-donation.md)
+
+</div>
+
+Seven more cover activists, election observers, domestic violence survivors, LGBTQ+ readers, speaking online from Singapore and Malaysia, and posting on mainland Chinese platforms. See [Scenarios](./scenarios/index.md).
+
+## :material-gamepad-variant-outline: Try it hands-on
+
+<div class="grid cards" markdown>
+
+- :material-cube-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Interactive**
+
+    ---
+
+    Tor explained through 3D visuals and playable pieces. Walk a three-hop circuit yourself and watch where two streams meet at a rendezvous point.
+
+    [:octicons-arrow-right-24: Play](./games/index.md)
+
+- :material-tools:{ .lg .middle style="color: var(--brand-cyan-500);" } **Utilities**
+
+    ---
+
+    Small tools that run entirely in your browser and send nothing anywhere. Strip metadata from images, generate a passphrase, check what your connection leaks.
+
+    [:octicons-arrow-right-24: Use them](./utils/index.md)
 
 </div>
 
@@ -150,3 +198,7 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
     <!-- latest-posts:5 -->
 
     More at [:material-bullhorn-outline: Updates](./blog/index.md).
+
+---
+
+For a compromised account, money already sent to a scam, a lost device, stalking, or a sudden loss of connectivity, [Emergency Help](./help/index.md) collects what to do first. The helpline numbers on that page are Taiwanese, and it points to the equivalents elsewhere. It does not replace professional help.
