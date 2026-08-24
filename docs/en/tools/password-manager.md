@@ -180,6 +180,7 @@ Several situations recur across the region that international guides do not usua
 - [:material-chat-question: How to build a threat model](../basics/threat-model.md)
 - [:material-chat-question: What metadata is](../basics/metadata.md)
 - [:material-account-multiple-outline: Maintaining multiple online identities](../basics/multiple-identities.md)
+- [:material-email-multiple-outline: Email aliases, and who you hand your trust to](./email-alias.md)
 - [:material-chat-question: What is Tails](./what-is-tails.md)
 
 </div>

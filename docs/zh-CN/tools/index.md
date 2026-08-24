@@ -7,7 +7,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具层
 
-读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。19 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
+读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。20 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
 
 ## 先看这篇
 
@@ -49,5 +49,6 @@ icon: material/toolbox-outline
 - [什么是 CryptPad](./what-is-cryptpad.md)：服务器读不到内容的在线协作办公套件，文档在浏览器端就完成加密，社区自建站点内建简体与正体中文界面。
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
 - [Asian Diceware 密语字典](./asian-diceware.md)：社群参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。
+- [邮件别名怎么用，以及它把信任交给谁](./email-alias.md)：转发服务、自有域名 catch-all 与加号子地址的差别，别名把往来记录集中到谁手上，以及哪些场合用得上、哪些场合接不上。
 - [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。
 - [用 AI 工作时怎么避免数据外泄](./ai-privacy.md)：贴进去的内容去了哪里、消费版与企业版的分野、删除对话为什么不等于数据消失、你没有主动贴却也送出去的那些，以及境内服务的另一套框架。

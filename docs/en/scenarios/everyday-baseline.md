@@ -51,7 +51,7 @@ You do not have to process dozens of accounts today. Do email, banking, and two 
 
 After one site is breached, attackers replay the same credentials against every other service. Unique passwords stop the chain at the first site.
 
-Start by finding out how exposed you already are. Enter your email address at [Have I Been Pwned](https://haveibeenpwned.com/){target="_blank"} and it lists the public breaches it appears in. The number is usually higher than people expect, and it explains directly why unique passwords rank first. The lookup does send the address to their server; the maintainer states that searches are not logged, and if that bothers you, query your least sensitive mailbox.
+Start by finding out how exposed you already are. Enter your email address at [Have I Been Pwned](https://haveibeenpwned.com/){target="_blank"} and it lists the public breaches it appears in. The number is usually higher than people expect, and it explains directly why unique passwords rank first. The lookup does send the address to their server; the maintainer states that searches are not logged, and if that bothers you, query your least sensitive mailbox. It tells you the incident but not who sold your address on, and closing that gap means giving each service its own address; see [email aliases, and who you hand your trust to](../tools/email-alias.md).
 
 If you have never used one, the manager built into your phone is enough to start with — the Passwords app on iOS, or Settings → Google → Autofill on Android. Choosing software can wait.
 

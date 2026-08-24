@@ -39,7 +39,7 @@ Not everyone needs all three. Most readers should start by separating the everyd
 
 ### What each layer needs
 
-Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md).
+Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md). Each layer's email does not have to be a separate mailbox: aliases grow several outward addresses from one, and the trade-offs are in [email aliases, and who you hand your trust to](../tools/email-alias.md).
 
 Two points deserve extra care in this context. Dating-app accounts belong to the exploration layer and should be separate from the community layer as well, covered in the next section. And a community-layer profile photo should never be an image that appears anywhere family or colleagues can see, because a reverse-image hit costs more here than in most situations.
 
