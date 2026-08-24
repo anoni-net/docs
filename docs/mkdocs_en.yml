@@ -15,10 +15,10 @@ nav:
   - !ENV [NAV_ABOUT, "About"]:
       - about/index.md
       - contact.md
-      - help/index.md
       - offline.md
   - !ENV [NAV_GUIDES, "Guides"]:
       - guides/index.md
+      - help/index.md
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md

@@ -14,6 +14,7 @@ nav:
   - index.md
   - !ENV [NAV_GUIDES, "指南"]:
       - guides/index.md
+      - help/index.md
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -174,7 +175,6 @@ nav:
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
       - contact.md
-      - help/index.md
       - offline.md
 theme:
   name: material
