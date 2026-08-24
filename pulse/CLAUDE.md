@@ -71,6 +71,8 @@ backend/
 
 **Vega 端點**：共 5 個，均接受 `country`（TW/JP/KR/HK enum）和 `limit=45` 參數，回傳 Pydantic model 的 JSON 陣列。
 
+**uv 來源**：兩個 Dockerfile 都用 `COPY --from=ghcr.io/astral-sh/uv:<版本> /uv /uvx /bin/` 取得 uv，build 期間不連 astral.sh。改回 `curl | sh` 會讓網路失敗變成難查的 `exit code 127`，因為 pipeline 的 exit code 取自 `sh`，curl 的失敗被吞掉，一路走到 `uv sync` 才報錯。升級 uv 就是改那個版本號。
+
 **Cron 設定**：Dockerfile 建置時寫入 `/etc/crontabs/root`，`5 * * * *` 執行四次（各地區），容器重啟時 `@reboot` 也觸發一次。
 
 ## 環境設定
