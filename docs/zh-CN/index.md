@@ -11,11 +11,11 @@ hide:
 
 > 推广 Tor、Tails、OONI，串连台湾的网络自由实践与在地观测。
 
-[:material-account-group: 认识社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 订阅电子报](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml){ .md-button }
+[:material-account-group: 社群参与](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 订阅电子报](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml){ .md-button }
 
 一群关注匿名网络、隐私与网络自由的在地社群成员。长期推广 Tor、Tails、OONI 等开源工具，维运在地的网络观测，追踪台湾的个资与加密支付法规，并与 EFF、Tor Project、OONI 合作把全球议题带回台湾脉络讨论。完整介绍见 [关于我们](./about/index.md)。
 
-2026 年社群投入三个主题，个人隐私指引、Tor Relay 校园建立、匿名支付，进度与参与方式见 [社群](./community/index.md)。
+2026 年社群投入三个主题，个人隐私指引、Tor Relay 校园建立、匿名支付，进度与参与方式见 [社群参与](./community/index.md)。
 
 ## :material-rocket-launch-outline: 从这里开始
 

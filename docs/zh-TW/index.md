@@ -11,11 +11,11 @@ hide:
 
 > 推廣 Tor、Tails、OONI，串連台灣的網路自由實踐與在地觀測。
 
-[:material-account-group: 認識社群](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 訂閱電子報](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/feed_rss_created.xml){ .md-button }
+[:material-account-group: 社群參與](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 訂閱電子報](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/feed_rss_created.xml){ .md-button }
 
 一群關注匿名網路、隱私與網路自由的在地社群成員。長期推廣 Tor、Tails、OONI 等開源工具，維運在地的網路觀測，追蹤台灣的個資與加密支付法規，並與 EFF、Tor Project、OONI 合作把全球議題帶回台灣脈絡討論。完整介紹見 [關於我們](./about/index.md)。
 
-2026 年社群投入三個主題，個人隱私指引、Tor Relay 校園建立、匿名支付，進度與參與方式見 [社群](./community/index.md)。
+2026 年社群投入三個主題，個人隱私指引、Tor Relay 校園建立、匿名支付，進度與參與方式見 [社群參與](./community/index.md)。
 
 ## :material-rocket-launch-outline: 從這裡開始
 
