@@ -30,7 +30,7 @@ What the community is building is a reproducible method: the full deployment pro
 - **Response templates and a case library**: reference answers for the frequent questions about legal exposure, bandwidth use, and purpose
 - **Approaching a second and third university**, extending from the first case
 - **A channel to EFF and the Tor Project**, feeding cases from Taiwan back into the global programme
-- **Live observation** of campus nodes through [Pulse](https://api.anoni.net/api/readme){target="_blank"}
+- **Live observation** of campus nodes through [Pulse](https://anoni.net/api/readme){target="_blank"}
 - **Pairing with campus security events**: integrating relay deployment into security weeks, orientation talks, and similar occasions
 
 ## Related articles
@@ -87,6 +87,8 @@ Backgrounds we would particularly welcome:
 - **Event organizing**: folding deployment work into security weeks and orientation events
 
 Having run a relay before is not required. Wanting to learn is a sufficient reason, and [how to run a Tor relay](./setup-tor-relay.md) is there to work through with you.
+
+If you are at Global Gathering 2026 in Estoril and your institution is weighing a relay, come and compare notes at our booth on 6 September. Details are in [the booth announcement](../blog/posts/2026-anoni-net-global-gathering.md).
 
 ## Ground rules
 

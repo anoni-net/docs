@@ -6,13 +6,13 @@ icon: material/account-box-outline
 
 # :material-account-box-outline: About anoni.net
 
-anoni.net is a small volunteer community based in Taiwan, working on networked freedom across the Sinophone Asia-Pacific. The community formed around 2023 with a focus on OONI measurement coverage in Taiwan, and has since broadened its scope toward regional observation, regulatory tracking, and selective translation of regional research.
+anoni.net is a small volunteer community based in Taiwan, working on networked freedom across the Sinophone (Chinese-speaking) Asia-Pacific. The community formed around 2023 with a focus on OONI measurement coverage in Taiwan, and has since broadened its scope toward regional observation, regulatory tracking, and selective translation of regional research.
 
 This page is written for international peer organizations, journalists, researchers, and funders who need to know who is behind the work before citing it, partnering, or recommending it onward.
 
 ## What we are
 
-- **A volunteer community**: No salaried staff. The site, the Pulse measurement system, the ASN coverage tooling, and the regional translations are produced by community contributors on their own time, sometimes under pseudonyms.
+- **A volunteer community**: No salaried staff. The site, the Pulse measurement system, the ASN (Autonomous System Number) coverage tooling, and the regional translations are produced by community contributors on their own time, sometimes under pseudonyms.
 - **Based in Taiwan**: The active core is in Taipei. We hope to bring in regional contributors over time but currently have only occasional informal exchange with collaborators elsewhere in the region.
 - **Anchored in self-hosted infrastructure**: We run our own Matrix homeserver (`im.anoni.net`), a Cryptpad instance, an Etherpad, a Send instance, a SearXNG instance, and a Formbricks instance. Internal coordination happens on these tools rather than on third-party platforms.
 - **Originally a Chinese-language community**: The Traditional Chinese (zh-TW) edition is the source of truth. A re-localized Simplified Chinese (zh-CN) edition exists. This English edition is being rebuilt as a regional observatory for international readers, not as a one-to-one translation.
@@ -20,7 +20,7 @@ This page is written for international peer organizations, journalists, research
 ## What we publish
 
 - **anoni.net Docs** — a multilingual documentation site in three editions (zh-TW, zh-CN, en) hosted at [anoni.net/docs](https://anoni.net/docs/){target="_blank"}, with Tor onion mirror at [docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}. Site source: [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}.
-- **Pulse** — a Tor relay monitoring system tracking running, version, ASN, node-type, and flag distributions for relays in Taiwan, Hong Kong, Japan, and South Korea. Pulse is an open-source FastAPI + PostgreSQL service exposing a REST and Vega-Lite chart API at [api.anoni.net](https://api.anoni.net/api/readme){target="_blank"}.
+- **Pulse** — a Tor relay monitoring system tracking running, version, ASN, node-type, and flag distributions for relays in Taiwan, Hong Kong, Japan, and South Korea. Pulse is an open-source FastAPI + PostgreSQL service exposing a REST and Vega-Lite chart API at [anoni.net/api](https://anoni.net/api/readme){target="_blank"}.
 - **ASN coverage analysis tooling** — a Python CLI for batch-processing OONI public S3 data to map per-ASN observation completeness across regions. Used internally to identify under-observed networks and produce regional comparisons.
 - **Two translated regional reports so far** — full Traditional Chinese translations of the 2025 InterSecLab Geedge Networks / MESA Lab leak report and the MADLink report on the Taiwanese link in the Geedge supply chain, both on the zh-TW edition. Future translations get added case by case, when a regional report fills a Chinese-language gap. The English [curated index](../reports/index.md) points to InterSecLab's originals alongside our translations.
 - **Blog posts and community updates** — public reporting on community work, conference participation (RightsCon, COSCUP, ETHTaipei), and translated upstream announcements from Tor Project, OONI, and Tails.
@@ -40,7 +40,7 @@ Decision history and significant changes are visible in the [GitHub repository](
 
 A short list of organizations we have worked with directly. The bar is bidirectional collaboration — joint work, not just citing or attending.
 
-- **[Tor Project](https://torproject.org/){target="_blank"}** — translation contributions, [Snowflake](https://snowflake.torproject.org/){target="_blank"} bridge support, and ongoing campus-relay deployment work in Taiwan. The [NTNU relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} was the subject of a Tor Project blog guest post in March 2026.
+- **[Tor Project](https://torproject.org/){target="_blank"}** — translation contributions, [Snowflake](https://snowflake.torproject.org/){target="_blank"} bridge support, and ongoing campus-relay deployment work in Taiwan. The [National Taiwan Normal University (NTNU) relay](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} was the subject of a Tor Project blog guest post in March 2026.
 - **[OONI](https://ooni.org/){target="_blank"}** — running OONI Probe locally, contributing to the regional websites test list, and translating OONI's methodology and announcements into Chinese for the community.
 - **[Electronic Frontier Foundation](https://www.eff.org/){target="_blank"}** — collaboration on the Tor Relay on Campus initiative; contributing the Traditional Chinese translation of the [Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"} (a joint EFF and Tor Project initiative).
 - **University hosts** — National Taiwan Normal University (Tor relay deployment) and National Taiwan University of Science and Technology (host venue for the 2025 Anonymous Network Workshop).
@@ -76,8 +76,9 @@ Proper attribution for documentation reuse: "anoni.net Docs Project, [URL of the
 Independent of any claim on this page, the following are checkable:
 
 - The full source of the documentation site, Pulse, and ASN coverage tooling is at [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, including commit history and contributor list
-- Pulse data is publicly readable at [api.anoni.net](https://api.anoni.net/api/readme){target="_blank"}
+- Pulse data is publicly readable at [anoni.net/api](https://anoni.net/api/readme){target="_blank"}
 - The Tor onion mirror at [the docs onion address](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"} reflects the same content as the clearnet site
+- An IPFS mirror of the same content is reachable through a public gateway at [anoni-net.ipns.dweb.link](https://anoni-net.ipns.dweb.link/){target="_blank"}, which is worth knowing if the clearnet site is unreachable from where you are
 - Recent community work and external participation are documented in the [Updates / blog](../blog/index.md), with photos and recordings where applicable
 
 ## Reaching us

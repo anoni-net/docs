@@ -10,6 +10,8 @@ icon: material/access-point-network
 
     The coverage analysis below was carried out between November 2023 and March 2024, and the report it draws on is from December 2023. The numbers describe that period. The method is what carries over: you can run the same audit against current data for any country.
 
+    A more recent snapshot, computed the same way against OONI public data for 12 July to 11 August 2026, is in [Taiwan's OONI coverage is 39.3% one ISP](../blog/posts/ooni-mobile-throttle-drill.md#Taiwans-OONI-coverage-is-393-one-ISP). The concentration pattern has not changed. Two fixed-line networks still carry most of the observations, and all three mobile carriers together account for 3.6%.
+
 ## Why ASN diversity matters
 
 The internet is a mesh of interconnected Autonomous Systems (AS). Each AS is a group of networks under one administration (a telecom operator, a university, a company, a CDN provider) with its own routing policy, exchanging traffic with other ASes over BGP, the protocol networks use to announce which addresses they can reach. Every AS has a unique number, its ASN.

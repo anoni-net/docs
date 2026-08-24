@@ -72,6 +72,8 @@ Backgrounds we would particularly welcome:
 
 No security background is required. Wanting to learn is a sufficient reason to join.
 
+We are at Global Gathering 2026 in Estoril on 6 September, and guides that misread regional context are one of the things we want to hear about there. See [the booth announcement](../blog/posts/2026-anoni-net-global-gathering.md).
+
 ## Ground rules
 
 All discussion presumes lawful use. This track presents material for education and risk understanding, and does not assist evasion of legal responsibility, harassment, stalking, or other unlawful conduct. For legal questions about a specific situation, consult a professional. Community members' observations do not substitute for legal advice.

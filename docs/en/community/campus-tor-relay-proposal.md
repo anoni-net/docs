@@ -73,6 +73,7 @@ If you want to do this at your own institution, you do not have to start from no
     - **Server**: provided by `<supervisor, department, or self-provided>`
     - **Bandwidth**: whatever the deployment location supports, adjustable at the IT centre's request
     - **IP address**: one IPv4 address from the campus network. IPv6 can be requested separately for dual-stack
+    - **Running costs**: rack space, power, and bandwidth come out of existing departmental capacity, with no separate budget line requested. Where your institution meters and cross-charges these internally, fill in the figures here
 
     #### 2.3 Operation
 

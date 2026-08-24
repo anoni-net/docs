@@ -29,6 +29,16 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
     Taiwan's first case is at the Computer Science and Information Engineering department of National Taiwan Normal University, live since November 2025. It is written up in a [guest post on the Tor Project blog](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} and in a [community interview](../blog/posts/ntnu-nz.md).
 
+??? question "Who pays for the machine, the rack space, and the electricity?"
+
+    A non-exit relay's footprint is small enough that most campus IT departments can absorb it into what they already run: one low-power machine, one IPv4 address, and a bandwidth allocation you set yourself. The [deployment SOP](./campus-tor-relay-sop.md) caps the relay with `RelayBandwidthRate` and `RelayBandwidthBurst`, so the ceiling is a number you agree with the IT centre in advance rather than something the Tor network decides for you.
+
+    Ask for existing rack space and an existing bandwidth allocation, not a new budget line. Bring three figures to the meeting: the machine's power draw, the bandwidth ceiling you plan to set, and who owns the hardware if the project ends. Working those out during the meeting is what turns a short conversation into a deferred one.
+
+    **Regional note**
+
+    At National Taiwan Normal University the relay runs on departmental infrastructure with no separate budget request, and TANet does not bill a single low-traffic relay's bandwidth back to the department. Where your institution meters and cross-charges internally, get the rate from IT before you write the proposal, because that number decides whether you are asking for a favour or asking for money.
+
 ??? question "We do not want to run an exit relay. Is that acceptable?"
 
     Entirely. The Tor network needs every type of relay to stay healthy. By default, a relay you deploy acts as a guard or middle relay, forwarding encrypted traffic between Tor nodes only. That is the lowest-maintenance form and it ensures you never face complaints.

@@ -73,7 +73,7 @@ In the communities and projects we are familiar with (for example, civic tech in
 Some patterns we have seen:
 
 - **Civic tech and community projects (for example g0v-related work)**  
-  Proposals and decisions are often documented through a mix of proposal documents, shared notes (such as HackMD), hackathon sessions, and online meetings. The [g0v collaboration guide](https://g0v.hackmd.io/@jothon/g0v-cowork-guideline/){target=\"_blank\"} is a good example of how this culture is documented.  
+  Proposals and decisions are often documented through a mix of proposal documents, shared notes (such as HackMD), hackathon sessions, and online meetings. The [g0v collaboration guide](https://g0v.hackmd.io/@jothon/g0v-cowork-guideline/){target="_blank"} is a good example of how this culture is documented.  
   Architecturally important decisions, however, may end up scattered across notes, issues, pull requests, slides, and chat logs. After some time, it becomes hard to reconstruct *why* a system looks the way it does.
 
 - **Government and public-sector collaborations**  

@@ -21,7 +21,7 @@ OONI's observation data has three entry points serving quite different purposes.
 | Entry point | Suits | Limitation |
 |---|---|---|
 | [AWS S3 public dataset](https://registry.opendata.aws/ooni/){target="_blank"} | Bulk analysis, full-population statistics, comparison over time | You parse it yourself, and downloads run to gigabytes |
-| [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"} | Filtering by criteria, fetching one complete measurement | A cap on results per request |
+| [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"} | Filtering by criteria, fetching one complete measurement | A cap on results per request |
 | [OONI Explorer](https://explorer.ooni.org/){target="_blank"} | Looking things up by hand, checking individual measurements | Not suited to programmatic access |
 
 `asn_coverage` takes the S3 route, since its purpose is coverage statistics rather than single lookups. For single measurements or small-scale filtering, [Reading an OONI measurement](./ooni-data-format.md) covers the API.

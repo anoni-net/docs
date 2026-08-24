@@ -100,7 +100,7 @@ icon: material/access-point-network
 ## 後續方向
 
 - 持續追蹤台灣 ASN 覆蓋率隨時間的變化（社群志工協作中）
-- 把 [Pulse 後端](https://api.anoni.net/api/readme){target="_blank"} 的觀測資料用 Vega-Lite 圖表呈現在這頁
+- 把 [Pulse 後端](https://anoni.net/api/readme){target="_blank"} 的觀測資料用 Vega-Lite 圖表呈現在這頁
 - 與 [OONI 網站檢測清單](./ooni-checklist.md) 維護工作搭配，提升觀測品質與多樣性
 
 ## 下一步

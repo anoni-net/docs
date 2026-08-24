@@ -25,17 +25,17 @@ The templates are ready. The next step is for more universities to take them up.
 
 Three documents cover the three roles in the rollout sequence: proposal author, technical operator, and the university administration team that gets asked questions.
 
-!!! note "English translation status"
+!!! note "All three documents are now in English"
 
-    The three community documents below are currently only available in Mandarin. The Mandarin originals are the authoritative source and carry the full Taiwan-specific legal annotations. English versions will be added in a follow-up release.
+    Each one marks its Taiwan-specific material in a separate regional note, covering TANet, the Criminal Code articles on unauthorised computer access, and the Personal Data Protection Act. Swap those notes for your own jurisdiction's equivalents. The proposal structure, the outreach emails, and the technical SOP carry over as they are. The Mandarin originals remain the authoritative source for the Taiwanese legal annotations.
 
-- **Proposal template** (school-facing document, four outreach email patterns, two-month administrative timeline): [https://anoni.net/docs/community/campus-tor-relay-proposal/](https://anoni.net/docs/community/campus-tor-relay-proposal/){target="_blank"}
-- **Deployment SOP** (torrc, UFW, status page architecture, monitoring runbook, IPv6, handover): [https://anoni.net/docs/community/campus-tor-relay-sop/](https://anoni.net/docs/community/campus-tor-relay-sop/){target="_blank"}
-- **FAQ for university administration and legal counsel** (ten questions with Taiwan-specific annotations, plus two one-page summaries): [https://anoni.net/docs/community/campus-relay-faq/](https://anoni.net/docs/community/campus-relay-faq/){target="_blank"}
+- **Proposal template** (school-facing document, four outreach email patterns, two-month administrative timeline): [Campus Tor relay proposal template](../../community/campus-tor-relay-proposal.md)
+- **Deployment SOP** (torrc, UFW, status page architecture, monitoring runbook, IPv6, handover): [Campus Tor relay deployment SOP](../../community/campus-tor-relay-sop.md)
+- **FAQ for university administration and legal counsel** (ten questions with Taiwan-specific annotations, plus two one-page summaries): [Campus Tor relay FAQ](../../community/campus-relay-faq.md)
 
 The hub page collects all three with case studies, project goals, and a backlog of external resources awaiting translation:
 
-- [Tor Relay 校園建立研究專題](https://anoni.net/docs/community/relay-on-campus/){target="_blank"}
+- [Tor relays on campus track](../../community/relay-on-campus.md)
 
 ## For readers outside Taiwan
 
@@ -52,7 +52,7 @@ If your university already runs a relay through EFF's Tor University Challenge p
 
 Tor's anonymity rests on relay diversity. When relays concentrate in a few countries or network providers, the network's ability to resist traffic analysis weakens. Taiwan's relay count on Tor Metrics is still limited, and each stable node adds another margin of resistance. Real-time observation:
 
-- [Tor Relays watcher](https://anoni.net/docs/taiwan/tor-relay-watcher/){target="_blank"}
+- [Tor Relays watcher](../../regional/tor-relay-watcher.md)
 
 University campuses are a reasonable place to close that gap: stable academic bandwidth, students and staff with the skill to operate the node, a clearer institutional review path than residential or small-company hosting, and direct alignment with EFF's [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}.
 
@@ -70,9 +70,9 @@ The Taiwan case is also documented in English on the Tor Project blog, with NZ's
 
 - [Setting up a Tor Relay at a university in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}
 
-The full long-form Mandarin interview with NZ on anoni.net covers the year-long arc through the proposal process. If you read Mandarin, this is the most complete record:
+The full long-form interview with NZ on anoni.net covers the year-long arc through the proposal process, and is the most complete record of how the first one went:
 
-- [在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](https://anoni.net/docs/blog/posts/ntnu-nz/){target="_blank"}
+- [Setting up a Tor relay at National Taiwan Normal University](./ntnu-nz.md)
 
 ## Acknowledgements
 

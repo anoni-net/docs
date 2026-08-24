@@ -45,7 +45,7 @@ The first step is to check each site listed in [tw.csv](https://github.com/citiz
 
 !!! info "PR #1444"
 
-    Our community [submitted a list revision](https://github.com/citizenlab/test-lists/pull/1444){target="_blank"} on 28 September 2023. Work on it is ongoing.
+    Our community [submitted a list revision](https://github.com/citizenlab/test-lists/pull/1444){target="_blank"} on 28 September 2023. As of August 2026 it is still open and unmerged, with no reviewer activity since December 2024. Anyone who wants to help move it along is welcome to.
 
 ## Adding to the list
 

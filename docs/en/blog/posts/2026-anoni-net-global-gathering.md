@@ -6,16 +6,16 @@ categories:
     - News
     - Community
 slug: 2026-anoni-net-global-gathering
-summary: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
-description: "Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal, and the anonymity networks community has a booth confirmed for 6 September, 13:00 to 15:00 local time, at Booth 6 in the Regional Perspectives Village. The booth is titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first time at the Gathering, and the main hope is to meet technologists developing anonymity networks and circumvention tools, along with others working across the Asia region, and to take part in coordination across the region. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post lists the nine sessions on the agenda that overlap with our work, the six booths we plan to visit and what we want to ask each of them, five ways to find us during the first two days, and how people who cannot travel can still take part. The observation record from the 30 minutes of mobile throttling in northern Taiwan on 13 August comes along as a case others can compare against."
+summary: "Global Gathering 2026 runs from 4 to 6 September in Estoril, Portugal, hosted by Team CommUNITY. We have a booth on 6 September, `13:00` to `15:00` WEST, at Booth 6 in the Regional Perspectives Village, titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first Global Gathering. We want to meet technologists building anonymity networks and circumvention tools, and others working across Asia. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post covers the sessions on the agenda that overlap with our work, the booths we plan to visit and what we want to ask each of them, how to find us before our own slot, and how to take part without travelling. We also bring the observation record from 30 minutes of mobile throttling in northern Taiwan on 13 August, as a case others can compare against."
+description: "Global Gathering 2026 runs from 4 to 6 September in Estoril, Portugal, hosted by Team CommUNITY. We have a booth on 6 September, `13:00` to `15:00` WEST, at Booth 6 in the Regional Perspectives Village, titled anoni.net Hub: Sinophone Asia-Pacific Networked Freedom. This is our first Global Gathering. We want to meet technologists building anonymity networks and circumvention tools, and others working across Asia. The booth takes anonymous payment as its topic, a subject no session on the agenda covers, and collects real situations from the people who have run into it. This post covers the sessions on the agenda that overlap with our work, the booths we plan to visit and what we want to ask each of them, how to find us before our own slot, and how to take part without travelling. We also bring the observation record from 30 minutes of mobile throttling in northern Taiwan on 13 August, as a case others can compare against."
 ---
 
 # The Anonymity Networks Community Is Going to Global Gathering 2026
 
 Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in Estoril, Portugal. We applied for a booth and the slot is now confirmed.
 
-- Date and time: 6 September, `13:00` to `15:00` local time
-- Location: Booth `6` in the Regional Perspectives Village, 3 x 3 metres
+- Date and time: 6 September, `13:00` to `15:00` WEST (UTC+1, Portugal local time during the event)
+- Location: Booth `6` in the Regional Perspectives Village, 3 x 3 meters
 - Booth title: anoni.net Hub: Sinophone Asia-Pacific Networked Freedom
 
 Event details are at [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}.
@@ -30,7 +30,7 @@ There is no main stage and no keynote, and the three days are built out of Circl
 
 This is our first time at the Global Gathering, and the main hope is to meet more people, both technologists developing anonymity networks and other circumvention tools, and others working across the Asia region.
 
-We are a group of volunteers who care about anonymity networks and internet freedom, starting from Taiwan, and what we do covers keeping journalists' sources protected, letting activists organise without leaving traces, and helping people support sensitive causes without exposing who they are. All three rest on having an anonymity network that works. We run the Matrix home server `im.anoni.net` and this docs site, which keeps our observations and discussions somewhere they can be checked.
+We are a group of volunteers who care about anonymity networks and internet freedom, starting from Taiwan, and what we do covers keeping journalists' sources protected, letting activists organize without leaving traces, and helping people support sensitive causes without exposing who they are. All three rest on having an anonymity network that works. We run the Matrix home server `im.anoni.net` and this docs site, which keeps our observations and discussions somewhere they can be checked.
 
 The community counts from the [anonymity network workshop](../../event-workshop-2025.md) we ran in August 2025, where the first group of members came together. Three threads are open in 2026, with practical privacy guides sorted by scenario for everyday life, sensitive work, and high risk, campus Tor relays pushed forward together with EFF and the Tor Project and one already running at National Taiwan Normal University, and the anonymous payment work we are bringing to the booth.
 
@@ -44,7 +44,7 @@ For the 30 minutes of mobile throttling in northern Taiwan on 13 August, we turn
 
 The agenda went up in late August, and across the three days it covers shutdown response, circumvention tools, platform accountability, AI governance, and journalist safety. Having gone through the Circles, Villages, and Booths one by one, we found no session that takes financial privacy as its subject. Donor anonymity, cross-border disbursement, and what sanctions and currency controls do to civil society appear in no session title or description. A few sessions do take fundraising strategy and grant applications as their subject, where the focus is getting money in. How a payment reaches its recipient without exposing them goes unaddressed.
 
-Sanctions lists, banks refusing to do business, donation records being subpoenaed: these are day-to-day realities for many organisations, with no matching discussion anywhere on the agenda.
+Sanctions lists, banks refusing to do business, donation records being subpoenaed: these are day-to-day realities for many organizations, with no matching discussion anywhere on the agenda.
 
 We are making anonymous payment the main topic at our booth. As a community we are still at the research stage, gathering real situations, including who needs an anonymous money trail and under what circumstances, where current practice breaks down, and what limits regulation and compliance impose.
 
@@ -89,11 +89,11 @@ The full agenda is at [Global Gathering 2026](https://wiki.digitalrights.communi
 
 Our booth is on the final day, which leaves no fixed spot for the first two days. Any of the following will reach us.
 
-- The Matrix room set up for the event is the most reliable, at [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, where a message is enough to arrange a time and place, no phone numbers need to change hands, and we will reply as soon as we can during the event.
-- Two sessions on 4 September are ones we will be attending, the Asia Meetup (`12:00` to `13:00`) and the Technologist Meetup (`16:30` to `17:30`), so meeting there works directly.
-- We will most likely be around for the Networking Hour, `12:00` to `13:00` each day, though plans may still shift, so a quick check in that room beforehand helps.
+- The Matrix room set up for the event is the most reliable, at [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, where a message is enough to arrange a time and place, no phone numbers need to change hands, and we will reply as soon as we can during the event. Any Matrix account can join, so a free matrix.org account works and takes a couple of minutes to set up. Times in that room are in WEST unless someone says otherwise. Accounts on `im.anoni.net` are issued by a person and take a day or two, which is too slow for meeting someone at the venue, so do not wait on one.
+- Two sessions on 4 September are ones we will be attending, the Asia Meetup (`12:00` to `13:00` WEST) and the Technologist Meetup (`16:30` to `17:30` WEST), so meeting there works directly.
+- We will most likely be around for the Networking Hour, `12:00` to `13:00` WEST each day, though plans may still shift, so checking that room before you leave for Estoril helps.
 - We will be at the venue for most of the three days, with anoni.net and a handle on our badges, so please do say hello.
-- The booth slot on 6 September, `13:00` to `15:00`, is the easiest place to find us, and giving the name you go by is enough.
+- The booth slot on 6 September, `13:00` to `15:00` WEST, is the easiest place to find us, and giving the name you go by is enough.
 
 ## Taking part without travelling
 
@@ -101,7 +101,7 @@ Most people will not be travelling to Portugal, and there are still two things w
 
 Please write down a coordination gap you have run into and send it to us, and we will take it along to compare against what other regions are seeing. Observations from Taiwan do not surface often at international events, and describing one concrete situation carries further than an abstract overview.
 
-We would also like to hear real experiences of anonymous payment, so if you or an organisation you know has dealt with small cross-border support, the trade-off between donation receipts and identity disclosure, or a recipient put at risk because a money trail identified them, that experience is what the booth needs. Anything you would rather not attach your name to can go to the anonymous mailbox below, which is checked at any hour.
+We would also like to hear real experiences of anonymous payment, so if you or an organization you know has dealt with small cross-border support, the trade-off between donation receipts and identity disclosure, or a recipient put at risk because a money trail identified them, that experience is what the booth needs. Anything you would rather not attach your name to can go to the anonymous mailbox below. We check it within a few hours across the three days of the Gathering, and reply within a day or two the rest of the time.
 
 Beyond the event, all three threads for 2026 are short of hands. The privacy guides need people to sort scenarios and proofread, campus Tor relays need someone willing to ask about feasibility at their own institution, and the anonymous payment work needs more real cases. If you have compared the August throttling write-up against the raw OONI data and have something to add or correct, that is welcome too. Say which part interests you in the Matrix room.
 
@@ -117,4 +117,4 @@ Whatever the booth collects will be written up and published in a later newslett
 
 - During the event: Matrix room [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, for the three days of the Global Gathering
 - Live discussion: [public Matrix room](../../community/tools.md) (home server `im.anoni.net`)
-- Anonymous tips: whisper@anoni.net ([GPG key](../../contact.md)), checked at any hour
+- Anonymous tips: whisper@anoni.net ([GPG key](../../contact.md)), checked within a few hours during the Gathering

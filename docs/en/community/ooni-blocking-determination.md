@@ -116,7 +116,7 @@ Getting from an observation to "this site is blocked in this place" takes more t
 1. **Across time**: the same URL producing the same verdict repeatedly over days or weeks rules out a one-off outage.
 2. **Across ASNs**: several carriers measuring the same result points at behaviour common to the network layer. A result confined to one ASN is more likely that operator's own configuration.
 3. **Across resolvers**: still anomalous with a different DNS resolver rules out the resolver itself.
-4. **Check the `confirmed` field**: OONI's backend matches measurements against known block-page fingerprints and marks `confirmed` as `true` on a hit. The field appears in [measurements API](https://api.ooni.io/api/v1/measurements){target="_blank"} responses as backend analysis, and is not part of the raw data the Probe produces.
+4. **Check the `confirmed` field**: OONI's backend matches measurements against known block-page fingerprints and marks `confirmed` as `true` on a hit. The field appears in [measurements API](https://api.ooni.org/api/v1/measurements){target="_blank"} responses as backend analysis, and is not part of the raw data the Probe produces.
 
 To run comparisons across time or across ASNs yourself, [ASN observation data retrieval and analysis](./asn-coverage-howto.md) covers bulk retrieval.
 
@@ -156,7 +156,7 @@ uv run python ooni.py lookback --units=24 --loc=TW --frame=hours
 The command prints the `blocking` totals and writes the per-ASN distribution into the CSV. Individual measurements still come from the API:
 
 ```bash title="List anomalous measurements from Taiwan"
-curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
+curl -s "https://api.ooni.org/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
   | python3 -m json.tool | head -40
 ```
 

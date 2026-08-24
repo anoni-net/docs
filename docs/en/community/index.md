@@ -89,7 +89,7 @@ See [ASN observation data analysis](../regional/ooni-asn-coverage.md) for where 
 
 ### Workshops and events
 
-We organize and co-organize workshops and meetups. Past include the 2025 Anonymous Network Workshop (NTUST) and Internet Freedom Coffee meetups in Taipei. Upcoming includes the COSCUP 2026 Anonymous Track. See [Events](../activity/index.md) for current and recent activity.
+We organize and co-organize workshops and meetups. Past include the 2025 Anonymous Network Workshop (NTUST), the COSCUP 2026 Anonymous Track (August 2026), and Internet Freedom Coffee meetups in Taipei. See [Events](../activity/index.md) for current and recent activity.
 
 ## :material-file-document-outline: For sensitive submissions
 

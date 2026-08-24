@@ -41,7 +41,7 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
     ---
 
-    Followed through public sources, not first-hand observation. We pay attention to the Great Firewall's filtering and DPI patterns, real-name infrastructure on domestic platforms (WeChat, Weibo, Douyin), content-governance campaigns affecting LGBTQ+ and other voices, and the technical export of these systems abroad. The 2025 InterSecLab Geedge and MESA leak is the one piece of regional research we have produced a full Chinese translation of.
+    Followed through public sources, not first-hand observation. We pay attention to the Great Firewall's filtering and DPI (deep packet inspection) patterns, real-name infrastructure on domestic platforms (WeChat, Weibo, Douyin), content-governance campaigns affecting LGBTQ+ and other voices, and the technical export of these systems abroad. The 2025 InterSecLab Geedge and MESA leak is the one piece of regional research we have produced a full Chinese translation of.
 
 - :material-domain:{ .lg .middle style="color: var(--neutral-muted);" } **Hong Kong & Macau**
 
@@ -87,7 +87,7 @@ Three threads run through the regional observation:
 
 ### Measurement we run or contribute to
 
-The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
+The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN (Autonomous System Number) coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
 
 ### Regulation we track
 
