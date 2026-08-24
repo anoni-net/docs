@@ -42,7 +42,7 @@ icon: material/email-multiple-outline
 
 addy.io 也能自架，前提是你有能力維護一台郵件伺服器，官方文件要求自備裝好 Postfix（處理收發信的伺服器軟體）的機器，另提供 Docker 容器版本。沒有伺服器管理經驗就用官方託管的版本，功能一樣。
 
-[Firefox Relay](https://relay.firefox.com/){target="_blank"} 由 Mozilla 營運，免費方案 5 個遮罩地址，付費方案給無限遮罩、自訂子網域與號碼遮罩。付費方案的供應國家清單目前涵蓋歐洲多國、美加、紐西蘭、新加坡與馬來西亞，台灣不在其中[^relay]。台灣使用者能用的就是免費的 5 個遮罩。
+[Firefox Relay](https://relay.firefox.com/){target="_blank"} 由 Mozilla 營運，免費方案 5 個遮罩地址。付費分成兩級，Email Protection 解鎖無限遮罩與自訂子網域，再高一級的 Email & Phone Protection 才加上號碼遮罩。付費方案的供應範圍是 34 個國家與地區，涵蓋歐洲多國、美加、紐西蘭、新加坡與馬來西亞，台灣不在其中[^relay]。台灣使用者能用的就是免費的 5 個遮罩。
 
 [DuckDuckGo Email Protection](https://duckduckgo.com/email/){target="_blank"} 免費、數量無限，地址落在 `@duck.com`，分成一個個人地址與隨機產生的私密地址兩種。除了轉寄，它會移除信件裡的追蹤像素（嵌在信件裡的一張看不見的圖片，用來回報你有沒有打開信件）。官方聲明轉寄過程不保存信件內容，連信件夾帶的寄件人與收件人欄位都不留[^ddg-privacy]。
 
@@ -127,6 +127,42 @@ Apple 的 Hide My Email 需要 iCloud+ 付費訂閱（iCloud 的付費方案）�
 
 電商、外送、購票、健身房會員這類會發促銷信也會外洩的服務，每家一個別名收益最高。銀行、券商、報稅、健保這類需要長期穩定且不能失聯的服務，用本尊地址，別為了隔離讓自己收不到重要通知。
 
+## 已經在用 Proton Mail 的話
+
+台灣的公民團體用 Proton Mail 的比例不低，這批組織的起點跟前面預設的不同，手上已經有帳號，不必再去註冊一家轉寄服務。額度按方案分得很細，而且跟直覺相反的地方不只一處，以下拆開說明。
+
+### 免費版就有 10 個別名
+
+免費的 Proton 帳號附帶 Proton Pass，裡面的 hide-my-email 別名可以開 10 個，底層就是前面提過的 SimpleLogin。不必另外註冊 Proton Pass，同一組帳號登入就有[^proton-alias]。開的位置在 Proton Mail 網頁版右側的 Security Center（盾牌圖示），或 Proton Pass 的 App 與瀏覽器擴充功能，兩邊共用同一份額度。
+
+加號子地址在所有方案都能用，而且不佔那 10 個額度。前面說過它擋不住任何人，拿來做收件分類仍然有效，兩者可以並用：別名給會外流的對象，加號地址給只需要分流歸檔的內部用途。
+
+### 升級到最便宜的付費方案，別名不會變多
+
+Mail Plus 的 hide-my-email 額度仍然是 10 個，與免費版相同。要無限別名得升到 Proton Unlimited，或單獨訂閱 Pass Plus[^proton-plans]。買 Mail Plus 換到的是信箱地址數與自有網域，別名數量原地不動。
+
+付費方案配上自有網域之後可以設 catch-all，免費版不行[^proton-catchall]。代價與前面那節寫的一樣，垃圾信全數落地、網域註冊資料公開可查。
+
+### 商務方案的入門檔反而沒有別名
+
+組織買商務方案時最容易誤判的一點：**Mail Essentials 不含 Proton Pass**，等於不含 hide-my-email 別名[^proton-business]。它給的是每人 10 個信箱地址、3 個自有網域與 catch-all，別名功能完全不在裡面。組織升上商務方案之後，同仁能用的別名還是各自免費帳號附帶的那 10 個，組織層級沒有任何整合管理。
+
+要在組織層級取得別名，路徑是 Workspace Standard 以上的整套方案，或單獨加購 Pass for Business（最低 3 席），兩者都給無限別名。
+
+既有的獨立 SimpleLogin 帳號可以連結到 Proton 帳號。Proton 訂閱屬於 Unlimited、Proton for Business、Family 這幾種的話，連結後會自動升級成 SimpleLogin Premium，含無限別名、最多 5 個 catch-all 子網域與 PGP 加密轉寄。原本另外付費訂閱過 SimpleLogin Premium 的人記得取消，避免重複扣款[^proton-simplelogin]。
+
+### 非營利折扣問得到價格，問不到規格
+
+Proton 有非營利組織折扣，涵蓋 Mail、Drive、VPN、Pass 的商務版。官方頁面只寫「registered nonprofit organizations with proper documentation」，沒有指名國家、沒有指定認證機構、也沒有公布折扣幅度，全部要聯絡業務才拿得到報價[^proton-nonprofit]。台灣立案的團體符不符合資格，公開資訊答不出來，需要直接去問。
+
+折扣影響的是價格，不改變別名功能的規則。洽談時要確認的是最後買到哪一個方案，Mail Essentials 打折之後仍然沒有別名。
+
+### 人員流動的兩個坑
+
+小型組織常見的做法是全體共用一組帳密。這種情況下 10 個別名全部掛在同一組帳號上，沒有分權限機制，交接時的風險等同交接整個信箱。
+
+用 Pass for Business 的組織要注意金庫歸屬。共享金庫的擁有者刪除自己的 Proton 帳號時，該金庫連同裡面所有項目一併刪除，被分享的人也拿不回來[^proton-vault]。官方文件沒有寫明員工被管理員移除帳號時，他個人金庫裡建的別名會怎麼處理。組織共用用途的別名一律建在共享金庫，不要讓個別同仁用自己的個人金庫建，導入前先實測一次離職流程。
+
 ## 撤銷一個別名的流程
 
 底下的流程針對某個服務的通知信箱，不涵蓋你長期對外公開的主要地址。已經印在名片、網站與報名表單上多年的組織聯絡信箱，換掉的成本落在找不到你的人身上，屬於改變對外聯絡方式，要另外規劃公告與並行期，別套用底下的步驟。
@@ -184,4 +220,11 @@ Apple 的 Hide My Email 需要 iCloud+ 付費訂閱（iCloud 的付費方案）�
 [^sl-block]: [Report blocking website](https://simplelogin.io/docs/report-blocking-website/){target="_blank"} - SimpleLogin 文件，回報流程與改用自有網域的建議在此頁。
 [^ded]: [disposable-email-domains](https://github.com/disposable-email-domains/disposable-email-domains){target="_blank"} - 社群維護的拋棄式信箱網域清單，提交新網域需附上可產生拋棄式地址的截圖。
 [^einvoice]: [手機條碼申請](https://www.einvoice.nat.gov.tw/accounts/signup/mw){target="_blank"} - 財政部電子發票整合服務平台，手機號與 email 兩項驗證流程在此頁。
+[^proton-alias]: [Hide-my-email aliases](https://proton.me/support/pass-email-alias){target="_blank"} - Proton 支援文件，免費方案與 Mail Plus 各 10 個、Pass Plus 與 Unlimited 無限，以及建立別名的介面位置在此頁。
+[^proton-plans]: [Proton plans](https://proton.me/support/proton-plans){target="_blank"} - Proton 支援文件的方案對照表，各方案的信箱地址數與 hide-my-email 額度在此頁。
+[^proton-catchall]: [Catch-all addresses](https://proton.me/support/catch-all){target="_blank"} - Proton 支援文件，catch-all 需搭配自有網域且限付費方案。
+[^proton-business]: [Proton for Business](https://proton.me/support/proton-for-business){target="_blank"} - Proton 支援文件，Mail Essentials 的地址數與自有網域數，以及 Proton Pass 只在 Workspace 與 Pass for Business 方案的分野在此頁。
+[^proton-simplelogin]: [Link your SimpleLogin account to your Proton Account](https://proton.me/support/link-simplelogin-account-proton-account){target="_blank"} - Proton 支援文件，自動升級的方案清單、SimpleLogin Premium 的內容與重複扣款提醒在此頁。
+[^proton-nonprofit]: [Nonprofit discount](https://proton.me/business/nonprofit-discount){target="_blank"} - Proton 商務方案的非營利折扣頁，資格敘述與需聯絡業務取得報價在此頁。
+[^proton-vault]: [Share vaults in Proton Pass](https://proton.me/support/pass-browser-share){target="_blank"} - Proton 支援文件，共享金庫擁有者刪除帳號會連帶刪除整個金庫的說明在此頁。
 [^bw-gen]: [Username Generator](https://bitwarden.com/help/generator/){target="_blank"} - Bitwarden 說明文件，六家轉寄服務的整合清單在此頁。
