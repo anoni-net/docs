@@ -70,6 +70,8 @@ Backgrounds we would particularly welcome:
 
 No cryptocurrency experience is required. Wanting to learn is a sufficient reason to join.
 
+This is the topic we are taking to our booth at Global Gathering 2026 in Estoril on 6 September. If you have a real situation to describe, whether or not you are travelling, [the booth announcement](../blog/posts/2026-anoni-net-global-gathering.md) covers how to send it, including a route that does not attach your name to it.
+
 ## Ground rules
 
 All discussion presumes lawful use, and this track needs particular care. Workshops and sessions present material for education and risk understanding, and do not assist money laundering, tax evasion, or other unlawful conduct. For legal questions about a specific situation, consult a professional. Community members' observations do not substitute for legal advice.

@@ -73,6 +73,7 @@ If you want to do this at your own institution, you do not have to start from no
     - **Server**: provided by `<supervisor, department, or self-provided>`
     - **Bandwidth**: whatever the deployment location supports, adjustable at the IT centre's request
     - **IP address**: one IPv4 address from the campus network. IPv6 can be requested separately for dual-stack
+    - **Running costs**: rack space, power, and bandwidth come out of existing departmental capacity, with no separate budget line requested. Where your institution meters and cross-charges these internally, fill in the figures here
 
     #### 2.3 Operation
 
@@ -267,7 +268,7 @@ From the first case, the places people get stuck:
 
 !!! tip "Next step"
 
-    1. **[The FAQ for administrators and legal counsel](./campus-relay-faq.md)**: read the ten questions so a meeting does not catch you out, and attach it as appendix one
+    1. **[The FAQ for administrators and legal counsel](./campus-relay-faq.md)**: read the eleven questions so a meeting does not catch you out, and attach it as appendix one
     2. **[The deployment SOP](./campus-tor-relay-sop.md)**: once approved and once you have the IP address and rack space, deploy from there
 
     Suggested order: **proposal template, then FAQ, then SOP**.

@@ -14,7 +14,7 @@ This page condenses all 41 into one reference table, noting each one's upstream 
 
     **Spec status** comes from the `_status_` marker at the top of each specification, one of `current`, `experimental` or `obsolete`, reflecting how upstream positions that nettest.
 
-    **Data in circulation** is measured, snapshotted on the day of writing (2026-08-04) by surveying each nettest's most recent public measurements through the [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"}.
+    **Data in circulation** is measured, snapshotted on the day of writing (2026-08-04) by surveying each nettest's most recent public measurements through the [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"}.
 
     **Taiwan** comes from the S3 public dataset, spot-checking the nettest directories that appeared under Taiwan across five time slots on 2026-08-03.
 

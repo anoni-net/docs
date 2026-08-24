@@ -116,7 +116,7 @@ OONI 在数据集层级亦处理同一类问题，作法见 [OONI 如何分辨�
 1. **跨时间**：同一个网址在数天到数周内反覆出现同样的判定，方能排除偶发故障。
 2. **跨 ASN**：多家电信商测得相同结果，指向网络层的普遍行为。仅在单一 ASN 出现者，较可能是该业者的个别设置。
 3. **跨解析器**：更换 DNS 解析器后仍然异常，方能排除解析器自身问题。
-4. **`confirmed` 栏位**：OONI 后端以已知的封锁告示页指纹比对测量，命中时将 `confirmed` 标为 `true`。该栏位位于 [measurements API](https://api.ooni.io/api/v1/measurements){target="_blank"} 的回应中，属于后端分析结果，不在 Probe 产生的原始数据内。
+4. **`confirmed` 栏位**：OONI 后端以已知的封锁告示页指纹比对测量，命中时将 `confirmed` 标为 `true`。该栏位位于 [measurements API](https://api.ooni.org/api/v1/measurements){target="_blank"} 的回应中，属于后端分析结果，不在 Probe 产生的原始数据内。
 
 跨时间与跨 ASN 比对的批次取用作法，见 [ASN 观测数据提取与分析](./asn-coverage-howto.md)。
 
@@ -156,7 +156,7 @@ uv run python ooni.py lookback --units=24 --loc=TW --frame=hours
 该指令会印出 `blocking` 的合计，并将逐 ASN 的分布写入 CSV。单笔查验仍使用 API：
 
 ```bash title="列出台湾的异常测量"
-curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
+curl -s "https://api.ooni.org/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&anomaly=true&limit=100" \
   | python3 -m json.tool | head -40
 ```
 

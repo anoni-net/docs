@@ -9,7 +9,7 @@ hide:
 
 # <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net Docs
 
-> A Taiwan-anchored volunteer observatory for networked freedom across the Sinophone Asia-Pacific.
+> A Taiwan-anchored volunteer observatory for networked freedom across the Sinophone (Chinese-speaking) Asia-Pacific.
 
 [:material-account-group: About us](./about/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: Newsletter](./contact.md){ .md-button } [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/en/feed_rss_created.xml){ .md-button }
 
@@ -27,7 +27,7 @@ For general digital safety guidance written for a global audience, well-establis
 
     ---
 
-    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN coverage analysis tool over OONI public data, and have published full Chinese translations of two regional reports (InterSecLab's Geedge / MESA leak and MADLink, both 2025). English regulatory explainers covering Taiwan's data protection overhaul, the Virtual Asset Service Act, and whistleblower protection are published.
+    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN (Autonomous System Number) coverage analysis tool over OONI public data, and have published full Chinese translations of two regional reports (InterSecLab's Geedge / MESA leak and MADLink, both 2025). English regulatory explainers covering Taiwan's data protection overhaul, the Virtual Asset Service Act, and whistleblower protection are published.
 
     [:octicons-arrow-right-24: Regional observatory](./regional/index.md)
 
@@ -61,7 +61,7 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
     ---
 
-    The community is in Taipei; this is the only jurisdiction where we have direct, first-hand standing. Personal Data Protection Act 2025, VASP Act 2026, the whistleblower-protection law's technical aspects, and one of the more open Sinophone connectivity environments that we use as a reference baseline. Most regulatory writing on this site is Taiwan-specific.
+    The community is in Taipei; this is the only jurisdiction where we have direct, first-hand standing. Personal Data Protection Act 2025, the Virtual Asset Service Act (VASP Act) 2026, the whistleblower-protection law's technical aspects, and one of the more open Sinophone connectivity environments that we use as a reference baseline. Most regulatory writing on this site is Taiwan-specific.
 
 - :material-source-branch:{ .lg .middle style="color: var(--brand-cyan-500);" } **Taiwan's open-source and civic-tech community**
 
@@ -79,7 +79,7 @@ Our standing varies by jurisdiction. We don't claim equal depth across the regio
 
     ---
 
-    Followed through public sources, not first-hand observation. The Great Firewall's filtering and DPI patterns, real-name infrastructure on domestic platforms, content-governance cycles, and the technical export of these systems abroad (the 2025 InterSecLab Geedge / MESA leak is the one report we have translated in full to Chinese).
+    Followed through public sources, not first-hand observation. The Great Firewall's filtering and DPI (deep packet inspection) patterns, real-name infrastructure on domestic platforms, content-governance cycles, and the technical export of these systems abroad (the 2025 InterSecLab Geedge / MESA leak is the one report we have translated in full to Chinese).
 
 - :material-domain:{ .lg .middle style="color: var(--neutral-muted);" } **Hong Kong & Macau**
 

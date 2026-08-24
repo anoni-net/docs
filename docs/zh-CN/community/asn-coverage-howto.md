@@ -21,7 +21,7 @@ OONI 的观测数据有三个入口，用途差异很大，着手前需先选定
 | 入口 | 适合的情境 | 限制 |
 |---|---|---|
 | [AWS S3 公开数据集](https://registry.opendata.aws/ooni/){target="_blank"} | 批次分析、全量统计、跨时间比对 | 需自行解析，下载量以 GB 计 |
-| [OONI API](https://api.ooni.io/api/v1/measurements){target="_blank"} | 依条件筛选、取单笔完整测量 | 单次返回笔数有上限 |
+| [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"} | 依条件筛选、取单笔完整测量 | 单次返回笔数有上限 |
 | [OONI Explorer](https://explorer.ooni.org/){target="_blank"} | 人工查阅、确认个别测量 | 不适合程序化取用 |
 
 `asn_coverage` 采用 S3 路径，目的是统计覆盖率而非查询单笔。单笔查询与小量筛选的 API 用法见 [OONI 测量数据结构导览](./ooni-data-format.md)。

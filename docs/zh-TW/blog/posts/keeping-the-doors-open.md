@@ -82,7 +82,7 @@ Tor 網路靠願意替它維運基礎設施的人與組織撐起。Exit 是這�
 
 Unredacted 文章裡那位中國使用者的話格外少見，因為身處審查環境的人多半沒有管道、也難以安全地對外發聲。對照到正體中文社群，台灣讀者本身並沒有遭遇這種審查封鎖。台灣的網路環境相對自由，沒有 GFW、沒有強制 VPN 註冊、ISP 也沒有國家審查命令。也因為如此，台灣有條件替被封鎖地區架設 Tor 中繼與橋接，分擔一部分抗審查基礎建設的工作。
 
-匿名網路社群 anoni.net 一直透過 [Pulse 即時觀測](https://api.anoni.net/api/readme){target="_blank"} 追蹤台灣 Tor 中繼節點的數量與分布。截至 2026-05-31，台灣境內 Onionoo（Tor 官方的中繼資料查詢服務）看得到的、運作中的中繼節點是 12 個，其中具有 Exit 旗標的只有 3 個（initramfs、GuruKopi、jerryrelay）。對照 Unredacted 一個組織就執行 123 個 exit relay、30 天承載近 300 TiB 流量，台灣的全國 exit 規模還不到他們的 3%。我們在 [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md) 持續更新這個數字，並在 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md) 補上 OONI 對台灣與鄰近地區的審查觀測。
+匿名網路社群 anoni.net 一直透過 [Pulse 即時觀測](https://anoni.net/api/readme){target="_blank"} 追蹤台灣 Tor 中繼節點的數量與分布。截至 2026-05-31，台灣境內 Onionoo（Tor 官方的中繼資料查詢服務）看得到的、運作中的中繼節點是 12 個，其中具有 Exit 旗標的只有 3 個（initramfs、GuruKopi、jerryrelay）。對照 Unredacted 一個組織就執行 123 個 exit relay、30 天承載近 300 TiB 流量，台灣的全國 exit 規模還不到他們的 3%。我們在 [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md) 持續更新這個數字，並在 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md) 補上 OONI 對台灣與鄰近地區的審查觀測。
 
 香港、澳門以及使用中文的東南亞華語使用者，在 2020 年後實際的翻牆需求增加，而正體中文的抗審查資源相對稀缺。anoni.net 的工作之一是把這套中文資源補起來，包括 [什麼是 Tor](../../tools/what-is-tor.md)、[Tor Snowflake 橋接點](../../tools/tor-snowflake.md)、[什麼是 OONI](../../tools/what-is-ooni.md) 等基礎文件，跟 Unredacted 的 Unredacted Education 走在同一條路上。
 

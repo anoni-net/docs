@@ -16,7 +16,7 @@ The 2025 retrospective and the background to how 2026 was scoped are in [From 20
 
 Across a year of advocacy for Tor, Tails, and OONI, the question we hear most often is "what do I actually do next to be safer". What sits behind that question is the absence of a practical guide graded by situation. Over this year we are building out the privacy material in stages, covering tools and steps at three levels of exposure (everyday use, sensitive work, and high-risk situations), landing across the [Concepts](../basics/index.md), [Tools](../tools/index.md), and [Scenarios](../scenarios/index.md) sections.
 
-The research track's entry point, article index, and current status are on [the personal privacy guide track page](https://anoni.net/docs/community/privacy-guide/){target="_blank"} (in Chinese).
+The research track's entry point, article index, and current status are on [the personal privacy guide track page](./privacy-guide.md).
 
 ### Tor relays on university campuses
 
@@ -24,13 +24,13 @@ This track follows from the [Tor University Challenge](https://toruniversity.eff
 
 In 2025 we completed the Traditional Chinese translation of the Tor University Challenge site. In 2026 we are taking the process onto campuses.
 
-The track entry point, the cases we have accumulated, and how to join are on [the campus relay track page](https://anoni.net/docs/community/relay-on-campus/){target="_blank"} (in Chinese). The technical how-to is in [Setting up a Tor relay](./setup-tor-relay.md).
+The track entry point, the cases we have accumulated, and how to join are on [the campus relay track page](./relay-on-campus.md). The technical how-to is in [Setting up a Tor relay](./setup-tor-relay.md).
 
 ### Anonymous payments
 
 Cash is the most mature anonymous payment method, and it runs into clear limits across borders, online, and when an organization needs to receive donations. Within the bounds of the law, the community is exploring what on-chain tools can do here, covering cryptocurrencies, stablecoins, zero-knowledge identity verification, and multi-signature setups. The track is at an early stage. We have not found a systematic body of Chinese-language material on it, which is part of why we are building the implementation guidance ourselves.
 
-The track entry point, article index, and current status are on [the anonymous payments track page](https://anoni.net/docs/community/payments-research/){target="_blank"} (in Chinese).
+The track entry point, article index, and current status are on [the anonymous payments track page](./payments-research.md).
 
 ## Documentation build-out
 
@@ -38,7 +38,7 @@ The documentation site is the community's main instrument for both advocacy and 
 
 The schedule below covers the site as a whole, where Traditional Chinese is the source of truth. The English site is a curated track carrying a subset of it, so several items land in Chinese first and reach English in a later batch. Where a section named here has no English equivalent yet, that is why.
 
-- **Q1 (complete)**: core [concepts](../basics/index.md) first, local regulatory coverage (the 2025 amendment to [the Personal Data Protection Act of Taiwan](https://anoni.net/docs/taiwan/pdpa-2025/){target="_blank"}, the 2026 [virtual asset service provider regime](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}, both in Chinese), the emergency help page, community governance, and this roadmap
+- **Q1 (complete)**: core [concepts](../basics/index.md) first, local regulatory coverage (the 2025 amendment to [the Personal Data Protection Act of Taiwan](../regional/taiwan-pdpa-2025.md), the 2026 [virtual asset service provider regime](../regional/taiwan-vasp-2026.md)), the emergency help page, community governance, and this roadmap
 - **Q2 (in progress)**: the tools layer (Tor Browser advanced settings, anonymity OS comparison, messaging tool comparison, password managers, the cryptocurrency privacy spectrum) and end-to-end encryption in the advanced layer, all with first drafts published and revisions ongoing
 - **Q3 (not started)**: the scenarios layer (journalists, activists, domestic violence survivors, LGBTQ+ people, election observers, among others), post-quantum cryptography and decentralized publishing in the advanced layer, and coverage of the whistleblower protection act
 - **Q4 (not started)**: the governance charter, the contributor handbook, and the annual retrospective
@@ -73,7 +73,7 @@ Beyond the documentation site, the community maintains several technical sub-pro
 - **ASN Coverage**: a batch analysis tool over OONI's public data, feeding the [ASN coverage analysis](../regional/ooni-asn-coverage.md) page
 - **Asian Diceware**: an EFF-compatible 7776-word passphrase list that blends in dictionary-attested Asian loanwords, built partly to prepare for a future community-run anonymous service platform along the lines of [AnonTicket](https://anonticket.torproject.org/){target="_blank"}, the Tor Project's anonymous support ticketing service, which would need to generate account codes. See [Asian Diceware](../tools/asian-diceware.md).
 
-Pulse and ASN Coverage live with their issue trackers in [anoni-net/docs on GitHub](https://github.com/anoni-net/docs){target="_blank"}. Asian Diceware has its own repository at [anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. How the two observation tools connect to the Tor Project's upstream network-health work is covered on [the Tor Project ecosystem page](https://anoni.net/docs/community/tor-project-ecosystem/){target="_blank"} (in Chinese).
+Pulse and ASN Coverage live with their issue trackers in [anoni-net/docs on GitHub](https://github.com/anoni-net/docs){target="_blank"}. Asian Diceware has its own repository at [anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. How the two observation tools connect to the Tor Project's upstream network-health work is covered on [the Tor Project ecosystem page](./tor-project-ecosystem.md).
 
 ## How to get involved
 

@@ -18,7 +18,7 @@ description: "快速回顾，国家级的监控，我们还可以采取什么样
   <figcaption>图片引用自网络自由小聚 10 月：https://ocftw.kktix.cc/events/internetfreedom-oct2025 活动。</figcaption>
 </figure>
 
-在「[网络自由小聚](https://ocftw.kktix.cc/events/internetfreedom-oct2025){target="_blank"}」上，分享了 [InterSecLab](https://interseclab.org/){target="_blank"} 针对中国防火长城数据泄露的[报告](https://anoni.net/docs/report/interseclab-the-internet-coup/){target=\"_blank\"}后，活动当天后半段展开了许多讨论。大家关注的问题主要是，当我们面对国家级的监控手段与能力时，还有什么是我们可以做的？过往提供的网络安全防护建议是否也需要重新检视与调整。
+在「[网络自由小聚](https://ocftw.kktix.cc/events/internetfreedom-oct2025){target="_blank"}」上，分享了 [InterSecLab](https://interseclab.org/){target="_blank"} 针对中国防火长城数据泄露的[报告](https://anoni.net/docs/report/interseclab-the-internet-coup/){target="_blank"}后，活动当天后半段展开了许多讨论。大家关注的问题主要是，当我们面对国家级的监控手段与能力时，还有什么是我们可以做的？过往提供的网络安全防护建议是否也需要重新检视与调整。
 
 以下是我们根据当天讨论的内容为大家进行的文字回顾，同时建议大家花时间阅读这份报告，它将更清晰地勾勒出我们所面临的风险与挑战。
 

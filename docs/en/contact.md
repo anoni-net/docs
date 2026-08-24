@@ -10,11 +10,11 @@ Currently, we adopt a cautious approach to provide updates on project progress a
 
 - Subscribe: <https://form.anoni.net/s/w21855zpca072rvgp0s2govj>{target="_blank"}
 
-If you have discussions that cannot be made public, you can directly contact the project team members through this email address.
+If you have discussions that cannot be made public, write to the project team directly at <whisper@anoni.net>. The PGP key is below.
 
 ### Community Discussion & Video
 
-For ongoing discussions and theme collaboration, we use **Matrix** (web client [Element](https://matrix.anoni.net/){target=\"_blank\"}, homeserver `im.anoni.net`), [**Cryptpad** encrypted collaboration](https://cryptpad.anoni.net/){target=\"_blank\"}, and [**Jitsi**](https://jitsi.goodmeet.asia/){target=\"_blank\"} for online meetings. For how to request accounts and get started, please see [Community](community/index.md).
+For ongoing discussions and theme collaboration, we use **Matrix** (web client [Element](https://matrix.anoni.net/){target="_blank"}, homeserver `im.anoni.net`), [**Cryptpad** encrypted collaboration](https://cryptpad.anoni.net/){target="_blank"}, and [**Jitsi**](https://jitsi.goodmeet.asia/){target="_blank"} for online meetings. For how to request accounts and get started, please see [Community](community/index.md).
 
 ---
 

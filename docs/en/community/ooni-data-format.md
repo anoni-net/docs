@@ -34,14 +34,14 @@ The verdict layer states the conclusion; the evidence layer holds the records su
 The public API returns a single measurement directly, with no local environment required. Start by listing measurements that match your criteria:
 
 ```bash title="List recent Web Connectivity measurements from Taiwan"
-curl -s "https://api.ooni.io/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&limit=5" \
+curl -s "https://api.ooni.org/api/v1/measurements?probe_cc=TW&test_name=web_connectivity&limit=5" \
   | python3 -m json.tool | head -40
 ```
 
 The `measurement_uid` in the response gets you the full content:
 
 ```bash title="Fetch one complete measurement"
-curl -s "https://api.ooni.io/api/v1/raw_measurement?measurement_uid=<measurement_uid>" \
+curl -s "https://api.ooni.org/api/v1/raw_measurement?measurement_uid=<measurement_uid>" \
   | python3 -m json.tool | head -60
 ```
 
