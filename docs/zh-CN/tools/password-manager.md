@@ -174,6 +174,7 @@ Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬
 - [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: Metadata 是什么](../basics/metadata.md)
 - [:material-account-multiple-outline: 怎么维持多个网络身分](../basics/multiple-identities.md)
+- [:material-email-multiple-outline: 邮件别名怎么用，以及它把信任交给谁](./email-alias.md)
 - [:material-chat-question: 什么是 Tails](./what-is-tails.md)
 
 </div>

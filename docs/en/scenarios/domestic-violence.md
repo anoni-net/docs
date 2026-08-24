@@ -76,7 +76,7 @@ Rebuilding a private digital life means new accounts that the abuser has no path
 
 When you are ready, and ideally with a plan in place, change credentials in this order, because the first two are the keys that unlock everything else:
 
-1. **Email and cloud account** (the recovery anchor). Change the password, remove the abuser's devices, and replace any shared recovery phone or email.
+1. **Email and cloud account** (the recovery anchor). Change the password, remove the abuser's devices, and replace any shared recovery phone or email. Generating the new outward-facing addresses as [email aliases](../tools/email-alias.md) means each can be switched off later without notifying anyone; what the other party sees is mail bouncing.
 2. **Move two-factor authentication off SMS**: SMS codes go to a number the abuser may control or be able to read. Switch to an authenticator app (Aegis on Android, 2FAS or Raivo on iOS) or a hardware key.
 3. **Banking and financial accounts**, watching for shared statements and joint cards that reveal new purchases or a new address.
 4. **Social media**, then shopping and streaming.
@@ -95,7 +95,7 @@ Evidence supports protection orders, custody decisions, and criminal complaints.
 - **Keep a dated log**: A simple running record of incidents, dates, and what happened is itself useful in legal proceedings, and is easier to maintain than perfect screenshots of everything.
 - **Get advice before confronting**: Showing the abuser that you have collected evidence can escalate the situation. Share it with an advocate, lawyer, or the police, not with the abuser.
 
-## The safety-planning principle: leaving is the highest-risk moment
+## Leaving is the highest-risk moment, which is what safety planning exists for
 
 The most important thing on this page is not a technical step. **The period around leaving an abusive relationship is the most dangerous time**, and digital changes that are safe in the abstract can be the trigger that exposes a plan. This is why advocates emphasize safety planning: sequencing every move, including the digital ones, so that the abuser does not learn you are leaving until you are safe.
 

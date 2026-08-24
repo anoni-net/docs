@@ -23,7 +23,7 @@ This page works alongside the conceptual frame in [Why networked freedom matters
 
 The adversaries differ; the underlying problem is shared: *which of your digital traces, if connected, would link two identities you do not want connected?* The sections below break that question into operationally usable pieces.
 
-## Account separation: everyday, community, exploration
+## Separate the everyday, community, and exploration layers
 
 Identity separation starts with not sharing email addresses, usernames, browsers, or password-manager vaults across layers. It sounds tedious; in practice it is a one-time setup that runs itself afterward.
 
@@ -39,7 +39,7 @@ Not everyone needs all three. Most readers should start by separating the everyd
 
 ### What each layer needs
 
-Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md).
+Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md). Each layer's email does not have to be a separate mailbox: aliases grow several outward addresses from one, and the trade-offs are in [email aliases, and who you hand your trust to](../tools/email-alias.md).
 
 Two points deserve extra care in this context. Dating-app accounts belong to the exploration layer and should be separate from the community layer as well, covered in the next section. And a community-layer profile photo should never be an image that appears anywhere family or colleagues can see, because a reverse-image hit costs more here than in most situations.
 
@@ -168,11 +168,11 @@ If a family member has found evidence (an app, a conversation), you're past prev
 - If the situation might escalate to abuse (verbal threats, confinement, financial coercion), think ahead about device and account separation as part of an exit plan
 - Mental-health support: country-specific hotlines and counseling services are in the regional section
 
-## Cross-border travel: preparing for less-friendly jurisdictions
+## Preparing to cross into a less friendly jurisdiction
 
 LGBTQ+ legal status varies dramatically by country. Per ILGA World's 2025 data, 64 UN member states still criminalize same-sex intimate conduct (7 with the death penalty as a possible punishment, 5 where the law is unclear), and several criminalize "LGBTQ+ propaganda"[^1]. Before travel to such jurisdictions, the digital identity on your devices needs separate handling.
 
-### Before you go: audit the destination
+### Audit the destination before you go
 
 An hour of research before departure:
 
@@ -202,7 +202,7 @@ For the highest-risk trips (full criminalization, sensitive work travel), consid
 
 Higher cost, but more reliable than wiping the main phone before each trip.
 
-### iMessage and Signal cloud backups: a double edge
+### iMessage and Signal cloud backups cut both ways
 
 Cloud backups speed recovery on return; they also create risk during travel:
 
