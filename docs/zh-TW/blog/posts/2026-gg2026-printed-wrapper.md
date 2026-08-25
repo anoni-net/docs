@@ -11,7 +11,7 @@ summary: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數�
 description: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數位版。封面用字元排出以台北為中心的世界地圖，台灣小到打不進任何一格，只好手動補上"
 ---
 
-# 實體活動才有的文宣小物
+# 實體活動才有的文宣小物 Global Gathering 會場見
 
 ![封套的兩面攤平並排，左邊是純文字排版的封面，右邊是用字元排出的世界地圖，地圖中央有一個實心方塊標出台灣](https://assets.anoni.net/blog/gg2026-anoni-net-wrapper-2up.png)
 
