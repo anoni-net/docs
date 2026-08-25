@@ -1,10 +1,10 @@
 ---
-title: Asian Diceware：带亚洲味的英文密语字典
+title: Asian Diceware，带亚洲味的英文密语字典
 description: 匿名网络社群参考 EFF Diceware 做的开源密语字典，把 tofu、boba、oolong、kimchi 这类有字典背书的亚洲外来语混进 7776 字英文词表，让华语圈与亚洲的读者更好记。这篇说明如何使用、何时使用、密语强度与随机性，并提供 A5 小册 PDF 下载。
 icon: material/dice-multiple-outline
 ---
 
-# :material-dice-multiple-outline: Asian Diceware：带亚洲味的英文密语字典
+# :material-dice-multiple-outline: Asian Diceware，带亚洲味的英文密语字典
 
 又长又随机的密码最安全，但人脑记不住，于是多数人改用生日加宠物名字，还一组到处重复使用。有个更容易的方法，掷几次骰子、从一份固定的词表里抽出几个英文字串起来，当成你的密码。这种「密语」（passphrase）好记、好输入，强度却远高于一般人手打的密码。这个做法你可能早就用过，下一节就列几个你大概见过的例子。我们做的是一份带亚洲味的版本，把已经进入英文字典的亚洲外来语混进去，对华语圈与亚洲的读者更好认、更好记。华语圈熟悉的 `oolong`（乌龙茶）、`boba`（珍珠奶茶，源自台湾）、`tofu`（豆腐）、`pinyin`（拼音）都在里面，也收了 `ramen`（拉面）、`matcha`（抹茶）、`kimchi`（泡菜）、`typhoon`（台风）这类日韩料理与亚洲风物，还有 `shampoo`（洗发，源自印地语）、`ketchup`（番茄酱，源头可追到闽南语）这种你未必发现源自亚洲的字。完整清单与挑字原则，后面〈我们做了什么〉会说明。
 

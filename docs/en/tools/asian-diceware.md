@@ -1,10 +1,10 @@
 ---
-title: "Asian Diceware: an Asian-flavored passphrase wordlist"
+title: "Asian Diceware, an Asian-flavored passphrase wordlist"
 description: A community-made open-source passphrase wordlist that blends common English with dictionary-attested Asian loanwords (tofu, boba, oolong, kimchi), built as an EFF-compatible drop-in. How to use it, when to use it, how strong it is, and why randomness is the whole point.
 icon: material/dice-multiple-outline
 ---
 
-# :material-dice-multiple-outline: Asian Diceware: an Asian-flavored passphrase wordlist
+# :material-dice-multiple-outline: Asian Diceware, an Asian-flavored passphrase wordlist
 
 A long random password is the safest option, but nobody can remember one — so most people fall back on a birthday plus a pet's name and reuse it everywhere. There is an easier way: roll a few dice, pull a handful of English words from a fixed list, and string them together as your password. This kind of "passphrase" is easy to remember and easy to type, yet far stronger than a hand-picked password. You have probably encountered this idea before (the next section lists a few examples). What we made is an Asian-flavored version, blending in Asian loanwords that English already absorbed, so the words feel familiar to people who grew up around Asian languages and food. You will find `oolong`, `boba` (bubble tea, which originated in Taiwan), `tofu`, and `pinyin` in there, alongside `ramen`, `matcha`, `kimchi`, and `typhoon`, plus a few you might not realize are loanwords at all, like `shampoo` (from Hindi) and `ketchup` (whose root traces to Hokkien). The full list and the word-choice rules are in [What we made](#What-we-made) below.
 

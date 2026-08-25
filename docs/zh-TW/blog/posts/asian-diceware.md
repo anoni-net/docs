@@ -126,7 +126,7 @@ Tor Project 有一個叫 [AnonTicket](https://anonticket.torproject.org/){target
 
 ## 相關閱讀
 
-- [Asian Diceware：帶亞洲味的英文密語字典](../../tools/asian-diceware.md)：完整的擲骰方法、強度對照表、隨機性規則與暗號本的進階用法
+- [Asian Diceware，帶亞洲味的英文密語字典](../../tools/asian-diceware.md)：完整的擲骰方法、強度對照表、隨機性規則與暗號本的進階用法
 - [文件站新增八個小工具，全部在讀者自己的瀏覽器裡執行](./2026-browser-side-utils.md)：站上的密語產生器怎麼用，含實體骰子模式
 - [密碼管理器入門](../../tools/password-manager.md)：密語適合少數要用腦記的密碼，其餘每個網站交給管理器
 - [威脅模型如何建立](../../basics/threat-model.md)：判斷自己需要多強的密碼，從這裡開始

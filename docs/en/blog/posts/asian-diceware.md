@@ -126,7 +126,7 @@ The community wants to build something like AnonTicket, still at the planning st
 
 ## Related reading
 
-- [Asian Diceware: an Asian-flavored passphrase wordlist](../../tools/asian-diceware.md): the full dice method, strength comparison, randomness rules, and the codebook technique
+- [Asian Diceware, an Asian-flavored passphrase wordlist](../../tools/asian-diceware.md): the full dice method, strength comparison, randomness rules, and the codebook technique
 - [Eight new tools on the docs site, all running in the reader's own browser](./2026-browser-side-utils.md): how the passphrase generator works, including physical dice mode
 - [Getting started with password managers](../../tools/password-manager.md): passphrases suit the few passwords you have to memorize; hand the rest to a manager
 - [Threat modeling](../../basics/threat-model.md): work out how strong your passwords actually need to be
