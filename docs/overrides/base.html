@@ -1,6 +1,17 @@
 {#-
   Fork of mkdocs-material base.html: per-page hreflang + keep in sync with partials/alternate.html.
   When upgrading mkdocs-material, refresh asset hashes and generator line from theme base.html.
+
+  theme-assets-from: mkdocs-material 9.7.7
+
+  上面那行由 tools/check_theme_assets.py 讀，跟 docs/uv.lock 解出來的版本比對。兩者
+  對不上就是升級了套件卻沒回來換 hash，CI 擋在部署之前。2026-08-24 的 #338 用
+  uv sync -U 把 mkdocs-material 帶到 9.7.7，這個檔案的 hash 留在 9.7.6，部署的
+  s3 sync --delete 又把舊檔刪掉，線上三個語系的 main.*.min.css 與 bundle.*.min.js
+  同時 404，讀者看到的是沒有樣式的頁面，而且清快取、重裝 PWA 都救不回來。
+
+  換 hash 的時候這一行要一起改。底下 styles 與 scripts 兩個 block、
+  partials 裡的 search worker，以及 docs/zh-TW/sw.js 的 SHELL_ASSETS 是同一組值。
 -#}
 {% import "partials/language.html" as lang with context %}
 <!doctype html>
@@ -49,7 +60,7 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.484c7ddc.min.css' | url }}">
+      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.ec1eaa64.min.css' | url }}">
       {% if config.theme.palette %}
         {% set palette = config.theme.palette %}
         <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.ab4e12ef.min.css' | url }}">
@@ -354,7 +365,7 @@
       </script>
     {% endblock %}
     {% block scripts %}
-      <script src="{{ 'assets/javascripts/bundle.79ae519e.min.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/bundle.d7400e89.min.js' | url }}"></script>
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}

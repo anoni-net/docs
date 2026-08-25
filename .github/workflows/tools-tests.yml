@@ -37,6 +37,10 @@ on:
       - "docs/en/js/**"
       - "docs/zh-TW/utils/**"
       - "docs/mkdocs*.yml"
+      # 升級 mkdocs-material 會換掉 theme 資產的雜湊，而 base.html 把那些檔名寫死。
+      # #338 只動了這個檔案，當時的 paths 沒有納入，於是一支測試都沒跑，壞掉的雜湊
+      # 一路上線。
+      - "docs/uv.lock"
       - "docs/snippets/**"
       # overrides 的 main.html 是 test_before_send.mjs 的來源，送出前的白名單寫在裡面
       - "docs/overrides/base.html"
@@ -125,6 +129,12 @@ jobs:
       # 威脅模型清單：建議的頁面存不存在，以及答案有沒有被存到裝置上
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs
+
+      # theme 資產的雜湊有沒有跟著 mkdocs-material 的版本一起換。忘了同步的話建置
+      # 與 PR 都是綠的，只有線上的 HTML 會指向一批不存在的檔案，而那種壞法讀者清
+      # 快取、重裝 PWA 都救不回來，因為錯的網址就寫在伺服器送出來的 HTML 裡。
+      - name: theme 資產雜湊同步
+        run: python3 tools/test_theme_assets.py
 
       # 部署後要清除的 Cloudflare 快取網址
       - name: Cloudflare 快取清除映射
