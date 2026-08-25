@@ -80,9 +80,9 @@ const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 // 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
 // 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
 const SHELL_ASSETS = [
-  "assets/stylesheets/main.484c7ddc.min.css",
+  "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
-  "assets/javascripts/bundle.79ae519e.min.js",
+  "assets/javascripts/bundle.d7400e89.min.js",
   "assets/javascripts/workers/search.2c215733.min.js",
   "assets/images/logo-white.svg",
   "assets/images/favicon.svg",

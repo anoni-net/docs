@@ -165,6 +165,27 @@ jobs:
       - name: Build Docs (/en)
         timeout-minutes: 20
         run: source ./.venv/bin/activate; BUILD_TAG="${GITHUB_SHA:0:7}" sh ./run_en.sh;
+      # theme 的資產檔名帶雜湊，而 overrides/base.html 與 zh-TW/sw.js 把它們寫死。
+      # mkdocs-material 一改版雜湊就變，忘了同步的話建置照樣成功，站上的 HTML 指向
+      # 一批不存在的檔案，而下一步的 s3 sync --delete 剛好把舊檔刪掉。2026-08-24 的
+      # #338 就是這樣讓三個語系同時掉樣式，讀者清快取、重裝 PWA 都救不回來。
+      #
+      # 擺在上傳之前是重點：這一關紅燈只是這次沒發布，站上維持上一版，比推上去再修
+      # 便宜得多。
+      - name: Verify theme assets
+        run: python3 ../tools/check_theme_assets.py
+
+      # 預快取清單裡的網址對不對得到產物。這支 2025 年就寫好了，卻一直沒有人跑，
+      # 理由見它的檔頭：sw.js 的 install 用 allSettled 容忍個別失敗，清單裡的錯字
+      # 線上完全看不出來，只有離線的讀者會遇到空白。
+      #
+      # 只在 clearnet 那格跑。onion 版的建置前會就地 sed 改寫整個工作目錄，這支要
+      # 原地抽出 sw.js 的清單來執行，沒必要讓它跟改寫過的原始碼互動，同一份模板在
+      # standard 驗過就夠。
+      - name: Verify precache list
+        if: matrix.variant == 'standard'
+        run: node ../tools/check_precache.mjs
+
       - name: Replace OG images
         timeout-minutes: 10
         run: |
