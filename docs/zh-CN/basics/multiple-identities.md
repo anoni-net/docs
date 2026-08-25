@@ -16,7 +16,7 @@ icon: material/account-multiple-outline
 
 - 记者用一个身分接触消息来源，用另一个身分过日常生活，见 [记者保护消息来源](../scenarios/journalist.md)
 - 社运参与者的动员角色跟本业工作分开，见 [社运行动者的数字准备](../scenarios/activist.md)
-- 家暴幸存者离开之后重建一组加害者不知道的联络方式，见 [家暴受害者的数字准备](../scenarios/domestic-violence.md)（该页目前是骨架，可用的部分在在地脉络一节）
+- 家暴幸存者离开之后重建一组加害者不知道的联络方式，见 [家暴受害者的数字准备](../scenarios/domestic-violence.md)
 - 出差或参加研讨会时，商务联络跟私人账号分流，见 [出差与研讨会的数字准备](../scenarios/asia-travel.md)
 - LGBTQ+ 与性少数控管出柜节奏，见 [LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)
 - 一般人求职期间不想让现任雇主看到，或者不想让购物平台的推荐连到工作账号

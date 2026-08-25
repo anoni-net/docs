@@ -150,7 +150,7 @@ icon: material/chat-question-outline
 
     台灣社會近年對「揭弊者保護」、「家暴與跟蹤騷擾防制」、「新聞自由」的關注持續上升。Tor 在這些情境中對台灣使用者的價值，跟全球趨勢一致。校園 Relay 是「讓這套基礎設施在台灣可用」的具體貢獻。
 
-    延伸閱讀：[揭弊者保護法技術觀察](../taiwan/whistleblower-law.md)、[家暴受害者的數位準備](../scenarios/domestic-violence.md)（待補）。
+    延伸閱讀：[揭弊者保護法技術觀察](../taiwan/whistleblower-law.md)、[家暴受害者的數位準備](../scenarios/domestic-violence.md)。
 
 ## 給網管的一頁摘要
 
