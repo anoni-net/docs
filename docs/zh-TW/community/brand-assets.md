@@ -28,6 +28,11 @@ anoni.net 的 logo 由三個六角形組成，呼應「節點網路」與「多�
 .brand-card.cyan .brand-size-label,
 .brand-card.cyan-deep .brand-size-label { color: rgba(255,255,255,0.5); }
 .color-swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #cdcdcd; border-radius: 3px; vertical-align: middle; margin-right: 8px; }
+.wm-row { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.wm-card { display: flex; flex-direction: column; }
+.wm-card .wm-box { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 84px; }
+.wm-card img { width: 100%; max-width: 230px; height: auto; }
+.wm-card.wm-stack img { max-width: 120px; }
 </style>
 
 ## :material-palette-swatch-outline: V3 cyan tonal（主視覺）
@@ -153,6 +158,121 @@ anoni.net 的 logo 由三個六角形組成，呼應「節點網路」與「多�
 
 [:material-download: 下載 logo-black.svg](../assets/images/logo-black.svg){ .md-button download="anoni-logo-black.svg" }
 
+## :material-format-letter-case: Wordmark（logo 加文字）
+
+上面三個變體只有圖案，沒有社群名稱。需要讓人一眼看到「anoni.net」的場合改用 wordmark，例如簡報頁首、名片、活動背板、海報、易拉展。圖案版留給空間很小、或旁邊已經有社群名稱的地方，例如 favicon、聊天室頭像、投影片頁角。
+
+wordmark 的文字已經轉成路徑，開啟的裝置有沒有裝字型都長一樣，也不會因為缺字而換成別的字型。
+
+### 六種版型
+
+| 檔名 | 版型 | 建議場合 |
+|---|---|---|
+| `logo-wordmark-*` | 橫式，logo 加 anoni.net | 預設版本。簡報頁首、網站 header、名片 |
+| `logo-wordmark-zh-*` | 橫式加中文副標「匿名網路社群」 | 中文場合，需要讓人知道社群中文名時 |
+| `logo-wordmark-en-*` | 橫式加英文副標 Anonymity Network Community | 國際場合，例如 Global Gathering、ETHTaipei |
+| `logo-wordmark-fullname-*` | 橫式單行「匿名網路社群 anoni.net」 | 中文語境的長條橫幅、活動背板頂部 |
+| `logo-wordmark-stack-*` | 直式堆疊，logo 在上、字在下 | 海報、易拉展、展板主視覺 |
+| `logo-wordmark-stack-zh-*` | 直式堆疊加中文副標 | 同上，中文場合 |
+
+每種版型都有 `tonal`、`white`、`black` 三個配色，選用規則跟上面的圖案版一樣。
+
+**橫式四種，cyan tonal 在白底**
+
+<div class="brand-row wm-row">
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-zh</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-en</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-fullname</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-tonal.svg"></div>
+  </div>
+</div>
+
+**同樣四種的 mono white，放在 cyan-900 底上**
+
+<div class="brand-row wm-row">
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-zh-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-en-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-fullname-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-white.svg"></div>
+  </div>
+</div>
+
+**直式堆疊，海報與易拉展用**
+
+<div class="brand-row wm-row">
+  <div class="brand-card wm-card wm-stack">
+    <p class="brand-card-label">logo-wordmark-stack</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card wm-stack">
+    <p class="brand-card-label">logo-wordmark-stack-zh</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-tonal.svg"></div>
+  </div>
+  <div class="brand-card dark wm-card wm-stack">
+    <p class="brand-card-label">stack-zh mono white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-white.svg"></div>
+  </div>
+  <div class="brand-card cyan wm-card wm-stack">
+    <p class="brand-card-label">stack mono white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-white.svg"></div>
+  </div>
+</div>
+
+### 幾何比例與淨空區
+
+比例固定，換尺寸時整份等比縮放就好，不要單獨調某一邊。
+
+- 橫式：logo 高度是「anoni.net」字樣視覺高度的 1.35 倍，兩者間距是 logo 寬度的 0.40 倍
+- 直式：logo 高度是字級的 1.90 倍，字樣對齊 logo 中線
+- 淨空區：四周留 logo 高度的 0.25 倍。SVG 的 viewBox 已經含這段留白，取用時不要再往內裁
+
+字樣是 Public Sans SemiBold，中文副標是 Noto Sans TC Medium，跟文件站英文版與正體中文版的內文字型同一套。`.net` 用 `cyan-700`，跟 logo 最下面那個六角形同色，單色版本則整組同一個顏色。
+
+### 最小尺寸
+
+低於這個高度文字會糊掉，改用只有圖案的版本。
+
+| 版型 | 最小高度 |
+|---|---|
+| 無副標（`logo-wordmark-*`、`logo-wordmark-fullname-*`） | 18 px |
+| 中文副標（`-zh-`） | 32 px |
+| 英文副標（`-en-`） | 40 px |
+
+印刷品換算：300 dpi 下 18 px 大約是 1.5 mm，實務上橫式版印到 8 mm 高以上都很安全。
+
+### 下載
+
+| 版型 | cyan tonal | mono white | mono black |
+|---|---|---|---|
+| 橫式 | [SVG](../assets/images/logo-wordmark-tonal.svg) | [SVG](../assets/images/logo-wordmark-white.svg) | [SVG](../assets/images/logo-wordmark-black.svg) |
+| 橫式加中文副標 | [SVG](../assets/images/logo-wordmark-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-zh-white.svg) | [SVG](../assets/images/logo-wordmark-zh-black.svg) |
+| 橫式加英文副標 | [SVG](../assets/images/logo-wordmark-en-tonal.svg) | [SVG](../assets/images/logo-wordmark-en-white.svg) | [SVG](../assets/images/logo-wordmark-en-black.svg) |
+| 橫式單行全名 | [SVG](../assets/images/logo-wordmark-fullname-tonal.svg) | [SVG](../assets/images/logo-wordmark-fullname-white.svg) | [SVG](../assets/images/logo-wordmark-fullname-black.svg) |
+| 直式堆疊 | [SVG](../assets/images/logo-wordmark-stack-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-white.svg) | [SVG](../assets/images/logo-wordmark-stack-black.svg) |
+| 直式堆疊加中文副標 | [SVG](../assets/images/logo-wordmark-stack-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-white.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-black.svg) |
+
 ## :material-palette: 配色 Token
 
 製作衍生視覺時請對齊以下色票。文件站 `extra.css` 已將下方 token 寫成 CSS 變數，內文用 `var(--brand-cyan-500)` 即可取用，不要 inline hex code。
@@ -242,6 +362,9 @@ anoni.net 的 logo 由三個六角形組成，呼應「節點網路」與「多�
 - 不要把 mono black 拿來當主視覺、Web 用途，那是印刷專用版本
 - 別自行調整六角形的排列、間距、圓角，影響識別性
 - 不要把單個六角形抽出來當其他用途，三個是一組
+- 別自己重排 wordmark 裡 logo 與文字的間距或大小，要改就整份等比縮放
+- 別把 wordmark 的副標換成活動名稱或其他字串，需要那種組合請另外排版，把 wordmark 當一個元件擺進去
+- 帶副標的 wordmark 低於最小尺寸就換成無副標版本，副標糊掉比沒有副標更難看
 
 **色彩**
 
