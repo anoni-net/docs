@@ -237,13 +237,13 @@ Tor 對 onion 服務的連線本身已經是端到端加密並經過驗證，位
 - **公開憑證機構簽得出來**：CA/Browser Forum 在 2021 年通過修正案，允許為 v3 `.onion` 核發 DV 憑證，目前有商業 CA 提供這項服務（付費）。如果你的稽核規定要求「一律要有 TLS」，這是一條實際存在的路
 - **Tor Browser 仍會顯示不安全提示**：純 HTTP 的 `.onion` 在 Tor Browser 上會被標示為不安全，這是官方追蹤中的已知議題（`#21321`）。密碼學上沒有問題，但非技術的使用者看到那個字樣很可能誤判並回報問題，內部工具尤其容易遇到
 
-### 常見的踩雷
+### 最常出錯的地方
 
-- **後端在回應裡寫死 clearnet 網址**。頁面上的連結、表單 action、重新導向如果指向原本的網域，訪客一點就跳出 Tor，匿名性當場失效
-- **外部資源**。圖片、字型、分析腳本如果從 clearnet 載入，同樣會讓訪客的瀏覽器對外連線
-- **Referrer 外洩**。頁面上如果有連到 clearnet 網站的連結，瀏覽器預設會帶 `Referer`，對方的日誌就會看到你的 `.onion` 位址。加上 `add_header Referrer-Policy no-referrer;` 或在連結加 `rel="noreferrer"`
-- **`Host` 標頭檢查**。有些應用程式框架會拒絕不在允許清單內的 `Host`，onion 位址要另外加進去
-- **access log 的來源都是 `127.0.0.1`**。所有連線都經過本機的 Tor 轉發，日誌記到的永遠是本機位址而不是訪客的真實來源。這是正常現象，不是日誌壞了
+- **後端在回應裡寫死 clearnet 網址**：頁面上的連結、表單 action、重新導向如果指向原本的網域，訪客一點就跳出 Tor，匿名性當場失效
+- **外部資源**：圖片、字型、分析腳本如果從 clearnet 載入，同樣會讓訪客的瀏覽器對外連線
+- **Referrer 外洩**：頁面上如果有連到 clearnet 網站的連結，瀏覽器預設會帶 `Referer`，對方的日誌就會看到你的 `.onion` 位址。加上 `add_header Referrer-Policy no-referrer;` 或在連結加 `rel="noreferrer"`
+- **`Host` 標頭檢查**：有些應用程式框架會拒絕不在允許清單內的 `Host`，onion 位址要另外加進去
+- **access log 的來源都是 `127.0.0.1`**：所有連線都經過本機的 Tor 轉發，日誌記到的永遠是本機位址而不是訪客的真實來源。這是正常現象，日誌設定沒有問題
 
 ## 三、子網域怎麼運作
 
@@ -434,7 +434,7 @@ add_header Onion-Location http://<你的位址>.onion$request_uri;
 
     走 Unix socket 的話，確認 socket 檔存在且 Tor 的身分寫得進去：`ls -l /run/onion/site.sock`。
 
-??? question "重開機之後就壞了"
+??? question "重開機之後就連不上了"
 
     如果 socket 放在 `/run` 底下，那是 tmpfs，重開機會清空。需要 `/etc/tmpfiles.d/` 的規則才會重建，見第二節。
 
