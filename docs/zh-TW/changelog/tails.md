@@ -8,6 +8,19 @@ icon: material/usb-flash-drive-outline
 
 [Tails](../tools/what-is-tails.md) 作業系統的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。
 
+## Tails 7.11
+
+> 2026-08-19 · [上游公告](https://tails.net/news/version_7.11/){target="_blank"}
+
+- 例行排程版本，同時帶入 Linux 核心的安全更新。
+- Tor Browser 升至 15.0.20（基於 Firefox ESR 140.14）。
+- 核心升至 6.12.101，涵蓋 Debian 安全公告 DSA-6415-1 的 24 個漏洞，影響包含提權、阻斷服務與資訊外洩。
+- 修正部分電腦上 Persistent Storage 無法解鎖的問題。啟用流程原本會等待 `udevadm settle`，無關的硬體問題會讓這一步逾時或失敗，現已不再等待。
+- 新增核心參數 `proc_mem.force_override=ptrace`，阻擋行程直接改寫自己的記憶體映射，提高提權漏洞的利用難度。
+- 抗審查連線設定改為自動從 Tor Browser 匯入 Moat fronts 與 reflectors，減少因設定過期而連不上的情況。
+- flatpak 套件跟進 Debian 安全更新，改以 1.16.6-1~deb13u2 為基礎。
+- 可從 Tails 7.0 以後版本自動升級，若自動升級失敗可改用手動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.10.1
 
 > 2026-08-05 · [上游公告](https://tails.net/news/version_7.10.1/){target="_blank"}

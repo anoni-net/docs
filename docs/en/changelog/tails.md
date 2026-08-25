@@ -8,6 +8,19 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tails 7.11
+
+> 2026-08-19 · [Upstream announcement](https://tails.net/news/version_7.11/){target="_blank"}
+
+- A scheduled release that also carries a Linux kernel security update.
+- Tor Browser updated to 15.0.20 (based on Firefox ESR 140.14).
+- The kernel is updated to 6.12.101, covering the 24 flaws in Debian security advisory DSA-6415-1, whose impact ranges over privilege escalation, denial of service, and information leaks.
+- Fixes Persistent Storage failing to unlock on some computers. Activation used to wait for `udevadm settle`, so an unrelated hardware problem could make that step time out or fail; the wait has been removed.
+- Adds the `proc_mem.force_override=ptrace` kernel parameter, which stops a process from writing directly to its own memory mappings and makes privilege-escalation flaws harder to exploit.
+- Circumvention settings now import Moat fronts and reflectors from Tor Browser automatically, so connections fail less often because of stale settings.
+- The flatpak package follows the Debian security update and is now based on 1.16.6-1~deb13u2.
+- Automatic upgrades are available from Tails 7.0 or later; a manual upgrade is available if the automatic one fails. Fresh installations will erase existing Persistent Storage.
+
 ## Tails 7.10.1
 
 > 2026-08-05 · [Upstream announcement](https://tails.net/news/version_7.10.1/){target="_blank"}
