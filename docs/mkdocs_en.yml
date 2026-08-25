@@ -134,6 +134,7 @@ nav:
       - "Run a Node":
           - community/setup-tor-relay.md
           - community/setup-tor-webtunnel.md
+          - community/setup-onion-service.md
           - community/campus-tor-relay-proposal.md
           - community/campus-tor-relay-sop.md
           - community/campus-relay-faq.md
