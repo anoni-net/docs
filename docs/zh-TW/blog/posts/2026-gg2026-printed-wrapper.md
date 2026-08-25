@@ -7,8 +7,8 @@ categories:
     - 活動
 slug: 2026-gg2026-printed-wrapper
 image: "https://assets.anoni.net/blog/gg2026-anoni-net-wrapper-2up.png"
-summary: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數位版。設計過程的紀錄，包含走錯方向的第一版封面、台灣在地圖上消失的那一次，以及印上紙之前抓到的三個錯誤"
-description: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數位版。設計過程的紀錄，包含走錯方向的第一版封面、台灣在地圖上消失的那一次，以及印上紙之前抓到的三個錯誤"
+summary: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數位版。設計過程的紀錄，包含走錯方向的第一版封面、台灣在地圖上消失的那一次，以及影印店如何決定了整體的美術方向"
+description: "Global Gathering 2026 現場限量 150 份的紙本小報，沒有數位版。設計過程的紀錄，包含走錯方向的第一版封面、台灣在地圖上消失的那一次，以及影印店如何決定了整體的美術方向"
 ---
 
 # 實體活動才有的文宣小物 Global Gathering 會場見
