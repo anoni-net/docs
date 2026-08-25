@@ -40,7 +40,7 @@ Tor 需要主動連出去才能加入 Tor 網路。防火牆**不需要**為 oni
 
 ## 一、Tor 官方的做法
 
-設定檔在 `/etc/tor/torrc`。編輯它並加上兩行，[Tor 官方文件](https://community.torproject.org/onion-services/setup/){target="_blank"} 的範例是這樣：
+設定檔在 `/etc/tor/torrc`。編輯它並加上兩行，[Tor 官方文件](https://community.torproject.org/onion-services/setup/){target="_blank"} 的範例如下：
 
 ```
 HiddenServiceDir /var/lib/tor/my_website/
@@ -63,7 +63,7 @@ HiddenServicePort 80 127.0.0.1:8081
 
 ### 目錄權限
 
-官方文件對這點只寫了一句，目錄要「readable/writeable by the user that will be running Tor」，沒有給出具體的權限數值。實務上的門檻是明確的，**目錄權限必須是 `0700`**，放寬就會被拒絕。
+官方文件對權限只寫了一句，目錄要「readable/writeable by the user that will be running Tor」，沒有給出具體的權限數值。實務上的門檻是明確的，**目錄權限必須是 `0700`**，放寬就會被拒絕。
 
 套件安裝的 `tor` 通常以 `debian-tor` 或 `tor` 這個使用者執行，確認方式：
 
@@ -104,7 +104,7 @@ Tor 出問題時的答案幾乎都在日誌裡。走 systemd 的話：
 
 ```bash
 sudo journalctl -u tor@default -n 50 --no-pager
-sudo journalctl -u tor@default -f          # 持續跟看
+sudo journalctl -u tor@default -f          # 持續輸出新的日誌
 ```
 
 `torrc` 也可以自己開一個日誌檔，預設是註解掉的：
@@ -119,11 +119,11 @@ Log notice file /var/log/tor/notices.log
 Bootstrapped 100% (done): Done
 ```
 
-沒有這一行就代表 Tor 本身還沒連上網路，這時候不管 `HiddenServiceDir` 設定對不對都不會有 onion 位址。多半是出站連線被擋。
+沒有這一行就代表 Tor 本身還沒連上網路，此時不管 `HiddenServiceDir` 設定對不對都不會有 onion 位址。多半是出站連線被擋。
 
 ### 取得位址
 
-Tor 正常啟動後，`HiddenServiceDir` 底下會有這些檔案：
+Tor 正常啟動後，`HiddenServiceDir` 底下會有下列檔案：
 
 | 檔案 | 內容 |
 |---|---|
@@ -146,7 +146,7 @@ sudo cat /var/lib/tor/my_website/hostname
 
 !!! tip "怎麼確認自己目前是安全的"
 
-    `sudo ls -la /var/lib/tor/my_website` 看到目錄是 `drwx------`、檔案是 `-rw-------`、擁有者是 Tor 的執行身分，就是正常狀態。Tor 自己建立的目錄本來就會是這樣，不需要額外處理。
+    `sudo ls -la /var/lib/tor/my_website` 看到目錄是 `drwx------`、檔案是 `-rw-------`、擁有者是 Tor 的執行身分，就是正常狀態。Tor 自己建立的目錄本來就是如此，不需要額外處理。
 
     備份 `HiddenServiceDir` 的整個目錄。存放的位置要用跟伺服器同等或更高的標準保護，具體來說是加密（例如放進已加密的密碼管理器或用 `gpg -c` 加密後再存），不要放進一般的雲端硬碟或程式碼倉庫。
 
@@ -159,7 +159,7 @@ Debian 與 Ubuntu 的慣例是把設定放進 `/etc/nginx/sites-available/`，�
 ```bash
 sudo nano /etc/nginx/sites-available/onion
 sudo ln -s /etc/nginx/sites-available/onion /etc/nginx/sites-enabled/
-sudo nginx -t                     # 語法檢查，一定要先跑
+sudo nginx -t                     # 語法檢查，一定要先執行
 sudo systemctl reload nginx
 ```
 
@@ -249,7 +249,7 @@ Tor 對 onion 服務的連線本身已經是端到端加密並經過驗證，位
 
 Onion 位址可以帶子網域，而且不需要另外申請或設定任何 DNS。Tor 會把完整的 `Host` 原樣傳給後端，由 nginx 決定怎麼分流。
 
-anoni.net 文件站的位址正好是這個結構：
+anoni.net 文件站的位址正好是下面的結構：
 
 ```
 docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion
@@ -257,7 +257,7 @@ docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion
  └── 子網域，由 nginx 的 server_name 分流
 ```
 
-一個 onion 位址可以承載多個子網域，nginx 這樣寫：
+一個 onion 位址可以承載多個子網域，nginx 的寫法：
 
 ```nginx
 server {
@@ -293,7 +293,7 @@ server {
 
 [mkp224o](https://github.com/cathugger/mkp224o){target="_blank"} 是常用的工具，[Tor 官方的 vanity 位址說明](https://community.torproject.org/onion-services/advanced/vanity-addresses/){target="_blank"} 也以它為主。
 
-先裝編譯需要的套件，mkp224o 的說明列的是這些：
+先裝編譯需要的套件，mkp224o 的說明列出下列套件：
 
 ```bash
 sudo apt install gcc libc6-dev libsodium-dev make autoconf
@@ -352,7 +352,7 @@ sudo cat /var/lib/tor/my_website/hostname
 
 要看到 56 個字元加上 `.onion`。
 
-**3. 後端在本機答得出來**
+**3. 後端在本機回應正常**
 
 ```bash
 curl -sI http://127.0.0.1:80/ -H 'Host: <你的位址>.onion' | head -1
@@ -411,8 +411,8 @@ add_header Onion-Location http://<你的位址>.onion$request_uri;
 
     1. 日誌有沒有 `Bootstrapped 100%`。沒有的話是 Tor 連不上 Tor 網路，檢查出站防火牆
     2. `hostname` 檔存不存在。不存在表示 `HiddenServiceDir` 那段沒有生效
-    3. 剛設定完或剛重啟嗎。描述子發布需要時間，等幾分鐘再試
-    4. 本機直接打後端通不通（見上一節第 3 步）。不通的話問題在 nginx 不在 Tor
+    3. 剛設定完或剛重啟的話，描述子發布需要時間，等幾分鐘再試
+    4. 本機直接連後端通不通（見上一節第 3 步）。不通的話問題在 nginx 不在 Tor
 
 ??? question "權限看起來完全正確，但 Tor 就是存取不了"
 
