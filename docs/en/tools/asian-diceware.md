@@ -45,6 +45,8 @@ Asian loanwords are only about 3.8% of the list, so a six-word passphrase carrie
 
 The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0); the source and full list are at [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. The list itself only makes the individual words easy to recognize and remember; it provides no encryption. The real security comes from how you generate, store, and use the passphrase.
 
+For how the words were picked, the breakdown by source language, and what the build pipeline throws out, see [How 292 Asian loanwords ended up in an English passphrase wordlist](../blog/posts/asian-diceware.md).
+
 ## How to use it
 
 Rolling dice against a table is the most direct way; a handful of dice plus one table is enough, no coding required. There are two ways to get the table: print the A5 booklet ([download the PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}; see [Print a booklet](#Print-a-booklet) below), or open the dice file [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"} on GitHub.

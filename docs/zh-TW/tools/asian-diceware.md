@@ -43,6 +43,8 @@ asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成
 
 這份詞表開源（程式碼採 MIT、詞表資料採 CC-BY-4.0），原始碼與完整詞表在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。詞表的功能是讓抽字這一步更好認好記，本身不涉及加密。真正的安全來自你如何產生、保管與使用密語。
 
+選字的完整過程、292 個字的來源分布，以及建置流程擋掉了什麼，見社群的 [一份英文密語詞表裡的 292 個亞洲外來語，是怎麼選出來的](../blog/posts/asian-diceware.md)。
+
 ## 如何使用
 
 擲骰子查表是最直覺的方式，一把骰子加一張表就能開始，不必懂程式。要查的那張表有兩種取得方式。印一本 A5 小冊最方便（[直接下載 PDF](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}，更多說明見下方〈[印一本小冊帶著走](#印一本小冊帶著走)〉），或直接開啟 GitHub 上的 dice 檔 [`asian_diceware_7776_dice.txt`](https://raw.githubusercontent.com/anoni-net/asian-diceware/main/output/asian_diceware_7776_dice.txt){target="_blank"}。
