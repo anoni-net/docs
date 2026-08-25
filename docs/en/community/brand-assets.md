@@ -28,6 +28,11 @@ When making event materials, social cards, slides, or print, take one of the thr
 .brand-card.cyan .brand-size-label,
 .brand-card.cyan-deep .brand-size-label { color: rgba(255,255,255,0.5); }
 .color-swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #cdcdcd; border-radius: 3px; vertical-align: middle; margin-right: 8px; }
+.wm-row { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.wm-card { display: flex; flex-direction: column; }
+.wm-card .wm-box { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 84px; }
+.wm-card img { width: 100%; max-width: 230px; height: auto; }
+.wm-card.wm-stack img { max-width: 120px; }
 </style>
 
 ## :material-palette-swatch-outline: V3 cyan tonal (primary)
@@ -153,6 +158,121 @@ Pure black, for print, fax, and single-colour stencils where colour is unavailab
 
 [:material-download: Download logo-black.svg](../assets/images/logo-black.svg){ .md-button download="anoni-logo-black.svg" }
 
+## :material-format-letter-case: Wordmark (the logo with the name)
+
+The three variants above are the mark on its own, without the community name. Where the name needs to be read at a glance, use a wordmark instead: slide headers, business cards, event backdrops, posters, roll-up banners. Keep the icon-only versions for places that are either very small or already carry the name nearby, such as favicons, chat avatars, and slide corners.
+
+The lettering is converted to paths, so it renders identically whether or not the device has the fonts installed, and no character can silently fall back to a different typeface. The Chinese subtitle is fixed as 匿名網路社群 in Traditional Chinese, matching the site name shared across all three editions.
+
+### Six layouts
+
+| Filename | Layout | Where to use it |
+|---|---|---|
+| `logo-wordmark-*` | Horizontal, logo plus anoni.net | The default. Slide headers, site header, business cards |
+| `logo-wordmark-zh-*` | Horizontal with the Chinese subtitle 匿名網路社群 | Chinese-language settings, where the Chinese name should be visible |
+| `logo-wordmark-en-*` | Horizontal with the English subtitle Anonymity Network Community | International settings such as Global Gathering or ETHTaipei |
+| `logo-wordmark-fullname-*` | Single line, 匿名網路社群 anoni.net | Long banners and backdrop headers in Chinese-language settings |
+| `logo-wordmark-stack-*` | Stacked, logo above the name | Posters, roll-up banners, exhibition boards |
+| `logo-wordmark-stack-zh-*` | Stacked with the Chinese subtitle | As above, in Chinese-language settings |
+
+Each layout comes in `tonal`, `white`, and `black`, following the same selection rules as the icon-only variants above.
+
+**The four horizontal layouts, cyan tonal on white**
+
+<div class="brand-row wm-row">
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-zh</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-en</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card">
+    <p class="brand-card-label">logo-wordmark-fullname</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-tonal.svg"></div>
+  </div>
+</div>
+
+**The same four in mono white, on cyan-900**
+
+<div class="brand-row wm-row">
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-zh-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-en-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-white.svg"></div>
+  </div>
+  <div class="brand-card cyan-deep wm-card">
+    <p class="brand-card-label">logo-wordmark-fullname-white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-white.svg"></div>
+  </div>
+</div>
+
+**Stacked, for posters and roll-up banners**
+
+<div class="brand-row wm-row">
+  <div class="brand-card wm-card wm-stack">
+    <p class="brand-card-label">logo-wordmark-stack</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-tonal.svg"></div>
+  </div>
+  <div class="brand-card wm-card wm-stack">
+    <p class="brand-card-label">logo-wordmark-stack-zh</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-tonal.svg"></div>
+  </div>
+  <div class="brand-card dark wm-card wm-stack">
+    <p class="brand-card-label">stack-zh mono white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-white.svg"></div>
+  </div>
+  <div class="brand-card cyan wm-card wm-stack">
+    <p class="brand-card-label">stack mono white</p>
+    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-white.svg"></div>
+  </div>
+</div>
+
+### Proportions and clear space
+
+The proportions are fixed. To change the size, scale the whole lockup; do not adjust one part on its own.
+
+- Horizontal: the logo height is 1.35 times the visual height of the anoni.net lettering, and the gap between them is 0.40 times the logo width
+- Stacked: the logo height is 1.90 times the type size, with the lettering centred under the mark
+- Clear space: 0.25 times the logo height on all four sides. The SVG viewBox already includes it, so do not crop inwards when placing the file
+
+The lettering is Public Sans SemiBold and the Chinese subtitle is Noto Sans TC Medium, the same faces as the body text on the English and Traditional Chinese editions. In the tonal variant, `.net` uses `cyan-700`, matching the lowest hexagon; the mono variants are a single colour throughout.
+
+### Minimum size
+
+Below these heights the lettering blurs, so switch to the icon-only mark.
+
+| Layout | Minimum height |
+|---|---|
+| No subtitle (`logo-wordmark-*`, `logo-wordmark-fullname-*`) | 18 px |
+| Chinese subtitle (`-zh-`) | 32 px |
+| English subtitle (`-en-`) | 40 px |
+
+In print terms, 18 px at 300 dpi is roughly 1.5 mm; in practice the horizontal version is safe at 8 mm high and above.
+
+### Downloads
+
+| Layout | cyan tonal | mono white | mono black |
+|---|---|---|---|
+| Horizontal | [SVG](../assets/images/logo-wordmark-tonal.svg) | [SVG](../assets/images/logo-wordmark-white.svg) | [SVG](../assets/images/logo-wordmark-black.svg) |
+| Horizontal, Chinese subtitle | [SVG](../assets/images/logo-wordmark-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-zh-white.svg) | [SVG](../assets/images/logo-wordmark-zh-black.svg) |
+| Horizontal, English subtitle | [SVG](../assets/images/logo-wordmark-en-tonal.svg) | [SVG](../assets/images/logo-wordmark-en-white.svg) | [SVG](../assets/images/logo-wordmark-en-black.svg) |
+| Single line, full name | [SVG](../assets/images/logo-wordmark-fullname-tonal.svg) | [SVG](../assets/images/logo-wordmark-fullname-white.svg) | [SVG](../assets/images/logo-wordmark-fullname-black.svg) |
+| Stacked | [SVG](../assets/images/logo-wordmark-stack-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-white.svg) | [SVG](../assets/images/logo-wordmark-stack-black.svg) |
+| Stacked, Chinese subtitle | [SVG](../assets/images/logo-wordmark-stack-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-white.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-black.svg) |
+
 ## :material-palette: Colour tokens
 
 Align derivative work to these values. The site's `extra.css` already defines them as CSS variables, so use `var(--brand-cyan-500)` rather than an inline hex code.
@@ -242,6 +362,9 @@ Align derivative work to these values. The site's `extra.css` already defines th
 - Do not use mono black as a primary mark or on the web, since it is the print variant
 - Do not adjust the hexagons' arrangement, spacing, or corner radius
 - Do not extract a single hexagon for another purpose. The three are one mark
+- Do not re-space or resize the logo and lettering inside a wordmark independently; scale the whole lockup
+- Do not swap a wordmark's subtitle for an event name or other text. Lay that out separately and place the wordmark into it as one element
+- Below the minimum size, drop to the version without a subtitle. A blurred subtitle reads worse than none
 
 **Colour**
 
