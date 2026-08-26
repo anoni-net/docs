@@ -117,14 +117,28 @@ def main() -> int:
         print("::error::--prefix 結尾要有斜線", file=sys.stderr)
         return 1
 
+    # 匯入失敗跟讀取失敗分開處理。讀不到清單可能是一時的（憑證、網路、S3 抽風），
+    # 退回完整上傳就好，warning 的份量剛好。匯入失敗是環境壞了，每一次部署都會踩到，
+    # 而這一步失敗不會讓任何一格變紅，只留下一則沒人看的訊息，這個優化就這樣靜靜
+    # 失效了好一段時間（awscli 1.46.0 把 botocore 內嵌成 awscli.botocore，不再宣告
+    # 頂層相依）。所以匯入失敗用 error 標，讓它在 Actions 頁面上是紅的。
+    # 仍然回 0：這是效能優化，不值得為它擋下整個部署。
     try:
         import botocore.session
+    except ImportError as exc:
+        print(
+            f"::error::botocore 匯入失敗（{exc}），略過時間戳還原，這次會完整上傳。"
+            "這是環境問題不是暫時性錯誤，補上相依之前每次部署都會完整上傳",
+            file=sys.stderr,
+        )
+        return 0
 
+    try:
         client = botocore.session.get_session().create_client(
             "s3", endpoint_url=args.endpoint_url
         )
         index = remote_index(client, args.bucket, args.prefix)
-    except Exception as exc:  # noqa: BLE001 - 任何問題都退回什麼都不做
+    except Exception as exc:  # noqa: BLE001 - 讀不到就退回什麼都不做
         print(
             f"::warning::讀不到 S3 物件清單（{type(exc).__name__}: {exc}），"
             "略過時間戳還原，這次會完整上傳",
