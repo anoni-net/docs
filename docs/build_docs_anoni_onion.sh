@@ -1,3 +1,6 @@
+# 頁首的版本小標記讀這個值。run.sh 等三支是子行程，export 會傳下去。
+export BUILD_VARIANT=onion
+
 sh ./replace_sitename_anoni_onion.sh
 rm -rf ./output/*
 # 清掉 privacy plugin 快取，避免外部資源（如 vega-embed）換 URL 形狀後殘留舊鏡像 symlink 害圖表不 render

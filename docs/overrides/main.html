@@ -62,6 +62,23 @@
   {% endif %}
 {% endblock %}
 
+{% block announce %}{% if config.extra.build_variant == "ipfs" %}{#-
+  IPFS 版專屬的橫幅。onion 與標準站不顯示，base.html 用 self.announce() 判斷有沒有
+  內容，這個 if 之外不能留任何字元，留了會在另外兩個版本渲染出一條空的橫幅。
+
+  為什麼只有 IPFS 版有：onion 的讀者是刻意走過來的，頁首的小標記確認一下就夠。
+  IPFS 的讀者可能是點到閘道連結才進來的，甚至不知道自己在讀鏡像，而閘道業者
+  看得到他的 IP 與每一個請求，那件事值得在讀者踩到的當下講一次。
+
+  主機名由下面那段 JS 填。鏡像可以掛在任何閘道上（見 replace_sitename_anoni_ipfs.sh），
+  寫死一個名字就等於把好不容易拆掉的耦合裝回去。JS 被關掉時句子照樣讀得通。
+-#}IPFS 鏡像。你正在用的閘道<span id="anoni-gateway-host"></span>看得到你的 IP 與你要求的每一個位址，走 IPFS 讀不會讓連線變匿名。<a href="{{ 'about/how-you-are-reading/' | url }}">三種閱讀方式的差別</a><script>
+  (function () {
+    var el = document.getElementById("anoni-gateway-host");
+    if (el && location.hostname) el.textContent = "（" + location.hostname + "）";
+  })();
+</script>{% endif %}{% endblock %}
+
 {% block scripts %}
   {{ super() }}
 <!-- anoni-analytics-start (standard build only; stripped by replace_sitename_anoni_ipfs.sh / replace_sitename_anoni_onion.sh) -->

@@ -175,6 +175,7 @@ nav:
               - event-workshop-2025-prepare.md
   - !ENV [NAV_ABOUT, "關於我們"]:
       - about/index.md
+      - about/how-you-are-reading.md
       - contact.md
       - offline.md
 theme:
@@ -219,6 +220,7 @@ theme:
     - content.tooltips
     - content.code.copy
     - content.footnote.tooltips
+    - announce.dismiss
 extra:
   # 每一筆分析資料都帶著這個標籤，改版前後才比較得出來。CI 由 build_docs.yml
   # 帶 commit 短碼進來，本機建置就是 dev。
@@ -229,6 +231,14 @@ extra:
   # 換 gateway 時設 IPFS_GATEWAY 環境變數，或改這一行的預設值。
   # DNSLink（_dnslink.anoni.net）指向同一個 IPNS 名稱，所以換主機名就能換入口。
   ipfs_gateway: !ENV [IPFS_GATEWAY, "https://ipfs.anoni.net"]
+  # 這份產物是哪一種部署。標準站不顯示任何標記，onion 與 IPFS 版在頁首掛一個小標記，
+  # 讓讀者知道手上這份內容是怎麼送到面前的。三支 build 腳本與 CI 的 matrix 各自帶值
+  # 進來，建置時就決定，不靠 JS 也不靠 hostname 判斷（IPFS 的 hostname 本來就會變）。
+  build_variant: !ENV [BUILD_VARIANT, "standard"]
+  # 小標記的文字。zh-TW 用這裡的預設值，另外兩個語系由 run_en.sh、run_zh-cn.sh 覆蓋，
+  # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
+  variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
+  variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
   alternate:
     # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是網站預設語系，run.sh 直接把它建在
     # 根路徑，沒有獨立的語系區段。填 /docs/ 讓 hreflang 有 self-reference（Google 要求
