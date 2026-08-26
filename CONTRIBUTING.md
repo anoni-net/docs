@@ -40,6 +40,7 @@
 | `docs/` 網站內容 | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | `pulse/` 程式碼 | [MIT](pulse/LICENSE) |
 | `asn_coverage/` 程式碼 | [GPL-3.0](asn_coverage/LICENSE) |
+| `tools/` 腳本與測試 | [MIT](tools/LICENSE)（不含 `tools/data/`，見 [`NOTICE`](./NOTICE)）|
 
 說明與根目錄 `LICENSE`、`LICENSE-asn_coverage` 的關係見 [README.md](./README.md)（〈授權〉一節）。
 
@@ -50,4 +51,4 @@
 This monorepo contains the **docs site**, **Pulse**, and **asn_coverage** tools. See the table above for where to edit. Use [CLAUDE.md](./CLAUDE.md) for `uv`, Docker, and API details.
 
 - **Branches / CI**: site build runs on pushes to the **`docs`** branch (`build_docs.yml`). **`asn_coverage` workflows** run on **`push` to `main` only** (manual and scheduled runs still available).  
-- **Licensing**: docs content is **CC-BY 4.0**; **Pulse** code is **MIT**; **asn_coverage** code is **GPL-3.0**. See [README.md](./README.md).
+- **Licensing**: docs content is **CC-BY 4.0**; **Pulse** and `tools/` code is **MIT** (`tools/data/` excluded, see [NOTICE](./NOTICE)); **asn_coverage** code is **GPL-3.0**. See [README.md](./README.md).
