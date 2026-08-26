@@ -4,6 +4,7 @@
 # Usage:
 #   ./build_docs_anoni_ipfs.sh              # build + upload + publish IPNS
 #   ./build_docs_anoni_ipfs.sh --no-upload  # 只 build 不 upload，產物在 ./anoni-net-docs-ipfs/
+#   IPFS_GATEWAY=https://ipfs.example.net ./build_docs_anoni_ipfs.sh  # 換公開入口
 #
 # 流程：
 #   1. 確認 working tree clean（避免 replace_sitename in-place 改動污染未提交修改）
@@ -14,6 +15,12 @@
 #   6. (預設) 跑 upload_to_ipfs.sh 上傳 + publish IPNS
 
 set -euo pipefail
+
+# IPFS 鏡像的公開入口，一個值餵三個地方：replace_sitename_anoni_ipfs.sh 用它改寫
+# site_url，mkdocs*.yml 的 extra.ipfs_gateway 用它產生頁尾連結，upload_to_ipfs.sh
+# 用它 pre-warm。鏡像的內部連結是網站根目錄的相對路徑，換 gateway 只要改這個環境變數，
+# 不必重建鏡像。
+export IPFS_GATEWAY="${IPFS_GATEWAY:-https://anoni-net.ipns.dweb.link}"
 
 # macOS 本地建置前置：
 # - gnu-sed：BSD sed 不接受 `sed -i 's|x|y|g'` 格式
@@ -84,6 +91,20 @@ if grep -r "https://anoni.net/docs" ./anoni-net-docs-ipfs/ >/dev/null 2>&1; then
   grep -rl "https://anoni.net/docs" ./anoni-net-docs-ipfs/ | head -5 | sed 's/^/  /' >&2
   exit 1
 fi
+
+# Sanity check：canonical 與 og:url 來自 site_url，必須是 gateway 的絕對網址。
+# 三個語系的 site_url 分別由 mkdocs.yml、run_en.sh、run_zh-cn.sh 決定，漏改任何一個
+# 都會讓那個語系的 canonical 掉回主站網址，這裡逐語系檢查。
+echo "[build] sanity check：確認三個語系的 canonical 指向 $IPFS_GATEWAY"
+for page in ./anoni-net-docs-ipfs/index.html \
+            ./anoni-net-docs-ipfs/en/index.html \
+            ./anoni-net-docs-ipfs/zh-cn/index.html; do
+  if ! grep -q "rel=\"canonical\" href=\"$IPFS_GATEWAY" "$page"; then
+    echo "[build] ERROR: $page 的 canonical 不是 $IPFS_GATEWAY，site_url 沒被改寫" >&2
+    grep -o 'rel="canonical" href="[^"]*"' "$page" | head -1 | sed 's/^/  /' >&2
+    exit 1
+  fi
+done
 
 if [ "${1:-}" != "--no-upload" ]; then
   sh ./upload_to_ipfs.sh

@@ -223,6 +223,12 @@ extra:
   # 每一筆分析資料都帶著這個標籤，改版前後才比較得出來。CI 由 build_docs.yml
   # 帶 commit 短碼進來，本機建置就是 dev。
   build_tag: !ENV [BUILD_TAG, "dev"]
+  # IPFS 鏡像的公開入口，頁尾的 IPFS/IPNS 連結讀這個值。集中在這裡是因為
+  # 公開 gateway 會停：Cloudflare 的 cf-ipfs.com 2024-08 除役並把流量導向
+  # dweb.link，Shipyard 又於 2026-09-30 停止營運 dweb.link 與 ipfs.io。
+  # 換 gateway 時設 IPFS_GATEWAY 環境變數，或改這一行的預設值。
+  # DNSLink（_dnslink.anoni.net）指向同一個 IPNS 名稱，所以換主機名就能換入口。
+  ipfs_gateway: !ENV [IPFS_GATEWAY, "https://anoni-net.ipns.dweb.link"]
   alternate:
     # zh-TW 填 /docs/，不填 /docs/zh-tw/。zh-TW 是網站預設語系，run.sh 直接把它建在
     # 根路徑，沒有獨立的語系區段。填 /docs/ 讓 hreflang 有 self-reference（Google 要求
