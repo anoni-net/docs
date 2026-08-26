@@ -38,7 +38,7 @@ IPFS（InterPlanetary File System）的核心是内容定址（content addressin
 
 - **内容存活靠 pin**：没有节点主动 pin 的内容会在垃圾回收中消失。「上 IPFS」不等于「永久保存」。
 - **DHT 查询延迟**：第一次取得内容比 HTTP 慢。
-- **网关依赖**：多数用户透过公开网关（例如 ipfs.io）读取，网关被封等于连不上。公开网关的数量本身也在减少，Cloudflare 的 cf-ipfs.com 已于 2024 年 8 月除役。
+- **网关依赖**：多数用户透过公开网关读取，网关被封等于连不上。公开网关的数量本身也在减少，Cloudflare 的 cf-ipfs.com 于 2024 年 8 月除役并把流量导向 ipfs.io 与 dweb.link，接手运营那两个的 Interplanetary Shipyard 也在 [2026 年 9 月 30 日结束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}，同一天停掉的还有 IPFS 的 bootstrap 节点。
 - **动态内容受限**：IPFS 适合静态，动态功能需要额外层。
 
 ## Onion 服务设计核心
@@ -89,7 +89,7 @@ Tor Onion 服务（v3）让网站直接运作于 Tor 网络：
 - **IPFS 没有任何连接匿名**：PeerID 长期不变，DHT 查询在公开网络上进行，第三方看得到哪个 IP 在找哪个 CID。这页的重点在发布者怎么选建站方式，暴露面的完整说明见 [常被误认为匿名的网络](./mistaken-for-anonymity.md)。
 - **IPFS 的内容存活依赖主动 pin**：没有 pin 就消失。Pinata 这类中心化 pin 服务商、或 Filecoin 这类需要代币激励的去中心化存储协议，都让「永久保存」重新依赖第三方。
 - **Onion 依赖 Tor 网络**：Tor 中继节点若大量被封禁，或 Tor Project 停止维运，.onion 生态都会受影响。
-- **两者的入口仍多半是中心化服务**：用户透过 ipfs.io 或 Tor Browser 访问，这些入口本身仍是潜在攻击面。
+- **两者的入口仍多半是中心化服务**：用户透过公开网关或 Tor Browser 访问，这些入口本身仍是潜在攻击面。公开网关还会整批停掉，把网址写死在某一个网关上的站，网关收摊时对外链接会跟着失效。
 - **法律灰色地带**：架设 Tor exit node、提供 IPFS pin 服务在不同司法管辖下风险不同。
 
 ## 常见组合
@@ -131,7 +131,7 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 
 实际运作的限制：
 
-- IPFS gateway（ipfs.io）有时不稳定，影响第一次访问。
+- IPFS 公开网关有时不稳定，影响第一次访问。网关本身也会停，所以镜像的内部链接用网站根目录的相对路径，换网关不需要重建整份镜像。
 - Onion 镜像的更新频率比主站慢一拍（部署流程较重）。
 - 多语系资源在 IPFS 上会放大 CID 数量，pin 列表变长。
 

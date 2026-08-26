@@ -51,7 +51,8 @@ Nobody has to tell you "a new version is out." IPNS is the shared sync point, an
 
     - IPNS name: `k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - Node Peer ID: `12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9` (only needed if you set up peering)
-    - Open in a browser: [https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
+    - DNSLink: `_dnslink.anoni.net` points at the same IPNS name, so any DNSLink-capable gateway serves the same content
+    - Open in a browser: [https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}. That gateway shuts down on 30 September 2026, see [what changes for IPFS after September 2026](#ipfs-maintenance-2026)
 
 Each run does this: resolve IPNS to the current CID, pin the new CID, unpin the previous one, reclaim space. The script confirms the new version pinned successfully *before* dropping the old one. If resolving or fetching fails, it keeps the copy you already have and never empties your node.
 
@@ -86,7 +87,7 @@ For pinning to fetch the content, your machine needs a continuously running IPFS
 
 === "Windows"
 
-    The easiest option is [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}. It bundles kubo and, once you log in, stays running in the system tray with the daemon always on.
+    The easiest option is [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}. It bundles kubo and, once you log in, stays running in the system tray with the daemon always on. IPFS Desktop has had no dedicated maintainer since 30 September 2026, see [what changes for IPFS after September 2026](#ipfs-maintenance-2026); a standalone kubo install or Docker removes one layer of uncertainty on Windows.
 
     After installing, make sure `ipfs` is callable from the command line. A standalone kubo install needs `ipfs.exe` added to your PATH; with IPFS Desktop, if PATH can't find `ipfs`, use the full path in the script instead.
 
@@ -228,6 +229,33 @@ ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 Peering here is one-way: the community node has no matching entry, so keeping the connection alive is your side's job. The [kubo config docs](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} warn that one-way peering consumes connection resources on the other node, and that load concentrates on a single machine as the number of mirrors grows. Turn it on if you actually hit slow fetches, and skip this section if things already work.
+
+## What changes for IPFS after September 2026 { #ipfs-maintenance-2026 }
+
+Interplanetary Shipyard maintained most of the major IPFS software for the past few years. After Protocol Labs stopped funding it, the team [ended its IPFS work on 30 September 2026](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}. Everything on this page still works, and three things change.
+
+- **No dedicated maintainer for the software**: kubo, Helia, Boxo, IPFS Desktop and IPFS Companion are all in that group, and the IPFS Foundation has moved to grants for individual maintainers. The code keeps working, security updates land more slowly, so check the release date before you install.
+- **Public gateways and bootstrap nodes stop**: ipfs.io, dweb.link and the IPFS bootstrap nodes shut down on the same day. Since kubo 0.38 the default for `Bootstrap` is `auto`, and the expanded list contains exactly those nodes.
+- **The browsing URL on this page will change**: `anoni-net.ipns.dweb.link` belongs to dweb.link. The site's DNSLink record points at the same IPNS name, so any DNSLink-capable gateway serves the same content. The pin script works from the IPNS name and is unaffected by the gateway.
+
+First check which bootstrap nodes your node currently gets, and how many peers it has:
+
+```bash
+ipfs config Bootstrap --expand-auto
+ipfs swarm peers | wc -l
+```
+
+If a fresh node cannot reach any peers, add the community node to `Bootstrap`. kubo accepts `auto` mixed with explicit addresses, and its config docs say to "Add your own trusted peers alongside or instead of the defaults":
+
+```json
+"Bootstrap": [
+  "auto",
+  "/ip4/152.42.226.144/udp/4001/quic-v1/p2p/12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9",
+  "/ip4/152.42.226.144/tcp/4001/p2p/12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9"
+]
+```
+
+Restart the daemon to apply. Docker users edit `./ipfs-data/config`, then run `docker compose restart`.
 
 ## Maintenance and notes
 

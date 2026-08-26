@@ -51,7 +51,8 @@ pin 文件站只會用到 IPNS 名稱。Peer ID 要到想讓自己的節點跟�
 
     - IPNS 名稱：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - 節點 Peer ID：`12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9`（設定 peering 時才會用到）
-    - 瀏覽器打開看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
+    - DNSLink：`_dnslink.anoni.net` 指向同一個 IPNS 名稱，換一個支援 DNSLink 的網關就讀得到同一份內容
+    - 瀏覽器打開看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}。這個網關在 2026 年 9 月 30 日停止營運，見 [2026 年 9 月之後的 IPFS 維護變化](#ipfs-maintenance-2026)
 
 腳本每次執行的動作是：解析 IPNS 取得當前 CID，pin 新 CID，unpin 上次那版，回收空間。腳本先確認新版 pin 成功，才會放掉舊版。萬一解析失敗或抓不到內容，它會保留你手上現有的複本，不會讓你的節點變空。
 
@@ -86,7 +87,7 @@ pin 要能抓齊內容，本機就得有一個持續運作的 IPFS daemon。下�
 
 === "Windows"
 
-    最簡便的是安裝 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它內含 kubo，登入後會自動在系統匣常駐，daemon 一直開著。
+    最簡便的是安裝 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它內含 kubo，登入後會自動在系統匣常駐，daemon 一直開著。IPFS Desktop 從 2026 年 9 月 30 日起沒有專職維護者，見 [2026 年 9 月之後的 IPFS 維護變化](#ipfs-maintenance-2026)，想少一層不確定的話，Windows 也可以裝獨立版 kubo 或用 Docker。
 
     裝好後確認命令列能呼叫到 `ipfs`。獨立版 kubo 需要自己把 `ipfs.exe` 加進系統 PATH，用 IPFS Desktop 的話，若 PATH 找不到 `ipfs`，在腳本裡改用完整路徑即可。
 
@@ -228,6 +229,33 @@ ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 peering 是單向設定，社群節點那端沒有對應條目，連線的保活責任落在你這邊。[kubo 官方文件](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒過，單向 peering 會佔用對方節點的連線資源，鏡像數量變多之後負擔會集中在同一台。建議實際遇到抓取不順再開，平常運作正常就跳過。
+
+## 2026 年 9 月之後的 IPFS 維護變化 { #ipfs-maintenance-2026 }
+
+Interplanetary Shipyard 是過去幾年 IPFS 主要軟體的維護團隊。Protocol Labs 停止資助之後，它在 [2026 年 9 月 30 日結束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}。這頁的做法照常可行，有三件事會變。
+
+- **軟體沒有專職維護者**：kubo、Helia、Boxo、IPFS Desktop、IPFS Companion 都在這批裡，IPFS Foundation 改成對個別維護者發 grant。程式繼續運作，安全性更新的節奏會慢下來，安裝前確認一次版本日期。
+- **公開網關與 bootstrap 節點停止營運**：ipfs.io、dweb.link 與 IPFS 的 bootstrap 節點同一天停。kubo 0.38 之後 `Bootstrap` 的預設值是 `auto`，展開後的清單裡就有這些節點。
+- **本頁的瀏覽網址會換**：`anoni-net.ipns.dweb.link` 屬於 dweb.link。文件站的 DNSLink 記錄指向同一個 IPNS 名稱，換一個支援 DNSLink 的網關就讀得到同一份內容。pin 腳本用的是 IPNS 名稱，不受網關影響。
+
+先看自己的節點目前取得哪些 bootstrap 節點，以及連上了幾個 peer：
+
+```bash
+ipfs config Bootstrap --expand-auto
+ipfs swarm peers | wc -l
+```
+
+新裝的節點連不到其他節點時，把社群節點加進 `Bootstrap`。kubo 接受 `auto` 與明確位址混用，官方文件寫的是「Add your own trusted peers alongside or instead of the defaults」：
+
+```json
+"Bootstrap": [
+  "auto",
+  "/ip4/152.42.226.144/udp/4001/quic-v1/p2p/12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9",
+  "/ip4/152.42.226.144/tcp/4001/p2p/12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9"
+]
+```
+
+改完重啟 daemon 生效。Docker 使用者改 `./ipfs-data/config`，接著執行 `docker compose restart`。
 
 ## 維護與注意事項
 
