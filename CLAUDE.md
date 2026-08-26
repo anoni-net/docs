@@ -80,12 +80,17 @@ cd docs
 # 啟動開發伺服器 (預設 zh-TW 版本)
 source .venv/bin/activate
 mkdocs serve
+```
 
-# 或使用腳本啟動不同語言版本
+三語系的建置驗證用 `run_*.sh`。三支都是 `mkdocs build`，各自 export 該語系需要的環境變數再建置到 `output/`：
+
+```bash
 sh run.sh          # zh-TW（預設語系，建在根路徑）
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
+
+直接執行 `mkdocs build -f mkdocs_en.yml` 會因為 `DOCS_DIR` 之類的環境變數落回預設值而產生假警報，驗證三語系一律走這三支腳本。
 
 ### 建置文件
 
