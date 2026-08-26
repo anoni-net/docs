@@ -78,7 +78,7 @@ Independent of any claim on this page, the following are checkable:
 - The full source of the documentation site, Pulse, and ASN coverage tooling is at [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, including commit history and contributor list
 - Pulse data is publicly readable at [anoni.net/api](https://anoni.net/api/readme){target="_blank"}
 - The Tor onion mirror at [the docs onion address](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"} reflects the same content as the clearnet site
-- An IPFS mirror of the same content is reachable through a public gateway at [anoni-net.ipns.dweb.link](https://anoni-net.ipns.dweb.link/){target="_blank"}, which is worth knowing if the clearnet site is unreachable from where you are
+- An IPFS mirror of the same content is reachable at [ipfs.anoni.net](https://ipfs.anoni.net/){target="_blank"}, which is worth knowing if the clearnet site is unreachable from where you are. The DNSLink record `_dnslink.anoni.net` points at the same IPNS name, so any DNSLink-capable gateway serves the same mirror
 - Recent community work and external participation are documented in the [Updates / blog](../blog/index.md), with photos and recordings where applicable
 
 ## Reaching us

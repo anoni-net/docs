@@ -7,6 +7,8 @@ IPFS_API="--api /ip4/127.0.0.1/tcp/5001"
 # IPNS 位址（來自 replace_sitename_anoni_ipfs.sh）
 # 需要重新匯入 `docker exec -i ipfs_host ipfs key import anoni-net /data/ipfs/keystore/key_mfxg63tjfvsg6y3t`
 IPFS_IPNS_ADDR="k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw"
+# 公開入口。由 build_docs_anoni_ipfs.sh export 進來，單獨執行時走 fallback。
+IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 TUNNEL_PID=""
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -74,12 +76,13 @@ echo "[upload] provide 新 CID 到 DHT..."
 ipfs $IPFS_API routing provide "$NEW_CID" || echo "[upload] provide 非致命失敗，繼續"
 
 # Pre-warm 公開閘道：先抓一次，逼閘道解析並把內容收進邊緣快取，縮短第一個訪客的等待。
-# 三個目標：dweb.link/ipfs.io 用新 CID 直接暖內容；DNSLink 網址觸發重新解析。全部非致命。
+# 兩類目標：用新 CID 直接暖內容，以及用 DNSLink 網址觸發重新解析。全部非致命。
+# dweb.link 與 ipfs.io 由 Shipyard 營運到 2026-09-30 為止
+# （https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/），之後這幾行會開始
+# 印 warm 失敗。清單用 IPFS_PREWARM_URLS 覆蓋（空白分隔），或直接刪掉停掉的那幾個。
+PREWARM_URLS="${IPFS_PREWARM_URLS:-https://dweb.link/ipfs/$NEW_CID/ https://ipfs.io/ipfs/$NEW_CID/ $IPFS_GATEWAY/}"
 echo "[upload] Pre-warm 公開閘道..."
-for gw in \
-    "https://dweb.link/ipfs/$NEW_CID/" \
-    "https://ipfs.io/ipfs/$NEW_CID/" \
-    "https://anoni-net.ipns.dweb.link/"; do
+for gw in $PREWARM_URLS; do
     if curl -fsS -o /dev/null --max-time 60 "$gw"; then
         echo "[upload]   warmed: $gw"
     else
@@ -102,4 +105,6 @@ echo "[upload] 執行 repo GC..."
 ipfs $IPFS_API repo gc
 
 echo "[upload] 完成。"
-echo "[upload] IPNS: https://ipfs.io/ipns/$IPFS_IPNS_ADDR"
+echo "[upload] IPNS 名稱: /ipns/$IPFS_IPNS_ADDR"
+echo "[upload] 公開入口: $IPFS_GATEWAY/"
+echo "[upload] DNSLink: _dnslink.anoni.net 指向同一個 IPNS 名稱，換 gateway 只要換主機名"

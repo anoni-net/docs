@@ -38,7 +38,7 @@ The limits:
 
 - **Survival depends on pinning**: content nobody pins disappears in garbage collection. Putting something on IPFS is not the same as preserving it
 - **DHT lookup latency**: first retrieval is slower than HTTP
-- **Gateway dependence**: most people read through a public gateway, and a blocked gateway means no access
+- **Gateway dependence**: most people read through a public gateway, and a blocked gateway means no access. The pool of public gateways keeps shrinking: Cloudflare retired cf-ipfs.com in August 2024 and redirected the traffic to ipfs.io and dweb.link, and Interplanetary Shipyard, which ran those two, [ended its IPFS work on 30 September 2026](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}, taking the IPFS bootstrap nodes with it
 - **Dynamic content**: IPFS suits static sites, and anything dynamic needs another layer
 
 ## What onion services are built on
@@ -89,7 +89,7 @@ Before picking a combination, two places where the decentralization promise does
 - **IPFS provides no connection anonymity at all**: The PeerID is long-lived, DHT lookups happen on the public network, and third parties can see which IP address is looking for which CID. This page is about how a publisher chooses to host. The full exposure analysis is in [networks mistaken for anonymity](./mistaken-for-anonymity.md)
 - **IPFS content survives only while pinned**: Centralized pinning services, or decentralized storage protocols requiring token incentives, both put "permanent" back in the hands of a third party
 - **Onion services depend on Tor**: Heavy blocking of relays, or the Tor Project ceasing operation, would affect the whole ecosystem
-- **The entry points are mostly still centralized services**: People arrive through a public gateway or Tor Browser, and those entry points are themselves attack surface
+- **The entry points are mostly still centralized services**: People arrive through a public gateway or Tor Browser, and those entry points are themselves attack surface. Public gateways also shut down in batches, and a site that hardcodes one gateway into its URLs loses those links when that gateway closes
 - **Legal grey areas**: Running a Tor exit node or offering IPFS pinning carries different risk in different jurisdictions
 
 ## Combinations that work
@@ -128,7 +128,7 @@ The operational trade-offs:
 
 What actually goes wrong:
 
-- Public IPFS gateways are sometimes unstable, which affects first visits
+- Public IPFS gateways are sometimes unstable, which affects first visits. Gateways also close, so the mirror uses site-root-relative internal links and switching gateways needs no rebuild
 - The onion mirror updates a step behind the main site, since its deployment is heavier
 - Three language sites multiply the CID count on IPFS, and the pin list grows accordingly
 

@@ -39,7 +39,7 @@ IPFS 上有三种长相接近的标识符，用途各自不同，贴错字段时
 | IPNS 名称 | `k51qzi…` | 固定 | 取得最新版，本页 pin 用这个 |
 | Peer ID | `12D3KooW…` | 固定 | 指定要连到哪一个节点 |
 
-pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟社群节点保持固定连接时才用得上，做法见下面的〈进阶：跟社群节点保持常连〉。
+pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟社群节点保持固定连接时才用得上，做法见下面的 [跟社群节点保持常连](#peering)。
 
 ## 运作原理（为什么定时就够，不用等通知）
 
@@ -51,7 +51,8 @@ pin 文件站只会用到 IPNS 名称。Peer ID 要到想让自己的节点跟�
 
     - IPNS 名称：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - 节点 Peer ID：`12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9`（设定 peering 时才会用到）
-    - 浏览器打开看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
+    - DNSLink：`_dnslink.anoni.net` 指向同一个 IPNS 名称，换一个支持 DNSLink 的网关就读得到同一份内容
+    - 浏览器打开看：[https://ipfs.anoni.net/](https://ipfs.anoni.net/){target="_blank"}，社群自架的网关。旧网址 `anoni-net.ipns.dweb.link` 在 2026 年 9 月 30 日停止运营，见 [2026 年 9 月之后的 IPFS 维护变化](#ipfs-maintenance-2026)
 
 脚本每次执行的动作是：解析 IPNS 取得当前 CID，pin 新 CID，unpin 上次那版，回收空间。脚本先确认新版 pin 成功，才会放掉旧版。万一解析失败或抓不到内容，它会保留你手上现有的副本，不会让你的节点变空。
 
@@ -86,7 +87,7 @@ pin 要能抓齐内容，本机就得有一个持续运作的 IPFS daemon。下�
 
 === "Windows"
 
-    最简便的是安装 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它内含 kubo，登录后会自动在系统托盘常驻，daemon 一直开着。
+    最简便的是安装 [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}，它内含 kubo，登录后会自动在系统托盘常驻，daemon 一直开着。IPFS Desktop 从 2026 年 9 月 30 日起没有专职维护者，见 [2026 年 9 月之后的 IPFS 维护变化](#ipfs-maintenance-2026)，想少一层不确定的话，Windows 也可以装独立版 kubo 或用 Docker。
 
     装好后确认命令行能调用到 `ipfs`。独立版 kubo 需要自己把 `ipfs.exe` 加进系统 PATH，用 IPFS Desktop 的话，若 PATH 找不到 `ipfs`，在脚本里改用完整路径即可。
 
@@ -205,7 +206,7 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 也可以在本机 gateway 打开看，内容正常显示就成功了：`http://127.0.0.1:8080${CID}/`。Docker 用户把上面的 `ipfs` 换成 `docker exec ipfs_host ipfs`。
 
-## 进阶用法是跟社群节点保持常连（选用）
+## 跟社群节点保持常连 { #peering }
 
 pin 只靠 IPNS 名称就能完成，内容交给 DHT 去找。第一次要把整份镜像抓齐，碰上 DHT 查询慢或查不到的时候会拖很久。想让自己的节点跟来源节点维持固定连接，可以设定 kubo 的 peering。
 
@@ -228,6 +229,23 @@ ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 peering 是单向设定，社群节点那端没有对应条目，连接的保活责任落在你这边。[kubo 官方文档](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} 提醒过，单向 peering 会占用对方节点的连接资源，镜像数量变多之后负担会集中在同一台。建议实际遇到抓取不顺再开，平常运作正常就跳过。
+
+## 2026 年 9 月之后的 IPFS 维护变化 { #ipfs-maintenance-2026 }
+
+Interplanetary Shipyard 是过去几年 IPFS 主要软件的维护团队。Protocol Labs 停止资助之后，它在 [2026 年 9 月 30 日结束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}。这页的做法照常可行，有三件事会变。
+
+- **软件没有专职维护者**：kubo、Helia、Boxo、IPFS Desktop、IPFS Companion 都在这批里，IPFS Foundation 改成对个别维护者发 grant。程序继续运作，安全性更新的节奏会慢下来，安装前确认一次版本日期。
+- **公开网关与 bootstrap 节点停止运营**：ipfs.io、dweb.link 与 IPFS 的 bootstrap 节点同一天停。kubo 0.38 之后 `Bootstrap` 的默认值是 `auto`，展开后的清单里就有这些节点。
+- **本页的浏览网址已经换掉**：旧的 `anoni-net.ipns.dweb.link` 属于 dweb.link，新的 [ipfs.anoni.net](https://ipfs.anoni.net/){target="_blank"} 由社群自己运营。两者读的是同一个 IPNS 名称，靠 DNSLink 记录对应。pin 脚本用的是 IPNS 名称，不受网关影响。
+
+先看自己的节点目前取得哪些 bootstrap 节点，以及连上了几个 peer：
+
+```bash
+ipfs config Bootstrap --expand-auto
+ipfs swarm peers | wc -l
+```
+
+`auto` 展开后的节点停掉之后，新装的节点可能连不进 DHT。这时候把社群节点设成固定连接对象最直接，做法见上面的 [跟社群节点保持常连](#peering)，`Peering` 只要填 Peer ID，kubo 会自己向 DHT 查地址。
 
 ## 维护与注意事项
 

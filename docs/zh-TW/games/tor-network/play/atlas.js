@@ -678,7 +678,7 @@ const ASSETS = 'https://assets.anoni.net/games/';
 //
 // onion 上打 clearnet 端點會脫離 onion 的保護範圍，而且會把「有人在看這個 onion
 // service」跟「有人在存取 assets.anoni.net」在時間上關聯起來。IPFS 版本的定位是
-// 離線也能看，對外連線跟那個定位相衝，透過公開網關開的話那條連線還會直接走使用者
+// 離線也能看，對外連線跟那個定位相衝，透過公開閘道開的話那條連線還會直接走使用者
 // 自己的網路，真實 IP 就交出去了，那正是選這個版本想避免的事。
 //
 // 原本只有「即時更新」那顆按鈕看這個判斷，頁面載入時抓 assets 的那三份完全沒看，
@@ -687,7 +687,7 @@ function offlineFirst() {
   const h = location.hostname || '';
   if (h.endsWith('.onion')) return true;
   if (/(^|[.-])ipfs[.-]|(^|[.-])ipns[.-]|\.eth\.(link|limo)$/.test(h)) return true;
-  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return true;   // 公開網關的路徑式位址
+  if (/^\/(ipfs|ipns)\//.test(location.pathname)) return true;   // 公開閘道的路徑式位址
   return false;
 }
 

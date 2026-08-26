@@ -8,8 +8,8 @@
     ><br />
     IPFS/IPNS:
     <a
-      href="https://anoni-net.ipns.dweb.link/zh-cn/{{page.url}}"
-      >anoni-net.ipns.dweb.link/zh-cn/{{page.url}}</a
+      href="{{ config.extra.ipfs_gateway }}/zh-cn/{{page.url}}"
+      >{{ config.extra.ipfs_gateway | replace('https://', '') }}/zh-cn/{{page.url}}</a
     >
   </div>
   <div class="md-copyright__offline" style="margin-top: 0.4em">

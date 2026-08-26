@@ -39,7 +39,7 @@ IPFS has three identifiers that look alike and do different jobs. Paste one into
 | IPNS name | `k51qzi…` | Fixed | Getting the latest version, which is what pinning uses |
 | Peer ID | `12D3KooW…` | Fixed | Pointing at one specific node |
 
-Pinning the docs site only needs the IPNS name. The Peer ID comes up when you want your own node to hold a steady connection to the community node, covered under "Advanced: keep a steady connection to the community node" below.
+Pinning the docs site only needs the IPNS name. The Peer ID comes up when you want your own node to hold a steady connection to the community node, covered under [keeping a steady connection](#peering) below.
 
 ## How it works (why a schedule is enough, no notification needed)
 
@@ -51,7 +51,8 @@ Nobody has to tell you "a new version is out." IPNS is the shared sync point, an
 
     - IPNS name: `k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - Node Peer ID: `12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9` (only needed if you set up peering)
-    - Open in a browser: [https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}
+    - DNSLink: `_dnslink.anoni.net` points at the same IPNS name, so any DNSLink-capable gateway serves the same content
+    - Open in a browser: [https://ipfs.anoni.net/](https://ipfs.anoni.net/){target="_blank"}, the gateway the community runs itself. The old address `anoni-net.ipns.dweb.link` shuts down on 30 September 2026, see [what changes for IPFS after September 2026](#ipfs-maintenance-2026)
 
 Each run does this: resolve IPNS to the current CID, pin the new CID, unpin the previous one, reclaim space. The script confirms the new version pinned successfully *before* dropping the old one. If resolving or fetching fails, it keeps the copy you already have and never empties your node.
 
@@ -86,7 +87,7 @@ For pinning to fetch the content, your machine needs a continuously running IPFS
 
 === "Windows"
 
-    The easiest option is [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}. It bundles kubo and, once you log in, stays running in the system tray with the daemon always on.
+    The easiest option is [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/){target="_blank"}. It bundles kubo and, once you log in, stays running in the system tray with the daemon always on. IPFS Desktop has had no dedicated maintainer since 30 September 2026, see [what changes for IPFS after September 2026](#ipfs-maintenance-2026); a standalone kubo install or Docker removes one layer of uncertainty on Windows.
 
     After installing, make sure `ipfs` is callable from the command line. A standalone kubo install needs `ipfs.exe` added to your PATH; with IPFS Desktop, if PATH can't find `ipfs`, use the full path in the script instead.
 
@@ -205,7 +206,7 @@ ipfs pin ls --type=recursive | grep "${CID#/ipfs/}"
 
 You can also open it on your local gateway and check it renders: `http://127.0.0.1:8080${CID}/`. Docker users: replace `ipfs` above with `docker exec ipfs_host ipfs`.
 
-## Advanced usage keeps a steady connection to the community node (optional)
+## Keeping a steady connection to the community node { #peering }
 
 Pinning works off the IPNS name alone, and the DHT takes care of finding the content. Fetching a full mirror for the first time can drag on when DHT lookups are slow or come back empty. To hold a fixed connection between your node and the source node, configure kubo's peering.
 
@@ -228,6 +229,23 @@ ipfs swarm peers | grep 12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9
 ```
 
 Peering here is one-way: the community node has no matching entry, so keeping the connection alive is your side's job. The [kubo config docs](https://github.com/ipfs/kubo/blob/master/docs/config.md#peering){target="_blank"} warn that one-way peering consumes connection resources on the other node, and that load concentrates on a single machine as the number of mirrors grows. Turn it on if you actually hit slow fetches, and skip this section if things already work.
+
+## What changes for IPFS after September 2026 { #ipfs-maintenance-2026 }
+
+Interplanetary Shipyard maintained most of the major IPFS software for the past few years. After Protocol Labs stopped funding it, the team [ended its IPFS work on 30 September 2026](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}. Everything on this page still works, and three things change.
+
+- **No dedicated maintainer for the software**: kubo, Helia, Boxo, IPFS Desktop and IPFS Companion are all in that group, and the IPFS Foundation has moved to grants for individual maintainers. The code keeps working, security updates land more slowly, so check the release date before you install.
+- **Public gateways and bootstrap nodes stop**: ipfs.io, dweb.link and the IPFS bootstrap nodes shut down on the same day. Since kubo 0.38 the default for `Bootstrap` is `auto`, and the expanded list contains exactly those nodes.
+- **The browsing URL on this page has changed**: the old `anoni-net.ipns.dweb.link` belonged to dweb.link, and the new [ipfs.anoni.net](https://ipfs.anoni.net/){target="_blank"} is run by the community. Both serve the same IPNS name through the DNSLink record. The pin script works from the IPNS name and is unaffected by the gateway.
+
+First check which bootstrap nodes your node currently gets, and how many peers it has:
+
+```bash
+ipfs config Bootstrap --expand-auto
+ipfs swarm peers | wc -l
+```
+
+Once the nodes behind `auto` shut down, a fresh node may fail to join the DHT. Pinning the community node as a steady peer is the most direct answer, described under [keeping a steady connection](#peering) above; `Peering` takes the Peer ID alone and kubo looks the addresses up in the DHT.
 
 ## Maintenance and notes
 

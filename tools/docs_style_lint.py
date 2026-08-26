@@ -187,6 +187,10 @@ REGIONAL_RULES = [
      "「硬件」是中國慣用詞，臺灣用「硬體」", False),
     ("regional-term-software", re.compile(r"軟件"), None,
      "「軟件」是中國慣用詞，臺灣用「軟體」", False),
+    # 「安全網關」出現在照錄的合約與產品名稱裡（interseclab 報告引用北京供應商的合同），
+    # 那是原文照錄，不是用詞選擇。例外視窗跟「網絡」那條一樣是命中處前後各兩字。
+    ("regional-term-gateway", re.compile(r"網關"), re.compile(r"安全"),
+     "「網關」是中國慣用詞，臺灣用「閘道」（照錄合約或產品名稱時不在此限）", False),
 ]
 
 # 掃過一遍全站之後刻意沒有收進來的詞，記在這裡免得有人以為是漏掉的：
