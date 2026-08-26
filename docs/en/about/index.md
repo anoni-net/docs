@@ -8,7 +8,7 @@ icon: material/account-box-outline
 
 anoni.net is a small volunteer community based in Taiwan, working on networked freedom across the Sinophone (Chinese-speaking) Asia-Pacific. The community formed around 2023 with a focus on OONI measurement coverage in Taiwan, and has since broadened its scope toward regional observation, regulatory tracking, and selective translation of regional research.
 
-The region we cover is Mainland China, Hong Kong and Macau, Singapore, Malaysia, Taiwan, and the diaspora moving between them. Taiwan is the only jurisdiction we can speak to first-hand. Everything else we follow through public sources and through contacts in those places, and pages that rest on second-hand material say so.
+The region we cover is Mainland China, Hong Kong and Macau, Singapore, Malaysia, Taiwan, and the diaspora moving between them. Taiwan is the only jurisdiction we can speak to first-hand. Everything else we follow through public sources and through contacts in those places, and we say so on pages that rest on second-hand material.
 
 What we add is the regional layer that global English-language privacy resources are not set up to produce: how a tool behaves in Mainland China versus Taiwan, what a local statute changes about the threat model, and measurement taken from inside the region.
 
