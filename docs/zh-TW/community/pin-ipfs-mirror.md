@@ -51,8 +51,8 @@ pin 文件站只會用到 IPNS 名稱。Peer ID 要到想讓自己的節點跟�
 
     - IPNS 名稱：`k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw`
     - 節點 Peer ID：`12D3KooWEzvBhnLa6NZnjnw22Yoqs56xq4pNCZdkkxw5yxvi1eV9`（設定 peering 時才會用到）
-    - DNSLink：`_dnslink.anoni.net` 指向同一個 IPNS 名稱，換一個支援 DNSLink 的網關就讀得到同一份內容
-    - 瀏覽器打開看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}。這個網關在 2026 年 9 月 30 日停止營運，見 [2026 年 9 月之後的 IPFS 維護變化](#ipfs-maintenance-2026)
+    - DNSLink：`_dnslink.anoni.net` 指向同一個 IPNS 名稱，換一個支援 DNSLink 的閘道就讀得到同一份內容
+    - 瀏覽器打開看：[https://anoni-net.ipns.dweb.link/](https://anoni-net.ipns.dweb.link/){target="_blank"}。這個閘道在 2026 年 9 月 30 日停止營運，見 [2026 年 9 月之後的 IPFS 維護變化](#ipfs-maintenance-2026)
 
 腳本每次執行的動作是：解析 IPNS 取得當前 CID，pin 新 CID，unpin 上次那版，回收空間。腳本先確認新版 pin 成功，才會放掉舊版。萬一解析失敗或抓不到內容，它會保留你手上現有的複本，不會讓你的節點變空。
 
@@ -235,8 +235,8 @@ peering 是單向設定，社群節點那端沒有對應條目，連線的保活
 Interplanetary Shipyard 是過去幾年 IPFS 主要軟體的維護團隊。Protocol Labs 停止資助之後，它在 [2026 年 9 月 30 日結束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}。這頁的做法照常可行，有三件事會變。
 
 - **軟體沒有專職維護者**：kubo、Helia、Boxo、IPFS Desktop、IPFS Companion 都在這批裡，IPFS Foundation 改成對個別維護者發 grant。程式繼續運作，安全性更新的節奏會慢下來，安裝前確認一次版本日期。
-- **公開網關與 bootstrap 節點停止營運**：ipfs.io、dweb.link 與 IPFS 的 bootstrap 節點同一天停。kubo 0.38 之後 `Bootstrap` 的預設值是 `auto`，展開後的清單裡就有這些節點。
-- **本頁的瀏覽網址會換**：`anoni-net.ipns.dweb.link` 屬於 dweb.link。文件站的 DNSLink 記錄指向同一個 IPNS 名稱，換一個支援 DNSLink 的網關就讀得到同一份內容。pin 腳本用的是 IPNS 名稱，不受網關影響。
+- **公開閘道與 bootstrap 節點停止營運**：ipfs.io、dweb.link 與 IPFS 的 bootstrap 節點同一天停。kubo 0.38 之後 `Bootstrap` 的預設值是 `auto`，展開後的清單裡就有這些節點。
+- **本頁的瀏覽網址會換**：`anoni-net.ipns.dweb.link` 屬於 dweb.link。文件站的 DNSLink 記錄指向同一個 IPNS 名稱，換一個支援 DNSLink 的閘道就讀得到同一份內容。pin 腳本用的是 IPNS 名稱，不受閘道影響。
 
 先看自己的節點目前取得哪些 bootstrap 節點，以及連上了幾個 peer：
 

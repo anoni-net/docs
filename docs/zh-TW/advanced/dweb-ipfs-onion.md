@@ -38,7 +38,7 @@ IPFS（InterPlanetary File System）的核心是內容定址（content addressin
 
 - **內容存活靠 pin**：沒有節點主動 pin 的內容會在垃圾回收中消失。「上 IPFS」不等於「永久保存」。
 - **DHT 查詢延遲**：第一次取得內容比 HTTP 慢。
-- **網關依賴**：多數使用者透過公開網關讀取，網關被封等於連不上。公開網關的數量本身也在減少，Cloudflare 的 cf-ipfs.com 於 2024 年 8 月除役並把流量導向 ipfs.io 與 dweb.link，接手營運那兩個的 Interplanetary Shipyard 也在 [2026 年 9 月 30 日結束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}，同一天停掉的還有 IPFS 的 bootstrap 節點。
+- **閘道依賴**：多數使用者透過公開閘道讀取，閘道被封等於連不上。公開閘道的數量本身也在減少，Cloudflare 的 cf-ipfs.com 於 2024 年 8 月除役並把流量導向 ipfs.io 與 dweb.link，接手營運那兩個的 Interplanetary Shipyard 也在 [2026 年 9 月 30 日結束 IPFS 的工作](https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/){target="_blank"}，同一天停掉的還有 IPFS 的 bootstrap 節點。
 - **動態內容受限**：IPFS 適合靜態，動態功能需要額外層。
 
 ## Onion 服務設計核心
@@ -78,7 +78,7 @@ Tor Onion 服務（v3）讓網站直接運作於 Tor 網路：
 | 抗下架 | ✅（多節點 pin） | 部分（單一服務可被人為關閉） |
 | 大檔效能 | 中等 | 差 |
 | 動態內容 | 困難 | 跟一般網站類似 |
-| 訪客門檻 | 低（瀏覽器網關） | 高（要 Tor Browser） |
+| 訪客門檻 | 低（瀏覽器閘道） | 高（要 Tor Browser） |
 
 要抗刪除選 IPFS，要連線匿名選 Onion，兩者都需要就同站雙鏡像。
 
@@ -89,7 +89,7 @@ Tor Onion 服務（v3）讓網站直接運作於 Tor 網路：
 - **IPFS 沒有任何連線匿名**：PeerID 長期不變，DHT 查詢在公開網路上進行，第三方看得到哪個 IP 在找哪個 CID。本頁的重點在發布者怎麼選架站方式，暴露面的完整說明見 [常被誤認為匿名的網路](./mistaken-for-anonymity.md)。
 - **IPFS 的內容存活依賴主動 pin**：沒有 pin 就消失。Pinata 這類中心化 pin 服務商、或 Filecoin 等需要代幣激勵的去中心化儲存協議，都讓「永久保存」重新依賴第三方。
 - **Onion 依賴 Tor 網路**：Tor 中繼節點若大量被封禁，或 Tor Project 停止維運，.onion 生態都會受影響。
-- **兩者的入口仍多半是中心化服務**：使用者透過公開網關或 Tor Browser 訪問，這些入口本身仍是潛在攻擊面。公開網關還會整批停掉，把網址寫死在某一個網關上的站，網關收攤時對外連結會跟著失效。
+- **兩者的入口仍多半是中心化服務**：使用者透過公開閘道或 Tor Browser 訪問，這些入口本身仍是潛在攻擊面。公開閘道還會整批停掉，把網址寫死在某一個閘道上的站，閘道收攤時對外連結會跟著失效。
 - **法律灰色地帶**：架設 Tor exit node、提供 IPFS pin 服務在不同司法管轄下風險不同。
 
 ## 常見組合
@@ -131,7 +131,7 @@ anoni.net 文件站本身就是一個 IPFS + Onion 雙鏡像案例。簡化的�
 
 實際運作的限制：
 
-- IPFS 公開網關有時不穩定，影響第一次訪問。網關本身也會停，所以鏡像的內部連結用網站根目錄的相對路徑，換網關不需要重建整份鏡像。
+- IPFS 公開閘道有時不穩定，影響第一次訪問。閘道本身也會停，所以鏡像的內部連結用網站根目錄的相對路徑，換閘道不需要重建整份鏡像。
 - Onion 鏡像的更新頻率比主站慢一拍（部署流程較重）。
 - 多語系資源在 IPFS 上會放大 CID 數量，pin 列表變長。
 
