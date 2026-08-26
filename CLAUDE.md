@@ -51,8 +51,8 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，分批並行清除 Cloudflare 快取（每批 30 條，同時 6 批）。測試由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發 |
 | 部署 | `s3_restore_mtime.py`、`test_s3_restore_mtime.py` | 上傳前比對 MD5 與 S3 的 ETag，內容沒變的把時間戳調回遠端版本，讓 `aws s3 sync` 跳過。`sync` 只看大小與時間，不看內容 |
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
-| 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 跑的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
-| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py`、`test_offline_library.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。其餘四支把原始碼原地抽出來單元測試，不需要建置：`test_sw_offline.mjs` 測 `docs/zh-TW/sw.js` 的離線路徑，`test_lang_preference.mjs` 測 `docs/overrides/base.html` 的語言導向，`test_offline_index.py` 測 `docs/hooks/offline_index.py` 的分組，`test_offline_library.mjs` 餵一組最小 DOM 替身把 `docs/zh-TW/js/offline-library.js` 整份跑起來，驗它畫出來的結構與送給 service worker 的指令（版面與樣式驗不到，那要靠實機）。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發，`check_precache.mjs` 需要建置產物所以沒進 CI，改 `docs/zh-TW/sw.js` 時手動跑一次 |
+| 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 執行的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
+| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py`、`test_offline_library.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，並驗索引頁連出去的網址形狀命中得了快取的 key（需先建置）。其餘四支把原始碼原地抽出來單元測試，不需要建置：`test_sw_offline.mjs` 測 `docs/zh-TW/sw.js` 的離線路徑，`test_lang_preference.mjs` 測 `docs/overrides/base.html` 的語言導向，`test_offline_index.py` 測 `docs/hooks/offline_index.py` 的分組，`test_offline_library.mjs` 餵一組最小 DOM 替身把 `docs/zh-TW/js/offline-library.js` 整份執行起來，驗它畫出來的結構與送給 service worker 的指令（版面與樣式驗不到，那要靠實機）。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發，`check_precache.mjs` 需要建置產物所以沒進 CI，改 `docs/zh-TW/sw.js` 時手動執行一次 |
 
 ## 開發環境設置
 
@@ -250,29 +250,29 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 - **build_docs.yml**: 建置多語系文件並發布
   - 觸發條件: push to `docs` branch 且變更落在會改變產物的路徑（`docs/**`、根目錄的 `BECOME_ANONI*.md`、`tools/cf_purge.py` 與其測試、workflow 自己），或手動觸發
-  - 只動 `tools/` 其他檔案或 CI 設定時推 `docs` 不會建置，那是刻意的，產物沒有變。真的需要重跑從 Actions 頁面用 `workflow_dispatch`
+  - 只動 `tools/` 其他檔案或 CI 設定時推 `docs` 不會建置，那是刻意的，產物沒有變。真的需要重新建置時，從 Actions 頁面用 `workflow_dispatch`
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
   - 以 `aws s3 sync --delete` 上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`。單一步覆寫，站上任何時刻都有完整的一份，不再有先清空再上傳造成的空窗
   - 上傳後由 `tools/cf_purge.py` 清除這次產出網址的 Cloudflare 快取，範圍限 `/docs/`，不動 zone 內其他服務
 
-  **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 跑完，內容就已經上線，不需要額外的手動發布步驟。發布指令：
+  **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 執行完，內容就已經上線，不需要額外的手動發布步驟。發布指令：
 
   ```bash
   git push origin origin/main:refs/heads/docs
   ```
 
-- **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 與小工具區的 UI 字串跑 `tools/docs_style_lint.py`
+- **docs-style-lint.yml**: 對 PR 變更到的中文 Markdown 與小工具區的 UI 字串執行 `tools/docs_style_lint.py`
   - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md`、`docs/en/**/*.md` 與 linter 本身
   - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
-  - 這個 job 會擋 merge。error 級規則讓 linter 回 exit 1，job 就紅；warn 級規則仍只以 annotation 標在變更行上，不影響 exit code
+  - 這個 job 會擋 merge。error 級規則讓 linter 回 exit 1，job 就紅。warn 級規則仍只以 annotation 標在變更行上，不影響 exit code
   - 待辦：repo 設定尚未把這個 check 列為 branch protection 必過，所以目前擋得住 PR 的紅燈，擋不住有權限的人直接合併
 
-- **tools-tests.yml**: 跑 `tools/` 底下那幾支零相依的測試
+- **tools-tests.yml**: 執行 `tools/` 底下那幾支零相依的測試
   - 觸發路徑：`tools/**`、`docs/zh-TW/sw.js`、`docs/overrides/base.html`、`docs/hooks/**`
   - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_offline_library.mjs`（離線內容管理頁的介面）、`test_passphrase.mjs`（密語與密碼產生器的取樣與熵）、`test_qrcode.mjs`（QR code 的編碼往返）、`test_leaks.mjs`（指紋示範頁不送資料）、`test_cf_purge.py`（快取清除映射）
-  - 不需要建置產物，跑完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 跑
-  - `check_precache.mjs` 需要 `docs/output`，沒進 CI，改 `sw.js` 時手動跑一次
+  - 不需要建置產物，執行完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 執行
+  - `check_precache.mjs` 需要 `docs/output`，沒進 CI，改 `sw.js` 時手動執行一次
 
 - **check-ripe.yml** 與 **lookback-ooni.yml**: `asn_coverage/` 的資料抓取
   - 觸發路徑：`asn_coverage/**` 與各自的 workflow。原本任何 main 的 push 都觸發，2026-08-19 一天被 docs 的 PR 觸發 18 次，每次四個 job（2 OS × 2 Python），把並行額度佔滿，連 BuildDocs 都排不進去
@@ -284,9 +284,9 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 檢查項目：捏合放開不彈開、擋掉 iOS Safari 雙擊放大、網址關注區域的取景、變電所容量計版面（280 座 × 三語系 × 寬窄視窗）
 
 - **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
-  - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
+  - **push** 僅在 **`main`** 分支觸發。`workflow_dispatch` 與 `schedule` 維持可用
 - **lookback-ooni.yml**: 定期回溯 OONI 資料（`asn_coverage/`）
-  - **push** 僅在 **`main`** 分支觸發；`workflow_dispatch` 與 `schedule` 維持可用
+  - **push** 僅在 **`main`** 分支觸發。`workflow_dispatch` 與 `schedule` 維持可用
 
 ## 專案特定注意事項
 
@@ -297,7 +297,9 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - 使用 YAML front matter 設定文章 metadata（title, date, categories）
 - 支援 Vega-Lite 圖表（使用 ````vegalite` code fence）
 - 寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)（原始檔 `docs/zh-TW/community/contributor-handbook.md`）的「寫作風格規範」一節。要新增或修改規則先改那裡
-- 送 PR 前可先跑 `python3 tools/docs_style_lint.py <path>` 自檢，CI 會對變更的中文 Markdown 跑同一支
+- 寫作風格規範的套用範圍不限於 `docs/` 的內容。repo 根目錄的說明文件（`README.md`、`CONTRIBUTING.md`、`CLAUDE.md`、`NOTICE`、各子目錄的 `README.md`）同樣要遵守。這幾個檔案不在 CI 的觸發路徑內，改完自己執行一次 linter。`NOTICE` 沒有 `.md` 副檔名，linter 只收 `.md` 與 `.js`，那一份要人工看
+  - 例外是 `tools/README.md` 的規則表與規則說明那兩段。那裡逐條寫出被禁用的標點與句型，linter 掃自己的規則描述必然全紅，屬於正當引用，不要照著「修正」，會把規則表寫壞
+- 送 PR 前可先執行 `python3 tools/docs_style_lint.py <path>` 自檢，CI 會對變更的中文 Markdown 執行同一支
 - 語系的資料夾與對外 URL 規則不同：`docs/zh-TW/` 對應 `https://anoni.net/docs/`（預設語系不帶語系區段），`docs/zh-CN/` 對應 `/docs/zh-cn/`（URL 小寫），`docs/en/` 對應 `/docs/en/`
 - `/docs/zh-tw/` 是已停用的舊網址，由 Cloudflare Redirect Rule 301 導回 `/docs/`。它曾經是 `run_zh-tw.sh` 建出來的第二棵樹，內容與根路徑完全相同，兩邊各自 self-canonical 又各自進 sitemap，等於自製重複內容。語言選單的 zh-TW 項填 `/docs/` 就夠，不要再加回那份建置
 

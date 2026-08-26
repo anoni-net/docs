@@ -2,7 +2,7 @@
 
 把公開[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)「寫作風格規範」裡可機器判斷的硬規則做成檢查，輸出 `file:line` 與規則代碼。
 
-編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。三個語系都掃，但套用的規則不同。中文那組是標點與句型，套用在 zh-TW 與 zh-CN。英文那組獨立（破折號與分號在英文是正常標點），2026-08 起納入 docs/en，目前實作 `bold-lead-sentence`、`title-colon` 與 `machine-field` 三條。linter 依路徑自動選規則集，見 `is_english_doc`。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的 Markdown 自動跑。error 級擋 merge，warn 級只提醒。
+編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。三個語系都掃，但套用的規則不同。中文那組是標點與句型，套用在 zh-TW 與 zh-CN。英文那組獨立（破折號與分號在英文是正常標點），2026-08 起納入 docs/en，目前實作 `bold-lead-sentence`、`title-colon` 與 `machine-field` 三條。linter 依路徑自動選規則集，見 `is_english_doc`。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的 Markdown 自動執行。error 級擋 merge，warn 級只提醒。
 
 ## 用法
 
@@ -23,9 +23,9 @@ python3 tools/docs_style_lint.py --format json <path>
 
 ## CI：GitHub Action（只掃變更檔）
 
-舊文有不少遺留違規（見下方試跑結果）。CI 不全庫掃，只掃這次 PR 變更到的 Markdown，避免舊文擋住新貢獻。由 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 處理：`pull_request` 觸發、用 `git diff` 算出變更的 Markdown（`docs/zh-TW`、`docs/zh-CN`、`docs/en`），跑 `--format github` 把問題以 annotation 標在 PR 的變更行上。
+舊文有不少遺留違規（見下方試行結果）。CI 不全庫掃，只掃這次 PR 變更到的 Markdown，避免舊文擋住新貢獻。由 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 處理：`pull_request` 觸發、用 `git diff` 算出變更的 Markdown（`docs/zh-TW`、`docs/zh-CN`、`docs/en`），以 `--format github` 把問題以 annotation 標在 PR 的變更行上。
 
-**這個 job 會擋 merge**：有任一 error 時 linter 回 exit 1，job 就紅。warn 級規則只標 annotation，不影響 exit code，因為改法要看語境，機器不宜代勞。要讓 warn 也擋，得先把對應規則升成 error。
+**這個 job 會擋 merge**：有任一 error 時 linter 回 exit 1，job 就紅。warn 級規則只標 annotation，不影響 exit code，因為改法要看語境，機器不宜代勞。要讓 warn 也擋，需先把對應規則升成 error。
 
 repo 設定還沒把這個 check 列為 branch protection 必過，所以它擋得住 PR 的紅燈，擋不住有權限的人直接合併。
 
@@ -94,7 +94,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
   同一行結尾放 `<!-- docs-style-lint: disable-line -->` 可只關閉該行。
 
-## 試跑結果（2026-06，全 zh-TW）
+## 試行結果（2026-06，全 zh-TW）
 
 | 規則 | 數量 |
 |---|---|
@@ -110,7 +110,7 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 ## 上線進程
 
-1. 私有試跑穩定。✅
-2. 移入公開 `anoni-net/docs`，GitHub Action 對變更檔跑「warn 不擋」。✅
+1. 私有試行穩定。✅
+2. 移入公開 `anoni-net/docs`，GitHub Action 對變更檔執行「warn 不擋」。✅
 3. 升為 blocking gate。已拿掉 `continue-on-error`，error 級會擋。← 現在，尚缺 repo 設定的 branch protection 必過。
 4. 視需要做一次全庫清理 pass，把舊文遺留違規補掉。
