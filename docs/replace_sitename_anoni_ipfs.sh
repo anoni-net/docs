@@ -15,7 +15,7 @@ rm -f ./zh-TW/js/analytics.js ./zh-CN/js/analytics.js ./en/js/analytics.js
 # 集中的理由是公開 gateway 會停。Cloudflare 的 cf-ipfs.com 在 2024-08 除役並把流量
 # 導向 dweb.link 與 ipfs.io，Shipyard 又宣布 2026-09-30 停止營運那兩個
 # （https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/）。
-IPFS_GATEWAY="${IPFS_GATEWAY:-https://anoni-net.ipns.dweb.link}"
+IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 
 # site_url 是少數必須用絕對網址的地方，mkdocs 拿它產生 canonical、og:url 與 sitemap，
 # 填相對路徑會讓 sitemap 產不出來。zh-TW 讀 mkdocs.yml 的預設值，en 與 zh-CN 由

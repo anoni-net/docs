@@ -8,7 +8,7 @@ IPFS_API="--api /ip4/127.0.0.1/tcp/5001"
 # 需要重新匯入 `docker exec -i ipfs_host ipfs key import anoni-net /data/ipfs/keystore/key_mfxg63tjfvsg6y3t`
 IPFS_IPNS_ADDR="k51qzi5uqu5dlfm2jj0f70ex3r3babmwy8qh071inwknttr7wqa3uhdwvlmrmw"
 # 公開入口。由 build_docs_anoni_ipfs.sh export 進來，單獨執行時走 fallback。
-IPFS_GATEWAY="${IPFS_GATEWAY:-https://anoni-net.ipns.dweb.link}"
+IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 TUNNEL_PID=""
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

@@ -20,7 +20,7 @@ set -euo pipefail
 # site_url，mkdocs*.yml 的 extra.ipfs_gateway 用它產生頁尾連結，upload_to_ipfs.sh
 # 用它 pre-warm。鏡像的內部連結是網站根目錄的相對路徑，換 gateway 只要改這個環境變數，
 # 不必重建鏡像。
-export IPFS_GATEWAY="${IPFS_GATEWAY:-https://anoni-net.ipns.dweb.link}"
+export IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 
 # macOS 本地建置前置：
 # - gnu-sed：BSD sed 不接受 `sed -i 's|x|y|g'` 格式
