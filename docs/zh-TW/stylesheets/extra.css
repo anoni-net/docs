@@ -451,3 +451,61 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .md-typeset table:not([class]) {
   width: 100%;
 }
+
+/* ==========================================================================
+   部署版本小標記與 IPFS 橫幅
+
+   頁首那顆藥丸標示這份產物是 onion 還是 IPFS 版，標準站不顯示。三個語系共用同一支
+   partials/header.html（符號連結），文案走 config.extra。
+
+   外框用 currentcolor，跟著頁首的前景色走，換主題色不用回來改這裡。
+
+   窄螢幕只留圖示：頁首右側已經有語言、搜尋、原始碼三個按鈕，再擠一段文字會把
+   站名壓掉。
+   ========================================================================== */
+
+.anoni-variant {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0 0.2rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid currentcolor;
+  border-radius: 999px;
+  color: inherit;
+  font-size: 0.62rem;
+  line-height: 1.7;
+  white-space: nowrap;
+  opacity: 0.82;
+  transition: opacity 125ms;
+}
+
+.anoni-variant:hover,
+.anoni-variant:focus-visible {
+  opacity: 1;
+}
+
+.anoni-variant__icon {
+  display: inline-flex;
+}
+
+.anoni-variant__icon svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: currentcolor;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .anoni-variant__label {
+    display: none;
+  }
+
+  .anoni-variant {
+    padding: 0.15rem 0.35rem;
+  }
+}
+
+.anoni-announce__host {
+  font-family: var(--md-code-font-family);
+  overflow-wrap: anywhere;
+}

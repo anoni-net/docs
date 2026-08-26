@@ -51,6 +51,10 @@ jobs:
     env:
       # clearnet 產物維持在既有的 docs/，onion 產物放同一個 bucket 的 docs-onion/。
       S3_PREFIX: ${{ matrix.variant == 'onion' && 'docs-onion' || 'docs' }}
+      # 頁首的版本小標記讀這個值。matrix 的兩個值剛好就是模板要的字串，
+      # 本機的 build_docs_anoni_onion.sh 也 export 同一個名字。IPFS 版不在這個
+      # workflow 裡建，它由 build_docs_anoni_ipfs.sh 帶 BUILD_VARIANT=ipfs。
+      BUILD_VARIANT: ${{ matrix.variant }}
     defaults:
       run:
         working-directory: ./docs

@@ -454,3 +454,63 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .md-typeset table:not([class]) {
   width: 100%;
 }
+
+/* ==========================================================================
+   Deployment variant chip and the IPFS banner
+
+   The pill in the header marks whether this build is the onion or the IPFS edition;
+   the standard site shows nothing. All three languages share one
+   partials/header.html through a symlink, so the wording comes from config.extra.
+
+   The border uses currentcolor so it follows the header foreground and survives a
+   palette change without edits here.
+
+   On narrow screens only the icon remains: the header already carries the language,
+   search and source buttons, and one more text run would squeeze out the site name.
+   ========================================================================== */
+
+.anoni-variant {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0 0.2rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid currentcolor;
+  border-radius: 999px;
+  color: inherit;
+  font-size: 0.62rem;
+  line-height: 1.7;
+  white-space: nowrap;
+  opacity: 0.82;
+  transition: opacity 125ms;
+}
+
+.anoni-variant:hover,
+.anoni-variant:focus-visible {
+  opacity: 1;
+}
+
+.anoni-variant__icon {
+  display: inline-flex;
+}
+
+.anoni-variant__icon svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: currentcolor;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .anoni-variant__label {
+    display: none;
+  }
+
+  .anoni-variant {
+    padding: 0.15rem 0.35rem;
+  }
+}
+
+.anoni-announce__host {
+  font-family: var(--md-code-font-family);
+  overflow-wrap: anywhere;
+}

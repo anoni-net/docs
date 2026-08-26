@@ -22,6 +22,9 @@ set -euo pipefail
 # 不必重建鏡像。
 export IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 
+# 頁首的版本小標記與 IPFS 版專屬的橫幅讀這個值。
+export BUILD_VARIANT=ipfs
+
 # macOS 本地建置前置：
 # - gnu-sed：BSD sed 不接受 `sed -i 's|x|y|g'` 格式
 # - DYLD_FALLBACK_LIBRARY_PATH：cairosvg 需 libcairo.2.dylib，SIP 會 strip 子 sh 的 DYLD_*

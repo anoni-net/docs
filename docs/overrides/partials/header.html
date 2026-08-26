@@ -1,0 +1,97 @@
+{#-
+  Fork of mkdocs-material partials/header.html: 加一個部署版本的小標記。
+  升級 mkdocs-material 時比對上游這支有沒有變，只有 anoni-variant 那一段是我們加的。
+
+  theme-partial-from: mkdocs-material 9.7.7
+-#}
+{% set class = "md-header" %}
+{% if "navigation.tabs.sticky" in features %}
+  {% set class = class ~ " md-header--shadow md-header--lifted" %}
+{% elif "navigation.tabs" not in features %}
+  {% set class = class ~ " md-header--shadow" %}
+{% endif %}
+<header class="{{ class }}" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            {{ config.site_name }}
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            {% if page.meta and page.meta.title %}
+              {{ page.meta.title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+    {#-
+      部署版本的小標記。標準站什麼都不顯示（讀者用一般網路連一般網站，沒有要說的），
+      onion 與 IPFS 版各掛一個，點下去是〈你正在用哪一種方式閱讀〉。
+      文案走 config，因為這支 partial 是三個語系共用的符號連結。
+      純 HTML 加 CSS，Tor Browser 把 JS 關到最嚴也看得到。
+    -#}
+    {% if config.extra.build_variant == "onion" or config.extra.build_variant == "ipfs" %}
+      {% if config.extra.build_variant == "onion" %}
+        {% set variant_label = config.extra.variant_label_onion %}
+        {% set variant_icon = "simple/torbrowser" %}
+      {% else %}
+        {% set variant_label = config.extra.variant_label_ipfs %}
+        {% set variant_icon = "simple/ipfs" %}
+      {% endif %}
+      <a
+        href="{{ 'about/how-you-are-reading/' | url }}"
+        class="anoni-variant anoni-variant--{{ config.extra.build_variant }}"
+        title="{{ variant_label }}"
+      >
+        <span class="anoni-variant__icon">
+          {% include ".icons/" ~ variant_icon ~ ".svg" %}
+        </span>
+        <span class="anoni-variant__label">{{ variant_label }}</span>
+      </a>
+    {% endif %}
+    {% if config.theme.palette %}
+      {% if not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+    {% endif %}
+    {% if not config.theme.palette is mapping %}
+      {% include "partials/javascripts/palette.html" %}
+    {% endif %}
+    {% if config.extra.alternate %}
+      {% include "partials/alternate.html" %}
+    {% endif %}
+    {% if "material/search" in config.plugins %}
+      {% set search = config.plugins["material/search"] | attr("config") %}
+      {% if search.enabled %}
+        <label class="md-header__button md-icon" for="__search">
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+    {% endif %}
+    {% if config.repo_url %}
+      <div class="md-header__source">
+        {% include "partials/source.html" %}
+      </div>
+    {% endif %}
+  </nav>
+  {% if "navigation.tabs.sticky" in features %}
+    {% if "navigation.tabs" in features %}
+      {% include "partials/tabs.html" %}
+    {% endif %}
+  {% endif %}
+</header>
