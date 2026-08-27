@@ -21,6 +21,8 @@ For general digital safety guidance written for a global audience, well-establis
 
 ## :material-target: Four ways to use this site
 
+If one of civil society, a newsroom, independent journalism, open-source development, or general reading describes you, [start by role](./start/index.md) has a reading path for each. Otherwise pick from the four below.
+
 <div class="grid cards" markdown>
 
 - :material-bookmark-check-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Cite our work**

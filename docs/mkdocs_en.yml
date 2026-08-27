@@ -12,6 +12,17 @@ repo_name: anoni-net/docs
 copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
+  # Role-based starting paths. Order matches the five cards in start/index.md; change
+  # both together. These pages only aggregate — every link points at an existing page
+  # and no new material lives here. media.md and independent-journalist.md link to
+  # section anchors in scenarios/journalist.md, so retitling a section breaks them.
+  - !ENV [NAV_START, "Start"]:
+      - start/index.md
+      - start/civil-society.md
+      - start/media.md
+      - start/independent-journalist.md
+      - start/developer.md
+      - start/everyone.md
   - !ENV [NAV_ABOUT, "About"]:
       - about/index.md
       - about/how-you-are-reading.md

@@ -12,6 +12,17 @@ repo_name: 匿名網路社群文件
 copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
+  # 依身分的起步路徑，順序跟 start/index.md 的五張卡一致，改一邊要改另一邊。
+  # 這一組頁面只做聚合，內容全部指向站上既有文章，本身不寫新知識。改文章路徑或
+  # 改章節標題時記得回頭檢查，media.md 與 independent-journalist.md 連的是
+  # scenarios/journalist.md 的中文錨點，標題一改連結就斷。
+  - !ENV [NAV_START, "開始"]:
+      - start/index.md
+      - start/civil-society.md
+      - start/media.md
+      - start/independent-journalist.md
+      - start/developer.md
+      - start/everyone.md
   - !ENV [NAV_GUIDES, "指南"]:
       - guides/index.md
       - help/index.md
