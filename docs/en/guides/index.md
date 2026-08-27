@@ -1,5 +1,6 @@
 ---
 title: Guides
+subtitle: Concept through practice
 description: The core reading paths through this site — concepts, tools, scenarios, advanced material, and curated external reports.
 icon: material/compass-outline
 ---

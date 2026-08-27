@@ -1,5 +1,6 @@
 ---
 title: Community & Collaboration
+subtitle: Taking part, and who we are
 description: How to reach the anoni.net community — Matrix, encrypted email, GitHub, and what we welcome from international collaborators, researchers, and contributors.
 icon: material/account-group
 ---

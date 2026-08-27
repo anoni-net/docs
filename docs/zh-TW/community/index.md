@@ -1,5 +1,6 @@
 ---
 title: 社群參與
+subtitle: 參與方式、節點與活動
 description: 2026 主題說明、如何參與、社群自架服務
 icon: material/account-group
 ---

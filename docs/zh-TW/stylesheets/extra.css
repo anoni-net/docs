@@ -509,3 +509,36 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   font-family: var(--md-code-font-family);
   overflow-wrap: anywhere;
 }
+
+/* ==========================================================================
+   左側 sidebar：nav 連結底下的 subtitle（frontmatter 的 subtitle 欄位）
+   套用範圍：所有帶 subtitle 的 nav 連結，桌面 sidebar 與窄螢幕抽屜都套用
+
+   theme 把它渲染成 <span class="md-ellipsis">標題<br><small>副標</small></span>，
+   對 <small> 沒有任何規則，於是行高沿用內文那一套。副標一長就斷成兩行，兩行之間
+   加上 <br> 的換行，整塊比標題本身還高。
+
+   <br> 換成 small 的 display:block，換行由區塊產生，間距改用 margin 控制，
+   行高壓到 1.2。text-wrap:pretty 讓瀏覽器盡量不留下太短的末行，Chrome 與 Safari
+   有效，Firefox 目前會忽略，所以它只是加分，中文的斷行主要還是靠文案長度控制。
+   ========================================================================== */
+
+.md-nav__link .md-ellipsis br {
+  display: none;
+}
+
+.md-nav__link .md-ellipsis small {
+  display: block;
+  margin-top: 0.05rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+}
+
+/* 窄螢幕收進抽屜之後可用寬度比桌面 sidebar 更窄，字級卻更大（12.8px 對 11.2px），
+   同一句在這裡會多斷一行，中文還會掉下一兩個字。縮到 0.58rem（11.6px，仍比桌面
+   那份大）之後，360、390、768 三個寬度的抽屜裡所有副標都收得回一行。 */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__link .md-ellipsis small {
+    font-size: 0.58rem;
+  }
+}
