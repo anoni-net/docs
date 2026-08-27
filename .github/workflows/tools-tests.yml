@@ -45,6 +45,9 @@ on:
       # overrides 的 main.html 是 test_before_send.mjs 的來源，送出前的白名單寫在裡面
       - "docs/overrides/base.html"
       - "docs/overrides/main.html"
+      # 語言切換器的樣板。改壞的方式是「目前語系整筆跳過」，畫面照樣好看，
+      # 壞掉的是首頁的偏好轉址與底部的語言選擇卡片
+      - "docs/overrides/partials/alternate.html"
       - "docs/overrides_cn/main.html"
       - "docs/overrides_en/main.html"
       - "docs/hooks/**"
@@ -77,6 +80,10 @@ jobs:
       # 語言偏好只在預設語系的首頁套用，其餘一律不動
       - name: 語言偏好導向規則
         run: node tools/test_lang_preference.mjs
+
+      # 語言切換器不列出目前語系，但那一筆要留在 DOM 裡給偏好轉址與語言選擇卡片用
+      - name: 語言切換器藏起目前語系
+        run: python3 tools/test_lang_switcher.py
 
       # 離線內容管理頁的章節分組與排序，照 nav 而不是檔案的字母序
       - name: 離線內容索引
