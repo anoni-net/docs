@@ -41,6 +41,8 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 ## Tier 1：本工具會自動檢查
 
+<!-- docs-style-lint: disable -->
+
 | 規則代碼 | 嚴重度 | 內容 |
 |---|---|---|
 | `em-dash` | error | 破折號「—」當插入語（表格空資料格 `| — |` 放行）|
@@ -63,6 +65,8 @@ git diff --name-only --diff-filter=ACM origin/main... \
 | `machine-field` | warn | 機器欄位名直接出現在內文（如 `web_connectivity`）|
 | `title-missing` / `frontmatter-summary` | warn | blog 無 H1 標題 / 無 summary |
 
+<!-- docs-style-lint: enable -->
+
 ## Tier 2：本工具「不」檢查，需 AI 或人工複審
 
 這些規則需要語意判斷，正則做不準，刻意不在此掃，避免假裝涵蓋了。校稿或 review 時仍要靠人或 AI 輔助：
@@ -76,10 +80,14 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 ## 已知邊界（會誤報或需人判斷）
 
+<!-- docs-style-lint: disable -->
+
 - `em-dash`：若破折號出現在外部專有名詞的連結文字（例 `[Cloudflare Radar — Iran](...)`），會被標記。必要時改寫標籤或人工放行。表格空資料格 `| — |`（整格只有一個破折號）已自動放行，破折號跟其他文字混在同一格仍會被標記。
 - `colloquial-jiang`、`definition-phrasing`：列為 warn 而非 error，因為「講清楚」、「指的是什麼呢」等仍有正當用法，只當提醒。
 - `zhe-repeat`：刻意的排比句會被標記，例如「這個 ASN、這個時段、這個網站」。多數情況把後面幾個「這個」拿掉會更好讀，真的要保留就用 `disable-line`。距離門檻 8 個字是對全 429 篇校準的，放寬會開始收進正當用法。
 - `colloquial-*` 系列：一律 warn 而非 error，因為替換詞要看語境（「跑」依情況是執行、架設、運作或營運），機器不宜直接改。照錄他人說法時（例：把讀者感受寫成「跑很慢」）屬正當用法，已列入例外，其餘情況請人工判斷後改寫。
+
+<!-- docs-style-lint: enable -->
 
 ## 關閉特定檢查
 

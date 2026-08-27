@@ -27,7 +27,21 @@ Every one of these starts with saying hello on Matrix. The community works async
 
 Traditional Chinese (`docs/zh-TW`) is the source of truth for the site, and its style rules cover Chinese punctuation, classifier repetition, register, and translated terminology. Those rules do not transfer, and several are actively wrong when applied to English. Em dashes, for example, are banned in Chinese body text and are ordinary English typography.
 
-What follows is the English rule set. If you are writing or reviewing Chinese, use the [Chinese contributor handbook](https://anoni.net/docs/community/contributor-handbook/){target="_blank"} (in Chinese) instead, which is the authority for `zh-TW` and `zh-CN`. The automated style linter in CI only covers `docs/zh-TW` and `docs/zh-CN`, so the English rules below rest on human review.
+What follows is the English rule set. If you are writing or reviewing Chinese, use the [Chinese contributor handbook](https://anoni.net/docs/community/contributor-handbook/){target="_blank"} (in Chinese) instead, which is the authority for `zh-TW` and `zh-CN`. Since 2026-08 the automated style linter in CI also covers `docs/en`, though only three of the English rules are mechanised so far (`bold-lead-sentence`, `title-colon`, `machine-field`). The rest of the English rules below rest on human review.
+
+### What these rules cover
+
+The rules apply to the documentation under `docs/` in all three locales, and to the repository's own explanatory files: `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`, and `NOTICE` at the root, plus the `README.md` in each subdirectory. Readers meet the project through those files, so they follow the same standard as the site.
+
+The `docs-style-lint` job only fires on Markdown changes under `docs/zh-TW`, `docs/zh-CN`, and `docs/en`. After editing an explanatory file, run the linter yourself:
+
+```bash
+python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
+```
+
+`NOTICE` has no `.md` extension and the linter only accepts `.md` and `.js`, so that one needs a human read.
+
+Rule documents spell out every banned punctuation mark and sentence pattern, so the linter flags its own rule descriptions. This handbook and the workspace projection are exempted by filename through the linter's `RULE_DOCS`, and the rule table and known-limits section in `tools/README.md` are wrapped in `<!-- docs-style-lint: disable -->` and `enable`. Follow the same approach when writing rule documentation, and leave the quoted examples as they are.
 
 ### Voice and positioning
 

@@ -298,7 +298,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - 支援 Vega-Lite 圖表（使用 ````vegalite` code fence）
 - 寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)（原始檔 `docs/zh-TW/community/contributor-handbook.md`）的「寫作風格規範」一節。要新增或修改規則先改那裡
 - 寫作風格規範的套用範圍不限於 `docs/` 的內容。repo 根目錄的說明文件（`README.md`、`CONTRIBUTING.md`、`CLAUDE.md`、`NOTICE`、各子目錄的 `README.md`）同樣要遵守。這幾個檔案不在 CI 的觸發路徑內，改完自己執行一次 linter。`NOTICE` 沒有 `.md` 副檔名，linter 只收 `.md` 與 `.js`，那一份要人工看
-  - 例外是 `tools/README.md` 的規則表與規則說明那兩段。那裡逐條寫出被禁用的標點與句型，linter 掃自己的規則描述必然全紅，屬於正當引用，不要照著「修正」，會把規則表寫壞
+  - 規則文件本身逐條寫出被禁用的標點與句型，掃自己的規則描述必然全紅。貢獻者百科與這份投影靠 linter 的 `RULE_DOCS` 依檔名豁免，`tools/README.md` 的規則表與已知邊界兩段改用 `<!-- docs-style-lint: disable -->` 與 `enable` 包住。往後寫規則說明時照同一個做法，不要改掉引用的例子
 - 送 PR 前可先執行 `python3 tools/docs_style_lint.py <path>` 自檢，CI 會對變更的中文 Markdown 執行同一支
 - 語系的資料夾與對外 URL 規則不同：`docs/zh-TW/` 對應 `https://anoni.net/docs/`（預設語系不帶語系區段），`docs/zh-CN/` 對應 `/docs/zh-cn/`（URL 小寫），`docs/en/` 對應 `/docs/en/`
 - `/docs/zh-tw/` 是已停用的舊網址，由 Cloudflare Redirect Rule 301 導回 `/docs/`。它曾經是 `run_zh-tw.sh` 建出來的第二棵樹，內容與根路徑完全相同，兩邊各自 self-canonical 又各自進 sitemap，等於自製重複內容。語言選單的 zh-TW 項填 `/docs/` 就夠，不要再加回那份建置
