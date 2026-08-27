@@ -27,6 +27,11 @@ on:
       - "docs/zh-TW/js/*.js"
       - "tools/docs_style_lint.py"
       - "tools/test_docs_style_lint.py"
+      # start/ 的三語系對齊。掛在這支而不是 tools-tests.yml，是因為錨點檢查看的是
+      # 被連結的那一篇（例如 scenarios/journalist.md）的小標，只有這裡的 paths
+      # 涵蓋得到「改的是目標文章、沒碰 start/」這種 PR。
+      - "tools/check_start_parity.py"
+      - "tools/test_check_start_parity.py"
       - ".github/workflows/docs-style-lint.yml"
 
 permissions:
@@ -51,6 +56,16 @@ jobs:
       # 「得先」的例外字集繁簡不對稱導致誤報，都是抽樣看不出來的覆蓋缺口。
       - name: 測試 linter 規則
         run: python3 tools/test_docs_style_lint.py
+
+      # 同上，檢查腳本自己回綠燈是最糟的壞法，所以先測它。
+      - name: 測試 start 對齊檢查
+        run: python3 tools/test_check_start_parity.py
+
+      # 三語系檔名清單、nav 收錄、章節錨點。這三件 mkdocs 都不擋：hreflang 是無條件
+      # 產生的，nav 漏收只給 INFO，links.anchors 預設也是 INFO（實測改壞錨點照樣
+      # Documentation built）。整區都是連結，斷了讀者只會落在文章開頭。
+      - name: start 三語系對齊
+        run: python3 tools/check_start_parity.py
 
       - name: 掃描變更的 Markdown 與 UI 字串
         run: |
