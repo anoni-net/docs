@@ -27,15 +27,15 @@ source .venv/bin/activate
 mkdocs serve   # 預設 zh-TW
 ```
 
-或使用腳本啟動不同語言版本：
+開啟瀏覽器訪問 `http://127.0.0.1:8000`。
+
+要驗證三個語系，用 `run_*.sh` 建置到 `output/`。三支腳本各自 export 該語系需要的環境變數，直接執行 `mkdocs build -f mkdocs_en.yml` 會因為 `DOCS_DIR` 之類的變數落回預設值而產生假警報：
 
 ```bash
 sh run.sh          # zh-TW（預設語系，建在根路徑）
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
-
-開啟瀏覽器訪問 `http://127.0.0.1:8000`。
 
 ## 建置文件
 
@@ -46,6 +46,45 @@ sh build_docs_anoni_onion.sh  # Onion 版
 ```
 
 注意：`build_docs_anoni.sh` 與 `build_docs_anoni_onion.sh` 內含伺服器專用路徑，僅供特定部署環境使用。`replace_sitename_anoni_ipfs.sh` 會對產出與來源做 `sed -i` 修改，請僅在乾淨建置環境執行。
+
+## 本地建置排錯
+
+### 圖表在本地是空白的，線上卻正常
+
+先看頁面原始碼裡載入 vega-embed 的那行。壞掉時長這樣：
+
+```
+../../../../https:/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+正常時會指向本地副本：
+
+```
+../../../../assets/external/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+Material 的 privacy plugin 會把 `mkdocs.yml` 裡 `extra_javascript` 的 CDN 資源下載到 `.cache/plugin/privacy/`。當某個資源的 URL 從無子路徑改成有子路徑時，舊快取會擋住新的目錄：
+
+```yaml
+- https://cdn.jsdelivr.net/npm/vega-embed@6                          # 舊：快取存成一個檔案
+- https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js  # 新：快取需要一個同名目錄
+```
+
+同名的舊檔案佔住路徑，目錄建不起來，下載落空，URL 也就沒被改寫成本地路徑，`https://` 被當成相對路徑接在頁面路徑後面。CI 每次都是乾淨 checkout，不會有舊快取，所以只有本地會壞。`mkdocs build` 的產出同樣會壞，不只是 `mkdocs serve`。
+
+刪掉擋路的那一項後重建：
+
+```bash
+rm .cache/plugin/privacy/assets/external/cdn.jsdelivr.net/npm/vega-embed@6
+```
+
+不確定是哪一項時，整包刪掉重建也可以，代價是下次建置要重新下載：
+
+```bash
+rm -rf .cache/plugin/privacy
+```
+
+`.cache/` 已列入 `.gitignore`，屬於本地快取，刪掉不影響版本控制。往後任何 `extra_javascript` 的 CDN 網址改變路徑結構，都可能再遇到，處理方式相同。
 
 ## 多語系架構
 
@@ -100,15 +139,15 @@ source .venv/bin/activate
 mkdocs serve   # Default: zh-TW
 ```
 
-Or use scripts to serve a specific language:
+Open `http://127.0.0.1:8000` in your browser.
+
+To verify all three locales, build into `output/` with the `run_*.sh` scripts. Each exports the environment variables that locale needs; running `mkdocs build -f mkdocs_en.yml` directly lets variables such as `DOCS_DIR` fall back to their defaults and raises spurious warnings:
 
 ```bash
-sh run.sh          # zh-TW (default language, built at the site root)
+sh run.sh          # zh-TW (default locale, built at the site root)
 sh run_zh-cn.sh    # zh-CN
 sh run_en.sh       # en
 ```
-
-Open `http://127.0.0.1:8000` in your browser.
 
 ## Building the Docs
 
@@ -119,6 +158,45 @@ sh build_docs_anoni_onion.sh  # Onion build
 ```
 
 Note: `build_docs_anoni.sh` and `build_docs_anoni_onion.sh` contain server-specific paths and are intended for a specific deployment environment only. `replace_sitename_anoni_ipfs.sh` modifies output and source with `sed -i`; run only in a clean build environment.
+
+## Local Build Troubleshooting
+
+### Charts are blank locally but fine in production
+
+Check the script tag that loads vega-embed in the page source. When broken, it looks like this:
+
+```
+../../../../https:/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+When working, it points at the local copy:
+
+```
+../../../../assets/external/cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js
+```
+
+Material's privacy plugin downloads the CDN resources listed under `extra_javascript` in `mkdocs.yml` into `.cache/plugin/privacy/`. When a resource's URL changes from having no sub-path to having one, the stale cache entry blocks the new directory:
+
+```yaml
+- https://cdn.jsdelivr.net/npm/vega-embed@6                          # old: cached as a file
+- https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js  # new: cache needs a directory of the same name
+```
+
+The old file occupies the path, the directory cannot be created, the download silently fails, and the URL is never rewritten to a local path, so `https://` gets appended to the page path as if it were relative. CI always starts from a clean checkout and has no stale cache, so only local builds break. This affects `mkdocs build` output as well, not just `mkdocs serve`.
+
+Delete the blocking entry and rebuild:
+
+```bash
+rm .cache/plugin/privacy/assets/external/cdn.jsdelivr.net/npm/vega-embed@6
+```
+
+If you are not sure which entry is at fault, dropping the whole cache is safe. The cost is re-downloading on the next build:
+
+```bash
+rm -rf .cache/plugin/privacy
+```
+
+`.cache/` is already listed in `.gitignore`, so removing it has no effect on version control. Any future `extra_javascript` CDN URL that changes its path structure can hit the same issue, with the same fix.
 
 ## Multilingual Structure
 

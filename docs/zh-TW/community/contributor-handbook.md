@@ -23,6 +23,20 @@ icon: material/book-open-variant
 
 ## 寫作風格規範
 
+### 套用範圍
+
+規範適用於 `docs/` 底下三個語系的文件內容，也適用於 repo 自己的說明文件：根目錄的 `README.md`、`CONTRIBUTING.md`、`CLAUDE.md`、`NOTICE`，以及各子目錄的 `README.md`。讀者會從那些檔案認識專案，寫法跟站上的文件同一套。
+
+CI 的 `docs-style-lint` 只在 `docs/zh-TW`、`docs/zh-CN`、`docs/en` 的 Markdown 變更時觸發。說明文件改完需要自己執行一次：
+
+```bash
+python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
+```
+
+`NOTICE` 沒有 `.md` 副檔名，linter 只收 `.md` 與 `.js`，那一份要人工看。
+
+規則文件本身逐條寫出被禁用的標點與句型，掃自己的規則描述必然全紅。這份百科與工作區的投影檔靠 linter 的 `RULE_DOCS` 依檔名豁免，`tools/README.md` 的規則表與已知邊界兩段用 `<!-- docs-style-lint: disable -->` 與 `enable` 包住。寫規則說明時照同一個做法，引用的例子要保持原樣。
+
 ### 禁用句型與標點
 
 - 不使用 `——`（雙破折號）作為句中插入語。需要補充說明時，改用冒號、逗號，或拆成兩句

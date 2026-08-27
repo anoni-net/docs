@@ -103,6 +103,8 @@ CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個�
 （哪條纜線連哪兩地），事實不受著作權保護。座標的彙整與精度判斷是本專案自己做的。
 
 每一筆的出處逐條記在 `tools/data/tw_landing.toml`，產生器是 `tools/gen_tw_landing.py`。
+那個 toml 是這份資料的來源檔，授權跟著 `tw-landing.json` 走，不受 `tools/LICENSE`
+的 MIT 涵蓋，`tools/LICENSE` 已在檔頭把 `tools/data/` 排除。
 輸出的 `precision` 欄位標示每一筆的可信程度，從「站址」到「鄉鎮」分五級，引用時要
 一併看那個欄位。這份是 v1，已知缺口寫在 toml 的檔頭。
 
