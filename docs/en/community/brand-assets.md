@@ -380,6 +380,8 @@ social:
     background_color: "#003e57"
 ```
 
+A background image uses the same option. The path in `background_image` is relative to the directory mkdocs runs in, which is `docs/`, so write it as `zh-TW/assets/images/xxx.png`. A missing file fails the build. Give the image on its own and the background colour becomes an 80% cyan-900 scrim, which keeps white text readable over any image. For the raw image, add `background_color: transparent`, at the cost of losing the title and the footer URL on a light image.
+
 Pages that need artwork of their own (event key visuals, the interactive section) take a different route: set `og.enabled: true` and `og.image` in the front matter, and the site template uses that image and skips the generated one. The COSCUP event pages and the interactive section work this way.
 
 ## :material-alert-octagon-outline: What not to do

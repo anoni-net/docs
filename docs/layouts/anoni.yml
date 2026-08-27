@@ -26,14 +26,24 @@ definitions:
   - &brand_cyan_500 "#00aeff"
   - &brand_cyan_700 "#0089bf"
 
-  # 背景。預設 cyan-900，單頁可用 front matter 的 social.cards_layout_options 換掉
+  # 背景。預設 cyan-900，單頁可用 front matter 的 social.cards_layout_options 換掉。
+  #
+  # 有給底圖時預設值改成半透明的 cyan-900。外掛畫背景的順序是先貼圖再填色
+  # （social/plugin.py 的 _render_background），不透明的底色會把圖整張蓋掉，
+  # 只給 background_image 的人會拿到一張跟平常一模一樣的卡片，而且沒有任何錯誤
+  # 訊息。壓一層 80% 的遮罩則是讓白字在任何一張底圖上都讀得到，淺色圖直出的話
+  # 標題與頁尾網址會消失。要原圖直出就明寫 background_color: transparent。
   - &background_color >-
     {%- if layout.background_color -%}
       {{ layout.background_color }}
+    {%- elif layout.background_image -%}
+      #003e57cc
     {%- else -%}
       #003e57
     {%- endif -%}
 
+  # 底圖路徑相對於執行 mkdocs 的目錄，也就是 docs/，寫成 zh-TW/assets/images/x.png
+  # 這種形式。檔案找不到時外掛會讓建置失敗。
   - &background_image >-
     {{ layout.background_image | x }}
 
