@@ -255,6 +255,10 @@ extra:
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
+  # 建在根路徑、網址上沒有語系區段的那一個語系。三份設定填的是同一個值，因為講的是
+  # 這個部署長什麼樣，跟正在建哪一份無關。base.html 的偏好轉址只在這個語系的首頁動手，
+  # /docs/en/ 那種網址上已經指定過語系的入口不受偏好影響。
+  default_lang: zh-TW
   # 這份產物是哪一個語系。語言切換器拿它把「目前語系」那一項藏起來，選單上只留切得
   # 過去的語言。值取自底下 alternate 的 lang，不要填 theme.language：簡體那份的
   # theme.language 是 material 語言包代號 zh，跟 alternate 的 zh-CN 對不起來。

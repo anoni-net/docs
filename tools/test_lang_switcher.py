@@ -17,6 +17,12 @@
 順便驗 current_lang 有沒有寫錯。值對不上任何一筆 alternate 的 lang 時不會有錯誤
 訊息，只是三個語系的選單都恢復成列出自己，那種壞法沒有人會注意到。
 
+一併守 default_lang，也就是「建在根路徑、網址上沒有語系區段的那一個語系」。
+base.html 原本取 extra.alternate 的第一筆，而 mkdocs_en.yml 把 English 排第一是為了
+選單版面，兩件事被綁在一起之後，en 建置出來的 DEFAULT_LANG 成了 en，偏好為 zh-TW
+的讀者打開 /docs/en/ 首頁會被轉走。三份設定各自寫明同一個值，這支測試盯著它們一致，
+而且那個語系的 link 真的是站台根。
+
 不碰網路，不需要建置產物，零外部相依。
 
 用法：
@@ -31,6 +37,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PARTIAL = ROOT / "docs" / "overrides" / "partials" / "alternate.html"
+BASE = ROOT / "docs" / "overrides" / "base.html"
 CONFIGS = [
     ROOT / "docs" / "mkdocs.yml",
     ROOT / "docs" / "mkdocs_cn.yml",
@@ -44,12 +51,28 @@ def fail(message: str) -> None:
     failures.append(message)
 
 
-def alternate_langs(text: str) -> list[str]:
-    """取出 extra.alternate 底下每一筆的 lang，順序照原檔。"""
+def alternate_entries(text: str) -> list[tuple[str, str]]:
+    """取出 extra.alternate 底下每一筆的 (lang, link)，順序照原檔。"""
     block = re.search(r"\n  alternate:\n((?:    .*\n|\n)*)", text)
     if not block:
         return []
-    return re.findall(r"^\s+lang:\s*(\S+)\s*$", block.group(1), re.M)
+    entries: list[tuple[str, str]] = []
+    link = None
+    for line in block.group(1).splitlines():
+        found_link = re.match(r"^\s+link:\s*(\S+)\s*$", line)
+        if found_link:
+            link = found_link.group(1)
+            continue
+        found_lang = re.match(r"^\s+lang:\s*(\S+)\s*$", line)
+        if found_lang and link is not None:
+            entries.append((found_lang.group(1), link))
+            link = None
+    return entries
+
+
+def alternate_langs(text: str) -> list[str]:
+    """只要 lang，順序照原檔。"""
+    return [lang for lang, _ in alternate_entries(text)]
 
 
 def test_menu_renders_every_language() -> None:
@@ -124,12 +147,71 @@ def test_every_language_is_current_somewhere() -> None:
         fail(f"沒有任何一份設定把這些語系標成 current_lang：{', '.join(sorted(missing))}")
 
 
+def test_default_lang_is_the_same_everywhere() -> None:
+    """default_lang 講的是這個部署長什麼樣，三份設定要填同一個值。"""
+    seen: dict[str, str] = {}
+    for path in CONFIGS:
+        text = path.read_text(encoding="utf-8")
+        found = re.search(r"^  default_lang:\s*(\S+)\s*$", text, re.M)
+        if not found:
+            fail(f"{path.name}: extra 底下缺 default_lang，首頁的偏好轉址會判錯語系")
+            continue
+        seen[path.name] = found.group(1)
+    if len(set(seen.values())) > 1:
+        detail = "、".join(f"{k} 是 {v}" for k, v in seen.items())
+        fail(f"三份設定的 default_lang 對不起來（{detail}）")
+
+
+def test_default_lang_sits_at_the_site_root() -> None:
+    """default_lang 那一筆的 link 要是站台根，也就是其餘語系 link 的共同前綴。"""
+    for path in CONFIGS:
+        text = path.read_text(encoding="utf-8")
+        found = re.search(r"^  default_lang:\s*(\S+)\s*$", text, re.M)
+        if not found:
+            continue
+        entries = alternate_entries(text)
+        target = [link for lang, link in entries if lang == found.group(1)]
+        if not target:
+            fail(
+                f"{path.name}: default_lang 是 {found.group(1)}，"
+                f" 對不上 alternate 的任何一筆（{', '.join(lang for lang, _ in entries)}）"
+            )
+            continue
+        others = [link for lang, link in entries if lang != found.group(1)]
+        strays = [link for link in others if not link.startswith(target[0])]
+        if strays:
+            fail(
+                f"{path.name}: default_lang 指向 {target[0]}，"
+                f" 但 {', '.join(strays)} 不在它底下，那就不是站台根"
+            )
+
+
+def test_base_html_reads_default_lang() -> None:
+    """base.html 的 DEFAULT_LANG 要讀設定，不要回頭去取 alternate 的第一筆。"""
+    text = BASE.read_text(encoding="utf-8")
+    found = re.search(r"var DEFAULT_LANG = \{\{(.*?)\}\};", text, re.S)
+    if not found:
+        fail(f"{BASE.name}: 找不到 DEFAULT_LANG 的賦值")
+        return
+    expr = found.group(1)
+    if "config.extra.default_lang" not in expr:
+        fail(f"{BASE.name}: DEFAULT_LANG 沒有讀 config.extra.default_lang")
+    if "alternate" in expr:
+        fail(
+            f"{BASE.name}: DEFAULT_LANG 又跟 extra.alternate 的順序綁在一起了。"
+            " 選單順序是版面決定，根路徑是誰是部署決定，理由見本檔檔頭。"
+        )
+
+
 def main() -> int:
     for fn in [
         test_menu_renders_every_language,
         test_current_language_is_hidden,
         test_current_lang_matches_an_alternate,
         test_every_language_is_current_somewhere,
+        test_default_lang_is_the_same_everywhere,
+        test_default_lang_sits_at_the_site_root,
+        test_base_html_reads_default_lang,
     ]:
         fn()
     if failures:

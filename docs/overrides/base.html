@@ -551,10 +551,16 @@
           var ASKED_KEY = "anoni-docs-lang-asked";
           var IS_HOME = {{ 'true' if page and page.is_homepage else 'false' }};
           {#
-            建在根路徑、網址上沒有語系區段的那一個語系，取 extra.alternate 的第一筆。
-            調整 alternate 的順序時這裡會跟著變，兩者本來就該一致。
+            建在根路徑、網址上沒有語系區段的那一個語系。三份 mkdocs 設定各自寫明，
+            值是同一個。
+
+            這裡原本取 extra.alternate 的第一筆，前提是「第一筆就是根路徑那個語系」。
+            mkdocs_en.yml 把 English 排在第一筆（英文版的選單先列自己），前提就不成立了，
+            en 建置出來的 DEFAULT_LANG 變成 en，於是偏好為 zh-TW 的讀者打開 /docs/en/
+            首頁會被轉走，跟底下 langRedirectTo 想守的「網址上已經有語系區段就是明確
+            指定過」相反。選單順序是版面決定，根路徑是誰是部署決定，兩件事分開寫。
           #}
-          var DEFAULT_LANG = {{ ((config.extra.alternate | first).lang if config.extra.alternate else "zh-TW") | tojson }};
+          var DEFAULT_LANG = {{ (config.extra.default_lang or "zh-TW") | tojson }};
 
           var STRINGS = {
             "zh-TW": { ask: "選擇你的閱讀語言", later: "稍後" },
