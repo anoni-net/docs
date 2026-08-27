@@ -234,6 +234,9 @@ extra:
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
+  # 這份產物是哪一個語系，語言切換器拿它把「目前語系」那一項藏起來。值對齊底下
+  # alternate 的 lang，理由見 mkdocs.yml 的註解。
+  current_lang: zh-CN
   alternate:
     # zh-TW 是網站預設語系，建在根路徑，沒有獨立語系區段。理由見 mkdocs.yml 的註解。
     - name: 臺灣正體（zh-TW）

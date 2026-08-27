@@ -1,4 +1,11 @@
 {#- Language switcher: language root + page.url. -#}
+{#-
+  目前語系那一項加 hidden，選單上只留讀者切得過去的語言。連結本身照樣渲染出來，
+  因為 base.html 的語言偏好 JS 是從這份清單讀各語系的實際網址（建置時算好，
+  clearnet、onion 與本機 serve 各自都對），首頁的偏好轉址靠它認出「目前這一頁是
+  哪個語系」，底部的語言選擇卡片也要列出目前語系，讀者才存得下這個偏好。
+  tools/test_lang_switcher.py 守著這個分界。
+-#}
 <div class="md-header__option">
   <div class="md-select">
     {% set icon = config.theme.icon.alternate or "material/translate" %}
@@ -8,7 +15,7 @@
     <div class="md-select__inner">
       <ul class="md-select__list">
         {% for alt in config.extra.alternate %}
-          <li class="md-select__item">
+          <li class="md-select__item"{% if alt.lang == config.extra.current_lang %} hidden{% endif %}>
             {% if page is defined and page %}
               {% set base = alt.link.rstrip('/') %}
               <a href="{{ (base ~ '/' ~ page.url) | url }}" hreflang="{{ alt.lang }}" class="md-select__link">
