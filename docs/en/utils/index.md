@@ -1,5 +1,6 @@
 ---
 title: Utilities
+subtitle: Offline browser tools and 3D interactives
 description: Small tools that run in your browser. Nothing is sent anywhere, and once stored on your device they work with the network off.
 icon: material/tools
 ---

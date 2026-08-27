@@ -129,11 +129,14 @@ nav:
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md
-  - !ENV [NAV_GAMES, "互動與呈現"]:
-      - games/index.md
-      - games/onion-routing.md
-      - games/onion-rendezvous.md
-      - games/tor-network.md
+      # 小工具區的頁面按下去就有反應，互動與呈現是同一種東西的另一種形式，收成子分組讓第一層短一點。
+      # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
+      # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。
+      - !ENV [NAV_GAMES, "互動與呈現"]:
+          - games/index.md
+          - games/onion-routing.md
+          - games/onion-rendezvous.md
+          - games/tor-network.md
   - !ENV [NAV_POST, "資訊更新"]:
       - blog/index.md
       - !ENV [NAV_CHANGELOG, "軟體更新日誌"]:
