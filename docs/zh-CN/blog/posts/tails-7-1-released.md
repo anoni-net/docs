@@ -37,7 +37,7 @@ description: "Tails 7.1 更新 Snowflake 连接效率与 OpenSSL 安全性更新
 
 !!! info ""
 
-    以下翻译自 [Tails 7.1 Drops Browser Home Phoning, Updates Tor Stack](https://www.sambent.com/tails-7-1-drops-browser-home-phoning-updates-tor-stack/), Sam Bent 的文章。
+    以下翻译自 Sam Bent 的文章 Tails 7.1 Drops Browser Home Phoning, Updates Tor Stack。
 
 Tails 7.1 于 2025 年 10 月 14 日发布，搭载 Tor 浏览器 14.5.8、Tor 客户端 0.4.8.19 和 Thunderbird 140.3.0。这款专注于隐私的操作系统也取消了启动时不必要的网络请求，透过将 Tor 浏览器的首页更换为离线版本来达成。（这个请求存在的原因是什么呢？）
 
@@ -70,8 +70,6 @@ Tails 7.1 的用户从版本 7.0 自动升级时，会保留持久储存区。�
 Firefox 144 的安全回溯值得多加注意。Mozilla 不断修补浏览器的漏洞，但 Tor 浏览器所基于的 ESR 分支相对于快速发布版有所落后。Tor 浏览器 14.5.8 宣称已经回溯了 Firefox 144 的修补程序，但截至 2025 年 10 月 7 日，Firefox 144 并未正式发布。这要么是指 Mozilla 内部开发版本的号码，要么是文件中存在错误。
 
 OpenSSL 更新修正了在 OpenSSL [安全公告](https://www.openssl.org/news/vulnerabilities.html){target="_blank"}中详细列出的特定 CVE，但 Tails 的发行记录中并未列出 3.5.4 解决了哪些漏洞。仰赖此操作系统维持生死攸关匿名性的用户值得知道具体的 CVE 列表，而不是「安全更新」这种可能意味着任何事情的模糊语言，从远端代码执行到轻微的消息泄露都可能囊括其中。
-
-![](https://www.sambent.com/content/images/2025/10/image-95.png)
 
 [Snowflake](../../tools/tor-snowflake.md){target="_blank"} 桥接更新的重要性超过大多数用户的认识。当审查基础设施封锁 Tor 入口节点时，Snowflake 透过不断轮换的浏览器代理提供替代入口。然而，Snowflake 的效能取决于更新的桥接信息。过时的桥接清单意味着受审查地区的用户无法顺利连接。Tor 0.4.8.19 的更新保持了这套基础设施的运作。
 
