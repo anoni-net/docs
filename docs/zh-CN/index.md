@@ -19,6 +19,8 @@ hide:
 
 ## :material-rocket-launch-outline: 从这里开始
 
+知道自己属于哪一类，[从你的身分开始](./start/index.md)有依身分整理的阅读路径。想直接挑主题，从下面四张卡开始。
+
 <div class="grid cards" markdown>
 
 - :material-check-circle-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **我该先做什么**
