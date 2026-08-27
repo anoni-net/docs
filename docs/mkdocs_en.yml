@@ -23,11 +23,6 @@ nav:
       - start/independent-journalist.md
       - start/developer.md
       - start/everyone.md
-  - !ENV [NAV_ABOUT, "About"]:
-      - about/index.md
-      - about/how-you-are-reading.md
-      - contact.md
-      - offline.md
   - !ENV [NAV_GUIDES, "Guides"]:
       - guides/index.md
       - help/index.md
@@ -132,6 +127,14 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      # About is part of the community section. Placed after community/index.md rather
+      # than before it: navigation.indexes needs the index page first for the section
+      # heading to stay clickable.
+      - !ENV [NAV_ABOUT, "About"]:
+          - about/index.md
+          - about/how-you-are-reading.md
+          - contact.md
+          - offline.md
       - "Get Involved":
           - community/how-to-contribute.md
           - community/tools.md

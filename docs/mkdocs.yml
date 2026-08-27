@@ -147,6 +147,13 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
+      # 關於我們是社群的一部分，收進去讓第一層再短一項。放在 community/index.md
+      # 之後而不是之前：navigation.indexes 要 index 頁排第一，section 標題才點得進去。
+      - !ENV [NAV_ABOUT, "關於我們"]:
+          - about/index.md
+          - about/how-you-are-reading.md
+          - contact.md
+          - offline.md
       - "加入社群":
           - community/how-to-contribute.md
           - community/tools.md
@@ -187,11 +194,6 @@ nav:
           - event-workshop-2025.md
           - !ENV [NAV_EVENT_PREPARE, "籌備頁面"]:
               - event-workshop-2025-prepare.md
-  - !ENV [NAV_ABOUT, "關於我們"]:
-      - about/index.md
-      - about/how-you-are-reading.md
-      - contact.md
-      - offline.md
 theme:
   name: material
   logo: assets/images/logo-white.svg
