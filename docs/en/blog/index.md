@@ -1,5 +1,6 @@
 ---
 title: Recent Updates
+subtitle: Announcements and changelogs
 icon: material/newspaper-variant-outline
 ---
 

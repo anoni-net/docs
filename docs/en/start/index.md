@@ -1,5 +1,6 @@
 ---
 title: Start by role
+subtitle: Reading paths by role
 description: Five reading paths, one for each role we most often work with — civil society, newsrooms, independent journalists, open-source developers, and general readers. Each path points at pages that already exist on this site.
 icon: material/sign-direction
 ---
