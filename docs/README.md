@@ -16,6 +16,7 @@
 - 多語系：zh-TW / zh-CN / en
 - 主題：[MkDocs Material](https://squidfunk.github.io/mkdocs-material/)
 - 部落格、RSS、Vega-Lite 圖表
+- 社群分享卡：`layouts/anoni.yml`，三語系共用的自訂版型
 - 三種部署：標準網站、IPFS、Tor Onion
 
 ## 本地開發

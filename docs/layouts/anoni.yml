@@ -1,0 +1,309 @@
+# anoni.net Docs 的社群分享卡版型（Open Graph、1200x630）
+#
+# 由 mkdocs-material 的 social 外掛渲染，三個語系共用這一份。語系差異只走
+# mkdocs*.yml 的 cards_layout_options（字型、版面上顯示的站名），版型本身改這裡，
+# 不要各語系各存一份。
+#
+# 配色取自貢獻者百科的品牌素材頁（community/brand-assets.md）。底色是 cyan-900，
+# 左緣三段色塊由上而下是 cyan-300、cyan-500、cyan-700，對應 logo 三個六角形的層次。
+# 白字放在 cyan-900 上對比 11.5:1，之前的 cyan-500 底配白字只有 2.5:1，縮到社群平台
+# 的預覽尺寸幾乎讀不出來。
+#
+# 版面數值由實測得出。外掛的字級由圖層高度與行數反推（social/plugin.py 的
+# _metrics），標題框 170px 配兩行對應 Noto Sans TC 58px、Public Sans 71px。58px 是
+# 三個語系全部標題的上限：目前最長的一段不可斷字串是 zh-CN 的
+# 「土库曼斯坦如何将网络审查变成一门生意」，18 個字在 58px 下佔 1044px，還放得進
+# 1056px 的標題框。字級再往上，那一類標題就會被切在畫布邊緣。
+
+# -----------------------------------------------------------------------------
+# Configuration
+# -----------------------------------------------------------------------------
+
+definitions:
+
+  # 品牌色票（brand-assets.md 的 token，改色請先改那一頁）
+  - &brand_cyan_300 "#4dbfff"
+  - &brand_cyan_500 "#00aeff"
+  - &brand_cyan_700 "#0089bf"
+
+  # 背景。預設 cyan-900，單頁可用 front matter 的 social.cards_layout_options 換掉
+  - &background_color >-
+    {%- if layout.background_color -%}
+      {{ layout.background_color }}
+    {%- else -%}
+      #003e57
+    {%- endif -%}
+
+  - &background_image >-
+    {{ layout.background_image | x }}
+
+  # 主要文字（站名、標題）
+  - &color >-
+    {%- if layout.color -%}
+      {{ layout.color }}
+    {%- else -%}
+      #ffffff
+    {%- endif -%}
+
+  # 次要文字（描述）。cyan-100，跟標題拉開層次又保有足夠對比
+  - &muted_color >-
+    {%- if layout.muted_color -%}
+      {{ layout.muted_color }}
+    {%- else -%}
+      #b3e3ff
+    {%- endif -%}
+
+  # 頁尾網址。cyan-300
+  - &accent_color >-
+    {%- if layout.accent_color -%}
+      {{ layout.accent_color }}
+    {%- else -%}
+      #4dbfff
+    {%- endif -%}
+
+  # 底圖用的頁面圖示顏色。白色 10% 透明，八位數 hex 的最後兩碼是 alpha
+  - &watermark_color >-
+    {%- if layout.watermark_color -%}
+      {{ layout.watermark_color }}
+    {%- else -%}
+      #ffffff1a
+    {%- endif -%}
+
+  # 字型。zh-TW 用 Noto Sans TC、zh-CN 用 Noto Sans SC、en 用 Public Sans，
+  # 三個值由各自的 mkdocs*.yml 帶進來，跟站上內文字型同一套
+  - &font_family >-
+    {%- if layout.font_family -%}
+      {{ layout.font_family }}
+    {%- elif config.theme.font is mapping -%}
+      {{ config.theme.font.get("text", "Roboto") }}
+    {%- else -%}
+      Roboto
+    {%- endif -%}
+
+  - &font_variant >-
+    {%- if layout.font_variant -%}
+      {{ layout.font_variant }}
+    {%- endif -%}
+
+  # 版面上的站名。en 的 site_name 是一整句副標，全部塞進來會被截斷，
+  # 所以 mkdocs_en.yml 用 site_name 這個選項換成短版
+  - &site_name >-
+    {%- if layout.site_name -%}
+      {{ layout.site_name }}
+    {%- else -%}
+      {{ config.site_name }}
+    {%- endif -%}
+
+  # 頁尾網址。site_url 去掉協定與結尾斜線，onion 版建置時 site_url 已被
+  # replace_sitename_anoni_onion.sh 換成 onion 位址，這裡跟著換，不必特別處理
+  - &site_url >-
+    {%- if layout.footer -%}
+      {{ layout.footer }}
+    {%- else -%}
+      {%- set url = config.site_url | replace("https://", "") | replace("http://", "") -%}
+      {%- if url.endswith("/") -%}
+        {{ url[:-1] }}
+      {%- else -%}
+        {{ url }}
+      {%- endif -%}
+    {%- endif -%}
+
+  # 標題。中文詞與詞之間沒有空白，而外掛的換行只斷在空白處（plugin.py 用
+  # re.split(r"\s+") 切詞），一整句中文會被當成一個詞，超過一行就直接切在畫布
+  # 邊緣，連刪節號都不會有。這裡在全形標點後面補一個半形空白，給換行演算法
+  # 可以斷的位置，補完的空白落在行尾就會被吃掉。
+  #
+  # 14 字以內不處理：那個長度本來就放得下一行，補了只會在句子中間看到多餘的空隙。
+  #
+  # 首頁的 front matter 標題是導覽列用的「首頁」「Home」，拿來當卡片標題等於沒說，
+  # 所以首頁改用站名，跟 og:title 的處理一致。
+  - &page_title >-
+    {%- if layout.title -%}
+      {%- set text = layout.title -%}
+    {%- elif page.is_homepage -%}
+      {%- set text = config.site_name -%}
+    {%- else -%}
+      {%- set text = page.meta.get("title", page.title) -%}
+    {%- endif -%}
+    {%- if text | length > 14 -%}
+      {{ text
+        | replace("：", "： ") | replace("，", "， ") | replace("、", "、 ")
+        | replace("；", "； ") | replace("。", "。 ") | replace("！", "！ ")
+        | replace("？", "？ ") | replace("）", "） ") | replace("」", "」 ")
+        | replace("》", "》 ") | replace("（", " （") | replace("「", " 「")
+        | replace("《", " 《")
+      }}
+    {%- else -%}
+      {{ text }}
+    {%- endif -%}
+
+  # 描述。理由同標題，描述一定夠長，不用判斷長度
+  - &page_description >-
+    {%- set text = layout.description or page.meta.get("description", config.site_description) | x -%}
+    {{ text
+      | replace("：", "： ") | replace("，", "， ") | replace("、", "、 ")
+      | replace("；", "； ") | replace("。", "。 ") | replace("！", "！ ")
+      | replace("？", "？ ") | replace("）", "） ") | replace("」", "」 ")
+      | replace("》", "》 ") | replace("（", " （") | replace("「", " 「")
+      | replace("《", " 《")
+    }}
+
+  # 底下兩個給 meta 標籤用，補空白的版本只給畫面，標籤要原文
+  - &meta_title >-
+    {%- if not page.is_homepage -%}
+      {{ page.meta.get("title", page.title) }} - {{ config.site_name }}
+    {%- else -%}
+      {{ config.site_name }}
+    {%- endif -%}
+
+  - &meta_description >-
+    {%- if layout.description -%}
+      {{ layout.description }}
+    {%- else -%}
+      {{ page.meta.get("description", config.site_description) | x }}
+    {%- endif -%}
+
+  # 頁面圖示。front matter 沒寫就退回 hexagon-multiple-outline，logo 就是從
+  # 這個圖示衍生定色而成，退回它不會讓卡片看起來像少了東西
+  - &page_icon >-
+    {%- if page.meta and page.meta.icon -%}
+      {{ page.meta.icon }}
+    {%- elif layout.icon -%}
+      {{ layout.icon }}
+    {%- else -%}
+      material/hexagon-multiple-outline
+    {%- endif -%}
+
+  # 社群 logo。mono white 版本，用在品牌色塊上對比最高
+  - &logo >-
+    {%- if layout.logo -%}
+      {{ layout.logo }}
+    {%- elif config.theme.logo -%}
+      {{ config.docs_dir }}/{{ config.theme.logo }}
+    {%- endif -%}
+
+  - &logo_icon >-
+    {%- if not layout.logo and config.theme.icon -%}
+      {{ config.theme.icon.logo | x }}
+    {%- endif -%}
+
+# Meta 標籤。內容與外掛預設版型一致，換版型不會動到 og 與 twitter 的值。
+# front matter 寫了 og.enabled 的頁面由 overrides/main.html 自己出標籤，
+# 那些頁面會跳過這一段。
+tags:
+  og:type: website
+  og:title: *meta_title
+  og:description: *meta_description
+  og:image: "{{ image.url }}"
+  og:image:type: "{{ image.type }}"
+  og:image:width: "{{ image.width }}"
+  og:image:height: "{{ image.height }}"
+  og:url: "{{ page.canonical_url }}"
+
+  twitter:card: summary_large_image
+  twitter:title: *meta_title
+  twitter:description: *meta_description
+  twitter:image: "{{ image.url }}"
+
+# -----------------------------------------------------------------------------
+# Specification
+# -----------------------------------------------------------------------------
+
+size: { width: 1200, height: 630 }
+layers:
+
+  # 底色
+  - background:
+      image: *background_image
+      color: *background_color
+
+  # 左緣三段色塊，對應 logo 由上而下三個六角形
+  - size: { width: 16, height: 210 }
+    offset: { x: 0, y: 0 }
+    background:
+      color: *brand_cyan_300
+  - size: { width: 16, height: 210 }
+    offset: { x: 0, y: 210 }
+    background:
+      color: *brand_cyan_500
+  - size: { width: 16, height: 210 }
+    offset: { x: 0, y: 420 }
+    background:
+      color: *brand_cyan_700
+
+  # 頁面圖示放大當底紋，壓在文字底下。10% 白色，標題照樣清楚
+  - size: { width: 400, height: 400 }
+    offset: { x: 752, y: 108 }
+    icon:
+      value: *page_icon
+      color: *watermark_color
+
+  # logo
+  - size: { width: 56, height: 56 }
+    offset: { x: 72, y: 56 }
+    background:
+      image: *logo
+    icon:
+      value: *logo_icon
+      color: *color
+
+  # 站名，跟 logo 垂直置中對齊
+  - size: { width: 660, height: 34 }
+    offset: { x: 148, y: 67 }
+    typography:
+      content: *site_name
+      align: start center
+      color: *color
+      font:
+        family: *font_family
+        variant: *font_variant
+        style: Bold
+
+  # 標題。往下對齊，一行的標題與兩行的標題距離底下那條分隔線一樣遠
+  - size: { width: 1056, height: 170 }
+    offset: { x: 72, y: 150 }
+    typography:
+      content: *page_title
+      align: start bottom
+      overflow: shrink
+      color: *color
+      line:
+        amount: 2
+        height: 1.25
+      font:
+        family: *font_family
+        variant: *font_variant
+        style: Bold
+
+  # 標題與描述之間的短分隔線
+  - size: { width: 96, height: 5 }
+    offset: { x: 72, y: 358 }
+    background:
+      color: *brand_cyan_500
+
+  # 描述
+  - size: { width: 1056, height: 120 }
+    offset: { x: 72, y: 390 }
+    typography:
+      content: *page_description
+      align: start top
+      color: *muted_color
+      line:
+        amount: 3
+        height: 1.5
+      font:
+        family: *font_family
+        variant: *font_variant
+        style: Regular
+
+  # 頁尾網址
+  - size: { width: 900, height: 30 }
+    offset: { x: 72, y: 538 }
+    typography:
+      content: *site_url
+      align: start top
+      color: *accent_color
+      font:
+        family: *font_family
+        variant: *font_variant
+        style: Medium

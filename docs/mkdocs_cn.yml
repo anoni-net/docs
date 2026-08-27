@@ -319,11 +319,11 @@ plugins:
         'reports/interseclab-network-coup/index_6.md': 'reports/index.md'
         'reports/interseclab-network-coup/index_7.md': 'reports/index.md'
         'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
+  # 社群分享卡，說明見 mkdocs.yml 的同一段
   - social:
+      cards_layout: anoni
       cards_layout_options:
         font_family: Noto Sans SC
-        color: "#ffffff"
-        background_color: "#00aeff"
   - privacy:
       assets_exclude:
         - aa.anoni.net/*

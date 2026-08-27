@@ -352,6 +352,36 @@ Align derivative work to these values. The site's `extra.css` already defines th
 - `Event` uses `--accent-action`
 - `Updated` uses `--cat-privacy`, sharing a colour with the privacy track, where the weak visual association is acceptable
 
+## :material-share-variant-outline: Social cards (Open Graph)
+
+Paste any page of the docs into Mastodon, LinkedIn, X, Bluesky or a chat room, and the preview image comes straight from the build. One card per page per language, no manual artwork.
+
+The card uses the palette from this page. cyan-900 is the background, and a three-part bar runs down the left edge in cyan-300, cyan-500 and cyan-700, matching the three hexagons of the logo. The mono white logo and the site name sit at the top left, the page title in the middle, and the page description and URL below it. When a page sets `icon` in its front matter, that icon is enlarged into a 10% white watermark on the right. Pages without one get `material/hexagon-multiple-outline`, the icon the logo was derived from.
+
+The background is cyan-900 rather than the brand colour cyan-500, so that the text stays readable. White on cyan-500 has a contrast ratio of 2.5:1, which turns to mush at the size social platforms display. On cyan-900 it is 11.5:1. The description uses cyan-100 at 8.4:1, and the footer URL cyan-300 at 5.6:1.
+
+The layout lives in `docs/layouts/anoni.yml`, shared by all three languages. The only per-language differences are the font (Noto Sans TC, Noto Sans SC, Public Sans) and the site name printed on the card, set in `mkdocs.yml`, `mkdocs_cn.yml` and `mkdocs_en.yml`. Change the shared layout instead of forking it per language.
+
+### Line breaking for Chinese titles
+
+The plugin that draws the cards breaks lines at whitespace only. A Chinese sentence has none, so it counts as a single word, and anything past the first line used to be cut off at the edge of the canvas without even an ellipsis. Before this change, the longest post title on the site showed only its first half.
+
+The layout now adds a space after the full-width comma, enumeration comma, colon, full stop, exclamation mark and question mark, which gives the line breaker somewhere to break. A space that lands at the end of a line disappears. The cost is an occasional extra gap inside a sentence. In return, every title and description across the three languages now fits. Titles of 14 characters or fewer are left alone, as they fit on one line anyway.
+
+### Overriding a single page
+
+To give one page a different title, description or background colour, override it in that page's front matter:
+
+```yaml
+social:
+  cards_layout_options:
+    title: The title to print on the card
+    description: The description to print on the card
+    background_color: "#003e57"
+```
+
+Pages that need artwork of their own (event key visuals, the interactive section) take a different route: set `og.enabled: true` and `og.image` in the front matter, and the site template uses that image and skips the generated one. The COSCUP event pages and the interactive section work this way.
+
 ## :material-alert-octagon-outline: What not to do
 
 **Logo**

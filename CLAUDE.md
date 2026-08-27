@@ -118,7 +118,10 @@ sh build_docs_anoni_onion.sh  # Onion 版本
   - `blog`: 部落格功能
   - `rss`: RSS feed
   - `charts`: Vega-Lite 圖表支援（用於數據視覺化）
-  - `social`: Open Graph 社交卡片生成
+  - `social`: Open Graph 社群分享卡。版型是 `docs/layouts/anoni.yml`，三個語系共用一份，
+    語系差異（字型、卡片上的站名）寫在各自的 `mkdocs*.yml`。`cards_layout_dir` 相對於
+    執行 mkdocs 的目錄，所以建置一律在 `docs/` 底下跑。設計說明見
+    `docs/zh-TW/community/brand-assets.md` 的「社群分享卡」一節
 - **特殊功能**: 使用 `custom_dir` 設定客製化的 overrides（針對不同語言有不同的 overrides 目錄）
 
 ## Pulse 監控系統

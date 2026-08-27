@@ -352,6 +352,36 @@ wordmark 的文字已经转成路径，打开的设备有没有装字体都长�
 - `活动` → `--accent-action`（橘）
 - `更新` → `--cat-privacy`（绿，跟个人隐私指引同色，视觉关联弱可接受）
 
+## :material-share-variant-outline: 社群分享卡（Open Graph）
+
+把文件站的任何一页贴到 Mastodon、LinkedIn、X、Bluesky 或聊天室，对方看到的预览图由构建流程自动生成，三个语系各一份，不需要人工做图。
+
+版面沿用这一页的色票。cyan-900 当底色，左缘三段色块由上而下是 cyan-300、cyan-500、cyan-700，对应 logo 三个六角形的层次。左上角是 mono white logo 与站名，中间是页面标题，下方依序是页面描述与网址。页面 front matter 有 `icon` 时，那个图示会放大成 10% 透明的底纹摆在右侧，没有的话用 `material/hexagon-multiple-outline`，也就是 logo 的来源图示。
+
+底色没有用品牌主色 cyan-500，理由是读得到字。白字放在 cyan-500 上对比只有 2.5:1，缩到社交平台的预览尺寸就糊成一团，换到 cyan-900 之后是 11.5:1。描述用 cyan-100，对比 8.4:1，页尾网址用 cyan-300，对比 5.6:1。
+
+版式文件是 `docs/layouts/anoni.yml`，三个语系共用同一份。语系差异只有字体（Noto Sans TC、Noto Sans SC、Public Sans）与版面上显示的站名，分别写在 `mkdocs.yml`、`mkdocs_cn.yml`、`mkdocs_en.yml`。要调整版面就改那一份版式，不要各语系各存一份。
+
+### 中文标题的换行
+
+生成卡片的插件只在空白处换行。一整句中文没有空白，会被当成一个词，超过一行就切在画布边缘，连省略号都不会有。改版之前，站上最长的那个文章标题只显示得出前半段。
+
+现在的作法是在全角逗号、顿号、冒号、句号、感叹号、问号后面补一个半角空白，给换行算法可以断的位置，补上的空白落在行尾就会被吃掉。代价是句子中间偶尔看得到多出来的空隙，换来的是三个语系目前每一则标题与描述都完整显示。标题 14 字以内不处理，那个长度本来就放得下一行。
+
+### 单页换掉卡片内容
+
+某一页需要不一样的标题、描述或底色时，在该页 front matter 覆写：
+
+```yaml
+social:
+  cards_layout_options:
+    title: 卡片上要显示的标题
+    description: 卡片上要显示的描述
+    background_color: "#003e57"
+```
+
+整张图要自己做的场合（活动主视觉、互动区）走另一种写法，front matter 填 `og.enabled: true` 与 `og.image`，文件站的模板会改用指定的图片，并跳过自动生成的那一张。COSCUP 活动页与互动区目前就是这样做。
+
 ## :material-alert-octagon-outline: 不要这样用
 
 **Logo**
