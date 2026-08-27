@@ -111,11 +111,14 @@ nav:
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md
-  - !ENV [NAV_GAMES, "互动与呈现"]:
-      - games/index.md
-      - games/onion-routing.md
-      - games/onion-rendezvous.md
-      - games/tor-network.md
+      # 小工具区的页面按下去就有反应，互动与呈现是同一种东西的另一种形式，收成子分组让第一层短一点。
+      # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
+      # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。
+      - !ENV [NAV_GAMES, "互动与呈现"]:
+          - games/index.md
+          - games/onion-routing.md
+          - games/onion-rendezvous.md
+          - games/tor-network.md
   - !ENV [NAV_POST, "信息更新"]:
       - blog/index.md
       - !ENV [NAV_CHANGELOG, "软件更新日志"]:
@@ -126,6 +129,13 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
+      # 关于我们是社群的一部分，收进去让第一层再短一项。放在 community/index.md
+      # 之后而不是之前：navigation.indexes 要 index 页排第一，section 标题才点得进去。
+      - !ENV [NAV_ABOUT, "关于我们"]:
+          - about/index.md
+          - about/how-you-are-reading.md
+          - contact.md
+          - offline.md
       - "加入社群":
           - community/how-to-contribute.md
           - community/tools.md
@@ -163,11 +173,6 @@ nav:
           - event-workshop-2025.md
           - !ENV [NAV_EVENT_PREPARE, "筹备页面"]:
               - event-workshop-2025-prepare.md
-  - !ENV [NAV_ABOUT, "关于我们"]:
-      - about/index.md
-      - about/how-you-are-reading.md
-      - contact.md
-      - offline.md
 theme:
   name: material
   logo: assets/images/logo-white.svg

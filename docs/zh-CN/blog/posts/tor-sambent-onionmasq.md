@@ -20,9 +20,7 @@ _OnionMasq 透过将应用程序置于内核隔离的沙箱中，只存在经由
 
     以下内容原文翻译来自以下文章：
 
-    - [OnionMasq: Tor's Experimental Fix for VPN-Style Traffic Isolation, Sam Bent, 2025-09-19](https://www.sambent.com/onionmasq-tors-experimental-fix-for-vpn-style-traffic-isolation/){target="_blank"}
-
-![Tor OnionMasq: Hiding in Plain Sight / Tor OnionMasq：隐身于无形之中](https://www.sambent.com/content/images/size/w2000/2025/09/onion-masq-1.jpg){style="border-radius: 10px;"}
+    - OnionMasq: Tor's Experimental Fix for VPN-Style Traffic Isolation，Sam Bent，2025-09-19
 
 [OnionMasq](https://gitlab.torproject.org/tpo/core/onionmasq){target="_blank"} 是 Tor 项目试图解决一个基本问题：让您的应用程序的每个数据封包都无例外地通过 Tor。它是一个实验性隧道接口，针对 [Arti](https://blog.torproject.org/arti_1_4_0_released/){target="_blank"}（以 Rust 实现的 Tor），透过内核级别的网络隔离来创造类似 VPN 的行为。
 
@@ -100,10 +98,6 @@ OnionMasq 的**实验性**状态是有原因的。Tor 项目明确表示，这�
 * **功能集不完整**：与已建立的工具相比，进阶 Tor 功能和极端案例可能无法正常运作。
 
 Tor 项目请求社群测试和臭虫报告，以加速开发达到正式使用的准备。
-
-## OnionMasq 与 Torsocks 的技术比较
-
-![OnionMasq 与 Torsocks 的技术比较](https://www.sambent.com/content/images/2025/09/onion-masq.jpg){style="border-radius: 10px;"}
 
 ### 未来发展与规划
 

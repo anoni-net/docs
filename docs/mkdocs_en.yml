@@ -23,11 +23,6 @@ nav:
       - start/independent-journalist.md
       - start/developer.md
       - start/everyone.md
-  - !ENV [NAV_ABOUT, "About"]:
-      - about/index.md
-      - about/how-you-are-reading.md
-      - contact.md
-      - offline.md
   - !ENV [NAV_GUIDES, "Guides"]:
       - guides/index.md
       - help/index.md
@@ -113,11 +108,14 @@ nav:
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md
-  - !ENV [NAV_GAMES, "Interactive"]:
-      - games/index.md
-      - games/onion-routing.md
-      - games/onion-rendezvous.md
-      - games/tor-network.md
+      # The utilities are things you press and get a response from, and the interactive pieces are the same kind of thing in another form. Nesting them keeps the top level short.
+      # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
+      # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。
+      - !ENV [NAV_GAMES, "Interactive"]:
+          - games/index.md
+          - games/onion-routing.md
+          - games/onion-rendezvous.md
+          - games/tor-network.md
   - !ENV [NAV_POST, "Updates"]:
       - blog/index.md
       - upstream-translations.md
@@ -129,6 +127,14 @@ nav:
           - changelog/ooni.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
+      # About is part of the community section. Placed after community/index.md rather
+      # than before it: navigation.indexes needs the index page first for the section
+      # heading to stay clickable.
+      - !ENV [NAV_ABOUT, "About"]:
+          - about/index.md
+          - about/how-you-are-reading.md
+          - contact.md
+          - offline.md
       - "Get Involved":
           - community/how-to-contribute.md
           - community/tools.md
