@@ -380,6 +380,8 @@ social:
     background_color: "#003e57"
 ```
 
+底图也走同一个选项。`background_image` 的路径相对于执行 mkdocs 的目录，也就是 `docs/`，写成 `zh-TW/assets/images/xxx.png` 这种形式，文件找不到时构建会失败。只填底图的话，底色自动变成 80% 的 cyan-900 遮罩，白字在任何一张图上都读得到。想要原图直出就多填一行 `background_color: transparent`，代价是浅色的图会让标题与页尾网址消失。
+
 整张图要自己做的场合（活动主视觉、互动区）走另一种写法，front matter 填 `og.enabled: true` 与 `og.image`，文件站的模板会改用指定的图片，并跳过自动生成的那一张。COSCUP 活动页与互动区目前就是这样做。
 
 ## :material-alert-octagon-outline: 不要这样用
