@@ -335,11 +335,16 @@ plugins:
         'blog/2026/02/ooni-全新的匿名凭证系统.md': 'blog/index.md'
         'regional.md': 'taiwan/index.md'
         'regional/tor-relay-watcher.md': 'taiwan/index.md'
+  # 社群分享卡。版型在 layouts/anoni.yml，三個語系共用同一份，這裡只帶語系差異。
+  # 配色、間距、圖層都寫在版型裡，不要在這裡覆蓋單一顏色，那會讓三個語系慢慢長歪。
+  #
+  # cards_layout_dir 用預設值 layouts，它相對於執行 mkdocs 的目錄而不是設定檔位置，
+  # 所以 run.sh、run_en.sh、run_zh-cn.sh 與 CI 都必須在 docs/ 底下執行（現況如此）。
+  # 位置不對時外掛會直接讓建置失敗，不會安靜地退回預設版型。
   - social:
+      cards_layout: anoni
       cards_layout_options:
         font_family: Noto Sans TC
-        color: "#ffffff"
-        background_color: "#00aeff"
   - privacy:
       assets_exclude:
         - aa.anoni.net/*

@@ -352,6 +352,36 @@ wordmark 的文字已經轉成路徑，開啟的裝置有沒有裝字型都長�
 - `活動` → `--accent-action`（橘）
 - `更新` → `--cat-privacy`（綠，跟個人隱私指引同色，視覺關聯弱可接受）
 
+## :material-share-variant-outline: 社群分享卡（Open Graph）
+
+把文件站的任何一頁貼到 Mastodon、LinkedIn、X、Bluesky 或聊天室，對方看到的預覽圖由建置流程自動產生，三個語系各一份，不需要人工做圖。
+
+版面沿用這一頁的色票。cyan-900 當底色，左緣三段色塊由上而下是 cyan-300、cyan-500、cyan-700，對應 logo 三個六角形的層次。左上角是 mono white logo 與站名，中間是頁面標題，下方依序是頁面描述與網址。頁面 front matter 有 `icon` 時，那個圖示會放大成 10% 透明的底紋擺在右側，沒有的話用 `material/hexagon-multiple-outline`，也就是 logo 的來源圖示。
+
+底色沒有用品牌主色 cyan-500，理由是讀得到字。白字放在 cyan-500 上對比只有 2.5:1，縮到社群平台的預覽尺寸就糊成一團，換到 cyan-900 之後是 11.5:1。描述用 cyan-100，對比 8.4:1，頁尾網址用 cyan-300，對比 5.6:1。
+
+版型檔案是 `docs/layouts/anoni.yml`，三個語系共用同一份。語系差異只有字型（Noto Sans TC、Noto Sans SC、Public Sans）與版面上顯示的站名，分別寫在 `mkdocs.yml`、`mkdocs_cn.yml`、`mkdocs_en.yml`。要調整版面就改那一份版型，不要各語系各存一份。
+
+### 中文標題的換行
+
+產卡片的外掛只在空白處換行。一整句中文沒有空白，會被當成一個詞，超過一行就切在畫布邊緣，連刪節號都不會有。改版之前，站上最長的那個文章標題只顯示得出前半段。
+
+現在的作法是在全形逗號、頓號、冒號、句號、驚嘆號、問號後面補一個半形空白，給換行演算法可以斷的位置，補上的空白落在行尾就會被吃掉。代價是句子中間偶爾看得到多出來的空隙，換來的是三個語系目前每一則標題與描述都完整顯示。標題 14 字以內不處理，那個長度本來就放得下一行。
+
+### 單頁換掉卡片內容
+
+某一頁需要不一樣的標題、描述或底色時，在該頁 front matter 覆寫：
+
+```yaml
+social:
+  cards_layout_options:
+    title: 卡片上要顯示的標題
+    description: 卡片上要顯示的描述
+    background_color: "#003e57"
+```
+
+整張圖要自己做的場合（活動主視覺、互動區）走另一種寫法，front matter 填 `og.enabled: true` 與 `og.image`，文件站的模板會改用指定的圖片，並跳過自動產生的那一張。COSCUP 活動頁與互動區目前就是這樣做。
+
 ## :material-alert-octagon-outline: 不要這樣用
 
 **Logo**

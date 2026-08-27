@@ -346,11 +346,14 @@ plugins:
         'taiwan/tor-relay-watcher.md': 'regional/tor-relay-watcher.md'
         'taiwan/vasp-2026.md': 'regional/taiwan-vasp-2026.md'
         'taiwan/whistleblower-law.md': 'regional/taiwan-whistleblower-law.md'
+  # 社群分享卡，說明見 mkdocs.yml 的同一段。
+  # site_name 是版面用的短站名：en 的 site_name 是一整句副標，直接放進卡片會被
+  # 截成半句，og 與 twitter 標籤照樣用完整的 site_name。
   - social:
+      cards_layout: anoni
       cards_layout_options:
         font_family: Public Sans
-        color: "#ffffff"
-        background_color: "#00aeff"
+        site_name: anoni.net Docs
   - privacy:
       assets_exclude:
         - aa.anoni.net/*
