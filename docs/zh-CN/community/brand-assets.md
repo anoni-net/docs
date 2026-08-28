@@ -527,6 +527,8 @@ grep -c mxfile your-diagram.drawio.svg
 
 手写的图自带外框与内距，不要再套 `.brand-frame`，那会变成双框。drawio 导出的图没有外框，维持套 `.brand-frame`。
 
+图里的文字一样适用写作规范，但 `docs_style_lint.py` 只收 `.md` 与 `.js`，扫不到 SVG。文字定稿之前先自己对一次规范，口语词那几条最容易漏。发布之后才发现要改，就得换文件名，因为覆盖同名文件会撞上 edge 缓存。
+
 ### 套到 markdown 文章
 
 drawio 图，套 `.brand-frame`：

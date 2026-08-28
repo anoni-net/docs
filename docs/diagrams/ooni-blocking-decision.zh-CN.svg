@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 646" width="880" height="646" role="img" aria-labelledby="title desc">
+<title id="title">web_connectivity 的四个判定阶段，差异出现在哪一阶就停在哪一阶</title>
+<desc id="desc">判定流程图。同一个网址由 Probe 端与 test helper 各测一次，两边结果逐阶段比对。第一阶比 DNS 解析结果，不一致就判 blocking 为 dns。第二阶比 TCP 连线，Probe 连不上而 test helper 连得上就判 tcp_ip。第三阶比 HTTP 阶段，失败就判 http-failure。第四阶比回应内容，与 test helper 取得的不同就判 http-diff。四阶都通过就是 blocking 为 false、accessible 为 true。判定在任何一阶中止之后就不再往下比对，这也是为什么四个 match 栏位在前三种情况下全是 null。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。橙色是判定为受干预的那几种结果，
+     cyan 是通过的路径，跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .mono { font-family: "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace; }
+  .src { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; rx: 8; }
+  .src-t { fill: #37474f; font-size: 14px; font-weight: 700; }
+  .src-sub { fill: #78909c; font-size: 11.5px; }
+  .stage { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; rx: 8; }
+  .stage-n { fill: #0089bf; font-size: 12px; font-weight: 700; }
+  .stage-t { fill: #212121; font-size: 14.5px; font-weight: 600; }
+  .stage-sub { fill: #607d8b; font-size: 11.5px; }
+  .hit { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.4; rx: 8; }
+  .hit-code { fill: #bf5700; font-size: 13.5px; font-weight: 700; }
+  .hit-sub { fill: #8d6e63; font-size: 11.5px; }
+  .ok { fill: #0089bf; stroke: none; rx: 8; }
+  .ok-code { fill: #ffffff; font-size: 13.5px; font-weight: 700; }
+  .ok-sub { fill: #cfeaf7; font-size: 11.5px; }
+  .flow { stroke: #0089bf; stroke-width: 2; fill: none; }
+  .flow-head { fill: #0089bf; }
+  .branch { stroke: #ef6c00; stroke-width: 1.8; fill: none; }
+  .branch-head { fill: #ef6c00; }
+  .lbl-no { fill: #ef6c00; font-size: 12px; font-weight: 700; }
+  .lbl-yes { fill: #0089bf; font-size: 12px; font-weight: 700; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .src { fill: #23292e; stroke: #4b565e; }
+    .src-t { fill: #cfd8dc; }
+    .src-sub { fill: #90a4ae; }
+    .stage { fill: #0d2b38; stroke: #4dbfff; }
+    .stage-n { fill: #4dbfff; }
+    .stage-t { fill: #eceff1; }
+    .stage-sub { fill: #90a4ae; }
+    .hit { fill: #33241a; stroke: #ff8c1a; }
+    .hit-code { fill: #ffb74d; }
+    .hit-sub { fill: #a1887f; }
+    .ok { fill: #1976a8; }
+    .ok-sub { fill: #cfeaf7; }
+    .flow { stroke: #4dbfff; }
+    .flow-head { fill: #4dbfff; }
+    .branch { stroke: #ff8c1a; }
+    .branch-head { fill: #ff8c1a; }
+    .lbl-no { fill: #ff8c1a; }
+    .lbl-yes { fill: #4dbfff; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="src" x="60" y="24" width="200" height="54"/>
+<text class="src-t"   x="160" y="46" text-anchor="middle">Probe 端</text>
+<text class="src-sub" x="160" y="66" text-anchor="middle">从你所在的网络测一次</text>
+<rect class="src" x="300" y="24" width="200" height="54"/>
+<text class="src-t"   x="400" y="46" text-anchor="middle">test helper</text>
+<text class="src-sub" x="400" y="66" text-anchor="middle">从外部网络测一次</text>
+<text class="stage-sub" x="280" y="102" text-anchor="middle">同一个网址，两边各测一次，接着逐阶段比对差异</text>
+<path class="flow" d="M160 78 V118 H280 V140"/>
+<path class="flow" d="M400 78 V118 H280"/>
+<path class="flow-head" d="M280 152 L273 136 L287 136 Z"/>
+
+<rect class="stage" x="60" y="160" width="440" height="52"/>
+<text class="stage-n" x="80" y="182">第 1 阶</text>
+<text class="stage-t" x="146" y="182">DNS 解析结果一致吗</text>
+<text class="stage-sub" x="146" y="200">比对两边的 A 与 AAAA 查询结果</text>
+<path class="branch" d="M500 186 H588"/>
+<path class="branch-head" d="M600 186 L584 179 L584 193 Z"/>
+<text class="lbl-no" x="544" y="176" text-anchor="middle">不一致</text>
+<rect class="hit" x="600" y="160" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="184" text-anchor="middle">blocking: "dns"</text>
+<text class="hit-sub" x="710" y="202" text-anchor="middle">解析结果对不上</text>
+
+<path class="flow" d="M280 212 V240"/>
+<path class="flow-head" d="M280 252 L273 236 L287 236 Z"/>
+<text class="lbl-yes" x="300" y="234">一致</text>
+
+<rect class="stage" x="60" y="260" width="440" height="52"/>
+<text class="stage-n" x="80" y="282">第 2 阶</text>
+<text class="stage-t" x="146" y="282">Probe 连得上 TCP 吗</text>
+<text class="stage-sub" x="146" y="300">先确认 test helper 那一端连得上</text>
+<path class="branch" d="M500 286 H588"/>
+<path class="branch-head" d="M600 286 L584 279 L584 293 Z"/>
+<text class="lbl-no" x="544" y="276" text-anchor="middle">连不上</text>
+<rect class="hit" x="600" y="260" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="284" text-anchor="middle">blocking: "tcp_ip"</text>
+<text class="hit-sub" x="710" y="302" text-anchor="middle">连不到目标地址</text>
+
+<path class="flow" d="M280 312 V340"/>
+<path class="flow-head" d="M280 352 L273 336 L287 336 Z"/>
+<text class="lbl-yes" x="300" y="334">连得上</text>
+
+<rect class="stage" x="60" y="360" width="440" height="52"/>
+<text class="stage-n" x="80" y="382">第 3 阶</text>
+<text class="stage-t" x="146" y="382">HTTP 阶段成功吗</text>
+<text class="stage-sub" x="146" y="400">请求送得出去，也收得到回应</text>
+<path class="branch" d="M500 386 H588"/>
+<path class="branch-head" d="M600 386 L584 379 L584 393 Z"/>
+<text class="lbl-no" x="544" y="376" text-anchor="middle">失败</text>
+<rect class="hit" x="600" y="360" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="384" text-anchor="middle">blocking: "http-failure"</text>
+<text class="hit-sub" x="710" y="402" text-anchor="middle">HTTP 阶段就断了</text>
+
+<path class="flow" d="M280 412 V440"/>
+<path class="flow-head" d="M280 452 L273 436 L287 436 Z"/>
+<text class="lbl-yes" x="300" y="434">成功</text>
+
+<rect class="stage" x="60" y="460" width="440" height="52"/>
+<text class="stage-n" x="80" y="482">第 4 阶</text>
+<text class="stage-t" x="146" y="482">内容跟 test helper 拿到的一样吗</text>
+<text class="stage-sub" x="146" y="500">比对状态码、标题、内文长度与 body</text>
+<path class="branch" d="M500 486 H588"/>
+<path class="branch-head" d="M600 486 L584 479 L584 493 Z"/>
+<text class="lbl-no" x="544" y="476" text-anchor="middle">不一样</text>
+<rect class="hit" x="600" y="460" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="484" text-anchor="middle">blocking: "http-diff"</text>
+<text class="hit-sub" x="710" y="502" text-anchor="middle">回应被换掉了</text>
+
+<path class="flow" d="M280 512 V536"/>
+<path class="flow-head" d="M280 548 L273 532 L287 532 Z"/>
+<text class="lbl-yes" x="300" y="530">一样</text>
+
+<rect class="ok" x="60" y="556" width="440" height="50"/>
+<text class="ok-code mono" x="280" y="580" text-anchor="middle">blocking: false　accessible: true</text>
+<text class="ok-sub" x="280" y="598" text-anchor="middle">两边都正常，内容也相符</text>
+
+<text class="foot" x="600" y="566">判定在哪一阶停下，后面就不再比对。</text>
+<text class="foot" x="600" y="588">前三种情况下四个 match 栏位</text>
+<text class="foot" x="600" y="610">全是 null，原因就在这里。</text>
+</svg>

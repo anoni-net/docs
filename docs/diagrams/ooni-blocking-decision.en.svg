@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 646" width="880" height="646" role="img" aria-labelledby="title desc">
+<title id="title">The four decision stages in web_connectivity, and where each one stops</title>
+<desc id="desc">A decision flow. The same URL is measured once by the probe and once by an OONI test helper, and the two results are compared stage by stage. Stage one compares DNS answers; if they differ, blocking is dns. Stage two compares TCP: if the probe cannot connect while the test helper can, blocking is tcp_ip. Stage three checks the HTTP stage; a failure gives http-failure. Stage four compares the response body against what the test helper received; a difference gives http-diff. Passing all four gives blocking false and accessible true. Once a stage stops the comparison, nothing below it is compared, which is why all four match fields are null in the first three cases.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal, matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .mono { font-family: "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace; }
+  .src { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; rx: 8; }
+  .src-t { fill: #37474f; font-size: 14px; font-weight: 700; }
+  .src-sub { fill: #78909c; font-size: 11.5px; }
+  .stage { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; rx: 8; }
+  .stage-n { fill: #0089bf; font-size: 12px; font-weight: 700; }
+  .stage-t { fill: #212121; font-size: 14.5px; font-weight: 600; }
+  .stage-sub { fill: #607d8b; font-size: 11.5px; }
+  .hit { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.4; rx: 8; }
+  .hit-code { fill: #bf5700; font-size: 13.5px; font-weight: 700; }
+  .hit-sub { fill: #8d6e63; font-size: 11.5px; }
+  .ok { fill: #0089bf; stroke: none; rx: 8; }
+  .ok-code { fill: #ffffff; font-size: 13.5px; font-weight: 700; }
+  .ok-sub { fill: #cfeaf7; font-size: 11.5px; }
+  .flow { stroke: #0089bf; stroke-width: 2; fill: none; }
+  .flow-head { fill: #0089bf; }
+  .branch { stroke: #ef6c00; stroke-width: 1.8; fill: none; }
+  .branch-head { fill: #ef6c00; }
+  .lbl-no { fill: #ef6c00; font-size: 12px; font-weight: 700; }
+  .lbl-yes { fill: #0089bf; font-size: 12px; font-weight: 700; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .src { fill: #23292e; stroke: #4b565e; }
+    .src-t { fill: #cfd8dc; }
+    .src-sub { fill: #90a4ae; }
+    .stage { fill: #0d2b38; stroke: #4dbfff; }
+    .stage-n { fill: #4dbfff; }
+    .stage-t { fill: #eceff1; }
+    .stage-sub { fill: #90a4ae; }
+    .hit { fill: #33241a; stroke: #ff8c1a; }
+    .hit-code { fill: #ffb74d; }
+    .hit-sub { fill: #a1887f; }
+    .ok { fill: #1976a8; }
+    .ok-sub { fill: #cfeaf7; }
+    .flow { stroke: #4dbfff; }
+    .flow-head { fill: #4dbfff; }
+    .branch { stroke: #ff8c1a; }
+    .branch-head { fill: #ff8c1a; }
+    .lbl-no { fill: #ff8c1a; }
+    .lbl-yes { fill: #4dbfff; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="src" x="60" y="24" width="200" height="54"/>
+<text class="src-t"   x="160" y="46" text-anchor="middle">Probe side</text>
+<text class="src-sub" x="160" y="66" text-anchor="middle">one measurement from your network</text>
+<rect class="src" x="300" y="24" width="200" height="54"/>
+<text class="src-t"   x="400" y="46" text-anchor="middle">test helper</text>
+<text class="src-sub" x="400" y="66" text-anchor="middle">one measurement from outside</text>
+<text class="stage-sub" x="280" y="102" text-anchor="middle">The same URL measured on both sides, then compared stage by stage</text>
+<path class="flow" d="M160 78 V118 H280 V140"/>
+<path class="flow" d="M400 78 V118 H280"/>
+<path class="flow-head" d="M280 152 L273 136 L287 136 Z"/>
+
+<rect class="stage" x="60" y="160" width="440" height="52"/>
+<text class="stage-n" x="80" y="182">Stage 1</text>
+<text class="stage-t" x="146" y="182">Do the DNS answers match?</text>
+<text class="stage-sub" x="146" y="200">comparing the A and AAAA lookups on both sides</text>
+<path class="branch" d="M500 186 H588"/>
+<path class="branch-head" d="M600 186 L584 179 L584 193 Z"/>
+<text class="lbl-no" x="544" y="176" text-anchor="middle">differ</text>
+<rect class="hit" x="600" y="160" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="184" text-anchor="middle">blocking: "dns"</text>
+<text class="hit-sub" x="710" y="202" text-anchor="middle">the answers do not line up</text>
+
+<path class="flow" d="M280 212 V240"/>
+<path class="flow-head" d="M280 252 L273 236 L287 236 Z"/>
+<text class="lbl-yes" x="300" y="234">match</text>
+
+<rect class="stage" x="60" y="260" width="440" height="52"/>
+<text class="stage-n" x="80" y="282">Stage 2</text>
+<text class="stage-t" x="146" y="282">Can the probe complete TCP?</text>
+<text class="stage-sub" x="146" y="300">after confirming the test helper connects</text>
+<path class="branch" d="M500 286 H588"/>
+<path class="branch-head" d="M600 286 L584 279 L584 293 Z"/>
+<text class="lbl-no" x="544" y="276" text-anchor="middle">cannot</text>
+<rect class="hit" x="600" y="260" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="284" text-anchor="middle">blocking: "tcp_ip"</text>
+<text class="hit-sub" x="710" y="302" text-anchor="middle">cannot reach the address</text>
+
+<path class="flow" d="M280 312 V340"/>
+<path class="flow-head" d="M280 352 L273 336 L287 336 Z"/>
+<text class="lbl-yes" x="300" y="334">can</text>
+
+<rect class="stage" x="60" y="360" width="440" height="52"/>
+<text class="stage-n" x="80" y="382">Stage 3</text>
+<text class="stage-t" x="146" y="382">Did the HTTP stage succeed?</text>
+<text class="stage-sub" x="146" y="400">the request goes out and a response comes back</text>
+<path class="branch" d="M500 386 H588"/>
+<path class="branch-head" d="M600 386 L584 379 L584 393 Z"/>
+<text class="lbl-no" x="544" y="376" text-anchor="middle">failed</text>
+<rect class="hit" x="600" y="360" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="384" text-anchor="middle">blocking: "http-failure"</text>
+<text class="hit-sub" x="710" y="402" text-anchor="middle">it broke at the HTTP stage</text>
+
+<path class="flow" d="M280 412 V440"/>
+<path class="flow-head" d="M280 452 L273 436 L287 436 Z"/>
+<text class="lbl-yes" x="300" y="434">ok</text>
+
+<rect class="stage" x="60" y="460" width="440" height="52"/>
+<text class="stage-n" x="80" y="482">Stage 4</text>
+<text class="stage-t" x="146" y="482">Same content as the test helper got?</text>
+<text class="stage-sub" x="146" y="500">comparing status, title, body length, and body</text>
+<path class="branch" d="M500 486 H588"/>
+<path class="branch-head" d="M600 486 L584 479 L584 493 Z"/>
+<text class="lbl-no" x="544" y="476" text-anchor="middle">differs</text>
+<rect class="hit" x="600" y="460" width="220" height="52"/>
+<text class="hit-code mono" x="710" y="484" text-anchor="middle">blocking: "http-diff"</text>
+<text class="hit-sub" x="710" y="502" text-anchor="middle">the response was swapped</text>
+
+<path class="flow" d="M280 512 V536"/>
+<path class="flow-head" d="M280 548 L273 532 L287 532 Z"/>
+<text class="lbl-yes" x="300" y="530">same</text>
+
+<rect class="ok" x="60" y="556" width="440" height="50"/>
+<text class="ok-code mono" x="280" y="580" text-anchor="middle">blocking: false　accessible: true</text>
+<text class="ok-sub" x="280" y="598" text-anchor="middle">both sides normal, content matches</text>
+
+<text class="foot" x="600" y="566">A stage that fires ends the</text>
+<text class="foot" x="600" y="588">comparison, so all four match</text>
+<text class="foot" x="600" y="610">fields stay null in those cases.</text>
+</svg>

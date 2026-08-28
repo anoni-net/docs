@@ -30,6 +30,14 @@ test helper 是 OONI 架设在外部网络的测量服务器，观测结果收�
 
     `blocking` 是双边比对的结果，并非 Probe 单方面的观测。判读异常测量时，应先确认 `test_keys.control` 中 test helper 的观测内容，再回头读 `blocking`。下一节的 `tcp_ip` 范例即说明，忽略 `control` 会把网站自身的问题误判成封锁。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/ooni-blocking-decision.zh-CN.svg"
+        alt="判定流程图。同一个网址由 Probe 端与 test helper 各测一次，两边结果逐阶段比对。第一阶比 DNS 解析结果，不一致就判 dns。第二阶比 TCP 连线，Probe 连不上而 test helper 连得上就判 tcp_ip。第三阶比 HTTP 阶段，失败就判 http-failure。第四阶比回应内容，不同就判 http-diff。四阶都通过就是 blocking false、accessible true。判定在任何一阶中止之后就不再往下比对。">
+    <figcaption>差异出现在哪一阶，判定就停在哪一阶</figcaption>
+</figure>
+
+上面那张表列的是「差异出现在哪里」对应到哪个判定，画成流程之后会多看到一件事：判定是有顺序的。DNS 阶段一出问题就不再往下比对，所以后面那几个 `*_match` 栏位在前三种情况下全是 `null`。下一节的五笔实际测量，就是这四条路径各自的例子。
+
 ## 四种判定对应的证据
 
 后续章节引用的五笔测量都是 2026-08-04 的公开数据，可在 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查到原始内容。

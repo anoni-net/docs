@@ -527,6 +527,8 @@ Never put an angle bracket inside the `<style>` block, not even in a comment. Na
 
 A hand-written diagram brings its own frame and padding, so do not also apply `.brand-frame`, which would double the border. drawio exports have no frame of their own and keep `.brand-frame`.
 
+Text inside a diagram follows the writing rules as well, but `docs_style_lint.py` only reads `.md` and `.js` and never sees an SVG. Check the wording against the rules before the file is final. Finding a change after publishing means renaming the file, since overwriting the same name runs into the edge cache.
+
 ### Using a diagram in an article
 
 A drawio diagram, with `.brand-frame`:
