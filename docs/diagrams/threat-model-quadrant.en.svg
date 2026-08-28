@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 566" width="900" height="566" role="img" aria-labelledby="title desc">
+<title id="title">What a filled-in threat model actually looks like</title>
+<desc id="desc">A four-quadrant chart. The horizontal axis is how real a given asset and adversary pairing actually is, from low to high. The vertical axis is how strong your protection is today, from weak to strong. Top left is over-protected and can be let go, with a family group chat against state-level surveillance and viewing history against a law enforcement request. Top right is covered and worth keeping, with a bank account against scammers and a main email account against takeover. Bottom left is accepted, a known risk left alone, with public posts against a passing stranger and reading history against ad tracking. Bottom right is not covered yet and is the next step, with a cloud photo library against a platform breach and a reused password on an old account against credential stuffing.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Text inside a box is neutral dark rather than a brand
+     colour, to keep contrast above 4.5:1; the quadrant meaning is carried by the border
+     colour and the heading. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .axis-line { stroke: #cdcdcd; stroke-width: 1.5; }
+  .axis-label { fill: #546e7a; font-size: 14px; font-weight: 600; }
+  .axis-end { fill: #90a4ae; font-size: 12.5px; }
+  .q-title { font-size: 19px; font-weight: 700; }
+  .q-hint { font-size: 12.5px; }
+  .asset { fill: #212121; font-size: 15px; }
+  .foe { fill: #607d8b; font-size: 12.5px; }
+
+  .gap-box   { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.6; }
+  .gap-title { fill: #212121; }
+  .gap-hint  { fill: #ef6c00; font-weight: 600; }
+  .gap-dot   { fill: #ef6c00; }
+
+  .hold-box   { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; }
+  .hold-title { fill: #212121; }
+  .hold-hint  { fill: #546e7a; }
+  .hold-dot   { fill: #0089bf; }
+
+  .over-box   { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; }
+  .over-title { fill: #455a64; }
+  .over-hint  { fill: #78909c; }
+  .over-dot   { fill: #b0bec5; }
+
+  .ok-box   { fill: none; stroke: #cfd8dc; stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .ok-title { fill: #607d8b; }
+  .ok-hint  { fill: #90a4ae; }
+  .ok-dot   { fill: #cfd8dc; }
+
+  @media (prefers-color-scheme: dark) {
+    .axis-line { stroke: #45505a; }
+    .axis-label { fill: #b0bec5; }
+    .axis-end { fill: #78909c; }
+    .asset { fill: #eceff1; }
+    .foe { fill: #90a4ae; }
+
+    .gap-box   { fill: #33241a; stroke: #ff8c1a; }
+    .gap-title { fill: #eceff1; }
+    .gap-hint  { fill: #ffb74d; }
+    .gap-dot   { fill: #ff8c1a; }
+
+    .hold-box   { fill: #0d2b38; stroke: #4dbfff; }
+    .hold-title { fill: #eceff1; }
+    .hold-hint  { fill: #90a4ae; }
+    .hold-dot   { fill: #4dbfff; }
+
+    .over-box   { fill: #23292e; stroke: #4b565e; }
+    .over-title { fill: #b0bec5; }
+    .over-hint  { fill: #78909c; }
+    .over-dot   { fill: #5c666e; }
+
+    .ok-box   { stroke: #3f4a52; }
+    .ok-title { fill: #90a4ae; }
+    .ok-hint  { fill: #6b7780; }
+    .ok-dot   { fill: #4b565e; }
+  }
+</style>
+
+<rect class="over-box" x="72"  y="22"  width="398" height="228" rx="8"/>
+<text class="q-title over-title" x="94" y="56">Over-protected</text>
+<text class="q-hint  over-hint"  x="94" y="78">Cost you will not get back. Let it go.</text>
+<circle class="over-dot" cx="102" cy="126" r="4.5"/>
+<text class="asset" x="120" y="121">Family group chat</text>
+<text class="foe"   x="120" y="140">Adversary: state-level surveillance</text>
+<circle class="over-dot" cx="102" cy="190" r="4.5"/>
+<text class="asset" x="120" y="185">What you watch</text>
+<text class="foe"   x="120" y="204">Adversary: a law enforcement request</text>
+
+<rect class="hold-box" x="484" y="22"  width="398" height="228" rx="8"/>
+<text class="q-title hold-title" x="506" y="56">Covered</text>
+<text class="q-hint  hold-hint"  x="506" y="78">Keep it, and check again from time to time</text>
+<circle class="hold-dot" cx="514" cy="126" r="4.5"/>
+<text class="asset" x="532" y="121">Bank account</text>
+<text class="foe"   x="532" y="140">Adversary: scammers</text>
+<circle class="hold-dot" cx="514" cy="190" r="4.5"/>
+<text class="asset" x="532" y="185">Main email</text>
+<text class="foe"   x="532" y="204">Adversary: account takeover</text>
+
+<rect class="ok-box" x="72"  y="262" width="398" height="228" rx="8"/>
+<text class="q-title ok-title" x="94" y="296">Accepted</text>
+<text class="q-hint  ok-hint"  x="94" y="318">A known risk you decided to leave alone</text>
+<circle class="ok-dot" cx="102" cy="366" r="4.5"/>
+<text class="asset" x="120" y="361">Public posts</text>
+<text class="foe"   x="120" y="380">Adversary: a passing stranger</text>
+<circle class="ok-dot" cx="102" cy="430" r="4.5"/>
+<text class="asset" x="120" y="425">What news you read</text>
+<text class="foe"   x="120" y="444">Adversary: ad tracking</text>
+
+<rect class="gap-box" x="484" y="262" width="398" height="228" rx="8"/>
+<text class="q-title gap-title" x="506" y="296">Not covered yet</text>
+<text class="q-hint  gap-hint"  x="506" y="318">This box is your next step</text>
+<circle class="gap-dot" cx="514" cy="366" r="4.5"/>
+<text class="asset" x="532" y="361">Cloud photo library</text>
+<text class="foe"   x="532" y="380">Adversary: a platform breach</text>
+<circle class="gap-dot" cx="514" cy="430" r="4.5"/>
+<text class="asset" x="532" y="425">A password reused on an old account</text>
+<text class="foe"   x="532" y="444">Adversary: credential stuffing</text>
+
+<line class="axis-line" x1="60" y1="502" x2="890" y2="502"/>
+<text class="axis-end"   x="72"  y="524">Low</text>
+<text class="axis-label" x="477" y="525" text-anchor="middle">How real this pairing actually is</text>
+<text class="axis-end"   x="882" y="524" text-anchor="end">High</text>
+
+<line class="axis-line" x1="52" y1="10" x2="52" y2="492"/>
+<text class="axis-end"   x="30" y="44"  text-anchor="middle">Strong</text>
+<text class="axis-label" x="30" y="256" text-anchor="middle" transform="rotate(-90 30 256)">Your protection today</text>
+<text class="axis-end"   x="30" y="474" text-anchor="middle">Weak</text>
+</svg>
