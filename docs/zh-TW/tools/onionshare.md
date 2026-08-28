@@ -37,6 +37,14 @@ icon: material/share-circle
     <figcaption>OnionShare 主視窗的四個模式分頁，從左到右分別是 Share Files、Receive Files、Host a Website、Chat Anonymously。</figcaption>
 </figure>
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/onionshare-modes-flow.zh-TW.svg"
+        alt="四種模式的資料流向對照。Send 是你的電腦放檔案，對方用 Tor Browser 下載。Receive 是你開上傳介面，投件人上傳，你在本機收到。Host a Website 是你放一份靜態網站，多位訪客各自瀏覽。Chat 是雙向的即時對話，訊息只在記憶體，關掉就消失。四種共通的是中間那個 .onion 網址。">
+    <figcaption>四種模式的資料往哪個方向走</figcaption>
+</figure>
+
+上面那張截圖是四個分頁長什麼樣，這張圖是資料往哪走。四種模式的差別就在方向：Send 由你流向對方，Receive 由對方流向你，Host a Website 由你流向多人，Chat 是雙向。中間那一段都一樣，檔案直接在兩端之間走 Tor，沒有經過任何雲端服務。
+
 ### Send（送檔）
 
 把檔案丟進 OnionShare，產生一個 `.onion` 網址。把網址透過安全管道交給對方，對方用 Tor Browser 開啟、下載。
