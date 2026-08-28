@@ -57,6 +57,12 @@ hide:
 
 </div>
 
+## :material-bullhorn-outline: 近期公告
+
+<!-- latest-posts:5 -->
+
+更多请见 [:material-bullhorn-outline: 全部公告](./blog/index.md)。
+
 ## :material-account-switch-outline: 换个处境看看
 
 同一套工具在不同处境下的用法差很多。这几篇从具体的人与具体的风险写起，读完会比较知道自己需要保护什么。
@@ -120,14 +126,6 @@ hide:
     [:octicons-arrow-right-24: 直接使用](./utils/index.md)
 
 </div>
-
-## :material-bullhorn-outline: 近期公告
-
-!!! tip "最新动态"
-
-    <!-- latest-posts:5 -->
-
-    更多公告请见 [:material-bullhorn-outline: 近期公告](./blog/index.md)。
 
 ---
 

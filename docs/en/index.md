@@ -59,6 +59,12 @@ If one of civil society, a newsroom, independent journalism, open-source develop
 
 </div>
 
+## :material-bullhorn-outline: Recent updates
+
+<!-- latest-posts:5 -->
+
+More at [:material-bullhorn-outline: Updates](./blog/index.md).
+
 ## :material-map-outline: What we observe
 
 Our standing varies by jurisdiction. We don't claim equal depth across the region; the section below is honest about where we have direct experience versus where we are following, often through second-hand sources. Conceptual frame: [Why networked freedom matters](./basics/internet-freedom.md).
@@ -192,14 +198,6 @@ Seven more cover activists, election observers, domestic violence survivors, LGB
     [:octicons-arrow-right-24: Use them](./utils/index.md)
 
 </div>
-
-## :material-bullhorn-outline: Recent updates
-
-!!! tip "Latest"
-
-    <!-- latest-posts:5 -->
-
-    More at [:material-bullhorn-outline: Updates](./blog/index.md).
 
 ---
 
