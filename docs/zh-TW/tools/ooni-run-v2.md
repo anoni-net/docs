@@ -37,7 +37,9 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 ## anoni.net 如何使用
 
-社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，目前納入 anoni.net 的官網、Cryptpad、Etherpad、SearXNG、Send、Matrix 與 docs 站。協助者用 OONI Probe 安裝連結後，每次執行測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
+社群維運的 OONI Run 連結 ID 是 `10328`，網址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，清單目前有 10 個網址，涵蓋官網、Etherpad、CryptPad、SearXNG、Send、Matrix、Cinny、電子報表單與靜態資源站。協助者用 OONI Probe 安裝連結後，每次執行測試都會把這幾個自架服務的可達性回傳到 OONI 公開資料庫。對社群來說，這是長期確認「我們的服務在台灣不同電信商眼中還連得上」的低成本方式。
+
+安裝過一次之後讓它留在背景持續執行，效果比偶爾手動測一輪好得多。社群做過的[全站普查](../blog/posts/2026-ooni-run-v2-usage-patterns.md)顯示，336 條 Run v2 清單裡有 112 條生涯檢測量掛零，193 條不到 100 筆，真正產出資料的清單，共通點都是背後有一台持續運行的裝置。
 
 連結之外，[OONI 網站檢測清單](../taiwan/ooni-checklist.md) 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助執行這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
 

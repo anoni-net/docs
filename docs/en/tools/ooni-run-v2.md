@@ -30,7 +30,11 @@ To assess these risks more systematically, see [how to build a threat model](../
 
 ## How our community uses it
 
-The community runs an OONI Run link (`10328`, at [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}) that checks the reachability of our own self-hosted services (the main site, CryptPad, Etherpad, SearXNG, Send, Matrix, and this docs site) from wherever a helper is. Each time a helper runs the test, it reports whether those services are reachable on their network, which is a low-cost way to confirm over time that our services are still reachable across different carriers in the region. If you want to help, install that link in OONI Probe (Android; check OONI for current iOS support) and run it. How that connects to broader ASN coverage is in the [regional observatory](../regional/index.md).
+The community runs an OONI Run link (`10328`, at [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}) that checks the reachability of our own self-hosted services from wherever a helper is. The list currently holds 10 URLs, covering the main site, Etherpad, CryptPad, SearXNG, Send, Matrix, Cinny, the newsletter form, and the static asset host. Each time a helper runs the test, it reports whether those services are reachable on their network, which is a low-cost way to confirm over time that our services are still reachable across different carriers in the region.
+
+Leaving the link running in the background after a one-time install is far more useful than running it by hand now and then. Our [census of every Run v2 link](../blog/posts/2026-ooni-run-v2-usage-patterns.md) found that of 336 lists, 112 had zero lifetime measurements and 193 had fewer than 100. The lists that actually produce data all share one trait: a device that keeps running behind them.
+
+If you want to help, install that link in OONI Probe (Android; check OONI for current iOS support) and run it. How that connects to broader ASN coverage is in the [regional observatory](../regional/index.md).
 
 ## The miniooni CLI gotcha
 

@@ -48,6 +48,14 @@ icon: material/access-point-network
 
 [:material-chart-bar: 2023/12 觀察報告](https://ocf.tw/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
 
+### 你可以補上一格
+
+要補上覆蓋，最直接的做法是讓一台裝置在還沒人測過的 ASN 上持續執行。社群維運的 OONI Run 連結 `10328` 是現成的入口，行動裝置安裝 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 之後點一次連結就完成設定，接著讓它留在背景執行。安裝前的風險前提與清單內容見 [OONI Run v2 操作說明](../tools/ooni-run-v2.md)。
+
+用行動網路的協助者特別有幫助。現有測量幾乎都落在少數固網 ASN 上，行動業者與第二類電信的資料最缺。
+
+[:material-help-network: 怎麼參與觀測](../tools/ooni-run-v2.md){ .md-button }
+
 ## 如何解讀單筆測量資料（進階）
 
 以下示範如何讀懂一筆原始測量紀錄，適合想自己著手分析的人，一般讀者可以直接跳到下一節。最快的入門路徑是先產生一筆屬於自己的資料，從 OONI Probe 操作開始：

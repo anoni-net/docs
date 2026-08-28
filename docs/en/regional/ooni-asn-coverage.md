@@ -52,6 +52,14 @@ For detailed content, please refer to the following report.
 
 [:material-chart-bar: December 2023 Observation Report](https://ocf.tw/en/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
 
+### Fill in one of the gaps
+
+The most direct way to improve coverage is to keep one device measuring from an ASN nobody has covered yet. The community's OONI Run link `10328` is a ready-made entry point: install [OONI Probe](https://ooni.org/install/mobile){target="_blank"} on a mobile device, tap the link once to set it up, and leave it running in the background. The risks to weigh beforehand and the contents of the list are covered in the [OONI Run v2 guide](../tools/ooni-run-v2.md).
+
+Helpers on mobile networks are especially valuable. Existing measurements cluster on a handful of fixed-line ASNs, and data from mobile carriers and Type II telecom operators is the scarcest.
+
+[:material-help-network: How to take part](../tools/ooni-run-v2.md){ .md-button }
+
 ## Reading a single measurement
 
 !!! info "We are looking for volunteers"

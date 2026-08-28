@@ -63,6 +63,7 @@ icon: material/account-outline
 
 - [什么是 Tor](../tools/what-is-tor.md)：多数人听过名字，用途与限制值得看清楚
 - [互动与呈现](../games/index.md)：用 3D 影像与可操作的游戏走一遍洋葱路由，比读文字快
+- [帮忙做一次网络观测](../tools/ooni-run-v2.md)：手机安装 OONI Probe 并加入社群的检测清单，让它在背景执行，就会持续回报台湾各家电信连不连得上
 
 ## 带得走的东西
 
