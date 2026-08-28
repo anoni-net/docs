@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 452" width="970" height="452" role="img" aria-labelledby="title desc">
+<title id="title">Tails、Whonix、Qubes 三种隔离结构长得不一样</title>
+<desc id="desc">三个系统的结构对照。Tails 是整机重置，从 USB 开机，一次工作阶段全部在里面，关机后整个消失，全部流量强制走 Tor。Whonix 是在你原本的操作系统里架两台虚拟机，Workstation 给你做事，它的流量只能经过 Gateway 出去，Gateway 强制走 Tor，主机系统照常使用。Qubes 是用 Xen hypervisor 把一台电脑切成多个独立的 qube，工作、个人、金融各自一个，要走 Tor 的话另外装一个 Whonix qube。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。cyan 标的是强制走 Tor 的那一块，
+     跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .sys { fill: #212121; font-size: 18px; font-weight: 700; }
+  .sys-sub { fill: #546e7a; font-size: 12.5px; }
+  .outer { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.4; }
+  .outer-gone { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.4; stroke-dasharray: 6 5; }
+  .outer-lbl { fill: #78909c; font-size: 11.5px; }
+  .inner { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.2; }
+  .inner-tor { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; }
+  .inner-lbl { fill: #212121; font-size: 13.5px; font-weight: 600; }
+  .inner-note { fill: #78909c; font-size: 11px; }
+  .flow { stroke: #0089bf; stroke-width: 1.8; fill: none; }
+  .flow-head { fill: #0089bf; }
+  .flow-lbl { fill: #0089bf; font-size: 11.5px; font-weight: 600; }
+  .foot { fill: #546e7a; font-size: 12.5px; }
+
+  @media (prefers-color-scheme: dark) {
+    .sys { fill: #eceff1; }
+    .sys-sub { fill: #b0bec5; }
+    .outer { fill: #23292e; stroke: #4b565e; }
+    .outer-gone { fill: #23292e; stroke: #4b565e; }
+    .outer-lbl { fill: #90a4ae; }
+    .inner { fill: #2c343a; stroke: #4b565e; }
+    .inner-tor { fill: #0d2b38; stroke: #4dbfff; }
+    .inner-lbl { fill: #eceff1; }
+    .inner-note { fill: #90a4ae; }
+    .flow { stroke: #4dbfff; }
+    .flow-head { fill: #4dbfff; }
+    .flow-lbl { fill: #4dbfff; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="sys"     x="30" y="42">Tails</text>
+<text class="sys-sub" x="30" y="62">整机重置</text>
+<rect class="outer-gone" x="30" y="80" width="280" height="230" rx="9"/>
+<text class="outer-lbl" x="46" y="102">一次工作阶段，从 USB 开机</text>
+<rect class="inner" x="52" y="116" width="236" height="120" rx="7"/>
+<text class="inner-lbl"  x="170" y="168" text-anchor="middle">你的全部工作</text>
+<text class="inner-note" x="170" y="188" text-anchor="middle">浏览、文件、通讯都在这里</text>
+<text class="flow-lbl"  x="170" y="256" text-anchor="middle">全部流量强制走 Tor</text>
+<text class="outer-lbl" x="170" y="280" text-anchor="middle">关机之后整个消失</text>
+<text class="outer-lbl" x="170" y="298" text-anchor="middle">除非另外开 Persistent Storage</text>
+
+<text class="sys"     x="374" y="42">Whonix</text>
+<text class="sys-sub" x="374" y="62">两台虚拟机分工</text>
+<rect class="outer" x="374" y="80" width="280" height="230" rx="9"/>
+<text class="outer-lbl" x="390" y="102">你原本的操作系统照常使用</text>
+<rect class="inner" x="396" y="116" width="236" height="66" rx="7"/>
+<text class="inner-lbl"  x="514" y="144" text-anchor="middle">Workstation</text>
+<text class="inner-note" x="514" y="164" text-anchor="middle">你在这里做事，连不到外面</text>
+<path class="flow" d="M514 182 V206"/>
+<path class="flow-head" d="M514 218 L507 202 L521 202 Z"/>
+<rect class="inner-tor" x="396" y="226" width="236" height="66" rx="7"/>
+<text class="inner-lbl"  x="514" y="254" text-anchor="middle">Gateway</text>
+<text class="inner-note" x="514" y="274" text-anchor="middle">唯一的出口，强制走 Tor</text>
+
+<text class="sys"     x="718" y="42">Qubes OS</text>
+<text class="sys-sub" x="718" y="62">一个任务一个 qube</text>
+<rect class="outer" x="718" y="80" width="222" height="230" rx="9"/>
+<text class="outer-lbl" x="734" y="102">Xen hypervisor 切开硬件</text>
+<rect class="inner" x="736" y="116" width="90" height="58" rx="6"/>
+<text class="inner-lbl" x="781" y="150" text-anchor="middle">工作</text>
+<rect class="inner" x="836" y="116" width="90" height="58" rx="6"/>
+<text class="inner-lbl" x="881" y="150" text-anchor="middle">个人</text>
+<rect class="inner" x="736" y="186" width="90" height="58" rx="6"/>
+<text class="inner-lbl" x="781" y="220" text-anchor="middle">金融</text>
+<rect class="inner-tor" x="836" y="186" width="90" height="58" rx="6"/>
+<text class="inner-lbl"  x="881" y="213" text-anchor="middle">Whonix</text>
+<text class="inner-note" x="881" y="231" text-anchor="middle">要另外装</text>
+<text class="outer-lbl" x="829" y="272" text-anchor="middle">qube 之间预设互不相通</text>
+<text class="outer-lbl" x="829" y="292" text-anchor="middle">只有 Whonix 那一个走 Tor</text>
+
+<text class="foot" x="30" y="352">Tails 一小时上手，做完就没了，适合一次性任务。Whonix 保留工作状态，跨平台，理解双 VM 要花半天到一天。</text>
+<text class="foot" x="30" y="374">Qubes 把界线画在硬件层，隔离最彻底，代价是挑硬件（VT-d、建议 16 GB 以上内存）与大约一周的适应期。</text>
+<text class="foot" x="30" y="396">三套的差别不在谁比较安全，在于界线画在哪一层，以及你愿意为那条界线付出多少。</text>
+</svg>

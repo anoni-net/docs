@@ -49,6 +49,14 @@ icon: material/message-text-outline
 
 对照组的「E2EE 默认」一栏写的是消息内容层级，不代表 metadata 也加密。Telegram 的「不适用」是因为一般群组与频道根本不走 E2EE，没办法谈「群组 E2EE 机制」。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/messaging-landscape.zh-CN.svg"
+        alt="散点图。横轴是身分绑定方式，左边绑手机号码，右边不绑任何可查的身分。纵轴是 metadata 留在哪，下面是中央服务器看得到全部，上面是没有中央服务器可看。LINE、Telegram、WhatsApp 三个对照组落在左下角。Signal 偏上偏左，metadata 最小化但身分仍绑手机。Matrix 落在中间偏下。Session、SimpleX、Briar 落在右上角。位置是相对的，不是量测值。">
+    <figcaption>八个工具在身分绑定与 metadata 这两个轴上的落点</figcaption>
+</figure>
+
+速查表列的是每个栏位的值，把其中两个轴拉成座标之后，看得到的是另一件事。对照组那三个挤在左下角，右上角那一群把身分与 metadata 都拆掉了。Signal 卡在左上，metadata 设计是主名单里最省的一个，身分却仍然绑在手机号码上。位置是相对的，不是量测值。
+
 ## Signal
 
 [Signal](https://signal.org/){target="_blank"} 是 E2EE 通讯工具的当前共识答案，协议成熟、UX 接近主流 IM。一对一用 Double Ratchet（每则消息独立密钥），群组用 Sender Keys，协议细节见 [端对端加密如何运作](../advanced/e2ee.md)。

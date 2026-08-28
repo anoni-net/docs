@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 516" width="1000" height="516" role="img" aria-labelledby="title desc">
+<title id="title">VPN 換掉的是那個單點是誰，Tor 把它拆掉</title>
+<desc id="desc">三種連線方式的對照。直接連的時候，ISP 同時知道你是誰與你連哪，網站看到你的真實 IP。經過 VPN 的時候，ISP 只看到你連上 VPN，改由 VPN 業者同時知道你是誰與你連哪，網站看到 VPN 的 IP。經過 Tor 的時候，ISP 只看到你在用 Tor，Guard 知道你是誰但不知道你連哪，Middle 兩邊都不知道，Exit 知道你連哪但不知道你是誰，網站看到出口節點的 IP。前兩種各有一個節點同時知道兩件事，Tor 沒有。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。橙色標的是同時知道你是誰與你連哪的節點，
+     也就是那個單點，跟站上其他示意圖的語意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .wire { stroke: #b0bec5; stroke-width: 1.6; }
+  .row-label { fill: #212121; font-size: 15px; font-weight: 700; }
+  .row-sub { fill: #90a4ae; font-size: 11.5px; }
+  .node { rx: 7; }
+  .n-plain { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; }
+  .n-safe  { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; }
+  .n-risk  { fill: #ef6c00; stroke: none; }
+  .t-plain { fill: #455a64; font-size: 14px; font-weight: 600; }
+  .t-safe  { fill: #212121; font-size: 14px; font-weight: 600; }
+  .t-risk  { fill: #ffffff; font-size: 14px; font-weight: 700; }
+  .cap { fill: #607d8b; font-size: 11.5px; }
+  .cap-risk { fill: #bf5700; font-size: 11.5px; font-weight: 600; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .wire { stroke: #5c666e; }
+    .row-label { fill: #eceff1; }
+    .row-sub { fill: #78909c; }
+    .n-plain { fill: #23292e; stroke: #4b565e; }
+    .n-safe  { fill: #0d2b38; stroke: #4dbfff; }
+    .n-risk  { fill: #ff8c1a; }
+    .t-plain { fill: #b0bec5; }
+    .t-safe  { fill: #eceff1; }
+    .t-risk  { fill: #241708; }
+    .cap { fill: #90a4ae; }
+    .cap-risk { fill: #ffb74d; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="row-label" x="150" y="92"  text-anchor="end">直接連</text>
+<line class="wire" x1="280" y1="94" x2="500" y2="94"/>
+<line class="wire" x1="650" y1="94" x2="870" y2="94"/>
+<rect class="node n-plain" x="170" y="70" width="110" height="48"/>
+<text class="t-plain" x="225" y="99" text-anchor="middle">你</text>
+<rect class="node n-risk"  x="500" y="70" width="150" height="48"/>
+<text class="t-risk" x="575" y="99" text-anchor="middle">ISP</text>
+<text class="cap-risk" x="575" y="134" text-anchor="middle">知道你是誰</text>
+<text class="cap-risk" x="575" y="150" text-anchor="middle">也知道你連哪</text>
+<rect class="node n-plain" x="870" y="70" width="110" height="48"/>
+<text class="t-plain" x="925" y="99" text-anchor="middle">網站</text>
+<text class="cap" x="925" y="134" text-anchor="middle">看到你的</text>
+<text class="cap" x="925" y="150" text-anchor="middle">真實 IP</text>
+
+<text class="row-label" x="150" y="222" text-anchor="end">經過 VPN</text>
+<text class="row-sub"   x="150" y="240" text-anchor="end">單點換人</text>
+<line class="wire" x1="280" y1="224" x2="405" y2="224"/>
+<line class="wire" x1="555" y1="224" x2="595" y2="224"/>
+<line class="wire" x1="745" y1="224" x2="870" y2="224"/>
+<rect class="node n-plain" x="170" y="200" width="110" height="48"/>
+<text class="t-plain" x="225" y="229" text-anchor="middle">你</text>
+<rect class="node n-safe"  x="405" y="200" width="150" height="48"/>
+<text class="t-safe" x="480" y="229" text-anchor="middle">ISP</text>
+<text class="cap" x="480" y="264" text-anchor="middle">只看到你</text>
+<text class="cap" x="480" y="280" text-anchor="middle">連上 VPN</text>
+<rect class="node n-risk"  x="595" y="200" width="150" height="48"/>
+<text class="t-risk" x="670" y="229" text-anchor="middle">VPN 業者</text>
+<text class="cap-risk" x="670" y="264" text-anchor="middle">知道你是誰</text>
+<text class="cap-risk" x="670" y="280" text-anchor="middle">也知道你連哪</text>
+<rect class="node n-plain" x="870" y="200" width="110" height="48"/>
+<text class="t-plain" x="925" y="229" text-anchor="middle">網站</text>
+<text class="cap" x="925" y="264" text-anchor="middle">看到 VPN</text>
+<text class="cap" x="925" y="280" text-anchor="middle">的 IP</text>
+
+<text class="row-label" x="150" y="352" text-anchor="end">經過 Tor</text>
+<text class="row-sub"   x="150" y="370" text-anchor="end">單點被拆開</text>
+<line class="wire" x1="280" y1="354" x2="309" y2="354"/>
+<line class="wire" x1="427" y1="354" x2="447" y2="354"/>
+<line class="wire" x1="565" y1="354" x2="585" y2="354"/>
+<line class="wire" x1="703" y1="354" x2="723" y2="354"/>
+<line class="wire" x1="841" y1="354" x2="870" y2="354"/>
+<rect class="node n-plain" x="170" y="330" width="110" height="48"/>
+<text class="t-plain" x="225" y="359" text-anchor="middle">你</text>
+<rect class="node n-safe" x="309" y="330" width="118" height="48"/>
+<text class="t-safe" x="368" y="359" text-anchor="middle">ISP</text>
+<text class="cap" x="368" y="394" text-anchor="middle">只看到你</text>
+<text class="cap" x="368" y="410" text-anchor="middle">在用 Tor</text>
+<rect class="node n-safe" x="447" y="330" width="118" height="48"/>
+<text class="t-safe" x="506" y="359" text-anchor="middle">Guard</text>
+<text class="cap" x="506" y="394" text-anchor="middle">知道你是誰</text>
+<text class="cap" x="506" y="410" text-anchor="middle">不知道你連哪</text>
+<rect class="node n-safe" x="585" y="330" width="118" height="48"/>
+<text class="t-safe" x="644" y="359" text-anchor="middle">Middle</text>
+<text class="cap" x="644" y="394" text-anchor="middle">兩邊</text>
+<text class="cap" x="644" y="410" text-anchor="middle">都不知道</text>
+<rect class="node n-safe" x="723" y="330" width="118" height="48"/>
+<text class="t-safe" x="782" y="359" text-anchor="middle">Exit</text>
+<text class="cap" x="782" y="394" text-anchor="middle">知道你連哪</text>
+<text class="cap" x="782" y="410" text-anchor="middle">不知道你是誰</text>
+<rect class="node n-plain" x="870" y="330" width="110" height="48"/>
+<text class="t-plain" x="925" y="359" text-anchor="middle">網站</text>
+<text class="cap" x="925" y="394" text-anchor="middle">看到出口</text>
+<text class="cap" x="925" y="410" text-anchor="middle">節點的 IP</text>
+
+<text class="foot" x="30" y="462">橙色那一格是同時知道你是誰與你連哪的節點。VPN 把它從 ISP 換成 VPN 業者，數量沒有變。</text>
+<text class="foot" x="30" y="486">Tor 把這兩件事拆給三個互不相干的中繼，任何一個節點都湊不出完整的答案，所以不需要信任其中任何一個。</text>
+</svg>

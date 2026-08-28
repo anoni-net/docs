@@ -37,6 +37,14 @@ Even with a VPN on, the timing of your connections, the size of your traffic, th
 
 The difference from Tor is in how trust is distributed. Tor routes your connection through three mutually independent relays (volunteer-run intermediate nodes), so no single node knows both who you are and where you are going — you don't have to trust any single node. A VPN concentrates trust in one provider, and your privacy depends on whether that provider is honest and whether it can be compelled to talk.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/vpn-trust-shift.en.svg"
+        alt="Three ways of connecting, compared. Connecting directly, the ISP knows both who you are and where you go, and the site sees your real IP. Through a VPN, the ISP only sees you reaching a VPN, while the provider now knows both facts. Through Tor, the ISP only sees you using Tor, the guard knows who you are but not where you go, the middle relay knows neither side, and the exit knows where you go but not who you are. The first two each have one node holding both facts. Tor has none.">
+    <figcaption>What a VPN changes is who the single point is</figcaption>
+</figure>
+
+The trust question above, drawn out. The orange box is the node that knows both who you are and where you are going. Connecting directly that is your ISP; with a VPN it becomes the provider. The count stays at one, and what changes is which company it is. The Tor row has no orange box, because those two facts are split across three unrelated relays.
+
 ## The concrete risks
 
 - **Concentrated trust**: "Doesn't log" is not the same as "can't log". The VPN provider can technically see all your traffic. Most providers claim no-log (they don't keep usage records), but there is a gap between the claim and the practice. A "no-log" claim with no independent audit and no real-world case behind it is just marketing copy. A few providers have proof: in April 2023 Swedish police arrived at Mullvad's office with a search warrant to seize computers holding customer data, and left empty-handed because that data simply does not exist[^mullvad-raid]. Having nothing to hand over after a search is what no-log actually means.

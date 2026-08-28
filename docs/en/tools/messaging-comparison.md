@@ -41,6 +41,14 @@ Before the table, here is what each column is asking and why it changes your ris
 
 The baseline rows are there because most readers already use them. Their "E2EE default" entry describes message content only; it never implies the metadata layer is protected. Telegram's "no" is the important correction: ordinary chats, groups, and channels are not end-to-end encrypted, only the manually-enabled one-to-one Secret Chat is.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/messaging-landscape.en.svg"
+        alt="A scatter plot. The horizontal axis is how identity is bound, from a phone number on the left to no lookupable identity on the right. The vertical axis is where metadata sits, from a central server seeing everything at the bottom to no central server at the top. LINE, Telegram, and WhatsApp sit in the lower left. Signal sits higher and still to the left. Matrix sits centre-low. Session, SimpleX, and Briar sit in the upper right. Positions are relative rather than measured.">
+    <figcaption>Where the eight tools land on identity binding and metadata</figcaption>
+</figure>
+
+The table above lists the value in each column. Plotting two of those columns as axes shows something else: the comparison group clusters in the lower left, while the upper right group has unpicked both identity and metadata. Signal sits high and to the left, with the leanest metadata design on the main list and an identity still tied to a phone number. Positions are relative rather than measured.
+
 ## The regional point that reorders the table
 
 In much of the Asia-Pacific, registering a SIM ties the phone number to a legal identity. Mandatory real-name SIM registration is in force across the region, including Thailand, Vietnam, Indonesia, Malaysia, and the Philippines under its 2022 SIM Registration Act[^8]. Mainland China binds phone numbers and national ID to most online accounts as a matter of course.

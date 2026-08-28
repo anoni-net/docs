@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 516" width="1000" height="516" role="img" aria-labelledby="title desc">
+<title id="title">A VPN changes who the single point is. Tor removes it.</title>
+<desc id="desc">Three ways of connecting, compared. Connecting directly, the ISP knows both who you are and where you go, and the site sees your real IP. Through a VPN, the ISP only sees you reaching a VPN, while the VPN provider now knows both who you are and where you go, and the site sees the VPN's IP. Through Tor, the ISP only sees you using Tor, the guard relay knows who you are but not where you go, the middle relay knows neither side, the exit relay knows where you go but not who you are, and the site sees the exit node's IP. The first two each have one node holding both facts. Tor has none.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Orange marks what is exposed and cyan what is protected,
+     matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .wire { stroke: #b0bec5; stroke-width: 1.6; }
+  .row-label { fill: #212121; font-size: 15px; font-weight: 700; }
+  .row-sub { fill: #90a4ae; font-size: 11.5px; }
+  .node { rx: 7; }
+  .n-plain { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; }
+  .n-safe  { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; }
+  .n-risk  { fill: #ef6c00; stroke: none; }
+  .t-plain { fill: #455a64; font-size: 14px; font-weight: 600; }
+  .t-safe  { fill: #212121; font-size: 14px; font-weight: 600; }
+  .t-risk  { fill: #ffffff; font-size: 14px; font-weight: 700; }
+  .cap { fill: #607d8b; font-size: 11.5px; }
+  .cap-risk { fill: #bf5700; font-size: 11.5px; font-weight: 600; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .wire { stroke: #5c666e; }
+    .row-label { fill: #eceff1; }
+    .row-sub { fill: #78909c; }
+    .n-plain { fill: #23292e; stroke: #4b565e; }
+    .n-safe  { fill: #0d2b38; stroke: #4dbfff; }
+    .n-risk  { fill: #ff8c1a; }
+    .t-plain { fill: #b0bec5; }
+    .t-safe  { fill: #eceff1; }
+    .t-risk  { fill: #241708; }
+    .cap { fill: #90a4ae; }
+    .cap-risk { fill: #ffb74d; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="row-label" x="150" y="92"  text-anchor="end">Direct</text>
+<line class="wire" x1="280" y1="94" x2="500" y2="94"/>
+<line class="wire" x1="650" y1="94" x2="870" y2="94"/>
+<rect class="node n-plain" x="170" y="70" width="110" height="48"/>
+<text class="t-plain" x="225" y="99" text-anchor="middle">You</text>
+<rect class="node n-risk"  x="500" y="70" width="150" height="48"/>
+<text class="t-risk" x="575" y="99" text-anchor="middle">ISP</text>
+<text class="cap-risk" x="575" y="134" text-anchor="middle">Knows who you are</text>
+<text class="cap-risk" x="575" y="150" text-anchor="middle">and where you go</text>
+<rect class="node n-plain" x="870" y="70" width="110" height="48"/>
+<text class="t-plain" x="925" y="99" text-anchor="middle">Site</text>
+<text class="cap" x="925" y="134" text-anchor="middle">Sees your</text>
+<text class="cap" x="925" y="150" text-anchor="middle">real IP</text>
+
+<text class="row-label" x="150" y="222" text-anchor="end">Through a VPN</text>
+<text class="row-sub"   x="150" y="240" text-anchor="end">the single point moves</text>
+<line class="wire" x1="280" y1="224" x2="405" y2="224"/>
+<line class="wire" x1="555" y1="224" x2="595" y2="224"/>
+<line class="wire" x1="745" y1="224" x2="870" y2="224"/>
+<rect class="node n-plain" x="170" y="200" width="110" height="48"/>
+<text class="t-plain" x="225" y="229" text-anchor="middle">You</text>
+<rect class="node n-safe"  x="405" y="200" width="150" height="48"/>
+<text class="t-safe" x="480" y="229" text-anchor="middle">ISP</text>
+<text class="cap" x="480" y="264" text-anchor="middle">Only sees you</text>
+<text class="cap" x="480" y="280" text-anchor="middle">reach a VPN</text>
+<rect class="node n-risk"  x="595" y="200" width="150" height="48"/>
+<text class="t-risk" x="670" y="229" text-anchor="middle">VPN provider</text>
+<text class="cap-risk" x="670" y="264" text-anchor="middle">Knows who you are</text>
+<text class="cap-risk" x="670" y="280" text-anchor="middle">and where you go</text>
+<rect class="node n-plain" x="870" y="200" width="110" height="48"/>
+<text class="t-plain" x="925" y="229" text-anchor="middle">Site</text>
+<text class="cap" x="925" y="264" text-anchor="middle">Sees the VPN's</text>
+<text class="cap" x="925" y="280" text-anchor="middle">IP</text>
+
+<text class="row-label" x="150" y="352" text-anchor="end">Through Tor</text>
+<text class="row-sub"   x="150" y="370" text-anchor="end">the single point is split</text>
+<line class="wire" x1="280" y1="354" x2="309" y2="354"/>
+<line class="wire" x1="427" y1="354" x2="447" y2="354"/>
+<line class="wire" x1="565" y1="354" x2="585" y2="354"/>
+<line class="wire" x1="703" y1="354" x2="723" y2="354"/>
+<line class="wire" x1="841" y1="354" x2="870" y2="354"/>
+<rect class="node n-plain" x="170" y="330" width="110" height="48"/>
+<text class="t-plain" x="225" y="359" text-anchor="middle">You</text>
+<rect class="node n-safe" x="309" y="330" width="118" height="48"/>
+<text class="t-safe" x="368" y="359" text-anchor="middle">ISP</text>
+<text class="cap" x="368" y="394" text-anchor="middle">Only sees you</text>
+<text class="cap" x="368" y="410" text-anchor="middle">using Tor</text>
+<rect class="node n-safe" x="447" y="330" width="118" height="48"/>
+<text class="t-safe" x="506" y="359" text-anchor="middle">Guard</text>
+<text class="cap" x="506" y="394" text-anchor="middle">Knows who you are</text>
+<text class="cap" x="506" y="410" text-anchor="middle">not where you go</text>
+<rect class="node n-safe" x="585" y="330" width="118" height="48"/>
+<text class="t-safe" x="644" y="359" text-anchor="middle">Middle</text>
+<text class="cap" x="644" y="394" text-anchor="middle">Knows neither</text>
+<text class="cap" x="644" y="410" text-anchor="middle">side</text>
+<rect class="node n-safe" x="723" y="330" width="118" height="48"/>
+<text class="t-safe" x="782" y="359" text-anchor="middle">Exit</text>
+<text class="cap" x="782" y="394" text-anchor="middle">Knows where you go</text>
+<text class="cap" x="782" y="410" text-anchor="middle">not who you are</text>
+<rect class="node n-plain" x="870" y="330" width="110" height="48"/>
+<text class="t-plain" x="925" y="359" text-anchor="middle">Site</text>
+<text class="cap" x="925" y="394" text-anchor="middle">Sees the exit</text>
+<text class="cap" x="925" y="410" text-anchor="middle">node's IP</text>
+
+<text class="foot" x="30" y="462">The orange box is the node that knows both who you are and where you are going. A VPN moves it from the ISP to the provider, and the count stays at one.</text>
+<text class="foot" x="30" y="486">Tor splits those two facts across three unrelated relays. No single node holds the whole answer, so none of them has to be trusted.</text>
+</svg>
