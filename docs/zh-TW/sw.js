@@ -66,6 +66,22 @@ const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
 // 十一 MB 變成十八 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
 const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 
+// 這個 SW 發出去的每一個請求都要繞過瀏覽器自己的 HTTP 快取。
+//
+// Cloudflare 上有一條 browser_ttl 為 override_origin 的 Cache Rule，送給讀者的
+// HTML 一律是 max-age=14400。沒帶 cache 選項的 fetch 在那四小時內根本不出門，
+// 拿回來的是裝置上的舊副本，network-first 看起來問過網路，實際上問的是自己，
+// 而那份舊回應還會被寫回 RUNTIME_PAGES，讓舊內容更久留在裝置上。
+//
+// 分頁裡的 Safari 讀者感覺不到，因為從網址列進站或下拉重新整理的 cache mode 是
+// reload，本來就繞過 HTTP 快取。standalone 的 PWA 冷啟動與站內點連結都是
+// default，加上 iOS 的 home screen app 有獨立的 storage 分區，Safari 那邊抓到
+// 新內容也傳不過來，於是只有 PWA 一直卡在舊版。
+//
+// no-cache 這個名字容易誤會，它的意思是每次都跟伺服器確認一次，內容沒變時回
+// 304，成本是一個往返。快取照樣留著。
+const NO_HTTP_CACHE = { credentials: "same-origin", cache: "no-cache" };
+
 // SW scope 在正式站是 /docs/，本地開發（mkdocs serve）是 /
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
 
@@ -353,9 +369,10 @@ function precacheUrlsFor(prefix) {
 // 讀者自己勾的頁面走的是另一條，由管理頁把資產一起送進 LIBRARY_ASSETS。
 async function corePageAssets(prefix) {
   try {
-    const response = await fetch(SCOPE_PATH + prefix + "offline-index.json", {
-      credentials: "same-origin",
-    });
+    const response = await fetch(
+      SCOPE_PATH + prefix + "offline-index.json",
+      NO_HTTP_CACHE
+    );
     if (!response.ok) return [];
     const index = await response.json();
     const core = new Set(CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH);
@@ -442,7 +459,7 @@ async function precacheFor(prefix, wantFull) {
   await Promise.allSettled(
     urls.map(async (url) => {
       if (await cache.match(url)) return;
-      const response = await fetch(url, { credentials: "same-origin" });
+      const response = await fetch(url, NO_HTTP_CACHE);
       if (response.ok) await cache.put(url, response);
     })
   );
@@ -620,7 +637,7 @@ async function addToLibrary(prefix, paths, assets, refresh, report) {
       if (!refresh && (await target.cache.match(url))) {
         ok += 1;
       } else {
-        const response = await fetch(url, { credentials: "same-origin" });
+        const response = await fetch(url, NO_HTTP_CACHE);
         if (response.ok) {
           await target.cache.put(url, response);
           ok += 1;
@@ -907,8 +924,13 @@ async function trimCache(cacheName, maxEntries) {
 const NAVIGATE_TIMEOUT_MS = 3000;
 
 async function networkFirst(request, event) {
-  // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取
-  const network = fetch(request).then(async (response) => {
+  // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取。
+  //
+  // cache 選項的理由見 NO_HTTP_CACHE，這裡傳的是 Request，credentials 由它自己帶。
+  // 帶 init 去複製一個 mode 為 navigate 的 Request，規格會把 mode 降成
+  // same-origin。這裡的請求在 fetch handler 入口已經濾成同源，站內連結也都是
+  // mkdocs 產出的完整目錄形狀，走不到跨站轉址那條路。
+  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
     if (response.ok && (await autoPrecacheEnabled())) {
       const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
@@ -947,7 +969,10 @@ async function networkFirst(request, event) {
 
 async function staleWhileRevalidate(request, event) {
   const cached = await caches.match(request);
-  const fetchPromise = fetch(request)
+  // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
+  // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。這裡回應先給快取，
+  // revalidate 在背景跑，讀者感覺不到多出來的那個往返。
+  const fetchPromise = fetch(request, { cache: "no-cache" })
     .then(async (response) => {
       if (response.ok && (await autoPrecacheEnabled())) {
         const cache = await caches.open(RUNTIME_ASSETS);
