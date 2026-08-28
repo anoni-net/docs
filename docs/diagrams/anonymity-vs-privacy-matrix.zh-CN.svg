@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 468" width="880" height="468" role="img" aria-labelledby="title desc">
+<title id="title">四个概念各自遮蔽观察者能看到的哪一部分</title>
+<desc id="desc">一张四行三列的对照表。三个栏位是观察者可能看到的三件事：你是谁、你的行为能否被串起来、你说什么。四个行是匿名、假名、机密性、隐私。匿名遮住你是谁与行为关联，不处理内容。假名遮住你是谁，行为关联看得到，不处理内容。机密性遮住内容，你是谁与行为关联都看得到。隐私三件事都由你决定揭露给谁。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，所以只能寫死 hex。底色是主色的極淡衍生。
+     格內文字一律用中性深色而不用主色，是為了讓對比度過 4.5:1，語意靠框色與文字本身。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .frame { stroke: #cdcdcd; stroke-width: 1.5; fill: none; }
+  .grid  { stroke: #cdcdcd; stroke-width: 1; opacity: .55; }
+  .h1 { fill: #212121; font-size: 17px; font-weight: 600; }
+  .h2 { fill: #546e7a; font-size: 12.5px; }
+  .rl { fill: #212121; font-size: 18px; font-weight: 600; }
+  .rle { fill: #546e7a; font-size: 11.5px; }
+  .corner { fill: #546e7a; font-size: 13px; }
+  .cell { font-size: 16px; font-weight: 500; }
+  .hidden-box  { fill: #0089bf; }
+  .hidden-tx   { fill: #ffffff; }
+  .visible-box { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.4; }
+  .visible-tx  { fill: #212121; }
+  .na-box      { fill: none; stroke: #cdcdcd; stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .na-tx       { fill: #546e7a; }
+  .you-box     { fill: #edf7ed; stroke: #4caf50; stroke-width: 1.4; }
+  .you-tx      { fill: #212121; }
+  @media (prefers-color-scheme: dark) {
+    .frame { stroke: #45505a; }
+    .grid  { stroke: #45505a; opacity: .8; }
+    .h1, .rl { fill: #eceff1; }
+    .h2, .rle, .corner, .na-tx { fill: #a8b4bc; }
+    .hidden-box  { fill: #4dbfff; }
+    .hidden-tx   { fill: #003e57; }
+    .visible-box { fill: #33241a; stroke: #ff8c1a; }
+    .visible-tx  { fill: #eceff1; }
+    .na-box      { stroke: #5c666e; }
+    .you-box     { fill: #1c2b1d; stroke: #66bb6a; }
+    .you-tx      { fill: #eceff1; }
+  }
+</style>
+
+<rect class="frame" x="12" y="10" width="856" height="450" rx="8"/>
+
+<line class="grid" x1="12"  y1="100" x2="868" y2="100"/>
+<line class="grid" x1="12"  y1="190" x2="868" y2="190"/>
+<line class="grid" x1="12"  y1="280" x2="868" y2="280"/>
+<line class="grid" x1="12"  y1="370" x2="868" y2="370"/>
+<line class="grid" x1="176" y1="10"  x2="176" y2="460"/>
+<line class="grid" x1="410" y1="10"  x2="410" y2="460"/>
+<line class="grid" x1="644" y1="10"  x2="644" y2="460"/>
+
+<text class="corner" x="30" y="50">观察者</text>
+<text class="corner" x="30" y="70">看得到什么</text>
+
+<text class="h1" x="293" y="52" text-anchor="middle">你是谁</text>
+<text class="h2" x="293" y="76" text-anchor="middle">连得到真实身份吗</text>
+<text class="h1" x="527" y="52" text-anchor="middle">你的行为</text>
+<text class="h2" x="527" y="76" text-anchor="middle">多次行为能被串起来吗</text>
+<text class="h1" x="756" y="52" text-anchor="middle">你说什么</text>
+<text class="h2" x="756" y="76" text-anchor="middle">读得到消息内容吗</text>
+
+<text class="rl"  x="30" y="140">匿名</text>
+<text class="rle" x="30" y="160">Anonymity</text>
+<text class="rl"  x="30" y="230">假名</text>
+<text class="rle" x="30" y="250">Pseudonymity</text>
+<text class="rl"  x="30" y="320">机密性</text>
+<text class="rle" x="30" y="340">Confidentiality</text>
+<text class="rl"  x="30" y="410">隐私</text>
+<text class="rle" x="30" y="430">Privacy</text>
+
+<rect class="hidden-box"  x="227" y="125" width="132" height="40" rx="6"/>
+<text class="cell hidden-tx"  x="293" y="145" text-anchor="middle" dominant-baseline="central">看不到</text>
+<rect class="hidden-box"  x="461" y="125" width="132" height="40" rx="6"/>
+<text class="cell hidden-tx"  x="527" y="145" text-anchor="middle" dominant-baseline="central">看不到</text>
+<rect class="na-box"      x="690" y="125" width="132" height="40" rx="6"/>
+<text class="cell na-tx"      x="756" y="145" text-anchor="middle" dominant-baseline="central">不涉及</text>
+
+<rect class="hidden-box"  x="227" y="215" width="132" height="40" rx="6"/>
+<text class="cell hidden-tx"  x="293" y="235" text-anchor="middle" dominant-baseline="central">看不到</text>
+<rect class="visible-box" x="461" y="215" width="132" height="40" rx="6"/>
+<text class="cell visible-tx" x="527" y="235" text-anchor="middle" dominant-baseline="central">看得到</text>
+<rect class="na-box"      x="690" y="215" width="132" height="40" rx="6"/>
+<text class="cell na-tx"      x="756" y="235" text-anchor="middle" dominant-baseline="central">不涉及</text>
+
+<rect class="visible-box" x="227" y="305" width="132" height="40" rx="6"/>
+<text class="cell visible-tx" x="293" y="325" text-anchor="middle" dominant-baseline="central">看得到</text>
+<rect class="visible-box" x="461" y="305" width="132" height="40" rx="6"/>
+<text class="cell visible-tx" x="527" y="325" text-anchor="middle" dominant-baseline="central">看得到</text>
+<rect class="hidden-box"  x="690" y="305" width="132" height="40" rx="6"/>
+<text class="cell hidden-tx"  x="756" y="325" text-anchor="middle" dominant-baseline="central">看不到</text>
+
+<rect class="you-box" x="227" y="395" width="132" height="40" rx="6"/>
+<text class="cell you-tx" x="293" y="415" text-anchor="middle" dominant-baseline="central">你决定</text>
+<rect class="you-box" x="461" y="395" width="132" height="40" rx="6"/>
+<text class="cell you-tx" x="527" y="415" text-anchor="middle" dominant-baseline="central">你决定</text>
+<rect class="you-box" x="690" y="395" width="132" height="40" rx="6"/>
+<text class="cell you-tx" x="756" y="415" text-anchor="middle" dominant-baseline="central">你决定</text>
+</svg>

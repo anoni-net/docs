@@ -23,6 +23,14 @@ This page puts the four side by side and draws the lines between them with concr
 | Pseudonymity | *Which persona is this, in this context?* | You act under a stable handle that is cut off from your real identity. Actions under one handle can be linked together, but not back to the person. |
 | Confidentiality | *Can only authorized people read the content?* | A message or file is readable only by its intended recipient; it is not exposed to unauthorized parties in transit or at rest. |
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/anonymity-vs-privacy-matrix.en.svg"
+        alt="A four-by-three table. The columns are the three things an observer may see: who you are, whether your separate actions can be linked, and what you say. Anonymity hides who you are and the link between your actions, and does not cover content. Pseudonymity hides who you are while the link between actions stays visible, and does not cover content. Confidentiality hides the content while who you are and the link between actions stay visible. Privacy leaves all three for you to decide who may see them.">
+    <figcaption>What each concept hides from an observer, and what it leaves in the open</figcaption>
+</figure>
+
+Reading the three columns separately makes the differences land faster than the definitions do. In the confidentiality row the first two cells are both "Visible", which is exactly where the mistake in the next section comes from. The privacy row is "You decide" all the way across, because privacy is about control rather than about a fixed state, so it sits at a different level from the other three.
+
 ## The same four, made concrete
 
 ### Sending a letter
