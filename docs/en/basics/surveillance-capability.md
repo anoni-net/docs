@@ -26,6 +26,14 @@ The other groupings on this site line up with these layers. [Threat modeling](./
 
     The warrant thresholds, retention periods, and facial-recognition status below use Taiwan as the worked example, because that is this site's primary context. They are illustrative, not universal — check your own jurisdiction. In mainland China, mandatory real-name registration, statutory data retention, and content moderation built into the platform layer drop that threshold sharply, and public speech alone can be enough to open a case; see [posting on mainland Chinese platforms](../scenarios/mainland-speech.md) and [speaking online from Singapore and Malaysia](../scenarios/singapore-malaysia-speech.md). Hong Kong has measured national-security sentences in years since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, and since March 2026 refusing to surrender a device password during a national-security investigation is itself an offense, including for passengers merely transiting through the airport; see the Hong Kong section of [cross-border travel and device searches](../scenarios/asia-travel.md). The platform and spyware layers do transfer.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/surveillance-cost-reach.en.svg"
+        alt="Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people the layer reaches and gets shorter to the right. The downward bar is the cost of using it on one person and gets longer to the right. Platforms and ads cost almost nothing and reach everyone; a commercial spyware licence runs to tens of thousands of dollars and works from a short list.">
+    <figcaption>Cost and reach run in opposite directions across the four layers</figcaption>
+</figure>
+
+The first point above, drawn out. The cheaper a layer is per target, the more people it covers, which makes it the layer you actually meet. The right-hand column has the strongest capability and, because of the price, the shortest list.
+
 ## Platforms, advertisers, and data brokers
 
 The widest layer. Marginal cost per person is close to zero, so everyone is in it.

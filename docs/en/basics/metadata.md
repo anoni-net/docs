@@ -25,6 +25,14 @@ A PGP-encrypted email to a lawyer keeps the body unreadable, but "you have an on
 
 This is the depth target for the "confidential is not anonymous" point in [anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md). A tool can keep your content fully confidential and still expose who you are and who you reach.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/metadata-envelope.en.svg"
+        alt="An envelope diagram. On the outside are the sender, the recipient, the time and duration, the message size, the subject line, and how often the two exchange messages, all readable without decrypting anything. Inside is a locked block standing for the end-to-end encrypted letter, which only the recipient can read. To the right are three conclusions drawn from the outside of the envelope alone: that you and a law firm are in regular contact, that you spoke to a reporter for thirty minutes tonight, and that this set of people is your regular circle.">
+    <figcaption>Encryption covers what is inside the envelope, and nothing around it</figcaption>
+</figure>
+
+The same point drawn out. The ring of fields on the outside is visible to the recipient, to every server along the path, and to whoever controls the link, with no decryption involved. The three conclusions on the right follow from that ring alone.
+
 ## The regional sharpener: real-name SIM registration
 
 In much of East and Southeast Asia, buying a SIM card means handing over an ID document. Mandatory SIM-card registration tied to identity is the norm across the region[^1]. That changes what metadata costs you.
