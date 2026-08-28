@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 512" width="940" height="512" role="img" aria-labelledby="title desc">
+<title id="title">出差准备是往上加码，每一层都建立在下面所有层之上</title>
+<desc id="desc">五层由下往上收窄的叠加图。最下面一层是每个地点都适用的通用准备：简化装置、行前把规避工具装好测好、准备两种以上连线方式、帐号分流、全盘加密。往上第二层是低风险的台湾、日本与南韩，用平常的工具即可，办 SIM 记得带护照。第三层是中风险的菲律宾、马来西亚、新加坡、印尼与澳门，公共 Wi-Fi 一律走 VPN，对外发表前先看当地内容法规。第四层是高风险的香港、泰国、越南、柬埔寨与中国大陆，混淆型 VPN 与 Tor 桥接要先在家测好，带干净机，敏感工作不在当地网络做。最上面一层是极高风险的缅甸，带最简化的干净装置，避免落地办卡，全程假设受监控。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。橙色越深代表准备强度要拉得越高，
+     跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .base  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; rx: 8; }
+  .low   { fill: #e6f4fb; stroke: #4dbfff; stroke-width: 1.3; rx: 8; }
+  .mid   { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; rx: 8; }
+  .high  { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; rx: 8; }
+  .top   { fill: #ef6c00; stroke: none; rx: 8; }
+  .tier { font-size: 14px; font-weight: 700; }
+  .item { font-size: 12.5px; }
+  .dark-t { fill: #212121; }
+  .white-t { fill: #ffffff; }
+  .white-i { fill: #ffe7d1; }
+  .muted { fill: #607d8b; }
+  .up { stroke: #90a4ae; stroke-width: 1.4; fill: none; }
+  .up-head { fill: #90a4ae; }
+  .up-lbl { fill: #78909c; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .base  { fill: #23292e; stroke: #4b565e; }
+    .low   { fill: #0d2b38; stroke: #4dbfff; }
+    .mid   { fill: #33241a; stroke: #9c5f1f; }
+    .high  { fill: #9c5f1f; stroke: #ff8c1a; }
+    .top   { fill: #ff8c1a; }
+    .dark-t { fill: #eceff1; }
+    .white-t { fill: #241708; }
+    .white-i { fill: #3d2410; }
+    .muted { fill: #90a4ae; }
+    .up { stroke: #6b7780; }
+    .up-head { fill: #6b7780; }
+    .up-lbl { fill: #78909c; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="top" x="270" y="30" width="400" height="62"/>
+<text class="tier white-t" x="470" y="54" text-anchor="middle">极高风险：缅甸</text>
+<text class="item white-i" x="470" y="76" text-anchor="middle">最简化的干净装置，避免落地办卡，全程假设受监控</text>
+
+<rect class="high" x="200" y="102" width="540" height="62"/>
+<text class="tier dark-t" x="470" y="126" text-anchor="middle">高风险：香港、泰国、越南、柬埔寨、中国大陆</text>
+<text class="item dark-t" x="470" y="148" text-anchor="middle">混淆型 VPN 与 Tor 桥接先在家测好，带干净机，敏感工作不在当地网络做</text>
+
+<rect class="mid" x="130" y="174" width="680" height="62"/>
+<text class="tier dark-t" x="470" y="198" text-anchor="middle">中风险：菲律宾、马来西亚、新加坡、印尼、澳门</text>
+<text class="item muted"  x="470" y="220" text-anchor="middle">公共与会场 Wi-Fi 一律走 VPN，对外发表前先了解当地的内容与诽谤法规</text>
+
+<rect class="low" x="70" y="246" width="800" height="62"/>
+<text class="tier dark-t" x="470" y="270" text-anchor="middle">低风险：台湾（参照）、日本、南韩</text>
+<text class="item muted"  x="470" y="292" text-anchor="middle">接近家用环境，用平常的工具即可。办 SIM 记得带护照</text>
+
+<rect class="base" x="30" y="318" width="880" height="76"/>
+<text class="tier dark-t" x="470" y="344" text-anchor="middle">每个地点都适用</text>
+<text class="item muted"  x="470" y="366" text-anchor="middle">带最简化的装置。行前把规避工具装好并连过一次。准备两种以上的连线方式。</text>
+<text class="item muted"  x="470" y="384" text-anchor="middle">敏感通讯走端对端加密。帐号分流。开全盘加密与开机密码。留离线备份。</text>
+
+<path class="up" d="M902 380 V70"/>
+<path class="up-head" d="M902 56 L894 74 L910 74 Z"/>
+<text class="up-lbl" x="922" y="176" text-anchor="middle">准</text>
+<text class="up-lbl" x="922" y="195" text-anchor="middle">备</text>
+<text class="up-lbl" x="922" y="214" text-anchor="middle">强</text>
+<text class="up-lbl" x="922" y="233" text-anchor="middle">度</text>
+<text class="up-lbl" x="922" y="252" text-anchor="middle">往</text>
+<text class="up-lbl" x="922" y="271" text-anchor="middle">上</text>
+<text class="up-lbl" x="922" y="290" text-anchor="middle">加</text>
+
+<text class="foot" x="30" y="430">每一层都建立在下面所有层之上，风险越高的目的地，往上叠的项目越多。</text>
+<text class="foot" x="30" y="452">香港被放进高风险层的理由跟另外四地不同。它的连线环境接近中风险，门槛在入境检查站：2026 年 3 月起涉及国安调查时，</text>
+<text class="foot" x="30" y="474">拒绝交出装置密码本身即构成犯罪，适用所有国籍，包含只在机场转机通关的旅客。装置内容成为主要暴露面，准备强度就要拉到干净机这一层。</text>
+<text class="foot" x="30" y="496">分层与逐地细节都会变。出发前查一次目的地当下的规定，页面后半的逐地注记列了各地的查证来源。</text>
+</svg>

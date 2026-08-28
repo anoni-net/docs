@@ -16,6 +16,14 @@ icon: octicons/paste-24
     | **實作** | 實際操作安裝、日常操作工具 | 記者、公民社會工作者、任何需要保護通訊安全的人 |
     | **貢獻** | 技術建置、資料分析、社群參與 | 具備基本命令列操作或資料分析能力的開源社群成員 |
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/skill-level-matrix.zh-TW.svg"
+        alt="三欄三列的對照表。三欄是 Tor、Tails、OONI，三列是認識、實作、貢獻。認識層在 Tor 是說得出洋蔥路由與三層中繼，在 Tails 是說得出跟一般作業系統差在哪，在 OONI 是說得出它在測什麼。實作層在 Tor 是裝好瀏覽器並會用橋接，在 Tails 是做出開機隨身碟，在 OONI 是執行 Probe 產出報告。貢獻層在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是備份 Persistent Storage 與 GnuPG 金鑰管理，在 OONI 是命令列執行指定測試與分析原始資料。">
+    <figcaption>同一個層級在三個工具上分別代表什麼</figcaption>
+</figure>
+
+下面三節各自展開一個工具的三個層級。橫著看的話是這樣：同一個「貢獻」在 Tor 是架中繼，在 Tails 是金鑰與持久磁區的管理，在 OONI 是命令列測試與資料分析。三欄互相獨立，不必依序點滿。
+
 ## Tor 技能分級
 
 === ":material-checkbox-marked-circle-outline: 認識"

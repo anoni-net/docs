@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 486" width="920" height="486" role="img" aria-labelledby="title desc">
+<title id="title">What the same level means on each of the three tools</title>
+<desc id="desc">A three-by-three table. The columns are Tor, Tails, and OONI; the rows are the know, use, and contribute levels. At the know level, suited to anyone curious, that means explaining onion routing for Tor, saying how Tails differs from an ordinary operating system, and saying what OONI measures. At the use level, suited to journalists and civil society workers, it means installing Tor Browser and connecting with a bridge, building a bootable Tails USB, and running Probe to produce a report. At the contribute level, suited to open source contributors, it means running a relay, bridge, or WebTunnel; backing up Persistent Storage and managing GnuPG keys; and running chosen tests from the command line while curating lists and analysing raw data. The three columns are independent.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal, matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .tool { fill: #212121; font-size: 17px; font-weight: 700; }
+  .tool-sub { fill: #78909c; font-size: 11.5px; }
+  .lv1 { fill: #e6f4fb; stroke: #b3e3ff; stroke-width: 1.2; rx: 8; }
+  .lv2 { fill: #b3e3ff; stroke: #80d1ff; stroke-width: 1.2; rx: 8; }
+  .lv3 { fill: #4dbfff; stroke: #26b3ff; stroke-width: 1.2; rx: 8; }
+  .cell { fill: #212121; font-size: 13.5px; }
+  .lv-name { fill: #212121; font-size: 16px; font-weight: 700; }
+  .lv-who { fill: #78909c; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .tool { fill: #eceff1; }
+    .tool-sub { fill: #90a4ae; }
+    .lv1 { fill: #16323d; stroke: #24647f; }
+    .lv2 { fill: #1f5872; stroke: #2b7396; }
+    .lv3 { fill: #2489b4; stroke: #35a3d1; }
+    .cell { fill: #eceff1; }
+    .lv-name { fill: #eceff1; }
+    .lv-who { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="tool"     x="288" y="42" text-anchor="middle">Tor</text>
+<text class="tool-sub" x="288" y="60" text-anchor="middle">the base for anonymity</text>
+<text class="tool"     x="530" y="42" text-anchor="middle">Tails</text>
+<text class="tool-sub" x="530" y="60" text-anchor="middle">raises the whole environment</text>
+<text class="tool"     x="772" y="42" text-anchor="middle">OONI</text>
+<text class="tool-sub" x="772" y="60" text-anchor="middle">measures censorship</text>
+
+<text class="lv-name" x="150" y="112" text-anchor="end">Know</text>
+<text class="lv-who"  x="150" y="132" text-anchor="end">Anyone curious</text>
+<rect class="lv1" x="170" y="78" width="236" height="80"/>
+<text class="cell" x="188" y="112">Can explain onion routing</text>
+<text class="cell" x="188" y="134">and the three-relay path</text>
+<rect class="lv1" x="412" y="78" width="236" height="80"/>
+<text class="cell" x="430" y="112">Can say how Tails differs</text>
+<text class="cell" x="430" y="134">from an ordinary OS</text>
+<rect class="lv1" x="654" y="78" width="236" height="80"/>
+<text class="cell" x="672" y="112">Can say what OONI</text>
+<text class="cell" x="672" y="134">measures, and why</text>
+
+<text class="lv-name" x="150" y="212" text-anchor="end">Use</text>
+<text class="lv-who"  x="150" y="232" text-anchor="end">Journalists, civil society</text>
+<rect class="lv2" x="170" y="178" width="236" height="80"/>
+<text class="cell" x="188" y="212">Install Tor Browser</text>
+<text class="cell" x="188" y="234">Connect with a bridge</text>
+<rect class="lv2" x="412" y="178" width="236" height="80"/>
+<text class="cell" x="430" y="212">Build a bootable USB</text>
+<text class="cell" x="430" y="234">and boot into it</text>
+<rect class="lv2" x="654" y="178" width="236" height="80"/>
+<text class="cell" x="672" y="212">Run Probe, produce a report</text>
+<text class="cell" x="672" y="234">Read results in Explorer</text>
+
+<text class="lv-name" x="150" y="312" text-anchor="end">Contribute</text>
+<text class="lv-who"  x="150" y="332" text-anchor="end">Open source contributors</text>
+<rect class="lv3" x="170" y="278" width="236" height="80"/>
+<text class="cell" x="188" y="312">Run a relay, a bridge,</text>
+<text class="cell" x="188" y="334">or WebTunnel</text>
+<rect class="lv3" x="412" y="278" width="236" height="80"/>
+<text class="cell" x="430" y="312">Back up Persistent Storage</text>
+<text class="cell" x="430" y="334">Manage keys with GnuPG</text>
+<rect class="lv3" x="654" y="278" width="236" height="80"/>
+<text class="cell" x="672" y="312">Run chosen tests from the CLI</text>
+<text class="cell" x="672" y="334">curate lists, analyse raw data</text>
+
+<text class="foot" x="30" y="398">The same level is not the same work on all three. Read across to see what “contributing” means for each.</text>
+<text class="foot" x="30" y="420">The three columns are independent. Pick the one that matches what you want to work on, and move up from where you are.</text>
+<text class="foot" x="30" y="442">Each cell has its own checklist on the page, and each level lists the reading to catch up on.</text>
+</svg>

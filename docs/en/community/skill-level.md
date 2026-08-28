@@ -16,6 +16,14 @@ Here is a self-evaluation scale to help you quickly assess your understanding of
     | **Practice** | Install and operate tools in daily use | Journalists, civil society workers, anyone who needs to protect their communications |
     | **Contribute** | Build infrastructure, analyze data, participate in the community | Open-source community members with basic command-line or data analysis skills |
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/skill-level-matrix.en.svg"
+        alt="A three-by-three table. The columns are Tor, Tails, and OONI; the rows are the know, use, and contribute levels. Knowing means explaining onion routing, saying how Tails differs from an ordinary OS, and saying what OONI measures. Using means installing Tor Browser and connecting with a bridge, building a bootable Tails USB, and running Probe to produce a report. Contributing means running a relay, bridge, or WebTunnel; backing up Persistent Storage and managing GnuPG keys; and running chosen tests from the command line while analysing raw data.">
+    <figcaption>What the same level means on each of the three tools</figcaption>
+</figure>
+
+The three sections below each expand one tool across its three levels. Read across instead, and the same “contribute” level is running relays for Tor, key and persistent-storage management for Tails, and command-line testing and data analysis for OONI. The three columns are independent, and there is no need to fill in all of them.
+
 ## Tor skills
 
 === ":material-checkbox-marked-circle-outline: Awareness"

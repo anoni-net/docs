@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 486" width="920" height="486" role="img" aria-labelledby="title desc">
+<title id="title">同一个层级在三个工具上分别代表什么</title>
+<desc id="desc">三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献三个层级。认识层适合任何想了解的人，在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层适合记者与公民社会工作者，在 Tor 是装好浏览器并会用桥接，在 Tails 是做出开机U盘并从 USB 进系统，在 OONI 是执行 Probe 产出检测报告。贡献层适合开源社群成员，在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与用 GnuPG 管理密钥，在 OONI 是用命令行执行指定测试、整理观测名单与分析原始数据。三栏各自独立，不必依序点满。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。cyan 由浅到深代表层级递进，
+     跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .tool { fill: #212121; font-size: 17px; font-weight: 700; }
+  .tool-sub { fill: #78909c; font-size: 11.5px; }
+  .lv1 { fill: #e6f4fb; stroke: #b3e3ff; stroke-width: 1.2; rx: 8; }
+  .lv2 { fill: #b3e3ff; stroke: #80d1ff; stroke-width: 1.2; rx: 8; }
+  .lv3 { fill: #4dbfff; stroke: #26b3ff; stroke-width: 1.2; rx: 8; }
+  .cell { fill: #212121; font-size: 13.5px; }
+  .lv-name { fill: #212121; font-size: 16px; font-weight: 700; }
+  .lv-who { fill: #78909c; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .tool { fill: #eceff1; }
+    .tool-sub { fill: #90a4ae; }
+    .lv1 { fill: #16323d; stroke: #24647f; }
+    .lv2 { fill: #1f5872; stroke: #2b7396; }
+    .lv3 { fill: #2489b4; stroke: #35a3d1; }
+    .cell { fill: #eceff1; }
+    .lv-name { fill: #eceff1; }
+    .lv-who { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="tool"     x="288" y="42" text-anchor="middle">Tor</text>
+<text class="tool-sub" x="288" y="60" text-anchor="middle">匿名上网的基础</text>
+<text class="tool"     x="530" y="42" text-anchor="middle">Tails</text>
+<text class="tool-sub" x="530" y="60" text-anchor="middle">把整个环境拉到高安全需求</text>
+<text class="tool"     x="772" y="42" text-anchor="middle">OONI</text>
+<text class="tool-sub" x="772" y="60" text-anchor="middle">观测与测量网络审查</text>
+
+<text class="lv-name" x="150" y="112" text-anchor="end">认识</text>
+<text class="lv-who"  x="150" y="132" text-anchor="end">任何想了解的人</text>
+<rect class="lv1" x="170" y="78" width="236" height="80"/>
+<text class="cell" x="188" y="112">说得出洋葱路由</text>
+<text class="cell" x="188" y="134">与三层中继怎么运作</text>
+<rect class="lv1" x="412" y="78" width="236" height="80"/>
+<text class="cell" x="430" y="112">说得出 Tails 跟一般</text>
+<text class="cell" x="430" y="134">操作系统差在哪</text>
+<rect class="lv1" x="654" y="78" width="236" height="80"/>
+<text class="cell" x="672" y="112">说得出 OONI 在测</text>
+<text class="cell" x="672" y="134">什么、为什么要测</text>
+
+<text class="lv-name" x="150" y="212" text-anchor="end">实作</text>
+<text class="lv-who"  x="150" y="232" text-anchor="end">记者、公民社会工作者</text>
+<rect class="lv2" x="170" y="178" width="236" height="80"/>
+<text class="cell" x="188" y="212">装好 Tor Browser</text>
+<text class="cell" x="188" y="234">会用桥接连线</text>
+<rect class="lv2" x="412" y="178" width="236" height="80"/>
+<text class="cell" x="430" y="212">做出开机U盘</text>
+<text class="cell" x="430" y="234">从 USB 进系统</text>
+<rect class="lv2" x="654" y="178" width="236" height="80"/>
+<text class="cell" x="672" y="212">执行 Probe 产出报告</text>
+<text class="cell" x="672" y="234">看得懂 Explorer 的结果</text>
+
+<text class="lv-name" x="150" y="312" text-anchor="end">贡献</text>
+<text class="lv-who"  x="150" y="332" text-anchor="end">开源社群成员</text>
+<rect class="lv3" x="170" y="278" width="236" height="80"/>
+<text class="cell" x="188" y="312">架 Relay、Bridge</text>
+<text class="cell" x="188" y="334">或 WebTunnel</text>
+<rect class="lv3" x="412" y="278" width="236" height="80"/>
+<text class="cell" x="430" y="312">备份 Persistent Storage</text>
+<text class="cell" x="430" y="334">用 GnuPG 管理密钥</text>
+<rect class="lv3" x="654" y="278" width="236" height="80"/>
+<text class="cell" x="672" y="312">命令行执行指定测试</text>
+<text class="cell" x="672" y="334">整理名单、分析原始资料</text>
+
+<text class="foot" x="30" y="398">同一个层级在三个工具上不是同一件事。横着看，会知道「贡献」对每个工具各自代表什么。</text>
+<text class="foot" x="30" y="420">三栏各自独立，不必依序点满。挑跟你想参与的主题相关的那一栏，从目前所在的那一格往上走。</text>
+<text class="foot" x="30" y="442">每一格在页面上都有对应的自我评估清单，还没到的话，那一级的「从这里开始」列了要补的文章。</text>
+</svg>

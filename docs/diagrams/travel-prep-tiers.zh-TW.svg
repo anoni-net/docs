@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 512" width="940" height="512" role="img" aria-labelledby="title desc">
+<title id="title">出差準備是往上加碼，每一層都建立在下面所有層之上</title>
+<desc id="desc">五層由下往上收窄的疊加圖。最下面一層是每個地點都適用的通用準備：簡化裝置、行前把規避工具裝好測好、準備兩種以上連線方式、帳號分流、全碟加密。往上第二層是低風險的台灣、日本與南韓，用平常的工具即可，辦 SIM 記得帶護照。第三層是中風險的菲律賓、馬來西亞、新加坡、印尼與澳門，公共 Wi-Fi 一律走 VPN，對外發表前先看當地內容法規。第四層是高風險的香港、泰國、越南、柬埔寨與中國大陸，混淆型 VPN 與 Tor 橋接要先在家測好，帶乾淨機，敏感工作不在當地網路做。最上面一層是極高風險的緬甸，帶最簡化的乾淨裝置，避免落地辦卡，全程假設受監控。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。橙色越深代表準備強度要拉得越高，
+     跟站上其他示意圖的語意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .base  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; rx: 8; }
+  .low   { fill: #e6f4fb; stroke: #4dbfff; stroke-width: 1.3; rx: 8; }
+  .mid   { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; rx: 8; }
+  .high  { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; rx: 8; }
+  .top   { fill: #ef6c00; stroke: none; rx: 8; }
+  .tier { font-size: 14px; font-weight: 700; }
+  .item { font-size: 12.5px; }
+  .dark-t { fill: #212121; }
+  .white-t { fill: #ffffff; }
+  .white-i { fill: #ffe7d1; }
+  .muted { fill: #607d8b; }
+  .up { stroke: #90a4ae; stroke-width: 1.4; fill: none; }
+  .up-head { fill: #90a4ae; }
+  .up-lbl { fill: #78909c; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .base  { fill: #23292e; stroke: #4b565e; }
+    .low   { fill: #0d2b38; stroke: #4dbfff; }
+    .mid   { fill: #33241a; stroke: #9c5f1f; }
+    .high  { fill: #9c5f1f; stroke: #ff8c1a; }
+    .top   { fill: #ff8c1a; }
+    .dark-t { fill: #eceff1; }
+    .white-t { fill: #241708; }
+    .white-i { fill: #3d2410; }
+    .muted { fill: #90a4ae; }
+    .up { stroke: #6b7780; }
+    .up-head { fill: #6b7780; }
+    .up-lbl { fill: #78909c; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="top" x="270" y="30" width="400" height="62"/>
+<text class="tier white-t" x="470" y="54" text-anchor="middle">極高風險：緬甸</text>
+<text class="item white-i" x="470" y="76" text-anchor="middle">最簡化的乾淨裝置，避免落地辦卡，全程假設受監控</text>
+
+<rect class="high" x="200" y="102" width="540" height="62"/>
+<text class="tier dark-t" x="470" y="126" text-anchor="middle">高風險：香港、泰國、越南、柬埔寨、中國大陸</text>
+<text class="item dark-t" x="470" y="148" text-anchor="middle">混淆型 VPN 與 Tor 橋接先在家測好，帶乾淨機，敏感工作不在當地網路做</text>
+
+<rect class="mid" x="130" y="174" width="680" height="62"/>
+<text class="tier dark-t" x="470" y="198" text-anchor="middle">中風險：菲律賓、馬來西亞、新加坡、印尼、澳門</text>
+<text class="item muted"  x="470" y="220" text-anchor="middle">公共與會場 Wi-Fi 一律走 VPN，對外發表前先了解當地的內容與誹謗法規</text>
+
+<rect class="low" x="70" y="246" width="800" height="62"/>
+<text class="tier dark-t" x="470" y="270" text-anchor="middle">低風險：台灣（基準）、日本、南韓</text>
+<text class="item muted"  x="470" y="292" text-anchor="middle">接近家用環境，用平常的工具即可。辦 SIM 記得帶護照</text>
+
+<rect class="base" x="30" y="318" width="880" height="76"/>
+<text class="tier dark-t" x="470" y="344" text-anchor="middle">每個地點都適用</text>
+<text class="item muted"  x="470" y="366" text-anchor="middle">帶最簡化的裝置。行前把規避工具裝好並連過一次。準備兩種以上的連線方式。</text>
+<text class="item muted"  x="470" y="384" text-anchor="middle">敏感通訊走端對端加密。帳號分流。開全碟加密與開機密碼。留離線備份。</text>
+
+<path class="up" d="M902 380 V70"/>
+<path class="up-head" d="M902 56 L894 74 L910 74 Z"/>
+<text class="up-lbl" x="922" y="176" text-anchor="middle">準</text>
+<text class="up-lbl" x="922" y="195" text-anchor="middle">備</text>
+<text class="up-lbl" x="922" y="214" text-anchor="middle">強</text>
+<text class="up-lbl" x="922" y="233" text-anchor="middle">度</text>
+<text class="up-lbl" x="922" y="252" text-anchor="middle">往</text>
+<text class="up-lbl" x="922" y="271" text-anchor="middle">上</text>
+<text class="up-lbl" x="922" y="290" text-anchor="middle">加</text>
+
+<text class="foot" x="30" y="430">每一層都建立在下面所有層之上，風險越高的目的地，往上疊的項目越多。</text>
+<text class="foot" x="30" y="452">香港被放進高風險層的理由跟另外四地不同。它的連線環境接近中風險，門檻在入境檢查站：2026 年 3 月起涉及國安調查時，</text>
+<text class="foot" x="30" y="474">拒絕交出裝置密碼本身即構成犯罪，適用所有國籍，包含只在機場轉機通關的旅客。裝置內容成為主要暴露面，準備強度就要拉到乾淨機這一層。</text>
+<text class="foot" x="30" y="496">分層與逐地細節都會變。出發前查一次目的地當下的規定，頁面後半的逐地註記列了各地的查證來源。</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 512" width="940" height="512" role="img" aria-labelledby="title desc">
+<title id="title">Travel prep stacks upward, each tier built on everything below it</title>
+<desc id="desc">Five tiers stacked and narrowing upward. The base applies everywhere: carry a stripped-down device, install and test circumvention tools before leaving, have a second way to connect, use end-to-end encryption for sensitive messages, separate accounts, turn on full-disk encryption, and keep an offline backup. Above it, the low-risk tier covers Taiwan, Japan, and South Korea, where usual tools are fine. The medium tier covers the Philippines, Malaysia, Singapore, Indonesia, and Macau, where public Wi-Fi should go through a VPN and local content law is worth reading first. The high tier covers Hong Kong, Thailand, Vietnam, Cambodia, and mainland China, where an obfuscating VPN and Tor bridges should be tested at home and sensitive work kept off the local network. The top tier is Myanmar, where the advice is a stripped-down clean device, no local SIM, and assuming surveillance throughout.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal, matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .base  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; rx: 8; }
+  .low   { fill: #e6f4fb; stroke: #4dbfff; stroke-width: 1.3; rx: 8; }
+  .mid   { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; rx: 8; }
+  .high  { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; rx: 8; }
+  .top   { fill: #ef6c00; stroke: none; rx: 8; }
+  .tier { font-size: 14px; font-weight: 700; }
+  .item { font-size: 12.5px; }
+  .dark-t { fill: #212121; }
+  .white-t { fill: #ffffff; }
+  .white-i { fill: #ffe7d1; }
+  .muted { fill: #607d8b; }
+  .up { stroke: #90a4ae; stroke-width: 1.4; fill: none; }
+  .up-head { fill: #90a4ae; }
+  .up-lbl { fill: #78909c; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .base  { fill: #23292e; stroke: #4b565e; }
+    .low   { fill: #0d2b38; stroke: #4dbfff; }
+    .mid   { fill: #33241a; stroke: #9c5f1f; }
+    .high  { fill: #9c5f1f; stroke: #ff8c1a; }
+    .top   { fill: #ff8c1a; }
+    .dark-t { fill: #eceff1; }
+    .white-t { fill: #241708; }
+    .white-i { fill: #3d2410; }
+    .muted { fill: #90a4ae; }
+    .up { stroke: #6b7780; }
+    .up-head { fill: #6b7780; }
+    .up-lbl { fill: #78909c; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="top" x="270" y="30" width="400" height="62"/>
+<text class="tier white-t" x="470" y="54" text-anchor="middle">Highest risk: Myanmar</text>
+<text class="item white-i" x="470" y="76" text-anchor="middle">Stripped-down clean device, no local SIM, assume surveillance</text>
+
+<rect class="high" x="200" y="102" width="540" height="62"/>
+<text class="tier dark-t" x="470" y="126" text-anchor="middle">High risk: Hong Kong, Thailand, Vietnam, Cambodia, mainland China</text>
+<text class="item dark-t" x="470" y="148" text-anchor="middle">Obfuscating VPN and bridges tested at home. Clean device. No sensitive work locally.</text>
+
+<rect class="mid" x="130" y="174" width="680" height="62"/>
+<text class="tier dark-t" x="470" y="198" text-anchor="middle">Medium risk: the Philippines, Malaysia, Singapore, Indonesia, Macau</text>
+<text class="item muted"  x="470" y="220" text-anchor="middle">Route public and venue Wi-Fi through a VPN. Read up on local content and defamation law before you publish.</text>
+
+<rect class="low" x="70" y="246" width="800" height="62"/>
+<text class="tier dark-t" x="470" y="270" text-anchor="middle">Low risk: Taiwan (baseline), Japan, South Korea</text>
+<text class="item muted"  x="470" y="292" text-anchor="middle">Close to home. Your usual tools are fine. Bring a passport for a SIM.</text>
+
+<rect class="base" x="30" y="318" width="880" height="76"/>
+<text class="tier dark-t" x="470" y="344" text-anchor="middle">Everywhere, whatever the destination</text>
+<text class="item muted"  x="470" y="366" text-anchor="middle">Carry the most stripped-down device you can. Install and test circumvention tools before you leave. Have a second way to connect.</text>
+<text class="item muted"  x="470" y="384" text-anchor="middle">Use end-to-end encryption for anything sensitive. Separate your accounts. Turn on full-disk encryption. Keep an offline backup.</text>
+
+<path class="up" d="M902 380 V70"/>
+<path class="up-head" d="M902 56 L894 74 L910 74 Z"/>
+<text class="up-lbl" x="922" y="230" text-anchor="middle" transform="rotate(-90 922 230)">more preparation</text>
+
+<text class="foot" x="30" y="430">Each tier is built on everything below it. The higher the risk, the more you stack on top.</text>
+<text class="foot" x="30" y="452">Hong Kong sits in the high tier for a different reason than the other four. Its connectivity is close to the medium tier, and the</text>
+<text class="foot" x="30" y="474">threshold is the border: since March 2026, refusing to hand over a device password during a national-security investigation is itself</text>
+<text class="foot" x="30" y="496">an offence, for any nationality, including passengers merely transiting. Tiers and country details change; check before you travel.</text>
+</svg>

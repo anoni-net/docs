@@ -30,6 +30,14 @@ The order runs top to bottom, and a failure at the DNS stage stops the compariso
 
     `blocking` is the result of a two-sided comparison, not something the Probe observed on its own. When reading any anomalous measurement, first check what the test helper saw in `test_keys.control`, then go back to `blocking`. The `tcp_ip` example in the next section shows how skipping `control` turns a site's own problem into an apparent block.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/ooni-blocking-decision.en.svg"
+        alt="A decision flow. The same URL is measured once by the probe and once by a test helper, then compared stage by stage. Stage one compares DNS answers and gives dns when they differ. Stage two compares TCP and gives tcp_ip when the probe cannot connect while the helper can. Stage three checks the HTTP stage and gives http-failure. Stage four compares the response body and gives http-diff. Passing all four gives blocking false and accessible true. Once a stage stops the comparison, nothing below it is compared.">
+    <figcaption>Where the difference shows up is where the verdict stops</figcaption>
+</figure>
+
+The table above maps where a difference appears onto which verdict comes out. Drawn as a flow, one more thing becomes visible: the verdicts are ordered. A DNS-stage problem ends the comparison there, which is why the `*_match` fields further down are all `null` in the first three cases. The five real measurements in the next section are one example of each path.
+
 ## The evidence behind each verdict
 
 The five measurements cited below are all public data from 2026-08-04, and the raw content can be looked up on [OONI Explorer](https://explorer.ooni.org/){target="_blank"}.
