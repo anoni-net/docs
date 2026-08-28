@@ -196,6 +196,10 @@
       done: "完成。存下 {ok} 頁。",
       doneFailed: "完成。存下 {ok} 頁，{failed} 頁失敗。",
       removed: "已移除 {n} 頁。",
+      saveAll: "全部存到裝置（{n} 頁，{size}）",
+      saveAllHint: "存的是清單裡還沒在這台裝置上的頁面，連同它們的內文圖。網站自動存的核心章節不重複下載，那批的內文圖由上面的選項決定。",
+      saveAllCaution: "這會一併存下記者、行動者、LGBTQ、家暴那幾類場景頁。那些頁面留在裝置上本身可能就是敏感訊號，你的處境需要挑的話，用下面的清單自己勾。",
+      saveAllDone: "清單裡的頁面都已經在這台裝置上了。",
       selectAll: "整章勾選",
       pages: "{n} 頁",
       overview: "總覽",
@@ -235,6 +239,10 @@
       done: "完成。存下 {ok} 页。",
       doneFailed: "完成。存下 {ok} 页，{failed} 页失败。",
       removed: "已移除 {n} 页。",
+      saveAll: "全部存到设备（{n} 页，{size}）",
+      saveAllHint: "存的是清单里还没有在这台设备上的页面，连同它们的内文图。网站自动存的核心章节不重复下载，那批的内文图由上面的选项决定。",
+      saveAllCaution: "这会一并存下记者、行动者、LGBTQ、家暴那几类场景页。那些页面留在设备上本身可能就是敏感信号，你的处境需要挑的话，用下面的清单自己勾。",
+      saveAllDone: "清单里的页面都已经在这台设备上了。",
       selectAll: "整章勾选",
       pages: "{n} 页",
       overview: "总览",
@@ -274,6 +282,10 @@
       done: "Done. {ok} pages stored.",
       doneFailed: "Done. {ok} pages stored, {failed} failed.",
       removed: "{n} pages removed.",
+      saveAll: "Save everything ({n} pages, {size})",
+      saveAllHint: "This saves the pages from the list that are not on this device yet, along with their inline images. Core chapters the site already saved are not downloaded again, and their inline images are governed by the option above.",
+      saveAllCaution: "This also saves the journalist, activist, LGBTQ and domestic-violence scenario pages. Having those on a device can itself be a signal. If your situation calls for picking, use the list below.",
+      saveAllDone: "Every page in the list is already on this device.",
       selectAll: "Select whole section",
       pages: "{n} pages",
       overview: "Overview",
@@ -504,6 +516,15 @@
       }
     }
     return pageIndex.get(url);
+  }
+
+  // 索引裡的每一頁，不分章節。同一頁可能掛在兩個章節底下，用 Set 去重。
+  function allPages() {
+    const out = new Set();
+    for (const section of (state.index && state.index.sections) || []) {
+      for (const page of section.pages) out.add(page.url);
+    }
+    return Array.from(out);
   }
 
   // 這批頁面需要哪些資產，去重。同一張圖被好幾頁引用時只會出現一次。
@@ -750,6 +771,42 @@
     const wrap = el("div");
     const row = el("p", "ol-actions");
 
+    // 一次把清單裡缺的都存下來。
+    //
+    // 原本只能一章一章展開、一頁一頁勾，再按套用。想在上飛機前或進到收不到訊號的
+    // 地方之前存一份的人做不完，而那正是這個功能存在的理由。要下載多少直接寫在按鈕
+    // 上，讀者按下去之前就知道，所以不再多一次確認。
+    //
+    // 只送還沒在裝置上的那些。網站自動存的核心章節已經在 PRECACHE 裡，再存一份到
+    // LIBRARY 只是佔兩倍空間。
+    const missing = allPages().filter((url) => !isStored(url));
+    if (!state.swMissing && missing.length) {
+      const missingAssets = Array.from(assetsOf(missing));
+      const saveAll = button(
+        fill("saveAll", { n: missing.length, size: size(weightOf(missing)) }),
+        "ol-primary",
+        () =>
+          runTask(t.applying, missing.length + missingAssets.length, (report) => {
+            trackOffline("add");
+            return ask(
+              {
+                type: "OFFLINE_ADD",
+                url: location.href,
+                paths: missing,
+                assets: missingAssets,
+              },
+              report
+            ).then((result) => ({
+              message: result.failed
+                ? fill("doneFailed", { ok: result.ok, failed: result.failed })
+                : fill("done", { ok: result.ok }),
+            }));
+          })
+      );
+      saveAll.disabled = state.busy;
+      row.appendChild(saveAll);
+    }
+
     // 更新的對象是讀者自己勾存的那批。網站自動存的那批跟著網站版本走，讀者
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
     const refresh = button(t.refresh, null, () => {
@@ -800,6 +857,15 @@
     }
 
     wrap.appendChild(row);
+    // 索引還沒到的時候兩句都不畫，那時候「都存好了」是假的。
+    if (state.index && !state.swMissing) {
+      wrap.appendChild(
+        el("p", "ol-hint", missing.length ? t.saveAllHint : t.saveAllDone)
+      );
+      // 敏感場景頁刻意不在預先下載的範圍內，理由見 offline.md。一鍵把全部存下來
+      // 等於繞過那個決定，所以按之前要讓讀者看見這件事。
+      if (missing.length) wrap.appendChild(el("p", "ol-hint", t.saveAllCaution));
+    }
     if (state.saved.size === 0) wrap.appendChild(el("p", "ol-hint", t.refreshEmpty));
     return wrap;
   }

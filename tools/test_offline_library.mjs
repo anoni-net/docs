@@ -448,6 +448,79 @@ test('有自選頁面時「更新已存的內容」可以按', async () => {
   assert.equal(findButton(root, '更新已存的內容').disabled, false);
 });
 
+test('一鍵存全部把清單裡缺的都送出，連同資產去重', async () => {
+  // 一章一章展開再勾，趕在斷網之前存一份的人做不完，而那正是這個功能存在的理由。
+  // 少送任何一頁的症狀都是讀者到了沒有網路的地方才發現缺。
+  const { root, sw } = await load();
+  clickButton(root, '全部存到裝置');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.ok(add, '沒有送出 OFFLINE_ADD');
+  // 網址是 sw.js 用來補語系前綴的依據
+  assert.equal(add.url, 'https://anoni.net/docs/offline/');
+  assert.deepEqual(add.paths.sort(), [
+    '',
+    'basics/',
+    'basics/metadata/',
+    'scenarios/activist/',
+    'scenarios/journalist/',
+  ]);
+  // 兩頁共用的那張只送一次
+  assert.deepEqual(add.assets.sort(), ['img/journalist.png', 'img/shared.png']);
+});
+
+test('一鍵存全部不重送已經在裝置上的頁面', async () => {
+  // 網站自動存的那批在 PRECACHE 裡，再存一份進 LIBRARY 只是佔兩倍空間
+  const { root, sw } = await load({
+    saved: ['scenarios/journalist/'],
+    precached: ['', 'basics/'],
+  });
+  clickButton(root, '全部存到裝置');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.deepEqual(add.paths.sort(), ['basics/metadata/', 'scenarios/activist/']);
+});
+
+test('清單都存好時不畫一鍵按鈕，改說明原因', async () => {
+  // 按鈕就這樣消失而沒有交代，讀者只會以為是壞了
+  const { root } = await load({
+    precached: [
+      '',
+      'basics/',
+      'basics/metadata/',
+      'scenarios/journalist/',
+      'scenarios/activist/',
+    ],
+  });
+  assert.equal(findButton(root, '全部存到裝置'), undefined);
+  assert.ok(root.textContent.includes('都已經在這台裝置上'));
+});
+
+test('一鍵按鈕上寫出頁數與要下載多少', async () => {
+  // 按下去之前就知道會用掉多少流量，所以這一顆不再多一次確認
+  const { root } = await load();
+  const btn = findButton(root, '全部存到裝置');
+  assert.ok(btn, '找不到一鍵按鈕');
+  assert.ok(btn.textContent.includes('5 頁'), btn.textContent);
+  assert.ok(/\d+(\.\d+)? (KB|MB|GB)/.test(btn.textContent), btn.textContent);
+});
+
+test('一鍵按鈕旁邊講明會一併存下敏感場景頁', async () => {
+  // 那幾類頁面刻意不在預先下載的範圍內，一鍵存全部等於繞過那個決定。
+  // 讀者按之前要看得見，不然裝置被檢查時才發現就來不及了。
+  const { root } = await load();
+  assert.ok(root.textContent.includes('記者、行動者、LGBTQ、家暴'), root.textContent);
+});
+
+test('索引還沒讀到時不說「都存好了」', async () => {
+  // 那時候一頁都還沒列出來，說都存好了是假的
+  const { root } = await load({ noIndex: true });
+  assert.equal(findButton(root, '全部存到裝置'), undefined);
+  assert.ok(!root.textContent.includes('都已經在這台裝置上'));
+});
+
 test('勾選之後才出現套用，計數跟著勾選走', async () => {
   const { root } = await load();
   assert.equal(findButton(root, '套用變更'), undefined);

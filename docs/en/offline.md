@@ -10,7 +10,7 @@ hide:
 
 If you were brought here because there is no network connection, the page you wanted has not been stored on this device yet. The list below shows what is still readable on this device, and the titles open. Without a network the list hides what was never stored, leaving only what you can read now.
 
-This page is also where offline content is managed. Below you can see what is currently stored on the device, pick what to keep, or clear all of it.
+This page is also where offline content is managed. Below you can see what is currently stored on the device, pick what to keep, or clear all of it. If you are in a hurry, there is a “Save everything” button above the list that stores everything not yet on the device in one go, with no need to expand each section and tick pages one by one.
 
 ## Offline content on this device
 
@@ -39,7 +39,7 @@ Tor Browser and the onion and IPFS builds do not offer offline installation, for
 
 The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
 
-Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored.
+Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored. The “Save everything” button includes them, and says so next to the button. If your situation calls for picking, use the list instead.
 
 The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
 
