@@ -63,6 +63,7 @@ icon: material/account-outline
 
 - [什麼是 Tor](../tools/what-is-tor.md)：多數人聽過名字，用途與限制值得看清楚
 - [互動與呈現](../games/index.md)：用 3D 影像與可操作的遊戲走一遍洋蔥路由，比讀文字快
+- [幫忙做一次網路觀測](../tools/ooni-run-v2.md)：手機安裝 OONI Probe 並加入社群的檢測清單，讓它在背景執行，就會持續回報台灣各家電信連不連得上
 
 ## 帶得走的東西
 

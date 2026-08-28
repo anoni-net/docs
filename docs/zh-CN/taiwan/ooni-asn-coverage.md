@@ -77,6 +77,14 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 [:material-chart-bar: 2023/12 观察报告](https://ocf.tw/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
 
+### 你可以补上一格
+
+要补上覆盖，最直接的做法是让一台装置在还没人测过的 ASN 上持续执行。社群维运的 OONI Run 链接 `10328` 是现成的入口，移动装置安装 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 之后点一次链接就完成设定，接着让它留在背景执行。安装前的风险前提与清单内容见 [OONI Run v2 操作说明](../tools/ooni-run-v2.md)。
+
+用移动网络的协助者特别有帮助。现有测量几乎都落在少数固网 ASN 上，移动业者与第二类电信的数据最缺。
+
+[:material-help-network: 怎么参与观测](../tools/ooni-run-v2.md){ .md-button }
+
 ## 观测数据分析
 
 !!! info "招募"
