@@ -628,18 +628,42 @@ async function precachedEntries(prefix) {
 
 // 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
 // refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
+// 同時在飛的請求數。
+//
+// 管理頁上的「全部存到裝置」一次就是四百多個請求，循序跑光是往返就要一分多鐘，
+// 而按下那顆的人多半正趕在上飛機或進到收不到訊號的地方之前。六條是折衷：站台在
+// HTTP/2 上本來就會多工，再往上加只是跟同一條連線上的其他請求互搶，慢的網路上
+// 反而更容易整批逾時。
+const LIBRARY_CONCURRENCY = 6;
+
+// 固定幾條 worker 輪流從同一個清單取工作，取完為止。用 worker 而不是把整份清單
+// 切成 N 段，是因為每一項的大小差很多，切段會讓拿到大檔那一段的最後一條拖著整批。
+async function runPool(items, worker) {
+  let next = 0;
+  const runners = [];
+  for (let i = 0; i < Math.min(LIBRARY_CONCURRENCY, items.length); i += 1) {
+    runners.push(
+      (async () => {
+        while (next < items.length) {
+          await worker(items[next++]);
+        }
+      })()
+    );
+  }
+  await Promise.all(runners);
+}
+
 async function addToLibrary(prefix, paths, assets, refresh, report) {
   const pageCache = await caches.open(LIBRARY);
   const assetCache = await caches.open(LIBRARY_ASSETS);
-  // 頁面先抓完再抓資產。中途斷線的話，讀者手上是幾頁完整的內容加幾頁缺圖的，
-  // 比反過來（一堆圖但沒有半頁可讀）有用。
-  const targets = paths
-    .map((path) => ({ path: path, cache: pageCache }))
-    .concat((assets || []).map((path) => ({ path: path, cache: assetCache })));
+  const pageTargets = paths.map((path) => ({ path: path, cache: pageCache }));
+  const assetTargets = (assets || []).map((path) => ({ path: path, cache: assetCache }));
+  const total = pageTargets.length + assetTargets.length;
   let ok = 0;
   let failed = 0;
   let done = 0;
-  for (const target of targets) {
+
+  const store = async (target) => {
     const url = SCOPE_PATH + prefix + target.path;
     try {
       if (!refresh && (await target.cache.match(url))) {
@@ -658,8 +682,13 @@ async function addToLibrary(prefix, paths, assets, refresh, report) {
     }
     done += 1;
     // 逐項回報。整批下載可能要好幾分鐘，沒有進度的話讀者只會看到一個不動的按鈕。
-    report({ type: "progress", done: done, total: targets.length, ok: ok, failed: failed });
-  }
+    report({ type: "progress", done: done, total: total, ok: ok, failed: failed });
+  };
+
+  // 頁面先抓完再抓資產。中途斷線的話，讀者手上是幾頁完整的內容加幾頁缺圖的，
+  // 比反過來（一堆圖但沒有半頁可讀）有用。並行只發生在各自那一批裡面。
+  await runPool(pageTargets, store);
+  await runPool(assetTargets, store);
   return { ok: ok, failed: failed };
 }
 

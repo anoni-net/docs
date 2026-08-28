@@ -133,6 +133,8 @@ const harness = `
   ${grab(/^async function libraryEntries\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precachedEntries\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const LIBRARY_ASSETS = .*$/m)}
+  ${grab(/^const LIBRARY_CONCURRENCY = .*$/m)}
+  ${grab(/^async function runPool\(items, worker\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function addToLibrary\(prefix, paths, assets, refresh, report\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function removeFromLibrary\(prefix, paths, assets\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const OWN_CACHE_PREFIX = .*$/m)}
@@ -195,7 +197,20 @@ const load = (opts = {}) => {
     blob: async () => ({ size: bytesOf(url) }),
     clone: () => makeResponse(url, ok),
   });
+  // 同時在飛的請求數。addToLibrary 並行之後，「真的有並行」與「沒有無上限地開」
+  // 這兩件事都要驗得到，而從 fetched 的順序看不出來。
+  const peak = { max: 0 };
+  let inFlight = 0;
   const fetchStub = async (input, init) => {
+    inFlight += 1;
+    if (inFlight > peak.max) peak.max = inFlight;
+    try {
+      return await rawFetch(input, init);
+    } finally {
+      inFlight -= 1;
+    }
+  };
+  const rawFetch = async (input, init) => {
     const url = typeof input === 'string' ? input : input.url;
     fetched.push(url);
     fetchInits.push(init);
@@ -227,7 +242,7 @@ const load = (opts = {}) => {
   const sw = new Function(
     'caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', 'setTimeout', harness
   )(caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub, setTimeoutStub);
-  return { sw, caches, fetched, fetchInits, net };
+  return { sw, caches, fetched, fetchInits, net, peak };
 };
 
 const req = (pathname) => ({ url: ORIGIN + pathname });
@@ -683,6 +698,18 @@ test('進度把資產也算進去，讀者才知道還剩多少', async (load) =
     totals.push(d.total)
   );
   assert.deepEqual(totals, [5, 5, 5, 5, 5]);
+});
+
+test('整批下載並行跑，同時在飛的請求有上限', async (load) => {
+  // 管理頁的「全部存到裝置」一次是四百多個請求。循序跑光是往返就要一分多鐘，而按下
+  // 那顆的人正趕在上飛機或進到收不到訊號的地方之前，慢到那個地步等於沒解決問題。
+  //
+  // 上限也要守著。無上限地開會跟同一條連線上的其他請求互搶，慢的網路上整批更容易逾時。
+  const { sw, peak } = load({ networkDelay: 5 });
+  const pages = ['a/', 'b/', 'c/', 'd/', 'e/', 'f/', 'g/', 'h/', 'i/', 'j/'];
+  await sw.addToLibrary('', pages, [], false, () => {});
+  assert.ok(peak.max > 1, `同時在飛的最多 ${peak.max} 個，等於還是一個一個排隊`);
+  assert.ok(peak.max <= 6, `同時在飛的到了 ${peak.max} 個，超過上限`);
 });
 
 test('頁面先抓完才抓資產，中途斷線至少有幾頁是完整的', async (load) => {
