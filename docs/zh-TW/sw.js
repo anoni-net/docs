@@ -68,15 +68,19 @@ const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 
 // 這個 SW 發出去的每一個請求都要繞過瀏覽器自己的 HTTP 快取。
 //
-// Cloudflare 上有一條 browser_ttl 為 override_origin 的 Cache Rule，送給讀者的
-// HTML 一律是 max-age=14400。沒帶 cache 選項的 fetch 在那四小時內根本不出門，
-// 拿回來的是裝置上的舊副本，network-first 看起來問過網路，實際上問的是自己，
-// 而那份舊回應還會被寫回 RUNTIME_PAGES，讓舊內容更久留在裝置上。
+// 沒帶 cache 選項的 fetch 會先問裝置上的 HTTP 快取，命中就直接回，網路那條根本
+// 不出門。network-first 於是看起來問過網路，實際上問的是自己，而那份舊回應還會
+// 被寫回 RUNTIME_PAGES，讓舊內容更久留在裝置上。
 //
-// 分頁裡的 Safari 讀者感覺不到，因為從網址列進站或下拉重新整理的 cache mode 是
+// 2026-08-28 就是這樣：Cloudflare 上一條 browser_ttl 為 override_origin 的 Cache
+// Rule 把送給讀者的 HTML 一律設成 max-age=14400，新發布的內容有四小時進不了
+// PWA。分頁裡的 Safari 讀者感覺不到，從網址列進站或下拉重新整理的 cache mode 是
 // reload，本來就繞過 HTTP 快取。standalone 的 PWA 冷啟動與站內點連結都是
 // default，加上 iOS 的 home screen app 有獨立的 storage 分區，Safari 那邊抓到
 // 新內容也傳不過來，於是只有 PWA 一直卡在舊版。
+//
+// 那條規則後來加了一條蓋過去，/docs/ 的頁面現在不給瀏覽器快取。這裡照樣帶著
+// no-cache，兩層各自獨立：CDN 的設定會被人改，改的人未必知道 SW 靠它吃飯。
 //
 // no-cache 這個名字容易誤會，它的意思是每次都跟伺服器確認一次，內容沒變時回
 // 304，成本是一個往返。快取照樣留著。

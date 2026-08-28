@@ -1128,10 +1128,11 @@ test('換版不動同一個 origin 上別人的快取', async (load) => {
 });
 
 test('每一條網路請求都繞過瀏覽器自己的 HTTP 快取', async (load) => {
-  // Cloudflare 上有一條 browser_ttl 為 override_origin 的 Cache Rule，送給讀者的
-  // HTML 一律是 max-age=14400。少了 cache 選項的 fetch 在那四小時內根本不出門，
-  // network-first 拿回來的是裝置上的舊副本，standalone 的 PWA 於是一直停在舊版，
-  // 而同一個人用 Safari 分頁看就是新的，因為那邊的 cache mode 是 reload。
+  // 少了 cache 選項的 fetch 會先問裝置上的 HTTP 快取，命中就不出門，network-first
+  // 拿回來的是舊副本。2026-08-28 的實例是 Cloudflare 一條 browser_ttl 為
+  // override_origin 的 Cache Rule 把 HTML 設成 max-age=14400，新發布的內容有四小時
+  // 進不了 standalone 的 PWA，而同一個人用 Safari 分頁看就是新的，因為那邊的
+  // cache mode 是 reload。
   //
   // 這一條守著 sw.js 裡每一個 fetch。少掉任何一個的 no-cache，症狀都是讀者拿不到
   // 剛發布的內容，而那在瀏覽器上點來點去看不出來。
