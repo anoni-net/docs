@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 418" width="980" height="418" role="img" aria-labelledby="title desc">
+<title id="title">Which way data flows in each of OnionShare's four modes</title>
+<desc id="desc">Data flow in four modes, compared. In Send, your computer holds the files and the other person downloads them in Tor Browser, so data moves from you outward. In Receive, you open an upload page and the sender uploads, so data moves toward you. In Host a Website, you serve a static site and several visitors browse it, so data moves from you to many. In Chat, the flow is two-way and everyone joins the same ephemeral room. All four share the same middle step, a .onion address that stops working the moment OnionShare is closed.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Cyan marks what runs over Tor, matching the other
+     diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .mode { fill: #212121; font-size: 16px; font-weight: 700; }
+  .mode-zh { fill: #546e7a; font-size: 12.5px; }
+  .node { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; rx: 7; }
+  .node-t { fill: #455a64; font-size: 13.5px; font-weight: 600; }
+  .node-sub { fill: #78909c; font-size: 11px; }
+  .onion { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.3; rx: 11; }
+  .onion-t { fill: #0089bf; font-size: 12px; font-weight: 600; }
+  .arrow { stroke: #0089bf; stroke-width: 2; fill: none; }
+  .arrow-head { fill: #0089bf; }
+  .use { fill: #607d8b; font-size: 12px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .mode { fill: #eceff1; }
+    .mode-zh { fill: #b0bec5; }
+    .node { fill: #23292e; stroke: #4b565e; }
+    .node-t { fill: #cfd8dc; }
+    .node-sub { fill: #90a4ae; }
+    .onion { fill: #0d2b38; stroke: #4dbfff; }
+    .onion-t { fill: #4dbfff; }
+    .arrow { stroke: #4dbfff; }
+    .arrow-head { fill: #4dbfff; }
+    .use { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="mode"    x="132" y="34" text-anchor="middle">Send</text>
+<text class="mode-zh" x="132" y="53" text-anchor="middle">files out</text>
+<rect class="node" x="25" y="70" width="215" height="46"/>
+<text class="node-t"   x="132" y="90"  text-anchor="middle">Your computer</text>
+<text class="node-sub" x="132" y="107" text-anchor="middle">drops files in</text>
+<path class="arrow" d="M132 116 V140"/>
+<path class="arrow-head" d="M132 152 L125 136 L139 136 Z"/>
+<rect class="onion" x="52" y="158" width="161" height="30"/>
+<text class="onion-t" x="132" y="178" text-anchor="middle">.onion address</text>
+<path class="arrow" d="M132 188 V212"/>
+<path class="arrow-head" d="M132 224 L125 208 L139 208 Z"/>
+<rect class="node" x="25" y="230" width="215" height="46"/>
+<text class="node-t"   x="132" y="250" text-anchor="middle">The other person</text>
+<text class="node-sub" x="132" y="267" text-anchor="middle">downloads in Tor Browser</text>
+<text class="use" x="132" y="304" text-anchor="middle">Sending evidence to a lawyer</text>
+<text class="use" x="132" y="322" text-anchor="middle">A one-off file handover</text>
+
+<text class="mode"    x="367" y="34" text-anchor="middle">Receive</text>
+<text class="mode-zh" x="367" y="53" text-anchor="middle">files in</text>
+<rect class="node" x="260" y="70" width="215" height="46"/>
+<text class="node-t"   x="367" y="90"  text-anchor="middle">The sender</text>
+<text class="node-sub" x="367" y="107" text-anchor="middle">uploads in Tor Browser</text>
+<path class="arrow" d="M367 116 V140"/>
+<path class="arrow-head" d="M367 152 L360 136 L374 136 Z"/>
+<rect class="onion" x="287" y="158" width="161" height="30"/>
+<text class="onion-t" x="367" y="178" text-anchor="middle">.onion address</text>
+<path class="arrow" d="M367 188 V212"/>
+<path class="arrow-head" d="M367 224 L360 208 L374 208 Z"/>
+<rect class="node" x="260" y="230" width="215" height="46"/>
+<text class="node-t"   x="367" y="250" text-anchor="middle">Your computer</text>
+<text class="node-sub" x="367" y="267" text-anchor="middle">receives them locally</text>
+<text class="use" x="367" y="304" text-anchor="middle">A hidden inbox</text>
+<text class="use" x="367" y="322" text-anchor="middle">Anonymous tips and crisis reports</text>
+
+<text class="mode"    x="602" y="34" text-anchor="middle">Host a Website</text>
+<text class="mode-zh" x="602" y="53" text-anchor="middle">temporary site</text>
+<rect class="node" x="495" y="70" width="215" height="46"/>
+<text class="node-t"   x="602" y="90"  text-anchor="middle">Your computer</text>
+<text class="node-sub" x="602" y="107" text-anchor="middle">hosts a static site</text>
+<path class="arrow" d="M602 116 V140"/>
+<path class="arrow-head" d="M602 152 L595 136 L609 136 Z"/>
+<rect class="onion" x="522" y="158" width="161" height="30"/>
+<text class="onion-t" x="602" y="178" text-anchor="middle">.onion address</text>
+<path class="arrow" d="M602 188 V206"/>
+<path class="arrow" d="M602 206 H528"/>
+<path class="arrow" d="M602 206 H676"/>
+<path class="arrow-head" d="M528 224 L521 208 L535 208 Z"/>
+<path class="arrow-head" d="M602 224 L595 208 L609 208 Z"/>
+<path class="arrow-head" d="M676 224 L669 208 L683 208 Z"/>
+<rect class="node" x="495" y="230" width="215" height="46"/>
+<text class="node-t"   x="602" y="250" text-anchor="middle">Visitors</text>
+<text class="node-sub" x="602" y="267" text-anchor="middle">each browsing in Tor Browser</text>
+<text class="use" x="602" y="304" text-anchor="middle">Publishing something sensitive briefly</text>
+<text class="use" x="602" y="322" text-anchor="middle">Material for the length of an event</text>
+
+<text class="mode"    x="837" y="34" text-anchor="middle">Chat</text>
+<text class="mode-zh" x="837" y="53" text-anchor="middle">ephemeral room</text>
+<rect class="node" x="730" y="70" width="215" height="46"/>
+<text class="node-t"   x="837" y="90"  text-anchor="middle">Everyone taking part</text>
+<text class="node-sub" x="837" y="107" text-anchor="middle">all joining the same room</text>
+<path class="arrow" d="M837 124 V144"/>
+<path class="arrow-head" d="M837 152 L830 136 L844 136 Z"/>
+<path class="arrow-head" d="M837 116 L830 132 L844 132 Z"/>
+<rect class="onion" x="757" y="158" width="161" height="30"/>
+<text class="onion-t" x="837" y="178" text-anchor="middle">.onion address</text>
+<path class="arrow" d="M837 196 V216"/>
+<path class="arrow-head" d="M837 224 L830 208 L844 208 Z"/>
+<path class="arrow-head" d="M837 188 L830 204 L844 204 Z"/>
+<rect class="node" x="730" y="230" width="215" height="46"/>
+<text class="node-t"   x="837" y="250" text-anchor="middle">Messages stay in memory</text>
+<text class="node-sub" x="837" y="267" text-anchor="middle">gone when you close it</text>
+<text class="use" x="837" y="304" text-anchor="middle">Coordinating during an action</text>
+<text class="use" x="837" y="322" text-anchor="middle">A discussion meant to leave no record</text>
+
+<text class="foot" x="25" y="356">All four share the middle step. Files and messages travel between the two ends over Tor, with no cloud service in between.</text>
+<text class="foot" x="25" y="378">The address dies the moment you close OnionShare, and delivering it is your job rather than OnionShare's.</text>
+<text class="foot" x="25" y="400">Send it over an insecure channel and that step is no longer anonymous.</text>
+</svg>

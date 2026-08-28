@@ -86,6 +86,14 @@ No single tool covers this. The site groups tools into four layers, each handlin
 
 The full article list for each family is on the [Tools index](./index.md).
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/tool-layers.en.svg"
+        alt="The structural relationship between the four tool layers. The Tor family at the connection layer is the core, and the environment layer wraps the whole of it. The observation layer sits alongside rather than inside, recording what a connection ran into without protecting it. Everyday privacy basics run underneath all of it, whichever layer you use above.">
+    <figcaption>Which layer wraps which</figcaption>
+</figure>
+
+The four cards above cover what each family does. There are relationships between them as well. The environment layer wraps the connection layer entirely, so installing Tails gives you both. The measurement layer sits alongside rather than inside, recording what a connection ran into without protecting it. The everyday fundamentals run underneath all of it, whichever layer you use above.
+
 ## What the community is building out in 2026
 
 Tools are the foundation, and using an anonymity network in practice is considerably more involved than installing an application. Three tracks this year aim at making the choices concrete:

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-labelledby="title desc">
+<title id="title">四層工具之間的關係，哪一層包住哪一層</title>
+<desc id="desc">四個工具層的結構關係。連線層的 Tor 工具家族是核心，環境層的匿名作業系統把整個連線層包在裡面，讓系統預設走 Tor 而且關機不留痕跡。觀測層獨立在旁邊，記錄的是連線遇到了什麼，把封鎖與降速轉成有時間、地點、ASN 的公開資料，它不保護連線。日常隱私基本功橫跨在最底下，通訊軟體、密碼管理與匿名支付這些不管你用哪一層都要。四層不是階梯，挑跟情境相關的那一群讀就好。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。cyan 給保護連線的那兩層，
+     觀測層用中性色是因為它記錄而不保護，跟站上其他示意圖的語意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .env { fill: #e6f4fb; stroke: #4dbfff; stroke-width: 1.6; }
+  .net { fill: #0089bf; stroke: none; }
+  .obs { fill: #f4f6f7; stroke: #90a4ae; stroke-width: 1.4; }
+  .base { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.4; }
+  .layer-name { font-size: 15px; font-weight: 700; }
+  .layer-sub { font-size: 11.5px; }
+  .env-name { fill: #0d5a7a; }
+  .env-sub { fill: #4a7a8c; }
+  .net-name { fill: #ffffff; }
+  .net-sub { fill: #cfeaf7; }
+  .obs-name { fill: #37474f; }
+  .obs-sub { fill: #78909c; }
+  .link { stroke: #90a4ae; stroke-width: 1.6; stroke-dasharray: 5 4; fill: none; }
+  .link-head { fill: #90a4ae; }
+  .link-lbl { fill: #607d8b; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .env { fill: #0d2b38; stroke: #4dbfff; }
+    .net { fill: #1976a8; }
+    .obs { fill: #23292e; stroke: #6b7780; }
+    .base { fill: #23292e; stroke: #4b565e; }
+    .env-name { fill: #9fd8ee; }
+    .env-sub { fill: #7fb8cc; }
+    .net-sub { fill: #cfeaf7; }
+    .obs-name { fill: #cfd8dc; }
+    .obs-sub { fill: #90a4ae; }
+    .link { stroke: #6b7780; }
+    .link-head { fill: #6b7780; }
+    .link-lbl { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="env" x="30" y="52" width="530" height="216" rx="10"/>
+<text class="layer-name env-name" x="52" y="80">環境層：匿名作業系統</text>
+<text class="layer-sub  env-sub"  x="52" y="100">Tails、Whonix、Qubes。整個系統預設走 Tor，關機不留痕跡</text>
+
+<rect class="net" x="58" y="120" width="474" height="122" rx="8"/>
+<text class="layer-name net-name" x="80" y="152">連線層：Tor 工具家族</text>
+<text class="layer-sub  net-sub"  x="80" y="174">把連線藏進多層加密與隨機路徑，讓 IP 與行為難以被追蹤</text>
+<text class="layer-sub  net-sub"  x="80" y="196">Tor Browser、Snowflake、OnionShare、橋接</text>
+<text class="layer-sub  net-sub"  x="80" y="222">環境層把這一整塊包在裡面，所以裝了 Tails 就等於同時有了這一層</text>
+
+<rect class="obs" x="592" y="52" width="278" height="216" rx="10"/>
+<text class="layer-name obs-name" x="614" y="80">觀測層</text>
+<text class="layer-sub  obs-sub"  x="614" y="100">OONI</text>
+<text class="layer-sub  obs-sub"  x="614" y="134">把封鎖、降速這些感受，</text>
+<text class="layer-sub  obs-sub"  x="614" y="152">轉成有時間、地點、ASN</text>
+<text class="layer-sub  obs-sub"  x="614" y="170">對得上的公開資料。</text>
+<text class="layer-sub  obs-sub"  x="614" y="204">它記錄連線遇到了什麼，</text>
+<text class="layer-sub  obs-sub"  x="614" y="222">本身不保護連線。</text>
+
+<path class="link" d="M588 160 H548"/>
+<path class="link-head" d="M536 160 L552 153 L552 167 Z"/>
+<text class="link-lbl" x="566" y="148" text-anchor="middle">觀測</text>
+
+<rect class="base" x="30" y="288" width="840" height="76" rx="10"/>
+<text class="layer-name obs-name" x="52" y="316">日常隱私基本功</text>
+<text class="layer-sub  obs-sub"  x="52" y="338">通訊軟體選哪個、密碼怎麼管、要匿名付錢時用什麼。不管上面用哪一層，這一層都要。</text>
+
+<text class="foot" x="30" y="398">四層不是階梯，也沒有先後順序。挑跟你情境相關的那一群讀就好，判斷依據回到威脅模型。</text>
+</svg>

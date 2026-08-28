@@ -35,6 +35,14 @@ icon: material/share-circle
     <figcaption>The four mode tabs in the OnionShare main window: Share Files, Receive Files and Messages, Host a Website, and Chat Anonymously.</figcaption>
 </figure>
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/onionshare-modes-flow.en.svg"
+        alt="Data flow in four modes, compared. In Send, your computer holds the files and the other person downloads them in Tor Browser. In Receive, you open an upload page and the sender uploads, and you receive locally. In Host a Website, you serve a static site that several visitors browse. In Chat, the flow is two-way, messages stay in memory, and everything disappears when you close it. All four share the same .onion address in the middle.">
+    <figcaption>Which way the data flows in each mode</figcaption>
+</figure>
+
+The screenshot above shows what the four tabs look like. This one shows where the data goes. The difference between the modes is direction: Send flows from you outward, Receive flows toward you, Host a Website flows from you to many, and Chat runs both ways. The middle step is the same in all four, with files travelling directly between the two ends over Tor and no cloud service in between.
+
 ### Share Files
 
 Drop files into OnionShare, which produces a `.onion` address. Deliver the address through a secure channel, and the recipient opens it in Tor Browser and downloads.

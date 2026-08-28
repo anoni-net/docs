@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-labelledby="title desc">
+<title id="title">How the four layers relate, and which one wraps which</title>
+<desc id="desc">The structural relationship between four tool layers. The Tor family at the connection layer is the core. The environment layer, the anonymous operating systems, wraps the entire connection layer, so the system defaults to Tor and leaves nothing behind at shutdown. The observation layer sits alongside rather than inside: it records what a connection ran into, turning blocking and throttling into public data with a time, a place, and an ASN, and it protects nothing itself. Everyday privacy basics run underneath all of it, since messengers, password management, and anonymous payment matter whichever layer you use above.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Cyan marks what runs over Tor, matching the other
+     diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .env { fill: #e6f4fb; stroke: #4dbfff; stroke-width: 1.6; }
+  .net { fill: #0089bf; stroke: none; }
+  .obs { fill: #f4f6f7; stroke: #90a4ae; stroke-width: 1.4; }
+  .base { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.4; }
+  .layer-name { font-size: 15px; font-weight: 700; }
+  .layer-sub { font-size: 11.5px; }
+  .env-name { fill: #0d5a7a; }
+  .env-sub { fill: #4a7a8c; }
+  .net-name { fill: #ffffff; }
+  .net-sub { fill: #cfeaf7; }
+  .obs-name { fill: #37474f; }
+  .obs-sub { fill: #78909c; }
+  .link { stroke: #90a4ae; stroke-width: 1.6; stroke-dasharray: 5 4; fill: none; }
+  .link-head { fill: #90a4ae; }
+  .link-lbl { fill: #607d8b; font-size: 11.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .env { fill: #0d2b38; stroke: #4dbfff; }
+    .net { fill: #1976a8; }
+    .obs { fill: #23292e; stroke: #6b7780; }
+    .base { fill: #23292e; stroke: #4b565e; }
+    .env-name { fill: #9fd8ee; }
+    .env-sub { fill: #7fb8cc; }
+    .net-sub { fill: #cfeaf7; }
+    .obs-name { fill: #cfd8dc; }
+    .obs-sub { fill: #90a4ae; }
+    .link { stroke: #6b7780; }
+    .link-head { fill: #6b7780; }
+    .link-lbl { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="env" x="30" y="52" width="530" height="216" rx="10"/>
+<text class="layer-name env-name" x="52" y="80">Environment layer: anonymous operating systems</text>
+<text class="layer-sub  env-sub"  x="52" y="100">Tails, Whonix, Qubes. The whole system defaults to Tor and leaves nothing behind</text>
+
+<rect class="net" x="58" y="120" width="474" height="122" rx="8"/>
+<text class="layer-name net-name" x="80" y="152">Connection layer: the Tor family</text>
+<text class="layer-sub  net-sub"  x="80" y="174">Layered encryption over a random path, so IP and behaviour are hard to follow</text>
+<text class="layer-sub  net-sub"  x="80" y="196">Tor Browser, Snowflake, OnionShare, bridges</text>
+<text class="layer-sub  net-sub"  x="80" y="222">The environment layer wraps this block, so Tails gives you this layer too</text>
+
+<rect class="obs" x="592" y="52" width="278" height="216" rx="10"/>
+<text class="layer-name obs-name" x="614" y="80">Observation layer</text>
+<text class="layer-sub  obs-sub"  x="614" y="100">OONI</text>
+<text class="layer-sub  obs-sub"  x="614" y="134">Turns the experience of blocking</text>
+<text class="layer-sub  obs-sub"  x="614" y="152">and throttling into public data</text>
+<text class="layer-sub  obs-sub"  x="614" y="170">with a time, a place, and an ASN.</text>
+<text class="layer-sub  obs-sub"  x="614" y="204">It records what a connection</text>
+<text class="layer-sub  obs-sub"  x="614" y="222">ran into. It protects nothing.</text>
+
+<path class="link" d="M588 160 H548"/>
+<path class="link-head" d="M536 160 L552 153 L552 167 Z"/>
+<text class="link-lbl" x="566" y="148" text-anchor="middle">observes</text>
+
+<rect class="base" x="30" y="288" width="840" height="76" rx="10"/>
+<text class="layer-name obs-name" x="52" y="316">Everyday privacy basics</text>
+<text class="layer-sub  obs-sub"  x="52" y="338">Which messenger, how you keep your passwords, what you use to pay anonymously. Whichever layer you use above, you still need this one.</text>
+
+<text class="foot" x="30" y="398">The four are not a ladder and have no fixed order. Read the group that matches your situation, and let your threat model decide.</text>
+</svg>

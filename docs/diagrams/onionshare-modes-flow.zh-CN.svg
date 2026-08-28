@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 396" width="980" height="396" role="img" aria-labelledby="title desc">
+<title id="title">OnionShare 四种模式的数据往哪个方向走</title>
+<desc id="desc">四种模式的数据流向对照。Send 是你的电脑放文件，对方用 Tor Browser 下载，数据由你流向对方。Receive 是你开一个上传界面，投件人上传，数据由对方流向你。Host a Website 是你放一份静态网站，多位访客浏览，数据由你流向多人。Chat 是双向的即时对话，所有人都连进同一个一次性聊天室。四种模式共通的是中间那个 .onion 网址，关掉 OnionShare 网址就失效。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。cyan 标的是走 Tor 的那一段，
+     跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .mode { fill: #212121; font-size: 16px; font-weight: 700; }
+  .mode-zh { fill: #546e7a; font-size: 12.5px; }
+  .node { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; rx: 7; }
+  .node-t { fill: #455a64; font-size: 13.5px; font-weight: 600; }
+  .node-sub { fill: #78909c; font-size: 11px; }
+  .onion { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.3; rx: 11; }
+  .onion-t { fill: #0089bf; font-size: 12px; font-weight: 600; }
+  .arrow { stroke: #0089bf; stroke-width: 2; fill: none; }
+  .arrow-head { fill: #0089bf; }
+  .use { fill: #607d8b; font-size: 12px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .mode { fill: #eceff1; }
+    .mode-zh { fill: #b0bec5; }
+    .node { fill: #23292e; stroke: #4b565e; }
+    .node-t { fill: #cfd8dc; }
+    .node-sub { fill: #90a4ae; }
+    .onion { fill: #0d2b38; stroke: #4dbfff; }
+    .onion-t { fill: #4dbfff; }
+    .arrow { stroke: #4dbfff; }
+    .arrow-head { fill: #4dbfff; }
+    .use { fill: #90a4ae; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="mode"    x="132" y="34" text-anchor="middle">Send</text>
+<text class="mode-zh" x="132" y="53" text-anchor="middle">送档</text>
+<rect class="node" x="25" y="70" width="215" height="46"/>
+<text class="node-t"   x="132" y="90"  text-anchor="middle">你的电脑</text>
+<text class="node-sub" x="132" y="107" text-anchor="middle">把文件丢进去</text>
+<path class="arrow" d="M132 116 V140"/>
+<path class="arrow-head" d="M132 152 L125 136 L139 136 Z"/>
+<rect class="onion" x="52" y="158" width="161" height="30"/>
+<text class="onion-t" x="132" y="178" text-anchor="middle">.onion 网址</text>
+<path class="arrow" d="M132 188 V212"/>
+<path class="arrow-head" d="M132 224 L125 208 L139 208 Z"/>
+<rect class="node" x="25" y="230" width="215" height="46"/>
+<text class="node-t"   x="132" y="250" text-anchor="middle">对方</text>
+<text class="node-sub" x="132" y="267" text-anchor="middle">用 Tor Browser 下载</text>
+<text class="use" x="132" y="304" text-anchor="middle">把证据送给律师</text>
+<text class="use" x="132" y="322" text-anchor="middle">一次性的文件交付</text>
+
+<text class="mode"    x="367" y="34" text-anchor="middle">Receive</text>
+<text class="mode-zh" x="367" y="53" text-anchor="middle">收档</text>
+<rect class="node" x="260" y="70" width="215" height="46"/>
+<text class="node-t"   x="367" y="90"  text-anchor="middle">投件人</text>
+<text class="node-sub" x="367" y="107" text-anchor="middle">用 Tor Browser 上传</text>
+<path class="arrow" d="M367 116 V140"/>
+<path class="arrow-head" d="M367 152 L360 136 L374 136 Z"/>
+<rect class="onion" x="287" y="158" width="161" height="30"/>
+<text class="onion-t" x="367" y="178" text-anchor="middle">.onion 网址</text>
+<path class="arrow" d="M367 188 V212"/>
+<path class="arrow-head" d="M367 224 L360 208 L374 208 Z"/>
+<rect class="node" x="260" y="230" width="215" height="46"/>
+<text class="node-t"   x="367" y="250" text-anchor="middle">你的电脑</text>
+<text class="node-sub" x="367" y="267" text-anchor="middle">在本机收到文件</text>
+<text class="use" x="367" y="304" text-anchor="middle">隐蔽收件箱</text>
+<text class="use" x="367" y="322" text-anchor="middle">匿名投稿与危机通报</text>
+
+<text class="mode"    x="602" y="34" text-anchor="middle">Host a Website</text>
+<text class="mode-zh" x="602" y="53" text-anchor="middle">暂时架站</text>
+<rect class="node" x="495" y="70" width="215" height="46"/>
+<text class="node-t"   x="602" y="90"  text-anchor="middle">你的电脑</text>
+<text class="node-sub" x="602" y="107" text-anchor="middle">放一份静态网站</text>
+<path class="arrow" d="M602 116 V140"/>
+<path class="arrow-head" d="M602 152 L595 136 L609 136 Z"/>
+<rect class="onion" x="522" y="158" width="161" height="30"/>
+<text class="onion-t" x="602" y="178" text-anchor="middle">.onion 网址</text>
+<path class="arrow" d="M602 188 V206"/>
+<path class="arrow" d="M602 206 H528"/>
+<path class="arrow" d="M602 206 H676"/>
+<path class="arrow-head" d="M528 224 L521 208 L535 208 Z"/>
+<path class="arrow-head" d="M602 224 L595 208 L609 208 Z"/>
+<path class="arrow-head" d="M676 224 L669 208 L683 208 Z"/>
+<rect class="node" x="495" y="230" width="215" height="46"/>
+<text class="node-t"   x="602" y="250" text-anchor="middle">多位访客</text>
+<text class="node-sub" x="602" y="267" text-anchor="middle">各自用 Tor Browser 浏览</text>
+<text class="use" x="602" y="304" text-anchor="middle">临时公布敏感内容</text>
+<text class="use" x="602" y="322" text-anchor="middle">活动期间限定的资料</text>
+
+<text class="mode"    x="837" y="34" text-anchor="middle">Chat</text>
+<text class="mode-zh" x="837" y="53" text-anchor="middle">一次性聊天室</text>
+<rect class="node" x="730" y="70" width="215" height="46"/>
+<text class="node-t"   x="837" y="90"  text-anchor="middle">所有参与者</text>
+<text class="node-sub" x="837" y="107" text-anchor="middle">各自连进同一个房间</text>
+<path class="arrow" d="M837 124 V144"/>
+<path class="arrow-head" d="M837 152 L830 136 L844 136 Z"/>
+<path class="arrow-head" d="M837 116 L830 132 L844 132 Z"/>
+<rect class="onion" x="757" y="158" width="161" height="30"/>
+<text class="onion-t" x="837" y="178" text-anchor="middle">.onion 网址</text>
+<path class="arrow" d="M837 196 V216"/>
+<path class="arrow-head" d="M837 224 L830 208 L844 208 Z"/>
+<path class="arrow-head" d="M837 188 L830 204 L844 204 Z"/>
+<rect class="node" x="730" y="230" width="215" height="46"/>
+<text class="node-t"   x="837" y="250" text-anchor="middle">消息只在内存</text>
+<text class="node-sub" x="837" y="267" text-anchor="middle">关掉就整个消失</text>
+<text class="use" x="837" y="304" text-anchor="middle">行动现场的临时协调</text>
+<text class="use" x="837" y="322" text-anchor="middle">不希望留下记录的讨论</text>
+
+<text class="foot" x="25" y="360">四种模式共通的是中间那一段。文件与消息直接在两端之间走 Tor，没有经过任何云端服务，关掉 OnionShare 网址立刻失效。</text>
+<text class="foot" x="25" y="382">网址本身要另外用安全管道交给对方，OnionShare 不负责配送。用不安全的管道传网址，那一段就不再匿名。</text>
+</svg>
