@@ -23,7 +23,7 @@ icon: material/atom-variant
 NIST（IR 8547）把 2030 年定為棄用舊演算法、2035 年定為完全禁止使用的官方時間表，NSA CNSA 2.0 與 ENISA 的路線圖也圍繞這兩個年份[^1]。這個時程意味著新部署從現在起就應該規劃 PQC 路徑。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="後量子密碼遷移時程：從 2023 Signal PQXDH、2024 NIST FIPS 與主流瀏覽器啟用、到 2030–2035 主要系統應完成轉換、2040 舊密碼學硬時間表">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/pq-timeline.zh-TW.drawio.svg" alt="後量子密碼遷移時程：從 2023 Signal PQXDH、2024 NIST FIPS 與主流瀏覽器啟用、到 2030–2035 主要系統應完成轉換、2040 舊密碼學硬時間表">
 </figure>
 
 ## NIST 2024 三大標準

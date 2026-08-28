@@ -17,7 +17,7 @@ The intuitive analogy is mixing paint. Alice and Bob both start from a public ba
 In practice, modern protocols use X25519, an elliptic-curve key exchange that is smaller and faster than the earlier finite-field versions and designed to reduce side-channel risk, meaning inference of a key from physical traces such as timing or power draw. Signal, Tor, TLS 1.3, and most modern SSH implementations use or prefer X25519.
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/dh-exchange.drawio.svg" alt="Diffie-Hellman key exchange: Alice and Bob pick secrets a and b, exchange G^a and G^b, each computes the shared key G^ab, and Eve seeing the intermediate messages cannot work backwards in reasonable time">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/dh-exchange.zh-TW.drawio.svg" alt="Diffie-Hellman key exchange: Alice and Bob pick secrets a and b, exchange G^a and G^b, each computes the shared key G^ab, and Eve seeing the intermediate messages cannot work backwards in reasonable time">
 </figure>
 
 Diffie-Hellman settles how to agree on a shared key. On its own it is not enough: once a key is long-lived, stealing it one day decrypts every message before and after. That is the next problem.
@@ -44,7 +44,7 @@ Three security properties follow directly:
 3. **Offline messages**: messages accumulate while the other party is offline and sync in a batch when they return, each still with its own key
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/double-ratchet.drawio.svg" alt="The Double Ratchet's two key-update mechanisms: the symmetric ratchet advances one step per message sent, the DH ratchet resets the chain when a message arrives, and each message has its own key">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/double-ratchet.zh-TW.drawio.svg" alt="The Double Ratchet's two key-update mechanisms: the symmetric ratchet advances one step per message sent, the DH ratchet resets the chain when a message arrives, and each message has its own key">
 </figure>
 
 The Double Ratchet was integrated into the Signal Protocol in 2014[^1], and was subsequently adopted by WhatsApp, Facebook Messenger's Secret Conversations as an opt-in, and Skype Private Conversations.

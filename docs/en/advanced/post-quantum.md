@@ -23,7 +23,7 @@ For personal real-time chat and short-lived session tokens, HNDL risk is low, si
 NIST's IR 8547, still an initial public draft, proposes deprecating the old algorithms in 2030 and disallowing them by 2035, with the deprecation date applying to 112-bit security and the 2035 date applying across the board. ENISA's roadmap works to the same two years, and the NSA's CNSA 2.0 sets its own deadlines of 2030 and 2033[^1]. That timeline means new deployments should be planning a PQC path now.
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/pq-timeline.drawio.svg" alt="Post-quantum migration timeline: Signal PQXDH in 2023, NIST FIPS standards and browser rollout in 2024, major systems expected to complete migration between 2030 and 2035, hard deadline for legacy cryptography by 2040">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/pq-timeline.zh-TW.drawio.svg" alt="Post-quantum migration timeline: Signal PQXDH in 2023, NIST FIPS standards and browser rollout in 2024, major systems expected to complete migration between 2030 and 2035, hard deadline for legacy cryptography by 2040">
 </figure>
 
 ## The three 2024 NIST standards

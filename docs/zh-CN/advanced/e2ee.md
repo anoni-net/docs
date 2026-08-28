@@ -17,7 +17,7 @@ icon: material/key-chain-variant
 实现上，现代协议普遍使用 X25519（一套基于椭圆曲线的密钥交换算法），比早期的有限体版本更小、更快，设计上也降低了侧信道攻击的风险（side channel，从运算时间、功耗等物理迹象侧面反推密钥）。Signal、Tor、TLS 1.3、大多数现代 SSH 实现（如 OpenSSH）默认或优先使用 X25519。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/dh-exchange.drawio.svg" alt="Diffie-Hellman 密钥交换流程：Alice 与 Bob 各自挑秘密 a、b，交换 G^a、G^b，双方各自算出共同密钥 G^ab，Eve 即使看到中间消息也无法在合理时间内反推">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/dh-exchange.zh-TW.drawio.svg" alt="Diffie-Hellman 密钥交换流程：Alice 与 Bob 各自挑秘密 a、b，交换 G^a、G^b，双方各自算出共同密钥 G^ab，Eve 即使看到中间消息也无法在合理时间内反推">
 </figure>
 
 DH 解决了「协商出共同密钥」这件事。但只有 DH 不够：密钥一旦长期存在，只要有一天被偷走，过去与未来的所有消息都会被解密。下一步要解决的就是这个。
@@ -44,7 +44,7 @@ Double Ratchet 是 Signal Protocol 的核心，名称来自两种同时运作的
 3. **离线消息**：对方不在线时可以累积消息，等对方上线再批次同步，每则仍有独立密钥。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/double-ratchet.drawio.svg" alt="Double Ratchet 的两种密钥更新机制：对称 ratchet 每送一则消息推进一格、DH ratchet 收到对方消息时整段重置，每则消息有独立密钥">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/double-ratchet.zh-TW.drawio.svg" alt="Double Ratchet 的两种密钥更新机制：对称 ratchet 每送一则消息推进一格、DH ratchet 收到对方消息时整段重置，每则消息有独立密钥">
 </figure>
 
 Double Ratchet 在 2014 年被 Open Whisper Systems 整合进 Signal Protocol[^1]，后续被 WhatsApp、Facebook Messenger 的 Secret Conversations（选择性开启）、Skype Private Conversations 采用。

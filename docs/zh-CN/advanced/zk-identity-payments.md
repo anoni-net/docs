@@ -28,7 +28,7 @@ Monero 的设计来自 2013 年的 CryptoNote 白皮书，三个核心机制：
 - **RingCT**（Ring Confidential Transactions）：用 Pedersen 同态承诺（一种能在不揭露数字的前提下、仍可验算加总的加密承诺）隐藏金额，再以 Bulletproofs+ 范围证明确保每笔金额非负，整体证明「输入总和等于输出总和」（没有凭空印钱）。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/monero-ring.drawio.svg" alt="Monero Ring Signature 示意：寄件人的真实签章混进 15 个诱饵中，环大小 16，观察者只能验证「16 个之一是真的」、无法反推哪一个">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/monero-ring.zh-TW.drawio.svg" alt="Monero Ring Signature 示意：寄件人的真实签章混进 15 个诱饵中，环大小 16，观察者只能验证「16 个之一是真的」、无法反推哪一个">
 </figure>
 
 三者组合下，链上看到的是：「某个一次性地址收到一笔隐藏金额，由 16 个可能寄件人之一发送」。没有 Alice 与 Bob 的概念。对照前面四层，stealth address 盖掉账户层、RingCT 盖掉金额层、ring signatures 打散图谱层，第四层元数据仍要靠 Tor 另外处理。
@@ -44,7 +44,7 @@ Zcash 走的是另一条更激进的路线。屏蔽交易（shielded transaction
 - 没有重复花费。
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/zcash-shielded.drawio.svg" alt="Zcash 屏蔽交易：寄件人与收件人之间透过 zk-SNARK 证明连线。链上可见的部分：proof、nullifier、commitment、手续费。链上不可见的部分：寄件人地址、收件人地址、金额、图谱关联">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/zcash-shielded.zh-TW.drawio.svg" alt="Zcash 屏蔽交易：寄件人与收件人之间透过 zk-SNARK 证明连线。链上可见的部分：proof、nullifier、commitment、手续费。链上不可见的部分：寄件人地址、收件人地址、金额、图谱关联">
 </figure>
 
 整个证明在链上只有几百 bytes，验证者不需要知道金额、地址、来源。从链上能看到的只有「有一笔屏蔽交易发生」这个事实。对照四层，屏蔽交易一次盖掉账户、金额、图谱三层，第四层元数据同样留给网络层处理。
