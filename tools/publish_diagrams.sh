@@ -81,7 +81,11 @@ done
 [ "$BAD" = "0" ] || die "有網址取不到，先不要改 Markdown 的引用"
 
 # Cloudflare 那層的 max-age 是 12 小時。新檔案第一次上傳不受影響（edge 上沒有舊
-# 的可以回），改同名檔案就會拿到舊版，改了配色卻看不出來通常就是這件事。
+# 的可以回），改同名檔案就會拿到舊版。
+#
+# 覆蓋同名檔案而沒清快取，影響不只是站上暫時看到舊的。CI 建置時 privacy 外掛是從
+# edge 抓圖，抓到的舊版會被烘進 S3 產物，之後 edge 快取過期也不會修正站上的內容，
+# 因為站上讀的是產物那一份。修法是清完快取再 workflow_dispatch 重建一次。
 #
 # 清除需要 Zone -> Cache Purge 權限的 token，跟 tools/cf_purge.py 用的是同一組。
 # 沒有設就只印提醒，不當成錯誤：新增圖片是常態，那種情況本來就不用清。
@@ -98,7 +102,8 @@ if [ -n "${CF_ZONE_ID:-}" ] && [ -n "${CF_PURGE_TOKEN:-}" ]; then
         | python3 -c "import json,sys; r=json.load(sys.stdin); print('   ' + ('已清除' if r.get('success') else '失敗：' + json.dumps(r.get('errors'), ensure_ascii=False)))"
 else
     say "== 沒有設 CF_ZONE_ID 與 CF_PURGE_TOKEN，跳過清快取 =="
-    say "   改了同名檔案的話，edge 上的舊版最多還會存在 12 小時"
+    say "   新增檔案沒有影響。覆蓋了同名檔案的話，edge 上的舊版最多還存在 12 小時，"
+    say "   而且這段期間推 docs 分支會把舊版烘進產物，之後快取過期也不會自己修正。"
 fi
 
 say ""

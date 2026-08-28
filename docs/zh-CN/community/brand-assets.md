@@ -451,7 +451,13 @@ social:
 
 顺序不能反过来。先发布图、确认网址回得了 200，才改 Markdown 的引用。反过来做会让下一次构建直接失败。
 
-改同名文件还要清 Cloudflare 缓存，edge 的 max-age 是 12 小时。设好 `CF_ZONE_ID` 与 `CF_PURGE_TOKEN` 环境变量，发布脚本会顺手清掉。改了配色却在站上看不出来，通常就是这件事。
+改同名文件还要清 Cloudflare 缓存，edge 的 max-age 是 12 小时。设好 `CF_ZONE_ID` 与 `CF_PURGE_TOKEN` 环境变量，发布脚本会顺手清掉。
+
+没清缓存就推 `docs` 分支的后果比「站上暂时看到旧版」严重。CI 构建时 privacy 插件是从 edge 抓图，抓到的旧版会被烘进 S3 产物，之后 edge 缓存自己过期也不会修正站上的内容，因为站上读的是产物那一份。2026-08-28 第一次发布 `anonymity-vs-privacy-matrix` 就是这样，配色改过了，站上取得的仍是改之前的版本。
+
+修法是清完缓存再重新构建一次，从 Actions 页面用 `workflow_dispatch` 触发 `build_docs.yml` 即可，不需要另外推一次 `docs`。
+
+最直接的做法是不要覆盖同名文件。图大改一次就换一个文件名，连同 Markdown 的引用一起改，整条路径上不会有任何一层取得旧的。
 
 ### 如何储存才会有 embedded XML
 

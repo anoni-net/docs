@@ -451,7 +451,13 @@ social:
 
 順序不能反過來。先發布圖、確認網址回得了 200，才改 Markdown 的引用。反過來做會讓下一次建置直接失敗。
 
-改同名檔案還要清 Cloudflare 快取，edge 的 max-age 是 12 小時。設好 `CF_ZONE_ID` 與 `CF_PURGE_TOKEN` 環境變數，發布腳本會順手清掉。改了配色卻在站上看不出來，通常就是這件事。
+改同名檔案還要清 Cloudflare 快取，edge 的 max-age 是 12 小時。設好 `CF_ZONE_ID` 與 `CF_PURGE_TOKEN` 環境變數，發布腳本會順手清掉。
+
+沒清快取就推 `docs` 分支的後果比「站上暫時看到舊版」嚴重。CI 建置時 privacy 外掛是從 edge 抓圖，抓到的舊版會被烘進 S3 產物，之後 edge 快取自己過期也不會修正站上的內容，因為站上讀的是產物那一份。2026-08-28 第一次發布 `anonymity-vs-privacy-matrix` 就是這樣，配色改過了，站上取得的仍是改之前的版本。
+
+修法是清完快取再重新建置一次，從 Actions 頁面用 `workflow_dispatch` 觸發 `build_docs.yml` 即可，不需要另外推一次 `docs`。
+
+最直接的做法是不要覆蓋同名檔案。圖大改一次就換一個檔名，連同 Markdown 的引用一起改，整條路徑上不會有任何一層取得舊的。
 
 ### 如何儲存才會有 embedded XML
 
