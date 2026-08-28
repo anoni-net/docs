@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" role="img" aria-labelledby="title desc">
+<title id="title">監控四層的成本與涵蓋範圍剛好相反</title>
+<desc id="desc">四組上下對照的長條，由左到右是平台與廣告、電信、國家與執法、商用間諜軟體。向上的長條代表這一層涵蓋多少人，由左到右越來越短，平台與廣告涵蓋所有人，商用間諜軟體的名單很短。向下的長條代表用在一個人身上的成本，由左到右越來越長，平台與廣告幾乎零成本，商用間諜軟體一次授權數萬美元。兩個指標剛好相反，所以做得到不等於會用在你身上。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。橙色給涵蓋範圍，左邊那兩欄涵蓋所有人，
+     也是讀者實際最需要處理的兩層，跟站上其他示意圖的語意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .reach { fill: #ef6c00; }
+  .reach-faint { fill: #f8b878; }
+  .cost { fill: #0089bf; }
+  .cost-faint { fill: #9dd6ee; }
+  .mid-line { stroke: #cdcdcd; stroke-width: 1; }
+  .side { fill: #546e7a; font-size: 13.5px; font-weight: 600; }
+  .side-sub { fill: #90a4ae; font-size: 12px; }
+  .layer { fill: #212121; font-size: 15px; font-weight: 600; }
+  .note { fill: #607d8b; font-size: 12px; }
+  .val { font-size: 12.5px; font-weight: 600; }
+  .val-reach { fill: #bf5700; }
+  .val-cost { fill: #006d99; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .reach { fill: #ff8c1a; }
+    .reach-faint { fill: #9c5f1f; }
+    .cost { fill: #4dbfff; }
+    .cost-faint { fill: #24647f; }
+    .mid-line { stroke: #45505a; }
+    .side { fill: #b0bec5; }
+    .side-sub { fill: #78909c; }
+    .layer { fill: #eceff1; }
+    .note { fill: #90a4ae; }
+    .val-reach { fill: #ffb74d; }
+    .val-cost { fill: #4dbfff; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="side"     x="175" y="150" text-anchor="end">涵蓋多少人</text>
+<text class="side-sub" x="175" y="170" text-anchor="end">越長代表涵蓋越多</text>
+<text class="side"     x="175" y="330" text-anchor="end">用在一個人身上的成本</text>
+<text class="side-sub" x="175" y="350" text-anchor="end">越長代表越貴</text>
+
+<line class="mid-line" x1="190" y1="250" x2="985" y2="250"/>
+
+<rect class="reach" x="195" y="95"  width="165" height="150" rx="5"/>
+<text class="val val-reach" x="277" y="82"  text-anchor="middle">所有人</text>
+<rect class="cost-faint" x="195" y="255" width="165" height="16" rx="5"/>
+<text class="val val-cost" x="277" y="288" text-anchor="middle">幾乎是零</text>
+
+<rect class="reach" x="400" y="150" width="165" height="95" rx="5"/>
+<text class="val val-reach" x="482" y="137" text-anchor="middle">所有用戶</text>
+<rect class="cost-faint" x="400" y="255" width="165" height="48" rx="5"/>
+<text class="val val-cost" x="482" y="320" text-anchor="middle">本來就在收</text>
+
+<rect class="reach-faint" x="605" y="202" width="165" height="43" rx="5"/>
+<text class="val val-reach" x="687" y="189" text-anchor="middle">特定對象</text>
+<rect class="cost" x="605" y="255" width="165" height="100" rx="5"/>
+<text class="val val-cost" x="687" y="372" text-anchor="middle">要走令狀</text>
+
+<rect class="reach-faint" x="810" y="231" width="165" height="14" rx="5"/>
+<text class="val val-reach" x="892" y="218" text-anchor="middle">名單很短</text>
+<rect class="cost" x="810" y="255" width="165" height="152" rx="5"/>
+<text class="val val-cost" x="892" y="424" text-anchor="middle">一次數萬美元</text>
+
+<text class="layer" x="277" y="462" text-anchor="middle">平台與廣告</text>
+<text class="note"  x="277" y="482" text-anchor="middle">不用挑對象，收越多越划算</text>
+<text class="layer" x="482" y="462" text-anchor="middle">電信</text>
+<text class="note"  x="482" y="482" text-anchor="middle">通聯與位置依法保存</text>
+<text class="layer" x="687" y="462" text-anchor="middle">國家與執法</text>
+<text class="note"  x="687" y="482" text-anchor="middle">向業者調取，一次針對特定人</text>
+<text class="layer" x="892" y="462" text-anchor="middle">商用間諜軟體</text>
+<text class="note"  x="892" y="482" text-anchor="middle">授權昂貴，目標清單很短</text>
+
+<text class="foot" x="30" y="518">做得到不等於會用在你身上。左邊兩欄的成本低到涵蓋所有人，右邊那欄是能力的上限，不是多數人的預期風險。</text>
+</svg>

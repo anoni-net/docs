@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" role="img" aria-labelledby="title desc">
+<title id="title">Cost and reach run in opposite directions across the four layers</title>
+<desc id="desc">Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people that layer reaches, and it gets shorter to the right: platforms and ads reach everyone, while commercial spyware works from a short list. The downward bar is the cost of using it on one person, and it gets longer to the right: platforms and ads cost almost nothing, while a commercial spyware licence runs to tens of thousands of dollars. The two measures run in opposite directions, which is why capability is not the same as being used on you.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Orange marks what is exposed and cyan what is protected,
+     matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .reach { fill: #ef6c00; }
+  .reach-faint { fill: #f8b878; }
+  .cost { fill: #0089bf; }
+  .cost-faint { fill: #9dd6ee; }
+  .mid-line { stroke: #cdcdcd; stroke-width: 1; }
+  .side { fill: #546e7a; font-size: 13.5px; font-weight: 600; }
+  .side-sub { fill: #90a4ae; font-size: 12px; }
+  .layer { fill: #212121; font-size: 15px; font-weight: 600; }
+  .note { fill: #607d8b; font-size: 12px; }
+  .val { font-size: 12.5px; font-weight: 600; }
+  .val-reach { fill: #bf5700; }
+  .val-cost { fill: #006d99; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .reach { fill: #ff8c1a; }
+    .reach-faint { fill: #9c5f1f; }
+    .cost { fill: #4dbfff; }
+    .cost-faint { fill: #24647f; }
+    .mid-line { stroke: #45505a; }
+    .side { fill: #b0bec5; }
+    .side-sub { fill: #78909c; }
+    .layer { fill: #eceff1; }
+    .note { fill: #90a4ae; }
+    .val-reach { fill: #ffb74d; }
+    .val-cost { fill: #4dbfff; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<text class="side"     x="175" y="150" text-anchor="end">How many people</text>
+<text class="side-sub" x="175" y="170" text-anchor="end">longer means wider reach</text>
+<text class="side"     x="175" y="330" text-anchor="end">Cost per person targeted</text>
+<text class="side-sub" x="175" y="350" text-anchor="end">longer means more expensive</text>
+
+<line class="mid-line" x1="190" y1="250" x2="985" y2="250"/>
+
+<rect class="reach" x="195" y="95"  width="165" height="150" rx="5"/>
+<text class="val val-reach" x="277" y="82"  text-anchor="middle">Everyone</text>
+<rect class="cost-faint" x="195" y="255" width="165" height="16" rx="5"/>
+<text class="val val-cost" x="277" y="288" text-anchor="middle">Near zero</text>
+
+<rect class="reach" x="400" y="150" width="165" height="95" rx="5"/>
+<text class="val val-reach" x="482" y="137" text-anchor="middle">Every subscriber</text>
+<rect class="cost-faint" x="400" y="255" width="165" height="48" rx="5"/>
+<text class="val val-cost" x="482" y="320" text-anchor="middle">Already collected</text>
+
+<rect class="reach-faint" x="605" y="202" width="165" height="43" rx="5"/>
+<text class="val val-reach" x="687" y="189" text-anchor="middle">Named targets</text>
+<rect class="cost" x="605" y="255" width="165" height="100" rx="5"/>
+<text class="val val-cost" x="687" y="372" text-anchor="middle">Needs a warrant</text>
+
+<rect class="reach-faint" x="810" y="231" width="165" height="14" rx="5"/>
+<text class="val val-reach" x="892" y="218" text-anchor="middle">A short list</text>
+<rect class="cost" x="810" y="255" width="165" height="152" rx="5"/>
+<text class="val val-cost" x="892" y="424" text-anchor="middle">Tens of thousands</text>
+
+<text class="layer" x="277" y="462" text-anchor="middle">Platforms and ads</text>
+<text class="note"  x="277" y="482" text-anchor="middle">No targeting, more is cheaper</text>
+<text class="layer" x="482" y="462" text-anchor="middle">Telecoms</text>
+<text class="note"  x="482" y="482" text-anchor="middle">Records retained by law</text>
+<text class="layer" x="687" y="462" text-anchor="middle">State and law enforcement</text>
+<text class="note"  x="687" y="482" text-anchor="middle">Requests, one target at a time</text>
+<text class="layer" x="892" y="462" text-anchor="middle">Commercial spyware</text>
+<text class="note"  x="892" y="482" text-anchor="middle">Costly licence, short target list</text>
+
+<text class="foot" x="30" y="502">Capability is not the same as being used on you. The two left columns are cheap enough to cover everyone.</text>
+<text class="foot" x="30" y="524">The right-hand column is the ceiling of what is possible, not what most people should expect.</text>
+</svg>

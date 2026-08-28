@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" width="920" height="470" role="img" aria-labelledby="title desc">
+<title id="title">Encryption covers the letter, not the envelope around it</title>
+<desc id="desc">An envelope diagram. On the outside of the envelope are the sender, the recipient, the time and duration, the message size, the subject line, and how often the two exchange messages, all readable without decrypting anything. Inside the envelope is a locked block standing for the end-to-end encrypted letter, which only the recipient can read. To the right are three conclusions drawn from the outside of the envelope alone: that you and a law firm are in regular contact, that you spoke to a reporter for thirty minutes tonight, and that this set of people is your regular circle.</desc>
+<style>
+  /* Colours follow the palette in community/brand-assets.md. This file is a standalone
+     SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
+     values have to be literal. Orange marks what is exposed and cyan what is protected,
+     matching the other diagrams on the site. */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .env-box { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.6; }
+  .env-flap { fill: none; stroke: #ef6c00; stroke-width: 1.4; opacity: .55; }
+  .env-title { fill: #212121; font-size: 17px; font-weight: 700; }
+  .env-sub { fill: #ef6c00; font-size: 12.5px; font-weight: 600; }
+  .field { fill: #212121; font-size: 15px; }
+  .field-dot { fill: #ef6c00; }
+  .field-note { fill: #8d6e63; font-size: 12px; }
+
+  .sealed-box { fill: #0089bf; stroke: none; }
+  .sealed-title { fill: #ffffff; font-size: 16px; font-weight: 700; }
+  .sealed-sub { fill: #cfeaf7; font-size: 12.5px; }
+  .cipher { stroke: #7fc9e8; stroke-width: 5; stroke-linecap: round; }
+  .lock-body { fill: #ffffff; }
+  .lock-shackle { fill: none; stroke: #ffffff; stroke-width: 3.4; }
+
+  .arrow { stroke: #ef6c00; stroke-width: 1.8; fill: none; }
+  .arrow-head { fill: #ef6c00; }
+  .infer-title { fill: #546e7a; font-size: 13px; font-weight: 600; }
+  .infer { fill: #212121; font-size: 14px; }
+  .infer-line { stroke: #ef6c00; stroke-width: 2.5; stroke-linecap: round; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .env-box { fill: #33241a; stroke: #ff8c1a; }
+    .env-flap { stroke: #ff8c1a; }
+    .env-title { fill: #eceff1; }
+    .env-sub { fill: #ffb74d; }
+    .field { fill: #eceff1; }
+    .field-dot { fill: #ff8c1a; }
+    .field-note { fill: #a1887f; }
+
+    .sealed-box { fill: #0d4f6b; }
+    .sealed-sub { fill: #9fd8ee; }
+    .cipher { stroke: #4dbfff; }
+
+    .arrow { stroke: #ff8c1a; }
+    .arrow-head { fill: #ff8c1a; }
+    .infer-title { fill: #b0bec5; }
+    .infer { fill: #eceff1; }
+    .infer-line { stroke: #ff8c1a; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="env-box" x="24" y="34" width="596" height="352" rx="10"/>
+<path class="env-flap" d="M24 44 L322 196 L620 44"/>
+
+<text class="env-title" x="48" y="72">On the envelope</text>
+<text class="env-sub"   x="48" y="94">Readable without decrypting anything</text>
+
+<circle class="field-dot" cx="54" cy="140" r="4"/>
+<text class="field" x="70" y="145">Sender</text>
+<circle class="field-dot" cx="54" cy="180" r="4"/>
+<text class="field" x="70" y="185">Recipient</text>
+<circle class="field-dot" cx="54" cy="220" r="4"/>
+<text class="field" x="70" y="225">Time and duration</text>
+<circle class="field-dot" cx="54" cy="260" r="4"/>
+<text class="field" x="70" y="265">Message size</text>
+<circle class="field-dot" cx="54" cy="300" r="4"/>
+<text class="field" x="70" y="305">Subject line</text>
+<text class="field-note" x="70" y="322">usually not encrypted</text>
+<circle class="field-dot" cx="54" cy="352" r="4"/>
+<text class="field" x="70" y="357">How often you exchange</text>
+
+<rect class="sealed-box" x="326" y="118" width="270" height="236" rx="9"/>
+<g transform="translate(447 168)">
+  <path class="lock-shackle" d="M-12 0 v-8 a12 12 0 0 1 24 0 v8"/>
+  <rect class="lock-body" x="-16" y="0" width="32" height="24" rx="4"/>
+</g>
+<text class="sealed-title" x="461" y="228" text-anchor="middle">The letter</text>
+<text class="sealed-sub"   x="461" y="250" text-anchor="middle">End-to-end encrypted, only the recipient reads it</text>
+<line class="cipher" x1="366" y1="286" x2="470" y2="286"/>
+<line class="cipher" x1="486" y1="286" x2="556" y2="286"/>
+<line class="cipher" x1="366" y1="308" x2="424" y2="308"/>
+<line class="cipher" x1="440" y1="308" x2="556" y2="308"/>
+<line class="cipher" x1="366" y1="330" x2="512" y2="330"/>
+
+<path class="arrow" d="M628 210 H672"/>
+<path class="arrow-head" d="M684 210 L668 203 L668 217 Z"/>
+
+<text class="infer-title" x="700" y="120">So without reading</text>
+<text class="infer-title" x="700" y="140">a word, they know</text>
+<line class="infer-line" x1="702" y1="170" x2="702" y2="200"/>
+<text class="infer" x="718" y="182">you and a law firm are</text>
+<text class="infer" x="718" y="201">in regular contact</text>
+<line class="infer-line" x1="702" y1="230" x2="702" y2="260"/>
+<text class="infer" x="718" y="242">you spoke to a reporter</text>
+<text class="infer" x="718" y="261">for 30 minutes tonight</text>
+<line class="infer-line" x1="702" y1="290" x2="702" y2="320"/>
+<text class="infer" x="718" y="302">this set of people is</text>
+<text class="infer" x="718" y="321">your regular circle</text>
+
+<text class="foot" x="24" y="428">Encryption covers the middle block only. The ring around it is the by-product of every letter, every call, and every connection.</text>
+<text class="foot" x="24" y="452">The same shape holds for a phone call, a Signal message, or a Tor circuit. Only the field names change.</text>
+</svg>

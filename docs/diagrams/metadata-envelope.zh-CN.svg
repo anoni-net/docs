@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" width="920" height="470" role="img" aria-labelledby="title desc">
+<title id="title">加密盖住的只有信件内容，信封外面那一圈没有</title>
+<desc id="desc">一个信封的示意图。信封外面标着寄件人、收件人、时间与长度、消息大小、主题、往返频率，这些不用解密就看得到。信封里面是一块上了锁的区域，代表端对端加密的信件内容，只有收件人读得到。右边接着三条推论，说明光凭信封外面的信息就能知道你跟某律师事务所有持续通信、你今晚跟某记者通了三十分钟、这群人是你固定往来的圈子。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。橙色代表暴露、cyan 代表被保护住，
+     跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .env-box { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.6; }
+  .env-flap { fill: none; stroke: #ef6c00; stroke-width: 1.4; opacity: .55; }
+  .env-title { fill: #212121; font-size: 17px; font-weight: 700; }
+  .env-sub { fill: #ef6c00; font-size: 12.5px; font-weight: 600; }
+  .field { fill: #212121; font-size: 15px; }
+  .field-dot { fill: #ef6c00; }
+  .field-note { fill: #8d6e63; font-size: 12px; }
+
+  .sealed-box { fill: #0089bf; stroke: none; }
+  .sealed-title { fill: #ffffff; font-size: 16px; font-weight: 700; }
+  .sealed-sub { fill: #cfeaf7; font-size: 12.5px; }
+  .cipher { stroke: #7fc9e8; stroke-width: 5; stroke-linecap: round; }
+  .lock-body { fill: #ffffff; }
+  .lock-shackle { fill: none; stroke: #ffffff; stroke-width: 3.4; }
+
+  .arrow { stroke: #ef6c00; stroke-width: 1.8; fill: none; }
+  .arrow-head { fill: #ef6c00; }
+  .infer-title { fill: #546e7a; font-size: 13px; font-weight: 600; }
+  .infer { fill: #212121; font-size: 14px; }
+  .infer-line { stroke: #ef6c00; stroke-width: 2.5; stroke-linecap: round; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .env-box { fill: #33241a; stroke: #ff8c1a; }
+    .env-flap { stroke: #ff8c1a; }
+    .env-title { fill: #eceff1; }
+    .env-sub { fill: #ffb74d; }
+    .field { fill: #eceff1; }
+    .field-dot { fill: #ff8c1a; }
+    .field-note { fill: #a1887f; }
+
+    .sealed-box { fill: #0d4f6b; }
+    .sealed-sub { fill: #9fd8ee; }
+    .cipher { stroke: #4dbfff; }
+
+    .arrow { stroke: #ff8c1a; }
+    .arrow-head { fill: #ff8c1a; }
+    .infer-title { fill: #b0bec5; }
+    .infer { fill: #eceff1; }
+    .infer-line { stroke: #ff8c1a; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="env-box" x="24" y="34" width="596" height="352" rx="10"/>
+<path class="env-flap" d="M24 44 L322 196 L620 44"/>
+
+<text class="env-title" x="48" y="72">信封外面</text>
+<text class="env-sub"   x="48" y="94">不用解密就看得到</text>
+
+<circle class="field-dot" cx="54" cy="140" r="4"/>
+<text class="field" x="70" y="145">寄件人</text>
+<circle class="field-dot" cx="54" cy="180" r="4"/>
+<text class="field" x="70" y="185">收件人</text>
+<circle class="field-dot" cx="54" cy="220" r="4"/>
+<text class="field" x="70" y="225">时间与长度</text>
+<circle class="field-dot" cx="54" cy="260" r="4"/>
+<text class="field" x="70" y="265">消息大小</text>
+<circle class="field-dot" cx="54" cy="300" r="4"/>
+<text class="field" x="70" y="305">主题</text>
+<text class="field-note" x="70" y="322">多数情况没有被加密</text>
+<circle class="field-dot" cx="54" cy="352" r="4"/>
+<text class="field" x="70" y="357">往返频率</text>
+
+<rect class="sealed-box" x="326" y="118" width="270" height="236" rx="9"/>
+<g transform="translate(447 168)">
+  <path class="lock-shackle" d="M-12 0 v-8 a12 12 0 0 1 24 0 v8"/>
+  <rect class="lock-body" x="-16" y="0" width="32" height="24" rx="4"/>
+</g>
+<text class="sealed-title" x="461" y="228" text-anchor="middle">信件内容</text>
+<text class="sealed-sub"   x="461" y="250" text-anchor="middle">端对端加密，只有收件人读得到</text>
+<line class="cipher" x1="366" y1="286" x2="470" y2="286"/>
+<line class="cipher" x1="486" y1="286" x2="556" y2="286"/>
+<line class="cipher" x1="366" y1="308" x2="424" y2="308"/>
+<line class="cipher" x1="440" y1="308" x2="556" y2="308"/>
+<line class="cipher" x1="366" y1="330" x2="512" y2="330"/>
+
+<path class="arrow" d="M628 210 H672"/>
+<path class="arrow-head" d="M684 210 L668 203 L668 217 Z"/>
+
+<text class="infer-title" x="700" y="120">于是不用读内容</text>
+<text class="infer-title" x="700" y="140">就知道</text>
+<line class="infer-line" x1="702" y1="170" x2="702" y2="200"/>
+<text class="infer" x="718" y="182">你跟某律师事务所</text>
+<text class="infer" x="718" y="201">有持续通信</text>
+<line class="infer-line" x1="702" y1="230" x2="702" y2="260"/>
+<text class="infer" x="718" y="242">你今晚跟某记者</text>
+<text class="infer" x="718" y="261">通了 30 分钟</text>
+<line class="infer-line" x1="702" y1="290" x2="702" y2="320"/>
+<text class="infer" x="718" y="302">这群人是你固定</text>
+<text class="infer" x="718" y="321">往来的圈子</text>
+
+<text class="foot" x="24" y="428">加密盖住的只有中间那一块。左边那一圈是每一封信、每一通电话、每一次连线都会留下的副产品。</text>
+<text class="foot" x="24" y="452">同一个结构套用在电话、Signal 消息、Tor 连线上都成立，只是栏位的名字换掉。</text>
+</svg>

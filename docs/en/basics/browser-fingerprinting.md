@@ -35,6 +35,14 @@ The unit of measurement is entropy, meaning how finely a single signal divides t
 
 Peter Eckersley's 2010 Panopticlick study collected 470,161 browser samples. Among them, 83.6% of fingerprints were unique, rising to 94.2% for samples with Flash or Java installed, and the distribution carried at least 18.1 bits of entropy[^eckersley]. Visitors to a test site select themselves, so the share of unique results runs higher than it would across the general population. Even with that caveat, a measurement from sixteen years ago is enough to establish the scale.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/fingerprint-funnel.en.svg"
+        alt="A funnel narrowing from top to bottom in six steps. The widest step is everyone. Each step down adds one fingerprinting trait and the crowd shrinks: time zone leaves everyone in your time zone, language and operating system still leaves a lot of people, screen and window size makes the range noticeably narrower, graphics hardware leaves not many, and the full font list often leaves only you. Step widths are illustrative rather than measured.">
+    <figcaption>Each trait measured removes another batch of people who still look like you</figcaption>
+</figure>
+
+Entropy is exactly this shape. A time zone leaves you among hundreds of millions. A font list frequently cuts the field to single digits in one step. No single trait identifies you, and together they do.
+
 ## Three reasons the problem resists a clean fix
 
 ### Websites need the same data the trackers use

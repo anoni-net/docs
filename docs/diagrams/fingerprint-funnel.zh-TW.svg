@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 512" width="1000" height="512" role="img" aria-labelledby="title desc">
+<title id="title">每加一項特徵，還跟你長得一樣的人就少一批</title>
+<desc id="desc">一個由上往下收窄的漏斗，分成六階。最上面一階最寬，代表所有瀏覽器。往下每一階加入一項瀏覽器指紋的特徵，人群就縮小一次：加上時區之後剩下同一個時區的人，加上語言與作業系統之後還是很多人，加上螢幕與視窗尺寸之後範圍明顯縮小，加上繪圖硬體之後剩下不多，加上完整的字型清單之後常常就只剩你一個。每一階的寬度是示意，不是量測到的數字。底下註記 EFF 在 2010 年的 Panopticlick 研究收集了 470,161 個瀏覽器樣本，其中 83.6% 的指紋是唯一的。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。cyan 代表還混在人群裡，
+     最後一階換成橙色代表已經被指認出來，跟站上其他示意圖的語意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .step { stroke: none; }
+  .s1 { fill: #e6f4fb; }
+  .s2 { fill: #cfeaf7; }
+  .s3 { fill: #b3e3ff; }
+  .s4 { fill: #80d1ff; }
+  .s5 { fill: #4dbfff; }
+  .s6 { fill: #ef6c00; }
+  .link { stroke: #b0bec5; stroke-width: 1; opacity: .5; }
+  .crowd { fill: #212121; font-size: 16px; font-weight: 600; }
+  .crowd-last { fill: #ffffff; font-size: 16px; font-weight: 700; }
+  .feature { fill: #212121; font-size: 14px; }
+  .feature-hi { fill: #ef6c00; font-size: 14px; font-weight: 600; }
+  .head { fill: #546e7a; font-size: 13px; font-weight: 600; }
+  .foot { fill: #546e7a; font-size: 13px; }
+  .foot-note { fill: #90a4ae; font-size: 12px; }
+
+  @media (prefers-color-scheme: dark) {
+    .s1 { fill: #16323d; }
+    .s2 { fill: #1b4557; }
+    .s3 { fill: #1f5872; }
+    .s4 { fill: #216d8f; }
+    .s5 { fill: #2489b4; }
+    .s6 { fill: #ff8c1a; }
+    .link { stroke: #4b565e; }
+    .crowd { fill: #eceff1; }
+    .crowd-last { fill: #241708; }
+    .feature { fill: #eceff1; }
+    .feature-hi { fill: #ffb74d; }
+    .head { fill: #b0bec5; }
+    .foot { fill: #b0bec5; }
+    .foot-note { fill: #78909c; }
+  }
+</style>
+
+<text class="head" x="236" y="44" text-anchor="end">量到的特徵</text>
+<text class="head" x="620" y="44" text-anchor="middle">還跟你長得一樣的人</text>
+
+<line class="link" x1="270" y1="112" x2="330" y2="122"/>
+<line class="link" x1="970" y1="112" x2="910" y2="122"/>
+<line class="link" x1="330" y1="174" x2="390" y2="184"/>
+<line class="link" x1="910" y1="174" x2="850" y2="184"/>
+<line class="link" x1="390" y1="236" x2="450" y2="246"/>
+<line class="link" x1="850" y1="236" x2="790" y2="246"/>
+<line class="link" x1="450" y1="298" x2="505" y2="308"/>
+<line class="link" x1="790" y1="298" x2="735" y2="308"/>
+<line class="link" x1="505" y1="360" x2="550" y2="370"/>
+<line class="link" x1="735" y1="360" x2="690" y2="370"/>
+
+<rect class="step s1" x="270" y="60"  width="700" height="52" rx="6"/>
+<text class="crowd" x="620" y="92" text-anchor="middle">所有人</text>
+<text class="feature" x="236" y="92" text-anchor="end">還沒量任何東西</text>
+
+<rect class="step s2" x="330" y="122" width="580" height="52" rx="6"/>
+<text class="crowd" x="620" y="154" text-anchor="middle">同一個時區的人</text>
+<text class="feature" x="236" y="154" text-anchor="end">加上時區</text>
+
+<rect class="step s3" x="390" y="184" width="460" height="52" rx="6"/>
+<text class="crowd" x="620" y="216" text-anchor="middle">還是很多人</text>
+<text class="feature" x="236" y="216" text-anchor="end">加上語言與作業系統</text>
+
+<rect class="step s4" x="450" y="246" width="340" height="52" rx="6"/>
+<text class="crowd" x="620" y="278" text-anchor="middle">範圍明顯縮小</text>
+<text class="feature" x="236" y="278" text-anchor="end">加上螢幕與視窗尺寸</text>
+
+<rect class="step s5" x="505" y="308" width="230" height="52" rx="6"/>
+<text class="crowd" x="620" y="340" text-anchor="middle">剩下不多</text>
+<text class="feature" x="236" y="340" text-anchor="end">加上繪圖硬體</text>
+
+<rect class="step s6" x="550" y="370" width="140" height="52" rx="6"/>
+<text class="crowd-last" x="620" y="402" text-anchor="middle">就是你</text>
+<text class="feature-hi" x="236" y="402" text-anchor="end">加上完整的字型清單</text>
+
+<text class="foot" x="30" y="458">沒有一項特徵單獨認得出你，湊在一起就可以。這也是為什麼沒有「清除指紋」這個按鈕，因為沒有東西被存下來。</text>
+<text class="foot-note" x="30" y="482">每一階的寬度是示意，不是量測到的數字。EFF 在 2010 年的 Panopticlick 研究收集 470,161 個瀏覽器樣本，其中 83.6% 的指紋是唯一的。</text>
+</svg>
