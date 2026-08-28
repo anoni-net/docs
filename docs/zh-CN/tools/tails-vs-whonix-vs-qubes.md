@@ -24,6 +24,14 @@ icon: material/compare-horizontal
 
 Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃式路线，整次工作阶段在 USB 上运作，关机就消失。Whonix 换另一条路：在你日常操作系统里架两台虚拟机，一台 Gateway 锁住所有对外流量强制走 Tor，一台 Workstation 给你做事，整套设定可以持久保留。Qubes 则拉到更上层，用 Xen hypervisor 把电脑切成多个 qube，每个任务在自己的 qube 里运作，硬件层的攻击更难跨界。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/isolation-models.zh-CN.svg"
+        alt="三个系统的结构对照。Tails 从 USB 开机，一次工作阶段全部在里面，全部流量强制走 Tor，关机后整个消失。Whonix 在你原本的操作系统里架两台虚拟机，Workstation 给你做事，流量只能经过强制走 Tor 的 Gateway 出去。Qubes 用 Xen hypervisor 把一台电脑切成多个独立的 qube，工作、个人、金融各自一个，要走 Tor 得另外装一个 Whonix qube。">
+    <figcaption>三套系统把界线画在不同的层</figcaption>
+</figure>
+
+速查表里「双 VM：Gateway + Workstation」那一格，画出来是上面中间那一栏。三套真正的差别在界线画在哪一层：Tails 画在一次工作阶段与其他所有时间之间，Whonix 画在两台虚拟机之间，Qubes 画在硬件层。
+
 ## 五个比较轴
 
 读每一套时可以对照这五个轴：

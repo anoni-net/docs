@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 512" width="920" height="512" role="img" aria-labelledby="title desc">
+<title id="title">通讯工具在身分绑定与 metadata 这两个轴上的落点</title>
+<desc id="desc">一张散点图。横轴是身分绑定方式，左边绑手机号码，右边不绑任何可查的身分。纵轴是 metadata 留在哪，下面是中央服务器看得到全部，上面是没有中央服务器可看。LINE、Telegram、WhatsApp 三个对照组落在左下角。Signal 因为 metadata 最小化设计而偏上，身分仍绑手机号码所以偏左。Matrix 落在中间偏下，房间参与的每个 homeserver 都看得到。Session、SimpleX、Briar 落在右上角，身分不绑手机也没有中央服务器掌握谁跟谁在通讯。位置是相对的，不是量测值。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个文件是被 img 标签引用的独立 SVG，
+     取不到页面的 CSS 变量，只能写死 hex。橙色是页面里的对照组，也就是暴露较多的那几个，
+     cyan 是主名单，跟站上其他示意图的语意一致。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .axis { stroke: #cdcdcd; stroke-width: 1.5; }
+  .guide { stroke: #cdcdcd; stroke-width: 1; stroke-dasharray: 4 5; opacity: .7; }
+  .ax-name { fill: #546e7a; font-size: 13.5px; font-weight: 700; }
+  .ax-end { fill: #90a4ae; font-size: 12px; }
+  .dot-main { fill: #0089bf; }
+  .dot-ref { fill: #ef6c00; }
+  .lbl { fill: #212121; font-size: 14px; font-weight: 600; }
+  .lbl-note { fill: #78909c; font-size: 11.5px; }
+  .legend { fill: #546e7a; font-size: 12.5px; }
+  .foot { fill: #546e7a; font-size: 13px; }
+
+  @media (prefers-color-scheme: dark) {
+    .axis { stroke: #45505a; }
+    .guide { stroke: #4b565e; }
+    .ax-name { fill: #b0bec5; }
+    .ax-end { fill: #78909c; }
+    .dot-main { fill: #4dbfff; }
+    .dot-ref { fill: #ff8c1a; }
+    .lbl { fill: #eceff1; }
+    .lbl-note { fill: #90a4ae; }
+    .legend { fill: #b0bec5; }
+    .foot { fill: #b0bec5; }
+  }
+</style>
+
+<line class="axis" x1="150" y1="60" x2="150" y2="432"/>
+<line class="axis" x1="150" y1="432" x2="872" y2="432"/>
+<line class="guide" x1="150" y1="250" x2="872" y2="250"/>
+<line class="guide" x1="505" y1="60" x2="505" y2="432"/>
+
+<text class="ax-end"  x="138" y="76"  text-anchor="end">没有中央</text>
+<text class="ax-end"  x="138" y="92"  text-anchor="end">服务器可看</text>
+<text class="ax-name" x="138" y="242" text-anchor="end">metadata</text>
+<text class="ax-name" x="138" y="260" text-anchor="end">留在哪</text>
+<text class="ax-end"  x="138" y="412" text-anchor="end">中央服务器</text>
+<text class="ax-end"  x="138" y="428" text-anchor="end">看得到全部</text>
+
+<text class="ax-end"  x="150" y="456" text-anchor="start">绑手机号码</text>
+<text class="ax-name" x="505" y="456" text-anchor="middle">身分绑定方式</text>
+<text class="ax-end"  x="872" y="456" text-anchor="end">不绑可查的身分</text>
+
+<circle class="dot-ref" cx="192" cy="408" r="7"/>
+<text class="lbl" x="206" y="413">LINE</text>
+<circle class="dot-ref" cx="248" cy="376" r="7"/>
+<text class="lbl" x="262" y="381">Telegram</text>
+<circle class="dot-ref" cx="205" cy="332" r="7"/>
+<text class="lbl" x="219" y="337">WhatsApp</text>
+
+<circle class="dot-main" cx="365" cy="200" r="7"/>
+<text class="lbl" x="379" y="199">Signal</text>
+<text class="lbl-note" x="379" y="215">身分仍绑手机</text>
+
+<circle class="dot-main" cx="468" cy="318" r="7"/>
+<text class="lbl" x="482" y="317">Matrix</text>
+<text class="lbl-note" x="482" y="333">每个 homeserver 都看得到</text>
+
+<circle class="dot-main" cx="645" cy="162" r="7"/>
+<text class="lbl" x="659" y="167">Session</text>
+<circle class="dot-main" cx="732" cy="114" r="7"/>
+<text class="lbl" x="746" y="119">SimpleX</text>
+<circle class="dot-main" cx="812" cy="84" r="7"/>
+<text class="lbl" x="826" y="89">Briar</text>
+
+<circle class="dot-main" cx="164" cy="486" r="6"/>
+<text class="legend" x="178" y="491">主名单</text>
+<circle class="dot-ref" cx="256" cy="486" r="6"/>
+<text class="legend" x="270" y="491">页面里的对照组</text>
+
+<text class="foot" x="410" y="491">位置是相对的，不是量测值。越靠右上，越少人知道你是谁、又在跟谁通讯。</text>
+</svg>

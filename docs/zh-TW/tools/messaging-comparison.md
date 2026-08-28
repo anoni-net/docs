@@ -49,6 +49,14 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 對照組的「E2EE 預設」一欄寫的是訊息內容層級，不代表 metadata 也加密。Telegram 的「不適用」是因為一般群組與頻道根本不走 E2EE，沒辦法談「群組 E2EE 機制」。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/messaging-landscape.zh-TW.svg"
+        alt="散點圖。橫軸是身分綁定方式，左邊綁手機號碼，右邊不綁任何可查的身分。縱軸是 metadata 留在哪，下面是中央伺服器看得到全部，上面是沒有中央伺服器可看。LINE、Telegram、WhatsApp 三個對照組落在左下角。Signal 偏上偏左，metadata 最小化但身分仍綁手機。Matrix 落在中間偏下。Session、SimpleX、Briar 落在右上角。位置是相對的，不是量測值。">
+    <figcaption>八個工具在身分綁定與 metadata 這兩個軸上的落點</figcaption>
+</figure>
+
+速查表列的是每個欄位的值，把其中兩個軸拉成座標之後，看得到的是另一件事。對照組那三個擠在左下角，右上角那一群把身分與 metadata 都拆掉了。Signal 卡在左上，metadata 設計是主名單裡最省的一個，身分卻仍然綁在手機號碼上。位置是相對的，不是量測值。
+
 ## Signal
 
 [Signal](https://signal.org/){target="_blank"} 是 E2EE 通訊工具的當前共識答案，協議成熟、UX 接近主流 IM。一對一用 Double Ratchet（每則訊息獨立金鑰），群組用 Sender Keys，協議細節見 [端對端加密如何運作](../advanced/e2ee.md)。
