@@ -28,7 +28,7 @@ Monero's design comes from the 2013 CryptoNote whitepaper, with three mechanisms
 - **RingCT (ring confidential transactions)**: Pedersen commitments, a form of homomorphic commitment allowing sums to be verified without revealing the numbers, hide the amounts, with Bulletproofs+ range proofs ensuring each amount is non-negative and the whole proving that inputs equal outputs so no money is created
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/monero-ring.drawio.svg" alt="A Monero ring signature: the sender's real signature mixed among 15 decoys for a ring size of 16, where an observer can verify that one of the 16 is genuine without determining which">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/monero-ring.zh-TW.drawio.svg" alt="A Monero ring signature: the sender's real signature mixed among 15 decoys for a ring size of 16, where an observer can verify that one of the 16 is genuine without determining which">
 </figure>
 
 Together, what appears on the chain is that a one-time address received a hidden amount, sent by one of 16 possible senders. There is no notion of named parties. Against the four layers, stealth addresses cover accounts, RingCT covers amounts, ring signatures obscure the graph, and metadata still needs Tor.
@@ -44,7 +44,7 @@ Zcash takes a more radical route. A shielded transaction uses zk-SNARKs, a crypt
 - Nothing is being double-spent
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/zcash-shielded.drawio.svg" alt="A Zcash shielded transaction: sender and recipient connected through a zk-SNARK proof. Visible on chain are the proof, nullifier, commitment, and fee. Not visible are the sender address, recipient address, amount, and graph relationship">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/zcash-shielded.zh-TW.drawio.svg" alt="A Zcash shielded transaction: sender and recipient connected through a zk-SNARK proof. Visible on chain are the proof, nullifier, commitment, and fee. Not visible are the sender address, recipient address, amount, and graph relationship">
 </figure>
 
 The whole proof occupies only a few hundred bytes on chain, and the verifier needs neither the amount nor the addresses nor the source. What the chain shows is that a shielded transaction occurred. Against the four layers, one shielded transaction covers accounts, amounts, and graph, with metadata again left to the network layer.

@@ -66,7 +66,7 @@ Tor Onion 服務（v3）讓網站直接運作於 Tor 網路：
 ## 兩者解決不同問題
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/ipfs-vs-onion.drawio.svg" alt="IPFS 與 Onion 架構對照。IPFS 走 gateway → DHT → peer，主要解決抗刪除。Onion 走 Guard → Middle → Rendezvous → HSDir → 服務，主要解決連線匿名">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/ipfs-vs-onion.zh-TW.drawio.svg" alt="IPFS 與 Onion 架構對照。IPFS 走 gateway → DHT → peer，主要解決抗刪除。Onion 走 Guard → Middle → Rendezvous → HSDir → 服務，主要解決連線匿名">
 </figure>
 
 | 維度 | IPFS | Onion |
@@ -114,7 +114,7 @@ EFF、ProtonMail、紐約時報、BBC、CIA（美國中央情報局）都架設�
 anoni.net 文件站本身就是一個 IPFS + Onion 雙鏡像案例。簡化的流程：
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/anoni-deployment.drawio.svg" alt="anoni.net 文件站三軌部署：同一份 GitHub repo 透過三套 build script 處理路徑差異，分別部署到主站 anoni.net、IPFS 網路、.onion 隱藏服務">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/anoni-deployment.zh-TW.drawio.svg" alt="anoni.net 文件站三軌部署：同一份 GitHub repo 透過三套 build script 處理路徑差異，分別部署到主站 anoni.net、IPFS 網路、.onion 隱藏服務">
 </figure>
 
 

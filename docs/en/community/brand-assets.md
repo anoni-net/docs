@@ -405,16 +405,57 @@ Pages that need artwork of their own (event key visuals, the interactive section
 - Do not use oversaturated colours such as pure red `#ff0000` or pure green `#00ff00`
 - Do not write `style="color: #...;"` inline. Use the CSS variable
 
-## :material-vector-square: Contributing technical diagrams with drawio
+## :material-vector-square: Contributing technical diagrams
 
-Every technical diagram on the site (flowcharts, architecture diagrams, timelines) is made in drawio and saved in the dual `.drawio.svg` format, which is simultaneously:
+Technical diagrams (flowcharts, architecture diagrams, comparison matrices, timelines) come in two flavours:
 
-- **A valid SVG**, rendered directly by browsers, mkdocs, and the IPFS and onion mirrors
-- **A re-editable drawio source**, so anyone later wanting to change a colour, edit text, or add an element can open it in drawio Desktop
+- **drawio**, for diagrams with many nodes and connections, saved in the dual `.drawio.svg` format
+- **Hand-written SVG**, for diagrams on a regular grid such as matrices, layer stacks, and timelines. Writing one directly is faster than dragging boxes around a canvas, and the file is one to two orders of magnitude smaller
 
-The difference is an extra `content="..."` attribute on the root `<svg>` tag, holding escaped drawio mxfile XML. drawio reads that to rebuild the structured editing experience. Without it, drawio sees a pile of independent paths, rectangles, and text, and re-editing is essentially impossible.
+Both are SVG, rendered directly by browsers, mkdocs, and the IPFS and onion mirrors.
+
+### Diagram files live on assets.anoni.net
+
+Diagram files do not go into `docs/<lang>/assets/images/`. The three language trees each have their own physical copy of `assets/images/`, so one diagram means three copies, and missing a language gives you a broken image on that page with no build error. That is exactly how seven drawio diagrams stayed broken in zh-CN for a while without anyone noticing.
+
+| Thing | Where |
+|---|---|
+| Source file (version-controlled, reviewable, revertible) | `docs/diagrams/` |
+| Published copy | `/srv/images-anoni-net/diagrams/` on m6 |
+| URL referenced from articles | `https://assets.anoni.net/diagrams/<filename>` |
+
+`docs/diagrams/` sits outside `docs_dir` (which points at each language directory), so it is never built into the output. It is purely where the sources live.
+
+Readers never connect to assets.anoni.net. The mkdocs-material privacy plugin downloads external assets at build time, and the `img src` in the output is a relative path under `assets/external/assets.anoni.net/...`. The onion build and the IPFS mirror stay self-contained, and no reader ends up making a request to the clearnet.
+
+The cost is that assets.anoni.net has to be reachable at build time. When a download fails the privacy plugin still registers the file, `copy_static_files` then cannot find it, and the whole build fails. The plugin does not retry.
+
+### Filenames carry the language
+
+A diagram containing Chinese or English prose needs one file per language, named `<slug>.<lang>.svg`:
+
+- `anonymity-vs-privacy-matrix.zh-TW.svg`
+- `anonymity-vs-privacy-matrix.zh-CN.svg`
+- `anonymity-vs-privacy-matrix.en.svg`
+
+A diagram carrying only English technical terms, or no text at all, is shared across all three languages and drops the language segment: `<slug>.svg`.
+
+Where a diagram has not been translated yet, point the other two languages at the zh-TW file so at least something renders. A `.zh-TW.` file referenced from a zh-CN or en page is the marker for translation still owed.
+
+### Publishing
+
+```bash
+./tools/publish_diagrams.sh --dry-run   # validate SVG syntax only
+./tools/publish_diagrams.sh             # validate, upload, check every URL returns 200
+```
+
+The order matters. Publish the image and confirm the URL returns 200 before editing the Markdown reference. Doing it the other way round breaks the next build.
+
+Overwriting an existing filename also needs a Cloudflare purge, since the edge `max-age` is 12 hours. Set `CF_ZONE_ID` and `CF_PURGE_TOKEN` and the publish script handles it. A colour change that stubbornly refuses to show up on the site is usually this.
 
 ### Saving so the XML is embedded
+
+What separates a drawio.svg from a plain SVG is an extra `content="..."` attribute on the root `<svg>` tag, holding escaped drawio mxfile XML. drawio reads that to rebuild the structured editing experience. Without it, drawio sees a pile of independent paths, rectangles, and text, and re-editing is essentially impossible.
 
 Two fields in drawio Desktop's save dialog matter:
 
@@ -466,17 +507,42 @@ New diagrams use the brand cyan scale above. Pasting this into drawio Desktop un
 
 Set once and stored permanently, so the picker offers brand colours rather than Material defaults.
 
+### Rules for hand-written SVG
+
+A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, taken from the palette above.
+
+Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`. The site's palette toggle does not reach a standalone SVG file. Lighten the primary colour for the dark set, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
+
+Text inside a coloured block should be neutral dark `#212121` or white. Do not use a brand colour as a text colour: `#ef6c00` and `#4caf50` fall short of 4.5:1 against white, and the meaning is already carried by the border colour and the words themselves.
+
+Never put an angle bracket inside the `<style>` block, not even in a comment. Naming a tag in a comment makes the whole file invalid XML while browsers still render it happily, so only an XML parser catches it. `publish_diagrams.sh` checks for this.
+
+A hand-written diagram brings its own frame and padding, so do not also apply `.brand-frame`, which would double the border. drawio exports have no frame of their own and keep `.brand-frame`.
+
 ### Using a diagram in an article
 
-Save to `docs/en/assets/images/<name>.drawio.svg` (or the corresponding language directory) and reference it:
+A drawio diagram, with `.brand-frame`:
 
 ```markdown
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/<name>.drawio.svg" alt="Description">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/<name>.zh-TW.drawio.svg" alt="Description">
 </figure>
 ```
 
-`.brand-frame` is the site's utility class for diagrams, giving a cyan border and a soft shadow, applied to every technical diagram for visual consistency. The `../../assets/images/...` path is the standard form when referencing from a section directory.
+A hand-written SVG, which brings its own frame and takes a figcaption instead:
+
+```markdown
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/<name>.en.svg" alt="Describe what the diagram actually shows">
+    <figcaption>One line on what this diagram is about</figcaption>
+</figure>
+```
+
+`.brand-frame` is the site's utility class for diagrams, giving a cyan border and a soft shadow.
+
+Write alt text that conveys the content of the diagram rather than the words "a diagram". Screen readers, low-bandwidth onion sessions, and any failed fetch leave the reader with nothing but that sentence.
+
+Do not wrap a diagram in an `<a>` for click-to-zoom. An SVG is already legible in the page, and `<a href>` is not rewritten by the privacy plugin, so a reader on the onion build would be pushed out of Tor to the clearnet. Save the `<a>` wrapper for screenshots that genuinely need zooming, which are PNGs anyway.
 
 ### When a plain SVG or PNG is needed
 

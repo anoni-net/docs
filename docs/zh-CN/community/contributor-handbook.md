@@ -129,11 +129,17 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 
 ## 图片与资源
 
-- 图片放在 `docs/zh-TW/assets/images/`
+截图与示意图走不同的路径。
+
+截图（操作画面、网站画面）放在 `docs/<lang>/assets/images/`：
+
 - 在 markdown 引用：对于 `basics/`、`tools/` 等深度 1 的目录，用 `../../assets/images/文件名`
 - 对于 `reports/interseclab-network-coup/` 等深度 2 的目录，用 `../../assets/images/文件名`（刚好一样）
-- 截图优先使用 webp 或最佳化过的 png，不直接放手机原始大档
-- 图片如果有 lightbox（点击放大），HTML 用 `<figure>` + `<a href>` 包 `<img>`，两个的相对路径都要对齐
+- 优先使用 webp 或最佳化过的 png，不直接放手机原始大档
+- 有 lightbox（点击放大）时，HTML 用 `<figure>` + `<a href>` 包 `<img>`，两个的相对路径都要对齐
+- 三个语系的 `assets/images/` 各自独立，补了一个语系记得补另外两个。漏掉的话构建不会报错，站上就是一页破图，执行 `python3 tools/check_image_refs.py` 扫得出来
+
+示意图（流程图、架构图、对照矩阵、时间轴）的原始文件放 `docs/diagrams/`，发布到 assets.anoni.net，三个语系引用同一个网址。制作、命名与发布流程见[品牌识别](brand-assets.md)的「贡献技术图示」一节。
 
 ## 跨档链接规则
 

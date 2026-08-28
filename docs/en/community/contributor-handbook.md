@@ -159,11 +159,17 @@ This came up in August 2026: a May 2025 split moved the workshop recruitment con
 
 ## Images and assets
 
-- Images go in `docs/en/assets/images/`.
+Screenshots and diagrams take different routes.
+
+Screenshots (application windows, web pages) go in `docs/<lang>/assets/images/`:
+
 - In markdown image syntax, the path is relative to the file: `../assets/images/filename` from a section directory such as `community/`.
 - In raw HTML `<img src>` and `<a href>`, the path resolves against the generated URL, not the source file. From a page at `/docs/en/basics/internet-freedom/` that means `../../assets/images/filename`.
 - Prefer webp or an optimized png. Do not commit unprocessed phone camera files.
 - For a lightbox image, wrap `<img>` in `<figure>` and `<a href>`, and keep both relative paths aligned.
+- The three language trees have independent copies of `assets/images/`. Adding a file to one means adding it to the other two. A missing copy produces no build error, just a broken image on the page. `python3 tools/check_image_refs.py` finds them.
+
+Diagrams (flowcharts, architecture diagrams, comparison matrices, timelines) keep their source in `docs/diagrams/`, are published to assets.anoni.net, and are referenced by all three languages through the same URL. See "Contributing technical diagrams" in the [brand guide](brand-assets.md) for how to make, name, and publish one.
 
 ## Cross-file links
 

@@ -66,7 +66,7 @@ The limits:
 ## They solve different problems
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/ipfs-vs-onion.drawio.svg" alt="IPFS and onion architectures compared. IPFS goes gateway to DHT to peer, addressing deletion resistance. Onion goes guard to middle to rendezvous to hidden service directory to service, addressing connection anonymity">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/ipfs-vs-onion.zh-TW.drawio.svg" alt="IPFS and onion architectures compared. IPFS goes gateway to DHT to peer, addressing deletion resistance. Onion goes guard to middle to rendezvous to hidden service directory to service, addressing connection anonymity">
 </figure>
 
 | Dimension | IPFS | Onion |
@@ -112,7 +112,7 @@ IPFS content can be given a memorable name through a blockchain naming system, w
 The anoni.net documentation site is itself an IPFS and onion mirroring case.
 
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/anoni-deployment.drawio.svg" alt="Three-track deployment of the anoni.net documentation site: one GitHub repository, three build scripts handling path differences, deploying to the main site, the IPFS network, and a .onion hidden service">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/anoni-deployment.zh-TW.drawio.svg" alt="Three-track deployment of the anoni.net documentation site: one GitHub repository, three build scripts handling path differences, deploying to the main site, the IPFS network, and a .onion hidden service">
 </figure>
 
 1. **Source**: markdown written for MkDocs Material, in a GitHub repository

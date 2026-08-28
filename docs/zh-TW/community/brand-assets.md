@@ -405,16 +405,57 @@ social:
 - 別用過飽和的色（純紅 `#ff0000`、純綠 `#00ff00`）
 - 別 inline `style="color: #...;"`，請改用 CSS 變數 `var(--brand-cyan-500)`
 
-## :material-vector-square: 用 drawio 貢獻技術圖示
+## :material-vector-square: 貢獻技術圖示
 
-文件站的所有技術圖示（流程圖、架構圖、時間軸）都用 drawio 製作，存成 `.drawio.svg` 雙重格式檔。這個格式同時是：
+技術圖示（流程圖、架構圖、對照矩陣、時間軸）有兩種做法：
 
-- **合法的 SVG**：瀏覽器、mkdocs、IPFS 鏡像、Onion 鏡像都直接渲染
-- **drawio 可重編的 source**：將來任何人想改顏色、改文字、加元素，可在 drawio Desktop 雙擊打開重新編輯
+- **drawio**：節點與連線多、結構複雜的圖，存成 `.drawio.svg` 雙重格式檔
+- **手寫 SVG**：版型規則的圖，例如矩陣、分層、時間軸。直接寫比在畫布上拖拉快，檔案也小一到兩個數量級
 
-關鍵差別在於 drawio.svg 在 `<svg>` 根標籤上多了一個 `content="..."` 屬性，裡面是 escape 過的 drawio mxfile XML。drawio 會讀這個 XML 重建原本的結構化編輯體驗。沒有它，drawio 只能把 SVG 視為一堆獨立的 path / rect / text 散件，幾乎沒辦法重編。
+兩種都是 SVG，瀏覽器、mkdocs、IPFS 鏡像、Onion 鏡像都直接渲染。
+
+### 圖檔放在 assets.anoni.net
+
+圖檔不進 `docs/<lang>/assets/images/`。三個語系的 `assets/images/` 是三份各自獨立的實體檔案，同一張圖要複製三次，漏掉一個語系就是一頁破圖，而且建置不會報錯。zh-CN 的七張 drawio 圖就是這樣壞了一段時間都沒有人發現。
+
+| 東西 | 位置 |
+|---|---|
+| 原始檔（進版控，可 review、可回溯） | `docs/diagrams/` |
+| 發布出去的副本 | m6 的 `/srv/images-anoni-net/diagrams/` |
+| 文章裡引用的網址 | `https://assets.anoni.net/diagrams/<檔名>` |
+
+`docs/diagrams/` 不在 `docs_dir` 底下（`docs_dir` 設成各語系自己的目錄），所以它不會被建置成產物，純粹是原始檔的存放處。
+
+讀者不會直接連到 assets.anoni.net。mkdocs-material 的 privacy 外掛在建置時把外部資產抓成本地檔案，產物裡的 `img src` 是 `assets/external/assets.anoni.net/...` 這樣的相對路徑。Onion 版與 IPFS 鏡像照樣自足，不會有讀者向 clearnet 發請求。
+
+代價是建置時 assets.anoni.net 必須連得到。privacy 外掛下載失敗時仍會把該檔登記進 files，接著 `copy_static_files` 找不到檔案就讓整個建置失敗，外掛本身沒有重試。
+
+### 檔名帶語系
+
+圖裡有中文字就要分語系，檔名寫成 `<slug>.<lang>.svg`：
+
+- `anonymity-vs-privacy-matrix.zh-TW.svg`
+- `anonymity-vs-privacy-matrix.zh-CN.svg`
+- `anonymity-vs-privacy-matrix.en.svg`
+
+圖裡只有英文術語或完全沒有文字，三個語系共用一份，檔名就不帶語系，寫成 `<slug>.svg`。
+
+還沒補齊三個語系的圖，先讓另外兩個語系引用 zh-TW 那一份，站上至少看得到圖。`docs/diagrams/` 底下帶 `.zh-TW.` 的檔案被 zh-CN 或 en 的頁面引用，就代表那張還沒補。
+
+### 發布
+
+```bash
+./tools/publish_diagrams.sh --dry-run   # 只檢查 SVG 語法
+./tools/publish_diagrams.sh             # 檢查、上傳、驗證每個網址回 200
+```
+
+順序不能反過來。先發布圖、確認網址回得了 200，才改 Markdown 的引用。反過來做會讓下一次建置直接失敗。
+
+改同名檔案還要清 Cloudflare 快取，edge 的 max-age 是 12 小時。設好 `CF_ZONE_ID` 與 `CF_PURGE_TOKEN` 環境變數，發布腳本會順手清掉。改了配色卻在站上看不出來，通常就是這件事。
 
 ### 如何儲存才會有 embedded XML
+
+drawio.svg 與純 SVG 的關鍵差別，在於 drawio.svg 的 `<svg>` 根標籤上多了一個 `content="..."` 屬性，裡面是 escape 過的 drawio mxfile XML。drawio 會讀這個 XML 重建原本的結構化編輯體驗。沒有它，drawio 只能把 SVG 視為一堆獨立的 path / rect / text 散件，幾乎沒辦法重編。
 
 drawio Desktop 的 Save 對話框有兩個關鍵欄位：
 
@@ -466,17 +507,42 @@ grep -c mxfile your-diagram.drawio.svg
 
 設一次永久存入，畫圖時 picker 直接挑品牌色，不會誤用 Material 預設色。
 
+### 手寫 SVG 的規則
+
+手寫的圖是被 `img` 標籤引用的獨立檔案，取不到頁面的 CSS 變數，顏色只能寫死 hex，色票照本頁上方那一組。
+
+深色模式在 SVG 內用 `@media (prefers-color-scheme: dark)` 自己處理，站上 palette 切換的狀態不會傳進獨立的 SVG 檔。深色那一組把主色提亮，例如 cyan-700 `#0089bf` 換成 cyan-300 `#4dbfff`。
+
+色塊裡的文字用中性深色 `#212121` 或白色，不要拿主色當文字色。`#ef6c00` 與 `#4caf50` 這類顏色在白底的對比度不到 4.5:1，語意靠框色與文字本身表達就夠了。
+
+`<style>` 區塊裡不要出現尖括號，連註解裡都不行。註解寫了帶角括號的標籤名，整份檔案就不是合法 XML，而瀏覽器照樣顯示得出來，只有 XML parser 抓得到。`publish_diagrams.sh` 會擋這個。
+
+手寫的圖自帶外框與內距，不要再套 `.brand-frame`，那會變成雙框。drawio 匯出的圖沒有外框，維持套 `.brand-frame`。
+
 ### 套到 markdown 文章
 
-新圖示存到 `docs/zh-TW/assets/images/<name>.drawio.svg`（或對應語系），在 markdown 引用：
+drawio 圖，套 `.brand-frame`：
 
 ```markdown
 <figure markdown="span">
-    <img class="brand-frame" src="../../assets/images/<name>.drawio.svg" alt="圖示說明">
+    <img class="brand-frame" src="https://assets.anoni.net/diagrams/<name>.zh-TW.drawio.svg" alt="圖示說明">
 </figure>
 ```
 
-`.brand-frame` 是 anoni.net 圖示的 utility class（cyan 邊框 + 軟陰影），所有技術圖示都套這個保持視覺一致。相對路徑 `../../assets/images/...` 是從 `basics/`、`tools/`、`scenarios/`、`advanced/`、`community/` 這層深度引用的標準寫法。
+手寫 SVG，自帶外框，改用 figcaption：
+
+```markdown
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/<name>.zh-TW.svg" alt="把圖的內容用文字說完整">
+    <figcaption>一句話說明這張圖在講什麼</figcaption>
+</figure>
+```
+
+`.brand-frame` 是 anoni.net 圖示的 utility class（cyan 邊框加軟陰影）。
+
+alt 要把圖的內容說完整，不要只寫「示意圖」三個字。語音朗讀、Onion 版的低頻寬情境、圖抓不到的時候，讀者手上只剩這一段文字。
+
+示意圖不要包 `<a>` 做點擊放大。SVG 在頁面裡本來就看得清楚，而 `<a href>` 不會被 privacy 外掛改寫，Onion 版的讀者點下去會跳出 Tor 連到 clearnet。截圖那類需要放大的圖才包 `<a>`，那些本來就是 PNG。
 
 ### 純 SVG / PNG export 的場合
 
