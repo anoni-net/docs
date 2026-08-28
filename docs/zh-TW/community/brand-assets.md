@@ -434,9 +434,9 @@ social:
 
 圖裡有中文字就要分語系，檔名寫成 `<slug>.<lang>.svg`：
 
-- `anonymity-vs-privacy-matrix.zh-TW.svg`
-- `anonymity-vs-privacy-matrix.zh-CN.svg`
-- `anonymity-vs-privacy-matrix.en.svg`
+- `anonymity-visibility-matrix.zh-TW.svg`
+- `anonymity-visibility-matrix.zh-CN.svg`
+- `anonymity-visibility-matrix.en.svg`
 
 圖裡只有英文術語或完全沒有文字，三個語系共用一份，檔名就不帶語系，寫成 `<slug>.svg`。
 
@@ -453,11 +453,13 @@ social:
 
 改同名檔案還要清 Cloudflare 快取，edge 的 max-age 是 12 小時。設好 `CF_ZONE_ID` 與 `CF_PURGE_TOKEN` 環境變數，發布腳本會順手清掉。
 
-沒清快取就推 `docs` 分支的後果比「站上暫時看到舊版」嚴重。CI 建置時 privacy 外掛是從 edge 抓圖，抓到的舊版會被烘進 S3 產物，之後 edge 快取自己過期也不會修正站上的內容，因為站上讀的是產物那一份。2026-08-28 第一次發布 `anonymity-vs-privacy-matrix` 就是這樣，配色改過了，站上取得的仍是改之前的版本。
+沒清快取就推 `docs` 分支的後果比「站上暫時看到舊版」嚴重。CI 建置時 privacy 外掛是從 edge 抓圖，抓到的舊版會被烘進 S3 產物，之後 edge 快取自己過期也不會修正站上的內容，因為站上讀的是產物那一份。
 
-修法是清完快取再重新建置一次，從 Actions 頁面用 `workflow_dispatch` 觸發 `build_docs.yml` 即可，不需要另外推一次 `docs`。
+補救也比想像中難。清掉 edge 快取再重新建置一次是救不回來的：CI 另外快取了 `docs/.cache/plugin/privacy`（理由見 `build_docs.yml` 的註解），同一個網址在那裡已經有檔案，privacy 外掛就不會再去下載。要靠清快取解決，得把 GitHub Actions 上全部 `mkdocs-privacy-*` 的項目刪掉，restore-keys 會 fallback 所以只刪最新的沒有用，而代價是下一次建置要重新對十幾個外部主機碰運氣。
 
-最直接的做法是不要覆蓋同名檔案。圖大改一次就換一個檔名，連同 Markdown 的引用一起改，整條路徑上不會有任何一層取得舊的。
+所以規則是不要覆蓋同名檔案。圖有實質改動就換一個檔名，連同 Markdown 的引用一起改，整條路徑上沒有任何一層會取得舊的。
+
+這一輪在 2026-08-28 完整踩過：矩陣圖的配色改過並重新上傳，edge 還在 max-age 內，推了 `docs` 之後站上是舊版。清掉 edge 快取、`workflow_dispatch` 重建一次，站上仍是舊版，因為 CI 的 privacy 快取命中，產物內容沒變連上傳都被跳過。最後把檔名從 `anonymity-vs-privacy-matrix` 換成 `anonymity-visibility-matrix` 才修好。
 
 ### 如何儲存才會有 embedded XML
 
