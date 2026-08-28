@@ -79,8 +79,12 @@ const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 // default，加上 iOS 的 home screen app 有獨立的 storage 分區，Safari 那邊抓到
 // 新內容也傳不過來，於是只有 PWA 一直卡在舊版。
 //
-// 那條規則後來加了一條蓋過去，/docs/ 的頁面現在不給瀏覽器快取。這裡照樣帶著
-// no-cache，兩層各自獨立：CDN 的設定會被人改，改的人未必知道 SW 靠它吃飯。
+// 同一天收尾成兩層。m6 的 nginx 對 /docs/ 的頁面與兩份索引送 no-cache（見
+// anoninet.conf 的 map $docs_cache_control），Cloudflare 那條規則的 browser_ttl
+// 改成 respect origin 讓它傳下來，edge 照樣快取 24 小時，由 cf_purge.py 清。
+//
+// 這裡照樣帶著 no-cache，兩層各自獨立。上游的設定會被人改，改的人未必知道 SW
+// 靠它吃飯，而症狀是讀者拿不到剛發布的內容，在瀏覽器上點來點去看不出來。
 //
 // no-cache 這個名字容易誤會，它的意思是每次都跟伺服器確認一次，內容沒變時回
 // 304，成本是一個往返。快取照樣留著。
