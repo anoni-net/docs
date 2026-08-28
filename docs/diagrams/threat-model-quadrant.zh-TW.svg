@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 566" width="900" height="566" role="img" aria-labelledby="title desc">
+<title id="title">威脅模型填完之後長什麼樣子的模擬結果</title>
+<desc id="desc">一張四象限圖，橫軸是這個資產與對手組合的實際威脅由低到高，縱軸是你現在的防護由薄到厚。左上是過度防護，可以放掉，例子是家庭群組閒聊對國家級情報監控、追劇紀錄對執法調閱。右上是防住了，保持現狀，例子是銀行帳戶對詐騙集團、主要 email 對帳號盜用。左下是可以接受，暫時不用處理，例子是公開貼文對隨意路人、看過哪些新聞對廣告追蹤。右下是還沒補上，這一格就是下一步要做的事，例子是雲端相簿對平台資料外洩、舊帳號重複使用的密碼對撞庫攻擊。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。格內文字用中性深色而不用主色，
+     是為了讓對比度過 4.5:1，象限的語意靠框色與標題文字表達。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .axis-line { stroke: #cdcdcd; stroke-width: 1.5; }
+  .axis-label { fill: #546e7a; font-size: 14px; font-weight: 600; }
+  .axis-end { fill: #90a4ae; font-size: 12.5px; }
+  .q-title { font-size: 19px; font-weight: 700; }
+  .q-hint { font-size: 12.5px; }
+  .asset { fill: #212121; font-size: 15px; }
+  .foe { fill: #607d8b; font-size: 12.5px; }
+
+  .gap-box   { fill: #fdf0e4; stroke: #ef6c00; stroke-width: 1.6; }
+  .gap-title { fill: #212121; }
+  .gap-hint  { fill: #ef6c00; font-weight: 600; }
+  .gap-dot   { fill: #ef6c00; }
+
+  .hold-box   { fill: #e6f4fb; stroke: #0089bf; stroke-width: 1.4; }
+  .hold-title { fill: #212121; }
+  .hold-hint  { fill: #546e7a; }
+  .hold-dot   { fill: #0089bf; }
+
+  .over-box   { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.2; }
+  .over-title { fill: #455a64; }
+  .over-hint  { fill: #78909c; }
+  .over-dot   { fill: #b0bec5; }
+
+  .ok-box   { fill: none; stroke: #cfd8dc; stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .ok-title { fill: #607d8b; }
+  .ok-hint  { fill: #90a4ae; }
+  .ok-dot   { fill: #cfd8dc; }
+
+  @media (prefers-color-scheme: dark) {
+    .axis-line { stroke: #45505a; }
+    .axis-label { fill: #b0bec5; }
+    .axis-end { fill: #78909c; }
+    .asset { fill: #eceff1; }
+    .foe { fill: #90a4ae; }
+
+    .gap-box   { fill: #33241a; stroke: #ff8c1a; }
+    .gap-title { fill: #eceff1; }
+    .gap-hint  { fill: #ffb74d; }
+    .gap-dot   { fill: #ff8c1a; }
+
+    .hold-box   { fill: #0d2b38; stroke: #4dbfff; }
+    .hold-title { fill: #eceff1; }
+    .hold-hint  { fill: #90a4ae; }
+    .hold-dot   { fill: #4dbfff; }
+
+    .over-box   { fill: #23292e; stroke: #4b565e; }
+    .over-title { fill: #b0bec5; }
+    .over-hint  { fill: #78909c; }
+    .over-dot   { fill: #5c666e; }
+
+    .ok-box   { stroke: #3f4a52; }
+    .ok-title { fill: #90a4ae; }
+    .ok-hint  { fill: #6b7780; }
+    .ok-dot   { fill: #4b565e; }
+  }
+</style>
+
+<rect class="over-box" x="72"  y="22"  width="398" height="228" rx="8"/>
+<text class="q-title over-title" x="94" y="56">過度防護</text>
+<text class="q-hint  over-hint"  x="94" y="78">成本花在這裡回收不了，可以放掉</text>
+<circle class="over-dot" cx="102" cy="126" r="4.5"/>
+<text class="asset" x="120" y="121">家庭群組閒聊</text>
+<text class="foe"   x="120" y="140">對手：國家級情報監控</text>
+<circle class="over-dot" cx="102" cy="190" r="4.5"/>
+<text class="asset" x="120" y="185">追劇紀錄</text>
+<text class="foe"   x="120" y="204">對手：執法調閱</text>
+
+<rect class="hold-box" x="484" y="22"  width="398" height="228" rx="8"/>
+<text class="q-title hold-title" x="506" y="56">已經防住</text>
+<text class="q-hint  hold-hint"  x="506" y="78">保持現狀，定期回頭確認還有效</text>
+<circle class="hold-dot" cx="514" cy="126" r="4.5"/>
+<text class="asset" x="532" y="121">銀行帳戶</text>
+<text class="foe"   x="532" y="140">對手：詐騙集團</text>
+<circle class="hold-dot" cx="514" cy="190" r="4.5"/>
+<text class="asset" x="532" y="185">主要 email</text>
+<text class="foe"   x="532" y="204">對手：帳號盜用</text>
+
+<rect class="ok-box" x="72"  y="262" width="398" height="228" rx="8"/>
+<text class="q-title ok-title" x="94" y="296">可以接受</text>
+<text class="q-hint  ok-hint"  x="94" y="318">知道有風險，決定先不處理</text>
+<circle class="ok-dot" cx="102" cy="366" r="4.5"/>
+<text class="asset" x="120" y="361">公開貼文</text>
+<text class="foe"   x="120" y="380">對手：隨意路人</text>
+<circle class="ok-dot" cx="102" cy="430" r="4.5"/>
+<text class="asset" x="120" y="425">看過哪些新聞</text>
+<text class="foe"   x="120" y="444">對手：廣告追蹤</text>
+
+<rect class="gap-box" x="484" y="262" width="398" height="228" rx="8"/>
+<text class="q-title gap-title" x="506" y="296">還沒補上</text>
+<text class="q-hint  gap-hint"  x="506" y="318">這一格就是你的下一步</text>
+<circle class="gap-dot" cx="514" cy="366" r="4.5"/>
+<text class="asset" x="532" y="361">雲端相簿</text>
+<text class="foe"   x="532" y="380">對手：平台資料外洩</text>
+<circle class="gap-dot" cx="514" cy="430" r="4.5"/>
+<text class="asset" x="532" y="425">舊帳號重複使用的密碼</text>
+<text class="foe"   x="532" y="444">對手：撞庫攻擊</text>
+
+<line class="axis-line" x1="60" y1="502" x2="890" y2="502"/>
+<text class="axis-end"   x="72"  y="524">低</text>
+<text class="axis-label" x="477" y="525" text-anchor="middle">這個組合的實際威脅</text>
+<text class="axis-end"   x="882" y="524" text-anchor="end">高</text>
+
+<line class="axis-line" x1="52" y1="10" x2="52" y2="492"/>
+<text class="axis-end"   x="30" y="44"  text-anchor="middle">厚</text>
+<text class="axis-label" x="30" y="206" text-anchor="middle">你</text>
+<text class="axis-label" x="30" y="228" text-anchor="middle">現</text>
+<text class="axis-label" x="30" y="250" text-anchor="middle">在</text>
+<text class="axis-label" x="30" y="272" text-anchor="middle">的</text>
+<text class="axis-label" x="30" y="294" text-anchor="middle">防</text>
+<text class="axis-label" x="30" y="316" text-anchor="middle">護</text>
+<text class="axis-end"   x="30" y="474" text-anchor="middle">薄</text>
+</svg>
