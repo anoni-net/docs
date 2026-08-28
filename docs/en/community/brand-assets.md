@@ -434,9 +434,9 @@ The cost is that assets.anoni.net has to be reachable at build time. When a down
 
 A diagram containing Chinese or English prose needs one file per language, named `<slug>.<lang>.svg`:
 
-- `anonymity-vs-privacy-matrix.zh-TW.svg`
-- `anonymity-vs-privacy-matrix.zh-CN.svg`
-- `anonymity-vs-privacy-matrix.en.svg`
+- `anonymity-visibility-matrix.zh-TW.svg`
+- `anonymity-visibility-matrix.zh-CN.svg`
+- `anonymity-visibility-matrix.en.svg`
 
 A diagram carrying only English technical terms, or no text at all, is shared across all three languages and drops the language segment: `<slug>.svg`.
 
@@ -451,7 +451,15 @@ Where a diagram has not been translated yet, point the other two languages at th
 
 The order matters. Publish the image and confirm the URL returns 200 before editing the Markdown reference. Doing it the other way round breaks the next build.
 
-Overwriting an existing filename also needs a Cloudflare purge, since the edge `max-age` is 12 hours. Set `CF_ZONE_ID` and `CF_PURGE_TOKEN` and the publish script handles it. A colour change that stubbornly refuses to show up on the site is usually this.
+Overwriting an existing filename also needs a Cloudflare purge, since the edge `max-age` is 12 hours. Set `CF_ZONE_ID` and `CF_PURGE_TOKEN` and the publish script handles it.
+
+Skipping the purge before pushing `docs` is worse than briefly serving a stale file. The privacy plugin fetches from the edge at build time, so the stale version gets baked into the S3 output, and the site keeps serving it even after the edge cache expires, because the site reads the output rather than the origin.
+
+Recovering from that is harder than it sounds. Purging the edge and rebuilding does not help: CI separately caches `docs/.cache/plugin/privacy` (see the comment in `build_docs.yml`), the URL already has a file sitting there, and the privacy plugin will not download it again. Fixing it through cache eviction means deleting every `mkdocs-privacy-*` entry on GitHub Actions, since restore-keys fall back and removing only the newest changes nothing, and the price is that the next build has to gamble on a dozen external hosts again.
+
+So the rule is not to overwrite a filename. Give a meaningfully redrawn diagram a new name and update the Markdown reference along with it, and no layer along the path can hand back something old.
+
+The full sequence was walked on 2026-08-28. The matrix diagram was recoloured and re-uploaded while the edge was still inside `max-age`, `docs` was pushed, and the site served the old version. Purging the edge and running `workflow_dispatch` still left the old version in place, because the CI privacy cache hit, the output was unchanged, and the upload step skipped it. Renaming the file from `anonymity-vs-privacy-matrix` to `anonymity-visibility-matrix` was what finally fixed it.
 
 ### Saving so the XML is embedded
 

@@ -24,7 +24,7 @@ This page puts the four side by side and draws the lines between them with concr
 | Confidentiality | *Can only authorized people read the content?* | A message or file is readable only by its intended recipient; it is not exposed to unauthorized parties in transit or at rest. |
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/anonymity-vs-privacy-matrix.en.svg"
+    <img src="https://assets.anoni.net/diagrams/anonymity-visibility-matrix.en.svg"
         alt="A four-by-three table. The columns are the three things an observer may see: who you are, whether your separate actions can be linked, and what you say. Anonymity hides who you are and the link between your actions, and does not cover content. Pseudonymity hides who you are while the link between actions stays visible, and does not cover content. Confidentiality hides the content while who you are and the link between actions stay visible. Privacy leaves all three for you to decide who may see them.">
     <figcaption>What each concept hides from an observer, and what it leaves in the open</figcaption>
 </figure>

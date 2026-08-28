@@ -434,9 +434,9 @@ social:
 
 图里有中文字就要分语系，文件名写成 `<slug>.<lang>.svg`：
 
-- `anonymity-vs-privacy-matrix.zh-TW.svg`
-- `anonymity-vs-privacy-matrix.zh-CN.svg`
-- `anonymity-vs-privacy-matrix.en.svg`
+- `anonymity-visibility-matrix.zh-TW.svg`
+- `anonymity-visibility-matrix.zh-CN.svg`
+- `anonymity-visibility-matrix.en.svg`
 
 图里只有英文术语或完全没有文字，三个语系共用一份，文件名就不带语系，写成 `<slug>.svg`。
 
@@ -451,7 +451,15 @@ social:
 
 顺序不能反过来。先发布图、确认网址回得了 200，才改 Markdown 的引用。反过来做会让下一次构建直接失败。
 
-改同名文件还要清 Cloudflare 缓存，edge 的 max-age 是 12 小时。设好 `CF_ZONE_ID` 与 `CF_PURGE_TOKEN` 环境变量，发布脚本会顺手清掉。改了配色却在站上看不出来，通常就是这件事。
+改同名文件还要清 Cloudflare 缓存，edge 的 max-age 是 12 小时。设好 `CF_ZONE_ID` 与 `CF_PURGE_TOKEN` 环境变量，发布脚本会顺手清掉。
+
+没清缓存就推 `docs` 分支的后果比「站上暂时看到旧版」严重。CI 构建时 privacy 插件是从 edge 抓图，抓到的旧版会被烘进 S3 产物，之后 edge 缓存自己过期也不会修正站上的内容，因为站上读的是产物那一份。
+
+补救也比想像中难。清掉 edge 缓存再重新构建一次是救不回来的：CI 另外缓存了 `docs/.cache/plugin/privacy`（理由见 `build_docs.yml` 的注释），同一个网址在那里已经有文件，privacy 插件就不会再去下载。要靠清缓存解决，得把 GitHub Actions 上全部 `mkdocs-privacy-*` 的项目删掉，restore-keys 会 fallback 所以只删最新的没有用，而代价是下一次构建要重新对十几个外部主机碰运气。
+
+所以规则是不要覆盖同名文件。图有实质改动就换一个文件名，连同 Markdown 的引用一起改，整条路径上没有任何一层会取得旧的。
+
+这一轮在 2026-08-28 完整踩过：矩阵图的配色改过并重新上传，edge 还在 max-age 内，推了 `docs` 之后站上是旧版。清掉 edge 缓存、`workflow_dispatch` 重建一次，站上仍是旧版，因为 CI 的 privacy 缓存命中，产物内容没变连上传都被跳过。最后把文件名从 `anonymity-vs-privacy-matrix` 换成 `anonymity-visibility-matrix` 才修好。
 
 ### 如何储存才会有 embedded XML
 

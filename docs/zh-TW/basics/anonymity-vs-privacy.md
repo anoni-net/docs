@@ -20,7 +20,7 @@ icon: material/incognito-circle
 | 機密性（Confidentiality） | 內容只有授權的人能讀嗎？ | 訊息或資料只在授權的接收者那一端被解讀，傳輸與儲存過程不被未授權者讀取 |
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/anonymity-vs-privacy-matrix.zh-TW.svg"
+    <img src="https://assets.anoni.net/diagrams/anonymity-visibility-matrix.zh-TW.svg"
         alt="四列三欄的對照表。三個欄位是觀察者可能看到的三件事：你是誰、你的行為能否被串起來、你說什麼。匿名遮住你是誰與行為關聯，不涉及內容。假名遮住你是誰，行為關聯看得到，不涉及內容。機密性遮住內容，你是誰與行為關聯都看得到。隱私三件事都由你決定揭露給誰。">
     <figcaption>四個概念各自遮住觀察者能看到的哪一部分</figcaption>
 </figure>
