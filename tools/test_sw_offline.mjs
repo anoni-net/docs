@@ -99,6 +99,7 @@ class FakeCacheStorage {
 }
 
 const harness = `
+  ${grab(/^const NO_HTTP_CACHE = .*$/m)}
   ${grab(/^const VERSION = .*$/m)}
   ${grab(/^const PRECACHE = .*$/m)}
   ${grab(/^const LANG_PREFIXES = \[[^\]]*\];/m)}
@@ -175,6 +176,8 @@ const harness = `
 const load = (opts = {}) => {
   const caches = new FakeCacheStorage();
   const fetched = [];
+  // 每次 fetch 的第二個參數。用來驗每一條都繞過瀏覽器自己的 HTTP 快取。
+  const fetchInits = [];
   const net = { offline: !!opts.offline };
   // 真的 Response 有 clone()，networkFirst 存快取時會用到。headers 與 blob 是給
   // cacheUsage 量大小用的：線上多數項目有 content-length，少數沒有的走 blob。
@@ -192,9 +195,10 @@ const load = (opts = {}) => {
     blob: async () => ({ size: bytesOf(url) }),
     clone: () => makeResponse(url, ok),
   });
-  const fetchStub = async (input) => {
+  const fetchStub = async (input, init) => {
     const url = typeof input === 'string' ? input : input.url;
     fetched.push(url);
+    fetchInits.push(init);
     if (net.offline) throw new TypeError("Failed to fetch");
     // 「連得上但很慢」。networkFirst 的逾時要比這個短才有得比。
     if (opts.networkDelay) await new Promise((r) => setTimeout(r, opts.networkDelay));
@@ -223,7 +227,7 @@ const load = (opts = {}) => {
   const sw = new Function(
     'caches', 'SCOPE_PATH', 'fetch', 'self', 'navigator', 'setTimeout', harness
   )(caches, SCOPE_PATH, fetchStub, selfStub, navigatorStub, setTimeoutStub);
-  return { sw, caches, fetched, net };
+  return { sw, caches, fetched, fetchInits, net };
 };
 
 const req = (pathname) => ({ url: ORIGIN + pathname });
@@ -1121,6 +1125,30 @@ test('換版不動同一個 origin 上別人的快取', async (load) => {
 
   assert.equal(await caches.has('anoni-site-shell'), true);
   assert.equal(await (await caches.open('anoni-site-shell')).match('/index.html'), 'HOME');
+});
+
+test('每一條網路請求都繞過瀏覽器自己的 HTTP 快取', async (load) => {
+  // 少了 cache 選項的 fetch 會先問裝置上的 HTTP 快取，命中就不出門，network-first
+  // 拿回來的是舊副本。2026-08-28 的實例是 Cloudflare 一條 browser_ttl 為
+  // override_origin 的 Cache Rule 把 HTML 設成 max-age=14400，新發布的內容有四小時
+  // 進不了 standalone 的 PWA，而同一個人用 Safari 分頁看就是新的，因為那邊的
+  // cache mode 是 reload。
+  //
+  // 這一條守著 sw.js 裡每一個 fetch。少掉任何一個的 no-cache，症狀都是讀者拿不到
+  // 剛發布的內容，而那在瀏覽器上點來點去看不出來。
+  const { sw, fetchInits } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.setPrecacheImages(true);
+  await sw.installPrecache();
+  await sw.precacheOnNavigation('', true);
+  await sw.corePageAssets('');
+  await sw.networkFirst(req('/docs/basics/threat-model/'));
+  await sw.staleWhileRevalidate(req('/docs/assets/images/logo-white.svg'));
+  await sw.addToLibrary('', ['taiwan/'], ['assets/images/logo-white.svg'], true, () => {});
+
+  assert.ok(fetchInits.length > 0, '這一輪一個 fetch 都沒發出去，測試本身沒驗到東西');
+  for (const init of fetchInits) {
+    assert.equal(init && init.cache, 'no-cache');
+  }
 });
 
 for (const [name, fn] of tests) {

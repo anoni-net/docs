@@ -533,6 +533,26 @@
                 }
               });
             });
+
+            // 回到前景時自己問一次有沒有新版。
+            //
+            // 瀏覽器的 soft update 靠 navigation 觸發，分頁裡怎麼逛都會碰到。
+            // standalone 的 PWA 常駐在背景，回到前景不產生新的 navigation，於是
+            // 那個觸發點永遠等不到，換版提示不出現，讀者連更新按鈕都看不到。
+            //
+            // 節流是因為切換 app 很頻繁，每次 update() 都是一個對 sw.js 的請求。
+            // 半小時一次夠了，內容本身的新鮮度由 sw.js 的 network-first 負責，
+            // 這裡管的只是換版提示。
+            var UPDATE_CHECK_INTERVAL = 30 * 60 * 1000;
+            var lastUpdateCheck = Date.now();
+            document.addEventListener("visibilitychange", function () {
+              if (document.visibilityState !== "visible") return;
+              if (Date.now() - lastUpdateCheck < UPDATE_CHECK_INTERVAL) return;
+              lastUpdateCheck = Date.now();
+              registration.update().catch(function () {
+                // 離線或抓不到 sw.js，下次回到前景再試
+              });
+            });
           });
         })();
       </script>
