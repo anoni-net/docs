@@ -31,7 +31,7 @@ title: {title}
 
 看 [別頁]({link})。
 
-## 個人的基線
+## 不分身分都要做到的
 
 每一條路徑都要走得到 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)。
 """
@@ -117,8 +117,8 @@ class TestAnchors(Harness):
         self.build(link="../scenarios/target.md#這個小標不存在")
         self.assertEqual(self.run_check(), 1)
 
-    def test_入口頁沒連到個人基線時紅燈(self):
-        # index.md 說一般大眾那條「也是其他四種身分共用的基線」，而 2026-08-29 查的
+    def test_入口頁沒連到那份共同內容時紅燈(self):
+        # index.md 說一般大眾那條「其他四種身分同樣要做到」，而 2026-08-29 查的
         # 時候，公民團體、新聞媒體、獨立記者三頁一個字都沒提到它。宣稱寫在 index，
         # 少掉的是另外三頁的連結，兩邊分開看都很正常。
         self.build(pages=("index.md", "media.md"))
