@@ -169,6 +169,33 @@
           background: var(--md-accent-fg-color);
           color: var(--md-accent-bg-color);
         }
+        .anoni-banner-action:disabled {
+          opacity: .75;
+          cursor: default;
+        }
+        /*
+          按下之後那顆按鈕自己轉。送出 SKIP_WAITING 到 controllerchange 之間，
+          service worker 要跑完 activate、清掉舊快取，接著整頁重新載入，網路差的
+          時候那是好幾秒的空白。原本按鈕上什麼都沒變，讀者只會以為沒按到，再按
+          一次，而每按一次就多送一則訊息。
+        */
+        .anoni-banner-spinner {
+          display: inline-block;
+          width: .75em;
+          height: .75em;
+          margin-right: .4em;
+          border: .1em solid currentColor;
+          border-top-color: transparent;
+          border-radius: 50%;
+          animation: anoni-spin .7s linear infinite;
+          flex: none;
+        }
+        @keyframes anoni-spin {
+          to { transform: rotate(360deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .anoni-banner-spinner { animation: none; opacity: .6; }
+        }
       </style>
     {% endblock %}
     {% block libs %}
@@ -428,15 +455,15 @@
           var STRINGS = {
             "zh-TW": {
               text: "離線存的內容有新版本。更新會重新載入這一頁。",
-              update: "更新", later: "稍後"
+              update: "更新", later: "稍後", updating: "更新中"
             },
             "zh": {
               text: "离线存的内容有新版本。更新会重新加载这一页。",
-              update: "更新", later: "稍后"
+              update: "更新", later: "稍后", updating: "更新中"
             },
             "en": {
               text: "A newer version is available for offline reading. Updating reloads this page.",
-              update: "Update", later: "Later"
+              update: "Update", later: "Later", updating: "Updating"
             }
           };
           var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
@@ -476,18 +503,39 @@
 
             var actions = document.createElement("div");
             actions.className = "anoni-toast__actions";
-            actions.appendChild(actionButton(t.update, true, function () {
+
+            // 按下之後把按鈕換成轉圈的「更新中」並停用。從送出 SKIP_WAITING 到
+            // 頁面真的重新載入，中間是 activate 加一次完整的導覽，網路差的時候
+            // 好幾秒都沒有動靜。沒有這一段的話讀者會以為沒按到而重複按。
+            //
+            // 「稍後」一起停掉。那顆會關掉卡片，可是更新已經送出去了，頁面照樣
+            // 會在幾秒後自己重新載入，關掉只會讓那次重載變得莫名其妙。
+            var updateButton;
+            var laterButton;
+            updateButton = actionButton(t.update, true, function () {
               reloadOnTakeover = true;
+              updateButton.disabled = true;
+              laterButton.disabled = true;
+              updateButton.textContent = "";
+              var spinner = document.createElement("span");
+              spinner.className = "anoni-banner-spinner";
+              spinner.setAttribute("aria-hidden", "true");
+              updateButton.appendChild(spinner);
+              updateButton.appendChild(document.createTextNode(t.updating));
+              // 讀螢幕的人靠這個知道狀態變了，轉圈的圖案對他們沒有意義
+              updateButton.setAttribute("aria-busy", "true");
               waiting.postMessage({ type: "SKIP_WAITING" });
-            }));
-            actions.appendChild(actionButton(t.later, false, function () {
+            });
+            laterButton = actionButton(t.later, false, function () {
               try {
                 sessionStorage.setItem(DISMISS_KEY, "1");
               } catch (err) {
                 // 存不進去就只是這次關掉，換頁會再出現
               }
               dismiss();
-            }));
+            });
+            actions.appendChild(updateButton);
+            actions.appendChild(laterButton);
 
             banner.appendChild(line);
             banner.appendChild(actions);
