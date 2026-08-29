@@ -22,7 +22,7 @@ icon: material/account-group
 
 对方可能是体制内的员工、当事人，或不想曝光的目击者。一般的表单与邮箱会留下可比对的记录，对方需要一条能自己判断风险的通道。
 
-看 [上传机敏信息流程](../community/upload-sensitive.md)，里面有 PGP 与 OnionShare 两种做法的取舍。
+看 [上传机敏信息流程](../community/upload-sensitive.md)，社群自己在用的那条通道就是这样做的：文件传上自架的 Send，链接设成一次下载就失效并加上密码，再把链接给收件人。
 
 ### 捐款人不想留下记录，组织仍需开立收据
 
@@ -47,7 +47,7 @@ icon: material/account-group
 
 ### 对外的线索与捐款
 
-- [上传机敏信息流程](../community/upload-sensitive.md)：收件端该怎么准备
+- [上传机敏信息流程](../community/upload-sensitive.md)：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
 - [文件 metadata 清除器](../utils/strip-metadata.md)：发布素材前在浏览器里清干净，文件不会送出去
 - [倡议组织的匿名捐款渠道](../scenarios/nonprofit-anonymous-donation.md)：完整流程与法规限制
 

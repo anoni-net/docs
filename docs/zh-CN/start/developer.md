@@ -24,7 +24,7 @@ icon: material/console
 
 - [如何搭建 Tor Relay](../community/setup-tor-relay.md)：中继节点的完整设置
 - [如何搭建 Tor WebTunnel 桥接](../community/setup-tor-webtunnel.md)：桥接对带宽的要求低很多，在审查环境下的价值也更高
-- [Tor Snowflake](../tools/tor-snowflake.md)：门槛最低的一种，装一个浏览器扩展就开始运作
+- [Tor Snowflake](../tools/tor-snowflake.md)：门槛最低的一种，开着那一页就在帮忙，要常驻再装扩展
 - [如何搭建 .onion 服务](../community/setup-onion-service.md)：把手上的服务多开一个 onion 入口
 - [帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)：目前是单点，多一个 pin 就多一份备援
 - [Tor Relays 观测点](../taiwan/tor-relay-watcher.md)：先看台湾现在有多少节点、分布在哪些 ASN

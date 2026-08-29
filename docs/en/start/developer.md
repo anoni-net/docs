@@ -24,7 +24,7 @@ The most direct contribution. Start with a relay; switch to a bridge if bandwidt
 
 - [How to set up a Tor relay](../community/setup-tor-relay.md): full configuration
 - [How to set up a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md): far lower bandwidth requirements, and worth more in a censored environment
-- [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, a browser extension and it is running
+- [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, keep the page open and you are already helping; install the extension to leave it running
 - [Setting up a .onion service](../community/setup-onion-service.md): give a service you already run an onion entrance
 - [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): currently a single point, and each additional pin is redundancy
 - [Tor relay watcher](../regional/tor-relay-watcher.md): see how many relays exist in the region and which ASNs they sit in

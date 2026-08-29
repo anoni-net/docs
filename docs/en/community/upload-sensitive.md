@@ -1,6 +1,6 @@
 ---
 title: Sending Us Sensitive Material
-description: How to send personal data, leaked material, or sensitive collaboration files to the anoni.net community using our self-hosted Send instance, with OnionShare as an alternative for higher-risk cases.
+description: How to send personal data, leaked material, or sensitive collaboration files to the anoni.net community using our self-hosted Send instance, with one-time download, expiry, and an agreed password.
 icon: material/file-lock
 ---
 # :material-file-lock: Sending Us Sensitive Material

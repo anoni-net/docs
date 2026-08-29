@@ -22,7 +22,7 @@ Fill in the [threat model checklist](../utils/threat-model.md) first. It produce
 
 They may be an employee, a directly affected person, or a witness who does not want to be identified. Ordinary forms and mailboxes leave correlatable records, and the sender has no way to assess the risk. They need a channel they can evaluate for themselves.
 
-See [sending us sensitive material](../community/upload-sensitive.md), which covers the PGP and OnionShare approaches and the trade-off between them.
+See [sending us sensitive material](../community/upload-sensitive.md), the channel the community uses itself: the file goes to a self-hosted Send instance, the link is set to expire after one download and carries an agreed password.
 
 ### Donors do not want a record, and the organization still has to issue receipts
 
@@ -47,7 +47,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 
 ### Intake and donations
 
-- [Sending us sensitive material](../community/upload-sensitive.md): how the receiving end should be set up
+- [Sending us sensitive material](../community/upload-sensitive.md): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
 - [File metadata stripper](../utils/strip-metadata.md): clean files in the browser before publishing, nothing is uploaded
 - [Anonymous donation channels](../scenarios/nonprofit-anonymous-donation.md): the full workflow and its legal constraints
 
