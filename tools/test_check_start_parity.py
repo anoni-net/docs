@@ -64,6 +64,9 @@ class Harness(unittest.TestCase):
             (mod.DOCS / lang / "start").mkdir(parents=True, exist_ok=True)
             (mod.DOCS / lang / "scenarios").mkdir(parents=True, exist_ok=True)
             (mod.DOCS / lang / "scenarios" / "target.md").write_text(TARGET, encoding="utf-8")
+            # 每個入口頁都要連到這一篇，PAGE 裡就寫著，所以它得真的存在
+            (mod.DOCS / lang / "scenarios" / "everyday-baseline.md").write_text(
+                TARGET.replace("目標", "不分身分都要做到的"), encoding="utf-8")
             listed = []
             for name in pages:
                 (mod.DOCS / lang / "start" / name).write_text(
@@ -131,6 +134,56 @@ class TestAnchors(Harness):
                 encoding="utf-8",
             )
         self.assertEqual(self.run_check(), 1)
+
+    def test_說明句提到目標頁沒有的東西時紅燈(self):
+        # 2026-08-30：civil-society.md 說 upload-sensitive「裡面有 PGP 與 OnionShare
+        # 兩種做法的取捨」，而那一頁的正文從頭到尾只有社群自架 Send 的上傳流程。
+        self.build()
+        for lang in mod.LANGS:
+            path = mod.DOCS / lang / "start" / "index.md"
+            path.write_text(
+                path.read_text(encoding="utf-8").replace(
+                    "看 [別頁](../scenarios/target.md#存在的小標)。",
+                    "看 [別頁](../scenarios/target.md)：裡面有 PGP 的做法。",
+                ),
+                encoding="utf-8",
+            )
+        self.assertEqual(self.run_check(), 1)
+
+    def test_目標頁的_frontmatter_不算數(self):
+        # PGP 只寫在目標頁的 description 裡，正文一個字都沒有。grep 掃整個檔案會
+        # 命中然後放行，人工 review 那次就是這樣漏掉的。
+        self.build()
+        for lang in mod.LANGS:
+            target = mod.DOCS / lang / "scenarios" / "target.md"
+            target.write_text(
+                TARGET.replace("title: 目標", "title: 目標\ndescription: 含 PGP 公鑰"),
+                encoding="utf-8",
+            )
+            path = mod.DOCS / lang / "start" / "index.md"
+            path.write_text(
+                path.read_text(encoding="utf-8").replace(
+                    "看 [別頁](../scenarios/target.md#存在的小標)。",
+                    "看 [別頁](../scenarios/target.md)：裡面有 PGP 的做法。",
+                ),
+                encoding="utf-8",
+            )
+        self.assertEqual(self.run_check(), 1)
+
+    def test_說明句提到的東西在正文裡就放行(self):
+        self.build()
+        for lang in mod.LANGS:
+            target = mod.DOCS / lang / "scenarios" / "target.md"
+            target.write_text(TARGET.replace("內文。", "內文提到 PGP。"), encoding="utf-8")
+            path = mod.DOCS / lang / "start" / "index.md"
+            path.write_text(
+                path.read_text(encoding="utf-8").replace(
+                    "看 [別頁](../scenarios/target.md#存在的小標)。",
+                    "看 [別頁](../scenarios/target.md)：裡面有 PGP 的做法。",
+                ),
+                encoding="utf-8",
+            )
+        self.assertEqual(self.run_check(), 0)
 
     def test_連到不存在的檔案時紅燈(self):
         self.build(link="../scenarios/nope.md#存在的小標")

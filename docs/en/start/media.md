@@ -41,7 +41,7 @@ See [keeping multiple sources apart](../scenarios/journalist.md#Keeping-multiple
 ### Setting up intake
 
 - [OnionShare](../tools/onionshare.md): a source can send files without registering an account
-- [Sending us sensitive material](../community/upload-sensitive.md): how the receiving end should be set up, including PGP
+- [Sending us sensitive material](../community/upload-sensitive.md): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
 - [Secure messaging compared](../tools/messaging-comparison.md): what follow-up contact runs on
 
 ### Retention and cleanup

@@ -1,6 +1,6 @@
 ---
 title: 上传机敏信息流程
-description: 机敏数据上传给 anoni.net 社群的安全流程，含 PGP 公钥与 OnionShare 替代方案。给需要安全传递个资、爆料素材或敏感文件的华语社群成员与外部协作者。
+description: 机敏数据上传给 anoni.net 社群的安全流程，走社群自架的 Send，链接设成一次下载就失效并加上密码。给需要安全传递个资、爆料素材或敏感文件的华语社群成员与外部协作者。
 icon: material/file-lock
 ---
 # :material-file-lock: 上传机敏信息流程

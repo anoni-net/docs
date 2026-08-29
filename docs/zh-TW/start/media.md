@@ -41,7 +41,7 @@ icon: material/newspaper-variant-outline
 ### 建立收件管道
 
 - [OnionShare](../tools/onionshare.md)：來源不需要註冊帳號就能傳檔案給你
-- [上傳機敏資訊流程](../community/upload-sensitive.md)：收件端該怎麼準備，含 PGP 公鑰的做法
+- [上傳機敏資訊流程](../community/upload-sensitive.md)：社群自己在用的那條通道，檔案走自架的 Send，連結會自動失效
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：後續聯絡走哪一套
 
 ### 素材的保存與清理

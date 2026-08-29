@@ -67,6 +67,9 @@ RE_EMOJI_SHORTHAND = re.compile(r":[a-z0-9_+-]+:", re.IGNORECASE)
 RE_HEADING = re.compile(r"^(#{1,6})\s+(.*?)\s*$", re.M)
 # ](../a/b.md#anchor) 與 ](./a.md)，只取站內的相對連結
 RE_LINK = re.compile(r"\]\((\.{1,2}/[^)\s]+)\)")
+# 連結加上後面那句說明。start/ 的寫法是 [文字](路徑)：說明，說明講的是目標頁有什麼。
+RE_CLAIM = re.compile(r"\[([^\]]+)\]\((\.\./[^)#]+\.md)\)([^\n]*)")
+RE_FRONTMATTER = re.compile(r"^---\n.*?\n---\n", re.S)
 
 
 def slugify(text: str) -> str:
@@ -211,7 +214,44 @@ def main() -> int:
                     "index.md 說那是所有身分同樣要做到的，每條路徑都要走得到"
                 )
 
-    # 五、h2 骨架，只提醒
+    # 五、說明句裡的專有名詞要在目標頁的正文出現
+    #
+    # 2026-08-30：civil-society.md 說 upload-sensitive「裡面有 PGP 與 OnionShare 兩種
+    # 做法的取捨」，而那一頁的正文從頭到尾只有社群自架 Send 的上傳流程。PGP 與
+    # OnionShare 只出現在它自己的 frontmatter description 裡，那個 description 同樣
+    # 是錯的。用 grep 掃整個檔案會命中 frontmatter 然後放行，人工 review 那次就是
+    # 這樣漏掉的，所以這裡切掉 frontmatter 只看正文。
+    #
+    # 只對中文語系跑。中文的說明句裡出現的 ASCII 詞幾乎都是專有名詞（PGP、OONI、
+    # Send、Tor），英文版的句首大寫是普通詞，抽出來只會製造雜訊，實測 en 會報
+    # Answers 與 Mainland 這種。
+    #
+    # 抓得到的是「說明句提到某個東西，目標頁一個字都沒有」。目標頁提了但講得很淺，
+    # 或者說明句用中文概括（「三題」「四封信」），這一項驗不出來，那些仍然要人看。
+    TERM = re.compile(r"\b[A-Z][A-Za-z0-9]{2,}\b")
+    # 句首大寫的普通英文詞，出現在中文說明句裡的機會很低，先擋掉最常見的幾個
+    TERM_STOP = {"The", "This", "That", "And", "For", "With", "How", "What"}
+    for lang in ("zh-TW", "zh-CN"):
+        for name, path in sorted(pages.get(lang, {}).items()):
+            for label, target, rest in RE_CLAIM.findall(path.read_text(encoding="utf-8")):
+                claim = rest.strip().lstrip("：:").strip()
+                if not claim:
+                    continue
+                dest = (path.parent / target).resolve()
+                if not dest.is_file():
+                    errors.append(f"{lang} 的 {SECTION}/{name} 連到不存在的檔案：{target}")
+                    continue
+                body = RE_FRONTMATTER.sub("", dest.read_text(encoding="utf-8"), count=1)
+                for term in sorted(set(TERM.findall(claim)) - TERM_STOP):
+                    if term in body:
+                        continue
+                    rel = dest.relative_to(DOCS / lang)
+                    errors.append(
+                        f"{lang} 的 {SECTION}/{name} 說 {rel} 有「{term}」，"
+                        f"那一篇的正文沒有提到它（frontmatter 不算）"
+                    )
+
+    # 六、h2 骨架，只提醒
     for name in sorted(base_names & set.intersection(*(set(pages[l]) for l in LANGS))):
         counts = {l: sum(1 for lv, _ in headings(pages[l][name]) if lv == 2) for l in LANGS}
         if len(set(counts.values())) > 1:
