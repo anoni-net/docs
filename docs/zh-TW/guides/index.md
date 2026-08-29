@@ -23,7 +23,7 @@ icon: material/compass-outline
 
 - [:material-account-group-outline: 場景](../scenarios/index.md)
 
-    特定角色或情境的應用：一般人的日常基線、記者、社運參與者、家暴倖存者、LGBTQ+ 與性少數、選舉觀察員、匿名捐款、出差與跨境、在中國大陸的公開平台發聲。
+    特定角色或情境的應用：一般人的日常防護、記者、社運參與者、家暴倖存者、LGBTQ+ 與性少數、選舉觀察員、匿名捐款、出差與跨境、在中國大陸的公開平台發聲。
 
 - [:material-lock-outline: 進階](../advanced/index.md)
 

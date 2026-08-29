@@ -62,7 +62,7 @@ icon: material/lifebuoy
 
 - 更換所有與本次事件相關的密碼，網銀與 email 優先，做法見 [帳號被盜或被異常登入](#帳號被盜或被異常登入)
 - 調低網銀的轉帳限額、關閉非約定轉帳、開啟每筆交易通知，三項共同決定下一次的損失上限
-- 平時的基線見 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)，那頁把詐騙列為一般人實際會遇到的主要損失來源
+- 平時該做到的見 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)，那頁把詐騙列為一般人實際會遇到的主要損失來源
 
 查證來源（2026-08）：[把握黃金時間撥打 165 增加攔阻詐騙款項機會](https://www.banqiao.police.ntpc.gov.tw/cp-73-82195-11.html){target="_blank"} - 新北市政府警察局板橋分局、[詐欺犯罪危害防制條例](https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0080226){target="_blank"}（2024 年 7 月制定，最近一次修正 2026 年 1 月）、[存款帳戶及其疑似不法或顯屬異常交易管理辦法](https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380199){target="_blank"} - 全國法規資料庫。
 
@@ -193,7 +193,7 @@ icon: material/lifebuoy
 - 把處置流程寫下來，留作下次或別人的參考（不需公開，可以是私人筆記）
 - 評估這次曝光的範圍：哪些密碼還沒換、哪些帳號還沒查
 - 重新走一遍 [威脅模型](../basics/threat-model.md)：這次經驗有沒有改變你對「保護什麼、防誰、能付出多少成本」的判斷
-- 補上平時的基線，見 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)。本頁處理的是事發當下，那頁處理的是下次不要再發生
+- 補上平時該做到的，見 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)。本頁處理的是事發當下，那頁處理的是下次不要再發生
 - 必要時尋求心理支持（`1925` 安心專線或專業諮商）
 
 ## 我們不能做的事
