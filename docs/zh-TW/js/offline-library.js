@@ -197,15 +197,15 @@
       doneFailed: "完成。存下 {ok} 頁，{failed} 頁失敗。",
       removed: "已移除 {n} 頁。",
       saveAll: "全部存到裝置（{n} 頁，{size}）",
-      saveAllHint: "存的是清單裡還沒在這台裝置上的頁面，連同它們的內文圖。網站自動存的核心章節不重複下載，那批的內文圖由上面的選項決定。",
+      saveAllHint: "存的是清單裡還沒存進來的頁面，連同它們的內文圖。網站自動存的核心章節也會存一份，那批跟著網站版本走，網站一換版就被清掉重來，存進來才留得住。",
       saveAllCaution: "這會一併存下記者、行動者、LGBTQ、家暴那幾類場景頁。那些頁面留在裝置上本身可能就是敏感訊號，你的處境需要挑的話，用下面的清單自己勾。",
-      saveAllDone: "清單裡的頁面都已經在這台裝置上了。",
+      saveAllDone: "清單裡的頁面都已經存進這台裝置了。",
       selectAll: "整章勾選",
       pages: "{n} 頁",
       overview: "總覽",
       badgeAuto: "網站已存",
       onlyStored: "只列已經存下來的",
-      legend: "淡色的標題還沒存到這台裝置，沒有網路時打不開。勾選框是灰的表示那一頁由上面的開關統一管，不用個別勾。",
+      legend: "淡色的標題還沒存到這台裝置，沒有網路時打不開。勾選框是灰的表示那一頁由網站自動存著，那一份跟著網站版本走，網站換版時會被清掉重來，要確保它留在裝置上就按上面的「全部存到裝置」。",
       onlyStoredEmpty: "這個語言目前沒有存下任何頁面。",
       notStored: "還沒存到這台裝置，沒有網路時打不開",
       progress: "{done} / {total}",
@@ -240,15 +240,15 @@
       doneFailed: "完成。存下 {ok} 页，{failed} 页失败。",
       removed: "已移除 {n} 页。",
       saveAll: "全部存到设备（{n} 页，{size}）",
-      saveAllHint: "存的是清单里还没有在这台设备上的页面，连同它们的内文图。网站自动存的核心章节不重复下载，那批的内文图由上面的选项决定。",
+      saveAllHint: "存的是清单里还没有存进来的页面，连同它们的内文图。网站自动存的核心章节也会存一份，那批跟着网站版本走，网站一换版就被清掉重来，存进来才留得住。",
       saveAllCaution: "这会一并存下记者、行动者、LGBTQ、家暴那几类场景页。那些页面留在设备上本身可能就是敏感信号，你的处境需要挑的话，用下面的清单自己勾。",
-      saveAllDone: "清单里的页面都已经在这台设备上了。",
+      saveAllDone: "清单里的页面都已经存进这台设备了。",
       selectAll: "整章勾选",
       pages: "{n} 页",
       overview: "总览",
       badgeAuto: "网站已存",
       onlyStored: "只列已经存下来的",
-      legend: "淡色的标题还没存到这台设备，没有网络时打不开。勾选框是灰的表示那一页由上面的开关统一管，不用个别勾。",
+      legend: "淡色的标题还没存到这台设备，没有网络时打不开。勾选框是灰的表示那一页由网站自动存着，那一份跟着网站版本走，网站换版时会被清掉重来，要确保它留在设备上就按上面的「全部存到设备」。",
       onlyStoredEmpty: "这个语言目前没有存下任何页面。",
       notStored: "还没存到这台设备，没有网络时打不开",
       progress: "{done} / {total}",
@@ -283,15 +283,15 @@
       doneFailed: "Done. {ok} pages stored, {failed} failed.",
       removed: "{n} pages removed.",
       saveAll: "Save everything ({n} pages, {size})",
-      saveAllHint: "This saves the pages from the list that are not on this device yet, along with their inline images. Core chapters the site already saved are not downloaded again, and their inline images are governed by the option above.",
+      saveAllHint: "This saves every page from the list that is not already stored here, along with its inline images. Core chapters the site keeps for you are stored again on purpose: that copy follows the site version and is cleared on every release, so only a copy saved here survives.",
       saveAllCaution: "This also saves the journalist, activist, LGBTQ and domestic-violence scenario pages. Having those on a device can itself be a signal. If your situation calls for picking, use the list below.",
-      saveAllDone: "Every page in the list is already on this device.",
+      saveAllDone: "Every page in the list is already stored here.",
       selectAll: "Select whole section",
       pages: "{n} pages",
       overview: "Overview",
       badgeAuto: "stored by the site",
       onlyStored: "Only show what is stored",
-      legend: "Faded titles are not on this device yet and will not open without a network. A greyed-out checkbox means the toggle above covers that page, so you do not need to tick it.",
+      legend: "Faded titles are not on this device yet and will not open without a network. A greyed-out checkbox means the site keeps that page for you, but that copy follows the site version and is cleared on every release. Use “Save everything” above to keep it for good.",
       onlyStoredEmpty: "Nothing is stored for this language yet.",
       notStored: "Not on this device yet, so it will not open without a network",
       progress: "{done} / {total}",
@@ -777,9 +777,15 @@
     // 地方之前存一份的人做不完，而那正是這個功能存在的理由。要下載多少直接寫在按鈕
     // 上，讀者按下去之前就知道，所以不再多一次確認。
     //
-    // 只送還沒在裝置上的那些。網站自動存的核心章節已經在 PRECACHE 裡，再存一份到
-    // LIBRARY 只是佔兩倍空間。
-    const missing = allPages().filter((url) => !isStored(url));
+    // 網站自動存的那批也要送，只跳過已經在 LIBRARY 裡的。
+    //
+    // 那批在 PRECACHE，而 PRECACHE 的名字帶著網站版本，換版時 activate 會整個刪掉，
+    // 新版的 install 只補得回當下開著的那一個語系。讀者按下這顆的意思是「這些要留在
+    // 裝置上」，那就得存進不隨版本走的地方。
+    //
+    // 2026-08-29 有人上飛機前三個語系各按了一次，飛到一半發現只剩一個語系讀得到。
+    // 被跳過的正好是核心章節那四十幾頁，也就是他最想讀的那些。
+    const missing = allPages().filter((url) => !state.saved.has(url));
     if (!state.swMissing && missing.length) {
       const missingAssets = Array.from(assetsOf(missing));
       const saveAll = button(

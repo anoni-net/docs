@@ -470,8 +470,12 @@ test('一鍵存全部把清單裡缺的都送出，連同資產去重', async ()
   assert.deepEqual(add.assets.sort(), ['img/journalist.png', 'img/shared.png']);
 });
 
-test('一鍵存全部不重送已經在裝置上的頁面', async () => {
-  // 網站自動存的那批在 PRECACHE 裡，再存一份進 LIBRARY 只是佔兩倍空間
+test('一鍵存全部跳過已經存進來的，但網站自動存的那批照樣送', async () => {
+  // PRECACHE 的名字帶著網站版本，換版時 activate 會整個刪掉，新版的 install 只補得
+  // 回當下開著的那一個語系。2026-08-29 有人上飛機前三個語系各按了一次，飛到一半發現
+  // 只剩一個語系讀得到，被跳過的正好是核心章節那四十幾頁。
+  //
+  // 讀者按下這顆的意思是「這些要留在裝置上」，那就得存進不隨版本走的地方。
   const { root, sw } = await load({
     saved: ['scenarios/journalist/'],
     precached: ['', 'basics/'],
@@ -480,11 +484,27 @@ test('一鍵存全部不重送已經在裝置上的頁面', async () => {
   await tick(30);
 
   const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
-  assert.deepEqual(add.paths.sort(), ['basics/metadata/', 'scenarios/activist/']);
+  // 已經在 LIBRARY 的那一頁不重送，網站自動存的兩頁照樣送
+  assert.deepEqual(add.paths.sort(), ['', 'basics/', 'basics/metadata/', 'scenarios/activist/']);
 });
 
-test('清單都存好時不畫一鍵按鈕，改說明原因', async () => {
+test('清單都存進來之後不畫一鍵按鈕，改說明原因', async () => {
   // 按鈕就這樣消失而沒有交代，讀者只會以為是壞了
+  const { root } = await load({
+    saved: [
+      '',
+      'basics/',
+      'basics/metadata/',
+      'scenarios/journalist/',
+      'scenarios/activist/',
+    ],
+  });
+  assert.equal(findButton(root, '全部存到裝置'), undefined);
+  assert.ok(root.textContent.includes('都已經存進這台裝置'));
+});
+
+test('整份清單都只是網站自動存的，一鍵按鈕照樣要出現', async () => {
+  // 那批換版就沒了。看起來「都在裝置上」而不給按，讀者就沒有辦法把它們留住。
   const { root } = await load({
     precached: [
       '',
@@ -494,8 +514,9 @@ test('清單都存好時不畫一鍵按鈕，改說明原因', async () => {
       'scenarios/activist/',
     ],
   });
-  assert.equal(findButton(root, '全部存到裝置'), undefined);
-  assert.ok(root.textContent.includes('都已經在這台裝置上'));
+  const btn = findButton(root, '全部存到裝置');
+  assert.ok(btn, '全是網站自動存的就不給按，那批換版之後會消失');
+  assert.ok(btn.textContent.includes('5 頁'), btn.textContent);
 });
 
 test('一鍵按鈕上寫出頁數與要下載多少', async () => {
