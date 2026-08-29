@@ -632,14 +632,25 @@ test('大小含資產，章節的部分去重', async () => {
 });
 
 test('填了底色的按鈕不會被 hover 規則蓋掉文字色', () => {
-  // 通用 hover 把文字色換成 accent，而它的特異性比 .ol-primary 高。實際效果是
-  // 「套用變更」按下去之後滑鼠停在上面，字就跟藍底融在一起看不見了。
-  // 觸控裝置點完會停在 hover 狀態，所以手機上是按一下就消失。
+  // 通用 hover 把文字色換成 accent，而它多一個 button 型別選擇器，特異性比
+  // .ol-primary 與 .ol-danger 自己的 hover 都高。漏排除哪一個，哪一個的文字色就會
+  // 被換成 accent。「套用變更」踩過一次，「確定清除」2026-08-29 又踩了一次，回報
+  // 是紅底配藍字。觸控裝置點完會停在 hover 狀態，所以手機上按一下就變成那樣。
   assert.ok(
-    src.includes('button:hover:not(:disabled):not(.ol-primary)'),
-    'hover 規則要排除填了底色的按鈕'
+    src.includes('button:hover:not(:disabled):not(.ol-primary):not(.ol-danger)'),
+    'hover 規則要排除每一顆填了底色的按鈕'
   );
-  assert.ok(src.includes('.ol-primary:hover'), '填色按鈕要有自己的 hover 回饋');
+  assert.ok(src.includes('.ol-primary:hover'), '.ol-primary 要有自己的 hover 回饋');
+  assert.ok(src.includes('.ol-danger:hover'), '.ol-danger 要有自己的 hover 回饋');
+});
+
+test('確定清除平常就是紅底白字，不等 hover 才看得出危險', () => {
+  // 清除是不可逆的，而觸控裝置沒有 hover 可用，靠 hover 表達危險等於在手機上
+  // 表達不出來。#c62828 配白字的對比是 5.6:1，過 WCAG AA。
+  const rule = src.match(/#offline-library \.ol-danger \{[^}]*\}/);
+  assert.ok(rule, '找不到 .ol-danger 的樣式');
+  assert.ok(/background:\s*#c62828/.test(rule[0]), rule[0]);
+  assert.ok(/color:\s*#fff/.test(rule[0]), rule[0]);
 });
 
 test('進度與完成訊息都在底部那條裡，不是散在頁面頂端', async () => {

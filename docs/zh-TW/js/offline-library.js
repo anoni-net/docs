@@ -30,8 +30,10 @@
       border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; padding: .3rem .7rem;
     }
-    /* 填了底色的「套用變更」不套這條，不然滑鼠放上去文字就看不見了 */
-    #offline-library button:hover:not(:disabled):not(.ol-primary) {
+    /* 填了底色的按鈕不套這條，不然滑鼠放上去文字就跟底色融在一起。這條多一個
+       button 型別選擇器，特異性比 .ol-primary 與 .ol-danger 自己的 hover 都高，
+       漏排除哪一個，哪一個的文字色就會被換成 accent。 */
+    #offline-library button:hover:not(:disabled):not(.ol-primary):not(.ol-danger) {
       border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color);
     }
     #offline-library .ol-primary:hover:not(:disabled) {
@@ -96,12 +98,14 @@
     #offline-library .ol-title--absent { color: inherit; opacity: .55; }
     #offline-library .ol-filter { display: block; cursor: pointer; margin: 1.4rem 0 .2rem; }
     #offline-library .ol-legend { margin-bottom: .4rem; }
+    /* 二段式確認的第二顆。平常就填滿紅底，不等 hover 才變色：那是不可逆的操作，
+       而觸控裝置沒有 hover 可用，靠 hover 表達危險等於在手機上表達不出來。
+       #c62828 配白字的對比是 5.6:1，過 WCAG AA。 */
     #offline-library .ol-danger {
-      border-color: var(--md-typeset-del-color, #f44336);
-      color: #c62828;
+      border-color: #c62828; background: #c62828; color: #fff;
     }
     #offline-library .ol-danger:hover:not(:disabled) {
-      background: #c62828; border-color: #c62828; color: #fff;
+      background: #b71c1c; border-color: #b71c1c; color: #fff;
     }
     /* 進度條。原本把進度寫在按鈕文字上，一邊跑一邊改字會讓按鈕寬度跟著跳。 */
     #offline-library .ol-progress { margin: .2rem 0 1rem; }
