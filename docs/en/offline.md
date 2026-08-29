@@ -39,6 +39,10 @@ Tor Browser and the onion and IPFS builds do not offer offline installation, for
 
 The first time you open this site in an ordinary browser, the core chapters for the language you are reading are downloaded to your device cache in the background. This happens without you installing anything. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
 
+The chapters the site stores for you follow the site version. Every release clears that copy and downloads it again, and the download only covers the language you have open at that moment. To make sure something stays on the device, use “Save everything” above the list. What that button stores is not affected by site releases.
+
+“Save everything” only covers the language you are currently in. To carry all three languages, open the offline reading page in each language and press it once there.
+
 Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored. The “Save everything” button includes them, and says so next to the button. If your situation calls for picking, use the list instead.
 
 The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
