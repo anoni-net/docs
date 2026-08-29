@@ -174,12 +174,19 @@
           cursor: default;
         }
         /*
-          按下之後那顆按鈕自己轉。送出 SKIP_WAITING 到 controllerchange 之間，
-          service worker 要跑完 activate、清掉舊快取，接著整頁重新載入，網路差的
-          時候那是好幾秒的空白。原本按鈕上什麼都沒變，讀者只會以為沒按到，再按
-          一次，而每按一次就多送一則訊息。
+          全站共用的忙碌轉圈。定義在這裡而不是各工具自己寫一份：站上的小工具有
+          八支，每一支都在自己的 JS 裡注入樣式，各寫一份 keyframes 只會讓「轉多快、
+          多大顆、reduced-motion 要不要停」在八個地方各自漂移。
+
+          用途是同一件事：按下之後有段時間沒有結果可以顯示。換版提示按下更新到
+          頁面真的換好，中間是 activate 加一次完整導覽；移除中繼資料要讀完整個
+          檔案再重編一次；解 QR 要先把圖解開。網路或裝置慢的時候那都是好幾秒的
+          空白，而畫面上什麼都不動，讀者只會以為沒按到，再按一次。
+
+          尺寸用 em，跟著按鈕或那行字的字級走。currentColor 讓它自動配合底色，
+          填色按鈕上是白的，一般文字旁邊是文字色。
         */
-        .anoni-banner-spinner {
+        .anoni-spinner {
           display: inline-block;
           width: .75em;
           height: .75em;
@@ -188,13 +195,15 @@
           border-top-color: transparent;
           border-radius: 50%;
           animation: anoni-spin .7s linear infinite;
+          vertical-align: -.05em;
           flex: none;
         }
         @keyframes anoni-spin {
           to { transform: rotate(360deg); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .anoni-banner-spinner { animation: none; opacity: .6; }
+          /* 不轉了還是要看得出跟平常不一樣，留一個淡掉的圈 */
+          .anoni-spinner { animation: none; opacity: .6; }
         }
       </style>
     {% endblock %}
@@ -518,7 +527,7 @@
               laterButton.disabled = true;
               updateButton.textContent = "";
               var spinner = document.createElement("span");
-              spinner.className = "anoni-banner-spinner";
+              spinner.className = "anoni-spinner";
               spinner.setAttribute("aria-hidden", "true");
               updateButton.appendChild(spinner);
               updateButton.appendChild(document.createTextNode(t.updating));

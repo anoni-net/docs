@@ -149,7 +149,7 @@ test('按下更新之後那顆按鈕停用並顯示更新中', () => {
   assert.equal(update.disabled, true, '按下之後還能再按');
   assert.ok(update.textContent.includes('更新中'), update.textContent);
   assert.ok(
-    update.children.some((c) => c.className === 'anoni-banner-spinner'),
+    update.children.some((c) => c.className === 'anoni-spinner'),
     '按鈕上沒有轉圈'
   );
   assert.equal(update.getAttribute('aria-busy'), 'true', '讀螢幕的人拿不到狀態');

@@ -668,7 +668,7 @@ test('按下之後那顆按鈕自己轉起來，不必等第一筆回報', async
 
   const busy = root.querySelectorAll('button').find((b) => b.textContent.includes('處理中'));
   assert.ok(busy, '按下之後沒有任何一顆按鈕顯示狀態');
-  assert.ok(busy.querySelector('.ol-spinner'), '按鈕上沒有轉圈');
+  assert.ok(busy.querySelector('.anoni-spinner'), '按鈕上沒有轉圈');
   assert.equal(busy.getAttribute('aria-busy'), 'true', '讀螢幕的人拿不到狀態');
 });
 

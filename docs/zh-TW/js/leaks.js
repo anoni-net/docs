@@ -498,6 +498,7 @@
       timeout: "你允許了，但等了十五秒還沒定出位置",
       askTitle: "下面這一項要你按了才會問",
       askButton: "顯示我的位置",
+      asking: "等待授權",
       askNote: "按下去瀏覽器會跳出授權視窗。允許之後畫面上會顯示你的經緯度與誤差範圍，只顯示在畫面上，不會送出也不會存起來。重新整理就沒了。",
       note: "以上全部在你的瀏覽器裡取得，沒有送出任何一項，也沒有寫進任何儲存。斷網時照樣讀得出來，沒有網路，這些值當然無處可送。刻意不提供匯出，匯出的檔案本身就是一份完整的指紋。",
       prefs: { dark: "深色模式", motion: "減少動態", contrast: "高對比", forced: "強制色彩" },
@@ -571,6 +572,7 @@
       timeout: "你允许了，但等了十五秒还没定出位置",
       askTitle: "下面这一项要你按了才会问",
       askButton: "显示我的位置",
+      asking: "等待授权",
       askNote: "按下去浏览器会跳出授权窗口。允许之后画面上会显示你的经纬度与误差范围，只显示在画面上，不会送出也不会存起来。刷新就没了。",
       note: "以上全部在你的浏览器里取得，没有送出任何一项，也没有写进任何存储。断网时照样读得出来，没有网络，这些值当然无处可送。刻意不提供导出，导出的文件本身就是一份完整的指纹。",
       prefs: { dark: "深色模式", motion: "减少动态", contrast: "高对比", forced: "强制色彩" },
@@ -644,6 +646,7 @@
       timeout: "you allowed it, but no fix arrived within fifteen seconds",
       askTitle: "This one only runs when you press the button",
       askButton: "Show my location",
+      asking: "Waiting for permission",
       askNote: "Pressing this brings up the browser's permission prompt. If you allow it, this page receives your latitude, longitude and accuracy, shows them on screen, and neither sends nor stores them. Reload and they are gone.",
       note: "Everything above was read inside your browser. None of it was sent anywhere and none of it was written to storage. This page still works with the network off, which is itself the proof that nothing is being sent. There is deliberately no export button: such a file would be a complete fingerprint sitting on your device.",
       prefs: { dark: "dark mode", motion: "reduced motion", contrast: "high contrast", forced: "forced colours" },
@@ -805,7 +808,15 @@
       const button = el("button", null, t.askButton);
       button.type = "button";
       button.addEventListener("click", () => {
+        // 只把按鈕變灰，讀者不知道是按到了還是壞了。授權視窗跳出來之前有一段空白，
+        // 而他允許之後還要等瀏覽器把座標算出來，那在室內可能是好幾秒。
         button.disabled = true;
+        button.textContent = "";
+        const spin = el("span", "anoni-spinner");
+        spin.setAttribute("aria-hidden", "true");
+        button.appendChild(spin);
+        button.appendChild(document.createTextNode(t.asking));
+        button.setAttribute("aria-busy", "true");
         Promise.resolve()
           .then(() => probe.read(t))
           .then((value) => ask.replaceWith(renderItem(probe, value)))
