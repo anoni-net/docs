@@ -925,6 +925,17 @@ function cacheKeyCandidates(pathname) {
 // 也命中，站上的 query 一律只由 client 端 JS 讀取，同一個路徑回傳的 HTML 是同一份。
 async function matchCachedPage(request) {
   const url = new URL(request.url);
+  // 先走精確比對。ignoreSearch 會讓 Cache Storage 放棄索引、線性掃過每一筆，而
+  // 按下「全部存到裝置」之後那是四百多筆，每翻一頁掃兩輪，在手機上是看得出來的
+  // 延遲。站上絕大多數導覽的網址沒有 query，這一條就結束了。
+  for (const pathname of cacheKeyCandidates(url.pathname)) {
+    const hit = await caches.match(url.origin + pathname);
+    if (hit) return hit;
+  }
+  // 精確那輪沒中才退回線性掃描。會走到這裡的是快取裡存著帶 query 的 key，例如讀者
+  // 從 /docs/x/?utm=... 進來，RUNTIME_PAGES 就存下了那個形狀。ignoreSearch 讓它跟
+  // 純路徑對得上，站上的 query 一律只由 client 端 JS 讀取，同一個路徑回傳的 HTML
+  // 是同一份。
   for (const pathname of cacheKeyCandidates(url.pathname)) {
     const hit = await caches.match(url.origin + pathname, { ignoreSearch: true });
     if (hit) return hit;
@@ -958,7 +969,27 @@ async function trimCache(cacheName, maxEntries) {
 // 完全斷線時 fetch 立刻就失敗，這個值用不到。它是為了「連得上但很慢」與「連線被
 // 干擾」那種狀態：讀者手上明明有離線副本，卻要陪著瀏覽器一路等到它自己放棄，
 // 而那種網路正是這個網站的讀者比別人更常遇到的。
-const NAVIGATE_TIMEOUT_MS = 3000;
+//
+// 2026-08-29 從三秒降下來。三秒是「網路慢的時候還願意等一下」的估計，實際遇到的
+// 是飛航模式底下 Wi-Fi 還開著，每翻一頁停三秒，而裝置上四百多頁一頁不缺。手上有
+// 副本可讀的時候，晚一輪拿到新內容比每一頁都卡住好。
+const NAVIGATE_TIMEOUT_MS = 1200;
+
+// 網路最近一次讓導覽等到逾時或直接失敗的時間。
+//
+// navigator.onLine 只有回 false 的時候可信，而讀者實際卡住的狀態正好是它回 true
+// 的那些：飛航模式底下 Wi-Fi 還開著、機上 Wi-Fi 沒買方案、公共熱點把流量攔在
+// 登入頁。那時候每翻一頁都要陪著等滿逾時，裝置上明明有一份讀得到的。
+//
+// 記下來之後的一分鐘內，有快取就直接給。網路那條照樣發出去在背景更新，它成功了
+// 就把這個狀態清掉，所以讀者接回網路之後不必自己按什麼，下一次導覽就恢復正常。
+const NETWORK_DOWN_TTL_MS = 60000;
+let networkDownSince = 0;
+
+function networkLooksDown() {
+  if (navigator.onLine === false) return true;
+  return networkDownSince > 0 && Date.now() - networkDownSince < NETWORK_DOWN_TTL_MS;
+}
 
 async function networkFirst(request, event) {
   // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取。
@@ -968,6 +999,8 @@ async function networkFirst(request, event) {
   // same-origin。這裡的請求在 fetch handler 入口已經濾成同源，站內連結也都是
   // mkdocs 產出的完整目錄形狀，走不到跨站轉址那條路。
   const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
+    // 這條路通了。不看 response.ok，回 404 也代表網路本身是好的。
+    networkDownSince = 0;
     if (response.ok && (await autoPrecacheEnabled())) {
       const cache = await caches.open(RUNTIME_PAGES);
       await cache.put(request, response.clone());
@@ -985,10 +1018,18 @@ async function networkFirst(request, event) {
     try {
       return await network;
     } catch (err) {
+      networkDownSince = Date.now();
       const offline = await caches.match(offlinePathFor(new URL(request.url)));
       if (offline) return offline;
       throw err;
     }
+  }
+
+  // 網路已經知道是斷的就不必再等一輪。直接給裝置上那一份，網路那條照樣在背景跑，
+  // 它成功的話會清掉離線狀態，下一次導覽就恢復成正常的賽跑。
+  if (networkLooksDown()) {
+    keepAlive(event, network.catch(() => {}));
+    return cached;
   }
 
   // 有副本就跟網路賽跑。網路先到就用網路的，讀者拿到的是最新內容。
@@ -1000,6 +1041,10 @@ async function networkFirst(request, event) {
 
   // 網路太慢或失敗，先給讀者看得到的那一份。網路那邊還在跑，回來時照樣寫進快取，
   // 下一次導覽拿到的就是新的。SW 要活到那時候，所以掛在 waitUntil 上。
+  //
+  // 同時記下這一次沒等到。接下來一分鐘內的導覽直接走上面那條，讀者不必每翻一頁
+  // 都重新等一遍逾時。
+  networkDownSince = Date.now();
   keepAlive(event, network.catch(() => {}));
   return cached;
 }

@@ -75,6 +75,9 @@ class FakeCache {
 class FakeCacheStorage {
   constructor() {
     this.named = new Map();
+    // 帶 ignoreSearch 的比對做過幾次。那條會讓 Cache Storage 放棄索引、線性掃過
+    // 每一筆，四百多筆的裝置上是看得出來的延遲，所以要驗它沒有被無條件用上。
+    this.ignoreSearchCalls = 0;
   }
   async open(name) {
     if (!this.named.has(name)) this.named.set(name, new FakeCache());
@@ -90,6 +93,7 @@ class FakeCacheStorage {
     return this.named.delete(name);
   }
   async match(request, opts) {
+    if (opts && opts.ignoreSearch) this.ignoreSearchCalls += 1;
     for (const cache of this.named.values()) {
       const hit = await cache.match(request, opts);
       if (hit) return hit;
@@ -153,6 +157,9 @@ const harness = `
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const NAVIGATE_TIMEOUT_MS = .*$/m)}
+  ${grab(/^const NETWORK_DOWN_TTL_MS = .*$/m)}
+  ${grab(/^let networkDownSince = .*$/m)}
+  ${grab(/^function networkLooksDown\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
@@ -165,6 +172,7 @@ const harness = `
     libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
     handleLibraryMessage, networkFirst, staleWhileRevalidate, NAVIGATE_TIMEOUT_MS,
+    networkLooksDown,
     OWN_CACHE_PREFIX, ownCacheNames, cacheUsage, purgeStaleCaches,
   };
 `;
@@ -235,7 +243,11 @@ const load = (opts = {}) => {
       matchAll: async () => (opts.clients || []).map((url) => ({ url })),
     },
   };
-  const navigatorStub = { storage: { estimate: async () => ({ usage: 1024, quota: 4096 }) } };
+  // onLine 不給就是 undefined，跟瀏覽器沒有回報一樣，networkLooksDown 只認 false
+  const navigatorStub = {
+    storage: { estimate: async () => ({ usage: 1024, quota: 4096 }) },
+    onLine: opts.onLine,
+  };
   // NAVIGATE_TIMEOUT_MS 那個 setTimeout 由外面給。fastTimeout 讓它立刻觸發，
   // 配上 networkDelay 就能在幾十毫秒內驗完「網路太慢」那條路。
   const setTimeoutStub = opts.fastTimeout ? (fn) => setTimeout(fn, 0) : setTimeout;
@@ -902,6 +914,67 @@ test('認不得的指令會回錯誤，不會靜靜沒反應', async (load) => {
   const replies = [];
   await sw.handleLibraryMessage({ type: 'NOPE' }, { postMessage: (d) => replies.push(d) });
   assert.equal(replies[0].type, 'error');
+});
+
+test('navigator.onLine 說沒有網路時直接給快取，不等那一輪逾時', async (load) => {
+  // 讀者切到飛航模式之後每翻一頁都停一下，而裝置上四百多頁一頁不缺。onLine 回
+  // false 是可信的（回 true 才不可信），拿來省掉那一輪等待剛好。
+  //
+  // networkDelay 比逾時短，少了這一條就會拿到網路那份，測得出差別。
+  const { sw, caches, fetched } = load({ onLine: false, networkDelay: 200 });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'CACHED');
+  // 網路那條照樣發出去。它成功的話下一次導覽就是新的，讀者不必自己按什麼。
+  assert.ok(fetched.includes(ORIGIN + '/docs/tools/what-is-tor/'), '背景那條沒有發出去');
+});
+
+test('等不到網路就記下來，下一頁不必重等一遍', async (load) => {
+  // 連得上但出不去的網路（飛航模式底下 Wi-Fi 還開著、機上 Wi-Fi 沒買方案、公共
+  // 熱點把流量攔在登入頁）下，navigator.onLine 回的是 true，每翻一頁都要陪著等
+  // 滿逾時。四百多頁存在裝置上卻頁頁卡住，那是這個功能最沒有道理的失敗方式。
+  const { sw, caches } = load({ networkDelay: 60, fastTimeout: true });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  assert.equal(sw.networkLooksDown(), false);
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'CACHED');
+  assert.equal(sw.networkLooksDown(), true, '沒記下來的話，下一頁又要從頭等一次');
+});
+
+test('網路回來就把離線狀態清掉，讀者不必自己按什麼', async (load) => {
+  const { sw, caches } = load({ networkDelay: 30, fastTimeout: true });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+  await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
+  assert.equal(sw.networkLooksDown(), true);
+
+  // 背景那條慢了一步，回來的時候網路其實是通的
+  await new Promise((resolve) => setTimeout(resolve, 80));
+  assert.equal(sw.networkLooksDown(), false, '網路回來了還當成離線，讀者會一直看到舊的');
+});
+
+test('沒有 query 的導覽不走 ignoreSearch 的線性掃描', async (load) => {
+  // ignoreSearch 會讓 Cache Storage 放棄索引、掃過每一筆。存了四百多頁的裝置上
+  // 每翻一頁掃兩輪，累積起來就是讀者說的那種停頓。站上絕大多數網址沒有 query。
+  const { sw, caches } = load();
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+
+  assert.equal(await sw.matchCachedPage(req('/docs/tools/what-is-tor/')), 'CACHED');
+  assert.equal(caches.ignoreSearchCalls, 0, '沒有 query 也走了線性掃描');
+});
+
+test('精確那輪沒中就退回 ignoreSearch，帶 query 存下的照樣找得到', async (load) => {
+  // 讀者從 /docs/x/?utm=... 之類的網址進來時，RUNTIME_PAGES 存下的就是那個形狀。
+  // 下一次他從乾淨的網址進來，精確比對對不上，這時候線性掃描是唯一找得到的路。
+  const { sw, caches } = load();
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put(ORIGIN + '/docs/tools/what-is-tor/?utm_source=x', 'CACHED');
+
+  assert.equal(await sw.matchCachedPage(req('/docs/tools/what-is-tor/')), 'CACHED');
+  assert.ok(caches.ignoreSearchCalls > 0, '精確沒中卻沒有退回線性掃描');
 });
 
 test('網路太慢時先給裝置上那一份，不陪著等到瀏覽器放棄', async (load) => {
