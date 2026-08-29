@@ -33,7 +33,7 @@ icon: material/account-group
 ## 二十分鐘：先讀這三篇
 
 1. [威脅模型清單](../utils/threat-model.md)：三題答完會標出答案裡的錯配，例如對手填到國家級、成本卻填最低。填的內容留在瀏覽器分頁裡，重新整理就沒了
-2. [社運行動者的數位準備](../scenarios/activist.md)：動員前、行動現場、行動之後的逐步建議，可以當成組織成員的共用基線
+2. [社運行動者的數位準備](../scenarios/activist.md)：動員前、行動現場、行動之後的逐步建議，可以當成組織成員的共同準備
 3. [匿名通訊工具比較](../tools/messaging-comparison.md)：決定組織對內對外各用哪一套之前先看
 
 ## 一週：把基本功補起來
@@ -56,6 +56,13 @@ icon: material/account-group
 - [台灣個資法 2025 修法](../taiwan/pdpa-2025.md)：組織持有個資的義務有變動
 - [揭弊者保護法](../taiwan/whistleblower-law.md)：內部員工願意說話時，法律保護到哪裡
 - [治理章程](../community/governance.md)：社群自己的決策方式與爭議處理，需要寫組織章程時可以參考
+
+## 不分身分都要做到的
+
+組織的制度做好了，成員個人的帳號被盜一樣會把整條線拉開。下面兩篇跟身分無關，每一種處境都適用。
+
+- [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：依實際效果排序的做法，二十分鐘讀完
+- [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：區塊鏈、私密瀏覽視窗、VPN 這幾項常被高估到什麼程度
 
 ## 帶得走的東西
 

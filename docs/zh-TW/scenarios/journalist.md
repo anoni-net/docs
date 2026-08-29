@@ -380,7 +380,7 @@ fixer、翻譯、司機、幫忙介紹受訪者的朋友，法律風險不比受
 
 ## 接下來
 
-- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分都要做到的那些，這一頁假設你已經做到
 - [威脅模型](../basics/threat-model.md)：寫報導前，先盤點誰是對手、能取得什麼
 - [Metadata 為什麼重要](../basics/metadata.md)：理解檔案隱含的元資料風險
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：採訪聯絡用的身分要跟署名發稿的身分切開，這頁是設定與長期維持的做法

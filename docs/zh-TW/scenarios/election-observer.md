@@ -141,7 +141,7 @@ icon: material/vote-outline
 
 ## 相關閱讀
 
-- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分的共同基線，這一頁假設你已經做到
+- [一般人平常該做到什麼](./everyday-baseline.md)：不分身分都要做到的那些，這一頁假設你已經做到
 - [社運行動者的數位準備](./activist.md)：行動現場與被臨檢時的裝置與通訊應對
 - [記者保護消息來源](./journalist.md)：敏感檔案交換與訪談紀錄保存，metadata 紀律與這頁共用
 - [出差與研討會的數位準備](./asia-travel.md)：裝置出入境、乾淨裝置的完整做法

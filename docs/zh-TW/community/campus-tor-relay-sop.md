@@ -70,7 +70,7 @@ icon: material/server-network-outline
 - IRC 6667/6697、P2P 常用 port
 - SocksPort、DNSPort、HTTPTunnelPort 一律不啟用
 
-## 作業系統與基線
+## 作業系統與安全基準
 
 建議用 Ubuntu Server 24.04 LTS（minimal install）：
 
@@ -84,7 +84,7 @@ icon: material/server-network-outline
 4. **時間同步**：`chrony`，事件調查時序一律以 UTC 記錄
 5. **強化保護**：啟用 AppArmor、`fs.protected_*` 參數
 6. **日誌持久化**：`journald` 設為 `Storage=persistent`，可選擇透過 `rsyslog` 轉送到校內 SIEM
-7. **檔案完整性（選用）**：部署 AIDE，週期性基線比對
+7. **檔案完整性（選用）**：部署 AIDE，週期性比對檔案基準
 8. **磁碟加密（選用）**：硬體允許的話，LUKS 全碟或至少保護 `/var/lib/tor`
 9. **備份**：離線或異地備份 `/etc/tor/torrc`、`/var/lib/tor/keys/`（**身份金鑰嚴格保密**）
 

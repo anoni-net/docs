@@ -57,6 +57,13 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 - [Taiwan's whistleblower protection act](../regional/taiwan-whistleblower-law.md): how far the law protects an employee who speaks
 - [Governance charter](../community/governance.md): how this community makes decisions and handles disputes, useful as a reference when drafting your own
 
+## Your own baseline still matters
+
+The organisation can have every process in place and still lose the whole thread when one member's account is taken over. The two pages below are role-independent and apply to everyone.
+
+- [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, twenty minutes
+- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): how far blockchains, private browsing windows, and VPNs are overestimated
+
 ## What to take with you
 
 - Press "copy summary" after the threat model checklist and paste it into the organization's notes, so the next person does not start over

@@ -31,9 +31,9 @@ title: {title}
 
 看 [別頁]({link})。
 
-## 第二節
+## 不分身分都要做到的
 
-沒有連結。
+每一條路徑都要走得到 [一般人平常該做到什麼](../scenarios/everyday-baseline.md)。
 """
 
 TARGET = """---
@@ -115,6 +115,21 @@ class TestNavListing(Harness):
 class TestAnchors(Harness):
     def test_錨點不存在時紅燈(self):
         self.build(link="../scenarios/target.md#這個小標不存在")
+        self.assertEqual(self.run_check(), 1)
+
+    def test_入口頁沒連到那份共同內容時紅燈(self):
+        # index.md 說一般大眾那條「其他四種身分同樣要做到」，而 2026-08-29 查的
+        # 時候，公民團體、新聞媒體、獨立記者三頁一個字都沒提到它。宣稱寫在 index，
+        # 少掉的是另外三頁的連結，兩邊分開看都很正常。
+        self.build(pages=("index.md", "media.md"))
+        for lang in ("zh-TW", "zh-CN", "en"):
+            path = mod.DOCS / lang / "start" / "media.md"
+            path.write_text(
+                path.read_text(encoding="utf-8").replace(
+                    "../scenarios/everyday-baseline.md", "../scenarios/target.md"
+                ),
+                encoding="utf-8",
+            )
         self.assertEqual(self.run_check(), 1)
 
     def test_連到不存在的檔案時紅燈(self):

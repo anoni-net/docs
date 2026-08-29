@@ -63,6 +63,13 @@ icon: material/account-edit-outline
 - [香港的脉络](../scenarios/journalist.md#香港的脉络)：2020 年《国安法》之后的差异
 - [中国大陆的脉络](../scenarios/journalist.md#中国大陆的脉络)：风险最重的一端在境内协作者身上
 
+## 个人的基线也要顾
+
+一个人工作的时候，个人的基线就是工作的基线，同一组账号与同一台设备两边都在用。下面两篇跟身分无关，每一种处境都适用。
+
+- [一般人平常该做到什么](../scenarios/everyday-baseline.md)：依实际效果排序的做法，二十分钟读完
+- [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：区块链、隐私浏览窗口、VPN 这几项常被高估到什么程度
+
 ## 带得走的东西
 
 - 威胁模型清单答完按「复制摘要」，贴到你自己选的地方，换题目时回头再填一次

@@ -7,7 +7,7 @@ icon: material/sign-direction
 
 # :material-sign-direction: Start by role
 
-This site has over two hundred pages, and it is hard to tell on a first visit which ones apply to you. This section gives each role one starting path: three pages for a twenty-minute pass, eight to ten for a week.
+This site has over two hundred pages, and it is hard to tell on a first visit which ones apply to you. This section gives each role one starting path: three pages for a twenty-minute pass, roughly ten more for a week. The developer path splits by what you already have, so its shape differs from the other four.
 
 Every link points at a page that already exists here. Nothing on these five pages is new material.
 
@@ -49,7 +49,7 @@ Every link points at a page that already exists here. Nothing on these five page
 
     ---
 
-    People who run servers, write code, or work with data. Relays, bridges, measurement analysis, and campus deployments: four lines you can pick up.
+    People who run servers, write code, work with data, or write documentation. Running nodes, measurement analysis, campus deployments, and documentation: four lines you can pick up.
 
     [:octicons-arrow-right-24: Developer path](./developer.md)
 

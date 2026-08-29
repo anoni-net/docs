@@ -191,7 +191,27 @@ def main() -> int:
                         "那一篇沒有這個小標。改標題的時候要一起改"
                     )
 
-    # 四、h2 骨架，只提醒
+    # 四、每個入口頁都要通往那份不分身分的內容
+    #
+    # index.md 的「一般大眾」卡片寫著「其他四種身分同樣要做到」，而 2026-08-29
+    # 查的時候，公民團體、新聞媒體、獨立記者三頁一個字都沒提到它，讀者從那三條路徑
+    # 進來走不到那一頁。開發者那頁有「不分身分都要做到的」那一節，另外三頁是漏掉了。
+    #
+    # 這一項機械驗得出來：五頁都要連到 scenarios/everyday-baseline.md。身分特有的
+    # 建議永遠蓋不掉「帳號被盜、密碼重複用」這一層，那是每一種處境都要做到的。
+    BASELINE = "scenarios/everyday-baseline.md"
+    for lang in LANGS:
+        for name, path in sorted(pages[lang].items()):
+            if name == "index.md":
+                continue
+            body = path.read_text(encoding="utf-8")
+            if BASELINE not in body:
+                errors.append(
+                    f"{lang} 的 {SECTION}/{name} 沒有連到 {BASELINE}。"
+                    "index.md 說那是所有身分同樣要做到的，每條路徑都要走得到"
+                )
+
+    # 五、h2 骨架，只提醒
     for name in sorted(base_names & set.intersection(*(set(pages[l]) for l in LANGS))):
         counts = {l: sum(1 for lv, _ in headings(pages[l][name]) if lv == 2) for l in LANGS}
         if len(set(counts.values())) > 1:

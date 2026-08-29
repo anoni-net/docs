@@ -148,13 +148,13 @@ test('對手選太多會建議拆成兩份清單', () => {
   assert.ok(!ids(ask(['content'], many.slice(0, 4), 'mid').warns).includes('too-many-adversaries'));
 });
 
-test('基線那一篇每個人都會拿到', () => {
+test('不分身分那一篇每個人都會拿到', () => {
   for (const state of [
     { assets: ['content'], adversaries: ['passerby'], budget: 'low' },
     { assets: ['device'], adversaries: ['state'], budget: 'high' },
     { assets: [], adversaries: [], budget: '' },
   ]) {
-    assert.ok(ids(tool.evaluate(state).reads).includes('baseline'), '基線沒有出現');
+    assert.ok(ids(tool.evaluate(state).reads).includes('baseline'), '不分身分那一篇沒有出現');
   }
 });
 
