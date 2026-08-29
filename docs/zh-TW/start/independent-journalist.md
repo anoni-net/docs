@@ -62,6 +62,13 @@ icon: material/account-edit-outline
 - [揭弊者保護法](../taiwan/whistleblower-law.md)：來源是內部員工時，法律保護到哪裡
 - [法規與通訊紀錄](../scenarios/journalist.md#法規與通訊紀錄)：調取的門檻與實務
 
+## 個人的基線也要顧
+
+一個人工作的時候，個人的基線就是工作的基線，同一組帳號與同一台裝置兩邊都在用。下面兩篇跟身分無關，每一種處境都適用。
+
+- [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：依實際效果排序的做法，二十分鐘讀完
+- [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：區塊鏈、私密瀏覽視窗、VPN 這幾項常被高估到什麼程度
+
 ## 帶得走的東西
 
 - 威脅模型清單答完按「複製摘要」，貼到你自己選的地方，換題目時回頭再填一次

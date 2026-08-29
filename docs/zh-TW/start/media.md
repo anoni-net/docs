@@ -62,6 +62,13 @@ icon: material/newspaper-variant-outline
 - [法規與通訊紀錄](../scenarios/journalist.md#法規與通訊紀錄)：調取的門檻與實務
 - [台灣個資法 2025 修法](../taiwan/pdpa-2025.md)：媒體持有個資的義務有變動
 
+## 個人的基線也要顧
+
+編輯台的制度做好了，記者個人的帳號被盜一樣會把來源暴露出去。下面兩篇跟身分無關，每一種處境都適用。
+
+- [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：依實際效果排序的做法，二十分鐘讀完
+- [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：區塊鏈、私密瀏覽視窗、VPN 這幾項常被高估到什麼程度
+
 ## 帶得走的東西
 
 - 威脅模型清單答完按「複製摘要」，貼進編輯台的共筆，換人接手時不用重問一次

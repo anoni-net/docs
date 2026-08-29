@@ -63,6 +63,13 @@ See [device minimization and border crossings in Asia](../scenarios/asia-travel.
 - [Taiwan's whistleblower protection act](../regional/taiwan-whistleblower-law.md): a Taiwan-specific worked example of how far the law protects a source
 - [Posting on mainland Chinese platforms](../scenarios/mainland-speech.md): relevant when a source or collaborator is inside Mainland China
 
+## Your own baseline still matters
+
+Working alone, your personal baseline is your work baseline: the same accounts and the same device carry both.
+
+- [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, twenty minutes
+- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): how far blockchains, private browsing windows, and VPNs are overestimated
+
 ## What to take with you
 
 - Press "copy summary" after the threat model checklist, paste it somewhere you choose, and fill it in again when you change beats

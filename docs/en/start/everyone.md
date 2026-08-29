@@ -62,7 +62,7 @@ All three run on your own device and upload nothing.
 ### Going further
 
 - [What is Tor?](../tools/what-is-tor.md): most people have heard the name, and the uses and limits are worth reading properly
-- [Interactive visualisations](../games/index.md): walk through onion routing in 3D, faster than reading about it
+- [Interactive visualisations](../games/index.md): three pieces built around Tor — a puzzle that walks a three-hop circuit, an animation of two circuits meeting at a rendezvous point, and a globe of every relay
 - [Help run a network measurement](../tools/ooni-run-v2.md): install OONI Probe, add the community list, and leave it running in the background to keep reporting which carriers can reach what
 
 ## What to take with you

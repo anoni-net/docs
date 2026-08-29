@@ -62,6 +62,13 @@ See [keeping multiple sources apart](../scenarios/journalist.md#Keeping-multiple
 - [Taiwan's whistleblower protection act](../regional/taiwan-whistleblower-law.md): how far the law protects an employee who speaks, as a Taiwan-specific worked example
 - [Posting on mainland Chinese platforms](../scenarios/mainland-speech.md): relevant when a source or collaborator is inside Mainland China
 
+## Your own baseline still matters
+
+The newsroom can have every process in place and still expose a source when one reporter's account is taken over. The two pages below are role-independent and apply to everyone.
+
+- [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, twenty minutes
+- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): how far blockchains, private browsing windows, and VPNs are overestimated
+
 ## What to take with you
 
 - Press "copy summary" after the threat model checklist and paste it into the desk's shared notes

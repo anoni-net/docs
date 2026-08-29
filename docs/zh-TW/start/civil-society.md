@@ -57,6 +57,13 @@ icon: material/account-group
 - [揭弊者保護法](../taiwan/whistleblower-law.md)：內部員工願意說話時，法律保護到哪裡
 - [治理章程](../community/governance.md)：社群自己的決策方式與爭議處理，需要寫組織章程時可以參考
 
+## 個人的基線也要顧
+
+組織的制度做好了，成員個人的帳號被盜一樣會把整條線拉開。下面兩篇跟身分無關，每一種處境都適用。
+
+- [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：依實際效果排序的做法，二十分鐘讀完
+- [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：區塊鏈、私密瀏覽視窗、VPN 這幾項常被高估到什麼程度
+
 ## 帶得走的東西
 
 - 威脅模型清單答完按「複製摘要」，貼進組織的共筆或會議紀錄，換人接手時不用重問一次
