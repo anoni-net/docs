@@ -81,6 +81,10 @@ jobs:
       - name: 語言偏好導向規則
         run: node tools/test_lang_preference.mjs
 
+      # 按下更新到頁面換好中間有好幾秒空白，按鈕不動的話讀者會一直重複按
+      - name: 換版提示按下更新之後的狀態
+        run: node tools/test_update_banner.mjs
+
       # 語言切換器不列出目前語系，但那一筆要留在 DOM 裡給偏好轉址與語言選擇卡片用
       - name: 語言切換器藏起目前語系
         run: python3 tools/test_lang_switcher.py

@@ -72,6 +72,10 @@ class FakeElement {
         for (const n of names) if (!have.includes(n)) have.push(n);
         this.className = have.join(' ');
       },
+      remove: (...names) => {
+        const have = this.className ? this.className.split(/\s+/) : [];
+        this.className = have.filter((n) => !names.includes(n)).join(' ');
+      },
       contains: (name) => (this.className || '').split(/\s+/).includes(name),
     };
   }
@@ -201,6 +205,8 @@ const makeServiceWorker = (opts) => {
             estimate: opts.estimate || null,
           });
         } else if (message.type === 'OFFLINE_ADD') {
+          // 模擬網路很差：service worker 收到了，但一筆都還沒回報
+          if (opts.holdAdd) return;
           let done = 0;
           for (const p of message.paths) {
             done += 1;
@@ -651,6 +657,45 @@ test('確定清除平常就是紅底白字，不等 hover 才看得出危險', (
   assert.ok(rule, '找不到 .ol-danger 的樣式');
   assert.ok(/background:\s*#c62828/.test(rule[0]), rule[0]);
   assert.ok(/color:\s*#fff/.test(rule[0]), rule[0]);
+});
+
+test('按下之後那顆按鈕自己轉起來，不必等第一筆回報', async () => {
+  // 進度條 sticky 在畫面下緣，而讀者的視線停在剛按下的那顆按鈕上。網路差的時候
+  // 第一筆回報要等好幾秒，按鈕沒有變化的話人會以為沒按到，一直重複按。
+  const { root } = await load({ holdAdd: true });
+  clickButton(root, '全部存到裝置');
+  await tick(10);
+
+  const busy = root.querySelectorAll('button').find((b) => b.textContent.includes('處理中'));
+  assert.ok(busy, '按下之後沒有任何一顆按鈕顯示狀態');
+  assert.ok(busy.querySelector('.ol-spinner'), '按鈕上沒有轉圈');
+  assert.equal(busy.getAttribute('aria-busy'), 'true', '讀螢幕的人拿不到狀態');
+});
+
+test('第一筆回報之前進度條在掃動，不是一條靜止的空槽', async () => {
+  // 比例是 0 的時候畫出來就是一條空槽，看起來跟沒反應一樣，而那正是讀者最想知道
+  // 「到底有沒有按到」的時候。
+  const { root } = await load({ holdAdd: true });
+  clickButton(root, '全部存到裝置');
+  await tick(10);
+
+  const track = root.querySelector('.ol-progress__track');
+  assert.ok(track, '沒有畫出進度條');
+  assert.ok(
+    track.classList.contains('ol-progress__track--idle'),
+    '第一筆回報還沒到，進度條卻是靜止的'
+  );
+});
+
+test('回報進來之後進度條切成實際比例', async () => {
+  const { root } = await load();
+  clickButton(root, '全部存到裝置');
+  await tick(30);
+
+  // 工作跑完了，進度條收掉，按鈕也回到原本的樣子
+  assert.equal(root.querySelector('.ol-progress__track'), null);
+  const still = root.querySelectorAll('button').find((b) => b.textContent.includes('處理中'));
+  assert.equal(still, undefined, '工作結束了按鈕還卡在處理中');
 });
 
 test('進度與完成訊息都在底部那條裡，不是散在頁面頂端', async () => {

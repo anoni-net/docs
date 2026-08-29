@@ -120,6 +120,16 @@
     #offline-library .ol-progress__track--idle .ol-progress__fill {
       width: 30%; animation: ol-sweep 1.1s ease-in-out infinite;
     }
+    /* 正在跑的那顆按鈕自己轉。進度條 sticky 在畫面下緣，而讀者的視線停在剛按下
+       的按鈕上，網路差的時候那裡好幾秒都沒有動靜，人就會再按一次。 */
+    #offline-library .ol-spinner {
+      display: inline-block;
+      width: .75em; height: .75em; margin-right: .4em;
+      border: .1em solid currentColor; border-top-color: transparent;
+      border-radius: 50%; animation: ol-spin .7s linear infinite;
+      vertical-align: -.05em; flex: none;
+    }
+    @keyframes ol-spin { to { transform: rotate(360deg); } }
     #offline-library .ol-progress__text {
       margin: .3rem 0 0; font-size: .7rem; opacity: .8;
     }
@@ -140,6 +150,7 @@
       #offline-library .ol-progress__track--idle .ol-progress__fill {
         width: 100%; animation: none;
       }
+      #offline-library .ol-spinner { animation: none; opacity: .6; }
     }
     #offline-library .ol-primary {
       border-color: var(--md-primary-fg-color);
@@ -470,6 +481,23 @@
     return node;
   }
 
+  // 跟 button 一樣，但工作正在跑的時候換成轉圈加狀態文字。
+  //
+  // 底部那條進度條本來就會出現，可是讀者的視線停在剛按下的那顆按鈕上，而網路差
+  // 的時候第一筆回報要等好幾秒。按鈕自己沒有變化，人就會以為沒按到而重複按。
+  function taskButton(key, label, className, onClick) {
+    const running = state.task && state.task.key === key;
+    const node = button(running ? "" : label, className, onClick);
+    if (!running) return node;
+    const spin = el("span", "ol-spinner");
+    spin.setAttribute("aria-hidden", "true");
+    node.appendChild(spin);
+    node.appendChild(document.createTextNode(state.task.label));
+    // 轉圈的圖案對讀螢幕的人沒有意義，狀態要用屬性講
+    node.setAttribute("aria-busy", "true");
+    return node;
+  }
+
   function renderStatus() {
     const status = el("p", "ol-status");
     if (state.swMissing) {
@@ -660,7 +688,7 @@
 
   function renderApply() {
     const bar = el("div", "ol-apply__row");
-    const applyButton = button(t.apply, "ol-primary", () => {
+    const applyButton = taskButton("apply", t.apply, "ol-primary", () => {
         const toAdd = Array.from(state.add);
         const toRemove = Array.from(state.remove);
         // 移掉一頁不代表它的圖可以丟。留著的頁面還用得到的就不動，
@@ -674,7 +702,7 @@
         // 只送有沒有做這個動作，不送勾了幾頁也不送勾了哪些
         if (toAdd.length) trackOffline("add");
         if (toRemove.length) trackOffline("remove");
-        runTask(t.applying, toAdd.length + addAssets.length, (report) =>
+        runTask("apply", t.applying, toAdd.length + addAssets.length, (report) =>
           Promise.resolve()
             .then(() =>
               toRemove.length
@@ -792,11 +820,12 @@
     const missing = allPages().filter((url) => !state.saved.has(url));
     if (!state.swMissing && missing.length) {
       const missingAssets = Array.from(assetsOf(missing));
-      const saveAll = button(
+      const saveAll = taskButton(
+        "saveAll",
         fill("saveAll", { n: missing.length, size: size(weightOf(missing)) }),
         "ol-primary",
         () =>
-          runTask(t.applying, missing.length + missingAssets.length, (report) => {
+          runTask("saveAll", t.applying, missing.length + missingAssets.length, (report) => {
             trackOffline("add");
             return ask(
               {
@@ -819,10 +848,10 @@
 
     // 更新的對象是讀者自己勾存的那批。網站自動存的那批跟著網站版本走，讀者
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
-    const refresh = button(t.refresh, null, () => {
+    const refresh = taskButton("refresh", t.refresh, null, () => {
       const paths = Array.from(state.saved);
       const assets = Array.from(assetsOf(paths));
-      return runTask(t.refreshing, paths.length + assets.length, (report) =>
+      return runTask("refresh", t.refreshing, paths.length + assets.length, (report) =>
         ask(
           {
             type: "OFFLINE_ADD",
@@ -848,8 +877,8 @@
     } else {
       // 兩段式確認。原本是同一顆按鈕換文字，讀者不見得注意到字變了，
       // 這裡改成兩顆並排，要按的那顆帶危險色。
-      const confirm = button(t.clearConfirm, "ol-danger", () =>
-        runTask(t.clearing, 0, () =>
+      const confirm = taskButton("clear", t.clearConfirm, "ol-danger", () =>
+        runTask("clear", t.clearing, 0, () =>
           ask({ type: "OFFLINE_CLEAR" }).then(() => {
             trackOffline("clear");
             return { message: t.cleared };
@@ -899,10 +928,13 @@
     const track = el("div", "ol-progress__track");
     const fillBar = el("div", "ol-progress__fill");
     const task = state.task;
-    if (task.total > 0) {
+    // done 還是 0 的時候比例畫出來是一條靜止的空槽，看起來跟沒反應一樣。網路差
+    // 的時候第一頁要等好幾秒，而那正是讀者最想知道「到底有沒有按到」的時候，
+    // 沒有動靜的話他只會再按一次。先用來回掃動表示在跑，第一筆回報到了才切成
+    // 實際比例。清除這種沒有頁數可數的工作也走這一條。
+    if (task.total > 0 && task.done > 0) {
       fillBar.style.width = Math.round((task.done / task.total) * 100) + "%";
     } else {
-      // 清除這種沒有頁數可數的工作，用來回掃動表示還在跑
       track.classList.add("ol-progress__track--idle");
     }
     track.appendChild(fillBar);
@@ -988,9 +1020,9 @@
   //
   // 進度顯示在獨立的進度條上，不去改按鈕文字。原本邊跑邊改按鈕文字，按鈕寬度會
   // 跟著跳，而清除那種沒有頁數可數的工作根本沒東西可顯示，按下去看起來就像沒反應。
-  function runTask(label, total, run) {
+  function runTask(key, label, total, run) {
     state.busy = true;
-    state.task = { label: label, done: 0, total: total };
+    state.task = { key: key, label: label, done: 0, total: total };
     render();
 
     const report = (data) => {
@@ -1001,6 +1033,9 @@
       if (bar && data.total) {
         bar.style.width = Math.round((data.done / data.total) * 100) + "%";
       }
+      // 第一筆回報到了，從來回掃動切成實際比例
+      const track = root.querySelector(".ol-progress__track");
+      if (track && data.done > 0) track.classList.remove("ol-progress__track--idle");
       const line = root.querySelector(".ol-progress__text");
       if (line) {
         line.textContent =
