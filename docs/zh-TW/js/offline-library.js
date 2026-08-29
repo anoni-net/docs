@@ -120,16 +120,6 @@
     #offline-library .ol-progress__track--idle .ol-progress__fill {
       width: 30%; animation: ol-sweep 1.1s ease-in-out infinite;
     }
-    /* 正在跑的那顆按鈕自己轉。進度條 sticky 在畫面下緣，而讀者的視線停在剛按下
-       的按鈕上，網路差的時候那裡好幾秒都沒有動靜，人就會再按一次。 */
-    #offline-library .ol-spinner {
-      display: inline-block;
-      width: .75em; height: .75em; margin-right: .4em;
-      border: .1em solid currentColor; border-top-color: transparent;
-      border-radius: 50%; animation: ol-spin .7s linear infinite;
-      vertical-align: -.05em; flex: none;
-    }
-    @keyframes ol-spin { to { transform: rotate(360deg); } }
     #offline-library .ol-progress__text {
       margin: .3rem 0 0; font-size: .7rem; opacity: .8;
     }
@@ -150,7 +140,6 @@
       #offline-library .ol-progress__track--idle .ol-progress__fill {
         width: 100%; animation: none;
       }
-      #offline-library .ol-spinner { animation: none; opacity: .6; }
     }
     #offline-library .ol-primary {
       border-color: var(--md-primary-fg-color);
@@ -489,7 +478,8 @@
     const running = state.task && state.task.key === key;
     const node = button(running ? "" : label, className, onClick);
     if (!running) return node;
-    const spin = el("span", "ol-spinner");
+    // 轉圈用全站共用的那顆，樣式定義在 overrides/base.html
+    const spin = el("span", "anoni-spinner");
     spin.setAttribute("aria-hidden", "true");
     node.appendChild(spin);
     node.appendChild(document.createTextNode(state.task.label));

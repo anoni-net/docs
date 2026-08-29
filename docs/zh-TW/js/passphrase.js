@@ -570,7 +570,17 @@
     if (state.mode === "dice" && !state.rolled.length) {
       out.textContent = state.words === false ? t.failed : t.diceEmpty;
     } else if (state.mode === "phrase" && !state.words) {
-      out.textContent = state.words === false ? t.failed : t.loading;
+      if (state.words === false) {
+        out.textContent = t.failed;
+      } else {
+        // 詞表有七千多個詞，慢的連線上要等一會，而那行字不會動，讀者分不出是
+        // 還在抓還是壞了。抓完會自己 render 一次，這裡不必收尾。
+        const spin = el("span", "anoni-spinner");
+        spin.setAttribute("aria-hidden", "true");
+        out.appendChild(spin);
+        out.appendChild(document.createTextNode(t.loading));
+        out.setAttribute("aria-busy", "true");
+      }
     } else if (!state.value && state.mode === "password") {
       out.textContent = t.charsetEmpty;
     } else {

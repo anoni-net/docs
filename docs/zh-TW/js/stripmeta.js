@@ -972,6 +972,11 @@
   // 第一次遇到 PDF 要先把函式庫抓回來，那段時間畫面要說一聲
   let loadingLib = false;
 
+  // 正在處理第幾個檔案。移除中繼資料要把整個檔案讀進來、重編一次、再解一次驗證，
+  // 大一點的圖或影片在手機上是好幾秒，而畫面原本從按下到全部做完都不會動，讀者
+  // 只能猜是不是當掉了。t.working 這個字串本來就在，之前沒有人用上。
+  let working = null;
+
   function release() {
     for (const item of files) {
       if (item.url) URL.revokeObjectURL(item.url);
@@ -1083,6 +1088,23 @@
     root.appendChild(formats);
 
     if (loadingLib) root.appendChild(el("p", "sm-loading", t.loadingLib));
+    if (working) {
+      const line = el("p", "sm-loading");
+      // 轉圈用全站共用的那顆，樣式定義在 overrides/base.html
+      const spin = el("span", "anoni-spinner");
+      spin.setAttribute("aria-hidden", "true");
+      line.appendChild(spin);
+      line.appendChild(document.createTextNode(
+        working.total > 1
+          ? t.working + "　" + working.done + " / " + working.total + "　" + working.name
+          : t.working + "　" + working.name
+      ));
+      // 轉圈對讀螢幕的人沒有意義。aria-busy 說「這一塊還在做事」，aria-live 讓
+      // 換到下一個檔案的時候把檔名唸出來，兩件事各自要一個屬性。
+      line.setAttribute("aria-busy", "true");
+      line.setAttribute("aria-live", "polite");
+      root.appendChild(line);
+    }
     for (const item of files) root.appendChild(renderFile(item));
 
     if (files.length) {
@@ -1204,6 +1226,7 @@
         break;
       }
     }
+    let index = 0;
     for (const file of list) {
       const okType = !file.type || file.type.indexOf("image/") === 0 ||
         file.type.indexOf("video/") === 0 || file.type === "application/pdf";
@@ -1211,8 +1234,16 @@
         files.push({ ok: false, name: file.name, reason: "notImage" });
         continue;
       }
+      index += 1;
+      // 先讓畫面說一聲再開始做。handleOne 從頭到尾不回到事件迴圈，不先畫出來的話
+      // 讀者看到的是一個凍住的頁面，而多檔案時他連做到第幾個都不知道。
+      working = { done: index, total: list.length, name: file.name };
+      render();
+      // 交還主執行緒，讓那一行先畫出來
+      await new Promise((next) => setTimeout(next, 0));
       files.push(await handleOne(file));
     }
+    working = null;
     loadingLib = false;
     render();
   }

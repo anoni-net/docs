@@ -822,7 +822,18 @@
     picker.accept = "image/*";
     picker.addEventListener("change", () => handle(picker.files && picker.files[0]));
 
-    const drop = el("div", "qd-drop", state.status === "reading" ? t.reading : t.drop);
+    // 解讀中要看得出在跑。整張圖解開再掃過一次，大張的照片在手機上是好幾秒，
+    // 而原本只有一行不會動的字，讀者分不出是在做事還是卡住了。
+    const drop = el("div", "qd-drop");
+    if (state.status === "reading") {
+      const spin = el("span", "anoni-spinner");
+      spin.setAttribute("aria-hidden", "true");
+      drop.appendChild(spin);
+      drop.appendChild(document.createTextNode(t.reading));
+      drop.setAttribute("aria-busy", "true");
+    } else {
+      drop.textContent = t.drop;
+    }
     drop.addEventListener("click", () => picker.click());
     drop.addEventListener("dragover", (event) => {
       event.preventDefault();

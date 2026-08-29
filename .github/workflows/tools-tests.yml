@@ -85,6 +85,10 @@ jobs:
       - name: 換版提示按下更新之後的狀態
         run: node tools/test_update_banner.mjs
 
+      # 每一個會讓讀者等待的互動都要在等的時候讓畫面說一聲，慢裝置上才不會像當掉
+      - name: 忙碌回饋的覆蓋檢查
+        run: node tools/test_busy_feedback.mjs
+
       # 語言切換器不列出目前語系，但那一筆要留在 DOM 裡給偏好轉址與語言選擇卡片用
       - name: 語言切換器藏起目前語系
         run: python3 tools/test_lang_switcher.py
