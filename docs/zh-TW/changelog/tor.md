@@ -8,6 +8,19 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon、Onion 服務的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。本頁同時收錄穩定版與 Alpha 測試通道，Alpha 條目會在標題標注。
 
+## Tor Browser 16.0a10（Alpha 測試通道）
+
+> 2026-08-27 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a10/){target="_blank"}
+
+- Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
+- 新增「使用通用視窗標題」選項，在設定的隱私與安全性、進階設定、防範第三方應用程式那一組，開啟後所有視窗標題一律顯示 Tor Browser Alpha。視窗標題預設跟著網頁的 title 變動，作業系統與其他程式不需特殊權限就讀得到，可以當成側錄瀏覽紀錄的旁通道。此功能已上游進 Firefox，一般 Firefox 使用者可在 `about:config` 把 `privacy.exposeContentTitleInWindow` 與 `privacy.exposeContentTitleInWindow.pbm` 設為 false。官方原本希望 16.0 穩定版就預設開啟，顧慮無障礙軟體與非標準桌面環境的相容性，改為先開放測試。
+- 桌面版內建手冊改版，把更新過的官方說明內容包進瀏覽器取代舊版手冊，網址列輸入 `about:manual` 可直接開啟，介面上的「Learn more」也都指向新版。
+- 設定頁改用 Mozilla 的新版 `about:preferences` 設計並預設啟用，連線、letterboxing、安全性等級等自訂項目都已搬到新版面。
+- Firefox 基底 rebase 至 153.1.0esr（tor-browser#45205），並從 Firefox 154 backport 安全修補（tor-browser#45219）。
+- 停用以語系為基礎的字型規則，作為瀏覽器指紋的深度防禦（tor-browser#44257）。
+- NoScript 升至 13.6.31.90301984，OpenSSL 升至 3.5.8。
+- tor daemon 崩潰時，`about:torconnect` 會顯示錯誤訊息（tor-browser#43570）。橋接連線失敗時也會更新橋接設定的顯示（tor-browser#43939）。
+
 ## Tor Browser 15.0.20
 
 > 2026-08-18 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}
