@@ -1,6 +1,6 @@
 ---
 title: Software Changelog
-description: Concise English summaries of Tor, Tails, OONI, Arti, OnionShare, and iOS releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
+description: Concise English summaries of Tor, Tails, OONI, Arti, OnionShare, iOS, and GrapheneOS releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
 icon: material/history
 ---
 
@@ -25,3 +25,4 @@ Your device is part of the attack surface. This group skips the line-by-line tra
 
 - :material-usb-flash-drive-outline: [Tails changelog](./tails.md) — Tails operating system
 - :material-apple-ios: [iOS security updates](./ios.md) — iPhone and iPad, with urgency ratings and older-model support
+- :material-cellphone-lock: [GrapheneOS monthly summary](./grapheneos.md) — hardened Android on Pixel, aggregated by month
