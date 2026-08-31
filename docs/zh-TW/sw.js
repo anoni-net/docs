@@ -101,8 +101,10 @@ const SCOPE_PATH = new URL(self.registration.scope).pathname;
 const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 
 // 每個語系各一份的資產：theme app shell（hash 檔名與 overrides/base.html 同步），
-// 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
-// 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
+// 加上兩個頁面各自要用的程式。頁面本身在 CORE_PAGES 裡，但 HTML 進了快取不代表
+// 它會動，工具的程式是另一個請求，少了它離線打開只剩一個空容器。
+//
+// 離線內容管理頁還需要那份頁面索引，少了索引就只剩「清除全部」可以按。
 const SHELL_ASSETS = [
   "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -114,6 +116,8 @@ const SHELL_ASSETS = [
   // 離線內容管理頁（hooks/offline_index.py 產生索引，js 是三語系共用的 symlink）
   "offline-index.json",
   "js/offline-library.js",
+  // 斷網應變卡（js 是三語系共用的 symlink，樣式與文案都內嵌在裡面）
+  "js/shutdown-card.js",
 ];
 
 // zh 版（zh-TW 根、/zh-cn/）章節結構一致，預快取完整指南集 + 緊急頁。
@@ -185,6 +189,19 @@ const CORE_PAGES_ZH = [
   "taiwan/vasp-2026/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  // utils（小工具，只收索引與斷網應變卡）
+  //
+  // 這一區其他八個工具留給執行期快取，落差不大：它們是「手上有個東西想查一下」
+  // 的工具，收到可疑連結、要清一張照片的座標，那個當下通常還連得上。
+  //
+  // 應變卡不同。它唯一的使用時機就是網路已經斷了，預快取沒有收它的話，讀者要在
+  // 斷網前剛好打開過那一頁才用得到，那等於把準備工作的成敗押在巧合上。索引頁
+  // 一起收，離線時才有入口走得到它，不必先記住完整網址。
+  //
+  // 身分敏感度照上面那條判準檢查過：讀者是「任何需要在中斷時聯絡上別人的人」，
+  // 不指向特定受威脅身分，跟旅行類同一種。工具的程式在 SHELL_ASSETS 裡。
+  "utils/",
+  "utils/shutdown-card/",
   // community（社群，選錄離線可讀的工具頁）
   "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
@@ -256,6 +273,9 @@ const CORE_PAGES_EN = [
   "regional/taiwan-vasp-2026/",
   "regional/ooni-asn-coverage/",
   "regional/tor-relay-watcher/",
+  // utils（小工具，只收索引與斷網應變卡，理由見 CORE_PAGES_ZH 的同一段註解）
+  "utils/",
+  "utils/shutdown-card/",
   // community（社群，選錄離線可讀的工具頁）
   "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
