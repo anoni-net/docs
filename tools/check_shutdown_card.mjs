@@ -148,15 +148,12 @@ for (const lang of LANGS) {
     await ev(`document.querySelectorAll('#shutdown-card-tool input[type=text]').length`));
   check('狀態列常駐並且說得出目前是哪一態',
     await ev(`!!document.querySelector('#shutdown-card-tool .sc-status p').textContent.trim()`));
-  check('確認本人那一欄的敏感提示常駐',
-    await ev(`!!document.querySelector('#shutdown-card-tool .sc-sensitive')`));
+
   // 桌機也要 16px。站上用的是 max(16px, .76rem) 而不是把它塞進 pointer: coarse，
   // 因為觸控筆電與 iPad 的桌面模式都會讓那個媒體查詢對不上，而代價只是字大一點
-  check('輸入框字級不小於 16px', await ev(`(() => {
-    const px = (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).fontSize);
-    return px('#shutdown-card-tool input[type=text]') >= 16
-      && px('#shutdown-card-tool textarea') >= 16;
-  })()`), await ev(`getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize`));
+  check('輸入框字級不小於 16px', await ev(`
+    parseFloat(getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize) >= 16`),
+    await ev(`getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize`));
   statusTexts.push(await ev(`document.querySelector('#shutdown-card-tool .sc-status p').textContent`));
 
   // 填一位聯絡人，兩個管道都填通訊軟體
@@ -164,7 +161,7 @@ for (const lang of LANGS) {
     const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
     const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
     set(boxes[0], 'CHECK-LABEL');
-    set(boxes[2], 'CHECK-NAME'); set(boxes[3], 'Signal'); set(boxes[4], 'Telegram');
+    set(boxes[1], 'CHECK-NAME'); set(boxes[2], 'Signal'); set(boxes[3], 'Telegram');
     return true;
   })()`);
   await sleep(120);
@@ -180,6 +177,37 @@ for (const lang of LANGS) {
       && new Set(cards.map((c) => c.textContent)).size === 1
       && cards[0].textContent === preview;
   })()`), await ev(`document.querySelectorAll('#shutdown-card-tool .sc-card').length`));
+
+  // 計畫層預設不建進 DOM。這是分艙的第一層保險，也是這次流程改版的重點：
+  // 只想要一張最小卡的人，畫面上不該出現他沒有要填的那七八個欄位
+  check('計畫層預設不在畫面上', await ev(`
+    document.querySelectorAll('#shutdown-card-tool textarea').length === 0`),
+    await ev(`document.querySelectorAll('#shutdown-card-tool textarea').length`));
+  check('自訂時間的輸入框預設藏起來', await ev(`(() => {
+    const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
+    const custom = boxes.filter((b) => b.hidden);
+    return custom.length === 2;
+  })()`), await ev(`document.querySelectorAll('#shutdown-card-tool input[type=text]').length`));
+
+  // 展開計畫層
+  await ev(`(() => {
+    const btn = [...document.querySelectorAll('#shutdown-card-tool button')]
+      .find((b) => b.textContent.trim() === ${JSON.stringify('x')});
+    return !!btn;
+  })()`);
+  await ev(`(() => {
+    const buttons = [...document.querySelectorAll('#shutdown-card-tool .sc-invite button')];
+    if (!buttons.length) return false;
+    buttons[0].click();
+    return true;
+  })()`);
+  await sleep(200);
+  check('按下邀請之後計畫層才出現', await ev(`
+    document.querySelectorAll('#shutdown-card-tool textarea').length >= 2`));
+  check('確認本人那一欄的敏感提示跟著出現',
+    await ev(`!!document.querySelector('#shutdown-card-tool .sc-sensitive')`));
+  check('計畫層的輸入框字級也不小於 16px',
+    await ev(`parseFloat(getComputedStyle(document.querySelector('#shutdown-card-tool textarea')).fontSize) >= 16`));
 
   // 分艙。計畫那一層的內容填進畫面之後，卡片與列印容器都不該出現它。
   // 單元測試驗的是 serializeCard 的輸出，這裡驗的是實際畫出來的那份
@@ -277,21 +305,19 @@ await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints
 await send('Page.navigate', { url: `${base}/?lang=zh-TW` });
 await sleep(500);
 
-check('觸控裝置上的輸入框字級不小於 16px', await ev(`(() => {
-  const px = (el) => parseFloat(getComputedStyle(el).fontSize);
-  return matchMedia('(pointer: coarse)').matches
-    && px(document.querySelector('#shutdown-card-tool input[type=text]')) >= 16
-    && px(document.querySelector('#shutdown-card-tool textarea')) >= 16;
-})()`), await ev(`[matchMedia('(pointer: coarse)').matches,
-  getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize]`));
+check('觸控裝置上的輸入框字級不小於 16px', await ev(`
+  matchMedia('(pointer: coarse)').matches
+  && parseFloat(getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize) >= 16`),
+  await ev(`[matchMedia('(pointer: coarse)').matches,
+    getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize]`));
 
 await ev(`(() => {
   const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
   const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
   set(boxes[0], '編輯部共同約定 v2');
-  set(boxes[2], '阿明'); set(boxes[3], 'Signal'); set(boxes[4], '到住處樓下按門鈴');
-  set(boxes[5], '小美'); set(boxes[6], 'https://example.org/a/very/long/path/without-any-spaces-1234567890');
-  set(boxes[7], 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+  set(boxes[1], '阿明'); set(boxes[2], 'Signal'); set(boxes[3], '到住處樓下按門鈴');
+  set(boxes[4], '小美'); set(boxes[5], 'https://example.org/a/very/long/path/without-any-spaces-1234567890');
+  set(boxes[6], 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
   return true;
 })()`);
 await sleep(200);
@@ -315,26 +341,24 @@ await sleep(500);
 const fillCard = (rows, longBackup) => ev(`(() => {
   const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
   let guard = 0;
-  while (document.querySelectorAll('#shutdown-card-tool .sc-contact').length / 2 < ${rows} && guard++ < 6) {
+  while (document.querySelectorAll('#shutdown-card-tool .sc-contact').length < ${rows} && guard++ < 6) {
     const btn = [...document.querySelectorAll('#shutdown-card-tool button')]
       .find((b) => b.textContent.trim() === '增加一位' && !b.disabled);
     if (!btn) break;
     btn.click();
   }
   const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
-  set(boxes[0], '編輯部共同約定 v2'); set(boxes[1], '2026-10-04');
+  set(boxes[0], '編輯部共同約定 2026-10-04');
   const backup = ${longBackup}
     ? '到住處樓下按門鈴，門牌是三樓之二，晚上七點以後通常在家。不在的話問一樓的鄰居，'
       + '他知道我大概什麼時候回來，也可以留話給他。真的找不到人就留紙條在信箱。'
     : '按門鈴';
   for (let i = 0; i < ${rows}; i += 1) {
-    set(boxes[2 + i * 3], '代號' + i);
-    set(boxes[3 + i * 3], '平常用的通訊軟體');
-    set(boxes[4 + i * 3], backup);
+    set(boxes[1 + i * 3], '代號' + i);
+    set(boxes[2 + i * 3], '平常用的通訊軟體');
+    set(boxes[3 + i * 3], backup);
   }
-  const rest = 2 + ${rows} * 3;
-  set(boxes[rest], '中正紀念堂五號出口');
-  set(boxes[rest + 1], '每日 18:00 到 19:00');
+  set(boxes[1 + ${rows} * 3], '中正紀念堂五號出口，每日 18:00 到 19:00');
   const pick = (name, n) => {
     const list = [...document.querySelectorAll('#shutdown-card-tool input[name="' + name + '"]')];
     if (!list[n]) return;
@@ -343,7 +367,7 @@ const fillCard = (rows, longBackup) => ev(`(() => {
   };
   pick('sc-triggerPrepare', 0);
   pick('sc-triggerActivate', 2);
-  return document.querySelectorAll('#shutdown-card-tool .sc-contact').length / 2;
+  return document.querySelectorAll('#shutdown-card-tool .sc-contact').length;
 })()`);
 
 // 量的是文字實際佔的高度與卡片扣掉內距之後的可用高度。不能用 scrollHeight：

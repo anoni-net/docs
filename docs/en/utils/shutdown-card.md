@@ -24,7 +24,9 @@ In that situation, fill in code names and one meeting point, and keep the rest i
 
 ## Why it comes in two parts
 
-What reaches the paper is code names, channels, one meeting point and two waiting times. What stays in the plan is each person's role and where to find them, the steps to take once contact is lost, who decides and who notifies, and the questions that confirm identity.
+What reaches the paper is code names, channels, one meeting point and two waiting times. What stays in the plan is who each person is and where to find them, the steps to take once contact is lost, and the questions that confirm identity.
+
+The card section is enough on its own: fill it in and you can print. The plan section is optional and takes a click to open. The smallest card that works is three contacts and one meeting point.
 
 Professional templates already work this way. The [Rory Peck Trust](https://rorypecktrust.org/get-help/safety/risk-assessment/creating-a-communications-plan/){target="_blank"} communications plan and proof-of-life document for freelance journalists are two separate files, not one. Wartime resistance networks followed the same logic: keep cells small, let each person know only their own single contact, so that an arrest gives up as little as possible.
 

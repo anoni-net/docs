@@ -60,6 +60,7 @@ const harness = `
   ${grab(/^  const BROADCAST_CHANNELS = [\s\S]*?;$/m)}
   ${grab(/^  const OFFLINE_CHANNELS = [\s\S]*?;$/m)}
   ${grab(/^  const FIELDS = \[[\s\S]*?\n  \];/m)}
+  ${grab(/^  const CARD_MINIMUM = .*$/m)}
   ${grab(/^  const CARD_LINE_UNITS = .*$/m)}
   ${grab(/^  const CARD_MAX_LINES = .*$/m)}
   ${grab(/^  const clean = [\s\S]*?;$/m)}
@@ -70,6 +71,7 @@ const harness = `
   ${grab(/^  function saveDraft\(state, stores\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function loadDraft\(stores\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function clearAll\(stores\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function hasContent\(state\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function triggerHours\(state, id\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function warnings\(state\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function cardLines\(state, t\) \{[\s\S]*?\n  \}/m)}
@@ -79,9 +81,9 @@ const harness = `
   ${grab(/^  function serializePlan\(state, t\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
   return { STORAGE_KEY, MODES, TRIGGERS, FIELDS, CARD_MAX_LINES, emptyState, filledContacts,
-           storagePlan, saveDraft, loadDraft, clearAll, triggerHours, warnings,
+           storagePlan, saveDraft, loadDraft, clearAll, hasContent, triggerHours, warnings,
            cardLines, cardHeight, visualWidth, serializeCard, serializePlan,
-           CARD_LINE_UNITS, STRINGS };
+           CARD_LINE_UNITS, CARD_MINIMUM, STRINGS };
 `;
 const tool = new Function(harness)();
 const t = tool.STRINGS['zh-TW'];
@@ -277,6 +279,18 @@ test('清除之後兩種儲存都沒有殘留', () => {
   assert.equal(tool.loadDraft(stores), null);
 });
 
+test('空白的表單不會留下草稿', () => {
+  // 按了清除之後畫面重建，重建的最後一步會存一次。沒有這個判斷的話，
+  // 儲存裡立刻又出現一份，使用者按了清除卻沒有真的清掉
+  assert.equal(tool.hasContent(tool.emptyState()), false);
+  const state = tool.emptyState();
+  state.contacts[0].codename = '阿明';
+  assert.equal(tool.hasContent(state), true);
+  const onlyMode = tool.emptyState();
+  onlyMode.mode = 'device';
+  assert.equal(tool.hasContent(onlyMode), false, '只切過儲存模式不算有內容');
+});
+
 test('清除只動這個工具的 key', () => {
   const stores = fakeStores();
   stores.local.setItem('anoni-lang', 'zh-TW');
@@ -315,21 +329,32 @@ test('完整計畫裡兩層都在', () => {
 
 test('驗證問題與行動步驟屬於計畫層', () => {
   // 這兩項如果被搬回卡片層，上面那條分艙測試就會失去意義，所以在這裡釘住
-  for (const id of ['verify', 'steps', 'decider', 'avoid']) {
+  for (const id of ['verify', 'steps']) {
     const field = tool.FIELDS.find((f) => f.id === id);
     assert.ok(field, `找不到欄位 ${id}`);
     assert.equal(field.layer, 'plan', `${id} 應該留在計畫層`);
   }
-  for (const id of ['contacts', 'meetPlace', 'triggerPrepare', 'triggerActivate']) {
+  for (const id of ['label', 'contacts', 'meet', 'triggerPrepare', 'triggerActivate']) {
     assert.equal(tool.FIELDS.find((f) => f.id === id).layer, 'card');
   }
 });
 
 test('聯絡人在卡片上只有代號，真名沒有欄位可以填', () => {
   assert.deepEqual(contactSpec.parts, ['codename', 'primary', 'backup']);
-  assert.deepEqual(contactSpec.planParts, ['role', 'reach']);
+  assert.deepEqual(contactSpec.planParts, ['who']);
   assert.equal(contactSpec.min, 3);
   assert.equal(contactSpec.max, 5);
+});
+
+test('卡片層的首見欄位數壓在使用者一眼掃得完的量', () => {
+  // 2026-09-01 的欄位審計把這一層從三十五個空格收到十來個。這條測試是那次審計的
+  // 守門員：日後每加一個欄位都要先過這裡，不會不知不覺又長回一整面牆
+  const card = tool.FIELDS.filter((f) => f.layer === 'card');
+  const inputs = card.reduce((n, f) =>
+    n + (f.kind === 'repeat' ? f.min * f.parts.length : 1), 0);
+  assert.ok(inputs <= 14, `卡片層一打開就看得到 ${inputs} 個欄位`);
+  assert.deepEqual(tool.CARD_MINIMUM, ['contacts', 'meet'],
+    '最小可用的一張卡是三位聯絡人加一個會合點');
 });
 
 test('空白的區塊不會留下只有標題的空段落', () => {
@@ -363,7 +388,7 @@ test('選了預設的啟動條件時輸出的是那個選項的文字', () => {
 
 test('備援管道跟主要管道填一樣會被指出來', () => {
   const state = tool.emptyState();
-  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: 'signal ', role: '', reach: '' };
+  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: 'signal ', who: '' };
   const hit = tool.warnings(state).find((w) => w.id === 'backup-same');
   assert.ok(hit, '主要與備援相同應該要提醒');
   assert.equal(hit.index, 0, '要指出是第幾筆');
@@ -371,7 +396,7 @@ test('備援管道跟主要管道填一樣會被指出來', () => {
 
 test('主要與備援都是網路服務時會被指出來', () => {
   const state = tool.emptyState();
-  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: 'Telegram', role: '', reach: '' };
+  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: 'Telegram', who: '' };
   assert.ok(tool.warnings(state).some((w) => w.id === 'backup-online'));
 });
 
@@ -380,7 +405,7 @@ test('備援填 mesh 類的工具會被指出來', () => {
   // 這幾個名字以前落在「不經網路」那一類，等於工具在替使用者背書
   for (const backup of ['Bridgefy', 'Briar', 'Meshtastic', '用藍牙傳']) {
     const state = tool.emptyState();
-    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, role: '', reach: '' };
+    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, who: '' };
     assert.ok(tool.warnings(state).some((w) => w.id === 'backup-mesh'),
       `備援填「${backup}」應該要提醒`);
   }
@@ -390,7 +415,7 @@ test('備援填廣播類會被指出來', () => {
   // 收得到廣播跟聯絡得到那個人是兩件事
   for (const backup of ['短波收音機', '聽廣播']) {
     const state = tool.emptyState();
-    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, role: '', reach: '' };
+    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, who: '' };
     assert.ok(tool.warnings(state).some((w) => w.id === 'backup-broadcast'),
       `備援填「${backup}」應該要提醒`);
   }
@@ -399,7 +424,7 @@ test('備援填廣播類會被指出來', () => {
 test('備援寫了不經過網路的方式就不再提醒', () => {
   for (const backup of ['到住處樓下按門鈴', '市話 02-1234-5678', '衛星電話']) {
     const state = tool.emptyState();
-    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, role: '', reach: '' };
+    state.contacts[0] = { codename: 'A', primary: 'Signal', backup, who: '' };
     const ids = tool.warnings(state).map((w) => w.id);
     for (const bad of ['backup-online', 'backup-mesh', 'backup-broadcast', 'backup-same']) {
       assert.ok(!ids.includes(bad), `備援填「${backup}」不該報 ${bad}`);
@@ -409,7 +434,7 @@ test('備援寫了不經過網路的方式就不再提醒', () => {
 
 test('兩段式時間的順序反了會被指出來', () => {
   const state = tool.emptyState();
-  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: '面交', role: '', reach: '' };
+  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: '面交', who: '' };
   state.triggerPrepare = 'd1';
   state.triggerActivate = 'h6';
   assert.ok(tool.warnings(state).some((w) => w.id === 'trigger-order'),
@@ -432,7 +457,7 @@ test('自訂的時間也看得懂，看不懂就不猜', () => {
 
 test('會合點、兩段時間與行動步驟沒填都會被指出來', () => {
   const state = tool.emptyState();
-  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: '面交', role: '', reach: '' };
+  state.contacts[0] = { codename: 'A', primary: 'Signal', backup: '面交', who: '' };
   const ids = tool.warnings(state).map((w) => w.id);
   assert.ok(ids.includes('no-meet'));
   assert.ok(ids.includes('no-trigger'));
@@ -449,10 +474,8 @@ test('驗證問題填了就提醒再確認沒有把答案寫進去', () => {
 test('卡片內容超過一張卡放得下的量會被指出來', () => {
   // 印出來才發現最後幾行被裁掉，而那時通常已經是需要卡片的時候
   const state = tool.emptyState();
-  state.label = '編輯部共同約定';
-  state.date = '2026-10-04';
-  state.meetPlace = '某某公園東側入口';
-  state.meetWindow = '每日 18:00 到 19:00';
+  state.label = '編輯部共同約定 2026-10-04';
+  state.meet = '某某公園東側入口，每日 18:00 到 19:00';
   state.triggerPrepare = 'h6';
   state.triggerActivate = 'd1';
   state.contacts = [];
@@ -464,7 +487,7 @@ test('卡片內容超過一張卡放得下的量會被指出來', () => {
       backup: '到住處樓下按門鈴，門牌是三樓之二，晚上七點以後通常在家。'
         + '不在的話問一樓的鄰居，他知道我大概什麼時候回來，也可以留話給他。'
         + '真的找不到人就留紙條在信箱，我每天回家都會看一次。',
-      role: '', reach: '',
+      who: '',
     });
   }
   assert.ok(tool.cardHeight(state, t) > tool.CARD_MAX_LINES,
@@ -529,7 +552,9 @@ test('每個欄位、選項與分層都有三語系的文案', () => {
     for (const key of ['card', 'plan']) {
       assert.ok(s.layers[key].title && s.layers[key].note, `${lang} 少了 ${key} 層的說明`);
     }
-    assert.ok(s.threatTitle && s.threatBody1 && s.threatBody2, `${lang} 少了威脅模型的說明`);
+    assert.ok(s.threatTitle && s.threatBody, `${lang} 少了威脅模型的說明`);
+    assert.ok(s.planInvite && s.planInviteNote, `${lang} 少了計畫層的邀請文案`);
+    assert.ok(s.avoidNote, `${lang} 少了不要在卡上管道談的提醒`);
   }
 });
 
