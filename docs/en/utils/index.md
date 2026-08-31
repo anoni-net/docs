@@ -30,6 +30,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Turn your answers to the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches flagged. Nothing is saved, and reloading clears it.
 
+-   :material-card-text-outline: **[Shutdown response card](shutdown-card.md)**
+
+    Fill in who you need to reach during a network outage, over which channels, where to meet, and how long to wait before acting. Print four copies on one sheet and cut them apart. Where the draft is kept is your choice.
+
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.

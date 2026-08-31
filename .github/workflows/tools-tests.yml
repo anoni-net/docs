@@ -145,6 +145,12 @@ jobs:
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs
 
+      # 斷網應變卡：草稿的三態暫存真的寫到使用者選的那一邊、切換與清除沒有殘留，
+      # 以及輸出不漏欄。這一頁收的是聯絡人與確認方式，存錯地方跟漏一欄都不會有
+      # 任何徵兆，而使用者要用到卡片的那天通常已經沒有網路可以回來重填。
+      - name: 斷網應變卡
+        run: node tools/test_shutdown_card.mjs
+
       # theme 資產的雜湊有沒有跟著 mkdocs-material 的版本一起換。忘了同步的話建置
       # 與 PR 都是綠的，只有線上的 HTML 會指向一批不存在的檔案，而那種壞法讀者清
       # 快取、重裝 PWA 都救不回來，因為錯的網址就寫在伺服器送出來的 HTML 裡。

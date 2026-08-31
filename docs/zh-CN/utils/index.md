@@ -30,6 +30,10 @@ icon: material/tools
 
     把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案不存起来，刷新就没了。
 
+-   :material-card-text-outline: **[断网应变卡](shutdown-card.md)**
+
+    把网络中断时要联系谁、用什么渠道、在哪里会合、多久没消息就行动，填成一张可以打印出来裁开分掉的卡。草稿存在哪里由你决定，随时清得掉。
+
 -   :material-dice-multiple-outline: **[密语与密码生成器](passphrase.md)**
 
     用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会显示生成出来的密码熵有多少。

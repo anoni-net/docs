@@ -104,6 +104,7 @@ nav:
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
       - utils/threat-model.md
+      - utils/shutdown-card.md
       - utils/passphrase.md
       - utils/qrcode.md
       - utils/qr-read.md
