@@ -1,6 +1,6 @@
 ---
 title: Open-source developers
-description: A participation path for open-source contributors. Four independent lines depending on what you have: running nodes, measurement analysis, campus deployments, and documentation.
+description: "A participation path for open-source contributors. Four independent lines depending on what you have: running nodes, measurement analysis, campus deployments, and documentation."
 icon: material/console
 ---
 
