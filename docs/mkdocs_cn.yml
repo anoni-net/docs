@@ -128,6 +128,7 @@ nav:
           - changelog/arti.md
           - changelog/ooni.md
           - changelog/onionshare.md
+          - changelog/ios.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
       # 关于我们是社群的一部分，收进去让第一层再短一项。放在 community/index.md
