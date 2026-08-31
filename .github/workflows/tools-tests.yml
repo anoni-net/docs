@@ -1,4 +1,7 @@
-# tools/ 底下那幾支測試的 CI。全部零外部相依，不需要建置產物，跑完不到十秒。
+# tools/ 底下那幾支測試的 CI。不需要建置產物，跑完不到十秒。
+#
+# 除了最後一支之外都零外部相依。check_shutdown_card.mjs 要 google-chrome，
+# ubuntu runner 本來就有，找不到時那支會自己跳過並回 0，不會擋人。
 #
 # 為什麼值得掛上來：這幾支守的都是「只在特定情境才會出錯、平常看不出來」的行為，
 # 而那正是抽樣測試守不住的一類。實際踩過的：
@@ -150,6 +153,13 @@ jobs:
       # 任何徵兆，而使用者要用到卡片的那天通常已經沒有網路可以回來重填。
       - name: 斷網應變卡
         run: node tools/test_shutdown_card.mjs
+
+      # 同一個工具在真的瀏覽器裡跑一次。單元測試餵替身驗得到 storagePlan 的決策，
+      # 驗不到接線：radio 換了而 state.mode 沒跟著改，畫面完全正常，資料寫到另一邊。
+      # 列印版面更是只有把媒體切成 print 再量 computed style 才驗得到，印出來才發現
+      # 站台頁首佔掉半張紙的話，紙已經印掉了。
+      - name: 斷網應變卡的瀏覽器行為與列印版面
+        run: node tools/check_shutdown_card.mjs
 
       # theme 資產的雜湊有沒有跟著 mkdocs-material 的版本一起換。忘了同步的話建置
       # 與 PR 都是綠的，只有線上的 HTML 會指向一批不存在的檔案，而那種壞法讀者清
