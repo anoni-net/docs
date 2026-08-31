@@ -32,7 +32,7 @@ icon: material/tools
 
 -   :material-card-text-outline: **[斷網應變卡](shutdown-card.md)**
 
-    把網路中斷時要聯絡誰、用什麼管道、在哪裡會合、多久沒消息就行動，填成一張可以印出來裁開分掉的卡。草稿存在哪裡由你決定，隨時清得掉。
+    把網路中斷時要聯絡誰、用什麼管道、在哪裡會合、多久沒消息就行動填成一張卡。印在紙上的只有代號與地點，怎麼確認身分與失聯之後要做什麼留在另一份計畫裡。
 
 -   :material-dice-multiple-outline: **[密語與密碼產生器](passphrase.md)**
 

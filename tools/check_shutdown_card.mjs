@@ -181,6 +181,26 @@ for (const lang of LANGS) {
       && cards[0].textContent === preview;
   })()`), await ev(`document.querySelectorAll('#shutdown-card-tool .sc-card').length`));
 
+  // 分艙。計畫那一層的內容填進畫面之後，卡片與列印容器都不該出現它。
+  // 單元測試驗的是 serializeCard 的輸出，這裡驗的是實際畫出來的那份
+  await ev(`(() => {
+    const areas = [...document.querySelectorAll('#shutdown-card-tool textarea')];
+    const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
+    set(areas[0], 'PLAN-STEPS-CHECK');
+    set(areas[1], 'PLAN-VERIFY-CHECK');
+    return areas.length;
+  })()`);
+  await sleep(150);
+  check('計畫層的內容不會流到卡片與紙上', await ev(`(() => {
+    const card = document.querySelectorAll('#shutdown-card-tool .sc-preview')[0].textContent;
+    const printed = [...document.querySelectorAll('#shutdown-card-tool .sc-card')]
+      .map((c) => c.textContent).join('');
+    const plan = document.querySelectorAll('#shutdown-card-tool .sc-preview')[1].textContent;
+    return !card.includes('PLAN-VERIFY-CHECK') && !card.includes('PLAN-STEPS-CHECK')
+      && !printed.includes('PLAN-VERIFY-CHECK') && !printed.includes('PLAN-STEPS-CHECK')
+      && plan.includes('PLAN-VERIFY-CHECK') && plan.includes('PLAN-STEPS-CHECK');
+  })()`));
+
   check('預設把草稿寫進 sessionStorage，另一邊不碰',
     await ev(`!!sessionStorage.getItem(KEY) && !localStorage.getItem(KEY)`),
     await ev(`[Object.keys(sessionStorage), Object.keys(localStorage)]`));
@@ -281,8 +301,93 @@ check('填進長字串之後畫面不會被撐寬', await ev(`(() => {
 })()`), await ev(`[document.documentElement.scrollWidth, document.documentElement.clientWidth]`));
 await send('Emulation.clearDeviceMetricsOverride');
 
+// 卡片容量的估算校準。純邏輯用「折行之後佔幾行」估，這裡把估的結果跟實際印出來
+// 會不會被裁掉對起來。兩邊對不上的話，使用者要嘛被無謂地擋、要嘛在印出來之後才
+// 發現最後幾行不見了
+console.log('\n[卡片容量估算與實際列印高度的校準]');
+// 視窗要設成 A4 的尺寸才量得準。headless 的列印模擬用的是視窗寬度而不是紙張寬度，
+// 預設視窗比 A4 寬，同一份內容折行較少，量出來的容量會偏樂觀
+await send('Emulation.setDeviceMetricsOverride',
+  { width: 794, height: 1123, deviceScaleFactor: 1, mobile: false });
+await send('Page.navigate', { url: `${base}/?lang=zh-TW` });
+await sleep(500);
+
+const fillCard = (rows, longBackup) => ev(`(() => {
+  const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
+  let guard = 0;
+  while (document.querySelectorAll('#shutdown-card-tool .sc-contact').length / 2 < ${rows} && guard++ < 6) {
+    const btn = [...document.querySelectorAll('#shutdown-card-tool button')]
+      .find((b) => b.textContent.trim() === '增加一位' && !b.disabled);
+    if (!btn) break;
+    btn.click();
+  }
+  const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
+  set(boxes[0], '編輯部共同約定 v2'); set(boxes[1], '2026-10-04');
+  const backup = ${longBackup}
+    ? '到住處樓下按門鈴，門牌是三樓之二，晚上七點以後通常在家。不在的話問一樓的鄰居，'
+      + '他知道我大概什麼時候回來，也可以留話給他。真的找不到人就留紙條在信箱。'
+    : '按門鈴';
+  for (let i = 0; i < ${rows}; i += 1) {
+    set(boxes[2 + i * 3], '代號' + i);
+    set(boxes[3 + i * 3], '平常用的通訊軟體');
+    set(boxes[4 + i * 3], backup);
+  }
+  const rest = 2 + ${rows} * 3;
+  set(boxes[rest], '中正紀念堂五號出口');
+  set(boxes[rest + 1], '每日 18:00 到 19:00');
+  const pick = (name, n) => {
+    const list = [...document.querySelectorAll('#shutdown-card-tool input[name="' + name + '"]')];
+    if (!list[n]) return;
+    list[n].checked = true;
+    list[n].dispatchEvent(new Event('change', { bubbles: true }));
+  };
+  pick('sc-triggerPrepare', 0);
+  pick('sc-triggerActivate', 2);
+  return document.querySelectorAll('#shutdown-card-tool .sc-contact').length / 2;
+})()`);
+
+// 量的是文字實際佔的高度與卡片扣掉內距之後的可用高度。不能用 scrollHeight：
+// 卡片是 overflow: hidden 的 grid item，量出來永遠等於 clientHeight，內容溢出多少
+// 都看不出來，這一點本身就踩過一次
+const overflowState = async () => {
+  await send('Emulation.setEmulatedMedia', { media: 'print' });
+  await sleep(200);
+  const r = await ev(`(() => {
+    const card = document.querySelector('#shutdown-card-tool .sc-card');
+    if (!card) return null;
+    const cs = getComputedStyle(card);
+    const range = document.createRange();
+    range.selectNodeContents(card);
+    const textH = range.getBoundingClientRect().height;
+    const inner = card.getBoundingClientRect().height
+      - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const lineH = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.6;
+    return {
+      warned: !!document.querySelector('#shutdown-card-tool .sc-warn-hard'),
+      cut: textH > inner + 1,
+      lines: Math.round(textH / lineH),
+      capacity: Math.floor(inner / lineH),
+    };
+  })()`);
+  await send('Emulation.setEmulatedMedia', { media: '' });
+  return r;
+};
+
+const three = await fillCard(3, false);
+const small = await overflowState();
+console.log(`    三位聯絡人、備援寫短：佔 ${small.lines} 行、卡片放得下 ${small.capacity} 行`);
+check('三位聯絡人放得下，而且工具沒有誤擋', !small.cut && !small.warned, small);
+
+const five = await fillCard(5, true);
+const big = await overflowState();
+console.log(`    ${five} 位聯絡人、備援寫成兩三句：佔 ${big.lines} 行、卡片放得下 ${big.capacity} 行`);
+check('內容超出時工具擋得下來', big.warned, big);
+check('工具說會超出時，實際列印也真的裝不下', !big.warned || big.cut, big);
+
 check('三個語系的狀態列文案各不相同', new Set(statusTexts).size === 3, statusTexts);
 check('全程沒有未處理的例外', errs.length === 0, errs);
+
+await send('Emulation.clearDeviceMetricsOverride');
 
 console.log(`\n${passed} 通過，${failed} 失敗`);
 process.exit(failed ? 1 : 0);

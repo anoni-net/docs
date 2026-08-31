@@ -32,7 +32,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-card-text-outline: **[Shutdown response card](shutdown-card.md)**
 
-    Fill in who you need to reach during a network outage, over which channels, where to meet, and how long to wait before acting. Print four copies on one sheet and cut them apart. Where the draft is kept is your choice.
+    Fill in who you need to reach during a network outage, over which channels, where to meet, and how long to wait before acting. What reaches the paper is code names and a place; how identity gets confirmed stays in a separate plan.
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
