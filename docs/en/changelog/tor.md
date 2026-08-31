@@ -8,6 +8,19 @@ icon: simple/torbrowser
 
 Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top. Each entry links back to the full translation.
 
+## Tor Browser 16.0a10 (alpha)
+
+> 2026-08-27 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a10/){target="_blank"}
+
+- The alpha channel is for testing only; regular users should stay on the stable channel (15.x).
+- New opt-in "Use generic window titles" setting, under Privacy and security → Advanced settings → Protections from third-party applications. With it enabled, every window title simply reads Tor Browser Alpha. Window titles normally track the page's `<title>` element, and other applications or the OS can read those changes without special permissions, which makes them a side channel for recording browsing history. The feature has been upstreamed, so vanilla Firefox users can set `privacy.exposeContentTitleInWindow` and `privacy.exposeContentTitleInWindow.pbm` to false in `about:config`. The Tor Project had hoped to enable it by default in 16.0, but held off over possible breakage with accessibility software and non-standard desktop environments.
+- The desktop built-in manual has been replaced with the Tor Project's updated support content, baked into the browser. Open it directly at `about:manual`, or through the "Learn more" links in the UI.
+- The settings page now uses Mozilla's redesigned `about:preferences` by default, with Tor Browser's own settings (connection, letterboxing, security level) migrated to the new design language.
+- Rebased the Firefox base onto 153.1.0esr (tor-browser#45205) and backported security fixes from Firefox 154 (tor-browser#45219).
+- Disabled locale-based font rules as defence in depth against fingerprinting (tor-browser#44257).
+- Updated NoScript to 13.6.31.90301984 and OpenSSL to 3.5.8.
+- `about:torconnect` now reports an error when the tor daemon crashes (tor-browser#43570), and bridge settings update when a connection fails (tor-browser#43939).
+
 ## Tor Browser 15.0.20
 
 > 2026-08-18 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}

@@ -1,6 +1,6 @@
 ---
 title: Software Changelog
-description: Concise English summaries of Tor, Tails, OONI, and Arti releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
+description: Concise English summaries of Tor, Tails, OONI, Arti, and OnionShare releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
 icon: material/history
 ---
 
@@ -16,3 +16,4 @@ Most of our release translations begin life in zh-TW and reach English on a roll
 - :material-usb-flash-drive-outline: [Tails changelog](./tails.md) — Tails operating system
 - :material-code-tags: [Arti changelog](./arti.md) — Tor Project's Rust implementation
 - :material-access-point-network: [OONI changelog](./ooni.md) — OONI Probe, Explorer, Run
+- :material-share-variant: [OnionShare changelog](./onionshare.md) — OnionShare file sharing and onion sites

@@ -145,6 +145,7 @@ nav:
           - changelog/tails.md
           - changelog/arti.md
           - changelog/ooni.md
+          - changelog/onionshare.md
   - !ENV [NAV_COMMUNITY, "社群"]:
       - community/index.md
       # 關於我們是社群的一部分，收進去讓第一層再短一項。放在 community/index.md

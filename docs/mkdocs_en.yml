@@ -125,6 +125,7 @@ nav:
           - changelog/tails.md
           - changelog/arti.md
           - changelog/ooni.md
+          - changelog/onionshare.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
       # About is part of the community section. Placed after community/index.md rather
