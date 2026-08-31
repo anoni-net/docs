@@ -1,6 +1,6 @@
 ---
 title: 软件更新日志
-description: Tor、Tails、OONI、Arti 各版本更新的中文重点整理，从上游 changelog 翻译而成，方便华语读者快速掌握每次发布的关键变更与安全修补。
+description: Tor、Tails、OONI、Arti、OnionShare 各版本更新的中文重点整理，从上游 changelog 翻译而成，方便华语读者快速掌握每次发布的关键变更与安全修补。
 icon: material/history
 ---
 
@@ -14,6 +14,7 @@ icon: material/history
 - :material-usb-flash-drive-outline: [Tails 更新日志](./tails.md)：Tails 操作系统
 - :material-code-tags: [Arti 更新日志](./arti.md)：Tor Project 的 Rust 实现
 - :material-access-point-network: [OONI 更新日志](./ooni.md)：OONI Probe、Explorer、Run
+- :material-share-variant: [OnionShare 更新日志](./onionshare.md)：OnionShare 文件分享与匿名网站
 
 ## 想找完整翻译文章
 
