@@ -57,11 +57,17 @@ The tool flags it once when both channels look like they need the internet, and 
 
 At least one backup should not go over the internet. Landlines and SMS stayed up in Cuba in 2021, in the first days after the 2021 coup in Myanmar, and in Iran in 2019, but Kashmir in August 2019 lost landlines, fixed broadband and mobile at the same time. A landline is not a guaranteed floor, it just fails under different conditions than the network.
 
-## The verification field takes questions only
+## How the verification questions actually work
 
-This field stays in the plan and never reaches the card, and the tool takes only the questions, not the answers.
+The situation is this: during an outage you get a message from someone claiming to be a person on your card, and you need to judge whether it really is them.
 
-An answer written down lets whoever finds it read the reply straight off the page. The established practice is that the person issuing the challenge does not know the correct response either, with the question and the answer held by different people. Kidnap-and-ransom negotiators use the same shape for proof-of-life forms: questions chosen by the subject, answers never circulated, each side holding one part.
+You ask a question only the two of you know the answer to. **The person doing the checking has to know the correct answer**, otherwise asking achieves nothing. So the answer has to be on your side. What it must not be is written next to the question, on something that can be found on you.
+
+The tool takes the questions and not the answers. Agree the answers in person and keep them in your heads. If you cannot hold them there, put them in a password manager or an encrypted note, kept apart from this plan. Then if the plan ends up in someone else's hands, what they have is a list of questions, and a question on its own gives away very little.
+
+Military challenge and password work the same way. Both sides agree the words beforehand, and the sentry knows the correct reply but does not offer it, waiting for the person approaching to say it first. On D-Day the challenge was "flash" and the password "thunder". Kidnap-and-ransom proof-of-life forms do write down both the questions and the answers, because the person holding that document is the negotiator who has to check the replies against it. The price is that the document has to be encrypted, access-controlled, and reviewed every three years.
+
+**One limit to know going in:** if you cannot remember the answers for three to five different people, the check fails at the moment you need it. Pick questions whose answers you are certain to retain. A shared experience holds better than a fact, so "how late was the train we waited for" beats "what number is your street".
 
 There is an adjacent thing the tool deliberately does not turn into a field: a duress code, the signal for "this message is not something I said freely". Professional training consistently says to memorise it rather than write it down, because once it leaks the defending side has no way of knowing, and goes on trusting a signal the other party can now produce at will.
 
