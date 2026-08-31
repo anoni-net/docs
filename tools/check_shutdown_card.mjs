@@ -373,6 +373,12 @@ const overflowState = async () => {
   return r;
 };
 
+// 只驗一個方向：工具說放得下的時候，實際列印一定放得下。
+//
+// 反過來那個方向（工具說會超出、實際也超出）在不同機器上不成立，因為折行取決於
+// 中文字實際渲染出來多寬，而那要看系統裝了哪些字型。同一份內容在有中文字型的
+// 桌機上佔 27 行，在沒有中文字型的 CI runner 上只佔 17 行。估算因此刻意取保守值，
+// 寧可偶爾多提醒一次，也不要讓使用者以為放得下、印出來卻少了最後幾行。
 const three = await fillCard(3, false);
 const small = await overflowState();
 console.log(`    三位聯絡人、備援寫短：佔 ${small.lines} 行、卡片放得下 ${small.capacity} 行`);
@@ -380,9 +386,10 @@ check('三位聯絡人放得下，而且工具沒有誤擋', !small.cut && !smal
 
 const five = await fillCard(5, true);
 const big = await overflowState();
-console.log(`    ${five} 位聯絡人、備援寫成兩三句：佔 ${big.lines} 行、卡片放得下 ${big.capacity} 行`);
+console.log(`    ${five} 位聯絡人、備援寫成兩三句：佔 ${big.lines} 行、卡片放得下 ${big.capacity} 行`
+  + `，工具${big.warned ? '有' : '沒有'}提醒`);
 check('內容超出時工具擋得下來', big.warned, big);
-check('工具說會超出時，實際列印也真的裝不下', !big.warned || big.cut, big);
+check('沒有被工具擋下來的內容，實際列印一定放得下', big.warned || !big.cut, big);
 
 check('三個語系的狀態列文案各不相同', new Set(statusTexts).size === 3, statusTexts);
 check('全程沒有未處理的例外', errs.length === 0, errs);
