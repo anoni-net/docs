@@ -127,6 +127,7 @@ nav:
           - changelog/ooni.md
           - changelog/onionshare.md
           - changelog/ios.md
+          - changelog/grapheneos.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
       # About is part of the community section. Placed after community/index.md rather

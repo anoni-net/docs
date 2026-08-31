@@ -1,6 +1,6 @@
 ---
 title: 軟體更新日誌
-description: Tor、Tails、OONI、Arti、OnionShare 與 iOS 各版本更新的中文重點整理，從上游 changelog 翻譯而成，方便台灣與華語讀者快速掌握每次發布的關鍵變更與安全修補。
+description: Tor、Tails、OONI、Arti、OnionShare、iOS 與 GrapheneOS 各版本更新的中文重點整理，從上游 changelog 翻譯而成，方便台灣與華語讀者快速掌握每次發布的關鍵變更與安全修補。
 icon: material/history
 ---
 
@@ -23,6 +23,7 @@ icon: material/history
 
 - :material-usb-flash-drive-outline: [Tails 更新日誌](./tails.md)：Tails 作業系統
 - :material-apple-ios: [iOS 安全更新](./ios.md)：iPhone 與 iPad，含急迫程度與舊機支援狀況
+- :material-cellphone-lock: [GrapheneOS 月度更新摘要](./grapheneos.md)：Pixel 上的強化 Android，按月聚合
 
 ## 想找完整翻譯文章
 
