@@ -1,6 +1,6 @@
 ---
 title: iOS Security Updates
-description: Plain-language summaries of iPhone and iPad security updates: what each one fixes, whether you need to install it now, and which older models still get patches.
+description: "Plain-language summaries of iPhone and iPad security updates: what each one fixes, whether you need to install it now, and which older models still get patches."
 icon: material/apple-ios
 ---
 

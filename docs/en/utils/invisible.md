@@ -1,6 +1,6 @@
 ---
 title: Invisible character detector
-description: Find characters that are present but not visible: zero-width characters, bidirectional controls, tag characters, and homoglyphs mixed into Latin text. Everything happens in your browser and it works with the network off.
+description: "Find characters that are present but not visible: zero-width characters, bidirectional controls, tag characters, and homoglyphs mixed into Latin text. Everything happens in your browser and it works with the network off."
 icon: material/format-letter-matches
 ---
 
