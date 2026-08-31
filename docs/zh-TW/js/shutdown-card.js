@@ -329,14 +329,30 @@
     @media (pointer: coarse) {
       #shutdown-card-tool button { min-height: 2.2rem; }
       #shutdown-card-tool .sc-choice { padding: .4rem 0; }
+      /* iOS Safari 在字級小於 16px 的輸入框聚焦時，會自動把整頁放大到那一欄，
+         而且退出之後不會縮回去。使用者看到的是填一填版面就被撐開，跟工具壞掉
+         沒有兩樣。16px 是那個門檻，剛好踩線的 15.2px 一樣會被放大。 */
+      #shutdown-card-tool input[type="text"],
+      #shutdown-card-tool textarea { font-size: 16px; }
     }
     @media print {
-      body * { visibility: hidden !important; }
-      #shutdown-card-tool .sc-print,
-      #shutdown-card-tool .sc-print * { visibility: visible !important; }
+      /* 只留下從 body 到卡片的那一條路徑，路徑外的東西一律 display: none。
+         原本用的是 visibility: hidden，那會把版面高度留著：紙上第一張是四張
+         卡，後面跟著五到六張空白紙，而印之前沒有人看得出來。 */
+      body > *:not(.md-container),
+      .md-container > *:not(.md-main),
+      .md-main > *:not(.md-main__inner),
+      .md-main__inner > *:not(.md-content),
+      .md-content > *:not(.md-content__inner),
+      .md-content__inner > *:not(#shutdown-card-tool),
+      #shutdown-card-tool > *:not(.sc-print) { display: none !important; }
+      .md-container, .md-main, .md-main__inner, .md-content, .md-content__inner {
+        display: block !important; margin: 0 !important; padding: 0 !important;
+        max-width: none !important; width: auto !important;
+      }
+      #shutdown-card-tool { margin: 0 !important; }
       #shutdown-card-tool .sc-print {
         display: grid !important;
-        position: absolute; left: 0; top: 0; width: 100%;
         grid-template-columns: 1fr 1fr; grid-auto-rows: 132mm; gap: 0;
       }
       #shutdown-card-tool .sc-card {
@@ -441,7 +457,8 @@
       previewTitle: "卡片內容",
       empty: "填幾欄之後，卡片的內容會出現在這裡。",
       print: "列印，一張 A4 四張卡",
-      printNote: "紙上只會有四張卡，表單與網站的頁首頁尾都不會印出來。四張內容一樣，裁開分給約定裡的其他人。",
+      printBusy: "準備列印",
+      printNote: "紙上只會有四張卡，表單與網站的頁首頁尾都不會印出來。四張內容一樣，裁開分給約定裡的其他人。手機上按了之後要等幾秒，列印選項通常在分享選單裡。",
       download: "下載純文字",
       downloadName: "shutdown-card.txt",
       afterOutput: "已經輸出。要清掉這台裝置上的草稿嗎",
@@ -535,7 +552,8 @@
       previewTitle: "卡片内容",
       empty: "填几栏之后，卡片的内容会出现在这里。",
       print: "打印，一张 A4 四张卡",
-      printNote: "纸上只会有四张卡，表单与站点的页眉页脚都不会打印出来。四张内容一样，裁开分给约定里的其他人。",
+      printBusy: "准备打印",
+      printNote: "纸上只会有四张卡，表单与站点的页眉页脚都不会打印出来。四张内容一样，裁开分给约定里的其他人。手机上按了之后要等几秒，打印选项通常在分享菜单里。",
       download: "下载纯文本",
       downloadName: "shutdown-card.txt",
       afterOutput: "已经输出。要清掉这台设备上的草稿吗",
@@ -629,7 +647,8 @@
       previewTitle: "Card content",
       empty: "Fill in a few fields and the card content appears here.",
       print: "Print, four cards per A4 sheet",
-      printNote: "Only the four cards reach the paper. The form and the site header and footer are left out. All four are identical, so cut them apart and hand them to the others in the agreement.",
+      printBusy: "Preparing",
+      printNote: "Only the four cards reach the paper. The form and the site header and footer are left out. All four are identical, so cut them apart and hand them to the others in the agreement. On a phone it takes a few seconds, and the print option usually sits in the share menu.",
       download: "Download as plain text",
       downloadName: "shutdown-card.txt",
       afterOutput: "Output done. Clear the draft from this device?",
@@ -924,9 +943,31 @@
 
   const actions = el("div", "sc-row");
   const printButton = el("button", null, t.print);
+  // 手機上按下去到系統的列印畫面跳出來之間有好幾秒完全沒有反應，讀者合理的
+  // 反應是再按一次。轉圈要在呼叫 print 之前就畫出來，而 print 在桌機是同步
+  // 阻塞的，同一個 tick 裡設好狀態畫面不會更新，所以隔兩層 rAF 才呼叫。
   printButton.addEventListener("click", () => {
+    if (printButton.disabled) return;
     renderPreview();
-    window.print();
+    printButton.disabled = true;
+    printButton.textContent = "";
+    printButton.appendChild(el("span", "anoni-spinner"));
+    printButton.appendChild(el("span", null, t.printBusy));
+    printButton.setAttribute("aria-busy", "true");
+    const done = () => {
+      printButton.removeAttribute("aria-busy");
+      printButton.disabled = false;
+      printButton.textContent = t.print;
+    };
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      try {
+        window.print();
+      } finally {
+        // 桌機的 print 回來時已經印完，手機是非同步的，這裡只負責把按鈕恢復。
+        // 紙上印什麼由 CSS 決定，不受這個計時器影響
+        window.setTimeout(done, 600);
+      }
+    }));
   });
   const downloadButton = el("button", null, t.download);
   downloadButton.addEventListener("click", () => {

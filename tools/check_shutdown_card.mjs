@@ -45,13 +45,28 @@ try {
   process.exit(0);
 }
 
-// 頁面外殼。.md-header 是站台頁首的替身，列印時它要跟著被藏起來，
-// 那條規則寫的是 body *，只驗工具自己的元素驗不到它有沒有波及整頁。
+// 頁面外殼。這裡照抄 mkdocs-material 的祖先鏈（body > .md-container > .md-main >
+// .md-main__inner > .md-content > article.md-content__inner > 工具），因為列印那組
+// 規則就是沿著這條路徑一層一層把旁邊的東西關掉的，鏈少一層就驗不到它有沒有生效。
+//
+// 長內容那一段是必要的。空白頁那個 bug 的樣子是「第一張紙有四張卡、後面跟著五六
+// 張空白」，成因是原本用 visibility: hidden 把東西藏起來，版面高度還留著。文章
+// 短的話高度本來就不到一頁，改壞了也看不出來。
+const FILLER = Array.from({ length: 60 }, (_, i) =>
+  `<p>第 ${i + 1} 段內文，用來把文章撐到好幾頁高，列印時這一段不該出現在紙上。</p>`).join('\n');
+
 const page = (lang) => `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"></head>
 <body>
 <header class="md-header">站台頁首</header>
-<div class="md-content"><div id="shutdown-card-tool"></div></div>
+<div class="md-container"><main class="md-main"><div class="md-main__inner md-grid">
+<div class="md-sidebar">側欄</div>
+<div class="md-content"><article class="md-content__inner md-typeset">
+<h1>斷網應變卡</h1>
+<div id="shutdown-card-tool"></div>
 <script src="/shutdown-card.js"></script>
+${FILLER}
+</article></div>
+</div></main></div>
 </body></html>`;
 
 const srv = http.createServer((req, res) => {
@@ -205,12 +220,59 @@ for (const lang of LANGS) {
     return s.display === 'grid' && s.visibility === 'visible'
       && s.gridTemplateColumns.split(' ').length === 2;
   })()`));
+  // 量的是 rect 而不是 computed display：被藏起來的是表單的外層容器，
+  // fieldset 自己的 display 照樣是 block，只是祖先沒了所以佔不到版面
   check('列印時表單本身不上紙',
-    await ev(`getComputedStyle(document.querySelector('#shutdown-card-tool fieldset')).visibility === 'hidden'`));
-  check('列印時站台的頁首不上紙',
-    await ev(`getComputedStyle(document.querySelector('.md-header')).visibility === 'hidden'`));
+    await ev(`document.querySelector('#shutdown-card-tool fieldset').getBoundingClientRect().height === 0`));
+  check('列印時站台的頁首與側欄不上紙', await ev(`
+    getComputedStyle(document.querySelector('.md-header')).display === 'none'
+    && getComputedStyle(document.querySelector('.md-sidebar')).display === 'none'`));
+  check('列印時文章本文不上紙',
+    await ev(`getComputedStyle(document.querySelector('.md-content__inner h1')).display === 'none'`));
+  // 空白頁的回歸檢查。用 visibility 藏東西的話版面高度會留著，卡片後面跟著五六
+  // 張空白紙，而那是印出來才會發現的
+  check('列印時整份文件收斂成卡片那一頁', await ev(`(() => {
+    const doc = document.documentElement.scrollHeight;
+    const cards = document.querySelector('#shutdown-card-tool .sc-print').getBoundingClientRect().height;
+    return doc <= cards + 40;
+  })()`), await ev(`[document.documentElement.scrollHeight,
+    Math.round(document.querySelector('#shutdown-card-tool .sc-print').getBoundingClientRect().height)]`));
   await send('Emulation.setEmulatedMedia', { media: '' });
 }
+
+// 手機。iOS Safari 在字級小於 16px 的輸入框聚焦時會自動放大整頁而且不縮回來，
+// 使用者看到的是填一填版面就被撐開。Chrome 不會這樣做，所以這一項只能量字級，
+// 量不到症狀本身
+console.log('\n[手機視窗 390 × 844，觸控]');
+await send('Emulation.setDeviceMetricsOverride',
+  { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
+await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+await send('Page.navigate', { url: `${base}/?lang=zh-TW` });
+await sleep(500);
+
+check('觸控裝置上的輸入框字級不小於 16px', await ev(`(() => {
+  const px = (el) => parseFloat(getComputedStyle(el).fontSize);
+  return matchMedia('(pointer: coarse)').matches
+    && px(document.querySelector('#shutdown-card-tool input[type=text]')) >= 16
+    && px(document.querySelector('#shutdown-card-tool textarea')) >= 16;
+})()`), await ev(`[matchMedia('(pointer: coarse)').matches,
+  getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize]`));
+
+await ev(`(() => {
+  const set = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
+  const boxes = [...document.querySelectorAll('#shutdown-card-tool input[type=text]')];
+  set(boxes[0], '編輯部共同約定 v2');
+  set(boxes[2], '阿明'); set(boxes[3], 'Signal'); set(boxes[4], '到住處樓下按門鈴');
+  set(boxes[5], '小美'); set(boxes[6], 'https://example.org/a/very/long/path/without-any-spaces-1234567890');
+  set(boxes[7], 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+  return true;
+})()`);
+await sleep(200);
+check('填進長字串之後畫面不會被撐寬', await ev(`(() => {
+  const doc = document.documentElement;
+  return doc.scrollWidth <= doc.clientWidth + 1;
+})()`), await ev(`[document.documentElement.scrollWidth, document.documentElement.clientWidth]`));
+await send('Emulation.clearDeviceMetricsOverride');
 
 check('三個語系的狀態列文案各不相同', new Set(statusTexts).size === 3, statusTexts);
 check('全程沒有未處理的例外', errs.length === 0, errs);

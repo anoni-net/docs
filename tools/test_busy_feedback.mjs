@@ -61,6 +61,10 @@ const WAITS = [
     file: 'zh-TW/js/passphrase.js',
     why: '七千多個詞的詞表要抓回來',
   },
+  {
+    file: 'zh-TW/js/shutdown-card.js',
+    why: '按下列印到系統的列印畫面跳出來之間，手機上有好幾秒完全沒有反應',
+  },
 ];
 
 const read = (rel) => fs.readFileSync(path.join(DOCS, rel), 'utf8');
