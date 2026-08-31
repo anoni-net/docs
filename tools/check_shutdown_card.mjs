@@ -150,6 +150,13 @@ for (const lang of LANGS) {
     await ev(`!!document.querySelector('#shutdown-card-tool .sc-status p').textContent.trim()`));
   check('確認本人那一欄的敏感提示常駐',
     await ev(`!!document.querySelector('#shutdown-card-tool .sc-sensitive')`));
+  // 桌機也要 16px。站上用的是 max(16px, .76rem) 而不是把它塞進 pointer: coarse，
+  // 因為觸控筆電與 iPad 的桌面模式都會讓那個媒體查詢對不上，而代價只是字大一點
+  check('輸入框字級不小於 16px', await ev(`(() => {
+    const px = (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).fontSize);
+    return px('#shutdown-card-tool input[type=text]') >= 16
+      && px('#shutdown-card-tool textarea') >= 16;
+  })()`), await ev(`getComputedStyle(document.querySelector('#shutdown-card-tool input[type=text]')).fontSize`));
   statusTexts.push(await ev(`document.querySelector('#shutdown-card-tool .sc-status p').textContent`));
 
   // 填一位聯絡人，兩個管道都填通訊軟體

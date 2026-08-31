@@ -273,7 +273,10 @@
     }
     #shutdown-card-tool .sc-choice input { margin: .35rem 0 0; flex: none; }
     #shutdown-card-tool input[type="text"], #shutdown-card-tool textarea {
-      font: inherit; font-size: .76rem; color: inherit; background: transparent;
+      font: inherit; color: inherit; background: transparent;
+      /* iOS 在輸入框字級小於 16px 時一聚焦就放大整頁，而且退出之後不會縮回去，
+         使用者看到的是填一填版面就被撐開。跟 cleanurl.js、qrcode.js 同一個處理 */
+      font-size: max(16px, .76rem);
       border: .05rem solid var(--md-default-fg-color--lighter); border-radius: .1rem;
       padding: .3rem .4rem; width: 100%; box-sizing: border-box; margin: .2rem 0 .6rem;
     }
@@ -329,11 +332,6 @@
     @media (pointer: coarse) {
       #shutdown-card-tool button { min-height: 2.2rem; }
       #shutdown-card-tool .sc-choice { padding: .4rem 0; }
-      /* iOS Safari 在字級小於 16px 的輸入框聚焦時，會自動把整頁放大到那一欄，
-         而且退出之後不會縮回去。使用者看到的是填一填版面就被撐開，跟工具壞掉
-         沒有兩樣。16px 是那個門檻，剛好踩線的 15.2px 一樣會被放大。 */
-      #shutdown-card-tool input[type="text"],
-      #shutdown-card-tool textarea { font-size: 16px; }
     }
     @media print {
       /* 只留下從 body 到卡片的那一條路徑，路徑外的東西一律 display: none。
