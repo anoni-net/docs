@@ -78,6 +78,7 @@ nav:
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
           - "撰寫中（2026 Q3）":
+              - scenarios/shutdown.md
               - scenarios/domestic-violence.md
               - scenarios/election-observer.md
       - !ENV [NAV_ADVANCED, "進階"]:
