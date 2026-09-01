@@ -22,14 +22,14 @@ All three are in Tor Browser's connection settings, with nothing extra to instal
 
 > 2026-07-23 · [Project page](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
 
-- Adds Debian packages, so people running a WebTunnel bridge no longer have to build it themselves.
+- Only affects people running their own WebTunnel bridge; ordinary users are unaffected. Adds Debian packages, so bridge operators no longer have to build it themselves.
 - WebTunnel does not maintain a separate changelog. Entries here are assembled from version tags and commit messages, so they carry less detail than the other two projects.
 
 ## WebTunnel 0.0.5
 
 > 2026-07-02 · [Project page](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
 
-- Adds a Trusted Proxy Hops setting. When a bridge sits behind a CDN or reverse proxy, this decides how many layers of forwarding headers to trust, which determines whether the client address you record is the real one.
+- Only affects people running their own bridge: adds a Trusted Proxy Hops setting. When a bridge sits behind a CDN or reverse proxy, this decides how many layers of forwarding headers to trust, which determines whether the client address you record is the real one.
 
 ## Snowflake 2.14.1
 

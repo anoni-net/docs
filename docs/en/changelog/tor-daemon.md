@@ -12,7 +12,7 @@ Newest at the top. Source data comes from the official [ChangeLog](https://gitla
 
 ## How we rate urgency
 
-- <span class="urg-tag urg-tag--now">Now</span>Marked by upstream as a security release, usually carrying TROVE identifiers. Relays and onion services are long-lived targets, and issues at this level are usually remotely reachable.
+- <span class="urg-tag urg-tag--now">Now</span>Marked by upstream as a security release, usually carrying TROVE identifiers (the numbering the Tor Project uses when disclosing security issues). Relays and onion services are long-lived targets, and issues at this level are usually remotely reachable.
 - <span class="urg-tag urg-tag--soon">Soon</span>Affects connection quality or network health without a remotely exploitable security issue.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else.
 
@@ -23,6 +23,10 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 ## Two maintenance lines
 
 `0.4.9.x` is the current line and `0.4.8.x` is long-term support, with security fixes backported to both. Distribution packages often sit on 0.4.8.x, so seeing two versions ship the same day is normal. Which one you install depends on your package source.
+
+## What conflux is
+
+Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
 
 ## tor 0.4.9.11
 
@@ -38,7 +42,7 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 > 2026-06-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.10/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">Now</span>A security release upstream strongly recommends installing promptly.
-- TROVE-2026-025: rejects a `CONFLUX_LINK` cell arriving on a circuit that already has attached streams. A malicious client could send `RELAY_COMMAND_BEGIN` before `CONFLUX_LINK`, leaving the attached exit stream orphaned with a dangling circuit back-pointer, and a use-after-free when the circuit is freed (bug 41258).
+- TROVE-2026-025: rejects a `CONFLUX_LINK` cell arriving on a circuit that already has attached streams. A malicious client could send `RELAY_COMMAND_BEGIN` before `CONFLUX_LINK`, leaving the attached exit stream orphaned with a dangling circuit back-pointer, and a use-after-free when the circuit is freed, meaning memory handed back and then used again, which crashes the relay (bug 41258).
 - Restores the warning about unsafe SOCKS protocols (socks4, or socks5 without a hostname) when `SafeSocks` is unset. The warning had been silently missing, and what it guards against is leaking the name you are resolving beyond your own machine (bug 41290).
 - Entry guards expire consistently at 48 to 60 days again.
 
@@ -64,7 +68,7 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 > 2026-05-06 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.7/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">Now</span>A security release shipped on both maintenance lines.
-- TROVE-2026-011: an out-of-bounds read handling END, TRUNCATE, and TRUNCATED cells whose payload carries no reason field. The bug had been present since 0.1.1.1-alpha (bug 41254).
+- TROVE-2026-011: an out-of-bounds read handling END, TRUNCATE, and TRUNCATED cells whose payload carries no reason field, meaning it reads memory it should not, which can crash the relay or leak memory contents. The bug had been present since 0.1.1.1-alpha (bug 41254).
 - TROVE-2026-008: no longer attempts or accepts `BEGIN_DIR` over conflux legs (bug 41243).
 - TROVE-2026-010: corrects accounting when clearing the conflux out-of-order queue (bug 41251).
 

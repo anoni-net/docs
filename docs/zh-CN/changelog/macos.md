@@ -13,7 +13,7 @@ Mac 的安全更新整理。Apple 一次更新动辄上百个 CVE，逐条读完
 ## 紧急程度怎么判断
 
 - <span class="urg-tag urg-tag--now">立刻</span>Apple 在公告里标注该问题可能已被实际利用，或漏洞被美国 CISA 的已知遭利用漏洞目录收录。看到这一级，当天就更新。
-- <span class="urg-tag urg-tag--soon">尽快</span>修补涵盖 WebKit 或 Kernel 的内存损坏类问题，或有取得 root 权限、绕过 Gatekeeper 与隐私偏好的项目。几天内更新。
+- <span class="urg-tag urg-tag--soon">尽快</span>修补涵盖 WebKit 或 Kernel 的内存损坏类问题（程序写错内存位置，攻击者可以借此塞进自己的代码执行），或有取得 root 权限（系统的最高控制权）、绕过 Gatekeeper 与隐私偏好的项目。几天内更新。
 - <span class="urg-tag urg-tag--routine">一般</span>其余修补，跟着平常的节奏更新即可。
 
 颜色回答的是「该多快处理」。「有没有人已经在利用」是另一个维度，每一则条目都会写明。这一页的「立刻」需要证据，也就是 Apple 自己标注可能已被实际利用，或漏洞进了 CISA 的目录。

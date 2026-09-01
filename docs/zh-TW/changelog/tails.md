@@ -11,7 +11,7 @@ icon: material/usb-flash-drive-outline
 ## 急迫程度怎麼判斷
 
 - <span class="urg-tag urg-tag--now">立刻</span>Tails 官方發出的緊急安全釋出，版本號帶第三碼（例如 7.10.1）。上游判斷不能等到下次排程，代表漏洞後果嚴重。
-- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，但修補涵蓋核心提權、sandbox 逃逸或 Tor Browser 的重要安全更新。
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，但修補涵蓋核心提權（程式取得系統最高權限）、沙箱逃逸（程式突破隔離環境，碰到系統其他部分）或 Tor Browser 的重要安全更新。
 - <span class="urg-tag urg-tag--routine">一般</span>其餘例行版本，以功能與硬體支援為主。
 
 Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等於失去匿名保護，攻擊者看得到你在 Tails 裡做的每一件事，所以這一頁的「立刻」比其他頁更值得當真。
@@ -89,8 +89,8 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">儘快</span>Tor Browser 升至 15.0.14（基於 Firefox ESR 140.11）。
-- 修補 Linux 核心本機提權漏洞「Fragnesia」（同步緩解「Drity Frag」）。此類漏洞可讓 Tails 內的應用程式取得管理員權限，配合其他未知漏洞可能被用於完整接管 Tails 並進行去匿名化。
-- 修補 Flatpak 透過 Yelp 逃逸 sandbox 的問題，yelp 升至 42.2-4tails1。
+- 修補 Linux 核心本機提權漏洞「Fragnesia」（同步緩解「Dirty Frag」）。此類漏洞可讓 Tails 內的應用程式取得管理員權限，配合其他未知漏洞可能被用於完整接管 Tails 並進行去匿名化。
+- 修補 Flatpak 透過 Yelp 逃逸沙箱的問題，yelp 升至 42.2-4tails1。
 - 修補 CVE-2026-46529（evince）、CVE-2026-41989（libgcrypt20）、CVE-2026-41054（haveged）。
 - 移除內建 Thunderbird。仍可透過 Persistent Storage 的 additional software 自動安裝，每次啟動 Tails 時拉取 Debian 倉庫的最新版本。原因是 Tails 釋出節奏跟著 Firefox，Debian 的 Thunderbird 新版通常稍晚才到，過去導致 Tails 內建版本常帶已知漏洞。
 - 底層升級至 Debian Trixie 13.5。

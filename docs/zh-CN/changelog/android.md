@@ -49,7 +49,7 @@ Android 设备的实际补丁级别由手机厂决定，跟 Google 公告的日�
 > 补丁级别 2026-06-01 与 2026-06-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-06-01){target="_blank"} · [GrapheneOS 发布页](https://grapheneos.org/releases){target="_blank"}
 
 - 这是最后一个公开明细完整的月份，Google 公告列出 119 个 CVE，GrapheneOS 那侧统计为 105 个。
-- **CVE-2025-48595** 被标为可能正在被有限、针对性地利用。它在 Framework 组件，类型是提权，严重度 High，影响 Android 14、15、16 与 16-qpr2。Google 用「有限、针对性」这个说法时，背后通常是商业间谍软件对特定对象发动的攻击，记者与人权工作者是常见的目标。
+- **CVE-2025-48595** 被标为可能正在被有限、针对性地利用。它在 Framework 组件，类型是提权（让程序取得比原本更高的系统权限），严重度 High，影响 Android 14、15、16 与 16-qpr2。Google 用「有限、针对性」这个说法时，背后通常是商业间谍软件对特定对象发动的攻击，记者与人权工作者是常见的目标。**工作性质属于这一类的人，请比照其他页面的「立刻」处理**：确认自己的设备补丁级别已经到 2026-06-05 或更新，没到就先别用它处理敏感联络。
 - 组件分布：System 37 个、Framework 30 个、Qualcomm 闭源组件 19 个、Unisoc 16 个、MediaTek 11 个。
 - 类型分布：提权 41 个、拒绝服务 22 个、信息泄露 7 个、远程执行代码 2 个。提权占最多是 Android 的常态，攻击链通常先取得执行机会，再靠提权升到系统权限。
 - 6 月 18 日的 2026-06-05 级别随 Android 17 一起发布。
@@ -59,7 +59,7 @@ Android 设备的实际补丁级别由手机厂决定，跟 Google 公告的日�
 > 补丁级别 2026-05-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-05-01){target="_blank"} · [GrapheneOS 发布页](https://grapheneos.org/releases){target="_blank"}
 
 - 涵盖 111 个 CVE，其中 18 个 Critical、92 个 High。
-- GrapheneOS 在这个月的硬件内存标记抓到 Broadcom Wi-Fi 驱动的 use-after-free 与 DisplayPort 驱动的越界读取，那些是上游没发现的问题。
+- GrapheneOS 在这个月的硬件内存标记抓到 Broadcom Wi-Fi 驱动的 use-after-free（程序把内存还回去之后又拿来用，可能被塞进恶意代码）与 DisplayPort 驱动的越界读取（读到不该读的内存，可能泄漏别的程序的数据），那些是上游没发现的问题。
 
 ## 2026 年 4 月
 

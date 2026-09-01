@@ -49,7 +49,7 @@ Vendor support periods vary widely. Checking a model's committed support window 
 > Patch levels 2026-06-01 and 2026-06-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-06-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
 
 - The last month with complete public details. Google's bulletin lists 119 CVEs; GrapheneOS counts 105 on their side.
-- **CVE-2025-48595** was flagged as possibly under limited, targeted exploitation. It sits in the Framework component, is an elevation of privilege, rated High, affecting Android 14, 15, 16, and 16-qpr2. When Google uses the phrase "limited, targeted", what usually sits behind it is commercial spyware aimed at specific individuals, and journalists and human rights workers are common targets.
+- **CVE-2025-48595** was flagged as possibly under limited, targeted exploitation. It sits in the Framework component, is an elevation of privilege (a program obtaining higher system privileges than it started with), rated High, affecting Android 14, 15, 16, and 16-qpr2. When Google uses the phrase "limited, targeted", what usually sits behind it is commercial spyware aimed at specific individuals, and journalists and human rights workers are common targets. **If your work falls into that category, treat this entry as a "Now" in the sense the other pages use**: confirm your device is on patch level 2026-06-05 or later, and until it is, avoid handling sensitive contacts on it.
 - Component split: System 37, Framework 30, Qualcomm closed-source 19, Unisoc 16, MediaTek 11.
 - Type split: 41 elevation of privilege, 22 denial of service, 7 information disclosure, 2 remote code execution. Elevation of privilege dominating is normal for Android: an attack chain usually gets code running first, then uses privilege escalation to reach system level.
 - The 2026-06-05 level shipped on 18 June alongside Android 17.
@@ -59,7 +59,7 @@ Vendor support periods vary widely. Checking a model's committed support window 
 > Patch level 2026-05-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-05-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
 
 - Covers 111 CVEs: 18 Critical and 92 High.
-- GrapheneOS hardware memory tagging caught a use-after-free in the Broadcom Wi-Fi driver and an out-of-bounds read in the DisplayPort driver that month, neither of which upstream had found.
+- GrapheneOS hardware memory tagging caught a use-after-free (memory handed back and then used again, which can be turned into running attacker code) in the Broadcom Wi-Fi driver and an out-of-bounds read (reading memory it should not, potentially leaking another program's data) in the DisplayPort driver that month, neither of which upstream had found.
 
 ## April 2026
 

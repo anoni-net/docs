@@ -13,7 +13,7 @@ icon: simple/torbrowser
 - <span class="chan-tag chan-tag--stable">稳定版</span>一般用户用这个，版本号形如 15.0.20。
 - <span class="chan-tag chan-tag--alpha">Alpha</span>仅供测试，可能含影响可用性、安全与隐私的错误，版本号带 a（例如 16.0a10）。需要强匿名保护的人不要用。
 
-Alpha 从 16.0a9 起改为跟着 Firefox beta 逐步 rebase，版本跳动比过去频繁。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。
+Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。
 
 ## Tor Browser 16.0a10（Alpha 测试通道）
 

@@ -22,14 +22,14 @@ icon: material/shield-key-outline
 
 > 2026-07-23 · [專案頁](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
 
-- 加入 Debian 套件，架設 WebTunnel 橋接的人不必再自己編譯。
+- 只影響自架 WebTunnel 橋接的人，一般使用者不受影響：加入 Debian 套件，架設橋接不必再自己編譯。
 - WebTunnel 沒有維護獨立的 changelog，這一頁的條目是從版本標籤與提交訊息整理的，細節比其他兩個專案少。
 
 ## WebTunnel 0.0.5
 
 > 2026-07-02 · [專案頁](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
 
-- 新增可信任代理跳數（Trusted Proxy Hops）設定。橋接架在 CDN 或反向代理後面時，這個設定決定要信任幾層轉發標頭，關係到記錄下來的用戶端位址正不正確。
+- 只影響自架橋接的人：新增可信任代理跳數（Trusted Proxy Hops）設定。橋接架在 CDN 或反向代理後面時，這個設定決定要信任幾層轉發標頭，關係到記錄下來的用戶端位址正不正確。
 
 ## Snowflake 2.14.1
 
@@ -44,7 +44,7 @@ icon: material/shield-key-outline
 
 - 更新 covert-dtls 並整理公開介面。covert-dtls 負責讓 DTLS 交握看起來像一般的 WebRTC 應用，是 Snowflake 避開特徵偵測的關鍵一環。
 - covert-dtls 設定新增 `none` 選項，代理端可以關掉偽裝。
-- Broker 的輪詢間隔改為可從檔案載入並以毫秒表示，代理端不必再重新編譯就能調整回報頻率。
+- 以下兩項只影響自己營運 Snowflake 代理或 Broker 的人。Broker 的輪詢間隔改為可從檔案載入並以毫秒表示，代理端不必再重新編譯就能調整回報頻率。
 - 修掉 Broker 一個可能的 nil 指標解參考，以及計量啟動失敗時沒有回報監聽錯誤的問題。
 
 ## Snowflake 2.13.0

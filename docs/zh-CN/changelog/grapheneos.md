@@ -39,8 +39,8 @@ GrapheneOS 走自动更新，设备在后台就会装好，一般用户不需要
 
 > 版本 `2026060100` 到 `2026062800`（八版）· [官方发布页](https://grapheneos.org/releases){target="_blank"}
 
-- Android 17 上线的月份。6 月 1 日先到完整的 2026-06-01 等级，6 月 18 日跟上随 Android 17 发布的完整 2026-06-05 Pixel 等级。Android 17 对 GrapheneOS 的处境代表什么，站上有[专文](../blog/posts/2026-grapheneos-android-17.md)讨论。
-- 硬件内存标记这个月抓到三个上游驱动的错误：Broadcom Wi-Fi 驱动的 use-after-free，以及 DisplayPort 驱动的两次越界读取。后者的成因是部分屏幕设备没有照 DisplayPort 规格实现。
+- Android 17 上线的月份。6 月 1 日先到完整的 2026-06-01 等级，6 月 18 日跟上随 Android 17 发布的完整 2026-06-05 Pixel 等级。这一批修补里有一个 CVE-2025-48595 被标为可能正在被有限、针对性地利用，细节见 [Android 安全补丁级别](./android.md)。Android 17 对 GrapheneOS 的处境代表什么，站上有[专文](../blog/posts/2026-grapheneos-android-17.md)讨论。
+- 硬件内存标记这个月抓到三个上游驱动的错误：Broadcom Wi-Fi 驱动的 use-after-free（程序把内存还回去之后又拿来用，可能被塞进恶意代码），以及 DisplayPort 驱动的两次越界读取（读到不该读的内存，可能泄漏别的程序的数据）。后者的成因是部分屏幕设备没有照 DisplayPort 规格实现。
 - 网络定位（Network Location）对 Apple 与 Apple China 的定位服务也改为要求 TLSv1.3，跟 GrapheneOS 自家服务的要求一致。
 - Android 17 带来几个行为变动：Wi-Fi 快速设置改成真的关闭 Wi-Fi，不再只是断开当前的网络。邻近设备权限拆出局域网访问，没有针对 Android 17 改版的 app 默认仍可使用。
 - 设置界面把胁迫密码（duress password）重新列回屏幕锁定菜单，这个功能靠有人看得到才会被用到。

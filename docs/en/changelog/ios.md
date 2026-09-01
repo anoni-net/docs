@@ -13,7 +13,7 @@ Source data comes from Apple's [security releases page](https://support.apple.co
 ## How we rate urgency
 
 - <span class="urg-tag urg-tag--now">Now</span>Apple notes the issue may have been actively exploited, or the CVE appears in the US CISA Known Exploited Vulnerabilities catalog. Install the same day.
-- <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory-corruption issues in WebKit or Kernel. The first is reachable by simply visiting a web page, the second decides how much privilege an attacker ends up with, and chained together they make a complete remote attack path. Install within a few days.
+- <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory-corruption issues in WebKit or Kernel (the program writes to the wrong place in memory, which an attacker can use to slip in code of their own). The first is reachable by simply visiting a web page, the second decides how much privilege an attacker ends up with, and chained together they make a complete remote attack path. Install within a few days.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else. Install on your normal schedule.
 
 The colour answers how fast to act. Whether anyone is already exploiting the flaw is a separate question, and every entry states it explicitly. "Now" on this page requires evidence: Apple itself noting possible active exploitation, or the CVE appearing in the CISA catalog. Other pages do not all rest on the same basis, so check each page's own explanation before comparing across them.
@@ -50,7 +50,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 > 2026-07-27 · [Upstream advisory](https://support.apple.com/en-us/128066){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">Soon</span>86 fixes, with 19 in Kernel, 7 in WebKit, and 6 in ImageIO.
-- WebKit closes a browsing-history leak where a website could tell whether you had visited a given link. The same group also fixes malicious content violating iframe sandboxing policy, and UI spoofing via framed malicious content.
+- WebKit closes a browsing-history leak where a website could tell whether you had visited a given link. The same group also fixes malicious content violating iframe sandboxing policy (the sandbox keeps embedded pages in an isolated environment; break it and they reach things they should not), and UI spoofing via framed malicious content.
 - Kernel fixes an issue where connecting to a malicious NFS server could corrupt kernel memory, worth noting if you mount network storage you do not control.
 - Contacts gets three fixes, including apps adding contacts without authorisation and a maliciously crafted contact leaking sensitive data.
 
@@ -67,7 +67,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 
 > 2026-05-11 · [26.5 advisory](https://support.apple.com/en-us/127110){target="_blank"} · [18.7.9 advisory](https://support.apple.com/en-us/127111){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>The 26.x line fixes 67 issues, 21 in WebKit and 6 in Kernel, including one where an app could gain root privileges.
+- <span class="urg-tag urg-tag--soon">Soon</span>The 26.x line fixes 67 issues, 21 in WebKit and 6 in Kernel, including one where an app could gain root privileges (full control of the system, equivalent to owning the device).
 - The 18.x line fixes 49 issues and includes three notable privacy ones: an app circumventing App Privacy Report logging (the very report you would use to audit what an app connects to), an app enumerating installed applications (usable for profiling a user), and a Wi-Fi issue letting an app execute arbitrary code with kernel privileges.
 - The 17.7.11, 16.7.16, and 15.8.8 releases for older hardware carry a single fix each: the notification retention issue described in the 22 April entry below.
 

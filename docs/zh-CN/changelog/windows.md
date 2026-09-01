@@ -28,7 +28,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 
 另一个常见的误会是 Microsoft Defender。它的漏洞修补走的是杀毒定义文件的自动更新，不跟着 Patch Tuesday，也不需要用户做任何事。
 
-在 Windows 上使用 Tor Browser 或其他匿名工具的人另外要知道：操作系统被取得权限之后，上面运行的任何工具都保护不了你。提权类的修补对这个情境的重要性不亚于浏览器本身的漏洞。
+在 Windows 上使用 Tor Browser 或其他匿名工具的人另外要知道：操作系统被取得权限之后，上面运行的任何工具都保护不了你。提权（让程序取得比原本更高的系统权限）类的修补对这个情境的重要性不亚于浏览器本身的漏洞。
 
 ## 2026 年 8 月
 
@@ -42,7 +42,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 
 > 2026-07-14 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>2003 个项目，是这五个月里最大的一轮，953 个标为 Critical，三个标为已被实际利用。
+- <span class="urg-tag urg-tag--soon">尽快</span>2003 个项目，是这五个月里最大的一轮，953 个标为 Critical，三个标为已被实际利用。一般桌面用户不受那三个影响，管理服务器的人要优先处理。
 - 三个都在服务器产品上：Active Directory Federation Services 提权、SharePoint Server 提权、SharePoint 远程执行代码。
 - 桌面用户不受这三个影响。管理 SharePoint 或 AD FS 的人要优先处理，SharePoint 的远程执行代码是不需要凭证就能触发的那一类。
 
@@ -57,7 +57,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 
 > 2026-05-12 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>1129 个项目，318 个标为 Critical，三个标为已被实际利用。
+- <span class="urg-tag urg-tag--soon">尽快</span>1129 个项目，318 个标为 Critical，三个标为已被实际利用。一般桌面用户这个月跟着平常节奏即可，三个都打不到你。
 - 两个在 Microsoft Defender 的防护引擎上（拒绝服务与提权），走定义文件自动更新，用户不需要做任何事。
 - 一个是 Exchange Server 的伪冒漏洞，只影响自建 Exchange 的组织。
 

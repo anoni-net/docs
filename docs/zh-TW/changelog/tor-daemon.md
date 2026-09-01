@@ -12,7 +12,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 
 ## 急迫程度怎麼判斷
 
-- <span class="urg-tag urg-tag--now">立刻</span>官方標為安全釋出（security release），通常帶 TROVE 編號。中繼與 onion 服務是長期在線的目標，這一級的問題多半可以被遠端觸發。
+- <span class="urg-tag urg-tag--now">立刻</span>官方標為安全釋出（security release），通常帶 TROVE 編號（Tor Project 對外公布安全問題時用的編號）。中繼與 onion 服務是長期在線的目標，這一級的問題多半可以被遠端觸發。
 - <span class="urg-tag urg-tag--soon">儘快</span>影響連線品質或網路健康，但沒有可被遠端利用的安全問題。
 - <span class="urg-tag urg-tag--routine">一般</span>其餘維護性釋出。
 
@@ -23,6 +23,10 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 ## 兩條維護線
 
 `0.4.9.x` 是目前的主線，`0.4.8.x` 是長期支援線，安全修補會同步 backport。發行版套件常常停在 0.4.8.x，看到同一天發兩個版本是正常的，裝哪一條看你的套件來源。
+
+## conflux 是什麼
+
+下面多則條目都在修 conflux。它讓用戶端同時用兩條電路傳同一個連線的資料以提升速度，2023 年進入 Tor，是這半年多起安全問題的共同來源。新的程式碼路徑帶來新的錯誤面，這批修補集中在那裡並不意外。
 
 ## tor 0.4.9.11
 
@@ -38,7 +42,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 > 2026-06-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.10/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全釋出，官方強烈建議盡快升級。
-- TROVE-2026-025：拒絕在已經有附掛串流的電路上收到的 `CONFLUX_LINK` 資料元。惡意用戶端可以先送 `RELAY_COMMAND_BEGIN` 再送 `CONFLUX_LINK`，掛上的離開串流最後會變成孤兒，留下懸空的電路反向指標，電路被釋放時形成 use-after-free（bug 41258）。
+- TROVE-2026-025：拒絕在已經有附掛串流的電路上收到的 `CONFLUX_LINK` 資料元。惡意用戶端可以先送 `RELAY_COMMAND_BEGIN` 再送 `CONFLUX_LINK`，掛上的離開串流最後會變成孤兒，留下懸空的電路反向指標，電路被釋放時形成 use-after-free，也就是記憶體還回去之後又被拿來用，結果是中繼當掉（bug 41258）。
 - 未設定 `SafeSocks` 時，恢復對不安全 SOCKS 協定（socks4 或不帶主機名的 socks5）的警告。這個警告消失了很久，而它防的是把要解析的網域直接洩漏給本機以外的地方（bug 41290）。
 - 用戶端的入口守衛（entry guard）過期時間回到一致的 48 到 60 天。
 
@@ -64,7 +68,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 > 2026-05-06 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.7/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全釋出，兩條維護線同時發布。
-- TROVE-2026-011：處理 END、TRUNCATE 與 TRUNCATED 資料元時，若酬載裡沒有原因欄位會發生越界讀取。這個問題從 0.1.1.1-alpha 存在到現在（bug 41254）。
+- TROVE-2026-011：處理 END、TRUNCATE 與 TRUNCATED 資料元時，若酬載裡沒有原因欄位會發生越界讀取，也就是讀到不該讀的記憶體，可能讓中繼當掉或洩漏記憶體內容。這個問題從 0.1.1.1-alpha 存在到現在（bug 41254）。
 - TROVE-2026-008：不再透過 conflux 的分腿嘗試或接受 `BEGIN_DIR`（bug 41243）。
 - TROVE-2026-010：清空 conflux 的亂序佇列時修正計數（bug 41251）。
 

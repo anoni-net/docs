@@ -23,8 +23,8 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 > 2026-07-28 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>相依套件更新，涵蓋內建的 tor、Python 套件與網頁端相依。
-- 沒有新功能與行為變更。2.6.4 的兩個安全修補仍是這一輪的重點，還停在 2.6.3 的人可以直接升到 2.6.5。
+- <span class="urg-tag urg-tag--routine">一般</span>相依套件更新，涵蓋內建的 tor、Python 套件與網頁端相依。這一級是給已經裝了 2.6.4 的人看的。
+- 沒有新功能與行為變更。還停在 2.6.3 或更早的人請視同「儘快」，因為升上來會一併帶進 2.6.4 的兩個安全修補，直接裝 2.6.5 即可。
 
 ## OnionShare 2.6.4
 
