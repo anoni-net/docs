@@ -30,3 +30,4 @@ Your device is part of the attack surface. This group skips the line-by-line tra
 - :material-apple: [macOS security updates](./macos.md) — Mac, with urgency ratings and the state of the three maintenance lines
 - :material-microsoft-windows: [Windows security updates](./windows.md) — monthly Patch Tuesday, sorted by desktop versus server impact
 - :material-cellphone-lock: [GrapheneOS monthly summary](./grapheneos.md) — hardened Android on Pixel, aggregated by month
+- :material-android: [Android security patch levels](./android.md) — monthly patch levels and CVE counts, and how to check how far behind your device is

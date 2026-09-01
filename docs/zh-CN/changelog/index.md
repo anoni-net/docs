@@ -28,3 +28,4 @@ icon: material/history
 - :material-apple: [macOS 安全更新](./macos.md)：Mac，含紧急程度与三条维护线的状态
 - :material-microsoft-windows: [Windows 安全更新](./windows.md)：每月 Patch Tuesday，先分清楚桌面还是服务器
 - :material-cellphone-lock: [GrapheneOS 月度更新摘要](./grapheneos.md)：Pixel 上的强化 Android，按月聚合
+- :material-android: [Android 安全补丁级别](./android.md)：每月补丁级别与 CVE 数，先查自己的设备落后多少
