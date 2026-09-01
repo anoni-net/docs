@@ -8,11 +8,18 @@ icon: simple/torbrowser
 
 [Tor Browser](../tools/what-is-tor.md)、Tor daemon、Onion 服務的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。本頁同時收錄穩定版與 Alpha 測試通道，Alpha 條目會在標題標注。
 
+## 兩個發布通道
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>一般使用者用這個，版本號形如 15.0.20。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>僅供測試，可能含影響可用性、安全與隱私的錯誤，版本號帶 a（例如 16.0a10）。需要強匿名保護的人不要用。
+
+Alpha 從 16.0a9 起改為跟著 Firefox beta 逐步 rebase，版本跳動比過去頻繁。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。
+
 ## Tor Browser 16.0a10（Alpha 測試通道）
 
 > 2026-08-27 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a10/){target="_blank"}
 
-- Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
 - 新增「使用通用視窗標題」選項，在設定的隱私與安全性、進階設定、防範第三方應用程式那一組，開啟後所有視窗標題一律顯示 Tor Browser Alpha。視窗標題預設跟著網頁的 title 變動，作業系統與其他程式不需特殊權限就讀得到，可以當成側錄瀏覽紀錄的旁通道。此功能已上游進 Firefox，一般 Firefox 使用者可在 `about:config` 把 `privacy.exposeContentTitleInWindow` 與 `privacy.exposeContentTitleInWindow.pbm` 設為 false。官方原本希望 16.0 穩定版就預設開啟，顧慮無障礙軟體與非標準桌面環境的相容性，改為先開放測試。
 - 桌面版內建手冊改版，把更新過的官方說明內容包進瀏覽器取代舊版手冊，網址列輸入 `about:manual` 可直接開啟，介面上的「Learn more」也都指向新版。
 - 設定頁改用 Mozilla 的新版 `about:preferences` 設計並預設啟用，連線、letterboxing、安全性等級等自訂項目都已搬到新版面。
@@ -25,7 +32,7 @@ icon: simple/torbrowser
 
 > 2026-08-18 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}
 
-- 以 Firefox 安全修補為主的小版本。
+- <span class="chan-tag chan-tag--stable">穩定版</span>以 Firefox 安全修補為主的小版本。
 - Firefox 基底 rebase 至 140.14.0esr（tor-browser#45204），桌面版與 Android 版 GeckoView 同步升至 140.14.0esr。
 - 從 Firefox 154 backport 安全修補（tor-browser#45219）。
 - libevent 升至 2.1.13（tor-browser-build#41839）。
@@ -36,7 +43,7 @@ icon: simple/torbrowser
 
 > 2026-07-23 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a9/){target="_blank"}
 
-- Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
 - Firefox 基底大幅 rebase 至 153.0esr（前一版為 140.0esr），Android 版 GeckoView 同步升至 153.0esr（tor-browser#45101）。
 - 官方宣布 Alpha 通道日後改為持續追蹤 Firefox beta 版本、逐步小步 rebase，取代過去一次跳過整年版本的做法，目標讓 16.0 穩定版於 9 月提前發布。
 - NoScript 升至 13.6.30.90201984，建置工具鏈的 Go 升至 1.26.5，libevent 升至 2.1.13。
@@ -47,7 +54,7 @@ icon: simple/torbrowser
 
 > 2026-07-21 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15019/){target="_blank"}
 
-- 以 Firefox 安全修補為主的小版本，帶入來自 Firefox 的重要安全更新。
+- <span class="chan-tag chan-tag--stable">穩定版</span>以 Firefox 安全修補為主的小版本，帶入來自 Firefox 的重要安全更新。
 - Firefox 基底 rebase 至 140.13.0esr（tor-browser#45117），桌面版與 Android 版 GeckoView 同步升至 140.13.0esr。
 - 從 Firefox 153 backport 安全修補（tor-browser#45124）。
 - NoScript 升至 13.6.31.1984。
@@ -57,7 +64,7 @@ icon: simple/torbrowser
 
 > 2026-07-14 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15018/){target="_blank"}
 
-- 以 Firefox 安全修補為主的小版本。
+- <span class="chan-tag chan-tag--stable">穩定版</span>以 Firefox 安全修補為主的小版本。
 - Firefox 基底維持 140.12.0esr，改以 cherry-pick 帶入 firefox/esr140 分支的後續修補（tor-browser#45111），未做 rebase。
 - NoScript 升至 13.6.30.1984。
 - 建置工具鏈的 Go 升至 1.25.12（Windows、Linux、Android）。
@@ -67,7 +74,7 @@ icon: simple/torbrowser
 
 > 2026-07-02 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a8/){target="_blank"}
 
-- Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
 - 重要的 Firefox 安全更新，rebase 至 Firefox 152.0a1（前一個 Alpha 16.0a7 為 151.0a1）。
 - Android 版 GeckoView 同步升至 152.0a1。
 - tor 用戶端升至 0.4.9.11。
@@ -83,7 +90,7 @@ icon: simple/torbrowser
 
 > 2026-06-28 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15017/){target="_blank"}
 
-- 以 tor 安全更新為主的小版本，未變動 Firefox 基底。
+- <span class="chan-tag chan-tag--stable">穩定版</span>以 tor 安全更新為主的小版本，未變動 Firefox 基底。
 - tor 用戶端升至 0.4.9.11。
 - NoScript 升至 13.6.25.1984。
 - 建置流程更新 boklm 的 GPG 子金鑰與 morgan 的續期金鑰（tor-browser-build#41821、#41827）。
@@ -92,7 +99,7 @@ icon: simple/torbrowser
 
 > 2026-06-17 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15016/){target="_blank"}
 
-- 重要的 Firefox 安全更新。
+- <span class="chan-tag chan-tag--stable">穩定版</span>重要的 Firefox 安全更新。
 - rebase 至 Firefox 140.12.0esr（tor-browser#45046），並 backport 自 Firefox 152 的安全修補（tor-browser#45054）。
 - Android 版 GeckoView 同步升至 140.12.0esr。
 - NoScript 升至 13.6.24.1984，修正前一版 13.6.19.902 在 DocStartInjection 上的 regression（tor-browser#45044）。
@@ -104,7 +111,7 @@ icon: simple/torbrowser
 
 > 2026-06-03 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15015/){target="_blank"}
 
-- tor daemon 重要安全更新，並修正部分審查規避問題。
+- <span class="chan-tag chan-tag--stable">穩定版</span>tor daemon 重要安全更新，並修正部分審查規避問題。
 - tor 用戶端升至 0.4.9.9。
 - NoScript 升至 13.6.20.1984。
 - Moat 模組支援設定多組 (front, reflector) domain fronting 配對（tor-browser#42436）。
@@ -115,7 +122,7 @@ icon: simple/torbrowser
 
 > 2026-06-03 · [dist 目錄](https://dist.torproject.org/torbrowser/16.0a7/){target="_blank"}
 
-- Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
 - 已在 dist 釋出二進位檔，官方部落格尚未發布對應公告。
 - 改以 Firefox 151.0a1 為基底（前一個 Alpha 16.0a6 為 150.0a1）。
 
@@ -123,7 +130,7 @@ icon: simple/torbrowser
 
 > 2026-05-19 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15014/){target="_blank"}
 
-- 重要 Firefox 安全更新，backport 自 Firefox 151 的修補（tor-browser#44958）。
+- <span class="chan-tag chan-tag--stable">穩定版</span>重要 Firefox 安全更新，backport 自 Firefox 151 的修補（tor-browser#44958）。
 - rebase 至 Firefox 140.11.0esr。
 - Android 版 GeckoView 同步升至 140.11.0esr。
 - 建置工具鏈的 Go 升至 1.25.10。
@@ -132,14 +139,14 @@ icon: simple/torbrowser
 
 > 2026-05-08 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15013/){target="_blank"}
 
-- tor 用戶端升至 0.4.9.8。
+- <span class="chan-tag chan-tag--stable">穩定版</span>tor 用戶端升至 0.4.9.8。
 - NoScript 升至 13.6.19.1984。
 
 ## Tor Browser 16.0a6（Alpha 測試通道）
 
 > 2026-05-07 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a6/){target="_blank"}
 
-- Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，可能含影響可用性、安全與隱私的錯誤，一般使用者請繼續用穩定版（15.x）。
 - 自此版起，Tor Browser Alpha 改以 Firefox beta 通道（150.0a1）為基底，過去是以 Firefox ESR 為基底。
 - tor 用戶端升至 0.4.9.7。
 - NoScript 升至 13.6.18.90101984。
@@ -152,7 +159,7 @@ icon: simple/torbrowser
 
 > 2026-05-07 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15012/){target="_blank"}
 
-- 重要 Firefox 安全更新（rebase 至 Firefox 140.10.2esr）。
+- <span class="chan-tag chan-tag--stable">穩定版</span>重要 Firefox 安全更新（rebase 至 Firefox 140.10.2esr）。
 - tor 用戶端升至 0.4.9.7。
 - Android 版 GeckoView 同步升至 140.10.2esr。
 - 桌面與 Android 版加入 Funding the Commons 整合（tor-browser#44746、#44747）。
@@ -161,6 +168,6 @@ icon: simple/torbrowser
 
 > 2026-04-28 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15011/){target="_blank"}
 
-- 重要 Firefox 安全更新（rebase 至 Firefox 140.10.1esr）。
+- <span class="chan-tag chan-tag--stable">穩定版</span>重要 Firefox 安全更新（rebase 至 Firefox 140.10.1esr）。
 - NoScript 升至 13.6.18.1984。
 - Android 版 GeckoView 同步升至 140.10.1esr。

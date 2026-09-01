@@ -69,7 +69,8 @@
    淡底深字、过 AA。颜色只是辅助，标签本身带文字，色盲与单色打印都读得到）
    浅色三组对比 5.72 / 5.81 / 8.35，深色 6.41 / 9.33 / 7.24，全部过 AA 4.5
    ========================================================================== */
-.urg-tag {
+.urg-tag,
+.chan-tag {
   display: inline-block;
   font-size: 0.66rem;
   font-weight: 700;
@@ -88,6 +89,12 @@
 [data-md-color-scheme="slate"] .urg-tag--now     { background: rgba(211,47,47,.18);  color: #ef9a9a; border-color: rgba(211,47,47,.45); }
 [data-md-color-scheme="slate"] .urg-tag--soon    { background: rgba(230,145,0,.18);  color: #ffcc80; border-color: rgba(230,145,0,.45); }
 [data-md-color-scheme="slate"] .urg-tag--routine { background: rgba(120,144,156,.20); color: #b0bec5; border-color: rgba(120,144,156,.45); }
+
+.chan-tag--stable { background: #e8f5e9; color: #1b5e20; border-color: #a5d6a7; }
+.chan-tag--alpha  { background: #f3e5f5; color: #6a1b9a; border-color: #ce93d8; }
+
+[data-md-color-scheme="slate"] .chan-tag--stable { background: rgba(76,175,80,.18);  color: #81c784; border-color: rgba(76,175,80,.42); }
+[data-md-color-scheme="slate"] .chan-tag--alpha  { background: rgba(123,31,162,.24); color: #ce93d8; border-color: rgba(123,31,162,.50); }
 
 /* 议程表：场次图示与标题也套上分类色（对齐 .sess-tag，只在活动页议程表出现；
    :has(+ strong) 精准选到标题前的场次图示，描述列的箭头图示维持中性） */
