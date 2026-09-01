@@ -64,6 +64,31 @@
 [data-md-color-scheme="slate"] .sess-tag--relay    { background: rgba(123,31,162,.24); color: #ce93d8; border-color: rgba(123,31,162,.50); }
 [data-md-color-scheme="slate"] .sess-tag--payments { background: rgba(239,108,0,.18); color: #ffb74d; border-color: rgba(239,108,0,.45); }
 
+/* ==========================================================================
+   更新日誌急迫程度標籤 .urg-tag（作業系統那組使用，對齊 .sess-tag 的 soft chip
+   淡底深字、過 AA。顏色只是輔助，標籤本身帶文字，色盲與單色列印都讀得到）
+   淺色六組對比 5.72 / 5.81 / 8.35，深色 6.41 / 9.33 / 7.24，全部過 AA 4.5
+   ========================================================================== */
+.urg-tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.02rem 0.4rem;
+  margin-right: 0.3rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  vertical-align: 0.1em;
+  border: 1px solid transparent;
+}
+.urg-tag--now     { background: #fdeceb; color: #b3261e; border-color: #f4b8b4; }
+.urg-tag--soon    { background: #fff4e0; color: #8a5300; border-color: #ffd699; }
+.urg-tag--routine { background: #eceff1; color: #37474f; border-color: #b0bec5; }
+
+[data-md-color-scheme="slate"] .urg-tag--now     { background: rgba(211,47,47,.18);  color: #ef9a9a; border-color: rgba(211,47,47,.45); }
+[data-md-color-scheme="slate"] .urg-tag--soon    { background: rgba(230,145,0,.18);  color: #ffcc80; border-color: rgba(230,145,0,.45); }
+[data-md-color-scheme="slate"] .urg-tag--routine { background: rgba(120,144,156,.20); color: #b0bec5; border-color: rgba(120,144,156,.45); }
+
 /* 議程表：場次圖示與標題也套上分類色（對齊 .sess-tag，只在活動頁議程表出現；
    :has(+ strong) 精準選到標題前的場次圖示，描述列的箭頭圖示維持中性） */
 .md-typeset td:has(.sess-tag--basic)    strong,
