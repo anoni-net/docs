@@ -327,6 +327,7 @@
     { key: "medium", version: 15, level: "M" },
     { key: "large", version: 20, level: "L" },
     { key: "huge", version: 25, level: "L" },
+    { key: "max", version: 40, level: "L" },
   ];
 
   // 容錯度為什麼低兩檔用 M、高兩檔用 L：
@@ -342,18 +343,18 @@
   // 低兩檔留 M：那兩檔是「怎麼樣都讀不到」時退回來的地方，退路本身不該是脆弱的。
   // 室內反光蓋掉一成碼面很常見，那正好是 L 死掉而 M 還活著的區間。
 
-  // 為什麼最高只到版本 25，而規格開到 40（L 等級 2953 個位元組）：
+  // 為什麼開到版本 40，也就是規格的上限（L 等級 2953 個位元組）：
   //
-  // 限制不在 QR 規格，在「一個方格在對方相機裡佔幾個像素」。解碼器要三個像素才勉強
-  // 分得出一個方格，四到五個才穩。相機這一端解碼取到 1280 寬，QR 佔畫面六成的話是
-  // 768 像素，除以版本 25 的 125 格（含留白）還有 6.1 個像素，很夠。版本 40 是 185
-  // 格，只剩 4.1 個，而且那是「對得剛剛好」的情況。
+  // 決定成敗的是「一個方格在對方相機拍到的畫面裡佔幾個像素」，解碼器要三個像素才
+  // 勉強分得出一個方格。這裡曾經只開到版本 25，理由是解碼取到 1280 寬的時候版本 40
+  // 只剩 4 個像素，量出來解不開。
   //
-  // 真正先撞牆的是送的那一端的螢幕。畫布最寬 34rem（680 px），版本 40 攤進去每個
-  // 方格只有 3.7 px，在 1 倍解析度的筆電上等於邊界落在像素之間，畫出來是灰的。
-  // 手機的高解析度螢幕撐得住，筆電撐不住，而這個工具兩種都要能當發送端。
+  // 那個 1280 是這一支自己設的，不是裝置的限制。改成用相機原生的解析度之後，在真的
+  // 瀏覽器裡拿 1920x1080 的畫面實測，版本 40 五次全解得開（同一段畫面壓到 1280 是
+  // 零次）。上限一直卡在我們自己那一行，不是 QR 規格也不是手機。
   //
-  // 版本 25 是實測還留有餘裕的位置。要再往上就得先解決螢幕那一端，不是調這個常數。
+  // 代價寫在 CAPTURE_WIDTHS 那裡：1920 的畫面 jsQR 一次要 70 毫秒上下，掃描率跟著
+  // 掉，所以不是無條件用高解析度，而是解不到才升上去。
 
   // 播放速度。快不一定好：一張停留的時間短於相機的曝光加對焦，讀到的就是兩張疊在
   // 一起的殘影，一張都拿不到。慢的那一檔是給舊手機與昏暗場地用的。
@@ -369,6 +370,20 @@
   // 檔案大小上限。這不是技術限制，是誠實：1 MB 在中檔密度下是兩千多張，一輪要七
   // 分鐘，而且要收齊通常不只一輪。與其讓人試完才失望，不如一開始就講。
   const MAX_INPUT_BYTES = 512 * 1024;
+
+  // 解碼用的畫面寬度，由低往高走。
+  //
+  // 低密度的碼在 1280 就解得開，而 1280 比 1920 快將近一倍（實測 jsQR 分別是 40 與
+  // 70 毫秒上下），掃描率高一倍等於漏格少很多。高密度的碼在 1280 解不開，非要原生
+  // 解析度不可。無條件用高的會拖慢所有人，無條件用低的則讓高密度檔位形同虛設。
+  //
+  // 所以連續解不到就升一階，解得到就停在當下這一階。低密度的串流第一次就解開，永遠
+  // 停在 1280；極限檔位會在一秒內升到 1920 然後穩定下來。重收或重開相機時退回起點。
+  const CAPTURE_WIDTHS = [1280, 1920];
+
+  // 連續幾次解不到才升上去。太小會因為鏡頭還沒對到就誤升，太大會讓高密度的檔位
+  // 前一兩秒都在做白工。
+  const ESCALATE_AFTER = 12;
 
   // 兩次掃描之間的目標間隔，注意是「間隔」而不是「解完之後再等多久」。
   //
@@ -413,6 +428,7 @@
       densityMedium: "中",
       densityLarge: "大",
       densityHuge: "特大",
+      densityMax: "極限",
       densityHint: "對面讀不到就往小調。每張裝的資料變少，畫面上的黑白方格跟著變大，相機容易對到。代價是張數變多，播一輪比較久。",
       speed: "播放速度",
       speedSlow: "慢",
@@ -471,6 +487,7 @@
       densityMedium: "中",
       densityLarge: "大",
       densityHuge: "特大",
+      densityMax: "极限",
       densityHint: "对面读不到就往小调。每张装的数据变少，画面上的黑白方格跟着变大，相机容易对到。代价是张数变多，播一轮比较久。",
       speed: "播放速度",
       speedSlow: "慢",
@@ -529,6 +546,7 @@
       densityMedium: "Medium",
       densityLarge: "Large",
       densityHuge: "Extra large",
+      densityMax: "Maximum",
       densityHint: "Turn it down if the other side cannot read the codes. Each frame carries less, so its modules get larger and a camera locks on more easily. The cost is more frames and a longer pass.",
       speed: "Playback speed",
       speedSlow: "Slow",
@@ -865,6 +883,9 @@
     manifest: null,
     chunks: new Map(),
     have: new Set(),
+    // 解碼解析度的階數與連續槓龜次數，見 CAPTURE_WIDTHS
+    step: 0,
+    misses: 0,
     result: null,
     url: null,
     note: null,
@@ -878,6 +899,8 @@
     recv.manifest = null;
     recv.chunks.clear();
     recv.have.clear();
+    recv.step = 0;
+    recv.misses = 0;
     dropResult();
   }
 
@@ -981,7 +1004,7 @@
     }
     try {
       recv.stream = await media.getUserMedia({
-        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+        video: { facingMode: "environment", width: { ideal: 1920 }, height: { ideal: 1080 } },
         audio: false,
       });
     } catch (err) {
@@ -1011,9 +1034,19 @@
     const started = performance.now();
     const video = dom.video;
     if (video.readyState >= 2 && video.videoWidth) {
-      const size = scaledSize(video.videoWidth, video.videoHeight, 1280);
+      const size = scaledSize(video.videoWidth, video.videoHeight, CAPTURE_WIDTHS[recv.step]);
       const bytes = decodeFrom(video, size.w, size.h);
-      if (bytes && ingest(bytes)) renderReceive();
+      if (bytes) {
+        recv.misses = 0;
+        if (ingest(bytes)) renderReceive();
+      } else if (recv.step < CAPTURE_WIDTHS.length - 1) {
+        // 一直解不到，可能是碼太密而不是沒對準。升一階再試，升上去就不再退回來。
+        recv.misses += 1;
+        if (recv.misses >= ESCALATE_AFTER) {
+          recv.step += 1;
+          recv.misses = 0;
+        }
+      }
     }
     // 扣掉這一次解碼花掉的時間再等，讓掃描率貼近目標而不是被解碼時間往下拖
     const spent = performance.now() - started;
@@ -1052,7 +1085,8 @@
       });
       const duration = Number.isFinite(video.duration) ? video.duration : 0;
       if (!duration) return;
-      const size = scaledSize(video.videoWidth, video.videoHeight, 1280);
+      // 掃影片檔沒有即時性的壓力，直接用最高的一階，不必為了速度犧牲解析度
+      const size = scaledSize(video.videoWidth, video.videoHeight, CAPTURE_WIDTHS[CAPTURE_WIDTHS.length - 1]);
       const step = 1 / VIDEO_SAMPLE_FPS;
       for (let at = 0; at < duration; at += step) {
         if (job.cancelled) return;
@@ -1399,6 +1433,7 @@
           { label: "densityMedium" },
           { label: "densityLarge" },
           { label: "densityHuge" },
+          { label: "densityMax" },
         ],
         () => send.density,
         (at) => {

@@ -219,17 +219,23 @@ function decodeRate(version, level, K, sigma, noise, glareFraction, trials) {
 
 const only = process.argv.find((a) => a.startsWith('--'));
 const VERSIONS = [15, 20, 25, 30, 35, 40];
+// K 是 QR 在相機畫面裡橫跨幾個像素。預設這一組對應解碼取到 1280 寬的情況，
+// 用 --k=1152,1344 之類可以量更高的拍攝解析度。
+const SPAN_K = (process.argv.find((a) => a.startsWith('--k=')) || '--k=896,768,640,512')
+  .slice(4)
+  .split(',')
+  .map(Number);
 const pct = (v) => `${(v * 100).toFixed(0).padStart(4)}%`;
 
 if (!only || only === '--span') {
   console.log('一、解析度：QR 在相機畫面裡橫跨 K 個像素，鏡頭模糊 sigma=1.5px，雜訊 ±8\n');
-  console.log('              K=896       K=768       K=640       K=512');
+  console.log('              ' + SPAN_K.map((k) => ('K=' + k).padEnd(12)).join(''));
   console.log('版本 方格 容錯  每格px 解碼  每格px 解碼  每格px 解碼  每格px 解碼');
   for (const version of VERSIONS) {
     const modules = 21 + 4 * (version - 1);
     const span = modules + QUIET * 2;
     for (const level of ['L', 'M']) {
-      const cells = [896, 768, 640, 512]
+      const cells = SPAN_K
         .map((K) => `${(K / span).toFixed(1).padStart(6)} ${pct(decodeRate(version, level, K, 1.5, 8, 0, 20))}`)
         .join(' ');
       console.log(`${String(version).padStart(3)} ${String(modules).padStart(4)}  ${level}  ${cells}`);

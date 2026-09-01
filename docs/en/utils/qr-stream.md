@@ -59,9 +59,13 @@ The table below uses the "medium" setting. Data per frame comes in small, medium
 | A signed text file | 50 KB | 129 | 26 seconds |
 | A photo from a phone | 3 MB | over the limit | cannot be sent |
 
-The tool refuses files over 512 KB. That number measures human patience rather than any technical ceiling: 512 KB at the default setting becomes 1302 frames and a four minute twenty pass, and collecting them usually takes more than one pass, so you would be holding two devices still for over ten minutes. The browser copes with far more. The person does not. The largest setting at the fastest speed brings a pass down to 42 seconds, though holding that steady takes good conditions.
+The tool refuses files over 512 KB. That number measures human patience rather than any technical ceiling: 512 KB at the default setting becomes 1302 frames and a four minute twenty pass, and collecting them usually takes more than one pass. The browser copes with far more. The person does not.
 
-The ceiling on this channel is roughly 12 KB per second. That comes from the largest setting (1264 bytes a frame) at the fastest speed (10 frames a second), assuming every frame is read. A 5 MB PDF would take seven minutes at that rate, with nothing dropped and nothing replayed, which in practice means holding two devices still for well over ten minutes. Files that size are beyond what this tool does, and beyond what it should try to do.
+The same 512 KB at the "maximum" setting is only 180 frames, a 36 second pass at medium speed. With good conditions the limit rarely gets in your way.
+
+The ceiling on this channel is around 14 KB per second: the "maximum" setting (2944 bytes a frame) at medium speed (5 frames a second), assuming every frame is read. Pushing the speed up too gives 28 KB/s on paper, but each of those frames takes about seventy milliseconds to decode, so the receiving side cannot keep pace and the real figure stays lower.
+
+A 5 MB PDF at 14 KB/s takes six minutes, with nothing dropped and nothing replayed, which in practice means holding two devices still for over ten minutes. Files that size are beyond what this tool does, and beyond what it should try to do.
 
 Send anything larger another way: [OnionShare](../tools/onionshare.md) if there is a network, a USB stick if there is not. This page suits things in the range of a few KB to a few tens of KB: keys, config files, signatures, short text.
 
@@ -119,8 +123,11 @@ Record the other screen with your phone's ordinary camera app, then drop the vid
 | Medium | 403 | 77 × 77 | M | 2.0 KB/s | 3.9 KB/s |
 | Large | 849 | 97 × 97 | L | 4.1 KB/s | 8.3 KB/s |
 | Extra large | 1264 | 117 × 117 | L | 6.2 KB/s | 12.3 KB/s |
+| Maximum | 2944 | 177 × 177 | L | 14.4 KB/s | 28.8 KB/s |
 
 The default "medium" is fine, and this table is for anyone who wants to know why. The correction column holds the level codes from the QR specification. There is nothing to choose there, since the tool derives it from the setting you pick.
+
+"Maximum" is the largest a QR code can hold, 2944 bytes a frame. It needs the other camera to capture at 1080p, held close, square on, with decent light. When the conditions fall short it gives no error, it simply collects nothing, and the answer is to drop down a setting.
 
 The top two settings drop to the lower error correction level (L), which fits 28% more data into the same number of modules. What that costs is half the reflection the code can absorb, [measured below](#Why-a-frame-holds-so-little).
 
@@ -233,18 +240,22 @@ Frame `0` carries JSON: `n` filename, `s` original size, `c` bytes actually sent
 
 The specification tops out at version 40 with level L: 2953 bytes. The largest setting here is 988, a third of that. Two reasons, both measured.
 
-#### Version stops at 25 because anything higher fails to decode
+#### The ceiling is version 40, and what held it back was our own code
 
-What decides it is how many pixels one module occupies in the other camera's captured image. Holding the framing fixed (the code spanning 768 pixels of the capture, roughly 60% of the width) and sweeping versions, the cliff sits between 4.5 and 5 pixels per module:
+What decides it is how many pixels one module occupies in the other camera's captured image, and a decoder needs about three to tell one module from the next. This tool used to shrink the camera frame to 1280 wide before decoding, which left version 40 with four pixels a module. It measured as undecodable, so the ceiling sat at version 25.
 
-| Version | Modules | Camera pixels per module | Decode rate |
-|---|---|---|---|
-| 25 | 117 × 117 | 6.1 | 100% |
-| 30 | 137 × 137 | 5.3 | 90% |
-| 35 | 157 × 157 | 4.7 | 70% |
-| 40 | 177 × 177 | 4.2 | 0% |
+That 1280 was this page's own choice, not the camera's limit. Decoding at the camera's native resolution instead, measured in a real browser against a 1080p frame:
 
-Version 30 looks like it only loses ten percent, and the real cost is far worse. With no feedback channel, a per-frame success rate of 0.9 pushes the expected number of passes from one to over two, which the extra 38% per frame does not come close to repaying. Sending the same file at version 30 ends up more than fifty percent slower than at version 25. That is the coupon collector problem above, made concrete.
+| Version | Modules | Bytes per frame | Decoded at 1280 | Decoded at 1920 |
+|---|---|---|---|---|
+| 25 | 117 × 117 | 1264 | five of five | five of five |
+| 30 | 137 × 137 | 1723 | five of five | five of five |
+| 35 | 157 × 157 | 2294 | none | five of five |
+| 40 | 177 × 177 | 2944 | none | five of five |
+
+So the ceiling is now the specification's own. The cost is that a 1920 frame takes around seventy milliseconds to decode against forty at 1280, nearly halving the scan rate. The tool starts at 1280 and steps up only after a run of failures, so low-density streams stay on the fast path and only the frames that need the resolution pay for it.
+
+Version 40 therefore requires the other camera to capture at 1080p. Devices that cannot will collect nothing at all on the "maximum" setting, and the fix is to drop down one.
 
 #### The lower two settings use M, the upper two use L
 
