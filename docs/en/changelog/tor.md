@@ -47,7 +47,7 @@ Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebas
 - Major rebase of the Firefox base onto 153.0esr (up from 140.0esr); Android GeckoView also moved to 153.0esr (tor-browser#45101).
 - The Tor Project announced the alpha channel will now track Firefox beta releases and rebase incrementally, instead of jumping a full year of Firefox versions at once, aiming to ship Tor Browser 16.0 stable a month early in September.
 - NoScript updated to 13.6.30.90201984, Go to 1.26.5, and libevent to 2.1.13 in the build toolchain.
-- Android's omni.ja now uses xz compression, saving about 3 MB; only one tracking-related dependency remains, Mozilla Telemetry (disabled by default).
+- Only one tracking-related dependency remains, Mozilla Telemetry (disabled by default).
 - Known issues: Firefox branding still appears in some places, and the Android address bar icon currently always shows "insecure" — tap it to verify the certificate manually.
 
 ## Tor Browser 15.0.19

@@ -32,7 +32,7 @@ The app and the engine version independently. The cross-platform app is 6.x, whi
 - The CLI gains an anonymous credentials submission path, matching the mechanism the app introduced in 6.1.0.
 - Removes a stray debug print left in `GetFeatureFlag`.
 - Android, iOS, and desktop `pom.xml` files are split apart, so releases on one platform no longer drag the others along.
-- Toolchain updates: Go 1.25.3, the latest stable Android NDK, and bundled assets at probe-assets v0.31.
+- Toolchain updates: Go moved to 1.25.3 and then to 1.26.5 late in the cycle, the latest stable Android NDK, and bundled assets at probe-assets v0.31.
 
 ## OONI Probe 6.1.1
 

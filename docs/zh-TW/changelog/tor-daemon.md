@@ -36,6 +36,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 - 修掉一個競態條件：在特定情況下，會合點（rendezvous point）可以冒充用戶端想連的那個 onion 服務，形成中間人。架設 onion 服務的人這一版務必要升（bug 41297，問題從 0.3.5.3-alpha 就存在）。
 - 用戶端遇到 onion 服務把某個引介點的公鑰編成全零時，不再直接中止結束（bug 41295）。
 - 目錄權威不再接受離開政策裡把埠寫成 0 的寫法。原本的次要檢查誤把 `0` 解析成 `1-0` 這個埠範圍，產生 networkstatus 投票時會觸發 assert。
+- TROVE-2026-026：conflux 物件的 use-after-free，甚至可能重複釋放。上游寫明惡意的離開節點可以拿它讓用戶端崩潰，所以這一版不只跟 onion 服務營運者有關，一般用戶端也在範圍內（bug 41306）。
 
 ## tor 0.4.9.10
 
@@ -50,10 +51,12 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 
 > 2026-06-01 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.9/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>安全釋出，一次修掉三個主要問題。上游沒有提到已被實際利用。
+- <span class="urg-tag urg-tag--now">立刻</span>安全釋出，一次修掉十個帶 TROVE 編號的問題（TROVE-2026-013 到 022）。上游沒有提到已被實際利用。
 - TROVE-2026-022：壓縮炸彈檢查可以被繞過。攻擊者把多個 gzip 或 zlib 子串流接在一起，每一段都剛好低於單串流的偵測門檻，整體就閃過了檢查（bug 41275，問題從 0.3.1.1-alpha 就存在）。
 - TROVE-2026-021：解壓被截斷的 zlib/gzip 串流時陷入無窮迴圈。截斷的串流永遠到不了 `Z_STREAM_END`，zlib 回傳的 `Z_BUF_ERROR` 被誤判成輸出緩衝區滿了，於是無限重試（bug 41274）。
 - TROVE-2026-017：送出 `CONFLUX_SWITCH` 資料元失敗時的 NULL write after free。送出失敗會關閉電路並移除該條腿，但回傳值被忽略，呼叫端接著往已經釋放的記憶體寫入而崩潰（bug 41263）。
+- 用戶端也在影響範圍：TROVE-2026-014 是 conflux 的 heap-use-after-free，用戶端或離開中繼都誘發得了。TROVE-2026-013 與 015 讓惡意 onion 服務可以用特製的 descriptor 把用戶端弄到中止。TROVE-2026-018 是 DNSPort 的崩潰。
+- 另外三個：TROVE-2026-019 解析 consensus 或分離簽章時的越界讀寫，對目錄權威影響最大。TROVE-2026-020 是啟用工作量證明防禦的 onion 服務可能除以零崩潰。TROVE-2026-016 同屬這一批。
 
 ## tor 0.4.9.8
 
@@ -71,6 +74,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 - TROVE-2026-011：處理 END、TRUNCATE 與 TRUNCATED 資料元時，若酬載裡沒有原因欄位會發生越界讀取，也就是讀到不該讀的記憶體，可能讓中繼當掉或洩漏記憶體內容。這個問題從 0.1.1.1-alpha 存在到現在（bug 41254）。
 - TROVE-2026-008：不再透過 conflux 的分腿嘗試或接受 `BEGIN_DIR`（bug 41243）。
 - TROVE-2026-010：清空 conflux 的亂序佇列時修正計數（bug 41251）。
+- 另外三個：TROVE-2026-009 是電路在佇列記憶體壓力下被重複關閉造成的用戶端崩潰，TROVE-2026-006 是收到順序錯亂的 CERT 資料元時的空指標解參考，TROVE-2026-007 是收到格式錯誤的 BEGIN 資料元時的差一越界讀取。
 
 ## tor 0.4.9.6、0.4.8.23
 

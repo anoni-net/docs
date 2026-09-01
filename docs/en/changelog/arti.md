@@ -58,6 +58,7 @@ On the client side, Arti's capabilities are now largely on par with c-tor: it wo
 > 2026-03-31 · [Upstream announcement](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [Full translation](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
 
 - HTTP CONNECT included in the full build and enabled by default, stronger RPC management capabilities, continued progress toward making Arti usable as a Tor relay.
+- Security fix: one low-severity issue. An application embedding arti that also pulls in `weak-table` with `ahash` enabled becomes somewhat less DoS-resistant on machines without hardware AES support (TROVE-2026-005).
 
 !!! info "Earlier versions"
 

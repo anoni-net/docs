@@ -26,7 +26,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 - <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，同時帶入 Linux 核心的安全更新。上游沒有提到這些漏洞有實際攻擊案例。
 - Tor Browser 升至 15.0.20（基於 Firefox ESR 140.14）。
-- 核心升至 6.12.101，涵蓋 Debian 安全公告 DSA-6415-1 的 24 個漏洞，影響包含提權、阻斷服務與資訊外洩。
+- 核心升至 6.12.101，涵蓋 Debian 安全公告 DSA-6415-1 的 28 個漏洞，影響包含提權、阻斷服務與資訊外洩。這一則以下的細節取自 Debian 的安全公告與 Tails 的原始碼倉庫，Tails 官方公告本身只寫了 Tor Browser 升級與 Persistent Storage 修正兩項。
 - 修正部分電腦上 Persistent Storage 無法解鎖的問題。啟用流程原本會等待 `udevadm settle`，無關的硬體問題會讓這一步逾時或失敗，現已不再等待。
 - 新增核心參數 `proc_mem.force_override=ptrace`，阻擋行程直接改寫自己的記憶體映射，提高提權漏洞的利用難度。
 - 抗審查連線設定改為自動從 Tor Browser 匯入 Moat fronts 與 reflectors，減少因設定過期而連不上的情況。

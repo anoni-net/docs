@@ -88,7 +88,7 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 > 2026-05-21 · [Upstream announcement](https://tails.net/news/version_7.8/){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">Soon</span>Tor Browser updated to 15.0.14 (based on Firefox ESR 140.11).Upstream mentions no real-world attacks involving these.
-- Mitigates the Linux kernel local privilege escalation "Fragnesia" (alongside the earlier "Drity Frag" mitigation). Such flaws let an application inside Tails gain administrator privileges, which combined with other unknown vulnerabilities could fully compromise Tails and deanonymize the user.
+- Mitigates the Linux kernel local privilege escalation "Fragnesia" (alongside the earlier "Dirty Frag" mitigation). Such flaws let an application inside Tails gain administrator privileges, which combined with other unknown vulnerabilities could fully compromise Tails and deanonymize the user.
 - Mitigates a Flatpak sandbox escape via Yelp; yelp updated to 42.2-4tails1.
 - Patches CVE-2026-46529 (evince), CVE-2026-41989 (libgcrypt20), and CVE-2026-41054 (haveged).
 - Thunderbird is no longer shipped with the image. It can still be installed automatically through Persistent Storage's additional software, pulling the latest version from Debian on each Tails startup. The previously bundled version was often out of date because Debian's Thunderbird update typically lands shortly after each Tails release, both of which follow Firefox's release cadence.

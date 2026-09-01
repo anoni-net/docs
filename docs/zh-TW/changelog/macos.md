@@ -57,7 +57,7 @@ Apple 同時維護最新版與前兩代，安全修補三條線都發，但只�
 - <span class="urg-tag urg-tag--soon">儘快</span>年度最大的一波，Tahoe 補 153 個、Sequoia 138 個、Sonoma 127 個。三條線的數量落差就是舊線收到的修補比較少的具體證據。Apple 沒有標注任何一項已被實際利用。
 - Kernel 是重點，Tahoe 佔 27 個、Sequoia 21 個、Sonoma 20 個。
 - Accounts 有一個 app 可能取得 root 權限。Assets 有一個惡意應用程式可以繞過隱私偏好，也就是不必經過你同意就取得原本要授權的權限。
-- AppleDouble 處理惡意檔案時可能導致應用程式異常結束。Model I/O 與 HFS 各有多個檔案解析類的問題，這一類的觸發方式通常是打開一個別人給的檔案。
+- AppleDouble 處理惡意檔案時可能導致應用程式異常結束，或是被執行任意程式碼。Model I/O 與 HFS 各有多個檔案解析類的問題，這一類的觸發方式通常是打開一個別人給的檔案。
 
 ## macOS Tahoe 26.5.2
 
