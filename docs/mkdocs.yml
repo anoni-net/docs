@@ -143,6 +143,7 @@ nav:
           - changelog/index.md
           - changelog/tor.md
           - changelog/tor-daemon.md
+          - changelog/anti-censorship.md
           - changelog/tails.md
           - changelog/arti.md
           - changelog/ooni.md
