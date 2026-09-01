@@ -47,7 +47,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 |------|------|------|
 | 離線內容索引 | `docs/hooks/offline_index.py` | mkdocs hook，建置時產出各語系的 `offline-index.json`（有哪些頁面、屬於哪個章節、多大）。離線內容管理頁 `docs/<lang>/offline.md` 用它列出可勾選的清單，介面在 `docs/zh-TW/js/offline-library.js`（另兩語是 symlink）|
 | 文件編輯標準 | `docs_style_lint.py`、`test_docs_style_lint.py` | 把貢獻者百科「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則（破折號與分號在英文屬正常用法，不套中文那組）。除了 Markdown，也掃 `docs/zh-TW/js/*.js` 裡 `STRINGS` 物件的 UI 字串，語系從物件的 key 判斷而不是路徑。純標準庫，無外部相依。細節見 [`tools/README.md`](./tools/README.md) |
-| 三語系對齊 | `check_start_parity.py`、`test_check_start_parity.py` | `docs/<lang>/start/` 三個語系的檔名清單、nav 收錄與章節錨點。這三件 mkdocs 都不擋：`hreflang_alternate_links.html` 無條件替每頁產生三個語系的 alternate，對面檔案不存在就是 404；nav 漏收只給 INFO；`links.anchors` 預設也是 INFO，實測把錨點改壞照樣 Documentation built。start 整區只做聚合、每頁都是連結，斷了讀者只會落在文章開頭，看起來像連對了。由 [`docs-style-lint.yml`](./.github/workflows/docs-style-lint.yml) 觸發，掛在那支是因為錨點檢查看的是被連結那篇的小標，只有它的 paths 涵蓋得到「改目標文章、沒碰 start/」的 PR |
+| 三語系對齊 | `check_start_parity.py`、`test_check_start_parity.py` | `docs/<lang>/start/` 三個語系的檔名清單、nav 收錄與章節錨點。這三件 mkdocs 都不擋：`hreflang_alternate_links.html` 無條件替每頁產生三個語系的 alternate，對面檔案不存在就是 404。nav 漏收只給 INFO。`links.anchors` 預設也是 INFO，實測把錨點改壞照樣 Documentation built。start 整區只做聚合、每頁都是連結，斷了讀者只會落在文章開頭，看起來像連對了。由 [`docs-style-lint.yml`](./.github/workflows/docs-style-lint.yml) 觸發，掛在那支是因為錨點檢查看的是被連結那篇的小標，只有它的 paths 涵蓋得到「改目標文章、沒碰 start/」的 PR |
 | 小工具 | `test_passphrase.mjs`、`test_qrcode.mjs`、`test_leaks.mjs`、`test_cleanurl.mjs`、`test_invisible.mjs`、`test_qrread.mjs` | `docs/zh-TW/js/passphrase.js` 的取樣、熵計算、字元集與詞表完整性。取樣那幾項刻意構造出「直接取模」與「拒絕重抽」會給出不同答案的輸入，寫回 `% n` 就會紅。這類錯誤畫面上完全正常，照樣吐出看起來很隨機的字，而受害的讀者不會知道自己受害。`test_qrcode.mjs` 另外寫了一個獨立的 QR 解碼器，把產生的矩陣讀回字串再比對，驗的是「掃得出來而且內容對」，人眼讀不了 QR，這種錯只有解回文字才驗得到。`test_leaks.mjs` 掃指紋示範頁的原始碼，出現任何送資料或寫入儲存的手段就紅，那一頁的整個立論建立在「什麼都不送」上。`test_cleanurl.mjs` 守的是網址清理器「必要參數不能被誤刪」，刪掉 `?v=` 讀者只會覺得對方給錯連結，不會怪到工具頭上。`test_invisible.mjs` 的誤判案例跟偵測案例一樣多，emoji 裡的 ZWJ、RTL 文字裡的方向標記、整段俄文裡的西里爾字母都不該報，全部報成可疑的話那支工具會變成狼來了 |
 | 部署 | `cf_purge.py`、`test_cf_purge.py` | 建置完把產物映射回網址，分批並行清除 Cloudflare 快取（每批 30 條，同時 6 批）。測試由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發 |
 | 部署 | `s3_restore_mtime.py`、`test_s3_restore_mtime.py` | 上傳前比對 MD5 與 S3 的 ETag，內容沒變的把時間戳調回遠端版本，讓 `aws s3 sync` 跳過。`sync` 只看大小與時間，不看內容 |
@@ -124,7 +124,7 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
   - `charts`: Vega-Lite 圖表支援（用於數據視覺化）
   - `social`: Open Graph 社群分享卡。版型是 `docs/layouts/anoni.yml`，三個語系共用一份，
     語系差異（字型、卡片上的站名）寫在各自的 `mkdocs*.yml`。`cards_layout_dir` 相對於
-    執行 mkdocs 的目錄，所以建置一律在 `docs/` 底下跑。設計說明見
+    執行 mkdocs 的目錄，所以建置一律在 `docs/` 底下執行。設計說明見
     `docs/zh-TW/community/brand-assets.md` 的「社群分享卡」一節
 - **特殊功能**: 使用 `custom_dir` 設定客製化的 overrides（針對不同語言有不同的 overrides 目錄）
 
