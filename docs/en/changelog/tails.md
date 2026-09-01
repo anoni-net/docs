@@ -8,11 +8,21 @@ icon: material/usb-flash-drive-outline
 
 [Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
 
+## How we rate urgency
+
+- <span class="urg-tag urg-tag--now">Now</span>An emergency security release from the Tails project, marked by a third version number (7.10.1, for example). Upstream decided it could not wait for the next scheduled release, which means the flaw is serious.
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release whose fixes cover kernel privilege escalation, sandbox escape, or an important Tor Browser security update.
+- <span class="urg-tag urg-tag--routine">Routine</span>Everything else, mostly features and hardware support.
+
+A compromise on Tails means something different from a compromise on an ordinary OS. Gaining administrator privileges means losing anonymity protection, and the attacker sees everything you do inside Tails, so "Now" on this page deserves to be taken more seriously than elsewhere.
+
+The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory.
+
 ## Tails 7.11
 
 > 2026-08-19 · [Upstream announcement](https://tails.net/news/version_7.11/){target="_blank"}
 
-- A scheduled release that also carries a Linux kernel security update.
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that also carries a Linux kernel security update.
 - Tor Browser updated to 15.0.20 (based on Firefox ESR 140.14).
 - The kernel is updated to 6.12.101, covering the 24 flaws in Debian security advisory DSA-6415-1, whose impact ranges over privilege escalation, denial of service, and information leaks.
 - Fixes Persistent Storage failing to unlock on some computers. Activation used to wait for `udevadm settle`, so an unrelated hardware problem could make that step time out or fail; the wait has been removed.
@@ -25,7 +35,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-08-05 · [Upstream announcement](https://tails.net/news/version_7.10.1/){target="_blank"}
 
-- Emergency security release fixing critical flaws in the Linux kernel and the expat XML library.
+- <span class="urg-tag urg-tag--now">Now</span>Emergency security release fixing critical flaws in the Linux kernel and the expat XML library.
 - The kernel is updated to 6.12.100, fixing CVE-2026-64560, which could let Tor Browser inside Tails gain administrator privileges. A malicious website that exploits it could fully compromise Tails and deanonymize the user. The attack is unlikely and would take a strong adversary such as a government or a hacking firm; no active exploitation has been observed.
 - The expat XML library is updated to 2.8.2, fixing DSA-6404-1, a set of flaws that could let applications using expat gain administrator privileges. Opening a malicious file in LibreOffice, Audacity, or Git could lead to the same full compromise and deanonymization. No active exploitation has been observed.
 - USB images and automatic upgrades are 70 MB smaller after removing unused firmware.
@@ -36,7 +46,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-07-23 · [Upstream announcement](https://tails.net/news/version_7.10/){target="_blank"}
 
-- A scheduled release introducing a new shutdown procedure and a new video player.
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release introducing a new shutdown procedure and a new video player.
 - Adopts GNOME's standard shutdown procedure. The Power Off dialog now warns about unsaved documents and open applications, and shutdown completes automatically after 60 seconds. It is a bit slower in exchange for better data protection. An emergency shutdown option remains for a faster power-off.
 - The video player is now Celluloid, more modern and reliable, and it has no network access. To watch videos online, use Tor Browser or install VLC as additional software. Celluloid does not work on computers manufactured in 2011 or earlier.
 - Tor Browser updated to 15.0.19.
@@ -47,7 +57,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-07-01 · [Upstream announcement](https://tails.net/news/version_7.9.1/){target="_blank"}
 
-- Emergency security release fixing two local privilege-escalation flaws in the Linux kernel.
+- <span class="urg-tag urg-tag--now">Now</span>Emergency security release fixing two local privilege-escalation flaws in the Linux kernel.
 - Patches CVE-2026-43503 (DirtyClone) and CVE-2026-46331 (PACKET_EDIT_MEME), with the kernel updated to 6.12.94. Such flaws let an application inside Tails gain administrator privileges; combined with other unknown vulnerabilities they could fully compromise Tails and deanonymize the user. No active exploitation has been observed.
 - Tor Browser updated to 15.0.17, and the Tor client to 0.4.9.11.
 - This is a security-only release; aside from Tor Browser, the kernel, and the Tor client, it keeps 7.9's software set. Automatic upgrades are available from Tails 7.0 or later.
@@ -56,7 +66,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-06-18 · [Upstream announcement](https://tails.net/news/version_7.9/){target="_blank"}
 
-- Regular scheduled release, not an emergency security update.
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update.
 - Tor Browser updated to 15.0.16.
 - Updated some firmware packages, improving support for newer hardware such as graphics and Wi-Fi.
 - Fixed a bug where the "outdated Secure Boot certificate" prompt could appear in the rare case when the certificates were already up to date.
@@ -66,7 +76,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-06-04 · [Upstream announcement](https://tails.net/news/version_7.8.1/){target="_blank"}
 
-- Emergency security release fixing a serious Linux kernel vulnerability and several Tor client security vulnerabilities.
+- <span class="urg-tag urg-tag--now">Now</span>Emergency security release fixing a serious Linux kernel vulnerability and several Tor client security vulnerabilities.
 - Patches the Linux kernel flaw CVE-2026-43503 (kernel updated to 6.12.90-2), a local privilege escalation that lets an application inside Tails gain administrator privileges; combined with other unknown vulnerabilities it could fully compromise Tails and deanonymize the user. No active exploitation has been observed.
 - Tor client updated to 0.4.9.9, fixing several security vulnerabilities.
 - This is a security-only emergency release; Tor Browser, Thunderbird, and the Debian base version are unchanged from 7.8. Automatic upgrades are available from Tails 7.0 or later.
@@ -75,7 +85,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-05-21 · [Upstream announcement](https://tails.net/news/version_7.8/){target="_blank"}
 
-- Tor Browser updated to 15.0.14 (based on Firefox ESR 140.11).
+- <span class="urg-tag urg-tag--soon">Soon</span>Tor Browser updated to 15.0.14 (based on Firefox ESR 140.11).
 - Mitigates the Linux kernel local privilege escalation "Fragnesia" (alongside the earlier "Drity Frag" mitigation). Such flaws let an application inside Tails gain administrator privileges, which combined with other unknown vulnerabilities could fully compromise Tails and deanonymize the user.
 - Mitigates a Flatpak sandbox escape via Yelp; yelp updated to 42.2-4tails1.
 - Patches CVE-2026-46529 (evince), CVE-2026-41989 (libgcrypt20), and CVE-2026-41054 (haveged).
@@ -88,7 +98,7 @@ icon: material/usb-flash-drive-outline
 
 > 2026-03-26 · [Upstream announcement](https://tails.net/news/version_7.6/){target="_blank"} · [Full translation](../blog/posts/2026-tails-7-6.md)
 
-- Automatic Tor bridges (region-aware via Moat API), GNOME Secrets replaces KeePassXC as the built-in password manager, routine component bumps (Tor Browser 15.0.8, Thunderbird 140.8.0, Electrum 4.7.0).
+- <span class="urg-tag urg-tag--routine">Routine</span>Automatic Tor bridges (region-aware via Moat API), GNOME Secrets replaces KeePassXC as the built-in password manager, routine component bumps (Tor Browser 15.0.8, Thunderbird 140.8.0, Electrum 4.7.0).
 
 !!! info "Earlier versions"
 
