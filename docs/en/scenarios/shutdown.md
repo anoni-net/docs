@@ -14,6 +14,10 @@ This page sorts outages into four levels, with how to tell them apart, what each
 
 For why the strength of your preparation should follow your own situation, see [Threat modelling](../basics/threat-model.md). To store this site on your device so you can read it during an outage, see [Offline reading](../offline.md).
 
+!!! tip "If you are short on time, do these three"
+
+    One, store this site on your device (see [Offline reading](../offline.md)); installing it after the network drops is too late. Two, check that your backups open with no network, the encrypted ones especially. Three, find the three to five people you must be able to reach and agree one contact method that does not go over the internet, plus a place and time to meet. The rest of this page is why, and how to do it more thoroughly.
+
 !!! warning "This page is in progress (2026 Q3)"
 
     The section on working during an outage is currently an outline and will be completed in September 2026. Everything else is ready to use.
@@ -36,7 +40,7 @@ You are connected, and it is slow. Text messages get through, photos fail halfwa
 
 Other sites work normally, a handful of services will not connect.
 
-**How to tell:** other sites open over the same line. This is the only level you can confirm with measurement tools. Public measurement such as [OONI](../tools/what-is-ooni.md) shows whether it is only you, and whether others in the same area see it too.
+**How to tell:** other sites open over the same line. This is the only level you can confirm with measurement tools. Public measurement such as [OONI](../tools/what-is-ooni.md) (a tool anyone can run to test whether a site is being blocked where they are) shows whether it is only you, and whether others in the same area see it too.
 
 **What you still have:** the channels that are not blocked, and circumvention tools. This page does not give a circumvention how-to, for reasons set out under "What this page does not do".
 
@@ -52,7 +56,7 @@ The line carries no connection at all.
 
 - Whatever you stored on the device beforehand. Anything you did not store is out of reach now
 - Short-range direct connections. Tools such as Briar can sync with people nearby over Bluetooth or a local network without a server. For how messaging tools differ, see [Comparing anonymous messaging tools](../tools/messaging-comparison.md)
-- Physical delivery. USB sticks, paper, telling someone face to face. Think about the destination first: physical delivery usually means carrying data to somewhere that still has a connection, and the far end still needs a point that can get online. [CPJ interviewed journalists in Iran, Gaza and Sudan in April 2026](https://cpj.org/2026/04/how-middle-east-journalists-report-during-internet-blackouts/){target="_blank"} about the methods they actually used during blackouts. In a total regional outage that connected point may lie outside the affected area, and how far away depends on how wide the outage is
+- Physical delivery. USB sticks, paper, telling someone face to face. Think about the destination first. Physical delivery usually means carrying data to somewhere that still has a connection, and the far end still needs a point that can get online. In a total regional outage that connected point may lie outside the affected area, and how far away depends on how wide the outage is ([CPJ, the Committee to Protect Journalists, interviewed journalists in Iran, Gaza and Sudan in April 2026](https://cpj.org/2026/04/how-middle-east-journalists-report-during-internet-blackouts/){target="_blank"} about the methods they actually used during blackouts)
 
 **The common mistake:** assuming every wireless function is dead. Bluetooth and local networks do not pass through an operator or the internet, so they keep working during a total outage. That is the biggest difference between level three and level four.
 
@@ -90,7 +94,7 @@ A power bank, a car charger, and knowing where there is electricity near where y
 
 The hardest part of an outage is usually not the missing tools, it is not being able to reach one specific person. The contact list is on the phone, the network is not, and all those numbers reach nobody. And a contact list was never going to hold something like "where to wait for them when you cannot get through".
 
-This section is one task in five steps: agree it, write it down, go over it together, walk it once, and revisit it. Most people do half of the first step.
+This section is one task in five steps: agree it, write it down, go over it together, walk it once, and revisit it. Most people do half of the first step. For how well evidenced any of this is, see "How well evidenced this is" below.
 
 ### One, the six things to agree on
 
@@ -113,21 +117,21 @@ The most common way to fill this in is one messaging app as the main channel and
 
 Three things get mistaken for backups:
 
-- **Bluetooth and mesh tools:** These hop about a hundred metres at a time and rely on a dense crowd to relay, which works at a protest and not for reaching people spread across a city. Bridgefy saw a surge of downloads in Hong Kong in 2019. A Royal Holloway team's 2020 reverse engineering, published at CT-RSA 2021, showed users could be tracked, messages carried no authentication, and anyone could be impersonated. The company then adopted libsignal, and Martin Albrecht, one of the original researchers, showed in follow-up work at [USENIX Security 2022](https://www.usenix.org/conference/usenixsecurity22/presentation/albrecht){target="_blank"} that the fix was incomplete
+- **Direct Bluetooth apps such as Bridgefy:** These skip the carrier and the internet, passing a message from one nearby phone to the next. Each hop covers roughly a hundred metres and the relay depends on a dense crowd, which works at a protest and not for reaching people spread across a city. They are also less secure than an ordinary messaging app: academic work showed twice over that Bridgefy users could be tracked and messages forged, the second time after it had adopted Signal's encryption protocol ([reverse engineering in 2020](https://eprint.iacr.org/2021/214){target="_blank"}, [follow-up work in 2022](https://www.usenix.org/conference/usenixsecurity22/presentation/albrecht){target="_blank"}). Do not make it your only backup
 - **Broadcast:** Iran's data hidden in satellite television signals, the shortwave service the BBC opened during the crisis in Sudan, and the Ukrainian government's requirement that radio stations hold at least three days of power during blackouts were all genuinely used. All of them run one way. Receiving a broadcast is a different thing from reaching a person
 - **Anything that needs the other person online too:** That includes voice over IP and satellite internet terminals. A satellite terminal also needs power, so at level four it will not turn on either
 
-At least one backup should not go over the internet. Myanmar in early 2021 is the clearest case on record: the operator confirmed voice and SMS stayed open after the coup while data was cut. Accounts from Cuba in 2021 and Iran in 2019 contradict each other, with residents saying landlines were down for half an hour and other reporting saying landlines and SMS were both interrupted. And in Kashmir in August 2019 landlines, fixed broadband and mobile went down together, so a landline is not a guaranteed floor. Its value is that it fails under different conditions than the network.
+At least one backup should not go over the internet. Myanmar in early 2021 is the clearest case on record: the operator confirmed voice and SMS stayed open after the coup while data was cut. How far a landline holds up varies by event: residents in Cuba in 2021 said theirs was down for half an hour, Iran in 2019 has [measurement showing a partial shutdown of telephony services](https://netblocks.org/reports/internet-disrupted-in-iran-amid-fuel-protests-in-multiple-cities-pA25L18b){target="_blank"}, and in Kashmir in August 2019 landlines, fixed broadband and mobile went down together. A landline is not a guaranteed floor. Its value is that it fails under different conditions than the network.
 
 ### Three, whoever checks has to know the answer already
 
-The situation is this: after an outage you get a message from someone claiming to be one of the people in your arrangement, and you need to judge whether it really is them.
+After an outage you get a message from someone claiming to be one of the people in your arrangement, and you need to judge whether it really is them.
 
 You ask a question only the two of you know the answer to. **Whoever is doing the checking has to know the correct answer**, otherwise asking settles nothing. So the answer stays with you. What it must not do is sit next to the question, because anything on the same piece of paper gets found together.
 
 Military challenge and password work the same way. Both sides agree the words beforehand. The sentry knows the correct reply and does not offer it, waiting for the person approaching to say it first. On D-Day the challenge was "flash" and the reply "thunder".
 
-Proof-of-life forms in the kidnap negotiation field do write down both the questions and the answers, because that document exists to be handed to the negotiator who checks the replies against it. The price is that it has to be encrypted, access-controlled, and reviewed every three years.
+Proof-of-life forms (used in kidnap negotiation to establish that a hostage is alive and that the words are really theirs, through a question agreed in advance) commonly write down both the questions and the answers, because that document exists to be handed to the negotiator who checks the replies against it. The price is that it has to be encrypted, access-controlled, and reviewed every three years.
 
 The workable middle ground is to write the questions, agree the answers in person, and keep those in your heads. If you cannot hold them there, put them in a password manager or an encrypted note, stored apart from the questions.
 
@@ -158,18 +162,6 @@ Professional templates already split it this way. The Rory Peck Trust communicat
 
 **Revisit it:** Changing jobs, moving house, changing contact details, or a change in anyone's situation are all reasons to check the content still holds. When it changes, change the version date, and tell whoever holds the old copy that it is void. Otherwise two people end up with different meeting points.
 
-### Six, none of this has a field record behind it
-
-Across the documented shutdowns in Iran, Myanmar, Kashmir, Sudan, Ethiopia, Ukraine, Cuba and Hong Kong, there is no account of an individual using a paper contact list and it later being recorded as having helped. The one documented use of paper is from the Tigray shutdown in Ethiopia, where the World Health Organization fell back on paper reports carried by hand, and that was institution-to-institution reporting.
-
-The same holds for acting after a set period of silence. It is standard advice in American family preparedness templates, and none of those eight events has a first-hand account of it being carried out.
-
-What is documented as having worked is a different set of things: landlines staying up in some events, physically travelling to where there is a connection (a train left Kashmir every morning after the 2019 shutdown, carrying people out of the region to get online), and physical sites set up by institutions (Ukraine's Points of Invincibility, the media centre in Kashmir, the Red Cross satellite phone in Tigray).
-
-Organisers in Pakistan in 2025 are recorded as having agreed meeting points in advance. But the "be water" tactic in Hong Kong in 2019 deliberately avoided fixed assembly points, on the grounds that fixed leadership and locations in 2014 had made people easier to target. The same practice cuts in opposite directions for finding family and for street protest.
-
-So the honest description of this section is a reasonable precaution rather than a historically proven mainstay. The most valuable things you can do after filling it in are going over it together and walking it once. Without those two, however complete the content, it is only a piece of paper.
-
 ## Working during an outage
 
 !!! warning "This section is in progress"
@@ -186,9 +178,9 @@ This is the most overlooked stretch and the riskiest, because attention goes to 
 
 The moment the connection is back, every queued app on the device starts uploading and downloading together. Photo backup, the outbox, system updates, backup tools, all at the same time.
 
-Two problems follow. First, the traffic signature at that moment is distinctive, and the period right after a network returns is exactly when observation is heaviest. Second, automatic upload does not ask. It sends every photo taken during the outage, including the ones you had no intention of letting out.
+Two problems follow. First, the traffic signature at that moment is distinctive, and the period right after a network returns is exactly when observation is heaviest. Second, every photo taken during the outage, including the ones you had no intention of letting out, goes up with the rest, with no confirmation prompt in between.
 
-The approach is to control the order of the return. When you notice connectivity is back, stay in flight mode or keep automatic sync off, open one channel to find out what the situation is outside, and only then decide item by item what to send.
+The approach is to control the order of the return. When you notice connectivity is back, stay in flight mode or keep automatic sync off and open one channel to find out what the situation is outside. Only then decide item by item what to send.
 
 ### What is queued may no longer be safe to send
 
@@ -204,9 +196,9 @@ The first action after reconnecting is to check, not to transfer. Whether they a
 
 Taiwan's external connectivity and electricity supply can both be seen in rough outline in public data. What that data is good for is judging what an outage might look like. It is not a prediction.
 
-**Undersea cables and the grid:** The [Tor relay globe](../games/tor-network.md) zoomed to Taiwan shows cable landing points, substations, power plants and the 345kV backbone, each layer labelled with its source and precision. Figures such as the number of landing points and the capacity headroom at substations give a sense of how concentrated external connectivity and power supply are.
+**Undersea cables and the grid:** The [Tor relay globe](../games/tor-network.md) zoomed to Taiwan shows cable landing points, substations, power plants and the 345kV (kilovolt, the voltage class of Taiwan's main high-voltage transmission lines) backbone, each layer labelled with its source and precision. Figures such as the number of landing points and the capacity headroom at substations give a sense of how concentrated external connectivity and power supply are.
 
-**How far network measurement reaches:** [ASN measurement coverage in Taiwan](../regional/ooni-asn-coverage.md) sets out which autonomous systems are actually being measured. That determines whether public data can corroborate an anomaly when one occurs.
+**How far network measurement reaches:** [ASN measurement coverage in Taiwan](../regional/ooni-asn-coverage.md) sets out which autonomous systems (ASNs, blocks of the internet each administered by a single organisation such as a carrier) are actually being measured. That determines whether public data can corroborate an anomaly when one occurs.
 
 **What this data cannot be used for:** It describes the current state and the degree of concentration. It does not support any inference about whether a particular event will happen, or when. Reading high concentration as a sign that an outage is imminent is over-reading it.
 
@@ -218,6 +210,18 @@ Priorities during an outage differ by who you are:
 - Keeping an organisation in contact internally during an outage, see [Activists and protest digital safety](./activist.md)
 - Already living with blocked services long term, see [Sharing information on mainland Chinese platforms](./mainland-speech.md)
 - No particular role, the baseline in [What everyone should be doing](./everyday-baseline.md) applies during an outage as much as at any other time
+
+## How well evidenced this is
+
+Across the documented shutdowns in Iran, Myanmar, Kashmir, Sudan, Ethiopia, Ukraine, Cuba and Hong Kong, there is no account of an individual using a paper contact list and it later being recorded as having helped. The one documented use of paper is from the Tigray shutdown in Ethiopia, where the World Health Organization fell back on paper reports carried by hand, and that was institution-to-institution reporting.
+
+The same holds for acting after a set period of silence. It is standard advice in American family preparedness templates, and none of those eight events has a first-hand account of it being carried out.
+
+What is documented as having worked is a different set of things: landlines staying up in some events, physically travelling to where there is a connection (after the 2019 Kashmir shutdown people travelled out of the restricted area on the existing regional train service to get online), and physical sites set up by institutions (Ukraine's Points of Invincibility, the media centre in Kashmir, the Red Cross satellite phone in Tigray). Points of Invincibility were emergency sites the Ukrainian government set up during power and network outages, offering electricity, heating and connectivity.
+
+Organisers in Pakistan in 2025 are recorded as having agreed meeting points in advance. But the "be water" tactic in Hong Kong in 2019 deliberately avoided fixed assembly points, on the grounds that fixed leadership and locations in 2014 had made people easier to target. The same practice cuts in opposite directions for finding family and for street protest.
+
+So the honest description of "Agreeing things with other people in advance" is a reasonable precaution rather than a historically proven mainstay. That does not make it not worth doing: going over it together and walking it once need nobody's validation, cost little, and once done are done. Without those two, however complete the content, it is only a piece of paper.
 
 ## What this page does not do
 
