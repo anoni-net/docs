@@ -47,7 +47,7 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 - Firefox 基底大幅 rebase 至 153.0esr（前一版为 140.0esr），Android 版 GeckoView 同步升至 153.0esr（tor-browser#45101）。
 - 官方宣布 Alpha 通道日后改为持续追踪 Firefox beta 版本、逐步小步 rebase，取代过去一次跳过整年版本的做法，目标让 16.0 稳定版于 9 月提前发布。
 - NoScript 升至 13.6.30.90201984，构建工具链的 Go 升至 1.26.5，libevent 升至 2.1.13。
-- Android 版 omni.ja 改用 xz 压缩省下约 3 MB，追踪用途的依赖仅剩 Mozilla Telemetry（默认停用）。
+- 追踪用途的依赖仅剩 Mozilla Telemetry（默认停用）。
 - 已知问题：部分画面仍残留 Firefox 品牌图示。Android 版网址栏图示目前一律显示「不安全」，需手动点击查验证书。
 
 ## Tor Browser 15.0.19

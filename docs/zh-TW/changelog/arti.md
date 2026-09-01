@@ -78,12 +78,14 @@ Arti 是 Tor Project 從 2021 年開始的計畫，把原本用 C 寫成的 Tor�
 - RPC 介面支援非阻塞請求與 superuser session 管理，便於外部工具控制 Arti 行為。
 - relay 開發持續推進，朝「Arti 可作為 Tor 中繼運行」的目標邁進。
 - 目錄服務、設定系統與多項內部模組同步迭代修補。
+- 安全修補：一個低危問題。嵌入 arti 的應用程式如果也用了 `weak-table` 且開啟 `ahash`，在沒有硬體 AES 支援的機器上，抗阻斷服務的能力會變差（TROVE-2026-005）。
 
 ## Arti 2.1.0
 
-> 2026-03-18 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"}
+> 2026-03-03 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"}
 
 - 中繼支援的底層建設大幅補完，為 2.2.0 開始對外開放 relay 功能鋪路。
 - 設定系統改用 `derive-deftly` 巨集架構，新增設定型別的成本顯著降低。
 - RPC 介面持續打磨，加入更多管理用 API。
 - MSRV（最低支援 Rust 版本）提升至 Rust 1.89.0。
+- 安全修補三項，都是相依套件升級：`bytes` 升到 0.11.1，避開 `BytesMut::reserve()` 整數溢位造成的未定義行為（TROVE-2026-001、RUSTSEC-2026-0007）。`keccak` 升到 0.1.6，避開 ARMv8 組譯錯誤可能造成的未定義行為。`time` 升到 0.3.47，清掉 RUSTSEC-2026-0009 的稽核警告。

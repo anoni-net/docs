@@ -30,7 +30,7 @@ icon: material/access-point-network
 - 命令行版新增匿名凭证（anonymous credentials）的提交路径，跟 app 端在 6.1.0 引入的机制对应。
 - 移除 `GetFeatureFlag` 里误留的调试输出。
 - Android、iOS 与桌面版的 `pom.xml` 拆开，各平台的发布不再互相牵动。
-- 构建工具链更新：Go 升至 1.25.3、Android NDK 升到最新稳定版，内置资产升至 probe-assets v0.31。
+- 构建工具链更新：Go 先升到 1.25.3、该版收尾时再升到 1.26.5，Android NDK 升到最新稳定版，内置资产升至 probe-assets v0.31。
 
 ## OONI Probe 6.1.1
 

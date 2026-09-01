@@ -32,7 +32,7 @@ App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與
 - 命令列版新增匿名憑證（anonymous credentials）的提交路徑，跟 app 端在 6.1.0 引入的機制對應。
 - 移除 `GetFeatureFlag` 裡誤留的除錯輸出。
 - Android、iOS 與桌面版的 `pom.xml` 拆開，各平台的發布不再互相牽動。
-- 建置工具鏈更新：Go 升至 1.25.3、Android NDK 升到最新穩定版，內建資產升至 probe-assets v0.31。
+- 建置工具鏈更新：Go 先升到 1.25.3、該版收尾時再升到 1.26.5，Android NDK 升到最新穩定版，內建資產升至 probe-assets v0.31。
 
 ## OONI Probe 6.1.1
 

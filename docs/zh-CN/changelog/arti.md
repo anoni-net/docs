@@ -58,12 +58,14 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 > 2026-03-31 · [上游公告](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
 
 - HTTP CONNECT 纳入完整构建并默认启用、RPC 管理能力增强、持续推进 relay 开发朝「Arti 可作为 Tor 中继」迈进。
+- 安全修补：一个低危问题。嵌入 arti 的应用程序如果也用了 `weak-table` 且开启 `ahash`，在没有硬件 AES 支持的机器上，抗拒绝服务的能力会变差（TROVE-2026-005）。
 
 ## Arti 2.1.0
 
-> 2026-03-18 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/arti-210.md)
+> 2026-03-03 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/arti-210.md)
 
 - 中继支持的内部建设、配置系统改用 `derive-deftly` 架构降低新增配置类型成本、RPC 接口持续打磨、MSRV 提升至 Rust 1.89.0。
+- 安全修补三项，都是依赖包升级：`bytes` 升到 0.11.1，避开 `BytesMut::reserve()` 整数溢出造成的未定义行为（TROVE-2026-001、RUSTSEC-2026-0007）。`keccak` 升到 0.1.6，避开 ARMv8 汇编错误可能造成的未定义行为。`time` 升到 0.3.47，清掉 RUSTSEC-2026-0009 的审计警告。
 
 ## Arti 1.4.1
 

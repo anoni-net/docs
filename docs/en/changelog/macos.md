@@ -57,7 +57,7 @@ All three shipping the same day is normal, and so is the gap in fix counts. See 
 - <span class="urg-tag urg-tag--soon">Soon</span>The largest round of the year: 153 fixes for Tahoe, 138 for Sequoia, 127 for Sonoma. That spread is the concrete evidence that older lines receive fewer fixes.Apple flags none of these as actively exploited.
 - Kernel dominates, with 27 for Tahoe, 21 for Sequoia, and 20 for Sonoma.
 - Accounts has one where an app could gain root privileges. Assets has one where a malicious application could bypass privacy preferences, meaning it takes permissions you never granted.
-- AppleDouble can terminate an app unexpectedly when processing a malicious file. Model I/O and HFS each carry several file-parsing issues, the kind you trigger by opening a file someone sent you.
+- AppleDouble can terminate an app unexpectedly, or lead to arbitrary code execution, when processing a malicious file. Model I/O and HFS each carry several file-parsing issues, the kind you trigger by opening a file someone sent you.
 
 ## macOS Tahoe 26.5.2
 
