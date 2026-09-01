@@ -122,6 +122,7 @@ nav:
       - !ENV [NAV_CHANGELOG, "Software Changelog"]:
           - changelog/index.md
           - changelog/tor.md
+          - changelog/tor-daemon.md
           - changelog/tails.md
           - changelog/arti.md
           - changelog/ooni.md
