@@ -107,6 +107,7 @@ nav:
       - utils/passphrase.md
       - utils/qrcode.md
       - utils/qr-read.md
+      - utils/qr-stream.md
       - utils/strip-metadata.md
       - utils/clean-url.md
       - utils/invisible.md

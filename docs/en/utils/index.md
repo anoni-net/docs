@@ -42,6 +42,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Read what is inside a QR code image without the image leaving your device. URLs get their hostname shown separately, and there is no open button.
 
+-   :material-animation-play-outline: **[QR code frame stream](qr-stream.md)**
+
+    Something on your phone needs to reach the laptop beside you and the Wi-Fi in the room is not yours. The file becomes a run of QR codes played in a loop, read back by the other device's camera. No pairing, no shared network, no server.
+
 -   :material-image-off-outline: **[File metadata remover](strip-metadata.md)**
 
     Strip EXIF, GPS, device model, authoring software and comment fields from photos, videos and PDFs without the file leaving your device. For photos and videos not one byte of compressed data is touched, and every segment kept or removed is listed for you.
@@ -70,8 +74,8 @@ Most of the code in this section is our own, under [anoni-net/docs](https://gith
 
 | Component | Used by | Licence | Where the licence text is |
 |---|---|---|---|
-| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code generator](qrcode.md) | MIT | [the header at the top of the file](vendor/qrcode-generator.js) |
-| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code reader](qr-read.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
+| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code generator](qrcode.md), [frame stream](qr-stream.md) | MIT | [the header at the top of the file](vendor/qrcode-generator.js) |
+| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code reader](qr-read.md), [frame stream](qr-stream.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
 | [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | The PDF part of the [file metadata remover](strip-metadata.md) | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
 | The 7776-word list from [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} | [Passphrase and password generator](passphrase.md) | Word data CC-BY-4.0, code MIT | [the upstream repository](https://github.com/anoni-net/asian-diceware){target="_blank"} |
 

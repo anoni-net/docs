@@ -54,6 +54,10 @@ const WAITS = [
     why: '整張圖解開再掃過一次',
   },
   {
+    file: 'zh-TW/js/qrstream.js',
+    why: '選了檔案要讀進來、算雜湊、壓一次，掃影片檔更是一格一格跳過去',
+  },
+  {
     file: 'zh-TW/js/leaks.js',
     why: '授權視窗跳出來，加上瀏覽器把座標算出來',
   },
