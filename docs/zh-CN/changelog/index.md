@@ -6,7 +6,7 @@ icon: material/history
 
 # :material-history: 软件更新日志
 
-匿名网络工具与常用操作系统每次版本发布的重点整理，由社群志愿者从上游 changelog 翻译精简而来。例行版本更新会以条目形式累积在此页面，遇到重大事件（安全审计、新架构公告、有强烈在地脉络的功能）会在 [近期公告](../blog/index.md) 写成完整文章。
+匿名网络工具与常用操作系统每次版本发布的重点整理，由社群志愿者从上游 changelog 翻译精简而来。每一则都连回上游公告，内容是摘译。例行版本更新会以条目形式累积在此页面，遇到重大事件（安全审计、新架构公告、有强烈在地脉络的功能）会在 [近期公告](../blog/index.md) 写成完整文章。
 
 ## 匿名工具
 
@@ -28,7 +28,3 @@ icon: material/history
 - :material-apple: [macOS 安全更新](./macos.md)：Mac，含紧急程度与三条维护线的状态
 - :material-microsoft-windows: [Windows 安全更新](./windows.md)：每月 Patch Tuesday，先分清楚桌面还是服务器
 - :material-cellphone-lock: [GrapheneOS 月度更新摘要](./grapheneos.md)：Pixel 上的强化 Android，按月聚合
-
-## 想找完整翻译文章
-
-每个条目都附「完整翻译文章」链接，可以回到当期完整翻译版本。也可以从 [近期公告](../blog/index.md) 直接浏览所有翻译与观点文章。

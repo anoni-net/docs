@@ -8,7 +8,7 @@ icon: material/history
 
 Release-by-release summaries of the anonymity tools our community follows, plus the operating systems people run them on. Routine point releases accumulate here as compact entries. Major events (security audits, architectural shifts, region-specific implications) get full posts in [Updates](../blog/index.md).
 
-Most of our release translations begin life in zh-TW and reach English on a rolling basis, so this English page is sparser than the Chinese versions for now. The links below point to whichever language version is currently available.
+Most of our release translations begin life in zh-TW and reach English on a rolling basis, so these English pages carry fewer entries than the Chinese versions. Every entry links back to the upstream announcement.
 
 ## Anonymity tools
 
