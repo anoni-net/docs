@@ -15,7 +15,7 @@ icon: material/access-point-network
 - 量测引擎升至 OONI Probe CLI v3.30.0，是 6.x 系列首次更动引擎版本，先前各版皆停在 v3.29.0。
 - Android 版新增 app 内语言切换，与桌面版在 6.1.1 已有的功能对齐。
 - 强化离线处理与重试机制。量测提交遇到无法解析的报告会妥善处理，写文件改为原子操作。
-- 匿名凭证（anonymous credentials）新增管理界面与重置功能。
+- 匿名凭证（anonymous credentials）新增管理界面与重置功能。匿名凭证让提交端证明自己有权提交测量结果，同时不揭露身份。
 - Passport 升至 0.1.5，支持 proxy 与超时设定。
 - macOS 与 iOS 的 secure storage 补上错误处理与重试机制。
 - 新增未读完成结果的计数查询索引。

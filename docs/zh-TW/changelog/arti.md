@@ -46,7 +46,7 @@ Arti 是 Tor Project 從 2021 年開始的計畫，把原本用 C 寫成的 Tor�
 
 - Counter Galois Onion（CGO）加密正式列為穩定，編譯時啟用 `counter-galois-onion` feature（或 `full`）即可使用。這是本次釋出的主打項目。
 - 壅塞控制（`flowctl-cc`）改為預設啟用，不需額外設定即可提升傳輸吞吐。此 feature 已於 2.4.0 轉 stable，本版把預設打開。
-- 修補兩個中危阻斷服務（DoS）漏洞：TROVE-2026-24（惡意目錄鏡像可觸發 `tor-netdoc` parser crash，最終停掉 `tor-dirmgr` 任務）、TROVE-2026-27（低效演算法可被利用拖垮 CPU），兩者皆未發現實際被利用。
+- **這一版唯一的安全修補**：兩個中危阻斷服務（DoS，讓服務當掉或無法回應）漏洞，TROVE-2026-24（惡意目錄鏡像可觸發 `tor-netdoc` parser crash，最終停掉 `tor-dirmgr` 任務）、TROVE-2026-27（低效演算法可被利用拖垮 CPU），兩者皆未發現實際被利用。
 - 持續往「Arti 作為 Tor 中繼」與「Arti 作為 directory authority」開發，新增 router descriptor、microdescriptor 與 consensus 的編解碼，以及 CREATE2 cell 的 ntor 握手回應。
 - MSRV（最低支援 Rust 版本）提升至 Rust 1.91。
 

@@ -11,7 +11,7 @@ icon: material/usb-flash-drive-outline
 ## How we rate urgency
 
 - <span class="urg-tag urg-tag--now">Now</span>An emergency security release from the Tails project, marked by a third version number (7.10.1, for example). Upstream decided it could not wait for the next scheduled release, which means the flaw is serious.
-- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release whose fixes cover kernel privilege escalation, sandbox escape, or an important Tor Browser security update.
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release whose fixes cover kernel privilege escalation (a program obtaining full system privileges), sandbox escape (a program breaking out of its isolated environment to reach the rest of the system), or an important Tor Browser security update.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else, mostly features and hardware support.
 
 A compromise on Tails means something different from a compromise on an ordinary OS. Gaining administrator privileges means losing anonymity protection, and the attacker sees everything you do inside Tails, so "Now" on this page deserves to be taken more seriously than elsewhere.

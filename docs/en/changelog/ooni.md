@@ -17,7 +17,7 @@ The app and the engine version independently. The cross-platform app is 6.x, whi
 - Measurement engine moves to OONI Probe CLI v3.30.0, the first engine bump of the 6.x series after every earlier release stayed on v3.29.0.
 - Android adds in-app language selection, matching what desktop gained in 6.1.1.
 - Improved offline handling and retry logic. Unparseable reports are handled gracefully during submission, and file writes are now atomic.
-- Anonymous credentials gain a management UI and a reset function.
+- Anonymous credentials gain a management UI and a reset function. Anonymous credentials let a submitter prove they are entitled to submit measurements without revealing who they are.
 - Passport updated to 0.1.5, with support for proxies and timeouts.
 - Secure storage on macOS and iOS gains error handling and a retry mechanism.
 - Added an indexed query for counting unviewed completed results.

@@ -13,7 +13,7 @@ iPhone 与 iPad 的安全更新整理。Apple 一次更新动辄上百个 CVE，
 ## 紧急程度怎么判断
 
 - <span class="urg-tag urg-tag--now">立刻</span>Apple 在公告里标注该问题可能已被实际利用，或漏洞被美国 CISA 的已知遭利用漏洞目录收录。看到这一级，当天就更新。
-- <span class="urg-tag urg-tag--soon">尽快</span>修补涵盖 WebKit 或 Kernel 的内存损坏类问题。前者是访问网页就可能触发的环节，后者决定攻击者能取得多少权限，两者串起来就是一条完整的远程攻击链。几天内更新。
+- <span class="urg-tag urg-tag--soon">尽快</span>修补涵盖 WebKit 或 Kernel 的内存损坏类问题（程序写错内存位置，攻击者可以借此塞进自己的代码执行）。前者是访问网页就可能触发的环节，后者决定攻击者能取得多少权限，两者串起来就是一条完整的远程攻击链。几天内更新。
 - <span class="urg-tag urg-tag--routine">一般</span>其余修补，跟着平常的节奏更新即可。
 
 颜色回答的是「该多快处理」。「有没有人已经在利用」是另一个维度，每一则条目都会写明。这一页的「立刻」需要证据，也就是 Apple 自己标注可能已被实际利用，或漏洞进了 CISA 的目录。其他页面的判准基础不一定相同，跨页比较时要看该页自己的说明。
@@ -50,7 +50,7 @@ Apple 同一天常常发好几条更新线，版本号差很多，内容也不�
 > 2026-07-27 · [上游公告](https://support.apple.com/en-us/128066){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">尽快</span>86 个修补，Kernel 占 19 个、WebKit 占 7 个、ImageIO 占 6 个。
-- WebKit 修掉一个浏览记录外泄：网站有办法知道你是否访问过某个链接。同一组还修了恶意内容违反 iframe 沙盒策略，以及网页内嵌恶意内容造成的界面伪装。
+- WebKit 修掉一个浏览记录外泄：网站有办法知道你是否访问过某个链接。同一组还修了恶意内容违反 iframe 沙盒策略（沙盒是把嵌入的网页关在隔离环境里，破得掉就能碰到不该碰的东西），以及网页内嵌恶意内容造成的界面伪装。
 - Kernel 有一个连到恶意 NFS 服务器就可能造成内核内存损坏的问题，接不明网络存储空间的人要留意。
 - Contacts 修了三个问题，包含 app 未经授权新增联系人，以及处理恶意联系人数据造成的数据外泄。
 
@@ -67,7 +67,7 @@ Apple 同一天常常发好几条更新线，版本号差很多，内容也不�
 
 > 2026-05-11 · [26.5 公告](https://support.apple.com/en-us/127110){target="_blank"} · [18.7.9 公告](https://support.apple.com/en-us/127111){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>26.x 线补 67 个，WebKit 占 21 个、Kernel 占 6 个。Kernel 那组有一个 app 可能取得 root 权限。
+- <span class="urg-tag urg-tag--soon">尽快</span>26.x 线补 67 个，WebKit 占 21 个、Kernel 占 6 个。Kernel 那组有一个 app 可能取得 root 权限（系统的最高控制权，取得之后等同设备的主人）。
 - 18.x 线补 49 个，另外修了三个值得注意的隐私问题：app 可能绕过 App 隐私报告的记录（那份报告本来就是拿来审查 app 在背后连了哪里）、app 可能列举设备上已安装的应用程序（可用来侧写用户身份）、Wi-Fi 组件有一个 app 可能以内核权限执行任意代码。
 - 同日发给更旧设备的 17.7.11、16.7.16、15.8.8 各只补一个问题，就是下面 4 月 22 日那个通知保留问题。
 

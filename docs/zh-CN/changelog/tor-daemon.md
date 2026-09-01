@@ -12,7 +12,7 @@ tor daemon（社群惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 
 ## 紧急程度怎么判断
 
-- <span class="urg-tag urg-tag--now">立刻</span>官方标为安全发布（security release），通常带 TROVE 编号。中继与 onion 服务是长期在线的目标，这一级的问题多半可以被远程触发。
+- <span class="urg-tag urg-tag--now">立刻</span>官方标为安全发布（security release），通常带 TROVE 编号（Tor Project 对外公布安全问题时用的编号）。中继与 onion 服务是长期在线的目标，这一级的问题多半可以被远程触发。
 - <span class="urg-tag urg-tag--soon">尽快</span>影响连接质量或网络健康，但没有可被远程利用的安全问题。
 - <span class="urg-tag urg-tag--routine">一般</span>其余维护性发布。
 
@@ -23,6 +23,10 @@ tor daemon（社群惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 ## 两条维护线
 
 `0.4.9.x` 是目前的主线，`0.4.8.x` 是长期支持线，安全修补会同步 backport。发行版软件包常常停在 0.4.8.x，看到同一天发两个版本是正常的，装哪一条看你的软件源。
+
+## conflux 是什么
+
+下面多则条目都在修 conflux。它让客户端同时用两条电路传同一个连接的数据以提升速度，2023 年进入 Tor，是这半年多起安全问题的共同来源。新的代码路径带来新的错误面，这批修补集中在那里并不意外。
 
 ## tor 0.4.9.11
 
@@ -38,7 +42,7 @@ tor daemon（社群惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 > 2026-06-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.10/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全发布，官方强烈建议尽快升级。
-- TROVE-2026-025：拒绝在已经有附挂流的电路上收到的 `CONFLUX_LINK` 信元。恶意客户端可以先发 `RELAY_COMMAND_BEGIN` 再发 `CONFLUX_LINK`，挂上的出口流最后会变成孤儿，留下悬空的电路反向指针，电路被释放时形成 use-after-free（bug 41258）。
+- TROVE-2026-025：拒绝在已经有附挂流的电路上收到的 `CONFLUX_LINK` 信元。恶意客户端可以先发 `RELAY_COMMAND_BEGIN` 再发 `CONFLUX_LINK`，挂上的出口流最后会变成孤儿，留下悬空的电路反向指针，电路被释放时形成 use-after-free，也就是内存还回去之后又被拿来用，结果是中继当掉（bug 41258）。
 - 未设置 `SafeSocks` 时，恢复对不安全 SOCKS 协议（socks4 或不带主机名的 socks5）的警告。这个警告消失了很久，而它防的是把要解析的域名直接泄漏给本机以外的地方（bug 41290）。
 - 客户端的入口守卫（entry guard）过期时间回到一致的 48 到 60 天。
 
@@ -64,7 +68,7 @@ tor daemon（社群惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 > 2026-05-06 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.7/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全发布，两条维护线同时发布。
-- TROVE-2026-011：处理 END、TRUNCATE 与 TRUNCATED 信元时，若载荷里没有原因字段会发生越界读取。这个问题从 0.1.1.1-alpha 存在到现在（bug 41254）。
+- TROVE-2026-011：处理 END、TRUNCATE 与 TRUNCATED 信元时，若载荷里没有原因字段会发生越界读取，也就是读到不该读的内存，可能让中继当掉或泄漏内存内容。这个问题从 0.1.1.1-alpha 存在到现在（bug 41254）。
 - TROVE-2026-008：不再通过 conflux 的分腿尝试或接受 `BEGIN_DIR`（bug 41243）。
 - TROVE-2026-010：清空 conflux 的乱序队列时修正计数（bug 41251）。
 

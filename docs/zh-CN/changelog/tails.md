@@ -11,7 +11,7 @@ icon: material/usb-flash-drive-outline
 ## 紧急程度怎么判断
 
 - <span class="urg-tag urg-tag--now">立刻</span>Tails 官方发出的紧急安全发布，版本号带第三码（例如 7.10.1）。上游判断不能等到下次排程，代表漏洞后果严重。
-- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，但修补涵盖内核提权、sandbox 逃逸或 Tor Browser 的重要安全更新。
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，但修补涵盖内核提权（程序取得系统最高权限）、沙盒逃逸（程序突破隔离环境，碰到系统其他部分）或 Tor Browser 的重要安全更新。
 - <span class="urg-tag urg-tag--routine">一般</span>其余例行版本，以功能与硬件支持为主。
 
 Tails 上的漏洞后果跟一般操作系统不同。取得管理员权限等于失去匿名保护，攻击者看得到你在 Tails 里做的每一件事，所以这一页的「立刻」比其他页更值得当真。
@@ -88,7 +88,7 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">尽快</span>Tor Browser 升至 15.0.14（基于 Firefox ESR 140.11）。
-- 修补 Linux 内核本地提权漏洞「Fragnesia」（同步缓解「Drity Frag」）。此类漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。
+- 修补 Linux 内核本地提权漏洞「Fragnesia」（同步缓解「Dirty Frag」）。此类漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。
 - 修补 Flatpak 通过 Yelp 逃逸沙箱的问题，yelp 升至 42.2-4tails1。
 - 修补 CVE-2026-46529（evince）、CVE-2026-41989（libgcrypt20）、CVE-2026-41054（haveged）。
 - 移除内置 Thunderbird。仍可通过持久存储的 additional software 自动安装，每次启动 Tails 时从 Debian 仓库拉取最新版本。原因是 Tails 发布节奏跟着 Firefox，Debian 的 Thunderbird 新版通常稍晚才到，过去导致 Tails 内置版本常带已知漏洞。

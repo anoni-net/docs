@@ -28,7 +28,7 @@ A large share of the actively exploited flaws each month land in server products
 
 Microsoft Defender is another common misunderstanding. Its fixes ship through automatic antimalware definition updates rather than Patch Tuesday, and require nothing from you.
 
-One more thing worth knowing if you run Tor Browser or other anonymity tools on Windows: once the operating system is compromised, nothing running on top of it can protect you. Privilege escalation fixes matter as much in that scenario as browser flaws do.
+One more thing worth knowing if you run Tor Browser or other anonymity tools on Windows: once the operating system is compromised, nothing running on top of it can protect you. Privilege escalation (a program obtaining higher system privileges than it started with) fixes matter as much in that scenario as browser flaws do.
 
 ## August 2026
 
@@ -42,7 +42,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 
 > 2026-07-14 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>2,003 entries, the largest of these five months, with 953 rated Critical and three flagged as actively exploited.
+- <span class="urg-tag urg-tag--soon">Soon</span>2,003 entries, the largest of these five months, with 953 rated Critical and three flagged as actively exploited. Ordinary desktop users are unaffected by all three; server administrators should prioritise.
 - All three are in server products: Active Directory Federation Services privilege escalation, SharePoint Server privilege escalation, and SharePoint remote code execution.
 - Desktop users are unaffected by those three. Anyone running SharePoint or AD FS should prioritise, as the SharePoint remote code execution is the kind that needs no credentials to trigger.
 
@@ -57,7 +57,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 
 > 2026-05-12 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>1,129 entries, 318 rated Critical, three flagged as actively exploited.
+- <span class="urg-tag urg-tag--soon">Soon</span>1,129 entries, 318 rated Critical, three flagged as actively exploited. For ordinary desktop users this month is a normal-schedule month: none of the three reach you.
 - Two are in the Microsoft Defender protection engine (denial of service and privilege escalation) and ship through automatic definition updates, so users need do nothing.
 - The third is an Exchange Server spoofing flaw, affecting only organisations running their own Exchange.
 

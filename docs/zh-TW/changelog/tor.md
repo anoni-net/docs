@@ -13,7 +13,7 @@ icon: simple/torbrowser
 - <span class="chan-tag chan-tag--stable">穩定版</span>一般使用者用這個，版本號形如 15.0.20。
 - <span class="chan-tag chan-tag--alpha">Alpha</span>僅供測試，可能含影響可用性、安全與隱私的錯誤，版本號帶 a（例如 16.0a10）。需要強匿名保護的人不要用。
 
-Alpha 從 16.0a9 起改為跟著 Firefox beta 逐步 rebase，版本跳動比過去頻繁。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。
+Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。
 
 ## Tor Browser 16.0a10（Alpha 測試通道）
 
@@ -44,8 +44,8 @@ Alpha 從 16.0a9 起改為跟著 Firefox beta 逐步 rebase，版本跳動比過
 > 2026-07-23 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a9/){target="_blank"}
 
 - <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
-- Firefox 基底大幅 rebase 至 153.0esr（前一版為 140.0esr），Android 版 GeckoView 同步升至 153.0esr（tor-browser#45101）。
-- 官方宣布 Alpha 通道日後改為持續追蹤 Firefox beta 版本、逐步小步 rebase，取代過去一次跳過整年版本的做法，目標讓 16.0 穩定版於 9 月提前發布。
+- Firefox 基底來到 153.0esr，Android 版 GeckoView 同步（tor-browser#45101）。上游公告寫的「前一版為 140.0esr」是拿穩定版線來比，前一個 Alpha 是 152.0a1，這一輪是追了半年的 beta 線正式成為新 ESR。
+- 官方說明這套持續追 beta 的做法會延續到 17.0 Alpha，取代過去一次跳過整年版本的舊模式，目標讓 16.0 穩定版於 9 月提前發布。
 - NoScript 升至 13.6.30.90201984，建置工具鏈的 Go 升至 1.26.5，libevent 升至 2.1.13。
 - Android 版 omni.ja 改用 xz 壓縮省下約 3 MB，追蹤用途的相依套件僅剩 Mozilla Telemetry（預設停用）。
 - 已知問題：部分畫面仍殘留 Firefox 品牌圖示。Android 版網址列圖示目前一律顯示「不安全」，需手動點擊查驗證書。

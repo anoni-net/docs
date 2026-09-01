@@ -23,8 +23,8 @@ Releases are infrequent and none so far has warranted same-day installation, so 
 
 > 2026-07-28 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>Dependency updates covering the bundled tor, Python packages, and web-side dependencies.
-- No new features or behaviour changes. The two security fixes from 2.6.4 remain the reason to upgrade, and anyone still on 2.6.3 can go straight to 2.6.5.
+- <span class="urg-tag urg-tag--routine">Routine</span>Dependency updates covering the bundled tor, Python packages, and web-side dependencies. This rating is for people already on 2.6.4.
+- No new features or behaviour changes. If you are still on 2.6.3 or earlier, treat this as "Soon": moving up brings the two security fixes from 2.6.4 with it, and you can install 2.6.5 directly.
 
 ## OnionShare 2.6.4
 

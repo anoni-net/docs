@@ -13,7 +13,7 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 - <span class="chan-tag chan-tag--stable">Stable</span>What regular users should run, versioned like 15.0.20.
 - <span class="chan-tag chan-tag--alpha">Alpha</span>Testing only. It may contain bugs affecting usability, security, and privacy, and is versioned with an a (16.0a10, for example). Do not use it if you need strong anonymity.
 
-Since 16.0a9 the alpha channel tracks Firefox betas and rebases incrementally, so versions move faster than they used to. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear.
+Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear.
 
 ## Tor Browser 16.0a10 (alpha)
 

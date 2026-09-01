@@ -13,7 +13,7 @@ Source data comes from Apple's [security releases page](https://support.apple.co
 ## How we rate urgency
 
 - <span class="urg-tag urg-tag--now">Now</span>Apple notes the issue may have been actively exploited, or the CVE appears in the US CISA Known Exploited Vulnerabilities catalog. Install the same day.
-- <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory corruption in WebKit or Kernel, or include gaining root, bypassing Gatekeeper, or bypassing privacy preferences. Install within a few days.
+- <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory corruption in WebKit or Kernel (the program writes to the wrong place in memory, which an attacker can use to slip in code of their own), or include gaining root (full control of the system), bypassing Gatekeeper, or bypassing privacy preferences. Install within a few days.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else. Install on your normal schedule.
 
 The colour answers how fast to act. Whether anyone is already exploiting the flaw is a separate question, and every entry states it explicitly. "Now" on this page requires evidence: Apple itself noting possible active exploitation, or the CVE appearing in the CISA catalog.
