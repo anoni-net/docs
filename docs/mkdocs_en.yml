@@ -129,6 +129,7 @@ nav:
           - changelog/ooni.md
           - changelog/onionshare.md
           - changelog/ios.md
+          - changelog/macos.md
           - changelog/grapheneos.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md

@@ -25,6 +25,7 @@ icon: material/history
 
 - :material-usb-flash-drive-outline: [Tails 更新日志](./tails.md)：Tails 操作系统
 - :material-apple-ios: [iOS 安全更新](./ios.md)：iPhone 与 iPad，含紧急程度与旧机支持状况
+- :material-apple: [macOS 安全更新](./macos.md)：Mac，含紧急程度与三条维护线的状态
 - :material-cellphone-lock: [GrapheneOS 月度更新摘要](./grapheneos.md)：Pixel 上的强化 Android，按月聚合
 
 ## 想找完整翻译文章
