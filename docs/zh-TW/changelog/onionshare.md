@@ -23,14 +23,14 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 > 2026-07-28 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>相依套件更新，涵蓋內建的 tor、Python 套件與網頁端相依。這一級是給已經裝了 2.6.4 的人看的。
+- <span class="urg-tag urg-tag--routine">一般</span>相依套件更新，涵蓋內建的 tor、Python 套件與網頁端相依。這一級是給已經裝了 2.6.4 的人看的，這一版本身沒有安全修補。
 - 沒有新功能與行為變更。還停在 2.6.3 或更早的人請視同「儘快」，因為升上來會一併帶進 2.6.4 的兩個安全修補，直接裝 2.6.5 即可。
 
 ## OnionShare 2.6.4
 
 > 2026-06-09 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.4){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>修補兩個安全問題，影響 2.6.3 與更早的版本，桌面版與 `onionshare-cli` 都受影響，兩者共用同一份 web 模組。
+- <span class="urg-tag urg-tag--soon">儘快</span>修補兩個安全問題，影響 2.6.3 與更早的版本，桌面版與 `onionshare-cli` 都受影響，兩者共用同一份 web 模組。兩則安全公告都沒有提到已被實際利用。
 - CVE-2026-54706（[GHSA-22p9-r2f5-22mf](https://github.com/onionshare/onionshare/security/advisories/GHSA-22p9-r2f5-22mf){target="_blank"}）：分享模式與網站模式會跟著資料夾裡的符號連結（symlink）走，把連結指向的檔案一併提供出去。分享的資料夾裡若有他人放進來或來源不明的符號連結，取得 onion 網址的對方就能讀到 OnionShare 行程權限範圍內的其他本機檔案。嚴重度評為中等，利用前提是對方要先有辦法把符號連結放進你分享的資料夾。
 - CVE-2026-54707（[GHSA-v833-3823-cmhp](https://github.com/onionshare/onionshare/security/advisories/GHSA-v833-3823-cmhp){target="_blank"}）：接收模式勾選「停用檔案上傳」之後，限制沒有落實到實際寫檔那一段。送出特製的 multipart 請求仍會把檔案寫進磁碟，路由處理只是不把它計入上傳紀錄。設定成純文字訊息端點的服務因此可能被寫入非預期的檔案。同一版順手修掉空的 POST 請求會建立空資料夾的問題。
 - 相依套件更新，包含內建的 tor 與 flatpak runtime。
@@ -40,7 +40,7 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 > 2025-02-25 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.3){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>CLI 新增 `--log-filenames`，分享模式與網站模式可以看到哪些網址被造訪過。
+- <span class="urg-tag urg-tag--routine">一般</span>CLI 新增 `--log-filenames`，分享模式與網站模式可以看到哪些網址被造訪過。這一版沒有安全修補。
 - 儲存下來的持續性 onion 分頁，可在 OnionShare 啟動並連上 Tor 之後自動開始服務。
 - 修好無法取得橋接、無法使用 meek 傳輸的問題，以及橋接查詢沒有回傳結果時的致命錯誤。
 - 修好 CLI 關閉時執行緒競爭造成的 segfault，以及分享模式在有人造訪過之後自動停止計時器失效的問題。
@@ -52,7 +52,7 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 > 2024-03-21 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>全部是安全修補，集中在接收模式與聊天模式的輸入處理。
+- <span class="urg-tag urg-tag--soon">儘快</span>全部是安全修補，集中在接收模式與聊天模式的輸入處理。上游沒有提到這些問題已被實際利用。
 - 歷史紀錄項目的路徑移除換行字元。
 - 接收模式的文字訊息長度上限設為 524288 字元。
 - 使用者名稱只允許特定 ASCII 字元並移除控制字元，另補上名稱驗證的例外處理，避免無聲加入聊天室。

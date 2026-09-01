@@ -38,7 +38,7 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 
 > 2026-08-17 · [上游公告](https://support.apple.com/en-us/148281){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>28 个修补，其中 19 个在 WebKit，多数是处理恶意网页内容造成的内存损坏或崩溃。
+- <span class="urg-tag urg-tag--soon">尽快</span>28 个修补，其中 19 个在 WebKit，多数是处理恶意网页内容造成的内存损坏或崩溃。Apple 没有标注任何一项已被实际利用。
 - ImageIO 有一个「处理图像可能导致任意代码执行」，这一类常被用在传一张图过去就能触发的攻击。
 - Kernel 有 3 个、IOGPUFamily 有 1 个。这一波只发给 Tahoe，Sequoia 与 Sonoma 没有对应版本。
 
@@ -46,7 +46,7 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 
 > 2026-08-06 · [26.6.1 公告](https://support.apple.com/en-us/148170){target="_blank"} · [15.7.9 公告](https://support.apple.com/en-us/148171){target="_blank"} · [14.8.9 公告](https://support.apple.com/en-us/148172){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>三条线同时发，各自只修一个问题。单一修补动用三条线，代表 Apple 认为不能等到下次排程。
+- <span class="urg-tag urg-tag--soon">尽快</span>三条线同时发，各自只修一个问题。单一修补动用三条线，代表 Apple 认为不能等到下次排程。Apple 没有标注任何一项已被实际利用。
 - CVE-2026-65400：同一网络上的攻击者可以在没有有效凭证的情况下通过屏幕共享（Screen Sharing）的验证。成因是验证流程的状态管理问题。
 - 有开启屏幕共享的人优先处理。系统设置里的「通用」、「共享」可以确认自己有没有开，平常用不到就关掉，那是最直接的处理方式。
 
@@ -54,7 +54,7 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 
 > 2026-07-27 · [26.6 公告](https://support.apple.com/en-us/128067){target="_blank"} · [15.7.8 公告](https://support.apple.com/en-us/128071){target="_blank"} · [14.8.8 公告](https://support.apple.com/en-us/128072){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>年度最大的一波，Tahoe 补 153 个、Sequoia 138 个、Sonoma 127 个。三条线的数量落差就是旧线收到的修补比较少的具体证据。
+- <span class="urg-tag urg-tag--soon">尽快</span>年度最大的一波，Tahoe 补 153 个、Sequoia 138 个、Sonoma 127 个。三条线的数量落差就是旧线收到的修补比较少的具体证据。Apple 没有标注任何一项已被实际利用。
 - Kernel 是重点，Tahoe 占 27 个、Sequoia 21 个、Sonoma 20 个。
 - Accounts 有一个 app 可能取得 root 权限。Assets 有一个恶意应用程序可以绕过隐私偏好，也就是不必经过你同意就取得原本要授权的权限。
 - AppleDouble 处理恶意文件时可能导致应用程序异常退出。Model I/O 与 HFS 各有多个文件解析类的问题，这一类的触发方式通常是打开一个别人给的文件。
@@ -63,14 +63,14 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 
 > 2026-06-29 · [上游公告](https://support.apple.com/en-us/127595){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>38 个修补里有 24 个在 WebKit、4 个在 WebRTC，整包几乎都是浏览器引擎。
+- <span class="urg-tag urg-tag--soon">尽快</span>38 个修补里有 24 个在 WebKit、4 个在 WebRTC，整包几乎都是浏览器引擎。Apple 没有标注任何一项已被实际利用。
 - 影响范围不只 Safari。系统上任何用 WebView 显示网页内容的 app 都走同一套引擎，包含邮件预览与许多聊天软件的内置浏览器。
 
 ## macOS Tahoe 26.5
 
 > 2026-05-11 · [上游公告](https://support.apple.com/en-us/127115){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>87 个修补，WebKit 占 22 个、Kernel 占 9 个。
+- <span class="urg-tag urg-tag--soon">尽快</span>87 个修补，WebKit 占 22 个、Kernel 占 9 个。Apple 没有标注任何一项已被实际利用。
 - CUPS 有一个 app 可能取得 root 权限。CUPS 是打印系统，平常不会想到它，而它默认就在运行。
 - BOM 有一个恶意的 ZIP 压缩文件可以绕过 Gatekeeper 检查。解压别人寄来的文件是很日常的动作，这条值得知道。
 - Accounts 有一个绕过部分隐私偏好的问题，mDNSResponder 有 4 个。

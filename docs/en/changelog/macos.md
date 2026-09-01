@@ -38,7 +38,7 @@ All three shipping the same day is normal, and so is the gap in fix counts. See 
 
 > 2026-08-17 · [Upstream advisory](https://support.apple.com/en-us/148281){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>28 fixes, 19 of them in WebKit, mostly memory corruption or crashes from processing malicious web content.
+- <span class="urg-tag urg-tag--soon">Soon</span>28 fixes, 19 of them in WebKit, mostly memory corruption or crashes from processing malicious web content.Apple flags none of these as actively exploited.
 - ImageIO has one "processing an image may lead to arbitrary code execution", the kind of flaw used in attacks that trigger by sending you a picture.
 - Kernel accounts for 3 and IOGPUFamily for 1. This round shipped for Tahoe only, with no matching Sequoia or Sonoma release.
 
@@ -46,7 +46,7 @@ All three shipping the same day is normal, and so is the gap in fix counts. See 
 
 > 2026-08-06 · [26.6.1](https://support.apple.com/en-us/148170){target="_blank"} · [15.7.9](https://support.apple.com/en-us/148171){target="_blank"} · [14.8.9](https://support.apple.com/en-us/148172){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>All three lines shipped the same day with a single fix each. Spending three releases on one issue means Apple decided it could not wait for the next scheduled update.
+- <span class="urg-tag urg-tag--soon">Soon</span>All three lines shipped the same day with a single fix each. Spending three releases on one issue means Apple decided it could not wait for the next scheduled update.Apple flags none of these as actively exploited.
 - CVE-2026-65400: an attacker on your network could authenticate to Screen Sharing without valid credentials. The cause was a state management flaw in the authentication flow.
 - Prioritise this if you have Screen Sharing enabled. System Settings, General, Sharing shows whether it is on, and turning it off when you do not use it is the most direct fix available.
 
@@ -54,7 +54,7 @@ All three shipping the same day is normal, and so is the gap in fix counts. See 
 
 > 2026-07-27 · [26.6](https://support.apple.com/en-us/128067){target="_blank"} · [15.7.8](https://support.apple.com/en-us/128071){target="_blank"} · [14.8.8](https://support.apple.com/en-us/128072){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>The largest round of the year: 153 fixes for Tahoe, 138 for Sequoia, 127 for Sonoma. That spread is the concrete evidence that older lines receive fewer fixes.
+- <span class="urg-tag urg-tag--soon">Soon</span>The largest round of the year: 153 fixes for Tahoe, 138 for Sequoia, 127 for Sonoma. That spread is the concrete evidence that older lines receive fewer fixes.Apple flags none of these as actively exploited.
 - Kernel dominates, with 27 for Tahoe, 21 for Sequoia, and 20 for Sonoma.
 - Accounts has one where an app could gain root privileges. Assets has one where a malicious application could bypass privacy preferences, meaning it takes permissions you never granted.
 - AppleDouble can terminate an app unexpectedly when processing a malicious file. Model I/O and HFS each carry several file-parsing issues, the kind you trigger by opening a file someone sent you.
@@ -63,14 +63,14 @@ All three shipping the same day is normal, and so is the gap in fix counts. See 
 
 > 2026-06-29 · [Upstream advisory](https://support.apple.com/en-us/127595){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>24 of the 38 fixes are in WebKit and 4 more in WebRTC, so this release is almost entirely browser engine work.
+- <span class="urg-tag urg-tag--soon">Soon</span>24 of the 38 fixes are in WebKit and 4 more in WebRTC, so this release is almost entirely browser engine work.Apple flags none of these as actively exploited.
 - The impact reaches beyond Safari. Every app that renders web content through a WebView uses the same engine, including mail previews and the in-app browsers in many chat clients.
 
 ## macOS Tahoe 26.5
 
 > 2026-05-11 · [Upstream advisory](https://support.apple.com/en-us/127115){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>87 fixes, 22 in WebKit and 9 in Kernel.
+- <span class="urg-tag urg-tag--soon">Soon</span>87 fixes, 22 in WebKit and 9 in Kernel.Apple flags none of these as actively exploited.
 - CUPS has one where an app could gain root privileges. CUPS is the printing system, easy to forget about, and it runs by default.
 - BOM has one where a maliciously crafted ZIP archive bypasses Gatekeeper checks. Unpacking an archive someone sent you is an everyday action, which makes this one worth knowing.
 - Accounts has an issue bypassing certain privacy preferences, and mDNSResponder accounts for 4.

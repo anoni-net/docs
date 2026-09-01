@@ -32,7 +32,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-06-25 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.11/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>A security release two days after the previous one. Upstream cited further high-priority issues, one of them affecting onion services.
+- <span class="urg-tag urg-tag--now">Now</span>A security release two days after the previous one. Upstream cited further high-priority issues, one of them affecting onion services.Upstream does not mention active exploitation.
 - Fixes a race condition where, under the right circumstances, a rendezvous point could impersonate the onion service a client was trying to reach, putting itself in the middle. Anyone running an onion service should take this one (bug 41297, present since 0.3.5.3-alpha).
 - Clients no longer assert and exit when an onion service encodes an all-zero public key for one of its introduction points (bug 41295).
 - Directory authorities no longer accept port 0 in exit policy lines. A secondary check parsed `0` as the range `1-0`, which tripped an assert while generating a networkstatus vote.
@@ -41,7 +41,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-06-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.10/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>A security release upstream strongly recommends installing promptly.
+- <span class="urg-tag urg-tag--now">Now</span>A security release upstream strongly recommends installing promptly.Upstream does not mention active exploitation.
 - TROVE-2026-025: rejects a `CONFLUX_LINK` cell arriving on a circuit that already has attached streams. A malicious client could send `RELAY_COMMAND_BEGIN` before `CONFLUX_LINK`, leaving the attached exit stream orphaned with a dangling circuit back-pointer, and a use-after-free when the circuit is freed, meaning memory handed back and then used again, which crashes the relay (bug 41258).
 - Restores the warning about unsafe SOCKS protocols (socks4, or socks5 without a hostname) when `SafeSocks` is unset. The warning had been silently missing, and what it guards against is leaking the name you are resolving beyond your own machine (bug 41290).
 - Entry guards expire consistently at 48 to 60 days again.
@@ -50,7 +50,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-06-01 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.9/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>A security release covering three major issues at once.
+- <span class="urg-tag urg-tag--now">Now</span>A security release covering three major issues at once.Upstream does not mention active exploitation.
 - TROVE-2026-022: the compression bomb check could be bypassed. An attacker concatenates many gzip or zlib sub-streams, each just under the per-stream detection threshold, and the whole payload slips past (bug 41275, present since 0.3.1.1-alpha).
 - TROVE-2026-021: an infinite loop when decompressing a truncated zlib/gzip stream. A truncated stream never reaches `Z_STREAM_END`, and the `Z_BUF_ERROR` zlib returns was mistaken for a full output buffer, so the code retried forever (bug 41274).
 - TROVE-2026-017: a NULL write after free when sending a `CONFLUX_SWITCH` cell fails. The failure closes the circuit and removes the leg, but the return value was ignored, so the caller went on to write into freed memory and crashed (bug 41263).
@@ -59,7 +59,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-05-07 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.8/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>An emergency follow-up to the previous release, after a silent error in the CI build emptied the entire fallback directory list.
+- <span class="urg-tag urg-tag--soon">Soon</span>An emergency follow-up to the previous release, after a silent error in the CI build emptied the entire fallback directory list.This release fixes no security issue, so the question of exploitation does not arise.
 - The impact falls on fresh installs: with no fallback directories available, new clients bootstrap directly against the directory authorities, which hurts both the load on those machines and how observable that traffic is.
 - Regenerates the fallback directory list as of 7 May 2026.
 
@@ -67,7 +67,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-05-06 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.7/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>A security release shipped on both maintenance lines.
+- <span class="urg-tag urg-tag--now">Now</span>A security release shipped on both maintenance lines.Upstream does not mention active exploitation.
 - TROVE-2026-011: an out-of-bounds read handling END, TRUNCATE, and TRUNCATED cells whose payload carries no reason field, meaning it reads memory it should not, which can crash the relay or leak memory contents. The bug had been present since 0.1.1.1-alpha (bug 41254).
 - TROVE-2026-008: no longer attempts or accepts `BEGIN_DIR` over conflux legs (bug 41243).
 - TROVE-2026-010: corrects accounting when clearing the conflux out-of-order queue (bug 41251).
@@ -76,7 +76,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 
 > 2026-03-25 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.6/ChangeLog){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>A security release covering two issues that could crash a relay remotely.
+- <span class="urg-tag urg-tag--now">Now</span>A security release covering two issues that could crash a relay remotely.Upstream does not mention active exploitation.
 - TROVE-2026-003: a malicious `CREATED2` causes an 11-byte stack overflow, resulting in a remote crash (bug 41231).
 - TROVE-2026-004: a memory comparison in the conflux subsystem used the wrong length, another path to a remote crash (bug 41232).
 - Also fixes a batch of defence-in-depth issues and the polyval implementation on big-endian platforms.

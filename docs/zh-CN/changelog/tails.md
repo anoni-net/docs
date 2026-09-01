@@ -24,7 +24,7 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 
 > 2026-08-19 · [上游公告](https://tails.net/news/version_7.11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，同时带入 Linux 内核的安全更新。
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，同时带入 Linux 内核的安全更新。上游没有提到这些漏洞有实际攻击案例。
 - Tor Browser 升至 15.0.20（基于 Firefox ESR 140.14）。
 - 内核升至 6.12.101，涵盖 Debian 安全公告 DSA-6415-1 的 24 个漏洞，影响包含提权、拒绝服务与信息泄露。
 - 修正部分电脑上 Persistent Storage 无法解锁的问题。启用流程原本会等待 `udevadm settle`，无关的硬件问题会让这一步超时或失败，现已不再等待。
@@ -48,7 +48,7 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 
 > 2026-07-23 · [上游公告](https://tails.net/news/version_7.10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，带来新的关机流程与视频播放器。
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，带来新的关机流程与视频播放器。上游没有提到这些漏洞有实际攻击案例。
 - 改用 GNOME 标准关机流程。关机前会提醒尚未保存的文档与开启中的应用程序，并在 60 秒后自动关机。速度略慢，换来更好的数据保护。紧急关机选项仍保留，供需要快速断电时使用。
 - 视频播放器改用 Celluloid，更现代也更可靠，且不具网络访问权限。要在线看视频请改用 Tor Browser，或额外安装 VLC。此播放器不支持 2011 年（含）以前制造的电脑。
 - Tor Browser 升至 15.0.19。
@@ -68,7 +68,7 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 
 > 2026-06-18 · [上游公告](https://tails.net/news/version_7.9/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。上游没有提到这些漏洞有实际攻击案例。
 - Tor Browser 升至 15.0.16。
 - 更新部分 firmware 套件，改善较新硬件的支持，包含显卡、Wi-Fi 等。
 - 修正在 Secure Boot 证书已是最新的少数情境下，仍误跳「证书过期」通知的问题。
@@ -87,7 +87,7 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>Tor Browser 升至 15.0.14（基于 Firefox ESR 140.11）。
+- <span class="urg-tag urg-tag--soon">尽快</span>Tor Browser 升至 15.0.14（基于 Firefox ESR 140.11）。上游没有提到这些漏洞有实际攻击案例。
 - 修补 Linux 内核本地提权漏洞「Fragnesia」（同步缓解「Dirty Frag」）。此类漏洞可让 Tails 内的应用程序取得管理员权限，配合其他未知漏洞可能被用于完整接管 Tails 并进行去匿名化。
 - 修补 Flatpak 通过 Yelp 逃逸沙箱的问题，yelp 升至 42.2-4tails1。
 - 修补 CVE-2026-46529（evince）、CVE-2026-41989（libgcrypt20）、CVE-2026-41054（haveged）。
@@ -104,28 +104,28 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社群志�
 
 > 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"} · [完整翻译文章](../blog/posts/2026-tails-7-6.md)
 
-- <span class="urg-tag urg-tag--routine">一般</span>自动 Tor 桥接（依用户区域获取）、GNOME Secrets 取代 KeePassXC 作为内置密码管理器、例行组件更新（Tor Browser 15.0.8、Thunderbird 140.8.0、Electrum 4.7.0）。
+- <span class="urg-tag urg-tag--routine">一般</span>自动 Tor 桥接（依用户区域获取）、GNOME Secrets 取代 KeePassXC 作为内置密码管理器、例行组件更新（Tor Browser 15.0.8、Thunderbird 140.8.0、Electrum 4.7.0）。上游没有提到这些漏洞有实际攻击案例。
 
 ## Tails 7.1
 
 > 2025-10-15 · [上游公告](https://tails.net/news/version_7.1/){target="_blank"} · [完整翻译文章](../blog/posts/tails-7-1-released.md)
 
-- <span class="urg-tag urg-tag--routine">一般</span>Tor Browser 首页改为离线版本（移除启动时的 metadata 泄露）、Snowflake 桥接更新方式翻新、例行组件更新（Tor Browser 14.5.8、Tor 客户端 0.4.8.19、Thunderbird 140.3.0）。
+- <span class="urg-tag urg-tag--routine">一般</span>Tor Browser 首页改为离线版本（移除启动时的 metadata 泄露）、Snowflake 桥接更新方式翻新、例行组件更新（Tor Browser 14.5.8、Tor 客户端 0.4.8.19、Thunderbird 140.3.0）。上游没有提到这些漏洞有实际攻击案例。
 
 ## Tails 7.0
 
 > 2025-09-20 · [上游公告](https://tails.net/news/version_7.0/){target="_blank"} · [完整翻译文章](../blog/posts/tails-7-released.md)
 
-- <span class="urg-tag urg-tag--routine">一般</span>首个以 Debian 13（Trixie）与 GNOME 48（Bengaluru）为基底的大版本，桌面与系统组件全面升级。
+- <span class="urg-tag urg-tag--routine">一般</span>首个以 Debian 13（Trixie）与 GNOME 48（Bengaluru）为基底的大版本，桌面与系统组件全面升级。上游没有提到这些漏洞有实际攻击案例。
 
 ## Tails 7.0~rc2
 
 > 2025-08-29 · [上游公告](https://tails.net/news/test_7.0-rc2/){target="_blank"} · [完整翻译文章](../blog/posts/tails-7-rc.md)
 
-- <span class="chan-tag chan-tag--alpha">RC 测试版</span>Tails 7.0 第二个发行候选版（RC2），开放社群协助测试 Debian 13 与 GNOME 48 新基底、自动升级流程、持久存储迁移。
+- <span class="chan-tag chan-tag--alpha">RC 测试版</span>Tails 7.0 第二个发行候选版（RC2），开放社群协助测试 Debian 13 与 GNOME 48 新基底、自动升级流程、持久存储迁移。上游没有提到这些漏洞有实际攻击案例。
 
 ## Tails 6.18
 
 > 2025-07-31 · [上游公告](https://tails.net/news/version_6.18/){target="_blank"} · [完整翻译文章](../blog/posts/tails-6-18-webtunnel.md)
 
-- <span class="urg-tag urg-tag--routine">一般</span>新增 WebTunnel 桥接协议支持，把 Tor 流量伪装成 HTTPS，对无法直接连入 Tor 的网络环境多一条进入路径。
+- <span class="urg-tag urg-tag--routine">一般</span>新增 WebTunnel 桥接协议支持，把 Tor 流量伪装成 HTTPS，对无法直接连入 Tor 的网络环境多一条进入路径。上游没有提到这些漏洞有实际攻击案例。
