@@ -100,9 +100,13 @@ cd docs
 
 # 建置所有語言版本
 sh build_docs_anoni.sh        # 標準版本
-sh build_docs_anoni_ipfs.sh   # IPFS 版本
+./build_docs_anoni_ipfs.sh    # IPFS 版本
 sh build_docs_anoni_onion.sh  # Onion 版本
 ```
+
+IPFS 那支要用 `./` 或 `bash` 執行，不能用 `sh`。它需要 bash 的 `set -o pipefail`，
+Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。錯誤發生在
+`trap` 裝好之前，看起來像什麼都沒做就結束。另外兩支沒有 bash 專用語法，`sh` 可以。
 
 ### 多語系架構
 
