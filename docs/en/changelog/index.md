@@ -1,6 +1,6 @@
 ---
 title: Software Changelog
-description: Concise English summaries of Tor, Tails, OONI, Arti, OnionShare, iOS, and GrapheneOS releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
+description: Concise English summaries of Tor, tor daemon, Tails, OONI, Arti, OnionShare, iOS, and GrapheneOS releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
 icon: material/history
 ---
 
@@ -14,7 +14,8 @@ Most of our release translations begin life in zh-TW and reach English on a roll
 
 Condensed release-by-release from upstream changelogs, keeping version numbers and issue references.
 
-- :simple-torbrowser: [Tor changelog](./tor.md) — Tor Browser, Tor daemon, Onion services
+- :simple-torbrowser: [Tor changelog](./tor.md) — Tor Browser stable and alpha channels
+- :material-server-network: [tor daemon changelog](./tor-daemon.md) — c-tor security releases, for relay and onion service operators
 - :material-code-tags: [Arti changelog](./arti.md) — Tor Project's Rust implementation
 - :material-access-point-network: [OONI changelog](./ooni.md) — OONI Probe, Explorer, Run
 - :material-share-variant: [OnionShare changelog](./onionshare.md) — OnionShare file sharing and onion sites

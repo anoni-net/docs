@@ -124,6 +124,7 @@ nav:
       - !ENV [NAV_CHANGELOG, "软件更新日志"]:
           - changelog/index.md
           - changelog/tor.md
+          - changelog/tor-daemon.md
           - changelog/tails.md
           - changelog/arti.md
           - changelog/ooni.md

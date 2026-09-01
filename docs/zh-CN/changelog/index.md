@@ -1,6 +1,6 @@
 ---
 title: 软件更新日志
-description: Tor、Tails、OONI、Arti、OnionShare、iOS 与 GrapheneOS 各版本更新的中文重点整理，从上游 changelog 翻译而成，方便华语读者快速掌握每次发布的关键变更与安全修补。
+description: Tor、tor daemon、Tails、OONI、Arti、OnionShare、iOS 与 GrapheneOS 各版本更新的中文重点整理，从上游 changelog 翻译而成，方便华语读者快速掌握每次发布的关键变更与安全修补。
 icon: material/history
 ---
 
@@ -12,7 +12,8 @@ icon: material/history
 
 从上游 changelog 逐版摘译，保留版本号与跟踪编号。
 
-- :simple-torbrowser: [Tor 更新日志](./tor.md)：Tor Browser、Tor daemon、Onion 服务
+- :simple-torbrowser: [Tor 更新日志](./tor.md)：Tor Browser 的稳定版与 Alpha 通道
+- :material-server-network: [tor daemon 更新日志](./tor-daemon.md)：c-tor 的安全发布，给中继与 onion 服务运营者
 - :material-code-tags: [Arti 更新日志](./arti.md)：Tor Project 的 Rust 实现
 - :material-access-point-network: [OONI 更新日志](./ooni.md)：OONI Probe、Explorer、Run
 - :material-share-variant: [OnionShare 更新日志](./onionshare.md)：OnionShare 文件分享与匿名网站
