@@ -21,15 +21,47 @@ Arti 是 Tor Project 從 2021 年開始的計畫，把原本用 C 寫成的 Tor�
 | 架設 onion 服務（服務端，含 full vanguards、限制性探索、用戶端授權） | ✅ 已完成 | 1.2.0（2024-03）起 |
 | RPC 控制介面（取代 c-tor 的 control port） | ✅ 已完成，轉 stable | 1.4.2（2025-03） |
 | HTTP CONNECT 代理 | ✅ 已完成，預設啟用 | 2.2.0（2026-03） |
-| 流量控制與壅塞控制（`flowctl-cc`，為 conflux 鋪路） | ✅ 已完成，轉 stable | 2.4.0（2026-06） |
+| 流量控制與壅塞控制 | ✅ 2.6.0 起永遠啟用，`flowctl-cc` 這個開關已移除 | 2.4.0 轉 stable、2.6.0（2026-09）預設化 |
+| Counter Galois Onion 加密（CGO） | ✅ 2.6.0 起永遠啟用 | 2.6.0（2026-09） |
 | 嵌入非 Rust 語言（C FFI） | 🟡 RPC client 已有 C 友善介面，完整 FFI 規畫中 | 進行中 |
-| 中繼（relay）：circuit reactor、relay channel、握手回應、TLS server 端 | 🟡 開發中，尚不可用 | 2.0.0（2026-02）起 |
-| 目錄權威（directory authority）：憑證管理、目錄快取 | 🟡 開發中，尚不可用 | 2.0.0（2026-02）起 |
+| 中繼（relay） | 🟡 開發中，官方明說不要拿去接公開網路 | 2.0.0（2026-02）到 2.6.0 持續推進 |
+| 目錄權威（directory authority） | 🟡 開發中，文件解析與 microdescriptor 計算已有雛形 | 2.0.0（2026-02）到 2.6.0 持續推進 |
 | control-port 協定相容 | ⬜ 不另實作，改以 RPC 取代 | — |
 
 圖例：✅ 已完成　🟡 開發中　⬜ 不實作
 
-用戶端這一側的能力已大致對齊 c-tor，能當 SOCKS 代理、連線與架設 onion 服務、走橋接與 pluggable transports。計畫現在的主力放在中繼端，relay 與 directory authority 仍在開發，還無法用 Arti 架設 Tor 中繼，這部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 介面取代，設計取向不同。
+用戶端這一側的能力已大致對齊 c-tor，能當 SOCKS 代理、連線與架設 onion 服務、走橋接與 pluggable transports。計畫現在的主力放在中繼端，還無法用 Arti 架設 Tor 中繼，這部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 介面取代，設計取向不同。
+
+## 中繼端做到哪裡
+
+2.6.0 隨版附上一份 [`README_relay.md`](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/README_relay.md){target="_blank"}，把中繼與目錄權威要做的事列成清單並標出完成狀態。這是目前最接近官方路線圖的東西，開頭第一句就是不要在公開 Tor 網路上執行 `arti-relay`。
+
+依 2026 年 8 月那份清單，中繼端的完成度：
+
+| 區塊 | 已完成 | 待辦 |
+|---|---|---|
+| 基本運作（通道、電路、CREATE2、EXTEND2、ORPort） | 9 | 8 |
+| 出口支援（DNS、BEGIN、RESOLVE、離開政策） | 0 | 5 |
+| 目錄快取 | 0 | 13 |
+| 自我檢測（ORPort 可達性、頻寬、DNS） | 0 | 3 |
+| onion 服務支援（HsDir、引介、會合） | 0 | 3 |
+| 安全功能（離線身分金鑰、記憶體與 socket 層 DoS 防禦） | 0 | 4 |
+| 效能功能（緩衝區調校、電路排程、conflux） | 0 | 5 |
+| 目錄權威 | 0 | 28 |
+
+已完成的九項集中在最底層：接受連入通道、雙向通道認證、處理與遞送 relay cell、CREATE2 與 CREATE\_FAST、EXTEND2、監聽 ORPort。也就是說電路建得起來，但一個中繼要能真的上線所需的其他東西幾乎都還沒開始，金鑰產生與輪替、發布 router descriptor、頻寬上限這些都還在待辦。
+
+那份清單自己註明 2026 年 8 月 11 日之後團隊還沒回頭勾選，所以實際進度可能比表上更前面，2.6.0 就補上了 `ntor-v3` 的 CREATE2 握手與中繼 DNS 解析器的初步設計。要追精確狀態得看 [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"}。
+
+## Arti 2.6.0
+
+> 2026-09-01 · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- 壅塞控制與 Counter Galois Onion 加密（CGO）改為永遠啟用，`flowctl-cc` 與 `counter-galois-onion` 兩個 cargo feature 開關一併移除。用 `arti-client` 或 `tor-proto` 的專案升上來時要拿掉那兩個開關。
+- 中繼端進展：支援 `ntor-v3` 的 CREATE2 握手、不再把認不得的電路 ID 當成通道協定違規、收到 DESTROY 的通道不再回送 DESTROY，另有中繼 DNS 解析器與快取的初步設計。
+- 目錄權威端進展：可以計算 microdescriptor、初步支援 Extra Info 文件、`DirMgr` 暫時可以當 `DirServer` 的後端。
+- 隨版附上 `README_relay.md`，列出中繼與目錄權威還要做哪些事，見上面的「中繼端做到哪裡」。
+- 上游沒有提到已被實際利用。這一版沒有列出安全修補。
 
 ## Arti 2.5.1
 
