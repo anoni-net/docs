@@ -16,7 +16,9 @@ icon: material/usb-flash-drive-outline
 
 A compromise on Tails means something different from a compromise on an ordinary OS. Gaining administrator privileges means losing anonymity protection, and the attacker sees everything you do inside Tails, so "Now" on this page deserves to be taken more seriously than elsewhere.
 
-The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory.
+"Now" on this page rests on how upstream shipped the release, not on anyone actively attacking. Most entries state plainly that no real-world exploitation is known, which does not mean it can wait: the Tails project only cuts a standalone emergency release when it judges the issue too serious to hold until the next scheduled one. The "Now" on the iOS and Windows pages requires evidence of active exploitation, so the basis differs from here.
+
+The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
 ## Tails 7.11
 

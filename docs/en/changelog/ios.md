@@ -16,6 +16,8 @@ Source data comes from Apple's [security releases page](https://support.apple.co
 - <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory-corruption issues in WebKit or Kernel. The first is reachable by simply visiting a web page, the second decides how much privilege an attacker ends up with, and chained together they make a complete remote attack path. Install within a few days.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else. Install on your normal schedule.
 
+The colour answers how fast to act. Whether anyone is already exploiting the flaw is a separate question, and every entry states it explicitly. "Now" on this page requires evidence: Apple itself noting possible active exploitation, or the CVE appearing in the CISA catalog. Other pages do not all rest on the same basis, so check each page's own explanation before comparing across them.
+
 These ratings come from community volunteers reading the advisories. Apple does not label releases this way. Where the call is unclear, we round up.
 
 If you are likely to be targeted over the long term (journalists, lawyers, human rights workers, activists), also turn on Lockdown Mode under Settings, Privacy & Security, Lockdown Mode. It disables several features commonly used to deliver attacks, at the cost of some web pages and attachments not rendering properly.

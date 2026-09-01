@@ -15,6 +15,8 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 - <span class="urg-tag urg-tag--soon">儘快</span>該版含安全修補。OnionShare 的服務在執行期間是對外可觸及的，修補通常關係到誰讀得到你分享的內容。
 - <span class="urg-tag urg-tag--routine">一般</span>功能、相依套件與打包更新。
 
+這一頁的「儘快」涵蓋所有安全修補，不分類別與嚴重度，篩選比 iOS 那幾頁寬。看到儘快時要自己讀一下條目內容判斷輕重。
+
 發版節奏慢，目前沒有出現過需要當天更新的等級，所以這一頁還沒有「立刻」。
 
 ## OnionShare 2.6.5

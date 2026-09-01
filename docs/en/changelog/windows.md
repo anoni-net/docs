@@ -20,6 +20,8 @@ Source data comes from Microsoft's [MSRC Security Update Guide](https://msrc.mic
 
 Microsoft publishes an `Exploited:Yes` field of its own. These ratings build on that field, with one added judgement about who is affected.
 
+Note that "Soon" on this page can also mean something is already being exploited, just not against desktop users. Do not read the amber tag as "nobody is using this yet": the evidence behind it is sometimes harder than behind another page's "Now", and the difference is whether it reaches you. Where the call is unclear, we round up.
+
 ## Check which kind of product is affected first
 
 A large share of the actively exploited flaws each month land in server products such as SharePoint, Exchange, and Active Directory Federation Services. If you run ordinary desktop Windows, none of those touch you. When a headline says Microsoft patched a critical flaw under active attack, the first thing to establish is which product it was in.

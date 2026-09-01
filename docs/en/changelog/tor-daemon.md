@@ -16,6 +16,8 @@ Newest at the top. Source data comes from the official [ChangeLog](https://gitla
 - <span class="urg-tag urg-tag--soon">Soon</span>Affects connection quality or network health without a remotely exploitable security issue.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else.
 
+"Now" on this page rests on how upstream shipped the release (marked a security release, carrying TROVE identifiers), not on anyone actively attacking. Relays and onion services stay online continuously and get scanned far more than a personal device, so the bar sits lower here than on the iOS pages. Where the call is unclear, we round up.
+
 Nearly every release in the first half of 2026 lands on "Now". Security scrutiny of Tor intensified during this period and produced a run of remotely reachable fixes, so the ratings reflect what actually happened. Relay operators genuinely did need to follow every release this half-year.
 
 ## Two maintenance lines
