@@ -23,7 +23,7 @@ Releases are infrequent and none so far has warranted same-day installation, so 
 
 > 2026-07-28 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>Dependency updates covering the bundled tor, Python packages, and web-side dependencies. This rating is for people already on 2.6.4.
+- <span class="urg-tag urg-tag--routine">Routine</span>Dependency updates covering the bundled tor, Python packages, and web-side dependencies. This rating is for people already on 2.6.4.The advisories mention no active exploitation.
 - No new features or behaviour changes. If you are still on 2.6.3 or earlier, treat this as "Soon": moving up brings the two security fixes from 2.6.4 with it, and you can install 2.6.5 directly.
 
 ## OnionShare 2.6.4
@@ -40,7 +40,7 @@ Releases are infrequent and none so far has warranted same-day installation, so 
 
 > 2025-02-25 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.3){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>The CLI gained `--log-filenames`, showing which URLs are visited in Share and Website mode.
+- <span class="urg-tag urg-tag--routine">Routine</span>The CLI gained `--log-filenames`, showing which URLs are visited in Share and Website mode.This release contains no security fixes.
 - A saved persistent onion tab can now start automatically once OnionShare launches and Tor connects.
 - Fixed bridge requests and meek as a pluggable transport, plus a fatal error when censorship circumvention returned no bridges.
 - Fixed a thread race segfault on CLI shutdown, and the auto-stop timer failing in Share mode after someone had visited the share.
@@ -52,7 +52,7 @@ Releases are infrequent and none so far has warranted same-day installation, so 
 
 > 2024-03-21 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>An all-security release, concentrated on input handling in Receive mode and Chat mode.
+- <span class="urg-tag urg-tag--soon">Soon</span>An all-security release, concentrated on input handling in Receive mode and Chat mode.The advisories mention no active exploitation.
 - Newlines are stripped from History item paths.
 - Text messages in Receive mode are capped at 524288 characters.
 - Usernames are restricted to specific ASCII characters with control characters removed, and username validation exceptions are handled so users can no longer join silently.

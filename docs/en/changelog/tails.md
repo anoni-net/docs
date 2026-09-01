@@ -48,7 +48,7 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 
 > 2026-07-23 · [Upstream announcement](https://tails.net/news/version_7.10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release introducing a new shutdown procedure and a new video player.
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release introducing a new shutdown procedure and a new video player.Upstream mentions no real-world attacks involving these.
 - Adopts GNOME's standard shutdown procedure. The Power Off dialog now warns about unsaved documents and open applications, and shutdown completes automatically after 60 seconds. It is a bit slower in exchange for better data protection. An emergency shutdown option remains for a faster power-off.
 - The video player is now Celluloid, more modern and reliable, and it has no network access. To watch videos online, use Tor Browser or install VLC as additional software. Celluloid does not work on computers manufactured in 2011 or earlier.
 - Tor Browser updated to 15.0.19.
@@ -68,7 +68,7 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 
 > 2026-06-18 · [Upstream announcement](https://tails.net/news/version_7.9/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update.
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update.Upstream mentions no real-world attacks involving these.
 - Tor Browser updated to 15.0.16.
 - Updated some firmware packages, improving support for newer hardware such as graphics and Wi-Fi.
 - Fixed a bug where the "outdated Secure Boot certificate" prompt could appear in the rare case when the certificates were already up to date.
@@ -87,7 +87,7 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 
 > 2026-05-21 · [Upstream announcement](https://tails.net/news/version_7.8/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Tor Browser updated to 15.0.14 (based on Firefox ESR 140.11).
+- <span class="urg-tag urg-tag--soon">Soon</span>Tor Browser updated to 15.0.14 (based on Firefox ESR 140.11).Upstream mentions no real-world attacks involving these.
 - Mitigates the Linux kernel local privilege escalation "Fragnesia" (alongside the earlier "Drity Frag" mitigation). Such flaws let an application inside Tails gain administrator privileges, which combined with other unknown vulnerabilities could fully compromise Tails and deanonymize the user.
 - Mitigates a Flatpak sandbox escape via Yelp; yelp updated to 42.2-4tails1.
 - Patches CVE-2026-46529 (evince), CVE-2026-41989 (libgcrypt20), and CVE-2026-41054 (haveged).
@@ -100,7 +100,7 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 
 > 2026-03-26 · [Upstream announcement](https://tails.net/news/version_7.6/){target="_blank"} · [Full translation](../blog/posts/2026-tails-7-6.md)
 
-- <span class="urg-tag urg-tag--routine">Routine</span>Automatic Tor bridges (region-aware via Moat API), GNOME Secrets replaces KeePassXC as the built-in password manager, routine component bumps (Tor Browser 15.0.8, Thunderbird 140.8.0, Electrum 4.7.0).
+- <span class="urg-tag urg-tag--routine">Routine</span>Automatic Tor bridges (region-aware via Moat API), GNOME Secrets replaces KeePassXC as the built-in password manager, routine component bumps (Tor Browser 15.0.8, Thunderbird 140.8.0, Electrum 4.7.0).Upstream mentions no real-world attacks involving these.
 
 !!! info "Earlier versions"
 

@@ -49,7 +49,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 
 > 2026-07-27 · [Upstream advisory](https://support.apple.com/en-us/128066){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>86 fixes, with 19 in Kernel, 7 in WebKit, and 6 in ImageIO.
+- <span class="urg-tag urg-tag--soon">Soon</span>86 fixes, with 19 in Kernel, 7 in WebKit, and 6 in ImageIO.Apple flags none of these as actively exploited.
 - WebKit closes a browsing-history leak where a website could tell whether you had visited a given link. The same group also fixes malicious content violating iframe sandboxing policy (the sandbox keeps embedded pages in an isolated environment; break it and they reach things they should not), and UI spoofing via framed malicious content.
 - Kernel fixes an issue where connecting to a malicious NFS server could corrupt kernel memory, worth noting if you mount network storage you do not control.
 - Contacts gets three fixes, including apps adding contacts without authorisation and a maliciously crafted contact leaking sensitive data.
@@ -58,7 +58,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 
 > 2026-06-29 · [Upstream advisory](https://support.apple.com/en-us/127594){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>24 of the 38 fixes are in WebKit and 4 more in WebRTC, so this release is almost entirely browser engine work.
+- <span class="urg-tag urg-tag--soon">Soon</span>24 of the 38 fixes are in WebKit and 4 more in WebRTC, so this release is almost entirely browser engine work.Apple flags none of these as actively exploited.
 - Several entries cover malicious sites exfiltrating data cross-origin and web content disclosing sensitive user information, which directly affects any service you stay logged into in the browser.
 - One entry covers a malicious website processing restricted web content outside the sandbox. The sandbox is the browser's last line of isolation, so breaking it removes a layer of protection.
 - A 26.5.1 also shipped on 1 June with no published CVE list, so it gets no entry here.
@@ -67,7 +67,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 
 > 2026-05-11 · [26.5 advisory](https://support.apple.com/en-us/127110){target="_blank"} · [18.7.9 advisory](https://support.apple.com/en-us/127111){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>The 26.x line fixes 67 issues, 21 in WebKit and 6 in Kernel, including one where an app could gain root privileges (full control of the system, equivalent to owning the device).
+- <span class="urg-tag urg-tag--soon">Soon</span>The 26.x line fixes 67 issues, 21 in WebKit and 6 in Kernel, including one where an app could gain root privileges (full control of the system, equivalent to owning the device).Apple flags none of these as actively exploited.
 - The 18.x line fixes 49 issues and includes three notable privacy ones: an app circumventing App Privacy Report logging (the very report you would use to audit what an app connects to), an app enumerating installed applications (usable for profiling a user), and a Wi-Fi issue letting an app execute arbitrary code with kernel privileges.
 - The 17.7.11, 16.7.16, and 15.8.8 releases for older hardware carry a single fix each: the notification retention issue described in the 22 April entry below.
 
@@ -75,6 +75,6 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 
 > 2026-04-22 · [26.4.2 advisory](https://support.apple.com/en-us/127002){target="_blank"} · [18.7.8 advisory](https://support.apple.com/en-us/127003){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>The privacy implication is worth knowing. The entire release fixes one issue.
+- <span class="urg-tag urg-tag--routine">Routine</span>The privacy implication is worth knowing. The entire release fixes one issue.Apple flags none of these as actively exploited.
 - CVE-2026-28950: notifications marked for deletion could be unexpectedly retained on the device. The cause was a logging issue, addressed with improved data redaction. Notification content you assumed disappeared when you swiped it away was still on the device, readable by anyone who obtained it.
 - The same fix did not reach the 17.x, 16.x, and 15.x lines until 11 May, 19 days later. Older hardware gets fewer fixes and gets them later.

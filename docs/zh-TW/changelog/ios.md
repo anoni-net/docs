@@ -49,7 +49,7 @@ Apple 同一天常常發好幾條更新線，版本號差很多，內容也不�
 
 > 2026-07-27 · [上游公告](https://support.apple.com/en-us/128066){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>86 個修補，Kernel 佔 19 個、WebKit 佔 7 個、ImageIO 佔 6 個。
+- <span class="urg-tag urg-tag--soon">儘快</span>86 個修補，Kernel 佔 19 個、WebKit 佔 7 個、ImageIO 佔 6 個。Apple 沒有標注任何一項已被實際利用。
 - WebKit 修掉一個瀏覽紀錄外洩：網站有辦法知道你是否造訪過某個連結。同一組還修了惡意內容違反 iframe 沙箱政策（沙箱是把嵌入的網頁關在隔離環境裡，破得掉就能碰到不該碰的東西），以及網頁內嵌惡意內容造成的介面偽裝。
 - Kernel 有一個連到惡意 NFS 伺服器就可能造成核心記憶體損毀的問題，接不明網路儲存空間的人要留意。
 - Contacts 修了三個問題，包含 app 未經授權新增聯絡人，以及處理惡意聯絡人資料造成的資料外洩。
@@ -58,7 +58,7 @@ Apple 同一天常常發好幾條更新線，版本號差很多，內容也不�
 
 > 2026-06-29 · [上游公告](https://support.apple.com/en-us/127594){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>38 個修補裡有 24 個在 WebKit、4 個在 WebRTC，整包幾乎都是瀏覽器引擎。
+- <span class="urg-tag urg-tag--soon">儘快</span>38 個修補裡有 24 個在 WebKit、4 個在 WebRTC，整包幾乎都是瀏覽器引擎。Apple 沒有標注任何一項已被實際利用。
 - 多個「惡意網站跨來源竊取資料」與「處理惡意網頁內容洩漏敏感使用者資訊」，這一類直接影響在瀏覽器裡登入的服務。
 - 有一個惡意網站可以在沙箱外處理受限網頁內容，沙箱是瀏覽器隔離網頁的最後一道，破得掉就等於少一層防護。
 - 6 月 1 日另有 26.5.1，Apple 沒有發布 CVE 清單，本頁不另立條目。
@@ -67,7 +67,7 @@ Apple 同一天常常發好幾條更新線，版本號差很多，內容也不�
 
 > 2026-05-11 · [26.5 公告](https://support.apple.com/en-us/127110){target="_blank"} · [18.7.9 公告](https://support.apple.com/en-us/127111){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>26.x 線補 67 個，WebKit 佔 21 個、Kernel 佔 6 個。Kernel 那組有一個 app 可能取得 root 權限（系統的最高控制權，取得之後等同裝置的主人）。
+- <span class="urg-tag urg-tag--soon">儘快</span>26.x 線補 67 個，WebKit 佔 21 個、Kernel 佔 6 個。Kernel 那組有一個 app 可能取得 root 權限（系統的最高控制權，取得之後等同裝置的主人）。Apple 沒有標注任何一項已被實際利用。
 - 18.x 線補 49 個，另外修了三個值得注意的隱私問題：app 可能繞過 App 隱私報告的記錄（那份報告本來就是拿來稽核 app 在背後連了哪裡）、app 可能列舉裝置上已安裝的應用程式（可用來側寫使用者身分）、Wi-Fi 元件有一個 app 可能以核心權限執行任意程式碼。
 - 同日發給更舊裝置的 17.7.11、16.7.16、15.8.8 各只補一個問題，就是下面 4 月 22 日那個通知保留問題。
 
@@ -75,6 +75,6 @@ Apple 同一天常常發好幾條更新線，版本號差很多，內容也不�
 
 > 2026-04-22 · [26.4.2 公告](https://support.apple.com/en-us/127002){target="_blank"} · [18.7.8 公告](https://support.apple.com/en-us/127003){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>隱私意涵值得知道。整個更新只修一個問題。
+- <span class="urg-tag urg-tag--routine">一般</span>隱私意涵值得知道。整個更新只修一個問題。Apple 沒有標注這一項已被實際利用。
 - CVE-2026-28950：標記為刪除的通知，可能仍然被保留在裝置上。原因是日誌記錄的問題，Apple 用改進的資料遮蔽修好。以為滑掉就消失的通知內容，實際上還留在裝置裡，對取得裝置的人可見。
 - 同一個修補到 17.x、16.x、15.x 這三條舊線是 5 月 11 日，晚了 19 天。舊機不只收到的修補比較少，時間也比較慢。

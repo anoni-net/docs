@@ -24,7 +24,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 > 2026-08-19 · [上游公告](https://tails.net/news/version_7.11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，同時帶入 Linux 核心的安全更新。
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，同時帶入 Linux 核心的安全更新。上游沒有提到這些漏洞有實際攻擊案例。
 - Tor Browser 升至 15.0.20（基於 Firefox ESR 140.14）。
 - 核心升至 6.12.101，涵蓋 Debian 安全公告 DSA-6415-1 的 24 個漏洞，影響包含提權、阻斷服務與資訊外洩。
 - 修正部分電腦上 Persistent Storage 無法解鎖的問題。啟用流程原本會等待 `udevadm settle`，無關的硬體問題會讓這一步逾時或失敗，現已不再等待。
@@ -48,7 +48,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 > 2026-07-23 · [上游公告](https://tails.net/news/version_7.10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，帶來新的關機流程與影片播放器。
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，帶來新的關機流程與影片播放器。上游沒有提到這些變更牽涉實際攻擊案例。
 - 改用 GNOME 標準關機流程。關機前會提醒尚未儲存的文件與開啟中的應用程式，並在 60 秒後自動關機。速度略慢，換來更好的資料保護。緊急關機選項仍保留，供需要快速斷電時使用。
 - 影片播放器改用 Celluloid，更現代也更可靠，且不具網路存取權限。要線上看影片請改用 Tor Browser，或額外安裝 VLC。此播放器不支援 2011 年（含）以前製造的電腦。
 - Tor Browser 升至 15.0.19。
@@ -69,7 +69,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 > 2026-06-18 · [上游公告](https://tails.net/news/version_7.9/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。上游沒有提到有實際攻擊案例，這一版本身也不是安全釋出。
 - Tor Browser 升至 15.0.16。
 - 更新部分 firmware 套件，改善較新硬體的支援，包含顯示卡、Wi-Fi 等。
 - 修正在 Secure Boot 憑證已是最新的少數情境下，仍誤跳「憑證過期」通知的問題。
@@ -88,7 +88,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 > 2026-05-21 · [上游公告](https://tails.net/news/version_7.8/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>Tor Browser 升至 15.0.14（基於 Firefox ESR 140.11）。
+- <span class="urg-tag urg-tag--soon">儘快</span>Tor Browser 升至 15.0.14（基於 Firefox ESR 140.11）。上游沒有提到這些漏洞有實際攻擊案例。
 - 修補 Linux 核心本機提權漏洞「Fragnesia」（同步緩解「Dirty Frag」）。此類漏洞可讓 Tails 內的應用程式取得管理員權限，配合其他未知漏洞可能被用於完整接管 Tails 並進行去匿名化。
 - 修補 Flatpak 透過 Yelp 逃逸沙箱的問題，yelp 升至 42.2-4tails1。
 - 修補 CVE-2026-46529（evince）、CVE-2026-41989（libgcrypt20）、CVE-2026-41054（haveged）。
@@ -118,7 +118,7 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 
 > 2026-04-30 · [上游公告](https://tails.net/news/version_7.7.1/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>緊急安全更新，修補 Tor Browser 多個漏洞。
+- <span class="urg-tag urg-tag--now">立刻</span>緊急安全更新，修補 Tor Browser 多個漏洞。上游明說目前尚未發現這些漏洞被實際利用。
 - Tor Browser 升至 15.0.11，修補 Firefox 140.10.1 多個漏洞。
 - Thunderbird 升至 140.10.0。
 - 停止支援以 ISO 映像從 USB 隨身碟開機，ISO 映像僅供 DVD 與虛擬機使用，USB 隨身碟請改用 USB image（自 2019 年起為推薦做法）。
