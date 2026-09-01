@@ -42,9 +42,13 @@ sh run_en.sh       # en
 
 ```bash
 sh build_docs_anoni.sh        # 標準版
-sh build_docs_anoni_ipfs.sh   # IPFS 版
+./build_docs_anoni_ipfs.sh    # IPFS 版
 sh build_docs_anoni_onion.sh  # Onion 版
 ```
+
+`build_docs_anoni_ipfs.sh` 要用 `./` 或 `bash` 執行。它用了 bash 的 `set -o pipefail`，
+在 dash（Ubuntu 的 `sh`）底下會直接中止在 `Illegal option -o pipefail`，而且中止的時機
+早於 `trap`，表現像是靜靜地什麼都沒做。另外兩支沒有 bash 專用語法，用 `sh` 執行沒問題。
 
 注意：`build_docs_anoni.sh` 與 `build_docs_anoni_onion.sh` 內含伺服器專用路徑，僅供特定部署環境使用。`replace_sitename_anoni_ipfs.sh` 會對產出與來源做 `sed -i` 修改，請僅在乾淨建置環境執行。
 
