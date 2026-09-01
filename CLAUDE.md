@@ -124,6 +124,14 @@ sh build_docs_anoni_onion.sh  # Onion 版本
     `docs/zh-TW/community/brand-assets.md` 的「社群分享卡」一節
 - **特殊功能**: 使用 `custom_dir` 設定客製化的 overrides（針對不同語言有不同的 overrides 目錄）
 
+### 軟體更新日誌（changelog/）
+
+`docs/<lang>/changelog/` 底下十二頁追蹤 Tor 家族、OONI、OnionShare 與五種作業系統的版本更新，目標是讓非工程師讀者能依風險自己判斷要不要更新。
+
+動這批頁面之前先讀 [`docs/CHANGELOG_SOURCES.md`](./docs/CHANGELOG_SOURCES.md)，那裡記了各頁的上游在哪、怎麼取，以及七個會踩的坑。最容易誤判的兩個：MSRC 的嚴重度是每個受影響產品各記一筆，直接數會膨脹好幾倍。GrapheneOS 發布說明裡的「List of additional fixed CVEs」是提前修補未來月份的累積清單，不是當月涵蓋範圍。
+
+急迫程度標籤的判準各頁不同，有的看證據、有的看官方發布形式，那一份也寫明了。
+
 ## Pulse 監控系統
 
 Tor 中繼監控系統，定期收集並儲存 Tor 網路資料，提供 API 供前端查詢。
