@@ -78,6 +78,7 @@ nav:
           - scenarios/nonprofit-anonymous-donation.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
+          - scenarios/shutdown.md
       - !ENV [NAV_ADVANCED, "Advanced"]:
           - advanced/index.md
           - advanced/e2ee.md
