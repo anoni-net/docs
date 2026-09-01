@@ -14,6 +14,8 @@ icon: material/broadcast
 
 本頁的「境內」一律指中國境內。站上其他頁面以台灣為預設語境，同一個詞在那些頁面代表台灣地區。
 
+同一個區域裡另一套法律框架下的處境，見 [在新加坡與馬來西亞的網路發言](./singapore-malaysia-speech.md)。
+
 要先理解對手能取得什麼，可以回頭看 [威脅模型如何建立](../basics/threat-model.md) 與 [社群平台怎麼收集你的資料](../basics/platform-tracking.md)。
 
 ## 現在的環境
@@ -166,6 +168,7 @@ Citizen Lab 對微信的一系列實證研究拆解了其中幾個機制，有�
 ## 相關閱讀
 
 - [一般人平常該做到什麼](./everyday-baseline.md)：不分身分都要做到的那些，這一頁假設你已經做到
+- [在新加坡與馬來西亞的網路發言](./singapore-malaysia-speech.md)：同一個問題在另一套言論法規與實名體系下的樣子
 - [記者保護消息來源](./journalist.md)：中國大陸的脈絡一節處理中國境內受訪者與協作者的風險
 - [出差與研討會的數位準備](./asia-travel.md)：中國大陸段的封鎖現況、SIM 實名與入境查機
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：分層的設定與長期維持，以及換帳號擋不掉的部分
