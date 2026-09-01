@@ -42,6 +42,10 @@ icon: material/tools
 
     讀出圖片裡 QR code 的內容，圖片不離開裝置。解出來是網址時把主機獨立標出來，並且不提供開啟按鈕。
 
+-   :material-animation-play-outline: **[QR code 影格串流](qr-stream.md)**
+
+    手機裡的東西要送進旁邊那台筆電，而現場的 Wi-Fi 不是你的。把檔案切成一連串 QR code 輪流播放，另一台用相機讀回來拼成原檔。兩台裝置之間沒有配對、沒有共用網路、沒有伺服器。
+
 -   :material-image-off-outline: **[檔案 metadata 清除器](strip-metadata.md)**
 
     拿掉照片、影片與 PDF 裡的 EXIF、GPS、裝置型號、製作軟體與註解欄位，全程在本機處理。照片與影片的壓縮資料一個位元都沒動，每一段的去留都列給你看。
@@ -70,8 +74,8 @@ icon: material/tools
 
 | 元件 | 用在 | 授權 | 授權文字在哪 |
 |---|---|---|---|
-| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code 產生器](qrcode.md) | MIT | [檔案開頭的標頭](vendor/qrcode-generator.js) |
-| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code 讀取器](qr-read.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
+| [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code 產生器](qrcode.md)、[影格串流](qr-stream.md) | MIT | [檔案開頭的標頭](vendor/qrcode-generator.js) |
+| [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code 讀取器](qr-read.md)、[影格串流](qr-stream.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
 | [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | [檔案 metadata 清除器](strip-metadata.md)的 PDF 部分 | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
 | [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} 的 7776 字詞表 | [密語與密碼產生器](passphrase.md) | 詞表資料 CC-BY-4.0，程式 MIT | [上游的 repo](https://github.com/anoni-net/asian-diceware){target="_blank"} |
 

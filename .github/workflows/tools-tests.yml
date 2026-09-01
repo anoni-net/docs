@@ -125,6 +125,16 @@ jobs:
       - name: QR code 讀取器
         run: node tools/test_qrread.mjs
 
+      # 影格串流的格式與拼接：漏格、亂序、一格被改掉，每一種都要拒絕得對。
+      # 最糟的失敗是「說收齊了、拼出來卻是壞的」，那在畫面上完全看不出來
+      - name: QR code 影格串流
+        run: node tools/test_qrstream.mjs
+
+      # 影格串流的介面：那一頁要兩台裝置加一個鏡頭才試得完，本機一個人補不了這一段。
+      # 用 DOM 替身把整支跑起來，走完播放、拍下、解碼、拼回的整條路
+      - name: QR code 影格串流介面
+        run: node tools/check_qrstream_ui.mjs
+
       # 第三方元件的標示與授權：漏掉不會有錯誤訊息，只是授權沒有被履行
       - name: 第三方元件標示
         run: node tools/test_vendor_attribution.mjs
