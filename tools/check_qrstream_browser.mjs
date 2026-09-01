@@ -107,8 +107,8 @@ function capacityOf(version, level) {
   return low;
 }
 
-const W = 1280;
-const H = 720;
+const W = 1920;
+const H = 1080;
 const FPS = 5;
 
 // 一張影格畫成 1280x720 的灰階畫面，QR 置中。周圍留白模擬鏡頭沒有貼齊螢幕。
@@ -523,6 +523,56 @@ test('用假的攝影機走完整條接收路徑，拼回來的檔案對得上',
       })()
     `);
     assert.ok(same, '存下來的內容跟送出去的不一樣');
+  } finally {
+    await page.close();
+    fs.rmSync(y4m, { force: true });
+  }
+});
+
+test('碼太密的時候解碼解析度會自己往上升', async () => {
+  // 版本 40 是規格上限，一張 2944 個位元組。同一段畫面壓到 1280 解不開（實測 0/5），
+  // 用原生的 1920 解得開（5/5）。擋住它的一直是這一支自己把解碼壓在 1280 那一行。
+  //
+  // 這一條驗的是升階真的會發生：CAPTURE_WIDTHS 的邏輯壞掉停在 1280 的話，極限那一檔
+  // 就永遠收不到東西，而畫面上只會看起來像對不準，沒有任何錯誤訊息。
+  const y4m = path.join(os.tmpdir(), 'qrstream-max.y4m');
+  const payload = Buffer.from('anoni.net 極限檔位的相機測試 '.repeat(90), 'utf8');
+  const tier = tool.DENSITY[tool.DENSITY.length - 1];
+  assert.equal(tier.version, 40, '最高的檔位應該是規格上限版本 40');
+  const total = writeY4M(y4m, new Uint8Array(payload), 'max-test.txt', tier.version, tier.level);
+  console.log(
+    `      版本 ${tier.version}${tier.level}：${total} 張，每張 ${capacityOf(tier.version, tier.level) - tool.OVERHEAD} 個位元組`
+  );
+
+  const page = await openChrome([
+    '--use-fake-ui-for-media-stream',
+    '--use-fake-device-for-media-stream',
+    `--use-file-for-fake-video-capture=${y4m}`,
+    '--autoplay-policy=no-user-gesture-required',
+  ]);
+  try {
+    await page.send('Page.navigate', { url: BASE });
+    await page.waitFor("document.readyState === 'complete'", '頁面載入');
+    await page.evaluate(HELPERS);
+    await page.waitFor('__qs.root() && __qs.root().children.length > 3', '工具畫出來');
+    await page.evaluate("__qs.button('接收').click(); true");
+    await page.evaluate("__qs.button('開相機').click(); true");
+    await page.waitFor("!!document.querySelector('#qr-stream-tool video')?.videoWidth", '相機畫面進來');
+
+    const capture = await page.evaluate(
+      "(() => { const v = document.querySelector('#qr-stream-tool video'); return v.videoWidth + 'x' + v.videoHeight; })()"
+    );
+    assert.equal(capture, '1920x1080', `拿到的畫面是 ${capture}，假攝影機沒有給到 1080p`);
+
+    await page.waitFor(
+      "(() => { const r = document.querySelector('#qr-stream-tool .qs-result'); return r && !r.hidden; })()",
+      `版本 40 收齊 ${total} 張（升階沒發生的話這裡會逾時）`,
+      800
+    );
+    const verdict = await page.evaluate(
+      "document.querySelector('#qr-stream-tool .qs-result').className"
+    );
+    assert.ok(verdict.includes('qs-ok'), `校驗結果是 ${verdict}`);
   } finally {
     await page.close();
     fs.rmSync(y4m, { force: true });
