@@ -16,6 +16,7 @@ Condensed release-by-release from upstream changelogs, keeping version numbers a
 
 - :simple-torbrowser: [Tor changelog](./tor.md) — Tor Browser stable and alpha channels
 - :material-server-network: [tor daemon changelog](./tor-daemon.md) — c-tor security releases, for relay and onion service operators
+- :material-shield-key-outline: [anti-censorship transports changelog](./anti-censorship.md) — Snowflake, WebTunnel, obfs4: what to switch to when Tor is blocked
 - :material-code-tags: [Arti changelog](./arti.md) — Tor Project's Rust implementation
 - :material-access-point-network: [OONI changelog](./ooni.md) — OONI Probe, Explorer, Run
 - :material-share-variant: [OnionShare changelog](./onionshare.md) — OnionShare file sharing and onion sites

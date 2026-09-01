@@ -14,6 +14,7 @@ icon: material/history
 
 - :simple-torbrowser: [Tor 更新日志](./tor.md)：Tor Browser 的稳定版与 Alpha 通道
 - :material-server-network: [tor daemon 更新日志](./tor-daemon.md)：c-tor 的安全发布，给中继与 onion 服务运营者
+- :material-shield-key-outline: [抗审查传输更新日志](./anti-censorship.md)：Snowflake、WebTunnel、obfs4，连不上 Tor 时要换的那几种
 - :material-code-tags: [Arti 更新日志](./arti.md)：Tor Project 的 Rust 实现
 - :material-access-point-network: [OONI 更新日志](./ooni.md)：OONI Probe、Explorer、Run
 - :material-share-variant: [OnionShare 更新日志](./onionshare.md)：OnionShare 文件分享与匿名网站
