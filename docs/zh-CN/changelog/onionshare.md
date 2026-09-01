@@ -15,6 +15,8 @@ OnionShare 的发版节奏比 Tor Browser 与 Tails 慢很多，2.6.3 到 2.6.4 
 - <span class="urg-tag urg-tag--soon">尽快</span>该版含安全修补。OnionShare 的服务在运行期间是对外可触及的，修补通常关系到谁读得到你分享的内容。
 - <span class="urg-tag urg-tag--routine">一般</span>功能、依赖包与打包更新。
 
+这一页的「尽快」涵盖所有安全修补，不分类别与严重度，筛选比 iOS 那几页宽。看到尽快时要自己读一下条目内容判断轻重。
+
 发版节奏慢，目前没有出现过需要当天更新的等级，所以这一页还没有「立刻」。
 
 ## OnionShare 2.6.5

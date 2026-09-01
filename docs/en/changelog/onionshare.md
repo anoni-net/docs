@@ -15,6 +15,8 @@ OnionShare ships far less often than Tor Browser or Tails: fifteen months passed
 - <span class="urg-tag urg-tag--soon">Soon</span>The release contains security fixes. An OnionShare service is reachable from outside while it runs, so its fixes usually govern who can read what you share.
 - <span class="urg-tag urg-tag--routine">Routine</span>Features, dependencies, and packaging.
 
+"Soon" on this page covers every security fix regardless of category or severity, a wider net than the iOS pages cast. When you see it, read the entry itself to judge how much weight it carries.
+
 Releases are infrequent and none so far has warranted same-day installation, so this page has no "Now" entries yet.
 
 ## OnionShare 2.6.5

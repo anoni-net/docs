@@ -16,6 +16,8 @@ Source data comes from Apple's [security releases page](https://support.apple.co
 - <span class="urg-tag urg-tag--soon">Soon</span>The fixes cover memory corruption in WebKit or Kernel, or include gaining root, bypassing Gatekeeper, or bypassing privacy preferences. Install within a few days.
 - <span class="urg-tag urg-tag--routine">Routine</span>Everything else. Install on your normal schedule.
 
+The colour answers how fast to act. Whether anyone is already exploiting the flaw is a separate question, and every entry states it explicitly. "Now" on this page requires evidence: Apple itself noting possible active exploitation, or the CVE appearing in the CISA catalog.
+
 These ratings come from community volunteers reading the advisories. Apple does not label releases this way. Where the call is unclear, we round up.
 
 The bypass category deserves particular attention on macOS. Gatekeeper is what stops unsigned software running, and privacy preferences (the access permissions in System Settings) are what stop an app reading your screen, microphone, and files. When either layer is bypassed, nothing looks wrong on screen.
