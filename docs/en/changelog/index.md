@@ -28,4 +28,5 @@ Your device is part of the attack surface. This group skips the line-by-line tra
 - :material-usb-flash-drive-outline: [Tails changelog](./tails.md) — Tails operating system
 - :material-apple-ios: [iOS security updates](./ios.md) — iPhone and iPad, with urgency ratings and older-model support
 - :material-apple: [macOS security updates](./macos.md) — Mac, with urgency ratings and the state of the three maintenance lines
+- :material-microsoft-windows: [Windows security updates](./windows.md) — monthly Patch Tuesday, sorted by desktop versus server impact
 - :material-cellphone-lock: [GrapheneOS monthly summary](./grapheneos.md) — hardened Android on Pixel, aggregated by month

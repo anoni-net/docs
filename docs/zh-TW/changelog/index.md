@@ -26,6 +26,7 @@ icon: material/history
 - :material-usb-flash-drive-outline: [Tails 更新日誌](./tails.md)：Tails 作業系統
 - :material-apple-ios: [iOS 安全更新](./ios.md)：iPhone 與 iPad，含急迫程度與舊機支援狀況
 - :material-apple: [macOS 安全更新](./macos.md)：Mac，含急迫程度與三條維護線的狀態
+- :material-microsoft-windows: [Windows 安全更新](./windows.md)：每月 Patch Tuesday，先分清楚桌面還是伺服器
 - :material-cellphone-lock: [GrapheneOS 月度更新摘要](./grapheneos.md)：Pixel 上的強化 Android，按月聚合
 
 ## 想找完整翻譯文章
