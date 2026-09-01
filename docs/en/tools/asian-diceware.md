@@ -1,10 +1,10 @@
 ---
-title: "Asian Diceware: an Asian-flavored passphrase wordlist"
+title: "Asian Diceware, an Asian-flavored passphrase wordlist"
 description: A community-made open-source passphrase wordlist that blends common English with dictionary-attested Asian loanwords (tofu, boba, oolong, kimchi), built as an EFF-compatible drop-in. How to use it, when to use it, how strong it is, and why randomness is the whole point.
 icon: material/dice-multiple-outline
 ---
 
-# :material-dice-multiple-outline: Asian Diceware: an Asian-flavored passphrase wordlist
+# :material-dice-multiple-outline: Asian Diceware, an Asian-flavored passphrase wordlist
 
 A long random password is the safest option, but nobody can remember one — so most people fall back on a birthday plus a pet's name and reuse it everywhere. There is an easier way: roll a few dice, pull a handful of English words from a fixed list, and string them together as your password. This kind of "passphrase" is easy to remember and easy to type, yet far stronger than a hand-picked password. You have probably encountered this idea before (the next section lists a few examples). What we made is an Asian-flavored version, blending in Asian loanwords that English already absorbed, so the words feel familiar to people who grew up around Asian languages and food. You will find `oolong`, `boba` (bubble tea, which originated in Taiwan), `tofu`, and `pinyin` in there, alongside `ramen`, `matcha`, `kimchi`, and `typhoon`, plus a few you might not realize are loanwords at all, like `shampoo` (from Hindi) and `ketchup` (whose root traces to Hokkien). The full list and the word-choice rules are in [What we made](#What-we-made) below.
 
@@ -44,6 +44,8 @@ Asian loanwords are only about 3.8% of the list, so a six-word passphrase carrie
     A higher percentage does not make the passphrase stronger. Every word carries the same weight whether it is `tofu` or `the`; the entropy comes from the list being exactly 7,776 words with each die roll uniform, never from where the words came from. So unlike beer, "higher proof" buys you nothing here, and usability wins when it conflicts with cultural coverage.
 
 The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0); the source and full list are at [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. The list itself only makes the individual words easy to recognize and remember; it provides no encryption. The real security comes from how you generate, store, and use the passphrase.
+
+For how the words were picked, the breakdown by source language, and what the build pipeline throws out, see [How 292 Asian loanwords ended up in an English passphrase wordlist](../blog/posts/asian-diceware.md).
 
 ## How to use it
 

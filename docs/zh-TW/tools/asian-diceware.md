@@ -1,10 +1,10 @@
 ---
-title: Asian Diceware：帶亞洲味的英文密語字典
+title: Asian Diceware，帶亞洲味的英文密語字典
 description: 匿名網路社群參考 EFF Diceware 做的開源密語字典，把 tofu、boba、oolong、kimchi 這類有字典背書的亞洲外來語混進 7776 字英文詞表，讓在台灣、香港與亞洲各地生活的人更好記。這篇說明如何使用、何時使用、密語強度與隨機性，並提供 A5 小冊 PDF 下載。
 icon: material/dice-multiple-outline
 ---
 
-# :material-dice-multiple-outline: Asian Diceware：帶亞洲味的英文密語字典
+# :material-dice-multiple-outline: Asian Diceware，帶亞洲味的英文密語字典
 
 又長又隨機的密碼最安全，但人腦記不住，於是多數人改用生日加寵物名字，還一組到處重複使用。有個更容易的方法，擲幾次骰子、從一份固定的詞表裡抽出幾個英文字串起來，當成你的密碼。這種「密語」（passphrase）好記、好輸入，強度卻遠高於一般人手打的密碼。密語你可能早就用過，下一節就列幾個你大概見過的例子。我們做的是一份帶亞洲味的版本，把已經進入英文字典的亞洲外來語混進去，對在台灣、香港與亞洲各地生活的人更好認、更好記。台灣與華語圈熟悉的 `oolong`（烏龍茶）、`boba`（珍珠奶茶，源自台灣）、`tofu`（豆腐）、`pinyin`（拼音）都在裡面，也收了 `ramen`（拉麵）、`matcha`（抹茶）、`kimchi`（泡菜）、`typhoon`（颱風）等日韓料理與亞洲風物，還有 `shampoo`（洗髮，源自印地語）、`ketchup`（番茄醬，源頭可追到閩南語）這種你未必發現源自亞洲的字。完整清單與挑字原則，後面〈我們做了什麼〉會說明。
 
@@ -42,6 +42,8 @@ asian-diceware 是一份 7776 字、與 EFF 相容的密語詞表，可以當成
     比例拉高，密語並不會更強。無論抽到 `tofu` 還是 `the`，每個字增加的猜測難度都一樣，強度只跟詞表恰好 7776 字、每次擲骰機率均勻有關，跟字的來源無關。所以跟啤酒不同，這裡「濃度更高」不會多給你什麼。文化覆蓋和好用性衝突時，好用性優先。
 
 這份詞表開源（程式碼採 MIT、詞表資料採 CC-BY-4.0），原始碼與完整詞表在 [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}。詞表的功能是讓抽字這一步更好認好記，本身不涉及加密。真正的安全來自你如何產生、保管與使用密語。
+
+選字的完整過程、292 個字的來源分布，以及建置流程擋掉了什麼，見社群的 [一份英文密語詞表裡的 292 個亞洲外來語，是怎麼選出來的](../blog/posts/asian-diceware.md)。
 
 ## 如何使用
 
