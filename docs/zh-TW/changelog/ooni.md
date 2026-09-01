@@ -6,7 +6,9 @@ icon: material/access-point-network
 
 # :material-access-point-network: OONI 更新日誌
 
-[OONI Probe](../tools/what-is-ooni.md) 跨平台應用（Windows、macOS、Linux、Android、iOS）的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。
+[OONI Probe](../tools/what-is-ooni.md) 跨平台應用（Windows、macOS、Linux、Android、iOS）與底層量測引擎的版本發布整理，從上游 release notes 條列摘譯。新版本永遠在最上面。
+
+App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與命令列工具（OONI Probe CLI）是 3.x，app 內建的就是某一版引擎。做資料分析或自己排量測的人看引擎那幾則，量測行為的變動寫在那裡。
 
 ## OONI Probe 6.2.0
 
@@ -21,6 +23,16 @@ icon: material/access-point-network
 - 新增未讀完成結果的計數查詢索引。
 - 依賴項目更新，Kotlin 升至 2.4.10，Android Gradle Plugin 升至 9.1.1。
 - 翻譯更新。
+
+## OONI Probe CLI v3.30.0
+
+> 2026-07-27 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.30.0){target="_blank"}
+
+- 量測引擎與命令列工具共用同一個版本號，跨平台應用從 6.2.0 起帶的就是這一版。
+- 命令列版新增匿名憑證（anonymous credentials）的提交路徑，跟 app 端在 6.1.0 引入的機制對應。
+- 移除 `GetFeatureFlag` 裡誤留的除錯輸出。
+- Android、iOS 與桌面版的 `pom.xml` 拆開，各平台的發布不再互相牽動。
+- 建置工具鏈更新：Go 升至 1.25.3、Android NDK 升到最新穩定版，內建資產升至 probe-assets v0.31。
 
 ## OONI Probe 6.1.1
 
@@ -60,6 +72,12 @@ icon: material/access-point-network
 - Java 升級至 25，依賴項目（Kotlin、Ktor、Sentry SDK、Compose）同步更新。
 - 多項 bug 修正與穩定性提升。
 
+## OONI Probe CLI v3.29.1
+
+> 2026-05-12 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.29.1){target="_blank"}
+
+- 維護性釋出，上游沒有列出變更項目。跨平台應用 6.0.x 與 6.1.x 帶的都是 v3.29.x 這條線。
+
 ## OONI Probe 6.0.1
 
 > 2026-03-10 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.0.1){target="_blank"}
@@ -77,6 +95,15 @@ icon: material/access-point-network
 - 測試畫面新增搜尋功能。
 - 量測結果可依「執行批次」聚合檢視。
 - IP geolocation 資料庫支援自動更新。
+
+## OONI Probe CLI v3.29.0
+
+> 2026-02-10 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.29.0){target="_blank"}
+
+- 停止支援 psiphon。依照上游的規劃（issue 1761），2026 年 1 月 1 日起 psiphon 通道與 psiphon 實驗都不再運作。做審查觀測資料分析的人要留意，那個測項從此不會有新資料。
+- 新增 `userauth` 內部套件，是匿名憑證機制的基礎。匿名憑證讓提交端證明自己有權提交，同時不揭露身分。
+- HTTP 回應本文加上讀取上限，避免異常或惡意的回應把記憶體吃光。
+- 更新內建憑證與 C 相依。
 
 ## OONI Probe 5.3.0
 

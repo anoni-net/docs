@@ -22,6 +22,16 @@ icon: material/access-point-network
 - 依赖项更新，Kotlin 升至 2.4.10，Android Gradle Plugin 升至 9.1.1。
 - 翻译更新。
 
+## OONI Probe CLI v3.30.0
+
+> 2026-07-27 · [上游发布页](https://github.com/ooni/probe-cli/releases/tag/v3.30.0){target="_blank"}
+
+- 测量引擎与命令行工具共用同一个版本号，跨平台应用从 6.2.0 起带的就是这一版。
+- 命令行版新增匿名凭证（anonymous credentials）的提交路径，跟 app 端在 6.1.0 引入的机制对应。
+- 移除 `GetFeatureFlag` 里误留的调试输出。
+- Android、iOS 与桌面版的 `pom.xml` 拆开，各平台的发布不再互相牵动。
+- 构建工具链更新：Go 升至 1.25.3、Android NDK 升到最新稳定版，内置资产升至 probe-assets v0.31。
+
 ## OONI Probe 6.1.1
 
 > 2026-07-07 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.1.1){target="_blank"}
@@ -64,11 +74,26 @@ icon: material/access-point-network
 
     OONI Probe 6.0.1、6.0.0、5.3.0 等版本的发布条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/ooni/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。下方保留早期的策展条目。
 
+## OONI Probe CLI v3.29.1
+
+> 2026-05-12 · [上游发布页](https://github.com/ooni/probe-cli/releases/tag/v3.29.1){target="_blank"}
+
+- 维护性发布，上游没有列出变更项目。跨平台应用 6.0.x 与 6.1.x 带的都是 v3.29.x 这条线。
+
 ## OONI Probe Desktop 6.0.1 beta
 
 > 2026-04-11 · [GitHub 发布页](https://github.com/ooni/probe-multiplatform/releases/v6.0.1){target="_blank"} · [完整翻译文章](../blog/posts/2026-ooni-probe-desktop-beta.md)
 
 - 推出全新跨平台 OONI Probe Desktop 与仪表板，邀请社群下载内测版回报问题与建议。
+
+## OONI Probe CLI v3.29.0
+
+> 2026-02-10 · [上游发布页](https://github.com/ooni/probe-cli/releases/tag/v3.29.0){target="_blank"}
+
+- 停止支持 psiphon。按照上游的规划（issue 1761），2026 年 1 月 1 日起 psiphon 通道与 psiphon 实验都不再运作。做审查观测数据分析的人要留意，那个测项从此不会有新数据。
+- 新增 `userauth` 内部包，是匿名凭证机制的基础。匿名凭证让提交端证明自己有权提交，同时不揭露身份。
+- HTTP 响应正文加上读取上限，避免异常或恶意的响应把内存吃光。
+- 更新内置证书与 C 依赖。
 
 ## OONI Explorer 主题审查页面
 
