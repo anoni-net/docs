@@ -2,6 +2,9 @@
 title: 新闻媒体
 description: 给媒体组织的起步路径。从建立公开的安全收件渠道开始，接到素材的保存与清理、查证时不烧掉来源，以及台湾、香港、中国大陆三地的法规脉络。
 icon: material/newspaper-variant-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-newspaper-variant-outline: 新闻媒体从这里开始

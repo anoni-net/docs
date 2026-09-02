@@ -2,6 +2,9 @@
 title: 新聞媒體
 description: 給媒體組織的起步路徑。從建立公開的安全收件管道開始，接到素材的保存與清理、查證時不燒掉來源，以及台灣的揭弊者保護與通訊紀錄法規。
 icon: material/newspaper-variant-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-newspaper-variant-outline: 新聞媒體從這裡開始

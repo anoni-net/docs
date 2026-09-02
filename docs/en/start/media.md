@@ -2,6 +2,9 @@
 title: Newsrooms
 description: A starting path for news organizations. Build a public intake channel first, then material retention and disclosure requests, verification that does not burn the source, and the regional angle that changes the advice.
 icon: material/newspaper-variant-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-newspaper-variant-outline: Newsrooms start here

@@ -1,5 +1,7 @@
 /*
- * 離線內容管理頁（offline.md）的介面。
+ * 離線內容管理頁（offline.md）的介面，也是起步索引頁（start/index.md）上路徑下載按鈕
+ * 的介面。根節點是 #offline-library 就畫章節清單，是 #start-offline 就畫五條路徑各一顆
+ * 按鈕，見 renderPicker。兩邊共用同一套 service worker 的等待、詢問與進度回饋。
  *
  * 資料有兩個來源：offline-index.json 說這個語系有哪些頁面、多大，service worker 說
  * 哪些已經在裝置上。管理頁把兩邊疊起來，讀者勾選之後由 service worker 實際存取。
@@ -13,8 +15,11 @@
  * 挑，zh-CN 版那個值是 "zh"（mkdocs_cn.yml 的 theme.language）。
  */
 (function () {
-  const root = document.getElementById("offline-library");
+  const root =
+    document.getElementById("offline-library") || document.getElementById("start-offline");
   if (!root) return;
+  // 起步索引頁那個根節點只畫路徑按鈕，不畫章節清單
+  const PICKER = root.id === "start-offline";
 
   // 樣式跟著這支走。三個語系的 stylesheets/extra.css 是各自獨立的檔案，寫在那裡
   // 要維護三份，而這些規則只有這一頁用得到。
@@ -165,9 +170,17 @@
     #offline-library .ol-apply .ol-progress,
     #offline-library .ol-apply .ol-message { margin: 0; }
     #offline-library .ol-apply .ol-apply__row + .ol-message { margin-top: .6rem; }
+    /* 起步索引頁的路徑按鈕，一條一列，提醒緊貼在自己那顆按鈕底下 */
+    #offline-library .ol-paths {
+      display: flex; flex-direction: column; gap: .8rem; margin: .8rem 0 1.2rem;
+    }
+    #offline-library .ol-path__done { margin: 0; opacity: .7; }
+    #offline-library .ol-path .ol-hint { margin: .3rem 0 0; }
+    #offline-library .ol-paths ~ .ol-hint { margin-left: 0; }
   `;
   const style = document.createElement("style");
-  style.textContent = CSS;
+  // 規則寫的是 #offline-library，起步索引頁的根節點是 #start-offline，注入時換掉
+  style.textContent = CSS.split("#offline-library").join("#" + root.id);
   document.head.appendChild(style);
 
   const STRINGS = {
@@ -212,6 +225,14 @@
       legend: "淡色的標題還沒存到這台裝置，沒有網路時打不開。勾選框是灰的表示那一頁由網站自動存著，那一份跟著網站版本走，網站換版時會被清掉重來，要確保它留在裝置上就按上面的「全部存到裝置」。",
       onlyStoredEmpty: "這個語言目前沒有存下任何頁面。",
       notStored: "還沒存到這台裝置，沒有網路時打不開",
+      pathSave: "存下「{title}」的路徑（{n} 頁，{size}）",
+      pathLabel: "「{title}」的路徑，{n} 頁，{size}",
+      pathDone: "「{title}」的路徑已經在裝置上（{n} 頁）",
+      pathCaution: "這條路徑含有場景頁，留在裝置上本身可能就是敏感訊號。裝置可能被檢查的話，改到離線閱讀頁只勾你需要的。",
+      pathHint: "按下去只做一件事：把該路徑連到的頁面連同內文圖存進裝置，跟你在離線閱讀頁自己勾選的結果相同，網站換版也不會消失。網站不會記住你選了哪一條，也不會記住你按過。",
+      pathManage: "裝置上目前存了什麼、想改成自己挑，見{link}。",
+      pathManageLink: "離線閱讀",
+      pathNone: "索引裡沒有起步路徑，重新整理再試一次。",
       progress: "{done} / {total}",
     },
     zh: {
@@ -255,6 +276,14 @@
       legend: "淡色的标题还没存到这台设备，没有网络时打不开。勾选框是灰的表示那一页由网站自动存着，那一份跟着网站版本走，网站换版时会被清掉重来，要确保它留在设备上就按上面的「全部存到设备」。",
       onlyStoredEmpty: "这个语言目前没有存下任何页面。",
       notStored: "还没存到这台设备，没有网络时打不开",
+      pathSave: "存下「{title}」的路径（{n} 页，{size}）",
+      pathLabel: "「{title}」的路径，{n} 页，{size}",
+      pathDone: "「{title}」的路径已经在设备上（{n} 页）",
+      pathCaution: "这条路径含有场景页，留在设备上本身可能就是敏感信号。设备可能被检查的话，改到离线阅读页只勾你需要的。",
+      pathHint: "按下去只做一件事：把该路径连到的页面连同内文图存进设备，跟你在离线阅读页自己勾选的结果相同，网站换版也不会消失。网站不会记住你选了哪一条，也不会记住你按过。",
+      pathManage: "设备上目前存了什么、想改成自己挑，见{link}。",
+      pathManageLink: "离线阅读",
+      pathNone: "索引里没有起步路径，刷新再试一次。",
       progress: "{done} / {total}",
     },
     en: {
@@ -298,6 +327,14 @@
       legend: "Faded titles are not on this device yet and will not open without a network. A greyed-out checkbox means the site keeps that page for you, but that copy follows the site version and is cleared on every release. Use “Save everything” above to keep it for good.",
       onlyStoredEmpty: "Nothing is stored for this language yet.",
       notStored: "Not on this device yet, so it will not open without a network",
+      pathSave: "Save the “{title}” path ({n} pages, {size})",
+      pathLabel: "“{title}” path, {n} pages, {size}",
+      pathDone: "The “{title}” path is already on this device ({n} pages)",
+      pathCaution: "This path includes scenario pages. Having them on a device can itself be a sensitive signal. If your device may be inspected, pick only what you need on the offline reading page instead.",
+      pathHint: "The button does one thing: it stores the pages this path links to, with their inline images, exactly as if you had ticked them on the offline reading page, and the copy survives site releases. The site does not remember which path you chose, or that you pressed anything.",
+      pathManage: "To see what is on this device, or to pick pages yourself, go to {link}.",
+      pathManageLink: "offline reading",
+      pathNone: "The index has no reading paths. Reload and try again.",
       progress: "{done} / {total}",
     },
   };
@@ -738,7 +775,111 @@
     return bar;
   }
 
+  // === 起步索引頁的路徑下載 ===
+  //
+  // 同一支程式在 start/index.md 上以 #start-offline 為根節點跑，畫的不是章節清單，
+  // 而是五條起步路徑各一顆按鈕。按下去把該路徑連到的頁面連同內文圖送進 LIBRARY，
+  // 跟讀者在管理頁勾完再按套用的結果相同。哪條路徑有哪些頁面由 offline-index.json
+  // 的 paths 說（hooks/offline_index.py 從起步頁自己的連結解析），這裡不另外列。
+  //
+  // 刻意不記住讀者選了哪一條，也不記住他按過。那是一個身分的自我宣告，而網站除了
+  // 閱讀語言之外不存任何描述讀者的東西，威脅模型清單連答案都不留。想再存一條就
+  // 再按一次，想改成自己挑就去管理頁。
+  //
+  // 哪幾條要在按鈕旁掛敏感提醒（記者、媒體、公民團體那幾條含場景頁），由起步頁
+  // frontmatter 的 offline_caution 決定，經索引的 caution 欄位帶進來。這裡不重複
+  // 判斷，也不因為有提醒就改變按鈕的行為，選擇仍然是讀者的。
+  function renderPicker(message) {
+    root.textContent = "";
+    root.appendChild(renderStatus());
+
+    if (!state.index) {
+      root.appendChild(el("p", null, t.noIndex));
+      return;
+    }
+    const paths = state.index.paths || [];
+    if (!paths.length) {
+      root.appendChild(el("p", null, t.pathNone));
+      return;
+    }
+
+    const list = el("div", "ol-paths");
+    for (const entry of paths) {
+      const row = el("div", "ol-path");
+      const pages = entry.pages || [];
+      // 跟「全部存到裝置」同一條判準：只跳過已經在 LIBRARY 的，網站自動存的照樣送。
+      // 那批跟著網站版本走，換版就被清掉，而讀者按這顆的意思是「這些要留在裝置上」。
+      const missing = pages.filter((url) => !state.saved.has(url));
+      if (state.swMissing) {
+        row.appendChild(
+          el(
+            "p",
+            "ol-path__label",
+            fill("pathLabel", { title: entry.title, n: pages.length, size: size(weightOf(pages)) })
+          )
+        );
+      } else if (!missing.length) {
+        row.appendChild(
+          el("p", "ol-path__done", fill("pathDone", { title: entry.title, n: pages.length }))
+        );
+      } else {
+        const assets = Array.from(assetsOf(missing));
+        const key = "path:" + entry.url;
+        const save = taskButton(
+          key,
+          fill("pathSave", {
+            title: entry.title,
+            n: missing.length,
+            size: size(weightOf(missing)),
+          }),
+          null,
+          () =>
+            runTask(key, t.applying, missing.length + assets.length, (report) => {
+              // 只送動作代號，不送選了哪一條。那等於身分，是這一頁最不該外流的東西。
+              trackOffline("add");
+              return ask(
+                {
+                  type: "OFFLINE_ADD",
+                  url: location.href,
+                  paths: missing,
+                  assets: assets,
+                },
+                report
+              ).then((result) => ({
+                message: result.failed
+                  ? fill("doneFailed", { ok: result.ok, failed: result.failed })
+                  : fill("done", { ok: result.ok }),
+              }));
+            })
+        );
+        save.disabled = state.busy;
+        row.appendChild(save);
+      }
+      if (entry.caution) row.appendChild(el("p", "ol-hint", t.pathCaution));
+      list.appendChild(row);
+    }
+    root.appendChild(list);
+
+    if (!state.swMissing) root.appendChild(el("p", "ol-hint", t.pathHint));
+    // 管理頁的連結。索引裡的網址相對於該語系的建置根目錄，管理頁在 offline/。
+    const manage = el("p", "ol-hint");
+    const around = t.pathManage.split("{link}");
+    manage.appendChild(document.createTextNode(around[0]));
+    const link = el("a", null, t.pathManageLink);
+    link.href = pageHref("offline/");
+    manage.appendChild(link);
+    manage.appendChild(document.createTextNode(around[1] || ""));
+    root.appendChild(manage);
+
+    if (state.task) root.appendChild(renderProgress());
+    if (message) root.appendChild(el("p", "ol-message", message));
+  }
+
   function render(message) {
+    if (PICKER) {
+      renderPicker(message);
+      return;
+    }
     root.textContent = "";
     root.appendChild(renderStatus());
 

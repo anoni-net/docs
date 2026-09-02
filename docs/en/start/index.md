@@ -63,6 +63,14 @@ Every link points at a page that already exists here. Nothing on these five page
 
 </div>
 
+## Store a path on your device
+
+Once you know your role, the pages that path links to can be stored on your phone or computer in one go, so they open without a network. Tor Browser and the onion and IPFS editions do not offer offline reading, for the reason given on [Offline reading](../offline.md).
+
+<div id="start-offline"></div>
+
+<script src="../js/offline-library.js"></script>
+
 ## How this differs from the other entry points
 
 | What you are looking for | Where to go |
