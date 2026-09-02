@@ -58,6 +58,7 @@ Coming out is a series of decisions across people and contexts, not a single swi
 If you find a stranger adding your alt with your main account's full name in the message, or you receive threats containing your home address, or you've been doxxed — you're past prevention:
 
 - Document the threats (screenshots, original message text, timestamps)
+- Keep the original screenshots untouched. Before a copy goes public or to anyone else, cover third people's names and avatars with [screenshot redaction](../utils/redact.md)
 - Don't delete the harassment — it's your evidence later
 - Move social media to friends-only, but don't mass-delete posts (often read as guilt)
 - Local helplines are listed in the regional context section below

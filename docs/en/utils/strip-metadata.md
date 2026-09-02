@@ -27,7 +27,7 @@ Three situations that come up:
 - **You photographed something at a protest or an accident and want to submit it to a newsroom**: The capture time and coordinates together point at who was standing where, and when. Strip them and the desk still receives the same image.
 - **You are about to send a petition, a whistleblowing letter or a CV as a PDF**: The author field often still holds the account name from your computer, and the producer field spells out your operating system and its version. Changing the name in the text leaves the old value in the fields.
 
-Stripping metadata only deals with fields you cannot see. Street numbers, road signs, uniforms and the view out of the window are part of the image itself and survive the process, so look the picture over yourself before you share it.
+Stripping metadata only deals with fields you cannot see. Street numbers, road signs, uniforms and the view out of the window are part of the image itself and survive the process, so look the picture over yourself before you share it. To cover something that is part of the picture, use [screenshot redaction](redact.md).
 
 ## Which files this handles
 

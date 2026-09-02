@@ -50,6 +50,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Strip EXIF, GPS, device model, authoring software and comment fields from photos, videos and PDFs without the file leaving your device. For photos and videos not one byte of compressed data is touched, and every segment kept or removed is listed for you.
 
+-   :material-selection-remove: **[Screenshot redaction](redact.md)**
+
+    Draw boxes over names, avatars and messages that must not leave a screenshot or photo and fill them with solid black, entirely on your device. The output is re-encoded so no metadata or filename carries over, and every box is checked pixel by pixel before you download.
+
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 
     Pick out and remove the tracking parameters in a URL, each annotated with who is doing the tracking. Unwraps Google and Facebook redirect wrappers too.

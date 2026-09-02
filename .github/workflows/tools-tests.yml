@@ -151,6 +151,11 @@ jobs:
       - name: 照片 metadata 清除器
         run: node tools/test_stripmeta.mjs
 
+      # 截圖遮蔽：方框座標的正規化與邊界、輸出格式與固定檔名、逐像素驗證，以及
+      # 原始碼裡沒有模糊、沒有送出或留存資料的手段
+      - name: 截圖遮蔽
+        run: node tools/test_redact.mjs
+
       # 威脅模型清單：建議的頁面存不存在，以及答案有沒有被存到裝置上
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs

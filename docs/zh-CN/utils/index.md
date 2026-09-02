@@ -50,6 +50,10 @@ icon: material/tools
 
     拿掉照片、视频与 PDF 里的 EXIF、GPS、设备型号、制作软件与注释字段，全程在本机处理。照片与视频的压缩数据一个比特都没动，每一段的去留都列给你看。
 
+-   :material-selection-remove: **[截图遮蔽](redact.md)**
+
+    在截图或照片上拉方框，把不该外流的名字、头像与对话填成实心黑色，全程在本机处理。输出重新编码，原文件的 metadata 与文件名都不会带过去，交给你之前会逐像素确认每一处都是纯黑。
+
 -   :material-link-variant-off: **[网址清理器](clean-url.md)**
 
     把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。顺便拆掉 Google 与 Facebook 的转址包装。
