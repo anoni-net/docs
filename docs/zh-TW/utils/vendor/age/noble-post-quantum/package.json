@@ -1,0 +1,79 @@
+{
+  "name": "@noble/post-quantum",
+  "version": "0.5.3",
+  "description": "Auditable & minimal JS implementation of post-quantum cryptography: FIPS 203, 204, 205",
+  "files": [
+    "*.js",
+    "*.js.map",
+    "*.d.ts",
+    "*.d.ts.map",
+    "src"
+  ],
+  "dependencies": {
+    "@noble/curves": "~2.0.0",
+    "@noble/hashes": "~2.0.0"
+  },
+  "devDependencies": {
+    "@paulmillr/jsbt": "0.4.5",
+    "@types/node": "24.2.1",
+    "fast-check": "4.2.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2"
+  },
+  "scripts": {
+    "bench": "node test/benchmark.ts",
+    "build": "tsc",
+    "build:release": "npx --no @paulmillr/jsbt esbuild test/build",
+    "build:clean": "rm *.{js,js.map,d.ts,d.ts.map} 2> /dev/null",
+    "format": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts,mjs}'",
+    "test": "node --experimental-strip-types --no-warnings test/index.ts",
+    "test:bun": "bun test/index.ts",
+    "test:deno": "deno --allow-env --allow-read test/index.ts",
+    "test:node20": "cd test; npx tsc; node compiled/test/index.js",
+    "test:slow": "SLOW_TESTS=1 node test/index.ts"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./_crystals.js": "./_crystals.js",
+    "./hybrid.js": "./hybrid.js",
+    "./ml-dsa.js": "./ml-dsa.js",
+    "./ml-kem.js": "./ml-kem.js",
+    "./slh-dsa.js": "./slh-dsa.js",
+    "./utils.js": "./utils.js"
+  },
+  "engines": {
+    "node": ">= 20.19.0"
+  },
+  "keywords": [
+    "ml-kem",
+    "ml-dsa",
+    "slh-dsa",
+    "kyber",
+    "dilithium",
+    "sphincs",
+    "fips203",
+    "fips204",
+    "fips205",
+    "xwing",
+    "kitchensink",
+    "pqc",
+    "post-quantum",
+    "public-key",
+    "crypto",
+    "noble",
+    "cryptography"
+  ],
+  "homepage": "https://paulmillr.com/noble/",
+  "funding": "https://paulmillr.com/funding/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmillr/noble-post-quantum.git"
+  },
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "author": "Paul Miller (https://paulmillr.com)",
+  "license": "MIT"
+}

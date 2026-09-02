@@ -34,6 +34,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
 
+-   :material-lock-outline: **[Local file encryption](age.md)**
+
+    Pick a file, type a passphrase, and encrypt it to the age format in your browser, or open an age file. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
+
 -   :material-qrcode: **[QR code generator](qrcode.md)**
 
     Turn onion addresses, Tor bridges and other long, easily mistyped strings into a QR code the person in front of you can read with a camera, without anything passing through a server. Downloadable as SVG for printing.
@@ -74,16 +78,20 @@ The code and data behind these tools are stored along with the page. Tick this s
 
 ## Whose code this uses
 
-Most of the code in this section is our own, under [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}. Four things come from elsewhere, included unmodified:
+Most of the code in this section is our own, under [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"}. A few things come from elsewhere, included unmodified:
 
 | Component | Used by | Licence | Where the licence text is |
 |---|---|---|---|
 | [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} 1.4.4 | [QR code generator](qrcode.md), [frame stream](qr-stream.md) | MIT | [the header at the top of the file](vendor/qrcode-generator.js) |
 | [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code reader](qr-read.md), [frame stream](qr-stream.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
 | [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | The PDF part of the [file metadata remover](strip-metadata.md) | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
+| [typage](https://github.com/FiloSottile/typage){target="_blank"} (age-encryption on npm) 0.3.1 | [Local file encryption](age.md) | BSD-3-Clause | [LICENSE](vendor/age/age-encryption/LICENSE) |
+| typage's dependencies [noble-ciphers](https://github.com/paulmillr/noble-ciphers){target="_blank"} 2.1.1, [noble-curves](https://github.com/paulmillr/noble-curves){target="_blank"} 2.0.1, [noble-hashes](https://github.com/paulmillr/noble-hashes){target="_blank"} 2.0.1, [noble-post-quantum](https://github.com/paulmillr/noble-post-quantum){target="_blank"} 0.5.3, [scure-base](https://github.com/paulmillr/scure-base){target="_blank"} 2.0.0 | [Local file encryption](age.md) | MIT | [noble-ciphers](vendor/age/noble-ciphers/LICENSE), [noble-curves](vendor/age/noble-curves/LICENSE), [noble-hashes](vendor/age/noble-hashes/LICENSE), [noble-post-quantum](vendor/age/noble-post-quantum/LICENSE), [scure-base](vendor/age/scure-base/LICENSE) |
 | The 7776-word list from [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} | [Passphrase and password generator](passphrase.md) | Word data CC-BY-4.0, code MIT | [the upstream repository](https://github.com/anoni-net/asian-diceware){target="_blank"} |
 
 The `pdf-lib.min.js` build also bundles Microsoft's tslib (Apache-2.0), whose copyright header survives in the file rather than being stripped by the minifier.
+
+typage and its dependencies are ES modules with no single-file distribution, so they sit under `vendor/age/` unmodified together with their `package.json` and licences, wired up by an import map on the page. Every file can be compared byte for byte with the same version's npm tarball, whose hashes are recorded in `vendor/README.md`.
 
 Leaving these unmodified is deliberate. Editing them would forfeit their upstream provenance, leaving readers who want to check with nothing but our word for it. The files sit under `utils/vendor/` and can be diffed against upstream.
 

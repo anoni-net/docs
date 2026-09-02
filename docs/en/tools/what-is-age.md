@@ -8,7 +8,7 @@ icon: material/file-key-outline
 
 You need to encrypt a backup before it goes to the cloud, or hand a file to one other person. Most people think of PGP first, then give up somewhere between generating a key, importing the other side's key and choosing a trust level. [age](https://github.com/FiloSottile/age){target="_blank"} was designed from scratch for exactly that job, encrypting a file to a person or a passphrase: a key is one line, there are no options, there is one file format, and the specification fits on a page.
 
-The [local file encryption tool](https://github.com/anoni-net/docs/issues/421){target="_blank"} planned for this site produces age files. This page covers what age is, how to use it, how it differs from PGP, and why it was chosen.
+This site's [local file encryption](../utils/age.md) tool produces age files. This page covers what age is, how to use it, how it differs from PGP, and why it was chosen.
 
 ## What age is
 
@@ -18,7 +18,7 @@ Three implementations open each other's files:
 
 - [age](https://github.com/FiloSottile/age){target="_blank"}: the reference implementation and command-line tool, in Go.
 - [rage](https://github.com/str4d/rage){target="_blank"}: a Rust implementation with the same command-line interface.
-- [typage](https://github.com/FiloSottile/typage){target="_blank"}: a TypeScript implementation that runs in the browser, which the tool on this site will use.
+- [typage](https://github.com/FiloSottile/typage){target="_blank"}: a TypeScript implementation that runs in the browser, which the tool on this site uses.
 
 A plugin mechanism lets hardware keys such as a YubiKey act as recipients, and the command-line tool can also encrypt directly to SSH public keys. Since 2025 the specification includes post-quantum hybrid recipient types, enabled in the command-line tool with `-pq`.
 
@@ -86,7 +86,7 @@ age also gives some things up. It does not sign, so being able to open a file sa
 
 When a reader needs to open a backup three years from now, they may have nothing but a computer with a command-line tool, and whether this site still exists is not guaranteed. age is a public format with three interoperable independent implementations, and any computer can open it. That is the entire argument for a public format over a custom one.
 
-Among public formats, age over PGP comes down to every row of the table above pointing the same way: no options means nothing to misconfigure, a short specification means a browser implementation small enough to audit, and passphrase mode needs no key management at all. The tool on this site does passphrase mode only. The reader picks a file, types a passphrase, and downloads.
+Among public formats, age over PGP comes down to every row of the table above pointing the same way: no options means nothing to misconfigure, a short specification means a browser implementation small enough to audit, and passphrase mode needs no key management at all. [Local file encryption](../utils/age.md) does passphrase mode only. The reader picks a file, types a passphrase, and downloads.
 
 PGP stays where it belongs. The [sensitive upload](../community/upload-sensitive.md) process on this site uses PGP, because that needs a long-lived identity, has to work with the email ecosystem, and the people on the other end are journalists and organisations who already use PGP. The split is: PGP for mail and identity, age for files and backups.
 

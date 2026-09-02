@@ -34,6 +34,10 @@ icon: material/tools
 
     用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会显示生成出来的密码熵有多少。
 
+-   :material-lock-outline: **[本机文件加密](age.md)**
+
+    选一个文件、输入密语，在浏览器里加密成 age 格式下载，或把 age 文件解回来。加密完先用同一组密语解回来比对才给下载。输出是公开格式，任何装了 age 命令行工具的电脑都能解开，不需要这个网站。
+
 -   :material-qrcode: **[QR code 生成器](qrcode.md)**
 
     把 onion 网址、Tor bridge 等很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
@@ -74,7 +78,7 @@ icon: material/tools
 
 ## 用了谁的程序
 
-小工具区大部分的程序是自己写的，放在 [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"} 底下。有四样东西来自别人，原封不动放进来，不做任何修改：
+小工具区大部分的程序是自己写的，放在 [anoni-net/docs](https://github.com/anoni-net/docs/tree/main/docs/zh-TW/js){target="_blank"} 底下。有几样东西来自别人，原封不动放进来，不做任何修改：
 
 | 组件 | 用在 | 授权 | 授权文字在哪 |
 |---|---|---|---|
@@ -82,12 +86,14 @@ icon: material/tools
 | [jsQR](https://github.com/cozmo/jsQR){target="_blank"} 1.4.0 | [QR code 读取器](qr-read.md)、[影格串流](qr-stream.md) | Apache-2.0 | [jsQR-LICENSE.txt](vendor/jsQR-LICENSE.txt) |
 | [pdf-lib](https://github.com/Hopding/pdf-lib){target="_blank"} 1.17.1 | [文件 metadata 清除器](strip-metadata.md)的 PDF 部分 | MIT | [pdf-lib-LICENSE.txt](vendor/pdf-lib-LICENSE.txt) |
 | [asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"} 的 7776 字词表 | [密语与密码生成器](passphrase.md) | 词表数据 CC-BY-4.0，程序 MIT | [上游的 repo](https://github.com/anoni-net/asian-diceware){target="_blank"} |
+| [typage](https://github.com/FiloSottile/typage){target="_blank"}（npm 的 age-encryption）0.3.1 | [本机文件加密](age.md) | BSD-3-Clause | [LICENSE](vendor/age/age-encryption/LICENSE) |
+| typage 相依的 [noble-ciphers](https://github.com/paulmillr/noble-ciphers){target="_blank"} 2.1.1、[noble-curves](https://github.com/paulmillr/noble-curves){target="_blank"} 2.0.1、[noble-hashes](https://github.com/paulmillr/noble-hashes){target="_blank"} 2.0.1、[noble-post-quantum](https://github.com/paulmillr/noble-post-quantum){target="_blank"} 0.5.3、[scure-base](https://github.com/paulmillr/scure-base){target="_blank"} 2.0.0 | [本机文件加密](age.md) | MIT | [noble-ciphers](vendor/age/noble-ciphers/LICENSE)、[noble-curves](vendor/age/noble-curves/LICENSE)、[noble-hashes](vendor/age/noble-hashes/LICENSE)、[noble-post-quantum](vendor/age/noble-post-quantum/LICENSE)、[scure-base](vendor/age/scure-base/LICENSE) |
 
 `pdf-lib.min.js` 里面还打包了微软的 tslib（Apache-2.0），它的版权信息跟着留在文件里，没有被压缩工具剥掉。
 
-不做修改是刻意的。改过就失去可对照上游版本的可审性，读者要验的时候只能相信我们的说法。文件都在 `utils/vendor/` 底下，可以自己跟上游的版本比对。
+不做修改是刻意的。改过就失去可对照上游版本的可审性，读者要验的时候只能相信我们的说法。文件都在 `utils/vendor/` 底下，可以自己跟上游的版本比对。typage 与它的相依是 ES module，没有单一文件的发行版，所以连同 `package.json` 与授权原封不动放进 `vendor/age/`，页面用 import map 接起来，每一个文件都能跟 npm 上同版本的 tarball 逐字节比对，哈希记在 `vendor/README.md`。
 
-为什么有四样不自己写，各页最后一节都有说明。共通的理由是外部函数库写错不会崩溃，只会产生看起来正常但实际上错的结果，比坏掉更难发现，QR code 生成器那一页就记了一次实际遇到的例子。
+为什么不自己写，各页最后一节都有说明。共通的理由是外部函数库写错不会崩溃，只会产生看起来正常但实际上错的结果，比坏掉更难发现，QR code 生成器那一页就记了一次实际遇到的例子。
 
 ## 没有收进来的东西
 

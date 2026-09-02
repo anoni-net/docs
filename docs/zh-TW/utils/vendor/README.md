@@ -8,6 +8,12 @@
 | `qrcode-generator.js` | [kazuhikoarase/qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) | 1.4.4 | MIT |
 | `jsQR.js` | [cozmo/jsQR](https://github.com/cozmo/jsQR) | 1.4.0 | Apache-2.0，授權全文見 `jsQR-LICENSE.txt` |
 | `pdf-lib.min.js` | [Hopding/pdf-lib](https://github.com/Hopding/pdf-lib) | 1.17.1 | MIT，授權全文見 `pdf-lib-LICENSE.txt` |
+| `age/age-encryption/` | [FiloSottile/typage](https://github.com/FiloSottile/typage)（npm `age-encryption`） | 0.3.1 | BSD-3-Clause，授權全文見 `age/age-encryption/LICENSE` |
+| `age/noble-ciphers/` | [paulmillr/noble-ciphers](https://github.com/paulmillr/noble-ciphers) | 2.1.1 | MIT，`age/noble-ciphers/LICENSE` |
+| `age/noble-curves/` | [paulmillr/noble-curves](https://github.com/paulmillr/noble-curves) | 2.0.1 | MIT，`age/noble-curves/LICENSE` |
+| `age/noble-hashes/` | [paulmillr/noble-hashes](https://github.com/paulmillr/noble-hashes) | 2.0.1 | MIT，`age/noble-hashes/LICENSE` |
+| `age/noble-post-quantum/` | [paulmillr/noble-post-quantum](https://github.com/paulmillr/noble-post-quantum) | 0.5.3 | MIT，`age/noble-post-quantum/LICENSE` |
+| `age/scure-base/` | [paulmillr/scure-base](https://github.com/paulmillr/scure-base) | 2.0.0 | MIT，`age/scure-base/LICENSE` |
 
 ## 為什麼不自己寫
 
@@ -29,3 +35,30 @@ QR 編碼寫錯的典型後果是產生一個「掃得出來但內容錯」的�
 
 Apache-2.0 與 MIT 都要求散布時附上授權副本，所以 `jsQR-LICENSE.txt` 與
 `pdf-lib-LICENSE.txt` 也在這個目錄裡，不要刪。
+
+## age/ 底下的 ES module
+
+typage 與它相依的五個套件沒有單一檔案的發行版，所以照 npm tarball 裡的目錄結構原封不動放進
+`age/`，每個套件自己的 `LICENSE` 與 `package.json` 跟著放。只放 `age-encryption/dist/index.js`
+從 import 一路連到的 38 支 `.js`（typage 的 `.d.ts` 與套件裡沒有被 import 的其他模組不放），
+清單由 `tools/test_agecrypt.mjs` 從 import 重算一次比對，多一個或少一個都會紅。
+
+頁面用 `<script type="importmap">` 把 `age-encryption` 與 `@noble/...` 等名稱接到 `age/` 底下的檔案，
+`js/agecrypt.js` 再 `import("age-encryption")`。要驗跟上游是不是同一份，拿下面的 tarball
+雜湊去對：
+
+| tarball | sha256 |
+|---|---|
+| `age-encryption-0.3.1.tgz` | `5a318d61f29bafc02810feef65dcf9d82b17a44d9c777eed658d2abea5f74bc5` |
+| `noble-ciphers-2.1.1.tgz` | `1704cc39be04737a17f17c37b8556b195e2b6ed442ecc2b7be6230b2e26f0d82` |
+| `noble-curves-2.0.1.tgz` | `1271ac0dfa27c93e464e64b65ff2a255eea52c449ca86c149cfb0b9786dd9029` |
+| `noble-hashes-2.0.1.tgz` | `638ffb3053a7e7478c9e54a6e297f3601299ee570a41112e501af7050d086a0a` |
+| `noble-post-quantum-0.5.3.tgz` | `30efd5f906fb181552a0ade106bb6d004725303360f6c041346fd578fff3438e` |
+| `scure-base-2.0.0.tgz` | `758d9a74d504922c21f12afbb832a8da13634657fa842c1aee1ec3eac82c8902` |
+
+```
+npm pack age-encryption@0.3.1 @noble/ciphers@2.1.1 @noble/curves@2.0.1 @noble/hashes@2.0.1 @noble/post-quantum@0.5.3 @scure/base@2.0.0
+```
+
+換版時重新執行 `tools/test_agecrypt.mjs`，它用 Node 內建的 crypto 獨立實作了 age 的密語模式，
+typage 的輸出要能被它解開、它的輸出也要能被 typage 解開，兩邊互驗才算通過。

@@ -131,6 +131,24 @@ test('其他語系的 vendor 檔案是指向 zh-TW 的 symlink', () => {
   }
 });
 
+test('vendor 底下的子目錄（age/）每個套件都有授權檔，三語系的表格都列到', () => {
+  // 子目錄裡的 .js 不在上面那份清單裡，它們以套件為單位登記。逐檔的閉包、import map
+  // 與 offline_assets 三邊一致由 tools/test_agecrypt.mjs 守。
+  const sub = path.join(VENDOR, 'age');
+  const pkgs = fs.readdirSync(sub).filter((d) => fs.statSync(path.join(sub, d)).isDirectory());
+  assert.ok(pkgs.length >= 6, `vendor/age 只有 ${pkgs.length} 個套件`);
+  const readme = read(path.join(VENDOR, 'README.md'));
+  for (const pkg of pkgs) {
+    const licence = path.join(sub, pkg, 'LICENSE');
+    assert.ok(fs.existsSync(licence) && fs.statSync(licence).size > 500, `vendor/age/${pkg} 沒有完整的 LICENSE`);
+    assert.ok(readme.includes(`age/${pkg}/`), `vendor/README.md 沒有登記 age/${pkg}/`);
+    for (const lang of LANGS) {
+      const index = read(path.join(DOCS, lang, 'utils', 'index.md'));
+      assert.ok(index.includes(`vendor/age/${pkg}/LICENSE`), `${lang} 的 index.md 沒有連到 age/${pkg} 的授權`);
+    }
+  }
+});
+
 test('每一頁引用的 vendor 檔案在自己的語系底下都找得到', () => {
   // 頁面寫的是相對路徑，檔案要在同語系的 vendor 底下才連得到
   for (const lang of LANGS) {

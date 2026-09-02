@@ -126,6 +126,7 @@ nav:
       - utils/index.md
       - utils/threat-model.md
       - utils/passphrase.md
+      - utils/age.md
       - utils/qrcode.md
       - utils/qr-read.md
       - utils/qr-stream.md

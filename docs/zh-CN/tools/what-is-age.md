@@ -8,7 +8,7 @@ icon: material/file-key-outline
 
 出门前要把备份加密后放上云端，或者要把一份文件交给另一个人，多数人第一个想到 PGP，然后在生成密钥、导入公钥、决定信任等级那几步放弃。[age](https://github.com/FiloSottile/age){target="_blank"} 是为「把一个文件加密给某个人或某组密语」重新设计的工具：密钥只有一行，没有选项，一个文件格式，规范只有一页长。
 
-站上规划中的[本机文件加密工具](https://github.com/anoni-net/docs/issues/421){target="_blank"}输出的就是 age 格式。这一页先说明 age 是什么、怎么用、跟 PGP 差在哪，以及为什么选它。
+站上的[本机文件加密](../utils/age.md)输出的就是 age 格式。这一页先说明 age 是什么、怎么用、跟 PGP 差在哪，以及为什么选它。
 
 ## age 是什么
 
@@ -18,7 +18,7 @@ age 由 Go 语言密码学函数库的维护者 Filippo Valsorda 设计，2019 �
 
 - [age](https://github.com/FiloSottile/age){target="_blank"}：Go 写的参考实现与命令行工具。
 - [rage](https://github.com/str4d/rage){target="_blank"}：Rust 实现，命令行界面相同。
-- [typage](https://github.com/FiloSottile/typage){target="_blank"}：TypeScript 实现，在浏览器里也能执行，站上的工具会用它。
+- [typage](https://github.com/FiloSottile/typage){target="_blank"}：TypeScript 实现，在浏览器里也能执行，站上的工具用的就是它。
 
 插件机制让硬件密钥（例如 YubiKey）也能当收件人，命令行工具另外支持直接用 SSH 公钥加密。2025 年之后规范加入了后量子混合密钥的收件人类型，命令行工具用 `-pq` 开启。
 
@@ -86,7 +86,7 @@ age 也放弃了几件事。它不签名，能解开一个文件不代表知道�
 
 读者三年后要解一份备份时，手上可能只剩一台装了命令行工具的电脑，网站还在不在都不一定。age 是公开格式，三份独立实现互通，任何一台电脑都能解开，这是选公开格式而非自定义格式的全部理由。
 
-在公开格式里选 age 而非 PGP，理由是上面那张表的每一行都指向同一件事：没有选项就没有设错的机会，规范短就能在浏览器里实现得小而能审，密语模式不需要任何密钥管理。站上的工具只做密语模式，读者要做的事只有选文件、输入密语、下载。
+在公开格式里选 age 而非 PGP，理由是上面那张表的每一行都指向同一件事：没有选项就没有设错的机会，规范短就能在浏览器里实现得小而能审，密语模式不需要任何密钥管理。[本机文件加密](../utils/age.md)只做密语模式，读者要做的事只有选文件、输入密语、下载。
 
 PGP 留在它该在的地方。站上的[敏感数据上传](../community/upload-sensitive.md)流程用 PGP，因为那里需要长期的身份、要跟邮件生态兼容，而且对方是已经在用 PGP 的记者与组织。分工是：邮件与身份用 PGP，文件与备份用 age。
 
