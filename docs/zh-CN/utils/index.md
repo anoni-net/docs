@@ -48,7 +48,7 @@ icon: material/tools
 
 -   :material-image-off-outline: **[文件 metadata 清除器](strip-metadata.md)**
 
-    拿掉照片、视频与 PDF 里的 EXIF、GPS、设备型号、制作软件与注释字段，全程在本机处理。照片与视频的压缩数据一个比特都没动，每一段的去留都列给你看。
+    拿掉照片、视频、录音、Office 文档与 PDF 里的 EXIF、GPS、设备型号、制作软件、作者与注释字段，全程在本机处理。照片、视频与录音的压缩数据一个比特都没动，每一段的去留都列给你看。
 
 -   :material-selection-remove: **[截图遮蔽](redact.md)**
 

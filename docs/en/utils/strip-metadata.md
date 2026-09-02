@@ -1,6 +1,6 @@
 ---
 title: File metadata stripper
-description: Remove EXIF, GPS, device model, producer software and comment fields from photos, video and PDFs. The file never leaves your device, and the compressed image data is not touched.
+description: Remove EXIF, GPS, device model, producer software, author and comment fields from photos, video, recordings, Office documents and PDFs. The file never leaves your device, and the compressed image, video and audio data is not touched.
 icon: material/image-off-outline
 offline_assets:
   # The vendor file is loaded on demand when a PDF arrives, so the page carries no
@@ -25,7 +25,7 @@ Three situations that come up:
 
 - **You have just moved somewhere new and want to send a friend a photo to say you are safe**: Phones write GPS coordinates into the file by default. Your friend sees a photo, anyone looking for you sees a coordinate. Strip it before sending and the picture is unaffected.
 - **You photographed something at a protest or an accident and want to submit it to a newsroom**: The capture time and coordinates together point at who was standing where, and when. Strip them and the desk still receives the same image.
-- **You are about to send a petition, a whistleblowing letter or a CV as a PDF**: The author field often still holds the account name from your computer, and the producer field spells out your operating system and its version. Changing the name in the text leaves the old value in the fields.
+- **You are about to send a petition, a whistleblowing letter or a CV as a Word file or PDF**: The author field often still holds the account name from your computer, and the producer field spells out your operating system and its version. A Word file also remembers the company name, the template file name and the total editing time. Changing the name in the text leaves the old value in the fields.
 
 Stripping metadata only deals with fields you cannot see. Street numbers, road signs, uniforms and the view out of the window are part of the image itself and survive the process, so look the picture over yourself before you share it. To cover something that is part of the picture, use [screenshot redaction](redact.md).
 
@@ -37,10 +37,13 @@ Stripping metadata only deals with fields you cannot see. Street numbers, road s
 | `.png` | EXIF, text chunks, modification time | Not one bit touched |
 | `.webp` | EXIF, XMP | Not one bit touched |
 | `.gif` | Comments, application extensions (the animation loop setting stays) | Not one bit touched |
-| `.mp4` `.mov` | User data, encoder name, track handler name | Not one bit touched |
+| `.mp4` `.mov` `.m4a` | User data, encoder name, track handler name | Not one bit touched |
+| `.mp3` | ID3v2 and ID3v1 tags, APE tag | Not one bit touched |
+| `.wav` | INFO list, broadcast wave description, iXML, XMP, ID3 | Not one bit touched |
+| `.docx` `.xlsx` `.pptx` | Document properties (author, company, timestamps, revision count, template), custom properties, thumbnail, per-part timestamps, EXIF of embedded images | Not one character of the body touched |
 | `.pdf` | Title, author, producer, timestamps, XMP | Rewritten in full, see below |
 
-The first five formats have their descriptive sections removed whole, and the compressed image or audio-video data is left alone. PDF cannot offer the same guarantee, for the reason given under "PDF cannot be guaranteed lossless" below.
+Photos, video and recordings have their descriptive sections removed whole, and the compressed image, video or audio data is left alone. Office documents have their descriptive parts emptied while the parts holding the body are copied as they are. PDF cannot offer the same guarantee, for the reason given under "PDF cannot be guaranteed lossless" below.
 
 Other formats are not supported yet. The list and the workarounds are at the end of this page. When a file cannot be recognised, the page reports an error rather than quietly handing back something it never processed.
 
@@ -77,7 +80,7 @@ Being lossless also means the cleaned file is only slightly smaller. A 630 KB ph
 
 ## Every cleaned file is opened once before you get it
 
-The cleaned file is loaded once in the browser before it is handed to you. For video the check waits until the duration can be read, which is the classic symptom of a corrupted edit. If the code damaged the file, that step catches it and reports why, rather than letting you walk away with a photo that will not open.
+The cleaned file is loaded once in the browser before it is handed to you. For video and audio the check waits until the duration can be read, which is the classic symptom of a corrupted edit. An Office document has nothing to load, so it is read back in full instead, and every part must match its recorded length and checksum. If the code damaged the file, that step catches it and lists the reason, so you never walk away with a file that will not open.
 
 ## Video works the same way
 
@@ -96,6 +99,33 @@ Three things are removed:
 Encoders write their own version into the compressed data itself. That string is not a descriptive field, it is part of the audio-video data, sitting among the picture content.
 
 Removing it would require re-encoding, which costs quality and only swaps the old encoder's trace for a new one. The page does not do that, and lists the strings it found in the results instead.
+
+## Recordings work the same way
+
+MP3 tags live at the start (ID3v2) and the end (ID3v1, APE) of the file, with a run of audio frames in between. The tags come out whole and the frames are copied. Besides title and artist, ID3v2 often carries the name of the recording software and cover art.
+
+WAV is the same RIFF container as WebP. The descriptive fields sit in the INFO list (artist, software, date, comment) and the broadcast wave description (bext: originator, date and time, coding history), alongside the iXML and XMP blocks that recorders and editing software write. Those sections come out, `fmt` and `data` are copied.
+
+M4A is the same container as MP4 and takes the video path.
+
+Encoders (LAME, Xing) write their own details into the first frame. That belongs to the audio data itself, as with video, and is listed in the result when found.
+
+## Office documents
+
+A Word, Excel or PowerPoint file is a zip of XML parts. The descriptive fields live in three of them: `core.xml` holds the author, last modifier, created and modified times, title and revision count, `app.xml` holds the authoring application and version, company, template file name and total editing time, and `custom.xml` holds fields an organisation adds itself, such as a file number or case officer. The body lives in other parts and is not touched.
+
+The three parts are emptied, not deleted. Two other lists inside the zip record which parts exist, and deleting a part means updating both. Miss one and Word reports the file as damaged. Replacing the part with an empty root element leaves the structure intact, and every field is optional in the specification anyway. The document thumbnail is the exception: there is no such thing as an empty image, so that part really is deleted, along with the lines in both lists that point at it.
+
+Two easily missed places are handled as well:
+
+- Every part inside the zip carries its own timestamp. Word writes 1 January 1980, LibreOffice writes the real save time. All of them become the former.
+- Images embedded in the document still carry EXIF. A photo dragged from a phone's camera roll into Word brings its GPS coordinates with it. Each image is taken out, run through the photo path above, and put back.
+
+### Comments, tracked changes and notes are left alone
+
+These three are part of the body, each carrying an author name and a time. This page does not touch the body, and lists them in the result when found. To remove them, delete all comments and accept or reject all changes in your editor, save, and run the file through again.
+
+OpenDocument formats such as ODT and ODS have a different structure and are not supported yet.
 
 ## PDF is handled differently
 
@@ -124,7 +154,7 @@ In testing the page content does not reflow and the rendered result is pixel-ide
 
 **HEIC/HEIF**: the iPhone default. Its container structure is considerably more complex and the page cannot handle it yet. On an iPhone you can go to Settings → Camera → Formats and choose "Most Compatible", after which new photos are JPEG. For photos already taken, sending them to yourself over AirDrop or email will usually convert them.
 
-TIFF, RAW, MKV, WebM, AVI and Office documents are also unsupported for now.
+TIFF, RAW, MKV, WebM, AVI, FLAC, OGG and OpenDocument (ODT, ODS) are also unsupported for now.
 
 ## What this page does not do
 
