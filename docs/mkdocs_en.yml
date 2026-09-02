@@ -54,6 +54,7 @@ nav:
           - "Comparisons and hardening":
               - tools/messaging-comparison.md
               - tools/asian-diceware.md
+              - tools/what-is-age.md
               - tools/email-alias.md
               - tools/ai-privacy.md
               - tools/crypto-privacy-spectrum.md
