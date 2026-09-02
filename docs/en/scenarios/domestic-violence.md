@@ -90,7 +90,7 @@ Signing out of a shared Apple ID, leaving a family plan, or removing a location 
 Evidence supports protection orders, custody decisions, and criminal complaints. Collect it in a way that does not itself become a risk.
 
 - **Preserve, do not delete**: Threatening messages, location-tracking screenshots, and call logs are your evidence later. Do not mass-delete harassment to "clean up," and do not delete the original messages.
-- **Capture full context**: Screenshot the message, the sender, the timestamp, and any surrounding thread. Where the platform allows it, export the original. A photo of one screen taken with a second camera is better than nothing.
+- **Capture full context**: Screenshot the message, the sender, the timestamp, and any surrounding thread. Where the platform allows it, export the original. A photo of one screen taken with a second camera is better than nothing. Keep the original untouched. When a copy goes to anyone other than your social worker or lawyer, or when you ask for help in public, cover third people's names and avatars with [screenshot redaction](../utils/redact.md).
 - **Store it off the shared cloud**: Do not back up evidence to an iCloud or Google account the abuser can see. Keep it on a device or storage they cannot reach, or send it to a trusted person or advocate.
 - **Keep a dated log**: A simple running record of incidents, dates, and what happened is itself useful in legal proceedings, and is easier to maintain than perfect screenshots of everything.
 - **Get advice before confronting**: Showing the abuser that you have collected evidence can escalate the situation. Share it with an advocate, lawyer, or the police, not with the abuser.

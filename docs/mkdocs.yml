@@ -129,6 +129,7 @@ nav:
       - utils/qr-read.md
       - utils/qr-stream.md
       - utils/strip-metadata.md
+      - utils/redact.md
       - utils/clean-url.md
       - utils/invisible.md
       - utils/leaks.md

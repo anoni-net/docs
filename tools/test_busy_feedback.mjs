@@ -50,6 +50,10 @@ const WAITS = [
     why: '把整個檔案讀進來、重編一次、再解一次驗證',
   },
   {
+    file: 'zh-TW/js/redact.js',
+    why: '整張圖重新編碼，再解開一次逐像素驗證每個方框',
+  },
+  {
     file: 'zh-TW/js/qrread.js',
     why: '整張圖解開再掃過一次',
   },
