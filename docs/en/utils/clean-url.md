@@ -1,6 +1,6 @@
 ---
 title: URL cleaner
-description: Pick out and remove tracking parameters from a URL, and unwrap Google and Facebook redirect wrappers. Everything happens in your browser and it works with the network off.
+description: Pick out and remove tracking parameters from a URL, unwrap Google and Facebook redirect wrappers, and show the real registered domain on its own, with an explanation when the host looks like an impersonation. Everything happens in your browser and it works with the network off.
 icon: material/link-variant-off
 ---
 
@@ -33,6 +33,18 @@ https://www.google.com/url?q=https%3A%2F%2Fanoni.net%2F&sa=U&ved=...
 ```
 
 Copy that to someone and their click passes through Google first. Facebook's `l.php` and Instagram's outbound links do the same. This tool strips the wrapper and leaves the real destination.
+
+## Who the real host is
+
+Phishing links mostly play tricks in the host name, and they all look alike in the address bar. The tool shows the real registered domain on its own, so that the rest stands out as decoration. Three common patterns:
+
+- `google.com.evil.tw`: the brand sits in a subdomain. The real domain is `evil.tw` at the end, and anyone can name a subdomain like that.
+- `paypal-secure.com`: extra words around the brand. A different domain is registered.
+- `аpple.com`: the first letter is the Cyrillic а, which displays exactly like the Latin one. The browser actually connects to `xn--pple-43d.com`. The tool decodes the xn-- form back to what is displayed and points out that one label mixes two alphabets. The `аррӏе.com` demonstrated in 2017, made entirely of Cyrillic letters, is caught as well.
+
+Three more things are flagged: the part before an "@" is login information rather than the host, and the browser connects to whatever follows the @. The host is an IP address. The link goes to a non-default port.
+
+The registered domain is worked out from a short table of common two-part suffixes (`com.tw`, `co.uk`, `github.io` and the like), not the full public suffix list, so unusual domains may be off by one label. Treat it as an aid. Whether a domain is the one you know is still your call.
 
 ## Only recognised parameters are removed
 

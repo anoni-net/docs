@@ -56,7 +56,7 @@ icon: material/tools
 
 -   :material-link-variant-off: **[网址清理器](clean-url.md)**
 
-    把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。顺便拆掉 Google 与 Facebook 的转址包装。
+    把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。拆掉 Google 与 Facebook 的转址包装，并把真正的注册域名单独标出来，品牌放在子域名、旁边加字、用长得像的字母冒充都会说明。
 
 -   :material-format-letter-matches: **[隐形字符检测](invisible.md)**
 

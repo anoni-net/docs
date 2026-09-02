@@ -56,7 +56,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 
-    Pick out and remove the tracking parameters in a URL, each annotated with who is doing the tracking. Unwraps Google and Facebook redirect wrappers too.
+    Pick out and remove the tracking parameters in a URL, each annotated with who is doing the tracking. Unwraps Google and Facebook redirect wrappers, and shows the real registered domain on its own, explaining brands in subdomains, extra words around a brand, and look-alike letters.
 
 -   :material-format-letter-matches: **[Invisible character detector](invisible.md)**
 
