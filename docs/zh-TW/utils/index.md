@@ -52,7 +52,7 @@ icon: material/tools
 
 -   :material-link-variant-off: **[網址清理器](clean-url.md)**
 
-    把網址裡的追蹤參數挑出來並移除，每一個都說明是誰在追。順便拆掉 Google 與 Facebook 的轉址包裝。
+    把網址裡的追蹤參數挑出來並移除，每一個都說明是誰在追。拆掉 Google 與 Facebook 的轉址包裝，並把真正的註冊網域單獨標出來，品牌放在子網域、旁邊加字、用長得像的字母冒充都會說明。
 
 -   :material-format-letter-matches: **[隱形字元偵測](invisible.md)**
 

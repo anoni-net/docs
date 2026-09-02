@@ -21,6 +21,7 @@
  * 不需要建置產物，也沒有外部相依。
  */
 import fs from 'node:fs';
+import { domainToUnicode } from 'node:url';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
@@ -43,7 +44,13 @@ const harness = `
   ${grab(/^  const WRAPPERS = \[[\s\S]*?\n  \];/m)}
   ${grab(/^  function unwrap\(url\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function clean\(input\) \{[\s\S]*?\n  \}/m)}
-  return { TRACKERS, trackerOwner, clean };
+  ${grab(/^  const PUBLIC_SUFFIXES = new Set\(\[[\s\S]*?\n  \]\);/m)}
+  ${grab(/^  const BRANDS = \[[\s\S]*?\n  \];/m)}
+  ${grab(/^  const CONFUSABLE_CYRILLIC = new Set\(\[[^\n]*\]\);/m)}
+  ${grab(/^  function punycodeDecode\(input\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function labelScripts\(label\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function hostFacts\(url\) \{[\s\S]*?\n  \}/m)}
+  return { TRACKERS, trackerOwner, clean, hostFacts, punycodeDecode, BRANDS };
 `;
 const tool = new Function('URL', harness)(URL);
 
@@ -183,6 +190,125 @@ test('短網址不展開', () => {
 // await 是必要的。原本寫 fn()，非同步的測試函式回一個 promise 就被當成通過，斷言
 // 失敗變成 unhandled rejection，整支測試照樣印綠色。這個檔案是 ESM，頂層 await 可以
 // 直接用。2026-08 在 test_qrread.mjs 先踩到一次，這裡是把同一個缺陷補齊。
+
+// ---------------------------------------------------------------------------
+// 主機真身
+//
+// 釣魚網址的手法都在主機名上，而清理器原本只看參數。這裡守三件事：註冊網域抓對、
+// 冒充的寫法要抓到、正常的網址不能被嚇。誤報比漏報更傷這一頁的可信度，所以「不該警告」
+// 的案例跟「該警告」的一樣多。
+// ---------------------------------------------------------------------------
+
+const host = (input) => tool.clean(input).host;
+const kinds = (input) => host(input).warnings.map((w) => w.kind).sort();
+
+test('註冊網域：一般 .com 取最後兩段，com.tw 這類兩段式後綴多取一段', () => {
+  assert.equal(host('https://www.google.com/').registrable, 'google.com');
+  assert.equal(host('https://mail.example.com.tw/x').registrable, 'example.com.tw');
+  assert.equal(host('https://news.bbc.co.uk/').registrable, 'bbc.co.uk');
+  assert.equal(host('https://evil.github.io/login').registrable, 'evil.github.io');
+  assert.equal(host('https://anoni.net/docs/').registrable, 'anoni.net');
+  assert.equal(host('https://localhost/').registrable, 'localhost');
+});
+
+test('正常的網址不給任何警告', () => {
+  for (const url of [
+    'https://www.google.com/search?q=x',
+    'https://accounts.google.com.tw/',
+    'https://www.paypal.com/signin',
+    'https://line.me/ti/p/abc',
+    'https://onlinegame.com/',       // line 是常用字，不在品牌表裡
+    'https://anoni.net/docs/',
+    'https://xn--kpry57d.tw/',       // 台灣.tw，純中文的 IDN 是正常用法
+  ]) {
+    const warns = kinds(url).filter((k) => k !== 'idn');
+    assert.deepEqual(warns, [], `${url} 被警告了：${warns}`);
+  }
+});
+
+test('品牌只出現在子網域時要指出真正的註冊網域', () => {
+  const facts = host('https://google.com.evil.tw/login');
+  assert.equal(facts.registrable, 'evil.tw');
+  assert.ok(facts.warnings.some((w) => w.kind === 'brandSubdomain' && w.detail === 'google'));
+  // 品牌自己的子網域不算
+  assert.ok(!host('https://mail.google.com/').warnings.some((w) => w.kind === 'brandSubdomain'));
+});
+
+test('品牌旁邊加字的冒充網域', () => {
+  assert.ok(host('https://paypal-secure.com/').warnings.some((w) => w.kind === 'brandLookalike' && w.detail === 'paypal'));
+  assert.ok(host('https://login.apple-id-verify.net/').warnings.some((w) => w.kind === 'brandLookalike' && w.detail === 'apple'));
+  // 品牌名黏在別的字母裡不算，那多半是別的字
+  assert.ok(!host('https://pineapple.com/').warnings.some((w) => w.kind === 'brandLookalike'));
+});
+
+test('@ 前面的假主機', () => {
+  const facts = host('https://google.com@evil.tw/');
+  assert.equal(facts.registrable, 'evil.tw');
+  assert.ok(facts.warnings.some((w) => w.kind === 'userinfo' && w.detail === 'google.com'));
+});
+
+test('IP 位址、非預設連接埠、沒加密的 http', () => {
+  assert.deepEqual(kinds('http://203.0.113.5/login'), ['http', 'ip']);
+  assert.deepEqual(kinds('https://example.com:8443/'), ['port']);
+  assert.deepEqual(kinds('http://example.com/'), ['http']);
+});
+
+test('punycode 解碼跟 Node 的實作一致', () => {
+  for (const label of ['xn--pple-43d', 'xn--80ak6aa92e', 'xn--kpry57d', 'xn--fiqs8s', 'xn--mnchen-3ya', 'xn--bcher-kva']) {
+    assert.equal(tool.punycodeDecode(label.slice(4)), domainToUnicode(label), `${label} 解錯了`);
+  }
+  // 分隔號之前是照抄的 ASCII，之後才是編碼。沒有分隔號的話整段都是編碼，'abc' 會解成別的東西，那是規格的行為
+  assert.equal(tool.punycodeDecode('abc-'), 'abc', '分隔號前的 ASCII 要照抄');
+  assert.equal(tool.punycodeDecode('!!!'), null, '不是合法數字的字元要回 null，不要丟例外也不要亂解');
+  assert.equal(tool.punycodeDecode('a-!'), null);
+});
+
+test('IDN 混用字母系統：西里爾 а 混在拉丁字母裡', () => {
+  const facts = host('https://xn--pple-43d.com/');
+  assert.equal(facts.display, domainToUnicode('xn--pple-43d.com'));
+  assert.ok(facts.warnings.some((w) => w.kind === 'mixedScript'), `沒有抓到混用：${kinds('https://xn--pple-43d.com/')}`);
+  assert.ok(facts.warnings.some((w) => w.kind === 'idn'));
+});
+
+test('IDN 整段都是長得像拉丁字母的西里爾字母（2017 年的 аррӏе.com）', () => {
+  const facts = host('https://xn--80ak6aa92e.com/');
+  assert.equal(facts.display, domainToUnicode('xn--80ak6aa92e.com'));
+  assert.ok(facts.warnings.some((w) => w.kind === 'wholeScript'), `沒有抓到整段冒充：${kinds('https://xn--80ak6aa92e.com/')}`);
+  assert.ok(!facts.warnings.some((w) => w.kind === 'mixedScript'));
+});
+
+test('IDN 顯示形式給讀者看，純中文網域只有說明沒有警告', () => {
+  const facts = host('https://xn--kpry57d.tw/');
+  assert.equal(facts.display, '台灣.tw');
+  assert.equal(facts.registrableDisplay, '台灣.tw');
+  assert.deepEqual(kinds('https://xn--kpry57d.tw/'), ['idn']);
+});
+
+test('主機真身跟著乾淨網址一起回，拆包裝之後看的是目的地的主機', () => {
+  const result = tool.clean('https://www.google.com/url?q=https%3A%2F%2Fgoogle.com.evil.tw%2Fx&sa=U');
+  assert.equal(result.host.registrable, 'evil.tw');
+  assert.ok(result.host.warnings.some((w) => w.kind === 'brandSubdomain'));
+});
+
+test('每一種警告三個語系都有文案', () => {
+  const strings = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
+  const kindsAll = ['userinfo', 'port', 'http', 'ip', 'idn', 'mixedScript', 'wholeScript', 'brandSubdomain', 'brandLookalike'];
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    for (const kind of kindsAll) {
+      assert.ok(strings[lang].hostWarnings[kind], `${lang} 少了 ${kind} 的文案`);
+    }
+    assert.ok(strings[lang].hostTitle && strings[lang].hostFull && strings[lang].hostNote);
+  }
+});
+
+test('品牌表裡沒有太短或本身是常用字的名字', () => {
+  for (const brand of tool.BRANDS) {
+    assert.ok(brand.length >= 5, `${brand} 太短，會誤報`);
+    assert.ok(!['line', 'post', 'gov', 'meta', 'bank', 'mail'].includes(brand));
+  }
+});
+
+
 for (const [name, fn] of tests) {
   try {
     await fn();
