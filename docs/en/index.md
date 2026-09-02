@@ -199,6 +199,12 @@ Seven more cover activists, election observers, domestic violence survivors, LGB
 
 </div>
 
+## :material-wifi-off: Works without a network
+
+The whole site can be stored on a phone or computer. Open it once in an ordinary browser and pick a reading language, and the core chapters download in the background, so the pages still open when the connection is gone. To carry the entire site, choose which pages to keep, or install it as an app with its own icon, follow the three steps on [Offline reading](./offline.md) and check the result in airplane mode. Tor Browser and the onion and IPFS editions do not offer this, for privacy reasons.
+
+[:material-wifi-off: Offline reading](./offline.md){ .md-button .md-button--primary }
+
 ---
 
 For a compromised account, money already sent to a scam, a lost device, stalking, or a sudden loss of connectivity, [Emergency Help](./help/index.md) collects what to do first. The helpline numbers on that page are Taiwanese, and it points to the equivalents elsewhere. It does not replace professional help.
