@@ -48,7 +48,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-image-off-outline: **[File metadata remover](strip-metadata.md)**
 
-    Strip EXIF, GPS, device model, authoring software and comment fields from photos, videos and PDFs without the file leaving your device. For photos and videos not one byte of compressed data is touched, and every segment kept or removed is listed for you.
+    Strip EXIF, GPS, device model, authoring software, author and comment fields from photos, videos, recordings, Office documents and PDFs without the file leaving your device. For photos, videos and recordings not one byte of compressed data is touched, and every segment kept or removed is listed for you.
 
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 

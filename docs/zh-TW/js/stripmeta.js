@@ -172,7 +172,10 @@
     { kind: "png", ext: ".png", lossless: true },
     { kind: "webp", ext: ".webp", lossless: true },
     { kind: "gif", ext: ".gif", lossless: true },
-    { kind: "mp4", ext: ".mp4 .mov", lossless: true },
+    { kind: "mp4", ext: ".mp4 .mov .m4a", lossless: true },
+    { kind: "mp3", ext: ".mp3", lossless: true },
+    { kind: "wav", ext: ".wav", lossless: true },
+    { kind: "ooxml", ext: ".docx .xlsx .pptx", lossless: true },
     { kind: "pdf", ext: ".pdf", lossless: false },
   ];
 
@@ -537,6 +540,472 @@
     bytes[at + 3] = value & 0xff;
   }
 
+  // --- MP3 ---
+  //
+  // 標籤住在檔頭（ID3v2）與檔尾（ID3v1 固定 128 位元組、APEv2）。中間是一連串 MPEG
+  // 音框，一個位元都不動。編碼器（LAME、Xing）會把自己的資訊寫進第一個音框，那屬於
+  // 聲音資料，跟影片的 compressorname 同一種情況，掃到就列在提醒裡。
+  function asciiAt(bytes, at, length) {
+    let text = "";
+    for (let i = 0; i < length && at + i < bytes.length; i += 1) {
+      text += String.fromCharCode(bytes[at + i]);
+    }
+    return text;
+  }
+
+  // ID3v2 標頭 10 個位元組，大小是 syncsafe 整數，旗標第 4 位表示後面還有 10 個
+  // 位元組的 footer。回整個標籤的長度，不是 ID3v2 就回 0。
+  function id3v2Size(bytes, at) {
+    if (bytes.length < at + 10) return 0;
+    if (asciiAt(bytes, at, 3) !== "ID3") return 0;
+    const size = ((bytes[at + 6] & 0x7f) << 21) | ((bytes[at + 7] & 0x7f) << 14) |
+      ((bytes[at + 8] & 0x7f) << 7) | (bytes[at + 9] & 0x7f);
+    const footer = bytes[at + 5] & 0x10 ? 10 : 0;
+    return 10 + size + footer;
+  }
+
+  // MPEG 音框的同步字。AAC 的 ADTS 也是 0xFFF 開頭，差在 layer 位元是保留值 00，
+  // 這裡不會把它認成 MP3。
+  function isMp3Frame(bytes, at) {
+    if (at + 4 > bytes.length) return false;
+    if (bytes[at] !== 0xff || (bytes[at + 1] & 0xe0) !== 0xe0) return false;
+    const layer = (bytes[at + 1] >> 1) & 0x3;
+    const bitrate = bytes[at + 2] >> 4;
+    const rate = (bytes[at + 2] >> 2) & 0x3;
+    return layer !== 0 && bitrate !== 0 && bitrate !== 15 && rate !== 3;
+  }
+
+  function stripMp3(bytes) {
+    const removed = [];
+    let start = 0;
+    // 檔頭可能疊好幾個 ID3v2
+    for (;;) {
+      const size = id3v2Size(bytes, start);
+      if (!size || start + size > bytes.length) break;
+      removed.push({ label: "id3v2", marker: "ID3v2." + bytes[start + 3], bytes: size });
+      start += size;
+    }
+    let end = bytes.length;
+    if (end - start >= 128 && asciiAt(bytes, end - 128, 3) === "TAG") {
+      removed.push({ label: "id3v1", marker: "ID3v1", bytes: 128 });
+      end -= 128;
+    }
+    // APEv2 的 footer 32 個位元組，size 欄位含所有項目與 footer、不含 header，
+    // header 有沒有看 flags 的最高位
+    if (end - start >= 32 && asciiAt(bytes, end - 32, 8) === "APETAGEX") {
+      const size = readUint32LE(bytes, end - 32 + 12);
+      const flags = readUint32LE(bytes, end - 32 + 20);
+      const total = size + (flags & 0x80000000 ? 32 : 0);
+      if (total <= end - start) {
+        removed.push({ label: "ape", marker: "APEv2", bytes: total });
+        end -= total;
+      }
+    }
+    // 標籤之後應該就是第一個音框。允許幾 KB 的填充，填充本身留著不動。
+    let probe = start;
+    let found = false;
+    while (probe < Math.min(end, start + 4096)) {
+      if (isMp3Frame(bytes, probe)) { found = true; break; }
+      probe += 1;
+    }
+    if (!found) return { ok: false, reason: "broken" };
+
+    const data = bytes.slice(start, end);
+    const notes = [];
+    const marks = encoderMarksInData(data, 0, data.length);
+    if (marks.length) notes.push({ label: "encoderInData", detail: marks.join("、") });
+    return { ok: true, data: data, removed: removed, kept: [], notes: notes };
+  }
+
+  // --- WAV ---
+  //
+  // RIFF 容器，跟 WebP 同一種結構。描述欄位在 LIST（INFO 型：演出者、軟體、日期、
+  // 註解）、bext（廣播波形：製作者、日期、時間、編碼歷程）、iXML、_PMX（XMP）與
+  // id3 這幾個 chunk。fmt 與 data 照抄，聲音資料一個位元都不動。LIST 的另一型 adtl
+  // 是提示點的標籤，屬於內容，留著。
+  const WAV_DROP = {
+    "LIST": "wavInfo", "bext": "bext", "iXML": "ixml", "axml": "ixml",
+    "_PMX": "wavXmp", "id3 ": "wavId3", "cart": "bext",
+  };
+
+  function stripWav(bytes) {
+    if (bytes.length < 12) return { ok: false, reason: "broken" };
+    const parts = [];
+    const removed = [];
+    let at = 12;
+    let sawData = false;
+    while (at + 8 <= bytes.length) {
+      const fourcc = asciiAt(bytes, at, 4);
+      const size = readUint32LE(bytes, at + 4);
+      const padded = size + (size & 1);
+      // 最後一個 chunk 的填充位元組有些程式會省略
+      if (at + 8 + size > bytes.length) return { ok: false, reason: "broken" };
+      const total = Math.min(8 + padded, bytes.length - at);
+      const drop = WAV_DROP[fourcc] &&
+        !(fourcc === "LIST" && asciiAt(bytes, at + 8, 4) !== "INFO");
+      if (drop) {
+        removed.push({ label: WAV_DROP[fourcc], marker: fourcc.trim(), bytes: total });
+      } else {
+        if (fourcc === "data") sawData = true;
+        parts.push(bytes.subarray(at, at + total));
+      }
+      at += total;
+    }
+    if (!sawData) return { ok: false, reason: "broken" };
+    const data = concat([bytes.subarray(0, 12), concat(parts)]);
+    writeUint32LE(data, 4, data.length - 8);
+    return { ok: true, data: data, removed: removed, kept: [], notes: [] };
+  }
+
+  // --- Office 文件（DOCX、XLSX、PPTX）---
+  //
+  // OOXML 是一個 zip，裡面是一堆 XML 部件。描述欄位住在 docProps/core.xml（作者、
+  // 最後修改者、建立與修改時間、標題、修訂次數）、docProps/app.xml（製作軟體與版本、
+  // 公司、範本、總編輯時間）與 docProps/custom.xml（自訂屬性），縮圖在
+  // docProps/thumbnail.*。內文在 word/document.xml 這類部件裡，一個字都不動。
+  //
+  // 幾個做法上的決定：
+  //
+  // 部件是清空，不是刪掉。[Content_Types].xml 與 _rels/.rels 各記著一份部件清單，
+  // 刪掉部件要同步改兩份，漏一份 Word 會說檔案損毀。把 core.xml 換成一個空的根元素，
+  // 結構完全不變，所有欄位在 schema 裡本來就是選填。縮圖是例外，圖片沒有「空」的
+  // 寫法，那一個真的刪，連同 .rels 與 [Content_Types].xml 裡指向它的那幾行。
+  //
+  // zip 的每個部件自己帶著修改時間。Word 寫的是 1980-01-01，LibreOffice 寫的是真的
+  // 存檔時間，等於另一組時間戳記。全部改成 1980-01-01，extra 欄位（可能帶 unix 時間
+  // 與 uid）整段丟掉。
+  //
+  // 夾在文件裡的圖片照樣帶 EXIF。從手機相簿拖進 Word 的照片，GPS 座標跟著進了
+  // word/media/。這裡把每一張拿出來走一次上面 JPEG 與 PNG 的流程，清完再放回去。
+  //
+  // 留言、追蹤修訂與演講者備忘稿是內文的一部分，帶著作者與時間，但這一頁不動它們，
+  // 掃到就列在提醒裡，讀者要在編輯軟體裡接受或刪除之後再存一次。
+  //
+  // 解壓縮與重新壓縮用瀏覽器內建的 DecompressionStream 與 CompressionStream
+  // （deflate-raw），沒有 vendor 任何函式庫。這兩支是非同步的，所以 stripOoxml 跟
+  // stripPdf 一樣不走同步的 strip()。
+  const ZIP_LOCAL = 0x04034b50;
+  const ZIP_CENTRAL = 0x02014b50;
+  const ZIP_END = 0x06054b50;
+  // 1980-01-01，DOS 日期的最小合法值。Word 自己寫的就是這個。
+  const ZIP_EPOCH_DATE = 0x0021;
+
+  let crcTable = null;
+  function crc32(bytes) {
+    if (!crcTable) {
+      crcTable = new Int32Array(256);
+      for (let n = 0; n < 256; n += 1) {
+        let c = n;
+        for (let k = 0; k < 8; k += 1) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+        crcTable[n] = c;
+      }
+    }
+    let crc = -1;
+    for (let i = 0; i < bytes.length; i += 1) {
+      crc = crcTable[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+    }
+    return (crc ^ -1) >>> 0;
+  }
+
+  function readUint16LE(bytes, at) {
+    return bytes[at] | (bytes[at + 1] << 8);
+  }
+
+  function writeUint16LE(bytes, at, value) {
+    bytes[at] = value & 0xff;
+    bytes[at + 1] = (value >>> 8) & 0xff;
+  }
+
+  const utf8Encode = (text) => new TextEncoder().encode(text);
+  const utf8Decode = (bytes) => new TextDecoder("utf-8").decode(bytes);
+
+  // 讀 zip 的中央目錄。每一項帶著壓縮資料的位置，內容等要用的時候才解。
+  // 回 { entries, commentLen } 或 { error }。
+  function parseZip(bytes) {
+    // EOCD 在檔尾，後面可能跟著一段註解，最長 65535
+    let end = -1;
+    const from = Math.max(0, bytes.length - 22 - 65535);
+    for (let at = bytes.length - 22; at >= from; at -= 1) {
+      if (readUint32LE(bytes, at) === ZIP_END) { end = at; break; }
+    }
+    if (end < 0) return { error: "broken" };
+    const count = readUint16LE(bytes, end + 10);
+    const cdSize = readUint32LE(bytes, end + 12);
+    const cdAt = readUint32LE(bytes, end + 16);
+    const commentLen = readUint16LE(bytes, end + 20);
+    if (count === 0xffff || cdSize === 0xffffffff || cdAt === 0xffffffff) return { error: "zip64" };
+    if (cdAt + cdSize > end) return { error: "broken" };
+
+    const entries = [];
+    let at = cdAt;
+    for (let i = 0; i < count; i += 1) {
+      if (at + 46 > end || readUint32LE(bytes, at) !== ZIP_CENTRAL) return { error: "broken" };
+      const flags = readUint16LE(bytes, at + 8);
+      const method = readUint16LE(bytes, at + 10);
+      const csize = readUint32LE(bytes, at + 20);
+      const usize = readUint32LE(bytes, at + 24);
+      const nameLen = readUint16LE(bytes, at + 28);
+      const extraLen = readUint16LE(bytes, at + 30);
+      const cmtLen = readUint16LE(bytes, at + 32);
+      const offset = readUint32LE(bytes, at + 42);
+      if (csize === 0xffffffff || usize === 0xffffffff || offset === 0xffffffff) return { error: "zip64" };
+      if (flags & 0x1) return { error: "encrypted" };
+      if (method !== 0 && method !== 8) return { error: "broken" };
+      const name = utf8Decode(bytes.subarray(at + 46, at + 46 + nameLen));
+      // 本地檔頭的名稱與 extra 長度可能跟中央目錄不同，要自己讀
+      if (offset + 30 > bytes.length || readUint32LE(bytes, offset) !== ZIP_LOCAL) return { error: "broken" };
+      const localExtraLen = readUint16LE(bytes, offset + 28);
+      const dataAt = offset + 30 + readUint16LE(bytes, offset + 26) + localExtraLen;
+      if (dataAt + csize > bytes.length) return { error: "broken" };
+      entries.push({
+        name: name, flags: flags, method: method,
+        time: readUint16LE(bytes, at + 12), date: readUint16LE(bytes, at + 14),
+        crc: readUint32LE(bytes, at + 16), csize: csize, usize: usize,
+        madeBy: readUint16LE(bytes, at + 4), needed: readUint16LE(bytes, at + 6),
+        internal: readUint16LE(bytes, at + 36), external: readUint32LE(bytes, at + 38),
+        extraLen: extraLen + localExtraLen,
+        data: bytes.subarray(dataAt, dataAt + csize),
+      });
+      at += 46 + nameLen + extraLen + cmtLen;
+    }
+    return { entries: entries, commentLen: commentLen };
+  }
+
+  // 先把讀取端接上再寫，不然大一點的部件寫進去會等讀取端消化，兩邊互等。
+  async function throughStream(stream, bytes) {
+    const done = new Response(stream.readable).arrayBuffer();
+    const writer = stream.writable.getWriter();
+    await writer.write(bytes);
+    await writer.close();
+    return new Uint8Array(await done);
+  }
+
+  const inflateRaw = (bytes) => throughStream(new DecompressionStream("deflate-raw"), bytes);
+  const deflateRaw = (bytes) => throughStream(new CompressionStream("deflate-raw"), bytes);
+
+  function entryContent(entry) {
+    if (entry.method === 0) return Promise.resolve(entry.data);
+    return inflateRaw(entry.data);
+  }
+
+  // 寫一個新的 zip。時間一律 1980-01-01，沒有 extra 也沒有註解，
+  // 旗標只留 UTF-8 名稱那一位（資料描述子那一位不再需要，長度與 CRC 都寫在檔頭裡）。
+  function buildZip(entries) {
+    const parts = [];
+    const central = [];
+    let offset = 0;
+    for (const entry of entries) {
+      const name = utf8Encode(entry.name);
+      const flags = entry.flags & 0x0800;
+      const local = new Uint8Array(30 + name.length);
+      writeUint32LE(local, 0, ZIP_LOCAL);
+      writeUint16LE(local, 4, entry.needed || 20);
+      writeUint16LE(local, 6, flags);
+      writeUint16LE(local, 8, entry.method);
+      writeUint16LE(local, 10, 0);
+      writeUint16LE(local, 12, ZIP_EPOCH_DATE);
+      writeUint32LE(local, 14, entry.crc);
+      writeUint32LE(local, 18, entry.csize);
+      writeUint32LE(local, 22, entry.usize);
+      writeUint16LE(local, 26, name.length);
+      writeUint16LE(local, 28, 0);
+      local.set(name, 30);
+      parts.push(local, entry.data);
+
+      const cd = new Uint8Array(46 + name.length);
+      writeUint32LE(cd, 0, ZIP_CENTRAL);
+      writeUint16LE(cd, 4, entry.madeBy || 20);
+      writeUint16LE(cd, 6, entry.needed || 20);
+      writeUint16LE(cd, 8, flags);
+      writeUint16LE(cd, 10, entry.method);
+      writeUint16LE(cd, 12, 0);
+      writeUint16LE(cd, 14, ZIP_EPOCH_DATE);
+      writeUint32LE(cd, 16, entry.crc);
+      writeUint32LE(cd, 20, entry.csize);
+      writeUint32LE(cd, 24, entry.usize);
+      writeUint16LE(cd, 28, name.length);
+      writeUint16LE(cd, 30, 0);
+      writeUint16LE(cd, 32, 0);
+      writeUint16LE(cd, 34, 0);
+      writeUint16LE(cd, 36, entry.internal || 0);
+      writeUint32LE(cd, 38, entry.external || 0);
+      writeUint32LE(cd, 42, offset);
+      cd.set(name, 46);
+      central.push(cd);
+      offset += local.length + entry.data.length;
+    }
+    const cdBytes = concat(central);
+    const end = new Uint8Array(22);
+    writeUint32LE(end, 0, ZIP_END);
+    writeUint16LE(end, 8, entries.length);
+    writeUint16LE(end, 10, entries.length);
+    writeUint32LE(end, 12, cdBytes.length);
+    writeUint32LE(end, 16, offset);
+    return concat(parts.concat([cdBytes, end]));
+  }
+
+  // 空的部件。所有欄位在 schema 裡都是選填，留著根元素結構就完整。
+  const OOXML_EMPTY = {
+    core: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>',
+    app: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"/>',
+    custom: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/custom-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"/>',
+  };
+
+  // core.xml 與 app.xml 裡各個欄位歸到哪個標籤，畫面上照標籤列。最後一個捕捉群組是
+  // 欄位內容，空的不算。
+  const CORE_FIELDS = [
+    ["coreCreator", /<dc:creator>([\s\S]*?)<\/dc:creator>/g],
+    ["coreModifiedBy", /<cp:lastModifiedBy>([\s\S]*?)<\/cp:lastModifiedBy>/g],
+    ["coreDates", /<(dcterms:created|dcterms:modified|cp:lastPrinted)\b[^>]*>([\s\S]*?)<\/\1>/g],
+    ["coreTitle", /<(dc:title|dc:subject|dc:description|cp:keywords|cp:category|cp:contentStatus)\b[^>]*>([\s\S]*?)<\/\1>/g],
+    ["coreRevision", /<cp:revision>([\s\S]*?)<\/cp:revision>/g],
+  ];
+  const APP_FIELDS = [
+    ["appApplication", /<(Application|AppVersion)>([\s\S]*?)<\/\1>/g],
+    ["appCompany", /<(Company|Manager)>([\s\S]*?)<\/\1>/g],
+    ["appTemplate", /<Template>([\s\S]*?)<\/Template>/g],
+    ["appTotalTime", /<TotalTime>([\s\S]*?)<\/TotalTime>/g],
+    ["appOther", /<(Pages|Words|Characters|CharactersWithSpaces|Lines|Paragraphs|Slides|Notes|HiddenSlides|MMClips|HyperlinkBase|DocSecurity|ScaleCrop|LinksUpToDate|SharedDoc|HyperlinksChanged|TitlesOfParts|HeadingPairs|PresentationFormat)\b[^>]*>([\s\S]*?)<\/\1>/g],
+  ];
+
+  function fieldEntries(xml, fields, marker) {
+    const out = [];
+    for (const [label, re] of fields) {
+      let bytes = 0;
+      let hit = false;
+      re.lastIndex = 0;
+      let m;
+      while ((m = re.exec(xml))) {
+        const value = (m[m.length - 1] || "").trim();
+        if (!value) continue;
+        hit = true;
+        bytes += value.length;
+      }
+      if (hit) out.push({ label: label, marker: marker, bytes: bytes });
+    }
+    return out;
+  }
+
+  const OOXML_MEDIA = /^(word|xl|ppt)\/media\//;
+  const OOXML_COMMENTS = /^(word\/comments(Extended|Ids|Extensible)?\.xml|xl\/comments\d*\.xml|xl\/threadedComments\/|ppt\/comments\/)/;
+  const OOXML_NOTES = /^ppt\/notesSlides\/notesSlide\d+\.xml$/;
+  const OOXML_THUMB = /^docProps\/thumbnail\.[A-Za-z0-9]+$/;
+  const OOXML_CHANGES = /<w:(ins|del|moveFrom|moveTo|rPrChange|pPrChange|tblPrChange|sectPrChange)\b/g;
+
+  async function stripOoxml(bytes) {
+    if (typeof DecompressionStream === "undefined" || typeof CompressionStream === "undefined") {
+      return { ok: false, reason: "noStreams" };
+    }
+    const zip = parseZip(bytes);
+    if (zip.error) return { ok: false, reason: zip.error };
+    if (!zip.entries.some((entry) => entry.name === "[Content_Types].xml")) {
+      return { ok: false, reason: "notOoxml" };
+    }
+
+    const removed = [];
+    const notes = [];
+    const out = [];
+    let zipTimeBytes = 0;
+    let mediaBytes = 0;
+    let mediaFiles = 0;
+    const dropThumb = zip.entries.some((entry) => OOXML_THUMB.test(entry.name));
+    const note = (label, detail) => {
+      if (!notes.some((item) => item.label === label)) notes.push({ label: label, detail: detail || "" });
+    };
+
+    for (const entry of zip.entries) {
+      if (entry.time !== 0 || (entry.date !== 0 && entry.date !== ZIP_EPOCH_DATE) || entry.extraLen) {
+        zipTimeBytes += 4 + entry.extraLen;
+      }
+      let replacement = null;
+      if (entry.name === "docProps/core.xml") {
+        removed.push(...fieldEntries(utf8Decode(await entryContent(entry)), CORE_FIELDS, "core.xml"));
+        replacement = utf8Encode(OOXML_EMPTY.core);
+      } else if (entry.name === "docProps/app.xml") {
+        removed.push(...fieldEntries(utf8Decode(await entryContent(entry)), APP_FIELDS, "app.xml"));
+        replacement = utf8Encode(OOXML_EMPTY.app);
+      } else if (entry.name === "docProps/custom.xml") {
+        const count = (utf8Decode(await entryContent(entry)).match(/<property\b/g) || []).length;
+        if (count) removed.push({ label: "customProps", marker: "custom.xml", bytes: count });
+        replacement = utf8Encode(OOXML_EMPTY.custom);
+      } else if (OOXML_THUMB.test(entry.name)) {
+        removed.push({ label: "thumbnail", marker: entry.name.slice(9), bytes: entry.usize });
+        continue;
+      } else if (dropThumb && entry.name === "_rels/.rels") {
+        const xml = utf8Decode(await entryContent(entry));
+        replacement = utf8Encode(
+          xml.replace(/<Relationship\b[^>]*\/metadata\/thumbnail"[^>]*\/>\s*/g, "")
+        );
+      } else if (dropThumb && entry.name === "[Content_Types].xml") {
+        const xml = utf8Decode(await entryContent(entry));
+        replacement = utf8Encode(
+          xml.replace(/<Override\b[^>]*PartName="\/docProps\/thumbnail\.[^"]*"[^>]*\/>\s*/g, "")
+        );
+      } else if (OOXML_MEDIA.test(entry.name)) {
+        const content = await entryContent(entry);
+        const kind = detect(content);
+        if (kind === "jpeg" || kind === "png" || kind === "webp" || kind === "gif") {
+          const inner = strip(content);
+          if (inner.ok && inner.removed.length) {
+            replacement = inner.data;
+            mediaFiles += 1;
+            for (const item of inner.removed) mediaBytes += item.bytes;
+          }
+        }
+      } else if (OOXML_COMMENTS.test(entry.name)) {
+        note("comments");
+      } else if (OOXML_NOTES.test(entry.name)) {
+        note("speakerNotes");
+      } else if (entry.name === "word/document.xml") {
+        const changes = (utf8Decode(await entryContent(entry)).match(OOXML_CHANGES) || []).length;
+        if (changes) note("trackedChanges", String(changes));
+      }
+
+      if (replacement) {
+        const data = await deflateRaw(replacement);
+        out.push({
+          name: entry.name, method: 8, flags: entry.flags, crc: crc32(replacement),
+          csize: data.length, usize: replacement.length, data: data,
+          madeBy: entry.madeBy, needed: entry.needed, internal: entry.internal, external: entry.external,
+        });
+      } else {
+        out.push(entry);
+      }
+    }
+    if (zipTimeBytes) removed.push({ label: "zipTime", marker: "zip", bytes: zipTimeBytes });
+    if (zip.commentLen) removed.push({ label: "zipComment", marker: "zip", bytes: zip.commentLen });
+    if (mediaFiles) removed.push({ label: "mediaMeta", marker: "media", bytes: mediaBytes });
+    return { ok: true, data: buildZip(out), removed: removed, kept: [], notes: notes };
+  }
+
+  // 清完的 zip 要能整份讀回來：每個部件解開之後長度與 CRC 都要對得上。
+  // 這是 Office 文件的驗證步驤，圖片與影片用瀏覽器實際載入，zip 沒有那種東西可用。
+  async function verifyZip(bytes) {
+    const zip = parseZip(bytes);
+    if (zip.error) return false;
+    for (const entry of zip.entries) {
+      try {
+        const content = await entryContent(entry);
+        if (content.length !== entry.usize || crc32(content) !== entry.crc) return false;
+      } catch (err) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // 輸出的 MIME 從副檔名決定，三種 Office 文件的 zip 內容看起來都一樣
+  const OOXML_TYPES = {
+    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  };
+  function ooxmlType(name) {
+    const at = String(name || "").lastIndexOf(".");
+    const ext = at >= 0 ? name.slice(at).toLowerCase() : "";
+    return OOXML_TYPES[ext] || "application/zip";
+  }
+
   // --- PDF ---
   //
   // PDF 跟前面幾種格式不一樣，不能直接把某一段剪掉。每個物件在交叉索引表裡都記著
@@ -692,6 +1161,14 @@
     if (bytes.length >= 3 && bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) return "gif";
     if (bytes.length >= 5 && bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 &&
         bytes[3] === 0x46 && bytes[4] === 0x2d) return "pdf";
+    if (bytes.length >= 12 && asciiAt(bytes, 0, 4) === "RIFF" && asciiAt(bytes, 8, 4) === "WAVE") return "wav";
+    if (id3v2Size(bytes, 0) || isMp3Frame(bytes, 0)) return "mp3";
+    // zip 開頭。有 [Content_Types].xml 的才是 Office 文件，其餘的壓縮檔不處理。
+    if (bytes.length >= 4 && readUint32LE(bytes, 0) === ZIP_LOCAL) {
+      const zip = parseZip(bytes);
+      if (zip.entries && zip.entries.some((entry) => entry.name === "[Content_Types].xml")) return "ooxml";
+      return "zip";
+    }
     return "unknown";
   }
 
@@ -711,6 +1188,8 @@
     if (kind === "mp4") return Object.assign({ kind: kind }, stripMp4(bytes));
     if (kind === "webp") return Object.assign({ kind: kind }, stripWebp(bytes));
     if (kind === "gif") return Object.assign({ kind: kind }, stripGif(bytes));
+    if (kind === "mp3") return Object.assign({ kind: kind }, stripMp3(bytes));
+    if (kind === "wav") return Object.assign({ kind: kind }, stripWav(bytes));
     return { ok: false, kind: kind, reason: "unsupported" };
   }
 
@@ -789,7 +1268,7 @@
 
   const STRINGS = {
     "zh-TW": {
-      drop: "把圖片或影片拖進來，或點一下選檔案。可以一次選多個，也可以直接貼上（Ctrl+V）。",
+      drop: "把圖片、影片、錄音或 Office 文件拖進來，或點一下選檔案。可以一次選多個，也可以直接貼上（Ctrl+V）。",
       dropOver: "放開就開始清",
       working: "處理中",
       clear: "清掉列表",
@@ -821,15 +1300,47 @@
         icc: "ICC 色彩描述檔：拿掉的話顏色會偏掉",
         adobe: "Adobe 色彩轉換標記：CMYK 的檔案少了它顏色會反過來",
         jfif: "JFIF 基本資訊：少了它有些看圖程式會抱怨",
+        coreCreator: "作者：建立文件的帳號名稱",
+        coreModifiedBy: "最後修改者",
+        coreDates: "建立、修改與最後列印的時間",
+        coreTitle: "標題、主旨、說明、關鍵字、分類",
+        coreRevision: "修訂次數：這份文件被存過幾次",
+        appApplication: "製作軟體與版本",
+        appCompany: "公司與主管",
+        appTemplate: "範本名稱：常帶著公司或個人的範本檔名",
+        appTotalTime: "總編輯時間",
+        appOther: "統計欄位：頁數、字數、投影片數等",
+        customProps: "自訂屬性：組織自己加的欄位，例如文件編號或承辦人",
+        thumbnail: "文件縮圖：第一頁的預覽圖，內容改過之後它可能還是舊的",
+        zipTime: "壓縮檔內每個部件的時間戳記與額外欄位",
+        zipComment: "壓縮檔註解",
+        mediaMeta: "夾在文件裡的圖片的 EXIF 與描述欄位，走跟照片一樣的流程",
+        id3v2: "ID3v2 標籤：標題、演出者、專輯、註解、封面圖、編碼軟體",
+        id3v1: "ID3v1 標籤：檔尾固定 128 位元組的標題、演出者、年份、註解",
+        ape: "APE 標籤",
+        wavInfo: "INFO 清單：演出者、軟體、日期、註解",
+        bext: "廣播波形描述：製作者、製作日期與時間、編碼歷程",
+        ixml: "iXML 製作資訊：場記、錄音機型號、時間碼",
+        wavXmp: "XMP 描述區",
+        wavId3: "ID3 標籤",
       },
       notes: {
+        comments: "文件裡還有留言，每一則都帶著作者名稱與時間。這一頁不動內文，要清掉請在編輯軟體裡刪除所有留言後再存一次，再清一遍。",
+        trackedChanges: "文件裡還有追蹤修訂，每一筆都帶著修改者與時間。全部接受或拒絕之後再存一次，再清一遍。",
+        speakerNotes: "投影片帶著演講者備忘稿，那是內容的一部分，這一頁不動它，分享前自己看過。",
         pdfLeftovers: "這份 PDF 裡還有註解或附件之類的東西，那些可能各自帶著作者與時間。這一頁只處理文件層級的描述欄位，沒有動它們。",
         encoderInData: "壓縮資料本身還帶著編碼器的版本字串，那一段屬於影音資料本身，不算 metadata。要清掉只能重新編碼，而重新編碼會損失畫質，也會換上新編碼器的痕跡。這一頁不做那件事。",
       },
       pdf: "這是 PDF。文件層級的描述欄位與 XMP 描述區會被拿掉，頁面內容不會重新排版。",
-      mp4: "這是 MP4 或 MOV，處理的是容器裡的描述欄位。壓縮過的影音資料一個位元都不會動。",
+      mp4: "這是 MP4、MOV 或 M4A，處理的是容器裡的描述欄位。壓縮過的影音資料一個位元都不會動。",
+      ooxml: "這是 Office 文件。處理的是文件屬性、部件的時間戳記與夾帶圖片的 metadata，內文一個字都不會動。",
+      audio: "這是音訊檔，處理的是檔頭與檔尾的標籤區。聲音資料一個位元都不會動。",
       nothing: "這個檔案裡沒有找到可以拿掉的欄位，本來就是乾淨的。",
       errors: {
+        noStreams: "這個瀏覽器沒有內建的解壓縮功能，處理 Office 文件需要它。換一個較新的瀏覽器再試。",
+        zip64: "這份文件用了 ZIP64 格式，頁面還做不到。",
+        zip: "這是一般的壓縮檔，不是 Office 文件。ODT、ODS 這類 OpenDocument 格式目前也不支援。",
+        notOoxml: "這是一般的壓縮檔，不是 Office 文件。ODT、ODS 這類 OpenDocument 格式目前也不支援。",
         pdfLibMissing: "處理 PDF 需要的函式庫還沒載入完，稍等一下再試一次。",
         encrypted: "這份 PDF 有加密保護，要先解除才能處理。",
         heic: "這是 HEIC/HEIF。iPhone 預設拍出來就是這個格式，它的容器結構複雜得多，這一頁還做不到。在 iPhone 上可以到「設定 → 相機 → 格式」選「最相容」，之後拍的就是 JPEG。已經拍好的可以用 AirDrop 或郵件傳給自己，那個過程多半會轉成 JPEG。",
@@ -843,7 +1354,7 @@
       note: "檔案在你的瀏覽器裡改，沒有上傳到任何地方。斷網時照樣可以用。清完的是新的一份，原始檔不會被動到。",
     },
     zh: {
-      drop: "把图片或视频拖进来，或点一下选文件。可以一次选多个，也可以直接粘贴（Ctrl+V）。",
+      drop: "把图片、视频、录音或 Office 文档拖进来，或点一下选文件。可以一次选多个，也可以直接粘贴（Ctrl+V）。",
       dropOver: "放开就开始清",
       working: "处理中",
       clear: "清掉列表",
@@ -875,15 +1386,47 @@
         icc: "ICC 色彩描述文件：拿掉的话颜色会偏掉",
         adobe: "Adobe 色彩转换标记：CMYK 的文件少了它颜色会反过来",
         jfif: "JFIF 基本信息：少了它有些看图程序会抱怨",
+        coreCreator: "作者：创建文档的账号名称",
+        coreModifiedBy: "最后修改者",
+        coreDates: "创建、修改与最后打印的时间",
+        coreTitle: "标题、主题、说明、关键字、分类",
+        coreRevision: "修订次数：这份文档被保存过几次",
+        appApplication: "制作软件与版本",
+        appCompany: "公司与主管",
+        appTemplate: "模板名称：常带着公司或个人的模板文件名",
+        appTotalTime: "总编辑时间",
+        appOther: "统计字段：页数、字数、幻灯片数等",
+        customProps: "自定义属性：组织自己加的字段，例如文档编号或承办人",
+        thumbnail: "文档缩略图：第一页的预览图，内容改过之后它可能还是旧的",
+        zipTime: "压缩文件内每个部件的时间戳与额外字段",
+        zipComment: "压缩文件注释",
+        mediaMeta: "夹在文档里的图片的 EXIF 与描述字段，走跟照片一样的流程",
+        id3v2: "ID3v2 标签：标题、演出者、专辑、注释、封面图、编码软件",
+        id3v1: "ID3v1 标签：文件尾固定 128 字节的标题、演出者、年份、注释",
+        ape: "APE 标签",
+        wavInfo: "INFO 列表：演出者、软件、日期、注释",
+        bext: "广播波形描述：制作者、制作日期与时间、编码历程",
+        ixml: "iXML 制作信息：场记、录音机型号、时间码",
+        wavXmp: "XMP 描述区",
+        wavId3: "ID3 标签",
       },
       notes: {
+        comments: "文档里还有批注，每一则都带着作者名称与时间。这一页不动正文，要清掉请在编辑软件里删除所有批注后再保存一次，再清一遍。",
+        trackedChanges: "文档里还有修订记录，每一笔都带着修改者与时间。全部接受或拒绝之后再保存一次，再清一遍。",
+        speakerNotes: "幻灯片带着演讲者备注，那是内容的一部分，这一页不动它，分享前自己看过。",
         pdfLeftovers: "这份 PDF 里还有注释或附件之类的东西，那些可能各自带着作者与时间。这一页只处理文档层级的描述字段，没有动它们。",
         encoderInData: "压缩数据本身还带着编码器的版本字符串，那一段属于音视频数据本身，不算 metadata。要清掉只能重新编码，而重新编码会损失画质，也会换上新编码器的痕迹。这一页不做那件事。",
       },
       pdf: "这是 PDF。文档层级的描述字段与 XMP 描述区会被拿掉，页面内容不会重新排版。",
-      mp4: "这是 MP4 或 MOV，处理的是容器里的描述字段。压缩过的影音数据一个比特都不会动。",
+      mp4: "这是 MP4、MOV 或 M4A，处理的是容器里的描述字段。压缩过的影音数据一个比特都不会动。",
+      ooxml: "这是 Office 文档。处理的是文档属性、部件的时间戳与夹带图片的 metadata，正文一个字都不会动。",
+      audio: "这是音频文件，处理的是文件头与文件尾的标签区。声音数据一个比特都不会动。",
       nothing: "这个文件里没有找到可以拿掉的字段，本来就是干净的。",
       errors: {
+        noStreams: "这个浏览器没有内置的解压缩功能，处理 Office 文档需要它。换一个较新的浏览器再试。",
+        zip64: "这份文档用了 ZIP64 格式，页面还做不到。",
+        zip: "这是一般的压缩文件，不是 Office 文档。ODT、ODS 这类 OpenDocument 格式目前也不支持。",
+        notOoxml: "这是一般的压缩文件，不是 Office 文档。ODT、ODS 这类 OpenDocument 格式目前也不支持。",
         pdfLibMissing: "处理 PDF 需要的函式库还没加载完，稍等一下再试一次。",
         encrypted: "这份 PDF 有加密保护，要先解除才能处理。",
         heic: "这是 HEIC/HEIF。iPhone 默认拍出来就是这个格式，它的容器结构复杂得多，这一页还做不到。在 iPhone 上可以到「设置 → 相机 → 格式」选「最兼容」，之后拍的就是 JPEG。已经拍好的可以用 AirDrop 或邮件传给自己，那个过程多半会转成 JPEG。",
@@ -897,7 +1440,7 @@
       note: "文件在你的浏览器里改，没有上传到任何地方。断网时照样可以用。清完的是新的一份，原始文件不会被动到。",
     },
     en: {
-      drop: "Drop images or videos here, or click to choose files. Several at once is fine, and pasting works too (Ctrl+V).",
+      drop: "Drop images, videos, recordings or Office documents here, or click to choose files. Several at once is fine, and pasting works too (Ctrl+V).",
       dropOver: "Release to start",
       working: "Working",
       clear: "Clear the list",
@@ -929,15 +1472,47 @@
         icc: "ICC colour profile: removing it shifts the colours",
         adobe: "Adobe colour transform marker: without it, CMYK files come out inverted",
         jfif: "JFIF basics: some viewers complain without it",
+        coreCreator: "Author: the account name that created the document",
+        coreModifiedBy: "Last modified by",
+        coreDates: "Created, modified and last printed times",
+        coreTitle: "Title, subject, description, keywords, category",
+        coreRevision: "Revision count: how many times the document was saved",
+        appApplication: "Authoring application and version",
+        appCompany: "Company and manager",
+        appTemplate: "Template name, often the file name of a company or personal template",
+        appTotalTime: "Total editing time",
+        appOther: "Statistics: pages, words, slides and the like",
+        customProps: "Custom properties: fields an organisation adds itself, such as a file number or case officer",
+        thumbnail: "Document thumbnail: a preview of the first page, possibly stale after edits",
+        zipTime: "Per-part timestamps and extra fields inside the zip container",
+        zipComment: "Zip archive comment",
+        mediaMeta: "EXIF and descriptive fields of the images embedded in the document, handled like photos",
+        id3v2: "ID3v2 tag: title, artist, album, comment, cover art, encoding software",
+        id3v1: "ID3v1 tag: the fixed 128 bytes at the end with title, artist, year, comment",
+        ape: "APE tag",
+        wavInfo: "INFO list: artist, software, date, comment",
+        bext: "Broadcast wave description: originator, date and time, coding history",
+        ixml: "iXML production data: scene notes, recorder model, timecode",
+        wavXmp: "XMP block",
+        wavId3: "ID3 tag",
       },
       notes: {
+        comments: "The document still contains comments, each with an author name and time. This page does not touch the body. Delete all comments in your editor, save again, and run it through once more.",
+        trackedChanges: "The document still contains tracked changes, each with an author and time. Accept or reject them all, save again, and run it through once more.",
+        speakerNotes: "The slides carry speaker notes. They are part of the content and this page leaves them alone. Read through them before sharing.",
         pdfLeftovers: "This PDF also contains annotations or attachments, which can carry their own authors and timestamps. This page only handles document-level descriptive fields and leaves those alone.",
         encoderInData: "The compressed data itself still carries the encoder's version string. That is not metadata; it is part of the audio and video data. Removing it means re-encoding, which costs quality and substitutes a new encoder's traces for the old ones. This page does not do that.",
       },
       pdf: "This is a PDF. Document-level descriptive fields and the XMP block come out. The page content is not re-laid out.",
-      mp4: "This is an MP4 or MOV. What gets handled is the descriptive fields in the container. Not one byte of the compressed audio or video is touched.",
+      mp4: "This is an MP4, MOV or M4A. What gets handled is the descriptive fields in the container. Not one byte of the compressed audio or video is touched.",
+      ooxml: "This is an Office document. What gets handled is the document properties, the per-part timestamps and the metadata of embedded images. Not one character of the body is touched.",
+      audio: "This is an audio file. What gets handled is the tag blocks at the start and end. Not one byte of the sound data is touched.",
       nothing: "No removable fields were found in this file. It was already clean.",
       errors: {
+        noStreams: "This browser has no built-in decompression support, which Office documents need. Try a newer browser.",
+        zip64: "This document uses the ZIP64 format, which the page cannot handle yet.",
+        zip: "This is an ordinary zip archive, not an Office document. OpenDocument formats such as ODT and ODS are not supported yet either.",
+        notOoxml: "This is an ordinary zip archive, not an Office document. OpenDocument formats such as ODT and ODS are not supported yet either.",
         pdfLibMissing: "The library needed for PDFs has not finished loading. Wait a moment and try again.",
         encrypted: "This PDF is encrypted. Remove the protection before processing it.",
         heic: "This is HEIC/HEIF. It is what an iPhone shoots by default, and its container is considerably more involved than this page handles. On an iPhone, Settings → Camera → Formats → Most Compatible switches future photos to JPEG. For photos already taken, sending them to yourself over AirDrop or email usually converts them.",
@@ -1004,9 +1579,11 @@
     return box;
   }
 
+  const IMAGE_KINDS = ["jpeg", "png", "webp", "gif"];
+
   function renderFile(item) {
     const row = el("div", "sm-file " + (item.ok ? "sm-file--ok" : "sm-file--bad"));
-    if (item.url && item.ok && item.kind !== "mp4" && item.kind !== "pdf") {
+    if (item.url && item.ok && IMAGE_KINDS.indexOf(item.kind) >= 0) {
       const thumb = el("img", "sm-thumb");
       thumb.src = item.url;
       thumb.alt = "";
@@ -1023,7 +1600,10 @@
 
     body.appendChild(el("p", "sm-size",
       t.sizeLine.replace("{a}", humanSize(item.originalSize)).replace("{b}", humanSize(item.cleanSize))));
-    if (item.kind === "mp4") body.appendChild(el("p", "sm-size", t.mp4));
+    if (item.kind === "mp4" && item.audio) body.appendChild(el("p", "sm-size", t.audio));
+    else if (item.kind === "mp4") body.appendChild(el("p", "sm-size", t.mp4));
+    if (item.kind === "mp3" || item.kind === "wav") body.appendChild(el("p", "sm-size", t.audio));
+    if (item.kind === "ooxml") body.appendChild(el("p", "sm-size", t.ooxml));
     if (item.kind === "pdf") body.appendChild(el("p", "sm-size", t.pdf));
 
     if (item.removed.length) body.appendChild(listOf(t.removed, item.removed));
@@ -1055,7 +1635,7 @@
 
     const picker = document.createElement("input");
     picker.type = "file";
-    picker.accept = "image/jpeg,image/png,video/mp4,video/quicktime,application/pdf";
+    picker.accept = "image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,audio/mpeg,audio/wav,audio/x-wav,audio/mp4,application/pdf,.docx,.xlsx,.pptx,.m4a";
     picker.multiple = true;
     picker.addEventListener("change", () => handle(picker.files));
 
@@ -1144,6 +1724,26 @@
           .catch(fail);
         return;
       }
+      if (kind === "ooxml") {
+        // zip 沒有東西可以「載入」，改成整份讀回來，每個部件的長度與 CRC 都要對
+        blob.arrayBuffer()
+          .then((buf) => verifyZip(new Uint8Array(buf)))
+          .then((ok) => (ok ? resolve(url) : fail()))
+          .catch(fail);
+        return;
+      }
+      if (kind === "mp3" || kind === "wav" || (kind === "mp4" && blob.type.indexOf("audio/") === 0)) {
+        const audio = document.createElement("audio");
+        audio.preload = "metadata";
+        audio.onloadedmetadata = () => {
+          const seconds = audio.duration;
+          if (!seconds || !isFinite(seconds)) return fail();
+          resolve(url);
+        };
+        audio.onerror = fail;
+        audio.src = url;
+        return;
+      }
       if (kind === "mp4") {
         const video = document.createElement("video");
         video.preload = "metadata";
@@ -1168,9 +1768,10 @@
     const buffer = await file.arrayBuffer();
     const bytes = new Uint8Array(buffer);
     const kind = detect(bytes);
-    const result = kind === "pdf"
-      ? Object.assign({ kind: kind }, await stripPdf(bytes))
-      : strip(bytes);
+    let result;
+    if (kind === "pdf") result = Object.assign({ kind: kind }, await stripPdf(bytes));
+    else if (kind === "ooxml") result = Object.assign({ kind: kind }, await stripOoxml(bytes));
+    else result = strip(bytes);
     if (!result.ok) {
       // 送出格式代號，讓「該不該支援 HEIC」這種決定有依據可看。detect() 本來就分得出
       // heic，只是不支援，那個資訊過去直接被丟掉。認不出來的送 unknown。
@@ -1186,8 +1787,15 @@
           ? result.kind : result.reason,
       };
     }
-    const TYPES = { png: "image/png", jpeg: "image/jpeg", mp4: "video/mp4", pdf: "application/pdf" };
-    const blob = new Blob([result.data], { type: TYPES[result.kind] || "application/octet-stream" });
+    const TYPES = {
+      png: "image/png", jpeg: "image/jpeg", webp: "image/webp", gif: "image/gif",
+      mp4: "video/mp4", mp3: "audio/mpeg", wav: "audio/wav", pdf: "application/pdf",
+    };
+    // M4A 跟 MP4 是同一種容器，靠原檔的 MIME 分辨要用 audio 還是 video 元素驗
+    const isAudioMp4 = result.kind === "mp4" && file.type.indexOf("audio/") === 0;
+    const mime = result.kind === "ooxml" ? ooxmlType(file.name)
+      : isAudioMp4 ? "audio/mp4" : TYPES[result.kind] || "application/octet-stream";
+    const blob = new Blob([result.data], { type: mime });
     const url = await verify(blob, result.kind);
     if (!url) {
       // 清完的檔案打不開就是這一頁的 bug。預期量極低，每一筆都值得看，等於一個
@@ -1197,15 +1805,10 @@
     }
     // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
     // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
-    if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
-    // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
-    // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
-    if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
-    // 成功也要數。原本只送 stripmeta-unsupported 與 stripmeta-verify-fail，沒有分母，
-    // 失敗次數就算不出失敗率，看到「這個月 30 筆 unsupported」也不知道那是多還是少。
+    // 這一行原本重複了三次，同一個檔案被數成三筆。
     if (window.anoniTrack) window.anoniTrack("stripmeta-ok", { kind: result.kind });
     return {
-      ok: true, name: file.name, cleanName: cleanName(file.name),
+      ok: true, name: file.name, cleanName: cleanName(file.name), audio: isAudioMp4,
       originalSize: bytes.length, cleanSize: result.data.length,
       kind: result.kind,
       removed: result.removed, kept: result.kept, notes: result.notes || [], url: url,
@@ -1229,7 +1832,10 @@
     let index = 0;
     for (const file of list) {
       const okType = !file.type || file.type.indexOf("image/") === 0 ||
-        file.type.indexOf("video/") === 0 || file.type === "application/pdf";
+        file.type.indexOf("video/") === 0 || file.type.indexOf("audio/") === 0 ||
+        file.type === "application/pdf" || file.type === "application/zip" ||
+        file.type === "application/octet-stream" ||
+        file.type.indexOf("application/vnd.openxmlformats-officedocument") === 0;
       if (!okType) {
         files.push({ ok: false, name: file.name, reason: "notImage" });
         continue;
