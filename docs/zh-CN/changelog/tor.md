@@ -28,6 +28,16 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 - NoScript 升至 13.6.31.90301984，OpenSSL 升至 3.5.8。
 - tor daemon 崩溃时，`about:torconnect` 会显示错误信息（tor-browser#43570）。网桥连接失败时也会更新网桥设置的显示（tor-browser#43939）。
 
+## Tor Browser 15.0.21
+
+> 2026-09-01 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15021/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>以 Firefox 安全修补为主的小版本。
+- Firefox 基底 rebase 至 140.15.0esr（tor-browser#45253），Android 版 GeckoView 同步，并从 Firefox 155 backport 安全修补（tor-browser#45259）。
+- 修好在非隐私浏览模式启动浏览器时 `about:torconnect` 不显示的问题（tor-browser#45223）。TorConnect 的重定向改由父进程处理（tor-browser#45264）。
+- NoScript 升至 13.6.32.1984，OpenSSL 升至 3.5.8，构建工具链的 Go 升至 1.25.14。
+- 上游把 32 位 Linux 的提示改成版本过期消息，跟踪项目写明这是 15.0 系列的最后一版（tor-browser#44996）。16.0 稳定版依 16.0a9 公告的规划在 9 月接手，还在 15.x 的人可以准备换过去。
+
 ## Tor Browser 15.0.20
 
 > 2026-08-18 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}

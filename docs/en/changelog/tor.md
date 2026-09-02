@@ -28,6 +28,16 @@ Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebas
 - Updated NoScript to 13.6.31.90301984 and OpenSSL to 3.5.8.
 - `about:torconnect` now reports an error when the tor daemon crashes (tor-browser#43570), and bridge settings update when a connection fails (tor-browser#43939).
 
+## Tor Browser 15.0.21
+
+> 2026-09-01 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15021/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>A small release focused on Firefox security fixes.
+- Rebased the Firefox base onto 140.15.0esr (tor-browser#45253), with Android GeckoView following, and backported security fixes from Firefox 155 (tor-browser#45259).
+- Fixed `about:torconnect` not appearing when the browser starts outside private browsing mode (tor-browser#45223). TorConnect redirections now go through the parent process (tor-browser#45264).
+- NoScript updated to 13.6.32.1984, OpenSSL to 3.5.8, and Go to 1.25.14 in the build toolchain.
+- Upstream switched the 32-bit Linux notice to the expired-version message, and the tracking item states this is the final 15.0 release (tor-browser#44996). Per the plan announced with 16.0a9, the 16.0 stable series takes over in September, so anyone on 15.x can start preparing to move.
+
 ## Tor Browser 15.0.20
 
 > 2026-08-18 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15020/){target="_blank"}
