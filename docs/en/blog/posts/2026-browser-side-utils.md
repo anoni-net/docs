@@ -159,7 +159,7 @@ XMP holds one more trap. Deleting the catalogue's reference to the XMP block and
 
 ## The whole site fits on a device
 
-Opening the docs site in an ordinary browser caches the core chapters of the current language in the background, with no install step. Switching language downloads that language's chapters only then, so a device holds only what has actually been read.
+Opening the docs site in an ordinary browser stores only the offline reading page and its styles at first, about 0.5 MB. Once you pick a reading language on the home page, or open a second page in the same language, the core chapters of that language are cached in the background, with no install step. The extra step keeps someone who reads one page and leaves from spending 10 MB of mobile data. Switching language downloads that language's chapters only then, so a device holds only what has actually been read.
 
 ![The offline reading page, with storage totals and two automatic-storage switches at the top and pages listed by chapter below, the Tools chapter expanded to show each page with its size and tick state](https://assets.anoni.net/blog/docs-offline-library-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 

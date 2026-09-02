@@ -152,7 +152,7 @@ What follows is the digital preparation for someone who has not yet left, or is 
 
 ## Install this site as an offline app while you still have connectivity
 
-When the connection is gone, so is this page. While you can still reach it, installing the documentation site as an app puts the core sections on your device to read offline.
+When the connection is gone, so is this page. While you can still reach it, open the site in an ordinary browser and pick a reading language once, and the core sections are stored on your device to read offline. Installing it as an app then gives you an icon that opens even without a connection.
 
 !!! tip "Worth doing now"
 

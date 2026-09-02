@@ -11,6 +11,8 @@
 from __future__ import annotations
 
 import pathlib
+import contextlib
+import io
 import sys
 import tempfile
 
@@ -169,8 +171,12 @@ def _run(batches, fail_on=()):
     sent = []
     original = cf_purge.purge_batch
     cf_purge.purge_batch = _fake_purge(sent, fail_on)
+    # 失敗的批次會印成 ::error:: 到 stderr，那是給 GitHub Actions 當 annotation 用的。
+    # 這裡模擬的失敗（boom）要是印出去，build_docs 與 tools-tests 每一次都會掛著一條
+    # 「第 8/20 批清除失敗：boom」，看起來像正式站有三十條網址沒清到。接走。
     try:
-        code = cf_purge.run_batches("z", "t", batches, sum(len(b) for b in batches), BASE)
+        with contextlib.redirect_stderr(io.StringIO()), contextlib.redirect_stdout(io.StringIO()):
+            code = cf_purge.run_batches("z", "t", batches, sum(len(b) for b in batches), BASE)
     finally:
         cf_purge.purge_batch = original
     return code, sent
