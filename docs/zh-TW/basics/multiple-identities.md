@@ -207,6 +207,7 @@ Google 圖片搜尋、Yandex、TinEye 都能用一張照片找出網路上其他
 - [社群平台怎麼收集你的資料](./platform-tracking.md)：平台側用哪些訊號把兩個帳號放進同一個檔案
 - [為什麼匿名支付重要](./payments-anonymity.md)：金流是最難切乾淨的一條線
 - [LGBTQ+ 與性少數的匿名社交](../scenarios/lgbtq.md)：出櫃節奏下的分層實例，含交友 app 與家人共用裝置的處理
+- [在新加坡與馬來西亞的網路發言](../scenarios/singapore-malaysia-speech.md)：實名身分層讓分層更難維持的地方
 
 [^raivo]: [PSA: Raivo OTP for iOS was acquired by Mobime a few months ago](https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/){target="_blank"} - gHacks，2023 年 12 月。Privacy Guides 社群同期討論指出新東家的隱私政策含 Facebook 與 Google AdMob 追蹤器並收集 IP 等 log 資料。查證日 2026-08。
 [^justalk]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} - TechCrunch 2022/07 對 JusTalk 假 E2EE 與虛擬門號明文外洩的調查報導
