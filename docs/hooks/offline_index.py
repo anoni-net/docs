@@ -11,6 +11,11 @@
 
 三語系是三次獨立的 mkdocs 執行，各自產出自己那一份，寫進各自的 site_dir 根目錄。
 
+`paths` 是五條起步路徑（`start/*.md`）各自連到哪些頁面。`start/index.md` 上的路徑下載
+按鈕靠它知道「存下這條路徑」實際要送哪些網址。清單從起步頁自己的 Markdown 連結解析，
+起步頁改了連結這裡就跟著變，不另外維護一份會脫節的名單。哪幾條要在按鈕旁掛敏感提醒，
+由起步頁 frontmatter 的 `offline_caution: true` 決定，這裡只是帶過去。
+
 `bytes` 是渲染後 HTML 的位元組數，不含圖片與 CSS/JS。實際下載時抓的也只有 HTML，
 圖片維持原本的行為（讀者實際瀏覽過才會留在裝置上），所以這個數字跟真正會增加的
 量是對得起來的。
@@ -69,8 +74,18 @@ SKIP_URLS = {"offline/", "404.html", "tags/"}
 # 讓讀者勾這些只會下載到一堆重複的摘要。
 SKIP_SEGMENTS = ("/page/", "/archive/", "/category/")
 
+# 起步頁的目錄與 Markdown 站內連結的形狀：](../a/b.md#anchor) 與 ](./a.md)。
+# 圖片 ![](../assets/x.png) 也會被抓到，_link_url 看副檔名把非 .md 的丟掉。
+_START_DIR = "start/"
+RE_MD_LINK = re.compile(r"\]\((\.{1,2}/[^)\s]+)\)")
+_CAUTION_META_KEY = "offline_caution"
+
 # 收集在模組層級。mkdocs 一次執行只建一個語系，三語系是三個 process，不會互相污染。
 _pages = []
+# 起步頁各自連到哪些頁面，url -> {"pages": [...], "caution": bool}
+_paths = {}
+# nav 上每一頁的 url，照側邊欄順序。paths 照它排，跟起步索引頁上五張卡的順序一致。
+_nav_urls = []
 # nav 樹走過一遍得到的章節順序。管理頁照這個排，讀者在側邊欄看到什麼順序，
 # 在這裡就看到什麼順序。
 _order = []
@@ -114,6 +129,7 @@ def on_nav(nav, config, **kwargs):
     中間）。這裡走一次 nav 樹，拿到的才是側邊欄的順序。
     """
     _order.clear()
+    _nav_urls.clear()
 
     def walk(items, path):
         for item in items:
@@ -123,8 +139,59 @@ def on_nav(nav, config, **kwargs):
                 key = _key(path[0] if path else None, path[1] if len(path) > 1 else (path[0] if path else None))
                 if key not in _order:
                     _order.append(key)
+                url = getattr(item, "url", None)
+                if url is not None:
+                    _nav_urls.append(url)
 
     walk(nav.items, [])
+
+
+def _src_uri(page):
+    """這一頁的原始檔路徑（相對 docs_dir）。沒有 file 物件時從 url 推回去。"""
+    file = getattr(page, "file", None)
+    src = getattr(file, "src_uri", None) if file is not None else None
+    if src:
+        return src
+    return page.url.rstrip("/") + ".md"
+
+
+def _link_url(src_dir, link):
+    """Markdown 的相對連結換成建置後的網址，非 .md 的回 None。
+
+    照 use_directory_urls 的規則：a/b.md 是 a/b/，a/index.md 是 a/。錨點去掉，
+    存離線副本抓的是整頁。
+    """
+    target = link.split("#", 1)[0]
+    if not target.endswith(".md"):
+        return None
+    path = posixpath.normpath(posixpath.join(src_dir, target)).lstrip("/")
+    if path == "index.md":
+        return ""
+    if path.endswith("/index.md"):
+        return posixpath.dirname(path) + "/"
+    return path[:-3] + "/"
+
+
+def on_page_markdown(markdown, page, config, files=None, **kwargs):
+    """起步頁的話，記下它連到哪些頁面。
+
+    只認 start/ 底下、index.md 以外的頁面。連到其他起步頁的連結不列（那是另一條
+    路徑的入口），起步頁自己排第一，讀者離線時才有地方看這條路徑的說明。連到的
+    頁面存不存在、有沒有進索引，等 on_post_build 對照 _pages 再篩。
+    """
+    src = _src_uri(page)
+    if not src.startswith(_START_DIR) or src == _START_DIR + "index.md":
+        return markdown
+    src_dir = posixpath.dirname(src)
+    pages = [page.url]
+    for link in RE_MD_LINK.findall(markdown):
+        url = _link_url(src_dir, link)
+        if url is None or url.startswith(_START_DIR) or url in pages:
+            continue
+        pages.append(url)
+    meta = getattr(page, "meta", None) or {}
+    _paths[page.url] = {"pages": pages, "caution": bool(meta.get(_CAUTION_META_KEY))}
+    return markdown
 
 
 def on_post_page(output, page, config, **kwargs):
@@ -262,6 +329,23 @@ def on_post_build(config, **kwargs):
         for page in section["pages"]
         for asset in page["assets"]
     }
+    # 起步路徑。只留真的進了索引的頁面（連到 offline.md 那種被排除的就不送），
+    # 標題用頁面自己的標題，順序照 nav。
+    known = {entry["url"]: entry for entry in _pages}
+    ordered_paths = [url for url in _nav_urls if url in _paths]
+    ordered_paths += [url for url in _paths if url not in ordered_paths]
+    paths = []
+    for url in ordered_paths:
+        entry = _paths[url]
+        paths.append(
+            {
+                "url": url,
+                "title": known[url]["title"] if url in known else url,
+                "pages": [page for page in entry["pages"] if page in known],
+                "caution": entry["caution"],
+            }
+        )
+
     index = {
         "lang": config["theme"]["language"],
         # 每個資產多大。管理頁要算的是「勾這幾頁實際會下載多少」，資產要先去重才
@@ -269,6 +353,7 @@ def on_post_build(config, **kwargs):
         # 管理頁沒有辦法從合計裡把它拆出來，只能估，而估出來會差到兩倍以上。
         "assets": {path: asset_size(path) for path in sorted(every_asset)},
         "sections": sections,
+        "paths": paths,
     }
     target = Path(config["site_dir"]) / OUTPUT_NAME
     target.write_text(
@@ -283,4 +368,11 @@ def on_post_build(config, **kwargs):
         len(every_asset),
         sum(asset_size(path) for path in every_asset) / 1024 / 1024,
     )
+    if paths:
+        log.info(
+            "offline_index: %d 條起步路徑，各連到 %s 頁",
+            len(paths),
+            "、".join(str(len(path["pages"])) for path in paths),
+        )
     _pages.clear()
+    _paths.clear()

@@ -2,6 +2,9 @@
 title: 公民团体
 description: 给公民团体与倡议组织的起步路径。从组织数据盘点开始，接到匿名线索渠道、匿名捐款与台湾个人信息保护法规的实务限制，二十分钟与一周两种深度。
 icon: material/account-group
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-group: 公民团体从这里开始

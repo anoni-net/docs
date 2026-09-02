@@ -2,6 +2,9 @@
 title: 獨立記者
 description: 給獨立記者與自由撰稿人的起步路徑。一台裝置同時處理工作與生活時怎麼分層，沒有機構信箱時怎麼收線索，出國採訪的裝置準備。
 icon: material/account-edit-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-edit-outline: 獨立記者從這裡開始

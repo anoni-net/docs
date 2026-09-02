@@ -2,6 +2,9 @@
 title: 公民團體
 description: 給公民團體與倡議組織的起步路徑。從組織資料盤點開始，接到匿名線索管道、匿名捐款與台灣個資法的實務限制，二十分鐘與一週兩種深度。
 icon: material/account-group
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-group: 公民團體從這裡開始

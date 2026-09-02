@@ -2,6 +2,9 @@
 title: 独立记者
 description: 给独立记者与自由撰稿人的起步路径。一台设备同时处理工作与生活时怎么分层，没有机构邮箱时怎么收线索，出国采访的设备准备。
 icon: material/account-edit-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-edit-outline: 独立记者从这里开始

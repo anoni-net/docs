@@ -71,8 +71,12 @@ def build(nav, pages, html="x", files=None):
     """
     offline_index._pages.clear()
     offline_index._order.clear()
+    offline_index._paths.clear()
     offline_index.on_nav(nav, None)
     for page in pages:
+        # 有 markdown 的頁面走一次 on_page_markdown，起步路徑從這裡解析
+        if getattr(page, "markdown", None) is not None:
+            offline_index.on_page_markdown(page.markdown, page, None)
         body = html.get(page.url, "x") if isinstance(html, dict) else html
         offline_index.on_post_page(body, page, None)
     with tempfile.TemporaryDirectory() as tmp:
@@ -275,6 +279,81 @@ check(
     [p["assetBytes"] for p in section["pages"]],
     [500, 500, 0, 0],
 )
+
+
+# --- 起步路徑 ---
+#
+# start/index.md 上的路徑下載按鈕靠 paths 知道「存下這條路徑」要送哪些網址。漏一頁
+# 的症狀是讀者到了沒有網路的地方才發現那一頁打不開，多送一頁（例如另一條路徑的
+# 入口）則是讀者裝置上多了一份他沒有選的身分指向。
+
+
+class FakeFile:
+    def __init__(self, src_uri):
+        self.src_uri = src_uri
+
+
+def start_page(url, title, src, markdown, meta=None):
+    page = FakePage(url, title, meta)
+    page.file = FakeFile(src)
+    page.markdown = markdown
+    return page
+
+
+media = start_page(
+    "start/media/",
+    "新聞媒體",
+    "start/media.md",
+    # 同一頁兩個錨點只列一次、其他起步頁與起步索引不列、mailto 與外站不列、
+    # 圖片不是頁面、offline.md 不在索引裡（SKIP_URLS）所以也不送
+    "[a](../scenarios/journalist.md#媒體側的紀錄) [b](../scenarios/journalist.md#加密儲存) "
+    "[c](./independent-journalist.md) [d](../help/index.md) [e](mailto:whisper@anoni.net) "
+    "[f](https://example.com/x.md) [g](../offline.md) ![img](../assets/x.png) [h](./index.md)",
+    meta={"offline_caution": True},
+)
+everyone = start_page(
+    "start/everyone/", "一般大眾", "start/everyone.md", "[a](../basics/metadata.md) [b](../utils/leaks.md)"
+)
+# 沒有 file 物件的頁面從 url 推回原始檔路徑
+civil = FakePage("start/civil-society/", "公民團體")
+civil.markdown = "[a](../basics/metadata.md)"
+start_index = start_page("start/", "從你的身分開始", "start/index.md", "[x](./media.md) [y](./everyone.md)")
+journalist = FakePage("scenarios/journalist/", "記者保護消息來源")
+help_page = FakePage("help/", "緊急求救")
+metadata = FakePage("basics/metadata/", "Metadata")
+offline_page = FakePage("offline/", "離線閱讀")
+# utils/leaks 刻意不放進 pages，模擬「起步頁連到一個索引裡沒有的頁面」
+nav7 = FakeNav([
+    FakeSection("開始", [start_index, civil, media, everyone]),
+    FakeSection("指南", [journalist, help_page, metadata]),
+])
+index7 = build(nav7, [media, everyone, civil, start_index, journalist, help_page, metadata, offline_page])
+paths = index7["paths"]
+check("路徑：照 nav 順序，起步索引頁自己不算一條", [p["url"] for p in paths], ["start/civil-society/", "start/media/", "start/everyone/"])
+check("路徑：標題用頁面自己的標題", [p["title"] for p in paths], ["公民團體", "新聞媒體", "一般大眾"])
+check(
+    "路徑：自己排第一，錨點去掉，同頁只列一次，其他起步頁、非 .md、索引沒有的都不列",
+    paths[1]["pages"],
+    ["start/media/", "scenarios/journalist/", "help/"],
+)
+check("路徑：連到索引裡沒有的頁面就不送", paths[2]["pages"], ["start/everyone/", "basics/metadata/"])
+check("路徑：沒有 file 物件時從 url 推原始檔", paths[0]["pages"], ["start/civil-society/", "basics/metadata/"])
+check("路徑：敏感提醒由 frontmatter 帶進來", [p["caution"] for p in paths], [False, True, False])
+
+# 起步頁本身也要在索引裡，讀者離線時才有地方看這條路徑的說明
+by_url7 = {p["url"] for s in index7["sections"] for p in s["pages"]}
+check("路徑：起步頁本身在索引裡", "start/media/" in by_url7, True)
+
+# 沒有起步頁的建置照樣要有 paths 這個欄位，管理頁的程式讀到空清單而不是 undefined
+plain_a = FakePage("tools/", "工具層")
+plain_b = FakePage("tools/x/", "某頁")
+check("路徑：沒有起步頁時是空清單", build(FakeNav([FakeSection("工具", [plain_a, plain_b])]), [plain_a, plain_b])["paths"], [])
+
+# 連結換網址的規則本身
+check("連結：a/b.md 是 a/b/", offline_index._link_url("start", "../scenarios/journalist.md#x"), "scenarios/journalist/")
+check("連結：a/index.md 是 a/", offline_index._link_url("start", "../help/index.md"), "help/")
+check("連結：根目錄的 index.md 是首頁", offline_index._link_url("start", "../index.md"), "")
+check("連結：非 .md 不是頁面", offline_index._link_url("start", "../assets/x.png"), None)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,9 @@
 title: Civil society
 description: A starting path for advocacy groups and service NGOs. Data inventory first, then anonymous tip channels, anonymous donations, and the data-protection duties that constrain all three.
 icon: material/account-group
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-group: Civil society starts here

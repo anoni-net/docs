@@ -164,10 +164,12 @@ class FakeText extends FakeElement {
   }
 }
 
+// 根節點的 id 決定原始碼畫哪一種介面：offline-library 是管理頁，start-offline 是
+// 起步索引頁的路徑按鈕。查別的 id 一律回 null，兩個根節點不會同時存在。
 const makeDocument = (root, lang) => ({
   documentElement: { lang },
   head: new FakeElement('head'),
-  getElementById: (id) => (id === 'offline-library' ? root : null),
+  getElementById: (id) => (id === root.id ? root : null),
   createElement: (tag) => new FakeElement(tag),
   createTextNode: (text) => new FakeText(text),
 });
@@ -302,6 +304,40 @@ const INDEX = {
   ],
 };
 
+// 起步索引頁用的索引：多一個「開始」章節放兩頁起步頁，以及兩條路徑。媒體那條標了
+// caution，一般大眾那條沒有。兩條共用 basics/metadata/，驗「只送自己這條的頁面」時
+// 用得上。
+const PICKER_INDEX = {
+  ...INDEX,
+  sections: [
+    ...INDEX.sections,
+    {
+      key: '開始|開始',
+      title: '開始',
+      group: '開始',
+      bytes: 200,
+      pages: [
+        { url: 'start/media/', title: '新聞媒體', bytes: 100 },
+        { url: 'start/everyone/', title: '一般大眾', bytes: 100 },
+      ],
+    },
+  ],
+  paths: [
+    {
+      url: 'start/media/',
+      title: '新聞媒體',
+      caution: true,
+      pages: ['start/media/', 'scenarios/journalist/', 'basics/metadata/'],
+    },
+    {
+      url: 'start/everyone/',
+      title: '一般大眾',
+      caution: false,
+      pages: ['start/everyone/', 'basics/', 'basics/metadata/'],
+    },
+  ],
+};
+
 const tick = (n = 6) =>
   new Promise((resolve) => {
     let left = n;
@@ -316,9 +352,11 @@ const tick = (n = 6) =>
  * opts.precached  網站自動存的
  * opts.online     navigator.onLine，預設 true
  * opts.noIndex    讓 offline-index.json 抓不到
+ * opts.picker     以 start/index.md 的 #start-offline 為根節點跑，餵 PICKER_INDEX
  */
 const load = async (opts = {}) => {
   const root = new FakeElement('div');
+  root.id = opts.picker ? 'start-offline' : 'offline-library';
   const document = makeDocument(root, opts.lang || 'zh-TW');
   const sw = makeServiceWorker(opts);
   const navigator = {
@@ -326,12 +364,15 @@ const load = async (opts = {}) => {
     onLine: opts.online !== false,
   };
   const window = { __anoniServiceWorker: opts.swFlag !== false };
-  const location = { href: 'https://anoni.net/docs/offline/' };
+  const location = {
+    href: opts.picker ? 'https://anoni.net/docs/start/' : 'https://anoni.net/docs/offline/',
+  };
   const fetched = [];
   const fetchStub = async (url) => {
     fetched.push(url);
     if (opts.noIndex) return { ok: false };
-    return { ok: true, json: async () => JSON.parse(JSON.stringify(INDEX)) };
+    const index = opts.picker ? PICKER_INDEX : INDEX;
+    return { ok: true, json: async () => JSON.parse(JSON.stringify(index)) };
   };
   // MessageChannel：port2 交給 worker，worker 回話走 port1.onmessage
   class MessageChannelStub {
@@ -838,6 +879,130 @@ test('三個語系各自挑到自己那組字串', async () => {
       `${lang} 應該看到「${needle}」`
     );
   }
+});
+
+// ---------------------------------------------------------------------------
+// 起步索引頁的路徑按鈕
+//
+// 同一支程式以 #start-offline 為根節點跑。這裡守的是：每條路徑一顆按鈕、按下去只送
+// 自己這條的頁面、敏感提醒只掛在標了的那條，以及整支程式不把讀者選了哪一條寫進裝置。
+// ---------------------------------------------------------------------------
+
+const pathButtons = (root) =>
+  root.querySelectorAll('button').filter((b) => b.textContent.includes('的路徑'));
+
+test('起步頁：每條路徑一顆按鈕，寫出頁數與大小', async () => {
+  const { root } = await load({ picker: true });
+  const buttons = pathButtons(root);
+  assert.equal(buttons.length, 2, root.textContent);
+  assert.ok(buttons[0].textContent.includes('「新聞媒體」'), buttons[0].textContent);
+  assert.ok(buttons[0].textContent.includes('3 頁'), buttons[0].textContent);
+  assert.ok(/\d+(\.\d+)? (KB|MB|GB)/.test(buttons[0].textContent), buttons[0].textContent);
+  // 管理頁的章節清單不畫在這裡
+  assert.equal(root.querySelectorAll('.ol-section').length, 0);
+});
+
+test('起步頁：敏感提醒只掛在標了 caution 的那條', async () => {
+  // 記者、媒體、公民團體那幾條含場景頁，留在裝置上本身就是指向。一般大眾那條不該
+  // 被同一句嚇到。
+  const { root } = await load({ picker: true });
+  const rows = root.querySelectorAll('.ol-path');
+  assert.equal(rows.length, 2);
+  assert.ok(rows[0].textContent.includes('敏感訊號'), rows[0].textContent);
+  assert.ok(!rows[1].textContent.includes('敏感訊號'), rows[1].textContent);
+});
+
+test('起步頁：按下去只送這條路徑的頁面，連同去重的資產，網址是起步頁自己的', async () => {
+  const { root, sw } = await load({ picker: true });
+  clickButton(root, '「新聞媒體」');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.ok(add, '沒有送出 OFFLINE_ADD');
+  // 網址是 sw.js 用來補語系前綴的依據，en 與 zh-cn 的起步頁存的要是自己那一版
+  assert.equal(add.url, 'https://anoni.net/docs/start/');
+  assert.deepEqual(add.paths.sort(), ['basics/metadata/', 'scenarios/journalist/', 'start/media/']);
+  // 另一條路徑獨有的頁面不送
+  assert.ok(!add.paths.includes('basics/'));
+  // 記者那頁兩張圖，共用的那張只送一次
+  assert.deepEqual(add.assets.sort(), ['img/journalist.png', 'img/shared.png']);
+});
+
+test('起步頁：已經自選存下的跳過，網站自動存的照樣送', async () => {
+  // 跟「全部存到裝置」同一條判準：PRECACHE 換版會被清掉，讀者按這顆的意思是要留住
+  const { root, sw } = await load({
+    picker: true,
+    saved: ['scenarios/journalist/'],
+    precached: ['basics/metadata/'],
+  });
+  const btn = pathButtons(root)[0];
+  assert.ok(btn.textContent.includes('2 頁'), btn.textContent);
+  btn.click();
+  await tick(30);
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.deepEqual(add.paths.sort(), ['basics/metadata/', 'start/media/']);
+});
+
+test('起步頁：整條都在裝置上就不畫按鈕，改說已經在裝置上', async () => {
+  const { root } = await load({
+    picker: true,
+    saved: ['start/media/', 'scenarios/journalist/', 'basics/metadata/'],
+  });
+  const buttons = pathButtons(root);
+  assert.equal(buttons.length, 1, '只剩一般大眾那條還有按鈕');
+  assert.ok(buttons[0].textContent.includes('「一般大眾」'));
+  assert.ok(root.textContent.includes('「新聞媒體」的路徑已經在裝置上（3 頁）'), root.textContent);
+});
+
+test('起步頁：完成後寫出存了幾頁，並附管理頁的連結', async () => {
+  const { root, sw } = await load({ picker: true });
+  clickButton(root, '「新聞媒體」');
+  await tick(30);
+  assert.ok(root.textContent.includes('完成。存下 3 頁'), root.textContent);
+  // 按完那條路徑的按鈕換成「已經在裝置上」，讀者知道不必再按
+  assert.ok(root.textContent.includes('「新聞媒體」的路徑已經在裝置上'), root.textContent);
+  assert.deepEqual(sw.state.saved.sort(), ['basics/metadata/', 'scenarios/journalist/', 'start/media/']);
+  const link = root.querySelectorAll('a').find((a) => a.textContent === '離線閱讀');
+  assert.ok(link, '沒有管理頁的連結');
+  assert.equal(link.getAttribute('href'), 'https://anoni.net/docs/offline/');
+});
+
+test('起步頁：沒有 service worker 時不畫按鈕，說明原因', async () => {
+  // Tor Browser、onion 版、IPFS gateway 都會走到這裡
+  const { root } = await load({ picker: true, swFlag: false, noRegistration: true });
+  assert.equal(pathButtons(root).length, 0);
+  assert.ok(root.textContent.includes('沒有提供離線儲存'), root.textContent);
+  // 路徑照樣列出來，讀者知道有這個功能、換個瀏覽器就有
+  assert.ok(root.textContent.includes('「新聞媒體」的路徑'), root.textContent);
+});
+
+test('起步頁：按下之後按鈕自己轉起來，不必等第一筆回報', async () => {
+  const { root } = await load({ picker: true, holdAdd: true });
+  clickButton(root, '「新聞媒體」');
+  await tick(10);
+  const busy = root.querySelectorAll('button').find((b) => b.textContent.includes('處理中'));
+  assert.ok(busy, '按下之後沒有任何一顆按鈕顯示狀態');
+  assert.ok(busy.querySelector('.anoni-spinner'), '按鈕上沒有轉圈');
+  assert.equal(busy.getAttribute('aria-busy'), 'true');
+  // 另一條路徑的按鈕跟著停用，不能同時跑兩批
+  const other = pathButtons(root).find((b) => b.textContent.includes('「一般大眾」'));
+  assert.ok(other && other.disabled, '另一條的按鈕沒有停用');
+  assert.ok(root.querySelector('.ol-progress__track'), '沒有畫出進度條');
+});
+
+test('起步頁：畫面上寫明網站不會記住選了哪一條', async () => {
+  const { root } = await load({ picker: true });
+  assert.ok(root.textContent.includes('不會記住你選了哪一條'), root.textContent);
+});
+
+test('整支程式不把任何東西寫進裝置的持久儲存', () => {
+  // 起步頁問的是身分。答案只能拿來當場下載，不能留在 localStorage 或 cookie 裡，
+  // 那會變成一個裝置被檢查時可以直接讀出來的自我宣告。管理頁那半本來就沒有寫，
+  // 這條把兩半一起釘住。
+  assert.ok(
+    !/localStorage|sessionStorage|document\.cookie|indexedDB/.test(src),
+    'offline-library.js 不該碰持久儲存'
+  );
 });
 
 // ---------------------------------------------------------------------------

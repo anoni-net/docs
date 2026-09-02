@@ -57,6 +57,14 @@ icon: material/sign-direction
 
 </div>
 
+## 把一條路徑存進裝置
+
+選好身分之後，可以把該路徑連到的頁面一次存進手機或電腦，沒有網路時照樣能讀。Tor Browser 與 onion、IPFS 版不提供離線功能，原因見[離線閱讀](../offline.md)。
+
+<div id="start-offline"></div>
+
+<script src="../js/offline-library.js"></script>
+
 ## 跟站上其他入口的差別
 
 | 你想找的 | 去哪裡 |

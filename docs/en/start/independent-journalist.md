@@ -2,6 +2,9 @@
 title: Independent journalists
 description: A starting path for freelancers and one-person outlets. Compartmentalizing a single device, running an intake channel without an institution behind you, and preparing for border crossings.
 icon: material/account-edit-outline
+# 這條路徑含有場景頁。start/index.md 的路徑下載按鈕旁會掛敏感提醒，
+# 由 hooks/offline_index.py 經 offline-index.json 的 paths 帶過去。
+offline_caution: true
 ---
 
 # :material-account-edit-outline: Independent journalists start here
