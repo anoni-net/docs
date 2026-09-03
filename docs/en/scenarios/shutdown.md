@@ -84,7 +84,7 @@ Across those four levels, almost every entry under "what you still have" depends
 
 A backup that exists only in the cloud does not exist during an outage. Keep at least one copy locally or on external storage, and confirm that copy opens without needing to check in with a server.
 
-Encrypted backups deserve a specific check here. Some encryption schemes verify a licence with a server when opening. You will not notice in normal times, and you will find out during the outage.
+Encrypted backups deserve a specific check here. Some encryption schemes verify a licence with a server when opening. You will not notice in normal times, and you will find out during the outage. Files encrypted in a public format such as [age](../tools/what-is-age.md) have no such dependency: any computer with the command-line tool opens them offline.
 
 ### Power
 

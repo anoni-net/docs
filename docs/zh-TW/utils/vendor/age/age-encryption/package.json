@@ -1,0 +1,63 @@
+{
+    "name": "age-encryption",
+    "version": "0.3.1",
+    "files": [
+        "dist/"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FiloSottile/typage.git"
+    },
+    "type": "module",
+    "main": "./dist/index.js",
+    "exports": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "keywords": [
+        "age",
+        "file encryption",
+        "cryptography"
+    ],
+    "dependencies": {
+        "@noble/ciphers": "^2.1.1",
+        "@noble/curves": "^2.0.1",
+        "@noble/hashes": "^2.0.1",
+        "@noble/post-quantum": "^0.5.3",
+        "@scure/base": "^2.0.0"
+    },
+    "scripts": {
+        "test": "vitest --run",
+        "test:short": "vitest --run --project node",
+        "test:slow": "SLOW=1 vitest --run --project node",
+        "examples:node": "cd tests/examples && npm install --omit=dev && npm run test:node",
+        "examples:bun": "cd tests/examples && bun install --production && bun run test:bun",
+        "examples:deno": "cd tests/examples && deno install && deno task test:deno",
+        "examples:yarn": "cd tests/examples && yarn install --prod && yarn test:node",
+        "examples:pnpm": "cd tests/examples && pnpm install --prod && pnpm test:node",
+        "examples:esbuild": "cd tests/examples && npm install && npm run test:esbuild",
+        "bench": "vitest bench --run",
+        "lint": "eslint .",
+        "serve": "esbuild wwwdev/index.ts --bundle --outdir=wwwdev/js --servedir=wwwdev --sourcemap",
+        "build": "tsc -p tsconfig.build.json",
+        "docs": "typedoc",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "@eslint/js": "9.39.2",
+        "@fast-check/vitest": "0.2.4",
+        "@stylistic/eslint-plugin": "5.6.1",
+        "@types/node": "25.0.3",
+        "@vitest/browser-webdriverio": "4.0.16",
+        "cctv-age": "0.2.0",
+        "esbuild": "0.27.2",
+        "eslint": "9.39.2",
+        "eslint-plugin-tsdoc": "0.5.0",
+        "typedoc": "0.28.15",
+        "typedoc-plugin-markdown": "4.9.0",
+        "typescript": "5.9.3",
+        "typescript-eslint": "8.50.0",
+        "vitest": "4.0.16",
+        "webdriverio": "9.21.0"
+    },
+    "author": "Filippo Valsorda <npm@filippo.io> (https://filippo.io)",
+    "license": "BSD-3-Clause"
+}

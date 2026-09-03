@@ -156,6 +156,12 @@ jobs:
       - name: 截圖遮蔽
         run: node tools/test_redact.mjs
 
+      # 本機檔案加密：用 Node 內建的 crypto 獨立實作 age 的密語模式，typage 的輸出要能被
+      # 它解開、它的輸出也要能被 typage 解開。另外對照 vendor/age 的檔案清單、import map
+      # 與 offline_assets，三邊多一個少一個都紅
+      - name: 本機檔案加密
+        run: node tools/test_agecrypt.mjs
+
       # 威脅模型清單：建議的頁面存不存在，以及答案有沒有被存到裝置上
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs

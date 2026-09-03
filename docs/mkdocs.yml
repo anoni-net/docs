@@ -62,6 +62,7 @@ nav:
               - tools/what-is-cryptpad.md
               - tools/password-manager.md
               - tools/asian-diceware.md
+              - tools/what-is-age.md
               - tools/email-alias.md
               - tools/crypto-privacy-spectrum.md
               - tools/ai-privacy.md
@@ -125,6 +126,7 @@ nav:
       - utils/index.md
       - utils/threat-model.md
       - utils/passphrase.md
+      - utils/age.md
       - utils/qrcode.md
       - utils/qr-read.md
       - utils/qr-stream.md

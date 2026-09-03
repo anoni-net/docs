@@ -54,6 +54,10 @@ const WAITS = [
     why: '整張圖重新編碼，再解開一次逐像素驗證每個方框',
   },
   {
+    file: 'zh-TW/js/agecrypt.js',
+    why: 'scrypt 把密語拉長成金鑰要幾秒，加密完還要解回來比對一次',
+  },
+  {
     file: 'zh-TW/js/qrread.js',
     why: '整張圖解開再掃過一次',
   },
