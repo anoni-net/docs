@@ -58,6 +58,10 @@ const WAITS = [
     why: 'scrypt 把密語拉長成金鑰要幾秒，加密完還要解回來比對一次',
   },
   {
+    file: 'zh-TW/js/passkey.js',
+    why: '建立與解鎖都在等瀏覽器的 passkey 提示，讀者看不到提示時要知道頁面在等',
+  },
+  {
     file: 'zh-TW/js/qrread.js',
     why: '整張圖解開再掃過一次',
   },

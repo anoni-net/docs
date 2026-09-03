@@ -162,6 +162,11 @@ jobs:
       - name: 本機檔案加密
         run: node tools/test_agecrypt.mjs
 
+      # passkey 鑰匙：替身的 navigator.credentials 讓 typage 的 webauthn 模組在 Node 跑起來，
+      # PRF 段落用 Node 內建的 crypto 獨立算一次對照。另守三語系頁面、import map 與 nav 的接線
+      - name: passkey 鑰匙
+        run: node tools/test_passkey.mjs
+
       # 威脅模型清單：建議的頁面存不存在，以及答案有沒有被存到裝置上
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs
