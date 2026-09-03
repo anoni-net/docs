@@ -50,6 +50,7 @@ icon: material/toolbox-outline
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
 - [Asian Diceware 密语字典](./asian-diceware.md)：社群参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。
 - [什么是 age](./what-is-age.md)：规范一页、密钥一行、没有选项的文件加密格式。怎么用、格式长什么样、跟 PGP 差在哪，以及站上的文件加密工具为什么选它。
+- [什么是 passkey](./what-is-passkey.md)：存在密码管理器里的凭证，配上 PRF 扩展就能算出加密密钥。为什么它能当站上数据的钥匙、跟密语差在哪、绑域名与遗失的限制。
 - [邮件别名怎么用，以及它把信任交给谁](./email-alias.md)：转发服务、自有域名 catch-all 与加号子地址的差别，别名把往来记录集中到谁手上，以及哪些场合用得上、哪些场合接不上。
 - [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。
 - [用 AI 工作时怎么避免数据外泄](./ai-privacy.md)：贴进去的内容去了哪里、消费版与企业版的分野、删除对话为什么不等于数据消失、你没有主动贴却也送出去的那些，以及境内服务的另一套框架。

@@ -38,6 +38,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Pick a file or paste some text, type a passphrase, and encrypt it to the age format in your browser, or open an age file. The ciphertext can come out as text, so it goes into your password manager next to the passphrase and follows you across devices. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
 
+-   :material-fingerprint: **[Passkey as your key](passkey.md)**
+
+    Create a passkey for this site, store it in your password manager or keychain, test an unlock, then generate a backup key. Local file encryption can then use it as the key, with no passphrase to remember. No account, no server, nothing stored here.
+
 -   :material-qrcode: **[QR code generator](qrcode.md)**
 
     Turn onion addresses, Tor bridges and other long, easily mistyped strings into a QR code the person in front of you can read with a camera, without anything passing through a server. Downloadable as SVG for printing.

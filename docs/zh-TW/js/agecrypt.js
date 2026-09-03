@@ -15,7 +15,12 @@
  *
  * === 幾個決定 ===
  *
- * 只做密語模式。公鑰模式需要金鑰管理，是另一個工具的範圍。
+ * 兩種鑰匙：密語，或 passkey。passkey 模式走 typage 的 webauthn 模組（PRF 派生金鑰），
+ * 共用的建立與偵測邏輯在 passkey.js（window.anoniPasskey），頁面要先載入它。passkey 模式
+ * 強制加一把 X25519 備援收件人：passkey 丟了資料還有路。passkey 模式不做加密後解回比對，
+ * 那要再按一次指紋，改成檢查檔頭確實有 passkey 與備援兩個段落。解密時看檔頭的段落類型
+ * 決定要問密語、passkey 還是備援金鑰，用 age 命令列加密給 age1 公鑰的檔案也能用備援金鑰解。
+ * 完整的公鑰模式（產生金鑰、多收件人）仍在 #421。
  *
  * 模式由檔案內容決定：開頭是 age 的版本行就解密，其餘一律加密。少一個要讀者選的開關。
  *
@@ -98,6 +103,51 @@
   function isAgeFile(bytes) {
     const head = asciiPrefix(bytes, AGE_ARMOR.length);
     return head.indexOf(AGE_HEADER) === 0 || head.indexOf(AGE_ARMOR) === 0;
+  }
+
+  // 段落類型，對應 age 檔頭每一行 "-> 類型 ..." 的第一個參數
+  const STANZA_SCRYPT = "scrypt";
+  const STANZA_X25519 = "X25519";
+  const STANZA_PASSKEY = "age-encryption.org/fido2prf";
+
+  // 讀檔頭到 --- 那一行為止，回每個段落的類型。不驗任何東西，只用來決定要問哪種鑰匙。
+  function stanzaTypes(bytes) {
+    const head = asciiPrefix(bytes, Math.min(bytes.length, 8192));
+    if (head.indexOf(AGE_HEADER) !== 0) return [];
+    const types = [];
+    const lines = head.split("\n");
+    for (let i = 1; i < lines.length; i += 1) {
+      if (lines[i].indexOf("---") === 0) break;
+      if (lines[i].indexOf("-> ") === 0) types.push(lines[i].slice(3).split(" ")[0]);
+    }
+    return types;
+  }
+
+  // armor 文字轉回位元組，只給判斷段落類型用，寬鬆版。真正解密走 typage 的嚴格版。
+  function armorToBytes(text) {
+    const lines = String(text).trim().replace(/\r\n/g, "\n").split("\n");
+    if (lines[0] !== AGE_ARMOR || lines[lines.length - 1] !== AGE_ARMOR_END) return null;
+    try {
+      const bin = atob(lines.slice(1, -1).join(""));
+      const out = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+      return out;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  // 解密要用哪種鑰匙：scrypt 段落問密語，passkey 或 X25519 段落問 passkey 或備援金鑰，
+  // 其餘（例如後量子混合收件人）這一頁不會處理
+  function keyModeFor(types) {
+    if (types.indexOf(STANZA_SCRYPT) >= 0) return "passphrase";
+    if (types.indexOf(STANZA_PASSKEY) >= 0 || types.indexOf(STANZA_X25519) >= 0) return "passkey";
+    return types.length ? "unsupported" : "unknown";
+  }
+
+  // passkey 模式加密完的檔頭要同時有 passkey 與備援兩個段落，少一個就不給下載
+  function hasPasskeyAndBackup(types) {
+    return types.length === 2 && types.indexOf(STANZA_PASSKEY) >= 0 && types.indexOf(STANZA_X25519) >= 0;
   }
 
   // 開頭是 armor 的頭行就是文字形式的 age 檔
@@ -280,6 +330,12 @@
       background: var(--md-code-bg-color); color: inherit; resize: vertical;
     }
     #age-tool .ag-or { font-size: .74rem; margin: .8rem 0 .2rem; }
+    #age-tool .ag-modes { display: flex; gap: 1rem; font-size: .74rem; margin: .8rem 0 0; flex-wrap: wrap; }
+    #age-tool .ag-modes label { display: flex; gap: .3rem; align-items: center; cursor: pointer; }
+    #age-tool .ag-secret {
+      font-family: var(--md-code-font-family, monospace); font-size: .72rem; background: var(--md-code-bg-color);
+      border-left: .15rem solid #ef6c00; padding: .5rem .7rem; border-radius: .1rem; margin: .4rem 0; user-select: all; word-break: break-all;
+    }
     #age-tool .ag-check { display: flex; gap: .4rem; align-items: flex-start; font-size: .74rem; margin: .6rem 0 0; cursor: pointer; }
     #age-tool .ag-check input { margin-top: .25rem; }
     #age-tool .ag-slow {
@@ -311,6 +367,24 @@
       copy: "複製",
       copied: "已複製",
       crossDevice: "把密文與密語一起存進你的密碼管理器，另一台裝置打開這一頁貼回來就能解開。密文由你信任的管理器同步，站上什麼都不存。",
+      keyMode: "用什麼當鑰匙",
+      modePassphrase: "密語",
+      modePasskey: "passkey",
+      passkeyUnavailable: "這個瀏覽器用不了 passkey，只能用密語。",
+      backupRecipient: "備援金鑰（公鑰，age1 開頭）",
+      backupPlaceholder: "age1…",
+      backupHint: "必填。passkey 丟了只剩它能開。還沒有的話到 passkey 鑰匙頁產生，或按右邊的按鈕，私鑰只顯示一次。",
+      genBackup: "產生備援金鑰",
+      backupSecretShown: "備援私鑰，只顯示這一次。存進密碼管理器，放在跟密文不同的地方。公鑰已填入上面的欄位。",
+      encryptPasskey: "用 passkey 加密並下載",
+      encryptedPasskey: "加密完成，檔頭確認有 passkey 與備援兩個收件人。passkey 模式沒有解回比對，那要再按一次指紋。",
+      decryptPasskey: "用 passkey 解開",
+      decryptChoice: "這個檔案加密給 passkey 與備援金鑰。用 passkey 解，或貼備援私鑰。",
+      decryptBackupOnly: "這個檔案加密給 age1 公鑰，貼對應的私鑰解開。",
+      backupIdentity: "備援私鑰（AGE-SECRET-KEY-1 開頭）",
+      identityPlaceholder: "AGE-SECRET-KEY-1…",
+      decryptBackup: "用備援私鑰解開",
+      passkeyPrompt: "等你在瀏覽器的提示裡完成",
       passphrase: "密語",
       show: "顯示",
       hide: "隱藏",
@@ -340,6 +414,13 @@
         verify: "加密完解回來比對不一致，那是工具的問題。原始檔沒有被動到，請不要用輸出的那一份，並回報。",
         libMissing: "加密用的程式還沒載入。第一次使用需要連上網，之後會留在裝置上。",
         words: "詞表載不進來，自己輸入一組密語，或到密語產生器抽一組。",
+        cancelled: "你取消了，或瀏覽器沒有完成。再按一次即可。",
+        noPrf: "這把 passkey 沒有 PRF 擴充，算不出金鑰。到 passkey 鑰匙頁看說明。",
+        badRecipient: "備援金鑰的格式不對，應該是 age1 開頭的 62 個字元。",
+        badIdentity: "備援私鑰的格式不對，應該是 AGE-SECRET-KEY-1 開頭的 74 個字元。",
+        wrongKey: "這把 passkey 或私鑰對不上檔案裡的收件人。",
+        unsupportedFile: "這個檔案的收件人類型這一頁不支援，用命令列工具解。",
+        header: "加密完檔頭裡沒有同時看到 passkey 與備援兩個收件人，那是工具的問題。請不要用輸出的那一份，並回報。",
       },
       note: "檔案與密語都在你的瀏覽器裡處理，沒有送到任何地方。密語不會被記住，重新整理就沒了。",
     },
@@ -358,6 +439,24 @@
       copy: "复制",
       copied: "已复制",
       crossDevice: "把密文与密语一起存进你的密码管理器，另一台设备打开这一页贴回来就能解开。密文由你信任的管理器同步，站上什么都不存。",
+      keyMode: "用什么当钥匙",
+      modePassphrase: "密语",
+      modePasskey: "passkey",
+      passkeyUnavailable: "这个浏览器用不了 passkey，只能用密语。",
+      backupRecipient: "备援密钥（公钥，age1 开头）",
+      backupPlaceholder: "age1…",
+      backupHint: "必填。passkey 丢了只剩它能开。还没有的话到 passkey 钥匙页生成，或按右边的按钮，私钥只显示一次。",
+      genBackup: "生成备援密钥",
+      backupSecretShown: "备援私钥，只显示这一次。存进密码管理器，放在跟密文不同的地方。公钥已填入上面的栏位。",
+      encryptPasskey: "用 passkey 加密并下载",
+      encryptedPasskey: "加密完成，文件头确认有 passkey 与备援两个收件人。passkey 模式没有解回比对，那要再按一次指纹。",
+      decryptPasskey: "用 passkey 解开",
+      decryptChoice: "这个文件加密给 passkey 与备援密钥。用 passkey 解，或贴备援私钥。",
+      decryptBackupOnly: "这个文件加密给 age1 公钥，贴对应的私钥解开。",
+      backupIdentity: "备援私钥（AGE-SECRET-KEY-1 开头）",
+      identityPlaceholder: "AGE-SECRET-KEY-1…",
+      decryptBackup: "用备援私钥解开",
+      passkeyPrompt: "等你在浏览器的提示里完成",
       passphrase: "密语",
       show: "显示",
       hide: "隐藏",
@@ -387,6 +486,13 @@
         verify: "加密完解回来比对不一致，那是工具的问题。原始文件没有被动到，请不要用输出的那一份，并回报。",
         libMissing: "加密用的程序还没加载。第一次使用需要联网，之后会留在设备上。",
         words: "词表加载不进来，自己输入一组密语，或到密语生成器抽一组。",
+        cancelled: "你取消了，或浏览器没有完成。再按一次即可。",
+        noPrf: "这把 passkey 没有 PRF 扩展，算不出密钥。到 passkey 钥匙页看说明。",
+        badRecipient: "备援密钥的格式不对，应该是 age1 开头的 62 个字符。",
+        badIdentity: "备援私钥的格式不对，应该是 AGE-SECRET-KEY-1 开头的 74 个字符。",
+        wrongKey: "这把 passkey 或私钥对不上文件里的收件人。",
+        unsupportedFile: "这个文件的收件人类型这一页不支持，用命令行工具解。",
+        header: "加密完文件头里没有同时看到 passkey 与备援两个收件人，那是工具的问题。请不要用输出的那一份，并回报。",
       },
       note: "文件与密语都在你的浏览器里处理，没有送到任何地方。密语不会被记住，刷新就没了。",
     },
@@ -405,6 +511,24 @@
       copy: "Copy",
       copied: "Copied",
       crossDevice: "Store the ciphertext and the passphrase together in your password manager. Open this page on another device, paste it back, and decrypt. Your manager does the syncing. This site stores nothing.",
+      keyMode: "What to use as the key",
+      modePassphrase: "Passphrase",
+      modePasskey: "Passkey",
+      passkeyUnavailable: "Passkeys are unavailable in this browser. Only the passphrase works.",
+      backupRecipient: "Backup key (public, starts with age1)",
+      backupPlaceholder: "age1…",
+      backupHint: "Required. If the passkey is lost, this is the only way in. Generate one on the passkey page, or with the button to the right. The secret is shown once.",
+      genBackup: "Generate a backup key",
+      backupSecretShown: "Backup secret key, shown only once. Store it in your password manager, apart from the ciphertexts. The public key has been filled in above.",
+      encryptPasskey: "Encrypt with the passkey and download",
+      encryptedPasskey: "Encrypted. The header has both the passkey and the backup recipient. Passkey mode skips the decrypt-and-compare pass, which would need another fingerprint.",
+      decryptPasskey: "Decrypt with the passkey",
+      decryptChoice: "This file is encrypted to a passkey and a backup key. Decrypt with the passkey, or paste the backup secret.",
+      decryptBackupOnly: "This file is encrypted to an age1 public key. Paste the matching secret key.",
+      backupIdentity: "Backup secret key (starts with AGE-SECRET-KEY-1)",
+      identityPlaceholder: "AGE-SECRET-KEY-1…",
+      decryptBackup: "Decrypt with the backup secret",
+      passkeyPrompt: "Finish in the browser prompt",
       passphrase: "Passphrase",
       show: "Show",
       hide: "Hide",
@@ -434,6 +558,13 @@
         verify: "Decrypting the output did not match the original. That is a bug in this tool. Your original is untouched. Do not use the output, and please report it.",
         libMissing: "The encryption code has not loaded. The first use needs a connection; after that it stays on the device.",
         words: "The word list could not be loaded. Type a passphrase yourself, or draw one on the passphrase generator page.",
+        cancelled: "You cancelled, or the browser did not finish. Press again.",
+        noPrf: "This passkey has no PRF extension, so no key can be derived. See the passkey page.",
+        badRecipient: "The backup key is malformed. It should be 62 characters starting with age1.",
+        badIdentity: "The backup secret is malformed. It should be 74 characters starting with AGE-SECRET-KEY-1.",
+        wrongKey: "This passkey or secret does not match any recipient in the file.",
+        unsupportedFile: "This page cannot handle the recipient types in this file. Use the command-line tool.",
+        header: "After encrypting, the header did not show both the passkey and the backup recipient. That is a bug in this tool. Do not use the output, and please report it.",
       },
       note: "The file and the passphrase are handled in your browser and sent nowhere. The passphrase is not remembered. Reload and it is gone.",
     },
@@ -461,6 +592,11 @@
     show: false,
     working: false,
     armorOut: false, // 檔案輸入時勾「輸出成文字」
+    keyMode: "passphrase",   // 加密時讀者選的鑰匙
+    backupRecipient: "",     // passkey 模式的備援公鑰
+    backupSecret: "",        // 解密時貼的備援私鑰
+    shownSecret: null,       // 剛產生的備援私鑰，只顯示這一次
+    passkeyOk: null,         // null 還在查，之後 true/false
     result: null,    // { url, name, size, verified, text, armored }
     error: null,
     drawn: null,
@@ -623,12 +759,21 @@
       return;
     }
     const bytes = new Uint8Array(await file.arrayBuffer());
+    const armored = isArmored(bytes);
     state.file = {
       name: file.name, size: file.size, bytes: bytes,
       mode: isAgeFile(bytes) ? "decrypt" : "encrypt",
-      source: "file", armored: isArmored(bytes),
+      source: "file", armored: armored,
+      types: typesOf(bytes, armored),
     };
     render();
+  }
+
+  // 解密要問哪種鑰匙，看檔頭的段落類型。armor 先寬鬆解回位元組。
+  function typesOf(bytes, armored) {
+    if (!armored) return stanzaTypes(bytes);
+    const raw = armorToBytes(new TextDecoder().decode(bytes));
+    return raw ? stanzaTypes(raw) : [];
   }
 
   function loadText(text) {
@@ -646,6 +791,7 @@
     state.file = {
       name: TEXT_NAME, size: parsed.bytes.length, bytes: parsed.bytes,
       mode: parsed.mode, source: "text", armored: parsed.armored,
+      types: parsed.mode === "decrypt" ? typesOf(parsed.bytes, parsed.armored) : [],
     };
     render();
   }
@@ -658,6 +804,114 @@
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return false;
     return true;
+  }
+
+  // 讀者要走哪條路：加密看選的模式，解密看檔頭
+  function activeKeyMode() {
+    if (!state.file) return "passphrase";
+    if (state.file.mode === "encrypt") return state.keyMode;
+    return keyModeFor(state.file.types || []);
+  }
+
+  // 解出來的東西轉成結果：armor 文字或位元組，檔名，顯示用的文字
+  function finish(output, mode, wantArmor, verified, age) {
+    let resultText = null;
+    if (mode === "encrypt" && wantArmor) {
+      resultText = age.armor.encode(output);
+      output = new TextEncoder().encode(resultText);
+    }
+    if (mode === "decrypt" && state.file.source === "text") resultText = decodeUtf8Text(output, ARMOR_MAX_BYTES);
+    const blob = new Blob([output], { type: resultText !== null ? "text/plain;charset=utf-8" : "application/octet-stream" });
+    let name = outputName(state.file.name, mode);
+    if (state.file.source === "text") name = mode === "encrypt" ? TEXT_NAME + ".age" : TEXT_NAME;
+    state.result = {
+      url: URL.createObjectURL(blob),
+      name: name,
+      size: blob.size,
+      verified: verified,
+      text: resultText,
+      armored: mode === "encrypt" && wantArmor,
+    };
+  }
+
+  // 解密的輸入：armor 先解回位元組
+  function decryptInput(age) {
+    let input = state.file.bytes;
+    if (state.file.armored) {
+      try {
+        input = age.armor.decode(new TextDecoder().decode(input));
+      } catch (err) {
+        throw new Error("broken");
+      }
+    }
+    return input;
+  }
+
+  // passkey 路徑。which 是 "passkey" 或 "backup"（解密時貼私鑰）。
+  async function runPasskey(which) {
+    if (!state.file || state.working) return;
+    const mode = state.file.mode;
+    const pk = window.anoniPasskey;
+    if (mode === "encrypt") {
+      if (!pk || !pk.looksLikeRecipient(state.backupRecipient)) {
+        state.error = "badRecipient";
+        render();
+        return;
+      }
+    } else if (which === "backup" && !(pk && pk.looksLikeIdentity(state.backupSecret))) {
+      state.error = "badIdentity";
+      render();
+      return;
+    }
+    releaseResult();
+    state.error = null;
+    state.working = true;
+    state.prompting = true;
+    render();
+    let loaded;
+    try {
+      loaded = await lib();
+    } catch (err) {
+      state.working = false;
+      state.prompting = false;
+      state.error = "libMissing";
+      render();
+      return;
+    }
+    const age = loaded.age;
+    const wantArmor = mode === "encrypt" && (state.file.source === "text" || state.armorOut);
+    try {
+      let output;
+      if (mode === "encrypt") {
+        const encrypter = new age.Encrypter();
+        encrypter.addRecipient(await pk.recipient());
+        encrypter.addRecipient(state.backupRecipient.trim());
+        output = await encrypter.encrypt(state.file.bytes);
+        // 沒有解回比對（要再按一次指紋），改成確認檔頭同時有 passkey 與備援兩個段落
+        if (!hasPasskeyAndBackup(stanzaTypes(output))) throw new Error("header");
+      } else {
+        const input = decryptInput(age);
+        const decrypter = new age.Decrypter();
+        if (which === "backup") decrypter.addIdentity(state.backupSecret.trim());
+        else decrypter.addIdentity(await pk.identity());
+        try {
+          output = await decrypter.decrypt(input, "uint8array");
+        } catch (err) {
+          if (err && (err.name === "NotAllowedError" || err.name === "AbortError")) throw new Error("cancelled");
+          if (/PRF/i.test(String(err && err.message))) throw new Error("noPrf");
+          throw new Error(/no identity matched|identit|recipient/i.test(String(err && err.message)) ? "wrongKey" : "broken");
+        }
+      }
+      finish(output, mode, wantArmor, false, age);
+    } catch (err) {
+      const known = ["cancelled", "noPrf", "wrongKey", "broken", "header", "badRecipient", "badIdentity"];
+      let reason = err && err.message;
+      if (known.indexOf(reason) < 0 && pk) reason = pk.classifyError(err);
+      state.error = known.indexOf(reason) >= 0 || reason === "unsupported" || reason === "failed" ? (reason === "unsupported" || reason === "failed" ? "broken" : reason) : "broken";
+    }
+    state.working = false;
+    state.prompting = false;
+    render();
   }
 
   async function run() {
@@ -699,7 +953,6 @@
     const wantArmor = mode === "encrypt" && (state.file.source === "text" || state.armorOut);
     try {
       let output;
-      let resultText = null;
       if (mode === "encrypt") {
         const encrypter = new age.Encrypter();
         encrypter.addRecipient(scryptRecipient(deps, passphrase, SCRYPT_LOG2_N, reportProgress(1, passes)));
@@ -713,20 +966,9 @@
             throw new Error("verify");
           }
         }
-        if (wantArmor) {
-          resultText = age.armor.encode(output);
-          output = new TextEncoder().encode(resultText);
-        }
       } else {
         // armor 的文字形式先解回位元組，typage 的 Decrypter 只認位元組
-        let input = state.file.bytes;
-        if (state.file.armored) {
-          try {
-            input = age.armor.decode(new TextDecoder().decode(input));
-          } catch (err) {
-            throw new Error("broken");
-          }
-        }
+        const input = decryptInput(age);
         const decrypter = new age.Decrypter();
         decrypter.addIdentity(scryptIdentity(deps, passphrase, reportProgress(1, 1)));
         try {
@@ -734,20 +976,8 @@
         } catch (err) {
           throw new Error(/passphrase|identit|scrypt|MAC|no recipient|incorrect/i.test(String(err && err.message)) ? "wrongPassphrase" : "broken");
         }
-        // 貼進來的密文解出來若是文字就直接顯示，檔案解出來只給下載
-        if (state.file.source === "text") resultText = decodeUtf8Text(output, ARMOR_MAX_BYTES);
       }
-      const blob = new Blob([output], { type: resultText !== null ? "text/plain;charset=utf-8" : "application/octet-stream" });
-      let name = outputName(state.file.name, mode);
-      if (state.file.source === "text") name = mode === "encrypt" ? TEXT_NAME + ".age" : TEXT_NAME;
-      state.result = {
-        url: URL.createObjectURL(blob),
-        name: name,
-        size: blob.size,
-        verified: verify,
-        text: resultText,
-        armored: wantArmor,
-      };
+      finish(output, mode, wantArmor, verify, age);
     } catch (err) {
       const reason = err && err.message;
       state.error = ["verify", "wrongPassphrase", "broken"].indexOf(reason) >= 0 ? reason : "broken";
@@ -817,6 +1047,149 @@
     return node;
   }
 
+  function resetFile() {
+    releaseResult();
+    state.file = null;
+    state.passphrase = "";
+    state.drawn = null;
+    state.error = null;
+    state.slow = null;
+    state.armorOut = false;
+    state.backupSecret = "";
+    state.shownSecret = null;
+    render();
+  }
+
+  function textField(type, value, placeholder, onInput) {
+    const input = document.createElement(type === "textarea" ? "textarea" : "input");
+    if (type !== "textarea") input.type = type;
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.value = value;
+    input.placeholder = placeholder;
+    input.addEventListener("input", () => onInput(input.value));
+    return input;
+  }
+
+  function appendResult(box, file) {
+    if (state.error) {
+      box.appendChild(el("p", "ag-error", fill(t.errors[state.error] || t.errors.broken, { limit: humanSize(MAX_BYTES) })));
+    }
+    if (!state.result) return;
+    const result = el("div", "ag-result");
+    let line = t.decrypted;
+    if (file.mode === "encrypt") line = activeKeyMode() === "passkey" ? t.encryptedPasskey : (state.result.verified ? t.encrypted : t.encryptedNoVerify);
+    result.appendChild(el("p", null, line));
+    result.appendChild(el("p", null, fill(t.sizeLine, { a: humanSize(file.size), b: humanSize(state.result.size) })));
+    const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
+    link.href = state.result.url;
+    link.download = state.result.name;
+    if (state.result.text !== null) {
+      const outLabel = el("label", "ag-label", t.outputText);
+      const out = document.createElement("textarea");
+      out.className = "ag-out";
+      out.rows = Math.min(12, Math.max(3, state.result.text.split("\n").length));
+      out.readOnly = true;
+      out.spellcheck = false;
+      out.value = state.result.text;
+      outLabel.appendChild(out);
+      result.appendChild(outLabel);
+      const tools = el("div", "ag-row");
+      tools.appendChild(copyButton(() => state.result.text, out));
+      tools.appendChild(link);
+      result.appendChild(tools);
+      if (state.result.armored) result.appendChild(el("p", "ag-hint", t.crossDevice));
+    } else {
+      result.appendChild(link);
+    }
+    box.appendChild(result);
+  }
+
+  // passkey 模式的介面：加密要備援公鑰，解密可選 passkey 或備援私鑰
+  function renderPasskeyBox(box, file) {
+    const pk = window.anoniPasskey;
+    const types = file.types || [];
+    const withPasskey = file.mode === "encrypt" || types.indexOf(STANZA_PASSKEY) >= 0;
+    if (file.mode === "encrypt") {
+      const label = el("label", "ag-label", t.backupRecipient);
+      const row = el("div", "ag-row");
+      const input = textField("text", state.backupRecipient, t.backupPlaceholder, (value) => {
+        state.backupRecipient = value;
+        const primary = root.querySelector(".ag-primary");
+        if (primary) primary.disabled = state.working || !(pk && pk.looksLikeRecipient(value));
+      });
+      row.appendChild(input);
+      const gen = button(t.genBackup, null, () => {
+        if (!pk) return;
+        pk.backupKey().then((key) => {
+          state.backupRecipient = key.recipient;
+          state.shownSecret = key.secret;
+          state.error = null;
+          render();
+        }, () => {
+          state.error = "libMissing";
+          render();
+        });
+      });
+      gen.disabled = state.working;
+      row.appendChild(gen);
+      label.appendChild(row);
+      box.appendChild(label);
+      box.appendChild(el("p", "ag-hint", t.backupHint));
+      if (state.shownSecret) {
+        box.appendChild(el("p", "ag-secret", state.shownSecret));
+        box.appendChild(el("p", "ag-hint", t.backupSecretShown));
+      }
+      if (file.source === "file" && file.size <= ARMOR_MAX_BYTES) {
+        const check = el("label", "ag-check");
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = state.armorOut;
+        cb.disabled = state.working;
+        cb.addEventListener("change", () => { state.armorOut = cb.checked; });
+        check.appendChild(cb);
+        check.appendChild(document.createTextNode(t.armorOut));
+        box.appendChild(check);
+      }
+    } else {
+      box.appendChild(el("p", "ag-hint", withPasskey ? t.decryptChoice : t.decryptBackupOnly));
+      const label = el("label", "ag-label", t.backupIdentity);
+      const input = textField("password", state.backupSecret, t.identityPlaceholder, (value) => {
+        state.backupSecret = value;
+        const b = root.querySelector(".ag-backup-go");
+        if (b) b.disabled = state.working || !(pk && pk.looksLikeIdentity(value));
+      });
+      label.appendChild(input);
+      box.appendChild(label);
+    }
+
+    const actions = el("div", "ag-actions ag-row");
+    if (state.working) {
+      const busy = button("", "ag-primary", () => {});
+      const spin = el("span", "anoni-spinner");
+      spin.setAttribute("aria-hidden", "true");
+      busy.appendChild(spin);
+      busy.appendChild(document.createTextNode(t.passkeyPrompt));
+      busy.setAttribute("aria-busy", "true");
+      busy.disabled = true;
+      actions.appendChild(busy);
+    } else if (file.mode === "encrypt") {
+      const primary = button(t.encryptPasskey, "ag-primary", () => runPasskey("passkey"));
+      primary.disabled = !(pk && pk.looksLikeRecipient(state.backupRecipient));
+      actions.appendChild(primary);
+    } else {
+      if (withPasskey) actions.appendChild(button(t.decryptPasskey, "ag-primary", () => runPasskey("passkey")));
+      const viaBackup = button(t.decryptBackup, withPasskey ? "ag-backup-go" : "ag-primary ag-backup-go", () => runPasskey("backup"));
+      viaBackup.disabled = !(pk && pk.looksLikeIdentity(state.backupSecret));
+      actions.appendChild(viaBackup);
+    }
+    const another = button(t.another, null, resetFile);
+    another.disabled = state.working;
+    actions.appendChild(another);
+    box.appendChild(actions);
+    appendResult(box, file);
+  }
+
   function render() {
     // 輸入框在打字時不能重建，重畫會失去焦點。密語欄位存在就只更新其他部分。
     root.textContent = "";
@@ -833,6 +1206,48 @@
     let nameText = fill(file.mode === "decrypt" ? t.decryptMode : t.encryptMode, { name: file.name, size: humanSize(file.size) });
     if (file.source === "text") nameText = fill(file.mode === "decrypt" ? t.textDecryptMode : t.textEncryptMode, { size: humanSize(file.size) });
     box.appendChild(el("p", "ag-name", nameText));
+
+    const keyMode = activeKeyMode();
+    if (keyMode === "unsupported") {
+      box.appendChild(el("p", "ag-error", t.errors.unsupportedFile));
+      const back = el("div", "ag-actions ag-row");
+      back.appendChild(button(t.another, null, resetFile));
+      box.appendChild(back);
+      root.appendChild(box);
+      root.appendChild(el("p", "ag-note", t.note));
+      return;
+    }
+    if (file.mode === "encrypt") {
+      const modes = el("div", "ag-modes");
+      const pkOk = state.passkeyOk === true;
+      [["passphrase", t.modePassphrase], ["passkey", t.modePasskey]].forEach(([value, text]) => {
+        const lab = el("label");
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "ag-keymode";
+        radio.value = value;
+        radio.checked = state.keyMode === value;
+        radio.disabled = state.working || (value === "passkey" && !pkOk);
+        radio.addEventListener("change", () => {
+          state.keyMode = value;
+          state.error = null;
+          render();
+        });
+        lab.appendChild(radio);
+        lab.appendChild(document.createTextNode(text));
+        modes.appendChild(lab);
+      });
+      const modesLabel = el("div", "ag-label", t.keyMode);
+      box.appendChild(modesLabel);
+      box.appendChild(modes);
+      if (state.passkeyOk === false) box.appendChild(el("p", "ag-hint", t.passkeyUnavailable));
+    }
+    if (keyMode === "passkey") {
+      renderPasskeyBox(box, file);
+      root.appendChild(box);
+      root.appendChild(el("p", "ag-note", t.note));
+      return;
+    }
 
     const label = el("label", "ag-label", t.passphrase);
     const row = el("div", "ag-row");
@@ -923,16 +1338,7 @@
     }
     primary.disabled = state.working || !state.passphrase;
     actions.appendChild(primary);
-    const another = button(t.another, null, () => {
-      releaseResult();
-      state.file = null;
-      state.passphrase = "";
-      state.drawn = null;
-      state.error = null;
-      state.slow = null;
-      state.armorOut = false;
-      render();
-    });
+    const another = button(t.another, null, resetFile);
     another.disabled = state.working;
     actions.appendChild(another);
     box.appendChild(actions);
@@ -940,39 +1346,7 @@
       box.appendChild(el("p", "ag-progress ag-hint", ""));
     }
 
-    if (state.error) {
-      box.appendChild(el("p", "ag-error", fill(t.errors[state.error] || t.errors.broken, { limit: humanSize(MAX_BYTES) })));
-    }
-    if (state.result) {
-      const result = el("div", "ag-result");
-      result.appendChild(el("p", null, file.mode === "decrypt" ? t.decrypted : (state.result.verified ? t.encrypted : t.encryptedNoVerify)));
-      result.appendChild(el("p", null, fill(t.sizeLine, { a: humanSize(file.size), b: humanSize(state.result.size) })));
-      if (state.result.text !== null) {
-        const outLabel = el("label", "ag-label", t.outputText);
-        const out = document.createElement("textarea");
-        out.className = "ag-out";
-        out.rows = Math.min(12, Math.max(3, state.result.text.split("\n").length));
-        out.readOnly = true;
-        out.spellcheck = false;
-        out.value = state.result.text;
-        outLabel.appendChild(out);
-        result.appendChild(outLabel);
-        const tools = el("div", "ag-row");
-        tools.appendChild(copyButton(() => state.result.text, out));
-        const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
-        link.href = state.result.url;
-        link.download = state.result.name;
-        tools.appendChild(link);
-        result.appendChild(tools);
-        if (state.result.armored) result.appendChild(el("p", "ag-hint", t.crossDevice));
-      } else {
-        const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
-        link.href = state.result.url;
-        link.download = state.result.name;
-        result.appendChild(link);
-      }
-      box.appendChild(result);
-    }
+    appendResult(box, file);
     root.appendChild(box);
     root.appendChild(el("p", "ag-note", t.note));
   }
@@ -984,4 +1358,16 @@
   }
 
   render();
+  // passkey 能不能用由 passkey.js 判斷，頁面沒載它或瀏覽器不支援就只剩密語
+  if (window.anoniPasskey) {
+    window.anoniPasskey.support().then((s) => {
+      state.passkeyOk = !!(s.webauthn && s.prf !== false);
+      render();
+    }, () => {
+      state.passkeyOk = false;
+      render();
+    });
+  } else {
+    state.passkeyOk = false;
+  }
 })();

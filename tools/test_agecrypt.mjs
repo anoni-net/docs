@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, hasPasskeyAndBackup };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -326,6 +326,28 @@ test('貼進來的文字：armor 開頭就解密（允許前後空白與 CRLF）
   assert.equal(tool.outputName(tool.TEXT_NAME, 'encrypt'), 'note.txt.age');
 });
 
+test('檔頭的段落類型決定要問哪種鑰匙：scrypt 問密語，passkey 或 X25519 問 passkey 或備援私鑰，其餘不支援', () => {
+  const header = (types) => Buffer.from('age-encryption.org/v1\n' + types.map((t) => `-> ${t} abc\nZm9v\n`).join('') + '--- mac\n\u0000payload');
+  assert.deepEqual(tool.stanzaTypes(header(['scrypt'])), ['scrypt']);
+  assert.deepEqual(tool.stanzaTypes(header(['age-encryption.org/fido2prf', 'X25519'])), ['age-encryption.org/fido2prf', 'X25519']);
+  assert.deepEqual(tool.stanzaTypes(Buffer.from('not age')), []);
+  assert.equal(tool.keyModeFor(['scrypt']), 'passphrase');
+  assert.equal(tool.keyModeFor(['age-encryption.org/fido2prf', 'X25519']), 'passkey');
+  assert.equal(tool.keyModeFor(['X25519']), 'passkey', '命令列加密給 age1 的檔案用備援私鑰解');
+  assert.equal(tool.keyModeFor(['age-encryption.org/mlkem768x25519']), 'unsupported');
+  assert.equal(tool.keyModeFor([]), 'unknown');
+  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf', 'X25519']), true);
+  assert.equal(tool.hasPasskeyAndBackup(['X25519', 'age-encryption.org/fido2prf']), true);
+  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf']), false, '少了備援就不給下載');
+  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf', 'X25519', 'X25519']), false);
+  // 寬鬆的 armor 解碼只給判斷類型用，要吃 CRLF，格式不對回 null
+  const raw = header(['scrypt']);
+  const armored = '-----BEGIN AGE ENCRYPTED FILE-----\r\n' + raw.toString('base64').match(/.{1,64}/g).join('\r\n') + '\r\n-----END AGE ENCRYPTED FILE-----\r\n';
+  assert.ok(Buffer.from(tool.armorToBytes(armored)).equals(raw));
+  assert.equal(tool.armorToBytes('nope'), null);
+  assert.equal(tool.armorToBytes('-----BEGIN AGE ENCRYPTED FILE-----\n!!!\n-----END AGE ENCRYPTED FILE-----'), null);
+});
+
 test('解出來的東西只有合法 UTF-8、沒有控制字元、不超過上限才顯示成文字', () => {
   assert.equal(tool.decodeUtf8Text(Buffer.from('哈囉\tworld\r\n'), 1024), '哈囉\tworld\r\n');
   assert.equal(tool.decodeUtf8Text(Buffer.from([0xff, 0xfe, 0x00]), 1024), null, '不是 UTF-8 不顯示');
@@ -544,20 +566,31 @@ test('vendor/age 裡的 .js 正好是從 index.js import 得到的閉包，多�
 
 test('頁面的 import map 涵蓋每一個 bare specifier，指到的檔案都存在', () => {
   const { bare } = closure();
-  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
-    const page = fs.readFileSync(path.join(DOCS, lang, 'utils', 'age.md'), 'utf8');
+  for (const [lang, file] of [['zh-TW', 'age.md'], ['zh-CN', 'age.md'], ['en', 'age.md'], ['zh-TW', 'passkey.md'], ['zh-CN', 'passkey.md'], ['en', 'passkey.md']]) {
+    const page = fs.readFileSync(path.join(DOCS, lang, 'utils', file), 'utf8');
     const m = page.match(/<script type="importmap">\s*([\s\S]*?)\s*<\/script>/);
-    assert.ok(m, `${lang} 的頁面沒有 import map`);
+    assert.ok(m, `${lang} 的 ${file} 沒有 import map`);
     const map = JSON.parse(m[1]).imports;
     for (const [spec, full] of bare) {
       assert.ok(map[spec], `${lang} 的 import map 少了 ${spec}`);
       const target = path.resolve(path.join(DOCS, lang, 'utils', 'age'), map[spec]);
       assert.equal(fs.realpathSync(target), fs.realpathSync(full), `${lang} 的 ${spec} 指錯檔案`);
     }
-    for (const spec of Object.keys(map)) assert.ok(bare.has(spec), `${lang} 的 import map 多了沒人用的 ${spec}`);
+    for (const spec of Object.keys(map)) assert.ok(bare.has(spec), `${lang} 的 ${file} import map 多了沒人用的 ${spec}`);
     // agecrypt.js 自己 import 的名稱也要在 map 裡，少一條是頁面上才炸
     for (const m2 of code.matchAll(/import\("([^"]+)"\)/g)) assert.ok(map[m2[1]], `${lang} 的 import map 少了介面用到的 ${m2[1]}`);
   }
+});
+
+test('passkey 模式：加密一定加備援公鑰、檔頭檢查兩個段落、不解回比對，解密看檔頭選鑰匙', () => {
+  assert.ok(/encrypter\.addRecipient\(await pk\.recipient\(\)\)/.test(code), '沒有加 passkey 收件人');
+  assert.ok(/encrypter\.addRecipient\(state\.backupRecipient\.trim\(\)\)/.test(code), '沒有加備援公鑰');
+  assert.ok(/if \(!hasPasskeyAndBackup\(stanzaTypes\(output\)\)\) throw new Error\("header"\)/.test(code), '加密完沒有檢查檔頭');
+  assert.ok(/pk\.looksLikeRecipient\(state\.backupRecipient\)/.test(code), '備援公鑰沒有先檢查形狀');
+  assert.ok(/decrypter\.addIdentity\(state\.backupSecret\.trim\(\)\)/.test(code) && /decrypter\.addIdentity\(await pk\.identity\(\)\)/.test(code), '解密缺一條路');
+  assert.ok(/return keyModeFor\(state\.file\.types/.test(code), '解密時要看檔頭決定鑰匙');
+  assert.ok(/state\.passkeyOk = !!\(s\.webauthn && s\.prf !== false\)/.test(code), 'passkey 能不能用要問 passkey.js');
+  assert.ok(!/credentials\.(create|get)\(/.test(code), 'WebAuthn 只經 passkey.js 與 typage 呼叫');
 });
 
 test('offline_assets 逐一列出 vendor/age 的每一支 .js 與詞表', () => {
@@ -615,7 +648,7 @@ test('加密完先解回來比對，不一致就不給下載。只有讀者答�
   assert.ok(/decrypter\.decrypt\(output/.test(code), '沒有把輸出解回來');
   assert.ok(/throw new Error\("verify"\)/.test(code), '比對不一致沒有攔下');
   assert.ok(/if \(verify\) \{/.test(code), '比對要由 verify 決定');
-  assert.ok(/verified: verify/.test(code), '結果要記得有沒有比對過，文案才分得出來');
+  assert.ok(/finish\(output, mode, wantArmor, verify, age\)/.test(code) && /verified: verified/.test(code), '結果要記得有沒有比對過，文案才分得出來');
   assert.ok(code.includes('anoni-spinner') && code.includes('aria-busy'));
   assert.ok(code.includes('ag-progress'), '等待期間要有進度');
 });
@@ -624,7 +657,7 @@ test('armor 進出都走 typage 的 armor 模組，剪貼簿只寫不讀，解�
   assert.ok(/input = age\.armor\.decode\(new TextDecoder\(\)\.decode\(input\)\)/.test(code), '解密前沒有把 armor 解回位元組');
   assert.ok(/resultText = age\.armor\.encode\(output\)/.test(code), '文字輸出沒有走 armor');
   assert.ok(/state\.file\.source === "text" \|\| state\.armorOut/.test(code), '文字輸入要一律輸出文字，檔案看勾選');
-  assert.ok(/if \(state\.file\.source === "text"\) resultText = decodeUtf8Text\(output, ARMOR_MAX_BYTES\)/.test(code), '解出來的文字只在貼文字時顯示');
+  assert.ok(/if \(mode === "decrypt" && state\.file\.source === "text"\) resultText = decodeUtf8Text\(output, ARMOR_MAX_BYTES\)/.test(code), '解出來的文字只在貼文字時顯示');
   assert.ok(code.includes('navigator.clipboard.writeText'), '沒有複製按鈕');
   assert.ok(!code.includes('readText'), '不准讀剪貼簿');
   assert.ok(/file\.size <= ARMOR_MAX_BYTES/.test(code), '大檔案不該提供文字輸出');

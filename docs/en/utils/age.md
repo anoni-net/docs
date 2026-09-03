@@ -81,6 +81,7 @@ offline_assets:
 
 <div id="age-tool"></div>
 
+<script src="../../js/passkey.js"></script>
 <script src="../../js/agecrypt.js"></script>
 
 ## How to use it
@@ -108,6 +109,10 @@ age -d -o note.txt note.txt.age
 ```
 
 The text form is a third larger than the binary, so files over 64 KB only get the binary download. Password manager notes rarely hold more than that anyway.
+
+## Using a passkey as the key
+
+Switch the key to "Passkey" when encrypting and there is no passphrase to remember. The browser shows a prompt, you approve once with a fingerprint or PIN, and the file is encrypted to your passkey. Before the first use, go to [Passkey as your key](passkey.md) to create one and generate a backup key. The backup key's public half is a required field here: if the passkey is lost or you move to an unsupported environment, only the backup secret opens the file. When decrypting, the tool reads the header to decide whether to ask for a passphrase, the passkey or the backup secret. Files encrypted with the age command line to an `age1` public key can be opened here by pasting the secret. Files in passkey mode only open on this site. The reasons are on [What is a passkey?](../tools/what-is-passkey.md).
 
 ## The passphrase is everything
 
