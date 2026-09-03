@@ -85,7 +85,7 @@ offline_assets:
 
 ## How to use it
 
-1. Drop a file in, or click to choose one. The tool reads the start of the file to decide: an age file gets decrypted, anything else gets encrypted.
+1. Drop a file in, click to choose one, or paste some text into the box below. The tool reads the start to decide: an age file or an age text file gets decrypted, anything else gets encrypted.
 2. Type a passphrase. When encrypting, "Draw a passphrase" picks six words from the Asian Diceware list. Write it down. It is gone when you close the page.
 3. Press "Encrypt and download". The page decrypts the output again with the same passphrase and checks it against the original before offering the download. The file name is the original with `.age` added. Decrypting removes the `.age`. In a slow environment the page shows an estimate first and lets you decide. If you go on, the check pass is skipped.
 
@@ -96,6 +96,18 @@ age -d -o backup.tar backup.tar.age
 ```
 
 What age is, what the format looks like and how it differs from PGP are on [What is age?](../tools/what-is-age.md).
+
+## Across devices, through your password manager
+
+Paste text to encrypt, or tick "Output as text" when encrypting a file, and you get plain text starting with `-----BEGIN AGE ENCRYPTED FILE-----`. Store it together with the passphrase in the password manager you already use (a secure note in Bitwarden, Proton Pass or 1Password all work). Open this page on another device, paste it back, type the passphrase, and it decrypts. Your manager does the syncing. This site stores nothing.
+
+Saved to a file, the text form is still a standard age file and the command-line tool recognises it on its own:
+
+```
+age -d -o note.txt note.txt.age
+```
+
+The text form is a third larger than the binary, so files over 64 KB only get the binary download. Password manager notes rarely hold more than that anyway.
 
 ## The passphrase is everything
 

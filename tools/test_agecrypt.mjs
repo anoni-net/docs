@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -87,6 +87,25 @@ function nodeAgeEncrypt(plain, passphrase, logN = 18) {
     counter += 1;
   } while (at < plain.length);
   return Buffer.concat([Buffer.from(header), nonce, ...chunks]);
+}
+
+// ASCII armor：PEM 的嚴格子集，48 位元組一行（64 個 base64 字元），標準 base64 含補位
+function nodeArmor(buf) {
+  const lines = ['-----BEGIN AGE ENCRYPTED FILE-----'];
+  for (let i = 0; i < buf.length; i += 48) lines.push(buf.subarray(i, i + 48).toString('base64'));
+  lines.push('-----END AGE ENCRYPTED FILE-----');
+  return lines.join('\n') + '\n';
+}
+function nodeDearmor(text) {
+  const lines = text.trim().replace(/\r\n/g, '\n').split('\n');
+  assert.equal(lines.shift(), '-----BEGIN AGE ENCRYPTED FILE-----', 'armor 頭行不對');
+  assert.equal(lines.pop(), '-----END AGE ENCRYPTED FILE-----', 'armor 尾行不對');
+  lines.forEach((l, i) => {
+    assert.ok(/^[A-Za-z0-9+/=]+$/.test(l), 'armor 內容不是 base64');
+    if (i < lines.length - 1) assert.equal(l.length, 64, 'armor 中間行要剛好 64 字');
+    else assert.ok(l.length > 0 && l.length <= 64 && l.length % 4 === 0, 'armor 最後一行長度不對');
+  });
+  return Buffer.from(lines.join(''), 'base64');
 }
 
 function nodeAgeDecrypt(file, passphrase) {
@@ -289,6 +308,32 @@ test('取樣沒有取模偏差，抽出來的都是詞表裡的字', () => {
   assert.equal(tool.WORDS_SUGGESTED, 6);
 });
 
+test('貼進來的文字：armor 開頭就解密（允許前後空白與 CRLF），其餘原樣當明文加密', () => {
+  const armored = '\n  -----BEGIN AGE ENCRYPTED FILE-----\r\nQUJD\r\n-----END AGE ENCRYPTED FILE-----\r\n\n';
+  const d = tool.classifyText(armored);
+  assert.equal(d.mode, 'decrypt');
+  assert.equal(d.armored, true);
+  assert.ok(Buffer.from(d.bytes).toString().startsWith('-----BEGIN AGE'), '解密輸入要從頭行開始');
+  const plain = '  兩個空白開頭，尾巴有換行\n';
+  const e = tool.classifyText(plain);
+  assert.equal(e.mode, 'encrypt');
+  assert.equal(e.armored, false);
+  assert.equal(Buffer.from(e.bytes).toString(), plain, '明文一個字元都不能動');
+  assert.equal(tool.isArmored(Buffer.from('-----BEGIN AGE ENCRYPTED FILE-----\n')), true);
+  assert.equal(tool.isArmored(Buffer.from('age-encryption.org/v1\n')), false);
+  assert.equal(tool.isAgeFile(Buffer.from('-----BEGIN AGE ENCRYPTED FILE-----\n')), true, 'armor 檔也要被認成 age 檔');
+  assert.equal(tool.TEXT_NAME, 'note.txt');
+  assert.equal(tool.outputName(tool.TEXT_NAME, 'encrypt'), 'note.txt.age');
+});
+
+test('解出來的東西只有合法 UTF-8、沒有控制字元、不超過上限才顯示成文字', () => {
+  assert.equal(tool.decodeUtf8Text(Buffer.from('哈囉\tworld\r\n'), 1024), '哈囉\tworld\r\n');
+  assert.equal(tool.decodeUtf8Text(Buffer.from([0xff, 0xfe, 0x00]), 1024), null, '不是 UTF-8 不顯示');
+  assert.equal(tool.decodeUtf8Text(Buffer.from('a\u0000b'), 1024), null, '含 NUL 不顯示');
+  assert.equal(tool.decodeUtf8Text(Buffer.from('x'.repeat(10)), 9), null, '超過上限不顯示');
+  assert.equal(tool.ARMOR_MAX_BYTES, 64 * 1024);
+});
+
 test('scrypt 工作因數用 age 命令列的預設值，不偷降', () => {
   assert.equal(tool.SCRYPT_LOG2_N, 18);
   assert.ok(/addRecipient\(scryptRecipient\(deps, passphrase, SCRYPT_LOG2_N/.test(code), '介面沒有把工作因數交給自組的收件人');
@@ -446,6 +491,28 @@ test('自組身分的檢查跟 typage 一致：多一個段落、鹽長度不對
   assert.equal(tool.SCRYPT_LABEL, 'age-encryption.org/v1/scrypt');
 });
 
+test('armor 兩邊互通：typage 包的獨立實作解得開，獨立實作包的 typage 解得開，格式逐字相同', async () => {
+  const { age } = typage;
+  const plain = Buffer.from('密碼管理器的安全筆記裡放這一段\n'.repeat(20));
+  const e = new age.Encrypter();
+  e.setPassphrase('pw'); e.setScryptWorkFactor(12);
+  const bin = Buffer.from(await e.encrypt(new Uint8Array(plain)));
+  const fromTypage = age.armor.encode(new Uint8Array(bin));
+  assert.equal(fromTypage, nodeArmor(bin), '兩邊的 armor 文字要逐字相同');
+  assert.ok(nodeAgeDecrypt(nodeDearmor(fromTypage), 'pw').equals(plain));
+  const fromNode = nodeArmor(nodeAgeEncrypt(plain, 'pw2', 12));
+  const d = new age.Decrypter(); d.addPassphrase('pw2');
+  assert.ok(Buffer.from(await d.decrypt(age.armor.decode(fromNode), 'uint8array')).equals(plain));
+  // 從密碼管理器貼回來常帶 CRLF 與前後空白，兩邊都要吃
+  const messy = '\n' + fromNode.replace(/\n/g, '\r\n') + '  \n';
+  assert.ok(Buffer.from(await d.decrypt(age.armor.decode(messy), 'uint8array')).equals(plain));
+  assert.ok(nodeAgeDecrypt(nodeDearmor(messy), 'pw2').equals(plain));
+  // 中間行被改短就要拒絕，不能默默解出錯的東西
+  const broken = fromNode.split('\n'); broken[1] = broken[1].slice(0, 60);
+  assert.throws(() => age.armor.decode(broken.join('\n')));
+  assert.throws(() => nodeDearmor(broken.join('\n')));
+});
+
 test('typage 的輸出符合規格的形狀：版本行、單一 scrypt 段落、工作因數、MAC 行', async () => {
   const e = new typage.age.Encrypter();
   e.setPassphrase('pw');
@@ -551,6 +618,16 @@ test('加密完先解回來比對，不一致就不給下載。只有讀者答�
   assert.ok(/verified: verify/.test(code), '結果要記得有沒有比對過，文案才分得出來');
   assert.ok(code.includes('anoni-spinner') && code.includes('aria-busy'));
   assert.ok(code.includes('ag-progress'), '等待期間要有進度');
+});
+
+test('armor 進出都走 typage 的 armor 模組，剪貼簿只寫不讀，解出來的文字只在貼文字時顯示', () => {
+  assert.ok(/input = age\.armor\.decode\(new TextDecoder\(\)\.decode\(input\)\)/.test(code), '解密前沒有把 armor 解回位元組');
+  assert.ok(/resultText = age\.armor\.encode\(output\)/.test(code), '文字輸出沒有走 armor');
+  assert.ok(/state\.file\.source === "text" \|\| state\.armorOut/.test(code), '文字輸入要一律輸出文字，檔案看勾選');
+  assert.ok(/if \(state\.file\.source === "text"\) resultText = decodeUtf8Text\(output, ARMOR_MAX_BYTES\)/.test(code), '解出來的文字只在貼文字時顯示');
+  assert.ok(code.includes('navigator.clipboard.writeText'), '沒有複製按鈕');
+  assert.ok(!code.includes('readText'), '不准讀剪貼簿');
+  assert.ok(/file\.size <= ARMOR_MAX_BYTES/.test(code), '大檔案不該提供文字輸出');
 });
 
 test('三個語系的字串表結構一致', () => {
