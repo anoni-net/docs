@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, isAgeFile, outputName, randomBelow, pickWords };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -167,8 +167,14 @@ async function loadTypage() {
   for (const [name, dir] of Object.entries(PKG_DIRS)) {
     copyTree(path.join(VENDOR, dir), path.join(tmp, 'node_modules', name));
   }
-  const mod = await import(pathToFileURL(path.join(tmp, 'node_modules', 'age-encryption', 'dist', 'index.js')).href);
-  return { age: mod, tmp };
+  const nm = (p) => pathToFileURL(path.join(tmp, 'node_modules', p)).href;
+  const mod = await import(nm('age-encryption/dist/index.js'));
+  // 介面自組 scrypt 段落時要用的三樣，跟 agecrypt.js 的 lib() 拿的是同一批檔案
+  const scryptMod = await import(nm('@noble/hashes/scrypt.js'));
+  const chachaMod = await import(nm('@noble/ciphers/chacha.js'));
+  const baseMod = await import(nm('@scure/base/index.js'));
+  const deps = { Stanza: mod.Stanza, scryptAsync: scryptMod.scryptAsync, chacha20poly1305: chachaMod.chacha20poly1305, base64nopad: baseMod.base64nopad };
+  return { age: mod, deps, tmp };
 }
 
 // ---------------------------------------------------------------------------
@@ -285,8 +291,60 @@ test('取樣沒有取模偏差，抽出來的都是詞表裡的字', () => {
 
 test('scrypt 工作因數用 age 命令列的預設值，不偷降', () => {
   assert.equal(tool.SCRYPT_LOG2_N, 18);
-  assert.ok(/setScryptWorkFactor\(SCRYPT_LOG2_N\)/.test(code), '介面沒有把工作因數傳給 typage');
+  assert.ok(/addRecipient\(scryptRecipient\(deps, passphrase, SCRYPT_LOG2_N/.test(code), '介面沒有把工作因數交給自組的收件人');
+  assert.ok(/addIdentity\(scryptIdentity\(deps, passphrase/.test(code), '解密沒有走自組的身分');
   assert.ok(/import\("age-encryption"\)/.test(code), '介面要用 import map 裡的入口名稱載入');
+});
+
+test('scrypt 走非同步版本，介面不再碰 typage 內建的同步密語模式', () => {
+  // 2026-09-03 IronFox（預設關 JIT）上同步 scrypt 一次 50 秒，主執行緒整段卡住。
+  // 之後的規則：scrypt 只能經由 scryptAsync，setPassphrase 與 addPassphrase 都不准出現。
+  assert.ok(/scryptAsync/.test(code), '沒有用 scryptAsync');
+  assert.ok(!/setPassphrase\(|addPassphrase\(|setScryptWorkFactor\(/.test(code), '介面又走回 typage 的同步 scrypt');
+  assert.ok(/onProgress/.test(src.slice(start, end)), '收件人與身分要把進度回報接出去');
+});
+
+test('scrypt 在 module worker 裡算，worker 用相對路徑載入 vendor 的 noble scrypt，三語系與離線清單都有', () => {
+  // noble 的 scryptAsync 只用 microtask 讓步，關 JIT 的 Firefox 實測主執行緒照樣卡 48 秒。
+  // 只有 worker 才讓轉圈與進度畫得出來。
+  const workerPath = path.join(DOCS, 'zh-TW', 'js', 'agecrypt-worker.js');
+  const w = fs.readFileSync(workerPath, 'utf8');
+  const m = w.match(/import \{ scrypt \} from "([^"]+)"/);
+  assert.ok(m, 'worker 沒有載入 scrypt');
+  assert.equal(fs.realpathSync(path.resolve(path.dirname(workerPath), m[1])), fs.realpathSync(path.join(VENDOR, 'noble-hashes', 'scrypt.js')), 'worker 載入的不是 vendor 那一份');
+  assert.ok(/onProgress/.test(w) && /postMessage\(\{ id: job\.id, progress/.test(w), 'worker 沒有回報進度');
+  assert.ok(/postMessage\(\{ id: job\.id, error/.test(w), 'worker 出錯沒有回報');
+  assert.ok(/new Worker\(new URL\("agecrypt-worker\.js", scriptUrl\), \{ type: "module" \}\)/.test(code), '主程式沒有用 module worker');
+  assert.ok(/scryptAsync: makeScrypt\(scryptMod\.scryptAsync\)/.test(code), '收件人與身分拿到的要是先試 worker 的那一個');
+  assert.ok(/return scryptAsync\(passphrase, salt, params\)/.test(code), 'worker 起不來沒有退路');
+  for (const lang of ['en', 'zh-CN']) {
+    const link = path.join(DOCS, lang, 'js', 'agecrypt-worker.js');
+    assert.ok(fs.lstatSync(link).isSymbolicLink(), `${lang} 的 worker 不是 symlink`);
+    assert.equal(fs.realpathSync(link), fs.realpathSync(workerPath));
+    assert.ok(fs.existsSync(path.resolve(path.join(DOCS, lang, 'js'), m[1])), `${lang} 底下 worker 的相對路徑解不到 vendor`);
+  }
+  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
+    const fm = frontmatter(fs.readFileSync(path.join(DOCS, lang, 'utils', 'age.md'), 'utf8'));
+    assert.ok(/^\s*- js\/agecrypt-worker\.js$/m.test(fm), `${lang} 的 offline_assets 少了 worker`);
+  }
+});
+
+test('校準與估時的算術：小工作因數量一次，推到 2^18，加密含比對算兩趟', () => {
+  assert.equal(tool.CALIBRATE_LOG2_N, 12);
+  assert.equal(tool.SCRYPT_MAX_LOG2_N, 20);
+  assert.equal(tool.SLOW_MS, 20000);
+  // 桌機關 JIT 實測：2^12 約 800 ms，推到 2^18 是 51.2 秒
+  assert.equal(tool.estimateMs(800, 12, 18), 51200);
+  assert.equal(tool.estimateMs(14, 12, 18), 896);
+  assert.equal(tool.plannedMs(51200, 'encrypt', true), 102400);
+  assert.equal(tool.plannedMs(51200, 'encrypt', false), 51200);
+  assert.equal(tool.plannedMs(51200, 'decrypt', true), 51200);
+  // 有 JIT 的手機：一次約 3 秒，兩趟 6 秒，不會被問
+  assert.ok(tool.plannedMs(3000, 'encrypt', true) < tool.SLOW_MS);
+  // 關 JIT 的桌機會被問，答應之後只做一趟
+  assert.ok(tool.plannedMs(51200, 'encrypt', true) > tool.SLOW_MS);
+  assert.ok(/plannedMs\(perScrypt, mode, true\) > SLOW_MS/.test(code), '介面的門檻沒有照 plannedMs 判斷');
+  assert.ok(/const verify = mode === "encrypt" && !state\.slowAccepted/.test(code), '答應等的慢環境才省略比對，其他情況都要比對');
 });
 
 // ---------------------------------------------------------------------------
@@ -335,6 +393,59 @@ test('密語錯了兩邊都拒絕，改一個位元組也拒絕', async () => {
   await assert.rejects(d2.decrypt(new Uint8Array(tampered), 'uint8array'));
 });
 
+test('自組的非同步 scrypt 收件人：typage 的密語模式與獨立實作都解得開，進度回報到 100%', async () => {
+  const { age, deps } = typage;
+  for (const size of [0, 1000, 65537]) {
+    const plain = crypto.randomBytes(size);
+    const seen = [];
+    const e = new age.Encrypter();
+    e.addRecipient(tool.scryptRecipient(deps, 'six words of passphrase here', 12, (r) => seen.push(r)));
+    const out = Buffer.from(await e.encrypt(new Uint8Array(plain)));
+    assert.ok(nodeAgeDecrypt(out, 'six words of passphrase here').equals(plain), `${size} 位元組獨立實作解回來不一樣`);
+    const d = new age.Decrypter();
+    d.addPassphrase('six words of passphrase here');
+    assert.ok(Buffer.from(await d.decrypt(new Uint8Array(out), 'uint8array')).equals(plain), `${size} 位元組 typage 解回來不一樣`);
+    assert.ok(seen.length > 10 && seen[seen.length - 1] === 1, '進度沒有回報到 1');
+    assert.ok(seen.every((v, i) => i === 0 || v >= seen[i - 1]), '進度倒退');
+  }
+});
+
+test('自組的非同步 scrypt 身分：解得開 typage 與獨立實作的輸出，密語錯了回 null', async () => {
+  const { age, deps } = typage;
+  const plain = crypto.randomBytes(5000);
+  const fromTypage = (() => { const e = new age.Encrypter(); e.setPassphrase('pw one'); e.setScryptWorkFactor(12); return e.encrypt(new Uint8Array(plain)); })();
+  const fromNode = nodeAgeEncrypt(plain, 'pw two', 12);
+  for (const [file, pw] of [[Buffer.from(await fromTypage), 'pw one'], [fromNode, 'pw two']]) {
+    const d = new age.Decrypter();
+    d.addIdentity(tool.scryptIdentity(deps, pw));
+    assert.ok(Buffer.from(await d.decrypt(new Uint8Array(file), 'uint8array')).equals(plain));
+    const wrong = new age.Decrypter();
+    wrong.addIdentity(tool.scryptIdentity(deps, 'nope'));
+    await assert.rejects(wrong.decrypt(new Uint8Array(file), 'uint8array'), /no identity matched/);
+  }
+});
+
+test('自組身分的檢查跟 typage 一致：多一個段落、鹽長度不對、工作因數太高、格式不對都拒絕', async () => {
+  const { deps } = typage;
+  const body = new Uint8Array(32);
+  const salt = deps.base64nopad.encode(new Uint8Array(16));
+  const ok = new deps.Stanza(['scrypt', salt, '12'], body);
+  const id = tool.scryptIdentity(deps, 'pw');
+  await assert.rejects(id.unwrapFileKey([ok, new deps.Stanza(['X25519', 'abc'], body)]), /not the only one/);
+  await assert.rejects(id.unwrapFileKey([new deps.Stanza(['scrypt', salt], body)]), /invalid scrypt stanza/);
+  await assert.rejects(id.unwrapFileKey([new deps.Stanza(['scrypt', salt, '012'], body)]), /invalid scrypt stanza/);
+  await assert.rejects(id.unwrapFileKey([new deps.Stanza(['scrypt', deps.base64nopad.encode(new Uint8Array(10)), '12'], body)]), /invalid scrypt stanza/);
+  await assert.rejects(id.unwrapFileKey([new deps.Stanza(['scrypt', salt, '21'], body)]), /too high/);
+  await assert.rejects(id.unwrapFileKey([new deps.Stanza(['scrypt', salt, '12'], new Uint8Array(31))]), /invalid stanza/);
+  // 不是 scrypt 的段落一律跳過，回 null 讓 typage 去報「沒有身分對上」
+  assert.equal(await id.unwrapFileKey([new deps.Stanza(['X25519', 'abc'], body)]), null);
+  // 鹽的組法：固定標籤接 16 位元組
+  const s = tool.scryptSalt(new Uint8Array(16).fill(7));
+  assert.equal(Buffer.from(s.subarray(0, 28)).toString(), 'age-encryption.org/v1/scrypt');
+  assert.equal(s.length, 28 + 16);
+  assert.equal(tool.SCRYPT_LABEL, 'age-encryption.org/v1/scrypt');
+});
+
 test('typage 的輸出符合規格的形狀：版本行、單一 scrypt 段落、工作因數、MAC 行', async () => {
   const e = new typage.age.Encrypter();
   e.setPassphrase('pw');
@@ -345,6 +456,14 @@ test('typage 的輸出符合規格的形狀：版本行、單一 scrypt 段落�
   assert.ok(/^-> scrypt [A-Za-z0-9+/]{22} 12$/.test(head[1]), head[1]);
   assert.ok(/^[A-Za-z0-9+/]{43}$/.test(head[2]), head[2]);
   assert.ok(/^--- [A-Za-z0-9+/]{43}$/.test(head[3]), head[3]);
+  // 自組收件人的輸出形狀一模一樣
+  const e2 = new typage.age.Encrypter();
+  e2.addRecipient(tool.scryptRecipient(typage.deps, 'pw', 12));
+  const head2 = Buffer.from(await e2.encrypt(new Uint8Array([1, 2, 3]))).toString('latin1').split('\n');
+  assert.equal(head2[0], 'age-encryption.org/v1');
+  assert.ok(/^-> scrypt [A-Za-z0-9+/]{22} 12$/.test(head2[1]), head2[1]);
+  assert.ok(/^[A-Za-z0-9+/]{43}$/.test(head2[2]), head2[2]);
+  assert.ok(/^--- [A-Za-z0-9+/]{43}$/.test(head2[3]), head2[3]);
 });
 
 // ---------------------------------------------------------------------------
@@ -369,6 +488,8 @@ test('頁面的 import map 涵蓋每一個 bare specifier，指到的檔案都�
       assert.equal(fs.realpathSync(target), fs.realpathSync(full), `${lang} 的 ${spec} 指錯檔案`);
     }
     for (const spec of Object.keys(map)) assert.ok(bare.has(spec), `${lang} 的 import map 多了沒人用的 ${spec}`);
+    // agecrypt.js 自己 import 的名稱也要在 map 裡，少一條是頁面上才炸
+    for (const m2 of code.matchAll(/import\("([^"]+)"\)/g)) assert.ok(map[m2[1]], `${lang} 的 import map 少了介面用到的 ${m2[1]}`);
   }
 });
 
@@ -423,10 +544,13 @@ test('原始碼裡除了抓詞表之外沒有網路請求，也沒有任何留�
   assert.ok(!/passphrase\s*[,)]?\s*\}?\)?\s*=>?\s*location|location\.(hash|search)\s*=/.test(code));
 });
 
-test('加密完先解回來比對，不一致就不給下載', () => {
+test('加密完先解回來比對，不一致就不給下載。只有讀者答應等的慢環境才省略', () => {
   assert.ok(/decrypter\.decrypt\(output/.test(code), '沒有把輸出解回來');
   assert.ok(/throw new Error\("verify"\)/.test(code), '比對不一致沒有攔下');
+  assert.ok(/if \(verify\) \{/.test(code), '比對要由 verify 決定');
+  assert.ok(/verified: verify/.test(code), '結果要記得有沒有比對過，文案才分得出來');
   assert.ok(code.includes('anoni-spinner') && code.includes('aria-busy'));
+  assert.ok(code.includes('ag-progress'), '等待期間要有進度');
 });
 
 test('三個語系的字串表結構一致', () => {

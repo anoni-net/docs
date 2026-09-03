@@ -25,6 +25,18 @@
  * scrypt 的工作因數用 age 命令列的預設值 2^18。手機上要幾秒，按鈕會轉圈。
  * 不偷降：降了檔案照樣能被別的實作解開，但猜密語也變快。
  *
+ * scrypt 不在主執行緒上算。2026-09-03 在 GrapheneOS 的 IronFox 上發現工具像當掉：
+ * IronFox 預設關閉 JavaScript 的 JIT（Tor Browser 的「較安全」等級也關），純 JS 的 scrypt
+ * 慢五十倍以上，桌機實測一次 2^18 從 0.9 秒變 50 秒，而 typage 內建的同步 scrypt 把主執行緒
+ * 整段占住，轉圈不會動、點什麼都沒反應。noble 的 scryptAsync 也救不了，它只用 microtask
+ * 讓步，畫面一樣進不來，headless Firefox 關 JIT 實測往返 48 秒。所以這裡照 typage 的
+ * ScryptRecipient 與 ScryptIdentity 重做一份收件人與身分物件，格式一個位元組都不差，
+ * 只把 scrypt 換成送進 agecrypt-worker.js 算，主執行緒只等訊息與進度。typage 允許自訂
+ * 這兩種物件，vendor 不用動。worker 起不來就退回主執行緒的 scryptAsync，慢但能用。
+ *
+ * 第一次按下時先量一次 2^12 推算整趟要多久，超過二十秒就先把預估時間與原因顯示出來，
+ * 讓讀者決定要不要等。決定要等的話省略解回比對那一趟，時間減半。快的環境維持比對。
+ *
  * 密語不存、不送、不記。重新整理就沒了。「抽一組密語」用的是 Asian Diceware 的詞表，
  * 跟密語產生器同一份，取樣方式也相同（拒絕重抽，理由見 passphrase.js）。
  *
@@ -34,6 +46,9 @@
  */
 (function () {
   "use strict";
+
+  // worker 的網址從這一支自己的網址推，三個語系的 js/ 都是 symlink 指向同一份
+  const scriptUrl = (document.currentScript && document.currentScript.src) || new URL("../../js/agecrypt.js", location.href).href;
 
   // --- 純邏輯（tools/test_agecrypt.mjs 從這裡原地抽出來測）---
 
@@ -49,6 +64,16 @@
 
   // 密語的詞數建議。六個詞是 77 bits，理由寫在 asian-diceware.md。
   const WORDS_SUGGESTED = 6;
+
+  // scrypt 段落的規格，跟 typage 的 ScryptRecipient 與 ScryptIdentity 逐項對齊
+  const SCRYPT_LABEL = "age-encryption.org/v1/scrypt";
+  const SCRYPT_MAX_LOG2_N = 20;
+
+  // 校準用的工作因數，成本是 2^18 的 1/64。有 JIT 十幾毫秒，沒有 JIT 接近一秒。
+  const CALIBRATE_LOG2_N = 12;
+
+  // 整趟預估超過這個毫秒數就先問過讀者。有 JIT 的手機兩趟加起來十秒內，碰不到。
+  const SLOW_MS = 20000;
 
   function asciiPrefix(bytes, length) {
     let text = "";
@@ -88,6 +113,71 @@
       out.push(words[randomBelow(words.length, randomUint32)]);
     }
     return out;
+  }
+
+  // scrypt 的鹽是固定標籤接上段落裡那 16 位元組
+  function scryptSalt(salt) {
+    const label = new TextEncoder().encode(SCRYPT_LABEL);
+    const out = new Uint8Array(label.length + salt.length);
+    out.set(label);
+    out.set(salt, label.length);
+    return out;
+  }
+
+  // 量過一個小的工作因數，推算大的。scrypt 的時間跟 N 成正比。
+  function estimateMs(sampleMs, sampleLog2N, targetLog2N) {
+    return sampleMs * Math.pow(2, targetLog2N - sampleLog2N);
+  }
+
+  // 整趟要幾次 scrypt：加密一次，解回比對再一次，解密一次
+  function plannedMs(perScryptMs, mode, verify) {
+    return perScryptMs * (mode === "encrypt" && verify ? 2 : 1);
+  }
+
+  function scryptParams(logN, onProgress) {
+    const params = { N: Math.pow(2, logN), r: 8, p: 1, dkLen: 32 };
+    if (onProgress) params.onProgress = onProgress;
+    return params;
+  }
+
+  // typage 的 Encrypter.addRecipient 接受自訂物件，這裡照它的 ScryptRecipient 重做一份，
+  // 輸出的段落逐位元組相同，差別只在 scrypt 用非同步版本。deps 由介面從 vendor 載入後傳進來。
+  function scryptRecipient(deps, passphrase, logN, onProgress) {
+    return {
+      async wrapFileKey(fileKey) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const key = await deps.scryptAsync(passphrase, scryptSalt(salt), scryptParams(logN, onProgress));
+        const body = deps.chacha20poly1305(key, new Uint8Array(12)).encrypt(fileKey);
+        return [new deps.Stanza(["scrypt", deps.base64nopad.encode(salt), String(logN)], body)];
+      },
+    };
+  }
+
+  // 對應 Decrypter.addIdentity。檢查條件跟 typage 的 ScryptIdentity 一樣：scrypt 段落
+  // 必須是唯一的段落，鹽 16 位元組，工作因數不超過上限，密語不對就回 null。
+  function scryptIdentity(deps, passphrase, onProgress) {
+    return {
+      async unwrapFileKey(stanzas) {
+        for (let i = 0; i < stanzas.length; i += 1) {
+          const s = stanzas[i];
+          if (s.args.length < 1 || s.args[0] !== "scrypt") continue;
+          if (stanzas.length !== 1) throw new Error("scrypt recipient is not the only one in the header");
+          if (s.args.length !== 3 || !/^[1-9][0-9]*$/.test(s.args[2])) throw new Error("invalid scrypt stanza");
+          const salt = deps.base64nopad.decode(s.args[1]);
+          if (salt.length !== 16) throw new Error("invalid scrypt stanza");
+          const logN = Number(s.args[2]);
+          if (logN > SCRYPT_MAX_LOG2_N) throw new Error("scrypt work factor is too high");
+          if (s.body.length !== 32) throw new Error("invalid stanza");
+          const key = await deps.scryptAsync(passphrase, scryptSalt(salt), scryptParams(logN, onProgress));
+          try {
+            return deps.chacha20poly1305(key, new Uint8Array(12)).decrypt(s.body);
+          } catch (err) {
+            return null;
+          }
+        }
+        return null;
+      },
+    };
   }
 
   // --- 介面 ---
@@ -145,6 +235,11 @@
       border-left: .15rem solid #c62828; padding: .1rem 0 .1rem .6rem;
       margin: .8rem 0; font-size: .74rem; line-height: 1.7;
     }
+    #age-tool .ag-slow {
+      border-left: .15rem solid #ef6c00; padding: .1rem 0 .1rem .6rem;
+      margin: .8rem 0; font-size: .74rem; line-height: 1.7;
+    }
+    #age-tool .ag-progress { font-variant-numeric: tabular-nums; }
     #age-tool .ag-hint { font-size: .7rem; opacity: .75; line-height: 1.7; margin: .3rem 0 0; }
     #age-tool .ag-note { font-size: .7rem; opacity: .75; line-height: 1.7; margin: .8rem 0 0; }
     @media (pointer: coarse) { #age-tool button, #age-tool a.ag-dl { min-height: 2.2rem; } }
@@ -170,7 +265,13 @@
       decrypt: "解密並下載",
       working: "處理中，密語要先經過 scrypt 拉長運算，手機上要幾秒",
       encrypted: "加密完成，已用同一組密語解回來比對，跟原檔一致。",
+      encryptedNoVerify: "加密完成。這個環境慢，省略了解回比對那一趟。",
       decrypted: "解開了。",
+      slow: "這個瀏覽器算 scrypt 很慢，預估要 {time}。多半是關掉了 JavaScript 的 JIT：IronFox 預設關閉，可在設定的 Security 開啟。Tor Browser 的「較安全」等級也會關。繼續的話加密會省略解回比對那一趟，期間頁面照常能操作。",
+      slowGo: "還是繼續，約 {time}",
+      progress: "scrypt 第 {pass}/{passes} 趟，{percent}%",
+      seconds: "{n} 秒",
+      minutes: "{n} 分鐘",
       download: "下載 {name}",
       sizeLine: "原始 {a}，輸出 {b}",
       another: "換一個檔案",
@@ -201,7 +302,13 @@
       decrypt: "解密并下载",
       working: "处理中，密语要先经过 scrypt 拉长运算，手机上要几秒",
       encrypted: "加密完成，已用同一组密语解回来比对，跟原文件一致。",
+      encryptedNoVerify: "加密完成。这个环境慢，省略了解回比对那一趟。",
       decrypted: "解开了。",
+      slow: "这个浏览器算 scrypt 很慢，预估要 {time}。多半是关掉了 JavaScript 的 JIT：IronFox 默认关闭，可在设置的 Security 开启。Tor Browser 的「较安全」等级也会关。继续的话加密会省略解回比对那一趟，期间页面照常能操作。",
+      slowGo: "还是继续，约 {time}",
+      progress: "scrypt 第 {pass}/{passes} 趟，{percent}%",
+      seconds: "{n} 秒",
+      minutes: "{n} 分钟",
       download: "下载 {name}",
       sizeLine: "原始 {a}，输出 {b}",
       another: "换一个文件",
@@ -232,7 +339,13 @@
       decrypt: "Decrypt and download",
       working: "Working. The passphrase goes through scrypt first, which takes a few seconds on a phone",
       encrypted: "Encrypted, and decrypted again with the same passphrase to check: it matches the original.",
+      encryptedNoVerify: "Encrypted. This environment is slow, so the decrypt-and-compare pass was skipped.",
       decrypted: "Decrypted.",
+      slow: "scrypt is slow in this browser: about {time} expected. Usually the JavaScript JIT is off. IronFox turns it off by default (Settings, Security), and Tor Browser's Safer level does too. If you go on, encryption skips the decrypt-and-compare pass. The page stays usable meanwhile.",
+      slowGo: "Go on anyway, about {time}",
+      progress: "scrypt pass {pass}/{passes}, {percent}%",
+      seconds: "{n} s",
+      minutes: "{n} min",
       download: "Download {name}",
       sizeLine: "Original {a}, output {b}",
       another: "Another file",
@@ -275,23 +388,123 @@
     drawn: null,
     words: null,     // null 還沒抓、false 抓失敗、陣列抓到了
     drawing: false,
+    perScryptMs: null,   // 校準結果：一次 2^18 預估幾毫秒，整頁只量一次
+    slow: null,          // 等讀者決定時放預估毫秒數，其餘時候 null
+    slowAccepted: false, // 讀者答應等過一次，之後不再問，也不再解回比對
   };
+
+  function humanTime(ms) {
+    const seconds = Math.ceil(ms / 1000);
+    if (seconds < 90) return fill(t.seconds, { n: seconds });
+    return fill(t.minutes, { n: Math.ceil(seconds / 60) });
+  }
 
   function releaseResult() {
     if (state.result && state.result.url) URL.revokeObjectURL(state.result.url);
     state.result = null;
   }
 
-  // typage 經由頁面的 import map 載入，路徑在 vendor/age/ 底下
+  // typage 與它相依的 noble、scure 經由頁面的 import map 載入，路徑在 vendor/age/ 底下。
+  // scrypt 收件人自己組，所以除了入口還要拿非同步 scrypt、ChaCha20-Poly1305 與 base64。
   let libPromise = null;
   function lib() {
     if (!libPromise) {
-      libPromise = import("age-encryption").catch((err) => {
+      libPromise = Promise.all([
+        import("age-encryption"),
+        import("@noble/hashes/scrypt.js"),
+        import("@noble/ciphers/chacha.js"),
+        import("@scure/base"),
+      ]).then(([age, scryptMod, chachaMod, baseMod]) => ({
+        age: age,
+        deps: {
+          Stanza: age.Stanza,
+          scryptAsync: makeScrypt(scryptMod.scryptAsync),
+          chacha20poly1305: chachaMod.chacha20poly1305,
+          base64nopad: baseMod.base64nopad,
+        },
+      })).catch((err) => {
         libPromise = null;
         throw err;
       });
     }
     return libPromise;
+  }
+
+  // scrypt 送進 worker 算，主執行緒只等訊息，轉圈與進度才畫得出來。worker 起不來
+  // （舊瀏覽器、被擋）就退回主執行緒的 scryptAsync，慢但至少能用。
+  let worker = null;
+  let workerBroken = false;
+  let workerSeq = 0;
+  const workerJobs = new Map();
+
+  function failWorkerJobs() {
+    workerJobs.forEach((job) => job.reject(new Error("worker")));
+    workerJobs.clear();
+    worker = null;
+    workerBroken = true;
+  }
+
+  function workerScrypt(passphrase, salt, params) {
+    return new Promise((resolve, reject) => {
+      if (!worker) {
+        try {
+          worker = new Worker(new URL("agecrypt-worker.js", scriptUrl), { type: "module" });
+        } catch (err) {
+          workerBroken = true;
+          reject(new Error("worker"));
+          return;
+        }
+        worker.addEventListener("message", (event) => {
+          const job = workerJobs.get(event.data.id);
+          if (!job) return;
+          if (event.data.progress !== undefined) {
+            if (job.onProgress) job.onProgress(event.data.progress);
+            return;
+          }
+          workerJobs.delete(event.data.id);
+          if (event.data.error) job.reject(new Error(event.data.error));
+          else job.resolve(event.data.key);
+        });
+        worker.addEventListener("error", failWorkerJobs);
+      }
+      const id = ++workerSeq;
+      workerJobs.set(id, { resolve: resolve, reject: reject, onProgress: params.onProgress });
+      worker.postMessage({ id: id, passphrase: passphrase, salt: salt, N: params.N, r: params.r, p: params.p, dkLen: params.dkLen });
+    });
+  }
+
+  // 收件人與身分物件拿到的 scryptAsync 就是這一個：先試 worker，不行才在主執行緒算
+  function makeScrypt(scryptAsync) {
+    return (passphrase, salt, params) => {
+      if (workerBroken || typeof Worker === "undefined") return scryptAsync(passphrase, salt, params);
+      return workerScrypt(passphrase, salt, params).catch((err) => {
+        if (err && err.message === "worker") return scryptAsync(passphrase, salt, params);
+        throw err;
+      });
+    };
+  }
+
+  // 第一次按下時量一次 2^12 推算 2^18。JIT 關掉的瀏覽器在這一步就看得出來，
+  // 不必讓讀者卡五十秒才知道。
+  async function calibrate(deps) {
+    if (state.perScryptMs === null) {
+      const t0 = performance.now();
+      await deps.scryptAsync("calibrate", scryptSalt(new Uint8Array(16)), scryptParams(CALIBRATE_LOG2_N, null));
+      state.perScryptMs = estimateMs(performance.now() - t0, CALIBRATE_LOG2_N, SCRYPT_LOG2_N);
+    }
+    return state.perScryptMs;
+  }
+
+  // noble 每千分之一就回報一次，只在百分比變了才動 DOM
+  function reportProgress(pass, passes) {
+    let shown = -1;
+    return (ratio) => {
+      const percent = Math.floor(ratio * 100);
+      if (percent === shown) return;
+      shown = percent;
+      const node = root.querySelector(".ag-progress");
+      if (node) node.textContent = fill(t.progress, { pass: pass, passes: passes, percent: percent });
+    };
   }
 
   const randomUint32 = () => {
@@ -361,33 +574,47 @@
     state.working = true;
     render();
     await new Promise((next) => setTimeout(next, 0));
-    let age;
+    let loaded;
     try {
-      age = await lib();
+      loaded = await lib();
     } catch (err) {
       state.working = false;
       state.error = "libMissing";
       render();
       return;
     }
+    const age = loaded.age;
+    const deps = loaded.deps;
     const passphrase = state.passphrase;
+    const mode = state.file.mode;
+    const perScrypt = await calibrate(deps);
+    // 慢的環境先問過再開始。答應過一次就不再問，並省略解回比對那一趟。
+    if (!state.slowAccepted && plannedMs(perScrypt, mode, true) > SLOW_MS) {
+      state.working = false;
+      state.slow = plannedMs(perScrypt, mode, false);
+      render();
+      return;
+    }
+    const verify = mode === "encrypt" && !state.slowAccepted;
+    const passes = verify ? 2 : 1;
     try {
       let output;
-      if (state.file.mode === "encrypt") {
+      if (mode === "encrypt") {
         const encrypter = new age.Encrypter();
-        encrypter.setPassphrase(passphrase);
-        encrypter.setScryptWorkFactor(SCRYPT_LOG2_N);
+        encrypter.addRecipient(scryptRecipient(deps, passphrase, SCRYPT_LOG2_N, reportProgress(1, passes)));
         output = await encrypter.encrypt(state.file.bytes);
-        // 交出去之前自己解回來比對。比對的是雜湊，兩份一起留在記憶體裡太占。
-        const decrypter = new age.Decrypter();
-        decrypter.addPassphrase(passphrase);
-        const back = await decrypter.decrypt(output, "uint8array");
-        if (!sameBytes(await sha256(back), await sha256(state.file.bytes))) {
-          throw new Error("verify");
+        if (verify) {
+          // 交出去之前自己解回來比對。比對的是雜湊，兩份一起留在記憶體裡太占。
+          const decrypter = new age.Decrypter();
+          decrypter.addIdentity(scryptIdentity(deps, passphrase, reportProgress(2, passes)));
+          const back = await decrypter.decrypt(output, "uint8array");
+          if (!sameBytes(await sha256(back), await sha256(state.file.bytes))) {
+            throw new Error("verify");
+          }
         }
       } else {
         const decrypter = new age.Decrypter();
-        decrypter.addPassphrase(passphrase);
+        decrypter.addIdentity(scryptIdentity(deps, passphrase, reportProgress(1, 1)));
         try {
           output = await decrypter.decrypt(state.file.bytes, "uint8array");
         } catch (err) {
@@ -397,8 +624,9 @@
       const blob = new Blob([output], { type: "application/octet-stream" });
       state.result = {
         url: URL.createObjectURL(blob),
-        name: outputName(state.file.name, state.file.mode),
+        name: outputName(state.file.name, mode),
         size: blob.size,
+        verified: verify,
       };
     } catch (err) {
       const reason = err && err.message;
@@ -473,7 +701,7 @@
       if (hint) hint.hidden = !isShort(state.passphrase);
     });
     input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") run();
+      if (event.key === "Enter" && state.slow === null) run();
     });
     row.appendChild(input);
     row.appendChild(button(state.show ? t.hide : t.show, null, () => {
@@ -510,8 +738,20 @@
       box.appendChild(short);
     }
 
+    if (state.slow !== null) {
+      box.appendChild(el("p", "ag-slow", fill(t.slow, { time: humanTime(state.slow) })));
+    }
+
     const actions = el("div", "ag-actions ag-row");
-    const primary = button(state.working ? "" : (file.mode === "decrypt" ? t.decrypt : t.encrypt), "ag-primary", run);
+    let primaryLabel = file.mode === "decrypt" ? t.decrypt : t.encrypt;
+    if (state.slow !== null) primaryLabel = fill(t.slowGo, { time: humanTime(state.slow) });
+    const primary = button(state.working ? "" : primaryLabel, "ag-primary", () => {
+      if (state.slow !== null) {
+        state.slowAccepted = true;
+        state.slow = null;
+      }
+      run();
+    });
     if (state.working) {
       // 轉圈用全站共用的那顆，樣式定義在 overrides/base.html。scrypt 在手機上要幾秒，
       // 按鈕沒有變化的話讀者會以為沒按到而重複按。
@@ -529,18 +769,22 @@
       state.passphrase = "";
       state.drawn = null;
       state.error = null;
+      state.slow = null;
       render();
     });
     another.disabled = state.working;
     actions.appendChild(another);
     box.appendChild(actions);
+    if (state.working) {
+      box.appendChild(el("p", "ag-progress ag-hint", ""));
+    }
 
     if (state.error) {
       box.appendChild(el("p", "ag-error", fill(t.errors[state.error] || t.errors.broken, { limit: humanSize(MAX_BYTES) })));
     }
     if (state.result) {
       const result = el("div", "ag-result");
-      result.appendChild(el("p", null, file.mode === "decrypt" ? t.decrypted : t.encrypted));
+      result.appendChild(el("p", null, file.mode === "decrypt" ? t.decrypted : (state.result.verified ? t.encrypted : t.encryptedNoVerify)));
       result.appendChild(el("p", null, fill(t.sizeLine, { a: humanSize(file.size), b: humanSize(state.result.size) })));
       const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
       link.href = state.result.url;

@@ -8,6 +8,7 @@ offline_assets:
   # they are listed here one by one for offline copies. tools/test_agecrypt.mjs checks the
   # list against the vendor directory.
   - utils/asian-diceware-7776.txt
+  - js/agecrypt-worker.js
   - utils/vendor/age/age-encryption/dist/armor.js
   - utils/vendor/age/age-encryption/dist/cbor.js
   - utils/vendor/age/age-encryption/dist/format.js
@@ -86,7 +87,7 @@ offline_assets:
 
 1. Drop a file in, or click to choose one. The tool reads the start of the file to decide: an age file gets decrypted, anything else gets encrypted.
 2. Type a passphrase. When encrypting, "Draw a passphrase" picks six words from the Asian Diceware list. Write it down. It is gone when you close the page.
-3. Press "Encrypt and download". The page decrypts the output again with the same passphrase and checks it against the original before offering the download. The file name is the original with `.age` added. Decrypting removes the `.age`.
+3. Press "Encrypt and download". The page decrypts the output again with the same passphrase and checks it against the original before offering the download. The file name is the original with `.age` added. Decrypting removes the `.age`. In a slow environment the page shows an estimate first and lets you decide. If you go on, the check pass is skipped.
 
 The output is a standard age file. Any computer with the command-line tool opens it, without this site:
 
@@ -106,6 +107,7 @@ This page does passphrase mode only, so there are no keys to manage, at the cost
 - The file name is not inside the ciphertext. The output name is the original plus `.age`, visible to anyone. Give backups a name that gives nothing away.
 - Files encrypted to a key (a public key starting with `age1`) cannot be opened here. That needs the private key and the command-line tool.
 - The first use needs a connection to fetch the code. After that it stays on the device.
+- Browsers with the JavaScript JIT off compute scrypt fifty times slower or more. One pass took 50 seconds on a desktop in testing. IronFox turns the JIT off by default (Settings, Security), and Tor Browser's Safer level does too. The tool measures first and shows an estimate. The page stays usable while it works.
 
 ## Works offline
 

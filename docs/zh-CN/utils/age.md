@@ -7,6 +7,7 @@ offline_assets:
   # 接到 vendor/age/ 底下，hooks/offline_index.py 只认 <script src>，所以逐一列在下面，
   # 读者把这一页存下来时才会一起存。清单由 tools/test_agecrypt.mjs 对照 vendor 目录。
   - utils/asian-diceware-7776.txt
+  - js/agecrypt-worker.js
   - utils/vendor/age/age-encryption/dist/armor.js
   - utils/vendor/age/age-encryption/dist/cbor.js
   - utils/vendor/age/age-encryption/dist/format.js
@@ -85,7 +86,7 @@ offline_assets:
 
 1. 把文件拖进来，或点一下选。工具看文件开头决定要做什么：age 文件就解密，其余一律加密。
 2. 输入密语。加密时可以按「抽一组密语」，会从 Asian Diceware 词表抽六个词，抄下来，关掉页面就没了。
-3. 按「加密并下载」。页面会用同一组密语把输出解回来比对，一致才给下载，文件名是原文件名加 `.age`。解密时文件名去掉 `.age`。
+3. 按「加密并下载」。页面会用同一组密语把输出解回来比对，一致才给下载，文件名是原文件名加 `.age`。解密时文件名去掉 `.age`。环境太慢时会先告诉你预估时间，由你决定要不要等，等的话省略比对那一趟。
 
 输出是标准的 age 格式，任何装了命令行工具的电脑都能解开，不需要这个网站：
 
@@ -105,6 +106,7 @@ age 是什么、格式长什么样、跟 PGP 差在哪，见[什么是 age](../t
 - 文件名不在密文里，输出文件名是原文件名加 `.age`，别人会看到。备份取一个不透露内容的文件名。
 - 用密钥（`age1` 开头的公钥）加密的文件需要对应的私钥，工具无法处理，用命令行工具解。
 - 第一次使用需要联网把程序抓回来，之后会留在设备上。
+- 关掉 JavaScript JIT 的浏览器算 scrypt 慢五十倍以上，桌机实测一次要 50 秒。IronFox 默认关闭，可在设置的 Security 开启。Tor Browser 的「较安全」等级也会关。工具会先量一次再告诉你预估时间，期间页面照常能操作。
 
 ## 离线可用
 
