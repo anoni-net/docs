@@ -114,7 +114,9 @@ const harness = `
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function corePageAssets\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function corePageAssets\(prefix, index\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function shellAssetsFor\(prefix, index\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function loadOfflineIndex\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const precachedPrefixes = .*$/m)}
   ${grab(/^const VISITS_URL = .*$/m)}
   ${grab(/^async function noteVisit\(prefix\) \{[\s\S]*?\n\}/m)}
@@ -160,6 +162,8 @@ const harness = `
   ${grab(/^const NETWORK_DOWN_TTL_MS = .*$/m)}
   ${grab(/^let networkDownSince = .*$/m)}
   ${grab(/^function networkLooksDown\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const ASSET_TIMEOUT_MS = .*$/m)}
+  ${grab(/^function assetUnavailable\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
@@ -167,6 +171,7 @@ const harness = `
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, LIBRARY_ASSETS, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
+    shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
     libraryEntries, precachedEntries,
@@ -529,6 +534,44 @@ test('同一個語系不會在每次導覽都重跑一輪', async (load) => {
   await sw.precacheFor('en/', true);
   await sw.precacheFor('en/', true);
   assert.equal(fetched.length, 0);
+});
+
+test('每頁都載入的樣式與腳本跟著預快取一起存', async (load) => {
+  // 2026-09-04 之前這批沒有人負責：建置端把每頁都出現的資產從個別頁面移除（讀者
+  // 勾一頁不該揹一份 Vega），而 SHELL_ASSETS 那份手寫清單也沒收。讀者按了「全部存
+  // 到裝置」，兩百多頁的 HTML 一頁不缺，離線打開是白的，因為 stylesheets/extra.css
+  // 是 render-blocking 的。
+  const { sw, fetched } = load({
+    index: { shell: ['stylesheets/extra.css', 'js/analytics.js'], sections: [] },
+  });
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/stylesheets/extra.css'));
+  assert.ok(fetched.includes('/docs/js/analytics.js'));
+});
+
+test('底線那批也要有樣式，離線閱讀頁進得來才看得到東西', async (load) => {
+  // essential 是「連不上網也進得來管理頁」那批。少了每頁共用的樣式，進得來也是白的。
+  const { sw, fetched } = load({
+    index: { shell: ['stylesheets/extra.css'], sections: [] },
+  });
+  await sw.precacheFor('', false);
+  assert.ok(fetched.includes('/docs/stylesheets/extra.css'));
+});
+
+test('shell 跟著語系走，跟頁面同一套路徑規則', async (load) => {
+  const { sw, fetched } = load({
+    index: { shell: ['stylesheets/extra.css'], sections: [] },
+  });
+  await sw.precacheFor('en/', false);
+  assert.ok(fetched.includes('/docs/en/stylesheets/extra.css'));
+  assert.ok(!fetched.includes('/docs/stylesheets/extra.css'));
+});
+
+test('索引沒有 shell 欄位時照樣跑完', async (load) => {
+  // 舊版建置產出的索引沒有這個欄位，讀者的裝置上可能還留著一份
+  const { sw, fetched } = load({ index: { sections: [] } });
+  await sw.precacheFor('', false);
+  assert.ok(fetched.includes('/docs/offline/'));
 });
 
 test('核心章節的內文圖跟著預快取一起下', async (load) => {
@@ -1152,6 +1195,42 @@ test('自動存下內容關掉之後，讀過的頁面不留在裝置上', async
   assert.ok(response.ok);
   const pages = await caches.open(sw.RUNTIME_PAGES);
   assert.equal(await pages.match('/docs/basics/metadata/'), undefined);
+});
+
+test('離線時快取沒有的資產直接收尾，頁面才畫得完', async (load) => {
+  // 冷啟動的第一個導覽已經把網路判成斷的，接下來每個快取沒有的資產都不必再等。
+  // 少了這一條，render-blocking 的樣式會一直掛著，讀者看到的是一片空白。實測在
+  // 連得上但沒有回應的網路底下，四十五秒還沒有任何內容。
+  const { sw } = load({ onLine: false, networkDelay: 200 });
+  const started = Date.now();
+  const response = await sw.staleWhileRevalidate(req('/docs/stylesheets/extra.css'), null);
+  assert.equal(response.status, 504);
+  assert.ok(Date.now() - started < 100, '離線時還在等網路');
+});
+
+test('資產等網路有上限，逾時之後給明確的失敗', async (load) => {
+  // 回 undefined 的話規格上是 network error，Gecko 還會在主控台印一行
+  // 「resolved with non-Response value」，而頁面停在載入中
+  const { sw } = load({ networkDelay: 200, fastTimeout: true });
+  const response = await sw.staleWhileRevalidate(req('/docs/stylesheets/extra.css'), null);
+  assert.equal(response.status, 504);
+});
+
+test('資產在裝置上有一份就先給，不受逾時影響', async (load) => {
+  const { sw, caches } = load({ networkDelay: 200, fastTimeout: true });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/stylesheets/extra.css', 'CSS');
+  const response = await sw.staleWhileRevalidate(req('/docs/stylesheets/extra.css'), null);
+  assert.equal(response, 'CSS');
+});
+
+test('資產抓成功就把離線狀態清掉，讀者接回網路不必自己處理', async (load) => {
+  const { sw } = load({ networkDelay: 5, fastTimeout: true });
+  await sw.staleWhileRevalidate(req('/docs/stylesheets/extra.css'), null);
+  assert.equal(sw.networkLooksDown(), true);
+  // 網路那條照樣在背景跑完，它成功就把狀態清掉
+  await new Promise((resolve) => setTimeout(resolve, 40));
+  assert.equal(sw.networkLooksDown(), false);
 });
 
 test('圖與樣式跟著同一個開關，關掉就不留', async (load) => {

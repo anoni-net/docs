@@ -33,12 +33,24 @@ log = logging.getLogger("mkdocs.hooks.offline_index")
 # 頁面自己引用的資產。存離線副本時只抓 HTML 的話，讀者離線打開會缺圖，而互動類的
 # 頁面（小工具）連跑都跑不起來，它的程式與資料就在這裡面。
 #
-# 抓 <img> 與 <script>。theme 的 CSS 與 JS 不列，那批 app shell 已經在預快取裡。
+# 抓 <img>、<script> 與 <link>。theme 自己那批帶雜湊檔名的 CSS 與 JS 由
+# _ASSET_SKIP_PREFIXES 濾掉，它們寫在 sw.js 的 SHELL_ASSETS 裡。
 _ASSET_PATTERNS = (
     re.compile(r'<img[^>]+src="([^"]+)"'),
     re.compile(r'<script[^>]+src="([^"]+)"'),
 )
 _ASSET_SKIP_PREFIXES = ("assets/javascripts/", "assets/stylesheets/")
+
+# <link> 的 rel 只收這兩種。同一個標籤也用在 canonical、alternate 與 preconnect，
+# 那些指的是頁面或第三方主機，存進離線副本沒有用。
+#
+# 2026-09-04 補上。站台自己的 stylesheets/extra.css 每一頁都載入，而它既不在
+# SHELL_ASSETS 也不在頁面資產裡，兩邊都以為對方負責。那一份是 render-blocking 的，
+# 離線時取不到的話讀者看到的是一片空白，其他資產缺了頂多是破圖。
+_LINK_PATTERN = re.compile(r"<link[^>]*>")
+_LINK_REL = re.compile(r'rel="([^"]+)"')
+_LINK_HREF = re.compile(r'href="([^"]+)"')
+_LINK_RELS = frozenset(("stylesheet", "manifest"))
 
 # 頁面用得到但沒寫在 HTML 標籤裡的東西（例如小工具在 JS 裡 fetch 的字典），
 # 由該頁的 frontmatter 自己宣告：
@@ -53,14 +65,26 @@ _ASSET_META_KEY = "offline_assets"
 def _page_assets(html, url, meta):
     """這一頁引用到的站內資產，回相對於該語系建置根目錄的路徑。"""
     found = set()
+
+    def take(raw):
+        if raw.startswith(("http://", "https://", "//", "data:")):
+            return
+        path = posixpath.normpath(posixpath.join(url, raw)).lstrip("/")
+        if path.startswith(_ASSET_SKIP_PREFIXES):
+            return
+        found.add(path)
+
     for pattern in _ASSET_PATTERNS:
         for raw in pattern.findall(html):
-            if raw.startswith(("http://", "https://", "//", "data:")):
-                continue
-            path = posixpath.normpath(posixpath.join(url, raw)).lstrip("/")
-            if path.startswith(_ASSET_SKIP_PREFIXES):
-                continue
-            found.add(path)
+            take(raw)
+    for tag in _LINK_PATTERN.findall(html):
+        rel = _LINK_REL.search(tag)
+        href = _LINK_HREF.search(tag)
+        if not rel or not href:
+            continue
+        if not (set(rel.group(1).split()) & _LINK_RELS):
+            continue
+        take(href.group(1))
     for declared in (meta or {}).get(_ASSET_META_KEY, []) or []:
         found.add(str(declared).lstrip("/"))
     return sorted(found)
@@ -244,15 +268,20 @@ def on_post_build(config, **kwargs):
     # 每頁都載入的東西不算在個別頁面頭上。目前是 mkdocs-charts-plugin 那組 Vega：
     # 每頁 808 KB，而真正畫圖表的只有三篇。那種東西跟頁面內容無關，讀者勾一頁就
     # 揹一份不合理。門檻取一半，只有真的全站共用才會落進來。
+    #
+    # 它們改寫進索引的 shell 欄位交給 service worker 預快取。2026-09-04 之前這裡
+    # 只是把它們丟掉，而 SHELL_ASSETS 那份手寫清單也沒收，於是每一頁都要的
+    # stylesheets/extra.css 從來沒有進過任何一個快取。讀者按了「全部存到裝置」，
+    # 227 頁的 HTML 一頁不缺，離線打開卻是白的。
     counts = Counter()
     for entry in _pages:
         counts.update(entry["assets"])
     shared = {path for path, n in counts.items() if n > len(_pages) / 2}
     if shared:
         log.info(
-            "offline_index: %d 個資產出現在過半頁面，不列進個別頁面（%s）",
+            "offline_index: %d 個資產每頁都載入，改列進 shell 交給預快取（%s）",
             len(shared),
-            "、".join(sorted(shared)[:3]),
+            "、".join(sorted(shared)),
         )
 
     def asset_size(path):
@@ -348,6 +377,10 @@ def on_post_build(config, **kwargs):
 
     index = {
         "lang": config["theme"]["language"],
+        # 每頁都載入的那批樣式、腳本與 manifest。service worker 把它當 app shell
+        # 的一部分預快取，跟著讀者當下的語系走。清單由建置算出來，sw.js 不再需要
+        # 手寫一份，頁面改了引用什麼這裡就跟著變。
+        "shell": sorted(shared),
         # 每個資產多大。管理頁要算的是「勾這幾頁實際會下載多少」，資產要先去重才
         # 知道，所以給一張全域的表。只有每頁的合計是不夠的：同一張圖被三頁引用時，
         # 管理頁沒有辦法從合計裡把它拆出來，只能估，而估出來會差到兩倍以上。

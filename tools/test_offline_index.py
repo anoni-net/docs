@@ -230,6 +230,25 @@ parsed = offline_index._page_assets(
 # 相對路徑正規化成相對建置根目錄，theme 的 app shell 與外部網址都不列
 check("資產：解析並正規化", parsed, ["assets/images/a.webp", "tools/js/tool.js"])
 
+# <link> 只收樣式與 manifest。canonical、alternate 與 preconnect 指的是頁面或第三方
+# 主機，存進離線副本沒有用。站台自己的 stylesheets/extra.css 每頁都載入，而它是
+# render-blocking 的，離線時取不到讀者看到的是一片空白。
+links = offline_index._page_assets(
+    '<link rel="stylesheet" href="../../stylesheets/extra.css">'
+    '<link rel="manifest" href="../../manifest.webmanifest">'
+    '<link rel="stylesheet" href="../../assets/stylesheets/main.min.css">'
+    '<link rel="canonical" href="https://anoni.net/docs/tools/what-is-tor/">'
+    '<link rel="alternate" hreflang="en" href="../../en/tools/what-is-tor/">'
+    '<link rel="preconnect" href="https://fonts.gstatic.com">',
+    "tools/what-is-tor/",
+    None,
+)
+check(
+    "資產：link 只收樣式與 manifest",
+    links,
+    ["manifest.webmanifest", "stylesheets/extra.css"],
+)
+
 # JS 裡 fetch 的東西不會出現在 HTML 標籤上，由該頁的 frontmatter 自己宣告
 declared = offline_index._page_assets(
     "<p>沒有任何標籤</p>",
@@ -256,6 +275,9 @@ index = build(
 by_url = {p["url"]: p for s in index["sections"] for p in s["pages"]}
 check("資產：過半頁面共用的不列進個別頁面", by_url["a/"]["assets"], ["img/only-a.png"])
 check("資產：共用的那個誰也沒有", by_url["b/"]["assets"], [])
+# 移出個別頁面之後要有人接手。2026-09-04 之前這批就這樣消失了，service worker 的
+# SHELL_ASSETS 也沒收，於是每頁都要的樣式從來沒有進過任何一個快取。
+check("資產：每頁都載入的那批列進 shell", index["shell"], ["vendor/vega.js"])
 check("資產：大小從建置產物量", by_url["a/"]["assetBytes"], 100)
 
 # 章節的資產大小要去重，同一張圖在這一章出現幾次都只算一次。

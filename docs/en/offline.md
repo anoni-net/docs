@@ -48,7 +48,7 @@ Tor Browser and the onion and IPFS builds do not offer offline reading, for priv
 
 ## What gets stored on your device
 
-Opening the site in an ordinary browser stores only this page and the styles it needs at first, about 0.5 MB, so that you can at least reach this page without a network. The core chapters for a language (concepts, tools, advanced, regional) download in the background only after you have picked a reading language on the home page, or opened a second page in that language. Nothing needs to be installed for this. The extra step is there so that someone who reads one page and leaves does not spend 10 MB of mobile data. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
+Opening the site in an ordinary browser stores only this page and the styles it needs at first, about 0.7 MB, so that you can at least reach this page without a network. The core chapters for a language (concepts, tools, advanced, regional) download in the background only after you have picked a reading language on the home page, or opened a second page in that language. Nothing needs to be installed for this. The extra step is there so that someone who reads one page and leaves does not spend 10 MB of mobile data. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
 
 The chapters the site stores for you follow the site version. Every release clears that copy and downloads it again, and the download only covers the language you have open at that moment. To make sure something stays on the device, use "Save everything" above the list. What that button stores is not affected by site releases.
 
@@ -64,7 +64,7 @@ The reading language you pick from the language menu is stored in the same place
 
 "Clear all offline content" above removes both what the site stored and what you picked, and turns off automatic storage, so the pages you read after clearing do not stay on the device either. Turn the switch back on above to resume.
 
-This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 0.5 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
+This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 0.7 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
 
 What that button does not cover: browsing history, DNS cache, and files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
 
