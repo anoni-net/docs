@@ -20,6 +20,8 @@ Global Gathering 2026, hosted by Team CommUNITY, runs from 4 to 6 September in E
 
 Event details are at [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}.
 
+<!-- more -->
+
 ## What the Global Gathering is
 
 The Global Gathering is an annual event hosted by Team CommUNITY. It draws people from around the world whose work covers digital rights, internet freedom, and protecting civil society from digital attacks.
