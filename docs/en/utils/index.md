@@ -36,7 +36,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-lock-outline: **[Local file encryption](age.md)**
 
-    Pick a file, type a passphrase, and encrypt it to the age format in your browser, or open an age file. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
+    Pick a file or paste some text, type a passphrase, and encrypt it to the age format in your browser, or open an age file. The ciphertext can come out as text, so it goes into your password manager next to the passphrase and follows you across devices. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
 
 -   :material-qrcode: **[QR code generator](qrcode.md)**
 

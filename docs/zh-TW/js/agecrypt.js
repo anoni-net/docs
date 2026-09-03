@@ -37,6 +37,10 @@
  * 第一次按下時先量一次 2^12 推算整趟要多久，超過二十秒就先把預估時間與原因顯示出來，
  * 讓讀者決定要不要等。決定要等的話省略解回比對那一趟，時間減半。快的環境維持比對。
  *
+ * 貼進來的文字也能處理，密文可以輸出成 ASCII armor 的文字。這是 #425 討論的 A′：讀者把密文
+ * 跟密語一起存進自己的密碼管理器，另一台裝置貼回來解開，跨裝置由他們信任的管理器負責，
+ * 站上維持什麼都不存。age 命令列也直接認 armor，貼出去的文字存成檔案照樣能用 age -d 解。
+ *
  * 密語不存、不送、不記。重新整理就沒了。「抽一組密語」用的是 Asian Diceware 的詞表，
  * 跟密語產生器同一份，取樣方式也相同（拒絕重抽，理由見 passphrase.js）。
  *
@@ -54,6 +58,13 @@
 
   const AGE_HEADER = "age-encryption.org/v1";
   const AGE_ARMOR = "-----BEGIN AGE ENCRYPTED FILE-----";
+  const AGE_ARMOR_END = "-----END AGE ENCRYPTED FILE-----";
+
+  // 檔案要輸出成文字時的大小上限。armor 膨脹三分之一，密碼管理器的筆記欄位多半只收幾萬字。
+  const ARMOR_MAX_BYTES = 64 * 1024;
+
+  // 貼進來的文字當成檔案處理時的名字
+  const TEXT_NAME = "note.txt";
 
   // 整份檔案在記憶體裡處理：讀進來、加密、再解回來比對，等於同時存三份。
   // 超過這個大小在手機上會直接失敗，先擋下來說清楚。
@@ -87,6 +98,33 @@
   function isAgeFile(bytes) {
     const head = asciiPrefix(bytes, AGE_ARMOR.length);
     return head.indexOf(AGE_HEADER) === 0 || head.indexOf(AGE_ARMOR) === 0;
+  }
+
+  // 開頭是 armor 的頭行就是文字形式的 age 檔
+  function isArmored(bytes) {
+    return asciiPrefix(bytes, AGE_ARMOR.length) === AGE_ARMOR;
+  }
+
+  // 貼進來的文字：開頭是 armor 就當 age 密文解，其餘原樣當明文加密
+  function classifyText(text) {
+    const trimmed = text.trim();
+    if (trimmed.indexOf(AGE_ARMOR) === 0) {
+      return { mode: "decrypt", bytes: new TextEncoder().encode(trimmed), armored: true };
+    }
+    return { mode: "encrypt", bytes: new TextEncoder().encode(text), armored: false };
+  }
+
+  // 解出來的東西能不能直接顯示成文字：UTF-8 解得開、沒有控制字元、不超過上限
+  function decodeUtf8Text(bytes, maxBytes) {
+    if (bytes.length > maxBytes) return null;
+    let text;
+    try {
+      text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+    } catch (err) {
+      return null;
+    }
+    if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(text)) return null;
+    return text;
   }
 
   // 輸出檔名。加密加上 .age，解密去掉 .age，沒有 .age 的解密輸出加 .decrypted，
@@ -235,6 +273,15 @@
       border-left: .15rem solid #c62828; padding: .1rem 0 .1rem .6rem;
       margin: .8rem 0; font-size: .74rem; line-height: 1.7;
     }
+    #age-tool textarea.ag-paste, #age-tool textarea.ag-out {
+      width: 100%; box-sizing: border-box; font-size: .74rem; line-height: 1.6;
+      font-family: var(--md-code-font-family, monospace); padding: .5rem .6rem;
+      border: .05rem solid var(--md-default-fg-color--lighter); border-radius: .1rem;
+      background: var(--md-code-bg-color); color: inherit; resize: vertical;
+    }
+    #age-tool .ag-or { font-size: .74rem; margin: .8rem 0 .2rem; }
+    #age-tool .ag-check { display: flex; gap: .4rem; align-items: flex-start; font-size: .74rem; margin: .6rem 0 0; cursor: pointer; }
+    #age-tool .ag-check input { margin-top: .25rem; }
     #age-tool .ag-slow {
       border-left: .15rem solid #ef6c00; padding: .1rem 0 .1rem .6rem;
       margin: .8rem 0; font-size: .74rem; line-height: 1.7;
@@ -254,6 +301,16 @@
       dropOver: "放開就載入",
       encryptMode: "要加密：{name}（{size}）",
       decryptMode: "這是 age 檔，要解密：{name}（{size}）",
+      pasteLabel: "或貼一段文字",
+      pastePlaceholder: "貼明文就加密。貼 age 的文字密文（-----BEGIN AGE ENCRYPTED FILE----- 開頭）就解密。",
+      useText: "用這段文字",
+      textEncryptMode: "要加密：貼進來的文字（{size}）",
+      textDecryptMode: "貼進來的是 age 文字密文，要解密（{size}）",
+      armorOut: "輸出成文字，方便貼進密碼管理器的筆記。大小會多三分之一。",
+      outputText: "輸出",
+      copy: "複製",
+      copied: "已複製",
+      crossDevice: "把密文與密語一起存進你的密碼管理器，另一台裝置打開這一頁貼回來就能解開。密文由你信任的管理器同步，站上什麼都不存。",
       passphrase: "密語",
       show: "顯示",
       hide: "隱藏",
@@ -291,6 +348,16 @@
       dropOver: "松开就加载",
       encryptMode: "要加密：{name}（{size}）",
       decryptMode: "这是 age 文件，要解密：{name}（{size}）",
+      pasteLabel: "或贴一段文字",
+      pastePlaceholder: "贴明文就加密。贴 age 的文字密文（-----BEGIN AGE ENCRYPTED FILE----- 开头）就解密。",
+      useText: "用这段文字",
+      textEncryptMode: "要加密：贴进来的文字（{size}）",
+      textDecryptMode: "贴进来的是 age 文字密文，要解密（{size}）",
+      armorOut: "输出成文字，方便贴进密码管理器的笔记。大小会多三分之一。",
+      outputText: "输出",
+      copy: "复制",
+      copied: "已复制",
+      crossDevice: "把密文与密语一起存进你的密码管理器，另一台设备打开这一页贴回来就能解开。密文由你信任的管理器同步，站上什么都不存。",
       passphrase: "密语",
       show: "显示",
       hide: "隐藏",
@@ -328,6 +395,16 @@
       dropOver: "Release to load",
       encryptMode: "To encrypt: {name} ({size})",
       decryptMode: "This is an age file, to decrypt: {name} ({size})",
+      pasteLabel: "Or paste some text",
+      pastePlaceholder: "Paste plain text to encrypt it. Paste an age text file (starting with -----BEGIN AGE ENCRYPTED FILE-----) to decrypt it.",
+      useText: "Use this text",
+      textEncryptMode: "To encrypt: pasted text ({size})",
+      textDecryptMode: "The pasted text is an age file, to decrypt ({size})",
+      armorOut: "Output as text, easy to paste into a password manager note. About a third larger.",
+      outputText: "Output",
+      copy: "Copy",
+      copied: "Copied",
+      crossDevice: "Store the ciphertext and the passphrase together in your password manager. Open this page on another device, paste it back, and decrypt. Your manager does the syncing. This site stores nothing.",
       passphrase: "Passphrase",
       show: "Show",
       hide: "Hide",
@@ -379,11 +456,12 @@
   }
 
   const state = {
-    file: null,      // { name, size, bytes, mode }
+    file: null,      // { name, size, bytes, mode, source: "file" | "text", armored }
     passphrase: "",
     show: false,
     working: false,
-    result: null,    // { url, name, size }
+    armorOut: false, // 檔案輸入時勾「輸出成文字」
+    result: null,    // { url, name, size, verified, text, armored }
     error: null,
     drawn: null,
     words: null,     // null 還沒抓、false 抓失敗、陣列抓到了
@@ -548,6 +626,26 @@
     state.file = {
       name: file.name, size: file.size, bytes: bytes,
       mode: isAgeFile(bytes) ? "decrypt" : "encrypt",
+      source: "file", armored: isArmored(bytes),
+    };
+    render();
+  }
+
+  function loadText(text) {
+    if (!text || !text.trim()) return;
+    releaseResult();
+    state.error = null;
+    state.drawn = null;
+    const parsed = classifyText(text);
+    if (parsed.bytes.length > MAX_BYTES) {
+      state.file = null;
+      state.error = "tooLarge";
+      render();
+      return;
+    }
+    state.file = {
+      name: TEXT_NAME, size: parsed.bytes.length, bytes: parsed.bytes,
+      mode: parsed.mode, source: "text", armored: parsed.armored,
     };
     render();
   }
@@ -597,8 +695,11 @@
     }
     const verify = mode === "encrypt" && !state.slowAccepted;
     const passes = verify ? 2 : 1;
+    // 文字輸入的輸出一律是文字，檔案輸入看讀者有沒有勾
+    const wantArmor = mode === "encrypt" && (state.file.source === "text" || state.armorOut);
     try {
       let output;
+      let resultText = null;
       if (mode === "encrypt") {
         const encrypter = new age.Encrypter();
         encrypter.addRecipient(scryptRecipient(deps, passphrase, SCRYPT_LOG2_N, reportProgress(1, passes)));
@@ -612,21 +713,40 @@
             throw new Error("verify");
           }
         }
+        if (wantArmor) {
+          resultText = age.armor.encode(output);
+          output = new TextEncoder().encode(resultText);
+        }
       } else {
+        // armor 的文字形式先解回位元組，typage 的 Decrypter 只認位元組
+        let input = state.file.bytes;
+        if (state.file.armored) {
+          try {
+            input = age.armor.decode(new TextDecoder().decode(input));
+          } catch (err) {
+            throw new Error("broken");
+          }
+        }
         const decrypter = new age.Decrypter();
         decrypter.addIdentity(scryptIdentity(deps, passphrase, reportProgress(1, 1)));
         try {
-          output = await decrypter.decrypt(state.file.bytes, "uint8array");
+          output = await decrypter.decrypt(input, "uint8array");
         } catch (err) {
           throw new Error(/passphrase|identit|scrypt|MAC|no recipient|incorrect/i.test(String(err && err.message)) ? "wrongPassphrase" : "broken");
         }
+        // 貼進來的密文解出來若是文字就直接顯示，檔案解出來只給下載
+        if (state.file.source === "text") resultText = decodeUtf8Text(output, ARMOR_MAX_BYTES);
       }
-      const blob = new Blob([output], { type: "application/octet-stream" });
+      const blob = new Blob([output], { type: resultText !== null ? "text/plain;charset=utf-8" : "application/octet-stream" });
+      let name = outputName(state.file.name, mode);
+      if (state.file.source === "text") name = mode === "encrypt" ? TEXT_NAME + ".age" : TEXT_NAME;
       state.result = {
         url: URL.createObjectURL(blob),
-        name: outputName(state.file.name, mode),
+        name: name,
         size: blob.size,
         verified: verify,
+        text: resultText,
+        armored: wantArmor,
       };
     } catch (err) {
       const reason = err && err.message;
@@ -666,6 +786,35 @@
     });
     root.appendChild(picker);
     root.appendChild(drop);
+
+    const orLabel = el("label", "ag-or", t.pasteLabel);
+    const paste = document.createElement("textarea");
+    paste.className = "ag-paste";
+    paste.rows = 4;
+    paste.placeholder = t.pastePlaceholder;
+    paste.spellcheck = false;
+    paste.setAttribute("autocomplete", "off");
+    orLabel.appendChild(paste);
+    root.appendChild(orLabel);
+    const useRow = el("div", "ag-row");
+    useRow.appendChild(button(t.useText, null, () => loadText(paste.value)));
+    root.appendChild(useRow);
+  }
+
+  // 複製到剪貼簿，按鈕文字短暫改成「已複製」。沒有 clipboard API 的環境就全選讓讀者自己複製。
+  function copyButton(getText, textarea) {
+    const node = button(t.copy, null, () => {
+      const done = () => {
+        node.textContent = t.copied;
+        setTimeout(() => { node.textContent = t.copy; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(getText()).then(done, () => textarea.select());
+      } else {
+        textarea.select();
+      }
+    });
+    return node;
   }
 
   function render() {
@@ -681,9 +830,9 @@
 
     const file = state.file;
     const box = el("div", "ag-file" + (file.mode === "decrypt" ? " ag-file--decrypt" : ""));
-    box.appendChild(el("p", "ag-name", fill(file.mode === "decrypt" ? t.decryptMode : t.encryptMode, {
-      name: file.name, size: humanSize(file.size),
-    })));
+    let nameText = fill(file.mode === "decrypt" ? t.decryptMode : t.encryptMode, { name: file.name, size: humanSize(file.size) });
+    if (file.source === "text") nameText = fill(file.mode === "decrypt" ? t.textDecryptMode : t.textEncryptMode, { size: humanSize(file.size) });
+    box.appendChild(el("p", "ag-name", nameText));
 
     const label = el("label", "ag-label", t.passphrase);
     const row = el("div", "ag-row");
@@ -737,6 +886,17 @@
       short.hidden = !isShort(state.passphrase);
       box.appendChild(short);
     }
+    if (file.mode === "encrypt" && file.source === "file" && file.size <= ARMOR_MAX_BYTES) {
+      const check = el("label", "ag-check");
+      const box2 = document.createElement("input");
+      box2.type = "checkbox";
+      box2.checked = state.armorOut;
+      box2.disabled = state.working;
+      box2.addEventListener("change", () => { state.armorOut = box2.checked; });
+      check.appendChild(box2);
+      check.appendChild(document.createTextNode(t.armorOut));
+      box.appendChild(check);
+    }
 
     if (state.slow !== null) {
       box.appendChild(el("p", "ag-slow", fill(t.slow, { time: humanTime(state.slow) })));
@@ -770,6 +930,7 @@
       state.drawn = null;
       state.error = null;
       state.slow = null;
+      state.armorOut = false;
       render();
     });
     another.disabled = state.working;
@@ -786,10 +947,30 @@
       const result = el("div", "ag-result");
       result.appendChild(el("p", null, file.mode === "decrypt" ? t.decrypted : (state.result.verified ? t.encrypted : t.encryptedNoVerify)));
       result.appendChild(el("p", null, fill(t.sizeLine, { a: humanSize(file.size), b: humanSize(state.result.size) })));
-      const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
-      link.href = state.result.url;
-      link.download = state.result.name;
-      result.appendChild(link);
+      if (state.result.text !== null) {
+        const outLabel = el("label", "ag-label", t.outputText);
+        const out = document.createElement("textarea");
+        out.className = "ag-out";
+        out.rows = Math.min(12, Math.max(3, state.result.text.split("\n").length));
+        out.readOnly = true;
+        out.spellcheck = false;
+        out.value = state.result.text;
+        outLabel.appendChild(out);
+        result.appendChild(outLabel);
+        const tools = el("div", "ag-row");
+        tools.appendChild(copyButton(() => state.result.text, out));
+        const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
+        link.href = state.result.url;
+        link.download = state.result.name;
+        tools.appendChild(link);
+        result.appendChild(tools);
+        if (state.result.armored) result.appendChild(el("p", "ag-hint", t.crossDevice));
+      } else {
+        const link = el("a", "ag-dl", fill(t.download, { name: state.result.name }));
+        link.href = state.result.url;
+        link.download = state.result.name;
+        result.appendChild(link);
+      }
       box.appendChild(result);
     }
     root.appendChild(box);
