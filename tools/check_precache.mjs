@@ -62,11 +62,31 @@ const harness = `
   // 執行期一次只預快取一個語系，檢查要涵蓋全部，所以逐一跑過再合併
   const byPrefix = LANG_PREFIXES.map((prefix) => [prefix, precacheUrlsFor(prefix)]);
   const essential = essentialUrlsFor("");
-  return { byPrefix, essential, games: GAME_APPS.length, cacheKeyCandidates };
+  return {
+    byPrefix, essential, games: GAME_APPS.length, cacheKeyCandidates,
+    SHELL_ASSETS, GAME_APPS,
+  };
 `;
-const { byPrefix, essential, games, cacheKeyCandidates } = new Function(harness)();
+const {
+  byPrefix, essential, games, cacheKeyCandidates, SHELL_ASSETS, GAME_APPS,
+} = new Function(harness)();
+
+// 每頁都載入的那批寫在各語系索引的 shell 欄位，執行期由 shellAssetsFor 讀出來補進
+// 預快取。清單在建置產物裡，不在 sw.js，所以底下的檢查與統計都要自己讀一次。
+const indexes = new Map();
+for (const [prefix] of byPrefix) {
+  const file = path.join(OUT, prefix, 'offline-index.json');
+  if (fs.existsSync(file)) indexes.set(prefix, JSON.parse(fs.readFileSync(file, 'utf8')));
+}
+const shellFor = (prefix) => {
+  const index = indexes.get(prefix);
+  return index ? (index.shell || []).map((asset) => '/docs/' + prefix + asset) : [];
+};
+const byPrefixFull = byPrefix.map(([prefix, list]) => [prefix, [...list, ...shellFor(prefix)]]);
+const essentialFull = [...essential, ...shellFor('')];
+
 // 作品本體每個語系的清單裡都有，合併時去重
-const urls = [...new Set(byPrefix.flatMap(([, list]) => list))];
+const urls = [...new Set(byPrefixFull.flatMap(([, list]) => list))];
 
 /** URL 換成 docs/output 底下的實際檔案路徑 */
 function resolve(url) {
@@ -92,7 +112,7 @@ const sizeOf = (list) =>
 
 // 讀者一次只下自己那個語系，所以分語系報比報總和有意義
 console.log('  預快取（讀者只會下到自己那個語系那一份）');
-for (const [prefix, list] of byPrefix) {
+for (const [prefix, list] of byPrefixFull) {
   const name = (prefix || 'zh-TW/').replace(/\/$/, '');
   console.log(`    ${name.padEnd(6)} ${mb(sizeOf(list))}（${list.length} 個 URL）`);
 }
@@ -102,7 +122,9 @@ const gameUrls = urls.filter((u) => u.startsWith('/docs/games/') && !u.endsWith(
 console.log(`  其中三件互動作品 ${mb(sizeOf(gameUrls))}（${games} 個檔案，三語共用）`);
 // 讀者關掉自動存或清空過內容時只會有這一批。少了它離線就沒有站台的說明頁可看，
 // 落到瀏覽器自己的錯誤畫面，所以它不受那個開關管。
-console.log(`  關掉自動存時仍保留的底線 ${mb(sizeOf(essential))}（${essential.length} 個 URL）`);
+console.log(
+  `  關掉自動存時仍保留的底線 ${mb(sizeOf(essentialFull))}（${essentialFull.length} 個 URL）`
+);
 console.log(`  全部語系去重後 ${mb(bytes)}，這是底下兩道檢查涵蓋的範圍`);
 
 // 索引頁連出去的網址形狀，要能命中預快取的 key
@@ -134,6 +156,58 @@ for (const [file, base] of INDEX_PAGES) {
   }
 }
 
+// 反過來驗：頁面實際載入的東西都要有人負責
+//
+// 上面那道的方向是清單往檔案，「清單裡的 URL 都對得到檔案」。反過來的漏洞它看不見：
+// 頁面需要某個檔案，而清單裡從頭到尾沒有它。2026-09-04 遇到的正是這種。站台自己的
+// stylesheets/extra.css 每一頁都載入，SHELL_ASSETS 沒收，建置端又因為「每頁都出現」
+// 把它從個別頁面的資產裡移除，兩邊都以為對方負責。那一份是 render-blocking 的，
+// 離線打開任何一頁都是白的，而線上一切正常，讀者也說不出哪裡壞了。
+//
+// 只驗 CSS、JS 與 manifest。圖片缺了是破圖，讀者看得出來也讀得下去，而且預設本來
+// 就不下載內文圖（那七 MB 由「連同內文圖一起存」那個開關管）。
+const RENDER_REFS = [
+  /<script[^>]+src="([^"]+)"/g,
+  /<link[^>]+rel="(?:stylesheet|manifest)"[^>]*href="([^"]+)"/g,
+  /<link[^>]+href="([^"]+)"[^>]*rel="(?:stylesheet|manifest)"/g,
+];
+
+function renderRefs(html, pageUrl) {
+  const found = new Set();
+  for (const re of RENDER_REFS) {
+    for (const m of html.matchAll(re)) {
+      const raw = m[1];
+      if (/^(https?:)?\/\//.test(raw) || raw.startsWith('data:')) continue;
+      const { pathname } = new URL(raw, 'https://anoni.net/' + pageUrl);
+      found.add(pathname.replace(/^\//, ''));
+    }
+  }
+  return found;
+}
+
+// 每個沒人負責的檔案記一次，附上有幾頁需要它。同一份 extra.css 報兩百多次沒有用
+const uncovered = new Map();
+if (indexes.has('')) {
+  const index = indexes.get('');
+  const covered = new Set([...SHELL_ASSETS, ...(index.shell || []), ...GAME_APPS]);
+  const pages = index.sections.flatMap((section) => section.pages);
+  // 管理頁自己不在索引裡（它就是列出那份清單的那一頁），而離線時最需要打得開的
+  // 正是它，所以另外補上
+  pages.push({ url: 'offline/', assets: [] });
+  for (const page of pages) {
+    const file = path.join(OUT, page.url, 'index.html');
+    if (!fs.existsSync(file)) continue;
+    const own = new Set(page.assets || []);
+    for (const ref of renderRefs(fs.readFileSync(file, 'utf8'), page.url)) {
+      if (covered.has(ref) || own.has(ref)) continue;
+      uncovered.set(ref, (uncovered.get(ref) || 0) + 1);
+    }
+  }
+  console.log(`  反向檢查涵蓋 ${pages.length} 頁的樣式、腳本與 manifest`);
+} else {
+  console.log('  找不到 offline-index.json，跳過反向檢查');
+}
+
 if (missing.length) {
   console.error(`\n✗ ${missing.length} 個 URL 在 docs/output 裡找不到對應檔案：`);
   for (const u of missing.slice(0, 20)) console.error('  ' + u);
@@ -147,5 +221,14 @@ if (unreachable.length) {
   console.error('\n檔案本身存在，線上一切正常，只有離線的讀者會打不開。');
   console.error('修法是讓 GAME_APPS 與索引頁的連結形狀一致，或補進 cacheKeyCandidates。');
 }
-if (missing.length || unreachable.length) process.exit(1);
-console.log('\n預快取清單裡的每個 URL 都對得到檔案，索引頁連出去的網址也都命中。');
+if (uncovered.size) {
+  console.error(`\n✗ ${uncovered.size} 個檔案是頁面載入時要用的，卻沒有人負責預快取：`);
+  for (const [ref, n] of [...uncovered].sort((a, b) => b[1] - a[1])) {
+    console.error(`  ${ref}（${n} 頁引用）`);
+  }
+  console.error('\n離線打開那些頁面會少掉這些東西，樣式類的會是一片空白。');
+  console.error('修法是補進 sw.js 的 SHELL_ASSETS，或讓建置把它算進索引的 shell。');
+}
+if (missing.length || unreachable.length || uncovered.size) process.exit(1);
+console.log('\n預快取清單裡的每個 URL 都對得到檔案，索引頁連出去的網址也都命中，');
+console.log('頁面載入時要用的樣式與腳本都有人負責。');
