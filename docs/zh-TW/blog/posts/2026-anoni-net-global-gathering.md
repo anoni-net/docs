@@ -20,6 +20,8 @@ Team CommUNITY 主辦的 Global Gathering 2026 於 9 月 4 日到 6 日在葡萄
 
 活動資訊見 [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}。
 
+<!-- more -->
+
 ## Global Gathering 是什麼
 
 Global Gathering 是 Team CommUNITY 主辦的年度聚會，參加者來自世界各地，工作範圍涵蓋數位人權、網路自由，以及協助公民社會抵禦數位攻擊。
