@@ -161,6 +161,7 @@ const harness = `
   ${grab(/^async function matchCachedPage\(request\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function offlinePathFor\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function offlineFallback\(url\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function langCodeOf\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
@@ -181,7 +182,7 @@ const harness = `
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
     shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
     crossLangAsset, assetUrlFor, matchCachedAsset,
-    visitedPrefixes, offlineFallback,
+    visitedPrefixes, offlineFallback, langCodeOf,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
     libraryEntries, precachedEntries,
@@ -273,6 +274,9 @@ const load = (opts = {}) => {
 };
 
 const req = (pathname) => ({ url: ORIGIN + pathname });
+// 落腳頁是用轉址給的，看的是 Location 標頭而不是內容
+const redirectTo = (response) =>
+  response && response.status === 302 ? response.headers.get('location') : response;
 const u = (pathname) => new URL(pathname, ORIGIN);
 
 let passed = 0;
@@ -970,7 +974,7 @@ test('清除過的裝置離線時仍看得到離線提示頁', async (load) => {
   net.offline = true;
 
   const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
-  assert.equal(response.url, '/docs/offline/');
+  assert.equal(redirectTo(response), ORIGIN + '/docs/offline/');
 });
 
 test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
@@ -979,7 +983,10 @@ test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
   await sw.precacheFor('');
   net.offline = true;
 
-  assert.equal((await sw.networkFirst(req('/docs/basics/metadata/'), null)).url, '/docs/offline/');
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/basics/metadata/'), null)),
+    ORIGIN + '/docs/offline/'
+  );
 });
 
 test('狀態查詢回得出已存的、網站存的與空間用量', async (load) => {
@@ -1146,7 +1153,7 @@ test('裝置上沒有的頁面等網路也有上限，一直不回來就給落�
   const precache = await caches.open(sw.PRECACHE);
   await precache.put('/docs/en/offline/', 'EN-OFFLINE');
   const response = await sw.networkFirst(req('/docs/en/tools/what-is-tor/'), null);
-  assert.equal(response, 'EN-OFFLINE');
+  assert.equal(redirectTo(response), ORIGIN + '/docs/en/offline/');
 });
 
 test('這個語系的落腳頁不在裝置上時，給別的語系那一份', async (load) => {
@@ -1156,12 +1163,22 @@ test('這個語系的落腳頁不在裝置上時，給別的語系那一份', as
   const { sw, caches } = load({ offline: true });
   const precache = await caches.open(sw.PRECACHE);
   await precache.put('/docs/offline/', 'ZH-OFFLINE');
-  assert.equal(await sw.offlineFallback(u('/docs/en/basics/')), 'ZH-OFFLINE');
-  assert.equal(await sw.offlineFallback(u('/docs/zh-cn/basics/')), 'ZH-OFFLINE');
+  // 退到別的語系時網址帶上 from，那一頁才知道要用哪個語言解釋這件事
+  assert.equal(
+    redirectTo(await sw.offlineFallback(u('/docs/en/basics/'))),
+    ORIGIN + '/docs/offline/?from=en'
+  );
+  assert.equal(
+    redirectTo(await sw.offlineFallback(u('/docs/zh-cn/basics/'))),
+    ORIGIN + '/docs/offline/?from=zh-cn'
+  );
 
-  // 自己那一份在的時候照樣優先
+  // 自己那一份在的時候照樣優先，而且不帶 from
   await precache.put('/docs/en/offline/', 'EN-OFFLINE');
-  assert.equal(await sw.offlineFallback(u('/docs/en/basics/')), 'EN-OFFLINE');
+  assert.equal(
+    redirectTo(await sw.offlineFallback(u('/docs/en/basics/'))),
+    ORIGIN + '/docs/en/offline/'
+  );
 });
 
 test('離線時沒快取過的頁面會落到離線頁', async (load) => {
@@ -1172,7 +1189,10 @@ test('離線時沒快取過的頁面會落到離線頁', async (load) => {
   const response = await sw.networkFirst(req('/docs/basics/metadata/'), null);
   // 走到這裡代表 networkFirst 沒有把錯誤往外丟。丟出去的話 respondWith 會 reject，
   // 讀者看到的是瀏覽器自己的網路錯誤畫面，站台的離線頁等於白做。
-  assert.equal(response, 'ZH-OFFLINE');
+  //
+  // 給的是轉址而不是內容。直接回內容的話，頁面的 location 還是讀者原本要開的那一個，
+  // 管理頁靠它算索引與各頁網址，算出來全是 404，整份清單畫不出來。
+  assert.equal(redirectTo(response), ORIGIN + '/docs/offline/');
 });
 
 test('離線時快取過的頁面直接回快取，不落到離線頁', async (load) => {
@@ -1190,8 +1210,38 @@ test('離線時各語系落到自己的離線頁', async (load) => {
   await precache.put('/docs/offline/', 'ZH-OFFLINE');
   await precache.put('/docs/en/offline/', 'EN-OFFLINE');
 
-  assert.equal(await sw.networkFirst(req('/docs/en/basics/metadata/'), null), 'EN-OFFLINE');
-  assert.equal(await sw.networkFirst(req('/docs/basics/metadata/'), null), 'ZH-OFFLINE');
+  // 自己那一份在的時候不帶 from，讀者看到的就是他的語言，沒什麼要解釋的
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/en/basics/metadata/'), null)),
+    ORIGIN + '/docs/en/offline/'
+  );
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/basics/metadata/'), null)),
+    ORIGIN + '/docs/offline/'
+  );
+});
+
+test('已經在落腳頁的網址上就不轉給自己', async (load) => {
+  // 正常情況走不到這裡（那一頁在快取裡的話 matchCachedPage 早就命中了），可是萬一
+  // 走到，轉給自己就是一圈轉不完的轉址
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/offline/', 'ZH-OFFLINE');
+  assert.equal(await sw.offlineFallback(u('/docs/offline/')), undefined);
+
+  await precache.put('/docs/en/offline/', 'EN-OFFLINE');
+  assert.equal(
+    redirectTo(await sw.offlineFallback(u('/docs/en/offline/'))),
+    ORIGIN + '/docs/offline/?from=en'
+  );
+});
+
+test('語系代號用網址上看得到的那個', async (load) => {
+  // 落腳頁靠它知道讀者本來要的是哪一種語言，值要跟網址上的區段一致
+  const { sw } = load();
+  assert.equal(sw.langCodeOf(u('/docs/basics/')), 'zh-tw');
+  assert.equal(sw.langCodeOf(u('/docs/zh-cn/basics/')), 'zh-cn');
+  assert.equal(sw.langCodeOf(u('/docs/en/basics/')), 'en');
 });
 
 test('連落腳頁都沒有時給明確的網路錯誤，不停在空白', async (load) => {

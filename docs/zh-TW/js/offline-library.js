@@ -198,6 +198,7 @@
       readyMissing: "沒有網路時打不開：{items}。連上網路後會自動補回來。",
       readyJoin: "、",
       readyHere: "這一頁",
+      fallbackNotice: "你要開的頁面不在裝置上，你的語言也還沒有存下離線閱讀頁，所以看到的是另一個語言的版本。連上網路之後，用你的語言打開離線閱讀頁就會存進來。",
       readyHome: "首頁",
       readyAssets: "樣式與程式",
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
@@ -256,6 +257,7 @@
       readyMissing: "没有网络时打不开：{items}。连上网络后会自动补回来。",
       readyJoin: "、",
       readyHere: "这一页",
+      fallbackNotice: "你要开的页面不在设备上，你的语言也还没有存下离线阅读页，所以看到的是另一个语言的版本。连上网络之后，用你的语言打开离线阅读页就会存进来。",
       readyHome: "首页",
       readyAssets: "样式与程序",
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
@@ -314,6 +316,7 @@
       readyMissing: "Without a network these do not open: {items}. They come back once you are online.",
       readyJoin: ", ",
       readyHere: "this page",
+      fallbackNotice: "The page you opened is not on this device, and this offline reading page is not stored in your language either, so you are seeing another language's version. Open this page in your language once you are online and it will be stored.",
       readyHome: "the home page",
       readyAssets: "styles and scripts",
       usageFree: "This site uses {used} on this device, with {free} still available",
@@ -361,6 +364,10 @@
   };
 
   const t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
+
+  // 網址上的語系代號對到這裡的字串組。service worker 把讀者帶到別的語言這一頁時，
+  // 會在網址上帶 from，值是他本來要的那個語系（見 sw.js 的 langCodeOf）。
+  const LANG_BY_CODE = { "zh-tw": "zh-TW", "zh-cn": "zh", en: "en" };
   const fill = (key, vars) =>
     Object.keys(vars || {}).reduce(
       (text, name) => text.split("{" + name + "}").join(vars[name]),
@@ -600,6 +607,19 @@
     // 轉圈的圖案對讀螢幕的人沒有意義，狀態要用屬性講
     node.setAttribute("aria-busy", "true");
     return node;
+  }
+
+  // service worker 把讀者從一個沒存下來的網址帶到這一頁，而他要的語言在這台裝置上
+  // 沒有這一頁時，會在網址上帶 from。用他要的那個語言解釋一次，不然畫面上就是莫名
+  // 其妙跳出一個看不懂的語言。
+  function renderFallbackNotice() {
+    const from = new URL(location.href).searchParams.get("from");
+    const strings = STRINGS[LANG_BY_CODE[from]];
+    // 帶的語系就是這一頁自己的語言時沒什麼要解釋的
+    if (!strings || strings === t) return null;
+    const notice = el("p", "ol-fallback");
+    notice.textContent = strings.fallbackNotice;
+    return notice;
   }
 
   function renderStatus() {
@@ -891,6 +911,8 @@
   // 判斷，也不因為有提醒就改變按鈕的行為，選擇仍然是讀者的。
   function renderPicker(message) {
     root.textContent = "";
+    const notice = renderFallbackNotice();
+    if (notice) root.appendChild(notice);
     root.appendChild(renderStatus());
 
     if (!state.index) {
@@ -981,6 +1003,8 @@
       return;
     }
     root.textContent = "";
+    const notice = renderFallbackNotice();
+    if (notice) root.appendChild(notice);
     root.appendChild(renderStatus());
 
     if (state.swMissing) return renderSections();
