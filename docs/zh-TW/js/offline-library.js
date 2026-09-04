@@ -193,6 +193,13 @@
       savedCount: "你自己選存的 {n} 頁",
       autoCount: "網站自動存的 {n} 頁",
       usage: "本站在這台裝置上佔用 {used}",
+      version: "離線內容版本 {version}",
+      readyOk: "沒有網路時，{items}都打得開。",
+      readyMissing: "沒有網路時打不開：{items}。連上網路後會自動補回來。",
+      readyJoin: "、",
+      readyHere: "這一頁",
+      readyHome: "首頁",
+      readyAssets: "樣式與程式",
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
       autoLabel: "自動存下核心章節與你讀過的頁面",
       autoHint: "關掉之後網站不再自動存任何內容，你讀過的頁面也不會留在裝置上。這一頁本身與它需要的樣式仍會留著（約 0.7 MB），沒有網路時你才進得來。你自己勾的頁面不受影響。",
@@ -244,6 +251,13 @@
       savedCount: "你自己选存的 {n} 页",
       autoCount: "网站自动存的 {n} 页",
       usage: "本站在这台设备上占用 {used}",
+      version: "离线内容版本 {version}",
+      readyOk: "没有网络时，{items}都打得开。",
+      readyMissing: "没有网络时打不开：{items}。连上网络后会自动补回来。",
+      readyJoin: "、",
+      readyHere: "这一页",
+      readyHome: "首页",
+      readyAssets: "样式与程序",
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
       autoLabel: "自动存下核心章节与你读过的页面",
       autoHint: "关掉之后网站不再自动存任何内容，你读过的页面也不会留在设备上。这一页本身与它需要的样式仍会留着（约 0.7 MB），没有网络时你才进得来。你自己勾的页面不受影响。",
@@ -295,6 +309,13 @@
       savedCount: "{n} pages you chose to keep",
       autoCount: "{n} pages stored automatically",
       usage: "This site uses {used} on this device",
+      version: "Offline content version {version}",
+      readyOk: "Without a network, {items} all open.",
+      readyMissing: "Without a network these do not open: {items}. They come back once you are online.",
+      readyJoin: ", ",
+      readyHere: "this page",
+      readyHome: "the home page",
+      readyAssets: "styles and scripts",
       usageFree: "This site uses {used} on this device, with {free} still available",
       autoLabel: "Automatically store the core chapters and the pages you read",
       autoHint: "Turning this off stops the site from storing anything automatically, including the pages you read. This page itself and the styles it needs stay (about 0.7 MB), so you can still get here without a network. Pages you ticked are unaffected.",
@@ -444,6 +465,12 @@
     precacheImages: false,
     // 本站在裝置上佔用多少 byte，由 SW 量自己的快取算出來
     usage: null,
+    // 這台裝置上的 service worker 是哪一版。讀者回報離線出問題時，第一個要分辨的
+    // 就是他換到新版了沒。
+    version: null,
+    // 沒有網路時這台裝置上打得開什麼。容量數字回答不了「能不能用」，這裡直接去問
+    // 快取。讀者回報離線出問題時，這一行是唯一講得出「缺的是哪一塊」的地方。
+    readiness: null,
     // 瀏覽器給的配額，只用來算「還剩多少空間」
     estimate: null,
     // 讀者這一輪勾選的變動，套用之前不動快取
@@ -474,6 +501,51 @@
     if (window.anoniTrack) window.anoniTrack("offline-action", { action: action });
   }
 
+  // 沒有網路時這台裝置上打得開什麼。
+  //
+  // 容量數字回答不了「能不能用」。讀者存了兩百多頁，缺的卻可能是每頁都要的那個
+  // 樣式，那時佔用量看起來很健康，而每一頁打開都是空白。這裡直接去問 Cache
+  // Storage，缺哪一塊就說哪一塊。
+  //
+  // 首頁單獨列一項，因為它是 PWA 的 start_url，也是語言導向的落點。讀者的 PWA 從
+  // 另一個語系的首頁啟動時，那一跳的目標不在裝置上就會停在空白。
+  //
+  // 檢查的都是當下這個語系的網址。讀者到哪一個語系的這一頁，看到的就是那個語系的
+  // 狀態。管理頁不去猜他平常讀哪一個：那個偏好存在瀏覽器的持久儲存裡，而這支程式
+  // 刻意一個字都不碰（見底下那條測試）。
+  function readinessTargets() {
+    const here = location.href.split("#")[0].split("?")[0];
+    const links = document.querySelectorAll
+      ? Array.prototype.slice.call(document.querySelectorAll("link[rel=stylesheet]"))
+      : [];
+    const styles = links
+      .map((link) => link.href)
+      .filter((href) => href && href.indexOf(location.origin) === 0);
+    return [
+      { key: "readyHere", hrefs: [here] },
+      { key: "readyHome", hrefs: [new URL("../", location.href).href] },
+      { key: "readyAssets", hrefs: styles },
+    ];
+  }
+
+  function checkReadiness() {
+    if (!window.caches || !window.caches.match) return Promise.resolve(null);
+    // 這一行是額外的資訊，算不出來就不顯示，不能讓它擋住整個狀態列
+    const targets = readinessTargets();
+    return Promise.all(
+      targets.map((target) =>
+        Promise.all(target.hrefs.map((href) => caches.match(href))).then((hits) =>
+          hits.length && hits.every(Boolean) ? null : target.key
+        )
+      )
+    )
+      .then((missing) => ({
+        missing: missing.filter(Boolean),
+        all: targets.map((target) => target.key),
+      }))
+      .catch(() => null);
+  }
+
   function refreshStatus() {
     return ask({ type: "OFFLINE_STATUS", url: location.href }).then((data) => {
       if (data.type !== "status") throw new Error("bad-status");
@@ -482,10 +554,15 @@
       state.autoPrecache = data.autoPrecache !== false;
       state.precacheImages = data.precacheImages === true;
       state.usage = typeof data.usage === "number" ? data.usage : null;
+      state.version = typeof data.version === "string" ? data.version : null;
       state.estimate = data.estimate || null;
       state.add.clear();
       state.remove.clear();
-    });
+    }).then(() =>
+      checkReadiness().then((readiness) => {
+        state.readiness = readiness;
+      })
+    );
   }
 
   // 網站自動存的那批也算在裝置上，勾選框對它們沒有意義，顯示成已存並停用
@@ -538,7 +615,9 @@
     status.appendChild(
       document.createTextNode(fill("savedCount", { n: state.saved.size }))
     );
-    status.appendChild(document.createTextNode("、"));
+    // 這個分隔符原本寫死成頓號，英文版於是變成
+    // 「0 pages you chose to keep、0 pages stored automatically」。跟著語系走。
+    status.appendChild(document.createTextNode(t.readyJoin));
     status.appendChild(
       document.createTextNode(fill("autoCount", { n: state.precached.size }))
     );
@@ -556,6 +635,27 @@
             : fill("usageFree", { used: size(state.usage), free: size(free) })
         )
       );
+    }
+    // 「能不能用」直接寫出來，缺哪一塊就講哪一塊
+    if (state.readiness) {
+      // 並列的連接符跟著語系走。中文用頓號，英文用逗號加空格。
+      const names = (keys) => keys.map((key) => t[key]).join(t.readyJoin);
+      status.appendChild(document.createElement("br"));
+      status.appendChild(
+        document.createTextNode(
+          state.readiness.missing.length
+            ? fill("readyMissing", { items: names(state.readiness.missing) })
+            : fill("readyOk", { items: names(state.readiness.all) })
+        )
+      );
+    }
+    // 版本另起一行。讀者回報離線出問題時，這是分辨「換到新版了沒」唯一看得到的地方。
+    if (state.version) {
+      status.appendChild(document.createElement("br"));
+      const line = document.createElement("small");
+      line.className = "ol-version";
+      line.textContent = fill("version", { version: state.version });
+      status.appendChild(line);
     }
     return status;
   }

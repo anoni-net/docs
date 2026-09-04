@@ -37,7 +37,32 @@ const found = src.match(re);
 if (!found) throw new Error('base.html 裡找不到 langRedirectTo');
 const langRedirectTo = new Function(`${found[0]}\nreturn langRedirectTo;`)();
 
+// 導向前的那道確認也抽出來。PWA 的 start_url 是安裝當下那個語系的首頁，讀者的閱讀
+// 語言是另一個的話，每次冷啟動都會走這一跳，而離線時跳到沒有副本的地方就是空白。
+// 這個函式裡有巢狀的 function，非貪婪比對會停在裡面那個的結尾，所以用縮排定位
+// 外層的收尾括號。base.html 裡它縮排十格。
+const reRedirect = /^ {10}function redirectTo\(href\) \{[\s\S]*?\n {10}\}/m;
+const foundRedirect = src.match(reRedirect);
+if (!foundRedirect) throw new Error('base.html 裡找不到 redirectTo');
+const loadRedirect = (opts) => {
+  const calls = [];
+  const location = { replace: (href) => calls.push(href) };
+  const navigator = { onLine: opts.onLine };
+  const caches = opts.noCaches
+    ? undefined
+    : { match: async (href) => (opts.cached || []).includes(href) ? 'HIT' : undefined };
+  const window = { caches };
+  const redirectTo = new Function(
+    'window', 'caches', 'navigator', 'location',
+    `${foundRedirect[0]}\nreturn redirectTo;`
+  )(window, caches, navigator, location);
+  return { redirectTo, calls };
+};
+
 const ZH = 'zh-TW';
+
+const HOME_EN = 'https://anoni.net/docs/en/';
+
 
 let passed = 0;
 let failed = 0;
@@ -76,6 +101,38 @@ test('認不出當前語言時不動', () => {
   assert.equal(langRedirectTo(true, undefined, 'en', ZH), null);
   assert.equal(langRedirectTo(true, null, 'en', ZH), null);
 });
+
+test('離線時跳過去的那一頁沒有副本就留在原地', async () => {
+  // PWA 從 zh-TW 的首頁啟動，讀者的閱讀語言是 en，每次冷啟動都會走這一跳。裝置上
+  // 沒有 en 首頁的時候跳過去只會停在空白，讀者反而失去手上這一頁看得到的內容。
+  const { redirectTo, calls } = loadRedirect({ onLine: false, cached: [] });
+  redirectTo(HOME_EN);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.deepEqual(calls, []);
+});
+
+test('離線但裝置上有那一頁就照跳', async () => {
+  const { redirectTo, calls } = loadRedirect({ onLine: false, cached: [HOME_EN] });
+  redirectTo(HOME_EN);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.deepEqual(calls, [HOME_EN]);
+});
+
+test('線上第一次造訪沒有副本也照跳', async () => {
+  // 沒有副本是線上讀者的正常狀態，這裡不該擋
+  const { redirectTo, calls } = loadRedirect({ onLine: true, cached: [] });
+  redirectTo(HOME_EN);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.deepEqual(calls, [HOME_EN]);
+});
+
+test('瀏覽器沒有 Cache Storage 時照舊直接跳', async () => {
+  const { redirectTo, calls } = loadRedirect({ onLine: false, noCaches: true });
+  redirectTo(HOME_EN);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.deepEqual(calls, [HOME_EN]);
+});
+
 
 for (const [name, fn] of tests) {
   try {

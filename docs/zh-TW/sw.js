@@ -471,10 +471,23 @@ async function loadOfflineIndex(prefix) {
 // 進不去的話整個功能等於不存在。少了它，沒快取過的網址在離線時會一路走到
 // networkFirst 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面。
 //
-// 這一批約 0.7 MB（含索引 shell 欄位那批每頁共用的樣式與腳本），相對於完整章節的
-// 十 MB 是可以接受的底線。
+// 這一批約 0.97 MB（首頁、離線閱讀頁，加上索引 shell 欄位那批每頁共用的樣式與腳本），
+// 相對於完整章節的十 MB 是可以接受的底線。三語系共用的資產只算一份，讀者用過第二個
+// 語系時實際多下的是 0.64 MB。
+// 底線那批裡的頁面。essentialUrlsFor 與 hadFullPrecache 共用這一份：後者要挑一個
+// 「只有完整章節才會有」的頁面當探針，兩邊寫在一起才不會不同步。2026-09-04 首頁進了
+// 底線那批之後，探針原本還指著首頁，只存過底線的裝置就被當成上一版有完整章節。
+const ESSENTIAL_PAGES = ["", "offline/"];
+
 function essentialUrlsFor(prefix) {
-  const urls = [SCOPE_PATH + prefix + "offline/"];
+  // 首頁跟離線閱讀頁一起進來。首頁是 PWA 的 start_url，也是語言導向的落點：讀者的
+  // PWA 是從 zh-TW 的首頁裝的，那一頁的 JS 讀到閱讀語言是 en 就 location.replace 到
+  // en 的首頁。離線時那一跳的目標不在裝置上，讀者會先看到 zh-TW 一眼，接著停在空白，
+  // 而他明明存著整套 en。
+  //
+  // 關掉自動存的讀者更需要它。那些人裝置上只有這一批，少了首頁，PWA 冷啟動的第一個
+  // 網址就落在快取外面。
+  const urls = ESSENTIAL_PAGES.map((page) => SCOPE_PATH + prefix + page);
   for (const asset of SHELL_ASSETS) {
     urls.push(assetUrlFor(prefix, asset));
   }
@@ -506,7 +519,8 @@ async function noteVisit(prefix) {
 async function hadFullPrecache(prefix) {
   const pages = CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH;
   // 挑一個不在底線那批裡的頁面當探針，有它就代表上一版下的是完整章節
-  const probe = SCOPE_PATH + prefix + pages.find((page) => page !== "offline/");
+  const probe =
+    SCOPE_PATH + prefix + pages.find((page) => !ESSENTIAL_PAGES.includes(page));
   for (const name of await caches.keys()) {
     if (!name.startsWith("anoni-docs-precache-")) continue;
     if (await (await caches.open(name)).match(probe)) return true;
@@ -863,6 +877,9 @@ async function handleLibraryMessage(data, port) {
       precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
       precacheImages: await precacheImagesEnabled(),
+      // 這台裝置上跑的是哪一版。讀者回報「離線打不開」時，第一個要分辨的就是他的
+      // service worker 換到新版了沒，而那件事在裝置上原本沒有任何地方看得出來。
+      version: VERSION,
       // 本站佔用自己算，見 cacheUsage。estimate 只拿來報「裝置還剩多少空間」，
       // 那是配額問題，本來就該問瀏覽器。
       usage: await cacheUsage(),

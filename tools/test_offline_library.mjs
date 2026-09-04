@@ -166,12 +166,17 @@ class FakeText extends FakeElement {
 
 // 根節點的 id 決定原始碼畫哪一種介面：offline-library 是管理頁，start-offline 是
 // 起步索引頁的路徑按鈕。查別的 id 一律回 null，兩個根節點不會同時存在。
-const makeDocument = (root, lang) => ({
+const makeDocument = (root, lang, opts = {}) => ({
   documentElement: { lang },
   head: new FakeElement('head'),
   getElementById: (id) => (id === root.id ? root : null),
   createElement: (tag) => new FakeElement(tag),
   createTextNode: (text) => new FakeText(text),
+  // 離線可用性那一行要知道這一頁載入了哪些樣式表
+  querySelectorAll: (selector) =>
+    selector === 'link[rel=stylesheet]'
+      ? (opts.stylesheets || []).map((href) => ({ href }))
+      : [],
 });
 
 // ---------------------------------------------------------------------------
@@ -205,6 +210,7 @@ const makeServiceWorker = (opts) => {
             autoPrecache: state.autoPrecache,
             precacheImages: state.precacheImages,
             estimate: opts.estimate || null,
+            version: opts.version,
           });
         } else if (message.type === 'OFFLINE_ADD') {
           // 模擬網路很差：service worker 收到了，但一筆都還沒回報
@@ -357,15 +363,22 @@ const tick = (n = 6) =>
 const load = async (opts = {}) => {
   const root = new FakeElement('div');
   root.id = opts.picker ? 'start-offline' : 'offline-library';
-  const document = makeDocument(root, opts.lang || 'zh-TW');
+  const document = makeDocument(root, opts.lang || 'zh-TW', opts);
   const sw = makeServiceWorker(opts);
   const navigator = {
     serviceWorker: sw.api,
     onLine: opts.online !== false,
   };
-  const window = { __anoniServiceWorker: opts.swFlag !== false };
+  // 離線可用性那一行去問 Cache Storage。opts.cached 沒給就當這個瀏覽器沒有這個 API，
+  // 那一行不顯示，其餘照舊。
+  const caches =
+    opts.cached === undefined
+      ? undefined
+      : { match: async (href) => (opts.cached.includes(href) ? 'HIT' : undefined) };
+  const window = { __anoniServiceWorker: opts.swFlag !== false, caches };
   const location = {
     href: opts.picker ? 'https://anoni.net/docs/start/' : 'https://anoni.net/docs/offline/',
+    origin: 'https://anoni.net',
   };
   const fetched = [];
   const fetchStub = async (url) => {
@@ -399,10 +412,13 @@ const load = async (opts = {}) => {
   }
   new Function(
     'document', 'window', 'navigator', 'location', 'fetch', 'MessageChannel', 'setTimeout', 'URL',
+    'caches',
     src
-  )(document, window, navigator, location, fetchStub, MessageChannelStub, setTimeout, URL);
+  )(document, window, navigator, location, fetchStub, MessageChannelStub, setTimeout, URL, caches);
 
-  await tick(12);
+  // 等初始化那串 promise 跑完。狀態回覆之後還要問一輪 Cache Storage 算離線可用性，
+  // 輪數不夠的話會停在「還在準備」，而畫面上看起來只是狀態列的字不一樣。
+  await tick(24);
   return { root, sw, fetched, document };
 };
 
@@ -869,6 +885,70 @@ test('service worker 還在準備時，清單先畫出來不必等它', async ()
   const { root } = await load({ noRegistration: true });
   assert.ok(root.querySelector('.ol-status').textContent.includes('還在準備'));
   assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
+});
+
+test('狀態列直接回答沒有網路時打不打得開，三個語系都有', async () => {
+  // 容量數字回答不了這件事。讀者存了兩百多頁，缺的卻可能是每頁都要的那個樣式，
+  // 那時佔用量看起來很健康，而每一頁打開都是空白。
+  const HERE = 'https://anoni.net/docs/offline/';
+  const HOME = 'https://anoni.net/docs/';
+  const CSS = 'https://anoni.net/docs/stylesheets/extra.css';
+  for (const [lang, ok, missing] of [
+    ['zh-TW', '沒有網路時，這一頁、首頁、樣式與程式都打得開', '沒有網路時打不開：首頁'],
+    ['zh', '没有网络时，这一页、首页、样式与程序都打得开', '没有网络时打不开：首页'],
+    ['en', 'Without a network, this page, the home page, styles and scripts all open', 'these do not open: the home page'],
+  ]) {
+    const all = await load({ lang, stylesheets: [CSS], cached: [HERE, HOME, CSS] });
+    const allText = all.root.querySelector('.ol-status').textContent;
+    assert.ok(allText.includes(ok), `${lang} 全部都在時該有「${ok}」，實際是：${allText}`);
+
+    // 首頁不在裝置上：PWA 的 start_url 與語言導向的落點就是它
+    const partial = await load({ lang, stylesheets: [CSS], cached: [HERE, CSS] });
+    assert.ok(
+      partial.root.querySelector('.ol-status').textContent.includes(missing),
+      `${lang} 缺首頁時應該看到「${missing}」`
+    );
+  }
+});
+
+test('瀏覽器沒有 Cache Storage 時不畫那一行，其餘照舊', async () => {
+  const { root } = await load({ precached: ['basics/'] });
+  const text = root.querySelector('.ol-status').textContent;
+  assert.ok(!text.includes('沒有網路時'));
+  assert.ok(text.includes('網站自動存的'));
+});
+
+test('狀態列寫出這台裝置上的離線內容版本，三個語系都有', async () => {
+  // 讀者回報離線出問題時，第一個要分辨的是他的 service worker 換到新版了沒，
+  // 而那件事在裝置上原本沒有任何地方看得出來。
+  //
+  // 三個語系各驗一次。這一頁是三語系共用的同一支程式，字串靠 documentElement.lang
+  // 挑，而 zh-CN 版的那個屬性是 "zh"，漏一組就是那個語系的讀者看到空白或英文。
+  for (const [lang, needle] of [
+    ['zh-TW', '離線內容版本'],
+    ['zh', '离线内容版本'],
+    ['en', 'Offline content version'],
+  ]) {
+    const { root } = await load({ lang, version: '202609042020' });
+    const text = root.querySelector('.ol-status').textContent;
+    assert.ok(text.includes(needle), `${lang} 應該看到「${needle}」`);
+    assert.ok(text.includes('202609042020'), `${lang} 應該看到版本號`);
+  }
+});
+
+test('舊版 service worker 不回版本時狀態列照樣畫得出來', async () => {
+  // 讀者的裝置上還跑著上一版時，OFFLINE_STATUS 的回覆裡沒有這個欄位
+  const { root } = await load({});
+  assert.ok(root.querySelector('.ol-status'));
+  assert.ok(!root.querySelector('.ol-version'));
+});
+
+test('英文版的並列用逗號，不吃到中文頓號', async () => {
+  // 原本狀態列第一行的分隔符寫死成頓號，英文版於是變成
+  // 「0 pages you chose to keep、0 pages stored automatically」
+  const { root } = await load({ lang: 'en', precached: ['basics/'] });
+  const text = root.querySelector('.ol-status').textContent;
+  assert.ok(!text.includes('、'), `英文版不該出現頓號，實際是：${text}`);
 });
 
 test('三個語系各自挑到自己那組字串', async () => {
