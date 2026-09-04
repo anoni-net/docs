@@ -107,6 +107,9 @@ Both modes produce standard age files. The only difference is who the recipients
 
 ## Where to store it
 
+Signing in to other sites with a passkey only needs a signature proving it is you, and every way of keeping one can do that. This page asks for something extra: deriving an encryption key. That ability has to be implemented separately, which is why the same passkey can work fine on other sites and still derive no key here. The table below is about which options can do the second thing.
+
+
 | Location | Syncs to other devices | Can derive keys |
 |---|---|---|
 | iCloud Keychain | Yes, across Apple devices | macOS 15 and iOS 18.4 or later |
