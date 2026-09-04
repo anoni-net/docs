@@ -377,7 +377,10 @@ const load = async (opts = {}) => {
       : { match: async (href) => (opts.cached.includes(href) ? 'HIT' : undefined) };
   const window = { __anoniServiceWorker: opts.swFlag !== false, caches };
   const location = {
-    href: opts.picker ? 'https://anoni.net/docs/start/' : 'https://anoni.net/docs/offline/',
+    // opts.from 模擬 service worker 轉址過來時帶的語系（見 sw.js 的 offlineFallback）
+    href:
+      (opts.picker ? 'https://anoni.net/docs/start/' : 'https://anoni.net/docs/offline/') +
+      (opts.from ? '?from=' + opts.from : ''),
     origin: 'https://anoni.net',
   };
   const fetched = [];
@@ -941,6 +944,26 @@ test('舊版 service worker 不回版本時狀態列照樣畫得出來', async (
   const { root } = await load({});
   assert.ok(root.querySelector('.ol-status'));
   assert.ok(!root.querySelector('.ol-version'));
+});
+
+test('被帶到別的語言那一頁時，用讀者要的語言解釋一次', async () => {
+  // service worker 找不到讀者那個語系的落腳頁時會轉到別的語系那一份。畫面上莫名
+  // 其妙跳出看不懂的語言，總要有人講一句發生了什麼事，而那句話要用他看得懂的語言。
+  const en = await load({ lang: 'zh-TW', from: 'en' });
+  const enText = en.root.querySelector('.ol-fallback');
+  assert.ok(enText, 'en 讀者落到中文那一頁時應該有提示');
+  assert.ok(enText.textContent.includes('The page you opened is not on this device'));
+
+  const cn = await load({ lang: 'en', from: 'zh-cn' });
+  assert.ok(cn.root.querySelector('.ol-fallback').textContent.includes('你要开的页面不在设备上'));
+});
+
+test('落到自己語言那一頁時不用解釋', async () => {
+  const same = await load({ lang: 'zh-TW', from: 'zh-tw' });
+  assert.equal(same.root.querySelector('.ol-fallback'), null);
+
+  const plain = await load({ lang: 'zh-TW' });
+  assert.equal(plain.root.querySelector('.ol-fallback'), null);
 });
 
 test('英文版的並列用逗號，不吃到中文頓號', async () => {

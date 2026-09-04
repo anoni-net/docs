@@ -1061,18 +1061,42 @@ function offlinePathFor(url) {
 
 // 離線時的落腳頁。先找這個語系自己那一份，沒有就給別的語系。
 //
-// 「沒有」是真的會發生的狀態：install 只補當下猜到的那一個語系，而換版時 activate
-// 會清掉舊的預快取，所以讀者昨天讀 en、今天在 zh-TW 分頁上按下更新，en 的落腳頁
-// 就不在裝置上了。看得懂與看不懂之間還有一個選項，總比瀏覽器的錯誤畫面好，那一頁
-// 上還有「你的裝置上還存著哪些內容」可以看。
+// 「沒有」是真的會發生的狀態：install 只補讀者用過的語系，而換版時 activate 會清掉
+// 舊的預快取，所以讀者昨天讀 en、今天在 zh-TW 分頁上按下更新，en 的落腳頁可能就不在
+// 裝置上了。
+//
+// 用轉址而不是把內容直接回給原本的網址。直接回傳的話，頁面的 location 還是讀者要開
+// 的那一個（例如 /docs/en/basics/threat-model/），而管理頁靠 location 算出索引與各頁
+// 的網址，算出來全是 404，整份清單畫不出來。讀者看到的是一頁靜態說明，而那一頁存在
+// 的理由正是告訴他「裝置上還有哪些讀得到」。轉址之後網址列也對得上，他知道自己被帶
+// 到哪裡，而 302 不留在 history，按上一頁不會回到那個打不開的網址。
+//
+// 退到別的語系時網址帶上 from。那一頁會用讀者要的語言說明發生了什麼事，不然畫面上
+// 就是莫名其妙跳出一個看不懂的語言。
+//
+// 目標跟當前網址一樣就跳過，自己轉自己會轉不完。
 async function offlineFallback(url) {
-  const own = await caches.match(offlinePathFor(url));
-  if (own) return own;
+  const own = offlinePathFor(url);
+  const paths = [own];
   for (const prefix of LANG_PREFIXES) {
-    const hit = await caches.match(SCOPE_PATH + prefix + "offline/");
-    if (hit) return hit;
+    const path = SCOPE_PATH + prefix + "offline/";
+    if (paths.indexOf(path) === -1) paths.push(path);
+  }
+  for (const path of paths) {
+    if (path === url.pathname) continue;
+    if (!(await caches.match(url.origin + path))) continue;
+    const target = new URL(url.origin + path);
+    if (path !== own) target.searchParams.set("from", langCodeOf(url));
+    return Response.redirect(target.href, 302);
   }
   return undefined;
+}
+
+// 網址屬於哪個語系，回的是網址上看得到的那個代號（zh-tw、zh-cn、en）。落腳頁靠它
+// 知道讀者本來要的是哪一種語言。
+function langCodeOf(url) {
+  const prefix = langPrefixOf(url);
+  return prefix ? prefix.replace(/\/$/, "") : "zh-tw";
 }
 
 // event 可能不存在（例如未來從別處呼叫），沒有就退回 fire-and-forget
