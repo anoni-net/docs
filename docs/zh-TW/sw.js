@@ -4,7 +4,8 @@
  * 策略：
  * - 預快取：app shell（theme CSS/JS）+ 讀者當下語系的核心章節 + offline fallback 頁
  * - HTML（navigation）：network-first，離線時回快取，再不行回該語系 offline 頁
- * - 靜態資產：stale-while-revalidate，runtime 快取設上限避免膨脹
+ * - 靜態資產：stale-while-revalidate，runtime 快取設上限避免膨脹。裝置上沒有副本
+ *   時等網路有上限，逾時給 504 讓頁面繼續渲染
  * - 跨域請求（含 aa.anoni.net 分析）一律放行不快取
  *
  * __BUILD_VERSION__ 由 build_docs_anoni.sh 於部署時替換，
@@ -37,7 +38,7 @@ const PRECACHE = "anoni-docs-precache-" + VERSION;
 // app shell，換版後舊的確實該整批丟掉。
 // 這兩個快取只在「自動存下內容」開著的時候寫。原本是無條件寫的，結果是讀者按了
 // 「清除所有離線內容」之後，每讀一頁就又被存回裝置一頁，上限 120 頁加 200 個資產，
-// 而管理頁上的說明只講會補回 0.5 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
+// 而管理頁上的說明只講會補回 0.7 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
 // 說了不留就不該留。
 const RUNTIME_PAGES = "anoni-docs-pages";
 const RUNTIME_ASSETS = "anoni-docs-assets";
@@ -103,6 +104,13 @@ const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 // 每個語系各一份的資產：theme app shell（hash 檔名與 overrides/base.html 同步），
 // 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
 // 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
+//
+// 這份清單只放 bootstrap：帶雜湊檔名的 theme 資產，加上索引本身。站台自己那批每頁
+// 都載入的樣式與腳本（stylesheets/extra.css、js/analytics.js 之類）寫在索引的 shell
+// 欄位，由 shellAssetsFor 讀出來，頁面改了引用什麼不必回來改這裡。
+//
+// 2026-09-04 之前那批沒有人負責：建置端把每頁都出現的資產從個別頁面移除，這裡又
+// 沒有收，於是讀者按了「全部存到裝置」，227 頁的 HTML 一頁不缺，離線打開是白的。
 const SHELL_ASSETS = [
   "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -383,26 +391,47 @@ function precacheUrlsFor(prefix) {
 // 一份寫死的清單，圖換了、頁面改了都不必回來改 sw.js。
 //
 // 讀者自己勾的頁面走的是另一條，由管理頁把資產一起送進 LIBRARY_ASSETS。
-async function corePageAssets(prefix) {
-  try {
-    const response = await fetch(
-      SCOPE_PATH + prefix + "offline-index.json",
-      NO_HTTP_CACHE
-    );
-    if (!response.ok) return [];
-    const index = await response.json();
-    const core = new Set(CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH);
-    const assets = new Set();
-    for (const section of index.sections || []) {
-      for (const page of section.pages || []) {
-        if (!core.has(page.url)) continue;
-        for (const asset of page.assets || []) assets.add(asset);
-      }
+async function corePageAssets(prefix, index) {
+  const data = index === undefined ? await loadOfflineIndex(prefix) : index;
+  if (!data) return [];
+  const core = new Set(CORE_PAGES_BY_PREFIX[prefix] || CORE_PAGES_ZH);
+  const assets = new Set();
+  for (const section of data.sections || []) {
+    for (const page of section.pages || []) {
+      if (!core.has(page.url)) continue;
+      for (const asset of page.assets || []) assets.add(asset);
     }
-    return [...assets].map((asset) => SCOPE_PATH + prefix + asset);
+  }
+  return [...assets].map((asset) => SCOPE_PATH + prefix + asset);
+}
+
+// 每一頁都會載入的那批樣式、腳本與 manifest。
+//
+// 清單由建置算出來（hooks/offline_index.py 的 shared），寫在索引的 shell 欄位。
+// 它們跟頁面內容無關，讀者勾一頁不該揹一份，可是離線打開任何一頁都需要它們，
+// 所以由預快取統一存一份，兩條路（完整章節與底線那批）都要。
+//
+// 索引抓不到就回空陣列。那一輪頁面照樣存得下來，樣式等下一次補。
+async function shellAssetsFor(prefix, index) {
+  const data = index === undefined ? await loadOfflineIndex(prefix) : index;
+  if (!data) return [];
+  return (data.shell || []).map((asset) => SCOPE_PATH + prefix + asset);
+}
+
+// 讀這個語系的離線索引。預快取要從它知道兩件事：每頁都載入的 shell 資產有哪些，
+// 以及核心章節那幾頁引用了哪些內文圖。抓不到就回 null，呼叫端各自退回原本的行為。
+async function loadOfflineIndex(prefix) {
+  const url = SCOPE_PATH + prefix + "offline-index.json";
+  try {
+    const response = await fetch(url, NO_HTTP_CACHE);
+    if (!response.ok) return null;
+    // 順手存進預快取。這一份本來就在 SHELL_ASSETS 裡（管理頁離線時要用），
+    // 存下來之後 precacheFor 的迴圈就會跳過它，同一個網址不必走兩次網路。
+    const cache = await caches.open(PRECACHE);
+    await cache.put(url, response.clone());
+    return await response.json();
   } catch (err) {
-    // 索引抓不到就只是這一輪沒補圖，頁面本身照樣存得下來
-    return [];
+    return null;
   }
 }
 
@@ -413,7 +442,8 @@ async function corePageAssets(prefix) {
 // 進不去的話整個功能等於不存在。少了它，沒快取過的網址在離線時會一路走到
 // networkFirst 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面。
 //
-// 這一批約 0.5 MB，相對於完整章節的十 MB 是可以接受的底線。
+// 這一批約 0.7 MB（含索引 shell 欄位那批每頁共用的樣式與腳本），相對於完整章節的
+// 十 MB 是可以接受的底線。
 function essentialUrlsFor(prefix) {
   const urls = [SCOPE_PATH + prefix + "offline/"];
   for (const asset of SHELL_ASSETS) {
@@ -468,8 +498,11 @@ async function precacheFor(prefix, wantFull) {
   precachedPrefixes.add(done);
   const cache = await caches.open(PRECACHE);
   let urls = full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix);
+  // 索引只讀一次，shell 與核心章節的內文圖都從同一份取。
+  const index = await loadOfflineIndex(prefix);
+  urls = urls.concat(await shellAssetsFor(prefix, index));
   if (full && (await precacheImagesEnabled())) {
-    urls = urls.concat(await corePageAssets(prefix));
+    urls = urls.concat(await corePageAssets(prefix, index));
   }
   // 逐一快取並容忍個別失敗（本地開發只有單一語系，其他語系路徑會 404）
   await Promise.allSettled(
@@ -536,7 +569,7 @@ async function installPrecache() {
 // 從搜尋引擎落在內頁的讀者更是從頭到尾沒被問過，十 MB 就這樣進了他的行動網路帳單。
 //
 // 兩個條件任一成立就算讀者確定了：client 說他選過閱讀語言，或者他在同一個語系底下
-// 翻到了第二頁。看一頁就走的人只會用掉底線那 0.5 MB。
+// 翻到了第二頁。看一頁就走的人只會用掉底線那 0.7 MB。
 //
 // 計數刻意不放在 precacheFor 裡。install 也會呼叫那一支，算進去的話首次造訪光是
 // install 加上第一次導覽就湊滿兩次，門檻等於不存在。
@@ -999,6 +1032,26 @@ function networkLooksDown() {
   return networkDownSince > 0 && Date.now() - networkDownSince < NETWORK_DOWN_TTL_MS;
 }
 
+// 裝置上沒有副本的資產，等網路等多久。
+//
+// 導覽那條的逾時可以壓到 1.2 秒，因為逾時之後還有裝置上的舊副本可以給，讀者拿到的
+// 是完整內容，只是晚一輪才更新。資產這條逾時之後只能給失敗，畫面會少一塊，所以放
+// 寬到八秒，慢的網路照樣等得到。真正接住離線讀者的是上面的 networkLooksDown。
+//
+// 2026-09-04 補上。原本沒有任何上限，連得上但沒有回應的網路（飛航模式底下 Wi-Fi
+// 還開著、熱點把流量攔在登入頁）會讓請求一直掛著。render-blocking 的
+// stylesheets/extra.css 掛住的話整頁就一直是白的，實測四十五秒還沒有任何內容。
+const ASSET_TIMEOUT_MS = 8000;
+
+// 快取沒有、網路也拿不到時給的回應。
+//
+// 原本讓 respondWith 收到 undefined，規格上那是 network error，Gecko 還會在主控台
+// 印一行「resolved with non-Response value」。回一個明確的 504，瀏覽器知道這個資源
+// 結束了才會繼續把頁面畫完，而不是停在載入中。
+function assetUnavailable() {
+  return new Response("", { status: 504, statusText: "Offline" });
+}
+
 async function networkFirst(request, event) {
   // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取。
   //
@@ -1060,19 +1113,41 @@ async function networkFirst(request, event) {
 async function staleWhileRevalidate(request, event) {
   const cached = await caches.match(request);
   // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
-  // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。這裡回應先給快取，
-  // revalidate 在背景跑，讀者感覺不到多出來的那個往返。
-  const fetchPromise = fetch(request, { cache: "no-cache" })
-    .then(async (response) => {
-      if (response.ok && (await autoPrecacheEnabled())) {
-        const cache = await caches.open(RUNTIME_ASSETS);
-        await cache.put(request, response.clone());
-        keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
-      }
-      return response;
-    })
-    .catch(() => cached);
-  return cached || fetchPromise;
+  // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。
+  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
+    // 這條路通了，離線狀態跟著清掉，跟 networkFirst 共用同一個旗標
+    networkDownSince = 0;
+    if (response.ok && (await autoPrecacheEnabled())) {
+      const cache = await caches.open(RUNTIME_ASSETS);
+      await cache.put(request, response.clone());
+      keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
+    }
+    return response;
+  });
+
+  // 裝置上有一份就直接給，revalidate 在背景跑，讀者感覺不到多出來的那個往返。
+  if (cached) {
+    keepAlive(event, network.catch(() => {}));
+    return cached;
+  }
+
+  // 網路已經知道是斷的就不必再等。這一條是空白畫面與可讀畫面的分界：導覽那次的
+  // 逾時已經替後面所有資產判斷過網路通不通，接下來一分鐘內快取沒有的東西直接
+  // 收尾，不必一個一個等滿上限。
+  if (networkLooksDown()) {
+    keepAlive(event, network.catch(() => {}));
+    return assetUnavailable();
+  }
+
+  const raced = await Promise.race([
+    network.catch(() => null),
+    new Promise((resolve) => setTimeout(() => resolve(null), ASSET_TIMEOUT_MS)),
+  ]);
+  if (raced) return raced;
+
+  networkDownSince = Date.now();
+  keepAlive(event, network.catch(() => {}));
+  return assetUnavailable();
 }
 
 self.addEventListener("fetch", (event) => {
