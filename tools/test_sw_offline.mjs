@@ -117,6 +117,8 @@ const harness = `
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const ESSENTIAL_PAGES = \[[^\]]*\];/m)}
+  ${grab(/^const FALLBACK_PAGE = .*$/m)}
+  ${grab(/^function fallbackUrls\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function corePageAssets\(prefix, index\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function shellAssetsFor\(prefix, index\) \{[\s\S]*?\n\}/m)}
@@ -182,7 +184,7 @@ const harness = `
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
     shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
     crossLangAsset, assetUrlFor, matchCachedAsset,
-    visitedPrefixes, offlineFallback, langCodeOf,
+    visitedPrefixes, offlineFallback, langCodeOf, fallbackUrls,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
     libraryEntries, precachedEntries,
@@ -414,16 +416,26 @@ test('預快取清單只含指定語系，作品本體三語共用', (load) => {
   const zh = sw.precacheUrlsFor('');
   const en = sw.precacheUrlsFor('en/');
 
+  // 落腳頁是刻意的例外，三個語系的都在（見 FALLBACK_PAGE），所以比對時先拿掉
+  const own = (list) => list.filter((url) => !url.endsWith('/not-stored/'));
+
   assert.ok(zh.includes('/docs/tools/what-is-tor/'));
-  assert.ok(!zh.some((url) => url.startsWith('/docs/en/')));
-  assert.ok(!zh.some((url) => url.startsWith('/docs/zh-cn/')));
+  assert.ok(!own(zh).some((url) => url.startsWith('/docs/en/')));
+  assert.ok(!own(zh).some((url) => url.startsWith('/docs/zh-cn/')));
 
   assert.ok(en.includes('/docs/en/tools/what-is-tor/'));
-  assert.ok(!en.includes('/docs/tools/what-is-tor/'));
+  assert.ok(!own(en).includes('/docs/tools/what-is-tor/'));
 
   // 作品只建置一份在根路徑，兩個清單都指向同一批
   assert.ok(zh.includes('/docs/games/tor-network/play/index.html'));
   assert.ok(en.includes('/docs/games/tor-network/play/index.html'));
+
+  // 落腳頁三個語系都在，兩個清單裡都是同樣那三個
+  for (const list of [zh, en]) {
+    assert.ok(list.includes('/docs/not-stored/'));
+    assert.ok(list.includes('/docs/en/not-stored/'));
+    assert.ok(list.includes('/docs/zh-cn/not-stored/'));
+  }
 });
 
 test('首次造訪只抓底線那批，不在讀者選語言之前下整個語系', async (load) => {
@@ -517,12 +529,14 @@ test('一次只抓一個語系的量', async (load) => {
   assert.ok(want.every((url) => fetched.includes(url)));
   // 內文圖預設不補，所以這一輪連 offline-index.json 都不會去讀
   assert.equal(fetched.length, want.length);
-  // 三種形狀：en 自己的、三語系共用的作品本體、三語系位元組相同的 theme 資產
+  // 四種形狀：en 自己的、三語系共用的作品本體、三語系位元組相同的 theme 資產，
+  // 以及三個語系都要存的落腳頁
   assert.ok(
     fetched.every(
       (url) =>
         url.startsWith('/docs/en/') ||
         url.startsWith('/docs/games/') ||
+        url.endsWith('/not-stored/') ||
         sw.crossLangAsset(url.slice('/docs/'.length))
     )
   );
@@ -572,12 +586,14 @@ test('換語系時不重抓已經有的東西', async (load) => {
   fetched.length = 0;
 
   await sw.precacheFor('en/', true);
-  // 作品本體第一輪就抓過了，第二輪只補 en 自己那一份
+  // 作品本體與三個語系的落腳頁第一輪就抓過了，第二輪只補 en 自己那一份
   assert.ok(fetched.every((url) => url.startsWith('/docs/en/')));
   assert.ok(fetched.length < firstRound);
   assert.equal(
     fetched.length,
-    sw.precacheUrlsFor('en/').filter((url) => url.startsWith('/docs/en/')).length
+    sw
+      .precacheUrlsFor('en/')
+      .filter((url) => url.startsWith('/docs/en/') && !url.endsWith('/not-stored/')).length
   );
 });
 
@@ -964,20 +980,20 @@ test('清除之後只補離線提示頁那一批，章節不會整包抓回來',
   assert.ok(fetched.includes('/docs/tools/what-is-tor/'));
 });
 
-test('清除過的裝置離線時仍看得到離線提示頁', async (load) => {
-  // 這一批底線存在的理由。少了它，沒快取過的網址在離線時會一路走到 networkFirst
-  // 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面，不是站台的說明，而那一頁
-  // 正好就是離線內容管理頁，想清東西的人往往正好連不上網。
+test('清除過的裝置離線時仍看得到落腳頁', async (load) => {
+  // 這一批底線存在的理由。少了它，沒快取過的網址在離線時只剩瀏覽器自己的網路錯誤
+  // 畫面，讀者連「裝置上還有哪些讀得到」都問不到。底線裡同時有落腳頁與管理頁：前者
+  // 是斷網時的落點，後者是想清掉裝置上東西的人唯一的入口，而那種時候往往正好沒網路。
   const { sw, net } = load();
   await sw.clearAllOffline();
   await sw.precacheFor('');
   net.offline = true;
 
   const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
-  assert.equal(redirectTo(response), ORIGIN + '/docs/offline/');
+  assert.equal(redirectTo(response), ORIGIN + '/docs/not-stored/');
 });
 
-test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
+test('關掉自動存之後，落腳頁照樣留著', async (load) => {
   const { sw, net } = load();
   await sw.setAutoPrecache(false);
   await sw.precacheFor('');
@@ -985,7 +1001,7 @@ test('關掉自動存之後，離線提示頁照樣留著', async (load) => {
 
   assert.equal(
     redirectTo(await sw.networkFirst(req('/docs/basics/metadata/'), null)),
-    ORIGIN + '/docs/offline/'
+    ORIGIN + '/docs/not-stored/'
   );
 });
 
@@ -1204,20 +1220,42 @@ test('離線時快取過的頁面直接回快取，不落到離線頁', async (l
   assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/'), null), 'TOR');
 });
 
-test('離線時各語系落到自己的離線頁', async (load) => {
+test('離線時各語系落到自己那一份落腳頁', async (load) => {
+  // 三個語系的落腳頁都在裝置上（每份三 KB），所以讀者拿到的一定是自己看得懂的那一份
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  for (const url of sw.fallbackUrls()) await precache.put(url, 'FALLBACK');
+
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/en/basics/metadata/'), null)),
+    ORIGIN + '/docs/en/not-stored/'
+  );
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/zh-cn/basics/metadata/'), null)),
+    ORIGIN + '/docs/zh-cn/not-stored/'
+  );
+  assert.equal(
+    redirectTo(await sw.networkFirst(req('/docs/basics/metadata/'), null)),
+    ORIGIN + '/docs/not-stored/'
+  );
+});
+
+test('舊版裝置上還沒有落腳頁時退到管理頁，跨語系才解釋一句', async (load) => {
+  // 讀者按下更新之前，裝置上是上一版的預快取，那時只有管理頁
   const { sw, caches } = load({ offline: true });
   const precache = await caches.open(sw.PRECACHE);
   await precache.put('/docs/offline/', 'ZH-OFFLINE');
   await precache.put('/docs/en/offline/', 'EN-OFFLINE');
 
-  // 自己那一份在的時候不帶 from，讀者看到的就是他的語言，沒什麼要解釋的
+  // 自己那個語系的管理頁在，不必解釋
   assert.equal(
-    redirectTo(await sw.networkFirst(req('/docs/en/basics/metadata/'), null)),
+    redirectTo(await sw.networkFirst(req('/docs/en/basics/'), null)),
     ORIGIN + '/docs/en/offline/'
   );
+  // zh-cn 的不在，退到 zh-TW 那一份並帶上讀者要的語系
   assert.equal(
-    redirectTo(await sw.networkFirst(req('/docs/basics/metadata/'), null)),
-    ORIGIN + '/docs/offline/'
+    redirectTo(await sw.networkFirst(req('/docs/zh-cn/basics/'), null)),
+    ORIGIN + '/docs/offline/?from=zh-cn'
   );
 });
 

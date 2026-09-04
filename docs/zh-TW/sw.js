@@ -407,7 +407,12 @@ function precacheUrlsFor(prefix) {
   for (const asset of GAME_APPS) {
     urls.push(SCOPE_PATH + asset);
   }
-  return urls;
+  return urls.concat(fallbackUrls());
+}
+
+// 三個語系的落腳頁。每份三 KB，兩條預快取的路都帶著，見 FALLBACK_PAGE。
+function fallbackUrls() {
+  return LANG_PREFIXES.map((prefix) => SCOPE_PATH + prefix + FALLBACK_PAGE);
 }
 
 // 核心章節那幾頁自己的內文圖。
@@ -479,6 +484,19 @@ async function loadOfflineIndex(prefix) {
 // 底線那批之後，探針原本還指著首頁，只存過底線的裝置就被當成上一版有完整章節。
 const ESSENTIAL_PAGES = ["", "offline/"];
 
+// 離線走到沒存下來的頁面時的落腳頁。
+//
+// 它跟管理頁分開，因為兩種處境不一樣：落到這裡的人是「我要看的東西打不開」，他要的
+// 是知道發生什麼事、還能做什麼；管理頁那份兩百多頁的清單與下載按鈕是給「我要準備
+// 離線內容」的人看的。
+//
+// 這一頁不繼承 theme 的版型（見 overrides/not_stored.html），整份三 KB 而且沒有任何
+// 外部資源。讀者落到這裡的時機正是東西缺了，那時候還要它去載別的檔案很奇怪。
+//
+// 三個語系的都存。每份三 KB，加起來不到十 KB，換到的是任何語系的讀者落腳時都看得懂
+// 那一頁。
+const FALLBACK_PAGE = "not-stored/";
+
 function essentialUrlsFor(prefix) {
   // 首頁跟離線閱讀頁一起進來。首頁是 PWA 的 start_url，也是語言導向的落點：讀者的
   // PWA 是從 zh-TW 的首頁裝的，那一頁的 JS 讀到閱讀語言是 en 就 location.replace 到
@@ -491,7 +509,7 @@ function essentialUrlsFor(prefix) {
   for (const asset of SHELL_ASSETS) {
     urls.push(assetUrlFor(prefix, asset));
   }
-  return urls;
+  return urls.concat(fallbackUrls());
 }
 
 // 這個 SW 生命週期內已經補過的語系。每次導覽 client 都會送 PRECACHE_LANG 過來，
@@ -1076,17 +1094,30 @@ function offlinePathFor(url) {
 //
 // 目標跟當前網址一樣就跳過，自己轉自己會轉不完。
 async function offlineFallback(url) {
-  const own = offlinePathFor(url);
+  const prefix = langPrefixOf(url) || "";
+  const own = SCOPE_PATH + prefix + FALLBACK_PAGE;
   const paths = [own];
-  for (const prefix of LANG_PREFIXES) {
-    const path = SCOPE_PATH + prefix + "offline/";
+  // 自己語系的落腳頁不在（舊版裝置上還沒有這一頁）就退到別的語系那一份
+  for (const other of LANG_PREFIXES) {
+    const path = SCOPE_PATH + other + FALLBACK_PAGE;
+    if (paths.indexOf(path) === -1) paths.push(path);
+  }
+  // 再退到管理頁。舊版的裝置上只有它，而它至少講得出「裝置上還有哪些讀得到」。
+  const ownOffline = offlinePathFor(url);
+  paths.push(ownOffline);
+  for (const other of LANG_PREFIXES) {
+    const path = SCOPE_PATH + other + "offline/";
     if (paths.indexOf(path) === -1) paths.push(path);
   }
   for (const path of paths) {
     if (path === url.pathname) continue;
     if (!(await caches.match(url.origin + path))) continue;
     const target = new URL(url.origin + path);
-    if (path !== own) target.searchParams.set("from", langCodeOf(url));
+    // 管理頁那一份會用 from 決定要用哪個語言解釋這件事。落腳頁三個語系都存著，
+    // 讀者拿到的本來就是自己看得懂的那一份，不需要解釋。
+    if (path !== own && path !== ownOffline && path.endsWith("offline/")) {
+      target.searchParams.set("from", langCodeOf(url));
+    }
     return Response.redirect(target.href, 302);
   }
   return undefined;

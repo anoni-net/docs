@@ -62,6 +62,8 @@ const harness = `
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const ESSENTIAL_PAGES = \[[^\]]*\];/m)}
+  ${grab(/^const FALLBACK_PAGE = .*$/m)}
+  ${grab(/^function fallbackUrls\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
   // 執行期一次只預快取一個語系，檢查要涵蓋全部，所以逐一跑過再合併

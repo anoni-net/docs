@@ -1,0 +1,45 @@
+{#
+  離線時走到沒存下來的頁面，service worker 會把讀者轉到這裡。
+
+  這一份刻意不繼承 base.html。讀者落到這裡的時機正是「東西缺了」，那時候還要求它去
+  載 theme 的樣式、腳本與字型很奇怪，少一個就又是一片空白。所以整頁自給自足：沒有
+  外部資源，樣式寫在裡面，三、四 KB 就完整。
+
+  預快取把三個語系的這一頁都存下來（見 sw.js 的 FALLBACK_PAGE），讀者不論用哪一種
+  語言，落腳的都是自己看得懂的那一份。
+#}
+<!DOCTYPE html>
+<html lang="{{ config.theme.language }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>{{ page.title }} - {{ config.site_name }}</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0 auto;
+        padding: 3rem 1.25rem;
+        max-width: 34rem;
+        font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+        line-height: 1.75;
+        color: #1f2529;
+        background: #fff;
+      }
+      h1 { font-size: 1.3rem; line-height: 1.5; margin: 0 0 1rem; }
+      p { margin: 0 0 1rem; }
+      ul { margin: 0; padding-left: 1.25rem; }
+      li { margin: 0.4rem 0; }
+      a { color: #006d99; }
+      /* theme 的固定連結錨點對這一頁沒有意義，這裡沒有目錄也沒有人要分享段落 */
+      .headerlink { display: none; }
+      @media (prefers-color-scheme: dark) {
+        body { color: #e4e6e7; background: #1b1f22; }
+        a { color: #4dc3ff; }
+      }
+    </style>
+  </head>
+  <body>
+    {{ page.content }}
+  </body>
+</html>
