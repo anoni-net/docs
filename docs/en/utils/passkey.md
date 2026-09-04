@@ -92,7 +92,7 @@ Then go to [local file encryption](age.md) and choose the "passkey" mode.
 
 After those three steps you hold two things: a passkey stored in your password manager or keychain, and a backup key pair.
 
-Local file encryption is the only place on this site that uses it so far. Switch the key to "passkey" and encryption takes one fingerprint touch, with no passphrase to think of or type. The file is encrypted to the passkey and the backup key at the same time, so either one opens it.
+Local file encryption is the only place on this site that uses it so far. Switch the key to "passkey" and encryption takes one fingerprint touch, with no passphrase to think of or type. By default the file is encrypted to the passkey and the backup key at the same time, so either one opens it. The backup half can be turned off, which leaves the passkey as the only way in, and the encryption tool spells out that cost on screen.
 
 A concrete example: the summary from the [threat model self-check](threat-model.md) says who you are protecting against and what you have. That page deliberately keeps no answers on the device, so when you decide to keep a copy, wrap it with this key first.
 
