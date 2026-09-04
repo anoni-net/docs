@@ -37,7 +37,7 @@ These are hard to spot while filling in the form. Listed side by side, they stan
 
 What you enter stays in the browser tab. It is not written to any form of browser storage, and it is not sent anywhere. Reloading returns the page to blank.
 
-That is deliberate. An answer like "the person I am protecting against is someone close to me" is exactly the kind of thing that should not sit on the device, and that device may well be one the other person can reach. To keep a copy, press "Copy summary" and paste it somewhere you chose. That decision belongs to you.
+That is deliberate. An answer like "the person I am protecting against is someone close to me" is exactly the kind of thing that should not sit on the device, and that device may well be one the other person can reach. To keep a copy, press "Copy summary" and paste it somewhere you chose. That decision belongs to you. If you decide to keep it on the device, encrypt it first with [local file encryption](age.md) rather than leaving plain text behind. That page takes a passphrase, or a [passkey](passkey.md) as the key, which is one fingerprint touch.
 
 A test covers this specifically, so that nobody later adds storage for the sake of convenience.
 
