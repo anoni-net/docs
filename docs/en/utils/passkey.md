@@ -88,6 +88,21 @@ Create a passkey for this site and store it in your password manager or keychain
 
 Then go to [local file encryption](age.md) and choose the "passkey" mode.
 
+## What this key can do
+
+After those three steps you hold two things: a passkey stored in your password manager or keychain, and a backup key pair.
+
+Local file encryption is the only place on this site that uses it so far. Switch the key to "passkey" and encryption takes one fingerprint touch, with no passphrase to think of or type. The file is encrypted to the passkey and the backup key at the same time, so either one opens it.
+
+The passphrase mode is still the right choice in these cases:
+
+- You need to decrypt on another computer with the age command line tool, and that computer does not have your passkey
+- You are sending the file to someone else, who cannot have your passkey
+- You use Tor Browser, which disables WebAuthn entirely
+- The device you need lacks PRF support, see the table below
+
+Both modes produce standard age files. The only difference is who the recipients are. Making one copy in each mode and keeping them in different places works too.
+
 ## Where to store it
 
 | Location | Syncs to other devices | PRF support |
