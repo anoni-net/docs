@@ -1095,6 +1095,7 @@ test('這個語系的落腳頁不在裝置上時，給別的語系那一份', as
   const precache = await caches.open(sw.PRECACHE);
   await precache.put('/docs/offline/', 'ZH-OFFLINE');
   assert.equal(await sw.offlineFallback(u('/docs/en/basics/')), 'ZH-OFFLINE');
+  assert.equal(await sw.offlineFallback(u('/docs/zh-cn/basics/')), 'ZH-OFFLINE');
 
   // 自己那一份在的時候照樣優先
   await precache.put('/docs/en/offline/', 'EN-OFFLINE');
@@ -1142,14 +1143,20 @@ test('連落腳頁都沒有時給明確的網路錯誤，不停在空白', async
 test('install 把讀者用過的其他語系的落腳頁一起補回來', async (load) => {
   // 換版時 activate 清掉舊的預快取，install 只補當下猜到的那一個語系的話，讀者
   // 昨天讀的 en 就沒有落腳頁也沒有樣式了。補的是底線那批，不是整份章節。
+  //
+  // 三個語系一視同仁。這裡兩個都記，避免哪天有人只照 en 想事情，zh-cn 的讀者
+  // 遇到同一件事卻沒有測試擋著。
   const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
   await sw.noteVisit('en/');
+  await sw.noteVisit('zh-cn/');
   fetched.length = 0;
   await sw.installPrecache();
   assert.ok(fetched.includes('/docs/en/offline/'), 'en 的落腳頁沒有補回來');
+  assert.ok(fetched.includes('/docs/zh-cn/offline/'), 'zh-cn 的落腳頁沒有補回來');
   assert.ok(fetched.includes('/docs/offline/'), 'zh-TW 自己那份也要有');
   // 完整章節仍然只跟著當下這一個語系，切過一次語言不該讓裝置上多出十 MB
   assert.ok(!fetched.includes('/docs/en/basics/threat-model/'));
+  assert.ok(!fetched.includes('/docs/zh-cn/basics/threat-model/'));
 });
 
 test('選過閱讀語言的讀者也會留下造訪紀錄', async (load) => {
