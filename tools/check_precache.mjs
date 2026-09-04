@@ -25,6 +25,7 @@
  *   node tools/check_precache.mjs
  * 找不到 docs/output 時跳過並回 0（沒建置過就不該擋人）。
  */
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -51,6 +52,9 @@ const grab = (re) => {
 const harness = `
   const SCOPE_PATH = "/docs/";
   ${grab(/^const LANG_PREFIXES = \[[^\]]*\];/m)}
+  ${grab(/^const CROSS_LANG_PREFIXES = \[[\s\S]*?\n\];/m)}
+  ${grab(/^function crossLangAsset\(asset\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function assetUrlFor\(prefix, asset\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const SHELL_ASSETS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_ZH = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_EN = \[[\s\S]*?\n\];/m)}
@@ -61,14 +65,15 @@ const harness = `
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
   // 執行期一次只預快取一個語系，檢查要涵蓋全部，所以逐一跑過再合併
   const byPrefix = LANG_PREFIXES.map((prefix) => [prefix, precacheUrlsFor(prefix)]);
-  const essential = essentialUrlsFor("");
+  const essentialByPrefix = LANG_PREFIXES.map((prefix) => [prefix, essentialUrlsFor(prefix)]);
   return {
-    byPrefix, essential, games: GAME_APPS.length, cacheKeyCandidates,
-    SHELL_ASSETS, GAME_APPS,
+    byPrefix, essentialByPrefix, games: GAME_APPS.length, cacheKeyCandidates,
+    SHELL_ASSETS, GAME_APPS, CROSS_LANG_PREFIXES, crossLangAsset, assetUrlFor,
   };
 `;
 const {
-  byPrefix, essential, games, cacheKeyCandidates, SHELL_ASSETS, GAME_APPS,
+  byPrefix, essentialByPrefix, games, cacheKeyCandidates, SHELL_ASSETS, GAME_APPS,
+  CROSS_LANG_PREFIXES, crossLangAsset, assetUrlFor,
 } = new Function(harness)();
 
 // 每頁都載入的那批寫在各語系索引的 shell 欄位，執行期由 shellAssetsFor 讀出來補進
@@ -80,10 +85,12 @@ for (const [prefix] of byPrefix) {
 }
 const shellFor = (prefix) => {
   const index = indexes.get(prefix);
-  return index ? (index.shell || []).map((asset) => '/docs/' + prefix + asset) : [];
+  // 路徑交給 sw.js 自己那支決定，三語系共用的那批走根路徑
+  return index ? (index.shell || []).map((asset) => assetUrlFor(prefix, asset)) : [];
 };
 const byPrefixFull = byPrefix.map(([prefix, list]) => [prefix, [...list, ...shellFor(prefix)]]);
-const essentialFull = [...essential, ...shellFor('')];
+const essentialFullBy = essentialByPrefix.map(([prefix, list]) => [prefix, [...list, ...shellFor(prefix)]]);
+const essentialFull = essentialFullBy.find(([prefix]) => prefix === '')[1];
 
 // 作品本體每個語系的清單裡都有，合併時去重
 const urls = [...new Set(byPrefixFull.flatMap(([, list]) => list))];
@@ -117,6 +124,19 @@ for (const [prefix, list] of byPrefixFull) {
   console.log(`    ${name.padEnd(6)} ${mb(sizeOf(list))}（${list.length} 個 URL）`);
 }
 
+// 切過語言的讀者要多下多少。三語系位元組相同的那批走根路徑，第一個語系下過就不必
+// 再下，而 install 換版時會替讀者用過的每個語系補回底線那批，所以這個數字有人在付。
+const first = byPrefixFull.find(([prefix]) => prefix === '');
+if (first) {
+  const already = new Set(first[1]);
+  for (const [prefix, list] of byPrefixFull) {
+    if (!prefix) continue;
+    const extra = list.filter((url) => !already.has(url));
+    const name = prefix.replace(/\/$/, '');
+    console.log(`    下過 zh-TW 再切到 ${name.padEnd(5)} 多 ${mb(sizeOf(extra))}（${extra.length} 個 URL）`);
+  }
+}
+
 // 作品本體單獨報一次，那是最容易漏補的一批
 const gameUrls = urls.filter((u) => u.startsWith('/docs/games/') && !u.endsWith('/games/'));
 console.log(`  其中三件互動作品 ${mb(sizeOf(gameUrls))}（${games} 個檔案，三語共用）`);
@@ -125,6 +145,18 @@ console.log(`  其中三件互動作品 ${mb(sizeOf(gameUrls))}（${games} 個�
 console.log(
   `  關掉自動存時仍保留的底線 ${mb(sizeOf(essentialFull))}（${essentialFull.length} 個 URL）`
 );
+// install 換版時替讀者用過的每個語系補的就是底線那批，這是切過語言的人要付的
+{
+  const already = new Set(essentialFull);
+  for (const [prefix, list] of essentialFullBy) {
+    if (!prefix) continue;
+    const extra = list.filter((url) => !already.has(url));
+    const name = prefix.replace(/\/$/, '');
+    console.log(
+      `    換版時替 ${name.padEnd(5)} 補的底線 ${mb(sizeOf(extra))}（${extra.length} 個 URL）`
+    );
+  }
+}
 console.log(`  全部語系去重後 ${mb(bytes)}，這是底下兩道檢查涵蓋的範圍`);
 
 // 索引頁連出去的網址形狀，要能命中預快取的 key
@@ -208,6 +240,34 @@ if (indexes.has('')) {
   console.log('  找不到 offline-index.json，跳過反向檢查');
 }
 
+// 三語系共用的那批要真的位元組相同
+//
+// CROSS_LANG_PREFIXES 讓預快取只存根路徑那一份，讀者切過語言之後不必再下一次。前提
+// 是三次 build 產出的內容確實一模一樣，而那是 mkdocs-material 與 privacy plugin 的
+// 行為，升級之後可能改變。assets/javascripts/bundle.*.js 就是活生生的反例：雜湊檔名
+// 三語系相同，內容卻不同，privacy plugin 在地化第三方資源時嵌進了帶語系前綴的絕對
+// 網址。那一支靠著不在共用目錄底下才沒出事，換成別的檔案開始這樣就沒人擋得住。
+const crossLangMismatch = [];
+{
+  const candidates = new Set();
+  for (const [prefix] of byPrefix) {
+    const index = indexes.get(prefix);
+    for (const asset of [...SHELL_ASSETS, ...((index && index.shell) || [])]) {
+      if (crossLangAsset(asset)) candidates.add(asset);
+    }
+  }
+  for (const asset of candidates) {
+    const digests = new Set();
+    for (const [prefix] of byPrefix) {
+      const f = path.join(OUT, prefix, asset);
+      if (!fs.existsSync(f)) continue;
+      digests.add(crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex'));
+    }
+    if (digests.size > 1) crossLangMismatch.push(asset);
+  }
+  console.log(`  三語系共用 ${candidates.size} 個資產，各語系的位元組都比對過`);
+}
+
 if (missing.length) {
   console.error(`\n✗ ${missing.length} 個 URL 在 docs/output 裡找不到對應檔案：`);
   for (const u of missing.slice(0, 20)) console.error('  ' + u);
@@ -229,6 +289,14 @@ if (uncovered.size) {
   console.error('\n離線打開那些頁面會少掉這些東西，樣式類的會是一片空白。');
   console.error('修法是補進 sw.js 的 SHELL_ASSETS，或讓建置把它算進索引的 shell。');
 }
-if (missing.length || unreachable.length || uncovered.size) process.exit(1);
+if (crossLangMismatch.length) {
+  console.error(`\n✗ ${crossLangMismatch.length} 個資產被當成三語系共用，實際上內容不同：`);
+  for (const asset of crossLangMismatch) console.error('  ' + asset);
+  console.error('\n讀者切過語言之後會拿到別的語系那一份。修法是把它移出 sw.js 的');
+  console.error('CROSS_LANG_PREFIXES，或找出建置為什麼開始讓它分語系。');
+}
+if (missing.length || unreachable.length || uncovered.size || crossLangMismatch.length) {
+  process.exit(1);
+}
 console.log('\n預快取清單裡的每個 URL 都對得到檔案，索引頁連出去的網址也都命中，');
 console.log('頁面載入時要用的樣式與腳本都有人負責。');

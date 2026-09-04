@@ -111,6 +111,35 @@ const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 //
 // 2026-09-04 之前那批沒有人負責：建置端把每頁都出現的資產從個別頁面移除，這裡又
 // 沒有收，於是讀者按了「全部存到裝置」，227 頁的 HTML 一頁不缺，離線打開是白的。
+// 三語系位元組完全相同的資產落在哪些目錄底下。
+//
+// 三次 mkdocs build 產出的內容一模一樣，只有路徑前綴不同，所以讀者切過語言之後，
+// 裝置上會存兩三份同樣的東西，也重新下載了兩三次。預快取這些一律用根路徑那一份，
+// 離線比對時把帶語系前綴的網址退回根路徑。目前省下約 0.3 MB。
+//
+// 這裡列的是目錄，不是「檔名相同就共用」。反例是 assets/javascripts/bundle.*.js 與
+// stylesheets/extra.css：檔名一樣（bundle 連雜湊都一樣），內容各語系不同，privacy
+// plugin 把第三方資源在地化之後，嵌進去的絕對網址帶著語系前綴。
+//
+// check_precache.mjs 驗這件事，落在這些前綴底下而三語系位元組不同的會紅燈。theme
+// 升級讓某一個開始分語系時擋得下來。
+const CROSS_LANG_PREFIXES = [
+  "assets/external/",
+  "assets/images/",
+  "assets/stylesheets/",
+  "assets/javascripts/workers/",
+  "js/",
+];
+
+function crossLangAsset(asset) {
+  return CROSS_LANG_PREFIXES.some((prefix) => asset.startsWith(prefix));
+}
+
+// 預快取一個資產時該用哪個網址。三語系共用的走根路徑，其餘跟著語系前綴。
+function assetUrlFor(prefix, asset) {
+  return SCOPE_PATH + (crossLangAsset(asset) ? "" : prefix) + asset;
+}
+
 const SHELL_ASSETS = [
   "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -372,7 +401,7 @@ function precacheUrlsFor(prefix) {
     urls.push(SCOPE_PATH + prefix + page);
   }
   for (const asset of SHELL_ASSETS) {
-    urls.push(SCOPE_PATH + prefix + asset);
+    urls.push(assetUrlFor(prefix, asset));
   }
   // 作品本體只建置一份在根路徑 /docs/games/，跟語系無關，三個語系共用
   for (const asset of GAME_APPS) {
@@ -415,7 +444,7 @@ async function corePageAssets(prefix, index) {
 async function shellAssetsFor(prefix, index) {
   const data = index === undefined ? await loadOfflineIndex(prefix) : index;
   if (!data) return [];
-  return (data.shell || []).map((asset) => SCOPE_PATH + prefix + asset);
+  return (data.shell || []).map((asset) => assetUrlFor(prefix, asset));
 }
 
 // 讀這個語系的離線索引。預快取要從它知道兩件事：每頁都載入的 shell 資產有哪些，
@@ -447,7 +476,7 @@ async function loadOfflineIndex(prefix) {
 function essentialUrlsFor(prefix) {
   const urls = [SCOPE_PATH + prefix + "offline/"];
   for (const asset of SHELL_ASSETS) {
-    urls.push(SCOPE_PATH + prefix + asset);
+    urls.push(assetUrlFor(prefix, asset));
   }
   return urls;
 }
@@ -556,6 +585,15 @@ async function guessLangPrefix() {
 // 都沒有。沒有的就是首次安裝，先抓底線，等讀者確定要讀哪個語言再下整份。
 async function installPrecache() {
   const prefix = await guessLangPrefix();
+  // 讀者用過的每個語系都要留得住落腳頁。install 只補當下猜到的那一個的話，換版
+  // 時 activate 清掉舊的預快取之後，另一個語系的 offline 頁與每頁共用的樣式就從
+  // 裝置上消失了，而讀者可能正好是用那個語系在讀。
+  //
+  // 補的是底線那一批（約 0.7 MB），不是整份章節。完整章節仍然只跟著當下這一個
+  // 語系走，讀者不會因為切過一次語言就在裝置上多出十 MB。
+  for (const other of await visitedPrefixes()) {
+    if (other !== prefix) await precacheFor(other, false);
+  }
   if (prefix === null) return null;
   await precacheFor(prefix, await hadFullPrecache(prefix));
   return prefix;
@@ -574,7 +612,21 @@ async function installPrecache() {
 // 計數刻意不放在 precacheFor 裡。install 也會呼叫那一支，算進去的話首次造訪光是
 // install 加上第一次導覽就湊滿兩次，門檻等於不存在。
 async function precacheOnNavigation(prefix, settled) {
-  await precacheFor(prefix, settled || (await noteVisit(prefix)) >= 2);
+  // 計數一律先記。原本 settled 為真時會短路掉 noteVisit，省一次快取讀寫，代價是
+  // 選過閱讀語言的讀者在這台裝置上從來不留下造訪紀錄，而 installPrecache 換版時
+  // 要靠那份紀錄才知道「除了當下這一個，還有哪些語系該保住落腳頁」。
+  const visits = await noteVisit(prefix);
+  await precacheFor(prefix, settled || visits >= 2);
+}
+
+// 讀者在這台裝置上用過哪些語系，依 noteVisit 留下的紀錄。
+async function visitedPrefixes() {
+  const cache = await caches.open(SETTINGS);
+  const found = [];
+  for (const prefix of LANG_PREFIXES) {
+    if (await cache.match(VISITS_URL + (prefix || "root"))) found.push(prefix);
+  }
+  return found;
 }
 
 self.addEventListener("install", (event) => {
@@ -990,6 +1042,22 @@ function offlinePathFor(url) {
   return SCOPE_PATH + (langPrefixOf(url) || "") + "offline/";
 }
 
+// 離線時的落腳頁。先找這個語系自己那一份，沒有就給別的語系。
+//
+// 「沒有」是真的會發生的狀態：install 只補當下猜到的那一個語系，而換版時 activate
+// 會清掉舊的預快取，所以讀者昨天讀 en、今天在 zh-TW 分頁上按下更新，en 的落腳頁
+// 就不在裝置上了。看得懂與看不懂之間還有一個選項，總比瀏覽器的錯誤畫面好，那一頁
+// 上還有「你的裝置上還存著哪些內容」可以看。
+async function offlineFallback(url) {
+  const own = await caches.match(offlinePathFor(url));
+  if (own) return own;
+  for (const prefix of LANG_PREFIXES) {
+    const hit = await caches.match(SCOPE_PATH + prefix + "offline/");
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
 // event 可能不存在（例如未來從別處呼叫），沒有就退回 fire-and-forget
 function keepAlive(event, promise) {
   if (event && typeof event.waitUntil === "function") event.waitUntil(promise);
@@ -1043,6 +1111,10 @@ function networkLooksDown() {
 // stylesheets/extra.css 掛住的話整頁就一直是白的，實測四十五秒還沒有任何內容。
 const ASSET_TIMEOUT_MS = 8000;
 
+// 裝置上沒有副本的導覽，等網路等多久。跟 ASSET_TIMEOUT_MS 同一個判斷：逾時之後
+// 給得出來的東西都不是讀者要的那一頁，所以放寬到八秒，慢的網路照樣等得到。
+const NO_CACHE_TIMEOUT_MS = 8000;
+
 // 快取沒有、網路也拿不到時給的回應。
 //
 // 原本讓 respondWith 收到 undefined，規格上那是 network error，Gecko 還會在主控台
@@ -1075,15 +1147,30 @@ async function networkFirst(request, event) {
 
   const cached = await matchCachedPage(request);
   if (!cached) {
-    // 裝置上沒有這一頁，等網路是唯一的選擇，慢也要等
-    try {
-      return await network;
-    } catch (err) {
-      networkDownSince = Date.now();
-      const offline = await caches.match(offlinePathFor(new URL(request.url)));
+    // 裝置上沒有這一頁，等網路是唯一的選擇。等的時間要有上限：連得上但沒有回應的
+    // 網路不會讓 fetch 失敗，它就是一直不回來，而這條路原本是 await network，
+    // 讀者看到的是一直空白的畫面。
+    //
+    // 2026-09-04 遇到的是換語系那一種。讀者的裝置上有整套 zh-TW，en 一頁都沒有，
+    // 在 en 底下離線冷啟動就落到這裡。zh-TW 好好的，en 卡住，看起來像語系有問題，
+    // 實際上是「這一頁裝置上有沒有」的差別。
+    if (networkLooksDown()) {
+      keepAlive(event, network.catch(() => {}));
+      const offline = await offlineFallback(new URL(request.url));
       if (offline) return offline;
-      throw err;
     }
+    const raced = await Promise.race([
+      network.catch(() => null),
+      new Promise((resolve) => setTimeout(() => resolve(null), NO_CACHE_TIMEOUT_MS)),
+    ]);
+    if (raced) return raced;
+    networkDownSince = Date.now();
+    keepAlive(event, network.catch(() => {}));
+    const offline = await offlineFallback(new URL(request.url));
+    if (offline) return offline;
+    // 連落腳頁都沒有，讓瀏覽器顯示它自己的錯誤畫面。繼續 await network 的話就是
+    // 停在空白，錯誤畫面至少講得出發生了什麼，讀者也按得到重新整理。
+    return Response.error();
   }
 
   // 網路已經知道是斷的就不必再等一輪。直接給裝置上那一份，網路那條照樣在背景跑，
@@ -1110,8 +1197,22 @@ async function networkFirst(request, event) {
   return cached;
 }
 
+// 離線時替一個資產請求找出對應的快取。三語系共用的那批只存根路徑那一份，而頁面
+// 引用的是帶語系前綴的網址，所以精確比對沒中的時候要再退一次。
+async function matchCachedAsset(request) {
+  const hit = await caches.match(request);
+  if (hit) return hit;
+  const url = new URL(request.url);
+  const prefix = langPrefixOf(url);
+  // 空字串是根路徑的 zh-TW，null 是 scope 外，兩種都沒有第二種形狀可以試
+  if (!prefix) return undefined;
+  const asset = url.pathname.slice(SCOPE_PATH.length + prefix.length);
+  if (!crossLangAsset(asset)) return undefined;
+  return caches.match(SCOPE_PATH + asset);
+}
+
 async function staleWhileRevalidate(request, event) {
-  const cached = await caches.match(request);
+  const cached = await matchCachedAsset(request);
   // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
   // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。
   const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
