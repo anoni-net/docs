@@ -53,7 +53,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 | 部署 | `s3_restore_mtime.py`、`test_s3_restore_mtime.py` | 上傳前比對 MD5 與 S3 的 ETag，內容沒變的把時間戳調回遠端版本，讓 `aws s3 sync` 跳過。`sync` 只看大小與時間，不看內容 |
 | 地球儀資料 | `gen_*.py`、`publish_games_data.sh` | 產生 `docs/zh-TW/games/tor-network/` 的靜態 JSON。`snapshot.json`、`torusers.json`、`seacable.json` 會持續變動，由 `publish_games_data.sh` 在正式機重生並檢查後發布到 assets，其餘幾份變動以季或年計，跟文件站一起發布即可 |
 | 地球儀版面檢查 | `check_double_tap.mjs`、`check_focus.mjs`、`check_pinch_release.mjs`、`check_sub_gauge.mjs`、`fix_trunk_land.mjs`、`shoot_games.mjs` | headless Chrome 執行的互動與版面檢查，由 `games-checks.yml` 在 PR 觸發 |
-| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py`、`test_offline_library.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，驗索引頁連出去的網址形狀命中得了快取的 key，並反過來驗每一頁載入的樣式、腳本與 manifest 都有人負責預快取（需先建置）。反向那道是 2026-09-04 補的：`stylesheets/extra.css` 每頁都載入，`SHELL_ASSETS` 沒收，建置端又因為「每頁都出現」把它從個別頁面的資產移除，兩邊都以為對方負責，離線打開任何一頁都是白的，而清單往檔案的那道檢查看不到這種漏洞。其餘四支把原始碼原地抽出來單元測試，不需要建置：`test_sw_offline.mjs` 測 `docs/zh-TW/sw.js` 的離線路徑，`test_lang_preference.mjs` 測 `docs/overrides/base.html` 的語言導向，`test_offline_index.py` 測 `docs/hooks/offline_index.py` 的分組，`test_offline_library.mjs` 餵一組最小 DOM 替身把 `docs/zh-TW/js/offline-library.js` 整份執行起來，驗它畫出來的結構與送給 service worker 的指令（版面與樣式驗不到，那要靠實機）。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發，`check_precache.mjs` 需要建置產物所以沒進 CI，改 `docs/zh-TW/sw.js` 時手動執行一次 |
+| PWA 與離線 | `check_precache.mjs`、`test_sw_offline.mjs`、`test_lang_preference.mjs`、`test_offline_index.py`、`test_offline_library.mjs` | `check_precache.mjs` 比對預快取清單與 `docs/output` 的實際檔案，驗索引頁連出去的網址形狀命中得了快取的 key，並反過來驗每一頁載入的樣式、腳本與 manifest 都有人負責預快取（需先建置）。反向那道是 2026-09-04 補的：`stylesheets/extra.css` 每頁都載入，`SHELL_ASSETS` 沒收，建置端又因為「每頁都出現」把它從個別頁面的資產移除，兩邊都以為對方負責，離線打開任何一頁都是白的，而清單往檔案的那道檢查看不到這種漏洞。其餘四支把原始碼原地抽出來單元測試，不需要建置：`test_sw_offline.mjs` 測 `docs/zh-TW/sw.js` 的離線路徑，`test_lang_preference.mjs` 測 `docs/overrides/base.html` 的語言導向，`test_offline_index.py` 測 `docs/hooks/offline_index.py` 的分組，`test_offline_library.mjs` 餵一組最小 DOM 替身把 `docs/zh-TW/js/offline-library.js` 整份執行起來，驗它畫出來的結構與送給 service worker 的指令（版面與樣式驗不到，那要靠實機）。由 [`tools-tests.yml`](./.github/workflows/tools-tests.yml) 在 PR 觸發。`check_precache.mjs` 需要建置產物，不在那一支裡，改由 [`build_docs.yml`](./.github/workflows/build_docs.yml) 在建完 standard 版之後執行，壞掉會擋下部署而不是擋下 PR。本機改 `docs/zh-TW/sw.js` 之後可以先建置再手動執行一次 |
 
 ## 開發環境設置
 
@@ -288,7 +288,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
   - 觸發路徑：`tools/**`、`docs/zh-TW/sw.js`、`docs/overrides/base.html`、`docs/hooks/**`
   - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_offline_library.mjs`（離線內容管理頁的介面）、`test_passphrase.mjs`（密語與密碼產生器的取樣與熵）、`test_qrcode.mjs`（QR code 的編碼往返）、`test_leaks.mjs`（指紋示範頁不送資料）、`test_cf_purge.py`（快取清除映射）
   - 不需要建置產物，執行完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 執行
-  - `check_precache.mjs` 需要 `docs/output`，沒進 CI，改 `sw.js` 時手動執行一次
+  - `check_precache.mjs` 需要 `docs/output`，不在這一支裡，由 `build_docs.yml` 在建完 standard 版之後執行
 
 - **check-ripe.yml** 與 **lookback-ooni.yml**: `asn_coverage/` 的資料抓取
   - 觸發路徑：`asn_coverage/**` 與各自的 workflow。原本任何 main 的 push 都觸發，2026-08-19 一天被 docs 的 PR 觸發 18 次，每次四個 job（2 OS × 2 Python），把並行額度佔滿，連 BuildDocs 都排不進去
