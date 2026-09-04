@@ -556,6 +556,15 @@ async function guessLangPrefix() {
 // 都沒有。沒有的就是首次安裝，先抓底線，等讀者確定要讀哪個語言再下整份。
 async function installPrecache() {
   const prefix = await guessLangPrefix();
+  // 讀者用過的每個語系都要留得住落腳頁。install 只補當下猜到的那一個的話，換版
+  // 時 activate 清掉舊的預快取之後，另一個語系的 offline 頁與每頁共用的樣式就從
+  // 裝置上消失了，而讀者可能正好是用那個語系在讀。
+  //
+  // 補的是底線那一批（約 0.7 MB），不是整份章節。完整章節仍然只跟著當下這一個
+  // 語系走，讀者不會因為切過一次語言就在裝置上多出十 MB。
+  for (const other of await visitedPrefixes()) {
+    if (other !== prefix) await precacheFor(other, false);
+  }
   if (prefix === null) return null;
   await precacheFor(prefix, await hadFullPrecache(prefix));
   return prefix;
@@ -574,7 +583,21 @@ async function installPrecache() {
 // 計數刻意不放在 precacheFor 裡。install 也會呼叫那一支，算進去的話首次造訪光是
 // install 加上第一次導覽就湊滿兩次，門檻等於不存在。
 async function precacheOnNavigation(prefix, settled) {
-  await precacheFor(prefix, settled || (await noteVisit(prefix)) >= 2);
+  // 計數一律先記。原本 settled 為真時會短路掉 noteVisit，省一次快取讀寫，代價是
+  // 選過閱讀語言的讀者在這台裝置上從來不留下造訪紀錄，而 installPrecache 換版時
+  // 要靠那份紀錄才知道「除了當下這一個，還有哪些語系該保住落腳頁」。
+  const visits = await noteVisit(prefix);
+  await precacheFor(prefix, settled || visits >= 2);
+}
+
+// 讀者在這台裝置上用過哪些語系，依 noteVisit 留下的紀錄。
+async function visitedPrefixes() {
+  const cache = await caches.open(SETTINGS);
+  const found = [];
+  for (const prefix of LANG_PREFIXES) {
+    if (await cache.match(VISITS_URL + (prefix || "root"))) found.push(prefix);
+  }
+  return found;
 }
 
 self.addEventListener("install", (event) => {
@@ -990,6 +1013,22 @@ function offlinePathFor(url) {
   return SCOPE_PATH + (langPrefixOf(url) || "") + "offline/";
 }
 
+// 離線時的落腳頁。先找這個語系自己那一份，沒有就給別的語系。
+//
+// 「沒有」是真的會發生的狀態：install 只補當下猜到的那一個語系，而換版時 activate
+// 會清掉舊的預快取，所以讀者昨天讀 en、今天在 zh-TW 分頁上按下更新，en 的落腳頁
+// 就不在裝置上了。看得懂與看不懂之間還有一個選項，總比瀏覽器的錯誤畫面好，那一頁
+// 上還有「你的裝置上還存著哪些內容」可以看。
+async function offlineFallback(url) {
+  const own = await caches.match(offlinePathFor(url));
+  if (own) return own;
+  for (const prefix of LANG_PREFIXES) {
+    const hit = await caches.match(SCOPE_PATH + prefix + "offline/");
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
 // event 可能不存在（例如未來從別處呼叫），沒有就退回 fire-and-forget
 function keepAlive(event, promise) {
   if (event && typeof event.waitUntil === "function") event.waitUntil(promise);
@@ -1043,6 +1082,10 @@ function networkLooksDown() {
 // stylesheets/extra.css 掛住的話整頁就一直是白的，實測四十五秒還沒有任何內容。
 const ASSET_TIMEOUT_MS = 8000;
 
+// 裝置上沒有副本的導覽，等網路等多久。跟 ASSET_TIMEOUT_MS 同一個判斷：逾時之後
+// 給得出來的東西都不是讀者要的那一頁，所以放寬到八秒，慢的網路照樣等得到。
+const NO_CACHE_TIMEOUT_MS = 8000;
+
 // 快取沒有、網路也拿不到時給的回應。
 //
 // 原本讓 respondWith 收到 undefined，規格上那是 network error，Gecko 還會在主控台
@@ -1075,15 +1118,30 @@ async function networkFirst(request, event) {
 
   const cached = await matchCachedPage(request);
   if (!cached) {
-    // 裝置上沒有這一頁，等網路是唯一的選擇，慢也要等
-    try {
-      return await network;
-    } catch (err) {
-      networkDownSince = Date.now();
-      const offline = await caches.match(offlinePathFor(new URL(request.url)));
+    // 裝置上沒有這一頁，等網路是唯一的選擇。等的時間要有上限：連得上但沒有回應的
+    // 網路不會讓 fetch 失敗，它就是一直不回來，而這條路原本是 await network，
+    // 讀者看到的是一直空白的畫面。
+    //
+    // 2026-09-04 遇到的是換語系那一種。讀者的裝置上有整套 zh-TW，en 一頁都沒有，
+    // 在 en 底下離線冷啟動就落到這裡。zh-TW 好好的，en 卡住，看起來像語系有問題，
+    // 實際上是「這一頁裝置上有沒有」的差別。
+    if (networkLooksDown()) {
+      keepAlive(event, network.catch(() => {}));
+      const offline = await offlineFallback(new URL(request.url));
       if (offline) return offline;
-      throw err;
     }
+    const raced = await Promise.race([
+      network.catch(() => null),
+      new Promise((resolve) => setTimeout(() => resolve(null), NO_CACHE_TIMEOUT_MS)),
+    ]);
+    if (raced) return raced;
+    networkDownSince = Date.now();
+    keepAlive(event, network.catch(() => {}));
+    const offline = await offlineFallback(new URL(request.url));
+    if (offline) return offline;
+    // 連落腳頁都沒有，讓瀏覽器顯示它自己的錯誤畫面。繼續 await network 的話就是
+    // 停在空白，錯誤畫面至少講得出發生了什麼，讀者也按得到重新整理。
+    return Response.error();
   }
 
   // 網路已經知道是斷的就不必再等一輪。直接給裝置上那一份，網路那條照樣在背景跑，

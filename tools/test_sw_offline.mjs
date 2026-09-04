@@ -123,6 +123,7 @@ const harness = `
   ${grab(/^async function hadFullPrecache\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precacheFor\(prefix, wantFull\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precacheOnNavigation\(prefix, settled\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function visitedPrefixes\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function langPrefixOf\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function guessLangPrefix\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function installPrecache\(\) \{[\s\S]*?\n\}/m)}
@@ -155,6 +156,7 @@ const harness = `
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function matchCachedPage\(request\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function offlinePathFor\(url\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function offlineFallback\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
@@ -163,6 +165,7 @@ const harness = `
   ${grab(/^let networkDownSince = .*$/m)}
   ${grab(/^function networkLooksDown\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const ASSET_TIMEOUT_MS = .*$/m)}
+  ${grab(/^const NO_CACHE_TIMEOUT_MS = .*$/m)}
   ${grab(/^function assetUnavailable\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
@@ -171,7 +174,8 @@ const harness = `
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, LIBRARY_ASSETS, SETTINGS,
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
-    shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS,
+    shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
+    visitedPrefixes, offlineFallback,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
     libraryEntries, precachedEntries,
@@ -1064,12 +1068,37 @@ test('逾時之後把網路那條掛在 waitUntil 上，SW 才活得到它回來
   await Promise.all(kept);
 });
 
-test('裝置上沒有的頁面照樣等網路，慢也要等', async (load) => {
-  // 快取裡什麼都沒有時逾時沒有意義，早早放棄只會把讀者丟到離線頁，
-  // 而網路其實只是慢，再等一下就回來了。
-  const { sw } = load({ networkDelay: 40, fastTimeout: true });
+test('裝置上沒有的頁面照樣等網路，只是慢就等得到', async (load) => {
+  // 快取裡什麼都沒有時早早放棄只會把讀者丟到落腳頁，而網路其實只是慢，
+  // 再等一下就回來了。這裡不開 fastTimeout，走的是真的八秒上限。
+  const { sw } = load({ networkDelay: 40 });
   const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'), null);
   assert.equal(response.url, ORIGIN + '/docs/tools/what-is-tor/');
+});
+
+test('裝置上沒有的頁面等網路也有上限，一直不回來就給落腳頁', async (load) => {
+  // 2026-09-04 的第二輪。讀者的裝置上有整套 zh-TW，en 一頁都沒有，在 en 底下離線
+  // 冷啟動就落到這條路。原本是 await network，而連得上但沒有回應的網路不會讓 fetch
+  // 失敗，它就是一直不回來，讀者看到的是四十五秒還在空白的畫面。
+  const { sw, caches } = load({ networkDelay: 5000, fastTimeout: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/en/offline/', 'EN-OFFLINE');
+  const response = await sw.networkFirst(req('/docs/en/tools/what-is-tor/'), null);
+  assert.equal(response, 'EN-OFFLINE');
+});
+
+test('這個語系的落腳頁不在裝置上時，給別的語系那一份', async (load) => {
+  // install 只補當下猜到的那一個語系，而換版時 activate 會清掉舊的預快取，所以
+  // 「讀者用 en，裝置上只剩 zh-TW 的落腳頁」是真的會發生的狀態。看得懂與看不懂
+  // 之間還有一個選項，總比瀏覽器的錯誤畫面好。
+  const { sw, caches } = load({ offline: true });
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/offline/', 'ZH-OFFLINE');
+  assert.equal(await sw.offlineFallback(u('/docs/en/basics/')), 'ZH-OFFLINE');
+
+  // 自己那一份在的時候照樣優先
+  await precache.put('/docs/en/offline/', 'EN-OFFLINE');
+  assert.equal(await sw.offlineFallback(u('/docs/en/basics/')), 'EN-OFFLINE');
 });
 
 test('離線時沒快取過的頁面會落到離線頁', async (load) => {
@@ -1102,9 +1131,33 @@ test('離線時各語系落到自己的離線頁', async (load) => {
   assert.equal(await sw.networkFirst(req('/docs/basics/metadata/'), null), 'ZH-OFFLINE');
 });
 
-test('連離線頁都沒快取到時才把錯誤丟出去', async (load) => {
+test('連落腳頁都沒有時給明確的網路錯誤，不停在空白', async (load) => {
+  // 原本是把錯誤往外丟，respondWith 收到 reject 一樣是瀏覽器的錯誤畫面。改成回
+  // Response.error() 的差別在意圖說得清楚，而且不會再有人以為這裡該繼續等網路。
   const { sw } = load({ offline: true });
-  await assert.rejects(() => sw.networkFirst(req('/docs/basics/metadata/'), null));
+  const response = await sw.networkFirst(req('/docs/basics/metadata/'), null);
+  assert.equal(response.type, 'error');
+});
+
+test('install 把讀者用過的其他語系的落腳頁一起補回來', async (load) => {
+  // 換版時 activate 清掉舊的預快取，install 只補當下猜到的那一個語系的話，讀者
+  // 昨天讀的 en 就沒有落腳頁也沒有樣式了。補的是底線那批，不是整份章節。
+  const { sw, fetched } = load({ clients: ['https://anoni.net/docs/'] });
+  await sw.noteVisit('en/');
+  fetched.length = 0;
+  await sw.installPrecache();
+  assert.ok(fetched.includes('/docs/en/offline/'), 'en 的落腳頁沒有補回來');
+  assert.ok(fetched.includes('/docs/offline/'), 'zh-TW 自己那份也要有');
+  // 完整章節仍然只跟著當下這一個語系，切過一次語言不該讓裝置上多出十 MB
+  assert.ok(!fetched.includes('/docs/en/basics/threat-model/'));
+});
+
+test('選過閱讀語言的讀者也會留下造訪紀錄', async (load) => {
+  // 原本 settled 為真時會短路掉 noteVisit，那些讀者在這台裝置上從來不留紀錄，
+  // 而換版時要靠它才知道有哪些語系該保住落腳頁
+  const { sw } = load();
+  await sw.precacheOnNavigation('en/', true);
+  assert.deepEqual(await sw.visitedPrefixes(), ['en/']);
 });
 
 // === 裝置佔用量 ===
