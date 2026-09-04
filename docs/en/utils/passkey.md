@@ -113,6 +113,20 @@ Both modes produce standard age files. The only difference is who the recipients
 | Windows Hello | This computer only | Windows 11 with the February 2026 update or later |
 | USB security key | Carried with you | Not supported on this page. It needs a different way of keeping the identity |
 
+## More than one device
+
+A file in passkey mode is encrypted to the passkey and the backup key at the same time, so there are two ways across devices, with different costs.
+
+### Let the passkey travel with you
+
+Store it somewhere that syncs, such as the iCloud Keychain, Google Password Manager, Bitwarden or 1Password, and another device opens the file straight away with nothing to paste. The cost is that the password manager account becomes a single point: lose the account and the key is gone from every device at once.
+
+### Open it with the backup private key
+
+In an environment that keeps the credential local, such as Windows Hello, the other device does not have that passkey, so decryption means pasting the backup private key. This way depends on no cloud account at all. The cost is that the private key ends up on the clipboard and the screen more often, and once it leaks the encryption may as well not have happened.
+
+A synced passkey on your main device, with the backup private key kept in a password manager as the last resort and stored somewhere else, suits most people.
+
 ## Things to keep in mind
 
 - The passkey is bound to the `anoni.net` domain. Mirrors and onion addresses cannot use it, and Tor Browser turns WebAuthn off entirely.
