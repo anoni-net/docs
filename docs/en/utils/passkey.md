@@ -101,13 +101,13 @@ The passphrase mode is still the right choice in these cases:
 - You need to decrypt on another computer with the age command line tool, and that computer does not have your passkey
 - You are sending the file to someone else, who cannot have your passkey
 - You use Tor Browser, which disables WebAuthn entirely
-- The device you need lacks PRF support, see the table below
+- The device you need cannot derive the key, see the table below
 
 Both modes produce standard age files. The only difference is who the recipients are. Making one copy in each mode and keeping them in different places works too.
 
 ## Where to store it
 
-| Location | Syncs to other devices | PRF support |
+| Location | Syncs to other devices | Can derive keys |
 |---|---|---|
 | iCloud Keychain | Yes, across Apple devices | macOS 15 and iOS 18.4 or later |
 | Google Password Manager | Yes | Chrome on Android |
