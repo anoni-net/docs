@@ -872,11 +872,22 @@ test('service worker 還在準備時，清單先畫出來不必等它', async ()
   assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
 });
 
-test('狀態列寫出這台裝置上的離線內容版本', async () => {
+test('狀態列寫出這台裝置上的離線內容版本，三個語系都有', async () => {
   // 讀者回報離線出問題時，第一個要分辨的是他的 service worker 換到新版了沒，
-  // 而那件事在裝置上原本沒有任何地方看得出來
-  const { root } = await load({ version: '202609042020' });
-  assert.ok(root.querySelector('.ol-status').textContent.includes('202609042020'));
+  // 而那件事在裝置上原本沒有任何地方看得出來。
+  //
+  // 三個語系各驗一次。這一頁是三語系共用的同一支程式，字串靠 documentElement.lang
+  // 挑，而 zh-CN 版的那個屬性是 "zh"，漏一組就是那個語系的讀者看到空白或英文。
+  for (const [lang, needle] of [
+    ['zh-TW', '離線內容版本'],
+    ['zh', '离线内容版本'],
+    ['en', 'Offline content version'],
+  ]) {
+    const { root } = await load({ lang, version: '202609042020' });
+    const text = root.querySelector('.ol-status').textContent;
+    assert.ok(text.includes(needle), `${lang} 應該看到「${needle}」`);
+    assert.ok(text.includes('202609042020'), `${lang} 應該看到版本號`);
+  }
 });
 
 test('舊版 service worker 不回版本時狀態列照樣畫得出來', async () => {
