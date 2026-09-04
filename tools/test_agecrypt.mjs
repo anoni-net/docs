@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, hasPasskeyAndBackup };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, passkeyHeaderOk };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -336,10 +336,24 @@ test('檔頭的段落類型決定要問哪種鑰匙：scrypt 問密語，passkey
   assert.equal(tool.keyModeFor(['X25519']), 'passkey', '命令列加密給 age1 的檔案用備援私鑰解');
   assert.equal(tool.keyModeFor(['age-encryption.org/mlkem768x25519']), 'unsupported');
   assert.equal(tool.keyModeFor([]), 'unknown');
-  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf', 'X25519']), true);
-  assert.equal(tool.hasPasskeyAndBackup(['X25519', 'age-encryption.org/fido2prf']), true);
-  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf']), false, '少了備援就不給下載');
-  assert.equal(tool.hasPasskeyAndBackup(['age-encryption.org/fido2prf', 'X25519', 'X25519']), false);
+  // 備援金鑰是讀者自己決定要不要加的，檔頭該有什麼跟著那個選擇走
+  assert.equal(tool.passkeyHeaderOk(['age-encryption.org/fido2prf', 'X25519'], true), true);
+  assert.equal(tool.passkeyHeaderOk(['X25519', 'age-encryption.org/fido2prf'], true), true);
+  assert.equal(
+    tool.passkeyHeaderOk(['age-encryption.org/fido2prf'], true),
+    false,
+    '選了備援卻只有 passkey 一個收件人，不給下載'
+  );
+  assert.equal(tool.passkeyHeaderOk(['age-encryption.org/fido2prf', 'X25519', 'X25519'], true), false);
+
+  assert.equal(tool.passkeyHeaderOk(['age-encryption.org/fido2prf'], false), true, '沒選備援就只要 passkey');
+  assert.equal(
+    tool.passkeyHeaderOk(['age-encryption.org/fido2prf', 'X25519'], false),
+    false,
+    '沒選備援卻多出一個收件人，一樣是工具出錯'
+  );
+  assert.equal(tool.passkeyHeaderOk(['X25519'], false), false, '少了 passkey 本身也不行');
+  assert.equal(tool.passkeyHeaderOk([], false), false);
   // 寬鬆的 armor 解碼只給判斷類型用，要吃 CRLF，格式不對回 null
   const raw = header(['scrypt']);
   const armored = '-----BEGIN AGE ENCRYPTED FILE-----\r\n' + raw.toString('base64').match(/.{1,64}/g).join('\r\n') + '\r\n-----END AGE ENCRYPTED FILE-----\r\n';
@@ -584,9 +598,29 @@ test('頁面的 import map 涵蓋每一個 bare specifier，指到的檔案都�
 
 test('passkey 模式：加密一定加備援公鑰、檔頭檢查兩個段落、不解回比對，解密看檔頭選鑰匙', () => {
   assert.ok(/encrypter\.addRecipient\(await pk\.recipient\(\)\)/.test(code), '沒有加 passkey 收件人');
-  assert.ok(/encrypter\.addRecipient\(state\.backupRecipient\.trim\(\)\)/.test(code), '沒有加備援公鑰');
-  assert.ok(/if \(!hasPasskeyAndBackup\(stanzaTypes\(output\)\)\) throw new Error\("header"\)/.test(code), '加密完沒有檢查檔頭');
-  assert.ok(/pk\.looksLikeRecipient\(state\.backupRecipient\)/.test(code), '備援公鑰沒有先檢查形狀');
+  assert.ok(
+    /if \(state\.useBackup\) encrypter\.addRecipient\(state\.backupRecipient\.trim\(\)\)/.test(code),
+    '備援公鑰沒有跟著讀者的選擇加'
+  );
+  assert.ok(
+    /if \(!passkeyHeaderOk\(stanzaTypes\(output\), state\.useBackup\)\) throw new Error\("header"\)/.test(code),
+    '加密完沒有依讀者的選擇檢查檔頭'
+  );
+  assert.ok(
+    /state\.useBackup && !pk\.looksLikeRecipient\(state\.backupRecipient\)/.test(code),
+    '選了備援時沒有先檢查公鑰形狀'
+  );
+
+  // 解密端只給檔頭裡真的有的選項。只加密給 passkey 的檔案貼備援私鑰也解不開，
+  // 那個欄位與按鈕留在畫面上只會讓讀者以為自己貼錯東西。
+  assert.ok(
+    /const withBackup = file\.mode === "encrypt" \|\| types\.indexOf\(STANZA_X25519\) >= 0/.test(code),
+    '沒有依檔頭判斷這個檔案有沒有備援收件人'
+  );
+  assert.ok(/if \(withBackup\) \{\s*const label = el\("label", "ag-label", t\.backupIdentity\)/.test(code),
+    '備援私鑰欄位沒有跟著檔頭出現或消失');
+  assert.ok(/if \(withBackup\) \{\s*const viaBackup = button\(t\.decryptBackup/.test(code),
+    '用備援私鑰解的按鈕沒有跟著檔頭出現或消失');
   assert.ok(/decrypter\.addIdentity\(state\.backupSecret\.trim\(\)\)/.test(code) && /decrypter\.addIdentity\(await pk\.identity\(\)\)/.test(code), '解密缺一條路');
   assert.ok(/return keyModeFor\(state\.file\.types/.test(code), '解密時要看檔頭決定鑰匙');
   assert.ok(/state\.passkeyOk = !!\(s\.webauthn && s\.prf !== false\)/.test(code), 'passkey 能不能用要問 passkey.js');

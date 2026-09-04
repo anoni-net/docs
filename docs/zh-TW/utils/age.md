@@ -111,7 +111,7 @@ age -d -o note.txt note.txt.age
 
 ## 用 passkey 當鑰匙
 
-加密時把鑰匙切到「passkey」，就不用記密語。瀏覽器會跳出提示，用指紋或 PIN 同意一次，檔案就加密給你的 passkey。第一次用之前先到 [passkey 鑰匙](passkey.md)建立一把、產生備援金鑰。備援金鑰的公鑰是這裡的必填欄位：passkey 丟了、換到不支援的環境，只剩備援私鑰能開。解密時工具看檔頭決定要問密語、passkey 還是備援私鑰，用 age 命令列加密給 `age1` 公鑰的檔案也能在這裡貼私鑰解開。passkey 模式的檔案只能在這個網站解，理由見[什麼是 passkey](../tools/what-is-passkey.md)。
+加密時把鑰匙切到「passkey」，就不用記密語。瀏覽器會跳出提示，用指紋或 PIN 同意一次，檔案就加密給你的 passkey。第一次用之前先到 [passkey 鑰匙](passkey.md)建立一把。「另外加一把備援金鑰」預設勾著，那把公鑰填在下面的欄位，passkey 丟了或換到不支援的環境時只剩它能開。你的處境不需要那條退路就取消勾選，取消之後畫面上會寫清楚代價。解密時工具看檔頭決定要問密語、passkey 還是備援私鑰，用 age 命令列加密給 `age1` 公鑰的檔案也能在這裡貼私鑰解開。passkey 模式的檔案只能在這個網站解，理由見[什麼是 passkey](../tools/what-is-passkey.md)。
 
 ## 密語就是全部
 
