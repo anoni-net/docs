@@ -709,13 +709,30 @@
           })[0];
           var pref = readPref();
           var goTo = langRedirectTo(IS_HOME, current && current.lang, pref, DEFAULT_LANG);
+          // 跳過去之前先確認那一頁打得開。
+          //
+          // PWA 的 start_url 是安裝當下那個語系的首頁，而讀者的閱讀語言可能是另一個，
+          // 所以每次冷啟動都會走這一跳。沒有網路又沒有副本的時候跳過去只會停在空白，
+          // 讀者反而失去手上這一頁。留在原地至少看得到內容，header 的語言切換器也還在。
+          //
+          // 有副本就跳。沒副本但看起來連得上網也跳，那是線上第一次造訪的正常情況。
+          function redirectTo(href) {
+            var go = function () {
+              // replace 而不是 assign，讓上一頁還是讀者原本來的地方
+              location.replace(href);
+            };
+            if (!window.caches || !window.caches.match) return go();
+            caches.match(href).then(function (hit) {
+              if (hit || navigator.onLine !== false) go();
+            }, go);
+          }
+
           if (goTo) {
             var target = links.filter(function (link) {
               return link.lang === goTo;
             })[0];
             if (target) {
-              // replace 而不是 assign，讓上一頁還是讀者原本來的地方
-              location.replace(target.href);
+              redirectTo(target.href);
               return;
             }
           }

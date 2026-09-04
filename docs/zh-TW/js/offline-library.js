@@ -193,6 +193,7 @@
       savedCount: "你自己選存的 {n} 頁",
       autoCount: "網站自動存的 {n} 頁",
       usage: "本站在這台裝置上佔用 {used}",
+      version: "離線內容版本 {version}",
       usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
       autoLabel: "自動存下核心章節與你讀過的頁面",
       autoHint: "關掉之後網站不再自動存任何內容，你讀過的頁面也不會留在裝置上。這一頁本身與它需要的樣式仍會留著（約 0.7 MB），沒有網路時你才進得來。你自己勾的頁面不受影響。",
@@ -244,6 +245,7 @@
       savedCount: "你自己选存的 {n} 页",
       autoCount: "网站自动存的 {n} 页",
       usage: "本站在这台设备上占用 {used}",
+      version: "离线内容版本 {version}",
       usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
       autoLabel: "自动存下核心章节与你读过的页面",
       autoHint: "关掉之后网站不再自动存任何内容，你读过的页面也不会留在设备上。这一页本身与它需要的样式仍会留着（约 0.7 MB），没有网络时你才进得来。你自己勾的页面不受影响。",
@@ -295,6 +297,7 @@
       savedCount: "{n} pages you chose to keep",
       autoCount: "{n} pages stored automatically",
       usage: "This site uses {used} on this device",
+      version: "Offline content version {version}",
       usageFree: "This site uses {used} on this device, with {free} still available",
       autoLabel: "Automatically store the core chapters and the pages you read",
       autoHint: "Turning this off stops the site from storing anything automatically, including the pages you read. This page itself and the styles it needs stay (about 0.7 MB), so you can still get here without a network. Pages you ticked are unaffected.",
@@ -444,6 +447,9 @@
     precacheImages: false,
     // 本站在裝置上佔用多少 byte，由 SW 量自己的快取算出來
     usage: null,
+    // 這台裝置上的 service worker 是哪一版。讀者回報離線出問題時，第一個要分辨的
+    // 就是他換到新版了沒。
+    version: null,
     // 瀏覽器給的配額，只用來算「還剩多少空間」
     estimate: null,
     // 讀者這一輪勾選的變動，套用之前不動快取
@@ -482,6 +488,7 @@
       state.autoPrecache = data.autoPrecache !== false;
       state.precacheImages = data.precacheImages === true;
       state.usage = typeof data.usage === "number" ? data.usage : null;
+      state.version = typeof data.version === "string" ? data.version : null;
       state.estimate = data.estimate || null;
       state.add.clear();
       state.remove.clear();
@@ -556,6 +563,14 @@
             : fill("usageFree", { used: size(state.usage), free: size(free) })
         )
       );
+    }
+    // 版本另起一行。讀者回報離線出問題時，這是分辨「換到新版了沒」唯一看得到的地方。
+    if (state.version) {
+      status.appendChild(document.createElement("br"));
+      const line = document.createElement("small");
+      line.className = "ol-version";
+      line.textContent = fill("version", { version: state.version });
+      status.appendChild(line);
     }
     return status;
   }

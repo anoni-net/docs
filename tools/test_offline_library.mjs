@@ -205,6 +205,7 @@ const makeServiceWorker = (opts) => {
             autoPrecache: state.autoPrecache,
             precacheImages: state.precacheImages,
             estimate: opts.estimate || null,
+            version: opts.version,
           });
         } else if (message.type === 'OFFLINE_ADD') {
           // 模擬網路很差：service worker 收到了，但一筆都還沒回報
@@ -869,6 +870,20 @@ test('service worker 還在準備時，清單先畫出來不必等它', async ()
   const { root } = await load({ noRegistration: true });
   assert.ok(root.querySelector('.ol-status').textContent.includes('還在準備'));
   assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
+});
+
+test('狀態列寫出這台裝置上的離線內容版本', async () => {
+  // 讀者回報離線出問題時，第一個要分辨的是他的 service worker 換到新版了沒，
+  // 而那件事在裝置上原本沒有任何地方看得出來
+  const { root } = await load({ version: '202609042020' });
+  assert.ok(root.querySelector('.ol-status').textContent.includes('202609042020'));
+});
+
+test('舊版 service worker 不回版本時狀態列照樣畫得出來', async () => {
+  // 讀者的裝置上還跑著上一版時，OFFLINE_STATUS 的回覆裡沒有這個欄位
+  const { root } = await load({});
+  assert.ok(root.querySelector('.ol-status'));
+  assert.ok(!root.querySelector('.ol-version'));
 });
 
 test('三個語系各自挑到自己那組字串', async () => {

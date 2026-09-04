@@ -116,6 +116,7 @@ const harness = `
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_BY_PREFIX = \{[\s\S]*?\n\};/m)}
   ${grab(/^function precacheUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const ESSENTIAL_PAGES = \[[^\]]*\];/m)}
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function corePageAssets\(prefix, index\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function shellAssetsFor\(prefix, index\) \{[\s\S]*?\n\}/m)}
@@ -478,10 +479,23 @@ test('install 在新裝置上只補底線，在換版的裝置上照舊補完整
   assert.deepEqual(fresh.fetched.slice().sort(), fresh.sw.essentialUrlsFor('').slice().sort());
 
   const upgrade = load({ clients: here });
-  await (await upgrade.caches.open('anoni-docs-precache-202601010000')).put('/docs/', 'HOME');
+  // 拿一個不在底線那批裡的頁面當上一版的證據。首頁現在也屬於底線（它是 PWA 的
+  // start_url），拿它當證據的話，只存過底線的裝置會被誤認成上一版有完整章節。
+  await (await upgrade.caches.open('anoni-docs-precache-202601010000')).put(
+    '/docs/guides/',
+    'PAGE'
+  );
   assert.equal(await upgrade.sw.hadFullPrecache(''), true);
   assert.equal(await upgrade.sw.installPrecache(), '');
   assert.ok(upgrade.fetched.includes('/docs/tools/what-is-tor/'));
+});
+
+test('首頁進了底線那批，探針要跟著換一個頁面', async (load) => {
+  // essentialUrlsFor 與 hadFullPrecache 共用 ESSENTIAL_PAGES，寫在一起才不會不同步
+  const { sw } = load();
+  const essential = sw.essentialUrlsFor('');
+  assert.ok(essential.includes('/docs/'), '首頁不在底線那批裡，PWA 的 start_url 就沒人存');
+  assert.ok(essential.includes('/docs/offline/'));
 });
 
 test('只存過底線那批的裝置不算有完整章節', async (load) => {
