@@ -82,7 +82,7 @@ offline_assets:
 
 ## 怎么用
 
-1. 按「创建 passkey」，浏览器会问你要存到哪里。存到会同步的地方（iCloud 钥匙串、Google 密码管理器、Bitwarden、1Password），其他设备才能用同一把。
+1. 按「创建 passkey」，浏览器会问你要存到哪里。存到会同步的地方，其他设备才能用同一把。在 iPhone 与 iPad 上选 iCloud 钥匙串，那是目前唯一算得出密钥的保管方式，理由见下面的「存到哪里」。
 2. 按「试解锁」，确认指纹或 PIN 的流程顺畅。在另一台同步过的设备上再按一次，确认那边也能用。
 3. 按「生成备援密钥」，把私钥存进密码管理器，放在跟密文不同的地方。公钥是加密时要贴的「备援密钥」。
 
@@ -111,9 +111,15 @@ offline_assets:
 |---|---|---|
 | iCloud 钥匙串 | 会，Apple 设备之间 | macOS 15、iOS 18.4 以上 |
 | Google 密码管理器 | 会 | Android 的 Chrome |
-| Bitwarden、1Password、Dashlane | 会 | 支持 |
+| Bitwarden、1Password、Dashlane | 会 | 电脑上的浏览器扩展可以，iPhone 与 iPad 的 app 不行 |
 | Windows Hello | 只在这台电脑 | Windows 11 加 2026 年 2 月更新之后 |
 | USB 安全密钥 | 带着走 | 本页不支持，它需要另一种保管方式 |
+
+### iPhone 与 iPad 要选 iCloud 钥匙串
+
+创建时系统会问存到哪里，选 iCloud 钥匙串。Apple 的实作不把算密钥要用的数据传给 iCloud 钥匙串以外的保管方式，所以在 iPhone 上选了第三方密码管理器的 app，passkey 创建得起来，接着就会看到「算不出加密密钥」。
+
+在另一台设备上扫 QR code 创建的那条路也一样拿不到。要在哪一台设备上用，就在那一台上直接创建。
 
 ## 两台以上的设备
 

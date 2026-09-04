@@ -82,7 +82,7 @@ Create a passkey for this site and store it in your password manager or keychain
 
 ## How to use it
 
-1. Press "Create a passkey". The browser asks where to store it. Pick something that syncs (iCloud Keychain, Google Password Manager, Bitwarden, 1Password) so your other devices can use the same one.
+1. Press "Create a passkey". The browser asks where to store it. Pick something that syncs so your other devices can use the same one. On an iPhone or iPad pick the iCloud Keychain, which is currently the only option there that can derive a key. See "Where to store it" below for why.
 2. Press "Test unlock" to check the fingerprint or PIN flow. On another synced device, press it again to confirm it works there too.
 3. Press "Generate a backup key". Store the secret key in your password manager, apart from the ciphertexts. The public key is what you paste as the "Backup key" when encrypting.
 
@@ -111,9 +111,15 @@ Both modes produce standard age files. The only difference is who the recipients
 |---|---|---|
 | iCloud Keychain | Yes, across Apple devices | macOS 15 and iOS 18.4 or later |
 | Google Password Manager | Yes | Chrome on Android |
-| Bitwarden, 1Password, Dashlane | Yes | Supported |
+| Bitwarden, 1Password, Dashlane | Yes | Browser extensions on a computer can, the iPhone and iPad apps cannot |
 | Windows Hello | This computer only | Windows 11 with the February 2026 update or later |
 | USB security key | Carried with you | Not supported on this page. It needs a different way of keeping the identity |
+
+### On iPhone and iPad, pick the iCloud Keychain
+
+The system asks where to store the passkey. Pick the iCloud Keychain. Apple's implementation does not pass the data needed to derive a key to anything else, so choosing a third-party password manager app on an iPhone creates the passkey and then leaves you looking at "cannot derive an encryption key".
+
+Creating it by scanning a QR code on another device does not get that data either. Create the passkey on the device where you intend to use it.
 
 ## More than one device
 
