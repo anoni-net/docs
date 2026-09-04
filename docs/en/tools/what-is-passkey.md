@@ -31,9 +31,11 @@ Files in passphrase mode open anywhere. Files in passkey mode are tied to this d
 
 The passkey is bound to the `anoni.net` RP ID. Browsers only allow it on the same domain, so mirrors and onion addresses cannot use it. Tor Browser turns WebAuthn off entirely, with `security.webauth.webauthn` set to false in its default profile.
 
-PRF support as of March 2026: Safari 18, Chrome 132 and Firefox 139 on macOS 15 or later, iOS 18.4 or later, Chrome on Android with Google Password Manager, and Windows 11 only from the February 2026 update. 1Password, Bitwarden and Dashlane support it. Firefox on Android and Windows 10 do not.
+PRF support as of March 2026: Safari 18, Chrome 132 and Firefox 139 on macOS 15 or later, iOS 18.4 or later, Chrome on Android with Google Password Manager, and Windows 11 only from the February 2026 update. On the desktop the 1Password, Bitwarden and Dashlane browser extensions support it. Firefox on Android and Windows 10 do not.
 
-If the passkey is lost, the password manager account disappears, or you move to an environment without PRF, the data is gone forever. That is why the flow on this site requires an X25519 backup key, and files are encrypted to both. Keep the backup key apart from the ciphertexts.
+iPhone and iPad carry two further limits. Apple's implementation does not pass the data PRF needs to anything other than the iCloud Keychain, so a passkey saved into a third-party password manager app on iOS is created successfully yet derives no key. The cross-device flow, meaning the one where you scan a QR code on another device, does not get PRF either. To use it on an iPhone, create the passkey on that iPhone and store it in the iCloud Keychain.
+
+If the passkey is lost, the password manager account disappears, or you move to an environment without PRF, the data is gone forever. That is why the flow on this site adds an X25519 backup key by default, and files are encrypted to both. That half can be turned off in the encryption tool, which leaves the passkey as the only way in. Keep the backup key apart from the ciphertexts.
 
 ## What this site stores
 

@@ -31,9 +31,11 @@ WebAuthn 的 PRF 擴充讓 passkey 內部多藏一把秘密，永遠不離開驗
 
 passkey 綁在 `anoni.net` 這個 RP ID 上。瀏覽器只允許在同一個網域使用，鏡像站與 onion 位址用不了。Tor Browser 整個關閉 WebAuthn，`security.webauth.webauthn` 在它的預設設定檔裡是 false。
 
-PRF 擴充的支援面到 2026 年 3 月：macOS 15 以上的 Safari 18、Chrome 132、Firefox 139，iOS 18.4 以上，Android 的 Chrome 配 Google 密碼管理員，Windows 11 要 2026 年 2 月的更新之後。1Password、Bitwarden、Dashlane 支援。Firefox Android 與 Windows 10 不支援。
+PRF 擴充的支援面到 2026 年 3 月：macOS 15 以上的 Safari 18、Chrome 132、Firefox 139，iOS 18.4 以上，Android 的 Chrome 配 Google 密碼管理員，Windows 11 要 2026 年 2 月的更新之後。桌機上 1Password、Bitwarden、Dashlane 的瀏覽器擴充支援。Firefox Android 與 Windows 10 不支援。
 
-passkey 丟了、密碼管理員的帳號沒了、換到不支援 PRF 的環境，資料就永遠打不開。所以站上的流程強制搭一把 X25519 備援金鑰，檔案同時加密給 passkey 與它。備援金鑰放在跟密文不同的地方。
+iPhone 與 iPad 另有兩道限制。Apple 的實作不把 PRF 需要的資料傳給 iCloud 鑰匙圈以外的保管方式，所以在 iOS 上把 passkey 存進第三方密碼管理器的 app，建得起來卻算不出金鑰。跨裝置的流程，也就是在另一台裝置上掃 QR code 那條路，同樣拿不到 PRF。要在 iPhone 上用，就在 iPhone 上直接建立並存進 iCloud 鑰匙圈。
+
+passkey 丟了、密碼管理員的帳號沒了、換到不支援 PRF 的環境，資料就永遠打不開。所以站上的流程預設搭一把 X25519 備援金鑰，檔案同時加密給 passkey 與它。那一把可以在加密工具上取消，取消之後只有 passkey 開得了。備援金鑰放在跟密文不同的地方。
 
 ## 站上存了什麼
 
