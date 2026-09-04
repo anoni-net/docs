@@ -111,6 +111,35 @@ const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 //
 // 2026-09-04 之前那批沒有人負責：建置端把每頁都出現的資產從個別頁面移除，這裡又
 // 沒有收，於是讀者按了「全部存到裝置」，227 頁的 HTML 一頁不缺，離線打開是白的。
+// 三語系位元組完全相同的資產落在哪些目錄底下。
+//
+// 三次 mkdocs build 產出的內容一模一樣，只有路徑前綴不同，所以讀者切過語言之後，
+// 裝置上會存兩三份同樣的東西，也重新下載了兩三次。預快取這些一律用根路徑那一份，
+// 離線比對時把帶語系前綴的網址退回根路徑。目前省下約 0.3 MB。
+//
+// 這裡列的是目錄，不是「檔名相同就共用」。反例是 assets/javascripts/bundle.*.js 與
+// stylesheets/extra.css：檔名一樣（bundle 連雜湊都一樣），內容各語系不同，privacy
+// plugin 把第三方資源在地化之後，嵌進去的絕對網址帶著語系前綴。
+//
+// check_precache.mjs 驗這件事，落在這些前綴底下而三語系位元組不同的會紅燈。theme
+// 升級讓某一個開始分語系時擋得下來。
+const CROSS_LANG_PREFIXES = [
+  "assets/external/",
+  "assets/images/",
+  "assets/stylesheets/",
+  "assets/javascripts/workers/",
+  "js/",
+];
+
+function crossLangAsset(asset) {
+  return CROSS_LANG_PREFIXES.some((prefix) => asset.startsWith(prefix));
+}
+
+// 預快取一個資產時該用哪個網址。三語系共用的走根路徑，其餘跟著語系前綴。
+function assetUrlFor(prefix, asset) {
+  return SCOPE_PATH + (crossLangAsset(asset) ? "" : prefix) + asset;
+}
+
 const SHELL_ASSETS = [
   "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -372,7 +401,7 @@ function precacheUrlsFor(prefix) {
     urls.push(SCOPE_PATH + prefix + page);
   }
   for (const asset of SHELL_ASSETS) {
-    urls.push(SCOPE_PATH + prefix + asset);
+    urls.push(assetUrlFor(prefix, asset));
   }
   // 作品本體只建置一份在根路徑 /docs/games/，跟語系無關，三個語系共用
   for (const asset of GAME_APPS) {
@@ -415,7 +444,7 @@ async function corePageAssets(prefix, index) {
 async function shellAssetsFor(prefix, index) {
   const data = index === undefined ? await loadOfflineIndex(prefix) : index;
   if (!data) return [];
-  return (data.shell || []).map((asset) => SCOPE_PATH + prefix + asset);
+  return (data.shell || []).map((asset) => assetUrlFor(prefix, asset));
 }
 
 // 讀這個語系的離線索引。預快取要從它知道兩件事：每頁都載入的 shell 資產有哪些，
@@ -447,7 +476,7 @@ async function loadOfflineIndex(prefix) {
 function essentialUrlsFor(prefix) {
   const urls = [SCOPE_PATH + prefix + "offline/"];
   for (const asset of SHELL_ASSETS) {
-    urls.push(SCOPE_PATH + prefix + asset);
+    urls.push(assetUrlFor(prefix, asset));
   }
   return urls;
 }
@@ -1168,8 +1197,22 @@ async function networkFirst(request, event) {
   return cached;
 }
 
+// 離線時替一個資產請求找出對應的快取。三語系共用的那批只存根路徑那一份，而頁面
+// 引用的是帶語系前綴的網址，所以精確比對沒中的時候要再退一次。
+async function matchCachedAsset(request) {
+  const hit = await caches.match(request);
+  if (hit) return hit;
+  const url = new URL(request.url);
+  const prefix = langPrefixOf(url);
+  // 空字串是根路徑的 zh-TW，null 是 scope 外，兩種都沒有第二種形狀可以試
+  if (!prefix) return undefined;
+  const asset = url.pathname.slice(SCOPE_PATH.length + prefix.length);
+  if (!crossLangAsset(asset)) return undefined;
+  return caches.match(SCOPE_PATH + asset);
+}
+
 async function staleWhileRevalidate(request, event) {
-  const cached = await caches.match(request);
+  const cached = await matchCachedAsset(request);
   // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
   // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。
   const network = fetch(request, { cache: "no-cache" }).then(async (response) => {

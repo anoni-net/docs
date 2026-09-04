@@ -107,6 +107,9 @@ const harness = `
   ${grab(/^const VERSION = .*$/m)}
   ${grab(/^const PRECACHE = .*$/m)}
   ${grab(/^const LANG_PREFIXES = \[[^\]]*\];/m)}
+  ${grab(/^const CROSS_LANG_PREFIXES = \[[\s\S]*?\n\];/m)}
+  ${grab(/^function crossLangAsset\(asset\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function assetUrlFor\(prefix, asset\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const SHELL_ASSETS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_ZH = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_EN = \[[\s\S]*?\n\];/m)}
@@ -168,6 +171,7 @@ const harness = `
   ${grab(/^const NO_CACHE_TIMEOUT_MS = .*$/m)}
   ${grab(/^function assetUnavailable\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function matchCachedAsset\(request\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
   return {
@@ -175,6 +179,7 @@ const harness = `
     cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
     shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
+    crossLangAsset, assetUrlFor, matchCachedAsset,
     visitedPrefixes, offlineFallback,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
@@ -494,9 +499,52 @@ test('一次只抓一個語系的量', async (load) => {
   assert.ok(want.every((url) => fetched.includes(url)));
   // 內文圖預設不補，所以這一輪連 offline-index.json 都不會去讀
   assert.equal(fetched.length, want.length);
+  // 三種形狀：en 自己的、三語系共用的作品本體、三語系位元組相同的 theme 資產
   assert.ok(
-    fetched.every((url) => url.startsWith('/docs/en/') || url.startsWith('/docs/games/'))
+    fetched.every(
+      (url) =>
+        url.startsWith('/docs/en/') ||
+        url.startsWith('/docs/games/') ||
+        sw.crossLangAsset(url.slice('/docs/'.length))
+    )
   );
+});
+
+test('三語系位元組相同的資產只下根路徑那一份', async (load) => {
+  // 三次 build 產出的內容一模一樣，只有路徑前綴不同。讀者切過語言之後裝置上會存
+  // 兩三份同樣的東西，也重新下載了兩三次，實測那批是 0.3 MB。
+  const { sw, fetched } = load();
+  await sw.precacheFor('en/', true);
+  assert.ok(fetched.includes('/docs/assets/stylesheets/main.ec1eaa64.min.css'));
+  assert.ok(!fetched.includes('/docs/en/assets/stylesheets/main.ec1eaa64.min.css'));
+
+  // bundle 是反例。檔名連雜湊都一樣，內容卻各語系不同，privacy plugin 把第三方資源
+  // 在地化之後嵌進去的絕對網址帶著語系前綴，所以它照樣跟著語系走。
+  assert.ok(fetched.includes('/docs/en/assets/javascripts/bundle.d7400e89.min.js'));
+  assert.ok(!fetched.includes('/docs/assets/javascripts/bundle.d7400e89.min.js'));
+});
+
+test('共用的資產在別的語系底下也命中得了', async (load) => {
+  // 頁面引用的是帶語系前綴的網址，而快取裡只有根路徑那一份
+  const { sw, caches } = load();
+  const precache = await caches.open(sw.PRECACHE);
+  await precache.put('/docs/assets/stylesheets/main.ec1eaa64.min.css', 'THEME-CSS');
+  assert.equal(
+    await sw.matchCachedAsset(req('/docs/en/assets/stylesheets/main.ec1eaa64.min.css')),
+    'THEME-CSS'
+  );
+  // 各語系不同的那些不該退回根路徑，退了就是拿到別的語系的內容
+  await precache.put('/docs/stylesheets/extra.css', 'ZH-EXTRA');
+  assert.equal(await sw.matchCachedAsset(req('/docs/en/stylesheets/extra.css')), undefined);
+});
+
+test('shell 裡三語系相同的那些也走根路徑', async (load) => {
+  const { sw, fetched } = load({
+    index: { shell: ['js/analytics.js', 'stylesheets/extra.css'], sections: [] },
+  });
+  await sw.precacheFor('en/', false);
+  assert.ok(fetched.includes('/docs/js/analytics.js'));
+  assert.ok(fetched.includes('/docs/en/stylesheets/extra.css'));
 });
 
 test('換語系時不重抓已經有的東西', async (load) => {
