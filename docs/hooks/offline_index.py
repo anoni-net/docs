@@ -91,8 +91,9 @@ def _page_assets(html, url, meta):
 
 OUTPUT_NAME = "offline-index.json"
 
-# 不列進管理頁的頁面。管理頁自己與 404 沒有離線留存的意義。
-SKIP_URLS = {"offline/", "404.html", "tags/"}
+# 不列進管理頁的頁面。管理頁自己、離線落腳頁與 404 沒有離線留存的意義，
+# 前兩者由 service worker 的預快取直接負責，讀者不必也不該自己去勾。
+SKIP_URLS = {"offline/", "not-stored/", "404.html", "tags/"}
 
 # blog plugin 生成的聚合頁：分頁、年份彙整、分類索引。內容都在個別文章裡，
 # 讓讀者勾這些只會下載到一堆重複的摘要。
