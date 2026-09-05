@@ -13,7 +13,27 @@ icon: simple/torbrowser
 - <span class="chan-tag chan-tag--stable">穩定版</span>一般使用者用這個，版本號形如 15.0.20。
 - <span class="chan-tag chan-tag--alpha">Alpha</span>僅供測試，可能含影響可用性、安全與隱私的錯誤，版本號帶 a（例如 16.0a10）。需要強匿名保護的人不要用。
 
-Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。
+Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 跟著改，穩定版的更新會比過去更密。
+
+## Tor Browser 16.0a11（Alpha 測試通道）
+
+> 2026-09-02 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a11/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道僅供測試，一般使用者請繼續用穩定版（15.x）。
+- Firefox 基底 rebase 至 153.2.0esr（tor-browser#45254），Android 版 GeckoView 同步，並從 Firefox 155 backport 安全修補（tor-browser#45259）。
+- Android 版一律啟用本機網路存取（Local Network Access，LNA）限制，作為深度防禦（tor-browser#44155）。開啟後網頁不能直接連向區域網路或本機位址，少掉一條探測同一個網路內其他裝置的路。
+- TorConnect 的重導改由父行程處理（tor-browser#45264），與穩定版 15.0.21 是同一項修正。
+- 建置流程改從 gcc.gnu.org 取得 GCC 原始碼（tor-browser-build#41860），建置工具鏈的 Go 升至 1.26.8。
+
+## Tor Browser 15.0.21
+
+> 2026-09-01 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15021/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>以 Firefox 安全修補為主的小版本。
+- Firefox 基底 rebase 至 140.15.0esr（tor-browser#45253），Android 版 GeckoView 同步，並從 Firefox 155 backport 安全修補（tor-browser#45259）。
+- 修好在非隱私瀏覽模式啟動瀏覽器時 `about:torconnect` 不顯示的問題（tor-browser#45223）。TorConnect 的重導改由父行程處理（tor-browser#45264）。
+- NoScript 升至 13.6.32.1984，OpenSSL 升至 3.5.8，建置工具鏈的 Go 升至 1.25.14。
+- 上游把 32 位元 Linux 的提示改成版本過期訊息，追蹤項目寫明這是 15.0 系列的最後一版（tor-browser#44996）。16.0 穩定版依 16.0a9 公告的規劃在 9 月接手，還在 15.x 的人可以準備換過去。
 
 ## Tor Browser 16.0a10（Alpha 測試通道）
 
@@ -27,16 +47,6 @@ Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小
 - 停用以語系為基礎的字型規則，作為瀏覽器指紋的深度防禦（tor-browser#44257）。
 - NoScript 升至 13.6.31.90301984，OpenSSL 升至 3.5.8。
 - tor daemon 崩潰時，`about:torconnect` 會顯示錯誤訊息（tor-browser#43570）。橋接連線失敗時也會更新橋接設定的顯示（tor-browser#43939）。
-
-## Tor Browser 15.0.21
-
-> 2026-09-01 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15021/){target="_blank"}
-
-- <span class="chan-tag chan-tag--stable">穩定版</span>以 Firefox 安全修補為主的小版本。
-- Firefox 基底 rebase 至 140.15.0esr（tor-browser#45253），Android 版 GeckoView 同步，並從 Firefox 155 backport 安全修補（tor-browser#45259）。
-- 修好在非隱私瀏覽模式啟動瀏覽器時 `about:torconnect` 不顯示的問題（tor-browser#45223）。TorConnect 的重導改由父行程處理（tor-browser#45264）。
-- NoScript 升至 13.6.32.1984，OpenSSL 升至 3.5.8，建置工具鏈的 Go 升至 1.25.14。
-- 上游把 32 位元 Linux 的提示改成版本過期訊息，追蹤項目寫明這是 15.0 系列的最後一版（tor-browser#44996）。16.0 穩定版依 16.0a9 公告的規劃在 9 月接手，還在 15.x 的人可以準備換過去。
 
 ## Tor Browser 15.0.20
 

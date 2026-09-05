@@ -20,6 +20,17 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.12
+
+> 2026-09-03 · [上游公告](https://tails.net/news/version_7.12/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。公告沒有列出這一版修掉的漏洞，上游也沒有提到已被實際利用。
+- Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 與 Tails 跟著改，7.12 是新節奏的第一版。往後的版本會來得更密，自動升級的提示也會更常出現。
+- Tor Browser 升至 15.0.21，該版帶有從 Firefox 155 backport 的安全修補。
+- Electrum 從 4.7.2 升至 4.8.1。
+- 更新部分 firmware 套件，改善較新硬體的支援，包含顯示卡、Wi-Fi 等。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.11
 
 > 2026-08-19 · [上游公告](https://tails.net/news/version_7.11/){target="_blank"}
