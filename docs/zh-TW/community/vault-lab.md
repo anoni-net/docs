@@ -82,6 +82,79 @@ offline_assets:
 }
 </script>
 
+<style>
+/*
+  這一頁的樣式。原本一條都沒寫，三個按鈕靠 appendChild 接在一起，中間連空白字元都沒有，
+  在手機上就是三個緊貼的目標，按「儲存」很容易點到旁邊的「匯出」跳出下載對話框。
+  按鈕之間留間距，觸控目標給到 2.75rem（約 44 px，觸控介面的建議下限）。
+  顏色用 theme 的變數，深色模式跟著走。
+*/
+#vault-lab .vl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.1rem 0;
+  align-items: center;
+}
+#vault-lab .vl-btn {
+  min-height: 2.75rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+}
+#vault-lab .vl-primary {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+#vault-lab .vl-btn:disabled { opacity: 0.5; cursor: default; }
+#vault-lab .vl-label {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+#vault-lab .vl-note {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.6rem;
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.78rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+#vault-lab .vl-row { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.4rem; }
+#vault-lab .vl-row input { flex: 1 1 auto; min-width: 0; }
+#vault-lab .vl-label input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.78rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+#vault-lab .vl-secret {
+  word-break: break-all;
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.72rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  background: var(--md-code-bg-color);
+}
+#vault-lab .vl-msg { font-weight: 600; }
+#vault-lab .vl-hint { font-size: 0.72rem; opacity: 0.85; }
+#vault-lab .vl-file { font-size: 0.72rem; }
+</style>
+
 <div id="vault-lab"></div>
 <script src="../../js/vault.js"></script>
 <script src="../../js/vault-lab.js"></script>
