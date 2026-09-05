@@ -47,10 +47,14 @@
   //
   // 這一次改成讓文字框從建立到清除都待在同一個位置，不移動、不重建、不同步。render 只
   // 重畫上面那一塊，文字框這一塊只切換顯示與 disabled。沒有搬動就沒有那一整類問題。
-  const main = el("div", "vl-main");
+  // 三塊，順序就是讀者的閱讀順序：現在什麼狀態、內容、可以做什麼。
+  // 文字框那一塊 render 永遠不碰，前後兩塊照舊清空重畫。
+  const head = el("div", "vl-head");
   const noteArea = el("div", "vl-note-area");
-  root.appendChild(main);
+  const foot = el("div", "vl-foot");
+  root.appendChild(head);
   root.appendChild(noteArea);
+  root.appendChild(foot);
 
   const noteLabel = el("label", "vl-label", "隨手記（試驗用的內容）");
   const noteBox = document.createElement("textarea");
@@ -59,6 +63,33 @@
   noteLabel.appendChild(noteBox);
   noteArea.appendChild(noteLabel);
   noteArea.hidden = true;
+
+  // 打完字停一下就自動存。
+  //
+  // 「要記得按儲存」這件事本身就是一個會出錯的環節，而它出錯的樣子跟程式有 bug 一模
+  // 一樣：讀者解開之後看到空的，分不出是自己忘了按還是東西掉了。拿掉那個環節，順便
+  // 也拿掉按鈕與輸入框之間所有的時序問題。
+  //
+  // 手動那顆留著，想立刻確認存進去了的人有地方按。
+  let saveTimer = null;
+  noteBox.addEventListener("input", () => {
+    if (!state.unlocked || state.readOnly) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(autoSave, 800);
+  });
+
+  async function autoSave() {
+    if (!state.unlocked || state.readOnly || state.busy) return;
+    const note = noteBox.value;
+    try {
+      state.data = Object.assign({}, state.data, { note: note });
+      await vault().save(state.data, state.backupRecipient || null);
+      await refresh();
+      say("已自動存下，內容 " + note.length + " 個字，密文 " + state.blobSize + " 個位元組。");
+    } catch (err) {
+      say("自動儲存沒成功：" + (err && err.message ? err.message : String(err)));
+    }
+  }
 
   function say(text) {
     state.message = text;
@@ -96,8 +127,8 @@
       // 讀者知道了才決定要不要換個地方重建一把。
       say(
         made && made.hasPrf
-          ? "建好了，裡面還是空的。這一把同時能給本機檔案加密用，那邊選 passkey 模式時挑同一把就好。打字之後要按儲存才會留下來。"
-          : "建好了，裡面還是空的。這個環境算不出檔案加密要用的金鑰，所以這一把只給暫存區用，兩種都想要的話換到電腦上再建一把。打字之後要按儲存才會留下來。"
+          ? "建好了，裡面還是空的。這一把同時能給本機檔案加密用，那邊選 passkey 模式時挑同一把就好。打字就會自動存下來。"
+          : "建好了，裡面還是空的。這個環境算不出檔案加密要用的金鑰，所以這一把只給暫存區用，兩種都想要的話換到電腦上再建一把。打字就會自動存下來。"
       );
     });
 
@@ -109,8 +140,12 @@
       state.unlocked = true;
       state.readOnly = false;
       await refresh();
-      const n = Object.keys(state.data || {}).length;
-      say(n ? "解開了，讀到 " + n + " 個項目。" : "解開了，裡面還沒有東西。打字之後按儲存。");
+      const note = (state.data && state.data.note) || "";
+      say(
+        note.length
+          ? "解開了，裡面有 " + note.length + " 個字。"
+          : "解開了，裡面還沒有東西。打字就會自動存下來。"
+      );
     });
 
   const unlockBackup = (secret) =>
@@ -180,7 +215,7 @@
 
   function renderLocked() {
     if (!state.exists) {
-      main.appendChild(
+      head.appendChild(
         el("p", "vl-hint", "這台裝置上還沒有暫存區。建立時會產生一把 passkey，之後每次進來按一次指紋就好，不必記密語。")
       );
       const label = el("label", "vl-label", "備援金鑰（公鑰，age1 開頭，可留空）");
@@ -196,24 +231,24 @@
       row.appendChild(input);
       row.appendChild(button("產生一把", null, makeBackup));
       label.appendChild(row);
-      main.appendChild(label);
-      main.appendChild(
+      head.appendChild(label);
+      head.appendChild(
         el("p", "vl-hint", "沒有 WebAuthn 的環境（例如 Tor Browser）只剩備援私鑰這條路，passkey 全丟了也一樣。留空就沒有那條退路。")
       );
       if (state.shownSecret) {
-        main.appendChild(el("p", "vl-secret", state.shownSecret));
-        main.appendChild(el("p", "vl-hint", "備援私鑰，只顯示這一次。存進密碼管理器，放在跟這台裝置不同的地方。"));
+        head.appendChild(el("p", "vl-secret", state.shownSecret));
+        head.appendChild(el("p", "vl-hint", "備援私鑰，只顯示這一次。存進密碼管理器，放在跟這台裝置不同的地方。"));
       }
-      main.appendChild(button("建立暫存區", "vl-primary", create));
+      head.appendChild(button("建立暫存區", "vl-primary", create));
       return;
     }
 
-    main.appendChild(
+    head.appendChild(
       el("p", "vl-hint", "這台裝置上有一份鎖著的暫存區，密文 " + state.blobSize + " 個位元組。")
     );
     const actions = el("div", "vl-actions");
     actions.appendChild(button("用 passkey 解開", "vl-primary", unlock));
-    main.appendChild(actions);
+    head.appendChild(actions);
 
     const label = el("label", "vl-label", "或者貼備援私鑰（AGE-SECRET-KEY-1 開頭）");
     const input = document.createElement("input");
@@ -221,18 +256,20 @@
     input.className = "vl-secret-in";
     input.placeholder = "AGE-SECRET-KEY-1…";
     label.appendChild(input);
-    main.appendChild(label);
-    main.appendChild(button("用備援私鑰解開", null, () => unlockBackup(input.value)));
+    head.appendChild(label);
+    head.appendChild(button("用備援私鑰解開", null, () => unlockBackup(input.value)));
   }
 
   function renderUnlocked() {
-    const items = Object.keys(state.data || {}).length;
-    main.appendChild(
+    const note = (state.data && state.data.note) || "";
+    head.appendChild(
       el(
         "p",
         "vl-hint",
-        (state.readOnly ? "唯讀，看得到也匯得出去，改不了。" : "解開了，關掉這個分頁就會重新鎖上。") +
-          (items ? "裡面有 " + items + " 個項目。" : "裡面還沒有東西，打字之後按儲存。")
+        (state.readOnly
+          ? "唯讀，看得到也匯得出去，改不了。"
+          : "解開了，打字會自動存下來，關掉這個分頁就重新鎖上。") +
+          (note.length ? "目前有 " + note.length + " 個字。" : "目前還是空的。")
       )
     );
 
@@ -248,18 +285,19 @@
         say("鎖上了。");
       })
     );
-    main.appendChild(actions);
+    foot.appendChild(actions);
   }
 
   function render() {
     // 只重畫上面那一塊。文字框在 noteArea 裡，從頭到尾不動它，正在打的字與輸入法的
     // 組字都不會被打斷。
-    main.textContent = "";
+    head.textContent = "";
+    foot.textContent = "";
     noteArea.hidden = !(state.unlocked && vault() && vault().available() && !state.busy);
     noteBox.disabled = state.readOnly;
 
     if (!vault() || !vault().available()) {
-      main.appendChild(el("p", "vl-hint", "這個瀏覽器用不了，它需要 WebAuthn 與 IndexedDB。"));
+      head.appendChild(el("p", "vl-hint", "這個瀏覽器用不了，它需要 WebAuthn 與 IndexedDB。"));
       return;
     }
 
@@ -270,14 +308,14 @@
       busy.appendChild(spin);
       busy.appendChild(document.createTextNode(" 等你在瀏覽器的提示裡完成"));
       busy.setAttribute("aria-busy", "true");
-      main.appendChild(busy);
+      foot.appendChild(busy);
       return;
     }
 
     if (state.unlocked) renderUnlocked();
     else renderLocked();
 
-    if (state.message) main.appendChild(el("p", "vl-msg", state.message));
+    if (state.message) foot.appendChild(el("p", "vl-msg", state.message));
 
     if (state.exists) {
       const danger = el("div", "vl-actions");
@@ -290,13 +328,9 @@
         if (file.files && file.files[0]) importBlob(file.files[0]);
       });
       danger.appendChild(file);
-      main.appendChild(danger);
+      foot.appendChild(danger);
     }
 
-    if (hadFocus && noteBox.isConnected) {
-      noteBox.focus();
-      if (caret) noteBox.setSelectionRange(caret[0], caret[1]);
-    }
   }
 
   refresh().then(render, render);
