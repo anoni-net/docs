@@ -280,7 +280,10 @@ test('原始碼：只有 import 那一個載入點，沒有網路請求，沒有
     assert.ok(!code.includes(needle), `原始碼裡出現了 ${needle}`);
   }
   assert.ok(/import\("age-encryption"\)/.test(code));
-  assert.ok(/rpId: rpId, type: "passkey"/.test(code), '建立時要指定 RP ID 與 passkey 類型');
+  // 建立的動作搬到 vault.js 了，那一支把 32 位元組金鑰放進 user.id 同時要求 PRF，一把
+  // 鑰匙兩邊都能用。這裡只能透過它建，不能自己呼叫 WebAuthn 也不能再走 typage 那條
+  assert.ok(/window\.anoniVault\.createKey\(\)/.test(code), '建立要經過 vault.js 的 createKey');
+  assert.ok(!/age\.webauthn\.createCredential/.test(code), '不該再用 typage 自己建，那把的 user.id 給不了暫存區用');
   assert.ok(code.includes('anoni-spinner') && code.includes('aria-busy'));
   assert.ok(/window\.anoniPasskey = \{/.test(code), '沒有掛出共用介面');
   assert.ok(!code.includes('readText'), '不准讀剪貼簿');
