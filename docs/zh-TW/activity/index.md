@@ -10,6 +10,16 @@ icon: material/account-reactivate-outline
 
 <div class="grid cards" markdown>
 
+-   [:material-map-marker-radius: Global Gathering 2026](./gg2026.md)
+    :material-update: 2026/09/04 ~ 09/06（三日），攤位 09/06 `13:00`-`15:00` WEST
+    :octicons-location-24: 葡萄牙 Estoril，`6` 號攤位
+
+    ---
+
+    現場找到我們的一頁。攤位時段、桌上十二個關掉網路照樣能用的瀏覽器小工具、三件 Tor 的 3D 互動作品，以及用 passkey 把加密資料留在自己裝置上的研究。
+
+    :material-account-supervisor-outline: 適合對象：Global Gathering 現場的參加者，以及想知道社群帶了什麼過去的人。
+
 -   [:material-calendar-star: COSCUP 2026 匿名網路社群議程軌](./coscup-2026.md)
     :material-update: 2026/08/08、08/09（二日）
     :octicons-location-24: 國立台灣科技大學 `TR-510`
