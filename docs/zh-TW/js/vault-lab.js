@@ -83,7 +83,7 @@
     const note = noteBox.value;
     try {
       state.data = Object.assign({}, state.data, { note: note });
-      await vault().save(state.data, state.backupRecipient || null);
+      await vault().save(state.data);
       await refresh();
       say("已自動存下，內容 " + note.length + " 個字，密文 " + state.blobSize + " 個位元組。");
     } catch (err) {
@@ -162,7 +162,7 @@
       // 文字框從頭到尾是同一個節點，直接讀它就是讀者看到的內容，沒有第二個真相來源。
       const note = noteBox.value;
       state.data = Object.assign({}, state.data, { note: note });
-      await vault().save(state.data, state.backupRecipient || null);
+      await vault().save(state.data);
       await refresh();
       // 字數寫出來，存進去的是不是空的一眼就看得到
       say(
@@ -262,6 +262,12 @@
 
   function renderUnlocked() {
     const note = (state.data && state.data.note) || "";
+    // 備援有沒有設要講出來。沒有退路的人該知道自己沒有退路。
+    const backup = state.readOnly
+      ? ""
+      : vault().backupRecipient()
+        ? "備援金鑰已設，每次儲存都會一起加密給它。"
+        : "沒有備援金鑰，passkey 丟了這裡的東西就永遠打不開。";
     head.appendChild(
       el(
         "p",
@@ -269,7 +275,8 @@
         (state.readOnly
           ? "唯讀，看得到也匯得出去，改不了。"
           : "解開了，打字會自動存下來，關掉這個分頁就重新鎖上。") +
-          (note.length ? "目前有 " + note.length + " 個字。" : "目前還是空的。")
+          (note.length ? "目前有 " + note.length + " 個字。" : "目前還是空的。") +
+          backup
       )
     );
 

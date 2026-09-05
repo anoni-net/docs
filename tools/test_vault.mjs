@@ -72,7 +72,10 @@ const harness = `
   ${grab(/^  async function recipientOf\(identity\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function encryptData\(data, keyBytes, backupRecipient\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function decryptData\(bytes, identity\) \{[\s\S]*?\n  \}/m)}
-  return { identityOf, recipientOf, encryptData, decryptData };
+  ${grab(/^  const ENVELOPE_VERSION = .*$/m)}
+  ${grab(/^  function wrapEnvelope\(data, backupRecipient\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function unwrapEnvelope\(obj\) \{[\s\S]*?\n  \}/m)}
+  return { identityOf, recipientOf, encryptData, decryptData, wrapEnvelope, unwrapEnvelope, ENVELOPE_VERSION };
 `;
 const vault = new Function('age', 'base', harness)(age, base);
 
@@ -140,6 +143,53 @@ test('輸出是標準 age 檔，命令列那邊也認得', async () => {
   const blob = await vault.encryptData({ a: 1 }, key, null);
   const head = Buffer.from(blob.slice(0, 30)).toString('latin1');
   assert.ok(head.startsWith('age-encryption.org/v1\n'), '檔頭不是 age 的版本行');
+});
+
+test('信封帶版本與備援公鑰，資料在 data 底下', () => {
+  const env = vault.wrapEnvelope({ note: 'x' }, 'age1abc');
+  assert.equal(env.v, vault.ENVELOPE_VERSION);
+  assert.equal(env.backupRecipient, 'age1abc');
+  assert.deepEqual(env.data, { note: 'x' });
+  // 沒給備援就是 null，不是 undefined 也不是空字串，讀回來才好判斷
+  assert.equal(vault.wrapEnvelope({}, '').backupRecipient, null);
+  assert.equal(vault.wrapEnvelope({}, undefined).backupRecipient, null);
+});
+
+test('第一版之前的密文沒有信封，整個物件當資料，備援視為沒設', () => {
+  // 讀者裝置上已經有那種形狀的密文，換版不能讓它讀不出來
+  const legacy = vault.unwrapEnvelope({ note: '舊的' });
+  assert.deepEqual(legacy.data, { note: '舊的' });
+  assert.equal(legacy.backupRecipient, null);
+  assert.deepEqual(vault.unwrapEnvelope(null).data, {});
+});
+
+test('備援公鑰跟著密文走：第二個 session 存的東西，備援私鑰照樣解得開', async () => {
+  // 這是被修掉的那個 bug。原本 save 要呼叫端傳備援公鑰，重開頁面解鎖之後那個值是空
+  // 的，之後每一次儲存都把備援收件人丟掉，備援私鑰只打得開建立當下那一份。
+  const key = crypto.getRandomValues(new Uint8Array(32));
+  const backupIdentity = await age.generateX25519Identity();
+  const backupRecipient = await age.identityToRecipient(backupIdentity);
+
+  // 第一個 session：建立時帶備援
+  const first = await vault.encryptData(vault.wrapEnvelope({}, backupRecipient), key, backupRecipient);
+  // 第二個 session：解開，讀出信封裡的備援公鑰，只憑它繼續加密
+  const opened = vault.unwrapEnvelope(await vault.decryptData(first, await vault.identityOf(key)));
+  assert.equal(opened.backupRecipient, backupRecipient, '解開後要讀得回備援公鑰');
+  const second = await vault.encryptData(
+    vault.wrapEnvelope({ note: '第二次存的' }, opened.backupRecipient),
+    key,
+    opened.backupRecipient
+  );
+  // 備援私鑰要打得開第二次存的那份，這正是原本壞掉的地方
+  const viaBackup = vault.unwrapEnvelope(await vault.decryptData(second, backupIdentity));
+  assert.deepEqual(viaBackup.data, { note: '第二次存的' });
+});
+
+test('save 只認記憶體裡的備援公鑰，呼叫端傳不進第二個參數', () => {
+  // 讓「傳錯」這件事在型別上就不可能發生
+  assert.ok(/async save\(data\) \{/.test(src), 'save 的簽名該只有 data');
+  assert.ok(/wrapEnvelope\(data, currentBackup\), unlockedKey, currentBackup/.test(src), 'save 沒有用 currentBackup');
+  assert.ok(/currentBackup = backup;/.test(src), 'unlock 沒有把備援公鑰讀回記憶體');
 });
 
 test('整支程式不把金鑰寫進任何持久儲存', () => {

@@ -43,6 +43,10 @@
 
   // 解鎖之後的金鑰只活在這裡。分頁關掉、重新整理都會沒有，這是刻意的。
   let unlockedKey = null;
+  // 這份密文的備援公鑰。它跟著密文一起存（見 wrapEnvelope），解開時讀回來，之後每一次
+  // 儲存都要繼續加密給它。原本沒有這一項，備援只保護建立當下那一次寫入，讀者重開頁面
+  // 解鎖後的每一次儲存都把備援收件人丟掉了，而備援私鑰打不開的那一刻才會發現。
+  let currentBackup = null;
   let agePromise = null;
 
   const lib = () => {
@@ -167,6 +171,26 @@
     return age.identityToRecipient(identity);
   }
 
+  // --- 信封 ---
+  //
+  // 密文裡放的不是裸資料，是 { v, backupRecipient, data }。
+  // v 是格式版本，現在加幾乎不花力氣，等內容變複雜再加就要寫遷移。
+  // backupRecipient 是公鑰，放在加密內容裡沒有洩漏的問題，好處是匯出時跟著走，另一台
+  // 裝置匯入解開之後知道該繼續加密給誰。
+  const ENVELOPE_VERSION = 1;
+
+  function wrapEnvelope(data, backupRecipient) {
+    return { v: ENVELOPE_VERSION, backupRecipient: backupRecipient || null, data: data || {} };
+  }
+
+  // 第一版之前的密文沒有信封，整個物件就是資料，讀到那種形狀就當成沒有備援公鑰的舊格式。
+  function unwrapEnvelope(obj) {
+    if (obj && typeof obj === "object" && typeof obj.v === "number") {
+      return { backupRecipient: obj.backupRecipient || null, data: obj.data || {} };
+    }
+    return { backupRecipient: null, data: obj || {} };
+  }
+
   // --- 加解密 ---
 
   async function encryptData(data, keyBytes, backupRecipient) {
@@ -216,18 +240,21 @@
       const keyBytes = crypto.getRandomValues(new Uint8Array(KEY_BYTES));
       const made = await createCredential(keyBytes);
       unlockedKey = keyBytes;
-      await api.save({}, backupRecipient);
+      currentBackup = backupRecipient ? backupRecipient.trim() : null;
+      await api.save({});
       return made;
     },
 
     async unlock() {
       const keyBytes = await keyFromCredential();
       const blob = await readBlob();
+      let backup = null;
       if (blob) {
-        // 解得開才算數，解不開代表這把 passkey 不是當初那一把
-        await decryptData(blob, await identityOf(keyBytes));
+        // 解得開才算數，解不開代表這把 passkey 不是當初那一把。順便把備援公鑰讀回來。
+        backup = unwrapEnvelope(await decryptData(blob, await identityOf(keyBytes))).backupRecipient;
       }
       unlockedKey = keyBytes;
+      currentBackup = backup;
       return true;
     },
 
@@ -240,21 +267,28 @@
       const blob = await readBlob();
       if (!blob) throw new Error("empty");
       unlockedKey = null;
-      return decryptData(blob, secret.trim());
+      currentBackup = null;
+      return unwrapEnvelope(await decryptData(blob, secret.trim())).data;
     },
 
     async read() {
       if (!unlockedKey) throw new Error("locked");
       const blob = await readBlob();
       if (!blob) return {};
-      return decryptData(blob, await identityOf(unlockedKey));
+      return unwrapEnvelope(await decryptData(blob, await identityOf(unlockedKey))).data;
     },
 
-    async save(data, backupRecipient) {
+    // 每一次儲存都加密給目前記著的備援公鑰。呼叫端不必再傳，也不能傳錯。
+    async save(data) {
       if (!unlockedKey) throw new Error("locked");
-      const bytes = await encryptData(data, unlockedKey, backupRecipient);
+      const bytes = await encryptData(wrapEnvelope(data, currentBackup), unlockedKey, currentBackup);
       await writeBlob(bytes);
       return true;
+    },
+
+    // 這份密文有沒有備援公鑰。畫面要能講出「備援已設」或「沒有退路」。
+    backupRecipient() {
+      return currentBackup;
     },
 
     // 匯出就是那份密文，標準 age 檔，另一台裝置匯入或用命令列解都可以
@@ -284,10 +318,12 @@
 
     lock() {
       unlockedKey = null;
+      currentBackup = null;
     },
 
     async clear() {
       unlockedKey = null;
+      currentBackup = null;
       await dropBlob();
       return true;
     },
