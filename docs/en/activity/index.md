@@ -10,12 +10,12 @@ We occasionally hold workshops or discussion meetings on topics related to anony
 <div class="grid cards" markdown>
 
 -   [:material-map-marker-radius: Global Gathering 2026](./gg2026.md)
-    :material-update: September 4–6, 2026 (three days), booth on 09/06 `13:00`-`15:00` WEST
+    :material-update: September 4–6, 2026 (three days), booth on Sunday 6 September, `13:00` to `15:00` WEST
     :octicons-location-24: Estoril, Portugal, Booth `6`
 
     ---
 
-    The one-page version for people at the venue. Booth slot, the twelve browser-side tools on the table that keep working with the network off, three 3D Tor interactives, and the passkey research on keeping encrypted data on your own device.
+    The one-page version for people at the venue. Booth slot, the twelve browser-side tools on the table that keep working with the network off, three 3D interactives about Tor, and the passkey research on keeping encrypted data on your own device.
 
     :material-account-supervisor-outline: Intended audience: anyone at Global Gathering, and anyone who wants to know what the community brought.
 
