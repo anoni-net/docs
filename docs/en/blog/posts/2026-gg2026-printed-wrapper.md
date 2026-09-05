@@ -20,7 +20,7 @@ From 4 to 6 September **we have a booth at Global Gathering 2026 in Estoril, Por
 anoni.net is a volunteer community based in Taiwan, working on documentation, measurement tools, and self-hosted services for anonymity networks and networked freedom.
 
 - **Booth slot**: Sunday 6 September, `13:00` to `15:00`
-- **Where**: booth `6`, Queer Rights Village
+- **Where**: Booth `6`
 - **What you can do there**: take a zine, try eight browser-side tools that work offline and three interactive 3D pieces about Tor (the onion routing network), discuss anonymous payments
 - **We are around all three days**, so stop us anywhere at the venue outside the booth slot
 

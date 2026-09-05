@@ -205,6 +205,7 @@ nav:
           - community/payments-research.md
       - !ENV [NAV_EVENT, "活動參與"]:
           - activity/index.md
+          - activity/gg2026.md
           - activity/coscup-2026-cfp.md
           - activity/coscup-2026.md
           - event-workshop-2025.md
