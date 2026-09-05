@@ -20,6 +20,17 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.12
+
+> 2026-09-03 · [Upstream announcement](https://tails.net/news/version_7.12/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update. The announcement lists no fixed vulnerabilities, and upstream does not mention any being exploited.
+- Firefox moves to a two-week release cadence from September 2026, and Tor Browser and Tails follow. 7.12 is the first release on the new schedule, so updates arrive more often from here on.
+- Tor Browser updated to 15.0.21, which carries security fixes backported from Firefox 155.
+- Electrum updated from 4.7.2 to 4.8.1.
+- Updated some firmware packages, improving support for newer hardware such as graphics and Wi-Fi.
+- Automatic upgrades are available from Tails 7.0 or later. Fresh installations will erase existing Persistent Storage.
+
 ## Tails 7.11
 
 > 2026-08-19 · [Upstream announcement](https://tails.net/news/version_7.11/){target="_blank"}
