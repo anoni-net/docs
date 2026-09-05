@@ -30,6 +30,12 @@
     unlocked: false,
     readOnly: false,   // 用備援私鑰進來的，改不了也存不回去
     data: null,
+    // 文字框裡「還沒儲存」的內容。
+    //
+    // 畫面每次重繪都會重建 textarea，而重繪比想像中頻繁：訊息更新、進出忙碌狀態都會。
+    // 只讀按下儲存那一刻的 DOM 值，中間發生任何一次重繪，讀到的就是空字串，然後畫面
+    // 說存好了，存進去的卻是空的。所以打字當下就同步到這裡，重繪從這裡取值。
+    draft: null,
     backupRecipient: "",
     shownSecret: null,
     message: "",
@@ -68,6 +74,7 @@
       state.unlocked = true;
       state.readOnly = false;
       state.data = {};
+      state.draft = "";
       await refresh();
       say("建好了，裡面還是空的。打字之後要按儲存才會留下來。");
     });
@@ -76,6 +83,7 @@
     guard(async () => {
       await vault().unlock();
       state.data = await vault().read();
+      state.draft = (state.data && state.data.note) || "";
       state.unlocked = true;
       state.readOnly = false;
       await refresh();
@@ -86,14 +94,15 @@
   const unlockBackup = (secret) =>
     guard(async () => {
       state.data = await vault().unlockWithBackup(secret);
+      state.draft = (state.data && state.data.note) || "";
       state.unlocked = true;
       state.readOnly = true;
       say("用備援私鑰進來的，看得到也匯得出去，改不了。要改回到有 passkey 的裝置。");
     });
 
-  const save = (text) =>
+  const save = () =>
     guard(async () => {
-      state.data = Object.assign({}, state.data, { note: text });
+      state.data = Object.assign({}, state.data, { note: state.draft || "" });
       await vault().save(state.data, state.backupRecipient || null);
       await refresh();
       say("存好了，密文 " + state.blobSize + " 個位元組。鎖上再解開就會看到同樣的內容。");
@@ -126,6 +135,7 @@
       await vault().importBlob(bytes);
       state.unlocked = false;
       state.data = null;
+      state.draft = null;
       await refresh();
       say("匯進來了。用 passkey 或備援私鑰解開。");
     });
@@ -135,6 +145,7 @@
       await vault().clear();
       state.unlocked = false;
       state.data = null;
+      state.draft = null;
       state.shownSecret = null;
       await refresh();
       say("清掉了。密碼管理器裡那把 passkey 要自己刪。");
@@ -202,19 +213,24 @@
     const box = document.createElement("textarea");
     box.className = "vl-note";
     box.rows = 6;
-    box.value = (state.data && state.data.note) || "";
+    box.value = state.draft !== null ? state.draft : (state.data && state.data.note) || "";
     box.disabled = state.readOnly;
+    // 打字當下就記起來，重繪才不會把還沒儲存的東西弄丟
+    box.addEventListener("input", () => {
+      state.draft = box.value;
+    });
     label.appendChild(box);
     root.appendChild(label);
 
     const actions = el("div", "vl-actions");
-    if (!state.readOnly) actions.appendChild(button("儲存", "vl-primary", () => save(box.value)));
+    if (!state.readOnly) actions.appendChild(button("儲存", "vl-primary", save));
     actions.appendChild(button("匯出", null, exportBlob));
     actions.appendChild(
       button("鎖上", null, () => {
         vault().lock();
         state.unlocked = false;
         state.data = null;
+        state.draft = null;
         say("鎖上了。");
       })
     );
