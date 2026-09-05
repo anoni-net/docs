@@ -70,13 +70,19 @@
 
   const create = () =>
     guard(async () => {
-      await vault().create(state.backupRecipient || null);
+      const made = await vault().create(state.backupRecipient || null);
       state.unlocked = true;
       state.readOnly = false;
       state.data = {};
       state.draft = "";
       await refresh();
-      say("建好了，裡面還是空的。打字之後要按儲存才會留下來。");
+      // 這一把拿到了哪些能力要當場講。PRF 的秘密是建立當下產生的，換到別的裝置補不回來，
+      // 讀者知道了才決定要不要換個地方重建一把。
+      say(
+        made && made.hasPrf
+          ? "建好了，裡面還是空的。這一把同時能給本機檔案加密用，那邊選 passkey 模式時挑同一把就好。打字之後要按儲存才會留下來。"
+          : "建好了，裡面還是空的。這個環境算不出檔案加密要用的金鑰，所以這一把只給暫存區用，兩種都想要的話換到電腦上再建一把。打字之後要按儲存才會留下來。"
+      );
     });
 
   const unlock = () =>
