@@ -192,6 +192,23 @@ test('save 只認記憶體裡的備援公鑰，呼叫端傳不進第二個參數
   assert.ok(/currentBackup = backup;/.test(src), 'unlock 沒有把備援公鑰讀回記憶體');
 });
 
+test('鑰匙頁只建鑰匙不留痕跡，暫存區頁能用已有的鑰匙開', () => {
+  // createKey 給鑰匙頁用，那一頁承諾站上什麼都不存，所以它不能碰 writeBlob 也不能設
+  // unlockedKey。openWithExisting 給在鑰匙頁建過的讀者，驗證一次拿回金鑰、寫一份空密文。
+  const createKey = src.match(/async createKey\(\) \{[\s\S]*?\n    \}/)[0];
+  assert.ok(!/writeBlob|api\.save|unlockedKey =/.test(createKey), 'createKey 不能留下任何東西');
+  assert.ok(/return createCredential\(keyBytes\)/.test(createKey));
+
+  const openExisting = src.match(/async openWithExisting\(backupRecipient\) \{[\s\S]*?\n    \}/)[0];
+  assert.ok(/await keyFromCredential\(\)/.test(openExisting), '要用驗證拿回金鑰，不是建新的');
+  assert.ok(!/createCredential/.test(openExisting), '不能建第二把');
+  assert.ok(/await api\.save\(\{\}\)/.test(openExisting), '要寫一份空的密文');
+
+  // 不同步裝置的那一支改了名，避免跟「用已有的鑰匙」混淆
+  assert.ok(/async enrollDevice\(keyBytes\)/.test(src));
+  assert.ok(!/async adopt\(/.test(src));
+});
+
 test('整支程式不把金鑰寫進任何持久儲存', () => {
   // 解鎖之後金鑰只活在記憶體裡，分頁關掉就沒了。這條規則寫壞了不會有任何症狀，
   // 只會讓一把長期有效的金鑰躺在裝置上。

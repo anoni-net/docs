@@ -39,7 +39,14 @@
   const BLOB_KEY = "main";
   const KEY_BYTES = 32;
   const RP_NAME = "anoni.net";
-  const CRED_NAME = "anoni.net 加密暫存區";
+
+  // 顯示在密碼管理器裡的名字。一把鑰匙同時服務檔案加密與暫存區，所以不叫「暫存區」，
+  // 帶日期讓讀者分得出哪一把是哪天建的。
+  function keyName(date) {
+    const d = date || new Date();
+    const pad = (n) => String(n).padStart(2, "0");
+    return "anoni.net " + d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  }
 
   // 解鎖之後的金鑰只活在這裡。分頁關掉、重新整理都會沒有，這是刻意的。
   let unlockedKey = null;
@@ -122,7 +129,7 @@
       publicKey: {
         rp: { name: RP_NAME, id: location.hostname },
         // user.id 就是金鑰。name 與 displayName 會顯示在密碼管理器裡，寫得讓讀者認得出來。
-        user: { id: keyBytes, name: CRED_NAME, displayName: CRED_NAME },
+        user: { id: keyBytes, name: keyName(), displayName: keyName() },
         challenge: crypto.getRandomValues(new Uint8Array(32)),
         pubKeyCredParams: [
           { type: "public-key", alg: -8 },
@@ -236,6 +243,15 @@
 
     // 建立：先產生金鑰，用它建 passkey，再寫一份空的密文進去。
     // 順序是刻意的，passkey 沒建成功就什麼都不留。
+    // 只建一把鑰匙，什麼都不寫進裝置。鑰匙頁用這一支，那一頁承諾「站上不會存任何跟
+    // passkey 有關的東西」，建鑰匙不能順手留下一份密文。金鑰在 user.id 裡，之後到暫存區
+    // 頁用 openWithExisting 就拿得回來。
+    async createKey() {
+      const keyBytes = crypto.getRandomValues(new Uint8Array(KEY_BYTES));
+      return createCredential(keyBytes);
+    },
+
+    // 建鑰匙加上開一個空的暫存區，給從這一頁開始、手上還沒有鑰匙的讀者。
     async create(backupRecipient) {
       const keyBytes = crypto.getRandomValues(new Uint8Array(KEY_BYTES));
       const made = await createCredential(keyBytes);
@@ -243,6 +259,16 @@
       currentBackup = backupRecipient ? backupRecipient.trim() : null;
       await api.save({});
       return made;
+    },
+
+    // 用已經有的鑰匙開一個空的暫存區。在鑰匙頁建過的讀者走這裡，不必再建第二把，
+    // 密碼管理器裡也就只有一筆。驗證一次拿回 user.id 裡那把金鑰，寫一份空的密文。
+    async openWithExisting(backupRecipient) {
+      const keyBytes = await keyFromCredential();
+      unlockedKey = keyBytes;
+      currentBackup = backupRecipient ? backupRecipient.trim() : null;
+      await api.save({});
+      return true;
     },
 
     async unlock() {
@@ -310,7 +336,9 @@
       return unlockedKey.slice();
     },
 
-    async adopt(keyBytes) {
+    // 不同步的環境（Windows Hello）要加第二台裝置：帶著 exportKey 拿出來的金鑰，在那台
+    // 用同一個 user.id 建一把新的。還沒有介面。
+    async enrollDevice(keyBytes) {
       const made = await createCredential(keyBytes);
       unlockedKey = keyBytes;
       return made;

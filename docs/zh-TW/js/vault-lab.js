@@ -115,6 +115,18 @@
     state.exists = state.blobSize > 0;
   }
 
+  // 在鑰匙頁建過的讀者走這裡，不必再建第二把
+  const openExisting = () =>
+    guard(async () => {
+      await vault().openWithExisting(state.backupRecipient || null);
+      state.unlocked = true;
+      state.readOnly = false;
+      state.data = {};
+      noteBox.value = "";
+      await refresh();
+      say("用你已有的那把鑰匙開好了，裡面還是空的。打字就會自動存下來。");
+    });
+
   const create = () =>
     guard(async () => {
       const made = await vault().create(state.backupRecipient || null);
@@ -216,7 +228,11 @@
   function renderLocked() {
     if (!state.exists) {
       head.appendChild(
-        el("p", "vl-hint", "這台裝置上還沒有暫存區。建立時會產生一把 passkey，之後每次進來按一次指紋就好，不必記密語。")
+        el(
+          "p",
+          "vl-hint",
+          "這台裝置上還沒有暫存區。已經在鑰匙頁建過 anoni.net 的鑰匙就用它開，密碼管理器裡只會有一筆；還沒有的話建一把新的。之後每次進來按一次指紋就好，不必記密語。"
+        )
       );
       const label = el("label", "vl-label", "備援金鑰（公鑰，age1 開頭，可留空）");
       const row = el("div", "vl-row");
@@ -239,7 +255,10 @@
         head.appendChild(el("p", "vl-secret", state.shownSecret));
         head.appendChild(el("p", "vl-hint", "備援私鑰，只顯示這一次。存進密碼管理器，放在跟這台裝置不同的地方。"));
       }
-      head.appendChild(button("建立暫存區", "vl-primary", create));
+      const choose = el("div", "vl-actions");
+      choose.appendChild(button("用我已有的鑰匙開", "vl-primary", openExisting));
+      choose.appendChild(button("建一把新的鑰匙", null, create));
+      head.appendChild(choose);
       return;
     }
 
