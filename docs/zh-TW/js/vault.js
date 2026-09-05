@@ -64,15 +64,34 @@
     });
   }
 
+  // 寫入要等交易 commit 才算數。
+  //
+  // request.onsuccess 只代表那一個請求被接受了，資料還在交易裡。在那個時間點回報成功
+  // 的話，畫面會說「存好了」，而讀者這時重新整理，交易還沒 commit 就被中斷，東西就
+  // 沒了。實際遇到的症狀是建立完存第一筆存不進去，重新整理再存一次才留得住。
   function withStore(mode, run) {
     return openDb().then(
       (db) =>
         new Promise((resolve, reject) => {
           const tx = db.transaction(STORE, mode);
           const request = run(tx.objectStore(STORE));
-          request.onsuccess = () => resolve(request.result);
+          let result;
+          request.onsuccess = () => {
+            result = request.result;
+          };
           request.onerror = () => reject(request.error);
-          tx.oncomplete = () => db.close();
+          tx.oncomplete = () => {
+            db.close();
+            resolve(result);
+          };
+          tx.onerror = () => {
+            db.close();
+            reject(tx.error);
+          };
+          tx.onabort = () => {
+            db.close();
+            reject(tx.error);
+          };
         })
     );
   }
