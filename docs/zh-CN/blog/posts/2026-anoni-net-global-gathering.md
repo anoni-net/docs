@@ -6,8 +6,8 @@ categories:
     - 公告
     - 社区
 slug: 2026-anoni-net-global-gathering
-summary: "Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄牙 Estoril 举行，匿名网络社区申请到一个展位，排在 9 月 6 日当地时间 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 号展位，展位名称为 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。这是社区第一次参加，主要希望认识开发匿名网络与规避审查工具的技术工作者，以及同在亚洲区域的伙伴，并参与区域之间的协作。展位的主题是匿名支付，议程上没有任何一场以资金流隐私为题，现场收集实际的使用情境。另一组来自台湾的团队 Cofacts 也在同一个时段设展位，位置是 Booth 10。本文列出议程上与社区工作重叠的九场讨论、会前往交流的六个展位与各自想问的问题、活动前两天找到我们的五种方式，以及无法到场的人可以参与的方式。8 月 13 日台湾北部移动网络降速的观测记录会一并带往现场，作为与其他地区对照的案例。"
-description: "Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄牙 Estoril 举行，匿名网络社区申请到一个展位，排在 9 月 6 日当地时间 13:00 到 15:00，位置在 Regional Perspectives Village 的 6 号展位，展位名称为 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。这是社区第一次参加，主要希望认识开发匿名网络与规避审查工具的技术工作者，以及同在亚洲区域的伙伴，并参与区域之间的协作。展位的主题是匿名支付，议程上没有任何一场以资金流隐私为题，现场收集实际的使用情境。另一组来自台湾的团队 Cofacts 也在同一个时段设展位，位置是 Booth 10。本文列出议程上与社区工作重叠的九场讨论、会前往交流的六个展位与各自想问的问题、活动前两天找到我们的五种方式，以及无法到场的人可以参与的方式。8 月 13 日台湾北部移动网络降速的观测记录会一并带往现场，作为与其他地区对照的案例。"
+summary: "Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄牙 Estoril 举行，匿名网络社区申请到一个展位，排在 9 月 6 日当地时间 13:00 到 15:00，位置是 6 号展位，展位名称为 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。这是社区第一次参加，主要希望认识开发匿名网络与规避审查工具的技术工作者，以及同在亚洲区域的伙伴，并参与区域之间的协作。展位的主题是匿名支付，议程上没有任何一场以资金流隐私为题，现场收集实际的使用情境。另一组来自台湾的团队 Cofacts 也在同一个时段设展位，位置是 Booth 10。本文列出议程上与社区工作重叠的九场讨论、会前往交流的六个展位与各自想问的问题、活动前两天找到我们的五种方式，以及无法到场的人可以参与的方式。8 月 13 日台湾北部移动网络降速的观测记录会一并带往现场，作为与其他地区对照的案例。"
+description: "Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄牙 Estoril 举行，匿名网络社区申请到一个展位，排在 9 月 6 日当地时间 13:00 到 15:00，位置是 6 号展位，展位名称为 anoni.net Hub: Sinophone Asia-Pacific Networked Freedom。这是社区第一次参加，主要希望认识开发匿名网络与规避审查工具的技术工作者，以及同在亚洲区域的伙伴，并参与区域之间的协作。展位的主题是匿名支付，议程上没有任何一场以资金流隐私为题，现场收集实际的使用情境。另一组来自台湾的团队 Cofacts 也在同一个时段设展位，位置是 Booth 10。本文列出议程上与社区工作重叠的九场讨论、会前往交流的六个展位与各自想问的问题、活动前两天找到我们的五种方式，以及无法到场的人可以参与的方式。8 月 13 日台湾北部移动网络降速的观测记录会一并带往现场，作为与其他地区对照的案例。"
 ---
 
 # 匿名网络社区前往 Global Gathering 2026
@@ -15,7 +15,7 @@ description: "Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 
 Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄牙 Estoril 举行，我们申请到一个展位，时段已经排定。
 
 - 日期时间：9 月 6 日 `13:00` 到 `15:00` WEST（UTC+1，活动期间的葡萄牙当地时间，北京时间减 7 小时）
-- 位置：Regional Perspectives Village 的 `6` 号展位，大小 3 x 3 米
+- 位置：`6` 号展位，大小 3 x 3 米
 - 展位名称：anoni.net Hub: Sinophone Asia-Pacific Networked Freedom
 
 活动信息见 [Global Gathering 2026](https://wiki.digitalrights.community/index.php?title=2026_Global_Gathering_Programming){target="_blank"}。
@@ -26,7 +26,7 @@ Team CommUNITY 主办的 Global Gathering 2026 于 9 月 4 日到 6 日在葡萄
 
 Global Gathering 是 Team CommUNITY 主办的年度聚会，参加者来自世界各地，工作范围涵盖数字权利、网络自由，以及协助民间社会抵御数字攻击。
 
-整场活动没有主舞台的主题演讲，三天的议程由讨论圈（Circles）、依地区或主题聚集的 Meetups，以及开放走动的展位（Booths）组成。村落（Villages）再把这些活动依主题分类，例如规避审查技术、数字安全、区域观点。我们的展位位于区域观点村（Regional Perspectives Village）。
+整场活动没有主舞台的主题演讲，三天的议程由讨论圈（Circles）、依地区或主题聚集的 Meetups，以及开放走动的展位（Booths）组成。村落（Villages）再把这些活动依主题分类，例如规避审查技术、数字安全、区域观点。
 
 ## 我们参与的原因
 
