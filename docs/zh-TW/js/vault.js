@@ -171,6 +171,13 @@
       return !!blob;
     },
 
+    // 密文多大。畫面上要能講出「這台裝置上有沒有東西、有多少」，讀者才分得出
+    // 「解開了但裡面是空的」跟「根本沒解開」。
+    async size() {
+      const blob = await readBlob();
+      return blob ? blob.length || blob.byteLength || 0 : 0;
+    },
+
     // 建立：先產生金鑰，用它建 passkey，再寫一份空的密文進去。
     // 順序是刻意的，passkey 沒建成功就什麼都不留。
     async create(backupRecipient) {

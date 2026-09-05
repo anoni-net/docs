@@ -26,6 +26,7 @@
 
   const state = {
     exists: false,
+    blobSize: 0,
     unlocked: false,
     readOnly: false,   // 用備援私鑰進來的，改不了也存不回去
     data: null,
@@ -57,7 +58,8 @@
   }
 
   async function refresh() {
-    state.exists = await vault().exists();
+    state.blobSize = await vault().size();
+    state.exists = state.blobSize > 0;
   }
 
   const create = () =>
@@ -67,7 +69,7 @@
       state.readOnly = false;
       state.data = {};
       await refresh();
-      say("建好了。這台裝置之後按一次指紋就能進來。");
+      say("建好了，裡面還是空的。打字之後要按儲存才會留下來。");
     });
 
   const unlock = () =>
@@ -76,7 +78,9 @@
       state.data = await vault().read();
       state.unlocked = true;
       state.readOnly = false;
-      say("");
+      await refresh();
+      const n = Object.keys(state.data || {}).length;
+      say(n ? "解開了，讀到 " + n + " 個項目。" : "解開了，裡面還沒有東西。打字之後按儲存。");
     });
 
   const unlockBackup = (secret) =>
@@ -91,7 +95,8 @@
     guard(async () => {
       state.data = Object.assign({}, state.data, { note: text });
       await vault().save(state.data, state.backupRecipient || null);
-      say("存好了。");
+      await refresh();
+      say("存好了，密文 " + state.blobSize + " 個位元組。鎖上再解開就會看到同樣的內容。");
     });
 
   const makeBackup = () =>
@@ -165,7 +170,9 @@
       return;
     }
 
-    root.appendChild(el("p", "vl-hint", "這台裝置上有一份鎖著的暫存區。"));
+    root.appendChild(
+      el("p", "vl-hint", "這台裝置上有一份鎖著的暫存區，密文 " + state.blobSize + " 個位元組。")
+    );
     const actions = el("div", "vl-actions");
     actions.appendChild(button("用 passkey 解開", "vl-primary", unlock));
     root.appendChild(actions);
@@ -181,8 +188,14 @@
   }
 
   function renderUnlocked() {
+    const items = Object.keys(state.data || {}).length;
     root.appendChild(
-      el("p", "vl-hint", state.readOnly ? "唯讀。" : "解開了。關掉這個分頁就會重新鎖上。")
+      el(
+        "p",
+        "vl-hint",
+        (state.readOnly ? "唯讀，看得到也匯得出去，改不了。" : "解開了，關掉這個分頁就會重新鎖上。") +
+          (items ? "裡面有 " + items + " 個項目。" : "裡面還沒有東西，打字之後按儲存。")
+      )
     );
 
     const label = el("label", "vl-label", "隨手記（試驗用的內容）");
