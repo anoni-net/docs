@@ -162,6 +162,12 @@ jobs:
       - name: 本機檔案加密
         run: node tools/test_agecrypt.mjs
 
+      # 加密暫存區：那 32 個位元組直接當 age 私鑰用，編碼錯一個位元組加密照樣成功，要等
+      # 到換裝置解不開才發現。這裡把編碼、加密、解密的往返跑一遍，另守金鑰不落地與
+      # passkey 一定建成 discoverable 兩條規則
+      - name: 加密暫存區
+        run: node tools/test_vault.mjs
+
       # passkey 鑰匙：替身的 navigator.credentials 讓 typage 的 webauthn 模組在 Node 跑起來，
       # PRF 段落用 Node 內建的 crypto 獨立算一次對照。另守三語系頁面、import map 與 nav 的接線
       - name: passkey 鑰匙
