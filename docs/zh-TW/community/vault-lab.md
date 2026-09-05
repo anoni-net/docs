@@ -92,6 +92,14 @@ offline_assets:
 
 密文存在這台裝置的 IndexedDB。解鎖之後金鑰只留在記憶體，分頁關掉就沒了。
 
+## 一把鑰匙服務兩件事
+
+建立時同時要求 PRF 擴充。拿得到的話，這把鑰匙也能給[本機檔案加密](../utils/age.md)用，那邊選 passkey 模式時挑同一把就好，密碼管理器裡不必留兩筆。已經在這裡建過的人不需要再去[鑰匙頁](../utils/passkey.md)建。
+
+PRF 拿不到不算失敗，暫存區走的是 `user.id` 那條，跟 PRF 無關。iPhone 配第三方密碼管理器就是這種情況，建出來的鑰匙只給暫存區用。
+
+PRF 的秘密是建立當下由 authenticator 產生的，所以**在哪裡建立決定了這把鑰匙有沒有那個能力**，之後換到支援的裝置也補不回來。想要兩種能力都有，在電腦上建第一把（Bitwarden 的瀏覽器擴充、Windows Hello、Mac 都可以），或者在 iPhone 上選 iCloud 鑰匙圈。
+
 ## 跟站上檔案加密的差別
 
 [本機檔案加密](../utils/age.md)的 passkey 模式走 WebAuthn 的 PRF 擴充，保證是「就算密碼管理器的 vault 洩漏，也算不出金鑰」。代價是 iPhone 配第三方密碼管理器拿不到 PRF。

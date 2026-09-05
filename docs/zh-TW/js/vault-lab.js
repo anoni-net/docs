@@ -44,6 +44,26 @@
 
   const vault = () => window.anoniVault;
 
+  // 文字框只建立一次，之後跨重繪重用同一個節點。
+  //
+  // render 每次都清空 root 再重建全部，如果連文字框一起重建，正在打的字會受兩種傷：
+  // 焦點跑掉，還有中文輸入法的組字被中斷。組字中途被打斷的話那段字根本不會進到 value，
+  // input 事件也不會帶著它，於是畫面說存好了，存進去的是空的。
+  //
+  // appendChild 對已經在文件裡的節點是移動而不是複製，所以每次重繪把它掛回新的位置就好。
+  let noteBox = null;
+
+  function getNoteBox() {
+    if (noteBox) return noteBox;
+    noteBox = document.createElement("textarea");
+    noteBox.className = "vl-note";
+    noteBox.rows = 6;
+    noteBox.addEventListener("input", () => {
+      state.draft = noteBox.value;
+    });
+    return noteBox;
+  }
+
   function say(text) {
     state.message = text;
     render();
@@ -70,13 +90,19 @@
 
   const create = () =>
     guard(async () => {
-      await vault().create(state.backupRecipient || null);
+      const made = await vault().create(state.backupRecipient || null);
       state.unlocked = true;
       state.readOnly = false;
       state.data = {};
       state.draft = "";
       await refresh();
-      say("建好了，裡面還是空的。打字之後要按儲存才會留下來。");
+      // 這一把拿到了哪些能力要當場講。PRF 的秘密是建立當下產生的，換到別的裝置補不回來，
+      // 讀者知道了才決定要不要換個地方重建一把。
+      say(
+        made && made.hasPrf
+          ? "建好了，裡面還是空的。這一把同時能給本機檔案加密用，那邊選 passkey 模式時挑同一把就好。打字之後要按儲存才會留下來。"
+          : "建好了，裡面還是空的。這個環境算不出檔案加密要用的金鑰，所以這一把只給暫存區用，兩種都想要的話換到電腦上再建一把。打字之後要按儲存才會留下來。"
+      );
     });
 
   const unlock = () =>
@@ -102,10 +128,17 @@
 
   const save = () =>
     guard(async () => {
-      state.data = Object.assign({}, state.data, { note: state.draft || "" });
+      // 文字框不再被重建，所以直接讀它最準。draft 留著當備援，兩邊取比較長的那個。
+      const typed = noteBox ? noteBox.value : "";
+      const note = typed.length >= (state.draft || "").length ? typed : state.draft;
+      state.data = Object.assign({}, state.data, { note: note || "" });
+      state.draft = note || "";
       await vault().save(state.data, state.backupRecipient || null);
       await refresh();
-      say("存好了，密文 " + state.blobSize + " 個位元組。鎖上再解開就會看到同樣的內容。");
+      // 字數寫出來，存進去的是不是空的一眼就看得到
+      say(
+        "存好了，內容 " + (note || "").length + " 個字，密文 " + state.blobSize + " 個位元組。鎖上再解開就會看到同樣的內容。"
+      );
     });
 
   const makeBackup = () =>
@@ -136,6 +169,7 @@
       state.unlocked = false;
       state.data = null;
       state.draft = null;
+      if (noteBox) noteBox.value = "";
       await refresh();
       say("匯進來了。用 passkey 或備援私鑰解開。");
     });
@@ -146,6 +180,7 @@
       state.unlocked = false;
       state.data = null;
       state.draft = null;
+      if (noteBox) noteBox.value = "";
       state.shownSecret = null;
       await refresh();
       say("清掉了。密碼管理器裡那把 passkey 要自己刪。");
@@ -210,15 +245,11 @@
     );
 
     const label = el("label", "vl-label", "隨手記（試驗用的內容）");
-    const box = document.createElement("textarea");
-    box.className = "vl-note";
-    box.rows = 6;
-    box.value = state.draft !== null ? state.draft : (state.data && state.data.note) || "";
+    const box = getNoteBox();
+    const want = state.draft !== null ? state.draft : (state.data && state.data.note) || "";
+    // 值只在真的不一樣時才寫回去。無條件指派會把游標推到最後，正在編輯的人會很困擾。
+    if (box.value !== want) box.value = want;
     box.disabled = state.readOnly;
-    // 打字當下就記起來，重繪才不會把還沒儲存的東西弄丟
-    box.addEventListener("input", () => {
-      state.draft = box.value;
-    });
     label.appendChild(box);
     root.appendChild(label);
 
@@ -231,6 +262,7 @@
         state.unlocked = false;
         state.data = null;
         state.draft = null;
+        if (noteBox) noteBox.value = "";
         say("鎖上了。");
       })
     );
@@ -238,6 +270,15 @@
   }
 
   function render() {
+    // 重繪會把文字框移出文件再掛回去，焦點與游標位置跟著沒了。實務上重繪都發生在按下
+    // 按鈕之後，焦點本來就在按鈕上，所以救不救得回來影響不大。留著這一段是為了將來
+    // 重繪如果由別的事情觸發，正在編輯的人不會被打斷。
+    //
+    // 救不回來的是忙碌畫面那一步：那時整個畫面只剩轉圈，文字框根本不在文件裡，
+    // 焦點已經散掉，下一次重繪也就無從得知它原本在哪。
+    const hadFocus = noteBox && document.activeElement === noteBox;
+    const caret = hadFocus ? [noteBox.selectionStart, noteBox.selectionEnd] : null;
+
     root.textContent = "";
 
     if (!vault() || !vault().available()) {
@@ -273,6 +314,11 @@
       });
       danger.appendChild(file);
       root.appendChild(danger);
+    }
+
+    if (hadFocus && noteBox.isConnected) {
+      noteBox.focus();
+      if (caret) noteBox.setSelectionRange(caret[0], caret[1]);
     }
   }
 

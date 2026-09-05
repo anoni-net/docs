@@ -102,6 +102,17 @@
 
   // --- passkey：只用核心欄位，沒有任何擴充 ---
 
+  // 建立一把 anoni.net 的鑰匙。它同時要兩種能力，讀者的密碼管理器裡因此只需要一筆。
+  //
+  // user.id 放資料金鑰，那是暫存區用的，任何 provider 都拿得回來。同時要求 PRF 擴充，
+  // 拿得到的話這把鑰匙也能給本機檔案加密用（那邊的收件人只認 rpId，不綁特定 credential，
+  // 所以挑同一把就行）。
+  //
+  // PRF 拿不到不算失敗。iPhone 配第三方密碼管理器就是這種情況，那時暫存區照樣能用，
+  // 少的只是檔案加密那項能力。回傳時把結果講出來，畫面才寫得出這一把拿到了哪些。
+  //
+  // PRF 的秘密是建立當下由 authenticator 產生的，所以「在哪裡建立」決定了這把鑰匙
+  // 有沒有那個能力，之後換到支援的裝置也補不回來。
   async function createCredential(keyBytes) {
     const cred = await navigator.credentials.create({
       publicKey: {
@@ -116,11 +127,13 @@
         ],
         // discoverable 才會在驗證時回傳 userHandle，那是整條路的前提
         authenticatorSelection: { residentKey: "required", userVerification: "required" },
+        extensions: { prf: {} },
         timeout: 120000,
       },
     });
     if (!cred) throw new Error("cancelled");
-    return cred;
+    const results = cred.getClientExtensionResults ? cred.getClientExtensionResults() : {};
+    return { hasPrf: !!(results.prf && results.prf.enabled) };
   }
 
   async function keyFromCredential() {
@@ -201,10 +214,10 @@
     // 順序是刻意的，passkey 沒建成功就什麼都不留。
     async create(backupRecipient) {
       const keyBytes = crypto.getRandomValues(new Uint8Array(KEY_BYTES));
-      await createCredential(keyBytes);
+      const made = await createCredential(keyBytes);
       unlockedKey = keyBytes;
       await api.save({}, backupRecipient);
-      return true;
+      return made;
     },
 
     async unlock() {
@@ -264,9 +277,9 @@
     },
 
     async adopt(keyBytes) {
-      await createCredential(keyBytes);
+      const made = await createCredential(keyBytes);
       unlockedKey = keyBytes;
-      return true;
+      return made;
     },
 
     lock() {

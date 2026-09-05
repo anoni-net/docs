@@ -164,6 +164,18 @@ test('passkey 一定建成 discoverable，否則驗證時拿不回 userHandle', 
   assert.ok(/user: \{ id: keyBytes,/.test(src));
 });
 
+test('建立時同時要 PRF，拿不到也不失敗', () => {
+  // 一把鑰匙服務兩件事：user.id 給暫存區，PRF 給本機檔案加密。讀者的密碼管理器裡
+  // 因此只需要一筆。iPhone 配第三方密碼管理器拿不到 PRF，那時暫存區照樣要能用。
+  const block = src.match(/async function createCredential\(keyBytes\) \{[\s\S]*?\n  \}/)[0];
+  assert.ok(/extensions: \{ prf: \{\} \}/.test(block), '建立時沒有要求 PRF');
+  assert.ok(
+    !/prf.*enabled[\s\S]{0,40}throw/.test(block),
+    'PRF 拿不到不該讓建立失敗，暫存區走的是 user.id 那條'
+  );
+  assert.ok(/hasPrf: !!\(results\.prf && results\.prf\.enabled\)/.test(block), '沒有把結果回報出去');
+});
+
 test('寫入等交易 commit 才回報成功', () => {
   // request.onsuccess 只代表請求被接受，資料還在交易裡。在那時回報成功的話，畫面會
   // 說「存好了」，而讀者這時重新整理就沒了。實際遇到的症狀是建立完存第一筆存不進去，
