@@ -28,7 +28,7 @@ icon: material/tools
 
 -   :material-clipboard-check-outline: **[威胁模型清单](threat-model.md)**
 
-    把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案不存起来，刷新就没了。
+    把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案预设不存，要留的话用 passkey 加密存在你的设备上。
 
 -   :material-dice-multiple-outline: **[密语与密码生成器](passphrase.md)**
 

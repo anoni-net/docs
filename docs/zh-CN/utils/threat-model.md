@@ -1,13 +1,84 @@
 ---
 title: 威胁模型清单
-description: 把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案不存起来，刷新就没了。
+description: 把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案预设不存，要留的话用 passkey 加密存在你的设备上。
 icon: material/clipboard-check-outline
+offline_assets:
+  # typage 與相依的 noble、scure 由 import map 接到 vendor/age/，hooks/offline_index.py 只認
+  # <script src>，所以逐一列在下面。清單由 tools/test_agecrypt.mjs 對照 vendor 目錄。
+  - utils/vendor/age/age-encryption/dist/armor.js
+  - utils/vendor/age/age-encryption/dist/cbor.js
+  - utils/vendor/age/age-encryption/dist/format.js
+  - utils/vendor/age/age-encryption/dist/index.js
+  - utils/vendor/age/age-encryption/dist/io.js
+  - utils/vendor/age/age-encryption/dist/recipients.js
+  - utils/vendor/age/age-encryption/dist/stream.js
+  - utils/vendor/age/age-encryption/dist/webauthn.js
+  - utils/vendor/age/age-encryption/dist/x25519.js
+  - utils/vendor/age/noble-ciphers/_arx.js
+  - utils/vendor/age/noble-ciphers/_poly1305.js
+  - utils/vendor/age/noble-ciphers/chacha.js
+  - utils/vendor/age/noble-ciphers/utils.js
+  - utils/vendor/age/noble-curves/abstract/curve.js
+  - utils/vendor/age/noble-curves/abstract/edwards.js
+  - utils/vendor/age/noble-curves/abstract/fft.js
+  - utils/vendor/age/noble-curves/abstract/hash-to-curve.js
+  - utils/vendor/age/noble-curves/abstract/modular.js
+  - utils/vendor/age/noble-curves/abstract/montgomery.js
+  - utils/vendor/age/noble-curves/abstract/oprf.js
+  - utils/vendor/age/noble-curves/abstract/weierstrass.js
+  - utils/vendor/age/noble-curves/ed25519.js
+  - utils/vendor/age/noble-curves/nist.js
+  - utils/vendor/age/noble-curves/utils.js
+  - utils/vendor/age/noble-hashes/_md.js
+  - utils/vendor/age/noble-hashes/_u64.js
+  - utils/vendor/age/noble-hashes/hkdf.js
+  - utils/vendor/age/noble-hashes/hmac.js
+  - utils/vendor/age/noble-hashes/pbkdf2.js
+  - utils/vendor/age/noble-hashes/scrypt.js
+  - utils/vendor/age/noble-hashes/sha2.js
+  - utils/vendor/age/noble-hashes/sha3.js
+  - utils/vendor/age/noble-hashes/utils.js
+  - utils/vendor/age/noble-post-quantum/_crystals.js
+  - utils/vendor/age/noble-post-quantum/hybrid.js
+  - utils/vendor/age/noble-post-quantum/ml-kem.js
+  - utils/vendor/age/noble-post-quantum/utils.js
+  - utils/vendor/age/scure-base/index.js
+  - js/vault.js
+  - js/threatmodel.js
 ---
 
 # :material-clipboard-check-outline: 威胁模型清单
 
-<div id="threatmodel-tool"></div>
+<script type="importmap">
+{
+  "imports": {
+    "age-encryption": "../vendor/age/age-encryption/dist/index.js",
+    "@noble/ciphers/chacha.js": "../vendor/age/noble-ciphers/chacha.js",
+    "@noble/curves/abstract/edwards.js": "../vendor/age/noble-curves/abstract/edwards.js",
+    "@noble/curves/abstract/fft.js": "../vendor/age/noble-curves/abstract/fft.js",
+    "@noble/curves/abstract/montgomery.js": "../vendor/age/noble-curves/abstract/montgomery.js",
+    "@noble/curves/abstract/weierstrass.js": "../vendor/age/noble-curves/abstract/weierstrass.js",
+    "@noble/curves/ed25519.js": "../vendor/age/noble-curves/ed25519.js",
+    "@noble/curves/nist.js": "../vendor/age/noble-curves/nist.js",
+    "@noble/curves/utils.js": "../vendor/age/noble-curves/utils.js",
+    "@noble/hashes/hkdf": "../vendor/age/noble-hashes/hkdf.js",
+    "@noble/hashes/hkdf.js": "../vendor/age/noble-hashes/hkdf.js",
+    "@noble/hashes/hmac": "../vendor/age/noble-hashes/hmac.js",
+    "@noble/hashes/hmac.js": "../vendor/age/noble-hashes/hmac.js",
+    "@noble/hashes/scrypt.js": "../vendor/age/noble-hashes/scrypt.js",
+    "@noble/hashes/sha2": "../vendor/age/noble-hashes/sha2.js",
+    "@noble/hashes/sha2.js": "../vendor/age/noble-hashes/sha2.js",
+    "@noble/hashes/sha3.js": "../vendor/age/noble-hashes/sha3.js",
+    "@noble/hashes/utils": "../vendor/age/noble-hashes/utils.js",
+    "@noble/hashes/utils.js": "../vendor/age/noble-hashes/utils.js",
+    "@noble/post-quantum/hybrid.js": "../vendor/age/noble-post-quantum/hybrid.js",
+    "@scure/base": "../vendor/age/scure-base/index.js"
+  }
+}
+</script>
 
+<div id="threatmodel-tool"></div>
+<script src="../../js/vault.js"></script>
 <script src="../../js/threatmodel.js"></script>
 
 常见的两种处境：
@@ -33,13 +104,13 @@ icon: material/clipboard-check-outline
 
 一题一题答的时候不容易看出冲突，五种答案并排列出来，例如对手选到国家级却填最低成本，落差马上就跳出来。
 
-## 答案不会存起来
+## 答案预设不存
 
-填的内容只留在浏览器标签页里，不会写进任何一种浏览器存储空间，也不会送到任何地方。刷新就回到空白。要留纪录的是另一种清单，[我的准备清单](checklist.md)记的是做到哪一步，用 passkey 加密存在你的设备上。
+填的内容只留在浏览器标签页里，不写进任何一种浏览器存储空间，也不送到任何地方，刷新就回到空白。要留一份有两条路：按「复制摘要」贴到你自己选的地方，或按「存进我的暂存区」，用你的 [passkey](passkey.md) 加密存在这台设备上，跟[我的准备清单](checklist.md)同一份密文。两条都要你自己按，这一页不替你决定。下次进来，顶端会问要不要填回上次的答案。
 
-这是刻意的。「我要防的是亲密关系的人」这种答案留在设备上，正好是最不该留的东西，而那台设备很可能就是对方碰得到的一台。要留一份就按「复制摘要」，贴到你自己选的地方，决定权在你。决定要留在设备上的话，先用[本机文件加密](age.md)包成密文再存，不要留明文。那一页可以用密语，也可以用 [passkey](passkey.md) 当钥匙，按一次指纹就好。
+有一种情况不提供存档：对手选了亲密关系、一国执法或国家级。他们碰得到你的设备，也可能要求你解锁，passkey 没有比屏幕锁更强。「我要防的是亲密关系的人」这种答案留在对方碰得到的设备上，正好是最不该留的东西。那时只剩「复制摘要」，贴到对方碰不到的地方。
 
-有一项测试专门确保数据不落地，避免日后有人为了体验方便顺手加上存储。
+有一项测试守着三件事：这一页自己不碰任何存储空间，存档只经 passkey 暂存区，上面那几种对手选了就不提供存档。
 
 ## 这份清单是活的
 

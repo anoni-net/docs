@@ -44,6 +44,7 @@ const BASE = process.env.VAULT_BASE || 'http://localhost:8011/docs/';
 const PASSKEY_URL = new URL('utils/passkey/', BASE).href;
 const VAULT_URL = new URL('community/vault-lab/', BASE).href;
 const CHECKLIST_URL = new URL('utils/checklist/', BASE).href;
+const THREAT_URL = new URL('utils/threat-model/', BASE).href;
 const SHOTS = process.argv.includes('--shots');
 const OUT = path.join(os.tmpdir(), 'vault-shots');
 
@@ -421,6 +422,75 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     assert.equal(dates.length, 2, '勾的項目要顯示日期');
     for (const d of dates) assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `日期格式不對：${d}`);
     assert.equal((await page.credentials()).length, 1, '解開不該多出 credential');
+  } finally {
+    await page.close();
+  }
+});
+
+test('威脅模型答案存進暫存區，重新整理後填回來，對手選親密關係就沒有存的按鈕', async () => {
+  const page = await openChrome();
+  try {
+    await page.goto(THREAT_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("document.querySelectorAll('#threatmodel-tool input').length > 0", '工具畫出來');
+    // 頂端不該有「填回上次」：這台裝置還沒有暫存區
+    assert.equal(await page.evaluate("!!__vl.button('#threatmodel-tool', '用 passkey 填回上次的答案')"), false, '沒有暫存區卻出現填回按鈕');
+
+    const pick = async (name, index) => page.evaluate(`
+      (() => { const list = [...document.querySelectorAll('#threatmodel-tool fieldset')][${index}].querySelectorAll('input');
+        const i = [...list].find((x) => x.nextSibling && x.nextSibling.textContent.startsWith('${name}'));
+        if (!i) throw new Error('沒有選項 ${name}'); i.click(); return true; })()
+    `);
+    await pick('內容相關', 0);
+    await pick('隨意路人', 1);
+    await pick('低', 2);
+    await page.evaluate("__vl.click('#threatmodel-tool', '產生摘要')");
+    await page.waitFor("!!document.querySelector('#threatmodel-tool .tm-out')", '摘要出現');
+    assert.ok(await page.evaluate("!!__vl.button('#threatmodel-tool', '存進我的暫存區')"), '隨意路人為對手時要有存的按鈕');
+
+    await page.evaluate("__vl.click('#threatmodel-tool', '存進我的暫存區')");
+    await page.waitFor("!!__vl.button('#threatmodel-tool', '建一把新的鑰匙')", '沒有暫存區時給兩個選項');
+    await page.evaluate("__vl.click('#threatmodel-tool', '建一把新的鑰匙')");
+    await page.waitFor("/已存，\\d{4}-\\d{2}-\\d{2}/.test(__vl.text('#threatmodel-tool'))", '存好並顯示日期');
+    assert.equal((await page.credentials()).length, 1, '建鑰匙之後驗證器裡應該只有一筆');
+    assert.ok(await page.evaluate("__vl.button('#threatmodel-tool', '更新存檔').disabled"), '剛存完、沒改答案，更新要是灰的');
+    await page.evaluate("document.querySelector('#threatmodel-tool .tm-store').scrollIntoView(); true");
+    await page.shot('06-threat-model-saved');
+
+    // 改答案會讓摘要失效，暫存區那段跟摘要一起收起來，按「重新產生」才回來。
+    // 選親密關係 → 存的按鈕消失、只剩刪與鎖
+    await pick('親密關係', 1);
+    assert.ok(await page.evaluate("!document.querySelector('#threatmodel-tool .tm-out')"), '改答案之後舊摘要還在');
+    await page.evaluate("__vl.click('#threatmodel-tool', '產生摘要')");
+    await page.waitFor("!!document.querySelector('#threatmodel-tool .tm-out')", '重新產生');
+    assert.ok(await page.evaluate("!__vl.button('#threatmodel-tool', '更新存檔') && !__vl.button('#threatmodel-tool', '存進我的暫存區')"), '選了親密關係還有存的按鈕');
+    assert.ok(await page.evaluate("/不提供存檔/.test(__vl.text('#threatmodel-tool'))"), '選了親密關係要說明為什麼不提供');
+    assert.ok(await page.evaluate("!!__vl.button('#threatmodel-tool', '刪掉存檔')"), '解開狀態下要能刪掉舊存檔');
+    await pick('親密關係', 1); // 取消
+    await page.evaluate("__vl.click('#threatmodel-tool', '產生摘要')");
+    await page.waitFor("!!__vl.button('#threatmodel-tool', '更新存檔')", '取消親密關係之後更新回來');
+    assert.ok(await page.evaluate("!__vl.button('#threatmodel-tool', '更新存檔').disabled"), '改過答案，更新要能按');
+
+    // 重新整理 → 頂端問要不要填回 → 填回後三題與摘要都在
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '重新整理');
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#threatmodel-tool', '用 passkey 填回上次的答案')", '重新整理後頂端問要不要填回');
+    await page.evaluate("__vl.click('#threatmodel-tool', '用 passkey 填回上次的答案')");
+    await page.waitFor("!!document.querySelector('#threatmodel-tool .tm-out')", '填回後摘要直接出現');
+    const checked = await page.evaluate("[...document.querySelectorAll('#threatmodel-tool input:checked')].map((i) => i.nextSibling.textContent.slice(0, 4))");
+    assert.deepEqual(checked, ['內容相關', '隨意路人', '低：不想'], `填回來的答案不對：${checked.join('、')}`);
+    assert.equal((await page.credentials()).length, 1, '填回不該多出 credential');
+
+    // 刪掉存檔 → 重新整理後頂端不再有填回（暫存區還在，但沒有威脅模型）
+    await page.evaluate("__vl.click('#threatmodel-tool', '刪掉存檔')");
+    await page.waitFor("/刪掉了/.test(__vl.text('#threatmodel-tool'))", '刪掉');
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '再重新整理');
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#threatmodel-tool', '用 passkey 填回上次的答案')", '暫存區還在，頂端照樣問');
+    await page.evaluate("__vl.click('#threatmodel-tool', '用 passkey 填回上次的答案')");
+    await page.waitFor("/沒有存過威脅模型/.test(__vl.text('#threatmodel-tool'))", '刪掉之後填回要說沒有');
   } finally {
     await page.close();
   }
