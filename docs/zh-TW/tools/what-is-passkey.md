@@ -46,3 +46,5 @@ passkey 丟了、密碼管理員的帳號沒了、換到不支援 PRF 的環境�
 - [passkey 鑰匙](../utils/passkey.md)：建立、試解鎖、產生備援金鑰。
 - [什麼是 age](what-is-age.md)：passkey 包的是 age 的 file key。
 - [本機檔案加密](../utils/age.md)：選「passkey」模式。
+- [我的準備清單](../utils/checklist.md)：勾選用 passkey 加密存在你的裝置上，站上第一個實際用途。
+- [威脅模型清單](../utils/threat-model.md)：答案預設不存，要留的話用 passkey 存進同一份暫存區。

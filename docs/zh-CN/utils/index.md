@@ -40,7 +40,7 @@ icon: material/tools
 
 -   :material-fingerprint: **[passkey 钥匙](passkey.md)**
 
-    创建一把这个网站的 passkey，存进你的密码管理器或钥匙串，试一次解锁，再生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语。没有账号、没有服务器，站上什么都不存。
+    创建一把这个网站的 passkey，存进你的密码管理器或钥匙串，试一次解锁，再生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语，准备清单、威胁模型的存档与收件人簿也用它加密存在你的设备上。没有账号、没有服务器，站上什么都不存。
 
 -   :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
 
