@@ -145,6 +145,17 @@ test('一年沒動的判斷：日期算天數、每年重看那組沒勾過也�
   assert.equal(isStale('daily', 'bad', '2026-09-07'), false, '壞日期不能被當成過期');
 });
 
+test('傳到另一台：密文走網址片段到 QR 串流頁，回來就匯入，片段讀完清掉', () => {
+  assert.ok(/new URL\("\.\.\/qr-stream\/", window\.location\.href\)/.test(src), '傳到另一台沒有指到 qr-stream 頁');
+  assert.ok(/url\.hash = "send=" \+ toBase64Url\(bytes\)/.test(src), '密文沒有放進 #send=');
+  assert.ok(/window\.open\(url\.href, "_blank", "noopener"\)/.test(src), '要開新分頁而且 noopener，清單頁留著不用重新解鎖');
+  assert.ok(/loc\.hash\.indexOf\("#import="\) !== 0/.test(src), '進頁面沒有看 #import=');
+  assert.ok(/window\.history\.replaceState\(null, "", loc\.pathname \+ loc\.search\)/.test(src), '讀完片段沒有清掉');
+  const incomingAt = src.indexOf('const incoming = takeIncoming()');
+  assert.ok(incomingAt > 0 && incomingAt < src.indexOf('refresh().then'), '要在查暫存區之前就把片段拿走');
+  assert.ok(/importBytes\(incoming, t\.importedFromQr, "badImport"\)/.test(src), '帶回來的密文沒有走匯入');
+});
+
 test('原始碼沒有把勾選送出去或寫進 localStorage 的手段', () => {
   for (const bad of ['fetch(', 'XMLHttpRequest', 'navigator.sendBeacon', 'localStorage', 'sessionStorage', 'document.cookie']) {
     assert.ok(!src.includes(bad), `checklist.js 出現 ${bad}`);

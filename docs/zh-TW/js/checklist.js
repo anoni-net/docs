@@ -167,6 +167,9 @@
       importBlob: "匯入",
       exported: "匯出的是標準 age 檔，另一台裝置匯進去之後用同一把 passkey 解開。",
       imported: "匯進來了。用 passkey 解開。",
+      transfer: "傳到另一台（QR）",
+      transferHint: "開了一個新分頁在播 QR code。另一台打開 QR 影格串流的接收端對著掃，收齊之後按「匯入我的準備清單」，再用同一把 passkey 解開。兩台不需要共用網路。",
+      importedFromQr: "從 QR 影格串流收到的密文匯進來了。用 passkey 解開。",
       readMore: "看文章",
       staleTag: "一年以上",
       confirm: "今天確認過",
@@ -207,6 +210,7 @@
         unsupported: "這個環境不允許用 passkey。要在正式站、https 網址，瀏覽器也沒有把功能關掉。",
         failed: "沒有成功。換一個瀏覽器或密碼管理器試試。",
         badFile: "檔案格式不對，要的是從清單匯出的 age 檔。",
+        badImport: "帶過來的內容不是暫存區的密文。",
       },
     },
     zh: {
@@ -228,6 +232,9 @@
       importBlob: "导入",
       exported: "导出的是标准 age 文件，另一台设备导进去之后用同一把 passkey 解开。",
       imported: "导进来了。用 passkey 解开。",
+      transfer: "传到另一台（QR）",
+      transferHint: "开了一个新标签页在播 QR code。另一台打开 QR 影格串流的接收端对着扫，收齐之后按「导入我的准备清单」，再用同一把 passkey 解开。两台不需要共用网络。",
+      importedFromQr: "从 QR 影格串流收到的密文导进来了。用 passkey 解开。",
       readMore: "看文章",
       staleTag: "一年以上",
       confirm: "今天确认过",
@@ -268,6 +275,7 @@
         unsupported: "这个环境不允许用 passkey。要在正式站、https 网址，浏览器也没有把功能关掉。",
         failed: "没有成功。换一个浏览器或密码管理器试试。",
         badFile: "文件格式不对，要的是从清单导出的 age 文件。",
+        badImport: "带过来的内容不是暂存区的密文。",
       },
     },
     en: {
@@ -289,6 +297,9 @@
       importBlob: "Import",
       exported: "The export is a standard age file. Import it on another device and unlock with the same passkey.",
       imported: "Imported. Unlock with your passkey.",
+      transfer: "Send to another device (QR)",
+      transferHint: "A new tab is playing QR codes. On the other device, open the QR frame stream receiver and point it at the screen. Once complete, press Import into my preparation checklist and unlock with the same passkey. The two devices do not need a shared network.",
+      importedFromQr: "The ciphertext received over the QR frame stream is imported. Unlock with your passkey.",
       readMore: "Read",
       staleTag: "over a year",
       confirm: "Checked today",
@@ -329,6 +340,7 @@
         unsupported: "This environment does not allow passkeys. It needs the production site, an https address, and a browser that has not turned the feature off.",
         failed: "It did not work. Try another browser or password manager.",
         badFile: "That file is not an age file exported from here.",
+        badImport: "What was handed over is not stash ciphertext.",
       },
     },
   };
@@ -370,7 +382,7 @@
     const name = err && err.name;
     if (name === "NotAllowedError" || name === "AbortError") return "cancelled";
     if (name === "NotSupportedError" || name === "SecurityError") return "unsupported";
-    if (err && err.message === "badFile") return "badFile";
+    if (err && err.message && t.errors[err.message]) return err.message; // 自己丟的錯誤碼原樣回
     return "failed";
   }
   // 本地日期，不是 UTC。讀者看到的日期要跟自己的日曆對得上。
@@ -490,18 +502,62 @@
       state.message = t.exported;
     });
 
+  const isAgeBlob = (bytes) => bytes.length >= 16 && new TextDecoder().decode(bytes.subarray(0, 11)) === "age-encrypt";
+  async function importBytes(bytes, message, badCode) {
+    if (!isAgeBlob(bytes)) throw new Error(badCode);
+    await vault().importBlob(bytes);
+    state.unlocked = false;
+    state.data = null;
+    boxes.clear();
+    list.textContent = "";
+    await refresh();
+    state.message = message;
+  }
   const importBlob = (file) =>
     guard("import", async () => {
-      const bytes = new Uint8Array(await file.arrayBuffer());
-      if (bytes.length < 16 || new TextDecoder().decode(bytes.subarray(0, 11)) !== "age-encrypt") throw new Error("badFile");
-      await vault().importBlob(bytes);
-      state.unlocked = false;
-      state.data = null;
-      boxes.clear();
-      list.textContent = "";
-      await refresh();
-      state.message = t.imported;
+      await importBytes(new Uint8Array(await file.arrayBuffer()), t.imported, "badFile");
     });
+
+  // --- 傳到另一台 ---
+  //
+  // 密文放進 QR 影格串流頁的網址片段 #send=<base64url>，那一頁載入就當作要傳的檔案。
+  // 接收端拼完帶著 #import=<base64url> 回來，這裡讀到就匯入。片段不會送到伺服器，
+  // 內容也只是密文，讀完就把片段清掉。
+  function toBase64Url(bytes) {
+    let bin = "";
+    for (let i = 0; i < bytes.length; i += 1) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function fromBase64Url(text) {
+    const bin = atob(text.replace(/-/g, "+").replace(/_/g, "/"));
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  const transfer = () =>
+    guard("export", async () => {
+      await saveNow();
+      const bytes = await vault().exportBlob();
+      const url = new URL("../qr-stream/", window.location.href);
+      url.hash = "send=" + toBase64Url(bytes);
+      window.open(url.href, "_blank", "noopener");
+      state.message = t.transferHint;
+    });
+  // 進頁面時看有沒有帶密文回來。壞掉的片段一樣清掉，不留在網址列
+  function takeIncoming() {
+    const loc = window.location;
+    if (!loc || typeof loc.hash !== "string" || loc.hash.indexOf("#import=") !== 0) return null;
+    let bytes = null;
+    try {
+      bytes = fromBase64Url(loc.hash.slice("#import=".length));
+    } catch (err) {
+      bytes = new Uint8Array(0);
+    }
+    if (window.history && typeof window.history.replaceState === "function") {
+      window.history.replaceState(null, "", loc.pathname + loc.search);
+    }
+    return bytes;
+  }
 
   // --- 清單本體 ---
   function onToggle(id) {
@@ -671,6 +727,7 @@
     else {
       row.appendChild(button(t.lock, "cl-primary", lock));
       row.appendChild(button(t.exportBlob, null, exportBlob));
+      row.appendChild(button(t.transfer, null, transfer));
     }
     head.appendChild(row);
   }
@@ -686,6 +743,12 @@
     renderFoot();
   }
 
+  const incoming = takeIncoming();
   render();
-  refresh().then(render, render);
+  refresh().then(() => {
+    if (incoming && state.support && state.support.vault) {
+      return guard("import", () => importBytes(incoming, t.importedFromQr, "badImport"));
+    }
+    render();
+  }, render);
 })();
