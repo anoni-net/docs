@@ -30,6 +30,7 @@
  *   先開著   cd docs && mkdocs serve -a localhost:8011
  *   然後     node tools/check_vault_browser.mjs
  *            node tools/check_vault_browser.mjs --shots   # 順便存 390x844 的截圖
+ *            node tools/check_vault_browser.mjs --only=清單  # 只跑名稱含這幾個字的
  *
  *   建好的 output 用靜態 server 開起來也行：
  *            VAULT_BASE=http://localhost:8781/ node tools/check_vault_browser.mjs
@@ -46,6 +47,7 @@ const VAULT_URL = new URL('community/vault-lab/', BASE).href;
 const CHECKLIST_URL = new URL('utils/checklist/', BASE).href;
 const THREAT_URL = new URL('utils/threat-model/', BASE).href;
 const SHOTS = process.argv.includes('--shots');
+const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice('--only='.length);
 const OUT = path.join(os.tmpdir(), 'vault-shots');
 
 if (!/^http:\/\/localhost[:/]/.test(BASE)) {
@@ -117,7 +119,10 @@ async function openChrome() {
       awaitPromise: true,
     });
     if (out.result?.exceptionDetails || out.result?.result?.subtype === 'error') {
-      throw new Error(out.result?.result?.description || '頁面上丟了例外');
+      const d = out.result?.exceptionDetails;
+      throw new Error(
+        out.result?.result?.description || d?.exception?.description || d?.text || '頁面上丟了例外'
+      );
     }
     return out.result?.result?.value;
   };
@@ -396,7 +401,7 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '清單畫出來');
     assert.equal((await page.credentials()).length, 1, '用已有的鑰匙開不該多出 credential');
 
-    const total = await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]').length");
+    const total = await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length");
     const links = await page.evaluate(`
       [...document.querySelectorAll('#checklist-tool .cl-item a')]
         .map((a) => ({ blank: a.target === '_blank', noopener: /noopener/.test(a.rel), href: a.getAttribute('href') }))
@@ -404,8 +409,8 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     assert.equal(links.length, total, '每個項目都要有連結');
     for (const l of links) assert.ok(l.blank && l.noopener, `連結沒有開新分頁：${l.href}`);
 
-    await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]')[0].click(); true");
-    await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]')[1].click(); true");
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[0].click(); true");
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[1].click(); true");
     await page.waitFor("/已存/.test(__vl.text('#checklist-tool'))", '自動存');
     assert.match(await page.evaluate("document.querySelector('#checklist-tool .cl-progress').textContent"), new RegExp(`2 / ${total}`));
     await page.shot('05-checklist-ticked');
@@ -416,7 +421,7 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     await page.waitFor("!!__vl.button('#checklist-tool', '用 passkey 解開')", '重新整理後回到鎖上狀態');
     await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
     await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '再次解開');
-    const checked = await page.evaluate("[...document.querySelectorAll('#checklist-tool input[type=checkbox]')].filter((i) => i.checked).length");
+    const checked = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')].filter((i) => i.checked).length");
     assert.equal(checked, 2, '勾的兩項要留到下一次');
     const dates = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-date')].map((d) => d.textContent).filter(Boolean)");
     assert.equal(dates.length, 2, '勾的項目要顯示日期');
@@ -496,7 +501,59 @@ test('威脅模型答案存進暫存區，重新整理後填回來，對手選�
   }
 });
 
+test('清單超過一年沒動的會標出來、篩得出來，按今天確認過就換日期', async () => {
+  const page = await openChrome();
+  try {
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '建一把新的鑰匙')", '清單頁畫出來');
+    await page.evaluate("__vl.click('#checklist-tool', '建一把新的鑰匙')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '清單畫出來');
+    const visible = () => page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-item')].filter((li) => li.getClientRects().length > 0).length");
+    const total = await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item').length");
+    const yearly = await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item--stale').length");
+    assert.equal(yearly, 9, '每年重看那組九題一開始都該標成該看');
+
+    // 直接把一個平常的項目寫成兩年前勾的，模擬放了很久
+    await page.evaluate(`
+      window.anoniVault.read().then((data) => {
+        data.checks = data.checks || {}; // 還沒勾過任何東西時密文裡沒有這一欄
+        data.checks['daily.backup'] = '2024-01-15';
+        return window.anoniVault.save(data);
+      }).then(() => true)
+    `);
+    await page.evaluate("__vl.click('#checklist-tool', '鎖上')");
+    await page.waitFor("!!__vl.button('#checklist-tool', '用 passkey 解開')", '鎖上');
+    await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '再解開');
+    const backup = "document.querySelector('#checklist-tool #cl-daily-backup').closest('.cl-item')";
+    assert.ok(await page.evaluate(`${backup}.classList.contains('cl-item--stale')`), '兩年前勾的沒有標成超過一年');
+    assert.ok(await page.evaluate(`${backup}.querySelector('.cl-stale').getClientRects().length > 0`), '超過一年的標籤沒顯示');
+    assert.ok(await page.evaluate(`${backup}.querySelector('.cl-confirm').getClientRects().length > 0`), '超過一年的沒有確認按鈕');
+    assert.match(await page.evaluate("document.querySelector('#checklist-tool .cl-filter').textContent"), /（10）/, '篩選旁的數字要是 9 題加 1 項');
+    const tagsShown = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-stale')].filter((x) => x.getClientRects().length > 0).length");
+    assert.equal(tagsShown, 10, '只有超過一年的項目該顯示標籤');
+
+    await page.evaluate("document.querySelector('#checklist-tool .cl-filter input').click(); true");
+    assert.equal(await visible(), 10, '篩選後只該剩該重看的');
+    await page.shot('07-checklist-stale-filter');
+
+    await page.evaluate(`${backup}.querySelector('.cl-confirm').click(); true`);
+    assert.ok(await page.evaluate(`${backup}.querySelector('input').checked`), '按確認不該把勾拿掉');
+    assert.match(await page.evaluate(`${backup}.querySelector('.cl-date').textContent`), /^\d{4}-\d{2}-\d{2}$/);
+    assert.notEqual(await page.evaluate(`${backup}.querySelector('.cl-date').textContent`), '2024-01-15', '日期沒換成今天');
+    assert.equal(await visible(), 9, '確認過的要從篩選裡消失');
+    await page.waitFor("/已存/.test(__vl.text('#checklist-tool'))", '自動存');
+
+    await page.evaluate("document.querySelector('#checklist-tool .cl-filter input').click(); true");
+    assert.equal(await visible(), total, '關掉篩選要全部回來');
+  } finally {
+    await page.close();
+  }
+});
+
 for (const [name, fn] of tests) {
+  if (ONLY && !name.includes(ONLY)) continue;
   try {
     await fn();
     console.log(`  ✓ ${name}`);

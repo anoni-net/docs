@@ -91,4 +91,5 @@ No passkey yet? Create one on [Passkey as your key](passkey.md) first, or create
 - To move to another device, export the ciphertext, import it there, and unlock with the same passkey. If the passkey lives in a password manager, the other device already has it.
 - The list only records what you ticked and on which day. If the passkey is lost and the list will not open, tick again; there is no backup key step here.
 - Renaming an article heading does not affect existing ticks. Ticks follow the item's internal id.
+- The yearly review group holds the nine questions from the baseline article. Anything untouched for over a year gets flagged, the filter narrows the list to those, and "Checked today" resets the date.
 - [Threat model checklist](threat-model.md) is the other list-shaped tool here. It asks what you protect and from whom, and stores nothing. This page records how far you have got.

@@ -31,6 +31,7 @@
 
   const CSS = `
     #checklist-tool { margin: 1rem 0; }
+    #checklist-tool [hidden] { display: none !important; } /* .cl-item 與 .cl-stale 自己設了 display，UA 的 [hidden] 會被壓過 */
     #checklist-tool .cl-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin: 0.8rem 0; }
     #checklist-tool button {
       min-height: 2.75rem;
@@ -70,6 +71,15 @@
     #checklist-tool .cl-item a { flex: 0 0 auto; font-size: 0.72rem; white-space: nowrap; margin-top: 0.2rem; }
     #checklist-tool .cl-date { display: block; font-size: 0.7rem; opacity: 0.75; }
     #checklist-tool .cl-item--done label { opacity: 0.7; }
+    #checklist-tool .cl-item--stale label { opacity: 1; }
+    #checklist-tool .cl-stale {
+      display: inline-block; margin-left: 0.4rem; padding: 0 0.35rem;
+      font-size: 0.65rem; line-height: 1.5; border-radius: 0.3rem;
+      border: 1px solid #ef6c00; color: #ef6c00; vertical-align: middle;
+    }
+    #checklist-tool .cl-confirm { min-height: 1.9rem; padding: 0.2rem 0.6rem; font-size: 0.7rem; margin-top: 0.3rem; }
+    #checklist-tool .cl-filter { display: flex; gap: 0.5rem; align-items: center; font-size: 0.75rem; margin: 0.6rem 0; cursor: pointer; }
+    #checklist-tool .cl-filter input { width: 1.1rem; height: 1.1rem; margin: 0; }
     #checklist-tool .cl-file { font-size: 0.72rem; }
     @media (pointer: coarse) { #checklist-tool .cl-item input { width: 1.5rem; height: 1.5rem; } }
   `;
@@ -103,9 +113,39 @@
         "offline-backup-contacts",
       ],
     },
+    {
+      id: "yearly",
+      items: [
+        "reused-passwords",
+        "sms-2fa",
+        "backup-codes",
+        "dormant-accounts",
+        "logged-in-devices",
+        "location-sharing",
+        "app-permissions",
+        "restore-test",
+        "assumptions",
+      ],
+    },
   ];
   // 已經下架的項目 id。留著是為了讀舊資料時不把它們當成垃圾清掉。
   const RETIRED = [];
+
+  // 一年沒動的判斷。日期是本地的 YYYY-MM-DD，兩邊都當 UTC 午夜算天數，避開時區與夏令時間。
+  const STALE_DAYS = 365;
+  function daysBetween(from, to) {
+    const parse = (text) => {
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text || "");
+      return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN;
+    };
+    return Math.floor((parse(to) - parse(from)) / 86400000);
+  }
+  // 勾過但超過一年，或「每年重看」那組從來沒勾過，都算該重看
+  function isStale(groupId, date, today) {
+    if (!date) return groupId === "yearly";
+    const days = daysBetween(date, today);
+    return Number.isFinite(days) && days >= STALE_DAYS;
+  }
 
   const STRINGS = {
     "zh-TW": {
@@ -128,7 +168,12 @@
       exported: "匯出的是標準 age 檔，另一台裝置匯進去之後用同一把 passkey 解開。",
       imported: "匯進來了。用 passkey 解開。",
       readMore: "看文章",
-      groups: { daily: "平常就做", travel: "出門前" },
+      staleTag: "一年以上",
+      confirm: "今天確認過",
+      filterLabel: "只看超過一年沒動的",
+      filterEmpty: "沒有超過一年沒動的項目。",
+      yearlyHint: "每年重看那一組勾了記日期，超過一年會標出來。其他組勾過超過一年也一樣。",
+      groups: { daily: "平常就做", travel: "出門前", yearly: "每年重看" },
       items: {
         "password-manager": { label: "密碼管理器，每個網站不同密碼", href: "../../scenarios/everyday-baseline/#密碼管理器每個網站不同密碼" },
         "two-factor": { label: "兩步驟驗證，能用強的就用強的", href: "../../scenarios/everyday-baseline/#兩步驟驗證能用強的就用強的" },
@@ -147,6 +192,15 @@
         sim: { label: "SIM 用漫遊或純數據 eSIM", href: "../../scenarios/asia-travel/#出發前的通用準備每個地點都適用" },
         "encrypt-and-power-off": { label: "開啟全碟加密、設好開機密碼，過境時關機", href: "../../scenarios/asia-travel/#出發前的通用準備每個地點都適用" },
         "offline-backup-contacts": { label: "留好離線備份與緊急聯絡方式", href: "../../scenarios/asia-travel/#出發前的通用準備每個地點都適用" },
+        "reused-passwords": { label: "密碼管理器裡有沒有重複使用的密碼？工具多半內建檢查功能", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "sms-2fa": { label: "兩步驟驗證還停在簡訊的重要帳號，有沒有可以升級的？", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "backup-codes": { label: "備援碼還找得到嗎？換過手機之後尤其要確認", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "dormant-accounts": { label: "一年沒登入的帳號，刪掉", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "logged-in-devices": { label: "LINE 與社群帳號的登入中裝置，有沒有你不認得的？", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "location-sharing": { label: "誰還看得到你的位置分享？家庭共享、行事曆、相簿都算", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "app-permissions": { label: "手機權限清單，新裝的 app 要了什麼？", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "restore-test": { label: "備份還原得回來嗎？沒有試過還原的備份不算備份", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
+        "assumptions": { label: "換工作、換伴侶、換城市之後，上面的假設還成立嗎？", href: "../../scenarios/everyday-baseline/#一年一次的檢查" },
       },
       errors: {
         cancelled: "你取消了，或瀏覽器沒有完成。再按一次。",
@@ -175,7 +229,12 @@
       exported: "导出的是标准 age 文件，另一台设备导进去之后用同一把 passkey 解开。",
       imported: "导进来了。用 passkey 解开。",
       readMore: "看文章",
-      groups: { daily: "平常就做", travel: "出门前" },
+      staleTag: "一年以上",
+      confirm: "今天确认过",
+      filterLabel: "只看超过一年没动的",
+      filterEmpty: "没有超过一年没动的项目。",
+      yearlyHint: "每年重看那一组勾了记日期，超过一年会标出来。其他组勾过超过一年也一样。",
+      groups: { daily: "平常就做", travel: "出门前", yearly: "每年重看" },
       items: {
         "password-manager": { label: "密码管理器，每个网站不同密码", href: "../../scenarios/everyday-baseline/#密码管理器每个网站不同密码" },
         "two-factor": { label: "两步验证，能用强的就用强的", href: "../../scenarios/everyday-baseline/#两步验证能用强的就用强的" },
@@ -194,6 +253,15 @@
         sim: { label: "SIM 用漫游或纯数据 eSIM", href: "../../scenarios/asia-travel/#出发前的通用准备每个地点都适用" },
         "encrypt-and-power-off": { label: "开启全盘加密、设好开机密码，过境时关机", href: "../../scenarios/asia-travel/#出发前的通用准备每个地点都适用" },
         "offline-backup-contacts": { label: "留好离线备份与紧急联络方式", href: "../../scenarios/asia-travel/#出发前的通用准备每个地点都适用" },
+        "reused-passwords": { label: "密码管理器里有没有重复使用的密码？工具多半内建检查功能", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "sms-2fa": { label: "两步验证还停在短信的重要账号，有没有可以升级的？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "backup-codes": { label: "备援码还找得到吗？换过手机之后尤其要确认", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "dormant-accounts": { label: "一年没登录的账号，删掉", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "logged-in-devices": { label: "通讯 app 与社群账号的登录中设备，有没有你不认得的？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "location-sharing": { label: "谁还看得到你的位置分享？家庭共享、日历、相册都算", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "app-permissions": { label: "手机权限清单，新装的 app 要了什么？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "restore-test": { label: "备份还原得回来吗？没有试过还原的备份不算备份", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "assumptions": { label: "换工作、换伴侣、换城市之后，上面的假设还成立吗？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
       },
       errors: {
         cancelled: "你取消了，或浏览器没有完成。再按一次。",
@@ -222,7 +290,12 @@
       exported: "The export is a standard age file. Import it on another device and unlock with the same passkey.",
       imported: "Imported. Unlock with your passkey.",
       readMore: "Read",
-      groups: { daily: "Everyday", travel: "Before you travel" },
+      staleTag: "over a year",
+      confirm: "Checked today",
+      filterLabel: "Only what has sat for over a year",
+      filterEmpty: "Nothing has sat for over a year.",
+      yearlyHint: "Ticks in the yearly group carry a date and get flagged after a year. So does anything in the other groups ticked more than a year ago.",
+      groups: { daily: "Everyday", travel: "Before you travel", yearly: "Yearly review" },
       items: {
         "password-manager": { label: "A password manager with a different password per site", href: "../../scenarios/everyday-baseline/#A-password-manager-with-a-different-password-per-site" },
         "two-factor": { label: "Two-factor authentication as strong as the site allows", href: "../../scenarios/everyday-baseline/#Two-factor-authentication-as-strong-as-the-site-allows" },
@@ -241,6 +314,15 @@
         sim: { label: "Roam on your home SIM or use a data-only eSIM", href: "../../scenarios/asia-travel/#SIM-eSIM-and-the-history-that-travels-with-you" },
         "encrypt-and-power-off": { label: "Full-disk encryption on, strong boot password, powered off at the border", href: "../../scenarios/asia-travel/#At-the-border-conduct-and-device-state" },
         "offline-backup-contacts": { label: "Offline backup and emergency contacts", href: "../../scenarios/asia-travel/#Back-up-before-you-go-and-watch-the-cloud-double-edge" },
+        "reused-passwords": { label: "Any reused passwords left in the manager? Most tools check this for you", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "sms-2fa": { label: "Any important accounts still on SMS that now support something stronger?", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "backup-codes": { label: "Can you still find your recovery codes, especially after changing phones?", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "dormant-accounts": { label: "Delete anything you have not signed into in a year", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "logged-in-devices": { label: "Any devices you do not recognize in the active-session list of your messaging and social accounts?", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "location-sharing": { label: "Who can still see your location sharing? Family sharing, calendars, and shared albums all count", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "app-permissions": { label: "Review the phone permission list, especially for recently installed apps", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "restore-test": { label: "Can you actually restore from your backup? An untested backup is not a backup", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
+        "assumptions": { label: "After a job change, a relationship change, or a move: do the assumptions above still hold?", href: "../../scenarios/everyday-baseline/#A-yearly-review" },
       },
       errors: {
         cancelled: "You cancelled, or the browser did not finish. Press again.",
@@ -265,7 +347,10 @@
   function button(label, className, onClick) {
     const node = el("button", className, label);
     node.type = "button";
-    node.addEventListener("click", onClick);
+    node.addEventListener("click", (event) => {
+      event.preventDefault(); // 放在 <label> 裡的按鈕，不讓點擊順便切到 checkbox
+      onClick(event);
+    });
     return node;
   }
   function busyButton(label) {
@@ -310,12 +395,14 @@
     support: null, // null 還在查，之後是 { webauthn, vault }
     exists: false,
     unlocked: false,
+    onlyStale: false, // 只看超過一年沒動的
     busy: null, // "unlock" | "open" | "create" | "import" | "export"
     data: null, // 解開後整份資料，checks 只是其中一欄
     error: null,
     message: "",
   };
-  const boxes = new Map(); // id → { input, date, item }
+  const boxes = new Map(); // id → { input, date, item, tag, confirm, group }
+  const groupBoxes = new Map(); // group id → 容器，篩選時整組藏起來
 
   async function refresh() {
     const v = vault();
@@ -429,12 +516,45 @@
   function paint(id) {
     const entry = boxes.get(id);
     const when = state.data.checks[id];
+    const stale = isStale(entry.group, when, today());
     entry.item.classList.toggle("cl-item--done", !!when);
+    entry.item.classList.toggle("cl-item--stale", stale);
     entry.date.textContent = when || "";
+    entry.tag.hidden = !stale;
+    entry.confirm.hidden = !(stale && when); // 沒勾過的直接勾，勾過太久的按確認換日期
+  }
+  function onConfirm(id) {
+    if (!state.data) return;
+    state.data.checks[id] = today();
+    paint(id);
+    applyFilter();
+    renderProgress();
+    scheduleSave();
+  }
+  function staleCount() {
+    return ALL_IDS.filter((id) => boxes.has(id) && isStale(boxes.get(id).group, state.data.checks[id], today())).length;
+  }
+  // 篩選只改 hidden，不重建清單
+  function applyFilter() {
+    let shown = 0;
+    for (const [gid, box] of groupBoxes) {
+      let inGroup = 0;
+      for (const [id, entry] of boxes) {
+        if (entry.group !== gid) continue;
+        const show = !state.onlyStale || isStale(gid, state.data.checks[id], today());
+        entry.item.hidden = !show;
+        if (show) inGroup += 1;
+      }
+      box.hidden = inGroup === 0;
+      shown += inGroup;
+    }
+    if (filterEmptyNode) filterEmptyNode.hidden = !(state.onlyStale && shown === 0);
+    if (filterCountNode) filterCountNode.textContent = t.filterLabel + "（" + staleCount() + "）";
   }
   function buildList() {
     list.textContent = "";
     boxes.clear();
+    groupBoxes.clear();
     for (const group of GROUPS) {
       const box = el("div", "cl-group");
       box.appendChild(el("p", "cl-group-title", t.groups[group.id]));
@@ -452,6 +572,10 @@
         label.htmlFor = input.id;
         const date = el("span", "cl-date");
         label.appendChild(date);
+        const tag = el("span", "cl-stale", t.staleTag);
+        label.insertBefore(tag, date);
+        const confirm = button(t.confirm, "cl-confirm", () => onConfirm(id));
+        label.appendChild(confirm);
         const link = el("a", null, t.readMore);
         link.href = text.href;
         link.target = "_blank";
@@ -460,12 +584,16 @@
         li.appendChild(label);
         li.appendChild(link);
         ul.appendChild(li);
-        boxes.set(id, { input: input, date: date, item: li });
+        boxes.set(id, { input: input, date: date, item: li, tag: tag, confirm: confirm, group: group.id });
         paint(id);
       }
       box.appendChild(ul);
       list.appendChild(box);
+      groupBoxes.set(group.id, box);
     }
+    filterEmptyNode = el("p", "cl-hint", t.filterEmpty);
+    list.appendChild(filterEmptyNode);
+    applyFilter();
   }
   function doneCount() {
     return ALL_IDS.filter((id) => !!state.data.checks[id]).length;
@@ -473,6 +601,8 @@
 
   // --- 畫面 ---
   let progressNode = null;
+  let filterEmptyNode = null;
+  let filterCountNode = null;
   function renderProgress() {
     if (progressNode && state.data) progressNode.textContent = fill(t.progress, { done: doneCount(), total: ALL_IDS.length });
   }
@@ -523,7 +653,19 @@
     progressNode = el("p", "cl-progress");
     head.appendChild(progressNode);
     renderProgress();
-    head.appendChild(el("p", "cl-hint", t.hintLinks));
+    head.appendChild(el("p", "cl-hint", t.hintLinks + (/[。.]$/.test(t.hintLinks) && !/\.$/.test(t.hintLinks) ? "" : " ") + t.yearlyHint));
+    const filter = el("label", "cl-filter");
+    const toggle = document.createElement("input");
+    toggle.type = "checkbox";
+    toggle.checked = state.onlyStale;
+    toggle.addEventListener("change", () => {
+      state.onlyStale = toggle.checked;
+      applyFilter();
+    });
+    filter.appendChild(toggle);
+    filterCountNode = el("span", null, "");
+    filter.appendChild(filterCountNode);
+    head.appendChild(filter);
     const row = el("div", "cl-row");
     if (state.busy) row.appendChild(busyButton(t.waiting));
     else {
@@ -535,10 +677,12 @@
   function render() {
     head.textContent = "";
     progressNode = null;
+    filterCountNode = null;
     if (!state.support) head.appendChild(el("p", "cl-hint", t.checking));
     else if (state.unlocked) renderUnlocked();
     else renderLocked();
     list.hidden = !state.unlocked;
+    if (state.unlocked && state.data) applyFilter();
     renderFoot();
   }
 

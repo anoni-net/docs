@@ -33,6 +33,7 @@ const grab = (re) => {
 const GROUPS = new Function(`${grab(/^  const GROUPS = \[[\s\S]*?\n  \];/m)}\n return GROUPS;`)();
 const RETIRED = new Function(`${grab(/^  const RETIRED = \[.*\];$/m)}\n return RETIRED;`)();
 const STRINGS = new Function(`${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}\n return STRINGS;`)();
+const { daysBetween, isStale, STALE_DAYS } = new Function(`${grab(/^  const STALE_DAYS = .*$/m)}\n${grab(/^  function daysBetween\(from, to\) \{[\s\S]*?\n  \}/m)}\n${grab(/^  function isStale\(groupId, date, today\) \{[\s\S]*?\n  \}/m)}\n return { daysBetween, isStale, STALE_DAYS };`)();
 
 // STRINGS 的 key、磁碟資料夾、建置產物的資料夾
 const LANGS = [
@@ -130,6 +131,18 @@ test('三個語系的 js 目錄都拿得到 checklist.js', () => {
     assert.ok(fs.existsSync(file), `${file} 不存在`);
     assert.equal(fs.readFileSync(file, 'utf8'), src, `${dir}/js/checklist.js 內容跟 zh-TW 不同`);
   }
+});
+
+test('一年沒動的判斷：日期算天數、每年重看那組沒勾過也算', () => {
+  assert.equal(STALE_DAYS, 365);
+  assert.equal(daysBetween('2025-09-07', '2026-09-07'), 365);
+  assert.equal(daysBetween('2026-09-07', '2026-09-08'), 1);
+  assert.ok(Number.isNaN(daysBetween('bad', '2026-09-07')), '壞日期要是 NaN，不能算成 0 天');
+  assert.equal(isStale('daily', '2025-09-07', '2026-09-07'), true, '滿一年要算');
+  assert.equal(isStale('daily', '2025-09-08', '2026-09-07'), false, '差一天不算');
+  assert.equal(isStale('daily', undefined, '2026-09-07'), false, '平常那組沒勾過是還沒做，不是沒動');
+  assert.equal(isStale('yearly', undefined, '2026-09-07'), true, '每年重看那組沒勾過就是該看');
+  assert.equal(isStale('daily', 'bad', '2026-09-07'), false, '壞日期不能被當成過期');
 });
 
 test('原始碼沒有把勾選送出去或寫進 localStorage 的手段', () => {
