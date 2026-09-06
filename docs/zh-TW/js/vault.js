@@ -173,6 +173,21 @@
     return bech32.encodeFromBytes("AGE-SECRET-KEY-", keyBytes).toUpperCase();
   }
 
+  // 另一台顯示的字串解回 32 個位元組。只認 AGE-SECRET-KEY-1 開頭、解出來剛好 32 位元組的。
+  async function keyFromIdentity(text) {
+    const { bech32 } = await import("@scure/base");
+    const clean = String(text || "").trim().toUpperCase();
+    if (!/^AGE-SECRET-KEY-1[02-9AC-HJ-NP-Z]{58}$/.test(clean)) throw new Error("badKey");
+    let res;
+    try {
+      res = bech32.decodeToBytes(clean); // 校驗碼錯會丟 scure 自己的錯誤，統一成 badKey
+    } catch (err) {
+      throw new Error("badKey");
+    }
+    if (String(res.prefix).toUpperCase() !== "AGE-SECRET-KEY-" || res.bytes.length !== KEY_BYTES) throw new Error("badKey");
+    return new Uint8Array(res.bytes);
+  }
+
   async function recipientOf(identity) {
     const age = await lib();
     return age.identityToRecipient(identity);
@@ -336,11 +351,21 @@
       return unlockedKey.slice();
     },
 
-    // 不同步的環境（Windows Hello）要加第二台裝置：帶著 exportKey 拿出來的金鑰，在那台
-    // 用同一個 user.id 建一把新的。還沒有介面。
+    // 給另一台登錄用的字串，跟 age 的私鑰同一種編碼。它就是資料金鑰本身，顯示的一方要限時、要警告。
+    async exportIdentity() {
+      if (!unlockedKey) throw new Error("locked");
+      return identityOf(unlockedKey);
+    },
+    keyFromIdentity: keyFromIdentity,
+
+    // passkey 不會同步過去的第二台：帶著另一台 exportIdentity 出來的鑰匙，在這台用同一個
+    // user.id 建一把新的。這台還沒有暫存區就先開一個空的，讀者重新整理之後「用我已有的
+    // 鑰匙開」才接得上。介面在我的準備清單。
     async enrollDevice(keyBytes) {
       const made = await createCredential(keyBytes);
       unlockedKey = keyBytes;
+      currentBackup = null;
+      if (!(await readBlob())) await api.save({});
       return made;
     },
 

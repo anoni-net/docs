@@ -81,6 +81,18 @@
     #checklist-tool .cl-filter { display: flex; gap: 0.5rem; align-items: center; font-size: 0.75rem; margin: 0.6rem 0; cursor: pointer; }
     #checklist-tool .cl-filter input { width: 1.1rem; height: 1.1rem; margin: 0; }
     #checklist-tool .cl-file { font-size: 0.72rem; }
+    #checklist-tool .cl-panel { border: 1px dashed var(--md-default-fg-color--lighter); border-radius: 0.4rem; padding: 0.6rem 0.8rem; margin: 0.8rem 0; }
+    #checklist-tool .cl-warn { font-weight: 600; border-left: 0.15rem solid #ef6c00; padding-left: 0.6rem; margin: 0.4rem 0; }
+    #checklist-tool .cl-secret {
+      font-family: var(--md-code-font-family, monospace); font-size: 0.72rem; word-break: break-all; user-select: all;
+      padding: 0.5rem; border-radius: 0.3rem; background: var(--md-code-bg-color);
+    }
+    #checklist-tool .cl-qr { display: block; width: 12rem; max-width: 100%; height: auto; image-rendering: pixelated; background: #fff; margin: 0.6rem 0; }
+    #checklist-tool .cl-label { display: block; margin: 0.6rem 0 0.3rem; font-size: 0.75rem; font-weight: 600; }
+    #checklist-tool .cl-key {
+      width: 100%; padding: 0.5rem; font-family: var(--md-code-font-family, monospace); font-size: 0.72rem;
+      border: 1px solid var(--md-default-fg-color--lighter); border-radius: 0.4rem; background: var(--md-default-bg-color); color: var(--md-default-fg-color);
+    }
     @media (pointer: coarse) { #checklist-tool .cl-item input { width: 1.5rem; height: 1.5rem; } }
   `;
 
@@ -166,6 +178,18 @@
       exportBlob: "匯出",
       importBlob: "匯入",
       exported: "匯出的是標準 age 檔，另一台裝置匯進去之後用同一把 passkey 解開。",
+      enrollShow: "登錄另一台裝置",
+      enrollWarn: "下面這串就是資料金鑰本身。拍到的人可以永遠打開你的暫存區，只在你自己的兩台裝置之間用。一分鐘後自動關掉，這一頁不留它。",
+      enrollSteps: "另一台打開我的準備清單，按「用另一台的鑰匙登錄這台」，拍下 QR code 或貼上字串。登錄完再用「傳到另一台」把資料搬過去。",
+      enrollCountdown: "還剩 {n} 秒",
+      enrollClose: "關掉",
+      enrollHere: "用另一台的鑰匙登錄這台",
+      enrollHereHint: "passkey 沒有同步到這台時用。另一台解開之後按「登錄另一台裝置」，把那邊顯示的字串貼進來，或拍那邊的 QR code。這台會建一把用同一份鑰匙的 passkey，資料再用那邊的「傳到另一台」搬。",
+      enrollInputLabel: "另一台顯示的字串（AGE-SECRET-KEY-1 開頭）",
+      enrollPhoto: "或拍另一台的 QR code",
+      enrollGo: "登錄這台裝置",
+      enrollBack: "返回",
+      enrollDone: "這台登錄好了，用的是跟另一台同一份鑰匙。資料還在另一台，用那邊的「傳到另一台」搬過來，或直接開始用。",
       imported: "匯進來了。用 passkey 解開。",
       transfer: "傳到另一台（QR）",
       transferHint: "開了一個新分頁在播 QR code。另一台打開 QR 影格串流的接收端對著掃，收齊之後按「匯入我的準備清單」，再用同一把 passkey 解開。兩台不需要共用網路。",
@@ -211,6 +235,8 @@
         failed: "沒有成功。換一個瀏覽器或密碼管理器試試。",
         badFile: "檔案格式不對，要的是從清單匯出的 age 檔。",
         badImport: "帶過來的內容不是暫存區的密文。",
+        badKey: "這串不是暫存區的鑰匙，要 AGE-SECRET-KEY-1 開頭的 74 個字元。",
+        noQr: "照片裡找不到 QR code，靠近一點、對正再拍一次。",
       },
     },
     zh: {
@@ -231,6 +257,18 @@
       exportBlob: "导出",
       importBlob: "导入",
       exported: "导出的是标准 age 文件，另一台设备导进去之后用同一把 passkey 解开。",
+      enrollShow: "登录另一台设备",
+      enrollWarn: "下面这串就是数据密钥本身。拍到的人可以永远打开你的暂存区，只在你自己的两台设备之间用。一分钟后自动关掉，这一页不留它。",
+      enrollSteps: "另一台打开我的准备清单，按「用另一台的钥匙登录这台」，拍下 QR code 或贴上字串。登录完再用「传到另一台」把数据搬过去。",
+      enrollCountdown: "还剩 {n} 秒",
+      enrollClose: "关掉",
+      enrollHere: "用另一台的钥匙登录这台",
+      enrollHereHint: "passkey 没有同步到这台时用。另一台解开之后按「登录另一台设备」，把那边显示的字串贴进来，或拍那边的 QR code。这台会创建一把用同一份钥匙的 passkey，数据再用那边的「传到另一台」搬。",
+      enrollInputLabel: "另一台显示的字串（AGE-SECRET-KEY-1 开头）",
+      enrollPhoto: "或拍另一台的 QR code",
+      enrollGo: "登录这台设备",
+      enrollBack: "返回",
+      enrollDone: "这台登录好了，用的是跟另一台同一份钥匙。数据还在另一台，用那边的「传到另一台」搬过来，或直接开始用。",
       imported: "导进来了。用 passkey 解开。",
       transfer: "传到另一台（QR）",
       transferHint: "开了一个新标签页在播 QR code。另一台打开 QR 影格串流的接收端对着扫，收齐之后按「导入我的准备清单」，再用同一把 passkey 解开。两台不需要共用网络。",
@@ -276,6 +314,8 @@
         failed: "没有成功。换一个浏览器或密码管理器试试。",
         badFile: "文件格式不对，要的是从清单导出的 age 文件。",
         badImport: "带过来的内容不是暂存区的密文。",
+        badKey: "这串不是暂存区的钥匙，要 AGE-SECRET-KEY-1 开头的 74 个字符。",
+        noQr: "照片里找不到 QR code，靠近一点、对正再拍一次。",
       },
     },
     en: {
@@ -296,6 +336,18 @@
       exportBlob: "Export",
       importBlob: "Import",
       exported: "The export is a standard age file. Import it on another device and unlock with the same passkey.",
+      enrollShow: "Enrol another device",
+      enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
+      enrollSteps: "On the other device, open my preparation checklist, press Enrol this device with a key from another, then photograph this QR code or paste the string. Once enrolled, use Send to another device to move the data across.",
+      enrollCountdown: "{n} seconds left",
+      enrollClose: "Close",
+      enrollHere: "Enrol this device with a key from another",
+      enrollHereHint: "For when the passkey did not sync to this device. Unlock on the other device, press Enrol another device, then paste the string shown there or photograph its QR code. This device gets a passkey with the same key; move the data afterwards with Send to another device over there.",
+      enrollInputLabel: "The string shown on the other device (starts with AGE-SECRET-KEY-1)",
+      enrollPhoto: "or photograph the other device's QR code",
+      enrollGo: "Enrol this device",
+      enrollBack: "Back",
+      enrollDone: "This device is enrolled with the same key as the other one. The data is still over there: use Send to another device on that side, or just start here.",
       imported: "Imported. Unlock with your passkey.",
       transfer: "Send to another device (QR)",
       transferHint: "A new tab is playing QR codes. On the other device, open the QR frame stream receiver and point it at the screen. Once complete, press Import into my preparation checklist and unlock with the same passkey. The two devices do not need a shared network.",
@@ -341,6 +393,8 @@
         failed: "It did not work. Try another browser or password manager.",
         badFile: "That file is not an age file exported from here.",
         badImport: "What was handed over is not stash ciphertext.",
+        badKey: "That is not a stash key. It should be 74 characters starting with AGE-SECRET-KEY-1.",
+        noQr: "No QR code found in the photo. Get closer, line it up and try again.",
       },
     },
   };
@@ -408,6 +462,7 @@
     exists: false,
     unlocked: false,
     onlyStale: false, // 只看超過一年沒動的
+    enroll: { showing: false, identity: "", until: 0, timer: null, here: false, input: "" }, // 登錄另一台
     busy: null, // "unlock" | "open" | "create" | "import" | "export"
     data: null, // 解開後整份資料，checks 只是其中一欄
     error: null,
@@ -482,6 +537,7 @@
   const lock = () =>
     guard("lock", async () => {
       await saveNow();
+      closeEnrollSilently();
       vault().lock();
       state.unlocked = false;
       state.data = null;
@@ -558,6 +614,174 @@
     }
     return bytes;
   }
+
+
+  // --- 登錄另一台裝置 ---
+  //
+  // passkey 不會同步過去的第二台（不同生態系、硬體金鑰）要能開同一份暫存區，得把那
+  // 32 個位元組帶過去一次。A 解開後把鑰匙用 age 私鑰的編碼顯示成 QR code 與文字，限時
+  // 一分鐘；B 拍照或貼上，用同一個 user.id 建一把新的 passkey。那串就是資料金鑰本身，
+  // 顯示前先警告，關掉或鎖上就從記憶體拿掉，這一頁不留。
+  const ENROLL_MS = 60 * 1000;
+  const looksLikeKey = (text) => /^AGE-SECRET-KEY-1[02-9AC-HJ-NP-Z]{58}$/i.test(String(text || "").trim());
+  let countdownNode = null;
+  function stopEnrollTimer() {
+    if (state.enroll.timer) clearInterval(state.enroll.timer);
+    state.enroll.timer = null;
+  }
+  function closeEnrollSilently() {
+    stopEnrollTimer();
+    state.enroll.showing = false;
+    state.enroll.identity = "";
+    state.enroll.until = 0;
+  }
+  function closeEnroll() {
+    closeEnrollSilently();
+    render();
+  }
+  function tickEnroll() {
+    const left = Math.ceil((state.enroll.until - Date.now()) / 1000);
+    if (left <= 0) {
+      closeEnroll();
+      return;
+    }
+    if (countdownNode) countdownNode.textContent = fill(t.enrollCountdown, { n: left });
+  }
+  const showEnroll = () =>
+    guard("enroll", async () => {
+      state.enroll.identity = await vault().exportIdentity();
+      state.enroll.until = Date.now() + ENROLL_MS;
+      state.enroll.showing = true;
+      stopEnrollTimer();
+      state.enroll.timer = setInterval(tickEnroll, 1000);
+    });
+  // QR code 交給 vendor 的 qrcode-generator，畫在 canvas 上，沒有它就只顯示文字
+  function drawQr(text) {
+    if (typeof window.qrcode !== "function") return null;
+    const qr = window.qrcode(0, "M");
+    qr.addData(text);
+    qr.make();
+    const count = qr.getModuleCount();
+    const scale = 4;
+    const margin = 4 * scale;
+    const canvas = document.createElement("canvas");
+    canvas.className = "cl-qr";
+    canvas.width = count * scale + margin * 2;
+    canvas.height = canvas.width;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#000";
+    for (let row = 0; row < count; row += 1) {
+      for (let col = 0; col < count; col += 1) {
+        if (qr.isDark(row, col)) ctx.fillRect(margin + col * scale, margin + row * scale, scale, scale);
+      }
+    }
+    return canvas;
+  }
+  function enrollShowPanel() {
+    const box = el("div", "cl-panel cl-enroll-show");
+    box.appendChild(el("p", "cl-warn", t.enrollWarn));
+    const canvas = drawQr(state.enroll.identity);
+    if (canvas) box.appendChild(canvas);
+    box.appendChild(el("p", "cl-secret", state.enroll.identity));
+    box.appendChild(el("p", "cl-hint", t.enrollSteps));
+    countdownNode = el("p", "cl-hint cl-countdown", fill(t.enrollCountdown, { n: Math.max(0, Math.ceil((state.enroll.until - Date.now()) / 1000)) }));
+    box.appendChild(countdownNode);
+    const row = el("div", "cl-row");
+    row.appendChild(button(t.enrollClose, "cl-primary", closeEnroll));
+    box.appendChild(row);
+    return box;
+  }
+  // B 這端：拍另一台螢幕的照片交給 vendor 的 jsQR 解，不開即時相機
+  async function decodeQrPhoto(file) {
+    if (typeof window.jsQR !== "function" || typeof createImageBitmap !== "function") throw new Error("noQr");
+    const bitmap = await createImageBitmap(file);
+    try {
+      const cap = 1400;
+      const ratio = Math.min(1, cap / Math.max(bitmap.width, bitmap.height));
+      const width = Math.max(1, Math.round(bitmap.width * ratio));
+      const height = Math.max(1, Math.round(bitmap.height * ratio));
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(bitmap, 0, 0, width, height);
+      const pixels = ctx.getImageData(0, 0, width, height);
+      const found = window.jsQR(pixels.data, width, height);
+      if (!found || !looksLikeKey(found.data)) throw new Error("noQr");
+      return found.data.trim();
+    } finally {
+      if (bitmap.close) bitmap.close();
+    }
+  }
+  function readQrPhoto(file) {
+    state.error = null;
+    decodeQrPhoto(file).then(
+      (text) => {
+        state.enroll.input = text;
+        render();
+      },
+      () => {
+        state.error = "noQr";
+        render();
+      }
+    );
+  }
+  function syncEnrollGo() {
+    const go = root.querySelector(".cl-enroll-go");
+    if (go) go.disabled = !looksLikeKey(state.enroll.input);
+  }
+  const enrollHere = () =>
+    guard("enroll", async () => {
+      const bytes = await vault().keyFromIdentity(state.enroll.input);
+      await vault().enrollDevice(bytes);
+      state.enroll.here = false;
+      state.enroll.input = "";
+      await opened();
+      state.message = t.enrollDone;
+    });
+  function enrollHerePanel() {
+    const box = el("div", "cl-panel cl-enroll-here");
+    box.appendChild(el("p", "cl-hint", t.enrollHereHint));
+    const label = el("label", "cl-label", t.enrollInputLabel);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.className = "cl-key";
+    input.value = state.enroll.input;
+    input.addEventListener("input", () => {
+      state.enroll.input = input.value;
+      syncEnrollGo();
+    });
+    label.appendChild(input);
+    box.appendChild(label);
+    const photoRow = el("div", "cl-row");
+    photoRow.appendChild(el("span", "cl-hint", t.enrollPhoto));
+    const photo = document.createElement("input");
+    photo.type = "file";
+    photo.accept = "image/*";
+    photo.setAttribute("capture", "environment");
+    photo.className = "cl-file cl-photo";
+    photo.setAttribute("aria-label", t.enrollPhoto);
+    photo.addEventListener("change", () => {
+      if (photo.files && photo.files[0]) readQrPhoto(photo.files[0]);
+    });
+    photoRow.appendChild(photo);
+    box.appendChild(photoRow);
+    const row = el("div", "cl-row");
+    const go = button(t.enrollGo, "cl-primary cl-enroll-go", enrollHere);
+    go.disabled = !looksLikeKey(state.enroll.input);
+    row.appendChild(go);
+    row.appendChild(button(t.enrollBack, null, () => {
+      state.enroll.here = false;
+      render();
+    }));
+    box.appendChild(row);
+    return box;
+  }
+  window.addEventListener("pagehide", closeEnrollSilently);
 
   // --- 清單本體 ---
   function onToggle(id) {
@@ -693,8 +917,13 @@
       head.appendChild(hint);
       row.appendChild(button(t.openExisting, "cl-primary", openExisting));
       row.appendChild(button(t.createNew, null, createNew));
+      row.appendChild(button(t.enrollHere, null, () => {
+        state.enroll.here = !state.enroll.here;
+        render();
+      }));
     }
     head.appendChild(row);
+    if (!state.exists && state.enroll.here) head.appendChild(enrollHerePanel());
     const file = document.createElement("input");
     file.type = "file";
     file.accept = ".age,application/octet-stream";
@@ -728,13 +957,16 @@
       row.appendChild(button(t.lock, "cl-primary", lock));
       row.appendChild(button(t.exportBlob, null, exportBlob));
       row.appendChild(button(t.transfer, null, transfer));
+      row.appendChild(button(t.enrollShow, null, showEnroll));
     }
     head.appendChild(row);
+    if (state.enroll.showing && !state.busy) head.appendChild(enrollShowPanel());
   }
   function render() {
     head.textContent = "";
     progressNode = null;
     filterCountNode = null;
+    countdownNode = null;
     if (!state.support) head.appendChild(el("p", "cl-hint", t.checking));
     else if (state.unlocked) renderUnlocked();
     else renderLocked();

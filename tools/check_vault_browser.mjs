@@ -176,6 +176,10 @@ async function openChrome() {
     const { result } = await send('WebAuthn.getCredentials', { authenticatorId });
     return result.credentials;
   };
+  // 模擬換到另一台：把驗證器裡的 credential 全部拿掉
+  const clearCredentials = async () => {
+    await send('WebAuthn.clearCredentials', { authenticatorId });
+  };
 
   const shot = async (name) => {
     if (!SHOTS) return;
@@ -194,6 +198,7 @@ async function openChrome() {
     goto,
     type,
     credentials,
+    clearCredentials,
     shot,
     // 收尾要吞掉錯誤。Chrome 關閉的時候還在寫 profile 目錄，rmSync 會撞上
     close: async () => {
@@ -739,6 +744,82 @@ test('清單傳到另一台：密文經 #send= 進 QR 串流頁載入，經 #imp
     await page.waitFor("/不是暫存區的密文/.test(__vl.text('#checklist-tool'))", '壞片段要說');
     assert.equal(await page.evaluate('location.hash'), '');
     assert.ok(await page.evaluate("!!__vl.button('#checklist-tool', '用 passkey 解開')"), '原本的暫存區要還在');
+  } finally {
+    await page.close();
+  }
+});
+
+test('登錄另一台：A 顯示鑰匙的 QR code，B 拍照登錄後用同一份鑰匙解開搬過來的資料', async () => {
+  const page = await openChrome();
+  try {
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '建一把新的鑰匙')", '清單頁畫出來');
+    await page.evaluate("__vl.click('#checklist-tool', '建一把新的鑰匙')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0", '清單畫出來');
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[1].click(); true");
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[2].click(); true");
+    await page.waitFor("/已存/.test(__vl.text('#checklist-tool'))", '自動存');
+    const exported = await page.evaluate("window.anoniVault.exportBlob().then((bytes) => Array.from(bytes))");
+    const blobPath = path.join(os.tmpdir(), `anoni-enroll-${process.pid}.age`);
+    fs.writeFileSync(blobPath, Buffer.from(exported));
+
+    // A：顯示鑰匙
+    await page.evaluate("__vl.click('#checklist-tool', '登錄另一台裝置')");
+    await page.waitFor("!!document.querySelector('#checklist-tool .cl-secret')", '鑰匙顯示出來');
+    const identity = await page.evaluate("document.querySelector('#checklist-tool .cl-secret').textContent");
+    assert.match(identity, /^AGE-SECRET-KEY-1[0-9A-Z]{58}$/, '顯示的要是 age 私鑰編碼');
+    assert.ok(await page.evaluate("!!document.querySelector('#checklist-tool canvas.cl-qr')"), '要有 QR code');
+    assert.ok(await page.evaluate("/資料金鑰本身/.test(__vl.text('#checklist-tool'))"), '要先警告');
+    assert.match(await page.evaluate("document.querySelector('#checklist-tool .cl-countdown').textContent"), /還剩 (60|59|58) 秒/, '倒數要從一分鐘開始');
+    await page.evaluate("document.querySelector('#checklist-tool .cl-enroll-show').scrollIntoView(); true");
+    await page.shot('11-enroll-show');
+    const png = await page.evaluate("document.querySelector('#checklist-tool canvas.cl-qr').toDataURL('image/png').split(',')[1]");
+    const photoPath = path.join(os.tmpdir(), `anoni-enroll-${process.pid}.png`);
+    fs.writeFileSync(photoPath, Buffer.from(png, 'base64'));
+
+    // 關掉之後畫面上不能再有鑰匙；鎖上也一樣
+    await page.evaluate("__vl.click('#checklist-tool', '關掉')");
+    assert.ok(!(await page.evaluate("__vl.text('#checklist-tool')")).includes(identity), '關掉之後鑰匙還在畫面上');
+    await page.evaluate("__vl.click('#checklist-tool', '登錄另一台裝置')");
+    await page.waitFor("!!document.querySelector('#checklist-tool .cl-secret')", '再顯示一次');
+    await page.evaluate("__vl.click('#checklist-tool', '鎖上')");
+    await page.waitFor("!!__vl.button('#checklist-tool', '用 passkey 解開')", '鎖上');
+    assert.ok(!(await page.evaluate("__vl.text('#checklist-tool')")).includes(identity), '鎖上之後鑰匙還在畫面上');
+
+    // B：這台沒有 passkey 也沒有暫存區，拍 A 的 QR code 登錄
+    await page.clearCredentials();
+    await page.evaluate('window.anoniVault.clear().then(() => true)');
+    await page.goto('about:blank');
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '用另一台的鑰匙登錄這台')", 'B 端給登錄的入口');
+    await page.evaluate("__vl.click('#checklist-tool', '用另一台的鑰匙登錄這台')");
+    await page.waitFor("!!document.querySelector('#checklist-tool input.cl-photo')", '登錄面板出現');
+    assert.ok(await page.evaluate("__vl.button('#checklist-tool', '登錄這台裝置').disabled"), '還沒有鑰匙不能登錄');
+    const { result: doc } = await page.send('DOM.getDocument', { depth: 1 });
+    const { result: node } = await page.send('DOM.querySelector', { nodeId: doc.root.nodeId, selector: '#checklist-tool input.cl-photo' });
+    await page.send('DOM.setFileInputFiles', { nodeId: node.nodeId, files: [photoPath] });
+    await page.waitFor(`document.querySelector('#checklist-tool input.cl-key') && document.querySelector('#checklist-tool input.cl-key').value === ${JSON.stringify(identity)}`, '照片解出鑰匙填進欄位');
+    await page.waitFor("!__vl.button('#checklist-tool', '登錄這台裝置').disabled", '有鑰匙了要能登錄');
+    await page.evaluate("__vl.click('#checklist-tool', '登錄這台裝置')");
+    await page.waitFor("/這台登錄好了/.test(__vl.text('#checklist-tool'))", '登錄完成');
+    assert.equal((await page.credentials()).length, 1, 'B 端要建出一筆新的 credential');
+    assert.ok(await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0"), '登錄完直接是解開的');
+
+    // 把 A 匯出的密文用檔案匯進來，用 B 這把新的 passkey 解開
+    await page.evaluate("__vl.click('#checklist-tool', '鎖上')");
+    await page.waitFor("!!document.querySelector('#checklist-tool input.cl-file')", '鎖上後有匯入的選檔');
+    const { result: doc2 } = await page.send('DOM.getDocument', { depth: 1 });
+    const { result: fileNode } = await page.send('DOM.querySelector', { nodeId: doc2.root.nodeId, selector: '#checklist-tool input.cl-file' });
+    await page.send('DOM.setFileInputFiles', { nodeId: fileNode.nodeId, files: [blobPath] });
+    await page.waitFor("/匯進來了/.test(__vl.text('#checklist-tool'))", '搬過來');
+    await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0", '用新的 passkey 解開');
+    const checked = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')].filter((i) => i.checked).length");
+    assert.equal(checked, 2, 'A 勾的兩項要在 B 解得出來');
+    fs.rmSync(photoPath, { force: true });
+    fs.rmSync(blobPath, { force: true });
   } finally {
     await page.close();
   }
