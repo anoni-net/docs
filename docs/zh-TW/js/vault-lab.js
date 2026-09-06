@@ -83,7 +83,7 @@
     const note = noteBox.value;
     try {
       state.data = Object.assign({}, state.data, { note: note });
-      await vault().save(state.data, state.backupRecipient || null);
+      await vault().save(state.data);
       await refresh();
       say("已自動存下，內容 " + note.length + " 個字，密文 " + state.blobSize + " 個位元組。");
     } catch (err) {
@@ -114,6 +114,18 @@
     state.blobSize = await vault().size();
     state.exists = state.blobSize > 0;
   }
+
+  // 在鑰匙頁建過的讀者走這裡，不必再建第二把
+  const openExisting = () =>
+    guard(async () => {
+      await vault().openWithExisting(state.backupRecipient || null);
+      state.unlocked = true;
+      state.readOnly = false;
+      state.data = {};
+      noteBox.value = "";
+      await refresh();
+      say("用你已有的那把鑰匙開好了，裡面還是空的。打字就會自動存下來。");
+    });
 
   const create = () =>
     guard(async () => {
@@ -162,7 +174,7 @@
       // 文字框從頭到尾是同一個節點，直接讀它就是讀者看到的內容，沒有第二個真相來源。
       const note = noteBox.value;
       state.data = Object.assign({}, state.data, { note: note });
-      await vault().save(state.data, state.backupRecipient || null);
+      await vault().save(state.data);
       await refresh();
       // 字數寫出來，存進去的是不是空的一眼就看得到
       say(
@@ -216,7 +228,11 @@
   function renderLocked() {
     if (!state.exists) {
       head.appendChild(
-        el("p", "vl-hint", "這台裝置上還沒有暫存區。建立時會產生一把 passkey，之後每次進來按一次指紋就好，不必記密語。")
+        el(
+          "p",
+          "vl-hint",
+          "這台裝置上還沒有暫存區。已經在鑰匙頁建過 anoni.net 的鑰匙就用它開，密碼管理器裡只會有一筆；還沒有的話建一把新的。之後每次進來按一次指紋就好，不必記密語。"
+        )
       );
       const label = el("label", "vl-label", "備援金鑰（公鑰，age1 開頭，可留空）");
       const row = el("div", "vl-row");
@@ -239,7 +255,10 @@
         head.appendChild(el("p", "vl-secret", state.shownSecret));
         head.appendChild(el("p", "vl-hint", "備援私鑰，只顯示這一次。存進密碼管理器，放在跟這台裝置不同的地方。"));
       }
-      head.appendChild(button("建立暫存區", "vl-primary", create));
+      const choose = el("div", "vl-actions");
+      choose.appendChild(button("用我已有的鑰匙開", "vl-primary", openExisting));
+      choose.appendChild(button("建一把新的鑰匙", null, create));
+      head.appendChild(choose);
       return;
     }
 
@@ -262,6 +281,12 @@
 
   function renderUnlocked() {
     const note = (state.data && state.data.note) || "";
+    // 備援有沒有設要講出來。沒有退路的人該知道自己沒有退路。
+    const backup = state.readOnly
+      ? ""
+      : vault().backupRecipient()
+        ? "備援金鑰已設，每次儲存都會一起加密給它。"
+        : "沒有備援金鑰，passkey 丟了這裡的東西就永遠打不開。";
     head.appendChild(
       el(
         "p",
@@ -269,7 +294,8 @@
         (state.readOnly
           ? "唯讀，看得到也匯得出去，改不了。"
           : "解開了，打字會自動存下來，關掉這個分頁就重新鎖上。") +
-          (note.length ? "目前有 " + note.length + " 個字。" : "目前還是空的。")
+          (note.length ? "目前有 " + note.length + " 個字。" : "目前還是空的。") +
+          backup
       )
     );
 

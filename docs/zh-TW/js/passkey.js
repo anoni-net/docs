@@ -113,10 +113,17 @@
     return prfSupport(has, caps);
   }
 
-  // 建立一把 passkey，回 typage 的識別字串。瀏覽器會問讀者要存到哪裡。
+  // 建立一把 passkey。建立的動作在 vault.js，那一支把 32 位元組金鑰放進 user.id、同時
+  // 要求 PRF，所以從這裡建的鑰匙兩邊都能用：檔案加密走 PRF，暫存區走 user.id。這一頁
+  // 只建鑰匙，不寫任何東西進裝置，維持頁面上「站上什麼都不存」那句承諾。
+  //
+  // 回的是 { hasPrf }。原本回 typage 的識別字串，那串對 passkey 只是選憑證時的提示，
+  // 頁面上標著選用，拿掉不影響任何流程；貼上外來識別字串那條路照舊。
   async function create() {
-    const age = await lib();
-    return age.webauthn.createCredential({ keyName: keyName(new Date()), rpId: rpId, type: "passkey" });
+    if (!window.anoniVault || typeof window.anoniVault.createKey !== "function") {
+      throw new Error("vault.js not loaded");
+    }
+    return window.anoniVault.createKey();
   }
 
   // 做一次 PRF 解鎖：拿一把隨機的 file key 包一次，包得起來就代表這把 passkey 的 PRF 可用
@@ -202,10 +209,9 @@
       step1: "1. 建立一把 passkey",
       step1Body: "按下去之後瀏覽器會問你要存到哪裡。存到 iCloud 鑰匙圈、Google 密碼管理員、Bitwarden、1Password 這類會同步的地方，其他裝置才能用同一把。只存在這台裝置上的話，資料也只在這一台解得開。",
       create: "建立 passkey",
+      createdBoth: "建好了。這一把同時能給本機檔案加密與加密暫存區用，密碼管理器裡只需要這一筆。",
+      createdVaultOnly: "建好了。這個環境算不出檔案加密要用的金鑰，這一把只給加密暫存區用。兩種都想要的話，換到電腦上再建一把。",
       creating: "等你在瀏覽器的提示裡完成",
-      created: "建好了。它在你剛剛選的地方，站上什麼都沒有留。",
-      identityLabel: "識別字串（選用）",
-      identityHint: "對 passkey 來說它只是選憑證時的提示，不用特別保存。",
       step2: "2. 試一次解鎖",
       step2Body: "請 passkey 算一次金鑰，確認指紋或 PIN 的流程順暢。換到另一台同步過的裝置也可以來這裡按一下，確認那邊能用。",
       test: "試解鎖",
@@ -237,10 +243,9 @@
       step1: "1. 创建一把 passkey",
       step1Body: "按下去之后浏览器会问你要存到哪里。存到 iCloud 钥匙串、Google 密码管理器、Bitwarden、1Password 这类会同步的地方，其他设备才能用同一把。只存在这台设备上的话，数据也只在这一台解得开。",
       create: "创建 passkey",
+      createdBoth: "创建好了。这一把同时能给本机文件加密与加密暂存区用，密码管理器里只需要这一笔。",
+      createdVaultOnly: "创建好了。这个环境算不出文件加密要用的密钥，这一把只给加密暂存区用。两种都想要的话，换到电脑上再创建一把。",
       creating: "等你在浏览器的提示里完成",
-      created: "建好了。它在你刚刚选的地方，站上什么都没有留。",
-      identityLabel: "识别字串（选用）",
-      identityHint: "对 passkey 来说它只是选凭证时的提示，不用特别保存。",
       step2: "2. 试一次解锁",
       step2Body: "请 passkey 算一次密钥，确认指纹或 PIN 的流程顺畅。换到另一台同步过的设备也可以来这里按一下，确认那边能用。",
       test: "试解锁",
@@ -272,10 +277,9 @@
       step1: "1. Create a passkey",
       step1Body: "The browser will ask where to store it. Choose something that syncs (iCloud Keychain, Google Password Manager, Bitwarden, 1Password) so your other devices can use the same passkey. If it stays on this device only, the data can only be opened here.",
       create: "Create a passkey",
+      createdBoth: "Created. This one works for both local file encryption and the encrypted stash, so your password manager only needs this single entry.",
+      createdVaultOnly: "Created. This environment cannot derive the key that file encryption needs, so this one only works for the encrypted stash. To have both, create another one on a computer.",
       creating: "Finish in the browser prompt",
-      created: "Done. It lives where you just chose. Nothing was kept on this site.",
-      identityLabel: "Identity string (optional)",
-      identityHint: "For a passkey this is only a hint for picking the credential. No need to keep it.",
       step2: "2. Test an unlock",
       step2Body: "Ask the passkey to derive a key once and check that the fingerprint or PIN flow works. On another synced device, come back here and press it to confirm it works there too.",
       test: "Test unlock",
@@ -337,7 +341,6 @@
   const state = {
     support: null,     // null 還在查
     creating: false,
-    identity: null,    // 建好的識別字串
     testing: false,
     tested: false,
     generating: false,
@@ -373,27 +376,22 @@
     const usable = !!(s && s.webauthn && s.prf !== false);
 
     // 1. 建立
-    const step1 = el("div", "pk-step" + (state.identity ? " pk-step--done" : ""));
+    const step1 = el("div", "pk-step" + (state.made ? " pk-step--done" : ""));
     step1.appendChild(el("p", "pk-title", t.step1));
     step1.appendChild(el("p", null, t.step1Body));
     const row1 = el("div", "pk-row");
     if (state.creating) row1.appendChild(busyButton(t.creating));
     else {
       const b = button(t.create, "pk-primary", () => guarded("create", "creating", async () => {
-        state.identity = await create().catch((err) => { throw err; });
+        state.made = await create();
       }));
       b.disabled = !usable;
       row1.appendChild(b);
     }
     step1.appendChild(row1);
-    if (state.identity) {
-      step1.appendChild(el("p", null, t.created));
-      const details = document.createElement("details");
-      const summary = el("summary", null, t.identityLabel);
-      details.appendChild(summary);
-      details.appendChild(el("p", "pk-code", state.identity));
-      details.appendChild(el("p", "pk-hint", t.identityHint));
-      step1.appendChild(details);
+    if (state.made) {
+      // 這一把拿到了哪些能力要當場講。PRF 的秘密是建立當下產生的，換裝置補不回來。
+      step1.appendChild(el("p", null, state.made.hasPrf ? t.createdBoth : t.createdVaultOnly));
     }
     if (state.error && state.error.step === "create") step1.appendChild(el("p", "pk-error", t.errors[state.error.code] || t.errors.failed));
     root.appendChild(step1);
@@ -406,7 +404,7 @@
     if (state.testing) row2.appendChild(busyButton(t.testing));
     else {
       const b = button(t.test, "pk-primary", () => guarded("test", "testing", async () => {
-        await testUnlock(state.identity);
+        await testUnlock();
         state.tested = true;
       }));
       b.disabled = !usable;
