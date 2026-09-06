@@ -683,6 +683,67 @@ test('公鑰模式：產生金鑰、加密給兩位收件人、重新整理後�
   }
 });
 
+test('清單傳到另一台：密文經 #send= 進 QR 串流頁載入，經 #import= 回清單頁匯入', async () => {
+  const page = await openChrome();
+  const QR_URL = new URL('utils/qr-stream/', BASE).href;
+  try {
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '建一把新的鑰匙')", '清單頁畫出來');
+    await page.evaluate("__vl.click('#checklist-tool', '建一把新的鑰匙')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0", '清單畫出來');
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[0].click(); true");
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[3].click(); true");
+    await page.waitFor("/已存/.test(__vl.text('#checklist-tool'))", '自動存');
+
+    // 「傳到另一台」會開新分頁，這裡把 window.open 換掉，抓它要開的網址
+    await page.evaluate("window.open = (u) => { window.__opened = u; return null; }; true");
+    await page.evaluate("__vl.click('#checklist-tool', '傳到另一台（QR）')");
+    await page.waitFor("!!window.__opened", '要開新分頁');
+    const opened = await page.evaluate("window.__opened");
+    assert.ok(opened.startsWith(QR_URL + '#send='), `開的網址不對：${opened.slice(0, 80)}`);
+    assert.ok(await page.evaluate("/開了一個新分頁/.test(__vl.text('#checklist-tool'))"), '要告訴讀者接下來另一台怎麼做');
+    const payload = opened.slice((QR_URL + '#send=').length);
+    assert.ok(payload.length > 100 && /^[A-Za-z0-9_-]+$/.test(payload), '片段要是 base64url');
+
+    // 串流頁：載入密文、片段清掉、切在傳送分頁、檔名對
+    await page.goto(opened);
+    await page.evaluate(HELPERS);
+    await page.waitFor("/從我的準備清單帶過來/.test(__vl.text('#qr-stream-tool'))", '串流頁說密文載入了');
+    await page.waitFor("/anoni-vault\\.age/.test(__vl.text('#qr-stream-tool'))", '要傳的檔名是暫存區的密文');
+    assert.equal(await page.evaluate('location.hash'), '', '讀完片段要清掉');
+    assert.equal(await page.evaluate("document.querySelector('#qr-stream-tool [aria-selected=\"true\"]').textContent.trim()"), '傳送', '要停在傳送分頁');
+    await page.shot('10-qr-handoff');
+
+    // 模擬另一台：清掉這台的暫存區，帶著 #import= 回清單頁
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor('!!window.anoniVault', 'vault.js 載入');
+    await page.evaluate('window.anoniVault.clear().then(() => true)');
+    // 同一頁只換片段不會重新載入，先離開再帶片段進來
+    await page.goto('about:blank');
+    await page.goto(CHECKLIST_URL + '#import=' + payload);
+    await page.evaluate(HELPERS);
+    await page.waitFor("/從 QR 影格串流收到的密文匯進來了/.test(__vl.text('#checklist-tool'))", '帶回來的密文要匯入');
+    assert.equal(await page.evaluate('location.hash'), '', '匯入之後片段要清掉');
+    await page.waitFor("!!__vl.button('#checklist-tool', '用 passkey 解開')", '匯入後是鎖上狀態');
+    await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0", '解開');
+    const checked = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')].filter((i) => i.checked).length");
+    assert.equal(checked, 2, '搬過來的勾選要還在');
+
+    // 壞掉的片段：不匯入、片段照樣清掉、暫存區不動
+    await page.goto('about:blank');
+    await page.goto(CHECKLIST_URL + '#import=not-base64!!');
+    await page.evaluate(HELPERS);
+    await page.waitFor("/不是暫存區的密文/.test(__vl.text('#checklist-tool'))", '壞片段要說');
+    assert.equal(await page.evaluate('location.hash'), '');
+    assert.ok(await page.evaluate("!!__vl.button('#checklist-tool', '用 passkey 解開')"), '原本的暫存區要還在');
+  } finally {
+    await page.close();
+  }
+});
+
 for (const [name, fn] of tests) {
   if (ONLY && !name.includes(ONLY)) continue;
   try {

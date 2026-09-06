@@ -460,6 +460,9 @@
       resultLine: "{name}，{size}",
       needUnzip: "對面送的是壓縮過的資料，這個瀏覽器沒有解壓的功能。換一個新一點的瀏覽器再收一次。",
       save: "儲存檔案",
+      handoffLoaded: "從我的準備清單帶過來的密文已經載入，按「開始播放」讓另一台掃。",
+      importChecklist: "匯入我的準備清單",
+      importHint: "這是 anoni.net 暫存區的密文。匯進清單頁之後用同一把 passkey 解開。",
       reset: "清掉重收",
       note: "兩台裝置之間沒有任何連線，中間只有螢幕跟鏡頭。畫面上的 QR code 是明文，拍得到的人都讀得到，敏感的東西先自己加密再傳。全部在你的瀏覽器裡處理，斷網時照樣可以用。",
     },
@@ -519,6 +522,9 @@
       resultLine: "{name}，{size}",
       needUnzip: "对面发的是压缩过的数据，这个浏览器没有解压的功能。换一个新一点的浏览器再收一次。",
       save: "保存文件",
+      handoffLoaded: "从我的准备清单带过来的密文已经加载，按「开始播放」让另一台扫。",
+      importChecklist: "导入我的准备清单",
+      importHint: "这是 anoni.net 暂存区的密文。导进清单页之后用同一把 passkey 解开。",
       reset: "清掉重收",
       note: "两台设备之间没有任何连接，中间只有屏幕跟镜头。画面上的 QR code 是明文，拍得到的人都读得到，敏感的东西先自己加密再传。全部在你的浏览器里处理，断网时照样可以用。",
     },
@@ -578,6 +584,9 @@
       resultLine: "{name}, {size}",
       needUnzip: "The other side sent compressed data and this browser cannot decompress it. Receive it again on a newer browser.",
       save: "Save the file",
+      handoffLoaded: "The ciphertext handed over from my preparation checklist is loaded. Press Play and let the other device scan.",
+      importChecklist: "Import into my preparation checklist",
+      importHint: "This is ciphertext from the anoni.net stash. Import it on the checklist page and unlock with the same passkey.",
       reset: "Clear and start over",
       note: "There is no connection between the two devices, only a screen and a camera. The QR codes on screen are in the clear and anyone who photographs them can read them, so encrypt anything sensitive before sending it. Everything runs in your browser and works with the network off.",
     },
@@ -905,6 +914,7 @@
   }
 
   function dropResult() {
+    recv.bytes = null;
     if (recv.url) {
       URL.revokeObjectURL(recv.url);
       recv.url = null;
@@ -962,6 +972,7 @@
 
     dropResult();
     recv.url = URL.createObjectURL(new Blob([data]));
+    recv.bytes = data;
     recv.result = { name: manifest.name, size: data.length, verdict: verdict };
     renderReceive();
   }
@@ -1758,7 +1769,62 @@
       link.href = recv.url;
       link.download = recv.result.name;
       dom.result.appendChild(link);
+      // 收到的是 anoni.net 暫存區的密文：多一顆直接帶去清單頁匯入。只認 age 檔頭、只認
+      // 校驗通過的，而且要小到塞得進網址片段。
+      if (verdict === "ok" && isVaultBlob(recv.bytes)) {
+        const row = el("div", "qs-row");
+        const go = el("button", null, t.importChecklist);
+        go.type = "button";
+        go.addEventListener("click", () => {
+          window.location.href = "../checklist/#import=" + toBase64Url(recv.bytes);
+        });
+        row.appendChild(go);
+        dom.result.appendChild(row);
+        dom.result.appendChild(el("p", "qs-hint", t.importHint));
+      }
     }
+  }
+
+  // --- 跟我的準備清單的接法 ---
+  //
+  // 清單頁把暫存區的密文放在 #send=<base64url> 帶過來，這裡載入就當作要傳的檔案。
+  // 接收端拼完的是同一種密文時，帶著 #import=<base64url> 回清單頁。網址片段不會送到
+  // 伺服器，裡面也只是密文，讀完就把片段清掉，重新整理不會再載一次。
+  const HANDOFF_NAME = "anoni-vault.age";
+  const HANDOFF_MAX = 64 * 1024;
+  function toBase64Url(bytes) {
+    let bin = "";
+    for (let i = 0; i < bytes.length; i += 1) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function fromBase64Url(text) {
+    const bin = atob(text.replace(/-/g, "+").replace(/_/g, "/"));
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function isVaultBlob(bytes) {
+    if (!bytes || bytes.length < 32 || bytes.length > HANDOFF_MAX) return false;
+    let head = "";
+    for (let i = 0; i < 21; i += 1) head += String.fromCharCode(bytes[i]);
+    return head === "age-encryption.org/v1";
+  }
+  function handoff() {
+    const loc = window.location;
+    if (!loc || typeof loc.hash !== "string" || loc.hash.indexOf("#send=") !== 0) return;
+    let bytes = null;
+    try {
+      bytes = fromBase64Url(loc.hash.slice("#send=".length));
+    } catch (err) {
+      bytes = null;
+    }
+    if (window.history && typeof window.history.replaceState === "function") {
+      window.history.replaceState(null, "", loc.pathname + loc.search);
+    }
+    if (!isVaultBlob(bytes)) return;
+    setTab("send");
+    dom.sendPanel.insertBefore(el("p", "qs-hint qs-handoff", t.handoffLoaded), dom.sendPanel.firstChild);
+    prepare(new File([bytes], HANDOFF_NAME, { type: "application/octet-stream" }));
   }
 
   // 離開頁面就把相機關掉。切分頁那條路徑已經有處理，這一條補的是直接關掉分頁、
@@ -1766,4 +1832,5 @@
   window.addEventListener("pagehide", stopScanning);
 
   build();
+  handoff();
 })();

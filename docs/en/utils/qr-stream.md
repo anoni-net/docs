@@ -281,6 +281,10 @@ A CRC is a short check value confirming the frame was read correctly from start 
 
 The coupon collector problem above has a purpose-built answer: a fountain code, where receiving enough frames reconstructs the file regardless of which ones arrived. It is not implemented here, because that format cannot be worked through by hand, and part of the point of this page is that anyone can check what it does.
 
+## How it connects to my preparation checklist
+
+"Send to another device" on [my preparation checklist](checklist.md) hands the stash ciphertext to this page as the file to send; press Play and that is it. The other device scans with the receiver here, and once the set is complete with a matching checksum, an extra button "Import into my preparation checklist" appears next to the result. It carries the ciphertext back to the checklist page, where the same passkey unlocks it. The hand-over goes through the URL fragment, which never reaches the server and is cleared as soon as it is read.
+
 ## Whose code this uses
 
 Encoding is handled by [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"} (MIT) and decoding by [jsQR](https://github.com/cozmo/jsQR){target="_blank"} (Apache-2.0, [licence text](vendor/jsQR-LICENSE.txt)). Both sit unmodified under `utils/vendor/`, shared with the [generator](qrcode.md) and the [reader](qr-read.md). Every third-party component in this section is listed on the [tools index](index.md#Whose-code-this-uses).

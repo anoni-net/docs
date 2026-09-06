@@ -281,6 +281,10 @@ CRC 是一个很短的检查码，用来确认这一张从头到尾没有被读�
 
 前面提到的集点问题有一个对症的解法，叫喷泉码（fountain code），它的性质是只要收到足够多张就能还原，跟收到的是哪几张无关。目前没有做，因为那套格式没办法用手验算，而这一页的重点之一是任何人都能自己检查它做了什么。
 
+## 跟我的准备清单的接法
+
+[我的准备清单](checklist.md)的「传到另一台」会把暂存区的密文带到这一页，直接当作要传的文件，按「开始播放」就好。另一台用这一页的接收端扫，收齐而且校验码相符时，结果旁边多一颗「导入我的准备清单」，按下去带着密文回清单页，再用同一把 passkey 解开。密文经网址片段交接，片段不会送到服务器，读完就清掉。
+
 ## 用了谁的程序
 
 编码交给 [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator){target="_blank"}（MIT 许可），解码交给 [jsQR](https://github.com/cozmo/jsQR){target="_blank"}（Apache-2.0 许可，[许可全文](vendor/jsQR-LICENSE.txt)），两份都原封不动放在 `utils/vendor/` 底下，跟[生成器](qrcode.md)与[读取器](qr-read.md)共用同一份。这一区用到的第三方组件都列在[小工具首页](index.md#用了谁的程序)。
