@@ -8,6 +8,7 @@ offline_assets:
   # 讀者把這一頁存下來時才會一起存。清單由 tools/test_agecrypt.mjs 對照 vendor 目錄。
   - utils/asian-diceware-7776.txt
   - js/agecrypt-worker.js
+  - js/vault.js
   - utils/vendor/age/age-encryption/dist/armor.js
   - utils/vendor/age/age-encryption/dist/cbor.js
   - utils/vendor/age/age-encryption/dist/format.js
@@ -80,6 +81,7 @@ offline_assets:
 
 <div id="age-tool"></div>
 
+<script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
 <script src="../../js/agecrypt.js"></script>
 
@@ -112,6 +114,8 @@ age -d -o note.txt note.txt.age
 ## 用 passkey 當鑰匙
 
 加密時把鑰匙切到「passkey」，就不用記密語。瀏覽器會跳出提示，用指紋或 PIN 同意一次，檔案就加密給你的 passkey。第一次用之前先到 [passkey 鑰匙](passkey.md)建立一把。「另外加一把備援金鑰」預設勾著，那把公鑰填在下面的欄位，passkey 丟了或換到不支援的環境時只剩它能開。你的處境不需要那條退路就取消勾選，取消之後畫面上會寫清楚代價。解密時工具看檔頭決定要問密語、passkey 還是備援私鑰，用 age 命令列加密給 `age1` 公鑰的檔案也能在這裡貼私鑰解開。passkey 模式的檔案只能在這個網站解，理由見[什麼是 passkey](../tools/what-is-passkey.md)。
+
+備援金鑰欄位下面有一本收件人簿：常用的 age1 公鑰取個名字存進你 passkey 加密的暫存區，跟[我的準備清單](checklist.md)同一份密文，下次選一個就填進去。存與刪都要你自己按。
 
 ## 密語就是全部
 

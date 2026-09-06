@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, passkeyHeaderOk };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { sanitizeRecipients, AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, passkeyHeaderOk };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -701,6 +701,37 @@ test('三個語系的字串表結構一致', () => {
   const shape = (o) => Object.keys(o).sort().map((k) => (typeof o[k] === 'object' ? `${k}:{${Object.keys(o[k]).sort().join(',')}}` : k)).join('|');
   assert.equal(shape(STRINGS.zh), shape(STRINGS['zh-TW']));
   assert.equal(shape(STRINGS.en), shape(STRINGS['zh-TW']));
+});
+
+test('收件人簿讀回來的清單只認格式對的公鑰，同一把只留一筆，名字截在 40 字', () => {
+  const ok = (v) => /^age1[a-z0-9]{58}$/.test(v);
+  const a = 'age1' + 'a'.repeat(58);
+  const b = 'age1' + 'b'.repeat(58);
+  const out = tool.sanitizeRecipients([
+    { name: '甲', recipient: a, addedAt: '2026-09-07' },
+    { name: '重複', recipient: ' ' + a + ' ' },
+    { name: '壞的', recipient: 'age1short' },
+    { name: 'x'.repeat(60), recipient: b, addedAt: 42 },
+    null, 'text', { name: '沒有公鑰' },
+  ], ok);
+  assert.deepEqual(out, [
+    { name: '甲', recipient: a, addedAt: '2026-09-07' },
+    { name: 'x'.repeat(40), recipient: b, addedAt: '' },
+  ]);
+  assert.deepEqual(tool.sanitizeRecipients(undefined, ok), []);
+  assert.deepEqual(tool.sanitizeRecipients('nope', ok), []);
+});
+
+test('收件人簿只經 anoniVault，沒有自動寫入，三語系頁面都載了 vault.js', () => {
+  assert.ok(code.includes('window.anoniVault'), '收件人簿沒有走 anoniVault');
+  assert.ok(!/setTimeout\([^)]*(save|vault)/i.test(code), '出現了自動儲存');
+  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
+    const page = fs.readFileSync(path.join(DOCS, lang, 'utils', 'age.md'), 'utf8');
+    assert.ok(page.includes('<script src="../../js/vault.js"></script>'), `${lang} 沒載 vault.js`);
+    assert.ok(/^\s*- js\/vault\.js$/m.test(frontmatter(page)), `${lang} 的 offline_assets 少了 vault.js`);
+    const order = page.indexOf('js/vault.js"></script>') < page.indexOf('js/agecrypt.js"></script>');
+    assert.ok(order, `${lang} 的 vault.js 要在 agecrypt.js 之前載入`);
+  }
 });
 
 for (const [name, fn] of tests) {

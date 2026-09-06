@@ -46,6 +46,7 @@ const PASSKEY_URL = new URL('utils/passkey/', BASE).href;
 const VAULT_URL = new URL('community/vault-lab/', BASE).href;
 const CHECKLIST_URL = new URL('utils/checklist/', BASE).href;
 const THREAT_URL = new URL('utils/threat-model/', BASE).href;
+const AGE_URL = new URL('utils/age/', BASE).href;
 const SHOTS = process.argv.includes('--shots');
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice('--only='.length);
 const OUT = path.join(os.tmpdir(), 'vault-shots');
@@ -547,6 +548,62 @@ test('清單超過一年沒動的會標出來、篩得出來，按今天確認�
 
     await page.evaluate("document.querySelector('#checklist-tool .cl-filter input').click(); true");
     assert.equal(await visible(), total, '關掉篩選要全部回來');
+  } finally {
+    await page.close();
+  }
+});
+
+test('本機檔案加密的收件人簿：存一把備援公鑰，重新整理後打開簿子填回欄位', async () => {
+  const page = await openChrome();
+  const toPasskeyMode = async () => {
+    await page.waitFor("!!document.querySelector('#age-tool textarea')", '工具畫出來');
+    await page.evaluate("const ta = document.querySelector('#age-tool textarea'); ta.value = 'hello book'; ta.dispatchEvent(new Event('input', { bubbles: true })); true");
+    await page.evaluate("__vl.click('#age-tool', '用這段文字')");
+    await page.waitFor("!!document.querySelector('#age-tool input[name=ag-keymode][value=passkey]') && !document.querySelector('#age-tool input[name=ag-keymode][value=passkey]').disabled", 'passkey 模式可選');
+    await page.evaluate("document.querySelector('#age-tool input[name=ag-keymode][value=passkey]').click(); true");
+    await page.waitFor("!!document.querySelector('#age-tool input[placeholder=\"age1…\"]')", '備援金鑰欄位出現');
+  };
+  const field = "document.querySelector('#age-tool input[placeholder=\"age1…\"]')";
+  try {
+    await page.goto(AGE_URL);
+    await page.evaluate(HELPERS);
+    await toPasskeyMode();
+    await page.waitFor("!!__vl.button('#age-tool', '存進收件人簿')", '收件人簿區塊出現');
+    assert.ok(await page.evaluate("__vl.button('#age-tool', '存進收件人簿').disabled"), '欄位還是空的，存的按鈕要是灰的');
+
+    await page.evaluate("__vl.click('#age-tool', '產生備援金鑰')");
+    await page.waitFor(`${field}.value.startsWith('age1')`, '備援公鑰填進欄位');
+    const recipient = await page.evaluate(`${field}.value`);
+    await page.waitFor("!__vl.button('#age-tool', '存進收件人簿').disabled", '有了公鑰，存的按鈕要能按');
+    await page.evaluate("__vl.click('#age-tool', '存進收件人簿')");
+    await page.waitFor("!!__vl.button('#age-tool', '建一把新的鑰匙')", '沒有暫存區時給兩個選項');
+    await page.evaluate("__vl.click('#age-tool', '建一把新的鑰匙')");
+    await page.waitFor("/存好了/.test(__vl.text('#age-tool'))", '存進簿子');
+    assert.equal((await page.credentials()).length, 1, '建鑰匙之後驗證器裡應該只有一筆');
+    assert.equal(await page.evaluate("document.querySelectorAll('#age-tool .ag-book-row').length"), 1, '簿子裡該有一筆');
+    await page.evaluate("document.querySelector('#age-tool .ag-book').scrollIntoView(); true");
+    await page.shot('08-age-address-book');
+
+    // 重新整理：欄位空了，打開簿子、填入，公鑰要一樣
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '重新整理');
+    await page.evaluate(HELPERS);
+    await toPasskeyMode();
+    assert.equal(await page.evaluate(`${field}.value`), '', '重新整理後欄位該是空的');
+    await page.waitFor("!!__vl.button('#age-tool', '用 passkey 打開收件人簿')", '有暫存區時給打開的按鈕');
+    await page.evaluate("__vl.click('#age-tool', '用 passkey 打開收件人簿')");
+    await page.waitFor("document.querySelectorAll('#age-tool .ag-book-row').length === 1", '簿子打開有一筆');
+    await page.evaluate("__vl.click('#age-tool', '填入')");
+    await page.waitFor(`${field}.value === ${JSON.stringify(recipient)}`, '填回來的公鑰要跟存的一樣');
+    assert.ok(await page.evaluate("__vl.button('#age-tool', '存進收件人簿').disabled"), '已經在簿子裡的公鑰不該再能存');
+    assert.equal((await page.credentials()).length, 1, '打開簿子不該多出 credential');
+
+    // 刪掉之後簿子空了，欄位的值還在
+    await page.evaluate("__vl.click('#age-tool', '刪')");
+    // 刪除進行中畫面只剩「等你完成」，那時 .ag-book-row 已經是 0，要等空的那句出現才算完成
+    await page.waitFor("/還是空的/.test(__vl.text('#age-tool'))", '刪掉之後簿子空了要說');
+    assert.equal(await page.evaluate("document.querySelectorAll('#age-tool .ag-book-row').length"), 0, '刪掉之後不該還有列');
+    assert.equal(await page.evaluate(`${field}.value`), recipient, '刪掉簿子裡的那筆不該動到欄位');
   } finally {
     await page.close();
   }

@@ -23,6 +23,11 @@
  * 決定要問密語、passkey 還是備援金鑰，用 age 命令列加密給 age1 公鑰的檔案也能用備援金鑰解。
  * 完整的公鑰模式（產生金鑰、多收件人）仍在 #421。
  *
+ * 收件人簿：常用的 age1 公鑰（自己的備援、夥伴的）取個名字存在 passkey 加密的暫存區裡
+ * （vault.js，跟我的準備清單同一份密文），選一個就填進備援金鑰欄位。只動密文裡的
+ * recipients 欄位，存與刪都是讀者按的，沒有自動寫入。#421 的多收件人做了之後同一本簿子
+ * 直接餵給它。暫存區本身建立時填的備援公鑰也列在簿子最前面，那一筆不能刪。
+ *
  * 模式由檔案內容決定：開頭是 age 的版本行就解密，其餘一律加密。少一個要讀者選的開關。
  *
  * 加密完先用同一組密語解回來比對，一致才給下載。跟 metadata 清除器同一個原則：
@@ -153,6 +158,25 @@
     if (types.indexOf(STANZA_PASSKEY) < 0) return false;
     const backups = types.filter((type) => type === STANZA_X25519).length;
     return withBackup ? types.length === 2 && backups === 1 : types.length === 1;
+  }
+
+  // 收件人簿從密文讀回來的清單只認格式對的 age1 公鑰，同一把只留第一筆，名字截在 40 字。
+  // looksLike 由 passkey.js 提供，這裡不自己判斷格式。
+  function sanitizeRecipients(list, looksLike) {
+    const out = [];
+    const seen = {};
+    for (const item of Array.isArray(list) ? list : []) {
+      if (!item || typeof item.recipient !== "string") continue;
+      const recipient = item.recipient.trim();
+      if (!looksLike(recipient) || seen[recipient]) continue;
+      seen[recipient] = true;
+      out.push({
+        name: String(item.name || "").trim().slice(0, 40),
+        recipient: recipient,
+        addedAt: typeof item.addedAt === "string" ? item.addedAt : "",
+      });
+    }
+    return out;
   }
 
   // 開頭是 armor 的頭行就是文字形式的 age 檔
@@ -336,6 +360,17 @@
     }
     #age-tool .ag-or { font-size: .74rem; margin: .8rem 0 .2rem; }
     #age-tool .ag-modes { display: flex; gap: 1rem; font-size: .74rem; margin: .8rem 0 0; flex-wrap: wrap; }
+    #age-tool .ag-book {
+      border: .05rem dashed var(--md-default-fg-color--lighter);
+      border-radius: .2rem; padding: .6rem .8rem; margin: .8rem 0;
+    }
+    #age-tool .ag-book-row {
+      display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;
+      padding: .35rem 0; border-top: .05rem solid var(--md-default-fg-color--lightest);
+    }
+    #age-tool .ag-book-name { font-weight: 600; font-size: .76rem; }
+    #age-tool .ag-book-key { font-family: var(--md-code-font-family, monospace); font-size: .7rem; opacity: .8; flex: 1 1 auto; }
+    #age-tool button[aria-busy="true"] { opacity: .7; }
     #age-tool .ag-modes label { display: flex; gap: .3rem; align-items: center; cursor: pointer; }
     #age-tool .ag-secret {
       font-family: var(--md-code-font-family, monospace); font-size: .72rem; background: var(--md-code-bg-color);
@@ -415,6 +450,31 @@
       download: "下載 {name}",
       sizeLine: "原始 {a}，輸出 {b}",
       another: "換一個檔案",
+      book: {
+        title: "收件人簿",
+        hint: "常用的公鑰取個名字存進你 passkey 加密的暫存區，跟準備清單同一份密文，下次選一個就填進上面的欄位。",
+        open: "用 passkey 打開收件人簿",
+        noVault: "這台裝置還沒有暫存區。已經在鑰匙頁建過 anoni.net 的 passkey 就用它開，還沒有的話建一把新的。",
+        openExisting: "用我已有的鑰匙開",
+        createNew: "建一把新的鑰匙",
+        waiting: "等你在瀏覽器的提示裡完成",
+        empty: "收件人簿還是空的。上面的欄位填好公鑰，取個名字存進去。",
+        vaultBackup: "暫存區的備援公鑰",
+        unnamed: "（沒有名字）",
+        nameLabel: "名字",
+        namePlaceholder: "例如 我的備援、阿明",
+        save: "存進收件人簿",
+        saved: "存好了。",
+        exists: "這把公鑰已經在收件人簿裡。",
+        use: "填入",
+        remove: "刪",
+        lock: "鎖上",
+        errors: {
+          cancelled: "你取消了，或瀏覽器沒有完成。再按一次。",
+          unsupported: "這個環境不允許用 passkey。要在正式站、https 網址，瀏覽器也沒有把功能關掉。",
+          failed: "沒有成功。換一個瀏覽器或密碼管理器試試。",
+        },
+      },
       errors: {
         empty: "先輸入密語。",
         tooLarge: "檔案超過 {limit}，整份要在記憶體裡處理，太大會失敗。先切小，或用命令列工具。",
@@ -491,6 +551,31 @@
       download: "下载 {name}",
       sizeLine: "原始 {a}，输出 {b}",
       another: "换一个文件",
+      book: {
+        title: "收件人簿",
+        hint: "常用的公钥取个名字存进你 passkey 加密的暂存区，跟准备清单同一份密文，下次选一个就填进上面的栏位。",
+        open: "用 passkey 打开收件人簿",
+        noVault: "这台设备还没有暂存区。已经在钥匙页创建过 anoni.net 的 passkey 就用它开，还没有的话创建一把新的。",
+        openExisting: "用我已有的钥匙开",
+        createNew: "创建一把新的钥匙",
+        waiting: "等你在浏览器的提示里完成",
+        empty: "收件人簿还是空的。上面的栏位填好公钥，取个名字存进去。",
+        vaultBackup: "暂存区的备援公钥",
+        unnamed: "（没有名字）",
+        nameLabel: "名字",
+        namePlaceholder: "例如 我的备援、阿明",
+        save: "存进收件人簿",
+        saved: "存好了。",
+        exists: "这把公钥已经在收件人簿里。",
+        use: "填入",
+        remove: "删",
+        lock: "锁上",
+        errors: {
+          cancelled: "你取消了，或浏览器没有完成。再按一次。",
+          unsupported: "这个环境不允许用 passkey。要在正式站、https 网址，浏览器也没有把功能关掉。",
+          failed: "没有成功。换一个浏览器或密码管理器试试。",
+        },
+      },
       errors: {
         empty: "先输入密语。",
         tooLarge: "文件超过 {limit}，整份要在内存里处理，太大会失败。先切小，或用命令行工具。",
@@ -567,6 +652,31 @@
       download: "Download {name}",
       sizeLine: "Original {a}, output {b}",
       another: "Another file",
+      book: {
+        title: "Address book",
+        hint: "Give a public key you use often a name and it is kept in your passkey-encrypted stash, the same ciphertext as the checklist. Next time, pick one and it fills the field above.",
+        open: "Open the address book with passkey",
+        noVault: "There is no stash on this device yet. If you already created an anoni.net passkey on the key page, open with it; otherwise create a new one.",
+        openExisting: "Open with my existing key",
+        createNew: "Create a new key",
+        waiting: "Finish the prompt in your browser",
+        empty: "The address book is empty. Fill in a public key above, give it a name and save it.",
+        vaultBackup: "The stash's own backup key",
+        unnamed: "(no name)",
+        nameLabel: "Name",
+        namePlaceholder: "e.g. my backup, Ming",
+        save: "Save to the address book",
+        saved: "Saved.",
+        exists: "That public key is already in the address book.",
+        use: "Use",
+        remove: "Delete",
+        lock: "Lock",
+        errors: {
+          cancelled: "You cancelled, or the browser did not finish. Press again.",
+          unsupported: "This environment does not allow passkeys. It needs the production site, an https address, and a browser that has not turned the feature off.",
+          failed: "It did not work. Try another browser or password manager.",
+        },
+      },
       errors: {
         empty: "Enter a passphrase first.",
         tooLarge: "The file is over {limit}. It is processed whole in memory, and a file this large would fail. Split it, or use the command-line tool.",
@@ -615,6 +725,7 @@
     useBackup: true,
     backupRecipient: "",     // passkey 模式的備援公鑰
     backupSecret: "",        // 解密時貼的備援私鑰
+    book: { support: null, exists: false, unlocked: false, busy: null, choosing: false, entries: [], name: "", error: null, message: "" },
     shownSecret: null,       // 剛產生的備援私鑰，只顯示這一次
     passkeyOk: null,         // null 還在查，之後 true/false
     result: null,    // { url, name, size, verified, text, armored }
@@ -1135,6 +1246,186 @@
   }
 
   // passkey 模式的介面：加密要備援公鑰，解密可選 passkey 或備援私鑰
+
+  // --- 收件人簿 ---
+  //
+  // 存在 passkey 加密的暫存區裡（window.anoniVault），只動密文的 recipients 欄位。
+  // 沒有自動寫入，存與刪都是讀者按的。
+  const vault = () => window.anoniVault;
+  const looksLikeRecipient = (value) => !!(window.anoniPasskey && window.anoniPasskey.looksLikeRecipient(value));
+  function classifyBookError(err) {
+    const name = err && err.name;
+    if (name === "NotAllowedError" || name === "AbortError") return "cancelled";
+    if (name === "NotSupportedError" || name === "SecurityError") return "unsupported";
+    return "failed";
+  }
+  async function bookRefresh() {
+    const b = state.book;
+    const v = vault();
+    b.support = !!(window.PublicKeyCredential && navigator.credentials && v && v.available());
+    b.exists = b.support ? await v.exists() : false;
+  }
+  async function bookGuard(action, work) {
+    const b = state.book;
+    b.error = null;
+    b.message = "";
+    b.busy = action;
+    render();
+    try {
+      await work();
+    } catch (err) {
+      b.error = classifyBookError(err);
+    }
+    b.busy = null;
+    render();
+  }
+  async function loadBook() {
+    const data = (await vault().read()) || {};
+    state.book.entries = sanitizeRecipients(data.recipients, looksLikeRecipient);
+    state.book.unlocked = true;
+    state.book.exists = true;
+  }
+  async function saveEntry() {
+    const recipient = state.backupRecipient.trim();
+    if (!looksLikeRecipient(recipient)) return;
+    const data = (await vault().read()) || {};
+    const list = sanitizeRecipients(data.recipients, looksLikeRecipient);
+    if (list.some((entry) => entry.recipient === recipient)) {
+      state.book.message = t.book.exists;
+      return;
+    }
+    list.push({ name: state.book.name.trim().slice(0, 40), recipient: recipient, addedAt: new Date().toISOString().slice(0, 10) });
+    data.recipients = list;
+    await vault().save(data);
+    state.book.entries = list;
+    state.book.name = "";
+    state.book.message = t.book.saved;
+  }
+  const openBook = () => bookGuard("open", async () => { await vault().unlock(); await loadBook(); });
+  const openBookWithExisting = () =>
+    bookGuard("open", async () => {
+      await vault().openWithExisting(null);
+      state.book.choosing = false;
+      await loadBook();
+      await saveEntry();
+    });
+  const openBookWithNew = () =>
+    bookGuard("open", async () => {
+      await vault().create(null);
+      state.book.choosing = false;
+      await loadBook();
+      await saveEntry();
+    });
+  const saveToBook = () => bookGuard("save", saveEntry);
+  const removeFromBook = (recipient) =>
+    bookGuard("remove", async () => {
+      const data = (await vault().read()) || {};
+      data.recipients = sanitizeRecipients(data.recipients, looksLikeRecipient).filter((entry) => entry.recipient !== recipient);
+      await vault().save(data);
+      state.book.entries = data.recipients;
+    });
+  function lockBook() {
+    vault().lock();
+    const b = state.book;
+    b.unlocked = false;
+    b.entries = [];
+    b.choosing = false;
+    b.message = "";
+    b.error = null;
+    render();
+  }
+  function vaultBackupRecipient() {
+    const v = vault();
+    const value = v && typeof v.backupRecipient === "function" ? v.backupRecipient() : null;
+    return value && looksLikeRecipient(value) ? value : null;
+  }
+  function shortKey(recipient) {
+    return recipient.slice(0, 8) + "…" + recipient.slice(-6);
+  }
+  function canSaveToBook() {
+    const recipient = state.backupRecipient.trim();
+    if (!looksLikeRecipient(recipient)) return false;
+    if (state.book.entries.some((entry) => entry.recipient === recipient)) return false;
+    return vaultBackupRecipient() !== recipient;
+  }
+  function syncBookSave() {
+    const save = root.querySelector(".ag-book-save");
+    if (save) save.disabled = state.working || !canSaveToBook();
+  }
+  function renderBook(box) {
+    const b = state.book;
+    if (b.support === null) {
+      // 第一次畫到 passkey 模式才查，查完重畫
+      b.support = false;
+      bookRefresh().then(render, render);
+      return;
+    }
+    if (!b.support) return;
+    const wrap = el("div", "ag-book");
+    wrap.appendChild(el("div", "ag-label", t.book.title));
+    if (b.busy) {
+      const waiting = button(t.book.waiting, null, () => {});
+      waiting.disabled = true;
+      waiting.setAttribute("aria-busy", "true");
+      wrap.appendChild(waiting);
+    } else if (!b.unlocked) {
+      const row = el("div", "ag-row");
+      if (b.choosing) {
+        wrap.appendChild(el("p", "ag-hint", t.book.noVault));
+        row.appendChild(button(t.book.openExisting, null, openBookWithExisting));
+        row.appendChild(button(t.book.createNew, null, openBookWithNew));
+      } else {
+        wrap.appendChild(el("p", "ag-hint", t.book.hint));
+        if (b.exists) row.appendChild(button(t.book.open, null, openBook));
+        else {
+          const save = button(t.book.save, "ag-book-save", () => {
+            b.choosing = true;
+            render();
+          });
+          save.disabled = state.working || !looksLikeRecipient(state.backupRecipient.trim());
+          row.appendChild(save);
+        }
+      }
+      wrap.appendChild(row);
+    } else {
+      const entries = b.entries.slice();
+      const own = vaultBackupRecipient();
+      if (own && !entries.some((entry) => entry.recipient === own)) entries.unshift({ name: t.book.vaultBackup, recipient: own, builtin: true });
+      if (!entries.length) wrap.appendChild(el("p", "ag-hint", t.book.empty));
+      for (const entry of entries) {
+        const line = el("div", "ag-book-row");
+        line.appendChild(el("span", "ag-book-name", entry.name || t.book.unnamed));
+        line.appendChild(el("span", "ag-book-key", shortKey(entry.recipient)));
+        line.appendChild(button(t.book.use, null, () => {
+          state.backupRecipient = entry.recipient;
+          state.error = null;
+          b.message = "";
+          render();
+        }));
+        if (!entry.builtin) line.appendChild(button(t.book.remove, null, () => removeFromBook(entry.recipient)));
+        wrap.appendChild(line);
+      }
+      const nameLabel = el("label", "ag-label", t.book.nameLabel);
+      const saveRow = el("div", "ag-row");
+      const nameInput = textField("text", b.name, t.book.namePlaceholder, (value) => {
+        b.name = value;
+        syncBookSave();
+      });
+      saveRow.appendChild(nameInput);
+      const save = button(t.book.save, "ag-book-save", saveToBook);
+      save.disabled = state.working || !canSaveToBook();
+      saveRow.appendChild(save);
+      nameLabel.appendChild(saveRow);
+      wrap.appendChild(nameLabel);
+      const actions = el("div", "ag-row");
+      actions.appendChild(button(t.book.lock, null, lockBook));
+      wrap.appendChild(actions);
+    }
+    if (b.error) wrap.appendChild(el("p", "ag-error", t.book.errors[b.error] || t.book.errors.failed));
+    if (b.message) wrap.appendChild(el("p", "ag-hint", b.message));
+    box.appendChild(wrap);
+  }
+
   function renderPasskeyBox(box, file) {
     const pk = window.anoniPasskey;
     const types = file.types || [];
@@ -1168,6 +1459,7 @@
         state.backupRecipient = value;
         const primary = root.querySelector(".ag-primary");
         if (primary) primary.disabled = state.working || !(pk && pk.looksLikeRecipient(value));
+        syncBookSave();
       });
       row.appendChild(input);
       const gen = button(t.genBackup, null, () => {
@@ -1191,6 +1483,7 @@
         box.appendChild(el("p", "ag-secret", state.shownSecret));
         box.appendChild(el("p", "ag-hint", t.backupSecretShown));
       }
+      renderBook(box);
     }
     if (file.mode === "encrypt") {
       if (file.source === "file" && file.size <= ARMOR_MAX_BYTES) {
