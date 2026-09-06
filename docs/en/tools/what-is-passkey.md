@@ -46,3 +46,5 @@ Nothing. Browsers do not let a page ask whether a passkey exists for a domain, e
 - [Passkey as your key](../utils/passkey.md): create, test an unlock, generate a backup key.
 - [What is age?](what-is-age.md): the passkey wraps the age file key.
 - [Local file encryption](../utils/age.md): choose the "passkey" mode.
+- [My preparation checklist](../utils/checklist.md): ticks are encrypted with the passkey on your device, the first everyday use on this site.
+- [Threat model checklist](../utils/threat-model.md): answers are not saved by default; keeping them puts them in the same passkey-encrypted stash.
