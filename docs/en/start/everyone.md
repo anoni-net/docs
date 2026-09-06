@@ -53,11 +53,12 @@ Both have real uses, and both cover a much narrower range than the marketing sug
 
 ### Tools that run in your browser
 
-All three run on your own device and upload nothing.
+All four run on your own device and upload nothing.
 
 - [What your browser gives away](../utils/leaks.md): see right now what your device is disclosing
 - [URL cleaner](../utils/clean-url.md): strip tracking parameters before sharing a link
 - [File metadata stripper](../utils/strip-metadata.md): coordinates in a photo are the most common leak
+- [My preparation checklist](../utils/checklist.md): the items from the baseline article as a list you can tick off, encrypted with a passkey and kept on your device
 
 ### Going further
 

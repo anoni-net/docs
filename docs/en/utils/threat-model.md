@@ -61,3 +61,5 @@ The other tools in this section line up with the answers too:
 Like the rest of this section, the code is stored on your device and runs without a network. A blocked domain or a severed connection is exactly when you'll most want this list open.
 
 To take this page with you, see [offline reading](../offline.md).
+
+Answers here are not saved. The list that does keep a record is [my preparation checklist](checklist.md): it tracks how far you have got, encrypted with a passkey and kept on your device.

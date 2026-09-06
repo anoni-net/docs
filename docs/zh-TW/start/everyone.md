@@ -53,11 +53,12 @@ icon: material/account-outline
 
 ### 在瀏覽器裡直接用的小工具
 
-底下三個都在你的裝置上執行，不送出任何資料。
+底下四個都在你的裝置上執行，不送出任何資料。
 
 - [你的瀏覽器透露了什麼](../utils/leaks.md)：現在就看得到自己的裝置洩漏了哪些資訊
 - [網址清理器](../utils/clean-url.md)：分享連結前把追蹤參數拿掉
 - [檔案 metadata 清除器](../utils/strip-metadata.md)：照片裡的座標是最常見的洩漏管道
+- [我的準備清單](../utils/checklist.md)：「一般人平常該做到什麼」的項目收成可勾的清單，用 passkey 加密存在你的裝置上
 
 ### 想再往下走
 
