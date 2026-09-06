@@ -37,7 +37,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'agecrypt.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { sanitizeRecipients, AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, passkeyHeaderOk };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { sanitizeRecipients, STANZA_PQ, looksLikePqRecipient, looksLikePqIdentity, parseRecipients, recipientsHeaderOk, parseIdentityText, keyFileText, AGE_HEADER, MAX_BYTES, SCRYPT_LOG2_N, WORDS_SUGGESTED, SCRYPT_LABEL, SCRYPT_MAX_LOG2_N, CALIBRATE_LOG2_N, SLOW_MS, isAgeFile, outputName, randomBelow, pickWords, scryptSalt, estimateMs, plannedMs, scryptRecipient, scryptIdentity, AGE_ARMOR, AGE_ARMOR_END, ARMOR_MAX_BYTES, TEXT_NAME, isArmored, classifyText, decodeUtf8Text, STANZA_SCRYPT, STANZA_X25519, STANZA_PASSKEY, stanzaTypes, armorToBytes, keyModeFor, passkeyHeaderOk };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -158,6 +158,183 @@ function nodeAgeDecrypt(file, passphrase) {
   return Buffer.concat(out);
 }
 
+
+// ---------------------------------------------------------------------------
+// age X25519 收件人的獨立實作（只用 Node 內建的 crypto，照 age-encryption.org/v1）
+// ---------------------------------------------------------------------------
+const BECH32 = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+function bech32Polymod(values) {
+  const GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+  let chk = 1;
+  for (const v of values) {
+    const top = chk >>> 25;
+    chk = ((chk & 0x1ffffff) << 5) ^ v;
+    for (let i = 0; i < 5; i += 1) if ((top >>> i) & 1) chk ^= GEN[i];
+  }
+  return chk >>> 0;
+}
+const hrpExpand = (hrp) => [...hrp].map((c) => c.charCodeAt(0) >>> 5).concat([0], [...hrp].map((c) => c.charCodeAt(0) & 31));
+function convertBits(data, from, to, pad) {
+  let acc = 0;
+  let bits = 0;
+  const out = [];
+  const max = (1 << to) - 1;
+  for (const v of data) {
+    acc = (acc << from) | v;
+    bits += from;
+    while (bits >= to) {
+      bits -= to;
+      out.push((acc >>> bits) & max);
+    }
+  }
+  if (pad) {
+    if (bits > 0) out.push((acc << (to - bits)) & max);
+  } else {
+    assert.ok(bits < from && ((acc << (to - bits)) & max) === 0, 'bech32 補位不對');
+  }
+  return out;
+}
+function bech32Decode(text) {
+  const lower = text.toLowerCase();
+  assert.ok(text === lower || text === text.toUpperCase(), 'bech32 大小寫混用');
+  const at = lower.lastIndexOf('1');
+  assert.ok(at > 0, 'bech32 沒有分隔的 1');
+  const hrp = lower.slice(0, at);
+  const data = [...lower.slice(at + 1)].map((c) => {
+    const v = BECH32.indexOf(c);
+    assert.ok(v >= 0, `bech32 有不合法的字元 ${c}`);
+    return v;
+  });
+  assert.equal(bech32Polymod(hrpExpand(hrp).concat(data)), 1, 'bech32 校驗碼對不上');
+  return { hrp, bytes: Buffer.from(convertBits(data.slice(0, -6), 5, 8, false)) };
+}
+function bech32Encode(hrp, bytes) {
+  const data = convertBits([...bytes], 8, 5, true);
+  const mod = bech32Polymod(hrpExpand(hrp).concat(data, [0, 0, 0, 0, 0, 0])) ^ 1;
+  const check = [];
+  for (let i = 0; i < 6; i += 1) check.push((mod >>> (5 * (5 - i))) & 31);
+  return hrp + '1' + data.concat(check).map((v) => BECH32[v]).join('');
+}
+const X25519_SPKI = Buffer.from('302a300506032b656e032100', 'hex');
+const X25519_PKCS8 = Buffer.from('302e020100300506032b656e04220420', 'hex');
+const x25519Public = (raw) => crypto.createPublicKey({ key: Buffer.concat([X25519_SPKI, raw]), format: 'der', type: 'spki' });
+const x25519Private = (raw) => crypto.createPrivateKey({ key: Buffer.concat([X25519_PKCS8, raw]), format: 'der', type: 'pkcs8' });
+const x25519RawPublic = (key) => key.export({ format: 'der', type: 'spki' }).subarray(-32);
+const X25519_INFO = 'age-encryption.org/v1/X25519';
+function nodeRecipientBytes(recipient) {
+  const { hrp, bytes } = bech32Decode(recipient);
+  assert.equal(hrp, 'age', 'age1 公鑰的 hrp 不對');
+  assert.equal(bytes.length, 32, 'age1 公鑰要是 32 位元組');
+  return bytes;
+}
+function nodeIdentityBytes(identity) {
+  const { hrp, bytes } = bech32Decode(identity);
+  assert.equal(hrp, 'age-secret-key-', '私鑰的 hrp 不對');
+  assert.equal(bytes.length, 32, '私鑰要是 32 位元組');
+  return bytes;
+}
+function nodeGenerateIdentity() {
+  const { privateKey, publicKey } = crypto.generateKeyPairSync('x25519');
+  const raw = privateKey.export({ format: 'der', type: 'pkcs8' }).subarray(-32);
+  return {
+    identity: bech32Encode('age-secret-key-', raw).toUpperCase(),
+    recipient: bech32Encode('age', x25519RawPublic(publicKey)),
+  };
+}
+// 一位收件人一段：暫時金鑰對、共享秘密、HKDF 的 salt 是兩把公鑰接起來，file key 用零 nonce 包
+function nodeX25519Stanza(fileKey, recipient) {
+  const theirs = nodeRecipientBytes(recipient);
+  const eph = crypto.generateKeyPairSync('x25519');
+  const ephPub = x25519RawPublic(eph.publicKey);
+  const shared = crypto.diffieHellman({ privateKey: eph.privateKey, publicKey: x25519Public(theirs) });
+  const wrap = hkdf(shared, Buffer.concat([ephPub, theirs]), X25519_INFO);
+  return `-> X25519 ${b64(ephPub)}\n${b64(seal(wrap, Buffer.alloc(12), fileKey))}\n`;
+}
+function nodePayload(fileKey, plain) {
+  const nonce = crypto.randomBytes(16);
+  const payloadKey = hkdf(fileKey, nonce, 'payload');
+  const chunks = [];
+  let at = 0;
+  let counter = 0;
+  do {
+    const stop = Math.min(plain.length, at + CHUNK);
+    chunks.push(seal(payloadKey, chunkNonce(counter, stop >= plain.length), plain.subarray(at, stop)));
+    at = stop;
+    counter += 1;
+  } while (at < plain.length);
+  return Buffer.concat([nonce, ...chunks]);
+}
+function nodeAgeEncryptTo(plain, recipients) {
+  const fileKey = crypto.randomBytes(16);
+  let header = `${VERSION}\n` + recipients.map((r) => nodeX25519Stanza(fileKey, r)).join('') + '---';
+  const mac = crypto.createHmac('sha256', hkdf(fileKey, Buffer.alloc(0), 'header')).update(header).digest();
+  header += ` ${b64(mac)}\n`;
+  return Buffer.concat([Buffer.from(header), nodePayload(fileKey, plain)]);
+}
+// 解析檔頭：每個 -> 段落連同本體（64 字元一行、最後一行短於 64）
+function nodeParseHeader(file) {
+  const text = file.toString('latin1');
+  const lines = [];
+  let cursor = 0;
+  for (;;) {
+    const nl = text.indexOf('\n', cursor);
+    if (nl < 0) throw new Error('header never ends');
+    const line = text.slice(cursor, nl);
+    cursor = nl + 1;
+    lines.push(line);
+    if (line.startsWith('--- ')) break;
+  }
+  assert.equal(lines[0], VERSION, '版本行不對');
+  const stanzas = [];
+  for (let i = 1; i < lines.length - 1;) {
+    assert.ok(lines[i].startsWith('-> '), `第 ${i} 行不是段落開頭`);
+    const args = lines[i].slice(3).split(' ');
+    const body = [];
+    i += 1;
+    for (; i < lines.length - 1; i += 1) {
+      body.push(lines[i]);
+      if (lines[i].length < 64) { i += 1; break; }
+    }
+    stanzas.push({ type: args[0], args: args.slice(1), body: unb64(body.join('')) });
+  }
+  return { lines, stanzas, payload: file.subarray(cursor) };
+}
+function nodeAgeDecryptWith(file, identity) {
+  const mine = nodeIdentityBytes(identity);
+  const myPub = x25519RawPublic(crypto.createPublicKey(x25519Private(mine)));
+  const { lines, stanzas, payload } = nodeParseHeader(file);
+  let fileKey = null;
+  for (const s of stanzas) {
+    if (s.type !== 'X25519') continue;
+    const ephPub = unb64(s.args[0]);
+    assert.equal(ephPub.length, 32, 'X25519 段落的暫時公鑰要是 32 位元組');
+    const shared = crypto.diffieHellman({ privateKey: x25519Private(mine), publicKey: x25519Public(ephPub) });
+    const wrap = hkdf(shared, Buffer.concat([ephPub, myPub]), X25519_INFO);
+    try {
+      fileKey = open(wrap, Buffer.alloc(12), s.body);
+      break;
+    } catch (err) {
+      // 不是給我的那一段，換下一段
+    }
+  }
+  if (!fileKey) throw new Error('no identity matched');
+  const macLine = lines[lines.length - 1];
+  const headerText = lines.slice(0, -1).join('\n') + '\n---';
+  const expected = crypto.createHmac('sha256', hkdf(fileKey, Buffer.alloc(0), 'header')).update(headerText).digest();
+  assert.ok(crypto.timingSafeEqual(expected, unb64(macLine.slice(4))), 'header MAC 對不上');
+  const nonce = payload.subarray(0, 16);
+  const payloadKey = hkdf(fileKey, nonce, 'payload');
+  const out = [];
+  let at = 16;
+  let counter = 0;
+  do {
+    const stop = Math.min(payload.length, at + CHUNK + 16);
+    out.push(open(payloadKey, chunkNonce(counter, stop >= payload.length), payload.subarray(at, stop)));
+    at = stop;
+    counter += 1;
+  } while (at < payload.length);
+  return Buffer.concat(out);
+}
 // ---------------------------------------------------------------------------
 // 從 vendor 載入原封不動的 typage
 // ---------------------------------------------------------------------------
@@ -617,9 +794,10 @@ test('passkey 模式：加密一定加備援公鑰、檔頭檢查兩個段落、
     /const withBackup = file\.mode === "encrypt" \|\| types\.indexOf\(STANZA_X25519\) >= 0/.test(code),
     '沒有依檔頭判斷這個檔案有沒有備援收件人'
   );
-  assert.ok(/if \(withBackup\) \{\s*const label = el\("label", "ag-label", t\.backupIdentity\)/.test(code),
+  // 有 passkey 段落時叫備援私鑰，只有公鑰段落時叫私鑰，欄位本身都跟著 withBackup 出現或消失
+  assert.ok(/if \(withBackup\) \{\s*const label = el\("label", "ag-label", withPasskey \? t\.backupIdentity : t\.identityLabel\)/.test(code),
     '備援私鑰欄位沒有跟著檔頭出現或消失');
-  assert.ok(/if \(withBackup\) \{\s*const viaBackup = button\(t\.decryptBackup/.test(code),
+  assert.ok(/if \(withBackup\) \{\s*const viaBackup = button\(withPasskey \? t\.decryptBackup : t\.decryptIdentity/.test(code),
     '用備援私鑰解的按鈕沒有跟著檔頭出現或消失');
   assert.ok(/decrypter\.addIdentity\(state\.backupSecret\.trim\(\)\)/.test(code) && /decrypter\.addIdentity\(await pk\.identity\(\)\)/.test(code), '解密缺一條路');
   assert.ok(/return keyModeFor\(state\.file\.types/.test(code), '解密時要看檔頭決定鑰匙');
@@ -731,6 +909,111 @@ test('收件人簿只經 anoniVault，沒有自動寫入，三語系頁面都載
     assert.ok(/^\s*- js\/vault\.js$/m.test(frontmatter(page)), `${lang} 的 offline_assets 少了 vault.js`);
     const order = page.indexOf('js/vault.js"></script>') < page.indexOf('js/agecrypt.js"></script>');
     assert.ok(order, `${lang} 的 vault.js 要在 agecrypt.js 之前載入`);
+  }
+});
+
+// ---------------------------------------------------------------------------
+// 公鑰模式（#421）
+// ---------------------------------------------------------------------------
+test('收件人一行一個：空行略過、重複只留一筆、age1pq1 照收、格式不對的另外列出', () => {
+  const ok = (v) => /^age1[02-9ac-hj-np-z]{58}$/.test(v);
+  const a = 'age1' + 'q'.repeat(58);
+  const pq = 'age1pq1' + 'q'.repeat(120);
+  const parsed = tool.parseRecipients(`\n ${a} \r\n${a}\nnot-a-key\n${pq}\n\nage1short\n`, ok);
+  assert.deepEqual(parsed.list, [a, pq]);
+  assert.deepEqual(parsed.bad, ['not-a-key', 'age1short']);
+  assert.deepEqual(tool.parseRecipients('', ok), { list: [], bad: [] });
+  assert.equal(tool.looksLikePqRecipient(pq), true);
+  assert.equal(tool.looksLikePqRecipient(a), false);
+  assert.equal(tool.looksLikePqIdentity('AGE-SECRET-KEY-PQ-1' + 'Q'.repeat(120)), true);
+  assert.equal(tool.looksLikePqIdentity('AGE-SECRET-KEY-1' + 'Q'.repeat(58)), false);
+});
+
+test('公鑰模式的檔頭：只能有 X25519 與後量子段落，數量跟收件人一樣', () => {
+  assert.equal(tool.recipientsHeaderOk(['X25519'], 1), true);
+  assert.equal(tool.recipientsHeaderOk(['X25519', tool.STANZA_PQ], 2), true);
+  assert.equal(tool.recipientsHeaderOk(['X25519', 'X25519'], 1), false, '多一段就是多了收件人');
+  assert.equal(tool.recipientsHeaderOk(['X25519'], 2), false, '少一段就是少了收件人');
+  assert.equal(tool.recipientsHeaderOk(['X25519', 'scrypt'], 2), false, '混進密語段落');
+  assert.equal(tool.recipientsHeaderOk([], 0), false);
+  assert.equal(tool.STANZA_PQ, 'mlkem768x25519');
+});
+
+test('key.txt：註解略過、第一個非註解行要是私鑰，格式跟 age-keygen 一樣', () => {
+  const ok = (v) => /^AGE-SECRET-KEY-1[02-9AC-HJ-NP-Z]{58}$/.test(v);
+  const secret = 'AGE-SECRET-KEY-1' + 'Q'.repeat(58);
+  const text = tool.keyFileText(secret, 'age1' + 'q'.repeat(58), '2026-09-07T00:00:00Z');
+  assert.equal(text, `# created: 2026-09-07T00:00:00Z\n# public key: age1${'q'.repeat(58)}\n${secret}\n`);
+  assert.equal(tool.parseIdentityText(text, ok), secret);
+  assert.equal(tool.parseIdentityText(`\r\n# c\r\n  ${secret}  \r\n`, ok), secret, 'CRLF 與前後空白要容忍');
+  assert.equal(tool.parseIdentityText('# only comments\n', ok), null);
+  assert.equal(tool.parseIdentityText('hello\n' + secret, ok), null, '第一個非註解行不是私鑰就不收，免得把別的檔案當成金鑰');
+  assert.equal(tool.parseIdentityText('AGE-SECRET-KEY-PQ-1' + 'Q'.repeat(120), ok), 'AGE-SECRET-KEY-PQ-1' + 'Q'.repeat(120));
+});
+
+test('後量子段落也走私鑰那條路', () => {
+  const header = (types) => Buffer.from('age-encryption.org/v1\n' + types.map((t) => `-> ${t} abc\nZm9v\n`).join('') + '--- mac\n payload');
+  assert.equal(tool.keyModeFor(tool.stanzaTypes(header([tool.STANZA_PQ]))), 'passkey');
+  assert.equal(tool.keyModeFor(tool.stanzaTypes(header(['X25519', tool.STANZA_PQ]))), 'passkey');
+});
+
+test('X25519：typage 加密給獨立實作的公鑰，獨立實作解得開', async () => {
+  const { age, tmp } = await loadTypage();
+  try {
+    const mine = nodeGenerateIdentity();
+    const other = nodeGenerateIdentity();
+    const plain = crypto.randomBytes(70000);
+    const enc = new age.Encrypter();
+    enc.addRecipient(other.recipient);
+    enc.addRecipient(mine.recipient);
+    const file = Buffer.from(await enc.encrypt(plain));
+    assert.deepEqual(tool.stanzaTypes(file), ['X25519', 'X25519'], '兩位收件人要兩段');
+    assert.ok(nodeAgeDecryptWith(file, mine.identity).equals(plain), '第二段是我的，要解得開');
+    assert.ok(nodeAgeDecryptWith(file, other.identity).equals(plain), '第一段也要解得開');
+    const stranger = nodeGenerateIdentity();
+    assert.throws(() => nodeAgeDecryptWith(file, stranger.identity), /no identity matched/, '不是收件人就不該解開');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('X25519：獨立實作加密給 typage 產生的公鑰，typage 解得開，而且 typage 的公鑰跟獨立實作算的一樣', async () => {
+  const { age, tmp } = await loadTypage();
+  try {
+    const identity = await age.generateIdentity();
+    const recipient = await age.identityToRecipient(identity);
+    const raw = nodeIdentityBytes(identity);
+    assert.equal(bech32Encode('age', x25519RawPublic(crypto.createPublicKey(x25519Private(raw)))), recipient, '從私鑰推公鑰要跟 typage 一致');
+    const plain = Buffer.from('給兩位收件人的一段話\n'.repeat(3000));
+    const other = nodeGenerateIdentity();
+    const file = nodeAgeEncryptTo(plain, [recipient, other.recipient]);
+    const dec = new age.Decrypter();
+    dec.addIdentity(identity);
+    const back = Buffer.from(await dec.decrypt(file, 'uint8array'));
+    assert.ok(back.equals(plain), 'typage 解不開獨立實作的輸出');
+    assert.ok(nodeAgeDecryptWith(file, other.identity).equals(plain), '另一位用獨立實作也解得開');
+    const armored = nodeArmor(file);
+    const dec2 = new age.Decrypter();
+    dec2.addIdentity(identity);
+    assert.ok(Buffer.from(await dec2.decrypt(age.armor.decode(armored), 'uint8array')).equals(plain), 'armor 之後 typage 也要解得開');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('typage 的 key.txt 能被獨立實作讀回來用', async () => {
+  const { age, tmp } = await loadTypage();
+  try {
+    const identity = await age.generateIdentity();
+    const recipient = await age.identityToRecipient(identity);
+    const text = tool.keyFileText(identity, recipient, new Date().toISOString());
+    const ok = (v) => /^AGE-SECRET-KEY-1[02-9AC-HJ-NP-Z]{58}$/.test(v);
+    const parsed = tool.parseIdentityText(text, ok);
+    assert.equal(parsed, identity);
+    const plain = Buffer.from('short');
+    assert.ok(nodeAgeDecryptWith(nodeAgeEncryptTo(plain, [recipient]), parsed).equals(plain));
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
 

@@ -609,6 +609,80 @@ test('本機檔案加密的收件人簿：存一把備援公鑰，重新整理�
   }
 });
 
+test('公鑰模式：產生金鑰、加密給兩位收件人、重新整理後用私鑰與 key.txt 解回來', async () => {
+  const page = await openChrome();
+  const pasteAnd = async (text) => {
+    await page.waitFor("!!document.querySelector('#age-tool textarea')", '工具畫出來');
+    // Runtime.evaluate 的頂層 const 會留在全域，第二次宣告會撞，所以包成 IIFE
+    await page.evaluate(`(() => { const ta = document.querySelector('#age-tool textarea'); ta.value = ${JSON.stringify(text)}; ta.dispatchEvent(new Event('input', { bubbles: true })); })(); true`);
+    await page.evaluate("__vl.click('#age-tool', '用這段文字')");
+    await page.waitFor("!!document.querySelector('#age-tool .ag-name')", '檔案載入');
+  };
+  const secretField = "document.querySelector('#age-tool input[placeholder=\"AGE-SECRET-KEY-1…\"]')";
+  try {
+    await page.goto(AGE_URL);
+    await page.evaluate(HELPERS);
+    await pasteAnd('公鑰模式的一段話');
+    await page.evaluate("document.querySelector('#age-tool input[name=ag-keymode][value=recipients]').click(); true");
+    await page.waitFor("!!__vl.button('#age-tool', '產生金鑰')", '公鑰模式畫出來');
+    assert.ok(await page.evaluate("__vl.button('#age-tool', '加密並下載').disabled"), '沒有收件人時不能加密');
+
+    // 一位是頁面產生的，一位是外面來的（用頁面上的 typage 另外產一把，模擬夥伴的公鑰）
+    const other = await page.evaluate(`
+      import('age-encryption').then(async (age) => { const id = await age.generateIdentity(); return { identity: id, recipient: await age.identityToRecipient(id) }; })
+    `);
+    await page.evaluate("__vl.click('#age-tool', '產生金鑰')");
+    await page.waitFor("!!document.querySelector('#age-tool a[download=\"key.txt\"]')", 'key.txt 的下載連結出現');
+    const keyText = await page.evaluate("fetch(document.querySelector('#age-tool a[download=\"key.txt\"]').href).then((r) => r.text())");
+    assert.match(keyText, /^# created: .+\n# public key: age1[a-z0-9]{58}\nAGE-SECRET-KEY-1[A-Z0-9]{58}\n$/, 'key.txt 的格式要跟 age-keygen 一樣');
+    const mine = keyText.split('\n')[2];
+    const minePub = keyText.split('\n')[1].replace('# public key: ', '');
+    const area = await page.evaluate("document.querySelector('#age-tool .ag-recipients').value");
+    assert.ok(area.includes(minePub), '產生的公鑰要加進收件人');
+    assert.ok(!(await page.evaluate("__vl.text('#age-tool')")).includes(mine), '私鑰不能出現在畫面上');
+    await page.evaluate(`(() => { const ta = document.querySelector('#age-tool .ag-recipients'); ta.value = ta.value + ${JSON.stringify(other.recipient)} + '\\n'; ta.dispatchEvent(new Event('input', { bubbles: true })); })(); true`);
+    await page.waitFor("!__vl.button('#age-tool', '加密並下載').disabled", '有收件人了要能加密');
+    await page.evaluate("__vl.click('#age-tool', '加密並下載')");
+    await page.waitFor("/2 位收件人/.test(__vl.text('#age-tool'))", '加密完成且檔頭有兩位');
+    assert.ok(await page.evaluate("/解回來比對，跟原檔一致/.test(__vl.text('#age-tool'))"), '剛產生的那把在收件人裡，要有解回比對');
+    const armored = await page.evaluate("[...document.querySelectorAll('#age-tool .ag-out')].map((o) => o.value).find((v) => v.startsWith('-----BEGIN AGE'))");
+    assert.ok(armored, '文字輸入的輸出要是 armor');
+    await page.shot('09-age-recipients');
+
+    // 重新整理，貼密文，用貼的私鑰解
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '重新整理');
+    await page.evaluate(HELPERS);
+    await pasteAnd(armored);
+    await page.waitFor("!!__vl.button('#age-tool', '用私鑰解開')", '檔頭只有公鑰段落，要私鑰');
+    assert.ok(await page.evaluate("__vl.button('#age-tool', '用私鑰解開').disabled"), '還沒貼私鑰不能解');
+    await page.evaluate(`${secretField}.value = ${JSON.stringify(other.identity)}; ${secretField}.dispatchEvent(new Event('input', { bubbles: true })); true`);
+    await page.waitFor("!__vl.button('#age-tool', '用私鑰解開').disabled", '貼了私鑰要能解');
+    await page.evaluate("__vl.click('#age-tool', '用私鑰解開')");
+    await page.waitFor("/解開了/.test(__vl.text('#age-tool'))", '另一位用自己的私鑰解開');
+    assert.equal(await page.evaluate("document.querySelector('#age-tool .ag-out').value"), '公鑰模式的一段話', '解出來的文字要跟原本一樣');
+
+    // 再來一次，改用 key.txt 檔案
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '重新整理');
+    await page.evaluate(HELPERS);
+    await pasteAnd(armored);
+    await page.waitFor("!!document.querySelector('#age-tool input.ag-keyfile')", 'key.txt 的選檔出現');
+    const keyPath = path.join(os.tmpdir(), `anoni-key-${process.pid}.txt`);
+    fs.writeFileSync(keyPath, keyText);
+    const { result: doc } = await page.send('DOM.getDocument', { depth: 1 });
+    const { result: node } = await page.send('DOM.querySelector', { nodeId: doc.root.nodeId, selector: '#age-tool input.ag-keyfile' });
+    await page.send('DOM.setFileInputFiles', { nodeId: node.nodeId, files: [keyPath] });
+    await page.waitFor("/讀進 .*私鑰了/.test(__vl.text('#age-tool'))", '從 key.txt 讀進私鑰');
+    await page.evaluate("__vl.click('#age-tool', '用私鑰解開')");
+    await page.waitFor("/解開了/.test(__vl.text('#age-tool'))", '用 key.txt 解開');
+    assert.equal(await page.evaluate("document.querySelector('#age-tool .ag-out').value"), '公鑰模式的一段話');
+    fs.rmSync(keyPath, { force: true });
+  } finally {
+    await page.close();
+  }
+});
+
 for (const [name, fn] of tests) {
   if (ONLY && !name.includes(ONLY)) continue;
   try {
