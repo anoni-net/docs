@@ -70,7 +70,7 @@ Two-factor authentication puts a second step after the password. Strongest to we
 - **TOTP apps** — the kind that show a rotating six-digit code, such as Aegis or 2FAS
 - **SMS** — the service texts a code to your phone number
 
-The [passkey key](../utils/passkey.md) on this site uses the same technology for something else: deriving an encryption key, with no account and no sign-in. The two do not affect each other.
+The [passkey key](../utils/passkey.md) on this site uses the same technology for something else: acting as the key to the data you keep on your device, with no account and no sign-in. The two do not affect each other.
 
 In practice, TOTP is what most accounts can actually be upgraded to today. Enable passkeys where they exist, and where SMS is the only option take it, since it does stop automated credential stuffing.
 

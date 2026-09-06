@@ -171,6 +171,13 @@ test('登錄另一台：鑰匙限時顯示、鎖上就收、B 端經 keyFromIden
   assert.ok(!/setInterval\([^)]*save/i.test(src), '計時器不能拿來自動存');
 });
 
+test('清除這台裝置是兩段式，第二下才呼叫 vault().clear()', () => {
+  assert.ok(/state\.clearing = true;/.test(src) && /button\(t\.clearConfirm, null, clearDevice\)/.test(src), '第一下只該把 clearing 打開，第二下才是 clearDevice');
+  const at = src.indexOf('const clearDevice = () =>');
+  assert.ok(at > 0 && src.slice(at, at + 400).includes('await vault().clear();'), 'clearDevice 沒有呼叫 vault().clear()');
+  assert.ok(src.slice(at, at + 400).includes('closeEnrollSilently();'), '清除前要先把顯示中的鑰匙收掉');
+});
+
 test('原始碼沒有把勾選送出去或寫進 localStorage 的手段', () => {
   for (const bad of ['fetch(', 'XMLHttpRequest', 'navigator.sendBeacon', 'localStorage', 'sessionStorage', 'document.cookie']) {
     assert.ok(!src.includes(bad), `checklist.js 出現 ${bad}`);

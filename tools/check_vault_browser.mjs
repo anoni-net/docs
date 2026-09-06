@@ -261,12 +261,12 @@ test('鑰匙頁建的 passkey 拿到暫存區直接能開，兩頁只留一筆 c
     await page.evaluate(HELPERS);
     await page.waitFor("!!__vl.button('#passkey-tool', '建立 passkey')", '鑰匙頁畫出來');
     await page.evaluate("__vl.click('#passkey-tool', '建立 passkey')");
-    await page.waitFor("/建好了。這一把同時能給/.test(__vl.text('#passkey-tool'))", '鑰匙頁說兩處都能用');
+    await page.waitFor("/建好了。這一把兩種用法都做得到/.test(__vl.text('#passkey-tool'))", '鑰匙頁說兩種用法都能用');
     assert.equal((await page.credentials()).length, 1, '建立之後驗證器裡應該只有一筆');
 
     // 同一把也要算得出檔案加密金鑰
     await page.evaluate("__vl.click('#passkey-tool', '試解鎖')");
-    await page.waitFor("/解鎖成功，PRF 可用/.test(__vl.text('#passkey-tool'))", '試解鎖成功');
+    await page.waitFor("/解鎖成功，這個環境算得出檔案加密的金鑰/.test(__vl.text('#passkey-tool'))", '試解鎖成功');
     assert.equal((await page.credentials()).length, 1, '試解鎖不該多出 credential');
     await page.shot('01-passkey-created');
 
@@ -433,6 +433,16 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     assert.equal(dates.length, 2, '勾的項目要顯示日期');
     for (const d of dates) assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `日期格式不對：${d}`);
     assert.equal((await page.credentials()).length, 1, '解開不該多出 credential');
+
+    // 清除這台裝置：第一下只出現確認，取消回原狀，確認才真的清
+    await page.evaluate("__vl.click('#checklist-tool', '清除這台裝置的暫存區')");
+    await page.waitFor("!!__vl.button('#checklist-tool', '確定清除')", '第一下要出現確認');
+    await page.evaluate("__vl.click('#checklist-tool', '取消')");
+    assert.ok(await page.evaluate("!__vl.button('#checklist-tool', '確定清除') && document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0"), '取消要回到原狀');
+    await page.evaluate("__vl.click('#checklist-tool', '清除這台裝置的暫存區')");
+    await page.evaluate("__vl.click('#checklist-tool', '確定清除')");
+    await page.waitFor("/清掉了/.test(__vl.text('#checklist-tool'))", '清掉');
+    assert.ok(await page.evaluate("!!__vl.button('#checklist-tool', '建一把新的鑰匙')"), '清掉之後這台沒有暫存區了');
   } finally {
     await page.close();
   }

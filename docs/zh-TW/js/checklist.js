@@ -178,6 +178,11 @@
       exportBlob: "匯出",
       importBlob: "匯入",
       exported: "匯出的是標準 age 檔，另一台裝置匯進去之後用同一把 passkey 解開。",
+      clearDevice: "清除這台裝置的暫存區",
+      clearHint: "會刪掉這台裝置上的密文，其他裝置與密碼管理器裡的 passkey 不受影響。沒有匯出的話，勾選、威脅模型存檔與收件人簿都會沒。",
+      clearConfirm: "確定清除",
+      clearCancel: "取消",
+      cleared: "清掉了。密碼管理器裡那把 passkey 要自己刪。",
       enrollShow: "登錄另一台裝置",
       enrollWarn: "下面這串就是資料金鑰本身。拍到的人可以永遠打開你的暫存區，只在你自己的兩台裝置之間用。一分鐘後自動關掉，這一頁不留它。",
       enrollSteps: "另一台打開我的準備清單，按「用另一台的鑰匙登錄這台」，拍下 QR code 或貼上字串。登錄完再用「傳到另一台」把資料搬過去。",
@@ -257,6 +262,11 @@
       exportBlob: "导出",
       importBlob: "导入",
       exported: "导出的是标准 age 文件，另一台设备导进去之后用同一把 passkey 解开。",
+      clearDevice: "清除这台设备的暂存区",
+      clearHint: "会删掉这台设备上的密文，其他设备与密码管理器里的 passkey 不受影响。没有导出的话，勾选、威胁模型存档与收件人簿都会没。",
+      clearConfirm: "确定清除",
+      clearCancel: "取消",
+      cleared: "清掉了。密码管理器里那把 passkey 要自己删。",
       enrollShow: "登录另一台设备",
       enrollWarn: "下面这串就是数据密钥本身。拍到的人可以永远打开你的暂存区，只在你自己的两台设备之间用。一分钟后自动关掉，这一页不留它。",
       enrollSteps: "另一台打开我的准备清单，按「用另一台的钥匙登录这台」，拍下 QR code 或贴上字串。登录完再用「传到另一台」把数据搬过去。",
@@ -336,6 +346,11 @@
       exportBlob: "Export",
       importBlob: "Import",
       exported: "The export is a standard age file. Import it on another device and unlock with the same passkey.",
+      clearDevice: "Clear the stash on this device",
+      clearHint: "Deletes the ciphertext on this device only; other devices and the passkey in your password manager are untouched. Without an export, the ticks, the saved threat model answers and the address book are gone.",
+      clearConfirm: "Yes, clear it",
+      clearCancel: "Cancel",
+      cleared: "Cleared. The passkey in your password manager is yours to delete.",
       enrollShow: "Enrol another device",
       enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
       enrollSteps: "On the other device, open my preparation checklist, press Enrol this device with a key from another, then photograph this QR code or paste the string. Once enrolled, use Send to another device to move the data across.",
@@ -463,6 +478,7 @@
     unlocked: false,
     onlyStale: false, // 只看超過一年沒動的
     enroll: { showing: false, identity: "", until: 0, timer: null, here: false, input: "" }, // 登錄另一台
+    clearing: false, // 清除這台裝置：按了第一下，等確認
     busy: null, // "unlock" | "open" | "create" | "import" | "export"
     data: null, // 解開後整份資料，checks 只是其中一欄
     error: null,
@@ -615,6 +631,23 @@
     return bytes;
   }
 
+
+  // --- 清除這台裝置 ---
+  //
+  // 刪的是這台裝置上的密文，兩段式，第二下才真的刪。原本這功能只在實驗頁，清單是正式
+  // 工具，退場的路要在這裡。
+  const clearDevice = () =>
+    guard("clear", async () => {
+      closeEnrollSilently();
+      await vault().clear();
+      state.clearing = false;
+      state.unlocked = false;
+      state.data = null;
+      boxes.clear();
+      list.textContent = "";
+      await refresh();
+      state.message = t.cleared;
+    });
 
   // --- 登錄另一台裝置 ---
   //
@@ -958,8 +991,21 @@
       row.appendChild(button(t.exportBlob, null, exportBlob));
       row.appendChild(button(t.transfer, null, transfer));
       row.appendChild(button(t.enrollShow, null, showEnroll));
+      if (state.clearing) {
+        row.appendChild(button(t.clearConfirm, null, clearDevice));
+        row.appendChild(button(t.clearCancel, null, () => {
+          state.clearing = false;
+          render();
+        }));
+      } else {
+        row.appendChild(button(t.clearDevice, null, () => {
+          state.clearing = true;
+          render();
+        }));
+      }
     }
     head.appendChild(row);
+    if (state.clearing && !state.busy) head.appendChild(el("p", "cl-warn", t.clearHint));
     if (state.enroll.showing && !state.busy) head.appendChild(enrollShowPanel());
   }
   function render() {
