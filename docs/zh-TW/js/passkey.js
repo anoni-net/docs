@@ -10,7 +10,7 @@
  * === 為什麼是金鑰派生而非門禁 ===
  *
  * 靜態站沒有伺服器能檢查「這個人通過了驗證」，寫在 JavaScript 裡的「驗證通過才顯示」誰都
- * 繞得過。這裡用的是 WebAuthn 的 PRF 擴充：passkey 內部多藏一把秘密，讀者通過指紋或 PIN
+ * 繞得過。這裡用的是 WebAuthn 的 PRF 擴充：passkey 內部多藏一把秘密，讀者通過指紋、臉或 PIN
  * 之後，驗證器對我們給的輸入算 HMAC，回傳固定的 32 位元組。同一把 passkey 配同一段輸入永遠
  * 得到同一段輸出，於是可以拿來包 age 的 file key。沒有 passkey 就算不出金鑰，資料就是密文。
  * 這一段在 typage 的 webauthn 模組裡，vendor/age/ 原封不動，這一支只負責介面與流程。
@@ -213,7 +213,7 @@
       createdVaultOnly: "建好了。這一把能用準備清單這類暫存區工具。這個環境算不出檔案加密要用的金鑰，要用檔案加密就換到電腦上再建一把。",
       creating: "等你在瀏覽器的提示裡完成",
       step2: "2. 試一次解鎖（檔案加密用）",
-      step2Body: "請 passkey 算一次檔案加密要用的金鑰，確認這個環境算得出，指紋或 PIN 的流程也順暢。只用清單這類暫存區工具的話，這一步可以跳過。",
+      step2Body: "請 passkey 算一次檔案加密要用的金鑰，確認這個環境算得出，指紋、臉或 PIN 的流程也順暢。只用清單這類暫存區工具的話，這一步可以跳過。",
       test: "試解鎖",
       testing: "等你在瀏覽器的提示裡完成",
       tested: "解鎖成功，這個環境算得出檔案加密的金鑰。",
@@ -232,7 +232,7 @@
         failed: "沒有成功。換一個瀏覽器或密碼管理員再試。",
         libMissing: "程式還沒載入。第一次使用需要連上網，之後會留在裝置上。",
       },
-      note: "站上不會存任何跟這把 passkey 有關的東西，也查不出你有沒有建過。每一次開鎖都要你用指紋或 PIN 同意。",
+      note: "站上不會存任何跟這把 passkey 有關的東西，也查不出你有沒有建過。每一次開鎖都要你用指紋、臉或 PIN 同意。",
     },
     zh: {
       checking: "正在确认这个浏览器支不支持。",
@@ -247,7 +247,7 @@
       createdVaultOnly: "创建好了。这一把能用准备清单这类暂存区工具。这个环境算不出文件加密要用的密钥，要用文件加密就换到电脑上再创建一把。",
       creating: "等你在浏览器的提示里完成",
       step2: "2. 试一次解锁（文件加密用）",
-      step2Body: "请 passkey 算一次文件加密要用的密钥，确认这个环境算得出，指纹或 PIN 的流程也顺畅。只用清单这类暂存区工具的话，这一步可以跳过。",
+      step2Body: "请 passkey 算一次文件加密要用的密钥，确认这个环境算得出，指纹、脸或 PIN 的流程也顺畅。只用清单这类暂存区工具的话，这一步可以跳过。",
       test: "试解锁",
       testing: "等你在浏览器的提示里完成",
       tested: "解锁成功，这个环境算得出文件加密的密钥。",
@@ -266,7 +266,7 @@
         failed: "没有成功。换一个浏览器或密码管理器再试。",
         libMissing: "程序还没加载。第一次使用需要联网，之后会留在设备上。",
       },
-      note: "站上不会存任何跟这把 passkey 有关的东西，也查不出你有没有建过。每一次开锁都要你用指纹或 PIN 同意。",
+      note: "站上不会存任何跟这把 passkey 有关的东西，也查不出你有没有建过。每一次开锁都要你用指纹、脸或 PIN 同意。",
     },
     en: {
       checking: "Checking whether this browser supports it.",
@@ -281,7 +281,7 @@
       createdVaultOnly: "Created. This one works for stash tools such as the checklist. This environment cannot derive the key that file encryption needs; for file encryption, create another one on a computer.",
       creating: "Finish in the browser prompt",
       step2: "2. Test an unlock (for file encryption)",
-      step2Body: "Ask the passkey to derive the file encryption key once, to confirm this environment can, and that the fingerprint or PIN flow is smooth. If you only use stash tools such as the checklist, skip this step.",
+      step2Body: "Ask the passkey to derive the file encryption key once, to confirm this environment can, and that the fingerprint, face or PIN flow is smooth. If you only use stash tools such as the checklist, skip this step.",
       test: "Test unlock",
       testing: "Finish in the browser prompt",
       tested: "Unlock succeeded. This environment can derive the file encryption key.",
@@ -300,7 +300,7 @@
         failed: "It did not work. Try another browser or password manager.",
         libMissing: "The code has not loaded. The first use needs a connection; after that it stays on the device.",
       },
-      note: "This site stores nothing about the passkey and cannot tell whether you created one. Every unlock needs your fingerprint or PIN.",
+      note: "This site stores nothing about the passkey and cannot tell whether you created one. Every unlock needs your fingerprint, face or PIN.",
     },
   };
   const t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];

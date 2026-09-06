@@ -102,7 +102,7 @@ What age is, what the format looks like and how it differs from PGP are on [What
 
 ## Across devices, through your password manager
 
-Paste text to encrypt, or tick "Output as text" when encrypting a file, and you get plain text starting with `-----BEGIN AGE ENCRYPTED FILE-----`. Store it together with the passphrase in the password manager you already use (a secure note in Bitwarden, Proton Pass or 1Password all work). Open this page on another device, paste it back, type the passphrase, and it decrypts. Your manager does the syncing. This site stores nothing.
+Paste text to encrypt, or tick "Output as text" when encrypting a file, and you get plain text starting with `-----BEGIN AGE ENCRYPTED FILE-----`. Store it together with the passphrase in the password manager you already use (a secure note in Bitwarden, Proton Pass or 1Password all work). Open this page on another device, paste it back, type the passphrase, and it decrypts. Your manager does the syncing. This site stores nothing. The downloaded `.age` file is an ordinary file; any cloud drive will hold it, with the passphrase kept elsewhere.
 
 Saved to a file, the text form is still a standard age file and the command-line tool recognises it on its own:
 
@@ -114,9 +114,9 @@ The text form is a third larger than the binary, so files over 64 KB only get th
 
 ## Using a passkey as the key
 
-Switch the key to "Passkey" when encrypting and there is no passphrase to remember. The browser shows a prompt, you approve once with a fingerprint or PIN, and the file is encrypted to your passkey. Before the first use, go to [Passkey as your key](passkey.md) to create one and generate a backup key. "Also add a backup key" is ticked by default, and that public key goes in the field below. If the passkey is lost or you move to an unsupported environment, only the backup secret opens the file. Untick it when your situation does not need that way out, and the cost is spelled out on screen. When decrypting, the tool reads the header to decide whether to ask for a passphrase, the passkey or the backup secret. Files encrypted with the age command line to an `age1` public key can be opened here by pasting the secret. Files in passkey mode only open on this site. The reasons are on [What is a passkey?](../tools/what-is-passkey.md).
+Switch the key to "Passkey" when encrypting and there is no passphrase to remember. The browser shows a prompt, you approve once with a fingerprint or PIN, and the file is encrypted to your passkey. Before the first use, go to [Passkey as your key](passkey.md) to create one and generate a backup key. "Also add a backup key" is ticked by default, and that public key goes in the field below. If the passkey is lost or you move to an unsupported environment, only the backup secret opens the file. Untick it when your situation does not need that way out, and the cost is spelled out on screen. When decrypting, the tool reads the header to decide whether to ask for a passphrase, the passkey or the backup secret. Files encrypted with the age command line to an `age1` public key can be opened here by pasting the secret. Files in passkey mode only open on this site. The reasons are on [What is a passkey?](../tools/what-is-passkey.md). Whether this environment can derive the key, check first with "Test an unlock" on the [key page](passkey.md).
 
-Under the backup key and recipient fields there is an address book: give a frequently used age1 public key a name and it is kept in your passkey-encrypted stash, the same ciphertext as [my preparation checklist](checklist.md). Next time, pick one and it fills the field. Saving and deleting both take a deliberate press.
+Under the backup key and recipient fields there is an address book: give a frequently used age1 public key a name and it is kept in your passkey-encrypted stash, the same ciphertext as [my preparation checklist](checklist.md). Next time, pick one and it fills the field. Saving and deleting both take a deliberate press. The list itself is a record of who you correspond with; like the checklist it lives in the stash, and its security equals the password manager's.
 
 ## Encrypting to someone else's public key
 
@@ -132,7 +132,7 @@ Passphrase mode has no keys to manage, at the cost that the strength of the encr
 
 ## Things to keep in mind
 
-- The whole file is processed in memory, and anything over 200 MB is refused up front. Split large backups, or use the command-line tool directly.
+- The whole file is processed in memory, and anything over 200 MB is refused up front. Split large backups, or use the command-line tool directly; installation is on [What is age?](../tools/what-is-age.md).
 - The file name is not inside the ciphertext. The output name is the original plus `.age`, visible to anyone. Give backups a name that gives nothing away.
 - Files encrypted to a key (a public key starting with `age1`) cannot be opened here. That needs the private key and the command-line tool.
 - The first use needs a connection to fetch the code. After that it stays on the device.

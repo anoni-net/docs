@@ -10,11 +10,11 @@ A passkey is a credential kept on your device or in your password manager. When 
 
 ## Use one, the data key travels inside the passkey
 
-When a WebAuthn credential is created, it can carry a piece of identifying data, called the user handle in the specification and stored in the `user.id` field, and the authenticator returns it unchanged on every later verification. What this site puts there is a randomly generated data key. Verify once with the passkey on any device and the data key comes back to the page, which uses it to open the ciphertext kept on your device.
+When the passkey is created, this site places a randomly generated data key inside it, and on every later verification the place that keeps the passkey returns it unchanged. Verify once with the passkey on any device and the data key comes back to the page, which uses it to open the ciphertext kept on your device. The specification calls this field the user handle, written `user.id`.
 
-`user.id` is a core field. Every storage method returns it as the specification requires, including a third-party password manager on an iPhone. [My preparation checklist](../utils/checklist.md), saved answers on the [threat model checklist](../utils/threat-model.md) and the address book inside local file encryption all live in one such stash, sharing one ciphertext.
+`user.id` is a core field. The specification requires every storage method to return it; we have verified it with Bitwarden on an iPhone and Chrome on a computer, and other combinations should behave the same by the specification. [My preparation checklist](../utils/checklist.md), saved answers on the [threat model checklist](../utils/threat-model.md) and the address book inside local file encryption all live in one such stash, sharing one ciphertext.
 
-The cost is that the data key sits alongside the passkey in your password manager, so its security equals the manager's: whoever can unlock your password manager gets the key. That is the same level as the screen lock on your device, enough for most people, and not enough against an adversary who can reach your device and may be able to make you unlock it. The threat model checklist offers no save option against such adversaries.
+The cost is that the data key sits alongside the passkey in your password manager, so its security equals the manager's: whoever can unlock your password manager gets the key. A password manager export, a shared vault, or a breach of the provider combined with a weak master password all lead down the same road. That is the same level as the screen lock on your device, enough for most people, and not enough against an adversary who can reach your device and may be able to make you unlock it. The threat model checklist offers no save option against such adversaries.
 
 ## Use two, PRF derives a key on the spot
 
@@ -22,7 +22,7 @@ The WebAuthn PRF extension gives the passkey an extra secret that never leaves t
 
 [Local file encryption](../utils/age.md) on this site uses that output to wrap the age file key. Without the passkey, no key can be derived and the data is just ciphertext. That is different from "show it after verification", which is a gate written into the page that anyone can step around. This is arithmetic.
 
-One level stronger than use one, since the secret is never in the password manager's hands. The cost is that the storage method has to implement the extension; see the limits below for what supports it.
+The difference from use one: the data key is a field inside the credential, visible to the password manager and possibly carried in exports, whereas the PRF secret only ever leaves the authenticator as a derived result, and neither the page nor any screen shows the secret itself. If the password manager itself is opened, neither use holds. The cost is that the storage method has to implement the extension; see the limits below for what supports it.
 
 ## How it differs from a passphrase
 
