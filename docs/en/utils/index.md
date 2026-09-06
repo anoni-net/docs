@@ -28,7 +28,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-clipboard-check-outline: **[Threat model checklist](threat-model.md)**
 
-    Turn your answers to the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches flagged. Nothing is saved, and reloading clears it.
+    Turn your answers to the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches flagged. Nothing is saved unless you choose to keep it, encrypted with a passkey on your device.
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 

@@ -40,7 +40,7 @@ const grab = (re) => {
 const harness = `
   ${grab(/^  const ASSETS = \[[\s\S]*?\n  function summarize\(state, strings, today\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
-  return { ASSETS, ADVERSARIES, BUDGETS, RULES, evaluate, summarize, STRINGS, topPower };
+  return { ASSETS, ADVERSARIES, BUDGETS, RULES, evaluate, summarize, STRINGS, topPower, canStore, NO_STORE };
 `;
 const tool = new Function(harness)();
 
@@ -200,13 +200,32 @@ test('沒答的題目在摘要裡標成沒填，不是留空行', () => {
   assert.equal((text.match(/（沒有填）/g) || []).length, 3, '三題都沒填就該出現三次');
 });
 
-test('答案不寫進任何儲存空間', () => {
-  // 「我要防的是親密關係的人」這種答案留在裝置上，正好是最不該留的東西。
-  // 這是設計決定，不是還沒做，所以要有測試擋住日後順手加上去。
+test('這一支自己不碰任何儲存空間，存檔只經 anoniVault', () => {
+  // 預設不落地是設計決定。要存只能走 passkey 加密的暫存區（vault.js），這一支不能
+  // 自己開 localStorage 或 IndexedDB，也不能為了體驗方便偷偷加。
   for (const needle of ['localStorage', 'sessionStorage', 'indexedDB', 'document.cookie',
                         'caches.open', 'IDBDatabase']) {
     assert.ok(!code.includes(needle), `出現了 ${needle}`);
   }
+  assert.ok(code.includes('window.anoniVault'), '存檔沒有走 anoniVault');
+  // 寫入只在讀者按了之後：save 與 remove 都在 guarded 裡，沒有任何自動儲存的計時器
+  assert.ok(!/setTimeout\([^)]*save/i.test(code), '出現了自動儲存');
+});
+
+test('對手碰得到裝置就不提供存檔', () => {
+  // 「我要防的是親密關係的人」這種答案留在對方碰得到的裝置上，正好是最不該留的東西。
+  // 一國執法與國家級可以扣押裝置並要求解鎖，passkey 沒有比螢幕鎖更強。
+  assert.deepEqual(tool.NO_STORE.slice().sort(), ['intimate', 'police', 'state']);
+  assert.equal(tool.canStore([]), false, '沒選對手就沒有東西好存');
+  assert.equal(tool.canStore(['passerby']), true);
+  assert.equal(tool.canStore(['employer', 'platform']), true);
+  assert.equal(tool.canStore(['intimate']), false);
+  assert.equal(tool.canStore(['passerby', 'intimate']), false, '混進一個親密關係就整份不給存');
+  assert.equal(tool.canStore(['platform', 'police']), false);
+  assert.equal(tool.canStore(['state']), false);
+  // 畫面那一段要真的看 canStore，不能只在字串裡寫規則
+  const section = code.slice(code.indexOf('function storeSection'));
+  assert.ok(/canStore\(state\.adversaries\)/.test(section), 'storeSection 沒有問 canStore');
 });
 
 test('沒有任何網路請求', () => {

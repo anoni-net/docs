@@ -14,13 +14,18 @@
  * 要防親密關係卻沒把裝置列進資產、只防隨意路人卻打算大改工作流程。這些組合人自己
  * 填的時候看不出來，並排列出來就很明顯。
  *
- * === 為什麼不存 ===
+ * === 預設不存，存要讀者自己按 ===
  *
- * 答案不寫進 localStorage、sessionStorage 或 IndexedDB，重新整理就沒了。
+ * 這一支自己不碰 localStorage、sessionStorage 或 IndexedDB，重新整理就沒了。要留一份
+ * 有兩條路，都要讀者按：「複製摘要」貼到自己選的地方，或「存進我的暫存區」經
+ * window.anoniVault（docs/zh-TW/js/vault.js）用 passkey 加密寫進這台裝置，跟我的準備
+ * 清單同一份密文，這裡只動 threatModel 欄位。
  *
- * 這是刻意的。「我要防的是親密關係的人」這種答案留在裝置上，正好是家暴情境裡最不
- * 該留的東西，而那台裝置很可能就是對方碰得到的那一台。要留一份就按「複製摘要」，
- * 貼到自己選的地方，那個決定應該由讀者做而不是由這一頁替他做。
+ * 對手含親密關係、一國執法或國家級時不提供存檔，規則在 canStore()。這幾種對手碰得到
+ * 裝置，也可能要求解鎖，passkey 沒有比螢幕鎖更強。「我要防的是親密關係的人」這種
+ * 答案留在對方碰得到的裝置上，正好是家暴情境裡最不該留的東西。那時只剩複製摘要。
+ * tools/test_threatmodel.mjs 守這三件事：不直接碰儲存空間、只經 anoniVault、那幾種
+ * 對手選了就不提供。
  *
  * 三個語系共用這一份，docs/en/js/ 與 docs/zh-CN/js/ 底下是指向這裡的 symlink。
  * 純邏輯由 tools/test_threatmodel.mjs 原地抽出來測。
@@ -63,6 +68,13 @@
       if (has(adversaries, item.id) && item.power > top) top = item.power;
     }
     return top;
+  }
+
+  // 這幾種對手碰得到裝置、也可能要求解鎖，答案留在裝置上等於交給對方。選了就不提供存檔。
+  const NO_STORE = ["intimate", "police", "state"];
+  function canStore(adversaries) {
+    if (!adversaries.length) return false;
+    return !NO_STORE.some((id) => has(adversaries, id));
   }
 
   // 每一條規則看同一份答案，各自決定要不要出聲。kind 是 warn 的排在建議前面，
@@ -282,6 +294,15 @@
       word-break: break-word; user-select: all;
     }
     #threatmodel-tool .tm-empty { font-size: .76rem; opacity: .75; line-height: 1.7; }
+    #threatmodel-tool .tm-store {
+      border: .05rem dashed var(--md-default-fg-color--lighter);
+      border-radius: .2rem; padding: .6rem .8rem; margin: .8rem 0 1rem;
+    }
+    #threatmodel-tool .tm-store .tm-group { margin-top: 0; }
+    #threatmodel-tool .tm-store .tm-row { margin-bottom: 0; }
+    #threatmodel-tool .tm-store .tm-warn { margin-bottom: .6rem; }
+    #threatmodel-tool .tm-saved { font-size: .72rem; margin: 0 0 .5rem; }
+    #threatmodel-tool button[aria-busy="true"] { opacity: .7; }
     @media (pointer: coarse) {
       #threatmodel-tool button { min-height: 2.2rem; }
       #threatmodel-tool label { padding: .4rem 0; }
@@ -363,8 +384,31 @@
       copy: "複製摘要",
       copied: "已複製",
       reset: "全部清掉",
-      empty: "三題都答完再按「產生摘要」。答案不會存起來，重新整理就沒了。",
-      note: "答案只留在這個分頁裡，不寫進瀏覽器的任何儲存空間，也不送出去。要留一份就按「複製摘要」，貼到你自己選的地方。",
+      store: {
+        title: "留一份在這台裝置（選用）",
+        hint: "用你的 passkey 加密存進這台裝置的暫存區，跟我的準備清單同一份密文。站上什麼都不收。",
+        notOffered: "對手選了親密關係、一國執法或國家級，這裡不提供存檔。他們碰得到你的裝置，也可能要求你解鎖，passkey 沒有比螢幕鎖更強。要留一份就按「複製摘要」，貼到對方碰不到的地方。",
+        restore: "用 passkey 填回上次的答案",
+        restoreHint: "這台裝置的暫存區有東西。上次存過威脅模型的話，解開就填回來。",
+        restoreEmpty: "暫存區裡沒有存過威脅模型。",
+        save: "存進我的暫存區",
+        update: "更新存檔",
+        savedOn: "已存，{date}。",
+        remove: "刪掉存檔",
+        removed: "刪掉了。暫存區裡其他東西沒動。",
+        lock: "鎖上",
+        openExisting: "用我已有的鑰匙開",
+        createNew: "建一把新的鑰匙",
+        chooseHint: "這台裝置還沒有暫存區。已經在鑰匙頁建過 anoni.net 的 passkey 就用它開，還沒有的話建一把新的。",
+        waiting: "等你在瀏覽器的提示裡完成",
+        errors: {
+          cancelled: "你取消了，或瀏覽器沒有完成。再按一次。",
+          unsupported: "這個環境不允許用 passkey。要在正式站、https 網址，瀏覽器也沒有把功能關掉。",
+          failed: "沒有成功。換一個瀏覽器或密碼管理器試試。",
+        },
+      },
+      empty: "三題都答完再按「產生摘要」。答案預設不存，重新整理就沒了。",
+      note: "答案預設只留在這個分頁裡，不送出去。要留一份，按「複製摘要」貼到你自己選的地方，或用 passkey 加密存進這台裝置的暫存區。兩種都要你自己按。",
     },
     zh: {
       q1: "要保护什么",
@@ -437,8 +481,31 @@
       copy: "复制摘要",
       copied: "已复制",
       reset: "全部清掉",
-      empty: "三题都答完再按「生成摘要」。答案不会存起来，刷新就没了。",
-      note: "答案只留在这个标签页里，不写进浏览器的任何存储空间，也不送出去。要留一份就按「复制摘要」，贴到你自己选的地方。",
+      store: {
+        title: "留一份在这台设备（可选）",
+        hint: "用你的 passkey 加密存进这台设备的暂存区，跟我的准备清单同一份密文。站上什么都不收。",
+        notOffered: "对手选了亲密关系、一国执法或国家级，这里不提供存档。他们碰得到你的设备，也可能要求你解锁，passkey 没有比屏幕锁更强。要留一份就按「复制摘要」，贴到对方碰不到的地方。",
+        restore: "用 passkey 填回上次的答案",
+        restoreHint: "这台设备的暂存区有东西。上次存过威胁模型的话，解开就填回来。",
+        restoreEmpty: "暂存区里没有存过威胁模型。",
+        save: "存进我的暂存区",
+        update: "更新存档",
+        savedOn: "已存，{date}。",
+        remove: "删掉存档",
+        removed: "删掉了。暂存区里其他东西没动。",
+        lock: "锁上",
+        openExisting: "用我已有的钥匙开",
+        createNew: "创建一把新的钥匙",
+        chooseHint: "这台设备还没有暂存区。已经在钥匙页创建过 anoni.net 的 passkey 就用它开，还没有的话创建一把新的。",
+        waiting: "等你在浏览器的提示里完成",
+        errors: {
+          cancelled: "你取消了，或浏览器没有完成。再按一次。",
+          unsupported: "这个环境不允许用 passkey。要在正式站、https 网址，浏览器也没有把功能关掉。",
+          failed: "没有成功。换一个浏览器或密码管理器试试。",
+        },
+      },
+      empty: "三题都答完再按「生成摘要」。答案预设不存，刷新就没了。",
+      note: "答案预设只留在这个标签页里，不送出去。要留一份，按「复制摘要」贴到你自己选的地方，或用 passkey 加密存进这台设备的暂存区。两种都要你自己按。",
     },
     en: {
       q1: "What are you protecting",
@@ -511,8 +578,31 @@
       copy: "Copy summary",
       copied: "Copied",
       reset: "Clear everything",
-      empty: 'Answer all three questions, then press "Build summary". Nothing is saved: reloading clears it.',
-      note: 'Your answers stay in this tab. They are not written to any browser storage and are not sent anywhere. To keep a copy, press "Copy summary" and paste it somewhere you chose.',
+      store: {
+        title: "Keep a copy on this device (optional)",
+        hint: "Encrypted with your passkey into this device's stash, the same ciphertext as my preparation checklist. Nothing reaches the site.",
+        notOffered: "With someone close to you, law enforcement or state intelligence as an adversary, there is no save option here. They can reach your device and may be able to make you unlock it, and a passkey is no stronger than the screen lock. To keep a copy, press \"Copy summary\" and paste it somewhere they cannot reach.",
+        restore: "Fill in last time's answers with passkey",
+        restoreHint: "This device's stash has something in it. If you saved a threat model last time, unlocking fills it back in.",
+        restoreEmpty: "No threat model has been saved in the stash.",
+        save: "Save to my stash",
+        update: "Update the saved copy",
+        savedOn: "Saved, {date}.",
+        remove: "Delete the saved copy",
+        removed: "Deleted. Everything else in the stash is untouched.",
+        lock: "Lock",
+        openExisting: "Open with my existing key",
+        createNew: "Create a new key",
+        chooseHint: "There is no stash on this device yet. If you already created an anoni.net passkey on the key page, open with it; otherwise create a new one.",
+        waiting: "Finish the prompt in your browser",
+        errors: {
+          cancelled: "You cancelled, or the browser did not finish. Press again.",
+          unsupported: "This environment does not allow passkeys. It needs the production site, an https address, and a browser that has not turned the feature off.",
+          failed: "It did not work. Try another browser or password manager.",
+        },
+      },
+      empty: 'Answer all three questions, then press "Build summary". Nothing is saved by default: reloading clears it.',
+      note: 'By default your answers stay in this tab and are not sent anywhere. To keep a copy, press "Copy summary" and paste it somewhere you chose, or save it to the stash on this device, encrypted with a passkey. Both take a deliberate press.',
     },
   };
 
@@ -525,7 +615,7 @@
     return node;
   };
 
-  // 答案只在這裡。沒有 localStorage、沒有 IndexedDB，重新整理就回到空的。
+  // 答案只在這裡，預設不落地。要存得經下面暫存區那段，讀者自己按。
   const state = { assets: [], adversaries: [], budget: "", built: false, copied: false };
 
   const toggle = (list, id, on) => {
@@ -539,6 +629,181 @@
     const now = new Date();
     const pad = (n) => (n < 10 ? "0" + n : String(n));
     return now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
+  }
+
+
+  // --- 存進暫存區（選用）---
+  //
+  // 預設什麼都不存。讀者按了才經 window.anoniVault 用 passkey 加密寫進這台裝置，
+  // 跟我的準備清單同一份密文，這裡只動 threatModel 欄位。對手含親密關係、一國執法
+  // 或國家級時 canStore() 是 false，整段不給存的按鈕。
+  const vault = () => window.anoniVault;
+  const vs = {
+    support: null,   // null 還在查
+    exists: false,   // 這台裝置有沒有暫存區
+    unlocked: false,
+    busy: null,      // "restore" | "save" | "remove"
+    saved: null,     // 存檔的日期
+    dirty: false,    // 存過之後答案有沒有改
+    choosing: false, // 沒有暫存區時，正在選用舊鑰匙還是建新的
+    error: null,
+    message: "",
+  };
+
+  function classifyError(err) {
+    const name = err && err.name;
+    if (name === "NotAllowedError" || name === "AbortError") return "cancelled";
+    if (name === "NotSupportedError" || name === "SecurityError") return "unsupported";
+    return "failed";
+  }
+  async function vaultRefresh() {
+    const v = vault();
+    vs.support = !!(window.PublicKeyCredential && navigator.credentials && v && v.available());
+    vs.exists = vs.support ? await v.exists() : false;
+  }
+  async function guarded(action, work) {
+    vs.error = null;
+    vs.message = "";
+    vs.busy = action;
+    render();
+    try {
+      await work();
+    } catch (err) {
+      vs.error = classifyError(err);
+    }
+    vs.busy = null;
+    render();
+  }
+  function snapshot() {
+    return { v: 1, assets: state.assets.slice(), adversaries: state.adversaries.slice(), budget: state.budget, savedAt: today() };
+  }
+  async function writeSnapshot() {
+    const data = (await vault().read()) || {};
+    data.threatModel = snapshot();
+    await vault().save(data);
+    vs.saved = data.threatModel.savedAt;
+    vs.dirty = false;
+    vs.exists = true;
+  }
+  // 讀回來的 id 只認現在有的，舊版存了已經拿掉的選項就略過
+  function applySnapshot(saved) {
+    const known = (list, ids) => (Array.isArray(ids) ? ids : []).filter((id) => list.some((x) => x.id === id));
+    state.assets = known(ASSETS, saved.assets);
+    state.adversaries = known(ADVERSARIES, saved.adversaries);
+    state.budget = BUDGETS.indexOf(saved.budget) >= 0 ? saved.budget : "";
+    state.built = !!(state.assets.length && state.adversaries.length && state.budget);
+    state.copied = false;
+    vs.saved = saved.savedAt || null;
+    vs.dirty = false;
+  }
+  const restore = () =>
+    guarded("restore", async () => {
+      await vault().unlock();
+      vs.unlocked = true;
+      const data = (await vault().read()) || {};
+      if (data.threatModel) applySnapshot(data.threatModel);
+      else vs.message = t.store.restoreEmpty;
+    });
+  const saveNow = () =>
+    guarded("save", async () => {
+      if (!vs.unlocked) {
+        await vault().unlock();
+        vs.unlocked = true;
+      }
+      await writeSnapshot();
+    });
+  const saveWithExisting = () =>
+    guarded("save", async () => {
+      await vault().openWithExisting(null);
+      vs.unlocked = true;
+      vs.choosing = false;
+      await writeSnapshot();
+    });
+  const saveWithNew = () =>
+    guarded("save", async () => {
+      await vault().create(null);
+      vs.unlocked = true;
+      vs.choosing = false;
+      await writeSnapshot();
+    });
+  const remove = () =>
+    guarded("remove", async () => {
+      const data = (await vault().read()) || {};
+      delete data.threatModel;
+      await vault().save(data);
+      vs.saved = null;
+      vs.dirty = true;
+      vs.message = t.store.removed;
+    });
+  function lock() {
+    vault().lock();
+    vs.unlocked = false;
+    vs.choosing = false;
+    vs.message = "";
+    vs.error = null;
+    render();
+  }
+
+  function tmButton(label, onClick) {
+    const node = el("button", null, label);
+    node.type = "button";
+    node.addEventListener("click", onClick);
+    return node;
+  }
+  function busyButton(label) {
+    const node = tmButton(label, () => {});
+    node.setAttribute("aria-busy", "true");
+    node.disabled = true;
+    return node;
+  }
+  // 頂部：有暫存區、還沒填任何答案時，先問要不要填回上次的。解開了卻沒有東西
+  // 可填（暫存區裡沒存過威脅模型）也要留在這裡說，不然讀者按下去像沒反應。
+  function restoreBox() {
+    if (!vs.support || !vs.exists) return null;
+    if (state.assets.length || state.adversaries.length || state.budget) return null;
+    const box = el("div", "tm-store");
+    const row = el("div", "tm-row");
+    if (!vs.unlocked) {
+      box.appendChild(el("p", "tm-hint", t.store.restoreHint));
+      row.appendChild(vs.busy === "restore" ? busyButton(t.store.waiting) : tmButton(t.store.restore, restore));
+    } else {
+      row.appendChild(tmButton(t.store.lock, lock));
+    }
+    box.appendChild(row);
+    if (vs.error) box.appendChild(el("p", "tm-warn", t.store.errors[vs.error] || t.store.errors.failed));
+    if (vs.message) box.appendChild(el("p", "tm-hint", vs.message));
+    return box;
+  }
+  // 摘要下方：存、更新、刪、鎖
+  function storeSection() {
+    if (!vs.support) return null;
+    const box = el("div", "tm-store");
+    box.appendChild(el("p", "tm-group", t.store.title));
+    const allowed = canStore(state.adversaries);
+    box.appendChild(allowed ? el("p", "tm-hint", t.store.hint) : el("p", "tm-warn", t.store.notOffered));
+    if (vs.unlocked && vs.saved) box.appendChild(el("p", "tm-saved", t.store.savedOn.replace("{date}", vs.saved)));
+    if (vs.choosing && !vs.busy) box.appendChild(el("p", "tm-hint", t.store.chooseHint));
+    const row = el("div", "tm-row");
+    if (vs.busy) row.appendChild(busyButton(t.store.waiting));
+    else if (vs.choosing) {
+      row.appendChild(tmButton(t.store.openExisting, saveWithExisting));
+      row.appendChild(tmButton(t.store.createNew, saveWithNew));
+    } else {
+      if (allowed) {
+        if (!vs.exists) row.appendChild(tmButton(t.store.save, () => { vs.choosing = true; render(); }));
+        else {
+          const b = tmButton(vs.saved ? t.store.update : t.store.save, saveNow);
+          b.disabled = !!(vs.saved && !vs.dirty);
+          row.appendChild(b);
+        }
+      }
+      if (vs.unlocked && vs.saved) row.appendChild(tmButton(t.store.remove, remove));
+      if (vs.unlocked) row.appendChild(tmButton(t.store.lock, lock));
+    }
+    box.appendChild(row);
+    if (vs.error) box.appendChild(el("p", "tm-warn", t.store.errors[vs.error] || t.store.errors.failed));
+    if (vs.message) box.appendChild(el("p", "tm-hint", vs.message));
+    return box;
   }
 
   function choiceGroup(question) {
@@ -559,6 +824,7 @@
       input.checked = question.checked(item.id);
       input.addEventListener("change", () => {
         question.onChange(item.id, input.checked);
+        vs.dirty = true;
         // 重畫整份輸出。答案改了，之前那份摘要就不再是這份答案的摘要。
         state.built = false;
         state.copied = false;
@@ -573,6 +839,9 @@
 
   function render() {
     root.textContent = "";
+
+    const top = restoreBox();
+    if (top) root.appendChild(top);
 
     root.appendChild(choiceGroup({
       key: "q1",
@@ -668,8 +937,12 @@
     copyRow.appendChild(copy);
     root.appendChild(copyRow);
 
+    const store = storeSection();
+    if (store) root.appendChild(store);
+
     root.appendChild(el("p", "tm-hint", t.note));
   }
 
   render();
+  vaultRefresh().then(render, render);
 })();

@@ -28,7 +28,7 @@ icon: material/tools
 
 -   :material-clipboard-check-outline: **[威脅模型清單](threat-model.md)**
 
-    把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡的錯配。答案不存起來，重新整理就沒了。
+    把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡的錯配。答案預設不存，要留的話用 passkey 加密存在你的裝置上。
 
 -   :material-dice-multiple-outline: **[密語與密碼產生器](passphrase.md)**
 

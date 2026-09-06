@@ -22,7 +22,7 @@ EFF frames threat modeling as five questions, worth keeping on a single sheet of
 - How bad are the consequences if I fail?
 - How much trouble am I willing to go through to prevent those?
 
-The [threat model checklist](../utils/threat-model.md) turns questions one, two and five into something you can click through, and flags the combinations that will not hold. It runs in your browser, saves nothing, and works offline. Questions three and four stay yours to judge, and the section below is why.
+The [threat model checklist](../utils/threat-model.md) turns questions one, two and five into something you can click through, and flags the combinations that will not hold. It runs in your browser, saves nothing unless you ask it to, and works offline. Questions three and four stay yours to judge, and the section below is why.
 
 <figure markdown="span">
     <img src="https://assets.anoni.net/diagrams/threat-model-quadrant.en.svg"
