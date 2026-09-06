@@ -23,6 +23,8 @@ The common advice is ordered below by how much it actually blocks, and each item
 
 Start with email, then online banking, then the messaging app you actually use daily. The four together take about an hour, and every tool involved has a workable free version. Why these four, and what comes after them, is below.
 
+You can tick each one off in [my preparation checklist](../utils/checklist.md). Ticks are encrypted with a passkey and stay on your device; nothing reaches the site. Tier one and tier two of this page are both in it.
+
 ## You are facing three different adversaries
 
 They differ in intensity, in how often they show up, and in what they cost you, so they call for different defenses.
@@ -161,7 +163,7 @@ Each of these has a clear use. They are just frequently mistaken for the main li
 
 ## A yearly review
 
-Not a redo. Just work through these questions once a year.
+Not a redo. Just work through these questions once a year. Items ticked in [my preparation checklist](../utils/checklist.md) carry the date you ticked them, so start with the ones that have sat the longest.
 
 - Any reused passwords left in the manager? Most tools check this for you
 - Any important accounts still on SMS that now support something stronger?
@@ -203,6 +205,7 @@ The baseline above assumes no specific adversary. When one of the following beco
 - [What surveillance can actually do](../basics/surveillance-capability.md) — capability limits for the commercial-collection and targeted-investigation adversaries above, plus telecom retention and commercial spyware
 - [Why metadata matters](../basics/metadata.md) — why encrypting content still leaves a great deal behind
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — account layering and retiring an identity
+- [My preparation checklist](../utils/checklist.md) — this page's items as a list you can tick off, encrypted with a passkey and kept on your device
 - [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} — the canonical general-audience guide, available in 14 languages
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support when something has already gone wrong
 

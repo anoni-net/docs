@@ -26,6 +26,8 @@ A normal phone is a poor travel device for a sensitive trip. It holds years of m
 
 This is one half of [threat modeling](../basics/threat-model.md): before you decide how far to go, name the adversary (customs? a hostile destination? a colleague who borrows your laptop?), what they can reach, and the consequence if they reach it. A short threat model per trip fits on one sheet of paper and reliably catches preparation gaps.
 
+The pre-departure steps on this page are also in [my preparation checklist](../utils/checklist.md), so you can tick them off before you leave. Ticks are encrypted with a passkey and stay on your device.
+
 ## Back up before you go, and watch the cloud double-edge
 
 Reducing what's on your device only works if you can get it back. Make a full backup before you strip anything down, ideally an **encrypted local backup** to a drive you leave at home rather than a cloud backup you can reach from the road.
@@ -153,6 +155,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.
 - [Threat modeling](../basics/threat-model.md) — the five questions to ask before deciding how far to minimize for a given trip.
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — keeping business contacts, conference socializing, and personal accounts on separate layers, so one being flagged doesn't reach the others.
+- [My preparation checklist](../utils/checklist.md) — the pre-departure steps from this page, plus the everyday baseline, as a list you can tick off; encrypted with a passkey and kept on your device.
 - [Regional Observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
 - [EFF — Things to Consider When Crossing the U.S. Border](https://ssd.eff.org/module/things-consider-when-crossing-us-border){target="_blank"} — the canonical US-border guide, and EFF's deeper [Digital Privacy at the U.S. Border](https://www.eff.org/wp/digital-privacy-us-border-2017){target="_blank"} whitepaper.
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if a device is seized or you're detained.

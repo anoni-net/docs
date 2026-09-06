@@ -45,7 +45,7 @@ icon: material/bag-suitcase-outline
 
 ## 出發前的通用準備（每個地點都適用）
 
-這幾項不分地點都建議做，風險越高的目的地越要做滿。
+這幾項不分地點都建議做，風險越高的目的地越要做滿。出發前逐項勾在[我的準備清單](../utils/checklist.md)，這一節的八項都在裡面。
 
 - **帶最簡化的裝置**。出差用的手機、筆電裡，跟行程無關的資料越少越好。高風險地建議準備一支只裝必要 App 的乾淨機，敏感資料留在雲端或家裡，需要時再透過加密連線取用。要不要另外準備一台機器、能不能在外地買、帶回來會發生什麼，展開在下方的 [乾淨機與 burner 手機的取捨](#乾淨機與-burner-手機的取捨)。
 - **出發前裝好並測試規避工具**。VPN、Tor Browser 與橋接都要在家裡先裝好、連一次確認可用。到了審查嚴的地方，App 商店與工具官網本身就連不上，落地才想下載通常來不及。Tor 的橋接設定見 [Tor Snowflake 橋接點](../tools/tor-snowflake.md) 與 [Tor Browser 進階設定](../tools/tor-browser-advanced.md)，自架橋接見 [如何架設 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
@@ -259,3 +259,4 @@ VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大
 - [社運行動者的數位準備](./activist.md)：一次性手機在動員場景的判斷與事前準備步驟，跟本文的乾淨機是同一套裝置思路。
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：換裝置擋不掉帳號層的關聯，這頁處理帳號怎麼分層。
 - [Tor Browser 進階設定](../tools/tor-browser-advanced.md) 與 [什麼是 Tor](../tools/what-is-tor.md)：橋接與規避設定的操作細節。
+- [我的準備清單](../utils/checklist.md)：出發前的通用準備收成可勾的清單，連同平常該做到的那些，用 passkey 加密存在你的裝置上。
