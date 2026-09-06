@@ -69,13 +69,15 @@ const harness = `
   const lib = async () => age;
   const importBase = async () => base;
   ${grab(/^  async function identityOf\(keyBytes\) \{[\s\S]*?\n  \}/m).replace('await import("@scure/base")', 'await importBase()')}
+  ${grab(/^  const KEY_BYTES = .*$/m)}
+  ${grab(/^  async function keyFromIdentity\(text\) \{[\s\S]*?\n  \}/m).replace('await import("@scure/base")', 'await importBase()')}
   ${grab(/^  async function recipientOf\(identity\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function encryptData\(data, keyBytes, backupRecipient\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function decryptData\(bytes, identity\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const ENVELOPE_VERSION = .*$/m)}
   ${grab(/^  function wrapEnvelope\(data, backupRecipient\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function unwrapEnvelope\(obj\) \{[\s\S]*?\n  \}/m)}
-  return { identityOf, recipientOf, encryptData, decryptData, wrapEnvelope, unwrapEnvelope, ENVELOPE_VERSION };
+  return { identityOf, keyFromIdentity, recipientOf, encryptData, decryptData, wrapEnvelope, unwrapEnvelope, ENVELOPE_VERSION };
 `;
 const vault = new Function('age', 'base', harness)(age, base);
 
@@ -83,6 +85,18 @@ let passed = 0;
 let failed = 0;
 const tests = [];
 const test = (name, fn) => tests.push([name, fn]);
+
+test('另一台顯示的字串解回同一把金鑰，壞的、別種前綴、長度不對都拒絕', async () => {
+  const key = crypto.getRandomValues(new Uint8Array(32));
+  const identity = await vault.identityOf(key);
+  assert.deepEqual(await vault.keyFromIdentity(identity), key, '編碼再解碼要回到同一把');
+  assert.deepEqual(await vault.keyFromIdentity('  ' + identity.toLowerCase() + '\n'), key, '前後空白與小寫要容忍');
+  const theirs = await age.generateX25519Identity();
+  assert.equal((await vault.keyFromIdentity(theirs)).length, 32, 'typage 產的私鑰是同一種編碼');
+  for (const bad of ['', 'hello', identity.slice(0, -1), identity.slice(0, -1) + (identity.endsWith('Q') ? 'P' : 'Q'), await vault.recipientOf(identity), 'AGE-SECRET-KEY-PQ-1' + 'Q'.repeat(120)]) {
+    await assert.rejects(() => vault.keyFromIdentity(bad), /badKey/, `不該收：${bad.slice(0, 30)}`);
+  }
+});
 
 test('那 32 個位元組編出來的 identity 跟 typage 自己產的同一個形狀', async () => {
   const key = new Uint8Array(32).fill(7);

@@ -110,7 +110,9 @@ test('三語系頁面都掛了工具、兩支腳本與 import map，offline_asse
     assert.ok(text.includes('<script type="importmap">'), `${dir} 沒有 import map`);
     assert.ok(text.includes('  - js/vault.js'), `${dir} 的 offline_assets 沒列 js/vault.js`);
     assert.ok(text.includes('  - js/checklist.js'), `${dir} 的 offline_assets 沒列 js/checklist.js`);
-    assert.deepEqual(vendor(page), vendor(path.join(DOCS, dir, 'utils', 'passkey.md')), `${dir} 的 vendor 清單跟鑰匙頁不同`);
+    assert.deepEqual(vendor(page).filter((l) => l.includes('vendor/age/')), vendor(path.join(DOCS, dir, 'utils', 'passkey.md')), `${dir} 的 age vendor 清單跟鑰匙頁不同`);
+    for (const extra of ['utils/vendor/qrcode-generator.js', 'utils/vendor/jsQR.js']) assert.ok(text.includes(`  - ${extra}`), `${dir} 的 offline_assets 少了 ${extra}`);
+    assert.ok(text.includes('<script src="../vendor/qrcode-generator.js"></script>') && text.includes('<script src="../vendor/jsQR.js"></script>'), `${dir} 沒載 QR 的 vendor`);
   }
 });
 
@@ -154,6 +156,19 @@ test('傳到另一台：密文走網址片段到 QR 串流頁，回來就匯入�
   const incomingAt = src.indexOf('const incoming = takeIncoming()');
   assert.ok(incomingAt > 0 && incomingAt < src.indexOf('refresh().then'), '要在查暫存區之前就把片段拿走');
   assert.ok(/importBytes\(incoming, t\.importedFromQr, "badImport"\)/.test(src), '帶回來的密文沒有走匯入');
+});
+
+test('登錄另一台：鑰匙限時顯示、鎖上就收、B 端經 keyFromIdentity 與 enrollDevice', () => {
+  assert.ok(/const ENROLL_MS = 60 \* 1000;/.test(src), '顯示鑰匙要限時一分鐘');
+  assert.ok(/state\.enroll\.identity = await vault\(\)\.exportIdentity\(\)/.test(src), '顯示的字串要從 exportIdentity 來');
+  assert.ok(/if \(left <= 0\) \{\s*closeEnroll\(\);/.test(src), '時間到要自己關掉');
+  const lockAt = src.indexOf('const lock = () =>');
+  assert.ok(src.slice(lockAt, lockAt + 300).includes('closeEnrollSilently();'), '鎖上時沒有把顯示中的鑰匙收掉');
+  assert.ok(/window\.addEventListener\("pagehide", closeEnrollSilently\)/.test(src), '離開頁面沒有收掉');
+  assert.ok(/const bytes = await vault\(\)\.keyFromIdentity\(state\.enroll\.input\);\s*await vault\(\)\.enrollDevice\(bytes\);/.test(src), 'B 端沒有經 keyFromIdentity 再 enrollDevice');
+  assert.ok(/window\.qrcode\(0, "M"\)/.test(src) && /window\.jsQR\(pixels\.data, width, height\)/.test(src), 'QR 的產生與解碼要交給 vendor');
+  assert.ok(!/new Image\(/.test(src) && /createImageBitmap\(file\)/.test(src), '照片用 createImageBitmap 解，不走 Image 與 object URL');
+  assert.ok(!/setInterval\([^)]*save/i.test(src), '計時器不能拿來自動存');
 });
 
 test('原始碼沒有把勾選送出去或寫進 localStorage 的手段', () => {

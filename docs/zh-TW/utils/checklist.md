@@ -43,6 +43,8 @@ offline_assets:
   - utils/vendor/age/noble-post-quantum/ml-kem.js
   - utils/vendor/age/noble-post-quantum/utils.js
   - utils/vendor/age/scure-base/index.js
+  - utils/vendor/qrcode-generator.js
+  - utils/vendor/jsQR.js
   - js/vault.js
   - js/checklist.js
 ---
@@ -82,6 +84,8 @@ offline_assets:
 </script>
 
 <div id="checklist-tool"></div>
+<script src="../vendor/qrcode-generator.js"></script>
+<script src="../vendor/jsQR.js"></script>
 <script src="../../js/vault.js"></script>
 <script src="../../js/checklist.js"></script>
 
@@ -93,4 +97,5 @@ offline_assets:
 - 這份清單只記你勾了什麼跟哪一天勾的。passkey 丟了、清單打不開，重勾一次就好，這裡沒有備援金鑰那一步。
 - 文章改標題不影響已勾的項目，勾選跟著項目的內部編號走。
 - 「每年重看」那一組是文章裡一年一次的檢查那九題。任何項目超過一年沒動會標出來，「只看超過一年沒動的」把清單縮成該重看的那幾項，按「今天確認過」把日期換成今天。
+- passkey 沒有同步到另一台時（不同生態系、硬體金鑰），這台解開後按「登錄另一台裝置」，會顯示一個 QR code 與一串字，限時一分鐘。另一台按「用另一台的鑰匙登錄這台」拍照或貼上，就建出一把用同一份鑰匙的 passkey。那串就是資料金鑰本身，只在自己的兩台裝置之間用。
 - [威脅模型清單](threat-model.md)是另一個清單型工具，答的是要保護什麼、防誰，答案不存起來。這一頁記的是做到哪一步。
