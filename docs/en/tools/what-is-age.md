@@ -86,7 +86,7 @@ age also gives some things up. It does not sign, so being able to open a file sa
 
 When a reader needs to open a backup three years from now, they may have nothing but a computer with a command-line tool, and whether this site still exists is not guaranteed. age is a public format with three interoperable independent implementations, and any computer can open it. That is the entire argument for a public format over a custom one.
 
-Among public formats, age over PGP comes down to every row of the table above pointing the same way: no options means nothing to misconfigure, a short specification means a browser implementation small enough to audit, and passphrase mode needs no key management at all. [Local file encryption](../utils/age.md) does passphrase mode only. The reader picks a file, types a passphrase, and downloads.
+Among public formats, age over PGP comes down to every row of the table above pointing the same way: no options means nothing to misconfigure, a short specification means a browser implementation small enough to audit, and passphrase mode needs no key management at all. [Local file encryption](../utils/age.md) offers passphrase, passkey and public-key modes; the simplest path is pick a file, type a passphrase, download. The reader picks a file, types a passphrase, and downloads.
 
 PGP stays where it belongs. The [sensitive upload](../community/upload-sensitive.md) process on this site uses PGP, because that needs a long-lived identity, has to work with the email ecosystem, and the people on the other end are journalists and organisations who already use PGP. The split is: PGP for mail and identity, age for files and backups.
 

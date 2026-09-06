@@ -165,7 +165,7 @@
       noWebAuthn: "這個瀏覽器沒有 passkey 功能，清單存不起來。Tor Browser 整個關閉了 WebAuthn。",
       noVault: "存清單用的程式沒有載入。第一次使用需要連線，之後留在裝置上。",
       introLocked: "清單存在這台裝置上，用 passkey 鎖著。",
-      introEmpty: "這台裝置上還沒有清單。已經在鑰匙頁建過 anoni.net 的 passkey 就用它開，密碼管理器裡只會有一筆。還沒有的話直接建一把新的。",
+      introEmpty: "這台裝置上還沒有清單。已經在鑰匙頁建過 anoni.net 的 passkey 就用它開，密碼管理器裡只會有一筆。還沒有的話直接建一把新的，密碼管理器裡會多一筆叫 anoni.net 的 passkey。",
       keyPage: "passkey 鑰匙頁",
       unlock: "用 passkey 解開",
       openExisting: "用我已有的鑰匙開",
@@ -178,6 +178,12 @@
       exportBlob: "匯出",
       importBlob: "匯入",
       exported: "匯出的是標準 age 檔，另一台裝置匯進去之後用同一把 passkey 解開。",
+      clearDevice: "清除這台裝置的暫存區",
+      clearHint: "會刪掉這台裝置上的密文，其他裝置與密碼管理器裡的 passkey 不受影響。沒有匯出的話，勾選、威脅模型存檔與收件人簿都會沒。",
+      clearConfirm: "確定清除",
+      clearCancel: "取消",
+      cleared: "清掉了。密碼管理器裡那把 passkey 要自己刪：iPhone 在設定的「密碼」裡搜 anoni.net，Android 在 Google 密碼管理員，Bitwarden 與 1Password 在它們的項目裡。",
+      deviceRisk: "這裡的加密強度等於保管 passkey 的地方，知道你解鎖密碼或密碼管理器主密碼的人一樣開得了。",
       enrollShow: "登錄另一台裝置",
       enrollWarn: "下面這串就是資料金鑰本身。拍到的人可以永遠打開你的暫存區，只在你自己的兩台裝置之間用。一分鐘後自動關掉，這一頁不留它。",
       enrollSteps: "另一台打開我的準備清單，按「用另一台的鑰匙登錄這台」，拍下 QR code 或貼上字串。登錄完再用「傳到另一台」把資料搬過去。",
@@ -244,7 +250,7 @@
       noWebAuthn: "这个浏览器没有 passkey 功能，清单存不起来。Tor Browser 整个关闭了 WebAuthn。",
       noVault: "存清单用的程序没有加载。第一次使用需要联网，之后留在设备上。",
       introLocked: "清单存在这台设备上，用 passkey 锁着。",
-      introEmpty: "这台设备上还没有清单。已经在钥匙页创建过 anoni.net 的 passkey 就用它开，密码管理器里只会有一笔。还没有的话直接创建一把新的。",
+      introEmpty: "这台设备上还没有清单。已经在钥匙页创建过 anoni.net 的 passkey 就用它开，密码管理器里只会有一笔。还没有的话直接创建一把新的，密码管理器里会多一笔叫 anoni.net 的 passkey。",
       keyPage: "passkey 钥匙页",
       unlock: "用 passkey 解开",
       openExisting: "用我已有的钥匙开",
@@ -257,6 +263,12 @@
       exportBlob: "导出",
       importBlob: "导入",
       exported: "导出的是标准 age 文件，另一台设备导进去之后用同一把 passkey 解开。",
+      clearDevice: "清除这台设备的暂存区",
+      clearHint: "会删掉这台设备上的密文，其他设备与密码管理器里的 passkey 不受影响。没有导出的话，勾选、威胁模型存档与收件人簿都会没。",
+      clearConfirm: "确定清除",
+      clearCancel: "取消",
+      cleared: "清掉了。密码管理器里那把 passkey 要自己删：iPhone 在设置的「密码」里搜 anoni.net，Android 在 Google 密码管理器，Bitwarden 与 1Password 在它们的项目里。",
+      deviceRisk: "这里的加密强度等于保管 passkey 的地方，知道你解锁密码或密码管理器主密码的人一样开得了。",
       enrollShow: "登录另一台设备",
       enrollWarn: "下面这串就是数据密钥本身。拍到的人可以永远打开你的暂存区，只在你自己的两台设备之间用。一分钟后自动关掉，这一页不留它。",
       enrollSteps: "另一台打开我的准备清单，按「用另一台的钥匙登录这台」，拍下 QR code 或贴上字串。登录完再用「传到另一台」把数据搬过去。",
@@ -323,7 +335,7 @@
       noWebAuthn: "This browser has no passkey support, so the list cannot be stored. Tor Browser turns WebAuthn off entirely.",
       noVault: "The code that stores the list has not loaded. The first use needs a connection; after that it stays on the device.",
       introLocked: "Your list is on this device, locked with your passkey.",
-      introEmpty: "There is no list on this device yet. If you already created an anoni.net passkey on the key page, open with it and your password manager keeps a single entry. Otherwise create a new one here.",
+      introEmpty: "There is no list on this device yet. If you already created an anoni.net passkey on the key page, open with it and your password manager keeps a single entry. Otherwise create a new one here; your password manager will gain an entry named anoni.net.",
       keyPage: "passkey key page",
       unlock: "Unlock with passkey",
       openExisting: "Open with my existing key",
@@ -336,6 +348,12 @@
       exportBlob: "Export",
       importBlob: "Import",
       exported: "The export is a standard age file. Import it on another device and unlock with the same passkey.",
+      clearDevice: "Clear the stash on this device",
+      clearHint: "Deletes the ciphertext on this device only; other devices and the passkey in your password manager are untouched. Without an export, the ticks, the saved threat model answers and the address book are gone.",
+      clearConfirm: "Yes, clear it",
+      clearCancel: "Cancel",
+      cleared: "Cleared. The passkey in your password manager is yours to delete: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item.",
+      deviceRisk: "The encryption here is only as strong as the place that keeps the passkey. Anyone who knows your unlock code or your password manager's master password can open it too.",
       enrollShow: "Enrol another device",
       enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
       enrollSteps: "On the other device, open my preparation checklist, press Enrol this device with a key from another, then photograph this QR code or paste the string. Once enrolled, use Send to another device to move the data across.",
@@ -463,6 +481,7 @@
     unlocked: false,
     onlyStale: false, // 只看超過一年沒動的
     enroll: { showing: false, identity: "", until: 0, timer: null, here: false, input: "" }, // 登錄另一台
+    clearing: false, // 清除這台裝置：按了第一下，等確認
     busy: null, // "unlock" | "open" | "create" | "import" | "export"
     data: null, // 解開後整份資料，checks 只是其中一欄
     error: null,
@@ -616,9 +635,26 @@
   }
 
 
+  // --- 清除這台裝置 ---
+  //
+  // 刪的是這台裝置上的密文，兩段式，第二下才真的刪。原本這功能只在實驗頁，清單是正式
+  // 工具，退場的路要在這裡。
+  const clearDevice = () =>
+    guard("clear", async () => {
+      closeEnrollSilently();
+      await vault().clear();
+      state.clearing = false;
+      state.unlocked = false;
+      state.data = null;
+      boxes.clear();
+      list.textContent = "";
+      await refresh();
+      state.message = t.cleared;
+    });
+
   // --- 登錄另一台裝置 ---
   //
-  // passkey 不會同步過去的第二台（不同生態系、硬體金鑰）要能開同一份暫存區，得把那
+  // passkey 不會同步過去的第二台（例如手機用 iCloud 鑰匙圈、電腦用 Windows Hello）要能開同一份暫存區，得把那
   // 32 個位元組帶過去一次。A 解開後把鑰匙用 age 私鑰的編碼顯示成 QR code 與文字，限時
   // 一分鐘；B 拍照或貼上，用同一個 user.id 建一把新的 passkey。那串就是資料金鑰本身，
   // 顯示前先警告，關掉或鎖上就從記憶體拿掉，這一頁不留。
@@ -922,6 +958,7 @@
         render();
       }));
     }
+    head.appendChild(el("p", "cl-hint", t.deviceRisk));
     head.appendChild(row);
     if (!state.exists && state.enroll.here) head.appendChild(enrollHerePanel());
     const file = document.createElement("input");
@@ -958,8 +995,21 @@
       row.appendChild(button(t.exportBlob, null, exportBlob));
       row.appendChild(button(t.transfer, null, transfer));
       row.appendChild(button(t.enrollShow, null, showEnroll));
+      if (state.clearing) {
+        row.appendChild(button(t.clearConfirm, null, clearDevice));
+        row.appendChild(button(t.clearCancel, null, () => {
+          state.clearing = false;
+          render();
+        }));
+      } else {
+        row.appendChild(button(t.clearDevice, null, () => {
+          state.clearing = true;
+          render();
+        }));
+      }
     }
     head.appendChild(row);
+    if (state.clearing && !state.busy) head.appendChild(el("p", "cl-warn", t.clearHint));
     if (state.enroll.showing && !state.busy) head.appendChild(enrollShowPanel());
   }
   function render() {

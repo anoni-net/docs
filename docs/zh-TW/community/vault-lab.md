@@ -50,6 +50,8 @@ offline_assets:
 
 # 加密暫存區（實驗）
 
+這是開發用的實驗頁，留著量機制、試新東西。給讀者用的工具是[我的準備清單](../utils/checklist.md)，機制與限制的說明在[什麼是 passkey](../tools/what-is-passkey.md)。
+
 一個用 passkey 解鎖的本機加密儲存。建立時產生一把資料金鑰，放進 passkey 的 `user.id`，之後在任何有這把 passkey 的裝置上驗證一次就能解開。不必記密語。
 
 這一頁是實驗，內容暫時只有一個文字欄位。真正要放的是 checklist 那類讀者主動打開才看的東西。
