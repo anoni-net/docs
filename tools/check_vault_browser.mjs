@@ -43,6 +43,7 @@ import { spawn } from 'node:child_process';
 const BASE = process.env.VAULT_BASE || 'http://localhost:8011/docs/';
 const PASSKEY_URL = new URL('utils/passkey/', BASE).href;
 const VAULT_URL = new URL('community/vault-lab/', BASE).href;
+const CHECKLIST_URL = new URL('utils/checklist/', BASE).href;
 const SHOTS = process.argv.includes('--shots');
 const OUT = path.join(os.tmpdir(), 'vault-shots');
 
@@ -373,6 +374,53 @@ test('手機寬度下按鈕有間距、夠高，不會誤按', async () => {
         }
       }
     }
+  } finally {
+    await page.close();
+  }
+});
+
+test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在', async () => {
+  const page = await openChrome();
+  try {
+    await page.goto(PASSKEY_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#passkey-tool', '建立 passkey')", '鑰匙頁畫出來');
+    await page.evaluate("__vl.click('#passkey-tool', '建立 passkey')");
+    await page.waitFor("/建好了/.test(__vl.text('#passkey-tool'))", '鑰匙建好');
+
+    await page.goto(CHECKLIST_URL);
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '用我已有的鑰匙開')", '清單頁給出「用已有的鑰匙」');
+    await page.evaluate("__vl.click('#checklist-tool', '用我已有的鑰匙開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '清單畫出來');
+    assert.equal((await page.credentials()).length, 1, '用已有的鑰匙開不該多出 credential');
+
+    const total = await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]').length");
+    const links = await page.evaluate(`
+      [...document.querySelectorAll('#checklist-tool .cl-item a')]
+        .map((a) => ({ blank: a.target === '_blank', noopener: /noopener/.test(a.rel), href: a.getAttribute('href') }))
+    `);
+    assert.equal(links.length, total, '每個項目都要有連結');
+    for (const l of links) assert.ok(l.blank && l.noopener, `連結沒有開新分頁：${l.href}`);
+
+    await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]')[0].click(); true");
+    await page.evaluate("document.querySelectorAll('#checklist-tool input[type=checkbox]')[1].click(); true");
+    await page.waitFor("/已存/.test(__vl.text('#checklist-tool'))", '自動存');
+    assert.match(await page.evaluate("document.querySelector('#checklist-tool .cl-progress').textContent"), new RegExp(`2 / ${total}`));
+    await page.shot('05-checklist-ticked');
+
+    await page.send('Page.reload');
+    await page.waitFor("document.readyState === 'complete'", '重新整理');
+    await page.evaluate(HELPERS);
+    await page.waitFor("!!__vl.button('#checklist-tool', '用 passkey 解開')", '重新整理後回到鎖上狀態');
+    await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool input[type=checkbox]').length > 0", '再次解開');
+    const checked = await page.evaluate("[...document.querySelectorAll('#checklist-tool input[type=checkbox]')].filter((i) => i.checked).length");
+    assert.equal(checked, 2, '勾的兩項要留到下一次');
+    const dates = await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-date')].map((d) => d.textContent).filter(Boolean)");
+    assert.equal(dates.length, 2, '勾的項目要顯示日期');
+    for (const d of dates) assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `日期格式不對：${d}`);
+    assert.equal((await page.credentials()).length, 1, '解開不該多出 credential');
   } finally {
     await page.close();
   }

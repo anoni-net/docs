@@ -173,6 +173,16 @@ jobs:
       - name: passkey 鑰匙
         run: node tools/test_passkey.mjs
 
+      # 我的準備清單：項目 id 進了讀者的密文就不能改，標籤與連結三語系各自維護。守三邊
+      # 對得上、連到的文章存在、三語系頁面與 nav 的接線，另守原始碼沒有送出或落地的手段
+      - name: 我的準備清單
+        run: node tools/test_checklist.mjs
+
+      # 三語系頁面的 <script src> 都要解析得到檔案。en 與 zh-CN 的 js/ 是逐檔 symlink，
+      # 漏補一支的話 zh-TW 正常、另兩個語系停在「程式沒有載入」，建置與 check_precache 都不報
+      - name: 頁面裡的 script src
+        run: node tools/test_script_src.mjs
+
       # 威脅模型清單：建議的頁面存不存在，以及答案有沒有被存到裝置上
       - name: 威脅模型清單
         run: node tools/test_threatmodel.mjs

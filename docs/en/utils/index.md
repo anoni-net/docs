@@ -42,6 +42,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Create a passkey for this site, store it in your password manager or keychain, test an unlock, then generate a backup key. Local file encryption can then use it as the key, with no passphrase to remember. No account, no server, nothing stored here.
 
+-   :material-checkbox-marked-outline: **[My preparation checklist](checklist.md)**
+
+    The site's action items gathered into one list you can tick off. Progress is encrypted with your passkey and stays on your device; one fingerprint next time and it is back. No account, no server, nothing stored here.
+
 -   :material-qrcode: **[QR code generator](qrcode.md)**
 
     Turn onion addresses, Tor bridges and other long, easily mistyped strings into a QR code the person in front of you can read with a camera, without anything passing through a server. Downloadable as SVG for printing.

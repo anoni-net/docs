@@ -42,6 +42,10 @@ icon: material/tools
 
     创建一把这个网站的 passkey，存进你的密码管理器或钥匙串，试一次解锁，再生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语。没有账号、没有服务器，站上什么都不存。
 
+-   :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
+
+    把站上的行动建议收成一份可勾的清单，勾了用 passkey 加密存在你的设备上，下次按一次指纹就看得到进度。没有账号、没有服务器，站上什么都不存。
+
 -   :material-qrcode: **[QR code 生成器](qrcode.md)**
 
     把 onion 网址、Tor bridge 等很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
