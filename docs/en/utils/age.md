@@ -9,6 +9,7 @@ offline_assets:
   # list against the vendor directory.
   - utils/asian-diceware-7776.txt
   - js/agecrypt-worker.js
+  - js/vault.js
   - utils/vendor/age/age-encryption/dist/armor.js
   - utils/vendor/age/age-encryption/dist/cbor.js
   - utils/vendor/age/age-encryption/dist/format.js
@@ -81,6 +82,7 @@ offline_assets:
 
 <div id="age-tool"></div>
 
+<script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
 <script src="../../js/agecrypt.js"></script>
 
@@ -114,9 +116,19 @@ The text form is a third larger than the binary, so files over 64 KB only get th
 
 Switch the key to "Passkey" when encrypting and there is no passphrase to remember. The browser shows a prompt, you approve once with a fingerprint or PIN, and the file is encrypted to your passkey. Before the first use, go to [Passkey as your key](passkey.md) to create one and generate a backup key. "Also add a backup key" is ticked by default, and that public key goes in the field below. If the passkey is lost or you move to an unsupported environment, only the backup secret opens the file. Untick it when your situation does not need that way out, and the cost is spelled out on screen. When decrypting, the tool reads the header to decide whether to ask for a passphrase, the passkey or the backup secret. Files encrypted with the age command line to an `age1` public key can be opened here by pasting the secret. Files in passkey mode only open on this site. The reasons are on [What is a passkey?](../tools/what-is-passkey.md).
 
+Under the backup key and recipient fields there is an address book: give a frequently used age1 public key a name and it is kept in your passkey-encrypted stash, the same ciphertext as [my preparation checklist](checklist.md). Next time, pick one and it fills the field. Saving and deleting both take a deliberate press.
+
+## Encrypting to someone else's public key
+
+Switch the key to "Public keys" and list recipients one per line. Both X25519 keys starting with age1 and post-quantum hybrid keys starting with age1pq1 are accepted, and each recipient opens the file with their own secret key. Add your own public key as a line if you want to open it too. If you have no key yet, press "Generate a key": the public key is added to the recipients and the secret key can only be downloaded as `key.txt`. This page keeps nothing; close it and the key is gone. The file has the same format as `age-keygen` on the command line, so the two are interchangeable.
+
+After encrypting, the tool checks that the number of header stanzas matches the number of recipients. If the key just generated is among the recipients, it also decrypts the output with it and compares.
+
+When a file's header has only public-key stanzas, the tool asks for a secret key: paste it into the field, pick `key.txt`, or drop `key.txt` onto the drop zone.
+
 ## The passphrase is everything
 
-This page does passphrase mode only, so there are no keys to manage, at the cost that the strength of the encryption is exactly the strength of the passphrase. scrypt makes every guess cost a fraction of a second, which holds against brute force but not against a guessable passphrase. Six words or more, not a quote or a lyric, never used elsewhere. The reasoning is in [Asian Diceware](../tools/asian-diceware.md). Nobody can recover a forgotten passphrase, so back up the passphrase too, on paper, somewhere other than where the backup is.
+Passphrase mode has no keys to manage, at the cost that the strength of the encryption is exactly the strength of the passphrase. scrypt makes every guess cost a fraction of a second, which holds against brute force but not against a guessable passphrase. Six words or more, not a quote or a lyric, never used elsewhere. The reasoning is in [Asian Diceware](../tools/asian-diceware.md). Nobody can recover a forgotten passphrase, so back up the passphrase too, on paper, somewhere other than where the backup is.
 
 ## Things to keep in mind
 
