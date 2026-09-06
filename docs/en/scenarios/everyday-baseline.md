@@ -163,7 +163,7 @@ Each of these has a clear use. They are just frequently mistaken for the main li
 
 ## A yearly review
 
-Not a redo. Just work through these questions once a year. Items ticked in [my preparation checklist](../utils/checklist.md) carry the date you ticked them, so start with the ones that have sat the longest.
+Not a redo. Just work through these questions once a year. Items ticked in [my preparation checklist](../utils/checklist.md) carry the date you ticked them, so start with the ones that have sat the longest. The nine questions below are in the checklist too, under the yearly review group.
 
 - Any reused passwords left in the manager? Most tools check this for you
 - Any important accounts still on SMS that now support something stronger?
