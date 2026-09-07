@@ -82,7 +82,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 ## Taking them offline
 
-The code and data behind these tools are stored along with the page. Tick this section in the [offline reading](../offline.md) list and the pages will open without a network afterwards.
+The code and data behind these tools are stored along with the page. The [QR code generator](qrcode.md), [reader](qr-read.md), [frame stream](qr-stream.md) and [passphrase generator](passphrase.md) are stored on the device automatically along with the core chapters, because those four get used during an outage; see [Preparing for and handling a network outage](../scenarios/shutdown.md). For the rest, tick them in the [offline reading](../offline.md) list and they will open without a network afterwards.
 
 ## Whose code this uses
 

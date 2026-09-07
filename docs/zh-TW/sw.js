@@ -105,6 +105,9 @@ const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 // 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
 // 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
 //
+// 這一份也是底線那批的一部分（見 essentialUrlsFor），關掉自動存的讀者一樣會下。
+// 所以只放每一頁都要用的東西，個別頁面的程式放 UTIL_ASSETS。
+//
 // 這份清單只放 bootstrap：帶雜湊檔名的 theme 資產，加上索引本身。站台自己那批每頁
 // 都載入的樣式與腳本（stylesheets/extra.css、js/analytics.js 之類）寫在索引的 shell
 // 欄位，由 shellAssetsFor 讀出來，頁面改了引用什麼不必回來改這裡。
@@ -151,6 +154,23 @@ const SHELL_ASSETS = [
   // 離線內容管理頁（hooks/offline_index.py 產生索引，js 是三語系共用的 symlink）
   "offline-index.json",
   "js/offline-library.js",
+];
+
+// 預快取的頁面自己要用的程式，只在 full 那一輪抓（見 precacheUrlsFor），不進底線
+// 那批。HTML 進了快取不代表頁面會動，程式是另一個請求，少了它離線打開只剩一個空
+// 容器。頁面資產本來有 corePageAssets 那條，但那條掛在內文圖的開關底下，預設是關
+// 的，靠它不夠。
+//
+// 目前只有斷網現場用得到的四個小工具，收進來的理由見 CORE_PAGES_ZH 的 utils 那一段。
+// js/ 在 CROSS_LANG_PREFIXES 裡，三語系共用一份，vendor 與詞表各語系各一份。
+const UTIL_ASSETS = [
+  "js/qrcode.js",
+  "js/qrread.js",
+  "js/qrstream.js",
+  "js/passphrase.js",
+  "utils/vendor/qrcode-generator.js",
+  "utils/vendor/jsQR.js",
+  "utils/asian-diceware-7776.txt",
 ];
 
 // zh 版（zh-TW 根、/zh-cn/）章節結構一致，預快取完整指南集 + 緊急頁。
@@ -226,6 +246,25 @@ const CORE_PAGES_ZH = [
   "taiwan/vasp-2026/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  // utils（小工具，收斷網現場用得到的四頁加索引）
+  //
+  // 這一區其他工具留給執行期快取，落差不大：它們是「手上有個東西想查一下」的工具，
+  // 收到可疑連結、要清掉一張照片的座標，那個當下通常還連得上。本機檔案加密與
+  // passkey 那幾頁另外還有 ES module 的 vendor，一起收會讓自動下載的量翻倍。
+  //
+  // 這四頁的使用時機不一樣。QR 影格串流與讀取器要用的時候，眼前正是沒有可用網路的
+  // 狀態，兩台裝置靠相機把資料傳過去。產生器把 onion 網址與 bridge 字串交給眼前的
+  // 人。密語產生器用在臨時要約一組口令，或是要為一份加密備份想一個密碼。預快取沒
+  // 有收的話，讀者要在斷網前剛好打開過那幾頁才用得到，等於把準備的成敗押在巧合
+  // 上。索引頁一起收，離線時才有入口走得到它們。
+  //
+  // 身分敏感度照上面那條判準檢查過：讀者是「任何遇到中斷的人」，不指向特定受威脅
+  // 身分，跟旅行類與斷網情境頁同一種。四頁要用的程式在 UTIL_ASSETS 裡。
+  "utils/",
+  "utils/qrcode/",
+  "utils/qr-read/",
+  "utils/qr-stream/",
+  "utils/passphrase/",
   // community（社群，選錄離線可讀的工具頁）
   "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
@@ -301,6 +340,12 @@ const CORE_PAGES_EN = [
   "regional/taiwan-vasp-2026/",
   "regional/ooni-asn-coverage/",
   "regional/tor-relay-watcher/",
+  // utils（小工具，收斷網現場用得到的四頁加索引，理由見 CORE_PAGES_ZH 的同一段註解）
+  "utils/",
+  "utils/qrcode/",
+  "utils/qr-read/",
+  "utils/qr-stream/",
+  "utils/passphrase/",
   // community（社群，選錄離線可讀的工具頁）
   "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
@@ -401,6 +446,9 @@ function precacheUrlsFor(prefix) {
     urls.push(SCOPE_PATH + prefix + page);
   }
   for (const asset of SHELL_ASSETS) {
+    urls.push(assetUrlFor(prefix, asset));
+  }
+  for (const asset of UTIL_ASSETS) {
     urls.push(assetUrlFor(prefix, asset));
   }
   // 作品本體只建置一份在根路徑 /docs/games/，跟語系無關，三個語系共用
