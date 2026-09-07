@@ -890,15 +890,15 @@ test('service worker 還在準備時，清單先畫出來不必等它', async ()
   assert.deepEqual(sectionNames(root), ['首頁', '概念', '場景']);
 });
 
-test('狀態列直接回答沒有網路時打不打得開，三個語系都有', async () => {
+test('狀態列直接回答沒有網路時能不能開啟，三個語系都有', async () => {
   // 容量數字回答不了這件事。讀者存了兩百多頁，缺的卻可能是每頁都要的那個樣式，
   // 那時佔用量看起來很健康，而每一頁打開都是空白。
   const HERE = 'https://anoni.net/docs/offline/';
   const HOME = 'https://anoni.net/docs/';
   const CSS = 'https://anoni.net/docs/stylesheets/extra.css';
   for (const [lang, ok, missing] of [
-    ['zh-TW', '沒有網路時，這一頁、首頁、樣式與程式都打得開', '沒有網路時打不開：首頁'],
-    ['zh', '没有网络时，这一页、首页、样式与程序都打得开', '没有网络时打不开：首页'],
+    ['zh-TW', '沒有網路時，這一頁、首頁、樣式與程式都可以開啟', '沒有網路時無法開啟：首頁'],
+    ['zh', '没有网络时，这一页、首页、样式与程序都可以打开', '没有网络时无法打开：首页'],
     ['en', 'Without a network, this page, the home page, styles and scripts all open', 'these do not open: the home page'],
   ]) {
     const all = await load({ lang, stylesheets: [CSS], cached: [HERE, HOME, CSS] });
