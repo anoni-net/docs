@@ -18,10 +18,6 @@ For why the strength of your preparation should follow your own situation, see [
 
     One, store this site on your device (see [Offline reading](../offline.md)); installing it after the network drops is too late. Two, check that your backups open with no network, the encrypted ones especially. Three, find the three to five people you must be able to reach and agree one contact method that does not go over the internet, plus a place and time to meet. The rest of this page is why, and how to do it more thoroughly.
 
-!!! warning "This page is in progress (2026 Q3)"
-
-    The section on working during an outage is currently an outline and will be completed in September 2026. Everything else is ready to use.
-
 ## Four levels
 
 Sorting the outage into a level tells you what to do next. Get the level wrong and no amount of preparation helps.
@@ -164,11 +160,44 @@ Professional templates already split it this way. The Rory Peck Trust communicat
 
 ## Working during an outage
 
-!!! warning "This section is in progress"
+During an outage most online tools have nothing to work with, and encryption cannot rescue a file that will not send. What this time is good for is writing things down and keeping them safe, then sending once connectivity returns.
 
-    It will be completed in September 2026, covering offline-first workflows, the real limits of each backup channel, and methods people actually used during documented shutdowns.
+### Break the work into units that finish offline
 
-One line to hold on to in the meantime: **during an outage most online tools have nothing to work with, and encryption cannot rescue a file that will not send:** What this time is good for is writing things down and keeping them safe, then sending once connectivity returns.
+Writing, sorting, captioning photos: none of that needs a connection, so finish it first. Anything that needs a lookup before it can continue goes on a list to check in one pass once connectivity returns.
+
+Retrying is the most common waste of both time and battery. Retries help neither the congestion of level one nor the total outage of level three, and at level four every retry shortens the time the device has left.
+
+Work in progress needs to land in a local file. A cloud editor's tab still accepts typing while offline, but close the tab or let the device die and those words may not survive.
+
+### Exchanging things with the person in front of you
+
+Bluetooth and local networks do not pass through an operator, so they keep working during a total outage. Cameras and screens are another route, and several of the utilities on this site were written for exactly this situation. All of them compute in your browser and send nothing:
+
+- **Moving a file between two devices:** [QR code frame stream](../utils/qr-stream.md) splits a file into a run of QR codes played in sequence, and the second device reads them back with its camera and reassembles the original. No pairing, no shared network
+- **Reading a QR code off paper or someone else's screen:** [QR code reader](../utils/qr-read.md). The image never leaves the device, and when the result is a URL the host is called out on its own
+- **Handing a long string to the person in front of you:** [QR code generator](../utils/qrcode.md). Onion addresses and bridge lines are easy to mistype, so let the other person read them with a camera
+- **Needing a challenge phrase or a password on the spot:** [Passphrase and password generator](../utils/passphrase.md), for agreeing a phrase that confirms identity, or for a password for an encrypted backup
+
+For a file going to someone who is not in front of you, on a USB stick or a memory card or carried by hand, seal it first with [local file encryption](../utils/age.md). The output is the age format, so whoever receives it can open it with the command-line tool without coming back to this site.
+
+The four pages above and the utilities index are stored on the device automatically along with the core chapters, and they show up in the list on [Offline reading](../offline.md). Local file encryption and the rest of the utilities have to be ticked yourself, and remembering after the network drops is too late.
+
+### Get what you are sending ready before connectivity returns
+
+One thing that can be finished during the outage is cleaning up photos and screenshots. The [file metadata stripper](../utils/strip-metadata.md) removes GPS coordinates, device model and capture time, and [screenshot redaction](../utils/redact.md) fills names and avatars that should not leave with solid black. Both run locally.
+
+Doing it during the outage matters because the first few minutes after a connection returns are busy enough; see the next section.
+
+### When the outage runs into days
+
+Three methods have clear documented use: landlines still worked in some events, physically moving outside the affected area, and physical hubs set up by institutions. For the limits of each, see "How well evidenced this is" below.
+
+### Where the tools do not help
+
+At level four, once the device powers down every tool above is useless, and what is left is paper plus the meeting arrangements made in advance. Real preparation happens while there is still power and still a connection.
+
+None of these utilities has documented use in a real shutdown. They sit exactly where "Agreeing things with other people in advance" sits: a plan that holds up mechanically. The methods with recorded use are the three in the previous subsection.
 
 ## The moment connectivity returns
 
@@ -248,6 +277,7 @@ So the honest description of "Agreeing things with other people in advance" is a
 - [Journalists and source protection](./journalist.md): the full workflow for filing during an outage while protecting sources
 - [Activists and protest digital safety](./activist.md): another emergency contact and missing-person workflow, shaped by field conditions
 - [Offline reading](../offline.md): storing this site on your device, and managing what is kept there
+- [Utilities](../utils/index.md): everything computes in your browser, and they work with no network once stored
 - [Tor relay globe](../games/tor-network.md): zoom to Taiwan for cable landing points, substations, power plants and the 345kV backbone
 - [ASN measurement coverage in Taiwan](../regional/ooni-asn-coverage.md): which autonomous systems are actually being measured
 - [Threat modelling](../basics/threat-model.md): deciding how far to prepare based on your own situation
