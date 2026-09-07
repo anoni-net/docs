@@ -40,6 +40,8 @@ description: "9 月初的 Global Gathering 2026，我們在 Circle 的討論裡�
 
 記者、行動者、LGBTQ、家暴幾類[場景頁](../../scenarios/index.md)不在預先下載的範圍內，只有讀者自己點開過才會留下。場景頁留在裝置上本身可能就是一個敏感訊號，留與不留由讀者決定。
 
+![離線閱讀頁展開場景那一章，13 頁逐頁列出，網站自動存過的四頁勾選框是灰的並標著「網站已存」，記者、家暴、LGBTQ 幾頁的勾選框是空的，要讀者自己勾](https://assets.anoni.net/blog/offline-scenarios-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ## 登機前按一次，整個站帶著走
 
 離線閱讀頁上的「全部存到裝置」會把當下語言的所有頁面存進裝置，正體中文版在截圖當下是 `232` 頁，飛機上、火車上、跨境移動的路上都可以繼續讀。
@@ -68,7 +70,7 @@ description: "9 月初的 Global Gathering 2026，我們在 Circle 的討論裡�
 
 工具斷網之後照常運作，本身就是「沒有偷偷送出資料」的一種證明。想自己確認的話，瀏覽器的開發者工具裡有一個網路分頁，會列出頁面送出的每一個請求，用任何一個工具處理一次資料，看清單有沒有動靜就知道了。
 
-![passkey 鑰匙頁的三個步驟，建立 passkey、試一次解鎖、產生備援金鑰，每一步各有說明與按鈕](https://assets.anoni.net/blog/utils-passkey-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![小工具索引頁的 14 張卡片，每張是一個工具的名稱與一句用途說明](https://assets.anoni.net/blog/utils-index-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ## 以下是技術的部分
 
@@ -117,6 +119,8 @@ Tor Browser 以及 onion、IPFS 版不註冊 Service Worker，基於隱私考量
 
 讀者自己勾存的那批不跟著換版走，離線閱讀頁上另有一顆「更新已存的內容」，按下去才會逐頁重新抓回。
 
+![畫面底部浮出的卡片，寫著「離線存的內容有新版本。更新會重新載入這一頁。」，下面是「更新」與「稍後」兩顆按鈕](https://assets.anoni.net/blog/sw-update-banner-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 還有一層跟 HTTP 快取有關。Service Worker 送出去的每一個請求都帶著 `cache: "no-cache"`。這個名字容易誤會，它的意思是每次都跟伺服器確認一次，內容沒變時伺服器回 304，快取照樣留著，成本是一個往返，並不是跳過快取。沒帶這個選項的 fetch 則會先問裝置上的 HTTP 快取，覺得還沒過期就直接回應，網路請求根本不出門，network-first 於是看起來問過網路，實際上問的是自己，舊回應還會被寫回 runtime 快取，讓舊內容更久留在裝置上。
 
 2026-08-28 就發生過一次。Cloudflare 上一條把 HTML 一律設成 `max-age=14400` 的 Cache Rule，讓新發布的內容有四小時無法進入 PWA。分頁裡的 Safari 讀者感覺不到，從網址列進站或下拉重新整理本來就繞過 HTTP 快取，安裝成 App 之後的冷啟動與站內點連結則不會，加上 iOS 的主畫面 app 有獨立的儲存分區，Safari 那邊取得新內容也傳不過去，於是只有 PWA 一直停在舊版。
@@ -135,6 +139,8 @@ passkey 是存在裝置或密碼管理器裡的一把鑰匙，用指紋、臉或
 
 [我的準備清單](../../utils/checklist.md)、[威脅模型清單](../../utils/threat-model.md)的存檔、本機檔案加密裡的收件人簿都放在同一個暫存區，共用一份密文。
 
+![passkey 鑰匙頁的三個步驟，建立 passkey、試一次解鎖、產生備援金鑰，每一步各有說明與按鈕](https://assets.anoni.net/blog/utils-passkey-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ### 用法二，PRF 現場算出金鑰
 
 這個用法把 passkey 變成一台只在讀者按指紋時才回答的金鑰計算機，機制是 WebAuthn 的 PRF 擴充。passkey 內部多藏一把秘密，永遠不離開驗證器，網頁每次驗證附一段輸入，讀者同意之後，驗證器回傳固定 32 位元組的輸出，同一把 passkey 配同一段輸入永遠得到同一段輸出。
@@ -149,14 +155,14 @@ passkey 是存在裝置或密碼管理器裡的一把鑰匙，用指紋、臉或
 
 在涵蓋面與安全性上限之間，我們選了涵蓋面。設計時的判準是「方案在 iPhone 配第三方密碼管理器上是否可行」，需要讀者記住一段密語的方案會被否決，讀者要做的只有驗證。
 
+![我的準備清單在還沒解鎖時的畫面，說明這台裝置上還沒有清單，並列出用已有的鑰匙開、建一把新的鑰匙、用另一台的鑰匙登錄這台三個選項](https://assets.anoni.net/blog/utils-checklist-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ### 限制
 
 - passkey 綁在 `anoni.net` 這個 RP ID 上，瀏覽器只允許在同一個網域使用，鏡像站與 onion 位址用不了
 - Tor Browser 整個關閉 WebAuthn，`security.webauth.webauthn` 在它的預設設定檔裡是 false
 - passkey 丟了、密碼管理員的帳號沒了，暫存區就打不開，用它加密的檔案只剩備援金鑰能開
 - 瀏覽器基於隱私不讓網頁查詢某個網域有沒有 passkey，所以站上連讀者有沒有建過都不知道，鑰匙頁每次打開都是空的
-
-![本機檔案加密的畫面，鑰匙有密語、passkey、公鑰三種模式，下方是密語欄位與加密並下載的按鈕](https://assets.anoni.net/blog/utils-age-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ## 加密為什麼選 age
 
@@ -176,6 +182,8 @@ passkey 是存在裝置或密碼管理器裡的一把鑰匙，用指紋、臉或
 每一列都指向同一件事，沒有選項就沒有設錯的機會，規格短就能在瀏覽器裡實作得小而能審，密語模式不需要任何金鑰管理。1999 年的可用性研究「Why Johnny Can't Encrypt」找了十二個人用 PGP 5.0 寄一封加密信，多數人在九十分鐘內無法完成，還有人把私鑰寄了出去，2018 年的 EFAIL 攻擊利用的則是舊格式的密文可以被改動、郵件軟體對驗證失敗只給警告照樣顯示。兩者的根源相同，選項太多、能設錯的地方太多。
 
 站上的本機檔案加密輸出的就是標準 age 檔，任何裝了 age 命令列工具的電腦都能解開，不需要這個網站：
+
+![本機檔案加密的畫面，鑰匙有密語、passkey、公鑰三種模式，下方是密語欄位與加密並下載的按鈕](https://assets.anoni.net/blog/utils-age-2609.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ```
 age -d -o backup.tar backup.tar.age

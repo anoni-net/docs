@@ -40,6 +40,8 @@ Only the language you switch to gets downloaded, so a device ends up holding onl
 
 [Scenario pages](../../scenarios/index.md) for journalists, activists, LGBTQ readers and domestic abuse are excluded from that prefetch and only stored if a reader opens one. Their presence on a device is itself a signal, so keeping them is the reader's decision.
 
+![The offline reading page with the Scenarios chapter expanded, listing 13 pages, four of them greyed out and marked as already stored by the site, while the journalist, domestic abuse and LGBTQ pages sit unticked for the reader to choose](https://assets.anoni.net/blog/offline-scenarios-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ## One button before a flight
 
 The **Save everything** button on the offline reading page stores every page in the current language, `196` pages in English at the time of the screenshot, which covers a flight, a train, or any stretch of a journey without coverage.
@@ -68,7 +70,7 @@ Skipping installation removes constraints that are otherwise hard to work around
 
 A tool that keeps working with the network off is also evidence that it is not sending anything out. To check for yourself, the developer tools in any browser have a network tab that lists every request a page makes. Run one piece of data through any tool and watch whether that list moves.
 
-![The passkey page, with three steps: create a passkey, try one unlock, and generate a backup key, each with its own explanation and button](https://assets.anoni.net/blog/utils-passkey-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+![The tools index with fourteen cards, each naming a tool and what it is for](https://assets.anoni.net/blog/utils-index-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ## The technical half
 
@@ -117,6 +119,8 @@ Installing the site as an app introduces one extra problem. The browser's soft u
 
 Pages a reader ticked do not follow releases. The offline reading page carries a separate Update what is stored button that re-fetches them page by page.
 
+![A card floating up at the bottom of the screen reading that a newer version is available for offline reading and that updating reloads the page, with Update and Later buttons below it](https://assets.anoni.net/blog/sw-update-banner-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 One more layer concerns the HTTP cache. Every request the Service Worker issues carries `cache: "no-cache"`. The name invites a misreading: it means revalidating with the server every time, and when nothing has changed the server answers 304 and the cached copy is used, at the cost of one round trip. It does not skip the cache. A fetch without that option consults the device's HTTP cache first and answers from it while it still looks fresh, so the network request never leaves, network-first appears to have asked the network while it actually asked itself, and that stale response is then written back into the runtime cache, keeping old content on the device even longer.
 
 That happened on 2026-08-28. A Cloudflare Cache Rule setting all HTML to `max-age=14400` kept newly published content out of the PWA for four hours. Readers in a Safari tab never noticed, because entering from the address bar or pulling to refresh bypasses the HTTP cache anyway, while a cold start of the installed app and in-site link clicks do not. On top of that, an iOS home screen app has its own storage partition, so fresh content fetched in Safari never reached it, and only the PWA stayed on the old version.
@@ -135,6 +139,8 @@ Creating the passkey generates a random data key on the site and places it in th
 
 [The preparation checklist](../../utils/checklist.md), saved [threat model](../../utils/threat-model.md) answers and the recipient book in local file encryption all share one vault and one ciphertext.
 
+![The passkey page, with three steps: create a passkey, try one unlock, and generate a backup key, each with its own explanation and button](https://assets.anoni.net/blog/utils-passkey-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ### Two, PRF derives the key on the spot
 
 This use turns the passkey into a key calculator that only answers when a finger is on the sensor, and the mechanism is the WebAuthn PRF extension. The passkey holds an extra internal secret that never leaves the authenticator, the page supplies an input on each verification, and after the reader approves, the authenticator returns a fixed 32-byte output. The same passkey with the same input always produces the same output.
@@ -149,14 +155,14 @@ The cost is stated on the page. The data key sits in the password manager alongs
 
 Between coverage and the security ceiling we chose coverage. The design question we ask first is whether an approach works on an iPhone paired with a third-party password manager, and any design that requires memorising a passphrase gets rejected. Verifying is all the reader should have to do.
 
+![The preparation checklist before it is unlocked, explaining that this device holds no checklist yet and offering three routes: open it with a key you already have, create a new key, or enrol this device using another device's key](https://assets.anoni.net/blog/utils-checklist-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+
 ### Limits
 
 - A passkey is bound to the `anoni.net` RP ID, browsers only allow it on that same origin, and mirrors and onion addresses cannot use it
 - Tor Browser disables WebAuthn entirely, `security.webauth.webauthn` is false in its default profile
 - Lose the passkey or the password manager account and the vault is gone, while files encrypted with it are left with only the backup key
 - Browsers do not let a page ask whether a given origin has a passkey, so the site does not even know whether a reader created one, and the key page is empty on every visit
-
-![Local file encryption, with passphrase, passkey and recipient key modes, a passphrase field below them, and the encrypt-and-download button](https://assets.anoni.net/blog/utils-age-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ## Why age was chosen for encryption
 
@@ -176,6 +182,8 @@ Choosing [age](../../tools/what-is-age.md) over PGP within the public formats co
 Every row points the same way. Nothing to configure means nothing to misconfigure, a short specification can be implemented small enough to audit in a browser, and passphrase mode needs no key management at all. The 1999 usability study "Why Johnny Can't Encrypt" gave twelve people PGP 5.0 and ninety minutes to send one encrypted message, most could not finish, and one of them mailed out a private key. The 2018 EFAIL attack exploited the fact that old-format ciphertext could be altered while mail clients displayed content anyway after a failed check. Both trace back to the same root: too many options and too many places to get it wrong.
 
 Local file encryption on the site outputs a standard age file, which any machine with the command-line tool can open without this site:
+
+![Local file encryption, with passphrase, passkey and recipient key modes, a passphrase field below them, and the encrypt-and-download button](https://assets.anoni.net/blog/utils-age-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ```
 age -d -o backup.tar backup.tar.age
