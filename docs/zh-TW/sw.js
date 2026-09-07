@@ -38,7 +38,7 @@ const PRECACHE = "anoni-docs-precache-" + VERSION;
 // app shell，換版後舊的確實該整批丟掉。
 // 這兩個快取只在「自動存下內容」開著的時候寫。原本是無條件寫的，結果是讀者按了
 // 「清除所有離線內容」之後，每讀一頁就又被存回裝置一頁，上限 120 頁加 200 個資產，
-// 而管理頁上的說明只講會補回 0.7 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
+// 而管理頁上的說明只講會補回 1 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
 // 說了不留就不該留。
 const RUNTIME_PAGES = "anoni-docs-pages";
 const RUNTIME_ASSETS = "anoni-docs-assets";
@@ -669,7 +669,7 @@ async function installPrecache() {
   // 時 activate 清掉舊的預快取之後，另一個語系的 offline 頁與每頁共用的樣式就從
   // 裝置上消失了，而讀者可能正好是用那個語系在讀。
   //
-  // 補的是底線那一批（約 0.7 MB），不是整份章節。完整章節仍然只跟著當下這一個
+  // 補的是底線那一批（約 1 MB），不是整份章節。完整章節仍然只跟著當下這一個
   // 語系走，讀者不會因為切過一次語言就在裝置上多出十 MB。
   for (const other of await visitedPrefixes()) {
     if (other !== prefix) await precacheFor(other, false);
@@ -687,7 +687,7 @@ async function installPrecache() {
 // 從搜尋引擎落在內頁的讀者更是從頭到尾沒被問過，十 MB 就這樣進了他的行動網路帳單。
 //
 // 兩個條件任一成立就算讀者確定了：client 說他選過閱讀語言，或者他在同一個語系底下
-// 翻到了第二頁。看一頁就走的人只會用掉底線那 0.7 MB。
+// 翻到了第二頁。看一頁就走的人只會用掉底線那 1 MB。
 //
 // 計數刻意不放在 precacheFor 裡。install 也會呼叫那一支，算進去的話首次造訪光是
 // install 加上第一次導覽就湊滿兩次，門檻等於不存在。
