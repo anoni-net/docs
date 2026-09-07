@@ -22,6 +22,13 @@ For why the strength of your preparation should follow your own situation, see [
 
 Sorting the outage into a level tells you what to do next. Get the level wrong and no amount of preparation helps.
 
+| Level | How to tell | What you still have | The most common mistake |
+|---|---|---|---|
+| One, slowdowns and intermittent drops | Small files get through, large ones do not | Text communication, editing offline and sending when conditions allow | Assuming your own device is broken, and rebooting it repeatedly |
+| Two, specific services blocked | Other sites open over the same line | The channels that are not blocked | One app fails to open and you conclude the whole line is down |
+| Three, total regional outage | Switching Wi-Fi or SIM changes nothing, and the people around you see the same | What you stored beforehand, Bluetooth and local networks, physical delivery | Assuming Bluetooth and local networks fail too |
+| Four, power is out as well | No need to tell, it is obvious | However long the batteries last, paper, meeting arrangements made in advance | Preparation still focused on communication tools, not shifted to power management |
+
 ### Level one, slowdowns and intermittent drops
 
 You are connected, and it is slow. Text messages get through, photos fail halfway, video calls connect and then break up.
@@ -38,7 +45,7 @@ Other sites work normally, a handful of services will not connect.
 
 **How to tell:** other sites open over the same line. This is the only level you can confirm with measurement tools. Public measurement such as [OONI](../tools/what-is-ooni.md) (a tool anyone can run to test whether a site is being blocked where they are) shows whether it is only you, and whether others in the same area see it too.
 
-**What you still have:** the channels that are not blocked, and circumvention tools. This page does not give a circumvention how-to, for reasons set out under "What this page does not do".
+**What you still have:** the channels that are not blocked, and circumvention tools. This page does not give a circumvention how-to, for reasons set out under "What this page does not do". To understand how these tools actually work, the site has [What Is Tor?](../tools/what-is-tor.md), [VPN: risks and how to choose](../tools/vpn-guide.md), and [Tor Snowflake](../tools/tor-snowflake.md), covering the mechanism and each one's failure conditions, not step-by-step instructions.
 
 **The common mistake:** one app fails to open, you conclude the whole line is down, and you start the preparations meant for a total outage. Open two or three different services first. It takes less than a minute.
 
@@ -47,6 +54,8 @@ Other sites work normally, a handful of services will not connect.
 The line carries no connection at all.
 
 **How to tell:** switching networks (Wi-Fi to mobile, one operator's SIM to another) changes nothing, and the people around you see the same. A single device's fault does not happen to everyone at once.
+
+This level is hardest to confirm when you have only one phone and nobody nearby to ask. Signal bars do not help: they show the radio link between the phone and the tower, not whether the network beyond that tower is up, and the phone has no way to display that. That is exactly why the opening scene of this page, bars showing and nothing sending, is the classic look of a total outage. On your own there are two steps to take. First turn off Wi-Fi and try mobile data alone, then do the reverse, Wi-Fi alone with mobile data off; if neither gets through, that rules out a single line being the problem. Next, try a phone call or a text message. Voice and SMS travel a different path from data, so if either goes through, the carrier network is still up and it is only data that has been cut. That result decides which kind of backup channel to reach for next.
 
 **What you still have:**
 
@@ -85,6 +94,16 @@ Encrypted backups deserve a specific check here. Some encryption schemes verify 
 ### Power
 
 A power bank, a car charger, and knowing where there is electricity near where you live. Useful outside level four as well, because retrying repeatedly during a slowdown drains a battery faster than normal use.
+
+### Agree who does what with the people you live with
+
+Everything above is a solo job. The people you live with are different: when the outage happens they are in the same place as you, and what needs coordinating is who does what on the spot.
+
+Start by checking whether the household has anything that cannot go without power: medical equipment that needs an outlet, medication that needs refrigeration, a family member with limited mobility in a building with no working lift. These determine how long level four is survivable, and whether to move somewhere else early.
+
+Next, agree who picks up and looks after children and older relatives: what the school or care facility does when it cannot reach you, who goes to collect them, and where to wait if nobody can. The three-to-five-person list mentioned earlier solves who you can reach; this solves who does what on the ground. Keeping the two separate makes it less likely you miss something.
+
+The household also needs information you can read without turning anything on: emergency contacts, medication names and dosages, where documents and insurance papers are kept. Write it on paper, keep it in a fixed place, and make sure everyone living there knows where that is.
 
 ## Agreeing things with other people in advance
 
@@ -133,7 +152,7 @@ The workable middle ground is to write the questions, agree the answers in perso
 
 **One limit to know going in:** if you cannot remember the answers for three to five different people, the check fails at the moment you need it. Pick questions whose answers you are certain to retain. A shared experience holds better than a fact, so "how late was the train we waited for" beats "what number is your street".
 
-There is a related but different idea worth separating out, the duress code, meaning "am I saying this freely". Professional training consistently says to memorise that rather than write it down, because once it leaks the defending side has no way of knowing, and goes on trusting a signal the other party can now produce at will.
+There is a related but different idea worth separating out, the duress code, meaning "am I saying this freely". People trained in this are consistent about it: memorise the code rather than write it down, because once it leaks, the defending side has no way of knowing, and goes on trusting a signal the other party can now produce at will.
 
 ### Four, the trade-off in writing it down
 
@@ -183,6 +202,8 @@ For a file going to someone who is not in front of you, on a USB stick or a memo
 
 The four pages above and the utilities index are stored on the device automatically along with the core chapters, and they show up in the list on [Offline reading](../offline.md). Local file encryption and the rest of the utilities have to be ticked yourself, and remembering after the network drops is too late.
 
+Exchanging things by camera and screen means one device's screen has to stay on and the other's camera has to stay running, which drains far more power than typing a message. When the battery is low, weigh whether the exchange is worth it first, especially at level four.
+
 ### Get what you are sending ready before connectivity returns
 
 One thing that can be finished during the outage is cleaning up photos and screenshots. The [file metadata stripper](../utils/strip-metadata.md) removes GPS coordinates, device model and capture time, and [screenshot redaction](../utils/redact.md) fills names and avatars that should not leave with solid black. Both run locally.
@@ -192,6 +213,10 @@ Doing it during the outage matters because the first few minutes after a connect
 ### When the outage runs into days
 
 Three methods have clear documented use: landlines still worked in some events, physically moving outside the affected area, and physical hubs set up by institutions. For the limits of each, see "How well evidenced this is" below.
+
+Past the first day, what gets used up shifts from power to attention. Checking for a signal every few minutes, or staying up all night by the one radio in the house, both spend tomorrow's energy today. With more than one person, take turns checking; alone, check a fixed number of times a day and leave the device off in between. At level four this is even more direct: every time the screen lights up, it takes a bite out of the time you have left.
+
+Sleep and meals need to be planned in as well. After a few days the first thing to give out is usually judgement, and no tool helps at that stage.
 
 ### Where the tools do not help
 
@@ -210,6 +235,14 @@ The moment the connection is back, every queued app on the device starts uploadi
 Two problems follow. First, the traffic signature at that moment is distinctive, and the period right after a network returns is exactly when observation is heaviest. Second, every photo taken during the outage, including the ones you had no intention of letting out, goes up with the rest, with no confirmation prompt in between.
 
 The approach is to control the order of the return. When you notice connectivity is back, stay in flight mode or keep automatic sync off and open one channel to find out what the situation is outside. Only then decide item by item what to send.
+
+### Location and time travel with the content
+
+Among everything waiting to upload, photos carry the most attached information. Cameras write GPS coordinates and the capture time into every photo by default, and when connectivity returns, photo backup uploads those along with the image, so where you went and when during the outage ends up in the cloud regardless. Files you are handing to someone else can be cleaned first with the [file metadata stripper](../utils/strip-metadata.md); your own camera roll's automatic backup never goes through that step.
+
+The device's own location history mostly stays local. Google announced in late 2023 that [Maps Timeline would move onto the phone](https://blog.google/products/maps/updates-to-location-history-and-new-controls-coming-soon-to-maps/){target="_blank"}, in the original wording, "soon your Timeline will be saved right on your device," with cloud backup an opt-in you turn on separately. iOS's Significant Locations are likewise encrypted on-device. What actually goes out the moment connectivity returns is whichever apps hold location permission and normally report in the background.
+
+To control that, turn off automatic sync for photo backup and those apps before connectivity returns, and switch them back on one at a time once you have confirmed the situation outside.
 
 ### What is queued may no longer be safe to send
 
@@ -238,6 +271,7 @@ Priorities during an outage differ by who you are:
 - Still filing during an outage while protecting sources, see [Journalists and source protection](./journalist.md)
 - Keeping an organisation in contact internally during an outage, see [Activists and protest digital safety](./activist.md)
 - Already living with blocked services long term, see [Sharing information on mainland Chinese platforms](./mainland-speech.md)
+- Reporting observations continuously during an election, see [Election observer self-protection](./election-observer.md)
 - No particular role, the baseline in [What everyone should be doing](./everyday-baseline.md) applies during an outage as much as at any other time
 
 ## How well evidenced this is
@@ -267,6 +301,8 @@ So the honest description of "Agreeing things with other people in advance" is a
 
 ## Where to get help
 
+- [Taipower customer service line, 1911](https://www.taipower.com.tw/2289/2290/2317/3482/){target="_blank"}: Taiwan Power Company's line for outage status and reporting a line fault, 24/7 year-round, toll-free (except from public payphones), calls capped at 5 minutes
+- If it is the network line itself that is down, call your own carrier's customer service. Numbers differ by carrier, so write yours down on paper beforehand; you will not be able to look it up once the network is down
 - [Access Now #KeepItOn](https://www.accessnow.org/keepiton/){target="_blank"}: reporting and international assistance for network blocking and shutdowns
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}: multilingual help for urgent digital security problems
 - [Emergency help](../help/index.md): step-by-step lists for accounts, devices, harassment and outages

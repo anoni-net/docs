@@ -145,6 +145,7 @@ icon: material/vote-outline
 - [社運行動者的數位準備](./activist.md)：行動現場與被臨檢時的裝置與通訊應對
 - [記者保護消息來源](./journalist.md)：敏感檔案交換與訪談紀錄保存，metadata 紀律與這頁共用
 - [出差與研討會的數位準備](./asia-travel.md)：裝置出入境、乾淨裝置的完整做法
+- [網路中斷時的準備與應對](./shutdown.md)：選舉日的網路中斷分成四級，各級的判斷方式與還剩下的管道
 - [威脅模型如何建立](../basics/threat-model.md)：跨境任務的威脅模型如何建立
 - [緊急求救](../help/index.md)：人身安全立即受威脅時的綜合應對清單
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境任務遇到緊急數位安全問題時的多語求助管道

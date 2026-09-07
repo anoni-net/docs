@@ -129,6 +129,7 @@ This is the point where individual self-protection runs into the mission's colle
 - [Metadata, and why it matters](../basics/metadata.md) — the concept behind the photo, file, and reporting-channel handling on this page.
 - [Journalists and source protection](./journalist.md) — overlapping discipline for protecting the people in your records, with a fuller file-handling and first-contact treatment.
 - [Cross-border travel and device searches](./asia-travel.md) — the device-preparation and customs-search detail for observers deployed across borders.
+- [Preparing for and responding to a network shutdown](./shutdown.md) — outages on election day sort into four levels, each with its own way to tell it apart and what it leaves you.
 - [GNDEM](https://gndem.org/){target="_blank"} and its [Declaration of Global Principles](https://www.gndem.org/declaration-of-global-principles){target="_blank"} — the canonical methodology and ethics for nonpartisan citizen observation, plus mission-level security resources; [NDI](https://www.ndi.org/){target="_blank"} is its founding partner. For the Asia region, [ANFREL](https://anfrel.org/){target="_blank"} runs and trains international missions.
 - [OSCE/ODIHR Election Observation Handbook](https://odihr.osce.org/odihr/elections/handbooks){target="_blank"} and the [Carter Center's Election Obligations and Standards](https://eos.cartercenter.org/){target="_blank"} — the international standards and methodology that define what observation is and how it is done.
 
