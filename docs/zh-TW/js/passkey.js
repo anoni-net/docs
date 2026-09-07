@@ -79,11 +79,6 @@
     return "failed";
   }
 
-  // 建立時給密碼管理器看的名字。帶日期，建過兩把才分得出哪一把是哪一把。
-  function keyName(date) {
-    return SITE_RP_ID + " " + date.toISOString().slice(0, 10);
-  }
-
   // --- 介面 ---
 
   const rpId = rpIdFor(location.hostname);
@@ -211,6 +206,7 @@
       create: "建立 passkey",
       createdBoth: "建好了。這一把兩種用法都做得到：準備清單這類暫存區工具，以及本機檔案加密。密碼管理器裡只需要這一筆。",
       createdVaultOnly: "建好了。這一把能用準備清單這類暫存區工具。這個環境算不出檔案加密要用的金鑰，要用檔案加密就換到電腦上再建一把。",
+      createdName: "密碼管理器裡它叫「{name}」。建了不只一把的話，到密碼管理器把它改名，例如加上「檔案加密」或「清單」，選單裡才分得出來。",
       creating: "等你在瀏覽器的提示裡完成",
       step2: "2. 試一次解鎖（檔案加密用）",
       step2Body: "請 passkey 算一次檔案加密要用的金鑰，確認這個環境算得出，指紋、臉或 PIN 的流程也順暢。只用清單這類暫存區工具的話，這一步可以跳過。",
@@ -227,7 +223,7 @@
       next: "接下來到本機檔案加密，選「passkey」模式。",
       errors: {
         cancelled: "你取消了，或瀏覽器沒有完成。再按一次即可。",
-        noPrf: "這把 passkey 算不出檔案加密要用的金鑰，準備清單這類暫存區工具照樣能用。要用檔案加密就換一個保管方式再建一次，見下面的「存到哪裡」。",
+        noPrf: "這把 passkey 算不出檔案加密要用的金鑰，準備清單這類暫存區工具照樣能用。要用檔案加密就換一個保管方式再建一次，見下面的「存到哪裡」。選單裡有不只一把 anoni.net 的話，先換另一把試。",
         unsupported: "這個環境不允許建立 passkey。網址開頭要是 https 的正式站，而且瀏覽器沒有把這個功能關掉。",
         failed: "沒有成功。換一個瀏覽器或密碼管理員再試。",
         libMissing: "程式還沒載入。第一次使用需要連上網，之後會留在裝置上。",
@@ -245,6 +241,7 @@
       create: "创建 passkey",
       createdBoth: "创建好了。这一把两种用法都做得到：准备清单这类暂存区工具，以及本机文件加密。密码管理器里只需要这一笔。",
       createdVaultOnly: "创建好了。这一把能用准备清单这类暂存区工具。这个环境算不出文件加密要用的密钥，要用文件加密就换到电脑上再创建一把。",
+      createdName: "密码管理器里它叫「{name}」。创建了不只一把的话，到密码管理器把它改名，例如加上「文件加密」或「清单」，选单里才分得出来。",
       creating: "等你在浏览器的提示里完成",
       step2: "2. 试一次解锁（文件加密用）",
       step2Body: "请 passkey 算一次文件加密要用的密钥，确认这个环境算得出，指纹、脸或 PIN 的流程也顺畅。只用清单这类暂存区工具的话，这一步可以跳过。",
@@ -261,7 +258,7 @@
       next: "接下来到本机文件加密，选「passkey」模式。",
       errors: {
         cancelled: "你取消了，或浏览器没有完成。再按一次即可。",
-        noPrf: "这把 passkey 算不出文件加密要用的密钥，准备清单这类暂存区工具照样能用。要用文件加密就换一个保管方式再创建一次，见下面的「存到哪里」。",
+        noPrf: "这把 passkey 算不出文件加密要用的密钥，准备清单这类暂存区工具照样能用。要用文件加密就换一个保管方式再创建一次，见下面的「存到哪里」。选单里有不只一把 anoni.net 的话，先换另一把试。",
         unsupported: "这个环境不允许创建 passkey。网址开头要是 https 的正式站，而且浏览器没有把这个功能关掉。",
         failed: "没有成功。换一个浏览器或密码管理器再试。",
         libMissing: "程序还没加载。第一次使用需要联网，之后会留在设备上。",
@@ -279,6 +276,7 @@
       create: "Create a passkey",
       createdBoth: "Created. This one works for both uses: stash tools such as the checklist, and local file encryption. Your password manager only needs this single entry.",
       createdVaultOnly: "Created. This one works for stash tools such as the checklist. This environment cannot derive the key that file encryption needs; for file encryption, create another one on a computer.",
+      createdName: "In your password manager it is called \"{name}\". If you end up with more than one, rename it there, say by adding \"file encryption\" or \"checklist\", so the picker tells them apart.",
       creating: "Finish in the browser prompt",
       step2: "2. Test an unlock (for file encryption)",
       step2Body: "Ask the passkey to derive the file encryption key once, to confirm this environment can, and that the fingerprint, face or PIN flow is smooth. If you only use stash tools such as the checklist, skip this step.",
@@ -295,7 +293,7 @@
       next: "Next, go to local file encryption and choose the “passkey” mode.",
       errors: {
         cancelled: "You cancelled, or the browser did not finish. Press again.",
-        noPrf: "This passkey cannot derive the key that file encryption needs; stash tools such as the checklist still work. For file encryption, create another one with a different storage method, see \"Where to store it\" below.",
+        noPrf: "This passkey cannot derive the key that file encryption needs; stash tools such as the checklist still work. For file encryption, create another one with a different storage method, see \"Where to store it\" below. If the picker lists more than one anoni.net passkey, try the other one first.",
         unsupported: "This environment does not allow creating a passkey. It needs the production site, at an https address, and a browser that has not turned the feature off.",
         failed: "It did not work. Try another browser or password manager.",
         libMissing: "The code has not loaded. The first use needs a connection; after that it stays on the device.",
@@ -392,6 +390,8 @@
     if (state.made) {
       // 這一把拿到了哪些能力要當場講。PRF 的秘密是建立當下產生的，換裝置補不回來。
       step1.appendChild(el("p", null, state.made.hasPrf ? t.createdBoth : t.createdVaultOnly));
+      // 名字念出來。建了不只一把時，密碼管理器裡只有這個名字能分，讀者要自己改名
+      if (state.made.name) step1.appendChild(el("p", "pk-hint", t.createdName.replace("{name}", state.made.name)));
     }
     if (state.error && state.error.step === "create") step1.appendChild(el("p", "pk-error", t.errors[state.error.code] || t.errors.failed));
     root.appendChild(step1);

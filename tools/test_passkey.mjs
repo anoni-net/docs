@@ -33,7 +33,7 @@ const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'passkey.js 裡找不到純邏輯與介面的分界註解');
-const tool = new Function(`${src.slice(start, end)}\n return { SITE_RP_ID, rpIdFor, looksLikeRecipient, looksLikeIdentity, looksLikePasskeyIdentity, prfSupport, classifyError, keyName };`)();
+const tool = new Function(`${src.slice(start, end)}\n return { SITE_RP_ID, rpIdFor, looksLikeRecipient, looksLikeIdentity, looksLikePasskeyIdentity, prfSupport, classifyError };`)();
 const STRINGS = new Function(`${src.match(/^  const STRINGS = \{[\s\S]*?\n  \};/m)[0]}\n return STRINGS;`)();
 
 // ---------------------------------------------------------------------------
@@ -177,7 +177,6 @@ test('錯誤分類與金鑰名字', () => {
   assert.equal(tool.classifyError(err('SecurityError')), 'unsupported');
   assert.equal(tool.classifyError(err('TypeError', 'x')), 'failed');
   assert.equal(tool.classifyError(null), 'failed');
-  assert.equal(tool.keyName(new Date('2026-09-04T12:00:00Z')), 'anoni.net 2026-09-04');
 });
 
 // ---------------------------------------------------------------------------
