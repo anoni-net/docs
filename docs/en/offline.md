@@ -66,7 +66,21 @@ The reading language you pick from the language menu is stored in the same place
 
 This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 1 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
 
-What that button does not cover: browsing history, DNS cache, and files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
+## What is left on the device after clearing
+
+The clear button does remove the layer a web page can see. We measured it once: with 101 entries in the precache, pressing clear brings the page's own count to 0, and neither what the site stored nor what you ticked is there any more.
+
+The disk is another matter. The browser reclaims that space lazily, so the directory holding this content still occupied more than ten megabytes after clearing, and after a clean browser shutdown the body text of a core chapter page could still be found by searching the browser's profile directory. The browser's own HTTP cache also holds a second copy of the same page, and that copy is outside this button's reach. The measurement was made with Chrome 151 on Linux; we have not tested other browsers or mobile platforms one by one, and their behaviour may differ.
+
+So the scope of this button is: it stops someone who picks up your phone and looks through it, and it does not stop someone who takes the whole device away for forensic imaging. The defence against the second case is full-disk encryption on the device itself, plus powering the device off before handing it over, because data is only fully encrypted once the device has been shut down and not yet unlocked with a passcode.
+
+The button also does not cover browsing history, DNS cache, or files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
+
+## The copy inside a device backup
+
+When a phone has iCloud Backup or Google device backup switched on, whether this offline content ends up in the backup is decided by that backup mechanism. A web page has no reach there, and we have not verified each vendor's behaviour. If it matters to you, turn device backup off, or check in the backup settings whether browser data is included.
+
+The same reasoning applies to storing the whole site. Save everything brings in well over a hundred megabytes, which is not an invisible amount inside backup and sync records. If you only need a few pages, tick them in the list instead and the footprint is far smaller.
 
 ## When the site has a new version
 

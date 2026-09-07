@@ -14,9 +14,9 @@ description: "At Global Gathering 2026 in early September we joined the Circles 
 
 # Storing the whole docs site and its tools on a device, so they open with the network off
 
-From 4 to 6 September we were at Global Gathering 2026 in Estoril, Portugal. Alongside our booth on the last day we joined the Circles, where we talked about how the privacy material on [the docs site](../../index.md) is written and how it is layered.
+When the network drops, the page you most want to open is often the one that will not open. On a flight, in the mountains, in a new country before you have found a SIM, that is an inconvenience. Where the network is cut, throttled or blocked, the same thing costs something else entirely.
 
-The conversation kept returning to one premise. The moment a reader needs these pages is not reliably a moment with a working connection.
+From 4 to 6 September we were at Global Gathering 2026 in Estoril, Portugal. Alongside our booth on the last day we joined the Circles, where we talked about how the privacy material on [the docs site](../../index.md) is written and how it is layered. The conversation kept returning to one premise: the moment a reader needs these pages is not reliably a moment with a working connection.
 
 ![The top of the offline reading page: storage totals, the automatic-storage and inline-image switches, and the Save everything, Update what is stored and Clear all offline content buttons](https://assets.anoni.net/blog/offline-library-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
@@ -28,7 +28,7 @@ The responses were almost entirely positive, and they converged on the same poin
 
 Offline reading already had a section in [the tools post](./2026-browser-side-utils.md) at the end of August. That feedback is why we moved it from a side feature to the main line of work, and everything added since has been built around it.
 
-The first half below describes what a reader actually sees. The second half covers how it works.
+The first half below describes what a reader actually sees. The second half covers how it works, and skipping it costs you nothing in use.
 
 ## Pages are stored as you read them
 
@@ -77,7 +77,7 @@ A tool that keeps working with the network off is also the most direct evidence 
 
 ## The technical half
 
-Everything above is what a reader sees. What follows is how it works, and the reasoning behind a few choices that look odd from the outside.
+Everything above is what a reader sees. What follows is how it works and the reasoning behind a few choices that look odd from the outside, written for anyone who wants to verify it or reuse it. If you only came to put the site on a device, this is a fine place to stop.
 
 ## Offline reading is a Service Worker storing pages one at a time
 
@@ -118,7 +118,9 @@ The fix that day landed in two layers. The nginx server sends `no-cache` for pag
 
 ## The site's passkey has no account and no server
 
-A passkey is a credential held on a device or in a password manager. When a site asks it to sign, the reader approves with a fingerprint, a face or a PIN, and it signs. It is normally used for logging in. [The way the site uses it](../../tools/what-is-passkey.md) is entirely different: no login, no account, no server. We use it as the key to the reader's data, and the same passkey supports two mechanisms.
+A passkey is a key held on a device or in a password manager, opened with a fingerprint, a face or a PIN. It is normally used for logging in. [The way the site uses it](../../tools/what-is-passkey.md) is entirely different: no login, no account, no server, and no way for the site to learn whether a reader ever created one. A completed preparation checklist, a set of threat model answers and a handful of frequently used contacts are all encrypted and stored on the reader's own device.
+
+The same passkey supports two mechanisms, which differ in how they work and in where they work.
 
 ### One, the data key rides inside the passkey
 
