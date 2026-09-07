@@ -179,7 +179,7 @@ PRF 的秘密是建立當下由 authenticator 產生的，所以**在哪裡建�
 
 ## 跟站上檔案加密的差別
 
-[本機檔案加密](../utils/age.md)的 passkey 模式走 WebAuthn 的 PRF 擴充，保證是「就算密碼管理器的 vault 洩漏，也算不出金鑰」。代價是 iPhone 配第三方密碼管理器拿不到 PRF。
+[本機檔案加密](../utils/age.md)的 passkey 模式走 WebAuthn 的 PRF 擴充，保證是「就算密碼管理器的 vault 洩漏，也無法算出金鑰」。代價是 iPhone 配第三方密碼管理器拿不到 PRF。
 
 這一層改把金鑰放進 `user.id`，任何支援 passkey 的環境都能用，代價是金鑰跟著 credential 存在 vault 裡，能解開 vault 的人就能解開這裡的資料。兩種取捨各有適合的東西，所以是兩套並存而不是互相取代。
 

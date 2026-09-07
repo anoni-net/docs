@@ -88,13 +88,13 @@ icon: material/eye-outline
 |---|---|---|
 | `stripmeta-ok` | metadata 清除成功 | 格式代号 |
 | `stripmeta-unsupported` | metadata 清除器遇到不支持的格式 | `heic`、`pdf`、`unknown` 等格式代号 |
-| `stripmeta-verify-fail` | 清完的文件打不开 | 格式代号 |
+| `stripmeta-verify-fail` | 清完的文件无法打开 | 格式代号 |
 | `qrread-fail` | QR code 读不出来 | `cantOpen` 或 `notFound`，加上格式代号 |
 | `qrread-kind` | QR code 读出来了 | 内容的粗分类，见下 |
 | `offline-action` | 在离线阅读页按下操作 | `add`、`remove`、`clear`、`auto-on`、`auto-off`、`images-on`、`images-off` |
 | `display-mode` | 每次完整加载页面 | 上面说的显示模式 |
 
-为什么要这些数字，用最近的例子说明。QR code 读取器有一段时间对 iPhone 拍的 HEIC 完全无效，画面显示「找不到 QR code」，而读者照着建议去裁图、重拍，做几次都不会成功，因为那张图从头到尾没有被解开过。那个状况持续了多久没有人知道，直到有人回报。`qrread-fail` 把「浏览器打不开这张图」与「图里真的没有码」分开数，同样的事下次会自己浮出来。
+为什么要这些数字，用最近的例子说明。QR code 读取器有一段时间对 iPhone 拍的 HEIC 完全无效，画面显示「找不到 QR code」，而读者照着建议去裁图、重拍，做几次都不会成功，因为那张图从头到尾没有被解开过。那个状况持续了多久没有人知道，直到有人回报。`qrread-fail` 把「浏览器无法打开这张图」与「图里真的没有码」分开数，同样的事下次会自己浮出来。
 
 `stripmeta-unsupported` 回答的是「该不该投入支持 HEIC」。程序本来就分得出那个格式，只是不处理，过去那个信息直接被丢掉。
 

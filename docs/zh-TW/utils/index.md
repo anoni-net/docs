@@ -86,7 +86,7 @@ icon: material/tools
 
 ## 要離線帶著走
 
-工具的程式與資料會跟頁面一起存下來。[QR code 產生器](qrcode.md)、[讀取器](qr-read.md)、[影格串流](qr-stream.md)與[密語產生器](passphrase.md)四頁跟核心章節一起自動存進裝置，理由是它們在斷網現場用得到，見[網路中斷時的準備與應對](../scenarios/shutdown.md)。其餘幾頁在[離線閱讀](../offline.md)的清單裡勾起來，之後沒有網路也打得開。
+工具的程式與資料會跟頁面一起存下來。[QR code 產生器](qrcode.md)、[讀取器](qr-read.md)、[影格串流](qr-stream.md)與[密語產生器](passphrase.md)四頁跟核心章節一起自動存進裝置，理由是它們在斷網現場會用到，見[網路中斷時的準備與應對](../scenarios/shutdown.md)。其餘幾頁在[離線閱讀](../offline.md)的清單裡勾起來，之後沒有網路也可以開啟。
 
 ## 用了誰的程式
 
