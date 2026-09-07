@@ -1486,6 +1486,11 @@
         font-family: monospace; font-size: 9pt; margin: 1mm 0 0; color: #000;
       }
     }
+    /* 觸控裝置上把按鈕撐到約 44px，站上其他工具都有這一條，這一頁漏了。
+       .qs-seg 與 .qs-tabs 的按鈕連在一起是分段控制的畫法，間距刻意留 0，只撐高度。 */
+    @media (pointer: coarse) {
+      #qr-stream-tool button { min-height: 2.2rem; }
+    }
   `;
 
   const dom = {};

@@ -90,10 +90,15 @@
     #checklist-tool .cl-qr { display: block; width: 12rem; max-width: 100%; height: auto; image-rendering: pixelated; background: #fff; margin: 0.6rem 0; }
     #checklist-tool .cl-label { display: block; margin: 0.6rem 0 0.3rem; font-size: 0.75rem; font-weight: 600; }
     #checklist-tool .cl-key {
-      width: 100%; padding: 0.5rem; font-family: var(--md-code-font-family, monospace); font-size: 0.72rem;
+      /* iOS Safari 在輸入框字級小於 16px 時一聚焦就放大整頁，處理同 qrcode.js */
+      width: 100%; padding: 0.5rem; font-family: var(--md-code-font-family, monospace); font-size: max(16px, 0.72rem);
       border: 1px solid var(--md-default-fg-color--lighter); border-radius: 0.4rem; background: var(--md-default-bg-color); color: var(--md-default-fg-color);
     }
-    @media (pointer: coarse) { #checklist-tool .cl-item input { width: 1.5rem; height: 1.5rem; } }
+    @media (pointer: coarse) {
+      #checklist-tool .cl-item input { width: 1.5rem; height: 1.5rem; }
+      /* 原生的檔案選擇器只有 22px 高，其他工具把它藏起來走拖放區，這裡是露在外面的 */
+      #checklist-tool .cl-file { min-height: 2.2rem; }
+    }
   `;
 
   // 清單的骨架。id 進了讀者的密文就不能改，改標籤與連結去 STRINGS。

@@ -305,7 +305,8 @@
     #threatmodel-tool button[aria-busy="true"] { opacity: .7; }
     @media (pointer: coarse) {
       #threatmodel-tool button { min-height: 2.2rem; }
-      #threatmodel-tool label { padding: .4rem 0; }
+      /* .4rem 只撐到 42px，差 44px 的建議值兩格 */
+      #threatmodel-tool label { padding: .5rem 0; }
     }
   `;
   const style = document.createElement("style");

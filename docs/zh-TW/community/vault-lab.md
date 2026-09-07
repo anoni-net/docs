@@ -127,7 +127,8 @@ offline_assets:
   margin-top: 0.4rem;
   padding: 0.6rem;
   font-family: var(--md-code-font-family, monospace);
-  font-size: 0.78rem;
+  /* iOS Safari 在輸入框字級小於 16px 時一聚焦就放大整頁，處理同 qrcode.js */
+  font-size: max(16px, 0.78rem);
   border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: 0.4rem;
   background: var(--md-default-bg-color);
@@ -138,7 +139,8 @@ offline_assets:
 #vault-lab .vl-label input {
   width: 100%;
   padding: 0.5rem;
-  font-size: 0.78rem;
+  /* 同上，備援私鑰與密語欄位也要撐到 16px */
+  font-size: max(16px, 0.78rem);
   border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: 0.4rem;
   background: var(--md-default-bg-color);

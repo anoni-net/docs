@@ -17,6 +17,51 @@ hide:
 
 `user.id` 是 WebAuthn 的核心欄位而不是擴充，規格上每次驗證都會原樣回傳。如果實作真的照規格走，它就是那條繞得過去的路。規格說可以跟實作真的給是兩回事，所以先在真機上量。
 
+<style>
+/*
+  這一頁原本一條樣式都沒寫。兩個按鈕靠 appendChild 接在一起，中間連空白字元都沒有，
+  在手機上就是兩個緊貼的目標。按鈕之間留間距，觸控目標給到 2.75rem（約 44 px，
+  觸控介面的建議下限），跟 vault-lab 那一頁同一個處理。
+  貼字串的欄位也沒有字級，落在瀏覽器給 input 的預設 13 px。iOS Safari 在輸入框字級
+  小於 16px 時一聚焦就放大整頁，而且不會縮回去，處理同 qrcode.js。
+*/
+#passkey-lab .pl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.1rem 0;
+  align-items: center;
+}
+#passkey-lab .pl-btn {
+  min-height: 2.75rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+}
+#passkey-lab .pl-label {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+#passkey-lab .pl-expect {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.5rem;
+  font-family: var(--md-code-font-family, monospace);
+  font-size: max(16px, 0.78rem);
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+</style>
+
 <div id="passkey-lab"></div>
 <script src="../../js/passkey-lab.js"></script>
 
