@@ -41,11 +41,13 @@
   const RP_NAME = "anoni.net";
 
   // 顯示在密碼管理器裡的名字。一把鑰匙同時服務檔案加密與暫存區，所以不叫「暫存區」，
-  // 帶日期讓讀者分得出哪一把是哪天建的。
+  // 帶日期與時分讓讀者分得出哪一把是什麼時候建的。能不能做檔案加密要建完才知道，
+  // WebAuthn 又沒有改名的 API，所以名字標不出能力，鑰匙頁建完會把名字念出來請讀者
+  // 自己到密碼管理器改。
   function keyName(date) {
     const d = date || new Date();
     const pad = (n) => String(n).padStart(2, "0");
-    return "anoni.net " + d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+    return "anoni.net " + d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
   }
 
   // 解鎖之後的金鑰只活在這裡。分頁關掉、重新整理都會沒有，這是刻意的。
@@ -125,11 +127,12 @@
   // PRF 的秘密是建立當下由 authenticator 產生的，所以「在哪裡建立」決定了這把鑰匙
   // 有沒有那個能力，之後換到支援的裝置也補不回來。
   async function createCredential(keyBytes) {
+    const name = keyName();
     const cred = await navigator.credentials.create({
       publicKey: {
         rp: { name: RP_NAME, id: location.hostname },
         // user.id 就是金鑰。name 與 displayName 會顯示在密碼管理器裡，寫得讓讀者認得出來。
-        user: { id: keyBytes, name: keyName(), displayName: keyName() },
+        user: { id: keyBytes, name: name, displayName: name },
         challenge: crypto.getRandomValues(new Uint8Array(32)),
         pubKeyCredParams: [
           { type: "public-key", alg: -8 },
@@ -144,7 +147,7 @@
     });
     if (!cred) throw new Error("cancelled");
     const results = cred.getClientExtensionResults ? cred.getClientExtensionResults() : {};
-    return { hasPrf: !!(results.prf && results.prf.enabled) };
+    return { hasPrf: !!(results.prf && results.prf.enabled), name: name };
   }
 
   async function keyFromCredential() {

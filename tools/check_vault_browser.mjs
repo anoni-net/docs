@@ -262,7 +262,10 @@ test('鑰匙頁建的 passkey 拿到暫存區直接能開，兩頁只留一筆 c
     await page.waitFor("!!__vl.button('#passkey-tool', '建立 passkey')", '鑰匙頁畫出來');
     await page.evaluate("__vl.click('#passkey-tool', '建立 passkey')");
     await page.waitFor("/建好了。這一把兩種用法都做得到/.test(__vl.text('#passkey-tool'))", '鑰匙頁說兩種用法都能用');
-    assert.equal((await page.credentials()).length, 1, '建立之後驗證器裡應該只有一筆');
+    const made = await page.credentials();
+    assert.equal(made.length, 1, '建立之後驗證器裡應該只有一筆');
+    assert.match(made[0].userName || '', /^anoni\.net \d{4}-\d{2}-\d{2} \d{2}:\d{2}$/, `密碼管理器裡的名字要帶日期與時分：${made[0].userName}`);
+    assert.ok((await page.evaluate("__vl.text('#passkey-tool')")).includes(made[0].userName), '建好之後要把名字念出來');
 
     // 同一把也要算得出檔案加密金鑰
     await page.evaluate("__vl.click('#passkey-tool', '試解鎖')");

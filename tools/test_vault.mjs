@@ -70,6 +70,7 @@ const harness = `
   const importBase = async () => base;
   ${grab(/^  async function identityOf\(keyBytes\) \{[\s\S]*?\n  \}/m).replace('await import("@scure/base")', 'await importBase()')}
   ${grab(/^  const KEY_BYTES = .*$/m)}
+  ${grab(/^  function keyName\(date\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function keyFromIdentity\(text\) \{[\s\S]*?\n  \}/m).replace('await import("@scure/base")', 'await importBase()')}
   ${grab(/^  async function recipientOf\(identity\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  async function encryptData\(data, keyBytes, backupRecipient\) \{[\s\S]*?\n  \}/m)}
@@ -77,7 +78,7 @@ const harness = `
   ${grab(/^  const ENVELOPE_VERSION = .*$/m)}
   ${grab(/^  function wrapEnvelope\(data, backupRecipient\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function unwrapEnvelope\(obj\) \{[\s\S]*?\n  \}/m)}
-  return { identityOf, keyFromIdentity, recipientOf, encryptData, decryptData, wrapEnvelope, unwrapEnvelope, ENVELOPE_VERSION };
+  return { keyName, identityOf, keyFromIdentity, recipientOf, encryptData, decryptData, wrapEnvelope, unwrapEnvelope, ENVELOPE_VERSION };
 `;
 const vault = new Function('age', 'base', harness)(age, base);
 
@@ -85,6 +86,12 @@ let passed = 0;
 let failed = 0;
 const tests = [];
 const test = (name, fn) => tests.push([name, fn]);
+
+test('密碼管理器裡的名字帶日期與時分，同一天建的兩把分得出來', () => {
+  assert.equal(vault.keyName(new Date(2026, 8, 7, 14, 5)), 'anoni.net 2026-09-07 14:05');
+  assert.notEqual(vault.keyName(new Date(2026, 8, 7, 14, 5)), vault.keyName(new Date(2026, 8, 7, 14, 6)));
+  assert.match(vault.keyName(), /^anoni\.net \d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
+});
 
 test('另一台顯示的字串解回同一把金鑰，壞的、別種前綴、長度不對都拒絕', async () => {
   const key = crypto.getRandomValues(new Uint8Array(32));
