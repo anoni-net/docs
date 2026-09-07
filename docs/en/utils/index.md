@@ -58,6 +58,10 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Something on your phone needs to reach the laptop beside you and the Wi-Fi in the room is not yours. The file becomes a run of QR codes played in a loop, read back by the other device's camera. No pairing, no shared network, no server.
 
+-   :material-file-compare: **[File hash comparison](hash.md)**
+
+    Compute a file's SHA-256 and check it against the string you were given. A USB stick carried by hand, a file sent with someone else, an installer you downloaded: this is the step that confirms what arrived matches the original. Multi-gigabyte files work, with progress shown.
+
 -   :material-image-off-outline: **[File metadata remover](strip-metadata.md)**
 
     Strip EXIF, GPS, device model, authoring software, author and comment fields from photos, videos, recordings, Office documents and PDFs without the file leaving your device. For photos, videos and recordings not one byte of compressed data is touched, and every segment kept or removed is listed for you.
