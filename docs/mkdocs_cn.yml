@@ -67,8 +67,7 @@ nav:
               - tools/email-alias.md
               - tools/crypto-privacy-spectrum.md
               - tools/ai-privacy.md
-      # 顺序与分组跟着 scenarios/index.md 的「已上线」「撰写中」两节走。撰写中的页面
-      # 目前是大纲加可用段落，收进独立分组让读者点进去之前就知道。写完了就移上来。
+      # 顺序跟着 scenarios/index.md 的清单走。
       - !ENV [NAV_SCENARIOS, "场景"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
@@ -80,10 +79,9 @@ nav:
           - scenarios/singapore-malaysia-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-ai-briefing.md
-          - "撰写中（2026 Q3）":
-              - scenarios/shutdown.md
-              - scenarios/domestic-violence.md
-              - scenarios/election-observer.md
+          - scenarios/domestic-violence.md
+          - scenarios/election-observer.md
+          - scenarios/shutdown.md
       - !ENV [NAV_ADVANCED, "进阶"]:
           - advanced/index.md
           - advanced/e2ee.md
