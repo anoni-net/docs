@@ -141,6 +141,12 @@ jobs:
       - name: 檔案雜湊比對
         run: node tools/test_hash.mjs
 
+      # 雜湊比對的介面：最傷的一種錯是「還沒貼東西」被畫成「不相符」，讀者會以為
+      # 檔案在路上壞了，然後重新跑一趟實體遞送。用 DOM 替身走完選檔、讀完、貼上、
+      # 比對這條路
+      - name: 檔案雜湊比對介面
+        run: node tools/check_hash_ui.mjs
+
       # 第三方元件的標示與授權：漏掉不會有錯誤訊息，只是授權沒有被履行
       - name: 第三方元件標示
         run: node tools/test_vendor_attribution.mjs
