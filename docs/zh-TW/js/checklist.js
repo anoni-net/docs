@@ -367,7 +367,7 @@
       deviceRisk: "The encryption here is only as strong as the place that keeps the passkey. Anyone who knows your unlock code or your password manager's master password can open it too.",
       deviceRiskGate: "If the person you guard against is a partner you live with, law enforcement or a state, do not create a key or save the list on this device. There is no view-only mode here; the items are all in the scenario articles. How to tell: ",
       threatPage: "Nothing is saved by default, on the threat model checklist",
-      threatHref: "../threat-model/#nothing-is-saved-by-default",
+      threatHref: "../threat-model/#Nothing-is-saved-by-default",
       gateEnd: ".",
       enrollShow: "Enrol another device",
       enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
