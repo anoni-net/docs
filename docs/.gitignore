@@ -1,5 +1,6 @@
 output
 .cache/
+.cache
 anoni-net-docs-ipfs
 .python-version
 .DS_Store
