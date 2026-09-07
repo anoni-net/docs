@@ -185,6 +185,10 @@
       clearCancel: "取消",
       cleared: "清掉了。密碼管理器裡那把 passkey 要自己刪：iPhone 在設定的「密碼」裡搜 anoni.net，Android 在 Google 密碼管理員，Bitwarden 與 1Password 在它們的項目裡。",
       deviceRisk: "這裡的加密強度等於保管 passkey 的地方，知道你解鎖密碼或密碼管理器主密碼的人一樣開得了。",
+      deviceRiskGate: "要防的人是同住的伴侶、執法單位或國家級時，清單只勾不存，怎麼判斷見",
+      threatPage: "威脅模型清單的「答案預設不存」",
+      threatHref: "../threat-model/#答案預設不存",
+      gateEnd: "。",
       enrollShow: "登錄另一台裝置",
       enrollWarn: "下面這串就是資料金鑰本身。拍到的人可以永遠打開你的暫存區，只在你自己的兩台裝置之間用。一分鐘後自動關掉，這一頁不留它。",
       enrollSteps: "另一台打開我的準備清單，按「用另一台的鑰匙登錄這台」，拍下 QR code 或貼上字串。登錄完再用「傳到另一台」把資料搬過去。",
@@ -271,6 +275,10 @@
       clearCancel: "取消",
       cleared: "清掉了。密码管理器里那把 passkey 要自己删：iPhone 在设置的「密码」里搜 anoni.net，Android 在 Google 密码管理器，Bitwarden 与 1Password 在它们的项目里。",
       deviceRisk: "这里的加密强度等于保管 passkey 的地方，知道你解锁密码或密码管理器主密码的人一样开得了。",
+      deviceRiskGate: "要防的人是同住的伴侣、执法单位或国家级时，清单只勾不存，怎么判断见",
+      threatPage: "威胁模型清单的「答案预设不存」",
+      threatHref: "../threat-model/#答案预设不存",
+      gateEnd: "。",
       enrollShow: "登录另一台设备",
       enrollWarn: "下面这串就是数据密钥本身。拍到的人可以永远打开你的暂存区，只在你自己的两台设备之间用。一分钟后自动关掉，这一页不留它。",
       enrollSteps: "另一台打开我的准备清单，按「用另一台的钥匙登录这台」，拍下 QR code 或贴上字串。登录完再用「传到另一台」把数据搬过去。",
@@ -357,6 +365,10 @@
       clearCancel: "Cancel",
       cleared: "Cleared. The passkey in your password manager is yours to delete: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item.",
       deviceRisk: "The encryption here is only as strong as the place that keeps the passkey. Anyone who knows your unlock code or your password manager's master password can open it too.",
+      deviceRiskGate: "If the person you guard against is a partner you live with, law enforcement or a state, tick without saving. How to tell: ",
+      threatPage: "Nothing is saved by default, on the threat model checklist",
+      threatHref: "../threat-model/#nothing-is-saved-by-default",
+      gateEnd: ".",
       enrollShow: "Enrol another device",
       enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
       enrollSteps: "On the other device, open my preparation checklist, press Enrol this device with a key from another, then photograph this QR code or paste the string. Once enrolled, use Send to another device to move the data across.",
@@ -1002,6 +1014,12 @@
       }));
     }
     head.appendChild(el("p", "cl-hint", t.deviceRisk));
+    const gate = el("p", "cl-hint", t.deviceRiskGate);
+    const gateLink = el("a", null, t.threatPage);
+    gateLink.href = t.threatHref;
+    gate.appendChild(gateLink);
+    gate.appendChild(document.createTextNode(t.gateEnd));
+    head.appendChild(gate);
     head.appendChild(row);
     if (!state.exists && state.enroll.here) head.appendChild(enrollHerePanel());
     const file = document.createElement("input");
