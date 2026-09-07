@@ -434,6 +434,16 @@ test('清單頁用鑰匙頁建的 passkey 開，勾兩項重新整理後還在',
     for (const d of dates) assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `日期格式不對：${d}`);
     assert.equal((await page.credentials()).length, 1, '解開不該多出 credential');
 
+    // 閒置自動鎖上：把時鐘撥快 6 分鐘、假裝切回分頁，剛勾的那一項要先存好再鎖
+    await page.evaluate("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')[5].click(); true");
+    await page.evaluate("window.__realNow = Date.now; Date.now = () => window.__realNow() + 6 * 60 * 1000; document.dispatchEvent(new Event('visibilitychange')); true");
+    await page.waitFor("/閒置 5 分鐘，已經鎖上/.test(__vl.text('#checklist-tool'))", '閒置後要自動鎖上');
+    assert.ok(await page.evaluate("!!__vl.button('#checklist-tool', '用 passkey 解開')"), '鎖上之後要回到鎖定狀態');
+    await page.evaluate("Date.now = window.__realNow; true");
+    await page.evaluate("__vl.click('#checklist-tool', '用 passkey 解開')");
+    await page.waitFor("document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]').length > 0", '再解開');
+    assert.equal(await page.evaluate("[...document.querySelectorAll('#checklist-tool .cl-item input[type=checkbox]')].filter((i) => i.checked).length"), 3, '自動鎖上前勾的那一項要先存好');
+
     // 清除這台裝置：第一下只出現確認，取消回原狀，確認才真的清
     await page.evaluate("__vl.click('#checklist-tool', '清除這台裝置的暫存區')");
     await page.waitFor("!!__vl.button('#checklist-tool', '確定清除')", '第一下要出現確認');

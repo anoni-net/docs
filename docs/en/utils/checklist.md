@@ -91,7 +91,7 @@ No passkey yet? Create one on [Passkey as your key](passkey.md) first, or create
 
 ## How it works
 
-- Ticks are encrypted and kept in the browser's IndexedDB. The key lives in your passkey and only exists in memory while unlocked; leaving this page drops it. That is why every item link opens in a new tab: keep this page open and you do not need to unlock again. It does not lock by itself once unlocked; press "Lock" before you walk away.
+- Ticks are encrypted and kept in the browser's IndexedDB. The key lives in your passkey and only exists in memory while unlocked; leaving this page drops it. That is why every item link opens in a new tab: keep this page open and you do not need to unlock again. After 5 idle minutes it locks by itself, saving your ticks first. Still press "Lock" before you walk away.
 - If the passkey lives somewhere that syncs (iCloud, Google, Bitwarden), the other device already has it and nothing needs doing. What moves is the data on this device: export the ciphertext and import it there, unlocking with the same passkey, or press "Send to another device" and the [QR frame stream](qr-stream.md) plays it for the other device to scan; once complete that page offers "Import into my preparation checklist". The two devices need no shared network.
 - The list only records what you ticked and on which day. If the passkey is lost and the list will not open, tick again; there is no backup key step here.
 - Renaming an article heading does not affect existing ticks. Ticks follow the item's internal id.

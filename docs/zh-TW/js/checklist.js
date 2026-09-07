@@ -172,7 +172,8 @@
       createNew: "建一把新的鑰匙",
       waiting: "等你在瀏覽器的提示裡完成",
       progress: "已完成 {done} / {total}",
-      hintLinks: "項目的連結都開新分頁，這一頁留著就不用重新解鎖。勾了會自動存。",
+      hintLinks: "項目的連結都開新分頁，這一頁留著就不用重新解鎖。勾了會自動存。閒置 5 分鐘會自動鎖上。",
+      autoLocked: "閒置 5 分鐘，已經鎖上。勾過的都存好了。",
       saved: "已存。",
       lock: "鎖上",
       exportBlob: "匯出",
@@ -257,7 +258,8 @@
       createNew: "创建一把新的钥匙",
       waiting: "等你在浏览器的提示里完成",
       progress: "已完成 {done} / {total}",
-      hintLinks: "项目的链接都开新标签页，这一页留着就不用重新解锁。勾了会自动存。",
+      hintLinks: "项目的链接都开新标签页，这一页留着就不用重新解锁。勾了会自动存。闲置 5 分钟会自动锁上。",
+      autoLocked: "闲置 5 分钟，已经锁上。勾过的都存好了。",
       saved: "已存。",
       lock: "锁上",
       exportBlob: "导出",
@@ -342,7 +344,8 @@
       createNew: "Create a new key",
       waiting: "Finish the prompt in your browser",
       progress: "{done} / {total} done",
-      hintLinks: "Every link opens in a new tab, so this page stays unlocked. Ticks are saved automatically.",
+      hintLinks: "Every link opens in a new tab, so this page stays unlocked. Ticks are saved automatically. After 5 idle minutes it locks by itself.",
+      autoLocked: "Locked after 5 idle minutes. Everything you ticked is saved.",
       saved: "Saved.",
       lock: "Lock",
       exportBlob: "Export",
@@ -520,6 +523,8 @@
     state.unlocked = true;
     state.exists = true;
     buildList();
+    touch();
+    armIdle();
   }
 
   const unlock = () => guard("unlock", async () => { await vault().unlock(); await opened(); });
@@ -553,16 +558,54 @@
     if (pending) await saveNow();
   }
 
-  const lock = () =>
-    guard("lock", async () => {
-      await saveNow();
-      closeEnrollSilently();
-      vault().lock();
-      state.unlocked = false;
-      state.data = null;
-      boxes.clear();
-      list.textContent = "";
-    });
+  // 鎖上之前先把還沒寫進去的勾選存掉，自動鎖上也走這裡
+  async function doLock() {
+    await saveNow();
+    closeEnrollSilently();
+    clearTimeout(idleTimer);
+    idleTimer = null;
+    vault().lock();
+    state.unlocked = false;
+    state.data = null;
+    state.clearing = false;
+    boxes.clear();
+    list.textContent = "";
+  }
+  const lock = () => guard("lock", doLock);
+
+  // --- 閒置自動鎖上 ---
+  //
+  // 解開後放著不動 5 分鐘就鎖，讀者走開時畫面不會一直攤著明文。計時器在背景分頁會被
+  // 瀏覽器拖慢，所以切回來時再看一次最後一次動作是多久以前，超過就立刻鎖。
+  const AUTO_LOCK_MS = 5 * 60 * 1000;
+  const IDLE_POLL_MS = 30 * 1000;
+  let lastActivity = Date.now();
+  let idleTimer = null;
+  function touch() {
+    lastActivity = Date.now();
+  }
+  function armIdle() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(checkIdle, IDLE_POLL_MS);
+  }
+  function checkIdle() {
+    idleTimer = null;
+    if (!state.unlocked) return;
+    if (Date.now() - lastActivity >= AUTO_LOCK_MS) {
+      guard("lock", async () => {
+        await doLock();
+        state.message = t.autoLocked;
+      });
+      return;
+    }
+    armIdle();
+  }
+  for (const type of ["pointerdown", "keydown", "input", "scroll"]) {
+    document.addEventListener(type, touch, { passive: true, capture: true });
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkIdle();
+  });
 
   const exportBlob = () =>
     guard("export", async () => {

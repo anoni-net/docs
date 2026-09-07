@@ -152,4 +152,4 @@ A syncing passkey on your main devices, with the backup secret key in a password
 - The first use needs a connection to fetch the code. After that it stays on the device.
 - To delete the passkey: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item. "Clear the stash on this device" on the checklist page only deletes the ciphertext on that device; the passkey is deleted separately.
 - Password manager exports and shared vaults carry the passkey, and with it the stash data key. Keep track of where they go.
-- The checklist page does not lock by itself once unlocked. Press "Lock" before you walk away.
+- The checklist page locks by itself after 5 idle minutes. Still press "Lock" before you walk away.

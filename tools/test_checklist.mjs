@@ -162,8 +162,8 @@ test('登錄另一台：鑰匙限時顯示、鎖上就收、B 端經 keyFromIden
   assert.ok(/const ENROLL_MS = 60 \* 1000;/.test(src), '顯示鑰匙要限時一分鐘');
   assert.ok(/state\.enroll\.identity = await vault\(\)\.exportIdentity\(\)/.test(src), '顯示的字串要從 exportIdentity 來');
   assert.ok(/if \(left <= 0\) \{\s*closeEnroll\(\);/.test(src), '時間到要自己關掉');
-  const lockAt = src.indexOf('const lock = () =>');
-  assert.ok(src.slice(lockAt, lockAt + 300).includes('closeEnrollSilently();'), '鎖上時沒有把顯示中的鑰匙收掉');
+  const lockAt = src.indexOf('async function doLock()');
+  assert.ok(lockAt > 0 && src.slice(lockAt, lockAt + 400).includes('closeEnrollSilently();'), '鎖上時沒有把顯示中的鑰匙收掉');
   assert.ok(/window\.addEventListener\("pagehide", closeEnrollSilently\)/.test(src), '離開頁面沒有收掉');
   assert.ok(/const bytes = await vault\(\)\.keyFromIdentity\(state\.enroll\.input\);\s*await vault\(\)\.enrollDevice\(bytes\);/.test(src), 'B 端沒有經 keyFromIdentity 再 enrollDevice');
   assert.ok(/window\.qrcode\(0, "M"\)/.test(src) && /window\.jsQR\(pixels\.data, width, height\)/.test(src), 'QR 的產生與解碼要交給 vendor');
@@ -176,6 +176,17 @@ test('清除這台裝置是兩段式，第二下才呼叫 vault().clear()', () =
   const at = src.indexOf('const clearDevice = () =>');
   assert.ok(at > 0 && src.slice(at, at + 400).includes('await vault().clear();'), 'clearDevice 沒有呼叫 vault().clear()');
   assert.ok(src.slice(at, at + 400).includes('closeEnrollSilently();'), '清除前要先把顯示中的鑰匙收掉');
+});
+
+test('閒置 5 分鐘自動鎖上，鎖之前先存，切回分頁時補看一次', () => {
+  assert.ok(/const AUTO_LOCK_MS = 5 \* 60 \* 1000;/.test(src), '閒置時間要是 5 分鐘');
+  const at = src.indexOf('async function doLock()');
+  const body = src.slice(at, at + 400);
+  assert.ok(body.indexOf('await saveNow();') < body.indexOf('vault().lock();'), '鎖上之前要先把勾選存掉');
+  assert.ok(/Date\.now\(\) - lastActivity >= AUTO_LOCK_MS/.test(src), '要看最後一次動作距今多久，不能只靠計時器');
+  assert.ok(/document\.addEventListener\("visibilitychange"/.test(src) && /document\.visibilityState === "visible"\) checkIdle\(\)/.test(src), '切回分頁時要補看一次');
+  for (const type of ['pointerdown', 'keydown', 'input', 'scroll']) assert.ok(src.includes(`"${type}"`), `${type} 沒有算成活動`);
+  assert.ok(/state\.message = t\.autoLocked/.test(src), '自動鎖上要告訴讀者');
 });
 
 test('原始碼沒有把勾選送出去或寫進 localStorage 的手段', () => {
