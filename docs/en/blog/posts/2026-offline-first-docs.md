@@ -24,9 +24,9 @@ From 4 to 6 September we were at Global Gathering 2026 in Estoril, Portugal. Alo
 
 ## What we heard at Global Gathering
 
-The responses were almost entirely positive, and they converged on the same point. War, government interference and uneven distribution of network resources all degrade connectivity to where information and knowledge stop moving in time. A guide that only opens when the connection is healthy is unavailable exactly when it matters.
+The responses were almost entirely positive. War, government interference and uneven distribution of network resources are three different situations that arrive at one result: when you need to look something up, the thing you need is on the other side of a network you cannot cross.
 
-Offline reading already had a section in [the tools post](./2026-browser-side-utils.md) at the end of August. That feedback is why we moved it from a side feature to the main line of work, and everything added since has been built around it.
+Offline reading already had a section in [the tools post](./2026-browser-side-utils.md) at the end of August, where we treated it as a convenience for travellers. What we heard is why it moved to the main line of work, and everything added since has been built around it.
 
 The first half below describes what a reader actually sees. The second half covers how it works, and skipping it costs you nothing in use.
 
@@ -64,35 +64,36 @@ The [utilities section](../../utils/index.md) currently holds fourteen tools: a 
 
 Each tool's code and data are stored alongside the page that carries it and keep working with the network off. The QR code generator, reader and frame streamer plus the passphrase generator are prefetched with the core chapters, because they get used [during an outage](../../scenarios/shutdown.md). The rest are ticked individually on the offline reading page.
 
-Skipping installation removes several constraints at once:
+Skipping installation removes constraints that are otherwise hard to work around. A borrowed laptop, a public machine or an organisation-managed device that forbids new software all work without asking anyone for permission. Windows, macOS, Linux, Android and iOS behave the same, as long as there is a browser. Nothing new appears in the device's app list, and one more privacy app in that list is itself a signal. Nor does anyone end up carrying a three-year-old copy with a fixed problem still in it.
 
-- **Any operating system**: Windows, macOS, Linux, Android and iOS all behave the same, as long as there is a browser
-- **No install rights needed**: a borrowed laptop, a public machine, or a managed device that forbids new software all work
-- **No installation trace**: one more privacy app in a device's app list is itself a signal, and a web page skips that layer
-- **No version drift**: nobody ends up carrying a three-year-old copy with a fixed problem still in it
-
-A tool that keeps working with the network off is also the most direct evidence that it is not sending anything out. Open the network tab of the developer tools, run one piece of data through any of them, and watch for outbound requests. It takes under a minute, which is faster than reading the source.
+A tool that keeps working with the network off is also evidence that it is not sending anything out. To check for yourself, the developer tools in any browser have a network tab that lists every request a page makes. Run one piece of data through any tool and watch whether that list moves.
 
 ![The passkey page, with three steps: create a passkey, try one unlock, and generate a backup key, each with its own explanation and button](https://assets.anoni.net/blog/utils-passkey-2609-en.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
 ## The technical half
 
-Everything above is what a reader sees. What follows is how it works and the reasoning behind a few choices that look odd from the outside, written for anyone who wants to verify it or reuse it. If you only came to put the site on a device, this is a fine place to stop.
+Everything above is what a reader sees. What follows is how it works, and if you only came to put the site on a device, this is a fine place to stop.
+
+If you stay, there are three things we got wrong further down: a CDN setting that kept newly published content off readers' phones for four hours, a clear button that put every page back on the device as soon as it was read, and a key that an iPhone could create but not compute with. Those three passages are about symptoms and consequences, so the jargon is safe to skip.
 
 ## Offline reading is a Service Worker storing pages one at a time
 
 A Service Worker is a piece of background code the browser provides. Once registered it intercepts every request to that site and decides whether to go to the network or answer from a cache on the device. The docs site uses it for two things: putting pages on the device, and serving them from there when there is no network.
 
-The code lives in [`docs/zh-TW/sw.js`](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/sw.js){target="_blank"}, currently 1388 lines, and splits the storage into six caches:
+The code lives in [`docs/zh-TW/sw.js`](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/sw.js){target="_blank"}, currently 1388 lines. What lands on a device is split across six stores rather than one, because the three kinds of content should disappear at different moments.
 
-- **PRECACHE**: the app shell and the core chapters of the current language, named with the build version, so a release drops the whole set and re-downloads it
-- **RUNTIME_PAGES**: pages picked up as the reader browses, capped at 120
-- **RUNTIME_ASSETS**: the images and fonts those pages reference, capped at 200
-- **LIBRARY**: pages the reader ticked on the offline reading page
-- **LIBRARY_ASSETS**: the images and scripts those pages reference, kept separate so the on-screen count of pages the reader picked stays accurate
-- **SETTINGS**: the two switch values, automatic storage and inline images
+What the site stores automatically follows the site version and is dropped and re-fetched on every deploy, otherwise a reader's copy drifts further out of date with each release. What the reader ticked cannot be treated that way, because something kept deliberately should not vanish because the site shipped. What gets picked up while browsing needs an entry limit, otherwise a few rounds through image-heavy pages evict both of the other two. Three lifetimes, so three places.
 
-Keeping the reader's own selection separate has two reasons. The runtime caches have entry limits, and a few rounds through image-heavy pages would evict exactly the pages someone meant to keep. PRECACHE follows the build version and is cleared on every deploy, and something a reader deliberately kept should not disappear because the site shipped.
+| Store | Holds | Cleared when |
+|---|---|---|
+| `PRECACHE` | app shell and the core chapters of the current language | every site release |
+| `RUNTIME_PAGES` | pages picked up while browsing, capped at 120 | oldest evicted past the cap |
+| `RUNTIME_ASSETS` | images and fonts those pages reference, capped at 200 | oldest evicted past the cap |
+| `LIBRARY` | pages the reader ticked | only by the reader unticking or clearing |
+| `LIBRARY_ASSETS` | images and scripts those pages reference | with the page they belong to |
+| `SETTINGS` | the two switch values | reset to off by the clear button |
+
+`LIBRARY_ASSETS` is kept apart from `LIBRARY` so that the on-screen count of pages the reader picked stays accurate, and dozens of images are not counted as dozens of pages.
 
 The two runtime caches are only written while automatic storage is on. They used to be written unconditionally, which meant that after a reader pressed Clear all offline content, every page they read went straight back onto the device. Someone presses that button because their device may be inspected, and a stated no should hold.
 
@@ -104,17 +105,23 @@ Tor Browser and the onion and IPFS editions register no Service Worker at all, w
 
 Freshness comes from network-first. Navigation requests always go to the network, store what comes back, fall back to the cache on timeout or failure, and fall back again to that language's offline page. Reading online is therefore always current, and the only thing that goes stale is the offline copy on the device.
 
+Choosing the timeout was the hardest part of this section, and the difficulty has nothing to do with connection speed. The browser's `navigator.onLine` is only trustworthy when it reports false, and the states that actually strand a reader are the ones where it reports true: aeroplane mode with Wi-Fi still on, in-flight Wi-Fi without a plan purchased, a public hotspot holding traffic at its login page. A complete copy is sitting on the device, and the reader waits out the full timeout on every page anyway.
+
+So navigation times out after 1.2 seconds, because there is still an older copy on the device to hand over, and the reader gets complete content that is merely one round behind. On top of that, once a single navigation has timed out, anything cached is served immediately for the next minute while the network request still goes out in the background, and a success clears that state, so a reader who regains connectivity has nothing to press.
+
+Assets run on different numbers. A navigation timeout still leaves something to serve, while an asset timeout leaves a hole in the page, so the limit is eight seconds. That limit was only added on 2026-09-04; before then there was none, a network that connects without responding left requests hanging indefinitely, and because `stylesheets/extra.css` is render-blocking, a hanging request meant a blank page, with nothing rendered after forty-five seconds in testing.
+
 When a new version ships, a card floats up at the bottom of the screen reading "A newer version is available for offline reading. Updating reloads this page." Nothing is applied until the reader presses Update. Requiring that press is deliberate, because applying it reloads the current page and loses the reader's position, which is the one surprising part, so it is written on the card. Skipping it is fine, and the offline copy stays as it is until the reader decides.
 
-Installing the site as an app introduces one extra problem. The browser's soft update is triggered by navigation, which happens constantly in a tab, but a PWA sitting in the background produces no new navigation when it returns to the foreground, so the update card never appears and the reader has no update button at all. The fix is asking for a new version explicitly on foreground, throttled so that switching apps does not fire a request every time.
+Installing the site as an app introduces one extra problem. The browser's soft update is triggered by navigation, which comes up often in a tab, but a PWA sitting in the background produces no new navigation when it returns to the foreground, so the update card never appears and the reader has no update button at all. The fix is asking for a new version explicitly on foreground, throttled so that switching apps does not fire a request every time.
 
 Pages a reader ticked do not follow releases. The offline reading page carries a separate Update what is stored button that re-fetches them page by page.
 
-One more layer concerns the HTTP cache. Every request the Service Worker issues carries `cache: "no-cache"` so that it bypasses the browser's own HTTP cache. A fetch without that option consults the device's HTTP cache first and answers from it on a hit, so network-first appears to have asked the network while it actually asked itself, and that stale response is then written back into the runtime cache, keeping old content on the device even longer.
+One more layer concerns the HTTP cache. Every request the Service Worker issues carries `cache: "no-cache"`. The name invites a misreading: it means revalidating with the server every time, and when nothing has changed the server answers 304 and the cached copy is used, at the cost of one round trip. It does not skip the cache. A fetch without that option consults the device's HTTP cache first and answers from it while it still looks fresh, so the network request never leaves, network-first appears to have asked the network while it actually asked itself, and that stale response is then written back into the runtime cache, keeping old content on the device even longer.
 
 That happened on 2026-08-28. A Cloudflare Cache Rule setting all HTML to `max-age=14400` kept newly published content out of the PWA for four hours. Readers in a Safari tab never noticed, because entering from the address bar or pulling to refresh bypasses the HTTP cache anyway, while a cold start of the installed app and in-site link clicks do not. On top of that, an iOS home screen app has its own storage partition, so fresh content fetched in Safari never reached it, and only the PWA stayed on the old version.
 
-The fix that day landed in two layers. The nginx server sends `no-cache` for pages under `/docs/` and for the two index files, the Cloudflare rule was changed to respect the origin, and the Service Worker still carries its own `no-cache`. The two layers are independent, because upstream settings get changed by people who have no reason to know a Service Worker depends on them, and the symptom is readers not receiving freshly published content, which is hard to notice by clicking around in a browser.
+The fix that day landed in two layers. The nginx server sends `no-cache` for pages under `/docs/` and for the two index files, the Cloudflare rule was changed to respect the origin and pass that through, the Cloudflare edge still caches for 24 hours and is purged by `cf_purge.py` at deploy time, and the Service Worker still carries its own `no-cache`. The two layers are independent, because upstream settings get changed by people who have no reason to know a Service Worker depends on them, and the symptom is readers not receiving freshly published content, which is hard to notice by clicking around in a browser.
 
 ## The site's passkey has no account and no server
 
@@ -130,7 +137,7 @@ Creating the passkey generates a random data key on the site and places it in th
 
 ### Two, PRF derives the key on the spot
 
-The WebAuthn PRF extension gives a passkey an extra internal secret that never leaves the authenticator. The page supplies an input on each verification, and after the reader approves, the authenticator returns a fixed 32-byte output. The same passkey with the same input always produces the same output, which turns the passkey into a key calculator that only answers when a finger is on the sensor.
+This use turns the passkey into a key calculator that only answers when a finger is on the sensor, and the mechanism is the WebAuthn PRF extension. The passkey holds an extra internal secret that never leaves the authenticator, the page supplies an input on each verification, and after the reader approves, the authenticator returns a fixed 32-byte output. The same passkey with the same input always produces the same output.
 
 [Local file encryption](../../utils/age.md) wraps age's file key with that output. Without the passkey the key cannot be derived and the data is just ciphertext. That is a different thing from "shown only after verification", which is a gate written into a web page and can be walked around by anyone.
 
@@ -176,7 +183,7 @@ age -d -o backup.tar backup.tar.age
 
 Three key modes cover different situations. Passphrase mode requires no key management and its strength is exactly the strength of the passphrase. Passkey mode requires memorising nothing, at the cost of the file only opening on this origin. Recipient mode encrypts to other people, one public key per line, accepting both `age1` X25519 keys and `age1pq1` post-quantum hybrid keys.
 
-After encrypting, the page decrypts its own output with the same key and compares before offering the download. The typage library and its dependencies are vendored into `utils/vendor/age/` unmodified, so every file can be compared byte for byte against the same version's npm tarball, with hashes recorded in `vendor/README.md`. Modifying them would remove the ability to check against upstream, leaving a reader with nothing but our word for it.
+After encrypting, the page decrypts its own output with the same key and compares before offering the download. The libraries doing the encryption sit on the site unmodified, not one line changed, so anyone who wants to check can compare them byte for byte against the upstream release. Modifying them would remove that comparison, leaving a reader with nothing but our word for it.
 
 PGP stays where it belongs. The [sensitive upload](../../community/upload-sensitive.md) process on the site uses PGP, because that context needs a long-lived identity and has to work with the mail ecosystem. Mail and identity use PGP, files and backups use age.
 
