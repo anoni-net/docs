@@ -135,6 +135,12 @@ jobs:
       - name: QR code 影格串流介面
         run: node tools/check_qrstream_ui.mjs
 
+      # 檔案雜湊比對：那一頁自己實作 SHA-256（瀏覽器內建的要一次讀進整份檔案，
+      # 幾 GB 的檔案在手機上讀不動）。算錯了畫面看起來完全正常，只是那串字是錯的，
+      # 所以拿 NIST 向量、Node 的 crypto、以及不同的分塊切法交叉驗
+      - name: 檔案雜湊比對
+        run: node tools/test_hash.mjs
+
       # 第三方元件的標示與授權：漏掉不會有錯誤訊息，只是授權沒有被履行
       - name: 第三方元件標示
         run: node tools/test_vendor_attribution.mjs
