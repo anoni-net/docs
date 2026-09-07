@@ -387,7 +387,7 @@
       store: {
         title: "留一份在這台裝置（選用）",
         hint: "用你的 passkey 加密存進這台裝置的暫存區，跟我的準備清單同一份密文。站上什麼都不收。",
-        notOffered: "對手選了親密關係、一國執法或國家級，這裡不提供存檔。他們碰得到你的裝置，也可能要求你解鎖，passkey 沒有比螢幕鎖更強。要留一份就按「複製摘要」，貼到對方碰不到的地方。",
+        notOffered: "對手選了親密關係、一國執法或國家級，這裡不提供存檔。他們碰得到你的裝置，也可能要求你解鎖，passkey 沒有比螢幕鎖更強。要留一份就按「複製摘要」，貼到對方碰不到的地方，例如抄在紙上收好，或貼進對方沒有密碼的帳號。",
         restore: "用 passkey 填回上次的答案",
         restoreHint: "這台裝置的暫存區有東西。上次存過威脅模型的話，解開就填回來。",
         restoreEmpty: "暫存區裡沒有存過威脅模型。",
@@ -484,7 +484,7 @@
       store: {
         title: "留一份在这台设备（可选）",
         hint: "用你的 passkey 加密存进这台设备的暂存区，跟我的准备清单同一份密文。站上什么都不收。",
-        notOffered: "对手选了亲密关系、一国执法或国家级，这里不提供存档。他们碰得到你的设备，也可能要求你解锁，passkey 没有比屏幕锁更强。要留一份就按「复制摘要」，贴到对方碰不到的地方。",
+        notOffered: "对手选了亲密关系、一国执法或国家级，这里不提供存档。他们碰得到你的设备，也可能要求你解锁，passkey 没有比屏幕锁更强。要留一份就按「复制摘要」，贴到对方碰不到的地方，例如抄在纸上收好，或贴进对方没有密码的账号。",
         restore: "用 passkey 填回上次的答案",
         restoreHint: "这台设备的暂存区有东西。上次存过威胁模型的话，解开就填回来。",
         restoreEmpty: "暂存区里没有存过威胁模型。",
@@ -581,7 +581,7 @@
       store: {
         title: "Keep a copy on this device (optional)",
         hint: "Encrypted with your passkey into this device's stash, the same ciphertext as my preparation checklist. Nothing reaches the site.",
-        notOffered: "With someone close to you, law enforcement or state intelligence as an adversary, there is no save option here. They can reach your device and may be able to make you unlock it, and a passkey is no stronger than the screen lock. To keep a copy, press \"Copy summary\" and paste it somewhere they cannot reach.",
+        notOffered: "With someone close to you, law enforcement or state intelligence as an adversary, there is no save option here. They can reach your device and may be able to make you unlock it, and a passkey is no stronger than the screen lock. To keep a copy, press \"Copy summary\" and paste it somewhere they cannot reach, such as on paper kept out of sight or in an account they have no password for.",
         restore: "Fill in last time's answers with passkey",
         restoreHint: "This device's stash has something in it. If you saved a threat model last time, unlocking fills it back in.",
         restoreEmpty: "No threat model has been saved in the stash.",

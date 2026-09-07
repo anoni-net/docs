@@ -83,7 +83,7 @@ Create a passkey for this site and store it in your password manager or keychain
 
 ## How to use it
 
-1. Press "Create passkey". The browser asks where to store it. Choose something that syncs (iCloud Keychain, Google Password Manager, Bitwarden, 1Password) so your other devices can use the same one. Before creating it, make sure that account is not shared with the person you are protecting against: a shared iCloud or Google account syncs the passkey onto their devices too, see [digital preparation for survivors of domestic abuse](../scenarios/domestic-violence.md). On Windows the browser first offers to keep it on this computer (Windows Hello); to sync, pick your password manager or Google account instead. Once created, the page tells you which abilities this passkey has.
+1. Press "Create passkey". The browser asks where to store it. Choose something that syncs (iCloud Keychain, Google Password Manager, Bitwarden, 1Password) so your other devices can use the same one. Before creating it, make sure that account is not shared with the person you are protecting against: a shared iCloud or Google account syncs the passkey onto their devices too, see [digital preparation for survivors of domestic abuse](../scenarios/domestic-violence.md). On an iPhone with no separate password manager app, "iCloud Keychain" is the built-in feature that already remembers your passwords; pick it. Chrome on Android lists the password managers enabled on the phone; if the app you want, such as Bitwarden, is missing, enable it first under Settings, Passwords & accounts, then come back. On Windows the browser first offers to keep it on this computer (Windows Hello); if this is your only computer, keep the default, and to sync pick your password manager or Google account instead. The dialog comes from the system in the system's language and ends by asking for the PIN, fingerprint or face you sign in with. Once created, the page tells you which abilities this passkey has, and your password manager gains an entry named anoni.net that anyone who can browse the manager will see. "Nothing stored here" refers to the server side.
 2. For the checklist and similar tools, you are done here. Open [my preparation checklist](checklist.md) and press "Open with my existing key".
 3. For local file encryption, press "Test an unlock" first to confirm this environment can derive a key, then "Generate a backup key" and store the secret in your password manager, apart from the ciphertexts. Then go to [local file encryption](age.md) and choose the "passkey" mode.
 
@@ -118,9 +118,11 @@ Other sites use a passkey to sign in, which only needs a signature proving it is
 |---|---|---|---|
 | iCloud Keychain | Yes, between Apple devices | Yes | macOS 15, iOS 18.4 and later |
 | Google Password Manager | Yes | Yes | Chrome on Android |
-| Bitwarden, 1Password, Dashlane | Yes | Yes | Browser extensions on a computer yes, the iPhone and iPad apps no |
+| Bitwarden, 1Password, Dashlane | Yes | Yes | Browser extensions on a computer yes, the iPhone and iPad apps no, the Android app is untested |
 | Windows Hello | This computer only | Yes | Windows 11 from the February 2026 update |
 | USB security key | Travels with you | Not on this page | Not on this page; it needs a different storage method |
+
+This table lists only the combinations we have tested. A storage method not listed here, such as a desktop password manager like KeePassXC, works for the stash regardless; whether it can derive the key for file encryption is answered by "Test an unlock" in step 3 above.
 
 ### Only file encryption needs the iCloud Keychain on iPhone and iPad
 
@@ -132,11 +134,11 @@ Three routes, for different situations.
 
 ### Let the passkey travel with you
 
-Stored somewhere that syncs, another device opens the site and everything just opens, stash and file encryption alike. The cost is that the password manager account becomes a single point: lose the account and the keys on every device go with it.
+Stored somewhere that syncs, the passkey is already on the other device and there is nothing to create. What travels is the key; the stash data stays on the original device, so move it with "Export" or "Send to another device" on the checklist page and open it there with the same passkey. Encrypted files are just files: carry them to any device and the same passkey opens them. The cost is that the password manager account becomes a single point: lose the account and the keys on every device go with it.
 
 ### Enrol another device
 
-When the passkey did not sync to the second device (say a phone on the iCloud Keychain and a computer on Windows Hello), unlock [my preparation checklist](checklist.md) and press "Enrol another device"; on the other device press "Enrol this device with a key from another", photograph the QR code or paste the string, and that device gets a passkey with the same data key. This route serves the stash only. The string on screen is the data key itself, so use it only between your own two devices. Move the stash data afterwards with "Send to another device". Once that string has been photographed it cannot be recalled, and there is no way to rotate it; the only remedy is to clear the stash, create a new passkey and move the data back. If you end up with more than one passkey, the password manager only shows the date and time each was created and cannot tell which one can do file encryption. The key page reads out the name and says whether this one can, right after creation; rename it in the password manager (say by adding "file encryption") so the picker tells them apart, and "Test an unlock" also tells them apart later.
+When the passkey did not sync to the second device (say a phone on the iCloud Keychain and a computer on Windows Hello, or two devices of the same kind not signed in to the same password manager account), unlock [my preparation checklist](checklist.md) and press "Enrol another device"; on the other device press "Enrol this device with a key from another", photograph the QR code or paste the string, and that device gets a passkey with the same data key. This route serves the stash only. The string on screen is the data key itself, so use it only between your own two devices. Move the stash data afterwards with "Send to another device". Once that string has been photographed it cannot be recalled, and there is no way to rotate it; the only remedy is to clear the stash, create a new passkey and move the data back. If you end up with more than one passkey, the password manager only shows the date and time each was created and cannot tell which one can do file encryption. The key page reads out the name and says whether this one can, right after creation; rename it in the password manager (say by adding "file encryption") so the picker tells them apart, and "Test an unlock" also tells them apart later.
 
 ### Open files with the backup secret key
 
@@ -150,6 +152,6 @@ A syncing passkey on your main devices, with the backup secret key in a password
 - If the passkey is lost or the password manager account disappears, files encrypted with it open only with the backup key; lose that too and they are gone for good, and nobody can help. The stash is left with whatever copy you kept via export or send to another device.
 - This site stores nothing about the passkey and cannot tell whether you created one. This page is empty every time you open it, on purpose.
 - The first use needs a connection to fetch the code. After that it stays on the device.
-- To delete the passkey: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item. "Clear the stash on this device" on the checklist page only deletes the ciphertext on that device; the passkey is deleted separately.
+- To delete the passkey: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item; in any other password manager, search its items for anoni.net. "Clear the stash on this device" on the checklist page only deletes the ciphertext on that device; the passkey is deleted separately.
 - Password manager exports and shared vaults carry the passkey, and with it the stash data key. Keep track of where they go.
 - The checklist page locks by itself after 5 idle minutes. Still press "Lock" before you walk away.

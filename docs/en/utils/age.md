@@ -122,7 +122,7 @@ Under the backup key and recipient fields there is an address book: give a frequ
 
 Switch the key to "Public keys" and list recipients one per line. Both X25519 keys starting with age1 and post-quantum hybrid keys starting with age1pq1 are accepted, and each recipient opens the file with their own secret key. Add your own public key as a line if you want to open it too. If you have no key yet, press "Generate a key": the public key is added to the recipients and the secret key can only be downloaded as `key.txt`. This page keeps nothing; close it and the key is gone. The file has the same format as `age-keygen` on the command line, so the two are interchangeable.
 
-After encrypting, the tool checks that the number of header stanzas matches the number of recipients. If the key just generated is among the recipients, it also decrypts the output with it and compares.
+After encrypting, the tool checks that the number of header stanzas matches the number of recipients; that is a count only, and a mistyped public key passes it. If the key just generated is among the recipients, it also decrypts the output with it and compares. With other people's public keys alone there is nothing local to decrypt with, so send a test file and have the recipient confirm it opens before sending the real one.
 
 When a file's header has only public-key stanzas, the tool asks for a secret key: paste it into the field, pick `key.txt`, or drop `key.txt` onto the drop zone.
 

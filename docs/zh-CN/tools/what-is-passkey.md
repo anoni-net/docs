@@ -16,6 +16,8 @@ passkey 是一把存在你设备或密码管理器里的凭证。网站请它签
 
 代价是数据密钥跟着 passkey 存在密码管理器里，安全等于那个管理器的安全：谁能解锁你的密码管理器，谁就拿得到密钥。密码管理器的导出文件、共享的 vault、服务端被入侵加上一组弱的主密码，走的都是同一条路。这跟设备的屏幕锁是同一个等级，对多数人够用，对碰得到你设备又可能要求你解锁的对手不够。威胁模型清单遇到这种对手就不提供存档。
 
+只用清单这类暂存区工具的话，下面这一节可以跳过，直接看「站上存了什么」。
+
 ## 用法二，PRF 现场算出密钥
 
 WebAuthn 的 PRF 扩展让 passkey 内部多藏一把秘密，永远不离开验证器。网页每次验证附一段输入，你同意之后，验证器回传固定 32 字节的输出。同一把 passkey 配同一段输入，永远得到同一段输出。passkey 因此变成一台「只在你按指纹时才回答的密钥计算机」。
@@ -41,7 +43,7 @@ WebAuthn 的 PRF 扩展让 passkey 内部多藏一把秘密，永远不离开验
 
 passkey 绑在 `anoni.net` 这个 RP ID 上。浏览器只允许在同一个域名使用，镜像站与 onion 地址用不了。Tor Browser 整个关闭 WebAuthn，`security.webauth.webauthn` 在它的默认配置里是 false。这两条两种用法都适用。
 
-以下只影响文件加密。PRF 扩展的支持面到 2026 年 3 月：macOS 15 以上的 Safari 18、Chrome 132、Firefox 139，iOS 18.4 以上，Android 的 Chrome 配 Google 密码管理器，Windows 11 要 2026 年 2 月的更新之后。桌面上 1Password、Bitwarden、Dashlane 的浏览器扩展支持。Firefox Android 与 Windows 10 不支持。
+以下只影响文件加密。PRF 扩展的支持面到 2026 年 3 月：macOS 15 以上的 Safari 18、Chrome 132、Firefox 139，iOS 18.4 以上，Android 的 Chrome 配 Google 密码管理器，Windows 11 要 2026 年 2 月的更新之后。桌面上 1Password、Bitwarden、Dashlane 的浏览器扩展支持。Firefox Android 与 Windows 10 不支持。浏览器版本够只是一半，保管 passkey 的密码管理器也要支持，两边都对才算得出密钥，[passkey 钥匙](../utils/passkey.md)页「存到哪里」那张表按保管方式列。
 
 iPhone 与 iPad 另有两道限制。Apple 的实现不把 PRF 需要的数据传给 iCloud 钥匙串以外的保管方式，所以在 iOS 上把 passkey 存进第三方密码管理器的 app，创建得起来却算不出密钥，那一把只能用在暂存区。跨设备的流程，也就是在另一台设备上扫 QR code 那条路，同样拿不到 PRF。要在 iPhone 上做文件加密，就在 iPhone 上选 iCloud 钥匙串创建。
 

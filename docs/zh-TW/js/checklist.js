@@ -183,8 +183,12 @@
       clearHint: "會刪掉這台裝置上的密文，其他裝置與密碼管理器裡的 passkey 不受影響。沒有匯出的話，勾選、威脅模型存檔與收件人簿都會沒。",
       clearConfirm: "確定清除",
       clearCancel: "取消",
-      cleared: "清掉了。密碼管理器裡那把 passkey 要自己刪：iPhone 在設定的「密碼」裡搜 anoni.net，Android 在 Google 密碼管理員，Bitwarden 與 1Password 在它們的項目裡。",
+      cleared: "清掉了。密碼管理器裡那把 passkey 要自己刪：iPhone 在設定的「密碼」裡搜 anoni.net，Android 在 Google 密碼管理員，Bitwarden 與 1Password 在它們的項目裡，其他密碼管理器在它們的項目裡搜 anoni.net。",
       deviceRisk: "這裡的加密強度等於保管 passkey 的地方，知道你解鎖密碼或密碼管理器主密碼的人一樣開得了。",
+      deviceRiskGate: "要防的人是同住的伴侶、執法單位或國家級時，別在這台裝置上建鑰匙或存清單。這一頁沒有只看不存的模式，項目在情境文章裡都讀得到。怎麼判斷見",
+      threatPage: "威脅模型清單的「答案預設不存」",
+      threatHref: "../threat-model/#答案預設不存",
+      gateEnd: "。",
       enrollShow: "登錄另一台裝置",
       enrollWarn: "下面這串就是資料金鑰本身。拍到的人可以永遠打開你的暫存區，只在你自己的兩台裝置之間用。一分鐘後自動關掉，這一頁不留它。",
       enrollSteps: "另一台打開我的準備清單，按「用另一台的鑰匙登錄這台」，拍下 QR code 或貼上字串。登錄完再用「傳到另一台」把資料搬過去。",
@@ -269,8 +273,12 @@
       clearHint: "会删掉这台设备上的密文，其他设备与密码管理器里的 passkey 不受影响。没有导出的话，勾选、威胁模型存档与收件人簿都会没。",
       clearConfirm: "确定清除",
       clearCancel: "取消",
-      cleared: "清掉了。密码管理器里那把 passkey 要自己删：iPhone 在设置的「密码」里搜 anoni.net，Android 在 Google 密码管理器，Bitwarden 与 1Password 在它们的项目里。",
+      cleared: "清掉了。密码管理器里那把 passkey 要自己删：iPhone 在设置的「密码」里搜 anoni.net，Android 在 Google 密码管理器，Bitwarden 与 1Password 在它们的项目里，其他密码管理器在它们的项目里搜 anoni.net。",
       deviceRisk: "这里的加密强度等于保管 passkey 的地方，知道你解锁密码或密码管理器主密码的人一样开得了。",
+      deviceRiskGate: "要防的人是同住的伴侣、执法单位或国家级时，别在这台设备上创建钥匙或存清单。这一页没有只看不存的模式，项目在情境文章里都读得到。怎么判断见",
+      threatPage: "威胁模型清单的「答案预设不存」",
+      threatHref: "../threat-model/#答案预设不存",
+      gateEnd: "。",
       enrollShow: "登录另一台设备",
       enrollWarn: "下面这串就是数据密钥本身。拍到的人可以永远打开你的暂存区，只在你自己的两台设备之间用。一分钟后自动关掉，这一页不留它。",
       enrollSteps: "另一台打开我的准备清单，按「用另一台的钥匙登录这台」，拍下 QR code 或贴上字串。登录完再用「传到另一台」把数据搬过去。",
@@ -355,8 +363,12 @@
       clearHint: "Deletes the ciphertext on this device only; other devices and the passkey in your password manager are untouched. Without an export, the ticks, the saved threat model answers and the address book are gone.",
       clearConfirm: "Yes, clear it",
       clearCancel: "Cancel",
-      cleared: "Cleared. The passkey in your password manager is yours to delete: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item.",
+      cleared: "Cleared. The passkey in your password manager is yours to delete: on iPhone search for anoni.net under Settings, Passwords; on Android, Google Password Manager; in Bitwarden or 1Password, its own item; in any other password manager, search its items for anoni.net.",
       deviceRisk: "The encryption here is only as strong as the place that keeps the passkey. Anyone who knows your unlock code or your password manager's master password can open it too.",
+      deviceRiskGate: "If the person you guard against is a partner you live with, law enforcement or a state, do not create a key or save the list on this device. There is no view-only mode here; the items are all in the scenario articles. How to tell: ",
+      threatPage: "Nothing is saved by default, on the threat model checklist",
+      threatHref: "../threat-model/#Nothing-is-saved-by-default",
+      gateEnd: ".",
       enrollShow: "Enrol another device",
       enrollWarn: "The string below is the data key itself. Anyone who photographs it can open your stash forever, so use it only between your own two devices. It closes by itself after a minute and this page keeps no copy.",
       enrollSteps: "On the other device, open my preparation checklist, press Enrol this device with a key from another, then photograph this QR code or paste the string. Once enrolled, use Send to another device to move the data across.",
@@ -1002,6 +1014,12 @@
       }));
     }
     head.appendChild(el("p", "cl-hint", t.deviceRisk));
+    const gate = el("p", "cl-hint", t.deviceRiskGate);
+    const gateLink = el("a", null, t.threatPage);
+    gateLink.href = t.threatHref;
+    gate.appendChild(gateLink);
+    gate.appendChild(document.createTextNode(t.gateEnd));
+    head.appendChild(gate);
     head.appendChild(row);
     if (!state.exists && state.enroll.here) head.appendChild(enrollHerePanel());
     const file = document.createElement("input");
