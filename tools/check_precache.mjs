@@ -56,6 +56,7 @@ const harness = `
   ${grab(/^function crossLangAsset\(asset\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function assetUrlFor\(prefix, asset\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const SHELL_ASSETS = \[[\s\S]*?\n\];/m)}
+  ${grab(/^const UTIL_ASSETS = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_ZH = \[[\s\S]*?\n\];/m)}
   ${grab(/^const CORE_PAGES_EN = \[[\s\S]*?\n\];/m)}
   ${grab(/^const GAME_APPS = \[[\s\S]*?\n\];/m)}
