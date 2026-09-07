@@ -155,14 +155,14 @@ icon: material/lifebuoy
 
 情境差异大，列出常见的应对方向：
 
-- **特定网站打不开**：先用 OONI Probe 或 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 确认是个别封锁还是区域问题，可参考 [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 看 TW 的观测现况
+- **特定网站无法打开**：先用 OONI Probe 或 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 确认是个别封锁还是区域问题，可参考 [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 看 TW 的观测现况
 - **整个家用网络被中断**：先确认是否电信端的问题（拨打 ISP 客服）。如果怀疑是针对性处置，记录时间、IP、服务名称与消息截图
 - **跨境连线受限**：尝试 Tor Browser 与内建桥接（obfs4、Snowflake、meek-azure）。桥接点建立可参考 [Tor Snowflake](../tools/tor-snowflake.md)
 - **完全无法连上 Tor**：透过电子邮件（[bridges@torproject.org](mailto:bridges@torproject.org)）申请非公开桥接
 
 ## 趁有网络时，把文档站装成离线 App
 
-断网或被封锁时，连不上网就查不到这页的应对步骤。趁现在还能连接，用一般浏览器打开这个文档站并选一次阅读语言，核心章节就会下载到设备，之后没网络也能查阅。再把它装成 App（PWA，把网站像一般 App 一样装到设备上），断网时直接点图标就进得来。
+断网或被封锁时，连不上网就查不到这页的应对步骤。趁现在还能连接，用一般浏览器打开这个文档站并选一次阅读语言，核心章节就会下载到设备，之后没网络也能查阅。再把它装成 App（PWA，把网站像一般 App 一样装到设备上），断网时直接点图标就能进入。
 
 !!! tip "建议现在就做"
     这是预先准备。等网络断了才装就来不及，花一分钟装好，等于在手机或电脑里先存一份离线版指南。
