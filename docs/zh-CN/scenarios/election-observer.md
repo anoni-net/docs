@@ -171,6 +171,7 @@ icon: material/vote-outline
 - [社运行动者的数字准备](./activist.md)：行动现场与被临检时的装置与通讯应对
 - [记者保护消息来源](./journalist.md)：敏感文件交换与访谈记录保存，metadata 纪律与这页共用
 - [出差与研讨会的数字准备](./asia-travel.md)：装置出入境、干净装置的完整做法
+- [网络中断时的准备与应对](./shutdown.md)：选举日的网络中断分成四级，各级的判断方式与还剩下的渠道
 - [威胁模型如何建立](../basics/threat-model.md)：跨境任务的威胁模型如何建立
 - [Tails](../tools/what-is-tails.md)：不信任当地网络或共用装置时的角色，完整选择逻辑见 [匿名操作系统比较](../tools/tails-vs-whonix-vs-qubes.md)
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}：跨境任务遇到紧急数字安全问题时的多语求助管道
