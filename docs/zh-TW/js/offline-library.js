@@ -177,6 +177,11 @@
     #offline-library .ol-path__done { margin: 0; opacity: .7; }
     #offline-library .ol-path .ol-hint { margin: .3rem 0 0; }
     #offline-library .ol-paths ~ .ol-hint { margin-left: 0; }
+    /* 觸控裝置上把按鈕與整行的勾選標籤撐到約 44px，站上其他工具都有這一條，這一頁漏了 */
+    @media (pointer: coarse) {
+      #offline-library button { min-height: 2.2rem; }
+      #offline-library .ol-auto, #offline-library .ol-filter { padding: .5rem 0; }
+    }
   `;
   const style = document.createElement("style");
   // 規則寫的是 #offline-library，起步索引頁的根節點是 #start-offline，注入時換掉

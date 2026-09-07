@@ -370,7 +370,8 @@
     #age-tool label.ag-label { display: block; font-size: .74rem; margin: .8rem 0 .2rem; }
     #age-tool .ag-row { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
     #age-tool input[type="password"], #age-tool input[type="text"] {
-      font: inherit; font-size: .8rem; flex: 1; min-width: 12rem;
+      /* iOS Safari 在輸入框字級小於 16px 時一聚焦就放大整頁，處理同 qrcode.js */
+      font: inherit; font-size: max(16px, .8rem); flex: 1; min-width: 12rem;
       padding: .4rem .6rem; border: .05rem solid var(--md-default-fg-color--lighter);
       border-radius: .1rem; background: var(--md-default-bg-color); color: inherit;
     }
@@ -403,7 +404,8 @@
       margin: .8rem 0; font-size: .74rem; line-height: 1.7;
     }
     #age-tool textarea.ag-paste, #age-tool textarea.ag-out {
-      width: 100%; box-sizing: border-box; font-size: .74rem; line-height: 1.6;
+      /* iOS Safari 在輸入框字級小於 16px 時一聚焦就放大整頁，處理同 qrcode.js */
+      width: 100%; box-sizing: border-box; font-size: max(16px, .74rem); line-height: 1.6;
       font-family: var(--md-code-font-family, monospace); padding: .5rem .6rem;
       border: .05rem solid var(--md-default-fg-color--lighter); border-radius: .1rem;
       background: var(--md-code-bg-color); color: inherit; resize: vertical;
