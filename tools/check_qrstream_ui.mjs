@@ -84,8 +84,20 @@ class Node {
     // 步驟用 dataset.state 表示還沒輪到、現在要動、做完了
     this.dataset = {};
     this.classList = {
-      add: (name) => this._classes().add(name) && this._writeClasses(),
-      remove: (name) => this._classes().delete(name) && this._writeClasses(),
+      // _classes() 每次回傳一份新的 Set，改完要把它交回去寫。原本寫的是
+      // this._classes().add(name) && this._writeClasses()，後半段沒收到那份 Set，
+      // 於是又從 className 重讀一次，加進去的名字就丟了。toggle 一直是對的，
+      // 因為它有把 set 傳下去，所以這個洞在有人用 add 之前都不會被發現
+      add: (name) => {
+        const set = this._classes();
+        set.add(name);
+        this._writeClasses(set);
+      },
+      remove: (name) => {
+        const set = this._classes();
+        set.delete(name);
+        this._writeClasses(set);
+      },
       contains: (name) => this._classes().has(name),
       toggle: (name, on) => {
         const set = this._classes();
@@ -123,9 +135,28 @@ class Node {
     this.children = [];
     this._text = String(value);
   }
+  // parentNode 與 removeChild 是紙本那條路要用的：列印收工時把容器從 body 上拿掉，
+  // 靠的是 printRoot.parentNode.removeChild(printRoot)。少了這兩個，clearPrint 的
+  // 第一個判斷就是 false，容器會一直留著而測試看不出差別
   appendChild(node) {
+    node.parentNode = this;
     this.children.push(node);
     return node;
+  }
+  removeChild(node) {
+    const at = this.children.indexOf(node);
+    if (at >= 0) this.children.splice(at, 1);
+    node.parentNode = null;
+    return node;
+  }
+  // 紙本輸出用 innerHTML 塞 SVG（來源是自己組的字串）。替身存起來，測試才驗得到
+  // 印出去的是什麼
+  set innerHTML(value) {
+    this._html = String(value);
+    this.children = [];
+  }
+  get innerHTML() {
+    return this._html || '';
   }
   setAttribute(name, value) {
     this.attributes[name] = String(value);
@@ -172,8 +203,10 @@ const root = new Node('div');
 root.id = 'qr-stream-tool';
 
 const blobs = [];
+const body = new Node('body');
 const document_ = {
   documentElement: { lang: 'zh-TW' },
+  body,
   getElementById: (id) => (id === 'qr-stream-tool' ? root : null),
   createElement: (tag) => new Node(tag),
   createTextNode: (text) => new TextNode(text),
@@ -189,7 +222,15 @@ const window_ = {
   devicePixelRatio: 1,
   CompressionStream: globalThis.CompressionStream,
   DecompressionStream: globalThis.DecompressionStream,
-  addEventListener() {},
+  // 紙本那條路要 afterprint 才會把列印容器清掉，空實作的話測不到清乾淨沒有
+  listeners: {},
+  addEventListener(type, fn) {
+    (this.listeners[type] = this.listeners[type] || []).push(fn);
+  },
+  printed: 0,
+  print() {
+    this.printed += 1;
+  },
   // 播放迴圈與掃描迴圈都靠 setTimeout 自己接下一輪。真的排下去會讓這支永遠不結束，
   // 所以只記下來，測試自己決定要不要跑。
   setTimeout(fn, delay) {
@@ -445,6 +486,122 @@ test('拍到雜訊不會被當成一張收下', async () => {
   ];
   input.dispatch('change');
   await waitFor(() => messageIn(panels()[1]).includes('沒有找到'), '找不到影格的說明');
+});
+
+// ---------------------------------------------------------------------------
+// 紙本輸出
+//
+// 排版錯了不會有任何錯誤訊息，只會印出一疊少了幾張的紙，而發現的時候人已經在
+// 沒有網路的地方，手上只有那疊紙。所以這裡驗的是張數有沒有全部上紙、頁數對不對、
+// 以及列印容器有沒有在收工之後清掉（留著的話下一次列印別的頁面會變成空白）。
+// ---------------------------------------------------------------------------
+
+/** 把一個檔案送進傳送端，回傳它切成幾張 */
+async function loadForPrint(name, bytes) {
+  // 前面的測試把分頁留在接收端，而 renderSend 在那個狀態下直接 return，畫面上的
+  // 切張結果永遠不會更新
+  buttonSaying('傳送').click();
+  const file = {
+    name,
+    size: bytes.length,
+    type: 'application/octet-stream',
+    arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.length),
+  };
+  root.find((n) => n.id === 'qs-drop').dispatch('drop', {
+    preventDefault() {},
+    dataTransfer: { files: [file] },
+  });
+  // 這一支的測試共用同一個 root，前一個測試留下的切張結果還掛在畫面上。只等
+  // 「切成」兩個字的話會立刻拿到舊的那一行，而新檔案其實還在處理，接下來按的
+  // 每一個按鈕都是對著舊狀態按的。等到檔名也換過去才算數
+  const plan = await waitFor(
+    () => {
+      const node = root.find((n) => n.className === 'qs-hint' && n.textContent.includes('切成'));
+      return node && node.textContent.includes(name) ? node : null;
+    },
+    `${name} 的切張結果（傳送端訊息：${messageIn(panels()[0])}）`
+  );
+  return Number(plan.textContent.match(/切成 (\d+) 張/)[1]);
+}
+
+const printRootIn = () => body.children.find((n) => n.className === 'qs-print');
+const fireAfterPrint = () => {
+  for (const fn of window_.listeners.afterprint || []) fn();
+  window_.listeners.afterprint = [];
+};
+
+test('沒選檔案之前印不了', () => {
+  assert.ok(buttonSaying('印成紙本'), '找不到印成紙本的按鈕');
+});
+
+test('印成紙本把每一張都排上頁，頁數與張數都對得起來', async () => {
+  const total = await loadForPrint('paper.txt', new TextEncoder().encode('paper mode '.repeat(60)));
+  const printedBefore = window_.printed;
+  buttonSaying('印成紙本').dispatch('click');
+
+  const sheet = printRootIn();
+  assert.ok(sheet, '按了沒有產生列印版面');
+  const cells = sheet.findAll((n) => n.className === 'qs-cell');
+  assert.equal(cells.length, total, `紙上有 ${cells.length} 張，實際切成 ${total} 張`);
+  const sheets = sheet.findAll((n) => n.className === 'qs-sheet');
+  assert.equal(sheets.length, Math.ceil(total / 4), '頁數不對');
+  assert.equal(window_.printed, printedBefore + 1, '沒有叫出列印對話框');
+});
+
+test('每一格裡是 SVG，不是把畫布放大的點陣圖', () => {
+  const cells = printRootIn().findAll((n) => n.className === 'qs-cell');
+  for (const cell of cells) {
+    const holder = cell.children.find((n) => n.className === 'qs-svg');
+    assert.ok(holder, '格子裡沒有圖');
+    assert.ok(holder.innerHTML.startsWith('<svg'), '圖不是 SVG');
+    assert.ok(holder.innerHTML.includes('shape-rendering="crispEdges"'), '沒有關掉平滑，印出來會糊');
+  }
+});
+
+test('編號印在每一張下面，收的人才知道漏了哪一張', () => {
+  const nums = printRootIn().findAll((n) => n.className === 'qs-num').map((n) => n.textContent);
+  assert.ok(nums.length > 0, '沒有編號');
+  assert.ok(nums.every((text) => /編號 \d+/.test(text)), `編號的格式不對：${nums[0]}`);
+  // 標的要是內部編號（0 起算），接收端說「還缺 3」的時候才找得到那一張
+  assert.ok(nums.some((text) => text.includes('編號 0')), '沒有從 0 起算');
+});
+
+test('讀回的說明只印在第一頁', () => {
+  const sheets = printRootIn().findAll((n) => n.className === 'qs-sheet');
+  const howto = sheets.map((s) => s.findAll((n) => n.className === 'qs-sheet-howto').length);
+  assert.equal(howto[0], 1, '第一頁沒有讀回的說明');
+  for (let i = 1; i < howto.length; i += 1) {
+    assert.equal(howto[i], 0, `第 ${i + 1} 頁也印了說明，那會吃掉版面`);
+  }
+});
+
+test('列印期間站台其他部分靠 body 的 class 藏起來', () => {
+  assert.ok(
+    String(body.className).split(/\s+/).includes('qs-printing'),
+    'body 上沒有掛列印用的 class，站台的導覽與頁尾會跟著印'
+  );
+});
+
+test('收工之後把列印容器清掉，下一次列印別的頁面才不會變空白', () => {
+  fireAfterPrint();
+  assert.equal(printRootIn(), undefined, '列印容器還留在 body 上');
+  assert.ok(!String(body.className).split(/\s+/).includes('qs-printing'), 'class 沒有清掉');
+});
+
+test('張數超過上限就不印，並且說得出為什麼', async () => {
+  // 資料要壓不動，張數才是實打實的。(i * 31 + 7) & 0xff 那種週期 256 的序列會被
+  // 壓成幾百個位元組，切出來只有三張；換成固定種子的 LCG 還是被壓到剩四十幾張。
+  // 這裡用真的亂數，壓縮器沒有東西可以吃，200 KB 在任何一檔密度下都遠超過上限
+  const big = new Uint8Array(200 * 1024);
+  for (let i = 0; i < big.length; i += 1) big[i] = (Math.random() * 256) | 0;
+  const total = await loadForPrint('too-many.bin', big);
+  assert.ok(total > 120, `這個檔案只切成 ${total} 張，測不到上限`);
+  const printedBefore = window_.printed;
+  buttonSaying('印成紙本').dispatch('click');
+  assert.equal(printRootIn(), undefined, '超過上限還是印了');
+  assert.equal(window_.printed, printedBefore, '超過上限還是叫了列印對話框');
+  const message = messageIn(panels()[0]);
+  assert.ok(message.includes(String(total)), `訊息裡沒有說幾張：${message}`);
 });
 
 for (const [name, fn] of tests) {

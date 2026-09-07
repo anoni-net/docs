@@ -313,6 +313,61 @@
     return Math.floor(whole / 60) + "m" + String(whole % 60).padStart(2, "0") + "s";
   }
 
+  // 方格矩陣轉成 SVG，紙本輸出用。
+  //
+  // 印出來的碼用向量而不是把畫布的點陣放大：雷射印表機是 600 dpi，畫布在螢幕上是
+  // 幾百像素寬，放大到 80 mm 邊緣會糊，而糊掉的方格邊界正是解碼器最先失敗的地方。
+  //
+  // 每個方格畫一個 rect 會產生上萬個節點，一頁四張就是四萬個，瀏覽器排版會卡住。
+  // 改成一列裡連續的黑格併成一個 rect，節點數少一個數量級。產生器那一頁
+  // （docs/zh-TW/js/qrcode.js）有同樣做法的一份，兩邊不共用是刻意的：那一支的
+  // 輸出要給讀者下載，這一支只進列印版面，改動的理由不會一樣。
+  function matrixToSvg(modules, quiet) {
+    const size = modules.length;
+    const total = size + quiet * 2;
+    const parts = [];
+    for (let row = 0; row < size; row += 1) {
+      let start = -1;
+      for (let col = 0; col <= size; col += 1) {
+        const dark = col < size && modules[row][col];
+        if (dark && start < 0) start = col;
+        if (!dark && start >= 0) {
+          parts.push(
+            `<rect x="${start + quiet}" y="${row + quiet}" width="${col - start}" height="1"/>`
+          );
+          start = -1;
+        }
+      }
+    }
+    return (
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" ` +
+      `shape-rendering="crispEdges">` +
+      `<rect width="${total}" height="${total}" fill="#ffffff"/>` +
+      `<g fill="#000000">${parts.join("")}</g></svg>`
+    );
+  }
+
+  // 每一頁放哪幾張。最後一頁不補滿，補了會印出空白的框讓人以為漏印。
+  function sheetsFor(total, perSheet) {
+    const sheets = [];
+    for (let at = 0; at < total; at += perSheet) {
+      const page = [];
+      for (let i = at; i < Math.min(at + perSheet, total); i += 1) page.push(i);
+      sheets.push(page);
+    }
+    return sheets;
+  }
+
+  // 這份東西印不印得完。
+  //
+  // 螢幕串流播不完只是等久一點，紙本印不完是一疊沒有人會去掃的紙。所以上限訂在
+  // 張數而不是位元組：同一個檔案在極限密度下是十幾張，在小密度下是幾百張，決定
+  // 這件事該不該做的是張數。
+  function printCheck(total, perSheet, limit) {
+    const pages = Math.ceil(total / perSheet);
+    return { ok: total <= limit, total: total, pages: pages };
+  }
+
   // --- 介面 ---
 
   const root = document.getElementById("qr-stream-tool");
@@ -366,6 +421,16 @@
 
   // 規範要求的四個方格留白。少了它有些掃描器對不到邊界。
   const QUIET = 4;
+
+  // 紙本一頁放幾張。A4 扣掉頁邊之後 2×2 讓每張約 78 mm，極限密度是 177 個方格，
+  // 一格 0.44 mm，600 dpi 的雷射印表機一格有十個點，手機拍單張也解得開。
+  // 3×3 每張只剩 52 mm，同樣密度一格 0.29 mm，一般噴墨就開始糊，而糊掉的方格
+  // 邊界正是解碼器最先失敗的地方。
+  const PRINT_PER_SHEET = 4;
+
+  // 紙本的張數上限。螢幕播不完只是等久一點，紙本印不完是一疊沒有人會去掃的紙。
+  // 120 張是 30 頁，已經是一疊了，再多應該換做法而不是加印。
+  const PRINT_MAX_FRAMES = 120;
 
   // 檔案大小上限。這不是技術限制，是誠實：1 MB 在中檔密度下是兩千多張，一輪要七
   // 分鐘，而且要收齊通常不只一輪。與其讓人試完才失望，不如一開始就講。
@@ -437,6 +502,13 @@
       play: "開始播放",
       pause: "暫停",
       change: "換一個檔案",
+      printBtn: "印成紙本",
+      printTitle: "{name}，共 {total} 張，{pages} 頁",
+      printHowTo: "用另一台裝置打開這一頁的「接收」，把鏡頭對著紙上的每一張讀過去。順序不重要，收齊就會拼回原檔。這疊紙上的內容沒有加密，拍得到的人都讀得到。",
+      printFrame: "編號 {index}",
+      printSheet: "第 {page} 頁，共 {pages} 頁",
+      printTooMany: "這個檔案在目前的設定下是 {total} 張，要印 {pages} 頁。把每張資料量調到大或極限可以少印很多，或者換一個小一點的檔案。紙本上限是 {limit} 張。",
+      printHint: "印出來的紙可以隨身帶、可以寄，不必依賴任何裝置或電力。適合金鑰、設定檔這類小東西。",
       plan: "{name}，{size}，切成 {total} 張，每張 {payload} 個位元組。一輪 {duration}。",
       planZip: "{name}，{size}（壓成 {stream}），切成 {total} 張，每張 {payload} 個位元組。一輪 {duration}。",
       longWarn: "一輪就要 {duration}，而收齊通常不只一輪。換小一點的檔案，或把每張資料量調大。",
@@ -499,6 +571,13 @@
       play: "开始播放",
       pause: "暂停",
       change: "换一个文件",
+      printBtn: "印成纸质",
+      printTitle: "{name}，共 {total} 张，{pages} 页",
+      printHowTo: "用另一台设备打开这一页的「接收」，把镜头对着纸上的每一张读过去。顺序不重要，收齐就会拼回原文件。这叠纸上的内容没有加密，拍得到的人都读得到。",
+      printFrame: "编号 {index}",
+      printSheet: "第 {page} 页，共 {pages} 页",
+      printTooMany: "这个文件在目前的设置下是 {total} 张，要印 {pages} 页。把每张数据量调到大或极限可以少印很多，或者换一个小一点的文件。纸质上限是 {limit} 张。",
+      printHint: "印出来的纸可以随身带、可以寄，不必依赖任何设备或电力。适合密钥、配置文件这类小东西。",
       plan: "{name}，{size}，切成 {total} 张，每张 {payload} 个字节。一轮 {duration}。",
       planZip: "{name}，{size}（压成 {stream}），切成 {total} 张，每张 {payload} 个字节。一轮 {duration}。",
       longWarn: "一轮就要 {duration}，而收齐通常不只一轮。换小一点的文件，或把每张数据量调大。",
@@ -561,6 +640,13 @@
       play: "Start playing",
       pause: "Pause",
       change: "Pick another file",
+      printBtn: "Print on paper",
+      printTitle: "{name}, {total} codes across {pages} pages",
+      printHowTo: "Open Receive on this page on another device and read every code on the paper with its camera. Order does not matter; once the set is complete the original file is reassembled. Nothing on this paper is encrypted, so anyone who photographs it can read it.",
+      printFrame: "No. {index}",
+      printSheet: "Page {page} of {pages}",
+      printTooMany: "At the current setting this file is {total} codes across {pages} pages. Raising the payload per code to large or maximum cuts that down a lot, or pick a smaller file. The limit for paper is {limit} codes.",
+      printHint: "Paper can be carried or posted, and it depends on no device and no power. It suits keys, config files and other small things.",
       plan: "{name}, {size}, split into {total} frames of {payload} bytes each. One pass takes {duration}.",
       planZip: "{name}, {size} (compressed to {stream}), split into {total} frames of {payload} bytes each. One pass takes {duration}.",
       longWarn: "One pass alone takes {duration}, and collecting every frame usually takes more than one. Send a smaller file, or raise the data per frame.",
@@ -696,6 +782,7 @@
     send.index = 0;
     send.loop = 1;
     send.error = null;
+    send.notice = "";
   }
 
   async function prepare(file) {
@@ -848,6 +935,81 @@
         }
       }
     }
+  }
+
+  // 把整份切好的張數排成可列印的版面。
+  //
+  // 接收端一個位元組都不必改：每一張自己帶著 sessionId、總張數、編號與 CRC，收的
+  // 順序無所謂，所以紙上的碼跟螢幕上播的碼是同一種東西，用同一個「接收」讀回來。
+  // 這裡做的只有排版。
+  //
+  // 列印期間把 body 的其他子節點藏起來，靠的是掛在 body 上的 class 與 .qs-print
+  // 這個容器。afterprint 收工時一起清掉，留著會讓下一次列印別的頁面也變成空白。
+  let printRoot = null;
+
+  function clearPrint() {
+    if (printRoot && printRoot.parentNode) printRoot.parentNode.removeChild(printRoot);
+    printRoot = null;
+    document.body.classList.remove("qs-printing");
+  }
+
+  function printSheets() {
+    if (!send.total) return;
+    const check = printCheck(send.total, PRINT_PER_SHEET, PRINT_MAX_FRAMES);
+    if (!check.ok) {
+      send.notice = fill("printTooMany", {
+        total: check.total,
+        pages: check.pages,
+        limit: PRINT_MAX_FRAMES,
+      });
+      renderSend();
+      return;
+    }
+    send.notice = "";
+    stopPlaying();
+    clearPrint();
+
+    const sheets = sheetsFor(send.total, PRINT_PER_SHEET);
+    printRoot = el("div", "qs-print");
+    sheets.forEach((page, at) => {
+      const sheet = el("section", "qs-sheet");
+      const head = el("div", "qs-sheet-head");
+      head.appendChild(
+        el(
+          "p",
+          "qs-sheet-title",
+          fill("printTitle", { name: send.name, total: send.total, pages: sheets.length })
+        )
+      );
+      head.appendChild(
+        el("p", "qs-sheet-page", fill("printSheet", { page: at + 1, pages: sheets.length }))
+      );
+      // 讀回的說明只印在第一頁。每一頁都印會吃掉版面，而拿到這疊紙的人一定看得到
+      // 第一頁
+      if (at === 0) head.appendChild(el("p", "qs-sheet-howto", t.printHowTo));
+      sheet.appendChild(head);
+
+      const grid = el("div", "qs-grid");
+      for (const index of page) {
+        const cell = el("div", "qs-cell");
+        const holder = el("div", "qs-svg");
+        // innerHTML 只吃 matrixToSvg 組出來的字串，內容全部是數字與固定的標籤
+        holder.innerHTML = matrixToSvg(matrixFor(index), QUIET);
+        cell.appendChild(holder);
+        // 標的是內部編號，跟接收端「還缺 3、7」用的是同一套。改成人看的 1 起算會
+        // 對不上，讀者拿著紙一張一張找的時候正需要那個對應
+        cell.appendChild(el("p", "qs-num", fill("printFrame", { index: index })));
+        grid.appendChild(cell);
+      }
+      sheet.appendChild(grid);
+      printRoot.appendChild(sheet);
+    });
+
+    document.body.appendChild(printRoot);
+    document.body.classList.add("qs-printing");
+    window.addEventListener("afterprint", clearPrint, { once: true });
+    window.print();
+    renderSend();
   }
 
   function tick() {
@@ -1300,6 +1462,30 @@
       color: var(--md-default-fg-color--light); font-size: .7rem; margin-top: 1.2rem;
     }
     #qr-stream-tool[hidden] { display: none; }
+
+    /* 紙本輸出。容器掛在 body 底下而不是工具裡面，列印時才有辦法只留它一個，
+       站台的導覽、側欄與頁尾都不會跟著印。螢幕上一律不顯示，這一段的唯一觀眾
+       是印表機。 */
+    .qs-print { display: none; }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body.qs-printing > *:not(.qs-print) { display: none !important; }
+      body.qs-printing .qs-print { display: block; }
+      .qs-print .qs-sheet { page-break-after: always; break-after: page; }
+      .qs-print .qs-sheet:last-child { page-break-after: auto; break-after: auto; }
+      .qs-print .qs-sheet-head { margin: 0 0 4mm; color: #000; }
+      .qs-print .qs-sheet-title { font-size: 10pt; margin: 0; font-weight: bold; }
+      .qs-print .qs-sheet-page { font-size: 9pt; margin: 1mm 0 0; }
+      .qs-print .qs-sheet-howto { font-size: 9pt; margin: 2mm 0 0; line-height: 1.5; }
+      .qs-print .qs-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm;
+      }
+      .qs-print .qs-cell { text-align: center; break-inside: avoid; page-break-inside: avoid; }
+      .qs-print .qs-cell svg { width: 78mm; height: 78mm; display: block; margin: 0 auto; }
+      .qs-print .qs-num {
+        font-family: monospace; font-size: 9pt; margin: 1mm 0 0; color: #000;
+      }
+    }
   `;
 
   const dom = {};
@@ -1484,7 +1670,13 @@
       }
     });
     playRow.appendChild(dom.play);
+
+    dom.print = el("button", null, t.printBtn);
+    dom.print.type = "button";
+    dom.print.addEventListener("click", printSheets);
+    playRow.appendChild(dom.print);
     dom.stepPlay.body.appendChild(playRow);
+    dom.stepPlay.body.appendChild(el("p", "qs-hint", t.printHint));
 
     const stage = el("div", "qs-stage");
     dom.canvas = el("canvas", "qs-code");
@@ -1659,6 +1851,7 @@
 
     dom.pick.textContent = send.data ? t.change : t.pick;
     dom.play.disabled = !send.total;
+    dom.print.disabled = !send.total;
     dom.play.textContent = send.playing ? t.pause : t.play;
     dom.canvas.hidden = !send.total;
     dom.sendMsg.classList.toggle("qs-bad", Boolean(send.error));
@@ -1691,6 +1884,8 @@
       dom.sendMsg.textContent = "";
     }
     if (send.error) dom.sendMsg.textContent = send.error;
+    // 印不出來的提示跟在最後。那不是錯誤，檔案照樣可以用螢幕播，所以不套 qs-bad
+    if (send.notice) dom.sendMsg.textContent = send.notice;
     if (!send.total) dom.frameNow.textContent = "";
     if (send.total && !send.playing) drawMatrix(dom.canvas, matrixFor(send.index));
   }

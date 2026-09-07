@@ -169,6 +169,34 @@ The tool computes a checksum (SHA-256) of the file and puts it in the first fram
 
 Note what the fingerprint does and does not show. It proves **the file did not get corrupted in transit**. It says nothing about **who gave it to you**, which you still have to establish some other way: checking a PGP fingerprint face to face, or confirming through a [channel where trust already exists](../tools/messaging-comparison.md).
 
+## Printing it on paper
+
+"Print on paper" lays every code out for A4, four to a page, each one numbered underneath. The stack that comes out of the printer is the file.
+
+The situations where this beats the screen version are different ones:
+
+- **The other person is not here:** paper can be posted, sent with someone, or left in a drawer for them to scan days later
+- **The power is out too:** paper needs none, which makes it one of the few carriers still working at [level four of an outage](../scenarios/shutdown.md)
+- **You only have one device:** holding a phone up to a laptop needs two, and printing needs neither
+
+Reading it back works exactly as it does from a screen. Open Receive on this page on another device and run its camera over every code on the paper. Order does not matter: each code carries its own number, the total, and a check value, so a complete set reassembles the original.
+
+### What is printed is not encrypted either
+
+The squares on paper are the same thing as the squares on screen, and anyone who photographs them can read them back. Paper is easier to photograph than a screen: it sits on desks, goes into folders, and gets left in the printer tray. Seal anything sensitive with [local file encryption](age.md) before printing.
+
+### The limit is 120 codes
+
+That is 30 pages. A stream that does not finish just means waiting longer; a print job that does not finish is a stack of paper nobody will scan.
+
+Past the limit the page tells you how many sheets the file would take. Raising the payload per code to large or maximum cuts that down considerably, at the cost of denser squares that need the camera closer. Genuinely large files do not belong on paper. Keys, config files and a contact list do.
+
+### The codes are printed as vectors
+
+Each code is generated as SVG rather than by scaling up the canvas from the screen. A laser printer works at 600 dpi, the canvas is a few hundred pixels wide, and stretching that to 78 mm blurs the edges, which is exactly where a decoder fails first.
+
+At 78 mm square, the maximum density is 177 modules, so one module is 0.44 mm, or ten dots on a 600 dpi printer. A phone photographing a single code reads it back.
+
 ## How does this compare to a USB stick
 
 This is the comparison people actually reach for, since a USB stick also avoids the network and also emits no wireless signal. Honestly, each side wins some.

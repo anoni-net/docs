@@ -78,11 +78,17 @@ const harness = `
   ${grab(/^  const QUIET = .*$/m)}
   ${grab(/^  const MAX_INPUT_BYTES = .*$/m)}
   ${grab(/^  const STRINGS = \{[\s\S]*?\n  \};/m)}
+  ${grab(/^  function matrixToSvg\(modules, quiet\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function sheetsFor\(total, perSheet\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function printCheck\(total, perSheet, limit\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  const PRINT_PER_SHEET = .*$/m)}
+  ${grab(/^  const PRINT_MAX_FRAMES = .*$/m)}
   return { MAGIC, HEADER_BYTES, CRC_BYTES, OVERHEAD, MAX_CHUNKS, MANIFEST_INDEX,
            crc16, packFrame, parseFrame, safeName, shortenName, buildManifest,
            parseManifest, planStream, assemble, collect, missingSummary,
            bytesToLatin1, toHex, formatSize, formatDuration,
-           DENSITY, SPEED, QUIET, MAX_INPUT_BYTES, STRINGS };
+           DENSITY, SPEED, QUIET, MAX_INPUT_BYTES, STRINGS,
+           matrixToSvg, sheetsFor, printCheck, PRINT_PER_SHEET, PRINT_MAX_FRAMES };
 `;
 const tool = new Function('TextEncoder', 'TextDecoder', harness)(TextEncoder, TextDecoder);
 
@@ -573,6 +579,142 @@ test('相機一定會被關掉，三條離開路徑都有', () => {
   assert.ok(/if \(which === "send"\) stopScanning\(\);/.test(code), '切到傳送分頁時沒有關相機');
 });
 
+/** 一段位元組編成 QR 之後的方格矩陣，跟工具裡 matrixFor 同一套問法 */
+function matrixOf(bytes, version, level) {
+  const qr = qrcode(version, level);
+  qr.addData(tool.bytesToLatin1(bytes));
+  qr.make();
+  const count = qr.getModuleCount();
+  const grid = [];
+  for (let row = 0; row < count; row += 1) {
+    const line = [];
+    for (let col = 0; col < count; col += 1) line.push(qr.isDark(row, col));
+    grid.push(line);
+  }
+  return grid;
+}
+
+/** 布林矩陣放大成像素，跟 renderFrame 同一個放大倍率 */
+function matrixToPixels(modules) {
+  const count = modules.length;
+  const size = (count + tool.QUIET * 2) * SCALE;
+  const data = new Uint8ClampedArray(size * size * 4).fill(255);
+  for (let row = 0; row < count; row += 1) {
+    for (let col = 0; col < count; col += 1) {
+      if (!modules[row][col]) continue;
+      for (let y = 0; y < SCALE; y += 1) {
+        for (let x = 0; x < SCALE; x += 1) {
+          const px = ((row + tool.QUIET) * SCALE + y) * size + (col + tool.QUIET) * SCALE + x;
+          data[px * 4] = 0;
+          data[px * 4 + 1] = 0;
+          data[px * 4 + 2] = 0;
+        }
+      }
+    }
+  }
+  return { data, width: size, height: size };
+}
+
+/** 把 matrixToSvg 的輸出解析回布林矩陣 */
+function svgToMatrix(svg, quiet) {
+  const view = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+  const total = Number(view[1]);
+  const size = total - quiet * 2;
+  const grid = Array.from({ length: size }, () => new Array(size).fill(false));
+  const re = /<rect x="(\d+)" y="(\d+)" width="(\d+)" height="1"\/>/g;
+  let m;
+  while ((m = re.exec(svg)) !== null) {
+    const x = Number(m[1]) - quiet;
+    const y = Number(m[2]) - quiet;
+    for (let i = 0; i < Number(m[3]); i += 1) grid[y][x + i] = true;
+  }
+  return grid;
+}
+
+test('SVG 畫出來的圖形跟方格矩陣一模一樣', () => {
+  const modules = matrixOf(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 6, 'M');
+  const svg = tool.matrixToSvg(modules, tool.QUIET);
+  assert.deepEqual(svgToMatrix(svg, tool.QUIET), modules);
+});
+
+test('印出來的碼掃回來就是那一張的內容', () => {
+  // 只比對矩陣還不夠。真正要成立的是「紙上那張圖，相機讀回來是原本的位元組」，
+  // 所以把 SVG 解析回矩陣、放大成像素，交給收的一端用的同一個解碼器讀
+  const payload = new Uint8Array(64).map((_, i) => (i * 7 + 3) & 0xff);
+  const frame = tool.packFrame(0x1234, 10, 3, payload);
+  const modules = matrixOf(frame, 10, 'M');
+  const back = svgToMatrix(tool.matrixToSvg(modules, tool.QUIET), tool.QUIET);
+  const decoded = readFrame(matrixToPixels(back));
+  assert.ok(decoded, 'SVG 還原出來的碼解不開');
+  const parsed = tool.parseFrame(decoded);
+  assert.ok(parsed, 'CRC 對不上');
+  assert.equal(parsed.index, 3);
+  assert.equal(parsed.total, 10);
+  assert.deepEqual(Uint8Array.from(parsed.payload), payload);
+});
+
+test('SVG 帶白底，反相的碼有些掃描器讀不到', () => {
+  const modules = matrixOf(new Uint8Array([9, 9, 9]), 4, 'M');
+  const svg = tool.matrixToSvg(modules, tool.QUIET);
+  assert.ok(svg.includes('fill="#ffffff"'), '少了白色底');
+  assert.ok(svg.includes('fill="#000000"'), '方格不是黑的');
+});
+
+test('SVG 的留白跟螢幕上同一個值', () => {
+  const modules = matrixOf(new Uint8Array([7]), 4, 'M');
+  const svg = tool.matrixToSvg(modules, tool.QUIET);
+  const view = svg.match(/viewBox="0 0 (\d+) /);
+  assert.equal(Number(view[1]), modules.length + tool.QUIET * 2);
+});
+
+test('一列連續的黑格併成一個 rect，節點數不會爆掉', () => {
+  // 一頁四張，每個方格各畫一個 rect 的話光是版本 25 就四萬個節點，排版會卡住
+  const modules = matrixOf(new Uint8Array(120).fill(0xff), 10, 'M');
+  const svg = tool.matrixToSvg(modules, tool.QUIET);
+  const rects = svg.match(/<rect x=/g) || [];
+  const dark = modules.flat().filter(Boolean).length;
+  assert.ok(rects.length < dark / 2, `rect 有 ${rects.length} 個，黑格有 ${dark} 個，沒有併`);
+});
+
+test('分頁把每一張放進去，不重複也不遺漏', () => {
+  for (const total of [1, 3, 4, 5, 8, 9, 120]) {
+    const sheets = tool.sheetsFor(total, tool.PRINT_PER_SHEET);
+    const flat = sheets.flat();
+    assert.deepEqual(flat, [...Array(total).keys()], `${total} 張分頁之後對不上`);
+    assert.equal(sheets.length, Math.ceil(total / tool.PRINT_PER_SHEET));
+  }
+});
+
+test('最後一頁不補滿，補了會印出空白框讓人以為漏印', () => {
+  const sheets = tool.sheetsFor(5, 4);
+  assert.equal(sheets.length, 2);
+  assert.deepEqual(sheets[1], [4]);
+});
+
+test('張數超過上限就不印，並且算得出要幾頁', () => {
+  const under = tool.printCheck(120, 4, 120);
+  assert.equal(under.ok, true);
+  assert.equal(under.pages, 30);
+  const over = tool.printCheck(121, 4, 120);
+  assert.equal(over.ok, false);
+  assert.equal(over.pages, 31);
+});
+
+test('三個語系都有紙本那幾條文案', () => {
+  for (const lang of ['zh-TW', 'zh-CN', 'en']) {
+    for (const key of ['printBtn', 'printTitle', 'printHowTo', 'printFrame', 'printSheet', 'printTooMany', 'printHint']) {
+      assert.ok(tool.STRINGS[lang][key], `${lang} 少了 ${key}`);
+    }
+  }
+});
+
+test('紙本說明有寫出內容沒有加密', () => {
+  // 印出來的東西會被放在桌上、夾在資料夾裡、拍照。那句提醒不能少
+  assert.ok(tool.STRINGS['zh-TW'].printHowTo.includes('加密'));
+  assert.ok(tool.STRINGS['zh-CN'].printHowTo.includes('加密'));
+  assert.ok(/encrypt/i.test(tool.STRINGS.en.printHowTo));
+});
+
 for (const [name, fn] of tests) {
   try {
     await fn();
@@ -584,5 +726,14 @@ for (const [name, fn] of tests) {
     failed += 1;
   }
 }
+// ---------------------------------------------------------------------------
+// 紙本輸出
+//
+// 紙上的碼跟螢幕上播的碼是同一種東西，接收端一個位元組都沒改。所以這裡要驗的是
+// 排版沒有把張數弄丟，以及 SVG 畫出來的圖形跟矩陣一致。後者用「把 SVG 的 rect
+// 解析回矩陣再比對」來驗：印出來的方格如果跟編碼結果不一樣，掃出來就是別的東西，
+// 而那在紙上完全看不出來，讀者要等到收齊之後對不上 SHA-256 才知道。
+// ---------------------------------------------------------------------------
+
 console.log(`\n${passed} 通過，${failed} 失敗`);
 process.exit(failed ? 1 : 0);
