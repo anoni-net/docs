@@ -40,7 +40,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-fingerprint: **[Passkey as your key](passkey.md)**
 
-    Create a passkey for this site and store it in your password manager or keychain. For file encryption, also test an unlock and generate a backup key. Local file encryption can then use it as the key, with no passphrase to remember, and the checklist, saved threat model answers and the address book are encrypted with it on your device. No account, no server, nothing stored here.
+    Create a passkey for this site and store it in your password manager or keychain. For the checklist alone, one press of "Create passkey" is enough; only file encryption also needs a test unlock and a backup key. Local file encryption can then use it as the key, with no passphrase to remember, and the checklist, saved threat model answers and the address book are encrypted with it on your device. No account, no server, nothing stored here.
 
 -   :material-checkbox-marked-outline: **[My preparation checklist](checklist.md)**
 

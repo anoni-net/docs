@@ -16,6 +16,8 @@ When the passkey is created, this site places a randomly generated data key insi
 
 The cost is that the data key sits alongside the passkey in your password manager, so its security equals the manager's: whoever can unlock your password manager gets the key. A password manager export, a shared vault, or a breach of the provider combined with a weak master password all lead down the same road. That is the same level as the screen lock on your device, enough for most people, and not enough against an adversary who can reach your device and may be able to make you unlock it. The threat model checklist offers no save option against such adversaries.
 
+If you only use stash tools such as the checklist, skip the next section and go straight to "What this site stores".
+
 ## Use two, PRF derives a key on the spot
 
 The WebAuthn PRF extension gives the passkey an extra secret that never leaves the authenticator. Each time the page asks and you approve, the authenticator returns a fixed 32-byte output for the input the page supplied. The same passkey with the same input always yields the same output. The passkey becomes a key calculator that only answers when you touch the sensor.
@@ -41,7 +43,7 @@ Files in passphrase mode open anywhere. Files in passkey mode are tied to this d
 
 The passkey is bound to the `anoni.net` RP ID. Browsers only allow it on the same domain, so mirrors and onion addresses cannot use it. Tor Browser turns WebAuthn off entirely, with `security.webauth.webauthn` set to false in its default profile. Both of these apply to both uses.
 
-What follows affects file encryption only. PRF support as of March 2026: Safari 18, Chrome 132 and Firefox 139 on macOS 15 or later, iOS 18.4 or later, Chrome on Android with Google Password Manager, and Windows 11 only from the February 2026 update. On the desktop the 1Password, Bitwarden and Dashlane browser extensions support it. Firefox on Android and Windows 10 do not.
+What follows affects file encryption only. PRF support as of March 2026: Safari 18, Chrome 132 and Firefox 139 on macOS 15 or later, iOS 18.4 or later, Chrome on Android with Google Password Manager, and Windows 11 only from the February 2026 update. On the desktop the 1Password, Bitwarden and Dashlane browser extensions support it. Firefox on Android and Windows 10 do not. A recent enough browser is only half of it: the password manager holding the passkey must support it too, and only when both do can the key be derived. The "Where to store it" table on [Passkey as your key](../utils/passkey.md) is arranged by storage method.
 
 iPhone and iPad carry two further limits. Apple's implementation does not pass the data PRF needs to anything other than the iCloud Keychain, so a passkey saved into a third-party password manager app on iOS is created successfully yet derives no key, and that one serves the stash only. The cross-device flow, meaning the one where you scan a QR code on another device, does not get PRF either. For file encryption on an iPhone, create the passkey on the iPhone and pick the iCloud Keychain.
 
