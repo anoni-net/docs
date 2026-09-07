@@ -497,7 +497,7 @@ test('拍到雜訊不會被當成一張收下', async () => {
 // ---------------------------------------------------------------------------
 
 /** 把一個檔案送進傳送端，回傳它切成幾張 */
-async function loadForPrint(name, bytes) {
+async function loadForPrint(name, bytes, tries = 400) {
   // 前面的測試把分頁留在接收端，而 renderSend 在那個狀態下直接 return，畫面上的
   // 切張結果永遠不會更新
   buttonSaying('傳送').click();
@@ -519,7 +519,8 @@ async function loadForPrint(name, bytes) {
       const node = root.find((n) => n.className === 'qs-hint' && n.textContent.includes('切成'));
       return node && node.textContent.includes(name) ? node : null;
     },
-    `${name} 的切張結果（傳送端訊息：${messageIn(panels()[0])}）`
+    `${name} 的切張結果（傳送端訊息：${messageIn(panels()[0])}）`,
+    tries
   );
   return Number(plan.textContent.match(/切成 (\d+) 張/)[1]);
 }
@@ -591,10 +592,16 @@ test('收工之後把列印容器清掉，下一次列印別的頁面才不會�
 test('張數超過上限就不印，並且說得出為什麼', async () => {
   // 資料要壓不動，張數才是實打實的。(i * 31 + 7) & 0xff 那種週期 256 的序列會被
   // 壓成幾百個位元組，切出來只有三張；換成固定種子的 LCG 還是被壓到剩四十幾張。
-  // 這裡用真的亂數，壓縮器沒有東西可以吃，200 KB 在任何一檔密度下都遠超過上限
-  const big = new Uint8Array(200 * 1024);
+  // 所以用真的亂數。
+  //
+  // 張數靠調小「每張資料量」湊，不靠丟一個大檔案。原本丟 200 KB 進來，壓縮與
+  // SHA-256 要跑好幾百輪事件迴圈才落地，waitFor 那 400 次有時候等不到，這一條就
+  // 隨機紅一次。60 KB 在最小的那一檔會切出三百多張，一樣超過上限，處理快得多。
+  buttonSaying('傳送').click();
+  buttonSaying('小').click();
+  const big = new Uint8Array(60 * 1024);
   for (let i = 0; i < big.length; i += 1) big[i] = (Math.random() * 256) | 0;
-  const total = await loadForPrint('too-many.bin', big);
+  const total = await loadForPrint('too-many.bin', big, 3000);
   assert.ok(total > 120, `這個檔案只切成 ${total} 張，測不到上限`);
   const printedBefore = window_.printed;
   buttonSaying('印成紙本').dispatch('click');
