@@ -581,3 +581,24 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     font-size: 0.58rem;
   }
 }
+
+/* ==========================================================================
+   窄螢幕抽屜：隱藏 GitHub repo 那一排
+   套用範圍：抽屜裡的 .md-nav__source，桌面 header 與頁尾社群列不受影響
+
+   設了 repo_url 之後，partials/nav.html 會在抽屜標題底下放一個
+   .md-nav__source，內容是 repo 名稱與 star、fork 數，位置排在導覽清單之前。
+   讀者打開抽屜第一眼看到的就是那一排，而站上多數讀者沒有技術背景，
+   GitHub 的星數對他們沒有意義，還把「開始」、「指南」往下擠了一行。
+
+   Material 給這個元素的規則是單一 class 的 .md-nav__source，只在
+   max-width 那組媒體查詢裡開成 display:block。底下用兩個 class 的選擇器
+   把權重蓋過去，不跟著 theme 的斷點走，升級改了斷點也不會失效。
+
+   repo 連結沒有消失。桌面 header 從 60em 起照樣顯示，頁尾社群列的 GitHub
+   圖示在所有寬度都在。
+   ========================================================================== */
+
+.md-nav--primary .md-nav__source {
+  display: none;
+}
