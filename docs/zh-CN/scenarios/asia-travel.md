@@ -11,7 +11,7 @@ icon: material/bag-suitcase-outline
 这篇整理东亚与东南亚十四个常见地点的现况，做成一张对照表，再给出依风险分层的准备清单。无论你从中国大陆、港澳、新马、台湾或其他华语环境出发，都可以拿这张表当行前依据。
 
 !!! warning "查证日与时效"
-    审查现况变动很快，VPN 能不能用、哪个服务被封，可能几个月就翻一次。本表整体查证日为 **2026 年 8 月**，每地的判断以该段时间的公开来源为准。出发前请以 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查目的地的最新观测、以各地官方公告查 SIM 与入境规定，不要把静态表格当成当下的保证。每地的[逐地注记](#逐地注记)末尾都附了该地的 OONI Explorer 直达链接。
+    审查现况变动很快，VPN 能不能用、哪个服务被封，可能几个月就翻一次。本表整体查证日为 **2026 年 9 月**，逐地注记末尾括号里的月份是该地来源最近一次查证的时间。出发前请以 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查目的地的最新观测、以各地官方公告查 SIM 与入境规定，不要把静态表格当成当下的保证。每地的[逐地注记](#逐地注记)末尾都附了该地的 OONI Explorer 直达链接。想知道每一版改了什么，看页尾的[更新记录](#更新记录)。
 
 ## 如何读这张表
 
@@ -36,12 +36,12 @@ icon: material/bag-suitcase-outline
 | 柬埔寨 | 42（部分自由） | 合法 | 一般可直连 | 多需证件，无强制法 | 低 |
 | 泰国 | 39（不自由） | 合法 | 建议备桥接 | 护照、脸部辨识，每业者上限 3 张 | 中高 |
 | 越南 | 22（不自由） | 合法（受网安法规范） | 建议备桥接 | 护照实名 | 中（数据少） |
-| 中国大陆 | 9（不自由） | 灰色，须强混淆 | 重度封锁 | 护照、人脸 | 高 |
+| 中国大陆 | 9（不自由） | 灰色，须强混淆 | 重度封锁 | 护照、人脸 | 高（2026/9 起新规可要求提供电子数据）|
 | 缅甸 | 9（不自由） | 提供服务入罪（2025 网安法） | 重度封锁 | 护照或 NRC、拦截设备 | 高 |
 
-香港、澳门未列入 FOTN 单独评分，香港的 FiW（Freedom in the World）2026 年为 41 分（部分自由）仅供质性对照。SIM 与入境规定为 2026 年 8 月查证，细节以出发前官方公告为准。
+香港、澳门未列入 FOTN 单独评分，香港的 FiW（Freedom in the World）2026 年为 41 分（部分自由）仅供质性对照。FOTN 2026 年版尚未发布，分数栏位仍是 2025 年版。SIM 与入境规定为 2026 年 9 月查证，细节以出发前官方公告为准。
 
-自上一版（2026 年 6 月）以来改动最大的是香港，入境装置检查从「中」升到「高」，理由是 2026 年 3 月生效的国安装置解密义务，细节见后面逐地注记的香港一节。其余变动集中在泰国的 SIM 新规、南韩的 CDN 层封锁、新加坡的新监理机关，同样见逐地注记。
+自上一版（2026 年 8 月）以来改动最大的是中国大陆。《国务院关于出境入境管理的规定》在 2026 年 9 月 15 日施行，条文写明移民管理机构与签证机关核实身份与申请事由时可以要求出境入境人员提供电子数据，细节见后面逐地注记的中国大陆一节。香港 2026 年 3 月的国安装置解密义务维持不变，入境装置检查仍在最高一级。这一轮还动到南韩、印尼、越南与缅甸，逐条列在页尾的[更新记录](#更新记录)。
 
 ## 出发前的通用准备（每个地点都适用）
 
@@ -58,7 +58,7 @@ icon: material/bag-suitcase-outline
     - **纯数据 eSIM（无本地号码）**：连本地号码这层都省掉，身份多半只留在 eSIM 供应商与你的付款记录里。
 
     对「目的地监控」这个威胁来说，漫游与 eSIM 把对应留在境外，比较难被当场对应到本人。需要本地号码收验证码时，再评估是否落地办卡。实名要求正在往 eSIM 延伸，日本已修法把纯数据 SIM 与 eSIM 纳入本人确认义务，施行日由政令另订、最迟 2027 年 5 月，境外供应商是否纳管也尚未明确。各地规则不同而且都在变，出发前查目的地的当下规定，不要默认 eSIM 一定匿名。
-- **开启全盘加密、设好开机密码**。入境查机风险高的地方，关机状态加上强密码，比解锁状态安全。要分清楚这道防护挡的是什么，加密挡的是装置被拿去离线取出数据，挡不掉「当场要求你解锁」。香港 2026 年 3 月起，涉国安调查时拒绝交出密码本身就是刑事罪，中国、缅甸则有现场临检。在这些地方，真正有效的是装置里本来就没有敏感内容。
+- **开启全盘加密、设好开机密码**。入境查机风险高的地方，关机状态加上强密码，比解锁状态安全。要分清楚这道防护挡的是什么，加密挡的是装置被拿去离线取出数据，挡不掉「当场要求你解锁」。香港 2026 年 3 月起，涉国安调查时拒绝交出密码本身就是刑事罪。中国自 2026 年 9 月 15 日起，查验身份与来意时可以要求提供电子数据，缅甸则有街头与检查哨的临检。在这几个地方，真正有效的是装置里本来就没有敏感内容。
 - **留好离线备份与紧急联络方式**。遇到断网或装置被扣，至少还能联络上同事或家人。
 
 ## 依风险分层的加码准备
@@ -75,7 +75,7 @@ icon: material/bag-suitcase-outline
 
 ### 低风险：台湾（参照）、日本、南韩
 
-台湾、日本、南韩接近完全开放的网络环境，用平常的工具即可。主要记得办 SIM 要带护照，日本把数据 SIM 纳入实名的修法已完成、施行日待定。南韩有内容过滤与较强的通讯拦截法制，2026 年起又把封锁推进到 CDN 层，过度封锁波及正常网站的机会变高，处理敏感数据或遇到连不上的网站时自备 VPN。
+台湾、日本、南韩接近完全开放的网络环境，用平常的工具即可。主要记得办 SIM 要带护照，日本把数据 SIM 纳入实名的修法已完成、施行日待定。南韩有内容过滤与较强的通讯拦截法制，2026 年起又把封锁推进到 CDN 层，过度封锁波及正常网站的机会变高，处理敏感数据或遇到连不上的网站时自备 VPN。同年 7 月上路的虚假操作信息修法与图片事前过滤义务，把规范从能不能连上延伸到发了什么、上传了什么，要在当地平台发文的人先看逐地注记。
 
 ### 中风险：菲律宾、马来西亚、新加坡、印尼、澳门
 
@@ -83,7 +83,7 @@ icon: material/bag-suitcase-outline
 
 ### 高风险：香港、泰国、越南、柬埔寨、中国大陆
 
-系统性封锁规模大，法律对线上言论的追诉力道强。出发前务必装好混淆型 VPN 与 Tor 桥接并测试，带干净机，敏感工作不要在当地网络上做。中国要假设所有连接都受监看、境外服务都连不到。泰国、越南建议默认 Tor 桥接，因为近年封锁规模大增、直连可能受阻。连接层的混淆准备对应的是泰国、越南、柬埔寨与中国大陆，香港的准备重点在装置本身，见下一段。
+系统性封锁规模大，法律对线上言论的追诉力道强。出发前务必装好混淆型 VPN 与 Tor 桥接并测试，带干净机，敏感工作不要在当地网络上做。中国要假设所有连接都受监看、境外服务都连不到，2026 年 9 月起入境时还可能被要求提供电子数据。泰国、越南建议默认 Tor 桥接，因为近年封锁规模大增、直连可能受阻。连接层的混淆准备对应的是泰国、越南、柬埔寨与中国大陆，香港的准备重点在装置本身，见下一段。
 
 香港的连接环境接近中风险，Google、社群与通讯服务照常可达，VPN 合法、Tor 一般也可直连，真正的门槛在入境检查站。2026 年 3 月起，涉及国安调查时可要求交出装置密码或解密方法，适用所有国籍，包含只在香港机场转机并通关的旅客，拒绝本身即构成犯罪。这个风险型态与其他四地不同，也是香港被放进这一层的原因。装置内容成为主要暴露面之后，准备强度就要拉到干净机这一层，带最少的东西过关比事后解释有用。
 
@@ -130,7 +130,7 @@ burner 这个俗称把两件事混在一起，风险来源并不相同：
 以下以带回中国境内为准。港澳、新马、台湾的读者请对照自身法域，几条结论会明显不同，见本节最后。繁体中文版的同一节以带回台湾为准。
 
 - **境外号码在境内漫游**：一个外国漫游号码长期出现在你住处附近，在境内不但不低调，反而显眼，也一样落在监控范围内。跨境调取的门槛不构成保护
-- **入境时装置本身可能被查**：2024 年 7 月起新规授权国安人员检查个人电子设备，深圳、上海有海关抽查手机与笔电的报告。本表把中国大陆的入境查机风险列为最高一级
+- **入境时装置本身可能被查**：2024 年 7 月起新规授权国安人员查验手机、电脑等电子设备，公开的旅客回报集中在手机被翻查。2026 年 9 月 15 日起再加上出境入境新规的电子数据提供义务，本表把中国大陆的入境查机风险列为最高一级
 - **预付卡有效期**：旅客卡多为 30 到 60 天，带回来很快就失效，之后要靠原发卡地充值或换卡
 - **换插境内 SIM**：境内办卡自 2019 年底起强制实名加人脸，机器就跟你的实名身份绑在一起，干净机的意义同时消失
 - **IMEI 会把两个号码串起来**：同一台机器先用境外卡、回来再用境内卡，电信商侧看到的是同一个 IMEI 底下换过两个号码
@@ -165,7 +165,13 @@ burner 这个俗称把两件事混在一起，风险来源并不相同：
 
 ### 中国大陆
 
-防火长城（Great Firewall）长期完整封锁 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 与全语系 Wikipedia，外媒多数被封。手法含 DNS 污染、SNI 过滤与深度封包检测（DPI，逐笔分析连接判断是否放行的技术）。个人翻墙属违法灰色地带，2025 年底国安部公开警告会究责。VPN 要选有强混淆的方案、入境前装好至少两款。Tor 直连在中国无法使用，obfs4 桥接长期被封。Tor Project 对中国目前建议优先用 WebTunnel，Snowflake、meek 作为备选，但可用性会随封锁更新大幅波动，出发前务必先测试，并多备几种桥接。SIM 自 2019 年底起强制实名加人脸，外籍旅客同样适用。2024 年 7 月起新规授权国安人员检查个人电子装置，深圳、上海有海关抽查手机与笔电的报告。在境内平台发表内容的风险与既有实践，见 [在中国大陆的公开平台传播信息](./mainland-speech.md)。查证来源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 对中国的连接指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}。最新观测：[OONI Explorer 中国大陆](https://explorer.ooni.org/zh-CN/country/CN){target="_blank"}。
+防火长城（Great Firewall）长期完整封锁 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 与全语系 Wikipedia，外媒多数被封。手法含 DNS 污染、SNI 过滤与深度封包检测（DPI，逐笔分析连接判断是否放行的技术）。个人翻墙属违法灰色地带，2025 年底国安部公开警告会究责。VPN 要选有强混淆的方案、入境前装好至少两款。Tor 直连在中国无法使用，obfs4 桥接长期被封。Tor Project 对中国目前建议优先用 WebTunnel，Snowflake、meek 作为备选，但可用性会随封锁更新大幅波动，出发前务必先测试，并多备几种桥接。SIM 自 2019 年底起强制实名加人脸，外籍旅客同样适用。2024 年 7 月起《国家安全机关行政执法程序规定》授权国安人员查验手机、电脑等电子设备，官方说法是查验的前提、对象与流程都要明确、不查一般人。实际被翻查的公开案例集中在手机，深圳福田口岸与上海机场都有旅客回报，笔电当场被查验则没有查到对应案例。海基会的行前建议是先检查手机与个人电脑里的内容，或改用新的装备与号码。
+
+2026 年 7 月 31 日公布、9 月 15 日施行的《国务院关于出境入境管理的规定》把查验授权写得更明确。全文 19 条，第三条写明移民管理机构与签证机关核实出境入境人员的身份与申请事由时，可以询问相关情况并要求出示、提供有关文件、资料、电子数据等信息。第四条前两款把不准出境的期间定为 6 个月至 3 年，第三款针对违反出口管制、技术进出口管理而可能危害产业安全与技术安全的情形，只写不准出境、没有期间上限。第六条在可能影响国家安全、刑事案件侦查等情形下可以不告知当事人。逐一检查所有旅客的装置并没有写进条文，实际影响在于官方要调取手机或云端内容时有了明文依据，而构成要件宽、裁量权在执法一方。条文只写「中国公民」与「外国人」，没有提到台湾居民或台胞证。
+
+台湾陆委会的提醒分几次发布。主委邱垂正 2026 年 8 月 5 日请当地民众赴陆前审慎评估风险，副主委梁文杰 8 月 6 日点名科技业与半导体业相关人士，理由是可能在不知情中误触出口管制与技术进出口的规定，对应的正是第四条第三款。8 月 17 日邱垂正把台商与台企干部一并列入，副主委沈有忠另外提到相关产业链、公务员与宗教人士。行前清理装置里的敏感内容是海基会《大陆旅行安全手册》长期就有的一般建议，不是这波新规才新增。
+
+在境内平台发表内容的风险与既有实践，见 [在中国大陆的公开平台传播信息](./mainland-speech.md)。查证来源（2026-09）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}、[Tor 对中国的连接指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}、[《国务院关于出境入境管理的规定》全文](https://www.gov.cn/zhengce/content/202607/content_7077172.htm){target="_blank"} - 中国政府网、[陆委会点名科技业与半导体业风险较高](https://www.cna.com.tw/news/acn/202608060280.aspx){target="_blank"} - 中央社、[陆委会再提相关产业链、公务员与宗教人士](https://www.ettoday.net/news/20260817/3220711.htm){target="_blank"} - ETtoday、[深圳福田口岸与上海机场旅客手机被翻查的回报](https://news.tvbs.com.tw/world/2479452){target="_blank"} - TVBS、[入境中国大陆你的手机很可能会被查](https://www.sef.org.tw/article-1-204-16295){target="_blank"} - 海基会交流杂志。最新观测：[OONI Explorer 中国大陆](https://explorer.ooni.org/zh-CN/country/CN){target="_blank"}。
 
 ### 香港
 
@@ -189,7 +195,11 @@ burner 这个俗称把两件事混在一起，风险来源并不相同：
 
 主流外站不封锁，旅客一般浏览不受影响。但有系统性的内容过滤，审议机关（原 KCSC，2025 年 10 月改组为방송미디어통신심의위원회）对色情、赌博、北韩宣传等类别封锁，官方统计的年度通讯审议案件从 2008 年的 2 万 9 千余件增至 2024 年的 35 万 6 千余件，其中实际下架或封锁的数量另计。技术上采 SNI 过滤（监看 HTTPS 连接中未加密的域名字段来比对黑名单），等于 ISP 拿得到你造访的域名清单。VPN 合法，常被用来绕过过滤。Tor 直连一般可用。SIM 须出示护照实名，观光 eSIM 较宽松但仍绑护照。南韩通讯拦截法制偏强，《通讯秘密保护法》授权即时拦截，处理敏感数据者宜纳入威胁模型。
 
-依 2025 年 5 月施行的非法信息接取阻断技术义务化规定，主管机关于 2025 年 9 月行文要求 Cloudflare 配合封锁指定域名，2026 年 5 月 1 日起经 Cloudflare 代管的目标网站对韩国连接直接回 HTTP `451`，封锁层级从 ISP 端推进到全球 CDN 业者端。同年 5 月 11 日再上路著作权侵害网站的紧急阻断制度，由文化体育观光部长先命令 ISP 封锁、著作权保护审议委员会五日内事后审议，首日就对 34 个网站发出命令。CDN 端执行的封锁改 DNS 规避不了，有报导指出过去在 ISP 端有效的规避工具也一并失效，这点目前缺少公开的实测验证。对商务旅客而言真正的风险是误封，已有二次元同人站、烟品经销这类与色情赌博无关的合法网站被一并封锁的用户回报，行程仰赖特定服务时先备好 VPN。查证来源（2026-08）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer、[行政审查统计与制度批评](https://www.opennetkorea.org/en/wp/5153){target="_blank"} - Open Net Korea、[主管机关要求 Cloudflare 封锁的原始通知](https://lumendatabase.org/notices/73101162){target="_blank"} - Lumen Database、[文化体育观光部依新法对 34 站发出紧急阻断命令](https://www.koreatimes.co.kr/entertainment/20260511/culture-minister-blocks-access-to-illegal-sites-under-new-anti-piracy-law){target="_blank"} - Korea Times。最新观测：[OONI Explorer 南韩](https://explorer.ooni.org/zh-CN/country/KR){target="_blank"}。
+依 2025 年 5 月施行的非法信息接取阻断技术义务化规定，主管机关于 2025 年 9 月行文要求 Cloudflare 配合封锁指定域名，2026 年 5 月 1 日起经 Cloudflare 代管的目标网站对韩国连接直接回 HTTP `451`，封锁层级从 ISP 端推进到全球 CDN 业者端。同年 5 月 11 日再上路著作权侵害网站的紧急阻断制度，由文化体育观光部长先命令 ISP 封锁、著作权保护审议委员会五日内事后审议，首日就对 34 个网站发出命令。CDN 端执行的封锁改 DNS 规避不了，有报导指出过去在 ISP 端有效的规避工具也一并失效，这点目前缺少公开的实测验证。对商务旅客而言真正的风险是误封，已有二次元同人站、烟品经销这类与色情赌博无关的合法网站被一并封锁的用户回报，行程仰赖特定服务时先备好 VPN。
+
+2026 年 7 月另有两件事上路，两者的适用门槛不同，容易被混为一谈。7 月 1 日起电信事业法施行令把不法拍摄物流通防止的技术措施对象从视频扩大到图片。负有事前措置义务的业者（前一年度增值电信服务营收 10 亿韩元以上，或前一年底起算前三个月的单日平均用户数 10 万人以上）要在上传时比对政府的违法影像数据库，辅导期到 2026 年底。官方与业界的说法是比对对象限于已确认违法的内容、不构成审查，Open Net Korea 的立场相反，认为由行政机关主导、即时监看私人通讯的比对系统本质上就是宪法禁止的事前审查，扩大到静止图片会让误判变多也在他们的反对理由里。7 月 7 日起信息通信网法修正案生效，门槛是单日平均用户数 100 万人以上的信息中介服务，收到标记后须移除或阻断「虚假操作信息」、停权账号并每半年至少公布一次透明度报告，法院最高可判被害金额五倍的损害赔偿，国会请愿要求废止的联署超过 14 万人。对外国访客的意义在于，在南韩平台发文与上传图片都进了规范范围，敏感题材改用境外平台或端对端加密工具。
+
+查证来源（2026-09）：[FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}、[South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer、[行政审查统计与制度批评](https://www.opennetkorea.org/en/wp/5153){target="_blank"} - Open Net Korea、[主管机关要求 Cloudflare 封锁的原始通知](https://lumendatabase.org/notices/73101162){target="_blank"} - Lumen Database、[文化体育观光部依新法对 34 站发出紧急阻断命令](https://www.koreatimes.co.kr/entertainment/20260511/culture-minister-blocks-access-to-illegal-sites-under-new-anti-piracy-law){target="_blank"} - Korea Times、[图片事前过滤义务与反对意见](https://www.opennetkorea.org/en/wp/7683){target="_blank"} - Open Net Korea、[7 月 7 日生效的虚假操作信息修法](https://www.koreajoongangdaily.com/korea/free-speech-fears-grow-ahead-of-koreas-new-online-content-law/12754694){target="_blank"} - Korea JoongAng Daily、[事前措置义务业者的门槛（施行令第 30 条之 6）](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%84%EA%B8%B0%ED%86%B5%EC%8B%A0%EC%82%AC%EC%97%85%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9){target="_blank"} - 国家法令情报中心、[7 月 7 日修正案的 100 万人门槛与义务内容](https://www.bkl.co.kr/law/insight/newsletter/6642){target="_blank"} - 태평양、[Cloudflare 自 5 月 1 日起对韩国封锁](https://www.mimint.co.kr/bbs/view/news/S1N12/5374412){target="_blank"} - 국제뉴스。最新观测：[OONI Explorer 南韩](https://explorer.ooni.org/zh-CN/country/KR){target="_blank"}。
 
 ### 台湾（参照）
 
@@ -205,17 +215,17 @@ burner 这个俗称把两件事混在一起，风险来源并不相同：
 
 ### 新加坡
 
-封锁范围窄但法律工具强。2024 年 10 月封锁 10 个被指可用于对新加坡发动敌意信息行动的网站。新闻网站受 IMDA 牌照与 POFMA（防止网络假信息与操纵法）约束，政府可对被认定不实的陈述发更正指令。VPN 与 Tor 合法可用，主流服务日常可达。SIM 须以护照登记，以护照登记的非居民卡自 2024 年 7 月起有效期仅 30 天。2024 年《刑事诉讼修正法》扩大无令状搜查权，逮捕可疑犯罪者时得搜查其持有或控制的物品，实务上一般旅客少见随机解锁，但法律门槛低。
+封锁范围窄但法律工具强。2024 年 10 月封锁 10 个被指可用于对新加坡发动敌意信息行动的网站。新闻网站受 IMDA 牌照与 POFMA（防止网络假信息与操纵法）约束，政府可对被认定不实的陈述发更正指令。VPN 与 Tor 合法可用，主流服务日常可达。SIM 须以护照登记，以护照登记的非居民卡自 2024 年 7 月起有效期仅 30 天。2024 年《刑事诉讼修正法》扩大无令状搜查权，侦办可逮捕罪行时，警方有理由相信文件或物品在涉嫌者持有或控制中即可搜查，另可在逮捕现场搜身取走危险物品。实务上一般旅客少见随机解锁，但法律门槛低。
 
-2026 年 6 月 29 日起，依《线上安全（救济与问责）法》成立的线上安全委员会（Online Safety Commission）开始受理案件，首阶段受理的五类线上伤害是网络骚扰、网络跟踪、起底、未经同意散布私密影像，以及儿少影像性剥削。委员会可要求平台限期移除内容，平台不配合时得命令 ISP 封锁特定页面、群组，必要时封锁整个平台。封锁整个平台被定位成平台拒绝配合时才动用的后盾机制，这项权力让新加坡的封锁工具箱从 POFMA 的个案更正指令扩大到服务层级。最大风险仍在你发表了什么（POFMA、诽谤、FICA）。查证来源（2026-08）：[FOTN 2025 Singapore](https://freedomhouse.org/country/singapore/freedom-net/2025){target="_blank"}、[Criminal Procedure Amendments Act 2024](https://sso.agc.gov.sg/Acts-Supp/5-2024/Published/20240318?DocDate=20240318){target="_blank"}、[线上安全委员会与《线上安全（救济与问责）法》自 2026 年 6 月 29 日施行](https://www.mlaw.gov.sg/online-safety-commission-and-online-safety-relief-and-accountability-act-2025-to-start-on-29-june-2026/){target="_blank"} - 新加坡律政部。最新观测：[OONI Explorer 新加坡](https://explorer.ooni.org/zh-CN/country/SG){target="_blank"}。
+2026 年 6 月 29 日起，依《线上安全（救济与问责）法》成立的线上安全委员会（Online Safety Commission）开始受理案件，首阶段受理的五类线上伤害是网络骚扰、网络跟踪、起底、未经同意散布私密影像，以及儿少影像性剥削。委员会可对发文者、群组或页面管理者与平台发出指令，要求停止存取特定内容或某一类内容。平台不配合指令时，委员会可以另外下命令封锁存取或要求下架 App，网络接取服务与 App 商店在法律上分开规范。这条升级路径让新加坡的工具箱从 POFMA 的个案更正指令扩大到服务层级。最大风险仍在你发表了什么（POFMA、诽谤、FICA）。查证来源（2026-09）：[FOTN 2025 Singapore](https://freedomhouse.org/country/singapore/freedom-net/2025){target="_blank"}、[Criminal Procedure Amendments Act 2024](https://sso.agc.gov.sg/Acts-Supp/5-2024/Published/20240318?DocDate=20240318){target="_blank"}、[线上安全委员会与《线上安全（救济与问责）法》自 2026 年 6 月 29 日施行](https://www.mlaw.gov.sg/online-safety-commission-and-online-safety-relief-and-accountability-act-2025-to-start-on-29-june-2026/){target="_blank"} - 新加坡律政部、[OSRA 的存取封锁与 App 下架命令](https://www.squirepattonboggs.com/en/insights/publications/2025/12/singapores-online-safety-relief-and-accountability-bill-key-insights){target="_blank"} - Squire Patton Boggs、[《刑事诉讼修正法》的搜查权说明](https://www.mha.gov.sg/media-room/newsroom/criminal-procedure-miscellaneous-amendments-bill-2024/){target="_blank"} - 新加坡内政部。最新观测：[OONI Explorer 新加坡](https://explorer.ooni.org/zh-CN/country/SG){target="_blank"}。
 
 ### 印尼
 
-中度且大致可预测的审查，封锁集中在色情与赌博，透过 Trust Positif 黑名单以 DNS 窜改执行。另有 PSE 平台注册制，未注册就封锁：2022 年曾封 PayPal、Steam、Epic Games 等，2024 年 7 月封 DuckDuckGo，2026 年 2 月 25 日到 4 月 30 日封锁 Wikimedia 的登录域名 `auth.wikimedia.org`，同样以未完成注册为由，该期间读者浏览条目不受影响，受阻的是登录与编辑。2026 年 5 月 22 日以线上赌博为由封锁预测市场平台 Polymarket。另自 2026 年 3 月 28 日起施行儿少数字空间保护规则（PP Tunas，`PP Nomor 17 Tahun 2025`），未满 16 岁不得在高风险平台持有账号，平台须配合验证年龄。WhatsApp、Tor 在测试期间多为可达，VPN 普及合法。SIM 外国旅客以护照办理，另自 2020 年起手机须登录 IMEI，用本地 SIM 时需在入境向海关登录装置。整体对一般商务旅客风险可控，行前确认常用服务是否在封锁名单上，需要登录编辑维基或使用小众服务的人尤其要先测。查证来源（2026-08）：[FOTN 2025 Indonesia](https://freedomhouse.org/country/indonesia/freedom-net/2025){target="_blank"}、[iMAP Indonesia 2024](https://imap.sinarproject.org/reports/2024/imap-indonesia-2024-internet-censorship-report){target="_blank"} - Sinar Project。最新观测：[OONI Explorer 印尼](https://explorer.ooni.org/zh-CN/country/ID){target="_blank"}。
+中度且大致可预测的审查，封锁集中在色情与赌博，透过 Trust Positif 黑名单以 DNS 窜改执行。另有 PSE 平台注册制，未注册就封锁：2022 年曾封 PayPal、Steam、Epic Games 等，2024 年 7 月封 DuckDuckGo，2026 年 2 月 25 日到 4 月 30 日封锁 Wikimedia 的登录域名 `auth.wikimedia.org`，同样以未完成注册为由，该期间读者浏览条目不受影响，受阻的是登录与编辑。2026 年 5 月 22 日以线上赌博为由封锁预测市场平台 Polymarket。同一套机制也会反向解封，2026 年 7 月初 Komdigi 在 Reddit 完成地区封锁、移除赌博与色情内容并承诺登记 PSE 之后，解除了 2015 年起长达 11 年的封锁。儿少数字空间保护规则（PP Tunas，`PP Nomor 17 Tahun 2025`）于 2025 年 3 月公告，未满 16 岁不得在高风险平台持有账号，平台须配合验证年龄。实施细则（`Permenkomdigi Nomor 9 Tahun 2026`）自 2026 年 3 月 28 日起要求平台分阶段停用未满 16 岁的账号。WhatsApp、Tor 在测试期间多为可达，VPN 普及合法。SIM 外国旅客以护照办理，另自 2020 年起手机须登录 IMEI，用本地 SIM 时需在入境向海关登录装置。整体对一般商务旅客风险可控，行前确认常用服务是否在封锁名单上，需要登录编辑维基或使用小众服务的人尤其要先测。查证来源（2026-09）：[FOTN 2025 Indonesia](https://freedomhouse.org/country/indonesia/freedom-net/2025){target="_blank"}、[iMAP Indonesia 2024](https://imap.sinarproject.org/reports/2024/imap-indonesia-2024-internet-censorship-report){target="_blank"} - Sinar Project、[Reddit 解封与 PSE 登记条件](https://en.antaranews.com/news/421473/indonesia-lifts-11-year-reddit-ban-after-regulatory-compliance){target="_blank"} - ANTARA News、[PP Tunas 的实施细则与 3 月 28 日起停用未满 16 岁账号](https://www.setneg.go.id/baca/index/lindungi_anak_di_ranah_digital_kemkomdigi_terbitkan_aturan_teknis_pp_tunas){target="_blank"} - 印尼国务秘书处。最新观测：[OONI Explorer 印尼](https://explorer.ooni.org/zh-CN/country/ID){target="_blank"}。
 
 ### 柬埔寨
 
-采选择性 DNS 封锁独立媒体，非全国性大断网。Voice of Democracy 于 2023 年被关闭，2023 年大选前封锁 Cambodia Daily、Radio Free Asia 等。OONI 量测显示被封站多为新闻与人权类，由多家 ISP 以 DNS 执行。VPN 与 Tor 合法可用，是绕过被封新闻站的常见手段，边境一般不查手机。SIM 目前无强制实名法规，但电信商办卡多会要求出示证件。需留意 National Internet Gateway（国家网关）计划在 2025 年复活、规划 2026 年起建设单一对外网关，一旦上线会大幅增加集中式审查与监控能力。这项计划自 2022 年原定启用日起多次延期，截至 2026 年 8 月仍未见上线的公开确认，出发前值得再查一次状态。查证来源（2026-08）：[FOTN 2025 Cambodia](https://freedomhouse.org/country/cambodia/freedom-net/2025){target="_blank"}、[Cambodia resurrects internet gateway plan](https://asia.nikkei.com/business/telecommunication/cambodia-resurrects-plan-for-controversial-internet-gateway){target="_blank"} - Nikkei Asia。最新观测：[OONI Explorer 柬埔寨](https://explorer.ooni.org/zh-CN/country/KH){target="_blank"}。国家网关若上线，断网样态会先变，可用 [IODA 柬埔寨](https://ioda.inetintel.cc.gatech.edu/country/KH){target="_blank"} 追连接中断的状况，这跟 OONI 的封锁观测是不同信号。
+采选择性 DNS 封锁独立媒体，非全国性大断网。Voice of Democracy 于 2023 年被关闭，2023 年大选前封锁 Cambodia Daily、Radio Free Asia 等。OONI 量测显示被封站多为新闻与人权类，由多家 ISP 以 DNS 执行。VPN 与 Tor 合法可用，是绕过被封新闻站的常见手段，边境一般不查手机。SIM 目前无强制实名法规，但电信商办卡多会要求出示证件。需留意 National Internet Gateway（国家网关）计划在 2025 年复活、规划 2026 年起建设单一对外网关，一旦上线会大幅增加集中式审查与监控能力。这项计划自 2022 年原定启用日起多次延期，截至 2026 年 9 月仍未见上线的公开确认，出发前值得再查一次状态。查证来源（2026-08）：[FOTN 2025 Cambodia](https://freedomhouse.org/country/cambodia/freedom-net/2025){target="_blank"}、[Cambodia resurrects internet gateway plan](https://asia.nikkei.com/business/telecommunication/cambodia-resurrects-plan-for-controversial-internet-gateway){target="_blank"} - Nikkei Asia。最新观测：[OONI Explorer 柬埔寨](https://explorer.ooni.org/zh-CN/country/KH){target="_blank"}。国家网关若上线，断网样态会先变，可用 [IODA 柬埔寨](https://ioda.inetintel.cc.gatech.edu/country/KH){target="_blank"} 追连接中断的状况，这跟 OONI 的封锁观测是不同信号。
 
 ### 泰国
 
@@ -229,13 +239,13 @@ NBTC 于 2026 年 5 月 15 日公报、5 月 16 日生效的科技犯罪防制�
 
 高审查环境，FOTN 22 分。2025 年 5 月电信局下令 ISP 封锁 Telegram，用户未挂 VPN 即难以连上。Decree 53/2022 要求外国业者数据在地化、留存数据至少 24 个月。Decree 147/2024 要求大型平台以越南手机号或身份证实名、24 小时内移除违法内容，Facebook 受影响最大。另有数万人规模的「47 部队」网军以检举与带风向压制异议。
 
-修订版《网络安全法》（Law 116/2025/QH15）自 2026 年 7 月 1 日生效，取代 2018 年网安法与 2015 年网络信息安全法，整并成单一框架，维持数据在地化与留存要求，并把下架时限写进法律，一般违法内容 24 小时、紧急案件 6 小时内须依公安部要求移除。《个人数据保护法》（Law 91/2025/QH15）也于 2026 年 1 月 1 日生效。这几部法的规范对象都是业者，对旅客的意义在境内平台的下架速度更快、连接与账号记录留在越南境内的量更大。新法未新增针对 VPN 的专属条文，个人使用在观光与商务旅客层级实务上几乎不见执法。
+修订版《网络安全法》（Law 116/2025/QH15）自 2026 年 7 月 1 日生效，取代 2018 年网安法与 2015 年网络信息安全法，整并成单一框架，维持数据在地化与留存要求，并把下架时限写进法律，一般违法内容 24 小时、紧急案件 6 小时内须依公安部要求移除。《个人数据保护法》（Law 91/2025/QH15）也于 2026 年 1 月 1 日生效。这几部法的规范对象都是业者，对旅客的意义在境内平台的下架速度更快、连接与账号记录留在越南境内的量更大。新法未新增针对 VPN 的专属条文，个人使用在观光与商务旅客层级实务上几乎不见执法。配套的三部子法 Decree 331/2026、332/2026 与 333/2026 于 2026 年 8 月 19 日生效，把要留在越南境内的数据类型列得更细，账号名称、使用时间、付费信息、最近的登入登出 IP 地址与账号绑定的电话号码都在内，一般留存期自主管机关要求日起至少 24 个月，系统日志与 IP 分配记录至少 12 个月。境外业者原则上不强制在地化，公安部另行决定要求时给 12 个月的遵循期。
 
-VPN 使用合法但受网安法规范，建议行前装好设定。Tor 直连大致可用，但审查机制活跃，建议备妥 WebTunnel 或 Snowflake 桥接。SIM 强制护照实名。会场与饭店 Wi-Fi 不应视为可信，敏感通讯改用 Signal 并先确认可达。查证来源（2026-08）：[FOTN 2025 Vietnam](https://freedomhouse.org/country/vietnam/freedom-net/2025){target="_blank"}、[Vietnam orders Telegram ban](https://www.aljazeera.com/news/2025/5/24/vietnam-orders-ban-on-popular-messaging-app){target="_blank"} - Al Jazeera。最新观测：[OONI Explorer 越南](https://explorer.ooni.org/zh-CN/country/VN){target="_blank"}。
+VPN 使用合法但受网安法规范，建议行前装好设定。Tor 直连大致可用，但审查机制活跃，建议备妥 WebTunnel 或 Snowflake 桥接。SIM 强制护照实名。会场与饭店 Wi-Fi 不应视为可信，敏感通讯改用 Signal 并先确认可达。查证来源（2026-09）：[FOTN 2025 Vietnam](https://freedomhouse.org/country/vietnam/freedom-net/2025){target="_blank"}、[Vietnam orders Telegram ban](https://www.aljazeera.com/news/2025/5/24/vietnam-orders-ban-on-popular-messaging-app){target="_blank"} - Al Jazeera、[三部子法的数据在地化与留存要求](https://blogs.duanemorris.com/vietnam/2026/08/27/vietnams-cybersecurity-reset-three-new-decrees-redefine-compliance-for-foreign-investors-and-fies/){target="_blank"} - Duane Morris。最新观测：[OONI Explorer 越南](https://explorer.ooni.org/zh-CN/country/VN){target="_blank"}。
 
 ### 缅甸
 
-与中国并列全球最差，FOTN 9 分。政变后封锁 Facebook、X、Instagram、WhatsApp，2024 年中封锁 Signal 与主要 VPN。2024 年起以中国 Geedge Networks 的 DPI 技术全国封锁 VPN，《Cybersecurity Law No. 1/2025》于 2025 年 7 月 30 日生效，未经授权提供 VPN 服务可判 1 至 6 个月徒刑或并科 100 万至 1,000 万缅元罚款，且具域外效力。这部法律的规范对象是未经授权的 VPN 服务提供者，定稿版把早期草案中针对个人使用的刑责拿掉了，条文在这点上并不含糊。剩下的不确定性在执法与解读，对旅客来说实际风险来自临检时手机里被搜出 VPN App 与社群内容。Tor 与 Psiphon 都被当作非法目标封锁，旅客不应假设默认 Tor 或一般桥接能连上。SIM 强制实名，军方已令电信商安装拦截设备，SIM 与国民登记卡关联，检查哨以监控系统核对身份。街头与检查哨会搜查手机里的 VPN 与社群内容。冲突区频繁全面断网，Access Now 记录缅甸 2024 年至少 85 次、2025 年至少 95 次断网，连两年居全球之冠。2025 年全球至少 313 次、遍及 52 国，是该组织有记录以来最高，缅甸一国就占了近三成。涉敏感主题者面临人身与数据双重风险。查证来源（2026-08）：[FOTN 2025 Myanmar](https://freedomhouse.org/country/myanmar/freedom-net/2025){target="_blank"}、[Myanmar cybersecurity law restricts VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - RFA、[internet shutdowns in 2025](https://www.accessnow.org/internet-shutdowns-2025/){target="_blank"} - Access Now。最新观测：[OONI Explorer 缅甸](https://explorer.ooni.org/zh-CN/country/MM){target="_blank"}。断网状态：[IODA 缅甸](https://ioda.inetintel.cc.gatech.edu/country/MM){target="_blank"}，这个站检测的是连接中断，与 OONI 的封锁观测是不同信号。
+与中国并列全球最差，FOTN 9 分。政变后封锁 Facebook、X、Instagram、WhatsApp，2024 年中封锁 Signal 与主要 VPN。2024 年起以中国 Geedge Networks 的 DPI 技术全国封锁 VPN，《Cybersecurity Law No. 1/2025》于 2025 年 7 月 30 日生效，未经授权提供 VPN 服务可判 1 至 6 个月徒刑或并科 100 万至 1,000 万缅元罚款，且具域外效力。这部法律的规范对象是未经授权的 VPN 服务提供者，定稿版把早期草案中针对个人使用的刑责拿掉了，条文在这点上并不含糊。剩下的不确定性在执法与解读，对旅客来说实际风险来自临检时手机里被搜出 VPN App 与社群内容。Tor 与 Psiphon 都被当作非法目标封锁，旅客不应假设默认 Tor 或一般桥接能连上。SIM 强制实名，军方已令电信商安装拦截设备，SIM 与国民登记卡关联。城市出入口、道路检查哨与桥梁都以人员审查监控系统（Person Scrutinization and Monitoring System，PSMS，部分报导作 Public Security Management System）核对身份，旅馆与客栈须把住客名单送交当局，观光部的住客名单系统（GLIS）把本国与外国旅客分开回报，2026 年 7 月起 PSMS 也扩及长途特快列车的乘客。街头与检查哨会搜查手机里的 VPN 与社群内容。2026 年通过的反线上诈骗法第 17 条再要求电信业者保存用户位置数据与通话明细供当局取用。冲突区频繁全面断网，Access Now 记录缅甸 2024 年至少 85 次、2025 年至少 95 次断网，连两年居全球之冠。2025 年全球至少 313 次、遍及 52 国，是该组织有记录以来最高，缅甸一国就占了约三成。涉敏感主题者面临人身与数据双重风险。查证来源（2026-09）：[FOTN 2025 Myanmar](https://freedomhouse.org/country/myanmar/freedom-net/2025){target="_blank"}、[Myanmar cybersecurity law restricts VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - RFA、[internet shutdowns in 2025](https://www.accessnow.org/internet-shutdowns-2025/){target="_blank"} - Access Now、[PSMS 扩及长途列车与反线上诈骗法第 17 条（2026 年 5 至 7 月）](https://www.myanmarinternet.info/post/quarterly_may_july_2026){target="_blank"} - Myanmar Internet Project、[PSMS 在城市出入口、检查哨、桥梁与旅馆的部署](https://www.bnionline.net/en/news/mon-state-sees-tighter-enforcement-psms-surveillance-system){target="_blank"} - Burma News International、[政变五年后的数字威权样态与 PSMS 全称](https://www.techpolicy.press/five-years-after-coup-myanmars-digital-authoritarianism-enters-new-phase/){target="_blank"} - Tech Policy Press、[观光部住客名单系统](https://glis.tourism.gov.mm/){target="_blank"} - GLIS。最新观测：[OONI Explorer 缅甸](https://explorer.ooni.org/zh-CN/country/MM){target="_blank"}。断网状态：[IODA 缅甸](https://ioda.inetintel.cc.gatech.edu/country/MM){target="_blank"}，这个站检测的是连接中断，与 OONI 的封锁观测是不同信号。
 
 ## 研讨会场景的特别提醒
 
@@ -243,9 +253,20 @@ VPN 使用合法但受网安法规范，建议行前装好设定。Tor 直连大
 
 - **报到实名与议程数据**。不少研讨会报名要绑实名与单位，到了现场领的识别证、签到系统都会留下出席记录。涉及敏感议题的活动，评估用哪个身份报名、要不要公开出席。
 - **经香港转机也算通关**。区域研讨会常把香港排成转机点或主办地，2026 年 3 月起的解密义务涵盖只在香港机场转机并通关的旅客，带着整台工作机与未发表的会议数据过关，暴露程度高过在会场连 Wi-Fi。行程含香港时，把装置最小化排进准备清单。
+- **行程含中国大陆时，把装置最小化排在报名之前**。2026 年 9 月 15 日起的出境入境新规让官方在核实身份与来意时可以要求提供电子数据，带着整台工作机与未发表的研究数据入境，暴露面落在装置内容上，连接加密帮不上忙。
 - **会场与饭店 Wi-Fi 一律视为不可信**。公共网络有假热点与窃听风险，连接一律走 VPN 加密。在中国、越南、缅甸这类地方，更要假设场馆网络本身受监控。
-- **公开发表的法律风险才是大宗**。多数地点连得上网，真正会出事的是你发表了什么、分享了什么。泰国的刑法第 112 条、新加坡的 POFMA 与诽谤法、马来西亚涉王室与宗教的内容、越南与中国的政治言论，都可能让外国与会者被追诉。发表涉当地政治、王室、宗教、种族的内容前先查清楚规范。
+- **公开发表的法律风险才是大宗**。多数地点连得上网，真正会出事的是你发表了什么、分享了什么。泰国的刑法第 112 条、新加坡的 POFMA 与诽谤法、马来西亚涉王室与宗教的内容、越南与中国的政治言论，都可能让外国与会者被追诉。南韩自 2026 年 7 月起也把虚假操作信息的移除与损害赔偿写进法律。发表涉当地政治、王室、宗教、种族的内容前先查清楚规范。
 - **团队出差约好通讯管道**。主要与备用管道各一，遇到断网或单一工具被封时还能联络。缅甸这类随时可能断网的地方尤其要先约好。
+
+## 更新记录
+
+只记会改变准备动作的变更，错字、排版与翻译润稿不列。更早的修订看页面右上角的原始码链接。
+
+- **2026/09/08：**查证日更新至 2026 年 9 月。中国大陆新增《国务院关于出境入境管理的规定》（2026 年 9 月 15 日施行），对照表的入境装置检查栏加注可要求提供电子数据，研讨会提醒多一条行程含中国大陆的准备项。南韩补 7 月 1 日的图片事前过滤义务与 7 月 7 日的虚假操作信息修法。印尼补 Reddit 解封。越南补 8 月 19 日生效的三部子法。缅甸补 PSMS 的查验范围与反线上诈骗法。同日的事实查核另修正四处：南韩图片过滤义务的适用门槛（10 万人，原误写百万）、陆委会三次提醒的日期归属、印尼 PP Tunas 与实施细则的生效日归属、新加坡线上安全委员会的命令层级。另把中国海关查验的公开案例收敛到手机，笔电当场被查没有对应案例，并标出缅甸 PSMS 全称在来源间的歧异。
+- **2026/08/10：**逐地注记末尾补上各地的 OONI Explorer 直达链接，柬埔寨与缅甸另附 IODA 的断网观测。
+- **2026/08/05：**查证日更新至 2026 年 8 月。香港的入境装置检查从「中」升到「高」，理由是 3 月生效的国安装置解密义务。泰国的 SIM 新规、南韩的 CDN 层封锁、新加坡的线上安全委员会一并补上，同时撤回三处查无实据的叙述。
+- **2026/08/04：**新增「干净机与 burner 手机的取舍」一节，处理要不要另备一台机器、能不能在外地买、带回来会发生什么。
+- **2026/06/07：**首次发布，十四地对照表与依风险分层的准备清单。
 
 ## 回报过时信息
 
