@@ -16,7 +16,7 @@ This page is built in two halves. The first is general device-minimization OPSEC
 
 !!! warning "General framing, not legal advice"
 
-    Border-search law changes fast and varies by checkpoint, officer, and your nationality. The per-jurisdiction notes below are a starting point for your own research, not legal advice. Verify the current rules against official sources and, for real exposure, consult a lawyer or an organization on the ground before you travel.
+    Border-search law changes fast and varies by checkpoint, officer, and your nationality. The per-jurisdiction notes below are a starting point for your own research, not legal advice. Verify the current rules against official sources and, for real exposure, consult a lawyer or an organization on the ground before you travel. For what changed in each revision, see the [change log](#Change-log) at the foot of the page.
 
 ## Why minimize before you travel
 
@@ -103,7 +103,7 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 
 !!! warning "Returning to mainland China inverts several of these"
 
-    A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry, since state-security officers have had explicit authority to check personal electronic devices since July 2024, and the jurisdiction sits at the top tier of the border-inspection column in the table above. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
+    A foreign roaming number is not discreet there; it stands out and sits inside the same monitoring scope, and the cross-border-request threshold is not protection. The device itself may be inspected on entry: state-security officers have had explicit authority to check personal electronic devices since July 2024, and from 15 September 2026 the State Council's exit-and-entry provisions add an express power to require electronic data at the line, which puts mainland China at the top of the range described in the per-jurisdiction notes below. Swapping in a local SIM means real-name registration with a face check. Only the short prepaid validity carries over unchanged. Full context is in [posting on mainland Chinese platforms](./mainland-speech.md) and the mainland China entry in the per-jurisdiction section below.
 
 **The practical shape**: Keep the device and reuse it, resetting before each trip and not using it for daily life in between. Don't mix foreign and domestic SIMs in one handset. Get a domestic second line domestically if you need one, accepting that registration applies there too. Physical destruction is for a device that genuinely took on risk, and [our activists' guide](./activist.md) covers that end of the lifecycle.
 
@@ -111,7 +111,7 @@ Two questions come up often enough to answer directly: can you buy an anonymous 
 
 ## Per-jurisdiction border context (Asia)
 
-The notes below cover border *device-search* powers specifically, with two reference points (US and UK) that many travelers already half-know but routinely misapply to Asia. **This is general framing as of mid-2026, not legal advice.** Verify against official sources before you travel; these powers are exactly where wrong specifics are dangerous.
+The notes below cover border *device-search* powers specifically, with two reference points (US and UK) that many travelers already half-know but routinely misapply to Asia. **This is general framing as of September 2026, not legal advice.** Verify against official sources before you travel; these powers are exactly where wrong specifics are dangerous.
 
 ### United States and United Kingdom (the rules people already know)
 
@@ -132,6 +132,8 @@ This still removes the old assumption that passing through Hong Kong is low-risk
 
 Treat device inspection as a baseline assumption. Procedures issued by the Ministry of State Security, effective 1 July 2024, give state-security officers broad authority to inspect electronic devices (phones, tablets, laptops) and gather "electronic data" including messages, emails, chats, documents, images, and app records, at borders, in transit, and inside the country. Routine inspections are framed as targeted at counter-espionage subjects rather than every traveler, and require internal approval, but emergency provisions allow warrantless checks, and the practical reality reported by travelers is that spot checks of phones and laptops do happen at some ports[^8]. Combined with mandatory real-name-plus-face SIM registration, the working assumption for sensitive travel is that everything on a connected device is reachable. A clean device is the safest answer here.
 
+A second instrument tightens this from 15 September 2026. The State Council's Provisions on Exit and Entry Administration, promulgated on 31 July 2026, run to 19 articles. Article 3 lets immigration authorities question travelers and require them to produce documents, materials, and *electronic data* when verifying identity or stated purpose of travel; Article 4 sets exit bans of six months to three years; Article 6 lets the authorities withhold notice from the person concerned where notifying them could affect national security or a criminal investigation. The text does not mandate searching every traveler's device. What it adds is an explicit basis for demanding phone or cloud content at the desk, with broad triggering conditions and the discretion sitting with the officer. Taiwan's Mainland Affairs Council issued a travel-risk reminder on 5 August 2026 advising a device cleanup before departure[^11].
+
 ### Singapore
 
 Day-to-day, mainstream services are reachable and most travelers clear immigration without a device search. The relevant exposure is the breadth of statutory search and arrest powers rather than a routine border-phone-search regime. Amendments to the Criminal Procedure Code in 2024 broadened powers to search items in a person's possession or control in connection with an arrest, and the legal threshold for various interventions is comparatively low, so don't treat "no routine search" as "no possible search." The larger practical risk in Singapore is what you publish, given POFMA (the online-falsehoods law), defamation, and foreign-interference legislation, more than what's on your phone at the desk. We could not verify a specific, current Singapore *border device-search-and-compelled-unlock* statute of the Hong Kong or UK kind, so we describe the powers generally rather than cite one; confirm with the Immigration & Checkpoints Authority before relying on any specific claim.
@@ -147,6 +149,15 @@ Routine immigration and customs checks are not deep device searches. Officers ma
 ### Macau, and the rest of the region
 
 For Macau and several other Asian jurisdictions, public, verifiable information on border *device-search* powers specifically is thin. That absence of documented power is not the same as a guarantee, so apply the general OPSEC above: minimized device, strong passcode, biometrics off, powered down at arrival. For a country-by-country briefing tuned to your exact destination, dates, and role, our [pre-departure AI briefing page](./travel-ai-briefing.md) gives you copy-paste prompts to run on your own AI without any query reaching us, and lists the primary sources (OONI, Freedom House, Access Now, your foreign ministry) to verify the answers against.
+
+## Change log
+
+Only changes that alter what you should do are listed here; typos, formatting, and copy edits are not. For the full revision history, use the source link at the top of the page.
+
+- **2026-09-08:** Added the State Council's Provisions on Exit and Entry Administration (effective 15 September 2026) to the mainland China section and to the return-to-mainland-China warning, and moved the framing date to September 2026.
+- **2026-08-05:** Refreshed to the August 2026 verification pass. Hong Kong moved to the top of the border-inspection range after the 23 March 2026 national-security decryption duty, and three claims that could not be substantiated were withdrawn.
+- **2026-08-04:** Added the burner section, covering the handset-versus-number split, buying abroad, and what changes when you take it home.
+- **2026-06-23:** First published.
 
 ## Where to go from here
 
@@ -170,3 +181,4 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 [^8]: [New rules let China's state security police check people's devices](https://www.rfa.org/english/news/china/security-police-check-devices-05082024130107.html){target="_blank"} — Radio Free Asia, on the Ministry of State Security procedures effective 1 July 2024 governing inspection of personal electronic devices.
 [^9]: [Malaysia: Country chapter — World Report 2024](https://www.hrw.org/world-report/2024/country-chapters/malaysia){target="_blank"} — Human Rights Watch, on Section 377, state-level Islamic enforcement, and the use of app data in enforcement actions against LGBTQ+ people.
 [^10]: [Can immigration check your phone when you arrive in Thailand?](https://thethaiger.com/travel/guides-travel/can-immigration-check-your-phone-when-you-arrive-in-thailand){target="_blank"} — The Thaiger, on the warrant requirement under the Computer Crime Act for accessing internal device data, and the separate, severe lèse-majesté exposure.
+[^11]: [Provisions of the State Council on Exit and Entry Administration](https://www.gov.cn/zhengce/content/202607/content_7077172.htm){target="_blank"} — full text on the Chinese government portal, promulgated 31 July 2026 and effective 15 September 2026; Article 3 covers the electronic-data demand, Article 4 the exit bans, Article 6 the withholding of notice. Taiwan's reminder is reported in [the Straits Exchange Foundation's cross-strait trade bulletin](https://www.seftb.org/cp-1021-2753-732f6-1.html){target="_blank"}, 5 August 2026.
