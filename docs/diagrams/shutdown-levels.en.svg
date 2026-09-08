@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 627" width="940" height="627" role="img" aria-labelledby="title desc">
+<title id="title">Shutdowns come in four levels, and each one leaves you different options</title>
+<desc id="desc">Four stacked bands running from light to dark, representing the four levels of a network shutdown, with fewer options available as you move down. Level one is throttling and intermittent loss, identified by small files getting through while large ones fail, leaving text messaging and offline editing; the common misreading is blaming your own device and rebooting repeatedly. Level two is specific services being blocked, identified by other sites loading on the same connection, leaving any channel that is not blocked; the common misreading is treating one broken app as a dead line. Level three is a regional blackout, identified by switching Wi-Fi and carriers with the same result while people nearby see the same thing, leaving whatever you stored in advance, Bluetooth and local networks, and physical delivery; the common misreading is assuming Bluetooth and local networks also stop working. Level four is a shutdown that takes the power with it, obvious without any diagnosis, leaving battery time, paper, and meeting arrangements agreed in advance; the common misreading is still focusing on communication tools instead of power management.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="844" height="114" rx="8"/>
+<rect class="card" x="44" y="42" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="63" text-anchor="middle">1</text>
+<text class="t-main h2" x="102" y="54">Throttling and intermittent loss</text>
+<text class="t-mute sm" x="102" y="74">Small files get through, large ones do</text>
+<text class="t-mute sm" x="102" y="91">not. Text-only services still work.</text>
+<text class="t-mute sm" x="358" y="54">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="74">Text messaging</text>
+<text class="t-main bd" x="358" y="91">Low-bandwidth ways of working</text>
+<text class="t-main bd" x="358" y="108">Offline editing, sent when a window</text>
+<text class="t-main bd" x="358" y="125">opens</text>
+<text class="t-mute sm" x="616" y="54">COMMON MISREADING</text>
+<text class="t-mute sm" x="616" y="74">Blaming your own device and rebooting,</text>
+<text class="t-mute sm" x="616" y="91">reinstalling apps, resetting the</text>
+<text class="t-mute sm" x="616" y="108">router.</text>
+<rect class="card-w1" x="28" y="152" width="844" height="114" rx="8"/>
+<rect class="card" x="44" y="166" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="187" text-anchor="middle">2</text>
+<text class="t-main h2" x="102" y="178">Specific services blocked</text>
+<text class="t-mute sm" x="102" y="198">Other sites load on the same</text>
+<text class="t-mute sm" x="102" y="215">connection. The only level you can</text>
+<text class="t-mute sm" x="102" y="232">confirm with public measurement such as</text>
+<text class="t-mute sm" x="102" y="249">OONI.</text>
+<text class="t-mute sm" x="358" y="178">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="198">Any channel that is not blocked</text>
+<text class="t-main bd" x="358" y="215">Circumvention tools</text>
+<text class="t-mute sm" x="616" y="178">COMMON MISREADING</text>
+<text class="t-mute sm" x="616" y="198">Treating one app that will not open as</text>
+<text class="t-mute sm" x="616" y="215">a dead connection.</text>
+<rect class="card-w2" x="28" y="276" width="844" height="131" rx="8"/>
+<rect class="card" x="44" y="290" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="311" text-anchor="middle">3</text>
+<text class="t-main h2" x="102" y="302">Regional blackout</text>
+<text class="t-main sm" x="102" y="322">Switching Wi-Fi or carrier gives the</text>
+<text class="t-main sm" x="102" y="339">same result, and people nearby see it</text>
+<text class="t-main sm" x="102" y="356">too.</text>
+<text class="t-main sm" x="102" y="373">Signal bars tell you nothing. A call or</text>
+<text class="t-main sm" x="102" y="390">SMS shows whether only data was cut.</text>
+<text class="t-main sm" x="358" y="302">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="322">Whatever you stored on the device in</text>
+<text class="t-main bd" x="358" y="339">advance</text>
+<text class="t-main bd" x="358" y="356">Bluetooth and local-network links to</text>
+<text class="t-main bd" x="358" y="373">people nearby</text>
+<text class="t-main bd" x="358" y="390">USB sticks, paper, talking in person</text>
+<text class="t-main sm" x="616" y="302">COMMON MISREADING</text>
+<text class="t-main sm" x="616" y="322">Assuming every wireless function is</text>
+<text class="t-main sm" x="616" y="339">gone. Bluetooth and local networks skip</text>
+<text class="t-main sm" x="616" y="356">the carrier and the internet, so they</text>
+<text class="t-main sm" x="616" y="373">keep working at this level.</text>
+<rect class="card-w3" x="28" y="417" width="844" height="114" rx="8"/>
+<rect class="card" x="44" y="431" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="452" text-anchor="middle">4</text>
+<text class="t-inv h2" x="102" y="443">Power goes down too</text>
+<text class="t-inv sm" x="102" y="463">No diagnosis needed. The problem shifts</text>
+<text class="t-inv sm" x="102" y="480">from messages not sending to the device</text>
+<text class="t-inv sm" x="102" y="497">shutting down in a few hours.</text>
+<text class="t-inv sm" x="358" y="443">STILL AVAILABLE</text>
+<text class="t-inv bd" x="358" y="463">However long the battery lasts</text>
+<text class="t-inv bd" x="358" y="480">Paper</text>
+<text class="t-inv bd" x="358" y="497">Meeting arrangements agreed in</text>
+<text class="t-inv bd" x="358" y="514">advance</text>
+<text class="t-inv sm" x="616" y="443">COMMON MISREADING</text>
+<text class="t-inv sm" x="616" y="463">Still focusing on communication tools</text>
+<text class="t-inv sm" x="616" y="480">rather than power. Power banks and a</text>
+<text class="t-inv sm" x="616" y="497">dimmed screen decide how much time you</text>
+<text class="t-inv sm" x="616" y="514">have left.</text>
+<path class="arrow" d="M894 42 V517"/>
+<path class="arrow-h" d="M894 531 L888.5 516 L899.5 516 Z"/>
+<text class="t-mute sm" x="910" y="277.5" text-anchor="middle" transform="rotate(-90 910 277.5)">FEWER OPTIONS AS YOU GO DOWN</text>
+<text class="t-foot" x="28" y="557">Read the level wrong and none of your preparation applies. Work out which level you are in before deciding what to do next.</text>
+<text class="t-foot" x="28" y="579">What is left at each level depends on what you finished before the shutdown. Anything you did not store on the device is out of</text>
+<text class="t-foot" x="28" y="601">reach now.</text>
+</svg>

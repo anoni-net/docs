@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 555" width="940" height="555" role="img" aria-labelledby="title desc">
+<title id="title">Agree the attribution level with your source, section by section</title>
+<desc id="desc">Four stacked bands running from dark to light, representing the four attribution levels a reporter and a source can agree on, with the source's exposure shrinking as you move down. The first level is on the record, meaning the name and job title can be printed, so the story carries the name, the title and the direct quote. The second level is anonymous quotation, meaning the content can be quoted under a role description, so the story carries a line such as an engineer who worked on the project said. The third level is background, used only to understand the situation and direct verification, with the source neither named nor quoted. The fourth level is not for use, where nothing enters the story at all. The red box below warns that anonymous quotation is the level that goes wrong most often, because the role description can identify the person on its own: if only three people at a company match the description, the description names all three.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<text class="t-mute sm" x="298" y="40">WHAT IT MEANS</text>
+<text class="t-mute sm" x="558" y="40">WHAT APPEARS IN THE STORY</text>
+<path class="rule" d="M28 50 H872"/>
+<rect class="card-w2" x="28" y="62" width="844" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="88">On the record</text>
+<text class="t-main bd" x="298" y="88">Name and job title can be printed</text>
+<text class="t-main bd" x="558" y="88">Name, title, direct quote</text>
+<rect class="card-w1" x="28" y="121" width="844" height="66" rx="8"/>
+<text class="t-main h2" x="44" y="147">Anonymous quotation</text>
+<text class="t-main bd" x="298" y="147">Content can be quoted under a role</text>
+<text class="t-main bd" x="298" y="164">description</text>
+<text class="t-mute bd" x="558" y="147">“An engineer who worked on the project said”</text>
+<rect class="card-c1" x="28" y="197" width="844" height="66" rx="8"/>
+<text class="t-main h2" x="44" y="223">Background</text>
+<text class="t-main bd" x="298" y="223">Only for understanding the story and</text>
+<text class="t-main bd" x="298" y="240">directing verification</text>
+<text class="t-mute bd" x="558" y="223">Source is neither named nor quoted</text>
+<rect class="card-n" x="28" y="273" width="844" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="299">Not for use</text>
+<text class="t-main bd" x="298" y="299">Nothing enters the story</text>
+<text class="t-mute bd" x="558" y="299">Nothing</text>
+<path class="arrow" d="M894 42 V308"/>
+<path class="arrow-h" d="M894 322 L888.5 307 L899.5 307 Z"/>
+<text class="t-mute sm" x="910" y="173" text-anchor="middle" transform="rotate(-90 910 173)">SOURCE EXPOSURE DECREASES</text>
+<rect class="card-no" x="28" y="342" width="884" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="370">Anonymous quotation is where this goes wrong</text>
+<text class="t-main bd" x="44" y="396">The role description can identify the person on its own. If only three people at a company match</text>
+<text class="t-main bd" x="44" y="413">“an engineer who worked on the project”, the description has named all three. Widen the description</text>
+<text class="t-main bd" x="44" y="430">by one step during the conversation, or move the material down to background.</text>
+<text class="t-foot" x="28" y="463">Different pieces of one conversation can sit at different levels. Confirm each section as you go, since by the end a source</text>
+<text class="t-foot" x="28" y="485">rarely remembers which sentence sat where.</text>
+<text class="t-foot" x="28" y="507">Do not promise what you cannot deliver. What you can promise is behaviour: no records handed over, no mention outside the</text>
+<text class="t-foot" x="28" y="529">newsroom, a look at the passages that concern them before publication.</text>
+</svg>

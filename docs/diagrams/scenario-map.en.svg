@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 494" width="940" height="494" role="img" aria-labelledby="title desc">
+<title id="title">A reading map for the scenarios, starting from one shared baseline</title>
+<desc id="desc">At the top sits the shared baseline, what an ordinary person should have in place, which every reader starts from and which every other article assumes. Below it the scenarios split into four groups. The first goes by your role: journalists protecting sources, activists preparing for mobilisation, election observers protecting themselves, and advocacy organisations building anonymous donation channels. The second goes by your situation: anonymous socialising for LGBTQ+ people, and digital preparation for survivors of domestic violence. The third goes by where you speak: publishing on mainland Chinese platforms, and posting online in Singapore and Malaysia. The fourth goes by travel and external events: preparing for business trips and conferences, generating a destination briefing with AI before you go, and preparing for network shutdowns. One person can fall into several groups at once, and the articles cross-reference each other.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c3" x="28" y="28" width="884" height="118" rx="8"/>
+<text class="t-main h1" x="44" y="56">Shared baseline: what an ordinary person should have in place</text>
+<text class="t-main bd" x="44" y="82">If none of the scenarios matches you, start here. Every other article assumes you have done this one, and it lists what should</text>
+<text class="t-main bd" x="44" y="99">push you up into a specific scenario.</text>
+<text class="t-main bd" x="44" y="116">It covers how three kinds of adversary differ, measures ranked by what they actually achieve, measures that are overrated, and</text>
+<text class="t-main bd" x="44" y="133">when to raise your standard.</text>
+<path class="arrow" d="M470 150 V177"/>
+<path class="arrow-h" d="M470 184 L464.5 176 L475.5 176 Z"/>
+<text class="t-mute sm" x="484" y="164">Branching by role and situation. One person can fall into several</text>
+<text class="t-mute sm" x="484" y="179">groups at once.</text>
+<rect class="card-c1" x="28" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="42" y="222">By your role</text>
+<text class="t-main bd" x="42" y="236">Journalists protecting</text>
+<text class="t-main bd" x="42" y="253">sources</text>
+<text class="t-main bd" x="42" y="270">Activists preparing for</text>
+<text class="t-main bd" x="42" y="287">mobilisation</text>
+<text class="t-main bd" x="42" y="304">Election observers</text>
+<text class="t-main bd" x="42" y="321">protecting themselves</text>
+<text class="t-main bd" x="42" y="338">Advocacy groups taking</text>
+<text class="t-main bd" x="42" y="355">anonymous donations</text>
+<rect class="card-w1" x="252.5" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="266.5" y="222">By your situation</text>
+<text class="t-main bd" x="266.5" y="236">Anonymous socialising for</text>
+<text class="t-main bd" x="266.5" y="253">LGBTQ+ people</text>
+<text class="t-main bd" x="266.5" y="270">Digital preparation for</text>
+<text class="t-main bd" x="266.5" y="287">survivors of domestic</text>
+<text class="t-main bd" x="266.5" y="304">violence</text>
+<rect class="card-c2" x="477" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="491" y="222">By where you speak</text>
+<text class="t-main bd" x="491" y="236">Publishing on mainland</text>
+<text class="t-main bd" x="491" y="253">Chinese platforms</text>
+<text class="t-main bd" x="491" y="270">Posting online in Singapore</text>
+<text class="t-main bd" x="491" y="287">and Malaysia</text>
+<rect class="card-n" x="701.5" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="715.5" y="222">By travel and external events</text>
+<text class="t-main bd" x="715.5" y="236">Business trips and</text>
+<text class="t-main bd" x="715.5" y="253">conferences</text>
+<text class="t-main bd" x="715.5" y="270">An AI-assisted destination</text>
+<text class="t-main bd" x="715.5" y="287">briefing</text>
+<text class="t-main bd" x="715.5" y="304">Preparing for a network</text>
+<text class="t-main bd" x="715.5" y="321">shutdown</text>
+<text class="t-foot" x="28" y="402">No tool is good or bad on its own. What matters is whether it answers a specific situation and threat. Each article pairs its</text>
+<text class="t-foot" x="28" y="424">advice with the tools and settings it relies on.</text>
+<text class="t-foot" x="28" y="446">When a term is unfamiliar, go back to the concepts and tools sections for the background. The articles cross-reference each</text>
+<text class="t-foot" x="28" y="468">other, so read what you need.</text>
+</svg>

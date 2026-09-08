@@ -37,6 +37,12 @@ Think of your accounts in three layers:
 
 Not everyone needs all three. Most readers should start by separating the everyday and community layers, and revisit the exploration layer once that's habitual.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/identity-tiers.en.svg"
+        alt="Three side-by-side columns representing the everyday, community and exploration account tiers, separated by dashed lines marked as non-overlapping. The everyday tier is the identity you share with work, family and long-term friends, holding email, social media, banking and streaming, on the assumption that family or colleagues seeing it is fine. The community tier is the identity used with LGBTQ+ friends, community events and content about sexual orientation; it shares nothing with the everyday tier, so you can take part in the community without being linked back, and its profile picture uses no photo that appears anywhere family or colleagues can see. The exploration tier covers dating apps, anonymous communities and test accounts, the highest-risk and shortest-lived of the three. The bar at the top states the basis of the separation: no shared email, no shared username, no shared browser, no shared password manager folder. The bar at the bottom lists what each tier needs of its own: an email address, a browser profile, a password manager vault and a two-factor group.">
+    <figcaption>The three tiers share no identifier</figcaption>
+</figure>
+
 ### What each layer needs
 
 Every layer needs its own email, browser profile, password-manager vault, and 2FA group. During registration you also have to avoid the phone-number and address-book matching platforms do on their side, and once the accounts exist, the correlation paths are profile photos, reused usernames, posting times, and writing style. None of that is specific to being LGBTQ+, and the full setup lives in [maintaining multiple online identities](../basics/multiple-identities.md). Each layer's email does not have to be a separate mailbox: aliases grow several outward addresses from one, and the trade-offs are in [email aliases, and who you hand your trust to](../tools/email-alias.md).

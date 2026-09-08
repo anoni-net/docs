@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 333" width="940" height="333" role="img" aria-labelledby="title desc">
+<title id="title">場景層的閱讀地圖，先做到共同基準再依身分往上走</title>
+<desc id="desc">上方是共同基準「一般人平常該做到什麼」，所有讀者從這篇開始，其餘各篇都假設你已經做到它。往下分成四組場景。第一組依你的角色：記者保護消息來源、社運行動者的數位準備、選舉觀察員的自保、倡議組織的匿名捐款管道。第二組依你的處境：LGBTQ+ 與性少數的匿名社交、家暴受害者的數位準備。第三組依你在哪裡發言：在中國大陸的公開平台傳播資訊、在新加坡與馬來西亞的網路發言。第四組依移動與外部事件：出差與研討會的數位準備、出國前用 AI 自助產生目的地概況、網路中斷時的準備與應對。同一個人可能同時落在好幾組，各篇之間互相引用，可以照需要挑著讀。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c3" x="28" y="28" width="884" height="84" rx="8"/>
+<text class="t-main h1" x="44" y="56">共同基準：一般人平常該做到什麼</text>
+<text class="t-main bd" x="44" y="82">找不到符合自己身分的那一篇，先看這一篇。其餘各篇都假設你已經做到它，它也列出什麼情況該往上走到特定場景。</text>
+<text class="t-main bd" x="44" y="99">內容是三種對手的差別、依實際效果排序的做法、被高估的做法，以及什麼時候該把標準拉高。</text>
+<path class="arrow" d="M470 116 V135"/>
+<path class="arrow-h" d="M470 142 L464.5 134 L475.5 134 Z"/>
+<text class="t-mute sm" x="484" y="130">依身分與處境分支，同一個人可能同時落在好幾組</text>
+<rect class="card-c1" x="28" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="42" y="173">依你的角色</text>
+<text class="t-main bd" x="42" y="187">記者保護消息來源</text>
+<text class="t-main bd" x="42" y="204">社運行動者的數位準備</text>
+<text class="t-main bd" x="42" y="221">選舉觀察員的自保</text>
+<text class="t-main bd" x="42" y="238">倡議組織的匿名捐款管道</text>
+<rect class="card-w1" x="252.5" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="266.5" y="173">依你的處境</text>
+<text class="t-main bd" x="266.5" y="187">LGBTQ+ 與性少數的匿名社交</text>
+<text class="t-main bd" x="266.5" y="204">家暴受害者的數位準備</text>
+<rect class="card-c2" x="477" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="491" y="173">依你在哪裡發言</text>
+<text class="t-main bd" x="491" y="187">在中國大陸的公開平台傳播資訊</text>
+<text class="t-main bd" x="491" y="204">在新加坡與馬來西亞的網路發言</text>
+<rect class="card-n" x="701.5" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="715.5" y="173">依移動與外部事件</text>
+<text class="t-main bd" x="715.5" y="187">出差與研討會的數位準備</text>
+<text class="t-main bd" x="715.5" y="204">出國前用 AI 產生目的地概況</text>
+<text class="t-main bd" x="715.5" y="221">網路中斷時的準備與應對</text>
+<text class="t-foot" x="28" y="285">工具沒有絕對的好壞，重點是能不能對應到具體的處境與威脅。每篇都會搭配對應的工具與設定建議。</text>
+<text class="t-foot" x="28" y="307">看不懂某個名詞時，回頭看概念層與工具層補背景知識。各篇之間互相引用，照需要挑著讀即可。</text>
+</svg>

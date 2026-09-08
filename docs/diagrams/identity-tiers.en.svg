@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 657" width="940" height="657" role="img" aria-labelledby="title desc">
+<title id="title">Three account tiers that share no identifier with each other</title>
+<desc id="desc">Three side-by-side columns representing the everyday, community and exploration account tiers, separated by dashed lines marked as non-overlapping. The everyday tier is the identity you share with work, family and long-term friends, holding email, social media, banking and streaming, on the assumption that family or colleagues seeing it is fine. The community tier is the identity used with LGBTQ+ friends, community events and content about sexual orientation; it shares nothing with the everyday tier, so you can take part in the community without being linked back, and its profile picture uses no photo that appears anywhere family or colleagues can see. The exploration tier covers dating apps, anonymous communities and test accounts, the highest-risk and shortest-lived of the three. The bar at the top states the basis of the separation: no shared email, no shared username, no shared browser, no shared password manager folder. The bar at the bottom lists what each tier needs of its own: an email address, a browser profile, a password manager vault and a two-factor group.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-n" x="28" y="28" width="884" height="52" rx="8"/>
+<text class="t-main h2" x="44" y="58">THE BASIS</text>
+<text class="t-main bd" x="176" y="58">Accounts in different tiers share no email, no username, no browser and no password manager folder.</text>
+<rect class="card-c1" x="28" y="94" width="241.333" height="323" rx="8"/>
+<text class="t-main h2" x="42" y="118">Everyday tier</text>
+<text class="t-mute sm" x="42" y="136">Long-lived, tied to your legal name</text>
+<text class="t-mute sm" x="42" y="154">WHAT LIVES HERE</text>
+<text class="t-main bd" x="42" y="172">Email and mainstream social</text>
+<text class="t-main bd" x="42" y="189">media</text>
+<text class="t-main bd" x="42" y="206">Banking and streaming</text>
+<text class="t-main bd" x="42" y="223">Work and school accounts</text>
+<text class="t-mute sm" x="42" y="248">WORKING ASSUMPTION</text>
+<text class="t-main bd" x="42" y="266">Family or colleagues seeing this</text>
+<text class="t-main bd" x="42" y="283">is fine</text>
+<rect class="card-c2" x="349.333" y="94" width="241.333" height="323" rx="8"/>
+<text class="t-main h2" x="363.333" y="118">Community tier</text>
+<text class="t-mute sm" x="363.333" y="136">Long-lived, no overlap with</text>
+<text class="t-mute sm" x="363.333" y="154">everyday</text>
+<text class="t-mute sm" x="363.333" y="172">WHAT LIVES HERE</text>
+<text class="t-main bd" x="363.333" y="190">Accounts used at community</text>
+<text class="t-main bd" x="363.333" y="207">events</text>
+<text class="t-main bd" x="363.333" y="224">Interaction with content about</text>
+<text class="t-main bd" x="363.333" y="241">sexual orientation</text>
+<text class="t-main bd" x="363.333" y="258">Contacts with LGBTQ+ friends</text>
+<text class="t-mute sm" x="363.333" y="283">WORKING ASSUMPTION</text>
+<text class="t-main bd" x="363.333" y="301">You can take part without being</text>
+<text class="t-main bd" x="363.333" y="318">linked back to the everyday</text>
+<text class="t-main bd" x="363.333" y="335">tier.</text>
+<text class="t-main bd" x="363.333" y="352">The profile picture uses no</text>
+<text class="t-main bd" x="363.333" y="369">photo family or colleagues can</text>
+<text class="t-main bd" x="363.333" y="386">see</text>
+<rect class="card-w1" x="670.667" y="94" width="241.333" height="323" rx="8"/>
+<text class="t-main h2" x="684.667" y="118">Exploration tier</text>
+<text class="t-mute sm" x="684.667" y="136">Short-lived, disposable</text>
+<text class="t-mute sm" x="684.667" y="154">WHAT LIVES HERE</text>
+<text class="t-main bd" x="684.667" y="172">Dating apps</text>
+<text class="t-main bd" x="684.667" y="189">Anonymous communities</text>
+<text class="t-main bd" x="684.667" y="206">Test accounts while exploring</text>
+<text class="t-mute sm" x="684.667" y="231">WORKING ASSUMPTION</text>
+<text class="t-main bd" x="684.667" y="249">The highest-risk tier. Keep it</text>
+<text class="t-main bd" x="684.667" y="266">separate from the community tier</text>
+<text class="t-main bd" x="684.667" y="283">as well: location and photos</text>
+<text class="t-main bd" x="684.667" y="300">expose more here than anywhere</text>
+<text class="t-main bd" x="684.667" y="317">else</text>
+<path class="rule" d="M309.333 102 V409" stroke-dasharray="4 4"/>
+<rect class="tag" x="272.333" y="243.5" width="74" height="22" rx="11"/>
+<text class="t-tag" x="309.333" y="258.5" text-anchor="middle">no overlap</text>
+<path class="rule" d="M630.667 102 V409" stroke-dasharray="4 4"/>
+<rect class="tag" x="593.667" y="243.5" width="74" height="22" rx="11"/>
+<text class="t-tag" x="630.667" y="258.5" text-anchor="middle">no overlap</text>
+<rect class="card" x="28" y="431" width="884" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="459">Four things each tier needs of its own</text>
+<text class="t-mute bd" x="44" y="485">Its own email address (aliases can grow several public addresses out of one mailbox), its own browser profile, its own password</text>
+<text class="t-mute bd" x="44" y="502">manager vault, its own two-factor group.</text>
+<text class="t-mute bd" x="44" y="519">At sign-up, avoid the reverse matching platforms run on phone numbers and contact lists. Once an account exists, watch for</text>
+<text class="t-mute bd" x="44" y="536">reverse image search on the avatar, reused usernames, posting times and writing style.</text>
+<text class="t-foot" x="28" y="565">Not everyone needs three tiers. Start by keeping the everyday and community tiers apart, then decide later whether to split off</text>
+<text class="t-foot" x="28" y="587">an exploration tier.</text>
+<text class="t-foot" x="28" y="609">This applies after coming out too. Protecting a partner or friends who have not, keeping a professional profile at work and</text>
+<text class="t-foot" x="28" y="631">controlling the pace across platforms all rest on the same separation.</text>
+</svg>

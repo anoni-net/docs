@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 637" width="940" height="637" role="img" aria-labelledby="title desc">
+<title id="title">Four steps from the opening prompt to a card in your wallet</title>
+<desc id="desc">Four steps side by side, joined by arrows. Step one is the opening prompt: replace the origin, destination and length of stay with your own details and paste it to the AI to set the role. You only fill this in once. Step two is five sets of questions, copied and pasted item by item with no editing: the digital environment covering censorship, Tor, VPN and device searches; legal and political risk; connectivity and communication covering SIM and eSIM; emergency contacts and support networks; and, optionally, the physical and surveillance environment. Step three is checking against primary sources, taking the AI's answers to the official sources listed at the foot of the article, with emergency numbers, statute references, visa rules and tariffs always verified. Step four is the emergency card: copy the key contacts from the fourth set of questions onto a card, print and laminate it, keep one in your wallet and one in your luggage, and store a copy in an offline note on your phone. The red box at the bottom warns that AI invents phone numbers, statutes and tariffs.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="42" y="52">1. The opening prompt</text>
+<text class="t-mute sm" x="42" y="84">Filled in once</text>
+<text class="t-main bd" x="42" y="102">Replace the origin,</text>
+<text class="t-main bd" x="42" y="119">destination and length</text>
+<text class="t-main bd" x="42" y="136">of stay with your own</text>
+<text class="t-main bd" x="42" y="153">details. Dates and</text>
+<text class="t-main bd" x="42" y="170">identity can be left</text>
+<text class="t-main bd" x="42" y="187">blank.</text>
+<text class="t-main bd" x="42" y="204">Paste it to the AI to</text>
+<text class="t-main bd" x="42" y="221">set the role.</text>
+<text class="t-mute sm" x="42" y="246">TWO VERSIONS</text>
+<text class="t-main bd" x="42" y="264">The full version for</text>
+<text class="t-main bd" x="42" y="281">self-hosted and local</text>
+<text class="t-main bd" x="42" y="298">models.</text>
+<text class="t-main bd" x="42" y="315">The commercial version</text>
+<text class="t-main bd" x="42" y="332">drops details that would</text>
+<text class="t-main bd" x="42" y="349">be retained in the</text>
+<text class="t-main bd" x="42" y="366">conversation.</text>
+<rect class="card-c2" x="259" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="273" y="52">2. Five sets of questions</text>
+<text class="t-mute sm" x="273" y="84">Copy and paste, no editing</text>
+<text class="t-mute sm" x="273" y="102">needed</text>
+<text class="t-main bd" x="273" y="120">Digital environment:</text>
+<text class="t-main bd" x="273" y="137">censorship, Tor, VPN,</text>
+<text class="t-main bd" x="273" y="154">device searches</text>
+<text class="t-main bd" x="273" y="171">Legal and political risk</text>
+<text class="t-main bd" x="273" y="188">Connectivity: SIM and</text>
+<text class="t-main bd" x="273" y="205">eSIM</text>
+<text class="t-main bd" x="273" y="222">Emergency contacts and</text>
+<text class="t-main bd" x="273" y="239">support</text>
+<text class="t-main bd" x="273" y="256">Physical and</text>
+<text class="t-main bd" x="273" y="273">surveillance environment</text>
+<text class="t-main bd" x="273" y="290">(optional)</text>
+<rect class="card-w1" x="490" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="504" y="52">3. Check the primary sources</text>
+<text class="t-mute sm" x="504" y="84">Do not skip this step</text>
+<text class="t-main bd" x="504" y="102">Take the AI's answers to</text>
+<text class="t-main bd" x="504" y="119">the official sources</text>
+<text class="t-main bd" x="504" y="136">listed at the foot of</text>
+<text class="t-main bd" x="504" y="153">the article.</text>
+<text class="t-mute sm" x="504" y="178">ALWAYS VERIFY</text>
+<text class="t-main bd" x="504" y="196">Emergency numbers</text>
+<text class="t-main bd" x="504" y="213">Statute references</text>
+<text class="t-main bd" x="504" y="230">Visa rules</text>
+<text class="t-main bd" x="504" y="247">Tariffs</text>
+<rect class="card-ok" x="721" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="735" y="52">4. The emergency card</text>
+<text class="t-mute sm" x="735" y="84">The copy that works</text>
+<text class="t-mute sm" x="735" y="102">offline</text>
+<text class="t-main bd" x="735" y="120">Copy the key contacts</text>
+<text class="t-main bd" x="735" y="137">from the fourth set of</text>
+<text class="t-main bd" x="735" y="154">questions onto a card.</text>
+<text class="t-main bd" x="735" y="171">Print and laminate it,</text>
+<text class="t-main bd" x="735" y="188">one in your wallet and</text>
+<text class="t-main bd" x="735" y="205">one in your luggage.</text>
+<text class="t-main bd" x="735" y="222">Store a copy in an</text>
+<text class="t-main bd" x="735" y="239">offline note.</text>
+<path class="arrow" d="M225 212.5 H246"/>
+<path class="arrow-h" d="M253 212.5 L245 207 L245 218 Z"/>
+<path class="arrow" d="M456 212.5 H477"/>
+<path class="arrow-h" d="M484 212.5 L476 207 L476 218 Z"/>
+<path class="arrow" d="M687 212.5 H708"/>
+<path class="arrow-h" d="M715 212.5 L707 207 L707 218 Z"/>
+<rect class="card-no" x="28" y="411" width="884" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="439">AI invents phone numbers, statutes and tariffs</text>
+<text class="t-main bd" x="44" y="465">Language models are very good at being confidently wrong. Treat the answers as a list of what to look up next rather than as the</text>
+<text class="t-main bd" x="44" y="482">final answer.</text>
+<text class="t-main bd" x="44" y="499">The more obscure the destination and the thinner the public record, the less training data the model has and the more it</text>
+<text class="t-main bd" x="44" y="516">invents, which is exactly where reliable information matters most.</text>
+<text class="t-foot" x="28" y="545">This works for any destination and complements the East and Southeast Asia article: that one gives a verified comparison of</text>
+<text class="t-foot" x="28" y="567">fourteen places, this one gives the method for checking anywhere else.</text>
+<text class="t-foot" x="28" y="589">Once you have the answers, run through the tiered checklist in the business travel article. The two together make a complete</text>
+<text class="t-foot" x="28" y="611">pre-departure routine.</text>
+</svg>

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 695" width="940" height="695" role="img" aria-labelledby="title desc">
+<title id="title">新加坡与马来西亚各有一组具名的法条，实名底层让换假名失效</title>
+<desc id="desc">左右两栏分别列出新加坡与马来西亚管到网络言论的法条。新加坡有 POFMA、FICA、诽谤与藐视法庭，以及《公共秩序法》对集会的宽松定义。马来西亚有 1998 年通信与多媒体法第 233 条、1948 年煽动法、SOSMA、1966 年社团法，以及各州的宗教执法。下方的横幅指出两国共同的实名底层：新加坡的 Singpass、马来西亚的 MyKad 与 MyDigital ID，加上两国都强制 SIM 卡实名，账号、设备与付款方式往往早就指向法律上的本名。最下方的横幅说明能见度与组织程度会放大风险，低触及的帖子、爆红的帖子与有协调的行动，三者的风险层级不同。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="433" height="390" rx="8"/>
+<text class="t-main h2" x="44" y="56">新加坡</text>
+<text class="t-mute sm" x="44" y="78">以下是要对照检查的法条，并未穷尽所有可能适用的法律</text>
+<text class="t-main bd" x="44" y="102">POFMA（防止网络假信息和网络操纵法令，2019）</text>
+<text class="t-mute sm" x="44" y="121">部长可对「不实事实陈述」发出更正或下架指示。多数发帖者遇到的是更正通</text>
+<text class="t-mute sm" x="44" y="138">知或内容被移除。</text>
+<text class="t-mute sm" x="44" y="155">2026 年首度出现刑事指控，无视指示本身就构成犯罪。</text>
+<text class="t-main bd" x="44" y="180">FICA（防止外来干预（对应措施）法令，2021）</text>
+<text class="t-mute sm" x="44" y="199">针对有组织或有外国关联的政治行为者，对跨境组织者的意义大于对单一则政</text>
+<text class="t-mute sm" x="44" y="216">治留言。</text>
+<text class="t-main bd" x="44" y="241">诽谤与藐视法庭</text>
+<text class="t-mute sm" x="44" y="260">民事与刑事诽谤，加上《司法（保护）法》的藐视法庭条款。</text>
+<text class="t-mute sm" x="44" y="277">评论官员与进行中案件时的实际限制。</text>
+<text class="t-main bd" x="44" y="302">《公共秩序法》的公开集会</text>
+<text class="t-mute sm" x="44" y="321">对集会的定义宽松，可以涵盖线上动员。</text>
+<text class="t-mute sm" x="44" y="338">曾有室内论坛因为线上直播被认定为非法集会。</text>
+<rect class="card-w1" x="479" y="28" width="433" height="390" rx="8"/>
+<text class="t-main h2" x="495" y="56">马来西亚</text>
+<text class="t-mute sm" x="495" y="78">条文管得到转发与留言，不限于自己写的内容</text>
+<text class="t-main bd" x="495" y="102">1998 年通信与多媒体法（CMA）第 233 条</text>
+<text class="t-mute sm" x="495" y="121">对付网络言论最常被使用的条文。2025 年 2 月修法后，罚金最高 RM500,000</text>
+<text class="t-mute sm" x="495" y="138">或两年以下有期徒刑。</text>
+<text class="t-mute sm" x="495" y="155">2026 年联邦法院要求检方证明真正的意图。</text>
+<text class="t-main bd" x="495" y="180">1948 年煽动法</text>
+<text class="t-mute sm" x="495" y="199">殖民时期留下的法律，至今仍然有效且持续被使用。</text>
+<text class="t-mute sm" x="495" y="216">适用于 3R 议题：种族 race、宗教 religion、王室 royalty。</text>
+<text class="t-main bd" x="495" y="241">SOSMA（2012 年安全罪行（特别措施）法）</text>
+<text class="t-mute sm" x="495" y="260">为安全罪行提供特别程序，包含延长羁押。</text>
+<text class="t-mute sm" x="495" y="277">适用对象是恐怖主义与国安犯罪，日常言论案件用不到。</text>
+<text class="t-main bd" x="495" y="302">1966 年社团法</text>
+<text class="t-mute sm" x="495" y="321">有成员、有干部、有持续活动的组织才可能落入其中。</text>
+<text class="t-mute sm" x="495" y="338">一次性的 hashtag 不构成社团。</text>
+<text class="t-main bd" x="495" y="363">各州的宗教执法</text>
+<text class="t-mute sm" x="495" y="382">各州伊斯兰宗教机关执行只适用于穆斯林的 Syariah 罪行。</text>
+<text class="t-mute sm" x="495" y="399">与煽动法的 3R 范围是两套不同的机制。</text>
+<rect class="card-n" x="28" y="432" width="884" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="460">两国共同的实名底层</text>
+<text class="t-main bd" x="44" y="486">新加坡的 Singpass、马来西亚的 MyKad 与 MyDigital ID 这类国家数字身份，加上两国都强制 SIM 卡实名。</text>
+<text class="t-main bd" x="44" y="503">账号、设备与付款方式往往早就指向法律上的本名。在实名账号上换一个显示名称并不构成区隔，区隔要从一开始就建立。</text>
+<rect class="card" x="28" y="530" width="884" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="558">风险随能见度与组织程度上升</text>
+<text class="t-mute bd" x="44" y="584">低触及的帖子、爆红的帖子、有协调的行动，三者的风险层级不同。记录到的执法多半落在公众人物、行动者与组织者身上，或者落在传得很远的帖子上。</text>
+<text class="t-mute bd" x="44" y="601">一般低能见度的帖子被追究的机率较低，机率低不等于安全，而且 2026 年的趋势是起诉变多。</text>
+<text class="t-mute bd" x="44" y="618">人在海外不代表构不到。新加坡的外来干预框架与 POFMA 明文主张域外效力，马来西亚的条文也写得宽。</text>
+<text class="t-foot" x="28" y="647">先确认自己碰到哪个题目、能见度多高，就知道哪一条法律会被引用，以及自己的暴露面有多大。</text>
+<text class="t-foot" x="28" y="669">两国都强制 SIM 卡实名，要取得一组真正不指向任何人的号码与付款渠道很困难。实际的目标放在区隔与减少关联。</text>
+</svg>

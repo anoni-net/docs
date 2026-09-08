@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 537" width="940" height="537" role="img" aria-labelledby="title desc">
+<title id="title">断网分四级，每一级还剩下的选项不同</title>
+<desc id="desc">四层由浅到深的横条，代表网络中断的四个等级，越往下可用的选项越少。第一级是降速与间歇中断，判断方式是小文件过得去、大文件过不去，还剩下文字通信与离线编辑之后等时机送出，最常见的误判是当成自己的设备坏了而反复重启。第二级是特定服务被拦，判断方式是同一条线路上别的网站打得开，还剩下没有被拦的其他渠道，最常见的误判是一个 app 打不开就认定整条线路断了。第三级是区域全断，判断方式是换 Wi-Fi、换号码结果相同而且旁边的人也一样，还剩下事先存好的东西、蓝牙与局域网、实体传递，最常见的误判是以为蓝牙与局域网也跟着失效。第四级是连电力一起中断，不必判断就很明显，还剩下电池撑得住的时间、纸本与事先约好的见面方式，最常见的误判是重点还放在通信工具而没有换成电力管理。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="844" height="97" rx="8"/>
+<rect class="card" x="44" y="42" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="63" text-anchor="middle">一</text>
+<text class="t-main h2" x="102" y="54">降速与间歇中断</text>
+<text class="t-mute sm" x="102" y="74">小文件过得去，大文件过不去。</text>
+<text class="t-mute sm" x="102" y="91">纯文字的服务仍然可用。</text>
+<text class="t-mute sm" x="358" y="54">还剩下</text>
+<text class="t-main bd" x="358" y="74">文字通信</text>
+<text class="t-main bd" x="358" y="91">低带宽的工作方式</text>
+<text class="t-main bd" x="358" y="108">离线编辑之后等时机送出</text>
+<text class="t-mute sm" x="616" y="54">最常见的误判</text>
+<text class="t-mute sm" x="616" y="74">当成自己的设备坏了，反复重启、重装 app、</text>
+<text class="t-mute sm" x="616" y="91">重置路由器。</text>
+<rect class="card-w1" x="28" y="135" width="844" height="97" rx="8"/>
+<rect class="card" x="44" y="149" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="170" text-anchor="middle">二</text>
+<text class="t-main h2" x="102" y="161">特定服务被拦</text>
+<text class="t-mute sm" x="102" y="181">同一条线路上别的网站打得开。</text>
+<text class="t-mute sm" x="102" y="198">四级里唯一能用 OONI 这类公开测量确认的一</text>
+<text class="t-mute sm" x="102" y="215">级。</text>
+<text class="t-mute sm" x="358" y="161">还剩下</text>
+<text class="t-main bd" x="358" y="181">没有被拦的其他渠道</text>
+<text class="t-main bd" x="358" y="198">规避工具</text>
+<text class="t-mute sm" x="616" y="161">最常见的误判</text>
+<text class="t-mute sm" x="616" y="181">一个 app 打不开，就认定整条线路断了。</text>
+<rect class="card-w2" x="28" y="242" width="844" height="114" rx="8"/>
+<rect class="card" x="44" y="256" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="277" text-anchor="middle">三</text>
+<text class="t-main h2" x="102" y="268">区域全断</text>
+<text class="t-main sm" x="102" y="288">换 Wi-Fi、换号码结果相同，旁边的人也一样</text>
+<text class="t-main sm" x="102" y="305">。信号格数帮不上忙。</text>
+<text class="t-main sm" x="102" y="322">拨电话或发短信可以分辨被切掉的是不是数据</text>
+<text class="t-main sm" x="102" y="339">。</text>
+<text class="t-main sm" x="358" y="268">还剩下</text>
+<text class="t-main bd" x="358" y="288">设备上事先存好的东西</text>
+<text class="t-main bd" x="358" y="305">蓝牙与局域网的近距离连接</text>
+<text class="t-main bd" x="358" y="322">U 盘、纸本、当面说明</text>
+<text class="t-main sm" x="616" y="268">最常见的误判</text>
+<text class="t-main sm" x="616" y="288">以为所有无线功能都失效。蓝牙与局域网不经</text>
+<text class="t-main sm" x="616" y="305">过运营商与互联网，这一级仍然运作。</text>
+<rect class="card-w3" x="28" y="366" width="844" height="97" rx="8"/>
+<rect class="card" x="44" y="380" width="42" height="30" rx="6"/>
+<text class="t-main h1" x="65" y="401" text-anchor="middle">四</text>
+<text class="t-inv h2" x="102" y="392">连电力一起中断</text>
+<text class="t-inv sm" x="102" y="412">不必判断，很明显。</text>
+<text class="t-inv sm" x="102" y="429">问题从「消息送不出去」换成「几小时之后会</text>
+<text class="t-inv sm" x="102" y="446">关机」。</text>
+<text class="t-inv sm" x="358" y="392">还剩下</text>
+<text class="t-inv bd" x="358" y="412">电池撑得住的那段时间</text>
+<text class="t-inv bd" x="358" y="429">纸本</text>
+<text class="t-inv bd" x="358" y="446">事先约好的见面方式</text>
+<text class="t-inv sm" x="616" y="392">最常见的误判</text>
+<text class="t-inv sm" x="616" y="412">重点还放在通信工具，没有换成电力管理。充</text>
+<text class="t-inv sm" x="616" y="429">电宝与调暗屏幕在这一级决定你还有多少时间</text>
+<text class="t-inv sm" x="616" y="446">。</text>
+<path class="arrow" d="M894 42 V449"/>
+<path class="arrow-h" d="M894 463 L888.5 448 L899.5 448 Z"/>
+<text class="t-mute sm" x="909" y="196" text-anchor="middle">可</text>
+<text class="t-mute sm" x="909" y="215" text-anchor="middle">用</text>
+<text class="t-mute sm" x="909" y="234" text-anchor="middle">选</text>
+<text class="t-mute sm" x="909" y="253" text-anchor="middle">项</text>
+<text class="t-mute sm" x="909" y="272" text-anchor="middle">递</text>
+<text class="t-mute sm" x="909" y="291" text-anchor="middle">减</text>
+<text class="t-foot" x="28" y="489">判断错等级，准备得再多也用不上。先确认现在是哪一级，再决定接下来做什么。</text>
+<text class="t-foot" x="28" y="511">每一级的「还剩下」都取决于中断之前做完了什么。没有事先存进设备的东西，这时候取不到。</text>
+</svg>

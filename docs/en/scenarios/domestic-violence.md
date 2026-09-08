@@ -24,6 +24,12 @@ The leading specialist resources are English- and European-language only, with n
 
 Most of these methods do not require special skill. They use ordinary consumer features that were built for families and couples, turned against one member of the household.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/tech-abuse-surface.en.svg"
+        alt="Four boxes listing the channels through which technology-facilitated abuse most often runs in intimate relationships, all of them features designed for families and partners. The first is account access and shared plans: passwords the other person already knows or can guess, a shared Apple ID or Google account, Apple Family Sharing and carrier family plans, Google Family Link, and password reset mail arriving at a shared number or mailbox. The second is location tracking: Find My and Google Maps location sharing, Bluetooth trackers such as AirTags, connected-car apps, shared calendars, and GPS coordinates carried by synced photos. The third is stalkerware installed while the other person briefly has your phone, which forwards messages, call logs, photos, browsing and location while showing no icon at all. The fourth is smart home and shared devices: smart locks, cameras, doorbells, thermostats, voice assistants and shared streaming accounts. The blue bar below notes that the most reliable signal is usually the other person knowing something they should not, and that the period around leaving is the most dangerous.">
+    <figcaption>All of it runs through features built for families and partners</figcaption>
+</figure>
+
 ### Account access and shared plans
 
 - **Known or guessable passwords**: An intimate partner often already knows, or can guess, your email, phone unlock, and banking passwords. Anything that protects an account against strangers does not protect it against someone who watched you type the PIN.

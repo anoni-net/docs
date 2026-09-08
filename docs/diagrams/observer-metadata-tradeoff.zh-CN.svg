@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 658" width="940" height="658" role="img" aria-labelledby="title desc">
+<title id="title">同一组 metadata，既让记录可信也让人曝险</title>
+<desc id="desc">上方的蓝框说明现场记录承载的张力：让记录作为证据可信的 metadata，正好也是让人曝险的那些 metadata。一张带时间戳记与 GPS 坐标的照片，是某个违规在特定时间地点发生过的有力证据，同一组 EXIF 数据在被扣押的设备上，可以定位你以及画面里任何可辨识的人。下方左右两栏是逐项要做的决定。左栏是保留 metadata，判准是记录的价值在于可验证而画面中的人不会因此受害，例如空的票箱、张贴出来的开票结果、没有可辨识面孔的排队人潮。右栏是去除或避免 metadata，判准是记录可能指认出会因此陷入危险的人，例如选务人员、面露恐惧的投票人、在不友善环境中的同行观察员，做法是拍摄时就让脸孔不入镜，影像离开设备前先清除 EXIF。最下方列出现场记录的四项实务。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="884" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="56">现场记录承载的张力</text>
+<text class="t-main bd" x="44" y="82">让记录「作为证据可信」的 metadata，正好也是「让人曝险」的那些 metadata。</text>
+<text class="t-main bd" x="44" y="99">一张带时间戳记与 GPS 坐标的照片，是「某个违规在特定时间地点发生过」的有力证据。</text>
+<text class="t-main bd" x="44" y="116">同一组 EXIF 数据，在被扣押的设备上，可以定位你以及画面里任何可辨识的人。</text>
+<text class="t-main bd" x="44" y="133">这件事没有通用的正确答案，只有逐项要做的决定。</text>
+<rect class="card-ok" x="28" y="160" width="433" height="285" rx="8"/>
+<text class="t-main h2" x="42" y="184">保留 metadata</text>
+<text class="t-mute sm" x="42" y="216">判准：记录的价值在于可验证，而画面中的人不会因此受害</text>
+<text class="t-mute sm" x="42" y="234">适用的画面</text>
+<text class="t-main bd" x="42" y="252">空的票箱</text>
+<text class="t-main bd" x="42" y="269">张贴出来的开票结果</text>
+<text class="t-main bd" x="42" y="286">没有可辨识面孔的排队人潮</text>
+<text class="t-main bd" x="42" y="303">公职人员执行职务的过程</text>
+<text class="t-mute sm" x="42" y="328">这样做的理由</text>
+<text class="t-main bd" x="42" y="346">时间戳记与坐标让记录</text>
+<text class="t-main bd" x="42" y="363">可以被第三方查证。</text>
+<text class="t-main bd" x="42" y="380">拿掉之后，这张照片</text>
+<text class="t-main bd" x="42" y="397">只剩下你的证词。</text>
+<rect class="card-no" x="479" y="160" width="433" height="285" rx="8"/>
+<text class="t-main h2" x="493" y="184">去除或避免 metadata</text>
+<text class="t-mute sm" x="493" y="216">判准：记录可能指认出会因此陷入危险的人</text>
+<text class="t-mute sm" x="493" y="234">适用的画面</text>
+<text class="t-main bd" x="493" y="252">选务人员</text>
+<text class="t-main bd" x="493" y="269">面露恐惧的投票人</text>
+<text class="t-main bd" x="493" y="286">在不友善环境中的同行观察员</text>
+<text class="t-main bd" x="493" y="303">任何可辨识的一般投票人</text>
+<text class="t-mute sm" x="493" y="328">怎么做</text>
+<text class="t-main bd" x="493" y="346">拍摄时就让脸孔与</text>
+<text class="t-main bd" x="493" y="363">可辨识细节不入镜。</text>
+<text class="t-main bd" x="493" y="380">影像离开设备前先清除 EXIF，</text>
+<text class="t-main bd" x="493" y="397">在证明不带 metadata 之前，</text>
+<text class="t-main bd" x="493" y="414">把每个文件都当成带着。</text>
+<rect class="card" x="28" y="459" width="884" height="135" rx="8"/>
+<text class="t-main h2" x="44" y="487">现场记录的四项实务</text>
+<text class="t-mute bd" x="44" y="513">拍文件与环境，不拍脸，除非那张脸本身就是违规事实，而且当事人同意或那是公职人员执行职务。各地对拍摄投票人的法规差异很大，举起相机之前先弄</text>
+<text class="t-mute bd" x="44" y="530">清楚。</text>
+<text class="t-mute bd" x="44" y="547">保留一份离线、可验证的备份。本机的加密副本在网络允许时再同步给任务团队，扣押与断网两种情况都撑得住。</text>
+<text class="t-mute bd" x="44" y="564">用结构化的工具记票数与事件。任务发的表单或共用的加密文档，能让记录格式一致。</text>
+<text class="t-mute bd" x="44" y="581">不要把身份写进记录里。名字不是关键信息时，用角色代称，例如「主任管理员」、「第 4 站观察员」。</text>
+<text class="t-foot" x="28" y="610">回报通道本身就是敏感的。谁在什么时候跟谁讲话，这种 metadata 即使在内容加密的情况下，仍然能描绘出整个观察协作圈。</text>
+<text class="t-foot" x="28" y="632">只存在对手申请得到的云端里的记录很脆弱。离线备份跟扣押应对是同一件事的两面。</text>
+</svg>

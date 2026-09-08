@@ -27,6 +27,12 @@ The same post that is unremarkable elsewhere can carry legal risk under a specif
 - **A real-name substrate**: National digital identity (Singpass in Singapore, MyKad and MyDigital ID in Malaysia) and mandatory SIM registration in both mean the account, the device, and the payment often already resolve to a legal name.
 - **Visibility and organizing scale the risk**: A low-reach post, a viral post, and a coordinated campaign sit at different risk tiers. Most enforcement documented below lands on public figures, activists, and organizers, or on posts that travel; an ordinary low-visibility post is less likely to be acted on, though "less likely" is not "safe," and the 2026 trend is toward more prosecution, not less.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/sg-my-speech-laws.en.svg"
+        alt="Two columns listing the statutes that reach online speech in Singapore and Malaysia. Singapore has POFMA, FICA, defamation and contempt of court, and a broad definition of public assembly under the Public Order Act. Malaysia has section 233 of the Communications and Multimedia Act 1998, the Sedition Act 1948, SOSMA, the Societies Act 1966, and state-level religious enforcement. The bar below sets out the real-name layer both countries share: national digital identity in the form of Singpass, MyKad and MyDigital ID, plus mandatory SIM registration, so accounts, devices and payment methods usually already point at a legal name. The final bar explains that visibility and organisation amplify risk, with low-reach posts, viral posts and coordinated action sitting at different levels.">
+    <figcaption>The real-name layer makes “just use a pseudonym” harder than it sounds</figcaption>
+</figure>
+
 ## The legal landscape in Singapore
 
 Treat this as the set of laws to check against, not an exhaustive list:
