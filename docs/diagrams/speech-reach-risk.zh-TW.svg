@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 457" width="980" height="457" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 457" width="940" height="457" role="img" aria-labelledby="title desc">
 <title id="title">有效與安全在四個地方直接衝突，每次行動前先決定要哪一邊</title>
 <desc id="desc">上半部是四組互相拉扯的組合，左邊是你想要的，箭頭指向右邊的代價。想讓普通人願意相信，代價是匿名帳號的可信度低，可信度來自實名、履歷與既有關係，而這些正是暴露面。想避開關鍵詞過濾，代價是變形後的表達難懂，只有原本就懂的人看得懂，等於留在同溫層。想讓內容有說服力，代價是說服力來自具體、可查證的細節，而具體正是最容易指向你的部分。想觸及更多人，代價是傳播規模越大越接近相關條款的認定門檻，也越可能被列為重點處理對象。下半部是三種取向：要留下紀錄的人優先把內容存檔到境外並把曝光度壓到最低，要說服特定的人的人走私下與小範圍並放棄公開傳播的規模，要擴散的人接受發布者承擔較高風險，或把內容交給願意承擔的既有管道。</desc>
 <style>
@@ -55,45 +55,45 @@
 
 <text class="t-mute sm" x="28" y="40">你想要的</text>
 <text class="t-mute sm" x="338" y="40">代價</text>
-<path class="rule" d="M28 50 H952"/>
+<path class="rule" d="M28 50 H912"/>
 <rect class="card-c1" x="28" y="60" width="250" height="39" rx="8"/>
 <text class="t-main bd" x="42" y="84.5">讓普通人願意相信</text>
 <path class="arrow" d="M288 79.5 H319"/>
 <path class="arrow-h" d="M326 79.5 L318 74 L318 85 Z"/>
-<rect class="card-w1" x="338" y="60" width="614" height="39" rx="8"/>
+<rect class="card-w1" x="338" y="60" width="574" height="39" rx="8"/>
 <text class="t-main bd" x="352" y="82">匿名帳號的可信度低。可信度來自實名、履歷、既有關係，而這些正是暴露面。</text>
 <rect class="card-c1" x="28" y="109" width="250" height="39" rx="8"/>
 <text class="t-main bd" x="42" y="133.5">避開關鍵詞過濾</text>
 <path class="arrow" d="M288 128.5 H319"/>
 <path class="arrow-h" d="M326 128.5 L318 123 L318 134 Z"/>
-<rect class="card-w1" x="338" y="109" width="614" height="39" rx="8"/>
+<rect class="card-w1" x="338" y="109" width="574" height="39" rx="8"/>
 <text class="t-main bd" x="352" y="131">變形後的表達難懂，只有原本就懂的人看得懂，等於留在同溫層。</text>
 <rect class="card-c1" x="28" y="158" width="250" height="39" rx="8"/>
 <text class="t-main bd" x="42" y="182.5">內容有說服力</text>
 <path class="arrow" d="M288 177.5 H319"/>
 <path class="arrow-h" d="M326 177.5 L318 172 L318 183 Z"/>
-<rect class="card-w1" x="338" y="158" width="614" height="39" rx="8"/>
+<rect class="card-w1" x="338" y="158" width="574" height="39" rx="8"/>
 <text class="t-main bd" x="352" y="180">說服力來自具體、可查證的細節，而具體正是最容易指向你的部分。</text>
 <rect class="card-c1" x="28" y="207" width="250" height="39" rx="8"/>
 <text class="t-main bd" x="42" y="231.5">觸及更多人</text>
 <path class="arrow" d="M288 226.5 H319"/>
 <path class="arrow-h" d="M326 226.5 L318 221 L318 232 Z"/>
-<rect class="card-w1" x="338" y="207" width="614" height="39" rx="8"/>
+<rect class="card-w1" x="338" y="207" width="574" height="39" rx="8"/>
 <text class="t-main bd" x="352" y="229">傳播規模越大，越接近相關條款的認定門檻，也越可能被列為重點處理對象。</text>
 <text class="t-main h2" x="28" y="276">四組矛盾都沒有兩全的解法，每次行動前先決定要哪一邊</text>
-<rect class="card" x="28" y="290" width="297.333" height="103" rx="8"/>
+<rect class="card" x="28" y="290" width="284" height="103" rx="8"/>
 <text class="t-main h2" x="42" y="314">要留下紀錄</text>
 <text class="t-main bd" x="42" y="328">優先確保內容能被存檔到境外。</text>
 <text class="t-main bd" x="42" y="345">發布者的曝光度壓到最低。</text>
-<rect class="card" x="341.333" y="290" width="297.333" height="103" rx="8"/>
-<text class="t-main h2" x="355.333" y="314">要說服特定的人</text>
-<text class="t-main bd" x="355.333" y="328">走私下與小範圍。</text>
-<text class="t-main bd" x="355.333" y="345">放棄公開傳播的規模。</text>
-<rect class="card" x="654.667" y="290" width="297.333" height="103" rx="8"/>
-<text class="t-main h2" x="668.667" y="314">要擴散</text>
-<text class="t-main bd" x="668.667" y="328">接受發布者承擔較高風險。</text>
-<text class="t-main bd" x="668.667" y="345">或評估把內容交給</text>
-<text class="t-main bd" x="668.667" y="362">願意承擔的既有管道。</text>
+<rect class="card" x="328" y="290" width="284" height="103" rx="8"/>
+<text class="t-main h2" x="342" y="314">要說服特定的人</text>
+<text class="t-main bd" x="342" y="328">走私下與小範圍。</text>
+<text class="t-main bd" x="342" y="345">放棄公開傳播的規模。</text>
+<rect class="card" x="628" y="290" width="284" height="103" rx="8"/>
+<text class="t-main h2" x="642" y="314">要擴散</text>
+<text class="t-main bd" x="642" y="328">接受發布者承擔較高風險。</text>
+<text class="t-main bd" x="642" y="345">或評估把內容交給</text>
+<text class="t-main bd" x="642" y="362">願意承擔的既有管道。</text>
 <text class="t-foot" x="28" y="409">風險不只落在你身上。群組管理者對群內內容負有管理責任，家人與雇主可能被聯繫，同一群組的其他成員可能一併受影響。</text>
 <text class="t-foot" x="28" y="431">評估要不要發的時候，二次傳播最常被低估。內容被別人轉發、截圖、改編之後，傳播規模脫離你的控制，責任可能仍然回到最初的來源。</text>
 </svg>

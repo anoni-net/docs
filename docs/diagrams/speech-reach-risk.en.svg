@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 586" width="1140" height="586" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 654" width="940" height="654" role="img" aria-labelledby="title desc">
 <title id="title">Reach and safety collide at four points, so decide which side you want before each attempt</title>
 <desc id="desc">The upper half shows four pairs in tension, with what you want on the left and an arrow pointing to its cost on the right. Wanting ordinary people to believe you costs credibility, because credibility comes from a real name, a track record and existing relationships, which are exactly your exposure. Wanting to evade keyword filtering costs comprehension, because distorted wording only reads clearly to people who already agree, keeping you inside your own circle. Wanting the content to persuade costs safety, because persuasion rests on specific, checkable detail and specificity is what points back at you. Wanting to reach more people costs risk, because a wider spread moves closer to the thresholds written into the relevant provisions and makes you more likely to be treated as a priority case. The lower half gives three orientations: to leave a record, prioritise archiving the content outside the jurisdiction and keep the publisher's visibility as low as possible; to persuade specific people, work privately and at small scale and give up public reach; to spread the content, accept higher risk for the publisher, or hand the material to an existing channel willing to carry it.</desc>
 <style>
@@ -54,54 +54,58 @@
 </style>
 
 <text class="t-mute sm" x="28" y="40">WHAT YOU WANT</text>
-<text class="t-mute sm" x="388" y="40">WHAT IT COSTS</text>
-<path class="rule" d="M28 50 H1112"/>
-<rect class="card-c1" x="28" y="60" width="300" height="56" rx="8"/>
-<text class="t-main bd" x="42" y="93">Ordinary people to believe you</text>
-<path class="arrow" d="M338 88 H369"/>
-<path class="arrow-h" d="M376 88 L368 82.5 L368 93.5 Z"/>
-<rect class="card-w1" x="388" y="60" width="724" height="56" rx="8"/>
-<text class="t-main bd" x="402" y="82">An anonymous account carries little credibility. Credibility comes from a real name, a</text>
-<text class="t-main bd" x="402" y="99">track record and existing relationships, and those are exactly your exposure.</text>
-<rect class="card-c1" x="28" y="126" width="300" height="56" rx="8"/>
-<text class="t-main bd" x="42" y="159">To evade keyword filtering</text>
-<path class="arrow" d="M338 154 H369"/>
-<path class="arrow-h" d="M376 154 L368 148.5 L368 159.5 Z"/>
-<rect class="card-w1" x="388" y="126" width="724" height="56" rx="8"/>
-<text class="t-main bd" x="402" y="148">Distorted wording is hard to read. Only people who already agree decode it, which</text>
-<text class="t-main bd" x="402" y="165">keeps you inside your own circle.</text>
-<rect class="card-c1" x="28" y="192" width="300" height="56" rx="8"/>
-<text class="t-main bd" x="42" y="225">Content that persuades</text>
-<path class="arrow" d="M338 220 H369"/>
-<path class="arrow-h" d="M376 220 L368 214.5 L368 225.5 Z"/>
-<rect class="card-w1" x="388" y="192" width="724" height="56" rx="8"/>
-<text class="t-main bd" x="402" y="214">Persuasion rests on specific, checkable detail, and specificity is the part that points</text>
-<text class="t-main bd" x="402" y="231">back at you.</text>
-<rect class="card-c1" x="28" y="258" width="300" height="56" rx="8"/>
-<text class="t-main bd" x="42" y="291">To reach more people</text>
-<path class="arrow" d="M338 286 H369"/>
-<path class="arrow-h" d="M376 286 L368 280.5 L368 291.5 Z"/>
-<rect class="card-w1" x="388" y="258" width="724" height="56" rx="8"/>
-<text class="t-main bd" x="402" y="280">A wider spread moves closer to the thresholds written into the relevant provisions,</text>
-<text class="t-main bd" x="402" y="297">and makes you more likely to be treated as a priority case.</text>
-<text class="t-main h2" x="28" y="344">None of the four has a solution that gets both. Decide which side you want before each attempt.</text>
-<rect class="card" x="28" y="358" width="350.667" height="120" rx="8"/>
-<text class="t-main h2" x="42" y="382">To leave a record</text>
-<text class="t-main bd" x="42" y="396">Prioritise archiving the content</text>
-<text class="t-main bd" x="42" y="413">outside the jurisdiction.</text>
-<text class="t-main bd" x="42" y="430">Keep the publisher's visibility</text>
-<text class="t-main bd" x="42" y="447">as low as possible.</text>
-<rect class="card" x="394.667" y="358" width="350.667" height="120" rx="8"/>
-<text class="t-main h2" x="408.667" y="382">To persuade specific people</text>
-<text class="t-main bd" x="408.667" y="396">Work privately and at small scale.</text>
-<text class="t-main bd" x="408.667" y="413">Give up public reach.</text>
-<rect class="card" x="761.333" y="358" width="350.667" height="120" rx="8"/>
-<text class="t-main h2" x="775.333" y="382">To spread it</text>
-<text class="t-main bd" x="775.333" y="396">Accept higher risk for the publisher.</text>
-<text class="t-main bd" x="775.333" y="413">Or weigh handing the material to an</text>
-<text class="t-main bd" x="775.333" y="430">existing channel willing to carry it.</text>
-<text class="t-foot" x="28" y="494">The risk does not land on you alone. Group administrators carry responsibility for what is posted, family and employers get contacted, and other members of</text>
-<text class="t-foot" x="28" y="516">the same group can be affected.</text>
-<text class="t-foot" x="28" y="538">Onward sharing is the part most often underestimated. Once content is reposted, screenshotted or reworked, the spread leaves your control while</text>
-<text class="t-foot" x="28" y="560">responsibility can still return to the original source.</text>
+<text class="t-mute sm" x="368" y="40">WHAT IT COSTS</text>
+<path class="rule" d="M28 50 H912"/>
+<rect class="card-c1" x="28" y="60" width="280" height="73" rx="8"/>
+<text class="t-main bd" x="42" y="101.5">Ordinary people to believe you</text>
+<path class="arrow" d="M318 96.5 H349"/>
+<path class="arrow-h" d="M356 96.5 L348 91 L348 102 Z"/>
+<rect class="card-w1" x="368" y="60" width="544" height="73" rx="8"/>
+<text class="t-main bd" x="382" y="82">An anonymous account carries little credibility. Credibility comes from a</text>
+<text class="t-main bd" x="382" y="99">real name, a</text>
+<text class="t-main bd" x="382" y="116">track record and existing relationships, and those are exactly your exposure.</text>
+<rect class="card-c1" x="28" y="143" width="280" height="73" rx="8"/>
+<text class="t-main bd" x="42" y="184.5">To evade keyword filtering</text>
+<path class="arrow" d="M318 179.5 H349"/>
+<path class="arrow-h" d="M356 179.5 L348 174 L348 185 Z"/>
+<rect class="card-w1" x="368" y="143" width="544" height="73" rx="8"/>
+<text class="t-main bd" x="382" y="165">Distorted wording is hard to read. Only people who already agree decode it,</text>
+<text class="t-main bd" x="382" y="182">which</text>
+<text class="t-main bd" x="382" y="199">keeps you inside your own circle.</text>
+<rect class="card-c1" x="28" y="226" width="280" height="73" rx="8"/>
+<text class="t-main bd" x="42" y="267.5">Content that persuades</text>
+<path class="arrow" d="M318 262.5 H349"/>
+<path class="arrow-h" d="M356 262.5 L348 257 L348 268 Z"/>
+<rect class="card-w1" x="368" y="226" width="544" height="73" rx="8"/>
+<text class="t-main bd" x="382" y="248">Persuasion rests on specific, checkable detail, and specificity is the part</text>
+<text class="t-main bd" x="382" y="265">that points</text>
+<text class="t-main bd" x="382" y="282">back at you.</text>
+<rect class="card-c1" x="28" y="309" width="280" height="73" rx="8"/>
+<text class="t-main bd" x="42" y="350.5">To reach more people</text>
+<path class="arrow" d="M318 345.5 H349"/>
+<path class="arrow-h" d="M356 345.5 L348 340 L348 351 Z"/>
+<rect class="card-w1" x="368" y="309" width="544" height="73" rx="8"/>
+<text class="t-main bd" x="382" y="331">A wider spread moves closer to the thresholds written into the relevant</text>
+<text class="t-main bd" x="382" y="348">provisions,</text>
+<text class="t-main bd" x="382" y="365">and makes you more likely to be treated as a priority case.</text>
+<text class="t-main h2" x="28" y="412">None of the four has a solution that gets both. Decide which side you want before each attempt.</text>
+<rect class="card" x="28" y="426" width="284" height="120" rx="8"/>
+<text class="t-main h2" x="42" y="450">To leave a record</text>
+<text class="t-main bd" x="42" y="464">Prioritise archiving the content</text>
+<text class="t-main bd" x="42" y="481">outside the jurisdiction.</text>
+<text class="t-main bd" x="42" y="498">Keep the publisher's visibility</text>
+<text class="t-main bd" x="42" y="515">as low as possible.</text>
+<rect class="card" x="328" y="426" width="284" height="120" rx="8"/>
+<text class="t-main h2" x="342" y="450">To persuade specific people</text>
+<text class="t-main bd" x="342" y="464">Work privately and at small scale.</text>
+<text class="t-main bd" x="342" y="481">Give up public reach.</text>
+<rect class="card" x="628" y="426" width="284" height="120" rx="8"/>
+<text class="t-main h2" x="642" y="450">To spread it</text>
+<text class="t-main bd" x="642" y="464">Accept higher risk for the publisher.</text>
+<text class="t-main bd" x="642" y="481">Or weigh handing the material to an</text>
+<text class="t-main bd" x="642" y="498">existing channel willing to carry it.</text>
+<text class="t-foot" x="28" y="562">The risk does not land on you alone. Group administrators carry responsibility for what is posted, family and employers get</text>
+<text class="t-foot" x="28" y="584">contacted, and other members of the same group can be affected.</text>
+<text class="t-foot" x="28" y="606">Onward sharing is the part most often underestimated. Once content is reposted, screenshotted or reworked, the spread leaves</text>
+<text class="t-foot" x="28" y="628">your control while responsibility can still return to the original source.</text>
 </svg>

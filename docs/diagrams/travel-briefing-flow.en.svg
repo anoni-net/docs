@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 530" width="1120" height="530" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 637" width="940" height="637" role="img" aria-labelledby="title desc">
 <title id="title">Four steps from the opening prompt to a card in your wallet</title>
 <desc id="desc">Four steps side by side, joined by arrows. Step one is the opening prompt: replace the origin, destination and length of stay with your own details and paste it to the AI to set the role. You only fill this in once. Step two is five sets of questions, copied and pasted item by item with no editing: the digital environment covering censorship, Tor, VPN and device searches; legal and political risk; connectivity and communication covering SIM and eSIM; emergency contacts and support networks; and, optionally, the physical and surveillance environment. Step three is checking against primary sources, taking the AI's answers to the official sources listed at the foot of the article, with emergency numbers, statute references, visa rules and tariffs always verified. Step four is the emergency card: copy the key contacts from the fourth set of questions onto a card, print and laminate it, keep one in your wallet and one in your luggage, and store a copy in an offline note on your phone. The red box at the bottom warns that AI invents phone numbers, statutes and tariffs.</desc>
 <style>
@@ -53,66 +53,78 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="236" height="301" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="191" height="369" rx="8"/>
 <text class="t-main h2" x="42" y="52">1. The opening prompt</text>
 <text class="t-mute sm" x="42" y="84">Filled in once</text>
-<text class="t-main bd" x="42" y="102">Replace the origin, destination</text>
-<text class="t-main bd" x="42" y="119">and length of stay with your</text>
-<text class="t-main bd" x="42" y="136">own details. Dates and identity</text>
-<text class="t-main bd" x="42" y="153">can be left blank.</text>
-<text class="t-main bd" x="42" y="170">Paste it to the AI to set the</text>
-<text class="t-main bd" x="42" y="187">role.</text>
-<text class="t-mute sm" x="42" y="212">TWO VERSIONS</text>
-<text class="t-main bd" x="42" y="230">The full version for</text>
-<text class="t-main bd" x="42" y="247">self-hosted and local models.</text>
-<text class="t-main bd" x="42" y="264">The commercial version drops</text>
-<text class="t-main bd" x="42" y="281">details that would be retained</text>
-<text class="t-main bd" x="42" y="298">in the conversation.</text>
-<rect class="card-c2" x="304" y="28" width="236" height="301" rx="8"/>
-<text class="t-main h2" x="318" y="52">2. Five sets of questions</text>
-<text class="t-mute sm" x="318" y="84">Copy and paste, no editing needed</text>
-<text class="t-main bd" x="318" y="102">Digital environment:</text>
-<text class="t-main bd" x="318" y="119">censorship, Tor, VPN, device</text>
-<text class="t-main bd" x="318" y="136">searches</text>
-<text class="t-main bd" x="318" y="153">Legal and political risk</text>
-<text class="t-main bd" x="318" y="170">Connectivity: SIM and eSIM</text>
-<text class="t-main bd" x="318" y="187">Emergency contacts and support</text>
-<text class="t-main bd" x="318" y="204">Physical and surveillance</text>
-<text class="t-main bd" x="318" y="221">environment (optional)</text>
-<rect class="card-w1" x="580" y="28" width="236" height="301" rx="8"/>
-<text class="t-main h2" x="594" y="52">3. Check the primary sources</text>
-<text class="t-mute sm" x="594" y="84">Do not skip this step</text>
-<text class="t-main bd" x="594" y="102">Take the AI's answers to the</text>
-<text class="t-main bd" x="594" y="119">official sources listed at the</text>
-<text class="t-main bd" x="594" y="136">foot of the article.</text>
-<text class="t-mute sm" x="594" y="161">ALWAYS VERIFY</text>
-<text class="t-main bd" x="594" y="179">Emergency numbers</text>
-<text class="t-main bd" x="594" y="196">Statute references</text>
-<text class="t-main bd" x="594" y="213">Visa rules</text>
-<text class="t-main bd" x="594" y="230">Tariffs</text>
-<rect class="card-ok" x="856" y="28" width="236" height="301" rx="8"/>
-<text class="t-main h2" x="870" y="52">4. The emergency card</text>
-<text class="t-mute sm" x="870" y="84">The copy that works offline</text>
-<text class="t-main bd" x="870" y="102">Copy the key contacts from the</text>
-<text class="t-main bd" x="870" y="119">fourth set of questions onto a</text>
-<text class="t-main bd" x="870" y="136">card.</text>
-<text class="t-main bd" x="870" y="153">Print and laminate it, one in</text>
-<text class="t-main bd" x="870" y="170">your wallet and one in your</text>
-<text class="t-main bd" x="870" y="187">luggage.</text>
-<text class="t-main bd" x="870" y="204">Store a copy in an offline</text>
-<text class="t-main bd" x="870" y="221">note.</text>
-<path class="arrow" d="M270 178.5 H291"/>
-<path class="arrow-h" d="M298 178.5 L290 173 L290 184 Z"/>
-<path class="arrow" d="M546 178.5 H567"/>
-<path class="arrow-h" d="M574 178.5 L566 173 L566 184 Z"/>
-<path class="arrow" d="M822 178.5 H843"/>
-<path class="arrow-h" d="M850 178.5 L842 173 L842 184 Z"/>
-<rect class="card-no" x="28" y="343" width="1064" height="101" rx="8"/>
-<text class="t-main h2" x="44" y="371">AI invents phone numbers, statutes and tariffs</text>
-<text class="t-main bd" x="44" y="397">Language models are very good at being confidently wrong. Treat the answers as a list of what to look up next rather than as the final answer.</text>
-<text class="t-main bd" x="44" y="414">The more obscure the destination and the thinner the public record, the less training data the model has and the more it invents, which is exactly where</text>
-<text class="t-main bd" x="44" y="431">reliable information matters most.</text>
-<text class="t-foot" x="28" y="460">This works for any destination and complements the East and Southeast Asia article: that one gives a verified comparison of fourteen places, this one</text>
-<text class="t-foot" x="28" y="482">gives the method for checking anywhere else.</text>
-<text class="t-foot" x="28" y="504">Once you have the answers, run through the tiered checklist in the business travel article. The two together make a complete pre-departure routine.</text>
+<text class="t-main bd" x="42" y="102">Replace the origin,</text>
+<text class="t-main bd" x="42" y="119">destination and length</text>
+<text class="t-main bd" x="42" y="136">of stay with your own</text>
+<text class="t-main bd" x="42" y="153">details. Dates and</text>
+<text class="t-main bd" x="42" y="170">identity can be left</text>
+<text class="t-main bd" x="42" y="187">blank.</text>
+<text class="t-main bd" x="42" y="204">Paste it to the AI to</text>
+<text class="t-main bd" x="42" y="221">set the role.</text>
+<text class="t-mute sm" x="42" y="246">TWO VERSIONS</text>
+<text class="t-main bd" x="42" y="264">The full version for</text>
+<text class="t-main bd" x="42" y="281">self-hosted and local</text>
+<text class="t-main bd" x="42" y="298">models.</text>
+<text class="t-main bd" x="42" y="315">The commercial version</text>
+<text class="t-main bd" x="42" y="332">drops details that would</text>
+<text class="t-main bd" x="42" y="349">be retained in the</text>
+<text class="t-main bd" x="42" y="366">conversation.</text>
+<rect class="card-c2" x="259" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="273" y="52">2. Five sets of questions</text>
+<text class="t-mute sm" x="273" y="84">Copy and paste, no editing</text>
+<text class="t-mute sm" x="273" y="102">needed</text>
+<text class="t-main bd" x="273" y="120">Digital environment:</text>
+<text class="t-main bd" x="273" y="137">censorship, Tor, VPN,</text>
+<text class="t-main bd" x="273" y="154">device searches</text>
+<text class="t-main bd" x="273" y="171">Legal and political risk</text>
+<text class="t-main bd" x="273" y="188">Connectivity: SIM and</text>
+<text class="t-main bd" x="273" y="205">eSIM</text>
+<text class="t-main bd" x="273" y="222">Emergency contacts and</text>
+<text class="t-main bd" x="273" y="239">support</text>
+<text class="t-main bd" x="273" y="256">Physical and</text>
+<text class="t-main bd" x="273" y="273">surveillance environment</text>
+<text class="t-main bd" x="273" y="290">(optional)</text>
+<rect class="card-w1" x="490" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="504" y="52">3. Check the primary sources</text>
+<text class="t-mute sm" x="504" y="84">Do not skip this step</text>
+<text class="t-main bd" x="504" y="102">Take the AI's answers to</text>
+<text class="t-main bd" x="504" y="119">the official sources</text>
+<text class="t-main bd" x="504" y="136">listed at the foot of</text>
+<text class="t-main bd" x="504" y="153">the article.</text>
+<text class="t-mute sm" x="504" y="178">ALWAYS VERIFY</text>
+<text class="t-main bd" x="504" y="196">Emergency numbers</text>
+<text class="t-main bd" x="504" y="213">Statute references</text>
+<text class="t-main bd" x="504" y="230">Visa rules</text>
+<text class="t-main bd" x="504" y="247">Tariffs</text>
+<rect class="card-ok" x="721" y="28" width="191" height="369" rx="8"/>
+<text class="t-main h2" x="735" y="52">4. The emergency card</text>
+<text class="t-mute sm" x="735" y="84">The copy that works</text>
+<text class="t-mute sm" x="735" y="102">offline</text>
+<text class="t-main bd" x="735" y="120">Copy the key contacts</text>
+<text class="t-main bd" x="735" y="137">from the fourth set of</text>
+<text class="t-main bd" x="735" y="154">questions onto a card.</text>
+<text class="t-main bd" x="735" y="171">Print and laminate it,</text>
+<text class="t-main bd" x="735" y="188">one in your wallet and</text>
+<text class="t-main bd" x="735" y="205">one in your luggage.</text>
+<text class="t-main bd" x="735" y="222">Store a copy in an</text>
+<text class="t-main bd" x="735" y="239">offline note.</text>
+<path class="arrow" d="M225 212.5 H246"/>
+<path class="arrow-h" d="M253 212.5 L245 207 L245 218 Z"/>
+<path class="arrow" d="M456 212.5 H477"/>
+<path class="arrow-h" d="M484 212.5 L476 207 L476 218 Z"/>
+<path class="arrow" d="M687 212.5 H708"/>
+<path class="arrow-h" d="M715 212.5 L707 207 L707 218 Z"/>
+<rect class="card-no" x="28" y="411" width="884" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="439">AI invents phone numbers, statutes and tariffs</text>
+<text class="t-main bd" x="44" y="465">Language models are very good at being confidently wrong. Treat the answers as a list of what to look up next rather than as the</text>
+<text class="t-main bd" x="44" y="482">final answer.</text>
+<text class="t-main bd" x="44" y="499">The more obscure the destination and the thinner the public record, the less training data the model has and the more it</text>
+<text class="t-main bd" x="44" y="516">invents, which is exactly where reliable information matters most.</text>
+<text class="t-foot" x="28" y="545">This works for any destination and complements the East and Southeast Asia article: that one gives a verified comparison of</text>
+<text class="t-foot" x="28" y="567">fourteen places, this one gives the method for checking anywhere else.</text>
+<text class="t-foot" x="28" y="589">Once you have the answers, run through the tiered checklist in the business travel article. The two together make a complete</text>
+<text class="t-foot" x="28" y="611">pre-departure routine.</text>
 </svg>

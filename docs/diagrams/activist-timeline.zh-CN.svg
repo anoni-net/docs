@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 440" width="940" height="440" role="img" aria-labelledby="title desc">
 <title id="title">动员前、行动现场、行动之后，三个阶段各有各的准备</title>
 <desc id="desc">三个并排的阶段，用箭头串起来，底下有一条横幅代表贯穿全程的跨组织协作。动员前是风险最低、时间最多的阶段，要做的是通信群组的设计与隔离、云端文档先撤到 Cryptpad、密码管理器与账号清单、个人账号的隐私审计，以及一次性手机的取舍。行动现场要做的是出门前的设备锁定设置、现场拍照与录像的判断、选择 Signal 或离线 mesh，以及紧急联系人与失联流程。行动之后要处理的是删除证据前的合规考量、媒体曝光时的身份管理，以及取得法律支援的渠道。底下的横幅是跨组织协作，贯穿三个阶段，包含信息最小化原则、协作文档与文件交换工具的选择、群组命名与消息政策。</desc>
 <style>
@@ -53,7 +53,7 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="277.333" height="250" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="264" height="250" rx="8"/>
 <text class="t-main h2" x="42" y="52">动员前准备</text>
 <text class="t-mute sm" x="42" y="84">风险最低，时间最多</text>
 <text class="t-main bd" x="42" y="102">通信群组的设计与隔离</text>
@@ -65,32 +65,32 @@
 <text class="t-main bd" x="42" y="213">多数人卡关的原因，</text>
 <text class="t-main bd" x="42" y="230">是把 30 分钟能做完的事</text>
 <text class="t-main bd" x="42" y="247">拖到当天才想起来</text>
-<rect class="card-w1" x="351.333" y="28" width="277.333" height="250" rx="8"/>
-<text class="t-main h2" x="365.333" y="52">行动现场</text>
-<text class="t-mute sm" x="365.333" y="84">来不及做新设置的阶段</text>
-<text class="t-main bd" x="365.333" y="102">出门前的设备锁定设置</text>
-<text class="t-main bd" x="365.333" y="119">现场拍照与录像的判断</text>
-<text class="t-main bd" x="365.333" y="136">Signal 与离线 mesh 的选择</text>
-<text class="t-main bd" x="365.333" y="153">紧急联系人与失联流程</text>
-<text class="t-mute sm" x="365.333" y="178">为什么在这里</text>
-<text class="t-main bd" x="365.333" y="196">被临检时手机被翻看，</text>
-<text class="t-main bd" x="365.333" y="213">群组对话与照片库</text>
-<text class="t-main bd" x="365.333" y="230">会一起暴露</text>
-<rect class="card-c2" x="674.667" y="28" width="277.333" height="250" rx="8"/>
-<text class="t-main h2" x="688.667" y="52">行动之后</text>
-<text class="t-mute sm" x="688.667" y="84">风险不会跟着散场结束</text>
-<text class="t-main bd" x="688.667" y="102">删除「证据」前的合规考量</text>
-<text class="t-main bd" x="688.667" y="119">媒体曝光时的身份管理</text>
-<text class="t-main bd" x="688.667" y="136">取得法律支援的渠道</text>
-<text class="t-mute sm" x="688.667" y="161">为什么在这里</text>
-<text class="t-main bd" x="688.667" y="179">抗争结束后被告时，</text>
-<text class="t-main bd" x="688.667" y="196">公司会用内部 IT 记录、</text>
-<text class="t-main bd" x="688.667" y="213">门禁卡与存取记录追究</text>
-<path class="arrow" d="M313.333 153 H336.333"/>
-<path class="arrow-h" d="M343.333 153 L335.333 147.5 L335.333 158.5 Z"/>
-<path class="arrow" d="M636.667 153 H659.667"/>
-<path class="arrow-h" d="M666.667 153 L658.667 147.5 L658.667 158.5 Z"/>
-<rect class="card-n" x="28" y="292" width="924" height="84" rx="8"/>
+<rect class="card-w1" x="338" y="28" width="264" height="250" rx="8"/>
+<text class="t-main h2" x="352" y="52">行动现场</text>
+<text class="t-mute sm" x="352" y="84">来不及做新设置的阶段</text>
+<text class="t-main bd" x="352" y="102">出门前的设备锁定设置</text>
+<text class="t-main bd" x="352" y="119">现场拍照与录像的判断</text>
+<text class="t-main bd" x="352" y="136">Signal 与离线 mesh 的选择</text>
+<text class="t-main bd" x="352" y="153">紧急联系人与失联流程</text>
+<text class="t-mute sm" x="352" y="178">为什么在这里</text>
+<text class="t-main bd" x="352" y="196">被临检时手机被翻看，</text>
+<text class="t-main bd" x="352" y="213">群组对话与照片库</text>
+<text class="t-main bd" x="352" y="230">会一起暴露</text>
+<rect class="card-c2" x="648" y="28" width="264" height="250" rx="8"/>
+<text class="t-main h2" x="662" y="52">行动之后</text>
+<text class="t-mute sm" x="662" y="84">风险不会跟着散场结束</text>
+<text class="t-main bd" x="662" y="102">删除「证据」前的合规考量</text>
+<text class="t-main bd" x="662" y="119">媒体曝光时的身份管理</text>
+<text class="t-main bd" x="662" y="136">取得法律支援的渠道</text>
+<text class="t-mute sm" x="662" y="161">为什么在这里</text>
+<text class="t-main bd" x="662" y="179">抗争结束后被告时，</text>
+<text class="t-main bd" x="662" y="196">公司会用内部 IT 记录、</text>
+<text class="t-main bd" x="662" y="213">门禁卡与存取记录追究</text>
+<path class="arrow" d="M300 153 H323"/>
+<path class="arrow-h" d="M330 153 L322 147.5 L322 158.5 Z"/>
+<path class="arrow" d="M610 153 H633"/>
+<path class="arrow-h" d="M640 153 L632 147.5 L632 158.5 Z"/>
+<rect class="card-n" x="28" y="292" width="884" height="84" rx="8"/>
 <text class="t-main h2" x="44" y="320">跨组织协作：三个阶段都适用</text>
 <text class="t-main bd" x="44" y="346">信息最小化原则。协作文档与文件交换工具的选择。群组命名与消息政策。</text>
 <text class="t-main bd" x="44" y="363">跨组织协调的协作文档放在一般云盘，后来被截图外流到对立阵营，这是实际发生过的情况。</text>

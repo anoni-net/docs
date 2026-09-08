@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 647" width="1120" height="647" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 720" width="940" height="720" role="img" aria-labelledby="title desc">
 <title id="title">The same metadata makes a record credible and puts people at risk</title>
 <desc id="desc">The blue bar at the top states the tension carried by field records: the metadata that makes a record credible as evidence is exactly the metadata that exposes people. A photograph carrying a timestamp and GPS coordinates is strong evidence that a specific violation happened at a specific time and place. The same EXIF data, on a seized device, locates you and anyone identifiable in the frame. The two columns below hold the decision, taken item by item. On the left, keep the metadata when the value of the record lies in being verifiable and nobody in the frame is harmed by it: an empty ballot box, posted results, a queue with no identifiable faces. On the right, strip or avoid the metadata when the record could identify someone who would be endangered by it: polling staff, a frightened voter, a fellow observer in a hostile environment. Keep faces out of frame while shooting, and clear EXIF before an image leaves the device. The bar at the bottom lists four field practices.</desc>
 <style>
@@ -53,44 +53,49 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="1064" height="118" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="884" height="118" rx="8"/>
 <text class="t-main h2" x="44" y="56">The tension a field record carries</text>
 <text class="t-main bd" x="44" y="82">The metadata that makes a record credible as evidence is exactly the metadata that exposes people.</text>
 <text class="t-main bd" x="44" y="99">A photo with a timestamp and GPS coordinates is strong evidence that a specific violation happened at a specific time and place.</text>
 <text class="t-main bd" x="44" y="116">The same EXIF data, on a seized device, locates you and anyone identifiable in the frame.</text>
 <text class="t-main bd" x="44" y="133">There is no general right answer here, only a decision taken item by item.</text>
-<rect class="card-ok" x="28" y="160" width="523" height="252" rx="8"/>
+<rect class="card-ok" x="28" y="160" width="433" height="286" rx="8"/>
 <text class="t-main h2" x="42" y="184">Keep the metadata</text>
-<text class="t-mute sm" x="42" y="216">Test: the record's value lies in being verifiable, and nobody in the frame is</text>
-<text class="t-mute sm" x="42" y="234">harmed by it</text>
+<text class="t-mute sm" x="42" y="216">Test: the record's value lies in being verifiable, and nobody in</text>
+<text class="t-mute sm" x="42" y="234">the frame is harmed by it</text>
 <text class="t-mute sm" x="42" y="252">WHAT THIS COVERS</text>
 <text class="t-main bd" x="42" y="270">An empty ballot box</text>
 <text class="t-main bd" x="42" y="287">Posted counting results</text>
 <text class="t-main bd" x="42" y="304">A queue with no identifiable faces</text>
 <text class="t-main bd" x="42" y="321">Officials carrying out their duties</text>
 <text class="t-mute sm" x="42" y="346">WHY</text>
-<text class="t-main bd" x="42" y="364">The timestamp and coordinates let a third party verify the record.</text>
-<text class="t-main bd" x="42" y="381">Strip them and the photo rests on your testimony alone.</text>
-<rect class="card-no" x="569" y="160" width="523" height="252" rx="8"/>
-<text class="t-main h2" x="583" y="184">Strip or avoid the metadata</text>
-<text class="t-mute sm" x="583" y="216">Test: the record could identify someone who would be endangered by it</text>
-<text class="t-mute sm" x="583" y="234">WHAT THIS COVERS</text>
-<text class="t-main bd" x="583" y="252">Polling staff</text>
-<text class="t-main bd" x="583" y="269">A frightened voter</text>
-<text class="t-main bd" x="583" y="286">A fellow observer in a hostile environment</text>
-<text class="t-main bd" x="583" y="303">Any identifiable ordinary voter</text>
-<text class="t-mute sm" x="583" y="328">HOW</text>
-<text class="t-main bd" x="583" y="346">Keep faces and identifying detail out of frame while shooting.</text>
-<text class="t-main bd" x="583" y="363">Clear EXIF before an image leaves the device, and treat every file as</text>
-<text class="t-main bd" x="583" y="380">carrying metadata until proven otherwise.</text>
-<rect class="card" x="28" y="426" width="1064" height="135" rx="8"/>
-<text class="t-main h2" x="44" y="454">Four field practices</text>
-<text class="t-mute bd" x="44" y="480">Photograph documents and surroundings rather than faces, unless the face is itself the violation and the person consents or is an official on duty. Rules</text>
-<text class="t-mute bd" x="44" y="497">on photographing voters vary widely, so check before raising a camera.</text>
-<text class="t-mute bd" x="44" y="514">Keep an offline, verifiable backup. An encrypted local copy synced to the mission team when the network allows survives both seizure and shutdown.</text>
-<text class="t-mute bd" x="44" y="531">Record counts and incidents with a structured tool. A mission form or a shared encrypted document keeps the format consistent.</text>
-<text class="t-mute bd" x="44" y="548">Keep identities out of the record. Where a name is not the point, use a role: presiding officer, observer at station 4.</text>
-<text class="t-foot" x="28" y="577">The reporting channel is sensitive in itself. Who spoke to whom and when is metadata that maps the whole observation network even when the content is</text>
-<text class="t-foot" x="28" y="599">encrypted.</text>
-<text class="t-foot" x="28" y="621">A record that exists only in a cloud your adversary can subpoena is fragile. Offline backup and seizure response are two sides of one decision.</text>
+<text class="t-main bd" x="42" y="364">The timestamp and coordinates let a third party verify the</text>
+<text class="t-main bd" x="42" y="381">record.</text>
+<text class="t-main bd" x="42" y="398">Strip them and the photo rests on your testimony alone.</text>
+<rect class="card-no" x="479" y="160" width="433" height="286" rx="8"/>
+<text class="t-main h2" x="493" y="184">Strip or avoid the metadata</text>
+<text class="t-mute sm" x="493" y="216">Test: the record could identify someone who would be endangered by</text>
+<text class="t-mute sm" x="493" y="234">it</text>
+<text class="t-mute sm" x="493" y="252">WHAT THIS COVERS</text>
+<text class="t-main bd" x="493" y="270">Polling staff</text>
+<text class="t-main bd" x="493" y="287">A frightened voter</text>
+<text class="t-main bd" x="493" y="304">A fellow observer in a hostile environment</text>
+<text class="t-main bd" x="493" y="321">Any identifiable ordinary voter</text>
+<text class="t-mute sm" x="493" y="346">HOW</text>
+<text class="t-main bd" x="493" y="364">Keep faces and identifying detail out of frame while</text>
+<text class="t-main bd" x="493" y="381">shooting.</text>
+<text class="t-main bd" x="493" y="398">Clear EXIF before an image leaves the device, and treat every</text>
+<text class="t-main bd" x="493" y="415">file as carrying metadata until proven otherwise.</text>
+<rect class="card" x="28" y="460" width="884" height="152" rx="8"/>
+<text class="t-main h2" x="44" y="488">Four field practices</text>
+<text class="t-mute bd" x="44" y="514">Photograph documents and surroundings rather than faces, unless the face is itself the violation and the person consents or is</text>
+<text class="t-mute bd" x="44" y="531">an official on duty. Rules on photographing voters vary widely, so check before raising a camera.</text>
+<text class="t-mute bd" x="44" y="548">Keep an offline, verifiable backup. An encrypted local copy synced to the mission team when the network allows survives both</text>
+<text class="t-mute bd" x="44" y="565">seizure and shutdown.</text>
+<text class="t-mute bd" x="44" y="582">Record counts and incidents with a structured tool. A mission form or a shared encrypted document keeps the format consistent.</text>
+<text class="t-mute bd" x="44" y="599">Keep identities out of the record. Where a name is not the point, use a role: presiding officer, observer at station 4.</text>
+<text class="t-foot" x="28" y="628">The reporting channel is sensitive in itself. Who spoke to whom and when is metadata that maps the whole observation network</text>
+<text class="t-foot" x="28" y="650">even when the content is encrypted.</text>
+<text class="t-foot" x="28" y="672">A record that exists only in a cloud your adversary can subpoena is fragile. Offline backup and seizure response are two sides</text>
+<text class="t-foot" x="28" y="694">of one decision.</text>
 </svg>

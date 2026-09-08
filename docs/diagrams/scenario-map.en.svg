@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 422" width="1120" height="422" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 494" width="940" height="494" role="img" aria-labelledby="title desc">
 <title id="title">A reading map for the scenarios, starting from one shared baseline</title>
 <desc id="desc">At the top sits the shared baseline, what an ordinary person should have in place, which every reader starts from and which every other article assumes. Below it the scenarios split into four groups. The first goes by your role: journalists protecting sources, activists preparing for mobilisation, election observers protecting themselves, and advocacy organisations building anonymous donation channels. The second goes by your situation: anonymous socialising for LGBTQ+ people, and digital preparation for survivors of domestic violence. The third goes by where you speak: publishing on mainland Chinese platforms, and posting online in Singapore and Malaysia. The fourth goes by travel and external events: preparing for business trips and conferences, generating a destination briefing with AI before you go, and preparing for network shutdowns. One person can fall into several groups at once, and the articles cross-reference each other.</desc>
 <style>
@@ -53,42 +53,49 @@
   }
 </style>
 
-<rect class="card-c3" x="28" y="28" width="1064" height="101" rx="8"/>
+<rect class="card-c3" x="28" y="28" width="884" height="118" rx="8"/>
 <text class="t-main h1" x="44" y="56">Shared baseline: what an ordinary person should have in place</text>
-<text class="t-main bd" x="44" y="82">If none of the scenarios matches you, start here. Every other article assumes you have done this one, and it lists what should push you up into a specific</text>
-<text class="t-main bd" x="44" y="99">scenario.</text>
-<text class="t-main bd" x="44" y="116">It covers how three kinds of adversary differ, measures ranked by what they actually achieve, measures that are overrated, and when to raise your standard.</text>
-<path class="arrow" d="M560 133 V152"/>
-<path class="arrow-h" d="M560 159 L554.5 151 L565.5 151 Z"/>
-<text class="t-mute sm" x="574" y="151">Branching by role and situation. One person can fall into several groups at once.</text>
-<rect class="card-c1" x="28" y="165" width="255.5" height="171" rx="8"/>
-<text class="t-main h2" x="42" y="189">By your role</text>
-<text class="t-main bd" x="42" y="203">Journalists protecting sources</text>
-<text class="t-main bd" x="42" y="220">Activists preparing for</text>
-<text class="t-main bd" x="42" y="237">mobilisation</text>
-<text class="t-main bd" x="42" y="254">Election observers protecting</text>
-<text class="t-main bd" x="42" y="271">themselves</text>
-<text class="t-main bd" x="42" y="288">Advocacy groups taking anonymous</text>
-<text class="t-main bd" x="42" y="305">donations</text>
-<rect class="card-w1" x="297.5" y="165" width="255.5" height="171" rx="8"/>
-<text class="t-main h2" x="311.5" y="189">By your situation</text>
-<text class="t-main bd" x="311.5" y="203">Anonymous socialising for LGBTQ+</text>
-<text class="t-main bd" x="311.5" y="220">people</text>
-<text class="t-main bd" x="311.5" y="237">Digital preparation for survivors</text>
-<text class="t-main bd" x="311.5" y="254">of domestic violence</text>
-<rect class="card-c2" x="567" y="165" width="255.5" height="171" rx="8"/>
-<text class="t-main h2" x="581" y="189">By where you speak</text>
-<text class="t-main bd" x="581" y="203">Publishing on mainland Chinese</text>
-<text class="t-main bd" x="581" y="220">platforms</text>
-<text class="t-main bd" x="581" y="237">Posting online in Singapore and</text>
-<text class="t-main bd" x="581" y="254">Malaysia</text>
-<rect class="card-n" x="836.5" y="165" width="255.5" height="171" rx="8"/>
-<text class="t-main h2" x="850.5" y="189">By travel and external events</text>
-<text class="t-main bd" x="850.5" y="203">Business trips and conferences</text>
-<text class="t-main bd" x="850.5" y="220">An AI-assisted destination</text>
-<text class="t-main bd" x="850.5" y="237">briefing</text>
-<text class="t-main bd" x="850.5" y="254">Preparing for a network shutdown</text>
-<text class="t-foot" x="28" y="352">No tool is good or bad on its own. What matters is whether it answers a specific situation and threat. Each article pairs its advice with the tools and</text>
-<text class="t-foot" x="28" y="374">settings it relies on.</text>
-<text class="t-foot" x="28" y="396">When a term is unfamiliar, go back to the concepts and tools sections for the background. The articles cross-reference each other, so read what you need.</text>
+<text class="t-main bd" x="44" y="82">If none of the scenarios matches you, start here. Every other article assumes you have done this one, and it lists what should</text>
+<text class="t-main bd" x="44" y="99">push you up into a specific scenario.</text>
+<text class="t-main bd" x="44" y="116">It covers how three kinds of adversary differ, measures ranked by what they actually achieve, measures that are overrated, and</text>
+<text class="t-main bd" x="44" y="133">when to raise your standard.</text>
+<path class="arrow" d="M470 150 V177"/>
+<path class="arrow-h" d="M470 184 L464.5 176 L475.5 176 Z"/>
+<text class="t-mute sm" x="484" y="164">Branching by role and situation. One person can fall into several</text>
+<text class="t-mute sm" x="484" y="179">groups at once.</text>
+<rect class="card-c1" x="28" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="42" y="222">By your role</text>
+<text class="t-main bd" x="42" y="236">Journalists protecting</text>
+<text class="t-main bd" x="42" y="253">sources</text>
+<text class="t-main bd" x="42" y="270">Activists preparing for</text>
+<text class="t-main bd" x="42" y="287">mobilisation</text>
+<text class="t-main bd" x="42" y="304">Election observers</text>
+<text class="t-main bd" x="42" y="321">protecting themselves</text>
+<text class="t-main bd" x="42" y="338">Advocacy groups taking</text>
+<text class="t-main bd" x="42" y="355">anonymous donations</text>
+<rect class="card-w1" x="252.5" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="266.5" y="222">By your situation</text>
+<text class="t-main bd" x="266.5" y="236">Anonymous socialising for</text>
+<text class="t-main bd" x="266.5" y="253">LGBTQ+ people</text>
+<text class="t-main bd" x="266.5" y="270">Digital preparation for</text>
+<text class="t-main bd" x="266.5" y="287">survivors of domestic</text>
+<text class="t-main bd" x="266.5" y="304">violence</text>
+<rect class="card-c2" x="477" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="491" y="222">By where you speak</text>
+<text class="t-main bd" x="491" y="236">Publishing on mainland</text>
+<text class="t-main bd" x="491" y="253">Chinese platforms</text>
+<text class="t-main bd" x="491" y="270">Posting online in Singapore</text>
+<text class="t-main bd" x="491" y="287">and Malaysia</text>
+<rect class="card-n" x="701.5" y="198" width="210.5" height="188" rx="8"/>
+<text class="t-main h2" x="715.5" y="222">By travel and external events</text>
+<text class="t-main bd" x="715.5" y="236">Business trips and</text>
+<text class="t-main bd" x="715.5" y="253">conferences</text>
+<text class="t-main bd" x="715.5" y="270">An AI-assisted destination</text>
+<text class="t-main bd" x="715.5" y="287">briefing</text>
+<text class="t-main bd" x="715.5" y="304">Preparing for a network</text>
+<text class="t-main bd" x="715.5" y="321">shutdown</text>
+<text class="t-foot" x="28" y="402">No tool is good or bad on its own. What matters is whether it answers a specific situation and threat. Each article pairs its</text>
+<text class="t-foot" x="28" y="424">advice with the tools and settings it relies on.</text>
+<text class="t-foot" x="28" y="446">When a term is unfamiliar, go back to the concepts and tools sections for the background. The articles cross-reference each</text>
+<text class="t-foot" x="28" y="468">other, so read what you need.</text>
 </svg>

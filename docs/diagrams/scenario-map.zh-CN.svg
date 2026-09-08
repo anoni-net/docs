@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 332" width="980" height="332" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 333" width="940" height="333" role="img" aria-labelledby="title desc">
 <title id="title">场景层的阅读地图，先做到共同基准再依身份往上走</title>
 <desc id="desc">上方是共同基准「一般人平常该做到什么」，所有读者从这篇开始，其余各篇都假设你已经做到它。往下分成四组场景。第一组依你的角色：记者保护消息来源、社运行动者的数字准备、选举观察员的自保、倡议组织的匿名捐款渠道。第二组依你的处境：LGBTQ+ 与性少数的匿名社交、家暴受害者的数字准备。第三组依你在哪里发言：在中国大陆的公开平台传播信息、在新加坡与马来西亚的网络发言。第四组依移动与外部事件：出差与研讨会的数字准备、出国前用 AI 自助产生目的地概况、网络中断时的准备与应对。同一个人可能同时落在好几组，各篇之间互相引用，可以照需要挑着读。</desc>
 <style>
@@ -53,32 +53,32 @@
   }
 </style>
 
-<rect class="card-c3" x="28" y="28" width="924" height="84" rx="8"/>
+<rect class="card-c3" x="28" y="28" width="884" height="84" rx="8"/>
 <text class="t-main h1" x="44" y="56">共同基准：一般人平常该做到什么</text>
 <text class="t-main bd" x="44" y="82">找不到符合自己身份的那一篇，先看这一篇。其余各篇都假设你已经做到它，它也列出什么情况该往上走到特定场景。</text>
 <text class="t-main bd" x="44" y="99">内容是三种对手的差别、依实际效果排序的做法、被高估的做法，以及什么时候该把标准拉高。</text>
-<path class="arrow" d="M490 116 V135"/>
-<path class="arrow-h" d="M490 142 L484.5 134 L495.5 134 Z"/>
-<text class="t-mute sm" x="504" y="134">依身份与处境分支，同一个人可能同时落在好几组</text>
-<rect class="card-c1" x="28" y="148" width="220.5" height="120" rx="8"/>
-<text class="t-main h2" x="42" y="172">依你的角色</text>
-<text class="t-main bd" x="42" y="186">记者保护消息来源</text>
-<text class="t-main bd" x="42" y="203">社运行动者的数字准备</text>
-<text class="t-main bd" x="42" y="220">选举观察员的自保</text>
-<text class="t-main bd" x="42" y="237">倡议组织的匿名捐款渠道</text>
-<rect class="card-w1" x="262.5" y="148" width="220.5" height="120" rx="8"/>
-<text class="t-main h2" x="276.5" y="172">依你的处境</text>
-<text class="t-main bd" x="276.5" y="186">LGBTQ+ 与性少数的匿名社交</text>
-<text class="t-main bd" x="276.5" y="203">家暴受害者的数字准备</text>
-<rect class="card-c2" x="497" y="148" width="220.5" height="120" rx="8"/>
-<text class="t-main h2" x="511" y="172">依你在哪里发言</text>
-<text class="t-main bd" x="511" y="186">在中国大陆的公开平台传播信息</text>
-<text class="t-main bd" x="511" y="203">在新加坡与马来西亚的网络发言</text>
-<rect class="card-n" x="731.5" y="148" width="220.5" height="120" rx="8"/>
-<text class="t-main h2" x="745.5" y="172">依移动与外部事件</text>
-<text class="t-main bd" x="745.5" y="186">出差与研讨会的数字准备</text>
-<text class="t-main bd" x="745.5" y="203">出国前用 AI 产生目的地概况</text>
-<text class="t-main bd" x="745.5" y="220">网络中断时的准备与应对</text>
-<text class="t-foot" x="28" y="284">工具没有绝对的好坏，重点是能不能对应到具体的处境与威胁。每篇都会搭配对应的工具与设置建议。</text>
-<text class="t-foot" x="28" y="306">看不懂某个名词时，回头看概念层与工具层补背景知识。各篇之间互相引用，照需要挑着读即可。</text>
+<path class="arrow" d="M470 116 V135"/>
+<path class="arrow-h" d="M470 142 L464.5 134 L475.5 134 Z"/>
+<text class="t-mute sm" x="484" y="130">依身份与处境分支，同一个人可能同时落在好几组</text>
+<rect class="card-c1" x="28" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="42" y="173">依你的角色</text>
+<text class="t-main bd" x="42" y="187">记者保护消息来源</text>
+<text class="t-main bd" x="42" y="204">社运行动者的数字准备</text>
+<text class="t-main bd" x="42" y="221">选举观察员的自保</text>
+<text class="t-main bd" x="42" y="238">倡议组织的匿名捐款渠道</text>
+<rect class="card-w1" x="252.5" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="266.5" y="173">依你的处境</text>
+<text class="t-main bd" x="266.5" y="187">LGBTQ+ 与性少数的匿名社交</text>
+<text class="t-main bd" x="266.5" y="204">家暴受害者的数字准备</text>
+<rect class="card-c2" x="477" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="491" y="173">依你在哪里发言</text>
+<text class="t-main bd" x="491" y="187">在中国大陆的公开平台传播信息</text>
+<text class="t-main bd" x="491" y="204">在新加坡与马来西亚的网络发言</text>
+<rect class="card-n" x="701.5" y="149" width="210.5" height="120" rx="8"/>
+<text class="t-main h2" x="715.5" y="173">依移动与外部事件</text>
+<text class="t-main bd" x="715.5" y="187">出差与研讨会的数字准备</text>
+<text class="t-main bd" x="715.5" y="204">出国前用 AI 产生目的地概况</text>
+<text class="t-main bd" x="715.5" y="221">网络中断时的准备与应对</text>
+<text class="t-foot" x="28" y="285">工具没有绝对的好坏，重点是能不能对应到具体的处境与威胁。每篇都会搭配对应的工具与设置建议。</text>
+<text class="t-foot" x="28" y="307">看不懂某个名词时，回头看概念层与工具层补背景知识。各篇之间互相引用，照需要挑着读即可。</text>
 </svg>

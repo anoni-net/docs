@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 691" width="1120" height="691" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 781" width="940" height="781" role="img" aria-labelledby="title desc">
 <title id="title">Tech abuse runs through four kinds of ordinary consumer feature</title>
 <desc id="desc">Four boxes listing the channels through which technology-facilitated abuse most often runs in intimate relationships, all of them features designed for families and partners. The first is account access and shared plans: passwords the other person already knows or can guess, a shared Apple ID or Google account, Apple Family Sharing and carrier family plans, Google Family Link, and password reset mail arriving at a shared number or mailbox. The second is location tracking: Find My and Google Maps location sharing, Bluetooth trackers such as AirTags, connected-car apps, shared calendars, and GPS coordinates carried by synced photos. The third is stalkerware installed while the other person briefly has your phone, which forwards messages, call logs, photos, browsing and location while showing no icon at all. The fourth is smart home and shared devices: smart locks, cameras, doorbells, thermostats, voice assistants and shared streaming accounts. The blue bar below notes that the most reliable signal is usually the other person knowing something they should not, and that the period around leaving is the most dangerous.</desc>
 <style>
@@ -53,52 +53,58 @@
   }
 </style>
 
-<rect class="card-no" x="28" y="28" width="1064" height="67" rx="8"/>
+<rect class="card-no" x="28" y="28" width="884" height="84" rx="8"/>
 <text class="t-main h2" x="44" y="56">WHAT THEY SHARE</text>
-<text class="t-main bd" x="44" y="82">Most of this needs no special skill. It uses ordinary consumer features built for families and partners, turned against one person in the household.</text>
-<rect class="card-w1" x="28" y="109" width="524" height="220" rx="8"/>
-<text class="t-main h2" x="44" y="137">Account access and shared plans</text>
-<text class="t-mute bd" x="44" y="161">Passwords for your mailbox, phone lock and banking that the other person</text>
-<text class="t-mute bd" x="44" y="178">already knows or can guess</text>
-<text class="t-mute bd" x="44" y="195">A shared Apple ID or Google account, which syncs messages, photos,</text>
-<text class="t-mute bd" x="44" y="212">browsing history and contacts to their device</text>
-<text class="t-mute bd" x="44" y="229">Apple Family Sharing and carrier family plans, exposing purchases and</text>
-<text class="t-mute bd" x="44" y="246">installed apps</text>
-<text class="t-mute bd" x="44" y="263">Google Family Link, a parental tool that becomes surveillance when pointed</text>
-<text class="t-mute bd" x="44" y="280">at an adult</text>
-<text class="t-mute bd" x="44" y="297">Reset mail arriving at a shared number or mailbox, so a new password does</text>
-<text class="t-mute bd" x="44" y="314">not lock them out</text>
-<rect class="card-w1" x="568" y="109" width="524" height="220" rx="8"/>
-<text class="t-main h2" x="584" y="137">Location tracking</text>
-<text class="t-mute bd" x="584" y="161">Find My and Google Maps location sharing, which keeps running once enabled</text>
-<text class="t-mute bd" x="584" y="178">and sends no further notice</text>
-<text class="t-mute bd" x="584" y="195">Bluetooth trackers such as AirTags or Tile, placed in a bag, a car or a</text>
-<text class="t-mute bd" x="584" y="212">child's belongings</text>
-<text class="t-mute bd" x="584" y="229">Connected-car apps showing live position and trip history</text>
-<text class="t-mute bd" x="584" y="246">Shared calendars, which reveal where you will be next</text>
-<text class="t-mute bd" x="584" y="263">Photos synced with GPS coordinates attached, enough to locate a new</text>
-<text class="t-mute bd" x="584" y="280">address</text>
-<rect class="card-w1" x="28" y="343" width="524" height="152" rx="8"/>
-<text class="t-main h2" x="44" y="371">Stalkerware on the device</text>
-<text class="t-mute bd" x="44" y="395">Installed while the other person briefly has your phone, then forwarding</text>
-<text class="t-mute bd" x="44" y="412">messages, call logs, photos, browsing and location</text>
-<text class="t-mute bd" x="44" y="429">Able to show no icon at all</text>
-<text class="t-mute bd" x="44" y="446">A battery that drains faster, a warm phone at idle and unexplained data</text>
-<text class="t-mute bd" x="44" y="463">use are all hints rather than proof</text>
-<rect class="card-w1" x="568" y="343" width="524" height="152" rx="8"/>
-<text class="t-main h2" x="584" y="371">Smart home and shared devices</text>
-<text class="t-mute bd" x="584" y="395">Smart locks, cameras, doorbells and thermostats: whoever holds the</text>
-<text class="t-mute bd" x="584" y="412">controlling account sees the footage, knows when the door opens and can</text>
-<text class="t-mute bd" x="584" y="429">lock you out</text>
-<text class="t-mute bd" x="584" y="446">After separation these often stay on the other account</text>
-<text class="t-mute bd" x="584" y="463">A shared voice assistant exposes routines and reminders</text>
-<text class="t-mute bd" x="584" y="480">Shared streaming and location-based social apps leak your daily pattern</text>
-<rect class="card-c1" x="28" y="509" width="1064" height="118" rx="8"/>
-<text class="t-main h2" x="44" y="537">The most reliable signal</text>
-<text class="t-main bd" x="44" y="563">Every hint above has other explanations. In practice the most reliable signal is the other person knowing something they should not.</text>
-<text class="t-main bd" x="44" y="580">The period around leaving an abusive relationship is the most dangerous. A burst of password changes, a deleted tracking app and a new phone in a bag all</text>
-<text class="t-main bd" x="44" y="597">read as someone about to go.</text>
-<text class="t-main bd" x="44" y="614">Time these actions to fit a safety plan rather than doing them the moment you read this page. Where possible, order them with a trained advocate.</text>
-<text class="t-foot" x="28" y="643">Take stock before acting. Until you know a device is clean, do not use it to look up support resources or contact an advocate.</text>
-<text class="t-foot" x="28" y="665">Keep the evidence. Do not mass-delete harassing messages to clean things up, and do not store any of it in a cloud account the other person can reach.</text>
+<text class="t-main bd" x="44" y="82">Most of this needs no special skill. It uses ordinary consumer features built for families and partners, turned against one</text>
+<text class="t-main bd" x="44" y="99">person in the household.</text>
+<rect class="card-w1" x="28" y="126" width="434" height="220" rx="8"/>
+<text class="t-main h2" x="44" y="154">Account access and shared plans</text>
+<text class="t-mute bd" x="44" y="178">Passwords for your mailbox, phone lock and banking that the</text>
+<text class="t-mute bd" x="44" y="195">other person already knows or can guess</text>
+<text class="t-mute bd" x="44" y="212">A shared Apple ID or Google account, which syncs messages,</text>
+<text class="t-mute bd" x="44" y="229">photos, browsing history and contacts to their device</text>
+<text class="t-mute bd" x="44" y="246">Apple Family Sharing and carrier family plans, exposing</text>
+<text class="t-mute bd" x="44" y="263">purchases and installed apps</text>
+<text class="t-mute bd" x="44" y="280">Google Family Link, a parental tool that becomes</text>
+<text class="t-mute bd" x="44" y="297">surveillance when pointed at an adult</text>
+<text class="t-mute bd" x="44" y="314">Reset mail arriving at a shared number or mailbox, so a new</text>
+<text class="t-mute bd" x="44" y="331">password does not lock them out</text>
+<rect class="card-w1" x="478" y="126" width="434" height="220" rx="8"/>
+<text class="t-main h2" x="494" y="154">Location tracking</text>
+<text class="t-mute bd" x="494" y="178">Find My and Google Maps location sharing, which keeps</text>
+<text class="t-mute bd" x="494" y="195">running once enabled and sends no further notice</text>
+<text class="t-mute bd" x="494" y="212">Bluetooth trackers such as AirTags or Tile, placed in a bag,</text>
+<text class="t-mute bd" x="494" y="229">a car or a child's belongings</text>
+<text class="t-mute bd" x="494" y="246">Connected-car apps showing live position and trip history</text>
+<text class="t-mute bd" x="494" y="263">Shared calendars, which reveal where you will be next</text>
+<text class="t-mute bd" x="494" y="280">Photos synced with GPS coordinates attached, enough to</text>
+<text class="t-mute bd" x="494" y="297">locate a new address</text>
+<rect class="card-w1" x="28" y="360" width="434" height="169" rx="8"/>
+<text class="t-main h2" x="44" y="388">Stalkerware on the device</text>
+<text class="t-mute bd" x="44" y="412">Installed while the other person briefly has your phone,</text>
+<text class="t-mute bd" x="44" y="429">then forwarding messages, call logs, photos, browsing and</text>
+<text class="t-mute bd" x="44" y="446">location</text>
+<text class="t-mute bd" x="44" y="463">Able to show no icon at all</text>
+<text class="t-mute bd" x="44" y="480">A battery that drains faster, a warm phone at idle and</text>
+<text class="t-mute bd" x="44" y="497">unexplained data use are all hints rather than proof</text>
+<rect class="card-w1" x="478" y="360" width="434" height="169" rx="8"/>
+<text class="t-main h2" x="494" y="388">Smart home and shared devices</text>
+<text class="t-mute bd" x="494" y="412">Smart locks, cameras, doorbells and thermostats: whoever</text>
+<text class="t-mute bd" x="494" y="429">holds the controlling account sees the footage, knows when</text>
+<text class="t-mute bd" x="494" y="446">the door opens and can lock you out</text>
+<text class="t-mute bd" x="494" y="463">After separation these often stay on the other account</text>
+<text class="t-mute bd" x="494" y="480">A shared voice assistant exposes routines and reminders</text>
+<text class="t-mute bd" x="494" y="497">Shared streaming and location-based social apps leak your</text>
+<text class="t-mute bd" x="494" y="514">daily pattern</text>
+<rect class="card-c1" x="28" y="543" width="884" height="152" rx="8"/>
+<text class="t-main h2" x="44" y="571">The most reliable signal</text>
+<text class="t-main bd" x="44" y="597">Every hint above has other explanations. In practice the most reliable signal is the other person knowing something they should</text>
+<text class="t-main bd" x="44" y="614">not.</text>
+<text class="t-main bd" x="44" y="631">The period around leaving an abusive relationship is the most dangerous. A burst of password changes, a deleted tracking app and</text>
+<text class="t-main bd" x="44" y="648">a new phone in a bag all read as someone about to go.</text>
+<text class="t-main bd" x="44" y="665">Time these actions to fit a safety plan rather than doing them the moment you read this page. Where possible, order them with a</text>
+<text class="t-main bd" x="44" y="682">trained advocate.</text>
+<text class="t-foot" x="28" y="711">Take stock before acting. Until you know a device is clean, do not use it to look up support resources or contact an advocate.</text>
+<text class="t-foot" x="28" y="733">Keep the evidence. Do not mass-delete harassing messages to clean things up, and do not store any of it in a cloud account the</text>
+<text class="t-foot" x="28" y="755">other person can reach.</text>
 </svg>

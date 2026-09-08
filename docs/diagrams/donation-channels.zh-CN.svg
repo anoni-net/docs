@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 645" width="1160" height="645" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 611" width="940" height="611" role="img" aria-labelledby="title desc">
 <title id="title">三种收款渠道各有取舍，捐款人依自己要躲的对象选通道</title>
 <desc id="desc">上半部是组织方三种收款渠道的对照。现金的匿名度高、合规负担中、规模化低、不能跨境，适合活动现场与公开信箱的小额支持。加密货币的匿名度中至高、合规负担高、规模化高、可以跨境，适合跨境捐款与需要规模的情境。预付礼品卡与便利店代码的匿名度中、合规负担低、规模化中、限境内，适合门槛最低的境内小额。下半部是捐款人视角的四种威胁与对应通道。想躲家人或雇主看到资金流的人走现金、预付卡或隐私币，避开信用卡与共用银行账户。想躲组织方留下身份记录的人走不留 email 的现金捐赠或隐私币到自管钱包，避开银行汇款因为户名会留。想躲跨境监控的人走 Monero 或 Zcash 屏蔽交易，避开比特币到中心化交易所。纯粹个人偏好不留记录的人用任意现金渠道即可，避开任何电子支付。</desc>
 <style>
@@ -54,71 +54,69 @@
 </style>
 
 <text class="t-main h2" x="28" y="40">组织方：三种收款渠道的取舍</text>
-<text class="t-mute sm" x="304" y="70" text-anchor="middle">匿名度</text>
-<text class="t-mute sm" x="424" y="70" text-anchor="middle">合规负担</text>
-<text class="t-mute sm" x="544" y="70" text-anchor="middle">规模化</text>
-<text class="t-mute sm" x="654" y="70" text-anchor="middle">跨境</text>
-<text class="t-mute sm" x="748" y="70">适合什么场合</text>
-<path class="rule" d="M28 80 H1132"/>
-<rect class="card-c1" x="28" y="92" width="1104" height="81" rx="8"/>
+<text class="t-mute sm" x="254" y="70" text-anchor="middle">匿名度</text>
+<text class="t-mute sm" x="322" y="70" text-anchor="middle">合规负担</text>
+<text class="t-mute sm" x="390" y="70" text-anchor="middle">规模化</text>
+<text class="t-mute sm" x="458" y="70" text-anchor="middle">跨境</text>
+<text class="t-mute sm" x="508" y="70">适合什么场合</text>
+<path class="rule" d="M28 80 H912"/>
+<rect class="card-c1" x="28" y="92" width="884" height="64" rx="8"/>
 <text class="t-main h2" x="44" y="120">现金</text>
-<text class="t-mute sm" x="44" y="139">公开信箱、活动现场</text>
-<rect class="card-ok" x="278" y="106" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="304" y="120.5" text-anchor="middle">高</text>
-<rect class="card-w1" x="398" y="106" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="424" y="120.5" text-anchor="middle">中</text>
-<rect class="card-no" x="518" y="106" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="544" y="120.5" text-anchor="middle">低</text>
-<rect class="card-no" x="628" y="106" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="654" y="120.5" text-anchor="middle">不行</text>
-<text class="t-mute bd" x="748" y="119">境内小额支持，门槛最低的一条路。</text>
-<text class="t-mute bd" x="748" y="136">公益劝募条例适用的情境多，</text>
-<text class="t-mute bd" x="748" y="153">先确认自己在不在里面。</text>
-<rect class="card-w1" x="28" y="183" width="1104" height="81" rx="8"/>
-<text class="t-main h2" x="44" y="211">加密货币</text>
-<text class="t-mute sm" x="44" y="230">自管钱包或托管平台</text>
-<rect class="card-ok" x="278" y="197" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="304" y="211.5" text-anchor="middle">中至高</text>
-<rect class="card-no" x="398" y="197" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="424" y="211.5" text-anchor="middle">高</text>
-<rect class="card-ok" x="518" y="197" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="544" y="211.5" text-anchor="middle">高</text>
-<rect class="card-ok" x="628" y="197" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="654" y="211.5" text-anchor="middle">行</text>
-<text class="t-mute bd" x="748" y="210">跨境支持境外组织。</text>
-<text class="t-mute bd" x="748" y="227">VASP、反洗钱与税务的负担明显高一截，</text>
-<text class="t-mute bd" x="748" y="244">换汇与会计要先排好。</text>
-<rect class="card-n" x="28" y="274" width="1104" height="81" rx="8"/>
-<text class="t-main h2" x="44" y="302">预付卡与代码</text>
-<text class="t-mute sm" x="44" y="321">预付礼品卡、便利店代码</text>
-<rect class="card-w1" x="278" y="288" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="304" y="302.5" text-anchor="middle">中</text>
-<rect class="card-ok" x="398" y="288" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="424" y="302.5" text-anchor="middle">低</text>
-<rect class="card-w1" x="518" y="288" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="544" y="302.5" text-anchor="middle">中</text>
-<rect class="card-w1" x="628" y="288" width="52" height="20" rx="10"/>
-<text class="t-main sm" x="654" y="302.5" text-anchor="middle">限境内</text>
-<text class="t-mute bd" x="748" y="301">境内小额，捐款人不必碰加密货币。</text>
-<text class="t-mute bd" x="748" y="318">多数捐款人走到「取得隐私币」那一步就放弃，</text>
-<text class="t-mute bd" x="748" y="335">这条路补的是那个缺口。</text>
-<text class="t-main h2" x="28" y="385">捐款人：先问要躲的是谁，再选通道</text>
-<rect class="card" x="28" y="399" width="544" height="84" rx="8"/>
-<text class="t-main h2" x="44" y="427">想躲家人或雇主看到资金流</text>
-<text class="t-mute bd" x="44" y="451">走：现金、预付卡、隐私币</text>
-<text class="t-mute bd" x="44" y="468">避开：信用卡、共用银行账户</text>
-<rect class="card" x="588" y="399" width="544" height="84" rx="8"/>
-<text class="t-main h2" x="604" y="427">想躲组织方留下身份记录</text>
-<text class="t-mute bd" x="604" y="451">走：不留 email 的现金捐赠、隐私币到自管钱包</text>
-<text class="t-mute bd" x="604" y="468">避开：银行汇款，户名会留在对方的账上</text>
-<rect class="card" x="28" y="497" width="544" height="84" rx="8"/>
-<text class="t-main h2" x="44" y="525">想躲跨境监控</text>
-<text class="t-mute bd" x="44" y="549">走：Monero、Zcash 屏蔽交易</text>
-<text class="t-mute bd" x="44" y="566">避开：比特币到中心化交易所</text>
-<rect class="card" x="588" y="497" width="544" height="84" rx="8"/>
-<text class="t-main h2" x="604" y="525">纯粹个人偏好不留记录</text>
-<text class="t-mute bd" x="604" y="549">走：任意现金渠道</text>
-<text class="t-mute bd" x="604" y="566">避开：任何电子支付</text>
-<text class="t-foot" x="28" y="597">没有「最匿名」的单一选项。多数组织会混搭：日常用现金与预付卡、跨境用加密货币、列名捐款人走银行转账。</text>
-<text class="t-foot" x="28" y="619">组织方准备两条路，让想匿名的人有路可走，同时想列名的人也能正常列名。强迫所有人走同一条，两边都照顾不到。</text>
+<text class="t-mute sm" x="44" y="138">公开信箱、活动现场</text>
+<rect class="card-ok" x="228" y="106" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="254" y="120.5" text-anchor="middle">高</text>
+<rect class="card-w1" x="296" y="106" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="322" y="120.5" text-anchor="middle">中</text>
+<rect class="card-no" x="364" y="106" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="390" y="120.5" text-anchor="middle">低</text>
+<rect class="card-no" x="432" y="106" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="458" y="120.5" text-anchor="middle">不行</text>
+<text class="t-mute bd" x="508" y="119">境内小额支持，门槛最低的一条路。</text>
+<text class="t-mute bd" x="508" y="136">公益劝募条例适用的情境多，先确认自己在不在里面。</text>
+<rect class="card-w1" x="28" y="166" width="884" height="64" rx="8"/>
+<text class="t-main h2" x="44" y="194">加密货币</text>
+<text class="t-mute sm" x="44" y="212">自管钱包或托管平台</text>
+<rect class="card-ok" x="228" y="180" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="254" y="194.5" text-anchor="middle">中至高</text>
+<rect class="card-no" x="296" y="180" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="322" y="194.5" text-anchor="middle">高</text>
+<rect class="card-ok" x="364" y="180" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="390" y="194.5" text-anchor="middle">高</text>
+<rect class="card-ok" x="432" y="180" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="458" y="194.5" text-anchor="middle">行</text>
+<text class="t-mute bd" x="508" y="193">跨境支持境外组织。</text>
+<text class="t-mute bd" x="508" y="210">VASP、反洗钱与税务的负担明显高一截，换汇与会计要先排好。</text>
+<rect class="card-n" x="28" y="240" width="884" height="81" rx="8"/>
+<text class="t-main h2" x="44" y="268">预付卡与代码</text>
+<text class="t-mute sm" x="44" y="286">预付礼品卡、便利店代码</text>
+<rect class="card-w1" x="228" y="254" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="254" y="268.5" text-anchor="middle">中</text>
+<rect class="card-ok" x="296" y="254" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="322" y="268.5" text-anchor="middle">低</text>
+<rect class="card-w1" x="364" y="254" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="390" y="268.5" text-anchor="middle">中</text>
+<rect class="card-w1" x="432" y="254" width="52" height="20" rx="10"/>
+<text class="t-main sm" x="458" y="268.5" text-anchor="middle">限境内</text>
+<text class="t-mute bd" x="508" y="267">境内小额，捐款人不必碰加密货币。</text>
+<text class="t-mute bd" x="508" y="284">多数捐款人走到「取得隐私币」那一步就放弃，这条路补的是那个缺口</text>
+<text class="t-mute bd" x="508" y="301">。</text>
+<text class="t-main h2" x="28" y="351">捐款人：先问要躲的是谁，再选通道</text>
+<rect class="card" x="28" y="365" width="434" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="393">想躲家人或雇主看到资金流</text>
+<text class="t-mute bd" x="44" y="417">走：现金、预付卡、隐私币</text>
+<text class="t-mute bd" x="44" y="434">避开：信用卡、共用银行账户</text>
+<rect class="card" x="478" y="365" width="434" height="84" rx="8"/>
+<text class="t-main h2" x="494" y="393">想躲组织方留下身份记录</text>
+<text class="t-mute bd" x="494" y="417">走：不留 email 的现金捐赠、隐私币到自管钱包</text>
+<text class="t-mute bd" x="494" y="434">避开：银行汇款，户名会留在对方的账上</text>
+<rect class="card" x="28" y="463" width="434" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="491">想躲跨境监控</text>
+<text class="t-mute bd" x="44" y="515">走：Monero、Zcash 屏蔽交易</text>
+<text class="t-mute bd" x="44" y="532">避开：比特币到中心化交易所</text>
+<rect class="card" x="478" y="463" width="434" height="84" rx="8"/>
+<text class="t-main h2" x="494" y="491">纯粹个人偏好不留记录</text>
+<text class="t-mute bd" x="494" y="515">走：任意现金渠道</text>
+<text class="t-mute bd" x="494" y="532">避开：任何电子支付</text>
+<text class="t-foot" x="28" y="563">没有「最匿名」的单一选项。多数组织会混搭：日常用现金与预付卡、跨境用加密货币、列名捐款人走银行转账。</text>
+<text class="t-foot" x="28" y="585">组织方准备两条路，让想匿名的人有路可走，同时想列名的人也能正常列名。强迫所有人走同一条，两边都照顾不到。</text>
 </svg>

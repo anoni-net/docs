@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 605" width="1140" height="605" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 627" width="940" height="627" role="img" aria-labelledby="title desc">
 <title id="title">Shutdowns come in four levels, and each one leaves you different options</title>
 <desc id="desc">Four stacked bands running from light to dark, representing the four levels of a network shutdown, with fewer options available as you move down. Level one is throttling and intermittent loss, identified by small files getting through while large ones fail, leaving text messaging and offline editing; the common misreading is blaming your own device and rebooting repeatedly. Level two is specific services being blocked, identified by other sites loading on the same connection, leaving any channel that is not blocked; the common misreading is treating one broken app as a dead line. Level three is a regional blackout, identified by switching Wi-Fi and carriers with the same result while people nearby see the same thing, leaving whatever you stored in advance, Bluetooth and local networks, and physical delivery; the common misreading is assuming Bluetooth and local networks also stop working. Level four is a shutdown that takes the power with it, obvious without any diagnosis, leaving battery time, paper, and meeting arrangements agreed in advance; the common misreading is still focusing on communication tools instead of power management.</desc>
 <style>
@@ -53,77 +53,76 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="1044" height="114" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="844" height="114" rx="8"/>
 <rect class="card" x="44" y="42" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="63" text-anchor="middle">1</text>
 <text class="t-main h2" x="102" y="54">Throttling and intermittent loss</text>
-<text class="t-mute sm" x="102" y="74">Small files get through, large ones</text>
-<text class="t-mute sm" x="102" y="91">do not. Text-only services still work.</text>
-<text class="t-mute sm" x="428" y="54">STILL AVAILABLE</text>
-<text class="t-main bd" x="428" y="74">Text messaging</text>
-<text class="t-main bd" x="428" y="91">Low-bandwidth ways of working</text>
-<text class="t-main bd" x="428" y="108">Offline editing, sent when a</text>
-<text class="t-main bd" x="428" y="125">window opens</text>
-<text class="t-mute sm" x="758" y="54">COMMON MISREADING</text>
-<text class="t-mute sm" x="758" y="74">Blaming your own device and</text>
-<text class="t-mute sm" x="758" y="91">rebooting, reinstalling apps,</text>
-<text class="t-mute sm" x="758" y="108">resetting the router.</text>
-<rect class="card-w1" x="28" y="152" width="1044" height="114" rx="8"/>
+<text class="t-mute sm" x="102" y="74">Small files get through, large ones do</text>
+<text class="t-mute sm" x="102" y="91">not. Text-only services still work.</text>
+<text class="t-mute sm" x="358" y="54">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="74">Text messaging</text>
+<text class="t-main bd" x="358" y="91">Low-bandwidth ways of working</text>
+<text class="t-main bd" x="358" y="108">Offline editing, sent when a window</text>
+<text class="t-main bd" x="358" y="125">opens</text>
+<text class="t-mute sm" x="616" y="54">COMMON MISREADING</text>
+<text class="t-mute sm" x="616" y="74">Blaming your own device and rebooting,</text>
+<text class="t-mute sm" x="616" y="91">reinstalling apps, resetting the</text>
+<text class="t-mute sm" x="616" y="108">router.</text>
+<rect class="card-w1" x="28" y="152" width="844" height="114" rx="8"/>
 <rect class="card" x="44" y="166" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="187" text-anchor="middle">2</text>
 <text class="t-main h2" x="102" y="178">Specific services blocked</text>
 <text class="t-mute sm" x="102" y="198">Other sites load on the same</text>
 <text class="t-mute sm" x="102" y="215">connection. The only level you can</text>
-<text class="t-mute sm" x="102" y="232">confirm with public measurement</text>
-<text class="t-mute sm" x="102" y="249">such as OONI.</text>
-<text class="t-mute sm" x="428" y="178">STILL AVAILABLE</text>
-<text class="t-main bd" x="428" y="198">Any channel that is not blocked</text>
-<text class="t-main bd" x="428" y="215">Circumvention tools</text>
-<text class="t-mute sm" x="758" y="178">COMMON MISREADING</text>
-<text class="t-mute sm" x="758" y="198">Treating one app that will not</text>
-<text class="t-mute sm" x="758" y="215">open as a dead connection.</text>
-<rect class="card-w2" x="28" y="276" width="1044" height="131" rx="8"/>
+<text class="t-mute sm" x="102" y="232">confirm with public measurement such as</text>
+<text class="t-mute sm" x="102" y="249">OONI.</text>
+<text class="t-mute sm" x="358" y="178">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="198">Any channel that is not blocked</text>
+<text class="t-main bd" x="358" y="215">Circumvention tools</text>
+<text class="t-mute sm" x="616" y="178">COMMON MISREADING</text>
+<text class="t-mute sm" x="616" y="198">Treating one app that will not open as</text>
+<text class="t-mute sm" x="616" y="215">a dead connection.</text>
+<rect class="card-w2" x="28" y="276" width="844" height="131" rx="8"/>
 <rect class="card" x="44" y="290" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="311" text-anchor="middle">3</text>
 <text class="t-main h2" x="102" y="302">Regional blackout</text>
 <text class="t-main sm" x="102" y="322">Switching Wi-Fi or carrier gives the</text>
-<text class="t-main sm" x="102" y="339">same result, and people nearby see</text>
-<text class="t-main sm" x="102" y="356">it too. Signal bars tell you nothing.</text>
-<text class="t-main sm" x="102" y="373">A call or SMS shows whether only</text>
-<text class="t-main sm" x="102" y="390">data was cut.</text>
-<text class="t-main sm" x="428" y="302">STILL AVAILABLE</text>
-<text class="t-main bd" x="428" y="322">Whatever you stored on the device</text>
-<text class="t-main bd" x="428" y="339">in advance</text>
-<text class="t-main bd" x="428" y="356">Bluetooth and local-network links</text>
-<text class="t-main bd" x="428" y="373">to people nearby</text>
-<text class="t-main bd" x="428" y="390">USB sticks, paper, talking in person</text>
-<text class="t-main sm" x="758" y="302">COMMON MISREADING</text>
-<text class="t-main sm" x="758" y="322">Assuming every wireless function</text>
-<text class="t-main sm" x="758" y="339">is gone. Bluetooth and local</text>
-<text class="t-main sm" x="758" y="356">networks skip the carrier and the</text>
-<text class="t-main sm" x="758" y="373">internet, so they keep working at</text>
-<text class="t-main sm" x="758" y="390">this level.</text>
-<rect class="card-w3" x="28" y="417" width="1044" height="114" rx="8"/>
+<text class="t-main sm" x="102" y="339">same result, and people nearby see it</text>
+<text class="t-main sm" x="102" y="356">too.</text>
+<text class="t-main sm" x="102" y="373">Signal bars tell you nothing. A call or</text>
+<text class="t-main sm" x="102" y="390">SMS shows whether only data was cut.</text>
+<text class="t-main sm" x="358" y="302">STILL AVAILABLE</text>
+<text class="t-main bd" x="358" y="322">Whatever you stored on the device in</text>
+<text class="t-main bd" x="358" y="339">advance</text>
+<text class="t-main bd" x="358" y="356">Bluetooth and local-network links to</text>
+<text class="t-main bd" x="358" y="373">people nearby</text>
+<text class="t-main bd" x="358" y="390">USB sticks, paper, talking in person</text>
+<text class="t-main sm" x="616" y="302">COMMON MISREADING</text>
+<text class="t-main sm" x="616" y="322">Assuming every wireless function is</text>
+<text class="t-main sm" x="616" y="339">gone. Bluetooth and local networks skip</text>
+<text class="t-main sm" x="616" y="356">the carrier and the internet, so they</text>
+<text class="t-main sm" x="616" y="373">keep working at this level.</text>
+<rect class="card-w3" x="28" y="417" width="844" height="114" rx="8"/>
 <rect class="card" x="44" y="431" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="452" text-anchor="middle">4</text>
 <text class="t-inv h2" x="102" y="443">Power goes down too</text>
-<text class="t-inv sm" x="102" y="463">No diagnosis needed. The problem</text>
-<text class="t-inv sm" x="102" y="480">shifts from messages not sending to</text>
-<text class="t-inv sm" x="102" y="497">the device shutting down in a few</text>
-<text class="t-inv sm" x="102" y="514">hours.</text>
-<text class="t-inv sm" x="428" y="443">STILL AVAILABLE</text>
-<text class="t-inv bd" x="428" y="463">However long the battery lasts</text>
-<text class="t-inv bd" x="428" y="480">Paper</text>
-<text class="t-inv bd" x="428" y="497">Meeting arrangements agreed</text>
-<text class="t-inv bd" x="428" y="514">in advance</text>
-<text class="t-inv sm" x="758" y="443">COMMON MISREADING</text>
-<text class="t-inv sm" x="758" y="463">Still focusing on communication</text>
-<text class="t-inv sm" x="758" y="480">tools rather than power. Power</text>
-<text class="t-inv sm" x="758" y="497">banks and a dimmed screen decide</text>
-<text class="t-inv sm" x="758" y="514">how much time you have left.</text>
-<path class="arrow" d="M1094 42 V517"/>
-<path class="arrow-h" d="M1094 531 L1088.5 516 L1099.5 516 Z"/>
-<text class="t-mute sm" x="1110" y="277.5" text-anchor="middle" transform="rotate(-90 1110 277.5)">FEWER OPTIONS AS YOU GO DOWN</text>
+<text class="t-inv sm" x="102" y="463">No diagnosis needed. The problem shifts</text>
+<text class="t-inv sm" x="102" y="480">from messages not sending to the device</text>
+<text class="t-inv sm" x="102" y="497">shutting down in a few hours.</text>
+<text class="t-inv sm" x="358" y="443">STILL AVAILABLE</text>
+<text class="t-inv bd" x="358" y="463">However long the battery lasts</text>
+<text class="t-inv bd" x="358" y="480">Paper</text>
+<text class="t-inv bd" x="358" y="497">Meeting arrangements agreed in</text>
+<text class="t-inv bd" x="358" y="514">advance</text>
+<text class="t-inv sm" x="616" y="443">COMMON MISREADING</text>
+<text class="t-inv sm" x="616" y="463">Still focusing on communication tools</text>
+<text class="t-inv sm" x="616" y="480">rather than power. Power banks and a</text>
+<text class="t-inv sm" x="616" y="497">dimmed screen decide how much time you</text>
+<text class="t-inv sm" x="616" y="514">have left.</text>
+<path class="arrow" d="M894 42 V517"/>
+<path class="arrow-h" d="M894 531 L888.5 516 L899.5 516 Z"/>
+<text class="t-mute sm" x="910" y="277.5" text-anchor="middle" transform="rotate(-90 910 277.5)">FEWER OPTIONS AS YOU GO DOWN</text>
 <text class="t-foot" x="28" y="557">Read the level wrong and none of your preparation applies. Work out which level you are in before deciding what to do next.</text>
-<text class="t-foot" x="28" y="579">What is left at each level depends on what you finished before the shutdown. Anything you did not store on the device is out of reach now.</text>
+<text class="t-foot" x="28" y="579">What is left at each level depends on what you finished before the shutdown. Anything you did not store on the device is out of</text>
+<text class="t-foot" x="28" y="601">reach now.</text>
 </svg>

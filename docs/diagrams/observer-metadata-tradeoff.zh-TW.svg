@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 641" width="980" height="641" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 658" width="940" height="658" role="img" aria-labelledby="title desc">
 <title id="title">同一組 metadata，既讓紀錄可信也讓人曝險</title>
 <desc id="desc">上方的藍框說明現場紀錄承載的張力：讓紀錄作為證據可信的 metadata，正好也是讓人曝險的那些 metadata。一張帶時間戳記與 GPS 座標的照片，是某個違規在特定時間地點發生過的有力證據，同一組 EXIF 資料在被扣押的裝置上，可以定位你以及畫面裡任何可辨識的人。下方左右兩欄是逐項要做的決定。左欄是保留 metadata，判準是紀錄的價值在於可驗證而畫面中的人不會因此受害，例如空的票匭、張貼出來的開票結果、沒有可辨識面孔的排隊人潮。右欄是去除或避免 metadata，判準是紀錄可能指認出會因此陷入危險的人，例如選務人員、面露恐懼的投票人、在不友善環境中的同行觀察員，做法是拍攝時就讓臉孔不入鏡，影像離開裝置前先清除 EXIF。最下方列出現場記錄的四項實務。</desc>
 <style>
@@ -53,13 +53,13 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="924" height="118" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="884" height="118" rx="8"/>
 <text class="t-main h2" x="44" y="56">現場紀錄承載的張力</text>
 <text class="t-main bd" x="44" y="82">讓紀錄「作為證據可信」的 metadata，正好也是「讓人曝險」的那些 metadata。</text>
 <text class="t-main bd" x="44" y="99">一張帶時間戳記與 GPS 座標的照片，是「某個違規在特定時間地點發生過」的有力證據。</text>
 <text class="t-main bd" x="44" y="116">同一組 EXIF 資料，在被扣押的裝置上，可以定位你以及畫面裡任何可辨識的人。</text>
 <text class="t-main bd" x="44" y="133">這件事沒有通用的正確答案，只有逐項要做的決定。</text>
-<rect class="card-ok" x="28" y="160" width="453" height="285" rx="8"/>
+<rect class="card-ok" x="28" y="160" width="433" height="285" rx="8"/>
 <text class="t-main h2" x="42" y="184">保留 metadata</text>
 <text class="t-mute sm" x="42" y="216">判準：紀錄的價值在於可驗證，而畫面中的人不會因此受害</text>
 <text class="t-mute sm" x="42" y="234">適用的畫面</text>
@@ -72,26 +72,27 @@
 <text class="t-main bd" x="42" y="363">可以被第三方查證。</text>
 <text class="t-main bd" x="42" y="380">拿掉之後，這張照片</text>
 <text class="t-main bd" x="42" y="397">只剩下你的證詞。</text>
-<rect class="card-no" x="499" y="160" width="453" height="285" rx="8"/>
-<text class="t-main h2" x="513" y="184">去除或避免 metadata</text>
-<text class="t-mute sm" x="513" y="216">判準：紀錄可能指認出會因此陷入危險的人</text>
-<text class="t-mute sm" x="513" y="234">適用的畫面</text>
-<text class="t-main bd" x="513" y="252">選務人員</text>
-<text class="t-main bd" x="513" y="269">面露恐懼的投票人</text>
-<text class="t-main bd" x="513" y="286">在不友善環境中的同行觀察員</text>
-<text class="t-main bd" x="513" y="303">任何可辨識的一般投票人</text>
-<text class="t-mute sm" x="513" y="328">怎麼做</text>
-<text class="t-main bd" x="513" y="346">拍攝時就讓臉孔與</text>
-<text class="t-main bd" x="513" y="363">可辨識細節不入鏡。</text>
-<text class="t-main bd" x="513" y="380">影像離開裝置前先清除 EXIF，</text>
-<text class="t-main bd" x="513" y="397">在證明不帶 metadata 之前，</text>
-<text class="t-main bd" x="513" y="414">把每個檔案都當成帶著。</text>
-<rect class="card" x="28" y="459" width="924" height="118" rx="8"/>
+<rect class="card-no" x="479" y="160" width="433" height="285" rx="8"/>
+<text class="t-main h2" x="493" y="184">去除或避免 metadata</text>
+<text class="t-mute sm" x="493" y="216">判準：紀錄可能指認出會因此陷入危險的人</text>
+<text class="t-mute sm" x="493" y="234">適用的畫面</text>
+<text class="t-main bd" x="493" y="252">選務人員</text>
+<text class="t-main bd" x="493" y="269">面露恐懼的投票人</text>
+<text class="t-main bd" x="493" y="286">在不友善環境中的同行觀察員</text>
+<text class="t-main bd" x="493" y="303">任何可辨識的一般投票人</text>
+<text class="t-mute sm" x="493" y="328">怎麼做</text>
+<text class="t-main bd" x="493" y="346">拍攝時就讓臉孔與</text>
+<text class="t-main bd" x="493" y="363">可辨識細節不入鏡。</text>
+<text class="t-main bd" x="493" y="380">影像離開裝置前先清除 EXIF，</text>
+<text class="t-main bd" x="493" y="397">在證明不帶 metadata 之前，</text>
+<text class="t-main bd" x="493" y="414">把每個檔案都當成帶著。</text>
+<rect class="card" x="28" y="459" width="884" height="135" rx="8"/>
 <text class="t-main h2" x="44" y="487">現場記錄的四項實務</text>
-<text class="t-mute bd" x="44" y="513">拍文件與環境，不拍臉，除非那張臉本身就是違規事實，而且當事人同意或那是公職人員執行職務。各地對拍攝投票人的法規差異很大，舉起相機之前先弄清楚。</text>
-<text class="t-mute bd" x="44" y="530">保留一份離線、可驗證的備份。本機的加密副本在網路允許時再同步給任務團隊，扣押與斷網兩種情況都撐得住。</text>
-<text class="t-mute bd" x="44" y="547">用結構化的工具記票數與事件。任務發的表單或共用的加密文件，能讓紀錄格式一致。</text>
-<text class="t-mute bd" x="44" y="564">不要把身分寫進紀錄裡。名字不是關鍵資訊時，用角色代稱，例如「主任管理員」、「第 4 站觀察員」。</text>
-<text class="t-foot" x="28" y="593">回報通道本身就是敏感的。誰在什麼時候跟誰講話，這種 metadata 即使在內容加密的情況下，仍然能描繪出整個觀察協作圈。</text>
-<text class="t-foot" x="28" y="615">只存在對手申請得到的雲端裡的紀錄很脆弱。離線備份跟扣押應對是同一件事的兩面。</text>
+<text class="t-mute bd" x="44" y="513">拍文件與環境，不拍臉，除非那張臉本身就是違規事實，而且當事人同意或那是公職人員執行職務。各地對拍攝投票人的法規差異很大，舉起相機之前先弄</text>
+<text class="t-mute bd" x="44" y="530">清楚。</text>
+<text class="t-mute bd" x="44" y="547">保留一份離線、可驗證的備份。本機的加密副本在網路允許時再同步給任務團隊，扣押與斷網兩種情況都撐得住。</text>
+<text class="t-mute bd" x="44" y="564">用結構化的工具記票數與事件。任務發的表單或共用的加密文件，能讓紀錄格式一致。</text>
+<text class="t-mute bd" x="44" y="581">不要把身分寫進紀錄裡。名字不是關鍵資訊時，用角色代稱，例如「主任管理員」、「第 4 站觀察員」。</text>
+<text class="t-foot" x="28" y="610">回報通道本身就是敏感的。誰在什麼時候跟誰講話，這種 metadata 即使在內容加密的情況下，仍然能描繪出整個觀察協作圈。</text>
+<text class="t-foot" x="28" y="632">只存在對手申請得到的雲端裡的紀錄很脆弱。離線備份跟扣押應對是同一件事的兩面。</text>
 </svg>

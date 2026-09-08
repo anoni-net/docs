@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 571" width="980" height="571" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 571" width="940" height="571" role="img" aria-labelledby="title desc">
 <title id="title">三層防護各自對付一種對手，做完第一層就擋掉大部分的損失</title>
 <desc id="desc">三層由深到淺的橫條，代表日常數位準備的三個層次，每一層對應一種不同的對手。第一層對付詐騙與帳號入侵，項目是密碼管理器、兩步驟驗證、系統與瀏覽器更新、對急著要你處理的訊息換一個管道確認，大約一小時可以做完，從 email 開始，接著是網銀與 LINE。第二層對付商業資料收集，項目是手機權限與廣告識別碼、全碟加密與開機密碼、日常通訊改用端對端加密、備份、帳號盤點，花的是幾個晚上。第三層對付針對性調查，只在特定情境才需要，觸發條件見文章的「什麼時候該把標準拉高」一節。下方的紅框列出六項被高估的做法：VPN、無痕模式、定期換密碼、換手機號碼、貼鏡頭貼紙、刪掉 app，各自有明確的用途，只是常被誤當成防護主力。</desc>
 <style>
@@ -53,46 +53,44 @@
   }
 </style>
 
-<text class="t-mute sm" x="238" y="40">主要對付的對手</text>
-<text class="t-mute sm" x="458" y="40">做什麼</text>
-<text class="t-mute sm" x="828" y="40">要花多久</text>
-<path class="rule" d="M28 50 H952"/>
-<rect class="card-c3" x="28" y="62" width="924" height="100" rx="8"/>
+<text class="t-mute sm" x="218" y="40">主要對付的對手</text>
+<text class="t-mute sm" x="428" y="40">做什麼</text>
+<text class="t-mute sm" x="728" y="40">要花多久</text>
+<path class="rule" d="M28 50 H912"/>
+<rect class="card-c3" x="28" y="62" width="884" height="100" rx="8"/>
 <text class="t-main h2" x="44" y="88">第一層</text>
-<text class="t-main bd" x="238" y="88">詐騙與帳號入侵</text>
-<text class="t-main bd" x="238" y="105">以自動化撒網為主，</text>
-<text class="t-main bd" x="238" y="122">實際造成金錢損失的是這一種</text>
-<text class="t-main bd" x="458" y="88">密碼管理器，每個網站不同密碼</text>
-<text class="t-main bd" x="458" y="105">兩步驟驗證，能用強的就用強的</text>
-<text class="t-main bd" x="458" y="122">系統與瀏覽器保持更新</text>
-<text class="t-main bd" x="458" y="139">對急著要你處理的訊息，換一個管道確認</text>
-<text class="t-main bd" x="828" y="88">約一小時</text>
-<text class="t-main bd" x="828" y="105">從 email 開始，</text>
-<text class="t-main bd" x="828" y="122">接著是網銀與 LINE</text>
-<rect class="card-c1" x="28" y="172" width="924" height="117" rx="8"/>
+<text class="t-main bd" x="218" y="88">詐騙與帳號入侵</text>
+<text class="t-main bd" x="218" y="105">以自動化撒網為主，實際造成金錢</text>
+<text class="t-main bd" x="218" y="122">損失的是這一種</text>
+<text class="t-main bd" x="428" y="88">密碼管理器，每個網站不同密碼</text>
+<text class="t-main bd" x="428" y="105">兩步驟驗證，能用強的就用強的</text>
+<text class="t-main bd" x="428" y="122">系統與瀏覽器保持更新</text>
+<text class="t-main bd" x="428" y="139">對急著要你處理的訊息，換一個管道確認</text>
+<text class="t-main bd" x="728" y="88">約一小時</text>
+<text class="t-main bd" x="728" y="105">從 email 開始，接著是網銀</text>
+<text class="t-main bd" x="728" y="122">與 LINE</text>
+<rect class="card-c1" x="28" y="172" width="884" height="117" rx="8"/>
 <text class="t-main h2" x="44" y="198">第二層</text>
-<text class="t-main bd" x="238" y="198">商業資料收集</text>
-<text class="t-main bd" x="238" y="215">平台、廣告商、資料掮客</text>
-<text class="t-main bd" x="238" y="232">持續在做，不針對你個人</text>
-<text class="t-mute bd" x="458" y="198">手機權限與廣告識別碼</text>
-<text class="t-mute bd" x="458" y="215">全碟加密與開機密碼</text>
-<text class="t-mute bd" x="458" y="232">日常通訊改用端對端加密</text>
-<text class="t-mute bd" x="458" y="249">備份，以及還原得回來的驗證</text>
-<text class="t-mute bd" x="458" y="266">帳號盤點</text>
-<text class="t-mute bd" x="828" y="198">幾個晚上</text>
-<text class="t-mute bd" x="828" y="215">一次做一項，</text>
-<text class="t-mute bd" x="828" y="232">不必一口氣做完</text>
-<rect class="card-n" x="28" y="299" width="924" height="83" rx="8"/>
+<text class="t-main bd" x="218" y="198">商業資料收集</text>
+<text class="t-main bd" x="218" y="215">平台、廣告商、資料掮客持續在做</text>
+<text class="t-main bd" x="218" y="232">，不針對你個人</text>
+<text class="t-mute bd" x="428" y="198">手機權限與廣告識別碼</text>
+<text class="t-mute bd" x="428" y="215">全碟加密與開機密碼</text>
+<text class="t-mute bd" x="428" y="232">日常通訊改用端對端加密</text>
+<text class="t-mute bd" x="428" y="249">備份，以及還原得回來的驗證</text>
+<text class="t-mute bd" x="428" y="266">帳號盤點</text>
+<text class="t-mute bd" x="728" y="198">幾個晚上</text>
+<text class="t-mute bd" x="728" y="215">一次做一項，不必一口氣做完</text>
+<rect class="card-n" x="28" y="299" width="884" height="83" rx="8"/>
 <text class="t-main h2" x="44" y="325">第三層</text>
-<text class="t-main bd" x="238" y="325">針對性調查</text>
-<text class="t-main bd" x="238" y="342">具備法律程序或技術資源，</text>
-<text class="t-main bd" x="238" y="359">多數人不在名單上</text>
-<text class="t-mute bd" x="458" y="325">觸發條件見文章的</text>
-<text class="t-mute bd" x="458" y="342">「什麼時候該把標準拉高」</text>
-<text class="t-mute bd" x="828" y="325">視情境</text>
-<text class="t-mute bd" x="828" y="342">換身分與換裝置改變的是</text>
-<text class="t-mute bd" x="828" y="359">幾個紀錄能不能被串起來</text>
-<rect class="card-no" x="28" y="402" width="924" height="101" rx="8"/>
+<text class="t-main bd" x="218" y="325">針對性調查</text>
+<text class="t-main bd" x="218" y="342">具備法律程序或技術資源，多數人</text>
+<text class="t-main bd" x="218" y="359">不在名單上</text>
+<text class="t-mute bd" x="428" y="325">觸發條件見文章的「什麼時候該把標準拉高」</text>
+<text class="t-mute bd" x="728" y="325">視情境</text>
+<text class="t-mute bd" x="728" y="342">換身分與換裝置改變的是幾個</text>
+<text class="t-mute bd" x="728" y="359">紀錄能不能被串起來</text>
+<rect class="card-no" x="28" y="402" width="884" height="101" rx="8"/>
 <text class="t-main h2" x="44" y="430">被高估的做法：各自有用途，常被誤當成防護主力</text>
 <text class="t-mute bd" x="44" y="456">VPN 換掉誰看得到你的連線。無痕模式清掉本機紀錄，平台與 ISP 照樣認得你。定期換密碼已被 NIST 明文取消要求。</text>
 <text class="t-mute bd" x="44" y="473">換手機號碼要先解綁舊帳號，舊號碼會被回收再配發。貼鏡頭貼紙擋鏡頭有效，多數人擔心的是麥克風。</text>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 440" width="940" height="440" role="img" aria-labelledby="title desc">
 <title id="title">動員前、行動現場、行動之後，三個階段各有各的準備</title>
 <desc id="desc">三個並排的階段，用箭頭串起來，底下有一條橫幅代表貫穿全程的跨組織協作。動員前是風險最低、時間最多的階段，要做的是通訊群組的設計與隔離、雲端文件先撤到 Cryptpad、密碼管理器與帳號清單、個人帳號的隱私審計，以及一次性手機的取捨。行動現場要做的是出門前的裝置鎖定設定、現場拍照與錄影的判斷、選擇 Signal 或離線 mesh，以及緊急聯絡人與失聯流程。行動之後要處理的是刪除證據前的合規考量、媒體曝光時的身分管理，以及取得法律支援的管道。底下的橫幅是跨組織協作，貫穿三個階段，包含資訊最小化原則、共筆與檔案交換工具的選擇、群組命名與訊息政策。</desc>
 <style>
@@ -53,7 +53,7 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="277.333" height="250" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="264" height="250" rx="8"/>
 <text class="t-main h2" x="42" y="52">動員前準備</text>
 <text class="t-mute sm" x="42" y="84">風險最低，時間最多</text>
 <text class="t-main bd" x="42" y="102">通訊群組的設計與隔離</text>
@@ -65,32 +65,32 @@
 <text class="t-main bd" x="42" y="213">多數人卡關的原因，</text>
 <text class="t-main bd" x="42" y="230">是把 30 分鐘能做完的事</text>
 <text class="t-main bd" x="42" y="247">拖到當天才想起來</text>
-<rect class="card-w1" x="351.333" y="28" width="277.333" height="250" rx="8"/>
-<text class="t-main h2" x="365.333" y="52">行動現場</text>
-<text class="t-mute sm" x="365.333" y="84">來不及做新設定的階段</text>
-<text class="t-main bd" x="365.333" y="102">出門前的裝置鎖定設定</text>
-<text class="t-main bd" x="365.333" y="119">現場拍照與錄影的判斷</text>
-<text class="t-main bd" x="365.333" y="136">Signal 與離線 mesh 的選擇</text>
-<text class="t-main bd" x="365.333" y="153">緊急聯絡人與失聯流程</text>
-<text class="t-mute sm" x="365.333" y="178">為什麼在這裡</text>
-<text class="t-main bd" x="365.333" y="196">被臨檢時手機被翻看，</text>
-<text class="t-main bd" x="365.333" y="213">群組對話與照片庫</text>
-<text class="t-main bd" x="365.333" y="230">會一起暴露</text>
-<rect class="card-c2" x="674.667" y="28" width="277.333" height="250" rx="8"/>
-<text class="t-main h2" x="688.667" y="52">行動之後</text>
-<text class="t-mute sm" x="688.667" y="84">風險不會跟著散場結束</text>
-<text class="t-main bd" x="688.667" y="102">刪除「證據」前的合規考量</text>
-<text class="t-main bd" x="688.667" y="119">媒體曝光時的身分管理</text>
-<text class="t-main bd" x="688.667" y="136">取得法律支援的管道</text>
-<text class="t-mute sm" x="688.667" y="161">為什麼在這裡</text>
-<text class="t-main bd" x="688.667" y="179">抗爭結束後被告時，</text>
-<text class="t-main bd" x="688.667" y="196">公司會用內部 IT 紀錄、</text>
-<text class="t-main bd" x="688.667" y="213">門禁卡與存取紀錄追究</text>
-<path class="arrow" d="M313.333 153 H336.333"/>
-<path class="arrow-h" d="M343.333 153 L335.333 147.5 L335.333 158.5 Z"/>
-<path class="arrow" d="M636.667 153 H659.667"/>
-<path class="arrow-h" d="M666.667 153 L658.667 147.5 L658.667 158.5 Z"/>
-<rect class="card-n" x="28" y="292" width="924" height="84" rx="8"/>
+<rect class="card-w1" x="338" y="28" width="264" height="250" rx="8"/>
+<text class="t-main h2" x="352" y="52">行動現場</text>
+<text class="t-mute sm" x="352" y="84">來不及做新設定的階段</text>
+<text class="t-main bd" x="352" y="102">出門前的裝置鎖定設定</text>
+<text class="t-main bd" x="352" y="119">現場拍照與錄影的判斷</text>
+<text class="t-main bd" x="352" y="136">Signal 與離線 mesh 的選擇</text>
+<text class="t-main bd" x="352" y="153">緊急聯絡人與失聯流程</text>
+<text class="t-mute sm" x="352" y="178">為什麼在這裡</text>
+<text class="t-main bd" x="352" y="196">被臨檢時手機被翻看，</text>
+<text class="t-main bd" x="352" y="213">群組對話與照片庫</text>
+<text class="t-main bd" x="352" y="230">會一起暴露</text>
+<rect class="card-c2" x="648" y="28" width="264" height="250" rx="8"/>
+<text class="t-main h2" x="662" y="52">行動之後</text>
+<text class="t-mute sm" x="662" y="84">風險不會跟著散場結束</text>
+<text class="t-main bd" x="662" y="102">刪除「證據」前的合規考量</text>
+<text class="t-main bd" x="662" y="119">媒體曝光時的身分管理</text>
+<text class="t-main bd" x="662" y="136">取得法律支援的管道</text>
+<text class="t-mute sm" x="662" y="161">為什麼在這裡</text>
+<text class="t-main bd" x="662" y="179">抗爭結束後被告時，</text>
+<text class="t-main bd" x="662" y="196">公司會用內部 IT 紀錄、</text>
+<text class="t-main bd" x="662" y="213">門禁卡與存取紀錄追究</text>
+<path class="arrow" d="M300 153 H323"/>
+<path class="arrow-h" d="M330 153 L322 147.5 L322 158.5 Z"/>
+<path class="arrow" d="M610 153 H633"/>
+<path class="arrow-h" d="M640 153 L632 147.5 L632 158.5 Z"/>
+<rect class="card-n" x="28" y="292" width="884" height="84" rx="8"/>
 <text class="t-main h2" x="44" y="320">跨組織協作：三個階段都適用</text>
 <text class="t-main bd" x="44" y="346">資訊最小化原則。共筆與檔案交換工具的選擇。群組命名與訊息政策。</text>
 <text class="t-main bd" x="44" y="363">跨組織協調的共筆放在一般雲端硬碟，後來被截圖外流到對立陣營，這是實際發生過的情況。</text>

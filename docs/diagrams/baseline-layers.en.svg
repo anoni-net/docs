@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 588" width="1180" height="588" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 741" width="940" height="741" role="img" aria-labelledby="title desc">
 <title id="title">Three layers, each aimed at a different adversary</title>
 <desc id="desc">Three stacked bands running from dark to light, representing the three layers of everyday digital preparation, each aimed at a different adversary. Layer one addresses fraud and account takeover, the kind that actually costs people money: a password manager with a different password per site, two-factor authentication using the strongest method available, keeping the system and browser updated, and switching channel to confirm any message that pushes you to act quickly. It takes about an hour, starting with email, then banking and messaging accounts. Layer two addresses commercial data collection by platforms, advertisers and data brokers: phone permissions and the advertising identifier, full-disk encryption with a boot password, end-to-end encrypted messaging, backups that you have tested restoring, and an account inventory. Layer three addresses targeted investigation and is only needed in specific situations. The red box below lists six overrated measures: VPNs, private browsing, scheduled password changes, changing your phone number, camera stickers and deleting apps, each of which has a real use but is often mistaken for the main line of defence.</desc>
 <style>
@@ -53,54 +53,65 @@
   }
 </style>
 
-<text class="t-mute sm" x="258" y="40">ADVERSARY IT ADDRESSES</text>
-<text class="t-mute sm" x="508" y="40">WHAT TO DO</text>
-<text class="t-mute sm" x="958" y="40">HOW LONG</text>
-<path class="rule" d="M28 50 H1152"/>
-<rect class="card-c3" x="28" y="62" width="1124" height="100" rx="8"/>
+<text class="t-mute sm" x="218" y="40">ADVERSARY IT ADDRESSES</text>
+<text class="t-mute sm" x="428" y="40">WHAT TO DO</text>
+<text class="t-mute sm" x="728" y="40">HOW LONG</text>
+<path class="rule" d="M28 50 H912"/>
+<rect class="card-c3" x="28" y="62" width="884" height="151" rx="8"/>
 <text class="t-main h2" x="44" y="88">Layer 1</text>
-<text class="t-main bd" x="258" y="88">Fraud and account takeover</text>
-<text class="t-main bd" x="258" y="105">Mostly automated and untargeted.</text>
-<text class="t-main bd" x="258" y="122">This is the one that costs</text>
-<text class="t-main bd" x="258" y="139">people money.</text>
-<text class="t-main bd" x="508" y="88">A password manager, a different password per site</text>
-<text class="t-main bd" x="508" y="105">Two-factor authentication, the strongest method available</text>
-<text class="t-main bd" x="508" y="122">Keep the system and browser updated</text>
-<text class="t-main bd" x="508" y="139">Switch channel to confirm any message that rushes you</text>
-<text class="t-main bd" x="958" y="88">About an hour</text>
-<text class="t-main bd" x="958" y="105">Start with email, then</text>
-<text class="t-main bd" x="958" y="122">banking and messaging</text>
-<rect class="card-c1" x="28" y="172" width="1124" height="117" rx="8"/>
-<text class="t-main h2" x="44" y="198">Layer 2</text>
-<text class="t-main bd" x="258" y="198">Commercial data collection</text>
-<text class="t-main bd" x="258" y="215">Platforms, advertisers and data</text>
-<text class="t-main bd" x="258" y="232">brokers, running continuously and</text>
-<text class="t-main bd" x="258" y="249">not aimed at you personally.</text>
-<text class="t-mute bd" x="508" y="198">Phone permissions and the advertising identifier</text>
-<text class="t-mute bd" x="508" y="215">Full-disk encryption and a boot password</text>
-<text class="t-mute bd" x="508" y="232">End-to-end encryption for everyday messaging</text>
-<text class="t-mute bd" x="508" y="249">Backups, and a restore you have actually tested</text>
-<text class="t-mute bd" x="508" y="266">An account inventory</text>
-<text class="t-mute bd" x="958" y="198">A few evenings</text>
-<text class="t-mute bd" x="958" y="215">One item at a time, no need</text>
-<text class="t-mute bd" x="958" y="232">to finish it in one sitting</text>
-<rect class="card-n" x="28" y="299" width="1124" height="100" rx="8"/>
-<text class="t-main h2" x="44" y="325">Layer 3</text>
-<text class="t-main bd" x="258" y="325">Targeted investigation</text>
-<text class="t-main bd" x="258" y="342">Backed by legal process or</text>
-<text class="t-main bd" x="258" y="359">technical resources. Most people</text>
-<text class="t-main bd" x="258" y="376">are not on that list.</text>
-<text class="t-mute bd" x="508" y="325">See the section on when to raise your standard</text>
-<text class="t-mute bd" x="508" y="342">for what triggers this layer</text>
-<text class="t-mute bd" x="958" y="325">Depends</text>
-<text class="t-mute bd" x="958" y="342">Changing identity or device</text>
-<text class="t-mute bd" x="958" y="359">changes which records can be</text>
-<text class="t-mute bd" x="958" y="376">linked, nothing more</text>
-<rect class="card-no" x="28" y="419" width="1124" height="101" rx="8"/>
-<text class="t-main h2" x="44" y="447">Overrated measures: each has a use, none is the main line of defence</text>
-<text class="t-mute bd" x="44" y="473">A VPN changes who can see your connection. Private browsing clears local traces while platforms and your ISP still recognise you.</text>
-<text class="t-mute bd" x="44" y="490">NIST no longer asks for scheduled password changes. A recycled phone number gets reassigned, so unlink the old accounts first.</text>
-<text class="t-mute bd" x="44" y="507">A camera sticker works on the camera, while most people are worried about the microphone. Deleting an app stops future collection only.</text>
-<text class="t-foot" x="28" y="540">Put all your effort into the third adversary and the losses from the second still happen. The reverse holds too.</text>
-<text class="t-foot" x="28" y="562">You do not have to finish all three at once. Layer one alone removes most of the loss from account takeover and fraud.</text>
+<text class="t-main bd" x="218" y="88">Fraud and account takeover</text>
+<text class="t-main bd" x="218" y="105">Mostly automated and</text>
+<text class="t-main bd" x="218" y="122">untargeted. This is the one</text>
+<text class="t-main bd" x="218" y="139">that costs people money.</text>
+<text class="t-main bd" x="428" y="88">A password manager, a different password</text>
+<text class="t-main bd" x="428" y="105">per site</text>
+<text class="t-main bd" x="428" y="122">Two-factor authentication, the strongest</text>
+<text class="t-main bd" x="428" y="139">method available</text>
+<text class="t-main bd" x="428" y="156">Keep the system and browser updated</text>
+<text class="t-main bd" x="428" y="173">Switch channel to confirm any message that</text>
+<text class="t-main bd" x="428" y="190">rushes you</text>
+<text class="t-main bd" x="728" y="88">About an hour</text>
+<text class="t-main bd" x="728" y="105">Start with email, then</text>
+<text class="t-main bd" x="728" y="122">banking and messaging</text>
+<rect class="card-c1" x="28" y="223" width="884" height="168" rx="8"/>
+<text class="t-main h2" x="44" y="249">Layer 2</text>
+<text class="t-main bd" x="218" y="249">Commercial data collection</text>
+<text class="t-main bd" x="218" y="266">Platforms, advertisers and</text>
+<text class="t-main bd" x="218" y="283">data brokers, running</text>
+<text class="t-main bd" x="218" y="300">continuously and not aimed at</text>
+<text class="t-main bd" x="218" y="317">you personally.</text>
+<text class="t-mute bd" x="428" y="249">Phone permissions and the advertising</text>
+<text class="t-mute bd" x="428" y="266">identifier</text>
+<text class="t-mute bd" x="428" y="283">Full-disk encryption and a boot password</text>
+<text class="t-mute bd" x="428" y="300">End-to-end encryption for everyday</text>
+<text class="t-mute bd" x="428" y="317">messaging</text>
+<text class="t-mute bd" x="428" y="334">Backups, and a restore you have actually</text>
+<text class="t-mute bd" x="428" y="351">tested</text>
+<text class="t-mute bd" x="428" y="368">An account inventory</text>
+<text class="t-mute bd" x="728" y="249">A few evenings</text>
+<text class="t-mute bd" x="728" y="266">One item at a time, no</text>
+<text class="t-mute bd" x="728" y="283">need to finish it in one</text>
+<text class="t-mute bd" x="728" y="300">sitting</text>
+<rect class="card-n" x="28" y="401" width="884" height="117" rx="8"/>
+<text class="t-main h2" x="44" y="427">Layer 3</text>
+<text class="t-main bd" x="218" y="427">Targeted investigation</text>
+<text class="t-main bd" x="218" y="444">Backed by legal process or</text>
+<text class="t-main bd" x="218" y="461">technical resources. Most</text>
+<text class="t-main bd" x="218" y="478">people are not on that list.</text>
+<text class="t-mute bd" x="428" y="427">See the section on when to raise your</text>
+<text class="t-mute bd" x="428" y="444">standard for what triggers this layer</text>
+<text class="t-mute bd" x="728" y="427">Depends</text>
+<text class="t-mute bd" x="728" y="444">Changing identity or</text>
+<text class="t-mute bd" x="728" y="461">device changes which</text>
+<text class="t-mute bd" x="728" y="478">records can be linked,</text>
+<text class="t-mute bd" x="728" y="495">nothing more</text>
+<rect class="card-no" x="28" y="538" width="884" height="135" rx="8"/>
+<text class="t-main h2" x="44" y="566">Overrated measures: each has a use, none is the main line of defence</text>
+<text class="t-mute bd" x="44" y="592">A VPN changes who can see your connection. Private browsing clears local traces while platforms and your ISP still recognise</text>
+<text class="t-mute bd" x="44" y="609">you.</text>
+<text class="t-mute bd" x="44" y="626">NIST no longer asks for scheduled password changes. A recycled phone number gets reassigned, so unlink the old accounts first.</text>
+<text class="t-mute bd" x="44" y="643">A camera sticker works on the camera, while most people are worried about the microphone. Deleting an app stops future</text>
+<text class="t-mute bd" x="44" y="660">collection only.</text>
+<text class="t-foot" x="28" y="693">Put all your effort into the third adversary and the losses from the second still happen. The reverse holds too.</text>
+<text class="t-foot" x="28" y="715">You do not have to finish all three at once. Layer one alone removes most of the loss from account takeover and fraud.</text>
 </svg>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 574" width="980" height="574" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 574" width="940" height="574" role="img" aria-labelledby="title desc">
 <title id="title">科技滥用走的是四类一般消费性功能</title>
 <desc id="desc">四个并排的方框，列出亲密关系中的科技滥用最常走的四类渠道，全部都是为家庭与伴侣设计的一般功能。第一类是账号存取与共用方案，包含对方知道或猜得到的密码、共用的 Apple ID 或 Google 账号、Apple 家人共享与运营商家庭套餐、Google Family Link，以及密码重设信寄到共用号码或共用信箱这条救援渠道。第二类是位置追踪，包含查找与 Google 地图的位置共享、AirTag 这类蓝牙追踪器、车联网 App、共用日历与照片的地理标记。第三类是设备上的追踪类 App，在对方短暂取得手机时安装，暗中转发消息、通话记录、照片、浏览行为与位置，而且可以完全不显示图标。第四类是智能家居与共用设备，包含智能锁、摄像头、门铃、温控、语音助理与共用的流媒体账号。下方的蓝框指出最可靠的信号往往是对方知道了他不该知道的事，并提醒离开受暴关系的前后是最危险的时期。</desc>
 <style>
@@ -53,10 +53,10 @@
   }
 </style>
 
-<rect class="card-no" x="28" y="28" width="924" height="52" rx="8"/>
+<rect class="card-no" x="28" y="28" width="884" height="52" rx="8"/>
 <text class="t-main h2" x="44" y="58">共同点</text>
 <text class="t-main bd" x="176" y="58">这些手法多半不需要特殊技术。它们用的是为家庭与伴侣设计的一般消费性功能，反过来对付家里的某一个人。</text>
-<rect class="card-w1" x="28" y="94" width="454" height="152" rx="8"/>
+<rect class="card-w1" x="28" y="94" width="434" height="152" rx="8"/>
 <text class="t-main h2" x="44" y="122">账号存取与共用方案</text>
 <text class="t-mute bd" x="44" y="146">对方已经知道或猜得出的信箱、手机解锁与网银密码</text>
 <text class="t-mute bd" x="44" y="163">共用的 Apple ID 或 Google 账号，消息、照片、浏览记录</text>
@@ -64,29 +64,29 @@
 <text class="t-mute bd" x="44" y="197">Apple 家人共享与运营商家庭套餐，暴露购买与安装记录</text>
 <text class="t-mute bd" x="44" y="214">Google Family Link 用在成年人身上就成了监控工具</text>
 <text class="t-mute bd" x="44" y="231">密码重设信寄到共用号码或共用信箱，改了密码也拿得回去</text>
-<rect class="card-w1" x="498" y="94" width="454" height="152" rx="8"/>
-<text class="t-main h2" x="514" y="122">位置追踪</text>
-<text class="t-mute bd" x="514" y="146">查找（Find My）与 Google 地图的位置共享，一旦开启</text>
-<text class="t-mute bd" x="514" y="163">就持续下去，而且不会再有任何通知</text>
-<text class="t-mute bd" x="514" y="180">AirTag、Tile 这类蓝牙追踪器放进包包、车内或孩子的物品</text>
-<text class="t-mute bd" x="514" y="197">车联网 App 看得到车辆实时位置与行程记录</text>
-<text class="t-mute bd" x="514" y="214">共用日历透露你接下来会在哪里</text>
-<text class="t-mute bd" x="514" y="231">照片同步时带着 GPS 坐标，足以定位新住处</text>
-<rect class="card-w1" x="28" y="260" width="454" height="135" rx="8"/>
+<rect class="card-w1" x="478" y="94" width="434" height="152" rx="8"/>
+<text class="t-main h2" x="494" y="122">位置追踪</text>
+<text class="t-mute bd" x="494" y="146">查找（Find My）与 Google 地图的位置共享，一旦开启</text>
+<text class="t-mute bd" x="494" y="163">就持续下去，而且不会再有任何通知</text>
+<text class="t-mute bd" x="494" y="180">AirTag、Tile 这类蓝牙追踪器放进包包、车内或孩子的物品</text>
+<text class="t-mute bd" x="494" y="197">车联网 App 看得到车辆实时位置与行程记录</text>
+<text class="t-mute bd" x="494" y="214">共用日历透露你接下来会在哪里</text>
+<text class="t-mute bd" x="494" y="231">照片同步时带着 GPS 坐标，足以定位新住处</text>
+<rect class="card-w1" x="28" y="260" width="434" height="135" rx="8"/>
 <text class="t-main h2" x="44" y="288">设备上的追踪类 App</text>
 <text class="t-mute bd" x="44" y="312">在对方短暂取得你的手机时安装，之后暗中转发消息、</text>
 <text class="t-mute bd" x="44" y="329">通话记录、照片、浏览行为与位置</text>
 <text class="t-mute bd" x="44" y="346">可以完全不显示图标</text>
 <text class="t-mute bd" x="44" y="363">电池比平常快没电、待机时机身发热、无法解释的流量用量</text>
 <text class="t-mute bd" x="44" y="380">都只是迹象，不是确定的证据</text>
-<rect class="card-w1" x="498" y="260" width="454" height="135" rx="8"/>
-<text class="t-main h2" x="514" y="288">智能家居与共用设备</text>
-<text class="t-mute bd" x="514" y="312">智能锁、摄像头、门铃与温控，掌握控制账号的人看得到</text>
-<text class="t-mute bd" x="514" y="329">画面、知道门什么时候开，也可以把你锁在外面</text>
-<text class="t-mute bd" x="514" y="346">分居之后这些设备经常还连在对方的账号上</text>
-<text class="t-mute bd" x="514" y="363">共用的语音助理暴露例行事项与提醒</text>
-<text class="t-mute bd" x="514" y="380">共用的流媒体与定位社交 App 泄漏日常作息</text>
-<rect class="card-c1" x="28" y="409" width="924" height="101" rx="8"/>
+<rect class="card-w1" x="478" y="260" width="434" height="135" rx="8"/>
+<text class="t-main h2" x="494" y="288">智能家居与共用设备</text>
+<text class="t-mute bd" x="494" y="312">智能锁、摄像头、门铃与温控，掌握控制账号的人看得到</text>
+<text class="t-mute bd" x="494" y="329">画面、知道门什么时候开，也可以把你锁在外面</text>
+<text class="t-mute bd" x="494" y="346">分居之后这些设备经常还连在对方的账号上</text>
+<text class="t-mute bd" x="494" y="363">共用的语音助理暴露例行事项与提醒</text>
+<text class="t-mute bd" x="494" y="380">共用的流媒体与定位社交 App 泄漏日常作息</text>
+<rect class="card-c1" x="28" y="409" width="884" height="101" rx="8"/>
 <text class="t-main h2" x="44" y="437">最可靠的信号</text>
 <text class="t-main bd" x="44" y="463">上面每一条的迹象都可能有别的解释。实务上最可靠的信号往往是对方知道了他不该知道的事。</text>
 <text class="t-main bd" x="44" y="480">离开受暴关系的前后是最危险的时期。一连串改密码、被删掉的追踪 App、包里的新手机，读起来都是「这个人要走了」。</text>

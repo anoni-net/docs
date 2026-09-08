@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 697" width="980" height="697" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 695" width="940" height="695" role="img" aria-labelledby="title desc">
 <title id="title">新加坡與馬來西亞各有一組具名的法條，實名底層讓換假名失效</title>
 <desc id="desc">左右兩欄分別列出新加坡與馬來西亞管到網路言論的法條。新加坡有 POFMA、FICA、誹謗與藐視法庭，以及《公共秩序法》對集會的寬鬆定義。馬來西亞有 1998 年通訊與多媒體法第 233 條、1948 年煽動法、SOSMA、1966 年社團法，以及各州的宗教執法。下方的橫幅指出兩國共同的實名底層：新加坡的 Singpass、馬來西亞的 MyKad 與 MyDigital ID，加上兩國都強制 SIM 卡實名，帳號、裝置與付款方式往往早就指向法律上的本名。最下方的橫幅說明能見度與組織程度會放大風險，低觸及的貼文、爆紅的貼文與有協調的行動，三者的風險層級不同。</desc>
 <style>
@@ -53,50 +53,50 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="453" height="392" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="433" height="390" rx="8"/>
 <text class="t-main h2" x="44" y="56">新加坡</text>
 <text class="t-mute sm" x="44" y="78">以下是要對照檢查的法條，並未窮盡所有可能適用的法律</text>
 <text class="t-main bd" x="44" y="102">POFMA（防止網路假訊息和網路操縱法令，2019）</text>
-<text class="t-mute sm" x="44" y="121">部長可對「不實事實陳述」發出更正或下架指示。</text>
-<text class="t-mute sm" x="44" y="138">多數發文者遇到的是更正通知或內容被移除。</text>
+<text class="t-mute sm" x="44" y="121">部長可對「不實事實陳述」發出更正或下架指示。多數發文者遇到的是更正通</text>
+<text class="t-mute sm" x="44" y="138">知或內容被移除。</text>
 <text class="t-mute sm" x="44" y="155">2026 年首度出現刑事指控，無視指示本身就構成犯罪。</text>
 <text class="t-main bd" x="44" y="180">FICA（防止外來干預（對應措施）法令，2021）</text>
-<text class="t-mute sm" x="44" y="199">針對有組織或有外國連結的政治行為者，</text>
-<text class="t-mute sm" x="44" y="216">對跨境組織者的意義大於對單一則政治留言。</text>
+<text class="t-mute sm" x="44" y="199">針對有組織或有外國連結的政治行為者，對跨境組織者的意義大於對單一則政</text>
+<text class="t-mute sm" x="44" y="216">治留言。</text>
 <text class="t-main bd" x="44" y="241">誹謗與藐視法庭</text>
 <text class="t-mute sm" x="44" y="260">民事與刑事誹謗，加上《司法（保護）法》的藐視法庭條款。</text>
 <text class="t-mute sm" x="44" y="277">評論官員與進行中案件時的實際限制。</text>
 <text class="t-main bd" x="44" y="302">《公共秩序法》的公開集會</text>
 <text class="t-mute sm" x="44" y="321">對集會的定義寬鬆，可以涵蓋線上動員。</text>
 <text class="t-mute sm" x="44" y="338">曾有室內論壇因為線上直播被認定為非法集會。</text>
-<rect class="card-w1" x="499" y="28" width="453" height="392" rx="8"/>
-<text class="t-main h2" x="515" y="56">馬來西亞</text>
-<text class="t-mute sm" x="515" y="78">條文管得到轉發與留言，不限於自己寫的內容</text>
-<text class="t-main bd" x="515" y="102">1998 年通訊與多媒體法（CMA）第 233 條</text>
-<text class="t-mute sm" x="515" y="121">對付網路言論最常被使用的條文。2025 年 2 月修法後，</text>
-<text class="t-mute sm" x="515" y="138">罰金最高 RM500,000 或兩年以下有期徒刑。</text>
-<text class="t-mute sm" x="515" y="155">2026 年聯邦法院要求檢方證明真正的意圖。</text>
-<text class="t-main bd" x="515" y="180">1948 年煽動法</text>
-<text class="t-mute sm" x="515" y="199">殖民時期留下的法律，至今仍然有效且持續被使用。</text>
-<text class="t-mute sm" x="515" y="216">適用於 3R 議題：種族 race、宗教 religion、王室 royalty。</text>
-<text class="t-main bd" x="515" y="241">SOSMA（2012 年安全罪行（特別措施）法）</text>
-<text class="t-mute sm" x="515" y="260">為安全罪行提供特別程序，包含延長羈押。</text>
-<text class="t-mute sm" x="515" y="277">適用對象是恐怖主義與國安犯罪，日常言論案件用不到。</text>
-<text class="t-main bd" x="515" y="302">1966 年社團法</text>
-<text class="t-mute sm" x="515" y="321">有成員、有幹部、有持續活動的組織才可能落入其中。</text>
-<text class="t-mute sm" x="515" y="338">一次性的 hashtag 不構成社團。</text>
-<text class="t-main bd" x="515" y="363">各州的宗教執法</text>
-<text class="t-mute sm" x="515" y="382">各州伊斯蘭宗教機關執行只適用於穆斯林的 Syariah 罪行。</text>
-<text class="t-mute sm" x="515" y="399">與煽動法的 3R 範圍是兩套不同的機制。</text>
-<rect class="card-n" x="28" y="434" width="924" height="84" rx="8"/>
-<text class="t-main h2" x="44" y="462">兩國共同的實名底層</text>
-<text class="t-main bd" x="44" y="488">新加坡的 Singpass、馬來西亞的 MyKad 與 MyDigital ID 這類國家數位身分，加上兩國都強制 SIM 卡實名。</text>
-<text class="t-main bd" x="44" y="505">帳號、裝置與付款方式往往早就指向法律上的本名。在實名帳號上換一個顯示名稱並不構成區隔，區隔要從一開始就建立。</text>
-<rect class="card" x="28" y="532" width="924" height="101" rx="8"/>
-<text class="t-main h2" x="44" y="560">風險隨能見度與組織程度上升</text>
-<text class="t-mute bd" x="44" y="586">低觸及的貼文、爆紅的貼文、有協調的行動，三者的風險層級不同。記錄到的執法多半落在公眾人物、行動者與組織者身上，或者落在傳得很遠的貼文上。</text>
-<text class="t-mute bd" x="44" y="603">一般低能見度的貼文被追究的機率較低，機率低不等於安全，而且 2026 年的趨勢是起訴變多。</text>
-<text class="t-mute bd" x="44" y="620">人在海外不代表構不到。新加坡的外來干預框架與 POFMA 明文主張域外效力，馬來西亞的條文也寫得寬。</text>
-<text class="t-foot" x="28" y="649">先確認自己碰到哪個題目、能見度多高，就知道哪一條法律會被引用，以及自己的暴露面有多大。</text>
-<text class="t-foot" x="28" y="671">兩國都強制 SIM 卡實名，要取得一組真正不指向任何人的號碼與付款管道很困難。實際的目標放在區隔與減少連結。</text>
+<rect class="card-w1" x="479" y="28" width="433" height="390" rx="8"/>
+<text class="t-main h2" x="495" y="56">馬來西亞</text>
+<text class="t-mute sm" x="495" y="78">條文管得到轉發與留言，不限於自己寫的內容</text>
+<text class="t-main bd" x="495" y="102">1998 年通訊與多媒體法（CMA）第 233 條</text>
+<text class="t-mute sm" x="495" y="121">對付網路言論最常被使用的條文。2025 年 2 月修法後，罰金最高 RM500,000</text>
+<text class="t-mute sm" x="495" y="138">或兩年以下有期徒刑。</text>
+<text class="t-mute sm" x="495" y="155">2026 年聯邦法院要求檢方證明真正的意圖。</text>
+<text class="t-main bd" x="495" y="180">1948 年煽動法</text>
+<text class="t-mute sm" x="495" y="199">殖民時期留下的法律，至今仍然有效且持續被使用。</text>
+<text class="t-mute sm" x="495" y="216">適用於 3R 議題：種族 race、宗教 religion、王室 royalty。</text>
+<text class="t-main bd" x="495" y="241">SOSMA（2012 年安全罪行（特別措施）法）</text>
+<text class="t-mute sm" x="495" y="260">為安全罪行提供特別程序，包含延長羈押。</text>
+<text class="t-mute sm" x="495" y="277">適用對象是恐怖主義與國安犯罪，日常言論案件用不到。</text>
+<text class="t-main bd" x="495" y="302">1966 年社團法</text>
+<text class="t-mute sm" x="495" y="321">有成員、有幹部、有持續活動的組織才可能落入其中。</text>
+<text class="t-mute sm" x="495" y="338">一次性的 hashtag 不構成社團。</text>
+<text class="t-main bd" x="495" y="363">各州的宗教執法</text>
+<text class="t-mute sm" x="495" y="382">各州伊斯蘭宗教機關執行只適用於穆斯林的 Syariah 罪行。</text>
+<text class="t-mute sm" x="495" y="399">與煽動法的 3R 範圍是兩套不同的機制。</text>
+<rect class="card-n" x="28" y="432" width="884" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="460">兩國共同的實名底層</text>
+<text class="t-main bd" x="44" y="486">新加坡的 Singpass、馬來西亞的 MyKad 與 MyDigital ID 這類國家數位身分，加上兩國都強制 SIM 卡實名。</text>
+<text class="t-main bd" x="44" y="503">帳號、裝置與付款方式往往早就指向法律上的本名。在實名帳號上換一個顯示名稱並不構成區隔，區隔要從一開始就建立。</text>
+<rect class="card" x="28" y="530" width="884" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="558">風險隨能見度與組織程度上升</text>
+<text class="t-mute bd" x="44" y="584">低觸及的貼文、爆紅的貼文、有協調的行動，三者的風險層級不同。記錄到的執法多半落在公眾人物、行動者與組織者身上，或者落在傳得很遠的貼文上。</text>
+<text class="t-mute bd" x="44" y="601">一般低能見度的貼文被追究的機率較低，機率低不等於安全，而且 2026 年的趨勢是起訴變多。</text>
+<text class="t-mute bd" x="44" y="618">人在海外不代表構不到。新加坡的外來干預框架與 POFMA 明文主張域外效力，馬來西亞的條文也寫得寬。</text>
+<text class="t-foot" x="28" y="647">先確認自己碰到哪個題目、能見度多高，就知道哪一條法律會被引用，以及自己的暴露面有多大。</text>
+<text class="t-foot" x="28" y="669">兩國都強制 SIM 卡實名，要取得一組真正不指向任何人的號碼與付款管道很困難。實際的目標放在區隔與減少連結。</text>
 </svg>

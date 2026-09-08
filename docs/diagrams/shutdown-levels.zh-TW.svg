@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 554" width="980" height="554" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 537" width="940" height="537" role="img" aria-labelledby="title desc">
 <title id="title">斷網分四級，每一級還剩下的選項不同</title>
 <desc id="desc">四層由淺到深的橫條，代表網路中斷的四個等級，越往下可用的選項越少。第一級是降速與間歇中斷，判斷方式是小檔案過得去、大檔案過不去，還剩下文字通訊與離線編輯之後等時機送出，最常見的誤判是當成自己的裝置壞了而反覆重開機。第二級是特定服務被擋，判斷方式是同一條線路上別的網站開得起來，還剩下沒有被擋的其他管道，最常見的誤判是一個 app 開不起來就認定整條線路斷了。第三級是區域全斷，判斷方式是換 Wi-Fi、換門號結果相同而且旁邊的人也一樣，還剩下事先存好的東西、藍牙與區域網路、實體傳遞，最常見的誤判是以為藍牙與區域網路也跟著失效。第四級是連電力一起中斷，不必判斷就很明顯，還剩下電池撐得住的時間、紙本與事先約好的見面方式，最常見的誤判是重點還放在通訊工具而沒有換成電力管理。</desc>
 <style>
@@ -53,74 +53,69 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="884" height="97" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="844" height="97" rx="8"/>
 <rect class="card" x="44" y="42" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="63" text-anchor="middle">一</text>
 <text class="t-main h2" x="102" y="54">降速與間歇中斷</text>
 <text class="t-mute sm" x="102" y="74">小檔案過得去，大檔案過不去。</text>
 <text class="t-mute sm" x="102" y="91">純文字的服務仍然可用。</text>
-<text class="t-mute sm" x="400" y="54">還剩下</text>
-<text class="t-main bd" x="400" y="74">文字通訊</text>
-<text class="t-main bd" x="400" y="91">低頻寬的工作方式</text>
-<text class="t-main bd" x="400" y="108">離線編輯之後等時機送出</text>
-<text class="t-mute sm" x="674" y="54">最常見的誤判</text>
-<text class="t-mute sm" x="674" y="74">當成自己的裝置壞了，</text>
-<text class="t-mute sm" x="674" y="91">反覆重開機、重裝 app、</text>
-<text class="t-mute sm" x="674" y="108">重設路由器。</text>
-<rect class="card-w1" x="28" y="135" width="884" height="97" rx="8"/>
+<text class="t-mute sm" x="358" y="54">還剩下</text>
+<text class="t-main bd" x="358" y="74">文字通訊</text>
+<text class="t-main bd" x="358" y="91">低頻寬的工作方式</text>
+<text class="t-main bd" x="358" y="108">離線編輯之後等時機送出</text>
+<text class="t-mute sm" x="616" y="54">最常見的誤判</text>
+<text class="t-mute sm" x="616" y="74">當成自己的裝置壞了，反覆重開機、重裝 app</text>
+<text class="t-mute sm" x="616" y="91">、重設路由器。</text>
+<rect class="card-w1" x="28" y="135" width="844" height="97" rx="8"/>
 <rect class="card" x="44" y="149" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="170" text-anchor="middle">二</text>
 <text class="t-main h2" x="102" y="161">特定服務被擋</text>
 <text class="t-mute sm" x="102" y="181">同一條線路上別的網站開得起來。</text>
-<text class="t-mute sm" x="102" y="198">四級裡唯一能用 OONI 這類</text>
-<text class="t-mute sm" x="102" y="215">公開量測確認的一級。</text>
-<text class="t-mute sm" x="400" y="161">還剩下</text>
-<text class="t-main bd" x="400" y="181">沒有被擋的其他管道</text>
-<text class="t-main bd" x="400" y="198">規避工具</text>
-<text class="t-mute sm" x="674" y="161">最常見的誤判</text>
-<text class="t-mute sm" x="674" y="181">一個 app 開不起來，</text>
-<text class="t-mute sm" x="674" y="198">就認定整條線路斷了。</text>
-<rect class="card-w2" x="28" y="242" width="884" height="114" rx="8"/>
+<text class="t-mute sm" x="102" y="198">四級裡唯一能用 OONI 這類公開量測確認的一</text>
+<text class="t-mute sm" x="102" y="215">級。</text>
+<text class="t-mute sm" x="358" y="161">還剩下</text>
+<text class="t-main bd" x="358" y="181">沒有被擋的其他管道</text>
+<text class="t-main bd" x="358" y="198">規避工具</text>
+<text class="t-mute sm" x="616" y="161">最常見的誤判</text>
+<text class="t-mute sm" x="616" y="181">一個 app 開不起來，就認定整條線路斷了。</text>
+<rect class="card-w2" x="28" y="242" width="844" height="114" rx="8"/>
 <rect class="card" x="44" y="256" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="277" text-anchor="middle">三</text>
 <text class="t-main h2" x="102" y="268">區域全斷</text>
-<text class="t-main sm" x="102" y="288">換 Wi-Fi、換門號結果相同，</text>
-<text class="t-main sm" x="102" y="305">旁邊的人也一樣。訊號格數</text>
-<text class="t-main sm" x="102" y="322">幫不上忙。撥電話或送簡訊</text>
-<text class="t-main sm" x="102" y="339">可以分辨被切掉的是不是數據。</text>
-<text class="t-main sm" x="400" y="268">還剩下</text>
-<text class="t-main bd" x="400" y="288">裝置上事先存好的東西</text>
-<text class="t-main bd" x="400" y="305">藍牙與區域網路的近距離連線</text>
-<text class="t-main bd" x="400" y="322">隨身碟、紙本、當面說明</text>
-<text class="t-main sm" x="674" y="268">最常見的誤判</text>
-<text class="t-main sm" x="674" y="288">以為所有無線功能都失效。</text>
-<text class="t-main sm" x="674" y="305">藍牙與區域網路不經過</text>
-<text class="t-main sm" x="674" y="322">電信商與網際網路，</text>
-<text class="t-main sm" x="674" y="339">這一級仍然運作。</text>
-<rect class="card-w3" x="28" y="366" width="884" height="114" rx="8"/>
+<text class="t-main sm" x="102" y="288">換 Wi-Fi、換門號結果相同，旁邊的人也一樣</text>
+<text class="t-main sm" x="102" y="305">。訊號格數幫不上忙。</text>
+<text class="t-main sm" x="102" y="322">撥電話或送簡訊可以分辨被切掉的是不是數據</text>
+<text class="t-main sm" x="102" y="339">。</text>
+<text class="t-main sm" x="358" y="268">還剩下</text>
+<text class="t-main bd" x="358" y="288">裝置上事先存好的東西</text>
+<text class="t-main bd" x="358" y="305">藍牙與區域網路的近距離連線</text>
+<text class="t-main bd" x="358" y="322">隨身碟、紙本、當面說明</text>
+<text class="t-main sm" x="616" y="268">最常見的誤判</text>
+<text class="t-main sm" x="616" y="288">以為所有無線功能都失效。藍牙與區域網路不</text>
+<text class="t-main sm" x="616" y="305">經過電信商與網際網路，這一級仍然運作。</text>
+<rect class="card-w3" x="28" y="366" width="844" height="97" rx="8"/>
 <rect class="card" x="44" y="380" width="42" height="30" rx="6"/>
 <text class="t-main h1" x="65" y="401" text-anchor="middle">四</text>
 <text class="t-inv h2" x="102" y="392">連電力一起中斷</text>
 <text class="t-inv sm" x="102" y="412">不必判斷，很明顯。</text>
-<text class="t-inv sm" x="102" y="429">問題從「訊息送不出去」</text>
-<text class="t-inv sm" x="102" y="446">換成「幾小時之後會關機」。</text>
-<text class="t-inv sm" x="400" y="392">還剩下</text>
-<text class="t-inv bd" x="400" y="412">電池撐得住的那段時間</text>
-<text class="t-inv bd" x="400" y="429">紙本</text>
-<text class="t-inv bd" x="400" y="446">事先約好的見面方式</text>
-<text class="t-inv sm" x="674" y="392">最常見的誤判</text>
-<text class="t-inv sm" x="674" y="412">重點還放在通訊工具，</text>
-<text class="t-inv sm" x="674" y="429">沒有換成電力管理。</text>
-<text class="t-inv sm" x="674" y="446">行動電源與調暗螢幕</text>
-<text class="t-inv sm" x="674" y="463">在這一級決定你還有多少時間。</text>
-<path class="arrow" d="M934 42 V466"/>
-<path class="arrow-h" d="M934 480 L928.5 465 L939.5 465 Z"/>
-<text class="t-mute sm" x="949" y="204.5" text-anchor="middle">可</text>
-<text class="t-mute sm" x="949" y="223.5" text-anchor="middle">用</text>
-<text class="t-mute sm" x="949" y="242.5" text-anchor="middle">選</text>
-<text class="t-mute sm" x="949" y="261.5" text-anchor="middle">項</text>
-<text class="t-mute sm" x="949" y="280.5" text-anchor="middle">遞</text>
-<text class="t-mute sm" x="949" y="299.5" text-anchor="middle">減</text>
-<text class="t-foot" x="28" y="506">判斷錯等級，準備得再多也用不上。先確認現在是哪一級，再決定接下來做什麼。</text>
-<text class="t-foot" x="28" y="528">每一級的「還剩下」都取決於中斷之前做完了什麼。沒有事先存進裝置的東西，這時候取不到。</text>
+<text class="t-inv sm" x="102" y="429">問題從「訊息送不出去」換成「幾小時之後會</text>
+<text class="t-inv sm" x="102" y="446">關機」。</text>
+<text class="t-inv sm" x="358" y="392">還剩下</text>
+<text class="t-inv bd" x="358" y="412">電池撐得住的那段時間</text>
+<text class="t-inv bd" x="358" y="429">紙本</text>
+<text class="t-inv bd" x="358" y="446">事先約好的見面方式</text>
+<text class="t-inv sm" x="616" y="392">最常見的誤判</text>
+<text class="t-inv sm" x="616" y="412">重點還放在通訊工具，沒有換成電力管理。行</text>
+<text class="t-inv sm" x="616" y="429">動電源與調暗螢幕在這一級決定你還有多少時</text>
+<text class="t-inv sm" x="616" y="446">間。</text>
+<path class="arrow" d="M894 42 V449"/>
+<path class="arrow-h" d="M894 463 L888.5 448 L899.5 448 Z"/>
+<text class="t-mute sm" x="909" y="196" text-anchor="middle">可</text>
+<text class="t-mute sm" x="909" y="215" text-anchor="middle">用</text>
+<text class="t-mute sm" x="909" y="234" text-anchor="middle">選</text>
+<text class="t-mute sm" x="909" y="253" text-anchor="middle">項</text>
+<text class="t-mute sm" x="909" y="272" text-anchor="middle">遞</text>
+<text class="t-mute sm" x="909" y="291" text-anchor="middle">減</text>
+<text class="t-foot" x="28" y="489">判斷錯等級，準備得再多也用不上。先確認現在是哪一級，再決定接下來做什麼。</text>
+<text class="t-foot" x="28" y="511">每一級的「還剩下」都取決於中斷之前做完了什麼。沒有事先存進裝置的東西，這時候取不到。</text>
 </svg>

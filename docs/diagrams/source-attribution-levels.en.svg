@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 555" width="1060" height="555" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 555" width="940" height="555" role="img" aria-labelledby="title desc">
 <title id="title">Agree the attribution level with your source, section by section</title>
 <desc id="desc">Four stacked bands running from dark to light, representing the four attribution levels a reporter and a source can agree on, with the source's exposure shrinking as you move down. The first level is on the record, meaning the name and job title can be printed, so the story carries the name, the title and the direct quote. The second level is anonymous quotation, meaning the content can be quoted under a role description, so the story carries a line such as an engineer who worked on the project said. The third level is background, used only to understand the situation and direct verification, with the source neither named nor quoted. The fourth level is not for use, where nothing enters the story at all. The red box below warns that anonymous quotation is the level that goes wrong most often, because the role description can identify the person on its own: if only three people at a company match the description, the description names all three.</desc>
 <style>
@@ -53,38 +53,37 @@
   }
 </style>
 
-<text class="t-mute sm" x="368" y="40">WHAT IT MEANS</text>
-<text class="t-mute sm" x="688" y="40">WHAT APPEARS IN THE STORY</text>
-<path class="rule" d="M28 50 H992"/>
-<rect class="card-w2" x="28" y="62" width="964" height="49" rx="8"/>
+<text class="t-mute sm" x="298" y="40">WHAT IT MEANS</text>
+<text class="t-mute sm" x="558" y="40">WHAT APPEARS IN THE STORY</text>
+<path class="rule" d="M28 50 H872"/>
+<rect class="card-w2" x="28" y="62" width="844" height="49" rx="8"/>
 <text class="t-main h2" x="44" y="88">On the record</text>
-<text class="t-main bd" x="368" y="88">Name and job title can be printed</text>
-<text class="t-main bd" x="688" y="88">Name, title, direct quote</text>
-<rect class="card-w1" x="28" y="121" width="964" height="66" rx="8"/>
+<text class="t-main bd" x="298" y="88">Name and job title can be printed</text>
+<text class="t-main bd" x="558" y="88">Name, title, direct quote</text>
+<rect class="card-w1" x="28" y="121" width="844" height="66" rx="8"/>
 <text class="t-main h2" x="44" y="147">Anonymous quotation</text>
-<text class="t-main bd" x="368" y="147">Content can be quoted under a</text>
-<text class="t-main bd" x="368" y="164">role description</text>
-<text class="t-mute bd" x="688" y="147">“An engineer who worked on the</text>
-<text class="t-mute bd" x="688" y="164">project said”</text>
-<rect class="card-c1" x="28" y="197" width="964" height="66" rx="8"/>
+<text class="t-main bd" x="298" y="147">Content can be quoted under a role</text>
+<text class="t-main bd" x="298" y="164">description</text>
+<text class="t-mute bd" x="558" y="147">“An engineer who worked on the project said”</text>
+<rect class="card-c1" x="28" y="197" width="844" height="66" rx="8"/>
 <text class="t-main h2" x="44" y="223">Background</text>
-<text class="t-main bd" x="368" y="223">Only for understanding the story</text>
-<text class="t-main bd" x="368" y="240">and directing verification</text>
-<text class="t-mute bd" x="688" y="223">Source is neither named nor quoted</text>
-<rect class="card-n" x="28" y="273" width="964" height="49" rx="8"/>
+<text class="t-main bd" x="298" y="223">Only for understanding the story and</text>
+<text class="t-main bd" x="298" y="240">directing verification</text>
+<text class="t-mute bd" x="558" y="223">Source is neither named nor quoted</text>
+<rect class="card-n" x="28" y="273" width="844" height="49" rx="8"/>
 <text class="t-main h2" x="44" y="299">Not for use</text>
-<text class="t-main bd" x="368" y="299">Nothing enters the story</text>
-<text class="t-mute bd" x="688" y="299">Nothing</text>
-<path class="arrow" d="M1014 42 V308"/>
-<path class="arrow-h" d="M1014 322 L1008.5 307 L1019.5 307 Z"/>
-<text class="t-mute sm" x="1030" y="173" text-anchor="middle" transform="rotate(-90 1030 173)">SOURCE EXPOSURE DECREASES</text>
-<rect class="card-no" x="28" y="342" width="1004" height="101" rx="8"/>
+<text class="t-main bd" x="298" y="299">Nothing enters the story</text>
+<text class="t-mute bd" x="558" y="299">Nothing</text>
+<path class="arrow" d="M894 42 V308"/>
+<path class="arrow-h" d="M894 322 L888.5 307 L899.5 307 Z"/>
+<text class="t-mute sm" x="910" y="173" text-anchor="middle" transform="rotate(-90 910 173)">SOURCE EXPOSURE DECREASES</text>
+<rect class="card-no" x="28" y="342" width="884" height="101" rx="8"/>
 <text class="t-main h2" x="44" y="370">Anonymous quotation is where this goes wrong</text>
 <text class="t-main bd" x="44" y="396">The role description can identify the person on its own. If only three people at a company match</text>
 <text class="t-main bd" x="44" y="413">“an engineer who worked on the project”, the description has named all three. Widen the description</text>
 <text class="t-main bd" x="44" y="430">by one step during the conversation, or move the material down to background.</text>
-<text class="t-foot" x="28" y="463">Different pieces of one conversation can sit at different levels. Confirm each section as you go, since by the end a source rarely remembers</text>
-<text class="t-foot" x="28" y="485">which sentence sat where.</text>
-<text class="t-foot" x="28" y="507">Do not promise what you cannot deliver. What you can promise is behaviour: no records handed over, no mention outside the newsroom, a look at the</text>
-<text class="t-foot" x="28" y="529">passages that concern them before publication.</text>
+<text class="t-foot" x="28" y="463">Different pieces of one conversation can sit at different levels. Confirm each section as you go, since by the end a source</text>
+<text class="t-foot" x="28" y="485">rarely remembers which sentence sat where.</text>
+<text class="t-foot" x="28" y="507">Do not promise what you cannot deliver. What you can promise is behaviour: no records handed over, no mention outside the</text>
+<text class="t-foot" x="28" y="529">newsroom, a look at the passages that concern them before publication.</text>
 </svg>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 423" width="980" height="423" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 423" width="940" height="423" role="img" aria-labelledby="title desc">
 <title id="title">從開場 prompt 到隨身緊急卡的四步</title>
 <desc id="desc">四個並排的步驟，用箭頭串起來。第一步是開場 prompt，把出發地、目的地與停留天數換成你的資訊，貼給 AI 設定角色，只需要填一次。第二步是五項調查，逐項複製貼上即可，內容是數位環境（審查、Tor、VPN、設備搜查）、法律與政治風險、連線與通訊（SIM 與 eSIM）、緊急聯絡與支援網路，以及選用的實體與監控環境。第三步是核對一手來源，拿 AI 的答案去對照文章底部的官方來源，緊急電話、法條編號、簽證規則與資費一定要回到一手來源核對。第四步是隨身緊急卡，把第四項問到的關鍵聯絡抄成卡片，印出來過塑，皮夾與行李各放一張，並同步存進手機離線筆記。最下方的紅框提醒 AI 會編造電話、法條與資費。</desc>
 <style>
@@ -53,7 +53,7 @@
   }
 </style>
 
-<rect class="card-c1" x="28" y="28" width="201" height="233" rx="8"/>
+<rect class="card-c1" x="28" y="28" width="191" height="233" rx="8"/>
 <text class="t-main h2" x="42" y="52">一、開場 prompt</text>
 <text class="t-mute sm" x="42" y="84">只填一次</text>
 <text class="t-main bd" x="42" y="102">把出發地、目的地與</text>
@@ -64,40 +64,40 @@
 <text class="t-main bd" x="42" y="196">完整版給自架與本地 AI。</text>
 <text class="t-main bd" x="42" y="213">商業服務版拿掉會讓</text>
 <text class="t-main bd" x="42" y="230">對話被記住的細節。</text>
-<rect class="card-c2" x="269" y="28" width="201" height="233" rx="8"/>
-<text class="t-main h2" x="283" y="52">二、五項調查</text>
-<text class="t-mute sm" x="283" y="84">逐項複製貼上，不必改字</text>
-<text class="t-main bd" x="283" y="102">數位環境：審查、Tor、</text>
-<text class="t-main bd" x="283" y="119">VPN、設備搜查</text>
-<text class="t-main bd" x="283" y="136">法律與政治風險</text>
-<text class="t-main bd" x="283" y="153">連線與通訊：SIM、eSIM</text>
-<text class="t-main bd" x="283" y="170">緊急聯絡與支援網路</text>
-<text class="t-main bd" x="283" y="187">實體與監控環境（選用）</text>
-<rect class="card-w1" x="510" y="28" width="201" height="233" rx="8"/>
-<text class="t-main h2" x="524" y="52">三、核對一手來源</text>
-<text class="t-mute sm" x="524" y="84">這一步不能跳過</text>
-<text class="t-main bd" x="524" y="102">拿 AI 的答案去對照</text>
-<text class="t-main bd" x="524" y="119">文章底部的官方來源。</text>
-<text class="t-mute sm" x="524" y="144">一定要核對的四類</text>
-<text class="t-main bd" x="524" y="162">緊急電話</text>
-<text class="t-main bd" x="524" y="179">法條編號</text>
-<text class="t-main bd" x="524" y="196">簽證規則</text>
-<text class="t-main bd" x="524" y="213">資費</text>
-<rect class="card-ok" x="751" y="28" width="201" height="233" rx="8"/>
-<text class="t-main h2" x="765" y="52">四、隨身緊急卡</text>
-<text class="t-mute sm" x="765" y="84">離線也拿得到的那一份</text>
-<text class="t-main bd" x="765" y="102">把第四項問到的關鍵聯絡</text>
-<text class="t-main bd" x="765" y="119">抄成一張卡片。</text>
-<text class="t-main bd" x="765" y="136">印出來過塑，皮夾與行李</text>
-<text class="t-main bd" x="765" y="153">各放一張。</text>
-<text class="t-main bd" x="765" y="170">同步存進手機離線筆記。</text>
-<path class="arrow" d="M235 144.5 H256"/>
-<path class="arrow-h" d="M263 144.5 L255 139 L255 150 Z"/>
-<path class="arrow" d="M476 144.5 H497"/>
-<path class="arrow-h" d="M504 144.5 L496 139 L496 150 Z"/>
-<path class="arrow" d="M717 144.5 H738"/>
-<path class="arrow-h" d="M745 144.5 L737 139 L737 150 Z"/>
-<rect class="card-no" x="28" y="275" width="924" height="84" rx="8"/>
+<rect class="card-c2" x="259" y="28" width="191" height="233" rx="8"/>
+<text class="t-main h2" x="273" y="52">二、五項調查</text>
+<text class="t-mute sm" x="273" y="84">逐項複製貼上，不必改字</text>
+<text class="t-main bd" x="273" y="102">數位環境：審查、Tor、</text>
+<text class="t-main bd" x="273" y="119">VPN、設備搜查</text>
+<text class="t-main bd" x="273" y="136">法律與政治風險</text>
+<text class="t-main bd" x="273" y="153">連線與通訊：SIM、eSIM</text>
+<text class="t-main bd" x="273" y="170">緊急聯絡與支援網路</text>
+<text class="t-main bd" x="273" y="187">實體與監控環境（選用）</text>
+<rect class="card-w1" x="490" y="28" width="191" height="233" rx="8"/>
+<text class="t-main h2" x="504" y="52">三、核對一手來源</text>
+<text class="t-mute sm" x="504" y="84">這一步不能跳過</text>
+<text class="t-main bd" x="504" y="102">拿 AI 的答案去對照</text>
+<text class="t-main bd" x="504" y="119">文章底部的官方來源。</text>
+<text class="t-mute sm" x="504" y="144">一定要核對的四類</text>
+<text class="t-main bd" x="504" y="162">緊急電話</text>
+<text class="t-main bd" x="504" y="179">法條編號</text>
+<text class="t-main bd" x="504" y="196">簽證規則</text>
+<text class="t-main bd" x="504" y="213">資費</text>
+<rect class="card-ok" x="721" y="28" width="191" height="233" rx="8"/>
+<text class="t-main h2" x="735" y="52">四、隨身緊急卡</text>
+<text class="t-mute sm" x="735" y="84">離線也拿得到的那一份</text>
+<text class="t-main bd" x="735" y="102">把第四項問到的關鍵聯絡</text>
+<text class="t-main bd" x="735" y="119">抄成一張卡片。</text>
+<text class="t-main bd" x="735" y="136">印出來過塑，皮夾與行李</text>
+<text class="t-main bd" x="735" y="153">各放一張。</text>
+<text class="t-main bd" x="735" y="170">同步存進手機離線筆記。</text>
+<path class="arrow" d="M225 144.5 H246"/>
+<path class="arrow-h" d="M253 144.5 L245 139 L245 150 Z"/>
+<path class="arrow" d="M456 144.5 H477"/>
+<path class="arrow-h" d="M484 144.5 L476 139 L476 150 Z"/>
+<path class="arrow" d="M687 144.5 H708"/>
+<path class="arrow-h" d="M715 144.5 L707 139 L707 150 Z"/>
+<rect class="card-no" x="28" y="275" width="884" height="84" rx="8"/>
 <text class="t-main h2" x="44" y="303">AI 會編造電話、法條與資費</text>
 <text class="t-main bd" x="44" y="329">語言模型很會「說得很有把握是錯的」。把 AI 的回答當成「我接下來該查哪些東西」的起點，不要當成最終答案。</text>
 <text class="t-main bd" x="44" y="346">目的地越冷門、公開資料越少，AI 手上的訓練資料也越少、越容易亂編，偏偏這種地方最需要可靠資訊。</text>
