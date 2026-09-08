@@ -519,6 +519,12 @@ Set once and stored permanently, so the picker offers brand colours rather than 
 
 A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, taken from the palette above.
 
+Keep the canvas at 940 wide or less. The content column scales the diagram down, so a wider canvas is scaled harder and its text ends up smaller. Measured on the docs site, the content column is 855 in a 1920 viewport and 668 at both 1280 and 1440, against body text of 16 to 17.6px. On a 940 canvas, 12.5px text renders at 11.4px and 8.9px, matching the diagrams already on the site. The same diagram on a 1240 canvas drops to 6.7px, which is too small to read.
+
+When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on`.
+
+Measure the rendered width in a headless browser before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
+
 Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`. The site's palette toggle does not reach a standalone SVG file. Lighten the primary colour for the dark set, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
 
 Text inside a coloured block should be neutral dark `#212121` or white. Do not use a brand colour as a text colour: `#ef6c00` and `#4caf50` fall short of 4.5:1 against white, and the meaning is already carried by the border colour and the words themselves.
