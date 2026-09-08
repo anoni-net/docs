@@ -51,6 +51,12 @@ The target set is widening. Campaigns from 2025 onward have covered "spreading p
 
 Most people want both "it spreads" and "nothing happens to me." In this environment those goals conflict at four specific points:
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/speech-reach-risk.en.svg"
+        alt="The upper half shows four pairs in tension, with what you want on the left and an arrow pointing to its cost on the right. Wanting ordinary people to believe you costs credibility, because credibility comes from a real name, a track record and existing relationships, which are exactly your exposure. Wanting to evade keyword filtering costs comprehension, because distorted wording only reads clearly to people who already agree, keeping you inside your own circle. Wanting the content to persuade costs safety, because persuasion rests on specific, checkable detail and specificity is what points back at you. Wanting to reach more people costs risk, because a wider spread moves closer to the thresholds written into the relevant provisions and makes you more likely to be treated as a priority case. The lower half gives three orientations: to leave a record, prioritise archiving the content outside the jurisdiction and keep the publisher's visibility as low as possible; to persuade specific people, work privately and at small scale and give up public reach; to spread the content, accept higher risk for the publisher, or hand the material to an existing channel willing to carry it.">
+    <figcaption>None of the four tensions has a solution that gets both</figcaption>
+</figure>
+
 | What you want | What it costs |
 |---|---|
 | Ordinary people to believe you | Anonymous accounts carry little credibility. Credibility comes from a real name, a track record, existing relationships, which are exactly the exposure |

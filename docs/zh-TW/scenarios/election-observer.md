@@ -68,6 +68,12 @@ icon: material/vote-outline
 
 為什麼這件事重要，見 [Metadata 是什麼](../basics/metadata.md)。[記者保護消息來源](./journalist.md) 的原則直接適用：在證明不帶 metadata 之前，把每個檔案都當成帶著 metadata。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/observer-metadata-tradeoff.zh-TW.svg"
+        alt="上方的藍框說明現場紀錄承載的張力：讓紀錄作為證據可信的 metadata，正好也是讓人曝險的那些 metadata。一張帶時間戳記與 GPS 座標的照片，是某個違規在特定時間地點發生過的有力證據，同一組 EXIF 資料在被扣押的裝置上，可以定位你以及畫面裡任何可辨識的人。下方左右兩欄是逐項要做的決定。左欄是保留 metadata，判準是紀錄的價值在於可驗證而畫面中的人不會因此受害，例如空的票匭、張貼出來的開票結果、沒有可辨識面孔的排隊人潮。右欄是去除或避免 metadata，判準是紀錄可能指認出會因此陷入危險的人，例如選務人員、面露恐懼的投票人、在不友善環境中的同行觀察員，做法是拍攝時就讓臉孔不入鏡，影像離開裝置前先清除 EXIF。最下方列出現場記錄的四項實務。">
+    <figcaption>沒有通用的正確答案，只有逐項要做的決定</figcaption>
+</figure>
+
 ### 現場記錄的實務
 
 - **拍文件與環境，不拍臉**，除非那張臉本身就是違規事實，而且當事人同意或那是公職人員執行職務。各地對拍攝投票人的法規差異很大而且可能相當嚴格，舉起相機之前先弄清楚

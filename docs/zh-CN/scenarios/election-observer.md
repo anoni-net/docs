@@ -68,6 +68,12 @@ icon: material/vote-outline
 
 为什么这件事重要，见 [Metadata 是什么](../basics/metadata.md)。[记者保护消息来源](./journalist.md) 的原则直接适用：在证明不带 metadata 之前，把每个文件都当成带着 metadata。
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/observer-metadata-tradeoff.zh-CN.svg"
+        alt="上方的蓝框说明现场记录承载的张力：让记录作为证据可信的 metadata，正好也是让人曝险的那些 metadata。一张带时间戳记与 GPS 坐标的照片，是某个违规在特定时间地点发生过的有力证据，同一组 EXIF 数据在被扣押的设备上，可以定位你以及画面里任何可辨识的人。下方左右两栏是逐项要做的决定。左栏是保留 metadata，判准是记录的价值在于可验证而画面中的人不会因此受害，例如空的票箱、张贴出来的开票结果、没有可辨识面孔的排队人潮。右栏是去除或避免 metadata，判准是记录可能指认出会因此陷入危险的人，例如选务人员、面露恐惧的投票人、在不友善环境中的同行观察员，做法是拍摄时就让脸孔不入镜，影像离开设备前先清除 EXIF。最下方列出现场记录的四项实务。">
+    <figcaption>没有通用的正确答案，只有逐项要做的决定</figcaption>
+</figure>
+
 ### 现场记录的实务
 
 - **拍文件与环境，不拍脸**，除非那张脸本身就是违规事实，而且当事人同意或那是公职人员执行职务。各地对拍摄投票人的法规差异很大而且可能相当严格，举起相机之前先弄清楚

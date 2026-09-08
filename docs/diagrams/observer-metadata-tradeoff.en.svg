@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 647" width="1120" height="647" role="img" aria-labelledby="title desc">
+<title id="title">The same metadata makes a record credible and puts people at risk</title>
+<desc id="desc">The blue bar at the top states the tension carried by field records: the metadata that makes a record credible as evidence is exactly the metadata that exposes people. A photograph carrying a timestamp and GPS coordinates is strong evidence that a specific violation happened at a specific time and place. The same EXIF data, on a seized device, locates you and anyone identifiable in the frame. The two columns below hold the decision, taken item by item. On the left, keep the metadata when the value of the record lies in being verifiable and nobody in the frame is harmed by it: an empty ballot box, posted results, a queue with no identifiable faces. On the right, strip or avoid the metadata when the record could identify someone who would be endangered by it: polling staff, a frightened voter, a fellow observer in a hostile environment. Keep faces out of frame while shooting, and clear EXIF before an image leaves the device. The bar at the bottom lists four field practices.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="1064" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="56">The tension a field record carries</text>
+<text class="t-main bd" x="44" y="82">The metadata that makes a record credible as evidence is exactly the metadata that exposes people.</text>
+<text class="t-main bd" x="44" y="99">A photo with a timestamp and GPS coordinates is strong evidence that a specific violation happened at a specific time and place.</text>
+<text class="t-main bd" x="44" y="116">The same EXIF data, on a seized device, locates you and anyone identifiable in the frame.</text>
+<text class="t-main bd" x="44" y="133">There is no general right answer here, only a decision taken item by item.</text>
+<rect class="card-ok" x="28" y="160" width="523" height="252" rx="8"/>
+<text class="t-main h2" x="42" y="184">Keep the metadata</text>
+<text class="t-mute sm" x="42" y="216">Test: the record's value lies in being verifiable, and nobody in the frame is</text>
+<text class="t-mute sm" x="42" y="234">harmed by it</text>
+<text class="t-mute sm" x="42" y="252">WHAT THIS COVERS</text>
+<text class="t-main bd" x="42" y="270">An empty ballot box</text>
+<text class="t-main bd" x="42" y="287">Posted counting results</text>
+<text class="t-main bd" x="42" y="304">A queue with no identifiable faces</text>
+<text class="t-main bd" x="42" y="321">Officials carrying out their duties</text>
+<text class="t-mute sm" x="42" y="346">WHY</text>
+<text class="t-main bd" x="42" y="364">The timestamp and coordinates let a third party verify the record.</text>
+<text class="t-main bd" x="42" y="381">Strip them and the photo rests on your testimony alone.</text>
+<rect class="card-no" x="569" y="160" width="523" height="252" rx="8"/>
+<text class="t-main h2" x="583" y="184">Strip or avoid the metadata</text>
+<text class="t-mute sm" x="583" y="216">Test: the record could identify someone who would be endangered by it</text>
+<text class="t-mute sm" x="583" y="234">WHAT THIS COVERS</text>
+<text class="t-main bd" x="583" y="252">Polling staff</text>
+<text class="t-main bd" x="583" y="269">A frightened voter</text>
+<text class="t-main bd" x="583" y="286">A fellow observer in a hostile environment</text>
+<text class="t-main bd" x="583" y="303">Any identifiable ordinary voter</text>
+<text class="t-mute sm" x="583" y="328">HOW</text>
+<text class="t-main bd" x="583" y="346">Keep faces and identifying detail out of frame while shooting.</text>
+<text class="t-main bd" x="583" y="363">Clear EXIF before an image leaves the device, and treat every file as</text>
+<text class="t-main bd" x="583" y="380">carrying metadata until proven otherwise.</text>
+<rect class="card" x="28" y="426" width="1064" height="135" rx="8"/>
+<text class="t-main h2" x="44" y="454">Four field practices</text>
+<text class="t-mute bd" x="44" y="480">Photograph documents and surroundings rather than faces, unless the face is itself the violation and the person consents or is an official on duty. Rules</text>
+<text class="t-mute bd" x="44" y="497">on photographing voters vary widely, so check before raising a camera.</text>
+<text class="t-mute bd" x="44" y="514">Keep an offline, verifiable backup. An encrypted local copy synced to the mission team when the network allows survives both seizure and shutdown.</text>
+<text class="t-mute bd" x="44" y="531">Record counts and incidents with a structured tool. A mission form or a shared encrypted document keeps the format consistent.</text>
+<text class="t-mute bd" x="44" y="548">Keep identities out of the record. Where a name is not the point, use a role: presiding officer, observer at station 4.</text>
+<text class="t-foot" x="28" y="577">The reporting channel is sensitive in itself. Who spoke to whom and when is metadata that maps the whole observation network even when the content is</text>
+<text class="t-foot" x="28" y="599">encrypted.</text>
+<text class="t-foot" x="28" y="621">A record that exists only in a cloud your adversary can subpoena is fragile. Offline backup and seizure response are two sides of one decision.</text>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 691" width="1120" height="691" role="img" aria-labelledby="title desc">
+<title id="title">Tech abuse runs through four kinds of ordinary consumer feature</title>
+<desc id="desc">Four boxes listing the channels through which technology-facilitated abuse most often runs in intimate relationships, all of them features designed for families and partners. The first is account access and shared plans: passwords the other person already knows or can guess, a shared Apple ID or Google account, Apple Family Sharing and carrier family plans, Google Family Link, and password reset mail arriving at a shared number or mailbox. The second is location tracking: Find My and Google Maps location sharing, Bluetooth trackers such as AirTags, connected-car apps, shared calendars, and GPS coordinates carried by synced photos. The third is stalkerware installed while the other person briefly has your phone, which forwards messages, call logs, photos, browsing and location while showing no icon at all. The fourth is smart home and shared devices: smart locks, cameras, doorbells, thermostats, voice assistants and shared streaming accounts. The blue bar below notes that the most reliable signal is usually the other person knowing something they should not, and that the period around leaving is the most dangerous.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-no" x="28" y="28" width="1064" height="67" rx="8"/>
+<text class="t-main h2" x="44" y="56">WHAT THEY SHARE</text>
+<text class="t-main bd" x="44" y="82">Most of this needs no special skill. It uses ordinary consumer features built for families and partners, turned against one person in the household.</text>
+<rect class="card-w1" x="28" y="109" width="524" height="220" rx="8"/>
+<text class="t-main h2" x="44" y="137">Account access and shared plans</text>
+<text class="t-mute bd" x="44" y="161">Passwords for your mailbox, phone lock and banking that the other person</text>
+<text class="t-mute bd" x="44" y="178">already knows or can guess</text>
+<text class="t-mute bd" x="44" y="195">A shared Apple ID or Google account, which syncs messages, photos,</text>
+<text class="t-mute bd" x="44" y="212">browsing history and contacts to their device</text>
+<text class="t-mute bd" x="44" y="229">Apple Family Sharing and carrier family plans, exposing purchases and</text>
+<text class="t-mute bd" x="44" y="246">installed apps</text>
+<text class="t-mute bd" x="44" y="263">Google Family Link, a parental tool that becomes surveillance when pointed</text>
+<text class="t-mute bd" x="44" y="280">at an adult</text>
+<text class="t-mute bd" x="44" y="297">Reset mail arriving at a shared number or mailbox, so a new password does</text>
+<text class="t-mute bd" x="44" y="314">not lock them out</text>
+<rect class="card-w1" x="568" y="109" width="524" height="220" rx="8"/>
+<text class="t-main h2" x="584" y="137">Location tracking</text>
+<text class="t-mute bd" x="584" y="161">Find My and Google Maps location sharing, which keeps running once enabled</text>
+<text class="t-mute bd" x="584" y="178">and sends no further notice</text>
+<text class="t-mute bd" x="584" y="195">Bluetooth trackers such as AirTags or Tile, placed in a bag, a car or a</text>
+<text class="t-mute bd" x="584" y="212">child's belongings</text>
+<text class="t-mute bd" x="584" y="229">Connected-car apps showing live position and trip history</text>
+<text class="t-mute bd" x="584" y="246">Shared calendars, which reveal where you will be next</text>
+<text class="t-mute bd" x="584" y="263">Photos synced with GPS coordinates attached, enough to locate a new</text>
+<text class="t-mute bd" x="584" y="280">address</text>
+<rect class="card-w1" x="28" y="343" width="524" height="152" rx="8"/>
+<text class="t-main h2" x="44" y="371">Stalkerware on the device</text>
+<text class="t-mute bd" x="44" y="395">Installed while the other person briefly has your phone, then forwarding</text>
+<text class="t-mute bd" x="44" y="412">messages, call logs, photos, browsing and location</text>
+<text class="t-mute bd" x="44" y="429">Able to show no icon at all</text>
+<text class="t-mute bd" x="44" y="446">A battery that drains faster, a warm phone at idle and unexplained data</text>
+<text class="t-mute bd" x="44" y="463">use are all hints rather than proof</text>
+<rect class="card-w1" x="568" y="343" width="524" height="152" rx="8"/>
+<text class="t-main h2" x="584" y="371">Smart home and shared devices</text>
+<text class="t-mute bd" x="584" y="395">Smart locks, cameras, doorbells and thermostats: whoever holds the</text>
+<text class="t-mute bd" x="584" y="412">controlling account sees the footage, knows when the door opens and can</text>
+<text class="t-mute bd" x="584" y="429">lock you out</text>
+<text class="t-mute bd" x="584" y="446">After separation these often stay on the other account</text>
+<text class="t-mute bd" x="584" y="463">A shared voice assistant exposes routines and reminders</text>
+<text class="t-mute bd" x="584" y="480">Shared streaming and location-based social apps leak your daily pattern</text>
+<rect class="card-c1" x="28" y="509" width="1064" height="118" rx="8"/>
+<text class="t-main h2" x="44" y="537">The most reliable signal</text>
+<text class="t-main bd" x="44" y="563">Every hint above has other explanations. In practice the most reliable signal is the other person knowing something they should not.</text>
+<text class="t-main bd" x="44" y="580">The period around leaving an abusive relationship is the most dangerous. A burst of password changes, a deleted tracking app and a new phone in a bag all</text>
+<text class="t-main bd" x="44" y="597">read as someone about to go.</text>
+<text class="t-main bd" x="44" y="614">Time these actions to fit a safety plan rather than doing them the moment you read this page. Where possible, order them with a trained advocate.</text>
+<text class="t-foot" x="28" y="643">Take stock before acting. Until you know a device is clean, do not use it to look up support resources or contact an advocate.</text>
+<text class="t-foot" x="28" y="665">Keep the evidence. Do not mass-delete harassing messages to clean things up, and do not store any of it in a cloud account the other person can reach.</text>
+</svg>

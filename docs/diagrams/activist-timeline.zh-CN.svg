@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-labelledby="title desc">
+<title id="title">动员前、行动现场、行动之后，三个阶段各有各的准备</title>
+<desc id="desc">三个并排的阶段，用箭头串起来，底下有一条横幅代表贯穿全程的跨组织协作。动员前是风险最低、时间最多的阶段，要做的是通信群组的设计与隔离、云端文档先撤到 Cryptpad、密码管理器与账号清单、个人账号的隐私审计，以及一次性手机的取舍。行动现场要做的是出门前的设备锁定设置、现场拍照与录像的判断、选择 Signal 或离线 mesh，以及紧急联系人与失联流程。行动之后要处理的是删除证据前的合规考量、媒体曝光时的身份管理，以及取得法律支援的渠道。底下的横幅是跨组织协作，贯穿三个阶段，包含信息最小化原则、协作文档与文件交换工具的选择、群组命名与消息政策。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="277.333" height="250" rx="8"/>
+<text class="t-main h2" x="42" y="52">动员前准备</text>
+<text class="t-mute sm" x="42" y="84">风险最低，时间最多</text>
+<text class="t-main bd" x="42" y="102">通信群组的设计与隔离</text>
+<text class="t-main bd" x="42" y="119">云端文档先撤到 Cryptpad</text>
+<text class="t-main bd" x="42" y="136">密码管理器与账号清单</text>
+<text class="t-main bd" x="42" y="153">个人账号的隐私审计</text>
+<text class="t-main bd" x="42" y="170">一次性手机的取舍</text>
+<text class="t-mute sm" x="42" y="195">为什么在这里</text>
+<text class="t-main bd" x="42" y="213">多数人卡关的原因，</text>
+<text class="t-main bd" x="42" y="230">是把 30 分钟能做完的事</text>
+<text class="t-main bd" x="42" y="247">拖到当天才想起来</text>
+<rect class="card-w1" x="351.333" y="28" width="277.333" height="250" rx="8"/>
+<text class="t-main h2" x="365.333" y="52">行动现场</text>
+<text class="t-mute sm" x="365.333" y="84">来不及做新设置的阶段</text>
+<text class="t-main bd" x="365.333" y="102">出门前的设备锁定设置</text>
+<text class="t-main bd" x="365.333" y="119">现场拍照与录像的判断</text>
+<text class="t-main bd" x="365.333" y="136">Signal 与离线 mesh 的选择</text>
+<text class="t-main bd" x="365.333" y="153">紧急联系人与失联流程</text>
+<text class="t-mute sm" x="365.333" y="178">为什么在这里</text>
+<text class="t-main bd" x="365.333" y="196">被临检时手机被翻看，</text>
+<text class="t-main bd" x="365.333" y="213">群组对话与照片库</text>
+<text class="t-main bd" x="365.333" y="230">会一起暴露</text>
+<rect class="card-c2" x="674.667" y="28" width="277.333" height="250" rx="8"/>
+<text class="t-main h2" x="688.667" y="52">行动之后</text>
+<text class="t-mute sm" x="688.667" y="84">风险不会跟着散场结束</text>
+<text class="t-main bd" x="688.667" y="102">删除「证据」前的合规考量</text>
+<text class="t-main bd" x="688.667" y="119">媒体曝光时的身份管理</text>
+<text class="t-main bd" x="688.667" y="136">取得法律支援的渠道</text>
+<text class="t-mute sm" x="688.667" y="161">为什么在这里</text>
+<text class="t-main bd" x="688.667" y="179">抗争结束后被告时，</text>
+<text class="t-main bd" x="688.667" y="196">公司会用内部 IT 记录、</text>
+<text class="t-main bd" x="688.667" y="213">门禁卡与存取记录追究</text>
+<path class="arrow" d="M313.333 153 H336.333"/>
+<path class="arrow-h" d="M343.333 153 L335.333 147.5 L335.333 158.5 Z"/>
+<path class="arrow" d="M636.667 153 H659.667"/>
+<path class="arrow-h" d="M666.667 153 L658.667 147.5 L658.667 158.5 Z"/>
+<rect class="card-n" x="28" y="292" width="924" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="320">跨组织协作：三个阶段都适用</text>
+<text class="t-main bd" x="44" y="346">信息最小化原则。协作文档与文件交换工具的选择。群组命名与消息政策。</text>
+<text class="t-main bd" x="44" y="363">跨组织协调的协作文档放在一般云盘，后来被截图外流到对立阵营，这是实际发生过的情况。</text>
+<text class="t-foot" x="28" y="392">每个场景的对手不一样，核心问题只有一个：你现在的数字足迹里，哪些东西被取得后会伤害你或同伴。</text>
+<text class="t-foot" x="28" y="414">行动圈的风险不只有高强度的专案，更多是日常累积的暴露。三个阶段的准备门槛都不高。</text>
+</svg>

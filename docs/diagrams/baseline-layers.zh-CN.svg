@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 571" width="1010" height="571" role="img" aria-labelledby="title desc">
+<title id="title">三层防护各自对付一种对手，做完第一层就挡掉大部分的损失</title>
+<desc id="desc">三层由深到浅的横条，代表日常数字准备的三个层次，每一层对应一种不同的对手。第一层对付诈骗与账号入侵，项目是密码管理器、两步验证、系统与浏览器更新、对急着要你处理的消息换一个渠道确认，大约一小时可以做完，从 email 开始，接着是网银与常用通信软件。第二层对付商业数据收集，项目是手机权限与广告标识符、全盘加密与开机密码、日常通信改用端到端加密、备份、账号盘点，花的是几个晚上。第三层对付针对性调查，只在特定情境才需要，触发条件见文章的「什么时候该把标准拉高」一节。下方的红框列出六项被高估的做法：VPN、无痕模式、定期换密码、换手机号码、贴镜头贴纸、删掉 app，各自有明确的用途，只是常被误当成防护主力。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<text class="t-mute sm" x="238" y="40">主要对付的对手</text>
+<text class="t-mute sm" x="458" y="40">做什么</text>
+<text class="t-mute sm" x="828" y="40">要花多久</text>
+<path class="rule" d="M28 50 H982"/>
+<rect class="card-c3" x="28" y="62" width="954" height="100" rx="8"/>
+<text class="t-main h2" x="44" y="88">第一层</text>
+<text class="t-main bd" x="238" y="88">诈骗与账号入侵</text>
+<text class="t-main bd" x="238" y="105">以自动化撒网为主，</text>
+<text class="t-main bd" x="238" y="122">实际造成金钱损失的是这一种</text>
+<text class="t-main bd" x="458" y="88">密码管理器，每个网站不同密码</text>
+<text class="t-main bd" x="458" y="105">两步验证，能用强的就用强的</text>
+<text class="t-main bd" x="458" y="122">系统与浏览器保持更新</text>
+<text class="t-main bd" x="458" y="139">对急着要你处理的消息，换一个渠道确认</text>
+<text class="t-main bd" x="828" y="88">约一小时</text>
+<text class="t-main bd" x="828" y="105">从 email 开始，</text>
+<text class="t-main bd" x="828" y="122">接着是网银与常用通信软件</text>
+<rect class="card-c1" x="28" y="172" width="954" height="117" rx="8"/>
+<text class="t-main h2" x="44" y="198">第二层</text>
+<text class="t-main bd" x="238" y="198">商业数据收集</text>
+<text class="t-main bd" x="238" y="215">平台、广告商、数据掮客</text>
+<text class="t-main bd" x="238" y="232">持续在做，不针对你个人</text>
+<text class="t-mute bd" x="458" y="198">手机权限与广告标识符</text>
+<text class="t-mute bd" x="458" y="215">全盘加密与开机密码</text>
+<text class="t-mute bd" x="458" y="232">日常通信改用端到端加密</text>
+<text class="t-mute bd" x="458" y="249">备份，以及还原得回来的验证</text>
+<text class="t-mute bd" x="458" y="266">账号盘点</text>
+<text class="t-mute bd" x="828" y="198">几个晚上</text>
+<text class="t-mute bd" x="828" y="215">一次做一项，</text>
+<text class="t-mute bd" x="828" y="232">不必一口气做完</text>
+<rect class="card-n" x="28" y="299" width="954" height="83" rx="8"/>
+<text class="t-main h2" x="44" y="325">第三层</text>
+<text class="t-main bd" x="238" y="325">针对性调查</text>
+<text class="t-main bd" x="238" y="342">具备法律程序或技术资源，</text>
+<text class="t-main bd" x="238" y="359">多数人不在名单上</text>
+<text class="t-mute bd" x="458" y="325">触发条件见文章的</text>
+<text class="t-mute bd" x="458" y="342">「什么时候该把标准拉高」</text>
+<text class="t-mute bd" x="828" y="325">视情境</text>
+<text class="t-mute bd" x="828" y="342">换身份与换设备改变的是</text>
+<text class="t-mute bd" x="828" y="359">几个记录能不能被串起来</text>
+<rect class="card-no" x="28" y="402" width="954" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="430">被高估的做法：各自有用途，常被误当成防护主力</text>
+<text class="t-mute bd" x="44" y="456">VPN 换掉谁看得到你的连接。无痕模式清掉本机记录，平台与 ISP 照样认得你。定期换密码已被 NIST 明文取消要求。</text>
+<text class="t-mute bd" x="44" y="473">换手机号码要先解绑旧账号，旧号码会被回收再配发。贴镜头贴纸挡镜头有效，多数人担心的是麦克风。</text>
+<text class="t-mute bd" x="44" y="490">删掉 app 停止的是往后的收集，已经给出去的数据不会消失。</text>
+<text class="t-foot" x="28" y="523">把力气全放在第三种对手上，第二种造成的损失照样会发生。反过来也一样。</text>
+<text class="t-foot" x="28" y="545">三层不必一次做完。做完第一层，账号入侵与诈骗的损失已经挡掉大部分。</text>
+</svg>

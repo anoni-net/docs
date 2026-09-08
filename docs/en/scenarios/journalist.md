@@ -45,6 +45,12 @@ Technique does not protect a source who is identifiable from the story itself, s
 
 Two things are worth separating explicitly. A source decides how their words are used; the newsroom decides whether the story runs. When a source asks you to spike the piece, what usually helps is addressing the specific fear (will they be identifiable, when does it publish, who else is talking) rather than debating the story. Do not promise what you cannot deliver: "no one will know it was you" is rarely true, and promising it costs you the source's trust at the worst moment. Promise the things you control instead. If a source withdraws before publication, re-source or drop the material; if they withdraw after, be honest that published material is not retractable, which is a reason to have said so at the start. A source whose anxiety far exceeds your read of their situation often knows something you don't — ask.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/source-attribution-levels.en.svg"
+        alt="Four stacked bands running from dark to light, representing the four attribution levels a reporter and a source can agree on, with the source's exposure shrinking as you move down. The first level is on the record, meaning the name and job title can be printed, so the story carries the name, the title and the direct quote. The second level is anonymous quotation, meaning the content can be quoted under a role description, so the story carries a line such as an engineer who worked on the project said. The third level is background, used only to understand the situation and direct verification, with the source neither named nor quoted. The fourth level is not for use, where nothing enters the story at all. The red box below warns that anonymous quotation is the level that goes wrong most often, because the role description can identify the person on its own: if only three people at a company match the description, the description names all three.">
+    <figcaption>Confirm section by section, not once at the end</figcaption>
+</figure>
+
 ### Sources who don't use these tools
 
 Most digital-security guidance assumes a source who can install Signal, strip metadata, and run Tor Browser. Older sources, sources with hearing or vision loss, and sources without smartphone habits are common in exactly the stories that matter, and pushing them onto unfamiliar tools usually produces a misconfigured install or a lost contact. Move the technical burden to your side instead.

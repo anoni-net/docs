@@ -17,6 +17,12 @@ If none of them matches your situation, [what an ordinary person should actually
 
     Most of the scenarios below default to Taiwan or general Sinophone Asia-Pacific examples. Read that framing as a floor, not a ceiling, for Hong Kong. Since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, national-security offenses carry sentences measured in years rather than fines, national-security police can seize and forensically examine a device under warrant, and the local civil-society organizations that once absorbed this kind of risk have largely dissolved since 2021. Where a scenario below assumes a functioning local NGO safety net, that assumption often no longer holds; the [activists](./activist.md) and [journalists](./journalist.md) pages route Hong Kong readers to international organizations instead. Macau's environment differs again and is comparatively under-documented here.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/scenario-map.en.svg"
+        alt="At the top sits the shared baseline, what an ordinary person should have in place, which every reader starts from and which every other article assumes. Below it the scenarios split into four groups. The first goes by your role: journalists protecting sources, activists preparing for mobilisation, election observers protecting themselves, and advocacy organisations building anonymous donation channels. The second goes by your situation: anonymous socialising for LGBTQ+ people, and digital preparation for survivors of domestic violence. The third goes by where you speak: publishing on mainland Chinese platforms, and posting online in Singapore and Malaysia. The fourth goes by travel and external events: preparing for business trips and conferences, generating a destination briefing with AI before you go, and preparing for network shutdowns. One person can fall into several groups at once, and the articles cross-reference each other.">
+    <figcaption>Start from the shared baseline, then move up by role and situation</figcaption>
+</figure>
+
 ## :material-check-circle-outline: Available now
 
 - [What an ordinary person should actually do](./everyday-baseline.md) — start here if none of the roles below is yours. Three kinds of adversary and why they need different answers, the common advice ordered by how much it actually blocks, what is overrated, and the triggers that mean you should move to one of the pages below.

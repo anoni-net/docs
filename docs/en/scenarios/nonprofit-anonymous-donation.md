@@ -31,6 +31,12 @@ Put differently, a donor's identifying information is tied to their politics, se
 
     Source (reviewed 2026-07): [Hong Kong court convicts Cardinal Zen and 5 others over failing to register protester relief fund as society](https://hongkongfp.com/2022/11/25/breaking-hong-kong-court-convicts-cardinal-zen-and-5-others-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"}, Hong Kong Free Press.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/donation-channels.en.svg"
+        alt="The upper half compares three collection channels an organisation can offer. Cash scores high on anonymity, medium on compliance burden, low on scale and cannot cross borders, suiting small domestic support at events or via a public mailbox. Cryptocurrency scores medium to high on anonymity, high on compliance burden, high on scale and works across borders, suiting cross-border giving. Prepaid gift cards and convenience-store codes score medium on anonymity, low on compliance burden, medium on scale and are domestic only, giving the lowest-friction route for small domestic gifts. The lower half maps four donor threats to channels. Someone hiding the money trail from family or an employer uses cash, prepaid cards or privacy coins and avoids credit cards and joint bank accounts. Someone avoiding an identity record at the organisation uses cash with no email attached, or privacy coins to a self-custodied wallet, and avoids bank transfers because the account name is retained. Someone avoiding cross-border surveillance uses Monero or shielded Zcash and avoids Bitcoin through a centralised exchange. Someone with a simple preference for leaving no record uses any cash route and avoids electronic payment.">
+    <figcaption>The organisation offers both paths, and the donor picks by who they are avoiding</figcaption>
+</figure>
+
 ## Organizers can build an optional anonymous channel
 
 The word *optional* is the core of the design. People who want anonymity have a path, and people who want to be named can still be named; the two run in parallel. In practice most donors take the named path (for a receipt, for membership), and a minority take the anonymous path for the sensitive reasons above. Preparing both is more respectful of your supporters' circumstances than forcing everyone down one road.

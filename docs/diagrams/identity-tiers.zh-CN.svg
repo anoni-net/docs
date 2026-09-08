@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 493" width="980" height="493" role="img" aria-labelledby="title desc">
+<title id="title">三层账号分流，彼此不共用任何一个标识项</title>
+<desc id="desc">三个并排的栏位，代表日常层、社群层与探索层三种账号，栏位之间用虚线隔开并标示彼此不交集。日常层是跟工作、家人与长期朋友共用的身份，里面有 email、社交、银行与流媒体服务，默认假设家人或同事看到也没关系，生命周期是长期。社群层是跟 LGBTQ+ 朋友、社群活动与性倾向相关内容互动的身份，跟日常层不交集，目的是让你能参与社群但不被串连，头像不用任何出现在家人或同事看得到的地方的照片。探索层是交友 app、匿名社群与探索期的测试账号，风险最高、生命周期短，用完就丢。最上方标出分流的基础：不共用 email、不共用 username、不共用浏览器、不共用密码管理器文件夹。最下方列出每一层各自需要的东西：自己的 email、浏览器 profile、密码管理器 vault 与两步验证组。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-n" x="28" y="28" width="924" height="52" rx="8"/>
+<text class="t-main h2" x="44" y="58">分流的基础</text>
+<text class="t-main bd" x="176" y="58">不同层的账号不共用 email、不共用 username、不共用浏览器、不共用密码管理器文件夹。</text>
+<rect class="card-c1" x="28" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="42" y="118">日常层</text>
+<text class="t-mute sm" x="42" y="136">长期，跟你的本名绑在一起</text>
+<text class="t-mute sm" x="42" y="154">里面有什么</text>
+<text class="t-main bd" x="42" y="172">email、社交</text>
+<text class="t-main bd" x="42" y="189">银行、流媒体服务</text>
+<text class="t-main bd" x="42" y="206">工作与学校相关账号</text>
+<text class="t-mute sm" x="42" y="231">默认假设</text>
+<text class="t-main bd" x="42" y="249">家人或同事看到</text>
+<text class="t-main bd" x="42" y="266">也没关系</text>
+<rect class="card-c2" x="356" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="370" y="118">社群层</text>
+<text class="t-mute sm" x="370" y="136">长期，跟日常层完全不交集</text>
+<text class="t-mute sm" x="370" y="154">里面有什么</text>
+<text class="t-main bd" x="370" y="172">社群活动的账号</text>
+<text class="t-main bd" x="370" y="189">性倾向相关内容的互动</text>
+<text class="t-main bd" x="370" y="206">LGBTQ+ 朋友的联系方式</text>
+<text class="t-mute sm" x="370" y="231">默认假设</text>
+<text class="t-main bd" x="370" y="249">能参与社群，</text>
+<text class="t-main bd" x="370" y="266">但不被串连回日常层。</text>
+<text class="t-main bd" x="370" y="283">头像不用任何家人或同事</text>
+<text class="t-main bd" x="370" y="300">看得到的照片</text>
+<rect class="card-w1" x="684" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="698" y="118">探索层</text>
+<text class="t-mute sm" x="698" y="136">短期，用完就丢</text>
+<text class="t-mute sm" x="698" y="154">里面有什么</text>
+<text class="t-main bd" x="698" y="172">交友 app</text>
+<text class="t-main bd" x="698" y="189">匿名社群</text>
+<text class="t-main bd" x="698" y="206">探索期的测试账号</text>
+<text class="t-mute sm" x="698" y="231">默认假设</text>
+<text class="t-main bd" x="698" y="249">风险最高的一层。</text>
+<text class="t-main bd" x="698" y="266">跟社群层也要分开，</text>
+<text class="t-main bd" x="698" y="283">位置与照片的暴露面</text>
+<text class="t-main bd" x="698" y="300">都比另外两层大</text>
+<path class="rule" d="M326 102 V323" stroke-dasharray="4 4"/>
+<rect class="tag" x="303" y="200.5" width="46" height="22" rx="11"/>
+<text class="t-tag" x="326" y="215.5" text-anchor="middle">不交集</text>
+<path class="rule" d="M654 102 V323" stroke-dasharray="4 4"/>
+<rect class="tag" x="631" y="200.5" width="46" height="22" rx="11"/>
+<text class="t-tag" x="654" y="215.5" text-anchor="middle">不交集</text>
+<rect class="card" x="28" y="345" width="924" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="373">每一层各自要有的四样东西</text>
+<text class="t-mute bd" x="44" y="399">自己的 email（邮件别名可以从同一个信箱长出多个对外地址）、自己的浏览器 profile、自己的密码管理器 vault、自己的两步验证组。</text>
+<text class="t-mute bd" x="44" y="416">注册时避开平台用手机号与通讯录做的反向匹配。账号存在之后还要防头像反查、username 重复、发帖时段与写作风格这几种串连途径。</text>
+<text class="t-foot" x="28" y="445">不一定每个人都需要三层。刚开始整理时，先确保日常层跟社群层分离，等习惯了再评估要不要切出探索层。</text>
+<text class="t-foot" x="28" y="467">已经出柜的人也适用。保护还没出柜的伴侣与朋友、维持职场专业形象、控制跨平台的呈现节奏，都要靠同一套分层。</text>
+</svg>

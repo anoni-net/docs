@@ -25,6 +25,12 @@ This page is **not** a per-country data table. It works for **any destination**:
 !!! warning "AI will fabricate phone numbers, laws, and prices"
     Language models are very good at sounding confident while being wrong. Treat the AI's reply as a starting list of *what to check next*, not as the final answer — especially emergency numbers, legal citations, visa rules, and tariffs. **Always** verify those against official primary sources. Note the perverse twist: the more obscure the destination, the less training data the AI has and the more it will fabricate — exactly when you most need accuracy. In those cases especially, treat AI output only as a checklist of *what to verify* against the primary sources at the bottom of this page.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/travel-briefing-flow.en.svg"
+        alt="Four steps side by side, joined by arrows. Step one is the opening prompt: replace the origin, destination and length of stay with your own details and paste it to the AI to set the role. You only fill this in once. Step two is five sets of questions, copied and pasted item by item with no editing: the digital environment covering censorship, Tor, VPN and device searches; legal and political risk; connectivity and communication covering SIM and eSIM; emergency contacts and support networks; and, optionally, the physical and surveillance environment. Step three is checking against primary sources, taking the AI's answers to the official sources listed at the foot of the article, with emergency numbers, statute references, visa rules and tariffs always verified. Step four is the emergency card: copy the key contacts from the fourth set of questions onto a card, print and laminate it, keep one in your wallet and one in your luggage, and store a copy in an offline note on your phone. The red box at the bottom warns that AI invents phone numbers, statutes and tariffs.">
+    <figcaption>The AI's answers are a starting list of what to look up</figcaption>
+</figure>
+
 ## Priming prompt (paste this first)
 
 === "Full (self-hosted / local AI)"

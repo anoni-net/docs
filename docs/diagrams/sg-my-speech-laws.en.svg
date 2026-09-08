@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 748" width="1240" height="748" role="img" aria-labelledby="title desc">
+<title id="title">Singapore and Malaysia each have a named set of statutes, and a real-name layer that defeats pseudonyms</title>
+<desc id="desc">Two columns listing the statutes that reach online speech in Singapore and Malaysia. Singapore has POFMA, FICA, defamation and contempt of court, and a broad definition of public assembly under the Public Order Act. Malaysia has section 233 of the Communications and Multimedia Act 1998, the Sedition Act 1948, SOSMA, the Societies Act 1966, and state-level religious enforcement. The bar below sets out the real-name layer both countries share: national digital identity in the form of Singpass, MyKad and MyDigital ID, plus mandatory SIM registration, so accounts, devices and payment methods usually already point at a legal name. The final bar explains that visibility and organisation amplify risk, with low-reach posts, viral posts and coordinated action sitting at different levels.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="583" height="392" rx="8"/>
+<text class="t-main h2" x="44" y="56">Singapore</text>
+<text class="t-mute sm" x="44" y="78">Statutes to check against. This list is not exhaustive.</text>
+<text class="t-main bd" x="44" y="102">POFMA (Protection from Online Falsehoods and Manipulation Act, 2019)</text>
+<text class="t-mute sm" x="44" y="121">A minister can order a correction or takedown of a false statement of fact.</text>
+<text class="t-mute sm" x="44" y="138">Most posters meet it as a correction notice or a removal.</text>
+<text class="t-mute sm" x="44" y="155">2026 brought the first criminal charges. Ignoring a direction is itself an offence.</text>
+<text class="t-main bd" x="44" y="180">FICA (Foreign Interference (Countermeasures) Act, 2021)</text>
+<text class="t-mute sm" x="44" y="199">Aimed at organised or foreign-linked political actors.</text>
+<text class="t-mute sm" x="44" y="216">It matters more to cross-border organisers than to a single political comment.</text>
+<text class="t-main bd" x="44" y="241">Defamation and contempt of court</text>
+<text class="t-mute sm" x="44" y="260">Civil and criminal defamation, plus the contempt provisions of the</text>
+<text class="t-mute sm" x="44" y="277">Administration of Justice (Protection) Act. The practical limit on</text>
+<text class="t-mute sm" x="44" y="294">commenting about officials and live cases.</text>
+<text class="t-main bd" x="44" y="319">Public assembly under the Public Order Act</text>
+<text class="t-mute sm" x="44" y="338">The definition of assembly is broad enough to cover online mobilisation.</text>
+<text class="t-mute sm" x="44" y="355">An indoor forum has been treated as an illegal assembly because it was streamed.</text>
+<rect class="card-w1" x="629" y="28" width="583" height="392" rx="8"/>
+<text class="t-main h2" x="645" y="56">Malaysia</text>
+<text class="t-mute sm" x="645" y="78">The provisions reach shares and comments, not only what you wrote yourself.</text>
+<text class="t-main bd" x="645" y="102">Section 233, Communications and Multimedia Act 1998</text>
+<text class="t-mute sm" x="645" y="121">The provision used most often against online speech. After the February 2025</text>
+<text class="t-mute sm" x="645" y="138">amendment, penalties reach RM500,000 or two years' imprisonment.</text>
+<text class="t-mute sm" x="645" y="155">In 2026 the Federal Court required prosecutors to prove genuine intent.</text>
+<text class="t-main bd" x="645" y="180">Sedition Act 1948</text>
+<text class="t-mute sm" x="645" y="199">A colonial-era law still in force and still in use.</text>
+<text class="t-mute sm" x="645" y="216">It applies to the 3R subjects: race, religion and royalty.</text>
+<text class="t-main bd" x="645" y="241">SOSMA (Security Offences (Special Measures) Act 2012)</text>
+<text class="t-mute sm" x="645" y="260">Special procedure for security offences, including extended detention.</text>
+<text class="t-mute sm" x="645" y="277">Aimed at terrorism and national security, not everyday speech cases.</text>
+<text class="t-main bd" x="645" y="302">Societies Act 1966</text>
+<text class="t-mute sm" x="645" y="321">Reaches groups with members, officers and continuing activity.</text>
+<text class="t-mute sm" x="645" y="338">A one-off hashtag does not constitute a society.</text>
+<text class="t-main bd" x="645" y="363">State religious enforcement</text>
+<text class="t-mute sm" x="645" y="382">State Islamic authorities enforce Syariah offences that apply to Muslims only.</text>
+<text class="t-mute sm" x="645" y="399">A separate mechanism from the Sedition Act's 3R scope, not an overlap.</text>
+<rect class="card-n" x="28" y="434" width="1184" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="462">The real-name layer both countries share</text>
+<text class="t-main bd" x="44" y="488">National digital identity such as Singpass in Singapore and MyKad and MyDigital ID in Malaysia, plus mandatory SIM registration in both.</text>
+<text class="t-main bd" x="44" y="505">Accounts, devices and payment methods usually already point at a legal name. Changing the display name on a real-name account is not separation. Separation has to be built</text>
+<text class="t-main bd" x="44" y="522">from the start.</text>
+<rect class="card" x="28" y="549" width="1184" height="135" rx="8"/>
+<text class="t-main h2" x="44" y="577">Risk rises with visibility and organisation</text>
+<text class="t-mute bd" x="44" y="603">A low-reach post, a viral post and a coordinated action sit at different levels. Recorded enforcement lands mostly on public figures, activists and organisers, or on posts</text>
+<text class="t-mute bd" x="44" y="620">that travelled a long way.</text>
+<text class="t-mute bd" x="44" y="637">An ordinary low-visibility post is less likely to be pursued. Less likely is not safe, and the 2026 trend is more prosecutions.</text>
+<text class="t-mute bd" x="44" y="654">Being abroad does not put you out of reach. Singapore's foreign interference framework and POFMA assert extraterritorial effect, and the Malaysian provisions are drafted</text>
+<text class="t-mute bd" x="44" y="671">broadly.</text>
+<text class="t-foot" x="28" y="700">Work out which subject you are touching and how visible you are, and you know which statute would be cited and how exposed you are.</text>
+<text class="t-foot" x="28" y="722">Both countries mandate SIM registration, so a number and payment route that point at nobody is hard to obtain. Aim at separation and fewer links rather than at anonymity.</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 588" width="1180" height="588" role="img" aria-labelledby="title desc">
+<title id="title">Three layers, each aimed at a different adversary</title>
+<desc id="desc">Three stacked bands running from dark to light, representing the three layers of everyday digital preparation, each aimed at a different adversary. Layer one addresses fraud and account takeover, the kind that actually costs people money: a password manager with a different password per site, two-factor authentication using the strongest method available, keeping the system and browser updated, and switching channel to confirm any message that pushes you to act quickly. It takes about an hour, starting with email, then banking and messaging accounts. Layer two addresses commercial data collection by platforms, advertisers and data brokers: phone permissions and the advertising identifier, full-disk encryption with a boot password, end-to-end encrypted messaging, backups that you have tested restoring, and an account inventory. Layer three addresses targeted investigation and is only needed in specific situations. The red box below lists six overrated measures: VPNs, private browsing, scheduled password changes, changing your phone number, camera stickers and deleting apps, each of which has a real use but is often mistaken for the main line of defence.</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<text class="t-mute sm" x="258" y="40">ADVERSARY IT ADDRESSES</text>
+<text class="t-mute sm" x="508" y="40">WHAT TO DO</text>
+<text class="t-mute sm" x="958" y="40">HOW LONG</text>
+<path class="rule" d="M28 50 H1152"/>
+<rect class="card-c3" x="28" y="62" width="1124" height="100" rx="8"/>
+<text class="t-main h2" x="44" y="88">Layer 1</text>
+<text class="t-main bd" x="258" y="88">Fraud and account takeover</text>
+<text class="t-main bd" x="258" y="105">Mostly automated and untargeted.</text>
+<text class="t-main bd" x="258" y="122">This is the one that costs</text>
+<text class="t-main bd" x="258" y="139">people money.</text>
+<text class="t-main bd" x="508" y="88">A password manager, a different password per site</text>
+<text class="t-main bd" x="508" y="105">Two-factor authentication, the strongest method available</text>
+<text class="t-main bd" x="508" y="122">Keep the system and browser updated</text>
+<text class="t-main bd" x="508" y="139">Switch channel to confirm any message that rushes you</text>
+<text class="t-main bd" x="958" y="88">About an hour</text>
+<text class="t-main bd" x="958" y="105">Start with email, then</text>
+<text class="t-main bd" x="958" y="122">banking and messaging</text>
+<rect class="card-c1" x="28" y="172" width="1124" height="117" rx="8"/>
+<text class="t-main h2" x="44" y="198">Layer 2</text>
+<text class="t-main bd" x="258" y="198">Commercial data collection</text>
+<text class="t-main bd" x="258" y="215">Platforms, advertisers and data</text>
+<text class="t-main bd" x="258" y="232">brokers, running continuously and</text>
+<text class="t-main bd" x="258" y="249">not aimed at you personally.</text>
+<text class="t-mute bd" x="508" y="198">Phone permissions and the advertising identifier</text>
+<text class="t-mute bd" x="508" y="215">Full-disk encryption and a boot password</text>
+<text class="t-mute bd" x="508" y="232">End-to-end encryption for everyday messaging</text>
+<text class="t-mute bd" x="508" y="249">Backups, and a restore you have actually tested</text>
+<text class="t-mute bd" x="508" y="266">An account inventory</text>
+<text class="t-mute bd" x="958" y="198">A few evenings</text>
+<text class="t-mute bd" x="958" y="215">One item at a time, no need</text>
+<text class="t-mute bd" x="958" y="232">to finish it in one sitting</text>
+<rect class="card-n" x="28" y="299" width="1124" height="100" rx="8"/>
+<text class="t-main h2" x="44" y="325">Layer 3</text>
+<text class="t-main bd" x="258" y="325">Targeted investigation</text>
+<text class="t-main bd" x="258" y="342">Backed by legal process or</text>
+<text class="t-main bd" x="258" y="359">technical resources. Most people</text>
+<text class="t-main bd" x="258" y="376">are not on that list.</text>
+<text class="t-mute bd" x="508" y="325">See the section on when to raise your standard</text>
+<text class="t-mute bd" x="508" y="342">for what triggers this layer</text>
+<text class="t-mute bd" x="958" y="325">Depends</text>
+<text class="t-mute bd" x="958" y="342">Changing identity or device</text>
+<text class="t-mute bd" x="958" y="359">changes which records can be</text>
+<text class="t-mute bd" x="958" y="376">linked, nothing more</text>
+<rect class="card-no" x="28" y="419" width="1124" height="101" rx="8"/>
+<text class="t-main h2" x="44" y="447">Overrated measures: each has a use, none is the main line of defence</text>
+<text class="t-mute bd" x="44" y="473">A VPN changes who can see your connection. Private browsing clears local traces while platforms and your ISP still recognise you.</text>
+<text class="t-mute bd" x="44" y="490">NIST no longer asks for scheduled password changes. A recycled phone number gets reassigned, so unlink the old accounts first.</text>
+<text class="t-mute bd" x="44" y="507">A camera sticker works on the camera, while most people are worried about the microphone. Deleting an app stops future collection only.</text>
+<text class="t-foot" x="28" y="540">Put all your effort into the third adversary and the losses from the second still happen. The reverse holds too.</text>
+<text class="t-foot" x="28" y="562">You do not have to finish all three at once. Layer one alone removes most of the loss from account takeover and fraud.</text>
+</svg>

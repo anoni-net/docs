@@ -22,6 +22,12 @@ For why the strength of your preparation should follow your own situation, see [
 
 Sorting the outage into a level tells you what to do next. Get the level wrong and no amount of preparation helps.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/shutdown-levels.en.svg"
+        alt="Four stacked bands running from light to dark, representing the four levels of a network shutdown, with fewer options available as you move down. Level one is throttling and intermittent loss, identified by small files getting through while large ones fail, leaving text messaging and offline editing; the common misreading is blaming your own device and rebooting repeatedly. Level two is specific services being blocked, identified by other sites loading on the same connection, leaving any channel that is not blocked; the common misreading is treating one broken app as a dead line. Level three is a regional blackout, identified by switching Wi-Fi and carriers with the same result while people nearby see the same thing, leaving whatever you stored in advance, Bluetooth and local networks, and physical delivery; the common misreading is assuming Bluetooth and local networks also stop working. Level four is a shutdown that takes the power with it, obvious without any diagnosis, leaving battery time, paper, and meeting arrangements agreed in advance; the common misreading is still focusing on communication tools instead of power management.">
+    <figcaption>Read the level wrong and none of your preparation applies</figcaption>
+</figure>
+
 | Level | How to tell | What you still have | The most common mistake |
 |---|---|---|---|
 | One, slowdowns and intermittent drops | Small files get through, large ones do not | Text communication, editing offline and sending when conditions allow | Assuming your own device is broken, and rebooting it repeatedly |

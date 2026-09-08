@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 493" width="980" height="493" role="img" aria-labelledby="title desc">
+<title id="title">三層帳號分流，彼此不共用任何一個識別項</title>
+<desc id="desc">三個並排的欄位，代表日常層、社群層與探索層三種帳號，欄位之間用虛線隔開並標示彼此不交集。日常層是跟工作、家人與長期朋友共用的身分，裡面有 email、社群、銀行與串流服務，預設假設家人或同事看到也沒關係，生命週期是長期。社群層是跟 LGBTQ+ 朋友、社群活動與性傾向相關內容互動的身分，跟日常層不交集，目的是讓你能參與社群但不被串連，頭像不用任何出現在家人或同事看得到的地方的照片。探索層是交友 app、匿名社群與探索期的測試帳號，風險最高、生命週期短，用完就丟。最上方標出分流的基礎：不共用 email、不共用 username、不共用瀏覽器、不共用密碼管理器資料夾。最下方列出每一層各自需要的東西：自己的 email、瀏覽器 profile、密碼管理器 vault 與兩階段驗證群組。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-n" x="28" y="28" width="924" height="52" rx="8"/>
+<text class="t-main h2" x="44" y="58">分流的基礎</text>
+<text class="t-main bd" x="176" y="58">不同層的帳號不共用 email、不共用 username、不共用瀏覽器、不共用密碼管理器資料夾。</text>
+<rect class="card-c1" x="28" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="42" y="118">日常層</text>
+<text class="t-mute sm" x="42" y="136">長期，跟你的本名綁在一起</text>
+<text class="t-mute sm" x="42" y="154">裡面有什麼</text>
+<text class="t-main bd" x="42" y="172">email、社群</text>
+<text class="t-main bd" x="42" y="189">銀行、串流服務</text>
+<text class="t-main bd" x="42" y="206">工作與學校相關帳號</text>
+<text class="t-mute sm" x="42" y="231">預設假設</text>
+<text class="t-main bd" x="42" y="249">家人或同事看到</text>
+<text class="t-main bd" x="42" y="266">也沒關係</text>
+<rect class="card-c2" x="356" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="370" y="118">社群層</text>
+<text class="t-mute sm" x="370" y="136">長期，跟日常層完全不交集</text>
+<text class="t-mute sm" x="370" y="154">裡面有什麼</text>
+<text class="t-main bd" x="370" y="172">社群活動的帳號</text>
+<text class="t-main bd" x="370" y="189">性傾向相關內容的互動</text>
+<text class="t-main bd" x="370" y="206">LGBTQ+ 朋友的聯絡方式</text>
+<text class="t-mute sm" x="370" y="231">預設假設</text>
+<text class="t-main bd" x="370" y="249">能參與社群，</text>
+<text class="t-main bd" x="370" y="266">但不被串連回日常層。</text>
+<text class="t-main bd" x="370" y="283">頭像不用任何家人或同事</text>
+<text class="t-main bd" x="370" y="300">看得到的照片</text>
+<rect class="card-w1" x="684" y="94" width="268" height="237" rx="8"/>
+<text class="t-main h2" x="698" y="118">探索層</text>
+<text class="t-mute sm" x="698" y="136">短期，用完就丟</text>
+<text class="t-mute sm" x="698" y="154">裡面有什麼</text>
+<text class="t-main bd" x="698" y="172">交友 app</text>
+<text class="t-main bd" x="698" y="189">匿名社群</text>
+<text class="t-main bd" x="698" y="206">探索期的測試帳號</text>
+<text class="t-mute sm" x="698" y="231">預設假設</text>
+<text class="t-main bd" x="698" y="249">風險最高的一層。</text>
+<text class="t-main bd" x="698" y="266">跟社群層也要分開，</text>
+<text class="t-main bd" x="698" y="283">位置與照片的暴露面</text>
+<text class="t-main bd" x="698" y="300">都比另外兩層大</text>
+<path class="rule" d="M326 102 V323" stroke-dasharray="4 4"/>
+<rect class="tag" x="303" y="200.5" width="46" height="22" rx="11"/>
+<text class="t-tag" x="326" y="215.5" text-anchor="middle">不交集</text>
+<path class="rule" d="M654 102 V323" stroke-dasharray="4 4"/>
+<rect class="tag" x="631" y="200.5" width="46" height="22" rx="11"/>
+<text class="t-tag" x="654" y="215.5" text-anchor="middle">不交集</text>
+<rect class="card" x="28" y="345" width="924" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="373">每一層各自要有的四樣東西</text>
+<text class="t-mute bd" x="44" y="399">自己的 email（郵件別名可以從同一個信箱長出多個對外地址）、自己的瀏覽器 profile、自己的密碼管理器 vault、自己的兩階段驗證群組。</text>
+<text class="t-mute bd" x="44" y="416">註冊時避開平台用手機號與通訊錄做的反向匹配。帳號存在之後還要防頭像反查、username 重複、發文時段與寫作風格這幾種串連途徑。</text>
+<text class="t-foot" x="28" y="445">不一定每個人都需要三層。剛開始整理時，先確保日常層跟社群層分離，等習慣了再評估要不要切出探索層。</text>
+<text class="t-foot" x="28" y="467">已經出櫃的人也適用。保護還沒出櫃的伴侶與朋友、維持職場專業形象、控制跨平台的呈現節奏，都要靠同一套分層。</text>
+</svg>

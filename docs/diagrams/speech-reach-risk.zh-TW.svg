@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 457" width="980" height="457" role="img" aria-labelledby="title desc">
+<title id="title">有效與安全在四個地方直接衝突，每次行動前先決定要哪一邊</title>
+<desc id="desc">上半部是四組互相拉扯的組合，左邊是你想要的，箭頭指向右邊的代價。想讓普通人願意相信，代價是匿名帳號的可信度低，可信度來自實名、履歷與既有關係，而這些正是暴露面。想避開關鍵詞過濾，代價是變形後的表達難懂，只有原本就懂的人看得懂，等於留在同溫層。想讓內容有說服力，代價是說服力來自具體、可查證的細節，而具體正是最容易指向你的部分。想觸及更多人，代價是傳播規模越大越接近相關條款的認定門檻，也越可能被列為重點處理對象。下半部是三種取向：要留下紀錄的人優先把內容存檔到境外並把曝光度壓到最低，要說服特定的人的人走私下與小範圍並放棄公開傳播的規模，要擴散的人接受發布者承擔較高風險，或把內容交給願意承擔的既有管道。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<text class="t-mute sm" x="28" y="40">你想要的</text>
+<text class="t-mute sm" x="338" y="40">代價</text>
+<path class="rule" d="M28 50 H952"/>
+<rect class="card-c1" x="28" y="60" width="250" height="39" rx="8"/>
+<text class="t-main bd" x="42" y="84.5">讓普通人願意相信</text>
+<path class="arrow" d="M288 79.5 H319"/>
+<path class="arrow-h" d="M326 79.5 L318 74 L318 85 Z"/>
+<rect class="card-w1" x="338" y="60" width="614" height="39" rx="8"/>
+<text class="t-main bd" x="352" y="82">匿名帳號的可信度低。可信度來自實名、履歷、既有關係，而這些正是暴露面。</text>
+<rect class="card-c1" x="28" y="109" width="250" height="39" rx="8"/>
+<text class="t-main bd" x="42" y="133.5">避開關鍵詞過濾</text>
+<path class="arrow" d="M288 128.5 H319"/>
+<path class="arrow-h" d="M326 128.5 L318 123 L318 134 Z"/>
+<rect class="card-w1" x="338" y="109" width="614" height="39" rx="8"/>
+<text class="t-main bd" x="352" y="131">變形後的表達難懂，只有原本就懂的人看得懂，等於留在同溫層。</text>
+<rect class="card-c1" x="28" y="158" width="250" height="39" rx="8"/>
+<text class="t-main bd" x="42" y="182.5">內容有說服力</text>
+<path class="arrow" d="M288 177.5 H319"/>
+<path class="arrow-h" d="M326 177.5 L318 172 L318 183 Z"/>
+<rect class="card-w1" x="338" y="158" width="614" height="39" rx="8"/>
+<text class="t-main bd" x="352" y="180">說服力來自具體、可查證的細節，而具體正是最容易指向你的部分。</text>
+<rect class="card-c1" x="28" y="207" width="250" height="39" rx="8"/>
+<text class="t-main bd" x="42" y="231.5">觸及更多人</text>
+<path class="arrow" d="M288 226.5 H319"/>
+<path class="arrow-h" d="M326 226.5 L318 221 L318 232 Z"/>
+<rect class="card-w1" x="338" y="207" width="614" height="39" rx="8"/>
+<text class="t-main bd" x="352" y="229">傳播規模越大，越接近相關條款的認定門檻，也越可能被列為重點處理對象。</text>
+<text class="t-main h2" x="28" y="276">四組矛盾都沒有兩全的解法，每次行動前先決定要哪一邊</text>
+<rect class="card" x="28" y="290" width="297.333" height="103" rx="8"/>
+<text class="t-main h2" x="42" y="314">要留下紀錄</text>
+<text class="t-main bd" x="42" y="328">優先確保內容能被存檔到境外。</text>
+<text class="t-main bd" x="42" y="345">發布者的曝光度壓到最低。</text>
+<rect class="card" x="341.333" y="290" width="297.333" height="103" rx="8"/>
+<text class="t-main h2" x="355.333" y="314">要說服特定的人</text>
+<text class="t-main bd" x="355.333" y="328">走私下與小範圍。</text>
+<text class="t-main bd" x="355.333" y="345">放棄公開傳播的規模。</text>
+<rect class="card" x="654.667" y="290" width="297.333" height="103" rx="8"/>
+<text class="t-main h2" x="668.667" y="314">要擴散</text>
+<text class="t-main bd" x="668.667" y="328">接受發布者承擔較高風險。</text>
+<text class="t-main bd" x="668.667" y="345">或評估把內容交給</text>
+<text class="t-main bd" x="668.667" y="362">願意承擔的既有管道。</text>
+<text class="t-foot" x="28" y="409">風險不只落在你身上。群組管理者對群內內容負有管理責任，家人與雇主可能被聯繫，同一群組的其他成員可能一併受影響。</text>
+<text class="t-foot" x="28" y="431">評估要不要發的時候，二次傳播最常被低估。內容被別人轉發、截圖、改編之後，傳播規模脫離你的控制，責任可能仍然回到最初的來源。</text>
+</svg>

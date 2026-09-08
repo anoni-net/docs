@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 460" width="980" height="460" role="img" aria-labelledby="title desc">
+<title id="title">跟来源约定引用层级，逐段确认比整场一次确认可靠</title>
+<desc id="desc">四层由深到浅的横条，代表记者与消息来源可以约定的四种引用层级，越往下来源的暴露面越小。第一层是具名，意思是可以写出姓名与职称，报道里会出现姓名、职称与原话。第二层是匿名引用，意思是可以引述内容但用角色代称，报道里会出现像「一位参与该项目的工程师表示」这样的句子。第三层是背景，只用来理解事情与指引查证方向，来源不出现也不被引述。第四层是不使用，内容完全不进入报道。下方的红框提醒匿名引用最容易出事，因为代称本身可能就足以指认，一家公司里符合描述的只有三个人时，代称等于点名了三个人。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<text class="t-mute sm" x="348" y="40">意思</text>
+<text class="t-mute sm" x="628" y="40">报道里会出现什么</text>
+<path class="rule" d="M28 50 H912"/>
+<rect class="card-w2" x="28" y="62" width="884" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="88">具名</text>
+<text class="t-main bd" x="348" y="88">可以写出姓名与职称</text>
+<text class="t-main bd" x="628" y="88">姓名、职称、原话</text>
+<rect class="card-w1" x="28" y="121" width="884" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="147">匿名引用</text>
+<text class="t-main bd" x="348" y="147">可以引述内容，用角色代称</text>
+<text class="t-mute bd" x="628" y="147">「一位参与该项目的工程师表示」</text>
+<rect class="card-c1" x="28" y="180" width="884" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="206">背景</text>
+<text class="t-main bd" x="348" y="206">只用来理解事情、指引查证方向</text>
+<text class="t-mute bd" x="628" y="206">来源不出现，也不引述</text>
+<rect class="card-n" x="28" y="239" width="884" height="49" rx="8"/>
+<text class="t-main h2" x="44" y="265">不使用</text>
+<text class="t-main bd" x="348" y="265">完全不进入报道</text>
+<text class="t-mute bd" x="628" y="265">无</text>
+<path class="arrow" d="M934 42 V274"/>
+<path class="arrow-h" d="M934 288 L928.5 273 L939.5 273 Z"/>
+<text class="t-mute sm" x="949" y="89.5" text-anchor="middle">来</text>
+<text class="t-mute sm" x="949" y="108.5" text-anchor="middle">源</text>
+<text class="t-mute sm" x="949" y="127.5" text-anchor="middle">的</text>
+<text class="t-mute sm" x="949" y="146.5" text-anchor="middle">暴</text>
+<text class="t-mute sm" x="949" y="165.5" text-anchor="middle">露</text>
+<text class="t-mute sm" x="949" y="184.5" text-anchor="middle">面</text>
+<text class="t-mute sm" x="949" y="203.5" text-anchor="middle">递</text>
+<text class="t-mute sm" x="949" y="222.5" text-anchor="middle">减</text>
+<rect class="card-no" x="28" y="308" width="924" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="336">匿名引用最容易出事</text>
+<text class="t-main bd" x="44" y="362">代称本身可能就足以指认。一家公司里符合「参与该项目的工程师」描述的只有三个人时，这个代称等于点名了三个人。</text>
+<text class="t-main bd" x="44" y="379">谈的时候把描述再放宽一级，或者改走背景层级。</text>
+<text class="t-foot" x="28" y="412">同一次谈话里的不同信息可以落在不同层级。整场谈完再一次确认，来源多半已经记不得哪一句属于哪一层。</text>
+<text class="t-foot" x="28" y="434">不要承诺做不到的事。可以承诺的是具体行为：不交出记录、不在编辑部以外提到他、报道刊出前让他看过涉及他的段落。</text>
+</svg>

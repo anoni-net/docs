@@ -66,6 +66,12 @@ A photo with an embedded timestamp and GPS coordinates is strong evidence that a
 
 For why this matters at all, see [metadata, and why it matters](../basics/metadata.md). The general principle from [source protection](./journalist.md) applies directly: treat every file as carrying metadata until proven otherwise.
 
+<figure markdown="span">
+    <img src="https://assets.anoni.net/diagrams/observer-metadata-tradeoff.en.svg"
+        alt="The blue bar at the top states the tension carried by field records: the metadata that makes a record credible as evidence is exactly the metadata that exposes people. A photograph carrying a timestamp and GPS coordinates is strong evidence that a specific violation happened at a specific time and place. The same EXIF data, on a seized device, locates you and anyone identifiable in the frame. The two columns below hold the decision, taken item by item. On the left, keep the metadata when the value of the record lies in being verifiable and nobody in the frame is harmed by it: an empty ballot box, posted results, a queue with no identifiable faces. On the right, strip or avoid the metadata when the record could identify someone who would be endangered by it: polling staff, a frightened voter, a fellow observer in a hostile environment. Keep faces out of frame while shooting, and clear EXIF before an image leaves the device. The bar at the bottom lists four field practices.">
+    <figcaption>There is no general right answer, only a decision taken item by item</figcaption>
+</figure>
+
 ### Practical recording hygiene
 
 - **Photograph documents and conditions, not faces**, unless a face is the irregularity and the person consents or is a public official acting in an official capacity. Local law on photographing voters varies and can be strict; know it before you point a camera.

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 423" width="980" height="423" role="img" aria-labelledby="title desc">
+<title id="title">從開場 prompt 到隨身緊急卡的四步</title>
+<desc id="desc">四個並排的步驟，用箭頭串起來。第一步是開場 prompt，把出發地、目的地與停留天數換成你的資訊，貼給 AI 設定角色，只需要填一次。第二步是五項調查，逐項複製貼上即可，內容是數位環境（審查、Tor、VPN、設備搜查）、法律與政治風險、連線與通訊（SIM 與 eSIM）、緊急聯絡與支援網路，以及選用的實體與監控環境。第三步是核對一手來源，拿 AI 的答案去對照文章底部的官方來源，緊急電話、法條編號、簽證規則與資費一定要回到一手來源核對。第四步是隨身緊急卡，把第四項問到的關鍵聯絡抄成卡片，印出來過塑，皮夾與行李各放一張，並同步存進手機離線筆記。最下方的紅框提醒 AI 會編造電話、法條與資費。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
+     取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
+     切換的狀態不會傳進獨立的 SVG 檔。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #607d8b; }
+  .t-foot { fill: #546e7a; font-size: 13px; }
+  .t-inv  { fill: #ffffff; }
+  .h1 { font-size: 15px; font-weight: 700; }
+  .h2 { font-size: 13.5px; font-weight: 700; }
+  .bd { font-size: 12.5px; }
+  .sm { font-size: 11.5px; }
+  .card    { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-n  { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .rule    { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow   { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; }
+  .tag     { fill: #eceff1; stroke: none; }
+  .t-tag   { fill: #455a64; font-size: 11px; font-weight: 700; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #90a4ae; }
+    .t-foot { fill: #b0bec5; }
+    .t-inv  { fill: #241708; }
+    .card    { fill: #23292e; stroke: #4b565e; }
+    .card-n  { fill: #1c2226; stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .rule    { stroke: #46515a; }
+    .arrow   { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .tag     { fill: #333c43; }
+    .t-tag   { fill: #b0bec5; }
+  }
+</style>
+
+<rect class="card-c1" x="28" y="28" width="201" height="233" rx="8"/>
+<text class="t-main h2" x="42" y="52">一、開場 prompt</text>
+<text class="t-mute sm" x="42" y="84">只填一次</text>
+<text class="t-main bd" x="42" y="102">把出發地、目的地與</text>
+<text class="t-main bd" x="42" y="119">停留天數換成你的資訊，</text>
+<text class="t-main bd" x="42" y="136">日期與身分可留白。</text>
+<text class="t-main bd" x="42" y="153">貼給 AI 設定角色。</text>
+<text class="t-mute sm" x="42" y="178">兩種版本</text>
+<text class="t-main bd" x="42" y="196">完整版給自架與本地 AI。</text>
+<text class="t-main bd" x="42" y="213">商業服務版拿掉會讓</text>
+<text class="t-main bd" x="42" y="230">對話被記住的細節。</text>
+<rect class="card-c2" x="269" y="28" width="201" height="233" rx="8"/>
+<text class="t-main h2" x="283" y="52">二、五項調查</text>
+<text class="t-mute sm" x="283" y="84">逐項複製貼上，不必改字</text>
+<text class="t-main bd" x="283" y="102">數位環境：審查、Tor、</text>
+<text class="t-main bd" x="283" y="119">VPN、設備搜查</text>
+<text class="t-main bd" x="283" y="136">法律與政治風險</text>
+<text class="t-main bd" x="283" y="153">連線與通訊：SIM、eSIM</text>
+<text class="t-main bd" x="283" y="170">緊急聯絡與支援網路</text>
+<text class="t-main bd" x="283" y="187">實體與監控環境（選用）</text>
+<rect class="card-w1" x="510" y="28" width="201" height="233" rx="8"/>
+<text class="t-main h2" x="524" y="52">三、核對一手來源</text>
+<text class="t-mute sm" x="524" y="84">這一步不能跳過</text>
+<text class="t-main bd" x="524" y="102">拿 AI 的答案去對照</text>
+<text class="t-main bd" x="524" y="119">文章底部的官方來源。</text>
+<text class="t-mute sm" x="524" y="144">一定要核對的四類</text>
+<text class="t-main bd" x="524" y="162">緊急電話</text>
+<text class="t-main bd" x="524" y="179">法條編號</text>
+<text class="t-main bd" x="524" y="196">簽證規則</text>
+<text class="t-main bd" x="524" y="213">資費</text>
+<rect class="card-ok" x="751" y="28" width="201" height="233" rx="8"/>
+<text class="t-main h2" x="765" y="52">四、隨身緊急卡</text>
+<text class="t-mute sm" x="765" y="84">離線也拿得到的那一份</text>
+<text class="t-main bd" x="765" y="102">把第四項問到的關鍵聯絡</text>
+<text class="t-main bd" x="765" y="119">抄成一張卡片。</text>
+<text class="t-main bd" x="765" y="136">印出來過塑，皮夾與行李</text>
+<text class="t-main bd" x="765" y="153">各放一張。</text>
+<text class="t-main bd" x="765" y="170">同步存進手機離線筆記。</text>
+<path class="arrow" d="M235 144.5 H256"/>
+<path class="arrow-h" d="M263 144.5 L255 139 L255 150 Z"/>
+<path class="arrow" d="M476 144.5 H497"/>
+<path class="arrow-h" d="M504 144.5 L496 139 L496 150 Z"/>
+<path class="arrow" d="M717 144.5 H738"/>
+<path class="arrow-h" d="M745 144.5 L737 139 L737 150 Z"/>
+<rect class="card-no" x="28" y="275" width="924" height="84" rx="8"/>
+<text class="t-main h2" x="44" y="303">AI 會編造電話、法條與資費</text>
+<text class="t-main bd" x="44" y="329">語言模型很會「說得很有把握是錯的」。把 AI 的回答當成「我接下來該查哪些東西」的起點，不要當成最終答案。</text>
+<text class="t-main bd" x="44" y="346">目的地越冷門、公開資料越少，AI 手上的訓練資料也越少、越容易亂編，偏偏這種地方最需要可靠資訊。</text>
+<text class="t-foot" x="28" y="375">這套流程適用任何目的地，跟「東亞東南亞出差」那篇互補：那篇給的是已經查證過的十四地對照，這篇給的是自己查其他地方的方法。</text>
+<text class="t-foot" x="28" y="397">問完之後，行前準備照「出差與研討會的數位準備」的分層清單走一次，兩篇合起來才是完整的行前流程。</text>
+</svg>
