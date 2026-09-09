@@ -394,6 +394,35 @@ Cloudflare 在 2024 年為 WhatsApp 的稽核做了一套任何人都能執行�
 查證來源（2026-08）：Signal-Android 的 [reproducible-builds](https://github.com/signalapp/Signal-Android/tree/main/reproducible-builds){target="_blank"} 說明，Signal-iOS 儲存庫無對應目錄。
 {: .source-note }
 
+### 後續補充（2026-09-09）
+
+文章發布之後將近一個月，德國出現同一條路徑的公開紀錄，行為者跟前面舉的例子不同。以下三則的查證日期都在 2026-09。
+
+#### 連結裝置已經是刑事偵查的常態工具
+
+前面「連結裝置是它看不到的地方」舉的是國家級情報行為者的例子，容易讀成只有高價值目標才需要在意。2026 年 9 月 2 日 netzpolitik.org 公開的德國海關刑事局內部處分把行為者的範圍拉寬了。文件裡寫著該局自 2023 年底試辦訊息軟體監控（Messengerüberwachung），2025 年 8 月 1 日轉入正式編制，成為偵辦組織犯罪的常態工具，做法同樣是替目標帳號連上一台自己的裝置，不需要植入木馬。
+
+更早的兩個案例有裁定書可查。2020 年 1 月德國聯邦刑事警察局趁一對父母以證人身分自願交出手機的機會，暗中啟用了 WhatsApp Web。2022 年 3 月警方接上一名嫌疑人的 Telegram 帳號，在對方數小時後切斷之前備份了約四個月的既往對話。
+
+#### 法院劃出的界線落在連結裝置做不到的地方
+
+德國聯邦最高法院在 2026 年 1 月 20 日認定，暗中接上帳號屬於源頭電信監察（Quellen-Telekommunikationsüberwachung），可取得的內容以法院裁定時點之後產生的為限。回溯既往訊息超出授權，該案因此撤銷部分原判。
+
+界線的技術意義在於業者的用戶端做不到。連結新裝置時既有的訊息封存會一併送過去，沒有只交出某個時間點之後那一段的選項，Signal 這一側的數字是最近 45 天。法律准許取得的範圍比功能一次交出的範圍窄，收斂差距的責任落在執行的人身上，軟體不提供對應的開關。
+
+#### Signal 沒有對這則報導表態
+
+查證時 Signal 官方部落格最新一篇仍是 8 月 11 日的自動金鑰驗證，Meredith Whittaker 的公開帳號沒有相關發言，德語圈的跟進報導也沒有引用任何通訊軟體業者的回應。原始報導只向德國海關刑事局與聯邦刑事警察局求證，兩邊都拒答，並未向業者提問。
+
+讀者要做的事沒有改變，仍然是定期打開設定裡的「已連結裝置」核對清單。改變的是判斷相關性的門檻。過去可以說服自己不會是情報單位盯上的人，現在要問的是自己會不會出現在一般刑事偵查的關係人名單上，那是一個寬得多的範圍。
+
+查證來源（2026-09）：[Messenger-Überwachung: Immer mehr Polizei überwacht Messenger wie WhatsApp](https://netzpolitik.org/2026/messenger-ueberwachung-immer-mehr-polizei-ueberwacht-messenger-wie-whatsapp/){target="_blank"} - netzpolitik.org，2026-09-02，內含德國海關刑事局 2026-02-20 內部處分全文。  
+查證來源（2026-09）：[BGH, Beschluss vom 20. Januar 2026 – 3 StR 495/25](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Strafsenate/3_StS/2025/3_StR_495-25.pdf?__blob=publicationFile){target="_blank"}，備份範圍為 2021-11-26 至 2022-03-30，原審為 Aurich 地方法院。  
+查證來源（2026-09）：[BGH, Beschluss vom 9. Juli 2020 – 2 BGs 468/20](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/UebrigeSenate/ErmRi/2020/2_BGs_468-20.pdf?__blob=publicationFile){target="_blank"}，記載 2020-01-12 訊問經過，交出手機的兩人法律身分是證人。  
+查證來源（2026-09）：[Gemeinsamer Sicherheitshinweis 01/2026: Phishing über Messengerdienste](https://www.bsi.bund.de/SharedDocs/Cybersicherheitswarnungen/DE/2026/202602_BfV_BSI.pdf?__blob=publicationFile){target="_blank"} - 德國聯邦憲法保衛局與聯邦資訊安全局，2026-02-06，45 天的數字出自此文。  
+查證來源（2026-09）：[Signal 官方部落格](https://signal.org/blog/){target="_blank"}，查證時最新一篇為 2026-08-11。
+{: .source-note }
+
 ### 常見問題
 
 ??? question "自動金鑰驗證要我自己去打開嗎"
