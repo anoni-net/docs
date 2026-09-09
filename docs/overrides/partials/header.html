@@ -222,6 +222,14 @@
     -#}
     <label class="anoni-settings__button md-header__button md-icon" for="__settings" aria-label="{{ config.extra.settings_label }}">
       {% include ".icons/material/tune-variant.svg" %}
+      {#-
+        桌面才顯示文字。這顆圖示在桌面取代了原本看得見的亮暗與語言兩顆，只給一個
+        滑桿符號的話，想切深色的讀者會在頁首找不到東西。
+
+        窄螢幕只留圖示，跟底下 anoni-variant 那顆藥丸同一個做法，理由也一樣：
+        標題那一格在 320px 上一點餘裕都沒有，360px 也只有 40px。
+      -#}
+      <span class="anoni-settings__button-label">{{ config.extra.settings_label }}</span>
     </label>
     {% if config.repo_url %}
       <div class="md-header__source">

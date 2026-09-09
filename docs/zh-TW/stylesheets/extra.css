@@ -649,6 +649,27 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   display: inline-block;
 }
 
+/* 窄螢幕只留圖示。文字要多約 32px，而標題那一格在 320px 上餘裕是 0、360px 是
+   40px，擠進去站名就開始截斷。斷點跟 anoni-variant 那顆藥丸的標籤取同一個。 */
+.anoni-settings__button-label {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
+  .anoni-settings__button.md-header__button {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.3rem;
+    width: auto;
+  }
+
+  .anoni-settings__button-label {
+    display: inline;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+}
+
 /* overlay 與抽屜都在 .md-header__inner 裡面。.md-header 是 z-index 4 的堆疊
    環境，抽屜放到 header 外面會被 Material 的 .md-overlay（z-index 5）蓋住。
    放在裡面之後，整個 header 開啟時提到 6，overlay 才遮得到 header 這一條，
