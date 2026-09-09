@@ -270,8 +270,9 @@ extra:
   # 这一列是连到离线阅读那一页的链接，不是开关。名词开头（「离线阅读」）排在
   # 浅色、深色那几列旁边会被读成状态，动词开头才看得出是一个去得了的地方。
   # 不用「管理离线内容」是因为正上方的分组标题就是「离线内容」，相邻两行重复
-  # 同一个词读起来卡。
-  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "管理设备中的内容"]
+  # 同一个词读起来卡。用「设备上」不用「设备中」：页尾那条链接与站上内容都写
+  # 「设备上」，同一个动作要用同一种说法。
+  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "管理设备上的内容"]
   settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "检查更新"]
   # 外觀那三個選項在抽屜裡的圖示，順序跟 theme.palette 一致。上游 toggle.icon 講的是
   # 「點下去會切到哪一種」，抽屜要的是「這一項本身是什麼」，兩者對不起來，所以另外列。
