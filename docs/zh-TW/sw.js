@@ -1000,6 +1000,18 @@ self.addEventListener("message", (event) => {
     return;
   }
 
+  // 只回版本的輕量查詢。設定抽屜按下檢查更新、結果是已經最新的時候，拿它把日期
+  // 一起顯示出來，讀者才知道手上這份是哪一天的。
+  //
+  // 不共用 OFFLINE_STATUS：那一則會順便算 cacheUsage，而那是走過每一筆快取項目、
+  // 缺 content-length 就把整個 blob 讀出來。存了整份站的裝置上，光為了一串版本號
+  // 付那個代價不划算。client 端認得舊 SW 不回這則的情況，會自己退回 OFFLINE_STATUS。
+  if (data.type === "VERSION") {
+    const versionPort = event.ports && event.ports[0];
+    if (versionPort) versionPort.postMessage({ type: "version", version: VERSION });
+    return;
+  }
+
   // 頁面載入時 client 送自己的網址過來，SW 據此補齊那個語系的預快取。
   //
   // 傳網址而不是語系代碼，是因為 document.documentElement.lang 在 zh-CN 版是 "zh"

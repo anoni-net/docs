@@ -472,18 +472,21 @@
               text: "離線存的內容有新版本。更新會重新載入這一頁。",
               update: "更新", later: "稍後", updating: "更新中",
               checking: "檢查中", latest: "已是最新版本",
+              latestAt: "已是最新版本（{version}）",
               failed: "連不上，稍後再試"
             },
             "zh": {
               text: "离线存的内容有新版本。更新会重新加载这一页。",
               update: "更新", later: "稍后", updating: "更新中",
               checking: "检查中", latest: "已是最新版本",
+              latestAt: "已是最新版本（{version}）",
               failed: "连不上，稍后再试"
             },
             "en": {
               text: "A newer version is available for offline reading. Updating reloads this page.",
               update: "Update", later: "Later", updating: "Updating",
               checking: "Checking", latest: "Already up to date",
+              latestAt: "Already up to date ({version})",
               failed: "Could not check, try again later"
             }
           };
@@ -568,6 +571,16 @@
             dismiss = window.__anoniToast(banner);
           }
 
+          // 202609091018 這種十二位數對讀者沒有意義，拆成日期與時間。CI 產生它用的是
+          // date +%Y%m%d%H%M，runner 跑在 UTC，所以標出來免得讀者拿自己的時區去對。
+          // 認不出來的格式就回 null，改顯示不帶日期那句：本機建置沒有替換
+          // __BUILD_VERSION__，走的就是這條。
+          function formatVersion(value) {
+            var m = /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(value || "");
+            if (!m) return null;
+            return m[1] + "-" + m[2] + "-" + m[3] + " " + m[4] + ":" + m[5] + " UTC";
+          }
+
           // 抽屜裡的檢查更新。換版提示是被動的，要等 service worker 自己裝好新版
           // 才浮出來，讀者按過稍後就得等下一次導覽，而 standalone 的 PWA 常常好幾天
           // 不產生新的導覽。這裡給一個隨時問得到的入口。
@@ -607,6 +620,41 @@
                 "anoni-banner-action" + (primary ? " anoni-banner-action--primary" : "");
             }
 
+            // 這台裝置上跑的是哪一版。VERSION 是輕量查詢，舊的 service worker 不認得
+            // 它，回不出東西就退回 OFFLINE_STATUS。那一則會順便算快取用量，存了整份
+            // 站的裝置上要走過每一筆項目，所以只當退路，讀者更新過一次就走輕的那條。
+            //
+            // 問不到就算了，按鈕不該因為這件事卡住，兩條路各給 1.5 秒。
+            function activeVersion() {
+              var active = navigator.serviceWorker.controller;
+              if (!active) return Promise.resolve(null);
+              function ask(message) {
+                return new Promise(function (resolve) {
+                  var channel = new MessageChannel();
+                  var settled = false;
+                  function finish(value) {
+                    if (settled) return;
+                    settled = true;
+                    resolve(value);
+                  }
+                  channel.port1.onmessage = function (event) {
+                    var reply = event.data || {};
+                    finish(typeof reply.version === "string" ? reply.version : null);
+                  };
+                  setTimeout(function () { finish(null); }, 1500);
+                  try {
+                    active.postMessage(message, [channel.port2]);
+                  } catch (err) {
+                    finish(null);
+                  }
+                });
+              }
+              return ask({ type: "VERSION" }).then(function (version) {
+                if (version) return version;
+                return ask({ type: "OFFLINE_STATUS", url: location.href });
+              });
+            }
+
             function toApply() {
               mode = "apply";
               status.textContent = t.text;
@@ -641,7 +689,15 @@
                 // update() 只保證檢查做完，裝新版可能還在跑，所以三種都要看
                 if (registration.waiting) { toApply(); return; }
                 var installing = registration.installing;
-                if (!installing) { toCheck(t.latest); return; }
+                if (!installing) {
+                  // 按鈕維持忙碌到版本問回來為止。先寫「已是最新版本」再補上日期的話
+                  // 那行字會在讀者眼前改兩次。
+                  activeVersion().then(function (version) {
+                    var stamp = formatVersion(version);
+                    toCheck(stamp ? t.latestAt.replace("{version}", stamp) : t.latest);
+                  });
+                  return;
+                }
                 installing.addEventListener("statechange", function () {
                   if (installing.state === "installed") toApply();
                   else if (installing.state === "redundant") toCheck(t.failed);

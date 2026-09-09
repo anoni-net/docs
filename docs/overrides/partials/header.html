@@ -129,14 +129,23 @@
         同一份，定義在 base.html 的 styles block。狀態那一行的文字由 JS 填，
         role 與 aria-live 讓讀螢幕的人也拿得到結果。
       -#}
+      <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
+      {#-
+        離線閱讀那一頁的入口。那一頁在 nav 裡的位置不淺，讀者不容易自己找到，
+        而它正是管理裝置上存了哪些內容的地方。
+
+        這個連結不跟著更新按鈕一起藏。沒有 service worker 的環境照樣看得到，
+        那一頁本來就會說明這個瀏覽器存不了離線內容，比一個消失的入口清楚。
+      -#}
+      <a href="{{ 'offline/' | url }}" class="anoni-settings__link">
+        <span class="anoni-settings__link-icon">{% include ".icons/material/wifi-off.svg" %}</span>
+        <span>{{ config.extra.settings_offline_link }}</span>
+      </a>
       <div class="anoni-settings__update" id="__anoni-update" hidden>
-        <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
-        <div class="anoni-settings__update-body">
-          <button type="button" class="anoni-banner-action" id="__anoni-update-check">
-            {{ config.extra.settings_update_check }}
-          </button>
-          <p class="anoni-settings__status" id="__anoni-update-status" role="status" aria-live="polite"></p>
-        </div>
+        <button type="button" class="anoni-banner-action" id="__anoni-update-check">
+          {{ config.extra.settings_update_check }}
+        </button>
+        <p class="anoni-settings__status" id="__anoni-update-status" role="status" aria-live="polite"></p>
       </div>
     </div>
     {% if not config.theme.palette is mapping %}

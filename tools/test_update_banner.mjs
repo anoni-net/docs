@@ -185,7 +185,7 @@ test('沒按更新之前兩顆都是可以按的', () => {
 // 抽屜裡的檢查更新
 // ---------------------------------------------------------------------------
 
-const loadCheck = ({ waiting = null, installing = null, updateFails = false, hasDom = true } = {}) => {
+const loadCheck = ({ waiting = null, installing = null, updateFails = false, hasDom = true, swVersion = '202609091018', legacySw = false } = {}) => {
   const box = new FakeElement('div');
   // 樣板給的初始狀態就是 hidden，假替身要照著來，不然「有沒有拿掉」驗不到東西
   box.hidden = true;
@@ -213,23 +213,50 @@ const loadCheck = ({ waiting = null, installing = null, updateFails = false, has
     installing,
     update: () => (updateFails ? Promise.reject(new Error('offline')) : Promise.resolve()),
   };
-  const navigator = { serviceWorker: { controller: {} } };
+  // MessagePort 的兩端在這裡不需要真的跨執行緒，接上就好
+  class FakeChannel {
+    constructor() {
+      this.port1 = { onmessage: null };
+      this.port2 = { deliver: (data) => { if (this.port1.onmessage) this.port1.onmessage({ data }); } };
+    }
+  }
+  const asked = [];
+  // swVersion 給 false 代表這一頁還沒被 service worker 接管，問不到任何東西。
+  // legacySw 模擬舊版 sw.js：它不認得 VERSION，會掉到 library 的分派回 unknown-command。
+  const controller = swVersion === false ? null : {
+    postMessage: (message, ports) => {
+      asked.push(message.type);
+      if (message.type === 'VERSION') {
+        ports[0].deliver(
+          legacySw ? { type: 'error', reason: 'unknown-command' }
+                   : { type: 'version', version: swVersion }
+        );
+        return;
+      }
+      ports[0].deliver({ type: 'status', version: swVersion });
+    },
+  };
+  const navigator = { serviceWorker: { controller } };
 
   const harness = `
     ${grab(/var STRINGS = \{[\s\S]*?\n          \};/)}
     var t = STRINGS["zh-TW"];
     var reloadOnTakeover = false;
     var onUpdateReady = function () {};
+    ${grab(/function formatVersion\(value\) \{[\s\S]*?\n          \}/)}
     ${grab(/function setupUpdateCheck\(registration\) \{[\s\S]*?\n          \}/)}
     return {
       setup: setupUpdateCheck,
+      formatVersion: formatVersion,
       reloaded: function () { return reloadOnTakeover; },
       ready: function () { return onUpdateReady; }
     };
   `;
-  const api = new Function('document', 'navigator', harness)(document, navigator);
+  const api = new Function('document', 'navigator', 'MessageChannel', 'location', harness)(
+    document, navigator, FakeChannel, { href: 'https://anoni.net/docs/tools/what-is-tor/' }
+  );
   api.setup(registration);
-  return { api, box, button, status, sent, registration };
+  return { api, box, button, status, sent, registration, asked };
 };
 
 // 讓 registration.update() 那條 promise 鏈跑完
@@ -273,13 +300,44 @@ test('按下檢查會停用並顯示檢查中與轉圈', async () => {
 });
 
 test('檢查完沒有新版就說已是最新版本', async () => {
-  const { button, status } = loadCheck();
+  // 這一頁還沒被 service worker 接管的話問不到版本，那就只說結論
+  const { button, status } = loadCheck({ swVersion: false });
   button.click();
   await flush();
   assert.equal(status.textContent, '已是最新版本');
   assert.equal(button.textContent, '檢查更新', '按鈕沒有還原成原本那串');
   assert.equal(button.disabled, false);
   assert.equal(button.getAttribute('aria-busy'), null);
+});
+
+test('版本號拆成看得懂的日期', () => {
+  const { api } = loadCheck();
+  assert.equal(api.formatVersion('202609091018'), '2026-09-09 10:18 UTC');
+});
+
+test('認不出來的版本字串不硬湊日期', () => {
+  // 本機建置沒有替換佔位字串，走的就是這條。硬拆會給出一個看起來像真的假日期。
+  const { api } = loadCheck();
+  for (const bad of ['__BUILD_VERSION__', '', null, undefined, '20260909101', '2026090910180', '2026-09-09'])
+    assert.equal(api.formatVersion(bad), null, String(bad));
+});
+
+test('已是最新版本會帶上日期', async () => {
+  const { button, status, asked } = loadCheck();
+  button.click();
+  await flush();
+  assert.equal(status.textContent, '已是最新版本（2026-09-09 10:18 UTC）');
+  assert.deepEqual(asked, ['VERSION'], '第一問就該用輕量的那則');
+});
+
+test('舊的 service worker 不認得 VERSION 就退回 OFFLINE_STATUS', async () => {
+  // 這顆按鈕上線的當下，讀者裝置上跑的還是舊版 sw.js，退路沒接好就整整一個
+  // 版本週期看不到日期
+  const { button, status, asked } = loadCheck({ legacySw: true });
+  button.click();
+  await flush();
+  assert.deepEqual(asked, ['VERSION', 'OFFLINE_STATUS']);
+  assert.equal(status.textContent, '已是最新版本（2026-09-09 10:18 UTC）');
 });
 
 test('檢查完抓不到 sw.js 就說連不上', async () => {
