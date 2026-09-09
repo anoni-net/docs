@@ -133,7 +133,7 @@ Tor Browser 的匿名性靠「全球使用者長得一樣」維持。幾個基�
 桌面版以外的選擇有限：
 
 - **Android**：[Tor Browser for Android](https://www.torproject.org/download/#android){target="_blank"}（Tor Project 官方），跟桌面版同一個 Tor 引擎，多數設定齊備
-- **iOS**：[Onion Browser](https://onionbrowser.com/){target="_blank"}（Mike Tigas 維護的社群版本，**非 Tor Project 官方**）。Apple 的 App Store 政策不允許 Tor Project 直接發 iOS 版本，所有 iOS 上的瀏覽器底層都受限於 WebKit（Safari 內核）
+- **iOS**：[Onion Browser](https://onionbrowser.com/){target="_blank"}（開源社群版本，**非 Tor Project 官方**，貢獻者包含 Mike Tigas、Benjamin Erhart 與 Guardian Project）。Apple 的 App Store 政策不允許 Tor Project 直接發 iOS 版本，所有 iOS 上的瀏覽器底層都受限於 WebKit（Safari 內核）
 
 行動裝置上的 Tor 體驗較弱，跟桌面版有幾個差異：
 

@@ -35,6 +35,8 @@ icon: material/routes
 
 这一版不加载任何分析脚本，也不注册后台的 Service Worker，所以没有离线阅读。延迟比标准网站高，那是 Tor 的常态。
 
+手机上要用哪一个 App、iOS 为什么没有官方版本，见 [Tor Browser 进阶设定的移动版一节](../tools/tor-browser-advanced.md#移动版)。
+
 ## IPFS 镜像
 
 内容用指纹（CID）寻址，任何节点都能提供同一份内容，没有单一可以被下架的位置。社群成员可以帮忙留存一份，做法见 [帮忙 pin 文档站的 IPFS 镜像](../community/pin-ipfs-mirror.md)。

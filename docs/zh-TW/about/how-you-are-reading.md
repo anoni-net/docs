@@ -35,6 +35,8 @@ icon: material/routes
 
 這一版不載入任何分析腳本，也不註冊背景的 Service Worker，所以沒有離線閱讀。延遲比標準網站高，那是 Tor 的常態。
 
+手機上要用哪一個 App、iOS 為什麼沒有官方版本，見 [Tor Browser 進階設定的行動版一節](../tools/tor-browser-advanced.md#行動版)。
+
 ## IPFS 鏡像
 
 內容用指紋（CID）定址，任何節點都能提供同一份內容，沒有單一可以被下架的位置。社群成員可以幫忙留存一份，做法見 [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)。
