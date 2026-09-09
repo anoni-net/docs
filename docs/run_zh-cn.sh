@@ -19,6 +19,7 @@ export NAV_EVENT_PREPARE="筹备页面"
 export NAV_WATCHER='监控观察'
 export CATE_NAME='文章类型'
 export LANGUAGE='zh'
+export VARIANT_LABEL_STANDARD='标准网站'
 export VARIANT_LABEL_ONION='Onion 版本'
 export VARIANT_LABEL_IPFS='IPFS 镜像'
 export OVERRIDES='overrides_cn'

@@ -253,6 +253,7 @@ extra:
   # 小標記的文字。zh-TW 用這裡的預設值，另外兩個語系由 run_en.sh、run_zh-cn.sh 覆蓋，
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
+  variant_label_standard: !ENV [VARIANT_LABEL_STANDARD, "標準網站"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
   # Copy for the narrow-screen settings drawer. partials/header.html and
   # partials/palette.html are symlinks shared by all three languages, so the
@@ -269,7 +270,9 @@ extra:
   settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
   # Copy for the "offline content" group in the drawer, same reason as settings_* above.
   settings_route: !ENV [SETTINGS_ROUTE, "Connection"]
-  settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "How you are reading this"]
+  # First row of the group, {variant} is replaced with the current edition.
+  # The row links to the explainer page.
+  settings_route_current: !ENV [SETTINGS_ROUTE_CURRENT, "Currently: {variant}"]
   # The onion address of the docs site, no trailing slash. The drawer builds this
   # page's onion URL from it, same approach as ipfs_gateway below.
   onion_base: !ENV [ONION_BASE, "http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion"]

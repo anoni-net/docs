@@ -138,9 +138,23 @@
         第一順位的問題，不該只有走 onion 進來的人看得到。
       -#}
       <p class="anoni-settings__group">{{ config.extra.settings_route }}</p>
+      {#-
+        第一列先講手上這一份是哪一種，再連到說明頁。原本只寫頁面標題「你正在用
+        哪一種方式閱讀」，抽屜裡看不出目前在哪一份，等於把問題留給讀者自己去點。
+
+        名稱沿用既有的 variant_label_*，那組本來就是頁首版本小標記在用的字，
+        標準版原本沒有標記所以也沒有字，這次補上 variant_label_standard。
+      -#}
+      {% if config.extra.build_variant == "onion" %}
+        {% set variant_name = config.extra.variant_label_onion %}
+      {% elif config.extra.build_variant == "ipfs" %}
+        {% set variant_name = config.extra.variant_label_ipfs %}
+      {% else %}
+        {% set variant_name = config.extra.variant_label_standard %}
+      {% endif %}
       <a href="{{ 'about/how-you-are-reading/' | url }}" class="anoni-settings__link">
         <span class="anoni-settings__link-icon">{% include ".icons/material/routes.svg" %}</span>
-        <span>{{ config.extra.settings_route_link }}</span>
+        <span>{{ config.extra.settings_route_current | replace("{variant}", variant_name) }}</span>
       </a>
       {#-
         本頁的 onion 與 IPFS 鏡像。頁尾那兩條是完整長網址，用途是複製起來給別人，

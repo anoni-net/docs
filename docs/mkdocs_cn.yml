@@ -250,6 +250,7 @@ extra:
   # 小標記的文字。zh-TW 用這裡的預設值，另外兩個語系由 run_en.sh、run_zh-cn.sh 覆蓋，
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
+  variant_label_standard: !ENV [VARIANT_LABEL_STANDARD, "標準網站"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
   # 窄屏幕设置抽屉的文案。partials/header.html 与 partials/palette.html 是三个
   # 语系共用的符号链接，文字只能走设置，跟上面 variant_label_* 是同一个理由。
@@ -265,7 +266,8 @@ extra:
   settings_language: !ENV [SETTINGS_LANGUAGE, "阅读语言"]
   # 抽屉里「离线内容」那一组的文案，理由同上面 settings_*。
   settings_route: !ENV [SETTINGS_ROUTE, "连线方式"]
-  settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "你正在用哪一种方式阅读"]
+  # 第一列的文字，{variant} 会换成目前这一份的名称。点下去是说明页。
+  settings_route_current: !ENV [SETTINGS_ROUTE_CURRENT, "目前：{variant}"]
   # 文档站的 onion 地址，不带结尾斜线。抽屉的「用 Tor 浏览器打开这一页」用它组出
   # 本页的 onion 网址，跟底下的 ipfs_gateway 是同一个做法。
   onion_base: !ENV [ONION_BASE, "http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion"]
