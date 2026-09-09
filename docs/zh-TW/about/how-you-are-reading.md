@@ -35,7 +35,7 @@ icon: material/routes
 
 這一版不載入任何分析腳本，也不註冊背景的 Service Worker，所以沒有離線閱讀。延遲比標準網站高，那是 Tor 的常態。
 
-手機上要用哪一個 App、iOS 為什麼沒有官方版本，見 [Tor Browser 進階設定的行動版一節](../tools/tor-browser-advanced.md#行動版)。
+手機上要用哪一個 App、怎麼裝、iOS 為什麼沒有官方版本，見 [手機上的 Tor](../tools/tor-browser-mobile.md)。
 
 ## IPFS 鏡像
 
