@@ -470,15 +470,21 @@
           var STRINGS = {
             "zh-TW": {
               text: "離線存的內容有新版本。更新會重新載入這一頁。",
-              update: "更新", later: "稍後", updating: "更新中"
+              update: "更新", later: "稍後", updating: "更新中",
+              checking: "檢查中", latest: "已是最新版本",
+              failed: "連不上，稍後再試"
             },
             "zh": {
               text: "离线存的内容有新版本。更新会重新加载这一页。",
-              update: "更新", later: "稍后", updating: "更新中"
+              update: "更新", later: "稍后", updating: "更新中",
+              checking: "检查中", latest: "已是最新版本",
+              failed: "连不上，稍后再试"
             },
             "en": {
               text: "A newer version is available for offline reading. Updating reloads this page.",
-              update: "Update", later: "Later", updating: "Updating"
+              update: "Update", later: "Later", updating: "Updating",
+              checking: "Checking", latest: "Already up to date",
+              failed: "Could not check, try again later"
             }
           };
           var t = STRINGS[document.documentElement.lang] || STRINGS["zh-TW"];
@@ -500,6 +506,11 @@
             button.addEventListener("click", onClick);
             return button;
           }
+
+          // 抽屜裡那顆按鈕的「有新版等著」入口。setupUpdateCheck 會把它接上去，
+          // 沒有那塊 DOM 的話維持空函式。被動的換版提示與主動的檢查更新看的是
+          // 同一個 registration，兩邊要顯示同一件事。
+          var onUpdateReady = function () {};
 
           function showUpdateBanner(waiting) {
             if (document.getElementById("__sw-update")) return;
@@ -557,6 +568,91 @@
             dismiss = window.__anoniToast(banner);
           }
 
+          // 抽屜裡的檢查更新。換版提示是被動的，要等 service worker 自己裝好新版
+          // 才浮出來，讀者按過稍後就得等下一次導覽，而 standalone 的 PWA 常常好幾天
+          // 不產生新的導覽。這裡給一個隨時問得到的入口。
+          //
+          // 兩種狀態共用同一顆按鈕。mode 是 "check" 時按下去問伺服器，是 "apply"
+          // 時按下去換版，跟換版提示上那顆做的是同一件事，送同一則 SKIP_WAITING。
+          function setupUpdateCheck(registration) {
+            var box = document.getElementById("__anoni-update");
+            var button = document.getElementById("__anoni-update-check");
+            var status = document.getElementById("__anoni-update-status");
+            if (!box || !button || !status) return;
+
+            // 樣板把整塊藏起來，註冊成功才顯示。沒有 service worker 的環境按了
+            // 什麼都不會發生，那種按鈕不如不要出現。
+            box.hidden = false;
+
+            // 按鈕原本的字取自樣板，那串走 config.extra，三個語系各自不同。
+            // 在這裡讀一次就不必再往 STRINGS 塞第四份。
+            var checkLabel = button.textContent.trim();
+            var mode = "check";
+
+            function setBusy(label) {
+              button.disabled = true;
+              button.textContent = "";
+              var spinner = document.createElement("span");
+              spinner.className = "anoni-spinner";
+              button.appendChild(spinner);
+              button.appendChild(document.createTextNode(label));
+              button.setAttribute("aria-busy", "true");
+            }
+
+            function setIdle(label, primary) {
+              button.disabled = false;
+              button.textContent = label;
+              button.removeAttribute("aria-busy");
+              button.className =
+                "anoni-banner-action" + (primary ? " anoni-banner-action--primary" : "");
+            }
+
+            function toApply() {
+              mode = "apply";
+              status.textContent = t.text;
+              setIdle(t.update, true);
+            }
+
+            function toCheck(message) {
+              mode = "check";
+              status.textContent = message || "";
+              setIdle(checkLabel, false);
+            }
+
+            // 讀者上次按了稍後，新版還停在 waiting。抽屜一打開就該看得到可以直接換，
+            // 不必再問一次伺服器。
+            if (registration.waiting && navigator.serviceWorker.controller) toApply();
+            onUpdateReady = toApply;
+
+            button.addEventListener("click", function () {
+              if (mode === "apply") {
+                var waiting = registration.waiting;
+                // 等的那個不見了（別的分頁先換掉了），退回檢查狀態，不要送空訊息
+                if (!waiting) { toCheck(t.latest); return; }
+                setBusy(t.updating);
+                status.textContent = "";
+                reloadOnTakeover = true;
+                waiting.postMessage({ type: "SKIP_WAITING" });
+                return;
+              }
+              setBusy(t.checking);
+              status.textContent = "";
+              registration.update().then(function () {
+                // update() 只保證檢查做完，裝新版可能還在跑，所以三種都要看
+                if (registration.waiting) { toApply(); return; }
+                var installing = registration.installing;
+                if (!installing) { toCheck(t.latest); return; }
+                installing.addEventListener("statechange", function () {
+                  if (installing.state === "installed") toApply();
+                  else if (installing.state === "redundant") toCheck(t.failed);
+                });
+              }).catch(function () {
+                // 離線或抓不到 sw.js
+                toCheck(t.failed);
+              });
+            });
+          }
+
           navigator.serviceWorker.register(script, options).then(function (registration) {
             // 告訴 SW 這頁是哪個語系，它據此補齊該語系的預快取。送的是網址不是語系
             // 代碼，判斷邏輯只留在 sw.js 的 langPrefixOf 一處，也繞開 zh-CN 版的
@@ -581,6 +677,8 @@
               }
             });
 
+            setupUpdateCheck(registration);
+
             // 上一次沒按更新，新版還停在 waiting
             if (registration.waiting && navigator.serviceWorker.controller) {
               showUpdateBanner(registration.waiting);
@@ -593,6 +691,9 @@
                 // 有 controller 才代表這是換版。沒有的話是首次安裝，沒什麼好提示的。
                 if (installing.state === "installed" && navigator.serviceWorker.controller) {
                   showUpdateBanner(installing);
+                  // 抽屜那顆也要跟上。讀者關掉卡片之後打開抽屜，看到的要是
+                  // 「有新版本」而不是「檢查更新」。
+                  onUpdateReady();
                 }
               });
             });

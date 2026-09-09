@@ -17,6 +17,13 @@
  * 從 overrides/base.html 原地抽出來執行，不重寫一份。DOM 用最小替身，只實作這段
  * 真正用到的那幾個方法。
  *
+ * === 抽屜裡那顆檢查更新 ===
+ *
+ * 換版提示是被動的，要等 service worker 自己裝好新版才浮出來。抽屜裡那顆是主動
+ * 的入口，同一顆按鈕身兼兩種狀態：問伺服器，以及套用已經等在那裡的新版。狀態
+ * 弄反的後果是讀者按了「更新」卻只是又問了一次，或者按「檢查更新」卻直接把頁面
+ * 換掉，兩種都只在真的有新版時才看得到，本機開發碰不到。
+ *
  * 用法：
  *   node tools/test_update_banner.mjs
  * 不需要建置產物，也沒有外部相依。
@@ -43,6 +50,7 @@ class FakeElement {
     this.attributes = {};
     this.className = '';
     this.disabled = false;
+    this.hidden = false;
     this._text = '';
     this._handlers = {};
   }
@@ -63,6 +71,9 @@ class FakeElement {
   }
   getAttribute(name) {
     return Object.prototype.hasOwnProperty.call(this.attributes, name) ? this.attributes[name] : null;
+  }
+  removeAttribute(name) {
+    delete this.attributes[name];
   }
   addEventListener(type, fn) {
     this._handlers[type] = fn;
@@ -170,9 +181,158 @@ test('沒按更新之前兩顆都是可以按的', () => {
   assert.equal(buttonBy('稍後').disabled, false);
 });
 
+// ---------------------------------------------------------------------------
+// 抽屜裡的檢查更新
+// ---------------------------------------------------------------------------
+
+const loadCheck = ({ waiting = null, installing = null, updateFails = false, hasDom = true } = {}) => {
+  const box = new FakeElement('div');
+  // 樣板給的初始狀態就是 hidden，假替身要照著來，不然「有沒有拿掉」驗不到東西
+  box.hidden = true;
+  const button = new FakeElement('button');
+  const status = new FakeElement('p');
+  button.className = 'anoni-banner-action';
+  button.textContent = '檢查更新';
+  const byId = {
+    '__anoni-update': box,
+    '__anoni-update-check': button,
+    '__anoni-update-status': status,
+  };
+  const document = {
+    createElement: (tag) => new FakeElement(tag),
+    createTextNode: (text) => {
+      const node = new FakeElement('#text');
+      node.textContent = text;
+      return node;
+    },
+    getElementById: (id) => (hasDom ? byId[id] || null : null),
+  };
+  const sent = [];
+  const registration = {
+    waiting: waiting === null ? null : { postMessage: (m) => sent.push(m) },
+    installing,
+    update: () => (updateFails ? Promise.reject(new Error('offline')) : Promise.resolve()),
+  };
+  const navigator = { serviceWorker: { controller: {} } };
+
+  const harness = `
+    ${grab(/var STRINGS = \{[\s\S]*?\n          \};/)}
+    var t = STRINGS["zh-TW"];
+    var reloadOnTakeover = false;
+    var onUpdateReady = function () {};
+    ${grab(/function setupUpdateCheck\(registration\) \{[\s\S]*?\n          \}/)}
+    return {
+      setup: setupUpdateCheck,
+      reloaded: function () { return reloadOnTakeover; },
+      ready: function () { return onUpdateReady; }
+    };
+  `;
+  const api = new Function('document', 'navigator', harness)(document, navigator);
+  api.setup(registration);
+  return { api, box, button, status, sent, registration };
+};
+
+// 讓 registration.update() 那條 promise 鏈跑完
+const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+test('沒有那塊 DOM 就什麼都不做', () => {
+  // onion 與 IPFS 版一樣走這支 base.html，樣板哪天沒渲那塊也不該整段爆掉
+  const { box } = loadCheck({ hasDom: false });
+  assert.equal(box.hidden, true, '找不到按鈕卻還是把整塊顯示出來了');
+});
+
+test('註冊成功之後那塊才顯示', () => {
+  // 樣板給的是 hidden，沒有 service worker 的環境不該看到按不動的按鈕
+  const { box } = loadCheck();
+  assert.equal(box.hidden, false, '註冊成功卻沒有把 hidden 拿掉');
+});
+
+test('上次按了稍後，抽屜一開就是可以直接更新', () => {
+  const { button, status } = loadCheck({ waiting: true });
+  assert.equal(button.textContent, '更新');
+  assert.ok(button.className.includes('--primary'), button.className);
+  assert.ok(status.textContent.includes('重新載入'), status.textContent);
+});
+
+test('沒有等待中的新版時是檢查狀態', () => {
+  const { button, status } = loadCheck();
+  assert.equal(button.textContent, '檢查更新');
+  assert.equal(button.className, 'anoni-banner-action');
+  assert.equal(status.textContent, '');
+});
+
+test('按下檢查會停用並顯示檢查中與轉圈', async () => {
+  // 慢網路上 update() 要好幾秒，按鈕沒有變化讀者只會以為沒按到
+  const { button } = loadCheck();
+  button.click();
+  assert.equal(button.disabled, true);
+  assert.ok(button.textContent.includes('檢查中'), button.textContent);
+  assert.ok(button.children.some((c) => c.className === 'anoni-spinner'), '按鈕上沒有轉圈');
+  assert.equal(button.getAttribute('aria-busy'), 'true');
+  await flush();
+});
+
+test('檢查完沒有新版就說已是最新版本', async () => {
+  const { button, status } = loadCheck();
+  button.click();
+  await flush();
+  assert.equal(status.textContent, '已是最新版本');
+  assert.equal(button.textContent, '檢查更新', '按鈕沒有還原成原本那串');
+  assert.equal(button.disabled, false);
+  assert.equal(button.getAttribute('aria-busy'), null);
+});
+
+test('檢查完抓不到 sw.js 就說連不上', async () => {
+  const { button, status } = loadCheck({ updateFails: true });
+  button.click();
+  await flush();
+  assert.ok(status.textContent.includes('連不上'), status.textContent);
+  assert.equal(button.disabled, false, '失敗之後按鈕沒有解開，讀者再也試不了');
+});
+
+test('檢查完發現新版就換成更新', async () => {
+  const { button, status, registration } = loadCheck();
+  registration.update = () => {
+    registration.waiting = { postMessage: () => {} };
+    return Promise.resolve();
+  };
+  button.click();
+  await flush();
+  assert.equal(button.textContent, '更新');
+  assert.ok(button.className.includes('--primary'), button.className);
+  assert.ok(status.textContent.includes('重新載入'), status.textContent);
+});
+
+test('更新狀態按下去送 SKIP_WAITING 並標記重新載入', () => {
+  const { api, button, sent } = loadCheck({ waiting: true });
+  button.click();
+  assert.deepEqual(sent, [{ type: 'SKIP_WAITING' }]);
+  assert.equal(api.reloaded(), true, '沒有標記接管後要重新載入');
+  assert.equal(button.disabled, true);
+  assert.ok(button.textContent.includes('更新中'), button.textContent);
+});
+
+test('等待中的新版不見了就退回檢查，不送空訊息', () => {
+  // 另一個分頁先按了更新，這邊的 registration.waiting 會變成 null
+  const { button, status, sent, registration } = loadCheck({ waiting: true });
+  registration.waiting = null;
+  button.click();
+  assert.deepEqual(sent, [], '對著不存在的 worker 送了訊息');
+  assert.equal(button.textContent, '檢查更新');
+  assert.equal(status.textContent, '已是最新版本');
+});
+
+test('換版提示那條路也接得到抽屜這顆', () => {
+  // 讀者關掉卡片再打開抽屜，看到的要是「更新」而不是「檢查更新」
+  const { api, button } = loadCheck();
+  assert.equal(button.textContent, '檢查更新');
+  api.ready()();
+  assert.equal(button.textContent, '更新');
+});
+
 for (const [name, fn] of tests) {
   try {
-    fn();
+    await fn();
     passed++;
     console.log('  ✓ ' + name);
   } catch (err) {

@@ -639,6 +639,13 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   display: none;
 }
 
+/* 離線內容那一組只在抽屜出現。樣板先給 hidden，base.html 註冊 service worker
+   成功才拿掉，所以底下開啟的規則要避開 [hidden]，否則作者樣式會蓋掉瀏覽器
+   預設的 [hidden]{display:none}，沒有 SW 的環境也會看到一顆按不動的按鈕。 */
+.anoni-settings__update {
+  display: none;
+}
+
 .anoni-settings__overlay,
 .anoni-settings__head,
 .anoni-settings__group,
@@ -705,6 +712,12 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
      tab 進去的話，讀者會在看不到東西的狀態下走進一串連結。 */
   .anoni-settings {
     background-color: var(--md-default-bg-color);
+    /* 抽屜長在 .md-header 裡面，文字色從 header 繼承下來是 --md-primary-bg-color
+       （白的）。底下每一列都各自指定過顏色所以看不出問題，直到放進一顆用
+       color:inherit 的 .anoni-banner-action，白字落在白底上整顆變空白。
+       在容器這一層定一次，之後往抽屜裡加東西不會再踩到。標題列自己會覆蓋回
+       primary 那組。 */
+    color: var(--md-default-fg-color);
     bottom: 0;
     display: block;
     overflow-y: auto;
@@ -749,6 +762,28 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     fill: currentcolor;
     height: 1.2rem;
     width: 1.2rem;
+  }
+
+  .anoni-settings__update:not([hidden]) {
+    display: block;
+  }
+
+  .anoni-settings__update-body {
+    padding: 0 0.8rem 0.8rem;
+  }
+
+  /* 按鈕撐滿抽屜寬度。抽屜只有 12.1rem，靠左的窄按鈕在這個寬度裡看起來像沒排好 */
+  .anoni-settings__update-body .anoni-banner-action {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .anoni-settings__status {
+    color: var(--md-default-fg-color--light);
+    font-size: 0.62rem;
+    line-height: 1.35;
+    margin: 0.4rem 0 0;
+    text-wrap: pretty;
   }
 
   .anoni-settings__group {

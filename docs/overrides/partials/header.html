@@ -116,6 +116,28 @@
         <p class="anoni-settings__group">{{ config.extra.settings_language }}</p>
         {% include "partials/alternate.html" %}
       {% endif %}
+      {#-
+        離線內容的更新入口。換版提示是被動的，它要等 service worker 裝好新版才
+        浮出來，讀者按過稍後就得等下一次導覽，而 standalone 的 PWA 常常好幾天不
+        產生新的導覽。這顆給的是主動的入口，隨時問得到。
+
+        整塊預設帶 hidden，由 base.html 註冊 service worker 成功之後才拿掉。
+        關掉 JS、瀏覽器不支援、或者在不註冊 SW 的主機上（本機以外的非 anoni.net）
+        按了什麼都不會發生，那種按鈕不如不要出現。
+
+        按鈕用全站共用的 .anoni-banner-action，樣式與觸控尺寸跟換版提示那兩顆
+        同一份，定義在 base.html 的 styles block。狀態那一行的文字由 JS 填，
+        role 與 aria-live 讓讀螢幕的人也拿得到結果。
+      -#}
+      <div class="anoni-settings__update" id="__anoni-update" hidden>
+        <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
+        <div class="anoni-settings__update-body">
+          <button type="button" class="anoni-banner-action" id="__anoni-update-check">
+            {{ config.extra.settings_update_check }}
+          </button>
+          <p class="anoni-settings__status" id="__anoni-update-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
     </div>
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}

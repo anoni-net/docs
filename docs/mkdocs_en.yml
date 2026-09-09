@@ -267,6 +267,9 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_LIGHT, "Light"]
     - !ENV [SETTINGS_APPEARANCE_DARK, "Dark"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
+  # Copy for the "offline content" group in the drawer, same reason as settings_* above.
+  settings_offline: !ENV [SETTINGS_OFFLINE, "Offline content"]
+  settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "Check for updates"]
   # Icons for the three appearance options in the drawer, same order as theme.palette.
   # The upstream toggle.icon says "what this switches to", the drawer needs "what this
   # option is", so they are listed separately. Icons are not localised, all three
