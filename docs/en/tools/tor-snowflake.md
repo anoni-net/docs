@@ -79,7 +79,7 @@ If your computer is on for long stretches, the extension version is better than 
 
 ??? question "Can I run it on a phone?"
 
-    Yes, but with limited effect. Mobile networks change IP often, and the OS cuts WebRTC connections once the app goes to the background. For sustained contribution, use a desktop or laptop.
+    The browser-tab version has limited effect: mobile networks change IP often, and the OS cuts WebRTC connections once the tab goes to the background. For sustained contribution from a phone, the Tor Project publishes a standalone app, [Snowflake Volunteer](https://f-droid.org/en/packages/io.bloco.snowflake/){target="_blank"}, which runs as a background service rather than a browser tab and is not subject to that limit. The [announcement](../blog/posts/snowflake-volunteer-android-app.md) has the detail.
 
 ??? question "How does it compare with running a Tor relay?"
 

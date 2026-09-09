@@ -78,7 +78,7 @@ Neither platform gives you what the desktop browser gives you, and they fall sho
 
 Two more things are weaker on a phone than on a laptop:
 
-- Running a Snowflake proxy from a phone is a poor fit. It drains the battery, heats the device, and the system kills it once the app goes to the background.
+- The browser-tab version of Snowflake is a poor fit on a phone, where the system cuts the WebRTC connection once the tab goes to the background. For sustained contribution from a phone the Tor Project publishes a standalone app, covered in [Tor Snowflake bridges](./tor-snowflake.md).
 - If your threat model is the journalist or activist end of the range, prefer the desktop browser, or [Tails](./what-is-tails.md) where the operating system enforces the isolation rather than the browser.
 
 ## Where to go from here
