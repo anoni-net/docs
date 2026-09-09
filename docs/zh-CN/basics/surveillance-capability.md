@@ -102,6 +102,16 @@ IP 地址、连过的 Wi-Fi 名称、基站都能推得出概略位置。关掉 
 
 令状门槛管的是向电信商与平台调数据。第一层那些数据掮客的商品在公开市场上流通，不受同一道程序约束。谈监控规模时，这条路径常常被漏掉。
 
+### 绕过端对端加密的设备关联
+
+端对端加密让传统监听取不到内容，另一条路径是把侦查机关的电脑当成第二台设备连上目标账号。WhatsApp、Telegram 与 Threema 有网页版，Signal 有桌面版，关联新设备是这些软件的正常功能。取得确认码的途径包含实体接触已解锁的手机、诱骗目标扫 QR code，或拦截以短信发送的验证码。连上之后后续消息会同步过去，多数客户端还会一并送出既有的消息存档。加密本身没有被破解。
+
+德国有完整的公开记录。联邦刑事警察局（Bundeskriminalamt，BKA）在 2020 年 1 月的一场证人询问里，趁一对父母自愿交出手机查看与女儿对话的机会，暗中启用了 WhatsApp Web[^bgh2020]。2022 年 3 月的另一案，警方接上嫌疑人的 Telegram 账号，在对方数小时后切断之前，已经备份约四个月的既往对话[^bgh2026]。海关刑事局（Zollkriminalamt，ZKA）自 2023 年底试点，2025 年 8 月转为常态编制的侦查工具[^zka]。
+
+法律界线在 2026 年 1 月由德国联邦最高法院（Bundesgerichtshof，BGH）划出。法院认定暗中接上账号属于源头电信监察（Quellen-Telekommunikationsüberwachung），可取得的范围限于法院裁定时点之后产生的内容，回溯既往消息超出授权，该案因此撤销部分原判[^bgh2026]。
+
+台湾没有对应的公开记录，通讯保障及监察法也没有针对设备关联的专门条文。列在这里的理由是它划出一条容易被漏掉的路径：令状门槛管的是向电信商与平台调数据，管不到侦查机关直接用业者提供的功能替自己开一个账号入口。用户这一端能做的只有一项，定期检查账号的已关联设备清单，移除不认得的项目[^bfvbsi]。
+
 ### 人脸识别
 
 台湾警政署的 M-Police 曾经可以拿户役政相片即时比对人脸，2021 年 12 月因权责与法源争议暂停，警政署当时表示会等法制完备再恢复[^mpolice]。查证时未找到公开的恢复宣布，现况以警政署公告为准。暂停的是户役政相片的即时比对这一项，路口监视器等影像系统另有各自的法源与管理规定，不在本节范围。
@@ -195,3 +205,11 @@ iPhone 的锁定模式与 Android 的进阶保护模式会关掉一批常被利�
 [^citizenlab]: [Espionage Against the European Parliament: Member of Committee Investigating Spyware Hacked with Pegasus](https://citizenlab.ca/research/member-of-committee-investigating-spyware-hacked-with-pegasus/){target="_blank"}，2026 年 7 月 3 日公布前欧洲议会议员 Stelios Kouloglou 的 iPhone 在 2022 至 2023 年间至少三次遭 Pegasus 感染。查证日期 2026-08。
 
 [^lockdown]: [About Lockdown Mode](https://support.apple.com/en-us/105120){target="_blank"} - Apple 支持。Apple 说明锁定模式属于极端的选用防护，多数人不会成为此类攻击的目标，适用对象是可能被国家级或商用间谍软件针对的个人。Android 对应的是进阶保护模式。查证日期 2026-08。
+
+[^bgh2020]: [BGH, Beschluss vom 9. Juli 2020 – 2 BGs 468/20](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/UebrigeSenate/ErmRi/2020/2_BGs_468-20.pdf?__blob=publicationFile){target="_blank"} - 德国联邦最高法院侦查法官。裁定书记载 2020 年 1 月 12 日的询问经过，交出手机的两人法律身份是证人，被告是其女儿。查证日期 2026-09。
+
+[^bgh2026]: [BGH, Beschluss vom 20. Januar 2026 – 3 StR 495/25](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Strafsenate/3_StS/2025/3_StR_495-25.pdf?__blob=publicationFile){target="_blank"} - 德国联邦最高法院第三刑事庭，原审为 Aurich 地方法院。接上账号的时间是 2022 年 3 月 30 日深夜，备份范围为 2021 年 11 月 26 日至 2022 年 3 月 30 日。撤销的部分包含两项犯行、总刑期与部分没收。查证日期 2026-09。
+
+[^zka]: [Messenger-Überwachung: Immer mehr Polizei überwacht Messenger wie WhatsApp](https://netzpolitik.org/2026/messenger-ueberwachung-immer-mehr-polizei-ueberwacht-messenger-wie-whatsapp/){target="_blank"} - netzpolitik.org，2026 年 9 月 2 日，内含德国海关刑事局 2026 年 2 月 20 日内部处分的全文。试点起于 2023 年底，2025 年 8 月 1 日转入正式编制。该局与联邦刑事警察局对实际使用次数均以机密为由未答复。查证日期 2026-09。
+
+[^bfvbsi]: [Gemeinsamer Sicherheitshinweis 01/2026: Phishing über Messengerdienste](https://www.bsi.bund.de/SharedDocs/Cybersicherheitswarnungen/DE/2026/202602_BfV_BSI.pdf?__blob=publicationFile){target="_blank"} - 德国联邦宪法保卫局与联邦信息安全局，2026 年 2 月 6 日。建议定期检查账号的已关联设备并立即移除不明设备，文中记载攻击者接上 Signal 账号后可取得最近 45 天的消息内容。查证日期 2026-09。

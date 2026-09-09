@@ -394,6 +394,35 @@ Cloudflare 在 2024 年为 WhatsApp 的审计做了一套任何人都能执行�
 查证来源（2026-08）：Signal-Android 的 [reproducible-builds](https://github.com/signalapp/Signal-Android/tree/main/reproducible-builds){target="_blank"} 说明，Signal-iOS 仓库无对应目录。
 {: .source-note }
 
+### 后续补充（2026-09-09）
+
+文章发布之后将近一个月，德国出现同一条路径的公开记录，行为者跟前面举的例子不同。以下三则的查证日期都在 2026-09。
+
+#### 关联设备已经是刑事侦查的常态工具
+
+前面「关联设备是它看不到的地方」举的是国家级情报行为者的例子，容易读成只有高价值目标才需要在意。2026 年 9 月 2 日 netzpolitik.org 公开的德国海关刑事局内部处分把行为者的范围拉宽了。文件里写着该局自 2023 年底试点消息软件监控（Messengerüberwachung），2025 年 8 月 1 日转入正式编制，成为侦办组织犯罪的常态工具，做法同样是替目标账号连上一台自己的设备，不需要植入木马。
+
+更早的两个案例有裁定书可查。2020 年 1 月德国联邦刑事警察局趁一对父母以证人身份自愿交出手机的机会，暗中启用了 WhatsApp Web。2022 年 3 月警方接上一名嫌疑人的 Telegram 账号，在对方数小时后切断之前备份了约四个月的既往对话。
+
+#### 法院划出的界线落在关联设备做不到的地方
+
+德国联邦最高法院在 2026 年 1 月 20 日认定，暗中接上账号属于源头电信监察（Quellen-Telekommunikationsüberwachung），可取得的内容以法院裁定时点之后产生的为限。回溯既往消息超出授权，该案因此撤销部分原判。
+
+界线的技术意义在于业者的客户端做不到。关联新设备时既有的消息存档会一并送过去，没有只交出某个时间点之后那一段的选项，Signal 这一侧的数字是最近 45 天。法律准许取得的范围比功能一次交出的范围窄，收敛差距的责任落在执行的人身上，软件不提供对应的开关。
+
+#### Signal 没有对这则报导表态
+
+查证时 Signal 官方博客最新一篇仍是 8 月 11 日的自动密钥验证，Meredith Whittaker 的公开账号没有相关发言，德语圈的跟进报导也没有引用任何通讯软件业者的回应。原始报导只向德国海关刑事局与联邦刑事警察局求证，两边都拒答，并未向业者提问。
+
+读者要做的事没有改变，仍然是定期打开设置里的「已关联设备」核对清单。改变的是判断相关性的门槛。过去可以说服自己不会是情报单位盯上的人，现在要问的是自己会不会出现在一般刑事侦查的关系人名单上，那是一个宽得多的范围。
+
+查证来源（2026-09）：[Messenger-Überwachung: Immer mehr Polizei überwacht Messenger wie WhatsApp](https://netzpolitik.org/2026/messenger-ueberwachung-immer-mehr-polizei-ueberwacht-messenger-wie-whatsapp/){target="_blank"} - netzpolitik.org，2026-09-02，内含德国海关刑事局 2026-02-20 内部处分全文。  
+查证来源（2026-09）：[BGH, Beschluss vom 20. Januar 2026 – 3 StR 495/25](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Strafsenate/3_StS/2025/3_StR_495-25.pdf?__blob=publicationFile){target="_blank"}，备份范围为 2021-11-26 至 2022-03-30，原审为 Aurich 地方法院。  
+查证来源（2026-09）：[BGH, Beschluss vom 9. Juli 2020 – 2 BGs 468/20](https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/UebrigeSenate/ErmRi/2020/2_BGs_468-20.pdf?__blob=publicationFile){target="_blank"}，记载 2020-01-12 询问经过，交出手机的两人法律身份是证人。  
+查证来源（2026-09）：[Gemeinsamer Sicherheitshinweis 01/2026: Phishing über Messengerdienste](https://www.bsi.bund.de/SharedDocs/Cybersicherheitswarnungen/DE/2026/202602_BfV_BSI.pdf?__blob=publicationFile){target="_blank"} - 德国联邦宪法保卫局与联邦信息安全局，2026-02-06，45 天的数字出自此文。  
+查证来源（2026-09）：[Signal 官方博客](https://signal.org/blog/){target="_blank"}，查证时最新一篇为 2026-08-11。
+{: .source-note }
+
 ### 常见问题
 
 ??? question "自动密钥验证要我自己去打开吗"
