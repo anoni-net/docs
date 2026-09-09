@@ -286,6 +286,7 @@ extra:
   settings_language: !ENV [SETTINGS_LANGUAGE, "閱讀語言"]
   # 抽屜裡「離線內容」那一組的文案，理由同上面 settings_*。
   settings_offline: !ENV [SETTINGS_OFFLINE, "離線內容"]
+  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "離線閱讀"]
   settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "檢查更新"]
   # 外觀那三個選項在抽屜裡的圖示，順序跟 theme.palette 一致。上游 toggle.icon 講的是
   # 「點下去會切到哪一種」，抽屜要的是「這一項本身是什麼」，兩者對不起來，所以另外列。

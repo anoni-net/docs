@@ -649,6 +649,7 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .anoni-settings__overlay,
 .anoni-settings__head,
 .anoni-settings__group,
+.anoni-settings__link,
 .anoni-settings__choice {
   display: none;
 }
@@ -764,16 +765,35 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     width: 1.2rem;
   }
 
-  .anoni-settings__update:not([hidden]) {
-    display: block;
+  /* 離線閱讀那一頁的入口。排版跟語言那幾列一致，兩組並排時左側圖示欄對得起來 */
+  .anoni-settings__link {
+    align-items: center;
+    color: var(--md-default-fg-color);
+    display: flex;
+    font-size: 0.7rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
   }
 
-  .anoni-settings__update-body {
-    padding: 0 0.8rem 0.8rem;
+  .anoni-settings__link-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .anoni-settings__link-icon svg {
+    display: block;
+    fill: currentcolor;
+    height: 0.9rem;
+    width: 0.9rem;
+  }
+
+  .anoni-settings__update:not([hidden]) {
+    display: block;
+    padding: 0.2rem 0.8rem 0.8rem;
   }
 
   /* 按鈕撐滿抽屜寬度。抽屜只有 12.1rem，靠左的窄按鈕在這個寬度裡看起來像沒排好 */
-  .anoni-settings__update-body .anoni-banner-action {
+  .anoni-settings__update .anoni-banner-action {
     justify-content: center;
     width: 100%;
   }

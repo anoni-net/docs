@@ -269,6 +269,7 @@ extra:
   settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
   # Copy for the "offline content" group in the drawer, same reason as settings_* above.
   settings_offline: !ENV [SETTINGS_OFFLINE, "Offline content"]
+  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "Offline reading"]
   settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "Check for updates"]
   # Icons for the three appearance options in the drawer, same order as theme.palette.
   # The upstream toggle.icon says "what this switches to", the drawer needs "what this
