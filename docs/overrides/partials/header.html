@@ -95,7 +95,14 @@
     <div class="anoni-settings">
       <div class="anoni-settings__head">
         <span class="anoni-settings__title">{{ config.extra.settings_label }}</span>
-        <label class="anoni-settings__close md-icon" for="__settings" title="{{ config.extra.settings_close }}" aria-label="{{ config.extra.settings_close }}">
+        {#-
+          只給 aria-label，不給 title。theme 開了 content.tooltips，bundle.js 會把
+          header 裡每一個帶 title 的元素接管成自訂 tooltip。桌面滑鼠移開就收掉，
+          觸控沒有 mouseleave，點一下之後那顆白色小框會一直蓋在抽屜上，要再點畫面
+          其他地方才消失。這兩顆按鈕在桌面是 display:none，只有觸控看得到，title
+          帶不來好處。無障礙名稱由 aria-label 提供，沒有損失。
+        -#}
+        <label class="anoni-settings__close md-icon" for="__settings" aria-label="{{ config.extra.settings_close }}">
           {% include ".icons/material/close.svg" %}
         </label>
       </div>
@@ -113,7 +120,8 @@
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}
     {% endif %}
-    <label class="anoni-settings__button md-header__button md-icon" for="__settings" title="{{ config.extra.settings_label }}" aria-label="{{ config.extra.settings_label }}">
+    {#- 不給 title，理由同上面關閉鈕那一段 -#}
+    <label class="anoni-settings__button md-header__button md-icon" for="__settings" aria-label="{{ config.extra.settings_label }}">
       {% include ".icons/material/tune-variant.svg" %}
     </label>
     {% if "material/search" in config.plugins %}
