@@ -284,6 +284,13 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_LIGHT, "亮色"]
     - !ENV [SETTINGS_APPEARANCE_DARK, "暗色"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "閱讀語言"]
+  # 外觀那三個選項在抽屜裡的圖示，順序跟 theme.palette 一致。上游 toggle.icon 講的是
+  # 「點下去會切到哪一種」，抽屜要的是「這一項本身是什麼」，兩者對不起來，所以另外列。
+  # 圖示不分語系，三份設定填一樣的值，也就不需要 !ENV。
+  settings_appearance_icons:
+    - material/brightness-auto
+    - material/white-balance-sunny
+    - material/weather-night
   # 窄螢幕的短站名，理由見 partials/header.html。留空就照舊顯示完整 site_name。
   site_name_short: !ENV [SITE_NAME_SHORT, "匿名網路社群"]
   # 建在根路徑、網址上沒有語系區段的那一個語系。三份設定填的是同一個值，因為講的是
@@ -301,12 +308,15 @@ extra:
     - name: 臺灣正體（zh-TW）
       link: /docs/
       lang: zh-TW
+      icon: material/ideogram-cjk
     - name: 簡體中文（zh-CN）
       link: /docs/zh-cn/
       lang: zh-CN
+      icon: material/ideogram-cjk
     - name: English (en-US)
       link: /docs/en/
       lang: en
+      icon: material/alphabet-latin
   social:
     - icon: material/home
       link: https://anoni.net/docs/

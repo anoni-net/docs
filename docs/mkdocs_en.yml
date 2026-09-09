@@ -267,6 +267,14 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_LIGHT, "Light"]
     - !ENV [SETTINGS_APPEARANCE_DARK, "Dark"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
+  # Icons for the three appearance options in the drawer, same order as theme.palette.
+  # The upstream toggle.icon says "what this switches to", the drawer needs "what this
+  # option is", so they are listed separately. Icons are not localised, all three
+  # configs carry the same values, hence no !ENV.
+  settings_appearance_icons:
+    - material/brightness-auto
+    - material/white-balance-sunny
+    - material/weather-night
   # Short site name for narrow screens, see partials/header.html. Leave empty
   # to keep the full site_name.
   site_name_short: !ENV [SITE_NAME_SHORT, "anoni.net Docs"]
@@ -280,13 +288,16 @@ extra:
     - name: English (en-US)
       link: /docs/en/
       lang: en
+      icon: material/alphabet-latin
     # zh-TW 是網站預設語系，建在根路徑，沒有獨立語系區段。理由見 mkdocs.yml 的註解。
     - name: 臺灣正體（zh-TW）
       link: /docs/
       lang: zh-TW
+      icon: material/ideogram-cjk
     - name: 簡體中文（zh-CN）
       link: /docs/zh-cn/
       lang: zh-CN
+      icon: material/ideogram-cjk
   social:
     - icon: material/home
       link: https://anoni.net/docs/en/

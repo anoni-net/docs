@@ -630,6 +630,11 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   display: contents;
 }
 
+/* 語言名稱前面的字形圖示只在抽屜出現，桌面的下拉選單維持純文字 */
+.anoni-lang__icon {
+  display: none;
+}
+
 .anoni-settings__overlay,
 .anoni-settings__head,
 .anoni-settings__group,
@@ -776,6 +781,18 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     flex-grow: 1;
   }
 
+  .anoni-settings__choice-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .anoni-settings__choice-icon svg {
+    display: block;
+    fill: currentcolor;
+    height: 0.9rem;
+    width: 0.9rem;
+  }
+
   .anoni-settings__choice-mark {
     display: block;
     opacity: 0;
@@ -847,10 +864,26 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
     line-height: 1.4;
   }
 
+  /* 跟外觀那三項共用一組左側圖示欄，兩組並排時對得起來 */
   .anoni-settings .md-select__link {
+    align-items: center;
     color: var(--md-default-fg-color);
+    display: flex;
     font-size: 0.7rem;
+    gap: 0.4rem;
     padding: 0.5rem 0.8rem;
     width: 100%;
+  }
+
+  .anoni-settings .anoni-lang__icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .anoni-settings .anoni-lang__icon svg {
+    display: block;
+    fill: currentcolor;
+    height: 0.9rem;
+    width: 0.9rem;
   }
 }

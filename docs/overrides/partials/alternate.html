@@ -16,14 +16,25 @@
       <ul class="md-select__list">
         {% for alt in config.extra.alternate %}
           <li class="md-select__item"{% if alt.lang == config.extra.current_lang %} hidden{% endif %}>
+            {#-
+              語言名稱外面包一層 span，前面多一個字形圖示，給窄螢幕的設定抽屜用。
+              圖示走 extra.alternate 的 icon，沒填就退回切換器自己那顆。桌面的下拉
+              選單維持純文字，圖示由 extra.css 在抽屜的斷點裡才顯示。
+
+              圖示放在連結裡面不影響 base.html 讀語系清單。它取的是
+              a.textContent.trim()，SVG 不帶文字節點，剩下的空白 trim 掉就是名稱。
+            -#}
+            {% set alt_icon = alt.icon or icon %}
             {% if page is defined and page %}
               {% set base = alt.link.rstrip('/') %}
               <a href="{{ (base ~ '/' ~ page.url) | url }}" hreflang="{{ alt.lang }}" class="md-select__link">
-                {{ alt.name }}
+                <span class="anoni-lang__icon">{% include ".icons/" ~ alt_icon ~ ".svg" %}</span>
+                <span class="anoni-lang__name">{{ alt.name }}</span>
               </a>
             {% else %}
               <a href="{{ alt.link }}" hreflang="{{ alt.lang }}" class="md-select__link">
-                {{ alt.name }}
+                <span class="anoni-lang__icon">{% include ".icons/" ~ alt_icon ~ ".svg" %}</span>
+                <span class="anoni-lang__name">{{ alt.name }}</span>
               </a>
             {% endif %}
           </li>

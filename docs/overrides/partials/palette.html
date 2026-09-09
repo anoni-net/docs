@@ -26,7 +26,15 @@
         {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
       </label>
       {% set choices = config.extra.settings_appearance_options %}
+      {% set icons = config.extra.settings_appearance_icons %}
       <label class="anoni-settings__choice" for="__palette_{{ loop.index0 }}">
+        <span class="anoni-settings__choice-icon">
+          {%- if icons and icons | length > loop.index0 -%}
+            {% include ".icons/" ~ icons[loop.index0] ~ ".svg" %}
+          {%- else -%}
+            {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
+          {%- endif -%}
+        </span>
         <span class="anoni-settings__choice-text">
           {%- if choices and choices | length > loop.index0 -%}
             {{ choices[loop.index0] }}
