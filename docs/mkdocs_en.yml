@@ -61,6 +61,7 @@ nav:
               - tools/crypto-privacy-spectrum.md
               - tools/tails-vs-whonix-vs-qubes.md
               - tools/tor-browser-advanced.md
+              - tools/tor-browser-mobile.md
               - tools/vpn-guide.md
               - tools/encrypted-dns.md
           - "Contribute and measure":

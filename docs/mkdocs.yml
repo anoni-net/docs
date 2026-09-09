@@ -45,6 +45,7 @@ nav:
           - "連線層：Tor 工具家族":
               - tools/what-is-tor.md
               - tools/tor-browser-advanced.md
+              - tools/tor-browser-mobile.md
               - tools/tor-snowflake.md
               - tools/signal-proxy.md
               - tools/onionshare.md
