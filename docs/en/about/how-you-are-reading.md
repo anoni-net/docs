@@ -35,7 +35,7 @@ An `.onion` address carries no certificate authority endorsement, so checking th
 
 This edition loads no analytics and registers no background Service Worker, which is why offline reading is absent. Latency is higher than the standard site, as it is for Tor generally.
 
-Which app to use on a phone, and why iOS has no official Tor Browser, is in [Tor on a phone](../tools/tor-browser-advanced.md#Tor-on-a-phone).
+Which app to use on a phone, how to install it, and why iOS has no official Tor Browser are in [Tor on a phone](../tools/tor-browser-mobile.md).
 
 ## IPFS mirror
 
