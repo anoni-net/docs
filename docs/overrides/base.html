@@ -249,6 +249,12 @@
     {% set features = config.theme.features or [] %}
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    {#-
+      窄螢幕設定抽屜的開關。抽屜本體與它的 overlay 在 partials/header.html，
+      理由寫在那裡。放在這裡是因為 extra.css 要用 #__settings:checked ~ .md-header
+      這種同層選擇器抓到 header，跟上面兩個 toggle 是同一套做法。
+    -#}
+    <input class="md-toggle" data-md-toggle="settings" type="checkbox" id="__settings" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       {% if page.toc | first is defined %}
@@ -790,6 +796,20 @@
           banner.appendChild(line);
           banner.appendChild(actions);
           dismiss = window.__anoniToast(banner);
+        })();
+      </script>
+      <script>
+        // 設定抽屜按 Esc 關掉。開合本身是 #__settings 這顆 checkbox，關掉 JS 也
+        // 能用 header 的圖示與 overlay 操作，這一段只是把鍵盤的習慣補上，跟
+        // Material 給左側抽屜與搜尋的 Esc 行為對齊。
+        (function () {
+          var toggle = document.getElementById("__settings");
+          if (!toggle) return;
+          document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && toggle.checked) {
+              toggle.checked = false;
+            }
+          });
         })();
       </script>
     {% endblock %}
