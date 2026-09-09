@@ -268,6 +268,8 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_DARK, "Dark"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
   # Copy for the "offline content" group in the drawer, same reason as settings_* above.
+  settings_route: !ENV [SETTINGS_ROUTE, "Connection"]
+  settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "How you are reading this"]
   settings_offline: !ENV [SETTINGS_OFFLINE, "Offline content"]
   # This row links to the offline reading page, it is not a switch. A noun phrase
   # sitting next to Light and Dark reads like a state, a verb makes it a place you

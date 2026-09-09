@@ -129,6 +129,19 @@
         同一份，定義在 base.html 的 styles block。狀態那一行的文字由 JS 填，
         role 與 aria-live 讓讀螢幕的人也拿得到結果。
       -#}
+      {#-
+        「你正在用哪一種方式閱讀」的入口。那一頁在 nav 裡是社群 / 關於我們底下，
+        跟離線閱讀一樣深，而標準站上原本連一個入口都沒有：底下 anoni-variant 那個
+        版本標記只在 onion 與 IPFS 版渲染，clearnet 版什麼都不顯示。
+
+        它回答的是「我現在連的是哪一份、過程中誰看得到什麼」，對這個站的讀者是
+        第一順位的問題，不該只有走 onion 進來的人看得到。
+      -#}
+      <p class="anoni-settings__group">{{ config.extra.settings_route }}</p>
+      <a href="{{ 'about/how-you-are-reading/' | url }}" class="anoni-settings__link">
+        <span class="anoni-settings__link-icon">{% include ".icons/material/routes.svg" %}</span>
+        <span>{{ config.extra.settings_route_link }}</span>
+      </a>
       <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
       {#-
         離線閱讀那一頁的入口。那一頁在 nav 裡的位置不淺，讀者不容易自己找到，

@@ -264,6 +264,8 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_DARK, "深色"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "阅读语言"]
   # 抽屉里「离线内容」那一组的文案，理由同上面 settings_*。
+  settings_route: !ENV [SETTINGS_ROUTE, "连线方式"]
+  settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "你正在用哪一种方式阅读"]
   settings_offline: !ENV [SETTINGS_OFFLINE, "离线内容"]
   # 这一列是连到离线阅读那一页的链接，不是开关。名词开头（「离线阅读」）排在
   # 浅色、深色那几列旁边会被读成状态，动词开头才看得出是一个去得了的地方。
