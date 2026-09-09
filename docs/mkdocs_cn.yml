@@ -251,6 +251,20 @@ extra:
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
+  # 窄屏幕设置抽屉的文案。partials/header.html 与 partials/palette.html 是三个
+  # 语系共用的符号链接，文字只能走设置，跟上面 variant_label_* 是同一个理由。
+  # settings_appearance_options 的顺序要跟 theme.palette 一致，目前是跟随系统、
+  # 浅色、深色三个。多一个或少一个选项，partial 会退回上游的 toggle.name。
+  settings_label: !ENV [SETTINGS_LABEL, "设置"]
+  settings_close: !ENV [SETTINGS_CLOSE, "关闭"]
+  settings_appearance: !ENV [SETTINGS_APPEARANCE, "外观"]
+  settings_appearance_options:
+    - !ENV [SETTINGS_APPEARANCE_AUTO, "跟随系统"]
+    - !ENV [SETTINGS_APPEARANCE_LIGHT, "浅色"]
+    - !ENV [SETTINGS_APPEARANCE_DARK, "深色"]
+  settings_language: !ENV [SETTINGS_LANGUAGE, "阅读语言"]
+  # 窄屏幕的短站名，理由见 partials/header.html。留空就照旧显示完整 site_name。
+  site_name_short: !ENV [SITE_NAME_SHORT, "匿名网络社群"]
   # 建在根路徑、網址上沒有語系區段的那一個語系，三份設定同一個值，理由見 mkdocs.yml。
   default_lang: zh-TW
   # 這份產物是哪一個語系，語言切換器拿它把「目前語系」那一項藏起來。值對齊底下

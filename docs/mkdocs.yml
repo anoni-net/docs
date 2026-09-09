@@ -272,6 +272,20 @@ extra:
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
+  # 窄螢幕設定抽屜的文案。partials/header.html 與 partials/palette.html 是三個
+  # 語系共用的符號連結，文字只能走設定，跟上面 variant_label_* 是同一個理由。
+  # settings_appearance_options 的順序要跟 theme.palette 一致，目前是跟隨系統、
+  # 亮色、暗色三個。多一個或少一個選項，partial 會退回上游的 toggle.name。
+  settings_label: !ENV [SETTINGS_LABEL, "設定"]
+  settings_close: !ENV [SETTINGS_CLOSE, "關閉"]
+  settings_appearance: !ENV [SETTINGS_APPEARANCE, "外觀"]
+  settings_appearance_options:
+    - !ENV [SETTINGS_APPEARANCE_AUTO, "跟隨系統"]
+    - !ENV [SETTINGS_APPEARANCE_LIGHT, "亮色"]
+    - !ENV [SETTINGS_APPEARANCE_DARK, "暗色"]
+  settings_language: !ENV [SETTINGS_LANGUAGE, "閱讀語言"]
+  # 窄螢幕的短站名，理由見 partials/header.html。留空就照舊顯示完整 site_name。
+  site_name_short: !ENV [SITE_NAME_SHORT, "匿名網路社群"]
   # 建在根路徑、網址上沒有語系區段的那一個語系。三份設定填的是同一個值，因為講的是
   # 這個部署長什麼樣，跟正在建哪一份無關。base.html 的偏好轉址只在這個語系的首頁動手，
   # /docs/en/ 那種網址上已經指定過語系的入口不受偏好影響。

@@ -602,3 +602,255 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 .md-nav--primary .md-nav__source {
   display: none;
 }
+
+/* ==========================================================================
+   窄螢幕的設定抽屜
+   套用範圍：44.9375em 以下，亮暗切換與語言切換收進從右側滑出的抽屜
+
+   窄螢幕的 header 右側常駐三顆圖示，390px 上量到亮暗 48px、語言 48px、搜尋
+   40px，共 140px，標題只剩 130px，而站名要 236px 才放得下。亮暗與語言兩顆
+   收進抽屜，header 只留一顆設定圖示與搜尋。搜尋留著，那是文件站最高頻的
+   動作，收進第二層等於每次多一次點擊。
+
+   收進抽屜還有一個空間以外的好處。那兩顆在 header 上都只有圖示沒有文字，
+   抽屜裡放得下「外觀」與「閱讀語言」的標題，亮暗也從點一下換下一個改成三個
+   並列，目前選的是哪一個直接看得到。
+
+   桌面版完全不受影響。.anoni-settings 在 44.9375em 以上是 display:contents，
+   palette 與語言切換直接排進 .md-header__inner 的 flex，跟改之前一樣。DOM 只
+   有一份，所以 base.html 讀 .md-header__option .md-select__link 的語言偏好與
+   bundle.js 的 palette 都照常運作。
+
+   斷點取 Material 自己的 mobile 上限 44.9375em（719px）。再往上 header 的
+   寬度夠，三顆並排不擠。
+   ========================================================================== */
+
+/* 桌面：抽屜的外框與裝飾全部退場，只留原本那兩組控制項排進 header */
+.anoni-settings {
+  display: contents;
+}
+
+.anoni-settings__overlay,
+.anoni-settings__head,
+.anoni-settings__group,
+.anoni-settings__choice {
+  display: none;
+}
+
+/* Material 的 .md-header__button:not([hidden]) 是兩個 class 的權重，單靠
+   .anoni-settings__button 蓋不掉，桌面版會多出一顆設定圖示。 */
+.anoni-settings__button.md-header__button {
+  display: none;
+}
+
+/* 窄螢幕改用短站名。標題在 390px 上收掉兩顆圖示之後有 178px，完整站名要 236px，
+   還是會截斷。短站名走 config，因為 header.html 是三個語系共用的符號連結。 */
+.anoni-site-name--short {
+  display: none;
+}
+
+@media screen and (max-width: 44.9375em) {
+  .anoni-settings__button.md-header__button {
+    display: inline-block;
+  }
+
+  .anoni-site-name {
+    display: none;
+  }
+
+  .anoni-site-name--short {
+    display: inline;
+  }
+
+  /* overlay 與抽屜都在 .md-header__inner 裡面。.md-header 是 z-index 4 的堆疊
+     環境，抽屜放到 header 外面會被 Material 的 .md-overlay（z-index 5）蓋住。
+     放在裡面之後，整個 header 開啟時提到 6，overlay 才遮得到 header 這一條，
+     讀者不會在抽屜開著的時候還按得到漢堡與搜尋。 */
+  #__settings:checked ~ .md-header {
+    z-index: 6;
+  }
+
+  .anoni-settings__overlay {
+    background-color: #0000008a;
+    display: block;
+    inset: 0;
+    opacity: 0;
+    position: fixed;
+    transition: opacity 0.25s, visibility 0ms 0.25s;
+    visibility: hidden;
+    z-index: 1;
+  }
+
+  #__settings:checked ~ .md-header .anoni-settings__overlay {
+    opacity: 1;
+    transition: opacity 0.25s, visibility 0ms;
+    visibility: visible;
+  }
+
+  /* 關閉時用 visibility:hidden 把整個抽屜移出 tab 順序。留在畫面外但還可以
+     tab 進去的話，讀者會在看不到東西的狀態下走進一串連結。 */
+  .anoni-settings {
+    background-color: var(--md-default-bg-color);
+    bottom: 0;
+    display: block;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms 0.25s;
+    visibility: hidden;
+    width: 12.1rem;
+    z-index: 2;
+  }
+
+  #__settings:checked ~ .md-header .anoni-settings {
+    transform: translateX(0);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms;
+    visibility: visible;
+  }
+
+  .anoni-settings__head {
+    align-items: center;
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    display: flex;
+    height: 2.4rem;
+    padding: 0 0.4rem 0 0.8rem;
+  }
+
+  .anoni-settings__title {
+    flex-grow: 1;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .anoni-settings__close {
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+
+  .anoni-settings__close svg {
+    display: block;
+    fill: currentcolor;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  .anoni-settings__group {
+    color: var(--md-default-fg-color--light);
+    display: block;
+    font-size: 0.64rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0.8rem 0.8rem 0.2rem;
+  }
+
+  /* .md-header__option 在 header 裡是橫排，抽屜裡要直排。搜尋展開時 Material
+     會把它壓成 max-width:0，那條規則在抽屜裡也要擋掉，否則抽屜內容會消失。 */
+  .anoni-settings .md-header__option,
+  [data-md-toggle="search"]:checked ~ .md-header .anoni-settings .md-header__option {
+    display: block;
+    max-width: none;
+    opacity: 1;
+    transition: none;
+    white-space: normal;
+  }
+
+  /* header 上那顆循環切換的圖示按鈕在抽屜裡沒有用處，三個選項已經並列 */
+  .anoni-settings .md-header__option > .md-header__button {
+    display: none;
+  }
+
+  .anoni-settings__choice {
+    align-items: center;
+    color: var(--md-default-fg-color);
+    cursor: pointer;
+    display: flex;
+    font-size: 0.7rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .anoni-settings__choice-text {
+    flex-grow: 1;
+  }
+
+  .anoni-settings__choice-mark {
+    display: block;
+    opacity: 0;
+  }
+
+  .anoni-settings__choice-mark svg {
+    display: block;
+    fill: var(--md-accent-fg-color);
+    height: 0.9rem;
+    width: 0.9rem;
+  }
+
+  /* 目前選的是哪一個，看上游那顆循環 label 的 hidden。bundle.js 每次換配色都會
+     把 index 對應的那一顆解除 hidden，其餘關掉，所以它一定跟著現況走。
+
+     不綁 input 的 :checked，因為第一次進站三顆 radio 都還沒被勾選（配色是從
+     localStorage 或 prefers-color-scheme 算出來的），綁 :checked 會整排沒有勾號。
+
+     順序是 input、循環 label、抽屜選項，由 palette.html 固定，中間不能插東西。 */
+  .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice {
+    color: var(--md-accent-fg-color);
+  }
+
+  .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice .anoni-settings__choice-mark {
+    opacity: 1;
+  }
+
+  /* 語言切換在 header 是滑過才展開的下拉，抽屜裡直接把清單攤開 */
+  /* .md-select__inner 在 header 是 position:absolute 的浮層，靠 hover 才展開。
+     抽屜裡要它回到文件流，位置與動畫那一整組都得歸零，只留清單本身。 */
+  .anoni-settings .md-select__inner {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    left: auto;
+    margin-top: 0;
+    max-height: none;
+    opacity: 1;
+    position: static;
+    top: auto;
+    transform: none;
+    transition: none;
+    z-index: auto;
+  }
+
+  .anoni-settings .md-select__inner::after {
+    display: none;
+  }
+
+  .anoni-settings .md-select {
+    display: block;
+  }
+
+  .anoni-settings .md-select > .md-header__button {
+    display: none;
+  }
+
+  .anoni-settings .md-select__list {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* .md-select__item 帶 1.8rem 的 line-height，加上連結自己的 padding，兩個
+     語言之間會空出比外觀那三項多一倍的距離。 */
+  .anoni-settings .md-select__item {
+    line-height: 1.4;
+  }
+
+  .anoni-settings .md-select__link {
+    color: var(--md-default-fg-color);
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+    width: 100%;
+  }
+}

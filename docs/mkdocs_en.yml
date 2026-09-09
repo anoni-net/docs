@@ -254,6 +254,22 @@ extra:
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
+  # Copy for the narrow-screen settings drawer. partials/header.html and
+  # partials/palette.html are symlinks shared by all three languages, so the
+  # strings have to come from config, same reason as variant_label_* above.
+  # Keep settings_appearance_options in the same order as theme.palette:
+  # follow system, light, dark. A mismatched length falls back to toggle.name.
+  settings_label: !ENV [SETTINGS_LABEL, "Settings"]
+  settings_close: !ENV [SETTINGS_CLOSE, "Close"]
+  settings_appearance: !ENV [SETTINGS_APPEARANCE, "Appearance"]
+  settings_appearance_options:
+    - !ENV [SETTINGS_APPEARANCE_AUTO, "Follow system"]
+    - !ENV [SETTINGS_APPEARANCE_LIGHT, "Light"]
+    - !ENV [SETTINGS_APPEARANCE_DARK, "Dark"]
+  settings_language: !ENV [SETTINGS_LANGUAGE, "Reading language"]
+  # Short site name for narrow screens, see partials/header.html. Leave empty
+  # to keep the full site_name.
+  site_name_short: !ENV [SITE_NAME_SHORT, "anoni.net Docs"]
   # 建在根路徑、網址上沒有語系區段的那一個語系，三份設定同一個值，理由見 mkdocs.yml。
   # 底下 alternate 把 English 排第一是選單的版面安排，跟這裡無關。
   default_lang: zh-TW

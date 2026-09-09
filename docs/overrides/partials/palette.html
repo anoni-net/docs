@@ -1,0 +1,43 @@
+{#-
+  Fork of mkdocs-material partials/palette.html: 每個選項多一顆直接指定的 label，
+  給窄螢幕的設定抽屜用。
+
+  上游那顆 label 的 for 指向下一個選項，點一下換下一個，讀者要從圖示反推目前是
+  哪個狀態。抽屜裡要的是三個並列，點哪個就是哪個，所以另外加一顆 for 指向自己的
+  label。桌面版把新加的那顆藏起來，維持原本的循環按鈕。
+
+  新加的 label 一定要排在上游那顆後面。bundle.js 用 input.nextElementSibling
+  找上游那顆來切 hidden（palette 的 index 一變就重算），插到前面會被它當成圖示
+  按鈕關掉。extra.css 的勾號規則也靠 input + label + label 這個順序。
+
+  選項名稱走 config.extra.settings_appearance_options，因為這支 partial 是三個
+  語系共用的符號連結。順序跟 theme.palette 一致，沒設就退回上游的 toggle.name。
+
+  theme-partial-from: mkdocs-material 9.7.7
+-#}
+<form class="md-header__option" data-md-component="palette">
+  {% for option in config.theme.palette %}
+    {% set scheme  = option.scheme  | d("default", true) %}
+    {% set primary = option.primary | d("indigo", true) %}
+    {% set accent  = option.accent  | d("indigo", true) %}
+    <input class="md-option" data-md-color-media="{{ option.media }}" data-md-color-scheme="{{ scheme | replace(' ', '-') }}" data-md-color-primary="{{ primary | replace(' ', '-') }}" data-md-color-accent="{{ accent | replace(' ', '-') }}" {% if option.toggle %} aria-label="{{ option.toggle.name }}" {% else %} aria-hidden="true" {% endif %} type="radio" name="__palette" id="__palette_{{ loop.index0 }}">
+    {% if option.toggle %}
+      <label class="md-header__button md-icon" title="{{ option.toggle.name }}" for="__palette_{{ loop.index % loop.length }}" hidden>
+        {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
+      </label>
+      {% set choices = config.extra.settings_appearance_options %}
+      <label class="anoni-settings__choice" for="__palette_{{ loop.index0 }}">
+        <span class="anoni-settings__choice-text">
+          {%- if choices and choices | length > loop.index0 -%}
+            {{ choices[loop.index0] }}
+          {%- else -%}
+            {{ option.toggle.name }}
+          {%- endif -%}
+        </span>
+        <span class="anoni-settings__choice-mark">
+          {% include ".icons/material/check.svg" %}
+        </span>
+      </label>
+    {% endif %}
+  {% endfor %}
+</form>

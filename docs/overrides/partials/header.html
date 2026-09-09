@@ -21,9 +21,20 @@
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
+        {#-
+          窄螢幕換一個短站名。完整站名在 390px 上要 236px，標題那一格收掉亮暗與
+          語言兩顆圖示之後有 178px，還是會截成「匿名網路社群 …」。短站名走
+          config.extra，沒設就照舊用 site_name。捲動之後 Material 換成下面那個
+          頁面標題，這一段只影響停在頂端的時候。
+        -#}
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            {{ config.site_name }}
+            {% if config.extra.site_name_short %}
+              <span class="anoni-site-name">{{ config.site_name }}</span>
+              <span class="anoni-site-name--short">{{ config.extra.site_name_short }}</span>
+            {% else %}
+              {{ config.site_name }}
+            {% endif %}
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -62,17 +73,49 @@
         <span class="anoni-variant__label">{{ variant_label }}</span>
       </a>
     {% endif %}
-    {% if config.theme.palette %}
-      {% if not config.theme.palette is mapping %}
-        {% include "partials/palette.html" %}
+    {#-
+      窄螢幕的設定抽屜。亮暗切換與語言切換在窄螢幕上是兩顆沒有文字的圖示，讀者
+      不見得認得，而且它們常駐在右側，390px 上標題只剩 130px。兩者都收進從右側
+      滑出的抽屜，header 上只留一顆設定圖示與搜尋。搜尋留在 header，那是文件站
+      最高頻的動作，多一層就是每次多一次點擊。
+
+      .anoni-settings 在桌面是 display:contents，palette 與語言切換照樣直接排進
+      header 的 flex，DOM 只有一份。窄螢幕才變成 position:fixed 的抽屜。斷點取
+      Material 自己的 mobile 上限 44.9375em。
+
+      開合靠 base.html 的 #__settings checkbox，純 HTML 加 CSS，Tor Browser 把
+      JS 關到最嚴也開得起來，跟底下 anoni-variant 那段是同一個理由。
+
+      overlay 與抽屜都放在 .md-header__inner 裡面。.md-header 是 z-index 4 的
+      堆疊環境，抽屜放到 header 外面就一定被 .md-overlay（z-index 5）蓋住，放在
+      裡面才有辦法讓 overlay 連 header 這一條也遮起來。開啟時 extra.css 把
+      .md-header 提到 z-index 6。
+    -#}
+    <label class="anoni-settings__overlay" for="__settings"></label>
+    <div class="anoni-settings">
+      <div class="anoni-settings__head">
+        <span class="anoni-settings__title">{{ config.extra.settings_label }}</span>
+        <label class="anoni-settings__close md-icon" for="__settings" title="{{ config.extra.settings_close }}" aria-label="{{ config.extra.settings_close }}">
+          {% include ".icons/material/close.svg" %}
+        </label>
+      </div>
+      {% if config.theme.palette %}
+        {% if not config.theme.palette is mapping %}
+          <p class="anoni-settings__group">{{ config.extra.settings_appearance }}</p>
+          {% include "partials/palette.html" %}
+        {% endif %}
       {% endif %}
-    {% endif %}
+      {% if config.extra.alternate %}
+        <p class="anoni-settings__group">{{ config.extra.settings_language }}</p>
+        {% include "partials/alternate.html" %}
+      {% endif %}
+    </div>
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}
     {% endif %}
-    {% if config.extra.alternate %}
-      {% include "partials/alternate.html" %}
-    {% endif %}
+    <label class="anoni-settings__button md-header__button md-icon" for="__settings" title="{{ config.extra.settings_label }}" aria-label="{{ config.extra.settings_label }}">
+      {% include ".icons/material/tune-variant.svg" %}
+    </label>
     {% if "material/search" in config.plugins %}
       {% set search = config.plugins["material/search"] | attr("config") %}
       {% if search.enabled %}
