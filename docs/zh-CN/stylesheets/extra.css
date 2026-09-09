@@ -596,8 +596,8 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
-   窄螢幕的設定抽屜
-   套用範圍：44.9375em 以下，亮暗切換與語言切換收進從右側滑出的抽屜
+   設定抽屜
+   套用範圍：76.234375em 以下，亮暗切換與語言切換收進從右側滑出的抽屜
 
    窄螢幕的 header 右側常駐三顆圖示，390px 上量到亮暗 48px、語言 48px、搜尋
    40px，共 140px，標題只剩 130px，而站名要 236px 才放得下。亮暗與語言兩顆
@@ -608,13 +608,17 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
    抽屜裡放得下「外觀」與「閱讀語言」的標題，亮暗也從點一下換下一個改成三個
    並列，目前選的是哪一個直接看得到。
 
-   桌面版完全不受影響。.anoni-settings 在 44.9375em 以上是 display:contents，
-   palette 與語言切換直接排進 .md-header__inner 的 flex，跟改之前一樣。DOM 只
-   有一份，所以 base.html 讀 .md-header__option .md-select__link 的語言偏好與
-   bundle.js 的 palette 都照常運作。
+   斷點跟左側導覽抽屜取同一個值。Material 在 max-width 76.234375em 把
+   .md-nav--primary 收成抽屜，並在 min-width 76.25em 把漢堡藏起來。兩側用同一
+   條線，讀者在平板上不會看到一邊收起、另一邊還攤在 header 的半套狀態。
 
-   斷點取 Material 自己的 mobile 上限 44.9375em（719px）。再往上 header 的
-   寬度夠，三顆並排不擠。
+   這裡原本填 44.9375em（Material 的 mobile 上限，719px），只顧到手機。平板
+   直立與手機橫放都落在 720 到 1219 之間，左邊已經是抽屜，右邊還是三顆並排。
+
+   .anoni-settings 在 76.25em 以上是 display:contents，palette 與語言切換直接
+   排進 .md-header__inner 的 flex，跟改之前一樣。DOM 只有一份，所以 base.html
+   讀 .md-header__option .md-select__link 的語言偏好與 bundle.js 的 palette 都
+   照常運作。
    ========================================================================== */
 
 /* 桌面：抽屜的外框與裝飾全部退場，只留原本那兩組控制項排進 header */
@@ -640,23 +644,28 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   display: none;
 }
 
-/* 窄螢幕改用短站名。標題在 390px 上收掉兩顆圖示之後有 178px，完整站名要 236px，
-   還是會截斷。短站名走 config，因為 header.html 是三個語系共用的符號連結。 */
+/* 短站名。標題在 390px 上收掉兩顆圖示之後有 178px，完整站名要 236px，還是會
+   截斷。短站名走 config，因為 header.html 是三個語系共用的符號連結。
+
+   這一項的斷點跟抽屜不同，維持 44.9375em。720px 起標題那一格已經有四百多 px，
+   完整站名放得下，沒有理由換掉。 */
 .anoni-site-name--short {
   display: none;
 }
 
 @media screen and (max-width: 44.9375em) {
-  .anoni-settings__button.md-header__button {
-    display: inline-block;
-  }
-
   .anoni-site-name {
     display: none;
   }
 
   .anoni-site-name--short {
     display: inline;
+  }
+}
+
+@media screen and (max-width: 76.234375em) {
+  .anoni-settings__button.md-header__button {
+    display: inline-block;
   }
 
   /* overlay 與抽屜都在 .md-header__inner 裡面。.md-header 是 z-index 4 的堆疊
