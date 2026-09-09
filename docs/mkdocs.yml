@@ -286,7 +286,11 @@ extra:
   settings_language: !ENV [SETTINGS_LANGUAGE, "閱讀語言"]
   # 抽屜裡「離線內容」那一組的文案，理由同上面 settings_*。
   settings_offline: !ENV [SETTINGS_OFFLINE, "離線內容"]
-  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "離線閱讀"]
+  # 這一列是連到離線閱讀那一頁的連結，不是開關。名詞開頭（「離線閱讀」）排在
+  # 亮色、暗色那幾列旁邊會被讀成狀態，動詞開頭才看得出是一個去得了的地方。
+  # 不用「管理離線內容」是因為正上方的群組標題就是「離線內容」，相鄰兩行重複
+  # 同一個詞讀起來卡。
+  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "管理裝置中的內容"]
   settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "檢查更新"]
   # 外觀那三個選項在抽屜裡的圖示，順序跟 theme.palette 一致。上游 toggle.icon 講的是
   # 「點下去會切到哪一種」，抽屜要的是「這一項本身是什麼」，兩者對不起來，所以另外列。
