@@ -949,3 +949,36 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   height: 0.9rem;
   width: 0.9rem;
 }
+
+/* ==========================================================================
+   .post-tag — category label in front of each row of "Recent updates" on the
+   home page. Emitted by hooks/latest_posts.py as `Category`{.post-tag
+   .post-tag--community}.
+
+   Classes replaced inline styles because an inline colour cannot follow the
+   colour scheme: every one of the six values failed AA 4.5 in one mode or the
+   other, and the old default --brand-cyan-800 scores only 2.80 on slate.
+   The label is a <code> element, so contrast is measured against Material's
+   code background: #f5f5f5 in light, #272a35 in slate. The number at the end
+   of each line is the measured ratio. All six pass AA 4.5 in both modes.
+
+   The category-to-class table lives in CATEGORY_CLASSES in
+   hooks/latest_posts.py. Anything not listed there falls back to the neutral
+   colour. The news and tech hues sit close to --guide-scenarios and
+   --guide-advanced, which are sidebar navigation UI colours used in a
+   different component, so the hue is reused but the token is not.
+   ========================================================================== */
+
+.md-typeset .post-tag            { color: #546e7a; }  /* default   4.95 */
+.md-typeset .post-tag--update    { color: #2e7d32; }  /* update    4.70 */
+.md-typeset .post-tag--event     { color: #b35309; }  /* event     4.63 */
+.md-typeset .post-tag--community { color: #006d99; }  /* community 5.28 */
+.md-typeset .post-tag--news      { color: #ad1457; }  /* news      6.39 */
+.md-typeset .post-tag--tech      { color: #673ab7; }  /* tech      6.72 */
+
+[data-md-color-scheme="slate"] .md-typeset .post-tag            { color: #b0bec5; }  /* 7.50 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--update    { color: #81c784; }  /* 7.10 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--event     { color: #ffb74d; }  /* 8.26 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--community { color: #4dbfff; }  /* 6.95 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--news      { color: #f48fb1; }  /* 6.41 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--tech      { color: #b39ddb; }  /* 5.97 */
