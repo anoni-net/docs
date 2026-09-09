@@ -719,6 +719,12 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
        在容器這一層定一次，之後往抽屜裡加東西不會再踩到。標題列自己會覆蓋回
        primary 那組。 */
     color: var(--md-default-fg-color);
+    /* 字級也要在容器定一次，理由跟上面的文字色一樣。Material 的 body 是 .5rem
+       （10px），各元件自己設自己的。抽屜裡每一列都指定過所以看不出問題，直到
+       放進一顆 font:inherit 的 .anoni-banner-action，那顆按鈕就掉到 10px，比
+       旁邊每一列都小，連它自己底下的狀態列都比它大。底部提示卡那份沒事，是因為
+       .anoni-toast 有設 .7rem。 */
+    font-size: 0.7rem;
     bottom: 0;
     display: block;
     overflow-y: auto;
