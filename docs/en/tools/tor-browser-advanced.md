@@ -68,6 +68,19 @@ Most people who lose anonymity on Tor don't lose it to a broken setting. They lo
 
 These come back to the same idea covered in [anonymity, privacy, pseudonymity, and confidentiality](../basics/anonymity-vs-privacy.md): Tor protects the *who-talked-to-what* of a connection, and you give that away the moment your own actions reattach a name to it.
 
+## Tor on a phone
+
+Neither platform gives you what the desktop browser gives you, and they fall short for different reasons.
+
+**Android** has an official Tor Browser from the Tor Project, listed alongside the desktop builds on the [download page](https://www.torproject.org/download/){target="_blank"}. It runs the same Tor engine, and most of the settings on this page are there: security levels, bridges, New Identity.
+
+**iOS has no official Tor Browser, and cannot have one.** Apple requires every browser on iOS to render with WebKit, so an app can route your traffic through Tor but cannot ship the engine changes that Tor Browser's fingerprinting defences are built from. The Tor Project points iOS users to [Onion Browser](https://onionbrowser.com/){target="_blank"}, an open-source app whose contributors include Mike Tigas, Benjamin Erhart and the Guardian Project.[^7] Traffic goes over Tor; the fingerprint resistance described earlier on this page does not carry over.
+
+Two more things are weaker on a phone than on a laptop:
+
+- The browser-tab version of Snowflake is a poor fit on a phone, where the system cuts the WebRTC connection once the tab goes to the background. For sustained contribution from a phone the Tor Project publishes a standalone app, covered in [Tor Snowflake bridges](./tor-snowflake.md).
+- If your threat model is the journalist or activist end of the range, prefer the desktop browser, or [Tails](./what-is-tails.md) where the operating system enforces the isolation rather than the browser.
+
 ## Where to go from here
 
 - [Tor Browser manual](https://tb-manual.torproject.org/){target="_blank"} — the canonical, current step-by-step for every setting on this page, including exact bridge and security-level instructions.
@@ -82,3 +95,4 @@ These come back to the same idea covered in [anonymity, privacy, pseudonymity, a
 [^4]: [What is lyrebird?](https://support.torproject.org/tbb/lyrebird/){target="_blank"} — Tor Project Support. Lyrebird is the program in Tor Browser that implements obfs4, meek, Snowflake, and WebTunnel.
 [^5]: [Hiding in plain sight: Introducing WebTunnel](https://blog.torproject.org/introducing-webtunnel-evading-censorship-by-hiding-in-plain-sight/){target="_blank"} — The Tor Project Blog.
 [^6]: [Managing identities](https://support.torproject.org/managing-identities/){target="_blank"} — Tor Project Support.
+[^7]: [Can I run Tor Browser on an iOS device?](https://support.torproject.org/tormobile/tormobile-3/){target="_blank"} — Tor Project Support. "Apple requires browsers on iOS to use something called Webkit, which prevents Onion Browser from having the same privacy protections as Tor Browser."

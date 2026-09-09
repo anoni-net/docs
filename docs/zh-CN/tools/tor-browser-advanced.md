@@ -133,12 +133,12 @@ Tor Browser 的匿名性靠「全球用户长得一样」维持。几个基本�
 桌面版以外的选择有限：
 
 - **Android**：[Tor Browser for Android](https://www.torproject.org/download/#android){target="_blank"}（Tor Project 官方），跟桌面版同一个 Tor 引擎，多数设定齐备
-- **iOS**：[Onion Browser](https://onionbrowser.com/){target="_blank"}（Mike Tigas 维护的社群版本，**非 Tor Project 官方**）。Apple 的 App Store 政策不允许 Tor Project 直接发 iOS 版本，所有 iOS 上的浏览器底层都受限于 WebKit（Safari 内核）
+- **iOS**：[Onion Browser](https://onionbrowser.com/){target="_blank"}（开源社群版本，**非 Tor Project 官方**，贡献者包含 Mike Tigas、Benjamin Erhart 与 Guardian Project）。Apple 的 App Store 政策不允许 Tor Project 直接发 iOS 版本，所有 iOS 上的浏览器底层都受限于 WebKit（Safari 内核）
 
 移动装置上的 Tor 体验较弱，跟桌面版有几个差异：
 
 - iOS 因 WebKit 限制，无法做到桌面版完整的指纹抗性
-- 移动装置不适合长时间执行 Snowflake 客户端，耗电、发热、进入背景会被系统杀
+- 浏览器标签页版的 Snowflake 在手机上效果有限，标签页进入后台后系统经常中断 WebRTC 连线。想用手机长期贡献，改用官方的独立 App，见 [Tor Snowflake 桥接点](./tor-snowflake.md)
 - 进阶威胁模型（记者、行动者）建议优先用桌面版的 Tor Browser，或直接改用 [Tails](./what-is-tails.md)
 
 ## 台湾常见错误排解
