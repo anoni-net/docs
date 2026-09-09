@@ -120,10 +120,6 @@
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}
     {% endif %}
-    {#- 不給 title，理由同上面關閉鈕那一段 -#}
-    <label class="anoni-settings__button md-header__button md-icon" for="__settings" aria-label="{{ config.extra.settings_label }}">
-      {% include ".icons/material/tune-variant.svg" %}
-    </label>
     {% if "material/search" in config.plugins %}
       {% set search = config.plugins["material/search"] | attr("config") %}
       {% if search.enabled %}
@@ -134,6 +130,18 @@
         {% include "partials/search.html" %}
       {% endif %}
     {% endif %}
+    {#-
+      設定圖示排在搜尋後面，窄螢幕上由左到右是漢堡、標題、搜尋、設定。設定是
+      最少用的那一顆，放在最外側。
+
+      桌面不受影響，這顆在 76.25em 以上是 display:none。上面 .anoni-settings 的
+      display:contents 仍排在搜尋之前，所以桌面的 palette、語言、搜尋順序沒有變。
+
+      不給 title，理由同上面關閉鈕那一段。
+    -#}
+    <label class="anoni-settings__button md-header__button md-icon" for="__settings" aria-label="{{ config.extra.settings_label }}">
+      {% include ".icons/material/tune-variant.svg" %}
+    </label>
     {% if config.repo_url %}
       <div class="md-header__source">
         {% include "partials/source.html" %}
