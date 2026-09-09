@@ -8,8 +8,9 @@
 建置時掃描就不會再有這個問題。
 
 三語系共用這一支，各自掃 config['docs_dir'] 底下的 blog/posts。標籤取 front
-matter 的第一個 category，各語系的 front matter 本來就是自己的語言，所以標籤
-文字不必在這裡維護對照表。需要對照的只有標點、日期格式與顏色 token。
+matter 的 categories 裡第一個對得到顏色的那一個，挑法見 _pick_category。各語系
+的 front matter 本來就是自己的語言，所以標籤文字不必在這裡維護對照表。需要對照
+的只有標點、日期格式，以及分類到顏色 class 的 CATEGORY_CLASSES。
 
 只掃 blog/posts。改版前的清單混進過 activity/ 底下的活動頁（COSCUP 徵稿），
 那類頁面現在不會自動出現，需要放上首頁的話照慣例也發一篇 blog post。
@@ -30,41 +31,38 @@ PLACEHOLDER = re.compile(r"<!--\s*latest-posts:(\d+)\s*-->")
 ICON = re.compile(r":[a-z0-9_-]+:\s*")
 H1 = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 
-ACTION = "var(--accent-action)"
+# 標籤顏色走 CSS class，不寫 inline style。理由是 inline 的色值沒辦法跟著亮暗
+# 模式換，改版前六個色值裡每一個都在其中一個模式低於 WCAG AA 4.5（例如預設的
+# --brand-cyan-800 在 slate 只有 2.80）。色值與兩個模式的對比數字寫在三份
+# stylesheets/extra.css 的 .post-tag 區塊。
 
-# 三語系的標點、日期格式與顏色 token 都不同，照各自首頁改版前的既有寫法。
-# colors 的 key 比對時轉小寫。
-LOCALES = {
-    "zh-TW": {
-        "sep": "：",
-        "dash": " - ",
-        "date": "{y}/{m}/{d}",
-        "colors": {"活動": ACTION, "更新": "#2e7d32"},
-        "default_color": "var(--brand-cyan-800)",
-    },
-    "zh-CN": {
-        "sep": "：",
-        "dash": " - ",
-        "date": "{y}/{m}/{d}",
-        "colors": {"活动": ACTION, "更新": "#2e7d32"},
-        "default_color": "var(--brand-cyan-800)",
-    },
+# 分類到 class 後綴的對照。三語系是同一套語意，同一篇文章在三邊的分類本來就
+# 對得起來（社群 / 社区 / Community）。key 比對時轉小寫，所以英文那組全部小寫。
+# 對不到的分類走 .post-tag 自己的中性色，不必在這裡窮舉所有主題分類。
+CATEGORY_CLASSES = {
+    "zh-TW": {"更新": "update", "活動": "event", "社群": "community", "公告": "news", "技術": "tech"},
+    "zh-CN": {"更新": "update", "活动": "event", "社区": "community", "公告": "news", "技术": "tech"},
     "en": {
-        "sep": ": ",
-        "dash": " — ",
-        "date": "{y}-{m}-{d}",
-        "colors": {
-            "event": ACTION,
-            "update": "var(--cat-privacy)",
-            "updates": "var(--cat-privacy)",
-        },
-        "default_color": "var(--brand-cyan-600)",
+        "update": "update",
+        "updates": "update",
+        "event": "event",
+        "events": "event",
+        "community": "community",
+        "news": "news",
+        "technology": "tech",
     },
+}
+
+# 三語系的標點與日期格式不同，照各自首頁改版前的既有寫法。
+LOCALES = {
+    "zh-TW": {"sep": "：", "dash": " - ", "date": "{y}/{m}/{d}"},
+    "zh-CN": {"sep": "：", "dash": " - ", "date": "{y}/{m}/{d}"},
+    "en": {"sep": ": ", "dash": " — ", "date": "{y}-{m}-{d}"},
 }
 
 
 def _parse_post(path):
-    """回傳 (date, category, title, slug)，格式不合就回 None。"""
+    """回傳 (date, categories, title, slug)，格式不合就回 None。"""
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---"):
         return None
@@ -86,9 +84,34 @@ def _parse_post(path):
     if not title:
         match = H1.search(parts[2])
         title = ICON.sub("", match.group(1)).strip() if match else path.stem
-    categories = meta.get("categories") or []
-    category = str(categories[0]).strip() if categories else None
-    return date, category, str(title).strip(), path.stem
+    categories = [str(c).strip() for c in (meta.get("categories") or []) if str(c).strip()]
+    return date, categories, str(title).strip(), path.stem
+
+
+# 同一篇文章掛得到多個分類時的挑選順序，愈前面愈優先。社群排最後是因為它涵蓋
+# 面最廣，2026-09 的五篇裡有四篇都掛著它，固定取 categories[0] 的話首頁整排都
+# 是同一個顏色，標籤等於沒有在分類。把它讓給比較具體的那幾個，讀者掃過去才知道
+# 每一列是什麼性質的內容。
+CATEGORY_PRIORITY = ("event", "update", "news", "tech", "community")
+
+
+def _pick_category(categories, classes):
+    """挑出要顯示的分類與它的 class 後綴。
+
+    不固定取 categories[0]，改成在對得到顏色的分類裡照 CATEGORY_PRIORITY 挑。
+    例如 `社群 / 技術 / 公告` 顯示公告，`社群 / 活動` 顯示活動。
+
+    整串都對不到顏色時回第一個，標籤照樣出現，只是走中性色。
+    """
+    matched = {}
+    for category in categories:
+        suffix = classes.get(category.lower())
+        if suffix and suffix not in matched:
+            matched[suffix] = category
+    for suffix in CATEGORY_PRIORITY:
+        if suffix in matched:
+            return matched[suffix], suffix
+    return (categories[0], None) if categories else (None, None)
 
 
 def on_page_markdown(markdown, page, config, files, **kwargs):
@@ -98,6 +121,7 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
 
     docs_dir = Path(config["docs_dir"])
     locale = LOCALES.get(docs_dir.name)
+    classes = CATEGORY_CLASSES.get(docs_dir.name, {})
     if locale is None:
         # strict 模式下 warning 會讓建置失敗，這裡刻意如此：語系設定漏了的話，
         # 首頁會留下一個裸露的 HTML 註解，不該悄悄上線。
@@ -122,12 +146,13 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     indent = markdown[line_start:match.start()]
 
     lines = []
-    for date, category, title, slug in posts[:limit]:
+    for date, categories, title, slug in posts[:limit]:
         shown = locale["date"].format(y=date.year, m=f"{date.month:02d}", d=f"{date.day:02d}")
         link = f"[{title}](./blog/posts/{slug}.md)"
+        category, suffix = _pick_category(categories, classes)
         if category:
-            color = locale["colors"].get(category.lower(), locale["default_color"])
-            label = f'`{category}`{{style="color: {color};"}}{locale["sep"]}'
+            names = f".post-tag .post-tag--{suffix}" if suffix else ".post-tag"
+            label = f'`{category}`{{{names}}}{locale["sep"]}'
         else:
             label = ""
         lines.append(f'- {label}{link}{locale["dash"]}{shown}')

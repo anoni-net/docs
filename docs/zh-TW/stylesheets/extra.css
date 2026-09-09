@@ -942,3 +942,31 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   height: 0.9rem;
   width: 0.9rem;
 }
+
+/* ==========================================================================
+   .post-tag — 首頁「近期公告」每一列前面的分類標籤
+   由 hooks/latest_posts.py 產生，形式是 `分類`{.post-tag .post-tag--community}。
+
+   改用 class 的理由是原本的 inline style 沒辦法跟著亮暗模式換色，六個色值每一個
+   都在其中一個模式低於 AA 4.5，預設的 --brand-cyan-800 在 slate 只有 2.80。
+   標籤是 <code>，對比要對 Material 的 code 底色算，亮色 #f5f5f5、slate #272a35。
+   行末括號是實測對比，六組在兩個模式都過 AA 4.5。
+
+   分類到 class 的對照表在 hooks/latest_posts.py 的 CATEGORY_CLASSES，對不到的
+   分類走中性色。news 與 tech 的色相接近 --guide-scenarios 與 --guide-advanced，
+   那兩個是側邊欄導覽的 UI 色，用在不同元件，這裡沿用色相但不共用 token。
+   ========================================================================== */
+
+.md-typeset .post-tag            { color: #546e7a; }  /* 預設 4.95 */
+.md-typeset .post-tag--update    { color: #2e7d32; }  /* 更新 4.70 */
+.md-typeset .post-tag--event     { color: #b35309; }  /* 活動 4.63 */
+.md-typeset .post-tag--community { color: #006d99; }  /* 社群 5.28 */
+.md-typeset .post-tag--news      { color: #ad1457; }  /* 公告 6.39 */
+.md-typeset .post-tag--tech      { color: #673ab7; }  /* 技術 6.72 */
+
+[data-md-color-scheme="slate"] .md-typeset .post-tag            { color: #b0bec5; }  /* 7.50 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--update    { color: #81c784; }  /* 7.10 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--event     { color: #ffb74d; }  /* 8.26 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--community { color: #4dbfff; }  /* 6.95 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--news      { color: #f48fb1; }  /* 6.41 */
+[data-md-color-scheme="slate"] .md-typeset .post-tag--tech      { color: #b39ddb; }  /* 5.97 */
