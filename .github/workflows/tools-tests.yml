@@ -45,9 +45,14 @@ on:
       # overrides 的 main.html 是 test_before_send.mjs 的來源，送出前的白名單寫在裡面
       - "docs/overrides/base.html"
       - "docs/overrides/main.html"
-      # 語言切換器的樣板。改壞的方式是「目前語系整筆跳過」，畫面照樣好看，
-      # 壞掉的是首頁的偏好轉址與底部的語言選擇卡片
-      - "docs/overrides/partials/alternate.html"
+      # partials 整個目錄。原本只列 alternate.html，因為語言切換器改壞的方式是
+      # 「目前語系整筆跳過」，畫面照樣好看，壞掉的是首頁的偏好轉址與底部的語言
+      # 選擇卡片。
+      #
+      # 2026-09-09 的 #492 與 #494 只動 header.html，這一支一次都沒觸發。當下沒有
+      # 測試讀 header.html，所以那兩次即使跑了也抓不到東西，但下一支測試補進來的
+      # 時候不會有人記得回來加路徑，跟上面 js 那段是同一種漏法。改成整個目錄。
+      - "docs/overrides/partials/**"
       - "docs/overrides_cn/main.html"
       - "docs/overrides_en/main.html"
       - "docs/hooks/**"
