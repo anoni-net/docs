@@ -11,7 +11,9 @@ hide:
 
 > 推广 Tor、Tails、OONI，串连台湾的网络自由实践与在地观测。
 
-[:material-account-group: 社群参与](./community/index.md){ .md-button .md-button--primary } [:material-email-fast-outline: 订阅电子报](./contact.md){ .md-button } [:material-chat-processing-outline: 加入 Matrix](https://matrix.to/#/#community:im.anoni.net){ .md-button target="_blank" rel="noopener" } [:material-rss: RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml){ .md-button }
+[:material-sign-direction: 从你的身分开始](./start/index.md){ .md-button .md-button--primary }
+
+[:material-email-fast-outline: 订阅电子报](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss: RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
 
 一群关注匿名网络、隐私与网络自由的在地社群成员。长期推广 Tor、Tails、OONI 等开源工具，维运在地的网络观测，追踪台湾的个资与加密支付法规，并与 EFF、Tor Project、OONI 合作把全球议题带回台湾脉络讨论。完整介绍见 [关于我们](./about/index.md)。
 

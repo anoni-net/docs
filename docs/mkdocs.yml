@@ -347,6 +347,8 @@ extra:
       link: https://github.com/anoni-net/docs
     - icon: simple/torbrowser
       link: http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/
+    - icon: simple/matrix
+      link: "https://matrix.to/#/#community:im.anoni.net"
     - icon: material/email-plus
       link: https://form.anoni.net/s/cmc9ceju1000dlj017fiathzq
 extra_css:
