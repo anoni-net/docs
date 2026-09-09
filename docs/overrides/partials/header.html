@@ -142,6 +142,29 @@
         <span class="anoni-settings__link-icon">{% include ".icons/material/routes.svg" %}</span>
         <span>{{ config.extra.settings_route_link }}</span>
       </a>
+      {#-
+        本頁的 onion 與 IPFS 鏡像。頁尾那兩條是完整長網址，用途是複製起來給別人，
+        onion 那條光網域就 56 個字元。這裡做成點得下去的動作，兩者不重複。
+
+        已經在哪一份就不列哪一條。走 onion 進來的人不需要「用 Tor 瀏覽器開這一頁」，
+        他就在上面。build_variant 由三支 build 腳本與 CI 的 matrix 各自帶值進來。
+
+        onion 位址走 config，跟 ipfs_gateway 同一個做法。站上還有九個地方把它寫死
+        （三份 copyright.html、三份 main.html、三份 mkdocs*.yml 的 social），那些
+        改天一起收斂，這裡先不要再多一份。
+      -#}
+      {% if config.extra.onion_base and config.extra.build_variant != "onion" %}
+        <a href="{{ config.extra.onion_base }}/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
+          <span class="anoni-settings__link-icon">{% include ".icons/simple/torbrowser.svg" %}</span>
+          <span>{{ config.extra.settings_route_onion }}</span>
+        </a>
+      {% endif %}
+      {% if config.extra.ipfs_gateway and config.extra.build_variant != "ipfs" %}
+        <a href="{{ config.extra.ipfs_gateway }}/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
+          <span class="anoni-settings__link-icon">{% include ".icons/simple/ipfs.svg" %}</span>
+          <span>{{ config.extra.settings_route_ipfs }}</span>
+        </a>
+      {% endif %}
       <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
       {#-
         離線閱讀那一頁的入口。那一頁在 nav 裡的位置不淺，讀者不容易自己找到，

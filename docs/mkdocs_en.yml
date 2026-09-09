@@ -270,6 +270,15 @@ extra:
   # Copy for the "offline content" group in the drawer, same reason as settings_* above.
   settings_route: !ENV [SETTINGS_ROUTE, "Connection"]
   settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "How you are reading this"]
+  # The onion address of the docs site, no trailing slash. The drawer builds this
+  # page's onion URL from it, same approach as ipfs_gateway below.
+  onion_base: !ENV [ONION_BASE, "http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion"]
+  # Language segment for the onion and IPFS mirrors. page.url is relative to
+  # each language's build root, so an en page gets tools/xxx/ rather than
+  # en/tools/xxx/ and would land on the zh-TW mirror without this.
+  mirror_prefix: !ENV [MIRROR_PREFIX, "en/"]
+  settings_route_onion: !ENV [SETTINGS_ROUTE_ONION, "Open in Tor Browser"]
+  settings_route_ipfs: !ENV [SETTINGS_ROUTE_IPFS, "Open via IPFS"]
   settings_offline: !ENV [SETTINGS_OFFLINE, "Offline content"]
   # This row links to the offline reading page, it is not a switch. A noun phrase
   # sitting next to Light and Dark reads like a state, a verb makes it a place you

@@ -266,6 +266,15 @@ extra:
   # 抽屉里「离线内容」那一组的文案，理由同上面 settings_*。
   settings_route: !ENV [SETTINGS_ROUTE, "连线方式"]
   settings_route_link: !ENV [SETTINGS_ROUTE_LINK, "你正在用哪一种方式阅读"]
+  # 文档站的 onion 地址，不带结尾斜线。抽屉的「用 Tor 浏览器打开这一页」用它组出
+  # 本页的 onion 网址，跟底下的 ipfs_gateway 是同一个做法。
+  onion_base: !ENV [ONION_BASE, "http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion"]
+  # onion 与 IPFS 镜像的语系区段。page.url 相对于该语系的构建根目录，
+  # zh-CN 的页面拿到的是 tools/xxx/ 而不是 zh-cn/tools/xxx/，直接接在镜像
+  # 域名后面会指到 zh-TW 那一份。
+  mirror_prefix: !ENV [MIRROR_PREFIX, "zh-cn/"]
+  settings_route_onion: !ENV [SETTINGS_ROUTE_ONION, "用 Tor 浏览器打开这一页"]
+  settings_route_ipfs: !ENV [SETTINGS_ROUTE_IPFS, "用 IPFS 打开这一页"]
   settings_offline: !ENV [SETTINGS_OFFLINE, "离线内容"]
   # 这一列是连到离线阅读那一页的链接，不是开关。名词开头（「离线阅读」）排在
   # 浅色、深色那几列旁边会被读成状态，动词开头才看得出是一个去得了的地方。
