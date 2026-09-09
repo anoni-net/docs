@@ -129,6 +129,56 @@
         同一份，定義在 base.html 的 styles block。狀態那一行的文字由 JS 填，
         role 與 aria-live 讓讀螢幕的人也拿得到結果。
       -#}
+      {#-
+        「你正在用哪一種方式閱讀」的入口。那一頁在 nav 裡是社群 / 關於我們底下，
+        跟離線閱讀一樣深，而標準站上原本連一個入口都沒有：底下 anoni-variant 那個
+        版本標記只在 onion 與 IPFS 版渲染，clearnet 版什麼都不顯示。
+
+        它回答的是「我現在連的是哪一份、過程中誰看得到什麼」，對這個站的讀者是
+        第一順位的問題，不該只有走 onion 進來的人看得到。
+      -#}
+      <p class="anoni-settings__group">{{ config.extra.settings_route }}</p>
+      {#-
+        第一列先講手上這一份是哪一種，再連到說明頁。原本只寫頁面標題「你正在用
+        哪一種方式閱讀」，抽屜裡看不出目前在哪一份，等於把問題留給讀者自己去點。
+
+        名稱沿用既有的 variant_label_*，那組本來就是頁首版本小標記在用的字，
+        標準版原本沒有標記所以也沒有字，這次補上 variant_label_standard。
+      -#}
+      {% if config.extra.build_variant == "onion" %}
+        {% set variant_name = config.extra.variant_label_onion %}
+      {% elif config.extra.build_variant == "ipfs" %}
+        {% set variant_name = config.extra.variant_label_ipfs %}
+      {% else %}
+        {% set variant_name = config.extra.variant_label_standard %}
+      {% endif %}
+      <a href="{{ 'about/how-you-are-reading/' | url }}" class="anoni-settings__link">
+        <span class="anoni-settings__link-icon">{% include ".icons/material/routes.svg" %}</span>
+        <span>{{ config.extra.settings_route_current | replace("{variant}", variant_name) }}</span>
+      </a>
+      {#-
+        本頁的 onion 與 IPFS 鏡像。頁尾那兩條是完整長網址，用途是複製起來給別人，
+        onion 那條光網域就 56 個字元。這裡做成點得下去的動作，兩者不重複。
+
+        已經在哪一份就不列哪一條。走 onion 進來的人不需要「用 Tor 瀏覽器開這一頁」，
+        他就在上面。build_variant 由三支 build 腳本與 CI 的 matrix 各自帶值進來。
+
+        onion 位址走 config，跟 ipfs_gateway 同一個做法。站上還有九個地方把它寫死
+        （三份 copyright.html、三份 main.html、三份 mkdocs*.yml 的 social），那些
+        改天一起收斂，這裡先不要再多一份。
+      -#}
+      {% if config.extra.onion_base and config.extra.build_variant != "onion" %}
+        <a href="{{ config.extra.onion_base }}/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
+          <span class="anoni-settings__link-icon">{% include ".icons/simple/torbrowser.svg" %}</span>
+          <span>{{ config.extra.settings_route_onion }}</span>
+        </a>
+      {% endif %}
+      {% if config.extra.ipfs_gateway and config.extra.build_variant != "ipfs" %}
+        <a href="{{ config.extra.ipfs_gateway }}/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
+          <span class="anoni-settings__link-icon">{% include ".icons/simple/ipfs.svg" %}</span>
+          <span>{{ config.extra.settings_route_ipfs }}</span>
+        </a>
+      {% endif %}
       <p class="anoni-settings__group">{{ config.extra.settings_offline }}</p>
       {#-
         離線閱讀那一頁的入口。那一頁在 nav 裡的位置不淺，讀者不容易自己找到，
@@ -172,6 +222,14 @@
     -#}
     <label class="anoni-settings__button md-header__button md-icon" for="__settings" aria-label="{{ config.extra.settings_label }}">
       {% include ".icons/material/tune-variant.svg" %}
+      {#-
+        桌面才顯示文字。這顆圖示在桌面取代了原本看得見的亮暗與語言兩顆，只給一個
+        滑桿符號的話，想切深色的讀者會在頁首找不到東西。
+
+        窄螢幕只留圖示，跟底下 anoni-variant 那顆藥丸同一個做法，理由也一樣：
+        標題那一格在 320px 上一點餘裕都沒有，360px 也只有 40px。
+      -#}
+      <span class="anoni-settings__button-label">{{ config.extra.settings_label }}</span>
     </label>
     {% if config.repo_url %}
       <div class="md-header__source">

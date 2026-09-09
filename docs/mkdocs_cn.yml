@@ -250,6 +250,7 @@ extra:
   # 小標記的文字。zh-TW 用這裡的預設值，另外兩個語系由 run_en.sh、run_zh-cn.sh 覆蓋，
   # 跟 NAV_* 那組是同一套做法。header.html 是三個語系共用的符號連結，文案只能走設定。
   variant_label_onion: !ENV [VARIANT_LABEL_ONION, "Onion 版本"]
+  variant_label_standard: !ENV [VARIANT_LABEL_STANDARD, "標準網站"]
   variant_label_ipfs: !ENV [VARIANT_LABEL_IPFS, "IPFS 鏡像"]
   # 窄屏幕设置抽屉的文案。partials/header.html 与 partials/palette.html 是三个
   # 语系共用的符号链接，文字只能走设置，跟上面 variant_label_* 是同一个理由。
@@ -264,12 +265,25 @@ extra:
     - !ENV [SETTINGS_APPEARANCE_DARK, "深色"]
   settings_language: !ENV [SETTINGS_LANGUAGE, "阅读语言"]
   # 抽屉里「离线内容」那一组的文案，理由同上面 settings_*。
+  settings_route: !ENV [SETTINGS_ROUTE, "连线方式"]
+  # 第一列的文字，{variant} 会换成目前这一份的名称。点下去是说明页。
+  settings_route_current: !ENV [SETTINGS_ROUTE_CURRENT, "目前：{variant}"]
+  # 文档站的 onion 地址，不带结尾斜线。抽屉的「用 Tor 浏览器打开这一页」用它组出
+  # 本页的 onion 网址，跟底下的 ipfs_gateway 是同一个做法。
+  onion_base: !ENV [ONION_BASE, "http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion"]
+  # onion 与 IPFS 镜像的语系区段。page.url 相对于该语系的构建根目录，
+  # zh-CN 的页面拿到的是 tools/xxx/ 而不是 zh-cn/tools/xxx/，直接接在镜像
+  # 域名后面会指到 zh-TW 那一份。
+  mirror_prefix: !ENV [MIRROR_PREFIX, "zh-cn/"]
+  settings_route_onion: !ENV [SETTINGS_ROUTE_ONION, "用 Tor 浏览器打开这一页"]
+  settings_route_ipfs: !ENV [SETTINGS_ROUTE_IPFS, "用 IPFS 打开这一页"]
   settings_offline: !ENV [SETTINGS_OFFLINE, "离线内容"]
   # 这一列是连到离线阅读那一页的链接，不是开关。名词开头（「离线阅读」）排在
   # 浅色、深色那几列旁边会被读成状态，动词开头才看得出是一个去得了的地方。
   # 不用「管理离线内容」是因为正上方的分组标题就是「离线内容」，相邻两行重复
-  # 同一个词读起来卡。
-  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "管理设备中的内容"]
+  # 同一个词读起来卡。用「设备上」不用「设备中」：页尾那条链接与站上内容都写
+  # 「设备上」，同一个动作要用同一种说法。
+  settings_offline_link: !ENV [SETTINGS_OFFLINE_LINK, "管理设备上的内容"]
   settings_update_check: !ENV [SETTINGS_UPDATE_CHECK, "检查更新"]
   # 外觀那三個選項在抽屜裡的圖示，順序跟 theme.palette 一致。上游 toggle.icon 講的是
   # 「點下去會切到哪一種」，抽屜要的是「這一項本身是什麼」，兩者對不起來，所以另外列。

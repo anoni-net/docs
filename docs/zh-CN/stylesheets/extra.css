@@ -597,7 +597,7 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 
 /* ==========================================================================
    設定抽屜
-   套用範圍：76.234375em 以下，亮暗切換與語言切換收進從右側滑出的抽屜
+   套用範圍：所有寬度，亮暗切換、閱讀語言與離線內容收進從右側滑出的抽屜
 
    窄螢幕的 header 右側常駐三顆圖示，390px 上量到亮暗 48px、語言 48px、搜尋
    40px，共 140px，標題只剩 130px，而站名要 236px 才放得下。亮暗與語言兩顆
@@ -608,49 +608,22 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
    抽屜裡放得下「外觀」與「閱讀語言」的標題，亮暗也從點一下換下一個改成三個
    並列，目前選的是哪一個直接看得到。
 
-   斷點跟左側導覽抽屜取同一個值。Material 在 max-width 76.234375em 把
-   .md-nav--primary 收成抽屜，並在 min-width 76.25em 把漢堡藏起來。兩側用同一
-   條線，讀者在平板上不會看到一邊收起、另一邊還攤在 header 的半套狀態。
+   這一組原本只在 76.234375em 以下成立，桌面維持 header 上三顆圖示並排，抽屜整個
+   不存在。結果是離線內容那一組在桌面完全看不到：管理裝置中的內容與檢查更新都
+   綁在同一個媒體查詢裡，桌面讀者只剩頁尾那條連結，也沒有主動檢查更新的入口。
 
-   這裡原本填 44.9375em（Material 的 mobile 上限，719px），只顧到手機。平板
-   直立與手機橫放都落在 720 到 1219 之間，左邊已經是抽屜，右邊還是三顆並排。
+   改成所有寬度都一樣。同一顆設定圖示在任何螢幕打開的內容都相同，讀者不必為了
+   不同裝置記兩套位置。
 
-   .anoni-settings 在 76.25em 以上是 display:contents，palette 與語言切換直接
-   排進 .md-header__inner 的 flex，跟改之前一樣。DOM 只有一份，所以 base.html
-   讀 .md-header__option .md-select__link 的語言偏好與 bundle.js 的 palette 都
-   照常運作。
+   為什麼不是「桌面把亮暗與語言留在 header、抽屜只放離線那一組」：亮暗與語言是
+   .anoni-settings 的子元素，靠 display:contents 才排得進 header 的 flex。抽屜
+   要在桌面也存在，這個容器就得變成 position:fixed，而 fixed 元素的子孫沒辦法
+   回到祖先的 flex 版面裡。同一份 DOM 二選一。繞過去要兩個面板容器與兩份標題列，
+   代價是同一顆圖示在桌面與手機打開的內容不同，那種不一致比原本的問題更糟。
+
+   DOM 只有一份，所以 base.html 讀 .md-header__option .md-select__link 的語言
+   偏好與 bundle.js 的 palette 都照常運作。
    ========================================================================== */
-
-/* 桌面：抽屜的外框與裝飾全部退場，只留原本那兩組控制項排進 header */
-.anoni-settings {
-  display: contents;
-}
-
-/* 語言名稱前面的字形圖示只在抽屜出現，桌面的下拉選單維持純文字 */
-.anoni-lang__icon {
-  display: none;
-}
-
-/* 離線內容那一組只在抽屜出現。樣板先給 hidden，base.html 註冊 service worker
-   成功才拿掉，所以底下開啟的規則要避開 [hidden]，否則作者樣式會蓋掉瀏覽器
-   預設的 [hidden]{display:none}，沒有 SW 的環境也會看到一顆按不動的按鈕。 */
-.anoni-settings__update {
-  display: none;
-}
-
-.anoni-settings__overlay,
-.anoni-settings__head,
-.anoni-settings__group,
-.anoni-settings__link,
-.anoni-settings__choice {
-  display: none;
-}
-
-/* Material 的 .md-header__button:not([hidden]) 是兩個 class 的權重，單靠
-   .anoni-settings__button 蓋不掉，桌面版會多出一顆設定圖示。 */
-.anoni-settings__button.md-header__button {
-  display: none;
-}
 
 /* 短站名。標題在 390px 上收掉兩顆圖示之後有 178px，完整站名要 236px，還是會
    截斷。短站名走 config，因為 header.html 是三個語系共用的符號連結。
@@ -671,281 +644,300 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   }
 }
 
-@media screen and (max-width: 76.234375em) {
+.anoni-settings__button.md-header__button {
+  display: inline-block;
+}
+
+/* 窄螢幕只留圖示。文字要多約 32px，而標題那一格在 320px 上餘裕是 0、360px 是
+   40px，擠進去站名就開始截斷。斷點跟 anoni-variant 那顆藥丸的標籤取同一個。 */
+.anoni-settings__button-label {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
   .anoni-settings__button.md-header__button {
-    display: inline-block;
-  }
-
-  /* overlay 與抽屜都在 .md-header__inner 裡面。.md-header 是 z-index 4 的堆疊
-     環境，抽屜放到 header 外面會被 Material 的 .md-overlay（z-index 5）蓋住。
-     放在裡面之後，整個 header 開啟時提到 6，overlay 才遮得到 header 這一條，
-     讀者不會在抽屜開著的時候還按得到漢堡與搜尋。 */
-  #__settings:checked ~ .md-header {
-    z-index: 6;
-  }
-
-  .anoni-settings__overlay {
-    background-color: #0000008a;
-    display: block;
-    inset: 0;
-    opacity: 0;
-    position: fixed;
-    transition: opacity 0.25s, visibility 0ms 0.25s;
-    visibility: hidden;
-    z-index: 1;
-  }
-
-  #__settings:checked ~ .md-header .anoni-settings__overlay {
-    opacity: 1;
-    transition: opacity 0.25s, visibility 0ms;
-    visibility: visible;
-  }
-
-  /* 關閉時用 visibility:hidden 把整個抽屜移出 tab 順序。留在畫面外但還可以
-     tab 進去的話，讀者會在看不到東西的狀態下走進一串連結。 */
-  .anoni-settings {
-    background-color: var(--md-default-bg-color);
-    /* 抽屜長在 .md-header 裡面，文字色從 header 繼承下來是 --md-primary-bg-color
-       （白的）。底下每一列都各自指定過顏色所以看不出問題，直到放進一顆用
-       color:inherit 的 .anoni-banner-action，白字落在白底上整顆變空白。
-       在容器這一層定一次，之後往抽屜裡加東西不會再踩到。標題列自己會覆蓋回
-       primary 那組。 */
-    color: var(--md-default-fg-color);
-    /* 字級也要在容器定一次，理由跟上面的文字色一樣。Material 的 body 是 .5rem
-       （10px），各元件自己設自己的。抽屜裡每一列都指定過所以看不出問題，直到
-       放進一顆 font:inherit 的 .anoni-banner-action，那顆按鈕就掉到 10px，比
-       旁邊每一列都小，連它自己底下的狀態列都比它大。底部提示卡那份沒事，是因為
-       .anoni-toast 有設 .7rem。 */
-    font-size: 0.7rem;
-    bottom: 0;
-    display: block;
-    overflow-y: auto;
-    position: fixed;
-    right: 0;
-    top: 0;
-    transform: translateX(100%);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms 0.25s;
-    visibility: hidden;
-    width: 12.1rem;
-    z-index: 2;
-  }
-
-  #__settings:checked ~ .md-header .anoni-settings {
-    transform: translateX(0);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms;
-    visibility: visible;
-  }
-
-  .anoni-settings__head {
     align-items: center;
-    background-color: var(--md-primary-fg-color);
-    color: var(--md-primary-bg-color);
-    display: flex;
-    height: 2.4rem;
-    padding: 0 0.4rem 0 0.8rem;
+    display: inline-flex;
+    gap: 0.3rem;
+    width: auto;
   }
 
-  .anoni-settings__title {
-    flex-grow: 1;
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-
-  .anoni-settings__close {
-    cursor: pointer;
-    padding: 0.4rem;
-  }
-
-  .anoni-settings__close svg {
-    display: block;
-    fill: currentcolor;
-    height: 1.2rem;
-    width: 1.2rem;
-  }
-
-  /* 離線閱讀那一頁的入口。排版跟語言那幾列一致，兩組並排時左側圖示欄對得起來 */
-  .anoni-settings__link {
-    align-items: center;
-    color: var(--md-default-fg-color);
-    display: flex;
+  .anoni-settings__button-label {
+    display: inline;
     font-size: 0.7rem;
-    gap: 0.4rem;
-    padding: 0.5rem 0.8rem;
+    line-height: 1;
   }
+}
 
-  .anoni-settings__link-icon {
-    display: block;
-    flex-shrink: 0;
-  }
+/* overlay 與抽屜都在 .md-header__inner 裡面。.md-header 是 z-index 4 的堆疊
+   環境，抽屜放到 header 外面會被 Material 的 .md-overlay（z-index 5）蓋住。
+   放在裡面之後，整個 header 開啟時提到 6，overlay 才遮得到 header 這一條，
+   讀者不會在抽屜開著的時候還按得到漢堡與搜尋。 */
+#__settings:checked ~ .md-header {
+  z-index: 6;
+}
 
-  .anoni-settings__link-icon svg {
-    display: block;
-    fill: currentcolor;
-    height: 0.9rem;
-    width: 0.9rem;
-  }
+.anoni-settings__overlay {
+  background-color: #0000008a;
+  display: block;
+  inset: 0;
+  opacity: 0;
+  position: fixed;
+  transition: opacity 0.25s, visibility 0ms 0.25s;
+  visibility: hidden;
+  z-index: 1;
+}
 
-  .anoni-settings__update:not([hidden]) {
-    display: block;
-    padding: 0.2rem 0.8rem 0.8rem;
-  }
+#__settings:checked ~ .md-header .anoni-settings__overlay {
+  opacity: 1;
+  transition: opacity 0.25s, visibility 0ms;
+  visibility: visible;
+}
 
-  /* 按鈕撐滿抽屜寬度。抽屜只有 12.1rem，靠左的窄按鈕在這個寬度裡看起來像沒排好 */
-  .anoni-settings__update .anoni-banner-action {
-    justify-content: center;
-    width: 100%;
-  }
+/* 關閉時用 visibility:hidden 把整個抽屜移出 tab 順序。留在畫面外但還可以
+   tab 進去的話，讀者會在看不到東西的狀態下走進一串連結。 */
+.anoni-settings {
+  background-color: var(--md-default-bg-color);
+  /* 抽屜長在 .md-header 裡面，文字色從 header 繼承下來是 --md-primary-bg-color
+     （白的）。底下每一列都各自指定過顏色所以看不出問題，直到放進一顆用
+     color:inherit 的 .anoni-banner-action，白字落在白底上整顆變空白。
+     在容器這一層定一次，之後往抽屜裡加東西不會再踩到。標題列自己會覆蓋回
+     primary 那組。 */
+  color: var(--md-default-fg-color);
+  /* 字級也要在容器定一次，理由跟上面的文字色一樣。Material 的 body 是 .5rem
+     （10px），各元件自己設自己的。抽屜裡每一列都指定過所以看不出問題，直到
+     放進一顆 font:inherit 的 .anoni-banner-action，那顆按鈕就掉到 10px，比
+     旁邊每一列都小，連它自己底下的狀態列都比它大。底部提示卡那份沒事，是因為
+     .anoni-toast 有設 .7rem。 */
+  font-size: 0.7rem;
+  bottom: 0;
+  display: block;
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms 0.25s;
+  visibility: hidden;
+  width: 12.1rem;
+  z-index: 2;
+}
 
-  .anoni-settings__status {
-    color: var(--md-default-fg-color--light);
-    font-size: 0.62rem;
-    line-height: 1.35;
-    margin: 0.4rem 0 0;
-    text-wrap: pretty;
-  }
+#__settings:checked ~ .md-header .anoni-settings {
+  transform: translateX(0);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms;
+  visibility: visible;
+}
 
-  .anoni-settings__group {
-    color: var(--md-default-fg-color--light);
-    display: block;
-    font-size: 0.64rem;
-    font-weight: 700;
-    margin: 0;
-    padding: 0.8rem 0.8rem 0.2rem;
-  }
+.anoni-settings__head {
+  align-items: center;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  display: flex;
+  height: 2.4rem;
+  padding: 0 0.4rem 0 0.8rem;
+}
 
-  /* .md-header__option 在 header 裡是橫排，抽屜裡要直排。搜尋展開時 Material
-     會把它壓成 max-width:0，那條規則在抽屜裡也要擋掉，否則抽屜內容會消失。 */
-  .anoni-settings .md-header__option,
-  [data-md-toggle="search"]:checked ~ .md-header .anoni-settings .md-header__option {
-    display: block;
-    max-width: none;
-    opacity: 1;
-    transition: none;
-    white-space: normal;
-  }
+.anoni-settings__title {
+  flex-grow: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 
-  /* header 上那顆循環切換的圖示按鈕在抽屜裡沒有用處，三個選項已經並列 */
-  .anoni-settings .md-header__option > .md-header__button {
-    display: none;
-  }
+.anoni-settings__close {
+  cursor: pointer;
+  padding: 0.4rem;
+}
 
-  .anoni-settings__choice {
-    align-items: center;
-    color: var(--md-default-fg-color);
-    cursor: pointer;
-    display: flex;
-    font-size: 0.7rem;
-    gap: 0.4rem;
-    padding: 0.5rem 0.8rem;
-  }
+.anoni-settings__close svg {
+  display: block;
+  fill: currentcolor;
+  height: 1.2rem;
+  width: 1.2rem;
+}
 
-  .anoni-settings__choice-text {
-    flex-grow: 1;
-  }
+/* 離線閱讀那一頁的入口。排版跟語言那幾列一致，兩組並排時左側圖示欄對得起來 */
+.anoni-settings__link {
+  align-items: center;
+  color: var(--md-default-fg-color);
+  display: flex;
+  font-size: 0.7rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+}
 
-  .anoni-settings__choice-icon {
-    display: block;
-    flex-shrink: 0;
-  }
+.anoni-settings__link-icon {
+  display: block;
+  flex-shrink: 0;
+}
 
-  .anoni-settings__choice-icon svg {
-    display: block;
-    fill: currentcolor;
-    height: 0.9rem;
-    width: 0.9rem;
-  }
+.anoni-settings__link-icon svg {
+  display: block;
+  fill: currentcolor;
+  height: 0.9rem;
+  width: 0.9rem;
+}
 
-  .anoni-settings__choice-mark {
-    display: block;
-    opacity: 0;
-  }
+.anoni-settings__update:not([hidden]) {
+  display: block;
+  padding: 0.2rem 0.8rem 0.8rem;
+}
 
-  .anoni-settings__choice-mark svg {
-    display: block;
-    fill: var(--md-accent-fg-color);
-    height: 0.9rem;
-    width: 0.9rem;
-  }
+/* 按鈕撐滿抽屜寬度。抽屜只有 12.1rem，靠左的窄按鈕在這個寬度裡看起來像沒排好 */
+.anoni-settings__update .anoni-banner-action {
+  justify-content: center;
+  width: 100%;
+}
 
-  /* 目前選的是哪一個，看上游那顆循環 label 的 hidden。bundle.js 每次換配色都會
-     把 index 對應的那一顆解除 hidden，其餘關掉，所以它一定跟著現況走。
+.anoni-settings__status {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+  line-height: 1.35;
+  margin: 0.4rem 0 0;
+  text-wrap: pretty;
+}
 
-     不綁 input 的 :checked，因為第一次進站三顆 radio 都還沒被勾選（配色是從
-     localStorage 或 prefers-color-scheme 算出來的），綁 :checked 會整排沒有勾號。
+.anoni-settings__group {
+  color: var(--md-default-fg-color--light);
+  display: block;
+  font-size: 0.64rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.8rem 0.8rem 0.2rem;
+}
 
-     順序是 input、循環 label、抽屜選項，由 palette.html 固定，中間不能插東西。 */
-  .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice {
-    color: var(--md-accent-fg-color);
-  }
+/* .md-header__option 在 header 裡是橫排，抽屜裡要直排。搜尋展開時 Material
+   會把它壓成 max-width:0，那條規則在抽屜裡也要擋掉，否則抽屜內容會消失。 */
+.anoni-settings .md-header__option,
+[data-md-toggle="search"]:checked ~ .md-header .anoni-settings .md-header__option {
+  display: block;
+  max-width: none;
+  opacity: 1;
+  transition: none;
+  white-space: normal;
+}
 
-  .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice .anoni-settings__choice-mark {
-    opacity: 1;
-  }
+/* header 上那顆循環切換的圖示按鈕在抽屜裡沒有用處，三個選項已經並列 */
+.anoni-settings .md-header__option > .md-header__button {
+  display: none;
+}
 
-  /* 語言切換在 header 是滑過才展開的下拉，抽屜裡直接把清單攤開 */
-  /* .md-select__inner 在 header 是 position:absolute 的浮層，靠 hover 才展開。
-     抽屜裡要它回到文件流，位置與動畫那一整組都得歸零，只留清單本身。 */
-  .anoni-settings .md-select__inner {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    left: auto;
-    margin-top: 0;
-    max-height: none;
-    opacity: 1;
-    position: static;
-    top: auto;
-    transform: none;
-    transition: none;
-    z-index: auto;
-  }
+.anoni-settings__choice {
+  align-items: center;
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  display: flex;
+  font-size: 0.7rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+}
 
-  .anoni-settings .md-select__inner::after {
-    display: none;
-  }
+.anoni-settings__choice-text {
+  flex-grow: 1;
+}
 
-  .anoni-settings .md-select {
-    display: block;
-  }
+.anoni-settings__choice-icon {
+  display: block;
+  flex-shrink: 0;
+}
 
-  .anoni-settings .md-select > .md-header__button {
-    display: none;
-  }
+.anoni-settings__choice-icon svg {
+  display: block;
+  fill: currentcolor;
+  height: 0.9rem;
+  width: 0.9rem;
+}
 
-  .anoni-settings .md-select__list {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    max-height: none;
-    overflow: visible;
-  }
+.anoni-settings__choice-mark {
+  display: block;
+  opacity: 0;
+}
 
-  /* .md-select__item 帶 1.8rem 的 line-height，加上連結自己的 padding，兩個
-     語言之間會空出比外觀那三項多一倍的距離。 */
-  .anoni-settings .md-select__item {
-    line-height: 1.4;
-  }
+.anoni-settings__choice-mark svg {
+  display: block;
+  fill: var(--md-accent-fg-color);
+  height: 0.9rem;
+  width: 0.9rem;
+}
 
-  /* 跟外觀那三項共用一組左側圖示欄，兩組並排時對得起來 */
-  .anoni-settings .md-select__link {
-    align-items: center;
-    color: var(--md-default-fg-color);
-    display: flex;
-    font-size: 0.7rem;
-    gap: 0.4rem;
-    padding: 0.5rem 0.8rem;
-    width: 100%;
-  }
+/* 目前選的是哪一個，看上游那顆循環 label 的 hidden。bundle.js 每次換配色都會
+   把 index 對應的那一顆解除 hidden，其餘關掉，所以它一定跟著現況走。
 
-  .anoni-settings .anoni-lang__icon {
-    display: block;
-    flex-shrink: 0;
-  }
+   不綁 input 的 :checked，因為第一次進站三顆 radio 都還沒被勾選（配色是從
+   localStorage 或 prefers-color-scheme 算出來的），綁 :checked 會整排沒有勾號。
 
-  .anoni-settings .anoni-lang__icon svg {
-    display: block;
-    fill: currentcolor;
-    height: 0.9rem;
-    width: 0.9rem;
-  }
+   順序是 input、循環 label、抽屜選項，由 palette.html 固定，中間不能插東西。 */
+.anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice {
+  color: var(--md-accent-fg-color);
+}
+
+.anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice .anoni-settings__choice-mark {
+  opacity: 1;
+}
+
+/* 語言切換在 header 是滑過才展開的下拉，抽屜裡直接把清單攤開 */
+/* .md-select__inner 在 header 是 position:absolute 的浮層，靠 hover 才展開。
+   抽屜裡要它回到文件流，位置與動畫那一整組都得歸零，只留清單本身。 */
+.anoni-settings .md-select__inner {
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  left: auto;
+  margin-top: 0;
+  max-height: none;
+  opacity: 1;
+  position: static;
+  top: auto;
+  transform: none;
+  transition: none;
+  z-index: auto;
+}
+
+.anoni-settings .md-select__inner::after {
+  display: none;
+}
+
+.anoni-settings .md-select {
+  display: block;
+}
+
+.anoni-settings .md-select > .md-header__button {
+  display: none;
+}
+
+.anoni-settings .md-select__list {
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
+}
+
+/* .md-select__item 帶 1.8rem 的 line-height，加上連結自己的 padding，兩個
+   語言之間會空出比外觀那三項多一倍的距離。 */
+.anoni-settings .md-select__item {
+  line-height: 1.4;
+}
+
+/* 跟外觀那三項共用一組左側圖示欄，兩組並排時對得起來 */
+.anoni-settings .md-select__link {
+  align-items: center;
+  color: var(--md-default-fg-color);
+  display: flex;
+  font-size: 0.7rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  width: 100%;
+}
+
+.anoni-settings .anoni-lang__icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.anoni-settings .anoni-lang__icon svg {
+  display: block;
+  fill: currentcolor;
+  height: 0.9rem;
+  width: 0.9rem;
 }
