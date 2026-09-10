@@ -68,7 +68,7 @@ Tor VPN Beta 是橫跨數年的協作成果。官方在文中感謝 [The Guardia
 
 ## 台灣脈絡下值得關注的地方
 
-**用途的落差要先說明**：Tor VPN Beta 最主要的用途是解除封鎖，而台灣目前沒有全國性的網址封鎖，迫切性跟伊朗、土庫曼不同。在台灣用得上的是它裝置層的 app 隔離，每個 app 各走一條 circuit，降低跨 app 被關聯的機會。要去有封鎖的地區之前先裝好、先熟悉操作，相關準備見[亞洲旅行的數位安全](../../scenarios/asia-travel.md)。
+**用途的落差要先說明**：Tor VPN Beta 最主要的用途是解除封鎖，台灣的處境與伊朗、土庫曼差距很大，主流服務都不封鎖，Tor 直連也可用。DNS 層另有 TWNIC 依主管機關命令執行的 RPZ 停止解析機制，2025 上半年逾五萬個網域被列入屏蔽，多數走緊急請求、未經事前司法審查[^rpz]，那是治理透明度的問題，日常上網遇不到廣泛封鎖，各地情況的對照見[出差與研討會的數位準備](../../scenarios/asia-travel.md)。在台灣用得上的是它裝置層的 app 隔離，每個 app 各走一條 circuit，降低跨 app 被關聯的機會。要去有封鎖的地區之前先裝好、先熟悉操作。
 
 **橋接與出口選擇的混淆同樣會發生在這裡**：官方在可用性測試裡看到的誤用，是被封鎖的人去調出口位置。本地推廣或帶工作坊時，這一組概念的先後順序要先交代，連不上要處理的是橋接，出口位置解決的是另一件事。橋接類型的說明見 [Snowflake 與橋接](../../tools/tor-snowflake.md)。
 
@@ -91,4 +91,5 @@ Tor VPN Beta 是橫跨數年的協作成果。官方在文中感謝 [The Guardia
 [^guardian]: The Guardian Project 是專做行動裝置隱私工具的組織，Orbot 與 Android 上多個低階網路函式庫都出自他們，與 Tor Project 長期合作。組織介紹見 [Guardian Project](https://guardianproject.info/){target="_blank"}。查證日 2026-09-11。
 [^leap]: LEAP Encryption Access Project 是開發加密通訊工具的自由軟體團隊，主要產品是 LEAP VPN，一套針對受審查環境設計的開源白標 VPN，RiseupVPN 與 Bitmask 共用它的程式基礎。組織介紹見 [LEAP](https://leap.se/){target="_blank"}。查證日 2026-09-11。
 [^tails]: Tails 是從 USB 隨身碟開機的作業系統，所有對外連線經由 Tor，關機後不在電腦上留下痕跡。站內介紹見[什麼是 Tails](../../tools/what-is-tails.md)，官方網站見 [Tails](https://tails.net/){target="_blank"}。查證日 2026-09-11。
+[^rpz]: TWNIC 依主管機關命令對網域執行 DNS 層的停止解析，透明度報告見 [RPZ 惡意網域名稱攔截服務](https://rpz.twnic.tw/){target="_blank"} - TWNIC，數字以該站當期公布為準。2025 上半年逾五萬個網域被指定、多數未經事前司法審查的統計出自 [Taiwan: Freedom on the Net 2025](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"} - Freedom House，該報告的來源是 TWNIC 的首份 RPZ 透明度報告。查證日 2026-09-11。
 [^torvpn-about]: Beta 警語的出處。[About Tor VPN](https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/){target="_blank"} - Tor Project 官方支援文件。查證日 2026-09-11。
