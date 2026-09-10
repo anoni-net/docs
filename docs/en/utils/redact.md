@@ -2,6 +2,12 @@
 title: Screenshot redaction
 description: Draw boxes over names, avatars and messages that must not leave a screenshot or photo, and fill them with solid black, entirely on your device. The output is re-encoded so none of the original metadata or filename carries over, and every box is checked pixel by pixel before you download.
 icon: material/selection-remove
+offline_assets:
+  # The face detector's code and cascade data are loaded on demand, so the page has
+  # no script tag for them. The offline copy still needs both, otherwise pressing
+  # "Find faces" with the network off does nothing.
+  - utils/vendor/pico/pico.js
+  - utils/vendor/pico/facefinder
 ---
 
 # :material-selection-remove: Screenshot redaction

@@ -14,6 +14,8 @@
 | `age/noble-hashes/` | [paulmillr/noble-hashes](https://github.com/paulmillr/noble-hashes) | 2.0.1 | MIT，`age/noble-hashes/LICENSE` |
 | `age/noble-post-quantum/` | [paulmillr/noble-post-quantum](https://github.com/paulmillr/noble-post-quantum) | 0.5.3 | MIT，`age/noble-post-quantum/LICENSE` |
 | `age/scure-base/` | [paulmillr/scure-base](https://github.com/paulmillr/scure-base) | 2.0.0 | MIT，`age/scure-base/LICENSE` |
+| `pico/pico.js` | [nenadmarkus/picojs](https://github.com/nenadmarkus/picojs) | 2022-08-25 的 master（無版本號） | MIT |
+| `pico/facefinder` | [nenadmarkus/pico](https://github.com/nenadmarkus/pico) | commit `c2e81f9` | MIT |
 
 ## 為什麼不自己寫
 
@@ -35,6 +37,35 @@ QR 編碼寫錯的典型後果是產生一個「掃得出來但內容錯」的�
 
 Apache-2.0 與 MIT 都要求散布時附上授權副本，所以 `jsQR-LICENSE.txt` 與
 `pdf-lib-LICENSE.txt` 也在這個目錄裡，不要刪。
+
+`pico/` 底下兩個檔案的授權都是 MIT，但上游兩個 repo 都沒有放 LICENSE 檔，也沒有
+版權人那一行，所以這裡沒有對應的授權全文可以附。授權的依據寫在兩個地方：
+`pico.js` 第一行的註解（`This library is released under the MIT license`，那一行
+原封不動留在檔案裡），以及 picojs 的 readme 的 License 一節寫著 MIT。要重新確認
+的時候看那兩處。
+
+pico.js 沒有發行版本號，取的是 2022-08-25 那次 push 的 master。級聯檔取自同一位
+作者的 `pico` repo，網址上釘死 commit `c2e81f9`，那是 picojs 的範例自己指向的
+版本。兩個檔案的 SHA-256：
+
+```
+785b981cc79e5fa3f7557dc3fa7773629d7529994d7627de41b77d8687649309  pico/pico.js
+d8014993e7298c7b1865d1f8b855d6dbf4ec5c808bf879e2091ab6837abf90cd  pico/facefinder
+```
+
+## 為什麼臉部偵測用 pico 而不是 TensorFlow.js
+
+截圖遮蔽的「自動找出人臉」需要一個偵測器。主流做法是 TensorFlow.js 加 BlazeFace，
+量過實際要載入的東西是 `tf-core.min.js` 287 KB、`tf-converter.min.js` 315 KB、
+`tf-backend-cpu.min.js` 129 KB、模型權重 455 KB，合計約 1.2 MB。而且
+`@tensorflow-models/blazeface` 的 repo 已經掛上棄用公告。
+
+pico 這條是 240 KB，純 JavaScript，不需要 WebGL 也不需要 WASM，Tor Browser 只要
+JavaScript 開著就能執行。代價是它只抓得到正面、直立、夠大的臉。
+
+那個代價在這一頁的設計裡被吸收掉了：偵測只提候選框，讀者看得到、刪得掉、補得上，
+按下產生的仍然是人。漏抓由人補，多抓一鍵刪掉。另外兩百行的 JavaScript 讀者自己
+讀得完，那比較接近這一區「看得懂的人可以自己驗」的立場。
 
 ## age/ 底下的 ES module
 

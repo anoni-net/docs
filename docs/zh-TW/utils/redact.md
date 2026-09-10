@@ -2,6 +2,11 @@
 title: 截圖遮蔽
 description: 在截圖或照片上拉方框，把不該外流的名字、頭像與對話填成實心黑色，全程在本機處理。輸出重新編碼，原檔的 metadata 與檔名都不會帶過去，交給你之前會逐像素確認每一處都是純黑。
 icon: material/selection-remove
+offline_assets:
+  # 臉部偵測用的程式與級聯資料是動態載入的，頁面裡沒有 script 標籤。離線副本
+  # 仍然要包含它們，不然存下這一頁的人在斷網時按了自動找出人臉不會有反應。
+  - utils/vendor/pico/pico.js
+  - utils/vendor/pico/facefinder
 ---
 
 # :material-selection-remove: 截圖遮蔽

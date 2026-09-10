@@ -37,7 +37,7 @@ const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'redact.js 裡找不到純邏輯與介面的分界註解');
 const logic = src.slice(start, end);
 const tool = new Function(
-  `${logic}\n return { FILL, FILL_RGB, MIN_SIDE, MAX_PIXELS, VERIFY, normalizeBox, toImagePoint, fitWithin, outputType, outputName, verifyBoxes };`
+  `${logic}\n return { FILL, FILL_RGB, MIN_SIDE, MAX_PIXELS, VERIFY, normalizeBox, toImagePoint, fitWithin, outputType, outputName, verifyBoxes, DETECT, detectionToBox, detectSize, isCovered };`
 )();
 
 const grab = (re) => {
@@ -209,6 +209,80 @@ test('方框比 inset 還小的時候縮小 inset，不會因為沒東西可檢�
 // 原始碼掃描
 // ---------------------------------------------------------------------------
 
+test('偵測用的縮圖尺寸：超過上限才縮，比例算得回去', () => {
+  const small = tool.detectSize(800, 600, 1280);
+  assert.deepEqual(small, { width: 800, height: 600, scale: 1 });
+
+  const big = tool.detectSize(4000, 3000, 1280);
+  assert.equal(big.width, 1280);
+  assert.equal(big.height, 960);
+  // scale 是把偵測座標乘回原尺寸的倍率
+  assert.ok(Math.abs(big.width * big.scale - 4000) < 1, '寬度乘回去對不上');
+  assert.ok(Math.abs(big.height * big.scale - 3000) < 1, '高度乘回去對不上');
+
+  // 直向的照片以長邊為準
+  const tall = tool.detectSize(1000, 4000, 1280);
+  assert.equal(tall.height, 1280);
+  assert.ok(tall.width >= 1);
+});
+
+test('偵測結果換成方框：往外推、夾在影像內、座標放得回原尺寸', () => {
+  // pico 回傳 [row, col, diameter, quality]
+  const box = tool.detectionToBox([100, 200, 50, 300], 1, 640, 480);
+  // 中心要落在原本的中心上
+  assert.ok(Math.abs(box.x + box.w / 2 - 200) <= 1, '水平中心跑掉了');
+  assert.ok(Math.abs(box.y + box.h / 2 - 100) <= 1, '垂直中心跑掉了');
+  // 往外推過，比原本的直徑大
+  assert.ok(box.w > 50, '沒有往外推');
+  assert.ok(Math.abs(box.w - 50 * (1 + tool.DETECT.pad)) <= 2, '推的比例不對');
+
+  // 縮圖上偵測到的座標要乘回原尺寸
+  const scaled = tool.detectionToBox([100, 200, 50, 300], 2, 1280, 960);
+  assert.ok(Math.abs(scaled.x + scaled.w / 2 - 400) <= 2, '放大之後中心不對');
+  assert.ok(scaled.w > box.w, '放大之後方框沒有變大');
+});
+
+test('貼著邊緣的臉不會把方框推到影像外面', () => {
+  // 左上角的臉。往外推之後左邊與上面都會超出去
+  const box = tool.detectionToBox([10, 10, 60, 300], 1, 640, 480);
+  assert.ok(box.x >= 0 && box.y >= 0, '方框跑到影像外面了');
+  assert.ok(box.x + box.w <= 640 && box.y + box.h <= 480, '方框超出右下邊界');
+
+  // 右下角的臉
+  const corner = tool.detectionToBox([475, 635, 60, 300], 1, 640, 480);
+  assert.ok(corner.x >= 0 && corner.y >= 0);
+  assert.ok(corner.x + corner.w <= 640 && corner.y + corner.h <= 480);
+});
+
+test('已經被讀者遮過的地方不重複加框', () => {
+  const existing = [{ x: 100, y: 100, w: 80, h: 80 }];
+  // 中心落在既有方框裡
+  assert.equal(tool.isCovered({ x: 120, y: 120, w: 20, h: 20 }, existing), true);
+  // 中心在外面
+  assert.equal(tool.isCovered({ x: 300, y: 300, w: 20, h: 20 }, existing), false);
+  // 沒有既有方框
+  assert.equal(tool.isCovered({ x: 120, y: 120, w: 20, h: 20 }, []), false);
+});
+
+test('偵測的門檻偏低是刻意的，漏抓比多抓貴', () => {
+  // 多抓的框讀者按一下就刪掉，漏抓的臉會跟著圖送出去
+  assert.ok(tool.DETECT.minQuality <= 50, '分數門檻太高會漏抓');
+  assert.ok(tool.DETECT.pad > 0, '沒有往外推的話頭髮跟下巴會露在框外');
+  assert.ok(tool.DETECT.maxSide >= 800, '縮得太小會抓不到遠一點的臉');
+});
+
+test('文案講出偵測抓不到什麼，不是只報找到幾張', () => {
+  // 只講找到幾張會讓人以為剩下的都乾淨了
+  // 這一份的鍵是 zh-TW、zh、en，簡體那一份的鍵沒有地區碼
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const found = STRINGS[lang].foundSome;
+    assert.ok(found, `${lang} 沒有 foundSome`);
+    assert.ok(/\{n\}/.test(found), `${lang} 的 foundSome 沒有帶數量`);
+    assert.ok(found.length > 30, `${lang} 的 foundSome 太短，放不下限制的說明`);
+    assert.ok(STRINGS[lang].foundNone, `${lang} 沒有 foundNone`);
+  }
+});
+
 test('原始碼裡沒有模糊、馬賽克或半透明的填法', () => {
   assert.ok(!/ctx\.filter|blur\(|pixelate|mosaic|globalAlpha/.test(code), '出現了模糊或半透明的手段');
   assert.equal(tool.FILL, '#000000');
@@ -218,12 +292,34 @@ test('原始碼裡沒有模糊、馬賽克或半透明的填法', () => {
 });
 
 test('原始碼裡沒有任何把資料送出去或留下來的手段', () => {
-  for (const needle of ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket', 'anoniTrack']) {
+  for (const needle of ['XMLHttpRequest', 'sendBeacon', 'WebSocket', 'EventSource', 'anoniTrack']) {
     assert.ok(!code.includes(needle), `原始碼裡出現了 ${needle}`);
   }
   for (const needle of ['localStorage', 'sessionStorage', 'indexedDB', 'document.cookie', 'caches.open']) {
     assert.ok(!code.includes(needle), `原始碼裡出現了 ${needle}`);
   }
+});
+
+test('唯一的 fetch 是去拿本站的級聯資料，而且不帶任何內容出去', () => {
+  // 2026-09 之前這裡連 fetch( 都直接禁掉。臉部偵測要讀級聯檔，所以改成精確的
+  // 條件而不是放寬：只准一個 fetch，網址由 new URL 從相對路徑組出來（同源），
+  // 而且不准有第二個參數，沒有第二個參數就不可能帶 method 或 body。
+  const calls = [...code.matchAll(/fetch\(([^)]*)\)/g)].map((m) => m[1].trim());
+  assert.equal(calls.length, 1, `fetch 出現 ${calls.length} 次，應該只有一次`);
+  assert.equal(calls[0], 'url', 'fetch 的參數不是那個組好的 url 變數');
+  assert.ok(
+    /const url = new URL\("\.\.\/vendor\/pico\/facefinder", location\.href\)\.href;/.test(code),
+    '級聯檔的網址不是用相對路徑組出來的'
+  );
+  // 整份原始碼不該有任何絕對網址（註解裡的說明不算）
+  const withoutComments = code.replace(/^\s*\*.*$/gm, '');
+  assert.ok(!/https?:\/\//.test(withoutComments), '原始碼裡出現絕對網址');
+});
+
+test('偵測用的程式與資料只從本站相對路徑載入', () => {
+  const m = code.match(/script\.src = new URL\((['"])([^'"]+)\1/);
+  assert.ok(m, '找不到 pico.js 的載入位置');
+  assert.equal(m[2], '../vendor/pico/pico.js');
 });
 
 test('產生輸出時有轉圈與 aria-busy，交付前真的解開一次驗', () => {
