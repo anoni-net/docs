@@ -38,7 +38,7 @@ icon: material/tools
 
 </div>
 
-### 密碼與金鑰
+### 密碼與加密
 
 <div class="grid cards" markdown>
 

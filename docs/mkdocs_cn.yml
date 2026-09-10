@@ -114,7 +114,7 @@ nav:
       - "要防什么":
           - utils/threat-model.md
           - utils/checklist.md
-      - "密码与密钥":
+      - "密码与加密":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md

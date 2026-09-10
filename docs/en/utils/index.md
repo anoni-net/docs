@@ -38,7 +38,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
-### Passwords and keys
+### Passwords, encryption
 
 <div class="grid cards" markdown>
 

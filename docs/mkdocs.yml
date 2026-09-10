@@ -132,7 +132,7 @@ nav:
       - "要防什麼":
           - utils/threat-model.md
           - utils/checklist.md
-      - "密碼與金鑰":
+      - "密碼與加密":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md

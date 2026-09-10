@@ -114,7 +114,7 @@ nav:
       - "What to protect":
           - utils/threat-model.md
           - utils/checklist.md
-      - "Passwords and keys":
+      - "Passwords, encryption":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md
