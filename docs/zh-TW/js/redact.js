@@ -146,9 +146,23 @@
   // 偵測用的參數。這幾個值決定漏抓與多抓之間站在哪裡，而在這一頁漏抓比多抓貴，
   // 因為多抓的框讀者按一下就刪掉，漏抓的臉會跟著圖送出去。所以門檻取得偏低。
   const DETECT = {
-    // pico 的分數。實測專案自己的樣張，真的臉落在 74 到 338 之間，雜訊在個位數。
-    // 取 40 會多框幾個，那是刻意的。
-    minQuality: 40,
+    // pico 分群後的分數是成員分數的總和，反映「有多少個重疊偵測投票給這張臉」，
+    // 不是單次的信心值。所以遮擋會讓分數整段掉下來，而不只是掉一點。
+    //
+    // 原本取 40。回報說戴眼鏡的比較難抓，做了對照實驗：同一張臉疊上合成鏡框，
+    // 其餘條件不變，四張臉的分數變化是
+    //
+    //   沒有鏡框    338, 147, 74, 40
+    //   細框透明    230,  97, 36, 14   ← 掉一半，後兩張跌破 40
+    //   粗框透明     38,   7,  7, 沒偵測到
+    //   墨鏡         13,   5, 沒偵測到, 0
+    //
+    // 細框只是跌破門檻，人還在。門檻降到 10 那四張全部收得回來，而乾淨樣張仍然
+    // 是 4 張沒有多框，人多的三種密度（4、36、64 張）也都維持全中不多框。降到 5
+    // 就開始誤判（36 張的場景框出 40 個），所以停在 10。
+    //
+    // 粗框與墨鏡是另一回事，分數整個崩掉，不設門檻也救不回來，那要靠讀者自己補。
+    minQuality: 10,
     // 掃描的最小臉。太小的值會讓耗時暴增又全是雜訊。
     minSize: 40,
     // 每一輪放大多少、每一步移動多少。上游範例的預設值。
@@ -291,7 +305,7 @@
       beforeHint: "選好圖之後可以先按「自動找出人臉」框一輪，機器漏掉的自己補。",
       findFaces: "自動找出人臉",
       finding: "尋找中",
-      foundSome: "找到 {n} 張臉，已經框起來。側臉、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
+      foundSome: "找到 {n} 張臉，已經框起來。側臉、墨鏡、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
       foundNone: "沒有找到正面、直立又夠大的臉。這一張要自己拉框。",
       undo: "復原上一個",
       reset: "全部重來",
@@ -323,7 +337,7 @@
       beforeHint: "选好图之后可以先按「自动找出人脸」框一轮，机器漏掉的自己补。",
       findFaces: "自动找出人脸",
       finding: "寻找中",
-      foundSome: "找到 {n} 张脸，已经框起来。侧脸、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
+      foundSome: "找到 {n} 张脸，已经框起来。侧脸、墨镜、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
       foundNone: "没有找到正面、直立又够大的脸。这一张要自己拉框。",
       undo: "撤销上一个",
       reset: "全部重来",
@@ -355,7 +369,7 @@
       beforeHint: "Once an image is loaded you can press \"Find faces\" for a first pass, then add whatever it missed yourself.",
       findFaces: "Find faces",
       finding: "Looking",
-      foundSome: "Found {n} faces and boxed them. Profiles, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
+      foundSome: "Found {n} faces and boxed them. Profiles, dark glasses, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
       foundNone: "No front-facing, upright, large enough face found. Draw the boxes yourself on this one.",
       undo: "Undo last box",
       reset: "Start over",
