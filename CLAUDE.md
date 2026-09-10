@@ -320,6 +320,13 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 - 語系的資料夾與對外 URL 規則不同：`docs/zh-TW/` 對應 `https://anoni.net/docs/`（預設語系不帶語系區段），`docs/zh-CN/` 對應 `/docs/zh-cn/`（URL 小寫），`docs/en/` 對應 `/docs/en/`
 - `/docs/zh-tw/` 是已停用的舊網址，由 Cloudflare Redirect Rule 301 導回 `/docs/`。它曾經是 `run_zh-tw.sh` 建出來的第二棵樹，內容與根路徑完全相同，兩邊各自 self-canonical 又各自進 sitemap，等於自製重複內容。語言選單的 zh-TW 項填 `/docs/` 就夠，不要再加回那份建置
 
+### 做小工具時
+
+- 對外的四條規則寫在 `docs/zh-TW/utils/index.md` 的前言，要改規則先改那裡，三語系一起改
+- 不做任何把資料送到伺服器的便利功能，「存起來給別人看」的分享連結也算。核心運算在瀏覽器裡完成，跟這個工具有沒有側門是兩件事，而畫面上分不出來。JSONFormatter 與 CodeBeautify 的政策寫著 `99% of our tools are doing processing on browser using Java Script`，那句話是真的，出事的是另外一顆存檔按鈕，存下來的內容預設公開且搜尋引擎索引得到。watchTowr Labs 2025 年從那裡取得八萬多份提交、超過 5 GB，涵蓋五年份的內容，裡面有資料庫密碼、雲端金鑰與企業內部帳號。兩站的政策都警告過不要存機密資料，看到的人不多
+- 判準是「斷網之後這個工具還做得完它宣稱的事嗎」，做得完才收進來。這條同時擋掉需要外部服務的功能與需要伺服器才成立的便利功能
+- 互動成本有上限。讀者要做的選擇與輸入落在個位數到十位數，超過就變成在做一套應用程式，說明留給文章。開工前先量一次
+
 ### 修改 API 時
 
 - FastAPI 使用 `root_path="/api"` 設定，所有端點需加上 `/api` 前綴

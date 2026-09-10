@@ -143,3 +143,7 @@ Why each of these is not written from scratch is explained at the bottom of the 
 ## What is not here
 
 Anything that needs an external service to work stays out, because the connection itself breaks both the offline rule and the no-data rule. For network measurement use [OONI Probe](../tools/what-is-ooni.md), which is built for network measurement and documents what happens to the data.
+
+There will be no share links either. Saving a result so someone else can look at it sounds like a convenience, but it sends the content to a server while the tool itself still runs in your browser, and nothing on screen tells the two apart. JSONFormatter and CodeBeautify, two paste-and-go tool sites, work exactly like that: their policies say that 99% of their tools process data in the browser, which is true, and they also have a save button whose output is public by default and indexed by search engines. In 2025 the security team at watchTowr Labs [pulled more than 80,000 submissions and over 5 GB](https://labs.watchtowr.com/stop-putting-your-passwords-into-random-websites-yes-seriously-you-are-the-problem/){target="_blank"} out of it, spanning five years, including database passwords, cloud keys and corporate account credentials. Both policies do warn against saving confidential data there. Not many people read them.
+
+So there is no side door here for the sake of convenience. To hand a result to someone, save it yourself and send it over a channel you trust.

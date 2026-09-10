@@ -141,3 +141,7 @@ icon: material/tools
 ## 沒有收進來的東西
 
 需要連到外部服務才能運作的功能不會收進小工具區，因為連線本身就違反「離線可用」與「不送出資料」兩條規則。網路測量請用 [OONI Probe](../tools/what-is-ooni.md)，它是設計來做網路測量的工具，資料的處理方式也公開。
+
+分享連結也不會有。把結果存起來給別人看，聽起來只是方便，實際上是把內容送到伺服器，而工具本體仍然在瀏覽器裡運算，畫面上看不出差別。JSONFormatter 與 CodeBeautify 這兩個貼上型工具站就是這樣，政策裡寫著九成九的工具在瀏覽器裡處理，那句話是真的，但同時有一顆存檔按鈕，存下來的內容預設公開，搜尋引擎索引得到。資安團隊 watchTowr Labs 在 2025 年[從那裡取得八萬多份提交、超過 5 GB](https://labs.watchtowr.com/stop-putting-your-passwords-into-random-websites-yes-seriously-you-are-the-problem/){target="_blank"}，涵蓋五年份的內容，裡面有資料庫密碼、雲端金鑰與企業內部帳號。兩站的政策都寫著不要拿它存機密資料，看到的人不多。
+
+所以這一區的規則沒有為了方便開的側門。要把結果給別人，自己存檔再用你信得過的管道傳。
