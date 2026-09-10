@@ -20,6 +20,11 @@
  * 那個理由現在仍然成立，改的是做法：偵測只把框畫出來，讀者看得到、刪得掉、
  * 補得上，按下產生的仍然是人。省掉的是重複勞動，不是判斷。
  *
+ * 第一版把偵測到的框直接填成實心黑，跟上面這一段相反，也跟 utils/redact.md 的
+ * 「不做的事」相反。現在偵測結果先當候選框，畫成空心的線，點一下移掉，按下
+ * 「全部遮起來」才整批變成實心。候選框還在的時候不給產生輸出，免得有人以為
+ * 框好就等於遮好。
+ *
  * 用 pico.js（MIT，約兩百行）而不是 TensorFlow.js 那條路。後者要 tfjs-core
  * 加 tfjs-converter 加 backend 加模型權重，量到約 1.2 MB，pico 這條是 240 KB，
  * 純 JavaScript 不碰 WebGL，Tor Browser 只要 JS 開著就能執行。代價是它只抓得到
@@ -44,6 +49,9 @@
   // 都看得出來是遮蔽，不會被誤認為畫面內容。
   const FILL = "#000000";
   const FILL_RGB = [0, 0, 0];
+
+  // 候選框與正在拖的那一個用同一個藍。它只出現在畫面上，輸出前會重畫一次不帶它。
+  const MARK = "#00aeff";
 
   // 影像座標上最短邊小於這個值的方框當成誤觸，不收。手指在螢幕上點一下常會有
   // 一兩個像素的位移，收進去會變成看不見卻算一處的遮蔽。
@@ -158,11 +166,23 @@
     //   墨鏡         13,   5, 沒偵測到, 0
     //
     // 細框只是跌破門檻，人還在。門檻降到 10 那四張全部收得回來，而乾淨樣張仍然
-    // 是 4 張沒有多框，人多的三種密度（4、36、64 張）也都維持全中不多框。降到 5
-    // 就開始誤判（36 張的場景框出 40 個），所以停在 10。
+    // 是 4 張沒有多框。
+    //
+    // 後來又降到 6。原本停在 10 的理由是「降到 5 就開始誤判」，那個數字是用只數
+    // 總數的方式量出來的，總數看不出「多框」與「找到」的差別。check_redact_detect
+    // 改成把偵測結果對回放進去的臉之後重量一次，五個場景的召回與多框是
+    //
+    //   門檻   街拍正立   街拍傾斜   傾斜加模糊   合計找到   合計多框
+    //    10     19/26      18/26      16/26         53         4
+    //     6     19/26      18/26      18/26         55         4
+    //     3     19/26      18/26      20/26         57         5
+    //
+    // 10 到 6 是純賺，召回多兩張而多框一個都沒有增加，乾淨樣張與人多的場景完全
+    // 沒有動。再往下要拿多框換召回，而這裡的合成場景全部出自同一張原始照片，
+    // 押到量測範圍的邊緣三次都出過事，所以停在 6。
     //
     // 粗框與墨鏡是另一回事，分數整個崩掉，不設門檻也救不回來，那要靠讀者自己補。
-    minQuality: 10,
+    minQuality: 6,
     // 掃描的最小臉，單位是縮小後工作影像上的像素。
     //
     // 原本 40。街拍那種「同一張照片裡有近有遠」的場景會漏掉遠的那些：3000px 寬
@@ -247,6 +267,17 @@
     return false;
   }
 
+  // 點一下要移掉哪一個框。後畫的疊在前面，所以從最後一個往前找。回傳索引，
+  // 沒點到任何一個回傳 -1。逐個刪掉才有意義：偵測一次可能提出幾十個候選框，
+  // 只靠「復原上一個」要退掉中間某一個得先把後面全部退掉。
+  function hitBox(list, x, y) {
+    for (let i = list.length - 1; i >= 0; i -= 1) {
+      const box = list[i];
+      if (x >= box.x && x <= box.x + box.w && y >= box.y && y <= box.y + box.h) return i;
+    }
+    return -1;
+  }
+
   // --- 介面 ---
 
   const root = document.getElementById("redact-tool");
@@ -311,15 +342,18 @@
       drop: "把截圖或照片拖進來，或點一下選檔案。也可以直接貼上（Ctrl+V）。",
       dropOver: "放開就載入",
       loading: "載入中",
-      hint: "在要遮的地方按住拖出方框，放開就填成黑色，可以拖好幾個。填的是實心色塊，馬賽克與模糊都可能被還原。",
+      hint: "在要遮的地方按住拖出方框，放開就填成黑色，可以拖好幾個。拉錯的點一下就移掉。填的是實心色塊，馬賽克與模糊都可能被還原。",
       canvasLabel: "遮蔽用的畫布，在上面按住拖出方框",
       count: "已遮 {n} 處",
       none: "還沒有遮任何地方",
       beforeHint: "選好圖之後可以先按「自動找出人臉」框一輪，機器漏掉的自己補。",
       findFaces: "自動找出人臉",
       finding: "尋找中",
-      foundSome: "找到 {n} 張臉，已經框起來。側臉、墨鏡、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
+      foundSome: "找到 {n} 張臉，用藍框標起來，還沒有遮住任何東西。不需要遮的點一下移掉，其餘的按「全部遮起來」。側臉、墨鏡、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
       foundNone: "沒有找到正面、直立又夠大的臉。這一張要自己拉框。",
+      markLeft: "還有 {n} 個藍框沒有決定。不需要遮的點一下移掉，其餘的按「全部遮起來」。",
+      markNone: "藍框都移掉了。要遮的地方自己拉框。",
+      coverAll: "全部遮起來",
       undo: "復原上一個",
       reset: "全部重來",
       another: "換一張",
@@ -343,15 +377,18 @@
       drop: "把截图或照片拖进来，或点一下选文件。也可以直接粘贴（Ctrl+V）。",
       dropOver: "松开就加载",
       loading: "加载中",
-      hint: "在要遮的地方按住拖出方框，松开就填成黑色，可以拖好几个。填的是实心色块，马赛克与模糊都可能被还原。",
+      hint: "在要遮的地方按住拖出方框，松开就填成黑色，可以拖好几个。拉错的点一下就移掉。填的是实心色块，马赛克与模糊都可能被还原。",
       canvasLabel: "遮蔽用的画布，在上面按住拖出方框",
       count: "已遮 {n} 处",
       none: "还没有遮任何地方",
       beforeHint: "选好图之后可以先按「自动找出人脸」框一轮，机器漏掉的自己补。",
       findFaces: "自动找出人脸",
       finding: "寻找中",
-      foundSome: "找到 {n} 张脸，已经框起来。侧脸、墨镜、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
+      foundSome: "找到 {n} 张脸，用蓝框标起来，还没有遮住任何东西。不需要遮的点一下移掉，其余的按「全部遮起来」。侧脸、墨镜、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
       foundNone: "没有找到正面、直立又够大的脸。这一张要自己拉框。",
+      markLeft: "还有 {n} 个蓝框没有决定。不需要遮的点一下移掉，其余的按「全部遮起来」。",
+      markNone: "蓝框都移掉了。要遮的地方自己拉框。",
+      coverAll: "全部遮起来",
       undo: "撤销上一个",
       reset: "全部重来",
       another: "换一张",
@@ -375,15 +412,18 @@
       drop: "Drop a screenshot or photo here, or click to choose a file. Pasting (Ctrl+V) works too.",
       dropOver: "Release to load",
       loading: "Loading",
-      hint: "Press and drag over anything that must not leave the picture. Release to fill it with solid black. Draw as many boxes as you need. Solid fill only: pixelation and blur can be reversed.",
+      hint: "Press and drag over anything that must not leave the picture. Release to fill it with solid black. Draw as many boxes as you need, and tap one to take it away again. Solid fill only: pixelation and blur can be reversed.",
       canvasLabel: "Redaction canvas. Press and drag to draw a box.",
       count: "{n} areas covered",
       none: "Nothing covered yet",
       beforeHint: "Once an image is loaded you can press \"Find faces\" for a first pass, then add whatever it missed yourself.",
       findFaces: "Find faces",
       finding: "Looking",
-      foundSome: "Found {n} faces and boxed them. Profiles, dark glasses, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
+      foundSome: "Found {n} faces and outlined them in blue. Nothing is covered yet. Tap any outline you do not need, then press \"Cover them all\". Profiles, dark glasses, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
       foundNone: "No front-facing, upright, large enough face found. Draw the boxes yourself on this one.",
+      markLeft: "{n} outlines are still undecided. Tap the ones you do not need, then press \"Cover them all\".",
+      markNone: "Every outline was taken away. Draw the boxes you need yourself.",
+      coverAll: "Cover them all",
       undo: "Undo last box",
       reset: "Start over",
       another: "Another image",
@@ -424,10 +464,15 @@
     return (bytes / 1024 / 1024).toFixed(1) + " MB";
   }
 
-  // 狀態。source 是解開的圖與它的尺寸，boxes 是影像座標上的方框，result 是產生
-  // 好且驗過的輸出。三者都只活在記憶體裡，換一張或關掉分頁就沒了。
+  // 狀態。source 是解開的圖與它的尺寸，boxes 是影像座標上已經遮住的方框，marks
+  // 是偵測提出來還沒有決定的候選框，result 是產生好且驗過的輸出。都只活在記憶體
+  // 裡，換一張或關掉分頁就沒了。
+  //
+  // boxes 與 marks 分開是這一頁的安全性所在：畫面上實心的才是會出現在輸出裡的，
+  // 空心的線只是提案。verifyBoxes 也只驗 boxes。
   let source = null;
   let boxes = [];
+  let marks = [];
   let dragging = null;
   let result = null;
   let working = false;
@@ -453,21 +498,37 @@
     ctx = null;
   }
 
-  // 整張重畫：底圖、已定的方框、正在拖的那一個。正在拖的也用實心填，讀者放開之前
-  // 看到的就是最後會得到的東西，外框只是讓邊界在深色畫面上也看得見。
-  function draw() {
+  // 整張重畫：底圖、已經遮住的方框、候選框、正在拖的那一個。正在拖的也用實心填，
+  // 讀者放開之前看到的就是最後會得到的東西，外框只是讓邊界在深色畫面上也看得見。
+  //
+  // options.marks 給 false 會跳過候選框。輸出前一定要這樣重畫一次，候選框是畫在
+  // 同一張畫布上的線，不跳過就會被燒進交出去的圖裡。
+  function draw(options) {
     if (!canvas || !source) return;
+    const withMarks = !(options && options.marks === false);
+    const line = Math.max(2, Math.round(canvas.width / 400));
     ctx.drawImage(source.bitmap, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = FILL;
     for (const box of boxes) ctx.fillRect(box.x, box.y, box.w, box.h);
+    if (withMarks) {
+      // 候選框只畫線不填色，白線墊底再疊藍線，淺色與深色的畫面上都看得見。
+      for (const box of marks) {
+        ctx.lineWidth = line + 2;
+        ctx.strokeStyle = "#ffffff";
+        ctx.strokeRect(box.x, box.y, box.w, box.h);
+        ctx.lineWidth = line;
+        ctx.strokeStyle = MARK;
+        ctx.strokeRect(box.x, box.y, box.w, box.h);
+      }
+    }
     if (dragging) {
       const left = Math.min(dragging.x1, dragging.x2);
       const top = Math.min(dragging.y1, dragging.y2);
       const w = Math.abs(dragging.x2 - dragging.x1);
       const h = Math.abs(dragging.y2 - dragging.y1);
       ctx.fillRect(left, top, w, h);
-      ctx.strokeStyle = "#00aeff";
-      ctx.lineWidth = Math.max(2, Math.round(canvas.width / 400));
+      ctx.strokeStyle = MARK;
+      ctx.lineWidth = line;
       ctx.strokeRect(left, top, w, h);
     }
   }
@@ -671,7 +732,8 @@
       return;
     }
 
-    for (const box of found) boxes.push(box);
+    // 直接指派而不是接在後面。重按一次偵測得到的是同一批，接上去會變成兩層。
+    marks = found;
     detecting = false;
     detectNote = found.length ? fill(t.foundSome, { n: found.length }) : t.foundNone;
     releaseResult();
@@ -679,7 +741,9 @@
   }
 
   async function exportImage() {
-    if (!source || !boxes.length || working) return;
+    // 候選框還沒有決定就不給產生。放行等於交出一張「機器找到了但沒有遮」的圖，
+    // 而畫面上那幾條藍線很容易被當成已經遮好。
+    if (!source || !boxes.length || marks.length || working) return;
     releaseResult();
     working = true;
     error = null;
@@ -687,7 +751,7 @@
     await new Promise((next) => setTimeout(next, 0));
     try {
       dragging = null;
-      draw();
+      draw({ marks: false });
       let type = outputType(source.type);
       let blob = await toBlob(canvas, type);
       let check = await verifyBlob(blob, boxes);
@@ -744,6 +808,7 @@
       const box = normalizeBox(
         dragging.x1, dragging.y1, dragging.x2, dragging.y2, target.width, target.height
       );
+      const at = { x: dragging.x2, y: dragging.y2 };
       dragging = null;
       if (box) {
         boxes.push(box);
@@ -751,9 +816,26 @@
         releaseResult();
         error = null;
         render();
-      } else {
-        scheduleDraw();
+        return;
       }
+      // 拖不出方框就是點了一下。點在候選框上移掉那一個，點在已經遮住的地方移掉
+      // 那一處。候選框疊在上面，先問它。
+      const onMark = hitBox(marks, at.x, at.y);
+      if (onMark !== -1) {
+        marks.splice(onMark, 1);
+        detectNote = marks.length ? fill(t.markLeft, { n: marks.length }) : t.markNone;
+        render();
+        return;
+      }
+      const onBox = hitBox(boxes, at.x, at.y);
+      if (onBox !== -1) {
+        boxes.splice(onBox, 1);
+        releaseResult();
+        error = null;
+        render();
+        return;
+      }
+      scheduleDraw();
     });
     target.addEventListener("pointercancel", (event) => {
       if (!dragging || event.pointerId !== dragging.id) return;
@@ -863,8 +945,23 @@
       make.appendChild(document.createTextNode(t.working));
       make.setAttribute("aria-busy", "true");
     }
-    make.disabled = working || detecting || !boxes.length;
+    make.disabled = working || detecting || !boxes.length || marks.length > 0;
     actions.appendChild(make);
+
+    // 候選框還在的時候才出現。預設是全部遮起來，要留下某一張臉得先點掉它，
+    // 逐張決定要不要遮的負擔留給例外，不留給常態。
+    if (marks.length) {
+      const cover = button(t.coverAll, "rd-primary", () => {
+        for (const box of marks) boxes.push(box);
+        marks = [];
+        detectNote = null;
+        releaseResult();
+        error = null;
+        render();
+      });
+      cover.disabled = working || detecting;
+      actions.appendChild(cover);
+    }
 
     // 偵測排在產生後面、復原前面。它是可選的省力步驟，不是主要路徑，
     // 主要路徑仍然是自己拉框。
@@ -891,18 +988,20 @@
 
     const reset = button(t.reset, null, () => {
       boxes = [];
+      marks = [];
       detectNote = null;
       releaseResult();
       error = null;
       render();
     });
-    reset.disabled = working || detecting || !boxes.length;
+    reset.disabled = working || detecting || (!boxes.length && !marks.length);
     actions.appendChild(reset);
 
     const another = button(t.another, null, () => {
       releaseResult();
       releaseSource();
       boxes = [];
+      marks = [];
       detectNote = null;
       error = null;
       render();

@@ -37,7 +37,7 @@ const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'redact.js 裡找不到純邏輯與介面的分界註解');
 const logic = src.slice(start, end);
 const tool = new Function(
-  `${logic}\n return { FILL, FILL_RGB, MIN_SIDE, MAX_PIXELS, VERIFY, normalizeBox, toImagePoint, fitWithin, outputType, outputName, verifyBoxes, DETECT, detectionToBox, detectSize, isCovered };`
+  `${logic}\n return { FILL, FILL_RGB, MIN_SIDE, MAX_PIXELS, VERIFY, normalizeBox, toImagePoint, fitWithin, outputType, outputName, verifyBoxes, DETECT, detectionToBox, detectSize, isCovered, hitBox };`
 )();
 
 const grab = (re) => {
@@ -265,11 +265,13 @@ test('已經被讀者遮過的地方不重複加框', () => {
 });
 
 test('偵測的門檻偏低是刻意的，漏抓比多抓貴', () => {
-  // 多抓的框讀者按一下就刪掉，漏抓的臉會跟著圖送出去
-  // 上界：40 會讓細框眼鏡的臉跌破門檻（實測分數從 74 掉到 36、40 掉到 14）
-  // 下界：5 開始誤判（36 張臉的場景框出 40 個）
-  assert.ok(tool.DETECT.minQuality <= 20, '門檻太高，戴細框眼鏡的臉會漏掉');
-  assert.ok(tool.DETECT.minQuality >= 10, '門檻太低會開始把不是臉的地方框起來');
+  // 多抓的候選框點一下就移掉（hitBox），漏抓的臉會跟著圖送出去。逐個移掉這件事
+  // 是這個取捨的前提，所以下面還有一條測試盯著它別被拿掉
+  // 上界：40 會讓細框眼鏡的臉跌破門檻（實測分數從 74 掉到 36、40 掉到 14），
+  //       10 在遠景模糊的街拍場景比 6 少找到兩張
+  // 下界：3 開始多框（街拍正立那一格從 2 個變 3 個）
+  assert.ok(tool.DETECT.minQuality <= 6, '門檻太高，戴細框眼鏡與遠一點的臉會漏掉');
+  assert.ok(tool.DETECT.minQuality >= 4, '門檻太低會開始把不是臉的地方框起來');
   assert.ok(tool.DETECT.pad > 0, '沒有往外推的話頭髮跟下巴會露在框外');
   // 街拍那種有近有遠的場景，40 會漏掉遠的（21 張只抓到 17），24 會開始多框
   assert.ok(tool.DETECT.minSize <= 32, '最小尺寸太大，遠一點的臉會漏掉');
@@ -380,6 +382,137 @@ test('三個語系是各自的文案，不是同一份', () => {
 test('提示文字寫明馬賽克與模糊可被還原，讀者按之前就看見理由', () => {
   assert.ok(STRINGS['zh-TW'].hint.includes('還原'));
   assert.ok(/revers/i.test(STRINGS.en.hint));
+});
+
+
+// ---------------------------------------------------------------------------
+// 候選框：偵測只提案，遮蔽由讀者按下去
+// ---------------------------------------------------------------------------
+
+test('點擊命中：後畫的疊在前面，先問最後一個', () => {
+  const list = [
+    { x: 0, y: 0, w: 100, h: 100 },
+    { x: 40, y: 40, w: 20, h: 20 },
+  ];
+  assert.equal(tool.hitBox(list, 50, 50), 1, '兩個重疊時要命中後畫的那一個');
+  assert.equal(tool.hitBox(list, 10, 10), 0, '只在大的裡面就命中大的');
+});
+
+test('點擊命中：點在外面回傳 -1，邊界算命中', () => {
+  const list = [{ x: 10, y: 20, w: 30, h: 40 }];
+  assert.equal(tool.hitBox(list, 5, 5), -1);
+  assert.equal(tool.hitBox(list, 41, 30), -1, '右邊界外一格不該命中');
+  assert.equal(tool.hitBox(list, 10, 20), 0, '左上角算命中');
+  assert.equal(tool.hitBox(list, 40, 60), 0, '右下角算命中');
+  assert.equal(tool.hitBox([], 1, 1), -1, '空清單不該爆掉');
+});
+
+test('偵測結果進 marks，不直接進 boxes', () => {
+  // 這是這一輪修的核心。utils/redact.md 的「不做的事」寫著偵測只把框畫出來，
+  // 舊版卻是按下去就整批填成實心黑，文件與行為相反。
+  const found = src.match(/marks = found;/);
+  assert.ok(found, 'findFaces 沒有把結果放進 marks');
+  assert.ok(
+    !/for \(const box of found\) boxes\.push/.test(src),
+    '偵測結果又被直接推進 boxes 了，那等於跳過讀者確認'
+  );
+});
+
+test('候選框只畫線不填色', () => {
+  const draw = src.slice(src.indexOf('function draw(options)'), src.indexOf('function scheduleDraw'));
+  assert.ok(draw.includes('for (const box of marks)'), 'draw 裡沒有畫候選框');
+  const marksPart = draw.slice(draw.indexOf('for (const box of marks)'), draw.indexOf('if (dragging)'));
+  assert.ok(marksPart.includes('strokeRect'), '候選框要用線畫出來');
+  assert.ok(!marksPart.includes('fillRect'), '候選框被填成實心了，那就分不出提案與已遮');
+});
+
+test('輸出前重畫一次不帶候選框，藍線不會燒進交出去的圖', () => {
+  const exp = src.slice(src.indexOf('async function exportImage'), src.indexOf('function bindPointer'));
+  assert.ok(
+    exp.includes('draw({ marks: false })'),
+    '輸出前沒有跳過候選框，那幾條線會被編碼進輸出'
+  );
+  assert.ok(!/\bdraw\(\)/.test(exp), '輸出路徑上還有一個不帶參數的 draw()');
+});
+
+test('候選框還沒決定就不給產生輸出', () => {
+  const exp = src.slice(src.indexOf('async function exportImage'), src.indexOf('function bindPointer'));
+  assert.ok(
+    /if \(!source \|\| !boxes\.length \|\| marks\.length \|\| working\) return;/.test(exp),
+    'exportImage 沒有擋住候選框還在的情況'
+  );
+  assert.ok(
+    /make\.disabled = [^\n]*marks\.length > 0/.test(src),
+    '產生的按鈕沒有在候選框還在的時候停用'
+  );
+});
+
+test('驗證只驗已經遮住的方框，候選框不算數', () => {
+  const exp = src.slice(src.indexOf('async function exportImage'), src.indexOf('function bindPointer'));
+  const calls = exp.match(/verifyBlob\([^)]*\)/g) || [];
+  assert.ok(calls.length >= 1, '輸出路徑上找不到驗證');
+  for (const call of calls) {
+    assert.ok(call.includes('boxes'), `驗證沒有帶 boxes：${call}`);
+    assert.ok(!call.includes('marks'), `驗證帶到候選框了：${call}`);
+  }
+});
+
+test('點一下就移掉一個框，不必從最後一個一路復原回來', () => {
+  const bind = src.slice(src.indexOf('function bindPointer'), src.indexOf('function button('));
+  assert.ok(bind.includes('hitBox(marks'), '點擊沒有去問候選框');
+  assert.ok(bind.includes('marks.splice('), '點到候選框沒有移掉它');
+  assert.ok(bind.includes('hitBox(boxes'), '點擊沒有去問已經遮住的方框');
+  assert.ok(bind.includes('boxes.splice('), '點到已經遮住的地方沒有移掉它');
+});
+
+test('全部遮起來會把候選框整批收進 boxes 並清空', () => {
+  const cover = src.slice(src.indexOf('if (marks.length) {'), src.indexOf('const undo = button'));
+  assert.ok(cover.includes('t.coverAll'), '沒有全部遮起來這顆按鈕');
+  assert.ok(/for \(const box of marks\) boxes\.push\(box\);/.test(cover), '沒有把候選框收進 boxes');
+  assert.ok(/marks = \[\];/.test(cover), '收完沒有清空候選框');
+});
+
+test('全部重來與換一張都要清掉候選框', () => {
+  for (const label of ['t.reset', 't.another']) {
+    const at = src.indexOf(`button(${label}`);
+    assert.ok(at > 0, `找不到 ${label} 那顆按鈕`);
+    const body = src.slice(at, at + 400);
+    assert.ok(/marks = \[\];/.test(body), `${label} 沒有清掉候選框`);
+  }
+});
+
+test('三個語系都講清楚候選框還沒有遮住任何東西', () => {
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const s = STRINGS[lang];
+    assert.ok(s.coverAll, `${lang} 少了 coverAll`);
+    assert.ok(s.markLeft.includes('{n}'), `${lang} 的 markLeft 沒有帶數量`);
+    assert.ok(s.markNone, `${lang} 少了 markNone`);
+  }
+  // 最容易出人命的一句：找到了但還沒遮，講成「已經框起來」會被當成已經安全
+  assert.ok(
+    /還沒有遮住/.test(STRINGS['zh-TW'].foundSome),
+    'zh-TW 的 foundSome 沒有講出還沒有遮住'
+  );
+  assert.ok(
+    /还没有遮住/.test(STRINGS.zh.foundSome),
+    'zh-CN 的 foundSome 沒有講出還沒有遮住'
+  );
+  assert.ok(
+    /nothing is covered yet/i.test(STRINGS.en.foundSome),
+    'en 的 foundSome 沒有講出還沒有遮住'
+  );
+  for (const lang of ['zh-TW', 'zh']) {
+    assert.ok(
+      !/已經框起來。|已经框起来。/.test(STRINGS[lang].foundSome),
+      `${lang} 的 foundSome 還在講「已經框起來」，讀者會以為遮好了`
+    );
+  }
+});
+
+test('提示文字要講出點一下可以移掉', () => {
+  assert.ok(/點一下就移掉/.test(STRINGS['zh-TW'].hint));
+  assert.ok(/点一下就移掉/.test(STRINGS.zh.hint));
+  assert.ok(/tap one to take it away/i.test(STRINGS.en.hint));
 });
 
 // ---------------------------------------------------------------------------
