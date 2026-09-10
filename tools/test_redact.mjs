@@ -271,6 +271,9 @@ test('偵測的門檻偏低是刻意的，漏抓比多抓貴', () => {
   assert.ok(tool.DETECT.minQuality <= 20, '門檻太高，戴細框眼鏡的臉會漏掉');
   assert.ok(tool.DETECT.minQuality >= 10, '門檻太低會開始把不是臉的地方框起來');
   assert.ok(tool.DETECT.pad > 0, '沒有往外推的話頭髮跟下巴會露在框外');
+  // 街拍那種有近有遠的場景，40 會漏掉遠的（21 張只抓到 17），24 會開始多框
+  assert.ok(tool.DETECT.minSize <= 32, '最小尺寸太大，遠一點的臉會漏掉');
+  assert.ok(tool.DETECT.minSize >= 28, '最小尺寸太小會把不是臉的地方框起來');
   // 這個值決定多小的臉還抓得到，因為 minSize 量的是縮完之後的像素。量過 1280
   // 在 64 張小臉的合成場景只抓到 31 張，1920 全中，所以下限訂在 1920。
   assert.ok(tool.DETECT.maxSide >= 1920, '縮得太小，人多的時候會抓不到');
