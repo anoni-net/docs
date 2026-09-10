@@ -266,8 +266,14 @@ test('已經被讀者遮過的地方不重複加框', () => {
 
 test('偵測的門檻偏低是刻意的，漏抓比多抓貴', () => {
   // 多抓的框讀者按一下就刪掉，漏抓的臉會跟著圖送出去
-  assert.ok(tool.DETECT.minQuality <= 50, '分數門檻太高會漏抓');
+  // 上界：40 會讓細框眼鏡的臉跌破門檻（實測分數從 74 掉到 36、40 掉到 14）
+  // 下界：5 開始誤判（36 張臉的場景框出 40 個）
+  assert.ok(tool.DETECT.minQuality <= 20, '門檻太高，戴細框眼鏡的臉會漏掉');
+  assert.ok(tool.DETECT.minQuality >= 10, '門檻太低會開始把不是臉的地方框起來');
   assert.ok(tool.DETECT.pad > 0, '沒有往外推的話頭髮跟下巴會露在框外');
+  // 街拍那種有近有遠的場景，40 會漏掉遠的（21 張只抓到 17），24 會開始多框
+  assert.ok(tool.DETECT.minSize <= 32, '最小尺寸太大，遠一點的臉會漏掉');
+  assert.ok(tool.DETECT.minSize >= 28, '最小尺寸太小會把不是臉的地方框起來');
   // 這個值決定多小的臉還抓得到，因為 minSize 量的是縮完之後的像素。量過 1280
   // 在 64 張小臉的合成場景只抓到 31 張，1920 全中，所以下限訂在 1920。
   assert.ok(tool.DETECT.maxSide >= 1920, '縮得太小，人多的時候會抓不到');
@@ -288,6 +294,14 @@ test('還沒選檔案的畫面就講出有自動找出人臉這個選項', () =>
       hint.includes(STRINGS[lang].findFaces),
       `${lang} 的 beforeHint 沒有寫出按鈕的名字`
     );
+  }
+});
+
+test('結果訊息要講到墨鏡，那是實測完全抓不到的一類', () => {
+  // 對照實驗：同一張臉疊上墨鏡，分數從 338 掉到 13，不設門檻也救不回來
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const line = STRINGS[lang].foundSome;
+    assert.ok(/墨鏡|墨镜|dark glasses/i.test(line), `${lang} 沒有提到墨鏡`);
   }
 });
 

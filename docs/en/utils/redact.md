@@ -53,6 +53,8 @@ The detector's code and data, about 240 KB, are fetched only when you press "Fin
 
 It finds faces that are front-facing, upright and reasonably large in the frame. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Delete the extra ones with a click and add the missed ones yourself.
 
+Glasses are a common case. The area around the eyes is where this kind of detector gets most of its signal, so frames change the light and dark pattern there and the score drops. Measured on the same face with synthetic frames: thin frames roughly halve the score and are still recoverable, while heavy frames and dark glasses collapse it entirely, beyond any threshold. If someone in the frame is wearing dark glasses, assume it will miss them and draw the box yourself.
+
 More to the point, a face is not the only thing that identifies someone. Name badges, ID cards, tattoos, licence plates, house numbers, distinctive clothing, a shop sign in the background: detection does not touch any of it. The pass you make yourself, after the machine has drawn its boxes, is the step that actually decides what gets covered.
 
 It uses [pico.js](https://github.com/nenadmarkus/picojs){target="_blank"}, MIT licensed, around two hundred lines of JavaScript that anyone who reads code can go through. It needs no WebGL, only JavaScript being enabled. Your image stays on your device, as with everything else on this page.

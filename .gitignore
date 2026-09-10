@@ -8,3 +8,6 @@ docs/site/
 # Local IDE / agent config (Claude Code, Cursor)
 .claude/
 .cursor/
+
+# 本機檢查用的暫存（tools/check_redact_detect.mjs 抓的樣張）
+/.cache/
