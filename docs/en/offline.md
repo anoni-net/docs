@@ -8,26 +8,26 @@ hide:
 
 # :material-wifi-off: Offline reading
 
-The whole site can be stored on a phone or computer and opens without a network. This page explains how to prepare, how to confirm it worked, and is where you manage what stays on the device.
+The whole site can be stored on a phone or computer and opens without a network. This page is where you manage what stays on the device, and it is also where you land when the connection is gone. Setting this up for the first time? Work through "Three steps to get ready" below first.
 
 !!! info "Brought here with no network?"
     The page you wanted has not been stored on this device yet. The list below shows only what is still readable here, and the titles open. Reload once the connection is back to return to the normal content. For what else you can do without a network, see [things to try](#Things-to-try-without-a-network) at the end.
-
-## Three steps to get ready
-
-Do this while you still have a connection. Once the network is down, nothing more can be stored.
-
-1. **Open the site**: use an ordinary browser such as Chrome, Edge, Firefox or Safari to open [anoni.net/docs](index.md), and leave Tor Browser aside for now (the reason is in the [install section](#Install-this-site-as-an-offline-app)). A card slides up from the bottom of the home page asking you to choose a reading language. Pick one. The core chapters for that language then download in the background, about 12 MB of text. If the card does not appear, open any second page in the same language and the download starts just the same.
-2. **Decide how much to carry**: come back to this page and look at "Offline content on this device" below. When "pages stored automatically" shows a few dozen, step one is done. If the number is still small, the background download may still be running, so wait a moment and reload. To carry the whole site, press "Save everything". To carry only some sections, expand them, tick the pages and press "Apply changes". What the site stores automatically is cleared and downloaded again on every release. What you save yourself stays. If you already know your role, [Start by role](start/index.md) has a one-press button that stores everything that path links to.
-3. **Confirm it worked**: switch the device to airplane mode, or turn off Wi-Fi and mobile data, then return to the [home page](index.md) and open a few pages. Stored pages open directly. Pages that were never stored bring you back here, and the list shrinks to what is still readable.
-
-Spend another minute to [install it as an app](#Install-this-site-as-an-offline-app), so that with no connection you tap an icon instead of opening a browser and hunting for a bookmark.
 
 ## Offline content on this device
 
 <div id="offline-library"></div>
 
 <script src="../js/offline-library.js"></script>
+
+## Three steps to get ready
+
+Do this while you still have a connection. Once the network is down, nothing more can be stored.
+
+1. **Open the site**: use an ordinary browser such as Chrome, Edge, Firefox or Safari to open [anoni.net/docs](index.md), and leave Tor Browser aside for now (the reason is in the [install section](#Install-this-site-as-an-offline-app)). A card slides up from the bottom of the home page asking you to choose a reading language. Pick one. The core chapters for that language then download in the background, about 12 MB of text. If the card does not appear, open any second page in the same language and the download starts just the same.
+2. **Decide how much to carry**: look at "Offline content on this device" above. When "pages stored automatically" shows a few dozen, step one is done. If the number is still small, the background download may still be running, so wait a moment and reload. To carry the whole site, press "Save everything". To carry only some sections, expand them, tick the pages and press "Apply changes". If you already know your role, [Start by role](start/index.md) has a one-press button that stores everything that path links to.
+3. **Confirm it worked**: switch the device to airplane mode, or turn off Wi-Fi and mobile data, then return to the [home page](index.md) and open a few pages. Stored pages open directly. Pages that were never stored bring you back here, and the list shrinks to what is still readable.
+
+Spend another minute to [install it as an app](#Install-this-site-as-an-offline-app), so that with no connection you tap an icon instead of opening a browser and hunting for a bookmark.
 
 ## Install this site as an offline app
 
@@ -46,45 +46,45 @@ Once installed, open the app once while you still have a connection and let it s
 
 Tor Browser and the onion and IPFS builds do not offer offline reading, for privacy reasons: those builds do not register a background Service Worker. Prepare from an ordinary browser on anoni.net when you need an offline fallback, and go back to Tor Browser for everyday anonymous reading.
 
-## What gets stored on your device
+??? info "What gets stored on your device"
 
-Opening the site in an ordinary browser stores only this page and the styles it needs at first, about 1 MB, so that you can at least reach this page without a network. The core chapters for a language (concepts, tools, advanced, regional, plus the four utilities that get used during an outage) download in the background only after you have picked a reading language on the home page, or opened a second page in that language. Nothing needs to be installed for this. The extra step is there so that someone who reads one page and leaves does not spend 12 MB of mobile data. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
+    Opening the site in an ordinary browser stores only this page and the styles it needs at first, about 1 MB, so that you can at least reach this page without a network. The core chapters for a language (concepts, tools, advanced, regional, plus the four utilities that get used during an outage) download in the background only after you have picked a reading language on the home page, or opened a second page in that language. Nothing needs to be installed for this. The extra step is there so that someone who reads one page and leaves does not spend 12 MB of mobile data. Switching to another language downloads that language separately, so only the languages you actually read end up on your device. Pages you visit afterwards are stored as well. That part follows the same switch above as the core chapters: turn it off and the pages you read stop staying on the device.
 
-The chapters the site stores for you follow the site version. Every release clears that copy and downloads it again, and the download only covers the language you have open at that moment. To make sure something stays on the device, use "Save everything" above the list. What that button stores is not affected by site releases.
+    The chapters the site stores for you follow the site version. Every release clears that copy and downloads it again, and the download only covers the language you have open at that moment. To make sure something stays on the device, use "Save everything" above the list. What that button stores is not affected by site releases.
 
-"Save everything" only covers the language you are currently in. To carry all three languages, open the offline reading page in each language and press it once there.
+    "Save everything" only covers the language you are currently in. To carry all three languages, open the offline reading page in each language and press it once there.
 
-Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored. The "Save everything" button includes them, and says so next to the button. If your situation calls for picking, use the list instead.
+    Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored. The "Save everything" button includes them, and says so next to the button. If your situation calls for picking, use the list instead.
 
-The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
+    The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
 
-Pages you tick yourself are not affected by that option. They always come with their images, and the size shown on screen already counts them.
+    Pages you tick yourself are not affected by that option. They always come with their images, and the size shown on screen already counts them.
 
-The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
+    The reading language you pick from the language menu is stored in the same place. The site uses it to decide which language version to open when you arrive at the home page next time, and for nothing else. The language your browser reports is never read: on Tor Browser that value is always English, so acting on it would send readers in Taiwan to the English version.
 
-"Clear all offline content" above removes both what the site stored and what you picked, and turns off automatic storage, so the pages you read after clearing do not stay on the device either. Turn the switch back on above to resume.
+    "Clear all offline content" above removes both what the site stored and what you picked, and turns off automatic storage, so the pages you read after clearing do not stay on the device either. Turn the switch back on above to resume.
 
-This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 1 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
+    This page itself and the styles it needs are outside that switch, and come back the next time you are online (about 1 MB). They stay because the moment you want to clear what is on the device, or check what is still readable, is often the moment you have no connection, and without this page all that is left is the browser error screen.
 
-## What is left on the device after clearing
+??? info "What is left on the device after clearing"
 
-The clear button does remove the layer a web page can see. We measured it once: with 101 entries in the precache, pressing clear brings the page's own count to 0, and neither what the site stored nor what you ticked is there any more.
+    The clear button does remove the layer a web page can see. We measured it once: with 101 entries in the precache, pressing clear brings the page's own count to 0, and neither what the site stored nor what you ticked is there any more.
 
-The disk is another matter. The browser reclaims that space lazily, so the directory holding this content still occupied more than ten megabytes after clearing, and after a clean browser shutdown the body text of a core chapter page could still be found by searching the browser's profile directory. The browser's own HTTP cache also holds a second copy of the same page, and that copy is outside this button's reach. The measurement was made with Chrome 151 on Linux; we have not tested other browsers or mobile platforms one by one, and their behaviour may differ.
+    The disk is another matter. The browser reclaims that space lazily, so the directory holding this content still occupied more than ten megabytes after clearing, and after a clean browser shutdown the body text of a core chapter page could still be found by searching the browser's profile directory. The browser's own HTTP cache also holds a second copy of the same page, and that copy is outside this button's reach. The measurement was made with Chrome 151 on Linux; we have not tested other browsers or mobile platforms one by one, and their behaviour may differ.
 
-So the scope of this button is: it is enough against someone who picks up your phone and looks through it, and not enough against someone who takes the whole device away for forensic imaging. The defence against the second case is full-disk encryption on the device itself, plus powering the device off before handing it over, because data is only fully encrypted once the device has been shut down and not yet unlocked with a passcode.
+    So the scope of this button is: it is enough against someone who picks up your phone and looks through it, and not enough against someone who takes the whole device away for forensic imaging. The defence against the second case is full-disk encryption on the device itself, plus powering the device off before handing it over, because data is only fully encrypted once the device has been shut down and not yet unlocked with a passcode.
 
-The button also does not cover browsing history, DNS cache, or files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
+    The button also does not cover browsing history, DNS cache, or files you downloaded from the site. Handle those in your browser or system settings. In Chrome this is Clear browsing data. In Firefox it is Clear recent history with "Cookies and site data" ticked under the details. Selecting only "Cached images and files" does not remove site storage.
 
-## The copy inside a device backup
+??? info "The copy inside a device backup"
 
-When a phone has iCloud Backup or Google device backup switched on, whether this offline content ends up in the backup is decided by that backup mechanism. A web page has no reach there, and we have not verified each vendor's behaviour. If it matters to you, turn device backup off, or check in the backup settings whether browser data is included.
+    When a phone has iCloud Backup or Google device backup switched on, whether this offline content ends up in the backup is decided by that backup mechanism. A web page has no reach there, and we have not verified each vendor's behaviour. If it matters to you, turn device backup off, or check in the backup settings whether browser data is included.
 
-The same reasoning applies to storing the whole site. Save everything brings in well over a hundred megabytes, which is not an invisible amount inside backup and sync records. If you only need a few pages, tick them in the list instead and the footprint is far smaller.
+    The same reasoning applies to storing the whole site. Save everything brings in well over a hundred megabytes, which is not an invisible amount inside backup and sync records. If you only need a few pages, tick them in the list instead and the footprint is far smaller.
 
-## When the site has a new version
+??? info "When the site has a new version"
 
-When a new version of the site is available, a notice slides up from the bottom of the screen, and it is applied only after you press Update, which reloads the page you are on. This keeps the content from being swapped out while you are reading. Ignoring the notice is fine: browsing online always gives you the latest content, and the offline copy on your device stays as it is until you press Update.
+    When a new version of the site is available, a notice slides up from the bottom of the screen, and it is applied only after you press Update, which reloads the page you are on. This keeps the content from being swapped out while you are reading. Ignoring the notice is fine: browsing online always gives you the latest content, and the offline copy on your device stays as it is until you press Update.
 
 ## Things to try without a network
 
