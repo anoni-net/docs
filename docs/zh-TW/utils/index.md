@@ -82,6 +82,11 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
+-   :material-file-document-multiple-outline: **[PDF 頁面整理](pdf-pages.md)**
+
+    合併好幾份 PDF、抽出或刪掉某幾頁、換順序、轉方向。輸出是新建的檔案，來源的標題、作者、製作軟體與建立時間都不會跟過來，交給你之前會重新讀一次確認頁數與方向都對。
+
+
 -   :material-image-off-outline: **[檔案 metadata 清除器](strip-metadata.md)**
 
     拿掉照片、影片、錄音、Office 文件與 PDF 裡的 EXIF、GPS、裝置型號、製作軟體、作者與註解欄位，全程在本機處理。照片、影片與錄音的壓縮資料一個位元都沒動，每一段的去留都列給你看。
