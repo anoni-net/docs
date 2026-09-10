@@ -195,9 +195,8 @@
       noSupport:
         "這個瀏覽器沒有提供離線儲存，或者停用了 Service Worker（Tor Browser 屬於後者，onion 版本也不啟用）。這一頁其他段落的說明仍然適用。",
       noIndex: "讀不到頁面清單，可能是目前離線且這份清單還沒被存下來。恢復連線後重新整理即可。",
-      savedCount: "你自己選存的 {n} 頁",
-      autoCount: "網站自動存的 {n} 頁",
-      usage: "本站在這台裝置上佔用 {used}",
+      countLine: "裝置上有你自己選存的 {saved} 頁、網站自動存的 {auto} 頁。",
+      usage: "本站在這台裝置上佔用 {used}。",
       version: "離線內容版本 {version}",
       readyOk: "沒有網路時，{items}都可以開啟。",
       readyMissing: "沒有網路時無法開啟：{items}。連上網路後會自動補回來。",
@@ -206,7 +205,7 @@
       fallbackNotice: "你要開的頁面不在裝置上，你的語言也還沒有存下離線閱讀頁，所以看到的是另一個語言的版本。連上網路之後，用你的語言打開離線閱讀頁就會存進來。",
       readyHome: "首頁",
       readyAssets: "樣式與程式",
-      usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}",
+      usageFree: "本站在這台裝置上佔用 {used}，可用空間還有 {free}。",
       autoLabel: "自動存下核心章節與你讀過的頁面",
       autoHint: "關掉之後網站不再自動存任何內容，你讀過的頁面也不會留在裝置上。這一頁本身與它需要的樣式仍會留著（約 1 MB），沒有網路時你才有地方落腳。你自己勾的頁面不受影響。",
       imagesLabel: "連同核心章節的內文圖一起存",
@@ -216,7 +215,7 @@
       clear: "清除所有離線內容",
       clearConfirm: "確定清除",
       cancel: "取消",
-      refreshEmpty: "你還沒有自己選存頁面。網站自動存的那批會在網站有新版本時一起更新。",
+      refreshEmpty: "「更新已存的內容」現在沒有東西可以更新，你還沒有自己選存頁面。網站自動存的那批會在網站有新版本時一起更新。",
       failed: "沒有完成。可能是連線中斷，稍後再試一次。",
       clearing: "清除中",
       cleared: "已清除，自動存下內容也一併關掉了，接下來你讀過的頁面不會留在裝置上。下次連上網時會補回這一頁本身與它需要的樣式（約 1 MB），讓你在沒有網路時仍有地方落腳。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
@@ -254,9 +253,8 @@
       noSupport:
         "这个浏览器没有提供离线存储，或者停用了 Service Worker（Tor Browser 属于后者，onion 版本也不启用）。这一页其他段落的说明仍然适用。",
       noIndex: "读不到页面清单，可能是当前离线且这份清单还没有被存下来。恢复连接后刷新即可。",
-      savedCount: "你自己选存的 {n} 页",
-      autoCount: "网站自动存的 {n} 页",
-      usage: "本站在这台设备上占用 {used}",
+      countLine: "设备上有你自己选存的 {saved} 页、网站自动存的 {auto} 页。",
+      usage: "本站在这台设备上占用 {used}。",
       version: "离线内容版本 {version}",
       readyOk: "没有网络时，{items}都可以打开。",
       readyMissing: "没有网络时无法打开：{items}。连上网络后会自动补回来。",
@@ -265,7 +263,7 @@
       fallbackNotice: "你要开的页面不在设备上，你的语言也还没有存下离线阅读页，所以看到的是另一个语言的版本。连上网络之后，用你的语言打开离线阅读页就会存进来。",
       readyHome: "首页",
       readyAssets: "样式与程序",
-      usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}",
+      usageFree: "本站在这台设备上占用 {used}，可用空间还有 {free}。",
       autoLabel: "自动存下核心章节与你读过的页面",
       autoHint: "关掉之后网站不再自动存任何内容，你读过的页面也不会留在设备上。这一页本身与它需要的样式仍会留着（约 1 MB），没有网络时你才有地方落脚。你自己勾的页面不受影响。",
       imagesLabel: "连同核心章节的内文图一起存",
@@ -275,7 +273,7 @@
       clear: "清除所有离线内容",
       clearConfirm: "确定清除",
       cancel: "取消",
-      refreshEmpty: "你还没有自己选存页面。网站自动存的那批会在网站有新版本时一起更新。",
+      refreshEmpty: "「更新已存的内容」现在没有东西可以更新，你还没有自己选存页面。网站自动存的那批会在网站有新版本时一起更新。",
       failed: "没有完成。可能是连接中断，稍后再试一次。",
       clearing: "清除中",
       cleared: "已清除，自动存下内容也一并关掉了，接下来你读过的页面不会留在设备上。下次连上网时会补回这一页本身与它需要的样式（约 1 MB），让你在没有网络时仍有地方落脚。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
@@ -313,9 +311,8 @@
       noSupport:
         "This browser has no offline storage available, or Service Workers are disabled (Tor Browser is the latter case, and the onion version does not enable them either). The rest of this page still applies.",
       noIndex: "The page list could not be loaded. You may be offline and it has not been stored yet. Reload once you are back online.",
-      savedCount: "{n} pages you chose to keep",
-      autoCount: "{n} pages stored automatically",
-      usage: "This site uses {used} on this device",
+      countLine: "This device holds {saved} pages you chose to keep and {auto} pages stored automatically.",
+      usage: "This site uses {used} on this device.",
       version: "Offline content version {version}",
       readyOk: "Without a network, {items} all open.",
       readyMissing: "Without a network these do not open: {items}. They come back once you are online.",
@@ -324,7 +321,7 @@
       fallbackNotice: "The page you opened is not on this device, and this offline reading page is not stored in your language either, so you are seeing another language's version. Open this page in your language once you are online and it will be stored.",
       readyHome: "the home page",
       readyAssets: "styles and scripts",
-      usageFree: "This site uses {used} on this device, with {free} still available",
+      usageFree: "This site uses {used} on this device, with {free} still available.",
       autoLabel: "Automatically store the core chapters and the pages you read",
       autoHint: "Turning this off stops the site from storing anything automatically, including the pages you read. This page itself and the styles it needs stay (about 1 MB), so you can still get here without a network. Pages you ticked are unaffected.",
       imagesLabel: "Also store the images in the core chapters",
@@ -334,7 +331,7 @@
       clear: "Clear all offline content",
       clearConfirm: "Yes, clear",
       cancel: "Cancel",
-      refreshEmpty: "You have not picked any pages yet. What the site stores automatically updates when a new version of the site arrives.",
+      refreshEmpty: "\"Update what is stored\" has nothing to update yet: you have not picked any pages. What the site stores automatically updates when a new version of the site arrives.",
       failed: "That did not complete. The connection may have dropped. Try again in a moment.",
       clearing: "Clearing",
       cleared: "Cleared, and automatic storage is off, so the pages you read from now on do not stay on this device. Next time you are online, this page itself and the styles it needs come back (about 1 MB) so you can still reach it without a network. Browsing history, DNS cache and files you downloaded are not covered here. Handle those in your browser or system settings.",
@@ -637,14 +634,15 @@
       status.textContent = t.preparing;
       return status;
     }
+    // 三行狀態原本是「名詞片語」「沒有句號的句子」「有句號的句子」三種寫法疊在一起，
+    // 用 <br> 斷行之後讀起來像沒寫完的片段。三行都寫成完整句子並統一以句號收尾。
+    // 頭一行以前是兩個片語用 readyJoin 串起來，英文版會變成
+    // 「0 pages you chose to keep、0 pages stored automatically」，改成各語系一句
+    // 完整的模板之後，中文用頓號、英文用 and，不必再靠共用的分隔符。
     status.appendChild(
-      document.createTextNode(fill("savedCount", { n: state.saved.size }))
-    );
-    // 這個分隔符原本寫死成頓號，英文版於是變成
-    // 「0 pages you chose to keep、0 pages stored automatically」。跟著語系走。
-    status.appendChild(document.createTextNode(t.readyJoin));
-    status.appendChild(
-      document.createTextNode(fill("autoCount", { n: state.precached.size }))
+      document.createTextNode(
+        fill("countLine", { saved: state.saved.size, auto: state.precached.size })
+      )
     );
     // 佔用量由 SW 直接量自己的快取，見 sw.js 的 cacheUsage。可用空間仍舊問瀏覽器，
     // 那是整台裝置的配額，本來就不是這個站算得出來的，慢個幾十秒才更新也沒差。
@@ -1165,6 +1163,8 @@
       // 等於繞過那個決定，所以按之前要讓讀者看見這件事。
       if (missing.length) wrap.appendChild(el("p", "ol-hint", t.saveAllCaution));
     }
+    // 這一句講的是旁邊的「更新已存的內容」，跟上面兩句的主詞不同。三段的樣式一樣、
+    // 縮排也一樣，讀下來像同一串說明，所以句子開頭要先點名是哪一顆按鈕。
     if (state.saved.size === 0) wrap.appendChild(el("p", "ol-hint", t.refreshEmpty));
     return wrap;
   }
