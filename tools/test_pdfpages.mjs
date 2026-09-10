@@ -39,7 +39,7 @@ const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'pdfpages.js 裡找不到純邏輯與介面的分界註解');
 const logic = src.slice(start, end);
 const tool = new Function(
-  `${logic}\n return { OUTPUT_NAME, MAX_FILES, MAX_PAGES, ROTATIONS, parsePageRange, normalizeRotation, describeSize, buildPlan, verifyPlan, moveFile, compactRange, allPages, humanSize };`
+  `${logic}\n return { OUTPUT_NAME, MAX_FILES, MAX_PAGES, ROTATIONS, parsePageRange, normalizeRotation, describeSize, buildPlan, verifyPlan, moveFile, compactRange, allPages, humanSize, INSPECT, findInPages, summarizeText, normalizeForSearch };`
 )();
 
 let passed = 0;
@@ -292,11 +292,81 @@ test('原始碼裡沒有任何送出或留存資料的手段', () => {
     /document\.cookie/,
     /navigator\.clipboard\.read/,
     /new\s+Worker\s*\(\s*['"`]https?:/,
-    /\bimport\s*\(/,
   ];
   for (const re of banned) {
     assert.ok(!re.test(code), `pdfpages.js 出現了 ${re}`);
   }
+});
+
+test('唯一的動態載入是同源的 pdf.js，網址由相對路徑組出來', () => {
+  // 原本這裡連 import( 都直接禁掉。檢查那一段要載 pdf.js，所以改成精確條件
+  // 而不是放寬：只准一個 import()，而且它的來源必須是那個用 new URL 組出來的
+  // 同源基底，不能是任何寫死的網址。
+  const calls = [...code.matchAll(/\bimport\(([^)]*)\)/g)].map((m) => m[1].trim());
+  assert.equal(calls.length, 1, `import() 出現 ${calls.length} 次，應該只有一次`);
+  assert.equal(calls[0], 'base + "pdf.min.mjs"', 'import() 的來源不是組好的同源基底');
+  assert.ok(
+    /const base = new URL\("\.\.\/vendor\/pdfjs\/", location\.href\)\.href;/.test(code),
+    'pdf.js 的基底不是用相對路徑組出來的'
+  );
+  assert.ok(
+    /GlobalWorkerOptions\.workerSrc = base \+ "pdf\.worker\.min\.mjs";/.test(code),
+    'worker 的來源不是同一個基底'
+  );
+});
+
+test('pdf.js 解析別人給的檔案時關掉會執行程式碼的能力', () => {
+  // CVE-2024-4367 就是從字型那條路做到任意程式碼執行。這一頁只要文字與縮圖。
+  const m = code.match(/getDocument\(\{([\s\S]*?)\}\)/);
+  assert.ok(m, '找不到 getDocument 的呼叫');
+  assert.ok(/isEvalSupported:\s*false/.test(m[1]), '沒有關掉 isEvalSupported');
+  assert.ok(/enableXfa:\s*false/.test(m[1]), '沒有關掉 XFA');
+});
+
+test('搜尋的正規化讓大小寫、全形與空白都不會造成假的安心', () => {
+  // 「找不到」如果是因為全形半形不同，讀者會以為遮乾淨了
+  const texts = ['王小明 的 電話', 'ABC-123', '', '全形　空白'];
+  assert.deepEqual(tool.findInPages(texts, '王小明'), [1]);
+  assert.deepEqual(tool.findInPages(texts, '王 小 明'), [1]);
+  assert.deepEqual(tool.findInPages(texts, 'abc-123'), [2]);
+  assert.deepEqual(tool.findInPages(texts, 'ＡＢＣ-１２３'), [2]);
+  assert.deepEqual(tool.findInPages(texts, '全形空白'), [4]);
+  assert.deepEqual(tool.findInPages(texts, '找不到的'), []);
+  // 空字串是「還沒有要找什麼」，跟「找不到」是兩件事
+  assert.equal(tool.findInPages(texts, ''), null);
+  assert.equal(tool.findInPages(texts, '   '), null);
+});
+
+test('同一段字出現在好幾頁就全部列出來', () => {
+  const texts = ['王小明', '別的', '王小明也在這裡'];
+  assert.deepEqual(tool.findInPages(texts, '王小明'), [1, 3]);
+});
+
+test('文字摘要數的是實際字元，不含空白', () => {
+  const s = tool.summarizeText(['一二三', '', '  四 五  ', null]);
+  assert.equal(s.pages, 4);
+  assert.equal(s.chars, 5);
+  assert.equal(s.pagesWithText, 2);
+});
+
+test('找到的時候要說「還在檔案裡」，不能說反', () => {
+  // 這一行是整個檢查最要緊的一句。寫反的話讀者會以為遮乾淨了就把檔案送出去。
+  // 實際發生過：zh-TW 與 zh-CN 一度寫成「文字層裡沒有」，意思整個相反。
+  const blocks = [...src.matchAll(/searchHit:\s*"([^"]+)"/g)].map((m) => m[1]);
+  assert.equal(blocks.length, 3, `searchHit 有 ${blocks.length} 個語系`);
+  for (const line of blocks) {
+    assert.ok(/\{pages\}/.test(line), 'searchHit 沒有帶頁碼');
+    assert.ok(!/沒有。|没有。|not in the text layer/i.test(line), `searchHit 講反了：${line}`);
+  }
+  // 至少要提到文字層或檔案裡還有這件事
+  assert.ok(/文字層/.test(blocks[0]), 'zh-TW 沒有講出文字層');
+  assert.ok(/文字层/.test(blocks[1]), 'zh-CN 沒有講出文字層');
+  assert.ok(/text layer/i.test(blocks[2]), 'en 沒有講出文字層');
+});
+
+test('檢查的上限有訂，不然大檔會把手機吃掉', () => {
+  assert.ok(tool.INSPECT.maxChars > 0);
+  assert.ok(tool.INSPECT.maxThumbs > 0 && tool.INSPECT.maxThumbs <= 200, '縮圖上限太高');
 });
 
 test('只從同一個站台載入 pdf-lib，網址是相對路徑', () => {

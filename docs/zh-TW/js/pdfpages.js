@@ -271,6 +271,54 @@
     return (n / 1024 / 1024).toFixed(1).replace(/\.0$/, "") + " MB";
   }
 
+
+  // 檢查那一段的上限。抽出來的文字全部留在記憶體裡，太大的檔案會把手機吃掉。
+  const INSPECT = {
+    // 單一檔案抽出來的文字上限，超過就截斷並說出來
+    maxChars: 400000,
+    // 預覽縮圖的寬度（CSS 像素）。夠看出是哪一頁就好，不是拿來讀內容的。
+    thumbWidth: 96,
+    // 頁數超過這個值就不畫縮圖。三百頁的縮圖在手機上會把記憶體用光。
+    maxThumbs: 60,
+  };
+
+  // 比對用的正規化：大小寫、全形半形、連續空白都不該讓「找不到」變成假的安心。
+  function normalizeForSearch(text) {
+    return String(text == null ? "" : text)
+      .replace(/[\uff01-\uff5e]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+      .replace(/\s+/g, "")
+      .toLowerCase();
+  }
+
+  /**
+   * 在抽出來的各頁文字裡找一段字，回傳它還留在哪幾頁（1 起算）。
+   *
+   * 這是這一段的重點功能：讀者貼上他以為已經遮掉的名字，如果還找得到，
+   * 那個遮蔽就是無效的。空字串回 null，代表「還沒有要找什麼」，跟「找不到」
+   * 是兩件事，呼叫端要分開處理。
+   */
+  function findInPages(pageTexts, needle) {
+    const target = normalizeForSearch(needle);
+    if (!target) return null;
+    const hits = [];
+    for (let i = 0; i < pageTexts.length; i += 1) {
+      if (normalizeForSearch(pageTexts[i]).indexOf(target) !== -1) hits.push(i + 1);
+    }
+    return hits;
+  }
+
+  /** 把逐頁的文字彙整成一份摘要，畫面上先給數量再給細節。 */
+  function summarizeText(pageTexts) {
+    let chars = 0;
+    let pagesWithText = 0;
+    for (const text of pageTexts) {
+      const n = String(text || "").replace(/\s+/g, "").length;
+      chars += n;
+      if (n > 0) pagesWithText += 1;
+    }
+    return { chars: chars, pagesWithText: pagesWithText, pages: pageTexts.length };
+  }
+
   // --- 介面 ---
 
   const root = document.getElementById("pdfpages-tool");
@@ -319,6 +367,24 @@
       border-color: var(--md-accent-fg-color);
     }
     #pdfpages-tool .pp-page-size { display: block; font-size: .6rem; opacity: .7; }
+    #pdfpages-tool .pp-thumb {
+      display: block; width: 100%; height: auto; margin: 0 auto .15rem;
+      border: .05rem solid var(--md-default-fg-color--lightest); background: #fff;
+    }
+    #pdfpages-tool .pp-page { max-width: 5rem; }
+    #pdfpages-tool .pp-check {
+      border-top: .05rem dashed var(--md-default-fg-color--lighter);
+      margin: .6rem 0 0; padding: .5rem 0 0;
+    }
+    #pdfpages-tool .pp-check-line { font-size: .72rem; line-height: 1.7; margin: .2rem 0; }
+    #pdfpages-tool .pp-check-hit {
+      color: #c62828; font-weight: 700;
+    }
+    #pdfpages-tool .pp-text {
+      font-size: .66rem; line-height: 1.6; max-height: 14rem; overflow: auto;
+      background: var(--md-default-fg-color--lightest); padding: .5rem;
+      border-radius: .1rem; margin: .5rem 0 0; white-space: pre-wrap; word-break: break-all;
+    }
     #pdfpages-tool .pp-status { font-size: .74rem; margin: .8rem 0 .3rem; }
     #pdfpages-tool .pp-actions { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .8rem; }
     #pdfpages-tool button, #pdfpages-tool a.pp-dl {
@@ -378,6 +444,19 @@
       nothing: "還沒有選到任何一頁",
       rotateLeft: "整份左轉",
       rotateRight: "整份右轉",
+      inspect: "看裡面有什麼",
+      inspecting: "檢查中",
+      inspectHint: "抽出文字、數附件與註解，並畫出每一頁的縮圖。第一次按會載入約 1.8 MB 的解析器。",
+      checkSummary: "抽得出 {chars} 個字，分布在 {pagesWithText} / {pages} 頁。附件 {attachments}，註解 {annotations}，表單欄位 {fields}。",
+      checkNone: "抽不出任何文字。這份多半是掃描成影像的，畫面上的字不在文字層裡。",
+      checkFailed: "這一份讀不進解析器，可能有這個工具處理不了的結構。",
+      checkTruncated: "文字太多，只抽了前面一段，搜尋結果會不完整。",
+      searchLabel: "找一段字還在不在",
+      searchPlaceholder: "貼上你以為已經遮掉的名字或號碼",
+      searchHit: "還在第 {pages} 頁的文字層裡。畫面上遮掉了不等於檔案裡沒有，收檔的人複製貼上就讀得到。",
+      searchMiss: "在抽得出的文字裡找不到。",
+      showAll: "展開全部文字",
+      hideAll: "收起文字",
       make: "產生整理好的 PDF",
       done: "整理完成，{n} 頁，{size}。輸出已經重新讀過一次，頁數與每一頁的方向都對得上。",
       download: "下載 " + OUTPUT_NAME,
@@ -397,6 +476,7 @@
         empty: "沒有選到任何一頁。",
         build: "組檔案的時候出錯，這份 PDF 可能有這個工具處理不了的結構。",
         verify: "輸出跟預期對不上，已經擋下來不給下載。這是工具的問題，請到 GitHub 回報。",
+        pdfjsMissing: "檢查需要的解析器載入失敗，重試一次。整理頁面那半邊不受影響。",
       },
     },
     "zh-CN": {
@@ -417,6 +497,19 @@
       nothing: "还没有选到任何一页",
       rotateLeft: "整份左转",
       rotateRight: "整份右转",
+      inspect: "看里面有什么",
+      inspecting: "检查中",
+      inspectHint: "抽出文字、数附件与注释，并画出每一页的缩图。第一次按会加载约 1.8 MB 的解析器。",
+      checkSummary: "抽得出 {chars} 个字，分布在 {pagesWithText} / {pages} 页。附件 {attachments}，注释 {annotations}，表单字段 {fields}。",
+      checkNone: "抽不出任何文字。这份多半是扫描成图像的，画面上的字不在文字层里。",
+      checkFailed: "这一份读不进解析器，可能有这个工具处理不了的结构。",
+      checkTruncated: "文字太多，只抽了前面一段，搜索结果会不完整。",
+      searchLabel: "找一段字还在不在",
+      searchPlaceholder: "粘贴你以为已经遮掉的名字或号码",
+      searchHit: "还在第 {pages} 页的文字层里。画面上遮掉了不等于文件里没有，收文件的人复制粘贴就读得到。",
+      searchMiss: "在抽得出的文字里找不到。",
+      showAll: "展开全部文字",
+      hideAll: "收起文字",
       make: "生成整理好的 PDF",
       done: "整理完成，{n} 页，{size}。输出已经重新读过一次，页数与每一页的方向都对得上。",
       download: "下载 " + OUTPUT_NAME,
@@ -436,6 +529,7 @@
         empty: "没有选到任何一页。",
         build: "组文件的时候出错，这份 PDF 可能有这个工具处理不了的结构。",
         verify: "输出跟预期对不上，已经拦下来不给下载。这是工具的问题，请到 GitHub 回报。",
+        pdfjsMissing: "检查需要的解析器加载失败，重试一次。整理页面那半边不受影响。",
       },
     },
     en: {
@@ -456,6 +550,19 @@
       nothing: "No pages selected yet",
       rotateLeft: "Rotate all left",
       rotateRight: "Rotate all right",
+      inspect: "Look inside",
+      inspecting: "Checking",
+      inspectHint: "Pulls out the text, counts attachments and annotations, and draws a thumbnail of every page. The first press loads about 1.8 MB of parser.",
+      checkSummary: "{chars} characters of text across {pagesWithText} of {pages} pages. Attachments {attachments}, annotations {annotations}, form fields {fields}.",
+      checkNone: "No text could be extracted. This is most likely a scan, so what you see on the page is not in a text layer.",
+      checkFailed: "This file would not open in the parser. It may use a structure this tool cannot handle.",
+      checkTruncated: "Too much text to hold, so only the first part was read. Search results will be incomplete.",
+      searchLabel: "Check whether something is still in there",
+      searchPlaceholder: "Paste the name or number you thought was redacted",
+      searchHit: "Still in the text layer on page {pages}. Covered on screen does not mean gone from the file: whoever receives it can copy and paste.",
+      searchMiss: "Not found in the text that could be extracted.",
+      showAll: "Show all the text",
+      hideAll: "Hide the text",
       make: "Build the PDF",
       done: "Done: {n} pages, {size}. The output was read back once, and the page count and every page's orientation match.",
       download: "Download " + OUTPUT_NAME,
@@ -475,6 +582,7 @@
         empty: "No pages selected.",
         build: "Something went wrong while building the file. This PDF may use a structure this tool cannot handle.",
         verify: "The output does not match what was planned, so it has been withheld. This is a bug. Please report it on GitHub.",
+        pdfjsMissing: "The parser needed for the check failed to load. Try again. The page tidy-up side is unaffected.",
       },
     },
   };
@@ -518,11 +626,39 @@
     return pdfLibLoading;
   }
 
+  // pdf.js 按下「看裡面有什麼」才載入。合計約 1.8 MB，是這一頁最大的一塊，
+  // 只想整理頁面的人不該為它等待。整理那半邊只用 pdf-lib，完全不碰這裡。
+  //
+  // 離線副本要包含這兩個檔案，它們列在這一頁 frontmatter 的 offline_assets 裡。
+  let pdfjsLoading = null;
+
+  function loadPdfJs() {
+    if (!pdfjsLoading) {
+      pdfjsLoading = (async () => {
+        try {
+          const base = new URL("../vendor/pdfjs/", location.href).href;
+          // 動態載入，網址由相對路徑組出來，跟 pdf-lib 那一支同源
+          const lib = await import(base + "pdf.min.mjs");
+          lib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.mjs";
+          return lib;
+        } catch (err) {
+          // 失敗就讓下一次重試，不要卡在一個永遠不會完成的 promise 上
+          pdfjsLoading = null;
+          return null;
+        }
+      })();
+    }
+    return pdfjsLoading;
+  }
+
   let files = [];
   let nextId = 1;
   let working = false;
   let error = null;
   let result = null;
+  // 檢查跟產生各自有自己的忙碌狀態，兩顆按鈕的轉圈才不會互相干擾
+  let inspecting = false;
+  let needle = "";
 
   function releaseResult() {
     if (result && result.url) URL.revokeObjectURL(result.url);
@@ -634,6 +770,110 @@
   function turnFile(file, delta) {
     for (const page of file.pages) page.turn = (page.turn || 0) + delta;
     releaseResult();
+    render();
+  }
+
+  // 把每一頁的文字抽出來，順便數附件、註解與表單欄位，並畫出縮圖。
+  //
+  // 這一段回答的是「我以為遮掉的東西還在不在」。黑框畫在視覺層而文字層原封不動
+  // 是最經典的外洩方式，畫面上看不出來，複製貼上就讀得到。
+  async function inspectAll() {
+    if (inspecting || working) return;
+    inspecting = true;
+    error = null;
+    render();
+
+    const lib = await loadPdfJs();
+    if (!lib) {
+      inspecting = false;
+      error = "pdfjsMissing";
+      render();
+      return;
+    }
+
+    for (const file of files) {
+      if (file.check) continue;
+      let doc = null;
+      let result = null;
+      try {
+        // isEvalSupported 關掉。pdf.js 解析的是別人給的檔案，2024 年那個
+        // CVE-2024-4367 就是從字型那條路做到任意程式碼執行。這一頁只要文字
+        // 與縮圖，不需要那些能力。XFA 表單同理不開。
+        doc = await lib.getDocument({
+          data: file.bytes.slice(),
+          isEvalSupported: false,
+          disableAutoFetch: true,
+          enableXfa: false,
+        }).promise;
+
+        const texts = [];
+        let annotations = 0;
+        let truncated = false;
+        const drawThumbs = doc.numPages <= INSPECT.maxThumbs;
+        for (let n = 1; n <= doc.numPages; n += 1) {
+          const page = await doc.getPage(n);
+          if (!truncated) {
+            const content = await page.getTextContent();
+            const text = content.items.map((item) => item.str || "").join(" ");
+            texts.push(text);
+          } else {
+            texts.push("");
+          }
+          const soFar = texts.reduce((a, t) => a + t.length, 0);
+          if (soFar > INSPECT.maxChars) truncated = true;
+
+          const annots = await page.getAnnotations();
+          annotations += annots.length;
+
+          if (drawThumbs) {
+            const base = page.getViewport({ scale: 1 });
+            const viewport = page.getViewport({ scale: INSPECT.thumbWidth / base.width });
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(viewport.width));
+            canvas.height = Math.max(1, Math.round(viewport.height));
+            await page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
+            if (file.pages[n - 1]) file.pages[n - 1].thumb = canvas.toDataURL("image/png");
+          }
+          page.cleanup();
+        }
+
+        // 附件與表單欄位是加分項，沒有就算了。這幾支在某些檔案上會丟例外，
+        // 不能讓它們把已經抽好的文字一起拖下水。
+        let attachments = 0;
+        try {
+          const attached = await doc.getAttachments();
+          attachments = attached ? Object.keys(attached).length : 0;
+        } catch (err) { /* 沒有附件時某些檔案會丟例外 */ }
+
+        let fields = 0;
+        try {
+          const data = await doc.getFieldObjects();
+          fields = data ? Object.keys(data).length : 0;
+        } catch (err) { /* 同上 */ }
+
+        result = {
+          texts: texts,
+          summary: summarizeText(texts),
+          annotations: annotations,
+          attachments: attachments,
+          fields: fields,
+          truncated: truncated,
+          showAll: false,
+        };
+      } catch (err) {
+        result = null;
+      }
+
+      // 收尾另外包。destroy() 失敗過一次，而它丟出來的例外原本會把上面已經
+      // 抽好的結果整份換成「讀不進解析器」，畫面上看起來像解析失敗。
+      try {
+        if (doc) await doc.destroy();
+      } catch (err) { /* 收尾失敗不影響已經拿到的結果 */ }
+
+      file.check = result || { failed: true };
+    }
+
+    inspecting = false;
     render();
   }
 
@@ -851,7 +1091,92 @@
     renderPagesInto(pages, file);
     box.appendChild(pages);
 
+    if (file.check) box.appendChild(renderCheck(file));
+
     return box;
+  }
+
+  // 檢查結果。先給數量，再給那個真正有用的動作：找一段字還在不在。
+  function renderCheck(file) {
+    const wrap = el("div", "pp-check");
+    const check = file.check;
+
+    if (check.failed) {
+      wrap.appendChild(el("p", "pp-error", t.checkFailed));
+      return wrap;
+    }
+
+    const s = check.summary;
+    wrap.appendChild(
+      el(
+        "p",
+        "pp-check-line",
+        s.chars
+          ? fill(t.checkSummary, {
+              chars: s.chars,
+              pagesWithText: s.pagesWithText,
+              pages: s.pages,
+              attachments: check.attachments,
+              annotations: check.annotations,
+              fields: check.fields,
+            })
+          : t.checkNone
+      )
+    );
+    if (check.truncated) wrap.appendChild(el("p", "pp-note", t.checkTruncated));
+
+    if (!s.chars) return wrap;
+
+    const row = el("div", "pp-range");
+    const label = el("label", "", t.searchLabel);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = needle;
+    input.placeholder = t.searchPlaceholder;
+    input.id = "pp-find-" + file.id;
+    label.setAttribute("for", input.id);
+    const answer = el("p", "pp-check-line");
+    const say = () => {
+      const hits = findInPages(check.texts, needle);
+      if (hits === null) {
+        answer.textContent = "";
+        answer.className = "pp-check-line";
+        return;
+      }
+      if (hits.length) {
+        answer.textContent = fill(t.searchHit, { pages: hits.join("、") });
+        answer.className = "pp-check-line pp-check-hit";
+      } else {
+        answer.textContent = t.searchMiss;
+        answer.className = "pp-check-line";
+      }
+    };
+    input.addEventListener("input", () => {
+      // 搜尋字串是跨檔案共用的，讀者通常拿同一個名字問每一份
+      needle = input.value;
+      say();
+    });
+    row.appendChild(label);
+    row.appendChild(input);
+    wrap.appendChild(row);
+    say();
+    wrap.appendChild(answer);
+
+    const toggle = button(check.showAll ? t.hideAll : t.showAll, "", () => {
+      check.showAll = !check.showAll;
+      render();
+    });
+    wrap.appendChild(toggle);
+
+    if (check.showAll) {
+      const pre = el("pre", "pp-text");
+      pre.textContent = check.texts
+        .map((text, i) => "— " + (i + 1) + " —\n" + text)
+        .join("\n\n");
+      wrap.appendChild(pre);
+    }
+
+    return wrap;
   }
 
   function renderPagesInto(container, file) {
@@ -863,6 +1188,14 @@
       node.type = "button";
       node.setAttribute("aria-pressed", on ? "true" : "false");
       node.appendChild(document.createTextNode(String(index + 1)));
+
+      if (page.thumb) {
+        const img = document.createElement("img");
+        img.className = "pp-thumb";
+        img.src = page.thumb;
+        img.alt = "";
+        node.appendChild(img);
+      }
 
       const shown = describeSize(page.width, page.height, normalizeRotation(page.rotation, page.turn || 0));
       if (shown && shown.w) {
@@ -913,6 +1246,11 @@
     status = el("p", "pp-status", statusText());
     root.appendChild(status);
 
+    // 第一次按會下載一大塊東西，先講出來，不要讓人按了才發現在等
+    if (!files.some((f) => f.check) && !inspecting) {
+      root.appendChild(el("p", "pp-note", t.inspectHint));
+    }
+
     const actions = el("div", "pp-actions");
     const make = el("button", "pp-primary", working ? "" : t.make);
     make.type = "button";
@@ -929,9 +1267,29 @@
       make.disabled = !totalPages();
     }
     actions.appendChild(make);
+
+    // 檢查排在產生後面。它是可選的，整理頁面不需要它，而它要載入的東西是這一頁
+    // 最大的一塊，不該讓只想合併檔案的人也付這個成本。
+    const look = el("button", "");
+    look.type = "button";
+    if (inspecting) {
+      const spin = el("span", "anoni-spinner");
+      spin.setAttribute("aria-hidden", "true");
+      look.appendChild(spin);
+      look.appendChild(document.createTextNode(t.inspecting));
+      look.setAttribute("aria-busy", "true");
+      look.disabled = true;
+    } else {
+      look.textContent = t.inspect;
+      look.addEventListener("click", inspectAll);
+      look.disabled = working;
+    }
+    actions.appendChild(look);
+
     actions.appendChild(
       button(t.clear, "", () => {
         files = [];
+        needle = "";
         releaseResult();
         error = null;
         render();
