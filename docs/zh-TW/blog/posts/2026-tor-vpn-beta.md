@@ -22,7 +22,7 @@ description: "Tor Project 在 2026 年 9 月 9 日發表 Tor VPN Beta 的開發�
 
 ![Tor VPN beta 的主視覺，左側寫著已可在 download.torproject.org 取得，下方是 F-Droid 與 Google Play 的下載徽章，右側手機顯示已連線畫面與上下傳流量](https://forum.torproject.org/uploads/default/original/2X/1/1705e443e3cb9fe39eedf2432cf559090323d6fe.png){style="border-radius: 10px;"}
 
-Tor Browser 多年來是保護隱私與繞過審查最有效的工具之一，而現在多數人上網的入口是各自慣用的 app，不是瀏覽器。把同一套保護延伸到通訊軟體、社群與電子郵件，是 Tor Project 的使用者研究裡反覆出現的要求，使用者想要一個簡單的方式保護整台裝置。Tor VPN 的構想在 2021 年因此成形，第一個平台選 Android，那裡的需求最強烈，也最能觸及受審查地區的使用者。
+Tor Browser[^tor-browser] 多年來是保護隱私與繞過審查最有效的工具之一，而現在多數人上網的入口是各自慣用的 app，不是瀏覽器。把同一套保護延伸到通訊軟體、社群與電子郵件，是 Tor Project 的使用者研究裡反覆出現的要求，使用者想要一個簡單的方式保護整台裝置。Tor VPN 的構想在 2021 年因此成形，第一個平台選 Android，那裡的需求最強烈，也最能觸及受審查地區的使用者。
 
 Tor VPN Beta 作為第一個版本推出時就預期要從真實使用中學習，去年秋天限量發布之後，最主要的使用情境很快清楚起來，使用者要的是解除封鎖。這件事決定了發布至今的開發與支援優先順序，也決定了產品往後的方向。
 
@@ -32,7 +32,7 @@ Tor VPN Beta 作為第一個版本推出時就預期要從真實使用中學習�
 
 ## app 隔離的設計來自 Tor Browser
 
-Tor VPN Beta 底下的模型與商業 VPN 根本不同。裝置上每個 app 各自取得一條自己的 Tor circuit（連線路徑），共用同一條通道的做法沒有採用，一個 app 的活動因此不容易被關聯到另一個 app。這種 app 隔離大量參考了 Tor Browser 的跨站追蹤防護，預設就在降低跨 app 的關聯，對行動裝置來說是裝置層網路保護的第一步。
+Tor VPN Beta 底下的模型與商業 VPN 根本不同。裝置上每個 app 各自取得一條自己的 Tor circuit（連線路徑）[^circuit]，共用同一條通道的做法沒有採用，一個 app 的活動因此不容易被關聯到另一個 app。這種 app 隔離大量參考了 Tor Browser 的跨站追蹤防護，預設就在降低跨 app 的關聯，對行動裝置來說是裝置層網路保護的第一步。
 
 app 層級的控制隨版本演進做得更好用。Apps 畫面現在可以搜尋，要找某一個特定的 app 並決定它是否走 Tor，速度快得多。
 
@@ -42,27 +42,27 @@ app 層級的控制隨版本演進做得更好用。Apps 畫面現在可以搜�
 
 出口選擇是一般人熟悉的 VPN 功能，對想繞過審查的使用者來說不見得是對的做法。官方把這件事列為開發階段的可用性測試與早期回饋帶來的最重要一課。
 
-最初的方向是讓使用者對出口選擇有更多控制權，設計在紙上看起來很合理，做出來卻造成混淆。想繞過封鎖的使用者去調了出口位置，他們需要的功能是橋接（bridges）。Tor 的運作方式與使用者以為的運作方式之間有落差，目前的設計因此要求先把 app 連上 Tor 網路，之後才能選出口。官方仍然想更完整地探索出口選擇，前提是引入的方式不會在高風險情境下誘發操作錯誤。
+最初的方向是讓使用者對出口選擇有更多控制權，設計在紙上看起來很合理，做出來卻造成混淆。想繞過封鎖的使用者去調了出口位置，他們需要的功能是橋接（bridges）[^bridge]。Tor 的運作方式與使用者以為的運作方式之間有落差，目前的設計因此要求先把 app 連上 Tor 網路，之後才能選出口。官方仍然想更完整地探索出口選擇，前提是引入的方式不會在高風險情境下誘發操作錯誤。
 
 ## 使用者集中在高度審查的地區
 
 早期的採用集中在高度審查地區，包含伊朗與土庫曼。Tor Browser for Android 的使用者分布偏向全球北方，Tor VPN Beta 這邊看到的是全球南方使用者更深的投入，網路限制對他們是每天要面對的現實。
 
-規避能力的改善力度因此加倍。一個例子是在早期版本之一（1.4.0 beta）優先加入 WebTunnel 橋接，它讓 Tor 流量看起來像一般的加密網頁流量，審查方要偵測並封鎖連線因此變得更難。橋接支援整體也修掉幾個錯誤、做了幾項體驗改善，目標是讓橋接用起來更可靠。
+規避能力的改善力度因此加倍。一個例子是在早期版本之一（1.4.0 beta）優先加入 WebTunnel[^webtunnel] 橋接，它讓 Tor 流量看起來像一般的加密網頁流量，審查方要偵測並封鎖連線因此變得更難。橋接支援整體也修掉幾個錯誤、做了幾項體驗改善，目標是讓橋接用起來更可靠。
 
 ## 穩定性、可重現建置與 F-Droid
 
-早期發布之後，相當大一部分的工作投入在提升穩定性。Tor VPN 建立在 [Arti 這個以 Rust 撰寫的下一代 Tor 實作](https://blog.torproject.org/announcing-arti/){target="_blank"}之上，底層換成新的、扎實的技術基礎，舊架構上繼續打補丁的路沒有走。立即可見的好處是可靠性提升，崩潰次數減少，對各種網路狀況的處理也更好。
+早期發布之後，相當大一部分的工作投入在提升穩定性。Tor VPN 建立在 [Arti 這個以 Rust 撰寫的下一代 Tor 實作](https://blog.torproject.org/announcing-arti/){target="_blank"}之上[^arti]，底層換成新的、扎實的技術基礎，舊架構上繼續打補丁的路沒有走。立即可見的好處是可靠性提升，崩潰次數減少，對各種網路狀況的處理也更好。
 
-另外投入的兩項是把建置做成可重現，以及把 app 送上 F-Droid。可重現建置讓任何人都能驗證手上執行的二進位檔與公開的原始碼相符，F-Droid 讓使用者不必依賴 Google Play 就能安裝與更新，對一個以隱私與安全為重的工具來說，兩件事都重要。
+另外投入的兩項是把建置做成可重現[^reproducible]，以及把 app 送上 F-Droid[^fdroid]。可重現建置讓任何人都能驗證手上執行的二進位檔與公開的原始碼相符，F-Droid 讓使用者不必依賴 Google Play 就能安裝與更新，對一個以隱私與安全為重的工具來說，兩件事都重要。
 
-速度上，Tor VPN Beta 的行為不像為速度最佳化的商業 VPN，而 [Tor 網路的效能這幾年確實提升了](https://blog.torproject.org/congestion-contrl-047/){target="_blank"}，[這些改善也在持續帶進行動端的體驗](https://gitlab.com/guardianproject/tormobile/arti-mobile){target="_blank"}。C 語言版 Tor 上的部分效能功能，例如壅塞控制（congestion control），在 Arti 還沒有，把這些能力移植過去是接下來的工作之一。
+速度上，Tor VPN Beta 的行為不像為速度最佳化的商業 VPN，而 [Tor 網路的效能這幾年確實提升了](https://blog.torproject.org/congestion-contrl-047/){target="_blank"}，[這些改善也在持續帶進行動端的體驗](https://gitlab.com/guardianproject/tormobile/arti-mobile){target="_blank"}。C 語言版 Tor 上的部分效能功能，例如壅塞控制（congestion control）[^congestion]，在 Arti 還沒有，把這些能力移植過去是接下來的工作之一。
 
-Tor VPN 的 UX 團隊負責人與產品經理 Duncan 在文中補充，專案的形狀很快就被使用者的真實用法推著走，尤其是需要可靠且涵蓋整台裝置的規避能力的那些人。團隊因此把力氣放在替行動端的 Tor 打好基礎，做成以 Arti 與 [Onionmasq](https://gitlab.torproject.org/ahf/onionmasq){target="_blank"} 為核心的模組化 Tor 堆疊，能隨真實使用一起演進。這些元件現在可以被多個應用程式重複使用，生態系的碎片化與長期維護風險都因此降低。官方也寫明工作還沒結束，Tor Browser 目前仍然是這件事能做到什麼程度的標準，讓 Tor VPN 隨時間逼近那個水準是團隊目標的一部分。
+Tor VPN 的 UX 團隊負責人與產品經理 Duncan 在文中補充，專案的形狀很快就被使用者的真實用法推著走，尤其是需要可靠且涵蓋整台裝置的規避能力的那些人。團隊因此把力氣放在替行動端的 Tor 打好基礎，做成以 Arti 與 [Onionmasq](https://gitlab.torproject.org/ahf/onionmasq){target="_blank"}[^onionmasq] 為核心的模組化 Tor 堆疊，能隨真實使用一起演進。這些元件現在可以被多個應用程式重複使用，生態系的碎片化與長期維護風險都因此降低。官方也寫明工作還沒結束，Tor Browser 目前仍然是這件事能做到什麼程度的標準，讓 Tor VPN 隨時間逼近那個水準是團隊目標的一部分。
 
 ## 接下來的方向
 
-Tor VPN Beta 是橫跨數年的協作成果。官方在文中感謝 [The Guardian Project](https://guardianproject.info/){target="_blank"} 的指引與關鍵的低階行動端函式庫，也感謝 LEAP Encryption Access Project 的高品質工作，少了任何一方這個 app 都不會問世。[開發持續在公開狀態下進行](https://blog.torproject.org/code-audit-tor-vpn/){target="_blank"}，由使用者的真實用法塑形。
+Tor VPN Beta 是橫跨數年的協作成果。官方在文中感謝 [The Guardian Project](https://guardianproject.info/){target="_blank"}[^guardian] 的指引與關鍵的低階行動端函式庫，也感謝 LEAP Encryption Access Project[^leap] 的高品質工作，少了任何一方這個 app 都不會問世。[開發持續在公開狀態下進行](https://blog.torproject.org/code-audit-tor-vpn/){target="_blank"}，由使用者的真實用法塑形。
 
 具體的方向有三個，改善受限環境下的規避能力，把更多效能功能帶進 Arti，以及調整使用者體驗來減少混淆與風險。想參與開發方向的人可以到[改版過的下載頁面](https://download.torproject.org/){target="_blank"}，除了下載 APK 或從 Google Play 商店安裝，現在也能透過 F-Droid 取得 Tor VPN Beta。
 
@@ -72,9 +72,23 @@ Tor VPN Beta 是橫跨數年的協作成果。官方在文中感謝 [The Guardia
 
 **橋接與出口選擇的混淆同樣會發生在這裡**：官方在可用性測試裡看到的誤用，是被封鎖的人去調出口位置。本地推廣或帶工作坊時，這一組概念的先後順序要先交代，連不上要處理的是橋接，出口位置解決的是另一件事。橋接類型的說明見 [Snowflake 與橋接](../../tools/tor-snowflake.md)。
 
-**Beta 的警語仍然有效**：官方支援文件到現在還標著可能洩漏資訊、不應用於任何敏感用途。對記者、人權工作者這類高風險使用者，現階段它適合測試與熟悉，真正高敏感的任務仍用 [Tor Browser](../../tools/what-is-tor.md) 或 Tails。安全稽核的結果見 [Cure53 完成 Tor VPN 安全稽核](./2026-code-audit-for-tor-vpn-completed-by-cure53.md)，工具之間的取捨比較見 [VPN 選擇指南](../../tools/vpn-guide.md)。
+**Beta 的警語仍然有效**：官方支援文件到現在還標著可能洩漏資訊、不應用於任何敏感用途[^torvpn-about]。對記者、人權工作者這類高風險使用者，現階段它適合測試與熟悉，真正高敏感的任務仍用 [Tor Browser](../../tools/what-is-tor.md) 或 Tails[^tails]。安全稽核的結果見 [Cure53 完成 Tor VPN 安全稽核](./2026-code-audit-for-tor-vpn-completed-by-cure53.md)，工具之間的取捨比較見 [VPN 選擇指南](../../tools/vpn-guide.md)。
 
 !!! info "參考資料"
 
     - 原文全文：[Tor VPN Beta: What we've learned building our own VPN for Android from scratch](https://blog.torproject.org/tor-vpn-beta/){target="_blank"}，Tor Project 官方部落格，2026 年 9 月 9 日
     - 圖片來源：[Tor Project 官方論壇的同一篇討論串](https://forum.torproject.org/t/tor-vpn-beta-what-weve-learned-building-our-own-vpn-for-android-from-scratch/22104){target="_blank"}，本篇引用論壇上的原始尺寸檔案
+
+[^tor-browser]: Tor Browser 是 Tor Project 維護的瀏覽器，以 Firefox ESR 為基礎，連線經由 Tor 網路送出，並內建跨站追蹤隔離與瀏覽器指紋一致化。站內介紹見[什麼是 Tor](../../tools/what-is-tor.md)，官方下載頁見 [Download Tor Browser](https://www.torproject.org/download/){target="_blank"} - Tor Project。查證日 2026-09-11。
+[^circuit]: Tor circuit（連線路徑）是流量在 Tor 網路裡經過的一組中繼，通常由入口、中間與出口三個節點組成，每一段各自加密。單一節點只知道相鄰的前後一段，沒有任何一個節點同時掌握來源與目的地。站內說明見[什麼是 Tor](../../tools/what-is-tor.md)。
+[^bridge]: 橋接（bridge）是沒有公開列在 Tor 目錄裡的入口中繼。公開的入口 IP 被封鎖時，改用橋接仍然連得上 Tor 網路，取得方式與可用類型見 [橋接](https://support.torproject.org/zh-TW/bridges/){target="_blank"} - Tor Project 官方支援文件。查證日 2026-09-11。
+[^webtunnel]: WebTunnel 是一種可插拔傳輸（pluggable transport），把 Tor 流量包進 HTTPS 連線裡，在網路上看起來像連往一般網站，適合用在會針對 Tor 特徵過濾的網路。站內的架設教學見[如何搭建 Tor WebTunnel 橋接](../../community/setup-tor-webtunnel.md)，設計說明見 [Hiding in plain sight: Introducing WebTunnel](https://blog.torproject.org/introducing-webtunnel-evading-censorship-by-hiding-in-plain-sight/){target="_blank"} - Tor Project 部落格，2024 年 3 月 12 日。查證日 2026-09-11。
+[^arti]: Arti 是 Tor Project 以 Rust 從頭撰寫的 Tor 實作，用來接手 C 語言版 tor 的角色。它以函式庫為主要形式，方便被其他軟體嵌進去使用，Tor VPN 的底層就是它。站內的版本紀錄見 [Arti 更新紀錄](../../changelog/arti.md)，原始碼見 [arti](https://gitlab.torproject.org/tpo/core/arti){target="_blank"} - Tor Project GitLab。查證日 2026-09-11。
+[^reproducible]: 可重現建置（reproducible builds）指同一份原始碼在不同機器、不同時間建置，都產生位元完全相同的成品。任何人因此可以自行建置一次，比對雜湊值，確認手上的執行檔確實來自公開的那份原始碼。說明見 [Reproducible Builds](https://reproducible-builds.org/){target="_blank"} - Reproducible Builds 專案。查證日 2026-09-11。
+[^fdroid]: F-Droid 是 Android 上的自由軟體 app 商店，收錄的 app 由 F-Droid 自行從原始碼建置，安裝與更新都不需要 Google 帳號。Tor VPN Beta 的頁面見 [Tor VPN Beta on F-Droid](https://f-droid.org/en/packages/org.torproject.vpn/){target="_blank"} - F-Droid。查證日 2026-09-11。
+[^congestion]: 壅塞控制（congestion control）是 Tor 0.4.7 引入的流量控制機制，讓連線依實際網路狀況調整送出速率，降低排隊造成的延遲。說明見 [Congestion Control Arrives in Tor 0.4.7-stable!](https://blog.torproject.org/congestion-contrl-047/){target="_blank"} - Tor Project 部落格，2022 年 5 月 4 日。查證日 2026-09-11。
+[^onionmasq]: Onionmasq 是以 Rust 撰寫的隧道介面，攔截裝置或個別 app 的 TCP、UDP 與 DNS 流量並改由 Tor 送出，Tor VPN 的網路層就是它。站內介紹見 [OnionMasq 的流量隔離實驗](./tor-sambent-onionmasq.md)，原始碼見 [onionmasq](https://gitlab.torproject.org/tpo/core/onionmasq){target="_blank"} - Tor Project GitLab。查證日 2026-09-11。
+[^guardian]: The Guardian Project 是專做行動裝置隱私工具的組織，Orbot 與 Android 上多個低階網路函式庫都出自他們，與 Tor Project 長期合作。組織介紹見 [Guardian Project](https://guardianproject.info/){target="_blank"}。查證日 2026-09-11。
+[^leap]: LEAP Encryption Access Project 是開發加密通訊工具的自由軟體團隊，主要產品是 LEAP VPN，一套針對受審查環境設計的開源白標 VPN，RiseupVPN 與 Bitmask 共用它的程式基礎。組織介紹見 [LEAP](https://leap.se/){target="_blank"}。查證日 2026-09-11。
+[^tails]: Tails 是從 USB 隨身碟開機的作業系統，所有對外連線經由 Tor，關機後不在電腦上留下痕跡。站內介紹見[什麼是 Tails](../../tools/what-is-tails.md)，官方網站見 [Tails](https://tails.net/){target="_blank"}。查證日 2026-09-11。
+[^torvpn-about]: Beta 警語的出處。[About Tor VPN](https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/){target="_blank"} - Tor Project 官方支援文件。查證日 2026-09-11。
