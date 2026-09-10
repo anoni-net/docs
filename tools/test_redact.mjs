@@ -32,6 +32,10 @@ const SRC = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'redact.js');
 const src = fs.readFileSync(SRC, 'utf8');
 const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 
+const WORKER = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'redact-worker.js');
+const workerSrc = fs.readFileSync(WORKER, 'utf8');
+const workerCode = workerSrc.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
 const start = src.indexOf('// --- 純邏輯');
 const end = src.indexOf('// --- 介面');
 assert.ok(start > 0 && end > start, 'redact.js 裡找不到純邏輯與介面的分界註解');
@@ -513,6 +517,122 @@ test('提示文字要講出點一下可以移掉', () => {
   assert.ok(/點一下就移掉/.test(STRINGS['zh-TW'].hint));
   assert.ok(/点一下就移掉/.test(STRINGS.zh.hint));
   assert.ok(/tap one to take it away/i.test(STRINGS.en.hint));
+});
+
+
+// ---------------------------------------------------------------------------
+// 掃描跑在 worker 裡，主執行緒不會凍住
+// ---------------------------------------------------------------------------
+
+test('按下去之後先讓瀏覽器畫一次，再開始工作', () => {
+  // 這是回報「按下去沒反應」的根因。第二次按的時候 pico 已經在記憶體裡，
+  // await 只讓出一個 microtask，整段偵測會在同一個工作裡做完，按鈕從頭到尾
+  // 沒有變過。量過六倍節流下是按下去之後 2.5 秒才有第一個畫面。
+  const fn = src.slice(src.indexOf('async function findFaces'), src.indexOf('async function exportImage'));
+  const at = fn.indexOf('render();');
+  const yieldAt = fn.indexOf('requestAnimationFrame(() => setTimeout(next, 0))');
+  assert.ok(at > 0, 'findFaces 裡沒有 render()');
+  assert.ok(yieldAt > at, 'render() 之後沒有等一次繪製，畫面來不及更新就開始算');
+  assert.ok(
+    yieldAt < fn.indexOf('detectInWorker'),
+    '讓出的位置在開始工作之後，那就沒有用'
+  );
+});
+
+test('掃描交給 worker，網址是本站的相對路徑', () => {
+  const m = code.match(/new Worker\(new URL\((['"])([^'"]+)\1, location\.href\)\.href\)/);
+  assert.ok(m, 'worker 不是用相對路徑從同源組出來的');
+  assert.equal(m[2], '../../js/redact-worker.js');
+  assert.ok(
+    fs.existsSync(WORKER),
+    'worker 檔案不存在'
+  );
+});
+
+test('worker 起不來就退回頁面裡做，功能不會消失', () => {
+  const fn = src.slice(src.indexOf('async function findFaces'), src.indexOf('async function exportImage'));
+  assert.ok(/if \(!dets\) dets = await detectInPage\(plan\);/.test(fn), '沒有退路');
+  assert.ok(code.includes('workerDead'), '起不來之後沒有記下來，會一直重試');
+  assert.ok(
+    src.includes('async function detectInPage'),
+    '退回頁面裡做的那一條不見了'
+  );
+});
+
+test('偵測中畫布不收拖曳，跟按鈕的狀態一致', () => {
+  const bind = src.slice(src.indexOf('function bindPointer'), src.indexOf('function button('));
+  assert.ok(
+    /pointerdown[\s\S]{0,400}?if \(!source \|\| working \|\| detecting\) return;/.test(bind),
+    '偵測中還收得到拖曳，那一下會排隊到偵測結束才處理'
+  );
+});
+
+test('偵測中每秒只換秒數，不重畫整個介面', () => {
+  assert.ok(code.includes('elapsedNode'), '沒有單獨的秒數節點');
+  const tick = src.slice(src.indexOf('function startElapsed'), src.indexOf('function stopElapsed'));
+  assert.ok(tick.includes('elapsedNode.nodeValue'), '計時器沒有直接換文字節點');
+  assert.ok(!/\brender\(\)/.test(tick), '計時器每秒重畫整個介面，底圖會跟著重畫');
+});
+
+test('三個語系都給了秒數與時間預期', () => {
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    assert.ok(STRINGS[lang].elapsed.includes('{s}'), `${lang} 的 elapsed 沒有帶秒數`);
+    assert.ok(STRINGS[lang].findingNote, `${lang} 少了 findingNote`);
+  }
+  // 轉圈只說明「在做事」，沒有說明「要多久」。手機上這一段有兩三秒
+  assert.ok(/兩到三秒/.test(STRINGS['zh-TW'].findingNote));
+  assert.ok(/两到三秒/.test(STRINGS.zh.findingNote));
+  assert.ok(/two to three seconds/i.test(STRINGS.en.findingNote));
+});
+
+test('worker 只從本站相對路徑載入 pico 與級聯資料', () => {
+  const imp = workerCode.match(/importScripts\((['"])([^'"]+)\1\)/);
+  assert.ok(imp, 'worker 沒有載入 pico');
+  assert.equal(imp[2], '../utils/vendor/pico/pico.js');
+  assert.ok(
+    /const url = new URL\("\.\.\/utils\/vendor\/pico\/facefinder", location\.href\)\.href;/.test(workerCode),
+    '級聯檔的網址不是用相對路徑組出來的'
+  );
+  const calls = [...workerCode.matchAll(/fetch\(([^)]*)\)/g)].map((m) => m[1].trim());
+  assert.equal(calls.length, 1, `worker 裡 fetch 出現 ${calls.length} 次，應該只有一次`);
+  assert.equal(calls[0], 'url', 'fetch 的參數不是那個組好的 url 變數');
+  assert.ok(!/https?:\/\//.test(workerCode), 'worker 原始碼裡出現絕對網址');
+});
+
+test('worker 裡沒有任何把資料送出去或留下來的手段', () => {
+  // postMessage 是它回覆開啟它的頁面用的，不算送出去。其餘一律不准。
+  for (const bad of [
+    'XMLHttpRequest', 'sendBeacon', 'WebSocket', 'EventSource',
+    'localStorage', 'sessionStorage', 'indexedDB', 'document.cookie', 'importScripts(http',
+  ]) {
+    assert.ok(!workerCode.includes(bad), `worker 裡出現 ${bad}`);
+  }
+  const posts = [...workerCode.matchAll(/postMessage\(/g)];
+  assert.ok(posts.length >= 1, 'worker 沒有回傳結果');
+  assert.ok(
+    !/self\.postMessage\([^)]*rgba/.test(workerCode),
+    'worker 把像素傳回去了，回去的應該只有座標'
+  );
+});
+
+test('三語系的離線清單都收了 worker', () => {
+  for (const [lang, dir] of [['zh-TW', 'zh-TW'], ['zh-CN', 'zh-CN'], ['en', 'en']]) {
+    const md = fs.readFileSync(
+      path.join(HERE, '..', 'docs', dir, 'utils', 'redact.md'), 'utf8'
+    );
+    assert.ok(
+      md.includes('- js/redact-worker.js'),
+      `${lang} 的 offline_assets 沒有收 worker，存下這一頁的人斷網時偵測會退回慢的那條`
+    );
+  }
+  for (const dir of ['en', 'zh-CN']) {
+    const link = path.join(HERE, '..', 'docs', dir, 'js', 'redact-worker.js');
+    assert.ok(fs.existsSync(link), `${dir}/js/redact-worker.js 不存在`);
+    assert.equal(
+      fs.readlinkSync(link), '../../zh-TW/js/redact-worker.js',
+      `${dir}/js/redact-worker.js 不是指向 zh-TW 的 symlink`
+    );
+  }
 });
 
 // ---------------------------------------------------------------------------

@@ -32,6 +32,10 @@
  *
  * 偵測用的程式與資料按下按鈕才載入，只想手動拉框的人不會被迫下載。
  *
+ * 掃描本身跑在 worker 裡（js/redact-worker.js）。run_cascade 是同步的，留在主
+ * 執行緒上就是整頁凍住，量過一張手機拍的照片在六倍 CPU 節流下要兩秒多，而且
+ * 那段時間連轉圈都不會轉。worker 起不來就退回頁面裡做，卡幾秒比功能消失好。
+ *
  * === 不做的事 ===
  *
  * 不做全自動遮蔽，理由見上一段。不做模糊與馬賽克。不處理影片。
@@ -349,6 +353,8 @@
       beforeHint: "選好圖之後可以先按「自動找出人臉」框一輪，機器漏掉的自己補。",
       findFaces: "自動找出人臉",
       finding: "尋找中",
+      elapsed: "（{s} 秒）",
+      findingNote: "掃描整張照片，手機上通常兩到三秒，照片越大越久。這段時間頁面照常可以操作。",
       foundSome: "找到 {n} 張臉，用藍框標起來，還沒有遮住任何東西。不需要遮的點一下移掉，其餘的按「全部遮起來」。側臉、墨鏡、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
       foundNone: "沒有找到正面、直立又夠大的臉。這一張要自己拉框。",
       markLeft: "還有 {n} 個藍框沒有決定。不需要遮的點一下移掉，其餘的按「全部遮起來」。",
@@ -384,6 +390,8 @@
       beforeHint: "选好图之后可以先按「自动找出人脸」框一轮，机器漏掉的自己补。",
       findFaces: "自动找出人脸",
       finding: "寻找中",
+      elapsed: "（{s} 秒）",
+      findingNote: "扫描整张照片，手机上通常两到三秒，照片越大越久。这段时间页面照常可以操作。",
       foundSome: "找到 {n} 张脸，用蓝框标起来，还没有遮住任何东西。不需要遮的点一下移掉，其余的按「全部遮起来」。侧脸、墨镜、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
       foundNone: "没有找到正面、直立又够大的脸。这一张要自己拉框。",
       markLeft: "还有 {n} 个蓝框没有决定。不需要遮的点一下移掉，其余的按「全部遮起来」。",
@@ -419,6 +427,8 @@
       beforeHint: "Once an image is loaded you can press \"Find faces\" for a first pass, then add whatever it missed yourself.",
       findFaces: "Find faces",
       finding: "Looking",
+      elapsed: " ({s}s)",
+      findingNote: "Scanning the whole photo. On a phone this usually takes two to three seconds, longer for larger photos. The page stays usable meanwhile.",
       foundSome: "Found {n} faces and outlined them in blue. Nothing is covered yet. Tap any outline you do not need, then press \"Cover them all\". Profiles, dark glasses, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
       foundNone: "No front-facing, upright, large enough face found. Draw the boxes yourself on this one.",
       markLeft: "{n} outlines are still undecided. Tap the ones you do not need, then press \"Cover them all\".",
@@ -480,6 +490,10 @@
   // 偵測跟輸出各自有自己的忙碌狀態，兩顆按鈕的轉圈才不會互相干擾
   let detecting = false;
   let detectNote = null;
+  // 偵測開始的時間、每秒跳一次的計時器，以及按鈕上那個放秒數的文字節點
+  let detectSince = 0;
+  let detectTicker = null;
+  let elapsedNode = null;
   let canvas = null;
   let ctx = null;
   let rafPending = false;
@@ -671,15 +685,21 @@
     return picoLoading;
   }
 
-  // 把畫面上的底圖轉成 pico 要的灰階緩衝區。偵測跑在縮小過的副本上，
-  // 座標再按比例放回原尺寸。
-  function grayscaleFrom(bitmap, width, height) {
+  // 把畫面上的底圖縮到工作尺寸再取出 RGBA。canvas 只有主執行緒碰得到，這一段
+  // 搬不進 worker。量過 4032x3024 的照片縮到 1920x1440 是 84ms，佔整段不到 4%。
+  function rgbaFrom(bitmap, width, height) {
     const work = document.createElement("canvas");
     work.width = width;
     work.height = height;
     const workCtx = work.getContext("2d", { willReadFrequently: true });
     workCtx.drawImage(bitmap, 0, 0, width, height);
-    const rgba = workCtx.getImageData(0, 0, width, height).data;
+    return workCtx.getImageData(0, 0, width, height).data;
+  }
+
+  // 灰階緩衝區，pico 吃的格式。worker 那條路自己在 worker 裡轉，這一份是給
+  // 退回頁面裡做的時候用的。
+  function grayscaleFrom(bitmap, width, height) {
+    const rgba = rgbaFrom(bitmap, width, height);
     const gray = new Uint8Array(width * height);
     for (let i = 0; i < gray.length; i += 1) {
       const at = i * 4;
@@ -688,49 +708,144 @@
     return gray;
   }
 
+  // 掃描搬到 worker 裡。起不來或中途死掉就記下來不再重試，退回頁面裡做。
+  let worker = null;
+  let workerDead = false;
+  let workerJob = 0;
+
+  function startWorker() {
+    if (worker || workerDead) return worker;
+    try {
+      worker = new Worker(new URL("../../js/redact-worker.js", location.href).href);
+    } catch (err) {
+      workerDead = true;
+      worker = null;
+    }
+    return worker;
+  }
+
+  // 把縮好的 RGBA 轉移給 worker。轉移之後主執行緒那一份就失效了，退回頁面裡做
+  // 的時候會從底圖重新取一次，那只要 84ms。
+  function detectInWorker(rgba, width, height) {
+    const node = startWorker();
+    if (!node) return Promise.resolve(null);
+    const id = workerJob + 1;
+    workerJob = id;
+    return new Promise((resolve) => {
+      const finish = (value) => {
+        node.removeEventListener("message", onMessage);
+        node.removeEventListener("error", onError);
+        resolve(value);
+      };
+      const onMessage = (event) => {
+        const data = event.data || {};
+        if (data.id !== id) return;
+        finish(data.ok ? data.dets : null);
+      };
+      const onError = () => {
+        workerDead = true;
+        node.terminate();
+        worker = null;
+        finish(null);
+      };
+      node.addEventListener("message", onMessage);
+      node.addEventListener("error", onError);
+      node.postMessage(
+        {
+          id: id,
+          rgba: rgba.buffer,
+          width: width,
+          height: height,
+          shiftFactor: DETECT.shiftFactor,
+          minSize: DETECT.minSize,
+          scaleFactor: DETECT.scaleFactor,
+          iou: DETECT.iou,
+          minQuality: DETECT.minQuality,
+        },
+        [rgba.buffer]
+      );
+    });
+  }
+
+  // 退回頁面裡做的那一條。worker 起不來的時候才走這裡，會卡住幾秒。
+  async function detectInPage(plan) {
+    const classify = await loadPico();
+    if (!classify) return null;
+    const lib = picoLib();
+    try {
+      const gray = grayscaleFrom(source.bitmap, plan.width, plan.height);
+      const raw = lib.run_cascade(
+        { pixels: gray, nrows: plan.height, ncols: plan.width, ldim: plan.width },
+        classify,
+        {
+          shiftfactor: DETECT.shiftFactor,
+          minsize: DETECT.minSize,
+          maxsize: Math.max(plan.width, plan.height),
+          scalefactor: DETECT.scaleFactor,
+        }
+      );
+      return lib.cluster_detections(raw, DETECT.iou).filter((det) => det[3] > DETECT.minQuality);
+    } catch (err) {
+      return null;
+    }
+  }
+
+  // 偵測中每秒把按鈕上的秒數換掉。不重畫整個介面，那會連底圖一起重畫，在手機
+  // 上每秒多花十幾毫秒，而且要換的只有一個文字節點。
+  function startElapsed() {
+    detectSince = Date.now();
+    stopElapsed();
+    detectTicker = setInterval(() => {
+      if (!detecting || !elapsedNode) return;
+      const secs = Math.floor((Date.now() - detectSince) / 1000);
+      elapsedNode.nodeValue = secs >= 1 ? fill(t.elapsed, { s: secs }) : "";
+    }, 1000);
+  }
+
+  function stopElapsed() {
+    if (detectTicker) clearInterval(detectTicker);
+    detectTicker = null;
+    elapsedNode = null;
+  }
+
   async function findFaces() {
     if (!source || detecting || working) return;
     detecting = true;
     detectNote = null;
     error = null;
     render();
+    // 先讓瀏覽器把「尋找中」畫出來再開始工作。少了這一步，第二次按的時候 pico
+    // 已經在記憶體裡，await 只讓出一個 microtask，整段偵測會在同一個工作裡做完，
+    // 按鈕從頭到尾沒有變過。量過六倍節流下是按下去之後 2.5 秒才有第一個畫面。
+    //
+    // 用 rAF 再接一個 timeout，不只是 setTimeout。單獨的 setTimeout 只保證換一個
+    // 工作，不保證那之間畫過一次。掃描交給 worker 之後這一步影響不大，但 worker
+    // 起不來退回頁面裡做的時候，主執行緒仍然會被擋住，那時就靠它。
+    await new Promise((next) => requestAnimationFrame(() => setTimeout(next, 0)));
+    startElapsed();
 
-    const classify = await loadPico();
-    if (!classify) {
-      detecting = false;
-      error = "detectMissing";
-      render();
-      return;
-    }
-
-    const lib = picoLib();
     const plan = detectSize(source.width, source.height, DETECT.maxSide);
-    let found = [];
+    let dets = null;
     try {
-      const gray = grayscaleFrom(source.bitmap, plan.width, plan.height);
-      const image = {
-        pixels: gray,
-        nrows: plan.height,
-        ncols: plan.width,
-        ldim: plan.width,
-      };
-      const raw = lib.run_cascade(image, classify, {
-        shiftfactor: DETECT.shiftFactor,
-        minsize: DETECT.minSize,
-        maxsize: Math.max(plan.width, plan.height),
-        scalefactor: DETECT.scaleFactor,
-      });
-      found = lib
-        .cluster_detections(raw, DETECT.iou)
-        .filter((det) => det[3] > DETECT.minQuality)
-        .map((det) => detectionToBox(det, plan.scale, source.width, source.height))
-        .filter((box) => box && !isCovered(box, boxes));
+      dets = await detectInWorker(
+        rgbaFrom(source.bitmap, plan.width, plan.height), plan.width, plan.height
+      );
     } catch (err) {
+      dets = null;
+    }
+    if (!dets) dets = await detectInPage(plan);
+    stopElapsed();
+
+    if (!dets) {
       detecting = false;
       error = "detectMissing";
       render();
       return;
     }
+
+    const found = dets
+      .map((det) => detectionToBox(det, plan.scale, source.width, source.height))
+      .filter((box) => box && !isCovered(box, boxes));
 
     // 直接指派而不是接在後面。重按一次偵測得到的是同一批，接上去會變成兩層。
     marks = found;
@@ -748,7 +863,9 @@
     working = true;
     error = null;
     render();
-    await new Promise((next) => setTimeout(next, 0));
+    // 跟 findFaces 同一個理由：單獨的 setTimeout 只保證換一個工作，不保證那之間
+    // 畫過一次，而重新編碼再解開驗證這一段是同步的。
+    await new Promise((next) => requestAnimationFrame(() => setTimeout(next, 0)));
     try {
       dragging = null;
       draw({ marks: false });
@@ -781,7 +898,9 @@
 
   function bindPointer(target) {
     target.addEventListener("pointerdown", (event) => {
-      if (!source || working) return;
+      // 偵測中不收拖曳。按鈕在那個狀態下全部停用，畫布也要一致，不然拖出來的框
+      // 會排隊等到偵測結束才處理，讀者看不出那一下有沒有算數。
+      if (!source || working || detecting) return;
       event.preventDefault();
       const p = toImagePoint(
         event.clientX, event.clientY, target.getBoundingClientRect(), target.width, target.height
@@ -925,6 +1044,15 @@
 
     root.appendChild(el("p", "rd-status", boxes.length ? fill(t.count, { n: boxes.length }) : t.none));
 
+    // 掃描要幾秒，按下去之後就講出來。轉圈只說明「在做事」，沒有說明「要多久」，
+    // 而在手機上這一段有兩三秒，不給預期的話讀者會以為當掉了。
+    if (detecting) {
+      const busy = el("p", "rd-note", t.findingNote);
+      busy.setAttribute("role", "status");
+      busy.setAttribute("aria-live", "polite");
+      root.appendChild(busy);
+    }
+
     // 偵測的結果講在狀態列底下。找到幾張、以及它抓不到什麼，兩件事要一起說，
     // 只講找到幾張會讓人以為剩下的都乾淨了。
     if (detectNote) {
@@ -971,6 +1099,9 @@
       spin.setAttribute("aria-hidden", "true");
       find.appendChild(spin);
       find.appendChild(document.createTextNode(t.finding));
+      // 秒數單獨一個文字節點，計時器每秒只換它，不重畫整個介面
+      elapsedNode = document.createTextNode("");
+      find.appendChild(elapsedNode);
       find.setAttribute("aria-busy", "true");
     }
     find.disabled = working || detecting;
@@ -998,6 +1129,7 @@
     actions.appendChild(reset);
 
     const another = button(t.another, null, () => {
+      stopElapsed();
       releaseResult();
       releaseSource();
       boxes = [];
@@ -1050,7 +1182,7 @@
 
   // Ctrl+Z 復原上一個方框。只在有圖的時候接手，焦點在輸入欄位時不搶。
   document.addEventListener("keydown", (event) => {
-    if (!source || working || !boxes.length) return;
+    if (!source || working || detecting || !boxes.length) return;
     if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== "z") return;
     const target = event.target;
     if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;

@@ -5,6 +5,7 @@ icon: material/selection-remove
 offline_assets:
   # 臉部偵測用的程式與級聯資料是動態載入的，頁面裡沒有 script 標籤。離線副本
   # 仍然要包含它們，不然存下這一頁的人在斷網時按了自動找出人臉不會有反應。
+  - js/redact-worker.js
   - utils/vendor/pico/pico.js
   - utils/vendor/pico/facefinder
 ---

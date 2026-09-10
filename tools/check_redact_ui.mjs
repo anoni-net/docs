@@ -24,6 +24,12 @@
  *   - 按下全部遮起來，藍色像素要歸零，留下的臉要變成純黑，被點掉的那一張不可以黑
  *   - 產生出來的結果要說 3 處，也就是點掉的那一張真的沒有被算進去
  *
+ * 最後再按一次偵測，這一次盯的是回饋本身。回報過「按下去整個介面凍住」，根因是
+ * findFaces 少了 exportImage 已經有的那一行讓出，第二次按的時候 pico 已經在記憶體
+ * 裡，await 只讓出一個 microtask，整段掃描在同一個工作裡做完，按鈕從頭到尾沒變過。
+ * 所以這裡量的是「點擊到第一個畫面」與「轉圈有沒有被畫出來」，並確認掃描真的交給
+ * 了 worker。CPU 節流開到四倍，讓這一段在快機器上也測得出來。
+ *
  * 需要建置產物（docs/output）與 .cache 裡的樣張，兩者缺一就跳過，所以沒有進 CI。
  * 改過 redact.js 的介面之後在本機跑一次。
  *
@@ -184,6 +190,17 @@ const check = (ok, label) => {
 
 check(await evaluate(`${helpers} !!cv`), '圖載進來，畫布出現');
 
+// worker 是 startWorker 建一次就留著重用的，攔截要在第一次按之前裝好
+await evaluate(`
+  window.__seen = { spinner: false, firstFrame: null, workers: [] };
+  const RealWorker = window.Worker;
+  window.Worker = function (url, opts) {
+    window.__seen.workers.push(String(url));
+    return new RealWorker(url, opts);
+  };
+  true;
+`);
+
 await evaluate(`${helpers} btn(/自動找出人臉|自动找出人脸|Find faces/).click(); true`);
 await wait(4000);
 const found = await evaluate(`${helpers} ({
@@ -246,6 +263,47 @@ const done = await evaluate(`(() => {
 })()`);
 check(done.name === 'redacted.jpg' || done.name === 'redacted.png', '輸出檔名固定，不帶原檔名');
 check(/3 處都是純黑/.test(done.text), '驗證訊息說 3 處，點掉的那一張沒有被算進去');
+
+// --- 回饋：第二次按也要立刻看得到，而且不能凍住 ---
+
+await evaluate(`${helpers}
+  btn(/全部重來|全部重来|Start over/).click(); true`);
+await wait(500);
+
+await evaluate(`
+  window.__seen.spinner = false;
+  window.__seen.firstFrame = null;
+  window.__clickAt = null;
+  const tick = () => {
+    if (window.__clickAt !== null) {
+      if (window.__seen.firstFrame === null) {
+        window.__seen.firstFrame = Math.round(performance.now() - window.__clickAt);
+      }
+      const b = [...document.querySelectorAll('#redact-tool button')]
+        .find((x) => x.querySelector('.anoni-spinner'));
+      if (b) window.__seen.spinner = true;
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  true;
+`);
+
+await send('Emulation.setCPUThrottlingRate', { rate: 4 });
+await evaluate(`${helpers}
+  window.__clickAt = performance.now();
+  btn(/自動找出人臉|自动找出人脸|Find faces/).click(); true`);
+await wait(6000);
+await send('Emulation.setCPUThrottlingRate', { rate: 1 });
+
+const feedback = await evaluate(`window.__seen`);
+check(feedback.spinner === true, '第二次按也看得到轉圈，按下去不是沒有反應');
+const quick = feedback.firstFrame !== null && feedback.firstFrame < 500;
+check(quick, `點擊之後 ${feedback.firstFrame}ms 畫出第一個畫面${quick ? '' : '，主執行緒被擋住了'}`);
+const viaWorker = feedback.workers.some((url) => /\/js\/redact-worker\.js$/.test(url));
+check(viaWorker, viaWorker
+  ? '掃描交給了 js/redact-worker.js'
+  : `掃描沒有交給 worker（建立過的 worker：${JSON.stringify(feedback.workers)}）`);
 
 console.log(failed ? `\n${failed} 項沒過` : '\n每一步都對');
 chrome.kill();
