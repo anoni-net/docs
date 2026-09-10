@@ -104,20 +104,32 @@ nav:
           - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_UTILS, "Utilities"]:
       - utils/index.md
-      - utils/threat-model.md
-      - utils/passphrase.md
-      - utils/age.md
-      - utils/passkey.md
-      - utils/checklist.md
-      - utils/qrcode.md
-      - utils/qr-read.md
-      - utils/qr-stream.md
-      - utils/hash.md
-      - utils/strip-metadata.md
-      - utils/redact.md
-      - utils/clean-url.md
-      - utils/invisible.md
-      - utils/leaks.md
+      # Fourteen utilities in one flat list need 732px in the mobile drawer. That
+      # fills a 390x844 screen exactly and leaves only eleven of them visible on
+      # 375x667. Five groups bring the first level down to six rows.
+      #
+      # The group names are the same strings as the ### headings on the index
+      # page, so the sidebar and the index page show the same grouping.
+      # tools/test_utils_index_order.mjs watches that.
+      - "Decide what to protect":
+          - utils/threat-model.md
+          - utils/checklist.md
+      - "Passwords, keys and encryption":
+          - utils/passphrase.md
+          - utils/passkey.md
+          - utils/age.md
+      - "Handing files over in person":
+          - utils/qrcode.md
+          - utils/qr-read.md
+          - utils/qr-stream.md
+          - utils/hash.md
+      - "Clean up before you send":
+          - utils/strip-metadata.md
+          - utils/redact.md
+      - "Check what you receive":
+          - utils/clean-url.md
+          - utils/invisible.md
+          - utils/leaks.md
       # The utilities are things you press and get a response from, and the interactive pieces are the same kind of thing in another form. Nesting them keeps the top level short.
       # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
       # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。

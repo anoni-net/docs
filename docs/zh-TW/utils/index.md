@@ -24,27 +24,41 @@ icon: material/tools
 
 ## 目前有的
 
+### 先確認要防什麼
+
 <div class="grid cards" markdown>
 
 -   :material-clipboard-check-outline: **[威脅模型清單](threat-model.md)**
 
     把「要保護什麼、要防誰、願意付出多少」三題答成一份可複製的清單，並標出答案裡的錯配。答案預設不存，要留的話用 passkey 加密存在你的裝置上。
 
+-   :material-checkbox-marked-outline: **[我的準備清單](checklist.md)**
+
+    把站上的行動建議收成一份可勾的清單，勾了用 passkey 加密存在你的裝置上，下次按一次指紋就看得到進度。沒有帳號、沒有伺服器，站上什麼都不存。
+
+</div>
+
+### 密碼、金鑰與加密
+
+<div class="grid cards" markdown>
+
 -   :material-dice-multiple-outline: **[密語與密碼產生器](passphrase.md)**
 
     用 asian-diceware 的 7776 字詞表抽密語，或從你選的字元集抽隨機密碼。亂數來自瀏覽器的 `crypto.getRandomValues`，並且會顯示產生出來的密碼熵有多少。
-
--   :material-lock-outline: **[本機檔案加密](age.md)**
-
-    選一個檔案或貼一段文字，用密語、passkey 或收件人的 age 公鑰在瀏覽器裡加密成 age 格式，或把 age 檔解回來。密文可以輸出成文字，跟密語一起存進你的密碼管理器就能跨裝置。加密完先用同一組密語解回來比對才給下載。輸出是公開格式，任何裝了 age 命令列工具的電腦都能解開，不需要這個網站。
 
 -   :material-fingerprint: **[passkey 鑰匙](passkey.md)**
 
     建立一把這個網站的 passkey，存進你的密碼管理器或鑰匙圈。只用清單的話按一次「建立 passkey」就夠，要用檔案加密才需要再試一次解鎖、產生備援金鑰。之後本機檔案加密可以用它當鑰匙，不用記密語，準備清單、威脅模型的存檔與收件人簿也用它加密存在你的裝置上。沒有帳號、沒有伺服器，站上什麼都不存。
 
--   :material-checkbox-marked-outline: **[我的準備清單](checklist.md)**
+-   :material-lock-outline: **[本機檔案加密](age.md)**
 
-    把站上的行動建議收成一份可勾的清單，勾了用 passkey 加密存在你的裝置上，下次按一次指紋就看得到進度。沒有帳號、沒有伺服器，站上什麼都不存。
+    選一個檔案或貼一段文字，用密語、passkey 或收件人的 age 公鑰在瀏覽器裡加密成 age 格式，或把 age 檔解回來。密文可以輸出成文字，跟密語一起存進你的密碼管理器就能跨裝置。加密完先用同一組密語解回來比對才給下載。輸出是公開格式，任何裝了 age 命令列工具的電腦都能解開，不需要這個網站。
+
+</div>
+
+### 當面把東西傳過去
+
+<div class="grid cards" markdown>
 
 -   :material-qrcode: **[QR code 產生器](qrcode.md)**
 
@@ -62,6 +76,12 @@ icon: material/tools
 
     算出檔案的 SHA-256，跟對方給的那一串比對。隨身碟帶過去、託人帶過去、下載回來的安裝檔，都靠這一步確認取得的跟原本那份一樣。幾 GB 的檔案也算得動，過程中顯示進度。
 
+</div>
+
+### 送出去之前先清乾淨
+
+<div class="grid cards" markdown>
+
 -   :material-image-off-outline: **[檔案 metadata 清除器](strip-metadata.md)**
 
     拿掉照片、影片、錄音、Office 文件與 PDF 裡的 EXIF、GPS、裝置型號、製作軟體、作者與註解欄位，全程在本機處理。照片、影片與錄音的壓縮資料一個位元都沒動，每一段的去留都列給你看。
@@ -69,6 +89,12 @@ icon: material/tools
 -   :material-selection-remove: **[截圖遮蔽](redact.md)**
 
     在截圖或照片上拉方框，把不該外流的名字、頭像與對話填成實心黑色，全程在本機處理。輸出重新編碼，原檔的 metadata 與檔名都不會帶過去，交給你之前會逐像素確認每一處都是純黑。
+
+</div>
+
+### 收到東西之後先看清楚
+
+<div class="grid cards" markdown>
 
 -   :material-link-variant-off: **[網址清理器](clean-url.md)**
 

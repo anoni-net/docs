@@ -124,20 +124,30 @@ nav:
           - taiwan/whistleblower-law.md
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
-      - utils/threat-model.md
-      - utils/passphrase.md
-      - utils/age.md
-      - utils/passkey.md
-      - utils/checklist.md
-      - utils/qrcode.md
-      - utils/qr-read.md
-      - utils/qr-stream.md
-      - utils/hash.md
-      - utils/strip-metadata.md
-      - utils/redact.md
-      - utils/clean-url.md
-      - utils/invisible.md
-      - utils/leaks.md
+      # 十四支工具排成一列，手機的左側抽屜要 732px 才裝得下，390x844 剛好塞滿、
+      # 375x667 一眼只看得到十一列。分成五組之後第一層剩六列。
+      #
+      # 分組名稱跟索引頁的 ### 小標題是同一組字，讀者從側邊欄與從索引頁看到的分法
+      # 一致，tools/test_utils_index_order.mjs 盯著這件事。
+      - "先確認要防什麼":
+          - utils/threat-model.md
+          - utils/checklist.md
+      - "密碼、金鑰與加密":
+          - utils/passphrase.md
+          - utils/passkey.md
+          - utils/age.md
+      - "當面把東西傳過去":
+          - utils/qrcode.md
+          - utils/qr-read.md
+          - utils/qr-stream.md
+          - utils/hash.md
+      - "送出去之前先清乾淨":
+          - utils/strip-metadata.md
+          - utils/redact.md
+      - "收到東西之後先看清楚":
+          - utils/clean-url.md
+          - utils/invisible.md
+          - utils/leaks.md
       # 小工具區的頁面按下去就有反應，互動與呈現是同一種東西的另一種形式，收成子分組讓第一層短一點。
       # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
       # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。

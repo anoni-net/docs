@@ -24,27 +24,41 @@ icon: material/tools
 
 ## 目前有的
 
+### 先确认要防什么
+
 <div class="grid cards" markdown>
 
 -   :material-clipboard-check-outline: **[威胁模型清单](threat-model.md)**
 
     把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案预设不存，要留的话用 passkey 加密存在你的设备上。
 
+-   :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
+
+    把站上的行动建议收成一份可勾的清单，勾了用 passkey 加密存在你的设备上，下次按一次指纹就看得到进度。没有账号、没有服务器，站上什么都不存。
+
+</div>
+
+### 密码、密钥与加密
+
+<div class="grid cards" markdown>
+
 -   :material-dice-multiple-outline: **[密语与密码生成器](passphrase.md)**
 
     用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会显示生成出来的密码熵有多少。
-
--   :material-lock-outline: **[本机文件加密](age.md)**
-
-    选一个文件或贴一段文字，用密语、passkey 或收件人的 age 公钥在浏览器里加密成 age 格式，或把 age 文件解回来。密文可以输出成文字，跟密语一起存进你的密码管理器就能跨设备。加密完先用同一组密语解回来比对才给下载。输出是公开格式，任何装了 age 命令行工具的电脑都能解开，不需要这个网站。
 
 -   :material-fingerprint: **[passkey 钥匙](passkey.md)**
 
     创建一把这个网站的 passkey，存进你的密码管理器或钥匙串。只用清单的话按一次「创建 passkey」就够，要用文件加密才需要再试一次解锁、生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语，准备清单、威胁模型的存档与收件人簿也用它加密存在你的设备上。没有账号、没有服务器，站上什么都不存。
 
--   :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
+-   :material-lock-outline: **[本机文件加密](age.md)**
 
-    把站上的行动建议收成一份可勾的清单，勾了用 passkey 加密存在你的设备上，下次按一次指纹就看得到进度。没有账号、没有服务器，站上什么都不存。
+    选一个文件或贴一段文字，用密语、passkey 或收件人的 age 公钥在浏览器里加密成 age 格式，或把 age 文件解回来。密文可以输出成文字，跟密语一起存进你的密码管理器就能跨设备。加密完先用同一组密语解回来比对才给下载。输出是公开格式，任何装了 age 命令行工具的电脑都能解开，不需要这个网站。
+
+</div>
+
+### 当面把东西传过去
+
+<div class="grid cards" markdown>
 
 -   :material-qrcode: **[QR code 生成器](qrcode.md)**
 
@@ -62,6 +76,12 @@ icon: material/tools
 
     算出文件的 SHA-256，跟对方给的那一串比对。U 盘带过去、托人带过去、下载回来的安装包，都靠这一步确认取得的跟原本那份一样。几 GB 的文件也算得动，过程中显示进度。
 
+</div>
+
+### 发出去之前先清干净
+
+<div class="grid cards" markdown>
+
 -   :material-image-off-outline: **[文件 metadata 清除器](strip-metadata.md)**
 
     拿掉照片、视频、录音、Office 文档与 PDF 里的 EXIF、GPS、设备型号、制作软件、作者与注释字段，全程在本机处理。照片、视频与录音的压缩数据一个比特都没动，每一段的去留都列给你看。
@@ -69,6 +89,12 @@ icon: material/tools
 -   :material-selection-remove: **[截图遮蔽](redact.md)**
 
     在截图或照片上拉方框，把不该外流的名字、头像与对话填成实心黑色，全程在本机处理。输出重新编码，原文件的 metadata 与文件名都不会带过去，交给你之前会逐像素确认每一处都是纯黑。
+
+</div>
+
+### 收到东西之后先看清楚
+
+<div class="grid cards" markdown>
 
 -   :material-link-variant-off: **[网址清理器](clean-url.md)**
 

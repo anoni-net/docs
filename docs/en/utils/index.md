@@ -24,27 +24,41 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 ## Available now
 
+### Decide what to protect
+
 <div class="grid cards" markdown>
 
 -   :material-clipboard-check-outline: **[Threat model checklist](threat-model.md)**
 
     Turn your answers to the three questions (what you are protecting, who from, what you will spend) into a copyable checklist, with the mismatches flagged. Nothing is saved unless you choose to keep it, encrypted with a passkey on your device.
 
+-   :material-checkbox-marked-outline: **[My preparation checklist](checklist.md)**
+
+    The site's action items gathered into one list you can tick off. Progress is encrypted with your passkey and stays on your device; one fingerprint next time and it is back. No account, no server, nothing stored here.
+
+</div>
+
+### Passwords, keys and encryption
+
+<div class="grid cards" markdown>
+
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
-
--   :material-lock-outline: **[Local file encryption](age.md)**
-
-    Pick a file or paste some text and encrypt it to the age format in your browser with a passphrase, a passkey or recipients' age public keys, or open an age file. The ciphertext can come out as text, so it goes into your password manager next to the passphrase and follows you across devices. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
 
 -   :material-fingerprint: **[Passkey as your key](passkey.md)**
 
     Create a passkey for this site and store it in your password manager or keychain. For the checklist alone, one press of "Create passkey" is enough; only file encryption also needs a test unlock and a backup key. Local file encryption can then use it as the key, with no passphrase to remember, and the checklist, saved threat model answers and the address book are encrypted with it on your device. No account, no server, nothing stored here.
 
--   :material-checkbox-marked-outline: **[My preparation checklist](checklist.md)**
+-   :material-lock-outline: **[Local file encryption](age.md)**
 
-    The site's action items gathered into one list you can tick off. Progress is encrypted with your passkey and stays on your device; one fingerprint next time and it is back. No account, no server, nothing stored here.
+    Pick a file or paste some text and encrypt it to the age format in your browser with a passphrase, a passkey or recipients' age public keys, or open an age file. The ciphertext can come out as text, so it goes into your password manager next to the passphrase and follows you across devices. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
+
+</div>
+
+### Handing files over in person
+
+<div class="grid cards" markdown>
 
 -   :material-qrcode: **[QR code generator](qrcode.md)**
 
@@ -62,6 +76,12 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Compute a file's SHA-256 and check it against the string you were given. A USB stick carried by hand, a file sent with someone else, an installer you downloaded: this is the step that confirms what arrived matches the original. Multi-gigabyte files work, with progress shown.
 
+</div>
+
+### Clean up before you send
+
+<div class="grid cards" markdown>
+
 -   :material-image-off-outline: **[File metadata remover](strip-metadata.md)**
 
     Strip EXIF, GPS, device model, authoring software, author and comment fields from photos, videos, recordings, Office documents and PDFs without the file leaving your device. For photos, videos and recordings not one byte of compressed data is touched, and every segment kept or removed is listed for you.
@@ -69,6 +89,12 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 -   :material-selection-remove: **[Screenshot redaction](redact.md)**
 
     Draw boxes over names, avatars and messages that must not leave a screenshot or photo and fill them with solid black, entirely on your device. The output is re-encoded so no metadata or filename carries over, and every box is checked pixel by pixel before you download.
+
+</div>
+
+### Check what you receive
+
+<div class="grid cards" markdown>
 
 -   :material-link-variant-off: **[URL cleaner](clean-url.md)**
 
