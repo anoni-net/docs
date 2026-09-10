@@ -24,7 +24,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 ## Available now
 
-### Decide what to protect
+### What to protect
 
 <div class="grid cards" markdown>
 
@@ -38,7 +38,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
-### Passwords, keys and encryption
+### Passwords, encryption
 
 <div class="grid cards" markdown>
 
@@ -56,7 +56,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
-### Handing files over in person
+### Handing things over
 
 <div class="grid cards" markdown>
 
@@ -78,7 +78,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
-### Clean up before you send
+### Before you send
 
 <div class="grid cards" markdown>
 
@@ -92,7 +92,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
-### Check what you receive
+### After you receive
 
 <div class="grid cards" markdown>
 

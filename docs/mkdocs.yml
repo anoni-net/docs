@@ -129,22 +129,22 @@ nav:
       #
       # 分組名稱跟索引頁的 ### 小標題是同一組字，讀者從側邊欄與從索引頁看到的分法
       # 一致，tools/test_utils_index_order.mjs 盯著這件事。
-      - "先確認要防什麼":
+      - "要防什麼":
           - utils/threat-model.md
           - utils/checklist.md
-      - "密碼、金鑰與加密":
+      - "密碼與加密":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md
-      - "當面把東西傳過去":
+      - "當面傳東西":
           - utils/qrcode.md
           - utils/qr-read.md
           - utils/qr-stream.md
           - utils/hash.md
-      - "送出去之前先清乾淨":
+      - "送出去之前":
           - utils/strip-metadata.md
           - utils/redact.md
-      - "收到東西之後先看清楚":
+      - "收到之後":
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md

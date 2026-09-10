@@ -111,22 +111,22 @@ nav:
       #
       # 分组名称跟索引页的 ### 小标题是同一组字，读者从侧边栏与从索引页看到的分法
       # 一致，tools/test_utils_index_order.mjs 盯着这件事。
-      - "先确认要防什么":
+      - "要防什么":
           - utils/threat-model.md
           - utils/checklist.md
-      - "密码、密钥与加密":
+      - "密码与加密":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md
-      - "当面把东西传过去":
+      - "当面传东西":
           - utils/qrcode.md
           - utils/qr-read.md
           - utils/qr-stream.md
           - utils/hash.md
-      - "发出去之前先清干净":
+      - "发出去之前":
           - utils/strip-metadata.md
           - utils/redact.md
-      - "收到东西之后先看清楚":
+      - "收到之后":
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md

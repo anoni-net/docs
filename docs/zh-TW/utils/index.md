@@ -24,7 +24,7 @@ icon: material/tools
 
 ## 目前有的
 
-### 先確認要防什麼
+### 要防什麼
 
 <div class="grid cards" markdown>
 
@@ -38,7 +38,7 @@ icon: material/tools
 
 </div>
 
-### 密碼、金鑰與加密
+### 密碼與加密
 
 <div class="grid cards" markdown>
 
@@ -56,7 +56,7 @@ icon: material/tools
 
 </div>
 
-### 當面把東西傳過去
+### 當面傳東西
 
 <div class="grid cards" markdown>
 
@@ -78,7 +78,7 @@ icon: material/tools
 
 </div>
 
-### 送出去之前先清乾淨
+### 送出去之前
 
 <div class="grid cards" markdown>
 
@@ -92,7 +92,7 @@ icon: material/tools
 
 </div>
 
-### 收到東西之後先看清楚
+### 收到之後
 
 <div class="grid cards" markdown>
 
