@@ -271,6 +271,24 @@ test('偵測的門檻偏低是刻意的，漏抓比多抓貴', () => {
   assert.ok(tool.DETECT.maxSide >= 800, '縮得太小會抓不到遠一點的臉');
 });
 
+test('還沒選檔案的畫面就講出有自動找出人臉這個選項', () => {
+  // 所有按鈕都要等圖片載進來才出現。文章的步驟寫著「先按自動找出人臉」，
+  // 而讀者停在第一步時畫面上沒有那顆按鈕，實際回報過找不到。
+  assert.ok(
+    /if \(!source\) \{[\s\S]*?t\.beforeHint[\s\S]*?return;/.test(src),
+    '載入前的畫面沒有把 beforeHint 放出來'
+  );
+  for (const lang of ['zh-TW', 'zh', 'en']) {
+    const hint = STRINGS[lang].beforeHint;
+    assert.ok(hint, `${lang} 沒有 beforeHint`);
+    // 提示裡要出現那顆按鈕的字面，讀者才對得起來
+    assert.ok(
+      hint.includes(STRINGS[lang].findFaces),
+      `${lang} 的 beforeHint 沒有寫出按鈕的名字`
+    );
+  }
+});
+
 test('文案講出偵測抓不到什麼，不是只報找到幾張', () => {
   // 只講找到幾張會讓人以為剩下的都乾淨了
   // 這一份的鍵是 zh-TW、zh、en，簡體那一份的鍵沒有地區碼
