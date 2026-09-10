@@ -14,10 +14,22 @@
  * 固定成 redacted.png 或 redacted.jpg，截圖的原始檔名常帶 app 名稱與精確到秒的
  * 時間，那本身就是一種洩漏。
  *
+ * === 臉部偵測只提候選框 ===
+ *
+ * 2026-09 之前這裡寫的是「不做臉部偵測」，理由是模型無法替讀者判斷該遮什麼。
+ * 那個理由現在仍然成立，改的是做法：偵測只把框畫出來，讀者看得到、刪得掉、
+ * 補得上，按下產生的仍然是人。省掉的是重複勞動，不是判斷。
+ *
+ * 用 pico.js（MIT，約兩百行）而不是 TensorFlow.js 那條路。後者要 tfjs-core
+ * 加 tfjs-converter 加 backend 加模型權重，量到約 1.2 MB，pico 這條是 240 KB，
+ * 純 JavaScript 不碰 WebGL，Tor Browser 只要 JS 開著就能執行。代價是它只抓得到
+ * 正面、直立、夠大的臉，那個代價由「機器只提案」這個設計吸收。
+ *
+ * 偵測用的程式與資料按下按鈕才載入，只想手動拉框的人不會被迫下載。
+ *
  * === 不做的事 ===
  *
- * 不做臉部偵測，哪些東西該遮取決於讀者的處境，而模型漏掉一張臉的代價由讀者承擔。
- * 不做模糊與馬賽克。不處理影片。
+ * 不做全自動遮蔽，理由見上一段。不做模糊與馬賽克。不處理影片。
  *
  * 三個語系共用這一份，docs/en/js/ 與 docs/zh-CN/js/ 底下是指向這裡的 symlink。
  * 純邏輯由 tools/test_redact.mjs 原地抽出來測，那支另外掃原始碼確認沒有任何送出
@@ -130,6 +142,70 @@
     return { ok: bad.length === 0, bad: bad };
   }
 
+
+  // 偵測用的參數。這幾個值決定漏抓與多抓之間站在哪裡，而在這一頁漏抓比多抓貴，
+  // 因為多抓的框讀者按一下就刪掉，漏抓的臉會跟著圖送出去。所以門檻取得偏低。
+  const DETECT = {
+    // pico 的分數。實測專案自己的樣張，真的臉落在 74 到 338 之間，雜訊在個位數。
+    // 取 40 會多框幾個，那是刻意的。
+    minQuality: 40,
+    // 掃描的最小臉。太小的值會讓耗時暴增又全是雜訊。
+    minSize: 40,
+    // 每一輪放大多少、每一步移動多少。上游範例的預設值。
+    scaleFactor: 1.1,
+    shiftFactor: 0.1,
+    // 分群時兩個框重疊多少算同一張臉
+    iou: 0.2,
+    // 偵測跑在縮小過的副本上。四千萬像素的照片直接掃要好幾秒，縮到長邊這個值
+    // 之後在手機上也是零點幾秒，而框的位置再按比例放回原尺寸。
+    maxSide: 1280,
+    // 偵測框只包到五官，頭髮跟下巴常常落在外面。往外推一點再遮。
+    pad: 0.28,
+  };
+
+  // pico 回傳的是圓：中心的列、欄、直徑與分數。換成這一頁在用的整數方框，
+  // 往外推 pad，再夾回影像範圍內。scale 是「偵測時縮小了多少」的倒數。
+  function detectionToBox(det, scale, width, height) {
+    const row = det[0] * scale;
+    const col = det[1] * scale;
+    const size = det[2] * scale * (1 + DETECT.pad);
+    const half = size / 2;
+    return normalizeBox(
+      Math.max(0, col - half),
+      Math.max(0, row - half),
+      Math.min(width, col + half),
+      Math.min(height, row + half),
+      width,
+      height
+    );
+  }
+
+  // 偵測要縮到多少。長邊超過上限才縮，回傳 { width, height, scale }，
+  // scale 是把偵測座標乘回原尺寸的倍率。
+  function detectSize(width, height, maxSide) {
+    const longest = Math.max(width, height);
+    if (longest <= maxSide) return { width: width, height: height, scale: 1 };
+    const ratio = maxSide / longest;
+    return {
+      width: Math.max(1, Math.round(width * ratio)),
+      height: Math.max(1, Math.round(height * ratio)),
+      scale: 1 / ratio,
+    };
+  }
+
+  // 已經有框的地方不要再加一個。讀者自己拉過的框，偵測不該疊上去。
+  // 判準是中心點落在既有的框裡面。
+  function isCovered(box, existing) {
+    const cx = box.x + box.w / 2;
+    const cy = box.y + box.h / 2;
+    for (const other of existing) {
+      if (cx >= other.x && cx <= other.x + other.w && cy >= other.y && cy <= other.y + other.h) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   // --- 介面 ---
 
   const root = document.getElementById("redact-tool");
@@ -198,6 +274,10 @@
       canvasLabel: "遮蔽用的畫布，在上面按住拖出方框",
       count: "已遮 {n} 處",
       none: "還沒有遮任何地方",
+      findFaces: "自動找出人臉",
+      finding: "尋找中",
+      foundSome: "找到 {n} 張臉，已經框起來。側臉、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
+      foundNone: "沒有找到正面、直立又夠大的臉。這一張要自己拉框。",
       undo: "復原上一個",
       reset: "全部重來",
       another: "換一張",
@@ -213,6 +293,7 @@
         decode: "無法解碼圖片。HEIC 目前只有 Safari 能解，可以先在手機上轉成 JPEG。",
         verifyFailed: "輸出檢查沒有通過，有一處不是純黑。請按「全部重來」再遮一次。",
         exportFailed: "產生輸出時失敗，可能是圖太大。換一張小一點的，或先縮圖。",
+        detectMissing: "臉部偵測需要的檔案載入失敗，重試一次，或直接自己拉框。",
       },
       types: { "image/png": "PNG", "image/jpeg": "JPEG" },
     },
@@ -224,6 +305,10 @@
       canvasLabel: "遮蔽用的画布，在上面按住拖出方框",
       count: "已遮 {n} 处",
       none: "还没有遮任何地方",
+      findFaces: "自动找出人脸",
+      finding: "寻找中",
+      foundSome: "找到 {n} 张脸，已经框起来。侧脸、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
+      foundNone: "没有找到正面、直立又够大的脸。这一张要自己拉框。",
       undo: "撤销上一个",
       reset: "全部重来",
       another: "换一张",
@@ -239,6 +324,7 @@
         decode: "无法解码图片。HEIC 目前只有 Safari 能解，可以先在手机上转成 JPEG。",
         verifyFailed: "输出检查没有通过，有一处不是纯黑。请按「全部重来」再遮一次。",
         exportFailed: "生成输出时失败，可能是图太大。换一张小一点的，或先缩图。",
+        detectMissing: "人脸检测需要的文件加载失败，重试一次，或直接自己拉框。",
       },
       types: { "image/png": "PNG", "image/jpeg": "JPEG" },
     },
@@ -250,6 +336,10 @@
       canvasLabel: "Redaction canvas. Press and drag to draw a box.",
       count: "{n} areas covered",
       none: "Nothing covered yet",
+      findFaces: "Find faces",
+      finding: "Looking",
+      foundSome: "Found {n} faces and boxed them. Profiles, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
+      foundNone: "No front-facing, upright, large enough face found. Draw the boxes yourself on this one.",
       undo: "Undo last box",
       reset: "Start over",
       another: "Another image",
@@ -265,6 +355,7 @@
         decode: "This image could not be decoded. HEIC currently decodes only in Safari; convert it to JPEG on your phone first.",
         verifyFailed: "The output check failed: one area is not solid black. Press “Start over” and cover it again.",
         exportFailed: "Creating the output failed, possibly because the image is too large. Try a smaller one, or downscale it first.",
+        detectMissing: "The files needed for face detection failed to load. Try again, or just draw the boxes yourself.",
       },
       types: { "image/png": "PNG", "image/jpeg": "JPEG" },
     },
@@ -297,6 +388,9 @@
   let result = null;
   let working = false;
   let error = null;
+  // 偵測跟輸出各自有自己的忙碌狀態，兩顆按鈕的轉圈才不會互相干擾
+  let detecting = false;
+  let detectNote = null;
   let canvas = null;
   let ctx = null;
   let rafPending = false;
@@ -379,6 +473,7 @@
     releaseResult();
     releaseSource();
     boxes = [];
+    detectNote = null;
     dragging = null;
     error = null;
     working = true;
@@ -427,6 +522,116 @@
     const pixels = c2.getImageData(0, 0, size.w, size.h).data;
     if (typeof bitmap.close === "function") bitmap.close();
     return verifyBoxes(pixels, size.w, list, VERIFY[blob.type] || VERIFY["image/png"]);
+  }
+
+  // 偵測用的程式與級聯資料按下按鈕才載入，合計約 240 KB。只想自己拉框的人不必
+  // 為了這個等待，跟 stripmeta.js 把 pdf-lib 延後到遇到 PDF 才載是同一個做法。
+  //
+  // 離線副本要包含這兩個檔案，它們列在這一頁 frontmatter 的 offline_assets 裡。
+  let picoLoading = null;
+  let cascade = null;
+
+  function picoLib() {
+    return typeof window !== "undefined" ? window.pico : null;
+  }
+
+  function loadPico() {
+    if (cascade) return Promise.resolve(cascade);
+    if (!picoLoading) {
+      picoLoading = (async () => {
+        try {
+          if (!picoLib()) {
+            await new Promise((resolve, reject) => {
+              const script = document.createElement("script");
+              script.src = new URL("../vendor/pico/pico.js", location.href).href;
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+          }
+          const lib = picoLib();
+          if (!lib) throw new Error("no pico");
+          const url = new URL("../vendor/pico/facefinder", location.href).href;
+          const response = await fetch(url);
+          if (!response.ok) throw new Error("no cascade");
+          cascade = lib.unpack_cascade(new Uint8Array(await response.arrayBuffer()));
+          return cascade;
+        } catch (err) {
+          // 失敗就讓下一次重試，不要卡在一個永遠不會完成的 promise 上
+          picoLoading = null;
+          return null;
+        }
+      })();
+    }
+    return picoLoading;
+  }
+
+  // 把畫面上的底圖轉成 pico 要的灰階緩衝區。偵測跑在縮小過的副本上，
+  // 座標再按比例放回原尺寸。
+  function grayscaleFrom(bitmap, width, height) {
+    const work = document.createElement("canvas");
+    work.width = width;
+    work.height = height;
+    const workCtx = work.getContext("2d", { willReadFrequently: true });
+    workCtx.drawImage(bitmap, 0, 0, width, height);
+    const rgba = workCtx.getImageData(0, 0, width, height).data;
+    const gray = new Uint8Array(width * height);
+    for (let i = 0; i < gray.length; i += 1) {
+      const at = i * 4;
+      gray[i] = (rgba[at] * 0.299 + rgba[at + 1] * 0.587 + rgba[at + 2] * 0.114) | 0;
+    }
+    return gray;
+  }
+
+  async function findFaces() {
+    if (!source || detecting || working) return;
+    detecting = true;
+    detectNote = null;
+    error = null;
+    render();
+
+    const classify = await loadPico();
+    if (!classify) {
+      detecting = false;
+      error = "detectMissing";
+      render();
+      return;
+    }
+
+    const lib = picoLib();
+    const plan = detectSize(source.width, source.height, DETECT.maxSide);
+    let found = [];
+    try {
+      const gray = grayscaleFrom(source.bitmap, plan.width, plan.height);
+      const image = {
+        pixels: gray,
+        nrows: plan.height,
+        ncols: plan.width,
+        ldim: plan.width,
+      };
+      const raw = lib.run_cascade(image, classify, {
+        shiftfactor: DETECT.shiftFactor,
+        minsize: DETECT.minSize,
+        maxsize: Math.max(plan.width, plan.height),
+        scalefactor: DETECT.scaleFactor,
+      });
+      found = lib
+        .cluster_detections(raw, DETECT.iou)
+        .filter((det) => det[3] > DETECT.minQuality)
+        .map((det) => detectionToBox(det, plan.scale, source.width, source.height))
+        .filter((box) => box && !isCovered(box, boxes));
+    } catch (err) {
+      detecting = false;
+      error = "detectMissing";
+      render();
+      return;
+    }
+
+    for (const box of found) boxes.push(box);
+    detecting = false;
+    detectNote = found.length ? fill(t.foundSome, { n: found.length }) : t.foundNone;
+    releaseResult();
+    render();
   }
 
   async function exportImage() {
@@ -590,6 +795,15 @@
 
     root.appendChild(el("p", "rd-status", boxes.length ? fill(t.count, { n: boxes.length }) : t.none));
 
+    // 偵測的結果講在狀態列底下。找到幾張、以及它抓不到什麼，兩件事要一起說，
+    // 只講找到幾張會讓人以為剩下的都乾淨了。
+    if (detectNote) {
+      const note = el("p", "rd-note", detectNote);
+      note.setAttribute("role", "status");
+      note.setAttribute("aria-live", "polite");
+      root.appendChild(note);
+    }
+
     const actions = el("div", "rd-actions");
     const make = button(working ? "" : t.make, "rd-primary", exportImage);
     if (working) {
@@ -601,35 +815,51 @@
       make.appendChild(document.createTextNode(t.working));
       make.setAttribute("aria-busy", "true");
     }
-    make.disabled = working || !boxes.length;
+    make.disabled = working || detecting || !boxes.length;
     actions.appendChild(make);
+
+    // 偵測排在產生後面、復原前面。它是可選的省力步驟，不是主要路徑，
+    // 主要路徑仍然是自己拉框。
+    const find = button(detecting ? "" : t.findFaces, null, findFaces);
+    if (detecting) {
+      const spin = el("span", "anoni-spinner");
+      spin.setAttribute("aria-hidden", "true");
+      find.appendChild(spin);
+      find.appendChild(document.createTextNode(t.finding));
+      find.setAttribute("aria-busy", "true");
+    }
+    find.disabled = working || detecting;
+    actions.appendChild(find);
 
     const undo = button(t.undo, null, () => {
       boxes.pop();
+      detectNote = null;
       releaseResult();
       error = null;
       render();
     });
-    undo.disabled = working || !boxes.length;
+    undo.disabled = working || detecting || !boxes.length;
     actions.appendChild(undo);
 
     const reset = button(t.reset, null, () => {
       boxes = [];
+      detectNote = null;
       releaseResult();
       error = null;
       render();
     });
-    reset.disabled = working || !boxes.length;
+    reset.disabled = working || detecting || !boxes.length;
     actions.appendChild(reset);
 
     const another = button(t.another, null, () => {
       releaseResult();
       releaseSource();
       boxes = [];
+      detectNote = null;
       error = null;
       render();
     });
-    another.disabled = working;
+    another.disabled = working || detecting;
     actions.appendChild(another);
     root.appendChild(actions);
 
