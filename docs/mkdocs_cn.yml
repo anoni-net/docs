@@ -1,9 +1,6 @@
 docs_dir: !ENV [DOCS_DIR, "zh-CN"]
 site_name: !ENV [SITE_NAME, "匿名网络社群 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/zh-cn/"]
-edit_uri:
-  !ENV [EDIT_URI, "https://github.com/anoni-net/docs/blob/main/docs/zh-CN/"]
-
 site_description:
   !ENV [SITE_DESC, "推广与翻译匿名网络 Tor、Tails 与 OONI 观测工具"]
 site_author: anoni.net Volunteer
@@ -239,8 +236,6 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
-    - content.action.view
-    - content.action.edit
     - content.tooltips
     - content.code.copy
     - content.footnote.tooltips

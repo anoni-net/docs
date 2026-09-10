@@ -152,7 +152,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 
 ## Change log
 
-Only changes that alter what you should do are listed here; typos, formatting, and copy edits are not. For the full revision history, use the source link at the top of the page.
+Only changes that alter what you should do are listed here; typos, formatting, and copy edits are not. For the full revision history, see [this page's commits on GitHub](https://github.com/anoni-net/docs/commits/main/docs/en/scenarios/asia-travel.md){target="_blank"}.
 
 - **2026-09-08:** Added the State Council's Provisions on Exit and Entry Administration (effective 15 September 2026) to the mainland China section and to the return-to-mainland-China warning, and moved the framing date to September 2026.
 - **2026-08-05:** Refreshed to the August 2026 verification pass. Hong Kong moved to the top of the border-inspection range after the 23 March 2026 national-security decryption duty, and three claims that could not be substantiated were withdrawn.
