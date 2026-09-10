@@ -818,23 +818,84 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   white-space: normal;
 }
 
-/* header 上那顆循環切換的圖示按鈕在抽屜裡沒有用處，三個選項已經並列 */
-.anoni-settings .md-header__option > .md-header__button {
+/* header 上那顆循環切換的圖示按鈕在抽屜裡沒有用處，三個選項已經並排。
+
+   兩條選擇器指同一件事，第二條是為了特異性。上游有一條
+   .md-option:checked + label:not([hidden])，特異性 (0,3,1)，比只寫類別的
+   (0,3,0) 高。讀者按過任何一個外觀選項之後，那條就把循環按鈕放出來，抽屜裡多
+   一個沒有邊框的燈泡圖示夾在選項中間。第二條補上 :not([hidden]) 湊到 (0,4,0)，
+   B 欄先比，壓得過去。 */
+.anoni-settings .md-header__option > .md-header__button,
+.anoni-settings .md-header__option > .md-header__button:not([hidden]) {
   display: none;
 }
 
+/* 外觀那三項排成一排三顆按鈕。原本一項一列，三列加上組標題佔掉抽屜上半部，
+   「閱讀語言」以下三組都被推到要捲動才看得到的位置。三個選項是同一個問題的三個
+   答案，並排比疊成三列更接近它們的關係，也是系統設定裡常見的擺法。
+
+   只改 palette 這一份，語言那一份維持一項一列。語言的項數跟著 extra.alternate
+   走，之後多一個語系就排不成一排。
+
+   搜尋展開時的那條選擇器要一起指定。上面那組把 display 壓回 block，兩邊特異性
+   相同，這一條靠排在後面才蓋得過去。 */
+.anoni-settings [data-md-component="palette"],
+[data-md-toggle="search"]:checked ~ .md-header .anoni-settings [data-md-component="palette"] {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem 0.8rem 0;
+}
+
+/* 抽屜寬 12.1rem，兩側各留 0.8rem，扣掉兩道 0.2rem 的間隙，每一顆約 67px，
+   文字可用寬度 59px。「跟隨系統」在 0.6rem 下量到 48px，一行排得下，英文的
+   Follow system 斷成兩行，三顆靠 flex 的預設拉伸維持同高。
+
+   圖示與名稱疊成兩層，不橫排。橫排要放「跟隨系統」四個字加一顆圖示得有 70px，
+   這個寬度給不起。
+
+   邊框粗細與圓角取底下「檢查更新」那顆按鈕的同一組值，樣式定義在 base.html 的
+   styles block。抽屜裡兩種可按的東西長得一致。 */
 .anoni-settings__choice {
   align-items: center;
+  border: 0.05rem solid var(--md-default-fg-color--lighter);
+  border-radius: 0.15rem;
   color: var(--md-default-fg-color);
   cursor: pointer;
   display: flex;
-  font-size: 0.7rem;
-  gap: 0.4rem;
-  padding: 0.5rem 0.8rem;
+  flex: 1;
+  flex-direction: column;
+  font-size: 0.6rem;
+  gap: 0.15rem;
+  justify-content: center;
+  line-height: 1.3;
+  min-width: 0;
+  padding: 0.35rem 0.15rem;
+  text-align: center;
 }
 
+/* 滑過轉成強調色，跟「檢查更新」那顆的 hover 一致 */
+.anoni-settings__choice:hover {
+  border-color: var(--md-accent-fg-color);
+}
+
+/* 鍵盤焦點的框。上游有一條 .md-option.focus-visible + label，套的是緊接在後面
+   那顆循環按鈕，而那顆在抽屜裡是 display:none，框畫在看不見的元素上。這裡把它
+   接到再下一格的選項按鈕。Material 用的是自己那支 polyfill 加的 focus-visible
+   類別，原生的 :focus-visible 另寫一條，兩種都接得住，也不會因為其中一個選擇器
+   不被認得就整條失效。 */
+.anoni-settings .md-option.focus-visible + .md-header__button + .anoni-settings__choice {
+  outline-color: var(--md-accent-fg-color);
+  outline-style: auto;
+}
+
+.anoni-settings .md-option:focus-visible + .md-header__button + .anoni-settings__choice {
+  outline-color: var(--md-accent-fg-color);
+  outline-style: auto;
+}
+
+/* 兩個字的名稱斷行時兩行等長，英文的 Follow system 不會斷成一長一短 */
 .anoni-settings__choice-text {
-  flex-grow: 1;
+  text-wrap: balance;
 }
 
 .anoni-settings__choice-icon {
@@ -849,9 +910,9 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   width: 0.9rem;
 }
 
+/* 勾號跟圖示同尺寸，也排在圖示那一格，換上去的時候按鈕高度與名稱位置都不變 */
 .anoni-settings__choice-mark {
-  display: block;
-  opacity: 0;
+  display: none;
 }
 
 .anoni-settings__choice-mark svg {
@@ -865,15 +926,25 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
    把 index 對應的那一顆解除 hidden，其餘關掉，所以它一定跟著現況走。
 
    不綁 input 的 :checked，因為第一次進站三顆 radio 都還沒被勾選（配色是從
-   localStorage 或 prefers-color-scheme 算出來的），綁 :checked 會整排沒有勾號。
+   localStorage 或 prefers-color-scheme 算出來的），綁 :checked 會整排都沒有
+   選中的樣子。
 
    順序是 input、循環 label、抽屜選項，由 palette.html 固定，中間不能插東西。 */
 .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice {
-  color: var(--md-accent-fg-color);
+  background-color: var(--md-accent-fg-color--transparent);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* 選到的那一顆把圖示換成勾號，兩者在 palette.html 裡是相鄰的兩格，換過去名稱
+   不會移位。三顆並排之後，選中與否原本只剩邊框與底色的差別，那是純色彩的區別，
+   色弱或高對比模式下的讀者分不出來。名稱就在勾號底下一行，換掉圖示不影響認出
+   這一顆是哪一個，Material Design 3 的 filter chip 也是這樣做。 */
+.anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice .anoni-settings__choice-icon {
+  display: none;
 }
 
 .anoni-settings .md-header__button:not([hidden]) + .anoni-settings__choice .anoni-settings__choice-mark {
-  opacity: 1;
+  display: block;
 }
 
 /* 語言切換在 header 是滑過才展開的下拉，抽屜裡直接把清單攤開 */

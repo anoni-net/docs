@@ -35,15 +35,21 @@
             {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
           {%- endif -%}
         </span>
+        {#-
+          勾號排在圖示後面、名稱前面。選到的那一顆由 extra.css 把圖示收起來、
+          把勾號放出來，兩者共用同一格，名稱在三顆按鈕裡的高度才對得起來。
+          勾號排到名稱後面的話，選到的那一顆會變成名稱在上、勾號在下，名稱比
+          旁邊兩顆高一截。
+        -#}
+        <span class="anoni-settings__choice-mark">
+          {% include ".icons/material/check.svg" %}
+        </span>
         <span class="anoni-settings__choice-text">
           {%- if choices and choices | length > loop.index0 -%}
             {{ choices[loop.index0] }}
           {%- else -%}
             {{ option.toggle.name }}
           {%- endif -%}
-        </span>
-        <span class="anoni-settings__choice-mark">
-          {% include ".icons/material/check.svg" %}
         </span>
       </label>
     {% endif %}
