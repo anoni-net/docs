@@ -8,6 +8,7 @@
 | `qrcode-generator.js` | [kazuhikoarase/qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) | 1.4.4 | MIT |
 | `jsQR.js` | [cozmo/jsQR](https://github.com/cozmo/jsQR) | 1.4.0 | Apache-2.0，授權全文見 `jsQR-LICENSE.txt` |
 | `pdf-lib.min.js` | [Hopding/pdf-lib](https://github.com/Hopding/pdf-lib) | 1.17.1 | MIT，授權全文見 `pdf-lib-LICENSE.txt` |
+| `pdfjs/pdf.min.mjs`、`pdfjs/pdf.worker.min.mjs` | [mozilla/pdf.js](https://github.com/mozilla/pdf.js)（npm `pdfjs-dist` 的 legacy build） | 6.3.289 | Apache-2.0，授權全文見 `pdfjs/pdfjs-LICENSE.txt` |
 | `age/age-encryption/` | [FiloSottile/typage](https://github.com/FiloSottile/typage)（npm `age-encryption`） | 0.3.1 | BSD-3-Clause，授權全文見 `age/age-encryption/LICENSE` |
 | `age/noble-ciphers/` | [paulmillr/noble-ciphers](https://github.com/paulmillr/noble-ciphers) | 2.1.1 | MIT，`age/noble-ciphers/LICENSE` |
 | `age/noble-curves/` | [paulmillr/noble-curves](https://github.com/paulmillr/noble-curves) | 2.0.1 | MIT，`age/noble-curves/LICENSE` |
@@ -66,6 +67,24 @@ JavaScript 開著就能執行。代價是它只抓得到正面、直立、夠大
 那個代價在這一頁的設計裡被吸收掉了：偵測只提候選框，讀者看得到、刪得掉、補得上，
 按下產生的仍然是人。漏抓由人補，多抓一鍵刪掉。另外兩百行的 JavaScript 讀者自己
 讀得完，那比較接近這一區「看得懂的人可以自己驗」的立場。
+
+## pdfjs/ 為什麼取最新版而不是小一點的舊版
+
+PDF 頁面整理的「看裡面有什麼」要把文字層抽出來，pdf-lib 做不到，那需要一個完整的
+解析器。v5 量到約 1.4 MB，v6 是 1.8 MB，差 0.4 MB。
+
+還是取最新的 6.3.289。這支解析的是別人給的檔案，而 pdf.js 出過從字型那條路做到
+任意程式碼執行的 CVE（CVE-2024-4367），版本落後的風險比 0.4 MB 重要。
+
+呼叫的時候另外關掉 `isEvalSupported` 與 `enableXfa`，這一頁只要文字與縮圖，
+不需要那些能力。`tools/test_pdfpages.mjs` 盯著這兩個選項。
+
+兩個檔案的 SHA-256：
+
+```
+f401927e692efc7735e0cd528c490d0dd31b7f0972c122b7040df805be45cce4  pdfjs/pdf.min.mjs
+a33cfe728c584fdba4fcc1fd54bcdc2f9f2f13889ddbb5b2bd1d0f8cbe49b84e  pdfjs/pdf.worker.min.mjs
+```
 
 ## age/ 底下的 ES module
 

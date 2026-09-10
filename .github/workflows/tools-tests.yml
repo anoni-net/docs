@@ -160,6 +160,9 @@ jobs:
       - name: 小工具索引順序
         run: node tools/test_utils_index_order.mjs
 
+      - name: PDF 頁面整理
+        run: node tools/test_pdfpages.mjs
+
       # 圖表函式庫按需載入：放回 extra_javascript 不會有錯誤訊息，只是全站變慢
       - name: 圖表函式庫按需載入
         run: node tools/test_chart_assets.mjs

@@ -124,6 +124,7 @@ nav:
           - utils/qr-stream.md
           - utils/hash.md
       - "Before you send":
+          - utils/pdf-pages.md
           - utils/strip-metadata.md
           - utils/redact.md
       - "After you receive":
