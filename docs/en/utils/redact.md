@@ -21,8 +21,9 @@ Several scenario pages share one step: handing a screenshot of a conversation or
 ## How to use it
 
 1. Drop the image in, click to choose a file, or paste it.
-2. Press and drag over what needs covering. Release, and it is filled with black. Draw as many boxes as you need, and press "Undo last box" if one goes wrong.
-3. Press "Create the redacted image". The page decodes the output once more, checks that every box is solid black, and only then offers the download.
+2. To save effort, press "Find faces" first. It boxes the faces it finds, and those boxes can be removed just like the ones you draw.
+3. Press and drag over what needs covering. Release, and it is filled with black. Draw as many boxes as you need, and press "Undo last box" if one goes wrong.
+4. Press "Create the redacted image". The page decodes the output once more, checks that every box is solid black, and only then offers the download.
 
 The output filename is always `redacted.png` or `redacted.jpg`. Screenshot filenames tend to carry the app name and a timestamp to the second, which is a leak of its own.
 
@@ -40,9 +41,19 @@ The output format follows the input: JPEG in, JPEG out. Everything else becomes 
 
 Images above sixteen million pixels are scaled down to that limit first, because a phone's canvas cannot hold a larger surface. Scaling only affects output resolution. The covered areas are unaffected. Colour profiles are not preserved, so wide-gamut photos may shift slightly.
 
+## Face detection only proposes
+
+The detector's code and data, about 240 KB, are fetched only when you press "Find faces". Nobody who just wants to draw boxes has to download it.
+
+It finds faces that are front-facing, upright and reasonably large in the frame. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Delete the extra ones with a click and add the missed ones yourself.
+
+More to the point, a face is not the only thing that identifies someone. Name badges, ID cards, tattoos, licence plates, house numbers, distinctive clothing, a shop sign in the background: detection does not touch any of it. The pass you make yourself, after the machine has drawn its boxes, is the step that actually decides what gets covered.
+
+It uses [pico.js](https://github.com/nenadmarkus/picojs){target="_blank"}, MIT licensed, around two hundred lines of JavaScript that anyone who reads code can go through. It needs no WebGL, only JavaScript being enabled. Your image stays on your device, as with everything else on this page.
+
 ## What it does not do
 
-No face detection and no automatic redaction. What needs covering depends on your situation, a model cannot decide that for you, and you carry the cost of the face it misses.
+No fully automatic redaction. What needs covering depends on your situation, a model cannot decide that for you, and you carry the cost of the face it misses. The "find faces" button only draws boxes for you; pressing "Make the redacted image" is still your decision, as described in the section above.
 
 No blur and no pixelation, for the reason above.
 
