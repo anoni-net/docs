@@ -201,6 +201,7 @@
       readyOk: "沒有網路時，{items}都可以開啟。",
       readyMissing: "沒有網路時無法開啟：{items}。連上網路後會自動補回來。",
       readyJoin: "、",
+      sentenceJoin: "",
       readyHere: "這一頁",
       fallbackNotice: "你要開的頁面不在裝置上，你的語言也還沒有存下離線閱讀頁，所以看到的是另一個語言的版本。連上網路之後，用你的語言打開離線閱讀頁就會存進來。",
       readyHome: "首頁",
@@ -259,6 +260,7 @@
       readyOk: "没有网络时，{items}都可以打开。",
       readyMissing: "没有网络时无法打开：{items}。连上网络后会自动补回来。",
       readyJoin: "、",
+      sentenceJoin: "",
       readyHere: "这一页",
       fallbackNotice: "你要开的页面不在设备上，你的语言也还没有存下离线阅读页，所以看到的是另一个语言的版本。连上网络之后，用你的语言打开离线阅读页就会存进来。",
       readyHome: "首页",
@@ -317,6 +319,7 @@
       readyOk: "Without a network, {items} all open.",
       readyMissing: "Without a network these do not open: {items}. They come back once you are online.",
       readyJoin: ", ",
+      sentenceJoin: " ",
       readyHere: "this page",
       fallbackNotice: "The page you opened is not on this device, and this offline reading page is not stored in your language either, so you are seeing another language's version. Open this page in your language once you are online and it will be stored.",
       readyHome: "the home page",
@@ -625,59 +628,60 @@
   }
 
   function renderStatus() {
-    const status = el("p", "ol-status");
+    const status = el("div", "ol-status");
     if (state.swMissing) {
-      status.textContent = t.noSupport;
+      status.appendChild(el("p", null, t.noSupport));
       return status;
     }
     if (!state.swReady) {
-      status.textContent = t.preparing;
+      status.appendChild(el("p", null, t.preparing));
       return status;
     }
-    // 三行狀態原本是「名詞片語」「沒有句號的句子」「有句號的句子」三種寫法疊在一起，
-    // 用 <br> 斷行之後讀起來像沒寫完的片段。三行都寫成完整句子並統一以句號收尾。
-    // 頭一行以前是兩個片語用 readyJoin 串起來，英文版會變成
+    // 這幾句原本擠在同一個 <p> 裡用 <br> 硬斷行。句子本身在窄螢幕會折行，兩種斷點
+    // 長得一模一樣，讀者分不出哪裡是一句話的結尾，整塊看起來像被切碎的片段。改成
+    // 真的段落，「裝置上存了什麼」與「沒有網路時開得了什麼」各成一段，中間有段距。
+    //
+    // 頭一句以前是兩個片語用 readyJoin 串起來，英文版會變成
     // 「0 pages you chose to keep、0 pages stored automatically」，改成各語系一句
     // 完整的模板之後，中文用頓號、英文用 and，不必再靠共用的分隔符。
-    status.appendChild(
-      document.createTextNode(
-        fill("countLine", { saved: state.saved.size, auto: state.precached.size })
-      )
-    );
+    const stored = [
+      fill("countLine", { saved: state.saved.size, auto: state.precached.size }),
+    ];
     // 佔用量由 SW 直接量自己的快取，見 sw.js 的 cacheUsage。可用空間仍舊問瀏覽器，
     // 那是整台裝置的配額，本來就不是這個站算得出來的，慢個幾十秒才更新也沒差。
     if (typeof state.usage === "number") {
       const est = state.estimate;
       const free =
         est && est.quota && est.quota > est.usage ? est.quota - est.usage : null;
-      status.appendChild(document.createElement("br"));
-      status.appendChild(
-        document.createTextNode(
-          free === null
-            ? fill("usage", { used: size(state.usage) })
-            : fill("usageFree", { used: size(state.usage), free: size(free) })
-        )
+      stored.push(
+        free === null
+          ? fill("usage", { used: size(state.usage) })
+          : fill("usageFree", { used: size(state.usage), free: size(free) })
       );
     }
-    // 「能不能用」直接寫出來，缺哪一塊就講哪一塊
+    // 同一段裡兩句話中間要不要空一格跟著語系走。中文不空，英文空一格。
+    status.appendChild(el("p", null, stored.join(t.sentenceJoin)));
+    // 「能不能用」自成一段，缺哪一塊就講哪一塊。跟上面的容量數字擺在一起，讀者會
+    // 把它當成同一件事的延伸，而容量健康跟打得開本來就是兩回事。
     if (state.readiness) {
       // 並列的連接符跟著語系走。中文用頓號，英文用逗號加空格。
       const names = (keys) => keys.map((key) => t[key]).join(t.readyJoin);
-      status.appendChild(document.createElement("br"));
       status.appendChild(
-        document.createTextNode(
+        el(
+          "p",
+          null,
           state.readiness.missing.length
             ? fill("readyMissing", { items: names(state.readiness.missing) })
             : fill("readyOk", { items: names(state.readiness.all) })
         )
       );
     }
-    // 版本另起一行。讀者回報離線出問題時，這是分辨「換到新版了沒」唯一看得到的地方。
+    // 版本另起一段。讀者回報離線出問題時，這是分辨「換到新版了沒」唯一看得到的地方。
     if (state.version) {
-      status.appendChild(document.createElement("br"));
-      const line = document.createElement("small");
-      line.className = "ol-version";
-      line.textContent = fill("version", { version: state.version });
+      const line = el("p");
+      line.appendChild(
+        el("small", "ol-version", fill("version", { version: state.version }))
+      );
       status.appendChild(line);
     }
     return status;

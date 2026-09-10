@@ -210,6 +210,7 @@ const makeServiceWorker = (opts) => {
             autoPrecache: state.autoPrecache,
             precacheImages: state.precacheImages,
             estimate: opts.estimate || null,
+            usage: opts.usage,
             version: opts.version,
           });
         } else if (message.type === 'OFFLINE_ADD') {
@@ -912,6 +913,41 @@ test('狀態列直接回答沒有網路時能不能開啟，三個語系都有',
       `${lang} 缺首頁時應該看到「${missing}」`
     );
   }
+});
+
+test('狀態列分成真的段落，不靠 <br> 硬斷行', async () => {
+  // 原本三句擠在同一個 <p> 裡用 <br> 斷開。句子本身在窄螢幕會折行，兩種斷點長得
+  // 一模一樣，讀者分不出哪裡才是一句話的結尾，整塊讀起來像被切碎的片段。
+  // 守的是分組：頁數與容量講同一件事放一段，離線可用性另一段，版本自己一段。
+  const CSS = 'https://anoni.net/docs/stylesheets/extra.css';
+  const HERE = 'https://anoni.net/docs/offline/';
+  const HOME = 'https://anoni.net/docs/';
+  const store = {
+    precached: ['basics/'],
+    usage: 113600000,
+    estimate: { usage: 200000000, quota: 10200000000 },
+  };
+  const { root } = await load({
+    ...store,
+    stylesheets: [CSS],
+    cached: [HERE, HOME, CSS],
+    version: '202609100832',
+  });
+  const status = root.querySelector('.ol-status');
+  assert.equal(status.querySelectorAll('br').length, 0, '狀態列不該再有 <br>');
+  const paras = status.querySelectorAll('p').map((n) => n.textContent);
+  assert.equal(paras.length, 3, `該是三段，實際是：${JSON.stringify(paras)}`);
+  assert.ok(paras[0].includes('網站自動存的') && paras[0].includes('佔用'), `頁數與容量該在同一段，實際是：${paras[0]}`);
+  assert.ok(paras[1].startsWith('沒有網路時'), `離線可用性該自成一段，實際是：${paras[1]}`);
+  assert.ok(paras[2].includes('離線內容版本'), `版本該自成一段，實際是：${paras[2]}`);
+  // 同一段裡兩句之間的空白跟著語系走：中文直接相接，英文空一格
+  assert.ok(paras[0].includes('頁。本站'), `中文同段兩句之間不該有空白，實際是：${paras[0]}`);
+  const en = await load({ ...store, lang: 'en' });
+  const first = en.root.querySelector('.ol-status').querySelectorAll('p')[0].textContent;
+  assert.ok(
+    /automatically\. This site uses/.test(first),
+    `英文同段兩句之間該有一個空格，實際是：${first}`
+  );
 });
 
 test('瀏覽器沒有 Cache Storage 時不畫那一行，其餘照舊', async () => {
