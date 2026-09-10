@@ -111,22 +111,22 @@ nav:
       # The group names are the same strings as the ### headings on the index
       # page, so the sidebar and the index page show the same grouping.
       # tools/test_utils_index_order.mjs watches that.
-      - "Decide what to protect":
+      - "What to protect":
           - utils/threat-model.md
           - utils/checklist.md
-      - "Passwords, keys and encryption":
+      - "Passwords and keys":
           - utils/passphrase.md
           - utils/age.md
           - utils/passkey.md
-      - "Handing files over in person":
+      - "Handing things over":
           - utils/qrcode.md
           - utils/qr-read.md
           - utils/qr-stream.md
           - utils/hash.md
-      - "Clean up before you send":
+      - "Before you send":
           - utils/strip-metadata.md
           - utils/redact.md
-      - "Check what you receive":
+      - "After you receive":
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md
