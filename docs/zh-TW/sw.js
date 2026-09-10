@@ -1343,6 +1343,65 @@ async function matchCachedAsset(request) {
   return caches.match(SCOPE_PATH + asset);
 }
 
+// 我們自己產出、檔名不帶內容雜湊的資產。theme 的資產帶 hash，同一個檔名的內容
+// 永遠一樣，stale-first 完全正確。這幾類不是：每次部署都可能換內容，而檔名不變。
+//
+// 2026-09-10 實際發生過。合併了「自動找出人臉」之後，用 PWA 的讀者拿到的是新的
+// HTML 配舊的 js：導覽走 networkFirst 所以頁面是新的，說明寫著按那顆按鈕，而
+// js 走 staleWhileRevalidate 先給裝置上那一份，按鈕根本不存在。要再開一次才會
+// 換過來，而畫面上沒有任何徵兆說手上這一份是舊的。
+//
+// 小工具區的每一支都吃這個問題，而那一區的內容是隱私工具，讀者拿到舊版卻以為
+// 是新版，比慢一個往返嚴重得多。
+const MUTABLE_ASSET_PREFIXES = ["js/", "stylesheets/", "utils/vendor/"];
+const MUTABLE_ASSET_FILES = ["offline-index.json"];
+
+// 逾時要短。拿不到新的就給舊的，跟改之前的行為一樣，只是多等這麼久。
+// 比導覽那個 1200 稍長一點，因為導覽已經先替網路狀態做過一次判斷。
+const MUTABLE_ASSET_TIMEOUT_MS = 1500;
+
+function mutableAsset(url) {
+  const prefix = langPrefixOf(url);
+  // 空字串是根路徑的 zh-TW，null 是 scope 外
+  if (prefix === null) return false;
+  const rest = url.pathname.slice(SCOPE_PATH.length + prefix.length);
+  if (MUTABLE_ASSET_FILES.indexOf(rest) !== -1) return true;
+  return MUTABLE_ASSET_PREFIXES.some((item) => rest.startsWith(item));
+}
+
+// 先問網路，拿不到才給裝置上那一份。跟 staleWhileRevalidate 相反的順序，其餘的
+// 離線行為一致：網路已知是斷的就不等，逾時就退回快取，兩種都不會讓讀者卡住。
+async function assetNetworkFirst(request, event) {
+  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
+    networkDownSince = 0;
+    if (response.ok && (await autoPrecacheEnabled())) {
+      const cache = await caches.open(RUNTIME_ASSETS);
+      await cache.put(request, response.clone());
+      keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
+    }
+    return response;
+  });
+
+  if (networkLooksDown()) {
+    keepAlive(event, network.catch(() => {}));
+    const cached = await matchCachedAsset(request);
+    return cached || assetUnavailable();
+  }
+
+  const raced = await Promise.race([
+    network.catch(() => null),
+    new Promise((resolve) => setTimeout(() => resolve(null), MUTABLE_ASSET_TIMEOUT_MS)),
+  ]);
+  // 網路回了但不是 200（部署中途、路徑改名），裝置上那一份比一個錯誤畫面有用
+  if (raced && raced.ok) return raced;
+
+  if (!raced) networkDownSince = Date.now();
+  keepAlive(event, network.catch(() => {}));
+  const cached = await matchCachedAsset(request);
+  if (cached) return cached;
+  return raced || assetUnavailable();
+}
+
 async function staleWhileRevalidate(request, event) {
   const cached = await matchCachedAsset(request);
   // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
@@ -1394,6 +1453,9 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request, event));
+  } else if (mutableAsset(url)) {
+    // 自己寫的程式與樣式先問網路，理由見 MUTABLE_ASSET_PREFIXES 上面那一段
+    event.respondWith(assetNetworkFirst(request, event));
   } else {
     event.respondWith(staleWhileRevalidate(request, event));
   }

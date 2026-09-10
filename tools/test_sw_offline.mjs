@@ -177,6 +177,11 @@ const harness = `
   ${grab(/^function assetUnavailable\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function networkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function matchCachedAsset\(request\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const MUTABLE_ASSET_PREFIXES = \[[^\]]*\];/m)}
+  ${grab(/^const MUTABLE_ASSET_FILES = \[[^\]]*\];/m)}
+  ${grab(/^const MUTABLE_ASSET_TIMEOUT_MS = .*$/m)}
+  ${grab(/^function mutableAsset\(url\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function assetNetworkFirst\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function staleWhileRevalidate\(request, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
   return {
@@ -191,6 +196,7 @@ const harness = `
     libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
     handleLibraryMessage, networkFirst, staleWhileRevalidate, NAVIGATE_TIMEOUT_MS,
+    mutableAsset, assetNetworkFirst, MUTABLE_ASSET_TIMEOUT_MS,
     networkLooksDown,
     OWN_CACHE_PREFIX, ownCacheNames, cacheUsage, purgeStaleCaches,
   };
@@ -1425,6 +1431,98 @@ test('資產等網路有上限，逾時之後給明確的失敗', async (load) =
   const { sw } = load({ networkDelay: 200, fastTimeout: true });
   const response = await sw.staleWhileRevalidate(req('/docs/stylesheets/extra.css'), null);
   assert.equal(response.status, 504);
+});
+
+// === 自己寫的程式與樣式要先問網路 ===
+//
+// 2026-09-10 的實際故障：合併新功能之後，用 PWA 的讀者拿到新的 HTML 配舊的 js。
+// 導覽走 networkFirst 所以頁面是新的，js 走 staleWhileRevalidate 先給裝置上那
+// 一份，說明寫著要按的按鈕根本不存在，而畫面上沒有任何徵兆。
+
+test('自己產出的程式、樣式與 vendor 認得出來，theme 的雜湊檔名不算', async (load) => {
+  const { sw } = load();
+  const is = (p) => sw.mutableAsset(new URL('https://anoni.net' + p));
+  // 我們自己的，檔名不帶內容雜湊
+  assert.equal(is('/docs/js/redact.js'), true);
+  assert.equal(is('/docs/stylesheets/extra.css'), true);
+  assert.equal(is('/docs/utils/vendor/pdf-lib.min.js'), true);
+  assert.equal(is('/docs/utils/vendor/pico/facefinder'), true);
+  assert.equal(is('/docs/offline-index.json'), true);
+  // 帶語系前綴的形狀
+  assert.equal(is('/docs/en/js/redact.js'), true);
+  assert.equal(is('/docs/zh-cn/utils/vendor/pdfjs/pdf.min.mjs'), true);
+  assert.equal(is('/docs/en/offline-index.json'), true);
+  // theme 的資產帶雜湊，同一個檔名內容永遠一樣，stale-first 是對的
+  assert.equal(is('/docs/assets/javascripts/bundle.d7400e89.min.js'), false);
+  assert.equal(is('/docs/assets/stylesheets/main.ec1eaa64.min.css'), false);
+  assert.equal(is('/docs/assets/images/logo-white.svg'), false);
+  // 頁面走導覽那條，不經過這個判斷
+  assert.equal(is('/docs/utils/redact/'), false);
+  // scope 外
+  assert.equal(is('/other/js/x.js'), false);
+});
+
+test('線上時給的是網路那一份，不是裝置上的舊版', async (load) => {
+  const { sw, caches } = load({ networkDelay: 5 });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/js/redact.js', 'OLD');
+  const response = await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  // 舊的那一份不能被端出來
+  assert.notEqual(response, 'OLD');
+  assert.equal(response.ok, true);
+  assert.ok(String(response.url).endsWith('/docs/js/redact.js'));
+});
+
+test('拿到新的就寫回快取，下一次離線用的是新版', async (load) => {
+  const { sw, caches } = load({ networkDelay: 5 });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/js/redact.js', 'OLD');
+  await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  const stored = await assets.match('/docs/js/redact.js');
+  assert.notEqual(stored, 'OLD', '快取裡還是舊的');
+});
+
+test('網路斷了就給裝置上那一份，不讓讀者卡住', async (load) => {
+  const { sw, caches } = load({ offline: true });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/js/redact.js', 'CACHED');
+  const response = await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  assert.equal(response, 'CACHED');
+});
+
+test('網路很慢就退回裝置上那一份，逾時有上限', async (load) => {
+  const { sw, caches } = load({ networkDelay: 200, fastTimeout: true });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/js/redact.js', 'CACHED');
+  const response = await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  assert.equal(response, 'CACHED');
+});
+
+test('網路回了但不是 200，裝置上那一份比錯誤畫面有用', async (load) => {
+  const { sw, caches } = load({ notFound: [ORIGIN + '/docs/js/redact.js'], networkDelay: 5 });
+  const assets = await caches.open(sw.RUNTIME_ASSETS);
+  await assets.put('/docs/js/redact.js', 'CACHED');
+  const response = await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  assert.equal(response, 'CACHED');
+});
+
+test('離線又沒有副本就收尾，不是停在那裡等', async (load) => {
+  const { sw } = load({ offline: true });
+  const response = await sw.assetNetworkFirst(req('/docs/js/redact.js'), null);
+  assert.equal(response.status, 504);
+});
+
+test('fetch 的路由把自己寫的程式送去 network-first', async (load) => {
+  load();
+  // 路由本身沒辦法原地抽出來執行，直接讀原始碼確認分支在
+  assert.ok(
+    /else if \(mutableAsset\(url\)\) \{[\s\S]{0,200}?assetNetworkFirst\(request, event\)/.test(src),
+    'fetch handler 沒有把 mutableAsset 送去 assetNetworkFirst'
+  );
+  assert.ok(
+    /request\.mode === "navigate"[\s\S]{0,120}?networkFirst\(request, event\)/.test(src),
+    '導覽不再走 networkFirst'
+  );
 });
 
 test('資產在裝置上有一份就先給，不受逾時影響', async (load) => {

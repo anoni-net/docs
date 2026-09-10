@@ -274,6 +274,7 @@
       canvasLabel: "遮蔽用的畫布，在上面按住拖出方框",
       count: "已遮 {n} 處",
       none: "還沒有遮任何地方",
+      beforeHint: "選好圖之後可以先按「自動找出人臉」框一輪，機器漏掉的自己補。",
       findFaces: "自動找出人臉",
       finding: "尋找中",
       foundSome: "找到 {n} 張臉，已經框起來。側臉、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
@@ -305,6 +306,7 @@
       canvasLabel: "遮蔽用的画布，在上面按住拖出方框",
       count: "已遮 {n} 处",
       none: "还没有遮任何地方",
+      beforeHint: "选好图之后可以先按「自动找出人脸」框一轮，机器漏掉的自己补。",
       findFaces: "自动找出人脸",
       finding: "寻找中",
       foundSome: "找到 {n} 张脸，已经框起来。侧脸、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
@@ -336,6 +338,7 @@
       canvasLabel: "Redaction canvas. Press and drag to draw a box.",
       count: "{n} areas covered",
       none: "Nothing covered yet",
+      beforeHint: "Once an image is loaded you can press \"Find faces\" for a first pass, then add whatever it missed yourself.",
       findFaces: "Find faces",
       finding: "Looking",
       foundSome: "Found {n} faces and boxed them. Profiles, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
@@ -771,6 +774,10 @@
       renderPicker();
       if (working) renderWorking(t.loading);
       if (error) root.appendChild(el("p", "rd-error", t.errors[error] || t.errors.decode));
+      // 按鈕全部要等圖片載進來才出現，所以在還沒選檔案的畫面先講一句。文章的
+      // 步驟寫著「先按自動找出人臉」，而讀者停在第一步時畫面上沒有那顆按鈕，
+      // 說明與畫面對不起來，實際回報過找不到。
+      root.appendChild(el("p", "rd-note", t.beforeHint));
       root.appendChild(el("p", "rd-note", t.note));
       return;
     }
