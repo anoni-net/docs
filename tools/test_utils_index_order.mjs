@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 小工具索引頁的卡片順序要跟 nav 一致。
+ * 小工具索引頁的卡片順序與分組要跟 nav 一致。
  *
  * === 為什麼需要這支 ===
  *
@@ -11,6 +11,10 @@
  * 六個地方各自插入，插錯位置不會有人發現。實際上這一區短時間內就發生過兩次。
  *
  * 順序以 nav 為準，索引頁跟著它走。
+ *
+ * 2026-09-10 起 nav 把十四支工具收成五組，索引頁用同名的 ### 小標題分同樣的組。
+ * 分組是第二個會走鐘的地方：改了 nav 的組別而忘記搬索引頁的卡片，兩個入口就會給
+ * 出不同的分法，一樣不會有錯誤訊息。所以除了順序，組名與每一組的成員也要比對。
  *
  * 用法：
  *   node tools/test_utils_index_order.mjs
@@ -29,30 +33,72 @@ const PAIRS = [
   ['mkdocs_cn.yml', 'zh-CN'],
 ];
 
-// nav 裡 utils/index.md 之後那一串就是這一區的順序
-function navOrder(configFile) {
+// nav 的小工具那一區，回傳 [{ name, slugs }]。
+//
+// 用縮排界定範圍，不靠「遇到第一個非 utils 的行就停」。那個寫法在分組之後會停在
+// 第一個組名上，只讀得到第一組。這裡改成從 NAV_UTILS 那一行的縮排往下收，縮排回到
+// 同層或更外層就結束，中間的組名、註解與空行各自處理。
+function navGroups(configFile) {
   const lines = fs.readFileSync(path.join(DOCS, configFile), 'utf8').split('\n');
-  const out = [];
-  let started = false;
-  for (const line of lines) {
-    const m = line.match(/^\s+- utils\/([a-z0-9-]+)\.md\s*$/);
-    if (m) {
-      if (m[1] === 'index') { started = true; continue; }
-      if (started) out.push(m[1]);
-    } else if (started && out.length) {
-      break;
+  const start = lines.findIndex((l) => l.includes('NAV_UTILS'));
+  assert.ok(start >= 0, `${configFile} 找不到 NAV_UTILS`);
+  const baseIndent = lines[start].search(/\S/);
+
+  const groups = [];
+  const loose = [];
+  let current = null;
+  for (const line of lines.slice(start + 1)) {
+    if (!line.trim() || line.trim().startsWith('#')) continue;
+    if (line.search(/\S/) <= baseIndent) break;
+
+    const page = line.match(/^\s+- utils\/([a-z0-9-]+)\.md\s*$/);
+    if (page) {
+      if (page[1] === 'index') continue;
+      (current ? current.slugs : loose).push(page[1]);
+      continue;
     }
+    const group = line.match(/^\s+- "(.+)":\s*$/);
+    if (group) {
+      current = { name: group[1], slugs: [] };
+      groups.push(current);
+      continue;
+    }
+    // !ENV 的分組是「互動與呈現」，它底下是 games/*.md，不屬於這一區
+    current = null;
   }
-  return out;
+  assert.deepEqual(loose, [], `${configFile} 有沒有被收進分組的工具：${loose.join('、')}`);
+  return groups;
 }
 
-// 索引頁的 grid cards 區塊裡，每張卡片連到哪一頁
-function cardOrder(lang) {
+function navOrder(configFile) {
+  return navGroups(configFile).flatMap((g) => g.slugs);
+}
+
+// 索引頁每一個 grid cards 區塊，連同它上面那個 ### 小標題，回傳 [{ name, slugs }]
+function cardGroups(lang) {
   const text = fs.readFileSync(path.join(DOCS, lang, 'utils', 'index.md'), 'utf8');
-  const start = text.indexOf('<div class="grid cards" markdown>');
-  assert.ok(start >= 0, `${lang} 的索引頁沒有 grid cards 區塊`);
-  const body = text.slice(start, text.indexOf('</div>', start));
-  return [...body.matchAll(/^-\s+:[a-z0-9-]+:\s+\*\*\[[^\]]+\]\(([a-z0-9-]+)\.md\)\*\*/gm)].map((m) => m[1]);
+  assert.ok(text.includes('<div class="grid cards" markdown>'), `${lang} 的索引頁沒有 grid cards 區塊`);
+
+  const groups = [];
+  let heading = null;
+  let current = null;
+  for (const line of text.split('\n')) {
+    const h = line.match(/^###\s+(.+?)\s*$/);
+    if (h) { heading = h[1]; continue; }
+    if (line.startsWith('<div class="grid cards" markdown>')) {
+      current = { name: heading, slugs: [] };
+      groups.push(current);
+      continue;
+    }
+    if (line.startsWith('</div>')) { current = null; continue; }
+    const card = line.match(/^-\s+:[a-z0-9-]+:\s+\*\*\[[^\]]+\]\(([a-z0-9-]+)\.md\)\*\*/);
+    if (card && current) current.slugs.push(card[1]);
+  }
+  return groups;
+}
+
+function cardOrder(lang) {
+  return cardGroups(lang).flatMap((g) => g.slugs);
 }
 
 let passed = 0;
@@ -66,6 +112,23 @@ test('三個語系的索引頁卡片順序都跟自己的 nav 一致', () => {
     const cards = cardOrder(lang);
     assert.deepEqual(cards, nav,
       `${lang} 的順序對不上\n      nav  ：${nav.join('、')}\n      卡片：${cards.join('、')}`);
+  }
+});
+
+test('三個語系的索引頁分組都跟自己的 nav 分組一致', () => {
+  // 組名也要一樣。側邊欄寫「當面把東西傳過去」而索引頁寫別的字，讀者會以為是兩區
+  for (const [config, lang] of PAIRS) {
+    assert.deepEqual(cardGroups(lang), navGroups(config),
+      `${lang} 的分組對不上`);
+  }
+});
+
+test('三個語系的 nav 分組數與成員數彼此一致', () => {
+  // 組名各語系不同，能比的是有幾組、每一組幾頁
+  const shape = (config) => navGroups(config).map((g) => g.slugs.join('、'));
+  const [base, ...rest] = PAIRS.map(([config]) => shape(config));
+  for (let i = 0; i < rest.length; i += 1) {
+    assert.deepEqual(rest[i], base, `${PAIRS[i + 1][0]} 的分組跟 mkdocs.yml 不同`);
   }
 });
 
