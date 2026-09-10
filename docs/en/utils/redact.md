@@ -27,9 +27,12 @@ Several scenario pages share one step: handing a screenshot of a conversation or
 ## How to use it
 
 1. Drop the image in, click to choose a file, or paste it.
-2. To save effort, press "Find faces" first. It boxes the faces it finds, and those boxes can be removed just like the ones you draw.
-3. Press and drag over what needs covering. Release, and it is filled with black. Draw as many boxes as you need, and press "Undo last box" if one goes wrong.
-4. Press "Create the redacted image". The page decodes the output once more, checks that every box is solid black, and only then offers the download.
+2. To save effort, press "Find faces" first. Every face it finds gets a hollow blue outline. At this point nothing is covered.
+3. Tap any outline you do not need to take it away. Press "Cover them all" and the rest are filled with solid black in one go.
+4. Add what the detector missed: press and drag over what needs covering, release, and it is filled with black. Tap a filled area to take it away again, or press "Undo last box".
+5. Press "Create the redacted image". The page decodes the output once more, checks that every box is solid black, and only then offers the download.
+
+While blue outlines are still on the picture, "Create the redacted image" stays disabled. A face the detector found and you have not ruled on is a face that would leave uncovered, so the button waits for you to press "Cover them all" or tap the outlines away.
 
 The output filename is always `redacted.png` or `redacted.jpg`. Screenshot filenames tend to carry the app name and a timestamp to the second, which is a leak of its own.
 
@@ -51,9 +54,11 @@ Images above sixteen million pixels are scaled down to that limit first, because
 
 The detector's code and data, about 240 KB, are fetched only when you press "Find faces". Nobody who just wants to draw boxes has to download it.
 
-It finds faces that are front-facing, upright and reasonably large in the frame. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Delete the extra ones with a click and add the missed ones yourself.
+It finds faces that are front-facing, upright and reasonably large in the frame. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Tap the extra ones to take them away, and add the missed ones yourself.
 
 Glasses are a common case. The area around the eyes is where this kind of detector gets most of its signal, so frames change the light and dark pattern there and the score drops. Measured on the same face with synthetic frames: thin frames roughly halve the score and are still recoverable, while heavy frames and dark glasses collapse it entirely, beyond any threshold. If someone in the frame is wearing dark glasses, assume it will miss them and draw the box yourself.
+
+A quick way to check your work: count the people you can see, then compare that with the number of outlines. The two numbers do not have to match, because anyone turned away from the camera never gets boxed, but a large gap is a sign to look again.
 
 More to the point, a face is not the only thing that identifies someone. Name badges, ID cards, tattoos, licence plates, house numbers, distinctive clothing, a shop sign in the background: detection does not touch any of it. The pass you make yourself, after the machine has drawn its boxes, is the step that actually decides what gets covered.
 
@@ -61,7 +66,7 @@ It uses [pico.js](https://github.com/nenadmarkus/picojs){target="_blank"}, MIT l
 
 ## What it does not do
 
-No fully automatic redaction. What needs covering depends on your situation, a model cannot decide that for you, and you carry the cost of the face it misses. The "find faces" button only draws boxes for you; pressing "Make the redacted image" is still your decision, as described in the section above.
+No fully automatic redaction. What needs covering depends on your situation, a model cannot decide that for you, and you carry the cost of the face it misses. The "Find faces" button only draws outlines for you. Filling them in with "Cover them all", and then pressing "Create the redacted image", stays your decision, as described in the section above.
 
 No blur and no pixelation, for the reason above.
 

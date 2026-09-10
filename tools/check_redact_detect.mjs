@@ -26,6 +26,15 @@
  * （縮到 maxSide、灰階、run_cascade、分群、過門檻），參數從 redact.js 原地讀，
  * 不重寫一份。每個場景訂一個召回下限與一個誤判上限。
  *
+ * 第一版只數框出幾個，那是錯的：一個場景放了 21 張臉而框出 21 個，可能是 21 張
+ * 全中，也可能是 17 張加 4 個多框，兩種的意義完全相反。現在把每個偵測的中心點
+ * 對回放進去的臉，落在該張臉半徑以內算找到，一對一，分數高的先配，對不上的算
+ * 多框。訂 minQuality 的時候正好是召回與多框同時在動，只看總數會訂錯。
+ *
+ * 真值要連「跟著裁切進來的臉」一起算。街拍場景是從樣張裁下單張臉再貼上去，而
+ * 裁切框是臉的 1.6 倍，樣張上第三張臉的裁切框剛好含進第二張臉。那張臉在拼出來
+ * 的畫面上真的看得見，偵測抓到它是對的，漏掉這件事會讓五個對的偵測被記成多框。
+ *
  * 門檻訂得比實測值寬鬆一點，留給不同 Chrome 版本的浮點差異。真正要擋的是
  * 「掉一大截」，不是一兩個的波動。
  *
@@ -58,11 +67,11 @@ const DETECT = new Function(`${detectBlock[0]}\n return DETECT;`)();
 // minRecall 訂在實測值往下留一點餘裕，maxExtra 是容許多框幾個。多框的代價是
 // 讀者按一下刪掉，漏抓的代價是那張臉送出去，所以兩邊不對稱。
 const SCENES = [
-  { key: 'plain', label: '乾淨樣張', truth: 4, minRecall: 4, maxExtra: 0 },
-  { key: 'crowd', label: '人多、臉小', truth: 64, minRecall: 58, maxExtra: 4 },
-  { key: 'street', label: '街拍、大小差很多', truth: 21, minRecall: 18, maxExtra: 3 },
-  { key: 'streetTilt', label: '街拍、頭傾斜', truth: 21, minRecall: 16, maxExtra: 3 },
-  { key: 'streetBlur', label: '街拍、傾斜加遠景模糊', truth: 21, minRecall: 14, maxExtra: 3 },
+  { key: 'plain', label: '乾淨樣張', minRecall: 4, maxExtra: 0 },
+  { key: 'crowd', label: '人多、臉小', minRecall: 58, maxExtra: 4 },
+  { key: 'street', label: '街拍、大小差很多', minRecall: 17, maxExtra: 4 },
+  { key: 'streetTilt', label: '街拍、頭傾斜', minRecall: 16, maxExtra: 4 },
+  { key: 'streetBlur', label: '街拍、傾斜加遠景模糊', minRecall: 16, maxExtra: 4 },
 ];
 
 const MIME = {
@@ -221,7 +230,36 @@ const counts = await evaluate(`(async () => {
       maxsize: Math.max(work.width, work.height),
       scalefactor: DETECT.scaleFactor,
     });
-    return pico.cluster_detections(raw, DETECT.iou).filter((d) => d[3] > DETECT.minQuality).length;
+    const back = canvas.width / work.width;
+    return pico
+      .cluster_detections(raw, DETECT.iou)
+      .filter((d) => d[3] > DETECT.minQuality)
+      .map((d) => ({ x: d[1] * back, y: d[0] * back, score: d[3] }));
+  };
+
+  // 把偵測到的框對回放進去的臉。中心點落在該張臉半徑以內就算找到，一對一，
+  // 分數高的先配。對不上的算多框。只數總數看不出「多框」與「找到」的差別，
+  // 而降門檻的時候剛好是這兩件事同時在動。
+  const score = (found, truth) => {
+    const taken = new Array(truth.length).fill(false);
+    let hit = 0;
+    for (const det of found.slice().sort((a, b) => b.score - a.score)) {
+      let best = -1;
+      let bestDist = Infinity;
+      truth.forEach((face, i) => {
+        if (taken[i]) return;
+        const dist = Math.hypot(det.x - face.x, det.y - face.y);
+        if (dist <= face.r && dist < bestDist) {
+          best = i;
+          bestDist = dist;
+        }
+      });
+      if (best !== -1) {
+        taken[best] = true;
+        hit += 1;
+      }
+    }
+    return { total: truth.length, found: found.length, hit: hit, extra: found.length - hit };
   };
 
   const plain = document.createElement('canvas');
@@ -245,7 +283,21 @@ const counts = await evaluate(`(async () => {
     for (let y = 0; y < tiles; y += 1) {
       for (let x = 0; x < tiles; x += 1) ctx.drawImage(img, x * cell, y * cellH, cell, cellH);
     }
-    return canvas;
+    const kx = cell / img.naturalWidth;
+    const ky = cellH / img.naturalHeight;
+    const truth = [];
+    for (let y = 0; y < tiles; y += 1) {
+      for (let x = 0; x < tiles; x += 1) {
+        for (const face of faces) {
+          truth.push({
+            x: x * cell + face[1] * kx,
+            y: y * cellH + face[0] * ky,
+            r: (face[2] * kx) / 2,
+          });
+        }
+      }
+    }
+    return { canvas: canvas, truth: truth };
   };
 
   // 街拍：雜亂背景，臉的大小從 44 到 260，可選傾斜與遠景模糊。
@@ -272,6 +324,7 @@ const counts = await evaluate(`(async () => {
       ctx.stroke();
     }
     const sizes = [260, 180, 120, 90, 70, 56, 44];
+    const truth = [];
     for (let i = 0; i < count; i += 1) {
       const face = faces[i % faces.length];
       const size = face[2];
@@ -291,16 +344,39 @@ const counts = await evaluate(`(async () => {
       ctx.drawImage(crop, -target * 0.8, -target * 0.8, target * 1.6, target * 1.6);
       ctx.restore();
       ctx.filter = 'none';
+
+      // 裁切框是臉的 1.6 倍，樣張上第三張臉的裁切框剛好含進第二張臉。那張臉在
+      // 拼出來的畫面上真的看得見，偵測抓到它是對的。所以真值要把跟著進來的臉
+      // 一起算，只記主角會把它們判成誤判，門檻就會被這個假訊號帶著跑。
+      const sx0 = face[1] - size * 0.8;
+      const sy0 = face[0] - size * 0.8;
+      const span = size * 1.6;
+      const rad = deg * Math.PI / 180;
+      for (const other of faces) {
+        const u = (other[1] - sx0) / span;
+        const v = (other[0] - sy0) / span;
+        if (u < 0 || u > 1 || v < 0 || v > 1) continue;
+        const lx = (u - 0.5) * target * 1.6;
+        const ly = (v - 0.5) * target * 1.6;
+        truth.push({
+          x: x + lx * Math.cos(rad) - ly * Math.sin(rad),
+          y: y + lx * Math.sin(rad) + ly * Math.cos(rad),
+          r: (other[2] * target / size) / 2,
+        });
+      }
     }
-    return canvas;
+    return { canvas: canvas, truth: truth };
   };
 
+  const run = (scene) => score(detect(scene.canvas), scene.truth);
+  const plainTruth = faces.map((face) => ({ x: face[1], y: face[0], r: face[2] / 2 }));
+
   return {
-    plain: detect(plain),
-    crowd: detect(tile(4, 3200)),
-    street: detect(street({ count: 21, tilt: 0, blur: 0 })),
-    streetTilt: detect(street({ count: 21, tilt: 25, blur: 0 })),
-    streetBlur: detect(street({ count: 21, tilt: 25, blur: 2 })),
+    plain: score(detect(plain), plainTruth),
+    crowd: run(tile(4, 3200)),
+    street: run(street({ count: 21, tilt: 0, blur: 0 })),
+    streetTilt: run(street({ count: 21, tilt: 25, blur: 0 })),
+    streetBlur: run(street({ count: 21, tilt: 25, blur: 2 })),
   };
 })()`);
 
@@ -308,14 +384,14 @@ let failed = 0;
 console.log(`  參數：maxSide ${DETECT.maxSide}、minSize ${DETECT.minSize}、minQuality ${DETECT.minQuality}\n`);
 for (const scene of SCENES) {
   const got = counts[scene.key];
-  const tooFew = got < scene.minRecall;
-  const tooMany = got > scene.truth + scene.maxExtra;
+  const tooFew = got.hit < scene.minRecall;
+  const tooMany = got.extra > scene.maxExtra;
   const ok = !tooFew && !tooMany;
   if (!ok) failed += 1;
-  const why = tooFew ? `低於下限 ${scene.minRecall}` : tooMany ? `超出上限 ${scene.truth + scene.maxExtra}` : '';
+  const why = tooFew ? `低於下限 ${scene.minRecall}` : tooMany ? `多框超出上限 ${scene.maxExtra}` : '';
   console.log(
-    `  ${ok ? '✓' : '✗'} ${scene.label.padEnd(22)} 實際 ${String(scene.truth).padStart(2)} 張，` +
-      `框出 ${String(got).padStart(2)} 個${why ? '  ← ' + why : ''}`
+    `  ${ok ? '✓' : '✗'} ${scene.label.padEnd(22)} 實際 ${String(got.total).padStart(2)} 張，` +
+      `找到 ${String(got.hit).padStart(2)} 張，多框 ${String(got.extra).padStart(2)} 個${why ? '  ← ' + why : ''}`
   );
 }
 
