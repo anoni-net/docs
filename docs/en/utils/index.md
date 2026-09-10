@@ -82,6 +82,11 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 <div class="grid cards" markdown>
 
+-   :material-file-document-multiple-outline: **[PDF page tidy-up](pdf-pages.md)**
+
+    Merge several PDFs, pull out or drop pages, reorder them, fix their orientation. The result is a newly built file, so the source's title, author, producer and creation date do not come along, and it is read back once before you get it.
+
+
 -   :material-image-off-outline: **[File metadata remover](strip-metadata.md)**
 
     Strip EXIF, GPS, device model, authoring software, author and comment fields from photos, videos, recordings, Office documents and PDFs without the file leaving your device. For photos, videos and recordings not one byte of compressed data is touched, and every segment kept or removed is listed for you.
