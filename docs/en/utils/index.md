@@ -46,13 +46,13 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
     Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
 
--   :material-fingerprint: **[Passkey as your key](passkey.md)**
-
-    Create a passkey for this site and store it in your password manager or keychain. For the checklist alone, one press of "Create passkey" is enough; only file encryption also needs a test unlock and a backup key. Local file encryption can then use it as the key, with no passphrase to remember, and the checklist, saved threat model answers and the address book are encrypted with it on your device. No account, no server, nothing stored here.
-
 -   :material-lock-outline: **[Local file encryption](age.md)**
 
     Pick a file or paste some text and encrypt it to the age format in your browser with a passphrase, a passkey or recipients' age public keys, or open an age file. The ciphertext can come out as text, so it goes into your password manager next to the passphrase and follows you across devices. The output is decrypted again and checked before the download is offered. It is a public format: any computer with the age command-line tool opens it, without this site.
+
+-   :material-fingerprint: **[Passkey as your key](passkey.md)**
+
+    Create a passkey for this site and store it in your password manager or keychain. For the checklist alone, one press of "Create passkey" is enough; only file encryption also needs a test unlock and a backup key. Local file encryption can then use it as the key, with no passphrase to remember, and the checklist, saved threat model answers and the address book are encrypted with it on your device. No account, no server, nothing stored here.
 
 </div>
 

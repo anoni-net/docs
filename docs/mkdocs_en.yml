@@ -116,8 +116,8 @@ nav:
           - utils/checklist.md
       - "Passwords, keys and encryption":
           - utils/passphrase.md
-          - utils/passkey.md
           - utils/age.md
+          - utils/passkey.md
       - "Handing files over in person":
           - utils/qrcode.md
           - utils/qr-read.md

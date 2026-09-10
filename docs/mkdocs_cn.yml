@@ -116,8 +116,8 @@ nav:
           - utils/checklist.md
       - "密码、密钥与加密":
           - utils/passphrase.md
-          - utils/passkey.md
           - utils/age.md
+          - utils/passkey.md
       - "当面把东西传过去":
           - utils/qrcode.md
           - utils/qr-read.md
