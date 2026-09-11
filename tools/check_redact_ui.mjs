@@ -192,11 +192,19 @@ check(await evaluate(`${helpers} !!cv`), '圖載進來，畫布出現');
 
 // worker 是 startWorker 建一次就留著重用的，攔截要在第一次按之前裝好
 await evaluate(`
-  window.__seen = { spinner: false, firstFrame: null, workers: [] };
+  window.__seen = { spinner: false, firstFrame: null, workers: [], messages: [] };
   const RealWorker = window.Worker;
   window.Worker = function (url, opts) {
     window.__seen.workers.push(String(url));
-    return new RealWorker(url, opts);
+    const node = new RealWorker(url, opts);
+    // 側錄 worker 回來的每一則。中途回報那一則走的是另一條分支，單元測試碰不到
+    node.addEventListener('message', (event) => {
+      const data = event.data || {};
+      window.__seen.messages.push({
+        ok: !!data.ok, partial: !!data.partial, n: (data.dets || []).length,
+      });
+    });
+    return node;
   };
   true;
 `);
@@ -273,6 +281,7 @@ await wait(500);
 await evaluate(`
   window.__seen.spinner = false;
   window.__seen.firstFrame = null;
+  window.__seen.messages = [];
   window.__clickAt = null;
   const tick = () => {
     if (window.__clickAt !== null) {
@@ -304,6 +313,20 @@ const viaWorker = feedback.workers.some((url) => /\/js\/redact-worker\.js$/.test
 check(viaWorker, viaWorker
   ? '掃描交給了 js/redact-worker.js'
   : `掃描沒有交給 worker（建立過的 worker：${JSON.stringify(feedback.workers)}）`);
+
+const msgs = feedback.messages;
+const partials = msgs.filter((m) => m.partial);
+const finals = msgs.filter((m) => m.ok && !m.partial);
+check(partials.length === 1, `中途回報了 ${partials.length} 次，應該只有一次`);
+check(finals.length === 1, `最終結果回了 ${finals.length} 次，應該只有一次`);
+const ordered = msgs.length >= 2 && msgs[0].partial === true && msgs[msgs.length - 1].partial === false;
+check(ordered, ordered
+  ? '訊息順序是先中途回報再最終結果'
+  : `訊息順序不對，應該是先中途再最終：${JSON.stringify(msgs)}`);
+const grew = partials.length === 1 && finals.length === 1 && partials[0].n <= finals[0].n;
+check(grew, grew
+  ? `中途 ${partials[0].n} 框，最終 ${finals[0].n} 框，只增不減`
+  : '中途回報的框比最終還多，框會在讀者眼前消失');
 
 console.log(failed ? `\n${failed} 項沒過` : '\n每一步都對');
 chrome.kill();

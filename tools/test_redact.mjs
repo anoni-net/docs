@@ -32,6 +32,12 @@ const SRC = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'redact.js');
 const src = fs.readFileSync(SRC, 'utf8');
 const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 
+const CORE = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'redact-detect.js');
+const coreSrc = fs.readFileSync(CORE, 'utf8');
+const coreCode = coreSrc.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+// 這一份是 worker 與退路共用的掃描核心，原地載進來真的執行
+const core = new Function('self', `${coreSrc}\n return self.redactDetect;`)({});
+
 const WORKER = path.join(HERE, '..', 'docs', 'zh-TW', 'js', 'redact-worker.js');
 const workerSrc = fs.readFileSync(WORKER, 'utf8');
 const workerCode = workerSrc.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
@@ -357,9 +363,17 @@ test('唯一的 fetch 是去拿本站的級聯資料，而且不帶任何內容�
 });
 
 test('偵測用的程式與資料只從本站相對路徑載入', () => {
-  const m = code.match(/script\.src = new URL\((['"])([^'"]+)\1/);
-  assert.ok(m, '找不到 pico.js 的載入位置');
-  assert.equal(m[2], '../vendor/pico/pico.js');
+  // 載入器只有一處組網址，literal 在呼叫端
+  assert.ok(
+    /script\.src = new URL\(rel, location\.href\)\.href;/.test(code),
+    'loadScript 不是用相對路徑從同源組出來的'
+  );
+  const rels = [...code.matchAll(/loadScript\((['"])([^'"]+)\1\)/g)].map((m) => m[2]);
+  assert.deepEqual(
+    rels.sort(),
+    ['../../js/redact-detect.js', '../vendor/pico/pico.js'],
+    '載入的相對路徑跟預期不一樣'
+  );
 });
 
 test('產生輸出時有轉圈與 aria-busy，交付前真的解開一次驗', () => {
@@ -551,7 +565,7 @@ test('掃描交給 worker，網址是本站的相對路徑', () => {
 
 test('worker 起不來就退回頁面裡做，功能不會消失', () => {
   const fn = src.slice(src.indexOf('async function findFaces'), src.indexOf('async function exportImage'));
-  assert.ok(/if \(!dets\) dets = await detectInPage\(plan\);/.test(fn), '沒有退路');
+  assert.ok(/if \(!dets\) dets = await detectInPage\(plan, showPartial\);/.test(fn), '沒有退路');
   assert.ok(code.includes('workerDead'), '起不來之後沒有記下來，會一直重試');
   assert.ok(
     src.includes('async function detectInPage'),
@@ -579,16 +593,21 @@ test('三個語系都給了秒數與時間預期', () => {
     assert.ok(STRINGS[lang].elapsed.includes('{s}'), `${lang} 的 elapsed 沒有帶秒數`);
     assert.ok(STRINGS[lang].findingNote, `${lang} 少了 findingNote`);
   }
-  // 轉圈只說明「在做事」，沒有說明「要多久」。手機上這一段有兩三秒
-  assert.ok(/兩到三秒/.test(STRINGS['zh-TW'].findingNote));
-  assert.ok(/两到三秒/.test(STRINGS.zh.findingNote));
-  assert.ok(/two to three seconds/i.test(STRINGS.en.findingNote));
+  // 轉圈只說明「在做事」，沒有說明「要多久」。三個角度在手機上有五六秒
+  assert.ok(/五到六秒/.test(STRINGS['zh-TW'].findingNote));
+  assert.ok(/五到六秒/.test(STRINGS.zh.findingNote));
+  assert.ok(/five to six seconds/i.test(STRINGS.en.findingNote));
 });
 
 test('worker 只從本站相對路徑載入 pico 與級聯資料', () => {
-  const imp = workerCode.match(/importScripts\((['"])([^'"]+)\1\)/);
+  const imp = workerCode.match(/importScripts\(([^)]*)\)/);
   assert.ok(imp, 'worker 沒有載入 pico');
-  assert.equal(imp[2], '../utils/vendor/pico/pico.js');
+  const rels = [...imp[1].matchAll(/(['"])([^'"]+)\1/g)].map((m) => m[2]);
+  assert.deepEqual(
+    rels,
+    ['../utils/vendor/pico/pico.js', 'redact-detect.js'],
+    'worker 載入的相對路徑跟預期不一樣'
+  );
   assert.ok(
     /const url = new URL\("\.\.\/utils\/vendor\/pico\/facefinder", location\.href\)\.href;/.test(workerCode),
     '級聯檔的網址不是用相對路徑組出來的'
@@ -633,6 +652,173 @@ test('三語系的離線清單都收了 worker', () => {
       `${dir}/js/redact-worker.js 不是指向 zh-TW 的 symlink`
     );
   }
+});
+
+
+// ---------------------------------------------------------------------------
+// 多角度掃描：抓得到頭是歪的臉
+// ---------------------------------------------------------------------------
+
+test('角度表的第一個一定是 0，中途回報的那一批才是直立的臉', () => {
+  assert.equal(tool.DETECT.angles[0], 0, '第一個角度不是 0，中途回報的就不是直立的臉');
+  assert.ok(tool.DETECT.angles.length >= 3, '只掃一兩個角度，傾斜的臉抓不回來');
+});
+
+test('角度左右對稱，幅度落在量過的範圍裡', () => {
+  const tilts = tool.DETECT.angles.filter((deg) => deg !== 0);
+  const mags = [...new Set(tilts.map(Math.abs))];
+  assert.equal(mags.length, 1, `左右的幅度不一樣：${JSON.stringify(tilts)}`);
+  assert.equal(tilts.reduce((a, b) => a + b, 0), 0, '角度沒有左右對稱，會偏向一邊');
+  // 上界：30 度那一組多框從 6 跳到 16，召回只多一張
+  // 下界：15 度那一組多框從 6 跳到 14
+  assert.ok(mags[0] <= 25, '角度太大，多框會跳上去');
+  assert.ok(mags[0] >= 20, '角度太小，多框會跳上去而召回沒有更好');
+});
+
+test('轉 0 度原封不動，轉一圈回到原點', () => {
+  const w = 9, h = 9;
+  const gray = new Uint8Array(w * h);
+  for (let i = 0; i < gray.length; i += 1) gray[i] = i * 3;
+  assert.equal(core.rotateGray(gray, w, h, 0), gray, '轉 0 度應該直接回傳同一個緩衝區');
+  const round = core.rotateGray(gray, w, h, 360);
+  // 中間那一塊不受邊界影響，逐點比對
+  for (let y = 2; y < h - 2; y += 1) {
+    for (let x = 2; x < w - 2; x += 1) {
+      const i = y * w + x;
+      assert.ok(Math.abs(round[i] - gray[i]) <= 1, `轉一圈之後 (${x},${y}) 差了太多`);
+    }
+  }
+});
+
+test('轉過去再轉回來，位置回得到原處', () => {
+  // 亮點放在偏離中心的地方，轉 25 度之後找最亮的那一格，再用 mapBack 推回去
+  const w = 61, h = 61, deg = 25;
+  const px = 44, py = 18;
+  const gray = new Uint8Array(w * h);
+  gray[py * w + px] = 255;
+  const out = core.rotateGray(gray, w, h, deg);
+  let best = -1, bestAt = -1;
+  for (let i = 0; i < out.length; i += 1) {
+    if (out[i] > best) { best = out[i]; bestAt = i; }
+  }
+  assert.ok(best > 0, '轉完之後亮點不見了');
+  const rx = bestAt % w, ry = (bestAt / w) | 0;
+  const backTo = core.mapBack([ry, rx, 10, 5], deg, w, h);
+  assert.ok(Math.abs(backTo[1] - px) <= 1.5, `x 推不回去：${backTo[1]} 應該接近 ${px}`);
+  assert.ok(Math.abs(backTo[0] - py) <= 1.5, `y 推不回去：${backTo[0]} 應該接近 ${py}`);
+  assert.equal(backTo[2], 10, 'size 被動到了，旋轉不該改變尺寸');
+  assert.equal(backTo[3], 5, '分數被動到了');
+});
+
+test('每個角度各掃一次，最後只分一次群', async () => {
+  const seen = [];
+  let clustered = 0;
+  const fakePico = {
+    run_cascade: (image) => {
+      seen.push(`${image.ncols}x${image.nrows}`);
+      return [[10, 20, 30, 40]];
+    },
+    cluster_detections: (dets) => { clustered += 1; return dets; },
+  };
+  const params = { angles: [0, -25, 25], iou: 0.2, minQuality: 1, shiftFactor: 0.1, minSize: 32, scaleFactor: 1.1 };
+  const gray = new Uint8Array(40 * 30);
+  const out = await core.scanAngles(fakePico, {}, gray, 40, 30, params, {});
+  assert.equal(seen.length, 3, `掃了 ${seen.length} 次，應該是三個角度各一次`);
+  assert.equal(out.length, 3, '三個角度的偵測沒有全部收進來');
+  // 中途回報那一次也會分群，所以是 2 而不是 4。重點是不會每個角度各分一次
+  assert.ok(clustered <= 2, `分群跑了 ${clustered} 次，應該只在最後（加上中途回報那一次）`);
+});
+
+test('第一個角度掃完回報一次，而且只有一次', async () => {
+  const fakePico = {
+    run_cascade: () => [[10, 20, 30, 40]],
+    cluster_detections: (dets) => dets,
+  };
+  const params = { angles: [0, -25, 25], iou: 0.2, minQuality: 1, shiftFactor: 0.1, minSize: 32, scaleFactor: 1.1 };
+  const gray = new Uint8Array(40 * 30);
+  const partials = [];
+  await core.scanAngles(fakePico, {}, gray, 40, 30, params, {
+    onPartial: (dets) => partials.push(dets.length),
+  });
+  assert.equal(partials.length, 1, `中途回報了 ${partials.length} 次，應該只有一次`);
+  assert.equal(partials[0], 1, '中途回報的不是第一個角度的結果');
+
+  // 只有一個角度的時候不該回報，那一批就是最終結果
+  const once = [];
+  await core.scanAngles(fakePico, {}, gray, 40, 30, { ...params, angles: [0] }, {
+    onPartial: () => once.push(1),
+  });
+  assert.equal(once.length, 0, '只掃一個角度也回報中途結果，畫面會閃一下');
+});
+
+test('角度之間讓出一次，退回頁面裡做的時候畫面才有機會更新', async () => {
+  const fakePico = { run_cascade: () => [], cluster_detections: (d) => d };
+  const params = { angles: [0, -25, 25], iou: 0.2, minQuality: 1, shiftFactor: 0.1, minSize: 32, scaleFactor: 1.1 };
+  let paused = 0;
+  await core.scanAngles(fakePico, {}, new Uint8Array(16), 4, 4, params, {
+    pause: async () => { paused += 1; },
+  });
+  assert.equal(paused, 2, `讓出了 ${paused} 次，三個角度之間應該是兩次`);
+});
+
+test('有了中途結果就不再顯示時間預期，兩段說明不疊在一起', () => {
+  assert.ok(
+    /if \(detecting && !detectNote\) \{/.test(code),
+    '偵測中的時間預期沒有在拿到中途結果之後收掉'
+  );
+});
+
+test('中途回報只換框，不解開動作按鈕', () => {
+  const fn = src.slice(src.indexOf('async function findFaces'), src.indexOf('async function exportImage'));
+  const partial = fn.slice(fn.indexOf('const showPartial'), fn.indexOf('let dets = null'));
+  assert.ok(partial.includes('marks = toBoxes(dets)'), '中途回報沒有把框畫出來');
+  assert.ok(
+    !/detecting = false/.test(partial),
+    '中途回報就把 detecting 關掉了，按了全部遮起來之後還會冒出新框'
+  );
+  assert.ok(partial.includes('t.foundPartial'), '中途回報沒有講出還在掃');
+});
+
+test('三個地方共用同一份掃描核心，沒有第二份實作', () => {
+  // worker、退路、量測工具都指向 redact-detect.js。少掃一個角度的那一邊會讓讀者
+  // 拿到一張少遮幾張臉的圖而完全不知情，所以不能有兩份實作
+  assert.ok(coreCode.includes('function rotateGray'), '核心裡沒有 rotateGray');
+  assert.ok(coreCode.includes('function scanAngles'), '核心裡沒有 scanAngles');
+  for (const [label, text] of [['redact.js', code], ['redact-worker.js', workerCode]]) {
+    assert.ok(
+      !/function rotateGray|function mapBack/.test(text),
+      `${label} 裡自己又寫了一份旋轉，應該共用 redact-detect.js`
+    );
+  }
+  assert.ok(code.includes('core.scanAngles'), '退路沒有用共用的核心');
+  assert.ok(workerCode.includes('self.redactDetect.scanAngles'), 'worker 沒有用共用的核心');
+  const harness = fs.readFileSync(path.join(HERE, 'check_redact_detect.mjs'), 'utf8');
+  assert.ok(
+    harness.includes("'/redact-detect.js'") && harness.includes('self.redactDetect.scanAngles'),
+    '量測工具沒有用共用的核心，量出來的就不是讀者拿到的結果'
+  );
+});
+
+test('共用核心也收進三語系的離線清單，symlink 也在', () => {
+  for (const dir of ['zh-TW', 'zh-CN', 'en']) {
+    const md = fs.readFileSync(path.join(HERE, '..', 'docs', dir, 'utils', 'redact.md'), 'utf8');
+    assert.ok(md.includes('- js/redact-detect.js'), `${dir} 的 offline_assets 沒有收掃描核心`);
+  }
+  for (const dir of ['en', 'zh-CN']) {
+    const link = path.join(HERE, '..', 'docs', dir, 'js', 'redact-detect.js');
+    assert.ok(fs.existsSync(link), `${dir}/js/redact-detect.js 不存在`);
+    assert.equal(fs.readlinkSync(link), '../../zh-TW/js/redact-detect.js');
+  }
+});
+
+test('共用核心裡沒有任何把資料送出去或留下來的手段', () => {
+  for (const bad of [
+    'fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket', 'EventSource',
+    'localStorage', 'sessionStorage', 'indexedDB', 'document.cookie', 'postMessage',
+  ]) {
+    assert.ok(!coreCode.includes(bad), `掃描核心裡出現 ${bad}`);
+  }
+  assert.ok(!/https?:\/\//.test(coreCode), '掃描核心裡出現絕對網址');
 });
 
 // ---------------------------------------------------------------------------
