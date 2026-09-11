@@ -15,6 +15,14 @@ icon: simple/torbrowser
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 15.0.22
+
+> 2026-09-09 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15022/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>整版只有一项变更，把内置的 tor daemon 更新到 0.4.9.12。那是一次带七个 TROVE 编号的安全释出，上游用的字是强烈建议尽快升级，看到更新提示就装。
+- 0.4.9.12 修掉的问题有几个从客户端这一侧就构成风险：恶意的目录缓存可以让浏览器误判某些中继不可用，设了 `AutomapHostsOnResolve` 时有 use-after-free，共识差异文件原本没有大小上限而可以被用来耗尽内存。逐条整理在 [tor daemon 更新日志](./tor-daemon.md)。
+- 上一则 15.0.21 引的上游跟踪项目写那是 15.0 系列的最后一版，实际上 15.0.22 仍以 15.0.x 发出，带的就是这个 tor 安全修补。
+
 ## Tor Browser 16.0a11（Alpha 测试通道）
 
 > 2026-09-02 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a11/){target="_blank"}

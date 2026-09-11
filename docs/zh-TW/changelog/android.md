@@ -1,6 +1,6 @@
 ---
 title: Android 安全修補等級
-description: Android 每月安全修補等級的整理，說明怎麼查自己的裝置落後多少，以及 2026 年 7 月起公開公告不再列出漏洞明細的影響。
+description: Android 每月安全修補等級的整理，說明怎麼查自己的裝置落後多少，以及公開公告在 2026 年 7 月到 8 月缺漏漏洞明細、9 月恢復的影響。
 icon: material/android
 ---
 
@@ -12,9 +12,11 @@ Android 每月安全更新的整理。這一頁的做法跟 [iOS](./ios.md)、[m
 
 Google 的 Android 安全公告在 2026 年 7 月出現變化，公開頁面不再列出漏洞明細。2026 年 6 月的公告還有 119 個 CVE，分成 Framework、System、Kernel 與各家晶片廠等分節，每一條都標了類型與嚴重度。7 月與 8 月的頁面只剩說明文字，連「明細表的 Type 欄位代表什麼」這種樣板解釋都還留著，那張表格本身卻不在頁面上。用瀏覽器完整渲染過也一樣，所以缺的是內容本身。
 
+9 月 8 日的公告又把明細放回來了，18 張表、180 個 CVE，元件分節與嚴重度都在。7 月與 8 月目前看是兩個月的空窗。分級要不要加回來，等這個狀態延續幾個月再決定比較穩妥。現在就改回去的話，7 月與 8 月那兩則會空著一格，讀者分不出哪一格是「查過沒事」、哪一格是「查不到」。
+
 沒有明細就無法判斷「這個月有沒有正在被實際利用的漏洞」，而那正是 iOS 與 Windows 那兩頁分級的依據。與其用不確定的資料硬做分級，這一頁改成追三件可以確定的事：每月的修補等級推進到哪、涵蓋多少 CVE 與嚴重度分佈、你的裝置落後多少。
 
-底下每則的 CVE 數字來自 [GrapheneOS 的發布說明](https://grapheneos.org/releases){target="_blank"}，但它代表的東西需要說明清楚。GrapheneOS 會發 security preview release，提前套用 Google 排定在未來幾個月才公告的修補，發布說明裡的「List of additional fixed CVEs」就是那批提前修好的清單，會逐版累積。所以那個數字是「GrapheneOS 已經比官方排程早修好多少」，不是「這個月官方公告涵蓋多少」。後者在 7 月之後拿不到，因為明細不再公開。
+7 月與 8 月那兩則的 CVE 數字來自 [GrapheneOS 的發布說明](https://grapheneos.org/releases){target="_blank"}，那是官方公告沒有明細時唯一拿得到的來源，它代表的東西需要說明清楚。GrapheneOS 會發 security preview release，提前套用 Google 排定在未來幾個月才公告的修補，發布說明裡的「List of additional fixed CVEs」就是那批提前修好的清單，會逐版累積。所以那個數字是「GrapheneOS 已經比官方排程早修好多少」，不是「這個月官方公告涵蓋多少」。後者在 7 月與 8 月拿不到，因為明細不在頁面上。9 月的公告恢復明細之後，那一則的數字直接取自 Google 的公告。
 
 ## 先查自己的裝置落後多少
 
@@ -27,6 +29,18 @@ Android 裝置的實際修補等級由手機廠決定，跟 Google 公告的日�
 - 完全停止更新的裝置，已知漏洞不會再有修補。處理敏感聯絡或採訪工作的話，該考慮換機或改裝仍在維護的系統。
 
 原廠支援期長短差很多，買之前查清楚該型號的承諾支援年限，比買了之後才發現划算。
+
+## 2026 年 9 月
+
+> 修補等級 2026-09-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [GrapheneOS 發布頁](https://grapheneos.org/releases){target="_blank"}
+
+- 公告在 9 月 8 日發布，漏洞明細回來了，所以這一則的數字直接來自 Google 的公告。
+- 180 個 CVE，32 個評為 Critical、148 個 High。分成 2026-09-01 與 2026-09-05 兩個修補等級，裝置顯示 2026-09-05 或更新才代表兩批都涵蓋。
+- 最嚴重的一組在 System 元件，8 個 Critical 的遠端執行程式碼，不需要額外的執行權限，也不需要使用者做任何動作。影響範圍從 Android 14 到 17（CVE-2026-28604、CVE-2026-28618、CVE-2026-28639、CVE-2026-28662、CVE-2026-49882、CVE-2026-49884、CVE-2026-49919、CVE-2026-49921）。
+- System 另外有 12 個 Critical 提權與 3 個 Critical 阻斷服務，Framework 有 3 個 Critical。核心那一組的 4 個 Critical 提權裡有 3 個落在受保護的 KVM（Protected KVM）上。
+- 晶片廠那一側集中在 Imagination Technologies 25 個與 MediaTek 21 個，都評為 High。
+- 公告沒有提到任何項目正在被實際利用。
+- GrapheneOS 這一側，到 9 月 10 日那版為止提前修好的 CVE 已經涵蓋 Google 排定在 2026 年 10 月到 2027 年 3 月公告的內容，詳見 [GrapheneOS 月度更新摘要](./grapheneos.md)。
 
 ## 2026 年 8 月
 

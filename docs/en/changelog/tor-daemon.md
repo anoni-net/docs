@@ -22,11 +22,29 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 
 ## Two maintenance lines
 
-`0.4.9.x` is the current line and `0.4.8.x` is long-term support, with security fixes backported to both. Distribution packages often sit on 0.4.8.x, so seeing two versions ship the same day is normal. Which one you install depends on your package source.
+`0.4.9.x` is the current line. `0.4.8.x` used to be long-term support, with security fixes backported to it, and distribution packages often sat there.
+
+0.4.9.12 (2026-09-08) changed that. From that release onward directory authorities reject 0.4.8.x at the authority level, so a relay left on that line is kept out of the network and 0.4.8.x is no longer usable for relay and onion service operators. If you install from packages, check that your source ships 0.4.9.x; if it has not caught up, switch sources or build it yourself.
 
 ## What conflux is
 
 Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
+
+## tor 0.4.9.12
+
+> 2026-09-08 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.12/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>A security release fixing seven TROVE-tracked issues at once, which upstream very strongly recommends installing as soon as possible. Upstream does not mention exploitation in the wild. Relay operators also have protocol changes to act on, covered in the last two points of this entry.
+- These issues came from a different source than previous rounds: upstream credits them to reports from LLMs.
+- TROVE-2026-043: out-of-memory handling moved from low-level code up the call stack. Memory used to be purged inside `append_cell_to_circuit_queue`, a function that can appear at many points in the stack, so objects were freed at surprising moments with a risk of use-after-free. This is the root-cause fix for four bugs (41341, 41336, 41326, 41363).
+- TROVE-2026-034: a hostile directory cache could trick a client into believing certain relays' microdescriptors or router descriptors were unusable. This one affects the client side (bug 41358).
+- TROVE-2026-036: a use-after-free when `AutomapHostsOnResolve` is set. The risk is highest for anyone using IPv4 or a small `VirtualAddrNetwork` (bug 41319).
+- TROVE-2026-042: consensus diffs are now capped in bytes and in lines, which blocks a class of memory-exhaustion denial of service (bug 41329).
+- TROVE-2026-032 and TROVE-2026-033 both sit in congestion control. The first: clients interpreted the `CC_RESPONSE` extension in handshakes where congestion control was never requested, putting the state machine into an invalid state and opening a remote crash path (bug 41345). The second: CGO cryptography was only negotiated with a circuit's final hop, and is now negotiated with every hop that supports it (bug 41348).
+- TROVE-2026-040: conflux stream isolation state was not kept in sync across every leg when new streams were attached (bug 41325). Stream isolation decides which connections share a circuit, so state that drifts out of sync makes isolation behave differently than expected.
+- TROVE-2026-035: DNS names are now validated for compliance both when handed to evdns and when received from it, narrowing exposure to a class of application and library bugs (bug 41320).
+- First thing for relay operators: directory authorities no longer accept relay descriptors containing TAP keys. TAP is Tor's early handshake protocol, deprecated for years, and this release clears it out of descriptors. A relay that has not upgraded cannot publish an acceptable descriptor.
+- Second: authorities now reject the 0.4.8.x series outright (ticket 41234), alongside a new consensus method (36) and new recommended protocol versions for clients and relays (ticket 41316). The new `AuthDirSupport048Clients` option is disabled by default and only matters to directory authority operators.
 
 ## tor 0.4.9.11
 

@@ -1,6 +1,6 @@
 ---
 title: Android Security Patch Levels
-description: "Monthly Android security patch levels: how to check how far behind your device is, and what changed when Google stopped publishing vulnerability details in July 2026."
+description: "Monthly Android security patch levels: how to check how far behind your device is, and what changed when Google dropped vulnerability details in July 2026 and restored them in September."
 icon: material/android
 ---
 
@@ -12,9 +12,11 @@ Summaries of Android's monthly security updates. This page works differently fro
 
 Google's Android Security Bulletin changed in July 2026: the public pages no longer list vulnerability details. The June 2026 bulletin still carried 119 CVEs, split across Framework, System, Kernel, and the various chipset vendors, each tagged with a type and severity. The July and August pages contain nothing but explanatory text, right down to the boilerplate describing what the Type column of the details table means, while the table itself is absent. Rendering the page in a full browser gives the same result, so what is missing is the content itself.
 
+The 8 September bulletin put the details back: 18 tables, 180 CVEs, component sections and severities all present. July and August now look like a two-month gap. Whether to bring urgency ratings back is better decided after this holds for a few more months — switching now would leave the July and August entries with an empty slot, and readers could not tell "checked, nothing there" from "no data available".
+
 Without the details there is no way to tell whether anything is under active exploitation in a given month, and that is exactly what the iOS and Windows pages rate. Rather than force a rating on uncertain data, this page tracks three things that can be established: how far the patch level advanced, how many CVEs it covers and at what severity, and how far behind your own device is.
 
-The CVE figures in each entry below come from the [GrapheneOS release notes](https://grapheneos.org/releases){target="_blank"}, but what they represent needs spelling out. GrapheneOS ships security preview releases that apply, ahead of schedule, patches Google has slated for bulletins months away. The "List of additional fixed CVEs" in those release notes is that early-patched set, and it accumulates release by release. So the number says how far ahead of Google's schedule GrapheneOS already is, not how much a given month's official bulletin covers. The latter is unavailable after July, since the details are no longer published.
+The CVE figures in the July and August entries come from the [GrapheneOS release notes](https://grapheneos.org/releases){target="_blank"}, the only source available while the official bulletin carried no details, and what they represent needs spelling out. GrapheneOS ships security preview releases that apply, ahead of schedule, patches Google has slated for bulletins months away. The "List of additional fixed CVEs" in those release notes is that early-patched set, and it accumulates release by release. So the number says how far ahead of Google's schedule GrapheneOS already is, not how much a given month's official bulletin covers. The latter was unavailable in July and August, since the details were not on the page. With the September bulletin carrying details again, that entry takes its numbers straight from Google.
 
 ## First, check how far behind your device is
 
@@ -27,6 +29,18 @@ How to read that date:
 - A device that has stopped receiving updates will not get fixes for known vulnerabilities at all. If you handle sensitive contacts or reporting work, consider replacing it or installing a system that is still maintained.
 
 Vendor support periods vary widely. Checking a model's committed support window before buying costs less than discovering it afterwards.
+
+## September 2026
+
+> Patch level 2026-09-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
+
+- The bulletin went up on 8 September with vulnerability details present again, so the figures in this entry come straight from Google.
+- 180 CVEs: 32 rated Critical and 148 High. They split across the 2026-09-01 and 2026-09-05 patch levels, so a device has to report 2026-09-05 or later to be covered by both.
+- The most serious group sits in the System component: eight Critical remote code execution issues needing no additional execution privileges and no user interaction, affecting Android 14 through 17 (CVE-2026-28604, CVE-2026-28618, CVE-2026-28639, CVE-2026-28662, CVE-2026-49882, CVE-2026-49884, CVE-2026-49919, CVE-2026-49921).
+- System also carries 12 Critical privilege escalations and three Critical denial-of-service issues, and Framework has three Critical. Of the four Critical privilege escalations in the Kernel section, three land in Protected KVM.
+- On the chipset side the volume concentrates in Imagination Technologies (25) and MediaTek (21), all rated High.
+- The bulletin does not mention any item under active exploitation.
+- On the GrapheneOS side, the CVEs patched ahead of schedule as of the 10 September release now cover what Google has slated for the October 2026 through March 2027 bulletins. See the [GrapheneOS monthly summary](./grapheneos.md).
 
 ## August 2026
 

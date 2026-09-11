@@ -8,11 +8,11 @@ icon: material/microsoft-windows
 
 Windows 每月更新的整理。微軟固定在每月第二個星期二發布（社群慣稱 Patch Tuesday），單月的 CVE 數以千計，2026 年 8 月那一輪有 1506 個。
 
-那個數字涵蓋微軟整個產品線，跟桌面 Windows 直接相關的只是其中一小部分。8 月的 1506 個裡，Windows 本體佔 248 個，Azure Linux（Mariner，用在雲端與容器）佔 698 個，從 Chromium 轉載的 Edge 漏洞佔 362 個，其餘是別的微軟產品。看到「單月上千個漏洞」的說法時，要先知道這件事。
+那個數字涵蓋微軟整個產品線，跟桌面 Windows 直接相關的只是其中一小部分。8 月的 1506 個裡，Windows 本體佔 248 個，Azure Linux（Mariner，用在雲端與容器）佔 698 個，從 Chromium 轉載的 Edge 漏洞佔 362 個，其餘是別的微軟產品。看到「單月上千個漏洞」的說法時，要先知道這件事。比例每個月都不一樣，2026 年 9 月就反過來，1206 個裡有 726 個落在 Windows 本體上。
 
 這一頁只回答三個問題：這個月有沒有正在被實際利用的漏洞、那些漏洞影響桌面還是伺服器、需不需要馬上更新。新版本永遠在最上面。
 
-原始資料來自微軟的 [MSRC 安全更新指南](https://msrc.microsoft.com/update-guide){target="_blank"}，數字是從它的 CVRF 資料整理的。
+原始資料來自微軟的 [MSRC 安全更新指南](https://msrc.microsoft.com/update-guide){target="_blank"}，數字是從它的 CVRF 資料整理的。微軟會在發布之後持續修訂當月文件、補進新的 CVE，所以每一則的數字是寫稿當下的快照，事後重數會有出入。
 
 ## 急迫程度怎麼判斷
 
@@ -31,6 +31,17 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 另一個常見的誤會是 Microsoft Defender。它的漏洞修補走的是防毒定義檔的自動更新，不跟著 Patch Tuesday，也不需要使用者做任何事。
 
 在 Windows 上使用 Tor Browser 或其他匿名工具的人另外要知道：作業系統被取得權限之後，上面執行的任何工具都保護不了你。提權（讓程式取得比原本更高的系統權限）類的修補對這個情境的重要性不亞於瀏覽器本身的漏洞。
+
+## 2026 年 9 月
+
+> 2026-09-08 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>1206 個 CVE（Windows 本體 726 個），119 個被評為 Critical，兩個標為已被實際利用，兩個都打得到桌面版。
+- CVE-2026-81963：Windows Update Stack 提權，影響 Windows 11 的 23H2、24H2、25H2、26H1 與 Windows Server 2025。微軟在資料裡標的是已偵測到利用行為。
+- CVE-2026-85880：Windows ALPC（進階本機程序呼叫，系統元件之間互相呼叫的機制）提權，影響 Windows 10 的 1607、1809、21H2、22H2 與 Windows Server 2012 以後。
+- 兩個合起來，從 Windows 10 1607 到 Windows 11 26H1 的桌面版都在範圍內。兩個都是提權，CVSS 都是 7.8，都需要先在機器上取得執行機會，配合瀏覽器或文件的漏洞就構成完整的接管。
+- Windows 本體的 726 個是這半年最高的一次，8 月只有 248 個。數量集中在少數元件上：Windows Biometric Service 64 個、DHCP Server 36 個、NTFS 29 個、Win32k 19 個。
+- 對用 Tor Browser 的人來說，這個月兩個被利用的都是提權，正是本頁開頭提到的那個情境：作業系統被取得權限之後，上面執行的匿名工具保護不了你。
 
 ## 2026 年 8 月
 

@@ -8,11 +8,11 @@ icon: material/microsoft-windows
 
 Summaries of Windows monthly updates. Microsoft ships on the second Tuesday of each month, known as Patch Tuesday, and a single month runs to thousands of CVEs. August 2026 carried 1,506.
 
-That number spans Microsoft's entire product line, and only a fraction of it touches desktop Windows. Of August's 1,506, Windows itself accounts for 248, Azure Linux (Mariner, which runs in the cloud and in containers) for 698, and Edge vulnerabilities carried over from Chromium for 362, with the rest spread across other Microsoft products. Worth knowing before you read "over a thousand vulnerabilities a month" anywhere.
+That number spans Microsoft's entire product line, and only a fraction of it touches desktop Windows. Of August's 1,506, Windows itself accounts for 248, Azure Linux (Mariner, which runs in the cloud and in containers) for 698, and Edge vulnerabilities carried over from Chromium for 362, with the rest spread across other Microsoft products. Worth knowing before you read "over a thousand vulnerabilities a month" anywhere. The split moves every month: September 2026 went the other way, with 726 of 1,206 landing in Windows itself.
 
 This page answers three questions: is anything being actively exploited this month, do those flaws hit desktops or servers, and do you need to update now. Newest at the top.
 
-Source data comes from Microsoft's [MSRC Security Update Guide](https://msrc.microsoft.com/update-guide){target="_blank"}, with the counts derived from its CVRF data.
+Source data comes from Microsoft's [MSRC Security Update Guide](https://msrc.microsoft.com/update-guide){target="_blank"}, with the counts derived from its CVRF data. Microsoft keeps revising each month's document after publication and adds CVEs to it, so every entry's numbers are a snapshot taken as it was written and a later recount will differ.
 
 ## How we rate urgency
 
@@ -31,6 +31,17 @@ A large share of the actively exploited flaws each month land in server products
 Microsoft Defender is another common misunderstanding. Its fixes ship through automatic antimalware definition updates rather than Patch Tuesday, and require nothing from you.
 
 One more thing worth knowing if you run Tor Browser or other anonymity tools on Windows: once the operating system is compromised, nothing running on top of it can protect you. Privilege escalation (a program obtaining higher system privileges than it started with) fixes matter as much in that scenario as browser flaws do.
+
+## September 2026
+
+> 2026-09-08 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>1,206 CVEs (726 in Windows itself), 119 rated Critical, two flagged as actively exploited, and both reach desktop machines.
+- CVE-2026-81963: privilege escalation in the Windows Update Stack, affecting Windows 11 23H2, 24H2, 25H2 and 26H1 plus Windows Server 2025. Microsoft's data marks it as exploitation detected.
+- CVE-2026-85880: privilege escalation in Windows Advanced Local Procedure Call (ALPC, the mechanism system components use to call each other), affecting Windows 10 1607, 1809, 21H2 and 22H2 plus Windows Server 2012 and later.
+- Together they cover desktop Windows from 10 1607 through 11 26H1, so no supported desktop version sits outside the range. Both are privilege escalations scoring CVSS 7.8, both need code running on the machine first, and paired with a browser or document flaw either one completes a takeover.
+- The 726 CVEs in Windows itself are the highest of the past six months; August had 248. They cluster in a handful of components: Windows Biometric Service 64, DHCP Server 36, NTFS 29, Win32k 19.
+- For anyone running Tor Browser, both exploited flaws this month are privilege escalations, which is exactly the scenario described at the top of this page: once the operating system is owned, the anonymity tools running on it cannot protect you.
 
 ## August 2026
 
