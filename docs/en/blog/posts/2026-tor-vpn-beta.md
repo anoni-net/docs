@@ -12,7 +12,7 @@ summary: "The Tor Project's Tor VPN Beta retrospective says the primary use case
 description: "Tor VPN Beta's first year taught the Tor Project that users wanted circumvention, not exit selection. We look at Tor usage across Taiwan, China, Hong Kong, Singapore, Malaysia, Japan and South Korea using Tor Metrics daily user estimates and OONI reachability measurements, explain which measurements we discarded and why, and set out the regulatory picture region by region. We also explain why we do not cite VPN adoption statistics."
 ---
 
-# What Tor VPN Beta's first year looks like from the Sinophone Asia-Pacific
+# What Tor VPN Beta's first year looks like across seven Asia-Pacific regions
 
 !!! info ""
 
@@ -61,7 +61,7 @@ We pulled Tor Metrics daily user estimates for the 90 days from 11 June to 9 Sep
     https://metrics.torproject.org/userstats-bridge-country.csv?start=2026-06-11&end=2026-09-09&country=tw
     ```
 
-    Both files carry one row per day, with the user count in the third column. The table shows the arithmetic mean of that column across the 90 rows, rounded to the nearest whole number. Bridge share is the bridge mean divided by the sum of both means.
+    Both files carry one row per day, with the user count in the third column. The table shows the arithmetic mean of that column across the 90 rows, rounded to the nearest whole number. Bridge share is the bridge mean divided by the sum of both means. Tor recalculates these estimates as new directory data arrives, so the table is a snapshot of one window rather than a fixed figure.
 
 China is the only region in the sample where bridge users outnumber direct users. Everywhere else the bridge share sits between 2 and 8 percent. That single ratio is the clearest evidence for the announcement's point about exit selection versus bridges: in the one place where direct access to Tor mostly fails, as the OONI measurements in the next section show, bridges are not an advanced option, they are the only way in.
 
@@ -89,7 +89,7 @@ OONI's `tor` test checks whether Tor directory authorities and default bridges a
     https://api.ooni.io/api/v1/aggregation?probe_cc=TW&test_name=tor&since=2026-06-11&until=2026-09-09
     ```
 
-    The anomaly rate is `anomaly_count` divided by `measurement_count` in the JSON response. Adding `&axis_x=measurement_start_day` returns the same counts broken down by day. The tests we looked at and discarded, covered in the next section, are `vanilla_tor`, `torsf` and `riseupvpn`, reachable by changing `test_name` in the same call.
+    The anomaly rate is `anomaly_count` divided by `measurement_count` in the JSON response. Adding `&axis_x=measurement_start_day` returns the same counts broken down by day. The tests we looked at and discarded, covered in the next section, are `vanilla_tor`, `torsf` and `riseupvpn`, reachable by changing `test_name` in the same call. Counts grow as probes submit measurements, so the same query run later returns different totals and the live data is the authoritative version.
 
 China's 96.5 percent is a different category of result from everything below it. OONI's classification does not record why a measurement was flagged, so the single-digit rates below China settle nothing in either direction and none of them should be read as proof that Tor is partly censored. South Korea's 9.6 percent is the highest of those, and the country runs the active HTTPS filtering system described later in this post, which is a reason to treat that figure with more care than Japan's or Taiwan's.
 
@@ -137,11 +137,7 @@ Install channels are not a side note either. Google Play is unavailable in China
 
 In the low-blocking regions in this table the value proposition is different, and per-app routing is the reason to look at it: route the apps that need anonymity through Tor and leave the ones that need a local IP address on the normal network. Anti-abuse systems commonly blocklist Tor exit addresses, a general pattern rather than something we measured for this post, and the per-app switch is what makes mixed use workable in spite of it.
 
-The Beta warning still applies everywhere. The Tor Project's own support documentation states that the app may leak information and should not be used for anything sensitive[^tor-vpn-about]. For high-risk work, [Tor Browser](../../tools/what-is-tor.md) and [Tails](../../tools/what-is-tails.md) remain the mature options, and the tool choice should follow from a [threat model](../../basics/threat-model.md) rather than from a feature list. The independent audit of the Android app is covered in [our earlier post](./2026-code-audit-for-tor-vpn-completed-by-cure53.md), and the wider trade-offs are in our [VPN guide](../../tools/vpn-guide.md).
-
-## Reproducing this analysis
-
-Both tables above carry the queries that produced them, so none of this needs to be reassembled from scratch. The window throughout is 11 June to 9 September 2026 and the figures are daily means over those 90 days. Tor's user estimates and OONI's measurement counts both move as new data arrives, so if you re-run the queries and get different numbers, the live data is authoritative and this post is a snapshot of one window.
+The Beta warning still applies everywhere. The Tor Project's own support documentation states that the app may leak information and should not be used for anything sensitive[^tor-vpn-about]. The independent audit of the Android app is covered in [our earlier post](./2026-code-audit-for-tor-vpn-completed-by-cure53.md), and the wider trade-offs are in our [VPN guide](../../tools/vpn-guide.md). For high-risk work, [Tor Browser](../../tools/what-is-tor.md) and [Tails](../../tools/what-is-tails.md) remain the mature options, and the tool choice should follow from a [threat model](../../basics/threat-model.md) rather than from a feature list.
 
 [^announcement]: [Tor VPN Beta: What we've learned building our own VPN for Android from scratch](https://blog.torproject.org/tor-vpn-beta/){target="_blank"} - The Tor Project blog, 9 September 2026, by pavel. Images in this post are the full-resolution files from [the companion forum thread](https://forum.torproject.org/t/tor-vpn-beta-what-weve-learned-building-our-own-vpn-for-android-from-scratch/22104){target="_blank"}. Retrieved 2026-09-11.
 [^arti]: Arti is the Tor Project's Tor implementation written from scratch in Rust, structured primarily as a library so it can be embedded in other software. It is the engine underneath Tor VPN. See our [Arti changelog](../../changelog/arti.md) and the [source repository](https://gitlab.torproject.org/tpo/core/arti){target="_blank"} - Tor Project GitLab. Retrieved 2026-09-11.
