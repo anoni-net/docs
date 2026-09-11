@@ -6,6 +6,7 @@ offline_assets:
   # The face detector's code and cascade data are loaded on demand, so the page has
   # no script tag for them. The offline copy still needs both, otherwise pressing
   # "Find faces" with the network off does nothing.
+  - js/redact-worker.js
   - utils/vendor/pico/pico.js
   - utils/vendor/pico/facefinder
 ---
