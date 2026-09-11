@@ -37,6 +37,9 @@ on:
       - "docs/en/js/**"
       - "docs/zh-TW/utils/**"
       - "docs/mkdocs*.yml"
+      # onion 位址的單一來源檢查讀這兩個，改了它們沒跑檢查就等於沒有檢查
+      - "docs/replace_sitename_anoni_onion.sh"
+      - ".github/workflows/build_docs.yml"
       # 升級 mkdocs-material 會換掉 theme 資產的雜湊，而 base.html 把那些檔名寫死。
       # #338 只動了這個檔案，當時的 paths 沒有納入，於是一支測試都沒跑，壞掉的雜湊
       # 一路上線。
@@ -238,3 +241,8 @@ jobs:
       # 而把 queryBucket(q.length) 寫成 q 只差幾個字元，畫面上看不出差別。
       - name: 量測腳本不外洩搜尋詞
         run: node tools/test_analytics.mjs
+
+      # onion 位址換掉而漏改其中一處，症狀是建置成功、CI 全綠、產物看起來正常，
+      # 壞掉的只有讀者點下去那一刻，而 onion 讀者多半沒有第二條路可走。
+      - name: onion 位址只有一個來源
+        run: python3 tools/check_onion_address.py

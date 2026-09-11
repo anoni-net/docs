@@ -55,6 +55,11 @@ jobs:
       # 本機的 build_docs_anoni_onion.sh 也 export 同一個名字。IPFS 版不在這個
       # workflow 裡建，它由 build_docs_anoni_ipfs.sh 帶 BUILD_VARIANT=ipfs。
       BUILD_VARIANT: ${{ matrix.variant }}
+      # onion 位址。replace_sitename_anoni_onion.sh 與下面的產物驗證都讀這一個，
+      # 那支腳本自己也有同樣的預設值供本機執行時用。三份 mkdocs 設定的 onion_base
+      # 也要跟著同一個位址，任何一邊漏改都會讓輪替之後的產物指向死掉的位址而
+      # 建置照樣成功，所以由 tools/check_onion_address.py 在 CI 裡比對四邊。
+      ONION_ROOT: anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion
     defaults:
       run:
         working-directory: ./docs
@@ -248,7 +253,7 @@ jobs:
       - name: Verify onion output
         if: matrix.variant == 'onion'
         run: |
-          onion='docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion'
+          onion="docs.${ONION_ROOT}"
           leftover=0
           for pattern in 'https://anoni.net/docs' 'aa.anoni.net'; do
             n=$(grep -rl "$pattern" ./output/ | wc -l)
