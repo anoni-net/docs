@@ -1,3 +1,13 @@
+# onion 位址只寫在這裡一次，下面所有改寫都跟著它走。輪替的時候改這一行。
+#
+# CI 由 .github/workflows/build_docs.yml 用同一個名字帶進來，本機直接執行用這裡
+# 的預設值。tools/check_onion_address.py 比對這個預設值、workflow 帶進來的值、
+# 以及三份 mkdocs 設定的 onion_base 有沒有對上，任何一邊漏改就紅。
+#
+# 曾經有八處寫死在這一支裡，加上六份模板各自寫死一次。位址換掉而漏改任何一處，
+# 建置照樣成功、CI 照樣綠，壞的只有讀者點下去那一刻。
+ONION_ROOT="${ONION_ROOT:-anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion}"
+
 # Strip standard-build-only analytics block from overrides before mkdocs build。
 # aa.anoni.net 分析端點僅在 standard 生效，避免 Onion 使用者連到 clearnet endpoint
 sed -i '/anoni-analytics-start/,/anoni-analytics-end/d' \
@@ -17,33 +27,33 @@ find ./ -path './onion' -prune -o \
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|https://anoni.net/api|http://anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/api|g' {} +
+	-exec sed -i "s|https://anoni.net/api|http://${ONION_ROOT}/api|g" {} +
 
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|https://anoni.net/docs|http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
+	-exec sed -i "s|https://anoni.net/docs|http://docs.${ONION_ROOT}|g" {} +
 
 # pymdownx snippets（--8<--）的正本放 repo 根目錄（base_path 含 '..'），
 # 例如 community/become-anoni.md 嵌入 ../BECOME_ANONI.md。這些檔在 docs/ 之外，
 # 上面 find ./ 掃不到，build 時會把含主站 URL 的原文 inline 進 output，
 # 害 onion 鏡像殘留 clearnet 連結。一併改寫 repo 根的 markdown snippet 來源。
 find .. -maxdepth 1 -type f -name '*.md' -exec sed -i \
-	-e 's|https://anoni.net/api|http://anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/api|g' \
-	-e 's|https://anoni.net/docs|http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' \
-	-e 's|https://form.anoni.net|http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' \
-	-e 's|https://pad.anoni.net|http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' \
+	-e "s|https://anoni.net/api|http://${ONION_ROOT}/api|g" \
+	-e "s|https://anoni.net/docs|http://docs.${ONION_ROOT}|g" \
+	-e "s|https://form.anoni.net|http://form.${ONION_ROOT}|g" \
+	-e "s|https://pad.anoni.net|http://pad.${ONION_ROOT}|g" \
 	{} +
 
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|https://form.anoni.net|http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
+	-exec sed -i "s|https://form.anoni.net|http://form.${ONION_ROOT}|g" {} +
 
 find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename.sh' \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
-	-exec sed -i 's|https://pad.anoni.net|http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion|g' {} +
+	-exec sed -i "s|https://pad.anoni.net|http://pad.${ONION_ROOT}|g" {} +
 
 # assets.anoni.net 刻意不改寫。這裡曾經加過一條把它換成 onion /assets 的規則，
 # 理由是「onion 讀者不該繞出口抓圖」，那個前提是錯的：mkdocs 的 privacy plugin

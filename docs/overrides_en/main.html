@@ -26,7 +26,7 @@
   {{ super() }}
   <meta
     http-equiv="onion-location"
-    content="http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/en/{{ page.url }}"
+    content="{{ config.extra.onion_base }}/en/{{ page.url }}"
   />
   <script type="application/ld+json">
   {
