@@ -12,6 +12,19 @@ GrapheneOS updates automatically in the background, so ordinary users need to do
 
 Source data comes from the [official releases page](https://grapheneos.org/releases){target="_blank"}. The official atom feed keeps only the last 20 entries (roughly four months), so anything older has to be looked up on the site.
 
+## September 2026
+
+> Releases `2026090500`, `2026090700`, `2026091000` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+
+- The security patch level advanced to the full 2026-09-01 Pixel level on 10 September. Google's September bulletin, published on 8 September, carries vulnerability details again; that month is covered in [Android Security Patch Levels](./android.md).
+- The Dialer gained automatic call recording. The 5 September release shipped it with a per-call opt-out covering both incoming and outgoing calls, and an on-screen notice while recording is active. The 10 September release added an option to record every contact by default with a list of excluded numbers, and declared the microphone and phone foreground service types to fix recording not starting when a call is answered over Bluetooth. Call recording carries legal constraints in many places, so check the rules where you are before enabling it.
+- Private Space closed two upstream privacy gaps. App drawer search no longer lists apps inside a locked Private Space, something the Pixel Launcher avoids only because it delegates search to Android System Intelligence. Settings also gained a warning that Android's built-in option for hiding a Private Space is superficial and has several known detection tricks. Anyone treating a Private Space as genuinely hidden should reassess.
+- hardened_malloc (the hardened memory allocator GrapheneOS maintains) switched to `MADV_DONTNEED_LOCKED` for better `mlockall` compatibility, and fixed extreme out-of-memory edge cases where a mapping could be unmapped without its replacement being put in place.
+- The system file manager (DocumentsUI) no longer strips location metadata from copies and certain moves. That was an upstream bug that left people believing they had kept a complete original.
+- Vanadium (the hardened Chromium browser bundled with GrapheneOS) shipped four updates up to the 5 September release, tracking the Chromium 152 series.
+- All three kernel lines (6.1, 6.6, 6.12) moved to the latest GKI LTS revisions. The 6.6 and 6.12 lines also work around an upstream arm64 KVM bug that stops devices booting with lockdown in confidentiality mode.
+- Device coverage runs from Pixel 6 to Pixel 10a, unchanged this month.
+
 ## August 2026
 
 > Releases `2026080500`, `2026081300` · [Official releases](https://grapheneos.org/releases){target="_blank"}

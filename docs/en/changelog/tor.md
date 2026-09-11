@@ -15,6 +15,14 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 15.0.22
+
+> 2026-09-09 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15022/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>The release carries exactly one change: the bundled tor daemon moves to 0.4.9.12, a security release covering seven TROVE identifiers that upstream very strongly recommends installing as soon as possible.
+- Several of the issues fixed in 0.4.9.12 matter from the client side — a hostile directory cache could make the browser believe certain relays were unusable, there was a use-after-free when `AutomapHostsOnResolve` was set, and consensus diffs had no size cap and could be used to exhaust memory. Each one is covered in the [tor daemon changelog](./tor-daemon.md).
+- The 15.0.21 entry above cites an upstream tracking item calling it the final 15.0 release. 15.0.22 still shipped on the 15.0.x line, carrying this tor security fix.
+
 ## Tor Browser 16.0a11 (alpha)
 
 > 2026-09-02 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a11/){target="_blank"}

@@ -8,7 +8,7 @@ icon: material/apple-ios
 
 Security update summaries for iPhone and iPad. An Apple update routinely covers a hundred or more CVEs, and reading the list start to finish still leaves you unsure what to do, so this page skips the line-by-line translation and answers three questions instead: do you need to update now, which common attack paths does the fix cover, and do older models still get it. Newest at the top.
 
-Source data comes from Apple's [security releases page](https://support.apple.com/en-us/100100){target="_blank"}. Releases Apple ships without a CVE list (bug-fix-only point updates, for example) do not get their own entry here.
+Source data comes from Apple's [security releases page](https://support.apple.com/en-us/100100){target="_blank"}. Point updates that never appear on that page do not get their own entry here. Releases that do appear there but which Apple marks as having no published CVE entries get a short entry, so you can tell whether what you are running is still the newest build.
 
 ## How we rate urgency
 
@@ -35,6 +35,14 @@ Apple often ships several release lines on the same day, with very different ver
 | iPhone 6s, 7, SE 1st gen, iPad Air 2, iPad mini 4, iPod touch 7 | 15.x |
 
 Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a concrete example. A device that no longer receives updates at all means known vulnerabilities go unpatched, so consider replacing it if you handle sensitive material.
+
+## iOS 26.6.2, iPadOS 26.6.2
+
+> 2026-09-08 · [Security releases page](https://support.apple.com/en-us/100100){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Apple lists this release on its security releases page, with the note that the update has no published CVE entries and no link to a security content article. Nothing is flagged as actively exploited.
+- With no details there is no way to see what was fixed, so install it on your normal schedule. This entry will be rewritten if Apple publishes security content for it later.
+- No macOS or 18.x release shipped the same day. Devices on the 18.x line are still on 18.7.10 from 17 August.
 
 ## iOS 26.6.1, iPadOS 26.6.1 (18.7.10 shipped the same day)
 
