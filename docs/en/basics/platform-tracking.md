@@ -70,7 +70,7 @@ The tracking mechanics are global. What differs across Sinophone Asia-Pacific is
 
 ### Mainland Chinese platforms add a further layer
 
-WeChat, Douyin, Xiaohongshu, and Weibo differ from the global platforms above in three ways, and this applies to diaspora users of those apps too.
+WeChat, Douyin, rednote (小紅書), and Weibo differ from the global platforms above in three ways, and this applies to diaspora users of those apps too.
 
 - **The account resolves to a legal person**: accounts bind to a phone number and the number to an identity document, with the national Cyberspace ID added on top since July 2025. An ad profile that is a pseudonymous blob elsewhere is a named individual here.
 

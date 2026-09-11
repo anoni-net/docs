@@ -18,7 +18,7 @@ It is a companion to [speaking online from Singapore and Malaysia](./singapore-m
 
 ### Accounts and identity
 
-Accounts on major mainland platforms bind to a phone number, and the phone number binds to a national ID. That chain has existed for years. Since 2025 there is another layer: the National Online Identity Authentication Public Service took effect on 15 July 2025, built jointly by the Cyberspace Administration and the Ministry of Public Security, issuing a "network number" and "network credential" that a user presents to platforms for real-name verification, nominally on a voluntary basis[^cyberid]. Taobao and Xiaohongshu were among the platforms integrated during the initial rollout.
+Accounts on major mainland platforms bind to a phone number, and the phone number binds to a national ID. That chain has existed for years. Since 2025 there is another layer: the National Online Identity Authentication Public Service took effect on 15 July 2025, built jointly by the Cyberspace Administration and the Ministry of Public Security, issuing a "network number" and "network credential" that a user presents to platforms for real-name verification, nominally on a voluntary basis[^cyberid]. Taobao and rednote (小紅書) were among the platforms integrated during the initial rollout.
 
 For anyone publishing, this changes the assumption that a new account is a new identity. As verification consolidates into one public service, the same natural person becomes easier to join across platforms.
 
