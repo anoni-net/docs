@@ -26,11 +26,11 @@ description: "Tor VPN Beta's first year taught the Tor Project that users wanted
 
 The Tor Project's retrospective on the first year of Tor VPN Beta contains one finding that reframes the whole product. The team expected to learn from real-world use, and what they learned was that the primary use case is unblocking the internet — not the privacy features a commercial VPN would lead with. Early adoption concentrated in heavily censored regions, and that shaped what got built next.
 
-That finding is the interesting part for us, because the regions we cover sit at very different points on that spectrum. This post checks the announcement against measurement data for seven Asia-Pacific regions, and sets out what the regulatory picture looks like in each.
+That finding is the interesting part for us, a community based in Taiwan, because the regions we cover sit at very different points on that spectrum. This post checks the announcement against measurement data for seven Asia-Pacific regions, and sets out what the regulatory picture looks like in each.
 
 <!-- more -->
 
-## What the announcement says
+## What the Tor Project published
 
 The design detail that matters most: every app on the device gets its own Tor circuit rather than sharing one tunnel, an isolation model borrowed from Tor Browser's cross-site tracking protections. The Apps screen is now searchable, so picking which apps route through Tor is faster.
 
@@ -69,7 +69,7 @@ Two caveats before anyone reuses these numbers. Tor's user estimates are derived
 
 ## What OONI measurements add
 
-OONI's `tor` test checks whether Tor directory authorities and default bridges are reachable. Over the same 90-day window[^ooni]:
+OONI (Open Observatory of Network Interference) runs a `tor` test, which checks whether Tor directory authorities and default bridges are reachable. Over the same 90-day window[^ooni]:
 
 | Region | Anomaly rate, OONI `tor` test | Measurements |
 |---|---:|---:|
@@ -91,7 +91,7 @@ OONI's `tor` test checks whether Tor directory authorities and default bridges a
 
     The anomaly rate is `anomaly_count` divided by `measurement_count` in the JSON response. Adding `&axis_x=measurement_start_day` returns the same counts broken down by day. The tests we looked at and discarded, covered in the next section, are `vanilla_tor`, `torsf` and `riseupvpn`, reachable by changing `test_name` in the same call. Counts grow as probes submit measurements, so the same query run later returns different totals and the live data is the authoritative version.
 
-China's 96.5 percent is a different category of result from everything below it. OONI's classification does not record why a measurement was flagged, so the single-digit rates below China settle nothing in either direction and none of them should be read as proof that Tor is partly censored. South Korea's 9.6 percent is the highest of those, and the country runs the active HTTPS filtering system described later in this post, which is a reason to treat that figure with more care than Japan's or Taiwan's.
+China's 96.5 percent is a different category of result from everything below it. OONI's classification does not record why a measurement was flagged, so the single-digit rates below China settle nothing in either direction and none of them should be read as proof that Tor is partly censored. South Korea's 9.6 percent is the highest of those, and the government there runs the active HTTPS filtering system described later in this post, which is a reason to treat that figure with more care than Japan's or Taiwan's.
 
 The same picture appears in OONI's `psiphon` test, which measures whether that circumvention tool can bootstrap. China sits at 23.2 percent anomalies across 3,326 measurements; the other six regions all come in at or below 2.1 percent[^ooni].
 
@@ -99,7 +99,7 @@ The same picture appears in OONI's `psiphon` test, which measures whether that c
 
 Three OONI test families looked relevant and did not survive scrutiny, and saying so is more useful than publishing them.
 
-The Snowflake test (`torsf`) reports a 70.6 percent anomaly rate in Taiwan across 517 measurements. Taiwan does not block Tor, and the OONI `tor` test in the same window agrees. An anomaly rate that high in a region with no blocking points at the reliability of the test, not at censorship, so we left the whole family out.
+The Snowflake test (`torsf`) comes out at a 70.6 percent anomaly rate in Taiwan across 517 measurements. Taiwan does not block Tor, and the OONI `tor` test puts Taiwan at 5.2 percent over the same window. An anomaly rate that high in a region with no blocking points at the reliability of the test, not at censorship, so we left the whole family out.
 
 The `vanilla_tor` test carries more failures than anomalies in several regions — 4,304 failures out of 6,215 measurements in Taiwan, 3,200 out of 3,707 in Malaysia. Failures are measurement errors, so the anomaly rates computed on top of them are not comparable across regions.
 
@@ -115,15 +115,15 @@ What can be measured is whether specific circumvention tools work from inside a 
 
 Freedom House's Freedom on the Net 2025 covers 1 June 2024 to 31 May 2025[^fotn], and gives us one consistent source for six of these seven regions. Hong Kong has no separate country report in that edition.
 
-**China** — the national-level Great Firewall blocks thousands of domains, and the 2025 report also documents a provincial website-blocking system in Henan operating on top of it[^fotn-cn]. Separately, a 2017 Ministry of Industry and Information Technology circular requires approval from the telecommunications authority before building or leasing channels, VPNs included, to carry out cross-border business; the ministry's follow-up clarification described the target as entities operating cross-border telecom services without the relevant licence[^miit].
+**China** — the national-level Great Firewall blocks thousands of domains, and a provincial website-blocking system in Henan operates on top of it, according to the 2025 report[^fotn-cn]. Separately, a 2017 Ministry of Industry and Information Technology circular requires approval from the telecommunications authority before building or leasing channels, VPNs included, to carry out cross-border business; the ministry's follow-up clarification described the target as entities operating cross-border telecom services without the relevant licence[^miit].
 
 **Hong Kong** — no separate Freedom on the Net report, so we have only our own measurements: an 8.0 percent bridge share, the second highest in the sample, against a 0.9 percent anomaly rate on the OONI `tor` test. Direct access to Tor works.
 
-**Taiwan** — mainstream services are not blocked and Tor connects directly. The governance question sits at the DNS layer, where TWNIC executes stop-resolution orders from competent authorities through a Response Policy Zone[^twnic]. Freedom on the Net 2025, citing TWNIC's first transparency report, records more than 50,000 websites designated for blocking in the first half of 2025, with the vast majority of designations not subject to judicial review, and notes an LGBT+ bulletin board blocked in February 2025 at the request of the Ministry of Health and Welfare[^fotn-tw]. In December 2025, CNA reported a one-year block of rednote (小紅書, also transliterated Xiaohongshu) ordered by the Ministry of the Interior and executed through the same mechanism[^cna].
+**Taiwan** — mainstream services are not blocked and Tor connects directly. The governance question sits at the DNS layer, where the Taiwan Network Information Center (TWNIC) executes stop-resolution orders from competent authorities through a Response Policy Zone[^twnic]. In Freedom on the Net 2025, drawing on TWNIC's first transparency report, the figure is more than 50,000 websites designated for blocking in the first half of 2025, with the vast majority of designations not subject to judicial review; an LGBT+ bulletin board blocked in February 2025 at the request of the Ministry of Health and Welfare is in the same entry[^fotn-tw]. In December 2025, the Central News Agency (CNA) reported a one-year block of rednote (小紅書, also transliterated Xiaohongshu) ordered by the Ministry of the Interior and executed through the same mechanism[^cna].
 
 **Singapore** — the government blocked 10 websites in October 2024, saying they "could be used to mount hostile information campaigns against Singapore", with several of the domains appearing to impersonate Singapore-based sites[^fotn-sg].
 
-**Malaysia** — the regulator continued removing content perceived as critical of the government, and legislation passed during the coverage period widened its censorship powers. In September 2024 the MCMC withdrew planned rules that would have required service providers to reroute DNS traffic to domestic servers, after civil society groups objected; DNS hijacking by two providers had been reported the month before[^fotn-my].
+**Malaysia** — the Malaysian Communications and Multimedia Commission (MCMC) continued removing content perceived as critical of the government, and legislation passed during the coverage period widened the regulator's censorship powers. In September 2024 the MCMC withdrew planned rules that would have required service providers to reroute DNS traffic to domestic servers, after civil society groups objected; DNS hijacking by two providers had been reported the month before[^fotn-my].
 
 **Japan** — no website blocks, and the highest possible score on the blocking and filtering indicator[^fotn-jp].
 
@@ -137,7 +137,7 @@ Install channels are not a side note either. Google Play is unavailable in China
 
 In the low-blocking regions in this table the value proposition is different, and per-app routing is the reason to look at it: route the apps that need anonymity through Tor and leave the ones that need a local IP address on the normal network. Anti-abuse systems commonly blocklist Tor exit addresses, a general pattern rather than something we measured for this post, and the per-app switch is what makes mixed use workable in spite of it.
 
-The Beta warning still applies everywhere. The Tor Project's own support documentation states that the app may leak information and should not be used for anything sensitive[^tor-vpn-about]. The independent audit of the Android app is covered in [our earlier post](./2026-code-audit-for-tor-vpn-completed-by-cure53.md), and the wider trade-offs are in our [VPN guide](../../tools/vpn-guide.md). For high-risk work, [Tor Browser](../../tools/what-is-tor.md) and [Tails](../../tools/what-is-tails.md) remain the mature options, and the tool choice should follow from a [threat model](../../basics/threat-model.md) rather than from a feature list.
+The Beta warning still applies everywhere. It is in the Tor Project's own support documentation: the app may leak information and should not be used for anything sensitive[^tor-vpn-about]. The independent audit of the Android app is covered in [our earlier post](./2026-code-audit-for-tor-vpn-completed-by-cure53.md), and the wider trade-offs are in our [VPN guide](../../tools/vpn-guide.md). For high-risk work, [Tor Browser](../../tools/what-is-tor.md) and [Tails](../../tools/what-is-tails.md), the amnesic live operating system, remain the mature options, and the tool choice should follow from a [threat model](../../basics/threat-model.md) rather than from a feature list.
 
 [^announcement]: [Tor VPN Beta: What we've learned building our own VPN for Android from scratch](https://blog.torproject.org/tor-vpn-beta/){target="_blank"} - The Tor Project blog, 9 September 2026, by pavel. Images in this post are the full-resolution files from [the companion forum thread](https://forum.torproject.org/t/tor-vpn-beta-what-weve-learned-building-our-own-vpn-for-android-from-scratch/22104){target="_blank"}. Retrieved 2026-09-11.
 [^arti]: Arti is the Tor Project's Tor implementation written from scratch in Rust, structured primarily as a library so it can be embedded in other software. It is the engine underneath Tor VPN. See our [Arti changelog](../../changelog/arti.md) and the [source repository](https://gitlab.torproject.org/tpo/core/arti){target="_blank"} - Tor Project GitLab. Retrieved 2026-09-11.
