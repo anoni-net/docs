@@ -63,7 +63,7 @@ We pulled Tor Metrics daily user estimates for the 90 days from 11 June to 9 Sep
 
     Both files carry one row per day, with the user count in the third column. The table shows the arithmetic mean of that column across the 90 rows, rounded to the nearest whole number. Bridge share is the bridge mean divided by the sum of both means.
 
-China is the only region in the sample where bridge users outnumber direct users. Everywhere else the bridge share sits between 2 and 8 percent. That single ratio is the clearest evidence for the announcement's point about exit selection versus bridges: in the one place where direct access to Tor mostly fails, bridges are not an advanced option, they are the only way in.
+China is the only region in the sample where bridge users outnumber direct users. Everywhere else the bridge share sits between 2 and 8 percent. That single ratio is the clearest evidence for the announcement's point about exit selection versus bridges: in the one place where direct access to Tor mostly fails, as the OONI measurements in the next section show, bridges are not an advanced option, they are the only way in.
 
 Two caveats before anyone reuses these numbers. Tor's user estimates are derived from directory requests and geolocated by IP address, so they are estimates rather than headcounts, and someone reaching Tor through a bridge or a commercial VPN may be attributed to the wrong place[^tormetrics]. The absolute counts are also not normalized by population, which is why Singapore's 21,812 direct users and Japan's 30,295 are not the comparison to draw. The bridge share is a ratio within each region, so it survives both problems.
 
@@ -91,7 +91,7 @@ OONI's `tor` test checks whether Tor directory authorities and default bridges a
 
     The anomaly rate is `anomaly_count` divided by `measurement_count` in the JSON response. Adding `&axis_x=measurement_start_day` returns the same counts broken down by day. The tests we looked at and discarded, covered in the next section, are `vanilla_tor`, `torsf` and `riseupvpn`, reachable by changing `test_name` in the same call.
 
-China's 96.5 percent is a different category of result from everything below it. The single-digit rates in South Korea, Japan and Taiwan are consistent with ordinary network failures rather than a blocking regime, and they should not be read as partial censorship of Tor.
+China's 96.5 percent is a different category of result from everything below it. OONI's classification does not record why a measurement was flagged, so the single-digit rates below China settle nothing in either direction and none of them should be read as proof that Tor is partly censored. South Korea's 9.6 percent is the highest of those, and the country runs the active HTTPS filtering system described later in this post, which is a reason to treat that figure with more care than Japan's or Taiwan's.
 
 The same picture appears in OONI's `psiphon` test, which measures whether that circumvention tool can bootstrap. China sits at 23.2 percent anomalies across 3,326 measurements; the other six regions all come in at or below 2.1 percent[^ooni].
 
@@ -103,7 +103,7 @@ The Snowflake test (`torsf`) reports a 70.6 percent anomaly rate in Taiwan acros
 
 The `vanilla_tor` test carries more failures than anomalies in several regions — 4,304 failures out of 6,215 measurements in Taiwan, 3,200 out of 3,707 in Malaysia. Failures are measurement errors, so the anomaly rates computed on top of them are not comparable across regions.
 
-The `riseupvpn` test had no measurements at all for China and Hong Kong in this window, and one or two for Singapore, Malaysia and South Korea. Absence of measurement is not evidence that a tool works.
+The `riseupvpn` test had no measurements at all for China and Hong Kong in this window, and one or two for Singapore, Malaysia and South Korea. Taiwan and Japan were covered properly, 221 and 562 measurements with no anomalies in either, but five of seven regions left effectively unmeasured cannot carry a regional comparison, and absence of measurement is not evidence that a tool works.
 
 ## Why we do not cite VPN adoption numbers
 
@@ -127,7 +127,7 @@ Freedom House's Freedom on the Net 2025 covers 1 June 2024 to 31 May 2025[^fotn]
 
 **Japan** — no website blocks, and the highest possible score on the blocking and filtering indicator[^fotn-jp].
 
-**South Korea** — SNI-based filtering of HTTPS traffic has been in place since February 2019, the first countrywide deployment of that technique[^fotn-kr-2019]. More recently, the data protection authority blocked downloads of a Chinese AI company's app in February 2025, with access restored two months later after privacy changes[^fotn-kr].
+**South Korea** — the government began SNI-based filtering of HTTPS sites in February 2019, which allows blocking at the level of an individual page[^fotn-kr-2019]. More recently, the data protection authority blocked downloads of DeepSeek's app in February 2025, with access restored two months later after the company made privacy changes[^fotn-kr].
 
 ## What this means for Tor VPN Beta
 
@@ -135,7 +135,7 @@ Bridges are the feature that matters in this region, and the design decision to 
 
 Install channels are not a side note either. Google Play is unavailable in China, so the F-Droid listing and the direct APK download are what make the app reachable at all — with the caveat that the download hosts themselves may be unreachable, which makes fetching and verifying the package in advance the practical approach.
 
-In the low-blocking regions in this table the value proposition is different, and per-app routing is the reason to look at it: route the apps that need anonymity through Tor and leave the ones that need a local IP address on the normal network. Services in the region routinely reject Tor exit addresses, so the per-app switch is what makes mixed use workable at all.
+In the low-blocking regions in this table the value proposition is different, and per-app routing is the reason to look at it: route the apps that need anonymity through Tor and leave the ones that need a local IP address on the normal network. Anti-abuse systems commonly blocklist Tor exit addresses, a general pattern rather than something we measured for this post, and the per-app switch is what makes mixed use workable in spite of it.
 
 The Beta warning still applies everywhere. The Tor Project's own support documentation states that the app may leak information and should not be used for anything sensitive[^tor-vpn-about]. For high-risk work, [Tor Browser](../../tools/what-is-tor.md) and [Tails](../../tools/what-is-tails.md) remain the mature options, and the tool choice should follow from a [threat model](../../basics/threat-model.md) rather than from a feature list. The independent audit of the Android app is covered in [our earlier post](./2026-code-audit-for-tor-vpn-completed-by-cure53.md), and the wider trade-offs are in our [VPN guide](../../tools/vpn-guide.md).
 
