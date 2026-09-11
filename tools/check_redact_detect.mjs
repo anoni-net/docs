@@ -70,8 +70,10 @@ const SCENES = [
   { key: 'plain', label: '乾淨樣張', minRecall: 4, maxExtra: 0 },
   { key: 'crowd', label: '人多、臉小', minRecall: 58, maxExtra: 4 },
   { key: 'street', label: '街拍、大小差很多', minRecall: 17, maxExtra: 4 },
-  { key: 'streetTilt', label: '街拍、頭傾斜', minRecall: 16, maxExtra: 4 },
-  { key: 'streetBlur', label: '街拍、傾斜加遠景模糊', minRecall: 16, maxExtra: 4 },
+  // 傾斜這兩格的下限從 16 拉到 19：多角度掃描之後實測都是 21，留兩張的餘裕。
+  // 這兩個數字就是「有沒有在掃傾斜角度」的哨兵，角度被拿掉會立刻掉回 18。
+  { key: 'streetTilt', label: '街拍、頭傾斜', minRecall: 19, maxExtra: 4 },
+  { key: 'streetBlur', label: '街拍、傾斜加遠景模糊', minRecall: 19, maxExtra: 4 },
 ];
 
 const MIME = {
@@ -106,11 +108,16 @@ if (!(await ensureSample())) {
   process.exit(0);
 }
 
+const CORE = path.join(DOCS, 'js', 'redact-detect.js');
 const files = {
   '/pico.js': fs.readFileSync(path.join(VENDOR, 'pico.js')),
+  '/redact-detect.js': fs.readFileSync(CORE),
   '/facefinder': fs.readFileSync(path.join(VENDOR, 'facefinder')),
   '/img.jpg': fs.readFileSync(SAMPLE),
-  '/index.html': Buffer.from('<!doctype html><meta charset=utf-8><script src="/pico.js"></script>'),
+  '/index.html': Buffer.from(
+    '<!doctype html><meta charset=utf-8><script src="/pico.js"></script>' +
+      '<script src="/redact-detect.js"></script>'
+  ),
 };
 
 const server = http.createServer((req, res) => {
@@ -213,8 +220,10 @@ const counts = await evaluate(`(async () => {
     return { pixels: gray, nrows: canvas.height, ncols: canvas.width, ldim: canvas.width };
   };
 
-  // 站上那一套流程：先縮到 maxSide，再偵測、分群、過門檻
-  const detect = (canvas) => {
+  // 站上那一套流程：先縮到 maxSide，再逐個角度掃、轉回原座標、分群、過門檻。
+  // 掃描用的是站上同一份 redact-detect.js，不在這裡重寫一份，不然它跟線上跑的
+  // 不是同一件事，量出來的數字就不代表讀者拿到的結果。
+  const detect = async (canvas) => {
     const longest = Math.max(canvas.width, canvas.height);
     let work = canvas;
     if (longest > DETECT.maxSide) {
@@ -224,17 +233,16 @@ const counts = await evaluate(`(async () => {
       work.height = Math.round(canvas.height * ratio);
       work.getContext('2d').drawImage(canvas, 0, 0, work.width, work.height);
     }
-    const raw = pico.run_cascade(grayscale(work), cascade, {
-      shiftfactor: DETECT.shiftFactor,
-      minsize: DETECT.minSize,
-      maxsize: Math.max(work.width, work.height),
-      scalefactor: DETECT.scaleFactor,
-    });
+    const image = grayscale(work);
+    const t0 = performance.now();
+    const dets = await self.redactDetect.scanAngles(
+      pico, cascade, image.pixels, work.width, work.height, DETECT, {}
+    );
+    const ms = performance.now() - t0;
     const back = canvas.width / work.width;
-    return pico
-      .cluster_detections(raw, DETECT.iou)
-      .filter((d) => d[3] > DETECT.minQuality)
-      .map((d) => ({ x: d[1] * back, y: d[0] * back, score: d[3] }));
+    const out = dets.map((d) => ({ x: d[1] * back, y: d[0] * back, score: d[3] }));
+    out.ms = ms;
+    return out;
   };
 
   // 把偵測到的框對回放進去的臉。中心點落在該張臉半徑以內就算找到，一對一，
@@ -259,7 +267,7 @@ const counts = await evaluate(`(async () => {
         hit += 1;
       }
     }
-    return { total: truth.length, found: found.length, hit: hit, extra: found.length - hit };
+    return { total: truth.length, found: found.length, hit: hit, extra: found.length - hit, ms: Math.round(found.ms || 0) };
   };
 
   const plain = document.createElement('canvas');
@@ -368,20 +376,23 @@ const counts = await evaluate(`(async () => {
     return { canvas: canvas, truth: truth };
   };
 
-  const run = (scene) => score(detect(scene.canvas), scene.truth);
+  const run = async (scene) => score(await detect(scene.canvas), scene.truth);
   const plainTruth = faces.map((face) => ({ x: face[1], y: face[0], r: face[2] / 2 }));
 
   return {
-    plain: score(detect(plain), plainTruth),
-    crowd: run(tile(4, 3200)),
-    street: run(street({ count: 21, tilt: 0, blur: 0 })),
-    streetTilt: run(street({ count: 21, tilt: 25, blur: 0 })),
-    streetBlur: run(street({ count: 21, tilt: 25, blur: 2 })),
+    plain: score(await detect(plain), plainTruth),
+    crowd: await run(tile(4, 3200)),
+    street: await run(street({ count: 21, tilt: 0, blur: 0 })),
+    streetTilt: await run(street({ count: 21, tilt: 25, blur: 0 })),
+    streetBlur: await run(street({ count: 21, tilt: 25, blur: 2 })),
   };
 })()`);
 
 let failed = 0;
-console.log(`  參數：maxSide ${DETECT.maxSide}、minSize ${DETECT.minSize}、minQuality ${DETECT.minQuality}\n`);
+console.log(
+  `  參數：maxSide ${DETECT.maxSide}、minSize ${DETECT.minSize}、` +
+    `minQuality ${DETECT.minQuality}、角度 [${DETECT.angles.join(', ')}]\n`
+);
 for (const scene of SCENES) {
   const got = counts[scene.key];
   const tooFew = got.hit < scene.minRecall;
@@ -391,7 +402,8 @@ for (const scene of SCENES) {
   const why = tooFew ? `低於下限 ${scene.minRecall}` : tooMany ? `多框超出上限 ${scene.maxExtra}` : '';
   console.log(
     `  ${ok ? '✓' : '✗'} ${scene.label.padEnd(22)} 實際 ${String(got.total).padStart(2)} 張，` +
-      `找到 ${String(got.hit).padStart(2)} 張，多框 ${String(got.extra).padStart(2)} 個${why ? '  ← ' + why : ''}`
+      `找到 ${String(got.hit).padStart(2)} 張，多框 ${String(got.extra).padStart(2)} 個，` +
+      `${String(got.ms).padStart(5)}ms${why ? '  ← ' + why : ''}`
   );
 }
 

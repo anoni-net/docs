@@ -32,9 +32,13 @@
  *
  * 偵測用的程式與資料按下按鈕才載入，只想手動拉框的人不會被迫下載。
  *
- * 掃描本身跑在 worker 裡（js/redact-worker.js）。run_cascade 是同步的，留在主
- * 執行緒上就是整頁凍住，量過一張手機拍的照片在六倍 CPU 節流下要兩秒多，而且
- * 那段時間連轉圈都不會轉。worker 起不來就退回頁面裡做，卡幾秒比功能消失好。
+ * 掃描本身跑在 worker 裡（js/redact-worker.js），實作在 js/redact-detect.js，
+ * 退回頁面裡做的那一條共用同一份。run_cascade 是同步的，留在主執行緒上就是整頁
+ * 凍住，量過一張手機拍的照片在六倍 CPU 節流下要兩秒多，而且那段時間連轉圈都
+ * 不會轉。worker 起不來就退回頁面裡做，卡幾秒比功能消失好。
+ *
+ * 掃三個角度，0 度先掃完就把框畫出來，剩下的繼續。動作按鈕要等全部掃完才解開，
+ * 免得讀者按了全部遮起來之後又冒出新的框。
  *
  * === 不做的事 ===
  *
@@ -226,6 +230,29 @@
     maxSide: 1920,
     // 偵測框只包到五官，頭髮跟下巴常常落在外面。往外推一點再遮。
     pad: 0.28,
+    // 掃描的角度。pico 沒有角度參數，級聯是拿直立的臉訓練的，要抓傾斜的臉只能
+    // 把圖轉過去再掃一次。第一個一定是 0，那一批會先回報給畫面。
+    //
+    // 量過五個合成場景（括號是實際張數，斜線後是多框）：
+    //
+    //   角度                乾淨(4)  人多(64)  正立(26)  傾斜(26)  傾斜模糊(26)  多框合計
+    //   [0]                  4/0     64/0      19/2      18/1      18/1            4
+    //   [-25, 0, 25]         4/0     64/0      19/2      21/2      21/2            6
+    //   [-20, 0, 20]         4/0     64/1      19/2      21/2      21/2            7
+    //   [-15, 0, 15]         4/0     64/4      19/4      21/3      20/3           14
+    //   [-30,-15,0,15,30]    4/1     64/5      19/4      22/3      21/3           16
+    //
+    // ±25 召回跟 ±20 一樣而多框更少，±15 的多框跳到 14，五個角度的多框跳到 16
+    // 而召回只多一張。直立的兩個場景完全沒有被影響。
+    //
+    // 兩個角度拿不到一半以上的好處（[-25,0] 是 20 張、[0,25] 是 19 張），大致線性，
+    // 沒有便宜的捷徑。分數是跨角度相加的，本來想順勢把門檻拉高把誤判濾掉，實測
+    // 門檻拉到 20 那兩個多框還在而真的臉從 21 掉到 19，所以門檻維持不動。
+    //
+    // 代價是掃描時間約三倍，而且剛好落在會受益的圖上：480x360 的截圖 27ms 變
+    // 72ms 感覺不出來，3000x2000 的街拍 225ms 變 690ms，手機上大約兩秒變六秒。
+    // 聊天截圖裡沒有傾斜的臉，而它們小到三倍也無所謂。
+    angles: [0, -25, 25],
   };
 
   // pico 回傳的是圓：中心的列、欄、直徑與分數。換成這一頁在用的整數方框，
@@ -354,7 +381,8 @@
       findFaces: "自動找出人臉",
       finding: "尋找中",
       elapsed: "（{s} 秒）",
-      findingNote: "掃描整張照片，手機上通常兩到三秒，照片越大越久。這段時間頁面照常可以操作。",
+      findingNote: "掃描整張照片，三個角度各掃一次才抓得到頭是歪的臉。手機上大約五到六秒，照片越大越久。這段時間頁面照常可以操作。",
+      foundPartial: "先框出 {n} 張直立的臉，還在掃傾斜的角度，找到會補上去。",
       foundSome: "找到 {n} 張臉，用藍框標起來，還沒有遮住任何東西。不需要遮的點一下移掉，其餘的按「全部遮起來」。側臉、墨鏡、被遮住與太小的臉會漏掉，名牌、刺青、車牌這些也要自己補。",
       foundNone: "沒有找到正面、直立又夠大的臉。這一張要自己拉框。",
       markLeft: "還有 {n} 個藍框沒有決定。不需要遮的點一下移掉，其餘的按「全部遮起來」。",
@@ -391,7 +419,8 @@
       findFaces: "自动找出人脸",
       finding: "寻找中",
       elapsed: "（{s} 秒）",
-      findingNote: "扫描整张照片，手机上通常两到三秒，照片越大越久。这段时间页面照常可以操作。",
+      findingNote: "扫描整张照片，三个角度各扫一次才抓得到头是歪的脸。手机上大约五到六秒，照片越大越久。这段时间页面照常可以操作。",
+      foundPartial: "先框出 {n} 张直立的脸，还在扫倾斜的角度，找到会补上去。",
       foundSome: "找到 {n} 张脸，用蓝框标起来，还没有遮住任何东西。不需要遮的点一下移掉，其余的按「全部遮起来」。侧脸、墨镜、被遮住与太小的脸会漏掉，名牌、纹身、车牌这些也要自己补。",
       foundNone: "没有找到正面、直立又够大的脸。这一张要自己拉框。",
       markLeft: "还有 {n} 个蓝框没有决定。不需要遮的点一下移掉，其余的按「全部遮起来」。",
@@ -428,7 +457,8 @@
       findFaces: "Find faces",
       finding: "Looking",
       elapsed: " ({s}s)",
-      findingNote: "Scanning the whole photo. On a phone this usually takes two to three seconds, longer for larger photos. The page stays usable meanwhile.",
+      findingNote: "Scanning the whole photo once per angle, three in all, because tilted heads are missed otherwise. On a phone this takes about five to six seconds, longer for larger photos. The page stays usable meanwhile.",
+      foundPartial: "Outlined {n} upright faces so far. Still scanning the tilted angles, and anything found gets added.",
       foundSome: "Found {n} faces and outlined them in blue. Nothing is covered yet. Tap any outline you do not need, then press \"Cover them all\". Profiles, dark glasses, covered and small faces get missed, and name badges, tattoos and licence plates are yours to add.",
       foundNone: "No front-facing, upright, large enough face found. Draw the boxes yourself on this one.",
       markLeft: "{n} outlines are still undecided. Tap the ones you do not need, then press \"Cover them all\".",
@@ -654,20 +684,28 @@
     return typeof window !== "undefined" ? window.pico : null;
   }
 
+  // 掃描核心，跟 worker 共用同一份。退回頁面裡做的時候才會載到它。
+  function scanCore() {
+    return typeof window !== "undefined" ? window.redactDetect : null;
+  }
+
+  function loadScript(rel) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = new URL(rel, location.href).href;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
   function loadPico() {
     if (cascade) return Promise.resolve(cascade);
     if (!picoLoading) {
       picoLoading = (async () => {
         try {
-          if (!picoLib()) {
-            await new Promise((resolve, reject) => {
-              const script = document.createElement("script");
-              script.src = new URL("../vendor/pico/pico.js", location.href).href;
-              script.onload = resolve;
-              script.onerror = reject;
-              document.head.appendChild(script);
-            });
-          }
+          if (!picoLib()) await loadScript("../vendor/pico/pico.js");
+          if (!scanCore()) await loadScript("../../js/redact-detect.js");
           const lib = picoLib();
           if (!lib) throw new Error("no pico");
           const url = new URL("../vendor/pico/facefinder", location.href).href;
@@ -726,7 +764,7 @@
 
   // 把縮好的 RGBA 轉移給 worker。轉移之後主執行緒那一份就失效了，退回頁面裡做
   // 的時候會從底圖重新取一次，那只要 84ms。
-  function detectInWorker(rgba, width, height) {
+  function detectInWorker(rgba, width, height, onPartial) {
     const node = startWorker();
     if (!node) return Promise.resolve(null);
     const id = workerJob + 1;
@@ -740,6 +778,11 @@
       const onMessage = (event) => {
         const data = event.data || {};
         if (data.id !== id) return;
+        // 第一個角度掃完的那一批，畫面先用，不結束這次等待
+        if (data.ok && data.partial) {
+          if (onPartial) onPartial(data.dets);
+          return;
+        }
         finish(data.ok ? data.dets : null);
       };
       const onError = () => {
@@ -761,30 +804,32 @@
           scaleFactor: DETECT.scaleFactor,
           iou: DETECT.iou,
           minQuality: DETECT.minQuality,
+          angles: DETECT.angles,
         },
         [rgba.buffer]
       );
     });
   }
 
-  // 退回頁面裡做的那一條。worker 起不來的時候才走這裡，會卡住幾秒。
-  async function detectInPage(plan) {
+  // 退回頁面裡做的那一條。worker 起不來的時候才走這裡。掃描的實作跟 worker 共用
+  // redact-detect.js，算出來的東西必須一模一樣：退路少掃一個角度，讀者會拿到一張
+  // 少遮幾張臉的圖而完全不知情。
+  //
+  // 差別只在每個角度之間讓出一次。這條路上掃描擋著主執行緒，一個角度大約兩秒，
+  // 三個角度連著做就是六秒的黑畫面，切成三段至少轉圈與秒數還會動。
+  async function detectInPage(plan, onPartial) {
     const classify = await loadPico();
-    if (!classify) return null;
-    const lib = picoLib();
+    const core = scanCore();
+    if (!classify || !core) return null;
     try {
       const gray = grayscaleFrom(source.bitmap, plan.width, plan.height);
-      const raw = lib.run_cascade(
-        { pixels: gray, nrows: plan.height, ncols: plan.width, ldim: plan.width },
-        classify,
+      return await core.scanAngles(
+        picoLib(), classify, gray, plan.width, plan.height, DETECT,
         {
-          shiftfactor: DETECT.shiftFactor,
-          minsize: DETECT.minSize,
-          maxsize: Math.max(plan.width, plan.height),
-          scalefactor: DETECT.scaleFactor,
+          onPartial: onPartial,
+          pause: () => new Promise((next) => requestAnimationFrame(() => setTimeout(next, 0))),
         }
       );
-      return lib.cluster_detections(raw, DETECT.iou).filter((det) => det[3] > DETECT.minQuality);
     } catch (err) {
       return null;
     }
@@ -825,27 +870,40 @@
     startElapsed();
 
     const plan = detectSize(source.width, source.height, DETECT.maxSide);
+    const toBoxes = (dets) =>
+      dets
+        .map((det) => detectionToBox(det, plan.scale, source.width, source.height))
+        .filter((box) => box && !isCovered(box, boxes));
+
+    // 第一個角度掃完就把直立的臉先框出來。detecting 維持著，動作按鈕還是停用的，
+    // 所以不會出現「按了全部遮起來之後又冒出新框」那種時序。
+    const showPartial = (dets) => {
+      if (!detecting) return;
+      marks = toBoxes(dets);
+      detectNote = fill(t.foundPartial, { n: marks.length });
+      render();
+    };
+
     let dets = null;
     try {
       dets = await detectInWorker(
-        rgbaFrom(source.bitmap, plan.width, plan.height), plan.width, plan.height
+        rgbaFrom(source.bitmap, plan.width, plan.height), plan.width, plan.height, showPartial
       );
     } catch (err) {
       dets = null;
     }
-    if (!dets) dets = await detectInPage(plan);
+    if (!dets) dets = await detectInPage(plan, showPartial);
     stopElapsed();
 
     if (!dets) {
       detecting = false;
+      marks = [];
       error = "detectMissing";
       render();
       return;
     }
 
-    const found = dets
-      .map((det) => detectionToBox(det, plan.scale, source.width, source.height))
-      .filter((box) => box && !isCovered(box, boxes));
+    const found = toBoxes(dets);
 
     // 直接指派而不是接在後面。重按一次偵測得到的是同一批，接上去會變成兩層。
     marks = found;
@@ -1045,8 +1103,11 @@
     root.appendChild(el("p", "rd-status", boxes.length ? fill(t.count, { n: boxes.length }) : t.none));
 
     // 掃描要幾秒，按下去之後就講出來。轉圈只說明「在做事」，沒有說明「要多久」，
-    // 而在手機上這一段有兩三秒，不給預期的話讀者會以為當掉了。
-    if (detecting) {
+    // 而在手機上這一段有五六秒，不給預期的話讀者會以為當掉了。
+    //
+    // 第一個角度回報之後就換掉。那則訊息自己會講「還在掃傾斜的角度」，時間預期
+    // 已經沒有用了，兩段說明疊在一起只會讓人不想讀。
+    if (detecting && !detectNote) {
       const busy = el("p", "rd-note", t.findingNote);
       busy.setAttribute("role", "status");
       busy.setAttribute("aria-live", "polite");

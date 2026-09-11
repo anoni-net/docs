@@ -18,6 +18,9 @@
  * 灰階迴圈放在這裡而不是留在呼叫端，是因為傳過來的 RGBA 是可轉移的緩衝區，
  * 轉移之後主執行緒那一份就失效了，順手在這邊轉成灰階不必多複製一次。
  *
+ * 掃描本身在 redact-detect.js，退回頁面裡做的那一條共用同一份。三個角度各掃一次，
+ * 第一個角度掃完就先回一批結果，那一批是直立的臉，畫面可以先把框畫出來。
+ *
  * === 不做的事 ===
  *
  * 只有一個 fetch，網址由相對路徑組出來，指向本站 vendor 的級聯資料。沒有第二個
@@ -30,7 +33,8 @@
 "use strict";
 
 // 位置是相對於這一支自己的網址（docs 的 js/ 底下），不是相對於頁面。
-importScripts("../utils/vendor/pico/pico.js");
+// redact-detect.js 是掃描核心，跟退回頁面裡做的那一條共用同一份實作。
+importScripts("../utils/vendor/pico/pico.js", "redact-detect.js");
 
 let cascade = null;
 let loading = null;
@@ -69,20 +73,16 @@ self.onmessage = async (event) => {
       const at = i * 4;
       gray[i] = (rgba[at] * 0.299 + rgba[at + 1] * 0.587 + rgba[at + 2] * 0.114) | 0;
     }
-    const raw = pico.run_cascade(
-      { pixels: gray, nrows: job.height, ncols: job.width, ldim: job.width },
-      classify,
+    // 第一個角度掃完先回一批，畫面可以把直立的臉先框出來，剩下的角度繼續掃。
+    const dets = await self.redactDetect.scanAngles(
+      pico, classify, gray, job.width, job.height, job,
       {
-        shiftfactor: job.shiftFactor,
-        minsize: job.minSize,
-        maxsize: Math.max(job.width, job.height),
-        scalefactor: job.scaleFactor,
+        onPartial: (partial) => {
+          self.postMessage({ id: job.id, ok: true, partial: true, dets: partial });
+        },
       }
     );
-    const dets = pico
-      .cluster_detections(raw, job.iou)
-      .filter((det) => det[3] > job.minQuality);
-    self.postMessage({ id: job.id, ok: true, dets: dets });
+    self.postMessage({ id: job.id, ok: true, partial: false, dets: dets });
   } catch (err) {
     self.postMessage({ id: job.id, ok: false });
   }

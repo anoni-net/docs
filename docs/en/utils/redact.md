@@ -6,6 +6,7 @@ offline_assets:
   # The face detector's code and cascade data are loaded on demand, so the page has
   # no script tag for them. The offline copy still needs both, otherwise pressing
   # "Find faces" with the network off does nothing.
+  - js/redact-detect.js
   - js/redact-worker.js
   - utils/vendor/pico/pico.js
   - utils/vendor/pico/facefinder
@@ -55,7 +56,9 @@ Images above sixteen million pixels are scaled down to that limit first, because
 
 The detector's code and data, about 240 KB, are fetched only when you press "Find faces". Nobody who just wants to draw boxes has to download it.
 
-It finds faces that are front-facing, upright and reasonably large in the frame. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Tap the extra ones to take them away, and add the missed ones yourself.
+The scan runs once per angle, three in all: upright, tilted twenty-five degrees left, and tilted twenty-five degrees right. Tilted heads are missed otherwise. That costs roughly three times the scanning time, and the cost lands on the images that benefit from it: chat screenshots are small enough that three times is imperceptible, while a full street photo takes about five to six seconds on a phone. The scan runs on a background thread, so the page stays usable, and the upright pass draws its boxes as soon as it finishes. Anything the other angles find is added afterwards.
+
+It finds faces that are front-facing and reasonably large in the frame, and it still catches heads tilted by up to about twenty-five degrees. Profiles, bowed heads, faces behind a mask or hair, and faces far from the camera get missed, and a busy background can produce boxes over things that are not faces. Tap the extra ones to take them away, and add the missed ones yourself.
 
 Glasses are a common case. The area around the eyes is where this kind of detector gets most of its signal, so frames change the light and dark pattern there and the score drops. Measured on the same face with synthetic frames: thin frames roughly halve the score and are still recoverable, while heavy frames and dark glasses collapse it entirely, beyond any threshold. If someone in the frame is wearing dark glasses, assume it will miss them and draw the box yourself.
 
