@@ -52,6 +52,17 @@ We pulled Tor Metrics daily user estimates for the 90 days from 11 June to 9 Sep
 | Singapore | 21,812 | 516 | 2.3% |
 | South Korea | 27,847 | 581 | 2.0% |
 
+??? info "The exact queries behind this table"
+
+    Tor Metrics serves these figures as CSV. Swap `country=` for `cn`, `hk`, `sg`, `my`, `jp` or `kr` to get the other rows.
+
+    ```
+    https://metrics.torproject.org/userstats-relay-country.csv?start=2026-06-11&end=2026-09-09&country=tw&events=off
+    https://metrics.torproject.org/userstats-bridge-country.csv?start=2026-06-11&end=2026-09-09&country=tw
+    ```
+
+    Both files carry one row per day, with the user count in the third column. The table shows the arithmetic mean of that column across the 90 rows, rounded to the nearest whole number. Bridge share is the bridge mean divided by the sum of both means.
+
 China is the only region in the sample where bridge users outnumber direct users. Everywhere else the bridge share sits between 2 and 8 percent. That single ratio is the clearest evidence for the announcement's point about exit selection versus bridges: in the one place where direct access to Tor mostly fails, bridges are not an advanced option, they are the only way in.
 
 Two caveats before anyone reuses these numbers. Tor's user estimates are derived from directory requests and geolocated by IP address, so they are estimates rather than headcounts, and someone reaching Tor through a bridge or a commercial VPN may be attributed to the wrong place[^tormetrics]. The absolute counts are also not normalized by population, which is why Singapore's 21,812 direct users and Japan's 30,295 are not the comparison to draw. The bridge share is a ratio within each region, so it survives both problems.
@@ -69,6 +80,16 @@ OONI's `tor` test checks whether Tor directory authorities and default bridges a
 | Hong Kong | 0.9% | 3,270 |
 | Singapore | 0.9% | 3,557 |
 | Malaysia | 0.7% | 10,288 |
+
+??? info "The exact queries behind this table"
+
+    OONI's aggregation API returns totals for one country and one test over a date range. `probe_cc` takes the uppercase two-letter code, and the same call with `test_name=psiphon` produces the Psiphon figures quoted below the table.
+
+    ```
+    https://api.ooni.io/api/v1/aggregation?probe_cc=TW&test_name=tor&since=2026-06-11&until=2026-09-09
+    ```
+
+    The anomaly rate is `anomaly_count` divided by `measurement_count` in the JSON response. Adding `&axis_x=measurement_start_day` returns the same counts broken down by day. The tests we looked at and discarded, covered in the next section, are `vanilla_tor`, `torsf` and `riseupvpn`, reachable by changing `test_name` in the same call.
 
 China's 96.5 percent is a different category of result from everything below it. The single-digit rates in South Korea, Japan and Taiwan are consistent with ordinary network failures rather than a blocking regime, and they should not be read as partial censorship of Tor.
 
@@ -120,7 +141,7 @@ The Beta warning still applies everywhere. The Tor Project's own support documen
 
 ## Reproducing this analysis
 
-Every number above comes from two public sources. Tor Metrics publishes per-country daily user estimates as CSV for both relay and bridge users, and OONI's aggregation API returns measurement and anomaly counts per country and test. The window used throughout is 11 June to 9 September 2026, and the figures are daily means over those 90 days. Anyone can re-run both queries and get the same table; if you do and the numbers have moved, the current data is authoritative and this post is a snapshot.
+Both tables above carry the queries that produced them, so none of this needs to be reassembled from scratch. The window throughout is 11 June to 9 September 2026 and the figures are daily means over those 90 days. Tor's user estimates and OONI's measurement counts both move as new data arrives, so if you re-run the queries and get different numbers, the live data is authoritative and this post is a snapshot of one window.
 
 [^announcement]: [Tor VPN Beta: What we've learned building our own VPN for Android from scratch](https://blog.torproject.org/tor-vpn-beta/){target="_blank"} - The Tor Project blog, 9 September 2026, by pavel. Images in this post are the full-resolution files from [the companion forum thread](https://forum.torproject.org/t/tor-vpn-beta-what-weve-learned-building-our-own-vpn-for-android-from-scratch/22104){target="_blank"}. Retrieved 2026-09-11.
 [^arti]: Arti is the Tor Project's Tor implementation written from scratch in Rust, structured primarily as a library so it can be embedded in other software. It is the engine underneath Tor VPN. See our [Arti changelog](../../changelog/arti.md) and the [source repository](https://gitlab.torproject.org/tpo/core/arti){target="_blank"} - Tor Project GitLab. Retrieved 2026-09-11.
