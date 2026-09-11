@@ -97,15 +97,31 @@ jobs:
       #
       # mirrorlist 的路徑是 runner 映像的實作細節，未來可能改。用 if 包住，檔案不在就
       # 略過，行為退回現況而不是讓整步失敗。
+      #
+      # 2026-09-11 又卡了一次，這次換成純 http 那一側不通。mirrorlist 裡的網址是
+      # http://，而 http://archive.ubuntu.com 每個 index 檔都等到逾時才 Ign，再退回
+      # https 抓成功，一來一回三十幾秒，八個檔案就把五分鐘用完。所以連通訊協定一起
+      # 改成 https，不要再走那條會逾時的路。log 裡 packages.microsoft.com 與
+      # dl.google.com 的 https 請求本來就成功，代表 runner 映像裡 ca-certificates
+      # 已經在，apt 走 https 不缺東西。
+      #
+      # 兩步都改成不擋建置。它們存在的目的只是補一次 ca-certificates，而那個套件
+      # 本來就在映像裡。Ubuntu 的 mirror 出狀況不該讓一次發布停在這裡，內容是好的
+      # 卻上不了線，代價比這兩步沒跑到高得多。真的缺套件的話後面會在用到的地方失敗。
       - name: Update libs
         timeout-minutes: 5
+        continue-on-error: true
         run: |
           if [ -f /etc/apt/apt-mirrors.txt ]; then
-            sudo sed -i 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' /etc/apt/apt-mirrors.txt
+            sudo sed -i \
+              -e 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' \
+              -e 's|http://|https://|g' \
+              /etc/apt/apt-mirrors.txt
           fi
           sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 update
       - name: Install ca
         timeout-minutes: 5
+        continue-on-error: true
         run: sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 install ca-certificates
       - name: Set up Python
         timeout-minutes: 10
