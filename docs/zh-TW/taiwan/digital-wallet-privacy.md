@@ -112,7 +112,9 @@ encodedList = ZipUtils.gzipCompressThenBase64(bytes);
 
 ## 皮夾查詢驗證方身分卻不擋下請求
 
-OpenID4VP 協定裡，驗證方用 `client_id` 表明身分，而 `client_id` 的形式決定皮夾能做多少驗證[^12]。形式決定皮夾能不能確認「對方是不是它自稱的那個人」。台灣的伺服器端支援四種[^13]：
+驗證方向皮夾要資料時，請求裡會帶一個 `client_id` 字串自稱身分。任何人都能在那裡填任何字串，所以皮夾能不能查證對方確實是該字串所指的單位，決定了這個宣稱有沒有意義。
+
+能不能查證，取決於那個字串屬於哪一種識別碼[^12]。有些種類本身解析得出公鑰，皮夾可以要求對方用對應的私鑰簽署請求，簽得出來才算數。有些種類只是一個網址，沒有可供比對的金鑰。台灣的伺服器端支援四種[^13]：
 
 ```java
 PRE_REGISTERED("pre-registered")
@@ -120,6 +122,8 @@ REDIRECT_URI("redirect_uri")
 DID("did")
 VERIFIER_ATTESTATION("verifier_attestation")
 ```
+
+用門口有人自稱是自來水公司員工來比喻。`REDIRECT_URI` 是口頭聲稱，`DID` 是出示一張識別證，證件編號查得到、而且證明得了這張是他本人的，`VERIFIER_ATTESTATION` 則是那張識別證另有可信機關加簽，`PRE_REGISTERED` 是你手上本來就有一份名單。
 
 上面四個名稱來自 OpenID4VP 較早的草案。正式發布的 1.0 版把該概念改名為 Client Identifier Prefix，`did` 也改成 `decentralized_identifier`[^12]。用現行規格對照會找不到 `did` 字串，本頁以皮夾實際執行的程式碼為準。
 
