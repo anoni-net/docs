@@ -107,9 +107,10 @@ We have produced full Traditional Chinese translations of two pieces of regional
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](../scenarios/lgbtq.md) — the showcase scenario, with the full multi-region context section.
 
-**Taiwan's regulatory environment**, the three threads we track in detail:
+**Taiwan's regulatory environment**, the four threads we track in detail:
 
 - [Taiwan's 2025 data protection overhaul](./taiwan-pdpa-2025.md) — the Personal Data Protection Act amendments, the Commission that has not yet been established, and what that gap means in practice.
+- [What Taiwan's Digital Credential Wallet protects](./taiwan-digital-wallet-privacy.md) — reading the source of the government identity wallet for three separate answers: the issuer cannot see your presentations, verifiers can link you, and the trust list check warns without blocking.
 - [Taiwan's 2026 Virtual Asset Service Act](./taiwan-vasp-2026.md) — the shift from registration to licensing, the stablecoin chapter, and the over-compliance side effect that catches cross-border donors.
 - [Taiwan's Whistleblower Protection Act, from a technical angle](./taiwan-whistleblower-law.md) — what the Act covers, the digital traces a disclosure leaves, and why anonymous disclosure sits outside the protection entirely.
 

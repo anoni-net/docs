@@ -97,6 +97,7 @@ nav:
           - regional/ooni-checklist.md
       - "Taiwan's regulatory environment":
           - regional/taiwan-pdpa-2025.md
+          - regional/taiwan-digital-wallet-privacy.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_UTILS, "Utilities"]:
@@ -427,6 +428,7 @@ plugins:
         'taiwan/ooni-asn-coverage.md': 'regional/ooni-asn-coverage.md'
         'taiwan/ooni-checklist.md': 'regional/ooni-checklist.md'
         'taiwan/pdpa-2025.md': 'regional/taiwan-pdpa-2025.md'
+        'taiwan/digital-wallet-privacy.md': 'regional/taiwan-digital-wallet-privacy.md'
         'taiwan/tor-relay-watcher.md': 'regional/tor-relay-watcher.md'
         'taiwan/vasp-2026.md': 'regional/taiwan-vasp-2026.md'
         'taiwan/whistleblower-law.md': 'regional/taiwan-whistleblower-law.md'
