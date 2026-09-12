@@ -99,6 +99,7 @@ nav:
           - taiwan/tor-relay-watcher.md
       - "法规与制度":
           - taiwan/pdpa-2025.md
+          - taiwan/digital-wallet-privacy.md
           - taiwan/vasp-2026.md
           - taiwan/whistleblower-law.md
   - !ENV [NAV_UTILS, "小工具"]:
