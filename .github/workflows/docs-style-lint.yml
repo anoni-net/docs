@@ -32,6 +32,11 @@ on:
       # 涵蓋得到「改的是目標文章、沒碰 start/」這種 PR。
       - "tools/check_start_parity.py"
       - "tools/test_check_start_parity.py"
+      # 自動存進讀者裝置的那批清單。掛在這支的理由跟 start 對齊同一個：新增文章的
+      # PR 只會碰 docs/<lang>/**/*.md，tools-tests.yml 的 paths 涵蓋不到，而漏收
+      # 一篇的症狀是斷網的讀者打不開，線上與 CI 一路正常。
+      - "tools/check_core_pages.py"
+      - "tools/test_check_core_pages.py"
       - ".github/workflows/docs-style-lint.yml"
 
 permissions:
@@ -66,6 +71,14 @@ jobs:
       # Documentation built）。整區都是連結，斷了讀者只會落在文章開頭。
       - name: start 三語系對齊
         run: python3 tools/check_start_parity.py
+
+      - name: 測試自動存清單的檢查
+        run: python3 tools/test_check_core_pages.py
+
+      # 概念、工具、進階、在地那幾區的註解寫著「全部」，少一頁就是漏掉。新增文章
+      # 沒有決定要不要收，斷網的讀者會發現那一篇打不開，而那時候補存已經來不及。
+      - name: 自動存清單沒有漂移
+        run: python3 tools/check_core_pages.py
 
       - name: 掃描變更的 Markdown 與 UI 字串
         run: |
