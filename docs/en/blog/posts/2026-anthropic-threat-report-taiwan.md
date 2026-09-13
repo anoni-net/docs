@@ -325,8 +325,9 @@ The campaigns targeted Claude's most valuable capabilities: agentic capabilities
 
     To reduce the risk of that being extracted, Claude's response carries not the reasoning but a "thinking signature", a reference that reveals nothing on its own and functions rather like a claim ticket. Getting the full reasoning back requires sending that reference along with the conversation to Anthropic's servers to redeem it. The technique Moonshot and DeepSeek used, described below, was to save the reference, open a fresh conversation, and ask Claude to convert it back into full text — redeeming a legitimate ticket for something that should never have been handed over. Nothing on screen reveals whether reasoning has leaked, because the leak depends on that extra redemption step afterwards.
 
-### Moonshot served Claude instead of Kimi (pp. 148–149)
+### Moonshot served Claude instead of Kimi
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 148–149</span></p>
 In `GTG-16002`, Moonshot AI, which produces the Kimi family of models, silently forwarded customer requests to Claude instead of processing them with Kimi, then displayed Claude's responses to its users. Those users believed they were using a Kimi model.
 
 The numbers:
@@ -344,8 +345,9 @@ Page 149 goes on to state that the rerouted user queries included sensitive info
 - A user assessed as likely affiliated with the PLA loaded surveillance data from a CCTV archive into what they believed was Kimi and asked it to analyse whether a tracked individual was behaving abnormally. The footage came from hundreds of cameras in Chengdu, including cameras outside PLA facilities, institutes affiliated with the China Electronics Technology Group Corporation, and a major state-owned enterprise
 - An engineer at a major PRC state-owned enterprise used Kimi to build an internal system, revealing internal code and live credentials from multiple high-profile PRC technology companies. The user had no way of knowing their use of Kimi was being forwarded to Claude
 
-### DeepSeek used the same approach (pp. 149–150)
+### DeepSeek used the same approach
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 149–150</span></p>
 `GTG-16001` describes DeepSeek building a CoT extraction pipeline relying on the same cross-session replay attack, and silently relaying exchanges to Claude without informing customers. DeepSeek targeted Opus reasoning traces, using the technique to exfiltrate traces that would otherwise have been summarised.
 
 The selection method is distinctive. DeepSeek checked various strings in inbound requests, tagging users working through third-party or Anthropic coding harnesses such as Claude Code, the Claude Agent SDK or OpenCode, then relayed the tagged users' requests to Claude Opus.
@@ -358,8 +360,9 @@ Three exposure cases are listed:
 
 Distillation attributable to DeepSeek over 14 days in July 2026 exceeded 12.1 million exchanges.
 
-### Alibaba ran the largest campaign (pp. 147–148)
+### Alibaba ran the largest campaign
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 147–148</span></p>
 `GTG 16005` is the largest distillation attack Anthropic has ever measured, targeting the chain-of-thought reasoning transcripts of Opus 4.6 and 4.7. Operators affiliated with Alibaba injected a fixed prompt into each request that forced Claude to write out its reasoning traces inside inline text tags before giving its final answer. Those transcripts were saved and converted into supervised fine-tuning data used to train Alibaba's Qwen models, distilling Claude's capabilities into Qwen 3.5, 3.6 and 3.7.
 
 The campaign peaked at nearly 3 million exchanges per day from more than 3,500 fraudulent accounts, targeting agentic tasks, software engineering, kernel development and long-horizon tasks. Beyond distillation, Alibaba also used Claude to advance its own AI R&D, helping develop internal infrastructure for model development, reinforcement learning environments and model architecture research.
@@ -368,8 +371,9 @@ Access came through two pools of fraudulent accounts. The first held nearly 5,00
 
 Scale attributable to Alibaba between May and July 2026: over 151 million exchanges.
 
-### Zhipu, Xiaomi, SenseTime and MiniMax (pp. 150–153)
+### Zhipu, Xiaomi, SenseTime and MiniMax
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 150–153</span></p>
 `GTG-16006` is Zhipu, branded outside China as Z.ai. It ran a chain-of-thought extraction pipeline, replaying captured Claude reasoning traces back through Claude to clean them for training its GLM models. Over ten days it rotated through 273 fraudulent accounts to evade model restrictions while attacking Opus 4.8. Over a 10-day period in June, 770,609 exchanges passed through the CoT-extraction cleaner, with over 3 million exchanges attributed to Zhipu in the same period, most used for cleaning distilled outputs. Zhipu also used Claude to improve its post-training pipelines, judging model outputs, cleaning and normalising harvested transcripts, scoring and filtering training data, and writing tasks, providing solutions and implementing testing.
 
 One passage deserves separate attention. Ahead of the release of GLM 5.3, Zhipu ran a campaign targeting the cyber capabilities of leading US frontier models, using public vulnerability datasets to develop capture-the-flag challenges, then launching a distillation attack against another US frontier lab's top model. Opus 4.6 was separately targeted, primarily to evaluate and grade the other model's responses. Zhipu initially attempted to target Anthropic's Fable model, whose strengthened cyber safeguards made it harder to extract cyber capabilities, and gave up on Fable after those safeguards degraded its attacks, switching to Opus 4.6 and another US lab's model expressly because it assessed the safeguards as weaker. Scale attributable to Zhipu over 17 days in June and July 2026: over 3.4 million exchanges.
@@ -382,8 +386,9 @@ The report advances an inference: Xiaomi may have launched MiMo-V2-Pro with a fr
 
 MiniMax built its own proxy network service through a shell company with no obvious links to MiniMax, which does not disclose its relationship to its parent. The service offers access only to models developed by Anthropic and OpenAI, and to no Chinese models, including MiniMax's own. Anthropic reads this as evidence that MiniMax established the service to harvest exchanges between users and US frontier models in order to train its own.
 
-### The user data carried along with it (pp. 146–147)
+### The user data carried along with it
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 146–147</span></p>
 Page 146 raises the user data problem on its own terms. DeepSeek, Xiaomi and Moonshot fed conversations between their own models and users into Claude, then used Claude's responses as training data. Some of those exchanges included sensitive information from individual users, major multinational companies and state-affiliated actors. Many were relayed from users of third-party model routing services commonly used in the United States and Europe, and those sessions contained names, email addresses, company data and other sensitive data of hundreds of end users in at least a dozen languages. The report concludes these practices are likely inconsistent with privacy laws and the labs' own terms of service.
 
 Two redacted real prompts are given as examples. The first is a pharmaceutical company's internal capital expenditure forecast, submitted to a Chinese lab's coding assistant through a third-party model router:
@@ -417,8 +422,9 @@ What both have in common is plain enough. A user pasted work into a service they
 
     Page 147 is explicit that every lab named in this chapter was attributed with high confidence. High confidence is Anthropic's own intelligence judgement, a different standard from a finding verified by a court or an independent body. The five labs named did not respond to press questions, China's Foreign Ministry and MOFCOM rejected similar claims, and no third party has verified either side. When citing what a given lab did, prefixing it with "Anthropic assesses" is the safer construction — particularly given that this report is also a commercial document.
 
-### How Anthropic is responding (pp. 153–154)
+### How Anthropic is responding
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 153–154</span></p>
 The chapter closes with the layered defence Anthropic uses, which is useful for anyone assessing the risk.
 
 - Metadata and irregular-activity signals identify accounts associated with proxy service networks. Rather than banning proxy accounts individually, Anthropic attributes the suspicious activity to a specific organisation so it can take comprehensive enforcement action at once
@@ -473,8 +479,9 @@ The closing advice on page 30 is worth quoting directly. AI API keys and session
 
 The influence operations chapter covers nine cases originating in Russia, Iran, Turkey, the Gulf, South Asia, Africa and Europe, targeting audiences on six continents. The actors include governments, state-aligned propaganda institutions and state media, private firms selling influence to paying clients, domestic political operators, and an opposition movement in exile. None of these cases targets Taiwan; they are included here because the techniques overlap with the working conditions of people doing advocacy and international liaison.
 
-### Techniques shared across the cases (p. 43)
+### Techniques shared across the cases
 
+<p class="role-tags"><span class="role-tags__page">Report p. 43</span></p>
 - **Complex tool use**: Markdown files containing doctrine were reused almost verbatim across hundreds of sessions. Actors kept banned-word lists inside their AI agents, maintained shared files of approved sources and evasion rules, and ran custom software calling Claude in fixed batches. The centralised setup meant content producers never needed to coordinate with, or even know, one another. One actor was building a course to teach the workflow to others. The report notes that operations are increasingly run not from individual prompts but from persistent memory files.
 - **Laundering of attribution, sourcing and certainty**: actors prompted Claude to strip state attribution from republished material, passing claims through chains of outlets so they read as independently confirmed. In one case tied to a Russian state media operation, an actor produced claims the model flagged as unverified, then instructed it to drop those caveats and present everything as confirmed, so the material would read as established fact.
 - **Increased operational security**: actors asked the model to strip the marks of automated text and sound organic, built account warmup and evasion logic, and removed metadata and codenames before delivery. They also laundered their access to Claude through VPNs, foreign phone numbers, rotated accounts and third-party services masking their IP.
@@ -483,20 +490,23 @@ The influence operations chapter covers nine cases originating in Russia, Iran, 
 
 The same page records the other side of this. Because Anthropic sits at the production stage, upstream of platforms like social media, it also observes that influence operations often fail to reach a genuine audience.
 
-### A front NGO wearing a real organisation's identity (p. 78)
+### A front NGO wearing a real organisation's identity
 
+<p class="role-tags"><span class="role-tags__page">Report p. 78</span></p>
 A UAE-linked operation created a front NGO that copied a real Swiss organisation's identity and published state-authored human rights reports under it. The same operation thoroughly researched and profiled 18 members of the European Parliament and prominent journalists, and compiled counter-accountability dossiers on UN Special Rapporteurs who had criticised the conduct of the UAE in Sudan.
 
 For Taiwanese advocacy workers who engage with international human rights mechanisms and give interviews regularly, the overlap in method is considerable.
 
-### Cloning a real activist's account (p. 70)
+### Cloning a real activist's account
 
+<p class="role-tags"><span class="role-tags__page">Report p. 70</span></p>
 An operation linked to the Iranian opposition, to deceive users, tasked a shared AI agent with cloning a real activist's personal Telegram account, then instructed it in Persian that it was now that person. The report states that to Anthropic's knowledge, those contacts did not know they were speaking with an AI-assisted account.
 
 Surveillance does not only take the form of being written into a file. For anyone collaborating with exile communities, your own messaging account is a thing that can be cloned, and people around you may receive a message that looks like you and is not.
 
-### A commercial surveillance vendor infiltrating private groups (pp. 82–85)
+### A commercial surveillance vendor infiltrating private groups
 
+<p class="role-tags"><span class="role-tags__page">Report pp. 82–85</span></p>
 `GTG-54009` sits in the surveillance chapter. The activity was carried out by, or on behalf of, an entity named "S2T Unlocking Cyberspace", which open-source research suggests is an Israeli-Singaporean commercial intelligence vendor. They used Claude to build a commercial surveillance platform that analysed, classified and profiled the social media activity of users in Iran and the Persian Gulf, sorting people into six demographic groups and producing Arabic-language intelligence briefings styled as official government communications. Anthropic also identified more than 255 synthetic social network accounts, suggesting a stock of fake accounts built for later deployment.
 
 The part most relevant to advocacy work is quoted on page 83. The 2023 Forbidden Stories investigation into a leaked S2T brochure described the company's services as including creating fake accounts to infiltrate private WhatsApp and Telegram groups, harvesting member lists, and escalating to phishing and compromising devices. Anthropic identified the activity at its pilot stage and banned the account, found no evidence that the later stages were used against real targets, and could not independently confirm the downstream stages Forbidden Stories reported.
