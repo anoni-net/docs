@@ -549,6 +549,53 @@ ShinyHunters（`GTG-50014`，第 12 到 14 頁）的規模具體說明了這件�
 
 詐騙章節第 139 頁的案例是一家中國 app 工作室，以 Claude 建置 20 多個交友 app 並驅動對談用的 AI 人格，同時對外宣稱服務全由真人提供。2026 年 4 月的兩週期間，Anthropic 觀察到超過 4,700 個 AI 人格與至少 25,000 名使用者對談，AI 人格與真人的比例約為三比一。該工作室也招募真人混進同一個配對池，負責處理 AI 做不到的環節，例如即時視訊與社群追蹤，用來降低受害者的戒心。
 
+## 報告發布之後的各界回應
+
+<p class="role-tags"><span class="role-tags__label">適合讀者</span><span class="role-tag role-tag--press">記者與研究者</span><span class="role-tag role-tag--civic">公民團體與倡議工作者</span><span class="role-tags__note">本節內容查核至 2026 年 9 月 13 日，之後的發展需要自行追蹤。</span></p>
+
+報告發布之後這幾天的發展，與報告本身分開記錄。以下每一項都標出日期與來源，方便判斷哪些已經查證、哪些還沒有。
+
+| 日期 | 事件 |
+|---|---|
+| 9 月 8 日 | 美國 NSA、CISA 與 FBI 發布聯合資安公告 `AA26-251A`，點名六家中國 AI 公司 |
+| 9 月 9 日 | 中國商務部回應，稱指控沒有事實與法律依據 |
+| 9 月 10 日 | Anthropic 發布這份報告 |
+| 9 月 10 到 11 日 | 台灣媒體大量報導，焦點集中在電子戰的 12 個目標 |
+| 9 月 11 日 | 被點名的實驗室對媒體詢問未提出實質回應 |
+| 9 月 12 日 | 中文社群流傳月之暗面創辦人與高管被帶走，公司同日發聲明否認並報案 |
+
+### 美國政府的公告排在報告之前
+
+NSA、CISA 與 FBI 在 2026 年 9 月 8 日發布聯合資安公告 `AA26-251A`[^cisa]，點名六家中國 AI 公司對美國前沿模型進行工業規模的蒸餾，被鎖定的模型涵蓋 Claude 3.7 到 Opus 4.8、GPT-4 到 GPT-5.5、Gemini 2.5 各版本與 Grok。對中國政府涉入程度的措辭是「很可能在中國政府知情的情況下」。
+
+兩份名單值得並排比對。美國政府那份六家是 DeepSeek、Moonshot AI、Alibaba、MiniMax、StepFun 與 Z.AI。Anthropic 那份七家是阿里巴巴、月之暗面、深度求索、智譜（海外品牌 Z.AI）、小米、商湯與 MiniMax。兩份的交集是五家，美國政府那份多了 StepFun，Anthropic 那份多了小米與商湯。引用時要寫清楚出自哪一份，兩者的證據基礎也不同，一份是政府的情報判斷，一份是單一廠商在自家平台上的觀測。
+
+### 中國官方的否認
+
+中國商務部在 9 月 9 日回應美方公告，稱指控沒有事實與法律依據，並把蒸餾描述為 AI 產業的正常技術與商業問題，認為美方將其政治化。外交部要求美方停止無端指責與抹黑。中方同時警告，若以此為由對中國 AI 企業採取新的限制措施，將採取堅決反制。
+
+這些回應針對的是美國政府 9 月 8 日的公告。Anthropic 的報告在 9 月 10 日才發布，截至本節查核時間，中國官方沒有針對報告本身的個別案例提出說明。
+
+### 被點名的實驗室多半沒有實質回應
+
+TechCrunch 與 CNBC 在報導當下都做過詢問。月之暗面拒絕置評，深度求索與小米沒有在時限內回覆[^press]。截至本節查核時間，七家之中沒有任何一家對 Anthropic 的具體指控提出實質說明。
+
+### 一則已被否認的傳聞
+
+9 月 12 日，中文社群流傳一則說法，指月之暗面的創辦人與十多名高管被帶走調查。台灣有 YouTube 頻道轉述，媒體隨後以「傳」字下標報導[^ltn]。
+
+月之暗面同日上午發出聲明，稱網傳關於創辦人及員工的資訊純屬虛構、係惡意造謠，並表示已向公安機關報案，將依法追究造謠者的法律責任[^moonshot]。
+
+三件事要分開看。這則傳聞沒有具名來源，也沒有可查證的文件。公司的否認針對的是這則傳聞，不是 Anthropic 的指控。至今沒有第三方查證支持傳聞的內容。本文把它記錄下來，是因為它與報告在同一週流傳，容易被讀成報告的後續，而目前沒有任何已知的關聯把兩者連起來。
+
+本文不轉述傳聞中的個人姓名。在一則被當事公司指為虛構、並已報案的說法裡，把特定個人與遭到拘留連在一起，對讀者判斷這件事沒有幫助。
+
+### 台灣這邊的反應
+
+台灣媒體在 9 月 10 到 11 日大量報導這份報告，焦點集中在電子戰軟體把模擬場景改成台灣 12 個目標那一段。長老教會領導層被建檔與輿情簡報把台灣媒體列為監控類目這兩段，報導的篇幅明顯少很多。
+
+截至本節查核時間，沒有查到台灣基督長老教會總會針對此事的公開回應，也沒有查到政府機關針對報告中台灣相關段落提出正式說明。
+
 ## 這份報告的限制
 
 - 報告由 Anthropic 自行發布，案例的歸因與信心等級皆由其判定。部分案例在文中明寫低信心或中等信心，引用時應一併載明
@@ -567,5 +614,11 @@ ShinyHunters（`GTG-50014`，第 12 到 14 頁）的規模具體說明了這件�
 - [技術分析報告：網路政變](../../reports/interseclab-network-coup/index.md)
 
 [^report]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日。[PDF 全文](https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a597377d3b5/Anthropic-Detecting-and-countering-091026.pdf){target="_blank"}，另有一份[指標清單](https://www-cdn.anthropic.com/b5af8acd5ee681422114af7c7b6b02c1ecd074ca/20260910_Anthropic_AI_Misuse_Report_IOCs.csv){target="_blank"}。
+
+[^cisa]: [China-Based Artificial Intelligence Companies Conducting Industrial-Scale Distillation Campaigns Against U.S. AI Companies](https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-251a){target="_blank"} - CISA、NSA 與 FBI 聯合資安公告 `AA26-251A`，2026 年 9 月 8 日。
+
+[^ltn]: [偷用美 AI 致解放軍資料被看光！傳月之暗面創辦人及 15 主管全被抓了](https://ec.ltn.com.tw/article/breakingnews/5571609){target="_blank"} - 自由財經，2026 年 9 月 12 日。標題的「傳」字與內文的「網路瘋傳」是該報導對消息性質的標示。
+
+[^moonshot]: [月之暗面：關於創始人及員工被傳播的信息純屬虛構 係惡意造謠已報案](https://news.mydrivers.com/1/1150/1150650.htm){target="_blank"} - 快科技，2026 年 9 月 12 日。
 
 [^press]: [Anthropic details distillation campaigns from Alibaba, Moonshot AI, and DeepSeek](https://techcrunch.com/2026/09/10/anthropic-details-distillation-campaigns-from-alibaba-moonshot-ai-and-deepseek/){target="_blank"} - TechCrunch，2026 年 9 月 10 日。
