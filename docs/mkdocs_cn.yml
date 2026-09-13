@@ -399,10 +399,23 @@ plugins:
         'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
   # 社群分享卡，說明見 mkdocs.yml 的同一段
   - social:
+      # 產卡片吃掉大半的建置時間，而 PR 上的網址合約檢查只看網址與錨點，卡片對它
+      # 沒有影響。url-contract.yml 帶 SOCIAL_CARDS=false 把這一段關掉，順便避開
+      # social 外掛偶發的 PIL 字型錯誤（en 那份時不時吐 unknown file format，重跑
+      # 就過）。那種偶發紅燈會讓人學會無視檢查，比慢兩分鐘糟得多。
+      #
+      # 預設 true，build_docs.yml 與本機建置不受影響，發布的產物照樣有卡片。
+      enabled: !ENV [SOCIAL_CARDS, true]
       cards_layout: anoni
       cards_layout_options:
         font_family: Noto Sans SC
   - privacy:
+      # 理由同上面的 social。這個外掛要跟十幾個外部主機要檔案，任何一個掛掉就是
+      # FileNotFoundError 讓整個建置失敗（2026-07 踩過兩次）。它只改外部資產的
+      # 引用位址，頁面網址與 heading 錨點都不經過它，PR 上關掉不影響合約。
+      #
+      # 關掉也讓 PR 不再每次都去敲那十幾個主機一輪。
+      enabled: !ENV [PRIVACY_ASSETS, true]
       assets_exclude:
         - aa.anoni.net/*
         - static.cloudflareinsights.com/*
