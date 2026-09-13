@@ -1092,3 +1092,17 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 /* --neutral-muted #546e7a 在 slate 底只有 2.93，深色另給一階亮的灰藍（6.12 過 AA） */
 [data-md-color-scheme="slate"] .role-tags__label,
 [data-md-color-scheme="slate"] .role-tags__note { color: #90a4ae; }
+
+/* 章節標題的報告頁碼移到標籤列，虛線外框與實心角色標籤區隔開 */
+.role-tags__page {
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.02rem 0.45rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  border: 1px dashed var(--neutral-border);
+  color: var(--neutral-muted);
+  font-variant-numeric: tabular-nums;
+}
+[data-md-color-scheme="slate"] .role-tags__page { border-color: rgba(144,164,174,.45); color: #90a4ae; }

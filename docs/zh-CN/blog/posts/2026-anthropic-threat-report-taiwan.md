@@ -60,9 +60,9 @@ Anthropic 于 2026 年 9 月 10 日发布《Detecting and countering misuse of A
 | `GTG-17002` | 119 到 122 | 电子战与防空压制的目标排序软件，模拟场景被改成台湾的 12 个目标 |
 | 非法蒸馏章节 | 143 到 154 | 七家中国实验室，含月之暗面（Moonshot）转送 Kimi 用户请求至 Claude |
 
-## 监控章节的三项趋势（第 81 到 82 页）
+## 监控章节的三项趋势
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--all">所有人</span><span class="role-tags__note">这一节是后面四个中国案例的共同背景，先读它再看个案比较容易定位。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 81 到 82 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--all">所有人</span><span class="role-tags__note">这一节是后面四个中国案例的共同背景，先读它再看个案比较容易定位。</span></p>
 
 监控章节涵盖 2026 年 1 月至 7 月，行动者包含国家关联组织、国家关联承包商与商业间谍软件厂商，来源地为中国、伊朗与西非，规模从单一个人到整支团队都有。Anthropic 的使用政策禁止以 Claude 进行未经同意的监控与画像，也禁止用于侵害公民自由与人权。章节导言先列出三项趋势，读后面的个案时可以拿它当坐标。
 
@@ -82,9 +82,9 @@ Anthropic 于 2026 年 9 月 10 日发布《Detecting and countering misuse of A
 
     报告第 3 页写明收录的是筛选过的显著案例，不是滥用的日常样态。监控章节里与中国有关的四件，各自是一名分析人员、一名研究生、一个市级机关与一个宗教事务单位做的事，操作者数量是个位数到十位数。可见范围也只到 Claude 这一侧，行动者换一套工具或换一家 AI 服务，报告就看不到了。这四个案例能证明的是这类作业存在而且成本很低。目前没有证据显示某个特定组织已经被系统性建档，读后面的细节时，把注意力放在收集方法与触发条件上比较实际。
 
-## 台湾基督长老教会被编进一份宗教事务情报作业（第 89 到 92 页）
+## 台湾基督长老教会被编进一份宗教事务情报作业
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--faith">教会与宗教团体</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">台湾在这一节占五条工作线之一。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 89 到 92 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--faith">教会与宗教团体</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">台湾在这一节占五条工作线之一。</span></p>
 
 Anthropic 封禁了一组账号，研判与一个位于中国境内、立场与官方一致的情报作业有关。行动者以 Claude 取代一个编制内的分析团队，产出中文档案，对象为亚洲各地的宗教领袖与华人离散社群人物。目标分布对应中国宗教事务与统战体系的优先顺序，也就是党国体制中负责管理宗教事务、并对被视为威胁宗教统一的群体进行拉拢或施压的机构。用户活动显示行动者位于中国境内，其中一名用户自述为中国国家机关的信息安全人员。
 
@@ -142,9 +142,9 @@ Anthropic 在第 92 与 93 页列出这个作业的识别特征，可视为往�
 
     报告写的目标是资深宗教领袖与涉入公开活动的人物，场地勘查也只做到公开聚会场所的平面图与动线。公开露面的程度本身就是风险因子，接受媒体采访、担任发言人、参与公开集会的人，比完全不对外发言的人更容易被纳入这条工作线。评估风险时可以先看自己在公开场合的曝光量，再决定要不要调整。
 
-## 舆情简报把台湾政治人物与媒体列成监控类目（第 98 到 101 页）
+## 舆情简报把台湾政治人物与媒体列成监控类目
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">受访内容与公开发言怎么被处理成官方简报，写在这一节。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 98 到 101 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">受访内容与公开发言怎么被处理成官方简报，写在这一节。</span></p>
 
 `GTG-14022` 是一条把 Claude 当成自动化舆情与情报分析系统的流程。行动者指示 Claude 产出供官员阅读的内部文件「舆情简报」，将异见人士、运动者、少数民族与华人离散社群、外国媒体编写为政治稳定的威胁。提示词要求 Claude 扮演「服务中华人民共和国政府的资深应急舆情分析师」。
 
@@ -182,9 +182,9 @@ Claude 产出的文件会依政治敏感度为内容评分，并依特定的用�
 
 从事倡议与公共沟通的人可从这一段推回自身处境。文章与受访内容一旦进入这条流程，会被标上政治敏感度分数、替换用语，最后进到呈给官员的简报。
 
-## 针对叙利亚维吾尔人的监控与招募（第 86 到 89 页）
+## 针对叙利亚维吾尔人的监控与招募
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">与流亡社群有协作的人尤其相关。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 86 到 89 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">与流亡社群有协作的人尤其相关。</span></p>
 
 `GTG-14010` 的行动者以 Claude 追踪、画像并招募叙利亚境内的维吾尔人与维吾尔武装编组。武装目标为近期加入新成立叙利亚军队的维吾尔裔人员，中国政府将该类编组列为恐怖组织。行动者以 Claude 接触研判可接近这些编组的人员，并尝试以金钱换取对方回报单位动态。
 
@@ -211,9 +211,9 @@ Claude 产出的文件会依政治敏感度为内容评分，并依特定的用�
 
 报告的判断是，Claude 让行动者不再需要具备母语能力与专业人力。一名不懂阿拉伯语的操作者因此得以维持一整套可信的隐蔽接触行动，建立监控个人的结构化数据库，对特定个人进行地理定位，并架起支撑数据收集所需的商业与影响力基础设施。
 
-## 维稳监控与跨国镇压（第 93 到 97 页）
+## 维稳监控与跨国镇压
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">办公开活动的人请特别看场地情报那一段。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 93 到 97 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">办公开活动的人请特别看场地情报那一段。</span></p>
 
 `GTG-14021` 是一批被封禁的账号集群，用于三项作业。与中国市级公安及国安机关有关的行动者以 Claude 支持「维稳」监控与跨国镇压，前者是党国体制用来指称压制动乱与异见的词。其中一例的行动者产出了一份 AI 使用的内部手册，内含要 Claude 扮演服务中国国家安全体系情报分析师的提示语。
 
@@ -242,9 +242,9 @@ Claude 产出的文件会依政治敏感度为内容评分，并依特定的用�
 
 Anthropic 同时在追查这批行动者更大的活动范围，包含在其中两个案例观察到的同一个商业 VPN 出口节点。
 
-## 电子战软件的模拟场景被改成台湾的十二个目标（第 119 到 122 页）
+## 电子战软件的模拟场景被改成台湾的十二个目标
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">主题是军事设施与模拟软件，只关心个人与组织安全的话可以跳过。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 119 到 122 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">主题是军事设施与模拟软件，只关心个人与组织安全的话可以跳过。</span></p>
 
 ??? tip "这一节谈国防模拟，与前面几节是不同范畴"
 
@@ -268,9 +268,9 @@ Anthropic 研判行动者为中国境内的国防与军工研究人员。账号�
 
 章节导言第 111 页另外提到一件与个案无关的事。Anthropic 的 Frontier Red Team 配合这份报告开发了新的评测，衡量模型在战术情报目标定位（例如从零碎信息推出人在哪里）与常规武器开发（例如设计无人机攻击移动目标）这两类任务上的能力，评测结果显示模型在模拟的情报与武器开发任务上持续进步。
 
-## 非法蒸馏章节（第 143 到 154 页）
+## 非法蒸馏章节
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--all">所有使用 AI 工具的人</span><span class="role-tag role-tag--dev">开发者</span><span class="role-tags__note">这一节与前面的监控案例可以分开读。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 143 到 154 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--all">所有使用 AI 工具的人</span><span class="role-tag role-tag--dev">开发者</span><span class="role-tags__note">这一节与前面的监控案例可以分开读。</span></p>
 
 这一章是报告最后一部分，也是与一般 AI 用户最直接相关的一章。第 147 页写明，后面点名的每一家实验室都是 Anthropic 以高信心研判归因的结果，读下面各节时这个前提要一路带着。Anthropic 表示自 2026 年 2 月首次揭露以来，另外检测并中止了七家中国实验室对 Claude 发动的蒸馏行动，全部针对公开提供的模型，尚未观察到针对 Mythos 5 或 Mythos Preview 的尝试，后两者并未对一般大众开放。
 
@@ -429,9 +429,9 @@ webhook fires but nothing lands in the channel.
 
 本站的[用 AI 工作时怎么避免数据外泄](../../tools/ai-privacy.md)已说明中国境内 AI 服务的法规框架，实名、输入输出留存与内建审核都属法定义务。这一章补上的是条款无法揭露的另一层：服务背后实际由谁处理，用户无从得知，已同意的条款也涵盖不到那一层。
 
-## 网络行动章节里与开发者直接相关的段落（第 12 到 30 页）
+## 网络行动章节里与开发者直接相关的段落
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--dev">开发者</span><span class="role-tags__note">手上管着 API 密钥的人尤其相关。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 12 到 30 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--dev">开发者</span><span class="role-tags__note">手上管着 API 密钥的人尤其相关。</span></p>
 
 蒸馏那一章处理用户的数据怎么被带走。网络行动章节处理另一件事，AI 的访问凭证本身已经成为犯罪经济里的商品。这一段对每天在用 API 密钥的人比较切身，所以另外整理出来。
 
@@ -467,9 +467,9 @@ ShinyHunters（`GTG-50014`，第 12 到 14 页）的规模具体说明了这件�
 
 第 30 页收尾的建议值得直接引在这里。AI 的密钥与 session token 是攻击目标，客户围绕 AI 建起来的集成，例如沙盒、代理与代理商，都是攻击面的一部分。组织应该用对待正式环境凭证的态度对待 AI 密钥与代理集成，因为攻击者就是用同样的态度在对待它们。AI 访问只应透过授权渠道购买。一个要求把流量与凭证经由不明中介转送的折扣，会替用户数据与系统带来极大的风险。
 
-## 影响力行动与商业监控里与倡议工作者相关的段落（第 41 到 85 页）
+## 影响力行动与商业监控里与倡议工作者相关的段落
 
-<p class="role-tags"><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">手法与从事倡议、国际连结工作的人处境重叠。</span></p>
+<p class="role-tags"><span class="role-tags__page">报告第 41 到 85 页</span><span class="role-tags__label">适合读者</span><span class="role-tag role-tag--civic">公民团体与倡议工作者</span><span class="role-tag role-tag--press">记者与研究者</span><span class="role-tags__note">手法与从事倡议、国际连结工作的人处境重叠。</span></p>
 
 影响力行动章节收录九个案例，来源涵盖俄罗斯、伊朗、土耳其、波斯湾、南亚、非洲与欧洲，目标横跨六大洲。行动者包含政府、国家关联的宣传机构与国家媒体、把影响力卖给付费客户的私人公司、境内政治操作者，以及一个流亡的反对运动。这些案例没有一件以台湾为目标，收进来的理由是手法与从事倡议、国际连结工作的人处境重叠。
 
