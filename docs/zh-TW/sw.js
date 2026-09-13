@@ -67,6 +67,20 @@ const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
 // 十一 MB 變成十八 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
 const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 
+// 讀者在管理頁按過「全部存到裝置」的語系。
+//
+// 按下那顆的意思是「這個語言的內容我全部都要」，可是按完之後程式裡只剩「LIBRARY
+// 裡有哪幾頁」這個結果，意圖沒有留下任何痕跡。站上之後多出來的文章從來沒被存過，
+// 所以不在 LIBRARY 裡，而「更新已存的內容」的對象就是 LIBRARY，新文章於是永遠
+// 不會被更新帶下來。這筆旗標讓更新把索引裡新增的頁面一起補上。
+//
+// 跟其他設定一樣放進 SETTINGS，而不是 localStorage：clearAllOffline 會把這個 cache
+// 一起刪掉，讀者按過「清除所有離線內容」之後意圖跟著歸零。放 localStorage 的話清除
+// 按鈕碰不到它，讀者清乾淨的下一步就是按更新，結果整站連同敏感場景頁又被抓回來。
+//
+// 逐語系一筆。「全部存到裝置」本來就一次只處理讀者當下所在的那個語系。
+const SAVE_ALL_URL = "/__anoni-settings/save-all/";
+
 // 這個 SW 發出去的每一個請求都要繞過瀏覽器自己的 HTTP 快取。
 //
 // 沒帶 cache 選項的 fetch 會先問裝置上的 HTTP 快取，命中就直接回，網路那條根本
@@ -757,6 +771,22 @@ async function setPrecacheImages(enabled) {
   precachedPrefixes.clear();
 }
 
+// 這個語系的讀者按過「全部存到裝置」沒有，見 SAVE_ALL_URL。
+async function saveAllEnabled(prefix) {
+  const cache = await caches.open(SETTINGS);
+  const hit = await cache.match(SAVE_ALL_URL + (prefix || "root"));
+  // 沒按過就是關著。跟 precacheImages 同一個方向，預設不替讀者多下載東西。
+  if (!hit) return false;
+  return (await hit.text()) === "on";
+}
+
+async function setSaveAll(prefix, enabled) {
+  const cache = await caches.open(SETTINGS);
+  const url = SAVE_ALL_URL + (prefix || "root");
+  if (enabled) await cache.put(url, new Response("on"));
+  else await cache.delete(url);
+}
+
 // 訊息裡帶的頁面網址落在哪個語系。
 //
 // 管理頁送過來的路徑取自 offline-index.json，那份索引的網址相對於各語系自己的建置
@@ -925,7 +955,8 @@ async function clearAllOffline() {
     await caches.delete(key);
   }
   precachedPrefixes.clear();
-  // 設定那個 cache 也在剛才刪掉的名單裡，這一行把它連同記憶體裡的值一起重建。
+  // 設定那個 cache 也在剛才刪掉的名單裡，這兩行把它連同記憶體裡的值一起重建。
+  // 三個語系的 save-all 旗標刻意不重建，讀者清掉的東西不該被下一次更新抓回來。
   await setAutoPrecache(false);
   await setPrecacheImages(false);
 }
@@ -943,6 +974,9 @@ async function handleLibraryMessage(data, port) {
       precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
       precacheImages: await precacheImagesEnabled(),
+      // 這個語系按過「全部存到裝置」沒有。管理頁用它決定更新要不要把索引裡新增
+      // 的頁面一起補下來，見 SAVE_ALL_URL。
+      saveAll: await saveAllEnabled(prefix),
       // 這台裝置上跑的是哪一版。讀者回報「離線打不開」時，第一個要分辨的就是他的
       // service worker 換到新版了沒，而那件事在裝置上原本沒有任何地方看得出來。
       version: VERSION,
@@ -957,15 +991,23 @@ async function handleLibraryMessage(data, port) {
   }
 
   if (data.type === "OFFLINE_ADD" && Array.isArray(data.paths)) {
+    const prefix = messagePrefix(data);
     const result = await addToLibrary(
-      messagePrefix(data), data.paths, data.assets, data.refresh === true, reply
+      prefix, data.paths, data.assets, data.refresh === true, reply
     );
+    // 「全部存到裝置」與帶著同一個意圖的更新會帶 intent，逐頁勾選與起步路徑那幾顆
+    // 不帶。部分失敗照樣記下來，讀者要的東西沒有變，沒抓到的那幾頁下次更新再試。
+    if (data.intent === "all") await setSaveAll(prefix, true);
     reply({ type: "done", ok: result.ok, failed: result.failed });
     return;
   }
 
   if (data.type === "OFFLINE_REMOVE" && Array.isArray(data.paths)) {
-    const result = await removeFromLibrary(messagePrefix(data), data.paths, data.assets);
+    const prefix = messagePrefix(data);
+    const result = await removeFromLibrary(prefix, data.paths, data.assets);
+    // 讀者把某一頁勾掉，「我全部都要」就不再成立。旗標留著的話下一次更新會把他
+    // 剛拿掉的頁面補回來，而拿掉的理由可能正是不想讓那一頁留在這台裝置上。
+    if (data.paths.length) await setSaveAll(prefix, false);
     reply({ type: "done", removed: result.removed });
     return;
   }

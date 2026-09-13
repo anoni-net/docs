@@ -54,6 +54,8 @@ Tor Browser and the onion and IPFS builds do not offer offline reading, for priv
 
     "Save everything" only covers the language you are currently in. To carry all three languages, open the offline reading page in each language and press it once there.
 
+    Once you have used "Save everything", articles published later are stored along with everything else when you press "Update what is stored", and the button says how many pages that is. If you pick pages yourself instead, updating covers only the pages you picked, and new articles have to be ticked again.
+
     Scenario pages for journalists, activists, LGBTQ+ readers and survivors of domestic abuse are **excluded from that background download**. They are only stored if you open them yourself, because the presence of those pages on a device can itself be a sensitive signal, and that choice should be yours. If you want them available offline, tick them in the list above and they will be stored. The "Save everything" button includes them, and says so next to the button. If your situation calls for picking, use the list instead.
 
     The chapters the site stores automatically are text only, so they lose their images offline. There is an option above, "Also store the images in the core chapters", that downloads those images too, about 7 MB more, starting the next time you are online. It is off by default because most people are on mobile data, and the text alone still carries most of what a page says.
