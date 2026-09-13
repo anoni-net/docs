@@ -64,7 +64,7 @@ const SETTINGS = "anoni-docs-settings";
 const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
 
 // 核心章節的內文圖要不要一起存。預設不存：那批圖有七 MB，會讓自動下載的量從
-// 十一 MB 變成十八 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
+// 十六 MB 變成二十三 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
 const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
 
 // 這個 SW 發出去的每一個請求都要繞過瀏覽器自己的 HTTP 快取。
@@ -187,7 +187,11 @@ const CORE_PAGES_ZH = [
   "basics/threat-model/",
   "basics/metadata/",
   "basics/payments-anonymity/",
-  // tools(工具，全部)
+  "basics/platform-tracking/",
+  "basics/surveillance-capability/",
+  "basics/multiple-identities/",
+  "basics/browser-fingerprinting/",
+  // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
   "tools/what-is-tor/",
@@ -203,6 +207,15 @@ const CORE_PAGES_ZH = [
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
   "tools/encrypted-dns/",
+  "tools/grapheneos/",
+  "tools/asian-diceware/",
+  "tools/vpn-guide/",
+  "tools/ai-privacy/",
+  "tools/email-alias/",
+  "tools/signal-proxy/",
+  "tools/tor-browser-mobile/",
+  "tools/what-is-age/",
+  "tools/what-is-passkey/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
@@ -246,6 +259,7 @@ const CORE_PAGES_ZH = [
   "taiwan/vasp-2026/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  "taiwan/digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引）
   //
   // 這一區其他工具留給執行期快取，落差不大：它們是「手上有個東西想查一下」的工具，
@@ -297,6 +311,7 @@ const CORE_PAGES_EN = [
   "basics/platform-tracking/",
   "basics/surveillance-capability/",
   "basics/multiple-identities/",
+  "basics/browser-fingerprinting/",
   // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
@@ -317,6 +332,11 @@ const CORE_PAGES_EN = [
   "tools/encrypted-dns/",
   "tools/vpn-guide/",
   "tools/ai-privacy/",
+  "tools/email-alias/",
+  "tools/signal-proxy/",
+  "tools/tor-browser-mobile/",
+  "tools/what-is-age/",
+  "tools/what-is-passkey/",
   // scenarios（場景，只留不指向特定受威脅身分的）
   "scenarios/",
   "scenarios/asia-travel/",
@@ -340,6 +360,7 @@ const CORE_PAGES_EN = [
   "regional/taiwan-vasp-2026/",
   "regional/ooni-asn-coverage/",
   "regional/tor-relay-watcher/",
+  "regional/taiwan-digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引，理由見 CORE_PAGES_ZH 的同一段註解）
   "utils/",
   "utils/qrcode/",

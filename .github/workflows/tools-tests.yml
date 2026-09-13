@@ -85,6 +85,12 @@ jobs:
       - name: sw.js 離線路徑
         run: node tools/test_sw_offline.mjs
 
+      # sw.js 的 CORE_PAGES 改了也要對一次。docs-style-lint.yml 涵蓋的是「新增文章、
+      # 沒碰 sw.js」，這裡涵蓋反過來的「改了清單、沒碰文章」，例如把一頁拿掉之後
+      # 檔案還在。
+      - name: 自動存清單沒有漂移
+        run: python3 tools/check_core_pages.py
+
       # 語言偏好只在預設語系的首頁套用，其餘一律不動
       - name: 語言偏好導向規則
         run: node tools/test_lang_preference.mjs
