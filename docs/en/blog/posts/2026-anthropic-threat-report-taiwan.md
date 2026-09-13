@@ -62,7 +62,7 @@ Each section below carries a line naming the readers it is written for, across f
 
 ## Three trends in the surveillance chapter (pp. 81–82)
 
-**Who this is for**: everyone. It sets the shared background for the four China cases that follow, and reading it first makes them easier to place.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--all">Everyone</span><span class="role-tags__note">It sets the shared background for the four China cases that follow, and reading it first makes them easier to place.</span></p>
 
 The surveillance chapter covers January to July 2026. The actors include state-aligned organisations, state-linked contractors and commercial spyware vendors, based in China, Iran and West Africa, ranging from lone individuals to whole teams. Anthropic's Usage Policy prohibits using Claude for non-consensual surveillance and profiling, and for violating civil liberties and human rights. The chapter opens with three trends that serve as coordinates for the individual cases.
 
@@ -84,7 +84,7 @@ The introduction closes by noting that in nearly every case in the chapter, the 
 
 ## The Presbyterian Church in Taiwan ran as a workstream in a religious-affairs intelligence desk (pp. 89–92)
 
-**Who this is for**: churches and religious groups, civil society and advocacy workers, journalists and researchers. Taiwan is one of five workstreams here.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--faith">Churches and religious groups</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">Taiwan is one of five workstreams here.</span></p>
 
 Anthropic banned a cluster of accounts it believes is linked to a China-based, PRC government-aligned intelligence operation. The actor used Claude in place of a staffed analyst team, producing Chinese-language dossiers on religious leaders and Chinese diaspora figures across Asia. The targeting maps precisely onto the priorities of China's religious affairs and united front apparatus, the party-state bodies that manage religious affairs and coopt or pressure groups perceived as a threat to religious unity. User activity indicated the actors were based in China; in one case a user disclosed that they were an information security officer for the Chinese state.
 
@@ -144,7 +144,7 @@ The venue reconnaissance is the item most directly relevant to churches and civi
 
 ## Taiwanese political figures and media listed as monitoring categories (pp. 98–101)
 
-**Who this is for**: civil society and advocacy workers, journalists and researchers. This is where interviews and public statements get processed into official briefings.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">This is where interviews and public statements get processed into official briefings.</span></p>
 
 `GTG-14022` used Claude as an automated "public opinion monitoring" (舆情) and intelligence analysis system. The actor directed Claude to produce restricted government briefings (舆情简报) cataloguing dissidents, activists, ethnic minority and Chinese diaspora communities, and foreign media as threats to political stability. Claude was instructed to role-play as a "senior emergency public opinion analyst serving the government of the People's Republic of China".
 
@@ -184,7 +184,7 @@ Anyone doing advocacy or public communications can reason back from this section
 
 ## Surveillance and recruitment targeting Uyghurs in Syria (pp. 86–89)
 
-**Who this is for**: civil society and advocacy workers, journalists and researchers, and anyone collaborating with exile communities in particular.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">Especially relevant if you collaborate with exile communities.</span></p>
 
 The `GTG-14010` actor used Claude to track, profile and recruit Uyghurs and Uyghur armed formations in Syria. The armed targets were ethnic Uyghurs who had recently joined the newly formed Syrian Army, formations the PRC government designates as terrorists. The actor used Claude to target and communicate with individuals assessed to have potential access to those formations, then attempted to recruit them, including by offering payment in exchange for reporting on the units.
 
@@ -213,7 +213,7 @@ Anthropic's assessment is that Claude removed the need for native language skill
 
 ## Stability-maintenance surveillance and transnational repression (pp. 93–97)
 
-**Who this is for**: civil society and advocacy workers, journalists and researchers. If you organise public events, the venue intelligence passage is the one to read.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">If you organise public events, the venue intelligence passage is the one to read.</span></p>
 
 `GTG-14021` is a banned cluster of accounts used across three operations. China-based actors linked to municipal public and state security organs used Claude to support "stability maintenance" (维稳, the party-state's term for suppressing unrest and dissent) surveillance and transnational repression. In one case the actor generated an internal manual on AI use, including language to prompt Claude to play the role of an intelligence analyst serving China's national security apparatus.
 
@@ -244,7 +244,7 @@ Anthropic is also mapping the actors' wider footprints, including a shared comme
 
 ## An electronic-warfare simulation switched to twelve targets in Taiwan (pp. 119–122)
 
-**Who this is for**: journalists and researchers. The subject is military installations and simulation software, so skip ahead if your concern is personal and organisational safety.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">The subject is military installations and simulation software, so skip ahead if your concern is personal and organisational safety.</span></p>
 
 ??? tip "This section covers military simulation, a different category from the sections above"
 
@@ -270,7 +270,7 @@ The chapter introduction on page 111 adds something separate from the individual
 
 ## The illicit distillation chapter (pp. 143–154)
 
-**Who this is for**: anyone who uses AI tools, and developers in particular. It can be read independently of the surveillance cases above.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--all">Anyone who uses AI tools</span><span class="role-tag role-tag--dev">Developers</span><span class="role-tags__note">It can be read independently of the surveillance cases above.</span></p>
 
 This closing chapter is the one most directly relevant to ordinary AI users. Page 147 states that every lab named below was attributed with high confidence, and that framing should travel through the sections that follow. Anthropic states that since its first disclosure in February 2026 it has identified and disrupted distillation attacks against Claude from seven China-based labs. All targeted generally available models; no attempts were observed against Mythos 5 or Mythos Preview, which are not accessible to the general public.
 
@@ -431,7 +431,7 @@ Our page on [using AI at work without leaking data](../../tools/ai-privacy.md) a
 
 ## The cyber operations chapter, for developers (pp. 12–30)
 
-**Who this is for**: developers, and anyone responsible for API keys.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--dev">Developers</span><span class="role-tags__note">Especially relevant if you are responsible for API keys.</span></p>
 
 The distillation chapter deals with how user data gets carried off. The cyber operations chapter deals with something else: AI access credentials have themselves become a commodity in the criminal economy. That part is close to home for anyone who handles API keys daily, so it gets its own section here.
 
@@ -469,7 +469,7 @@ The closing advice on page 30 is worth quoting directly. AI API keys and session
 
 ## Influence operations and commercial surveillance, for advocacy workers (pp. 41–85)
 
-**Who this is for**: civil society and advocacy workers, journalists and researchers.
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">The techniques overlap with the working conditions of advocacy and international liaison work.</span></p>
 
 The influence operations chapter covers nine cases originating in Russia, Iran, Turkey, the Gulf, South Asia, Africa and Europe, targeting audiences on six continents. The actors include governments, state-aligned propaganda institutions and state media, private firms selling influence to paying clients, domestic political operators, and an opposition movement in exile. None of these cases targets Taiwan; they are included here because the techniques overlap with the working conditions of people doing advocacy and international liaison.
 
