@@ -48,6 +48,13 @@ breaking，這支只擋 breaking。
 需要三個語系都建置過（`sh run.sh`、`sh run_zh-cn.sh`、`sh run_en.sh`），產物在
 `docs/output`。找不到產物時直接跳過，沒建置過不該擋人。
 
+CI 上由 `.github/workflows/url-contract.yml` 在 PR 階段建站執行，`build_docs.yml`
+在上傳之前再驗一次，涵蓋沒走 PR 的推送。本機要驗的話，關掉 social 與 privacy 兩個
+外掛建得比較快，實測產出的合約與開著時逐位元組相同：
+
+    cd docs && SOCIAL_CARDS=false PRIVACY_ASSETS=false \
+      sh run.sh && sh run_zh-cn.sh && sh run_en.sh
+
     python3 tools/check_url_contract.py            # 比對
     python3 tools/check_url_contract.py --update   # 認可目前的產物，寫回合約
 """
