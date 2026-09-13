@@ -23,6 +23,7 @@
 - [ ] 圖片放在 `assets/images/`，有 alt 文字與授權標示。 / Images in assets/images, with alt text and license.
 - [ ] 文末有「相關閱讀」之類的橫向連結（2 到 4 篇）。 / 2–4 related-reading links at the end.
 - [ ] 新增概念、工具、進階、在地的文章時，已決定要不要收進自動存的清單（`docs/zh-TW/sw.js` 的 `CORE_PAGES_*`），判準見該清單上方的註解。 / New basics/tools/advanced/regional page: decided whether it belongs in `CORE_PAGES_*`.
+- [ ] 改過既有文章的檔名、路徑或小標題文字時，已確認舊網址與舊錨點還到得了（改名的話在 `mkdocs.yml` 的 `redirect_maps` 補一條）。 / Renamed a file, path, or heading: old URLs and anchors still resolve.
 
 ## 翻譯（如適用）/ Translation (if applicable)
 

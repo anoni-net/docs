@@ -248,6 +248,12 @@ jobs:
       - name: 量測腳本不外洩搜尋詞
         run: node tools/test_analytics.mjs
 
+      # 網址合約：這裡跑得到的是「合約檔案本身沒有被手改壞」與「增減分得開」那幾層。
+      # 拿產物去對的那一層要三個語系建置過，由 build_docs.yml 在上傳前跑，沒有產物時
+      # 這一支會自己跳過那一項。
+      - name: 網址合約
+        run: python3 tools/test_check_url_contract.py
+
       # onion 位址換掉而漏改其中一處，症狀是建置成功、CI 全綠、產物看起來正常，
       # 壞掉的只有讀者點下去那一刻，而 onion 讀者多半沒有第二條路可走。
       - name: onion 位址只有一個來源
