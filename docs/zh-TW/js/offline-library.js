@@ -212,11 +212,13 @@
       imagesLabel: "連同核心章節的內文圖一起存",
       imagesHint: "網站自動存的那批章節預設只存文字，離線打開會缺圖。打開這個選項會連內文圖一起下載，大約多 7 MB，下次連上網時開始補。你自己勾的頁面本來就會連圖一起存。",
       refresh: "更新已存的內容",
+      refreshWithNew: "更新已存的內容，含站上新增的 {n} 頁（{size}）",
       refreshing: "更新中",
       clear: "清除所有離線內容",
       clearConfirm: "確定清除",
       cancel: "取消",
       refreshEmpty: "「更新已存的內容」現在沒有東西可以更新，你還沒有自己選存頁面。網站自動存的那批會在網站有新版本時一起更新。",
+      refreshNewHint: "你按過「全部存到裝置」，所以「更新已存的內容」會把站上後來新增的 {n} 頁一起存下來。只想要新的那幾頁的話，按「全部存到裝置」快得多，更新會連你已經存著的頁面一起重抓一遍。",
       failed: "沒有完成。可能是連線中斷，稍後再試一次。",
       clearing: "清除中",
       cleared: "已清除，自動存下內容也一併關掉了，接下來你讀過的頁面不會留在裝置上。下次連上網時會補回這一頁本身與它需要的樣式（約 1 MB），讓你在沒有網路時仍有地方落腳。瀏覽記錄、DNS 快取與你下載過的檔案不在清除範圍內，那些要在瀏覽器或系統裡處理。",
@@ -271,11 +273,13 @@
       imagesLabel: "连同核心章节的内文图一起存",
       imagesHint: "网站自动存的那批章节预设只存文字，离线打开会缺图。打开这个选项会连内文图一起下载，大约多 7 MB，下次连上网时开始补。你自己勾的页面本来就会连图一起存。",
       refresh: "更新已存的内容",
+      refreshWithNew: "更新已存的内容，含站上新增的 {n} 页（{size}）",
       refreshing: "更新中",
       clear: "清除所有离线内容",
       clearConfirm: "确定清除",
       cancel: "取消",
       refreshEmpty: "「更新已存的内容」现在没有东西可以更新，你还没有自己选存页面。网站自动存的那批会在网站有新版本时一起更新。",
+      refreshNewHint: "你按过「全部存到设备」，所以「更新已存的内容」会把站上后来新增的 {n} 页一起存下来。只想要新的那几页的话，按「全部存到设备」快得多，更新会连你已经存着的页面一起重抓一遍。",
       failed: "没有完成。可能是连接中断，稍后再试一次。",
       clearing: "清除中",
       cleared: "已清除，自动存下内容也一并关掉了，接下来你读过的页面不会留在设备上。下次连上网时会补回这一页本身与它需要的样式（约 1 MB），让你在没有网络时仍有地方落脚。浏览记录、DNS 缓存与你下载过的文件不在清除范围内，那些要在浏览器或系统里处理。",
@@ -330,11 +334,13 @@
       imagesLabel: "Also store the images in the core chapters",
       imagesHint: "The chapters the site stores automatically are text only, so they lose their images offline. Turning this on downloads those images too, about 7 MB more, starting the next time you are online. Pages you tick already come with their images.",
       refresh: "Update what is stored",
+      refreshWithNew: "Update what is stored, plus {n} new pages ({size})",
       refreshing: "Updating",
       clear: "Clear all offline content",
       clearConfirm: "Yes, clear",
       cancel: "Cancel",
       refreshEmpty: "\"Update what is stored\" has nothing to update yet: you have not picked any pages. What the site stores automatically updates when a new version of the site arrives.",
+      refreshNewHint: "You used \"Save everything\", so \"Update what is stored\" also saves the {n} pages published since. If you only want those, \"Save everything\" is much quicker: updating re-downloads every page you already keep.",
       failed: "That did not complete. The connection may have dropped. Try again in a moment.",
       clearing: "Clearing",
       cleared: "Cleared, and automatic storage is off, so the pages you read from now on do not stay on this device. Next time you are online, this page itself and the styles it needs come back (about 1 MB) so you can still reach it without a network. Browsing history, DNS cache and files you downloaded are not covered here. Handle those in your browser or system settings.",
@@ -475,6 +481,10 @@
     precached: new Set(),
     autoPrecache: true,
     precacheImages: false,
+    // 這個語系按過「全部存到裝置」沒有。真的話更新的對象從「已存的那些」擴成
+    // 「已存的加上索引裡新增的」，讀者按過一次之後站上的新文章就跟著更新下來。
+    // 由 service worker 記著，見 sw.js 的 SAVE_ALL_URL。
+    saveAll: false,
     // 本站在裝置上佔用多少 byte，由 SW 量自己的快取算出來
     usage: null,
     // 這台裝置上的 service worker 是哪一版。讀者回報離線出問題時，第一個要分辨的
@@ -565,6 +575,8 @@
       state.precached = new Set(data.precached || []);
       state.autoPrecache = data.autoPrecache !== false;
       state.precacheImages = data.precacheImages === true;
+      // 舊版 service worker 不回這個欄位，收不到就當沒按過，更新照原本的範圍跑
+      state.saveAll = data.saveAll === true;
       state.usage = typeof data.usage === "number" ? data.usage : null;
       state.version = typeof data.version === "string" ? data.version : null;
       state.estimate = data.estimate || null;
@@ -711,6 +723,15 @@
       for (const page of section.pages) out.add(page.url);
     }
     return Array.from(out);
+  }
+
+  // 索引裡有、讀者自己那份沒有的頁面。按過「全部存到裝置」之後站上新發布的文章
+  // 就落在這裡，更新要把它們一起帶下來。
+  //
+  // 判準跟「全部存到裝置」那顆一樣看 state.saved，不看網站自動存的那批。那批跟著
+  // 網站版本走，換版就被清掉，算進來的話讀者的那一份會缺頁。
+  function newPages() {
+    return allPages().filter((url) => !state.saved.has(url));
   }
 
   // 這批頁面需要哪些資產，去重。同一張圖被好幾頁引用時只會出現一次。
@@ -1079,7 +1100,7 @@
     //
     // 2026-08-29 有人上飛機前三個語系各按了一次，飛到一半發現只剩一個語系讀得到。
     // 被跳過的正好是核心章節那四十幾頁，也就是他最想讀的那些。
-    const missing = allPages().filter((url) => !state.saved.has(url));
+    const missing = newPages();
     if (!state.swMissing && missing.length) {
       const missingAssets = Array.from(assetsOf(missing));
       const saveAll = taskButton(
@@ -1095,6 +1116,9 @@
                 url: location.href,
                 paths: missing,
                 assets: missingAssets,
+                // 讓 service worker 記住這個語系按過全部下載，之後站上新增的文章
+                // 才會被下面那顆更新帶下來，見 sw.js 的 SAVE_ALL_URL
+                intent: "all",
               },
               report
             ).then((result) => ({
@@ -1110,23 +1134,42 @@
 
     // 更新的對象是讀者自己勾存的那批。網站自動存的那批跟著網站版本走，讀者
     // 按不出新的內容來，所以沒有自選內容時停用並說明，而不是按了沒有反應。
-    const refresh = taskButton("refresh", t.refresh, null, () => {
-      const paths = Array.from(state.saved);
-      const assets = Array.from(assetsOf(paths));
-      return runTask("refresh", t.refreshing, paths.length + assets.length, (report) =>
-        ask(
-          {
-            type: "OFFLINE_ADD",
-            url: location.href,
-            paths: paths,
-            assets: assets,
-            refresh: true,
-          },
-          report
-        )
-      );
-    });
-    refresh.disabled = state.busy || state.saved.size === 0;
+    //
+    // 按過「全部存到裝置」的人另算，對象擴成「已存的加上索引裡新增的」。
+    //
+    // 原本只送 state.saved，而那是 LIBRARY 裡實際躺著的那些頁面。站上之後發布的
+    // 文章從來沒被存過，所以不在裡面，更新永遠帶不到新文章。按下全部下載的意思
+    // 就是「這個語言的內容我全部都要」，之後多出來的那幾篇也在那個意思裡面。
+    //
+    // 只勾了幾頁的讀者維持原本的範圍。他挑過，沒挑的那些（含敏感場景頁）不該被
+    // 一次更新塞進裝置。
+    const fresh = state.saveAll ? newPages() : [];
+    const refresh = taskButton(
+      "refresh",
+      fresh.length
+        ? fill("refreshWithNew", { n: fresh.length, size: size(weightOf(fresh)) })
+        : t.refresh,
+      null,
+      () => {
+        const paths = Array.from(state.saved).concat(fresh);
+        const assets = Array.from(assetsOf(paths));
+        return runTask("refresh", t.refreshing, paths.length + assets.length, (report) =>
+          ask(
+            {
+              type: "OFFLINE_ADD",
+              url: location.href,
+              paths: paths,
+              assets: assets,
+              refresh: true,
+              // 這裡不送 intent。旗標只由「全部存到裝置」那一顆設起來，更新再送一次
+              // 是沒有作用的重複，而另一個分頁剛把它取消掉時反而會把取消蓋回去。
+            },
+            report
+          )
+        );
+      }
+    );
+    refresh.disabled = state.busy || (state.saved.size === 0 && !fresh.length);
     row.appendChild(refresh);
 
     if (!state.armedClear) {
@@ -1170,6 +1213,13 @@
     // 這一句講的是旁邊的「更新已存的內容」，跟上面兩句的主詞不同。三段的樣式一樣、
     // 縮排也一樣，讀下來像同一串說明，所以句子開頭要先點名是哪一顆按鈕。
     if (state.saved.size === 0) wrap.appendChild(el("p", "ol-hint", t.refreshEmpty));
+    // 站上有新文章時兩顆按鈕都做得到「把新的存下來」，差別在更新會連已存的那幾百
+    // 頁一起重抓。讀者只想要新的那幾篇的話，全部存到裝置那顆便宜得多，這裡講清楚。
+    if (fresh.length) {
+      wrap.appendChild(
+        el("p", "ol-hint", fill("refreshNewHint", { n: fresh.length }))
+      );
+    }
     return wrap;
   }
 

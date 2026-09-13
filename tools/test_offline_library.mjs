@@ -194,6 +194,8 @@ const makeServiceWorker = (opts) => {
     precached: [...(opts.precached || [])],
     autoPrecache: opts.autoPrecache !== false,
     precacheImages: opts.precacheImages === true,
+    // 這個語系按過「全部存到裝置」沒有，見 sw.js 的 SAVE_ALL_URL
+    saveAll: opts.saveAll === true,
   };
   const active = {
     postMessage(message, ports) {
@@ -209,6 +211,8 @@ const makeServiceWorker = (opts) => {
             precached: [...state.precached],
             autoPrecache: state.autoPrecache,
             precacheImages: state.precacheImages,
+            // opts.legacyStatus 模擬還沒換版的 service worker，那一版沒有這個欄位
+            ...(opts.legacyStatus ? {} : { saveAll: state.saveAll }),
             estimate: opts.estimate || null,
             usage: opts.usage,
             version: opts.version,
@@ -222,10 +226,14 @@ const makeServiceWorker = (opts) => {
             if (!state.saved.includes(p)) state.saved.push(p);
             reply({ type: 'progress', done, total: message.paths.length });
           }
+          // 跟真的 service worker 一樣，帶 intent 的才記旗標
+          if (message.intent === 'all') state.saveAll = true;
           reply({ type: 'done', ok: message.paths.length, failed: 0 });
         } else if (message.type === 'OFFLINE_REMOVE') {
           const before = state.saved.length;
           state.saved = state.saved.filter((p) => !message.paths.includes(p));
+          // 勾掉一頁就取消「我全部都要」，同樣跟真的那支對齊
+          if (message.paths.length) state.saveAll = false;
           reply({ type: 'done', removed: before - state.saved.length });
         } else if (message.type === 'OFFLINE_IMAGES') {
           state.precacheImages = message.enabled;
@@ -360,6 +368,8 @@ const tick = (n = 6) =>
  * opts.online     navigator.onLine，預設 true
  * opts.noIndex    讓 offline-index.json 抓不到
  * opts.picker     以 start/index.md 的 #start-offline 為根節點跑，餵 PICKER_INDEX
+ * opts.saveAll    這個語系按過「全部存到裝置」，見 sw.js 的 SAVE_ALL_URL
+ * opts.legacyStatus  狀態回覆不帶 saveAll，模擬還沒換版的 service worker
  */
 const load = async (opts = {}) => {
   const root = new FakeElement('div');
@@ -513,6 +523,80 @@ test('沒有自選頁面時「更新已存的內容」停用並說明原因', as
 test('有自選頁面時「更新已存的內容」可以按', async () => {
   const { root } = await load({ saved: ['scenarios/journalist/'] });
   assert.equal(findButton(root, '更新已存的內容').disabled, false);
+});
+
+test('一鍵存全部帶著 intent，讓 service worker 記住這個意圖', async () => {
+  // 不帶的話按完就只剩「LIBRARY 裡有哪幾頁」，讀者要的是全部這件事沒有留下痕跡，
+  // 站上之後發布的文章於是永遠不在更新的範圍裡
+  const { root, sw } = await load();
+  clickButton(root, '全部存到裝置');
+  await tick(30);
+  assert.equal(sw.sent.find((m) => m.type === 'OFFLINE_ADD').intent, 'all');
+});
+
+test('按過全部存到裝置的人，更新把站上新增的頁面一起送', async () => {
+  // 這是整個修正的重點。新文章從來沒被存過，所以不在 state.saved 裡，而更新原本
+  // 的對象就是 state.saved，讀者按幾次都不會有新文章
+  const { root, sw } = await load({
+    saveAll: true,
+    saved: ['', 'basics/', 'basics/metadata/', 'scenarios/journalist/'],
+  });
+  clickButton(root, '更新已存的內容');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.equal(add.refresh, true);
+  assert.deepEqual(add.paths.sort(), [
+    '',
+    'basics/',
+    'basics/metadata/',
+    'scenarios/activist/',
+    'scenarios/journalist/',
+  ]);
+  // 新那一頁的圖也要跟著，不然讀者離線打開是缺圖的
+  assert.ok(add.assets.includes('img/shared.png'));
+});
+
+test('沒按過全部存到裝置的人，更新只送自己勾的那幾頁', async () => {
+  // 他挑過。沒挑的那些含記者、行動者那幾類場景頁，一次更新塞進裝置等於替他推翻
+  // 那個決定，而那些頁面留在裝置上本身就是指向性證據
+  const { root, sw } = await load({ saved: ['basics/'] });
+  clickButton(root, '更新已存的內容');
+  await tick(30);
+
+  const add = sw.sent.find((m) => m.type === 'OFFLINE_ADD');
+  assert.deepEqual(add.paths, ['basics/']);
+  assert.equal(add.intent, undefined);
+});
+
+test('有新頁時更新按鈕自己寫出幾頁與多少量', async () => {
+  // 按下去要下載多少，按之前就看得到。旁邊那顆一鍵按鈕只抓新的那幾頁，更新會連
+  // 已經存著的一起重抓，兩顆的差別靠按鈕上的字與底下那句說明講清楚
+  const { root } = await load({
+    saveAll: true,
+    saved: ['', 'basics/', 'basics/metadata/', 'scenarios/journalist/'],
+  });
+  const btn = findButton(root, '更新已存的內容');
+  assert.ok(btn.textContent.includes('1 頁'), btn.textContent);
+  assert.ok(root.textContent.includes('全部存到裝置'));
+});
+
+test('站上沒有新頁時，更新按鈕維持原本的字', async () => {
+  const { root } = await load({
+    saveAll: true,
+    saved: ['', 'basics/', 'basics/metadata/', 'scenarios/journalist/', 'scenarios/activist/'],
+  });
+  const btn = findButton(root, '更新已存的內容');
+  assert.equal(btn.textContent, '更新已存的內容');
+});
+
+test('舊版 service worker 不回旗標時，更新照原本的範圍跑', async () => {
+  // 管理頁的 js 走 network-first，可能比 service worker 先換到新版。那時候問不到
+  // 旗標，退回原本的行為即可，多存東西比少存嚴重
+  const { root, sw } = await load({ saved: ['basics/'], legacyStatus: true });
+  clickButton(root, '更新已存的內容');
+  await tick(30);
+  assert.deepEqual(sw.sent.find((m) => m.type === 'OFFLINE_ADD').paths, ['basics/']);
 });
 
 test('一鍵存全部把清單裡缺的都送出，連同資產去重', async () => {

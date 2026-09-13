@@ -59,7 +59,13 @@ class FakeCache {
   async match(request, opts = {}) {
     const want = normalize(urlOf(request), opts.ignoreSearch);
     for (const [key, value] of this.store) {
-      if (normalize(key, opts.ignoreSearch) === want) return value;
+      // 真的 Cache Storage 每次比對都給一份沒讀過的 body，同一筆讀兩次是正常的。
+      // 回同一個物件的話第二次就是 Body has already been read，而那是替身的毛病，
+      // 不是 sw.js 的。設定那幾筆本來就會被讀好幾次（狀態查詢一次，cacheUsage
+      // 算容量時又一次）。測試裡直接塞字串或假物件的不動。
+      if (normalize(key, opts.ignoreSearch) === want) {
+        return value && typeof value.clone === 'function' ? value.clone() : value;
+      }
     }
     return undefined;
   }
@@ -143,6 +149,9 @@ const harness = `
   ${grab(/^const PRECACHE_IMAGES_URL = .*$/m)}
   ${grab(/^async function precacheImagesEnabled\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function setPrecacheImages\(enabled\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const SAVE_ALL_URL = .*$/m)}
+  ${grab(/^async function saveAllEnabled\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function setSaveAll\(prefix, enabled\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function messagePrefix\(data\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function libraryEntries\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precachedEntries\(prefix\) \{[\s\S]*?\n\}/m)}
@@ -193,6 +202,7 @@ const harness = `
     visitedPrefixes, offlineFallback, langCodeOf, fallbackUrls,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
     autoPrecacheEnabled, setAutoPrecache, precacheImagesEnabled, setPrecacheImages,
+    saveAllEnabled, setSaveAll,
     libraryEntries, precachedEntries,
     messagePrefix, addToLibrary, removeFromLibrary, clearAllOffline,
     handleLibraryMessage, networkFirst, staleWhileRevalidate, NAVIGATE_TIMEOUT_MS,
@@ -1046,6 +1056,132 @@ test('狀態查詢依網址挑對語系的預設清單', async (load) => {
   // en 的章節路徑跟 zh 不同（在地脈絡叫 regional/ 不叫 taiwan/）
   assert.ok(replies[0].precached.includes('regional/ooni-checklist/'));
   assert.ok(!replies[0].precached.includes('taiwan/ooni-checklist/'));
+});
+
+test('按過全部存到裝置就記下來，狀態查詢回報得出來', async (load) => {
+  // 沒有這筆旗標，讀者按下全部下載之後程式裡只剩「LIBRARY 裡有哪幾頁」這個結果。
+  // 站上後來發布的文章從來沒被存過，更新於是永遠帶不到新文章。
+  const { sw } = load();
+  const reply = (replies) => ({ postMessage: (data) => replies.push(data) });
+
+  const before = [];
+  await sw.handleLibraryMessage(
+    { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/offline/' },
+    reply(before)
+  );
+  assert.equal(before[0].saveAll, false, '沒按過就該是關著的');
+
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/offline/',
+      paths: ['basics/metadata/'],
+      intent: 'all',
+    },
+    reply([])
+  );
+
+  const after = [];
+  await sw.handleLibraryMessage(
+    { type: 'OFFLINE_STATUS', url: 'https://anoni.net/docs/offline/' },
+    reply(after)
+  );
+  assert.equal(after[0].saveAll, true);
+});
+
+test('逐頁勾選與起步路徑不帶 intent，記不上那筆旗標', async (load) => {
+  // 挑過幾頁的讀者要的就是那幾頁。記上的話下一次更新會把他沒挑的頁面（含記者、
+  // 行動者那幾類場景頁）一起存進裝置，而那正是他挑選的理由。
+  const { sw } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/offline/',
+      paths: ['basics/metadata/'],
+    },
+    { postMessage: () => {} }
+  );
+  assert.equal(await sw.saveAllEnabled(''), false);
+});
+
+test('旗標逐語系各記各的', async (load) => {
+  // 全部存到裝置一次只處理讀者當下所在的語系，旗標跟著同一個範圍
+  const { sw } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/en/offline/',
+      paths: ['basics/metadata/'],
+      intent: 'all',
+    },
+    { postMessage: () => {} }
+  );
+  assert.equal(await sw.saveAllEnabled('en/'), true);
+  assert.equal(await sw.saveAllEnabled(''), false);
+  assert.equal(await sw.saveAllEnabled('zh-cn/'), false);
+});
+
+test('勾掉任何一頁就取消旗標，更新不會把它補回來', async (load) => {
+  // 讀者把一頁勾掉的理由可能正是不想讓它留在這台裝置上。旗標留著的話下一次更新
+  // 會照著索引把它重新抓回來，而畫面上沒有任何地方講得出這件事。
+  const { sw } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/offline/',
+      paths: ['basics/metadata/', 'scenarios/journalist/'],
+      intent: 'all',
+    },
+    { postMessage: () => {} }
+  );
+  assert.equal(await sw.saveAllEnabled(''), true);
+
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_REMOVE',
+      url: 'https://anoni.net/docs/offline/',
+      paths: ['scenarios/journalist/'],
+      assets: [],
+    },
+    { postMessage: () => {} }
+  );
+  assert.equal(await sw.saveAllEnabled(''), false);
+});
+
+test('清除所有離線內容之後旗標歸零', async (load) => {
+  // 按這顆的人多半是因為裝置可能被檢查。旗標留著的話，清完再按一次更新就把整站
+  // 連同敏感場景頁抓回一台才剛清乾淨的裝置。放 SETTINGS 而不是 localStorage，
+  // 靠的就是 clearAllOffline 會把整個 cache 刪掉。
+  const { sw } = load();
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/offline/',
+      paths: ['basics/metadata/'],
+      intent: 'all',
+    },
+    { postMessage: () => {} }
+  );
+  await sw.clearAllOffline();
+  assert.equal(await sw.saveAllEnabled(''), false);
+});
+
+test('部分失敗照樣記下旗標', async (load) => {
+  // 讀者要的東西沒有變。這裡不記的話，抓失敗的那幾頁連同之後的新文章都不會有人
+  // 再去補，而下載失敗在網路差的裝置上是常態。
+  const { sw } = load();
+  await sw.setSaveAll('', false);
+  await sw.handleLibraryMessage(
+    {
+      type: 'OFFLINE_ADD',
+      url: 'https://anoni.net/docs/offline/',
+      // 建置產物裡沒有這一頁，addToLibrary 會記一筆 failed
+      paths: ['basics/metadata/', 'does-not-exist/'],
+      intent: 'all',
+    },
+    { postMessage: () => {} }
+  );
+  assert.equal(await sw.saveAllEnabled(''), true);
 });
 
 test('認不得的指令會回錯誤，不會靜靜沒反應', async (load) => {
