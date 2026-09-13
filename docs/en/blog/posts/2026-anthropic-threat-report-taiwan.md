@@ -549,6 +549,53 @@ Page 129 of the biological misuse chapter states that, to Anthropic's knowledge,
 
 Page 139 of the scams chapter describes a China-based app studio that used Claude to build a network of over 20 dating apps and to power the AI personas that conversed with users, while advertising the service as fully human. Over a two-week window in April 2026, Anthropic found more than 4,700 distinct AI personas that engaged at least 25,000 unique individuals, at roughly three AI personas per real person. The studio also recruited real people into the same match feed to handle what Claude could not do, such as live video calls and social media follows, in order to reduce victims' scepticism.
 
+## Responses since publication
+
+<p class="role-tags"><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tags__note">Checked as of 13 September 2026; anything after that date needs following up separately.</span></p>
+
+What has happened since publication is recorded here separately from the report itself. Each item carries a date and a source, so it is clear which parts have been verified and which have not.
+
+| Date | Event |
+|---|---|
+| 8 September | NSA, CISA and the FBI issue joint advisory `AA26-251A` naming six Chinese AI companies |
+| 9 September | China's Ministry of Commerce responds, calling the allegations groundless |
+| 10 September | Anthropic publishes this report |
+| 10–11 September | Taiwanese media cover it heavily, focusing on the 12 electronic-warfare targets |
+| 11 September | The named labs offer no substantive response to press enquiries |
+| 12 September | A claim circulates in Chinese-language social media that Moonshot's founder and executives were detained; the company denies it the same day and files a police report |
+
+### The US government advisory came first
+
+NSA, CISA and the FBI issued joint advisory `AA26-251A` on 8 September 2026[^cisa], naming six Chinese AI companies for industrial-scale distillation against US frontier models, with targets spanning Claude 3.7 through Opus 4.8, GPT-4 through GPT-5.5, the Gemini 2.5 family and Grok. On Chinese government involvement, the advisory says the campaigns were conducted "likely with Chinese government awareness".
+
+The two lists are worth setting side by side. The government advisory names DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun and Z.AI. Anthropic names Alibaba, Moonshot, DeepSeek, Zhipu (branded Z.AI abroad), Xiaomi, SenseTime and MiniMax. Five appear on both; the advisory adds StepFun, and Anthropic adds Xiaomi and SenseTime. Any citation should state which document it comes from, since the evidentiary basis also differs: one is a government intelligence assessment, the other is one vendor's observation of its own platform.
+
+### China's official denial
+
+China's Ministry of Commerce responded on 9 September, saying the allegations have no factual or legal basis and describing distillation as a normal technical and commercial matter in the AI industry that the US is politicising. The Foreign Ministry called on the US to stop making unfounded accusations. Beijing also warned that it would take resolute countermeasures if the claims were used to justify new restrictions on Chinese AI firms.
+
+Those responses addressed the US government advisory of 8 September. Anthropic's report was published on 10 September, and as of this check, Chinese officials have not addressed the individual cases in the report.
+
+### The named labs have mostly stayed silent
+
+TechCrunch and CNBC both sought comment at the time. Moonshot declined to comment, and DeepSeek and Xiaomi did not reply within deadline[^press]. As of this check, none of the seven labs has given a substantive account of Anthropic's specific allegations.
+
+### A claim the company has denied
+
+On 12 September a claim circulated in Chinese-language social media that Moonshot's founder and more than ten senior executives had been taken away for investigation. A YouTube channel in Taiwan repeated it, and media outlets then reported it under headlines marked as unconfirmed[^ltn].
+
+Moonshot issued a statement the same morning calling the circulating information about its founder and employees entirely fabricated and malicious rumour, stating that it had filed a report with the public security authorities and would pursue those responsible[^moonshot].
+
+Three things here need separating. The claim has no named source and no verifiable documentation. The company's denial addresses that claim, not Anthropic's allegations. No third party has verified the claim. It is recorded here because it circulated in the same week as the report and is easily read as a consequence of it, when nothing currently links the two.
+
+This post does not repeat the individual name carried in the claim. In an account the company calls fabricated and has reported to police, attaching a specific person to a detention does nothing to help a reader judge what happened.
+
+### In Taiwan
+
+Taiwanese media covered the report heavily on 10 and 11 September, concentrating on the passage where the electronic-warfare simulation was switched to 12 targets in Taiwan. The dossiers on Presbyterian Church leadership and the listing of Taiwanese media as a monitoring category received noticeably less coverage.
+
+As of this check, no public response from the General Assembly of the Presbyterian Church in Taiwan has been found, and no government body has issued a formal statement on the Taiwan-related passages in the report.
+
 ## Limits of the report
 
 - The report is published by Anthropic, and the attributions and confidence levels are its own. Several cases state low or medium confidence explicitly, and that qualifier should travel with any citation
@@ -566,5 +613,11 @@ Page 139 of the scams chapter describes a China-based app studio that used Claud
 - [Activists and protest digital safety](../../scenarios/activist.md)
 
 [^report]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic, 10 September 2026. [Full PDF](https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a597377d3b5/Anthropic-Detecting-and-countering-091026.pdf){target="_blank"}, plus a separate [indicator list](https://www-cdn.anthropic.com/b5af8acd5ee681422114af7c7b6b02c1ecd074ca/20260910_Anthropic_AI_Misuse_Report_IOCs.csv){target="_blank"}.
+
+[^cisa]: [China-Based Artificial Intelligence Companies Conducting Industrial-Scale Distillation Campaigns Against U.S. AI Companies](https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-251a){target="_blank"} - joint CISA, NSA and FBI advisory `AA26-251A`, 8 September 2026.
+
+[^ltn]: [Reportedly, Moonshot's founder and 15 executives have all been detained](https://ec.ltn.com.tw/article/breakingnews/5571609){target="_blank"} - Liberty Times Net, 12 September 2026, in Chinese. The headline and body both mark the claim as circulating online rather than confirmed.
+
+[^moonshot]: [Moonshot: information circulating about our founder and employees is entirely fabricated, a malicious rumour, and has been reported to the police](https://news.mydrivers.com/1/1150/1150650.htm){target="_blank"} - MyDrivers, 12 September 2026, in Chinese.
 
 [^press]: [Anthropic details distillation campaigns from Alibaba, Moonshot AI, and DeepSeek](https://techcrunch.com/2026/09/10/anthropic-details-distillation-campaigns-from-alibaba-moonshot-ai-and-deepseek/){target="_blank"} - TechCrunch, 10 September 2026.
