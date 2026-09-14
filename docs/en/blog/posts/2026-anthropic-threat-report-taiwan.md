@@ -49,7 +49,8 @@ Each section below carries a line naming the readers it is written for, across f
 
 | Case ID | Pages | Content |
 |---|---|---|
-| Cyber operations chapter | 12–30 | Fraudulent AI resellers, LiteLLM key extraction, where leaked credentials come from, the `GTG-10007` exploit foundry |
+| Cyber operations chapter | 12–30 | Fraudulent AI resellers, LiteLLM key extraction, where leaked credentials come from |
+| `GTG-10007` | 24–27 | A China-linked espionage operation and an automated exploit foundry |
 | Influence operations chapter | 41–80 | Cross-case techniques, the UAE front NGO, cloning a real activist's account |
 | Surveillance chapter introduction | 81–82 | Three trends, and the target communities shared across these operations |
 | `GTG-54009` | 82–85 | A commercial surveillance vendor infiltrating private groups |
@@ -473,7 +474,9 @@ ShinyHunters (`GTG-50014`, pp. 12–14) shows the scale concretely. Their pipeli
 
 The closing advice on page 30 is worth quoting directly. AI API keys and session tokens are targets, and the integrations customers build around AI — sandboxes, proxies and resellers — are part of the attack surface. Organisations should treat AI keys and agent integrations with the same seriousness as production credentials, because attackers treat them with the same seriousness too. AI access should be purchased only through authorised channels, and an alleged discount that requires routing traffic and credentials through an unknown intermediary introduces tremendous risk to user data and systems.
 
-### A China-linked espionage operation and an automated exploit foundry (pp. 24–27)
+## A China-linked espionage operation and an automated exploit foundry
+
+<p class="role-tags"><span class="role-tags__page">Report pp. 24–27</span><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tag role-tag--dev">Developers</span><span class="role-tags__note">Anthropic does not attribute this case to the Chinese government, so its evidentiary basis differs from the cases above; read the second paragraph before citing it.</span></p>
 
 `GTG-10007` differs in kind from the three cases above: it is a sustained espionage operation. Anthropic assesses the operators as Chinese-speaking and likely residing in Changsha, in China's Hunan province. Two were identified as undergraduates at a university in Hunan studying in a School of Computer & Communication Engineering; one had a prior internship at the Chinese security company Sangfor and was interviewing for an offensive cyber operations role at another, QiAnXin.
 
