@@ -49,7 +49,7 @@ Each section below carries a line naming the readers it is written for, across f
 
 | Case ID | Pages | Content |
 |---|---|---|
-| Cyber operations chapter | 12–30 | Fraudulent AI resellers, LiteLLM key extraction, where leaked credentials come from |
+| Cyber operations chapter | 12–30 | Fraudulent AI resellers, LiteLLM key extraction, where leaked credentials come from, the `GTG-10007` exploit foundry |
 | Influence operations chapter | 41–80 | Cross-case techniques, the UAE front NGO, cloning a real activist's account |
 | Surveillance chapter introduction | 81–82 | Three trends, and the target communities shared across these operations |
 | `GTG-54009` | 82–85 | A commercial surveillance vendor infiltrating private groups |
@@ -473,6 +473,26 @@ ShinyHunters (`GTG-50014`, pp. 12–14) shows the scale concretely. Their pipeli
 
 The closing advice on page 30 is worth quoting directly. AI API keys and session tokens are targets, and the integrations customers build around AI — sandboxes, proxies and resellers — are part of the attack surface. Organisations should treat AI keys and agent integrations with the same seriousness as production credentials, because attackers treat them with the same seriousness too. AI access should be purchased only through authorised channels, and an alleged discount that requires routing traffic and credentials through an unknown intermediary introduces tremendous risk to user data and systems.
 
+### A China-linked espionage operation and an automated exploit foundry (pp. 24–27)
+
+`GTG-10007` differs in kind from the three cases above: it is a sustained espionage operation. Anthropic assesses the operators as Chinese-speaking and likely residing in Changsha, in China's Hunan province. Two were identified as undergraduates at a university in Hunan studying in a School of Computer & Communication Engineering; one had a prior internship at the Chinese security company Sangfor and was interviewing for an offensive cyber operations role at another, QiAnXin.
+
+The limits of that attribution are worth stating first. The report says "likely residing"; the operators are students and a job applicant; Anthropic does not attribute the operation to the Chinese government and assigns it no confidence level. The Presbyterian Church and stability-maintenance cases above are explicitly described as PRC government-aligned, so the two sit at different evidentiary levels and should be cited separately.
+
+The operators used Claude as the engineering and orchestration layer of a coordinated offensive programme, running parallel workstreams: intrusion attempts against production systems, reconnaissance of foreign-government networks across the Middle East, Europe and Southeast Asia, standing vulnerability research and exploit development against major endpoint-security products, malware development, and an intelligence-collection platform.
+
+Scale and outcomes:
+
+- Roughly fifty organisations targeted, spanning education, retail, energy, technology, healthcare, finance, manufacturing and multiple government agencies globally
+- An education-technology company compromised, with hundreds of megabytes of bulk student personal data extracted from its cloud storage
+- Access gained to a retail company's production systems, reaching internal hosts and demonstrating the ability to modify the live environment
+- Citizen records retrieved from a Southeast Asian government agency, including names, phone numbers and home addresses
+- Sustained research against a major security product producing multiple previously unknown vulnerabilities, validated in the actor's own lab, alongside working exploits for several families of network and security appliances
+
+Page 26 describes how far the automation went. The operators routinely ran "agent swarms", where a lead AI agent decomposed reconnaissance and post-exploitation work and dispatched it to many subagents running in parallel. The operation maintained persistent campaign memory: target lists, harvested credentials, engagement state and standing instructions saved across working sessions, so each session resumed mid-campaign with the accumulated context. The same page records a zero-day research loop against appliance firmware, loading firmware into a decompiler, walking decompilation and cross-reference chains, forming vulnerability hypotheses, writing exploit code, testing it against lab copies and iterating until it worked, at which point the result landed in the operator's private exploit portfolio. One workflow against network appliances yielded more than a dozen possible zero-day findings in a single month.
+
+Two observations here are useful for readers: the security products deployed to detect intrusions are themselves the research target, and the continuity of the operation rests on memory files and subagents rather than on whether an operator happens to be online.
+
 ## Influence operations and commercial surveillance, for advocacy workers
 
 <p class="role-tags"><span class="role-tags__page">Report pp. 41–85</span><span class="role-tags__label">Who this is for</span><span class="role-tag role-tag--civic">Civil society and advocacy</span><span class="role-tag role-tag--press">Journalists and researchers</span><span class="role-tags__note">The techniques overlap with the working conditions of advocacy and international liaison work.</span></p>
@@ -541,7 +561,7 @@ The sections above deal only with passages involving Taiwan and the Chinese stat
 
 A few cross-cutting findings are worth pulling out.
 
-The first subheading of the cyber chapter, on page 5, reads "sophisticated attacks no longer require sophisticated attackers". Anthropic's argument is that AI has collapsed the labour and tooling gap that used to separate well-resourced, state-sponsored operations from individual operators; multi-victim campaigns that a year ago would have required many skilled operators and specialist knowledge are now sustained by single actors. The chapter goes on to note that sophistication has stopped being a reliable signal of who is behind an operation, and that publicly available offensive agent frameworks let anyone who downloads them reproduce the same scaffolding and automate each step of the cyber kill chain.
+The first subheading of the cyber chapter, on page 5, reads "sophisticated attacks no longer require sophisticated attackers". Anthropic's argument is that AI has collapsed the labour and tooling gap that used to separate well-resourced, state-sponsored operations from individual operators; multi-victim campaigns that a year ago would have required many skilled operators and specialist knowledge are now sustained by single actors. The chapter goes on to note that sophistication has stopped being a reliable signal of who is behind an operation, and that publicly available offensive agent frameworks let anyone who downloads them reproduce the same scaffolding and automate each step of the cyber kill chain. The example given there is the Russian espionage operation `GTG-20006` (p. 6), which automated its workflow to gain speed.
 
 Page 41 of the influence operations chapter notes that several campaigns were timed to national elections, including fabricated claims produced by Russian state media about Moldova's president before the September 2025 vote, and fake grassroots social media posts prepared by a pro-government operator ahead of Kenya's 2027 general election.
 
