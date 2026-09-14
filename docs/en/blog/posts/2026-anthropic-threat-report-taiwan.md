@@ -275,6 +275,10 @@ The chapter introduction on page 111 adds something separate from the individual
 
 This closing chapter is the one most directly relevant to ordinary AI users. Page 147 states that every lab named below was attributed with high confidence, and that framing should travel through the sections that follow. Anthropic states that since its first disclosure in February 2026 it has identified and disrupted distillation attacks against Claude from seven China-based labs. All targeted generally available models; no attempts were observed against Mythos 5 or Mythos Preview, which are not accessible to the general public.
 
+??? question "Three identifiers are formatted differently from the rest"
+
+    The report carries 39 `GTG` identifiers, 36 of them hyphenated. Only `GTG 16005` (p. 147), `GTG 16012` and `GTG 16003` (p. 152) use a space instead, and all three appear in headings in this chapter, while every heading elsewhere uses the hyphen. It is a typesetting slip in the report, reproduced here as written. Searching the PDF for those three needs the space; the hyphenated form returns nothing.
+
 ### What illicit distillation is
 
 Distillation itself is a legitimate training method. Researchers use a larger, more capable "teacher" model to generate responses to a set of inputs, then use those exchanges to train a smaller "student" model to mimic the teacher. It is common because it reduces the resources needed to reach more advanced capabilities.
