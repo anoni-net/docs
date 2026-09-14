@@ -24,6 +24,8 @@ https://example.com/article?fbclid=IwAR3xK9mQ...
 
 电子报的 `utm_source` 也一样，转发出去等于让收件人知道你订了哪份电子报。`mc_eid` 更直接，是 Mailchimp 的收件人识别码，对得回你的电子邮件地址。
 
+这几个判断在一则真实的消息里长什么样，[群里转来的链接](case-link.md)走完一遍。
+
 ## 转址包装
 
 Google 搜索结果的链接，实际指向的网址跟你看到的不一样：

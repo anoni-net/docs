@@ -26,6 +26,8 @@ Several scenario pages share one step: handing a screenshot of a conversation or
 - **Asking for help in public about harassment**: before posting, cover your own phone number, the names of the other party's friends, and the carrier and clock in the status bar at the top.
 - **A photo from the scene is submitted to a newsroom**: house numbers, licence plates and bystanders' faces are still in the picture after the metadata is gone, and need covering separately.
 
+For when to reach for this and when for the metadata remover, [selling things on a secondhand marketplace](case-secondhand.md) works through fourteen photos waiting to be listed.
+
 ## How to use it
 
 1. Drop the image in, click to choose a file, or paste it.

@@ -129,6 +129,14 @@ nav:
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md
+      # Everyday narratives that walk a whole path end to end. The three cards
+      # under "How the tools connect" on the index page point here. These are not
+      # utilities, so they sit after the five tool groups and leave the earlier
+      # sidebar rows where they were.
+      - "Everyday cases":
+          - utils/case-resume.md
+          - utils/case-secondhand.md
+          - utils/case-link.md
       # The utilities are things you press and get a response from, and the interactive pieces are the same kind of thing in another form. Nesting them keeps the top level short.
       # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
       # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。

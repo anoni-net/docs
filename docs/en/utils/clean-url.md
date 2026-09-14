@@ -24,6 +24,8 @@ https://example.com/article?fbclid=IwAR3xK9mQ...
 
 Newsletter `utm_source` works the same way. Forwarding it lets the recipient see which newsletter you subscribe to. `mc_eid` is more direct still, being Mailchimp's recipient identifier, which maps back to your email address.
 
+For what these judgements look like against a real message, [a link forwarded into a group chat](case-link.md) walks the whole path.
+
 ## Redirect wrappers
 
 A link in Google search results does not point where it appears to:
