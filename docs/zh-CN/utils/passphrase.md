@@ -25,6 +25,8 @@ offline_assets:
 
 两个模式的随机数都来自 `crypto.getRandomValues`，那是浏览器提供的密码学等级随机数，比网页常用的 `Math.random` 更难被推算出下一个值。取样时如果直接拿随机数对 7776 取余数，词表最后几个字会比其他字容易被抽到，所以不能整除的尾巴会丢掉重抽，让每个字被抽中的概率完全相同。细节与测试见[源代码](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}。
 
+抽出来的密语接着怎么用，见[把名单交给外部伙伴](case-roster.md)。
+
 ## 熵那个数字
 
 熵是「要猜多少次才猜得到」的度量，单位是比特。每多一个比特，猜的次数就要多一倍。

@@ -29,6 +29,8 @@ Three situations that come up:
 
 Stripping metadata only deals with fields you cannot see. Street numbers, road signs, uniforms and the view out of the window are part of the image itself and survive the process, so look the picture over yourself before you share it. To cover something that is part of the picture, use [screenshot redaction](redact.md).
 
+For when to reach for this and when for screenshot redaction, [selling things on a secondhand marketplace](case-secondhand.md) works through fourteen photos waiting to be listed. For inspecting what a file from someone else carries, see [a file from a source](case-source-file.md).
+
 ## Which files this handles
 
 | Format | What comes out | Image data |

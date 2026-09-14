@@ -25,6 +25,8 @@ offline_assets:
 
 兩個模式的亂數都來自 `crypto.getRandomValues`，那是瀏覽器提供的密碼學等級亂數，比網頁常用的 `Math.random` 更難被推算出下一個值。取樣時如果直接拿亂數對 7776 取餘數，詞表最後幾個字會比其他字容易被抽到，所以不能整除的尾巴會丟掉重抽，讓每個字被抽中的機率完全相同。細節與測試見[原始碼](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}。
 
+抽出來的密語接著怎麼用，見[把名單交給外部夥伴](case-roster.md)。
+
 ## 熵那個數字
 
 熵是「要猜多少次才猜得到」的度量，單位是位元。每多一個位元，猜的次數就要多一倍。
