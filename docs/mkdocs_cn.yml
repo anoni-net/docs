@@ -129,12 +129,18 @@ nav:
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md
-      # 走完一整条路径的日常叙事，索引页「工具怎么接起来」那一节的三张卡片对应到这里。
+      # 走完一整条路径的日常叙事，索引页「工具怎么接起来」那一节的卡片对应到这里。
       # 内容不是工具，排在五组工具之后，让侧边栏前面几列维持原本的顺序。
-      - "使用场景":
+      # 分成两组：日常场景不预设读者的身份，工作场景对着站上服务的几种工作写。
+      - "日常场景":
           - utils/case-resume.md
           - utils/case-secondhand.md
           - utils/case-link.md
+      - "工作场景":
+          - utils/case-roster.md
+          - utils/case-workshop.md
+          - utils/case-source-file.md
+          - utils/case-evidence.md
       # 小工具区的页面按下去就有反应，互动与呈现是同一种东西的另一种形式，收成子分组让第一层短一点。
       # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
       # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。

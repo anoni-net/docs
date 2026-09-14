@@ -124,13 +124,14 @@ icon: material/tools
 | 照片或截图要交给别人 | 画面上有要遮的东西，用[截图遮蔽](redact.md)，输出已经不带原文件的 metadata。画面干净、只要去掉拍摄信息的，用[文件 metadata 清除器](strip-metadata.md) |
 | 要交一份 PDF 出去 | [PDF 页面整理](pdf-pages.md)排好页面，再用同一页的「看里面有什么」搜索不该留下的字 |
 | 收到来路不明的链接或二维码 | [QR code 读取器](qr-read.md)解出内容，[网址清理器](clean-url.md)看注册域名，[隐形字符检测](invisible.md)查文字里的同形字 |
-| 东西要进旁边那台设备 | [QR code 影格串流](qr-stream.md)传过去，[文件哈希比对](hash.md)确认两边取得的是同一份 |
+| 收到别人给的文件，要确认也要看清楚 | [文件哈希比对](hash.md)确认跟对方手上那份一样，[文件 metadata 清除器](strip-metadata.md)或 [PDF 页面整理](pdf-pages.md)的「看里面有什么」列出里面带着什么，[隐形字符检测](invisible.md)查夹带的字符 |
+| 东西要给眼前的人或旁边那台设备 | 很长的字符串用 [QR code 生成器](qrcode.md)，让对方用相机读走。几 KB 的文件用 [QR code 影格串流](qr-stream.md)，收齐时它自己比对 SHA-256 |
 | 文件要托人带走或放进 U 盘 | [密语与密码生成器](passphrase.md)抽一组密语，[本机文件加密](age.md)封起来，[文件哈希比对](hash.md)让收的人核对 |
 | 临时要一组之后找得回来的密码 | [密语与密码生成器](passphrase.md)抽，[passkey 钥匙](passkey.md)当钥匙，[我的准备清单](checklist.md)记下已经做到哪里 |
 
-### 使用场景
+走完一整条路径长什么样，用七件具体的事各写一篇。前三篇不需要你先有特殊身份或特别的处境，后四篇对着站上服务的几种工作写。
 
-走完一整条路径长什么样，用三件日常的事各写一篇。这三篇不需要你先有特殊身份或特别的处境，看完会知道哪一页在什么时候打开。
+### 日常场景
 
 <div class="grid cards" markdown>
 
@@ -148,6 +149,27 @@ icon: material/tools
 
 </div>
 
+### 工作场景
+
+<div class="grid cards" markdown>
+
+-   :material-account-multiple-outline: **[把名单交给外部伙伴](case-roster.md)**
+
+    年度申报要把捐款人名单交给会计师，往年都当附件发出去。密语为什么要走另一个渠道，加密过的文件为什么还要算一次哈希。
+
+-   :material-presentation: **[工作坊现场要发东西给大家](case-workshop.md)**
+
+    场地的 Wi-Fi 是主办方的，二十个人的设备各不相同。哪些东西该印成二维码、哪些用屏幕跟镜头传、哪些只能靠 U 盘。
+
+-   :material-file-account-outline: **[收到来源给的文件](case-source-file.md)**
+
+    来源发来一份内部简报，你要核实它、要引用它，而且不能让提供的人被指认出来。文件外泄追踪怎么运作，为什么引用要靠重打与遮蔽。
+
+-   :material-folder-account-outline: **[把对话截图整理成送件附件](case-evidence.md)**
+
+    四十几张对话截图要整理成一份送出去的附件，画面上有第三人的名字与头像。遮蔽、合并与确认的顺序，以及交出去之前最后那一步要查什么。
+
+</div>
 
 ## 要离线带着走
 

@@ -99,6 +99,8 @@ age -d -o backup.tar backup.tar.age
 
 age 是什么、格式长什么样、跟 PGP 差在哪，见[什么是 age](../tools/what-is-age.md)。
 
+整条路径走完长什么样，见[把名单交给外部伙伴](case-roster.md)与[收到来源给的文件](case-source-file.md)。
+
 ## 跨设备，贴进你的密码管理器
 
 贴一段文字进来加密，或加密文件时勾「输出成文字」，得到的是 `-----BEGIN AGE ENCRYPTED FILE-----` 开头的纯文字。把它跟密语一起存进你已经在用的密码管理器（Bitwarden、Proton Pass、1Password 的安全笔记都行），另一台设备打开这一页贴回来、输入密语就解开。跨设备同步由你信任的管理器负责，站上什么都不存。 下载下来的 `.age` 文件就是一般文件，放进任何云端硬盘都可以，密语另外收。

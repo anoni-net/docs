@@ -26,7 +26,7 @@ icon: material/format-letter-matches
 
 在源代码里放一个右至左覆写字符，人在编辑器里看到的顺序跟编译器读到的可以完全不同。注释看起来包住了一段代码，实际上没有。这类手法有个名字叫 Trojan Source。
 
-跟 QR code 读取器、网址清理器接起来的顺序，见[群里转来的链接](case-link.md)。
+跟 QR code 读取器、网址清理器接起来的顺序，见[群里转来的链接](case-link.md)。文件外泄追踪那个用途，见[收到来源给的文件](case-source-file.md)。
 
 ## 几个真的会遇到的场景
 

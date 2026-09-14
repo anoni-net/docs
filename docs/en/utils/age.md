@@ -100,6 +100,8 @@ age -d -o backup.tar backup.tar.age
 
 What age is, what the format looks like and how it differs from PGP are on [What is age?](../tools/what-is-age.md).
 
+For what the whole path looks like, see [handing a list to an outside partner](case-roster.md) and [a file from a source](case-source-file.md).
+
 ## Across devices, through your password manager
 
 Paste text to encrypt, or tick "Output as text" when encrypting a file, and you get plain text starting with `-----BEGIN AGE ENCRYPTED FILE-----`. Store it together with the passphrase in the password manager you already use (a secure note in Bitwarden, Proton Pass or 1Password all work). Open this page on another device, paste it back, type the passphrase, and it decrypts. Your manager does the syncing. This site stores nothing. The downloaded `.age` file is an ordinary file; any cloud drive will hold it, with the passphrase kept elsewhere.

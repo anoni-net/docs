@@ -25,6 +25,8 @@ Password mode draws characters one at a time from the sets you tick. It suits an
 
 Both modes draw from `crypto.getRandomValues`, the browser's cryptographic random source, which is not the same thing as `Math.random`. Sampling discards the values in the remainder that cannot divide evenly and draws again, so every word has exactly the same chance. The details and the tests are in the [source](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}.
 
+For what happens to the passphrase next, see [handing a list to an outside partner](case-roster.md).
+
 ## About that entropy number
 
 Entropy measures how many guesses it takes, in bits. Each extra bit doubles the work.

@@ -124,13 +124,14 @@ Each tool above covers one action, and one thing on your plate usually runs thro
 | Photos or screenshots going to someone else | If something in the picture needs covering, use [Screenshot redaction](redact.md), whose output already carries no metadata from the original. If the picture is clean and you only want the capture data gone, use the [File metadata remover](strip-metadata.md) |
 | A PDF going out | [PDF page tidy-up](pdf-pages.md) to arrange the pages, then the same page's "see what is inside" to search for text that should not still be there |
 | A link or QR code of unclear provenance | [QR code reader](qr-read.md) to decode it, [URL cleaner](clean-url.md) for the registered domain, [Invisible character detector](invisible.md) for homoglyphs in the text |
-| Something that needs to reach the device next to you | [QR code frame stream](qr-stream.md) to send it, [File hash comparison](hash.md) to confirm both sides hold the same file |
+| A file from someone else, to confirm and to inspect | [File hash comparison](hash.md) to confirm it matches their copy, the [File metadata remover](strip-metadata.md) or "see what is inside" on [PDF page tidy-up](pdf-pages.md) to list what it carries, [Invisible character detector](invisible.md) for embedded characters |
+| Something going to the person or device in front of you | Long strings go through the [QR code generator](qrcode.md) for the other side to read with a camera. Files of a few kilobytes go through the [QR code frame stream](qr-stream.md), which compares SHA-256 itself once the pieces arrive |
 | A file travelling by courier or on a USB stick | [Passphrase and password generator](passphrase.md) for a passphrase, [Local file encryption](age.md) to seal it, [File hash comparison](hash.md) so the recipient can verify |
 | A password you need now and again later | [Passphrase and password generator](passphrase.md) to draw one, [Passkey as your key](passkey.md) to hold it, [My preparation checklist](checklist.md) to record where you got to |
 
-### Everyday cases
+Seven concrete situations, each written up as a full walk through one of these paths. The first three assume no particular role or threat. The last four are written against the kinds of work this site serves.
 
-Three ordinary situations, each written up as a full walk through one of these paths. None of them assumes you hold a particular role or face a particular threat, and each one leaves you knowing which page to open when.
+### Everyday cases
 
 <div class="grid cards" markdown>
 
@@ -148,6 +149,27 @@ Three ordinary situations, each written up as a full walk through one of these p
 
 </div>
 
+### Cases at work
+
+<div class="grid cards" markdown>
+
+-   :material-account-multiple-outline: **[Handing a list to an outside partner](case-roster.md)**
+
+    The annual filing means sending a donor list to your accountant, which used to travel as an email attachment. Why the passphrase takes a different route, and why an encrypted file still gets a hash.
+
+-   :material-presentation: **[Handing things out at a workshop](case-workshop.md)**
+
+    The venue Wi-Fi belongs to the host and twenty people brought twenty different devices. What belongs on a printed QR code, what travels by screen and camera, and what still needs a USB stick.
+
+-   :material-file-account-outline: **[A file from a source](case-source-file.md)**
+
+    A source sends an internal deck, you need to verify it and quote from it, and nobody should be able to work out who handed it over. How document leak tracking works, and why quoting means retyping and redacting.
+
+-   :material-folder-account-outline: **[Turning conversation screenshots into a submission](case-evidence.md)**
+
+    Forty-odd conversation screenshots have to become one attachment, with third parties' names and avatars in frame. The order of redacting, merging and confirming, and what the last check before sending looks for.
+
+</div>
 
 ## Taking them offline
 

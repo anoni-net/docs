@@ -4915,6 +4915,7 @@
 	#After-you-receive
 	#Available-now
 	#Before-you-send
+	#Cases-at-work
 	#Everyday-cases
 	#Handing-things-over
 	#How-the-tools-connect
@@ -4934,6 +4935,14 @@
 	#Things-to-keep-in-mind
 	#Using-a-passkey-as-the-key
 	#Works-offline
+/en/utils/case-evidence/
+	#Cover-what-should-not-appear
+	#Dozens-of-screenshots
+	#Merge-into-one-file-in-date-order
+	#The-last-check-before-it-goes
+	#The-originals-stay
+	#The-same-path-applies-well-beyond-submissions
+	#Turning-conversation-screenshots-into-a-submission
 /en/utils/case-link/
 	#A-link-forwarded-into-a-group-chat
 	#After-the-checks
@@ -4951,6 +4960,15 @@
 	#The-deadline-is-midnight-tonight
 	#The-same-path-applies-well-beyond-job-applications
 	#Three-things-all-on-one-page
+/en/utils/case-roster/
+	#A-recipient-with-an-age-public-key-needs-no-passphrase
+	#An-encrypted-file-still-gets-a-hash
+	#Draw-a-passphrase-first
+	#Encrypt-before-it-leaves
+	#Handing-a-list-to-an-outside-partner
+	#The-passphrase-takes-a-different-route
+	#The-same-path-applies-well-beyond-annual-filings
+	#Three-hundred-rows-in-a-spreadsheet
 /en/utils/case-secondhand/
 	#Drawing-fewer-boxes
 	#Fourteen-photos-ready-to-list
@@ -4959,6 +4977,22 @@
 	#The-same-path-applies-well-beyond-secondhand-sales
 	#Two-tools-and-usually-you-only-need-one
 	#When-a-buyer-asks-you-for-ID
+/en/utils/case-source-file/
+	#A-file-from-a-source
+	#An-internal-deck-arrives
+	#Confirm-both-sides-hold-the-same-file
+	#How-document-leak-tracking-works
+	#Keeping-the-original
+	#Quoting-means-retyping-and-redacting
+	#See-what-the-file-carries
+	#The-same-path-applies-well-beyond-internal-documents
+/en/utils/case-workshop/
+	#Files-of-a-few-kilobytes-travel-by-screen-and-camera
+	#Handing-things-out-at-a-workshop
+	#Large-files-still-need-a-USB-stick
+	#Long-strings-go-on-a-printed-QR-code
+	#The-same-path-applies-well-beyond-workshops
+	#Twenty-people-one-afternoon
 /en/utils/checklist/
 	#How-it-works
 	#My-preparation-checklist
@@ -6301,11 +6335,12 @@
 	#接下來
 /tor-snowflake/ -> /tools/tor-snowflake/
 /utils/
-	#使用情境
 	#密碼與加密
 	#小工具
+	#工作情境
 	#工具怎麼接起來
 	#收到之後
+	#日常情境
 	#沒有收進來的東西
 	#用-Tor-Browser-的話有一個衝突要知道
 	#用了誰的程式
@@ -6323,6 +6358,14 @@
 	#用公鑰加密給別人
 	#跨裝置貼進你的密碼管理器
 	#離線可用
+/utils/case-evidence/
+	#交出去之前的最後一步
+	#原始截圖要留著
+	#合併成一份排出時間順序
+	#幾十張截圖
+	#把對話截圖整理成送件附件
+	#這條路徑不只用在送件
+	#遮掉不該出現的部分
 /utils/case-link/
 	#先看圖裡的-QR-code-是什麼
 	#查完之後
@@ -6340,6 +6383,15 @@
 	#這條路徑不只用在應徵
 	#附件的作者欄寫著另一家公司
 	#黑色方塊蓋住的字還在檔案裡
+/utils/case-roster/
+	#一份三百多列的試算表
+	#先抽一組密語
+	#加密再交出去
+	#加密過的檔案還是要算一次雜湊
+	#密語不要跟檔案走同一個管道
+	#把名單交給外部夥伴
+	#收件人有-age-公鑰就不必約密語
+	#這條路徑不只用在年度申報
 /utils/case-secondhand/
 	#兩個工具多數時候只需要用一個
 	#十四張照片準備上架
@@ -6348,6 +6400,22 @@
 	#買家要你出示證件的時候
 	#這條路徑不只用在二手交易
 	#遮的時候可以少拉幾個框
+/utils/case-source-file/
+	#一份內部簡報
+	#先確認兩邊是同一份
+	#原始檔怎麼收著
+	#引用要靠重打與遮蔽
+	#收到來源給的檔案
+	#文件外流追蹤是怎麼運作的
+	#看清楚這個檔案帶著什麼
+	#這條路徑不只用在內部文件
+/utils/case-workshop/
+	#二十個人一個下午
+	#大檔案還是隨身碟
+	#工作坊現場要發東西給大家
+	#幾-KB-的檔案用螢幕跟鏡頭傳
+	#很長的字串印成-QR-code
+	#這條路徑不只用在工作坊
 /utils/checklist/
 	#怎麼運作
 	#我的準備清單
@@ -9657,13 +9725,14 @@
 	#接下来
 /zh-cn/tor-snowflake/ -> /zh-cn/tools/tor-snowflake/
 /zh-cn/utils/
-	#使用场景
 	#发出去之前
 	#密码与加密
 	#小工具
+	#工作场景
 	#工具怎么接起来
 	#当面传东西
 	#收到之后
+	#日常场景
 	#没有收进来的东西
 	#用-Tor-Browser-的话有一个冲突要知道
 	#用了谁的程序
@@ -9679,6 +9748,14 @@
 	#用公钥加密给别人
 	#离线可用
 	#跨设备贴进你的密码管理器
+/zh-cn/utils/case-evidence/
+	#交出去之前的最后一步
+	#几十张截图
+	#原始截图要留着
+	#合并成一份排出时间顺序
+	#把对话截图整理成送件附件
+	#这条路径不只用在送件
+	#遮掉不该出现的部分
 /zh-cn/utils/case-link/
 	#先看图里的二维码是什么
 	#查完之后
@@ -9696,6 +9773,15 @@
 	#这条路径不只用在投递简历
 	#附件的作者栏写着另一家公司
 	#黑色方块盖住的字还在文件里
+/zh-cn/utils/case-roster/
+	#一份三百多行的表格
+	#先抽一组密语
+	#加密再交出去
+	#加密过的文件还是要算一次哈希
+	#密语不要跟文件走同一个渠道
+	#把名单交给外部伙伴
+	#收件人有-age-公钥就不必约密语
+	#这条路径不只用在年度申报
 /zh-cn/utils/case-secondhand/
 	#两个工具多数时候只需要用一个
 	#买家要你出示证件的时候
@@ -9704,6 +9790,22 @@
 	#清除器会把每一段的去留列给你看
 	#这条路径不只用在二手交易
 	#遮的时候可以少拉几个框
+/zh-cn/utils/case-source-file/
+	#一份内部简报
+	#先确认两边是同一份
+	#原文件怎么收着
+	#引用要靠重打与遮蔽
+	#收到来源给的文件
+	#文件外泄追踪是怎么运作的
+	#看清楚这个文件带着什么
+	#这条路径不只用在内部文件
+/zh-cn/utils/case-workshop/
+	#二十个人一个下午
+	#几-KB-的文件用屏幕跟镜头传
+	#大文件还是-U-盘
+	#工作坊现场要发东西给大家
+	#很长的字符串印成二维码
+	#这条路径不只用在工作坊
 /zh-cn/utils/checklist/
 	#怎么运作
 	#我的准备清单

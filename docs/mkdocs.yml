@@ -147,12 +147,18 @@ nav:
           - utils/clean-url.md
           - utils/invisible.md
           - utils/leaks.md
-      # 走完一整條路徑的日常敘事，索引頁「工具怎麼接起來」那一節的三張卡片對應到這裡。
+      # 走完一整條路徑的日常敘事，索引頁「工具怎麼接起來」那一節的卡片對應到這裡。
       # 內容不是工具，排在五組工具之後，讓側邊欄前面幾列維持原本的順序。
-      - "使用情境":
+      # 分成兩組：日常情境不預設讀者的身分，工作情境對著站上服務的幾種工作寫。
+      - "日常情境":
           - utils/case-resume.md
           - utils/case-secondhand.md
           - utils/case-link.md
+      - "工作情境":
+          - utils/case-roster.md
+          - utils/case-workshop.md
+          - utils/case-source-file.md
+          - utils/case-evidence.md
       # 小工具區的頁面按下去就有反應，互動與呈現是同一種東西的另一種形式，收成子分組讓第一層短一點。
       # 排在 utils 那一串後面，index 頁的卡片順序不含它（那一串由
       # tools/test_utils_index_order.mjs 盯著，只認 utils/*.md）。

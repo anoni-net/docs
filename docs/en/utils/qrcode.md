@@ -25,6 +25,8 @@ One situation from practice: someone running a workshop needs to give participan
 
 To confirm the code you generated actually contains what you meant, read it back with the [QR code reader](qr-read.md).
 
+For using this with twenty people in a room, see [handing things out at a workshop](case-workshop.md).
+
 ## What is inside a QR code is in the clear
 
 Many people assume a QR code is encryption. It is only a way of drawing text as squares. Anyone who photographs it can read the contents: the camera on the wall, the other person's photo backup, whoever is standing behind you.

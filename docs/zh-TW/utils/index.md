@@ -121,16 +121,17 @@ icon: material/tools
 
 | 你手上的事 | 走的順序 |
 |---|---|
-| 照片或截圖要交給別人 | 畫面上有要遮的東西，用[截圖遮蔽](redact.md)，輸出已經不帶原檔的 metadata。畫面乾淨、只要拿掉拍攝資訊的，用[檔案 metadata 清除器](strip-metadata.md) |
+| 照片或截圖要交給別人 | 畫面上有要遮的東西，用[截圖遮蔽](redact.md)，輸出已經不帶原檔的 metadata。畫面乾淨、只要去掉拍攝資訊的，用[檔案 metadata 清除器](strip-metadata.md) |
 | 要交一份 PDF 出去 | [PDF 頁面整理](pdf-pages.md)排好頁面，再用同一頁的「看裡面有什麼」搜尋不該留下的字 |
 | 收到來路不明的連結或 QR code | [QR code 讀取器](qr-read.md)解出內容，[網址清理器](clean-url.md)看註冊網域，[隱形字元偵測](invisible.md)查文字裡的同形字 |
-| 東西要進旁邊那台裝置 | [QR code 影格串流](qr-stream.md)傳過去，[檔案雜湊比對](hash.md)確認兩邊取得的是同一份 |
+| 收到別人給的檔案，要確認也要看清楚 | [檔案雜湊比對](hash.md)確認跟對方手上那份一樣，[檔案 metadata 清除器](strip-metadata.md)或 [PDF 頁面整理](pdf-pages.md)的「看裡面有什麼」列出裡面帶著什麼，[隱形字元偵測](invisible.md)查夾帶的字元 |
+| 東西要給眼前的人或旁邊那台裝置 | 很長的字串用 [QR code 產生器](qrcode.md)，讓對方用相機讀走。幾 KB 的檔案用 [QR code 影格串流](qr-stream.md)，收齊時它自己比對 SHA-256 |
 | 檔案要託人帶走或放進隨身碟 | [密語與密碼產生器](passphrase.md)抽一組密語，[本機檔案加密](age.md)封起來，[檔案雜湊比對](hash.md)讓收的人核對 |
 | 臨時要一組之後找得回來的密碼 | [密語與密碼產生器](passphrase.md)抽，[passkey 鑰匙](passkey.md)當鑰匙，[我的準備清單](checklist.md)記下已經做到哪裡 |
 
-### 使用情境
+走完一整條路徑長什麼樣，用七件具體的事各寫一篇。前三篇不需要你先有特殊身分或特別的處境，後四篇對著站上服務的幾種工作寫。
 
-走完一整條路徑長什麼樣，用三件日常的事各寫一篇。這三篇不需要你先有特殊身分或特別的處境，看完會知道哪一頁在什麼時候打開。
+### 日常情境
 
 <div class="grid cards" markdown>
 
@@ -145,6 +146,28 @@ icon: material/tools
 -   :material-message-alert-outline: **[群組轉來的連結](case-link.md)**
 
     社區群組轉來一則限時登記的訊息，附一個看起來像官網的網址與一張 QR code 圖。註冊網域為什麼是唯一該看的部分，看不見的字元能查到什麼、查不到什麼。
+
+</div>
+
+### 工作情境
+
+<div class="grid cards" markdown>
+
+-   :material-account-multiple-outline: **[把名單交給外部夥伴](case-roster.md)**
+
+    年度申報要把捐款人名單交給會計師，往年都當附件寄出去。密語為什麼要走另一個管道，加密過的檔案為什麼還要算一次雜湊。
+
+-   :material-presentation: **[工作坊現場要發東西給大家](case-workshop.md)**
+
+    場地的 Wi-Fi 是主辦方的，二十個人的裝置各不相同。哪些東西該印成 QR code、哪些用螢幕跟鏡頭傳、哪些只能靠隨身碟。
+
+-   :material-file-account-outline: **[收到來源給的檔案](case-source-file.md)**
+
+    來源傳來一份內部簡報，你要查證它、要引用它，而且不能讓提供的人被指認出來。文件外流追蹤怎麼運作，為什麼引用要靠重打與遮蔽。
+
+-   :material-folder-account-outline: **[把對話截圖整理成送件附件](case-evidence.md)**
+
+    四十幾張對話截圖要整理成一份送出去的附件，畫面上有第三人的名字與頭像。遮蔽、合併與確認的順序，以及交出去之前最後那一步要查什麼。
 
 </div>
 

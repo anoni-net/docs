@@ -26,7 +26,7 @@ Scan a document before forwarding it.
 
 A right-to-left override in source code makes what a human sees in the editor differ from what the compiler reads. A comment appears to enclose a block of code while doing nothing of the sort. The technique has a name: Trojan Source.
 
-For how this joins up with the QR code reader and the URL cleaner, see [a link forwarded into a group chat](case-link.md).
+For how this joins up with the QR code reader and the URL cleaner, see [a link forwarded into a group chat](case-link.md). For the document leak tracking use, see [a file from a source](case-source-file.md).
 
 ## Situations where this actually comes up
 
