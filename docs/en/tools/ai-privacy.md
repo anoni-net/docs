@@ -99,6 +99,24 @@ Paste only the passage the task needs, rather than the whole document.
 
 And apply one test: if this text appeared in public search results tomorrow, what happens? If the answer is "nothing," paste it. If the answer is "that's a problem," de-identify first or handle it another way.
 
+## Access credentials are themselves a target
+
+The sections above are about what you send. Credentials run the other way: API keys and authenticated session tokens are now traded goods in the criminal economy.
+
+Anthropic's September 2026 abuse report (pp. 28-30) describes stolen AI keys, session tokens, and devices as the sole objective of several criminal groups. Whoever holds the credential gets three things at once: resale value on an existing market, attack compute billed to someone else, and activity attributed to the credential's legitimate owner[^anthropic2026].
+
+### Discount resellers
+
+Actors stand up sites advertising themselves as multi-model middlemen offering cheap frontier-model access. One documented reseller sold cut-price "Claude" access that, in the report's words, was neither cheap nor Claude: traffic was silently routed to a different model while the reseller's client software installed an infostealer that took the customer's account credentials for resale. Those stealers frequently impersonate popular AI tools, Claude Code among them, and keep watching for new sessions after a leaked key is rotated. Buy access only through authorized channels, and download client software only from the vendor's own domain.
+
+### Where the keys leak from
+
+The most common source of the stolen access sold by fake resellers is legitimate customers exposing credentials in their own code and products: GitHub, mobile app packages, Docker containers, websites, and chatbots (p. 30). One group ran a pipeline that bulk-downloaded 1.8 million Android APKs, decompiled them, and scanned for hardcoded secrets (pp. 12-14). Scan your own repositories, images, and app packages; scope keys narrowly, rotate them, and alert on unusual usage.
+
+### Your own proxies and sandboxes count as attack surface
+
+Actors compromised self-hosted LiteLLM deployments with prompt injection to extract production API keys from cloud container environments, and injected instructions into a vendor's automated evaluation sandbox to make it surrender the provider keys it held (p. 29). Treat an internal integration as production infrastructure, because the attackers already do.
+
 ## Local models
 
 Running a model on your own machine keeps content on the device, which suits genuinely sensitive work: client data, unpublished material, source-related content, or an environment where sending data abroad is itself the risk. The costs are real hardware requirements (memory is the practical ceiling), quality below the contemporary large commercial models, and setup you maintain yourself.
@@ -140,6 +158,7 @@ AI terms and settings change quickly. Verified 2026-08. The mechanisms and the q
 - [Journalists and source protection](../scenarios/journalist.md) — why source material is the clearest case of data you cannot consent to share
 - [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — where user data actually leaked from third-party model routing services, and what stolen API keys are worth to the people who take them
 
+[^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} — Anthropic, 10 September 2026, 154 pages. Page numbers in this section refer to the report PDF. A section-by-section summary is [on this site](../blog/posts/2026-anthropic-threat-report-taiwan.md). Verified 2026-09.
 [^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} — China Law Translate. In force 15 August 2023, issued by the CAC with six other agencies; covers identity verification, retention of input and output records, and security assessment plus algorithm filing for services with public-opinion attributes. Verified 2026-08.
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} — OpenAI, on the consumer/business distinction (ChatGPT Team, Enterprise, and the API excluded by default) and where the data controls sit. Verified 2026-08.
 [^anthropic]: [Anthropic Privacy Center](https://privacy.anthropic.com/){target="_blank"} — Anthropic, on commercial services not being used for training, consumer services being a user choice, and de-identified content persisting up to five years in training pipelines once opted in. Verified 2026-08.
