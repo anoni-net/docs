@@ -10,17 +10,17 @@ Answers to "how far has surveillance actually gone" tend to swing between two ex
 
 Two numbers to start with. One advertising audience list in circulation contains 650,000 segments, one of which is labelled "I generally get a raw deal out of life"[^markup]. Taiwanese prosecutors and police applied for 16,663 communication-record retrieval orders in 2025, covering 147,422 phone lines[^rjsd]. The two are entirely different in kind, and they call for different defenses.
 
-What follows covers four layers: platforms and data brokers, telecom carriers, states and law enforcement, and commercial spyware. For what to do about it, see [what an ordinary person should actually do](../scenarios/everyday-baseline.md).
+What follows covers five layers: platforms and data brokers, telecom carriers, states and law enforcement, commercial spyware, and open-source intelligence profiling. Cost and reach run in opposite directions across the first four; the fifth sits off that line. For what to do about it, see [what an ordinary person should actually do](../scenarios/everyday-baseline.md).
 
 ## How to read this page
 
-- **Capability is not the same as being used on you**: Cost per target differs by orders of magnitude across these four layers. Commercial collection is close to free, so it covers everyone; a commercial spyware licence runs to tens of thousands of dollars, so the target list is short.
+- **Capability is not the same as being used on you**: Cost per target differs by orders of magnitude across these four layers. Commercial collection is close to free, so it covers everyone; a commercial spyware licence runs to tens of thousands of dollars, so the target list is short. The fifth layer is cheap and still selective, so whether it reaches you depends on how publicly you operate.
 - **Capability moves fast, institutions move slowly**: Retention periods and warrant thresholds are more stable than the technical picture, so weight them more heavily when judging long-term risk.
 - **Absence of evidence is not evidence of absence**: Only claims with a public record appear here. Where nothing could be verified, the page says so.
 
 Two adversaries fall outside this page. Fraud and account takeover cost ordinary people the most money in practice; see [what an ordinary person should actually do](../scenarios/everyday-baseline.md). An employer-issued device, or tracking software a partner or parent installs on your phone, costs a few dollars or is built in already, and sits far closer to most people than any state-level capability; see [domestic violence and tech-enabled abuse](../scenarios/domestic-violence.md).
 
-The other groupings on this site line up with these layers. [Threat modeling](./threat-model.md) sorts adversaries into six tiers and [what an ordinary person should actually do](../scenarios/everyday-baseline.md) into three kinds. Layer one here corresponds to their "platform operators" and "commercial data collection", layers three and four to "national law enforcement" and "targeted investigation", and telecom is the shared infrastructure underneath the first two.
+The other groupings on this site line up with these layers. [Threat modeling](./threat-model.md) sorts adversaries into six tiers and [what an ordinary person should actually do](../scenarios/everyday-baseline.md) into three kinds. Layer one here corresponds to their "platform operators" and "commercial data collection", layers three and four to "national law enforcement" and "targeted investigation", and telecom is the shared infrastructure underneath the first two. The fifth layer has no counterpart on either page, and the role examples in [threat modeling](./threat-model.md) now name it.
 
 !!! warning "The legal layer does not transfer across jurisdictions"
 
@@ -28,11 +28,11 @@ The other groupings on this site line up with these layers. [Threat modeling](./
 
 <figure markdown="span">
     <img src="https://assets.anoni.net/diagrams/surveillance-cost-reach.en.svg"
-        alt="Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people the layer reaches and gets shorter to the right. The downward bar is the cost of using it on one person and gets longer to the right. Platforms and ads cost almost nothing and reach everyone; a commercial spyware licence runs to tens of thousands of dollars and works from a short list.">
-    <figcaption>Cost and reach run in opposite directions across the four layers</figcaption>
+        alt="Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people the layer reaches and gets shorter to the right. The downward bar is the cost of using it on one person and gets longer to the right. Platforms and ads cost almost nothing and reach everyone; a commercial spyware licence runs to tens of thousands of dollars and works from a short list. A band underneath carries the fifth layer, open-source intelligence profiling, whose cost sits at the level of the leftmost column while its target selection resembles the rightmost, so the pattern of the first four does not hold there.">
+    <figcaption>Cost and reach run in opposite directions across the first four layers, and the fifth is off that line</figcaption>
 </figure>
 
-The first point above, drawn out. The cheaper a layer is per target, the more people it covers, which makes it the layer you actually meet. The right-hand column has the strongest capability and, because of the price, the shortest list.
+The first point above, drawn out. The cheaper a layer is per target, the more people it covers, which makes it the layer you actually meet. The right-hand column has the strongest capability and, because of the price, the shortest list. The band beneath the bars is the fifth layer, priced like the far left and targeted like the far right.
 
 ## Platforms, advertisers, and data brokers
 
@@ -148,29 +148,69 @@ Licenses are expensive and operating the tooling takes staff, so buyers choose t
 
 Lockdown Mode on iPhone and Advanced Protection on Android switch off a batch of commonly exploited features, at the cost of some functionality. Apple's own guidance is explicit: most people do not need it, and it exists for people who may be targeted by state-level or mercenary spyware, such as journalists, activists, and government officials[^lockdown]. To decide whether that includes you, start from [threat modeling](./threat-model.md).
 
+## Open-source intelligence profiling
+
+Cost and reach run in opposite directions across the four layers above. This one sits off that line: the cost is close to layer one, and the target selection is as deliberate as layer four.
+
+Anthropic's September 2026 abuse report documented several clusters of banned accounts whose work was turning public speech, social posts, and event information into individual dossiers, daily briefings, and target lists, for government customers or for internal use inside an agency[^anthropic2026]. That output used to require a full analyst team. In the documented cases a single operator sustained it with a templated workflow, the model handling translation, summarization, drafting, and formatting.
+
+### What it can do
+
+#### Pull one person's public activity across platforms into a single file
+
+Collection spans WeChat, Xiaohongshu, Douyin, and Weibo alongside LinkedIn, Instagram, Threads, X, and Facebook, reported on a daily cycle. Dossier fields include date of birth, place of birth, emigration date, and social accounts (report pp. 91-92).
+
+#### Profile people by the pressure points that can be used on them
+
+One case converted bulk-extracted group chats into structured data, profiling people for economic pressure, family separation, and ideological disillusionment, and specifically flagging targets whose relatives remain in Xinjiang (pp. 86-89).
+
+#### Produce advance venue intelligence for lawful public events
+
+Accounts tied to a municipal security bureau requested assembly points, routes, and end points for events overseas, among them a democracy march in Vancouver and screening sessions at the Oslo Freedom Forum, all of them lawful and public (pp. 93-97). The corresponding preparation is in [activists and protest digital safety](../scenarios/activist.md).
+
+#### Run as routine daily output
+
+Another case ingested 15 to 30 foreign news articles a day, scored them for political sensitivity, and produced briefings written for officials, with monitoring categories that include Taiwanese political activity and Taiwanese media coverage (pp. 98-101).
+
+### What it cannot do
+
+This layer does not compromise devices and does not read end-to-end encrypted content. The collection stage described in the report ran on separate infrastructure with no model involved, and that capability belongs to the layers above.
+
+Being written into a file and being acted on are different things. The summonses and "control" measures in the report were aimed at citizens inside mainland China. For someone outside that jurisdiction, being recorded is usually followed by listing and continued tracking (pp. 93-97).
+
+### Where the boundary sits
+
+Anthropic sees only what passed through its own models, so equivalent activity elsewhere is out of scope. Attribution and confidence levels are Anthropic's own judgments, and several cases carry a low or medium confidence marker in the report. Page-by-page notes and the report's own limits are in [our summary of it](../blog/posts/2026-anthropic-threat-report-taiwan.md).
+
+### The one thing an ordinary person can do
+
+Take an inventory of your own public exposure. People who give interviews, act as spokespeople, or appear at public assemblies are likelier to end up on these lists than people who never speak publicly. For organizers, the disclosure-timing entry in [activists and protest digital safety](../scenarios/activist.md) covers what to publish when.
+
 ## How would I know if I were targeted
 
-Each layer has one action you can take yourself.
+Each of the five layers has one action you can take yourself.
 
 - **Platform layer**: Open Google's My Ad Center and Meta's ad preferences to see the topics the system thinks you care about, then use data export for the full record. The steps are in [how platforms collect your data](./platform-tracking.md). Nothing else on this site shows you your own profile as directly.
 - **Telecom layer**: Request your own call detail records from your carrier; the scope is broadly what a retrieval order would produce.
 - **State and law enforcement layer**: Under Article 15 of Taiwan's Communication Security and Surveillance Act, the executing agency must report after surveillance ends and the court notifies the person who was surveilled. Notification can be deferred where it would defeat the purpose, but the grounds must be reassessed every three months and notice must still follow once they lapse[^tsa15]. Lawful interception, in other words, has a built-in path to being told afterwards. Whether an equivalent exists where you live is worth checking.
 - **Device layer**: Review the active-session list on each service and turn on unknown-tracker alerts for AirTags and on Android. If you suspect commercial spyware, [Citizen Lab](https://citizenlab.ca/){target="_blank"} and the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} both provide forensic help. Amnesty's open-source [Mobile Verification Toolkit](https://github.com/mvt-project/mvt){target="_blank"} (MVT) checks a phone backup against known traces of compromise, and takes some technical background to run.
+- **Open-source profiling layer**: Search once for your own name, your usual handle, and your organization. What comes back is the raw material this layer works from. Organizations running public events should also check how much venue and schedule detail is already published.
 
 ## Which measure stops which layer
 
-Read it this way. The two left-hand columns are the ones you are most likely to face, and the first four rows are largely effective there. The rightmost column costs too much to be aimed at most people; treat it as the ceiling on capability rather than as your expected risk.
+Read it this way. The two left-hand columns are the ones you are most likely to face, and the first four rows are largely effective there. The commercial spyware column costs too much to be aimed at most people; treat it as the ceiling on capability rather than as your expected risk. The rightmost column is a different case: it is cheap and still selective, so whether it applies depends on how publicly you operate, and the first four rows do almost nothing against it.
 
 The table covers communication and account measures only. Facial recognition and physical camera networks are not on it, and the equivalent for fraud and account takeover is in [what an ordinary person should actually do](../scenarios/everyday-baseline.md).
 
-| Measure | Platforms & ads | Telecom | State & law enforcement | Commercial spyware |
-|---|---|---|---|---|
-| End-to-end encryption | Message content protected; behavioral signals and linkage still collected | Content protected, records still generated | Content protected, records still obtainable | No protection, decrypted on device |
-| VPN | Substitutes the source IP the platform sees; the account is still you | Your carrier sees only that you connect to a VPN; call records and cell-site data are unaffected | No help against account-level requests | No protection |
-| Tor | Breaks source-IP correlation; once you log in it is still you | Carrier sees only that you use Tor | No help against account-level requests | No protection |
-| Ad ID and permissions off | Reduces cross-app linkage | Not applicable | Not applicable | Not applicable |
-| Account layering | Cuts some linkage | Not applicable | Raises the cost of correlation | No protection |
-| Staying updated | Not applicable | Not applicable | Not applicable | Raises cost; no help against zero-days |
+| Measure | Platforms & ads | Telecom | State & law enforcement | Commercial spyware | Open-source profiling |
+|---|---|---|---|---|---|
+| End-to-end encryption | Message content protected; behavioral signals and linkage still collected | Content protected, records still generated | Content protected, records still obtainable | No protection, decrypted on device | Not applicable; the material is what you published |
+| VPN | Substitutes the source IP the platform sees; the account is still you | Your carrier sees only that you connect to a VPN; call records and cell-site data are unaffected | No help against account-level requests | No protection | Not applicable |
+| Tor | Breaks source-IP correlation; once you log in it is still you | Carrier sees only that you use Tor | No help against account-level requests | No protection | Not applicable |
+| Ad ID and permissions off | Reduces cross-app linkage | Not applicable | Not applicable | Not applicable | Not applicable |
+| Account layering | Cuts some linkage | Not applicable | Raises the cost of correlation | No protection | Raises the cost of linking a public identity to other activity |
+| Staying updated | Not applicable | Not applicable | Not applicable | Raises cost; no help against zero-days | Not applicable |
+| Disclosure timing for public information | Reduces what the platform side can collect | Not applicable | Not applicable | Not applicable | The only measure that works at this layer |
 
 The layer you defend has to match the layer you actually face. The framework for deciding that is in [threat modeling](./threat-model.md).
 
@@ -187,6 +227,8 @@ Both capability and law keep moving, and the facial-recognition legislative trac
 - [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md) — changing tools does not by itself reduce the number of observers
 - [VPN risks and how to choose one](../tools/vpn-guide.md) — what the VPN row in the table above does and does not buy you
 - [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — an operation outside the four layers on this page: open-source profiling whose labor cost has dropped to what a single operator can sustain
+
+[^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} — Anthropic, 10 September 2026. 154 pages, covering abuse cases detected and disrupted between December 2025 and August 2026. Page numbers in this section refer to the report PDF. Attribution and confidence levels are Anthropic's own. Verified 2026-09.
 
 [^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} — The Markup, 8 June 2023. The reporting is based on the audience-segment list of the ad exchange Xandr, drawn from close to a hundred data suppliers. Segment names are quoted as they appear in that list. Verified 2026-08.
 
