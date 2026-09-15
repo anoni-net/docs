@@ -6,7 +6,14 @@ icon: material/link-variant-off
 
 # :material-link-variant-off: URL cleaner
 
-<div id="cleanurl-tool"></div>
+<div id="cleanurl-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/cleanurl.js"></script>
 

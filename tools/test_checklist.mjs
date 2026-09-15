@@ -104,7 +104,11 @@ test('三語系頁面都掛了工具、兩支腳本與 import map，offline_asse
     const page = path.join(DOCS, dir, 'utils', 'checklist.md');
     assert.ok(fs.existsSync(page), `${page} 不存在`);
     const text = fs.readFileSync(page, 'utf8');
-    assert.ok(text.includes('<div id="checklist-tool"></div>'), `${dir} 沒有掛點`);
+    assert.ok(text.includes('<div id="checklist-tool">'), `${dir} 沒有掛點`);
+    assert.ok(
+      /<div id="checklist-tool">\s*<noscript>/.test(text),
+      `${dir} 的容器少了關閉 JavaScript 時的說明`
+    );
     assert.ok(text.includes('<script src="../../js/vault.js"></script>'), `${dir} 沒載 vault.js`);
     assert.ok(text.includes('<script src="../../js/checklist.js"></script>'), `${dir} 沒載 checklist.js`);
     assert.ok(text.includes('<script type="importmap">'), `${dir} 沒有 import map`);

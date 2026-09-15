@@ -83,7 +83,14 @@ No passkey yet? Create one on [Passkey as your key](passkey.md) first, or create
 }
 </script>
 
-<div id="checklist-tool"></div>
+<div id="checklist-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 <script src="../vendor/qrcode-generator.js"></script>
 <script src="../vendor/jsQR.js"></script>
 <script src="../../js/vault.js"></script>
