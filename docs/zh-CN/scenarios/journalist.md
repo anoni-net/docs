@@ -425,3 +425,4 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [出差与研讨会的数字准备](./asia-travel.md)：前往中国大陆或东南亚采访前的逐地审查、SIM 实名与入境查机现况
 - [社群自架服务](../community/tools.md)：anoni.net 提供给公益用途的协作工具入口
+- [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：监控章节把台湾的政治人物与媒体列成监控类目，另有一个案例以维吾尔流亡记者为压制对象，每一段都标了报告页码

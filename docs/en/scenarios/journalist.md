@@ -107,3 +107,4 @@ For the travel side of this, [pre-departure digital safety](./travel-ai-briefing
 - [Threat modeling](../basics/threat-model.md) — a short per-story pass on who the adversary is and what they can reach.
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — keeping a source-contact identity apart from the bylined one, and sustaining that separation between stories.
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if a source or reporter is detained or a device is seized; the first call for Hong Kong readers under the exposure described above.
+- [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — the surveillance chapter lists Taiwanese politicians and media as monitoring categories, and a separate case targets exiled Uyghur journalists, with page numbers throughout.
