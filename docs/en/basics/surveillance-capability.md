@@ -178,7 +178,7 @@ This layer does not compromise devices and does not read end-to-end encrypted co
 
 Being written into a file and being acted on are different things. The summonses and "control" measures in the report were aimed at citizens inside mainland China. For someone outside that jurisdiction, being recorded is usually followed by listing and continued tracking (pp. 93-97).
 
-### Where the boundary is
+### Where the boundary sits
 
 Anthropic sees only what passed through its own models, so equivalent activity elsewhere is out of scope. Attribution and confidence levels are Anthropic's own judgments, and several cases carry a low or medium confidence marker in the report. Page-by-page notes and the report's own limits are in [our summary of it](../blog/posts/2026-anthropic-threat-report-taiwan.md).
 
