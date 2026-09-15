@@ -144,7 +144,7 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 
 `docs/<lang>/changelog/` 底下十二頁追蹤 Tor 家族、OONI、OnionShare 與五種作業系統的版本更新，目標是讓非工程師讀者能依風險自己判斷要不要更新。
 
-動這批頁面之前先讀 [`docs/CHANGELOG_SOURCES.md`](./docs/CHANGELOG_SOURCES.md)，那裡記了各頁的上游在哪、怎麼取，以及七個會踩的坑。最容易誤判的兩個：MSRC 的嚴重度是每個受影響產品各記一筆，直接數會膨脹好幾倍。GrapheneOS 發布說明裡的「List of additional fixed CVEs」是提前修補未來月份的累積清單，不是當月涵蓋範圍。
+動這批頁面之前先讀 [`docs/CHANGELOG_SOURCES.md`](./docs/CHANGELOG_SOURCES.md)，那裡記了各頁的上游在哪、怎麼取，以及八個會踩的坑。最容易誤判的三個：MSRC 的嚴重度是每個受影響產品各記一筆，直接數會膨脹好幾倍。GrapheneOS 發布說明裡的「List of additional fixed CVEs」是提前修補未來月份的累積清單，不是當月涵蓋範圍。Apple 同一輪多條維護線的公告元件同名，修的卻不一定是同一項，歸屬要逐條看 `Impact:`。
 
 急迫程度標籤的判準各頁不同，有的看證據、有的看官方發布形式，那一份也寫明了。
 
