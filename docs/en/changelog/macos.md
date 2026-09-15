@@ -28,11 +28,25 @@ Apple maintains the current release plus the two before it. Security fixes ship 
 
 | Line | Version | Status |
 |---|---|---|
-| Tahoe | 26.x | Current, most complete fixes |
-| Sequoia | 15.x | Previous, security fixes keep pace |
-| Sonoma | 14.x | Two back, receives the fewest fixes |
+| Golden Gate | 27.x | Current, most complete fixes |
+| Tahoe | 26.x | Previous, security fixes keep pace |
+| Sequoia | 15.x | Two back, receives the fewest fixes |
 
-All three shipping the same day is normal, and so is the gap in fix counts. See the 2026-07-27 entry below for the comparison. If your hardware cannot run Tahoe, staying on Sequoia or Sonoma still gets you security fixes, but note that the Sonoma line drops out of support after roughly one more cycle.
+Golden Gate 27 arrived on 14 September 2026 and pushed every line back a step. Sonoma 14.x got no matching release that round, and its last fixes were 14.8.9 on 6 August, so the line looks finished. The next round will confirm it.
+
+All three shipping the same day is normal, and so is the gap in fix counts. See the 2026-07-27 entry below for the comparison. If your hardware cannot run the current line, staying on Tahoe or Sequoia still gets you security fixes.
+
+## macOS Golden Gate 27 (Tahoe 26.7 and Sequoia 15.8 shipped the same day)
+
+> 2026-09-14 · [Golden Gate 27 advisory](https://support.apple.com/en-us/149035){target="_blank"} · [Tahoe 26.7 advisory](https://support.apple.com/en-us/149042){target="_blank"} · [Sequoia 15.8 advisory](https://support.apple.com/en-us/149043){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>The annual major release, Golden Gate 27, arrived alongside updates for both older lines, carrying 210, 153, and 154 CVEs respectively. Apple flags none of them as actively exploited.
+- Bypasses dominate this round, which is exactly the category this page opens by flagging. Golden Gate 27 has 6 Gatekeeper bypasses, in autofs, copyfile, Kernel, System Settings (two), and WebDAV. Each older line has 4: autofs, copyfile, and Kernel in common, with the fourth in CoreServices for Tahoe 26.7 and WebDAV for Sequoia 15.8. On the privacy preferences side, all three lines have one CoreServices bypass, and Golden Gate 27 additionally fixes a TCC issue where an app could modify privacy preferences and an Accounts issue where a malicious app could bypass them.
+- Root escalations number 9 in Golden Gate 27, 7 in Tahoe 26.7, and 6 in Sequoia 15.8. CUPS, Directory Utility, Disk Images, odproxyd, CoreServices, and Kernel appear on all three lines, and Golden Gate 27 adds one in Bluetooth. One more in autofs deserves separate attention and is also on all three lines: an attacker controlling a network directory server can execute arbitrary code with root privileges, so anyone mounting a corporate or campus network share should take this one first.
+- Kernel is the largest group at 33, 27, and 29 fixes. CUPS and SMB carry 8 to 10 each, which are the printing and file sharing services: if you do not use them, turn them off in System Settings and remove that whole surface.
+- Sandbox escapes and sandbox restriction bypasses number 9, 7, and 6 across the three lines. Across the round they land in AppleMobileFileIntegrity, Archive Utility, Automator, iWork, libxpc, and quarantine. Golden Gate 27 has one more in MediaRemote, where a sandboxed app can reach the System Keychain.
+- The three lists are not a simple subset of one another: 4 CVEs in Tahoe 26.7 and 11 in Sequoia 15.8 never appear in the Golden Gate 27 list.
+- The tracking-related fixes overlap with the iOS side. All three lines carry the AuthKit persistent account identifier issue, the NetworkExtension issue where an app can identify what other apps you have installed, and the Symptom Framework issue where an app can determine the user's current location. The App Store identifier issue appears only in Golden Gate 27 and Tahoe 26.7, and the Sandbox Profiles user-fingerprinting issue only in Golden Gate 27. Each is explained in [iOS security updates](./ios.md).
 
 ## macOS Tahoe 26.6.2
 

@@ -15,6 +15,17 @@ icon: simple/torbrowser
 
 Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 跟著改，穩定版的更新會比過去更密。
 
+## Tor Browser 15.0.23
+
+> 2026-09-15 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15023/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>兩個重點修補都打在安全等級上，調到 Safer 的瀏覽器仍然執行得了 WebAssembly。靠安全等級擋掉指令碼與 WebAssembly 的人優先更新。
+- 一個出在 SharedWorker 的身分比對（tor-browser#45296），一個出在缺少 `setHTMLUnsafe` 的攔截點，留下一個永久帶有 WebAssembly 能力的子環境（child realm）（tor-browser#45297）。Safer 等級原本會關掉 WebAssembly，這兩項讓關掉的效果被繞過。
+- 上游在那兩項前面標了 `(H1)`。同樣的標記出現在 15.0.4 修掉的「Safest 模式下經 data URI 執行指令碼」，兩次都是安全等級本身被繞過。
+- Firefox 基底升至 140.16.0esr，並從 Firefox 156 backport 安全修補（tor-browser#45299、tor-browser#45303），Android 版 GeckoView 同步。NoScript 升至 13.6.33.1984。
+- Windows 使用者另有一個簽章問題要知道。簽安裝包用的 DigiCert EV 憑證 9 月 1 日到期，換發還沒完成，全新安裝 15.0.21 與 15.0.22 會跳出 bad signature 的警告。下載頁的 Windows 版本因此暫時停在 15.0.20，靠自動更新把人帶到新版，自動更新用的是另一把金鑰，不受這件事影響。要直接安裝新版的人可以從[發布目錄](https://dist.torproject.org/torbrowser/15.0.23/){target="_blank"}取得，過程中會看到憑證過期的警告。
+- 32 位元 Linux 的提示再次改成版本過期訊息，追蹤項目標的是 15.0 系列的最後一版（tor-browser#44996）。15.0.21 那則引過同一個項目，後來仍然發了 15.0.22 與 15.0.23，哪一版真的收尾要等 16.0 穩定版接手才算數。
+
 ## Tor Browser 15.0.22
 
 > 2026-09-09 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15022/){target="_blank"}

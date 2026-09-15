@@ -28,11 +28,25 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 
 | 线 | 版本号 | 状态 |
 |---|---|---|
-| Tahoe | 26.x | 最新，修补最完整 |
-| Sequoia | 15.x | 前一代，安全修补跟上 |
-| Sonoma | 14.x | 再前一代，收到的修补数量最少 |
+| Golden Gate | 27.x | 最新，修补最完整 |
+| Tahoe | 26.x | 前一代，安全修补跟上 |
+| Sequoia | 15.x | 再前一代，收到的修补数量最少 |
 
-同一天三条线一起发是常态，数量落差很正常，见下面 2026-07-27 那则的比较。硬件太旧升不上 Tahoe 的话，留在 Sequoia 或 Sonoma 仍然收得到安全修补，但要注意 Sonoma 这条线再过一轮就会停止支持。
+2026 年 9 月 14 日 Golden Gate 27 推出，三条线整个往后推一格。Sonoma 14.x 在那一轮没有对应版本，最后一次收到修补是 8 月 6 日的 14.8.9，看起来已经走到终点，下一轮才能确定。
+
+同一天三条线一起发是常态，数量落差很正常，见下面 2026-07-27 那则的比较。硬件太旧升不上最新线的话，留在 Tahoe 或 Sequoia 仍然收得到安全修补。
+
+## macOS Golden Gate 27（同日另有 Tahoe 26.7、Sequoia 15.8）
+
+> 2026-09-14 · [Golden Gate 27 公告](https://support.apple.com/en-us/149035){target="_blank"} · [Tahoe 26.7 公告](https://support.apple.com/en-us/149042){target="_blank"} · [Sequoia 15.8 公告](https://support.apple.com/en-us/149043){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>年度大版本 Golden Gate 27 推出，三条线同日发出，分别补 210、153 与 154 个 CVE。Apple 没有标注任何一项已被实际利用。
+- 绕过类问题是这一轮的主轴，正好是本页开头提醒要留意的那一类。Gatekeeper 的绕过 Golden Gate 27 有 6 个，落在 autofs、copyfile、Kernel、系统设置（两个）与 WebDAV。两条旧线各 4 个，autofs、copyfile 与 Kernel 三项共通，第四项 Tahoe 26.7 在 CoreServices、Sequoia 15.8 在 WebDAV。隐私偏好那一侧，三条线都有一个 CoreServices 的绕过，Golden Gate 27 另外修了 TCC 可被修改隐私偏好与 Accounts 绕过隐私偏好。
+- 取得 root 权限的项目，Golden Gate 27 有 9 个、Tahoe 26.7 有 7 个、Sequoia 15.8 有 6 个。CUPS、Directory Utility、Disk Images、odproxyd、CoreServices 与 Kernel 三条线都有，Golden Gate 27 另外多一个 Bluetooth。autofs 那一个更值得注意，三条线也都有：控制了网络目录服务器的攻击者可以用 root 权限执行任意代码，接公司或学校网络磁盘的人优先处理。
+- Kernel 是数量最大的一组，三条线分别占 33、27 与 29 个。CUPS 与 SMB 各有 8 到 10 个，那是打印与文件共享的服务，平常用不到就在系统设置里关掉，直接少掉一整组暴露面。
+- 沙箱逃逸与沙箱限制绕过，Golden Gate 27 有 9 个、Tahoe 26.7 有 7 个、Sequoia 15.8 有 6 个，整轮出现的组件有 AppleMobileFileIntegrity、Archive Utility、Automator、iWork、libxpc 与 quarantine。Golden Gate 27 另有一个 MediaRemote，沙箱内的应用读得到系统钥匙串。
+- 三份清单不是单纯的包含关系。Tahoe 26.7 有 4 个、Sequoia 15.8 有 11 个没有出现在 Golden Gate 27 的清单里。
+- 跟踪类的修补与 iOS 那一侧重叠。三条线都有的是 AuthKit 的常驻账号标识符、NetworkExtension 可以查出你装了哪些其他应用、Symptom Framework 可以判定用户当前的位置。App Store 的标识符问题只出现在 Golden Gate 27 与 Tahoe 26.7，Sandbox Profiles 的用户指纹识别只出现在 Golden Gate 27。逐项说明写在 [iOS 安全更新](./ios.md)。
 
 ## macOS Tahoe 26.6.2
 

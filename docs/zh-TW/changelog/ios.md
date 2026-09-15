@@ -24,17 +24,32 @@ iPhone 與 iPad 的安全更新整理。Apple 一次更新動輒上百個 CVE，
 
 ## 你的機器走哪一條線
 
-Apple 同一天常常發好幾條更新線，版本號差很多，內容也不一樣。以 2026 年 8 月的狀況來說：
+Apple 同一天常常發好幾條更新線，版本號差很多，內容也不一樣。以 2026 年 9 月 14 日 iOS 27 推出之後的狀況來說：
 
 | 機型 | 目前的更新線 |
 |---|---|
-| iPhone 11 以後、iPad Air 3 以後、iPad 8 以後 | 26.x |
+| iPhone 11 以後、iPad Pro 12.9 吋四代以後、iPad Pro 11 吋二代以後、iPad Air 4 以後、iPad 9 以後、iPad mini 6 以後 | 27.x |
+| iPad Pro 12.9 吋三代、iPad Pro 11 吋一代、iPad Air 3、iPad 8、iPad mini 5 | 26.x，硬體升不上 27 |
 | iPhone XS、XS Max、XR、iPad 7 | 18.x |
 | iPad Pro 12.9 吋二代、iPad Pro 10.5 吋、iPad 6 | 17.x |
 | iPhone 8、8 Plus、X、iPad 5、iPad Pro 9.7 吋、iPad Pro 12.9 吋一代 | 16.x |
 | iPhone 6s、7、SE 一代、iPad Air 2、iPad mini 4、iPod touch 7 | 15.x |
 
+iPhone 11 以後的機型兩條線都收得到，26.7 那一版是給暫時不想升上 27 的人。iPad 這一側的分界比較硬，12.9 吋三代、11 吋一代、Air 3、iPad 8 與 mini 5 最高只到 26.x。
+
 愈舊的線收到的修補愈少也愈慢，下面 2026-04-22 那則有具體例子。完全收不到更新的機型代表已知漏洞不再有人修，處理敏感資料的話該考慮換機。
+
+## iOS 27、iPadOS 27（同日另有 26.7）
+
+> 2026-09-14 · [27 公告](https://support.apple.com/en-us/149034){target="_blank"} · [26.7 公告](https://support.apple.com/en-us/149041){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>年度大版本與舊線的安全更新同日發出，27 補 126 個 CVE、26.7 補 82 個。Apple 沒有標注任何一項已被實際利用。
+- Kernel 是數量最大的一組，27 佔 20 個、26.7 佔 18 個。多數是 app 造成系統異常終止或核心記憶體損毀，兩條線各有一個讓惡意 app 取得 root 權限。AVEVideoEncoder 有一個沙箱內的 app 可以用核心權限執行任意程式碼，那是從沙箱一路打進核心的完整路徑。
+- 追蹤類的修補這次特別多，對在意身分關聯的讀者比 CVE 總數更值得看。27 這一側，App Store、AuthKit 與 CloudKit 各有一個本機 app 讀得到常駐帳號識別碼，Photos Storage 與 Sandbox Profiles 各有一個 app 可以對使用者做指紋辨識。26.7 那一側同一類只有 AuthKit 一個。
+- 兩條線共通的有三項：Power Management 一個 app 可以對裝置做指紋辨識，Symptom Framework 一個惡意程式可以判定使用者目前的位置，NetworkExtension 一個 app 可以查出你裝了哪些其他 app，27 另有 Accessibility 的同類問題。裝了什麼本身就是一組辨識特徵，安裝清單裡有特定的通訊或工具軟體，足以把你縮小到某一群人。
+- 瀏覽器引擎這一側，27 有 3 個 WebKit 加 1 個 WebKit Canvas，26.7 各有 1 個，涵蓋惡意網頁內容洩漏敏感使用者資訊、非預期的行程終止與 Safari 崩潰。26.7 另有 5 個 ImageIO，數量比 27 那一側多。
+- 兩份清單不是單純的包含關係。26.7 的 82 個裡有 7 個沒有出現在 27 的清單，27 多出來的 51 個集中在 CoreUI、Kernel、WebKit、Baseband 與 CloudKit。兩條線都收得到的人裝哪一個都可以，安全上沒有落差。
+- 同日另有 macOS Golden Gate 27、Tahoe 26.7 與 Sequoia 15.8，整理在 [macOS 安全更新](./macos.md)。18.x 線這一輪沒有更新，還在那條線的機型最新仍是 8 月 17 日的 18.7.10。
 
 ## iOS 26.6.2、iPadOS 26.6.2
 

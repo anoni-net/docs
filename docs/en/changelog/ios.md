@@ -24,17 +24,32 @@ If you are likely to be targeted over the long term (journalists, lawyers, human
 
 ## Which release line is your device on
 
-Apple often ships several release lines on the same day, with very different version numbers and different contents. As of August 2026:
+Apple often ships several release lines on the same day, with very different version numbers and different contents. As of 14 September 2026, when iOS 27 arrived:
 
 | Model | Current release line |
 |---|---|
-| iPhone 11 and later, iPad Air 3 and later, iPad 8 and later | 26.x |
+| iPhone 11 and later, iPad Pro 12.9-inch 4th gen and later, iPad Pro 11-inch 2nd gen and later, iPad Air 4 and later, iPad 9 and later, iPad mini 6 and later | 27.x |
+| iPad Pro 12.9-inch 3rd gen, iPad Pro 11-inch 1st gen, iPad Air 3, iPad 8, iPad mini 5 | 26.x, hardware cannot run 27 |
 | iPhone XS, XS Max, XR, iPad 7 | 18.x |
 | iPad Pro 12.9-inch 2nd gen, iPad Pro 10.5-inch, iPad 6 | 17.x |
 | iPhone 8, 8 Plus, X, iPad 5, iPad Pro 9.7-inch, iPad Pro 12.9-inch 1st gen | 16.x |
 | iPhone 6s, 7, SE 1st gen, iPad Air 2, iPad mini 4, iPod touch 7 | 15.x |
 
+Any iPhone 11 or later can take either line, and 26.7 is there for people who would rather not move to 27 yet. The split is harder on the iPad side: the 12.9-inch 3rd gen, 11-inch 1st gen, Air 3, iPad 8, and mini 5 top out at 26.x.
+
 Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a concrete example. A device that no longer receives updates at all means known vulnerabilities go unpatched, so consider replacing it if you handle sensitive material.
+
+## iOS 27, iPadOS 27 (26.7 shipped the same day)
+
+> 2026-09-14 · [27 advisory](https://support.apple.com/en-us/149034){target="_blank"} · [26.7 advisory](https://support.apple.com/en-us/149041){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>The annual major release and a security update for the older line shipped the same day, with 126 CVEs in 27 and 82 in 26.7. Apple flags none of them as actively exploited.
+- Kernel is the largest group, 20 in 27 and 18 in 26.7. Most are an app causing unexpected system termination or corrupting kernel memory, and each line has one that lets a malicious app gain root. AVEVideoEncoder has one where a sandboxed app can execute arbitrary code with kernel privileges, which is a complete path from inside the sandbox into the kernel.
+- The tracking-related fixes are unusually numerous this round and matter more than the CVE total for readers who care about linkability. On the 27 side, App Store, AuthKit, and CloudKit each have one where a local app can read a persistent account identifier, and Photos Storage and Sandbox Profiles each have one where an app can fingerprint the user. On the 26.7 side, AuthKit is the only fix in that category.
+- Three appear on both lines: Power Management, where an app can fingerprint the device; Symptom Framework, where a malicious application can determine the user's current location; and NetworkExtension, where an app can identify what other apps you have installed — 27 has a matching Accessibility issue as well. What you have installed is itself an identifying trait: a particular messaging or tooling app in the list is enough to narrow you down to a much smaller group.
+- On the browser engine side, 27 carries 3 WebKit fixes plus 1 in WebKit Canvas and 26.7 carries 1 of each, covering sensitive information disclosure from malicious web content, unexpected process termination, and a Safari crash. 26.7 also has 5 ImageIO fixes, more than 27 on that component.
+- The two lists are not a simple subset of one another. 7 of the 82 CVEs in 26.7 never appear in the 27 list, and the 51 extra in 27 cluster in CoreUI, Kernel, WebKit, Baseband, and CloudKit. If both lines are available to you, either one is fine; there is no security gap between them.
+- macOS Golden Gate 27, Tahoe 26.7, and Sequoia 15.8 shipped the same day and are covered in [macOS security updates](./macos.md). Nothing shipped for the 18.x line this round, so devices there are still on 18.7.10 from 17 August.
 
 ## iOS 26.6.2, iPadOS 26.6.2
 
