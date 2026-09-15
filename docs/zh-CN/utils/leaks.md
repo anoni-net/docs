@@ -8,7 +8,14 @@ icon: material/eye-outline
 
 下面列出的是网站在你打开页面的那一刻就拿得到的东西，没有问过你，也不需要你同意。任何一个网站都拿得到同样的东西。
 
-<div id="leaks-tool"></div>
+<div id="leaks-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/leaks.js"></script>
 

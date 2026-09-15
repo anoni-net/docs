@@ -15,7 +15,14 @@ offline_assets:
 
 # :material-file-document-multiple-outline: PDF page tidy-up
 
-<div id="pdfpages-tool"></div>
+<div id="pdfpages-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/pdfpages.js"></script>
 

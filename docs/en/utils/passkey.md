@@ -77,7 +77,14 @@ Create a passkey for this site and store it in your password manager or keychain
 }
 </script>
 
-<div id="passkey-tool"></div>
+<div id="passkey-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 <script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
 

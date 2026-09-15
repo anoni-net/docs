@@ -6,7 +6,14 @@ icon: material/animation-play-outline
 
 # :material-animation-play-outline: QR code frame stream
 
-<div id="qr-stream-tool"></div>
+<div id="qr-stream-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../vendor/qrcode-generator.js"></script>
 <script src="../vendor/jsQR.js"></script>

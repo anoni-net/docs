@@ -6,7 +6,14 @@ icon: material/qrcode-scan
 
 # :material-qrcode-scan: QR code reader
 
-<div id="qrread-tool"></div>
+<div id="qrread-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../vendor/jsQR.js"></script>
 <script src="../../js/qrread.js"></script>

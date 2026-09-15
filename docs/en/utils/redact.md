@@ -14,7 +14,14 @@ offline_assets:
 
 # :material-selection-remove: Screenshot redaction
 
-<div id="redact-tool"></div>
+<div id="redact-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/redact.js"></script>
 
