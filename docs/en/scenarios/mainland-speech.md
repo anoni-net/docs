@@ -148,6 +148,7 @@ Submitting material to these projects usually preserves it more reliably than re
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — what changing accounts does and does not cover
 - [How platforms collect your data](../basics/platform-tracking.md) — the platform-side collection and behavioral signals underneath all of this
 - [Threat modeling](../basics/threat-model.md) — the adversary and the cost you can absorb, per action
+- [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — a worked example of the same apparatus using AI to score, reframe, and package public speech into briefings written for officials
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} — US Library of Congress, Global Legal Monitor, July 2025. Translated measures at [China Law Translate](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"}. Verified 2026-08.
 [^one-app]: [One App, Two Systems](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"} — The Citizen Lab, on keyword filtering being enabled only for mainland-registered accounts and persisting after relinking to an international number.

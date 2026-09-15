@@ -138,6 +138,7 @@ AI terms and settings change quickly. Verified 2026-08. The mechanisms and the q
 - [How platforms collect your data](../basics/platform-tracking.md) — the same "where does this actually go" question, applied to social platforms
 - [Threat modeling](../basics/threat-model.md) — decide the adversary before deciding the tier
 - [Journalists and source protection](../scenarios/journalist.md) — why source material is the clearest case of data you cannot consent to share
+- [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — where user data actually leaked from third-party model routing services, and what stolen API keys are worth to the people who take them
 
 [^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} — China Law Translate. In force 15 August 2023, issued by the CAC with six other agencies; covers identity verification, retention of input and output records, and security assessment plus algorithm filing for services with public-opinion attributes. Verified 2026-08.
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} — OpenAI, on the consumer/business distinction (ChatGPT Team, Enterprise, and the API excluded by default) and where the data controls sit. Verified 2026-08.

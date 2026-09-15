@@ -395,3 +395,4 @@ fixer、翻譯、司機、幫忙介紹受訪者的朋友，法律風險不比受
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：公開 Wi-Fi 採訪、傳稿時的連線層防護與服務選擇
 - [出差與研討會的數位準備](./asia-travel.md)：前往中國大陸或東南亞採訪前的逐地審查、SIM 實名與入境查機現況
 - [社群自架服務](../community/tools.md)：anoni.net 提供給公益用途的協作工具入口
+- [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：監控章節把台灣的政治人物與媒體列成監控類目，另有一個案例以維吾爾流亡記者為壓制對象，每一段都標了報告頁碼
