@@ -18,6 +18,13 @@ icon: material/shield-key-outline
 
 三種都在 Tor Browser 的連線設定裡，不必另外安裝。橋接位址可以從 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自動取得。
 
+## WebTunnel 0.0.7
+
+> 2026-09-15 · [專案頁](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
+
+- 只影響自架 WebTunnel 橋接的人，一般使用者不受影響。0.0.6 以來只有三個提交，都落在打包與建置：deb 的建置與上傳流程調整，容器映像檔加上 arm64 架構，用容器架橋接的人可以在 arm64 主機上直接取得映像檔。
+- 這一版沒有安全修補，偽裝手法也沒有變動。WebTunnel 沒有維護獨立的 changelog，條目是從版本標籤與提交訊息整理的，細節比 Snowflake 與 lyrebird 少。
+
 ## WebTunnel 0.0.6
 
 > 2026-07-23 · [專案頁](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
