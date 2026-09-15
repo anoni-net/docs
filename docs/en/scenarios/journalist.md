@@ -75,6 +75,16 @@ Use a different channel per source, keep separate code-name schemes with the map
 
 Publication is often when source risk *rises*, because the subject organization starts an internal investigation and reviews who had access. Before the story runs, remind the source about likely access-log reviews and office monitoring, and agree on a quiet period with no contact. On your side, weigh keeping records (a defense against litigation) against destroying the link to the source, set disappearing messages on the relevant threads, and consider reimaging a reporting laptop after a high-sensitivity story. The public, citable evidence behind the story should be preserved; the private back-and-forth with the source should be cleared as early as it safely can be.
 
+### When you are the target
+
+Everything above protects the source. This subsection is about the reporter as the target.
+
+Anthropic's September 2026 abuse report documents two patterns that land directly on journalists. One is profiling and counter-dossiers: an operation linked to the UAE researched and profiled 18 Members of the European Parliament and prominent journalists, and compiled a counter-dossier on a UN special rapporteur who had criticized the UAE's role in Sudan (report p. 78). The other is account cloning: an operation tied to the Iranian opposition had a shared AI agent impersonate a real activist's Telegram account and hold live conversations in Persian with that person's contacts, who as far as the report's authors could tell did not know they were talking to an AI-assisted account (p. 70). Page-by-page notes are in [our summary of the report](../blog/posts/2026-anthropic-threat-report-taiwan.md).
+
+What protects you against the second pattern is how the people around you verify. That has to be arranged in advance: agree on a verification method with regular sources, editors, and colleagues, whether a shared phrase or a callback on a different channel; announce a change of channel on the old channel rather than simply appearing on the new one; and stop to verify when someone's tone, requests, or urgency shifts, particularly a request for new files, a push to move platforms, or pressure to answer immediately. Search your own name, handle, and outlet once a quarter, including account search on each platform. If you find a clone, tell your regular contacts before you report it to the platform, and screenshot it first.
+
+Cross-border investigations often run on private group chats, and the first step of the commercial surveillance service described in the same report is a fake account joining one and harvesting the member list (pp. 82-85). Membership verification belongs in the routine: know who vouched for each member, announce who invited a new one, review the list each quarter, and keep code-name mappings and full contact lists out of the group.
+
 ## The regional angle that changes the advice
 
 The general lifecycle above holds everywhere. What shifts in this region is the *consequence* of exposure and the *reach* of the adversary.

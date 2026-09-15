@@ -118,6 +118,34 @@ DeepSeek、豆包、Kimi、通义等在境内提供的生成式 AI 服务，受�
 
 处理的方式落在设定上。第一步是先去看已经装了什么：浏览器的扩展清单、编辑器的插件清单、以及账号授权过的第三方应用。多数浏览器 AI 外挂可以把网站权限从「所有网站」改成「点击时才启用」，敏感的项目与网域个别停用，开会前则先问过在场的人。组织盘点时，这类工具比员工手动贴上更值得优先处理。
 
+## AI 的访问凭证本身是攻击目标
+
+前面几节处理的是你送出去的内容。另一个方向是凭证。API 密钥与登录后的 session token 已经是犯罪经济里的商品。
+
+2026 年 9 月 Anthropic 的滥用检测报告第 28 到 30 页写，被入侵取得的 AI 密钥、session token 与设备，已经成为多个犯罪集团的唯一目标。取得凭证的人一次得到三样东西，被窃的密钥在既有市场上有转售价值，攻击的运算量可以挂在别人的账单上执行，活动会被归咎到凭证的合法拥有者[^anthropic2026]。
+
+### 折扣代理商
+
+报告第 28 到 29 页描述一种管道。行动者架设网站，宣称自己是串接多家模型的中介服务，提供前沿模型的折扣访问。其中一个案例卖的是便宜的 Claude 访问，报告的原话是那既不便宜也不是 Claude。客户的流量被静默转送到另一个模型，同时代理商的工具在客户端装上凭证窃取程序，偷走账号凭证再转卖给其他代理商。
+
+这些窃取程序经常冒充热门的 AI 工具，Claude Code 是报告点名的其中一个。密钥被识别为外泄而重设之后，窃取程序会继续盯着设备上出现的新 session。
+
+判断方式很单纯。要求把流量与凭证经由不明中介转送的折扣，代价是你的数据与系统。AI 访问只透过授权管道购买，客户端程序只从官方域名下载。
+
+### 密钥是从哪里外泄的
+
+报告第 30 页写，假代理商手上被窃的访问权，最常见的来源是正当客户自己不慎暴露的凭证，包含 GitHub、移动应用的安装包、Docker 容器、网站与聊天机器人。同一份报告第 12 到 14 页记录，有集团建了一条管线，从多个应用商店批次下载 180 万个 Android 安装包，反编译之后扫硬编码的密钥，验证过的结果即时送进分类好的频道。
+
+- 定期扫自家的 repo、Docker image 与移动应用安装包，确认没有硬编码的密钥
+- 密钥给最小权限，定期轮替，设用量告警。异常用量通常是最早看得到的信号
+- 用对待正式环境凭证的态度对待 AI 密钥
+
+### 自架的代理与沙盒也是攻击面
+
+报告第 29 页提到，有行动者入侵 AI 服务自架的 LiteLLM，用 prompt injection 把云端容器环境里的正式 API 密钥抽出来。另一个案例对某家厂商的自动化评测沙盒注入恶意指令，让沙盒交出它持有的多家供应商正式密钥。
+
+自己在 AI 周边建起来的整合，代理、沙盒与自动化流程，都要算进攻击面。内部工具这个名义不构成放宽凭证管理的理由。
+
 ## 本地模型
 
 在自己的机器上执行模型，内容不离开装置，是敏感工作的可行选项。取舍很清楚：
@@ -166,6 +194,7 @@ AI 服务的条款与设定界面变动很快，本页的查证日是 2026 年 8
 - [威胁模型如何建立](../basics/threat-model.md)：先判断对手是谁，再决定要用哪一种 AI 服务
 - [社群平台怎么收集你的数据](../basics/platform-tracking.md)：同一套「这些数据流向谁」的问法，用在社群平台上
 
+[^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日，全文 154 页。本节的页码对应该报告的 PDF 全文。站上另有[逐段的整理](../blog/posts/2026-anthropic-threat-report-taiwan.md)。查证日 2026-09。
 [^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} - China Law Translate 的法规英译。2023 年 8 月 15 日施行，网信办会同六部门发布，含实名验证、输入与输出记录留存、具舆论属性服务的安全评估与算法备案。查证日 2026-08。
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} - OpenAI。说明消费者服务与商业服务（ChatGPT Team、Enterprise、API）在训练使用上的差别，以及数据控制设定的位置。查证日 2026-08。
 [^anthropic]: [Anthropic Privacy Center](https://privacy.anthropic.com/){target="_blank"} - Anthropic。商业服务不使用输入与输出训练模型，消费者服务由使用者选择。选择提供后，去识别化内容在训练管线中最长保留五年。查证日 2026-08。
