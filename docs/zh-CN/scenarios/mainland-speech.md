@@ -178,6 +178,7 @@ Citizen Lab 对微信的一系列实证研究拆解了其中几个机制，有�
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：分层的设定与长期维持，以及换账号挡不掉的部分
 - [社群平台怎么收集你的数据](../basics/platform-tracking.md)：平台侧的数据收集与行为讯号
 - [威胁模型如何建立](../basics/threat-model.md)：每次行动前先盘点对手与能承受的代价
+- [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：同一套体系用 AI 产出舆情简报的实例，公开发言被评分、改写，再送进呈给官员的文件
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} - 美国国会图书馆 Global Legal Monitor，2025 年 7 月。法规英译见 [Measures on the Management of the National Online Identity Authentication Public Service](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"} - China Law Translate。查证日 2026-08。
 [^one-app]: [One App, Two Systems: How WeChat uses one censorship policy in China and another internationally](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"} - The Citizen Lab。关键词过滤只对中国大陆手机号注册的账号启用，且改绑国际号码后仍持续。

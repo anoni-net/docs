@@ -185,6 +185,7 @@ iPhone 的锁定模式与 Android 的进阶保护模式会关掉一批常被利�
 - [威胁模型如何建立](./threat-model.md)：把上面的能力边界换算成你自己的判断
 - [Metadata 是什么，为什么重要](./metadata.md)：为什么通联记录常常比内容更有价值
 - [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：换工具不等于减少观察者
+- [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：本页四层之外的一种作业，材料全来自公开来源的情报建档，人力成本已降到单一操作者可维持
 
 [^markup]: [From "Heavy Purchasers" of Pregnancy Tests to the Depression-Prone: We Found 650,000 Ways Advertisers Label You](https://themarkup.org/privacy/2023/06/08/from-heavy-purchasers-of-pregnancy-tests-to-the-depression-prone-we-found-650000-ways-advertisers-label-you){target="_blank"} - The Markup，2023 年 6 月 8 日。报导依据的是广告交易平台 Xandr 的受众分类清单，数据供应者近百家。文中引用的分类名称为该清单原文的中译。查证日期 2026-08。
 

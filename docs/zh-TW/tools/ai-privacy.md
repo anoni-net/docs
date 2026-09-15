@@ -165,6 +165,7 @@ AI 服務的條款與設定介面變動很快，本頁的查證日是 2026 年 8
 - [端對端加密如何運作](../advanced/e2ee.md)：為什麼「有加密」不代表服務端看不到內容
 - [威脅模型如何建立](../basics/threat-model.md)：先判斷對手是誰，再決定要用哪一種 AI 服務
 - [社群平台怎麼收集你的資料](../basics/platform-tracking.md)：同一套「這些資料流向誰」的問法，用在社群平台上
+- [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：使用者資料從第三方模型路由服務外流的實際案例，以及被竊的 API 金鑰在犯罪經濟裡的用途
 
 [^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} - China Law Translate 的法規英譯。2023 年 8 月 15 日施行，網信辦會同六部門發布，含實名驗證、輸入與輸出紀錄留存、具輿論屬性服務的安全評估與演算法備案。查證日 2026-08。
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} - OpenAI。說明消費者服務與商業服務（ChatGPT Team、Enterprise、API）在訓練使用上的差別，以及資料控制設定的位置。查證日 2026-08。
