@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 440" width="940" height="440" role="img" aria-labelledby="title desc">
 <title id="title">動員前、行動現場、行動之後，三個階段各有各的準備</title>
-<desc id="desc">三個並排的階段，用箭頭串起來，底下有一條橫幅代表貫穿全程的跨組織協作。動員前是風險最低、時間最多的階段，要做的是通訊群組的設計與隔離、雲端文件先撤到 Cryptpad、密碼管理器與帳號清單、個人帳號的隱私審計，以及一次性手機的取捨。行動現場要做的是出門前的裝置鎖定設定、現場拍照與錄影的判斷、選擇 Signal 或離線 mesh，以及緊急聯絡人與失聯流程。行動之後要處理的是刪除證據前的合規考量、媒體曝光時的身分管理，以及取得法律支援的管道。底下的橫幅是跨組織協作，貫穿三個階段，包含資訊最小化原則、共筆與檔案交換工具的選擇、群組命名與訊息政策。</desc>
+<desc id="desc">三個並排的階段，用箭頭串起來，底下有一條橫幅代表貫穿全程的跨組織協作。動員前是風險最低、時間最多的階段，要做的是通訊群組的設計與隔離、雲端文件先撤到 Cryptpad、密碼管理器與帳號清單、個人帳號的隱私審計、一次性手機的取捨，以及活動公開資訊的揭露節奏。行動現場要做的是出門前的裝置鎖定設定、現場拍照與錄影的判斷、選擇 Signal 或離線 mesh，以及緊急聯絡人與失聯流程。行動之後要處理的是刪除證據前的合規考量、媒體曝光時的身分管理，以及取得法律支援的管道。底下的橫幅是跨組織協作，貫穿三個階段，包含資訊最小化原則、共筆與檔案交換工具的選擇、群組命名與訊息政策。</desc>
 <style>
   /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
      取不到頁面的 CSS 變數，只能寫死 hex。深色模式在檔案內自己處理，站上 palette
@@ -61,10 +61,11 @@
 <text class="t-main bd" x="42" y="136">密碼管理器與帳號清單</text>
 <text class="t-main bd" x="42" y="153">個人帳號的隱私審計</text>
 <text class="t-main bd" x="42" y="170">一次性手機的取捨</text>
-<text class="t-mute sm" x="42" y="195">為什麼在這裡</text>
-<text class="t-main bd" x="42" y="213">多數人卡關的原因，</text>
-<text class="t-main bd" x="42" y="230">是把 30 分鐘能做完的事</text>
-<text class="t-main bd" x="42" y="247">拖到當天才想起來</text>
+<text class="t-main bd" x="42" y="187">活動公開資訊的揭露節奏</text>
+<text class="t-mute sm" x="42" y="212">為什麼在這裡</text>
+<text class="t-main bd" x="42" y="230">多數人卡關的原因，</text>
+<text class="t-main bd" x="42" y="247">是把 30 分鐘能做完的事</text>
+<text class="t-main bd" x="42" y="264">拖到當天才想起來</text>
 <rect class="card-w1" x="338" y="28" width="264" height="250" rx="8"/>
 <text class="t-main h2" x="352" y="52">行動現場</text>
 <text class="t-mute sm" x="352" y="84">來不及做新設定的階段</text>

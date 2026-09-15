@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" role="img" aria-labelledby="title desc">
-<title id="title">監控四層的成本與涵蓋範圍剛好相反</title>
-<desc id="desc">四組上下對照的長條，由左到右是平台與廣告、電信、國家與執法、商用間諜軟體。向上的長條代表這一層涵蓋多少人，由左到右越來越短，平台與廣告涵蓋所有人，商用間諜軟體的名單很短。向下的長條代表用在一個人身上的成本，由左到右越來越長，平台與廣告幾乎零成本，商用間諜軟體一次授權數萬美元。兩個指標剛好相反，所以做得到不等於會用在你身上。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620" role="img" aria-labelledby="title desc">
+<title id="title">前四層的成本與涵蓋範圍剛好相反，第五層不在那條線上</title>
+<desc id="desc">四組上下對照的長條，由左到右是平台與廣告、電信、國家與執法、商用間諜軟體。向上的長條代表這一層涵蓋多少人，由左到右越來越短，平台與廣告涵蓋所有人，商用間諜軟體的名單很短。向下的長條代表用在一個人身上的成本，由左到右越來越長，平台與廣告幾乎零成本，商用間諜軟體一次授權數萬美元。兩個指標剛好相反，所以做得到不等於會用在你身上。底下另有一條橫幅代表第五層，公開來源的情報建檔。材料是你自己公開的發言與活動資訊，成本落在最左邊那一欄的量級，目標的挑選方式接近最右邊，前四層的規律在這一層不成立。</desc>
 <style>
   /* 配色對齊 community/brand-assets.md 的色票。這個檔案是被 img 標籤引用的獨立 SVG，
      取不到頁面的 CSS 變數，只能寫死 hex。橙色給涵蓋範圍，左邊那兩欄涵蓋所有人，
@@ -19,6 +19,7 @@
   .val-reach { fill: #bf5700; }
   .val-cost { fill: #006d99; }
   .foot { fill: #546e7a; font-size: 13px; }
+  .band { fill: #eceff1; stroke: #cfd8dc; stroke-width: 1.2; }
 
   @media (prefers-color-scheme: dark) {
     .reach { fill: #ff8c1a; }
@@ -33,6 +34,7 @@
     .val-reach { fill: #ffb74d; }
     .val-cost { fill: #4dbfff; }
     .foot { fill: #b0bec5; }
+    .band { fill: #23292e; stroke: #4b565e; }
   }
 </style>
 
@@ -72,5 +74,10 @@
 <text class="layer" x="892" y="462" text-anchor="middle">商用間諜軟體</text>
 <text class="note"  x="892" y="482" text-anchor="middle">授權昂貴，目標清單很短</text>
 
-<text class="foot" x="30" y="518">做得到不等於會用在你身上。左邊兩欄的成本低到涵蓋所有人，右邊那欄是能力的上限，不是多數人的預期風險。</text>
+<rect class="band" x="195" y="500" width="780" height="72" rx="8"/>
+<text class="layer" x="213" y="526">公開來源的情報建檔不在這條規律上</text>
+<text class="note"  x="213" y="548">材料是你自己公開的發言與活動資訊，成本落在最左邊那一欄的量級，目標卻像最右邊那樣挑過。</text>
+<text class="note"  x="213" y="566">一名操作者配一套 AI 流程就維持得住，端對端加密與 VPN 對這一層沒有作用。</text>
+
+<text class="foot" x="30" y="598">做得到不等於會用在你身上。左邊兩欄的成本低到涵蓋所有人，右邊那欄是能力的上限，不是多數人的預期風險。</text>
 </svg>

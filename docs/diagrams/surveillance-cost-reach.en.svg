@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" role="img" aria-labelledby="title desc">
-<title id="title">Cost and reach run in opposite directions across the four layers</title>
-<desc id="desc">Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people that layer reaches, and it gets shorter to the right: platforms and ads reach everyone, while commercial spyware works from a short list. The downward bar is the cost of using it on one person, and it gets longer to the right: platforms and ads cost almost nothing, while a commercial spyware licence runs to tens of thousands of dollars. The two measures run in opposite directions, which is why capability is not the same as being used on you.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" role="img" aria-labelledby="title desc">
+<title id="title">Cost and reach run in opposite directions across the first four layers, and the fifth is off that line</title>
+<desc id="desc">Four paired bars, left to right: platforms and ads, telecoms, state and law enforcement, and commercial spyware. The upward bar is how many people that layer reaches, and it gets shorter to the right: platforms and ads reach everyone, while commercial spyware works from a short list. The downward bar is the cost of using it on one person, and it gets longer to the right: platforms and ads cost almost nothing, while a commercial spyware licence runs to tens of thousands of dollars. The two measures run in opposite directions, which is why capability is not the same as being used on you. A band underneath carries the fifth layer, open-source intelligence profiling: the material is your own public speech and event information, the cost sits at the level of the leftmost column, and the target selection resembles the rightmost, so the pattern of the first four does not hold there.</desc>
 <style>
   /* Colours follow the palette in community/brand-assets.md. This file is a standalone
      SVG pulled in by an img tag, so it cannot reach the page CSS variables and the hex
@@ -20,6 +20,7 @@
   .val-reach { fill: #bf5700; }
   .val-cost { fill: #006d99; }
   .foot { fill: #546e7a; font-size: 13px; }
+  .band { fill: #eceff1; stroke: #cfd8dc; stroke-width: 1.2; }
 
   @media (prefers-color-scheme: dark) {
     .reach { fill: #ff8c1a; }
@@ -34,6 +35,7 @@
     .val-reach { fill: #ffb74d; }
     .val-cost { fill: #4dbfff; }
     .foot { fill: #b0bec5; }
+    .band { fill: #23292e; stroke: #4b565e; }
   }
 </style>
 
@@ -73,6 +75,11 @@
 <text class="layer" x="892" y="462" text-anchor="middle">Commercial spyware</text>
 <text class="note"  x="892" y="482" text-anchor="middle">Costly licence, short target list</text>
 
-<text class="foot" x="30" y="502">Capability is not the same as being used on you. The two left columns are cheap enough to cover everyone.</text>
-<text class="foot" x="30" y="524">The right-hand column is the ceiling of what is possible, not what most people should expect.</text>
+<rect class="band" x="195" y="500" width="780" height="72" rx="8"/>
+<text class="layer" x="213" y="526">Open-source profiling does not follow that pattern</text>
+<text class="note"  x="213" y="548">Priced like the leftmost column, targeted like the rightmost, with one operator and an AI workflow.</text>
+<text class="note"  x="213" y="566">The material is your own public speech and event information, so encryption and VPNs do nothing here.</text>
+
+<text class="foot" x="30" y="598">Capability is not the same as being used on you. The two left columns are cheap enough to cover everyone.</text>
+<text class="foot" x="30" y="620">The right-hand column is the ceiling of what is possible, not what most people should expect.</text>
 </svg>

@@ -38,6 +38,8 @@ That top left box is the one people skip. Reviewing a security plan usually mean
 
 The reason this matters on a Sinophone Asia-Pacific site: the adversary in question 2 changes shape across jurisdictions, and so does the cost in question 4. The same action, using a pseudonymous account, carrying a phone across a border, reaching a blocked service, carries very different consequences in Taipei, Hong Kong, Kuala Lumpur, or across the Myanmar border. A threat model built for one jurisdiction does not transfer unchanged to the next. When you move across the region, re-run the five questions for where you are now.
 
+Three factors pull the answer to question two upward regardless of jurisdiction: how publicly you speak, whether you work with exile communities or cross-border advocacy networks, and whether you or a close collaborator has family still living in mainland China or Hong Kong. All three appear as selection criteria in the September 2026 Anthropic abuse report, summarized with page numbers in [our notes on it](../blog/posts/2026-anthropic-threat-report-taiwan.md), and the capability limits of that layer are in [what surveillance can actually do](./surveillance-capability.md).
+
 For the vocabulary the five questions assume, see [anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md).
 
 ## Where to go from here
