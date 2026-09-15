@@ -175,6 +175,34 @@ Installation steps, what ends up on the device, and how to pick what to keep are
 - Warn key contacts to expect social engineering attempts
 - Further reading: [Taiwan's 2025 data protection overhaul](../regional/taiwan-pdpa-2025.md)
 
+## Approaches, suspected profiling, and pressure on your family
+
+You have reason to think you are on a list held by a foreign agency, or someone has approached your family or a collaborator. Three situations, three different channels.
+
+### Someone has actually approached you
+
+A request for membership lists, internal information, or an introduction, or an offer of payment, is a concrete act and can be reported.
+
+- **Taiwan's Ministry of Justice Investigation Bureau tip line**: `02-2917-7777`, toll-free `0800-007-007` within Taiwan, plus an online form. National security is within its remit
+- Before you call, write down the time, the place, what was said, and which channel was used
+- Screenshot the messages and the account details first, and do not rush to delete the conversation
+
+### A family member or partner is detained or missing in mainland China
+
+- **Straits Exchange Foundation cross-strait emergency line**: `02-2533-9995`, 24 hours year-round, for personal-safety incidents in mainland China including detention, disappearance, serious illness, and serious injury. From the mainland, dial `+886-2-2533-9995`
+- **SEF legal service line**: `02-2533-5995`
+
+Both lines are Taiwanese channels for Taiwanese nationals. Hong Kong and Macau sit under a different legal framework; see [cross-border travel and device searches](../scenarios/asia-travel.md).
+
+### You suspect a file exists, with no approach to point to
+
+As of September 2026, Taiwan has no office that takes this. The Investigation Bureau's channel needs a specific act to report, and the SEF handles personal-safety incidents that occur in mainland China. Rather than wait for a counterpart to appear, do these.
+
+- **Keep a record**: Log unusual approaches, messages, and account activity with timestamps and screenshots. When you do need help, that record is what you have to show
+- **Take digital security incidents to the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"}**: account compromise, a suspicious device, or a risk assessment for your organization are all in scope, 24 hours a day, with a stated two-hour response. Check the current language list on their page
+- **Human rights defenders can use [Front Line Defenders](https://www.frontlinedefenders.org/en/emergency-contact){target="_blank"}**: an encrypted contact form for defenders at risk
+- **Separate being recorded from being acted on**: being written into a file is usually followed by listing and continued tracking, and what actually happens depends more on whether you enter that jurisdiction, so start from your own travel plans. For what this layer can and cannot do, see [what surveillance can actually do](../basics/surveillance-capability.md)
+
 ## Travelling or working across borders
 
 - **Access Now Digital Security Helpline**: [accessnow.org/help](https://www.accessnow.org/help/){target="_blank"}, digital security support for journalists, human rights defenders, and activists, in multiple languages, from anywhere
