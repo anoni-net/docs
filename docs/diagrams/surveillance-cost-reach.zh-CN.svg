@@ -58,7 +58,7 @@
 <rect class="reach-faint" x="605" y="202" width="165" height="43" rx="5"/>
 <text class="val val-reach" x="687" y="189" text-anchor="middle">特定对象</text>
 <rect class="cost" x="605" y="255" width="165" height="100" rx="5"/>
-<text class="val val-cost" x="687" y="372" text-anchor="middle">要走令状</text>
+<text class="val val-cost" x="687" y="372" text-anchor="middle">要法院核准</text>
 
 <rect class="reach-faint" x="810" y="231" width="165" height="14" rx="5"/>
 <text class="val val-reach" x="892" y="218" text-anchor="middle">名单很短</text>
