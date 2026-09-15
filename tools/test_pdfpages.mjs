@@ -428,7 +428,11 @@ test('三個語系的頁面都存在，en 與 zh-CN 的 js 是 symlink', () => {
     const page = path.join(DOCS, lang, 'utils', 'pdf-pages.md');
     assert.ok(fs.existsSync(page), `${lang} 缺 utils/pdf-pages.md`);
     const text = fs.readFileSync(page, 'utf8');
-    assert.ok(text.includes('<div id="pdfpages-tool"></div>'), `${lang} 的頁面沒有容器`);
+    assert.ok(text.includes('<div id="pdfpages-tool">'), `${lang} 的頁面沒有容器`);
+    assert.ok(
+      /<div id="pdfpages-tool">\s*<noscript>/.test(text),
+      `${lang} 的容器少了關閉 JavaScript 時的說明`
+    );
     assert.ok(text.includes('js/pdfpages.js'), `${lang} 的頁面沒有載入 pdfpages.js`);
     // pdf-lib 是動態載入的，頁面裡沒有 script 標籤，離線副本要靠 offline_assets
     assert.ok(

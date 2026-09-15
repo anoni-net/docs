@@ -254,7 +254,11 @@ test('三語系的 utils/passkey.md：import map 跟 age.md 相同、offline_ass
     assert.equal(map(page), map(agePage), `${lang} 的 import map 跟 age.md 不同`);
     const listed = [...frontmatter(page).matchAll(/^\s*- (utils\/[^\s]+)$/gm)].map((m) => m[1]);
     for (const f of vendorJs) assert.ok(listed.includes(f), `${lang} 的 offline_assets 少了 ${f}`);
-    assert.ok(page.includes('<div id="passkey-tool"></div>'), `${lang} 沒有容器`);
+    assert.ok(page.includes('<div id="passkey-tool">'), `${lang} 沒有容器`);
+    assert.ok(
+      /<div id="passkey-tool">\s*<noscript>/.test(page),
+      `${lang} 的容器少了關閉 JavaScript 時的說明`
+    );
     assert.ok(page.includes('<script src="../../js/passkey.js"></script>'), `${lang} 沒有載入 passkey.js`);
     assert.ok(/what-is-passkey\.md/.test(page), `${lang} 沒有連到介紹頁`);
     assert.ok(fs.existsSync(path.join(DOCS, lang, 'tools', 'what-is-passkey.md')), `${lang} 缺介紹頁`);
