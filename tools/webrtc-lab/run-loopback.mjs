@@ -69,7 +69,11 @@ async function until(fn, label, timeout = 20000) {
 
 const a = await openTab();
 const b = await openTab();
-await wait(1200);
+// 固定等一段時間不可靠。頁面多載了 QR 的兩支函式庫之後，1.2 秒常常還沒跑到
+// webrtc-lab.js，改成等把手真的出現。
+const ready = "typeof __lab === 'object' && document.readyState === 'complete'";
+await until(() => a.evaluate(ready), "發起方頁面載入");
+await until(() => b.evaluate(ready), "回應方頁面載入");
 
 await a.evaluate("__lab.offer()");
 const offer = await until(() => a.evaluate("__lab.localSdp()"), "發起方產生描述");
