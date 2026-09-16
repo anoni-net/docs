@@ -53,6 +53,8 @@ Tor Browser 把 WebRTC 整个关掉，因为它会泄漏你真正的 IP。那个
 
 ## 测完请回报
 
-按「导出记录」存下 JSON，贴到 [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}，顺便写上是哪一种网络、哪两种设备与浏览器。
+传之前先在第五区那一栏填上这次的环境，例如「自架热点，Mac Chrome 对 iPhone Safari」。那一行会跟着每一笔记录一起导出，之后整理结果时才对得起来。
+
+按「导出记录」存下 JSON，贴到 [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}。两台设备各导出一份，收送两侧的耗时才都有。
 
 失败的结果一样有用。判准之一就是「失败要多快说得出来」，卡在转圈三分钟的体验跟直接说不支持，对现场的人差别很大。

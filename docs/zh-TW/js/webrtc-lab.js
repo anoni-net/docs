@@ -85,8 +85,13 @@
       iceGathering: "候選蒐集",
       channel: "資料通道",
       channelIdle: "尚未建立",
-      handshake: "握手耗時",
+      handshake: "握手耗時（含人工）",
+      negotiate: "協定耗時",
+      handover: "描述交換（人工）",
       handshakeIdle: "未完成",
+      envLabel: "這次的環境",
+      envPlaceholder: "例：自架熱點，Mac Chrome 對 iPhone Safari",
+      flushing: "等送出真的完成",
       pair: "選中的候選",
       pairIdle: "尚未選定",
       direction: "方向",
@@ -148,8 +153,13 @@
       iceGathering: "候选搜集",
       channel: "数据通道",
       channelIdle: "尚未建立",
-      handshake: "握手耗时",
+      handshake: "握手耗时（含人工）",
+      negotiate: "协议耗时",
+      handover: "描述交换（人工）",
       handshakeIdle: "未完成",
+      envLabel: "这次的环境",
+      envPlaceholder: "例：自架热点，Mac Chrome 对 iPhone Safari",
+      flushing: "等送出真的完成",
       pair: "选中的候选",
       pairIdle: "尚未选定",
       direction: "方向",
@@ -211,8 +221,13 @@
       iceGathering: "Candidate gathering",
       channel: "Data channel",
       channelIdle: "Not created",
-      handshake: "Handshake time",
+      handshake: "Handshake (incl. by hand)",
+      negotiate: "Negotiation",
+      handover: "Handover (by hand)",
       handshakeIdle: "Not finished",
+      envLabel: "This run",
+      envPlaceholder: "e.g. own hotspot, Mac Chrome to iPhone Safari",
+      flushing: "Waiting for the send to finish",
       pair: "Selected candidates",
       pairIdle: "None yet",
       direction: "Direction",
@@ -265,6 +280,7 @@
       word-break: break-all;
     }
     #webrtc-lab .md-button { margin: 0.2rem 0.4rem 0.2rem 0; padding: 0.3rem 0.8rem; }
+    #webrtc-lab .wl-env { box-sizing: border-box; font-size: 0.75rem; margin: 0 0 0.4rem; padding: 0.3rem; width: 100%; }
   `;
 
   function el(tag, className, text) {
@@ -337,6 +353,14 @@
 
   const sendStep = step(t.transferTitle);
   sendStep.appendChild(el("p", "wl-hint", t.transferHint));
+  // 哪一種網路、哪兩台裝置，只有測的人知道，而測試矩陣要靠這一欄才填得起來。
+  // 寫進 log 與匯出的檔案，回報時不必另外在 issue 補一段描述。
+  const envBox = el("input");
+  envBox.type = "text";
+  envBox.className = "wl-env";
+  envBox.placeholder = t.envPlaceholder;
+  envBox.setAttribute("aria-label", t.envLabel);
+  sendStep.appendChild(envBox);
   const sizeBox = el("select");
   [
     ["102400", "100 KB"],
@@ -375,6 +399,7 @@
   let channel = null;
   let role = null;
   let startedAt = 0;
+  let appliedAt = 0;
   let openedAt = 0;
   const incoming = { chunks: [], size: 0, expect: null, startedAt: 0 };
 
@@ -460,8 +485,23 @@
     channel.bufferedAmountLowThreshold = BUFFER_LOW;
     channel.addEventListener("open", function () {
       openedAt = performance.now();
-      record("datachannel-open", { handshakeMs: Math.round(openedAt - startedAt) });
+      // 握手耗時原本只有一個數字，而那個數字裡面裝著人類複製貼上的時間。實測有一筆
+      // 記到 160 秒，協定本身其實不到一秒。拆成兩段才比對得了 issue #553 的門檻。
+      //
+      // negotiateMs 只有發起方那一側準確。回應方是把描述交回去之後，對方套用的那
+      // 一刻才開通，中間同樣夾著人工。
+      record("datachannel-open", {
+        handshakeMs: Math.round(openedAt - startedAt),
+        negotiateMs: appliedAt ? Math.round(openedAt - appliedAt) : null,
+        handoverMs: appliedAt ? Math.round(appliedAt - startedAt) : null,
+      });
       updateState();
+      // 候選對在開通的當下不一定選好了，等一秒再記。host 或別的類型決定了這條路
+      // 在真實網路裡是怎麼通的。
+      setTimeout(async function () {
+        const pair = await selectedPair();
+        if (pair) record("candidate-pair", pair);
+      }, 1000);
     });
     channel.addEventListener("close", function () {
       record("datachannel-close", {});
@@ -505,6 +545,8 @@
       [t.iceConnection, pc.iceConnectionState],
       [t.iceGathering, pc.iceGatheringState],
       [t.channel, channel ? channel.readyState : t.channelIdle],
+      [t.negotiate, openedAt && appliedAt ? Math.round(openedAt - appliedAt) + " ms" : t.handshakeIdle],
+      [t.handover, appliedAt ? Math.round(appliedAt - startedAt) + " ms" : t.handshakeIdle],
       [t.handshake, openedAt ? Math.round(openedAt - startedAt) + " ms" : t.handshakeIdle],
       [t.pair, pair ? pair.local + " / " + pair.remote : t.pairIdle],
     ]);
@@ -559,6 +601,7 @@
       return;
     }
     await pc.setRemoteDescription(desc);
+    appliedAt = performance.now();
     record("remote-description", { type: desc.type });
     if (role === "answerer") {
       await pc.setLocalDescription(await pc.createAnswer());
@@ -589,6 +632,24 @@
       .join("");
   }
 
+  // send() 只把資料塞進緩衝區就返回，迴圈跑完的時候東西還在排隊。實測 1 MB 的送出端
+  // 寫著 0 秒、每秒一萬 MB，同一筆在接收端是 0.27 秒。等緩衝區排空才是真的送完。
+  function drain(timeout) {
+    const limit = timeout || 180000;
+    return new Promise(function (resolve) {
+      const began = performance.now();
+      const tick = function () {
+        const stuck = performance.now() - began > limit;
+        if (!channel || channel.readyState !== "open" || channel.bufferedAmount === 0 || stuck) {
+          resolve(stuck);
+          return;
+        }
+        setTimeout(tick, 50);
+      };
+      tick();
+    });
+  }
+
   async function sendBytes(bytes, name) {
     if (!channel || channel.readyState !== "open") {
       rows(sendTable, [[t.direction, t.notConnected]]);
@@ -597,7 +658,7 @@
     const slice = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
     const hash = await sha256Hex(slice);
     channel.send(JSON.stringify({ kind: "start", name: name, size: bytes.length, hash: hash }));
-    record("send-start", { size: bytes.length });
+    record("send-start", { size: bytes.length, environment: envBox.value || null });
 
     const began = performance.now();
     let sent = 0;
@@ -618,7 +679,14 @@
     }
     channel.send(JSON.stringify({ kind: "end" }));
 
-    const secs = (performance.now() - began) / 1000;
+    rows(sendTable, [
+      [t.direction, t.sending],
+      [t.size, bytes.length.toLocaleString() + " B"],
+      [t.elapsed, t.flushing],
+    ]);
+    const stuck = await drain();
+
+    const secs = Math.max((performance.now() - began) / 1000, 0.001);
     const rate = (bytes.length / 1024 / 1024 / secs).toFixed(2);
     rows(sendTable, [
       [t.direction, t.sending],
@@ -626,7 +694,12 @@
       [t.elapsed, secs.toFixed(2) + " " + t.seconds],
       [t.throughput, rate + " MB/s"],
     ]);
-    record("send-done", { size: bytes.length, seconds: Number(secs.toFixed(2)), mbps: Number(rate) });
+    record("send-done", {
+      size: bytes.length,
+      seconds: Number(secs.toFixed(2)),
+      mbps: Number(rate),
+      drainTimedOut: stuck || false,
+    });
   }
 
   async function onMessage(event) {
@@ -637,7 +710,7 @@
         incoming.size = 0;
         incoming.expect = msg;
         incoming.startedAt = performance.now();
-        record("recv-start", { size: msg.size });
+        record("recv-start", { size: msg.size, environment: envBox.value || null });
         rows(sendTable, [[t.direction, t.receiving], [t.size, msg.size.toLocaleString() + " B"]]);
         return;
       }
@@ -689,6 +762,7 @@
       exportedAt: new Date().toISOString(),
       userAgent: navigator.userAgent,
       role: role,
+      environment: envBox.value || null,
       localSdp: pc && pc.localDescription ? maskSdp(pc.localDescription.sdp) : null,
       log: log,
     };
@@ -716,6 +790,7 @@
       };
     },
     send: function (size) { sizeBox.value = String(size); sendGenerated(); },
+    environment: function (text) { envBox.value = text; },
     log: function () { return log; },
   };
 })();
