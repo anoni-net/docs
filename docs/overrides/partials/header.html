@@ -197,6 +197,18 @@
         </button>
         <p class="anoni-settings__status" id="__anoni-update-status" role="status" aria-live="polite"></p>
       </div>
+      {#-
+        統計的退出開關。這裡只放一個空的掛載點，群組標題、按鈕與說明全部由
+        js/analytics.js 的 setupOptOut 建出來。
+
+        標題不寫在這裡有兩個理由。onion 與 IPFS 版建置時把整段分析拿掉，那支腳本
+        連載入都不會發生。Tor Browser 調到 Safest 會把 JavaScript 全關。兩種情況下
+        靜態的標題都會留在抽屜裡，底下卻什麼都沒有。
+
+        揭露頁 utils/leaks 上那一顆用的是 id，這裡用屬性，同一支腳本兩邊都認得，
+        按下任一顆另一顆會跟著換文字。
+      -#}
+      <div class="anoni-settings__optout" data-anoni-optout="drawer"></div>
     </div>
     {% if not config.theme.palette is mapping %}
       {% include "partials/javascripts/palette.html" %}

@@ -153,6 +153,8 @@ clearnet 版可以直接關掉。下面的開關把 `umami.disabled` 寫進這�
 
 看不到開關，多半是因為你正在看 onion 版，該版連分析腳本都不會載入，沒有東西需要關掉。
 
+每一頁的設定選單裡也有同一顆開關，換裝置或換瀏覽器的時候不必回到這一頁。兩邊按下去是同一個設定。
+
 另外三種方式。把網路關掉再開一次，斷網時一個請求都不會有。用 [Tor Browser](../tools/what-is-tor.md) 的 Safest 等級，JavaScript 全關，這一頁與分析都不會執行。或者用 onion 版，那一版不載入任何分析。
 
 瀏覽器開了 Do Not Track 或 Global Privacy Control 的話，從 2026-08-23 起我們也一筆都不送，下面「Do Not Track 與 GPC」一節有細節。
