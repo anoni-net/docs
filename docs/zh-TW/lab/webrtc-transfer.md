@@ -53,6 +53,8 @@ Tor Browser 把 WebRTC 整個關掉，因為它會洩漏你真正的 IP。那個
 
 ## 測完請回報
 
-按「匯出紀錄」存下 JSON，貼到 [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}，順便寫上是哪一種網路、哪兩種裝置與瀏覽器。
+傳之前先在第五區那一欄填上這次的環境，例如「自架熱點，Mac Chrome 對 iPhone Safari」。那一行會跟著每一筆紀錄一起匯出，之後整理結果時才對得起來。
+
+按「匯出紀錄」存下 JSON，貼到 [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}。兩台裝置各匯出一份，收送兩側的耗時才都有。
 
 失敗的結果一樣有用。判準之一就是「失敗要多快說得出來」，卡在轉圈三分鐘的體驗跟直接說不支援，對現場的人差別很大。

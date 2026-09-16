@@ -53,6 +53,8 @@ File contents move only between the two devices. On export, IP addresses and mDN
 
 ## Report what you find
 
-Press "Export log", save the JSON, and attach it to [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"} along with the kind of network and the two devices and browsers involved.
+Before sending, fill in the field in step 5 with this run's setup, for example "own hotspot, Mac Chrome to iPhone Safari". That line rides along with every log entry, which is what makes the results line up later.
+
+Press "Export log", save the JSON, and attach it to [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}. Export from both devices, so that timings from the sending and the receiving side are both there.
 
 Failures are just as useful. One of the criteria is how quickly a failure becomes visible, and three minutes of a spinner is a very different experience from a clear message saying it will not work here.
