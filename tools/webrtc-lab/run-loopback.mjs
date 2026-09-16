@@ -9,18 +9,19 @@
  * 以及 SHA-256 比對有沒有一致。回送量到的吞吐量不能信，那是本機記憶體之間的複製，
  * 跟 Wi-Fi 上的數字沒有關係。握手耗時也不能信，它含了這支腳本自己的等待。
  *
- * 前置條件跟 repo 裡其他 check_*.mjs 一樣，要自己先開好兩樣東西：
+ * 前置條件跟 repo 裡其他 check_*.mjs 一樣，要先建置再自己開好兩樣東西：
  *
- *   python3 -m http.server 8790 --directory tools/webrtc-lab
+ *   cd docs && SOCIAL_CARDS=false PRIVACY_ASSETS=false bash run.sh
+ *   python3 -m http.server 8790 --directory docs/output
  *   google-chrome --headless=new --remote-debugging-port=9223 \
  *     --user-data-dir=/tmp/chrome-lab-profile about:blank
  *
  * 用法：
  *   node tools/webrtc-lab/run-loopback.mjs
- *   LAB_URL=http://localhost:8790/ CDP_PORT=9223 node tools/webrtc-lab/run-loopback.mjs
+ *   LAB_URL=http://localhost:8790/lab/webrtc-transfer/ node tools/webrtc-lab/run-loopback.mjs
  */
 const CDP_PORT = process.env.CDP_PORT || "9223";
-const LAB_URL = process.env.LAB_URL || "http://localhost:8790/";
+const LAB_URL = process.env.LAB_URL || "http://localhost:8790/lab/webrtc-transfer/";
 const SIZES = [1048576, 5242880];
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
