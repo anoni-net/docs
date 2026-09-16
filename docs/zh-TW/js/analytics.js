@@ -194,6 +194,7 @@
       off: "分析目前開著",
       turnOff: "關掉分析",
       turnOn: "重新開啟",
+      group: "統計",
       note: "設定存在這台裝置的 localStorage，清掉瀏覽器資料就會回到預設。",
       unavailable: "這個瀏覽器不讓網站用 localStorage，開關沒辦法記住。",
     },
@@ -202,6 +203,7 @@
       off: "分析目前开着",
       turnOff: "关掉分析",
       turnOn: "重新开启",
+      group: "统计",
       note: "设定存在这台设备的 localStorage，清掉浏览器资料就会回到预设。",
       unavailable: "这个浏览器不让网站用 localStorage，开关没办法记住。",
     },
@@ -210,6 +212,7 @@
       off: "Analytics is on",
       turnOff: "Turn analytics off",
       turnOn: "Turn it back on",
+      group: "Analytics",
       note: "The setting lives in this device's localStorage. Clearing browser data resets it.",
       unavailable: "This browser blocks localStorage, so the switch cannot be remembered.",
     },
@@ -233,9 +236,25 @@
     }
   }
 
+  // 一頁上可能有好幾顆開關，設定抽屜一顆、揭露頁一顆。按下任何一顆之後每一顆都要
+  // 重畫，否則畫面上會同時出現「分析已關閉」與「關掉分析」，讀者不知道自己按到的
+  // 是哪個狀態。
+  function renderOptOutViews(views, off, t) {
+    for (let i = 0; i < views.length; i++) {
+      const view = views[i];
+      view.status.textContent = off ? t.on : t.off;
+      view.button.textContent = off ? t.turnOn : t.turnOff;
+      view.host.setAttribute("data-state", off ? "off" : "on");
+    }
+  }
+
+  // 揭露頁用 id 掛一顆，其他地方用 data-anoni-optout 屬性掛。值是 "drawer" 的那顆
+  // 連群組標題都由這裡建，理由見 setupOptOut 裡的說明。
+  const OPT_OUT_HOSTS = "#anoni-optout, [data-anoni-optout]";
+
   function setupOptOut() {
-    const host = document.getElementById("anoni-optout");
-    if (!host) return;
+    const hosts = Array.prototype.slice.call(document.querySelectorAll(OPT_OUT_HOSTS));
+    if (!hosts.length) return;
     const t =
       OPT_OUT_STRINGS[normalizeLang(document.documentElement.lang)] || OPT_OUT_STRINGS["zh-TW"];
 
@@ -247,38 +266,68 @@
     }
 
     if (!storage) {
-      const warn = document.createElement("p");
-      warn.className = "anoni-optout-note";
-      warn.textContent = t.unavailable;
-      host.appendChild(warn);
+      for (let i = 0; i < hosts.length; i++) {
+        const warn = document.createElement("p");
+        warn.className = "anoni-optout-note";
+        warn.textContent = t.unavailable;
+        hosts[i].appendChild(warn);
+      }
       return;
     }
 
-    const status = document.createElement("p");
-    status.className = "anoni-optout-status";
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "md-button anoni-optout-button";
-    const note = document.createElement("p");
-    note.className = "anoni-optout-note";
-    note.textContent = t.note;
+    const views = [];
 
-    function render() {
-      const off = readOptOut(storage);
-      status.textContent = off ? t.on : t.off;
-      button.textContent = off ? t.turnOn : t.turnOff;
-      host.setAttribute("data-state", off ? "off" : "on");
+    function toggle() {
+      writeOptOut(storage, !readOptOut(storage));
+      renderOptOutViews(views, readOptOut(storage), t);
     }
 
-    button.addEventListener("click", function () {
-      writeOptOut(storage, !readOptOut(storage));
-      render();
-    });
+    for (let i = 0; i < hosts.length; i++) {
+      const host = hosts[i];
+      // 設定抽屜那一顆的樣式跟著抽屜走，其餘沿用揭露頁原本那組。
+      const inDrawer = host.getAttribute("data-anoni-optout") === "drawer";
 
-    render();
-    host.appendChild(status);
-    host.appendChild(button);
-    host.appendChild(note);
+      // 抽屜裡連群組標題都在這裡建。標題若寫成模板的靜態 HTML，onion 與 IPFS 版
+      // （建置時整段分析被拿掉，這支根本不載入）與 Tor Browser 的 Safest（JS 全關）
+      // 都會看到一個底下什麼都沒有的群組。
+      if (inDrawer) {
+        const title = document.createElement("p");
+        title.className = "anoni-settings__group";
+        title.textContent = t.group;
+        host.appendChild(title);
+      }
+
+      const body = inDrawer ? document.createElement("div") : host;
+      if (inDrawer) body.className = "anoni-settings__optout-body";
+
+      const status = document.createElement("p");
+      status.className = inDrawer ? "anoni-settings__status" : "anoni-optout-status";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = inDrawer ? "anoni-banner-action" : "md-button anoni-optout-button";
+      const note = document.createElement("p");
+      note.className = inDrawer ? "anoni-settings__status" : "anoni-optout-note";
+      note.textContent = t.note;
+
+      button.addEventListener("click", toggle);
+
+      // 抽屜裡按鈕在前，跟旁邊的「檢查更新」同一個排法。揭露頁維持原本的順序。
+      if (inDrawer) {
+        body.appendChild(button);
+        body.appendChild(status);
+      } else {
+        body.appendChild(status);
+        body.appendChild(button);
+      }
+      body.appendChild(note);
+      if (inDrawer) host.appendChild(body);
+
+      views.push({ host: host, status: status, button: button });
+    }
+
+    renderOptOutViews(views, readOptOut(storage), t);
   }
 
   // ----------------------------------------------------------------

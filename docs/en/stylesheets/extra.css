@@ -797,6 +797,18 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   width: 100%;
 }
 
+/* 退出開關那一組。整組連群組標題都由 js/analytics.js 建出來，所以這裡的規則要
+   認得 JS 給的 class。標題自己帶 .anoni-settings__group 的內距，按鈕與說明另外
+   包一層，兩層都加內距的話左右會多縮排一次。 */
+.anoni-settings__optout-body {
+  padding: 0.2rem 0.8rem 0.8rem;
+}
+
+.anoni-settings__optout .anoni-banner-action {
+  justify-content: center;
+  width: 100%;
+}
+
 .anoni-settings__status {
   color: var(--md-default-fg-color--light);
   font-size: 0.62rem;

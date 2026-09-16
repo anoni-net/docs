@@ -153,6 +153,8 @@ On the clearnet build you can simply switch it off. The button below writes `uma
 
 If you see no button, you are most likely reading the onion build, which never loads the analytics script at all, so there is nothing to switch off.
 
+The same switch sits in the settings menu on every page, so on a new device or a new browser you do not have to come back here. Both write the same setting.
+
 Three further ways. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
 
 If your browser sends Do Not Track or Global Privacy Control, we send nothing at all as of 2026-08-23. The section "Think before enabling Do Not Track and GPC" below has the details.
