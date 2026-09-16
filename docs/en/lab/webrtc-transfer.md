@@ -21,6 +21,8 @@ This page belongs to the [lab](index.md). It exists to produce measurements rath
 </noscript>
 </div>
 
+<script src="../../utils/vendor/qrcode-generator.js"></script>
+<script src="../../utils/vendor/jsQR.js"></script>
 <script src="../../js/webrtc-lab.js"></script>
 
 ## Why measure this
@@ -31,9 +33,16 @@ A direct connection inside one local network is far faster. The cost is that bot
 
 ## Running it on two devices
 
-Put both devices on the same network. A hotspot you run yourself is the most predictable. On one device press "I start", then hand the whole description to the other device. On the other press "The other side starts", paste, apply, and hand its description back.
+Put both devices on the same network. A hotspot you run yourself is the most predictable.
 
-The description can travel any way you like: written on paper, turned into an image with the [QR code generator](../utils/qrcode.md) for the other device to scan, or copied and pasted when both devices are yours.
+1. On one device press "I start". A QR code appears in step 2
+2. On the other press "The other side starts", then "Scan their QR code" in step 3, and point it at the first screen
+3. Once scanned, the second device creates its reply and step 2 switches to its own QR code
+4. On the first device press scan in step 3 and point it at the second screen. The connection opens as soon as it reads
+
+The first scan asks for camera permission, and scanning only works once it is allowed. Camera frames are decoded inside this page and are not sent anywhere.
+
+When the camera is not an option, copy the whole text block under step 2 to the other device, paste it into step 3 and press apply. The result is the same.
 
 Once connected, either side can send. The receiving side computes SHA-256 and compares it against the source, and a run only counts when they match.
 

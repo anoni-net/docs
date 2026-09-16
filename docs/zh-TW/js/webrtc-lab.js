@@ -10,11 +10,14 @@
  * RTCPeerConnection 的 iceServers 是空的，沒有 STUN 也沒有 TURN，連得上就是靠同一個
  * 區網裡的 host candidate，連不上就代表那個網路擋掉裝置之間的連線，而那正是要量的。
  *
- * 檔案內容只在兩台裝置之間流動，文件站這一側拿不到任何一個位元組。
+ * 檔案內容只在兩台裝置之間流動，文件站這一側拿不到任何一個位元組。相機畫面在這一頁的
+ * canvas 裡解碼，同樣不離開裝置。
  *
  * === 幾個設計決定 ===
  *
- * 只開 DataChannel 不要媒體軌，SDP 才會小，小到塞得進 QR code 才有下一階段。
+ * 只開 DataChannel 不要媒體軌，SDP 才會小。實機量到 587 B，gzip 後不到 400 B，一張靜態
+ * QR code 就裝得下，所以交換描述不需要影格串流，兩邊各顯示一張、對方掃一次就過去。
+ * 封包開頭有四個位元組的標記，掃到網址之類的其他 QR code 時認得出來。複製貼上保留當退路。
  * ICE 蒐集完成才把描述交出去，不做 trickle，因為 trickle 需要一條雙向且持續的通道，
  * 而手動貼上與 QR 都只能一次過一份。
  * 分塊 64 KB 並靠 bufferedAmount 做背壓，收的一端算 SHA-256 跟來源比對。
@@ -32,6 +35,19 @@
   const QR_PAYLOAD_MEDIUM = 402;
   const QR_FRAMES_PER_SECOND = 5;
 
+  // 一張 QR code 最高用到幾版。版本越高方格越小，手機螢幕對手機鏡頭超過這個版本就開始
+  // 難讀。實機量到的描述 gzip 後不到 400 B，落在十版上下，離這個上限很遠。超過的時候
+  // 退回複製貼上並記一筆，那本身也是量測：有多少裝置的描述大到一張放不下。
+  const MAX_QR_VERSION = 25;
+  // 掃描一輪的目標間隔與畫面縮到多寬再解碼。手機上 jsQR 解一張 1920 寬的畫面要上百毫秒，
+  // 縮到 960 寬對一張佔半個畫面的碼綽綽有餘。
+  const SCAN_INTERVAL_MS = 150;
+  const SCAN_WIDTH = 960;
+  // 描述封包的開頭。掃到別的 QR code（網址、Wi-Fi 設定）時靠這四個位元組認出來，
+  // 而不是把一段網址當成描述去套用。第三個是格式版本，第四個標示有沒有 gzip。
+  const PACK_MAGIC = [0x57, 0x4c];
+  const PACK_VERSION = 1;
+
   // DataChannel 一次送多大。SCTP 的訊息上限各家實作不同，64 KB 是普遍安全的值。
   const CHUNK = 64 * 1024;
   // bufferedAmount 超過上界就先停手，等它降到下界再送，否則記憶體會被塞爆。
@@ -44,16 +60,29 @@
       offer: "我先開始，產生描述",
       answer: "對方先開始，我來回應",
       roleIdle: "還沒選。兩台裝置各挑一邊，誰先開始都可以。",
-      roleOfferer: "你是發起方。把下面那段描述交給對方，取得回覆之後貼進第三區。",
-      roleAnswerer: "你是回應方。把對方給的描述貼進第三區按套用，再把產生的描述交回去。",
-      roleAnswered: "回應描述好了，交回給對方。",
+      roleOfferer: "你是發起方。讓對方掃第二區的 QR code，再到第三區掃對方回給你的那一張。",
+      roleAnswerer: "你是回應方。到第三區掃對方的 QR code，掃完之後讓對方掃第二區出現的那一張。",
+      roleAnswered: "回應描述好了，讓對方掃第二區的 QR code。",
       localTitle: "二、你的描述",
-      localHint: "等連線候選蒐集完才會出現，整段交給對方。",
+      localHint: "等連線候選蒐集完才會出現。讓對方的相機對準這張 QR code，掃不了的話整段複製交給對方。",
+      qrHint: "螢幕亮度調高，QR code 佔對方畫面一半以上最好讀。",
+      qrTooLarge: "這一次的描述太大，一張 QR code 裝不下，請改用複製貼上。",
+      qrMissing: "QR code 元件沒有載入，請改用複製貼上。",
       copy: "複製",
       copied: "已複製。",
       copyManual: "瀏覽器不給用剪貼簿，已經選起來，自己按複製。",
       remoteTitle: "三、對方的描述",
-      remoteHint: "把對方交給你的整段貼進來。",
+      remoteHint: "用相機掃對方螢幕上的 QR code，或者把對方交給你的整段貼進來。",
+      scan: "用相機掃對方的 QR code",
+      scanStop: "停止掃描",
+      scanning: "掃描中，對準對方螢幕上的 QR code。",
+      scanForeign: "掃到的 QR code 不是這一頁產生的，繼續對準對方的那一張。",
+      scanUnsupported: "這個瀏覽器拿不到相機，請改用複製貼上。",
+      scanDenied: "相機權限被拒絕了。到瀏覽器設定允許這個網站使用相機，或改用複製貼上。",
+      scanNoCamera: "找不到可用的相機，請改用複製貼上。",
+      scanFailed: "相機開不起來，請改用複製貼上。",
+      scanBadPayload: "QR code 讀到了但內容解不開，請改用複製貼上。",
+      scanned: "掃到了，正在套用。",
       apply: "套用",
       badJson: "貼上的內容解不開，要整段貼，不要只貼中間幾行。",
       pickRoleFirst: "先選上面的角色。",
@@ -112,16 +141,29 @@
       offer: "我先开始，产生描述",
       answer: "对方先开始，我来回应",
       roleIdle: "还没选。两台设备各挑一边，谁先开始都可以。",
-      roleOfferer: "你是发起方。把下面那段描述交给对方，取得回复之后贴进第三区。",
-      roleAnswerer: "你是回应方。把对方给的描述贴进第三区按套用，再把产生的描述交回去。",
-      roleAnswered: "回应描述好了，交回给对方。",
+      roleOfferer: "你是发起方。让对方扫第二区的 QR code，再到第三区扫对方回给你的那一张。",
+      roleAnswerer: "你是回应方。到第三区扫对方的 QR code，扫完之后让对方扫第二区出现的那一张。",
+      roleAnswered: "回应描述好了，让对方扫第二区的 QR code。",
       localTitle: "二、你的描述",
-      localHint: "等连线候选搜集完才会出现，整段交给对方。",
+      localHint: "等连线候选搜集完才会出现。让对方的相机对准这张 QR code，扫不了的话整段复制交给对方。",
+      qrHint: "屏幕亮度调高，QR code 占对方画面一半以上最好读。",
+      qrTooLarge: "这一次的描述太大，一张 QR code 装不下，请改用复制粘贴。",
+      qrMissing: "QR code 组件没有加载，请改用复制粘贴。",
       copy: "复制",
       copied: "已复制。",
       copyManual: "浏览器不给用剪贴板，已经选起来，自己按复制。",
       remoteTitle: "三、对方的描述",
-      remoteHint: "把对方交给你的整段贴进来。",
+      remoteHint: "用相机扫对方屏幕上的 QR code，或者把对方交给你的整段贴进来。",
+      scan: "用相机扫对方的 QR code",
+      scanStop: "停止扫描",
+      scanning: "扫描中，对准对方屏幕上的 QR code。",
+      scanForeign: "扫到的 QR code 不是这一页产生的，继续对准对方的那一张。",
+      scanUnsupported: "这个浏览器拿不到相机，请改用复制粘贴。",
+      scanDenied: "相机权限被拒绝了。到浏览器设置允许这个网站使用相机，或改用复制粘贴。",
+      scanNoCamera: "找不到可用的相机，请改用复制粘贴。",
+      scanFailed: "相机开不起来，请改用复制粘贴。",
+      scanBadPayload: "QR code 读到了但内容解不开，请改用复制粘贴。",
+      scanned: "扫到了，正在套用。",
       apply: "套用",
       badJson: "贴上的内容解不开，要整段贴，不要只贴中间几行。",
       pickRoleFirst: "先选上面的角色。",
@@ -180,16 +222,29 @@
       offer: "I start, create my description",
       answer: "The other side starts, I reply",
       roleIdle: "Nothing picked yet. Each device takes one side, either order works.",
-      roleOfferer: "You start. Hand the description below to the other device, then paste their reply into step 3.",
-      roleAnswerer: "You reply. Paste their description into step 3, apply it, then hand your description back.",
-      roleAnswered: "Your reply is ready. Hand it back to the other device.",
+      roleOfferer: "You start. Let the other device scan the QR code in step 2, then scan their reply in step 3.",
+      roleAnswerer: "You reply. Scan their QR code in step 3, then let them scan the one that appears in step 2.",
+      roleAnswered: "Your reply is ready. Let the other device scan the QR code in step 2.",
       localTitle: "2. Your description",
-      localHint: "It appears once candidate gathering finishes. Hand over the whole block.",
+      localHint: "It appears once candidate gathering finishes. Point the other camera at this QR code, or copy the whole block across if scanning fails.",
+      qrHint: "Turn the screen brightness up. The code reads best when it fills half of the other camera view.",
+      qrTooLarge: "This description is too large for a single QR code. Use copy and paste this time.",
+      qrMissing: "The QR code library did not load. Use copy and paste.",
       copy: "Copy",
       copied: "Copied.",
       copyManual: "The browser blocks clipboard access. The text is selected, copy it yourself.",
       remoteTitle: "3. Their description",
-      remoteHint: "Paste the whole block they handed you.",
+      remoteHint: "Scan the QR code on their screen, or paste the whole block they handed you.",
+      scan: "Scan their QR code",
+      scanStop: "Stop scanning",
+      scanning: "Scanning. Point the camera at the QR code on their screen.",
+      scanForeign: "That QR code did not come from this page. Keep pointing at theirs.",
+      scanUnsupported: "This browser cannot reach a camera. Use copy and paste.",
+      scanDenied: "Camera permission was denied. Allow it for this site in the browser settings, or use copy and paste.",
+      scanNoCamera: "No usable camera was found. Use copy and paste.",
+      scanFailed: "The camera would not start. Use copy and paste.",
+      scanBadPayload: "The QR code was read but its content would not decode. Use copy and paste.",
+      scanned: "Got it, applying.",
       apply: "Apply",
       badJson: "That text does not parse. Paste the whole block, not a few lines of it.",
       pickRoleFirst: "Pick a side above first.",
@@ -280,6 +335,15 @@
       word-break: break-all;
     }
     #webrtc-lab .md-button { margin: 0.2rem 0.4rem 0.2rem 0; padding: 0.3rem 0.8rem; }
+    #webrtc-lab .wl-qr {
+      background: #fff;
+      display: block;
+      image-rendering: pixelated;
+      margin: 0.4rem 0;
+      max-width: 22rem;
+      width: 100%;
+    }
+    #webrtc-lab .wl-video { background: #000; display: block; margin: 0.4rem 0; max-width: 22rem; width: 100%; }
     #webrtc-lab .wl-env { box-sizing: border-box; font-size: 0.75rem; margin: 0 0 0.4rem; padding: 0.3rem; width: 100%; }
   `;
 
@@ -336,6 +400,13 @@
 
   const localStep = step(t.localTitle);
   localStep.appendChild(el("p", "wl-hint", t.localHint));
+  // QR code 放在文字框前面。掃碼是主要的交換方式，文字框留給相機不能用的時候。
+  const qrCanvas = el("canvas", "wl-qr");
+  qrCanvas.hidden = true;
+  localStep.appendChild(qrCanvas);
+  const qrNote = el("p", "wl-hint");
+  qrNote.hidden = true;
+  localStep.appendChild(qrNote);
   const localBox = el("textarea");
   localBox.readOnly = true;
   localStep.appendChild(localBox);
@@ -344,6 +415,19 @@
 
   const remoteStep = step(t.remoteTitle);
   remoteStep.appendChild(el("p", "wl-hint", t.remoteHint));
+  const btnScan = button(t.scan, startScan);
+  const btnScanStop = button(t.scanStop, function () { stopScan("cancel"); });
+  btnScanStop.hidden = true;
+  remoteStep.appendChild(btnScan);
+  remoteStep.appendChild(btnScanStop);
+  const video = el("video", "wl-video");
+  video.hidden = true;
+  // muted 與 playsinline 少一個，iOS Safari 就不肯自動播，畫面會停在第一張
+  video.muted = true;
+  video.setAttribute("playsinline", "");
+  remoteStep.appendChild(video);
+  const scanState = el("p", "wl-state");
+  remoteStep.appendChild(scanState);
   const remoteBox = el("textarea");
   remoteStep.appendChild(remoteBox);
   remoteStep.appendChild(button(t.apply, applyRemote));
@@ -569,6 +653,240 @@
     });
   }
 
+  // ---------------------------------------------------------------- QR code
+
+  // 位元組陣列轉成每個字元一個位元組的字串，餵給 qrcode-generator 的 byte mode。
+  function bytesToLatin1(bytes) {
+    let out = "";
+    for (let at = 0; at < bytes.length; at += 4096) {
+      out += String.fromCharCode.apply(null, bytes.subarray(at, at + 4096));
+    }
+    return out;
+  }
+
+  async function streamBytes(bytes, transform) {
+    const stream = new Blob([bytes]).stream().pipeThrough(transform);
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+
+  // 描述封成 QR 要裝的位元組。gzip 之後比原文小才用，壓了反而變大就送原文。
+  async function packDescription(json) {
+    const raw = new TextEncoder().encode(json);
+    let body = raw;
+    let gzipped = 0;
+    if (typeof CompressionStream === "function") {
+      const packed = await streamBytes(raw, new CompressionStream("gzip"));
+      if (packed.length < raw.length) {
+        body = packed;
+        gzipped = 1;
+      }
+    }
+    const out = new Uint8Array(4 + body.length);
+    out.set([PACK_MAGIC[0], PACK_MAGIC[1], PACK_VERSION, gzipped]);
+    out.set(body, 4);
+    return out;
+  }
+
+  // 解不開的原因分開回報，掃到別的 QR code 要繼續掃，內容壞掉就要停下來說清楚。
+  async function unpackDescription(bytes) {
+    if (!bytes || bytes.length < 5 || bytes[0] !== PACK_MAGIC[0] || bytes[1] !== PACK_MAGIC[1]) {
+      return { error: "foreign" };
+    }
+    if (bytes[2] !== PACK_VERSION || bytes[3] > 1) return { error: "version" };
+    let body = bytes.subarray(4);
+    try {
+      if (bytes[3] === 1) {
+        if (typeof DecompressionStream !== "function") return { error: "nodecompress" };
+        body = await streamBytes(body, new DecompressionStream("gzip"));
+      }
+      const json = new TextDecoder().decode(body);
+      JSON.parse(json);
+      return { json: json };
+    } catch (err) {
+      return { error: "corrupt" };
+    }
+  }
+
+  // 先試容錯度 M，版本超過上限再退到 L。M 撐得住螢幕反光遮掉的一小塊，能用就用 M。
+  function buildQr(bytes) {
+    if (!window.qrcode) return null;
+    // 這一頁送的是原始位元組，編碼用函式庫預設的那一份（每個字元取低八位）
+    window.qrcode.stringToBytes = window.qrcode.stringToBytesFuncs["default"];
+    const text = bytesToLatin1(bytes);
+    const levels = ["M", "L"];
+    for (let i = 0; i < levels.length; i += 1) {
+      try {
+        const qr = window.qrcode(0, levels[i]);
+        qr.addData(text, "Byte");
+        qr.make();
+        const version = (qr.getModuleCount() - 17) / 4;
+        if (version <= MAX_QR_VERSION) return { qr: qr, version: version, level: levels[i] };
+      } catch (err) {
+        // 這個容錯度下連第 40 版都裝不下，換下一個
+      }
+    }
+    return { qr: null };
+  }
+
+  let shownQr = null;
+
+  async function showQr(json) {
+    qrCanvas.hidden = true;
+    qrNote.hidden = false;
+    shownQr = null;
+    if (!window.qrcode) {
+      qrNote.textContent = t.qrMissing;
+      record("qr-missing", {});
+      return;
+    }
+    const bytes = await packDescription(json);
+    const built = buildQr(bytes);
+    if (!built || !built.qr) {
+      qrNote.textContent = t.qrTooLarge;
+      record("qr-too-large", { bytes: bytes.length });
+      return;
+    }
+    // 畫在 canvas 上，每個方格整數倍放大，外圍留四格空白。CSS 再縮到版面寬度，
+    // image-rendering: pixelated 讓縮放後的邊界維持銳利。
+    const quiet = 4;
+    const count = built.qr.getModuleCount();
+    const scale = Math.max(4, Math.floor(640 / (count + quiet * 2)));
+    const size = (count + quiet * 2) * scale;
+    qrCanvas.width = size;
+    qrCanvas.height = size;
+    const ctx = qrCanvas.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#000";
+    for (let row = 0; row < count; row += 1) {
+      for (let col = 0; col < count; col += 1) {
+        if (built.qr.isDark(row, col)) {
+          ctx.fillRect((col + quiet) * scale, (row + quiet) * scale, scale, scale);
+        }
+      }
+    }
+    qrCanvas.hidden = false;
+    qrNote.textContent = t.qrHint;
+    shownQr = built;
+    record("qr-shown", {
+      bytes: bytes.length,
+      gzip: bytes[3] === 1,
+      version: built.version,
+      level: built.level,
+    });
+  }
+
+  // ---------------------------------------------------------------- 相機
+
+  const scan = { stream: null, timer: null, startedAt: 0, canvas: null, foreign: 0 };
+
+  function scanError(reason, message) {
+    stopScan(reason);
+    scanState.textContent = message;
+    record("qr-scan-error", { reason: reason });
+  }
+
+  async function startScan() {
+    stopScan("restart");
+    if (!window.jsQR) {
+      scanError("missing", t.qrMissing);
+      return;
+    }
+    const media = navigator.mediaDevices;
+    if (!media || !media.getUserMedia) {
+      // 不安全的連線（http 的區網位址）也會落到這裡，瀏覽器在那種頁面上不提供 mediaDevices
+      scanError("unsupported", t.scanUnsupported);
+      return;
+    }
+    try {
+      scan.stream = await media.getUserMedia({
+        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false,
+      });
+    } catch (err) {
+      const name = err && err.name;
+      if (name === "NotAllowedError" || name === "SecurityError") scanError("denied", t.scanDenied);
+      else if (name === "NotFoundError" || name === "OverconstrainedError") scanError("nocamera", t.scanNoCamera);
+      else scanError("failed", t.scanFailed);
+      return;
+    }
+    // 先把畫面露出來再播。display:none 的 video 在部分瀏覽器不會解出畫面，
+    // 結果是相機指示燈亮著，而掃描迴圈永遠讀到空白。
+    video.hidden = false;
+    video.srcObject = scan.stream;
+    try {
+      await video.play();
+    } catch (err) {
+      // 播不起來多半是還沒有互動紀錄，下面的迴圈會等到 readyState 就位
+    }
+    btnScan.hidden = true;
+    btnScanStop.hidden = false;
+    scanState.textContent = t.scanning;
+    scan.startedAt = performance.now();
+    scan.foreign = 0;
+    record("qr-scan-start", {});
+    scanTick();
+  }
+
+  function stopScan(reason) {
+    if (scan.timer) {
+      clearTimeout(scan.timer);
+      scan.timer = null;
+    }
+    if (scan.stream) {
+      scan.stream.getTracks().forEach(function (track) { track.stop(); });
+      scan.stream = null;
+      if (reason === "cancel") record("qr-scan-cancel", { ms: Math.round(performance.now() - scan.startedAt) });
+    }
+    video.srcObject = null;
+    video.hidden = true;
+    btnScan.hidden = false;
+    btnScanStop.hidden = true;
+    if (reason === "cancel") scanState.textContent = "";
+  }
+
+  function readFrame() {
+    if (video.readyState < 2 || !video.videoWidth) return null;
+    const width = Math.min(video.videoWidth, SCAN_WIDTH);
+    const height = Math.round((video.videoHeight * width) / video.videoWidth);
+    if (!scan.canvas) scan.canvas = document.createElement("canvas");
+    scan.canvas.width = width;
+    scan.canvas.height = height;
+    const ctx = scan.canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(video, 0, 0, width, height);
+    const pixels = ctx.getImageData(0, 0, width, height);
+    // 螢幕上的 QR 是正常的深色方格，不必試反相，關掉那一輪解碼成本砍一半
+    const found = window.jsQR(pixels.data, width, height, { inversionAttempts: "dontInvert" });
+    return found && found.binaryData ? Uint8Array.from(found.binaryData) : null;
+  }
+
+  async function scanTick() {
+    if (!scan.stream) return;
+    const began = performance.now();
+    const bytes = readFrame();
+    if (bytes) {
+      const result = await unpackDescription(bytes);
+      if (result.json) {
+        const ms = Math.round(performance.now() - scan.startedAt);
+        stopScan("done");
+        scanState.textContent = t.scanned;
+        record("qr-scanned", { ms: ms, bytes: bytes.length, foreignSeen: scan.foreign });
+        remoteBox.value = result.json;
+        await applyRemote();
+        return;
+      }
+      if (result.error === "foreign") {
+        scan.foreign += 1;
+        scanState.textContent = t.scanForeign;
+      } else {
+        scanError(result.error, t.scanBadPayload);
+        return;
+      }
+    }
+    const spent = performance.now() - began;
+    scan.timer = setTimeout(scanTick, Math.max(0, SCAN_INTERVAL_MS - spent));
+  }
+
   async function startOffer() {
     role = "offerer";
     startedAt = performance.now();
@@ -579,6 +897,7 @@
     await waitForGathering(pc);
     localBox.value = JSON.stringify(pc.localDescription);
     await showSdpStats(pc.localDescription.sdp);
+    await showQr(localBox.value);
     roleState.textContent = t.roleOfferer;
     updateState();
   }
@@ -608,6 +927,7 @@
       await waitForGathering(pc);
       localBox.value = JSON.stringify(pc.localDescription);
       await showSdpStats(pc.localDescription.sdp);
+      await showQr(localBox.value);
       roleState.textContent = t.roleAnswered;
     }
     updateState();
@@ -791,6 +1111,21 @@
     },
     send: function (size) { sizeBox.value = String(size); sendGenerated(); },
     environment: function (text) { envBox.value = text; },
+    // 把現在顯示的 QR 方格矩陣交出去，檢查腳本拿去寫成假攝影機的 Y4M 畫面
+    qrMatrix: function () {
+      if (!shownQr || !shownQr.qr) return null;
+      const count = shownQr.qr.getModuleCount();
+      const out = [];
+      for (let row = 0; row < count; row += 1) {
+        let line = "";
+        for (let col = 0; col < count; col += 1) line += shownQr.qr.isDark(row, col) ? "1" : "0";
+        out.push(line);
+      }
+      return { version: shownQr.version, level: shownQr.level, rows: out };
+    },
+    scan: startScan,
+    stopScan: function () { stopScan("cancel"); },
+    scanStatus: function () { return { scanning: !!scan.stream, foreign: scan.foreign }; },
     log: function () { return log; },
   };
 })();
