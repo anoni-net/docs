@@ -20,6 +20,19 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.13
+
+> 2026-09-16 · [上游公告](https://tails.net/news/version_7.13/){target="_blank"} · [7.12 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.12/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，帶進 Tor Browser 與 tor 的安全更新。Tails 另外發了一份 7.12 的已知漏洞公告，要求儘快升級。上游沒有提到已被實際利用。
+- Tor Browser 從 15.0.21 升至 15.0.23，中間那一版 15.0.22 的變更一併帶進來。15.0.23 修掉兩個安全等級被繞過的問題，調到 Safer 的瀏覽器原本仍然執行得了 WebAssembly，另外從 Firefox 156 backport 安全修補，細節見 [Tor 更新日誌](./tor.md)。
+- Tor 用戶端升至 0.4.9.12，那是一次帶七個 TROVE 編號的安全釋出，逐條整理在 [tor daemon 更新日誌](./tor-daemon.md)。
+- 已知漏洞公告本身沒有列出清單，只指向 Tor Browser 的發布說明與 7.12 之後的 Debian 安全公告。拿 7.13 的套件清單對過 9 月 3 日之後發布的 Debian 公告，裝進去的修補有四個。libevent（DSA-6493-1）有 8 個 CVE，DNS、RPC 與 bufferevent 有越界存取，evbuffer 有 use-after-free，可能被用來執行任意程式碼，tor 本身就連結這個函式庫。
+- libde265（DSA-6486-1）的 H.265 解碼器與 GStreamer（DSA-6489-1）的 Opus 解碼器，處理惡意的影片或音訊檔時可能執行任意程式碼。jbig2dec（DSA-6488-1）負責解碼 PDF 裡常見的 JBIG2 影像，輸入檢查不足會造成阻斷服務。
+- 核心是 6.12.107，對應 Debian 目前最新的核心安全公告 DSA-6477-1。7.12 當時用哪一版核心查不到，所以不算進 7.13 的變更。
+- 關機流程簡化。7.10 起關機要在對話框裡確認，現在沒有程式需要關閉、也沒有文件需要儲存時會直接關機。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.12
 
 > 2026-09-03 · [上游公告](https://tails.net/news/version_7.12/){target="_blank"}
