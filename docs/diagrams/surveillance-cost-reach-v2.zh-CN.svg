@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="400" height="520" role="img" aria-labelledby="title desc">
+<title id="title">前四层的成本与涵盖范围刚好相反，第五层不在那条线上</title>
+<desc id="desc">四组上下对照的长条，由左到右是平台与广告、电信、国家与执法、商用间谍软件。向上的长条代表这一层涵盖多少人，由左到右越来越短，平台与广告涵盖所有人，商用间谍软件的名单很短。向下的长条代表用在一个人身上的成本，由左到右越来越长，平台与广告几乎零成本，商用间谍软件一次授权数万美元。两个指标刚好相反，所以做得到不等于会用在你身上。底下另有一条横幅代表第五层，公开来源的情报建档。材料是你自己公开的发言与活动信息，成本落在最左边那一栏的量级，目标的挑选方式接近最右边，前四层的规律在这一层不成立。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="55" rx="8"/>
+<text class="t-main h2" x="26" y="24">覆盖越多人，用在一个人身上的成本越低</text>
+<text class="t-mute bd" x="26" y="41">四层由上而下，覆盖面递减，单一目标的成本递增。</text>
+<rect class="card-no" x="12" y="69" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="93">平台与广告</text>
+<rect class="card-no" x="26" y="103" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="120" text-anchor="middle">覆盖 所有人</text>
+<rect class="card-ok" x="204" y="103" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="120" text-anchor="middle">成本 几乎是零</text>
+<text class="t-mute bd" x="26" y="144">不用挑对象，收越多越划算。</text>
+<rect class="card-w2" x="12" y="168" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="192">电信</text>
+<rect class="card-no" x="26" y="202" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="218" text-anchor="middle">覆盖 所有用户</text>
+<rect class="card-ok" x="204" y="202" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="218" text-anchor="middle">成本 本来就在收</text>
+<text class="t-main bd" x="26" y="243">通联与位置依法保存。</text>
+<rect class="card-w1" x="12" y="267" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="291">国家与执法</text>
+<rect class="card-ok" x="26" y="301" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="318" text-anchor="middle">覆盖 特定对象</text>
+<rect class="card-no" x="204" y="301" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="318" text-anchor="middle">成本 要法院核准</text>
+<text class="t-mute bd" x="26" y="342">向运营商调取，一次针对特定人。</text>
+<rect class="card-c1" x="12" y="366" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="390">商用间谍软件</text>
+<rect class="card-ok" x="26" y="400" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="416" text-anchor="middle">覆盖 名单很短</text>
+<rect class="card-no" x="204" y="400" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="416" text-anchor="middle">成本 一次数万美元</text>
+<text class="t-mute bd" x="26" y="441">授权昂贵，目标清单很短。</text>
+<rect class="card-n" x="12" y="471" width="376" height="37" rx="8"/>
+<text class="t-mute bd" x="26" y="494">公开来源的情报建档不在这条规律上。</text>
+</svg>

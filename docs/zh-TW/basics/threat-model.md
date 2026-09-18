@@ -69,7 +69,7 @@ icon: material/shield-search
 4. 對應現有的工具或流程，看哪些對應到了、哪些還缺、哪些是過度防護
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/threat-model-quadrant.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/threat-model-quadrant-v2.zh-TW.svg"
         alt="四象限圖。橫軸是一個資產與對手的組合實際上有多真，由低到高。縱軸是你現在的防護有多厚，由薄到厚。左上是過度防護，成本回收不了可以放掉，例子是家庭群組閒聊對國家級情報監控、追劇紀錄對執法調閱。右上是已經防住，保持現狀，例子是銀行帳戶對詐騙集團、主要 email 對帳號盜用。左下是可以接受，知道有風險但決定先不處理，例子是公開貼文對隨意路人、看過哪些新聞對廣告追蹤。右下是還沒補上，這一格就是下一步，例子是雲端相簿對平台資料外洩、舊帳號重複使用的密碼對撞庫攻擊。">
     <figcaption>第 4 步做完大概長這樣，圖上的組合是模擬的</figcaption>
 </figure>

@@ -17,9 +17,9 @@ icon: octicons/paste-24
     | **贡献** | 技术建置、数据分析、社群参与 | 具备基本命令行操作或数据分析能力的开源社群成员 |
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/skill-level-matrix.zh-CN.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/skill-level-matrix-v2.zh-CN.svg"
         alt="三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献。认识层在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层在 Tor 是装好浏览器并会用桥接，在 Tails 是做出开机U盘，在 OONI 是执行 Probe 产出报告。贡献层在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与 GnuPG 密钥管理，在 OONI 是命令行执行指定测试与分析原始数据。">
-    <figcaption>同一个层级在三个工具上分别代表什么</figcaption>
+    <figcaption>同一个层级在三个工具上分别代表什么。三栏各自独立，不必依序点满。挑跟你想参与的主题相关的那一栏，从目前所在的那一格往上走。每一格在页面上都有对应的自我评估清单，还没到的话，那一级的「从这里开始」列了要补的文章。</figcaption>
 </figure>
 
 下面三节各自展开一个工具的三个层级。横着看的话是这样：同一个「贡献」在 Tor 是架中继，在 Tails 是密钥与持久磁区的管理，在 OONI 是命令行测试与数据分析。三栏互相独立，不必依序点满。

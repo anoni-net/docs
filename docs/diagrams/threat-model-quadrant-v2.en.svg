@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 807" width="400" height="807" role="img" aria-labelledby="title desc">
+<title id="title">What a filled-in threat model actually looks like</title>
+<desc id="desc">A four-quadrant chart. The horizontal axis is how real a given asset and adversary pairing actually is, from low to high. The vertical axis is how strong your protection is today, from weak to strong. Top left is over-protected and can be let go, with a family group chat against state-level surveillance and viewing history against a law enforcement request. Top right is covered and worth keeping, with a bank account against scammers and a main email account against takeover. Bottom left is accepted, a known risk left alone, with public posts against a passing stranger and reading history against ad tracking. Bottom right is not covered yet and is the next step, with a cloud photo library against a platform breach and a reused password on an old account against credential stuffing.</desc>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="176" rx="8"/>
+<text class="t-main h2" x="26" y="24">Two axes. Measure the threat</text>
+<text class="t-main h2" x="26" y="43">first, then your protection.</text>
+<text class="t-mute bd" x="26" y="60">The horizontal axis is the real threat</text>
+<text class="t-mute bd" x="26" y="77">this pairing carries, from low to high.</text>
+<text class="t-mute bd" x="26" y="94">The vertical axis is how much protection</text>
+<text class="t-mute bd" x="26" y="111">you have now, from thick to thin.</text>
+<text class="t-mute bd" x="26" y="128">Pair the thing you want to protect</text>
+<text class="t-mute bd" x="26" y="145">with the adversary you face, and</text>
+<text class="t-mute bd" x="26" y="162">only then does it land in a square.</text>
+<rect class="card-n" x="12" y="190" width="376" height="165" rx="8"/>
+<text class="t-main lab" x="26" y="214">Low threat, thick protection</text>
+<text class="t-main h2" x="26" y="234">Over-protected</text>
+<text class="t-mute bd" x="26" y="252">Cost you will not get back. Let it go.</text>
+<text class="t-main lab" x="26" y="273">Examples</text>
+<text class="t-mute bd" x="36" y="290">Family group chat, against</text>
+<text class="t-mute bd" x="36" y="307">state-level surveillance</text>
+<text class="t-mute bd" x="36" y="324">What you watch, against a</text>
+<text class="t-mute bd" x="36" y="341">law enforcement request</text>
+<rect class="card-ok" x="12" y="365" width="376" height="131" rx="8"/>
+<text class="t-main lab" x="26" y="389">High threat, thick protection</text>
+<text class="t-main h2" x="26" y="409">Covered</text>
+<text class="t-mute bd" x="26" y="427">Keep it, and check again from time to time</text>
+<text class="t-main lab" x="26" y="448">Examples</text>
+<text class="t-mute bd" x="36" y="465">Bank account, against scammers</text>
+<text class="t-mute bd" x="36" y="482">Main email, against account takeover</text>
+<rect class="card-c1" x="12" y="506" width="376" height="131" rx="8"/>
+<text class="t-main lab" x="26" y="530">Low threat, thin protection</text>
+<text class="t-main h2" x="26" y="550">Accepted</text>
+<text class="t-mute bd" x="26" y="568">A known risk you decided to leave alone</text>
+<text class="t-main lab" x="26" y="589">Examples</text>
+<text class="t-mute bd" x="36" y="606">Public posts, against a passing stranger</text>
+<text class="t-mute bd" x="36" y="623">What news you read, against ad tracking</text>
+<rect class="card-no" x="12" y="647" width="376" height="148" rx="8"/>
+<text class="t-main lab" x="26" y="671">High threat, thin protection</text>
+<text class="t-main h2" x="26" y="691">Not covered yet</text>
+<text class="t-mute bd" x="26" y="709">This square is your next step</text>
+<text class="t-main lab" x="26" y="730">Examples</text>
+<text class="t-mute bd" x="36" y="747">Cloud photo library, against a platform breach</text>
+<text class="t-mute bd" x="36" y="764">A password reused on an old account,</text>
+<text class="t-mute bd" x="36" y="781">against credential stuffing</text>
+</svg>
