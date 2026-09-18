@@ -348,6 +348,8 @@ Text and lines:
 | `.rule` | Divider | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
 | `.arrow` | Flow arrow | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
 
+Do not nest a tag inside a card of the same role. A `.card-w1` tag sitting on a `.card-w1` card shares its fill, leaving only the border to separate them; switch the role or drop the outer card to `.card-n`.
+
 Colour must never be the only thing carrying the meaning. The text inside each block has to say it in full, so a tag reads "Anonymity High" rather than relying on the green. Red against green is the hardest pair for colour-blind readers, and once the words are complete the colour is only reinforcement, so a reader who cannot tell the two apart still gets the content.
 
 Measured contrast puts every text pairing above the WCAG AA threshold of 4.5:1. `#212121` scores 14.1 to 16.1 on the six light fills, `#eceff1` scores 12.3 to 14.0 on the six dark fills, `#546e7a` scores 5.4 on white, 5.0 on the neutral card and 4.8 on the cyan card, and `#b0bec5` scores 7.7 to 8.4 on the dark cards.

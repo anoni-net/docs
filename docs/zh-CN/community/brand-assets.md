@@ -348,6 +348,8 @@ wordmark 的文字已经转成路径，打开的设备有没有装字体都长�
 | `.rule` | 分隔线 | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
 | `.arrow` | 流程箭头 | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
 
+同一个角色的卡片与标签不要叠在一起。`.card-w1` 的标签放进 `.card-w1` 的卡片里，两者底色相同，只剩框线在撑，换一个角色或者把外层改成 `.card-n`。
+
 颜色不能是唯一的语义载体。每一个色块里的文字要把语义写完整，例如标签写「匿名度 高」而不是只靠绿色。红配绿是色盲最难分的一组，文字写完整之后颜色只是辅助，看不出颜色差别的人照样读得到内容。
 
 对比实测，文字那几组都过 WCAG AA 的 4.5:1：`#212121` 在六种亮色底上是 14.1 到 16.1，`#eceff1` 在六种暗色底上是 12.3 到 14.0，`#546e7a` 在白底 5.4、在中性卡 5.0、在 cyan 卡 4.8，`#b0bec5` 在暗色卡是 7.7 到 8.4。
