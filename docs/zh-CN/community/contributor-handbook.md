@@ -35,6 +35,14 @@ python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
 
 `NOTICE` 没有 `.md` 扩展名，linter 只收 `.md` 与 `.js`，那一份要人工看。
 
+有一组规则明文豁免既有内容，目前只有下方「标题句构」的 `title-colon`。CI 传 `--changed-since <base>`，让这组规则只在这个 PR 真的动过的行上报。本机想看整个文件的全貌就不要带那个旗标：
+
+```bash
+python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-guide.md
+```
+
+没有这个机制的话，改一行图片引用就会带出整篇旧标题的 annotation，跟作者的改动无关，而真正该修的那几条会被淹在里面。
+
 规则文件本身逐条写出被禁用的标点与句型，扫自己的规则描述必然全红。这份百科与工作区的投影文件靠 linter 的 `RULE_DOCS` 依文件名豁免，`tools/README.md` 的规则表与已知边界两段用 `<!-- docs-style-lint: disable -->` 与 `enable` 包住。写规则说明时照同一个做法，引用的例子要保持原样。
 
 ### 禁用句型与标点

@@ -20,6 +20,7 @@ exit code：有任一 error 回 1，否則回 0（warn 不影響 exit code）。
 from __future__ import annotations
 
 import argparse
+import subprocess
 import json
 import re
 import sys
@@ -255,6 +256,37 @@ BLOG_REQUIRED = ["date", "slug", "categories", "authors"]
 LINT_DIRECTIVE = re.compile(r"<!--\s*docs-style-lint:\s*(disable|enable|disable-line)\s*-->")
 
 # 規則文件本身會引用被禁的句型當例子，預設略過（可用 --include-rule-docs 強制掃）
+# 貢獻者百科明文豁免既有內容的規則。百科的「標題句構」一節寫著「既有文章不必回頭
+# 改寫，新文章與大幅改版時套用」，所以這些規則只在作者真的動過的行上報。沒有給
+# --changed-since 時照舊全掃，本機想看全貌仍然看得到。
+#
+# 不放進來的規則是那些「既有內容也該修」的：破折號、分號、不是…而是、AI 開頭語
+# 這幾條沒有既有豁免，掃到就是該改。
+GRANDFATHERED = {"title-colon"}
+
+HUNK_RE = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@", re.M)
+
+
+def changed_lines(ref: str, path: Path):
+    """回傳這個檔案相對 ref 有變更的行號集合。
+
+    取不到 diff 時回 None，呼叫端會退回「全部都報」。寧可多報也不要安靜地
+    吃掉 finding，這個函式失敗最糟的壞法是讓 linter 看起來變乾淨了。
+    """
+    try:
+        r = subprocess.run(["git", "diff", "-U0", "--no-color", ref, "--", str(path)],
+                           capture_output=True, text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if r.returncode != 0:
+        return None
+    lines = set()
+    for m in HUNK_RE.finditer(r.stdout):
+        start, count = int(m.group(1)), int(m.group(2) or 1)
+        lines.update(range(start, start + count))
+    return lines
+
+
 RULE_DOCS = {
     "contributor-handbook.md",
     "docs-writing-style.md",
@@ -646,18 +678,32 @@ def main(argv=None):
     ap.add_argument("--no-warn", action="store_true", help="只顯示 error")
     ap.add_argument("--include-rule-docs", action="store_true",
                     help="連規則文件本身（貢獻者百科等）一起掃")
+    ap.add_argument("--changed-since", metavar="REF",
+                    help="只在相對 REF 有變更的行上報既有豁免規則（目前是 title-colon）。"
+                         "貢獻者百科寫著既有文章不必回頭改寫，這個選項讓 CI 的 annotation "
+                         "只指向作者真的動過的東西")
     ap.add_argument("--format", choices=["text", "json", "github"], default="text",
                     help="github: 輸出 GitHub Actions annotation（::error/::warning）")
     args = ap.parse_args(argv)
 
     results = {}
-    n_err = n_warn = n_files = n_skipped = 0
+    n_err = n_warn = n_files = n_skipped = n_grandfathered = 0
     for f in iter_md(args.paths):
         if not args.include_rule_docs and f.name in RULE_DOCS:
             n_skipped += 1
             continue
         n_files += 1
         items = lint_js_file(f) if f.suffix == ".js" else lint_file(f)
+        if args.changed_since and any(x[2] in GRANDFATHERED for x in items):
+            touched = changed_lines(args.changed_since, f)
+            if touched is not None:
+                kept = []
+                for it in items:
+                    if it[2] in GRANDFATHERED and it[0] not in touched:
+                        n_grandfathered += 1
+                        continue
+                    kept.append(it)
+                items = kept
         if args.no_warn:
             items = [x for x in items if x[1] == ERROR]
         if not items:
@@ -683,7 +729,8 @@ def main(argv=None):
                 text = f"[{code}] {msg}" + (f"  | {sn}" if sn else "")
                 text = text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
                 print(f"::{cmd} file={fp},line={l}::{text}")
-        print(f"docs-style-lint: {n_err} error, {n_warn} warn, {n_files} files",
+        gf = f", {n_grandfathered} grandfathered" if n_grandfathered else ""
+        print(f"docs-style-lint: {n_err} error, {n_warn} warn, {n_files} files{gf}",
               file=sys.stderr)
     else:
         for fp, items in results.items():
@@ -693,7 +740,8 @@ def main(argv=None):
                 extra = f"  | {sn}" if sn else ""
                 print(f"  {l:>4}: {tag} [{code}] {msg}{extra}")
         skip_note = f"，略過規則文件 {n_skipped} 個" if n_skipped else ""
-        print(f"\n總計：{n_err} error、{n_warn} warn，掃描 {n_files} 個檔案{skip_note}")
+        gf_note = f"，既有內容豁免 {n_grandfathered} 件" if n_grandfathered else ""
+        print(f"\n總計：{n_err} error、{n_warn} warn，掃描 {n_files} 個檔案{skip_note}{gf_note}")
 
     return 1 if n_err else 0
 
