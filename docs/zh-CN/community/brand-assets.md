@@ -651,7 +651,7 @@ grep -c mxfile your-diagram.drawio.svg
 
 卡片的 eyebrow 跟 sub 同一个颜色系（浅底用 `.t-mute`，`.card-c2`、`.card-c3`、`.card-w2` 用 `.t-main`，`.card-w3` 用 `.t-onfill`），只有 title 用深色。三行的层次是「淡的小标、深的标题、淡的副标」。eyebrow 跟 title 都用深色的话，两行只差 1px 字级，在 328 宽看起来像标题被拆成两行。
 
-eyebrow 放的是分类或编号（「第一级」、「Send」、「环境层」），title 放的是这一格在讲什么。如果某个字串单独看就是这张卡的主要信息，它应该是 title 而不是 eyebrow。
+eyebrow 放的是分类或编号（「第一级」、「Send」、「环境层」），title 说明这一格的内容。如果某个字串单独看就是这张卡的主要信息，它应该是 title 而不是 eyebrow。
 
 SVG 内只留一个简短的 `<title>`，给直接开启文件网址的情境用，不要写 `<desc>`。图是被 `img` 标签引用的，浏览器把它当成不透明的点阵图，SVG 内部的 `title`、`desc`、`role`、`aria-*` 都不会被辅助科技读到，读者听到的一律是 `img` 的 `alt`。完整的说明只写在 `alt` 那一份，两边各写一份的结果是内容各自漂移。
 
