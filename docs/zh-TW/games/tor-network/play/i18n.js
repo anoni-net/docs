@@ -194,6 +194,34 @@ const ZH_TW = {
   roleTipOne: '只看這個角色',
 
   // 面板底部的返回列，整段連同連結一起換語言。
+  // === 工作坊導覽 ===
+  //
+  // 這幾段是要對著一群人唸出來的，所以每一站壓在三句以內，長句留給面板裡的說明。
+  // 數字由 tour.js 從當下的快照算好帶進來，換了快照或按過即時更新都會跟著變。
+  // 站點怎麼排、取景為什麼寫成涵蓋度，見 tour.js 的檔頭。
+  btnTour: '導覽',
+  btnTourLong: '開始導覽',
+  tourNote: '七站，約五分鐘。給工作坊與教學現場翻給人看，斷網也開得起來。',
+  tourNext: '下一步',
+  tourPrev: '上一步',
+  tourDone: '完成',
+  tourExit: '離開',
+  tourKeys: '空白鍵前進 · 左右鍵切換 · Esc 離開',
+  tourIntroTitle: '近萬台中繼，分布不平均',
+  tourIntroBody: '全網目前有 <b>{total}</b> 台運作中的中繼，落在 {countries} 個國家。陸地的亮度代表該國托管多少台，北美與西歐連成一整片，其餘地區只有零星幾點。',
+  tourWeightTitle: '台數多不代表扛得多',
+  tourWeightBody: '亮度換成共識權重，也就是各國實際承擔的流量比重。美國 {usN} 台、權重 {usPct}%，德國 {deN} 台卻是 {dePct}%。德國那批中繼單台扛的流量比較大。',
+  tourBlockedTitle: '有些地方連不上',
+  tourBlockedBody: 'OONI 近 30 天的 tor 測試裡，異常率達 85% 以上的 {blockedN} 個國家由國界向內標紅。異常代表測試沒有照預期完成，成因包含連線被擋、網路不穩與 ISP 故障，光看比率分不出來。',
+  tourUsersTitle: '用的人跟架的機器不在同一批國家',
+  tourUsersBody: '亮度換成各國使用 Tor 的人數估計，中繼點照樣顯示。用的人多的地方，底下不一定有中繼。這個落差就是中繼需要更多地方一起架的理由。',
+  tourTwTitle: '台灣在哪裡',
+  tourTwBody: '台灣有 <b>{twN}</b> 台中繼，台數排第 {twRank}，共識權重佔全網 {twPct}%。球上這一點幾乎看不見，社群或校園多架一台，補的就是這裡。',
+  tourInfraTitle: '連線靠的是這些實體設施',
+  tourInfraBody: '貼近之後多出五層：縣市界、海纜登陸點、變電所、發電廠與 345kV 骨幹。海外的封包從登陸點上岸，機房要有電才轉得動。點任何一個設施可以看細節。',
+  tourEndTitle: '導覽到這裡',
+  tourEndBody: '接下來自己轉、自己點。想讀文字版：<a href="../../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../utils/">離線小工具</a>。',
+
   backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a>',
 };
 
@@ -376,6 +404,31 @@ const EN = {
   roleTipAll: 'Click again to show all',
   roleTipOne: 'Show only this role',
 
+  // Guided tour. Same constraint as the zh-TW table: these lines get read out loud,
+  // so three sentences per stop at most. Numbers come from tour.js.
+  btnTour: 'Tour',
+  btnTourLong: 'Start the tour',
+  tourNote: 'Seven stops, about five minutes. Built for workshops and classrooms, and it runs with no network.',
+  tourNext: 'Next',
+  tourPrev: 'Back',
+  tourDone: 'Done',
+  tourExit: 'Exit',
+  tourKeys: 'Space to advance · arrow keys to move · Esc to exit',
+  tourIntroTitle: 'Close to ten thousand relays, unevenly spread',
+  tourIntroBody: '<b>{total}</b> relays are running right now, across {countries} countries. Land brightness is how many each country hosts. North America and Western Europe form one bright band, the rest of the world is a scattering of points.',
+  tourWeightTitle: 'Hosting the most and carrying the most are two different things',
+  tourWeightBody: 'Brightness switches to consensus weight, the share of traffic each country actually carries. The US hosts {usN} relays for {usPct}% of the weight, Germany {deN} for {dePct}%. Relays in Germany each carry more.',
+  tourBlockedTitle: 'Some places cannot reach it',
+  tourBlockedBody: 'In OONI tor measurements over the last 30 days, {blockedN} countries reached an anomaly rate of 85% or higher and are shaded red inward from the border. An anomaly means the test did not complete as expected, and blocking, an unstable network and an ISP fault all produce one.',
+  tourUsersTitle: 'The people using it and the machines running it sit in different countries',
+  tourUsersBody: 'Brightness switches to the estimated number of Tor users. Relay dots stay as they are. Where many people use it, there is often nothing underneath. That gap is why relays need to come from more places.',
+  tourTwTitle: 'Where Taiwan sits',
+  tourTwBody: 'Taiwan has <b>{twN}</b> relays, ranked {twRank} by count, holding {twPct}% of the consensus weight. That dot is almost invisible at this scale, and one more relay from a campus or a community group lands right here.',
+  tourInfraTitle: 'What the connection physically rests on',
+  tourInfraBody: 'Five more layers appear up close: county borders, cable landing points, substations, power stations and the 345 kV backbone. Traffic from abroad comes ashore at a landing point, and a machine room needs power to forward any of it. Click any facility for detail.',
+  tourEndTitle: 'That is the tour',
+  tourEndBody: 'Spin it and click around from here. In text: <a href="../../../en/tools/what-is-tor/">What is Tor</a>, <a href="../../../en/blog/2026/07/games-globe-open-data/">where this globe\'s data comes from</a>, <a href="../../../en/utils/">offline tools</a>.',
+
   backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/blog/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
 };
 
@@ -557,6 +610,30 @@ const ZH_CN = {
   listSep: '、',
   roleTipAll: '再点一次看全部',
   roleTipOne: '只看这个角色',
+
+  // 工作坊导览。约束跟 zh-TW 那份一样，每一站压在三句以内，数字由 tour.js 带进来。
+  btnTour: '导览',
+  btnTourLong: '开始导览',
+  tourNote: '七站，约五分钟。给工作坊与教学现场翻给人看，断网也打得开。',
+  tourNext: '下一步',
+  tourPrev: '上一步',
+  tourDone: '完成',
+  tourExit: '离开',
+  tourKeys: '空格键前进 · 左右键切换 · Esc 离开',
+  tourIntroTitle: '近万台中继，分布不平均',
+  tourIntroBody: '全网目前有 <b>{total}</b> 台运行中的中继，落在 {countries} 个国家。陆地的亮度代表该国托管多少台，北美与西欧连成一整片，其余地区只有零星几点。',
+  tourWeightTitle: '台数多不代表扛得多',
+  tourWeightBody: '亮度换成共识权重，也就是各国实际承担的流量比重。美国 {usN} 台、权重 {usPct}%，德国 {deN} 台却是 {dePct}%。德国那批中继单台扛的流量比较大。',
+  tourBlockedTitle: '有些地方连不上',
+  tourBlockedBody: 'OONI 近 30 天的 tor 测试里，异常率达 85% 以上的 {blockedN} 个国家由国界向内标红。异常代表测试没有按预期完成，成因包含连线被挡、网络不稳与 ISP 故障，只看比率分不出来。',
+  tourUsersTitle: '用的人跟架的机器不在同一批国家',
+  tourUsersBody: '亮度换成各国使用 Tor 的人数估计，中继点照样显示。用的人多的地方，底下不一定有中继。这个落差就是中继需要更多地方一起架的理由。',
+  tourTwTitle: '台湾在哪里',
+  tourTwBody: '台湾有 <b>{twN}</b> 台中继，台数排第 {twRank}，共识权重占全网 {twPct}%。球上这一点几乎看不见，社群或校园多架一台，补的就是这里。',
+  tourInfraTitle: '连线靠的是这些实体设施',
+  tourInfraBody: '贴近之后多出五层：县市界、海缆登陆点、变电所、发电厂与 345kV 骨干。海外的封包从登陆点上岸，机房要有电才转得动。点任何一个设施可以看细节。',
+  tourEndTitle: '导览到这里',
+  tourEndBody: '接下来自己转、自己点。想读文字版：<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/utils/">离线小工具</a>。',
 
   backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
 };

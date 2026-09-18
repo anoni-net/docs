@@ -426,7 +426,7 @@ const CORE_PAGES_EN = [
 // 是教學性質的視覺化，跟已經在預快取裡的 tools/what-is-tor/ 同一類，不指向特定身分，
 // 所以可以放。
 //
-// 維護：新增作品或地球儀多一份資料檔時要補進這裡，漏了的話那一份會在離線時抓不到。
+// 維護：新增作品，或地球儀多一份資料檔與程式檔時要補進這裡，漏了的話那一份會在離線時抓不到。
 // seacable.json 刻意不在清單裡，那份沒有落地到 repo。
 const GAME_APPS = [
   "games/onion-routing/play/index.html",
@@ -439,6 +439,7 @@ const GAME_APPS = [
   "games/tor-network/play/index.html",
   "games/tor-network/play/atlas.js",
   "games/tor-network/play/i18n.js",
+  "games/tor-network/play/tour.js",
   "games/tor-network/play/cables.json",
   "games/tor-network/play/continents.json",
   "games/tor-network/play/countries.json",

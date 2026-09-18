@@ -44,7 +44,7 @@ All three pieces have an English interface. The three language editions share on
 
     ---
 
-    A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates connection-blocking measurements, user estimates, shutdown records, submarine cables and internet-usage rates. Zoom in on Taiwan and it adds county boundaries, cable landing points, substations, power plants and the transmission grid.
+    A globe built from real data. Nearly ten thousand running Tor relays placed inside their own national borders, coloured by guard, middle and exit, sized by bandwidth, with landmasses lit according to the selected metric. Alongside the relay distribution it integrates connection-blocking measurements, user estimates, shutdown records, submarine cables and internet-usage rates. Zoom in on Taiwan and it adds county boundaries, cable landing points, substations, power plants and the transmission grid. A seven-stop guided tour runs through it one stop per press of the space bar, built for workshops and classrooms.
 
     [:octicons-arrow-right-24: Read more](tor-network.md){ .md-button .md-button--primary }
     <a href="../../games/tor-network/play/index.html?lang=en" class="md-button">Explore</a>
