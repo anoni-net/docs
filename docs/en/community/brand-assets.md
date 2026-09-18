@@ -519,11 +519,45 @@ Set once and stored permanently, so the picker offers brand colours rather than 
 
 A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, taken from the palette above.
 
-Keep the canvas at 940 wide or less. The content column scales the diagram down, so a wider canvas is scaled harder and its text ends up smaller. Measured on the docs site, the content column is 855 in a 1920 viewport and 668 at both 1280 and 1440, against body text of 16 to 17.6px. On a 940 canvas, 12.5px text renders at 11.4px and 8.9px, matching the diagrams already on the site. The same diagram on a 1240 canvas drops to 6.7px, which is too small to read.
+#### Size the canvas for phones
 
-When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on`.
+Draw on a 400-wide canvas and let the content run downwards. The page clamps the diagram into the content column with `max-width: 100%`, and that scale factor depends only on width, never on height — so a wider canvas is scaled harder, and phones sit at the worst end of the range. Measured content column widths across viewports:
 
-Measure the rendered width in a headless browser before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
+| Viewport | Content column | Scale on a 940 canvas | Scale on a 400 canvas |
+|---|---|---|---|
+| 1920 | 855 | 0.91 | 1.20 |
+| 1440, 1280 | 668 | 0.71 | 1.20 |
+| 1024 | 750 | 0.80 | 1.20 |
+| 768 | 736 | 0.78 | 1.20 |
+| 414 | 382 | 0.41 | 0.96 |
+| 390 | 358 | 0.38 | 0.90 |
+| 360 | 328 | 0.35 | 0.82 |
+
+Body text is 16 to 17.6px on desktop and 16px on phones. On a 940 canvas, 11.5px text renders at 8.2px on a 1440 screen and at 4.0px on a 360 phone, roughly a quarter of the body text beside it. A headless Chrome sweep of all 81 files in `docs/diagrams/` on 2026-09-19 put the smallest text between 3.5 and 5.0px on a 360 phone, with no exceptions, and the site has no lightbox, so a reader can only pinch-zoom the whole page and pan around.
+
+On a 400 canvas, 13px text renders at 15.6px on a 1440 screen, 11.6px on a 390 phone and 10.7px on a 360 phone. The desktop end is handled by `.diagram-tall`, which scales the image up to 480px. See "Using a diagram in a markdown article" below.
+
+The relationship between canvas width and font size is:
+
+```
+canvas width <= phone content column × smallest font size in the diagram / target rendered size
+```
+
+To land the smallest text above 11px on a 360 phone (content column 328), 12.5px text caps the canvas at roughly 372 and 14px text at roughly 417.
+
+#### Turn horizontal layouts vertical
+
+Left-to-right flows become top-to-bottom flows, side-by-side columns become stacked cards, and horizontal timelines become vertical ones. When a comparison matrix cannot fit its column headers into 400 units, move each header into the cell it labels: four rating columns become a 2×2 set of tags inside the card.
+
+Keep full sentences of prose out of the diagram. Those one or two footnote lines are a large part of what forces a wide canvas, and once baked into an image they cannot be selected or searched, and translating them means redrawing the whole file. Put them in the `figcaption` or in the article body.
+
+Splitting a diagram into a phone file and a desktop file behind `<picture>` and `srcset` does not work here. The privacy plugin only rewrites `img src`, `script src`, `a href` and the `image href` inside an SVG. A `srcset` is left alone, so the onion and IPFS editions would keep a clearnet request to assets.anoni.net.
+
+#### Leave line breaks to the layout
+
+When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on` in English, and in Chinese a line holding nothing but a full stop, or a full stop pushed to the start of a line. `docs/diagrams/` currently carries 10 of these, spread across `donation-channels`, `shutdown-levels` and `baseline-layers`.
+
+Measure the rendered font size in a headless browser at both 360 and 390 before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
 
 Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`. The site's palette toggle does not reach a standalone SVG file. Lighten the primary colour for the dark set, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
 
@@ -545,14 +579,16 @@ A drawio diagram, with `.brand-frame`:
 </figure>
 ```
 
-A hand-written SVG, which brings its own frame and takes a figcaption instead:
+A hand-written SVG, which brings its own frame, takes a figcaption instead, and carries `.diagram-tall`:
 
 ```markdown
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/<name>.en.svg" alt="Describe what the diagram actually shows">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/<name>.en.svg" alt="Describe what the diagram actually shows">
     <figcaption>One line on what this diagram is about</figcaption>
 </figure>
 ```
+
+`.diagram-tall` is `width: 480px` with `max-width: 100%`, which takes a 400 canvas up to 480 on desktop and down to the content column on a phone. Leave it off the older horizontal diagrams: their canvases are 880 to 1000, and clamping them to 480 would make the text smaller than it is today.
 
 `.brand-frame` is the site's utility class for diagrams, giving a cyan border and a soft shadow.
 
