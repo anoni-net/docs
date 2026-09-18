@@ -28,6 +28,8 @@ When a file travels without going over the network, the person receiving it has 
 
 During an outage this matters more; see [Preparing for and handling a network outage](../scenarios/shutdown.md). Physical delivery becomes the main channel, and the recipient does not get a second chance to ask for another copy.
 
+For where this step sits in a real workflow, see [handing a list to an outside partner](case-roster.md) and [handing things out at a workshop](case-workshop.md).
+
 ## What a match means
 
 Two files with the same SHA-256 have identical contents, down to the byte. Deliberately constructing two different files with the same SHA-256 is beyond what public research can currently do.

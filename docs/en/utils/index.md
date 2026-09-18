@@ -115,6 +115,62 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 </div>
 
+## How the tools connect
+
+Each tool above covers one action, and one thing on your plate usually runs through two or three of them. These are the paths people walk most often.
+
+| What you have to do | The order |
+|---|---|
+| Photos or screenshots going to someone else | If something in the picture needs covering, use [Screenshot redaction](redact.md), whose output already carries no metadata from the original. If the picture is clean and you only want the capture data gone, use the [File metadata remover](strip-metadata.md) |
+| A PDF going out | [PDF page tidy-up](pdf-pages.md) to arrange the pages, then the same page's "see what is inside" to search for text that should not still be there |
+| A link or QR code of unclear provenance | [QR code reader](qr-read.md) to decode it, [URL cleaner](clean-url.md) for the registered domain, [Invisible character detector](invisible.md) for homoglyphs in the text |
+| A file from someone else, to confirm and to inspect | [File hash comparison](hash.md) to confirm it matches their copy, the [File metadata remover](strip-metadata.md) or "see what is inside" on [PDF page tidy-up](pdf-pages.md) to list what it carries, [Invisible character detector](invisible.md) for embedded characters |
+| Something going to the person or device in front of you | Long strings go through the [QR code generator](qrcode.md) for the other side to read with a camera. Files of a few kilobytes go through the [QR code frame stream](qr-stream.md), which compares SHA-256 itself once the pieces arrive |
+| A file travelling by courier or on a USB stick | [Passphrase and password generator](passphrase.md) for a passphrase, [Local file encryption](age.md) to seal it, [File hash comparison](hash.md) so the recipient can verify |
+| A password you need now and again later | [Passphrase and password generator](passphrase.md) to draw one, [Passkey as your key](passkey.md) to hold it, [My preparation checklist](checklist.md) to record where you got to |
+
+Seven concrete situations, each written up as a full walk through one of these paths. The first three assume no particular role or threat. The last four are written against the kinds of work this site serves.
+
+### Everyday cases
+
+<div class="grid cards" markdown>
+
+-   :material-file-send-outline: **[Sending out a job application](case-resume.md)**
+
+    One evening before the deadline, a CV edited from an old version, a portfolio in three files, and one page showing work a previous employer has not published. Why an exported PDF carries the account name from your computer, and why text under a black box is still in the file.
+
+-   :material-tag-outline: **[Selling things on a secondhand marketplace](case-secondhand.md)**
+
+    Fourteen photos taken before a move, with a house number, the sign on the building opposite, and a utility bill in the backgrounds. When to reach for screenshot redaction and when for the metadata remover, and what to say when a buyer asks you for ID.
+
+-   :material-message-alert-outline: **[A link forwarded into a group chat](case-link.md)**
+
+    A neighbourhood group chat forwards a limited-time registration, with a URL that looks official and a QR code image. Why the registered domain is the only part worth reading, and what invisible characters can and cannot tell you.
+
+</div>
+
+### Cases at work
+
+<div class="grid cards" markdown>
+
+-   :material-account-multiple-outline: **[Handing a list to an outside partner](case-roster.md)**
+
+    The annual filing means sending a donor list to your accountant, which used to travel as an email attachment. Why the passphrase takes a different route, and why an encrypted file still gets a hash.
+
+-   :material-presentation: **[Handing things out at a workshop](case-workshop.md)**
+
+    The venue Wi-Fi belongs to the host and twenty people brought twenty different devices. What belongs on a printed QR code, what travels by screen and camera, and what still needs a USB stick.
+
+-   :material-file-account-outline: **[A file from a source](case-source-file.md)**
+
+    A source sends an internal deck, you need to verify it and quote from it, and nobody should be able to work out who handed it over. How document leak tracking works, and why quoting means retyping and redacting.
+
+-   :material-folder-account-outline: **[Turning conversation screenshots into a submission](case-evidence.md)**
+
+    Forty-odd conversation screenshots have to become one attachment, with third parties' names and avatars in frame. The order of redacting, merging and confirming, and what the last check before sending looks for.
+
+</div>
+
 ## Taking them offline
 
 The code and data behind these tools are stored along with the page. The [QR code generator](qrcode.md), [reader](qr-read.md), [frame stream](qr-stream.md) and [passphrase generator](passphrase.md) are stored on the device automatically along with the core chapters, because those four get used during an outage; see [Preparing for and handling a network outage](../scenarios/shutdown.md). For the rest, tick them in the [offline reading](../offline.md) list and they will open without a network afterwards.

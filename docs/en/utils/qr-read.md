@@ -27,6 +27,8 @@ Two that come up in practice:
 - **A QR code sticker on a parking meter** that looks just like the original payment code. Check it first: if the hostname does not match the official one, that sticker is a problem. A fake payment page will ask for your card number outright, and the money goes to someone else.
 - **Someone you just met hands you a card with a QR code**, saying scan this to add me. Look at what is actually inside before deciding whether to add them.
 
+For what to check once it is decoded, [a link forwarded into a group chat](case-link.md) walks through all three tools in order.
+
 ## No link is opened for you
 
 QR codes are a common phishing vector. A sticker over a payment code, a swapped image on a poster: the text looks like an official site while the host is something else. A camera app follows it immediately, leaving you no chance to check.

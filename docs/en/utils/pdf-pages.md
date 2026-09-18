@@ -37,6 +37,8 @@ A PDF you are about to send is rarely right the first time. The scan came out as
 
 Free online PDF services do the same job, and the price is that the whole file goes up to their servers first. One such service's privacy policy says files are deleted within two hours of processing — clearly written, but for those two hours the complete file sits on someone else's machine, and most people have never read the policy.
 
+For what these steps look like joined up, [sending out a job application](case-resume.md) walks the whole path from one evening before the deadline. For turning dozens of screenshots into one submission, see [turning conversation screenshots into a submission](case-evidence.md).
+
 ## How to use it
 
 1. Drop PDFs in, or click to choose files. You can pick several at once.

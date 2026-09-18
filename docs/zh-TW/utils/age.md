@@ -106,6 +106,8 @@ age -d -o backup.tar backup.tar.age
 
 age 是什麼、格式長什麼樣、跟 PGP 差在哪，見[什麼是 age](../tools/what-is-age.md)。
 
+整條路徑走完長什麼樣，見[把名單交給外部夥伴](case-roster.md)與[收到來源給的檔案](case-source-file.md)。
+
 ## 跨裝置，貼進你的密碼管理器
 
 貼一段文字進來加密，或加密檔案時勾「輸出成文字」，得到的是 `-----BEGIN AGE ENCRYPTED FILE-----` 開頭的純文字。把它跟密語一起存進你已經在用的密碼管理器（Bitwarden、Proton Pass、1Password 的安全筆記都行），另一台裝置打開這一頁貼回來、輸入密語就解開。跨裝置同步由你信任的管理器負責，站上什麼都不存。 下載下來的 `.age` 檔就是一般檔案，放進任何雲端硬碟都可以，密語另外收。

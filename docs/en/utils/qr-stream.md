@@ -33,6 +33,8 @@ What the three have in common: the file is small, both devices are within arm's 
 
 If you just need to send a colleague a file and you do not mind it crossing a network, use whatever you already use. This page gains you nothing and is slower.
 
+For using this with twenty people in a room, see [handing things out at a workshop](case-workshop.md).
+
 ## How it works
 
 The file is cut into small pieces, each piece is drawn as a QR code, and the codes flip past on screen like a short animation. The other device points a camera at it, collects each code it sees, and once it has the whole set it rebuilds the original.
