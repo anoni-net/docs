@@ -293,6 +293,20 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
+   .diagram-tall — docs/diagrams/ 直式手寫 SVG 的尺寸
+   畫布畫成 400 寬，手機端縮到內容欄寬（360 視窗是 328，390 視窗是 358），
+   桌面端放大到 480 為止。縮放比只看寬度，畫布越寬字縮得越狠，所以畫布是照
+   手機訂的，桌面靠這條往上放大回來。規格見 community/brand-assets.md。
+   舊的橫式圖（畫布 880 到 1000）不要套，套上去會被夾到 480，字更小。
+   用法：<img class="diagram-tall" src="..." alt="...">
+   ========================================================================== */
+
+.md-typeset img.diagram-tall {
+  width: 480px;
+  max-width: 100%;
+}
+
+/* ==========================================================================
    .hero-icon — 首頁 H1 旁的 logo（同 header / favicon 使用 logo-tonal）
    用法：# <img src="./assets/images/logo-tonal.svg" class="hero-icon"> 標題
    ========================================================================== */

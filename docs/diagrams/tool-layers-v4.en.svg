@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 548" width="400" height="548" role="img" aria-labelledby="title">
+<title id="title">How the four layers relate, and which one wraps which</title>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .card-c1, .card-c2, .card-c3, .card-n { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+  }
+</style>
+
+<rect class="card-c3" x="12" y="0" width="376" height="144" rx="8"/>
+<text class="t-main lab" x="26" y="24">Environment layer</text>
+<text class="t-main h2" x="26" y="44">Anonymous operating systems</text>
+<text class="t-main bd" x="26" y="62">Tails, Whonix, Qubes</text>
+<text class="t-main bd" x="26" y="79">The whole system defaults to Tor and</text>
+<text class="t-main bd" x="26" y="96">leaves nothing behind. This layer</text>
+<text class="t-main bd" x="26" y="113">wraps the connection layer below it,</text>
+<text class="t-main bd" x="26" y="130">so Tails gives you that layer too.</text>
+<rect class="card-c2" x="12" y="154" width="376" height="110" rx="8"/>
+<text class="t-main lab" x="26" y="178">Connection layer</text>
+<text class="t-main h2" x="26" y="198">The Tor family</text>
+<text class="t-main bd" x="26" y="216">Tor Browser, Snowflake, OnionShare, bridges</text>
+<text class="t-main bd" x="26" y="233">Layered encryption over a random path,</text>
+<text class="t-main bd" x="26" y="250">so IP and behaviour are hard to follow.</text>
+<rect class="card-c1" x="12" y="274" width="376" height="109" rx="8"/>
+<text class="t-mute lab" x="26" y="298">Base layer</text>
+<text class="t-main h2" x="26" y="318">Everyday privacy basics</text>
+<text class="t-mute bd" x="26" y="335">Which messenger, how you keep your passwords,</text>
+<text class="t-mute bd" x="26" y="352">what you use to pay anonymously. Whichever</text>
+<text class="t-mute bd" x="26" y="369">layer you use above, you still need this one.</text>
+<rect class="card-n" x="12" y="393" width="376" height="143" rx="8"/>
+<text class="t-mute lab" x="26" y="417">Observation layer</text>
+<text class="t-main h2" x="26" y="437">OONI</text>
+<text class="t-mute bd" x="26" y="454">Turns the experience of blocking</text>
+<text class="t-mute bd" x="26" y="471">and throttling into public data</text>
+<text class="t-mute bd" x="26" y="488">with a time, a place, and an ASN.</text>
+<text class="t-mute bd" x="26" y="505">It records what a connection</text>
+<text class="t-mute bd" x="26" y="522">ran into. It protects nothing.</text>
+</svg>

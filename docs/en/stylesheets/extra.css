@@ -296,6 +296,22 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
+   .diagram-tall — Sizing for the vertical hand-written SVGs in docs/diagrams/
+   The canvas is drawn 400 wide, shrinks to the content column on phones
+   (328 at a 360 viewport, 358 at 390) and scales up to 480 on desktop.
+   The scale factor depends on width alone, so the canvas is sized for phones
+   and brought back up here. Spec in community/brand-assets.md.
+   Leave it off the older horizontal diagrams (canvas 880 to 1000): clamping
+   them to 480 makes their text smaller than it is today.
+   Usage: <img class="diagram-tall" src="..." alt="...">
+   ========================================================================== */
+
+.md-typeset img.diagram-tall {
+  width: 480px;
+  max-width: 100%;
+}
+
+/* ==========================================================================
    .hero-icon — Home page H1 logo (same logo-tonal as header / favicon)
    ========================================================================== */
 

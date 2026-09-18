@@ -315,6 +315,71 @@ wordmark 的文字已经转成路径，打开的设备有没有装字体都长�
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | 次要文字、背景角色（如首页「我们关注的参与者」卡片） |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | 图片、卡片边框 |
 
+### 示意图用色
+
+`docs/diagrams/` 的手写 SVG 是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，所以下面这一组没有写成 `var(--x)`，是直接抄 hex 进 SVG 的 `<style>`。class 名称也照抄，三十几张图用的是同一套，换图的人才不用重新认。
+
+语义色，每一格是底色加框色：
+
+| class | 用在哪 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-c1` | 这一行是重点、主线路径 | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-ok` | 可以、低成本、风险低 | <span class="color-swatch" style="background:#e8f5e9"></span>`#e8f5e9` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` | <span class="color-swatch" style="background:#17301a"></span>`#17301a` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` |
+| `.card-w1` | 有条件、要注意、中等 | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-no` | 不行、高成本、风险高 | <span class="color-swatch" style="background:#fdecea"></span>`#fdecea` | <span class="color-swatch" style="background:#d32f2f"></span>`#d32f2f` | <span class="color-swatch" style="background:#35181a"></span>`#35181a` | <span class="color-swatch" style="background:#e57373"></span>`#e57373` |
+| `.card` | 没有好坏判断的一般卡片 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#23292e"></span>`#23292e` | <span class="color-swatch" style="background:#4b565e"></span>`#4b565e` |
+| `.card-n` | 弱化、次要、已排除 | <span class="color-swatch" style="background:#f4f6f7"></span>`#f4f6f7` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` | <span class="color-swatch" style="background:#1c2226"></span>`#1c2226` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+
+分层图用的 cyan 三阶，由浅到深对应由下到上或由外到内：
+
+| class | 层级 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-c1` | 最浅，第一层 | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-c2` | 中间层 | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
+| `.card-c3` | 最深，顶层 | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+
+橙色三阶给警示或成本递增的分层，结构跟 cyan 三阶一样：
+
+| class | 层级 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-w1` | 最浅 | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-w2` | 中间层 | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#7d4b19"></span>`#7d4b19` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` |
+| `.card-w3` | 最深，饱和底 | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#c85a00"></span>`#c85a00` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` | <span class="color-swatch" style="background:#ffa64d"></span>`#ffa64d` |
+
+底色越深，能放上去的文字色越少：
+
+| 卡片 | 亮色 | 暗色 |
+|---|---|---|
+| `.card`、`.card-n`、`.card-c1`、`.card-w1`、`.card-ok`、`.card-no` | `.t-main` 与 `.t-mute` 都可以 | 同左 |
+| `.card-c2`、`.card-c3`、`.card-w2` | 只用 `.t-main` | 只用 `.t-main` |
+| `.card-w3` | `.t-onfill` <span class="color-swatch" style="background:#212121"></span>`#212121` | `.t-onfill` <span class="color-swatch" style="background:#241708"></span>`#241708` |
+
+`.t-mute` 的 `#546e7a` 在 `.card-c2` 是 3.95:1、`.card-c3` 是 3.21:1、`.card-w2` 是 3.12:1，三个都过不了 AA，所以那三种底只放 `.t-main`（9.3 到 11.8:1）。
+
+`.card-w3` 两个模式要往相反方向走。亮色底 `#ef6c00` 配白字只有 3.08:1，配 `#212121` 是 5.23:1。暗色底 `#ff8c1a` 配 `#eceff1` 只有 2.02:1，配 `#241708` 是 7.51:1。旧的 `.t-inv` 是亮色白字配暗色 `#241708`，亮色那一半不够，2026-09-19 的竖式改版已经全部换成 `.t-onfill`，77 个手写文件零残留。
+
+`.t-onfill` 在亮色模式的值跟 `.t-main` 相同，都是 `#212121`，只有暗色模式才分岔成 `#241708`。两个 class 不能合并，合并之后暗色模式的 `.card-w3` 会掉到 2.02:1。
+
+文字与线：
+
+| class | 用途 | 亮色 | 暗色 |
+|---|---|---|---|
+| `.t-main` | 主要文字 | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
+| `.t-mute` | 次要文字、说明 | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
+| `.t-onfill` | 饱和底色上的文字，见上方配对表 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.rule` | 分隔线 | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+| `.arrow` | 流程箭头 | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
+
+同一个角色的卡片与标签不要叠在一起。`.card-w1` 的标签放进 `.card-w1` 的卡片里，两者底色相同，只剩框线在撑，换一个角色或者把外层改成 `.card-n`。
+
+颜色不能是唯一的语义载体。每一个色块里的文字要把语义写完整，例如标签写「匿名度 高」而不是只靠绿色。红配绿是色盲最难分的一组，文字写完整之后颜色只是辅助，看不出颜色差别的人照样读得到内容。
+
+对比实测，文字那几组都过 WCAG AA 的 4.5:1：`#212121` 在六种亮色底上是 14.1 到 16.1，`#eceff1` 在六种暗色底上是 12.3 到 14.0，`#546e7a` 在白底 5.4、在中性卡 5.0、在 cyan 卡 4.8，`#b0bec5` 在暗色卡是 7.7 到 8.4。
+
+`.t-mute` 订为 `#546e7a`，它同时也是上面中性色那一组的 `--neutral-muted`。旧值 `#607d8b` 在白底只有 4.37:1，AA 差一点，2026-09-19 的竖式改版已经全部换掉，77 个手写文件零残留。
+
+框色对页面底色多半在 1.5 到 2.8:1，没有到 WCAG 1.4.11 的 3:1。这一组的判断是框色属于加强，语义由框内的文字承担，所以不强求。真的要靠颜色分辨的图（散点图、条形图）不适用这个判断，那种图的每一个数据点都要标到文字。
+
 ### Logo 专用
 
 | 颜色 | Hex | 用途 |
@@ -517,15 +582,100 @@ grep -c mxfile your-diagram.drawio.svg
 
 ### 手写 SVG 的规则
 
-手写的图是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，颜色只能写死 hex，色票照本页上方那一组。
+手写的图是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，颜色只能写死 hex，照本页上方「示意图用色」那一组抄，class 名称也一起沿用。
 
-画布宽度上限 940。图在页面上会被内容栏缩小，画布越宽缩得越多，字看起来就越小。量过文档站的内容栏，1920 的视窗是 855，1280 与 1440 都是 668，正文字级 16 到 17.6px。940 的画布上，12.5px 的字实际渲染成 11.4px 与 8.9px，跟站上既有的图一致。同一张图放到 1240，会掉到 6.7px，读不了。
+#### 画布宽度照手机订
 
-英文版排不下的时候让图长高，不要让图变宽。三个语系共用同一组栏位坐标，长度差异靠折行吸收。数据里一句就是一句，断行的位置交给版面算，手写断行加上折行会长出 `the`、`on` 这种单字孤行。
+画布抓 400 宽，信息往下长。图在页面上被 `max-width: 100%` 夹进内容栏，缩放比只跟宽度有关，跟高度无关，所以画布越宽，字缩得越狠，而手机是缩放比最糟的那一端。量过文档站各个视窗宽度的内容栏：
 
-定稿前用 headless 浏览器量一次实际渲染宽度。只看 SVG 文件本身量不出来，字级要乘上缩放比才是读者看到的大小。
+| 视窗宽 | 内容栏 | 940 画布的缩放 | 400 画布的缩放 |
+|---|---|---|---|
+| 1920 | 855 | 0.91 | 1.20 |
+| 1440、1280 | 668 | 0.71 | 1.20 |
+| 1024 | 750 | 0.80 | 1.20 |
+| 768 | 736 | 0.78 | 1.20 |
+| 414 | 382 | 0.41 | 0.96 |
+| 390 | 358 | 0.38 | 0.90 |
+| 360 | 328 | 0.35 | 0.82 |
 
-深色模式在 SVG 内用 `@media (prefers-color-scheme: dark)` 自己处理，站上 palette 切换的状态不会传进独立的 SVG 文件。深色那一组把主色提亮，例如 cyan-700 `#0089bf` 换成 cyan-300 `#4dbfff`。
+正文字级桌面 16 到 17.6px，手机 16px。940 的画布配 11.5px 的最小字，在 1440 渲染成 8.2px，在 360 的手机渲染成 4.0px，大约是旁边正文的四分之一。2026-09-19 用 headless Chrome 扫过 `docs/diagrams/` 全部 81 个文件，最小字在 360 手机上落在 3.5 到 5.0px，没有一张例外，而页面没有装 lightbox，读者只能整页 pinch-zoom 再平移。
+
+400 的画布配 13px 的最小字，在 1440 渲染成 15.6px，在 390 手机是 11.6px，在 360 手机是 10.7px。桌面那一端靠 `.diagram-tall` 往上放大到 480px，用法见下方「套到 markdown 文章」。
+
+字级与画布宽度的关系用这一条算：
+
+```
+画布宽 <= 手机内容栏 × 图内最小字级 / 目标渲染字级
+```
+
+要在 360 手机（内容栏 328）让最小字渲染到 11px 以上，12.5px 的字对应画布上限约 372，14px 的字约 417。
+
+#### 横的东西都翻成竖的
+
+左到右的流程改成上到下，并排的栏位改成堆叠的卡片，横向的时间轴改成竖向的时间轴。对照矩阵的栏位标题在 400 宽塞不下的时候，把标题搬进每一格里，例如四个评分栏改成卡片内的 2×2 标签。
+
+图里不要放整句的脚注。那一两行散文是逼画布变宽的主因之一，而且烘进图片之后不能选取、不能被搜索，翻译的时候要整张重画。把它搬到 `figcaption` 或正文。
+
+`<picture>` 加 `srcset` 分手机与桌面两份文件这条路走不通。privacy 插件只改写 `img src`、`script src`、`a href` 与 SVG 的 `image href`，`srcset` 不会被本地化，onion 与 IPFS 版会留下对 assets.anoni.net 的 clearnet 请求。
+
+#### 版型范本
+
+下面这张图把每个版型元件与每个色票 token 各用一次。做新图时照它抄，尺寸、内距与色值都在里面。
+
+<figure markdown="span">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference-v4.zh-CN.svg" alt="示意图版型范本，由上而下依序是六块。带 eyebrow、title、sub 与 lines 的卡片。两栏标签的卡片，四个标签分别是良好、中等、警示、中性。有小标分段的卡片。一个分节标题。上下流程的三个节点与居中连接线。cyan 三阶与橙色三阶各三张卡片。">
+    <figcaption>每个元件与每个 token 各用一次，做新图时照这张抄</figcaption>
+</figure>
+
+固定的数字：画布 400 宽，外距 12，卡片内距 14，所以文字可用宽度是 348。卡片上缘到第一行文字 24px，行距 17px。
+
+卡片之间的间距有三个值，依关系选：
+
+| 间距 | 用在哪 |
+|---|---|
+| 8px | 同一族群的色阶变体堆叠，例如三阶分层的三张卡片 |
+| 10px | 一般情况，语义不同的两张卡片之间 |
+| 14px | 段落或族群的边界，例如从 cyan 三阶跳到橙色三阶 |
+
+圆角有三个值，依形状选：
+
+| rx | 用在哪 |
+|---|---|
+| 8 | 卡片 |
+| 6 | 流程节点与卡片内的小方框 |
+| 高度的一半 | 胶囊状标签。标签高 24 时 rx 是 12，不要写死 6 |
+
+字级只有 15、14、13 三个值。这套阶层是「粗细乘颜色」两个轴叠出来的，不是一路递增的字级 scale：15 与 14 是粗体深色，13 同时出现在粗体（小标）与细体（正文）。想再加一层强调时改粗细或改颜色，不要插进 12.5 或 13.5 这种中间值，在 0.82 到 1.2 的缩放范围内那 0.5px 没有人看得出来。
+
+#### eyebrow 用 muted，alt 是唯一的权威文字
+
+卡片的 eyebrow 跟 sub 同一个颜色系（浅底用 `.t-mute`，`.card-c2`、`.card-c3`、`.card-w2` 用 `.t-main`，`.card-w3` 用 `.t-onfill`），只有 title 用深色。三行的层次是「淡的小标、深的标题、淡的副标」。eyebrow 跟 title 都用深色的话，两行只差 1px 字级，在 328 宽看起来像标题被拆成两行。
+
+eyebrow 放的是分类或编号（「第一级」、「Send」、「环境层」），title 说明这一格的内容。如果某个字串单独看就是这张卡的主要信息，它应该是 title 而不是 eyebrow。
+
+SVG 内只留一个简短的 `<title>`，给直接开启文件网址的情境用，不要写 `<desc>`。图是被 `img` 标签引用的，浏览器把它当成不透明的点阵图，SVG 内部的 `title`、`desc`、`role`、`aria-*` 都不会被辅助科技读到，读者听到的一律是 `img` 的 `alt`。完整的说明只写在 `alt` 那一份，两边各写一份的结果是内容各自漂移。
+
+#### 流程用居中的连接线
+
+上下流程的节点是满版的圆角矩形，文字靠左。节点之间留 18px，中间放一条居中在画布中线的连接线，线用 `.arrow`（stroke `#90a4ae`，暗色 `#6b7780`，宽 1.6），末端接一个 `.arrow-h` 的实心三角形。
+
+不要拿「↓」这类文字字符当箭头。字符的基线、字重与字级都跟着正文走，位置也对不齐节点中线，看起来像漏字而不像流程。
+
+```
+节点 rect x=26 width=348 rx=6
+连接线   M200 y V y+12
+箭头     M196 y+11 L204 y+11 L200 y+18 Z
+```
+
+#### 断行交给版面算
+
+英文版排不下的时候让图长高，不要让图变宽。三个语系共用同一组栏位坐标，长度差异靠折行吸收。数据里一句就是一句，断行的位置交给版面算，手写断行加上折行会长出 `the`、`on` 这种单字孤行，中文那一侧则是整行只剩一个「。」，或者句号落在行首。`docs/diagrams/` 目前有 10 处这种痕迹，散在 `donation-channels`、`shutdown-levels`、`baseline-layers` 三组文件里。
+
+定稿前用 headless 浏览器在 360 与 390 两个宽度各量一次实际渲染字级。只看 SVG 文件本身量不出来，字级要乘上缩放比才是读者看到的大小。
+
+深色模式在 SVG 内用 `@media (prefers-color-scheme: dark)` 自己处理，色值照上方「示意图用色」的暗色那两栏抄。自己配的话原则是把主色提亮，例如 cyan-700 `#0089bf` 换成 cyan-300 `#4dbfff`。
+
+站上的 palette 切换传得进独立的 SVG。Material 在 slate 主题下会对 `body` 设 `color-scheme: dark`，浏览器把这个值带进 `img` 载入的 SVG 文件，读者手动切到暗色的时候图会跟着换。2026-09-19 在 Chromium 与 Firefox 两边都验过：系统设亮色、文档站切 slate 的组合，图照样渲染成暗色那一组。七张 drawio 图没有这一段，在暗色底上会看到白底方块。
 
 色块里的文字用中性深色 `#212121` 或白色，不要拿主色当文字色。`#ef6c00` 与 `#4caf50` 这类颜色在白底的对比度不到 4.5:1，语意靠框色与文字本身表达就够了。
 
@@ -545,14 +695,16 @@ drawio 图，套 `.brand-frame`：
 </figure>
 ```
 
-手写 SVG，自带外框，改用 figcaption：
+手写 SVG，自带外框，改用 figcaption，并且套 `.diagram-tall`：
 
 ```markdown
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/<name>.zh-TW.svg" alt="把图的内容用文字说完整">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/<name>.zh-TW.svg" alt="把图的内容用文字说完整">
     <figcaption>一句话说明这张图在讲什么</figcaption>
 </figure>
 ```
+
+`.diagram-tall` 做的事是 `width: 480px` 配 `max-width: 100%`，让 400 的画布在桌面放大到 480，在手机缩到内容栏宽。旧的横式图先不要套，它们的画布是 880 到 1000，套上去会被夹到 480，字比现在更小。
 
 `.brand-frame` 是 anoni.net 图示的 utility class（cyan 边框加软阴影）。
 

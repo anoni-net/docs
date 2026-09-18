@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1070" width="400" height="1070" role="img" aria-labelledby="title">
+<title id="title">Three collection channels, and a donor's choice depends on who they are avoiding</title>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card, .card-c1, .card-n, .card-no, .card-ok, .card-w1 { stroke-width: 1.3; }
+  .card { fill: #ffffff; stroke: #cfd8dc; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .rule { stroke: #46515a; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">For the organisation: what each channel costs</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-c1" x="12" y="44" width="376" height="169" rx="8"/>
+<text class="t-main h2" x="26" y="68">Cash</text>
+<text class="t-mute bd" x="26" y="86">Public mailbox, events</text>
+<rect class="card-ok" x="26" y="96" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="112" text-anchor="middle">Anonymity High</text>
+<rect class="card-w1" x="204" y="96" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="112" text-anchor="middle">Compliance Medium</text>
+<rect class="card-no" x="26" y="124" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="140" text-anchor="middle">Scale Low</text>
+<rect class="card-no" x="204" y="124" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="140" text-anchor="middle">Cross-border No</text>
+<text class="t-mute bd" x="26" y="165">Small domestic support, the lowest-friction</text>
+<text class="t-mute bd" x="26" y="182">route. Public fundraising rules cover more</text>
+<text class="t-mute bd" x="26" y="199">situations than people expect, so check first.</text>
+<rect class="card-w1" x="12" y="223" width="376" height="186" rx="8"/>
+<text class="t-main h2" x="26" y="247">Cryptocurrency</text>
+<text class="t-mute bd" x="26" y="265">Self-custody or a hosted platform</text>
+<rect class="card-ok" x="26" y="275" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="292" text-anchor="middle">Anonymity Med-high</text>
+<rect class="card-no" x="204" y="275" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="292" text-anchor="middle">Compliance High</text>
+<rect class="card-ok" x="26" y="303" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="320" text-anchor="middle">Scale High</text>
+<rect class="card-ok" x="204" y="303" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="320" text-anchor="middle">Cross-border Yes</text>
+<text class="t-mute bd" x="26" y="344">Cross-border support for organisations abroad.</text>
+<text class="t-mute bd" x="26" y="361">VASP registration, anti-money-laundering and</text>
+<text class="t-mute bd" x="26" y="378">tax duties are a clear step up. Sort out</text>
+<text class="t-mute bd" x="26" y="395">conversion and accounting first.</text>
+<rect class="card-n" x="12" y="419" width="376" height="169" rx="8"/>
+<text class="t-main h2" x="26" y="443">Prepaid cards and codes</text>
+<text class="t-mute bd" x="26" y="461">Gift cards, store codes</text>
+<rect class="card-w1" x="26" y="471" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="488" text-anchor="middle">Anonymity Medium</text>
+<rect class="card-ok" x="204" y="471" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="488" text-anchor="middle">Compliance Low</text>
+<rect class="card-w1" x="26" y="499" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="516" text-anchor="middle">Scale Medium</text>
+<rect class="card-w1" x="204" y="499" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="516" text-anchor="middle">Cross-border Domestic</text>
+<text class="t-mute bd" x="26" y="540">Small domestic gifts with no crypto involved.</text>
+<text class="t-mute bd" x="26" y="557">Most donors give up at the step of acquiring a</text>
+<text class="t-mute bd" x="26" y="574">privacy coin, and this route fills that gap.</text>
+<text class="t-main h1" x="12" y="626">For the donor: work out</text>
+<text class="t-main h1" x="12" y="646">who you are avoiding first</text>
+<path class="rule" d="M12 656 H388"/>
+<rect class="card" x="12" y="668" width="376" height="91" rx="8"/>
+<text class="t-main h2" x="26" y="692">Hiding the money trail</text>
+<text class="t-main h2" x="26" y="711">from family or an employer</text>
+<text class="t-mute bd" x="26" y="728">Use: cash, prepaid cards, privacy coins</text>
+<text class="t-mute bd" x="26" y="745">Avoid: credit cards, joint bank accounts</text>
+<rect class="card" x="12" y="769" width="376" height="125" rx="8"/>
+<text class="t-main h2" x="26" y="793">Avoiding an identity</text>
+<text class="t-main h2" x="26" y="812">record at the organisation</text>
+<text class="t-mute bd" x="26" y="829">Use: cash with no email attached,</text>
+<text class="t-mute bd" x="26" y="846">privacy coins to a self-custodied wallet</text>
+<text class="t-mute bd" x="26" y="863">Avoid: bank transfer, which leaves</text>
+<text class="t-mute bd" x="26" y="880">the account name on their books</text>
+<rect class="card" x="12" y="904" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="928">Avoiding cross-border surveillance</text>
+<text class="t-mute bd" x="26" y="945">Use: Monero, shielded Zcash</text>
+<text class="t-mute bd" x="26" y="962">Avoid: Bitcoin through a centralised exchange</text>
+<rect class="card" x="12" y="986" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="1010">A personal preference for leaving no record</text>
+<text class="t-mute bd" x="26" y="1027">Use: any cash route</text>
+<text class="t-mute bd" x="26" y="1044">Avoid: any electronic payment</text>
+</svg>

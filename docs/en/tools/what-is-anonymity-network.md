@@ -87,9 +87,9 @@ No single tool covers this. The site groups tools into four layers, each handlin
 The full article list for each family is on the [Tools index](./index.md).
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/tool-layers.en.svg"
-        alt="The structural relationship between the four tool layers. The Tor family at the connection layer is the core, and the environment layer wraps the whole of it. The observation layer sits alongside rather than inside, recording what a connection ran into without protecting it. Everyday privacy basics run underneath all of it, whichever layer you use above.">
-    <figcaption>Which layer wraps which</figcaption>
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v4.en.svg"
+        alt="The structural relationship between four tool layers. The Tor family at the connection layer is the core. The environment layer, the anonymous operating systems, wraps the entire connection layer, so the system defaults to Tor and leaves nothing behind at shutdown. The observation layer sits alongside rather than inside: it records what a connection ran into, turning blocking and throttling into public data with a time, a place, and an ASN, and it protects nothing itself. Everyday privacy basics run underneath all of it, since messengers, password management, and anonymous payment matter whichever layer you use above.">
+    <figcaption>Which layer wraps which. The four are not a ladder and have no fixed order. Read the group that matches your situation, and let your threat model decide.</figcaption>
 </figure>
 
 The four cards above cover what each family does. There are relationships between them as well. The environment layer wraps the connection layer entirely, so installing Tails gives you both. The measurement layer sits alongside rather than inside, recording what a connection ran into without protecting it. The everyday fundamentals run underneath all of it, whichever layer you use above.

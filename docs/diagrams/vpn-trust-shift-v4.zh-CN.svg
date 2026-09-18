@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1091" width="400" height="1091" role="img" aria-labelledby="title">
+<title id="title">VPN 换掉的是那个单点是谁，Tor 把它拆掉</title>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .arrow { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; stroke: none; }
+  .card, .card-c1, .card-n, .card-ok, .card-w3 { stroke-width: 1.3; }
+  .card { fill: #ffffff; stroke: #cfd8dc; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .arrow { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<defs><g id="arw"><path class="arrow" d="M0 0 V12"/><path class="arrow-h" d="M-4 11 L4 11 L0 18 Z"/></g></defs>
+
+<rect class="card-n" x="12" y="0" width="376" height="230" rx="8"/>
+<text class="t-mute lab" x="26" y="24">直接连</text>
+<text class="t-main h2" x="26" y="44">只有一个节点，它什么都知道</text>
+<rect class="card" x="26" y="50" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="70">你</text>
+<use href="#arw" x="200" y="80"/>
+<rect class="card-w3" x="26" y="98" width="348" height="48" rx="6"/>
+<text class="t-onfill lab" x="38" y="118">ISP</text>
+<text class="t-onfill bd" x="38" y="136">知道你是谁，也知道你连哪</text>
+<use href="#arw" x="200" y="146"/>
+<rect class="card" x="26" y="164" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="184">网站</text>
+<text class="t-main bd" x="38" y="202">看到你的真实 IP</text>
+<rect class="card-n" x="12" y="240" width="376" height="296" rx="8"/>
+<text class="t-mute lab" x="26" y="264">经过 VPN</text>
+<text class="t-main h2" x="26" y="284">单点换人</text>
+<rect class="card" x="26" y="290" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="310">你</text>
+<use href="#arw" x="200" y="320"/>
+<rect class="card-ok" x="26" y="338" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="358">ISP</text>
+<text class="t-main bd" x="38" y="376">只看到你连上 VPN</text>
+<use href="#arw" x="200" y="386"/>
+<rect class="card-w3" x="26" y="404" width="348" height="48" rx="6"/>
+<text class="t-onfill lab" x="38" y="424">VPN 业者</text>
+<text class="t-onfill bd" x="38" y="442">知道你是谁，也知道你连哪</text>
+<use href="#arw" x="200" y="452"/>
+<rect class="card" x="26" y="470" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="490">网站</text>
+<text class="t-main bd" x="38" y="508">看到 VPN 的 IP</text>
+<rect class="card-n" x="12" y="546" width="376" height="428" rx="8"/>
+<text class="t-mute lab" x="26" y="570">经过 Tor</text>
+<text class="t-main h2" x="26" y="590">单点被拆开</text>
+<rect class="card" x="26" y="596" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="616">你</text>
+<use href="#arw" x="200" y="626"/>
+<rect class="card-ok" x="26" y="644" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="664">ISP</text>
+<text class="t-main bd" x="38" y="682">只看到你在用 Tor</text>
+<use href="#arw" x="200" y="692"/>
+<rect class="card-ok" x="26" y="710" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="730">Guard</text>
+<text class="t-main bd" x="38" y="748">知道你是谁，不知道你连哪</text>
+<use href="#arw" x="200" y="758"/>
+<rect class="card-ok" x="26" y="776" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="796">Middle</text>
+<text class="t-main bd" x="38" y="814">两边都不知道</text>
+<use href="#arw" x="200" y="824"/>
+<rect class="card-ok" x="26" y="842" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="862">Exit</text>
+<text class="t-main bd" x="38" y="880">知道你连哪，不知道你是谁</text>
+<use href="#arw" x="200" y="890"/>
+<rect class="card" x="26" y="908" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="928">网站</text>
+<text class="t-main bd" x="38" y="946">看到出口节点的 IP</text>
+<rect class="card-c1" x="12" y="990" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="1014">橙色那一格是同时知道你是谁与你连哪的节点</text>
+<text class="t-mute bd" x="26" y="1031">VPN 把它从 ISP 换成 VPN 业者，数量没有变。</text>
+<text class="t-mute bd" x="26" y="1048">Tor 把这两件事拆给三个互不相干的中继，任何一个节</text>
+<text class="t-mute bd" x="26" y="1065">点都凑不出完整的答案，所以不需要信任其中任何一个。</text>
+</svg>

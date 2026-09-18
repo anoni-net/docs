@@ -38,9 +38,9 @@ icon: material/share-circle
 </figure>
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/onionshare-modes-flow.zh-CN.svg"
-        alt="四种模式的数据流向对照。Send 是你的电脑放文件，对方用 Tor Browser 下载。Receive 是你开上传界面，投件人上传，你在本机收到。Host a Website 是你放一份静态网站，多位访客各自浏览。Chat 是双向的即时对话，消息只在内存，关掉就消失。四种共通的是中间那个 .onion 网址。">
-    <figcaption>四种模式的数据往哪个方向走</figcaption>
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/onionshare-modes-flow-v4.zh-CN.svg"
+        alt="四种模式的数据流向对照。Send 是你的电脑放文件，对方用 Tor Browser 下载，数据由你流向对方。Receive 是你开一个上传界面，投件人上传，数据由对方流向你。Host a Website 是你放一份静态网站，多位访客浏览，数据由你流向多人。Chat 是双向的即时对话，所有人都连进同一个一次性聊天室。四种模式共通的是中间那个 .onion 网址，关掉 OnionShare 网址就失效。">
+    <figcaption>四种模式的数据往哪个方向走。四种模式共通的是中间那一段。文件与消息直接在两端之间走 Tor，没有经过任何云端服务，关掉 OnionShare 网址立刻失效。网址本身要另外用安全管道交给对方，OnionShare 不负责配送。用不安全的管道传网址，那一段就不再匿名。</figcaption>
 </figure>
 
 上面那张截图是四个分页长什么样，这张图是数据往哪走。四种模式的差别就在方向：Send 由你流向对方，Receive 由对方流向你，Host a Website 由你流向多人，Chat 是双向。中间那一段都一样，文件直接在两端之间走 Tor，没有经过任何云端服务。

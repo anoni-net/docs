@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 759" width="400" height="759" role="img" aria-labelledby="title">
+<title id="title">科技滥用走的是四类一般消费性功能</title>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .card-c1, .card-no, .card-w1 { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="24">共同点</text>
+<text class="t-mute bd" x="26" y="41">这些手法多半不需要特殊技术。它们用的是为家庭与伴</text>
+<text class="t-mute bd" x="26" y="58">侣设计的一般消费性功能，反过来对付家里的某一个人。</text>
+<rect class="card-w1" x="12" y="86" width="376" height="140" rx="8"/>
+<text class="t-main h2" x="26" y="110">账号存取与共用方案</text>
+<text class="t-mute bd" x="26" y="127">对方已经知道或猜得出的信箱、手机解锁与网银密码</text>
+<text class="t-mute bd" x="26" y="144">共用的 Apple ID 或 Google 账号，消息、照片、</text>
+<text class="t-mute bd" x="26" y="161">浏览记录与联系人会自动同步到对方手上的设备</text>
+<text class="t-mute bd" x="26" y="178">Apple 家人共享与运营商家庭套餐，暴露购买与安装记录</text>
+<text class="t-mute bd" x="26" y="195">Google Family Link 用在成年人身上就成了监控工具</text>
+<text class="t-mute bd" x="26" y="212">密码重设信寄到共用号码或共用信箱，改了密码也拿得回去</text>
+<rect class="card-w1" x="12" y="236" width="376" height="157" rx="8"/>
+<text class="t-main h2" x="26" y="260">位置追踪</text>
+<text class="t-mute bd" x="26" y="277">查找（Find My）与 Google 地图的位置共享，</text>
+<text class="t-mute bd" x="26" y="294">一旦开启就持续下去，而且不会再有任何通知</text>
+<text class="t-mute bd" x="26" y="311">AirTag、Tile 这类蓝牙追踪器</text>
+<text class="t-mute bd" x="26" y="328">放进包包、车内或孩子的物品</text>
+<text class="t-mute bd" x="26" y="345">车联网 App 看得到车辆实时位置与行程记录</text>
+<text class="t-mute bd" x="26" y="362">共用日历透露你接下来会在哪里</text>
+<text class="t-mute bd" x="26" y="379">照片同步时带着 GPS 坐标，足以定位新住处</text>
+<rect class="card-w1" x="12" y="403" width="376" height="123" rx="8"/>
+<text class="t-main h2" x="26" y="427">设备上的追踪类 App</text>
+<text class="t-mute bd" x="26" y="444">在对方短暂取得你的手机时安装，之后暗中转</text>
+<text class="t-mute bd" x="26" y="461">发消息、通话记录、照片、浏览行为与位置</text>
+<text class="t-mute bd" x="26" y="478">可以完全不显示图标</text>
+<text class="t-mute bd" x="26" y="495">电池比平常快没电、待机时机身发热、无法解</text>
+<text class="t-mute bd" x="26" y="512">释的流量用量都只是迹象，不是确定的证据</text>
+<rect class="card-w1" x="12" y="536" width="376" height="123" rx="8"/>
+<text class="t-main h2" x="26" y="560">智能家居与共用设备</text>
+<text class="t-mute bd" x="26" y="577">智能锁、摄像头、门铃与温控，掌握控制账号的人看</text>
+<text class="t-mute bd" x="26" y="594">得到画面、知道门什么时候开，也可以把你锁在外面</text>
+<text class="t-mute bd" x="26" y="611">分居之后这些设备经常还连在对方的账号上</text>
+<text class="t-mute bd" x="26" y="628">共用的语音助理暴露例行事项与提醒</text>
+<text class="t-mute bd" x="26" y="645">共用的流媒体与定位社交 App 泄漏日常作息</text>
+<rect class="card-no" x="12" y="675" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="699">最可靠的信号</text>
+<text class="t-mute bd" x="26" y="716">上面每一条的迹象都可能有别的解释。实务上最</text>
+<text class="t-mute bd" x="26" y="733">可靠的信号往往是对方知道了他不该知道的事。</text>
+</svg>

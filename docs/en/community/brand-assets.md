@@ -315,6 +315,71 @@ Align derivative work to these values. The site's `extra.css` already defines th
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | Secondary text, background roles |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | Image and card borders |
 
+### Diagram colours
+
+The hand-written SVGs in `docs/diagrams/` are standalone files pulled in by an `img` tag, so they cannot reach the page's CSS variables. The set below is therefore not written as `var(--x)`; copy the hex values straight into the SVG's `<style>`. Copy the class names too, because the thirty-odd diagrams already share one set and the next person to edit one should not have to learn a second.
+
+Semantic colours, each cell giving a fill and a border:
+
+| class | Where it goes | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-c1` | The highlighted row, the main path | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-ok` | Works, low cost, low risk | <span class="color-swatch" style="background:#e8f5e9"></span>`#e8f5e9` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` | <span class="color-swatch" style="background:#17301a"></span>`#17301a` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` |
+| `.card-w1` | Conditional, needs care, medium | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-no` | Does not work, high cost, high risk | <span class="color-swatch" style="background:#fdecea"></span>`#fdecea` | <span class="color-swatch" style="background:#d32f2f"></span>`#d32f2f` | <span class="color-swatch" style="background:#35181a"></span>`#35181a` | <span class="color-swatch" style="background:#e57373"></span>`#e57373` |
+| `.card` | A plain card with no verdict attached | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#23292e"></span>`#23292e` | <span class="color-swatch" style="background:#4b565e"></span>`#4b565e` |
+| `.card-n` | Downplayed, secondary, ruled out | <span class="color-swatch" style="background:#f4f6f7"></span>`#f4f6f7` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` | <span class="color-swatch" style="background:#1c2226"></span>`#1c2226` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+
+The three-step cyan ramp for layered diagrams, lightest to darkest running bottom to top or outside to inside:
+
+| class | Level | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-c1` | Lightest, first layer | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-c2` | Middle layer | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
+| `.card-c3` | Darkest, top layer | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+
+An orange ramp for warning levels or rising cost, built the same way as the cyan one:
+
+| class | Level | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-w1` | Lightest | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-w2` | Middle layer | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#7d4b19"></span>`#7d4b19` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` |
+| `.card-w3` | Darkest, saturated fill | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#c85a00"></span>`#c85a00` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` | <span class="color-swatch" style="background:#ffa64d"></span>`#ffa64d` |
+
+The darker the fill, the fewer text colours it will take:
+
+| Card | Light | Dark |
+|---|---|---|
+| `.card`, `.card-n`, `.card-c1`, `.card-w1`, `.card-ok`, `.card-no` | `.t-main` or `.t-mute` | Same |
+| `.card-c2`, `.card-c3`, `.card-w2` | `.t-main` only | `.t-main` only |
+| `.card-w3` | `.t-onfill` <span class="color-swatch" style="background:#212121"></span>`#212121` | `.t-onfill` <span class="color-swatch" style="background:#241708"></span>`#241708` |
+
+`.t-mute` at `#546e7a` scores 3.95:1 on `.card-c2`, 3.21:1 on `.card-c3` and 3.12:1 on `.card-w2`, all under AA, so those three fills take `.t-main` only, which scores 9.3 to 11.8:1.
+
+`.card-w3` has to go opposite ways in the two modes. On the light fill `#ef6c00`, white text scores 3.08:1 while `#212121` scores 5.23:1. On the dark fill `#ff8c1a`, `#eceff1` scores 2.02:1 while `#241708` scores 7.51:1. The older `.t-inv` paired white in light mode with `#241708` in dark, so the light half fell short. The vertical rework on 2026-09-19 replaced every instance with `.t-onfill`, and none remain across the 77 hand-written files.
+
+`.t-onfill` holds the same value as `.t-main` in light mode, `#212121`, and only diverges to `#241708` in dark mode. The two classes cannot be merged: merging them drops `.card-w3` to 2.02:1 in dark mode.
+
+Text and lines:
+
+| class | Where it goes | Light | Dark |
+|---|---|---|---|
+| `.t-main` | Primary text | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
+| `.t-mute` | Secondary text and notes | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
+| `.t-onfill` | Text on a saturated fill, see the pairing table above | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.rule` | Divider | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+| `.arrow` | Flow arrow | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
+
+Do not nest a tag inside a card of the same role. A `.card-w1` tag sitting on a `.card-w1` card shares its fill, leaving only the border to separate them; switch the role or drop the outer card to `.card-n`.
+
+Colour must never be the only thing carrying the meaning. The text inside each block has to say it in full, so a tag reads "Anonymity High" rather than relying on the green. Red against green is the hardest pair for colour-blind readers, and once the words are complete the colour is only reinforcement, so a reader who cannot tell the two apart still gets the content.
+
+Measured contrast puts every text pairing above the WCAG AA threshold of 4.5:1. `#212121` scores 14.1 to 16.1 on the six light fills, `#eceff1` scores 12.3 to 14.0 on the six dark fills, `#546e7a` scores 5.4 on white, 5.0 on the neutral card and 4.8 on the cyan card, and `#b0bec5` scores 7.7 to 8.4 on the dark cards.
+
+`.t-mute` is `#546e7a`, which is also `--neutral-muted` in the neutral set above. The older `#607d8b` reached only 4.37:1 on white, just under AA. The vertical rework on 2026-09-19 replaced every instance, and none remain across the 77 hand-written files.
+
+Border colours land between 1.5 and 2.8:1 against the page background, short of the 3:1 in WCAG 1.4.11. The judgement here is that the border reinforces and the words inside carry the meaning, so the threshold is not enforced. It does not extend to diagrams where colour genuinely does the distinguishing, such as scatter plots and bar charts; label every data point in those.
+
 ### Logo fills
 
 | Colour | Hex | Use |
@@ -517,15 +582,100 @@ Set once and stored permanently, so the picker offers brand colours rather than 
 
 ### Rules for hand-written SVG
 
-A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, taken from the palette above.
+A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, copied from "Diagram colours" above along with the class names.
 
-Keep the canvas at 940 wide or less. The content column scales the diagram down, so a wider canvas is scaled harder and its text ends up smaller. Measured on the docs site, the content column is 855 in a 1920 viewport and 668 at both 1280 and 1440, against body text of 16 to 17.6px. On a 940 canvas, 12.5px text renders at 11.4px and 8.9px, matching the diagrams already on the site. The same diagram on a 1240 canvas drops to 6.7px, which is too small to read.
+#### Size the canvas for phones
 
-When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on`.
+Draw on a 400-wide canvas and let the content run downwards. The page clamps the diagram into the content column with `max-width: 100%`, and that scale factor depends only on width, never on height — so a wider canvas is scaled harder, and phones sit at the worst end of the range. Measured content column widths across viewports:
 
-Measure the rendered width in a headless browser before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
+| Viewport | Content column | Scale on a 940 canvas | Scale on a 400 canvas |
+|---|---|---|---|
+| 1920 | 855 | 0.91 | 1.20 |
+| 1440, 1280 | 668 | 0.71 | 1.20 |
+| 1024 | 750 | 0.80 | 1.20 |
+| 768 | 736 | 0.78 | 1.20 |
+| 414 | 382 | 0.41 | 0.96 |
+| 390 | 358 | 0.38 | 0.90 |
+| 360 | 328 | 0.35 | 0.82 |
 
-Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`. The site's palette toggle does not reach a standalone SVG file. Lighten the primary colour for the dark set, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
+Body text is 16 to 17.6px on desktop and 16px on phones. On a 940 canvas, 11.5px text renders at 8.2px on a 1440 screen and at 4.0px on a 360 phone, roughly a quarter of the body text beside it. A headless Chrome sweep of all 81 files in `docs/diagrams/` on 2026-09-19 put the smallest text between 3.5 and 5.0px on a 360 phone, with no exceptions, and the site has no lightbox, so a reader can only pinch-zoom the whole page and pan around.
+
+On a 400 canvas, 13px text renders at 15.6px on a 1440 screen, 11.6px on a 390 phone and 10.7px on a 360 phone. The desktop end is handled by `.diagram-tall`, which scales the image up to 480px. See "Using a diagram in a markdown article" below.
+
+The relationship between canvas width and font size is:
+
+```
+canvas width <= phone content column × smallest font size in the diagram / target rendered size
+```
+
+To land the smallest text above 11px on a 360 phone (content column 328), 12.5px text caps the canvas at roughly 372 and 14px text at roughly 417.
+
+#### Turn horizontal layouts vertical
+
+Left-to-right flows become top-to-bottom flows, side-by-side columns become stacked cards, and horizontal timelines become vertical ones. When a comparison matrix cannot fit its column headers into 400 units, move each header into the cell it labels: four rating columns become a 2×2 set of tags inside the card.
+
+Keep full sentences of prose out of the diagram. Those one or two footnote lines are a large part of what forces a wide canvas, and once baked into an image they cannot be selected or searched, and translating them means redrawing the whole file. Put them in the `figcaption` or in the article body.
+
+Splitting a diagram into a phone file and a desktop file behind `<picture>` and `srcset` does not work here. The privacy plugin only rewrites `img src`, `script src`, `a href` and the `image href` inside an SVG. A `srcset` is left alone, so the onion and IPFS editions would keep a clearnet request to assets.anoni.net.
+
+#### The layout reference
+
+The diagram below uses every layout element and every colour token once. Copy from it when drawing a new one: the sizes, padding and colour values are all in there.
+
+<figure markdown="span">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference-v4.en.svg" alt="A layout reference for diagrams. From top to bottom: a card with an eyebrow, title, subtitle and body lines; a card with two columns of tags labelled good, medium, warning and neutral; a card with labelled sections; a section heading; a three-node top-to-bottom flow with a centred connector; then the three-step cyan ramp and the three-step orange ramp.">
+    <figcaption>Every element and every token used once, to copy from when drawing a new diagram</figcaption>
+</figure>
+
+The fixed numbers: a 400-wide canvas, a 12 outer margin and 14 of card padding, which leaves 348 of usable text width. From the top of a card to its first line of text is 24px, and the line height is 17px.
+
+Card spacing has three values, chosen by relationship:
+
+| Gap | Where it goes |
+|---|---|
+| 8px | Colour-step variants of one family, such as the three cards of a ramp |
+| 10px | The ordinary case, between two cards that mean different things |
+| 14px | A section or family boundary, such as the cyan ramp giving way to the orange one |
+
+Corner radius has three values, chosen by shape:
+
+| rx | Where it goes |
+|---|---|
+| 8 | Cards |
+| 6 | Flow nodes and small boxes inside a card |
+| Half the height | Pill-shaped tags. A 24-high tag takes `rx=12`, not a hard-coded 6 |
+
+Font sizes are only 15, 14 and 13. That hierarchy is built from two axes, weight and colour, rather than a rising size scale: 15 and 14 are bold and dark, and 13 appears both bold (section labels) and regular (body). To add another level of emphasis, change weight or colour rather than inserting 12.5 or 13.5, because within a 0.82 to 1.2 scaling range half a pixel is invisible.
+
+#### The eyebrow is muted, and the alt is the only authoritative text
+
+A card's eyebrow takes the same colour family as its subtitle (`.t-mute` on light fills, `.t-main` on `.card-c2`, `.card-c3` and `.card-w2`, `.t-onfill` on `.card-w3`), leaving the title as the only dark line. The three lines then read as a quiet label, a loud title and a quiet subtitle. With both the eyebrow and the title in dark, only 1px of size separates them, and at 328 wide that looks like one title broken across two lines.
+
+The eyebrow carries a category or a number ("Level 1", "Send", "Environment layer") and the title says what the card is about. If a string reads as the card's main information on its own, it belongs in the title rather than the eyebrow.
+
+Keep a short `<title>` inside the SVG for anyone opening the file URL directly, and do not write a `<desc>`. The diagram is pulled in by an `img` tag, the browser treats it as an opaque bitmap, and the `title`, `desc`, `role` and `aria-*` inside the SVG never reach assistive technology: what a reader hears is the `img` `alt`. Write the full description once, in the `alt`. Keeping two copies only lets them drift apart.
+
+#### Flows use a centred connector
+
+Nodes in a top-to-bottom flow are full-width rounded rectangles with left-aligned text. Leave 18px between nodes and run a connector down the centre line of the canvas, drawn with `.arrow` (stroke `#90a4ae`, `#6b7780` in dark mode, width 1.6) and ending in a solid `.arrow-h` triangle.
+
+Do not use a text character such as "↓" as the arrow. Its baseline, weight and size follow the body text and it does not line up with the centre of the nodes, so it reads as a stray glyph rather than as a flow.
+
+```
+node       rect x=26 width=348 rx=6
+connector  M200 y V y+12
+arrowhead  M196 y+11 L204 y+11 L200 y+18 Z
+```
+
+#### Leave line breaks to the layout
+
+When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on` in English, and in Chinese a line holding nothing but a full stop, or a full stop pushed to the start of a line. `docs/diagrams/` currently carries 10 of these, spread across `donation-channels`, `shutdown-levels` and `baseline-layers`.
+
+Measure the rendered font size in a headless browser at both 360 and 390 before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
+
+Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`, taking its values from the two dark columns in "Diagram colours" above. If you do mix your own, the principle is to lighten the primary colour, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
+
+The site's palette toggle does reach a standalone SVG. Material sets `color-scheme: dark` on `body` under the slate theme, the browser carries that value into the SVG document loaded by `img`, and the diagram follows when a reader switches to dark by hand. Verified in both Chromium and Firefox on 2026-09-19: with the system set to light and the site toggled to slate, the diagram still renders its dark set. The seven drawio files have no such block and show a white panel against a dark page.
 
 Text inside a coloured block should be neutral dark `#212121` or white. Do not use a brand colour as a text colour: `#ef6c00` and `#4caf50` fall short of 4.5:1 against white, and the meaning is already carried by the border colour and the words themselves.
 
@@ -545,14 +695,16 @@ A drawio diagram, with `.brand-frame`:
 </figure>
 ```
 
-A hand-written SVG, which brings its own frame and takes a figcaption instead:
+A hand-written SVG, which brings its own frame, takes a figcaption instead, and carries `.diagram-tall`:
 
 ```markdown
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/<name>.en.svg" alt="Describe what the diagram actually shows">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/<name>.en.svg" alt="Describe what the diagram actually shows">
     <figcaption>One line on what this diagram is about</figcaption>
 </figure>
 ```
+
+`.diagram-tall` is `width: 480px` with `max-width: 100%`, which takes a 400 canvas up to 480 on desktop and down to the content column on a phone. Leave it off the older horizontal diagrams: their canvases are 880 to 1000, and clamping them to 480 would make the text smaller than it is today.
 
 `.brand-frame` is the site's utility class for diagrams, giving a cyan border and a soft shadow.
 
