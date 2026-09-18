@@ -5023,7 +5023,7 @@
 	#Photo-metadata-has-to-be-handled-earlier
 	#Sending-out-a-job-application
 	#Text-under-a-black-box-is-still-in-the-file
-	#The-author-field-says-a-different-company
+	#The-author-field-names-a-different-company
 	#The-deadline-is-midnight-tonight
 	#The-same-path-applies-well-beyond-job-applications
 	#Three-things-all-on-one-page
@@ -5040,9 +5040,9 @@
 	#Drawing-fewer-boxes
 	#Fourteen-photos-ready-to-list
 	#Selling-things-on-a-secondhand-marketplace
-	#The-remover-lists-what-stays-and-what-goes
 	#The-same-path-applies-well-beyond-secondhand-sales
 	#Two-tools-and-usually-you-only-need-one
+	#What-stays-and-what-goes
 	#When-a-buyer-asks-you-for-ID
 /en/utils/case-source-file/
 	#A-file-from-a-source
@@ -6452,7 +6452,7 @@
 	#跨裝置貼進你的密碼管理器
 	#離線可用
 /utils/case-evidence/
-	#交出去之前的最後一步
+	#交出去前再查一次有沒有漏遮
 	#原始截圖要留著
 	#合併成一份排出時間順序
 	#幾十張截圖
@@ -6507,7 +6507,7 @@
 	#兩個工具多數時候只需要用一個
 	#十四張照片準備上架
 	#在二手平台賣東西
-	#清除器會把每一段的去留列給你看
+	#每一段的去留都會列出來
 	#買家要你出示證件的時候
 	#這條路徑不只用在二手交易
 	#遮的時候可以少拉幾個框
@@ -6522,7 +6522,7 @@
 	#這條路徑不只用在內部文件
 /utils/case-workshop/
 	#二十個人一個下午
-	#大檔案還是隨身碟
+	#大檔案改用隨身碟送
 	#工作坊現場要發東西給大家
 	#幾-KB-的檔案用螢幕跟鏡頭傳
 	#很長的字串印成-QR-code
@@ -9901,7 +9901,7 @@
 	#离线可用
 	#跨设备贴进你的密码管理器
 /zh-cn/utils/case-evidence/
-	#交出去之前的最后一步
+	#交出去前再查一次有没有漏遮
 	#几十张截图
 	#原始截图要留着
 	#合并成一份排出时间顺序
@@ -9957,7 +9957,7 @@
 	#买家要你出示证件的时候
 	#十四张照片准备上架
 	#在二手平台卖东西
-	#清除器会把每一段的去留列给你看
+	#每一段的去留都会列出来
 	#这条路径不只用在二手交易
 	#遮的时候可以少拉几个框
 /zh-cn/utils/case-source-file/
@@ -9972,7 +9972,7 @@
 /zh-cn/utils/case-workshop/
 	#二十个人一个下午
 	#几-KB-的文件用屏幕跟镜头传
-	#大文件还是-U-盘
+	#大文件改用-U-盘送
 	#工作坊现场要发东西给大家
 	#很长的字符串印成-QR-code
 	#这条路径不只用在工作坊

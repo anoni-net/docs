@@ -34,7 +34,7 @@ The boxes are filled with solid black. Pixelation averages a region into large b
 
 While blue boxes remain, "generate redacted image" stays disabled. That is deliberate. The detector found something and you have not decided about it yet, and an image handed over in that state is an unredacted image.
 
-## The remover lists what stays and what goes
+## What stays and what goes
 
 Drop the photos with nothing to cover into the [File metadata remover](strip-metadata.md). Not a single bit of the image compression data is touched. The EXIF, GPS, and device model segments come off, and the picture itself is unchanged. When it finishes, it lists segment by segment what was kept and what was removed.
 
