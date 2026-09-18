@@ -12,6 +12,9 @@
 # blog frontmatter）讓 linter 回 exit 1，job 就紅。warn 級規則仍只標 annotation，
 # 不影響 exit code，改法要看語境，機器不宜代勞。
 #
+# 有一組規則百科明文豁免既有內容（目前是 title-colon），這一支傳 --changed-since
+# 讓它們只在 PR 動過的行上報，見下方掃描那一步的註解。
+#
 # 要讓 warn 也擋，得先把對應規則升成 error，那是規則本身的決定，不是這裡改。
 # 另需在 repo 設定把這個 check 設為 branch protection 必過，workflow 擋不到那一層。
 name: docs-style-lint
@@ -91,4 +94,11 @@ jobs:
           fi
           echo "掃描 ${#files[@]} 個變更檔："
           printf '  %s\n' "${files[@]}"
-          python3 tools/docs_style_lint.py --format github "${files[@]}"
+          # --changed-since 讓「既有內容豁免」那一組規則（目前只有 title-colon）
+          # 只在這個 PR 真的動過的行上報。貢獻者百科的「標題句構」一節寫著
+          # 「既有文章不必回頭改寫，新文章與大幅改版時套用」，沒有這個旗標的話，
+          # 改一行 img src 就會帶出整篇舊標題的 annotation，跟作者的改動無關。
+          #
+          # 實際踩過：PR #560 只改了示意圖的引用，卻浮出 7 條別人寫的舊標題，
+          # 而同一批 annotation 裡真正該修的兩條 colloquial-jiang 被淹掉。
+          python3 tools/docs_style_lint.py --format github --changed-since "$base" "${files[@]}"

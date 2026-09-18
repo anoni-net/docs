@@ -41,6 +41,14 @@ python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
 
 `NOTICE` has no `.md` extension and the linter only accepts `.md` and `.js`, so that one needs a human read.
 
+One group of rules is explicitly grandfathered for existing content; right now that is only `title-colon` from "Heading structure" below. CI passes `--changed-since <base>` so those rules are reported only on lines the pull request actually touched. Leave the flag off locally to see the whole file:
+
+```bash
+python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-guide.md
+```
+
+Without it, changing a single image reference surfaces annotations for every old heading in the file, none of them related to the author's change, and the ones that do need fixing get lost among them.
+
 Rule documents spell out every banned punctuation mark and sentence pattern, so the linter flags its own rule descriptions. This handbook and the workspace projection are exempted by filename through the linter's `RULE_DOCS`, and the rule table and known-limits section in `tools/README.md` are wrapped in `<!-- docs-style-lint: disable -->` and `enable`. Follow the same approach when writing rule documentation, and leave the quoted examples as they are.
 
 ### Voice and positioning

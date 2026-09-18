@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import pathlib
 import re
+import os
 import subprocess
 import sys
 import tempfile
@@ -412,6 +413,51 @@ JS_CASES: list[tuple[str, bool, str]] = [
      "})();\n", True, "空字串不影響同一行後面的抽取"),
 ]
 
+# --changed-since 的行為。貢獻者百科寫著標題句構「既有文章不必回頭改寫」，
+# linter 給了 --changed-since 之後 title-colon 只在作者動過的行上報。
+# 這三個案例分別對應：既有的不報、新增的要報、改動既有那一行的也要報。
+def run_grandfather_cases() -> list[str]:
+    import shutil
+    fails = []
+    repo = pathlib.Path(tempfile.mkdtemp()) / "repo"
+    (repo / "docs" / "en").mkdir(parents=True)
+    md = repo / "docs" / "en" / "case.md"
+    env = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@e",
+           "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@e"}
+
+    def git(*a):
+        subprocess.run(["git", *a], cwd=repo, env=env, capture_output=True, check=True)
+
+    def lint(*extra):
+        out = subprocess.run([sys.executable, str(LINT), str(md), *extra],
+                             cwd=repo, capture_output=True, text=True).stdout
+        m = SUMMARY.search(out)
+        if not m:
+            raise AssertionError(f"無法解析 linter 輸出：\n{out}")
+        return int(m.group(1)) + int(m.group(2))
+
+    base = "---\ntitle: t\n---\n\n# t\n\n## Existing heading: with a colon\n\nBody.\n"
+    md.write_text(base, encoding="utf-8")
+    git("init", "-q"); git("add", "-A"); git("commit", "-qm", "base")
+
+    if lint() != 1:
+        fails.append("  [豁免／沒給旗標] 期望照舊報 1 件")
+    if lint("--changed-since", "HEAD") != 0:
+        fails.append("  [豁免／既有標題] 期望 0 件，既有文章不必回頭改寫")
+
+    md.write_text(base + "\n## Added heading: also with a colon\n\nMore.\n", encoding="utf-8")
+    if lint("--changed-since", "HEAD") != 1:
+        fails.append("  [豁免／新增標題] 期望報 1 件，新文章與大幅改版時套用")
+
+    md.write_text(base.replace("Existing heading: with a colon",
+                               "Existing heading: with a colon, edited"), encoding="utf-8")
+    if lint("--changed-since", "HEAD") != 1:
+        fails.append("  [豁免／改動既有標題那一行] 期望報 1 件")
+
+    shutil.rmtree(repo.parent, ignore_errors=True)
+    return fails
+
+
 def main() -> int:
     tmpdir = pathlib.Path(tempfile.mkdtemp())
     failures = []
@@ -469,8 +515,10 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
             )
 
+    failures.extend(run_grandfather_cases())
+
     total = (len(CASES) + 1 + len(CN_CASES) + len(EN_CASES) + len(HEADING_CASES)
-             + len(ZH_HEADING_CASES) + len(JS_CASES))
+             + len(ZH_HEADING_CASES) + len(JS_CASES) + 4)
     if failures:
         print(f"失敗 {len(failures)} / {total}\n")
         print("\n".join(failures))
