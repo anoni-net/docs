@@ -121,6 +121,8 @@ icon: material/tools
 
 | 你手上的事 | 走的顺序 |
 |---|---|
+| 第一次坐下来，要先厘清该做什么 | [威胁模型清单](threat-model.md)答三题并看错配，[我的准备清单](checklist.md)勾出接下来要做的，[passkey 钥匙](passkey.md)把进度加密存在你的设备上 |
+| 想知道网站不必问就拿得到你什么 | [你的浏览器透露了什么](leaks.md)看一次，换一个浏览器再看一次做对照，[网址清理器](clean-url.md)查链接尾巴带着谁的标识码 |
 | 照片或截图要交给别人 | 画面上有要遮的东西，用[截图遮蔽](redact.md)，输出已经不带原文件的 metadata。画面干净、只要去掉拍摄信息的，用[文件 metadata 清除器](strip-metadata.md) |
 | 要交一份 PDF 出去 | [PDF 页面整理](pdf-pages.md)排好页面，再用同一页的「看里面有什么」搜索不该留下的字 |
 | 收到来路不明的链接或二维码 | [QR code 读取器](qr-read.md)解出内容，[网址清理器](clean-url.md)看注册域名，[隐形字符检测](invisible.md)查文字里的同形字 |
@@ -129,11 +131,15 @@ icon: material/tools
 | 文件要托人带走或放进 U 盘 | [密语与密码生成器](passphrase.md)抽一组密语，[本机文件加密](age.md)封起来，[文件哈希比对](hash.md)让收的人核对 |
 | 临时要一组之后找得回来的密码 | [密语与密码生成器](passphrase.md)抽，[passkey 钥匙](passkey.md)当钥匙，[我的准备清单](checklist.md)记下已经做到哪里 |
 
-走完一整条路径长什么样，用七件具体的事各写一篇。前三篇不需要你先有特殊身份或特别的处境，后四篇对着站上服务的几种工作写。
+走完一整条路径长什么样，用九件具体的事各写一篇。日常场景那组不需要你先有特殊身份或特别的处境，工作场景那组对着站上服务的几种工作写。
 
 ### 日常场景
 
 <div class="grid cards" markdown>
+
+-   :material-target-account: **[广告好像知道你在想什么](case-profile.md)**
+
+    刚在别的地方看过的东西，转头就出现在信息流的广告里。任何网站不必问就拿得到你哪些信息、那些值加起来为什么足以认出你，以及链接尾巴带着谁的标识码。
 
 -   :material-file-send-outline: **[发一份简历出去](case-resume.md)**
 
@@ -152,6 +158,10 @@ icon: material/tools
 ### 工作场景
 
 <div class="grid cards" markdown>
+
+-   :material-account-plus-outline: **[带新同事做一次设备盘点](case-onboarding.md)**
+
+    新人下周报到，权限开好了，而没有人跟他谈过设备该怎么准备。为什么三题要有人在旁边问，错配清单为什么比答案本身有用，以及进度为什么存在他自己的设备上。
 
 -   :material-account-multiple-outline: **[把名单交给外部伙伴](case-roster.md)**
 

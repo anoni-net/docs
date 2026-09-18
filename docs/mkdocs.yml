@@ -151,10 +151,12 @@ nav:
       # 內容不是工具，排在五組工具之後，讓側邊欄前面幾列維持原本的順序。
       # 分成兩組：日常情境不預設讀者的身分，工作情境對著站上服務的幾種工作寫。
       - "日常情境":
+          - utils/case-profile.md
           - utils/case-resume.md
           - utils/case-secondhand.md
           - utils/case-link.md
       - "工作情境":
+          - utils/case-onboarding.md
           - utils/case-roster.md
           - utils/case-workshop.md
           - utils/case-source-file.md

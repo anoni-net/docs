@@ -96,6 +96,8 @@ No passkey yet? Create one on [Passkey as your key](passkey.md) first, or create
 <script src="../../js/vault.js"></script>
 <script src="../../js/checklist.js"></script>
 
+For what comes after the ticking, see [walking a new colleague through a device review](case-onboarding.md).
+
 ## How it works
 
 - Ticks are encrypted and kept in the browser's IndexedDB; the "stash" on the buttons is this ciphertext. The key lives in your passkey and only exists in memory while unlocked; leaving this page drops it. That is why every item link opens in a new tab: keep this page open and you do not need to unlock again. After 5 idle minutes it locks by itself, saving your ticks first. Still press "Lock" before you walk away.

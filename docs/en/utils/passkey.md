@@ -94,6 +94,8 @@ Create a passkey for this site and store it in your password manager or keychain
 2. For the checklist and similar tools, you are done here. Open [my preparation checklist](checklist.md) and press "Open with my existing key".
 3. For local file encryption, press "Test an unlock" first to confirm this environment can derive a key, then "Generate a backup key" and store the secret in your password manager, apart from the ciphertexts. Then go to [local file encryption](age.md) and choose the "passkey" mode.
 
+For where this key sits in a real workflow, see [walking a new colleague through a device review](case-onboarding.md).
+
 ## What this key can do
 
 One passkey has two uses on this site. The mechanisms differ, and so do the environments each one works in.

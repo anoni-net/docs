@@ -133,10 +133,12 @@ nav:
       # 内容不是工具，排在五组工具之后，让侧边栏前面几列维持原本的顺序。
       # 分成两组：日常场景不预设读者的身份，工作场景对着站上服务的几种工作写。
       - "日常场景":
+          - utils/case-profile.md
           - utils/case-resume.md
           - utils/case-secondhand.md
           - utils/case-link.md
       - "工作场景":
+          - utils/case-onboarding.md
           - utils/case-roster.md
           - utils/case-workshop.md
           - utils/case-source-file.md
