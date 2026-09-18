@@ -38,7 +38,7 @@ VPN 做不到的事：
 這跟 Tor 的差別在信任如何分配。Tor 把連線經過三個互相獨立的中繼（relay，由志工運作的中轉節點），沒有任何一個節點同時知道你是誰、你連去哪，所以你不需要信任任何單一節點。VPN 把信任集中在一家業者身上，匿名性取決於這家業者有沒有說謊、會不會被傳喚。完整對照見 [什麼是匿名網路](./what-is-anonymity-network.md)。
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/vpn-trust-shift.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/vpn-trust-shift-v2.zh-TW.svg"
         alt="三種連線方式的對照。直接連的時候，ISP 同時知道你是誰與你連哪，網站看到你的真實 IP。經過 VPN 的時候，ISP 只看到你連上 VPN，改由 VPN 業者同時知道你是誰與你連哪。經過 Tor 的時候，ISP 只看到你在用 Tor，Guard 知道你是誰但不知道你連哪，Middle 兩邊都不知道，Exit 知道你連哪但不知道你是誰。前兩種各有一個節點同時知道兩件事，Tor 沒有。">
     <figcaption>VPN 換掉的是那個單點是誰</figcaption>
 </figure>

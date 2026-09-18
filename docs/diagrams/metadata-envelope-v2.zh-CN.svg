@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 455" width="400" height="455" role="img" aria-labelledby="title desc">
+<title id="title">加密盖住的只有信件内容，信封外面那一圈没有</title>
+<desc id="desc">一个信封的示意图。信封外面标着寄件人、收件人、时间与长度、消息大小、主题、往返频率，这些不用解密就看得到。信封里面是一块上了锁的区域，代表端对端加密的信件内容，只有收件人读得到。右边接着三条推论，说明光凭信封外面的信息就能知道你跟某律师事务所有持续通信、你今晚跟某记者通了三十分钟、这群人是你固定往来的圈子。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-w1" x="12" y="0" width="376" height="160" rx="8"/>
+<text class="t-main lab" x="26" y="24">信封外面</text>
+<text class="t-main h2" x="26" y="44">不用解密就看得到</text>
+<text class="t-mute bd" x="26" y="61">寄件人</text>
+<text class="t-mute bd" x="26" y="78">收件人</text>
+<text class="t-mute bd" x="26" y="95">时间与长度</text>
+<text class="t-mute bd" x="26" y="112">消息大小</text>
+<text class="t-mute bd" x="26" y="129">主题（多数情况没有被加密）</text>
+<text class="t-mute bd" x="26" y="146">往返频率</text>
+<rect class="card-c3" x="12" y="170" width="376" height="58" rx="8"/>
+<text class="t-main lab" x="26" y="194">信件内容</text>
+<text class="t-main h2" x="26" y="214">端对端加密，只有收件人读得到</text>
+<rect class="card-no" x="12" y="238" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="262">于是不用读内容就知道</text>
+<text class="t-mute bd" x="26" y="279">你跟某律师事务所有持续通信</text>
+<text class="t-mute bd" x="26" y="296">你今晚跟某记者通了 30 分钟</text>
+<text class="t-mute bd" x="26" y="313">这群人是你固定往来的圈子</text>
+<rect class="card-n" x="12" y="337" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="361">加密盖住的只有中间那一块</text>
+<text class="t-mute bd" x="26" y="378">信封外面那一圈是每一封信、每一通</text>
+<text class="t-mute bd" x="26" y="395">电话、每一次连线都会留下的副产品。</text>
+<text class="t-mute bd" x="26" y="412">同一个结构套用在电话、Signal 消息、</text>
+<text class="t-mute bd" x="26" y="429">Tor 连线上都成立，只是栏位的名字换掉。</text>
+</svg>

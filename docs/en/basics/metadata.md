@@ -26,7 +26,7 @@ A PGP-encrypted email to a lawyer keeps the body unreadable, but "you have an on
 This is the depth target for the "confidential is not anonymous" point in [anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md). A tool can keep your content fully confidential and still expose who you are and who you reach.
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/metadata-envelope.en.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/metadata-envelope-v2.en.svg"
         alt="An envelope diagram. On the outside are the sender, the recipient, the time and duration, the message size, the subject line, and how often the two exchange messages, all readable without decrypting anything. Inside is a locked block standing for the end-to-end encrypted letter, which only the recipient can read. To the right are three conclusions drawn from the outside of the envelope alone: that you and a law firm are in regular contact, that you spoke to a reporter for thirty minutes tonight, and that this set of people is your regular circle.">
     <figcaption>Encryption covers what is inside the envelope, and nothing around it</figcaption>
 </figure>

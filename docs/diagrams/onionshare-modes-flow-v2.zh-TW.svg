@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1246" width="400" height="1246" role="img" aria-labelledby="title desc">
+<title id="title">OnionShare 四種模式的資料往哪個方向走</title>
+<desc id="desc">四種模式的資料流向對照。Send 是你的電腦放檔案，對方用 Tor Browser 下載，資料由你流向對方。Receive 是你開一個上傳介面，投件人上傳，資料由對方流向你。Host a Website 是你放一份靜態網站，多位訪客瀏覽，資料由你流向多人。Chat 是雙向的即時對話，所有人都連進同一個一次性聊天室。四種模式共通的是中間那個 .onion 網址，關掉 OnionShare 網址就失效。</desc>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="24">四種模式共通的是中間那一段</text>
+<text class="t-mute bd" x="26" y="41">檔案與訊息直接在兩端之間走 Tor，沒有經過任</text>
+<text class="t-mute bd" x="26" y="58">何雲端服務，關掉 OnionShare 網址立刻失效。</text>
+<text class="t-mute bd" x="26" y="75">網址本身要另外用安全管道交給對方，OnionShare 不</text>
+<text class="t-mute bd" x="26" y="92">負責配送。用不安全的管道傳網址，那一段就不再匿名。</text>
+<rect class="card-c1" x="12" y="120" width="376" height="271" rx="8"/>
+<text class="t-main lab" x="26" y="144">Send</text>
+<text class="t-main h2" x="26" y="164">送檔</text>
+<rect class="card" x="26" y="170" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="186">你的電腦</text>
+<text class="t-main bd" x="36" y="203">把檔案丟進去</text>
+<text class="t-mute bd" x="40" y="227">&#8595;</text>
+<rect class="card-c3" x="26" y="233" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="249">.onion 網址</text>
+<text class="t-mute bd" x="40" y="273">&#8595;</text>
+<rect class="card" x="26" y="279" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="295">對方</text>
+<text class="t-main bd" x="36" y="312">用 Tor Browser 下載</text>
+<text class="t-main lab" x="26" y="343">用在哪</text>
+<text class="t-mute bd" x="36" y="360">把證據送給律師</text>
+<text class="t-mute bd" x="36" y="377">一次性的檔案交付</text>
+<rect class="card-w1" x="12" y="401" width="376" height="271" rx="8"/>
+<text class="t-main lab" x="26" y="425">Receive</text>
+<text class="t-main h2" x="26" y="445">收檔</text>
+<rect class="card" x="26" y="451" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="467">投件人</text>
+<text class="t-main bd" x="36" y="484">用 Tor Browser 上傳</text>
+<text class="t-mute bd" x="40" y="508">&#8595;</text>
+<rect class="card-c3" x="26" y="514" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="530">.onion 網址</text>
+<text class="t-mute bd" x="40" y="554">&#8595;</text>
+<rect class="card" x="26" y="560" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="576">你的電腦</text>
+<text class="t-main bd" x="36" y="593">在本機收到檔案</text>
+<text class="t-main lab" x="26" y="624">用在哪</text>
+<text class="t-mute bd" x="36" y="641">隱蔽收件箱</text>
+<text class="t-mute bd" x="36" y="658">匿名投稿與危機通報</text>
+<rect class="card-ok" x="12" y="682" width="376" height="271" rx="8"/>
+<text class="t-main lab" x="26" y="706">Host a Website</text>
+<text class="t-main h2" x="26" y="726">暫時架站</text>
+<rect class="card" x="26" y="732" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="748">你的電腦</text>
+<text class="t-main bd" x="36" y="765">放一份靜態網站</text>
+<text class="t-mute bd" x="40" y="789">&#8595;</text>
+<rect class="card-c3" x="26" y="795" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="811">.onion 網址</text>
+<text class="t-mute bd" x="40" y="835">&#8595;</text>
+<rect class="card" x="26" y="841" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="857">多位訪客</text>
+<text class="t-main bd" x="36" y="874">各自用 Tor Browser 瀏覽</text>
+<text class="t-main lab" x="26" y="905">用在哪</text>
+<text class="t-mute bd" x="36" y="922">臨時公布敏感內容</text>
+<text class="t-mute bd" x="36" y="939">活動期間限定的資料</text>
+<rect class="card-n" x="12" y="963" width="376" height="271" rx="8"/>
+<text class="t-main lab" x="26" y="987">Chat</text>
+<text class="t-main h2" x="26" y="1007">一次性聊天室</text>
+<rect class="card" x="26" y="1013" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="1029">所有參與者</text>
+<text class="t-main bd" x="36" y="1046">各自連進同一個房間</text>
+<text class="t-mute bd" x="40" y="1070">&#8595;</text>
+<rect class="card-c3" x="26" y="1076" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="1092">.onion 網址</text>
+<text class="t-mute bd" x="40" y="1116">&#8595;</text>
+<rect class="card" x="26" y="1122" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="1138">訊息只在記憶體</text>
+<text class="t-main bd" x="36" y="1155">關掉就整個消失</text>
+<text class="t-main lab" x="26" y="1186">用在哪</text>
+<text class="t-mute bd" x="36" y="1203">行動現場的臨時協調</text>
+<text class="t-mute bd" x="36" y="1220">不希望留下紀錄的討論</text>
+</svg>

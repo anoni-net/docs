@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1090" width="400" height="1090" role="img" aria-labelledby="title desc">
+<title id="title">A VPN changes who the single point is. Tor removes it.</title>
+<desc id="desc">Three ways of connecting, compared. Connecting directly, the ISP knows both who you are and where you go, and the site sees your real IP. Through a VPN, the ISP only sees you reaching a VPN, while the VPN provider now knows both who you are and where you go, and the site sees the VPN's IP. Through Tor, the ISP only sees you using Tor, the guard relay knows who you are but not where you go, the middle relay knows neither side, the exit relay knows where you go but not who you are, and the site sees the exit node's IP. The first two each have one node holding both facts. Tor has none.</desc>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="216" rx="8"/>
+<text class="t-main lab" x="26" y="24">Direct connection</text>
+<text class="t-main h2" x="26" y="44">One node, and it knows everything</text>
+<rect class="card" x="26" y="50" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="66">You</text>
+<text class="t-mute bd" x="40" y="90">&#8595;</text>
+<rect class="card-w3" x="26" y="96" width="348" height="41" rx="6"/>
+<text class="t-onfill lab" x="36" y="112">ISP</text>
+<text class="t-onfill bd" x="36" y="129">Knows who you are and where you go</text>
+<text class="t-mute bd" x="40" y="153">&#8595;</text>
+<rect class="card" x="26" y="159" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="175">The site</text>
+<text class="t-main bd" x="36" y="192">Sees your real IP</text>
+<rect class="card-n" x="12" y="226" width="376" height="279" rx="8"/>
+<text class="t-main lab" x="26" y="250">Through a VPN</text>
+<text class="t-main h2" x="26" y="270">The single point changes hands</text>
+<rect class="card" x="26" y="276" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="292">You</text>
+<text class="t-mute bd" x="40" y="316">&#8595;</text>
+<rect class="card-ok" x="26" y="322" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="338">ISP</text>
+<text class="t-main bd" x="36" y="355">Only sees you reaching the VPN</text>
+<text class="t-mute bd" x="40" y="379">&#8595;</text>
+<rect class="card-w3" x="26" y="385" width="348" height="41" rx="6"/>
+<text class="t-onfill lab" x="36" y="401">VPN provider</text>
+<text class="t-onfill bd" x="36" y="418">Knows who you are and where you go</text>
+<text class="t-mute bd" x="40" y="442">&#8595;</text>
+<rect class="card" x="26" y="448" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="464">The site</text>
+<text class="t-main bd" x="36" y="481">Sees the VPN's IP</text>
+<rect class="card-n" x="12" y="515" width="376" height="405" rx="8"/>
+<text class="t-main lab" x="26" y="539">Through Tor</text>
+<text class="t-main h2" x="26" y="559">The single point is split up</text>
+<rect class="card" x="26" y="565" width="348" height="24" rx="6"/>
+<text class="t-main lab" x="36" y="581">You</text>
+<text class="t-mute bd" x="40" y="605">&#8595;</text>
+<rect class="card-ok" x="26" y="611" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="627">ISP</text>
+<text class="t-main bd" x="36" y="644">Only sees that you use Tor</text>
+<text class="t-mute bd" x="40" y="668">&#8595;</text>
+<rect class="card-ok" x="26" y="674" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="690">Guard</text>
+<text class="t-main bd" x="36" y="707">Knows who you are, not where you go</text>
+<text class="t-mute bd" x="40" y="731">&#8595;</text>
+<rect class="card-ok" x="26" y="737" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="753">Middle</text>
+<text class="t-main bd" x="36" y="770">Knows neither end</text>
+<text class="t-mute bd" x="40" y="794">&#8595;</text>
+<rect class="card-ok" x="26" y="800" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="816">Exit</text>
+<text class="t-main bd" x="36" y="833">Knows where you go, not who you are</text>
+<text class="t-mute bd" x="40" y="857">&#8595;</text>
+<rect class="card" x="26" y="863" width="348" height="41" rx="6"/>
+<text class="t-main lab" x="36" y="879">The site</text>
+<text class="t-main bd" x="36" y="896">Sees the exit node's IP</text>
+<rect class="card-c1" x="12" y="936" width="376" height="142" rx="8"/>
+<text class="t-main h2" x="26" y="960">The orange cell is the node that knows</text>
+<text class="t-main h2" x="26" y="979">both who you are and where you go</text>
+<text class="t-mute bd" x="26" y="996">A VPN moves it from the ISP to the VPN</text>
+<text class="t-mute bd" x="26" y="1013">provider. The count does not change.</text>
+<text class="t-mute bd" x="26" y="1030">Tor splits those two facts across three</text>
+<text class="t-mute bd" x="26" y="1047">unrelated relays, so no single node can assemble</text>
+<text class="t-mute bd" x="26" y="1064">the answer and none of them has to be trusted.</text>
+</svg>
