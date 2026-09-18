@@ -356,7 +356,9 @@ The darker the fill, the fewer text colours it will take:
 
 `.t-mute` at `#546e7a` scores 3.95:1 on `.card-c2`, 3.21:1 on `.card-c3` and 3.12:1 on `.card-w2`, all under AA, so those three fills take `.t-main` only, which scores 9.3 to 11.8:1.
 
-`.card-w3` has to go opposite ways in the two modes. On the light fill `#ef6c00`, white text scores 3.08:1 while `#212121` scores 5.23:1. On the dark fill `#ff8c1a`, `#eceff1` scores 2.02:1 while `#241708` scores 7.51:1. The 32 files that currently use `.t-inv` pair white in light mode with `#241708` in dark, so the light half falls short; switch them to `.t-onfill` as they are reworked.
+`.card-w3` has to go opposite ways in the two modes. On the light fill `#ef6c00`, white text scores 3.08:1 while `#212121` scores 5.23:1. On the dark fill `#ff8c1a`, `#eceff1` scores 2.02:1 while `#241708` scores 7.51:1. The older `.t-inv` paired white in light mode with `#241708` in dark, so the light half fell short. The vertical rework on 2026-09-19 replaced every instance with `.t-onfill`, and none remain across the 77 hand-written files.
+
+`.t-onfill` holds the same value as `.t-main` in light mode, `#212121`, and only diverges to `#241708` in dark mode. The two classes cannot be merged: merging them drops `.card-w3` to 2.02:1 in dark mode.
 
 Text and lines:
 
@@ -374,7 +376,7 @@ Colour must never be the only thing carrying the meaning. The text inside each b
 
 Measured contrast puts every text pairing above the WCAG AA threshold of 4.5:1. `#212121` scores 14.1 to 16.1 on the six light fills, `#eceff1` scores 12.3 to 14.0 on the six dark fills, `#546e7a` scores 5.4 on white, 5.0 on the neutral card and 4.8 on the cyan card, and `#b0bec5` scores 7.7 to 8.4 on the dark cards.
 
-The 32 files that currently set `.t-mute` to `#607d8b` reach only 4.37:1 on white, just under AA. Switch them to `#546e7a` as each one gets reworked; it is also `--neutral-muted` in the neutral set above.
+`.t-mute` is `#546e7a`, which is also `--neutral-muted` in the neutral set above. The older `#607d8b` reached only 4.37:1 on white, just under AA. The vertical rework on 2026-09-19 replaced every instance, and none remain across the 77 hand-written files.
 
 Border colours land between 1.5 and 2.8:1 against the page background, short of the 3:1 in WCAG 1.4.11. The judgement here is that the border reinforces and the words inside carry the meaning, so the threshold is not enforced. It does not extend to diagrams where colour genuinely does the distinguishing, such as scatter plots and bar charts; label every data point in those.
 
@@ -625,7 +627,25 @@ The diagram below uses every layout element and every colour token once. Copy fr
     <figcaption>Every element and every token used once, to copy from when drawing a new diagram</figcaption>
 </figure>
 
-Only a handful of numbers are fixed: a 400-wide canvas, a 12 outer margin and 14 of card padding, which leaves 348 of usable text width. From the top of a card to its first line of text is 24px, the line height is 17px, cards sit 10px apart, and that opens to 14px where a section break is wanted. Tags and flow nodes use `rx=6`, cards use `rx=8`.
+The fixed numbers: a 400-wide canvas, a 12 outer margin and 14 of card padding, which leaves 348 of usable text width. From the top of a card to its first line of text is 24px, and the line height is 17px.
+
+Card spacing has three values, chosen by relationship:
+
+| Gap | Where it goes |
+|---|---|
+| 8px | Colour-step variants of one family, such as the three cards of a ramp |
+| 10px | The ordinary case, between two cards that mean different things |
+| 14px | A section or family boundary, such as the cyan ramp giving way to the orange one |
+
+Corner radius has three values, chosen by shape:
+
+| rx | Where it goes |
+|---|---|
+| 8 | Cards |
+| 6 | Flow nodes and small boxes inside a card |
+| Half the height | Pill-shaped tags. A 24-high tag takes `rx=12`, not a hard-coded 6 |
+
+Font sizes are only 15, 14 and 13. That hierarchy is built from two axes, weight and colour, rather than a rising size scale: 15 and 14 are bold and dark, and 13 appears both bold (section labels) and regular (body). To add another level of emphasis, change weight or colour rather than inserting 12.5 or 13.5, because within a 0.82 to 1.2 scaling range half a pixel is invisible.
 
 #### Flows use a centred connector
 
@@ -636,7 +656,7 @@ Do not use a text character such as "↓" as the arrow. Its baseline, weight and
 ```
 node       rect x=26 width=348 rx=6
 connector  M200 y V y+12
-arrowhead  M195.5 y+11 L204.5 y+11 L200 y+18 Z
+arrowhead  M196 y+11 L204 y+11 L200 y+18 Z
 ```
 
 #### Leave line breaks to the layout
