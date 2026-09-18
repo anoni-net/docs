@@ -130,7 +130,7 @@ onion 地址用的是 base32，只有 `a` 到 `z` 与 `2` 到 `7`。任何西里
 
 ## 用 Tor Browser 查可疑内容的话
 
-[Tor Browser 的安全等级](../tools/tor-browser-advanced.md)调到 Safest 会关掉 JavaScript，检测功能就会停摆，而收到来路不明的消息正是那篇文章建议把等级调高的场合。
+[Tor Browser 的安全等级](../tools/tor-browser-advanced.md)调到 Safest 会关掉 JavaScript，检测功能就会停摆，而收到来路不明的消息正是那篇文章里要把等级调高的场合。
 
 把可疑的网站与检测分开处理：在高安全等级下复制那段文字，切回 Standard 贴进来扫，扫完再调回去。扫描在你的设备上做，不连外。
 

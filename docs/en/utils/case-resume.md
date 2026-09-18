@@ -22,7 +22,7 @@ Use [PDF page tidy-up](pdf-pages.md). All three happen in the same place.
 
 After you generate the output, the page reads the result back in and compares the page count, rotation, and dimensions against what you selected. If they do not match, the download is not offered. A wrong output looks exactly like a correct one, most people do not open it to check, and by the time the recipient notices a missing page the file has already been sent.
 
-## The author field says a different company
+## The author field names a different company
 
 PDFs exported from a word processor or presentation tool usually carry document-level fields: the account name on your computer, a company name, an operating system version, and a creation timestamp down to the second. Applying to company A with an attachment whose author field names company B is an easy mistake to make, and the recipient sees it in the document properties.
 
@@ -32,7 +32,7 @@ The file you generate here is newly built. Title, author, subject, keywords, pro
 
 If a client name in the portfolio was covered with a black rectangle in a presentation tool and then exported to PDF, that text is still in the file. Anyone who receives it can select and copy it out. This is the most common way redaction fails.
 
-The "see what is inside" section on the same page has a search box. Paste in the client name, a case number, or anything you believe you covered up, and it tells you which page that text is still on. If it is still there, go back to the original presentation, delete those pages, and rebuild them. Do not cover it a second time in the PDF.
+The "see what is inside" section on the same page has a search box. Paste in the client name, a case number, or anything you believe you covered up, and the result shows which page that text is still on. If it is still there, go back to the original presentation, delete those pages, and rebuild them. Do not cover it a second time in the PDF.
 
 ## Photo metadata has to be handled earlier
 

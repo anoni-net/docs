@@ -96,6 +96,8 @@ offline_assets:
 <script src="../../js/vault.js"></script>
 <script src="../../js/checklist.js"></script>
 
+勾完之后接下来做什么，见[带新同事做一次设备盘点](case-onboarding.md)。
+
 ## 怎么运作
 
 - 勾选的内容加密后放在浏览器的 IndexedDB，按钮上写的「暂存区」就是这一份密文。密钥在你的 passkey 里，解开时才在内存里出现，离开这一页就消失。所以项目的链接都开新标签页，这一页留着就不用重新解锁。闲置 5 分钟会自动锁上，锁之前会先把勾选存好，离开前还是按一下「锁上」。

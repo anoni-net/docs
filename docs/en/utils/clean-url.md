@@ -31,7 +31,7 @@ https://example.com/article?fbclid=IwAR3xK9mQ...
 
 Newsletter `utm_source` works the same way. Forwarding it lets the recipient see which newsletter you subscribe to. `mc_eid` is more direct still, being Mailchimp's recipient identifier, which maps back to your email address.
 
-For what these judgements look like against a real message, [a link forwarded into a group chat](case-link.md) walks the whole path.
+For what these judgements look like against a real message, [a link forwarded into a group chat](case-link.md) walks the whole path. For how tracking parameters feed an advertising profile, see [the ads seem to know what you are thinking](case-profile.md).
 
 ## Redirect wrappers
 

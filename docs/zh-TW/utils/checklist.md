@@ -96,6 +96,8 @@ offline_assets:
 <script src="../../js/vault.js"></script>
 <script src="../../js/checklist.js"></script>
 
+勾完之後接下來做什麼，見[帶新同事做一次裝置盤點](case-onboarding.md)。
+
 ## 怎麼運作
 
 - 勾選的內容加密後放在瀏覽器的 IndexedDB，按鈕上寫的「暫存區」就是這一份密文。金鑰在你的 passkey 裡，解開時才在記憶體裡出現，離開這一頁就消失。所以項目的連結都開新分頁，這一頁留著就不用重新解鎖。閒置 5 分鐘會自動鎖上，鎖之前會先把勾選存好，離開前還是按一下「鎖上」。

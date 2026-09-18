@@ -54,7 +54,7 @@ For when to reach for this and when for screenshot redaction, [selling things on
 
 Photos, video and recordings have their descriptive sections removed whole, and the compressed image, video or audio data is left alone. Office documents have their descriptive parts emptied while the parts holding the body are copied as they are. PDF cannot offer the same guarantee, for the reason given under "PDF cannot be guaranteed lossless" below.
 
-Other formats are not supported yet. The list and the workarounds are at the end of this page. When a file cannot be recognised, the page reports an error rather than quietly handing back something it never processed.
+Other formats are not supported yet. The list and the workarounds are at the end of this page. When a file cannot be recognised, an error is shown rather than quietly handing back something it never processed.
 
 ## What comes out, what stays
 

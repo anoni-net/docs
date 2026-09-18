@@ -28,13 +28,13 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-clipboard-check-outline: **[威胁模型清单](threat-model.md)**
+- :material-clipboard-check-outline: **[威胁模型清单](threat-model.md)**
 
-    把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案预设不存，要留的话用 passkey 加密存在你的设备上。
+ 把「要保护什么、要防谁、愿意付出多少」三题答成一份可复制的清单，并标出答案里的错配。答案预设不存，要留的话用 passkey 加密存在你的设备上。
 
--   :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
+- :material-checkbox-marked-outline: **[我的准备清单](checklist.md)**
 
-    把站上的行动建议收成一份可勾的清单，勾了用 passkey 加密存在你的设备上，下次按一次指纹就看得到进度。没有账号、没有服务器，站上什么都不存。
+ 把站上的行动建议收成一份可勾的清单，勾了用 passkey 加密存在你的设备上，下次按一次指纹就看得到进度。没有账号、没有服务器，站上什么都不存。
 
 </div>
 
@@ -42,17 +42,17 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-dice-multiple-outline: **[密语与密码生成器](passphrase.md)**
+- :material-dice-multiple-outline: **[密语与密码生成器](passphrase.md)**
 
-    用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会显示生成出来的密码熵有多少。
+ 用 asian-diceware 的 7776 字词表抽密语，或从你选的字符集抽随机密码。随机数来自浏览器的 `crypto.getRandomValues`，并且会显示生成出来的密码熵有多少。
 
--   :material-lock-outline: **[本机文件加密](age.md)**
+- :material-lock-outline: **[本机文件加密](age.md)**
 
-    选一个文件或贴一段文字，用密语、passkey 或收件人的 age 公钥在浏览器里加密成 age 格式，或把 age 文件解回来。密文可以输出成文字，跟密语一起存进你的密码管理器就能跨设备。加密完先用同一组密语解回来比对才给下载。输出是公开格式，任何装了 age 命令行工具的电脑都能解开，不需要这个网站。
+ 选一个文件或贴一段文字，用密语、passkey 或收件人的 age 公钥在浏览器里加密成 age 格式，或把 age 文件解回来。密文可以输出成文字，跟密语一起存进你的密码管理器就能跨设备。加密完先用同一组密语解回来比对才给下载。输出是公开格式，任何装了 age 命令行工具的电脑都能解开，不需要这个网站。
 
--   :material-fingerprint: **[passkey 钥匙](passkey.md)**
+- :material-fingerprint: **[passkey 钥匙](passkey.md)**
 
-    创建一把这个网站的 passkey，存进你的密码管理器或钥匙串。只用清单的话按一次「创建 passkey」就够，要用文件加密才需要再试一次解锁、生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语，准备清单、威胁模型的存档与收件人簿也用它加密存在你的设备上。没有账号、没有服务器，站上什么都不存。
+ 创建一把这个网站的 passkey，存进你的密码管理器或钥匙串。只用清单的话按一次「创建 passkey」就够，要用文件加密才需要再试一次解锁、生成备援密钥。之后本机文件加密可以用它当钥匙，不用记密语，准备清单、威胁模型的存档与收件人簿也用它加密存在你的设备上。没有账号、没有服务器，站上什么都不存。
 
 </div>
 
@@ -60,21 +60,21 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-qrcode: **[QR code 生成器](qrcode.md)**
+- :material-qrcode: **[QR code 生成器](qrcode.md)**
 
-    把 onion 网址、Tor bridge 等很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
+ 把 onion 网址、Tor bridge 等很长又容易打错的字符串变成 QR code，让眼前的人用相机读走，中间不经过任何服务器。可以下载成 SVG 印出来。
 
--   :material-qrcode-scan: **[QR code 读取器](qr-read.md)**
+- :material-qrcode-scan: **[QR code 读取器](qr-read.md)**
 
-    读出图片里 QR code 的内容，图片不离开设备。解出来是网址时把主机独立标出来，并且不提供打开按钮。
+ 读出图片里 QR code 的内容，图片不离开设备。解出来是网址时把主机独立标出来，并且不提供打开按钮。
 
--   :material-animation-play-outline: **[QR code 影格串流](qr-stream.md)**
+- :material-animation-play-outline: **[QR code 影格串流](qr-stream.md)**
 
-    手机里的东西要送进旁边那台笔记本，而现场的 Wi-Fi 不是你的。把文件切成一连串 QR code 轮流播放，另一台用摄像头读回来拼成原文件。两台设备之间没有配对、没有共用网络、没有服务器。
+ 手机里的东西要送进旁边那台笔记本，而现场的 Wi-Fi 不是你的。把文件切成一连串 QR code 轮流播放，另一台用摄像头读回来拼成原文件。两台设备之间没有配对、没有共用网络、没有服务器。
 
--   :material-file-compare: **[文件哈希比对](hash.md)**
+- :material-file-compare: **[文件哈希比对](hash.md)**
 
-    算出文件的 SHA-256，跟对方给的那一串比对。U 盘带过去、托人带过去、下载回来的安装包，都靠这一步确认取得的跟原本那份一样。几 GB 的文件也算得动，过程中显示进度。
+ 算出文件的 SHA-256，跟对方给的那一串比对。U 盘带过去、托人带过去、下载回来的安装包，都靠这一步确认取得的跟原本那份一样。几 GB 的文件也算得动，过程中显示进度。
 
 </div>
 
@@ -82,18 +82,18 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-file-document-multiple-outline: **[PDF 页面整理](pdf-pages.md)**
+- :material-file-document-multiple-outline: **[PDF 页面整理](pdf-pages.md)**
 
-    合并好几份 PDF、抽出或删掉某几页、换顺序、转方向。输出是新建的文件，来源的标题、作者、制作软件与创建时间都不会跟过来，交给你之前会重新读一次确认页数与方向都对。
+ 合并好几份 PDF、抽出或删掉某几页、换顺序、转方向。输出是新建的文件，来源的标题、作者、制作软件与创建时间都不会跟过来，交给你之前会重新读一次确认页数与方向都对。
 
 
--   :material-image-off-outline: **[文件 metadata 清除器](strip-metadata.md)**
+- :material-image-off-outline: **[文件 metadata 清除器](strip-metadata.md)**
 
-    拿掉照片、视频、录音、Office 文档与 PDF 里的 EXIF、GPS、设备型号、制作软件、作者与注释字段，全程在本机处理。照片、视频与录音的压缩数据一个比特都没动，每一段的去留都列给你看。
+ 拿掉照片、视频、录音、Office 文档与 PDF 里的 EXIF、GPS、设备型号、制作软件、作者与注释字段，全程在本机处理。照片、视频与录音的压缩数据一个比特都没动，每一段的去留都列给你看。
 
--   :material-selection-remove: **[截图遮蔽](redact.md)**
+- :material-selection-remove: **[截图遮蔽](redact.md)**
 
-    在截图或照片上拉方框，把不该外流的名字、头像与对话填成实心黑色，全程在本机处理。输出重新编码，原文件的 metadata 与文件名都不会带过去，交给你之前会逐像素确认每一处都是纯黑。
+ 在截图或照片上拉方框，把不该外流的名字、头像与对话填成实心黑色，全程在本机处理。输出重新编码，原文件的 metadata 与文件名都不会带过去，交给你之前会逐像素确认每一处都是纯黑。
 
 </div>
 
@@ -101,17 +101,17 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-link-variant-off: **[网址清理器](clean-url.md)**
+- :material-link-variant-off: **[网址清理器](clean-url.md)**
 
-    把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。拆掉 Google 与 Facebook 的转址包装，并把真正的注册域名单独标出来，品牌放在子域名、旁边加字、用长得像的字母冒充都会说明。
+ 把网址里的追踪参数挑出来并移除，每一个都说明是谁在追。拆掉 Google 与 Facebook 的转址包装，并把真正的注册域名单独标出来，品牌放在子域名、旁边加字、用长得像的字母冒充都会说明。
 
--   :material-format-letter-matches: **[隐形字符检测](invisible.md)**
+- :material-format-letter-matches: **[隐形字符检测](invisible.md)**
 
-    找出文字里看不见的零宽字符、方向控制、标签字符与同形字，标出位置并说明每一类是什么。文件外流追踪、钓鱼网址，还有藏给 AI 读的指令，都会利用看不见的字符。
+ 找出文字里看不见的零宽字符、方向控制、标签字符与同形字，标出位置并说明每一类是什么。文件外流追踪、钓鱼网址，还有藏给 AI 读的指令，都会利用看不见的字符。
 
--   :material-eye-outline: **[你的浏览器透露了什么](leaks.md)**
+- :material-eye-outline: **[你的浏览器透露了什么](leaks.md)**
 
-    列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道 Tor Browser 实际上防住了什么。
+ 列出任何网站不必问你就拿得到的信息，并标出 Tor Browser 会把哪些统一掉。换个浏览器再看一次，就知道 Tor Browser 实际上防住了什么。
 
 </div>
 
@@ -121,31 +121,37 @@ icon: material/tools
 
 | 你手上的事 | 走的顺序 |
 |---|---|
+| 第一次坐下来，要先厘清该做什么 | [威胁模型清单](threat-model.md)答三题并看错配，[我的准备清单](checklist.md)勾出接下来要做的，[passkey 钥匙](passkey.md)把进度加密存在你的设备上 |
+| 想知道网站不必问就拿得到你什么 | [你的浏览器透露了什么](leaks.md)看一次，换一个浏览器再看一次做对照，[网址清理器](clean-url.md)查链接尾巴带着谁的标识码 |
 | 照片或截图要交给别人 | 画面上有要遮的东西，用[截图遮蔽](redact.md)，输出已经不带原文件的 metadata。画面干净、只要去掉拍摄信息的，用[文件 metadata 清除器](strip-metadata.md) |
 | 要交一份 PDF 出去 | [PDF 页面整理](pdf-pages.md)排好页面，再用同一页的「看里面有什么」搜索不该留下的字 |
-| 收到来路不明的链接或二维码 | [QR code 读取器](qr-read.md)解出内容，[网址清理器](clean-url.md)看注册域名，[隐形字符检测](invisible.md)查文字里的同形字 |
+| 收到来路不明的链接或 QR code | [QR code 读取器](qr-read.md)解出内容，[网址清理器](clean-url.md)看注册域名，[隐形字符检测](invisible.md)查文字里的同形字 |
 | 收到别人给的文件，要确认也要看清楚 | [文件哈希比对](hash.md)确认跟对方手上那份一样，[文件 metadata 清除器](strip-metadata.md)或 [PDF 页面整理](pdf-pages.md)的「看里面有什么」列出里面带着什么，[隐形字符检测](invisible.md)查夹带的字符 |
 | 东西要给眼前的人或旁边那台设备 | 很长的字符串用 [QR code 生成器](qrcode.md)，让对方用相机读走。几 KB 的文件用 [QR code 影格串流](qr-stream.md)，收齐时它自己比对 SHA-256 |
 | 文件要托人带走或放进 U 盘 | [密语与密码生成器](passphrase.md)抽一组密语，[本机文件加密](age.md)封起来，[文件哈希比对](hash.md)让收的人核对 |
 | 临时要一组之后找得回来的密码 | [密语与密码生成器](passphrase.md)抽，[passkey 钥匙](passkey.md)当钥匙，[我的准备清单](checklist.md)记下已经做到哪里 |
 
-走完一整条路径长什么样，用七件具体的事各写一篇。前三篇不需要你先有特殊身份或特别的处境，后四篇对着站上服务的几种工作写。
+走完一整条路径长什么样，用九件具体的事各写一篇。日常场景那组不需要你先有特殊身份或特别的处境，工作场景那组对着站上服务的几种工作写。
 
 ### 日常场景
 
 <div class="grid cards" markdown>
 
--   :material-file-send-outline: **[发一份简历出去](case-resume.md)**
+- :material-target-account: **[广告好像知道你在想什么](case-profile.md)**
 
-    截止只剩一个晚上，简历是旧版改的，作品集分成三个文件，其中一页是前公司还没公开的画面。导出的 PDF 为什么带着你电脑的账号名称，黑色方块盖住的字为什么还在文件里。
+ 刚在别的地方看过的东西，转头就出现在信息流的广告里。任何网站不必问就拿得到你哪些信息、那些值加起来为什么足以认出你，以及链接尾巴带着谁的标识码。
 
--   :material-tag-outline: **[在二手平台卖东西](case-secondhand.md)**
+- :material-file-send-outline: **[发一份简历出去](case-resume.md)**
 
-    搬家前拍了十四张照片要上架，背景有门牌、对面大楼的招牌与桌上的账单。截图遮蔽与 metadata 清除器什么时候该用哪一个，以及买家要你出示证件时该怎么回。
+ 截止只剩一个晚上，简历是旧版改的，作品集分成三个文件，其中一页是前公司还没公开的画面。导出的 PDF 为什么带着你电脑的账号名称，黑色方块盖住的字为什么还在文件里。
 
--   :material-message-alert-outline: **[群里转来的链接](case-link.md)**
+- :material-tag-outline: **[在二手平台卖东西](case-secondhand.md)**
 
-    小区群转来一则限时登记的消息，附一个看起来像官网的网址与一张二维码图。注册域名为什么是唯一该看的部分，看不见的字符能查到什么、查不到什么。
+ 搬家前拍了十四张照片要上架，背景有门牌、对面大楼的招牌与桌上的账单。截图遮蔽与 metadata 清除器什么时候该用哪一个，以及买家要你出示证件时该怎么回。
+
+- :material-message-alert-outline: **[群里转来的链接](case-link.md)**
+
+ 小区群转来一则限时登记的消息，附一个看起来像官网的网址与一张 QR code 图。注册域名为什么是唯一该看的部分，看不见的字符能查到什么、查不到什么。
 
 </div>
 
@@ -153,21 +159,25 @@ icon: material/tools
 
 <div class="grid cards" markdown>
 
--   :material-account-multiple-outline: **[把名单交给外部伙伴](case-roster.md)**
+- :material-account-plus-outline: **[带新同事做一次设备盘点](case-onboarding.md)**
 
-    年度申报要把捐款人名单交给会计师，往年都当附件发出去。密语为什么要走另一个渠道，加密过的文件为什么还要算一次哈希。
+ 新人下周报到，权限开好了，而没有人跟他谈过设备该怎么准备。为什么三题要有人在旁边问，错配清单为什么比答案本身有用，以及进度为什么存在他自己的设备上。
 
--   :material-presentation: **[工作坊现场要发东西给大家](case-workshop.md)**
+- :material-account-multiple-outline: **[把名单交给外部伙伴](case-roster.md)**
 
-    场地的 Wi-Fi 是主办方的，二十个人的设备各不相同。哪些东西该印成二维码、哪些用屏幕跟镜头传、哪些只能靠 U 盘。
+ 年度申报要把捐款人名单交给会计师，往年都当附件发出去。密语为什么要走另一个渠道，加密过的文件为什么还要算一次哈希。
 
--   :material-file-account-outline: **[收到来源给的文件](case-source-file.md)**
+- :material-presentation: **[工作坊现场要发东西给大家](case-workshop.md)**
 
-    来源发来一份内部简报，你要核实它、要引用它，而且不能让提供的人被指认出来。文件外泄追踪怎么运作，为什么引用要靠重打与遮蔽。
+ 场地的 Wi-Fi 是主办方的，二十个人的设备各不相同。哪些东西该印成 QR code、哪些用屏幕跟镜头传、哪些只能靠 U 盘。
 
--   :material-folder-account-outline: **[把对话截图整理成送件附件](case-evidence.md)**
+- :material-file-account-outline: **[收到来源给的文件](case-source-file.md)**
 
-    四十几张对话截图要整理成一份送出去的附件，画面上有第三人的名字与头像。遮蔽、合并与确认的顺序，以及交出去之前最后那一步要查什么。
+ 来源发来一份内部简报，你要核实它、要引用它，而且不能让提供的人被指认出来。文件外泄追踪怎么运作，为什么引用要靠重打与遮蔽。
+
+- :material-folder-account-outline: **[把对话截图整理成送件附件](case-evidence.md)**
+
+ 四十几张对话截图要整理成一份送出去的附件，画面上有第三人的名字与头像。遮蔽、合并与确认的顺序，以及交出去之前最后那一步要查什么。
 
 </div>
 

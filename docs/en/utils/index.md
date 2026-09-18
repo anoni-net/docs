@@ -44,7 +44,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
-    Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
+    Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the entropy you got is shown alongside.
 
 -   :material-lock-outline: **[Local file encryption](age.md)**
 
@@ -121,6 +121,8 @@ Each tool above covers one action, and one thing on your plate usually runs thro
 
 | What you have to do | The order |
 |---|---|
+| Sitting down for the first time to work out what to do | [Threat model checklist](threat-model.md) for the three questions and the mismatches, [My preparation checklist](checklist.md) to pick what comes next, [Passkey as your key](passkey.md) to keep the progress encrypted on your device |
+| Wanting to know what a website receives without asking | [What your browser gives away](leaks.md) once, then again in a different browser for comparison, and the [URL cleaner](clean-url.md) for whose identifier rides on the end of a link |
 | Photos or screenshots going to someone else | If something in the picture needs covering, use [Screenshot redaction](redact.md), whose output already carries no metadata from the original. If the picture is clean and you only want the capture data gone, use the [File metadata remover](strip-metadata.md) |
 | A PDF going out | [PDF page tidy-up](pdf-pages.md) to arrange the pages, then the same page's "see what is inside" to search for text that should not still be there |
 | A link or QR code of unclear provenance | [QR code reader](qr-read.md) to decode it, [URL cleaner](clean-url.md) for the registered domain, [Invisible character detector](invisible.md) for homoglyphs in the text |
@@ -129,11 +131,15 @@ Each tool above covers one action, and one thing on your plate usually runs thro
 | A file travelling by courier or on a USB stick | [Passphrase and password generator](passphrase.md) for a passphrase, [Local file encryption](age.md) to seal it, [File hash comparison](hash.md) so the recipient can verify |
 | A password you need now and again later | [Passphrase and password generator](passphrase.md) to draw one, [Passkey as your key](passkey.md) to hold it, [My preparation checklist](checklist.md) to record where you got to |
 
-Seven concrete situations, each written up as a full walk through one of these paths. The first three assume no particular role or threat. The last four are written against the kinds of work this site serves.
+Nine concrete situations, each written up as a full walk through one of these paths. The everyday group assumes no particular role or threat. The group at work is written against the kinds of work this site serves.
 
 ### Everyday cases
 
 <div class="grid cards" markdown>
+
+-   :material-target-account: **[The ads seem to know what you are thinking](case-profile.md)**
+
+    Something you looked at elsewhere turns up in your feed shortly afterwards. What any website receives without asking, why those values together identify a person, and whose identifier rides on the end of a link.
 
 -   :material-file-send-outline: **[Sending out a job application](case-resume.md)**
 
@@ -152,6 +158,10 @@ Seven concrete situations, each written up as a full walk through one of these p
 ### Cases at work
 
 <div class="grid cards" markdown>
+
+-   :material-account-plus-outline: **[Walking a new colleague through a device review](case-onboarding.md)**
+
+    Someone starts next week with access provisioned and nobody has talked to them about their devices. Why the three questions need a second person asking, why the mismatch list beats the answers, and why the progress stays on their device.
 
 -   :material-account-multiple-outline: **[Handing a list to an outside partner](case-roster.md)**
 

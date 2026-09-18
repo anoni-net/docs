@@ -18,7 +18,7 @@ Opening it is the worst available option. The moment you do, whoever is on the o
 
 Save the image and drop it into the [QR code reader](qr-read.md). The image is decoded in your browser and is not uploaded.
 
-When the result is a URL, the page displays the host on its own line, and it deliberately gives you no button to open it. That missing button is the design. During a check, the button is exactly where a hand slips.
+When the result is a URL, the host appears on its own line, and there is deliberately no button to open it. That missing button is the design. During a check, the button is exactly where a hand slips.
 
 A QR code offers no clues of its own. Printed on paper, stuck to a pole, or attached to a message, they all look the same and none of them reveals its destination. An app that scans and jumps straight there removes the moment of judgement entirely.
 
@@ -38,11 +38,11 @@ Paste the whole message into the [Invisible character detector](invisible.md). I
 
 Homoglyphs matter most here. Replace the Latin `a` with the Cyrillic `а` and the two look identical on screen while the domain is an entirely different one. Direction control characters can make a string display in the opposite order to the one it is stored in.
 
-One limit needs stating plainly: this page can prove presence, not absence. A clean result means none of these known categories are present, and it does not mean the link is safe. It is one step in a check, not a conclusion.
+The detector can prove presence, not absence. A clean result means none of these known categories are present, and it does not mean the link is safe. It is one step in a check.
 
 ## After the checks
 
-With all three done, the judgement is usually clear. If the registered domain does not match the agency the message claims, or the text uses homoglyphs, the forward can stop with you.
+If the registered domain does not match the agency named in the message, or the text uses homoglyphs, the forward can stop with you.
 
 If you want to explain it to the group, screenshot the part of the [URL cleaner](clean-url.md) that isolates the registered domain. That works far better than saying the link looks odd. Run the screenshot through [Screenshot redaction](redact.md) before sending it, because group chat screenshots usually carry other members' names and profile pictures.
 

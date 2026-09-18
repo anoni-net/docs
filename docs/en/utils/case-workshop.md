@@ -14,7 +14,7 @@ Several things have to reach them. A URL for the materials, a line of Tor bridge
 
 The venue Wi-Fi belongs to the host and the password is on the wall. Whether it can move files is one question. Whether you want twenty devices joining a network you do not control just to collect a file is another.
 
-Anything that requires installing software is expensive here. Published training preparation guidance suggests budgeting 90 minutes to get a room of learners through installing one new tool, and the whole afternoon is three hours.
+Anything that requires installing software is expensive here. Published training preparation guidance puts the budget at 90 minutes to get a room of learners through installing one new tool, and the whole afternoon is three hours.
 
 ## Long strings go on a printed QR code
 
@@ -24,7 +24,7 @@ Use the [QR code generator](qrcode.md) to turn the string into a QR code and dow
 
 Nothing passes through a server along the way. A printed copy works in a venue with no connectivity, and the same sheet works again at the next session.
 
-Bridge lines of eighty-odd characters especially deserve this treatment. Reading one out character by character produces a startling error rate, and the people who mistype it conclude the bridge is dead.
+Bridge lines of eighty-odd characters especially deserve this treatment. Reading one out character by character goes wrong easily, and the people who mistype it conclude the bridge is dead.
 
 ## Files of a few kilobytes travel by screen and camera
 
@@ -32,7 +32,7 @@ Configuration files, keys, and signatures in the range of a few to a few tens of
 
 There is no pairing between the two devices, no shared network, and no server. Your laptop holds up its screen and the participant points a phone at it.
 
-The channel is slow, roughly one to three kilobytes per second, and the tool refuses files over 512 KB. That number measures human patience rather than a technical ceiling: 512 KB at default settings plays for four minutes twenty, and one pass is usually not enough.
+The channel is slow, roughly one to three kilobytes per second, and files over 512 KB are rejected. That number measures human patience rather than a technical ceiling: 512 KB at default settings plays for four minutes twenty, and one pass is usually not enough.
 
 No separate hash check is needed afterwards. The sending side puts the original file's SHA-256 into the first frame, the receiving side computes it again once the pieces are assembled, and the screen tells you directly whether they match.
 

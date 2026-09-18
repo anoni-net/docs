@@ -265,12 +265,19 @@
 	#高成本特定情境才需要
 /basics/surveillance-capability/
 	#一般人做得到的一件事
+	#一般人做得到的一件事_1
 	#中國境內與香港
 	#人臉辨識
+	#例行化的每日產出
+	#依可被施力的弱點側寫個人
 	#做不到
+	#做不到_1
 	#做得到
 	#做得到_1
 	#做得到_2
+	#做得到_3
+	#公開來源的情報建檔
+	#公開活動的前期場地情報
 	#向商業端取得資料
 	#哪個措施擋得住哪一層
 	#商用間諜軟體
@@ -282,6 +289,7 @@
 	#從行為推論你沒有說出口的屬性
 	#怎麼讀這頁
 	#我怎麼知道自己有沒有被盯上
+	#把一個人散在各平台的公開活動收攏成檔案
 	#把不同-app不同裝置上的你串起來
 	#接下來
 	#本頁會過期
@@ -294,12 +302,14 @@
 	#調取通聯紀錄
 	#通聯紀錄
 	#邊界在哪
+	#邊界在哪_1
 	#關掉定位之後仍然知道你大概在哪
 	#電信商
 /basics/threat-model/
 	#一個操作流程把三題寫成一份小清單
 	#一般使用者沒有特別敏感工作
 	#三個基本問題
+	#什麼情況要把對手清單往上拉
 	#威脅模型不是設定一次就完成
 	#威脅模型如何建立
 	#家暴倖存者在離開前後
@@ -1633,6 +1643,7 @@
 	#Snowflake-2141
 	#WebTunnel-005
 	#WebTunnel-006
+	#WebTunnel-007
 	#lyrebird-081
 	#三種傳輸適合什麼情況
 	#抗審查傳輸更新日誌
@@ -1660,10 +1671,12 @@
 	#iOS-2661iPadOS-2661同日另有-18710
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
+	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的機器走哪一條線
 	#急迫程度怎麼判斷
 /changelog/macos/
+	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
 	#macOS-Tahoe-2661Sequoia-1579Sonoma-1489
@@ -1696,6 +1709,7 @@
 	#Tails-7101
 	#Tails-711
 	#Tails-712
+	#Tails-713
 	#Tails-771
 	#Tails-772
 	#Tails-773
@@ -1730,6 +1744,7 @@
 	#Tor-Browser-15020
 	#Tor-Browser-15021
 	#Tor-Browser-15022
+	#Tor-Browser-15023
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a6Alpha-測試通道
@@ -2452,21 +2467,30 @@
 	#Join-you-together-across-apps-and-devices
 	#Know-roughly-where-you-are-after-you-turn-location-off
 	#Linking-a-device-around-end-to-end-encryption
+	#Open-source-intelligence-profiling
 	#Other-jurisdictions
 	#Platforms-advertisers-and-data-brokers
+	#Produce-advance-venue-intelligence-for-lawful-public-events
+	#Profile-people-by-the-pressure-points-that-can-be-used-on-them
+	#Pull-one-persons-public-activity-across-platforms-into-a-single-file
 	#Retrieving-communication-records
+	#Run-as-routine-daily-output
 	#States-and-law-enforcement
 	#Telecom-carriers
 	#The-one-thing-an-ordinary-person-can-do
+	#The-one-thing-an-ordinary-person-can-do_1
 	#This-page-will-age
 	#What-it-can-do
 	#What-it-can-do_1
 	#What-it-can-do_2
+	#What-it-can-do_3
 	#What-it-cannot-do
+	#What-it-cannot-do_1
 	#What-surveillance-can-actually-do
 	#What-there-is-no-evidence-for
 	#What-there-is-no-evidence-for_1
 	#Where-the-boundary-sits
+	#Where-the-boundary-sits_1
 	#Where-to-go-from-here
 	#Which-measure-stops-which-layer
 	#Why-most-people-are-not-on-the-list
@@ -3450,6 +3474,7 @@
 	#Snowflake-2141
 	#WebTunnel-005
 	#WebTunnel-006
+	#WebTunnel-007
 	#Which-transport-suits-which-situation
 	#lyrebird-081
 /en/changelog/arti/
@@ -3476,10 +3501,12 @@
 	#iOS-266-iPadOS-266
 	#iOS-2661-iPadOS-2661-18710-shipped-the-same-day
 	#iOS-2662-iPadOS-2662
+	#iOS-27-iPadOS-27-267-shipped-the-same-day
 	#iOS-Security-Updates
 /en/changelog/macos/
 	#How-we-rate-urgency
 	#Three-maintenance-lines
+	#macOS-Golden-Gate-27-Tahoe-267-and-Sequoia-158-shipped-the-same-day
 	#macOS-Security-Updates
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
@@ -3508,6 +3535,7 @@
 	#Tails-7101
 	#Tails-711
 	#Tails-712
+	#Tails-713
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -3535,6 +3563,7 @@
 	#Tor-Browser-15020
 	#Tor-Browser-15021
 	#Tor-Browser-15022
+	#Tor-Browser-15023
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a7-alpha
@@ -4072,11 +4101,13 @@
 	#Guides
 	#How-to-use-them
 /en/help/
+	#A-family-member-or-partner-is-detained-or-missing-in-mainland-China
 	#After-it-is-over
 	#Afterwards
 	#Afterwards_1
 	#Afterwards_2
 	#Alongside
+	#Approaches-suspected-profiling-and-pressure-on-your-family
 	#Assessing-the-situation
 	#Cut-off-censored-or-blocked
 	#Digital-steps-to-take-alongside
@@ -4095,14 +4126,27 @@
 	#Next-thirty-minutes
 	#Personal-data-exposed-or-published-doxxing
 	#Reporting-it
+	#Someone-has-actually-approached-you
 	#Stalking-and-online-harassment
 	#Travelling-or-working-across-borders
 	#What-the-24-hours-means
 	#What-we-cannot-do
 	#Whether-the-money-comes-back
+	#You-suspect-a-file-exists-with-no-approach-to-point-to
 	#account-compromise
 /en/internet-freedom-matter/ -> /en/basics/internet-freedom/
 /en/intro/ -> /en/basics/
+/en/lab/
+	#Lab
+	#Reporting-back
+	#What-is-here-now
+/en/lab/webrtc-transfer/
+	#Device-to-device-transfer
+	#Report-what-you-find
+	#Running-it-on-two-devices
+	#This-page-sends-nothing
+	#Where-it-is-known-to-fail
+	#Why-measure-this
 /en/not-stored/
 	#This-page-is-not-stored-on-your-device
 /en/offline-index.json
@@ -4356,6 +4400,7 @@
 	#The-regional-angle-that-changes-the-advice
 	#The-source-protection-lifecycle
 	#Verifying-identity-without-creating-evidence
+	#When-you-are-the-target
 	#Where-to-go-from-here
 /en/scenarios/lgbtq/
 	#A-three-layer-model
@@ -4588,9 +4633,11 @@
 	#Tools
 	#Where-to-go-from-here
 /en/tools/ai-privacy/
+	#Access-credentials-are-themselves-a-target
 	#Before-you-paste
 	#Confabulation-is-also-a-safety-problem
 	#Deleting-the-conversation-does-not-delete-the-data
+	#Discount-resellers
 	#Human-review-is-normal
 	#Local-models
 	#Services-inside-mainland-China-run-on-a-different-framework
@@ -4602,10 +4649,12 @@
 	#What-should-not-go-in
 	#What-to-ask-a-provider
 	#What-you-never-pasted-but-sent-anyway
+	#Where-the-keys-leak-from
 	#Where-the-text-goes
 	#Where-to-go-from-here
 	#Whether-it-trains-the-model-depends-on-your-tier
 	#Your-employer-can-see-the-business-tier-logs
+	#Your-own-proxies-and-sandboxes-count-as-attack-surface
 /en/tools/asian-diceware/
 	#Agreeing-on-a-codebook-with-someone-you-trust
 	#Asian-Diceware-an-Asian-flavored-passphrase-wordlist
@@ -4952,11 +5001,29 @@
 	#The-same-path-applies-well-beyond-group-chat-forwards
 	#The-text-of-the-message-is-worth-a-look-as-well
 	#What-the-message-looks-like
+/en/utils/case-onboarding/
+	#One-hour-on-their-first-day
+	#Pick-what-the-next-three-months-hold
+	#The-mismatch-list-is-the-useful-part
+	#The-progress-stays-on-their-device
+	#The-same-path-applies-well-beyond-onboarding
+	#The-three-questions-need-a-second-person-asking
+	#Walking-a-new-colleague-through-a-device-review
+	#What-that-hour-does-not-do
+/en/utils/case-profile/
+	#Accurate-to-an-uncomfortable-degree
+	#Handed-over-on-page-load-without-a-prompt
+	#Links-carry-identifiers-too
+	#Open-it-again-in-a-different-browser
+	#The-ads-seem-to-know-what-you-are-thinking
+	#The-same-path-applies-well-beyond-advertising
+	#Together-they-identify-a-person
+	#What-this-page-cannot-prove
 /en/utils/case-resume/
 	#Photo-metadata-has-to-be-handled-earlier
 	#Sending-out-a-job-application
 	#Text-under-a-black-box-is-still-in-the-file
-	#The-author-field-says-a-different-company
+	#The-author-field-names-a-different-company
 	#The-deadline-is-midnight-tonight
 	#The-same-path-applies-well-beyond-job-applications
 	#Three-things-all-on-one-page
@@ -4973,9 +5040,9 @@
 	#Drawing-fewer-boxes
 	#Fourteen-photos-ready-to-list
 	#Selling-things-on-a-secondhand-marketplace
-	#The-remover-lists-what-stays-and-what-goes
 	#The-same-path-applies-well-beyond-secondhand-sales
 	#Two-tools-and-usually-you-only-need-one
+	#What-stays-and-what-goes
 	#When-a-buyer-asks-you-for-ID
 /en/utils/case-source-file/
 	#A-file-from-a-source
@@ -5269,12 +5336,14 @@
 	#之後的整理_1
 	#事件結束後的整理
 	#個資外洩或被公開Doxxing
+	#只是懷疑被寫進名單沒有具體的接觸
 	#同步保護
 	#圈存的-24-小時是什麼意思
 	#在地支援組織
 	#報案
 	#如果被列為警示的是你自己的帳戶
 	#安全評估
+	#家人或夥伴在中國大陸被扣押或失聯
 	#家庭暴力或親密關係暴力
 	#帳號被盜或被異常登入
 	#後續
@@ -5282,6 +5351,8 @@
 	#接下來的-30-分鐘
 	#數位防護的同步動作
 	#旅居或跨境工作的常見資源
+	#有人來接觸懷疑被建檔或家人被找上
+	#有人實際接觸你
 	#款項能否追回
 	#求助管道
 	#立刻做
@@ -5297,6 +5368,17 @@
 /internet-freedom-matter/ -> /basics/internet-freedom/
 /intro/ -> /basics/
 /intro/ooni-run-v2/ -> /tools/ooni-run-v2/
+/lab/
+	#實驗區
+	#怎麼回報
+	#現在有什麼
+/lab/webrtc-transfer/
+	#兩台裝置怎麼測
+	#已知會失敗的情況
+	#測完請回報
+	#為什麼要量這個
+	#裝置之間直接傳檔
+	#這一頁不送任何資料
 /not-stored/
 	#這一頁沒有存在裝置上
 /offline-index.json
@@ -5487,6 +5569,7 @@
 	#接下來
 	#求助管道
 	#法規線
+	#活動公開資訊的揭露節奏
 	#為什麼需要這套流程
 	#現場即時通訊Signal-vs-離線-mesh
 	#現場拍照與錄影
@@ -5496,6 +5579,7 @@
 	#行動之後
 	#行動現場
 	#資訊最小化原則
+	#跨國協作群組的成員驗證
 	#跨組織協作
 	#通訊群組的設計與隔離
 	#雲端文件先撤到-Cryptpad
@@ -5599,6 +5683,8 @@
 	#不問什麼
 	#不熟數位工具的來源
 	#中國大陸的脈絡
+	#事前約好一個驗證方式
+	#你自己是目標的時候
 	#來源的意願與知情同意
 	#保護來源不等於順從來源
 	#傳遞媒介
@@ -5617,6 +5703,7 @@
 	#多個來源之間的區隔
 	#多管道交叉驗證
 	#媒體側的紀錄
+	#定期看自己的名字被拿去做什麼
 	#對方主動先聯繫的處理
 	#對方端的提醒
 	#對方要求整篇不要發表
@@ -5635,11 +5722,13 @@
 	#確認對方身分
 	#第一次接觸
 	#第一次見面前的判斷
+	#被建檔跟被處置是兩件事
 	#記者保護消息來源
 	#記者端
 	#記者自己這一端
 	#記錄方式
 	#訪談紀錄
+	#跨國協作的私人群組
 	#跨境合作與求助
 	#過度焦慮是風險訊號
 	#離境後才是風險高峰
@@ -5991,6 +6080,7 @@
 	#連線層Tor-工具家族
 /tools/ai-privacy/
 	#AI-會編造也是安全問題
+	#AI-的存取憑證本身是攻擊目標
 	#一個判斷題
 	#三條路各自的門檻
 	#中國境內的-AI-服務是另一套框架
@@ -6003,14 +6093,17 @@
 	#只貼需要的那一段
 	#哪些內容不該貼
 	#團隊與組織
+	#折扣代理商
 	#接下來
 	#會不會被拿去訓練取決於你用的是哪一版
 	#本地模型
 	#本頁會過期
 	#用-AI-工作時怎麼避免資料外洩
+	#自架的代理與沙盒也是攻擊面
 	#該問服務供應商的問題
 	#貼之前可以怎麼處理
 	#貼進去之後發生什麼
+	#金鑰是從哪裡外洩的
 /tools/asian-diceware/
 	#Asian-Diceware帶亞洲味的英文密語字典
 	#一同瞭解
@@ -6359,7 +6452,7 @@
 	#跨裝置貼進你的密碼管理器
 	#離線可用
 /utils/case-evidence/
-	#交出去之前的最後一步
+	#交出去前再查一次有沒有漏遮
 	#原始截圖要留著
 	#合併成一份排出時間順序
 	#幾十張截圖
@@ -6375,6 +6468,24 @@
 	#訊息的文字也值得查一次
 	#訊息長這樣
 	#這條路徑不只用在群組轉貼
+/utils/case-onboarding/
+	#三題要有人在旁邊問
+	#勾出接下來三個月要做的
+	#報到那天的一小時
+	#帶新同事做一次裝置盤點
+	#真正有用的是錯配清單
+	#這一小時做不到的事
+	#這條路徑不只用在新人報到
+	#進度存在他自己的裝置上
+/utils/case-profile/
+	#加起來就認得出人
+	#廣告好像知道你在想什麼
+	#打開就拿得到不會問你
+	#換一個瀏覽器再看一次
+	#清單證明不了的事
+	#準得有點過頭
+	#這條路徑不只用在廣告
+	#連結的尾巴也帶著識別碼
 /utils/case-resume/
 	#今天午夜的期限
 	#寄一份履歷出去
@@ -6396,7 +6507,7 @@
 	#兩個工具多數時候只需要用一個
 	#十四張照片準備上架
 	#在二手平台賣東西
-	#清除器會把每一段的去留列給你看
+	#每一段的去留都會列出來
 	#買家要你出示證件的時候
 	#這條路徑不只用在二手交易
 	#遮的時候可以少拉幾個框
@@ -6411,7 +6522,7 @@
 	#這條路徑不只用在內部文件
 /utils/case-workshop/
 	#二十個人一個下午
-	#大檔案還是隨身碟
+	#大檔案改用隨身碟送
 	#工作坊現場要發東西給大家
 	#幾-KB-的檔案用螢幕跟鏡頭傳
 	#很長的字串印成-QR-code
@@ -6868,13 +6979,20 @@
 	#高成本特定情境才需要
 /zh-cn/basics/surveillance-capability/
 	#一般人做得到的一件事
+	#一般人做得到的一件事_1
 	#为什么多数人不在名单上
 	#人脸识别
 	#从行为推论你没有说出口的属性
+	#例行化的每日产出
+	#依可被施力的弱点侧写个人
 	#做不到
+	#做不到_1
 	#做得到
 	#做得到_1
 	#做得到_2
+	#做得到_3
+	#公开来源的情报建档
+	#公开活动的前期场地情报
 	#关掉定位之后仍然知道你大概在哪
 	#其他法域
 	#几个常见误解
@@ -6887,6 +7005,7 @@
 	#平台广告与数据掮客
 	#怎么读这页
 	#我怎么知道自己有没有被盯上
+	#把一个人散在各平台的公开活动收拢成档案
 	#把不同-app不同设备上的你串起来
 	#接下来
 	#本页会过期
@@ -6898,11 +7017,13 @@
 	#绕过端对端加密的设备关联
 	#调取通联记录
 	#边界在哪
+	#边界在哪_1
 	#通联记录
 /zh-cn/basics/threat-model/
 	#一个操作流程把三题写成一份小清单
 	#一般用户没有特别敏感工作
 	#三个基本问题
+	#什么情况要把对手清单往上拉
 	#几个常见角色的威胁模型范例
 	#威胁模型不是设定一次就完成
 	#威胁模型如何建立
@@ -8225,6 +8346,7 @@
 	#Snowflake-2141
 	#WebTunnel-005
 	#WebTunnel-006
+	#WebTunnel-007
 	#lyrebird-081
 	#三种传输适合什么情况
 	#抗审查传输更新日志
@@ -8252,10 +8374,12 @@
 	#iOS-2661iPadOS-2661同日另有-18710
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
+	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的机器走哪一条线
 	#紧急程度怎么判断
 /zh-cn/changelog/macos/
+	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
 	#macOS-Tahoe-2661Sequoia-1579Sonoma-1489
@@ -8291,6 +8415,7 @@
 	#Tails-7101
 	#Tails-711
 	#Tails-712
+	#Tails-713
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -8319,6 +8444,7 @@
 	#Tor-Browser-15020
 	#Tor-Browser-15021
 	#Tor-Browser-15022
+	#Tor-Browser-15023
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a7Alpha-测试通道
@@ -8788,18 +8914,22 @@
 	#之后的整理
 	#之后的整理_1
 	#事件结束后的整理
+	#只是怀疑被写进名单没有具体的接触
 	#同步保护
 	#后续
 	#圈存的-24-小时是什么意思
 	#在地支持组织
 	#如果被列为警示的是你自己的账户
 	#安全评估
+	#家人或伙伴在中国大陆被扣押或失联
 	#家庭暴力或亲密关系暴力
 	#我们不能做的事
 	#报案
 	#接下来的-30-分钟
 	#数字防护的同步动作
 	#旅居或跨境工作的常见资源
+	#有人实际接触你
+	#有人来接触怀疑被建档或家人被找上
 	#款项能否追回
 	#求助管道
 	#立刻做
@@ -8814,6 +8944,17 @@
 	#跟踪骚扰与线上骚扰
 	#钱已经汇给诈骗
 /zh-cn/internet-freedom-matter/ -> /zh-cn/basics/internet-freedom/
+/zh-cn/lab/
+	#实验区
+	#怎么回报
+	#现在有什么
+/zh-cn/lab/webrtc-transfer/
+	#两台设备怎么测
+	#为什么要量这个
+	#已知会失败的情况
+	#测完请回报
+	#设备之间直接传文件
+	#这一页不送任何数据
 /zh-cn/not-stored/
 	#这一页没有存在设备上
 /zh-cn/offline-index.json
@@ -8871,6 +9012,7 @@
 	#接下来
 	#求助管道
 	#法规线
+	#活动公开信息的披露节奏
 	#现场即时通讯Signal-vs-离线-mesh
 	#现场拍照与录影
 	#社运行动者的数字准备
@@ -8878,6 +9020,7 @@
 	#群组命名与消息政策
 	#行动之后
 	#行动现场
+	#跨国协作群组的成员验证
 	#跨组织协作
 	#通讯群组的设计与隔离
 	#香港的脉络
@@ -8988,7 +9131,9 @@
 	#中国大陆的脉络
 	#为什么要隔开
 	#为什么需要这套流程
+	#事前约好一个验证方式
 	#传递媒介
+	#你自己是目标的时候
 	#保护来源不等于顺从来源
 	#先判断对方能做到什么
 	#先约定引用的层级
@@ -9003,6 +9148,7 @@
 	#多个来源之间的区隔
 	#多管道交叉验证
 	#媒体侧的记录
+	#定期看自己的名字被拿去做什么
 	#对方主动先联系的处理
 	#对方信息的最小化
 	#对方端的提醒
@@ -9023,11 +9169,13 @@
 	#离境后才是风险高峰
 	#第一次接触
 	#第一次见面前的判断
+	#被建档跟被处置是两件事
 	#记录方式
 	#记者保护消息来源
 	#记者端
 	#记者自己这一端
 	#访谈记录
+	#跨国协作的私人群组
 	#跨境合作与求助
 	#过度焦虑是风险讯号
 	#面谈优先
@@ -9382,6 +9530,7 @@
 	#连线层Tor-工具家族
 /zh-cn/tools/ai-privacy/
 	#AI-会编造也是安全问题
+	#AI-的访问凭证本身是攻击目标
 	#一个判断题
 	#三条路各自的门槛
 	#中国境内的-AI-服务是另一套框架
@@ -9395,10 +9544,13 @@
 	#只贴需要的那一段
 	#哪些内容不该贴
 	#团队与组织
+	#密钥是从哪里外泄的
+	#折扣代理商
 	#接下来
 	#本地模型
 	#本页会过期
 	#用-AI-工作时怎么避免数据外泄
+	#自架的代理与沙盒也是攻击面
 	#该问服务供应商的问题
 	#贴之前可以怎么处理
 	#贴进去之后发生什么
@@ -9749,7 +9901,7 @@
 	#离线可用
 	#跨设备贴进你的密码管理器
 /zh-cn/utils/case-evidence/
-	#交出去之前的最后一步
+	#交出去前再查一次有没有漏遮
 	#几十张截图
 	#原始截图要留着
 	#合并成一份排出时间顺序
@@ -9757,7 +9909,7 @@
 	#这条路径不只用在送件
 	#遮掉不该出现的部分
 /zh-cn/utils/case-link/
-	#先看图里的二维码是什么
+	#先看图里的-QR-code-是什么
 	#查完之后
 	#消息的文字也值得查一次
 	#消息长这样
@@ -9765,6 +9917,24 @@
 	#网址真正的落点在注册域名
 	#群里转来的链接
 	#这条路径不只用在群里转发
+/zh-cn/utils/case-onboarding/
+	#三题要有人在旁边问
+	#勾出接下来三个月要做的
+	#带新同事做一次设备盘点
+	#报到那天的一小时
+	#真正有用的是错配清单
+	#这一小时做不到的事
+	#这条路径不只用在新人报到
+	#进度存在他自己的设备上
+/zh-cn/utils/case-profile/
+	#准得有点过头
+	#加起来就认得出人
+	#广告好像知道你在想什么
+	#打开就拿得到不会问你
+	#换一个浏览器再看一次
+	#清单证明不了的事
+	#这条路径不只用在广告
+	#链接的尾巴也带着标识码
 /zh-cn/utils/case-resume/
 	#今天午夜的截止时间
 	#发一份简历出去
@@ -9787,7 +9957,7 @@
 	#买家要你出示证件的时候
 	#十四张照片准备上架
 	#在二手平台卖东西
-	#清除器会把每一段的去留列给你看
+	#每一段的去留都会列出来
 	#这条路径不只用在二手交易
 	#遮的时候可以少拉几个框
 /zh-cn/utils/case-source-file/
@@ -9802,9 +9972,9 @@
 /zh-cn/utils/case-workshop/
 	#二十个人一个下午
 	#几-KB-的文件用屏幕跟镜头传
-	#大文件还是-U-盘
+	#大文件改用-U-盘送
 	#工作坊现场要发东西给大家
-	#很长的字符串印成二维码
+	#很长的字符串印成-QR-code
 	#这条路径不只用在工作坊
 /zh-cn/utils/checklist/
 	#怎么运作

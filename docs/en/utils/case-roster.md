@@ -12,13 +12,13 @@ The filing deadline is close and the accountant wants the donation records. The 
 
 In previous years it went out as an email attachment. That file then exists in several places at once: their mailbox, your sent folder, the mail servers at both ends, and whatever automatic backup either side runs. The list itself is not encrypted, so anyone with access to those mailboxes has the list.
 
-This happens once a year, and not only with accountants. Contracted designers, collaborating researchers, and partners on a joint application all end up needing a list from you.
+The annual filing comes round once a year, and accountants are not the only recipients. Contracted designers, collaborating researchers, and partners on a joint application all end up needing a list from you.
 
 ## Draw a passphrase first
 
 Go to the [Passphrase and password generator](passphrase.md) and draw one. The page shows how much entropy it has, which is roughly how many attempts guessing it would take.
 
-Draw rather than invent, because what people come up with is not random enough. A birthday, the organisation's initials, or last year's passphrase with a digit appended all rank early in a dictionary attack.
+Draw rather than invent, because people rarely come up with anything random enough. A birthday, the organisation's initials, or last year's passphrase with a digit appended all rank early in a dictionary attack.
 
 ## Encrypt before it leaves
 
@@ -42,7 +42,7 @@ To keep the passphrase, store it in your password manager with a note saying whi
 
 Compute the SHA-256 of the encrypted file and give that string to the recipient separately from the passphrase. They hash what arrives, compare, and only then decrypt.
 
-What this buys you is the ability to tell two failures apart. If they cannot open it and the hash matches, the problem is the passphrase, so read it out again. If the hash does not match, the file was damaged or swapped in transit and resending is the only thing that helps. Without this step, two completely different problems look identical.
+This buys you the ability to tell two failures apart. If they cannot open it and the hash matches, the problem is the passphrase, so read it out again. If the hash does not match, the file was damaged or swapped in transit and resending is the only thing that helps. Without this step, two completely different problems look identical.
 
 ## A recipient with an age public key needs no passphrase
 

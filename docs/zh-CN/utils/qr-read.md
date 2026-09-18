@@ -76,7 +76,7 @@ QR code 里放得进的不只网址。扫到之后直接动作的 App 不会先�
 
 ## 用 Tor Browser 扫可疑的码
 
-[Tor Browser 的安全等级](../tools/tor-browser-advanced.md)调到 Safest 会关掉 JavaScript，扫码功能就会停摆，而收到来路不明的 QR code 正是那篇文章建议把等级调高的场合。
+[Tor Browser 的安全等级](../tools/tor-browser-advanced.md)调到 Safest 会关掉 JavaScript，扫码功能就会停摆，而收到来路不明的 QR code 正是那篇文章里要把等级调高的场合。
 
 先把图片存下来，切回 Standard 再读，读完调回去。解码不连外，图片全程留在设备上。
 

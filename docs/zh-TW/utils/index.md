@@ -121,6 +121,8 @@ icon: material/tools
 
 | 你手上的事 | 走的順序 |
 |---|---|
+| 第一次坐下來，要先釐清該做什麼 | [威脅模型清單](threat-model.md)答三題並看錯配，[我的準備清單](checklist.md)勾出接下來要做的，[passkey 鑰匙](passkey.md)把進度加密存在你的裝置上 |
+| 想知道網站不必問就拿得到你什麼 | [你的瀏覽器透露了什麼](leaks.md)看一次，換一個瀏覽器再看一次做對照，[網址清理器](clean-url.md)查連結尾巴帶著誰的識別碼 |
 | 照片或截圖要交給別人 | 畫面上有要遮的東西，用[截圖遮蔽](redact.md)，輸出已經不帶原檔的 metadata。畫面乾淨、只要去掉拍攝資訊的，用[檔案 metadata 清除器](strip-metadata.md) |
 | 要交一份 PDF 出去 | [PDF 頁面整理](pdf-pages.md)排好頁面，再用同一頁的「看裡面有什麼」搜尋不該留下的字 |
 | 收到來路不明的連結或 QR code | [QR code 讀取器](qr-read.md)解出內容，[網址清理器](clean-url.md)看註冊網域，[隱形字元偵測](invisible.md)查文字裡的同形字 |
@@ -129,11 +131,15 @@ icon: material/tools
 | 檔案要託人帶走或放進隨身碟 | [密語與密碼產生器](passphrase.md)抽一組密語，[本機檔案加密](age.md)封起來，[檔案雜湊比對](hash.md)讓收的人核對 |
 | 臨時要一組之後找得回來的密碼 | [密語與密碼產生器](passphrase.md)抽，[passkey 鑰匙](passkey.md)當鑰匙，[我的準備清單](checklist.md)記下已經做到哪裡 |
 
-走完一整條路徑長什麼樣，用七件具體的事各寫一篇。前三篇不需要你先有特殊身分或特別的處境，後四篇對著站上服務的幾種工作寫。
+走完一整條路徑長什麼樣，用九件具體的事各寫一篇。日常情境那組不需要你先有特殊身分或特別的處境，工作情境那組對著站上服務的幾種工作寫。
 
 ### 日常情境
 
 <div class="grid cards" markdown>
+
+-   :material-target-account: **[廣告好像知道你在想什麼](case-profile.md)**
+
+    剛在別的地方看過的東西，轉頭就出現在動態牆的廣告裡。任何網站不必問就拿得到你哪些資訊、那些值加起來為什麼足以認出你，以及連結尾巴帶著誰的識別碼。
 
 -   :material-file-send-outline: **[寄一份履歷出去](case-resume.md)**
 
@@ -152,6 +158,10 @@ icon: material/tools
 ### 工作情境
 
 <div class="grid cards" markdown>
+
+-   :material-account-plus-outline: **[帶新同事做一次裝置盤點](case-onboarding.md)**
+
+    新人下週報到，權限開好了，而沒有人跟他談過裝置該怎麼準備。為什麼三題要有人在旁邊問，錯配清單為什麼比答案本身有用，以及進度為什麼存在他自己的裝置上。
 
 -   :material-account-multiple-outline: **[把名單交給外部夥伴](case-roster.md)**
 

@@ -27,6 +27,8 @@ A new phone, a fresh reinstall, or someone telling you a particular browser is s
 - **After a digital security workshop** where the trainer said Tor Browser is safer but did not say how. Note the time zone and fonts in your usual browser, then open the same page in Tor Browser. The time zone becomes UTC and the font list collapses to one set. You see the difference yourself.
 - **Explaining to someone else why this matters**: Having this page open beats a slide deck. Every number on screen came from their own device.
 
+For how this list relates to an advertising profile, see [the ads seem to know what you are thinking](case-profile.md).
+
 ## Individually dull, collectively identifying
 
 Each item above looks ordinary on its own. There are dozens of time zones, hundreds of screen sizes, thousands of font combinations. They multiply. A few of them together take the pool of people you could be from millions down to dozens, and adding the times and order of your visits often leaves one.

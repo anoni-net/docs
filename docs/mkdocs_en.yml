@@ -136,10 +136,12 @@ nav:
       # particular role, cases at work are written against the kinds of work
       # this site serves.
       - "Everyday cases":
+          - utils/case-profile.md
           - utils/case-resume.md
           - utils/case-secondhand.md
           - utils/case-link.md
       - "Cases at work":
+          - utils/case-onboarding.md
           - utils/case-roster.md
           - utils/case-workshop.md
           - utils/case-source-file.md

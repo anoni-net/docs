@@ -99,6 +99,8 @@ Two situations where this comes up:
 
 The tiers match the article exactly: four categories of asset, six tiers of adversary (from someone idly looking through your phone up to a state intelligence service), three levels of budget. Answering produces a plain-text summary you can copy, along with the pages worth reading first.
 
+For what these three questions look like with a second person asking, see [walking a new colleague through a device review](case-onboarding.md).
+
 ## The mismatches are the useful part
 
 Each answer looks reasonable on its own. Put together they often do not hold. Several combinations that come up repeatedly get flagged:
