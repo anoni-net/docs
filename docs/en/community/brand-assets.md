@@ -475,11 +475,6 @@ Technical diagrams (flowcharts, architecture diagrams, comparison matrices, time
 - **drawio**, for diagrams with many nodes and connections, saved in the dual `.drawio.svg` format
 - **Hand-written SVG**, for diagrams on a regular grid such as matrices, layer stacks, and timelines. Writing one directly is faster than dragging boxes around a canvas, and the file is one to two orders of magnitude smaller
 
-!!! note "There are currently no drawio files in `docs/diagrams/`"
-    On 2026-09-19 the seven drawio diagrams were redrawn as 400-wide vertical hand-written SVGs. Their canvases ran 580 to 832 wide, which shrank 11 to 12px text to between 4.3 and 6.2px on a 360 phone, and a drawio export carries no `@media (prefers-color-scheme: dark)`, so it showed as a white panel against a dark page. `zcash-shielded` also went from 329 KB to 2.9 KB.
-
-    The drawio workflow below still applies, and a new diagram can be drawn in drawio, as long as it follows "Diagram colours" above and the 400-wide canvas and adds its own dark mode. The original seven drawio sources remain in git history if you would rather redraw them there.
-
 Both are SVG, rendered directly by browsers, mkdocs, and the IPFS and onion mirrors.
 
 ### Diagram files live on assets.anoni.net
