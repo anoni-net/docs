@@ -30,13 +30,13 @@ Drag the image into [Screenshot redaction](redact.md) and press "find faces auto
 
 Add what the detector missed yourself: press and drag a box over the house number or the name on the bill, and it fills with black when you release.
 
-The boxes are filled with solid black, not pixelated and not blurred. Pixelation averages a region into large blocks and blurring mixes each pixel with its neighbours. Both preserve statistical features of the original content, and text is especially recoverable. Open source tools that reverse pixelated text have been public since 2020.
+The boxes are filled with solid black. Pixelation averages a region into large blocks and blurring mixes each pixel with its neighbours. Both preserve statistical features of the original content, and text is especially recoverable. Open source tools that reverse pixelated text have been public since 2020.
 
 While blue boxes remain, "generate redacted image" stays disabled. That is deliberate. The detector found something and you have not decided about it yet, and an image handed over in that state is an unredacted image.
 
 ## The remover lists what stays and what goes
 
-Drop the photos with nothing to cover into the [File metadata remover](strip-metadata.md). Not a single bit of the image compression data is touched. What comes off is the EXIF, GPS, and device model segments, and the picture itself is unchanged. When it finishes, it lists segment by segment what was kept and what was removed.
+Drop the photos with nothing to cover into the [File metadata remover](strip-metadata.md). Not a single bit of the image compression data is touched. The EXIF, GPS, and device model segments come off, and the picture itself is unchanged. When it finishes, it lists segment by segment what was kept and what was removed.
 
 ## When a buyer asks you for ID
 

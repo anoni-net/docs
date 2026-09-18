@@ -44,7 +44,7 @@ If something is still there, redo that page by filling solid black on the image 
 
 ## The originals stay
 
-What gets submitted is the processed version, and the original screenshots stay intact, because any later dispute or request for further material depends on them.
+Only the processed version gets submitted, and the original screenshots stay intact, because any later dispute or request for further material depends on them.
 
 Keep them encrypted on the device. Draw a passphrase from the [Passphrase and password generator](passphrase.md) and seal them with [Local file encryption](age.md). The output is the age format, which any computer with the age command line tool can open.
 

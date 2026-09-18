@@ -1,6 +1,6 @@
 ---
 title: A file from a source
-description: A source sends an internal deck, you need to verify it and quote from it, and nobody should be able to work out who handed it over. This walkthrough covers the order of operations after a file arrives, how document leak tracking works, why the invisible character detector can only prove presence, and why quoting means retyping and redacting rather than forwarding the original.
+description: A source sends an internal deck, you need to verify it and quote from it, and nobody should be able to work out who handed it over. This walkthrough covers the order of operations after a file arrives, how document leak tracking works, why the invisible character detector can only prove presence, and why quoting has to go through retyping and redaction.
 icon: material/file-account-outline
 ---
 
@@ -10,7 +10,7 @@ icon: material/file-account-outline
 
 Someone you have been talking to for three weeks sends a PDF today. Twenty-odd pages, apparently exported from an internal presentation.
 
-Three things follow, and the order matters. Confirm that what arrived is what they sent, work out what the file itself carries, and then decide how the story quotes from it.
+Three things follow, and the order matters. Confirm the file arrived exactly as they sent it, work out what it carries, and then decide how the story quotes from it.
 
 The third is the one that counts. When the same document goes to different people inside an organisation, each copy may differ, and the differences are far too fine to see. Handing the original on, or publishing it, points straight back at who gave it to you.
 
@@ -20,7 +20,7 @@ Ask the source to compute the file's SHA-256 on their end. Compute it on yours w
 
 The command line has always done this, and `sha256sum`, `shasum -a 256`, and `Get-FileHash` produce the same value as this page. When the other person is not comfortable on a command line, sending them this URL is faster than teaching them to open a terminal.
 
-A match means the transfer was complete. A mismatch means something was lost along the way, so ask for it again. With this step done, anything you find afterwards definitely belongs to the original rather than to a broken transfer.
+A match means the transfer was complete. A mismatch means something was lost along the way, so ask for it again. With this step done, anything you find afterwards definitely belongs to the original itself.
 
 ## See what the file carries
 
@@ -38,7 +38,7 @@ Zero-width characters sit between letters, show nothing at all on screen, and su
 
 Paste the text into the [Invisible character detector](invisible.md) and it marks where these categories appear and explains what each one is.
 
-One limit needs stating plainly: this page can prove presence, not absence. A clean result means none of these known categories are present. Markers built from word spacing, line break positions, or a handful of pixels inside an image are invisible to it, and those techniques are in use.
+The detector can prove presence, not absence. A clean result means none of these known categories are present. Markers built from word spacing, line break positions, or a handful of pixels inside an image are invisible to it, and those techniques are in use.
 
 So the conclusion of a check is never "this file is safe to publish".
 
@@ -46,7 +46,7 @@ So the conclusion of a check is never "this file is safe to publish".
 
 Since absence cannot be proven, the story should not carry the original file onward.
 
-When quoting text, retype it rather than copying and pasting from the original. Retyping leaves every embedded character where it was, and it is both the simplest and the most reliable step available.
+When quoting text, retype it rather than copying and pasting from the original. Retyping carries none of the embedded characters into your copy, and it is both the simplest and the most reliable step available.
 
 When an image of the document is genuinely necessary, screenshot it and run it through [Screenshot redaction](redact.md) to fill what should not appear with solid black. The output is newly encoded, and neither the original metadata nor the original filename carries over.
 
