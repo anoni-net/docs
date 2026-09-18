@@ -38,7 +38,7 @@ icon: material/share-circle
 </figure>
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/onionshare-modes-flow-v2.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/onionshare-modes-flow-v3.zh-TW.svg"
         alt="四種模式的資料流向對照。Send 是你的電腦放檔案，對方用 Tor Browser 下載。Receive 是你開上傳介面，投件人上傳，你在本機收到。Host a Website 是你放一份靜態網站，多位訪客各自瀏覽。Chat 是雙向的即時對話，訊息只在記憶體，關掉就消失。四種共通的是中間那個 .onion 網址。">
     <figcaption>四種模式的資料往哪個方向走。四種模式共通的是中間那一段。檔案與訊息直接在兩端之間走 Tor，沒有經過任何雲端服務，關掉 OnionShare 網址立刻失效。</figcaption>
 </figure>

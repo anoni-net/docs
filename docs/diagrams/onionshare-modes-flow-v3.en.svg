@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1370" width="400" height="1370" role="img" aria-labelledby="title desc">
+<title id="title">Which way data flows in each of OnionShare's four modes</title>
+<desc id="desc">Data flow in four modes, compared. In Send, your computer holds the files and the other person downloads them in Tor Browser, so data moves from you outward. In Receive, you open an upload page and the sender uploads, so data moves toward you. In Host a Website, you serve a static site and several visitors browse it, so data moves from you to many. In Chat, the flow is two-way and everyone joins the same ephemeral room. All four share the same middle step, a .onion address that stops working the moment OnionShare is closed.</desc>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .arrow { stroke: #90a4ae; stroke-width: 1.6; fill: none; }
+  .arrow-h { fill: #90a4ae; stroke: none; }
+  .card { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .arrow { stroke: #6b7780; }
+    .arrow-h { fill: #6b7780; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="174" rx="8"/>
+<text class="t-main h2" x="26" y="24">All four modes share the middle section</text>
+<text class="t-mute bd" x="26" y="41">Files and messages travel over Tor</text>
+<text class="t-mute bd" x="26" y="58">directly between the two ends, through</text>
+<text class="t-mute bd" x="26" y="75">no cloud service, and the address dies</text>
+<text class="t-mute bd" x="26" y="92">the moment OnionShare closes.</text>
+<text class="t-mute bd" x="26" y="109">The address itself has to reach the other</text>
+<text class="t-mute bd" x="26" y="126">person through a safe channel. OnionShare</text>
+<text class="t-mute bd" x="26" y="143">does not deliver it. Send it insecurely</text>
+<text class="t-mute bd" x="26" y="160">and that leg is no longer anonymous.</text>
+<rect class="card-c1" x="12" y="188" width="376" height="285" rx="8"/>
+<text class="t-main lab" x="26" y="212">Send</text>
+<text class="t-main h2" x="26" y="232">Sending a file</text>
+<rect class="card" x="26" y="238" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="258">Your computer</text>
+<text class="t-main bd" x="38" y="276">Drop the files in</text>
+<path class="arrow" d="M200 286 V298"/>
+<path class="arrow-h" d="M196 297 L204 297 L200 304 Z"/>
+<rect class="card-c3" x="26" y="304" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="324">.onion address</text>
+<path class="arrow" d="M200 334 V346"/>
+<path class="arrow-h" d="M196 345 L204 345 L200 352 Z"/>
+<rect class="card" x="26" y="352" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="372">The recipient</text>
+<text class="t-main bd" x="38" y="390">Downloads with Tor Browser</text>
+<text class="t-main lab" x="26" y="425">Where it fits</text>
+<text class="t-mute bd" x="36" y="442">Sending evidence to a lawyer</text>
+<text class="t-mute bd" x="36" y="459">A one-off file handover</text>
+<rect class="card-w1" x="12" y="483" width="376" height="285" rx="8"/>
+<text class="t-main lab" x="26" y="507">Receive</text>
+<text class="t-main h2" x="26" y="527">Receiving a file</text>
+<rect class="card" x="26" y="533" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="553">The sender</text>
+<text class="t-main bd" x="38" y="571">Uploads with Tor Browser</text>
+<path class="arrow" d="M200 581 V593"/>
+<path class="arrow-h" d="M196 592 L204 592 L200 599 Z"/>
+<rect class="card-c3" x="26" y="599" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="619">.onion address</text>
+<path class="arrow" d="M200 629 V641"/>
+<path class="arrow-h" d="M196 640 L204 640 L200 647 Z"/>
+<rect class="card" x="26" y="647" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="667">Your computer</text>
+<text class="t-main bd" x="38" y="685">Receives the file locally</text>
+<text class="t-main lab" x="26" y="720">Where it fits</text>
+<text class="t-mute bd" x="36" y="737">A discreet inbox</text>
+<text class="t-mute bd" x="36" y="754">Anonymous submissions and crisis reports</text>
+<rect class="card-ok" x="12" y="778" width="376" height="285" rx="8"/>
+<text class="t-main lab" x="26" y="802">Host a Website</text>
+<text class="t-main h2" x="26" y="822">A temporary site</text>
+<rect class="card" x="26" y="828" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="848">Your computer</text>
+<text class="t-main bd" x="38" y="866">Serves a static site</text>
+<path class="arrow" d="M200 876 V888"/>
+<path class="arrow-h" d="M196 887 L204 887 L200 894 Z"/>
+<rect class="card-c3" x="26" y="894" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="914">.onion address</text>
+<path class="arrow" d="M200 924 V936"/>
+<path class="arrow-h" d="M196 935 L204 935 L200 942 Z"/>
+<rect class="card" x="26" y="942" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="962">Visitors</text>
+<text class="t-main bd" x="38" y="980">Browse with Tor Browser</text>
+<text class="t-main lab" x="26" y="1015">Where it fits</text>
+<text class="t-mute bd" x="36" y="1032">Publishing sensitive material briefly</text>
+<text class="t-mute bd" x="36" y="1049">Material limited to the length of an event</text>
+<rect class="card-n" x="12" y="1073" width="376" height="285" rx="8"/>
+<text class="t-main lab" x="26" y="1097">Chat</text>
+<text class="t-main h2" x="26" y="1117">A disposable chat room</text>
+<rect class="card" x="26" y="1123" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="1143">Everyone taking part</text>
+<text class="t-main bd" x="38" y="1161">Joins the same room</text>
+<path class="arrow" d="M200 1171 V1183"/>
+<path class="arrow-h" d="M196 1182 L204 1182 L200 1189 Z"/>
+<rect class="card-c3" x="26" y="1189" width="348" height="30" rx="6"/>
+<text class="t-main lab" x="38" y="1209">.onion address</text>
+<path class="arrow" d="M200 1219 V1231"/>
+<path class="arrow-h" d="M196 1230 L204 1230 L200 1237 Z"/>
+<rect class="card" x="26" y="1237" width="348" height="48" rx="6"/>
+<text class="t-main lab" x="38" y="1257">Messages stay in memory</text>
+<text class="t-main bd" x="38" y="1275">Closing it erases everything</text>
+<text class="t-main lab" x="26" y="1310">Where it fits</text>
+<text class="t-mute bd" x="36" y="1327">Coordinating during an action</text>
+<text class="t-mute bd" x="36" y="1344">Discussion you do not want recorded</text>
+</svg>

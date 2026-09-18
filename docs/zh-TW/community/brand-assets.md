@@ -616,6 +616,18 @@ grep -c mxfile your-diagram.drawio.svg
 
 `<picture>` 加 `srcset` 分手機與桌機兩份檔案這條路走不通。privacy 外掛只改寫 `img src`、`script src`、`a href` 與 SVG 的 `image href`，`srcset` 不會被在地化，onion 與 IPFS 版會留下對 assets.anoni.net 的 clearnet 請求。
 
+#### 流程用置中的連接線
+
+上下流程的節點是滿版的圓角矩形，文字靠左。節點之間留 18px，中間放一條置中在畫布中線的連接線，線用 `.arrow`（stroke `#90a4ae`，暗色 `#6b7780`，寬 1.6），末端接一個 `.arrow-h` 的實心三角形。
+
+不要拿「↓」這類文字字元當箭頭。字元的基線、字重與字級都跟著內文走，位置也對不齊節點中線，看起來像漏字而不像流程。
+
+```
+節點 rect x=26 width=348 rx=6
+連接線   M200 y V y+12
+箭頭     M195.5 y+11 L204.5 y+11 L200 y+18 Z
+```
+
 #### 斷行交給版面算
 
 英文版排不下的時候讓圖長高，不要讓圖變寬。三個語系共用同一組欄位座標，長度差異靠折行吸收。資料裡一句就是一句，斷行的位置交給版面算，手寫斷行加上折行會長出 `the`、`on` 這種單字孤行，中文那一側則是整行只剩一個「。」，或者句號落在行首。`docs/diagrams/` 目前有 10 處這種痕跡，散在 `donation-channels`、`shutdown-levels`、`baseline-layers` 三組檔案裡。

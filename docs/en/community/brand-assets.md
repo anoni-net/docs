@@ -616,6 +616,18 @@ Keep full sentences of prose out of the diagram. Those one or two footnote lines
 
 Splitting a diagram into a phone file and a desktop file behind `<picture>` and `srcset` does not work here. The privacy plugin only rewrites `img src`, `script src`, `a href` and the `image href` inside an SVG. A `srcset` is left alone, so the onion and IPFS editions would keep a clearnet request to assets.anoni.net.
 
+#### Flows use a centred connector
+
+Nodes in a top-to-bottom flow are full-width rounded rectangles with left-aligned text. Leave 18px between nodes and run a connector down the centre line of the canvas, drawn with `.arrow` (stroke `#90a4ae`, `#6b7780` in dark mode, width 1.6) and ending in a solid `.arrow-h` triangle.
+
+Do not use a text character such as "↓" as the arrow. Its baseline, weight and size follow the body text and it does not line up with the centre of the nodes, so it reads as a stray glyph rather than as a flow.
+
+```
+node       rect x=26 width=348 rx=6
+connector  M200 y V y+12
+arrowhead  M195.5 y+11 L204.5 y+11 L200 y+18 Z
+```
+
 #### Leave line breaks to the layout
 
 When the English version runs out of room, let the diagram grow taller rather than wider. All three locales share one set of column coordinates and absorb the difference in length by wrapping. Keep one sentence per string in the source data and leave the line breaks to the layout, because hand-written breaks combined with wrapping produce orphan lines such as `the` or `on` in English, and in Chinese a line holding nothing but a full stop, or a full stop pushed to the start of a line. `docs/diagrams/` currently carries 10 of these, spread across `donation-channels`, `shutdown-levels` and `baseline-layers`.
