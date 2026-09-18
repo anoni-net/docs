@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 605" width="400" height="605" role="img" aria-labelledby="title desc">
+<title id="title">跟來源約定引用層級，逐段確認比整場一次確認可靠</title>
+<desc id="desc">四層由深到淺的橫條，代表記者與消息來源可以約定的四種引用層級，越往下來源的暴露面越小。第一層是具名，意思是可以寫出姓名與職稱，報導裡會出現姓名、職稱與原話。第二層是匿名引用，意思是可以引述內容但用角色代稱，報導裡會出現像「一位參與該專案的工程師表示」這樣的句子。第三層是背景，只用來理解事情與指引查證方向，來源不出現也不被引述。第四層是不使用，內容完全不進入報導。下方的紅框提醒匿名引用最容易出事，因為代稱本身可能就足以指認，一家公司裡符合描述的只有三個人時，代稱等於點名了三個人。</desc>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+  }
+</style>
+
+<rect class="card-no" x="12" y="0" width="376" height="114" rx="8"/>
+<text class="t-main h2" x="26" y="24">具名</text>
+<text class="t-main lab" x="26" y="45">意思</text>
+<text class="t-mute bd" x="36" y="62">可以寫出姓名與職稱</text>
+<text class="t-main lab" x="26" y="83">報導裡會出現什麼</text>
+<text class="t-mute bd" x="36" y="100">姓名、職稱、原話</text>
+<rect class="card-w2" x="12" y="124" width="376" height="114" rx="8"/>
+<text class="t-main h2" x="26" y="148">匿名引用</text>
+<text class="t-main lab" x="26" y="169">意思</text>
+<text class="t-main bd" x="36" y="186">可以引述內容，用角色代稱</text>
+<text class="t-main lab" x="26" y="207">報導裡會出現什麼</text>
+<text class="t-main bd" x="36" y="224">「一位參與該專案的工程師表示」</text>
+<rect class="card-w1" x="12" y="248" width="376" height="114" rx="8"/>
+<text class="t-main h2" x="26" y="272">背景</text>
+<text class="t-main lab" x="26" y="293">意思</text>
+<text class="t-mute bd" x="36" y="310">只用來理解事情、指引查證方向</text>
+<text class="t-main lab" x="26" y="331">報導裡會出現什麼</text>
+<text class="t-mute bd" x="36" y="348">來源不出現，也不引述</text>
+<rect class="card-n" x="12" y="372" width="376" height="114" rx="8"/>
+<text class="t-main h2" x="26" y="396">不使用</text>
+<text class="t-main lab" x="26" y="417">意思</text>
+<text class="t-mute bd" x="36" y="434">完全不進入報導</text>
+<text class="t-main lab" x="26" y="455">報導裡會出現什麼</text>
+<text class="t-mute bd" x="36" y="472">無</text>
+<rect class="card-c1" x="12" y="504" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="528">匿名引用最容易出事</text>
+<text class="t-mute bd" x="26" y="545">代稱本身可能就足以指認。一家公司裡符合「參與該專案的</text>
+<text class="t-mute bd" x="26" y="562">工程師」描述的只有三個人時，這個代稱等於點名了三個人。</text>
+<text class="t-mute bd" x="26" y="579">談的時候把描述再放寬一級，或者改走背景層級。</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 660" width="400" height="660" role="img" aria-labelledby="title desc">
+<title id="title">出差準備是往上加碼，每一層都建立在下面所有層之上</title>
+<desc id="desc">五層由下往上收窄的疊加圖。最下面一層是每個地點都適用的通用準備：簡化裝置、行前把規避工具裝好測好、準備兩種以上連線方式、帳號分流、全碟加密。往上第二層是低風險的台灣、日本與南韓，用平常的工具即可，辦 SIM 記得帶護照。第三層是中風險的菲律賓、馬來西亞、新加坡、印尼與澳門，公共 Wi-Fi 一律走 VPN，對外發表前先看當地內容法規。第四層是高風險的香港、泰國、越南、柬埔寨與中國大陸，混淆型 VPN 與 Tor 橋接要先在家測好，帶乾淨機，敏感工作不在當地網路做。最上面一層是極高風險的緬甸，帶最簡化的乾淨裝置，避免落地辦卡，全程假設受監控。</desc>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">每一層都建立在下面所有層之上</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-w3" x="12" y="44" width="376" height="75" rx="8"/>
+<text class="t-onfill lab" x="26" y="68">極高風險</text>
+<text class="t-onfill h2" x="26" y="88">緬甸</text>
+<text class="t-onfill bd" x="26" y="105">最簡化的乾淨裝置，避免落地辦卡，全程假設受監控。</text>
+<rect class="card-w2" x="12" y="129" width="376" height="92" rx="8"/>
+<text class="t-main lab" x="26" y="153">高風險</text>
+<text class="t-main h2" x="26" y="173">香港、泰國、越南、柬埔寨、中國大陸</text>
+<text class="t-main bd" x="26" y="190">混淆型 VPN 與 Tor 橋接先在家測好，</text>
+<text class="t-main bd" x="26" y="207">帶乾淨機，敏感工作不在當地網路做。</text>
+<rect class="card-w1" x="12" y="231" width="376" height="92" rx="8"/>
+<text class="t-main lab" x="26" y="255">中風險</text>
+<text class="t-main h2" x="26" y="275">菲律賓、馬來西亞、新加坡、印尼、澳門</text>
+<text class="t-mute bd" x="26" y="292">公共與會場 Wi-Fi 一律走 VPN，對外</text>
+<text class="t-mute bd" x="26" y="309">發表前先了解當地的內容與誹謗法規。</text>
+<rect class="card-c1" x="12" y="333" width="376" height="75" rx="8"/>
+<text class="t-main lab" x="26" y="357">低風險</text>
+<text class="t-main h2" x="26" y="377">台灣（基準）、日本、南韓</text>
+<text class="t-mute bd" x="26" y="394">接近家用環境，用平常的工具即可。辦 SIM 記得帶護照。</text>
+<rect class="card-n" x="12" y="426" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="450">每個地點都適用</text>
+<text class="t-mute bd" x="26" y="467">帶最簡化的裝置。行前把規避工具裝好</text>
+<text class="t-mute bd" x="26" y="484">並連過一次。準備兩種以上的連線方式。</text>
+<text class="t-mute bd" x="26" y="501">敏感通訊走端對端加密。帳號分流。</text>
+<text class="t-mute bd" x="26" y="518">開全碟加密與開機密碼。留離線備份。</text>
+<rect class="card-no" x="12" y="542" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="566">香港進高風險層的理由跟另外四地不同</text>
+<text class="t-mute bd" x="26" y="583">它的連線環境接近中風險，門檻在入境檢查站。2026</text>
+<text class="t-mute bd" x="26" y="600">年 3 月起，涉及國安調查時拒絕交出裝置密碼本身即構</text>
+<text class="t-mute bd" x="26" y="617">成犯罪，適用所有國籍，包含只在機場轉機通關的旅客。</text>
+<text class="t-mute bd" x="26" y="634">裝置內容成為主要暴露面，準備強度就要拉到乾淨機這一層。</text>
+</svg>

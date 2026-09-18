@@ -338,13 +338,33 @@ wordmark 的文字已經轉成路徑，開啟的裝置有沒有裝字型都長�
 | `.card-c2` | 中間層 | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
 | `.card-c3` | 最深，頂層 | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
 
+橘色三階給警示或成本遞增的分層，結構跟 cyan 三階一樣：
+
+| class | 層級 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-w1` | 最淺 | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-w2` | 中間層 | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#7d4b19"></span>`#7d4b19` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` |
+| `.card-w3` | 最深，飽和底 | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#c85a00"></span>`#c85a00` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` | <span class="color-swatch" style="background:#ffa64d"></span>`#ffa64d` |
+
+底色越深，能放上去的文字色越少：
+
+| 卡片 | 亮色 | 暗色 |
+|---|---|---|
+| `.card`、`.card-n`、`.card-c1`、`.card-w1`、`.card-ok`、`.card-no` | `.t-main` 與 `.t-mute` 都可以 | 同左 |
+| `.card-c2`、`.card-c3`、`.card-w2` | 只用 `.t-main` | 只用 `.t-main` |
+| `.card-w3` | `.t-onfill` <span class="color-swatch" style="background:#212121"></span>`#212121` | `.t-onfill` <span class="color-swatch" style="background:#241708"></span>`#241708` |
+
+`.t-mute` 的 `#546e7a` 在 `.card-c2` 是 3.95:1、`.card-c3` 是 3.21:1、`.card-w2` 是 3.12:1，三個都過不了 AA，所以那三種底只放 `.t-main`（9.3 到 11.8:1）。
+
+`.card-w3` 兩個模式要往相反方向走。亮色底 `#ef6c00` 配白字只有 3.08:1，配 `#212121` 是 5.23:1。暗色底 `#ff8c1a` 配 `#eceff1` 只有 2.02:1，配 `#241708` 是 7.51:1。現行 32 個檔的 `.t-inv` 是亮色白字配暗色 `#241708`，亮色那一半不夠，改版時換成 `.t-onfill`。
+
 文字與線：
 
 | class | 用途 | 亮色 | 暗色 |
 |---|---|---|---|
 | `.t-main` | 主要文字 | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
 | `.t-mute` | 次要文字、說明 | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
-| `.t-inv` | 深色塊上的反白文字 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.t-onfill` | 飽和底色上的文字，見上方配對表 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
 | `.rule` | 分隔線 | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
 | `.arrow` | 流程箭頭 | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
 

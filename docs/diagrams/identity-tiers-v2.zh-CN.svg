@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 812" width="400" height="812" role="img" aria-labelledby="title desc">
+<title id="title">三层账号分流，彼此不共用任何一个标识项</title>
+<desc id="desc">三个并排的栏位，代表日常层、社群层与探索层三种账号，栏位之间用虚线隔开并标示彼此不交集。日常层是跟工作、家人与长期朋友共用的身份，里面有 email、社交、银行与流媒体服务，默认假设家人或同事看到也没关系，生命周期是长期。社群层是跟 LGBTQ+ 朋友、社群活动与性倾向相关内容互动的身份，跟日常层不交集，目的是让你能参与社群但不被串连，头像不用任何出现在家人或同事看得到的地方的照片。探索层是交友 app、匿名社群与探索期的测试账号，风险最高、生命周期短，用完就丢。最上方标出分流的基础：不共用 email、不共用 username、不共用浏览器、不共用密码管理器文件夹。最下方列出每一层各自需要的东西：自己的 email、浏览器 profile、密码管理器 vault 与两步验证组。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="24">分流的基础</text>
+<text class="t-mute bd" x="26" y="41">不同层的账号不共用 email、不共用 username、</text>
+<text class="t-mute bd" x="26" y="58">不共用浏览器、不共用密码管理器文件夹。</text>
+<rect class="card-c1" x="12" y="86" width="376" height="168" rx="8"/>
+<text class="t-main lab" x="26" y="110">日常层</text>
+<text class="t-main h2" x="26" y="130">长期，跟你的本名绑在一起</text>
+<text class="t-main lab" x="26" y="151">里面有什么</text>
+<text class="t-mute bd" x="36" y="168">email、社交</text>
+<text class="t-mute bd" x="36" y="185">银行、流媒体服务</text>
+<text class="t-mute bd" x="36" y="202">工作与学校相关账号</text>
+<text class="t-main lab" x="26" y="223">默认假设</text>
+<text class="t-mute bd" x="36" y="240">家人或同事看到也没关系。</text>
+<rect class="card-c2" x="12" y="264" width="376" height="185" rx="8"/>
+<text class="t-main lab" x="26" y="288">社群层</text>
+<text class="t-main h2" x="26" y="308">长期，跟日常层完全不交集</text>
+<text class="t-main lab" x="26" y="329">里面有什么</text>
+<text class="t-main bd" x="36" y="346">社群活动的账号</text>
+<text class="t-main bd" x="36" y="363">性倾向相关内容的互动</text>
+<text class="t-main bd" x="36" y="380">LGBTQ+ 朋友的联系方式</text>
+<text class="t-main lab" x="26" y="401">默认假设</text>
+<text class="t-main bd" x="36" y="418">能参与社群，但不被串连回日常层。头</text>
+<text class="t-main bd" x="36" y="435">像不用任何家人或同事看得到的照片。</text>
+<rect class="card-w1" x="12" y="459" width="376" height="185" rx="8"/>
+<text class="t-main lab" x="26" y="483">探索层</text>
+<text class="t-main h2" x="26" y="503">短期，用完就丢</text>
+<text class="t-main lab" x="26" y="524">里面有什么</text>
+<text class="t-mute bd" x="36" y="541">交友 app</text>
+<text class="t-mute bd" x="36" y="558">匿名社群</text>
+<text class="t-mute bd" x="36" y="575">探索期的测试账号</text>
+<text class="t-main lab" x="26" y="596">默认假设</text>
+<text class="t-mute bd" x="36" y="613">风险最高的一层。跟社群层也要分开，</text>
+<text class="t-mute bd" x="36" y="630">位置与照片的暴露面都比另外两层大。</text>
+<rect class="card" x="12" y="660" width="376" height="140" rx="8"/>
+<text class="t-main h2" x="26" y="684">每一层各自要有的四样东西</text>
+<text class="t-mute bd" x="26" y="701">自己的 email（邮件别名可以从同一个信箱长</text>
+<text class="t-mute bd" x="26" y="718">出多个对外地址）、自己的浏览器 profile、</text>
+<text class="t-mute bd" x="26" y="735">自己的密码管理器 vault、自己的两步验证组。</text>
+<text class="t-mute bd" x="26" y="752">注册时避开平台用手机号与通讯录做的反向匹</text>
+<text class="t-mute bd" x="26" y="769">配。账号存在之后还要防头像反查、username</text>
+<text class="t-mute bd" x="26" y="786">重复、发帖时段与写作风格这几种串连途径。</text>
+</svg>

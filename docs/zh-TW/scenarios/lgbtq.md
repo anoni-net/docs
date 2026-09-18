@@ -41,9 +41,9 @@ LGBTQ+ 的數位風險不只來自「對手」，更多是日常累積的線索�
 實務上不一定每個人都需要三層。剛開始整理時，先確保「日常層」跟「社群層」分離就好，等習慣了再評估要不要再切出探索層。
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/identity-tiers.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/identity-tiers-v2.zh-TW.svg"
         alt="三個並排的欄位，代表日常層、社群層與探索層三種帳號，欄位之間用虛線隔開並標示彼此不交集。日常層是跟工作、家人與長期朋友共用的身分，裡面有 email、社群、銀行與串流服務，預設假設家人或同事看到也沒關係，生命週期是長期。社群層是跟 LGBTQ+ 朋友、社群活動與性傾向相關內容互動的身分，跟日常層不交集，目的是讓你能參與社群但不被串連，頭像不用任何出現在家人或同事看得到的地方的照片。探索層是交友 app、匿名社群與探索期的測試帳號，風險最高、生命週期短，用完就丟。最上方標出分流的基礎：不共用 email、不共用 username、不共用瀏覽器、不共用密碼管理器資料夾。最下方列出每一層各自需要的東西：自己的 email、瀏覽器 profile、密碼管理器 vault 與兩階段驗證群組。">
-    <figcaption>三層之間不共用任何一個識別項</figcaption>
+    <figcaption>三層之間不共用任何一個識別項。已經出櫃的人也適用。保護還沒出櫃的伴侶與朋友、維持職場專業形象、控制跨平台的呈現節奏，都要靠同一套分層。</figcaption>
 </figure>
 
 ### 每一層要準備什麼

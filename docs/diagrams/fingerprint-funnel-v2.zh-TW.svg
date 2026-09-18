@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 513" width="400" height="513" role="img" aria-labelledby="title desc">
+<title id="title">每加一項特徵，還跟你長得一樣的人就少一批</title>
+<desc id="desc">一個由上往下收窄的漏斗，分成六階。最上面一階最寬，代表所有瀏覽器。往下每一階加入一項瀏覽器指紋的特徵，人群就縮小一次：加上時區之後剩下同一個時區的人，加上語言與作業系統之後還是很多人，加上螢幕與視窗尺寸之後範圍明顯縮小，加上繪圖硬體之後剩下不多，加上完整的字型清單之後常常就只剩你一個。每一階的寬度是示意，不是量測到的數字。底下註記 EFF 在 2010 年的 Panopticlick 研究收集了 470,161 個瀏覽器樣本，其中 83.6% 的指紋是唯一的。</desc>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; stroke-width: 1.3; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">每加一項特徵，還跟你長得一樣的人就少一批</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-c1" x="26" y="50" width="348" height="26" rx="6"/>
+<text class="t-main h2" x="200" y="68" text-anchor="middle">所有人</text>
+<text class="t-mute bd" x="200" y="88" text-anchor="middle">還沒量任何東西</text>
+<rect class="card-c1" x="50" y="104" width="300" height="26" rx="6"/>
+<text class="t-main h2" x="200" y="122" text-anchor="middle">同一個時區的人</text>
+<text class="t-mute bd" x="200" y="142" text-anchor="middle">加上時區</text>
+<rect class="card-c2" x="74" y="158" width="253" height="26" rx="6"/>
+<text class="t-main h2" x="200" y="176" text-anchor="middle">還是很多人</text>
+<text class="t-mute bd" x="200" y="196" text-anchor="middle">加上語言與作業系統</text>
+<rect class="card-c2" x="97" y="212" width="205" height="26" rx="6"/>
+<text class="t-main h2" x="200" y="230" text-anchor="middle">範圍明顯縮小</text>
+<text class="t-mute bd" x="200" y="250" text-anchor="middle">加上螢幕與視窗尺寸</text>
+<rect class="card-c3" x="121" y="266" width="158" height="26" rx="6"/>
+<text class="t-main h2" x="200" y="284" text-anchor="middle">剩下不多</text>
+<text class="t-mute bd" x="200" y="304" text-anchor="middle">加上繪圖硬體</text>
+<rect class="card-w3" x="145" y="320" width="110" height="26" rx="6"/>
+<text class="t-onfill h2" x="200" y="338" text-anchor="middle">就是你</text>
+<text class="t-mute bd" x="200" y="358" text-anchor="middle">加上完整的字型清單</text>
+<rect class="card-n" x="12" y="378" width="376" height="123" rx="8"/>
+<text class="t-main h2" x="26" y="402">為什麼沒有「清除指紋」這個按鈕</text>
+<text class="t-mute bd" x="26" y="419">沒有一項特徵單獨認得出你，湊在一起就可以。指</text>
+<text class="t-mute bd" x="26" y="436">紋不是被存下來的東西，所以也沒有東西可以清除。</text>
+<text class="t-mute bd" x="26" y="453">每一階的寬度是示意，不是量測到的數字。EFF 在</text>
+<text class="t-mute bd" x="26" y="470">2010 年的 Panopticlick 研究收集 470,161</text>
+<text class="t-mute bd" x="26" y="487">個瀏覽器樣本，其中 83.6% 的指紋是唯一的。</text>
+</svg>

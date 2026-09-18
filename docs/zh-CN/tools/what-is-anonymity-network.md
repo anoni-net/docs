@@ -77,9 +77,9 @@ icon: material/chat-question
 每个家族的完整文章列表见 [工具层首页](./index.md)。
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/tool-layers.zh-CN.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v2.zh-CN.svg"
         alt="四个工具层的结构关系。连线层的 Tor 工具家族是核心，环境层的匿名操作系统把整个连线层包在里面。观测层独立在旁边，记录连线遇到了什么，本身不保护连线。日常隐私基本功横跨在最底下，不管上面用哪一层都要。">
-    <figcaption>四层之间，哪一层包住哪一层</figcaption>
+    <figcaption>四层之间，哪一层包住哪一层。四层不是阶梯，也没有先后顺序。挑跟你情境相关的那一群读就好，判断依据回到威胁模型。</figcaption>
 </figure>
 
 上面四张卡片是四个家族各自在做什么，它们之间还有关系。环境层把连线层整个包在里面，所以装了 Tails 等于同时有了连线层。观测层独立在旁边，它记录连线遇到了什么，本身不保护连线。日常基本功横跨在最底下，不管上面用哪一层都要。

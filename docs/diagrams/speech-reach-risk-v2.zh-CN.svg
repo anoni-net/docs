@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 802" width="400" height="802" role="img" aria-labelledby="title desc">
+<title id="title">有效与安全在四个地方直接冲突，每次行动前先决定要哪一边</title>
+<desc id="desc">上半部是四组互相拉扯的组合，左边是你想要的，箭头指向右边的代价。想让普通人愿意相信，代价是匿名账号的可信度低，可信度来自实名、履历与既有关系，而这些正是暴露面。想避开关键词过滤，代价是变形后的表达难懂，只有原本就懂的人看得懂，等于留在同温层。想让内容有说服力，代价是说服力来自具体、可查证的细节，而具体正是最容易指向你的部分。想触及更多人，代价是传播规模越大越接近相关条款的认定门槛，也越可能被列为重点处理对象。下半部是三种取向：要留下记录的人优先把内容存档到境外并把曝光度压到最低，要说服特定的人的人走私下与小范围并放弃公开传播的规模，要扩散的人接受发布者承担较高风险，或把内容交给愿意承担的既有渠道。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">四组矛盾，每一组都没有两全的解法</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-w1" x="12" y="44" width="376" height="113" rx="8"/>
+<text class="t-main lab" x="26" y="68">你想要的</text>
+<text class="t-main h2" x="26" y="88">让普通人愿意相信</text>
+<text class="t-main lab" x="26" y="109">代价</text>
+<text class="t-mute bd" x="36" y="126">匿名账号的可信度低。可信度来自实名、</text>
+<text class="t-mute bd" x="36" y="143">履历、既有关系，而这些正是暴露面。</text>
+<rect class="card-w1" x="12" y="167" width="376" height="113" rx="8"/>
+<text class="t-main lab" x="26" y="191">你想要的</text>
+<text class="t-main h2" x="26" y="211">避开关键词过滤</text>
+<text class="t-main lab" x="26" y="232">代价</text>
+<text class="t-mute bd" x="36" y="249">变形后的表达难懂，只有原本就</text>
+<text class="t-mute bd" x="36" y="266">懂的人看得懂，等于留在同温层。</text>
+<rect class="card-w1" x="12" y="290" width="376" height="113" rx="8"/>
+<text class="t-main lab" x="26" y="314">你想要的</text>
+<text class="t-main h2" x="26" y="334">内容有说服力</text>
+<text class="t-main lab" x="26" y="355">代价</text>
+<text class="t-mute bd" x="36" y="372">说服力来自具体、可查证的细节，</text>
+<text class="t-mute bd" x="36" y="389">而具体正是最容易指向你的部分。</text>
+<rect class="card-w1" x="12" y="413" width="376" height="113" rx="8"/>
+<text class="t-main lab" x="26" y="437">你想要的</text>
+<text class="t-main h2" x="26" y="457">触及更多人</text>
+<text class="t-main lab" x="26" y="478">代价</text>
+<text class="t-mute bd" x="36" y="495">传播规模越大，越接近相关条款的认定</text>
+<text class="t-mute bd" x="36" y="512">门槛，也越可能被列为重点处理对象。</text>
+<text class="t-main h1" x="12" y="566">每次行动前先决定要哪一边</text>
+<path class="rule" d="M12 576 H388"/>
+<rect class="card-c1" x="12" y="588" width="376" height="55" rx="8"/>
+<text class="t-main h2" x="26" y="612">要留下记录</text>
+<text class="t-mute bd" x="26" y="629">优先确保内容能被存档到境外。发布者的曝光度压到最低。</text>
+<rect class="card-c1" x="12" y="653" width="376" height="55" rx="8"/>
+<text class="t-main h2" x="26" y="677">要说服特定的人</text>
+<text class="t-mute bd" x="26" y="694">走私下与小范围。放弃公开传播的规模。</text>
+<rect class="card-c1" x="12" y="718" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="742">要扩散</text>
+<text class="t-mute bd" x="26" y="759">接受发布者承担较高风险。或评估</text>
+<text class="t-mute bd" x="26" y="776">把内容交给愿意承担的既有渠道。</text>
+</svg>

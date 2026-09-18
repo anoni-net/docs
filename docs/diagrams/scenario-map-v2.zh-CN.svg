@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 565" width="400" height="565" role="img" aria-labelledby="title desc">
+<title id="title">场景层的阅读地图，先做到共同基准再依身份往上走</title>
+<desc id="desc">上方是共同基准「一般人平常该做到什么」，所有读者从这篇开始，其余各篇都假设你已经做到它。往下分成四组场景。第一组依你的角色：记者保护消息来源、社运行动者的数字准备、选举观察员的自保、倡议组织的匿名捐款渠道。第二组依你的处境：LGBTQ+ 与性少数的匿名社交、家暴受害者的数字准备。第三组依你在哪里发言：在中国大陆的公开平台传播信息、在新加坡与马来西亚的网络发言。第四组依移动与外部事件：出差与研讨会的数字准备、出国前用 AI 自助产生目的地概况、网络中断时的准备与应对。同一个人可能同时落在好几组，各篇之间互相引用，可以照需要挑着读。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="126" rx="8"/>
+<text class="t-main lab" x="26" y="24">共同基准</text>
+<text class="t-main h2" x="26" y="44">一般人平常该做到什么</text>
+<text class="t-mute bd" x="26" y="61">找不到符合自己身份的那一篇，先看这</text>
+<text class="t-mute bd" x="26" y="78">一篇。其余各篇都假设你已经做到它。</text>
+<text class="t-mute bd" x="26" y="95">内容是三种对手的差别、依实际效果排序的做法、</text>
+<text class="t-mute bd" x="26" y="112">被高估的做法，以及什么时候该把标准拉高。</text>
+<text class="t-main h1" x="12" y="162">依身份与处境分支，同一个人可能落在好几组</text>
+<path class="rule" d="M12 172 H388"/>
+<rect class="card-n" x="12" y="184" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="208">依你的角色</text>
+<text class="t-mute bd" x="26" y="225">记者保护消息来源</text>
+<text class="t-mute bd" x="26" y="242">社运行动者的数字准备</text>
+<text class="t-mute bd" x="26" y="259">选举观察员的自保</text>
+<text class="t-mute bd" x="26" y="276">倡议组织的匿名捐款渠道</text>
+<rect class="card-n" x="12" y="300" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="324">依你的处境</text>
+<text class="t-mute bd" x="26" y="341">LGBTQ+ 与性少数的匿名社交</text>
+<text class="t-mute bd" x="26" y="358">家暴受害者的数字准备</text>
+<rect class="card-n" x="12" y="382" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="406">依你在哪里发言</text>
+<text class="t-mute bd" x="26" y="423">在中国大陆的公开平台传播信息</text>
+<text class="t-mute bd" x="26" y="440">在新加坡与马来西亚的网络发言</text>
+<rect class="card-n" x="12" y="464" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="488">依移动与外部事件</text>
+<text class="t-mute bd" x="26" y="505">出差与研讨会的数字准备</text>
+<text class="t-mute bd" x="26" y="522">出国前用 AI 产生目的地概况</text>
+<text class="t-mute bd" x="26" y="539">网络中断时的准备与应对</text>
+</svg>

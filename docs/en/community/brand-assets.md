@@ -338,13 +338,33 @@ The three-step cyan ramp for layered diagrams, lightest to darkest running botto
 | `.card-c2` | Middle layer | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
 | `.card-c3` | Darkest, top layer | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
 
+An orange ramp for warning levels or rising cost, built the same way as the cyan one:
+
+| class | Level | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-w1` | Lightest | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-w2` | Middle layer | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#7d4b19"></span>`#7d4b19` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` |
+| `.card-w3` | Darkest, saturated fill | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | <span class="color-swatch" style="background:#c85a00"></span>`#c85a00` | <span class="color-swatch" style="background:#ff8c1a"></span>`#ff8c1a` | <span class="color-swatch" style="background:#ffa64d"></span>`#ffa64d` |
+
+The darker the fill, the fewer text colours it will take:
+
+| Card | Light | Dark |
+|---|---|---|
+| `.card`, `.card-n`, `.card-c1`, `.card-w1`, `.card-ok`, `.card-no` | `.t-main` or `.t-mute` | Same |
+| `.card-c2`, `.card-c3`, `.card-w2` | `.t-main` only | `.t-main` only |
+| `.card-w3` | `.t-onfill` <span class="color-swatch" style="background:#212121"></span>`#212121` | `.t-onfill` <span class="color-swatch" style="background:#241708"></span>`#241708` |
+
+`.t-mute` at `#546e7a` scores 3.95:1 on `.card-c2`, 3.21:1 on `.card-c3` and 3.12:1 on `.card-w2`, all under AA, so those three fills take `.t-main` only, which scores 9.3 to 11.8:1.
+
+`.card-w3` has to go opposite ways in the two modes. On the light fill `#ef6c00`, white text scores 3.08:1 while `#212121` scores 5.23:1. On the dark fill `#ff8c1a`, `#eceff1` scores 2.02:1 while `#241708` scores 7.51:1. The 32 files that currently use `.t-inv` pair white in light mode with `#241708` in dark, so the light half falls short; switch them to `.t-onfill` as they are reworked.
+
 Text and lines:
 
 | class | Where it goes | Light | Dark |
 |---|---|---|---|
 | `.t-main` | Primary text | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
 | `.t-mute` | Secondary text and notes | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
-| `.t-inv` | Reversed text on a dark block | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.t-onfill` | Text on a saturated fill, see the pairing table above | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
 | `.rule` | Divider | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
 | `.arrow` | Flow arrow | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
 

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1289" width="400" height="1289" role="img" aria-labelledby="title desc">
+<title id="title">新加坡与马来西亚各有一组具名的法条，实名底层让换假名失效</title>
+<desc id="desc">左右两栏分别列出新加坡与马来西亚管到网络言论的法条。新加坡有 POFMA、FICA、诽谤与藐视法庭，以及《公共秩序法》对集会的宽松定义。马来西亚有 1998 年通信与多媒体法第 233 条、1948 年煽动法、SOSMA、1966 年社团法，以及各州的宗教执法。下方的横幅指出两国共同的实名底层：新加坡的 Singpass、马来西亚的 MyKad 与 MyDigital ID，加上两国都强制 SIM 卡实名，账号、设备与付款方式往往早就指向法律上的本名。最下方的横幅说明能见度与组织程度会放大风险，低触及的帖子、爆红的帖子与有协调的行动，三者的风险层级不同。</desc>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card { fill: #ffffff; stroke: #cfd8dc; stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; stroke-width: 1.3; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">新加坡</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-n" x="12" y="44" width="376" height="37" rx="8"/>
+<text class="t-mute bd" x="26" y="67">以下是要对照检查的法条，并未穷尽所有可能适用的法律。</text>
+<rect class="card-c1" x="12" y="91" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="115">POFMA，防止网络假信息和网络操纵法令，2019</text>
+<text class="t-mute bd" x="26" y="132">部长可对「不实事实陈述」发出更正或下架指示。</text>
+<text class="t-mute bd" x="26" y="149">多数发帖者遇到的是更正通知或内容被移除。</text>
+<text class="t-mute bd" x="26" y="166">2026 年首度出现刑事指控，无视指示本身就构成犯罪。</text>
+<rect class="card-c1" x="12" y="190" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="214">FICA，防止外来干预（对应措施）法令，2021</text>
+<text class="t-mute bd" x="26" y="231">针对有组织或有外国关联的政治行为者，对</text>
+<text class="t-mute bd" x="26" y="248">跨境组织者的意义大于对单一则政治留言。</text>
+<rect class="card-c1" x="12" y="272" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="296">诽谤与藐视法庭</text>
+<text class="t-mute bd" x="26" y="313">民事与刑事诽谤，加上《司法（保护）法》的藐视法庭条款。</text>
+<text class="t-mute bd" x="26" y="330">评论官员与进行中案件时的实际限制。</text>
+<rect class="card-c1" x="12" y="354" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="378">《公共秩序法》的公开集会</text>
+<text class="t-mute bd" x="26" y="395">对集会的定义宽松，可以涵盖线上动员。</text>
+<text class="t-mute bd" x="26" y="412">曾有室内论坛因为线上直播被认定为非法集会。</text>
+<text class="t-main h1" x="12" y="466">马来西亚</text>
+<path class="rule" d="M12 476 H388"/>
+<rect class="card-n" x="12" y="488" width="376" height="37" rx="8"/>
+<text class="t-mute bd" x="26" y="511">条文管得到转发与留言，不限于自己写的内容。</text>
+<rect class="card-w1" x="12" y="535" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="559">1998 年通信与多媒体法（CMA）第 233 条</text>
+<text class="t-mute bd" x="26" y="576">对付网络言论最常被使用的条文。2025 年 2 月修</text>
+<text class="t-mute bd" x="26" y="593">法后，罚金最高 RM500,000 或两年以下有期徒刑。</text>
+<text class="t-mute bd" x="26" y="610">2026 年联邦法院要求检方证明真正的意图。</text>
+<rect class="card-w1" x="12" y="634" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="658">1948 年煽动法</text>
+<text class="t-mute bd" x="26" y="675">殖民时期留下的法律，至今仍然有效且持续被使用。</text>
+<text class="t-mute bd" x="26" y="692">适用于 3R 议题：种族 race、</text>
+<text class="t-mute bd" x="26" y="709">宗教 religion、王室 royalty。</text>
+<rect class="card-w1" x="12" y="733" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="757">SOSMA，2012 年安全罪行（特别措施）法</text>
+<text class="t-mute bd" x="26" y="774">为安全罪行提供特别程序，包含延长羁押。</text>
+<text class="t-mute bd" x="26" y="791">适用对象是恐怖主义与国安犯罪，日常言论案件用不到。</text>
+<rect class="card-w1" x="12" y="815" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="839">1966 年社团法</text>
+<text class="t-mute bd" x="26" y="856">有成员、有干部、有持续活动的组织才可能</text>
+<text class="t-mute bd" x="26" y="873">落入其中。一次性的 hashtag 不构成社团。</text>
+<rect class="card-w1" x="12" y="897" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="921">各州的宗教执法</text>
+<text class="t-mute bd" x="26" y="938">各州伊斯兰宗教机关执行只适用于穆斯林的 Syariah 罪行。</text>
+<text class="t-mute bd" x="26" y="955">与煽动法的 3R 范围是两套不同的机制。</text>
+<rect class="card" x="12" y="987" width="376" height="123" rx="8"/>
+<text class="t-main h2" x="26" y="1011">两国共同的实名底层</text>
+<text class="t-mute bd" x="26" y="1028">新加坡的 Singpass、马来西亚的 MyKad 与 MyDigital</text>
+<text class="t-mute bd" x="26" y="1045">ID 这类国家数字身份，加上两国都强制 SIM 卡实名。</text>
+<text class="t-mute bd" x="26" y="1062">账号、设备与付款方式往往早就指向法律</text>
+<text class="t-mute bd" x="26" y="1079">上的本名。在实名账号上换一个显示名称</text>
+<text class="t-mute bd" x="26" y="1096">并不构成区隔，区隔要从一开始就建立。</text>
+<rect class="card-no" x="12" y="1120" width="376" height="157" rx="8"/>
+<text class="t-main h2" x="26" y="1144">风险随能见度与组织程度上升</text>
+<text class="t-mute bd" x="26" y="1161">低触及的帖子、爆红的帖子、有协调的行动，三者的</text>
+<text class="t-mute bd" x="26" y="1178">风险层级不同。记录到的执法多半落在公众人物、行</text>
+<text class="t-mute bd" x="26" y="1195">动者与组织者身上，或者落在传得很远的帖子上。</text>
+<text class="t-mute bd" x="26" y="1212">一般低能见度的帖子被追究的机率较低，机率低</text>
+<text class="t-mute bd" x="26" y="1229">不等于安全，而且 2026 年的趋势是起诉变多。</text>
+<text class="t-mute bd" x="26" y="1246">人在海外不代表构不到。新加坡的外来干预框架与</text>
+<text class="t-mute bd" x="26" y="1263">POFMA 明文主张域外效力，马来西亚的条文也写得宽。</text>
+</svg>
