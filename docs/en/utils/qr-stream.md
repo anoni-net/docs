@@ -68,7 +68,7 @@ The table below uses the "medium" setting. Data per frame comes in small, medium
 | A signed text file | 50 KB | 129 | 26 seconds |
 | A photo from a phone | 3 MB | over the limit | cannot be sent |
 
-The tool refuses files over 512 KB. That number measures human patience rather than any technical ceiling: 512 KB at the default setting becomes 1302 frames and a four minute twenty pass, and collecting them usually takes more than one pass. The browser copes with far more. The person does not.
+Files over 512 KB are rejected. That number measures human patience rather than any technical ceiling: 512 KB at the default setting becomes 1302 frames and a four minute twenty pass, and collecting them usually takes more than one pass. The browser copes with far more. The person does not.
 
 The same 512 KB at the "maximum" setting is only 180 frames, a 36 second pass at medium speed. With good conditions the limit rarely gets in your way.
 
@@ -176,7 +176,7 @@ There is no fixed rule for what counts as sensitive. One question usually settle
 
 The tool computes a checksum (SHA-256) of the file and puts it in the first frame. Think of a checksum as the file's fingerprint: the sending side takes one print and sends it along, the receiving side takes another once it has reassembled, and matching prints mean not a single bit went astray. The result is stated plainly on screen once the set is complete.
 
-Note what the fingerprint does and does not show. It proves **the file did not get corrupted in transit**. It says nothing about **who gave it to you**, which you still have to establish some other way: checking a PGP fingerprint face to face, or confirming through a [channel where trust already exists](../tools/messaging-comparison.md).
+Note what the fingerprint does and does not show. It proves **the file did not get corrupted in transit**. It shows nothing about **who gave it to you**, which you still have to establish some other way: checking a PGP fingerprint face to face, or confirming through a [channel where trust already exists](../tools/messaging-comparison.md).
 
 ## Printing it on paper
 
@@ -198,7 +198,7 @@ The squares on paper are the same thing as the squares on screen, and anyone who
 
 That is 30 pages. A stream that does not finish just means waiting longer; a print job that does not finish is a stack of paper nobody will scan.
 
-Past the limit the page tells you how many sheets the file would take. Raising the payload per code to large or maximum cuts that down considerably, at the cost of denser squares that need the camera closer. Genuinely large files do not belong on paper. Keys, config files and a contact list do.
+Past the limit the number of sheets the file would take is shown. Raising the payload per code to large or maximum cuts that down considerably, at the cost of denser squares that need the camera closer. Genuinely large files do not belong on paper. Keys, config files and a contact list do.
 
 ### The codes are printed as vectors
 

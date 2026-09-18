@@ -38,7 +38,7 @@ The file you generate is newly built. Title, author, subject, keywords, producer
 
 Press "see what is inside" and use the search box underneath.
 
-Paste in the names, phone numbers and handles you already covered, and it reports which page each is still on. A black box on screen does not mean the text left the file. If any step along the way involved drawing a black rectangle in a document editor and exporting, the text layer is untouched and whoever receives it can select and copy it.
+Paste in the names, phone numbers and handles you already covered, and the result shows which page each is still on. A black box on screen does not mean the text left the file. If any step along the way involved drawing a black rectangle in a document editor and exporting, the text layer is untouched and whoever receives it can select and copy it.
 
 If something is still there, redo that page by filling solid black on the image in [Screenshot redaction](redact.md). Do not cover it a second time in the PDF.
 

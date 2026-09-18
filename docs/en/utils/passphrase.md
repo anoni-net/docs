@@ -21,7 +21,7 @@ offline_assets:
 
 Two situations where this comes up:
 
-- **You just set up a password manager and need a master password**: That one password is the door to every other one. Typing something off the top of your head is common, and nobody can tell whether it is strong enough. Draw six words and the page tells you the entropy outright.
+- **You just set up a password manager and need a master password**: That one password is the door to every other one. Typing something off the top of your head is common, and nobody can tell whether it is strong enough. Draw six words and the entropy is shown outright.
 - **You suspect the computer in front of you has been tampered with**: Switch to physical dice mode, where the randomness comes from your hands rather than from the machine.
 
 ## What this does

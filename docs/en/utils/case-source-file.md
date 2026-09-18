@@ -28,7 +28,7 @@ For a PDF, use "see what is inside" on [PDF page tidy-up](pdf-pages.md). It extr
 
 What turns up regularly: the author's account name, a company domain, the user name on a machine, creation and modification timestamps down to the second, and every piece of software that has touched the file. Those fields alone can narrow the field to a handful of people.
 
-Annotations and revision history deserve the same attention. Speaker notes deleted from a deck but not actually removed, and passages in a PDF sitting under a black rectangle with the text layer intact, both count. Use the search box on the same page to look for text you believe is not visible, and it reports which page it is still on.
+Annotations and revision history deserve the same attention. Speaker notes deleted from a deck but not actually removed, and passages in a PDF sitting under a black rectangle with the text layer intact, both count. Use the search box on the same page to look for text you believe is not visible, and the result shows which page it is still on.
 
 ## How document leak tracking works
 

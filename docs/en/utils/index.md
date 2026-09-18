@@ -44,7 +44,7 @@ Handle the two separately. Open the suspicious site at the higher level, copy ou
 
 -   :material-dice-multiple-outline: **[Passphrase and password generator](passphrase.md)**
 
-    Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the tool tells you how much entropy you got.
+    Draw a passphrase from the 7776-word asian-diceware list, or a random password from the character sets you pick. Randomness comes from the browser's `crypto.getRandomValues`, and the entropy you got is shown alongside.
 
 -   :material-lock-outline: **[Local file encryption](age.md)**
 

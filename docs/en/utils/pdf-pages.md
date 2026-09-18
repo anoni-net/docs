@@ -66,7 +66,7 @@ The reasoning is the same as the pixel-by-pixel check in screenshot redaction. A
 
 "Look inside" does three things: pulls the text out of every page, counts attachments, annotations and form fields, and draws a thumbnail of each page. The first press loads about 1.8 MB of parser, which nobody who only wants to tidy pages ever touches.
 
-The search box underneath is the useful part. Paste the name or number you thought was redacted and it tells you which pages still contain it. **A black box on screen does not mean the text is gone from the file.** A rectangle drawn over the visual layer while the text layer stays untouched is the most common way redaction fails, and whoever receives the file only has to copy and paste.
+The search box underneath is the useful part. Paste the name or number you thought was redacted and the result shows which pages still contain it. **A black box on screen does not mean the text is gone from the file.** A rectangle drawn over the visual layer while the text layer stays untouched is the most common way redaction fails, and whoever receives the file only has to copy and paste.
 
 The comparison normalises case, full-width characters and whitespace first. Otherwise "not found" might only mean the other side typed it differently, which is false reassurance.
 
