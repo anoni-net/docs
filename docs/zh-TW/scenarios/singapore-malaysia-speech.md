@@ -28,7 +28,7 @@ icon: material/comment-alert-outline
 - **能見度與組織程度放大風險**：低觸及的貼文、爆紅的貼文、有協調的行動，三者的風險層級不同。下面記錄到的執法多半落在公眾人物、行動者與組織者身上，或者落在傳得很遠的貼文上。一般低能見度的貼文被追究的機率較低，機率低不等於安全，而且 2026 年的趨勢是起訴變多。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/sg-my-speech-laws-v2.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/sg-my-speech-laws-v4.zh-TW.svg"
         alt="左右兩欄分別列出新加坡與馬來西亞管到網路言論的法條。新加坡有 POFMA、FICA、誹謗與藐視法庭，以及《公共秩序法》對集會的寬鬆定義。馬來西亞有 1998 年通訊與多媒體法第 233 條、1948 年煽動法、SOSMA、1966 年社團法，以及各州的宗教執法。下方的橫幅指出兩國共同的實名底層：新加坡的 Singpass、馬來西亞的 MyKad 與 MyDigital ID，加上兩國都強制 SIM 卡實名，帳號、裝置與付款方式往往早就指向法律上的本名。最下方的橫幅說明能見度與組織程度會放大風險，低觸及的貼文、爆紅的貼文與有協調的行動，三者的風險層級不同。">
     <figcaption>實名底層讓「換個假名就好」比聽起來難做到。先確認自己碰到哪個題目、能見度多高，就知道哪一條法律會被引用，以及自己的暴露面有多大。兩國都強制 SIM 卡實名，要取得一組真正不指向任何人的號碼與付款管道很困難。實際的目標放在區隔與減少連結。</figcaption>
 </figure>

@@ -77,8 +77,8 @@ icon: material/chat-question
 每個家族的完整文章列表見 [工具層首頁](./index.md)。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v2.zh-TW.svg"
-        alt="四個工具層的結構關係。連線層的 Tor 工具家族是核心，環境層的匿名作業系統把整個連線層包在裡面。觀測層獨立在旁邊，記錄連線遇到了什麼，本身不保護連線。日常隱私基本功橫跨在最底下，不管上面用哪一層都要。">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v4.zh-TW.svg"
+        alt="四個工具層的結構關係。連線層的 Tor 工具家族是核心，環境層的匿名作業系統把整個連線層包在裡面，讓系統預設走 Tor 而且關機不留痕跡。觀測層獨立在旁邊，記錄的是連線遇到了什麼，把封鎖與降速轉成有時間、地點、ASN 的公開資料，它不保護連線。日常隱私基本功橫跨在最底下，通訊軟體、密碼管理與匿名支付這些不管你用哪一層都要。四層不是階梯，挑跟情境相關的那一群讀就好。">
     <figcaption>四層之間，哪一層包住哪一層。四層不是階梯，也沒有先後順序。挑跟你情境相關的那一群讀就好，判斷依據回到威脅模型。</figcaption>
 </figure>
 

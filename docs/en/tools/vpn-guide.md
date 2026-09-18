@@ -38,8 +38,8 @@ Even with a VPN on, the timing of your connections, the size of your traffic, th
 The difference from Tor is in how trust is distributed. Tor routes your connection through three mutually independent relays (volunteer-run intermediate nodes), so no single node knows both who you are and where you are going — you don't have to trust any single node. A VPN concentrates trust in one provider, and your privacy depends on whether that provider is honest and whether it can be compelled to talk.
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/vpn-trust-shift-v3.en.svg"
-        alt="Three ways of connecting, compared. Connecting directly, the ISP knows both who you are and where you go, and the site sees your real IP. Through a VPN, the ISP only sees you reaching a VPN, while the provider now knows both facts. Through Tor, the ISP only sees you using Tor, the guard knows who you are but not where you go, the middle relay knows neither side, and the exit knows where you go but not who you are. The first two each have one node holding both facts. Tor has none.">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/vpn-trust-shift-v4.en.svg"
+        alt="Three ways of connecting, compared. Connecting directly, the ISP knows both who you are and where you go, and the site sees your real IP. Through a VPN, the ISP only sees you reaching a VPN, while the VPN provider now knows both who you are and where you go, and the site sees the VPN&#x27;s IP. Through Tor, the ISP only sees you using Tor, the guard relay knows who you are but not where you go, the middle relay knows neither side, the exit relay knows where you go but not who you are, and the site sees the exit node&#x27;s IP. The first two each have one node holding both facts. Tor has none.">
     <figcaption>What a VPN changes is who the single point is</figcaption>
 </figure>
 

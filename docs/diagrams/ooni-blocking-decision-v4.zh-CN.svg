@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 788" width="400" height="788" role="img" aria-labelledby="title">
+<title id="title">web_connectivity 的四个判定阶段，差异出现在哪一阶就停在哪一阶</title>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .card-c1, .card-n, .card-ok, .card-w1 { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="24">同一个网址，两边各测一次</text>
+<text class="t-mute bd" x="26" y="41">Probe 端从你所在的网络测一次，test helper</text>
+<text class="t-mute bd" x="26" y="58">从外部网络测一次，接着逐阶段比对差异。</text>
+<rect class="card-n" x="12" y="86" width="376" height="131" rx="8"/>
+<text class="t-mute lab" x="26" y="110">第 1 阶</text>
+<text class="t-main h2" x="26" y="130">DNS 解析结果一致吗</text>
+<text class="t-mute bd" x="26" y="148">比对两边的 A 与 AAAA 查询结果</text>
+<text class="t-main lab" x="26" y="169">不一致 →</text>
+<text class="t-mute bd" x="36" y="186">blocking: "dns"</text>
+<text class="t-mute bd" x="36" y="203">解析结果对不上</text>
+<rect class="card-n" x="12" y="227" width="376" height="131" rx="8"/>
+<text class="t-mute lab" x="26" y="251">第 2 阶</text>
+<text class="t-main h2" x="26" y="271">Probe 连得上 TCP 吗</text>
+<text class="t-mute bd" x="26" y="289">先确认 test helper 那一端连得上</text>
+<text class="t-main lab" x="26" y="310">连不上 →</text>
+<text class="t-mute bd" x="36" y="327">blocking: "tcp_ip"</text>
+<text class="t-mute bd" x="36" y="344">连不到目标地址</text>
+<rect class="card-n" x="12" y="368" width="376" height="131" rx="8"/>
+<text class="t-mute lab" x="26" y="392">第 3 阶</text>
+<text class="t-main h2" x="26" y="412">HTTP 阶段成功吗</text>
+<text class="t-mute bd" x="26" y="430">请求送得出去，也收得到回应</text>
+<text class="t-main lab" x="26" y="451">失败 →</text>
+<text class="t-mute bd" x="36" y="468">blocking: "http-failure"</text>
+<text class="t-mute bd" x="36" y="485">HTTP 阶段就断了</text>
+<rect class="card-n" x="12" y="509" width="376" height="131" rx="8"/>
+<text class="t-mute lab" x="26" y="533">第 4 阶</text>
+<text class="t-main h2" x="26" y="553">内容跟 test helper 拿到的一样吗</text>
+<text class="t-mute bd" x="26" y="571">比对状态码、标题、内文长度与 body</text>
+<text class="t-main lab" x="26" y="592">不一样 →</text>
+<text class="t-mute bd" x="36" y="609">blocking: "http-diff"</text>
+<text class="t-mute bd" x="36" y="626">回应被换掉了</text>
+<rect class="card-ok" x="12" y="656" width="376" height="55" rx="8"/>
+<text class="t-main h2" x="26" y="680">四阶都通过 blocking: false accessible: true</text>
+<text class="t-mute bd" x="26" y="697">两边都正常，内容也相符。</text>
+<rect class="card-w1" x="12" y="721" width="376" height="55" rx="8"/>
+<text class="t-main h2" x="26" y="745">判定在哪一阶停下，后面就不再比对</text>
+<text class="t-mute bd" x="26" y="762">前三种情况下四个 match 栏位全是 null，原因就在这里。</text>
+</svg>

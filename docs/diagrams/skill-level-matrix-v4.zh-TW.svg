@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 668" width="400" height="668" role="img" aria-labelledby="title">
+<title id="title">同一個層級在三個工具上分別代表什麼</title>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .card-c1, .card-c2, .card-c3, .card-n { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; }
+  .card-c3 { fill: #80d1ff; stroke: #0089bf; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-c3 { fill: #14495f; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="24">三欄各自獨立，不必依序點滿</text>
+<text class="t-mute bd" x="26" y="41">Tor 是匿名上網的基礎，Tails 把整個環境</text>
+<text class="t-mute bd" x="26" y="58">拉到高安全需求，OONI 觀測與測量網路審查。</text>
+<text class="t-mute bd" x="26" y="75">同一個層級在三個工具上不是同一件事。挑跟你想參</text>
+<text class="t-mute bd" x="26" y="92">與的主題相關的那一欄，從目前所在的那一格往上走。</text>
+<rect class="card-c1" x="12" y="120" width="376" height="172" rx="8"/>
+<text class="t-mute lab" x="26" y="144">任何想了解的人</text>
+<text class="t-main h2" x="26" y="164">認識</text>
+<text class="t-main lab" x="26" y="185">Tor</text>
+<text class="t-mute bd" x="36" y="202">說得出洋蔥路由與三層中繼怎麼運作</text>
+<text class="t-main lab" x="26" y="223">Tails</text>
+<text class="t-mute bd" x="36" y="240">說得出 Tails 跟一般作業系統差在哪</text>
+<text class="t-main lab" x="26" y="261">OONI</text>
+<text class="t-mute bd" x="36" y="278">說得出 OONI 在測什麼、為什麼要測</text>
+<rect class="card-c2" x="12" y="302" width="376" height="172" rx="8"/>
+<text class="t-main lab" x="26" y="326">記者、公民社會工作者</text>
+<text class="t-main h2" x="26" y="346">實作</text>
+<text class="t-main lab" x="26" y="367">Tor</text>
+<text class="t-main bd" x="36" y="384">裝好 Tor Browser，會用橋接連線</text>
+<text class="t-main lab" x="26" y="405">Tails</text>
+<text class="t-main bd" x="36" y="422">做出開機隨身碟，從 USB 進系統</text>
+<text class="t-main lab" x="26" y="443">OONI</text>
+<text class="t-main bd" x="36" y="460">執行 Probe 產出報告，看得懂 Explorer 的結果</text>
+<rect class="card-c3" x="12" y="484" width="376" height="172" rx="8"/>
+<text class="t-main lab" x="26" y="508">開源社群成員</text>
+<text class="t-main h2" x="26" y="528">貢獻</text>
+<text class="t-main lab" x="26" y="549">Tor</text>
+<text class="t-main bd" x="36" y="566">架 Relay、Bridge 或 WebTunnel</text>
+<text class="t-main lab" x="26" y="587">Tails</text>
+<text class="t-main bd" x="36" y="604">備份 Persistent Storage，用 GnuPG 管理金鑰</text>
+<text class="t-main lab" x="26" y="625">OONI</text>
+<text class="t-main bd" x="36" y="642">命令列執行指定測試，整理名單、分析原始資料</text>
+</svg>

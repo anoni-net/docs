@@ -50,8 +50,8 @@ icon: material/message-text-outline
 对照组的「E2EE 默认」一栏写的是消息内容层级，不代表 metadata 也加密。Telegram 的「不适用」是因为一般群组与频道根本不走 E2EE，没办法谈「群组 E2EE 机制」。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v2.zh-CN.svg"
-        alt="散点图。横轴是身分绑定方式，左边绑手机号码，右边不绑任何可查的身分。纵轴是 metadata 留在哪，下面是中央服务器看得到全部，上面是没有中央服务器可看。LINE、Telegram、WhatsApp 三个对照组落在左下角。Signal 偏上偏左，metadata 最小化但身分仍绑手机。Matrix 落在中间偏下。Session、SimpleX、Briar 落在右上角。位置是相对的，不是量测值。">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v4.zh-CN.svg"
+        alt="一张散点图。横轴是身分绑定方式，左边绑手机号码，右边不绑任何可查的身分。纵轴是 metadata 留在哪，下面是中央服务器看得到全部，上面是没有中央服务器可看。LINE、Telegram、WhatsApp 三个对照组落在左下角。Signal 因为 metadata 最小化设计而偏上，身分仍绑手机号码所以偏左。Matrix 落在中间偏下，房间参与的每个 homeserver 都看得到。Session、SimpleX、Briar 落在右上角，身分不绑手机也没有中央服务器掌握谁跟谁在通讯。位置是相对的，不是量测值。">
     <figcaption>八个工具在身分绑定与 metadata 这两个轴上的落点。位置是相对的，不是量测值。越靠右上，越少人知道你是谁、又在跟谁通讯。</figcaption>
 </figure>
 

@@ -77,8 +77,8 @@ icon: material/chat-question
 每个家族的完整文章列表见 [工具层首页](./index.md)。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v2.zh-CN.svg"
-        alt="四个工具层的结构关系。连线层的 Tor 工具家族是核心，环境层的匿名操作系统把整个连线层包在里面。观测层独立在旁边，记录连线遇到了什么，本身不保护连线。日常隐私基本功横跨在最底下，不管上面用哪一层都要。">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/tool-layers-v4.zh-CN.svg"
+        alt="四个工具层的结构关系。连线层的 Tor 工具家族是核心，环境层的匿名操作系统把整个连线层包在里面，让系统预设走 Tor 而且关机不留痕迹。观测层独立在旁边，记录的是连线遇到了什么，把封锁与降速转成有时间、地点、ASN 的公开数据，它不保护连线。日常隐私基本功横跨在最底下，通讯软件、密码管理与匿名支付这些不管你用哪一层都要。四层不是阶梯，挑跟情境相关的那一群读就好。">
     <figcaption>四层之间，哪一层包住哪一层。四层不是阶梯，也没有先后顺序。挑跟你情境相关的那一群读就好，判断依据回到威胁模型。</figcaption>
 </figure>
 

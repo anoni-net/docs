@@ -36,8 +36,8 @@ icon: material/share-circle
 </figure>
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/onionshare-modes-flow-v3.en.svg"
-        alt="Data flow in four modes, compared. In Send, your computer holds the files and the other person downloads them in Tor Browser. In Receive, you open an upload page and the sender uploads, and you receive locally. In Host a Website, you serve a static site that several visitors browse. In Chat, the flow is two-way, messages stay in memory, and everything disappears when you close it. All four share the same .onion address in the middle.">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/onionshare-modes-flow-v4.en.svg"
+        alt="Data flow in four modes, compared. In Send, your computer holds the files and the other person downloads them in Tor Browser, so data moves from you outward. In Receive, you open an upload page and the sender uploads, so data moves toward you. In Host a Website, you serve a static site and several visitors browse it, so data moves from you to many. In Chat, the flow is two-way and everyone joins the same ephemeral room. All four share the same middle step, a .onion address that stops working the moment OnionShare is closed.">
     <figcaption>Which way the data flows in each mode. The address dies the moment you close OnionShare, and delivering it is your job rather than OnionShare's. Send it over an insecure channel and that step is no longer anonymous.</figcaption>
 </figure>
 

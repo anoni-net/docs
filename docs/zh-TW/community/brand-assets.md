@@ -623,7 +623,7 @@ grep -c mxfile your-diagram.drawio.svg
 下面這張圖把每個版型元件與每個色票 token 各用一次。做新圖時照它抄，尺寸、內距與色值都在裡面。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference.zh-TW.svg" alt="示意圖版型範本，由上而下依序是六塊。帶 eyebrow、title、sub 與 lines 的卡片。兩欄標籤的卡片，四個標籤分別是良好、中等、警示、中性。有小標分段的卡片。一個分節標題。上下流程的三個節點與置中連接線。cyan 三階與橘色三階各三張卡片。">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference-v4.zh-TW.svg" alt="示意圖版型範本，由上而下依序是六塊。帶 eyebrow、title、sub 與 lines 的卡片。兩欄標籤的卡片，四個標籤分別是良好、中等、警示、中性。有小標分段的卡片。一個分節標題。上下流程的三個節點與置中連接線。cyan 三階與橘色三階各三張卡片。">
     <figcaption>每個元件與每個 token 各用一次，做新圖時照這張抄</figcaption>
 </figure>
 
@@ -646,6 +646,14 @@ grep -c mxfile your-diagram.drawio.svg
 | 高度的一半 | 膠囊狀標籤。標籤高 24 時 rx 是 12，不要寫死 6 |
 
 字級只有 15、14、13 三個值。這套階層是「粗細乘顏色」兩個軸疊出來的，不是一路遞增的字級 scale：15 與 14 是粗體深色，13 同時出現在粗體（小標）與細體（內文）。想再加一層強調時改粗細或改顏色，不要插進 12.5 或 13.5 這種中間值，在 0.82 到 1.2 的縮放範圍內那 0.5px 沒有人看得出來。
+
+#### eyebrow 用 muted，alt 是唯一的權威文字
+
+卡片的 eyebrow 跟 sub 同一個顏色系（淺底用 `.t-mute`，`.card-c2`、`.card-c3`、`.card-w2` 用 `.t-main`，`.card-w3` 用 `.t-onfill`），只有 title 用深色。三行的層次是「淡的小標、深的標題、淡的副標」。eyebrow 跟 title 都用深色的話，兩行只差 1px 字級，在 328 寬看起來像標題被拆成兩行。
+
+eyebrow 放的是分類或編號（「第一級」、「Send」、「環境層」），title 放的是這一格在講什麼。如果某個字串單獨看就是這張卡的主要資訊，它應該是 title 而不是 eyebrow。
+
+SVG 內只留一個簡短的 `<title>`，給直接開啟檔案網址的情境用，不要寫 `<desc>`。圖是被 `img` 標籤引用的，瀏覽器把它當成不透明的點陣圖，SVG 內部的 `title`、`desc`、`role`、`aria-*` 都不會被輔助科技讀到，讀者聽到的一律是 `img` 的 `alt`。完整的說明只寫在 `alt` 那一份，兩邊各寫一份的結果是內容各自漂移。
 
 #### 流程用置中的連接線
 

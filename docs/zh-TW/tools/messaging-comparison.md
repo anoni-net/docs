@@ -50,8 +50,8 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 對照組的「E2EE 預設」一欄寫的是訊息內容層級，不代表 metadata 也加密。Telegram 的「不適用」是因為一般群組與頻道根本不走 E2EE，沒辦法談「群組 E2EE 機制」。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v2.zh-TW.svg"
-        alt="散點圖。橫軸是身分綁定方式，左邊綁手機號碼，右邊不綁任何可查的身分。縱軸是 metadata 留在哪，下面是中央伺服器看得到全部，上面是沒有中央伺服器可看。LINE、Telegram、WhatsApp 三個對照組落在左下角。Signal 偏上偏左，metadata 最小化但身分仍綁手機。Matrix 落在中間偏下。Session、SimpleX、Briar 落在右上角。位置是相對的，不是量測值。">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v4.zh-TW.svg"
+        alt="一張散點圖。橫軸是身分綁定方式，左邊綁手機號碼，右邊不綁任何可查的身分。縱軸是 metadata 留在哪，下面是中央伺服器看得到全部，上面是沒有中央伺服器可看。LINE、Telegram、WhatsApp 三個對照組落在左下角。Signal 因為 metadata 最小化設計而偏上，身分仍綁手機號碼所以偏左。Matrix 落在中間偏下，房間參與的每個 homeserver 都看得到。Session、SimpleX、Briar 落在右上角，身分不綁手機也沒有中央伺服器掌握誰跟誰在通訊。位置是相對的，不是量測值。">
     <figcaption>八個工具在身分綁定與 metadata 這兩個軸上的落點。位置是相對的，不是量測值。越靠右上，越少人知道你是誰、又在跟誰通訊。</figcaption>
 </figure>
 

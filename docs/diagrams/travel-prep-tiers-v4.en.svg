@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 870" width="400" height="870" role="img" aria-labelledby="title">
+<title id="title">Travel prep stacks upward, each tier built on everything below it</title>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1, .card-n, .card-no, .card-w1, .card-w2, .card-w3 { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">Each tier is built on everything below it</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-w3" x="12" y="44" width="376" height="92" rx="8"/>
+<text class="t-onfill lab" x="26" y="68">Highest risk</text>
+<text class="t-onfill h2" x="26" y="88">Myanmar</text>
+<text class="t-onfill bd" x="26" y="105">Stripped-down clean device, no</text>
+<text class="t-onfill bd" x="26" y="122">local SIM, assume surveillance.</text>
+<rect class="card-w2" x="12" y="146" width="376" height="111" rx="8"/>
+<text class="t-main lab" x="26" y="170">High risk</text>
+<text class="t-main h2" x="26" y="190">Hong Kong, Thailand, Vietnam,</text>
+<text class="t-main h2" x="26" y="209">Cambodia, mainland China</text>
+<text class="t-main bd" x="26" y="226">Obfuscating VPN and bridges tested at home.</text>
+<text class="t-main bd" x="26" y="243">Clean device. No sensitive work locally.</text>
+<rect class="card-w1" x="12" y="267" width="376" height="128" rx="8"/>
+<text class="t-mute lab" x="26" y="291">Medium risk</text>
+<text class="t-main h2" x="26" y="311">The Philippines, Malaysia,</text>
+<text class="t-main h2" x="26" y="330">Singapore, Indonesia, Macau</text>
+<text class="t-mute bd" x="26" y="347">Route public and venue Wi-Fi through</text>
+<text class="t-mute bd" x="26" y="364">a VPN. Read up on local content and</text>
+<text class="t-mute bd" x="26" y="381">defamation law before you publish.</text>
+<rect class="card-c1" x="12" y="405" width="376" height="92" rx="8"/>
+<text class="t-mute lab" x="26" y="429">Low risk</text>
+<text class="t-main h2" x="26" y="449">Taiwan (baseline), Japan, South Korea</text>
+<text class="t-mute bd" x="26" y="466">Close to home. Your usual tools are</text>
+<text class="t-mute bd" x="26" y="483">fine. Bring a passport for a SIM.</text>
+<rect class="card-n" x="12" y="515" width="376" height="140" rx="8"/>
+<text class="t-main h2" x="26" y="539">Everywhere, whatever the destination</text>
+<text class="t-mute bd" x="26" y="556">Carry the most stripped-down device you can.</text>
+<text class="t-mute bd" x="26" y="573">Install and test circumvention tools before</text>
+<text class="t-mute bd" x="26" y="590">you leave. Have a second way to connect.</text>
+<text class="t-mute bd" x="26" y="607">Use end-to-end encryption for anything</text>
+<text class="t-mute bd" x="26" y="624">sensitive. Separate your accounts. Turn on</text>
+<text class="t-mute bd" x="26" y="641">full-disk encryption. Keep an offline backup.</text>
+<rect class="card-no" x="12" y="665" width="376" height="193" rx="8"/>
+<text class="t-main h2" x="26" y="689">Hong Kong sits in the high</text>
+<text class="t-main h2" x="26" y="708">tier for a different reason</text>
+<text class="t-mute bd" x="26" y="725">Its connectivity is close to the medium tier,</text>
+<text class="t-mute bd" x="26" y="742">and the threshold is the border. Since March</text>
+<text class="t-mute bd" x="26" y="759">2026, refusing to hand over a device password</text>
+<text class="t-mute bd" x="26" y="776">during a national-security investigation is</text>
+<text class="t-mute bd" x="26" y="793">itself an offence, for any nationality,</text>
+<text class="t-mute bd" x="26" y="810">including passengers merely transiting.</text>
+<text class="t-mute bd" x="26" y="827">Device contents become the main exposure, so</text>
+<text class="t-mute bd" x="26" y="844">preparation has to rise to the clean-device tier.</text>
+</svg>

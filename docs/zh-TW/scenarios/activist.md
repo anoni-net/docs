@@ -23,7 +23,7 @@ icon: material/bullhorn-outline
 每個場景的對手不一樣，但都圍繞同一個核心問題。你現在的數位足跡裡，哪些東西被取得後會傷害你或同伴。本文把核心問題拆成可以實際調整的具體設定。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/activist-timeline-v2.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/activist-timeline-v4.zh-TW.svg"
         alt="三個並排的階段，用箭頭串起來，底下有一條橫幅代表貫穿全程的跨組織協作。動員前是風險最低、時間最多的階段，要做的是通訊群組的設計與隔離、雲端文件先撤到 Cryptpad、密碼管理器與帳號清單、個人帳號的隱私審計、一次性手機的取捨，以及活動公開資訊的揭露節奏。行動現場要做的是出門前的裝置鎖定設定、現場拍照與錄影的判斷、選擇 Signal 或離線 mesh，以及緊急聯絡人與失聯流程。行動之後要處理的是刪除證據前的合規考量、媒體曝光時的身分管理，以及取得法律支援的管道。底下的橫幅是跨組織協作，貫穿三個階段，包含資訊最小化原則、共筆與檔案交換工具的選擇、群組命名與訊息政策。">
     <figcaption>每個場景的對手不一樣，核心問題只有一個：你現在的數位足跡裡，哪些東西被取得後會傷害你或同伴。行動圈的風險不只有高強度的專案，更多是日常累積的暴露，三個階段的準備門檻都不高，卡關多半是拖到當天。</figcaption>
 </figure>

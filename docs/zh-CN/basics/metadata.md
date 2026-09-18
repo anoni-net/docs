@@ -21,7 +21,7 @@ Metadata 字面意思是「数据的数据」。你打了一通电话，**通话
 这句话听起来吓人，但它揭露的事实对日常生活同样适用。Metadata 不是只有国家级监控才在意的东西。广告商、平台算法、保险业、在追踪前任的人、想肉搜你的网友，都用同一份原料。
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/metadata-envelope-v2.zh-CN.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/metadata-envelope-v4.zh-CN.svg"
         alt="信封示意图。信封外面标着寄件人、收件人、时间与长度、消息大小、主题、往返频率，这些不用解密就看得到。信封里面是一块上了锁的区域，代表端对端加密的信件内容，只有收件人读得到。右边接着三条推论，说明光凭信封外面就能知道你跟某律师事务所有持续通信、你今晚跟某记者通了三十分钟、这群人是你固定往来的圈子。">
     <figcaption>加密盖住的只有信封里面那一块。加密盖住的只有中间那一块。左边那一圈是每一封信、每一通电话、每一次连线都会留下的副产品。</figcaption>
 </figure>

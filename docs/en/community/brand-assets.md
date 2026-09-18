@@ -623,7 +623,7 @@ Splitting a diagram into a phone file and a desktop file behind `<picture>` and 
 The diagram below uses every layout element and every colour token once. Copy from it when drawing a new one: the sizes, padding and colour values are all in there.
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference.en.svg" alt="A layout reference for diagrams. From top to bottom: a card with an eyebrow, title, subtitle and body lines; a card with two columns of tags labelled good, medium, warning and neutral; a card with labelled sections; a section heading; a three-node top-to-bottom flow with a centred connector; then the three-step cyan ramp and the three-step orange ramp.">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference-v4.en.svg" alt="A layout reference for diagrams. From top to bottom: a card with an eyebrow, title, subtitle and body lines; a card with two columns of tags labelled good, medium, warning and neutral; a card with labelled sections; a section heading; a three-node top-to-bottom flow with a centred connector; then the three-step cyan ramp and the three-step orange ramp.">
     <figcaption>Every element and every token used once, to copy from when drawing a new diagram</figcaption>
 </figure>
 
@@ -646,6 +646,14 @@ Corner radius has three values, chosen by shape:
 | Half the height | Pill-shaped tags. A 24-high tag takes `rx=12`, not a hard-coded 6 |
 
 Font sizes are only 15, 14 and 13. That hierarchy is built from two axes, weight and colour, rather than a rising size scale: 15 and 14 are bold and dark, and 13 appears both bold (section labels) and regular (body). To add another level of emphasis, change weight or colour rather than inserting 12.5 or 13.5, because within a 0.82 to 1.2 scaling range half a pixel is invisible.
+
+#### The eyebrow is muted, and the alt is the only authoritative text
+
+A card's eyebrow takes the same colour family as its subtitle (`.t-mute` on light fills, `.t-main` on `.card-c2`, `.card-c3` and `.card-w2`, `.t-onfill` on `.card-w3`), leaving the title as the only dark line. The three lines then read as a quiet label, a loud title and a quiet subtitle. With both the eyebrow and the title in dark, only 1px of size separates them, and at 328 wide that looks like one title broken across two lines.
+
+The eyebrow carries a category or a number ("Level 1", "Send", "Environment layer") and the title says what the card is about. If a string reads as the card's main information on its own, it belongs in the title rather than the eyebrow.
+
+Keep a short `<title>` inside the SVG for anyone opening the file URL directly, and do not write a `<desc>`. The diagram is pulled in by an `img` tag, the browser treats it as an opaque bitmap, and the `title`, `desc`, `role` and `aria-*` inside the SVG never reach assistive technology: what a reader hears is the `img` `alt`. Write the full description once, in the `alt`. Keeping two copies only lets them drift apart.
 
 #### Flows use a centred connector
 

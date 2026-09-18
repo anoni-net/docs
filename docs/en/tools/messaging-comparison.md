@@ -42,8 +42,8 @@ Before the table, here is what each column is asking and why it changes your ris
 The baseline rows are there because most readers already use them. Their "E2EE default" entry describes message content only; it never implies the metadata layer is protected. Telegram's "no" is the important correction: ordinary chats, groups, and channels are not end-to-end encrypted, only the manually-enabled one-to-one Secret Chat is.
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v2.en.svg"
-        alt="A scatter plot. The horizontal axis is how identity is bound, from a phone number on the left to no lookupable identity on the right. The vertical axis is where metadata sits, from a central server seeing everything at the bottom to no central server at the top. LINE, Telegram, and WhatsApp sit in the lower left. Signal sits higher and still to the left. Matrix sits centre-low. Session, SimpleX, and Briar sit in the upper right. Positions are relative rather than measured.">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/messaging-landscape-v4.en.svg"
+        alt="A scatter plot. The horizontal axis is how identity is bound, from a phone number on the left to no lookupable identity on the right. The vertical axis is where metadata sits, from a central server seeing everything at the bottom to no central server to look at, at the top. LINE, Telegram, and WhatsApp, the comparison group, sit in the lower left. Signal sits higher because of its metadata-minimising design, and still to the left because identity is tied to a phone number. Matrix sits centre-low, since every homeserver in a room can see the traffic. Session, SimpleX, and Briar sit in the upper right, with no phone binding and no central server holding who talks to whom. Positions are relative rather than measured.">
     <figcaption>Where the eight tools land on identity binding and metadata</figcaption>
 </figure>
 

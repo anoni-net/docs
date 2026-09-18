@@ -25,7 +25,7 @@ EFF frames threat modeling as five questions, worth keeping on a single sheet of
 The [threat model checklist](../utils/threat-model.md) turns questions one, two and five into something you can click through, and flags the combinations that will not hold. It runs in your browser, saves nothing unless you ask it to, and works offline. Questions three and four stay yours to judge, and the section below is why.
 
 <figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/threat-model-quadrant-v2.en.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/threat-model-quadrant-v4.en.svg"
         alt="A four-quadrant chart. The horizontal axis is how real a given asset and adversary pairing actually is, from low to high. The vertical axis is how strong your protection is today, from weak to strong. Top left is over-protected and can be let go, with a family group chat against state-level surveillance and viewing history against a law enforcement request. Top right is covered and worth keeping, with a bank account against scammers and a main email account against takeover. Bottom left is accepted, a known risk left alone, with public posts against a passing stranger and reading history against ad tracking. Bottom right is not covered yet and is the next step, with a cloud photo library against a platform breach and a reused password on an old account against credential stuffing.">
     <figcaption>Roughly what the answers look like once laid out. The pairings shown are invented.</figcaption>
 </figure>
