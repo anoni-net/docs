@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 378" width="400" height="378" role="img" aria-labelledby="title desc">
+<title id="title">Monero Ring Signature：1 真實寄件人 + 15 個誘餌</title>
+<desc id="desc">Monero Ring Signature：1 真實寄件人 + 15 個誘餌</desc>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; stroke-width: 1.3; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; stroke-width: 1.3; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; stroke-width: 1.3; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<rect class="card-c1" x="12" y="0" width="376" height="74" rx="8"/>
+<text class="t-main h2" x="26" y="24">Monero Ring Signature，1</text>
+<text class="t-main h2" x="26" y="43">個真實寄件人加 15 個誘餌</text>
+<text class="t-mute bd" x="26" y="60">環大小 16 是 Monero 的預設值。</text>
+<rect class="card-n" x="12" y="86" width="376" height="196" rx="8"/>
+<rect class="card-n" x="26" y="104" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="67" y="121" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="114" y="104" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="156" y="121" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="203" y="104" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="244" y="121" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="292" y="104" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="333" y="121" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="26" y="144" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="67" y="161" text-anchor="middle">誘餌</text>
+<rect class="card-w3" x="114" y="144" width="82" height="34" rx="6"/>
+<text class="t-onfill bd" x="156" y="161" text-anchor="middle">真實寄件人</text>
+<rect class="card-n" x="203" y="144" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="244" y="161" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="292" y="144" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="333" y="161" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="26" y="184" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="67" y="201" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="114" y="184" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="156" y="201" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="203" y="184" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="244" y="201" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="292" y="184" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="333" y="201" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="26" y="224" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="67" y="241" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="114" y="224" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="156" y="241" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="203" y="224" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="244" y="241" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="292" y="224" width="82" height="34" rx="6"/>
+<text class="t-main bd" x="333" y="241" text-anchor="middle">誘餌</text>
+<rect class="card-n" x="12" y="294" width="376" height="72" rx="8"/>
+<text class="t-main h2" x="26" y="318">鏈上看到的只有一件事</text>
+<text class="t-mute bd" x="26" y="335">16 個輸出之一是真的。觀察者</text>
+<text class="t-mute bd" x="26" y="352">無法在計算上反推哪一個是真的。</text>
+</svg>

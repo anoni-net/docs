@@ -473,6 +473,11 @@ social:
 技術圖示（流程圖、架構圖、對照矩陣、時間軸）有兩種做法：
 
 - **drawio**：節點與連線多、結構複雜的圖，存成 `.drawio.svg` 雙重格式檔
+
+!!! note "目前 `docs/diagrams/` 底下沒有 drawio 檔"
+    2026-09-19 把原本七張 drawio 圖改成 400 寬的直式手寫 SVG，理由是畫布 580 到 832 在 360 手機上把 11 到 12px 的字縮成 4.3 到 6.2px，而且 drawio 匯出的檔案沒有 `@media (prefers-color-scheme: dark)`，在暗色底上是一塊白底方塊。順帶把 `zcash-shielded` 的 329 KB 縮到 2.9 KB。
+
+    下面這一整節的 drawio 流程照樣有效，新圖要用 drawio 畫沒有問題，只是要照上方「示意圖用色」與 400 寬的畫布規格走，並自己補上暗色模式。原本七張的 drawio 原始檔留在 git 歷史裡（commit 之前的 `docs/diagrams/*.drawio.svg`），想改回 drawio 重畫的話取得回來。
 - **手寫 SVG**：版型規則的圖，例如矩陣、分層、時間軸。直接寫比在畫布上拖拉快，檔案也小一到兩個數量級
 
 兩種都是 SVG，瀏覽器、mkdocs、IPFS 鏡像、Onion 鏡像都直接渲染。
