@@ -1,6 +1,6 @@
 ---
 title: The ads seem to know what you are thinking
-description: Something you looked at elsewhere turns up in your feed shortly afterwards. This walkthrough moves attention away from the microphone and uses two tools to let you see it for yourself: what any website receives without asking, why those values together are enough to recognise you, and whose identifier rides along on the end of every link you tap.
+description: Something you looked at elsewhere turns up in your feed shortly afterwards. This walkthrough covers what any website receives without asking, why those values together are enough to recognise you, and whose identifier rides along on the end of every link you tap.
 icon: material/target-account
 ---
 
@@ -10,9 +10,9 @@ icon: material/target-account
 
 Last week you mentioned a brand of shoes to a friend, and for the past few days your feed has kept showing them. You did not search for them and you did not open a single related page.
 
-The first thought is usually that the phone is listening. That explanation is intuitive, and it is also the one with the least evidence behind it. [How platforms collect your data](../basics/platform-tracking.md) covers what the research actually found and what putting your attention on the microphone costs you. The short version: none of this requires a microphone, and the alternatives are far cheaper to run.
+The first thought is usually that the phone is listening. That explanation is intuitive, and it is also the one with the least evidence behind it. What the research actually found, and what putting your attention on the microphone costs you, is set out in [how platforms collect your data](../basics/platform-tracking.md). The short version: none of this requires a microphone, and the alternatives are far cheaper to run.
 
-This page does something else. Rather than guessing whether anyone is listening, open a page and see for yourself what they actually receive.
+Rather than guessing whether anyone is listening, open a page and see for yourself what they actually receive.
 
 ## Handed over on page load, without a prompt
 
@@ -26,11 +26,9 @@ Look at the eight-character short code at the top. It is computed from several o
 
 The same browser produces the same code every time you open the page. Without logging in and without accepting a single cookie, those values already give you an identifier that follows you. That is the skeleton of a profile, and your behaviour across different sites can be strung onto the same code.
 
-What an ad system wants is an identifier that connects "the person who looked at shoes last week" with "the person reading this feed now". Your name is of no use to it.
+An identifier that connects "the person who looked at shoes last week" with "the person reading this feed now" is what holds a profile together. Your name plays no part in it.
 
 ## Open it again in a different browser
-
-Comparison is what makes this page useful.
 
 Open the same page in another browser and see whether the short code changes. To find out which value moved, each item has a reference line underneath stating what Tor Browser reports instead.
 
@@ -44,7 +42,7 @@ The other half of a profile lives in URLs.
 
 Paste any link you received recently into the [URL cleaner](clean-url.md) and it pulls out the tracking parameters, naming who does the tracking in each case. Links copied out of social platforms are the clearest example, often trailing a long string of identifiers.
 
-What that string does is record who handed the link to whom. Clean it before forwarding, otherwise passing it on adds your own hand to the chain.
+That string records who handed the link to whom. Clean it before forwarding, otherwise passing it on adds your own hand to the chain.
 
 ## What this page cannot prove
 

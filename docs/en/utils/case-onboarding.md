@@ -26,9 +26,13 @@ The person asking does not need to be a security specialist. They need to be wil
 
 Each of the three answers looks reasonable on its own, and together they often do not hold up. The checklist flags where they fail to line up.
 
-The most common one is picking law enforcement or a state-level adversary while setting the cost to the lowest option. Several others recur too: protecting against someone in an intimate relationship without listing devices among the things to protect, defending only against passing strangers while planning to overhaul your entire workflow, and protecting a source's identity without counting who contacts whom.
+The most common one is picking law enforcement or a state-level adversary while setting the cost to the lowest option. Several others recur too:
 
-Answering one question at a time hides the conflict. Laid out side by side, the gap surfaces on its own. That mismatch list is what the hour produces. The answers themselves matter less.
+- Protecting against someone in an intimate relationship, without listing devices among the things to protect
+- Defending only against passing strangers, while planning to overhaul an entire workflow
+- Protecting a source's identity, without counting who contacts whom
+
+Answering one question at a time hides the conflict. Laid out side by side, the gap surfaces on its own. The hour produces that mismatch list. The answers themselves matter less.
 
 ## Pick what the next three months hold
 
