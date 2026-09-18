@@ -616,6 +616,17 @@ grep -c mxfile your-diagram.drawio.svg
 
 `<picture>` 加 `srcset` 分手機與桌機兩份檔案這條路走不通。privacy 外掛只改寫 `img src`、`script src`、`a href` 與 SVG 的 `image href`，`srcset` 不會被在地化，onion 與 IPFS 版會留下對 assets.anoni.net 的 clearnet 請求。
 
+#### 版型範本
+
+下面這張圖把每個版型元件與每個色票 token 各用一次。做新圖時照它抄，尺寸、內距與色值都在裡面。
+
+<figure markdown="span">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference.zh-TW.svg" alt="示意圖版型範本，由上而下依序是六塊。帶 eyebrow、title、sub 與 lines 的卡片。兩欄標籤的卡片，四個標籤分別是良好、中等、警示、中性。有小標分段的卡片。一個分節標題。上下流程的三個節點與置中連接線。cyan 三階與橘色三階各三張卡片。">
+    <figcaption>每個元件與每個 token 各用一次，做新圖時照這張抄</figcaption>
+</figure>
+
+固定的數字只有幾個：畫布 400 寬，外距 12，卡片內距 14，所以文字可用寬度是 348。卡片上緣到第一行文字 24px，行距 17px，卡片之間 10px，需要分段時放大到 14px。標籤與節點的圓角 rx 是 6，卡片是 8。
+
 #### 流程用置中的連接線
 
 上下流程的節點是滿版的圓角矩形，文字靠左。節點之間留 18px，中間放一條置中在畫布中線的連接線，線用 `.arrow`（stroke `#90a4ae`，暗色 `#6b7780`，寬 1.6），末端接一個 `.arrow-h` 的實心三角形。

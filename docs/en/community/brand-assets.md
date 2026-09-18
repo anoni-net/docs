@@ -616,6 +616,17 @@ Keep full sentences of prose out of the diagram. Those one or two footnote lines
 
 Splitting a diagram into a phone file and a desktop file behind `<picture>` and `srcset` does not work here. The privacy plugin only rewrites `img src`, `script src`, `a href` and the `image href` inside an SVG. A `srcset` is left alone, so the onion and IPFS editions would keep a clearnet request to assets.anoni.net.
 
+#### The layout reference
+
+The diagram below uses every layout element and every colour token once. Copy from it when drawing a new one: the sizes, padding and colour values are all in there.
+
+<figure markdown="span">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/diagram-reference.en.svg" alt="A layout reference for diagrams. From top to bottom: a card with an eyebrow, title, subtitle and body lines; a card with two columns of tags labelled good, medium, warning and neutral; a card with labelled sections; a section heading; a three-node top-to-bottom flow with a centred connector; then the three-step cyan ramp and the three-step orange ramp.">
+    <figcaption>Every element and every token used once, to copy from when drawing a new diagram</figcaption>
+</figure>
+
+Only a handful of numbers are fixed: a 400-wide canvas, a 12 outer margin and 14 of card padding, which leaves 348 of usable text width. From the top of a card to its first line of text is 24px, the line height is 17px, cards sit 10px apart, and that opens to 14px where a section break is wanted. Tags and flow nodes use `rx=6`, cards use `rx=8`.
+
 #### Flows use a centred connector
 
 Nodes in a top-to-bottom flow are full-width rounded rectangles with left-aligned text. Leave 18px between nodes and run a connector down the centre line of the canvas, drawn with `.arrow` (stroke `#90a4ae`, `#6b7780` in dark mode, width 1.6) and ending in a solid `.arrow-h` triangle.
