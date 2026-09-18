@@ -315,6 +315,47 @@ wordmark 的文字已经转成路径，打开的设备有没有装字体都长�
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | 次要文字、背景角色（如首页「我们关注的参与者」卡片） |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | 图片、卡片边框 |
 
+### 示意图用色
+
+`docs/diagrams/` 的手写 SVG 是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，所以下面这一组没有写成 `var(--x)`，是直接抄 hex 进 SVG 的 `<style>`。class 名称也照抄，三十几张图用的是同一套，换图的人才不用重新认。
+
+语义色，每一格是底色加框色：
+
+| class | 用在哪 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-c1` | 这一行是重点、主线路径 | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-ok` | 可以、低成本、风险低 | <span class="color-swatch" style="background:#e8f5e9"></span>`#e8f5e9` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` | <span class="color-swatch" style="background:#17301a"></span>`#17301a` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` |
+| `.card-w1` | 有条件、要注意、中等 | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-no` | 不行、高成本、风险高 | <span class="color-swatch" style="background:#fdecea"></span>`#fdecea` | <span class="color-swatch" style="background:#d32f2f"></span>`#d32f2f` | <span class="color-swatch" style="background:#35181a"></span>`#35181a` | <span class="color-swatch" style="background:#e57373"></span>`#e57373` |
+| `.card` | 没有好坏判断的一般卡片 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#23292e"></span>`#23292e` | <span class="color-swatch" style="background:#4b565e"></span>`#4b565e` |
+| `.card-n` | 弱化、次要、已排除 | <span class="color-swatch" style="background:#f4f6f7"></span>`#f4f6f7` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` | <span class="color-swatch" style="background:#1c2226"></span>`#1c2226` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+
+分层图用的 cyan 三阶，由浅到深对应由下到上或由外到内：
+
+| class | 层级 | 亮色 底 | 亮色 框 | 暗色 底 | 暗色 框 |
+|---|---|---|---|---|---|
+| `.card-c1` | 最浅，第一层 | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-c2` | 中间层 | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
+| `.card-c3` | 最深，顶层 | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+
+文字与线：
+
+| class | 用途 | 亮色 | 暗色 |
+|---|---|---|---|
+| `.t-main` | 主要文字 | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
+| `.t-mute` | 次要文字、说明 | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
+| `.t-inv` | 深色块上的反白文字 | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.rule` | 分隔线 | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+| `.arrow` | 流程箭头 | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
+
+颜色不能是唯一的语义载体。每一个色块里的文字要把语义写完整，例如标签写「匿名度 高」而不是只靠绿色。红配绿是色盲最难分的一组，文字写完整之后颜色只是辅助，看不出颜色差别的人照样读得到内容。
+
+对比实测，文字那几组都过 WCAG AA 的 4.5:1：`#212121` 在六种亮色底上是 14.1 到 16.1，`#eceff1` 在六种暗色底上是 12.3 到 14.0，`#546e7a` 在白底 5.4、在中性卡 5.0、在 cyan 卡 4.8，`#b0bec5` 在暗色卡是 7.7 到 8.4。
+
+现行 32 个文件的 `.t-mute` 写 `#607d8b`，在白底只有 4.37:1，AA 差一点。改版的时候一起换成 `#546e7a`，它同时也是上面中性色那一组的 `--neutral-muted`。
+
+框色对页面底色多半在 1.5 到 2.8:1，没有到 WCAG 1.4.11 的 3:1。这一组的判断是框色属于加强，语义由框内的文字承担，所以不强求。真的要靠颜色分辨的图（散点图、条形图）不适用这个判断，那种图的每一个数据点都要标到文字。
+
 ### Logo 专用
 
 | 颜色 | Hex | 用途 |
@@ -517,7 +558,7 @@ grep -c mxfile your-diagram.drawio.svg
 
 ### 手写 SVG 的规则
 
-手写的图是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，颜色只能写死 hex，色票照本页上方那一组。
+手写的图是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，颜色只能写死 hex，照本页上方「示意图用色」那一组抄，class 名称也一起沿用。
 
 #### 画布宽度照手机订
 
@@ -559,7 +600,9 @@ grep -c mxfile your-diagram.drawio.svg
 
 定稿前用 headless 浏览器在 360 与 390 两个宽度各量一次实际渲染字级。只看 SVG 文件本身量不出来，字级要乘上缩放比才是读者看到的大小。
 
-深色模式在 SVG 内用 `@media (prefers-color-scheme: dark)` 自己处理，站上 palette 切换的状态不会传进独立的 SVG 文件。深色那一组把主色提亮，例如 cyan-700 `#0089bf` 换成 cyan-300 `#4dbfff`。
+深色模式在 SVG 内用 `@media (prefers-color-scheme: dark)` 自己处理，色值照上方「示意图用色」的暗色那两栏抄。自己配的话原则是把主色提亮，例如 cyan-700 `#0089bf` 换成 cyan-300 `#4dbfff`。
+
+站上的 palette 切换传得进独立的 SVG。Material 在 slate 主题下会对 `body` 设 `color-scheme: dark`，浏览器把这个值带进 `img` 载入的 SVG 文件，读者手动切到暗色的时候图会跟着换。2026-09-19 在 Chromium 与 Firefox 两边都验过：系统设亮色、文档站切 slate 的组合，图照样渲染成暗色那一组。七张 drawio 图没有这一段，在暗色底上会看到白底方块。
 
 色块里的文字用中性深色 `#212121` 或白色，不要拿主色当文字色。`#ef6c00` 与 `#4caf50` 这类颜色在白底的对比度不到 4.5:1，语意靠框色与文字本身表达就够了。
 

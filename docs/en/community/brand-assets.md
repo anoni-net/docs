@@ -315,6 +315,47 @@ Align derivative work to these values. The site's `extra.css` already defines th
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | Secondary text, background roles |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | Image and card borders |
 
+### Diagram colours
+
+The hand-written SVGs in `docs/diagrams/` are standalone files pulled in by an `img` tag, so they cannot reach the page's CSS variables. The set below is therefore not written as `var(--x)`; copy the hex values straight into the SVG's `<style>`. Copy the class names too, because the thirty-odd diagrams already share one set and the next person to edit one should not have to learn a second.
+
+Semantic colours, each cell giving a fill and a border:
+
+| class | Where it goes | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-c1` | The highlighted row, the main path | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-ok` | Works, low cost, low risk | <span class="color-swatch" style="background:#e8f5e9"></span>`#e8f5e9` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` | <span class="color-swatch" style="background:#17301a"></span>`#17301a` | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` |
+| `.card-w1` | Conditional, needs care, medium | <span class="color-swatch" style="background:#fdf0e4"></span>`#fdf0e4` | <span class="color-swatch" style="background:#f8b878"></span>`#f8b878` | <span class="color-swatch" style="background:#2b1f16"></span>`#2b1f16` | <span class="color-swatch" style="background:#8a5420"></span>`#8a5420` |
+| `.card-no` | Does not work, high cost, high risk | <span class="color-swatch" style="background:#fdecea"></span>`#fdecea` | <span class="color-swatch" style="background:#d32f2f"></span>`#d32f2f` | <span class="color-swatch" style="background:#35181a"></span>`#35181a` | <span class="color-swatch" style="background:#e57373"></span>`#e57373` |
+| `.card` | A plain card with no verdict attached | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#23292e"></span>`#23292e` | <span class="color-swatch" style="background:#4b565e"></span>`#4b565e` |
+| `.card-n` | Downplayed, secondary, ruled out | <span class="color-swatch" style="background:#f4f6f7"></span>`#f4f6f7` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` | <span class="color-swatch" style="background:#1c2226"></span>`#1c2226` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+
+The three-step cyan ramp for layered diagrams, lightest to darkest running bottom to top or outside to inside:
+
+| class | Level | Light fill | Light border | Dark fill | Dark border |
+|---|---|---|---|---|---|
+| `.card-c1` | Lightest, first layer | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | <span class="color-swatch" style="background:#0d2b38"></span>`#0d2b38` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+| `.card-c2` | Middle layer | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | <span class="color-swatch" style="background:#10394b"></span>`#10394b` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` |
+| `.card-c3` | Darkest, top layer | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | <span class="color-swatch" style="background:#14495f"></span>`#14495f` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` |
+
+Text and lines:
+
+| class | Where it goes | Light | Dark |
+|---|---|---|---|
+| `.t-main` | Primary text | <span class="color-swatch" style="background:#212121"></span>`#212121` | <span class="color-swatch" style="background:#eceff1"></span>`#eceff1` |
+| `.t-mute` | Secondary text and notes | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | <span class="color-swatch" style="background:#b0bec5"></span>`#b0bec5` |
+| `.t-inv` | Reversed text on a dark block | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | <span class="color-swatch" style="background:#241708"></span>`#241708` |
+| `.rule` | Divider | <span class="color-swatch" style="background:#cfd8dc"></span>`#cfd8dc` | <span class="color-swatch" style="background:#46515a"></span>`#46515a` |
+| `.arrow` | Flow arrow | <span class="color-swatch" style="background:#90a4ae"></span>`#90a4ae` | <span class="color-swatch" style="background:#6b7780"></span>`#6b7780` |
+
+Colour must never be the only thing carrying the meaning. The text inside each block has to say it in full, so a tag reads "Anonymity High" rather than relying on the green. Red against green is the hardest pair for colour-blind readers, and once the words are complete the colour is only reinforcement, so a reader who cannot tell the two apart still gets the content.
+
+Measured contrast puts every text pairing above the WCAG AA threshold of 4.5:1. `#212121` scores 14.1 to 16.1 on the six light fills, `#eceff1` scores 12.3 to 14.0 on the six dark fills, `#546e7a` scores 5.4 on white, 5.0 on the neutral card and 4.8 on the cyan card, and `#b0bec5` scores 7.7 to 8.4 on the dark cards.
+
+The 32 files that currently set `.t-mute` to `#607d8b` reach only 4.37:1 on white, just under AA. Switch them to `#546e7a` as each one gets reworked; it is also `--neutral-muted` in the neutral set above.
+
+Border colours land between 1.5 and 2.8:1 against the page background, short of the 3:1 in WCAG 1.4.11. The judgement here is that the border reinforces and the words inside carry the meaning, so the threshold is not enforced. It does not extend to diagrams where colour genuinely does the distinguishing, such as scatter plots and bar charts; label every data point in those.
+
 ### Logo fills
 
 | Colour | Hex | Use |
@@ -517,7 +558,7 @@ Set once and stored permanently, so the picker offers brand colours rather than 
 
 ### Rules for hand-written SVG
 
-A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, taken from the palette above.
+A hand-written diagram is a standalone file pulled in by an `img` tag, so it cannot reach the page's CSS variables. Colours have to be literal hex values, copied from "Diagram colours" above along with the class names.
 
 #### Size the canvas for phones
 
@@ -559,7 +600,9 @@ When the English version runs out of room, let the diagram grow taller rather th
 
 Measure the rendered font size in a headless browser at both 360 and 390 before calling a diagram done. The SVG file alone does not tell you: multiply the font size by the scale factor to get what a reader actually sees.
 
-Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`. The site's palette toggle does not reach a standalone SVG file. Lighten the primary colour for the dark set, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
+Dark mode is handled inside the SVG with `@media (prefers-color-scheme: dark)`, taking its values from the two dark columns in "Diagram colours" above. If you do mix your own, the principle is to lighten the primary colour, for example cyan-700 `#0089bf` becoming cyan-300 `#4dbfff`.
+
+The site's palette toggle does reach a standalone SVG. Material sets `color-scheme: dark` on `body` under the slate theme, the browser carries that value into the SVG document loaded by `img`, and the diagram follows when a reader switches to dark by hand. Verified in both Chromium and Firefox on 2026-09-19: with the system set to light and the site toggled to slate, the diagram still renders its dark set. The seven drawio files have no such block and show a white panel against a dark page.
 
 Text inside a coloured block should be neutral dark `#212121` or white. Do not use a brand colour as a text colour: `#ef6c00` and `#4caf50` fall short of 4.5:1 against white, and the meaning is already carried by the border colour and the words themselves.
 
