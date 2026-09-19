@@ -16,14 +16,21 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 
 細分等級 n 的格數是 10 * 4^n + 2：
 
-    n=5   10,242 格   每格 49,801 km²   邊長約 138 km
-    n=6   40,962 格   每格 12,452 km²   邊長約 69 km
-    n=7  163,842 格   每格  3,113 km²   邊長約 35 km
+    n=5   10,242 格   每格 49,801 km²   邊長 138 km   對角 277 km
+    n=6   40,962 格   每格 12,452 km²   邊長  69 km   對角 139 km
+    n=7  163,842 格   每格  3,113 km²   邊長  35 km   對角  69 km
+    n=8  655,362 格   每格    778 km²   邊長  17 km   對角  35 km
 
-台灣是 36,193 km²，所以 n=5 只佔得到 1 格，n=6 是 3 格，n=7 是 12 格。要在整顆地球
-入鏡時就看得出六角形，格子在螢幕上至少要 8 px，換算是 470 km 的邊長，那個尺度下
-台灣連 0.05 格都排不到。「遠看認得出蜂巢」與「台灣有形狀」在同一張球面上沒辦法
-同時成立，只能靠縮放分層：遠看當細密的底紋，放大到大陸尺度才顯出六角形。
+台灣是 36,193 km²，所以 n=5 只佔得到 1 格，n=6 是 3 格，n=7 是 12 格，n=8 是 47 格。
+
+單一密度在任何縮放下都好看是做不到的，格子在螢幕上的大小跟畫面涵蓋度成反比。
+所以這幾份會同時存在，由 atlas.js 依當下的涵蓋度挑一份，放大就換細的，跟地圖
+圖磚的做法一樣。
+
+尺度本身對得上兩個東西：level 7 的對角 69 km 約等於光纖 1 毫秒來回的直線距離
+（單模光纖裡光速約 2e5 km/s，實際路徑約直線的 1.4 倍），level 8 的 35 km 對應
+0.5 毫秒。一條 Tor 電路的延遲落在 100 到 300 毫秒，同一格內的兩台中繼差不到
+1 毫秒，在電路層級分不出來。
 
 === 小國會掉格 ===
 
@@ -39,7 +46,7 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 取樣幾格的中心經緯度，前端載入時比對得上才畫。
 
 用法：
-    python3 tools/gen_hexgrid.py --level 7      # 產出 hexgrid-7.json
+    python3 tools/gen_hexgrid.py --level 8      # 產出 hexgrid-8.json
     python3 tools/gen_hexgrid.py --level 6 --out /tmp/x.json
 
 相依只有標準庫。
@@ -140,8 +147,8 @@ def main():
     ap.add_argument('--snapshot', default=os.path.join(PLAY, 'snapshot.json'),
                     help='用來檢查有中繼的國家有沒有分到格子')
     args = ap.parse_args()
-    if args.level < 1 or args.level > 7:
-        sys.exit('level 只支援 1 到 7，再高的格數與檔案大小都不划算')
+    if args.level < 1 or args.level > 8:
+        sys.exit('level 只支援 1 到 8。level 9 是 262 萬格，瀏覽器端建幾何要好幾秒')
 
     world = json.load(open(args.world, encoding='utf-8'))
     # 先算每個國家的外接框。逐格對 177 國做射線法太慢，用框先篩掉九成九。

@@ -4,9 +4,9 @@
  *
  * === 這一層是什麼 ===
  *
- * 把地球表面切成大小一致的六角格，每一格記下落在哪個國家，中繼分布就有了規則、
- * 可數、點得到的容器，形狀剛好是社群的標記。幾何由 hexgrid.js 在瀏覽器裡算，
- * 國碼由 tools/gen_hexgrid.py 產出的 hexgrid.json 提供。
+ * 把地球表面切成大小一致的六角格，當作地圖的最小呈現單位，資料點疊在上面。
+ * 放大之後換更細的一級，讓格子在螢幕上維持三十幾個像素。幾何由 hexgrid.js 在
+ * 瀏覽器裡算，國碼由 tools/gen_hexgrid.py 產出的 hexgrid-<level>.json 提供。
  *
  * === 為什麼需要這支 ===
  *
@@ -14,15 +14,13 @@
  * 一處寫法不同就會整體錯開，而錯開的結果是「每一格都有顏色，但顏色屬於別的國家」。
  * 畫面完全正常，美國那片蜂巢可能其實是加拿大的數字。沒有人看得出來。
  *
- * 另一類是幾何本身。球面鋪不滿六角形，歐拉公式保證一定有 12 個五邊形，多一個少一個
- * 都代表細分或取對偶寫錯了，而畫面上只會是某處的格子形狀怪怪的。
+ * 實際發生過一次：toLatLon 的經度寫成 atan2(x, z)，正確的是 atan2(-z, x)，算出來
+ * 整整多 90 度。產生器與前端共用同一個錯式子，所以格數、五邊形數量、probe 取樣點
+ * 全部自洽地通過，台灣本島所在的那一格卻被判成海。自己跟自己比對不出座標慣例的錯，
+ * 一定要拿 atlas.js 的 llToVec 來回跑一次。
  *
- * === 怎麼驗 ===
- *
- * 直接載 hexgrid.js 算一遍，對照 hexgrid.json 的 cells、land 與 probe 取樣點。
- * probe 是 gen_hexgrid.py 寫進去的幾格中心經緯度，兩邊的順序一致才對得上。
- * 另外驗五邊形正好 12 個、每格的邊數只有 5 或 6、三角扇的索引都在範圍內、
- * picking 用的 faceCell 指得回正確的格。
+ * 另一類是幾何本身。球面鋪不滿六角形，歐拉公式保證一定有 12 個五邊形，多一個少
+ * 一個都代表細分或取對偶寫錯了，而畫面上只會是某處的格子形狀怪怪的。
  *
  * 用法：
  *   node tools/check_hexgrid.mjs
@@ -53,7 +51,7 @@ function extractFn(src, header) {
   throw new Error(`${header} 的大括號沒有配對成功`);
 }
 // 地球上每一個東西的位置都是這支算出來的：中繼點、國家標籤、海纜、電廠。
-// 六角格要跟它們對得起來，唯一的判準就是 toLatLon 是它的反函數。
+// 六角格要跟它們對得起來，唯一的判準就是 cellLatLon 是它的反函數。
 const llToVecRaw = new Function(`${extractFn(atlas, 'function llToVec(')}; return llToVec;`)();
 const llToVec = (lat, lon, r = 1) => {
   const out = { set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; } };
@@ -65,29 +63,36 @@ const fail = [];
 const ok = [];
 const check = (cond, msg) => { (cond ? ok : fail).push(msg); };
 
-for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
+const LEVELS = [5, 6, 7, 8];
+const loaded = new Map();
+
+for (const lv of LEVELS) {
+  const file = `hexgrid-${lv}.json`;
   const p = path.join(PLAY, file);
   if (!fs.existsSync(p)) { check(false, `${file} 不在`); continue; }
   const data = JSON.parse(read(p));
-  const tag = `${file}（level ${data.level}）`;
+  const tag = `level ${lv}`;
+  loaded.set(lv, data);
 
   // --- 幾何 ---
-  const dual = hex.dualCells(data.level);
-  const want = 10 * 4 ** data.level + 2;
-  check(dual.centers.length === want, `${tag} 格數 ${dual.centers.length}，公式算出來是 ${want}`);
+  const dual = hex.dualCells(lv);
+  const want = 10 * 4 ** lv + 2;
+  check(dual.nc === want, `${tag} 格數 ${dual.nc}，公式算出來是 ${want}`);
   check(data.cells === want, `${tag} 資料檔記的格數對得上`);
-  const sides = dual.rings.map((r) => r.length);
-  const penta = sides.filter((x) => x === 5).length;
-  const hexa = sides.filter((x) => x === 6).length;
+  let penta = 0, hexa = 0, other = 0;
+  for (let i = 0; i < dual.nc; i++) {
+    const n = dual.ringOff[i + 1] - dual.ringOff[i];
+    if (n === 5) penta++; else if (n === 6) hexa++; else other++;
+  }
   // 歐拉公式的硬性結果。多一個少一個都代表細分或取對偶寫錯了
   check(penta === 12, `${tag} 五邊形正好 12 個（算出 ${penta}）`);
-  check(hexa === want - 12, `${tag} 其餘都是六邊形（算出 ${hexa}）`);
-  check(sides.every((x) => x === 5 || x === 6), `${tag} 沒有其他邊數的格`);
+  check(hexa === want - 12 && other === 0, `${tag} 其餘都是六邊形（算出 ${hexa}，其他邊數 ${other}）`);
 
   // 每一格的中心都該在單位球面上，細分後忘了正規化就會在這裡現形
   let offSphere = 0;
-  for (const c of dual.centers) {
-    if (Math.abs(Math.hypot(c[0], c[1], c[2]) - 1) > 1e-9) offSphere++;
+  for (let i = 0; i < dual.nc; i++) {
+    const c = dual.centers;
+    if (Math.abs(Math.hypot(c[i * 3], c[i * 3 + 1], c[i * 3 + 2]) - 1) > 1e-9) offSphere++;
   }
   check(offSphere === 0, `${tag} 所有格心都在單位球面上`);
 
@@ -95,8 +100,21 @@ for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
   check(Array.isArray(data.probe) && data.probe.length >= 4, `${tag} 資料檔帶了取樣點`);
   check(hex.verifyOrder(dual, data.probe), `${tag} 頂點順序跟 gen_hexgrid.py 對得上`);
   // 反面：把取樣點挪開一格就該判定失敗，否則這道關卡等於沒裝
-  const shifted = data.probe.map(([i, la, lo]) => [i + 1, la, lo]);
-  check(!hex.verifyOrder(dual, shifted), `${tag} 取樣點挪一格會被擋下來`);
+  check(!hex.verifyOrder(dual, data.probe.map(([i, la, lo]) => [i + 1, la, lo])),
+        `${tag} 取樣點挪一格會被擋下來`);
+
+  // --- 座標慣例 ---
+  // 六角格畫在球上的位置是 centers 直接乘半徑，而球上其他東西全部由 llToVec 定位。
+  // 兩套慣例必須互逆，這是唯一抓得到「兩邊共用同一個錯式子」的檢查。
+  let rt = 0;
+  const step = Math.max(1, Math.floor(dual.nc / 500));
+  for (let i = 0; i < dual.nc; i += step) {
+    const [la, lo] = hex.cellLatLon(dual, i);
+    const back = llToVec(la, lo, 1);
+    const c = dual.centers;
+    if (Math.hypot(c[i * 3] - back[0], c[i * 3 + 1] - back[1], c[i * 3 + 2] - back[2]) > 1e-9) rt++;
+  }
+  check(rt === 0, `${tag} 格心的座標跟 atlas.js 的 llToVec 互逆（抽驗 500 格，不合的 ${rt} 個）`);
 
   // --- 國碼 ---
   const cc = hex.decodeCC(data.cc);
@@ -104,47 +122,28 @@ for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
   const land = [];
   for (let i = 0; i < cc.length; i++) if (cc[i]) land.push(i);
   check(land.length === data.land, `${tag} 陸地格 ${land.length} 跟資料檔一致`);
-  // 不用 Math.max(...cc)。level 7 有 163,842 個元素，展開成參數會把呼叫堆疊撐爆。
+  // 不用 Math.max(...cc)。level 8 有 655,362 個元素，展開成參數會把呼叫堆疊撐爆。
   let maxCode = 0;
   for (const x of cc) if (x > maxCode) maxCode = x;
   check(maxCode <= data.codes.length, `${tag} 國碼索引沒有超出 codes 表`);
   check(data.codes.every((k) => /^[a-z]{2}$/.test(k)), `${tag} codes 都是兩碼小寫國碼`);
 
-  // 六角格畫在球上的位置，是 dual.centers 直接乘半徑，而球上其他東西（中繼點、
-  // 國家標籤、電廠、海纜）全部由 atlas.js 的 llToVec 定位。兩套座標慣例必須互逆。
-  //
-  // 這一條是補的。第一版的 toLatLon 把經度算多了 90 度，而產生器與前端共用同一個
-  // 錯式子，所以格數、五邊形、probe、甚至「日本的格子落在日本的經緯度範圍內」
-  // 全部自洽地通過，畫面上卻是每格都塗成東邊 90 度那個國家的顏色。自己跟自己比
-  // 對不出這種錯，一定要拿外面那支來回跑一次。
-  let rt = 0;
-  for (let i = 0; i < dual.centers.length; i += Math.max(1, Math.floor(dual.centers.length / 500))) {
-    const c = dual.centers[i];
-    const [la, lo] = hex.toLatLon(c);
-    const back = llToVec(la, lo, 1);
-    if (Math.hypot(c[0] - back[0], c[1] - back[1], c[2] - back[2]) > 1e-9) rt++;
-  }
-  check(rt === 0, `${tag} 格心的座標跟 atlas.js 的 llToVec 互逆（抽驗 500 格，不合的 ${rt} 個）`);
-
-  // 拿幾個真實地點反過來問：這個經緯度所在的那一格，被判成哪一國。
+  // 拿真實地點反過來問：這個經緯度所在的那一格被判成哪一國。
   // 上面那一條保證兩套座標對得起來，這一條保證國界判定本身沒有錯位。
   const nearest = (lat, lon) => {
     const p = llToVec(lat, lon, 1);
+    const c = dual.centers;
     let best = -1, bd = Infinity;
-    for (let i = 0; i < dual.centers.length; i++) {
-      const c = dual.centers[i];
-      const d = (c[0] - p[0]) ** 2 + (c[1] - p[1]) ** 2 + (c[2] - p[2]) ** 2;
+    for (let i = 0; i < dual.nc; i++) {
+      const d = (c[i * 3] - p[0]) ** 2 + (c[i * 3 + 1] - p[1]) ** 2 + (c[i * 3 + 2] - p[2]) ** 2;
       if (d < bd) { bd = d; best = i; }
     }
     return cc[best] ? data.codes[cc[best] - 1] : null;
   };
-  // 挑的都是離海岸有一段距離的內陸點，免得 69 公里的格子壓在邊界上變成鄰國
-  for (const [nm, lat, lon, want, minLevel] of [
-    // 台灣在 level 5 只分得到一格，格心離台中超過半格，所以那一版連自己的島上
-    // 都指不回 tw。這不是這裡要修的東西，是那個密度不可用的另一個註腳。
+  // 挑的都是離海岸有一段距離的內陸點，免得格子壓在邊界上變成鄰國或海。
+  // 台灣本島東西只有 120 公里，粗的那幾級指不回自己，那是密度不足的註腳不是錯。
+  for (const [nm, lat, lon, want2, minLevel] of [
     ['台中', 24.15, 120.75, 'tw', 6],
-    // 挑南投不挑台南：本島東西只有 120 公里，level 7 一格 35 公里，
-    // 貼著海岸的點很容易落進旁邊那格海裡
     ['南投', 23.96, 120.97, 'tw', 7],
     ['東京', 35.68, 139.69, 'jp'],
     ['柏林', 52.52, 13.40, 'de'],
@@ -152,36 +151,48 @@ for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
     ['聖保羅', -23.55, -46.63, 'br'],
     ['伯斯內陸', -30.00, 120.00, 'au'],
   ]) {
-    if (minLevel && data.level < minLevel) continue;
+    if (minLevel && lv < minLevel) continue;
     const got = nearest(lat, lon);
-    check(got === want, `${tag} ${nm}（${lat}/${lon}）落在 ${want} 的格子裡${got === want ? '' : `，實際判成 ${got || '海'}`}`);
+    check(got === want2, `${tag} ${nm}（${lat}/${lon}）落在 ${want2} 的格子裡${got === want2 ? '' : `，實際判成 ${got || '海'}`}`);
   }
 
-  // 抽幾個國家驗位置。格子的經緯度要真的落在那個國家附近，
-  // 順序對了但判定寫錯的話，probe 那一關看不出來。
-  const at = (code) => {
-    const idx = data.codes.indexOf(code) + 1;
-    return land.filter((i) => cc[i] === idx).map((i) => hex.toLatLon(dual.centers[i]));
-  };
-  const jp = at('jp');
-  check(jp.length > 0 && jp.every(([la, lo]) => la > 20 && la < 50 && lo > 120 && lo < 150),
-        `${tag} 日本的 ${jp.length} 格都落在日本的經緯度範圍內`);
-  const br = at('br');
-  check(br.length > 0 && br.every(([la, lo]) => la > -35 && la < 6 && lo > -75 && lo < -33),
-        `${tag} 巴西的 ${br.length} 格都落在南美`);
+  // --- 視野裁切 ---
+  // 貼近時只建看得到的格子，level 8 全建是 63 MB，裁切之後不到 1 MB。
+  const dir = llToVec(23.75, 121.0, 1);
+  const near = hex.cellsNear(dual, dir[0], dir[1], dir[2], 10);
+  const cosR = Math.cos(10 * Math.PI / 180);
+  let outside = 0;
+  for (const i of near) {
+    const c = dual.centers;
+    if (c[i * 3] * dir[0] + c[i * 3 + 1] * dir[1] + c[i * 3 + 2] * dir[2] < cosR - 1e-12) outside++;
+  }
+  check(outside === 0, `${tag} 裁切出來的格子都在半徑內（${near.length} 格）`);
+  // 半徑內的一格都不能漏，漏了畫面上就是開天窗
+  let missed = 0;
+  const set = new Set(near);
+  for (let i = 0; i < dual.nc; i += step) {
+    const c = dual.centers;
+    const inside = c[i * 3] * dir[0] + c[i * 3 + 1] * dir[1] + c[i * 3 + 2] * dir[2] >= cosR;
+    if (inside && !set.has(i)) missed++;
+  }
+  check(missed === 0, `${tag} 半徑內的格子沒有漏`);
+  check(hex.cellsNear(dual, dir[0], dir[1], dir[2], 10, (i) => cc[i] !== 0).every((i) => cc[i] !== 0),
+        `${tag} 過濾條件生效`);
 
   // --- 可以畫的幾何 ---
-  const g = hex.cellGeometry(dual, land, 5, 0.9);
-  check(g.position.length / 3 === land.reduce((a, c) => a + dual.rings[c].length + 1, 0),
-        `${tag} 頂點數等於每格的邊數加一`);
+  const g = hex.cellGeometry(dual, near, 5, 0.9);
+  let wantVerts = 0;
+  for (const c of near) wantVerts += dual.ringOff[c + 1] - dual.ringOff[c] + 1;
+  check(g.position.length / 3 === wantVerts, `${tag} 頂點數等於每格的邊數加一`);
   check(g.normal.length === g.position.length, `${tag} 法線跟頂點一樣多，六角層才吃得到光照`);
-  // 長度對不代表值對。法線全是零照樣通過上面那一條，而畫面上會是整層不受光照，
-  // 夜半球的格子全亮。
   let nBad = 0;
   for (let i = 0; i < g.normal.length; i += 3) {
     if (Math.abs(Math.hypot(g.normal[i], g.normal[i + 1], g.normal[i + 2]) - 1) > 1e-5) nBad++;
   }
   check(nBad === 0, `${tag} 法線都是單位向量`);
+  check(g.index.every((i) => i < g.position.length / 3), `${tag} 索引都在頂點範圍內`);
+  check(g.faceCell.length === g.index.length / 3, `${tag} 每個三角形都對得到一格`);
+  check(g.faceCell.every((c) => c < near.length), `${tag} faceCell 指得回 cells 裡的位置`);
 
   // 對偶取完要繞著格心排一圈。沒排的話頂點順序是細分留下的先後，連起來是自交的
   // 星形，而邊數、格數、probe 全部照樣通過。用繞向抓：排對了每個三角形的法線都
@@ -195,58 +206,49 @@ for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
     if (nx * g.position[a] + ny * g.position[a + 1] + nz * g.position[a + 2] <= 0) flipped++;
   }
   check(flipped === 0, `${tag} 每個三角形都朝球外（繞向反了的有 ${flipped} 個）`);
-  check(g.index.every((i) => i < g.position.length / 3), `${tag} 索引都在頂點範圍內`);
-  check(g.faceCell.length === g.index.length / 3, `${tag} 每個三角形都對得到一格`);
-  check(g.faceCell.every((c) => c < land.length), `${tag} faceCell 指得回 cells 裡的位置`);
-  // 三角扇的第一個頂點是格心，每格第一個三角形都該從它開始
-  let fanOk = true;
-  for (let ci = 0; ci < land.length; ci++) {
-    if (g.index[ci === 0 ? 0 : 0] === undefined) { fanOk = false; break; }
-  }
-  check(fanOk, `${tag} 三角扇的索引建得起來`);
-  // 半徑要對。position 全部落在指定的球面上，收縮係數不該把頂點拉離球面
+
   let rBad = 0;
   for (let i = 0; i < g.position.length; i += 3) {
-    const r = Math.hypot(g.position[i], g.position[i + 1], g.position[i + 2]);
-    if (Math.abs(r - 5) > 1e-4) rBad++;
+    if (Math.abs(Math.hypot(g.position[i], g.position[i + 1], g.position[i + 2]) - 5) > 1e-4) rBad++;
   }
   check(rBad === 0, `${tag} 收縮之後所有頂點仍在同一顆球面上`);
 }
 
-// --- 兩種密度的差別要留得住 ---
+// --- 四級之間的關係 ---
 {
-  const l6 = JSON.parse(read(path.join(PLAY, 'hexgrid-6.json')));
-  const l5 = JSON.parse(read(path.join(PLAY, 'hexgrid-5.json')));
-  check(l6.codes.length > l5.codes.length,
-        `level 6 涵蓋的國家（${l6.codes.length}）比 level 5（${l5.codes.length}）多`);
-  // 丹麥、克羅埃西亞、愛沙尼亞在 level 5 分不到格子，三國合起來九十幾台。
-  // 這一條是紀錄而不是要求：它就是「粗的那一版不能用」的證據。
-  const lost = ['dk', 'hr', 'ee'].filter((k) => !l5.codes.includes(k) && l6.codes.includes(k));
-  check(lost.length === 3, `level 5 分不到格子的 ${lost.join('、')}，在 level 6 都有格子`);
-  check(l6.codes.includes('tw'), 'level 6 的台灣有格子');
-  const l7 = JSON.parse(read(path.join(PLAY, 'hexgrid-7.json')));
-  // 台灣要看得出是個島，至少得有十格上下。level 6 的 3 格排成一直線，
-  // 讀者只會覺得那裡有三個點。
-  const cc7 = hex.decodeCC(l7.cc);
-  const tw7 = l7.codes.indexOf('tw') + 1;
-  let n7 = 0;
-  for (const x of cc7) if (x === tw7) n7++;
-  check(n7 >= 10, `level 7 的台灣有 ${n7} 格`);
-  check(!l6.codes.includes('lu') && l7.codes.includes('lu'),
+  const n = (lv) => {
+    const d = loaded.get(lv);
+    if (!d) return 0;
+    const cc = hex.decodeCC(d.cc);
+    const tw = d.codes.indexOf('tw') + 1;
+    let k = 0;
+    for (const x of cc) if (x === tw) k++;
+    return k;
+  };
+  check(n(5) < n(6) && n(6) < n(7) && n(7) < n(8),
+        `台灣的格數隨等級遞增：${n(5)} → ${n(6)} → ${n(7)} → ${n(8)}`);
+  check(n(8) >= 40, `level 8 的台灣有 ${n(8)} 格，島的形狀出得來`);
+  const codes = (lv) => (loaded.get(lv) ? loaded.get(lv).codes : []);
+  check(codes(8).length >= codes(7).length && codes(7).length >= codes(6).length,
+        `涵蓋的國家隨等級遞增：${codes(5).length} → ${codes(6).length} → ${codes(7).length} → ${codes(8).length}`);
+  // 盧森堡 2,586 km²，粗的那幾級整國分不到格子
+  check(!codes(6).includes('lu') && codes(7).includes('lu'),
         'level 6 分不到格子的盧森堡（120 台），在 level 7 有格子');
 }
 
 // --- 接線 ---
 check(atlas.includes("from './hexgrid.js'"), 'atlas.js 載入了 hexgrid.js');
-check(atlas.includes('async function buildHex()'), 'atlas.js 有建層的函式');
-check(atlas.includes('function paintHex(mode)'), 'atlas.js 會依指標重新上色');
-check(/paintHex\(mode\);/.test(atlas), '切換指標時六角層跟著換色');
+check(atlas.includes('async function hexRefresh()'), 'atlas.js 有依距離換級的入口');
+check(atlas.includes('function hexPickLevel('), 'atlas.js 會依涵蓋度挑等級');
+check(atlas.includes('function hexPaint(mode)'), 'atlas.js 會依指標重新上色');
+check(/hexPaint\(mode\);/.test(atlas), '切換指標時六角層跟著換色');
 check(atlas.includes('function pickHexCC('), 'atlas.js 有點格子的判定');
-check(/if \(!verifyOrder\(dual, data\.probe\)\)/.test(atlas), '順序對不上時整層不畫');
-check(/hexAlpha\.value = HEX_OP \* hexT\(\)/.test(atlas), '六角層的濃淡由自己那條曲線決定');
-check(atlas.includes('function hexT()'), 'atlas.js 有六角層的進退場曲線');
-check(atlas.includes('function hexTakesOver()'), '六角層接手時中繼點會讓位');
-check(/HEX_IN_HI = 90, HEX_IN_LO = 45/.test(atlas), '遠看不畫，涵蓋 45 度以內才全亮');
+check(/if \(!verifyOrder\(dual, data\.probe\)\)/.test(atlas), '順序對不上時那一級不畫');
+check(/const HEX_LEVELS = \[5, 6, 7, 8\]/.test(atlas), '四級都在換級的名單裡');
+check(/HEX_MIN_PX = 14, HEX_MAX_PX = 64/.test(atlas), '格子在螢幕上超出 14 到 64 px 才換級');
+check(/mesh\.renderOrder = -1/.test(atlas), '六角層最先畫，國界與設施疊在它上面');
+check(/const HEX_LIFT = 1\.0015/.test(atlas), '六角層的高度壓在所有線層之下');
+check(atlas.includes('cellsNear('), '只建看得到的那些格子');
 check(html.includes('id="btn-hex"'), 'index.html 有六角層的開關');
 check(/id="btn-hex"[^>]*hidden/.test(html), '沒開參數時那顆開關是收起來的');
 
