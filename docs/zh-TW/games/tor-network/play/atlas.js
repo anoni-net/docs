@@ -1,7 +1,7 @@
 // Tor 網路現況地球儀
 // 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼依國別聚成一團一團畫在地球上。
 // 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
-// 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
+// 底圖用 countries.json（Natural Earth 50m，亞洲簡化到約 1 公里）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
 import * as THREE from 'three';
 import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
          float, mix, hash, uniform, instanceIndex,
@@ -214,7 +214,7 @@ const roleHex = (k) => '#' + ROLE_COL[k].toString(16).padStart(6, '0');
 const SHOW_DOTS = true;
 
 // ISO2 → [緯度, 經度] 手調的國家定位。優先於 countries.json 算出來的質心，
-// 因為 Natural Earth 110m 沒有新加坡、香港這種小地方，挪威一類的質心也會飄到鄰國。
+// 因為挪威一類的質心會飄到鄰國。新加坡、香港在換到 50m 之後國界裡就有了，手調的仍留著當後備。
 const CENTROID = {
   us:[39.8,-98.6], de:[51.2,10.4], nl:[52.2,5.3], se:[62,17.6], fr:[46.6,2.5], at:[47.6,14.1],
   gb:[54,-2.4], ca:[56,-106], ch:[46.8,8.2], fi:[64,26], ro:[45.9,24.9], lu:[49.8,6.1],
@@ -1134,7 +1134,7 @@ function buildTrunks() {
 // 想放寬門檻請先讀那支程式開頭關於 anomaly 的說明。
 //
 // 這一層直接吃 countries.json 的國界，等於把那份資料的領土畫法照搬到畫面上。
-// 現用的 Natural Earth 110m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
+// 現用的 Natural Earth 50m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
 // 換底圖資料前請重新確認這件事。
 // 把國界多邊形轉成貼在球面上的線段。pick 決定要哪些國家，height 是離地高度。
 // 國界的相鄰點最遠有 9 度（俄羅斯北岸），直線連過去會從地球內部穿過，中段被球體
@@ -1182,7 +1182,7 @@ function ringSegments(world, pick, height) {
 // 縣市界線用貼圖畫不出來。線段不論放到多近都是銳利的。
 //
 // 縣市多邊形的外圍就是海岸線，而且是實測等級的。continents.json 那條海岸線來自
-// Natural Earth 110m，一度才一個點，在縣市尺度下完全不能看。所以貼近台灣的時候，
+// Natural Earth 50m，亞洲簡化到約 1 公里，在縣市尺度下仍然不夠。所以貼近台灣的時候，
 // 實際上是這一層在同時提供縣市界與可用的海岸線。
 //
 // 遠看時整個台灣只有幾十個像素，二十二個縣市的線會糊成一團亮斑，反而讓台灣變得

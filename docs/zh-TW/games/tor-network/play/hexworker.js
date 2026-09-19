@@ -28,7 +28,7 @@ function ensureJudge() {
   if (judgePromise) return judgePromise;
   judgePromise = Promise.all([
     fetch('./countries.json').then((r) => r.json()),
-    // 縣市界抓不到的話台灣就退回用 110m 的國界判，金門會變成中國，但不會整個壞掉
+    // 縣市界抓不到的話台灣就退回用國界判，金門與馬祖會變成海，但不會整個壞掉
     fetch('./tw-admin.json').then((r) => r.json()).catch(() => null),
   ]).then(([world, adm]) => judgeIndex(world, adm));
   return judgePromise;

@@ -453,8 +453,8 @@ export function inRings(rings, lon, lat) {
 /**
  * 判國碼要用的外接框。逐格對 177 國做射線法太慢，用框先篩掉九成九。
  *
- * 台灣另外收一份而且排在最前面：Natural Earth 110m 把金門畫進中國的多邊形裡，
- * 馬祖、澎湖、綠島、蘭嶼那個比例尺下整個沒收錄。縣市界那份是內政部的，22 個縣市都在。
+ * 台灣另外收一份而且排在最前面：Natural Earth 50m 沒有收錄金門與馬祖，
+ * 澎湖、綠島、蘭嶼也一樣。縣市界那份是內政部的，22 個縣市都在。
  */
 export function judgeIndex(world, twAdmin) {
   const box = (rings) => {

@@ -34,19 +34,18 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 
 === 小國會掉格 ===
 
-國界來自 countries.json，也就是 Natural Earth 110m，那個比例尺裡本來就沒有新加坡、
-香港這類小地方，它們在任何等級下都分不到格。地球儀原本靠 CENTROID 手調座標補這一塊，
+國界來自 countries.json，也就是 Natural Earth 50m。那一份的亞洲簡化到約 1 公里，新加坡、
+香港、澳門都有，110m 那個比例尺整個沒收錄它們。地球儀原本靠 CENTROID 手調座標補這一塊，
 六角層沒有對應的補救，所以輸出時會把「有中繼卻沒有格子」的國家列出來，呼叫端自己
 決定要不要留原本的點。
 
 === 台灣的領土另外判 ===
 
-Natural Earth 110m 對台灣有兩個問題。金門落在它畫的中國多邊形裡面，而馬祖、澎湖、
-烏坵、綠島、蘭嶼在那個比例尺下整個沒有收錄，全部算成海。照它判的話，六角層會把
-金門塗成中國的顏色，其餘離島變成海上的空白。
+Natural Earth 對台灣的離島收得不全。金門、馬祖、烏坵在 50m 裡沒有收錄（110m 更糟，
+金門直接落在它畫的中國多邊形裡）。照它判的話那些離島會變成海上的空白。
 
 所以台灣改用 tw-admin.json，也就是內政部國土測繪中心的直轄市、縣市界線，22 個縣市
-都在，容差 67 公尺，比 110m 精確兩個數量級。判定順序是台灣優先：格心先對縣市界試
+都在，容差 67 公尺，比 50m 精確一個數量級以上。判定順序是台灣優先：格心先對縣市界試
 一次，中了就是 tw，沒中才去問 countries.json。
 
 釣魚台列嶼、東沙島與南沙太平島照那份原始資料所屬的縣市收錄，跟地球儀的縣市界圖層
@@ -65,6 +64,10 @@ Natural Earth 110m 對台灣有兩個問題。金門落在它畫的中國多邊�
 
 島太小就不補：對角不到格子對角 12% 的島，補出來會是一整格代表一個小點，那已經
 不是精度不足而是誤導。那些島在更細的等級才會出現。
+
+補完小島還要再掃一次「有中繼卻一格都沒有」的國家。50m 的邊界比 110m 準，細長的
+國家反而更容易整個掉格：荷蘭有 1,154 台中繼，在 level 5 那個 138 公里的格子下，
+格心全部落在海上。這種情況補一格在它最大那塊陸地的中心，找不到空格就放棄。
 
 === 前端怎麼用這份資料 ===
 
@@ -291,7 +294,7 @@ def gen_local(args, tw_rings, tw_box, boxes):
 
     r = lambda x: round(x, 4)   # 小數點後四位約 11 公尺，比這一級的格子細三個數量級
     out = {
-        'source': 'Natural Earth 110m + 內政部國土測繪中心直轄市、縣市界線',
+        'source': 'Natural Earth 50m + 內政部國土測繪中心直轄市、縣市界線',
         'note': '台灣的局部高解析六角格。幾何直接存在這裡，全球那幾份只存國碼由前端算。',
         'local': 'tw', 'level': level, 'center': list(TW_CENTER), 'radius': TW_RADIUS,
         'cells': len(cells), 'codes': codes,
@@ -317,7 +320,7 @@ def main():
     ap.add_argument('--out', default=None)
     ap.add_argument('--world', default=os.path.join(PLAY, 'countries.json'))
     ap.add_argument('--tw-admin', default=os.path.join(PLAY, 'tw-admin.json'),
-                    help='台灣的縣市界。110m 的國界少了離島也把金門畫進中國，所以台灣優先用這份')
+                    help='台灣的縣市界。國界那份沒有收錄金門馬祖，所以台灣優先用這份')
     ap.add_argument('--local', default=None, choices=['tw'],
                     help='產出局部高解析網格而不是全球的那一份')
     ap.add_argument('--local-level', type=int, default=9)
@@ -337,7 +340,7 @@ def main():
         for c in adm.get('c', []):
             tw_rings.extend(c.get('p', []))
     except OSError:
-        print('（找不到 tw-admin.json，台灣改用 110m 的國界判，金門會被算成中國）')
+        print('（找不到 tw-admin.json，台灣改用國界判，金門與馬祖會變成海）')
     if tw_rings:
         lo0 = la0 = 1e9
         lo1 = la1 = -1e9
@@ -370,7 +373,7 @@ def main():
     cc = bytearray(len(verts))
     for i, p in enumerate(verts):
         lat, lon = to_ll(p)
-        # 台灣優先。中了就不必再問國界，也就不會被 110m 那份的中國多邊形搶走金門。
+        # 台灣優先。中了就不必再問國界，離島也就不會變成海上的空白。
         if tw_box and tw_box[0] <= lon <= tw_box[2] and tw_box[1] <= lat <= tw_box[3] \
                 and in_rings(tw_rings, lon, lat):
             if 'tw' not in index:
@@ -425,6 +428,57 @@ def main():
         if added:
             print(f'小島補格：{added} 格（比一格小的島，格心落不到島上）')
 
+    # 有中繼卻一格都沒有的國家，補一格在它最大那塊陸地的中心。
+    # 50m 的邊界比 110m 準，細長的國家反而更容易整個掉格，荷蘭在 level 5 就是這樣。
+    want = set()
+    try:
+        snap0 = json.load(open(args.snapshot, encoding='utf-8'))
+        for cc_, _r, _w in snap0['relays']:
+            if cc_:
+                want.add(cc_)
+    except OSError:
+        pass
+    if want:
+        have = {c for c in codes}
+        miss = [c for c in boxes if c[0] in want and c[0] not in have]
+        edge_km = math.sqrt(4 * math.pi * 6371 ** 2 / len(verts) / 2.598)
+        diag_deg = 2 * edge_km / 111.19
+        fixed = []
+        for k, lo0, la0, lo1, la1, rings in miss:
+            # 取面積最大的那個環當代表，離島不能代表整個國家
+            best_ring, best_area = None, -1.0
+            for r in rings:
+                a0 = a1 = 1e9
+                b0 = b1 = -1e9
+                a0 = min(r[i] for i in range(0, len(r), 2))
+                b0 = max(r[i] for i in range(0, len(r), 2))
+                a1 = min(r[i] for i in range(1, len(r), 2))
+                b1 = max(r[i] for i in range(1, len(r), 2))
+                area = (b0 - a0) * (b1 - a1)
+                if area > best_area:
+                    best_area, best_ring = area, (a0, a1, b0, b1)
+            if not best_ring:
+                continue
+            clon = (best_ring[0] + best_ring[2]) / 2
+            clat = (best_ring[1] + best_ring[3]) / 2
+            cv = ll_to_vec(clat, clon)
+            best, bd = -1, -2.0
+            for i, p in enumerate(verts):
+                d = p[0] * cv[0] + p[1] * cv[1] + p[2] * cv[2]
+                if d > bd:
+                    bd, best = d, i
+            # 離得太遠就不補。補在別的大陸上比沒有還糟。
+            if best < 0 or math.degrees(math.acos(min(1.0, bd))) > diag_deg:
+                continue
+            if cc[best]:
+                continue
+            codes.append(k)
+            index[k] = len(codes)
+            cc[best] = index[k]
+            fixed.append(k)
+        if fixed:
+            print(f'補回整個掉格的國家：{"、".join(fixed)}')
+
     if len(codes) > 255:
         sys.exit(f'國家數 {len(codes)} 超過 255，Uint8 放不下')
 
@@ -461,7 +515,7 @@ def main():
     print(f'陸地 {land:,} 格（{land / len(verts) * 100:.0f}%），{len(codes)} 個國家，台灣 {tw_n} 格')
     print(f'寫出 {path}，{size / 1024:.0f} KB')
 
-    # 有中繼卻分不到格子的國家。Natural Earth 110m 沒有新加坡、香港這類小地方，
+    # 有中繼卻分不到格子的國家。國界那份收不到的小地方，
     # 六角層畫不出它們，呼叫端要自己決定原本的點要不要留著。
     try:
         snap = json.load(open(args.snapshot, encoding='utf-8'))

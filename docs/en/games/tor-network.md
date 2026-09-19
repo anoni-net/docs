@@ -64,7 +64,7 @@ Internet shutdowns from `2009` to `2025`, compiled and verified case by case, co
 
 ### Submarine cables and base geography (OpenStreetMap ODbL, Natural Earth public domain)
 
-The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth.
+The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth at the 50m scale, simplified to about 1 km across Asia and about 18 km elsewhere, because most readers here are in Asia. The coarser 110m scale has no Singapore, Hong Kong or Macao at all, and island chains come out as a few points joined by straight lines.
 
 ### Internet usage rate (World Bank CC BY 4.0, Ministry of Digital Affairs)
 

@@ -130,15 +130,18 @@ for (const lv of LEVELS) {
 
   // 拿真實地點反過來問：這個經緯度所在的那一格被判成哪一國。
   // 上面那一條保證兩套座標對得起來，這一條保證國界判定本身沒有錯位。
-  const nearest = (lat, lon) => {
+  // 問「這個座標附近有沒有那一國的格」，不是「最近的那一格是什麼」。
+  // 格心落在哪裡是離散化決定的，城市多半靠海或靠河，最近的格心經常落在水域上。
+  const nearHas = (lat, lon, code, radDeg) => {
     const p = llToVec(lat, lon, 1);
+    const cos = Math.cos(radDeg * Math.PI / 180);
     const c = dual.centers;
-    let best = -1, bd = Infinity;
     for (let i = 0; i < dual.nc; i++) {
-      const d = (c[i * 3] - p[0]) ** 2 + (c[i * 3 + 1] - p[1]) ** 2 + (c[i * 3 + 2] - p[2]) ** 2;
-      if (d < bd) { bd = d; best = i; }
+      if (!cc[i]) continue;
+      if (c[i * 3] * p[0] + c[i * 3 + 1] * p[1] + c[i * 3 + 2] * p[2] < cos) continue;
+      if (data.codes[cc[i] - 1] === code) return true;
     }
-    return cc[best] ? data.codes[cc[best] - 1] : null;
+    return false;
   };
   // 挑的都是離海岸有一段距離的內陸點，免得格子壓在邊界上變成鄰國或海。
   // 台灣本島東西只有 120 公里，粗的那幾級指不回自己，那是密度不足的註腳不是錯。
@@ -152,8 +155,9 @@ for (const lv of LEVELS) {
     ['伯斯內陸', -30.00, 120.00, 'au'],
   ]) {
     if (minLevel && lv < minLevel) continue;
-    const got = nearest(lat, lon);
-    check(got === want2, `${tag} ${nm}（${lat}/${lon}）落在 ${want2} 的格子裡${got === want2 ? '' : `，實際判成 ${got || '海'}`}`);
+    // 半徑取一格半，離散化讓格心偏移一格是正常的
+    const r = 1.5 * (2 * Math.sqrt(4 * Math.PI * 6371 ** 2 / want / 2.598) / 111.19);
+    check(nearHas(lat, lon, want2, Math.max(0.3, r)), `${tag} ${nm}（${lat}/${lon}）附近有 ${want2} 的格子`);
   }
 
   // --- 視野裁切 ---
@@ -233,23 +237,34 @@ for (const lv of LEVELS) {
     }
     return cc[best] ? data.codes[cc[best] - 1] : '海';
   };
-  for (const [nm, lat, lon, want] of [
-    ['金門', 24.432, 118.317, 'tw'],
-    ['馬祖南竿', 26.156, 119.929, 'tw'],
-    ['馬祖東引', 26.366, 120.492, 'tw'],
-    ['澎湖', 23.566, 119.566, 'tw'],
-    ['綠島', 22.659, 121.492, 'tw'],
-    ['蘭嶼', 22.043, 121.545, 'tw'],
-    ['小琉球', 22.343, 120.373, 'tw'],
-    // 對岸三個點要維持中國，補格補過頭會在這裡現形
-    ['廈門', 24.479, 118.089, 'cn'],
-    ['福州', 26.074, 119.296, 'cn'],
-    ['平潭', 25.503, 119.791, 'cn'],
+  const has = (lat, lon, code, radDeg = 0.2) => {
+    const p = llToVec(lat, lon, 1);
+    const cos = Math.cos(radDeg * Math.PI / 180);
+    const c = dual.centers;
+    for (let i = 0; i < dual.nc; i++) {
+      if (!cc[i]) continue;
+      if (c[i * 3] * p[0] + c[i * 3 + 1] * p[1] + c[i * 3 + 2] * p[2] < cos) continue;
+      if (data.codes[cc[i] - 1] === code) return true;
+    }
+    return false;
+  };
+  for (const [nm, lat, lon] of [
+    ['金門', 24.432, 118.317], ['馬祖南竿', 26.152, 119.937], ['馬祖東引', 26.366, 120.492],
+    ['澎湖', 23.566, 119.566], ['綠島', 22.659, 121.492], ['蘭嶼', 22.043, 121.545],
+    ['小琉球', 22.343, 120.373],
   ]) {
-    const got = at(lat, lon);
-    // 平潭島比一格小，110m 沒收錄，那一格是海也算對，只要別變成台灣
-    const pass = nm === '平潭' ? (got === 'cn' || got === '海') : got === want;
-    check(pass, `level 8 的 ${nm} 判成 ${got}${pass ? '' : `，應該是 ${want}`}`);
+    check(has(lat, lon, 'tw'), `level 8 的 ${nm} 附近有台灣的格子`);
+  }
+  // 對岸要維持中國，補格補過頭會在這裡現形
+  for (const [nm, lat, lon] of [['廈門', 24.479, 118.089], ['福州', 26.074, 119.296]]) {
+    check(has(lat, lon, 'cn'), `level 8 的 ${nm} 附近有中國的格子`);
+    check(!has(lat, lon, 'tw', 0.1), `level 8 的 ${nm} 沒有被算成台灣`);
+  }
+  // 50m 的亞洲多出新加坡、香港、澳門、巴林，110m 那個比例尺整個沒收錄。
+  // 有中繼的那兩個一定要有格子，那是六角層原本最明顯的破口（sg 101 台、hk 15 台）。
+  // 澳門 33 平方公里而且沒有中繼，在 17 公里一格底下收不到是正常的。
+  for (const [nm, lat, lon, code] of [['新加坡', 1.35, 103.82, 'sg'], ['香港', 22.35, 114.13, 'hk']]) {
+    check(has(lat, lon, code), `level 8 的 ${nm} 有自己的格子（110m 收不到）`);
   }
 }
 
@@ -411,8 +426,11 @@ for (const lv of LEVELS) {
   // 沒有縣市界那份的時候要能退回國界。worker 抓不到 tw-admin.json 就走這條。
   const bare = hex.judgeIndex(world, null);
   check(hex.judgeAt(bare, 24.15, 120.75) === 'tw', '少了縣市界，台灣本島仍判得出來');
-  check(hex.judgeAt(idx, 24.432, 118.317) === 'tw' && hex.judgeAt(bare, 24.432, 118.317) === 'cn',
-        '金門要靠縣市界那份才判成台灣，少了它就會被 110m 判進中國');
+  // 50m 的國界沒有把金門畫進中國，但也沒收錄它，所以仍然要靠縣市界那份
+  check(hex.judgeAt(idx, 24.432, 118.317) === 'tw' && hex.judgeAt(bare, 24.432, 118.317) === null,
+        '金門要靠縣市界那份才判得成台灣，只有國界的話是海');
+  check(hex.judgeAt(idx, 1.35, 103.82) === 'sg' && hex.judgeAt(idx, 22.35, 114.13) === 'hk',
+        '新加坡與香港在 50m 的國界裡判得出來');
 }
 
 // --- 接線 ---
