@@ -8,6 +8,7 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML, STR } from './i18n.js';
+import { dualCells, cellGeometry, decodeCC, verifyOrder } from './hexgrid.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -82,6 +83,9 @@ function applyI18n() {
   set('mode-conc', 'modeConc');
   set('ramp-lo', 'rampLow');
   set('ramp-hi', 'rampHigh');
+  set('btn-hex', 'btnHex');
+  const hb = $('btn-hex');
+  if (hb) hb.title = S('btnHexTip');
   set('lbl-mix', 'lblMix');
   set('lbl-asn', 'lblAsn');
   set('lbl-asia', 'lblAsia');
@@ -795,11 +799,18 @@ function buildSky() {
   scene.background = tex;
 }
 
-function glowColor(n, max, ramp) {
-  const t = Math.pow(n / max, 0.35); // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
+// 色階本身。底圖走 canvas 需要 CSS 字串，六角層走頂點色需要三個分量，
+// 所以算的那一段抽出來共用，兩層的顏色才不會各走各的。
+const GLOW_EXP = 0.35; // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
+function glowMix(n, max, ramp) {
+  const t = Math.pow(n / max, GLOW_EXP);
   const a = (ramp && ramp.lo) || MAP.glowLo, b = (ramp && ramp.hi) || MAP.glowHi;
   const mix = (i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t);
-  return `rgb(${mix(1)},${mix(3)},${mix(5)})`;
+  return [mix(1), mix(3), mix(5)];
+}
+function glowColor(n, max, ramp) {
+  const c = glowMix(n, max, ramp);
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
 }
 
 // 畫兩張貼圖。base 是海陸與國界，吃日夜光照；glow 只放各國中繼數的等值色，走自體發光。
@@ -1232,6 +1243,128 @@ function buildBlocked(world) {
 // （bloom 比的是 tonemap 之前的線性 luminance），所以這層不會被 bloom 抓去糊成白斑。
 const RIM_POWER = 5.5;   // 衰減要夠陡。3.2 時中心仍有可見疊加，被 bloom 一暈整顆球都蒙上藍霧
 const RIM_INTENSITY = 0.32; // additive 是疊在陸地本身的亮度上，兩者相加才是 bloom 看到的值
+// === 六角層（原型）===
+//
+// 把國別的中繼分布畫成規則的六角格，而不是國界內的隨機點。
+//
+// 動機是球面上那些點的位置本來就沒有意義：Onionoo 只給到國別，點落在國土的哪裡
+// 是亂數決定的（sampleIn 那段的註解寫得很清楚）。讀者數不出幾台，手機上也點不準。
+// 規則的格子把同一份國別資料變成可數、點得到的東西，形狀剛好是社群的標記。
+//
+// 要小心的是反過來那一面：格子比國家細，一旦讓「這一格亮著」看起來像「這裡有一台
+// 中繼」，就是在畫一個資料裡並不存在的精度。所以這一層的規矩是顏色可以編碼國家層級
+// 的值，格子的位置不承載任何意義，同一國的格子一律同色。
+//
+// 目前是原型，用網址參數開：?hex 是 level 6（40,962 格、邊長 69 km），?hex=5 是
+// level 5（10,242 格、138 km）。兩種密度的差別值得自己看一次。level 5 在整顆地球
+// 入鏡時才勉強看得出是六角形，但那個尺度下瑞士（188 台）、摩爾多瓦、拉脫維亞完全
+// 分不到格子，掉的都是有中繼的國家。level 6 只掉 lu、sg、hk 那幾個 Natural Earth
+// 110m 本來就沒有的小地方。
+//
+// 這一層沒有取代任何東西。陸地色塊與中繼點都還在，格子疊在兩者中間，縫隙露出底下
+// 的陸地色，看起來就是蜂巢的線。要評估的正是「換掉划不划算」，兩種呈現得並存著比。
+const HEX_PARAM = new URLSearchParams(location.search).get('hex');
+const HEX_LEVEL = HEX_PARAM === '5' ? 5 : 6;
+const HEX_SHRINK = 0.9;   // 格子往中心收多少。1 是完全貼合，收一點才有格縫
+const HEX_OP = 0.95;
+const HEX_LIFT = 1.006;   // 陸地貼圖之上、中繼點（1.012）之下
+// 格子最低的不透明度。
+//
+// 色階的低端（#0d2c46）比陸地本色（#16334e）還暗，在底圖上那是連續漸層看不出來，
+// 但格子是一塊一塊蓋上去的，土耳其那種十幾台的國家會整片變成比周圍陸地更暗的洞。
+// 改成低值的格子半透明，讓底下的陸地與 OONI 的紅色透出來，台數愈多才愈實心。
+// 讀起來就是密度：淡淡幾格到整片飽和。
+const HEX_A_MIN = 0.32;
+let HEX = null;
+const hexCol = new THREE.Color();
+// 整層的透明度。走 uniform 而不是 material.opacity，因為 opacityNode 一旦指定就會
+// 整個蓋掉 material.opacity（是互斥的 if/else 不是相乘），而 alpha 要跟頂點的那一份相乘。
+const hexAlpha = uniform(HEX_OP);
+
+async function buildHex() {
+  if (HEX_PARAM === null) return;
+  const data = await getJSON(HEX_LEVEL === 5 ? './hexgrid-5.json' : './hexgrid.json').catch(() => null);
+  if (!data || !data.cc) return;
+  const dual = dualCells(data.level);
+  // 幾何在這邊算，國碼在資料檔裡，兩邊的頂點順序錯開一格，結果就是每一格都有顏色
+  // 但顏色屬於別的國家，而畫面看起來完全正常。對不上就整層不畫，寧可少一層。
+  if (!verifyOrder(dual, data.probe)) {
+    console.warn('hexgrid: 幾何順序與資料檔對不上，六角層不畫');
+    return;
+  }
+  const cc = decodeCC(data.cc);
+  const cells = [];
+  for (let i = 0; i < cc.length; i++) if (cc[i]) cells.push(i);
+  if (!cells.length) return;
+  const g = cellGeometry(dual, cells, R * HEX_LIFT, HEX_SHRINK);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(g.position, 3));
+  geo.setAttribute('normal', new THREE.BufferAttribute(g.normal, 3));
+  // 頂點色帶 alpha。這個指標下沒有數字的國家整格收成透明，底下的陸地、OONI 的
+  // 紅色漸層與海岸線就照常看得到。第一版把它們畫成陸地本色，結果是六角層把紅色
+  // 那一層整片蓋掉，受標示的國家只剩格縫裡透出來的幾條紅線。
+  const colors = new Float32Array(g.position.length / 3 * 4);
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 4));
+  geo.setIndex(new THREE.BufferAttribute(g.index, 1));
+  // 用 Standard 不用 Basic，材質跟陸地同一種，日夜分界才會一起走。Basic 不吃光照，
+  // 夜半球的格子會整片亮著，那條線在格子上就不見了。
+  const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0, transparent: true, depthWrite: false });
+  const ca = attribute('color');
+  mat.colorNode = ca.xyz;
+  mat.opacityNode = ca.w.mul(hexAlpha);
+  const mesh = new THREE.Mesh(geo, mat);
+  // 排在中繼點（預設 0）之前畫，點才會留在格子上面。格子本身比點低 0.006 個半徑，
+  // 深度測試也會擋住它蓋到點，兩道保險。
+  mesh.renderOrder = 2;
+  globe.add(mesh);
+  HEX = { mesh, mat, colors, geo, codes: data.codes, level: data.level,
+          cellCC: cells.map((i) => cc[i]), faceCell: g.faceCell,
+          vertStart: g.vertStart, vertCount: g.vertCount };
+  paintHex(MODE);
+  const btn = $('btn-hex');
+  if (btn) { btn.hidden = false; btn.classList.add('on'); }
+}
+
+// 依目前的指標重新上色。色階跟陸地色塊共用 glowMix，兩層不會各走各的。
+function paintHex(mode) {
+  if (!HEX) return;
+  const values = modeValues(mode);
+  const ramp = modeRamp(mode);
+  let max = 1;
+  for (const v of values.values()) if (v > max) max = v;
+  const { colors, cellCC, codes, vertStart, vertCount } = HEX;
+  for (let ci = 0; ci < cellCC.length; ci++) {
+    const n = values.get(codes[cellCC[ci] - 1]) || 0;
+    // 頂點色是線性空間的，底圖那邊由貼圖的 colorSpace 自動處理，這裡要自己轉。
+    // 少了這一步整層會亮一階，跟底下的色塊對不起來。
+    if (n) hexCol.setRGB(...glowMix(n, max, ramp).map((x) => x / 255)).convertSRGBToLinear();
+    // 跟 glowMix 用同一條曲線，色階與濃度才會講同一件事
+    const a = n ? HEX_A_MIN + (1 - HEX_A_MIN) * Math.pow(n / max, GLOW_EXP) : 0;
+    const s = vertStart[ci], e = s + vertCount[ci];
+    for (let v = s; v < e; v++) {
+      colors[v * 4] = hexCol.r; colors[v * 4 + 1] = hexCol.g; colors[v * 4 + 2] = hexCol.b;
+      colors[v * 4 + 3] = a;
+    }
+  }
+  HEX.geo.attributes.color.needsUpdate = true;
+}
+
+// 點到哪一格。回傳國碼，沒中回 null。
+//
+// 用 raycast 不自己算球面反查：Goldberg 的格子沒有解析的反函數，要自己做就得另外
+// 建一張查表。七萬個三角形的線性掃描每次點擊約十幾毫秒，那是點擊不是每幀，划得來。
+const hexRay = new THREE.Raycaster();
+const hexPt = new THREE.Vector2();
+function pickHexCC(sx, sy) {
+  if (!HEX || !HEX.mesh.visible || hexAlpha.value < 0.08) return null;
+  hexPt.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
+  hexRay.setFromCamera(hexPt, camera);
+  const hit = hexRay.intersectObject(HEX.mesh, false)[0];
+  if (!hit || hit.faceIndex === undefined) return null;
+  const ci = HEX.faceCell[hit.faceIndex];
+  return HEX.codes[HEX.cellCC[ci] - 1] || null;
+}
+
 function buildAtmosphere() {
   const mat = new THREE.MeshBasicNodeMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
@@ -3002,6 +3135,7 @@ function setMode(mode) {
   const values = modeValues(mode);
   paintGlow(values, GLOW.canvas, modeRamp(mode));
   GLOW.tex.needsUpdate = true;
+  paintHex(mode);
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
     const pct = v / CC_STATS.totalW * 100;
@@ -3421,6 +3555,15 @@ function bindControls(dom) {
   const twBtn = $('btn-tw');
   if (twBtn) twBtn.addEventListener('click', () => goFocus('tw'));
 
+  // 六角層的開關。按鈕要等 buildHex 成功才會露出來，沒開參數的人看不到它。
+  const hexBtn = $('btn-hex');
+  if (hexBtn) hexBtn.addEventListener('click', () => {
+    if (!HEX) return;
+    const on = !HEX.mesh.visible;
+    HEX.mesh.visible = on;
+    hexBtn.classList.toggle('on', on);
+  });
+
   const spinBtn = $('btn-spin');
   if (spinBtn) {
     spinBtn.addEventListener('click', () => {
@@ -3531,6 +3674,12 @@ async function animate() {
   if (plantMat) plantMat.opacity = swap * 0.95;
   if (renewMat) renewMat.opacity = swap * 0.9;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
+  // 六角格是遠看的表面，貼近之後一格會脹到蓋住縣市界與設施，所以吃 deepU 退場，
+  // 跟大氣層、極光那幾層同一個時機。那條曲線講的正是「從太空視角換成地圖視角」。
+  //
+  // 不跟粗輪廓共用 twSwapT。那條從涵蓋 36 度就開始淡，而 17 度左右正是六角格
+  // 在螢幕上一格約 29 px、最看得出形狀的時候，共用的話最好看的那一段已經淡掉七成。
+  if (HEX) hexAlpha.value = HEX_OP * (1 - deepU.value);
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
@@ -3639,6 +3788,9 @@ async function main() {
   fillGrid();
   fillEnergy();
   buildStats(snap);
+  // 六角層是原型，預設不載。放在 buildStats 之後是因為上色要讀 CC_STATS，
+  // 而且它自己 catch 掉所有失敗，資料抓不到就是少一層，不影響其他東西。
+  await buildHex();
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
@@ -3713,7 +3865,11 @@ async function main() {
     pressAt = null;
     if (moved > 6 || pointers.size > 0) return;
     const hit = pickFeature(e.clientX, e.clientY);
-    if (hit) showFeature(hit);
+    if (hit) { showFeature(hit); return; }
+    // 設施沒中就問六角層。格子是國家層級的東西，點下去開國家卡，跟點國家標籤同一個結果。
+    // 這是格子比隨機點好的地方之一：整片國土都是命中區，手機上不必對準那幾個點。
+    const hcc = pickHexCC(e.clientX, e.clientY);
+    if (hcc) showCountry(hcc);
   });
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);

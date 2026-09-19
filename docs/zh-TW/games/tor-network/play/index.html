@@ -393,6 +393,12 @@
                 padding: 3px 9px; border-radius: 999px; cursor: pointer;
                 border: 1px solid var(--panel-b); background: rgba(0,174,255,.12); color: var(--cyan); }
     #btn-spin[hidden] { display: none; }
+    /* 六角層的開關。跟陸地亮度那一排同一個語彙，選中時填滿。 */
+    #btn-hex { font: inherit; font-size: 11px; font-weight: 700; line-height: 1; padding: 4px 10px;
+               margin: 0 0 9px; border-radius: 999px; cursor: pointer;
+               border: 1px solid var(--panel-b); background: rgba(0, 174, 255, .12); color: var(--cyan); }
+    #btn-hex.on { background: rgba(0, 174, 255, .85); color: #04141f; border-color: transparent; }
+    #btn-hex[hidden] { display: none; }
     #btn-spin:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     /* 台灣專區。用一條左側細線與縮排跟上面的全球資料分開，不另外加背景框，
        面板本來就已經有一層框了，再套一層會太重。 */
@@ -547,6 +553,8 @@
         <div class="lbl" id="lbl-brightness">陸地亮度：由低到高（非線性，中段差距已放大）</div>
         <div id="metric-sw"><button data-mode="all-count" class="on" id="mode-count">中繼台數</button><button data-mode="all-weight" id="mode-weight">共識權重</button><button data-mode="conc" id="mode-conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
         <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
+        <!-- 六角層的開關。網址沒帶 ?hex 的話 buildHex 直接返回，這顆就一直是 hidden。 -->
+        <button id="btn-hex" type="button" hidden>六角格</button>
         <div class="lbl" id="lbl-mix">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
         <div id="mix-note"></div>
