@@ -531,6 +531,7 @@ function updateDbg(dt) {
     + (HEX_ON ? `\nhex  ${HEX ? 'lv' + HEX.level + '  ' + HEX.cells.length + ' 格' : '未建'}`
         + `  want lv${hexPickLevel(c, hexNearLocal(c, hexViewDir()))}  ${HEX ? (HEX_DIAG_DEG[HEX.level] / c * Math.min(innerWidth, innerHeight)).toFixed(0) + ' px' : ''}`
         + `  r${HEX ? HEX.radiusDeg.toFixed(0) : '-'}°  busy ${hexBusy ? 'Y' : 'N'}`
+        + (hexFade ? `  淡入 ${(hexFade.t * 100).toFixed(0)}%` : '')
         + (HEX ? `\n     格心 ${hexLL(HEX.dir)}  現在 ${hexLL(hexViewDir())}` : '') : '');
 }
 
@@ -1279,7 +1280,11 @@ const HEX_TARGET_PX = 30, HEX_MIN_PX = 14, HEX_MAX_PX = 64;
 // 涵蓋度乘 0.75 當半徑，結果是畫面左右兩側整片沒有格子，只有正中間那一塊有。
 const HEX_PAD = 1.15;     // 算完對角再留這個比例的餘裕，轉動時邊緣不會馬上開天窗
 const HEX_SHRINK = 0.9;   // 格子往中心收多少。1 是完全貼合，收一點才有格縫
-const HEX_OP = 1;   // 整層的總開關，目前沒有進退場，濃淡交給頂點的 alpha
+// 換級的交叉淡入淡出有多久。
+//
+// 沒有這一段的話換級就是一幀之內整片格子換一套大小，看起來是硬切。兩層疊著淡是
+// 唯一不會在中間露出底圖的做法，代價是那 0.35 秒內畫兩份幾何。
+const HEX_FADE_SEC = 0.35;
 // 六角層的高度。
 //
 // 它是底圖，所有線層都要壓在它上面：海纜 1.003、國界 1.0036、OONI 的紅色 1.0045、
@@ -1335,7 +1340,7 @@ const hexCache = new Map();     // level → { dual, cc, codes }，建過就留�
 let hexBusy = false;            // 正在載資料或建幾何，別再排一次
 const hexCol = new THREE.Color();
 const hexDir = new THREE.Vector3();
-const hexAlpha = uniform(HEX_OP);
+let hexFade = null;   // 正在淡出的上一份 { mesh, mat, geo, alpha, t }
 
 /**
  * 這個涵蓋度下該用哪一級。目前這一級還可以就不換，換級要重建幾何。
@@ -1496,20 +1501,58 @@ function hexBuildMesh(rec, dir, radiusDeg) {
   // 夜半球留一份自發光。純靠光照的話，背著太陽那一面會沉到全黑，格縫露出來的
   // 陸地貼圖比它亮，整片看起來像挖了一堆洞。
   mat.emissiveNode = ca.xyz.mul(0.3);
-  mat.opacityNode = ca.w.mul(hexAlpha);
+  // 每一份有自己的 alpha，換級時兩份各走各的曲線交叉淡入淡出
+  const alpha = uniform(hexFadeReady() ? 0 : 1);
+  mat.opacityNode = ca.w.mul(alpha);
   const mesh = new THREE.Mesh(geo, mat);
   // 最先畫。高度壓得比所有線層低還不夠，透明物件之間是照 renderOrder 再照距離排的，
   // 排在後面的話它會蓋掉已經畫好的國界與縣市界。負數保證它在那些線之前。
+  // 淡出中的那一份再低一階，兩層疊著的時候新的要畫在舊的上面。
   mesh.renderOrder = -1;
   globe.add(mesh);
-  HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec, local: isLocal,
+  HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec, local: isLocal, alpha,
           cellCC: cells.map((i) => rec.cc[i]), faceCell: g.faceCell,
           vertStart: g.vertStart, vertCount: g.vertCount,
           dir: dir.clone(), radiusDeg };
   hexPaint(MODE);
   hexShowScale(rec.level);
-  // 新的接上去之後才拆舊的，中間沒有一幀是空的
-  if (old) { globe.remove(old.mesh); old.geo.dispose(); old.mat.dispose(); }
+  // 舊的接手去淡出，新的從透明淡進來。上一輪還沒淡完的直接收掉，
+  // 連續縮放的時候同時最多兩份，不會愈疊愈多。
+  if (old) {
+    hexDropFade();
+    old.mesh.renderOrder = -2;
+    hexFade = { mesh: old.mesh, mat: old.mat, geo: old.geo, alpha: old.alpha, t: 0 };
+  }
+}
+
+/** 有沒有東西可以交叉淡出。第一份是直接出現的，沒有前一份可以接。 */
+function hexFadeReady() { return !!HEX; }
+
+/** 收掉正在淡出的那一份。 */
+function hexDropFade() {
+  if (!hexFade) return;
+  globe.remove(hexFade.mesh);
+  hexFade.geo.dispose();
+  hexFade.mat.dispose();
+  hexFade = null;
+}
+
+/**
+ * 推進交叉淡入淡出。
+ *
+ * 兩層的 alpha 不能單純一個升一個降，那樣中間會合出比兩端都低的透明度，換級的
+ * 瞬間整片格子會先淡一下再回來，看起來像閃了一下。這裡讓舊的照
+ * a_old = 1 - (1 - A) / (1 - A * t) 走，合成之後 1 - (1 - a_new)(1 - a_old) 剛好
+ * 恆等於 A，全程看不出中間有兩層。
+ */
+function hexStepFade(dt) {
+  if (!hexFade || !HEX) return;
+  hexFade.t += dt / HEX_FADE_SEC;
+  const t = Math.min(1, hexFade.t);
+  HEX.alpha.value = t;
+  if (t >= 1) { hexDropFade(); return; }
+  const A = HEX_ALPHA;
+  hexFade.alpha.value = (1 - (1 - A) / (1 - A * t)) / A;
 }
 
 /** 相機動過之後看要不要重建。換級、轉到別的地方、縮放幅度夠大時才重建。 */
@@ -1581,7 +1624,7 @@ function hexPaint(mode) {
 const hexRay = new THREE.Raycaster();
 const hexPt = new THREE.Vector2();
 function pickHexCC(sx, sy) {
-  if (!HEX || !HEX.mesh.visible) return null;
+  if (!HEX || !HEX.mesh.visible || HEX.alpha.value < 0.3) return null;
   hexPt.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
   hexRay.setFromCamera(hexPt, camera);
   const hit = hexRay.intersectObject(HEX.mesh, false)[0];
@@ -3790,6 +3833,7 @@ function bindControls(dom) {
   if (hexBtn) hexBtn.addEventListener('click', () => {
     if (!HEX) return;
     HEX.mesh.visible = !HEX.mesh.visible;
+    if (hexFade) hexFade.mesh.visible = HEX.mesh.visible;
     hexBtn.classList.toggle('on', HEX.mesh.visible);
     const sc = $('hex-scale');
     if (sc) sc.hidden = !HEX.mesh.visible;
@@ -3916,8 +3960,10 @@ async function animate() {
   // 整趟飛行都停在出發時那一級，落地才換。而 flyTo 是指數趨近，低幀率的裝置上
   // 那個收斂要幾十秒，等於幾乎不更新。
   if (HEX_ON) {
+    hexStepFade(dt);
     hexTick += dt;
-    if (hexTick > (fly ? 0.4 : 0.2)) { hexTick = 0; hexRefresh(); }
+    // 上一份還在淡出就先別排下一次，否則快速縮放會一直把沒淡完的收掉，等於沒有過場
+    if (!hexFade && hexTick > (fly ? 0.4 : 0.2)) { hexTick = 0; hexRefresh(); }
   }
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);

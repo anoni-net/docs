@@ -360,6 +360,35 @@ for (const lv of LEVELS) {
         'level 6 分不到格子的盧森堡（120 台），在 level 7 有格子');
 }
 
+// --- 換級的交叉淡入淡出 ---
+//
+// 兩層的 alpha 不能單純一個升一個降，那樣中間會合出比兩端都低的透明度，換級的
+// 瞬間整片格子先淡一下再回來，看起來像閃了一下。舊的那一份照
+// a_old = 1 - (1 - A) / (1 - A * t) 走，合成起來才會恆定。
+{
+  // 公式直接從 atlas.js 抽出來驗，免得這裡自己抄一份然後跟本體漂走
+  const src = extractFn(atlas, 'function hexStepFade(');
+  const m = src.match(/hexFade\.alpha\.value = ([^;]+);/);
+  check(!!m, 'atlas.js 的淡出曲線找得到');
+  const A = parseFloat((atlas.match(/const HEX_ALPHA = ([\d.]+)/) || [])[1]);
+  check(A > 0 && A <= 1, `頂點的不透明度是 ${A}`);
+  if (m && A) {
+    const fade = new Function('A', 't', `return ${m[1]};`);
+    let bad = 0, worst = 0;
+    for (let i = 0; i <= 100; i++) {
+      const t = i / 100;
+      const aNew = A * t;
+      const aOld = t >= 1 ? 0 : A * fade(A, t);
+      const comp = 1 - (1 - aNew) * (1 - aOld);
+      worst = Math.max(worst, Math.abs(comp - A));
+      if (Math.abs(comp - A) > 1e-9) bad++;
+    }
+    check(bad === 0, `交叉淡入淡出全程合成出同一個透明度（最大偏離 ${worst.toExponential(1)}）`);
+    check(Math.abs(fade(A, 0) - 1) < 1e-12, '起點時舊的那一份還是全不透明');
+    check(Math.abs(fade(A, 1)) < 1e-12, '終點時舊的那一份完全透明');
+  }
+}
+
 // --- 接線 ---
 check(atlas.includes("from './hexgrid.js'"), 'atlas.js 載入了 hexgrid.js');
 check(atlas.includes('async function hexRefresh()'), 'atlas.js 有依距離換級的入口');
@@ -381,6 +410,10 @@ check(atlas.includes('function hexShowScale('), '面板會顯示這一級代表�
 check(/HEX_KM = \{ 5: 277, 6: 139, 7: 69, 8: 35, 9: 17, 10: 8\.7, 11: 4\.3, 12: 2\.2 \}/.test(atlas),
       '八級的尺度都有對應的公里數');
 check(html.includes('id="hex-scale"'), 'index.html 有尺度說明那一行');
+check(atlas.includes('function hexStepFade('), '換級時有交叉淡入淡出');
+check(atlas.includes('function hexDropFade('), '淡出完的那一份會被收掉');
+check(/if \(!hexFade && hexTick >/.test(atlas), '上一份還在淡出時不排下一次換級');
+check(/mesh\.renderOrder = -2/.test(atlas), '淡出中的那一份排在新的下面');
 check(html.includes('id="btn-hex"'), 'index.html 有六角層的開關');
 check(/id="btn-hex"[^>]*hidden/.test(html), '沒開參數時那顆開關是收起來的');
 
