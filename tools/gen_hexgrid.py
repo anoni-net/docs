@@ -462,15 +462,19 @@ def main():
             clon = (best_ring[0] + best_ring[2]) / 2
             clat = (best_ring[1] + best_ring[3]) / 2
             cv = ll_to_vec(clat, clon)
+            # 找最近的「還是海」的格，不是最近的格。新加坡 728 平方公里，在 level 7
+            # 那個 3,113 平方公里的格子底下，離它最近的格早就被馬來西亞佔走了，
+            # 只看最近一格的話它永遠補不到，而那裡有 101 台中繼。
             best, bd = -1, -2.0
             for i, p in enumerate(verts):
+                if cc[i]:
+                    continue
                 d = p[0] * cv[0] + p[1] * cv[1] + p[2] * cv[2]
                 if d > bd:
                     bd, best = d, i
-            # 離得太遠就不補。補在別的大陸上比沒有還糟。
-            if best < 0 or math.degrees(math.acos(min(1.0, bd))) > diag_deg:
-                continue
-            if cc[best]:
+            # 離得太遠就不補。補在別的大陸上比沒有還糟。放寬到兩格，因為現在找的是
+            # 空格，而被鄰國包住的小國本來就要多跳一格才找得到。
+            if best < 0 or math.degrees(math.acos(min(1.0, bd))) > diag_deg * 2:
                 continue
             codes.append(k)
             index[k] = len(codes)

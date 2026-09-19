@@ -2697,18 +2697,21 @@ function fillEnergy() {
 }
 
 function buildCoastline(coast, world) {
-  const seg = coast.seg;
-  const n = seg.length / 4;
+  // 資料是一條條連續的折線，相鄰段共用端點，存起來比獨立線段省將近一半。
+  // 畫的時候還是展開成 LineSegments，那一層沒有改。
+  const lines = coast.lines || [];
   const keys = twOutlineKeys(world);
   const v = new THREE.Vector3();
   const main = [], twPart = [];
-  for (let i = 0; i < n; i++) {
-    const x0 = seg[i * 4], y0 = seg[i * 4 + 1], x1 = seg[i * 4 + 2], y1 = seg[i * 4 + 3];
-    // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
-    const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
-    const out = isTw ? twPart : main;
-    llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
-    llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
+  for (const ln of lines) {
+    for (let i = 0; i + 3 < ln.length; i += 2) {
+      const x0 = ln[i], y0 = ln[i + 1], x1 = ln[i + 2], y1 = ln[i + 3];
+      // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
+      const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
+      const out = isTw ? twPart : main;
+      llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
+      llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
+    }
   }
   const mk = (arr, opacity) => {
     const g = new THREE.BufferGeometry();
