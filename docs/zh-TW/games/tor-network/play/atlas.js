@@ -543,6 +543,7 @@ function updateDbg(dt) {
     + `zoom ${view.zoom.toFixed(5)}\n`
     + `fov  ${camera.fov.toFixed(1)}°\n`
     + `離地 ${(camera.position.z - R).toFixed(3)}\n`
+    + `轉動 ry ${(view.ry * 180 / Math.PI).toFixed(2)}° rx ${(view.rx * 180 / Math.PI).toFixed(2)}°\n`
     + `deep ${deepU.value.toFixed(2)}  swap ${twSwapT().toFixed(2)}`
     + (HEX_ON ? `\nhex  ${HEX ? 'lv' + HEX.level + '  ' + HEX.cells.length + ' 格' : '未建'}`
         + `  want lv${hexPickLevel(c, hexNearLocal(c, hexViewDir()))}  ${HEX ? (HEX_DIAG_DEG[HEX.level] / c * Math.min(innerWidth, innerHeight)).toFixed(0) + ' px' : ''}`
@@ -622,7 +623,34 @@ const DRAG_FOV_MIX = (() => {
   const v = parseFloat(new URLSearchParams(location.search).get('drag-fov'));
   return v >= 0 && v <= 1 ? v : 1;
 })();
+// ?grab=0 退回固定比例的近似，也就是球面抓取之前的行為。
+//
+// 兩者的差別不只是準不準：1:1 抓取算出來的角度只有舊近似的三分之一。舊的那條
+// 係數是憑手感調的，調出來的值等於「拖一百像素，地表在螢幕上跑兩百七十像素」，
+// 所以換成 1:1 之後一定會覺得變慢，那不是壞掉，是原本就超前地表 2.7 倍。
+const DRAG_GRAB = new URLSearchParams(location.search).get('grab') !== '0';
 const DRAG_TAN_REF = Math.tan(FOV_FAR * Math.PI / 360);
+/**
+ * 螢幕座標打到球面上的哪一點，回傳世界座標的單位向量。打不到回 null。
+ *
+ * 這是「拉多遠就轉多遠」的基礎。dragRate 那一套是固定比例的近似，只有在球面正
+ * 中央才準：球是曲面，愈靠近輪廓，同樣一段像素對應的角度愈大，所以往邊緣拖的
+ * 時候手指跟地表一定會分家。把滑鼠位置投影回球面上再算兩點之間的角度差就沒有
+ * 這個問題，代價是滑鼠拖出球外之後沒有交點可以算。
+ */
+const dragRay = new THREE.Raycaster();
+const dragNdc = new THREE.Vector2();
+function sphereAt(sx, sy, out) {
+  dragNdc.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
+  dragRay.setFromCamera(dragNdc, camera);
+  const o = dragRay.ray.origin, d = dragRay.ray.direction;
+  const b = o.dot(d);
+  const c = o.lengthSq() - R * R;
+  const disc = b * b - c;
+  if (disc < 0) return null;            // 射線沒打到球，拖到背景去了
+  return out.copy(d).multiplyScalar(-b - Math.sqrt(disc)).add(o).normalize();
+}
+
 function dragRate() {
   const ref = Math.max(1e-3, fitDist() - R);
   const tanNow = Math.tan(camera.fov * Math.PI / 360);
@@ -3859,6 +3887,7 @@ async function fetchLive(btn) {
 const pointers = new Map();
 const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
+const dragA = new THREE.Vector3(), dragB = new THREE.Vector3();
 let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
 const DRAG_DEAD_PX = 6; // 跟挑選設施那條死區同一個值
 // 地球的操作全部掛在 window，不是掛在畫布上。
@@ -3894,8 +3923,27 @@ function bindControls(dom) {
       return;
     }
     if (!last) return;
-    const k = dragRate();
-    const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
+    // 先試著讓地表跟著手指走：兩個螢幕位置各自投影回球面，取它們的經緯度差當成
+    // 這一步要轉的角度。這樣拖到哪裡地表就到哪裡，不論在畫面中央還是靠近輪廓。
+    //
+    // 拖出球外就沒有交點可以算，那時退回固定比例的近似，至少還推得動。
+    let dry, drx;
+    const a = DRAG_GRAB ? sphereAt(last.x, last.y, dragA) : null;
+    const b = a ? sphereAt(e.clientX, e.clientY, dragB) : null;
+    if (a && b) {
+      // 經度差要繞回 [-180, 180]，跨過換日線那一下才不會整顆球彈一圈
+      let dlon = Math.atan2(b.x, b.z) - Math.atan2(a.x, a.z);
+      while (dlon > Math.PI) dlon -= Math.PI * 2;
+      while (dlon < -Math.PI) dlon += Math.PI * 2;
+      // 緯度差的符號跟 rotation.x 相反：手指往下拉，看到的是更北邊
+      const dlat = Math.asin(clamp(b.y, -1, 1)) - Math.asin(clamp(a.y, -1, 1));
+      dry = dlon;
+      drx = -dlat;
+    } else {
+      const k = dragRate();
+      dry = (e.clientX - last.x) * k;
+      drx = (e.clientY - last.y) * k;
+    }
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
     // 視角真的動了才清網址上的關注區域，而且要動得夠多。掛在 pointerdown 的話，

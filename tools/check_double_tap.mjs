@@ -127,6 +127,11 @@ const harness = `
   // bindControls 會先問事件是不是落在面板上。這幾支重放的都是地球上的操作，
   // 一律回 false。真正驗那條排除的是 check_ui_passthrough.mjs。
   const onUI = () => false;
+  // 拖曳現在會先把滑鼠投影回球面算角度差，打不到球才退回固定比例。這幾支沒有相機
+  // 可以投影，一律回 null 走比例那條，驗的是接線與係數本身。球面那條另外直接驗數學。
+  const DRAG_GRAB = false;
+  const sphereAt = () => null;
+  const dragA = {}, dragB = {};
   const dom = {
     setPointerCapture: () => {},
   };

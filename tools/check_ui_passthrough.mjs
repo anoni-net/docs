@@ -56,6 +56,18 @@ check(/\.lb\.on\s*\{[^}]*pointer-events:\s*auto/.test(html),
 const wire = `
   ${decl(/^const UI_SEL = [^;]+;/m)}
   ${decl(/^const onUI = [^;]+;/m)}
+  // 拖曳現在會先把滑鼠投影回球面算角度差，打不到球才退回固定比例。這幾支沒有相機
+  // 可以投影，一律回 null 走比例那條，驗的是接線與係數本身。球面那條另外直接驗數學。
+  let sphereHits = null;   // 設成一對向量就走球面抓取那條，null 走比例那條
+  const sphereAt = (x, y, out) => {
+    if (!sphereHits) return null;
+    const v = (x === lastGrabX ? sphereHits[0] : sphereHits[1]);
+    Object.assign(out, v);
+    return out;
+  };
+  let lastGrabX = -1;
+  const DRAG_GRAB = true;
+  const dragA = {}, dragB = {};
   const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
   ${decl(/^const COVER_STEP_MAX = [^;]+;/m)}
   const DRAG_K = 0.006;   // 網址可覆寫，這裡固定成預設值
@@ -88,6 +100,8 @@ const wire = `
     ry: () => view.ry,
     cleared: () => cleared,
     types: () => Object.keys(H),
+    // 餵一對球面點進去就走球面抓取那條，null 回比例那條
+    setGrab: (pair, x) => { sphereHits = pair; lastGrabX = x; },
   };
 `;
 const W = new Function(wire)();
@@ -136,6 +150,25 @@ for (const sel of ['#top', '#cc-card', '#hint', '#tour']) {
   W.fire('pointermove', ptrEv(inPanel('#top'), 2, 200, 300));
   W.fire('pointerup', ptrEv(inPanel('#top'), 2, 200, 300));
   check(W.ry() === before, '在左側面板上拖曳不會轉動地球');
+}
+
+// --- 球面抓取 ---
+//
+// 固定比例那條只有在球面正中央才準：球是曲面，愈靠近輪廓，同樣一段像素對應的角度
+// 愈大，往邊緣拖的時候手指跟地表一定會分家。把滑鼠位置投影回球面上算兩點的角度差
+// 就沒有這個問題。這裡驗它真的走那條路，而且經緯度差換算成轉動的符號是對的。
+{
+  // 起點在經度 0、終點在經度 +30 度，兩點都在赤道上
+  const p = (lonDeg) => ({ x: Math.sin(lonDeg * Math.PI / 180), y: 0, z: Math.cos(lonDeg * Math.PI / 180) });
+  W.setGrab([p(0), p(30)], 400);
+  const before = W.ry();
+  W.fire('pointerdown', ptrEv(onCanvas, 9, 400, 300));
+  W.fire('pointermove', ptrEv(onCanvas, 9, 500, 300));
+  const turned = (W.ry() - before) * 180 / Math.PI;
+  W.fire('pointerup', ptrEv(onCanvas, 9, 500, 300));
+  check(Math.abs(turned - 30) < 0.01,
+        `地表從經度 0 拖到經度 30，地球就轉 ${turned.toFixed(1)} 度（不是照像素數算）`);
+  W.setGrab(null, -1);
 }
 
 // --- 拖曳的靈敏度 ---
