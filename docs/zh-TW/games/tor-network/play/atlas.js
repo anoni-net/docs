@@ -1,9 +1,10 @@
 // Tor 網路現況地球儀
 // 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼依國別聚成一團一團畫在地球上。
 // 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
-// 底圖用 countries.json（Natural Earth 50m，亞洲簡化到約 1 公里）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
+// 底圖用 countries.json（Natural Earth 10m，東亞簡化到相鄰兩點約 2.8 公里）即時畫成貼圖：填海陸、依中繼數把國家調亮。
+// 東亞另外畫一張 2048 見方的細部貼圖，那一塊的一個像素是 2.8 公里，全球那張是 19.6 公里。
 import * as THREE from 'three';
-import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
+import { pass, texture, vec2, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
@@ -1008,6 +1009,108 @@ function paintSeaFloor(ctx) {
   });
 }
 
+// ── 東亞細部貼圖 ───────────────────────────────────────────────────────────
+// 全球貼圖是 2048x1024 的等距長方投影，赤道一個像素就是 19.6 公里。香港 1,104 km2
+// 在上面只有 3 個像素，填色糊成一團、邊緣跟海岸線差了十幾公里，自己的形狀完全畫不
+// 出來，新加坡與澳門同樣。這是 buildBorders 畫的國界線修細之後仍然看得到方塊的原因，
+// 線已經準了，底下的填色沒有跟上。
+//
+// 拉高全球貼圖解不了。要讓香港有 150 個像素得做到 16384x8192，顯存是現在的 64 倍，
+// 而多出來的像素有九成九花在沒有人放大去看的海面與極區。改成另外畫一張只涵蓋東亞的
+// 貼圖，框跟 tools/gen_world_geo.py 的 EAST_BOX 同一個，2048 見方，一個像素 2.8
+// 公里，香港變成 148 個像素。
+//
+// 兩張就夠，因為陸地在貼圖上只是一個定值色 MAP.land，本身沒有細節要存：
+//
+//   eastLand  2048  RGB 放各國依指標值的發光色，A 放陸地遮罩。海陸邊界與國界都由
+//                   這張決定，是整件事的重點。切換指標時跟全球的發光層一起重畫。
+//   eastDeco   512  海底地形與經緯線。兩者都是大尺度的形狀，解析度不必跟著上去。
+//
+// 合計 17 MB，全球那四張目前是 25 MB。
+const EAST_ON = new URLSearchParams(location.search).get('east') !== '0';
+const EAST_BOX = [95, 0, 150, 50];
+const EAST_TEX = 2048;
+const EAST_DECO = 512;
+const eastX = (lon) => (lon - EAST_BOX[0]) / (EAST_BOX[2] - EAST_BOX[0]) * EAST_TEX;
+const eastY = (lat) => (EAST_BOX[3] - lat) / (EAST_BOX[3] - EAST_BOX[1]) * EAST_TEX;
+const EAST_PATH = [];  // { k, path }，k 是 ISO2。沒有國碼的陸地也要進來，不然遮罩會破洞
+let EAST = null;       // { canvas, tex }：切換指標時重畫的那張
+
+// 這個環有沒有碰到東亞框。用外接框相交判，逐點判會漏掉「整條邊橫越框、頂點都在框外」
+// 的環，中國那幾條長邊就是。
+function ringHitsEast(ring) {
+  let lo0 = 1e9, lo1 = -1e9, la0 = 1e9, la1 = -1e9;
+  for (let i = 0; i < ring.length; i += 2) {
+    if (ring[i] < lo0) lo0 = ring[i];
+    if (ring[i] > lo1) lo1 = ring[i];
+    if (ring[i + 1] < la0) la0 = ring[i + 1];
+    if (ring[i + 1] > la1) la1 = ring[i + 1];
+  }
+  return lo1 >= EAST_BOX[0] && lo0 <= EAST_BOX[2] && la1 >= EAST_BOX[1] && la0 <= EAST_BOX[3];
+}
+
+function buildEastPaths(world) {
+  EAST_PATH.length = 0;
+  for (const c of world.c) {
+    const rings = c.p.filter(ringHitsEast);
+    if (!rings.length) continue;
+    const path = new Path2D();
+    for (const ring of rings) {
+      path.moveTo(eastX(ring[0]), eastY(ring[1]));
+      for (let i = 2; i < ring.length; i += 2) path.lineTo(eastX(ring[i]), eastY(ring[i + 1]));
+      path.closePath();
+    }
+    EAST_PATH.push({ k: c.k, path });
+  }
+}
+
+// 一道填完。沒有中繼的國家填黑，發光層讀到的就是零，而 alpha 仍然是 1，
+// 陸地遮罩不會因為那個國家沒有中繼就破一個洞。
+function paintEastLand(values, canvas, ramp) {
+  const g = canvas.getContext('2d');
+  g.clearRect(0, 0, EAST_TEX, EAST_TEX);
+  let max = 1;
+  for (const v of values.values()) if (v > max) max = v;
+  for (const { k, path } of EAST_PATH) {
+    const n = (k && values.get(k)) || 0;
+    g.fillStyle = n ? glowColor(n, max, ramp) : '#000';
+    g.fill(path);
+  }
+}
+
+function paintEastDeco(canvas) {
+  const g = canvas.getContext('2d');
+  const s = EAST_DECO / EAST_TEX;
+  g.setTransform(s, 0, 0, s, 0, 0); // 之後都用 EAST_TEX 的座標畫，跟 eastX/eastY 共用
+  g.fillStyle = BATHY && BATHY.levels ? MAP.seaRamp[0] : MAP.sea;
+  g.fillRect(0, 0, EAST_TEX, EAST_TEX);
+  if (BATHY && BATHY.levels) {
+    BATHY.levels.forEach((lv, i) => {
+      const path = new Path2D();
+      for (const ring of lv.p) {
+        if (!ringHitsEast(ring)) continue;
+        path.moveTo(eastX(ring[0]), eastY(ring[1]));
+        for (let k = 2; k < ring.length; k += 2) path.lineTo(eastX(ring[k]), eastY(ring[k + 1]));
+        path.closePath();
+      }
+      g.fillStyle = MAP.seaRamp[Math.min(i + 1, MAP.seaRamp.length - 1)];
+      g.fill(path, 'evenodd');
+    });
+  }
+  // 經緯線。框內只有 120 度經線與 30 度緯線兩條，而且是一成不透明度的細線，疊在
+  // 陸地上原本就幾乎看不見，所以只畫在這一層。陸地那一段在東亞框內會斷掉。
+  g.lineWidth = EAST_TEX / EAST_DECO; // 換算回去正好是一個貼圖像素
+  g.strokeStyle = MAP.grid;
+  for (let lon = -180; lon <= 180; lon += 30) {
+    if (lon <= EAST_BOX[0] || lon >= EAST_BOX[2]) continue;
+    g.beginPath(); g.moveTo(eastX(lon), 0); g.lineTo(eastX(lon), EAST_TEX); g.stroke();
+  }
+  for (let lat = -60; lat <= 60; lat += 30) {
+    if (lat <= EAST_BOX[1] || lat >= EAST_BOX[3]) continue;
+    g.beginPath(); g.moveTo(0, eastY(lat)); g.lineTo(EAST_TEX, eastY(lat)); g.stroke();
+  }
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
   const base = mk(), glow = mk(), block = mk();
@@ -1084,13 +1187,62 @@ function buildEarth(world, counts) {
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
   const seaTex = toTex(painted.sea);
   GLOW = { canvas: painted.glow, tex: glowTex };
-  const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
+  const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0 });
+
+  // 底色與發光色。東亞那一塊改由細部貼圖供應，其餘維持全球那張。
+  let baseCol = texture(baseTex).rgb;
+  let glowCol = texture(glowTex).rgb;
+  if (EAST_ON) {
+    const eastLand = document.createElement('canvas');
+    eastLand.width = eastLand.height = EAST_TEX;
+    const eastDeco = document.createElement('canvas');
+    eastDeco.width = eastDeco.height = EAST_DECO;
+    buildEastPaths(world);
+    paintEastLand(counts, eastLand, null);
+    paintEastDeco(eastDeco);
+    // 不能用 RepeatWrapping。這兩張只涵蓋東亞，重複的話框外會取到框內的內容，
+    // 雖然混合權重在框外已經是 0，mipmap 的低階層仍然會把邊緣以外的取樣拉進來。
+    const toTexE = (cv) => {
+      const t = new THREE.CanvasTexture(cv);
+      t.colorSpace = THREE.SRGBColorSpace;
+      t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+      if (renderer.getMaxAnisotropy) t.anisotropy = Math.min(8, renderer.getMaxAnisotropy());
+      return t;
+    };
+    const eastLandTex = toTexE(eastLand), eastDecoTex = toTexE(eastDeco);
+    EAST = { canvas: eastLand, tex: eastLandTex };
+
+    // 東亞框在球面 uv 上的位置。全球貼圖的 texX/texY 是同一組線性關係，
+    // SphereGeometry 的 uv 跟著等距長方投影走，所以直接換算就對得上。
+    const u0 = (EAST_BOX[0] + 180) / 360, u1 = (EAST_BOX[2] + 180) / 360;
+    const v0 = (EAST_BOX[1] + 90) / 180, v1 = (EAST_BOX[3] + 90) / 180;
+    const eastUv = vec2(uv().x.sub(u0).div(u1 - u0), uv().y.sub(v0).div(v1 - v0));
+    // 框邊硬切會留下一條接縫，往內縮一圈做過渡。0.035 換算成經度約 1.9 度，
+    // 過渡帶裡兩張貼圖畫的是同一組國界，只有精度不同，混起來不會出現雙重輪廓。
+    const feather = 0.035;
+    const inEast = smoothstep(0, feather, eastUv.x)
+      .mul(smoothstep(0, feather, eastUv.y))
+      .mul(smoothstep(0, feather, oneMinus(eastUv.x)))
+      .mul(smoothstep(0, feather, oneMinus(eastUv.y)));
+    const eL = texture(eastLandTex, eastUv), eD = texture(eastDecoTex, eastUv);
+    // 框內完全由細部貼圖決定海陸，不跟全球那張混。混的話香港會變成一塊清楚的陸地
+    // 外面再糊一圈陸地色，比原本更難看。
+    //
+    // ColorManagement 開著，new THREE.Color 讀進來就已經轉成線性，可以直接跟
+    // 貼圖取樣的結果放在一起算。
+    const landLin = new THREE.Color(MAP.land);
+    const eastBase = mix(eD.rgb, vec3(landLin.r, landLin.g, landLin.b), eL.a);
+    baseCol = mix(baseCol, eastBase, inEast);
+    glowCol = mix(glowCol, eL.rgb.mul(eL.a), inEast);
+  }
+
+  mat.colorNode = baseCol;
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   // 受阻漸層另存一層，切換「台數、共識權重」時 paintGlow 只重畫 glow，這一層不受影響
-  mat.emissiveNode = texture(baseTex).mul(0.15)
-    .add(texture(seaTex).mul(SEA_EMIT))
-    .add(texture(glowTex).mul(0.5))
-    .add(texture(blockTex).mul(BLOCK_EMIT));
+  mat.emissiveNode = baseCol.mul(0.15)
+    .add(texture(seaTex).rgb.mul(SEA_EMIT))
+    .add(glowCol.mul(0.5))
+    .add(texture(blockTex).rgb.mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
 }
 
@@ -3549,6 +3701,10 @@ function setMode(mode) {
   const values = modeValues(mode);
   paintGlow(values, GLOW.canvas, modeRamp(mode));
   GLOW.tex.needsUpdate = true;
+  if (EAST) {
+    paintEastLand(values, EAST.canvas, modeRamp(mode));
+    EAST.tex.needsUpdate = true;
+  }
   hexPaint(mode);
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
