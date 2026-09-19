@@ -1316,25 +1316,34 @@ const HEX_ALPHA = 0.88;
 // 拿同樣的多邊形再判一次不必多一個資料檔。這樣等級可以用網址參數隨便調，不必為了
 // 每一級各產一份。
 //
-// 那一塊自己也要換級。固定一級的話，貼到涵蓋一度時格子只剩幾個像素，跟沒畫一樣。
-// 9、10、11 三級接在全球的 8 後面，格子在螢幕上一樣維持三十幾個像素：
+// 局部那幾級接在全球的 8 後面，格子在螢幕上一樣維持三十幾個像素：
 //
 //   涵蓋 9 度   level 9   對角 17 公里   一座變電所的供電範圍
 //   涵蓋 4 度   level 10  對角 8.7 公里  半個鄉鎮
 //   涵蓋 2 度   level 11  對角 4.3 公里  一個行政區或一座科學園區
 //
-// ?hex-tw=N 可以改最細到哪一級，12 是 2.2 公里，大約一個里。
+// 中心跟著視野走，不綁在台灣。原本寫死台灣的時候，在別的地方放大到底只剩全球的
+// level 8，一格會脹到兩百多個像素。
+//
+// 半徑也跟著縮放算，不是固定值。這一級用在什麼距離是確定的，所以要收的範圍也是
+// 確定的：level 11 落在涵蓋一度上下，對角半徑不到 1.6 度，收那麼大就夠。跟著算
+// 反而比原本固定 3.6 度省，格數從四萬掉到八千。
+//
+// ?hex-fine=N 可以改最細到哪一級，12 是 2.2 公里，大約一個里。
 const HEX_LOCAL_LEVELS = (() => {
-  const v = parseInt(new URLSearchParams(location.search).get('hex-tw'), 10);
+  const q = new URLSearchParams(location.search);
+  const v = parseInt(q.get('hex-fine') || q.get('hex-tw'), 10);
   const max = v >= 9 && v <= 12 ? v : 11;
   const out = [];
   for (let i = 9; i <= max; i++) out.push(i);
   return out;
 })();
-const HEX_LOCAL_AT = [23.7, 121.0];  // 台灣本島中心
-const HEX_LOCAL_RADIUS = 3.6;        // 涵蓋本島、澎湖、金門、馬祖、綠島、蘭嶼
-const HEX_LOCAL_COVER = 9;           // 畫面涵蓋度小於這個才輪到它，再遠就用全球的 level 8
-const hexLocalCache = new Map();     // level → 那一級的局部網格，建過就留著
+const HEX_LOCAL_COVER = 9;      // 畫面涵蓋度小於這個才輪到局部那幾級
+const HEX_LOCAL_R_MAX = 5;      // 收再大格數會爆，level 11 半徑 5 度就是八萬格
+const HEX_LOCAL_R_MIN = 0.6;
+const HEX_LOCAL_KEEP = 4;       // 快取幾份。轉來轉去的時候不必每次重算
+// key 是「等級加上量化過的中心」，因為中心現在會跟著視野走。
+const hexLocalCache = new Map();
 
 // 幾何在背景執行緒算。理由見 hexworker.js 的檔頭：level 8 的全球細分加對偶要
 // 357 毫秒，在主執行緒上做就是滾輪滾到那一段畫面整個停住。
@@ -1382,7 +1391,6 @@ function hexFromWorker(m) {
            faceCenters: m.faceCenters, level: m.level, local: m.local };
 }
 let hexJudgeBoxes = null;            // 各國的外接框，判國碼前先用它篩掉九成九
-let hexLocalDir = null;              // 台灣本島中心的方向，判斷視野在不在那一塊
 let HEX = null;                 // 目前畫出來的那一份
 const hexCache = new Map();     // level → { dual, cc, codes }，建過就留著
 let hexBusy = false;            // 正在載資料或建幾何，別再排一次
@@ -1412,6 +1420,12 @@ function hexPickLevel(cover, canLocal) {
   return best;
 }
 
+/** 一個球面方向的經緯度。跟 llToVec 互為反函數。 */
+function cellLatLonFromDir(v) {
+  return [Math.asin(clamp(v.y, -1, 1)) * 180 / Math.PI,
+          Math.atan2(-v.z, v.x) * 180 / Math.PI];
+}
+
 /** 除錯用：把一個球面方向印成經緯度。 */
 const hexLL = (v) => {
   const lat = Math.asin(Math.max(-1, Math.min(1, v.y))) * 180 / Math.PI;
@@ -1432,12 +1446,22 @@ function hexPrepJudge(world) {
   if (!hexJudgeBoxes) hexJudgeBoxes = judgeIndex(world, TWADMIN);
 }
 
-/** 台灣那塊的某一級。只在真的貼近台灣時才算，算過就留著。 */
-async function hexBuildLocal(level) {
-  if (hexLocalCache.has(level)) return hexLocalCache.get(level);
+/** 這個涵蓋度下，局部網格要收多遠。判準跟全球那邊的裁切一樣，看畫面對角那一圈。 */
+function hexLocalRadius(cover) {
+  const aspect = Math.max(innerWidth, innerHeight) / Math.min(innerWidth, innerHeight);
+  const r = cover * 0.5 * Math.sqrt(1 + aspect * aspect) * 1.25 + 0.3;
+  return Math.max(HEX_LOCAL_R_MIN, Math.min(HEX_LOCAL_R_MAX, r));
+}
+
+/** 局部網格的某一份。中心量化過，轉來轉去的時候才不會每動一下就重算。 */
+async function hexBuildLocal(level, lat, lon, radius) {
+  // 量化到半徑的三分之一。同一塊區域內的微幅移動共用同一份，移出去才換。
+  const q = Math.max(0.25, radius / 3);
+  const key = `${level}:${Math.round(lat / q)}:${Math.round(lon / q)}:${Math.ceil(radius * 2)}`;
+  const hit = hexLocalCache.get(key);
+  if (hit) return hit;
   if (!hexJudgeBoxes) return null;
-  const got = await (hexWorkerAsk({ kind: 'local', level, lat: HEX_LOCAL_AT[0],
-                                    lon: HEX_LOCAL_AT[1], radius: HEX_LOCAL_RADIUS })
+  const got = await (hexWorkerAsk({ kind: 'local', level, lat, lon, radius })
                      || Promise.resolve(null));
   let dual, cc, codes;
   if (got && got.ok) {
@@ -1445,30 +1469,29 @@ async function hexBuildLocal(level) {
     cc = got.cc;
     codes = got.codes;
   } else {
-    // worker 不可用的退路。判 41,086 格的國碼要 620 毫秒，主執行緒會明顯頓一下，
+    // worker 不可用的退路。判幾萬格的國碼要幾百毫秒，主執行緒會明顯頓一下，
     // 但總比整層畫不出來好。
-    dual = localCells(level, HEX_LOCAL_AT[0], HEX_LOCAL_AT[1], HEX_LOCAL_RADIUS);
+    dual = localCells(level, lat, lon, radius);
     if (!dual.nc) return null;
     const j = judgeCells(dual, hexJudgeBoxes);
     cc = j.cc;
     codes = j.codes;
   }
   if (!dual.nc) return null;
-  const rec = { dual, cc, codes, level, local: true };
-  hexLocalCache.set(level, rec);
+  const dir = new THREE.Vector3();
+  llToVec(lat, lon, 1, dir);
+  const rec = { dual, cc, codes, level, local: true, at: [lat, lon], radius, dir };
+  // 留最近幾份就好。Map 的迭代是插入順序，最舊的排在最前面。
+  hexLocalCache.set(key, rec);
+  while (hexLocalCache.size > HEX_LOCAL_KEEP) {
+    hexLocalCache.delete(hexLocalCache.keys().next().value);
+  }
   return rec;
 }
 
-/** 視野中心在不在台灣那一塊。在的話那三級才進得了候選。 */
-function hexNearLocal(cover, dir) {
-  if (cover > HEX_LOCAL_COVER || !HEX_LOCAL_LEVELS.length) return false;
-  if (!hexLocalDir) {
-    hexLocalDir = new THREE.Vector3();
-    llToVec(HEX_LOCAL_AT[0], HEX_LOCAL_AT[1], 1, hexLocalDir);
-  }
-  const ang = Math.acos(clamp(dir.dot(hexLocalDir), -1, 1)) * 180 / Math.PI;
-  // 邊緣留一點，轉出去的瞬間才不會閃一下
-  return ang < HEX_LOCAL_RADIUS * 0.8;
+/** 這個涵蓋度下局部那幾級進不進得了候選。現在不綁位置，夠近就行。 */
+function hexNearLocal(cover) {
+  return cover <= HEX_LOCAL_COVER && HEX_LOCAL_LEVELS.length > 0;
 }
 
 /** 某一級的資料。載過就留著，沒用到的等級完全不會付代價。 */
@@ -1580,10 +1603,14 @@ async function hexRefresh() {
   if (!HEX_ON || hexBusy) return;
   const cover = coverDeg();
   const dir = hexViewDir();
-  const lv = hexPickLevel(cover, hexNearLocal(cover, dir));
+  const lv = hexPickLevel(cover, hexNearLocal(cover));
   const aspect = Math.max(innerWidth, innerHeight) / Math.min(innerWidth, innerHeight);
   const radius = Math.min(180, cover * 0.5 * Math.sqrt(1 + aspect * aspect) * HEX_PAD + 2);
-  if (HEX && HEX.level === lv && HEX.local) return;   // 局部那幾級涵蓋整塊，轉動不必重建
+  // 局部那幾級的中心跟著視野走，所以一樣要看轉了多遠。轉出已收範圍的四成就換一份。
+  if (HEX && HEX.level === lv && HEX.local) {
+    const moved = Math.acos(clamp(HEX.rec.dir.dot(dir), -1, 1)) * 180 / Math.PI;
+    if (moved < HEX.rec.radius * 0.4) return;
+  }
   if (HEX && HEX.level === lv && !HEX.local) {
     const moved = Math.acos(clamp(HEX.dir.dot(dir), -1, 1)) * 180 / Math.PI;
     // 轉動不到已收範圍的四分之一、縮放幅度不到三成，就沿用現在這一份
@@ -1592,7 +1619,10 @@ async function hexRefresh() {
   hexBusy = true;
   try {
     // 9 以上是台灣那一塊的局部網格，現場細分，不必多一個資料檔
-    const rec = lv >= 9 ? await hexBuildLocal(lv) : await hexLoadLevel(lv);
+    const ll = cellLatLonFromDir(dir);
+    const rec = lv >= 9
+      ? await hexBuildLocal(lv, ll[0], ll[1], hexLocalRadius(cover))
+      : await hexLoadLevel(lv);
     if (rec) hexBuildMesh(rec, dir, radius);
   } finally {
     hexBusy = false;
