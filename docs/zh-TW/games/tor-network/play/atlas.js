@@ -8,6 +8,7 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML, STR } from './i18n.js';
+import { createTour } from './tour.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -118,6 +119,14 @@ function applyI18n() {
   set('hint-narrow', 'hintNarrow');
   set('btn-spin', 'btnSpin');
   set('hint-close', 'hintClose');
+  // 工作坊導覽。每一站的標題與內文由 tour.js 自己填，這裡只換固定的那幾顆。
+  set('btn-tour', 'btnTourLong');
+  set('btn-tour-hint', 'btnTour');
+  set('tour-note', 'tourNote');
+  set('tour-exit', 'tourExit');
+  set('tour-prev', 'tourPrev');
+  set('tour-next', 'tourNext');
+  set('tour-keys', 'tourKeys');
   set('backend', 'backendDetecting');
   const bu = $('btn-users');
   if (bu) { bu.textContent = S('modeUsers'); bu.title = S('modeUsersTip'); }
@@ -2437,11 +2446,12 @@ function measureLabels() {
 }
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLabels);
 
-// 左上面板與底部提示列會蓋住標籤，壓在它們上面的國家就不標
+// 左上面板與底部那幾條會蓋住標籤，壓在它們上面的國家就不標。
+// 導覽列比提示條高得多，漏掉它的話導覽期間國家標籤會壓在說明文字上。
 let uiBoxes = [];
 function refreshUIBoxes() {
   uiBoxes = [];
-  for (const id of ['top', 'hint']) {
+  for (const id of ['top', 'hint', 'tour']) {
     const el = $(id);
     if (!el) continue;
     const r = el.getBoundingClientRect(); // 面板是 fixed，offsetParent 一律為 null，改看實際尺寸判斷有沒有顯示
@@ -2560,6 +2570,40 @@ function buildStats(snap) {
   let exitAll = 0;
   for (const r of mix.values()) exitAll += r[2] + r[3];
   CC_STATS = { mix, w, totalN, totalW, rankN, rankW, conc, cnt: cntByCC, exitShare: exitAll / totalN };
+}
+
+// 工作坊導覽要插進文案的數字。每次換站都重取一次，按過即時更新之後跟著變。
+//
+// 百分比的格式跟國家標籤那邊同一套：小數點後一位，低於 0.05 收成 <0.1。少了這條，
+// 台灣那一筆 0.007% 會被四捨五入成 0.0%，讀起來像一台都沒有。
+function tourStats() {
+  const s = CC_STATS;
+  if (!s) return {};
+  const n = (cc) => (s.cnt.get(cc) || 0);
+  const pct = (cc) => {
+    const v = (s.w.get(cc) || 0) / (s.totalW || 1) * 100;
+    return v < 0.05 ? '<0.1' : v.toFixed(1);
+  };
+  return {
+    total: s.totalN.toLocaleString(),
+    countries: s.cnt.size,
+    usN: n('us').toLocaleString(), usPct: pct('us'),
+    deN: n('de').toLocaleString(), dePct: pct('de'),
+    twN: n('tw'), twRank: s.rankN.get('tw') || '—', twPct: pct('tw'),
+    blockedN: (OONI && OONI.blocked && OONI.blocked.length) || 0,
+  };
+}
+
+// 哪幾站的資料真的載到了。
+//
+// 使用者估計那一站要有 torusers.json，台灣那兩站要有縣市界加上電力那幾份之一。
+// 抓不到就把整站抽掉，站數跟著少一站。留一站空畫面的話，講者得在台前臨時解釋
+// 為什麼什麼都沒有，那比少講一站糟得多。
+function tourAvailable() {
+  return {
+    users: !!USERS_MAP,
+    tw: !!(TWADMIN && (POWER || GRID)),
+  };
 }
 
 // 這個國家在中繼以外的資料裡有沒有東西。
@@ -3724,6 +3768,27 @@ async function main() {
   // 才算得出取景，所以擺在這裡而不是更早。
   applyFocus();
   addEventListener('hashchange', applyFocus);
+  // 工作坊導覽。擺在這裡是因為第一站要報中繼台數，CC_STATS 要先建好。
+  //
+  // 兩顆入口鍵在 HTML 裡是停用的，到這裡才放行，讀者不會在資料還沒齊的時候按到
+  // 一趟數字全空的導覽。
+  const tour = createTour({
+    $, S, flyTo, setMode, hideCountry,
+    stats: tourStats,
+    available: tourAvailable,
+    onLayout: refreshUIBoxes,
+    // 網址跟著動，複製網址列就是一條「開啟後直接進導覽」的連結，工作坊把它貼進
+    // 投影機那台瀏覽器就能開講。用 replaceState 跟 goFocus 一致，不留歷史紀錄。
+    onStart: () => history.replaceState(null, '', '#tour'),
+    onStop: clearFocus,
+  });
+  for (const id of ['btn-tour', 'btn-tour-hint']) {
+    const b = $(id);
+    if (b) b.disabled = false;
+  }
+  // #tour 進場就直接開講。focusTarget 認不得 tour 這個 key，所以上面那行 applyFocus
+  // 不會把它誤判成國碼，兩者不衝突。
+  if (focusKey().toLowerCase() === 'tour') tour.start();
   renderer.setAnimationLoop(animate);
 }
 main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });

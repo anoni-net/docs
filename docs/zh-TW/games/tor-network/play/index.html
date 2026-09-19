@@ -381,6 +381,46 @@
     @media (prefers-reduced-motion: reduce) { .feed-item { transition: opacity .2s; transform: none; } }
     #hint { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; max-width: min(92vw, 460px); padding: 8px 14px; font-size: 12px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
     #hint.hidden { display: none; }
+
+    /* 工作坊導覽。
+       寬度比提示條寬一截，因為每一站是標題加兩三句說明，460 會讓中文擠成五行。
+       z-index 壓在國家卡片（15）之下、提示條（9）之上：導覽期間卡片仍然點得開，
+       而且該蓋在導覽列上面。 */
+    #tour { left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 11;
+            width: min(94vw, 540px); padding: 11px 14px 12px; }
+    #tour[hidden] { display: none; }
+    #tour-head { display: flex; align-items: baseline; gap: 8px; }
+    #tour-step { flex: none; font-size: 10.5px; font-weight: 800; color: var(--cyan); letter-spacing: .5px; }
+    #tour-title { flex: 1 1 auto; min-width: 0; font-size: 13.5px; font-weight: 800; color: #fff; line-height: 1.45; }
+    #tour-body { margin-top: 5px; font-size: 12px; line-height: 1.7; color: var(--ink); }
+    #tour-body b { color: #fff; font-weight: 800; }
+    #tour-body a { color: #7fc4ea; }
+    #tour-nav { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    #tour-keys { flex: 1 1 auto; min-width: 0; font-size: 10px; color: #6b8296; }
+    /* 三顆按鈕同一組底樣式。line-height 寫死 1，font: inherit 會把 body 的 1.6
+       帶進來，跟旁邊的文字並排時高度會差幾個 px。 */
+    #tour-exit, #tour-prev, #tour-next, #btn-tour, #btn-tour-hint {
+      flex: none; font: inherit; font-size: 11px; font-weight: 700; line-height: 1;
+      padding: 5px 11px; border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--panel-b); background: rgba(0, 174, 255, .12); color: var(--cyan);
+    }
+    #tour-exit { padding: 3px 9px; background: none; border-color: transparent; color: var(--muted); }
+    #tour-exit:hover { color: var(--ink); }
+    /* 下一步是這一列的主要動作，填滿讓它在投影機上一眼看得到 */
+    #tour-next { background: rgba(0, 174, 255, .9); color: #04141f; border-color: transparent; }
+    #tour-prev:disabled, #btn-tour:disabled, #btn-tour-hint:disabled { opacity: .35; cursor: default; }
+    #tour-entry { margin: 0 0 11px; }
+    #tour-note { display: block; margin-top: 5px; font-size: 10.5px; color: #7d93a6; line-height: 1.5; }
+    /* 左側面板寬 340 加上左邊 14，右緣落在 354，而 540 寬的導覽列置中之後，
+       視窗要寬到 1276 才不會壓在面板上。中間那一段（視窗沒有開滿的筆電、平板橫放）
+       還沒窄到會收合面板，所以改成靠右擺，兩塊各據畫面一邊。 */
+    @media (min-width: 681px) and (max-width: 1275px) {
+      #tour { left: auto; right: 14px; transform: none; }
+    }
+    /* 導覽期間訊息串與國家卡片都要讓開導覽列。高度由 tour.js 量完寫進 --tour-h，
+       因為文案長短與語系不同，換行數跟著變，寫死一個數字總有一種組合會撞上。 */
+    body.tour-on #feed { bottom: calc(var(--tour-h, 120px) + 18px); }
+    body.tour-on #cc-card { bottom: calc(var(--tour-h, 120px) + 12px); }
     /* 錯誤訊息獨立一層。原本只寫進面板裡的徽章，但手機預設收合面板，等於什麼都看不到 */
     /* 繼續轉動。使用者一動地球就停下來，這顆才出現，按了就消失。
        不做成浮在地球上的按鈕：試過左下角，被展開的面板蓋住吃掉點擊，而手機上
@@ -509,6 +549,16 @@
     #hint .narrow { display: none; }
     @media (max-width: 680px) {
       #hint { font-size: 10.5px; bottom: 12px; padding: 7px 12px; }
+      /* 手機沒有鍵盤，那一行按鍵說明只是佔掉高度，而導覽列每高一點就多壓住一塊地球 */
+      #tour { bottom: 12px; padding: 10px 12px 11px; }
+      #tour-keys { display: none; }
+      #tour-title { font-size: 12.5px; }
+      #tour-body { font-size: 11.5px; }
+      /* 按鍵說明是桌機那一列的彈性空間，收掉之後兩顆按鈕會掉到左邊，跟桌機的位置對不上 */
+      #tour-nav { justify-content: flex-end; }
+      /* 下一步是整趟導覽要反覆按的那一顆，桌機那個尺寸在手機上是 23px 高，
+         拇指按得到但很容易按偏。加到 32px 左右，仍然比面板裡其他按鈕明顯大一階。 */
+      #tour-prev, #tour-next { padding: 9px 16px; font-size: 12px; }
       #hint .wide { display: none; }
       #hint .narrow { display: inline; }
       #big { font-size: 24px; } .lb { font-size: 10px; }
@@ -541,6 +591,12 @@
       <div class="body">
         <div id="pub"><span id="snapshot-at">資料快照：</span><span id="stat-pub">…</span></div>
         <div id="live-box" hidden><span id="live-status"></span>
+        </div>
+        <!-- 工作坊導覽的入口。擺在資料快照與角色分布之間，面板一展開就按得到，
+             講者不必先往下捲。提示條那邊還有一顆短的，兩顆接同一支 tour.js。 -->
+        <div id="tour-entry">
+          <button id="btn-tour" type="button" disabled>開始導覽</button>
+          <span id="tour-note">七站，約五分鐘。給工作坊與教學現場翻給人看，斷網也開得起來。</span>
         </div>
         <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
@@ -637,7 +693,24 @@
   <div id="hint" class="panel">
     <span class="wide" id="hint-wide">拖曳旋轉地球 · 滾輪或雙指放大會浮出更多國家標籤</span>
     <span class="narrow" id="hint-narrow">拖曳旋轉 · 雙指放大浮出更多標籤</span>
+    <button id="btn-tour-hint" type="button" disabled>導覽</button>
     <span id="hint-close">知道了</span>
+  </div>
+
+  <!-- 工作坊導覽。跟 #hint 佔畫面下緣同一處，兩者不會同時出現，切換由 tour.js 管。
+       站點的文字全部由 i18n 填，這裡留空就好，載入前不會閃過一段繁中再換掉。 -->
+  <div id="tour" class="panel" hidden>
+    <div id="tour-head">
+      <span id="tour-step"></span>
+      <b id="tour-title"></b>
+      <button id="tour-exit" type="button">離開</button>
+    </div>
+    <div id="tour-body" aria-live="polite"></div>
+    <div id="tour-nav">
+      <span id="tour-keys">空白鍵前進 · 左右鍵切換 · Esc 離開</span>
+      <button id="tour-prev" type="button">上一步</button>
+      <button id="tour-next" type="button">下一步</button>
+    </div>
   </div>
 
   <script type="module" src="./atlas.js"></script>

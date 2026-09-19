@@ -19,6 +19,14 @@ Of the three works, the globe pulls in the most data. It puts public datasets sc
 
 <a href="../../games/tor-network/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
 
+## Not sure where to start, take the tour
+
+Click "Start the tour" in the left panel, or open <a href="../../games/tor-network/play/index.html?lang=en#tour">the URL with <code>#tour</code></a>. The globe walks through seven stops in order: the global spread of relays, the gap between relay count and consensus weight, where connections run into trouble, estimated users, where Taiwan sits, the physical layers underneath it, and further reading at the end. Space advances a stop, the arrow keys move back and forth, Esc leaves.
+
+This is built for workshops and classrooms. The work and its data sit in the automatic offline list, so once the page has been opened to store it, it runs with no network at all. You can drag the globe at any point during the tour, and the next stop brings the camera back to where the script wants it.
+
+When a dataset fails to load, the stop that needs it is dropped and the count adjusts.
+
 ## What is on the sphere
 
 Each relay is one dot placed inside its own country's border, coloured by its four possible roles (guard, middle, exit, and guard plus exit) and sized by bandwidth. Landmass brightness carries a separate metric, relay count by default.
