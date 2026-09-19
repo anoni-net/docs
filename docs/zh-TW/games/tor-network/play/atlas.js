@@ -279,9 +279,9 @@ function targetDist() { return R + (fitDist() - R) * view.zoom; }
 // 視角之後同樣的涵蓋度需要站得更遠。用高度判斷的話會變成：視角一窄、高度就升，
 // 判斷就退回遠看，視角又放寬，來回震盪。改用涵蓋度就沒有這個回饋，而且「螢幕上
 // 看得到多少地表」本來就比「離地多高」更貼近這幾個轉換真正想表達的事。
-function coverDeg(dist) {
+function coverDeg(dist, fovDeg) {
   const d = dist === undefined ? camera.position.z : dist;
-  const vFov = camera.fov * Math.PI / 180;
+  const vFov = (fovDeg === undefined ? camera.fov : fovDeg) * Math.PI / 180;
   const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
   const th = Math.min(vFov, hFov) / 2;
   const disc = d * d * Math.cos(th) ** 2 - d * d + R * R;
@@ -448,7 +448,15 @@ function zoomForExtent(latDeg, lonDeg) {
 // 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦，所以
 // 換視角的同時要補償 zoom，讓涵蓋度不變，否則按下「關注台灣」之後畫面會自己再縮一段。
 const FOV_FAR = 45;    // 太空視角
-const FOV_NEAR = 18;   // 地圖視角
+// 地圖視角。這是整個縮放過程裡唯一會改變透視的東西，也是「滾到某一段覺得不順」
+// 最可能的來源：變焦推軌的本質就是中心不動而畫面邊緣脹縮。
+//
+// ?fov-near=N 可以現場改，45 等於整個關掉變焦，滾起來完全沒有透視變化，代價是
+// 貼近地表時畫面仍然是一顆球而不是一張平面地圖。要調手感先拿這個參數兩邊比。
+const FOV_NEAR = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('fov-near'));
+  return v >= 10 && v <= 45 ? v : 18;
+})();
 const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
 
 // 換鏡頭的區間，用畫面短邊的涵蓋度界定。
@@ -463,8 +471,15 @@ const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投
 // 畫面本來就變化很快，扭曲被蓋過去。到了 30 度以內鏡頭就固定在 18 度不再動，
 // 整個細看的範圍都是同一顆鏡頭。整顆地球入鏡時涵蓋度是飽和的 180 度，維持 45 度廣角，
 // 進場的樣子完全沒變。
-const FOV_HI_COVER = 90;
-const FOV_LO_COVER = 30;
+// 上緣本來是 90 度，那正好落在涵蓋度對距離最敏感的那一段：離地 8.2 個半徑是飽和
+// 的 180 度，退到 7.9 就只剩 116 度，一格滾輪的距離只動 3% 卻換來 15 度。換鏡頭
+// 再疊上去，實測 zoom 0.66 到 0.60 那一格涵蓋度一口氣掉 30.8 度，畫面像猛然拉近。
+// 拆開來量是距離佔 15.0 度、視角佔 18.3 度，兩件事剛好撞在一起。
+//
+// 改成 62 度才開始換。那時球已經填滿畫面，涵蓋度對距離的敏感度掉下來了，兩個來源
+// 不再疊加。下緣跟著收到 26，過渡區間的長度維持原樣。
+const FOV_HI_COVER = 62;
+const FOV_LO_COVER = 26;
 
 /** 換鏡頭的進度。頭尾用 smoothstep 抹平，線性斜坡在兩端有硬轉折，看得出來。 */
 function fovT() {
@@ -582,6 +597,9 @@ function twSwapT() {
 //
 // 用 camera.position.z 而不是 targetDist()，因為 animate 是平滑趨近目標距離的，
 // 拖曳當下看到的是相機實際在哪，靈敏度要跟畫面一致而不是跟目標值一致。
+// 一格滾輪最多讓涵蓋的地表變動幾成。理由見 wheel 那段。
+// 0.16 是試出來的：小於這個滾起來會覺得推不動，大於的話飽和區那一段仍然會跳。
+const COVER_STEP_MAX = 0.16;
 const DRAG_K = 0.006;
 function dragRate() {
   const ref = Math.max(1e-3, fitDist() - R);
@@ -3910,7 +3928,25 @@ function bindControls(dom) {
     // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
     const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
     const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
-    view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    let next = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    // 一格滾輪最多讓畫面涵蓋的地表變動這麼多。
+    //
+    // zoom 是相對於 fitDist 的倍率，而涵蓋度跟它高度非線性：球快填滿畫面的那一段，
+    // 離地 8.2 個半徑是飽和的 180 度，退到 7.9 就只剩 116 度，距離只動 3% 卻換來
+    // 15 度。固定比例的 zoom 步進在那裡就是一格滾輪畫面猛然拉近一大截，實測掉 26 度，
+    // 而同樣一格在別的距離只掉 1 到 5 度。
+    //
+    // 所以改成先算這一格會讓涵蓋度變多少，超過上限就回頭解出剛好走到上限的 zoom。
+    // 飽和區（180 度）沒有比例可言，那一段維持原本的 zoom 步進。
+    const before = coverDeg(targetDist());
+    if (before < 179 && step !== 0) {
+      const after = coverDeg(R + (fitDist() - R) * next);
+      const limit = before * (step < 0 ? 1 - COVER_STEP_MAX : 1 + COVER_STEP_MAX);
+      if ((step < 0 && after < limit) || (step > 0 && after > limit)) {
+        next = zoomForCover(Math.min(limit, 179));
+      }
+    }
+    view.zoom = next;
     fly = null;
     clearFocus();
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉

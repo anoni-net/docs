@@ -282,6 +282,15 @@ const ok = [];
       decl(/^const FOCUS_PAD = [^;]+;/m), decl(/^const FOCUS_MIN = [^;]+;/m),
       "const NO_PLACE = new Set(['eu', 'xx', '??', '']);",
       "const ANCHOR = new Map();",
+      // 滾輪那段會先問「這一格會讓涵蓋的地表變多少」，超過上限就回頭解 zoom。
+      // 這支驗的是接線不是縮放手感，所以餵一個飽和的涵蓋度，那段會照原本的
+      // zoom 步進走完，clearFocus 仍然會被呼叫到。
+      "const R = 5;",
+      decl(/^const COVER_STEP_MAX = [^;]+;/m),
+      "const coverDeg = () => 180;",
+      "const targetDist = () => 10;",
+      "const fitDist = () => 15.4;",
+      "const zoomForCover = () => 0.5;",
       extractFn(atlas, 'function focusTarget(key)'),
       extractFn(atlas, 'function goFocus(key)'),
       extractFn(atlas, 'function clearFocus()'),
