@@ -597,14 +597,23 @@ function twSwapT() {
 //
 // 用 camera.position.z 而不是 targetDist()，因為 animate 是平滑趨近目標距離的，
 // 拖曳當下看到的是相機實際在哪，靈敏度要跟畫面一致而不是跟目標值一致。
+//
+// 還要乘上視角那一項。距離 d 處螢幕上每一像素對應的世界距離是
+// 2 · d · tan(fov/2) / 畫面高，所以同樣一度轉動在螢幕上跑多遠，除了距離還跟視角
+// 有關。貼近地表時鏡頭從 45 度收到 18 度，tan 比是 2.62，漏掉這一項的話拖曳就是
+// 快了 2.62 倍：手指動一點點地球就甩過去。基準同樣取進場時的 45 度，所以遠看的
+// 手感一個字都沒變。
+const DRAG_K = 0.006;
+const DRAG_TAN_REF = Math.tan(FOV_FAR * Math.PI / 360);
+function dragRate() {
+  const ref = Math.max(1e-3, fitDist() - R);
+  const tanNow = Math.tan(camera.fov * Math.PI / 360);
+  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref * (tanNow / DRAG_TAN_REF);
+}
+
 // 一格滾輪最多讓涵蓋的地表變動幾成。理由見 wheel 那段。
 // 0.16 是試出來的：小於這個滾起來會覺得推不動，大於的話飽和區那一段仍然會跳。
 const COVER_STEP_MAX = 0.16;
-const DRAG_K = 0.006;
-function dragRate() {
-  const ref = Math.max(1e-3, fitDist() - R);
-  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref;
-}
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組

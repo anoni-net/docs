@@ -138,6 +138,36 @@ for (const sel of ['#top', '#cc-card', '#hint', '#tour']) {
   check(W.ry() === before, '在左側面板上拖曳不會轉動地球');
 }
 
+// --- 拖曳的靈敏度 ---
+//
+// 螢幕上每一像素對應的世界距離是 2 · d · tan(fov/2) / 畫面高，所以拖曳一像素該轉
+// 多少角度，除了距離還跟視角有關。原本只算了距離，而貼近地表時鏡頭從 45 度收到
+// 18 度，tan 比是 2.62，漏掉那一項就是拖曳快了 2.62 倍，手指動一點點地球就甩過去。
+{
+  const src = `
+    const R = 5;
+    ${decl(/^const FOV_FAR = [^;]+;/m)}
+    ${decl(/^const DRAG_K = [^;]+;/m)}
+    ${decl(/^const DRAG_TAN_REF = [^;]+;/m)}
+    let camera = { fov: 45, position: { z: 15.42 } };
+    const fitDist = () => 15.42;
+    ${extractFn(atlas, 'function dragRate()')}
+    return { rate: (d, fov) => { camera = { fov, position: { z: d } }; return dragRate(); } };
+  `;
+  const D = new Function(src)();
+  const base = D.rate(15.42, 45);
+  check(Math.abs(base - 0.006) < 1e-9, `進場時的手感沒變（${base}）`);
+  // 只有距離變、視角不變的話，靈敏度正比於離地距離
+  const half = D.rate(5 + (15.42 - 5) / 2, 45);
+  check(Math.abs(half / base - 0.5) < 1e-6, '距離減半，靈敏度也減半');
+  // 同一個距離換成望遠鏡頭，靈敏度要照 tan 比往下收
+  const near = D.rate(10, 45), tele = D.rate(10, 18);
+  const want = Math.tan(18 * Math.PI / 360) / Math.tan(45 * Math.PI / 360);
+  check(Math.abs(tele / near - want) < 1e-6,
+        `同一個距離下 18 度鏡頭的靈敏度是 45 度的 ${(tele / near).toFixed(3)}（應為 ${want.toFixed(3)}）`);
+  check(tele < near * 0.45, '換成望遠鏡頭之後拖曳明顯變慢，不會手指動一點點就甩過去');
+}
+
 for (const m of ok) console.log(`  ok   ${m}`);
 if (fail.length) {
   console.error('');
