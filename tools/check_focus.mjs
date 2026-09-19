@@ -262,8 +262,20 @@ const ok = [];
     const btns = { 'btn-tw': mkBtn('btn-tw'), 'btn-spin': mkBtn('btn-spin') };
     const $ = (id) => btns[id] || null;
     /*BIND_SRC*/
+    // 地球的操作現在掛在 window 不是畫布上，理由見 atlas.js 的 bindControls 檔頭：
+    // 可見的國家標籤設了 pointer-events: auto 才點得開卡片，掛在畫布上的話游標壓在
+    // 標籤上就縮放不了也拖不動。所以這裡攔的是全域的 addEventListener。
     const H = {};
-    const dom = { addEventListener: (t, f) => { (H[t] = H[t] || []).push(f); }, setPointerCapture: () => {} };
+    globalThis.addEventListener = (t, f) => { (H[t] = H[t] || []).push(f); };
+    // bindControls 會先問事件是不是落在面板上。這幾支重放的都是地球上的操作，
+    // 一律回 false。真正驗那條排除的是 check_ui_passthrough.mjs。
+    const onUI = () => false;
+    // 拖曳現在會先把滑鼠投影回球面算角度差，打不到球才退回固定比例。這幾支沒有相機
+    // 可以投影，一律回 null 走比例那條，驗的是接線與係數本身。球面那條另外直接驗數學。
+    const DRAG_GRAB = false;
+    const sphereAt = () => null;
+    const dragA = {}, dragB = {};
+    const dom = { setPointerCapture: () => {} };
     globalThis.document = { addEventListener: () => {}, querySelectorAll: () => [] };
     bindControls(dom);
     return {
@@ -282,6 +294,15 @@ const ok = [];
       decl(/^const FOCUS_PAD = [^;]+;/m), decl(/^const FOCUS_MIN = [^;]+;/m),
       "const NO_PLACE = new Set(['eu', 'xx', '??', '']);",
       "const ANCHOR = new Map();",
+      // 滾輪那段會先問「這一格會讓涵蓋的地表變多少」，超過上限就回頭解 zoom。
+      // 這支驗的是接線不是縮放手感，所以餵一個飽和的涵蓋度，那段會照原本的
+      // zoom 步進走完，clearFocus 仍然會被呼叫到。
+      "const R = 5;",
+      decl(/^const COVER_STEP_MAX = [^;]+;/m),
+      "const coverDeg = () => 180;",
+      "const targetDist = () => 10;",
+      "const fitDist = () => 15.4;",
+      "const zoomForCover = () => 0.5;",
       extractFn(atlas, 'function focusTarget(key)'),
       extractFn(atlas, 'function goFocus(key)'),
       extractFn(atlas, 'function clearFocus()'),
