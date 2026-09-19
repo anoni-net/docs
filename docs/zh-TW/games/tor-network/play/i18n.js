@@ -205,6 +205,9 @@ const ZH_TW = {
   hexScale7: '約一個都會區的網路範圍，光纖 1 毫秒來回',
   hexScale8: '約一座電廠的地盤，光纖 0.5 毫秒',
   hexScale9: '約一座變電所的供電範圍',
+  hexScale10: '約半個鄉鎮',
+  hexScale11: '約一個行政區，或一座科學園區',
+  hexScale12: '約一個里',
   backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a>',
 };
 
@@ -395,6 +398,9 @@ const EN = {
   hexScale7: 'about one metro network, 1 ms of fibre round trip',
   hexScale8: 'about one power station\'s ground, 0.5 ms',
   hexScale9: 'about one substation\'s supply area',
+  hexScale10: 'about half a township',
+  hexScale11: 'about one district, or one science park',
+  hexScale12: 'about one village',
   backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/blog/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
 };
 
@@ -585,6 +591,9 @@ const ZH_CN = {
   hexScale7: '约一个都会区的网络范围，光纤 1 毫秒来回',
   hexScale8: '约一座电厂的地盘，光纤 0.5 毫秒',
   hexScale9: '约一座变电站的供电范围',
+  hexScale10: '约半个乡镇',
+  hexScale11: '约一个行政区，或一座科学园区',
+  hexScale12: '约一个里',
   backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
 };
 

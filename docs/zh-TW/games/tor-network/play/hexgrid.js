@@ -179,6 +179,121 @@ export function toLatLon(p) {
 }
 
 /**
+ * 只算某一小塊的高解析網格。
+ *
+ * 台灣那一帶要細到公里級，而全球的 level 11 是 4,190 萬格，瀏覽器算不動也裝不下。
+ * 這支在細分的時候就把離中心太遠的面丟掉，格數降到範圍佔比那麼多，level 11 的
+ * 台灣一帶只剩八千格。
+ *
+ * 兩件事會讓結果錯掉：
+ *
+ * 剔除的半徑要跟著每一級的三角形大小縮。正二十面體的邊長是 63.4 度，細分一次減半，
+ * 前幾級的三角形比整個台灣還大，拿最終半徑去砍會一刀砍光，回傳空的。
+ *
+ * 取對偶需要一格周圍的面都在。邊界上的格子少了面會缺角，所以保留的範圍要比實際
+ * 要用的多一圈，最後只收周圍面數是 5 或 6 的格。
+ *
+ * 回傳的形狀跟 dualCells 一樣，所以 cellGeometry 兩邊通用。
+ */
+export function localCells(level, centerLat, centerLon, radiusDeg, buffer = 2) {
+  const cv = latLonToVec(centerLat, centerLon);
+  const V = [];   // 扁平的頂點座標，細分途中會累積被丟掉那些面的頂點
+  for (let i = 0; i < 36; i += 3) {
+    const L = Math.hypot(ICO_V[i], ICO_V[i + 1], ICO_V[i + 2]);
+    V.push(ICO_V[i] / L, ICO_V[i + 1] / L, ICO_V[i + 2] / L);
+  }
+  const far = (i, cos) => V[i * 3] * cv[0] + V[i * 3 + 1] * cv[1] + V[i * 3 + 2] * cv[2] < cos;
+  let faces = ICO_F.slice();
+  for (let it = 0; it < level; it++) {
+    const mid = new Map();
+    const middle = (a, b) => {
+      const key = a < b ? a * 4194304 + b : b * 4194304 + a;
+      const got = mid.get(key);
+      if (got !== undefined) return got;
+      const ai = a * 3, bi = b * 3;
+      const x = (V[ai] + V[bi]) / 2, y = (V[ai + 1] + V[bi + 1]) / 2, z = (V[ai + 2] + V[bi + 2]) / 2;
+      const L = Math.hypot(x, y, z);
+      V.push(x / L, y / L, z / L);
+      const vi = V.length / 3 - 1;
+      mid.set(key, vi);
+      return vi;
+    };
+    // 63.4 是正二十面體的邊長（度），細分一次減半
+    const cos = Math.cos(Math.min(180, radiusDeg + buffer + 63.4 / 2 ** it) * Math.PI / 180);
+    const next = [];
+    for (let f = 0; f < faces.length; f += 3) {
+      const a = faces[f], b = faces[f + 1], c = faces[f + 2];
+      const ab = middle(a, b), bc = middle(b, c), ca = middle(c, a);
+      const quad = [a, ab, ca, b, bc, ab, c, ca, bc, ab, bc, ca];
+      for (let q = 0; q < 12; q += 3) {
+        // 三個頂點全都太遠才丟。留一個在範圍內就保住，邊界的格子才不會缺面。
+        if (!far(quad[q], cos) || !far(quad[q + 1], cos) || !far(quad[q + 2], cos)) {
+          next.push(quad[q], quad[q + 1], quad[q + 2]);
+        }
+      }
+    }
+    faces = next;
+  }
+  // 取對偶。只收周圍面數是 5 或 6 的頂點，其餘是被切掉的邊界。
+  const around = new Map();
+  const nf = faces.length / 3;
+  const fc = new Float64Array(nf * 3);
+  for (let f = 0; f < nf; f++) {
+    const a = faces[f * 3] * 3, b = faces[f * 3 + 1] * 3, c = faces[f * 3 + 2] * 3;
+    const x = (V[a] + V[b] + V[c]) / 3, y = (V[a + 1] + V[b + 1] + V[c + 1]) / 3, z = (V[a + 2] + V[b + 2] + V[c + 2]) / 3;
+    const L = Math.hypot(x, y, z);
+    fc[f * 3] = x / L; fc[f * 3 + 1] = y / L; fc[f * 3 + 2] = z / L;
+    for (let k = 0; k < 3; k++) {
+      const v = faces[f * 3 + k];
+      let arr = around.get(v);
+      if (!arr) { arr = []; around.set(v, arr); }
+      arr.push(f);
+    }
+  }
+  const keepCos = Math.cos(Math.min(180, radiusDeg) * Math.PI / 180);
+  const pick = [];
+  for (const [v, fs] of around) {
+    if (fs.length !== 5 && fs.length !== 6) continue;
+    if (V[v * 3] * cv[0] + V[v * 3 + 1] * cv[1] + V[v * 3 + 2] * cv[2] < keepCos) continue;
+    pick.push(v);
+  }
+  pick.sort((a, b) => a - b);   // 順序穩定，重算兩次拿到的是同一份
+  const nc = pick.length;
+  const centers = new Float64Array(nc * 3);
+  const ringOff = new Uint32Array(nc + 1);
+  for (let i = 0; i < nc; i++) ringOff[i + 1] = ringOff[i] + around.get(pick[i]).length;
+  const ringIdx = new Uint32Array(ringOff[nc]);
+  const ang = new Float64Array(6), tmp = new Uint32Array(6);
+  for (let i = 0; i < nc; i++) {
+    const v = pick[i];
+    const nx = V[v * 3], ny = V[v * 3 + 1], nz = V[v * 3 + 2];
+    centers[i * 3] = nx; centers[i * 3 + 1] = ny; centers[i * 3 + 2] = nz;
+    const fs = around.get(v);
+    const f0 = fs[0] * 3;
+    let ux = fc[f0] - nx, uy = fc[f0 + 1] - ny, uz = fc[f0 + 2] - nz;
+    const d = ux * nx + uy * ny + uz * nz;
+    ux -= d * nx; uy -= d * ny; uz -= d * nz;
+    const uL = Math.hypot(ux, uy, uz);
+    ux /= uL; uy /= uL; uz /= uL;
+    const wx = ny * uz - nz * uy, wy = nz * ux - nx * uz, wz = nx * uy - ny * ux;
+    for (let k = 0; k < fs.length; k++) {
+      const j = fs[k] * 3;
+      const dx = fc[j] - nx, dy = fc[j + 1] - ny, dz = fc[j + 2] - nz;
+      ang[k] = Math.atan2(dx * wx + dy * wy + dz * wz, dx * ux + dy * uy + dz * uz);
+      tmp[k] = fs[k];
+    }
+    for (let a = 1; a < fs.length; a++) {
+      const av = ang[a], tv = tmp[a];
+      let b = a - 1;
+      while (b >= 0 && ang[b] > av) { ang[b + 1] = ang[b]; tmp[b + 1] = tmp[b]; b--; }
+      ang[b + 1] = av; tmp[b + 1] = tv;
+    }
+    for (let k = 0; k < fs.length; k++) ringIdx[ringOff[i] + k] = tmp[k];
+  }
+  return { centers, nc, ringOff, ringIdx, faceCenters: fc, level, local: true };
+}
+
+/**
  * 挑出視野附近的格子。
  *
  * 換級之後 level 8 有 655,362 格，全部建成幾何是 1,132,107 個三角形、63 MB。
