@@ -259,7 +259,8 @@ for (const lv of LEVELS) {
 // level 11 是 4,190 萬格，只為了台灣那三千格不划算。國碼也在前端判，國界與縣市界
 // 本來就載進來了。
 {
-  const inRings = new Function(`${extractFn(atlas, 'function inRings(')}; return inRings;`)();
+  // inRings 已經搬到 hexgrid.js，三處共用一份（取樣中繼點、判六角格的國碼、worker）
+  const inRings = hex.inRings;
   const adm = JSON.parse(read(path.join(PLAY, 'tw-admin.json')));
   const twRings = [];
   for (const c of adm.c) for (const r of c.p) twRings.push(r);
@@ -389,6 +390,31 @@ for (const lv of LEVELS) {
   }
 }
 
+// --- 判國碼的共用邏輯 ---
+//
+// 主執行緒與背景執行緒判的必須是同一件事。worker 自己抓國界與縣市界，主執行緒
+// 用手上那份，兩邊呼叫的是 hexgrid.js 的同一支 judgeAt，這裡驗它的行為。
+{
+  const world = JSON.parse(read(path.join(PLAY, 'countries.json')));
+  const adm = JSON.parse(read(path.join(PLAY, 'tw-admin.json')));
+  const idx = hex.judgeIndex(world, adm);
+  check(idx.list.length > 150, `外接框收了 ${idx.list.length} 國`);
+  check(idx.tw.length > 0, `台灣的縣市界收了 ${idx.tw.length} 條環線`);
+  for (const [nm, lat, lon, want] of [
+    ['金門', 24.432, 118.317, 'tw'], ['馬祖南竿', 26.152, 119.937, 'tw'],
+    ['台中', 24.15, 120.75, 'tw'], ['廈門', 24.479, 118.089, 'cn'],
+    ['福州', 26.074, 119.296, 'cn'], ['柏林', 52.52, 13.40, 'de'],
+  ]) {
+    const got = hex.judgeAt(idx, lat, lon);
+    check(got === want, `judgeAt 把 ${nm} 判成 ${got}${got === want ? '' : `，應該是 ${want}`}`);
+  }
+  // 沒有縣市界那份的時候要能退回國界。worker 抓不到 tw-admin.json 就走這條。
+  const bare = hex.judgeIndex(world, null);
+  check(hex.judgeAt(bare, 24.15, 120.75) === 'tw', '少了縣市界，台灣本島仍判得出來');
+  check(hex.judgeAt(idx, 24.432, 118.317) === 'tw' && hex.judgeAt(bare, 24.432, 118.317) === 'cn',
+        '金門要靠縣市界那份才判成台灣，少了它就會被 110m 判進中國');
+}
+
 // --- 接線 ---
 check(atlas.includes("from './hexgrid.js'"), 'atlas.js 載入了 hexgrid.js');
 check(atlas.includes('async function hexRefresh()'), 'atlas.js 有依距離換級的入口');
@@ -404,7 +430,9 @@ check(/const HEX_LIFT = 1\.0015/.test(atlas), '六角層的高度壓在所有線
 check(atlas.includes('cellsNear('), '只建看得到的那些格子');
 check(atlas.includes('function hexNearLocal('), '視野在台灣那一塊時局部那幾級才進候選');
 check(atlas.includes('function hexBuildLocal('), 'atlas.js 會現場算局部網格');
-check(atlas.includes('function hexJudge('), '局部網格的國碼在前端判');
+check(atlas.includes('judgeCells('), '局部網格的國碼在前端判');
+check(atlas.includes("new Worker(new URL('./hexworker.js'"), '幾何算在背景執行緒');
+check(fs.existsSync(path.join(PLAY, 'hexworker.js')), 'hexworker.js 在');
 check(/HEX_LOCAL_LEVELS/.test(atlas), '局部那邊也會換級');
 check(atlas.includes('function hexShowScale('), '面板會顯示這一級代表多大');
 check(/HEX_KM = \{ 5: 277, 6: 139, 7: 69, 8: 35, 9: 17, 10: 8\.7, 11: 4\.3, 12: 2\.2 \}/.test(atlas),

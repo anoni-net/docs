@@ -432,6 +432,83 @@ export function localGeometry(data, radius, shrink = 0.92) {
   return { position, normal, index, faceCell, vertStart, vertCount };
 }
 
+/**
+ * 射線法：這個經緯度在不在這組多邊形裡。
+ *
+ * 全部的 ring 一起算偶奇，所以內部的洞（例如南非包著賴索托）會自動被扣掉。
+ * 放在這裡是因為三個地方要用同一份：畫中繼點時在國土內取樣、六角層判國碼、
+ * 背景執行緒裡判局部網格的國碼。各寫一份遲早會漂走。
+ */
+export function inRings(rings, lon, lat) {
+  let hit = false;
+  for (const r of rings) {
+    for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) {
+      const yi = r[i + 1], yj = r[j + 1];
+      if ((yi > lat) !== (yj > lat) && lon < (r[j] - r[i]) * (lat - yi) / (yj - yi) + r[i]) hit = !hit;
+    }
+  }
+  return hit;
+}
+
+/**
+ * 判國碼要用的外接框。逐格對 177 國做射線法太慢，用框先篩掉九成九。
+ *
+ * 台灣另外收一份而且排在最前面：Natural Earth 110m 把金門畫進中國的多邊形裡，
+ * 馬祖、澎湖、綠島、蘭嶼那個比例尺下整個沒收錄。縣市界那份是內政部的，22 個縣市都在。
+ */
+export function judgeIndex(world, twAdmin) {
+  const box = (rings) => {
+    let lo0 = 1e9, la0 = 1e9, lo1 = -1e9, la1 = -1e9;
+    for (const r of rings) {
+      for (let i = 0; i < r.length; i += 2) {
+        if (r[i] < lo0) lo0 = r[i];
+        if (r[i] > lo1) lo1 = r[i];
+        if (r[i + 1] < la0) la0 = r[i + 1];
+        if (r[i + 1] > la1) la1 = r[i + 1];
+      }
+    }
+    return [lo0, la0, lo1, la1];
+  };
+  const list = [];
+  for (const c of (world && world.c) || []) {
+    if (!c.k) continue;
+    const b = box(c.p);
+    list.push({ k: c.k, rings: c.p, lo0: b[0], la0: b[1], lo1: b[2], la1: b[3] });
+  }
+  const tw = [];
+  for (const c of (twAdmin && twAdmin.c) || []) for (const r of c.p) tw.push(r);
+  return { tw, twBox: tw.length ? box(tw) : [0, 0, 0, 0], list };
+}
+
+/** 一個座標落在哪一國。台灣優先，理由見 judgeIndex。 */
+export function judgeAt(idx, lat, lon) {
+  if (!idx) return null;
+  const { tw, twBox, list } = idx;
+  if (tw.length && lon >= twBox[0] && lon <= twBox[2] && lat >= twBox[1] && lat <= twBox[3]
+      && inRings(tw, lon, lat)) return 'tw';
+  for (const b of list) {
+    if (lon < b.lo0 || lon > b.lo1 || lat < b.la0 || lat > b.la1) continue;
+    if (inRings(b.rings, lon, lat)) return b.k;
+  }
+  return null;
+}
+
+/** 把一份局部網格的每一格判成國碼。回傳 1-based 的索引陣列與國碼表。 */
+export function judgeCells(dual, idx) {
+  const codes = [];
+  const seen = new Map();
+  const cc = new Uint8Array(dual.nc);
+  for (let i = 0; i < dual.nc; i++) {
+    const ll = cellLatLon(dual, i);
+    const k = judgeAt(idx, ll[0], ll[1]);
+    if (!k) continue;
+    let id = seen.get(k);
+    if (id === undefined) { codes.push(k); id = codes.length; seen.set(k, id); }
+    cc[i] = id;
+  }
+  return { cc, codes };
+}
+
 /** base64 的國碼陣列解回 Uint8Array。 */
 export function decodeCC(b64) {
   const bin = atob(b64);

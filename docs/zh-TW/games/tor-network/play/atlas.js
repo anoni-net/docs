@@ -8,7 +8,8 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML, STR } from './i18n.js';
-import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder } from './hexgrid.js';
+import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder,
+         inRings, judgeIndex, judgeCells } from './hexgrid.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -532,6 +533,7 @@ function updateDbg(dt) {
         + `  want lv${hexPickLevel(c, hexNearLocal(c, hexViewDir()))}  ${HEX ? (HEX_DIAG_DEG[HEX.level] / c * Math.min(innerWidth, innerHeight)).toFixed(0) + ' px' : ''}`
         + `  r${HEX ? HEX.radiusDeg.toFixed(0) : '-'}°  busy ${hexBusy ? 'Y' : 'N'}`
         + (hexFade ? `  淡入 ${(hexFade.t * 100).toFixed(0)}%` : '')
+        + `  ${hexWorker ? 'worker' : (hexWorker === false ? '主執行緒' : '未啟')} ${hexLastMs.toFixed(0)}ms`
         + (HEX ? `\n     格心 ${hexLL(HEX.dir)}  現在 ${hexLL(hexViewDir())}` : '') : '');
 }
 
@@ -1333,6 +1335,52 @@ const HEX_LOCAL_AT = [23.7, 121.0];  // 台灣本島中心
 const HEX_LOCAL_RADIUS = 3.6;        // 涵蓋本島、澎湖、金門、馬祖、綠島、蘭嶼
 const HEX_LOCAL_COVER = 9;           // 畫面涵蓋度小於這個才輪到它，再遠就用全球的 level 8
 const hexLocalCache = new Map();     // level → 那一級的局部網格，建過就留著
+
+// 幾何在背景執行緒算。理由見 hexworker.js 的檔頭：level 8 的全球細分加對偶要
+// 357 毫秒，在主執行緒上做就是滾輪滾到那一段畫面整個停住。
+//
+// worker 起不來（舊瀏覽器、被政策擋掉）就退回主執行緒同步算，會卡一下但畫得出來，
+// 少一層的話這個原型就什麼都看不到了。
+let hexWorker = null;               // null 還沒試、false 不能用、物件可用
+let hexWorkerSeq = 0;
+const hexWorkerJobs = new Map();
+
+function hexWorkerGet() {
+  if (hexWorker !== null) return hexWorker || null;
+  try {
+    hexWorker = new Worker(new URL('./hexworker.js', import.meta.url), { type: 'module' });
+    hexWorker.onmessage = (e) => {
+      const done = hexWorkerJobs.get(e.data && e.data.id);
+      if (done) { hexWorkerJobs.delete(e.data.id); done(e.data); }
+    };
+    hexWorker.onerror = () => {
+      console.warn('hexgrid: 背景執行緒起不來，改在主執行緒算，換級時會頓一下');
+      hexWorker = false;
+      for (const done of hexWorkerJobs.values()) done(null);
+      hexWorkerJobs.clear();
+    };
+  } catch {
+    hexWorker = false;
+  }
+  return hexWorker || null;
+}
+
+/** 丟一份工作給背景執行緒。沒有 worker 可用時回 null，呼叫端自己同步算。 */
+function hexWorkerAsk(req) {
+  const w = hexWorkerGet();
+  if (!w) return null;
+  return new Promise((resolve) => {
+    const id = ++hexWorkerSeq;
+    hexWorkerJobs.set(id, resolve);
+    w.postMessage({ ...req, id });
+  });
+}
+
+/** worker 傳回來的 typed array 重組成 dualCells 那個形狀。 */
+function hexFromWorker(m) {
+  return { centers: m.centers, nc: m.nc, ringOff: m.ringOff, ringIdx: m.ringIdx,
+           faceCenters: m.faceCenters, level: m.level, local: m.local };
+}
 let hexJudgeBoxes = null;            // 各國的外接框，判國碼前先用它篩掉九成九
 let hexLocalDir = null;              // 台灣本島中心的方向，判斷視野在不在那一塊
 let HEX = null;                 // 目前畫出來的那一份
@@ -1341,6 +1389,7 @@ let hexBusy = false;            // 正在載資料或建幾何，別再排一次
 const hexCol = new THREE.Color();
 const hexDir = new THREE.Vector3();
 let hexFade = null;   // 正在淡出的上一份 { mesh, mat, geo, alpha, t }
+let hexLastMs = 0;    // 上一次換級在主執行緒上花了多久，debug 面板會顯示
 
 /**
  * 這個涵蓋度下該用哪一級。目前這一級還可以就不換，換級要重建幾何。
@@ -1378,67 +1427,33 @@ function hexViewDir() {
   return hexDir.normalize();
 }
 
-/**
- * 一個座標落在哪一國。台灣優先，理由跟 gen_hexgrid.py 檔頭寫的一樣：
- * Natural Earth 110m 把金門畫進中國的多邊形裡，馬祖、澎湖、綠島、蘭嶼那個比例尺
- * 下整個沒收錄。縣市界那份是內政部的，22 個縣市都在。
- */
-function hexJudge(lat, lon) {
-  if (!hexJudgeBoxes) return null;
-  const { tw, twBox, list } = hexJudgeBoxes;
-  if (tw.length && lon >= twBox[0] && lon <= twBox[2] && lat >= twBox[1] && lat <= twBox[3]
-      && inRings(tw, lon, lat)) return 'tw';
-  for (const b of list) {
-    if (lon < b.lo0 || lon > b.lo1 || lat < b.la0 || lat > b.la1) continue;
-    if (inRings(b.rings, lon, lat)) return b.k;
-  }
-  return null;
-}
-
-/** 判國碼要用的外接框。逐格對 177 國做射線法太慢，用框先篩掉九成九。建一次就留著。 */
+/** 判國碼要用的外接框。worker 起不來時才用得到，那條路徑會在主執行緒上判。 */
 function hexPrepJudge(world) {
-  if (hexJudgeBoxes) return;
-  const box = (rings) => {
-    let lo0 = 1e9, la0 = 1e9, lo1 = -1e9, la1 = -1e9;
-    for (const r of rings) {
-      for (let i = 0; i < r.length; i += 2) {
-        if (r[i] < lo0) lo0 = r[i];
-        if (r[i] > lo1) lo1 = r[i];
-        if (r[i + 1] < la0) la0 = r[i + 1];
-        if (r[i + 1] > la1) la1 = r[i + 1];
-      }
-    }
-    return [lo0, la0, lo1, la1];
-  };
-  const list = [];
-  for (const c of (world && world.c) || []) {
-    if (!c.k) continue;
-    const b = box(c.p);
-    list.push({ k: c.k, rings: c.p, lo0: b[0], la0: b[1], lo1: b[2], la1: b[3] });
-  }
-  const tw = [];
-  for (const c of (TWADMIN && TWADMIN.c) || []) for (const r of c.p) tw.push(r);
-  hexJudgeBoxes = { tw, twBox: tw.length ? box(tw) : [0, 0, 0, 0], list };
+  if (!hexJudgeBoxes) hexJudgeBoxes = judgeIndex(world, TWADMIN);
 }
 
 /** 台灣那塊的某一級。只在真的貼近台灣時才算，算過就留著。 */
-function hexBuildLocal(level) {
+async function hexBuildLocal(level) {
   if (hexLocalCache.has(level)) return hexLocalCache.get(level);
   if (!hexJudgeBoxes) return null;
-  const dual = localCells(level, HEX_LOCAL_AT[0], HEX_LOCAL_AT[1], HEX_LOCAL_RADIUS);
-  if (!dual.nc) return null;
-  // 只留有國家的格。海的格子不畫，底圖不會在海上長出蜂巢。
-  const codes = [];
-  const index = new Map();
-  const cc = new Uint8Array(dual.nc);
-  for (let i = 0; i < dual.nc; i++) {
-    const ll = cellLatLon(dual, i);
-    const k = hexJudge(ll[0], ll[1]);
-    if (!k) continue;
-    let id = index.get(k);
-    if (id === undefined) { codes.push(k); id = codes.length; index.set(k, id); }
-    cc[i] = id;
+  const got = await (hexWorkerAsk({ kind: 'local', level, lat: HEX_LOCAL_AT[0],
+                                    lon: HEX_LOCAL_AT[1], radius: HEX_LOCAL_RADIUS })
+                     || Promise.resolve(null));
+  let dual, cc, codes;
+  if (got && got.ok) {
+    dual = hexFromWorker(got);
+    cc = got.cc;
+    codes = got.codes;
+  } else {
+    // worker 不可用的退路。判 41,086 格的國碼要 620 毫秒，主執行緒會明顯頓一下，
+    // 但總比整層畫不出來好。
+    dual = localCells(level, HEX_LOCAL_AT[0], HEX_LOCAL_AT[1], HEX_LOCAL_RADIUS);
+    if (!dual.nc) return null;
+    const j = judgeCells(dual, hexJudgeBoxes);
+    cc = j.cc;
+    codes = j.codes;
   }
+  if (!dual.nc) return null;
   const rec = { dual, cc, codes, level, local: true };
   hexLocalCache.set(level, rec);
   return rec;
@@ -1461,7 +1476,8 @@ async function hexLoadLevel(lv) {
   if (hexCache.has(lv)) return hexCache.get(lv);
   const data = await getJSON(`./hexgrid-${lv}.json`).catch(() => null);
   if (!data || !data.cc) return null;
-  const dual = dualCells(lv);
+  const got = await (hexWorkerAsk({ kind: 'global', level: lv }) || Promise.resolve(null));
+  const dual = got && got.ok ? hexFromWorker(got) : dualCells(lv);
   // 幾何在這邊算，國碼在資料檔裡，兩邊的頂點順序錯開一格，結果就是每一格都有
   // 顏色但顏色屬於別的國家，而畫面看起來完全正常。對不上就整級不用。
   if (!verifyOrder(dual, data.probe)) {
@@ -1486,6 +1502,7 @@ function hexBuildMesh(rec, dir, radiusDeg) {
     HEX = null;
     return;
   }
+  const t0 = performance.now();
   const g = cellGeometry(rec.dual, cells, R * HEX_LIFT, HEX_SHRINK);
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(g.position, 3));
@@ -1516,6 +1533,9 @@ function hexBuildMesh(rec, dir, radiusDeg) {
           dir: dir.clone(), radiusDeg };
   hexPaint(MODE);
   hexShowScale(rec.level);
+  // 主執行緒在換級上實際花掉的時間。重的那一段（細分與取對偶）在 worker 裡，
+  // 這裡剩下的是裁切、建 BufferGeometry 與上色。
+  hexLastMs = performance.now() - t0;
   // 舊的接手去淡出，新的從透明淡進來。上一輪還沒淡完的直接收掉，
   // 連續縮放的時候同時最多兩份，不會愈疊愈多。
   if (old) {
@@ -1572,7 +1592,7 @@ async function hexRefresh() {
   hexBusy = true;
   try {
     // 9 以上是台灣那一塊的局部網格，現場細分，不必多一個資料檔
-    const rec = lv >= 9 ? hexBuildLocal(lv) : await hexLoadLevel(lv);
+    const rec = lv >= 9 ? await hexBuildLocal(lv) : await hexLoadLevel(lv);
     if (rec) hexBuildMesh(rec, dir, radius);
   } finally {
     hexBusy = false;
@@ -2580,16 +2600,6 @@ function buildCoastline(coast, world) {
 }
 
 // 射線法：點是否落在該國的任一個外環內
-function inRings(rings, lon, lat) {
-  let hit = false;
-  for (const r of rings) {
-    for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) {
-      const yi = r[i + 1], yj = r[j + 1];
-      if ((yi > lat) !== (yj > lat) && lon < (r[j] - r[i]) * (lat - yi) / (yj - yi) + r[i]) hit = !hit;
-    }
-  }
-  return hit;
-}
 
 // 散布半徑由中繼數決定，不再由國土面積決定。
 // 原本在國界內隨機取樣，結果是加拿大 203 台灑滿整片國土（連北極圈都有點），瑞典 513 台
