@@ -100,9 +100,17 @@ def build(level):
 
 
 def to_ll(p):
-    """球面座標換經緯度。跟 atlas.js 的 llToVec 互為反函數，Y 是北極。"""
+    """球面座標換經緯度。必須是 atlas.js 那支 llToVec 的反函數。
+
+    llToVec 用 phi = 90 - lat、theta = lon + 180，展開之後
+    x = cos(lat)cos(lon)、y = sin(lat)、z = -cos(lat)sin(lon)，所以經度是 atan2(-z, x)。
+
+    第一版寫成 atan2(x, z)，算出來的經度整整多 90 度。前端與這裡用同一個錯式子，
+    所以 probe 比對、格數、五邊形數量全部照樣通過，畫面上卻是每一格都塗成東邊
+    90 度那個國家的顏色。這條式子動到的時候，先跑 tools/check_hexgrid.mjs。
+    """
     lat = math.degrees(math.asin(max(-1.0, min(1.0, p[1]))))
-    lon = math.degrees(math.atan2(p[0], p[2]))
+    lon = math.degrees(math.atan2(-p[2], p[0]))
     return lat, lon
 
 

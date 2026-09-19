@@ -65,10 +65,22 @@ export function geodesic(level) {
   return { verts, faces };
 }
 
-/** 球面座標換經緯度。跟 atlas.js 的 llToVec 互為反函數，Y 軸指向北極。 */
+/**
+ * 球面座標換經緯度。必須是 atlas.js 那支 llToVec 的反函數。
+ *
+ * llToVec 用的是 phi = 90 - lat、theta = lon + 180，展開之後
+ * x = cos(lat)cos(lon)、y = sin(lat)、z = -cos(lat)sin(lon)，
+ * 所以經度要用 atan2(-z, x)。
+ *
+ * 第一版寫成 atan2(x, z)，那個式子算出來的經度整整多 90 度。兩邊的細分順序、
+ * 格數、五邊形數量、probe 取樣點全部照樣對得上，因為產生器與這裡用的是同一個
+ * 錯式子，自洽。畫面上的結果是每一格都有顏色，但顏色屬於東邊 90 度那個國家，
+ * 而台灣本島所在的那一格被判成海。要抓它只能拿 llToVec 來回跑一次，
+ * check_hexgrid.mjs 現在有這一條。
+ */
 export function toLatLon(p) {
   return [Math.asin(Math.max(-1, Math.min(1, p[1]))) * 180 / Math.PI,
-          Math.atan2(p[0], p[2]) * 180 / Math.PI];
+          Math.atan2(-p[2], p[0]) * 180 / Math.PI];
 }
 
 /**

@@ -1311,6 +1311,10 @@ async function buildHex() {
   const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0, transparent: true, depthWrite: false });
   const ca = attribute('color');
   mat.colorNode = ca.xyz;
+  // 夜半球留一份自發光。純靠光照的話，背著太陽那一面的格子會沉到全黑，
+  // 而格縫露出來的陸地貼圖比它亮，整片看起來像挖了一堆洞。
+  // 0.3 是試出來的：夜側讀得出顏色與濃度，日夜分界那條線還在。
+  mat.emissiveNode = ca.xyz.mul(0.3);
   mat.opacityNode = ca.w.mul(hexAlpha);
   const mesh = new THREE.Mesh(geo, mat);
   // 排在中繼點（預設 0）之前畫，點才會留在格子上面。格子本身比點低 0.006 個半徑，

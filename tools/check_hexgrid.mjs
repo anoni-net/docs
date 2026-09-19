@@ -41,6 +41,26 @@ const hex = await load(path.join(PLAY, 'hexgrid.js'));
 const atlas = read(path.join(PLAY, 'atlas.js'));
 const html = read(path.join(PLAY, 'index.html'));
 
+/** 從 atlas.js 原地抽一支函式出來，免得這裡自己抄一份然後跟本體漂走 */
+function extractFn(src, header) {
+  const i = src.indexOf(header);
+  if (i < 0) throw new Error(`atlas.js 裡找不到 ${header}`);
+  let depth = 0, started = false;
+  for (let j = i; j < src.length; j++) {
+    if (src[j] === '{') { depth++; started = true; }
+    else if (src[j] === '}') { depth--; if (started && depth === 0) return src.slice(i, j + 1); }
+  }
+  throw new Error(`${header} 的大括號沒有配對成功`);
+}
+// 地球上每一個東西的位置都是這支算出來的：中繼點、國家標籤、海纜、電廠。
+// 六角格要跟它們對得起來，唯一的判準就是 toLatLon 是它的反函數。
+const llToVecRaw = new Function(`${extractFn(atlas, 'function llToVec(')}; return llToVec;`)();
+const llToVec = (lat, lon, r = 1) => {
+  const out = { set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; } };
+  llToVecRaw(lat, lon, r, out);
+  return [out.x, out.y, out.z];
+};
+
 const fail = [];
 const ok = [];
 const check = (cond, msg) => { (cond ? ok : fail).push(msg); };
@@ -86,6 +106,50 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
   check(land.length === data.land, `${tag} 陸地格 ${land.length} 跟資料檔一致`);
   check(Math.max(...cc) <= data.codes.length, `${tag} 國碼索引沒有超出 codes 表`);
   check(data.codes.every((k) => /^[a-z]{2}$/.test(k)), `${tag} codes 都是兩碼小寫國碼`);
+
+  // 六角格畫在球上的位置，是 dual.centers 直接乘半徑，而球上其他東西（中繼點、
+  // 國家標籤、電廠、海纜）全部由 atlas.js 的 llToVec 定位。兩套座標慣例必須互逆。
+  //
+  // 這一條是補的。第一版的 toLatLon 把經度算多了 90 度，而產生器與前端共用同一個
+  // 錯式子，所以格數、五邊形、probe、甚至「日本的格子落在日本的經緯度範圍內」
+  // 全部自洽地通過，畫面上卻是每格都塗成東邊 90 度那個國家的顏色。自己跟自己比
+  // 對不出這種錯，一定要拿外面那支來回跑一次。
+  let rt = 0;
+  for (let i = 0; i < dual.centers.length; i += Math.max(1, Math.floor(dual.centers.length / 500))) {
+    const c = dual.centers[i];
+    const [la, lo] = hex.toLatLon(c);
+    const back = llToVec(la, lo, 1);
+    if (Math.hypot(c[0] - back[0], c[1] - back[1], c[2] - back[2]) > 1e-9) rt++;
+  }
+  check(rt === 0, `${tag} 格心的座標跟 atlas.js 的 llToVec 互逆（抽驗 500 格，不合的 ${rt} 個）`);
+
+  // 拿幾個真實地點反過來問：這個經緯度所在的那一格，被判成哪一國。
+  // 上面那一條保證兩套座標對得起來，這一條保證國界判定本身沒有錯位。
+  const nearest = (lat, lon) => {
+    const p = llToVec(lat, lon, 1);
+    let best = -1, bd = Infinity;
+    for (let i = 0; i < dual.centers.length; i++) {
+      const c = dual.centers[i];
+      const d = (c[0] - p[0]) ** 2 + (c[1] - p[1]) ** 2 + (c[2] - p[2]) ** 2;
+      if (d < bd) { bd = d; best = i; }
+    }
+    return cc[best] ? data.codes[cc[best] - 1] : null;
+  };
+  // 挑的都是離海岸有一段距離的內陸點，免得 69 公里的格子壓在邊界上變成鄰國
+  for (const [nm, lat, lon, want, minLevel] of [
+    // 台灣在 level 5 只分得到一格，格心離台中超過半格，所以那一版連自己的島上
+    // 都指不回 tw。這不是這裡要修的東西，是那個密度不可用的另一個註腳。
+    ['台中', 24.15, 120.75, 'tw', 6],
+    ['東京', 35.68, 139.69, 'jp'],
+    ['柏林', 52.52, 13.40, 'de'],
+    ['堪薩斯', 38.50, -98.00, 'us'],
+    ['聖保羅', -23.55, -46.63, 'br'],
+    ['伯斯內陸', -30.00, 120.00, 'au'],
+  ]) {
+    if (minLevel && data.level < minLevel) continue;
+    const got = nearest(lat, lon);
+    check(got === want, `${tag} ${nm}（${lat}/${lon}）落在 ${want} 的格子裡${got === want ? '' : `，實際判成 ${got || '海'}`}`);
+  }
 
   // 抽幾個國家驗位置。格子的經緯度要真的落在那個國家附近，
   // 順序對了但判定寫錯的話，probe 那一關看不出來。
@@ -149,10 +213,10 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
   const l5 = JSON.parse(read(path.join(PLAY, 'hexgrid-5.json')));
   check(l6.codes.length > l5.codes.length,
         `level 6 涵蓋的國家（${l6.codes.length}）比 level 5（${l5.codes.length}）多`);
-  // 瑞士有 200 台上下，是 level 5 掉格國家裡最有份量的一個。
+  // 丹麥、克羅埃西亞、愛沙尼亞在 level 5 分不到格子，三國合起來九十幾台。
   // 這一條是紀錄而不是要求：它就是「粗的那一版不能用」的證據。
-  check(!l5.codes.includes('ch') && l6.codes.includes('ch'),
-        'level 5 分不到格子的瑞士，在 level 6 有格子');
+  const lost = ['dk', 'hr', 'ee'].filter((k) => !l5.codes.includes(k) && l6.codes.includes(k));
+  check(lost.length === 3, `level 5 分不到格子的 ${lost.join('、')}，在 level 6 都有格子`);
   check(l6.codes.includes('tw'), 'level 6 的台灣有格子');
 }
 
