@@ -630,6 +630,26 @@ const clockT = uniform(0);
 //   mat.positionNode 覆寫掉 NodeMaterial 處理 instancing 的那段，instance 位置整個沒套用
 // dotGroups 保存每顆點的原始位置與大小，重算時從這份原始值乘上係數，避免誤差累積。
 const dotGroups = [];
+// 各層浮在地表上方多少。這些高度是為了避免點穿進球面才留的，數值大約等於那一層
+// 最大的那顆點的半徑，所以每一層各有各的值。
+const DOT_LIFT = 1.012;      // 中繼點
+const LANDING_LIFT = 1.011;  // 海纜登陸點
+const SUB_LIFT = 1.009;      // 變電所
+const PLANT_LIFT = 1.010;    // 發電廠
+const RENEW_LIFT = 1.0095;   // 再生能源場址
+
+/**
+ * 貼近地表時把浮空高度跟著點的大小一起收。
+ *
+ * 點的大小本來就有補償（見 DOT_EXP 那一段），貼近時世界尺寸會縮小，浮空高度卻是
+ * 寫死的倍率。遠看時 0.06 個世界單位看不出來，貼到縣市尺度時相機離地只剩 0.156，
+ * 那個高度就佔了 38%，整片點看起來浮在地面上方一截，跟底下的地面對不起來。
+ *
+ * 用同一個 k 收，高度與點半徑的比例維持不變，點在任何距離下都像是貼在地表上。
+ * 實測 zoom 0.05 時從佔離地高度的 38% 降到 3%。
+ */
+const liftAt = (h, k) => 1 + (h - 1) * k;
+
 const DOT_EXP = 0.85;   // 1 是完全補償螢幕大小。留點餘裕，放大時仍稍微變大，手感自然些
 const DOT_STEP = 0.02;  // 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣
 let lastDotK = 1;
@@ -2189,7 +2209,7 @@ function rescaleLanding(k) {
     const p = list[i];
     const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
     const sz = meta.size * k;
-    llToVec(p.lat, p.lon, R * 1.011, v);
+    llToVec(p.lat, p.lon, R * liftAt(LANDING_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     landingMesh.setMatrixAt(i, m);
@@ -2325,7 +2345,7 @@ function rescalePower(k) {
   for (let i = 0; i < list.length; i++) {
     const s = list[i];
     const sz = powerSize(s) * k;
-    llToVec(s.lat, s.lon, R * 1.009, v);
+    llToVec(s.lat, s.lon, R * liftAt(SUB_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     powerMesh.setMatrixAt(i, m);
@@ -2461,7 +2481,7 @@ function rescalePlants(k) {
   for (let i = 0; i < list.length; i++) {
     const p = list[i];
     const sz = plantSize(p) * k;
-    llToVec(p.lat, p.lon, R * 1.010, v);
+    llToVec(p.lat, p.lon, R * liftAt(PLANT_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     plantMesh.setMatrixAt(i, m);
@@ -2566,7 +2586,7 @@ function rescaleRenew(k) {
   for (let i = 0; i < list.length; i++) {
     const s = list[i];
     const sz = renewSize(s) * k;
-    llToVec(s.lat, s.lon, R * 1.0095, v);
+    llToVec(s.lat, s.lon, R * liftAt(RENEW_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     renewMesh.setMatrixAt(i, m);
@@ -2760,7 +2780,7 @@ function buildRelays(snap, counts) {
     const a = ANCHOR.get(country);
     if (!a || NO_PLACE.has(country)) continue;
     sampleIn(a, ll);
-    llToVec(ll[0], ll[1], R * 1.012, tmp);
+    llToVec(ll[0], ll[1], R * DOT_LIFT, tmp);
     // cc 帶著走，訊息串要拿它顯示三跳落在哪幾國
     groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w), cc: country });
     total++;
@@ -2836,7 +2856,9 @@ function rescaleDots(k) {
       const n = g.list[i];
       const s = n.s * k;
       m4.makeScale(s, s, s);
-      m4.setPosition(n.x, n.y, n.z);
+      // 存的是建好時的位置（半徑 R * DOT_LIFT），照同一個比例收回地表
+      const ls = liftAt(DOT_LIFT, k) / DOT_LIFT;
+      m4.setPosition(n.x * ls, n.y * ls, n.z * ls);
       g.mesh.setMatrixAt(i, m4);
     }
     g.mesh.instanceMatrix.needsUpdate = true;

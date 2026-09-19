@@ -168,6 +168,31 @@ for (const sel of ['#top', '#cc-card', '#hint', '#tour']) {
   check(tele < near * 0.45, '換成望遠鏡頭之後拖曳明顯變慢，不會手指動一點點就甩過去');
 }
 
+// --- 點浮在地表上方多少 ---
+//
+// 點的大小有補償，貼近時世界尺寸會縮，浮空高度卻是寫死的倍率。遠看時 0.06 個
+// 世界單位看不出來，貼到縣市尺度時相機離地只剩 0.156，那個高度就佔了 38%，
+// 整片點看起來浮在地面上方一截。
+{
+  const src = `
+    ${decl(/^const DOT_LIFT = [^;]+;/m)}
+    ${decl(/^const liftAt = [^;]+;/m)}
+    return { liftAt, DOT_LIFT };
+  `;
+  const L = new Function(src)();
+  check(Math.abs(L.liftAt(L.DOT_LIFT, 1) - L.DOT_LIFT) < 1e-12, '遠看時高度維持原值，進場的樣子沒變');
+  check(Math.abs(L.liftAt(L.DOT_LIFT, 0) - 1) < 1e-12, '貼到極限時高度收到貼著地表');
+  // 高度與點半徑的比例要維持不變，點才會在任何距離下都像貼在地表上
+  const ratio = (k) => (L.liftAt(L.DOT_LIFT, k) - 1) / k;
+  check(Math.abs(ratio(1) - ratio(0.1)) < 1e-12, '高度與點半徑的比例不隨距離變');
+  // 實際的量級：貼近時相機離地 0.156 個半徑，點不該佔掉三成
+  const alt = 0.156, R = 5;
+  const before = R * (L.DOT_LIFT - 1) / alt;
+  const after = R * (L.liftAt(L.DOT_LIFT, Math.pow(0.05, 0.85)) - 1) / alt;
+  check(before > 0.3 && after < 0.06,
+        `zoom 0.05 時點的高度從離地高度的 ${(before * 100).toFixed(0)}% 降到 ${(after * 100).toFixed(0)}%`);
+}
+
 for (const m of ok) console.log(`  ok   ${m}`);
 if (fail.length) {
   console.error('');
