@@ -197,6 +197,14 @@ const ZH_TW = {
   // 六角層（原型）。開關平常不露出來，網址帶 ?hex 才會出現。
   btnHex: '六角格',
   btnHexTip: '原型。把國別的中繼分布畫成規則的六角格，同一國的格子同色，格子的位置不代表中繼在哪裡',
+  // 每一級的格子代表多大的地方。尺度不是隨便挑的，對得上網路與電力基礎設施
+  // 實際的聚集範圍，判斷依據寫在 tools/gen_hexgrid.py 的檔頭。
+  hexScale: '一格對角 <b>{km} 公里</b>，{name}',
+  hexScale5: '約一個省的範圍',
+  hexScale6: '約一個都會圈',
+  hexScale7: '約一個都會區的網路範圍，光纖 1 毫秒來回',
+  hexScale8: '約一座電廠的地盤，光纖 0.5 毫秒',
+  hexScale9: '約一座變電所的供電範圍',
   backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a>',
 };
 
@@ -381,6 +389,12 @@ const EN = {
 
   btnHex: 'Hex grid',
   btnHexTip: 'Prototype. Draws the per-country relay distribution as a regular hex grid. Cells of one country share a colour, and a cell position says nothing about where a relay is',
+  hexScale: '<b>{km} km</b> across, {name}',
+  hexScale5: 'about one province',
+  hexScale6: 'about one metro area',
+  hexScale7: 'about one metro network, 1 ms of fibre round trip',
+  hexScale8: 'about one power station\'s ground, 0.5 ms',
+  hexScale9: 'about one substation\'s supply area',
   backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/blog/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
 };
 
@@ -565,6 +579,12 @@ const ZH_CN = {
 
   btnHex: '六角格',
   btnHexTip: '原型。把国别的中继分布画成规则的六角格，同一国的格子同色，格子的位置不代表中继在哪里',
+  hexScale: '一格对角 <b>{km} 公里</b>，{name}',
+  hexScale5: '约一个省的范围',
+  hexScale6: '约一个都会圈',
+  hexScale7: '约一个都会区的网络范围，光纤 1 毫秒来回',
+  hexScale8: '约一座电厂的地盘，光纤 0.5 毫秒',
+  hexScale9: '约一座变电站的供电范围',
   backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
 };
 

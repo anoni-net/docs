@@ -399,6 +399,9 @@
                border: 1px solid var(--panel-b); background: rgba(0, 174, 255, .12); color: var(--cyan); }
     #btn-hex.on { background: rgba(0, 174, 255, .85); color: #04141f; border-color: transparent; }
     #btn-hex[hidden] { display: none; }
+    #hex-scale { margin: 0 0 9px; font-size: 10.5px; line-height: 1.5; color: #7d93a6; }
+    #hex-scale[hidden] { display: none; }
+    #hex-scale b { color: var(--muted); font-weight: 700; }
     #btn-spin:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
     /* 台灣專區。用一條左側細線與縮排跟上面的全球資料分開，不另外加背景框，
        面板本來就已經有一層框了，再套一層會太重。 */
@@ -555,6 +558,9 @@
         <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
         <!-- 六角層的開關。網址沒帶 ?hex 的話 buildHex 直接返回，這顆就一直是 hidden。 -->
         <button id="btn-hex" type="button" hidden>六角格</button>
+        <!-- 目前這一級的格子代表多大的地方。換級時由 atlas.js 換掉，
+             讓尺度從 lv7 這種編號變成一把有刻度的尺。 -->
+        <div id="hex-scale" hidden></div>
         <div class="lbl" id="lbl-mix">各國中繼數與角色組成（30 台以上）</div>
         <div id="stat-mix"></div>
         <div id="mix-note"></div>

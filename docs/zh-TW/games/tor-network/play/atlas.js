@@ -8,7 +8,7 @@ import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorl
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML, STR } from './i18n.js';
-import { dualCells, cellGeometry, cellsNear, decodeCC, verifyOrder } from './hexgrid.js';
+import { dualCells, cellGeometry, cellsNear, localGeometry, latLonToVec, decodeCC, verifyOrder } from './hexgrid.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -1266,7 +1266,7 @@ const HEX_ON = new URLSearchParams(location.search).has('hex');
 // 由粗到細。格數是 10 * 4^n + 2，中間沒有東西可以調。
 const HEX_LEVELS = [5, 6, 7, 8];
 // 每一級的格子對角有幾度。地球半徑 6371 公里，一度 111.19 公里。
-const HEX_DIAG_DEG = { 5: 2.490, 6: 1.245, 7: 0.623, 8: 0.311 };
+const HEX_DIAG_DEG = { 5: 2.490, 6: 1.245, 7: 0.623, 8: 0.311, 9: 0.156 };
 // 希望格子在螢幕上多大，以及換級前容許漂移到哪裡。
 //
 // 沒有這個容許範圍的話，每次縮放都可能換級，而換級要重建幾何，畫面會一直閃。
@@ -1298,6 +1298,16 @@ const HEX_LAND = [0x16, 0x33, 0x4e];
 // 整片的不透明度。格子要讀得出邊界，所以壓得高一點，只留一點讓底下的海岸線透出來。
 const HEX_ALPHA = 0.88;
 
+// 局部高解析網格。
+//
+// 台灣是這個作品唯一做到縣市尺度的地區，六角格在那裡多一級才跟得上已經在圖上的
+// 那 201 座變電所。全球的 level 9 是 262 萬格，只為了台灣那兩百格不划算，所以
+// 那一塊的幾何由 gen_hexgrid.py --local tw 先算好存進資料檔，前端直接畫。
+//
+// 一格邊長 8.7 公里，對角 17 公里，大約是一座二次變電所的供電範圍。
+const HEX_LOCAL_FILE = './hexgrid-tw9.json';
+const HEX_LOCAL_COVER = 9;   // 畫面涵蓋度小於這個才輪到它，再遠就用全球的 level 8
+let hexLocal = null;         // null 還沒載、false 載失敗、物件已備好
 let HEX = null;                 // 目前畫出來的那一份
 const hexCache = new Map();     // level → { dual, cc, codes }，建過就留著
 let hexBusy = false;            // 正在載資料或建幾何，別再排一次
@@ -1336,6 +1346,26 @@ function hexViewDir() {
   return hexDir.normalize();
 }
 
+/** 台灣那份局部網格。只在真的貼近台灣時才載。 */
+async function hexLoadLocal() {
+  if (hexLocal !== null) return hexLocal || null;
+  const data = await getJSON(HEX_LOCAL_FILE).catch(() => null);
+  if (!data || !data.cells) { hexLocal = false; return null; }
+  data.dir = latLonToVec(data.center[0], data.center[1]);
+  data.ccArr = decodeCC(data.cc);
+  hexLocal = data;
+  return data;
+}
+
+/** 現在這個取景該不該換成局部網格。要夠近，而且看的就是那一塊。 */
+function hexUseLocal(cover, dir) {
+  if (!hexLocal || cover > HEX_LOCAL_COVER) return false;
+  const d = hexLocal.dir;
+  const ang = Math.acos(clamp(dir.x * d[0] + dir.y * d[1] + dir.z * d[2], -1, 1)) * 180 / Math.PI;
+  // 視野中心落在那一塊的範圍內就用它。邊緣留一點，轉出去的瞬間才不會閃一下
+  return ang < hexLocal.radius * 0.8;
+}
+
 /** 某一級的資料。載過就留著，沒用到的等級完全不會付代價。 */
 async function hexLoadLevel(lv) {
   if (hexCache.has(lv)) return hexCache.get(lv);
@@ -1355,14 +1385,20 @@ async function hexLoadLevel(lv) {
 
 /** 建一份新的六角層幾何，換掉舊的。 */
 function hexBuildMesh(rec, dir, radiusDeg) {
-  const cells = cellsNear(rec.dual, dir.x, dir.y, dir.z, radiusDeg, (i) => rec.cc[i] !== 0);
+  // 局部網格的格子形狀是資料檔給的，全球那幾級是從對偶現算的，差別只在這一段
+  const isLocal = !!rec.local;
+  const cells = isLocal
+    ? Array.from({ length: rec.cells }, (_, i) => i)
+    : cellsNear(rec.dual, dir.x, dir.y, dir.z, radiusDeg, (i) => rec.cc[i] !== 0);
   const old = HEX;
   if (!cells.length) {
     if (old) { globe.remove(old.mesh); old.geo.dispose(); old.mat.dispose(); }
     HEX = null;
     return;
   }
-  const g = cellGeometry(rec.dual, cells, R * HEX_LIFT, HEX_SHRINK);
+  const g = isLocal
+    ? localGeometry(rec, R * HEX_LIFT, HEX_SHRINK)
+    : cellGeometry(rec.dual, cells, R * HEX_LIFT, HEX_SHRINK);
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(g.position, 3));
   geo.setAttribute('normal', new THREE.BufferAttribute(g.normal, 3));
@@ -1383,11 +1419,13 @@ function hexBuildMesh(rec, dir, radiusDeg) {
   // 排在後面的話它會蓋掉已經畫好的國界與縣市界。負數保證它在那些線之前。
   mesh.renderOrder = -1;
   globe.add(mesh);
-  HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec,
-          cellCC: cells.map((i) => rec.cc[i]), faceCell: g.faceCell,
+  HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec, local: isLocal,
+          cellCC: isLocal ? Array.from(rec.ccArr) : cells.map((i) => rec.cc[i]),
+          faceCell: g.faceCell,
           vertStart: g.vertStart, vertCount: g.vertCount,
           dir: dir.clone(), radiusDeg };
   hexPaint(MODE);
+  hexShowScale(rec.level);
   // 新的接上去之後才拆舊的，中間沒有一幀是空的
   if (old) { globe.remove(old.mesh); old.geo.dispose(); old.mat.dispose(); }
 }
@@ -1400,18 +1438,36 @@ async function hexRefresh() {
   const dir = hexViewDir();
   const aspect = Math.max(innerWidth, innerHeight) / Math.min(innerWidth, innerHeight);
   const radius = Math.min(180, cover * 0.5 * Math.sqrt(1 + aspect * aspect) * HEX_PAD + 2);
-  if (HEX && HEX.level === lv) {
+  if (HEX && HEX.local && hexUseLocal(cover, dir)) return;   // 局部那一份不必重建，它涵蓋整塊
+  if (HEX && !HEX.local && HEX.level === lv) {
     const moved = Math.acos(clamp(HEX.dir.dot(dir), -1, 1)) * 180 / Math.PI;
     // 轉動不到已收範圍的四分之一、縮放幅度不到三成，就沿用現在這一份
     if (moved < HEX.radiusDeg * 0.25 && Math.abs(Math.log(radius / HEX.radiusDeg)) < 0.3) return;
   }
   hexBusy = true;
   try {
+    // 夠近而且看的就是台灣，就換成那一塊的局部網格，一格 8.7 公里
+    if (cover <= HEX_LOCAL_COVER) await hexLoadLocal();
+    if (hexUseLocal(cover, dir)) {
+      if (!HEX || !HEX.local) hexBuildMesh(hexLocal, dir, radius);
+      return;
+    }
     const rec = await hexLoadLevel(lv);
     if (rec) hexBuildMesh(rec, dir, radius);
   } finally {
     hexBusy = false;
   }
+}
+
+// 每一級的格子對角有幾公里。地球半徑 6371，一格是正六角形，面積 4πR²/格數。
+const HEX_KM = { 5: 277, 6: 139, 7: 69, 8: 35, 9: 17 };
+
+/** 面板上那行「現在一格代表多大」。換級的時候跟著換。 */
+function hexShowScale(level) {
+  const el = $('hex-scale');
+  if (!el) return;
+  el.innerHTML = S('hexScale', { name: S(`hexScale${level}`), km: HEX_KM[level] || '?' });
+  el.hidden = false;
 }
 
 /** 依目前的指標重新上色。色階跟陸地色塊共用 glowMix，兩層不會各走各的。 */
@@ -3658,6 +3714,8 @@ function bindControls(dom) {
     if (!HEX) return;
     HEX.mesh.visible = !HEX.mesh.visible;
     hexBtn.classList.toggle('on', HEX.mesh.visible);
+    const sc = $('hex-scale');
+    if (sc) sc.hidden = !HEX.mesh.visible;
   });
 
   const spinBtn = $('btn-spin');

@@ -258,6 +258,65 @@ export function cellGeometry(dual, cells, radius, shrink = 0.92) {
   return { position, normal, index, faceCell, vertStart, vertCount };
 }
 
+/**
+ * 經緯度換球面座標。必須跟 atlas.js 的 llToVec 一模一樣。
+ *
+ * 局部網格的幾何是經緯度存在資料檔裡的，要靠這支轉回 3D。全球那幾份不需要它，
+ * 因為那邊的格心本來就是細分算出來的球面座標。check_hexgrid.mjs 會把 atlas.js
+ * 那支抽出來跟這支比對，兩邊漂走的話局部網格會整塊錯位。
+ */
+export function latLonToVec(lat, lon) {
+  const phi = (90 - lat) * Math.PI / 180;
+  const theta = (lon + 180) * Math.PI / 180;
+  return [-Math.sin(phi) * Math.cos(theta), Math.cos(phi), Math.sin(phi) * Math.sin(theta)];
+}
+
+/**
+ * 局部網格的幾何。
+ *
+ * 跟 cellGeometry 做的事情一樣，差別是格子的形狀直接從資料檔讀，不是從對偶算。
+ * 台灣那一塊只有五百格，幾何存成經緯度才二十幾 KB，比讓瀏覽器去算 262 萬格的
+ * 全球 level 9 划算太多。
+ */
+export function localGeometry(data, radius, shrink = 0.92) {
+  const n = data.cells;
+  const sides = decodeCC(data.sides);
+  const ring = data.ring_ll, cen = data.center_ll;
+  let verts = 0, tris = 0;
+  for (let i = 0; i < n; i++) { verts += sides[i] + 1; tris += sides[i]; }
+  const position = new Float32Array(verts * 3);
+  const normal = new Float32Array(verts * 3);
+  const index = new Uint32Array(tris * 3);
+  const faceCell = new Uint32Array(tris);
+  const vertStart = new Uint32Array(n);
+  const vertCount = new Uint8Array(n);
+  let vp = 0, ip = 0, tp = 0, rp = 0;
+  for (let ci = 0; ci < n; ci++) {
+    const c = latLonToVec(cen[ci * 2], cen[ci * 2 + 1]);
+    const base = vp / 3;
+    vertStart[ci] = base;
+    vertCount[ci] = sides[ci] + 1;
+    normal[vp] = c[0]; normal[vp + 1] = c[1]; normal[vp + 2] = c[2];
+    position[vp++] = c[0] * radius; position[vp++] = c[1] * radius; position[vp++] = c[2] * radius;
+    for (let k = 0; k < sides[ci]; k++) {
+      const q = latLonToVec(ring[rp++], ring[rp++]);
+      let x = c[0] + (q[0] - c[0]) * shrink;
+      let y = c[1] + (q[1] - c[1]) * shrink;
+      let z = c[2] + (q[2] - c[2]) * shrink;
+      const L = Math.hypot(x, y, z);
+      normal[vp] = x / L; normal[vp + 1] = y / L; normal[vp + 2] = z / L;
+      position[vp++] = x / L * radius; position[vp++] = y / L * radius; position[vp++] = z / L * radius;
+    }
+    for (let k = 0; k < sides[ci]; k++) {
+      index[ip++] = base;
+      index[ip++] = base + 1 + k;
+      index[ip++] = base + 1 + ((k + 1) % sides[ci]);
+      faceCell[tp++] = ci;
+    }
+  }
+  return { position, normal, index, faceCell, vertStart, vertCount };
+}
+
 /** base64 的國碼陣列解回 Uint8Array。 */
 export function decodeCC(b64) {
   const bin = atob(b64);

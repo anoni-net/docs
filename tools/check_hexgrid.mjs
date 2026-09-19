@@ -214,6 +214,94 @@ for (const lv of LEVELS) {
   check(rBad === 0, `${tag} 收縮之後所有頂點仍在同一顆球面上`);
 }
 
+// --- 台灣的領土 ---
+//
+// Natural Earth 110m 把金門畫進中國的多邊形裡，馬祖、澎湖、綠島、蘭嶼那個比例尺
+// 下整個沒有收錄。所以 gen_hexgrid.py 對台灣改用內政部的縣市界，而且比一格小的島
+// 另外補一輪。這幾條盯的就是那個修正，回頭有人改判定順序會在這裡轉紅。
+{
+  const data = loaded.get(8);
+  const cc = hex.decodeCC(data.cc);
+  const dual = hex.dualCells(8);
+  const at = (lat, lon) => {
+    const p = llToVec(lat, lon, 1);
+    const c = dual.centers;
+    let best = -1, bd = Infinity;
+    for (let i = 0; i < dual.nc; i++) {
+      const d = (c[i * 3] - p[0]) ** 2 + (c[i * 3 + 1] - p[1]) ** 2 + (c[i * 3 + 2] - p[2]) ** 2;
+      if (d < bd) { bd = d; best = i; }
+    }
+    return cc[best] ? data.codes[cc[best] - 1] : '海';
+  };
+  for (const [nm, lat, lon, want] of [
+    ['金門', 24.432, 118.317, 'tw'],
+    ['馬祖南竿', 26.156, 119.929, 'tw'],
+    ['馬祖東引', 26.366, 120.492, 'tw'],
+    ['澎湖', 23.566, 119.566, 'tw'],
+    ['綠島', 22.659, 121.492, 'tw'],
+    ['蘭嶼', 22.043, 121.545, 'tw'],
+    ['小琉球', 22.343, 120.373, 'tw'],
+    // 對岸三個點要維持中國，補格補過頭會在這裡現形
+    ['廈門', 24.479, 118.089, 'cn'],
+    ['福州', 26.074, 119.296, 'cn'],
+    ['平潭', 25.503, 119.791, 'cn'],
+  ]) {
+    const got = at(lat, lon);
+    // 平潭島比一格小，110m 沒收錄，那一格是海也算對，只要別變成台灣
+    const pass = nm === '平潭' ? (got === 'cn' || got === '海') : got === want;
+    check(pass, `level 8 的 ${nm} 判成 ${got}${pass ? '' : `，應該是 ${want}`}`);
+  }
+}
+
+// --- 台灣的局部高解析網格 ---
+{
+  const p = path.join(PLAY, 'hexgrid-tw9.json');
+  if (!fs.existsSync(p)) {
+    check(false, 'hexgrid-tw9.json 不在');
+  } else {
+    const d = JSON.parse(read(p));
+    check(d.local === 'tw' && d.level === 9, `局部網格是 tw 的 level ${d.level}`);
+    const cc = hex.decodeCC(d.cc);
+    const sides = hex.decodeCC(d.sides);
+    check(cc.length === d.cells && sides.length === d.cells, `局部網格的陣列長度都等於格數 ${d.cells}`);
+    check(d.center_ll.length === d.cells * 2, '每格都有中心座標');
+    let ringLen = 0;
+    for (const n of sides) ringLen += n;
+    check(d.ring_ll.length === ringLen * 2, '每格的多邊形頂點數對得上 sides');
+    check([...sides].every((n) => n === 5 || n === 6), '局部網格也只有五邊形與六邊形');
+    const tw = d.codes.indexOf('tw') + 1;
+    let n = 0;
+    for (const x of cc) if (x === tw) n++;
+    check(n >= 150, `局部網格的台灣有 ${n} 格，跟 201 座變電所是同一個量級`);
+
+    // 幾何：經緯度轉回 3D 之後要在球面上，而且繞向朝外
+    const g = hex.localGeometry(d, 5, 0.9);
+    check(g.faceCell.length === g.index.length / 3, '局部網格每個三角形都對得到一格');
+    let rBad = 0, flip = 0;
+    for (let i = 0; i < g.position.length; i += 3) {
+      if (Math.abs(Math.hypot(g.position[i], g.position[i + 1], g.position[i + 2]) - 5) > 1e-3) rBad++;
+    }
+    for (let t = 0; t < g.index.length; t += 3) {
+      const a = g.index[t] * 3, b = g.index[t + 1] * 3, c = g.index[t + 2] * 3;
+      const ux = g.position[b] - g.position[a], uy = g.position[b + 1] - g.position[a + 1], uz = g.position[b + 2] - g.position[a + 2];
+      const vx = g.position[c] - g.position[a], vy = g.position[c + 1] - g.position[a + 1], vz = g.position[c + 2] - g.position[a + 2];
+      const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+      if (nx * g.position[a] + ny * g.position[a + 1] + nz * g.position[a + 2] <= 0) flip++;
+    }
+    check(rBad === 0, '局部網格的頂點都在球面上');
+    check(flip === 0, `局部網格的三角形都朝球外（反了 ${flip} 個）`);
+
+    // 局部網格的幾何是經緯度存的，轉回 3D 要用跟 atlas.js 同一支公式
+    let vBad = 0;
+    for (let i = 0; i < 200; i++) {
+      const lat = -80 + i * 0.8, lon = -170 + i * 1.7;
+      const a = hex.latLonToVec(lat, lon), b = llToVec(lat, lon, 1);
+      if (Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) > 1e-12) vBad++;
+    }
+    check(vBad === 0, 'hexgrid.js 的 latLonToVec 跟 atlas.js 的 llToVec 一致');
+  }
+}
+
 // --- 四級之間的關係 ---
 {
   const n = (lv) => {
@@ -249,6 +337,11 @@ check(/HEX_MIN_PX = 14, HEX_MAX_PX = 64/.test(atlas), '格子在螢幕上超出 
 check(/mesh\.renderOrder = -1/.test(atlas), '六角層最先畫，國界與設施疊在它上面');
 check(/const HEX_LIFT = 1\.0015/.test(atlas), '六角層的高度壓在所有線層之下');
 check(atlas.includes('cellsNear('), '只建看得到的那些格子');
+check(atlas.includes('function hexUseLocal('), '貼近台灣時會換成局部網格');
+check(atlas.includes('localGeometry('), 'atlas.js 會用局部網格的幾何');
+check(atlas.includes('function hexShowScale('), '面板會顯示這一級代表多大');
+check(/HEX_KM = \{ 5: 277, 6: 139, 7: 69, 8: 35, 9: 17 \}/.test(atlas), '五級的尺度都有對應的公里數');
+check(html.includes('id="hex-scale"'), 'index.html 有尺度說明那一行');
 check(html.includes('id="btn-hex"'), 'index.html 有六角層的開關');
 check(/id="btn-hex"[^>]*hidden/.test(html), '沒開參數時那顆開關是收起來的');
 

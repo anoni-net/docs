@@ -39,6 +39,33 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 六角層沒有對應的補救，所以輸出時會把「有中繼卻沒有格子」的國家列出來，呼叫端自己
 決定要不要留原本的點。
 
+=== 台灣的領土另外判 ===
+
+Natural Earth 110m 對台灣有兩個問題。金門落在它畫的中國多邊形裡面，而馬祖、澎湖、
+烏坵、綠島、蘭嶼在那個比例尺下整個沒有收錄，全部算成海。照它判的話，六角層會把
+金門塗成中國的顏色，其餘離島變成海上的空白。
+
+所以台灣改用 tw-admin.json，也就是內政部國土測繪中心的直轄市、縣市界線，22 個縣市
+都在，容差 67 公尺，比 110m 精確兩個數量級。判定順序是台灣優先：格心先對縣市界試
+一次，中了就是 tw，沒中才去問 countries.json。
+
+釣魚台列嶼、東沙島與南沙太平島照那份原始資料所屬的縣市收錄，跟地球儀的縣市界圖層
+同一個處理方式，這裡不另外做判斷。
+
+=== 比一格還小的島要另外補 ===
+
+判定是看格心落在誰的領土裡，所以比一格小的島幾乎不可能被收到：馬祖南竿 10 公里、
+綠島 4 公里、蘭嶼 6 公里，而 level 8 一格的對角是 35 公里。實測金門在 level 8 剛好
+有一個格心落在島上，其餘全部算成海。
+
+所以小島另外補一輪：把每一座島的中心對到最近的格，那一格如果還是海就指給台灣。
+已經屬於別國的格不搶，寧可那一級畫不出那座島。補進來的格子會比島本身大很多，
+澎湖那一格畫出來是 778 平方公里而馬公本島只有 65 平方公里，這是離散化的必然，
+比整座島消失好。
+
+島太小就不補：對角不到格子對角 12% 的島，補出來會是一整格代表一個小點，那已經
+不是精度不足而是誤導。那些島在更細的等級才會出現。
+
 === 前端怎麼用這份資料 ===
 
 檔案裡只有國碼，沒有任何幾何。幾何由 hexgrid.js 在瀏覽器裡用同一套細分算出來，
@@ -53,6 +80,7 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 """
 import argparse
 import base64
+import collections
 import json
 import math
 import os
@@ -106,6 +134,13 @@ def build(level):
     return verts
 
 
+def ll_to_vec(lat, lon):
+    """經緯度換球面座標。跟 atlas.js 的 llToVec 同一套，to_ll 是它的反函數。"""
+    phi = math.radians(90 - lat)
+    th = math.radians(lon + 180)
+    return (-math.sin(phi) * math.cos(th), math.cos(phi), math.sin(phi) * math.sin(th))
+
+
 def to_ll(p):
     """球面座標換經緯度。必須是 atlas.js 那支 llToVec 的反函數。
 
@@ -139,18 +174,179 @@ def in_rings(rings, lon, lat):
     return hit
 
 
+# === 局部網格 ===
+#
+# 台灣是這個作品唯一做到縣市尺度的地區，六角格也就值得在那裡多一級。但全球的
+# level 9 是 262 萬格，瀏覽器端算幾何要好幾秒、吃掉一百多 MB，只為了台灣那兩百格
+# 不划算。
+#
+# 所以局部網格走另一條路：細分的時候就把離台灣太遠的面丟掉，格數從 262 萬降到
+# 三千出頭，而且幾何直接寫進 JSON（兩百格的座標才二十幾 KB），前端連算都不用算。
+#
+# 丟面要留一圈緩衝。取對偶需要一格周圍的六個面都在，邊界上的格子少了面就會缺角，
+# 所以保留的範圍比實際要輸出的多兩度。
+TW_CENTER = (23.7, 121.0)
+TW_RADIUS = 3.6   # 涵蓋本島、澎湖、金門、馬祖、綠島、蘭嶼。東沙與南沙太遠，不在這一份裡
+TW_BUFFER = 2.0   # 取對偶用的緩衝，最後只輸出中心落在 TW_RADIUS 內的格
+
+
+def build_local(level, center, radius_deg):
+    """只細分中心附近的那一塊。回傳頂點與留下來的面。"""
+    cv = ll_to_vec(*center)
+    verts = [normalize(v) for v in ICO_V]
+    faces = [list(f) for f in ICO_F]
+    # 剔除的半徑要跟著每一級的三角形大小縮。正二十面體的邊長約 63.4 度，細分一次
+    # 減半，所以前幾級的三角形比整個台灣還大，拿最終半徑去砍會一刀砍光。
+    ico_edge = 63.4
+    for it in range(level):
+        keep_cos = math.cos(math.radians(min(180.0, radius_deg + TW_BUFFER + ico_edge / (2 ** it))))
+        mid = {}
+
+        def middle(a, b):
+            key = (a, b) if a < b else (b, a)
+            if key in mid:
+                return mid[key]
+            p, q = verts[a], verts[b]
+            verts.append(normalize(((p[0] + q[0]) / 2, (p[1] + q[1]) / 2, (p[2] + q[2]) / 2)))
+            mid[key] = len(verts) - 1
+            return mid[key]
+
+        nxt = []
+        for a, b, c in faces:
+            ab, bc, ca = middle(a, b), middle(b, c), middle(c, a)
+            nxt += [[a, ab, ca], [b, bc, ab], [c, ca, bc], [ab, bc, ca]]
+        # 三個頂點全都離中心太遠才丟。留一個在範圍內就保住，邊界的格子才不會缺面。
+        faces = [f for f in nxt
+                 if any(verts[i][0] * cv[0] + verts[i][1] * cv[1] + verts[i][2] * cv[2] >= keep_cos
+                        for i in f)]
+    return verts, faces, cv
+
+
+def dual_local(verts, faces):
+    """取對偶。只有周圍的面全都在的頂點才算數，缺面的邊界格直接不收。"""
+    around = {}
+    centers = {}
+    for fi, (a, b, c) in enumerate(faces):
+        x = (verts[a][0] + verts[b][0] + verts[c][0]) / 3
+        y = (verts[a][1] + verts[b][1] + verts[c][1]) / 3
+        z = (verts[a][2] + verts[b][2] + verts[c][2]) / 3
+        centers[fi] = normalize((x, y, z))
+        for v in (a, b, c):
+            around.setdefault(v, []).append(fi)
+    out = {}
+    for v, fs in around.items():
+        # 二十面體的頂點是五邊形，其餘是六邊形。數量不對就是邊界上被切掉的，不收。
+        if len(fs) not in (5, 6):
+            continue
+        n = verts[v]
+        f0 = centers[fs[0]]
+        ux, uy, uz = f0[0] - n[0], f0[1] - n[1], f0[2] - n[2]
+        d = ux * n[0] + uy * n[1] + uz * n[2]
+        ux -= d * n[0]; uy -= d * n[1]; uz -= d * n[2]
+        L = math.sqrt(ux * ux + uy * uy + uz * uz)
+        ux, uy, uz = ux / L, uy / L, uz / L
+        wx = n[1] * uz - n[2] * uy
+        wy = n[2] * ux - n[0] * uz
+        wz = n[0] * uy - n[1] * ux
+        ang = []
+        for fi in fs:
+            c = centers[fi]
+            dx, dy, dz = c[0] - n[0], c[1] - n[1], c[2] - n[2]
+            ang.append((math.atan2(dx * wx + dy * wy + dz * wz, dx * ux + dy * uy + dz * uz), fi))
+        ang.sort()
+        out[v] = [centers[fi] for _, fi in ang]
+    return out
+
+
+def gen_local(args, tw_rings, tw_box, boxes):
+    """台灣的局部高解析網格。幾何直接寫進檔案，前端不必自己算。"""
+    level = args.local_level
+    verts, faces, cv = build_local(level, TW_CENTER, TW_RADIUS)
+    rings = dual_local(verts, faces)
+    keep_cos = math.cos(math.radians(TW_RADIUS))
+    codes, index = [], {}
+    cells = []
+    for v, poly in rings.items():
+        p = verts[v]
+        if p[0] * cv[0] + p[1] * cv[1] + p[2] * cv[2] < keep_cos:
+            continue
+        lat, lon = to_ll(p)
+        k = None
+        if tw_box and tw_box[0] <= lon <= tw_box[2] and tw_box[1] <= lat <= tw_box[3] \
+                and in_rings(tw_rings, lon, lat):
+            k = 'tw'
+        else:
+            for kk, lo0, la0, lo1, la1, rr in boxes:
+                if lon < lo0 or lon > lo1 or lat < la0 or lat > la1:
+                    continue
+                if in_rings(rr, lon, lat):
+                    k = kk
+                    break
+        if not k:
+            continue
+        if k not in index:
+            codes.append(k)
+            index[k] = len(codes)
+        cells.append((index[k], lat, lon, [to_ll(q) for q in poly]))
+
+    r = lambda x: round(x, 4)   # 小數點後四位約 11 公尺，比這一級的格子細三個數量級
+    out = {
+        'source': 'Natural Earth 110m + 內政部國土測繪中心直轄市、縣市界線',
+        'note': '台灣的局部高解析六角格。幾何直接存在這裡，全球那幾份只存國碼由前端算。',
+        'local': 'tw', 'level': level, 'center': list(TW_CENTER), 'radius': TW_RADIUS,
+        'cells': len(cells), 'codes': codes,
+        'cc': base64.b64encode(bytes(c[0] for c in cells)).decode('ascii'),
+        'sides': base64.b64encode(bytes(len(c[3]) for c in cells)).decode('ascii'),
+        'center_ll': [r(x) for c in cells for x in (c[1], c[2])],
+        'ring_ll': [r(x) for c in cells for q in c[3] for x in q],
+    }
+    path = args.out or os.path.join(PLAY, f'hexgrid-{args.local}{level}.json')
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
+    area = 4 * math.pi * 6371 ** 2 / (10 * 4 ** level + 2)
+    per = collections.Counter(codes[c[0] - 1] for c in cells)
+    print(f'局部 level {level}：中心 {TW_CENTER}、半徑 {TW_RADIUS}°，'
+          f'一格 {area:,.0f} km²、邊長 {math.sqrt(area / 2.598):.1f} km')
+    print(f'收了 {len(cells)} 格：' + '、'.join(f'{k} {v}' for k, v in per.most_common()))
+    print(f'寫出 {path}，{os.path.getsize(path) / 1024:.0f} KB')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--level', type=int, default=6, help='細分等級，格數是 10*4^n+2')
     ap.add_argument('--out', default=None)
     ap.add_argument('--world', default=os.path.join(PLAY, 'countries.json'))
+    ap.add_argument('--tw-admin', default=os.path.join(PLAY, 'tw-admin.json'),
+                    help='台灣的縣市界。110m 的國界少了離島也把金門畫進中國，所以台灣優先用這份')
+    ap.add_argument('--local', default=None, choices=['tw'],
+                    help='產出局部高解析網格而不是全球的那一份')
+    ap.add_argument('--local-level', type=int, default=9)
     ap.add_argument('--snapshot', default=os.path.join(PLAY, 'snapshot.json'),
                     help='用來檢查有中繼的國家有沒有分到格子')
     args = ap.parse_args()
     if args.level < 1 or args.level > 8:
-        sys.exit('level 只支援 1 到 8。level 9 是 262 萬格，瀏覽器端建幾何要好幾秒')
+        sys.exit('全球網格只支援 level 1 到 8。再細的用 --local，只算需要的那一塊')
+    if args.local and (args.local_level < 1 or args.local_level > 11):
+        sys.exit('局部網格的 level 只支援 1 到 11')
 
     world = json.load(open(args.world, encoding='utf-8'))
+    # 台灣的縣市界。這一份要在國界之前判，理由見檔頭「台灣的領土另外判」。
+    tw_rings, tw_box = [], None
+    try:
+        adm = json.load(open(args.tw_admin, encoding='utf-8'))
+        for c in adm.get('c', []):
+            tw_rings.extend(c.get('p', []))
+    except OSError:
+        print('（找不到 tw-admin.json，台灣改用 110m 的國界判，金門會被算成中國）')
+    if tw_rings:
+        lo0 = la0 = 1e9
+        lo1 = la1 = -1e9
+        for r in tw_rings:
+            for i in range(0, len(r), 2):
+                lo0 = min(lo0, r[i]); lo1 = max(lo1, r[i])
+                la0 = min(la0, r[i + 1]); la1 = max(la1, r[i + 1])
+        tw_box = (lo0, la0, lo1, la1)
+
     # 先算每個國家的外接框。逐格對 177 國做射線法太慢，用框先篩掉九成九。
     boxes = []
     for c in world['c']:
@@ -164,12 +360,24 @@ def main():
                 la0 = min(la0, r[i + 1]); la1 = max(la1, r[i + 1])
         boxes.append((c['k'], lo0, la0, lo1, la1, c['p']))
 
+    if args.local:
+        gen_local(args, tw_rings, tw_box, boxes)
+        return
+
     verts = build(args.level)
     codes = []          # 1-based 的國碼表，0 留給海
     index = {}
     cc = bytearray(len(verts))
     for i, p in enumerate(verts):
         lat, lon = to_ll(p)
+        # 台灣優先。中了就不必再問國界，也就不會被 110m 那份的中國多邊形搶走金門。
+        if tw_box and tw_box[0] <= lon <= tw_box[2] and tw_box[1] <= lat <= tw_box[3] \
+                and in_rings(tw_rings, lon, lat):
+            if 'tw' not in index:
+                codes.append('tw')
+                index['tw'] = len(codes)
+            cc[i] = index['tw']
+            continue
         for k, lo0, la0, lo1, la1, rings in boxes:
             if lon < lo0 or lon > lo1 or lat < la0 or lat > la1:
                 continue
@@ -179,6 +387,44 @@ def main():
                     index[k] = len(codes)   # 1-based
                 cc[i] = index[k]
                 break
+    # 小島補格。理由見檔頭「比一格還小的島要另外補」。
+    if tw_rings and tw_box:
+        edge_km = math.sqrt(4 * math.pi * 6371 ** 2 / len(verts) / 2.598)
+        diag_deg = 2 * edge_km / 111.19
+        # 先把候選格縮到台灣外接框再放一格的範圍，否則每座島都要掃過全球的格心
+        pad = diag_deg
+        cand = []
+        for i, p in enumerate(verts):
+            lat, lon = to_ll(p)
+            if tw_box[0] - pad <= lon <= tw_box[2] + pad and tw_box[1] - pad <= lat <= tw_box[3] + pad:
+                cand.append((i, p))
+        added = 0
+        for ring in tw_rings:
+            lo0 = la0 = 1e9
+            lo1 = la1 = -1e9
+            for i in range(0, len(ring), 2):
+                lo0 = min(lo0, ring[i]); lo1 = max(lo1, ring[i])
+                la0 = min(la0, ring[i + 1]); la1 = max(la1, ring[i + 1])
+            # 經度差要照緯度收窄，高緯度的一度經度比一度緯度短
+            dlon = (lo1 - lo0) * math.cos(math.radians((la0 + la1) / 2))
+            if math.hypot(dlon, la1 - la0) < diag_deg * 0.12:
+                continue
+            clat, clon = (la0 + la1) / 2, (lo0 + lo1) / 2
+            cv = ll_to_vec(clat, clon)
+            best, bd = -1, -2.0
+            for i, p in cand:
+                d = p[0] * cv[0] + p[1] * cv[1] + p[2] * cv[2]
+                if d > bd:
+                    bd, best = d, i
+            if best >= 0 and cc[best] == 0:
+                if 'tw' not in index:
+                    codes.append('tw')
+                    index['tw'] = len(codes)
+                cc[best] = index['tw']
+                added += 1
+        if added:
+            print(f'小島補格：{added} 格（比一格小的島，格心落不到島上）')
+
     if len(codes) > 255:
         sys.exit(f'國家數 {len(codes)} 超過 255，Uint8 放不下')
 
@@ -211,7 +457,8 @@ def main():
 
     print(f'level {args.level}：{len(verts):,} 格，每格 {area:,.0f} km²，'
           f'邊長約 {math.sqrt(area / 2.598):.0f} km')
-    print(f'陸地 {land:,} 格（{land / len(verts) * 100:.0f}%），{len(codes)} 個國家')
+    tw_n = sum(1 for x in cc if x == index.get('tw', -1))
+    print(f'陸地 {land:,} 格（{land / len(verts) * 100:.0f}%），{len(codes)} 個國家，台灣 {tw_n} 格')
     print(f'寫出 {path}，{size / 1024:.0f} KB')
 
     # 有中繼卻分不到格子的國家。Natural Earth 110m 沒有新加坡、香港這類小地方，
