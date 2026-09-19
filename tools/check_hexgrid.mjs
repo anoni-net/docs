@@ -65,7 +65,7 @@ const fail = [];
 const ok = [];
 const check = (cond, msg) => { (cond ? ok : fail).push(msg); };
 
-for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
+for (const file of ['hexgrid-5.json', 'hexgrid-6.json', 'hexgrid-7.json']) {
   const p = path.join(PLAY, file);
   if (!fs.existsSync(p)) { check(false, `${file} 不在`); continue; }
   const data = JSON.parse(read(p));
@@ -104,7 +104,10 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
   const land = [];
   for (let i = 0; i < cc.length; i++) if (cc[i]) land.push(i);
   check(land.length === data.land, `${tag} 陸地格 ${land.length} 跟資料檔一致`);
-  check(Math.max(...cc) <= data.codes.length, `${tag} 國碼索引沒有超出 codes 表`);
+  // 不用 Math.max(...cc)。level 7 有 163,842 個元素，展開成參數會把呼叫堆疊撐爆。
+  let maxCode = 0;
+  for (const x of cc) if (x > maxCode) maxCode = x;
+  check(maxCode <= data.codes.length, `${tag} 國碼索引沒有超出 codes 表`);
   check(data.codes.every((k) => /^[a-z]{2}$/.test(k)), `${tag} codes 都是兩碼小寫國碼`);
 
   // 六角格畫在球上的位置，是 dual.centers 直接乘半徑，而球上其他東西（中繼點、
@@ -140,6 +143,9 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
     // 台灣在 level 5 只分得到一格，格心離台中超過半格，所以那一版連自己的島上
     // 都指不回 tw。這不是這裡要修的東西，是那個密度不可用的另一個註腳。
     ['台中', 24.15, 120.75, 'tw', 6],
+    // 挑南投不挑台南：本島東西只有 120 公里，level 7 一格 35 公里，
+    // 貼著海岸的點很容易落進旁邊那格海裡
+    ['南投', 23.96, 120.97, 'tw', 7],
     ['東京', 35.68, 139.69, 'jp'],
     ['柏林', 52.52, 13.40, 'de'],
     ['堪薩斯', 38.50, -98.00, 'us'],
@@ -209,7 +215,7 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
 
 // --- 兩種密度的差別要留得住 ---
 {
-  const l6 = JSON.parse(read(path.join(PLAY, 'hexgrid.json')));
+  const l6 = JSON.parse(read(path.join(PLAY, 'hexgrid-6.json')));
   const l5 = JSON.parse(read(path.join(PLAY, 'hexgrid-5.json')));
   check(l6.codes.length > l5.codes.length,
         `level 6 涵蓋的國家（${l6.codes.length}）比 level 5（${l5.codes.length}）多`);
@@ -218,6 +224,16 @@ for (const file of ['hexgrid.json', 'hexgrid-5.json']) {
   const lost = ['dk', 'hr', 'ee'].filter((k) => !l5.codes.includes(k) && l6.codes.includes(k));
   check(lost.length === 3, `level 5 分不到格子的 ${lost.join('、')}，在 level 6 都有格子`);
   check(l6.codes.includes('tw'), 'level 6 的台灣有格子');
+  const l7 = JSON.parse(read(path.join(PLAY, 'hexgrid-7.json')));
+  // 台灣要看得出是個島，至少得有十格上下。level 6 的 3 格排成一直線，
+  // 讀者只會覺得那裡有三個點。
+  const cc7 = hex.decodeCC(l7.cc);
+  const tw7 = l7.codes.indexOf('tw') + 1;
+  let n7 = 0;
+  for (const x of cc7) if (x === tw7) n7++;
+  check(n7 >= 10, `level 7 的台灣有 ${n7} 格`);
+  check(!l6.codes.includes('lu') && l7.codes.includes('lu'),
+        'level 6 分不到格子的盧森堡（120 台），在 level 7 有格子');
 }
 
 // --- 接線 ---
@@ -227,7 +243,10 @@ check(atlas.includes('function paintHex(mode)'), 'atlas.js 會依指標重新上
 check(/paintHex\(mode\);/.test(atlas), '切換指標時六角層跟著換色');
 check(atlas.includes('function pickHexCC('), 'atlas.js 有點格子的判定');
 check(/if \(!verifyOrder\(dual, data\.probe\)\)/.test(atlas), '順序對不上時整層不畫');
-check(/hexAlpha\.value = HEX_OP \* \(1 - deepU\.value\)/.test(atlas), '貼近地表時六角層會淡出');
+check(/hexAlpha\.value = HEX_OP \* hexT\(\)/.test(atlas), '六角層的濃淡由自己那條曲線決定');
+check(atlas.includes('function hexT()'), 'atlas.js 有六角層的進退場曲線');
+check(atlas.includes('function hexTakesOver()'), '六角層接手時中繼點會讓位');
+check(/HEX_IN_HI = 90, HEX_IN_LO = 45/.test(atlas), '遠看不畫，涵蓋 45 度以內才全亮');
 check(html.includes('id="btn-hex"'), 'index.html 有六角層的開關');
 check(/id="btn-hex"[^>]*hidden/.test(html), '沒開參數時那顆開關是收起來的');
 

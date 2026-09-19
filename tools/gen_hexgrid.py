@@ -39,8 +39,8 @@ Goldberg 多面體，也就是正二十面體細分之後取對偶，12 個五�
 取樣幾格的中心經緯度，前端載入時比對得上才畫。
 
 用法：
-    python3 tools/gen_hexgrid.py --level 6
-    python3 tools/gen_hexgrid.py --level 5 --out docs/zh-TW/games/tor-network/play/hexgrid-5.json
+    python3 tools/gen_hexgrid.py --level 7      # 產出 hexgrid-7.json
+    python3 tools/gen_hexgrid.py --level 6 --out /tmp/x.json
 
 相依只有標準庫。
 """
@@ -197,7 +197,7 @@ def main():
         'probe': probe,
         'cc': base64.b64encode(bytes(cc)).decode('ascii'),
     }
-    path = args.out or os.path.join(PLAY, 'hexgrid.json' if args.level == 6 else f'hexgrid-{args.level}.json')
+    path = args.out or os.path.join(PLAY, f'hexgrid-{args.level}.json')
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
     size = os.path.getsize(path)

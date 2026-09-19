@@ -1255,19 +1255,35 @@ const RIM_INTENSITY = 0.32; // additive 是疊在陸地本身的亮度上，兩�
 // 中繼」，就是在畫一個資料裡並不存在的精度。所以這一層的規矩是顏色可以編碼國家層級
 // 的值，格子的位置不承載任何意義，同一國的格子一律同色。
 //
-// 目前是原型，用網址參數開：?hex 是 level 6（40,962 格、邊長 69 km），?hex=5 是
-// level 5（10,242 格、138 km）。兩種密度的差別值得自己看一次。level 5 在整顆地球
-// 入鏡時才勉強看得出是六角形，但那個尺度下瑞士（188 台）、摩爾多瓦、拉脫維亞完全
-// 分不到格子，掉的都是有中繼的國家。level 6 只掉 lu、sg、hk 那幾個 Natural Earth
-// 110m 本來就沒有的小地方。
+// 目前是原型，用網址參數開，數字是細分等級：?hex 或 ?hex=7 是最細的一版
+// （163,842 格、邊長 35 km、台灣 12 格），?hex=6 是 40,962 格（69 km、台灣 3 格），
+// ?hex=5 是 10,242 格（138 km、台灣 1 格）。
 //
-// 這一層沒有取代任何東西。陸地色塊與中繼點都還在，格子疊在兩者中間，縫隙露出底下
-// 的陸地色，看起來就是蜂巢的線。要評估的正是「換掉划不划算」，兩種呈現得並存著比。
+// 三種密度的取捨很清楚。粗的那兩版在整顆地球入鏡時就看得出六角形，但 level 5 連
+// 丹麥、克羅埃西亞、愛沙尼亞都分不到格子，level 6 的台灣只有 3 格，看不出是個島。
+// level 7 掉格的只剩 sg、hk 那幾個 Natural Earth 110m 本來就沒有的地方，代價是
+// 資料檔 215 KB、瀏覽器要花 230 毫秒算幾何。
+//
+// 這一層是拿來取代中繼點的，所以只在放大到區域尺度之後才出現，整顆地球入鏡時
+// 完全不畫。那個距離下一格只有 4 px，畫出來就是一層雜訊，而且會蓋掉陸地色塊
+// 正在講的「哪幾國托管得多」。
 const HEX_PARAM = new URLSearchParams(location.search).get('hex');
-const HEX_LEVEL = HEX_PARAM === '5' ? 5 : 6;
+const HEX_LEVEL = HEX_PARAM === '5' ? 5 : (HEX_PARAM === '6' ? 6 : 7);
 const HEX_SHRINK = 0.9;   // 格子往中心收多少。1 是完全貼合，收一點才有格縫
 const HEX_OP = 0.95;
 const HEX_LIFT = 1.006;   // 陸地貼圖之上、中繼點（1.012）之下
+// 什麼距離該出現。判準是格子在螢幕上的大小，level 7 的一格是 0.315 度，
+// 畫面短邊 800 px 的話：
+//
+//   涵蓋 90 度   2.8 px   比中繼點還小，畫出來是雜訊
+//   涵蓋 45 度   5.6 px   跟中繼點差不多大，開始讀得出形狀
+//   涵蓋 12 度    21 px   一格一格分得很開，蜂巢最清楚
+//   涵蓋  6 度    42 px   太大了，開始蓋住縣市界與設施那幾層
+//
+// 所以 45 到 12 度之間全亮，兩端各留一段淡入淡出。下緣跟 twSwapT 的 9.7 度接得上，
+// 縣市界淡入的時候六角格正好退場。
+const HEX_IN_HI = 90, HEX_IN_LO = 45;
+const HEX_OUT_HI = 12, HEX_OUT_LO = 6;
 // 格子最低的不透明度。
 //
 // 色階的低端（#0d2c46）比陸地本色（#16334e）還暗，在底圖上那是連續漸層看不出來，
@@ -1281,9 +1297,22 @@ const hexCol = new THREE.Color();
 // 整個蓋掉 material.opacity（是互斥的 if/else 不是相乘），而 alpha 要跟頂點的那一份相乘。
 const hexAlpha = uniform(HEX_OP);
 
+/** 六角層該有多明顯。遠看是 0，區域尺度全亮，貼到地表又退場。 */
+function hexT() {
+  const c = coverDeg();
+  const fadeIn = clamp((HEX_IN_HI - c) / (HEX_IN_HI - HEX_IN_LO), 0, 1);
+  const fadeOut = clamp((c - HEX_OUT_LO) / (HEX_OUT_HI - HEX_OUT_LO), 0, 1);
+  return Math.min(fadeIn, fadeOut);
+}
+
+/** 六角層正在畫的時候，中繼點要讓位。兩者講的是同一份數字，疊著看只會互相干擾。 */
+function hexTakesOver() {
+  return !!(HEX && HEX.on && hexAlpha.value > 0.25);
+}
+
 async function buildHex() {
   if (HEX_PARAM === null) return;
-  const data = await getJSON(HEX_LEVEL === 5 ? './hexgrid-5.json' : './hexgrid.json').catch(() => null);
+  const data = await getJSON(`./hexgrid-${HEX_LEVEL}.json`).catch(() => null);
   if (!data || !data.cc) return;
   const dual = dualCells(data.level);
   // 幾何在這邊算，國碼在資料檔裡，兩邊的頂點順序錯開一格，結果就是每一格都有顏色
@@ -1321,7 +1350,10 @@ async function buildHex() {
   // 深度測試也會擋住它蓋到點，兩道保險。
   mesh.renderOrder = 2;
   globe.add(mesh);
-  HEX = { mesh, mat, colors, geo, codes: data.codes, level: data.level,
+  // on 是使用者的開關，mesh.visible 是「這一幀到底要不要畫」，兩者分開。
+  // 淡到透明還留著 visible 的話，level 7 那 283,000 個三角形每一幀都照跑一次
+  // blending，只是結果全部是透明的。實測在軟體渲染的環境下這足以讓畫面停住。
+  HEX = { mesh, mat, colors, geo, codes: data.codes, level: data.level, on: true,
           cellCC: cells.map((i) => cc[i]), faceCell: g.faceCell,
           vertStart: g.vertStart, vertCount: g.vertCount };
   paintHex(MODE);
@@ -1360,7 +1392,7 @@ function paintHex(mode) {
 const hexRay = new THREE.Raycaster();
 const hexPt = new THREE.Vector2();
 function pickHexCC(sx, sy) {
-  if (!HEX || !HEX.mesh.visible || hexAlpha.value < 0.08) return null;
+  if (!HEX || !HEX.on || !HEX.mesh.visible || hexAlpha.value < 0.08) return null;
   hexPt.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
   hexRay.setFromCamera(hexPt, camera);
   const hit = hexRay.intersectObject(HEX.mesh, false)[0];
@@ -3133,6 +3165,16 @@ function modeValues(mode) {
   return m;
 }
 
+// 中繼點現在有兩個顯示條件：角色篩選（點了 guard 就只留 guard），以及六角層有沒有
+// 接手。兩處各寫一次的話，切角色的時候會把六角層藏起來的點又放回來。
+let hexDotsHidden = false;
+function applyRoleVisibility() {
+  const role = MODE_ROLE[MODE];
+  for (const m of relayMeshes) {
+    m.visible = (role === undefined || m.userData.role === role) && !hexDotsHidden;
+  }
+}
+
 function setMode(mode) {
   if (!CC_STATS || !GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
   MODE = mode;
@@ -3151,8 +3193,7 @@ function setMode(mode) {
     l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
   }
   measureLabels();
-  const role = MODE_ROLE[mode];
-  for (const m of relayMeshes) m.visible = role === undefined || m.userData.role === role;
+  applyRoleVisibility();
   const r = modeRamp(mode);
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
@@ -3563,9 +3604,11 @@ function bindControls(dom) {
   const hexBtn = $('btn-hex');
   if (hexBtn) hexBtn.addEventListener('click', () => {
     if (!HEX) return;
-    const on = !HEX.mesh.visible;
-    HEX.mesh.visible = on;
-    hexBtn.classList.toggle('on', on);
+    HEX.on = !HEX.on;
+    hexBtn.classList.toggle('on', HEX.on);
+    // 關掉的時候中繼點要立刻回來，不必等下一幀的距離判斷
+    hexDotsHidden = hexTakesOver();
+    applyRoleVisibility();
   });
 
   const spinBtn = $('btn-spin');
@@ -3678,12 +3721,19 @@ async function animate() {
   if (plantMat) plantMat.opacity = swap * 0.95;
   if (renewMat) renewMat.opacity = swap * 0.9;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
-  // 六角格是遠看的表面，貼近之後一格會脹到蓋住縣市界與設施，所以吃 deepU 退場，
-  // 跟大氣層、極光那幾層同一個時機。那條曲線講的正是「從太空視角換成地圖視角」。
-  //
-  // 不跟粗輪廓共用 twSwapT。那條從涵蓋 36 度就開始淡，而 17 度左右正是六角格
-  // 在螢幕上一格約 29 px、最看得出形狀的時候，共用的話最好看的那一段已經淡掉七成。
-  if (HEX) hexAlpha.value = HEX_OP * (1 - deepU.value);
+  // 六角層的進退場走自己那條曲線，理由見 HEX_IN_HI 那一段：它跟著「格子在螢幕上
+  // 有多大」走，而既有的 deepU 與 twSwapT 管的是別的事情。
+  if (HEX) {
+    hexAlpha.value = HEX_OP * hexT();
+    HEX.mesh.visible = HEX.on && hexAlpha.value > 0.01;
+    // 格子接手的時候中繼點收起來，退場的時候放回去。兩層都在講同一份國別數字，
+    // 疊著看只是互相干擾，而這個原型要回答的正是「換掉之後好不好讀」。
+    const over = hexTakesOver();
+    if (over !== hexDotsHidden) {
+      hexDotsHidden = over;
+      applyRoleVisibility();
+    }
+  }
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
