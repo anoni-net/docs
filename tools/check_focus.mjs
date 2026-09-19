@@ -262,8 +262,15 @@ const ok = [];
     const btns = { 'btn-tw': mkBtn('btn-tw'), 'btn-spin': mkBtn('btn-spin') };
     const $ = (id) => btns[id] || null;
     /*BIND_SRC*/
+    // 地球的操作現在掛在 window 不是畫布上，理由見 atlas.js 的 bindControls 檔頭：
+    // 可見的國家標籤設了 pointer-events: auto 才點得開卡片，掛在畫布上的話游標壓在
+    // 標籤上就縮放不了也拖不動。所以這裡攔的是全域的 addEventListener。
     const H = {};
-    const dom = { addEventListener: (t, f) => { (H[t] = H[t] || []).push(f); }, setPointerCapture: () => {} };
+    globalThis.addEventListener = (t, f) => { (H[t] = H[t] || []).push(f); };
+    // bindControls 會先問事件是不是落在面板上。這幾支重放的都是地球上的操作，
+    // 一律回 false。真正驗那條排除的是 check_ui_passthrough.mjs。
+    const onUI = () => false;
+    const dom = { setPointerCapture: () => {} };
     globalThis.document = { addEventListener: () => {}, querySelectorAll: () => [] };
     bindControls(dom);
     return {

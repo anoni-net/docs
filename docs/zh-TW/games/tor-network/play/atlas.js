@@ -3810,15 +3810,30 @@ const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
 let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
 const DRAG_DEAD_PX = 6; // 跟挑選設施那條死區同一個值
+// 地球的操作全部掛在 window，不是掛在畫布上。
+//
+// 畫布上面浮著一層 HTML：國家標籤。可見的那些是 .lb.on，設了 pointer-events: auto
+// 才點得開國家卡片，代價是它們會把滑鼠事件整個吃掉。事件掛在畫布上的話，游標只要
+// 壓在任何一個標籤上，滾輪就縮放不了、按下去也拖不動地球，而畫面上隨時有幾十個
+// 標籤，等於地球上有幾十塊區域是死的。
+//
+// 掛在 window 就沒有這個問題，代價是要自己排除真正的 UI。那幾塊面板需要自己的
+// 捲動與點擊，列在這裡。
+const UI_SEL = '#top, #cc-card, #hint, #tour';
+const onUI = (e) => !!(e && e.target && e.target.closest && e.target.closest(UI_SEL));
+
 function bindControls(dom) {
-  dom.addEventListener('pointerdown', (e) => {
-    dom.setPointerCapture(e.pointerId);
+  addEventListener('pointerdown', (e) => {
+    if (onUI(e)) return;
+    // 捕捉到畫布上，後續的 move 與 up 就算游標跑到面板上也還是送得到這裡，
+    // 而且 target 會變成畫布，onUI 不會在拖到一半的時候誤判。
+    try { dom.setPointerCapture(e.pointerId); } catch { /* 捕捉不到就算了，事件照樣冒泡 */ }
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
     dragFrom = { x: e.clientX, y: e.clientY };
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
-  dom.addEventListener('pointermove', (e) => {
+  addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 2) {
@@ -3864,7 +3879,7 @@ function bindControls(dom) {
     // 三指收到剩兩指，捏合的基準距離也要重取，否則縮放會跟著跳
     if (n === 2) { pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   };
-  dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
+  addEventListener('pointerup', up); addEventListener('pointercancel', up);
   // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
   // 而 iOS Safari 從 10 開始也忽略 viewport 的 user-scalable=no。所以整頁鎖縮放
   // 這件事在 Safari 上只能靠攔這三個事件，跟 index.html 的 viewport 是一組的，
@@ -3917,13 +3932,15 @@ function bindControls(dom) {
   // 掛太廣會讓面板上的按鈕連按兩下時第二下沒反應。畫布上的互動全走 pointer 事件，
   // 取消相容事件沒有影響。
   let lastTapT = 0;
-  dom.addEventListener('touchend', (e) => {
+  addEventListener('touchend', (e) => {
+    if (onUI(e)) return;
     const now = performance.now();
     if (now - lastTapT < 350 && e.touches.length === 0) e.preventDefault();
     lastTapT = now;
   }, { passive: false });
-  dom.addEventListener('dblclick', (e) => e.preventDefault());
-  dom.addEventListener('wheel', (e) => {
+  addEventListener('dblclick', (e) => { if (!onUI(e)) e.preventDefault(); });
+  addEventListener('wheel', (e) => {
+    if (onUI(e)) return;   // 面板要留給它自己捲動
     e.preventDefault();
     // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
     const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
