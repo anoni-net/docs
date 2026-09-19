@@ -603,12 +603,32 @@ function twSwapT() {
 // 有關。貼近地表時鏡頭從 45 度收到 18 度，tan 比是 2.62，漏掉這一項的話拖曳就是
 // 快了 2.62 倍：手指動一點點地球就甩過去。基準同樣取進場時的 45 度，所以遠看的
 // 手感一個字都沒變。
-const DRAG_K = 0.006;
+// 兩個旋鈕都可以用網址現場調，手感這種東西只能自己滾過才知道：
+//
+//   ?drag=0.008      基礎係數。愈大轉得愈多，預設 0.006
+//   ?drag-fov=0.6    鏡頭補償的程度。1 是完全補償（同樣一段滑鼠位移，地表在螢幕上
+//                    跑的距離不論遠近都一樣），0 是完全不補償（換上望遠鏡頭之後會
+//                    快 2.62 倍，那是修掉的舊行為）。中間值介於兩者。
+//
+// 預設的 1 是物理上一致的那一端：任何距離下拖一百像素，地表在螢幕上就跑一百像素。
+// 但一致不等於好用。遠看的時候人想要的是「一把轉到地球另一側」，貼近的時候想要
+// 的是「慢慢挪到那個變電所上」，兩者要的本來就不是同一個比例。真的覺得遠看推不
+// 動，把 drag-fov 調小一點比調大 drag 好，後者會連帶讓貼近也變快。
+const DRAG_K = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('drag'));
+  return v > 0 && v <= 0.05 ? v : 0.006;
+})();
+const DRAG_FOV_MIX = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('drag-fov'));
+  return v >= 0 && v <= 1 ? v : 1;
+})();
 const DRAG_TAN_REF = Math.tan(FOV_FAR * Math.PI / 360);
 function dragRate() {
   const ref = Math.max(1e-3, fitDist() - R);
   const tanNow = Math.tan(camera.fov * Math.PI / 360);
-  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref * (tanNow / DRAG_TAN_REF);
+  // mix 是 0 的時候這一項固定為 1，等於完全不補償鏡頭
+  const tanFix = Math.pow(tanNow / DRAG_TAN_REF, DRAG_FOV_MIX);
+  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref * tanFix;
 }
 
 // 一格滾輪最多讓涵蓋的地表變動幾成。理由見 wheel 那段。

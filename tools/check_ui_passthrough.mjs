@@ -58,7 +58,7 @@ const wire = `
   ${decl(/^const onUI = [^;]+;/m)}
   const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
   ${decl(/^const COVER_STEP_MAX = [^;]+;/m)}
-  ${decl(/^const DRAG_K = [^;]+;/m)}
+  const DRAG_K = 0.006;   // 網址可覆寫，這裡固定成預設值
   ${decl(/^const DRAG_DEAD_PX = [^;]+;/m)}
   const R = 5;
   const view = { zoom: 1, rx: 0, ry: 0, spin: true };
@@ -147,8 +147,10 @@ for (const sel of ['#top', '#cc-card', '#hint', '#tour']) {
   const src = `
     const R = 5;
     ${decl(/^const FOV_FAR = [^;]+;/m)}
-    ${decl(/^const DRAG_K = [^;]+;/m)}
+    const DRAG_K = 0.006;
     ${decl(/^const DRAG_TAN_REF = [^;]+;/m)}
+    // 兩個旋鈕都可以用網址調，這裡固定成預設值驗公式本身
+    const DRAG_FOV_MIX = 1;
     let camera = { fov: 45, position: { z: 15.42 } };
     const fitDist = () => 15.42;
     ${extractFn(atlas, 'function dragRate()')}
