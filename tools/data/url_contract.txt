@@ -1125,15 +1125,15 @@
 	#前半段的離線閱讀與-passkey
 	#在地脈絡的三頁新內容
 	#實驗區與-WebRTC-傳檔量測
+	#已作廢的敘述
 	#手機上的-Tor-與緊急求救
 	#接下來
-	#收回來的敘述
 	#新工具與截圖遮蔽的人臉偵測
 	#監控能力的第五層
 	#相關閱讀
 	#示意圖地球儀導覽與網址合約
 	#系列的範圍與節奏
-	#舊版讀者要補的五件事
+	#舊版讀者的補充事項
 	#設定抽屜
 	#近期的三篇文章
 /blog/archive/2025/
@@ -3098,19 +3098,19 @@
 	#A-new-tool-and-face-detection-in-screenshot-redaction
 	#Diagrams-the-globe-tour-and-the-URL-contract
 	#Docs-site-update-review-September-2026
-	#Five-things-for-readers-of-the-old-guidance
+	#Follow-ups-for-readers-of-the-old-guidance
 	#Further-reading
 	#Next-steps
 	#Nine-worked-examples
 	#Offline-reading-and-passkeys-in-the-first-half
 	#Scope-and-cadence
-	#Statements-we-are-taking-back
 	#The-Lab-and-the-WebRTC-transfer-measurement
 	#The-fifth-surveillance-tier
 	#The-settings-drawer
 	#Three-articles-from-this-period
 	#Three-new-regional-pages
 	#Tor-on-a-phone-and-Emergency-Help
+	#Withdrawn-statements
 /en/blog/archive/2025/
 	#2025
 	#202504-Project-Status-and-Updates
@@ -7998,11 +7998,11 @@
 	#前半段的离线阅读与-passkey
 	#在地脉络的三页新内容
 	#实验区与-WebRTC-传文件量测
+	#已作废的叙述
 	#手机上的-Tor-与紧急求救
 	#接下来
-	#收回来的叙述
 	#新工具与截图遮蔽的人脸检测
-	#旧版读者要补的五件事
+	#旧版读者的补充事项
 	#监控能力的第五层
 	#相关阅读
 	#示意图地球仪导览与网址合约
