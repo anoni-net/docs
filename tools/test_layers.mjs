@@ -21,7 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LAYERS, LAYER, RO, DEFAULT_ON } from '../docs/zh-TW/games/tor-network/play/layers.js';
+import { LAYERS, LAYER, METRICS, DEFAULT_METRIC, RO, DEFAULT_ON } from '../docs/zh-TW/games/tor-network/play/layers.js';
 import { STR } from '../docs/zh-TW/games/tor-network/play/i18n.js';
 import { STOPS } from '../docs/zh-TW/games/tor-network/play/tour.js';
 
@@ -184,6 +184,47 @@ for (const l of LAYERS) {
     if (JSON.stringify(got) !== JSON.stringify(want)) {
       fail.push(`網址 "${search}" ${why}：開出 ${got.join('、') || '（無）'}，應該是 ${want.join('、')}`);
     }
+  }
+}
+
+// ── 陸地亮度的指標 ──────────────────────────────────────────
+//
+// 指標宣告在層裡，算法在 atlas.js 的 METRIC_VALUES，兩邊用 id 連起來。宣告了卻
+// 沒有算法的話，按鈕會照常出現在亮度那一排，按下去陸地整片暗掉而圖例還寫著它的
+// 名字，看起來像資料剛好都是零。
+{
+  const m = atlas.match(/^const METRIC_VALUES = \{[\s\S]*?^\};/m);
+  if (!m) fail.push('atlas.js 裡找不到 METRIC_VALUES');
+  else {
+    const impl = new Set([...m[0].matchAll(/^\s*'([^']+)':/gm)].map((x) => x[1]));
+    for (const id of Object.keys(METRICS)) {
+      if (!impl.has(id)) fail.push(`指標 ${id} 有宣告，METRIC_VALUES 裡卻沒有算法`);
+    }
+    for (const id of impl) {
+      if (!METRICS[id]) fail.push(`METRIC_VALUES 裡的 ${id} 沒有任何一層宣告它，按鈕不會出現`);
+    }
+  }
+  const FMT = ['count', 'share', 'pct'];
+  const seen = new Set();
+  for (const l of LAYERS) {
+    for (const mt of l.metrics || []) {
+      if (seen.has(mt.id)) fail.push(`指標 ${mt.id} 被宣告了兩次`);
+      seen.add(mt.id);
+      if (!FMT.includes(mt.fmt)) fail.push(`指標 ${mt.id} 的 fmt 是 ${mt.fmt}，只收 ${FMT.join('、')}`);
+      for (const k of [mt.label, mt.tip].filter(Boolean)) {
+        const miss = LANGS.filter((lang) => !STR[lang] || STR[lang][k] === undefined);
+        if (miss.length) fail.push(`指標 ${mt.id} 的 ${k} 缺 ${miss.join('、')}`);
+      }
+      for (const c of [mt.lo, mt.hi]) {
+        if (!/^#[0-9a-f]{6}$/i.test(c || '')) fail.push(`指標 ${mt.id} 的色階 ${c} 不是六位十六進位`);
+      }
+    }
+  }
+  // 預設那個指標要來自開場就載的層，不然一進來陸地是暗的而圖例寫著它
+  const def = METRICS[DEFAULT_METRIC];
+  if (!def) fail.push(`DEFAULT_METRIC 指向不存在的指標 ${DEFAULT_METRIC}`);
+  else if (!LAYERS.find((l) => l.id === def.layer && l.on)) {
+    fail.push(`預設指標 ${DEFAULT_METRIC} 來自 ${def.layer}，而那一層開場不載`);
   }
 }
 

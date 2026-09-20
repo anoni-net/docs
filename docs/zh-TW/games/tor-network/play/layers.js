@@ -26,6 +26,9 @@
 //   creditEl  資料來源區塊的 DOM id。這一組沒有命名慣例可推，逐筆寫出來
 //   lift      幾何抬離地表多少，單位是地球半徑的倍數
 //   order     renderOrder。同心的透明物件預設排序不穩定，要明確指定
+//   metrics   這一層能供應哪幾個陸地亮度指標。層關掉時那幾顆按鈕跟著收起來，
+//             目前正停在上面的話會自動換到還在的那一個。fmt 決定國家標籤上那個
+//             數字怎麼寫：count 是原值，share 是佔全網多少，pct 是數值本身即百分比
 
 // 台灣那幾層的疊放順序。數字本身沒有意義，相對大小才有：變電所在最底下，
 // 登陸點在最上面，中繼點又在登陸點之上。
@@ -76,6 +79,14 @@ export const LAYERS = [
     credit: 'creditOnionoo', creditEl: 'credit-onionoo',
     panel: 'stat-mix',
     lift: 1.012,
+    // 陸地亮度可以換的三個指標都由這一層供應。關掉它，那三顆按鈕跟著收起來。
+    metrics: [
+      { id: 'all-count', label: 'modeCount', fmt: 'count', lo: '#0d2c46', hi: '#3d87bd' },
+      // 共識權重看的是佔全網多少，標籤寫百分比才讀得出意義
+      { id: 'all-weight', label: 'modeWeight', fmt: 'share', lo: '#0d2c46', hi: '#3d87bd' },
+      // 集中度用紫，跟四個角色色都拉開。數值本身就是百分比
+      { id: 'conc', label: 'modeConc', fmt: 'pct', lo: '#2b1030', hi: '#c47ad8' },
+    ],
     note: 'Onionoo 的中繼快照。每小時都在變，定期重生，所以每次載入都向 server 驗證新鮮度。',
   },
   {
@@ -98,6 +109,10 @@ export const LAYERS = [
     label: 'lblUsers',
     credit: 'creditMetrics', creditEl: 'credit-metrics',
     panel: 'stat-users',
+    // 使用者估計是需求端，跟中繼那三個供給端指標不是同一件事，色相挑剩下沒人用的黃。
+    // 這個指標下中繼點照樣全部顯示，「陸地亮度是用的人、點是架的機器」那個落差
+    // 就是重點。
+    metrics: [{ id: 'users', label: 'modeUsers', tip: 'modeUsersTip', fmt: 'count', lo: '#2a2410', hi: '#e8d24a' }],
     note: '使用者估計與橋接統計。跟 snapshot 一樣帶 no-cache。assets 回的是 max-age=43200，瀏覽器會把這份快取十二小時，但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。',
   },
   {
@@ -199,6 +214,13 @@ export const LAYERS = [
 
 /** id → 那一筆宣告。 */
 export const LAYER = Object.fromEntries(LAYERS.map((l) => [l.id, l]));
+
+/** 所有層供應的陸地亮度指標攤成一張表，id 對到宣告。 */
+export const METRICS = Object.fromEntries(
+  LAYERS.flatMap((l) => (l.metrics || []).map((m) => [m.id, { ...m, layer: l.id }])));
+
+/** 預設停在哪個指標。那一層沒開的時候由 atlas.js 換到還在的第一個。 */
+export const DEFAULT_METRIC = 'all-count';
 
 /** 開場預設開著的層。網址帶 layers 的時候由它覆蓋，見 atlas.js 的 wantOn。 */
 export const DEFAULT_ON = LAYERS.filter((l) => l.on).map((l) => l.id);

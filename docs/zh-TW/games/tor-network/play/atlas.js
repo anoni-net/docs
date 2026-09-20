@@ -12,7 +12,7 @@ import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder,
          inRings, judgeIndex, judgeCells } from './hexgrid.js';
 import { createTour } from './tour.js';
-import { LAYERS, LAYER, RO, lift } from './layers.js';
+import { LAYERS, LAYER, METRICS, DEFAULT_METRIC, RO, lift } from './layers.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -82,9 +82,6 @@ function applyI18n() {
   if (lb0 && lb0.disabled) lb0.title = S('loading');
   set('lbl-roles', 'lblRoles');
   set('lbl-brightness', 'lblBrightness');
-  set('mode-count', 'modeCount');
-  set('mode-weight', 'modeWeight');
-  set('mode-conc', 'modeConc');
   set('ramp-lo', 'rampLow');
   set('ramp-hi', 'rampHigh');
   set('btn-hex', 'btnHex');
@@ -123,8 +120,6 @@ function applyI18n() {
   set('tour-next', 'tourNext');
   set('tour-keys', 'tourKeys');
   set('backend', 'backendDetecting');
-  const bu = $('btn-users');
-  if (bu) { bu.textContent = S('modeUsers'); bu.title = S('modeUsersTip'); }
   // 收合鈕的文字在 CSS ::after 裡，只能透過自訂屬性換掉
   document.documentElement.style.setProperty('--toggle-open', `'${S('toggleOpen')}'`);
   document.documentElement.style.setProperty('--toggle-closed', `'${S('toggleClosed')}'`);
@@ -193,16 +188,13 @@ const ROLE_COL = [COL.mid, COL.guard, COL.exit, COL.both]; // index = roleCode
 
 // 地圖模式：全部，或單看某一種角色。發光層依模式換色階，深淺代表該國的數量。
 // lo 是「有一台」的顏色，hi 是「最多的那個國家」，中間走 glowColor 的冪次曲線。
+// 只看某一種角色時的色階。這四個是中繼那一層內部的切面，不是獨立的資料，
+// 所以留在這裡而不是當成層供應的指標。指標那幾個宣告在 layers.js 的 metrics。
 const MODES = {
-  all:    { get lbl() { return S('modeAllLbl'); },   lo: '#0d2c46', hi: '#3d87bd' },
-  guard:  { lbl: 'guard',       lo: '#0c2b1e', hi: '#4fd58f' },
-  exit:   { lbl: 'exit',        lo: '#2b1d09', hi: '#ffb347' },
-  both:   { lbl: 'guard＋exit', lo: '#2a1220', hi: '#ff9ec7' },
-  middle: { lbl: 'middle',      lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
-  conc:   { get lbl() { return S('modeConcLbl'); },  lo: '#2b1030', hi: '#c47ad8' }, // 紫，跟四個角色色都拉開
-  // 使用者估計是需求端，跟其他模式的供給端不是同一件事，色相挑剩下沒人用的黃。
-  // 這個模式下中繼點照樣全部顯示，「陸地亮度是用的人、點是架的機器」那個落差就是重點。
-  users:  { get lbl() { return S('modeUsersLbl'); }, lo: '#2a2410', hi: '#e8d24a' },
+  guard:  { lo: '#0c2b1e', hi: '#4fd58f' },
+  exit:   { lo: '#2b1d09', hi: '#ffb347' },
+  both:   { lo: '#2a1220', hi: '#ff9ec7' },
+  middle: { lo: '#08262e', hi: '#35c6e8' }, // 青色系，避開陸地本身的藍
 };
 const CONC_MIN = 10; // 台數太少的國家，集中度沒有意義（一台就是 100%）
 const MODE_ROLE = { guard: 1, exit: 2, both: 3, middle: 0 };
@@ -1011,13 +1003,11 @@ const REGISTRY = {
   },
 };
 
-/** 使用者數那一份載到了沒有，決定色階用的 Map 與那顆模式按鈕露不露。 */
+/** 使用者數那一份載到了沒有，決定色階用的那張表。按鈕由 buildMetricUI 管。 */
 function applyUsers() {
   USERS_MAP = TORUSERS && TORUSERS.users
     ? new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]))
     : null;
-  const b = $('btn-users');
-  if (b) b.hidden = !USERS_MAP; // 沒抓到資料就不要露出一個按了會空白的按鈕
 }
 
 /**
@@ -1083,6 +1073,7 @@ async function layerOn(id) {
   inLayer(id, () => REGISTRY[id].build(st.data));
   st.on = true;
   resortGlobe();
+  buildMetricUI(); // 這一層供應的指標要跟著出現在亮度那一排
   return true;
 }
 
@@ -1097,6 +1088,7 @@ function layerOff(id) {
   layerPanel(id, false);
   st.on = false;
   resortGlobe();
+  buildMetricUI(); // 停在它供應的指標上的話，這裡會換到還在的那一個
 }
 
 // ── 圖層清單 ─────────────────────────────────────────────────
@@ -4137,20 +4129,39 @@ function showFeature(hit) {
 
 // 地圖模式：看全部，或單看某一種角色。陸地深淺就是該國在這個模式下的數量。
 // 角色分布那四個 chip 直接當按鈕用，點下去地球就換成那個角色的色調。
-function modeRamp(mode) { return MODES[(mode === 'all-weight' || mode === 'all-count') ? 'all' : mode]; }
+/** 這個模式的色階。指標由層供應，角色是中繼那一層內部的切面。 */
+function modeRamp(mode) { return METRICS[mode] || MODES[mode] || METRICS[DEFAULT_METRIC]; }
 
-function modeValues(mode) {
-  if (!CC_STATS) return mode === 'users' ? (USERS_MAP || new Map()) : new Map();
-  if (mode === 'all-weight') return CC_STATS.w;
-  if (mode === 'conc') return CC_STATS.conc;
-  if (mode === 'users') return USERS_MAP || new Map();
-  const role = MODE_ROLE[mode];
+/**
+ * 每個指標怎麼換算成一張「國碼對數值」的表。
+ *
+ * 宣告在 layers.js，算法在這裡，兩邊用 id 連起來，跟 REGISTRY 同一套分工。
+ * 那邊是純資料要給 node 的檢查腳本讀，這邊要讀模組裡的統計。
+ *
+ * 供應它的那一層關掉時這裡拿不到東西，回空表，陸地就整片暗下去。
+ */
+const METRIC_VALUES = {
+  'all-count': () => roleMap(undefined),
+  'all-weight': () => (CC_STATS ? CC_STATS.w : new Map()),
+  'conc': () => (CC_STATS ? CC_STATS.conc : new Map()),
+  'users': () => USERS_MAP || new Map(),
+};
+
+/** 某一種角色的台數。role 省略代表四種加起來。 */
+function roleMap(role) {
   const m = new Map();
+  if (!CC_STATS) return m;
   for (const [cc, r] of CC_STATS.mix) {
     const v = role === undefined ? r[0] + r[1] + r[2] + r[3] : r[role];
     if (v) m.set(cc, v);
   }
   return m;
+}
+
+function modeValues(mode) {
+  const f = METRIC_VALUES[mode];
+  if (f) return f();
+  return roleMap(MODE_ROLE[mode]);
 }
 
 // 中繼點的顯示條件只有角色篩選。六角層是底圖，資料點疊在它上面，兩者不互斥。
@@ -4162,7 +4173,7 @@ function applyRoleVisibility() {
 function setMode(mode) {
   // CC_STATS 是中繼快照算出來的。那一層被關掉之後它是 null，這裡照樣要走完，
   // 陸地亮度才會跟著暗下去。擋在門口的話關掉中繼，陸地還亮著上一次的台數。
-  if (!GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
+  if (!GLOW || !(METRICS[mode] || MODES[mode])) return;
   MODE = mode;
   const values = modeValues(mode);
   paintGlow(values, GLOW.canvas, modeRamp(mode));
@@ -4173,12 +4184,14 @@ function setMode(mode) {
   }
   hexPaint(mode);
   const totalW = (CC_STATS && CC_STATS.totalW) || 1;
+  // 國家標籤上那個數字怎麼寫，由指標自己宣告。角色那四個走預設的原值。
+  const fmt = (METRICS[mode] && METRICS[mode].fmt) || 'count';
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
     const pct = v / totalW * 100;
-    const txt = mode === 'all-weight'
+    const txt = fmt === 'share'
       ? (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%')
-      : mode === 'conc' ? Math.round(v) + '%'
+      : fmt === 'pct' ? Math.round(v) + '%'
       : v.toLocaleString();
     l.el.innerHTML = `${l.cc.toUpperCase()}<i>${txt}</i>`;
     l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
@@ -4188,9 +4201,42 @@ function setMode(mode) {
   const r = modeRamp(mode);
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
+  syncMetricUI();
+}
+
+/**
+ * 陸地亮度可以換哪幾個指標，由現在開著的層決定。
+ *
+ * 原本四顆寫死在 index.html 裡，使用者數那顆靠 hidden 控制。層能自己開關之後那個
+ * 做法不夠用：供應指標的層一關，按鈕要跟著消失，不然按下去是一片全暗的陸地而
+ * 圖例還寫著那個指標的名字。
+ */
+function buildMetricUI() {
+  const box = $('metric-sw');
+  if (!box) return;
+  const list = LAYERS.flatMap((l) => (layerIsOn(l.id) ? (l.metrics || []) : []));
+  box.innerHTML = list.map((m) =>
+    `<button type="button" data-mode="${m.id}"${m.tip ? ` title="${esc(S(m.tip))}"` : ''}>${esc(S(m.label))}</button>`
+  ).join('');
+  box.hidden = !list.length;
+  const lbl = $('lbl-brightness');
+  if (lbl) lbl.hidden = !list.length;
+  const ramp = $('ramp');
+  if (ramp) ramp.hidden = !list.length;
+  // 停在上面的那個指標被關掉了就換一個。留在原地的話陸地全暗，而圖例還寫著它。
+  const has = (id) => list.some((m) => m.id === id);
+  if (!has(MODE) && MODE_ROLE[MODE] === undefined && list.length) {
+    setMode(has(DEFAULT_METRIC) ? DEFAULT_METRIC : list[0].id);
+    return; // setMode 會自己回頭同步樣式
+  }
+  syncMetricUI();
+}
+
+function syncMetricUI() {
   for (const el of document.querySelectorAll('[data-mode]')) {
-    const on = el.dataset.mode === mode;
+    const on = el.dataset.mode === MODE;
     el.classList.toggle('on', on);
+    el.setAttribute('aria-pressed', on ? 'true' : 'false');
     if (MODE_ROLE[el.dataset.mode] !== undefined) el.title = on ? S('roleTipAll') : S('roleTipOne');
   }
 }
@@ -4287,7 +4333,7 @@ function fillUsers(snap) {
     const hi = cc === 'tw' ? ' hi' : '';
     return `<div class="mix-row${hi}"><span class="cc">${cc.toUpperCase()}</span>`
       + `<span class="tot">${cur.toLocaleString()}</span>`
-      + `<span class="mix-bar"><span style="width:${(cur / max * 100).toFixed(1)}%;background:${MODES.users.hi}"></span></span>`
+      + `<span class="mix-bar"><span style="width:${(cur / max * 100).toFixed(1)}%;background:${METRICS.users.hi}"></span></span>`
       + `<span class="n">${S('rowRelays', { n: (cnt.get(cc) || 0).toLocaleString() })}</span></div>`;
   }).join('');
   const note = $('users-note');
@@ -4874,6 +4920,7 @@ async function main() {
   });
   buildLayerUI();
   bindLayerUI();
+  buildMetricUI();
   bindControls(renderer.domElement);
   // 即時更新的按鈕從一開始就在位子上，只是停用著，等這裡才放行。
   // 版面不會在載入完成的瞬間跳一下，使用者也一開始就知道有這個功能。
@@ -4906,13 +4953,24 @@ async function main() {
     const el = e.target.closest('.lb');
     if (el && el.dataset.cc) { e.preventDefault(); showCountry(el.dataset.cc); }
   });
-  for (const el of document.querySelectorAll('[data-mode]')) {
-    const isRole = MODE_ROLE[el.dataset.mode] !== undefined;
+  // 指標與角色兩種 chip 都用委派。兩邊的節點都會被重新產生，指標跟著層開關，
+  // 角色跟著 fillMix，各自綁在節點上的話重建一次就失效，而畫面看起來完全正常，
+  // 只是點下去沒反應。
+  const goMode = (el) => {
+    const m = el.dataset.mode;
     // 角色 chip 再點一次就取消，回到看全部。沒有這個的話進得去出不來。
-    const go = () => setMode(isRole && el.dataset.mode === MODE ? 'all-count' : el.dataset.mode);
-    el.addEventListener('click', go);
-    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
-  }
+    const isRole = MODE_ROLE[m] !== undefined;
+    setMode(isRole && m === MODE ? DEFAULT_METRIC : m);
+  };
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('[data-mode]');
+    if (el) goMode(el);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target.closest && e.target.closest('[data-mode]');
+    if (el) { e.preventDefault(); goMode(el); }
+  });
   $('cc-close') && $('cc-close').addEventListener('click', hideCountry);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCountry(); });
   // 點地球上的設施看細節。

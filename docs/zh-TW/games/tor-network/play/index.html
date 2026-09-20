@@ -631,7 +631,10 @@
         <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
         <div class="lbl" id="lbl-brightness">陸地亮度：由低到高（非線性，中段差距已放大）</div>
-        <div id="metric-sw"><button data-mode="all-count" class="on" id="mode-count">中繼台數</button><button data-mode="all-weight" id="mode-weight">共識權重</button><button data-mode="conc" id="mode-conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
+        <!-- 亮度可以換哪幾個指標由現在開著的層決定，內容由 atlas.js 的 buildMetricUI
+             畫出來。原本四顆寫死在這裡，使用者數那顆靠 hidden 控制，層能自己開關
+             之後那個做法不夠用。 -->
+        <div id="metric-sw"></div>
         <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
         <!-- 六角層的開關。網址沒帶 ?hex 的話 buildHex 直接返回，這顆就一直是 hidden。 -->
         <button id="btn-hex" type="button" hidden>六角格</button>

@@ -224,6 +224,55 @@ check((await ev(`document.querySelectorAll('#labels .lb').length`)) > 0, '國家
 const end = await ev(`window.__atlas.objCount()`);
 check(end === base, `全部走完之後仍是 ${base} 個物件（實際 ${end}）`);
 
+// ── 陸地亮度的指標跟著層增減 ────────────────────────────────
+//
+// 指標由層供應。供應它的那一層關掉時按鈕要跟著消失，不然按下去是一片全暗的陸地
+// 而圖例還寫著那個指標的名字。停在上面的那個被關掉時還要自動換一個。
+const modes = () => ev(`JSON.stringify([...document.querySelectorAll('#metric-sw button')].map((b) => b.dataset.mode))`);
+const onMode = () => ev(`(document.querySelector('#metric-sw button.on')||{ dataset: {} }).dataset.mode`);
+const waitOn = async (id, want = true) => {
+  for (let i = 0; i < 60; i++) {
+    if ((await ev(`window.__atlas.isOn('${id}')`)) === want) return true;
+    await sleep(250);
+  }
+  return false;
+};
+
+check(JSON.parse(await modes()).join() === 'all-count,all-weight,conc', '開場的三個指標都來自中繼那一層');
+check((await onMode()) === 'all-count', '開場停在中繼台數');
+
+await ev(`(async () => { await window.__atlas.on('torusers'); })()`);
+await waitOn('torusers');
+await sleep(200);
+check(JSON.parse(await modes()).includes('users'), '打開使用者估計之後多一個指標');
+await ev(`document.querySelector('[data-mode="users"]').click()`);
+await sleep(300);
+check((await onMode()) === 'users', '按下去換到使用者數');
+
+await ev(`window.__atlas.off('torusers')`);
+await sleep(300);
+check(!JSON.parse(await modes()).includes('users'), '關掉之後那個指標跟著消失');
+check((await onMode()) === 'all-count', '停在被關掉的指標上會自動換回預設');
+
+await ev(`window.__atlas.off('relays')`);
+await sleep(300);
+check(JSON.parse(await modes()).length === 0, '中繼也關掉之後一個指標都不剩');
+check(await ev(`document.getElementById('metric-sw').hidden`), '按鈕列整排收起來');
+check(await ev(`document.getElementById('lbl-brightness').hidden`), '亮度那個小標跟著收');
+await ev(`(async () => { await window.__atlas.on('relays'); })()`);
+await waitOn('relays');
+await sleep(400);
+check(JSON.parse(await modes()).length === 3, '再打開之後三個指標回來');
+
+// 角色 chip 是 fillMix 每次重建的，事件綁在節點上的話重開一次就點不動了，
+// 而畫面看起來完全正常。
+await ev(`document.querySelector('#stat-role [data-mode]').click()`);
+await sleep(300);
+check((await ev(`(document.querySelector('#stat-role [data-mode].on')||{ dataset: {} }).dataset.mode`)) === 'guard',
+      '中繼重開之後角色 chip 還點得動');
+await ev(`document.querySelector('#stat-role [data-mode]').click()`);
+await sleep(300);
+
 // ── 導覽按下去要能走完七站 ──────────────────────────────────
 //
 // 七站各自依賴一份資料，而開場只載地理底圖與中繼。導覽開始前沒有把缺的補上的話，

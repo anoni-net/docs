@@ -52,6 +52,8 @@ Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding 
 - **Single-provider concentration**: what fraction of a country's relays sit with its largest hosting provider, showing how dependent it is on one operator
 - **User estimate**: the estimated number of Tor users, a demand-side figure
 
+Layers supply the metrics, so the row of buttons grows and shrinks with them. The first three come from the Tor relay layer, and the user estimate appears once that layer is on. Turning off the layer behind the metric you are viewing drops the view back to relay count.
+
 The gap between count and weight is worth switching over to see once. The United States hosts the most relays, but under consensus weight Germany moves ahead, which means each German relay carries more traffic.
 
 ### Clicking a country label opens its card

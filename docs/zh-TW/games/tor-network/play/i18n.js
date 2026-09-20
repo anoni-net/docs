@@ -197,9 +197,6 @@ const ZH_TW = {
   liveTag: '（剛才即時取得）',
 
   // ---- 其他 ----
-  modeAllLbl: '全部',
-  modeConcLbl: '單一業者集中度',
-  modeUsersLbl: '使用者估計',
   ptPlain: '一般橋接',
   gapNoPlace: '另有 {n} 台的國別是 eu 或未知，地球上沒有位置可放，略過不畫。',
   gapPartial: '地球上畫出 {drawn} 台，其餘 {miss} 台缺明確國別或取回時未取得。',
@@ -443,9 +440,6 @@ const EN = {
   liveTag: ' (fetched just now)',
 
   // ---- 其他 ----
-  modeAllLbl: 'All',
-  modeConcLbl: 'Provider concentration',
-  modeUsersLbl: 'Estimated users',
   ptPlain: 'plain bridge',
   gapNoPlace: 'A further {n} relays report their country as eu or unknown, so they have nowhere to sit on the globe and are left out.',
   gapPartial: '{drawn} relays are drawn on the globe. The remaining {miss} lack a clear country or were not returned in this fetch.',
@@ -682,9 +676,6 @@ const ZH_CN = {
   liveTag: '（刚才实时取得）',
 
   // ---- 其他 ----
-  modeAllLbl: '全部',
-  modeConcLbl: '单一服务商集中度',
-  modeUsersLbl: '用户估计',
   ptPlain: '一般网桥',
   gapNoPlace: '另有 {n} 台的国别是 eu 或未知，地球上没有位置可放，略过不画。',
   gapPartial: '地球上画出 {drawn} 台，其余 {miss} 台缺明确国别或取回时未取得。',
