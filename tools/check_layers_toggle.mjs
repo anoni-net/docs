@@ -97,15 +97,21 @@ await new Promise((r) => ws.addEventListener('open', r, { once: true }));
 let id = 0;
 const pend = new Map();
 const errs = [];
+// 收尾時的雜訊。SwiftShader 那條路上，Chrome 要關的時候 WebGPU 的 device 會被
+// 回收，接著噴一批 device lost 與 popErrorScope。跑在有顯示卡的機器上看不到，
+// 在 CI 上整批出現，把 102 項全過的那一輪判成紅燈。
+const NOISE = /WebGPU Device Lost|Instance dropped in popErrorScope/;
+let collecting = true;
+const note = (line) => { if (collecting && !NOISE.test(line)) errs.push(line); };
 ws.addEventListener('message', (m) => {
   const d = JSON.parse(m.data);
   if (d.id && pend.has(d.id)) { pend.get(d.id)(d.result); pend.delete(d.id); }
   if (d.method === 'Runtime.consoleAPICalled' && d.params.type === 'error') {
-    errs.push(d.params.args.map((a) => a.value || a.description || '').join(' '));
+    note(d.params.args.map((a) => a.value || a.description || '').join(' '));
   }
   if (d.method === 'Runtime.exceptionThrown') {
     const x = d.params.exceptionDetails;
-    errs.push('未捕捉例外: ' + (x.exception?.description || x.text));
+    note('未捕捉例外: ' + (x.exception?.description || x.text));
   }
 });
 const send = (method, params = {}) => new Promise((r) => {
@@ -349,6 +355,9 @@ for (const id of ['relays', 'ooni', 'torusers', 'tw-admin', 'tw-landing', 'tw-po
 }
 check((await ev(`!document.getElementById('tour').hidden`)), '導覽列出現了');
 check((await ev(`[...document.querySelectorAll('[data-ly].on')].length`)) >= 8, '圖層清單跟著標成開著');
+
+// 檢查跑完了，之後發生的都是收尾
+collecting = false;
 
 for (const m of ok) console.log(`  ok   ${m}`);
 if (errs.length) {
