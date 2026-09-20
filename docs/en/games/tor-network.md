@@ -27,6 +27,16 @@ This is built for workshops and classrooms. The work and its data sit in the aut
 
 When a dataset fails to load, the stop that needs it is dropped and the count adjusts.
 
+## Pick the layers you want
+
+The globe and the Tor relays load at startup. The other eleven layers sit in the row of chips at the top of the left panel: tap one and that dataset is fetched and drawn, tap again and it is removed. Layers you never tap cost nothing.
+
+The split exists because the full stack is 380 KB, and most visitors come for the relay distribution. The Taiwan infrastructure layers account for another 100 KB, so they load only when someone asks for them.
+
+The URL follows your choices, so copying the address bar hands someone else the same stack. You can also write it directly: `?layers=tw-power,tw-grid` opens just the substations and the grid, and an empty `?layers=` leaves only the globe itself.
+
+Starting the tour pulls in whatever its seven stops need, so there is no need to tap the layers open beforehand.
+
 ## What is on the sphere
 
 Each relay is one dot placed inside its own country's border, coloured by its four possible roles (guard, middle, exit, and guard plus exit) and sized by bandwidth. Landmass brightness carries a separate metric, relay count by default.

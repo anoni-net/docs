@@ -21,8 +21,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LAYERS, RO } from '../docs/zh-TW/games/tor-network/play/layers.js';
+import { LAYERS, LAYER, RO, DEFAULT_ON } from '../docs/zh-TW/games/tor-network/play/layers.js';
 import { STR } from '../docs/zh-TW/games/tor-network/play/i18n.js';
+import { STOPS } from '../docs/zh-TW/games/tor-network/play/tour.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PLAY = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play');
@@ -86,6 +87,10 @@ for (const l of LAYERS) {
 // 這兩組要跟著清單一起改，改的時候正好被迫想一次為什麼。
 const FRESH = ['relays', 'torusers'];          // assets 上天天重生，CDN 快取 12 小時
 const REQUIRED = ['countries', 'relays'];      // 沒有它們畫不出東西
+// 開場開哪幾層是產品決策。讀者第一眼看到的是一顆有中繼點的地球，其餘十一層等他
+// 自己勾。改這一組等於改第一印象，所以在這裡釘一份對照，改的時候被迫想一次。
+const EXPECT_DEFAULT = ['countries', 'continents', 'bathymetry', 'relays'];
+const CORE = ['countries'];                    // 關不掉，沒有國界就沒有地球可看
 
 const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
 const nowFresh = LAYERS.filter((l) => l.fresh).map((l) => l.id).sort();
@@ -95,6 +100,20 @@ if (!eq(nowFresh, [...FRESH].sort())) {
 }
 if (!eq(nowReq, [...REQUIRED].sort())) {
   fail.push(`必要的層變成 ${nowReq.join('、') || '（無）'}，測試裡記的是 ${REQUIRED.join('、')}`);
+}
+const nowOn = LAYERS.filter((l) => l.on).map((l) => l.id).sort();
+const nowCore = LAYERS.filter((l) => l.core).map((l) => l.id).sort();
+if (!eq(nowOn, [...EXPECT_DEFAULT].sort())) {
+  fail.push(`開場開著的層變成 ${nowOn.join('、') || '（無）'}，測試裡記的是 ${EXPECT_DEFAULT.join('、')}`);
+}
+if (!eq(nowCore, [...CORE].sort())) {
+  fail.push(`關不掉的層變成 ${nowCore.join('、') || '（無）'}，測試裡記的是 ${CORE.join('、')}`);
+}
+for (const l of LAYERS) {
+  // required 講的是「抓不到就整個中止」，而只有開場要載的層才走得到那個判斷。
+  // 兩者對不上的話那個標記沒有作用，讀得到的人會以為它有。
+  if (l.required && !l.on) fail.push(`${l.id}：標了 required 卻不在開場要載的那幾層裡`);
+  if (l.core && !l.on) fail.push(`${l.id}：關不掉的層卻沒有標 on`);
 }
 for (const l of LAYERS) {
   if (l.fresh && l.from !== 'assets') fail.push(`${l.id}：本機檔案不必驗新鮮度`);
@@ -109,6 +128,72 @@ for (const id of new Set(ids)) {
 // 疊放順序互異。相同的話那幾層退回比較物件 id，也就是誰先建出來誰先畫
 const ro = Object.values(RO);
 if (new Set(ro).size !== ro.length) fail.push(`RO 裡有重複的 renderOrder：${ro.join('、')}`);
+
+// 圖層清單上每一格的名字。key 從 id 推出來，atlas.js 的 lyKey 是同一條規則。
+// 推不出東西的話那一格顯示的是 key 本身，三語系一起壞。
+const lyKey = (id) => 'ly' + id.replace(/(^|-)([a-z])/g, (m, a, b) => b.toUpperCase());
+for (const l of LAYERS) {
+  const k = lyKey(l.id);
+  const miss = LANGS.filter((lang) => !STR[lang] || STR[lang][k] === undefined);
+  if (miss.length) fail.push(`${l.id}：圖層清單的 ${k} 缺 ${miss.join('、')}`);
+}
+if (!/id="layer-list"/.test(html)) fail.push('index.html 沒有圖層清單的容器 layer-list');
+for (const k of ['lblLayers', 'lyGroupBase', 'lyGroupGlobal', 'lyGroupTw', 'lyFixed', 'lyFail']) {
+  const miss = LANGS.filter((lang) => !STR[lang] || STR[lang][k] === undefined);
+  if (miss.length) fail.push(`圖層清單的 ${k} 缺 ${miss.join('、')}`);
+}
+// 分組只有三個，清單上出現第四個的話那一層不會被畫出來，而畫面看起來正常
+for (const l of LAYERS) {
+  if (!['base', 'global', 'tw'].includes(l.group)) fail.push(`${l.id}：group 是 ${l.group}，圖層清單畫不出來`);
+}
+
+// ── 網址決定開哪幾層 ────────────────────────────────────────
+//
+// 把 atlas.js 的 WANT 與 wantOn 抽出來餵假的 location。這一段純粹是字串解析，
+// 不需要把整個作品跑起來，而 headless 那邊每導一次頁就要重建一次 WebGPU 裝置，
+// 那條路上偶爾會卡在 renderer.init 不回來，測起來反而不準。
+//
+// 空字串是有意義的，代表除了地球本身什麼都不開。判斷寫成 q ? ... 的話那個用法
+// 會落回預設值，而讀者看到的是「網址明明寫了，開起來卻是全套」。
+{
+  const grab = (re) => {
+    const m = atlas.match(re);
+    if (!m) { fail.push(`atlas.js 裡找不到 ${re}`); return 'return null;'; }
+    return m[0];
+  };
+  const src = `
+    ${grab(/^const WANT = \(\(\) => \{[\s\S]*?\}\)\(\);/m)}
+    ${grab(/^function wantOn\([\s\S]*?^}/m)}
+    return wantOn;
+  `;
+  const on = (search) => {
+    const fn = new Function('location', 'LAYER', 'URLSearchParams', src)(
+      { search }, LAYER, URLSearchParams);
+    return LAYERS.filter((l) => fn(l.id)).map((l) => l.id).sort();
+  };
+  const cases = [
+    ['', [...DEFAULT_ON].sort(), '沒帶參數時照清單的預設'],
+    ['?layers=tw-power,ooni', ['countries', 'ooni', 'tw-power'], '帶了就照它'],
+    ['?layers=', ['countries'], '空字串只留關不掉的那一層'],
+    ['?layers= tw-power , ooni ', ['countries', 'ooni', 'tw-power'], '前後空白要吃掉'],
+    ['?layers=bogus', ['countries'], '認不得的 id 忽略掉'],
+    ['?east=0', [...DEFAULT_ON].sort(), '別的參數不影響'],
+  ];
+  for (const [search, want, why] of cases) {
+    const got = on(search);
+    if (JSON.stringify(got) !== JSON.stringify(want)) {
+      fail.push(`網址 "${search}" ${why}：開出 ${got.join('、') || '（無）'}，應該是 ${want.join('、')}`);
+    }
+  }
+}
+
+// 工作坊導覽每一站宣告它要哪幾層，按下開始導覽時由 atlas.js 補載起來。id 打錯
+// 的症狀是那一站少一層資料，而導覽照樣走得完，講者站在台前對著半張圖講。
+for (const st of STOPS) {
+  for (const id of st.layers || []) {
+    if (!LAYERS.some((l) => l.id === id)) fail.push(`導覽的 ${st.id} 站引用了不存在的層 ${id}`);
+  }
+}
 
 // 清單這支模組自己也要進預快取。atlas.js 無條件 import 它，漏了的話離線開啟
 // 整個作品停在載入中，而線上完全正常。

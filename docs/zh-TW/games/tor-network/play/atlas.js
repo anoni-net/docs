@@ -12,7 +12,7 @@ import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder,
          inRings, judgeIndex, judgeCells } from './hexgrid.js';
 import { createTour } from './tour.js';
-import { LAYERS, RO, lift } from './layers.js';
+import { LAYERS, LAYER, RO, lift } from './layers.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -90,6 +90,7 @@ function applyI18n() {
   set('btn-hex', 'btnHex');
   const hb = $('btn-hex');
   if (hb) hb.title = S('btnHexTip');
+  set('lbl-layers', 'lblLayers');
   set('lbl-asn', 'lblAsn');
   set('lbl-asia', 'lblAsia');
   set('tw-title', 'twTitle');
@@ -234,6 +235,52 @@ const NO_PLACE = new Set(['eu', 'xx', '??', '']);
 const R = 5;
 
 let renderer, scene, camera, post, globe, sun;
+
+// ── 圖層的物件歸屬與畫的先後 ──────────────────────────────────
+//
+// renderOrder 相同的時候 three.js 照 children 的順序畫，所以線層疊在誰上面，
+// 目前是由「誰先被 add 進去」決定的。註解裡那幾句「先畫電纜，海岸線疊在上面」
+// 「國界要在海岸線之前畫」講的就是這個。
+//
+// 讀者自己開關圖層之後那個先後就不成立了：後來才開的海岸線會排到最後面，
+// 蓋掉本來該蓋住它的東西。所以每個物件記一個序號，載入或卸載之後照序號重排。
+// 數字本身沒有意義，相對大小才有，維持的是原本那個 add 順序。
+const SEQ = {
+  sun: -10, hex: 5, earth: 0, cables: 10, trunks: 20, borders: 30, aurora: 40,
+  atmosphere: 50, coast: 60, twAdmin: 70, power: 80, grid: 81, renew: 82,
+  landing: 83, relays: 90, circuits: 95, blocked: 100,
+};
+
+// 正在建的是哪一層。build 把東西掛進地球時順手記到那一層名下，卸載時照這份
+// 清單回收。build 函式本身不必知道自己屬於誰，省掉十幾處各自維護一份物件清單。
+let BUILDING = null;
+const LAYER_OBJ = new Map();   // 層的 id → 它建出來的物件
+
+function addToGlobe(obj, seq) {
+  obj.userData.seq = seq;
+  if (BUILDING) {
+    obj.userData.layer = BUILDING;
+    const arr = LAYER_OBJ.get(BUILDING);
+    if (arr) arr.push(obj); else LAYER_OBJ.set(BUILDING, [obj]);
+  }
+  globe.add(obj);
+  return obj;
+}
+
+/**
+ * 在某一層的名下建東西。這段期間 addToGlobe 進去的物件都記到它名下，卸載時
+ * 照那份清單回收。build 函式本身不必知道自己屬於誰。
+ */
+function inLayer(id, fn) {
+  const prev = BUILDING;
+  BUILDING = id;
+  try { fn(); } finally { BUILDING = prev; }
+}
+
+function resortGlobe() {
+  // sort 在現代 JS 是穩定的，同序號的維持原本的相對順序
+  globe.children.sort((a, b) => (a.userData.seq ?? 0) - (b.userData.seq ?? 0));
+}
 // zoom 是「相對於剛好完整入鏡的倍率」，不是絕對距離。畫面比例一變（手機轉向、視窗縮放），
 // 貼合距離跟著重算，地球就不會被裁掉，使用者原本放大到哪一級也保留得住。
 // 開場正對日本，順著自轉往東亞、太平洋、美洲一路帶過去。rx 稍微低頭，讓北半球
@@ -767,6 +814,11 @@ function fatal(msg) {
   if (box) { box.textContent = msg; box.hidden = false; }
   const badge = $('backend');
   if (badge) { badge.textContent = msg; badge.className = 'err'; }
+  // 「載入中…」那一行要一起收掉。留著的話畫面同時寫著載入中與錯誤訊息，讀者
+  // 會以為還有救而繼續等。WebGPU 起不來那條路是 return 而不是 throw，走不到
+  // main 的 catch，原本只有那裡收得掉。
+  const load = $('loading');
+  if (load) load.classList.add('done');
 }
 
 // fetch 對 404、500 不會 reject，錯誤頁會一路餵進 json() 才炸開，這裡先攔下來
@@ -835,6 +887,307 @@ async function loadLayers(list = LAYERS) {
   return Object.fromEntries(list.map((l, i) => [l.id, got[i]]));
 }
 
+// ── 讀者自己開關圖層 ──────────────────────────────────────────
+//
+// 每一層被打開與關掉時要做的事。build 把資料接上、建幾何、填面板，掛進地球的
+// 物件由 inLayer 記帳，卸載時統一回收，所以 drop 只要把模組層級那幾個材質與
+// 網格的參照歸零。
+//
+// 歸零那一步漏掉的症狀是每幀對著已經 dispose 的材質設透明度。animate 裡那一排
+// 判斷寫成 if (mat) 就是為了這個，參照留著的話那個防護等於沒有。
+//
+// 沒列在這裡的層不能關。countries 是所有東西的底，bathymetry 與 ooni 畫在地球
+// 貼圖上，關掉要重畫整張貼圖，那一段另外處理。
+const REGISTRY = {
+  continents: {
+    build: (d) => buildCoastline(d, WORLD),
+    drop: () => { coastTwMat = null; },
+  },
+  cables: {
+    build: (d) => buildCables(d),
+  },
+  torusers: {
+    build: (d) => { TORUSERS = d; applyUsers(); fillUsers(SNAP); },
+    drop: () => {
+      TORUSERS = null; applyUsers();
+      // 陸地亮度正停在使用者數的話要換回台數，不然色階會留在一張空的 Map 上，
+      // 整顆地球暗掉而圖例還寫著「使用者數」。
+      if (MODE === 'users') setMode('all-count');
+      fillUsers(SNAP);
+    },
+  },
+  shutdowns: {
+    build: (d) => { SHUTDOWNS = d; fillShutdowns(); },
+    drop: () => { SHUTDOWNS = null; fillShutdowns(); },
+  },
+  netusers: {
+    // 只出現在國家卡片的一行，沒有幾何也沒有自己的側欄區塊
+    build: (d) => { NETUSERS = d; },
+    drop: () => { NETUSERS = null; },
+  },
+  'tw-admin': {
+    build: (d) => { TWADMIN = d; buildTwAdmin(d); },
+    drop: () => { TWADMIN = null; twAdminMat = null; },
+  },
+  'tw-power': {
+    build: (d) => { POWER = d; buildPower(); fillPower(); },
+    drop: () => { POWER = null; powerMat = null; powerMesh = null; lastPowerK = 1; fillPower(); },
+  },
+  'tw-grid': {
+    build: (d) => { GRID = d; buildGrid(); fillGrid(); },
+    drop: () => {
+      GRID = null; gridLineMat = null; plantMat = null; plantMesh = null; lastPlantK = 1; fillGrid();
+    },
+  },
+  'tw-energy': {
+    build: (d) => { ENERGY = d; buildRenew(); fillEnergy(); },
+    drop: () => {
+      ENERGY = null; renewMat = null; renewMesh = null; lastRenewK = 1; fillEnergy();
+    },
+  },
+  'tw-landing': {
+    build: (d) => { LANDING = d; buildLanding(); fillLanding(); },
+    drop: () => { LANDING = null; landingMesh = null; lastLandingK = 1; fillLanding(); },
+  },
+  seacable: {
+    build: (d) => { SEACABLE = d; fillSeacable(); },
+    drop: () => { SEACABLE = null; fillSeacable(); },
+  },
+  // 海底地形畫在地球貼圖上，沒有自己的物件。關掉就是海面換回單色，那本來就是
+  // 抓不到這一份時的樣子。
+  bathymetry: {
+    build: (d) => { BATHY = d; repaintBase(); },
+    drop: () => { BATHY = null; repaintBase(); },
+  },
+  // 連線受阻有兩半，貼圖上那層紅色漸層與國界內縮的那條線。線是獨立物件，
+  // 由 inLayer 記帳，漸層要自己重畫。
+  ooni: {
+    build: (d) => { OONI = d; repaintBlocked(); buildBlocked(WORLD); fillOoni(SNAP); },
+    drop: () => { OONI = null; repaintBlocked(); fillOoni(SNAP); },
+  },
+  relays: {
+    build: (d) => {
+      SNAP = d;
+      const counts = countryCounts(d);
+      if (SHOW_DOTS && !CLUSTERED) { relaxClusters(counts); CLUSTERED = true; }
+      const drawn = buildRelays(d, counts);
+      buildLabels(d);
+      if (!REDUCED) buildCircuits(); // 要在 buildRelays 之後，端點是從 dotGroups 挑的
+      buildStats(d);
+      fillPanel(d, drawn);
+      fillMix(d);
+      fillAsn(d);
+      fillAsia(d);
+      // 這兩區把外部資料跟中繼數擺在一起看，中繼回來了要重填一次
+      fillUsers(d);
+      fillOoni(d);
+      setMode(MODE); // 陸地亮度、標籤數字、角色顯示都在這裡一起更新
+    },
+    drop: () => {
+      // 物件本身由 dropLayer 收走了，這裡收的是那幾份索引與畫面上的文字
+      relayMeshes.length = 0;
+      pointMats.length = 0;
+      dotGroups.length = 0;
+      circuits.length = 0;
+      lastDotK = 1;
+      lastCountF = -1;
+      const lb = $('labels');
+      if (lb) lb.innerHTML = '';
+      labels.length = 0;
+      CC_STATS = null; SNAP_ASN = null; SNAP_VER = null; SNAP_ASN_TOP = null; SNAP = null;
+      // 托管商排行與亞洲對照跟著中繼走，但它們不是中繼層的 panel 欄位，自己收
+      for (const id of ['stat-asn', 'stat-asia', 'lbl-asn', 'lbl-asia', 'asn-note', 'mix-note']) {
+        const el = $(id);
+        if (el) { el.hidden = true; if (id.startsWith('stat-')) el.innerHTML = ''; }
+      }
+      const total = $('stat-total'), pub = $('stat-pub');
+      if (total) total.textContent = '–';
+      if (pub) pub.textContent = '…';
+      fillUsers(null);
+      fillOoni(null);
+      setMode(MODE); // 陸地亮度跟著暗下去
+      hideCountry();
+    },
+  },
+};
+
+/** 使用者數那一份載到了沒有，決定色階用的 Map 與那顆模式按鈕露不露。 */
+function applyUsers() {
+  USERS_MAP = TORUSERS && TORUSERS.users
+    ? new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]))
+    : null;
+  const b = $('btn-users');
+  if (b) b.hidden = !USERS_MAP; // 沒抓到資料就不要露出一個按了會空白的按鈕
+}
+
+/**
+ * 一層的側欄區塊要不要露出來。
+ *
+ * 節點有四個：內容、小標、附註、資料來源。前三個照 stat-x、lbl-x、x-note 的
+ * 慣例推，來源那一個沒有慣例可推，id 寫在清單裡。
+ *
+ * 原本只有「資料缺就收起來」那一條路，因為載入只會發生一次。讀者能自己開關
+ * 之後兩個方向都要走得通，少了回頭那一半的症狀是關掉再打開，區塊不見了。
+ */
+function layerPanel(id, on) {
+  const l = LAYER[id];
+  if (!l || !l.panel) return;
+  const base = l.panel.replace(/^stat-/, '');
+  for (const el of [$(l.panel), $('lbl-' + base), $(base + '-note'), l.creditEl ? $(l.creditEl) : null]) {
+    if (el) el.hidden = !on;
+  }
+}
+
+/**
+ * 回收一層掛在地球上的東西。
+ *
+ * 材質一定要 dispose。只清 geometry 不夠：renderer 內部是把完整的 GPU 清除掛在
+ * material 的 dispose 事件上，geometry 的 dispose 只會清掉快取的 attribute 參照，
+ * pipeline 與 bindings 仍留著。讀者每開關一次就累積一份。
+ *
+ * 同一層的物件常常共用幾何與材質，中繼點那四個角色就是，所以先收進 Set 再各
+ * dispose 一次。
+ */
+function dropLayer(id) {
+  const objs = LAYER_OBJ.get(id) || [];
+  const geos = new Set(), mats = new Set();
+  for (const o of objs) {
+    globe.remove(o);
+    if (o.geometry) geos.add(o.geometry);
+    if (o.material) for (const m of [].concat(o.material)) mats.add(m);
+    if (o.isInstancedMesh) o.dispose(); // InstancedMesh 自己的 instanceMatrix 與 instanceColor
+  }
+  for (const g of geos) g.dispose();
+  for (const m of mats) m.dispose();
+  LAYER_OBJ.delete(id);
+}
+
+// 每一層現在的狀態。data 留著，關掉再打開不必重抓一次。
+const STATE = new Map();   // id → { on, data }
+
+function layerIsOn(id) { const st = STATE.get(id); return !!(st && st.on); }
+function layerCanToggle(id) { return !!REGISTRY[id]; }
+
+/** 打開一層。第一次打開才會去抓資料，之後都從 STATE 拿。 */
+async function layerOn(id) {
+  const st = STATE.get(id) || { on: false, data: null };
+  STATE.set(id, st);
+  if (st.on || !REGISTRY[id]) return st.on;
+  if (!st.data) {
+    st.data = await fetchLayer(LAYER[id]).catch(() => null);
+    // 抓不到就維持關著。這跟「這一層沒有資料」是同一個畫面，側欄那一區照樣收著，
+    // 讀者看到的是按了沒動靜，所以呼叫端要自己交代失敗。
+    if (!st.data) return false;
+  }
+  layerPanel(id, true);
+  inLayer(id, () => REGISTRY[id].build(st.data));
+  st.on = true;
+  resortGlobe();
+  return true;
+}
+
+/** 關掉一層。資料留在 STATE 裡，再打開不必重抓。 */
+function layerOff(id) {
+  const st = STATE.get(id);
+  if (!st || !st.on || !REGISTRY[id]) return;
+  dropLayer(id);
+  if (REGISTRY[id].drop) REGISTRY[id].drop();
+  const l = LAYER[id];
+  if (l && l.panel) { const b = $(l.panel); if (b) b.innerHTML = ''; }
+  layerPanel(id, false);
+  st.on = false;
+  resortGlobe();
+}
+
+// ── 圖層清單 ─────────────────────────────────────────────────
+//
+// 開場要開哪幾層，網址帶 layers 就照它，否則照清單的預設。網址那一份是給工作坊
+// 與分享用的：把網址列複製給別人，對方打開看到的疊法跟你一樣。
+//
+// 空字串（?layers=）是有意義的，代表除了地球本身什麼都不開。所以判斷用 null
+// 而不是 falsy，寫成 q ? ... 的話那個用法會落回預設值。
+const WANT = (() => {
+  const q = new URLSearchParams(location.search).get('layers');
+  if (q === null) return null;
+  return new Set(q.split(',').map((x) => x.trim()).filter(Boolean));
+})();
+
+function wantOn(id) {
+  const l = LAYER[id];
+  if (!l) return false;
+  if (l.core) return true;          // 沒有國界就沒有地球可看
+  return WANT ? WANT.has(id) : !!l.on;
+}
+
+/** 層的 id 換成它在 i18n 表裡的 key。tw-power 對到 lyTwPower。 */
+const lyKey = (id) => 'ly' + id.replace(/(^|-)([a-z])/g, (m, a, b) => b.toUpperCase());
+
+const LY_GROUPS = [['base', 'lyGroupBase'], ['global', 'lyGroupGlobal'], ['tw', 'lyGroupTw']];
+
+function buildLayerUI() {
+  const box = $('layer-list');
+  if (!box) return;
+  box.innerHTML = LY_GROUPS.map(([g, key]) => {
+    const items = LAYERS.filter((l) => l.group === g);
+    if (!items.length) return '';
+    const chips = items.map((l) => {
+      const fixed = !layerCanToggle(l.id);
+      return `<button type="button" class="ly" data-ly="${l.id}"${fixed ? ' disabled' : ''}`
+        + `${fixed ? ` title="${esc(S('lyFixed'))}"` : ''}>${esc(S(lyKey(l.id)))}</button>`;
+    }).join('');
+    return `<div class="ly-h">${esc(S(key))}</div><div class="ly-g">${chips}</div>`;
+  }).join('');
+  syncLayerUI();
+}
+
+function syncLayerUI() {
+  for (const b of document.querySelectorAll('[data-ly]')) {
+    const on = layerIsOn(b.dataset.ly);
+    b.classList.toggle('on', on);
+    // 這幾顆是開關不是選單，aria-pressed 才講得出「現在是開還是關」
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+}
+
+/**
+ * 目前的疊法寫回網址。
+ *
+ * 用 replaceState 跟關注區域與導覽一致，開關圖層不該在上一頁堆出一長串紀錄。
+ * core 的層不寫，它本來就一直開著，寫進去只是讓網址變長。
+ */
+function syncLayerUrl() {
+  const on = LAYERS.filter((l) => !l.core && layerCanToggle(l.id) && layerIsOn(l.id)).map((l) => l.id);
+  const u = new URL(location.href);
+  u.searchParams.set('layers', on.join(','));
+  history.replaceState(null, '', u.pathname + u.search + u.hash);
+}
+
+function bindLayerUI() {
+  const box = $('layer-list');
+  if (!box) return;
+  box.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-ly]');
+    if (!b || b.disabled) return;
+    const id = b.dataset.ly;
+    if (layerIsOn(id)) {
+      layerOff(id);
+    } else {
+      // 第一次打開要去抓資料，那段期間按鈕停用並淡掉。沒有這個回饋的話讀者
+      // 會以為沒反應而連按好幾次，每一次都送出一個請求。
+      b.classList.add('busy');
+      b.disabled = true;
+      const ok = await layerOn(id);
+      b.disabled = false;
+      b.classList.remove('busy');
+      // 失敗要講出來。側欄那一區照樣收著，畫面上跟「按了沒反應」分不出來。
+      if (!ok) notify(esc(S('lyFail', { name: S(lyKey(id)) })));
+    }
+    syncLayerUI();
+    syncLayerUrl();
+    refreshUIBoxes(); // 側欄長短變了，國家標籤的閃避範圍要重量
+  });
+}
+
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
 // WebGPU 要求 secure context，WebGL2 不要求，所以會安靜地退回去。
 async function webgpuBlocker() {
@@ -874,7 +1227,7 @@ async function initRenderer() {
   // 這樣被照亮的半球才會固定在正確的經度上，而不是跟著鏡頭跑。
   // target 預設在原點，globe 也在原點，所以光的方向就是直射點指向地心。
   sun = new THREE.DirectionalLight(0xcfe6ff, 2.2);
-  globe.add(sun);
+  addToGlobe(sun, SEQ.sun);
   updateSun();
   return true;
 }
@@ -946,6 +1299,7 @@ function glowColor(n, max, ramp) {
 // 分開的原因：陸地亮度若併在 base 裡，會被 dot(N,L) 的明暗蓋過去，色階就讀不出來了。
 const COUNTRY_PATH = new Map(); // ISO2 → Path2D（貼圖座標），重畫發光層時直接沿用
 let GLOW = null;          // { canvas, tex }：發光層，切換指標時重畫
+let EARTH = null;         // 地球那四張貼圖的 canvas 與 texture，單獨重畫某一層時用
 let MODE = 'all-count';   // 目前的地圖模式
 
 // 發光層：各國依指標值上色。切換「台數、共識權重」時只重畫這一張。
@@ -1137,23 +1491,21 @@ function paintEastDeco(canvas) {
   }
 }
 
-function paintEarth(world, counts) {
-  const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
-  const base = mk(), glow = mk(), block = mk();
-  // 夜側專用的海。base 的自發光只有 0.15，海的色階本來就窄，乘完之後差距不到一階色，
-  // 實測夜側整片海是 (0,0,3)，等深線等於只在白天看得見。這一層只放海、陸地塗黑，
-  // 用高一點的係數疊回去，海就整圈都保得住深淺，陸地的日夜對比完全不受影響。
-  //
-  // 解析度砍一半就夠。等深線是大尺度的形狀，不像國界那樣需要銳利的邊，而且再多一張
-  // 全尺寸貼圖是多 8 MB 的顯存。
-  const sea = document.createElement('canvas');
-  sea.width = TEX_W >> 1; sea.height = TEX_H >> 1;
-  const g = base.getContext('2d'), gg = glow.getContext('2d'), gsea = sea.getContext('2d');
-  gsea.scale(0.5, 0.5); // 之後都用 TEX_W/TEX_H 的座標畫，跟其他幾張共用同一套 texX/texY
+/**
+ * 海陸與經緯線畫到 base 與 sea 兩張貼圖上。
+ *
+ * 抽出來是為了能重畫。海底地形那一層讀者可以自己關掉，關掉之後海面要換回單色，
+ * 而陸地與經緯線是畫在海上面的，只補海的部分蓋不掉原本的等深線，整張重畫才乾淨。
+ *
+ * 順手填 COUNTRY_PATH 與 ANCHOR，重跑一次只是把同樣的值再寫一遍。
+ */
+function paintBase(world, base, sea) {
+  const g = base.getContext('2d'), gsea = sea.getContext('2d');
+  // setTransform 而不是 scale。scale 是疊上去的，重畫第二次就縮成四分之一，
+  // 症狀是夜側的海只剩左上角那一塊有顏色。
+  gsea.setTransform(0.5, 0, 0, 0.5, 0, 0); // 之後都用 TEX_W/TEX_H 的座標畫，跟其他幾張共用同一套 texX/texY
   paintSeaFloor(g);
   paintSeaFloor(gsea);
-  gg.fillStyle = '#000';
-  gg.fillRect(0, 0, TEX_W, TEX_H);
 
   g.lineJoin = 'round';
   g.strokeStyle = MAP.border;
@@ -1192,9 +1544,46 @@ function paintEarth(world, counts) {
   for (let lat = -60; lat <= 60; lat += 30) { g.beginPath(); g.moveTo(0, texY(lat)); g.lineTo(TEX_W, texY(lat)); g.stroke(); }
   g.strokeStyle = MAP.equator;
   g.beginPath(); g.moveTo(0, texY(0)); g.lineTo(TEX_W, texY(0)); g.stroke();
+}
+
+/**
+ * 地球的四張貼圖。
+ *
+ *   base   海陸與經緯線
+ *   sea    夜側專用的海。base 的自發光只有 0.15，海的色階本來就窄，乘完之後差距
+ *          不到一階色，實測夜側整片海是 (0,0,3)，等深線等於只在白天看得見。這一層
+ *          只放海、陸地塗黑，用高一點的係數疊回去，海就整圈都保得住深淺，陸地的
+ *          日夜對比完全不受影響。解析度砍一半就夠，等深線是大尺度的形狀，不像國界
+ *          那樣需要銳利的邊，而且再多一張全尺寸貼圖是多 8 MB 的顯存。
+ *   glow   陸地亮度。切換指標時由 paintGlow 單獨重畫
+ *   block  連線受阻的紅色漸層。OONI 那一層開關時由 paintBlocked 單獨重畫
+ *
+ * 四張都留著 canvas 的參照，三個來源層各自開關的時候只重畫自己那一張。
+ */
+function paintEarth(world, counts) {
+  const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
+  const base = mk(), glow = mk(), block = mk();
+  const sea = document.createElement('canvas');
+  sea.width = TEX_W >> 1; sea.height = TEX_H >> 1;
+  paintBase(world, base, sea);
   paintGlow(counts, glow);
-  paintBlocked(block); // 要在上面填完 COUNTRY_PATH 之後才有國土路徑可以 clip
+  paintBlocked(block); // 要在 paintBase 填完 COUNTRY_PATH 之後才有國土路徑可以 clip
   return { base, glow, block, sea };
+}
+
+/** 海底地形開關之後重畫海陸。陸地畫在海上面，只補海的部分蓋不掉等深線。 */
+function repaintBase() {
+  if (!EARTH || !WORLD) return;
+  paintBase(WORLD, EARTH.base, EARTH.sea);
+  EARTH.texBase.needsUpdate = true;
+  EARTH.texSea.needsUpdate = true;
+}
+
+/** 連線受阻那一層開關之後重畫紅色漸層。沒有資料的時候整張是黑的，等於沒有這一層。 */
+function repaintBlocked() {
+  if (!EARTH) return;
+  paintBlocked(EARTH.block);
+  EARTH.texBlock.needsUpdate = true;
 }
 
 function buildEarth(world, counts) {
@@ -1213,6 +1602,10 @@ function buildEarth(world, counts) {
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
   const seaTex = toTex(painted.sea);
   GLOW = { canvas: painted.glow, tex: glowTex };
+  // 海底地形與連線受阻這兩層畫在貼圖上而不是獨立的物件，讀者開關它們的時候
+  // 重畫自己那一張就好，不必重建整顆地球的材質。
+  EARTH = { base: painted.base, sea: painted.sea, block: painted.block,
+            texBase: baseTex, texSea: seaTex, texBlock: blockTex };
   const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0 });
 
   // 底色與發光色。東亞那一塊改由細部貼圖供應，其餘維持全球那張。
@@ -1269,7 +1662,7 @@ function buildEarth(world, counts) {
     .add(texture(seaTex).rgb.mul(SEA_EMIT))
     .add(glowCol.mul(0.5))
     .add(texture(blockTex).rgb.mul(BLOCK_EMIT));
-  globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
+  addToGlobe(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat), SEQ.earth);
 }
 
 // 海底電纜。資料是 OpenStreetMap 的 communication=line + submarine=yes，覆蓋並不完整，
@@ -1307,7 +1700,7 @@ function buildCables(data) {
   // 這一層是背景，主角是中繼點與陸地亮度。北海、地中海一帶疊了幾十條線，透明度再高一點
   // 就會連成一片蓋過等值色，0.3 已經看得出在跟 choropleth 搶注意力。
   const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: 0.22, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  addToGlobe(new THREE.LineSegments(g, m), SEQ.cables);
 }
 
 // 主要跨洋走廊的示意線。
@@ -1391,7 +1784,7 @@ function buildTrunks() {
   // 那是誤導，所以貼近地表時淡出。每幀由 animate 寫 opacity。
   const m = new THREE.LineBasicMaterial({ color: COL.cable, transparent: true, opacity: TRUNK_OP, depthWrite: false });
   trunkMat = m;
-  globe.add(new THREE.LineSegments(g, m));
+  addToGlobe(new THREE.LineSegments(g, m), SEQ.trunks);
 }
 
 // OONI 觀測到 Tor 連線大量失敗的國家，沿著該國國界描一圈紅線。
@@ -1471,7 +1864,7 @@ function buildTwAdmin(admin) {
   twAdminMat = new THREE.LineBasicMaterial({
     color: COL.twAdmin, transparent: true, opacity: 0, depthWrite: false,
   });
-  globe.add(new THREE.LineSegments(g, twAdminMat));
+  addToGlobe(new THREE.LineSegments(g, twAdminMat), SEQ.twAdmin);
 }
 
 // 國界同樣分兩份。台灣那一圈是 9 個點的八邊形，貼近了跟縣市界對不上，要退場。
@@ -1489,7 +1882,7 @@ function buildBorders(world) {
     // 試過把線抬到點的上方（1.016）好讓邊界不被遮住，結果是線浮起來跟地形明顯錯開，
     // 掠射角下尤其糟。改成貼著地面走，靠不透明度在點的縫隙間透出來。
     const m = new THREE.LineBasicMaterial({ color: COL.border, transparent: true, opacity: BORDER_OP, depthWrite: false });
-    globe.add(new THREE.LineSegments(g, m));
+    addToGlobe(new THREE.LineSegments(g, m), SEQ.borders);
     return m;
   };
   mk((c) => !!c.k && c.k !== 'tw');
@@ -1508,7 +1901,7 @@ function buildBlocked(world) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
   const m = new THREE.LineBasicMaterial({ color: COL.blocked, transparent: true, opacity: 0.85, depthWrite: false });
-  globe.add(new THREE.LineSegments(g, m));
+  addToGlobe(new THREE.LineSegments(g, m), SEQ.blocked);
 }
 
 // 大氣層邊緣輝光。地球邊緣原本是硬邊直接切到背景色，任何參考級的星球渲染都有這圈散射光。
@@ -1822,7 +2215,7 @@ function hexBuildMesh(rec, dir, radiusDeg) {
   // 排在後面的話它會蓋掉已經畫好的國界與縣市界。負數保證它在那些線之前。
   // 淡出中的那一份再低一階，兩層疊著的時候新的要畫在舊的上面。
   mesh.renderOrder = -1;
-  globe.add(mesh);
+  addToGlobe(mesh, SEQ.hex);
   HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec, local: isLocal, alpha,
           cellCC: cells.map((i) => rec.cc[i]), faceCell: g.faceCell,
           vertStart: g.vertStart, vertCount: g.vertCount,
@@ -1970,7 +2363,7 @@ function buildAtmosphere() {
   // 這幾層透明物件都以地球球心為中心，包圍球中心到相機的距離幾乎打平，
   // 預設排序會不穩定（哪層蓋在哪層可能逐幀跳動），所以明確指定順序。
   mesh.renderOrder = 50;
-  globe.add(mesh);
+  addToGlobe(mesh, SEQ.atmosphere);
 }
 
 // 極光。兩極各一條環狀簾幕，貼著地表往外飄起。
@@ -2032,7 +2425,7 @@ function buildAurora() {
   mat.opacityNode = streak.mul(footFade).mul(tipFade).mul(AUR_INTENSITY).mul(oneMinus(deepU));
   const mesh = new THREE.Mesh(g, mat);
   mesh.renderOrder = 40; // 這幾層同心透明物件的預設排序不穩定，明確指定
-  globe.add(mesh);
+  addToGlobe(mesh, SEQ.aurora);
 }
 
 // 畫面右下的訊息串。新的一則從底下進來，把舊的往上頂。
@@ -2203,7 +2596,7 @@ function buildCircuits() {
     const line = new THREE.Line(geo, mat);
     line.frustumCulled = false;
     line.renderOrder = 45;
-    globe.add(line);
+    addToGlobe(line, SEQ.circuits);
     circuits.push({
       line, geo, uHead, uAlpha,
       state: 'wait', t: 0,
@@ -2415,7 +2808,7 @@ function buildLanding() {
   mesh.instanceMatrix.needsUpdate = true;
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   mesh.renderOrder = RO_LANDING;
-  globe.add(mesh);
+  addToGlobe(mesh, SEQ.landing);
   landingMesh = mesh;
 }
 
@@ -2560,7 +2953,7 @@ function buildPower() {
   powerMesh.instanceMatrix.needsUpdate = true;
   if (powerMesh.instanceColor) powerMesh.instanceColor.needsUpdate = true;
   powerMesh.renderOrder = RO_SUB;
-  globe.add(powerMesh);
+  addToGlobe(powerMesh, SEQ.power);
 }
 
 // 跟中繼點與登陸點吃同一個補償係數，三層的相對大小才不會隨縮放亂跑
@@ -2669,7 +3062,7 @@ function buildGrid() {
     gridLineMat = new THREE.LineBasicMaterial({
       color: COL.gridLine, transparent: true, opacity: 0, depthWrite: false,
     });
-    globe.add(new THREE.LineSegments(g, gridLineMat));
+    addToGlobe(new THREE.LineSegments(g, gridLineMat), SEQ.grid);
   }
   // 發電廠
   const list = gridPlants();
@@ -2697,7 +3090,7 @@ function buildGrid() {
   plantMesh.instanceMatrix.needsUpdate = true;
   if (plantMesh.instanceColor) plantMesh.instanceColor.needsUpdate = true;
   plantMesh.renderOrder = RO_PLANT;
-  globe.add(plantMesh);
+  addToGlobe(plantMesh, SEQ.grid);
 }
 
 function rescalePlants(k) {
@@ -2802,7 +3195,7 @@ function buildRenew() {
   renewMesh.instanceMatrix.needsUpdate = true;
   if (renewMesh.instanceColor) renewMesh.instanceColor.needsUpdate = true;
   renewMesh.renderOrder = RO_RENEW;
-  globe.add(renewMesh);
+  addToGlobe(renewMesh, SEQ.renew);
 }
 
 function rescaleRenew(k) {
@@ -2901,7 +3294,7 @@ function buildCoastline(coast, world) {
       color: COL.coast, transparent: true, opacity,
       blending: THREE.AdditiveBlending, depthWrite: false,
     });
-    globe.add(new THREE.LineSegments(g, m));
+    addToGlobe(new THREE.LineSegments(g, m), SEQ.coast);
     return m;
   };
   if (main.length) mk(main, COAST_OP);
@@ -2957,6 +3350,9 @@ function relaxClusters(counts) {
 // 點位取樣用的亂數。刻意不是 Math.random：每次重新整理都換一組位置的話，同一個國家的
 // 點會整片跳動，而且畫面完全無法比對（先前想量呼吸效果時，同一時間截兩次就有三成像素
 // 不同，全是這裡造成的）。固定種子之後每次載入都畫在一樣的位置。
+// 推開團只做一次。那是依台數推開國家中心的位置，一次資料更新或開關一次中繼層
+// 推不動它，重跑只是白花時間。
+let CLUSTERED = false;
 let dotSeed = 20260726;
 const dotRnd = () => (dotSeed = (dotSeed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
 
@@ -3071,7 +3467,7 @@ function buildRelays(snap, counts) {
     }
     mesh.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-    globe.add(mesh);
+    addToGlobe(mesh, SEQ.relays);
     relayMeshes.push(mesh);
     dotGroups.push({ mesh, list });
   }
@@ -3253,6 +3649,9 @@ let OONI = null;
 // Tor Metrics 的使用者面（CC0）與 Access Now 的斷網事件（CC BY 4.0）。
 // 三份外部資料三種授權，所以三個檔案分開讀，credit 也各自標。
 let TORUSERS = null, SHUTDOWNS = null, NETUSERS = null, BATHY = null, SEACABLE = null, LANDING = null, POWER = null, TWADMIN = null, GRID = null, ENERGY = null;
+// 國界與中繼快照留一份在手上。讀者後來才打開的層有幾支要拿它們重算，海岸線要
+// 國界判台灣那一圈，使用者數那一份要快照裡的台數才填得出排行。
+let WORLD = null, SNAP = null;
 let USERS_MAP = null; // ISO2 → 使用者數，給 users 模式的色階用，載入時建一次
 function buildStats(snap) {
   SNAP_ASN = snap.asn || null;
@@ -3741,6 +4140,7 @@ function showFeature(hit) {
 function modeRamp(mode) { return MODES[(mode === 'all-weight' || mode === 'all-count') ? 'all' : mode]; }
 
 function modeValues(mode) {
+  if (!CC_STATS) return mode === 'users' ? (USERS_MAP || new Map()) : new Map();
   if (mode === 'all-weight') return CC_STATS.w;
   if (mode === 'conc') return CC_STATS.conc;
   if (mode === 'users') return USERS_MAP || new Map();
@@ -3760,7 +4160,9 @@ function applyRoleVisibility() {
 }
 
 function setMode(mode) {
-  if (!CC_STATS || !GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
+  // CC_STATS 是中繼快照算出來的。那一層被關掉之後它是 null，這裡照樣要走完，
+  // 陸地亮度才會跟著暗下去。擋在門口的話關掉中繼，陸地還亮著上一次的台數。
+  if (!GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
   MODE = mode;
   const values = modeValues(mode);
   paintGlow(values, GLOW.canvas, modeRamp(mode));
@@ -3770,9 +4172,10 @@ function setMode(mode) {
     EAST.tex.needsUpdate = true;
   }
   hexPaint(mode);
+  const totalW = (CC_STATS && CC_STATS.totalW) || 1;
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
-    const pct = v / CC_STATS.totalW * 100;
+    const pct = v / totalW * 100;
     const txt = mode === 'all-weight'
       ? (pct < 0.05 ? '<0.1%' : pct.toFixed(1) + '%')
       : mode === 'conc' ? Math.round(v) + '%'
@@ -3838,7 +4241,9 @@ function fillAsia(snap) {
 // 條的長度用異常率，數字給中繼數，讓「條很長、數字是 0」自己說話。
 function fillOoni(snap) {
   const box = $('stat-ooni');
-  if (!box || !OONI || !OONI.blocked || !OONI.blocked.length) {
+  // snap 是中繼快照。這一區列的是受阻的國家各有多少台中繼，中繼那一層關著就
+  // 沒有對照可寫，整區收掉。
+  if (!box || !snap || !OONI || !OONI.blocked || !OONI.blocked.length) {
     const t = $('lbl-ooni');
     if (t) t.hidden = true;   // 資料缺就連標題一起收掉，不要留空區塊
     return;
@@ -3868,7 +4273,8 @@ function fillOoni(snap) {
 // 這邊講「用的人最多的地方」，兩塊合起來才是完整的需求面。
 function fillUsers(snap) {
   const box = $('stat-users');
-  if (!box || !TORUSERS || !TORUSERS.users) {
+  // 同 fillOoni，這一區把使用者數跟中繼數擺在一起看，少了任何一邊都不成立
+  if (!box || !snap || !TORUSERS || !TORUSERS.users) {
     const t = $('lbl-users');
     if (t) t.hidden = true;   // 資料缺就連標題一起收掉，不要留空區塊
     return;
@@ -4414,56 +4820,37 @@ async function main() {
   // 每一層的來源、失敗時的退路與新鮮度策略宣告在 layers.js，這裡只負責取回來。
   // 十四份同時發出，最慢的那一份決定開場時間。第二期會把非必要的那幾層挪到
   // 讀者自己開啟的時候才載，在那之前先把「有哪些層」這件事收斂成一份清單。
-  const D = await loadLayers();
+  // 只抓這一輪要開的那幾層。其餘等讀者在側欄按下去才去抓，沒按過的完全不付代價。
+  const D = await loadLayers(LAYERS.filter((l) => wantOn(l.id)));
   const snap = D.relays, world = D.countries, coast = D.continents, cables = D.cables;
-  OONI = D.ooni;
-  TORUSERS = D.torusers;
-  SHUTDOWNS = D.shutdowns;
-  NETUSERS = D.netusers;
+  // 接資料這件事交給各層自己的 build，開場建起來跟讀者後來打開走的是同一條路，
+  // 兩邊不會分歧。這裡只先放好 buildEarth 需要的兩份。
+  WORLD = world;
   BATHY = D.bathymetry;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
-  SEACABLE = D.seacable;
-  LANDING = D['tw-landing'];
-  POWER = D['tw-power'];
-  GRID = D['tw-grid'];
-  ENERGY = D['tw-energy'];
-  TWADMIN = D['tw-admin'];
-  if (TORUSERS && TORUSERS.users) {
-    USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
-    const b = $('btn-users');
-    if (b) b.hidden = false; // 沒抓到資料就不要露出一個按了會空白的按鈕
-  }
-  const counts = countryCounts(snap);
+  // 開場就建起來的層記成開著的，資料也留著。讀者關掉再打開不必重抓一次。
+  for (const l of LAYERS) STATE.set(l.id, { on: !!D[l.id], data: D[l.id] || null });
+  // 中繼那一層不見得開著。網址帶 layers 而沒有列到它的時候這裡是 undefined，
+  // 陸地亮度就全暗，那是「沒有中繼可畫」該有的樣子。
+  const counts = snap ? countryCounts(snap) : new Map();
+  // 建的順序照舊。inLayer 只是把這一段建出來的東西記到那一層名下，讀者關掉它的
+  // 時候才知道要收回哪些。非資料層的三樣（星空、走廊示意線、極光與大氣輝光）
+  // 不歸任何一層，它們沒有來源資料可以關。
+  // 不歸任何一層的三樣。它們沒有來源資料可以關，也就不出現在圖層清單裡。
   buildSky();                      // 星空要先鋪，後面的東西才像在太空裡
-  buildEarth(world, counts);
-  if (cables) buildCables(cables); // 先畫電纜，海岸線疊在上面
   buildTrunks();                   // 走廊示意線，補 OSM 在大洋中段的空白
-  buildBorders(world);             // 國界要在海岸線之前畫，重疊處讓海岸線蓋在上面
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
-  if (coast) buildCoastline(coast, world);
-  buildTwAdmin(TWADMIN);           // 縣市界線，貼近地表時才淡入
-  buildPower();                    // 變電所，跟縣市界同一個時機淡入
-  buildGrid();                     // 345kV 骨幹與發電廠
-  buildRenew();                    // 台電自建的再生能源場址
-  buildLanding();                  // 登陸點疊在海岸線之上，那是它實際的位置關係
-  if (SHOW_DOTS) relaxClusters(counts); // 不畫點就不用推開團，標籤留在國家中心比較準
-  const drawn = buildRelays(snap, counts);
-  buildLabels(snap);
-  if (!REDUCED) buildCircuits(); // 要在 buildRelays 之後，端點是從 dotGroups 挑的
-  fillPanel(snap, drawn);
-  fillMix(snap);
-  fillAsn(snap);
-  fillAsia(snap);
-  buildBlocked(world);
-  fillUsers(snap);
-  fillOoni(snap);
-  fillShutdowns();
-  fillSeacable();
-  fillLanding();
-  fillPower();
-  fillGrid();
-  fillEnergy();
-  buildStats(snap);
+  // 地球本體與國界。海底地形已經在 paintEarth 裡畫進貼圖了，所以它不走下面那個迴圈。
+  inLayer('countries', () => { buildEarth(world, counts); buildBorders(world); });
+  // 其餘每一層照清單順序建。誰疊在誰上面由 SEQ 決定，不再靠這裡的先後，
+  // 讀者後來才打開的層也才排得回正確的位置。
+  for (const l of LAYERS) {
+    if (!REGISTRY[l.id] || l.id === 'bathymetry') continue;
+    const d = D[l.id];
+    if (d) inLayer(l.id, () => REGISTRY[l.id].build(d));
+    else layerPanel(l.id, false); // 抓不到的層把側欄那一區收起來
+  }
+  resortGlobe();
   // 局部網格要拿國界與縣市界判國碼，那兩份剛好都在手上，建一次外接框留著
   hexPrepJudge(world);
   // 六角層是原型，預設不載。放在 buildStats 之後是因為上色要讀 CC_STATS，
@@ -4485,6 +4872,8 @@ async function main() {
     // 得下跟寬度直接相關，窄螢幕上原本放得下的會擠在一起，要重新量一次。
     fitGaugeScale($('cc-bar'));
   });
+  buildLayerUI();
+  bindLayerUI();
   bindControls(renderer.domElement);
   // 即時更新的按鈕從一開始就在位子上，只是停用著，等這裡才放行。
   // 版面不會在載入完成的瞬間跳一下，使用者也一開始就知道有這個功能。
@@ -4572,6 +4961,14 @@ async function main() {
     // 網址跟著動，複製網址列就是一條「開啟後直接進導覽」的連結，工作坊把它貼進
     // 投影機那台瀏覽器就能開講。用 replaceState 跟 goFocus 一致，不留歷史紀錄。
     onStart: () => history.replaceState(null, '', '#tour'),
+    // 導覽要用的層先補齊。開場只載地理底圖與中繼，直接開講的話第三站起會整站
+    // 被抽掉。工作坊的場合網路通常很差，所以是按下去才補，不是開場全載。
+    prepare: async (stops) => {
+      const need = new Set();
+      for (const s of stops) for (const id of s.layers || []) need.add(id);
+      for (const id of need) if (!layerIsOn(id)) await layerOn(id);
+      syncLayerUI();
+    },
     onStop: clearFocus,
   });
   for (const id of ['btn-tour', 'btn-tour-hint']) {
@@ -4581,6 +4978,16 @@ async function main() {
   // #tour 進場就直接開講。focusTarget 認不得 tour 這個 key，所以上面那行 applyFocus
   // 不會把它誤判成國碼，兩者不衝突。
   if (focusKey().toLowerCase() === 'tour') tour.start();
+  // ?debug 時把圖層開關掛出來。headless 的回歸檢查靠它把每一層開關一輪，
+  // 現場除錯也用得到。正常模式不掛，頁面不該對外多開一個能改內部狀態的入口。
+  if (DBG) {
+    window.__atlas = {
+      on: layerOn, off: layerOff, isOn: layerIsOn,
+      objCount: () => globe.children.length,
+      layerObjs: (id) => (LAYER_OBJ.get(id) || []).length,
+      info: () => JSON.parse(JSON.stringify(renderer.info)),
+    };
+  }
   renderer.setAnimationLoop(animate);
 }
 main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });

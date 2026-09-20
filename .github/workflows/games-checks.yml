@@ -77,3 +77,6 @@ jobs:
 
       - name: 圖層清單跟來源檔案、三語字串、面板節點對得上
         run: node tools/test_layers.mjs
+
+      - name: 每一層開得起來也關得掉，物件沒有漏收
+        run: node tools/check_layers_toggle.mjs

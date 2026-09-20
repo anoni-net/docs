@@ -18,6 +18,8 @@
 //   fresh     每次載入都向 server 驗證新鮮度。只有天天在變的那幾份需要
 //   required  抓不到就沒有東西可畫，整個作品中止。其餘的失敗只是少一層
 //   group     base 是地理底圖，global 是全球資料，tw 是台灣那一區
+//   on        開場就載。其餘的層等讀者在側欄勾了才去抓那一份
+//   core      關不掉。沒有它畫不出地球，所以它在圖層清單上是停用的狀態
 //   label     側欄小標的 i18n key，純面板層沒有幾何也要有它
 //   credit    資料來源區塊的 i18n key，授權說明寫在那裡
 //   panel     側欄內容節點的 DOM id。小標節點照慣例是同名的 lbl- 開頭，由 test_layers.mjs 守
@@ -36,6 +38,8 @@ export const LAYERS = [
     file: 'countries.json',
     from: 'docs',
     required: true,
+    core: true,
+    on: true,
     group: 'base',
     credit: 'creditNaturalEarth', creditEl: 'credit-ne',
     lift: 1.0036,
@@ -45,6 +49,7 @@ export const LAYERS = [
     id: 'continents',
     file: 'continents.json',
     from: 'docs',
+    on: true,
     group: 'base',
     lift: 1.004,
     note: '海岸線。疊在國界之上，海陸交界是這張圖上最清楚的一條線。',
@@ -53,6 +58,7 @@ export const LAYERS = [
     id: 'bathymetry',
     file: 'bathymetry.json',
     from: 'docs',
+    on: true,
     group: 'base',
     note: '海底地形。要在 buildEarth 之前備好，海面的深淺是那時候畫進貼圖的。抓不到就退回單色海面。',
   },
@@ -64,6 +70,7 @@ export const LAYERS = [
     from: 'assets',
     fresh: true,
     required: true,
+    on: true,
     group: 'global',
     label: 'lblMix',
     credit: 'creditOnionoo', creditEl: 'credit-onionoo',
@@ -192,6 +199,9 @@ export const LAYERS = [
 
 /** id → 那一筆宣告。 */
 export const LAYER = Object.fromEntries(LAYERS.map((l) => [l.id, l]));
+
+/** 開場預設開著的層。網址帶 layers 的時候由它覆蓋，見 atlas.js 的 wantOn。 */
+export const DEFAULT_ON = LAYERS.filter((l) => l.on).map((l) => l.id);
 
 /** 幾何抬離地表多少。沒宣告 lift 的層代表它沒有自己的幾何。 */
 export function lift(id) {
