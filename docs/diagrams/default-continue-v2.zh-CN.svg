@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640" width="400" height="640" role="img" aria-labelledby="title desc">
+<title id="title">身份绑定之后，记录流向国家调取与商业贩售两边，两边的默认值都是继续</title>
+<desc id="desc">由上而下的流程图。最上层是四种需要出示身份的场合：办理手机号码、开通电子支付账户、投放网络广告、使用虚拟资产服务。中层是绑定之后持续产生的三类记录：你在哪、你连了哪里、你买了什么。下层分成左右两边，左边是国家调取，标示二零二五年共四十八万七千三百五十三线，经法院签发只占百分之二点二，百分之八十七点二的调取没有通知规定。右边是商业贩售，标示政府自己卖一格两千元、运营商的商用人流服务、广告标识符、政府开放数据免费。最底下一列标示三个环节的默认值全部是继续，退出的条款写在告知声明第十条第三款，要当事人自己去找。</desc>
+<style>
+  /* 配色对齐 community/brand-assets.md 的色票。这个档案被 img 标签引用，取不到页面的
+     CSS 变量，只能写死 hex。cyan 是主线，橙色标记默认开启那几处。
+     画布宽 400，手机内容栏 328 至 382，缩放后字级仍在 11px 以上。 */
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .h { font-size: 17px; font-weight: 700; fill: #212121; }
+  .lbl { font-size: 14px; font-weight: 700; fill: #003e57; }
+  .t { font-size: 13px; fill: #45505a; }
+  .s { font-size: 12px; fill: #546e7a; }
+  .num { font-size: 15px; font-weight: 700; fill: #212121; }
+  .warn { font-size: 12.5px; font-weight: 700; fill: #ef6c00; }
+  .box { fill: #e0f4ff; stroke: #0089bf; stroke-width: 1.5; rx: 6; }
+  .box2 { fill: #eceff1; stroke: #90a4ae; stroke-width: 1.5; rx: 6; }
+  .warnbox { fill: #fff3e0; stroke: #ef6c00; stroke-width: 1.5; rx: 6; }
+  .arw { stroke: #78909c; stroke-width: 2; fill: none; marker-end: url(#a); }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#78909c"/></marker></defs>
+
+<text class="h" x="200" y="26" text-anchor="middle">默认值都设在「继续」</text>
+
+<rect class="box" x="16" y="44" width="368" height="72"/>
+<text class="lbl" x="28" y="64">需要出示身份的地方</text>
+<text class="t" x="28" y="85">办理手机号码　开通电子支付账户</text>
+<text class="t" x="28" y="105">投放网络广告　使用虚拟资产服务</text>
+
+<path class="arw" d="M200,116 L200,140"/>
+
+<rect class="box" x="16" y="146" width="368" height="92"/>
+<text class="lbl" x="28" y="166">绑定之后持续产生的记录</text>
+<text class="t" x="28" y="188">你在哪　　哪个号码靠近哪座基站</text>
+<text class="t" x="28" y="208">你连了哪里　连接时间与域名</text>
+<text class="t" x="28" y="228">你买了什么　交通行程与小额消费</text>
+
+<path class="arw" d="M200,238 L200,256"/>
+<path class="arw" d="M200,252 L108,252 L108,276"/>
+<path class="arw" d="M200,252 L292,252 L292,276"/>
+
+<rect class="box2" x="16" y="282" width="176" height="122"/>
+<text class="lbl" x="28" y="302">国家调取</text>
+<text class="num" x="28" y="326">487,353 线</text>
+<text class="s" x="28" y="344">2025 年，全部类别合计</text>
+<text class="num" x="28" y="370">2.2%</text>
+<text class="s" x="28" y="388">经法院签发的比例</text>
+
+<rect class="box2" x="208" y="282" width="176" height="122"/>
+<text class="lbl" x="220" y="302">商业贩售</text>
+<text class="num" x="220" y="326">2,000 元</text>
+<text class="s" x="220" y="344">政府自己卖，一个空间单元</text>
+<text class="s" x="220" y="368">运营商的商用人流服务</text>
+<text class="s" x="220" y="386">广告标识符　开放数据免费</text>
+
+<rect class="warnbox" x="16" y="420" width="368" height="64"/>
+<text class="warn" x="28" y="442">87.2% 的调取没有通知当事人的规定</text>
+<text class="s" x="28" y="463">有通知设计的只有网络流量记录那一类，</text>
+<text class="s" x="28" y="479">而且以通信记录之名附带取得时不必通知</text>
+
+<rect class="warnbox" x="16" y="496" width="368" height="64"/>
+<text class="warn" x="28" y="518">去识别化统计提供企业客户，默认开启</text>
+<text class="s" x="28" y="539">同一份告知声明里，第三方营销默认关闭，</text>
+<text class="s" x="28" y="555">两者方向相反</text>
+
+<rect class="box" x="16" y="572" width="368" height="52"/>
+<text class="lbl" x="28" y="592">退出的渠道在哪</text>
+<text class="t" x="28" y="613">告知声明第十条第三款，要自己去找</text>
+</svg>

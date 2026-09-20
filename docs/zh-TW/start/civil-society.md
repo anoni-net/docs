@@ -57,6 +57,7 @@ offline_caution: true
 ### 台灣的法規
 
 - [台灣個資法 2025 修法](../taiwan/pdpa-2025.md)：組織持有個資的義務有變動
+- [實名要求與資料市場](../taiwan/realname-data-market.md)：實名要求的盤點、資料市場的四個窗口，末尾有依機關分列的訴求對照表
 - [揭弊者保護法](../taiwan/whistleblower-law.md)：內部員工願意說話時，法律保護到哪裡
 - [治理章程](../community/governance.md)：社群自己的決策方式與爭議處理，需要寫組織章程時可以參考
 

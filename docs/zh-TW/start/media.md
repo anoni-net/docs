@@ -64,6 +64,7 @@ offline_caution: true
 - [揭弊者保護法](../taiwan/whistleblower-law.md)：內部員工願意說話時，法律保護到哪裡
 - [法規與通訊紀錄](../scenarios/journalist.md#法規與通訊紀錄)：調取的門檻與實務
 - [台灣個資法 2025 修法](../taiwan/pdpa-2025.md)：媒體持有個資的義務有變動
+- [實名要求與資料市場](../taiwan/realname-data-market.md)：門號、位置與連線紀錄怎麼被調取與販售，附五年調取統計與可遞件的追問清單
 
 ## 不分身分都要做到的
 

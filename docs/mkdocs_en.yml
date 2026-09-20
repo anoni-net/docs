@@ -99,6 +99,7 @@ nav:
       - "Taiwan's regulatory environment":
           - regional/taiwan-pdpa-2025.md
           - regional/taiwan-digital-wallet-privacy.md
+          - regional/taiwan-realname-data-market.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
   - !ENV [NAV_UTILS, "Utilities"]:

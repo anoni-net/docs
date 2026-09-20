@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640" width="400" height="640" role="img" aria-labelledby="title desc">
+<title id="title">身分綁定之後，紀錄流向國家調取與商業販售兩邊，兩邊的預設值都是繼續</title>
+<desc id="desc">由上而下的流程圖。最上層是四種要出示身分的場合：辦行動門號、開電子支付帳戶、刊登網路廣告、使用虛擬資產服務。中層是綁定之後持續產生的三類紀錄：你在哪、你連了哪裡、你買了什麼。下層分成左右兩邊，左邊是國家調取，標示二零二五年共四十八萬七千三百五十三線，經法院核發只占百分之二點二，百分之八十七點二的調取沒有通知規定。右邊是商業販售，標示政府自己賣一格兩千元、業者的商用人流服務、廣告識別碼、政府開放資料免費。最底下一列標示三個環節的預設值全部是繼續，退出的條款寫在告知聲明第十條第三款，要當事人自己去找。</desc>
+<style>
+  /* 配色對齊 community/brand-assets.md 的色票。這個檔案被 img 標籤引用，取不到頁面的
+     CSS 變數，只能寫死 hex。cyan 是主線，橙色標記預設開啟那幾處。
+     畫布寬 400，手機內容欄 328 至 382，縮放後字級仍在 11px 以上。 */
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans GB", "Source Han Sans TC", sans-serif; }
+  .h { font-size: 17px; font-weight: 700; fill: #212121; }
+  .lbl { font-size: 14px; font-weight: 700; fill: #003e57; }
+  .t { font-size: 13px; fill: #45505a; }
+  .s { font-size: 12px; fill: #546e7a; }
+  .num { font-size: 15px; font-weight: 700; fill: #212121; }
+  .warn { font-size: 12.5px; font-weight: 700; fill: #ef6c00; }
+  .box { fill: #e0f4ff; stroke: #0089bf; stroke-width: 1.5; rx: 6; }
+  .box2 { fill: #eceff1; stroke: #90a4ae; stroke-width: 1.5; rx: 6; }
+  .warnbox { fill: #fff3e0; stroke: #ef6c00; stroke-width: 1.5; rx: 6; }
+  .arw { stroke: #78909c; stroke-width: 2; fill: none; marker-end: url(#a); }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#78909c"/></marker></defs>
+
+<text class="h" x="200" y="26" text-anchor="middle">預設值都設在「繼續」</text>
+
+<rect class="box" x="16" y="44" width="368" height="72"/>
+<text class="lbl" x="28" y="64">要出示身分的地方</text>
+<text class="t" x="28" y="85">辦行動門號　開電子支付帳戶</text>
+<text class="t" x="28" y="105">刊登網路廣告　使用虛擬資產服務</text>
+
+<path class="arw" d="M200,116 L200,140"/>
+
+<rect class="box" x="16" y="146" width="368" height="92"/>
+<text class="lbl" x="28" y="166">綁定之後持續產生的紀錄</text>
+<text class="t" x="28" y="188">你在哪　　哪支門號靠近哪座基地台</text>
+<text class="t" x="28" y="208">你連了哪裡　連線時間與網域名稱</text>
+<text class="t" x="28" y="228">你買了什麼　交通旅程與小額消費</text>
+
+<path class="arw" d="M200,238 L200,256"/>
+<path class="arw" d="M200,252 L108,252 L108,276"/>
+<path class="arw" d="M200,252 L292,252 L292,276"/>
+
+<rect class="box2" x="16" y="282" width="176" height="122"/>
+<text class="lbl" x="28" y="302">國家調取</text>
+<text class="num" x="28" y="326">487,353 線</text>
+<text class="s" x="28" y="344">2025 年，全部類別合計</text>
+<text class="num" x="28" y="370">2.2%</text>
+<text class="s" x="28" y="388">經法院核發的比例</text>
+
+<rect class="box2" x="208" y="282" width="176" height="122"/>
+<text class="lbl" x="220" y="302">商業販售</text>
+<text class="num" x="220" y="326">2,000 元</text>
+<text class="s" x="220" y="344">政府自己賣，一個空間單元</text>
+<text class="s" x="220" y="368">業者的商用人流服務</text>
+<text class="s" x="220" y="386">廣告識別碼　開放資料免費</text>
+
+<rect class="warnbox" x="16" y="420" width="368" height="64"/>
+<text class="warn" x="28" y="442">87.2% 的調取沒有通知當事人的規定</text>
+<text class="s" x="28" y="463">有通知設計的只有網路流量紀錄那一類，</text>
+<text class="s" x="28" y="479">而且以通信紀錄之名附帶取得時不必通知</text>
+
+<rect class="warnbox" x="16" y="496" width="368" height="64"/>
+<text class="warn" x="28" y="518">去識別化統計提供企業客戶，預設開啟</text>
+<text class="s" x="28" y="539">同一份告知聲明裡，第三人行銷預設關閉，</text>
+<text class="s" x="28" y="555">兩者方向相反</text>
+
+<rect class="box" x="16" y="572" width="368" height="52"/>
+<text class="lbl" x="28" y="592">退出的管道在哪</text>
+<text class="t" x="28" y="613">告知聲明第十條第三款，要自己去找</text>
+</svg>
