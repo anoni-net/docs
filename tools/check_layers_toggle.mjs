@@ -67,7 +67,11 @@ const prof = fs.mkdtempSync('/tmp/ly-toggle-');
 // 實際用的號碼在 profile 目錄的 DevToolsActivePort，第一行就是。
 const chrome = spawn('google-chrome', ['--headless=new', '--remote-debugging-port=0',
   `--user-data-dir=${prof}`, '--no-sandbox', '--disable-dev-shm-usage', '--enable-unsafe-webgpu',
-  '--enable-features=Vulkan', '--use-angle=vulkan', '--window-size=1280,900', 'about:blank'],
+  '--enable-features=Vulkan', '--use-angle=vulkan',
+  // 沒有顯示卡的機器靠 SwiftShader 走軟體路徑。CI 的 runner 就是那種，少了這個
+  // WebGPU 起不來，整支只能跳過。
+  '--enable-unsafe-swiftshader', '--use-webgpu-adapter=swiftshader',
+  '--window-size=1280,900', 'about:blank'],
   { stdio: 'ignore' });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -153,8 +157,16 @@ async function once(url) {
 if (!(await goto(`http://127.0.0.1:${port}${PAGE}?debug`))) { console.error('作品沒有載入完成'); bye(1); }
 if (!(await ev(`!!window.__atlas`))) {
   // initRenderer 失敗時 main 直接 return，掛鉤不會掛上去。那是環境沒有 WebGPU，
-  // 不是這次改動的問題。
-  console.log('  WebGPU 起不來，跳過圖層開關的檢查');
+  // 不是這次改動的問題。把卡在哪一關印出來，免得哪天 CI 默默跳過而沒人發現。
+  const why = await ev(`(async () => {
+    if (!navigator.gpu) return 'navigator.gpu 不存在';
+    try {
+      const a = await navigator.gpu.requestAdapter();
+      if (!a) return 'requestAdapter 回 null';
+      return 'adapter 有了但 renderer.init 沒過：' + JSON.stringify(a.info || {});
+    } catch (e) { return 'requestAdapter 丟出 ' + e.message; }
+  })()`);
+  console.log(`  WebGPU 起不來，跳過圖層開關的檢查（${why}）`);
   bye(0);
 }
 await sleep(600);
