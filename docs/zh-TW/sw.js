@@ -273,6 +273,7 @@ const CORE_PAGES_ZH = [
   "taiwan/vasp-2026/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  "taiwan/tor-users/",
   "taiwan/digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引）
   //
