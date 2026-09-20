@@ -320,11 +320,15 @@ CAMARA 的規格對授權模型分得很清楚[^14]：
 
 前面兩個窗口的資料都來自你跟某家公司的契約關係。第三個窗口不需要契約。
 
-手機出廠時帶有一組廣告識別碼，iOS 的叫 IDFA、Android 的叫 GAID，裝置上的 App 可以讀取，用來跨 App 辨識同一台裝置。報導記載威朋以蒐集這組識別碼為主，與多數公司著重 Cookie ID 的作法不同，並另外開發了集團內使用的 Vpon ID[^35]：
+作業系統會為每台裝置產生一組廣告識別碼，iOS 的叫 IDFA、Android 的叫 GAID，用途是讓不同 App 認出同一台裝置。這是軟體產生的值，不是出廠固化的硬體序號，兩個平台都給了使用者處理它的方法，作法差很多。
+
+iOS 自 2021 年的 App Tracking Transparency（ATT）起，App 要跨 App 追蹤必須先取得同意。EFF 記載這項改變之前約有兩成使用者選擇退出，改成要主動同意之後，絕大多數使用者選擇不允許追蹤[^46]。Android 走的是相反的預設，2022-04-01 起讀取廣告識別碼需要宣告權限，但不會跳出視窗詢問，Android 12 之後使用者可以自行永久刪除[^46]。
+
+台灣這一端的業者怎麼用這組識別碼，報導留下了紀錄。威朋依賴第三方 Cookie 與廣告 ID 整合用戶資料，並另外開發了集團內使用的 Vpon ID[^35]：
 
 > 專注於行動裝置數據分析的大數據集團威朋（Vpon），過去一直靠第三方Cookie或廣告ID來整合用戶數據，透過將用戶分群、描繪出群組的輪廓，再以此對個人投放廣告。
 
-資料來源不只一種。該公司執行長 2025 年 10 月接受採訪時說明第三方數據庫的組成[^36]：
+資料來源不只一種。該公司執行長在一篇由該公司出資刊登的媒體內容裡說明第三方數據庫的組成，這是業者的自我描述，不是第三方查證[^36]：
 
 > 除了透過 App 廣告聯播網收集數據， Vpon 亦以電子發票數據為基礎，並結合政府開放數據，擴大數據收集的維度，使數據庫涵蓋線下消費傾向、地理位置、族群輪廓、興趣偏好、App 使用行為等多元面向。
 
@@ -332,7 +336,7 @@ App 廣告聯播網、電子發票、政府開放資料，三種來源合在一�
 
 > Vpon 從一開始就堅持不收集使用者的姓名、電話或其他可識別個人身分的數據，數據庫內僅有匿名化的裝置使用行為數據
 
-主張與前面內政部、中華電信那兩份文件是同一個形態，去掉姓名與電話，剩下的部分宣告為匿名。
+主張與前面內政部、中華電信那兩份文件是同一個形態，去掉姓名與電話，剩下的部分宣告為匿名。出資刊登的內容裡說自己不蒐集什麼，讀者要打折看待，不過這段話本身仍然是業者對自家產品組成的公開描述。
 
 美國聯邦貿易委員會（Federal Trade Commission，FTC）2024-01-09 對資料仲介 X-Mode Social 與其後續公司 Outlogic 作成處分，隨附的新聞稿對同一類主張寫了直接的認定[^38]：
 
@@ -340,7 +344,7 @@ App 廣告聯播網、電子發票、政府開放資料，三種來源合在一�
 
 白話是，與廣告識別碼綁在一起的原始位置資料並未匿名化，足以把某台裝置對應到它去過的地點，而市面上本來就有幫忙把這種資料對應到個別消費者的服務。同年 1 月 18 日 FTC 另對 InMarket Media 作成處分，禁止其販售或授權精確位置資料[^39]。
 
-這個判斷可以用外洩事件檢驗。位置資料仲介 Gravy Analytics 於 2025 年 1 月發生外洩，報導記載的規模是數十 TB 的位置資料，牽涉的 App 數以千計，包含交友、健身與新聞類應用[^40]。外洩的資料能被用來還原個人的居住地與行程，這件事本身就是那批資料在外洩之前處於什麼狀態的證據。
+這個判斷可以用外洩事件檢驗。位置資料仲介 Gravy Analytics 於 2025 年 1 月發生外洩，報導記載攻擊者宣稱竊得 17TB 資料並威脅公開，牽涉的 App 有 3,455 個，報導點名的類別包含遊戲、交友與影音下載工具[^40]。外洩的資料能被用來還原個人的居住地與行程，這件事本身就是那批資料在外洩之前處於什麼狀態的證據。
 
 台灣沒有針對這類業者的登記制度。加州的《Delete Act》要求資料仲介逐年登記，並自 2026-01-01 起加入集中式的刪除請求平台 DROP，仲介業者自 2026-08-01 起必須處理這些請求，且至少每 45 天檢查一次[^41]。台灣的對應位置目前是空的，既沒有名單，也沒有一個地方可以一次要求全部刪除。
 
@@ -706,11 +710,11 @@ NCC 的官方網站在機器人防護之後，從本機、無頭瀏覽器與位�
 [^33]: [悠遊卡股份有限公司蒐集處理及利用個人資料告知事項](https://www.easycard.com.tw/personalized){target="_blank"} - 悠遊卡公司，頁面標示 2025-06-30 修訂版次 3
 [^34]: [悠遊卡攜手威朋 用AI大數據助力打造無現金生態圈](https://www.easycard.com.tw/new?cls=1&id=1705042262){target="_blank"} - 悠遊卡公司新聞稿，2024-01-12
 [^35]: [【業界對策：行動廣告大數據分析商威朋】布局內容比對技術與新演算法，威朋還發集團專用ID](https://www.ithome.com.tw/news/146657){target="_blank"} - iThome，2021-09-14
-[^36]: [用數據串起亞洲市場，Vpon 為品牌開啟跨境成長新航線](https://www.bnext.com.tw/article/84925/vpon_202510){target="_blank"} - 數位時代，2025 年 10 月
+[^36]: [用數據串起亞洲市場，Vpon 為品牌開啟跨境成長新航線](https://www.bnext.com.tw/article/84925/vpon_202510){target="_blank"} - 數位時代，2025-10-29。該頁標示 `sponsored by VPON`，頁面中繼資料亦標記 `is_ads` 為 `1`、編輯署名為 VPON，屬業者出資刊登的內容
 [^37]: [中華電/意藍資訊合推大數據新應用 助溝通效益最大化](https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=64cd4b04-eb62-4611-b735-0b940832e77b){target="_blank"} - MoneyDJ，2017-07-05
 [^38]: [FTC Order Prohibits Data Broker X-Mode Social and Outlogic from Selling Sensitive Location Data](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data){target="_blank"} - Federal Trade Commission，2024-01-09
 [^39]: [FTC Order Will Ban InMarket from Selling Precise Consumer Location Data](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-will-ban-inmarket-selling-precise-consumer-location-data){target="_blank"} - Federal Trade Commission，2024-01-18
-[^40]: [Massive breach at location data seller](https://www.malwarebytes.com/blog/news/2025/01/massive-breach-at-location-data-seller){target="_blank"} - Malwarebytes，2025 年 1 月，Gravy Analytics 外洩事件
+[^40]: [Massive breach at location data seller](https://www.malwarebytes.com/blog/news/2025/01/massive-breach-at-location-data-seller){target="_blank"} - Malwarebytes，2025-01-09，Gravy Analytics 外洩事件。原文記載攻擊者宣稱竊得 17TB 資料，涉及 3,455 個 App
 [^41]: [Data Broker Registry](https://cppa.ca.gov/data_broker_registry/){target="_blank"} - California Privacy Protection Agency。《Delete Act》（SB 362）的刪除請求平台 DROP 自 2026-01-01 開放消費者提交，仲介業者自 2026-08-01 起應處理
 [^42]: [預付卡新申請](https://www.cht.com.tw/home/campaign/prepaidcard/applynew){target="_blank"} - 中華電信網路門市，申請方式載明本人持指定雙證件正本臨櫃辦理
 [^43]: [「廣告實名制」2025上路打詐 如何驗證廣告主身分？怎麼防冒名？](https://news.pts.org.tw/article/724139){target="_blank"} - 公視新聞網
