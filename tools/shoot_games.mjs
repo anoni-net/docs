@@ -79,6 +79,11 @@ const PASS_L3 = [['xy', 435, 276], ['xy', 854, 295], ['xy', 958, 432], ...SEND_N
 
 const GAME = '/games/onion-routing/play/index.html';
 const GLOBE = '/games/tor-network/play/index.html';
+// 地球儀的資料層預設只開地理底圖與中繼，其餘要讀者自己勾。截圖要看到哪幾層就
+// 用網址帶進去，不然台灣那兩張只有一顆光禿禿的球。層的 id 見
+// docs/zh-TW/games/tor-network/play/layers.js。
+const LAYERS_TW = 'continents,bathymetry,relays,tw-admin,tw-landing,tw-power,tw-grid,tw-energy';
+const GLOBE_TW = `${GLOBE}?layers=${LAYERS_TW}#tw`;
 const GLOBE_READY = `!!document.querySelector('#loading.done')`;
 
 const SHOTS = [
@@ -127,7 +132,7 @@ const SHOTS = [
   {
     // 陸地亮度換成共識權重，台數多與實際扛流量多是兩件事
     nm: 'tor-network-weight', url: GLOBE, ready: GLOBE_READY,
-    actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '#mode-weight']], settle: 4000,
+    actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '[data-mode="all-weight"]']], settle: 4000,
   },
   {
     // 國家卡。標籤是 #labels 裡的 div，帶 data-cc，不用點球面
@@ -135,13 +140,13 @@ const SHOTS = [
     actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '#labels [data-cc="de"]']], settle: 3000,
   },
   {
-    nm: 'tor-network-taiwan', url: GLOBE + '#tw', ready: GLOBE_READY,
+    nm: 'tor-network-taiwan', url: GLOBE_TW, ready: GLOBE_READY,
     actions: [['sel', '#hint-close']], settle: 13000,
   },
   {
     // 用電切成工業用電佔比，新竹會跳到第一。那個切換改的是左欄的長條，
     // 不是地圖，所以要把面板捲到台灣那一區再截
-    nm: 'tor-network-industry', url: GLOBE + '#tw', ready: GLOBE_READY,
+    nm: 'tor-network-industry', url: GLOBE_TW, ready: GLOBE_READY,
     actions: [['sel', '#hint-close'], ['wait', 10000], ['sel', '#use-ind'],
               ['eval', `document.getElementById('lbl-energy').scrollIntoView({ block: 'center' })`]],
     settle: 3000,
