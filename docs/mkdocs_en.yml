@@ -93,6 +93,7 @@ nav:
       - regional/index.md
       - "Measurement and framing":
           - regional/tor-relay-watcher.md
+          - regional/taiwan-tor-users.md
           - regional/ooni-asn-coverage.md
           - regional/ooni-checklist.md
       - "Taiwan's regulatory environment":
