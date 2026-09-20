@@ -1799,6 +1799,7 @@
 	#V3-mono-black印刷與單色場合
 	#V3-mono-white品牌色塊上的露出
 	#Wordmarklogo-加文字
+	#eyebrow-用-mutedalt-是唯一的權威文字
 	#下載
 	#不要用-Export
 	#不要這樣用
@@ -1815,9 +1816,15 @@
 	#幾何比例與淨空區
 	#手寫-SVG-的規則
 	#接下來
+	#斷行交給版面算
 	#最小尺寸
+	#橫的東西都翻成直的
 	#檔名帶語系
+	#流程用置中的連接線
+	#版型範本
+	#畫布寬度照手機訂
 	#發布
+	#示意圖用色
 	#社群分享卡Open-Graph
 	#純-SVG--PNG-export-的場合
 	#結構性次色2026-三大主題限分類標籤
@@ -3629,11 +3636,14 @@
 	#Brand-cyan-nine-steps
 	#Colour-tokens
 	#Contributing-technical-diagrams
+	#Diagram-colours
 	#Diagram-files-live-on-assetsanoninet
 	#Do-not-use-Export
 	#Downloads
 	#Filenames-carry-the-language
+	#Flows-use-a-centred-connector
 	#Keeping-colours-consistent
+	#Leave-line-breaks-to-the-layout
 	#Line-breaking-for-Chinese-titles
 	#Logo-fills
 	#Minimum-size
@@ -3645,8 +3655,12 @@
 	#Rules-for-hand-written-SVG
 	#Saving-so-the-XML-is-embedded
 	#Six-layouts
+	#Size-the-canvas-for-phones
 	#Social-cards-Open-Graph
 	#Structural-secondaries-for-the-three-2026-tracks-category-tags-only
+	#The-eyebrow-is-muted-and-the-alt-is-the-only-authoritative-text
+	#The-layout-reference
+	#Turn-horizontal-layouts-vertical
 	#Using-a-diagram-in-an-article
 	#Using-the-colours
 	#V3-cyan-tonal-primary
@@ -4085,6 +4099,7 @@
 	#Further-reading
 	#Internet-usage-rate-World-Bank-CC-BY-40-Ministry-of-Digital-Affairs
 	#Landmass-brightness-switches-between-four-metrics
+	#Not-sure-where-to-start-take-the-tour
 	#Relay-distribution-Onionoo-CC0-10
 	#Shutdown-records-Access-Now-KeepItOn-CC-BY-40
 	#Sources-and-licensing
@@ -4234,6 +4249,46 @@
 	#What-the-Commission-will-do
 	#Where-the-Commission-stands
 	#Why-an-anonymity-community-tracks-data-protection-law
+/en/regional/taiwan-realname-data-market/
+	#A-puzzle-first
+	#After-binding-records-come-in-three-kinds
+	#Ask-operators-and-financial-institutions
+	#Ask-the-Ministry-of-the-Interior-the-load-bearing-question
+	#Back-to-the-puzzle
+	#Carriers-query-government-databases
+	#Four-windows-onto-the-same-business
+	#Further-reading
+	#How-small-these-units-actually-are
+	#How-the-numbers-were-calculated
+	#Identity-Binding-and-Taiwans-Data-Market
+	#Institutions-query-your-numbers-status
+	#International-practice-includes-this-layer
+	#Limits-of-this-page
+	#Recompute-it-yourself
+	#The-answer
+	#The-duty-to-notify-covers-only-one-of-the-three
+	#The-gap-common-to-all-five
+	#The-gap-concentrates-in-the-east-and-in-Chiayi
+	#The-missing-three-sit-in-the-other-three-windows
+	#The-rules-set-no-minimum-population
+	#The-same-report-scores-Taiwan-very-differently-by-category
+	#Three-routes-to-obtain-these-records
+	#Verification-continues-after-binding
+	#What-aggregation-actually-protects
+	#What-de-identification-does-in-Taiwanese-law
+	#What-these-numbers-can-and-cannot-show
+	#What-you-buy
+	#What-you-can-verify-and-ask
+	#What-you-connect-to
+	#Where-you-are
+	#Where-you-must-show-identification
+	#Which-route-was-actually-used
+	#Who-performs-the-aggregation
+	#Who-set-the-defaults-and-who-should-change-them
+	#Window-four-open-data-free
+	#Window-one-the-government-sells-its-own
+	#Window-three-the-advertising-identifier
+	#Window-two-what-the-carriers-sell-directly
 /en/regional/taiwan-vasp-2026/
 	#Cross-border-sanctions-and-the-over-compliance-side-effect
 	#Defining-virtual-asset-and-where-NFTs-sit
@@ -5311,6 +5366,7 @@
 /games/tor-network/
 	#Tor-中繼地球儀
 	#上網人口比例World-Bank-CC-BY-40數位發展部-政府資料開放授權條款
+	#不知道從哪看起就走一遍導覽
 	#中繼分布OnionooCC0-10
 	#使用者與橋接Tor-MetricsCC0-10
 	#延伸閱讀
@@ -5679,6 +5735,7 @@
 	#第二層值得花時間
 	#系統與瀏覽器保持更新
 	#被高估的做法
+	#電信業者手上那份紀錄
 /scenarios/journalist/
 	#不問什麼
 	#不熟數位工具的來源
@@ -6026,6 +6083,45 @@
 	#角色面
 	#資料外洩通報義務
 	#跨境傳輸規範
+/taiwan/realname-data-market/
+	#五類資訊的共同缺口
+	#你在哪
+	#你買了什麼
+	#你連了哪裡
+	#先看一道題
+	#去識別化這個詞做了多少事
+	#可以自己查證與追問的事
+	#向內政部問那個承重問題
+	#向業者與金融機構追問
+	#回到那道題
+	#國際上的做法有這一層
+	#實名要求與資料市場
+	#實際走了哪一條
+	#延伸閱讀
+	#拿走這些紀錄有三條路
+	#本頁的限制
+	#查核在綁定之後仍然持續
+	#機構查你的門號狀態
+	#窗口一政府自己賣
+	#窗口三廣告識別碼
+	#窗口二業者的商用服務
+	#窗口四免費的開放資料
+	#缺的三項散在另外三個窗口
+	#聚合到底保護了什麼
+	#聚合這個動作由誰執行
+	#自己重算一次
+	#落差集中在東部與嘉義
+	#要出示身分的地方
+	#規則裡沒有最小人數
+	#計算方式
+	#身分綁上去之後紀錄分三種
+	#這些單元實際上有多小
+	#這些數字能說明什麼不能說明什麼
+	#這道題的答案
+	#這門生意的四個窗口
+	#通知義務只蓋到其中一類
+	#電信業者查政府的資料庫
+	#預設值是誰設的又該由誰來改
 /taiwan/tor-relay-watcher/
 	#Tor-Relays-觀測點
 	#下一步
@@ -8498,6 +8594,7 @@
 	#V3-mono-black印刷与单色场合
 	#V3-mono-white品牌色块上的露出
 	#Wordmarklogo-加文字
+	#eyebrow-用-mutedalt-是唯一的权威文字
 	#下载
 	#不要用-Export
 	#不要这样用
@@ -8516,7 +8613,13 @@
 	#手写-SVG-的规则
 	#接下来
 	#文件名带语系
+	#断行交给版面算
 	#最小尺寸
+	#横的东西都翻成竖的
+	#流程用居中的连接线
+	#版型范本
+	#画布宽度照手机订
+	#示意图用色
 	#社群分享卡Open-Graph
 	#纯-SVG--PNG-export-的场合
 	#结构性次色2026-三大主题限分类标签
@@ -8890,6 +8993,7 @@
 /zh-cn/games/tor-network/
 	#Tor-中继地球仪
 	#上网人口比例World-Bank-CC-BY-40数位发展部-政府数据开放授权条款
+	#不知道从哪看起就走一遍导览
 	#中继分布OnionooCC0-10
 	#延伸阅读
 	#放大到台湾
@@ -9477,6 +9581,45 @@
 	#罚则调整
 	#角色面
 	#跨境传输规范
+/zh-cn/taiwan/realname-data-market/
+	#五类信息的共同缺口
+	#你买了什么
+	#你在哪
+	#你连了哪里
+	#先看一道题
+	#去识别化这个词做了多少事
+	#可以自己查证与追问的事
+	#向业者与金融机构追问
+	#向内政部问那个承重问题
+	#回到那道题
+	#国际上的做法有这一层
+	#实名要求与数据市场
+	#实际走了哪一条
+	#延伸阅读
+	#拿走这些记录有三条路
+	#本页的限制
+	#机构查你的手机号状态
+	#查核在绑定之后仍然持续
+	#电信业者查政府的数据库
+	#窗口一政府自己卖
+	#窗口三广告标识符
+	#窗口二业者的商用服务
+	#窗口四免费的开放数据
+	#缺的三项散在另外三个窗口
+	#聚合到底保护了什么
+	#聚合这个动作由谁执行
+	#自己重算一次
+	#落差集中在东部与嘉义
+	#要出示身份的地方
+	#规则里没有最小人数
+	#计算方式
+	#身份绑上去之后记录分三种
+	#这些单元实际上有多小
+	#这些数字能说明什么不能说明什么
+	#这道题的答案
+	#这门生意的四个窗口
+	#通知义务只盖到其中一类
+	#默认值是谁设的又该由谁来改
 /zh-cn/taiwan/tor-relay-watcher/
 	#Tor-Relays-观测点
 	#下一步
