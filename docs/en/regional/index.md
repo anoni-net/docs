@@ -103,6 +103,7 @@ We have produced full Traditional Chinese translations of two pieces of regional
 
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
 - [Tor relay watcher](./tor-relay-watcher.md) — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
+- [How many people use Tor in Taiwan](./taiwan-tor-users.md) — the user side of the same connection layer, four years of Taiwan figures set against Mainland China and Hong Kong, and why the tenfold spike of 2025 was a counting bug.
 - [ASN observation data analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](../scenarios/lgbtq.md) — the showcase scenario, with the full multi-region context section.
