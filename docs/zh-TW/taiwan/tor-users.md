@@ -6,13 +6,13 @@ icon: material/account-group-outline
 
 # :material-account-group-outline: 台灣有多少人在用 Tor
 
-從 [Tor Relays 觀測點](./tor-relay-watcher.md) 接續。那一頁看的是節點端，台灣架了多少中繼、分散在哪些 ASN、貢獻多少頻寬。這一頁換到使用者端，問的是有多少人從台灣連上 [Tor](../tools/what-is-tor.md)、四年來怎麼變化、使用的樣子跟其他地區差在哪裡。
+從 [Tor Relays 觀測點](./tor-relay-watcher.md) 接續。前一頁看的是節點端，台灣架了多少中繼、分散在哪些 ASN、貢獻多少頻寬。本頁換到使用者端，看有多少人從台灣連上 [Tor](../tools/what-is-tor.md)、四年來如何變化、使用型態與其他地區的差異。
 
 資料來自 Tor Metrics 的公開 CSV，授權是 CC0，取得方式列在頁尾，任何人都能自行重現。
 
-結論先寫在前面。台灣平均同時上線的 Tor 客戶端約 9,500 個，四年來從約 7,400 緩步上升，沒有哪一年出現跳躍。2025 年 9 月到 2026 年上半年，同一個數字一度衝上九萬，那一段是 Tor 自己的計數程式出錯，不能當成使用者成長。
+台灣平均同時上線的 Tor 客戶端約 9,500 個，四年來從約 7,400 緩步上升，沒有哪一年出現跳躍。2025 年 9 月到 2026 年上半年，同一個數字一度衝上九萬，那一段是 Tor 自己的計數程式出錯，不能當成使用者成長。
 
-## 這個數字量的是什麼
+## 使用者數是怎麼算出來的
 
 Tor 沒有帳號，也不會統計裝置，所以「有多少使用者」是推算出來的。中繼會記錄收到多少次目錄請求，Tor Metrics 再從請求數反推人數，公式寫在官方的 Reproducible Metrics 文件裡[^1]：
 
@@ -20,15 +20,15 @@ Tor 沒有帳號，也不會統計裝置，所以「有多少使用者」是推�
 r(N) = floor(r(R) / frac / 10)
 ```
 
-`r(R)` 是某國某日回報成功的目錄請求總數，`frac` 是當天有回報統計的中繼佔比，除以 `10` 來自一項假設，官方的說法是「A client that is connected 24/7 makes about 15 requests per day, but not all clients are connected 24/7, so we picked the number 10 for the average client」。
+`r(R)` 是某國某日回報成功的目錄請求總數，`frac` 是當天有回報統計的中繼佔比，除以 `10` 來自一項假設，文件裡的原文是「A client that is connected 24/7 makes about 15 requests per day, but not all clients are connected 24/7, so we picked the number 10 for the average client」。
 
-同一份文件接著寫明這個估計值的限制：
+估計值的限制寫在同一份文件裡：
 
 > The result is an average number of concurrent users, estimated from data collected over a day. We can't say how many distinct users there are.
 
 所以「台灣有 9,500 個 Tor 使用者」的準確說法是**平均同時上線約 9,500 個 Tor 客戶端**。一年之內在台灣開過 Tor Browser 的人數遠高於此，官方的方法算不出那個數字。
 
-官方也給了信心區間，寬度值得先看過[^2]：
+官方另外給了信心區間[^2]：
 
 | 項目 | 2026 年 8 月之後的平均 |
 |---|---|
@@ -36,11 +36,11 @@ r(N) = floor(r(R) / frac / 10)
 | 區間下界 | 6,641 |
 | 區間上界 | 13,823 |
 
-單日更寬。2026-09-15 的估計值是 8,312，區間從 3,119 到 16,881。所以本頁的數字適合用來看方向與相對變化，拿它當精確人數會超出資料能支撐的範圍。
+單日更寬。2026-09-15 的估計值是 8,312，區間從 3,119 到 16,881。本頁的數字適合看方向與相對變化，當成精確人數會超出資料能支撐的範圍。
 
 ## 四年來緩慢上升
 
-排除下一節要說明的污染期之後，取每年同一段時間比較[^3]：
+排除 2025 年 9 月起受計數錯誤影響的那一段，取每年同一段時間比較[^3]：
 
 | 期間 | 平均同時上線 | 每十萬人 |
 |---|---|---|
@@ -51,13 +51,13 @@ r(N) = floor(r(R) / frac / 10)
 
 四年上升約 29%，換算年複合成長率約 6.5%，方向單調。
 
-這個成長可以推到什麼程度，取決於在比什麼。官方信心區間在 2023 年夏天（4,782 到 10,233）與 2026 年夏天（6,641 到 13,823）是重疊的，單看絕對人數無法排除四年來沒有變化。同期日資料的均值 95% 區間（7,297 到 7,543 對 9,102 到 9,980）則不重疊，水準確實上升了。
+成長幅度能推到什麼程度，取決於拿什麼在比。官方信心區間在 2023 年夏天（4,782 到 10,233）與 2026 年夏天（6,641 到 13,823）是重疊的，單看絕對人數無法排除四年來沒有變化。同期日資料的均值 95% 區間（7,297 到 7,543 對 9,102 到 9,980）則不重疊，水準確實上升了。
 
-兩者量的東西不同。官方區間含的是估計方法本身的系統性不確定，例如 `frac` 外推與每個客戶端每天 10 次請求的假設，同一套方法在各年之間同向，比較相對變化時大致會抵銷。可以說的是在同一套估計方法之下，台灣的水準四年上升約 29%。
+兩者量的並不相同。官方區間含的是估計方法本身的系統性不確定，例如 `frac` 外推與每個客戶端每天 10 次請求的假設，同一套方法在各年之間同向，比較相對變化時大致會抵銷。在同一套估計方法之下，台灣的水準四年上升約 29%。
 
 ## 2025 年那次十倍跳升是計數錯誤
 
-翻 Tor Metrics 的台灣曲線會看到 2025 年 9 月起的一段暴衝。逐日資料長這樣：
+Tor Metrics 的台灣曲線在 2025 年 9 月起有一段陡升。逐日資料如下：
 
 | 日期 | 台灣 | 全球 |
 |---|---|---|
@@ -66,9 +66,9 @@ r(N) = floor(r(R) / frac / 10)
 | 2025-09-01 | 82,626 | 14,824,760 |
 | 2025-09-02 | 109,607 | 19,374,696 |
 
-一天之內全球從 195 萬跳到 1,482 萬，台灣從 8,429 跳到 82,626。真實的工具採用不會有這種形狀，而且全球一起跳，代表問題出在網路層而不在台灣。
+一天之內全球從 195 萬跳到 1,482 萬，台灣從 8,429 跳到 82,626。真實的採用曲線不會是這種形狀，而且全球一起跳，代表問題出在網路層，與台灣本地無關。
 
-原因後來寫在 Tor `0.4.8.22` 的發行說明裡，兩條修正疊在一起[^4]。第一條是舊版客戶端被擋在門外：
+原因後來寫在 Tor `0.4.8.22` 的發行說明裡，兩條修正疊在一起[^4]。第一條是舊版客戶端連不上目錄伺服器：
 
 > Allow old clients to fetch the consensus even if they use version 0 of the SENDME protocol. In mid 2025 we changed the required minimum version of the "FlowCtrl" protocol to 1, meaning directory caches hang up on clients that send a version 0 SENDME cell. Since old clients were no longer able to retrieve the consensus, they couldn't learn about this required minimum version -- meaning we've had many many old clients loading down directory servers for the past months.
 
@@ -76,9 +76,9 @@ r(N) = floor(r(R) / frac / 10)
 
 > Don't count networkstatus serves until they finish. When we started serving a consensus document but the client didn't receive all of it, we were still counting that as a success in our stats. This mistake, which can be triggered for example by obsolete clients or by DPI-based censorship, led to wildly inflated user counts because we estimate total users in the world based on successful consensus fetches.
 
-合起來的機制是，協定的最低版本一改，舊客戶端被目錄伺服器中途掛斷，它們拿不到 consensus 就無從得知自己該升級，於是不斷重試，而每一次沒下載完的請求都被記成一次成功，使用者估計值跟著等比例膨脹。
+合起來的機制是，協定的最低版本一改，舊客戶端就被目錄伺服器中途掛斷。升級的要求寫在取不到的那份 consensus 裡，舊客戶端因此持續重試，而每一次沒下載完的請求都被記成一次成功，使用者估計值跟著等比例膨脹。
 
-修正在 2026-01-28 釋出，效果隨中繼升級而逐步顯現。把全網升級比例跟台灣的數字擺在一起看：
+修正在 2026-01-28 釋出，效果隨中繼升級而逐步顯現。全網升級比例與台灣的數字對照如下：
 
 | 時點 | 已升級到含修正的版本 | 台灣月均 |
 |---|---|---|
@@ -90,9 +90,9 @@ r(N) = floor(r(R) / frac / 10)
 
 兩條曲線逐段對得上，而且回落的終點（約 8,800）與事件發生前的水準（2025 年 6 到 8 月平均 8,794）幾乎重合。到 2026 年 9 月中，全網 99.5% 的中繼已經運作在修正後的版本上。
 
-膨脹的幅度各地不同。以 2025 年 8 月為基準看 2026 年 1 月，印尼 12.4 倍、泰國 10.8 倍、台灣 10.2 倍、越南 9.1 倍，而美國 1.6 倍、英國 1.5 倍、德國 1.4 倍。舊版客戶端集中的地區膨脹得最厲害。
+各地膨脹的幅度不同。以 2025 年 8 月為基準看 2026 年 1 月，印尼 12.4 倍、泰國 10.8 倍、台灣 10.2 倍、越南 9.1 倍，而美國 1.6 倍、英國 1.5 倍、德國 1.4 倍。舊版客戶端集中的地區受影響最深。
 
-這件事留下兩個可以帶走的判讀習慣。看到 Tor 使用者數大幅變動，先比對同期的全球值與鄰近地區，全球一起動就不是在地事件。再去翻 Tor 的發行說明，確認計數方式有沒有改過。任何跨越 2025 年 9 月到 2026 年 6 月的比較都要標註不可比。
+下次遇到類似的跳動，檢查順序一樣。先比對同期的全球值與鄰近地區，全球一起動就不是在地事件，接著查 Tor 的發行說明，確認計數方式有沒有改過。任何跨越 2025 年 9 月到 2026 年 6 月的比較都要標註不可比。
 
 ## 台灣使用者的四個特徵
 
@@ -110,9 +110,9 @@ r(N) = floor(r(R) / frac / 10)
 | 德國 | 307,354 | 6,063 | 1.9% |
 | 越南 | 23,298 | 278 | 1.2% |
 
-台灣的 5.0% 落在通暢環境的區間，跟受封鎖地區差了一個數量級。
+台灣的 5.0% 落在通暢環境的區間，與受封鎖地區差了一個數量級。
 
-[OONI](../tools/what-is-ooni.md) 的實測支持同一個結論。2023 年以來台灣累積 168,197 筆 `tor` 測試，確認封鎖為 `0` 筆[^6]：
+[OONI](../tools/what-is-ooni.md) 的實測結果一致。2023 年以來台灣累積 168,197 筆 `tor` 測試，確認封鎖為 `0` 筆[^6]：
 
 | 年 | 測量筆數 | 異常比例 | 確認封鎖 |
 |---|---|---|---|
@@ -160,7 +160,7 @@ r(N) = floor(r(R) / frac / 10)
 
 ### bridge 使用在 2026 年成長，原因還不清楚
 
-台灣的 bridge 使用者季平均從 2025 年第二季的 137 上升到 2026 年第三季的 501。這段成長發生在計數錯誤修正之後，而且 bridge 的統計管道與直連不同，比較可能是真實變化。
+台灣的 bridge 使用者季平均從 2025 年第二季的 137 上升到 2026 年第三季的 501。成長發生在計數錯誤修正之後，而且 bridge 的統計管道與直連不同，比較可能是真實變化。
 
 依傳輸方式拆開來看[^9]：
 
@@ -171,11 +171,11 @@ r(N) = floor(r(R) / frac / 10)
 | 2026Q2 | 151 | 47 | 13 | 62 | 276 |
 | 2026Q3 | 321 | 27 | 17 | 135 | 502 |
 
-成長集中在 obfs4 與未混淆的 bridge，WebTunnel 那一欄從零起步到 17。各種傳輸方式的差別見 [Tor Browser 進階設定](../tools/tor-browser-advanced.md)。2026 年第三季只有不到三個月的資料，而且 Tor Metrics 記載 2026 年 2 月與 3 月修過幾次 Snowflake 的統計問題，snowflake 那一欄的短期變動要保留懷疑。原因還不清楚，先列為後續觀察。
+成長集中在 obfs4 與未混淆的 bridge，WebTunnel 那一欄從零起步到 17。各種傳輸方式的差別見 [Tor Browser 進階設定](../tools/tor-browser-advanced.md)。2026 年第三季只有不到三個月的資料，而且 Tor Metrics 的 News 頁面記了 2026 年 2 月與 3 月的幾次 Snowflake 統計問題修復，snowflake 那一欄的短期變動要保留懷疑。
 
-## 用的人多，撐網路的人少
+## 使用的人多，提供中繼的人少
 
-台灣使用者約佔全球的 0.33%，而台灣的中繼數只佔全網的 0.12%，消費與貢獻之間有大約三倍的落差。每個在地中繼對應的本地使用者數，台灣是 795，美國 168、德國 188。節點端的即時數字與 ASN 分布在 [Tor Relays 觀測點](./tor-relay-watcher.md)，想補上一格可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
+台灣使用者約佔全球的 0.33%，而台灣的中繼數只佔全網的 0.12%，消費與貢獻之間有大約三倍的落差。每個在地中繼對應的本地使用者數，台灣是 795，美國 168、德國 188。節點端的即時數字與 ASN 分布在 [Tor Relays 觀測點](./tor-relay-watcher.md)，想增加一個節點可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
 
 !!! example "想自己重現？"
 
@@ -202,7 +202,7 @@ r(N) = floor(r(R) / frac / 10)
 [^1]: 公式與假設出自 Tor Metrics 的 [Reproducible Metrics](https://metrics.torproject.org/reproducible-metrics.html){target="_blank"}。`frac` 量的是當天全網有多少比例的中繼回報了統計，同一天所有國家的值相同，不是逐國的可信度，2023-06-15 全部是 `64`，2026-09-15 全部是 `56`。
 [^2]: 信心區間取自 `userstats-relay-country.csv` 的 `lower` 與 `upper` 欄位，全期 97% 的日子有值。表中為 2026-08-01 到 2026-09-17 的平均。
 [^3]: 每年取同一段月份以避開季節差異。2026 年因為 2 月整月資料缺漏，改取 8 月到 9 月。人口以內政部統計的 23,235,002 人（2026 年 7 月）計算。
-[^4]: 兩段引文出自 Tor `0.4.8.22` 的發行說明，2026-01-28 釋出，對應 [`41191`](https://gitlab.torproject.org/tpo/core/tor/-/issues/41191){target="_blank"} 與 [`41192`](https://gitlab.torproject.org/tpo/core/tor/-/issues/41192){target="_blank"} 兩張票。升級比例由 `versions.csv` 計算，以 `0.4.9` 系列與 `0.4.8.22` 為含修正的版本。Tor Metrics 的 News 頁面沒有替這段期間加註記。
+[^4]: 兩段引文出自 Tor `0.4.8.22` 的發行說明，2026-01-28 釋出，對應 [`41191`](https://gitlab.torproject.org/tpo/core/tor/-/issues/41191){target="_blank"} 與 [`41192`](https://gitlab.torproject.org/tpo/core/tor/-/issues/41192){target="_blank"} 兩則 issue。升級比例由 `versions.csv` 計算，以 `0.4.9` 系列與 `0.4.8.22` 為含修正的版本。Tor Metrics 的 News 頁面沒有替這段期間加註記。
 [^5]: 直連與 bridge 皆取 2026-08-01 到 2026-09-17 的平均，資料來自 `userstats-relay-country.csv` 與 `userstats-bridge-country.csv`。
 [^6]: 取自 OONI API 的 `aggregation` 端點，`probe_cc=TW` 且 `test_name=tor`。2026 年統計到 9 月 20 日。「確認封鎖」對應 OONI 的 `confirmed`，需要測到明確的封鎖頁面才會計入。
 [^7]: 取 2023-01-01 到 2025-08-30 的日資料，避開計數錯誤的污染期。
