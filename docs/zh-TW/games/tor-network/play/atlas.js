@@ -987,11 +987,10 @@ const REGISTRY = {
       if (lb) lb.innerHTML = '';
       labels.length = 0;
       CC_STATS = null; SNAP_ASN = null; SNAP_VER = null; SNAP_ASN_TOP = null; SNAP = null;
-      // 托管商排行與亞洲對照跟著中繼走，但它們不是中繼層的 panel 欄位，自己收
-      for (const id of ['stat-asn', 'stat-asia', 'lbl-asn', 'lbl-asia', 'asn-note', 'mix-note']) {
-        const el = $(id);
-        if (el) { el.hidden = true; if (id.startsWith('stat-')) el.innerHTML = ''; }
-      }
+      // 托管商排行與亞洲對照跟著中繼走，但它們不是中繼層的 panel 欄位。餵 null
+      // 讓它們自己走無資料那條路，收起來與放回來才是同一段程式碼在管。
+      fillAsn(null);
+      fillAsia(null);
       const total = $('stat-total'), pub = $('stat-pub');
       if (total) total.textContent = '–';
       if (pub) pub.textContent = '…';
@@ -4244,9 +4243,21 @@ function syncMetricUI() {
 // 托管商排行與亞洲對照。國界分散不代表機房分散，這兩塊把另一半講出來。
 const ASIA = ['sg', 'jp', 'hk', 'kr', 'tw'];
 
+/** 托管商排行與亞洲對照跟著中繼那一層走，兩邊都要自己管收放，不然關掉再打開會
+ *  變成一塊沒有標題的排行榜，而內容是對的。 */
+function sideBlock(box, lbl, note, on) {
+  for (const el of [box, lbl, note]) if (el) el.hidden = !on;
+  if (!on && box) box.innerHTML = '';
+}
+
 function fillAsn(snap) {
   const box = $('stat-asn');
-  if (!box || !snap.asnTop || !snap.asnTop.length) return;
+  if (!snap || !snap.asnTop || !snap.asnTop.length) {
+    sideBlock(box, $('lbl-asn'), $('asn-note'), false);
+    return;
+  }
+  sideBlock(box, $('lbl-asn'), $('asn-note'), true);
+  if (!box) return;
   const tot = snap.sampled || snap.total || 1;
   const max = snap.asnTop[0][2] || 1;
   box.innerHTML = snap.asnTop.slice(0, 8).map(([id, nm, n]) =>
@@ -4265,10 +4276,14 @@ function fillAsn(snap) {
 
 function fillAsia(snap) {
   const box = $('stat-asia');
-  if (!box) return;
-  const cnt = new Map(snap.countries || []);
+  const cnt = new Map((snap && snap.countries) || []);
   const rows = ASIA.filter((cc) => cnt.has(cc)).sort((a, b) => cnt.get(b) - cnt.get(a));
-  if (!rows.length) return;
+  if (!rows.length) {
+    sideBlock(box, $('lbl-asia'), null, false);
+    return;
+  }
+  sideBlock(box, $('lbl-asia'), null, true);
+  if (!box) return;
   const max = cnt.get(rows[0]) || 1;
   box.innerHTML = rows.map((cc) => {
     const n = cnt.get(cc);
@@ -4489,39 +4504,24 @@ function aggregateLive(relays, published) {
 }
 
 // 用新的快照重畫。舊的中繼點與標籤要先清乾淨，不然會疊在上面愈積愈多。
+/**
+ * 換一份新的中繼快照。
+ *
+ * 走跟開關那一層同一條路：dropLayer 收乾淨，再用新資料重建一次。自己 remove 物件
+ * 的話記帳表跟不上，舊的點留在 LAYER_OBJ 裡、新的點沒被記到，於是按過即時更新
+ * 之後關掉這一層，畫面上的點不會消失而按鈕顯示關著。
+ *
+ * ANCHOR 與 relaxClusters 不重跑，那是依台數推開團的位置，一次更新的台數變化
+ * 推不動它，CLUSTERED 那個旗標擋著。
+ */
 function applySnapshot(snap) {
-  // 材質一定要 dispose。只清 geometry 不夠：renderer 內部是把完整的 GPU 清除掛在
-  // material 的 dispose 事件上，geometry 的 dispose 只會清掉快取的 attribute 參照，
-  // pipeline 與 bindings 仍留著。這個函式每按一次「即時更新」就跑一遍，漏掉會累積。
-  // 四個角色共用同一份 geometry 與 material，各自 dispose 一次就好。
-  for (const m of relayMeshes) {
-    globe.remove(m);
-    m.dispose();                       // InstancedMesh 自己的 instanceMatrix / instanceColor
-  }
-  if (relayMeshes.length && relayMeshes[0].geometry) relayMeshes[0].geometry.dispose();
-  for (const mat of pointMats) mat.dispose();
-  relayMeshes.length = 0;
-  pointMats.length = 0;
-  dotGroups.length = 0;
-  lastDotK = 1;
-  lastCountF = -1;
-  const box = $('labels');
-  if (box) box.innerHTML = '';
-  labels.length = 0;
-
-  const counts = countryCounts(snap);
-  // ANCHOR 不重建，國家位置本來就不會變。relaxClusters 也跳過，那是依台數推開團的位置，
-  // 一次更新的台數變化推不動它，重跑只是白花時間。
-  const drawn = buildRelays(snap, counts);
+  const st = STATE.get('relays');
+  if (st) st.data = snap;   // 關掉再打開要拿到新的這一份，不是開場那一份
+  dropLayer('relays');
+  REGISTRY.relays.drop();
+  inLayer('relays', () => REGISTRY.relays.build(snap));
   for (const m of pointMats) m.opacity = 1; // 更新是使用者按出來的，不需要再淡入一次
-  buildLabels(snap);
-  buildStats(snap);
-  fillPanel(snap, drawn);
-  fillMix(snap);
-  fillAsn(snap);
-  fillAsia(snap);
-  fillUsers(snap);
-  setMode(MODE); // 色階、標籤數字、角色顯示都在這裡一起更新
+  resortGlobe();
 }
 
 async function fetchLive(btn) {
@@ -5044,6 +5044,9 @@ async function main() {
       objCount: () => globe.children.length,
       layerObjs: (id) => (LAYER_OBJ.get(id) || []).length,
       info: () => JSON.parse(JSON.stringify(renderer.info)),
+      // 即時更新那條路。外網連不上的機器測不到按鈕，餵一份假快照進來一樣走得完
+      apply: applySnapshot,
+      snap: () => JSON.parse(JSON.stringify(SNAP)),
     };
   }
   renderer.setAnimationLoop(animate);

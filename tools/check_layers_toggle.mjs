@@ -163,6 +163,14 @@ const ok = [], fail = [];
 const check = (c, m) => (c ? ok : fail).push(m);
 const panelLen = (el) => ev(`((document.getElementById('${el}')||{}).textContent||'').trim().length`);
 const hidden = (el) => ev(`!!(document.getElementById('${el}')||{}).hidden`);
+/** 等某一層開好或關好。走 assets 的那幾份要等外網回來，寫死的 sleep 不夠穩。 */
+const waitOn = async (id, want = true) => {
+  for (let i = 0; i < 60; i++) {
+    if ((await ev(`window.__atlas.isOn('${id}')`)) === want) return true;
+    await sleep(250);
+  }
+  return false;
+};
 
 // ── 開場的樣子 ──────────────────────────────────────────────
 const chips = JSON.parse(await ev(
@@ -224,19 +232,48 @@ check((await ev(`document.querySelectorAll('#labels .lb').length`)) > 0, '國家
 const end = await ev(`window.__atlas.objCount()`);
 check(end === base, `全部走完之後仍是 ${base} 個物件（實際 ${end}）`);
 
+// ── 托管商排行與亞洲對照要對稱地收放 ────────────────────────
+//
+// 那兩區跟著中繼那一層走，但它們不是中繼層的 panel 欄位，收放由 fillAsn 與
+// fillAsia 自己管。只寫了收沒寫放的話，關掉再打開會變成一塊沒有標題的排行榜，
+// 而內容是對的，看起來只像版面壞了一點點。
+await ev(`window.__atlas.off('relays')`);
+await sleep(300);
+check(await hidden('lbl-asn'), '關掉中繼之後托管商排行的小標收起來');
+check((await panelLen('stat-asn')) === 0, '排行的內容也清掉');
+await ev(`(async () => { await window.__atlas.on('relays'); })()`);
+await waitOn('relays');
+await sleep(500);
+check(!(await hidden('lbl-asn')), '再打開之後小標跟著回來');
+check((await panelLen('stat-asn')) > 20, '排行的內容也回來');
+check(!(await hidden('lbl-asia')), '亞洲對照那一區同樣回得來');
+
+// ── 換一份新快照之後記帳表要跟得上 ──────────────────────────
+//
+// 即時更新那顆按鈕走的是 applySnapshot。它如果自己 remove 物件而不經過
+// dropLayer，舊的點會留在記帳表裡、新的點沒被記到，於是按過更新之後關掉這一層，
+// 畫面上的點不會消失而按鈕顯示關著。外網連不上的機器按不到那顆按鈕，改從掛鉤
+// 餵一份改過的快照進去，走的是同一條路。
+{
+  const before = await ev(`window.__atlas.objCount()`);
+  await ev(`(() => { const d = window.__atlas.snap(); d.total = 12345; window.__atlas.apply(d); })()`);
+  await sleep(600);
+  check((await ev(`document.getElementById('stat-total').textContent`)) === '12,345', '新快照的數字上得去');
+  check((await ev(`window.__atlas.objCount()`)) === before, `換完快照物件數不變（${before}）`);
+  await ev(`window.__atlas.off('relays')`);
+  await sleep(400);
+  check((await ev(`window.__atlas.layerObjs('relays')`)) === 0, '換過快照之後關掉那一層，記帳表清得乾淨');
+  await ev(`(async () => { await window.__atlas.on('relays'); })()`);
+  await waitOn('relays');
+  await sleep(500);
+}
+
 // ── 陸地亮度的指標跟著層增減 ────────────────────────────────
 //
 // 指標由層供應。供應它的那一層關掉時按鈕要跟著消失，不然按下去是一片全暗的陸地
 // 而圖例還寫著那個指標的名字。停在上面的那個被關掉時還要自動換一個。
 const modes = () => ev(`JSON.stringify([...document.querySelectorAll('#metric-sw button')].map((b) => b.dataset.mode))`);
 const onMode = () => ev(`(document.querySelector('#metric-sw button.on')||{ dataset: {} }).dataset.mode`);
-const waitOn = async (id, want = true) => {
-  for (let i = 0; i < 60; i++) {
-    if ((await ev(`window.__atlas.isOn('${id}')`)) === want) return true;
-    await sleep(250);
-  }
-  return false;
-};
 
 check(JSON.parse(await modes()).join() === 'all-count,all-weight,conc', '開場的三個指標都來自中繼那一層');
 check((await onMode()) === 'all-count', '開場停在中繼台數');
