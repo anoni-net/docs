@@ -6,7 +6,14 @@ icon: material/qrcode
 
 # :material-qrcode: QR code 產生器
 
-<div id="qrcode-tool"></div>
+<div id="qrcode-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../vendor/qrcode-generator.js"></script>
 <script src="../../js/qrcode.js"></script>
@@ -24,6 +31,8 @@ icon: material/qrcode
 一個實際的場合：帶工作坊的人要把一行 Tor bridge 給現場的參加者，唸出來兩邊都不確定剛才那個是大寫 O 還是數字 0，回去怎麼打都連不上。改成用 QR code 讓對方掃，一次就對。
 
 產生完想確認內容沒錯，用 [QR code 讀取器](qr-read.md)掃回來看看。
+
+現場要發給二十個人的時候怎麼用，見[工作坊現場要發東西給大家](case-workshop.md)。
 
 ## QR code 裡面是明文
 

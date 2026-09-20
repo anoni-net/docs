@@ -6,7 +6,14 @@ icon: material/qrcode
 
 # :material-qrcode: QR code generator
 
-<div id="qrcode-tool"></div>
+<div id="qrcode-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../vendor/qrcode-generator.js"></script>
 <script src="../../js/qrcode.js"></script>
@@ -24,6 +31,8 @@ The other person points a camera at your screen and has it. Nothing passes throu
 One situation from practice: someone running a workshop needs to give participants a Tor bridge line, reads it aloud, and neither side is sure whether that character was a capital O or a zero. Nothing they type afterwards connects. Showing a QR code to scan gets it right first time.
 
 To confirm the code you generated actually contains what you meant, read it back with the [QR code reader](qr-read.md).
+
+For using this with twenty people in a room, see [handing things out at a workshop](case-workshop.md).
 
 ## What is inside a QR code is in the clear
 

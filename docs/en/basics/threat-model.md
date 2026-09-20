@@ -25,7 +25,7 @@ EFF frames threat modeling as five questions, worth keeping on a single sheet of
 The [threat model checklist](../utils/threat-model.md) turns questions one, two and five into something you can click through, and flags the combinations that will not hold. It runs in your browser, saves nothing unless you ask it to, and works offline. Questions three and four stay yours to judge, and the section below is why.
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/threat-model-quadrant.en.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/threat-model-quadrant-v4.en.svg"
         alt="A four-quadrant chart. The horizontal axis is how real a given asset and adversary pairing actually is, from low to high. The vertical axis is how strong your protection is today, from weak to strong. Top left is over-protected and can be let go, with a family group chat against state-level surveillance and viewing history against a law enforcement request. Top right is covered and worth keeping, with a bank account against scammers and a main email account against takeover. Bottom left is accepted, a known risk left alone, with public posts against a passing stranger and reading history against ad tracking. Bottom right is not covered yet and is the next step, with a cloud photo library against a platform breach and a reused password on an old account against credential stuffing.">
     <figcaption>Roughly what the answers look like once laid out. The pairings shown are invented.</figcaption>
 </figure>
@@ -37,6 +37,8 @@ That top left box is the one people skip. Reviewing a security plan usually mean
 ## Why the adversary is regional
 
 The reason this matters on a Sinophone Asia-Pacific site: the adversary in question 2 changes shape across jurisdictions, and so does the cost in question 4. The same action, using a pseudonymous account, carrying a phone across a border, reaching a blocked service, carries very different consequences in Taipei, Hong Kong, Kuala Lumpur, or across the Myanmar border. A threat model built for one jurisdiction does not transfer unchanged to the next. When you move across the region, re-run the five questions for where you are now.
+
+Three factors pull the answer to question two upward regardless of jurisdiction: how publicly you speak, whether you work with exile communities or cross-border advocacy networks, and whether you or a close collaborator has family still living in mainland China or Hong Kong. All three appear as selection criteria in the September 2026 Anthropic abuse report, summarized with page numbers in [our notes on it](../blog/posts/2026-anthropic-threat-report-taiwan.md), and the capability limits of that layer are in [what surveillance can actually do](./surveillance-capability.md).
 
 For the vocabulary the five questions assume, see [anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md).
 

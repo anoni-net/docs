@@ -118,6 +118,34 @@ DeepSeek、豆包、Kimi、通義等在中國境內提供的生成式 AI 服務�
 
 處理的方式落在設定上。第一步是先去看已經裝了什麼：瀏覽器的擴充功能清單、編輯器的外掛清單、以及帳號授權過的第三方應用。多數瀏覽器 AI 外掛可以把網站權限從「所有網站」改成「點擊時才啟用」，敏感的專案與網域個別停用，開會前則先問過在場的人。組織盤點時，這類工具比員工手動貼上更值得優先處理。
 
+## AI 的存取憑證本身是攻擊目標
+
+前面幾節處理的是你送出去的內容。另一個方向是憑證。API 金鑰與登入後的 session token 已經是犯罪經濟裡的商品。
+
+2026 年 9 月 Anthropic 的濫用偵測報告第 28 到 30 頁寫，被入侵取得的 AI 金鑰、session token 與裝置，已經成為多個犯罪集團的唯一目標。取得憑證的人一次得到三樣東西，被竊的金鑰在既有市場上有轉售價值，攻擊的運算量可以掛在別人的帳單上執行，活動會被歸咎到憑證的合法擁有者[^anthropic2026]。
+
+### 折扣代理商
+
+報告第 28 到 29 頁描述一種管道。行動者架設網站，宣稱自己是串接多家模型的中介服務，提供前沿模型的折扣存取。其中一個案例賣的是便宜的 Claude 存取，報告的原話是那既不便宜也不是 Claude。客戶的流量被靜默轉送到另一個模型，同時代理商的工具在客戶端裝上憑證竊取程式，偷走帳號憑證再轉賣給其他代理商。
+
+這些竊取程式經常冒充熱門的 AI 工具，Claude Code 是報告點名的其中一個。金鑰被識別為外洩而重設之後，裝置上新出現的 session 仍會被竊取程式一併送出。
+
+判斷方式很單純。要求把流量與憑證經由不明中介轉送的折扣，代價是你的資料與系統。AI 存取只透過授權管道購買，客戶端程式只從官方網域下載。
+
+### 金鑰是從哪裡外洩的
+
+報告第 30 頁寫，假代理商手上被竊的存取權，最常見的來源是正當客戶自己不慎暴露的憑證，包含 GitHub、行動應用的安裝檔、Docker 容器、網站與聊天機器人。同一份報告第 12 到 14 頁記錄，有集團建了一條管線，從多個應用商店批次下載 180 萬個 Android 安裝檔，反編譯之後掃硬編碼的金鑰，驗證過的結果即時送進分類好的頻道。
+
+- 定期掃自家的 repo、Docker image 與行動應用安裝檔，確認沒有硬編碼的金鑰
+- 金鑰給最小權限，定期輪替，設用量告警。異常用量通常是最早看得到的訊號
+- 用對待正式環境憑證的態度對待 AI 金鑰
+
+### 自架的代理與沙盒也是攻擊面
+
+報告第 29 頁提到，有行動者入侵 AI 服務自架的 LiteLLM，用 prompt injection 把雲端容器環境裡的正式 API 金鑰抽出來。另一個案例對某家廠商的自動化評測沙盒注入惡意指令，讓沙盒交出它持有的多家供應商正式金鑰。
+
+自己在 AI 周邊建起來的整合，代理、沙盒與自動化流程，都要算進攻擊面。內部工具這個名義不構成放寬憑證管理的理由。
+
 ## 本地模型
 
 在自己的機器上執行模型，內容不離開裝置，是敏感工作的可行選項。取捨很清楚：
@@ -165,7 +193,9 @@ AI 服務的條款與設定介面變動很快，本頁的查證日是 2026 年 8
 - [端對端加密如何運作](../advanced/e2ee.md)：為什麼「有加密」不代表服務端看不到內容
 - [威脅模型如何建立](../basics/threat-model.md)：先判斷對手是誰，再決定要用哪一種 AI 服務
 - [社群平台怎麼收集你的資料](../basics/platform-tracking.md)：同一套「這些資料流向誰」的問法，用在社群平台上
+- [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：使用者資料從第三方模型路由服務外流的實際案例，以及被竊的 API 金鑰在犯罪經濟裡的用途
 
+[^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日，全文 154 頁。本節的頁碼對應該報告的 PDF 全文。站上另有[逐段的整理](../blog/posts/2026-anthropic-threat-report-taiwan.md)。查證日 2026-09。
 [^cn-genai]: [Interim Measures for the Management of Generative Artificial Intelligence Services](https://www.chinalawtranslate.com/en/generative-ai-interim/){target="_blank"} - China Law Translate 的法規英譯。2023 年 8 月 15 日施行，網信辦會同六部門發布，含實名驗證、輸入與輸出紀錄留存、具輿論屬性服務的安全評估與演算法備案。查證日 2026-08。
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} - OpenAI。說明消費者服務與商業服務（ChatGPT Team、Enterprise、API）在訓練使用上的差別，以及資料控制設定的位置。查證日 2026-08。
 [^anthropic]: [Anthropic Privacy Center](https://privacy.anthropic.com/){target="_blank"} - Anthropic。商業服務不使用輸入與輸出訓練模型，消費者服務由使用者選擇。選擇提供後，去識別化內容在訓練管線中最長保留五年。查證日 2026-08。

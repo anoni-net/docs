@@ -24,17 +24,32 @@ iPhone 与 iPad 的安全更新整理。Apple 一次更新动辄上百个 CVE，
 
 ## 你的机器走哪一条线
 
-Apple 同一天常常发好几条更新线，版本号差很多，内容也不一样。以 2026 年 8 月的状况来说：
+Apple 同一天常常发好几条更新线，版本号差很多，内容也不一样。以 2026 年 9 月 14 日 iOS 27 推出之后的状况来说：
 
 | 机型 | 目前的更新线 |
 |---|---|
-| iPhone 11 以后、iPad Air 3 以后、iPad 8 以后 | 26.x |
+| iPhone 11 以后、iPad Pro 12.9 英寸四代以后、iPad Pro 11 英寸二代以后、iPad Air 4 以后、iPad 9 以后、iPad mini 6 以后 | 27.x |
+| iPad Pro 12.9 英寸三代、iPad Pro 11 英寸一代、iPad Air 3、iPad 8、iPad mini 5 | 26.x，硬件升不上 27 |
 | iPhone XS、XS Max、XR、iPad 7 | 18.x |
 | iPad Pro 12.9 英寸二代、iPad Pro 10.5 英寸、iPad 6 | 17.x |
 | iPhone 8、8 Plus、X、iPad 5、iPad Pro 9.7 英寸、iPad Pro 12.9 英寸一代 | 16.x |
 | iPhone 6s、7、SE 一代、iPad Air 2、iPad mini 4、iPod touch 7 | 15.x |
 
+iPhone 11 以后的机型两条线都收得到，26.7 那一版是给暂时不想升上 27 的人。iPad 这一侧的分界比较硬，12.9 英寸三代、11 英寸一代、Air 3、iPad 8 与 mini 5 最高只到 26.x。
+
 越旧的线收到的修补越少也越慢，下面 2026-04-22 那则有具体例子。完全收不到更新的机型代表已知漏洞不再有人修，处理敏感数据的话该考虑换机。
+
+## iOS 27、iPadOS 27（同日另有 26.7）
+
+> 2026-09-14 · [27 公告](https://support.apple.com/en-us/149034){target="_blank"} · [26.7 公告](https://support.apple.com/en-us/149041){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>年度大版本与旧线的安全更新同日发出，27 补 126 个 CVE、26.7 补 82 个。Apple 没有标注任何一项已被实际利用。
+- Kernel 是数量最大的一组，27 占 20 个、26.7 占 18 个。多数是应用造成系统异常终止或内核内存损坏，两条线各有一个让恶意应用取得 root 权限。AVEVideoEncoder 有一个沙箱内的应用可以用内核权限执行任意代码，那是从沙箱一路打进内核的完整路径。
+- 跟踪类的修补这次特别多，对在意身份关联的读者比 CVE 总数更值得看。27 这一侧，App Store、AuthKit 与 CloudKit 各有一个本地应用读得到常驻账号标识符，Photos Storage 与 Sandbox Profiles 各有一个应用可以对用户做指纹识别。26.7 那一侧同一类只有 AuthKit 一个。
+- 两条线共通的有三项：Power Management 一个应用可以对设备做指纹识别，Symptom Framework 一个恶意程序可以判定用户当前的位置，NetworkExtension 一个应用可以查出你装了哪些其他应用，27 另有 Accessibility 的同类问题。装了什么本身就是一组识别特征，安装清单里有特定的通信或工具软件，足以把你缩小到某一群人。
+- 浏览器引擎这一侧，27 有 3 个 WebKit 加 1 个 WebKit Canvas，26.7 各有 1 个，涵盖恶意网页内容泄漏敏感用户信息、非预期的进程终止与 Safari 崩溃。26.7 另有 5 个 ImageIO，数量比 27 那一侧多。
+- 两份清单不是单纯的包含关系。26.7 的 82 个里有 7 个没有出现在 27 的清单，27 多出来的 51 个集中在 CoreUI、Kernel、WebKit、Baseband 与 CloudKit。两条线都收得到的人装哪一个都可以，安全上没有落差。
+- 同日另有 macOS Golden Gate 27、Tahoe 26.7 与 Sequoia 15.8，整理在 [macOS 安全更新](./macos.md)。18.x 线这一轮没有更新，还在那条线的机型最新仍是 8 月 17 日的 18.7.10。
 
 ## iOS 26.6.2、iPadOS 26.6.2
 

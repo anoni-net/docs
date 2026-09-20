@@ -78,9 +78,9 @@ Citizen Lab 对微信的一系列实证研究拆解了其中几个机制，有�
 多数人希望同时做到「传得出去」与「不出事」。在境内平台上，两个目标在四个地方直接冲突：
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/speech-reach-risk.zh-CN.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/speech-reach-risk-v4.zh-CN.svg"
         alt="上半部是四组互相拉扯的组合，左边是你想要的，箭头指向右边的代价。想让普通人愿意相信，代价是匿名账号的可信度低，可信度来自实名、履历与既有关系，而这些正是暴露面。想避开关键词过滤，代价是变形后的表达难懂，只有原本就懂的人看得懂，等于留在同温层。想让内容有说服力，代价是说服力来自具体、可查证的细节，而具体正是最容易指向你的部分。想触及更多人，代价是传播规模越大越接近相关条款的认定门槛，也越可能被列为重点处理对象。下半部是三种取向：要留下记录的人优先把内容存档到境外并把曝光度压到最低，要说服特定的人的人走私下与小范围并放弃公开传播的规模，要扩散的人接受发布者承担较高风险，或把内容交给愿意承担的既有渠道。">
-    <figcaption>四组矛盾都没有两全的解法</figcaption>
+    <figcaption>四组矛盾都没有两全的解法。风险不只落在你身上。群组管理者对群内内容负有管理责任，家人与雇主可能被联系，同一群组的其他成员可能一并受影响。</figcaption>
 </figure>
 
 | 你想要的 | 代价 |
@@ -178,6 +178,7 @@ Citizen Lab 对微信的一系列实证研究拆解了其中几个机制，有�
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：分层的设定与长期维持，以及换账号挡不掉的部分
 - [社群平台怎么收集你的数据](../basics/platform-tracking.md)：平台侧的数据收集与行为讯号
 - [威胁模型如何建立](../basics/threat-model.md)：每次行动前先盘点对手与能承受的代价
+- [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：同一套体系用 AI 产出舆情简报的实例，公开发言被评分、改写，最后进到呈给官员的简报
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} - 美国国会图书馆 Global Legal Monitor，2025 年 7 月。法规英译见 [Measures on the Management of the National Online Identity Authentication Public Service](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"} - China Law Translate。查证日 2026-08。
 [^one-app]: [One App, Two Systems: How WeChat uses one censorship policy in China and another internationally](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"} - The Citizen Lab。关键词过滤只对中国大陆手机号注册的账号启用，且改绑国际号码后仍持续。

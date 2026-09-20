@@ -8,7 +8,14 @@ icon: material/eye-outline
 
 下面列出的是网站在你打开页面的那一刻就拿得到的东西，没有问过你，也不需要你同意。任何一个网站都拿得到同样的东西。
 
-<div id="leaks-tool"></div>
+<div id="leaks-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/leaks.js"></script>
 
@@ -19,6 +26,8 @@ icon: material/eye-outline
 - **离开一段有监控的关系之后**，换了新设备想确认自己现在看起来还像不像原本那个人。打开页面记下最上面那组短码，用旧设备再打开一次比对。短码不同，代表两台设备的指纹对不起来。
 - **参加完数字安全讲座**，讲师提到 Tor Browser 比较安全，但没有说明差别在哪里。用平常的浏览器打开页面记下时区与字体，再用 Tor Browser 打开同一页。时区变成 UTC、字体只剩一组，差别自己看得到。
 - **要向别人说明为什么该在意**，现场开着它比放幻灯片有效。画面上每一个数字，都是从对方自己的设备读出来的。
+
+这份清单跟广告轮廓的关系，见[广告好像知道你在想什么](case-profile.md)。
 
 ## 单看不起眼，加起来就认得出人
 
@@ -145,6 +154,8 @@ clearnet 版可以直接关掉。下面的开关把 `umami.disabled` 写进这�
 <div id="anoni-optout"></div>
 
 看不到开关，多半是因为你正在看 onion 版，该版连分析脚本都不会加载，没有东西需要关掉。
+
+每一页的设置菜单里也有同一颗开关，换设备或换浏览器的时候不必回到这一页。两边按下去是同一个设置。
 
 另外三种方式。把网络关掉再开一次，断网时一个请求都不会有。用 [Tor Browser](../tools/what-is-tor.md) 的 Safest 等级，JavaScript 全关，这一页与分析都不会执行。或者用 onion 版，那一版不加载任何分析。
 

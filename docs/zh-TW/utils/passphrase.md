@@ -8,7 +8,14 @@ offline_assets:
 
 # :material-dice-multiple-outline: 密語與密碼產生器
 
-<div id="passphrase-tool"></div>
+<div id="passphrase-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/passphrase.js"></script>
 
@@ -24,6 +31,8 @@ offline_assets:
 「隨機密碼」模式從你勾選的字元集裡逐字抽。適合用密碼管理器保管、不需要用手打的場合。
 
 兩個模式的亂數都來自 `crypto.getRandomValues`，那是瀏覽器提供的密碼學等級亂數，比網頁常用的 `Math.random` 更難被推算出下一個值。取樣時如果直接拿亂數對 7776 取餘數，詞表最後幾個字會比其他字容易被抽到，所以不能整除的尾巴會丟掉重抽，讓每個字被抽中的機率完全相同。細節與測試見[原始碼](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}。
+
+抽出來的密語接著怎麼用，見[把名單交給外部夥伴](case-roster.md)。
 
 ## 熵那個數字
 

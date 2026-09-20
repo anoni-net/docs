@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 625" width="400" height="625" role="img" aria-labelledby="title">
+<title id="title">四個概念各自遮蔽觀察者能看到的哪一部分</title>
+<style>
+  text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .chip { font-size: 13px; }
+  .card-c1, .card-n, .card-no, .card-ok { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; }
+  .card-ok { fill: #e8f5e9; stroke: #4caf50; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-ok { fill: #17301a; stroke: #4caf50; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="24">觀察者看得到什麼</text>
+<text class="t-mute bd" x="26" y="41">你是誰，連得到真實身分嗎</text>
+<text class="t-mute bd" x="26" y="58">你的行為，多次行為能被串起來嗎</text>
+<text class="t-mute bd" x="26" y="75">你說什麼，讀得到訊息內容嗎</text>
+<rect class="card-c1" x="12" y="103" width="376" height="120" rx="8"/>
+<text class="t-mute lab" x="26" y="127">Anonymity</text>
+<text class="t-main h2" x="26" y="147">匿名</text>
+<rect class="card-ok" x="26" y="157" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="174" text-anchor="middle">你是誰 看不到</text>
+<rect class="card-ok" x="204" y="157" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="174" text-anchor="middle">你的行為 看不到</text>
+<rect class="card-n" x="26" y="185" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="202" text-anchor="middle">你說什麼 不涉及</text>
+<rect class="card-c1" x="12" y="233" width="376" height="120" rx="8"/>
+<text class="t-mute lab" x="26" y="257">Pseudonymity</text>
+<text class="t-main h2" x="26" y="277">假名</text>
+<rect class="card-ok" x="26" y="287" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="304" text-anchor="middle">你是誰 看不到</text>
+<rect class="card-no" x="204" y="287" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="304" text-anchor="middle">你的行為 看得到</text>
+<rect class="card-n" x="26" y="315" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="332" text-anchor="middle">你說什麼 不涉及</text>
+<rect class="card-c1" x="12" y="363" width="376" height="120" rx="8"/>
+<text class="t-mute lab" x="26" y="387">Confidentiality</text>
+<text class="t-main h2" x="26" y="407">機密性</text>
+<rect class="card-no" x="26" y="417" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="434" text-anchor="middle">你是誰 看得到</text>
+<rect class="card-no" x="204" y="417" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="434" text-anchor="middle">你的行為 看得到</text>
+<rect class="card-ok" x="26" y="445" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="462" text-anchor="middle">你說什麼 看不到</text>
+<rect class="card-c1" x="12" y="493" width="376" height="120" rx="8"/>
+<text class="t-mute lab" x="26" y="517">Privacy</text>
+<text class="t-main h2" x="26" y="537">隱私</text>
+<rect class="card-c1" x="26" y="547" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="564" text-anchor="middle">你是誰 你決定</text>
+<rect class="card-c1" x="204" y="547" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="289" y="564" text-anchor="middle">你的行為 你決定</text>
+<rect class="card-c1" x="26" y="575" width="170" height="24" rx="12"/>
+<text class="t-main chip" x="111" y="592" text-anchor="middle">你說什麼 你決定</text>
+</svg>

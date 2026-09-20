@@ -6,7 +6,14 @@ icon: material/format-letter-matches
 
 # :material-format-letter-matches: Invisible character detector
 
-<div id="invisible-tool"></div>
+<div id="invisible-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/invisible.js"></script>
 
@@ -25,6 +32,8 @@ Scan a document before forwarding it.
 ### Direction overrides in source code
 
 A right-to-left override in source code makes what a human sees in the editor differ from what the compiler reads. A comment appears to enclose a block of code while doing nothing of the sort. The technique has a name: Trojan Source.
+
+For how this joins up with the QR code reader and the URL cleaner, see [a link forwarded into a group chat](case-link.md). For the document leak tracking use, see [a file from a source](case-source-file.md).
 
 ## Situations where this actually comes up
 

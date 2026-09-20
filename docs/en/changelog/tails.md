@@ -20,6 +20,19 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.13
+
+> 2026-09-16 · [Upstream announcement](https://tails.net/news/version_7.13/){target="_blank"} · [Known vulnerabilities in 7.12](https://tails.net/security/known_security_vulnerabilities_in_7.12/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>Regular scheduled release carrying Tor Browser and tor security updates. Tails also published a known-vulnerabilities notice for 7.12 asking everyone to upgrade as soon as possible. Upstream does not mention any being exploited.
+- Tor Browser moves from 15.0.21 to 15.0.23, picking up the 15.0.22 changes along the way. 15.0.23 fixes two security-level bypasses that let a browser set to Safer still run WebAssembly, and backports security fixes from Firefox 156; details in the [Tor changelog](./tor.md).
+- The tor client moves to 0.4.9.12, a security release covering seven TROVE identifiers, each one covered in the [tor daemon changelog](./tor-daemon.md).
+- The known-vulnerabilities notice lists nothing itself, pointing only to the Tor Browser release notes and to Debian security advisories published since 7.12. Checking the 7.13 package list against Debian advisories issued after 3 September turns up four fixes that made it in. libevent (DSA-6493-1) carries 8 CVEs: out-of-bounds access in its DNS, RPC and bufferevent code plus a use-after-free in evbuffer, potentially allowing arbitrary code execution. tor itself links against this library.
+- The H.265 decoder in libde265 (DSA-6486-1) and the Opus decoder in GStreamer (DSA-6489-1) could potentially execute arbitrary code when processing a malformed video or audio file. jbig2dec (DSA-6488-1), which decodes the JBIG2 images common in PDFs, had an input-validation flaw leading to denial of service.
+- The kernel is 6.12.107, matching Debian's latest kernel security advisory, DSA-6477-1. We could not determine which kernel 7.12 shipped, so the kernel is not counted as a change in 7.13.
+- Shutting down is simpler. Since 7.10 you had to confirm in a Power Off dialog; Tails now shuts down straight away when no application needs closing and no document needs saving.
+- Automatic upgrades are available from Tails 7.0 or later. Fresh installations will erase existing Persistent Storage.
+
 ## Tails 7.12
 
 > 2026-09-03 · [Upstream announcement](https://tails.net/news/version_7.12/){target="_blank"}

@@ -47,8 +47,11 @@ const harness = `
   ${grab(/^  const OPT_OUT_STRINGS = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  function readOptOut\(storage\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function writeOptOut\(storage, disabled\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function renderOptOutViews\(views, off, t\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  const OPT_OUT_HOSTS = .*$/m)}
   return { queryBucket, rankBucket, normalizeLang, depthReached, worthMeasuring,
-           OPT_OUT_KEY, OPT_OUT_STRINGS, readOptOut, writeOptOut };
+           OPT_OUT_KEY, OPT_OUT_STRINGS, OPT_OUT_HOSTS, readOptOut, writeOptOut,
+           renderOptOutViews };
 `;
 const M = new Function(harness)();
 
@@ -176,6 +179,51 @@ await check('退出開關三個語系都有，沒有漏翻譯', () => {
       assert.notEqual(M.OPT_OUT_STRINGS[lang][k], M.OPT_OUT_STRINGS['zh-TW'][k],
         `${lang}.${k} 跟 zh-TW 一模一樣，多半是忘了翻`);
     }
+  }
+});
+
+await check('一頁上的每一顆開關都會跟著換文字', () => {
+  // 設定抽屜一顆、揭露頁一顆，兩顆同時在畫面上。只重畫被按的那一顆的話，另一顆
+  // 會停在舊文字，讀者看到「分析已關閉」旁邊寫著「關掉分析」，不知道自己在哪個狀態。
+  const t = M.OPT_OUT_STRINGS['zh-TW'];
+  const view = () => ({
+    host: { attrs: {}, setAttribute(k, v) { this.attrs[k] = v; } },
+    status: { textContent: '' },
+    button: { textContent: '' },
+  });
+  const views = [view(), view()];
+
+  M.renderOptOutViews(views, true, t);
+  for (const v of views) {
+    assert.equal(v.status.textContent, t.on);
+    assert.equal(v.button.textContent, t.turnOn);
+    assert.equal(v.host.attrs['data-state'], 'off');
+  }
+
+  M.renderOptOutViews(views, false, t);
+  for (const v of views) {
+    assert.equal(v.status.textContent, t.off);
+    assert.equal(v.button.textContent, t.turnOff);
+    assert.equal(v.host.attrs['data-state'], 'on');
+  }
+});
+
+await check('開關的掛載點三個地方對得上', () => {
+  // 選取器、設定抽屜的掛載點與揭露頁的掛載點分散在三個檔案，任何一邊改了名字，
+  // 開關就從那個位置消失，而建置與其他測試全都是綠的。
+  assert.match(M.OPT_OUT_HOSTS, /#anoni-optout/, '揭露頁那顆用的是 id');
+  assert.match(M.OPT_OUT_HOSTS, /\[data-anoni-optout\]/, '抽屜那顆用的是屬性');
+
+  const header = fs.readFileSync(
+    path.join(HERE, '..', 'docs', 'overrides', 'partials', 'header.html'), 'utf8');
+  assert.match(header, /data-anoni-optout="drawer"/, '設定抽屜裡的掛載點不見了');
+  assert.ok(!/anoni-settings__group[^>]*>\s*\{\{\s*config\.extra\.settings_analytics/.test(header),
+    '群組標題要由 JS 建，靜態標題在 onion 版與 Safest 下會變成空群組');
+
+  for (const lang of LOCALES) {
+    const leaks = fs.readFileSync(
+      path.join(HERE, '..', 'docs', lang, 'utils', 'leaks.md'), 'utf8');
+    assert.match(leaks, /id="anoni-optout"/, `${lang} 的揭露頁少了掛載點`);
   }
 });
 

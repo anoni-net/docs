@@ -77,7 +77,14 @@ offline_assets:
 }
 </script>
 
-<div id="threatmodel-tool"></div>
+<div id="threatmodel-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 <script src="../../js/vault.js"></script>
 <script src="../../js/threatmodel.js"></script>
 
@@ -91,6 +98,8 @@ offline_assets:
 [威胁模型如何建立](../basics/threat-model.md)把三题写完之后，给了一段操作流程：拿一张纸或开个协作文档，依序回答。这份清单就是那张纸的网页版。
 
 三题的分级跟原文完全一样，资产四类、对手六级、成本三级（从随手翻看的人一路到国家级情报单位）。答完会产出一份可以复制的纯文字摘要，并列出建议先读的页面。
+
+带另一个人走一遍这三题长什么样，见[带新同事做一次设备盘点](case-onboarding.md)。
 
 ## 真正有用的是错配清单
 

@@ -6,7 +6,14 @@ icon: material/qrcode-scan
 
 # :material-qrcode-scan: QR code 讀取器
 
-<div id="qrread-tool"></div>
+<div id="qrread-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../vendor/jsQR.js"></script>
 <script src="../../js/qrread.js"></script>
@@ -19,6 +26,8 @@ icon: material/qrcode-scan
 
 - **停車繳費機上貼著一張 QR code**，看起來跟原本的繳費碼沒兩樣。掃之前先確認裡面是不是真的付款頁面，主機名跟官方網域對不上，就知道那張貼紙有問題。假的付款頁通常會直接要你輸入卡號，那筆錢就進了別人的帳戶。
 - **剛認識的人遞來印著 QR code 的名片**，說掃這個加我。先看一眼裡面到底是聯絡方式還是別的東西，確認過再自己決定要不要加。
+
+解出來之後接著要查什麼，[群組轉來的連結](case-link.md)把三個工具的順序走完一遍。
 
 ## 不會幫你開啟連結
 
@@ -67,7 +76,7 @@ QR code 裡放得進的不只網址。掃到之後直接動作的 App 不會先�
 
 ## 用 Tor Browser 掃可疑的碼
 
-[Tor Browser 的安全等級](../tools/tor-browser-advanced.md)調到 Safest 會關掉 JavaScript，掃碼功能就會停擺，而收到來路不明的 QR code 正是那篇文章建議把等級調高的場合。
+[Tor Browser 的安全等級](../tools/tor-browser-advanced.md)調到 Safest 會關掉 JavaScript，掃碼功能就會停擺，而收到來路不明的 QR code 正是那篇文章裡要把等級調高的場合。
 
 先把圖片存下來，切回 Standard 再讀，讀完調回去。解碼不連外，圖片全程留在裝置上。
 

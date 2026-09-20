@@ -18,7 +18,7 @@
 | `android.md` | Android 安全公告 | `source.android.com/docs/security/bulletin/2026/2026-08-01` |
 | `grapheneos.md` | GrapheneOS 發布 | `grapheneos.org/releases.atom` |
 
-## 七個會踩的坑
+## 八個會踩的坑
 
 ### MSRC 的嚴重度是每個受影響產品各記一筆
 
@@ -27,6 +27,14 @@
 ### MSRC 的項目總數涵蓋微軟整個產品線
 
 2026 年 8 月的 1506 個 CVE 裡，Windows 本體只有 248 個，Azure Linux（Mariner）佔 698 個，Edge/Chromium 佔 362 個。寫「單月上千個漏洞」會誤導，要分層說明。
+
+### Apple 同一輪的多條維護線，元件同名不代表修的是同一項
+
+Apple 一天發三到五份公告時，各條線的公告會出現大量同名元件，用元件名稱比對歸屬會寫錯。2026 年 9 月 14 日那一輪，Accessibility 在 iOS 27、iOS 26.7 與三份 macOS 公告裡都有，但「app 可以查出使用者裝了哪些其他 app」只出現在 iOS 27。App Store 的常駐帳號識別碼問題在 macOS Golden Gate 27 與 Tahoe 26.7 有，Sequoia 15.8 沒有。歸屬要逐條看 `Impact:` 那一行，不要停在元件名稱。
+
+同一輪各版本的 CVE 集合也不是包含關係。那一輪 iOS 26.7 有 7 個 CVE 沒有出現在 iOS 27 的清單裡，Sequoia 15.8 有 11 個沒有出現在 Golden Gate 27 的清單裡。寫成「舊線是新線的子集」會是錯的，兩邊都要各自算。
+
+利用狀態同樣逐份確認，掃公告全文的 `exploited` 這個字。那一輪五份公告都沒有出現，才寫得出「Apple 沒有標注任何一項已被實際利用」。
 
 ### GrapheneOS 的「List of additional fixed CVEs」不是當月修補
 

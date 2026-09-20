@@ -19,6 +19,14 @@ Of the three works, the globe pulls in the most data. It puts public datasets sc
 
 <a href="../../games/tor-network/play/index.html?lang=en" class="md-button md-button--primary">:octicons-arrow-right-24: Explore</a>
 
+## Not sure where to start, take the tour
+
+Click "Start the tour" in the left panel, or open <a href="../../games/tor-network/play/index.html?lang=en#tour">the URL with <code>#tour</code></a>. The globe walks through seven stops in order: the global spread of relays, the gap between relay count and consensus weight, where connections run into trouble, estimated users, where Taiwan sits, the physical layers underneath it, and further reading at the end. Space advances a stop, the arrow keys move back and forth, Esc leaves.
+
+This is built for workshops and classrooms. The work and its data sit in the automatic offline list, so once the page has been opened to store it, it runs with no network at all. You can drag the globe at any point during the tour, and the next stop brings the camera back to where the script wants it.
+
+When a dataset fails to load, the stop that needs it is dropped and the count adjusts.
+
 ## What is on the sphere
 
 Each relay is one dot placed inside its own country's border, coloured by its four possible roles (guard, middle, exit, and guard plus exit) and sized by bandwidth. Landmass brightness carries a separate metric, relay count by default.
@@ -64,7 +72,7 @@ Internet shutdowns from `2009` to `2025`, compiled and verified case by case, co
 
 ### Submarine cables and base geography (OpenStreetMap ODbL, Natural Earth public domain)
 
-The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth.
+The finer lines over water are submarine cables, taken from the two hundred-odd routes mapped by OpenStreetMap contributors, with the best coverage across Europe, the Mediterranean and the Atlantic. The faintest layer sketches the major transoceanic corridors, drawn as great-circle arcs between publicly documented landing points, so only the general direction is reliable and actual routing should be checked against a dedicated cable map. Borders and coastlines come from Natural Earth at the 10m scale. The East Asia zone covers the southeastern Chinese seaboard, Taiwan, Japan, Korea, the Philippines, mainland Southeast Asia, the Malay Peninsula and Sumatra. Coastlines there are simplified to about 220 m, or 2.3 km between adjacent points, and borders to about 330 m, or 2.8 km. Both layers have to sit at the same order of magnitude — let one get much coarser and you end up with a smooth coastline running alongside a staircase of a border. The rest of Asia and the rest of the world are progressively coarser, because most readers here are in East Asia. In Europe and the Americas the spacing runs to tens of kilometres, so islands come out as a few points joined by straight lines, which reads as a row of blocks once you zoom in. Land fill takes a different route: it is painted into a texture and wrapped onto the sphere. The global texture is 2048x1024, one pixel at the equator covering 19.6 km, which leaves Hong Kong with 3 pixels, a smear whose edge misses the coastline by a dozen kilometres. East Asia gets a second texture, 2048 square, at 2.8 km per pixel, and Hong Kong becomes 147 pixels. Macau, at 33 square kilometres, is still only 4 pixels there, so its shape has to be read off the vector border line.
 
 ### Internet usage rate (World Bank CC BY 4.0, Ministry of Digital Affairs)
 

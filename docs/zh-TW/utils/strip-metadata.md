@@ -10,7 +10,14 @@ offline_assets:
 
 # :material-image-off-outline: 檔案 metadata 清除器
 
-<div id="stripmeta-tool"></div>
+<div id="stripmeta-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/stripmeta.js"></script>
 
@@ -27,6 +34,8 @@ offline_assets:
 - **要寄出陳情書、檢舉信或履歷的 Word 檔或 PDF**：作者欄位常留著你電腦裡的帳號名稱，製作軟體那一欄會寫出作業系統與版本，Word 檔還記著公司名稱、範本檔名與總編輯時間。內文改過名字，欄位裡的舊資料還在。
 
 拿掉 metadata 只處理檔案裡看不到的欄位。畫面中的門牌、路標、制服、窗外景色都在影像本身，清完照樣看得見，分享之前要自己看過一遍。畫面裡的東西要蓋掉，用[截圖遮蔽](redact.md)。
+
+跟截圖遮蔽什麼時候該用哪一個，[在二手平台賣東西](case-secondhand.md)用十四張待上架的照片說明。收到別人給的檔案要先看清楚裡面帶著什麼，見[收到來源給的檔案](case-source-file.md)。
 
 ## 支援哪些檔案
 

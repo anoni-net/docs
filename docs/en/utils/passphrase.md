@@ -8,13 +8,20 @@ offline_assets:
 
 # :material-dice-multiple-outline: Passphrase and password generator
 
-<div id="passphrase-tool"></div>
+<div id="passphrase-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/passphrase.js"></script>
 
 Two situations where this comes up:
 
-- **You just set up a password manager and need a master password**: That one password is the door to every other one. Typing something off the top of your head is common, and nobody can tell whether it is strong enough. Draw six words and the page tells you the entropy outright.
+- **You just set up a password manager and need a master password**: That one password is the door to every other one. Typing something off the top of your head is common, and nobody can tell whether it is strong enough. Draw six words and the entropy is shown outright.
 - **You suspect the computer in front of you has been tampered with**: Switch to physical dice mode, where the randomness comes from your hands rather than from the machine.
 
 ## What this does
@@ -24,6 +31,8 @@ Passphrase mode draws words independently from the 7776-word [asian-diceware](..
 Password mode draws characters one at a time from the sets you tick. It suits anything you keep in a password manager and never type by hand.
 
 Both modes draw from `crypto.getRandomValues`, the browser's cryptographic random source, which is not the same thing as `Math.random`. Sampling discards the values in the remainder that cannot divide evenly and draws again, so every word has exactly the same chance. The details and the tests are in the [source](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}.
+
+For what happens to the passphrase next, see [handing a list to an outside partner](case-roster.md).
 
 ## About that entropy number
 

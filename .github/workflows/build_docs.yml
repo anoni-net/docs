@@ -211,6 +211,18 @@ jobs:
         if: matrix.variant == 'standard'
         run: node ../tools/check_precache.mjs
 
+      # 對外的網址與錨點有沒有被這次改動拿掉。移除就擋，新增放行，判準寫在那支的檔頭。
+      #
+      # 同一關在 PR 上也有一份（url-contract.yml），那裡才是主要的攔截點，作者還在
+      # 手上的時候就看得到。留這一份是因為推 docs 分支不一定經過 PR，
+      # workflow_dispatch 更是完全繞過。這一關紅燈只是這次不發布，站上維持上一版。
+      #
+      # 只在 clearnet 那格跑。合約記的是相對於站台根目錄的路徑，onion 那格建置前會
+      # 就地改寫網域，驗同一份路徑結構沒有額外的意義。
+      - name: Verify URL contract
+        if: matrix.variant == 'standard'
+        run: python3 ../tools/check_url_contract.py
+
       - name: Replace OG images
         timeout-minutes: 10
         run: |

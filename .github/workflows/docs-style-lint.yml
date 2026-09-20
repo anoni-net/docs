@@ -12,6 +12,9 @@
 # blog frontmatter）讓 linter 回 exit 1，job 就紅。warn 級規則仍只標 annotation，
 # 不影響 exit code，改法要看語境，機器不宜代勞。
 #
+# 有一組規則百科明文豁免既有內容（目前是 title-colon），這一支傳 --changed-since
+# 讓它們只在 PR 動過的行上報，見下方掃描那一步的註解。
+#
 # 要讓 warn 也擋，得先把對應規則升成 error，那是規則本身的決定，不是這裡改。
 # 另需在 repo 設定把這個 check 設為 branch protection 必過，workflow 擋不到那一層。
 name: docs-style-lint
@@ -32,6 +35,11 @@ on:
       # 涵蓋得到「改的是目標文章、沒碰 start/」這種 PR。
       - "tools/check_start_parity.py"
       - "tools/test_check_start_parity.py"
+      # 自動存進讀者裝置的那批清單。掛在這支的理由跟 start 對齊同一個：新增文章的
+      # PR 只會碰 docs/<lang>/**/*.md，tools-tests.yml 的 paths 涵蓋不到，而漏收
+      # 一篇的症狀是斷網的讀者打不開，線上與 CI 一路正常。
+      - "tools/check_core_pages.py"
+      - "tools/test_check_core_pages.py"
       - ".github/workflows/docs-style-lint.yml"
 
 permissions:
@@ -67,6 +75,14 @@ jobs:
       - name: start 三語系對齊
         run: python3 tools/check_start_parity.py
 
+      - name: 測試自動存清單的檢查
+        run: python3 tools/test_check_core_pages.py
+
+      # 概念、工具、進階、在地那幾區的註解寫著「全部」，少一頁就是漏掉。新增文章
+      # 沒有決定要不要收，斷網的讀者會發現那一篇打不開，而那時候補存已經來不及。
+      - name: 自動存清單沒有漂移
+        run: python3 tools/check_core_pages.py
+
       - name: 掃描變更的 Markdown 與 UI 字串
         run: |
           base="${{ github.event.pull_request.base.sha }}"
@@ -78,4 +94,11 @@ jobs:
           fi
           echo "掃描 ${#files[@]} 個變更檔："
           printf '  %s\n' "${files[@]}"
-          python3 tools/docs_style_lint.py --format github "${files[@]}"
+          # --changed-since 讓「既有內容豁免」那一組規則（目前只有 title-colon）
+          # 只在這個 PR 真的動過的行上報。貢獻者百科的「標題句構」一節寫著
+          # 「既有文章不必回頭改寫，新文章與大幅改版時套用」，沒有這個旗標的話，
+          # 改一行 img src 就會帶出整篇舊標題的 annotation，跟作者的改動無關。
+          #
+          # 實際踩過：PR #560 只改了示意圖的引用，卻浮出 7 條別人寫的舊標題，
+          # 而同一批 annotation 裡真正該修的兩條 colloquial-jiang 被淹掉。
+          python3 tools/docs_style_lint.py --format github --changed-since "$base" "${files[@]}"

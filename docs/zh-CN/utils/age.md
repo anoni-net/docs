@@ -79,7 +79,14 @@ offline_assets:
 }
 </script>
 
-<div id="age-tool"></div>
+<div id="age-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
@@ -98,6 +105,8 @@ age -d -o backup.tar backup.tar.age
 ```
 
 age 是什么、格式长什么样、跟 PGP 差在哪，见[什么是 age](../tools/what-is-age.md)。
+
+整条路径走完长什么样，见[把名单交给外部伙伴](case-roster.md)与[收到来源给的文件](case-source-file.md)。
 
 ## 跨设备，贴进你的密码管理器
 

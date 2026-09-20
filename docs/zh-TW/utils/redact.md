@@ -13,7 +13,14 @@ offline_assets:
 
 # :material-selection-remove: 截圖遮蔽
 
-<div id="redact-tool"></div>
+<div id="redact-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/redact.js"></script>
 
@@ -24,6 +31,8 @@ offline_assets:
 - **群組對話的截圖要交給律師或平台檢舉**：對方的訊息要留著，同一個畫面裡其他成員的名字與頭像不該一起送出去。
 - **把騷擾訊息公開求助**：貼出來之前遮掉自己的電話號碼、對方朋友的名字，還有頂端狀態列上的電信商與時間。
 - **現場照片要投稿**：背景裡的門牌、車牌、旁觀者的臉，拿掉 metadata 之後仍然在畫面裡，要另外遮。
+
+跟 metadata 清除器什麼時候該用哪一個，[在二手平台賣東西](case-secondhand.md)用十四張待上架的照片說明。送件附件的完整整理流程，見[把對話截圖整理成送件附件](case-evidence.md)。
 
 ## 怎麼用
 

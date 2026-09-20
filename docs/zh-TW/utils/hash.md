@@ -6,7 +6,14 @@ icon: material/file-compare
 
 # :material-file-compare: 檔案雜湊比對
 
-<div id="hash-tool"></div>
+<div id="hash-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/hash.js"></script>
 
@@ -20,6 +27,8 @@ icon: material/file-compare
 - **兩台裝置之間搬完東西**。用 [QR code 影格串流](qr-stream.md)或別的方式搬完，比一次確認拼回來的內容完整
 
 斷網的時候這件事更重要，見[網路中斷時的準備與應對](../scenarios/shutdown.md)。實體遞送在那種情況下是主要的管道，而收件的人沒有第二次機會回頭要一份。
+
+這一步在實際流程裡的位置，見[把名單交給外部夥伴](case-roster.md)與[工作坊現場要發東西給大家](case-workshop.md)。
 
 ## 相符代表什麼
 

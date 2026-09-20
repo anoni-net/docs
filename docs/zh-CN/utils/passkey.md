@@ -77,7 +77,14 @@ offline_assets:
 }
 </script>
 
-<div id="passkey-tool"></div>
+<div id="passkey-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 <script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
 
@@ -86,6 +93,8 @@ offline_assets:
 1. 按「创建 passkey」，浏览器会问你要存到哪里。存到会同步的地方（iCloud 钥匙串、Google 密码管理器、Bitwarden、1Password），其他设备才能用同一把。创建前先确认要存的那个账号没有跟你要防的人共用，共用的 iCloud 或 Google 账号会把这把 passkey 同步到对方的设备上，见[家暴受害者的数位准备](../scenarios/domestic-violence.md)。iPhone 没有另外装密码管理器的话，「iCloud 钥匙串」就是手机平常替你记密码的那个功能，选它就好。Android 的 Chrome 会列出手机上启用的密码管理器，选单里没有你要的 Bitwarden 这类 app，先到系统设置的「密码与账号」把它开起来再回来创建。Windows 上的浏览器会先提议存在这台电脑（Windows Hello），只用这台电脑的话维持默认就好，要同步就改选你的密码管理器或 Google 账号那一项。窗口由系统显示，语言跟系统一样，最后会要你输入登录用的 PIN、指纹或脸。创建好之后画面会列出它能做哪些事，你的密码管理器里也会多一笔名字叫 anoni.net 的项目，翻得到密码管理器的人看得到这个名字，「站上什么都不存」说的是服务器那一端。
 2. 要用清单那类工具，到这里就好。打开[我的准备清单](checklist.md)按「用我已有的钥匙开」。
 3. 要用本机文件加密，先按「试解锁」确认这个环境算得出密钥，再按「生成备援密钥」，把私钥存进密码管理器、放在跟密文不同的地方。做完到[本机文件加密](age.md)选「passkey」模式。
+
+这把钥匙在实际流程里的位置，见[带新同事做一次设备盘点](case-onboarding.md)。
 
 ## 这把钥匙能做什么
 

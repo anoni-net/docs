@@ -6,13 +6,13 @@ icon: material/microsoft-windows
 
 # :material-microsoft-windows: Windows 安全更新
 
-Windows 每月更新的整理。微軟固定在每月第二個星期二發布（社群慣稱 Patch Tuesday），單月的 CVE 數以千計，2026 年 8 月那一輪有 1506 個。
+Windows 每月更新的整理。微軟固定在每月第二個星期二發布（社群慣稱 Patch Tuesday），單月的 CVE 數以千計，2026 年 8 月那一輪寫稿時就有 1506 個。
 
-那個數字涵蓋微軟整個產品線，跟桌面 Windows 直接相關的只是其中一小部分。8 月的 1506 個裡，Windows 本體佔 248 個，Azure Linux（Mariner，用在雲端與容器）佔 698 個，從 Chromium 轉載的 Edge 漏洞佔 362 個，其餘是別的微軟產品。看到「單月上千個漏洞」的說法時，要先知道這件事。比例每個月都不一樣，2026 年 9 月就反過來，1206 個裡有 726 個落在 Windows 本體上。
+那個數字涵蓋微軟整個產品線，跟桌面 Windows 直接相關的只是其中一小部分。8 月的 1506 個裡，Windows 本體佔 248 個，Azure Linux（Mariner，用在雲端與容器）佔 698 個，從 Chromium 轉載的 Edge 漏洞佔 362 個，其餘是別的微軟產品。看到「單月上千個漏洞」的說法時，要先知道這件事。比例每個月都不一樣，2026 年 9 月就反過來，截至 9 月 17 日的 1713 個裡有 729 個落在 Windows 本體上。
 
 這一頁只回答三個問題：這個月有沒有正在被實際利用的漏洞、那些漏洞影響桌面還是伺服器、需不需要馬上更新。新版本永遠在最上面。
 
-原始資料來自微軟的 [MSRC 安全更新指南](https://msrc.microsoft.com/update-guide){target="_blank"}，數字是從它的 CVRF 資料整理的。微軟會在發布之後持續修訂當月文件、補進新的 CVE，所以每一則的數字是寫稿當下的快照，事後重數會有出入。
+原始資料來自微軟的 [MSRC 安全更新指南](https://msrc.microsoft.com/update-guide){target="_blank"}，數字是從它的 CVRF 資料整理的。微軟會在發布之後持續修訂當月文件、補進新的 CVE，所以每一則的數字是寫稿當下的快照，事後重數會有出入。9 月那一輪的差距特別大，9 月 11 日寫稿時是 1206 個，六天後重數已經是 1713 個，那一則因此改成附上查核日期的數字。
 
 ## 急迫程度怎麼判斷
 
@@ -36,11 +36,12 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 
 > 2026-09-08 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>1206 個 CVE（Windows 本體 726 個），119 個被評為 Critical，兩個標為已被實際利用，兩個都打得到桌面版。
+- <span class="urg-tag urg-tag--now">立刻</span>截至 9 月 17 日有 1713 個 CVE（Windows 本體 729 個），137 個被評為 Critical，兩個標為已被實際利用，兩個都打得到桌面版。
+- 9 月 11 日初次整理時是 1206 個、Critical 119 個。六天內微軟補進 507 個，Windows 本體只多了 3 個，增加的幾乎都落在其他產品線。已被利用的仍是下面兩個，影響範圍與 CVSS 分數也沒有變。
 - CVE-2026-81963：Windows Update Stack 提權，影響 Windows 11 的 23H2、24H2、25H2、26H1 與 Windows Server 2025。微軟在資料裡標的是已偵測到利用行為。
 - CVE-2026-85880：Windows ALPC（進階本機程序呼叫，系統元件之間互相呼叫的機制）提權，影響 Windows 10 的 1607、1809、21H2、22H2 與 Windows Server 2012 以後。
 - 兩個合起來，從 Windows 10 1607 到 Windows 11 26H1 的桌面版都在範圍內。兩個都是提權，CVSS 都是 7.8，都需要先在機器上取得執行機會，配合瀏覽器或文件的漏洞就構成完整的接管。
-- Windows 本體的 726 個是這半年最高的一次，8 月只有 248 個。數量集中在少數元件上：Windows Biometric Service 64 個、DHCP Server 36 個、NTFS 29 個、Win32k 19 個。
+- Windows 本體的 729 個是這半年最高的一次，同樣以 9 月 17 日的資料重數，8 月是 253 個、7 月是 439 個。數量集中在少數元件上：Windows Biometric Service 64 個、DHCP Server 36 個、NTFS 29 個、Win32k 23 個。
 - 對用 Tor Browser 的人來說，這個月兩個被利用的都是提權，正是本頁開頭提到的那個情境：作業系統被取得權限之後，上面執行的匿名工具保護不了你。
 
 ## 2026 年 8 月

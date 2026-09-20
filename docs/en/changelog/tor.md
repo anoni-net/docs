@@ -15,6 +15,17 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 15.0.23
+
+> 2026-09-15 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15023/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>Both headline fixes land on the security level itself: a browser set to Safer could still run WebAssembly. If you rely on the security slider to keep scripts and WebAssembly out, update first.
+- One came in through SharedWorker identity matching (tor-browser#45296), the other through a missing `setHTMLUnsafe` hook that left behind a permanently WebAssembly-capable child realm (tor-browser#45297). Safer is supposed to switch WebAssembly off, and these two let that switch be bypassed.
+- Upstream marks both with `(H1)`. The same marker appeared on the "script execution in Safest mode via data URI navigation" fix in 15.0.4 — both times the security level itself was what got bypassed.
+- The Firefox base moves to 140.16.0esr with security fixes backported from Firefox 156 (tor-browser#45299, tor-browser#45303), and Android GeckoView follows. NoScript updates to 13.6.33.1984.
+- Windows users have a signing problem to know about. The DigiCert EV certificate used to sign the installers expired on 1 September and has not been reissued yet, so fresh installs of 15.0.21 and 15.0.22 raise a bad signature warning. The download page therefore still lists 15.0.20 for Windows and relies on automatic updates to carry people forward; those are signed with a different key and are unaffected. To install the new version directly, take it from the [distribution directory](https://dist.torproject.org/torbrowser/15.0.23/){target="_blank"} and expect an expired-certificate warning along the way.
+- The 32-bit Linux notice switched to the expired-version message again, with the tracking item calling this the final 15.0 release (tor-browser#44996). The 15.0.21 entry cited that same item, 15.0.22 and 15.0.23 shipped anyway, and which build actually ends the line will only be settled once 16.0 stable takes over.
+
 ## Tor Browser 15.0.22
 
 > 2026-09-09 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15022/){target="_blank"}

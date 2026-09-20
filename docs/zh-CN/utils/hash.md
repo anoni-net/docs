@@ -6,7 +6,14 @@ icon: material/file-compare
 
 # :material-file-compare: 文件哈希比对
 
-<div id="hash-tool"></div>
+<div id="hash-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/hash.js"></script>
 
@@ -20,6 +27,8 @@ icon: material/file-compare
 - **两台设备之间搬完东西**。用 [QR code 影格串流](qr-stream.md)或别的方式搬完，比一次确认拼回来的内容完整
 
 断网的时候这件事更重要，见[网络中断时的准备与应对](../scenarios/shutdown.md)。实体递送在那种情况下是主要的渠道，而收件的人没有第二次机会回头要一份。
+
+这一步在实际流程里的位置，见[把名单交给外部伙伴](case-roster.md)与[工作坊现场要发东西给大家](case-workshop.md)。
 
 ## 相符代表什么
 

@@ -18,6 +18,13 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## WebTunnel 0.0.7
+
+> 2026-09-15 · [Project page](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}
+
+- Only affects people running their own WebTunnel bridge; ordinary users are unaffected. There are just three commits since 0.0.6, all in packaging and builds: adjustments to the deb build and upload flow, and arm64 support in the container image, so bridge operators on arm64 hosts can now pull the image directly.
+- No security fixes in this release, and no change to how traffic disguises itself. WebTunnel does not maintain a separate changelog, so entries here are assembled from version tags and commit messages and carry less detail than Snowflake or lyrebird.
+
 ## WebTunnel 0.0.6
 
 > 2026-07-23 · [Project page](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}

@@ -46,9 +46,9 @@ Technique does not protect a source who is identifiable from the story itself, s
 Two things are worth separating explicitly. A source decides how their words are used; the newsroom decides whether the story runs. When a source asks you to spike the piece, what usually helps is addressing the specific fear (will they be identifiable, when does it publish, who else is talking) rather than debating the story. Do not promise what you cannot deliver: "no one will know it was you" is rarely true, and promising it costs you the source's trust at the worst moment. Promise the things you control instead. If a source withdraws before publication, re-source or drop the material; if they withdraw after, be honest that published material is not retractable, which is a reason to have said so at the start. A source whose anxiety far exceeds your read of their situation often knows something you don't — ask.
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/source-attribution-levels.en.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/source-attribution-levels-v4.en.svg"
         alt="Four stacked bands running from dark to light, representing the four attribution levels a reporter and a source can agree on, with the source's exposure shrinking as you move down. The first level is on the record, meaning the name and job title can be printed, so the story carries the name, the title and the direct quote. The second level is anonymous quotation, meaning the content can be quoted under a role description, so the story carries a line such as an engineer who worked on the project said. The third level is background, used only to understand the situation and direct verification, with the source neither named nor quoted. The fourth level is not for use, where nothing enters the story at all. The red box below warns that anonymous quotation is the level that goes wrong most often, because the role description can identify the person on its own: if only three people at a company match the description, the description names all three.">
-    <figcaption>Confirm section by section, not once at the end</figcaption>
+    <figcaption>Confirm section by section, not once at the end. Different pieces of one conversation can sit at different levels. Confirm each section as you go, since by the end a source rarely remembers which sentence sat where.</figcaption>
 </figure>
 
 ### Sources who don't use these tools
@@ -75,6 +75,16 @@ Use a different channel per source, keep separate code-name schemes with the map
 
 Publication is often when source risk *rises*, because the subject organization starts an internal investigation and reviews who had access. Before the story runs, remind the source about likely access-log reviews and office monitoring, and agree on a quiet period with no contact. On your side, weigh keeping records (a defense against litigation) against destroying the link to the source, set disappearing messages on the relevant threads, and consider reimaging a reporting laptop after a high-sensitivity story. The public, citable evidence behind the story should be preserved; the private back-and-forth with the source should be cleared as early as it safely can be.
 
+### When you are the target
+
+Everything above protects the source. This subsection is about the reporter as the target.
+
+Anthropic's September 2026 abuse report documents two patterns that land directly on journalists. One is profiling and counter-dossiers: an operation linked to the UAE researched and profiled 18 Members of the European Parliament and prominent journalists, and compiled a counter-dossier on a UN special rapporteur who had criticized the UAE's role in Sudan (report p. 78). The other is account cloning: an operation tied to the Iranian opposition had a shared AI agent impersonate a real activist's Telegram account and hold live conversations in Persian with that person's contacts, who as far as the report's authors could tell did not know they were talking to an AI-assisted account (p. 70). Page-by-page notes are in [our summary of the report](../blog/posts/2026-anthropic-threat-report-taiwan.md).
+
+What protects you against the second pattern is how the people around you verify. That has to be arranged in advance: agree on a verification method with regular sources, editors, and colleagues, whether a shared phrase or a callback on a different channel; announce a change of channel on the old channel rather than simply appearing on the new one; and stop to verify when someone's tone, requests, or urgency shifts, particularly a request for new files, a push to move platforms, or pressure to answer immediately. Search your own name, handle, and outlet once a quarter, including account search on each platform. If you find a clone, tell your regular contacts before you report it to the platform, and screenshot it first.
+
+Cross-border investigations often run on private group chats, and the first step of the commercial surveillance service described in the same report is a fake account joining one and harvesting the member list (pp. 82-85). Membership verification belongs in the routine: know who vouched for each member, announce who invited a new one, review the list each quarter, and keep code-name mappings and full contact lists out of the group.
+
 ## The regional angle that changes the advice
 
 The general lifecycle above holds everywhere. What shifts in this region is the *consequence* of exposure and the *reach* of the adversary.
@@ -97,3 +107,4 @@ For the travel side of this, [pre-departure digital safety](./travel-ai-briefing
 - [Threat modeling](../basics/threat-model.md) — a short per-story pass on who the adversary is and what they can reach.
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — keeping a source-contact identity apart from the bylined one, and sustaining that separation between stories.
 - [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} — 24/7 multilingual support if a source or reporter is detained or a device is seized; the first call for Hong Kong readers under the exposure described above.
+- [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — the surveillance chapter lists Taiwanese politicians and media as monitoring categories, and a separate case targets exiled Uyghur journalists, with page numbers throughout.

@@ -6,7 +6,14 @@ icon: material/link-variant-off
 
 # :material-link-variant-off: URL cleaner
 
-<div id="cleanurl-tool"></div>
+<div id="cleanurl-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/cleanurl.js"></script>
 
@@ -23,6 +30,8 @@ https://example.com/article?fbclid=IwAR3xK9mQ...
 `fbclid` is Meta's identifier for that one click. Paste it into a group chat and everyone who follows it carries the same ID back to Meta, which ties together who shared the link, how many followed it and who they were, all in one record.
 
 Newsletter `utm_source` works the same way. Forwarding it lets the recipient see which newsletter you subscribe to. `mc_eid` is more direct still, being Mailchimp's recipient identifier, which maps back to your email address.
+
+For what these judgements look like against a real message, [a link forwarded into a group chat](case-link.md) walks the whole path. For how tracking parameters feed an advertising profile, see [the ads seem to know what you are thinking](case-profile.md).
 
 ## Redirect wrappers
 

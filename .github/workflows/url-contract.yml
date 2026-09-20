@@ -1,0 +1,137 @@
+# PR 階段的網址合約檢查。建三個語系的產物，拿它對 tools/data/url_contract.txt。
+#
+# 為什麼要在 PR 就建站：合約裡有 8866 個 heading 錨點，而錨點算不出來就驗不到。
+# toc 用 pymdownx.slugs.slugify() 從標題文字算 id，改一個小標題的字就換一個 id，
+# 建置不會提到任何事，連 strict 都綠。要知道錨點變了，只能真的把 HTML 產出來。
+#
+# 原本只掛在 build_docs.yml 的上傳之前，代價是改壞了要到推 docs 分支那一刻才知道，
+# 而那時候改動早就合併進 main 了。搬到 PR 上，作者還在手上的時候就看得到。
+# build_docs.yml 那一關保留，涵蓋沒走 PR 的推送與 workflow_dispatch。
+#
+# 這一支不碰 S3、不碰 Cloudflare、不用任何 secret，fork 送來的 PR 照樣跑得起來。
+name: url-contract
+
+on:
+  pull_request:
+    paths:
+      # 整個 docs/ 都算。js/ 與 assets/ 改動其實動不到網址，用排除規則濾掉的話會省
+      # 幾分鐘，但排除規則寫錯的症狀是「這一支安靜地不跑」，而那正是這一關要防的
+      # 那種壞法。多建幾次三分鐘的站，比留一個看不見的缺口便宜。
+      - "docs/**"
+      # 根目錄這兩份由 pymdownx.snippets 嵌進文件（base_path 含 ".."），裡面的標題
+      # 會變成頁面的錨點。
+      - "BECOME_ANONI*.md"
+      - "tools/check_url_contract.py"
+      - "tools/data/url_contract.txt"
+      - ".github/workflows/url-contract.yml"
+
+permissions:
+  contents: read
+
+# 同一個 PR 連推幾次時只留最後一次。這裡沒有 S3 那種「取消會留下半份」的顧慮，
+# 中途取消最多就是這一輪沒驗到，下一輪會補。
+concurrency:
+  group: url-contract-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    env:
+      # 兩個外掛都跟網址無關，PR 上關掉。實測關掉之後產出的合約與開著時逐位元組
+      # 相同，三個語系建置從 72 秒降到 41 秒。
+      #
+      # 關 social 的主要理由是偶發紅燈：那個外掛產卡片時會不定時吐 PIL 的
+      # unknown file format（只有 en 那份，重跑就過）。一個時不時自己變紅的檢查，
+      # 會讓人學會「紅了就重跑」，接著它擋不住任何真的問題。
+      #
+      # 關 privacy 是因為它要跟十幾個外部主機要檔案，任何一個掛掉就是
+      # FileNotFoundError 讓整個建置失敗（2026-07 踩過兩次）。順便讓 PR 不再每次
+      # 都去敲那十幾個主機一輪。
+      #
+      # 兩個都關掉之後這一支不需要 libcairo 那組系統套件，也就不必碰 apt，
+      # build_docs.yml 檔頭記的那兩次 apt mirror 卡死跟這裡無關。
+      SOCIAL_CARDS: "false"
+      PRIVACY_ASSETS: "false"
+    defaults:
+      run:
+        working-directory: ./docs
+    steps:
+      # fetch-depth: 0 是必要的。git-revision-date-localized 讀每一頁的 git 歷史，
+      # 淺 clone 會讓它抓不到日期。
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        timeout-minutes: 10
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        timeout-minutes: 10
+        uses: astral-sh/setup-uv@v8.1.0
+
+      - name: Sync Packages
+        timeout-minutes: 10
+        run: uv sync --group=dev
+
+      # 順序不能換。run.sh 建到 ./output，mkdocs 會先清空那個目錄，另外兩個語系
+      # 建在它底下的子目錄。zh-TW 放後面的話會把前兩份掃掉。
+      - name: Build Docs (/)
+        timeout-minutes: 20
+        run: source ./.venv/bin/activate; sh ./run.sh
+      - name: Build Docs (/zh-cn)
+        timeout-minutes: 20
+        run: source ./.venv/bin/activate; sh ./run_zh-cn.sh
+      - name: Build Docs (/en)
+        timeout-minutes: 20
+        run: source ./.venv/bin/activate; sh ./run_en.sh
+
+      # 移除網址、移除錨點、redirect 換目的地就紅。新增一律放行，只印一行提醒。
+      - name: Verify URL contract
+        working-directory: .
+        run: python3 tools/check_url_contract.py
+
+      # 上一步綠或紅都要跑。綠的時候貼的是「這個 PR 新增了哪些網址與錨點」，紅的
+      # 時候貼的是「合約要改成什麼樣才收得下這次改動」，兩種都是作者接下來要處理的
+      # 那份 diff。
+      #
+      # 附帶一份完整的檔案當 artifact。合約要重新產生本來得在本機建過三個語系，
+      # 對只改一篇文章的貢獻者是過重的要求，讓他直接下載這一份放回去就好。
+      - name: 合約差異
+        if: always()
+        working-directory: .
+        run: |
+          python3 tools/check_url_contract.py --update > /dev/null
+          if git diff --quiet -- tools/data/url_contract.txt; then
+            echo "網址合約沒有變動。" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git diff --no-color -U0 -- tools/data/url_contract.txt > /tmp/contract.diff
+          {
+            echo "### 網址合約要跟著改"
+            echo
+            echo '把下面的改動套進 `tools/data/url_contract.txt` 一起提交。本機建置過三個語系的話，`python3 tools/check_url_contract.py --update` 會產出同一份；沒有建置環境就直接下載這個 run 的 `url-contract` artifact 換掉那個檔案。'
+            echo
+            echo '以 `-` 開頭的是被這次改動拿掉的網址或錨點。它們現在在讀者的書籤、搜尋引擎的索引與別人的文章裡，拿掉之前先確認有 redirect 接住。'
+            echo
+            echo '```diff'
+            head -c 400000 /tmp/contract.diff
+            echo '```'
+            if [ "$(wc -c < /tmp/contract.diff)" -gt 400000 ]; then
+              echo
+              echo "（差異太長，上面只貼了前面一段，完整的在 artifact 裡）"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload contract
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: url-contract
+          path: tools/data/url_contract.txt
+          if-no-files-found: error

@@ -8,7 +8,14 @@ icon: material/eye-outline
 
 Everything below was available to this site the moment you opened the page, without asking you and without needing your consent. Any website gets the same.
 
-<div id="leaks-tool"></div>
+<div id="leaks-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/leaks.js"></script>
 
@@ -19,6 +26,8 @@ A new phone, a fresh reinstall, or someone telling you a particular browser is s
 - **After leaving a relationship where you were monitored**, you have a new device and want to know whether you still look like the person you were. Open this page and note the short code at the top, then open it on the old device and compare. Different codes mean the two devices do not match on fingerprinting.
 - **After a digital security workshop** where the trainer said Tor Browser is safer but did not say how. Note the time zone and fonts in your usual browser, then open the same page in Tor Browser. The time zone becomes UTC and the font list collapses to one set. You see the difference yourself.
 - **Explaining to someone else why this matters**: Having this page open beats a slide deck. Every number on screen came from their own device.
+
+For how this list relates to an advertising profile, see [the ads seem to know what you are thinking](case-profile.md).
 
 ## Individually dull, collectively identifying
 
@@ -145,6 +154,8 @@ On the clearnet build you can simply switch it off. The button below writes `uma
 <div id="anoni-optout"></div>
 
 If you see no button, you are most likely reading the onion build, which never loads the analytics script at all, so there is nothing to switch off.
+
+The same switch sits in the settings menu on every page, so on a new device or a new browser you do not have to come back here. Both write the same setting.
 
 Three further ways. Turn the network off and open the page again; with no connection there are no requests at all. Use [Tor Browser](../tools/what-is-tor.md) at the Safest level, where JavaScript is off and neither this page nor the analytics runs. Or use the onion build, which loads no analytics.
 

@@ -115,6 +115,72 @@ icon: material/tools
 
 </div>
 
+## 工具怎麼接起來
+
+上面每一個工具負責一個動作，而你手上的一件事通常要走過兩三個。下面這幾條是常走的順序。
+
+| 你手上的事 | 走的順序 |
+|---|---|
+| 第一次坐下來，要先釐清該做什麼 | [威脅模型清單](threat-model.md)答三題並看錯配，[我的準備清單](checklist.md)勾出接下來要做的，[passkey 鑰匙](passkey.md)把進度加密存在你的裝置上 |
+| 想知道網站不必問就拿得到你什麼 | [你的瀏覽器透露了什麼](leaks.md)看一次，換一個瀏覽器再看一次做對照，[網址清理器](clean-url.md)查連結尾巴帶著誰的識別碼 |
+| 照片或截圖要交給別人 | 畫面上有要遮的東西，用[截圖遮蔽](redact.md)，輸出已經不帶原檔的 metadata。畫面乾淨、只要去掉拍攝資訊的，用[檔案 metadata 清除器](strip-metadata.md) |
+| 要交一份 PDF 出去 | [PDF 頁面整理](pdf-pages.md)排好頁面，再用同一頁的「看裡面有什麼」搜尋不該留下的字 |
+| 收到來路不明的連結或 QR code | [QR code 讀取器](qr-read.md)解出內容，[網址清理器](clean-url.md)看註冊網域，[隱形字元偵測](invisible.md)查文字裡的同形字 |
+| 收到別人給的檔案，要確認也要看清楚 | [檔案雜湊比對](hash.md)確認跟對方手上那份一樣，[檔案 metadata 清除器](strip-metadata.md)或 [PDF 頁面整理](pdf-pages.md)的「看裡面有什麼」列出裡面帶著什麼，[隱形字元偵測](invisible.md)查夾帶的字元 |
+| 東西要給眼前的人或旁邊那台裝置 | 很長的字串用 [QR code 產生器](qrcode.md)，讓對方用相機讀走。幾 KB 的檔案用 [QR code 影格串流](qr-stream.md)，收齊時它自己比對 SHA-256 |
+| 檔案要託人帶走或放進隨身碟 | [密語與密碼產生器](passphrase.md)抽一組密語，[本機檔案加密](age.md)封起來，[檔案雜湊比對](hash.md)讓收的人核對 |
+| 臨時要一組之後找得回來的密碼 | [密語與密碼產生器](passphrase.md)抽，[passkey 鑰匙](passkey.md)當鑰匙，[我的準備清單](checklist.md)記下已經做到哪裡 |
+
+走完一整條路徑長什麼樣，用九件具體的事各寫一篇。日常情境那組不需要你先有特殊身分或特別的處境，工作情境那組對著站上服務的幾種工作寫。
+
+### 日常情境
+
+<div class="grid cards" markdown>
+
+-   :material-target-account: **[廣告好像知道你在想什麼](case-profile.md)**
+
+    剛在別的地方看過的東西，轉頭就出現在動態牆的廣告裡。任何網站不必問就拿得到你哪些資訊、那些值加起來為什麼足以認出你，以及連結尾巴帶著誰的識別碼。
+
+-   :material-file-send-outline: **[寄一份履歷出去](case-resume.md)**
+
+    期限剩一個晚上，履歷是舊版改的，作品集分成三個檔，其中一頁是前公司還沒公開的畫面。轉出來的 PDF 為什麼帶著你電腦的帳號名稱，黑色方塊蓋住的字為什麼還在檔案裡。
+
+-   :material-tag-outline: **[在二手平台賣東西](case-secondhand.md)**
+
+    搬家前拍了十四張照片要上架，背景有門牌、對面大樓的招牌與桌上的帳單。截圖遮蔽與 metadata 清除器什麼時候該用哪一個，以及買家要你出示證件時該怎麼回。
+
+-   :material-message-alert-outline: **[群組轉來的連結](case-link.md)**
+
+    社區群組轉來一則限時登記的訊息，附一個看起來像官網的網址與一張 QR code 圖。註冊網域為什麼是唯一該看的部分，看不見的字元能查到什麼、查不到什麼。
+
+</div>
+
+### 工作情境
+
+<div class="grid cards" markdown>
+
+-   :material-account-plus-outline: **[帶新同事做一次裝置盤點](case-onboarding.md)**
+
+    新人下週報到，權限開好了，而沒有人跟他談過裝置該怎麼準備。為什麼三題要有人在旁邊問，錯配清單為什麼比答案本身有用，以及進度為什麼存在他自己的裝置上。
+
+-   :material-account-multiple-outline: **[把名單交給外部夥伴](case-roster.md)**
+
+    年度申報要把捐款人名單交給會計師，往年都當附件寄出去。密語為什麼要走另一個管道，加密過的檔案為什麼還要算一次雜湊。
+
+-   :material-presentation: **[工作坊現場要發東西給大家](case-workshop.md)**
+
+    場地的 Wi-Fi 是主辦方的，二十個人的裝置各不相同。哪些東西該印成 QR code、哪些用螢幕跟鏡頭傳、哪些只能靠隨身碟。
+
+-   :material-file-account-outline: **[收到來源給的檔案](case-source-file.md)**
+
+    來源傳來一份內部簡報，你要查證它、要引用它，而且不能讓提供的人被指認出來。文件外流追蹤怎麼運作，為什麼引用要靠重打與遮蔽。
+
+-   :material-folder-account-outline: **[把對話截圖整理成送件附件](case-evidence.md)**
+
+    四十幾張對話截圖要整理成一份送出去的附件，畫面上有第三人的名字與頭像。遮蔽、合併與確認的順序，以及交出去之前最後那一步要查什麼。
+
+</div>
+
 ## 要離線帶著走
 
 工具的程式與資料會跟頁面一起存下來。[QR code 產生器](qrcode.md)、[讀取器](qr-read.md)、[影格串流](qr-stream.md)與[密語產生器](passphrase.md)四頁跟核心章節一起自動存進裝置，理由是它們在斷網現場會用到，見[網路中斷時的準備與應對](../scenarios/shutdown.md)。其餘幾頁在[離線閱讀](../offline.md)的清單裡勾起來，之後沒有網路也可以開啟。

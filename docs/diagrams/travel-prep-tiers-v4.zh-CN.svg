@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 660" width="400" height="660" role="img" aria-labelledby="title">
+<title id="title">出差准备是往上加码，每一层都建立在下面所有层之上</title>
+<style>
+  text { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .t-onfill { fill: #212121; }
+  .h1   { font-size: 15px; font-weight: 700; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .rule { stroke: #cfd8dc; stroke-width: 1.2; fill: none; }
+  .card-c1, .card-n, .card-no, .card-w1, .card-w2, .card-w3 { stroke-width: 1.3; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-no { fill: #fdecea; stroke: #d32f2f; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+  .card-w2 { fill: #f8b878; stroke: #ef6c00; }
+  .card-w3 { fill: #ef6c00; stroke: #c85a00; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .t-onfill { fill: #241708; }
+    .rule { stroke: #46515a; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-no { fill: #35181a; stroke: #e57373; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+    .card-w2 { fill: #7d4b19; stroke: #ff8c1a; }
+    .card-w3 { fill: #ff8c1a; stroke: #ffa64d; }
+  }
+</style>
+
+<text class="t-main h1" x="12" y="22">每一层都建立在下面所有层之上</text>
+<path class="rule" d="M12 32 H388"/>
+<rect class="card-w3" x="12" y="44" width="376" height="75" rx="8"/>
+<text class="t-onfill lab" x="26" y="68">极高风险</text>
+<text class="t-onfill h2" x="26" y="88">缅甸</text>
+<text class="t-onfill bd" x="26" y="105">最简化的干净装置，避免落地办卡，全程假设受监控。</text>
+<rect class="card-w2" x="12" y="129" width="376" height="92" rx="8"/>
+<text class="t-main lab" x="26" y="153">高风险</text>
+<text class="t-main h2" x="26" y="173">香港、泰国、越南、柬埔寨、中国大陆</text>
+<text class="t-main bd" x="26" y="190">混淆型 VPN 与 Tor 桥接先在家测好，</text>
+<text class="t-main bd" x="26" y="207">带干净机，敏感工作不在当地网络做。</text>
+<rect class="card-w1" x="12" y="231" width="376" height="92" rx="8"/>
+<text class="t-mute lab" x="26" y="255">中风险</text>
+<text class="t-main h2" x="26" y="275">菲律宾、马来西亚、新加坡、印尼、澳门</text>
+<text class="t-mute bd" x="26" y="292">公共与会场 Wi-Fi 一律走 VPN，对外</text>
+<text class="t-mute bd" x="26" y="309">发表前先了解当地的内容与诽谤法规。</text>
+<rect class="card-c1" x="12" y="333" width="376" height="75" rx="8"/>
+<text class="t-mute lab" x="26" y="357">低风险</text>
+<text class="t-main h2" x="26" y="377">台湾（参照）、日本、南韩</text>
+<text class="t-mute bd" x="26" y="394">接近家用环境，用平常的工具即可。办 SIM 记得带护照。</text>
+<rect class="card-n" x="12" y="426" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="450">每个地点都适用</text>
+<text class="t-mute bd" x="26" y="467">带最简化的装置。行前把规避工具装好</text>
+<text class="t-mute bd" x="26" y="484">并连过一次。准备两种以上的连线方式。</text>
+<text class="t-mute bd" x="26" y="501">敏感通讯走端对端加密。帐号分流。</text>
+<text class="t-mute bd" x="26" y="518">开全盘加密与开机密码。留离线备份。</text>
+<rect class="card-no" x="12" y="542" width="376" height="106" rx="8"/>
+<text class="t-main h2" x="26" y="566">香港进高风险层的理由跟另外四地不同</text>
+<text class="t-mute bd" x="26" y="583">它的连线环境接近中风险，门槛在入境检查站。2026</text>
+<text class="t-mute bd" x="26" y="600">年 3 月起，涉及国安调查时拒绝交出装置密码本身即构</text>
+<text class="t-mute bd" x="26" y="617">成犯罪，适用所有国籍，包含只在机场转机通关的旅客。</text>
+<text class="t-mute bd" x="26" y="634">装置内容成为主要暴露面，准备强度就要拉到干净机这一层。</text>
+</svg>

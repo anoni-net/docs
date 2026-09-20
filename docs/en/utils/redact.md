@@ -14,7 +14,14 @@ offline_assets:
 
 # :material-selection-remove: Screenshot redaction
 
-<div id="redact-tool"></div>
+<div id="redact-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/redact.js"></script>
 
@@ -25,6 +32,8 @@ Several scenario pages share one step: handing a screenshot of a conversation or
 - **A group chat screenshot goes to a lawyer or a platform report**: the other party's messages stay, the names and avatars of everyone else in the same frame should not go with them.
 - **Asking for help in public about harassment**: before posting, cover your own phone number, the names of the other party's friends, and the carrier and clock in the status bar at the top.
 - **A photo from the scene is submitted to a newsroom**: house numbers, licence plates and bystanders' faces are still in the picture after the metadata is gone, and need covering separately.
+
+For when to reach for this and when for the metadata remover, [selling things on a secondhand marketplace](case-secondhand.md) works through fourteen photos waiting to be listed. For the full assembly of a submission attachment, see [turning conversation screenshots into a submission](case-evidence.md).
 
 ## How to use it
 

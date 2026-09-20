@@ -23,8 +23,8 @@ Each system is built around a different core idea.
 The shorthand: Tails forgets, Whonix routes, Qubes separates. Tails and Whonix are organized around Tor traffic. Qubes is organized around keeping unrelated activities from contaminating each other, and adds Tor by layering Whonix on top.
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/isolation-models.en.svg"
-        alt="The structure of three systems side by side. Tails boots from USB, holds one session inside, forces all traffic through Tor, and disappears at shutdown. Whonix runs two virtual machines inside your usual operating system: the Workstation is where you work, and its traffic can only leave through the Gateway, which forces it through Tor. Qubes uses the Xen hypervisor to split one computer into separate qubes for work, personal, and finance, with a Whonix qube installed separately if Tor is needed.">
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/isolation-models-v4.en.svg"
+        alt="The structure of three systems side by side. Tails is a whole-machine reset booted from USB: one session holds everything, it disappears at shutdown, and all traffic is forced through Tor. Whonix runs two virtual machines inside your usual operating system: the Workstation is where you work and its traffic can only leave through the Gateway, which forces it through Tor, while the host system carries on as normal. Qubes uses the Xen hypervisor to split one computer into separate qubes, one each for work, personal, and finance, with a Whonix qube installed separately if Tor is needed.">
     <figcaption>The three systems draw the boundary at different layers</figcaption>
 </figure>
 

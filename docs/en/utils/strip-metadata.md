@@ -11,7 +11,14 @@ offline_assets:
 
 # :material-image-off-outline: File metadata stripper
 
-<div id="stripmeta-tool"></div>
+<div id="stripmeta-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/stripmeta.js"></script>
 
@@ -29,6 +36,8 @@ Three situations that come up:
 
 Stripping metadata only deals with fields you cannot see. Street numbers, road signs, uniforms and the view out of the window are part of the image itself and survive the process, so look the picture over yourself before you share it. To cover something that is part of the picture, use [screenshot redaction](redact.md).
 
+For when to reach for this and when for screenshot redaction, [selling things on a secondhand marketplace](case-secondhand.md) works through fourteen photos waiting to be listed. For inspecting what a file from someone else carries, see [a file from a source](case-source-file.md).
+
 ## Which files this handles
 
 | Format | What comes out | Image data |
@@ -45,7 +54,7 @@ Stripping metadata only deals with fields you cannot see. Street numbers, road s
 
 Photos, video and recordings have their descriptive sections removed whole, and the compressed image, video or audio data is left alone. Office documents have their descriptive parts emptied while the parts holding the body are copied as they are. PDF cannot offer the same guarantee, for the reason given under "PDF cannot be guaranteed lossless" below.
 
-Other formats are not supported yet. The list and the workarounds are at the end of this page. When a file cannot be recognised, the page reports an error rather than quietly handing back something it never processed.
+Other formats are not supported yet. The list and the workarounds are at the end of this page. When a file cannot be recognised, an error is shown rather than quietly handing back something it never processed.
 
 ## What comes out, what stays
 

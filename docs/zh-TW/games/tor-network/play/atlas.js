@@ -1,13 +1,17 @@
 // Tor 網路現況地球儀
 // 讀取由 Onionoo 蒸餾出的靜態 snapshot.json，把全網 running 中繼依國別聚成一團一團畫在地球上。
 // 顏色分 middle/guard/exit/both，大小依 consensus weight 連續縮放。three.js WebGPURenderer + TSL bloom。
-// 底圖用 countries.json（Natural Earth 110m）即時畫成貼圖：填海陸、描國界、依中繼數把國家調亮。
+// 底圖用 countries.json（Natural Earth 10m，東亞簡化到相鄰兩點約 2.8 公里）即時畫成貼圖：填海陸、依中繼數把國家調亮。
+// 東亞另外畫一張 2048 見方的細部貼圖，那一塊的一個像素是 2.8 公里，全球那張是 19.6 公里。
 import * as THREE from 'three';
-import { pass, texture, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
+import { pass, texture, vec2, vec3, dot, oneMinus, saturate, normalWorld, positionWorld, cameraPosition,
          float, mix, hash, uniform, instanceIndex,
          uv, smoothstep, mx_fractal_noise_float, attribute } from 'three/tsl';
 import { bloom } from 'three/addons/tsl/display/BloomNode.js';
 import { pickLang, t, langLinksHTML, STR } from './i18n.js';
+import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder,
+         inRings, judgeIndex, judgeCells } from './hexgrid.js';
+import { createTour } from './tour.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -82,6 +86,9 @@ function applyI18n() {
   set('mode-conc', 'modeConc');
   set('ramp-lo', 'rampLow');
   set('ramp-hi', 'rampHigh');
+  set('btn-hex', 'btnHex');
+  const hb = $('btn-hex');
+  if (hb) hb.title = S('btnHexTip');
   set('lbl-mix', 'lblMix');
   set('lbl-asn', 'lblAsn');
   set('lbl-asia', 'lblAsia');
@@ -118,6 +125,14 @@ function applyI18n() {
   set('hint-narrow', 'hintNarrow');
   set('btn-spin', 'btnSpin');
   set('hint-close', 'hintClose');
+  // 工作坊導覽。每一站的標題與內文由 tour.js 自己填，這裡只換固定的那幾顆。
+  set('btn-tour', 'btnTourLong');
+  set('btn-tour-hint', 'btnTour');
+  set('tour-note', 'tourNote');
+  set('tour-exit', 'tourExit');
+  set('tour-prev', 'tourPrev');
+  set('tour-next', 'tourNext');
+  set('tour-keys', 'tourKeys');
   set('backend', 'backendDetecting');
   const bu = $('btn-users');
   if (bu) { bu.textContent = S('modeUsers'); bu.title = S('modeUsersTip'); }
@@ -209,7 +224,7 @@ const roleHex = (k) => '#' + ROLE_COL[k].toString(16).padStart(6, '0');
 const SHOW_DOTS = true;
 
 // ISO2 → [緯度, 經度] 手調的國家定位。優先於 countries.json 算出來的質心，
-// 因為 Natural Earth 110m 沒有新加坡、香港這種小地方，挪威一類的質心也會飄到鄰國。
+// 因為挪威一類的質心會飄到鄰國。新加坡、香港在換到 50m 之後國界裡就有了，手調的仍留著當後備。
 const CENTROID = {
   us:[39.8,-98.6], de:[51.2,10.4], nl:[52.2,5.3], se:[62,17.6], fr:[46.6,2.5], at:[47.6,14.1],
   gb:[54,-2.4], ca:[56,-106], ch:[46.8,8.2], fi:[64,26], ro:[45.9,24.9], lu:[49.8,6.1],
@@ -274,9 +289,9 @@ function targetDist() { return R + (fitDist() - R) * view.zoom; }
 // 視角之後同樣的涵蓋度需要站得更遠。用高度判斷的話會變成：視角一窄、高度就升，
 // 判斷就退回遠看，視角又放寬，來回震盪。改用涵蓋度就沒有這個回饋，而且「螢幕上
 // 看得到多少地表」本來就比「離地多高」更貼近這幾個轉換真正想表達的事。
-function coverDeg(dist) {
+function coverDeg(dist, fovDeg) {
   const d = dist === undefined ? camera.position.z : dist;
-  const vFov = camera.fov * Math.PI / 180;
+  const vFov = (fovDeg === undefined ? camera.fov : fovDeg) * Math.PI / 180;
   const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
   const th = Math.min(vFov, hFov) / 2;
   const disc = d * d * Math.cos(th) ** 2 - d * d + R * R;
@@ -443,7 +458,15 @@ function zoomForExtent(latDeg, lonDeg) {
 // 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦，所以
 // 換視角的同時要補償 zoom，讓涵蓋度不變，否則按下「關注台灣」之後畫面會自己再縮一段。
 const FOV_FAR = 45;    // 太空視角
-const FOV_NEAR = 18;   // 地圖視角
+// 地圖視角。這是整個縮放過程裡唯一會改變透視的東西，也是「滾到某一段覺得不順」
+// 最可能的來源：變焦推軌的本質就是中心不動而畫面邊緣脹縮。
+//
+// ?fov-near=N 可以現場改，45 等於整個關掉變焦，滾起來完全沒有透視變化，代價是
+// 貼近地表時畫面仍然是一顆球而不是一張平面地圖。要調手感先拿這個參數兩邊比。
+const FOV_NEAR = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('fov-near'));
+  return v >= 10 && v <= 45 ? v : 18;
+})();
 const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
 
 // 換鏡頭的區間，用畫面短邊的涵蓋度界定。
@@ -458,8 +481,15 @@ const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投
 // 畫面本來就變化很快，扭曲被蓋過去。到了 30 度以內鏡頭就固定在 18 度不再動，
 // 整個細看的範圍都是同一顆鏡頭。整顆地球入鏡時涵蓋度是飽和的 180 度，維持 45 度廣角，
 // 進場的樣子完全沒變。
-const FOV_HI_COVER = 90;
-const FOV_LO_COVER = 30;
+// 上緣本來是 90 度，那正好落在涵蓋度對距離最敏感的那一段：離地 8.2 個半徑是飽和
+// 的 180 度，退到 7.9 就只剩 116 度，一格滾輪的距離只動 3% 卻換來 15 度。換鏡頭
+// 再疊上去，實測 zoom 0.66 到 0.60 那一格涵蓋度一口氣掉 30.8 度，畫面像猛然拉近。
+// 拆開來量是距離佔 15.0 度、視角佔 18.3 度，兩件事剛好撞在一起。
+//
+// 改成 62 度才開始換。那時球已經填滿畫面，涵蓋度對距離的敏感度掉下來了，兩個來源
+// 不再疊加。下緣跟著收到 26，過渡區間的長度維持原樣。
+const FOV_HI_COVER = 62;
+const FOV_LO_COVER = 26;
 
 /** 換鏡頭的進度。頭尾用 smoothstep 抹平，線性斜坡在兩端有硬轉折，看得出來。 */
 function fovT() {
@@ -523,7 +553,14 @@ function updateDbg(dt) {
     + `zoom ${view.zoom.toFixed(5)}\n`
     + `fov  ${camera.fov.toFixed(1)}°\n`
     + `離地 ${(camera.position.z - R).toFixed(3)}\n`
-    + `deep ${deepU.value.toFixed(2)}  swap ${twSwapT().toFixed(2)}`;
+    + `轉動 ry ${(view.ry * 180 / Math.PI).toFixed(2)}° rx ${(view.rx * 180 / Math.PI).toFixed(2)}°\n`
+    + `deep ${deepU.value.toFixed(2)}  swap ${twSwapT().toFixed(2)}`
+    + (HEX_ON ? `\nhex  ${HEX ? 'lv' + HEX.level + '  ' + HEX.cells.length + ' 格' : '未建'}`
+        + `  want lv${hexPickLevel(c, hexNearLocal(c, hexViewDir()))}  ${HEX ? (HEX_DIAG_DEG[HEX.level] / c * Math.min(innerWidth, innerHeight)).toFixed(0) + ' px' : ''}`
+        + `  r${HEX ? HEX.radiusDeg.toFixed(0) : '-'}°  busy ${hexBusy ? 'Y' : 'N'}`
+        + (hexFade ? `  淡入 ${(hexFade.t * 100).toFixed(0)}%` : '')
+        + `  ${hexWorker ? 'worker' : (hexWorker === false ? '主執行緒' : '未啟')} ${hexLastMs.toFixed(0)}ms`
+        + (HEX ? `\n     格心 ${hexLL(HEX.dir)}  現在 ${hexLL(hexViewDir())}` : '') : '');
 }
 
 // 飛行中的目標。null 代表沒有在飛。
@@ -571,11 +608,70 @@ function twSwapT() {
 //
 // 用 camera.position.z 而不是 targetDist()，因為 animate 是平滑趨近目標距離的，
 // 拖曳當下看到的是相機實際在哪，靈敏度要跟畫面一致而不是跟目標值一致。
-const DRAG_K = 0.006;
+//
+// 還要乘上視角那一項。距離 d 處螢幕上每一像素對應的世界距離是
+// 2 · d · tan(fov/2) / 畫面高，所以同樣一度轉動在螢幕上跑多遠，除了距離還跟視角
+// 有關。貼近地表時鏡頭從 45 度收到 18 度，tan 比是 2.62，漏掉這一項的話拖曳就是
+// 快了 2.62 倍：手指動一點點地球就甩過去。基準同樣取進場時的 45 度，所以遠看的
+// 手感一個字都沒變。
+// 兩個旋鈕都可以用網址現場調，手感這種東西只能自己滾過才知道：
+//
+//   ?drag=0.008      基礎係數。愈大轉得愈多，預設 0.006
+//   ?drag-fov=0.6    鏡頭補償的程度。1 是完全補償（同樣一段滑鼠位移，地表在螢幕上
+//                    跑的距離不論遠近都一樣），0 是完全不補償（換上望遠鏡頭之後會
+//                    快 2.62 倍，那是修掉的舊行為）。中間值介於兩者。
+//
+// 預設的 1 是物理上一致的那一端：任何距離下拖一百像素，地表在螢幕上就跑一百像素。
+// 但一致不等於好用。遠看的時候人想要的是「一把轉到地球另一側」，貼近的時候想要
+// 的是「慢慢挪到那個變電所上」，兩者要的本來就不是同一個比例。真的覺得遠看推不
+// 動，把 drag-fov 調小一點比調大 drag 好，後者會連帶讓貼近也變快。
+const DRAG_K = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('drag'));
+  return v > 0 && v <= 0.05 ? v : 0.006;
+})();
+const DRAG_FOV_MIX = (() => {
+  const v = parseFloat(new URLSearchParams(location.search).get('drag-fov'));
+  return v >= 0 && v <= 1 ? v : 1;
+})();
+// ?grab=0 退回固定比例的近似，也就是球面抓取之前的行為。
+//
+// 兩者的差別不只是準不準：1:1 抓取算出來的角度只有舊近似的三分之一。舊的那條
+// 係數是憑手感調的，調出來的值等於「拖一百像素，地表在螢幕上跑兩百七十像素」，
+// 所以換成 1:1 之後一定會覺得變慢，那不是壞掉，是原本就超前地表 2.7 倍。
+const DRAG_GRAB = new URLSearchParams(location.search).get('grab') !== '0';
+const DRAG_TAN_REF = Math.tan(FOV_FAR * Math.PI / 360);
+/**
+ * 螢幕座標打到球面上的哪一點，回傳世界座標的單位向量。打不到回 null。
+ *
+ * 這是「拉多遠就轉多遠」的基礎。dragRate 那一套是固定比例的近似，只有在球面正
+ * 中央才準：球是曲面，愈靠近輪廓，同樣一段像素對應的角度愈大，所以往邊緣拖的
+ * 時候手指跟地表一定會分家。把滑鼠位置投影回球面上再算兩點之間的角度差就沒有
+ * 這個問題，代價是滑鼠拖出球外之後沒有交點可以算。
+ */
+const dragRay = new THREE.Raycaster();
+const dragNdc = new THREE.Vector2();
+function sphereAt(sx, sy, out) {
+  dragNdc.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
+  dragRay.setFromCamera(dragNdc, camera);
+  const o = dragRay.ray.origin, d = dragRay.ray.direction;
+  const b = o.dot(d);
+  const c = o.lengthSq() - R * R;
+  const disc = b * b - c;
+  if (disc < 0) return null;            // 射線沒打到球，拖到背景去了
+  return out.copy(d).multiplyScalar(-b - Math.sqrt(disc)).add(o).normalize();
+}
+
 function dragRate() {
   const ref = Math.max(1e-3, fitDist() - R);
-  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref;
+  const tanNow = Math.tan(camera.fov * Math.PI / 360);
+  // mix 是 0 的時候這一項固定為 1，等於完全不補償鏡頭
+  const tanFix = Math.pow(tanNow / DRAG_TAN_REF, DRAG_FOV_MIX);
+  return DRAG_K * Math.max(0.05, camera.position.z - R) / ref * tanFix;
 }
+
+// 一格滾輪最多讓涵蓋的地表變動幾成。理由見 wheel 那段。
+// 0.16 是試出來的：小於這個滾起來會覺得推不動，大於的話飽和區那一段仍然會跳。
+const COVER_STEP_MAX = 0.16;
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
@@ -592,6 +688,26 @@ const clockT = uniform(0);
 //   mat.positionNode 覆寫掉 NodeMaterial 處理 instancing 的那段，instance 位置整個沒套用
 // dotGroups 保存每顆點的原始位置與大小，重算時從這份原始值乘上係數，避免誤差累積。
 const dotGroups = [];
+// 各層浮在地表上方多少。這些高度是為了避免點穿進球面才留的，數值大約等於那一層
+// 最大的那顆點的半徑，所以每一層各有各的值。
+const DOT_LIFT = 1.012;      // 中繼點
+const LANDING_LIFT = 1.011;  // 海纜登陸點
+const SUB_LIFT = 1.009;      // 變電所
+const PLANT_LIFT = 1.010;    // 發電廠
+const RENEW_LIFT = 1.0095;   // 再生能源場址
+
+/**
+ * 貼近地表時把浮空高度跟著點的大小一起收。
+ *
+ * 點的大小本來就有補償（見 DOT_EXP 那一段），貼近時世界尺寸會縮小，浮空高度卻是
+ * 寫死的倍率。遠看時 0.06 個世界單位看不出來，貼到縣市尺度時相機離地只剩 0.156，
+ * 那個高度就佔了 38%，整片點看起來浮在地面上方一截，跟底下的地面對不起來。
+ *
+ * 用同一個 k 收，高度與點半徑的比例維持不變，點在任何距離下都像是貼在地表上。
+ * 實測 zoom 0.05 時從佔離地高度的 38% 降到 3%。
+ */
+const liftAt = (h, k) => 1 + (h - 1) * k;
+
 const DOT_EXP = 0.85;   // 1 是完全補償螢幕大小。留點餘裕，放大時仍稍微變大，手感自然些
 const DOT_STEP = 0.02;  // 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣
 let lastDotK = 1;
@@ -795,11 +911,18 @@ function buildSky() {
   scene.background = tex;
 }
 
-function glowColor(n, max, ramp) {
-  const t = Math.pow(n / max, 0.35); // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
+// 色階本身。底圖走 canvas 需要 CSS 字串，六角層走頂點色需要三個分量，
+// 所以算的那一段抽出來共用，兩層的顏色才不會各走各的。
+const GLOW_EXP = 0.35; // 開根號式色階，少量中繼的國家也拉得開，又不會全部擠在最亮端
+function glowMix(n, max, ramp) {
+  const t = Math.pow(n / max, GLOW_EXP);
   const a = (ramp && ramp.lo) || MAP.glowLo, b = (ramp && ramp.hi) || MAP.glowHi;
   const mix = (i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t);
-  return `rgb(${mix(1)},${mix(3)},${mix(5)})`;
+  return [mix(1), mix(3), mix(5)];
+}
+function glowColor(n, max, ramp) {
+  const c = glowMix(n, max, ramp);
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
 }
 
 // 畫兩張貼圖。base 是海陸與國界，吃日夜光照；glow 只放各國中繼數的等值色，走自體發光。
@@ -895,6 +1018,108 @@ function paintSeaFloor(ctx) {
   });
 }
 
+// ── 東亞細部貼圖 ───────────────────────────────────────────────────────────
+// 全球貼圖是 2048x1024 的等距長方投影，赤道一個像素就是 19.6 公里。香港 1,104 km2
+// 在上面只有 3 個像素，填色糊成一團、邊緣跟海岸線差了十幾公里，自己的形狀完全畫不
+// 出來，新加坡與澳門同樣。這是 buildBorders 畫的國界線修細之後仍然看得到方塊的原因，
+// 線已經準了，底下的填色沒有跟上。
+//
+// 拉高全球貼圖解不了。要讓香港有 150 個像素得做到 16384x8192，顯存是現在的 64 倍，
+// 而多出來的像素有九成九花在沒有人放大去看的海面與極區。改成另外畫一張只涵蓋東亞的
+// 貼圖，框跟 tools/gen_world_geo.py 的 EAST_BOX 同一個，2048 見方，一個像素 2.8
+// 公里，香港變成 148 個像素。
+//
+// 兩張就夠，因為陸地在貼圖上只是一個定值色 MAP.land，本身沒有細節要存：
+//
+//   eastLand  2048  RGB 放各國依指標值的發光色，A 放陸地遮罩。海陸邊界與國界都由
+//                   這張決定，是整件事的重點。切換指標時跟全球的發光層一起重畫。
+//   eastDeco   512  海底地形與經緯線。兩者都是大尺度的形狀，解析度不必跟著上去。
+//
+// 合計 17 MB，全球那四張目前是 25 MB。
+const EAST_ON = new URLSearchParams(location.search).get('east') !== '0';
+const EAST_BOX = [95, 0, 150, 50];
+const EAST_TEX = 2048;
+const EAST_DECO = 512;
+const eastX = (lon) => (lon - EAST_BOX[0]) / (EAST_BOX[2] - EAST_BOX[0]) * EAST_TEX;
+const eastY = (lat) => (EAST_BOX[3] - lat) / (EAST_BOX[3] - EAST_BOX[1]) * EAST_TEX;
+const EAST_PATH = [];  // { k, path }，k 是 ISO2。沒有國碼的陸地也要進來，不然遮罩會破洞
+let EAST = null;       // { canvas, tex }：切換指標時重畫的那張
+
+// 這個環有沒有碰到東亞框。用外接框相交判，逐點判會漏掉「整條邊橫越框、頂點都在框外」
+// 的環，中國那幾條長邊就是。
+function ringHitsEast(ring) {
+  let lo0 = 1e9, lo1 = -1e9, la0 = 1e9, la1 = -1e9;
+  for (let i = 0; i < ring.length; i += 2) {
+    if (ring[i] < lo0) lo0 = ring[i];
+    if (ring[i] > lo1) lo1 = ring[i];
+    if (ring[i + 1] < la0) la0 = ring[i + 1];
+    if (ring[i + 1] > la1) la1 = ring[i + 1];
+  }
+  return lo1 >= EAST_BOX[0] && lo0 <= EAST_BOX[2] && la1 >= EAST_BOX[1] && la0 <= EAST_BOX[3];
+}
+
+function buildEastPaths(world) {
+  EAST_PATH.length = 0;
+  for (const c of world.c) {
+    const rings = c.p.filter(ringHitsEast);
+    if (!rings.length) continue;
+    const path = new Path2D();
+    for (const ring of rings) {
+      path.moveTo(eastX(ring[0]), eastY(ring[1]));
+      for (let i = 2; i < ring.length; i += 2) path.lineTo(eastX(ring[i]), eastY(ring[i + 1]));
+      path.closePath();
+    }
+    EAST_PATH.push({ k: c.k, path });
+  }
+}
+
+// 一道填完。沒有中繼的國家填黑，發光層讀到的就是零，而 alpha 仍然是 1，
+// 陸地遮罩不會因為那個國家沒有中繼就破一個洞。
+function paintEastLand(values, canvas, ramp) {
+  const g = canvas.getContext('2d');
+  g.clearRect(0, 0, EAST_TEX, EAST_TEX);
+  let max = 1;
+  for (const v of values.values()) if (v > max) max = v;
+  for (const { k, path } of EAST_PATH) {
+    const n = (k && values.get(k)) || 0;
+    g.fillStyle = n ? glowColor(n, max, ramp) : '#000';
+    g.fill(path);
+  }
+}
+
+function paintEastDeco(canvas) {
+  const g = canvas.getContext('2d');
+  const s = EAST_DECO / EAST_TEX;
+  g.setTransform(s, 0, 0, s, 0, 0); // 之後都用 EAST_TEX 的座標畫，跟 eastX/eastY 共用
+  g.fillStyle = BATHY && BATHY.levels ? MAP.seaRamp[0] : MAP.sea;
+  g.fillRect(0, 0, EAST_TEX, EAST_TEX);
+  if (BATHY && BATHY.levels) {
+    BATHY.levels.forEach((lv, i) => {
+      const path = new Path2D();
+      for (const ring of lv.p) {
+        if (!ringHitsEast(ring)) continue;
+        path.moveTo(eastX(ring[0]), eastY(ring[1]));
+        for (let k = 2; k < ring.length; k += 2) path.lineTo(eastX(ring[k]), eastY(ring[k + 1]));
+        path.closePath();
+      }
+      g.fillStyle = MAP.seaRamp[Math.min(i + 1, MAP.seaRamp.length - 1)];
+      g.fill(path, 'evenodd');
+    });
+  }
+  // 經緯線。框內只有 120 度經線與 30 度緯線兩條，而且是一成不透明度的細線，疊在
+  // 陸地上原本就幾乎看不見，所以只畫在這一層。陸地那一段在東亞框內會斷掉。
+  g.lineWidth = EAST_TEX / EAST_DECO; // 換算回去正好是一個貼圖像素
+  g.strokeStyle = MAP.grid;
+  for (let lon = -180; lon <= 180; lon += 30) {
+    if (lon <= EAST_BOX[0] || lon >= EAST_BOX[2]) continue;
+    g.beginPath(); g.moveTo(eastX(lon), 0); g.lineTo(eastX(lon), EAST_TEX); g.stroke();
+  }
+  for (let lat = -60; lat <= 60; lat += 30) {
+    if (lat <= EAST_BOX[1] || lat >= EAST_BOX[3]) continue;
+    g.beginPath(); g.moveTo(0, eastY(lat)); g.lineTo(EAST_TEX, eastY(lat)); g.stroke();
+  }
+}
+
 function paintEarth(world, counts) {
   const mk = () => { const cv = document.createElement('canvas'); cv.width = TEX_W; cv.height = TEX_H; return cv; };
   const base = mk(), glow = mk(), block = mk();
@@ -971,13 +1196,62 @@ function buildEarth(world, counts) {
   const baseTex = toTex(painted.base), glowTex = toTex(painted.glow), blockTex = toTex(painted.block);
   const seaTex = toTex(painted.sea);
   GLOW = { canvas: painted.glow, tex: glowTex };
-  const mat = new THREE.MeshStandardNodeMaterial({ map: baseTex, roughness: 1, metalness: 0 });
+  const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0 });
+
+  // 底色與發光色。東亞那一塊改由細部貼圖供應，其餘維持全球那張。
+  let baseCol = texture(baseTex).rgb;
+  let glowCol = texture(glowTex).rgb;
+  if (EAST_ON) {
+    const eastLand = document.createElement('canvas');
+    eastLand.width = eastLand.height = EAST_TEX;
+    const eastDeco = document.createElement('canvas');
+    eastDeco.width = eastDeco.height = EAST_DECO;
+    buildEastPaths(world);
+    paintEastLand(counts, eastLand, null);
+    paintEastDeco(eastDeco);
+    // 不能用 RepeatWrapping。這兩張只涵蓋東亞，重複的話框外會取到框內的內容，
+    // 雖然混合權重在框外已經是 0，mipmap 的低階層仍然會把邊緣以外的取樣拉進來。
+    const toTexE = (cv) => {
+      const t = new THREE.CanvasTexture(cv);
+      t.colorSpace = THREE.SRGBColorSpace;
+      t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+      if (renderer.getMaxAnisotropy) t.anisotropy = Math.min(8, renderer.getMaxAnisotropy());
+      return t;
+    };
+    const eastLandTex = toTexE(eastLand), eastDecoTex = toTexE(eastDeco);
+    EAST = { canvas: eastLand, tex: eastLandTex };
+
+    // 東亞框在球面 uv 上的位置。全球貼圖的 texX/texY 是同一組線性關係，
+    // SphereGeometry 的 uv 跟著等距長方投影走，所以直接換算就對得上。
+    const u0 = (EAST_BOX[0] + 180) / 360, u1 = (EAST_BOX[2] + 180) / 360;
+    const v0 = (EAST_BOX[1] + 90) / 180, v1 = (EAST_BOX[3] + 90) / 180;
+    const eastUv = vec2(uv().x.sub(u0).div(u1 - u0), uv().y.sub(v0).div(v1 - v0));
+    // 框邊硬切會留下一條接縫，往內縮一圈做過渡。0.035 換算成經度約 1.9 度，
+    // 過渡帶裡兩張貼圖畫的是同一組國界，只有精度不同，混起來不會出現雙重輪廓。
+    const feather = 0.035;
+    const inEast = smoothstep(0, feather, eastUv.x)
+      .mul(smoothstep(0, feather, eastUv.y))
+      .mul(smoothstep(0, feather, oneMinus(eastUv.x)))
+      .mul(smoothstep(0, feather, oneMinus(eastUv.y)));
+    const eL = texture(eastLandTex, eastUv), eD = texture(eastDecoTex, eastUv);
+    // 框內完全由細部貼圖決定海陸，不跟全球那張混。混的話香港會變成一塊清楚的陸地
+    // 外面再糊一圈陸地色，比原本更難看。
+    //
+    // ColorManagement 開著，new THREE.Color 讀進來就已經轉成線性，可以直接跟
+    // 貼圖取樣的結果放在一起算。
+    const landLin = new THREE.Color(MAP.land);
+    const eastBase = mix(eD.rgb, vec3(landLin.r, landLin.g, landLin.b), eL.a);
+    baseCol = mix(baseCol, eastBase, inEast);
+    glowCol = mix(glowCol, eL.rgb.mul(eL.a), inEast);
+  }
+
+  mat.colorNode = baseCol;
   // 底圖留一點自發光，夜側仍看得出海陸；中繼多的國家額外亮起來，轉到背光面也讀得到
   // 受阻漸層另存一層，切換「台數、共識權重」時 paintGlow 只重畫 glow，這一層不受影響
-  mat.emissiveNode = texture(baseTex).mul(0.15)
-    .add(texture(seaTex).mul(SEA_EMIT))
-    .add(texture(glowTex).mul(0.5))
-    .add(texture(blockTex).mul(BLOCK_EMIT));
+  mat.emissiveNode = baseCol.mul(0.15)
+    .add(texture(seaTex).rgb.mul(SEA_EMIT))
+    .add(glowCol.mul(0.5))
+    .add(texture(blockTex).rgb.mul(BLOCK_EMIT));
   globe.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), mat));
 }
 
@@ -1116,7 +1390,7 @@ function buildTrunks() {
 // 想放寬門檻請先讀那支程式開頭關於 anomaly 的說明。
 //
 // 這一層直接吃 countries.json 的國界，等於把那份資料的領土畫法照搬到畫面上。
-// 現用的 Natural Earth 110m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
+// 現用的 Natural Earth 50m 把台灣列為獨立單位，cn 的邊界沒有一點落在台灣範圍內，
 // 換底圖資料前請重新確認這件事。
 // 把國界多邊形轉成貼在球面上的線段。pick 決定要哪些國家，height 是離地高度。
 // 國界的相鄰點最遠有 9 度（俄羅斯北岸），直線連過去會從地球內部穿過，中段被球體
@@ -1164,7 +1438,7 @@ function ringSegments(world, pick, height) {
 // 縣市界線用貼圖畫不出來。線段不論放到多近都是銳利的。
 //
 // 縣市多邊形的外圍就是海岸線，而且是實測等級的。continents.json 那條海岸線來自
-// Natural Earth 110m，一度才一個點，在縣市尺度下完全不能看。所以貼近台灣的時候，
+// Natural Earth 50m，亞洲簡化到約 1 公里，在縣市尺度下仍然不夠。所以貼近台灣的時候，
 // 實際上是這一層在同時提供縣市界與可用的海岸線。
 //
 // 遠看時整個台灣只有幾十個像素，二十二個縣市的線會糊成一團亮斑，反而讓台灣變得
@@ -1232,6 +1506,439 @@ function buildBlocked(world) {
 // （bloom 比的是 tonemap 之前的線性 luminance），所以這層不會被 bloom 抓去糊成白斑。
 const RIM_POWER = 5.5;   // 衰減要夠陡。3.2 時中心仍有可見疊加，被 bloom 一暈整顆球都蒙上藍霧
 const RIM_INTENSITY = 0.32; // additive 是疊在陸地本身的亮度上，兩者相加才是 bloom 看到的值
+// === 六角層（原型）===
+//
+// 把地表切成六角格，當作地圖的最小呈現單位，資料點疊在上面。
+//
+// 因為是底圖，它在任何縮放下都在。放大之後格子會脹大，處理方式是換更細的一級，
+// 讓格子在螢幕上維持三十幾個像素，跟地圖圖磚的做法一樣。四級的格數各差四倍，
+// 對角從 277 公里到 35 公里。
+//
+// 成本控制有兩層。一是幾何在瀏覽器裡現算，資料檔只有國碼，而且用到才載，沒放大
+// 到那一級就不會付那筆錢。二是只建看得到的那些格子：相機貼近時畫面上只有球面的
+// 一小塊，涵蓋 16 度時 level 8 也只要三千格，幾何從 63 MB 掉到 0.7 MB。
+//
+// 顏色沿用陸地色塊那一套，同一國的格子一律同色。格子比國家細，一旦讓「這一格亮著」
+// 看起來像「這裡有一台中繼」，就是在畫一個資料裡並不存在的精度。Onionoo 只給到
+// 國別，所以格子的位置不承載任何意義，只有顏色在講話。
+const HEX_ON = new URLSearchParams(location.search).has('hex');
+// 由粗到細。格數是 10 * 4^n + 2，中間沒有東西可以調。
+const HEX_LEVELS = [5, 6, 7, 8];
+// 每一級的格子對角有幾度。地球半徑 6371 公里，一度 111.19 公里。
+const HEX_DIAG_DEG = { 5: 2.490, 6: 1.245, 7: 0.623, 8: 0.311, 9: 0.156, 10: 0.078, 11: 0.039, 12: 0.019 };
+// 希望格子在螢幕上多大，以及換級前容許漂移到哪裡。
+//
+// 沒有這個容許範圍的話，每次縮放都可能換級，而換級要重建幾何，畫面會一直閃。
+// 目前這一級還落在 14 到 64 px 之間就不動，超出去才挑最接近 30 px 的那一級。
+const HEX_TARGET_PX = 30, HEX_MIN_PX = 14, HEX_MAX_PX = 64;
+// 視野裁切要收多遠。
+//
+// coverDeg() 給的是「畫面短邊」涵蓋多少度，而要收的是畫面對角那一圈，兩者差很多：
+// 1280×800 的視窗長短邊比 1.6，對角的半徑是短邊半徑的 1.887 倍。第一版直接拿
+// 涵蓋度乘 0.75 當半徑，結果是畫面左右兩側整片沒有格子，只有正中間那一塊有。
+const HEX_PAD = 1.15;     // 算完對角再留這個比例的餘裕，轉動時邊緣不會馬上開天窗
+const HEX_SHRINK = 0.9;   // 格子往中心收多少。1 是完全貼合，收一點才有格縫
+// 換級的交叉淡入淡出有多久。
+//
+// 沒有這一段的話換級就是一幀之內整片格子換一套大小，看起來是硬切。兩層疊著淡是
+// 唯一不會在中間露出底圖的做法，代價是那 0.35 秒內畫兩份幾何。
+const HEX_FADE_SEC = 0.35;
+// 六角層的高度。
+//
+// 它是底圖，所有線層都要壓在它上面：海纜 1.003、國界 1.0036、OONI 的紅色 1.0045、
+// 縣市界 1.005、海纜登陸點 1.007、再生能源 1.009、變電所與電廠 1.011、中繼點 1.012。
+// 第一版放在 1.004，結果是貼近台灣時整片格子蓋掉縣市界與設施，畫面只剩蜂巢。
+const HEX_LIFT = 1.0015;
+// 六角層的色階起點是陸地本色，不是資料色階的低端。
+//
+// 資料色階的低端（#0d2c46）比陸地本色（#16334e）還暗，畫在底圖上是連續漸層看不
+// 出來，但格子是一塊一塊蓋上去的，十幾台的國家會整片變成比周圍更暗的洞。而這一層
+// 是底圖，蜂巢的結構要在任何地方都看得見，沒有中繼的國家也一樣。
+//
+// 所以低端固定用陸地本色，資料只往亮的那一端拉。台灣那 12 格跟隔壁沒有中繼的
+// 島是同一個底色，德國那片才亮起來。
+const HEX_LAND = [0x16, 0x33, 0x4e];
+// 整片的不透明度。格子要讀得出邊界，所以壓得高一點，只留一點讓底下的海岸線透出來。
+const HEX_ALPHA = 0.88;
+
+// 局部高解析網格。
+//
+// 台灣是這個作品唯一做到縣市尺度的地區，六角格在那裡要細到公里級才跟得上已經在
+// 圖上的 201 座變電所。全球的 level 11 是 4,190 萬格，瀏覽器算不動也裝不下，所以
+// 那一塊改成局部細分：細分的時候就把離台灣太遠的面丟掉，格數降到四萬出頭，
+// 實測 115 毫秒。
+//
+// 國碼也在前端判。國界與縣市界本來就已經載進來了，畫底圖與縣市界用的就是那兩份，
+// 拿同樣的多邊形再判一次不必多一個資料檔。這樣等級可以用網址參數隨便調，不必為了
+// 每一級各產一份。
+//
+// 局部那幾級接在全球的 8 後面，格子在螢幕上一樣維持三十幾個像素：
+//
+//   涵蓋 9 度   level 9   對角 17 公里   一座變電所的供電範圍
+//   涵蓋 4 度   level 10  對角 8.7 公里  半個鄉鎮
+//   涵蓋 2 度   level 11  對角 4.3 公里  一個行政區或一座科學園區
+//
+// 中心跟著視野走，不綁在台灣。原本寫死台灣的時候，在別的地方放大到底只剩全球的
+// level 8，一格會脹到兩百多個像素。
+//
+// 半徑也跟著縮放算，不是固定值。這一級用在什麼距離是確定的，所以要收的範圍也是
+// 確定的：level 11 落在涵蓋一度上下，對角半徑不到 1.6 度，收那麼大就夠。跟著算
+// 反而比原本固定 3.6 度省，格數從四萬掉到八千。
+//
+// ?hex-fine=N 可以改最細到哪一級，12 是 2.2 公里，大約一個里。
+const HEX_LOCAL_LEVELS = (() => {
+  const q = new URLSearchParams(location.search);
+  const v = parseInt(q.get('hex-fine') || q.get('hex-tw'), 10);
+  const max = v >= 9 && v <= 12 ? v : 11;
+  const out = [];
+  for (let i = 9; i <= max; i++) out.push(i);
+  return out;
+})();
+const HEX_LOCAL_COVER = 9;      // 畫面涵蓋度小於這個才輪到局部那幾級
+const HEX_LOCAL_R_MAX = 5;      // 收再大格數會爆，level 11 半徑 5 度就是八萬格
+const HEX_LOCAL_R_MIN = 0.6;
+const HEX_LOCAL_KEEP = 4;       // 快取幾份。轉來轉去的時候不必每次重算
+// key 是「等級加上量化過的中心」，因為中心現在會跟著視野走。
+const hexLocalCache = new Map();
+
+// 幾何在背景執行緒算。理由見 hexworker.js 的檔頭：level 8 的全球細分加對偶要
+// 357 毫秒，在主執行緒上做就是滾輪滾到那一段畫面整個停住。
+//
+// worker 起不來（舊瀏覽器、被政策擋掉）就退回主執行緒同步算，會卡一下但畫得出來，
+// 少一層的話這個原型就什麼都看不到了。
+let hexWorker = null;               // null 還沒試、false 不能用、物件可用
+let hexWorkerSeq = 0;
+const hexWorkerJobs = new Map();
+
+function hexWorkerGet() {
+  if (hexWorker !== null) return hexWorker || null;
+  try {
+    hexWorker = new Worker(new URL('./hexworker.js', import.meta.url), { type: 'module' });
+    hexWorker.onmessage = (e) => {
+      const done = hexWorkerJobs.get(e.data && e.data.id);
+      if (done) { hexWorkerJobs.delete(e.data.id); done(e.data); }
+    };
+    hexWorker.onerror = () => {
+      console.warn('hexgrid: 背景執行緒起不來，改在主執行緒算，換級時會頓一下');
+      hexWorker = false;
+      for (const done of hexWorkerJobs.values()) done(null);
+      hexWorkerJobs.clear();
+    };
+  } catch {
+    hexWorker = false;
+  }
+  return hexWorker || null;
+}
+
+/** 丟一份工作給背景執行緒。沒有 worker 可用時回 null，呼叫端自己同步算。 */
+function hexWorkerAsk(req) {
+  const w = hexWorkerGet();
+  if (!w) return null;
+  return new Promise((resolve) => {
+    const id = ++hexWorkerSeq;
+    hexWorkerJobs.set(id, resolve);
+    w.postMessage({ ...req, id });
+  });
+}
+
+/** worker 傳回來的 typed array 重組成 dualCells 那個形狀。 */
+function hexFromWorker(m) {
+  return { centers: m.centers, nc: m.nc, ringOff: m.ringOff, ringIdx: m.ringIdx,
+           faceCenters: m.faceCenters, level: m.level, local: m.local };
+}
+let hexJudgeBoxes = null;            // 各國的外接框，判國碼前先用它篩掉九成九
+let HEX = null;                 // 目前畫出來的那一份
+const hexCache = new Map();     // level → { dual, cc, codes }，建過就留著
+let hexBusy = false;            // 正在載資料或建幾何，別再排一次
+const hexCol = new THREE.Color();
+const hexDir = new THREE.Vector3();
+let hexFade = null;   // 正在淡出的上一份 { mesh, mat, geo, alpha, t }
+let hexLastMs = 0;    // 上一次換級在主執行緒上花了多久，debug 面板會顯示
+
+/**
+ * 這個涵蓋度下該用哪一級。目前這一級還可以就不換，換級要重建幾何。
+ *
+ * 視野落在台灣那一塊的時候，候選多出 9 到 11 三級，那幾級是局部細分算出來的。
+ */
+function hexPickLevel(cover, canLocal) {
+  const short = Math.min(innerWidth, innerHeight);
+  const px = (lv) => HEX_DIAG_DEG[lv] / cover * short;
+  const pool = canLocal ? HEX_LEVELS.concat(HEX_LOCAL_LEVELS) : HEX_LEVELS;
+  if (HEX && pool.includes(HEX.level)) {
+    const cur = px(HEX.level);
+    if (cur >= HEX_MIN_PX && cur <= HEX_MAX_PX) return HEX.level;
+  }
+  let best = pool[0], bestErr = Infinity;
+  for (const lv of pool) {
+    const err = Math.abs(Math.log(px(lv) / HEX_TARGET_PX));
+    if (err < bestErr) { bestErr = err; best = lv; }
+  }
+  return best;
+}
+
+/** 一個球面方向的經緯度。跟 llToVec 互為反函數。 */
+function cellLatLonFromDir(v) {
+  return [Math.asin(clamp(v.y, -1, 1)) * 180 / Math.PI,
+          Math.atan2(-v.z, v.x) * 180 / Math.PI];
+}
+
+/** 除錯用：把一個球面方向印成經緯度。 */
+const hexLL = (v) => {
+  const lat = Math.asin(Math.max(-1, Math.min(1, v.y))) * 180 / Math.PI;
+  const lon = Math.atan2(-v.z, v.x) * 180 / Math.PI;
+  return `${lat.toFixed(1)}/${lon.toFixed(1)}`;
+};
+
+/** 球面上正對相機的那一點，在 globe 自己的座標系裡。 */
+function hexViewDir() {
+  hexDir.copy(camera.position);
+  globe.updateMatrixWorld();
+  globe.worldToLocal(hexDir);
+  return hexDir.normalize();
+}
+
+/** 判國碼要用的外接框。worker 起不來時才用得到，那條路徑會在主執行緒上判。 */
+function hexPrepJudge(world) {
+  if (!hexJudgeBoxes) hexJudgeBoxes = judgeIndex(world, TWADMIN);
+}
+
+/** 這個涵蓋度下，局部網格要收多遠。判準跟全球那邊的裁切一樣，看畫面對角那一圈。 */
+function hexLocalRadius(cover) {
+  const aspect = Math.max(innerWidth, innerHeight) / Math.min(innerWidth, innerHeight);
+  const r = cover * 0.5 * Math.sqrt(1 + aspect * aspect) * 1.25 + 0.3;
+  return Math.max(HEX_LOCAL_R_MIN, Math.min(HEX_LOCAL_R_MAX, r));
+}
+
+/** 局部網格的某一份。中心量化過，轉來轉去的時候才不會每動一下就重算。 */
+async function hexBuildLocal(level, lat, lon, radius) {
+  // 量化到半徑的三分之一。同一塊區域內的微幅移動共用同一份，移出去才換。
+  const q = Math.max(0.25, radius / 3);
+  const key = `${level}:${Math.round(lat / q)}:${Math.round(lon / q)}:${Math.ceil(radius * 2)}`;
+  const hit = hexLocalCache.get(key);
+  if (hit) return hit;
+  if (!hexJudgeBoxes) return null;
+  const got = await (hexWorkerAsk({ kind: 'local', level, lat, lon, radius })
+                     || Promise.resolve(null));
+  let dual, cc, codes;
+  if (got && got.ok) {
+    dual = hexFromWorker(got);
+    cc = got.cc;
+    codes = got.codes;
+  } else {
+    // worker 不可用的退路。判幾萬格的國碼要幾百毫秒，主執行緒會明顯頓一下，
+    // 但總比整層畫不出來好。
+    dual = localCells(level, lat, lon, radius);
+    if (!dual.nc) return null;
+    const j = judgeCells(dual, hexJudgeBoxes);
+    cc = j.cc;
+    codes = j.codes;
+  }
+  if (!dual.nc) return null;
+  const dir = new THREE.Vector3();
+  llToVec(lat, lon, 1, dir);
+  const rec = { dual, cc, codes, level, local: true, at: [lat, lon], radius, dir };
+  // 留最近幾份就好。Map 的迭代是插入順序，最舊的排在最前面。
+  hexLocalCache.set(key, rec);
+  while (hexLocalCache.size > HEX_LOCAL_KEEP) {
+    hexLocalCache.delete(hexLocalCache.keys().next().value);
+  }
+  return rec;
+}
+
+/** 這個涵蓋度下局部那幾級進不進得了候選。現在不綁位置，夠近就行。 */
+function hexNearLocal(cover) {
+  return cover <= HEX_LOCAL_COVER && HEX_LOCAL_LEVELS.length > 0;
+}
+
+/** 某一級的資料。載過就留著，沒用到的等級完全不會付代價。 */
+async function hexLoadLevel(lv) {
+  if (hexCache.has(lv)) return hexCache.get(lv);
+  const data = await getJSON(`./hexgrid-${lv}.json`).catch(() => null);
+  if (!data || !data.cc) return null;
+  const got = await (hexWorkerAsk({ kind: 'global', level: lv }) || Promise.resolve(null));
+  const dual = got && got.ok ? hexFromWorker(got) : dualCells(lv);
+  // 幾何在這邊算，國碼在資料檔裡，兩邊的頂點順序錯開一格，結果就是每一格都有
+  // 顏色但顏色屬於別的國家，而畫面看起來完全正常。對不上就整級不用。
+  if (!verifyOrder(dual, data.probe)) {
+    console.warn(`hexgrid: level ${lv} 的幾何順序與資料檔對不上，這一級不畫`);
+    return null;
+  }
+  const rec = { dual, cc: decodeCC(data.cc), codes: data.codes, level: lv };
+  hexCache.set(lv, rec);
+  return rec;
+}
+
+/** 建一份新的六角層幾何，換掉舊的。 */
+function hexBuildMesh(rec, dir, radiusDeg) {
+  // 局部與全球同一條路徑。局部那份的格子本來就只有台灣附近那一塊，
+  // 裁切半徑開到 180 度也不會多收東西。
+  const isLocal = !!rec.local;
+  const cells = cellsNear(rec.dual, dir.x, dir.y, dir.z,
+                          isLocal ? 180 : radiusDeg, (i) => rec.cc[i] !== 0);
+  const old = HEX;
+  if (!cells.length) {
+    if (old) { globe.remove(old.mesh); old.geo.dispose(); old.mat.dispose(); }
+    HEX = null;
+    return;
+  }
+  const t0 = performance.now();
+  const g = cellGeometry(rec.dual, cells, R * HEX_LIFT, HEX_SHRINK);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(g.position, 3));
+  geo.setAttribute('normal', new THREE.BufferAttribute(g.normal, 3));
+  // 頂點色帶 alpha，低值的格子半透明，底下的陸地與 OONI 的紅色漸層仍然讀得到
+  const colors = new Float32Array(g.position.length / 3 * 4);
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 4));
+  geo.setIndex(new THREE.BufferAttribute(g.index, 1));
+  // 用 Standard 不用 Basic，材質跟陸地同一種，日夜分界才會一起走。
+  const mat = new THREE.MeshStandardNodeMaterial({ roughness: 1, metalness: 0, transparent: true, depthWrite: false });
+  const ca = attribute('color');
+  mat.colorNode = ca.xyz;
+  // 夜半球留一份自發光。純靠光照的話，背著太陽那一面會沉到全黑，格縫露出來的
+  // 陸地貼圖比它亮，整片看起來像挖了一堆洞。
+  mat.emissiveNode = ca.xyz.mul(0.3);
+  // 每一份有自己的 alpha，換級時兩份各走各的曲線交叉淡入淡出
+  const alpha = uniform(hexFadeReady() ? 0 : 1);
+  mat.opacityNode = ca.w.mul(alpha);
+  const mesh = new THREE.Mesh(geo, mat);
+  // 最先畫。高度壓得比所有線層低還不夠，透明物件之間是照 renderOrder 再照距離排的，
+  // 排在後面的話它會蓋掉已經畫好的國界與縣市界。負數保證它在那些線之前。
+  // 淡出中的那一份再低一階，兩層疊著的時候新的要畫在舊的上面。
+  mesh.renderOrder = -1;
+  globe.add(mesh);
+  HEX = { mesh, mat, geo, colors, cells, level: rec.level, rec, local: isLocal, alpha,
+          cellCC: cells.map((i) => rec.cc[i]), faceCell: g.faceCell,
+          vertStart: g.vertStart, vertCount: g.vertCount,
+          dir: dir.clone(), radiusDeg };
+  hexPaint(MODE);
+  hexShowScale(rec.level);
+  // 主執行緒在換級上實際花掉的時間。重的那一段（細分與取對偶）在 worker 裡，
+  // 這裡剩下的是裁切、建 BufferGeometry 與上色。
+  hexLastMs = performance.now() - t0;
+  // 舊的接手去淡出，新的從透明淡進來。上一輪還沒淡完的直接收掉，
+  // 連續縮放的時候同時最多兩份，不會愈疊愈多。
+  if (old) {
+    hexDropFade();
+    old.mesh.renderOrder = -2;
+    hexFade = { mesh: old.mesh, mat: old.mat, geo: old.geo, alpha: old.alpha, t: 0 };
+  }
+}
+
+/** 有沒有東西可以交叉淡出。第一份是直接出現的，沒有前一份可以接。 */
+function hexFadeReady() { return !!HEX; }
+
+/** 收掉正在淡出的那一份。 */
+function hexDropFade() {
+  if (!hexFade) return;
+  globe.remove(hexFade.mesh);
+  hexFade.geo.dispose();
+  hexFade.mat.dispose();
+  hexFade = null;
+}
+
+/**
+ * 推進交叉淡入淡出。
+ *
+ * 兩層的 alpha 不能單純一個升一個降，那樣中間會合出比兩端都低的透明度，換級的
+ * 瞬間整片格子會先淡一下再回來，看起來像閃了一下。這裡讓舊的照
+ * a_old = 1 - (1 - A) / (1 - A * t) 走，合成之後 1 - (1 - a_new)(1 - a_old) 剛好
+ * 恆等於 A，全程看不出中間有兩層。
+ */
+function hexStepFade(dt) {
+  if (!hexFade || !HEX) return;
+  hexFade.t += dt / HEX_FADE_SEC;
+  const t = Math.min(1, hexFade.t);
+  HEX.alpha.value = t;
+  if (t >= 1) { hexDropFade(); return; }
+  const A = HEX_ALPHA;
+  hexFade.alpha.value = (1 - (1 - A) / (1 - A * t)) / A;
+}
+
+/** 相機動過之後看要不要重建。換級、轉到別的地方、縮放幅度夠大時才重建。 */
+async function hexRefresh() {
+  if (!HEX_ON || hexBusy) return;
+  const cover = coverDeg();
+  const dir = hexViewDir();
+  const lv = hexPickLevel(cover, hexNearLocal(cover));
+  const aspect = Math.max(innerWidth, innerHeight) / Math.min(innerWidth, innerHeight);
+  const radius = Math.min(180, cover * 0.5 * Math.sqrt(1 + aspect * aspect) * HEX_PAD + 2);
+  // 局部那幾級的中心跟著視野走，所以一樣要看轉了多遠。轉出已收範圍的四成就換一份。
+  if (HEX && HEX.level === lv && HEX.local) {
+    const moved = Math.acos(clamp(HEX.rec.dir.dot(dir), -1, 1)) * 180 / Math.PI;
+    if (moved < HEX.rec.radius * 0.4) return;
+  }
+  if (HEX && HEX.level === lv && !HEX.local) {
+    const moved = Math.acos(clamp(HEX.dir.dot(dir), -1, 1)) * 180 / Math.PI;
+    // 轉動不到已收範圍的四分之一、縮放幅度不到三成，就沿用現在這一份
+    if (moved < HEX.radiusDeg * 0.25 && Math.abs(Math.log(radius / HEX.radiusDeg)) < 0.3) return;
+  }
+  hexBusy = true;
+  try {
+    // 9 以上是台灣那一塊的局部網格，現場細分，不必多一個資料檔
+    const ll = cellLatLonFromDir(dir);
+    const rec = lv >= 9
+      ? await hexBuildLocal(lv, ll[0], ll[1], hexLocalRadius(cover))
+      : await hexLoadLevel(lv);
+    if (rec) hexBuildMesh(rec, dir, radius);
+  } finally {
+    hexBusy = false;
+  }
+}
+
+// 每一級的格子對角有幾公里。地球半徑 6371，一格是正六角形，面積 4πR²/格數。
+const HEX_KM = { 5: 277, 6: 139, 7: 69, 8: 35, 9: 17, 10: 8.7, 11: 4.3, 12: 2.2 };
+
+/** 面板上那行「現在一格代表多大」。換級的時候跟著換。 */
+function hexShowScale(level) {
+  const el = $('hex-scale');
+  if (!el) return;
+  el.innerHTML = S('hexScale', { name: S(`hexScale${level}`), km: HEX_KM[level] || '?' });
+  el.hidden = false;
+}
+
+/** 依目前的指標重新上色。色階跟陸地色塊共用 glowMix，兩層不會各走各的。 */
+function hexPaint(mode) {
+  if (!HEX) return;
+  const values = modeValues(mode);
+  const ramp = modeRamp(mode);
+  let max = 1;
+  for (const v of values.values()) if (v > max) max = v;
+  const { colors, cellCC, vertStart, vertCount, rec } = HEX;
+  // 亮端取這個指標的色階高點，低端一律是陸地本色，中間走跟色塊同一條冪次曲線
+  const hi = [parseInt(ramp.hi.slice(1, 3), 16), parseInt(ramp.hi.slice(3, 5), 16), parseInt(ramp.hi.slice(5, 7), 16)];
+  for (let ci = 0; ci < cellCC.length; ci++) {
+    const n = values.get(rec.codes[cellCC[ci] - 1]) || 0;
+    const t = n ? Math.pow(n / max, GLOW_EXP) : 0;
+    // 頂點色是線性空間的，底圖那邊由貼圖的 colorSpace 自動處理，這裡要自己轉。
+    // 少了這一步整層會亮一階，跟底下的色塊對不起來。
+    hexCol.setRGB((HEX_LAND[0] + (hi[0] - HEX_LAND[0]) * t) / 255,
+                  (HEX_LAND[1] + (hi[1] - HEX_LAND[1]) * t) / 255,
+                  (HEX_LAND[2] + (hi[2] - HEX_LAND[2]) * t) / 255).convertSRGBToLinear();
+    const s = vertStart[ci], e = s + vertCount[ci];
+    for (let v = s; v < e; v++) {
+      colors[v * 4] = hexCol.r; colors[v * 4 + 1] = hexCol.g; colors[v * 4 + 2] = hexCol.b;
+      colors[v * 4 + 3] = HEX_ALPHA;
+    }
+  }
+  HEX.geo.attributes.color.needsUpdate = true;
+}
+
+// 點到哪一格。回傳國碼，沒中回 null。
+//
+// 用 raycast 不自己算球面反查：Goldberg 的格子沒有解析的反函數，要自己做就得另外
+// 建一張查表。視野裁切之後 mesh 上通常只有幾千到兩萬個三角形，一次點擊幾毫秒。
+const hexRay = new THREE.Raycaster();
+const hexPt = new THREE.Vector2();
+function pickHexCC(sx, sy) {
+  if (!HEX || !HEX.mesh.visible || HEX.alpha.value < 0.3) return null;
+  hexPt.set(sx / innerWidth * 2 - 1, -(sy / innerHeight * 2 - 1));
+  hexRay.setFromCamera(hexPt, camera);
+  const hit = hexRay.intersectObject(HEX.mesh, false)[0];
+  if (!hit || hit.faceIndex === undefined) return null;
+  const ci = HEX.faceCell[hit.faceIndex];
+  return HEX.rec.codes[HEX.cellCC[ci] - 1] || null;
+}
+
 function buildAtmosphere() {
   const mat = new THREE.MeshBasicNodeMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
@@ -1711,7 +2418,7 @@ function rescaleLanding(k) {
     const p = list[i];
     const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
     const sz = meta.size * k;
-    llToVec(p.lat, p.lon, R * 1.011, v);
+    llToVec(p.lat, p.lon, R * liftAt(LANDING_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     landingMesh.setMatrixAt(i, m);
@@ -1847,7 +2554,7 @@ function rescalePower(k) {
   for (let i = 0; i < list.length; i++) {
     const s = list[i];
     const sz = powerSize(s) * k;
-    llToVec(s.lat, s.lon, R * 1.009, v);
+    llToVec(s.lat, s.lon, R * liftAt(SUB_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     powerMesh.setMatrixAt(i, m);
@@ -1983,7 +2690,7 @@ function rescalePlants(k) {
   for (let i = 0; i < list.length; i++) {
     const p = list[i];
     const sz = plantSize(p) * k;
-    llToVec(p.lat, p.lon, R * 1.010, v);
+    llToVec(p.lat, p.lon, R * liftAt(PLANT_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     plantMesh.setMatrixAt(i, m);
@@ -2088,7 +2795,7 @@ function rescaleRenew(k) {
   for (let i = 0; i < list.length; i++) {
     const s = list[i];
     const sz = renewSize(s) * k;
-    llToVec(s.lat, s.lon, R * 1.0095, v);
+    llToVec(s.lat, s.lon, R * liftAt(RENEW_LIFT, k), v);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
     renewMesh.setMatrixAt(i, m);
@@ -2151,18 +2858,21 @@ function fillEnergy() {
 }
 
 function buildCoastline(coast, world) {
-  const seg = coast.seg;
-  const n = seg.length / 4;
+  // 資料是一條條連續的折線，相鄰段共用端點，存起來比獨立線段省將近一半。
+  // 畫的時候還是展開成 LineSegments，那一層沒有改。
+  const lines = coast.lines || [];
   const keys = twOutlineKeys(world);
   const v = new THREE.Vector3();
   const main = [], twPart = [];
-  for (let i = 0; i < n; i++) {
-    const x0 = seg[i * 4], y0 = seg[i * 4 + 1], x1 = seg[i * 4 + 2], y1 = seg[i * 4 + 3];
-    // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
-    const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
-    const out = isTw ? twPart : main;
-    llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
-    llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
+  for (const ln of lines) {
+    for (let i = 0; i + 3 < ln.length; i += 2) {
+      const x0 = ln[i], y0 = ln[i + 1], x1 = ln[i + 2], y1 = ln[i + 3];
+      // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
+      const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
+      const out = isTw ? twPart : main;
+      llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
+      llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
+    }
   }
   const mk = (arr, opacity) => {
     const g = new THREE.BufferGeometry();
@@ -2179,16 +2889,6 @@ function buildCoastline(coast, world) {
 }
 
 // 射線法：點是否落在該國的任一個外環內
-function inRings(rings, lon, lat) {
-  let hit = false;
-  for (const r of rings) {
-    for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) {
-      const yi = r[i + 1], yj = r[j + 1];
-      if ((yi > lat) !== (yj > lat) && lon < (r[j] - r[i]) * (lat - yi) / (yj - yi) + r[i]) hit = !hit;
-    }
-  }
-  return hit;
-}
 
 // 散布半徑由中繼數決定，不再由國土面積決定。
 // 原本在國界內隨機取樣，結果是加拿大 203 台灑滿整片國土（連北極圈都有點），瑞典 513 台
@@ -2292,7 +2992,7 @@ function buildRelays(snap, counts) {
     const a = ANCHOR.get(country);
     if (!a || NO_PLACE.has(country)) continue;
     sampleIn(a, ll);
-    llToVec(ll[0], ll[1], R * 1.012, tmp);
+    llToVec(ll[0], ll[1], R * DOT_LIFT, tmp);
     // cc 帶著走，訊息串要拿它顯示三跳落在哪幾國
     groups[role].push({ x: tmp.x, y: tmp.y, z: tmp.z, s: relaySize(w), cc: country });
     total++;
@@ -2368,7 +3068,9 @@ function rescaleDots(k) {
       const n = g.list[i];
       const s = n.s * k;
       m4.makeScale(s, s, s);
-      m4.setPosition(n.x, n.y, n.z);
+      // 存的是建好時的位置（半徑 R * DOT_LIFT），照同一個比例收回地表
+      const ls = liftAt(DOT_LIFT, k) / DOT_LIFT;
+      m4.setPosition(n.x * ls, n.y * ls, n.z * ls);
       g.mesh.setMatrixAt(i, m4);
     }
     g.mesh.instanceMatrix.needsUpdate = true;
@@ -2437,11 +3139,12 @@ function measureLabels() {
 }
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLabels);
 
-// 左上面板與底部提示列會蓋住標籤，壓在它們上面的國家就不標
+// 左上面板與底部那幾條會蓋住標籤，壓在它們上面的國家就不標。
+// 導覽列比提示條高得多，漏掉它的話導覽期間國家標籤會壓在說明文字上。
 let uiBoxes = [];
 function refreshUIBoxes() {
   uiBoxes = [];
-  for (const id of ['top', 'hint']) {
+  for (const id of ['top', 'hint', 'tour']) {
     const el = $(id);
     if (!el) continue;
     const r = el.getBoundingClientRect(); // 面板是 fixed，offsetParent 一律為 null，改看實際尺寸判斷有沒有顯示
@@ -2560,6 +3263,40 @@ function buildStats(snap) {
   let exitAll = 0;
   for (const r of mix.values()) exitAll += r[2] + r[3];
   CC_STATS = { mix, w, totalN, totalW, rankN, rankW, conc, cnt: cntByCC, exitShare: exitAll / totalN };
+}
+
+// 工作坊導覽要插進文案的數字。每次換站都重取一次，按過即時更新之後跟著變。
+//
+// 百分比的格式跟國家標籤那邊同一套：小數點後一位，低於 0.05 收成 <0.1。少了這條，
+// 台灣那一筆 0.007% 會被四捨五入成 0.0%，讀起來像一台都沒有。
+function tourStats() {
+  const s = CC_STATS;
+  if (!s) return {};
+  const n = (cc) => (s.cnt.get(cc) || 0);
+  const pct = (cc) => {
+    const v = (s.w.get(cc) || 0) / (s.totalW || 1) * 100;
+    return v < 0.05 ? '<0.1' : v.toFixed(1);
+  };
+  return {
+    total: s.totalN.toLocaleString(),
+    countries: s.cnt.size,
+    usN: n('us').toLocaleString(), usPct: pct('us'),
+    deN: n('de').toLocaleString(), dePct: pct('de'),
+    twN: n('tw'), twRank: s.rankN.get('tw') || '—', twPct: pct('tw'),
+    blockedN: (OONI && OONI.blocked && OONI.blocked.length) || 0,
+  };
+}
+
+// 哪幾站的資料真的載到了。
+//
+// 使用者估計那一站要有 torusers.json，台灣那兩站要有縣市界加上電力那幾份之一。
+// 抓不到就把整站抽掉，站數跟著少一站。留一站空畫面的話，講者得在台前臨時解釋
+// 為什麼什麼都沒有，那比少講一站糟得多。
+function tourAvailable() {
+  return {
+    users: !!USERS_MAP,
+    tw: !!(TWADMIN && (POWER || GRID)),
+  };
 }
 
 // 這個國家在中繼以外的資料裡有沒有東西。
@@ -2996,12 +3733,23 @@ function modeValues(mode) {
   return m;
 }
 
+// 中繼點的顯示條件只有角色篩選。六角層是底圖，資料點疊在它上面，兩者不互斥。
+function applyRoleVisibility() {
+  const role = MODE_ROLE[MODE];
+  for (const m of relayMeshes) m.visible = role === undefined || m.userData.role === role;
+}
+
 function setMode(mode) {
   if (!CC_STATS || !GLOW || !MODES[mode === 'all-weight' || mode === 'all-count' ? 'all' : mode]) return;
   MODE = mode;
   const values = modeValues(mode);
   paintGlow(values, GLOW.canvas, modeRamp(mode));
   GLOW.tex.needsUpdate = true;
+  if (EAST) {
+    paintEastLand(values, EAST.canvas, modeRamp(mode));
+    EAST.tex.needsUpdate = true;
+  }
+  hexPaint(mode);
   for (const l of labels) {
     const v = values.get(l.cc) || 0;
     const pct = v / CC_STATS.totalW * 100;
@@ -3013,8 +3761,7 @@ function setMode(mode) {
     l.el.dataset.off = v ? '' : '1'; // 這個模式下沒有的國家就不標
   }
   measureLabels();
-  const role = MODE_ROLE[mode];
-  for (const m of relayMeshes) m.visible = role === undefined || m.userData.role === role;
+  applyRoleVisibility();
   const r = modeRamp(mode);
   const ramp = document.querySelector('#ramp i');
   if (ramp) ramp.style.background = `linear-gradient(90deg, ${MAP.land} 0 14%, ${r.lo} 14%, ${r.hi})`;
@@ -3343,17 +4090,33 @@ async function fetchLive(btn) {
 const pointers = new Map();
 const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
 let last = null, pinchStart = 0, zoomStart = 1;
+const dragA = new THREE.Vector3(), dragB = new THREE.Vector3();
 let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
 const DRAG_DEAD_PX = 6; // 跟挑選設施那條死區同一個值
+// 地球的操作全部掛在 window，不是掛在畫布上。
+//
+// 畫布上面浮著一層 HTML：國家標籤。可見的那些是 .lb.on，設了 pointer-events: auto
+// 才點得開國家卡片，代價是它們會把滑鼠事件整個吃掉。事件掛在畫布上的話，游標只要
+// 壓在任何一個標籤上，滾輪就縮放不了、按下去也拖不動地球，而畫面上隨時有幾十個
+// 標籤，等於地球上有幾十塊區域是死的。
+//
+// 掛在 window 就沒有這個問題，代價是要自己排除真正的 UI。那幾塊面板需要自己的
+// 捲動與點擊，列在這裡。
+const UI_SEL = '#top, #cc-card, #hint, #tour';
+const onUI = (e) => !!(e && e.target && e.target.closest && e.target.closest(UI_SEL));
+
 function bindControls(dom) {
-  dom.addEventListener('pointerdown', (e) => {
-    dom.setPointerCapture(e.pointerId);
+  addEventListener('pointerdown', (e) => {
+    if (onUI(e)) return;
+    // 捕捉到畫布上，後續的 move 與 up 就算游標跑到面板上也還是送得到這裡，
+    // 而且 target 會變成畫布，onUI 不會在拖到一半的時候誤判。
+    try { dom.setPointerCapture(e.pointerId); } catch { /* 捕捉不到就算了，事件照樣冒泡 */ }
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
     dragFrom = { x: e.clientX, y: e.clientY };
     if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   });
-  dom.addEventListener('pointermove', (e) => {
+  addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 2) {
@@ -3363,8 +4126,27 @@ function bindControls(dom) {
       return;
     }
     if (!last) return;
-    const k = dragRate();
-    const dry = (e.clientX - last.x) * k, drx = (e.clientY - last.y) * k;
+    // 先試著讓地表跟著手指走：兩個螢幕位置各自投影回球面，取它們的經緯度差當成
+    // 這一步要轉的角度。這樣拖到哪裡地表就到哪裡，不論在畫面中央還是靠近輪廓。
+    //
+    // 拖出球外就沒有交點可以算，那時退回固定比例的近似，至少還推得動。
+    let dry, drx;
+    const a = DRAG_GRAB ? sphereAt(last.x, last.y, dragA) : null;
+    const b = a ? sphereAt(e.clientX, e.clientY, dragB) : null;
+    if (a && b) {
+      // 經度差要繞回 [-180, 180]，跨過換日線那一下才不會整顆球彈一圈
+      let dlon = Math.atan2(b.x, b.z) - Math.atan2(a.x, a.z);
+      while (dlon > Math.PI) dlon -= Math.PI * 2;
+      while (dlon < -Math.PI) dlon += Math.PI * 2;
+      // 緯度差的符號跟 rotation.x 相反：手指往下拉，看到的是更北邊
+      const dlat = Math.asin(clamp(b.y, -1, 1)) - Math.asin(clamp(a.y, -1, 1));
+      dry = dlon;
+      drx = -dlat;
+    } else {
+      const k = dragRate();
+      dry = (e.clientX - last.x) * k;
+      drx = (e.clientY - last.y) * k;
+    }
     view.ry += dry;
     view.rx = clamp(view.rx + drx, -1.2, 1.2);
     // 視角真的動了才清網址上的關注區域，而且要動得夠多。掛在 pointerdown 的話，
@@ -3399,7 +4181,7 @@ function bindControls(dom) {
     // 三指收到剩兩指，捏合的基準距離也要重取，否則縮放會跟著跳
     if (n === 2) { pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
   };
-  dom.addEventListener('pointerup', up); dom.addEventListener('pointercancel', up);
+  addEventListener('pointerup', up); addEventListener('pointercancel', up);
   // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
   // 而 iOS Safari 從 10 開始也忽略 viewport 的 user-scalable=no。所以整頁鎖縮放
   // 這件事在 Safari 上只能靠攔這三個事件，跟 index.html 的 viewport 是一組的，
@@ -3421,6 +4203,17 @@ function bindControls(dom) {
   const twBtn = $('btn-tw');
   if (twBtn) twBtn.addEventListener('click', () => goFocus('tw'));
 
+  // 六角層的開關。按鈕要等第一次建起來才會露出來，沒開參數的人看不到它。
+  const hexBtn = $('btn-hex');
+  if (hexBtn) hexBtn.addEventListener('click', () => {
+    if (!HEX) return;
+    HEX.mesh.visible = !HEX.mesh.visible;
+    if (hexFade) hexFade.mesh.visible = HEX.mesh.visible;
+    hexBtn.classList.toggle('on', HEX.mesh.visible);
+    const sc = $('hex-scale');
+    if (sc) sc.hidden = !HEX.mesh.visible;
+  });
+
   const spinBtn = $('btn-spin');
   if (spinBtn) {
     spinBtn.addEventListener('click', () => {
@@ -3441,18 +4234,38 @@ function bindControls(dom) {
   // 掛太廣會讓面板上的按鈕連按兩下時第二下沒反應。畫布上的互動全走 pointer 事件，
   // 取消相容事件沒有影響。
   let lastTapT = 0;
-  dom.addEventListener('touchend', (e) => {
+  addEventListener('touchend', (e) => {
+    if (onUI(e)) return;
     const now = performance.now();
     if (now - lastTapT < 350 && e.touches.length === 0) e.preventDefault();
     lastTapT = now;
   }, { passive: false });
-  dom.addEventListener('dblclick', (e) => e.preventDefault());
-  dom.addEventListener('wheel', (e) => {
+  addEventListener('dblclick', (e) => { if (!onUI(e)) e.preventDefault(); });
+  addEventListener('wheel', (e) => {
+    if (onUI(e)) return;   // 面板要留給它自己捲動
     e.preventDefault();
     // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
     const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
     const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
-    view.zoom = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    let next = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    // 一格滾輪最多讓畫面涵蓋的地表變動這麼多。
+    //
+    // zoom 是相對於 fitDist 的倍率，而涵蓋度跟它高度非線性：球快填滿畫面的那一段，
+    // 離地 8.2 個半徑是飽和的 180 度，退到 7.9 就只剩 116 度，距離只動 3% 卻換來
+    // 15 度。固定比例的 zoom 步進在那裡就是一格滾輪畫面猛然拉近一大截，實測掉 26 度，
+    // 而同樣一格在別的距離只掉 1 到 5 度。
+    //
+    // 所以改成先算這一格會讓涵蓋度變多少，超過上限就回頭解出剛好走到上限的 zoom。
+    // 飽和區（180 度）沒有比例可言，那一段維持原本的 zoom 步進。
+    const before = coverDeg(targetDist());
+    if (before < 179 && step !== 0) {
+      const after = coverDeg(R + (fitDist() - R) * next);
+      const limit = before * (step < 0 ? 1 - COVER_STEP_MAX : 1 + COVER_STEP_MAX);
+      if ((step < 0 && after < limit) || (step > 0 && after > limit)) {
+        next = zoomForCover(Math.min(limit, 179));
+      }
+    }
+    view.zoom = next;
     fly = null;
     clearFocus();
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
@@ -3480,6 +4293,8 @@ function stopSpin() { setSpin(false); }
 // 但保留兩個名字讓呼叫處讀得出當初的意圖（按下去 vs 放開）。
 function pauseSpin() { setSpin(false); }
 
+// 六角層的重建節流。每 0.25 秒看一次要不要換，換級與轉動的判斷在 hexRefresh 裡。
+let hexTick = 0;
 let prevNow = performance.now();
 async function animate() {
   const now = performance.now();
@@ -3531,6 +4346,20 @@ async function animate() {
   if (plantMat) plantMat.opacity = swap * 0.95;
   if (renewMat) renewMat.opacity = swap * 0.9;
   if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
+  // 六角層是底圖，任何縮放下都在，所以這裡不做進退場，只管「該不該換一份」。
+  //
+  // 重建要掃全域的格心再建一份 BufferGeometry，不能每幀來一次，所以隔一段時間才
+  // 問一次，真正要不要換由 hexRefresh 依移動量與縮放幅度決定。
+  //
+  // 飛行途中照樣更新。第一版加了「fly 為 null 才更新」，結果是按下關注某國之後
+  // 整趟飛行都停在出發時那一級，落地才換。而 flyTo 是指數趨近，低幀率的裝置上
+  // 那個收斂要幾十秒，等於幾乎不更新。
+  if (HEX_ON) {
+    hexStepFade(dt);
+    hexTick += dt;
+    // 上一份還在淡出就先別排下一次，否則快速縮放會一直把沒淡完的收掉，等於沒有過場
+    if (!hexFade && hexTick > (fly ? 0.4 : 0.2)) { hexTick = 0; hexRefresh(); }
+  }
   if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
@@ -3639,6 +4468,13 @@ async function main() {
   fillGrid();
   fillEnergy();
   buildStats(snap);
+  // 局部網格要拿國界與縣市界判國碼，那兩份剛好都在手上，建一次外接框留著
+  hexPrepJudge(world);
+  // 六角層是原型，預設不載。放在 buildStats 之後是因為上色要讀 CC_STATS，
+  // 而且它自己 catch 掉所有失敗，資料抓不到就是少一層，不影響其他東西。
+  await hexRefresh();
+  const hb = $('btn-hex');
+  if (HEX_ON && hb) { hb.hidden = false; hb.classList.add('on'); }
   post = new THREE.PostProcessing(renderer);
   const sp = pass(scene, camera);
   const c = sp.getTextureNode('output');
@@ -3713,7 +4549,11 @@ async function main() {
     pressAt = null;
     if (moved > 6 || pointers.size > 0) return;
     const hit = pickFeature(e.clientX, e.clientY);
-    if (hit) showFeature(hit);
+    if (hit) { showFeature(hit); return; }
+    // 設施沒中就問六角層。格子是國家層級的東西，點下去開國家卡，跟點國家標籤同一個結果。
+    // 這是格子比隨機點好的地方之一：整片國土都是命中區，手機上不必對準那幾個點。
+    const hcc = pickHexCC(e.clientX, e.clientY);
+    if (hcc) showCountry(hcc);
   });
   refreshUIBoxes();
   $('info') && $('info').addEventListener('toggle', refreshUIBoxes);
@@ -3724,6 +4564,27 @@ async function main() {
   // 才算得出取景，所以擺在這裡而不是更早。
   applyFocus();
   addEventListener('hashchange', applyFocus);
+  // 工作坊導覽。擺在這裡是因為第一站要報中繼台數，CC_STATS 要先建好。
+  //
+  // 兩顆入口鍵在 HTML 裡是停用的，到這裡才放行，讀者不會在資料還沒齊的時候按到
+  // 一趟數字全空的導覽。
+  const tour = createTour({
+    $, S, flyTo, setMode, hideCountry,
+    stats: tourStats,
+    available: tourAvailable,
+    onLayout: refreshUIBoxes,
+    // 網址跟著動，複製網址列就是一條「開啟後直接進導覽」的連結，工作坊把它貼進
+    // 投影機那台瀏覽器就能開講。用 replaceState 跟 goFocus 一致，不留歷史紀錄。
+    onStart: () => history.replaceState(null, '', '#tour'),
+    onStop: clearFocus,
+  });
+  for (const id of ['btn-tour', 'btn-tour-hint']) {
+    const b = $(id);
+    if (b) b.disabled = false;
+  }
+  // #tour 進場就直接開講。focusTarget 認不得 tour 這個 key，所以上面那行 applyFocus
+  // 不會把它誤判成國碼，兩者不衝突。
+  if (focusKey().toLowerCase() === 'tour') tour.start();
   renderer.setAnimationLoop(animate);
 }
 main().catch((e) => { const l = $('loading'); if (l) l.classList.add('done'); console.error(e); fatal(S('fatalLoad')); });

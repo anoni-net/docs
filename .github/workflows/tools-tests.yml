@@ -85,6 +85,12 @@ jobs:
       - name: sw.js 離線路徑
         run: node tools/test_sw_offline.mjs
 
+      # sw.js 的 CORE_PAGES 改了也要對一次。docs-style-lint.yml 涵蓋的是「新增文章、
+      # 沒碰 sw.js」，這裡涵蓋反過來的「改了清單、沒碰文章」，例如把一頁拿掉之後
+      # 檔案還在。
+      - name: 自動存清單沒有漂移
+        run: python3 tools/check_core_pages.py
+
       # 語言偏好只在預設語系的首頁套用，其餘一律不動
       - name: 語言偏好導向規則
         run: node tools/test_lang_preference.mjs
@@ -241,6 +247,12 @@ jobs:
       # 而把 queryBucket(q.length) 寫成 q 只差幾個字元，畫面上看不出差別。
       - name: 量測腳本不外洩搜尋詞
         run: node tools/test_analytics.mjs
+
+      # 網址合約：這裡跑得到的是「合約檔案本身沒有被手改壞」與「增減分得開」那幾層。
+      # 拿產物去對的那一層要三個語系建置過，由 build_docs.yml 在上傳前跑，沒有產物時
+      # 這一支會自己跳過那一項。
+      - name: 網址合約
+        run: python3 tools/test_check_url_contract.py
 
       # onion 位址換掉而漏改其中一處，症狀是建置成功、CI 全綠、產物看起來正常，
       # 壞掉的只有讀者點下去那一刻，而 onion 讀者多半沒有第二條路可走。

@@ -293,6 +293,20 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 }
 
 /* ==========================================================================
+   .diagram-tall — docs/diagrams/ 竖式手写 SVG 的尺寸
+   画布画成 400 宽，手机端缩到内容栏宽（360 视窗是 328，390 视窗是 358），
+   桌面端放大到 480 为止。缩放比只看宽度，画布越宽字缩得越狠，所以画布是照
+   手机订的，桌面靠这条往上放大回来。规格见 community/brand-assets.md。
+   旧的横式图（画布 880 到 1000）不要套，套上去会被夹到 480，字更小。
+   用法：<img class="diagram-tall" src="..." alt="...">
+   ========================================================================== */
+
+.md-typeset img.diagram-tall {
+  width: 480px;
+  max-width: 100%;
+}
+
+/* ==========================================================================
    .hero-icon — 首页 H1 旁的 logo（同 header / favicon 使用 logo-tonal）
    ========================================================================== */
 
@@ -789,6 +803,18 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   width: 100%;
 }
 
+/* 退出開關那一組。整組連群組標題都由 js/analytics.js 建出來，所以這裡的規則要
+   認得 JS 給的 class。標題自己帶 .anoni-settings__group 的內距，按鈕與說明另外
+   包一層，兩層都加內距的話左右會多縮排一次。 */
+.anoni-settings__optout-body {
+  padding: 0.2rem 0.8rem 0.8rem;
+}
+
+.anoni-settings__optout .anoni-banner-action {
+  justify-content: center;
+  width: 100%;
+}
+
 .anoni-settings__status {
   color: var(--md-default-fg-color--light);
   font-size: 0.62rem;
@@ -964,6 +990,22 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   z-index: auto;
 }
 
+/* 上游的 .md-select:hover .md-select__inner 與 :focus-within 那一條特異性是
+   (0,3,0)，壓得過上面只有兩個類別的 (0,2,0)。滑鼠移進抽屜的語言那一區，清單就被
+   上游的 translate3d(-50%, 0, 0) 往左推半個自己的寬度，1280px 實測位移 121px，
+   兩個語言名稱有一半掉到抽屜外被裁掉。
+
+   960px 以下不會發生，上面「語言切換選單」那一組的窄螢幕覆寫已經把 hover 的
+   transform 改成 translate3d(0, 0, 0)。抽屜改成所有寬度都存在之後，桌面才露出來。
+
+   補一層 .anoni-settings 湊到 (0,4,0) 壓回去。max-height 一起接住，上游同一條把
+   展開值設成 10rem，語言再多幾個清單就會長出捲軸。 */
+.anoni-settings .md-select:focus-within .md-select__inner,
+.anoni-settings .md-select:hover .md-select__inner {
+  max-height: none;
+  transform: none;
+}
+
 .anoni-settings .md-select__inner::after {
   display: none;
 }
@@ -1040,3 +1082,68 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
 [data-md-color-scheme="slate"] .md-typeset .post-tag--community { color: #4dbfff; }  /* 6.95 */
 [data-md-color-scheme="slate"] .md-typeset .post-tag--news      { color: #f48fb1; }  /* 6.41 */
 [data-md-color-scheme="slate"] .md-typeset .post-tag--tech      { color: #b39ddb; }  /* 5.97 */
+
+/* ==========================================================================
+   文章章節的適合讀者標籤 .role-tag（沿用 .sess-tag 的 soft chip 淡底深字）
+   淺色五組對比 8.35 / 5.71 / 8.68 / 7.85 / 9.56，深色 6.19 / 5.06 / 5.89 /
+   6.21 / 5.86，全部過 AA 4.5。顏色只是輔助，標籤本身帶文字，色盲與單色
+   列印都讀得到。不挪用 --guide-* sidebar 導覽色
+   ========================================================================== */
+.md-typeset .role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.32rem;
+  margin: -0.3rem 0 1.2rem;
+  line-height: 1.7;
+}
+.role-tags__label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--neutral-muted);
+  white-space: nowrap;
+}
+.role-tags__note {
+  flex: 1 1 100%;
+  font-size: 0.68rem;
+  color: var(--neutral-muted);
+}
+.role-tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.02rem 0.45rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.role-tag--all   { background: #eceff1; color: #37474f; border-color: #b0bec5; }
+.role-tag--faith { background: #e0f2f1; color: #00695c; border-color: #80cbc4; }
+.role-tag--civic { background: #e8eaf6; color: #283593; border-color: #9fa8da; }
+.role-tag--dev   { background: #fce4ec; color: #880e4f; border-color: #f48fb1; }
+.role-tag--press { background: #efebe9; color: #4e342e; border-color: #bcaaa4; }
+
+[data-md-color-scheme="slate"] .role-tag--all   { background: rgba(120,144,156,.20); color: #b0bec5; border-color: rgba(120,144,156,.45); }
+[data-md-color-scheme="slate"] .role-tag--faith { background: rgba(0,150,136,.20);   color: #4db6ac; border-color: rgba(0,150,136,.45); }
+[data-md-color-scheme="slate"] .role-tag--civic { background: rgba(63,81,181,.22);    color: #9fa8da; border-color: rgba(63,81,181,.50); }
+[data-md-color-scheme="slate"] .role-tag--dev   { background: rgba(233,30,99,.18);    color: #f48fb1; border-color: rgba(233,30,99,.45); }
+[data-md-color-scheme="slate"] .role-tag--press { background: rgba(121,85,72,.25);    color: #bcaaa4; border-color: rgba(121,85,72,.50); }
+
+/* --neutral-muted #546e7a 在 slate 底只有 2.93，深色另給一階亮的灰藍（6.12 過 AA） */
+[data-md-color-scheme="slate"] .role-tags__label,
+[data-md-color-scheme="slate"] .role-tags__note { color: #90a4ae; }
+
+/* 章節標題的報告頁碼移到標籤列，虛線外框與實心角色標籤區隔開 */
+.role-tags__page {
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.02rem 0.45rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  border: 1px dashed var(--neutral-border);
+  color: var(--neutral-muted);
+  font-variant-numeric: tabular-nums;
+}
+[data-md-color-scheme="slate"] .role-tags__page { border-color: rgba(144,164,174,.45); color: #90a4ae; }

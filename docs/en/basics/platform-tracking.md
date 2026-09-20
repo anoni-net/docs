@@ -12,7 +12,7 @@ This page does two things. It points to the canonical account of how third-party
 
 !!! info "We point outward on the mechanics"
 
-    EFF's [Behind the One-Way Mirror](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} is the reference for how corporate tracking works: invisible tracking pixels, browser fingerprinting, social widgets, mobile SDKs, and the data-broker ecosystem behind them. It reports that the average web page shares data with dozens of third parties, and that mobile apps do the same, many collecting location and call records even when not in use. We don't reproduce that work.
+    EFF's [Behind the One-Way Mirror](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} is the reference for how corporate tracking works: invisible tracking pixels, browser fingerprinting, social widgets, mobile SDKs, and the data-broker ecosystem behind them. Its findings are that the average web page shares data with dozens of third parties, and that mobile apps do the same, many collecting location and call records even when not in use. We don't reproduce that work.
 
 ## Why targeted ads feel like eavesdropping
 

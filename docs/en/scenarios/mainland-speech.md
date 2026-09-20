@@ -52,9 +52,9 @@ The target set is widening. Campaigns from 2025 onward have covered "spreading p
 Most people want both "it spreads" and "nothing happens to me." In this environment those goals conflict at four specific points:
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/speech-reach-risk.en.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/speech-reach-risk-v4.en.svg"
         alt="The upper half shows four pairs in tension, with what you want on the left and an arrow pointing to its cost on the right. Wanting ordinary people to believe you costs credibility, because credibility comes from a real name, a track record and existing relationships, which are exactly your exposure. Wanting to evade keyword filtering costs comprehension, because distorted wording only reads clearly to people who already agree, keeping you inside your own circle. Wanting the content to persuade costs safety, because persuasion rests on specific, checkable detail and specificity is what points back at you. Wanting to reach more people costs risk, because a wider spread moves closer to the thresholds written into the relevant provisions and makes you more likely to be treated as a priority case. The lower half gives three orientations: to leave a record, prioritise archiving the content outside the jurisdiction and keep the publisher's visibility as low as possible; to persuade specific people, work privately and at small scale and give up public reach; to spread the content, accept higher risk for the publisher, or hand the material to an existing channel willing to carry it.">
-    <figcaption>None of the four tensions has a solution that gets both</figcaption>
+    <figcaption>None of the four tensions has a solution that gets both. The risk does not land on you alone. Group administrators carry responsibility for what is posted, family and employers get contacted, and other members of the same group can be affected. Onward sharing is the part most often underestimated. Once content is reposted, screenshotted or reworked, the spread leaves your control while responsibility can still return to the original source.</figcaption>
 </figure>
 
 | What you want | What it costs |
@@ -148,6 +148,7 @@ Submitting material to these projects usually preserves it more reliably than re
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — what changing accounts does and does not cover
 - [How platforms collect your data](../basics/platform-tracking.md) — the platform-side collection and behavioral signals underneath all of this
 - [Threat modeling](../basics/threat-model.md) — the adversary and the cost you can absorb, per action
+- [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — a worked example of the same apparatus using AI to score, reframe, and package public speech into briefings written for officials
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} — US Library of Congress, Global Legal Monitor, July 2025. Translated measures at [China Law Translate](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"}. Verified 2026-08.
 [^one-app]: [One App, Two Systems](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"} — The Citizen Lab, on keyword filtering being enabled only for mainland-registered accounts and persisting after relinking to an international number.

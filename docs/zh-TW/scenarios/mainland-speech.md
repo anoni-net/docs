@@ -80,9 +80,9 @@ Citizen Lab 對微信的一系列實證研究拆解了其中幾個機制，有�
 多數人希望同時做到「傳得出去」與「不出事」。在中國境內的平台上，兩個目標在四個地方直接衝突：
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/speech-reach-risk.zh-TW.svg"
+    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/speech-reach-risk-v4.zh-TW.svg"
         alt="上半部是四組互相拉扯的組合，左邊是你想要的，箭頭指向右邊的代價。想讓普通人願意相信，代價是匿名帳號的可信度低，可信度來自實名、履歷與既有關係，而這些正是暴露面。想避開關鍵詞過濾，代價是變形後的表達難懂，只有原本就懂的人看得懂，等於留在同溫層。想讓內容有說服力，代價是說服力來自具體、可查證的細節，而具體正是最容易指向你的部分。想觸及更多人，代價是傳播規模越大越接近相關條款的認定門檻，也越可能被列為重點處理對象。下半部是三種取向：要留下紀錄的人優先把內容存檔到境外並把曝光度壓到最低，要說服特定的人的人走私下與小範圍並放棄公開傳播的規模，要擴散的人接受發布者承擔較高風險，或把內容交給願意承擔的既有管道。">
-    <figcaption>四組矛盾都沒有兩全的解法</figcaption>
+    <figcaption>四組矛盾都沒有兩全的解法。風險不只落在你身上。群組管理者對群內內容負有管理責任，家人與雇主可能被聯繫，同一群組的其他成員可能一併受影響。</figcaption>
 </figure>
 
 | 你想要的 | 代價 |
@@ -180,6 +180,7 @@ Citizen Lab 對微信的一系列實證研究拆解了其中幾個機制，有�
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：分層的設定與長期維持，以及換帳號擋不掉的部分
 - [社群平台怎麼收集你的資料](../basics/platform-tracking.md)：平台側的資料收集與行為訊號
 - [威脅模型如何建立](../basics/threat-model.md)：每次行動前先盤點對手與能承受的代價
+- [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：同一套體系用 AI 產出輿情簡報的實例，公開發言被評分、改寫，最後進到呈給官員的簡報
 
 [^cyberid]: [China: Centralized Internet ID System Officially Launched](https://www.loc.gov/item/global-legal-monitor/2025-07-09/china-centralized-internet-id-system-officially-launched/){target="_blank"} - 美國國會圖書館 Global Legal Monitor，2025 年 7 月。法規英譯見 [Measures on the Management of the National Online Identity Authentication Public Service](https://www.chinalawtranslate.com/en/online-id-2/){target="_blank"} - China Law Translate。查證日 2026-08。
 [^one-app]: [One App, Two Systems: How WeChat uses one censorship policy in China and another internationally](https://citizenlab.ca/research/wechat-china-censorship-one-app-two-systems/){target="_blank"} - The Citizen Lab。關鍵詞過濾只對中國大陸手機號註冊的帳號啟用，且改綁國際號碼後仍持續。

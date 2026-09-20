@@ -64,8 +64,22 @@ const SETTINGS = "anoni-docs-settings";
 const AUTO_PRECACHE_URL = "/__anoni-settings/auto-precache";
 
 // 核心章節的內文圖要不要一起存。預設不存：那批圖有七 MB，會讓自動下載的量從
-// 十一 MB 變成十八 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
+// 十六 MB 變成二十三 MB，而多數讀者在行動網路上。想要完整離線閱讀的人自己打開。
 const PRECACHE_IMAGES_URL = "/__anoni-settings/precache-images";
+
+// 讀者在管理頁按過「全部存到裝置」的語系。
+//
+// 按下那顆的意思是「這個語言的內容我全部都要」，可是按完之後程式裡只剩「LIBRARY
+// 裡有哪幾頁」這個結果，意圖沒有留下任何痕跡。站上之後多出來的文章從來沒被存過，
+// 所以不在 LIBRARY 裡，而「更新已存的內容」的對象就是 LIBRARY，新文章於是永遠
+// 不會被更新帶下來。這筆旗標讓更新把索引裡新增的頁面一起補上。
+//
+// 跟其他設定一樣放進 SETTINGS，而不是 localStorage：clearAllOffline 會把這個 cache
+// 一起刪掉，讀者按過「清除所有離線內容」之後意圖跟著歸零。放 localStorage 的話清除
+// 按鈕碰不到它，讀者清乾淨的下一步就是按更新，結果整站連同敏感場景頁又被抓回來。
+//
+// 逐語系一筆。「全部存到裝置」本來就一次只處理讀者當下所在的那個語系。
+const SAVE_ALL_URL = "/__anoni-settings/save-all/";
 
 // 這個 SW 發出去的每一個請求都要繞過瀏覽器自己的 HTTP 快取。
 //
@@ -187,7 +201,11 @@ const CORE_PAGES_ZH = [
   "basics/threat-model/",
   "basics/metadata/",
   "basics/payments-anonymity/",
-  // tools(工具，全部)
+  "basics/platform-tracking/",
+  "basics/surveillance-capability/",
+  "basics/multiple-identities/",
+  "basics/browser-fingerprinting/",
+  // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
   "tools/what-is-tor/",
@@ -203,6 +221,15 @@ const CORE_PAGES_ZH = [
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
   "tools/encrypted-dns/",
+  "tools/grapheneos/",
+  "tools/asian-diceware/",
+  "tools/vpn-guide/",
+  "tools/ai-privacy/",
+  "tools/email-alias/",
+  "tools/signal-proxy/",
+  "tools/tor-browser-mobile/",
+  "tools/what-is-age/",
+  "tools/what-is-passkey/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
@@ -246,6 +273,7 @@ const CORE_PAGES_ZH = [
   "taiwan/vasp-2026/",
   "taiwan/ooni-asn-coverage/",
   "taiwan/tor-relay-watcher/",
+  "taiwan/digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引）
   //
   // 這一區其他工具留給執行期快取，落差不大：它們是「手上有個東西想查一下」的工具，
@@ -297,6 +325,7 @@ const CORE_PAGES_EN = [
   "basics/platform-tracking/",
   "basics/surveillance-capability/",
   "basics/multiple-identities/",
+  "basics/browser-fingerprinting/",
   // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
@@ -317,6 +346,11 @@ const CORE_PAGES_EN = [
   "tools/encrypted-dns/",
   "tools/vpn-guide/",
   "tools/ai-privacy/",
+  "tools/email-alias/",
+  "tools/signal-proxy/",
+  "tools/tor-browser-mobile/",
+  "tools/what-is-age/",
+  "tools/what-is-passkey/",
   // scenarios（場景，只留不指向特定受威脅身分的）
   "scenarios/",
   "scenarios/asia-travel/",
@@ -340,6 +374,7 @@ const CORE_PAGES_EN = [
   "regional/taiwan-vasp-2026/",
   "regional/ooni-asn-coverage/",
   "regional/tor-relay-watcher/",
+  "regional/taiwan-digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引，理由見 CORE_PAGES_ZH 的同一段註解）
   "utils/",
   "utils/qrcode/",
@@ -382,6 +417,15 @@ const CORE_PAGES_EN = [
 // 數字用 tools/check_precache.mjs 量的，那支讀的是 apparent size，也就是實際要傳輸的
 // 位元組。不要用 du 量，這台的檔案系統會共用 extent，du report 出來只有一半。
 //
+// 2026-09 國界與海岸線換成 Natural Earth 10m，那兩份從 261 KB 變成 1,467 KB，
+// 這一批因此多了 1,206 KB。換的理由是站上的讀者多半在東亞，而粗的比例尺下島鏈
+// 只是幾個點連成的折線，放大之後看起來是一段一段的方塊。
+//
+// 東亞那一塊的海岸線留到約 220 公尺、國界留到約 330 公尺，其餘亞洲與世界其他逐級
+// 放粗。兩層的容差要同一個量級，因為 atlas.js 的 buildBorders() 會把國界畫成線疊
+// 在海岸線旁邊，其中一層粗太多的話，放大之後是一條平滑的海岸線配一條階梯狀的國界。
+// 海岸線改存成折線而不是獨立線段，相鄰段共用端點，光那一項就省了 62%。
+//
 // 上面那組數字是作品加進來當時量的。2026-08 重量一次，整份預快取已經到 25.05 MB，
 // 三件作品的 2.33 MB 佔比降到 9.3%。變大的原因是三個語系各存一份完整章節，而 en
 // 那份在 2026-08 補齊之後跟 zh 差不多厚了。要縮的話該從「只預快取讀者當下的語系」
@@ -391,7 +435,7 @@ const CORE_PAGES_EN = [
 // 是教學性質的視覺化，跟已經在預快取裡的 tools/what-is-tor/ 同一類，不指向特定身分，
 // 所以可以放。
 //
-// 維護：新增作品或地球儀多一份資料檔時要補進這裡，漏了的話那一份會在離線時抓不到。
+// 維護：新增作品，或地球儀多一份資料檔與程式檔時要補進這裡，漏了的話那一份會在離線時抓不到。
 // seacable.json 刻意不在清單裡，那份沒有落地到 repo。
 const GAME_APPS = [
   "games/onion-routing/play/index.html",
@@ -404,6 +448,7 @@ const GAME_APPS = [
   "games/tor-network/play/index.html",
   "games/tor-network/play/atlas.js",
   "games/tor-network/play/i18n.js",
+  "games/tor-network/play/tour.js",
   "games/tor-network/play/cables.json",
   "games/tor-network/play/continents.json",
   "games/tor-network/play/countries.json",
@@ -757,6 +802,22 @@ async function setPrecacheImages(enabled) {
   precachedPrefixes.clear();
 }
 
+// 這個語系的讀者按過「全部存到裝置」沒有，見 SAVE_ALL_URL。
+async function saveAllEnabled(prefix) {
+  const cache = await caches.open(SETTINGS);
+  const hit = await cache.match(SAVE_ALL_URL + (prefix || "root"));
+  // 沒按過就是關著。跟 precacheImages 同一個方向，預設不替讀者多下載東西。
+  if (!hit) return false;
+  return (await hit.text()) === "on";
+}
+
+async function setSaveAll(prefix, enabled) {
+  const cache = await caches.open(SETTINGS);
+  const url = SAVE_ALL_URL + (prefix || "root");
+  if (enabled) await cache.put(url, new Response("on"));
+  else await cache.delete(url);
+}
+
 // 訊息裡帶的頁面網址落在哪個語系。
 //
 // 管理頁送過來的路徑取自 offline-index.json，那份索引的網址相對於各語系自己的建置
@@ -925,7 +986,8 @@ async function clearAllOffline() {
     await caches.delete(key);
   }
   precachedPrefixes.clear();
-  // 設定那個 cache 也在剛才刪掉的名單裡，這一行把它連同記憶體裡的值一起重建。
+  // 設定那個 cache 也在剛才刪掉的名單裡，這兩行把它連同記憶體裡的值一起重建。
+  // 三個語系的 save-all 旗標刻意不重建，讀者清掉的東西不該被下一次更新抓回來。
   await setAutoPrecache(false);
   await setPrecacheImages(false);
 }
@@ -943,6 +1005,9 @@ async function handleLibraryMessage(data, port) {
       precached: await precachedEntries(prefix),
       autoPrecache: await autoPrecacheEnabled(),
       precacheImages: await precacheImagesEnabled(),
+      // 這個語系按過「全部存到裝置」沒有。管理頁用它決定更新要不要把索引裡新增
+      // 的頁面一起補下來，見 SAVE_ALL_URL。
+      saveAll: await saveAllEnabled(prefix),
       // 這台裝置上跑的是哪一版。讀者回報「離線打不開」時，第一個要分辨的就是他的
       // service worker 換到新版了沒，而那件事在裝置上原本沒有任何地方看得出來。
       version: VERSION,
@@ -957,15 +1022,23 @@ async function handleLibraryMessage(data, port) {
   }
 
   if (data.type === "OFFLINE_ADD" && Array.isArray(data.paths)) {
+    const prefix = messagePrefix(data);
     const result = await addToLibrary(
-      messagePrefix(data), data.paths, data.assets, data.refresh === true, reply
+      prefix, data.paths, data.assets, data.refresh === true, reply
     );
+    // 「全部存到裝置」與帶著同一個意圖的更新會帶 intent，逐頁勾選與起步路徑那幾顆
+    // 不帶。部分失敗照樣記下來，讀者要的東西沒有變，沒抓到的那幾頁下次更新再試。
+    if (data.intent === "all") await setSaveAll(prefix, true);
     reply({ type: "done", ok: result.ok, failed: result.failed });
     return;
   }
 
   if (data.type === "OFFLINE_REMOVE" && Array.isArray(data.paths)) {
-    const result = await removeFromLibrary(messagePrefix(data), data.paths, data.assets);
+    const prefix = messagePrefix(data);
+    const result = await removeFromLibrary(prefix, data.paths, data.assets);
+    // 讀者把某一頁勾掉，「我全部都要」就不再成立。旗標留著的話下一次更新會把他
+    // 剛拿掉的頁面補回來，而拿掉的理由可能正是不想讓那一頁留在這台裝置上。
+    if (data.paths.length) await setSaveAll(prefix, false);
     reply({ type: "done", removed: result.removed });
     return;
   }

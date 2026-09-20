@@ -15,7 +15,14 @@ offline_assets:
 
 # :material-file-document-multiple-outline: PDF page tidy-up
 
-<div id="pdfpages-tool"></div>
+<div id="pdfpages-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/pdfpages.js"></script>
 
@@ -29,6 +36,8 @@ A PDF you are about to send is rarely right the first time. The scan came out as
 - **Submissions and applications**: pull the unpublished pages out of a portfolio before it goes.
 
 Free online PDF services do the same job, and the price is that the whole file goes up to their servers first. One such service's privacy policy says files are deleted within two hours of processing — clearly written, but for those two hours the complete file sits on someone else's machine, and most people have never read the policy.
+
+For what these steps look like joined up, [sending out a job application](case-resume.md) walks the whole path from one evening before the deadline. For turning dozens of screenshots into one submission, see [turning conversation screenshots into a submission](case-evidence.md).
 
 ## How to use it
 
@@ -57,7 +66,7 @@ The reasoning is the same as the pixel-by-pixel check in screenshot redaction. A
 
 "Look inside" does three things: pulls the text out of every page, counts attachments, annotations and form fields, and draws a thumbnail of each page. The first press loads about 1.8 MB of parser, which nobody who only wants to tidy pages ever touches.
 
-The search box underneath is the useful part. Paste the name or number you thought was redacted and it tells you which pages still contain it. **A black box on screen does not mean the text is gone from the file.** A rectangle drawn over the visual layer while the text layer stays untouched is the most common way redaction fails, and whoever receives the file only has to copy and paste.
+The search box underneath is the useful part. Paste the name or number you thought was redacted and the result shows which pages still contain it. **A black box on screen does not mean the text is gone from the file.** A rectangle drawn over the visual layer while the text layer stays untouched is the most common way redaction fails, and whoever receives the file only has to copy and paste.
 
 The comparison normalises case, full-width characters and whitespace first. Otherwise "not found" might only mean the other side typed it differently, which is false reassurance.
 

@@ -6,7 +6,14 @@ icon: material/format-letter-matches
 
 # :material-format-letter-matches: 隱形字元偵測
 
-<div id="invisible-tool"></div>
+<div id="invisible-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/invisible.js"></script>
 
@@ -25,6 +32,8 @@ icon: material/format-letter-matches
 ### 程式碼裡的方向覆寫
 
 在原始碼裡放一個右至左覆寫字元，人在編輯器裡看到的順序跟編譯器讀到的可以完全不同。註解看起來包住了一段程式碼，實際上沒有。這類手法有個名字叫 Trojan Source。
+
+跟 QR code 讀取器、網址清理器接起來的順序，見[群組轉來的連結](case-link.md)。文件外流追蹤那個用途，見[收到來源給的檔案](case-source-file.md)。
 
 ## 幾個真的會遇到的場景
 
@@ -121,7 +130,7 @@ onion 位址用的是 base32，只有 `a` 到 `z` 與 `2` 到 `7`。任何西里
 
 ## 用 Tor Browser 查可疑內容的話
 
-[Tor Browser 的安全等級](../tools/tor-browser-advanced.md)調到 Safest 會關掉 JavaScript，偵測功能就會停擺，而收到來路不明的訊息正是那篇文章建議把等級調高的場合。
+[Tor Browser 的安全等級](../tools/tor-browser-advanced.md)調到 Safest 會關掉 JavaScript，偵測功能就會停擺，而收到來路不明的訊息正是那篇文章裡要把等級調高的場合。
 
 把可疑的網站與偵測分開處理：在高安全等級下複製那段文字，切回 Standard 貼進來掃，掃完再調回去。掃描在你的裝置上做，不連外。
 

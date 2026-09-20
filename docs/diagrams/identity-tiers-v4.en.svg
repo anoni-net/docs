@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 931" width="400" height="931" role="img" aria-labelledby="title">
+<title id="title">Three account tiers that share no identifier with each other</title>
+<style>
+  text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
+  .t-main { fill: #212121; }
+  .t-mute { fill: #546e7a; }
+  .h2   { font-size: 14px; font-weight: 700; }
+  .lab  { font-size: 13px; font-weight: 700; }
+  .bd   { font-size: 13px; }
+  .card, .card-c1, .card-c2, .card-n, .card-w1 { stroke-width: 1.3; }
+  .card { fill: #ffffff; stroke: #cfd8dc; }
+  .card-c1 { fill: #e0f4ff; stroke: #4dbfff; }
+  .card-c2 { fill: #b3e3ff; stroke: #26b3ff; }
+  .card-n { fill: #f4f6f7; stroke: #b0bec5; }
+  .card-w1 { fill: #fdf0e4; stroke: #f8b878; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-main { fill: #eceff1; }
+    .t-mute { fill: #b0bec5; }
+    .card { fill: #23292e; stroke: #4b565e; }
+    .card-c1 { fill: #0d2b38; stroke: #4dbfff; }
+    .card-c2 { fill: #10394b; stroke: #26b3ff; }
+    .card-n { fill: #1c2226; stroke: #46515a; }
+    .card-w1 { fill: #2b1f16; stroke: #8a5420; }
+  }
+</style>
+
+<rect class="card-n" x="12" y="0" width="376" height="89" rx="8"/>
+<text class="t-main h2" x="26" y="24">The basis</text>
+<text class="t-mute bd" x="26" y="41">Accounts in different tiers share</text>
+<text class="t-mute bd" x="26" y="58">no email, no username, no browser</text>
+<text class="t-mute bd" x="26" y="75">and no password manager folder.</text>
+<rect class="card-c1" x="12" y="103" width="376" height="168" rx="8"/>
+<text class="t-mute lab" x="26" y="127">Everyday tier</text>
+<text class="t-main h2" x="26" y="147">Long-lived, tied to your legal name</text>
+<text class="t-main lab" x="26" y="168">What lives here</text>
+<text class="t-mute bd" x="36" y="185">Email and mainstream social media</text>
+<text class="t-mute bd" x="36" y="202">Banking and streaming</text>
+<text class="t-mute bd" x="36" y="219">Work and school accounts</text>
+<text class="t-main lab" x="26" y="240">Working assumption</text>
+<text class="t-mute bd" x="36" y="257">Family or colleagues seeing this is fine.</text>
+<rect class="card-c2" x="12" y="281" width="376" height="219" rx="8"/>
+<text class="t-main lab" x="26" y="305">Community tier</text>
+<text class="t-main h2" x="26" y="325">Long-lived, no overlap with everyday</text>
+<text class="t-main lab" x="26" y="346">What lives here</text>
+<text class="t-main bd" x="36" y="363">Accounts used at community events</text>
+<text class="t-main bd" x="36" y="380">Interaction with content</text>
+<text class="t-main bd" x="36" y="397">about sexual orientation</text>
+<text class="t-main bd" x="36" y="414">Contacts with LGBTQ+ friends</text>
+<text class="t-main lab" x="26" y="435">Working assumption</text>
+<text class="t-main bd" x="36" y="452">You can take part without being linked back</text>
+<text class="t-main bd" x="36" y="469">to the everyday tier. The profile picture</text>
+<text class="t-main bd" x="36" y="486">uses no photo family or colleagues can see.</text>
+<rect class="card-w1" x="12" y="510" width="376" height="202" rx="8"/>
+<text class="t-mute lab" x="26" y="534">Exploration tier</text>
+<text class="t-main h2" x="26" y="554">Short-lived, disposable</text>
+<text class="t-main lab" x="26" y="575">What lives here</text>
+<text class="t-mute bd" x="36" y="592">Dating apps</text>
+<text class="t-mute bd" x="36" y="609">Anonymous communities</text>
+<text class="t-mute bd" x="36" y="626">Test accounts while exploring</text>
+<text class="t-main lab" x="26" y="647">Working assumption</text>
+<text class="t-mute bd" x="36" y="664">The highest-risk tier. Keep it separate from</text>
+<text class="t-mute bd" x="36" y="681">the community tier as well, since location and</text>
+<text class="t-mute bd" x="36" y="698">photos expose more here than anywhere else.</text>
+<rect class="card" x="12" y="728" width="376" height="191" rx="8"/>
+<text class="t-main h2" x="26" y="752">Four things each tier needs of its own</text>
+<text class="t-mute bd" x="26" y="769">Its own email address (aliases can grow</text>
+<text class="t-mute bd" x="26" y="786">several public addresses out of one mailbox),</text>
+<text class="t-mute bd" x="26" y="803">its own browser profile, its own password</text>
+<text class="t-mute bd" x="26" y="820">manager vault, its own two-factor group.</text>
+<text class="t-mute bd" x="26" y="837">At sign-up, avoid the reverse matching</text>
+<text class="t-mute bd" x="26" y="854">platforms run on phone numbers and contact</text>
+<text class="t-mute bd" x="26" y="871">lists. Once an account exists, watch for</text>
+<text class="t-mute bd" x="26" y="888">reverse image search on the avatar, reused</text>
+<text class="t-mute bd" x="26" y="905">usernames, posting times and writing style.</text>
+</svg>

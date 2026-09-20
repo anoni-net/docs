@@ -8,7 +8,14 @@ offline_assets:
 
 # :material-dice-multiple-outline: 密语与密码生成器
 
-<div id="passphrase-tool"></div>
+<div id="passphrase-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">这个工具需要 JavaScript</p>
+<p>运算在你的设备上进行，所以需要浏览器执行程序。Tor Browser 调到 Safest 会把 JavaScript 全部关掉，工具就不会出现。处理方式见<a href="../#用-Tor-Browser-的话有一个冲突要知道">小工具区的说明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/passphrase.js"></script>
 
@@ -24,6 +31,8 @@ offline_assets:
 「随机密码」模式从你勾选的字符集里逐字抽。适合用密码管理器保管、不需要用手打的场合。
 
 两个模式的随机数都来自 `crypto.getRandomValues`，那是浏览器提供的密码学等级随机数，比网页常用的 `Math.random` 更难被推算出下一个值。取样时如果直接拿随机数对 7776 取余数，词表最后几个字会比其他字容易被抽到，所以不能整除的尾巴会丢掉重抽，让每个字被抽中的概率完全相同。细节与测试见[源代码](https://github.com/anoni-net/docs/blob/main/docs/zh-TW/js/passphrase.js){target="_blank"}。
+
+抽出来的密语接着怎么用，见[把名单交给外部伙伴](case-roster.md)。
 
 ## 熵那个数字
 

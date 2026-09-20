@@ -83,11 +83,20 @@ offline_assets:
 }
 </script>
 
-<div id="checklist-tool"></div>
+<div id="checklist-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 <script src="../vendor/qrcode-generator.js"></script>
 <script src="../vendor/jsQR.js"></script>
 <script src="../../js/vault.js"></script>
 <script src="../../js/checklist.js"></script>
+
+勾完之後接下來做什麼，見[帶新同事做一次裝置盤點](case-onboarding.md)。
 
 ## 怎麼運作
 

@@ -80,7 +80,14 @@ offline_assets:
 }
 </script>
 
-<div id="age-tool"></div>
+<div id="age-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">This tool needs JavaScript</p>
+<p>The work happens on your own device, so the browser has to run the code. Tor Browser at the Safest level turns JavaScript off and the tool will not appear. The utilities index explains <a href="../#One-conflict-to-know-about-if-you-use-Tor-Browser">how to work around that</a>.</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/vault.js"></script>
 <script src="../../js/passkey.js"></script>
@@ -99,6 +106,8 @@ age -d -o backup.tar backup.tar.age
 ```
 
 What age is, what the format looks like and how it differs from PGP are on [What is age?](../tools/what-is-age.md).
+
+For what the whole path looks like, see [handing a list to an outside partner](case-roster.md) and [a file from a source](case-source-file.md).
 
 ## Across devices, through your password manager
 

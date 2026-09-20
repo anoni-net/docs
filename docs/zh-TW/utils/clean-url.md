@@ -6,7 +6,14 @@ icon: material/link-variant-off
 
 # :material-link-variant-off: 網址清理器
 
-<div id="cleanurl-tool"></div>
+<div id="cleanurl-tool">
+<noscript>
+<div class="admonition warning">
+<p class="admonition-title">這個工具需要 JavaScript</p>
+<p>運算在你的裝置上進行，所以需要瀏覽器執行程式。Tor Browser 調到 Safest 會把 JavaScript 全部關掉，工具就不會出現。處理方式見<a href="../#用-Tor-Browser-的話有一個衝突要知道">小工具區的說明</a>。</p>
+</div>
+</noscript>
+</div>
 
 <script src="../../js/cleanurl.js"></script>
 
@@ -23,6 +30,8 @@ https://example.com/article?fbclid=IwAR3xK9mQ...
 `fbclid` 是 Meta 給該次點擊的識別碼。你把它貼進群組，每個點進去的人都帶著同一個 ID 回到 Meta，於是連結是誰分享的、有多少人點、點的人是誰，都串成同一筆記錄。
 
 電子報的 `utm_source` 也一樣，轉發出去等於讓收件人知道你訂了哪份電子報。`mc_eid` 更直接，是 Mailchimp 的收件人識別碼，對得回你的電子郵件地址。
+
+這幾個判斷在一則真實的訊息裡長什麼樣，[群組轉來的連結](case-link.md)走完一遍。追蹤參數跟廣告輪廓的關係，見[廣告好像知道你在想什麼](case-profile.md)。
 
 ## 轉址包裝
 

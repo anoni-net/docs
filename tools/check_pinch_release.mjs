@@ -79,9 +79,20 @@ const harness = `
   // 滾輪與 pointerdown 現在會清掉網址上的關注區域，這裡不驗那件事，給個空的就好
   const clearFocus = () => {};
   ${body}
+  // 地球的操作現在掛在 window 不是畫布上，理由見 atlas.js 的 bindControls 檔頭：
+  // 可見的國家標籤設了 pointer-events: auto 才點得開卡片，掛在畫布上的話游標壓在
+  // 標籤上就縮放不了也拖不動。所以這裡攔的是全域的 addEventListener。
   const H = {};
+  globalThis.addEventListener = (t, f) => { (H[t] = H[t] || []).push(f); };
+  // bindControls 會先問事件是不是落在面板上。這幾支重放的都是地球上的操作，
+  // 一律回 false。真正驗那條排除的是 check_ui_passthrough.mjs。
+  const onUI = () => false;
+  // 拖曳現在會先把滑鼠投影回球面算角度差，打不到球才退回固定比例。這幾支沒有相機
+  // 可以投影，一律回 null 走比例那條，驗的是接線與係數本身。球面那條另外直接驗數學。
+  const DRAG_GRAB = false;
+  const sphereAt = () => null;
+  const dragA = {}, dragB = {};
   const dom = {
-    addEventListener: (t, f) => { (H[t] = H[t] || []).push(f); },
     setPointerCapture: () => {},
   };
   // bindControls 會掃 [data-use] 掛切換鈕的 click，這裡沒有 DOM，回空陣列就好。
