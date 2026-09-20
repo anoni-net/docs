@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 660" width="440" height="660" role="img" aria-labelledby="title desc">
+<title id="title">After identity binding, records flow to state retrieval and commercial sale, and both sides default to continue</title>
+<desc id="desc">A top-to-bottom flow diagram. The top layer lists four situations requiring identification: getting a mobile number, opening an electronic payment account, placing an online advertisement, and using a virtual asset service. The middle layer lists three kinds of record produced continuously after binding: where you are, what you connect to, and what you buy. The lower layer splits in two. On the left, state retrieval, marked with 487,353 lines in 2025, of which 2.2 percent were issued by a court, and 87.2 percent carried no duty to notify. On the right, commercial sale, marked with the government selling its own product at 2,000 New Taiwan dollars per spatial unit, carriers' commercial footfall services, advertising identifiers, and free open government data. The bottom row notes that the defaults at all three stages are set to continue, and that the exit clause sits at Article 10, paragraph 3 of the carrier notice, which the individual has to go and find.</desc>
+<style>
+  /* Palette follows community/brand-assets.md. This file is referenced by an img tag and
+     cannot read the page CSS variables, so hex values are written in. Cyan is the main
+     line, orange marks the two places where the default is on.
+     Canvas is 440 wide; at a 328 to 382 mobile content column the smallest text stays
+     above 9px. */
+  text { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; }
+  .h { font-size: 17px; font-weight: 700; fill: #212121; }
+  .lbl { font-size: 13.5px; font-weight: 700; fill: #003e57; }
+  .t { font-size: 12.5px; fill: #45505a; }
+  .s { font-size: 11.5px; fill: #546e7a; }
+  .num { font-size: 15px; font-weight: 700; fill: #212121; }
+  .warn { font-size: 12px; font-weight: 700; fill: #ef6c00; }
+  .box { fill: #e0f4ff; stroke: #0089bf; stroke-width: 1.5; rx: 6; }
+  .box2 { fill: #eceff1; stroke: #90a4ae; stroke-width: 1.5; rx: 6; }
+  .warnbox { fill: #fff3e0; stroke: #ef6c00; stroke-width: 1.5; rx: 6; }
+  .arw { stroke: #78909c; stroke-width: 2; fill: none; marker-end: url(#a); }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#78909c"/></marker></defs>
+
+<text class="h" x="220" y="26" text-anchor="middle">Every default is set to &#8220;continue&#8221;</text>
+
+<rect class="box" x="16" y="44" width="408" height="76"/>
+<text class="lbl" x="28" y="64">Where you must show identification</text>
+<text class="t" x="28" y="85">Mobile number · Electronic payment account</text>
+<text class="t" x="28" y="106">Online advertising · Virtual asset service</text>
+
+<path class="arw" d="M220,120 L220,144"/>
+
+<rect class="box" x="16" y="150" width="408" height="96"/>
+<text class="lbl" x="28" y="170">Records produced after binding</text>
+<text class="t" x="28" y="192">Where you are — number near which base station</text>
+<text class="t" x="28" y="213">What you connect to — times and domain names</text>
+<text class="t" x="28" y="234">What you buy — transit journeys, small purchases</text>
+
+<path class="arw" d="M220,246 L220,264"/>
+<path class="arw" d="M220,260 L114,260 L114,286"/>
+<path class="arw" d="M220,260 L326,260 L326,286"/>
+
+<rect class="box2" x="16" y="292" width="196" height="126"/>
+<text class="lbl" x="28" y="312">State retrieval</text>
+<text class="num" x="28" y="337">487,353 lines</text>
+<text class="s" x="28" y="355">2025, all categories</text>
+<text class="num" x="28" y="382">2.2%</text>
+<text class="s" x="28" y="400">issued by a court</text>
+
+<rect class="box2" x="228" y="292" width="196" height="126"/>
+<text class="lbl" x="240" y="312">Commercial sale</text>
+<text class="num" x="240" y="337">NT$2,000</text>
+<text class="s" x="240" y="355">government, per spatial unit</text>
+<text class="s" x="240" y="379">carrier footfall services</text>
+<text class="s" x="240" y="397">ad identifiers · open data free</text>
+
+<rect class="warnbox" x="16" y="434" width="408" height="62"/>
+<text class="warn" x="28" y="456">87.2% of retrievals carry no duty to notify</text>
+<text class="s" x="28" y="476">Only network traffic records have a notification rule, and</text>
+<text class="s" x="28" y="492">none applies when they arrive with a communication records request</text>
+
+<rect class="warnbox" x="16" y="508" width="408" height="62"/>
+<text class="warn" x="28" y="530">De-identified statistics to enterprise customers: on</text>
+<text class="s" x="28" y="550">In the same notice, third-party marketing defaults off.</text>
+<text class="s" x="28" y="566">The two point opposite ways</text>
+
+<rect class="box" x="16" y="582" width="408" height="56"/>
+<text class="lbl" x="28" y="602">Where the exit sits</text>
+<text class="t" x="28" y="624">Article 10(3) of the carrier notice, for you to go and find</text>
+</svg>
