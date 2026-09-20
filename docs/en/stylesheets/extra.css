@@ -1000,6 +1000,22 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   z-index: auto;
 }
 
+/* 上游的 .md-select:hover .md-select__inner 與 :focus-within 那一條特異性是
+   (0,3,0)，壓得過上面只有兩個類別的 (0,2,0)。滑鼠移進抽屜的語言那一區，清單就被
+   上游的 translate3d(-50%, 0, 0) 往左推半個自己的寬度，1280px 實測位移 121px，
+   兩個語言名稱有一半掉到抽屜外被裁掉。
+
+   960px 以下不會發生，上面「語言切換選單」那一組的窄螢幕覆寫已經把 hover 的
+   transform 改成 translate3d(0, 0, 0)。抽屜改成所有寬度都存在之後，桌面才露出來。
+
+   補一層 .anoni-settings 湊到 (0,4,0) 壓回去。max-height 一起接住，上游同一條把
+   展開值設成 10rem，語言再多幾個清單就會長出捲軸。 */
+.anoni-settings .md-select:focus-within .md-select__inner,
+.anoni-settings .md-select:hover .md-select__inner {
+  max-height: none;
+  transform: none;
+}
+
 .anoni-settings .md-select__inner::after {
   display: none;
 }
