@@ -1125,7 +1125,7 @@
 	#前半段的離線閱讀與-passkey
 	#在地脈絡的三頁新內容
 	#實驗區與-WebRTC-傳檔量測
-	#手機上的-Tor-與求助管道
+	#手機上的-Tor-與緊急求救
 	#接下來
 	#收回來的敘述
 	#新工具與截圖遮蔽的人臉偵測
@@ -1135,7 +1135,7 @@
 	#系列的範圍與節奏
 	#舊版讀者要補的五件事
 	#設定抽屜
-	#這段時間的三篇文章
+	#近期的三篇文章
 /blog/archive/2025/
 	#2025
 	#202508-專案進度更新
@@ -3100,6 +3100,7 @@
 	#Docs-site-update-review-September-2026
 	#Five-things-for-readers-of-the-old-guidance
 	#Further-reading
+	#Next-steps
 	#Nine-worked-examples
 	#Offline-reading-and-passkeys-in-the-first-half
 	#Scope-and-cadence
@@ -3109,8 +3110,7 @@
 	#The-settings-drawer
 	#Three-articles-from-this-period
 	#Three-new-regional-pages
-	#Tor-on-a-phone-and-the-new-route-to-help
-	#What-comes-next
+	#Tor-on-a-phone-and-Emergency-Help
 /en/blog/archive/2025/
 	#2025
 	#202504-Project-Status-and-Updates
@@ -7998,17 +7998,17 @@
 	#前半段的离线阅读与-passkey
 	#在地脉络的三页新内容
 	#实验区与-WebRTC-传文件量测
-	#手机上的-Tor-与求助管道
+	#手机上的-Tor-与紧急求救
 	#接下来
 	#收回来的叙述
-	#新工具与截图遮蔽的人脸侦测
+	#新工具与截图遮蔽的人脸检测
 	#旧版读者要补的五件事
 	#监控能力的第五层
 	#相关阅读
 	#示意图地球仪导览与网址合约
 	#系列的范围与节奏
 	#设置抽屉
-	#这段时间的三篇文章
+	#近期的三篇文章
 /zh-cn/blog/archive/2025/
 	#2025
 	#202508-项目进度更新
