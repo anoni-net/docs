@@ -12,6 +12,7 @@ import { pickLang, t, langLinksHTML, STR } from './i18n.js';
 import { dualCells, cellGeometry, cellsNear, localCells, cellLatLon, decodeCC, verifyOrder,
          inRings, judgeIndex, judgeCells } from './hexgrid.js';
 import { createTour } from './tour.js';
+import { LAYERS, RO, lift } from './layers.js';
 
 const $ = (id) => document.getElementById(id);
 const LANG = pickLang();
@@ -89,36 +90,23 @@ function applyI18n() {
   set('btn-hex', 'btnHex');
   const hb = $('btn-hex');
   if (hb) hb.title = S('btnHexTip');
-  set('lbl-mix', 'lblMix');
   set('lbl-asn', 'lblAsn');
   set('lbl-asia', 'lblAsia');
-  set('lbl-users', 'lblUsers');
-  set('lbl-ooni', 'lblOoni');
-  set('lbl-shutdown', 'lblShutdown');
-  set('lbl-seacable', 'lblSeacable');
   set('tw-title', 'twTitle');
   set('btn-tw', 'btnTw');
-  set('lbl-grid', 'lblGrid');
-  set('lbl-energy', 'lblEnergy');
   set('use-total', 'useTotal');
   set('use-ind', 'useInd');
-  set('lbl-power', 'lblPower');
-  set('lbl-landing', 'lblLanding');
   set('note', 'note');
   set('credit-title', 'creditTitle');
-  set('credit-onionoo', 'creditOnionoo', true);
-  set('credit-metrics', 'creditMetrics', true);
-  set('credit-ooni', 'creditOoni', true);
-  set('credit-accessnow', 'creditAccessNow', true);
-  set('credit-seacable', 'creditSeacable', true);
-  set('credit-energy', 'creditEnergy', true);
-  set('credit-grid', 'creditGrid', true);
-  set('credit-power', 'creditPower', true);
-  set('credit-landing', 'creditLanding', true);
-  set('credit-twadmin', 'creditTwAdmin', true);
-  set('credit-ne', 'creditNaturalEarth', true);
-  set('credit-osm', 'creditOsm', true);
-  set('credit-netusers', 'creditNetUsers', true);
+  // 各層的側欄小標與來源說明由清單帶。小標節點照慣例是面板節點換掉前綴，
+  // 來源那一組沒有慣例可推，id 寫在清單的 creditEl 欄位。
+  //
+  // 原本這裡是 22 行逐一 set 的名單，加一層要記得回來補一行，忘了的症狀是
+  // 換成英文或簡中之後那一區的小標還是繁體，而其餘部分都對。
+  for (const l of LAYERS) {
+    if (l.panel && l.label) set(l.panel.replace(/^stat-/, 'lbl-'), l.label);
+    if (l.creditEl && l.credit) set(l.creditEl, l.credit, true);
+  }
   set('cc-close', 'ccClose');
   set('loading', 'loading');
   set('hint-wide', 'hintWide');
@@ -690,11 +678,19 @@ const clockT = uniform(0);
 const dotGroups = [];
 // 各層浮在地表上方多少。這些高度是為了避免點穿進球面才留的，數值大約等於那一層
 // 最大的那顆點的半徑，所以每一層各有各的值。
-const DOT_LIFT = 1.012;      // 中繼點
-const LANDING_LIFT = 1.011;  // 海纜登陸點
-const SUB_LIFT = 1.009;      // 變電所
-const PLANT_LIFT = 1.010;    // 發電廠
-const RENEW_LIFT = 1.0095;   // 再生能源場址
+//
+// 數值宣告在 layers.js。原本 build、rescale 與 pickFeature 各自寫死同一個數字，
+// 同一層的高度散在三處，改一處漏兩處的症狀是點畫在一個高度、按得到的位置在另一個
+// 高度，而畫面看起來完全正常。
+const DOT_LIFT = lift('relays');        // 中繼點
+const LANDING_LIFT = lift('tw-landing'); // 海纜登陸點
+const SUB_LIFT = lift('tw-power');      // 變電所
+const PLANT_LIFT = lift('tw-grid');     // 發電廠
+const RENEW_LIFT = lift('tw-energy');   // 再生能源場址
+const BLOCK_LIFT = lift('ooni');        // 連線受阻的紅色漸層
+const ADMIN_LIFT = lift('tw-admin');    // 縣市界
+const BORDER_LIFT = lift('countries');  // 國界
+const COAST_LIFT = lift('continents');  // 海岸線
 
 /**
  * 貼近地表時把浮空高度跟著點的大小一起收。
@@ -816,6 +812,27 @@ async function getJSONAsset(name, opt) {
   } catch (e) {
     return getJSON('./' + name, opt);
   }
+}
+
+/** 一層的資料。from 決定去哪裡拿，fresh 決定要不要每次都向 server 驗新鮮度。 */
+function fetchLayer(l) {
+  const opt = l.fresh ? { cache: 'no-cache' } : undefined;
+  return l.from === 'assets' ? getJSONAsset(l.file, opt) : getJSON('./' + l.file, opt);
+}
+
+/**
+ * 把清單上每一層的資料取回來，回傳 id 對到資料的物件。
+ *
+ * required 的兩層（國界與中繼快照）抓不到就讓整個載入失敗，沒有它們畫不出地球。
+ * 其餘的失敗收斂成 null，少一層而已，那一層的側欄區塊會自己收掉，畫面跟沒有
+ * 這個功能時一模一樣。
+ */
+async function loadLayers(list = LAYERS) {
+  const got = await Promise.all(list.map((l) => {
+    const p = fetchLayer(l);
+    return l.required ? p : p.catch(() => null);
+  }));
+  return Object.fromEntries(list.map((l, i) => [l.id, got[i]]));
 }
 
 // 沒走到 WebGPU 時，把卡在哪一關講出來。最常見的是頁面不是 https 或 localhost，
@@ -1448,7 +1465,7 @@ function buildTwAdmin(admin) {
   if (!admin || !admin.c || !admin.c.length) return;
   // 高度壓在中繼點（1.012）與登陸點（1.011）之下，那兩層是資料，界線是底圖。
   // 但要高過國界（1.0036）與海岸線（1.004），重疊時看到的是比較細的這一條。
-  const pos = ringSegments(admin, () => true, R * 1.005);
+  const pos = ringSegments(admin, () => true, R * ADMIN_LIFT);
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
   twAdminMat = new THREE.LineBasicMaterial({
@@ -1465,7 +1482,7 @@ function buildBorders(world) {
   // 高度壓在海岸線（1.004）之下。沿海國家的國界跟海岸線本來就重疊，讓海岸線畫在上面，
   // 重疊處看到的是比較亮的那條，海陸交界仍然是最清楚的線。
   const mk = (pick) => {
-    const pos = ringSegments(world, pick, R * 1.0036);
+    const pos = ringSegments(world, pick, R * BORDER_LIFT);
     if (!pos.length) return null;
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
@@ -1487,7 +1504,7 @@ function buildBlocked(world) {
   // 掠射角下會整條跑到地球輪廓外面。而且這幾國本來就幾乎沒有中繼（PK、EG、MM 是 0 台，
   // CN 1 台），沒有需要避開的東西，抬高純粹是白付視差的代價。
   // 比國界那層（1.0036）高一點點，兩條線重疊時紅色蓋在上面。
-  const pos = ringSegments(world, (c) => !!c.k && want.has(c.k), R * 1.0045);
+  const pos = ringSegments(world, (c) => !!c.k && want.has(c.k), R * BLOCK_LIFT);
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
   const m = new THREE.LineBasicMaterial({ color: COL.blocked, transparent: true, opacity: 0.85, depthWrite: false });
@@ -2305,7 +2322,10 @@ function fillSeacable() {
 // 由下而上：變電所、再生能源場址、電廠、登陸點。跟各層的離地半徑同序。電廠要壓在
 // 場址之上，因為有幾座太陽能就座落在大電廠的廠區裡，大的畫在上面比較讀得出來。
 // 都排在極光（40）與電路（45）之下，那兩層是全球尺度的效果，不該被台灣的點蓋掉。
-const RO_SUB = 11, RO_RENEW = 12, RO_PLANT = 13, RO_LANDING = 14;
+//
+// 實際的數字宣告在 layers.js，跟各層的離地半徑放在一起。兩者要同序，分開寫的話
+// 改了一邊忘了另一邊，症狀是某一層莫名其妙被蓋住，而畫面看起來完全正常。
+const RO_SUB = RO.sub, RO_RENEW = RO.renew, RO_PLANT = RO.plant, RO_LANDING = RO.landing;
 
 // 台灣的海纜登陸點。跟其他圖層不同，這一份是自建的，資料來源逐筆記在
 // tools/data/tw_landing.toml，產生器是 tools/gen_tw_landing.py。
@@ -2385,7 +2405,7 @@ function buildLanding() {
   for (let i = 0; i < list.length; i++) {
     const p = list[i];
     const meta = LP_PREC[p.precision] || LP_PREC['鄉鎮'];
-    llToVec(p.lat, p.lon, R * 1.011, v);
+    llToVec(p.lat, p.lon, R * LANDING_LIFT, v);
     m.makeScale(meta.size, meta.size, meta.size);
     m.setPosition(v);
     mesh.setMatrixAt(i, m);
@@ -2530,7 +2550,7 @@ function buildPower() {
     const s = list[i];
     // 壓在中繼點（1.012）與登陸點（1.011）之下、縣市界（1.005）之上。
     // 電力是這一層要講的主題，但中繼點仍然是這張圖的主角。
-    llToVec(s.lat, s.lon, R * 1.009, v);
+    llToVec(s.lat, s.lon, R * SUB_LIFT, v);
     const sz = powerSize(s);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
@@ -2665,7 +2685,7 @@ function buildGrid() {
   for (let i = 0; i < list.length; i++) {
     const p = list[i];
     // 抬到變電所之上。發電廠比變電所少得多也大得多，疊在一起時它該在上面。
-    llToVec(p.lat, p.lon, R * 1.010, v);
+    llToVec(p.lat, p.lon, R * PLANT_LIFT, v);
     const sz = plantSize(p);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
@@ -2772,7 +2792,7 @@ function buildRenew() {
     const s = list[i];
     // 壓在電廠（1.010）之下、變電所（1.009）之上。這些場址多半很小，
     // 有幾座太陽能就蓋在大電廠的廠區裡，讓大的畫在上面比較好讀。
-    llToVec(s.lat, s.lon, R * 1.0095, v);
+    llToVec(s.lat, s.lon, R * RENEW_LIFT, v);
     const sz = renewSize(s);
     m.makeScale(sz, sz, sz);
     m.setPosition(v);
@@ -2870,8 +2890,8 @@ function buildCoastline(coast, world) {
       // 兩端都落在台灣那一圈的頂點上，才算是那個粗輪廓的一部分
       const isTw = keys.has(`${x0},${y0}`) && keys.has(`${x1},${y1}`);
       const out = isTw ? twPart : main;
-      llToVec(y0, x0, R * 1.004, v); out.push(v.x, v.y, v.z);
-      llToVec(y1, x1, R * 1.004, v); out.push(v.x, v.y, v.z);
+      llToVec(y0, x0, R * COAST_LIFT, v); out.push(v.x, v.y, v.z);
+      llToVec(y1, x1, R * COAST_LIFT, v); out.push(v.x, v.y, v.z);
     }
   }
   const mk = (arr, opacity) => {
@@ -3549,11 +3569,11 @@ function pickFeature(sx, sy) {
     if (!best || d < best.d) best = { kind, data, d };
   };
   if (deep) {
-    for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * 1.010);
-    for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * 1.009);
-    for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * 1.0095);
+    for (const p of gridPlants()) consider('plant', p, p.lat, p.lon, R * PLANT_LIFT);
+    for (const s of powerPoints()) consider('sub', s, s.lat, s.lon, R * SUB_LIFT);
+    for (const r of renewSites()) consider('renew', r, r.lat, r.lon, R * RENEW_LIFT);
   }
-  for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * 1.011);
+  for (const l of (LANDING && LANDING.points) || []) consider('landing', l, l.lat, l.lon, R * LANDING_LIFT);
   if (best) return best;
 
   // 沒點到點才輪到線
@@ -4391,46 +4411,22 @@ async function main() {
   applyI18n();
   const ok = await initRenderer();
   if (!ok) return;
-  const [snap, world, coast, cables, ooni, torusers, shutdowns, netusers, bathy, seacable, landing, twAdmin, power, grid, energy] = await Promise.all([
-    getJSONAsset('snapshot.json', { cache: 'no-cache' }), // 定期重生，每次載入都向 server 驗證新鮮度
-    getJSON('./countries.json'),
-    getJSON('./continents.json').catch(() => null), // 海岸線可選，抓不到就略過
-    getJSON('./cables.json').catch(() => null),     // 海底電纜可選
-    getJSON('./ooni.json').catch(() => null),       // OONI 觀測可選
-    // 跟 snapshot 一樣帶 no-cache。assets 回的是 max-age=43200，瀏覽器會把這份快取十二小時，
-    // 但它每天更新，不驗證的話使用者會看到過期的數字。代價是每次載入多一個 304 往返。
-    getJSONAsset('torusers.json', { cache: 'no-cache' }).catch(() => null), // 使用者面可選，定期重生
-    getJSON('./shutdowns.json').catch(() => null),  // 斷網事件可選
-    getJSON('./netusers.json').catch(() => null),   // 上網人口比例可選。一年才動一次，跟文件站一起發布
-    getJSON('./bathymetry.json').catch(() => null), // 海底地形可選，抓不到海面就退回單色
-    // 海纜障礙可選。由 publish_games_data.sh 定期重生並發布到 assets，所以走
-    // getJSONAsset 而不是文件站自己的路徑，更新不必等文件站重建。
-    // 障礙的存續期是月為單位，assets 的 12 小時快取夠新鮮，不必額外帶 no-cache。
-    // 取不到的時候整個區塊會收掉，畫面跟沒有這個功能時一模一樣。
-    getJSONAsset('seacable.json').catch(() => null),
-    // 台灣海纜登陸點。自建資料，跟文件站一起發布而不是走 assets，因為它是人工維護的，
-    // 改動頻率是「查到新來源才動」，沒有定期重生的必要。
-    getJSON('./tw-landing.json').catch(() => null),
-    // 台灣縣市界線。跟登陸點一樣是人工跑產生器更新的，跟文件站一起發布。
-    getJSON('./tw-admin.json').catch(() => null),
-    // 台灣變電所的容量與負載。跟縣市界一樣是人工跑產生器更新的。
-    getJSON('./tw-power.json').catch(() => null),
-    // 發電廠與 345kV 電網骨幹。含即時發電量的快照，時間戳在 stamp 欄位。
-    getJSON('./tw-grid.json').catch(() => null),
-    // 再生能源場址、各縣市用電量、每日備轉容量率，三份都是台電的。
-    getJSON('./tw-energy.json').catch(() => null),
-  ]);
-  OONI = ooni;
-  TORUSERS = torusers;
-  SHUTDOWNS = shutdowns;
-  NETUSERS = netusers;
-  BATHY = bathy;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
-  SEACABLE = seacable;
-  LANDING = landing;
-  POWER = power;
-  GRID = grid;
-  ENERGY = energy;
-  TWADMIN = twAdmin;
+  // 每一層的來源、失敗時的退路與新鮮度策略宣告在 layers.js，這裡只負責取回來。
+  // 十四份同時發出，最慢的那一份決定開場時間。第二期會把非必要的那幾層挪到
+  // 讀者自己開啟的時候才載，在那之前先把「有哪些層」這件事收斂成一份清單。
+  const D = await loadLayers();
+  const snap = D.relays, world = D.countries, coast = D.continents, cables = D.cables;
+  OONI = D.ooni;
+  TORUSERS = D.torusers;
+  SHUTDOWNS = D.shutdowns;
+  NETUSERS = D.netusers;
+  BATHY = D.bathymetry;   // 要在 buildEarth 之前設好，貼圖是那時候畫的
+  SEACABLE = D.seacable;
+  LANDING = D['tw-landing'];
+  POWER = D['tw-power'];
+  GRID = D['tw-grid'];
+  ENERGY = D['tw-energy'];
+  TWADMIN = D['tw-admin'];
   if (TORUSERS && TORUSERS.users) {
     USERS_MAP = new Map(Object.entries(TORUSERS.users).map(([cc, v]) => [cc, v[0]]));
     const b = $('btn-users');
@@ -4445,7 +4441,7 @@ async function main() {
   if (!REDUCED) buildAurora();     // 極光是純動態效果，靜止的簾幕沒有意義，REDUCED 時整個不建
   buildAtmosphere();               // 邊緣輝光。畫在最外層，renderOrder 已指定
   if (coast) buildCoastline(coast, world);
-  buildTwAdmin(twAdmin);           // 縣市界線，貼近地表時才淡入
+  buildTwAdmin(TWADMIN);           // 縣市界線，貼近地表時才淡入
   buildPower();                    // 變電所，跟縣市界同一個時機淡入
   buildGrid();                     // 345kV 骨幹與發電廠
   buildRenew();                    // 台電自建的再生能源場址

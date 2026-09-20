@@ -212,6 +212,11 @@ jobs:
       - name: 頁面裡的 script src
         run: node tools/test_script_src.mjs
 
+      # games-checks.yml 也跑這一支。那邊涵蓋「改了地球儀、沒碰 tools」，這邊涵蓋
+      # 反過來的「改了 sw.js 的預快取清單或 tools、沒碰地球儀」。
+      - name: 地球儀的圖層清單
+        run: node tools/test_layers.mjs
+
       # 威脅模型清單：建議的頁面存不存在、這一支不直接碰儲存空間、存檔只經 passkey 暫存區，
       # 對手碰得到裝置（親密關係、執法、國家級）時不提供存檔
       - name: 威脅模型清單

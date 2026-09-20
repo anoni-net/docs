@@ -23,6 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { lift } from '../docs/zh-TW/games/tor-network/play/layers.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DIR = path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play');
@@ -214,7 +215,9 @@ for (const sel of ['#top', '#cc-card', '#hint', '#tour']) {
     ${decl(/^const liftAt = [^;]+;/m)}
     return { liftAt, DOT_LIFT };
   `;
-  const L = new Function(src)();
+  // DOT_LIFT 的數值宣告在 layers.js，抽出來的那一行會去叫 lift()，所以要把真的
+  // 那一支交給它。順帶驗了清單跟 atlas.js 接得起來，層的 id 改名這裡就會紅。
+  const L = new Function('lift', src)(lift);
   check(Math.abs(L.liftAt(L.DOT_LIFT, 1) - L.DOT_LIFT) < 1e-12, '遠看時高度維持原值，進場的樣子沒變');
   check(Math.abs(L.liftAt(L.DOT_LIFT, 0) - 1) < 1e-12, '貼到極限時高度收到貼著地表');
   // 高度與點半徑的比例要維持不變，點才會在任何距離下都像貼在地表上
