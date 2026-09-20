@@ -55,9 +55,15 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 
 ### 標題句構
 
-- 標題不使用「主題：說明」的冒號句構，改寫成一句完整的話。需要交代第二層資訊時用逗號接續，或把補述留給前言與 `summary`
+- 標題用名詞片語，不寫成句子。以動詞為主幹的標題改寫成名詞結構，需要交代第二層資訊時用逗號接續，或把補述留給前言與 `summary`
+    - :material-close: `這三週文件站多了什麼，以及照著舊版做過準備的人要補的五件事`
+    - :material-check: `2026/09 文件站更新回顧`
+- 標題不使用「主題：說明」的冒號句構
     - :material-close: `Brave 抹平 GPU 指紋：一致化與隨機化在同一次更新裡分工`
-    - :material-check: `Brave 用兩種相反的手法抹平 GPU 指紋`
+    - :material-check: `Brave 抹平 GPU 指紋的兩種相反手法`
+- 標題裡不讓非人的主體做動作，判準與內文的擬人化同一條
+    - :material-close: `設定抽屜把散落的開關收在一起`
+    - :material-check: `設定抽屜`
 - 文章標題與各層小標題同樣適用
 - 翻譯文章照錄外部來源的原始標題時保留原樣，例：`介紹 oniux：針對任何 Linux 應用程式的核心層級 Tor 隔離技術`
 - 既有文章不必回頭改寫，新文章與大幅改版時套用
