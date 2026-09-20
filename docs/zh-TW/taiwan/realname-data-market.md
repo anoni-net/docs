@@ -13,7 +13,7 @@ icon: material/card-account-details-outline
 兩邊共用一個結構。該由你決定的事情，預設值全部設在「繼續」，而且沒有人被要求來問你。本頁把這個結構拆開來看，四十九個公開來源、五個年度的官方統計、十五萬筆自行重算的資料，最後回答一個問題，這些預設值是誰設的，又該由誰來改。
 
 <figure markdown="span">
-    <img src="https://assets.anoni.net/diagrams/default-continue.zh-TW.svg"
+    <img src="https://assets.anoni.net/diagrams/default-continue-v2.zh-TW.svg"
         alt="由上而下的流程圖。最上層是四種要出示身分的場合：辦行動門號、開電子支付帳戶、刊登網路廣告、使用虛擬資產服務。中層是綁定之後持續產生的三類紀錄：你在哪、你連了哪裡、你買了什麼。下層分成左右兩邊，左邊是國家調取，標示二零二五年共四十八萬七千三百五十三線，經法院核發只占百分之二點二，百分之八十七點二的調取沒有通知規定。右邊是商業販售，標示政府自己賣一格兩千元、業者的商用人流服務、廣告識別碼、政府開放資料免費。最底下一列標示三個環節的預設值全部是繼續，退出的條款寫在告知聲明第十條第三款，要當事人自己去找。">
     <figcaption>三個環節的預設值都是繼續，退出要自己去找</figcaption>
 </figure>

@@ -58,7 +58,7 @@
 <text class="s" x="28" y="479">而且以通信记录之名附带取得时不必通知</text>
 
 <rect class="warnbox" x="16" y="496" width="368" height="64"/>
-<text class="warn" x="28" y="518">去标识化统计提供企业客户，默认开启</text>
+<text class="warn" x="28" y="518">去识别化统计提供企业客户，默认开启</text>
 <text class="s" x="28" y="539">同一份告知声明里，第三方营销默认关闭，</text>
 <text class="s" x="28" y="555">两者方向相反</text>
 
