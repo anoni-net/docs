@@ -68,9 +68,15 @@ The English site is written for international peers, researchers, journalists, a
 
 ### Headings
 
-- Do not use the "Topic: explanation" colon construction. Write a heading as a complete statement instead.
+- Write headings as noun phrases, not as sentences. Recast a heading built around a verb into a noun structure; where a second layer of information is needed, continue with a comma or leave it to the intro and the `summary`.
+    - :material-close: `What the docs site gained in the past two weeks`
+    - :material-check: `Docs site update review, September 2026`
+- Do not use the "Topic: explanation" colon construction.
     - :material-close: `Brave and GPU fingerprinting: uniformity and randomization in one release`
-    - :material-check: `Brave flattens GPU fingerprints two opposite ways`
+    - :material-check: `Two opposite approaches to flattening GPU fingerprints in Brave`
+- Do not let a non-human subject perform an action in a heading; the test is the same one used for animacy in body text.
+    - :material-close: `The sidebar groups the tools into five sets`
+    - :material-check: `The five utility groups`
 - This applies to article titles and to section headings at every level.
 - Keep an external source's original title as-is when the link text quotes it.
 - Existing articles do not need retrofitting. Apply this to new articles and substantial rewrites.
