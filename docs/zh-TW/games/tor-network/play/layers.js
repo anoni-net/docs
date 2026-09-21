@@ -93,6 +93,9 @@ export const LAYERS = [
     id: 'ooni',
     file: 'ooni.json',
     from: 'docs',
+    // 開場就載。陸地上那層紅色漸層是這件作品最有話講的一層，只有中繼點的球看不出
+    // 「哪裡連不上」那一半的主題。gzip 後 1.6 KB，放進預設幾乎不花成本。
+    on: true,
     group: 'global',
     label: 'lblOoni',
     credit: 'creditOoni', creditEl: 'credit-ooni',
