@@ -1020,9 +1020,15 @@ function applyUsers() {
  */
 function layerPanel(id, on) {
   const l = LAYER[id];
-  if (!l || !l.panel) return;
+  if (!l) return;
+  // 資料來源那一段先處理，因為有幾層沒有側欄區塊卻有來源說明（海底電纜、縣市界、
+  // 上網人口）。原本跟其他三個節點寫在同一個迴圈裡，而那個迴圈被 !l.panel 擋在
+  // 外面，結果是那幾層不管開不開，來源清單上都寫著它們，讀者看到的來源裡有畫面
+  // 上根本沒有的資料。
+  if (l.creditEl) { const el = $(l.creditEl); if (el) el.hidden = !on; }
+  if (!l.panel) return;
   const base = l.panel.replace(/^stat-/, '');
-  for (const el of [$(l.panel), $('lbl-' + base), $(base + '-note'), l.creditEl ? $(l.creditEl) : null]) {
+  for (const el of [$(l.panel), $('lbl-' + base), $(base + '-note')]) {
     if (el) el.hidden = !on;
   }
 }

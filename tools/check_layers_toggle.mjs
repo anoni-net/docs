@@ -213,6 +213,13 @@ for (const c of chips.filter((x) => !x.fixed)) {
   await ev(`(async () => { await window.__atlas.${first}('${c.id}'); })()`);
   await sleep(150);
   check((await ev(`window.__atlas.isOn('${c.id}')`)) === !c.on, `${c.id}：${first} 之後狀態翻過來`);
+  // 資料來源那一段要跟著層走。沒有側欄區塊的那幾層（海底電纜、縣市界、上網人口）
+  // 最容易漏掉，漏了的話讀者看到的來源清單裡有畫面上根本沒有的資料。
+  const decl = LAYERS.find((l) => l.id === c.id);
+  if (decl && decl.creditEl) {
+    check((await ev(`!document.getElementById('${decl.creditEl}').hidden`)) === !c.on,
+          `${c.id}：資料來源那一段跟著${c.on ? '收起來' : '露出來'}`);
+  }
   await ev(`(async () => { await window.__atlas.${second}('${c.id}'); })()`);
   await sleep(150);
   check((await ev(`window.__atlas.isOn('${c.id}')`)) === c.on, `${c.id}：${second} 之後回到原狀`);
