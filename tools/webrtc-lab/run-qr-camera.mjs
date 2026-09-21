@@ -222,8 +222,16 @@ try {
   const scannedA = (await event(a, "qr-scanned"))[0];
   const openA = (await event(a, "datachannel-open"))[0];
   console.log("QR 內容");
-  console.log(`  發起描述 ${shownA.bytes} B（gzip ${shownA.gzip}），第 ${shownA.version} 版，容錯 ${shownA.level}`);
-  console.log(`  回應描述 ${shownB.bytes} B（gzip ${shownB.gzip}），第 ${shownB.version} 版，容錯 ${shownB.level}`);
+  console.log(`  發起描述 ${shownA.bytes} B（${shownA.format}），第 ${shownA.version} 版，容錯 ${shownA.level}`);
+  console.log(`  回應描述 ${shownB.bytes} B（${shownB.format}），第 ${shownB.version} 版，容錯 ${shownB.level}`);
+  // 兩顆 Chrome 交出的是 SHA-256 指紋加明碼 IPv4，一定編得出只帶欄位的封包。
+  // 退回完整描述照樣連得上，所以要在這裡攔，不然編碼壞掉也看不出來。
+  for (const [who, shown] of [["發起", shownA], ["回應", shownB]]) {
+    if (shown.format !== "compact") {
+      console.log(`  ${who}描述退回完整描述：${shown.fallback}`);
+      failed = true;
+    }
+  }
   console.log("相機掃描（假攝影機，耗時含開相機）");
   console.log(`  B 掃 A：${scannedB.ms} ms`);
   console.log(`  A 掃 B：${scannedA.ms} ms`);
