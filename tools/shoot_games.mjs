@@ -37,6 +37,7 @@
  *   node tools/shoot_games.mjs tor-network     # 只截名稱含這段字的
  *   node tools/shoot_games.mjs --lang=en       # 只截某個語系
  *   node tools/shoot_games.mjs --no-webp       # 只留 PNG
+ *   node tools/shoot_games.mjs --software      # 沒有顯示卡的機器，退到 WebGL2
  *
  * 產物在 tools/.shots/，PNG 與 WebP 各一份，OG 卡片另外複製到 tools/.shots/og/。
  * 確認過畫面才發布：
@@ -58,6 +59,11 @@ const W = 1280, H = 720;                                // 16:9，縮圖與 OG �
 
 const args = process.argv.slice(2);
 const NO_WEBP = args.includes('--no-webp');
+// 沒有顯示卡的機器（開發容器、CI）上，WebGPU 的 device 建不起來，畫面是空的。
+// 三件作品都用 three.js 的 WebGPURenderer，而它在 WebGPU 拿不到時會退到 WebGL2，
+// 只要不要帶那組逼它走 Vulkan 的旗標就退得成。退路畫出來的東西跟硬體那條路差多少
+// 要自己比對過再決定能不能拿去發布，bloom 後處理與 TSL 的幾個節點是兩套實作。
+const SOFTWARE = args.includes('--software');
 const LANG_ARG = (args.find((a) => a.startsWith('--lang=')) || '').split('=')[1] || '';
 const ONLY = args.filter((a) => !a.startsWith('--'));
 
@@ -79,6 +85,15 @@ const PASS_L3 = [['xy', 435, 276], ['xy', 854, 295], ['xy', 958, 432], ...SEND_N
 
 const GAME = '/games/onion-routing/play/index.html';
 const GLOBE = '/games/tor-network/play/index.html';
+// 地球儀的資料層預設只開地理底圖與中繼，其餘要讀者自己勾。截圖要看到哪幾層就
+// 用網址帶進去，不然台灣那兩張只有一顆光禿禿的球。層的 id 見
+// docs/zh-TW/games/tor-network/play/layers.js。
+const LAYERS_TW = 'continents,bathymetry,relays,tw-admin,tw-landing,tw-power,tw-grid,tw-energy';
+const GLOBE_TW = `${GLOBE}?layers=${LAYERS_TW}#tw`;
+// 全球那幾張要把全球組開起來。預設只有地理底圖與中繼，而這幾張圖的工作是讓人看出
+// 這件作品能做什麼，少了連線受阻那層紅色漸層，畫面上最有話講的那一塊就不見了。
+const LAYERS_GLOBAL = 'continents,bathymetry,relays,ooni,torusers,netusers,shutdowns,cables';
+const GLOBE_ALL = `${GLOBE}?layers=${LAYERS_GLOBAL}`;
 const GLOBE_READY = `!!document.querySelector('#loading.done')`;
 
 const SHOTS = [
@@ -121,27 +136,30 @@ const SHOTS = [
 
   // ── Tor 中繼地球儀 ──
   {
-    nm: 'tor-network-globe', url: GLOBE, ready: GLOBE_READY, ogAs: 'tor-network',
+    nm: 'tor-network-globe', url: GLOBE_ALL, ready: GLOBE_READY, ogAs: 'tor-network',
     actions: [['sel', '#hint-close']], settle: 9000,
   },
   {
     // 陸地亮度換成共識權重，台數多與實際扛流量多是兩件事
-    nm: 'tor-network-weight', url: GLOBE, ready: GLOBE_READY,
-    actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '#mode-weight']], settle: 4000,
+    nm: 'tor-network-weight', url: GLOBE_ALL, ready: GLOBE_READY,
+    actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '[data-mode="all-weight"]']], settle: 4000,
   },
   {
     // 國家卡。標籤是 #labels 裡的 div，帶 data-cc，不用點球面
-    nm: 'tor-network-country', url: GLOBE, ready: GLOBE_READY,
+    nm: 'tor-network-country', url: GLOBE_ALL, ready: GLOBE_READY,
     actions: [['sel', '#hint-close'], ['wait', 6000], ['sel', '#labels [data-cc="de"]']], settle: 3000,
   },
   {
-    nm: 'tor-network-taiwan', url: GLOBE + '#tw', ready: GLOBE_READY,
+    // 這一站要相機飛到台灣特寫，而飛行是逐幀趨近的。軟體轉譯那條路上一幀要好幾秒，
+    // 飛到一半就被截走，畫面停在中距離，島上那幾層還沒淡入。reduced 讓 flyTo 直接
+    // 跳到終點，代價是沒有極光與示意路徑，那兩樣在台灣特寫裡本來就看不到。
+    nm: 'tor-network-taiwan', url: GLOBE_TW, ready: GLOBE_READY, reduced: true,
     actions: [['sel', '#hint-close']], settle: 13000,
   },
   {
     // 用電切成工業用電佔比，新竹會跳到第一。那個切換改的是左欄的長條，
     // 不是地圖，所以要把面板捲到台灣那一區再截
-    nm: 'tor-network-industry', url: GLOBE + '#tw', ready: GLOBE_READY,
+    nm: 'tor-network-industry', url: GLOBE_TW, ready: GLOBE_READY, reduced: true,
     actions: [['sel', '#hint-close'], ['wait', 10000], ['sel', '#use-ind'],
               ['eval', `document.getElementById('lbl-energy').scrollIntoView({ block: 'center' })`]],
     settle: 3000,
@@ -180,9 +198,11 @@ await new Promise((r) => srv.listen(0, '127.0.0.1', r));
 const base = `http://127.0.0.1:${srv.address().port}`;
 
 // GPU sandbox 要關掉，Vulkan 的 device 才起得來
-const CHROME_FLAGS = ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage',
-  '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=vulkan', '--enable-features=Vulkan',
-  '--disable-gpu-sandbox', '--enable-unsafe-webgpu', '--hide-scrollbars'];
+const CHROME_FLAGS = SOFTWARE
+  ? ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--hide-scrollbars']
+  : ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage',
+     '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=vulkan', '--enable-features=Vulkan',
+     '--disable-gpu-sandbox', '--enable-unsafe-webgpu', '--hide-scrollbars'];
 
 const prof = fs.mkdtempSync('/tmp/shoot-games-');
 const chrome = spawn('google-chrome', [...CHROME_FLAGS, `--remote-debugging-port=${PORT_CDP}`,
@@ -257,7 +277,10 @@ for (const s of todo) {
       else if (kind === 'wait') await sleep(a);
       await sleep(150);
     }
-    await sleep(s.settle ?? 3000);
+    // 軟體轉譯一幀要好幾秒，淡入與相機趨近都是逐幀算的，照原本的時間等會截到
+    // 半成品。多給一倍再加八秒，實測夠這幾張走到定位。
+    const settle = s.settle ?? 3000;
+    await sleep(SOFTWARE ? settle * 2 + 8000 : settle);
 
     // 免得參數打錯還安靜產出三份一樣的圖
     const got = await ev(`document.documentElement.lang || ''`);

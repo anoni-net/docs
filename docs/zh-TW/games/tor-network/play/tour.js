@@ -27,18 +27,23 @@
 // 時對應的站會整站抽掉，站數跟著變，而不是留一站空畫面讓講者在台前解釋為什麼
 // 什麼都沒有。抽掉的判斷由 atlas.js 那邊回報，這支只管照著過濾。
 
-/** 七站的腳本。mode 與 cam 省略代表那一站不動那一項，畫面停在上一站的狀態。 */
+/**
+ * 七站的腳本。mode 與 cam 省略代表那一站不動那一項，畫面停在上一站的狀態。
+ *
+ * layers 是那一站要有哪幾層才講得成。開場只載地理底圖與中繼，其餘等讀者自己勾，
+ * 所以導覽開始之前要先把這些補上，見 start 裡的 prepare。
+ */
 export const STOPS = [
-  { id: 'intro', t: 'tourIntroTitle', b: 'tourIntroBody', mode: 'all-count', cam: [30, -30, 140, 140] },
-  { id: 'weight', t: 'tourWeightTitle', b: 'tourWeightBody', mode: 'all-weight' },
+  { id: 'intro', t: 'tourIntroTitle', b: 'tourIntroBody', mode: 'all-count', cam: [30, -30, 140, 140], layers: ['relays'] },
+  { id: 'weight', t: 'tourWeightTitle', b: 'tourWeightBody', mode: 'all-weight', layers: ['relays'] },
   // 轉到東半球再講受阻，那一側才看得到被標紅的國家。亮度切回台數，
   // 紅色是獨立的一層，留著共識權重的話畫面上同時有兩套顏色在變。
-  { id: 'blocked', t: 'tourBlockedTitle', b: 'tourBlockedBody', mode: 'all-count', cam: [22, 62, 140, 140] },
-  { id: 'users', t: 'tourUsersTitle', b: 'tourUsersBody', mode: 'users', need: 'users' },
+  { id: 'blocked', t: 'tourBlockedTitle', b: 'tourBlockedBody', mode: 'all-count', cam: [22, 62, 140, 140], layers: ['ooni'] },
+  { id: 'users', t: 'tourUsersTitle', b: 'tourUsersBody', mode: 'users', need: 'users', layers: ['torusers'] },
   // 台灣用的取景跟「關注台灣」那顆按鈕同一組，本島填滿畫面、澎湖還在。
-  { id: 'tw', t: 'tourTwTitle', b: 'tourTwBody', mode: 'all-count', cam: [23.75, 121.0, 4.6, 3.0] },
+  { id: 'tw', t: 'tourTwTitle', b: 'tourTwBody', mode: 'all-count', cam: [23.75, 121.0, 4.6, 3.0], layers: ['tw-admin', 'tw-landing'] },
   // 再往西部貼一段。變電所、電廠與 345kV 骨幹都集中在那條走廊上。
-  { id: 'infra', t: 'tourInfraTitle', b: 'tourInfraBody', cam: [23.6, 120.45, 2.6, 2.6], need: 'tw' },
+  { id: 'infra', t: 'tourInfraTitle', b: 'tourInfraBody', cam: [23.6, 120.45, 2.6, 2.6], need: 'tw', layers: ['tw-admin', 'tw-power', 'tw-grid'] },
   { id: 'end', t: 'tourEndTitle', b: 'tourEndBody', cam: [23.75, 121.0, 140, 140] },
 ];
 
@@ -57,6 +62,7 @@ const CLEAR_PAD = 14;
  *   hideCountry()
  *   stats()          文案要插的數字
  *   available()      { users: bool, tw: bool }，哪幾份資料真的載到了
+ *   prepare(stops)   非同步，把 stops 裡列到的層補載起來。省略的話少載的站會被抽掉
  *   onLayout()       導覽列顯示或收起之後重量一次 UI 遮蔽區（可省略）
  *   onStart() / onStop()  網址要不要跟著動，交給呼叫端決定（可省略）
  */
@@ -129,7 +135,10 @@ export function createTour(api) {
 
   function prev() { if (active()) go(at - 1); }
 
-  function start() {
+  async function start() {
+    // 先把七站要用的層補齊再決定站數。少了這一步，開場沒載到的那幾層會讓第三站
+    // 起整站被抽掉，而講者是站在台前才發現少講了三站。
+    if (api.prepare) await api.prepare(STOPS);
     stops = pick();
     if (!stops.length) return;
     at = 0;

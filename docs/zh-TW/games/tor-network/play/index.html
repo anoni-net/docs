@@ -541,6 +541,22 @@
     #metric-sw, .metric-sw { flex-wrap: wrap; }
     #metric-sw button, .metric-sw button { flex: 1 1 44%; }
     /* 台數與共識權重的排名不一樣，給一個切換讓人自己對照 */
+    /* 資料層的勾選格。沿用指標切換那組 chip 的視覺語言，讀者已經認得那個形狀
+       代表「可以按，按了會換內容」。 */
+    #layer-list { margin: 0 0 10px; }
+    .ly-h { font-size: 10px; font-weight: 700; color: var(--muted); opacity: .72; margin: 0 0 3px; }
+    .ly-g { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 7px; }
+    .ly {
+      font: inherit; font-size: 10.5px; font-weight: 700; padding: 3px 8px;
+      border: 1px solid var(--panel-b); border-radius: 999px;
+      background: rgba(255, 255, 255, .04); color: var(--muted); cursor: pointer;
+    }
+    .ly.on { background: rgba(0, 174, 255, .16); color: var(--ink); border-color: rgba(0, 174, 255, .5); }
+    /* 按下去到畫面出現之間要抓資料。沒有這個回饋的話讀者會以為沒反應而連按好幾次 */
+    .ly.busy { opacity: .55; cursor: progress; }
+    .ly:disabled { opacity: .45; cursor: default; }
+    .ly:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+
     #metric-sw, .metric-sw { display: flex; gap: 4px; margin-bottom: 8px; }
     #metric-sw button, .metric-sw button { flex: 1 1 0; white-space: nowrap; font: inherit; font-size: 10.5px; font-weight: 700; padding: 4px 6px; border: 1px solid var(--panel-b); border-radius: 999px; background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; }
     #metric-sw button.on, .metric-sw button.on { background: rgba(0,174,255,.16); color: var(--ink); border-color: rgba(0,174,255,.5); }
@@ -607,10 +623,18 @@
           <button id="btn-tour" type="button" disabled>開始導覽</button>
           <span id="tour-note">七站，約五分鐘。給工作坊與教學現場翻給人看，斷網也開得起來。</span>
         </div>
+        <!-- 資料層。每一份來源資料一個格子，勾了才去抓那一份並建幾何，取消就收回去。
+             分組與順序照 layers.js 的宣告，這裡只留一個空容器，內容由 atlas.js 畫。
+             地球本身那一格是停用的，沒有國界就沒有地球可看。 -->
+        <div class="lbl" id="lbl-layers">資料層（按一下開關，勾了才載入）</div>
+        <div id="layer-list"></div>
         <div class="lbl" id="lbl-roles">角色分布（點一下只看這個角色，再點一次看全部）</div>
         <div class="row" id="stat-role"></div>
         <div class="lbl" id="lbl-brightness">陸地亮度：由低到高（非線性，中段差距已放大）</div>
-        <div id="metric-sw"><button data-mode="all-count" class="on" id="mode-count">中繼台數</button><button data-mode="all-weight" id="mode-weight">共識權重</button><button data-mode="conc" id="mode-conc">業者集中度</button><button data-mode="users" id="btn-users" hidden title="陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示">使用者數</button></div>
+        <!-- 亮度可以換哪幾個指標由現在開著的層決定，內容由 atlas.js 的 buildMetricUI
+             畫出來。原本四顆寫死在這裡，使用者數那顆靠 hidden 控制，層能自己開關
+             之後那個做法不夠用。 -->
+        <div id="metric-sw"></div>
         <div id="ramp"><span id="ramp-lo">無</span><i></i><span id="ramp-hi">最多</span></div>
         <!-- 六角層的開關。網址沒帶 ?hex 的話 buildHex 直接返回，這顆就一直是 hidden。 -->
         <button id="btn-hex" type="button" hidden>六角格</button>

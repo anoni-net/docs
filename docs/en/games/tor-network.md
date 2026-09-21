@@ -27,13 +27,23 @@ This is built for workshops and classrooms. The work and its data sit in the aut
 
 When a dataset fails to load, the stop that needs it is dropped and the count adjusts.
 
+## Pick the layers you want
+
+The globe itself, bathymetry, Tor relays and blocking observations load at startup. The other eleven layers sit in the row of chips at the top of the left panel: tap one and that dataset is fetched and drawn, tap again and it is removed. Layers you never tap cost nothing.
+
+Compressed, the fourteen datasets come to 800 KB. The four that load at startup account for 429 KB, so arriving costs a little over half. The two heaviest items on the on-demand side are the coastlines at 237 KB and the five Taiwan layers at 95 KB. Coastlines only sharpen the land and sea boundary, which the borders and the land fill already make legible, so they sit on the on-demand side.
+
+The URL follows your choices, so copying the address bar hands someone else the same stack. You can also write it directly: `?layers=tw-power,tw-grid` opens just the substations and the grid, and an empty `?layers=` leaves only the globe itself.
+
+Starting the tour pulls in whatever its seven stops need, so there is no need to tap the layers open beforehand.
+
 ## What is on the sphere
 
 Each relay is one dot placed inside its own country's border, coloured by its four possible roles (guard, middle, exit, and guard plus exit) and sized by bandwidth. Landmass brightness carries a separate metric, relay count by default.
 
 Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding `#tw` to the URL flies straight to Taiwan on load, and other country codes such as `#jp` work the same way, so a shared link can decide what the recipient sees first.
 
-### Landmass brightness switches between four metrics
+### Landmass brightness switches between metrics
 
 ![Landmass brightness switched to consensus weight, with country labels now showing percentages, Germany at 29.5% and Sweden at 6.1%](https://assets.anoni.net/games/tor-network-weight-en.webp){style="border-radius: 10px;"}
 
@@ -41,6 +51,11 @@ Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding 
 - **Consensus weight**: the share of traffic the country actually carries in the Tor network, which often diverges noticeably from the raw count
 - **Single-provider concentration**: what fraction of a country's relays sit with its largest hosting provider, showing how dependent it is on one operator
 - **User estimate**: the estimated number of Tor users, a demand-side figure
+- **Internet use**: what share of the country is online. The World Bank series covers 208 economies, wider than relay coverage
+
+Layers supply the metrics, so the row of buttons grows and shrinks with them. The first three come from the Tor relay layer; the user estimate and internet use each appear once their layer is on. Turning off the layer behind the metric you are viewing drops the view back to relay count.
+
+The last two belong together. One is an absolute headcount, the other is its denominator, and comparing them is what tells you whether a gap between two countries is about demand or about population size.
 
 The gap between count and weight is worth switching over to see once. The United States hosts the most relays, but under consensus weight Germany moves ahead, which means each German relay carries more traffic.
 

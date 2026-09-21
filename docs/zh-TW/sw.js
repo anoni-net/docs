@@ -451,6 +451,7 @@ const GAME_APPS = [
   "games/onion-rendezvous/play/i18n.js",
   "games/tor-network/play/index.html",
   "games/tor-network/play/atlas.js",
+  "games/tor-network/play/layers.js",
   "games/tor-network/play/i18n.js",
   "games/tor-network/play/tour.js",
   "games/tor-network/play/cables.json",

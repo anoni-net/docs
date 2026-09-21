@@ -4143,8 +4143,9 @@
 	#Demand-reads-two-ways
 	#Further-reading
 	#Internet-usage-rate-World-Bank-CC-BY-40-Ministry-of-Digital-Affairs
-	#Landmass-brightness-switches-between-four-metrics
+	#Landmass-brightness-switches-between-metrics
 	#Not-sure-where-to-start-take-the-tour
+	#Pick-the-layers-you-want
 	#Relay-distribution-Onionoo-CC0-10
 	#Shutdown-records-Access-Now-KeepItOn-CC-BY-40
 	#Sources-and-licensing
@@ -5436,8 +5437,9 @@
 	#球面上有什麼
 	#用電那段可以換兩種看法
 	#資料來源與授權
+	#資料層自己選
 	#連線受阻的地區OONICC-BY-NC-SA-40
-	#陸地亮度可以換四種指標
+	#陸地亮度可以換指標
 	#點國家標籤展開資訊卡
 /games/tor-network/play/
 /guides/
@@ -9090,6 +9092,7 @@
 	#中继分布OnionooCC0-10
 	#延伸阅读
 	#放大到台湾
+	#数据层自己选
 	#数据来源与授权
 	#整合了哪些数据
 	#断网事件Access-Now-KeepItOnCC-BY-40
@@ -9100,7 +9103,7 @@
 	#用户与网桥Tor-MetricsCC0-10
 	#用电那段可以换两种看法
 	#连线受阻的地区OONICC-BY-NC-SA-40
-	#陆地亮度可以换四种指标
+	#陆地亮度可以换指标
 /zh-cn/guides/
 	#五个阅读层次
 	#如何走这条路径
