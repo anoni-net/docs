@@ -18,6 +18,17 @@
  * 只開 DataChannel 不要媒體軌，SDP 才會小。實機量到 587 B，gzip 後不到 400 B，一張靜態
  * QR code 就裝得下，所以交換描述不需要影格串流，兩邊各顯示一張、對方掃一次就過去。
  * 封包開頭有四個位元組的標記，掃到網址之類的其他 QR code 時認得出來。複製貼上保留當退路。
+ *
+ * QR 優先放只帶欄位的封包（格式版本 2），約 80 B，第 5 版就裝得下，完整描述 gzip 後要到
+ * 第 17 版。描述裡每次真的會變的只有 ice-ufrag、ice-pwd、DTLS 指紋、候選與 setup 角色，
+ * 其餘的行由接收端照固定樣板補回。編不出來（指紋不是 SHA-256、候選全被濾掉）就退回
+ * 格式版本 1 的完整描述，所以這只是縮小，不會讓原本連得上的組合變得連不上。
+ *
+ * 候選只留 UDP 的 host，並丟掉 100.64.0.0/10 與 Tailscale 的 fd7a:115c:a1e0::/48。
+ * 這一步只管交出去的候選，管不到瀏覽器從哪張網卡送連線檢查：有相機權限之後才建立的
+ * 連線，每張網卡各有一個 socket，Tailscale 那一個照樣會送，對方收到後當成 prflx 候選。
+ * 要完全避開 Tailscale，連線要在授權之前建立，見 issue #553 的第二階段規格草案。
+ *
  * ICE 蒐集完成才把描述交出去，不做 trickle，因為 trickle 需要一條雙向且持續的通道，
  * 而手動貼上與 QR 都只能一次過一份。
  * 分塊 64 KB 並靠 bufferedAmount 做背壓，收的一端算 SHA-256 跟來源比對。
@@ -47,6 +58,8 @@
   // 而不是把一段網址當成描述去套用。第三個是格式版本，第四個標示有沒有 gzip。
   const PACK_MAGIC = [0x57, 0x4c];
   const PACK_VERSION = 1;
+  // 只帶欄位的封包。版本 1 的第四個位元組是 gzip 旗標，這一版拿來放描述的旗標。
+  const PACK_COMPACT = 2;
 
   // DataChannel 一次送多大。SCTP 的訊息上限各家實作不同，64 KB 是普遍安全的值。
   const CHUNK = 64 * 1024;
@@ -104,6 +117,8 @@
       sdpFrames: "換算 QR 張數（中檔）",
       sdpSeconds: "播完一輪",
       sdpCandidates: "連線候選行數",
+      sdpCompact: "QR 用的欄位封包",
+      sdpCompactFallback: "編不出來，QR 改放完整描述",
       noCompression: "這個瀏覽器沒有 CompressionStream",
       role: "角色",
       roleValueOfferer: "發起方",
@@ -185,6 +200,8 @@
       sdpFrames: "换算 QR 张数（中档）",
       sdpSeconds: "播完一轮",
       sdpCandidates: "连线候选行数",
+      sdpCompact: "QR 用的字段封包",
+      sdpCompactFallback: "编不出来，QR 改放完整描述",
       noCompression: "这个浏览器没有 CompressionStream",
       role: "角色",
       roleValueOfferer: "发起方",
@@ -266,6 +283,8 @@
       sdpFrames: "QR frames (medium)",
       sdpSeconds: "One full pass",
       sdpCandidates: "Candidate lines",
+      sdpCompact: "Compact packet for the QR code",
+      sdpCompactFallback: "Could not encode, the QR code carries the full description",
       noCompression: "This browser has no CompressionStream",
       role: "Side",
       roleValueOfferer: "Starter",
@@ -512,7 +531,8 @@
     return { gzip: buffer.byteLength, base64: Math.ceil(buffer.byteLength / 3) * 4 };
   }
 
-  async function showSdpStats(sdp) {
+  async function showSdpStats(desc) {
+    const sdp = desc.sdp;
     const raw = new TextEncoder().encode(sdp).length;
     const trimmed = new TextEncoder().encode(trimSdp(sdp)).length;
     const packed = await gzipSize(trimSdp(sdp));
@@ -520,6 +540,7 @@
     const frames = Math.ceil(forQr / QR_PAYLOAD_MEDIUM) + 1;
     const secs = (frames / QR_FRAMES_PER_SECOND).toFixed(1);
     const candidates = (sdp.match(/^a=candidate/gm) || []).length;
+    const compact = encodeCompact(desc);
     rows(sdpTable, [
       [t.sdpRaw, raw + " B"],
       [t.sdpTrimmed, trimmed + " B"],
@@ -528,7 +549,9 @@
       [t.sdpFrames, frames + " " + t.frames],
       [t.sdpSeconds, secs + " " + t.seconds],
       [t.sdpCandidates, String(candidates)],
+      [t.sdpCompact, compact.bytes ? compact.bytes.length + " B" : t.sdpCompactFallback],
     ]);
+    // 被濾掉的候選只記原因與個數，不記位址
     record("sdp-stats", {
       raw: raw,
       trimmed: trimmed,
@@ -537,6 +560,10 @@
       qrFrames: frames,
       qrSeconds: Number(secs),
       candidates: candidates,
+      compact: compact.bytes ? compact.bytes.length : null,
+      compactError: compact.error || null,
+      compactKept: compact.kept,
+      compactDropped: compact.dropped,
     });
   }
 
@@ -653,6 +680,283 @@
     });
   }
 
+  // ---------------------------------------------------------------- 只帶欄位的封包
+
+  // compact-codec-begin。tools/webrtc-lab/test_compact.mjs 把這一段到 compact-codec-end
+  // 原地抽出來測，改格式時兩邊一起看。
+  //
+  // 格式版本 2 接在 PACK_MAGIC 與版本號後面：
+  //   1 byte   旗標：bit0 是 answer、bit1 是 setup:passive、bit2 帶 mid、bit3 帶 max-message-size
+  //   ice-ufrag 與 ice-pwd 各一段：1 byte 標頭加內容。標頭 bit7 表示用 base64 字母表壓過，
+  //            低 7 bit 是字元數。沒壓的話內容就是原字串，低 7 bit 是位元組數
+  //   32 bytes DTLS 指紋，SHA-256 的原始位元組
+  //   mid              旗標 bit2 才有：1 byte 長度加字串
+  //   max-message-size 旗標 bit3 才有：4 bytes
+  //   1 byte   候選數。每個候選是 1 byte 種類、位址、2 bytes port。種類 0 是 mDNS 名稱
+  //            （UUID 16 bytes），4 是 IPv4，6 是 IPv6，255 是其他主機名稱（1 byte 長度加字串）
+  const CF_ANSWER = 1;
+  const CF_PASSIVE = 2;
+  const CF_MID = 4;
+  const CF_MAXMSG = 8;
+  const CK_MDNS = 0;
+  const CK_V4 = 4;
+  const CK_V6 = 6;
+  const CK_NAME = 255;
+  const COMPACT_MID = "0";
+  // 樣板寫的訊息上限。Chrome 宣告的就是這個值，Firefox 宣告 1073741823。對方的上限比較大時
+  // 照這個值送只是保守一點，分塊是 64 KB 不受影響。比較小才需要帶上。
+  const COMPACT_MAXMSG = 262144;
+  const ICE_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  const MDNS_UUID = /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})\.local$/i;
+
+  function parseIPv4(text) {
+    const parts = text.split(".");
+    if (parts.length !== 4) return null;
+    const out = [];
+    for (let i = 0; i < 4; i += 1) {
+      if (!/^\d{1,3}$/.test(parts[i]) || Number(parts[i]) > 255) return null;
+      out.push(Number(parts[i]));
+    }
+    return out;
+  }
+
+  // 內嵌 IPv4 的寫法與帶 zone 的位址不處理，當成主機名稱照原樣送
+  function parseIPv6(text) {
+    if (text.indexOf(":") < 0 || /[.%]/.test(text)) return null;
+    const halves = text.split("::");
+    if (halves.length > 2) return null;
+    const head = halves[0] ? halves[0].split(":") : [];
+    const tail = halves.length === 2 && halves[1] ? halves[1].split(":") : [];
+    const fill = 8 - head.length - tail.length;
+    if (halves.length === 1 ? fill !== 0 : fill < 1) return null;
+    const groups = head.concat(new Array(halves.length === 2 ? fill : 0).fill("0"), tail);
+    const out = [];
+    for (let i = 0; i < groups.length; i += 1) {
+      if (!/^[0-9a-f]{1,4}$/i.test(groups[i])) return null;
+      const n = parseInt(groups[i], 16);
+      out.push(n >> 8, n & 0xff);
+    }
+    return out;
+  }
+
+  function formatIPv6(bytes) {
+    const groups = [];
+    for (let i = 0; i < 16; i += 2) groups.push(((bytes[i] << 8) | bytes[i + 1]).toString(16));
+    return groups.join(":");
+  }
+
+  // 離線現場用不到、而且會把流量引進 VPN 的位址，不交給對方。
+  // 100.64.0.0/10 是 CGNAT，Tailscale 也用這一段。fd7a:115c:a1e0::/48 是 Tailscale 的 IPv6。
+  function dropReason(kind, addr) {
+    if (kind === CK_V4) {
+      if (addr[0] === 100 && (addr[1] & 0xc0) === 64) return "cgnat";
+      if (addr[0] === 127) return "loopback";
+      if (addr[0] === 169 && addr[1] === 254) return "link-local";
+    } else if (kind === CK_V6) {
+      const tailscale = [0xfd, 0x7a, 0x11, 0x5c, 0xa1, 0xe0];
+      if (tailscale.every(function (b, i) { return addr[i] === b; })) return "tailscale";
+      if (addr[0] === 0xfe && (addr[1] & 0xc0) === 0x80) return "link-local";
+      if (addr.slice(0, 15).every(function (b) { return b === 0; }) && addr[15] === 1) return "loopback";
+    }
+    return null;
+  }
+
+  // ice-char 的字元集正好是 base64 的字母表，長度是 4 的倍數時每 4 個字元無損壓成 3 個位元組。
+  // Chrome 的 ufrag 4 字、pwd 24 字，Firefox 的 8 與 32 個十六進位字元都符合。
+  function packIce(text) {
+    if (text.length % 4 === 0 && /^[A-Za-z0-9+/]+$/.test(text)) {
+      if (text.length > 124) return null;
+      const out = [0x80 | text.length];
+      for (let i = 0; i < text.length; i += 4) {
+        const n = (ICE_ALPHABET.indexOf(text[i]) << 18) | (ICE_ALPHABET.indexOf(text[i + 1]) << 12) |
+          (ICE_ALPHABET.indexOf(text[i + 2]) << 6) | ICE_ALPHABET.indexOf(text[i + 3]);
+        out.push((n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff);
+      }
+      return out;
+    }
+    const raw = Array.from(new TextEncoder().encode(text));
+    return raw.length > 127 ? null : [raw.length].concat(raw);
+  }
+
+  function sdpAttr(sdp, name) {
+    const found = sdp.match(new RegExp("^a=" + name + ":(.*)$", "m"));
+    return found ? found[1].trim() : null;
+  }
+
+  // 編不出來時回 error，呼叫的一端退回格式版本 1。kept 與 dropped 只記個數與原因。
+  function encodeCompact(desc) {
+    const dropped = {};
+    let kept = 0;
+    function fail(reason) { return { error: reason, kept: kept, dropped: dropped }; }
+    const sdp = desc && desc.sdp ? desc.sdp : "";
+    const media = sdp.match(/^m=.*$/gm) || [];
+    if (media.length !== 1 || !/^m=application \d+ UDP\/DTLS\/SCTP webrtc-datachannel/.test(media[0])) {
+      return fail("media");
+    }
+    const ufrag = sdpAttr(sdp, "ice-ufrag");
+    const pwd = sdpAttr(sdp, "ice-pwd");
+    const fingerprint = (sdpAttr(sdp, "fingerprint") || "").split(/\s+/);
+    const setup = sdpAttr(sdp, "setup");
+    const mid = sdpAttr(sdp, "mid") || COMPACT_MID;
+    const maxmsg = Number(sdpAttr(sdp, "max-message-size") || COMPACT_MAXMSG);
+    if (!ufrag || !pwd || !setup) return fail("field");
+    if (fingerprint[0].toLowerCase() !== "sha-256" || !/^([0-9a-f]{2}:){31}[0-9a-f]{2}$/i.test(fingerprint[1] || "")) {
+      return fail("fingerprint");
+    }
+    const ufragBytes = packIce(ufrag);
+    const pwdBytes = packIce(pwd);
+    if (!ufragBytes || !pwdBytes) return fail("ice");
+    const midBytes = Array.from(new TextEncoder().encode(mid));
+    if (midBytes.length > 255) return fail("mid");
+
+    let flags = 0;
+    if (desc.type === "answer") {
+      flags |= CF_ANSWER;
+      if (setup === "passive") flags |= CF_PASSIVE;
+      else if (setup !== "active") return fail("setup");
+    } else if (desc.type !== "offer" || setup !== "actpass") {
+      return fail("setup");
+    }
+    if (mid !== COMPACT_MID) flags |= CF_MID;
+    // 0 代表沒有上限，跟比樣板大一樣不必帶
+    if (maxmsg > 0 && maxmsg < COMPACT_MAXMSG) flags |= CF_MAXMSG;
+
+    const out = [PACK_MAGIC[0], PACK_MAGIC[1], PACK_COMPACT, flags].concat(ufragBytes, pwdBytes);
+    fingerprint[1].split(":").forEach(function (h) { out.push(parseInt(h, 16)); });
+    if (flags & CF_MID) out.push.apply(out, [midBytes.length].concat(midBytes));
+    if (flags & CF_MAXMSG) out.push((maxmsg >>> 24) & 0xff, (maxmsg >>> 16) & 0xff, (maxmsg >>> 8) & 0xff, maxmsg & 0xff);
+
+    // 只留 UDP 的 host，照原本的 priority 由高到低排，解碼端依順序重新給 priority
+    const cands = [];
+    sdp.split(/\r?\n/).forEach(function (line) {
+      if (line.indexOf("a=candidate:") !== 0) return;
+      const f = line.slice(12).split(" ");
+      let reason = null;
+      let kind = CK_NAME;
+      let addr = null;
+      if (f.length < 8 || f[1] !== "1") reason = "other";
+      else if (f[2].toLowerCase() !== "udp") reason = f[2].toLowerCase();
+      else if (f[7] !== "host") reason = f[7];
+      else {
+        const uuid = f[4].match(MDNS_UUID);
+        if (uuid) {
+          kind = CK_MDNS;
+          addr = uuid.slice(1).join("").match(/../g).map(function (h) { return parseInt(h, 16); });
+        } else if ((addr = parseIPv4(f[4]))) {
+          kind = CK_V4;
+        } else if ((addr = parseIPv6(f[4]))) {
+          kind = CK_V6;
+        } else {
+          addr = Array.from(new TextEncoder().encode(f[4]));
+          if (addr.length > 255) reason = "other";
+        }
+        reason = reason || dropReason(kind, addr);
+      }
+      if (reason) {
+        dropped[reason] = (dropped[reason] || 0) + 1;
+        return;
+      }
+      cands.push({ kind: kind, addr: addr, port: Number(f[5]), priority: Number(f[3]) });
+    });
+    kept = cands.length;
+    // 全部被濾掉就退回完整描述，照原本的候選交出去，至少不比格式版本 1 差
+    if (kept === 0 || kept > 255) return fail("candidates");
+    cands.sort(function (a, b) { return b.priority - a.priority; });
+    out.push(kept);
+    cands.forEach(function (c) {
+      out.push(c.kind);
+      if (c.kind === CK_NAME) out.push(c.addr.length);
+      out.push.apply(out, c.addr);
+      out.push((c.port >> 8) & 0xff, c.port & 0xff);
+    });
+    return { bytes: new Uint8Array(out), kept: kept, dropped: dropped };
+  }
+
+  // 解不開就丟出例外，由 unpackDescription 回報成 corrupt
+  function decodeCompact(bytes) {
+    let at = 4;
+    function take(n) {
+      if (at + n > bytes.length) throw new Error("truncated");
+      const part = bytes.subarray(at, at + n);
+      at += n;
+      return part;
+    }
+    function hex(b) { return (b < 16 ? "0" : "") + b.toString(16); }
+    function readIce() {
+      const head = take(1)[0];
+      const len = head & 0x7f;
+      if (!(head & 0x80)) return new TextDecoder().decode(take(len));
+      if (len % 4) throw new Error("ice length");
+      const body = take((len / 4) * 3);
+      let text = "";
+      for (let i = 0; i < body.length; i += 3) {
+        const n = (body[i] << 16) | (body[i + 1] << 8) | body[i + 2];
+        text += ICE_ALPHABET[(n >> 18) & 63] + ICE_ALPHABET[(n >> 12) & 63] + ICE_ALPHABET[(n >> 6) & 63] + ICE_ALPHABET[n & 63];
+      }
+      return text;
+    }
+    const flags = bytes[3];
+    if (flags & 0xf0) throw new Error("flags");
+    const ufrag = readIce();
+    const pwd = readIce();
+    const fingerprint = Array.from(take(32)).map(function (b) { return hex(b).toUpperCase(); }).join(":");
+    let mid = COMPACT_MID;
+    if (flags & CF_MID) mid = new TextDecoder().decode(take(take(1)[0]));
+    let maxmsg = COMPACT_MAXMSG;
+    if (flags & CF_MAXMSG) {
+      const b = take(4);
+      maxmsg = b[0] * 16777216 + (b[1] << 16) + (b[2] << 8) + b[3];
+    }
+    const count = take(1)[0];
+    const lines = [];
+    for (let i = 0; i < count; i += 1) {
+      const kind = take(1)[0];
+      let address;
+      if (kind === CK_MDNS) {
+        const h = Array.from(take(16)).map(hex).join("");
+        address = [h.slice(0, 8), h.slice(8, 12), h.slice(12, 16), h.slice(16, 20), h.slice(20)].join("-") + ".local";
+      } else if (kind === CK_V4) {
+        address = Array.from(take(4)).join(".");
+      } else if (kind === CK_V6) {
+        address = formatIPv6(take(16));
+      } else if (kind === CK_NAME) {
+        address = new TextDecoder().decode(take(take(1)[0]));
+      } else {
+        throw new Error("candidate kind");
+      }
+      const port = take(2);
+      // host 的 type preference 是 126，local preference 依原本的順序遞減
+      const priority = 126 * 16777216 + (65535 - i) * 256 + 255;
+      lines.push("a=candidate:" + (i + 1) + " 1 udp " + priority + " " + address + " " + ((port[0] << 8) | port[1]) + " typ host");
+    }
+    if (at !== bytes.length) throw new Error("trailing bytes");
+    const answer = (flags & CF_ANSWER) !== 0;
+    const setup = answer ? ((flags & CF_PASSIVE) ? "passive" : "active") : "actpass";
+    // o= 那一行是假的。實測 Chrome 與 Firefox 都接受，之後在 DataChannel 上用完整描述
+    // 重新協商（例如加音軌）也不受影響。
+    const sdp = [
+      "v=0",
+      "o=- 0 1 IN IP4 127.0.0.1",
+      "s=-",
+      "t=0 0",
+      "a=group:BUNDLE " + mid,
+      "m=application 9 UDP/DTLS/SCTP webrtc-datachannel",
+      "c=IN IP4 0.0.0.0",
+    ].concat(lines, [
+      "a=end-of-candidates",
+      "a=ice-ufrag:" + ufrag,
+      "a=ice-pwd:" + pwd,
+      "a=fingerprint:sha-256 " + fingerprint,
+      "a=setup:" + setup,
+      "a=mid:" + mid,
+      "a=sctp-port:5000",
+      "a=max-message-size:" + maxmsg,
+    ]).join("\r\n") + "\r\n";
+    return { type: answer ? "answer" : "offer", sdp: sdp };
+  }
+
+  // compact-codec-end
+
   // ---------------------------------------------------------------- QR code
 
   // 位元組陣列轉成每個字元一個位元組的字串，餵給 qrcode-generator 的 byte mode。
@@ -691,6 +995,13 @@
   async function unpackDescription(bytes) {
     if (!bytes || bytes.length < 5 || bytes[0] !== PACK_MAGIC[0] || bytes[1] !== PACK_MAGIC[1]) {
       return { error: "foreign" };
+    }
+    if (bytes[2] === PACK_COMPACT) {
+      try {
+        return { json: JSON.stringify(decodeCompact(bytes)) };
+      } catch (err) {
+        return { error: "corrupt" };
+      }
     }
     if (bytes[2] !== PACK_VERSION || bytes[3] > 1) return { error: "version" };
     let body = bytes.subarray(4);
@@ -739,11 +1050,14 @@
       record("qr-missing", {});
       return;
     }
-    const bytes = await packDescription(json);
+    // 先試只帶欄位的封包，編不出來才放格式版本 1 的完整描述。複製貼上那一格維持完整描述。
+    const compact = encodeCompact(JSON.parse(json));
+    const bytes = compact.bytes || (await packDescription(json));
+    const format = compact.bytes ? "compact" : "full";
     const built = buildQr(bytes);
     if (!built || !built.qr) {
       qrNote.textContent = t.qrTooLarge;
-      record("qr-too-large", { bytes: bytes.length });
+      record("qr-too-large", { bytes: bytes.length, format: format });
       return;
     }
     // 畫在 canvas 上，每個方格整數倍放大，外圍留四格空白。CSS 再縮到版面寬度，
@@ -770,7 +1084,9 @@
     shownQr = built;
     record("qr-shown", {
       bytes: bytes.length,
-      gzip: bytes[3] === 1,
+      format: format,
+      fallback: compact.error || null,
+      gzip: format === "full" && bytes[3] === 1,
       version: built.version,
       level: built.level,
     });
@@ -896,7 +1212,7 @@
     await pc.setLocalDescription(await pc.createOffer());
     await waitForGathering(pc);
     localBox.value = JSON.stringify(pc.localDescription);
-    await showSdpStats(pc.localDescription.sdp);
+    await showSdpStats(pc.localDescription);
     await showQr(localBox.value);
     roleState.textContent = t.roleOfferer;
     updateState();
@@ -926,7 +1242,7 @@
       await pc.setLocalDescription(await pc.createAnswer());
       await waitForGathering(pc);
       localBox.value = JSON.stringify(pc.localDescription);
-      await showSdpStats(pc.localDescription.sdp);
+      await showSdpStats(pc.localDescription);
       await showQr(localBox.value);
       roleState.textContent = t.roleAnswered;
     }
