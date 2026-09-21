@@ -4656,6 +4656,11 @@ function bindControls(dom) {
   // 那段距離，幾百像素，地球會瞬間彈到別的地方。而且同一個值會寫進 spin 當成
   // 滑行速度，以 0.92 每幀衰減，放開後還會繼續飛四十幾幀才停。
   const up = (e) => {
+    // 沒記過的那一根不算數。pointerdown 落在面板上時上面那個處理器直接 return，
+    // 那一根從來沒被 set 進 pointers，而這裡照樣 delete 再看 size 的話，
+    // 「點了一下面板」會被當成「放開最後一根手指」，於是點側欄上任何一顆按鈕都
+    // 順手把自轉停掉。收合鍵、圖層格子、指標按鈕、角色 chip 全中。
+    if (!pointers.has(e.pointerId)) return;
     pointers.delete(e.pointerId);
     const n = pointers.size;
     if (n === 0) { last = null; pauseSpin(); return; }

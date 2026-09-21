@@ -335,6 +335,53 @@ check((await ev(`(document.querySelector('#stat-role [data-mode].on')||{ dataset
 await ev(`document.querySelector('#stat-role [data-mode]').click()`);
 await sleep(300);
 
+// ── 點面板不該停掉自轉 ──────────────────────────────────────
+//
+// 拖曳地球才是「使用者接手了，別再自己轉」。點側欄上的按鈕不是。
+//
+// pointerdown 落在面板上時控制那邊直接 return，那一根手指從來沒被記進 pointers，
+// 而 pointerup 原本照樣 delete 再看 size，於是「點了一下面板」被當成「放開最後
+// 一根手指」。收合鍵、圖層格子、指標按鈕、角色 chip 全中，症狀是點任何一顆按鈕
+// 地球就停下來，而右上角冒出「繼續轉動」。
+{
+  const spinning = () => ev(`!!document.getElementById('btn-spin').hidden`);
+  const tap = async (sel) => {
+    const box = JSON.parse(await ev(`(() => {
+      const el = document.querySelector(${JSON.stringify(sel)});
+      if (!el) return 'null';
+      const r = el.getBoundingClientRect();
+      return JSON.stringify({ x: Math.round(r.x + r.width / 2), y: Math.round(r.y + r.height / 2) });
+    })()`));
+    if (!box) return false;
+    for (const type of ['mousePressed', 'mouseReleased']) {
+      await send('Input.dispatchMouseEvent', { type, x: box.x, y: box.y, button: 'left', clickCount: 1 });
+      await sleep(80);
+    }
+    return true;
+  };
+  // 開場是轉著的。前面那串檢查沒有碰過畫布，所以到這裡應該還在轉。
+  check(await spinning(), '前面那串檢查跑完，地球還在自轉');
+  await tap('[data-ly="cables"]');
+  await sleep(400);
+  check(await spinning(), '點圖層格子之後照樣在轉');
+  await tap('[data-mode="all-weight"]');
+  await sleep(400);
+  check(await spinning(), '點指標按鈕之後照樣在轉');
+  await tap('.title-row');
+  await sleep(300);
+  check(await spinning(), '點收合鍵之後照樣在轉');
+  // 反過來，拖曳畫布就該停。這一關證明上面那幾項不是因為自轉根本沒在跑。
+  await send('Input.dispatchMouseEvent', { type: 'mousePressed', x: 900, y: 400, button: 'left', clickCount: 1 });
+  await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 940, y: 420, button: 'left' });
+  await send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: 940, y: 420, button: 'left', clickCount: 1 });
+  await sleep(300);
+  check(!(await spinning()), '拖曳地球之後自轉停下來');
+  // 收拾現場，後面還有導覽要走
+  await ev(`document.getElementById('btn-spin').click()`);
+  await ev(`(async () => { if (window.__atlas.isOn('cables')) window.__atlas.off('cables'); })()`);
+  await sleep(300);
+}
+
 // ── 導覽按下去要能走完七站 ──────────────────────────────────
 //
 // 七站各自依賴一份資料，而開場只載地理底圖與中繼。導覽開始前沒有把缺的補上的話，
