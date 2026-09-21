@@ -91,7 +91,12 @@ const wire = `
   const $ = () => null;
   const H = {};
   const addEventListener = (t, f) => { (H[t] = H[t] || []).push(f); };
-  const dom = { setPointerCapture: () => {}, releasePointerCapture: () => {} };
+  const captured = new Set();
+  const dom = {
+    setPointerCapture: (id) => { captured.add(id); },
+    releasePointerCapture: (id) => { captured.delete(id); },
+    hasPointerCapture: (id) => captured.has(id),
+  };
   const document = { addEventListener: () => {}, querySelectorAll: () => [] };
   ${extractFn(atlas, 'function bindControls(dom)')}
   bindControls(dom);
@@ -100,6 +105,7 @@ const wire = `
     zoom: () => view.zoom,
     ry: () => view.ry,
     cleared: () => cleared,
+    captured: (id) => captured.has(id),
     types: () => Object.keys(H),
     // 餵一對球面點進去就走球面抓取那條，null 回比例那條
     setGrab: (pair, x) => { sphereHits = pair; lastGrabX = x; },
@@ -132,6 +138,20 @@ check(W.types().includes('pointerdown'), '按下掛在 window 上');
   W.fire('pointermove', ptrEv(onLabel, 1, 460, 300));
   W.fire('pointerup', ptrEv(onLabel, 1, 460, 300));
   check(W.ry() !== before, '從國家標籤上按下去，地球拖得動');
+}
+// --- 捕捉的時機 ---
+//
+// 按下當下就捕捉到畫布的話，放開之後的 click 送到畫布，點標籤開不出卡片。
+// 拖過死區才捕捉，點一下留給標籤，拖曳一樣全程收得到。瀏覽器把 click 送給誰
+// 這裡驗不到，那一半在 check_click_card.mjs。
+{
+  W.fire('pointerdown', ptrEv(onLabel, 7, 400, 300));
+  check(!W.captured(7), '在標籤上按下去的當下不捕捉，click 留給標籤');
+  W.fire('pointermove', ptrEv(onLabel, 7, 403, 300));
+  check(!W.captured(7), '死區內的晃動不捕捉');
+  W.fire('pointermove', ptrEv(onLabel, 7, 420, 300));
+  check(W.captured(7), '拖過死區之後捕捉到畫布');
+  W.fire('pointerup', ptrEv(onLabel, 7, 420, 300));
 }
 // --- 畫布上當然要通 ---
 {
