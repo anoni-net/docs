@@ -4098,8 +4098,9 @@
 	#Demand-reads-two-ways
 	#Further-reading
 	#Internet-usage-rate-World-Bank-CC-BY-40-Ministry-of-Digital-Affairs
-	#Landmass-brightness-switches-between-four-metrics
+	#Landmass-brightness-switches-between-metrics
 	#Not-sure-where-to-start-take-the-tour
+	#Pick-the-layers-you-want
 	#Relay-distribution-Onionoo-CC0-10
 	#Shutdown-records-Access-Now-KeepItOn-CC-BY-40
 	#Sources-and-licensing
@@ -4289,6 +4290,19 @@
 	#Window-one-the-government-sells-its-own
 	#Window-three-the-advertising-identifier
 	#Window-two-what-the-carriers-sell-directly
+/en/regional/taiwan-tor-users/
+	#A-weekday-shaped-curve
+	#Almost-nobody-needs-a-bridge
+	#Bridge-use-grew-during-2026-for-reasons-that-are-not-clear
+	#Four-years-of-slow-growth
+	#How-many-people-use-Tor-in-Taiwan
+	#Mid-range-within-the-Asia-Pacific
+	#More-people-use-the-network-than-help-carry-it
+	#Next
+	#Reproducing-this
+	#The-tenfold-spike-was-a-counting-bug
+	#What-the-number-actually-measures
+	#What-usage-in-Taiwan-looks-like
 /en/regional/taiwan-vasp-2026/
 	#Cross-border-sanctions-and-the-over-compliance-side-effect
 	#Defining-virtual-asset-and-where-NFTs-sit
@@ -5378,8 +5392,9 @@
 	#球面上有什麼
 	#用電那段可以換兩種看法
 	#資料來源與授權
+	#資料層自己選
 	#連線受阻的地區OONICC-BY-NC-SA-40
-	#陸地亮度可以換四種指標
+	#陸地亮度可以換指標
 	#點國家標籤展開資訊卡
 /games/tor-network/play/
 /guides/
@@ -6129,6 +6144,18 @@
 	#各地區比較
 	#多樣性指標
 	#版本與標籤
+/taiwan/tor-users/
+	#2025-年那次十倍跳升是計數錯誤
+	#bridge-使用在-2026-年成長原因還不清楚
+	#下一步
+	#亞太區的中段位置
+	#使用的人多提供中繼的人少
+	#使用者數是怎麼算出來的
+	#台灣使用者的四個特徵
+	#台灣有多少人在用-Tor
+	#四年來緩慢上升
+	#工作日型的使用曲線
+	#幾乎不需要-bridge
 /taiwan/vasp-2026/
 	#上市公司持有證交所的會計與內控指引2026-05
 	#參考來源
@@ -8997,6 +9024,7 @@
 	#中继分布OnionooCC0-10
 	#延伸阅读
 	#放大到台湾
+	#数据层自己选
 	#数据来源与授权
 	#整合了哪些数据
 	#断网事件Access-Now-KeepItOnCC-BY-40
@@ -9007,7 +9035,7 @@
 	#用户与网桥Tor-MetricsCC0-10
 	#用电那段可以换两种看法
 	#连线受阻的地区OONICC-BY-NC-SA-40
-	#陆地亮度可以换四种指标
+	#陆地亮度可以换指标
 /zh-cn/guides/
 	#五个阅读层次
 	#如何走这条路径
@@ -9627,6 +9655,18 @@
 	#各地区比较
 	#多样性指标
 	#版本与标签
+/zh-cn/taiwan/tor-users/
+	#2025-年那次十倍跳升是计数错误
+	#bridge-使用在-2026-年增长原因还不清楚
+	#下一步
+	#亚太区的中段位置
+	#使用的人多提供中继的人少
+	#几乎不需要-bridge
+	#台湾有多少人在用-Tor
+	#台湾用户的四个特征
+	#四年来缓慢上升
+	#工作日型的使用曲线
+	#用户数是怎么算出来的
 /zh-cn/taiwan/vasp-2026/
 	#中国对应制度速览
 	#为什么匿名网络社群会关心这件事

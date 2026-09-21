@@ -43,7 +43,7 @@ Each relay is one dot placed inside its own country's border, coloured by its fo
 
 Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding `#tw` to the URL flies straight to Taiwan on load, and other country codes such as `#jp` work the same way, so a shared link can decide what the recipient sees first.
 
-### Landmass brightness switches between four metrics
+### Landmass brightness switches between metrics
 
 ![Landmass brightness switched to consensus weight, with country labels now showing percentages, Germany at 29.5% and Sweden at 6.1%](https://assets.anoni.net/games/tor-network-weight-en.webp){style="border-radius: 10px;"}
 
@@ -51,8 +51,11 @@ Drag to rotate, scroll or pinch to zoom and more country labels surface. Adding 
 - **Consensus weight**: the share of traffic the country actually carries in the Tor network, which often diverges noticeably from the raw count
 - **Single-provider concentration**: what fraction of a country's relays sit with its largest hosting provider, showing how dependent it is on one operator
 - **User estimate**: the estimated number of Tor users, a demand-side figure
+- **Internet use**: what share of the country is online. The World Bank series covers 208 economies, wider than relay coverage
 
-Layers supply the metrics, so the row of buttons grows and shrinks with them. The first three come from the Tor relay layer, and the user estimate appears once that layer is on. Turning off the layer behind the metric you are viewing drops the view back to relay count.
+Layers supply the metrics, so the row of buttons grows and shrinks with them. The first three come from the Tor relay layer; the user estimate and internet use each appear once their layer is on. Turning off the layer behind the metric you are viewing drops the view back to relay count.
+
+The last two belong together. One is an absolute headcount, the other is its denominator, and comparing them is what tells you whether a gap between two countries is about demand or about population size.
 
 The gap between count and weight is worth switching over to see once. The United States hosts the most relays, but under consensus weight Germany moves ahead, which means each German relay carries more traffic.
 

@@ -46,6 +46,8 @@ const ZH_TW = {
   modeConc: '業者集中度',
   modeUsers: '使用者數',
   modeUsersTip: '陸地亮度改成各國估計有多少人在用 Tor，中繼點照樣顯示',
+  modeNetPct: '上網人口',
+  modeNetPctTip: '陸地亮度改成各國有多少比例的人上網。那是使用者估計的分母，兩個一起看才分得出差距來自需求還是人口',
   rampLow: '無',
   rampHigh: '最多',
 
@@ -293,6 +295,8 @@ const EN = {
   modeConc: 'Provider concentration',
   modeUsers: 'Estimated users',
   modeUsersTip: 'Land brightness switches to the estimated number of Tor users per country. Relay dots stay as they are.',
+  modeNetPct: 'Internet use',
+  modeNetPctTip: 'Land brightness switches to the share of each country that is online. It is the denominator behind the user estimate, so read the two together to tell demand apart from population size.',
   rampLow: 'none',
   rampHigh: 'most',
 
@@ -529,6 +533,8 @@ const ZH_CN = {
   modeConc: '服务商集中度',
   modeUsers: '用户数',
   modeUsersTip: '陆地亮度改成各国估计有多少人在用 Tor，中继点照样显示',
+  modeNetPct: '上网人口',
+  modeNetPctTip: '陆地亮度改成各国有多少比例的人上网。那是用户估计的分母，两个一起看才分得出差距来自需求还是人口',
   rampLow: '无',
   rampHigh: '最多',
 

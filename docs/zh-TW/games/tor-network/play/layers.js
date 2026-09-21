@@ -131,7 +131,12 @@ export const LAYERS = [
     from: 'docs',
     group: 'global',
     credit: 'creditNetUsers', creditEl: 'credit-netusers',
-    note: '各國上網人口比例。只出現在國家卡片裡，沒有自己的側欄區塊。一年才動一次，跟文件站一起發布。',
+    // 這一層沒有側欄區塊，本來只在國家卡片上貢獻一行，而那一行還掛在使用者估計
+    // 底下，所以單獨打開它畫面上什麼都不會變。改成供應一個陸地亮度指標，按下去
+    // 就看得到。色相挑藍紫，離其他五組色階最遠的一塊。
+    metrics: [{ id: 'netpct', label: 'modeNetPct', tip: 'modeNetPctTip', fmt: 'pct',
+                lo: '#1a1730', hi: '#8b7fe0' }],
+    note: '各國上網人口比例。208 個國家，比中繼涵蓋得廣。一年才動一次，跟文件站一起發布。',
   },
   {
     id: 'cables',

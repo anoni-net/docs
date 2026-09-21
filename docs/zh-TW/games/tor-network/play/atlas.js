@@ -4150,6 +4150,16 @@ const METRIC_VALUES = {
   'all-weight': () => (CC_STATS ? CC_STATS.w : new Map()),
   'conc': () => (CC_STATS ? CC_STATS.conc : new Map()),
   'users': () => USERS_MAP || new Map(),
+  // 上網人口比例。World Bank 那份沒有收台灣，另一個來源補在 alt 裡，兩邊的方法論
+  // 不同，國家卡片上會標出來，色階這一層只取數值。
+  'netpct': () => {
+    const m = new Map();
+    if (!NETUSERS) return m;
+    for (const [cc, v] of Object.entries(NETUSERS.pct || {})) if (v && v[0]) m.set(cc, v[0]);
+    const alt = (NETUSERS.alt && NETUSERS.alt.pct) || {};
+    for (const [cc, v] of Object.entries(alt)) if (v && v[0] && !m.has(cc)) m.set(cc, v[0]);
+    return m;
+  },
 };
 
 /** 某一種角色的台數。role 省略代表四種加起來。 */
