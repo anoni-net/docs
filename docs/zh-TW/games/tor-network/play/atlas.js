@@ -4596,9 +4596,10 @@ const onUI = (e) => !!(e && e.target && e.target.closest && e.target.closest(UI_
 function bindControls(dom) {
   addEventListener('pointerdown', (e) => {
     if (onUI(e)) return;
-    // 捕捉到畫布上，後續的 move 與 up 就算游標跑到面板上也還是送得到這裡，
-    // 而且 target 會變成畫布，onUI 不會在拖到一半的時候誤判。
-    try { dom.setPointerCapture(e.pointerId); } catch { /* 捕捉不到就算了，事件照樣冒泡 */ }
+    // 這裡不捕捉，拖過死區才捕捉，在 pointermove 裡。
+    //
+    // 按下當下就捕捉到畫布的話，放開之後的 click 會送到畫布而不是國家標籤，
+    // 點標籤開卡片整個失效。拖曳照常，所以看起來只是「點了沒反應」。
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
     dragFrom = { x: e.clientX, y: e.clientY };
@@ -4644,7 +4645,16 @@ function bindControls(dom) {
     // 像素的晃動，那會發出 pointermove，網址就悄悄被清掉，畫面卻看不出變化。使用者
     // 這時複製網址分享出去，對方開起來不會落在原本那一塊。門檻沿用挑選設施那條
     // 6 像素死區，同一個問題同一個尺度，而且要從按下的那一刻起算，不是跟上一個 move 比。
-    if (dragFrom && Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > DRAG_DEAD_PX) clearFocus();
+    //
+    // 同一道門檻也決定什麼時候捕捉到畫布。確定是拖曳之後，後續的 move 與 up
+    // 就算游標跑到面板上或視窗外也還是送得到這裡。而且放開時的 click 會落在畫布，
+    // 從標籤上拖過去再放開，不會因為標籤跟著地表移到手指底下就開出卡片。
+    if (dragFrom && Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > DRAG_DEAD_PX) {
+      clearFocus();
+      try {
+        if (!dom.hasPointerCapture(e.pointerId)) dom.setPointerCapture(e.pointerId);
+      } catch { /* 捕捉不到就算了，事件照樣冒泡 */ }
+    }
     spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
     last = { x: e.clientX, y: e.clientY };
   });
@@ -5011,7 +5021,11 @@ async function main() {
     if (!pressAt) return;
     const moved = Math.hypot(e.clientX - pressAt.x, e.clientY - pressAt.y);
     pressAt = null;
-    if (moved > 6 || pointers.size > 0) return;
+    // 要問的是「還有沒有別根手指按著」，這一根自己要扣掉。清 pointers 的那支掛在
+    // window，冒泡時排在畫布後面，跑到這裡的時候這一根還在裡面。直接看
+    // pointers.size > 0 的話永遠成立，每一次點擊都在這裡被擋掉。
+    const others = pointers.size - (pointers.has(e.pointerId) ? 1 : 0);
+    if (moved > 6 || others > 0) return;
     const hit = pickFeature(e.clientX, e.clientY);
     if (hit) { showFeature(hit); return; }
     // 設施沒中就問六角層。格子是國家層級的東西，點下去開國家卡，跟點國家標籤同一個結果。
