@@ -89,7 +89,7 @@ const FRESH = ['relays', 'torusers'];          // assets 上天天重生，CDN �
 const REQUIRED = ['countries', 'relays'];      // 沒有它們畫不出東西
 // 開場開哪幾層是產品決策。讀者第一眼看到的是一顆有中繼點的地球，其餘十一層等他
 // 自己勾。改這一組等於改第一印象，所以在這裡釘一份對照，改的時候被迫想一次。
-const EXPECT_DEFAULT = ['countries', 'continents', 'bathymetry', 'relays', 'ooni'];
+const EXPECT_DEFAULT = ['countries', 'bathymetry', 'relays', 'ooni'];
 const CORE = ['countries'];                    // 關不掉，沒有國界就沒有地球可看
 
 const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);

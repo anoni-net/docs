@@ -29,9 +29,9 @@ When a dataset fails to load, the stop that needs it is dropped and the count ad
 
 ## Pick the layers you want
 
-The globe itself, coastlines, bathymetry, Tor relays and blocking observations load at startup. The other ten layers sit in the row of chips at the top of the left panel: tap one and that dataset is fetched and drawn, tap again and it is removed. Layers you never tap cost nothing.
+The globe itself, bathymetry, Tor relays and blocking observations load at startup. The other eleven layers sit in the row of chips at the top of the left panel: tap one and that dataset is fetched and drawn, tap again and it is removed. Layers you never tap cost nothing.
 
-Compressed, the fourteen datasets come to 800 KB. The five that load at startup account for 666 KB, the other ten for 134 KB between them. That is a modest saving, because the borders and coastlines of the globe itself are 60% of the total and have to arrive first. The real difference is the five Taiwan layers, which make up 70% of the on-demand part, and most readers never zoom in far enough to see a substation.
+Compressed, the fourteen datasets come to 800 KB. The four that load at startup account for 429 KB, so arriving costs a little over half. The two heaviest items on the on-demand side are the coastlines at 237 KB and the five Taiwan layers at 95 KB. Coastlines only sharpen the land and sea boundary, which the borders and the land fill already make legible, so they sit on the on-demand side.
 
 The URL follows your choices, so copying the address bar hands someone else the same stack. You can also write it directly: `?layers=tw-power,tw-grid` opens just the substations and the grid, and an empty `?layers=` leaves only the globe itself.
 

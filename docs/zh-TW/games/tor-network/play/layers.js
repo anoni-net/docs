@@ -52,10 +52,12 @@ export const LAYERS = [
     id: 'continents',
     file: 'continents.json',
     from: 'docs',
-    on: true,
     group: 'base',
     lift: 1.004,
-    note: '海岸線。疊在國界之上，海陸交界是這張圖上最清楚的一條線。',
+    // 開場不載。壓縮後 243 KB，是所有層裡第二重的，而它是視覺細節：海陸的分界
+    // 本來就畫在陸地貼圖上，少了這一層只是邊緣沒有那條亮線。台灣的粗輪廓也在
+    // 這一層裡，貼近台灣時由縣市界接手。
+    note: '海岸線。疊在國界之上，把海陸交界描清楚。',
   },
   {
     id: 'bathymetry',
