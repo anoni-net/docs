@@ -60,7 +60,7 @@ DEFAULT_BASE_URL = "https://anoni.net/docs"
 # 2026-09-23 發現的：地球儀的 atlas.js、layers.js、i18n.js 是 <script type="module">，
 # 讀者的瀏覽器一律帶 Origin 來要，拿到的是 Cloudflare 另外存的那一份，而部署後的清除
 # 從來沒清到它。#577 部署後，同一個 atlas.js 不帶 Origin 要是新版、帶 Origin 要是兩小時
-# 前 #573 的舊版，JSON 走一般的 fetch 不帶 Origin 所以是新的，讀者拿到的是新資料配舊
+# 前 #573 的舊版，JSON 走一般的 fetch 不帶 Origin 所以是新的，讀者取得的是新資料配舊
 # 程式：舊程式不認得新索引裡的欄位，去抓 play/undefined 回 404，台灣縣市界也不會自動
 # 出現。在那之前每一次部署都一樣，模組腳本要等邊緣快取過期（這條 Cache Rule 是一天）
 # 才換得掉，只是剛好沒有新資料用到舊程式不認得的東西，沒被看出來。
