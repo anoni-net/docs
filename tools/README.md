@@ -39,6 +39,38 @@ git diff --name-only --diff-filter=ACM origin/main... \
 
 全庫掃描留作選擇性的清理 pass。
 
+## 在其他 repo 使用（pre-commit）
+
+社群其他專案的中文文字（電子報、社群貼文草稿、工作區的說明文件）也照貢獻者百科寫。那些 repo 用 pre-commit 呼叫這支 linter，不必另外 clone 本 repo，也不必寫死 `../anoni-net-docs/tools/...` 這種相對路徑（在 git worktree 裡找不到）。hook 定義在 repo 根目錄的 `.pre-commit-hooks.yaml`。
+
+在該 repo 根目錄放 `.pre-commit-config.yaml`：
+
+```yaml
+repos:
+  - repo: https://github.com/anoni-net/docs
+    rev: <commit SHA>        # 固定版本，升級時改這一行
+    hooks:
+      - id: docs-style-lint
+        verbose: true        # 通過時也顯示 warn
+        exclude: ^\.claude/skills/   # 引用反面例子的規則文件
+```
+
+需要先裝 pre-commit（例如 `uv tool install pre-commit`），然後在該 repo 執行一次 `pre-commit install`。之後每次 `git commit` 會檢查這次變更的 Markdown，error 擋下 commit，warn 只顯示。沒有變更的舊檔案不會被檢查。
+
+檢查不在 repo 裡的檔案，例如從 YAML 抽出來的字串：
+
+```bash
+pre-commit run docs-style-lint --files /path/to/strings.md
+```
+
+本 repo 沒有發版 tag，升級到 `main` 最新的規則要帶 `--bleeding-edge`：
+
+```bash
+pre-commit autoupdate --repo https://github.com/anoni-net/docs --bleeding-edge
+```
+
+兩個限制。語言依路徑判斷，路徑不含 `/en/` 的檔案整份套中文規則，中英並存的檔案（例如雙語電子報）裡，英文句子用了破折號也會被報，改寫那一句或在行尾加 `<!-- docs-style-lint: disable-line -->`。另外 hook 只收 Markdown，`.js` 的 UI 字串掃描只對本 repo 的 `docs/zh-TW/js/` 有意義，不開放給其他 repo。
+
 ## Tier 1：本工具會自動檢查
 
 <!-- docs-style-lint: disable -->
