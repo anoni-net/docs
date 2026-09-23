@@ -239,7 +239,7 @@ let renderer, scene, camera, post, globe, sun;
 // 數字本身沒有意義，相對大小才有，維持的是原本那個 add 順序。
 const SEQ = {
   sun: -10, hex: 5, earth: 0, cables: 10, trunks: 20, borders: 30, aurora: 40,
-  atmosphere: 50, coast: 60, twAdmin: 70, power: 80, grid: 81, renew: 82,
+  atmosphere: 50, coast: 60, admin1: 65, twAdmin: 70, power: 80, grid: 81, renew: 82,
   landing: 83, relays: 90, circuits: 95, blocked: 100,
 };
 
@@ -907,6 +907,7 @@ const PLANT_LIFT = lift('tw-grid');     // 發電廠
 const RENEW_LIFT = lift('tw-energy');   // 再生能源場址
 const BLOCK_LIFT = lift('ooni');        // 連線受阻的紅色漸層
 const ADMIN_LIFT = lift('tw-admin');    // 縣市界
+const ADMIN1_LIFT = lift('admin1');     // 各國一級行政區
 const BORDER_LIFT = lift('countries');  // 國界
 const COAST_LIFT = lift('continents');  // 海岸線
 
@@ -1101,6 +1102,11 @@ const REGISTRY = {
     // 只出現在國家卡片的一行，沒有幾何也沒有自己的側欄區塊
     build: (d) => { NETUSERS = d; },
     drop: () => { NETUSERS = null; },
+  },
+  admin1: {
+    // 這一層載入的只是索引，各國的界線由 updateAdmin1 等鏡頭貼近那一國才去抓
+    build: (d) => { ADMIN1 = { index: (d && d.countries) || [], got: new Map(), pending: new Set() }; },
+    drop: () => { ADMIN1 = null; },
   },
   'tw-admin': {
     build: (d) => { TWADMIN = d; buildTwAdmin(d); },
@@ -2040,6 +2046,98 @@ function ringSegments(world, pick, height) {
 // 遠看時整個台灣只有幾十個像素，二十二個縣市的線會糊成一團亮斑，反而讓台灣變得
 // 比周圍國家醒目，那是視覺上的偏袒。所以跟著 deepU 淡入，太空視角下完全不畫。
 let twAdminMat = null;
+// ── 各國一級行政區 ─────────────────────────────────────────────
+//
+// 台灣的縣市界是貼近之後才出現的，這一段把同一件事推到其他國家：日本的都道府縣、
+// 韓國的道與廣域市、香港的 18 區。資料與取捨寫在 tools/gen_admin1.py 的檔頭。
+//
+// 各國一份檔案，貼近那一國才去抓。判斷分兩步：
+//
+//   一、那一國的典型行政區在螢幕上夠不夠大。索引裡的 r 是行政區面積中位數開根號，
+//       除以畫面涵蓋度再乘上畫面短邊，就是一個典型的縣在螢幕上佔幾個像素。
+//       日本的縣大、香港的區小，同一個縮放下一個看得清楚一個還擠成一團，所以不能
+//       用同一個涵蓋度門檻。台灣縣市界那條交接換算過來大約是 10 到 35 像素，這裡
+//       照同一個範圍淡入。
+//   二、那一國進到畫面中央。畫面中央一半的經緯度範圍跟那一國的外接框有交集才抓。
+//       第一版放了涵蓋度四分之三的餘裕，加上東南亞之後一飛到泰國，連日本、韓國、
+//       菲律賓都一起抓了。改成整個畫面之後還是不夠：從中國上空飛向日本，涵蓋 35 度
+//       那一刻越南北部與菲律賓正好擦過畫面邊緣，省的大小也到了門檻，照樣被抓。只是
+//       飛過去時擦到邊的國家不該讓讀者付下載，讀者真的把它拉進畫面中央才抓。
+//   三、涵蓋度低於 40 度。印尼的省很大，涵蓋 90 度時一個省在螢幕上已經有 16 像素，
+//       只看第一條的話整個半球入鏡時就開始淡入，比台灣縣市界的 36 度早太多。
+//       這條讓所有國家的行政區都在同一個尺度以內才出現，40 到 30 度之間淡入。
+//
+// 抓回來的幾何掛在 admin1 這一層名下，讀者把這一層關掉時跟著回收。資料留在
+// ADMIN1_DATA，關掉再打開不必重抓。
+let ADMIN1 = null;                 // { index, got: cc → { mat }, pending }
+const ADMIN1_DATA = new Map();     // cc → 抓回來的資料
+const ADMIN1_PX_LO = 10, ADMIN1_PX_HI = 35;
+const ADMIN1_COVER_HI = 40, ADMIN1_COVER_LO = 30;
+const ADMIN1_OP = 0.7;
+
+function buildAdmin1(cc, d) {
+  const pos = [];
+  const v = new THREE.Vector3();
+  for (const ln of d.lines || []) {
+    for (let i = 0; i + 3 < ln.length; i += 2) {
+      llToVec(ln[i + 1], ln[i], R * ADMIN1_LIFT, v); pos.push(v.x, v.y, v.z);
+      llToVec(ln[i + 3], ln[i + 2], R * ADMIN1_LIFT, v); pos.push(v.x, v.y, v.z);
+    }
+  }
+  if (!pos.length) return null;
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+  const mat = new THREE.LineBasicMaterial({ color: COL.twAdmin, transparent: true, opacity: 0, depthWrite: false });
+  inLayer('admin1', () => addToGlobe(new THREE.LineSegments(g, mat), SEQ.admin1));
+  resortGlobe();
+  return { mat };
+}
+
+function loadAdmin1(c) {
+  const st = ADMIN1;
+  if (st.pending.has(c.cc)) return;
+  const done = (d) => {
+    st.pending.delete(c.cc);
+    // 抓回來之前讀者可能已經把這一層關掉，或關掉又打開換了一份新的狀態
+    if (ADMIN1 !== st) return;
+    // 抓不到也記一筆，免得每一幀重抓。那一國就只是沒有行政區界線
+    st.got.set(c.cc, d ? (buildAdmin1(c.cc, d) || { mat: null }) : { mat: null });
+  };
+  st.pending.add(c.cc);
+  const cached = ADMIN1_DATA.get(c.cc);
+  if (cached) { done(cached); return; }
+  getJSON('./' + c.file).then((d) => { ADMIN1_DATA.set(c.cc, d); done(d); }).catch(() => done(null));
+}
+
+function updateAdmin1() {
+  if (!ADMIN1) return;
+  const cover = coverDeg();
+  const px = Math.min(innerWidth, innerHeight);
+  // 視野中心的經緯度，llToVec 的反函數
+  const dir = hexViewDir();
+  const lat = Math.asin(clamp(dir.y, -1, 1)) * 180 / Math.PI;
+  let lon = Math.atan2(dir.z, -dir.x) * 180 / Math.PI - 180;
+  if (lon < -180) lon += 360;
+  // coverDeg 給的是短邊，長邊照長寬比放大。經度再除以緯度的餘弦，高緯度一度經度比較短
+  const aspect = innerWidth / innerHeight;
+  const mLat = cover / 4 * Math.max(1, 1 / aspect);
+  const mLon = cover / 4 * Math.max(1, aspect) / Math.max(0.2, Math.cos(lat * Math.PI / 180));
+  const coverFade = clamp((ADMIN1_COVER_HI - cover) / (ADMIN1_COVER_HI - ADMIN1_COVER_LO), 0, 1);
+  for (const c of ADMIN1.index) {
+    const size = c.r / cover * px;
+    const got = ADMIN1.got.get(c.cc);
+    if (got) {
+      if (got.mat) got.mat.opacity = ADMIN1_OP * coverFade * clamp((size - ADMIN1_PX_LO) / (ADMIN1_PX_HI - ADMIN1_PX_LO), 0, 1);
+      continue;
+    }
+    // 開始淡入了才去抓。檔案只有幾 KB，抓回來的時候線還淡，接得上
+    if (coverFade <= 0 || size < ADMIN1_PX_LO) continue;
+    const [x0, y0, x1, y1] = c.bbox;
+    if (lat < y0 - mLat || lat > y1 + mLat || lon < x0 - mLon || lon > x1 + mLon) continue;
+    loadAdmin1(c);
+  }
+}
+
 function buildTwAdmin(admin) {
   if (!admin || !admin.c || !admin.c.length) return;
   // 高度壓在中繼點（1.012）與登陸點（1.011）之下，那兩層是資料，界線是底圖。
@@ -5148,6 +5246,7 @@ async function animate() {
   updateCircuits(dt);
   updateFeed();
   setDotCount(SAMPLE_MIN + (1 - SAMPLE_MIN) * Math.pow(lod, SAMPLE_EXP)); // 遠看抽樣，放大逐步補齊
+  updateAdmin1();       // 各國行政區界線：貼近哪一國才抓，典型行政區夠大才淡入
   updateLabels();
   try {
     await post.renderAsync();
@@ -5352,6 +5451,8 @@ async function main() {
         coast: coastTwMat ? coastTwMat.opacity : null,
         admin: twAdminMat ? twAdminMat.opacity : null,
       }),
+      // 各國行政區抓了哪幾國、各自現在的透明度。還沒抓的不在裡面
+      admin1: () => (ADMIN1 ? Object.fromEntries([...ADMIN1.got].map(([k, g]) => [k, g.mat ? g.mat.opacity : null])) : null),
       fly: (lat, lon, span) => flyTo(lat, lon, span, span),
       info: () => JSON.parse(JSON.stringify(renderer.info)),
       // 即時更新那條路。外網連不上的機器測不到按鈕，餵一份假快照進來一樣走得完

@@ -410,6 +410,49 @@ await sleep(300);
   check(o.border > 0.5, `再關掉縣市界，粗國界回來（透明度 ${o.border}）`);
 }
 
+// ── 各國行政區：貼近那一國才抓 ────────────────────────────────
+//
+// admin1 開場就開，因為開著的只是一份 0.2 KB 的索引。各國的界線要等鏡頭貼近那一國
+// 才去抓，這個前提一壞，讀者一打開頁面就把每一國的檔案全部抓下來，而畫面上看不出來。
+// 抓回來的幾何是事後才掛上去的，也要記在這一層名下，關掉時才收得回去。
+{
+  if (!(await ev(`window.__atlas.isOn('admin1')`))) {
+    await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
+    await waitOn('admin1');
+  }
+  // 前面台灣那一段會貼近台灣，順手抓了附近的國家。先飛到整顆地球入鏡、確實到了，
+  // 再把這一層關掉重開，從一國都沒抓的狀態開始驗
+  await ev(`window.__atlas.fly(30, 120, 170)`);
+  for (let i = 0; i < 160; i++) {
+    if ((await ev(`window.__atlas.view().cover`)) >= 179) break;
+    await sleep(250);
+  }
+  await ev(`window.__atlas.off('admin1')`);
+  await waitOn('admin1', false);
+  await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
+  await waitOn('admin1');
+  await sleep(1500);
+  check((await ev(`JSON.stringify(window.__atlas.admin1())`)) === '{}', '遠看整顆地球時一國的行政區都沒抓');
+  await ev(`window.__atlas.fly(36.5, 137.5, 14)`);
+  let a = {};
+  for (let i = 0; i < 160; i++) {
+    a = JSON.parse(await ev(`JSON.stringify(window.__atlas.admin1())`));
+    if (a.jp > 0.5) break;
+    await sleep(250);
+  }
+  check(a.jp > 0.5, `貼近日本，都道府縣的界線抓回來並淡入（透明度 ${a.jp}）`);
+  // 涵蓋 14 度的日本畫面裡看得到的只有日本與韓國。東南亞任何一國出現在這裡，就是
+  // 「在不在畫面上」那條判斷放太寬，一飛就把半個亞洲的檔案都抓下來
+  const extra = Object.keys(a).filter((k) => !['jp', 'kr'].includes(k));
+  check(extra.length === 0, `貼近日本時只抓了畫面上看得到的國家（${Object.keys(a).join('、')}${extra.length ? `，多抓了 ${extra.join('、')}` : ''}）`);
+  check((await ev(`window.__atlas.layerObjs('admin1')`)) > 0, '抓回來的界線記在 admin1 這一層名下');
+  await ev(`window.__atlas.off('admin1')`);
+  await waitOn('admin1', false);
+  check((await ev(`window.__atlas.layerObjs('admin1')`)) === 0, '關掉 admin1，事後才掛上去的界線也收回了');
+  await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
+  await waitOn('admin1');
+}
+
 // ── 導覽按下去要能走完七站 ──────────────────────────────────
 //
 // 七站各自依賴一份資料，而開場只載地理底圖與中繼。導覽開始前沒有把缺的補上的話，

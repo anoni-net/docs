@@ -98,3 +98,6 @@ jobs:
 
       - name: 同一套手感在真的頁面上量一次（錨點與相機的接線）
         run: node tools/check_globe_nav_browser.mjs
+
+      - name: 各國行政區的資料、預快取與爭議島嶼
+        run: node tools/check_admin1.mjs
