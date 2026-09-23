@@ -392,10 +392,10 @@ await sleep(300);
     await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
     await waitOn('admin1');
   }
-  await ev(`window.__atlas.flyTo(30, 120, 170)`);
+  await ev(`window.__atlas.fly(30, 120, 170)`);
   await sleep(3000);
   check((await ev(`JSON.stringify(window.__atlas.admin1())`)) === '{}', '遠看整顆地球時一國的行政區都沒抓');
-  await ev(`window.__atlas.flyTo(36.5, 137.5, 14)`);
+  await ev(`window.__atlas.fly(36.5, 137.5, 14)`);
   let a = {};
   for (let i = 0; i < 160; i++) {
     a = JSON.parse(await ev(`JSON.stringify(window.__atlas.admin1())`));

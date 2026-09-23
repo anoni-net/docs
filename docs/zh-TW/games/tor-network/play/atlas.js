@@ -5179,7 +5179,7 @@ async function main() {
       layerObjs: (id) => (LAYER_OBJ.get(id) || []).length,
       // 各國行政區抓了哪幾國、各自現在的透明度。還沒抓的不在裡面
       admin1: () => (ADMIN1 ? Object.fromEntries([...ADMIN1.got].map(([k, g]) => [k, g.mat ? g.mat.opacity : null])) : null),
-      flyTo: (lat, lon, span) => flyTo(lat, lon, span, span),
+      fly: (lat, lon, span) => flyTo(lat, lon, span, span),
       info: () => JSON.parse(JSON.stringify(renderer.info)),
       // 即時更新那條路。外網連不上的機器測不到按鈕，餵一份假快照進來一樣走得完
       apply: applySnapshot,
