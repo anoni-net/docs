@@ -21,6 +21,11 @@ anoni.net 這個 zone 底下還有主站、pad、form、search 等服務，`purg
 本來就不會殘留，但 `stylesheets/extra.css`、`sw.js`、`sitemap.xml`、RSS feed
 這些沒有 hash，改了就必須清，逐一挑選容易漏，整份清掉才 48 次呼叫。
 
+JS 模組與字型要多清一份帶 `Origin` 的快取。瀏覽器抓 `<script type="module">` 與
+CSS 裡的字型走的是 CORS 模式，請求會帶 `Origin`，而 Cloudflare 把帶 `Origin` 的請求
+存成另一份快取。依網址清除只清得到不帶 `Origin` 的那一份，帶的那份要在 API 的
+`headers` 裡寫上同樣的 `Origin` 才清得到。見 ORIGIN_EXTS。
+
 用法：
     python3 tools/cf_purge.py --output docs/output
     python3 tools/cf_purge.py --output docs/output --dry-run   # 只印，不呼叫 API
@@ -49,6 +54,20 @@ BATCH_SIZE = 30
 MAX_WORKERS = 6
 API = "https://api.cloudflare.com/client/v4/zones/{zone}/purge_cache"
 DEFAULT_BASE_URL = "https://anoni.net/docs"
+
+# 瀏覽器會以 CORS 模式抓、請求帶著 Origin 的檔案類型。
+#
+# 2026-09-23 發現的：地球儀的 atlas.js、layers.js、i18n.js 是 <script type="module">，
+# 讀者的瀏覽器一律帶 Origin 來要，拿到的是 Cloudflare 另外存的那一份，而部署後的清除
+# 從來沒清到它。#577 部署後，同一個 atlas.js 不帶 Origin 要是新版、帶 Origin 要是兩小時
+# 前 #573 的舊版，JSON 走一般的 fetch 不帶 Origin 所以是新的，讀者取得的是新資料配舊
+# 程式：舊程式不認得新索引裡的欄位，去抓 play/undefined 回 404，台灣縣市界也不會自動
+# 出現。在那之前每一次部署都一樣，模組腳本要等邊緣快取過期（這條 Cache Rule 是一天）
+# 才換得掉，只是剛好沒有新資料用到舊程式不認得的東西，沒被看出來。
+#
+# 字型也在這裡，CSS 的 @font-face 同樣走 CORS。一般的 <script>、<link rel=stylesheet>、
+# 圖片與同源的 fetch 不帶 Origin，不必多清。
+ORIGIN_EXTS = {".js", ".mjs", ".woff", ".woff2", ".ttf", ".otf"}
 
 
 def to_url(rel_path: Path, base_url: str) -> str:
@@ -97,12 +116,29 @@ def collect_urls(output_dir: Path, base_url: str) -> list[str]:
     return sorted(urls)
 
 
-def batched(items: list[str], size: int):
+def origin_of(base_url: str) -> str:
+    """對外網址前綴的 origin，也就是瀏覽器帶在 Origin 標頭裡的值。"""
+    from urllib.parse import urlsplit
+    parts = urlsplit(base_url)
+    return f"{parts.scheme}://{parts.netloc}"
+
+
+def origin_items(urls: list[str], base_url: str) -> list[dict]:
+    """需要另外清帶 Origin 那一份的網址，寫成 purge API 的物件形式。"""
+    origin = origin_of(base_url)
+    return [
+        {"url": u, "headers": {"Origin": origin}}
+        for u in urls
+        if any(u.endswith(ext) for ext in ORIGIN_EXTS)
+    ]
+
+
+def batched(items: list, size: int):
     for i in range(0, len(items), size):
         yield items[i : i + size]
 
 
-def purge_batch(zone: str, token: str, urls: list[str], attempts: int = 3) -> None:
+def purge_batch(zone: str, token: str, urls: list, attempts: int = 3) -> None:
     """送出一批 purge，失敗時重試。全部失敗就丟 RuntimeError。"""
     body = json.dumps({"files": urls}).encode("utf-8")
     req = urllib.request.Request(
@@ -153,12 +189,17 @@ def main() -> int:
         print(f"::error::{output_dir} 幾乎沒有檔案，中止清除", file=sys.stderr)
         return 1
 
-    batches = list(batched(urls, BATCH_SIZE))
-    print(f"準備清除 {len(urls)} 個網址，分 {len(batches)} 批（每批最多 {BATCH_SIZE} 條）")
+    # 帶 Origin 的那幾批分開送，不跟純網址混在同一個請求裡
+    extra = origin_items(urls, args.base_url)
+    batches = list(batched(urls, BATCH_SIZE)) + list(batched(extra, BATCH_SIZE))
+    print(f"準備清除 {len(urls)} 個網址，另有 {len(extra)} 個 JS 模組與字型連同 Origin 再清一次，"
+          f"分 {len(batches)} 批（每批最多 {BATCH_SIZE} 條）")
 
     if args.dry_run:
         for u in urls:
             print(u)
+        for it in extra:
+            print(f"{it['url']}  (Origin: {it['headers']['Origin']})")
         return 0
 
     zone = os.environ.get("CF_ZONE_ID", "")
@@ -170,7 +211,7 @@ def main() -> int:
         )
         return 0
 
-    return run_batches(zone, token, batches, len(urls), args.base_url)
+    return run_batches(zone, token, batches, len(urls) + len(extra), args.base_url)
 
 
 def run_batches(zone: str, token: str, batches, url_count: int, base_url: str) -> int:
