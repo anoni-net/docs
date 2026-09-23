@@ -22,6 +22,10 @@
 
 取自上游 [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp)（Apache-2.0，授權全文在同目錄的 `LICENSE`），開頭加了一段這個 repo 的用法：原始檔放 `docs/diagrams/`、存成 `.drawio.svg`、不覆蓋同名檔。上游更新時整份換掉再補回那一段。
 
+### `.claude/skills/translate-blog/`
+
+把外部文章翻成 blog 的操作停點。流程與格式寫在 `docs/zh-TW/community/i18n.md` 的「翻譯外部文章到 blog」，skill 只補兩個校稿停點與開 PR 前的檢查。
+
 ### 不進版控的部分
 
 `.claude/settings.local.json`（個人的權限設定）與 `.claude/worktrees/`（本機 worktree）留在各自的電腦上。
