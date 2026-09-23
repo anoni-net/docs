@@ -5103,12 +5103,18 @@ async function animate() {
   // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
   // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
   const swap = twSwapT();
+  // 粗輪廓只有在縣市界真的在的時候才交棒淡出。
+  //
+  // 縣市界從 #568 起是讀者自己開的層，預設關著。交接原本只看涵蓋度，於是預設狀態下
+  // 貼近台灣，粗輪廓照樣在 36 度到 9.7 度之間淡掉，沒有東西接手，整個台灣的海岸線
+  // 與國界一起不見。twAdminMat 在那一層關掉時會歸零（見 REGISTRY），拿它判斷就好。
+  const swapTw = twAdminMat ? swap : 0;
   if (twAdminMat) twAdminMat.opacity = swap * 0.85;
   if (powerMat) powerMat.opacity = swap * 0.9;
   if (gridLineMat) gridLineMat.opacity = swap * 0.55;
   if (plantMat) plantMat.opacity = swap * 0.95;
   if (renewMat) renewMat.opacity = swap * 0.9;
-  if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swap);
+  if (borderTwMat) borderTwMat.opacity = BORDER_OP * (1 - swapTw);
   // 六角層是底圖，任何縮放下都在，所以這裡不做進退場，只管「該不該換一份」。
   //
   // 重建要掃全域的格心再建一份 BufferGeometry，不能每幀來一次，所以隔一段時間才
@@ -5123,7 +5129,7 @@ async function animate() {
     // 上一份還在淡出就先別排下一次，否則快速縮放會一直把沒淡完的收掉，等於沒有過場
     if (!hexFade && hexTick > (fly ? 0.4 : 0.2)) { hexTick = 0; hexRefresh(); }
   }
-  if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swap);
+  if (coastTwMat) coastTwMat.opacity = COAST_OP * (1 - swapTw);
   if (trunkMat) trunkMat.opacity = TRUNK_OP * (1 - deepU.value);
   if (pointsIn < 1) pointsIn = Math.min(1, pointsIn + dt / 1.2); // 點層淡入
   // 遠看時歐洲十幾個國家團擠在很小的螢幕範圍內，怎麼排都糊。讓點隨距離退成底噪，
@@ -5338,6 +5344,15 @@ async function main() {
       on: layerOn, off: layerOff, isOn: layerIsOn,
       objCount: () => globe.children.length,
       layerObjs: (id) => (LAYER_OBJ.get(id) || []).length,
+      // 台灣粗輪廓與縣市界的交接。swap 是涵蓋度推出來的進度，其餘是三層的透明度，
+      // 那一層沒載就是 null
+      twOutline: () => ({
+        swap: twSwapT(),
+        border: borderTwMat ? borderTwMat.opacity : null,
+        coast: coastTwMat ? coastTwMat.opacity : null,
+        admin: twAdminMat ? twAdminMat.opacity : null,
+      }),
+      fly: (lat, lon, span) => flyTo(lat, lon, span, span),
       info: () => JSON.parse(JSON.stringify(renderer.info)),
       // 即時更新那條路。外網連不上的機器測不到按鈕，餵一份假快照進來一樣走得完
       apply: applySnapshot,
