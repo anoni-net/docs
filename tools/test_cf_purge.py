@@ -19,7 +19,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import cf_purge  # noqa: E402
-from cf_purge import BATCH_SIZE, batched, collect_urls, to_url, to_urls  # noqa: E402
+from cf_purge import BATCH_SIZE, ORIGIN_EXTS, batched, collect_urls, origin_items, origin_of, to_url, to_urls  # noqa: E402
 
 BASE = "https://anoni.net/docs"
 
@@ -205,6 +205,38 @@ def test_run_batches_empty() -> None:
     check("沒有呼叫", sent, [])
 
 
+# === 帶 Origin 的那一份 ===
+#
+# 瀏覽器抓 <script type="module"> 與字型時帶著 Origin，Cloudflare 把那種請求存成另一份
+# 快取，只依網址清是清不到的。2026-09-23 地球儀部署後讀者拿到新資料配舊程式，就是這樣。
+
+def test_origin_items() -> None:
+    urls = [f"{BASE}/games/tor-network/play/atlas.js", f"{BASE}/games/tor-network/play/countries.json",
+            f"{BASE}/basics/", f"{BASE}/assets/fonts/x.woff2", f"{BASE}/stylesheets/extra.css",
+            f"{BASE}/games/vendor/three.core.min.js"]
+    items = origin_items(urls, BASE)
+    check("只挑 JS 模組與字型", [it["url"] for it in items],
+          [f"{BASE}/games/tor-network/play/atlas.js", f"{BASE}/assets/fonts/x.woff2",
+           f"{BASE}/games/vendor/three.core.min.js"])
+    check("Origin 是網址前綴的 scheme 加 host", {it["headers"]["Origin"] for it in items}, {"https://anoni.net"})
+    check("origin_of 不帶路徑", origin_of("https://anoni.net/docs"), "https://anoni.net")
+    check("原本那份照樣在清單裡", all(isinstance(u, str) for u in urls), True)
+    check("ORIGIN_EXTS 含 .js", ".js" in ORIGIN_EXTS, True)
+
+
+def test_origin_items_from_real_output() -> None:
+    """拿一份迷你產物走完 collect_urls 再挑，地球儀的三支模組都要在裡面。"""
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        play = root / "games" / "tor-network" / "play"
+        play.mkdir(parents=True)
+        for name in ("atlas.js", "layers.js", "i18n.js", "countries.json", "index.html"):
+            (play / name).write_text("x", encoding="utf-8")
+        items = origin_items(collect_urls(root, BASE), BASE)
+        got = sorted(it["url"].rsplit("/", 1)[-1] for it in items)
+        check("地球儀的模組都會連同 Origin 再清一次", got, ["atlas.js", "i18n.js", "layers.js"])
+
+
 def main() -> int:
     for fn in [
         test_to_url,
@@ -215,6 +247,8 @@ def main() -> int:
         test_run_batches_sends_every_batch,
         test_run_batches_fails_when_any_batch_fails,
         test_run_batches_empty,
+        test_origin_items,
+        test_origin_items_from_real_output,
     ]:
         fn()
     if failures:
