@@ -311,7 +311,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 - **games-checks.yml**: 「Tor 中繼地球儀」的互動與版面檢查（headless Chrome）
   - 觸發路徑：`docs/zh-TW/games/tor-network/**`、`tools/check_*.mjs`
-  - 檢查項目：捏合放開不彈開、擋掉 iOS Safari 雙擊放大、網址關注區域的取景、變電所容量計版面（280 座 × 三語系 × 寬窄視窗）、六角層的幾何與國碼對齊、國家標籤上的事件穿透、點標籤與點地表開得出卡片、工作坊導覽走得完、圖層清單與來源檔案及三語字串對得上、每一層開得起來也關得掉、各國行政區界線的資料與預快取對得上且爭議島嶼沒被畫進去（`check_admin1.mjs`）
+  - 檢查項目：捏合放開不彈開、擋掉 iOS Safari 雙擊放大、網址關注區域的取景、變電所容量計版面（280 座 × 三語系 × 寬窄視窗）、六角層的幾何與國碼對齊、國家標籤上的事件穿透、點標籤與點地表開得出卡片、工作坊導覽走得完、圖層清單與來源檔案及三語字串對得上、每一層開得起來也關得掉、拖曳滾輪捏合時手指底下那一點不動（`check_globe_nav.mjs` 驗算法，`check_globe_nav_browser.mjs` 在真的頁面上驗接線）、各國行政區界線的資料與預快取對得上且爭議島嶼沒被畫進去（`check_admin1.mjs`）
 
 - **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
   - **push** 僅在 **`main`** 分支觸發。`workflow_dispatch` 與 `schedule` 維持可用

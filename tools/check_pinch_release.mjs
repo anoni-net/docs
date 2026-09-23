@@ -54,6 +54,23 @@ function extractFn(src, header) {
 }
 
 const src = fs.readFileSync(ATLAS, 'utf8');
+
+// bindControls 需要的抓取與滑行工具。從 atlas.js 原樣抽出來，不另寫一份假的，
+// 否則改了 atlas.js 這裡照樣綠燈。THREE 只用到 Vector3 的欄位與 set，給個最小替身。
+function grabKit(src) {
+  const a = src.indexOf('// ---- 抓住地表的一點 ----');
+  const b = src.indexOf('// 一格滾輪最多讓涵蓋的地表變動幾成。');
+  if (a < 0 || b < a) throw new Error('atlas.js 裡找不到抓取工具那一段');
+  const wheel = ['WHEEL_K', 'WHEEL_K_PINCH', 'WHEEL_PX_MAX'].map((k) => {
+    const m = src.match(new RegExp('^const ' + k + ' = [^;]+;', 'm'));
+    if (!m) throw new Error('atlas.js 裡找不到 ' + k);
+    return m[0];
+  });
+  return 'const THREE = { Vector3: class { constructor(x = 0, y = 0, z = 0) { this.x = x; this.y = y; this.z = z; }'
+    + ' set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; } } };\n'
+    + src.slice(a, b) + '\n' + wheel.join('\n');
+}
+
 const body = extractFn(src, 'function bindControls(dom)');
 
 // 注入相依，讓 bindControls 在這裡跑得起來。這些名字要跟 atlas.js 的模組層變數一致。
@@ -78,6 +95,7 @@ const harness = `
   const pauseSpin = () => setSpin(false);
   // 滾輪與 pointerdown 現在會清掉網址上的關注區域，這裡不驗那件事，給個空的就好
   const clearFocus = () => {};
+  ${grabKit(src)}
   ${body}
   // 地球的操作現在掛在 window 不是畫布上，理由見 atlas.js 的 bindControls 檔頭：
   // 可見的國家標籤設了 pointer-events: auto 才點得開卡片，掛在畫布上的話游標壓在
