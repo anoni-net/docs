@@ -204,6 +204,8 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 - Across directories: `../basics/anonymity-vs-privacy.md`
 - Across depths: `../../blog/posts/2025to2026.md`
 
+Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](./tools.md)`.
+
 External links get `{target="_blank"}` so they open in a new tab: `[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`.
 
 Linking to a page that exists only in Chinese is the one case where you write a full URL, because the language sites build separately and no relative path reaches across them. Use `https://anoni.net/docs/community/privacy-guide/` and mark it `(in Chinese)` so the reader knows what they are clicking. The default language, zh-TW, carries no language segment in its URLs. zh-CN uses lowercase `https://anoni.net/docs/zh-cn/...` and English uses `https://anoni.net/docs/en/...`, while the source directories keep their original casing.
