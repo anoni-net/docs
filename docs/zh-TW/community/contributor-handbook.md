@@ -103,6 +103,13 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 - 時間線可以條列日期，前後要有敘述銜接：開頭交代為什麼值得做，結尾交代做完對誰有意義
 - 號召型文章在開頭就寫出邀請誰、做什麼、做不到時的替代方案，必要時用 admonition（`!!! tip`）讓它跳出來
 
+### 品牌名稱與受眾
+
+- 品牌名稱寫 `anoni.net` 或 `匿名網路社群 anoni.net`，一律小寫，英文段落也一樣（`anoni.net Docs Project`），不寫 `Anoni.net`。網址與 email 照原樣
+- 內容涉及正體中文使用者時，受眾寫「正體中文使用者」，不要只寫「台灣使用者」，後者把香港、澳門等地的讀者排除在外。前言點明一次範圍（例：無論在台灣、香港、澳門或其他華語環境），之後用簡潔的說法帶過
+- 寫「華文社群」、「華語使用者」前，先確認是否同時包含正體與簡體中文使用者。只想指特定字系或地區時直接寫出來（`正體中文使用者`、`中港澳的中文使用者`）
+- 描述在地脈絡時寫「台灣的法規環境」是準確的。寫到「希望讓 X 用得上」這類訴求段時，先確認真正的受眾範圍
+
 ### 擬人化
 
 非人的主體不做人的動作，四種常見情況與改法：
@@ -253,6 +260,47 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 需要寫對外完整網址時（社群貼文、外部引用），網站預設語系 zh-TW 不帶語系區段：`docs/zh-TW/community/i18n.md` 對應 `https://anoni.net/docs/community/i18n/`。zh-CN 用小寫 `https://anoni.net/docs/zh-cn/...`，en 用 `https://anoni.net/docs/en/...`。資料夾路徑仍保留語系大小寫。
 
 文章末尾建議放「接下來」、「相關閱讀」之類的小節，連結到 2–4 篇相關文章。基礎、工具、場景、進階之間的橫向連結比單向引用更有用。
+
+## 文章格式
+
+### front matter
+
+每一頁開頭的 front matter 至少有三個欄位：
+
+```yaml
+---
+title: 威脅模型
+description: 一句完整的句子，說明這一頁在講什麼、對讀者有什麼用
+icon: material/shield-account-outline
+---
+```
+
+- `title` 不加問號，也不加站名。社群分享卡與頁面標題會自動帶上站名
+- `description` 會用在搜尋結果的摘要與社群分享卡。寫成一句完整的句子，交代這一頁對讀者有什麼用，不要只重述標題
+- `icon` 以 `material/` 為主，少數情境用 `fontawesome-solid-`、`fontawesome-brands-`
+- front matter 之後緊接 H1，寫成 `# :material-icon-name: 標題`，圖示通常與 `icon` 欄位相同
+- blog 文章另外要有 `date`、`slug`、`categories`、`authors`
+- 社群分享卡要換標題、描述或底圖時，見[品牌素材](./brand-assets.md)的「社群分享卡」一節
+
+### 註腳
+
+引用研究與報導時用 Markdown 註腳，註腳放在文章末尾：
+
+```markdown
+中國的防火長城[^1]長期過濾大量國際網站。
+
+[^1]: [原文標題](https://example.org/article){target="_blank"} - 媒體名稱
+```
+
+主要來源避免選付費牆的內容。只找得到付費牆版本時，另外附一個 archive.org 的存檔連結。
+
+### 圖表
+
+文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫，資料來源優先用 Pulse API（`https://api.anoni.net/api/...`）。可參考 `taiwan/tor-relay-watcher.md`。
+
+### 結構化資料
+
+整站的 `Organization` JSON-LD 寫在 `docs/overrides/main.html`，文章裡不要再手動加 `<script type="application/ld+json">`。
 
 ## PR 流程
 

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   品牌色 token（依 .claude/rules/brand-identity.md）
+   品牌色 token（說明見 community/brand-assets.md 的「配色 Token」）
    主色 cyan #00aeff、Accent、結構性次色、中性色
    ========================================================================== */
 
@@ -29,7 +29,7 @@
   --neutral-muted:  #546e7a;
   --neutral-border: #cdcdcd;
 
-  /* 指南分類色（sidebar 導覽 chip 用 UI 色，非內容語意色，見 brand-identity.md）
+  /* 指南分類色（sidebar 導覽 chip 用 UI 色，非內容語意色，見 community/brand-assets.md 的「指南分類色」）
      刻意避開三大主題保留色：綠 #4caf50、紫 #7b1fa2、橙 #ef6c00 與緊急紅 #d32f2f */
   --guide-basics:    #0079a3;  --guide-basics-d:    #4dbfff;  /* 概念：品牌 cyan（深一階以過 AA 對比） */
   --guide-tools:     #2e7d32;  --guide-tools-d:     #66bb6a;  /* 工具：深綠（跟 cyan 拉開，比隱私綠 #4caf50 更深） */
@@ -40,7 +40,7 @@
 
 /* ==========================================================================
    活動頁議程主題標籤 .sess-tag（對齊 2026 三大主題；soft chip 淡底深字、過 AA）
-   見 .claude/rules/brand-identity.md；不挪用 --guide-* sidebar 導覽色
+   見 community/brand-assets.md 的「結構性次色」，不挪用 --guide-* sidebar 導覽色
    ========================================================================== */
 .sess-tag {
   display: inline-block;

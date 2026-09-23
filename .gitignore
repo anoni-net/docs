@@ -7,8 +7,8 @@ docs/site/
 
 # Local IDE / agent config。.claude/ 的 agents 與 skills 進版控給所有貢獻者用，
 # 只忽略個人設定與本機 worktree
-.claude/settings.local.json
-.claude/worktrees/
+**/.claude/settings.local.json
+**/.claude/worktrees/
 .cursor/
 
 # 本機檢查用的暫存（tools/check_redact_detect.mjs 抓的樣張）
