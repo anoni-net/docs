@@ -315,6 +315,29 @@ wordmark 的文字已经转成路径，打开的设备有没有装字体都长�
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | 次要文字、背景角色（如首页「我们关注的参与者」卡片） |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | 图片、卡片边框 |
 
+### 指南分类色（侧栏导览）
+
+桌面版左栏「指南」tab 底下的五个分类 chip（概念、工具、场景、进阶、报告）各用一个颜色区隔，文字、图标与框同色。这组是导览界面的识别色，跟上面的结构性次色属于不同层级，两组不要互相挪用。
+
+| Token | 亮色 | 暗色 | 分类 |
+|---|---|---|---|
+| `--guide-basics`    | `#0079a3` | `#4dbfff` | 概念，品牌 cyan 深一阶以过 AA 对比 |
+| `--guide-tools`     | `#2e7d32` | `#66bb6a` | 工具，比隐私绿 `#4caf50` 深 |
+| `--guide-scenarios` | `#ad1457` | `#f06292` | 场景 |
+| `--guide-advanced`  | `#4527a0` | `#b39ddb` | 进阶，暗色提亮以过 AA 对比 |
+| `--guide-reports`   | `#946c00` | `#e0b020` | 报告，琥珀金，刻意离开蓝色系 |
+
+暗色变体在 CSS 里命名为 `--guide-*-d`。
+
+- 只用在 `extra.css` 的侧栏分类 chip。内容标签、admonition 与三大主题标记用 `--cat-*`
+- 避开保留的紫 `#7b1fa2` 与紧急红 `#d32f2f`
+- 五色的亮色在白底、暗色在 slate 底都过 WCAG AA 的 4.5:1。报告原本是蓝色，跟概念的 cyan 在三种色盲模拟下几乎同色（ΔE 最低 2.7），改成琥珀金之后，在红绿色盲下与概念完全分开（ΔE 60 以上）。概念与进阶在第一型色盲下偏近，工具与报告在红绿色盲下偏近，这两组靠图标与文字标签区分，颜色只是辅助线索（WCAG 1.4.1）
+- CSS 依位置上色（`:nth-of-type(1)` 到 `(5)`，概念是 1、报告是 5），顺序对应 `mkdocs.yml` 指南 tab 底下的分类排序，改排序时要同步调整 CSS
+
+### 亮色模式的界面色
+
+Material 默认的 light blue 当主色时，在白底的对比只有 2.71:1，过不了 WCAG AA。亮色模式把正文链接、accent、header 与面包屑改用 cyan-800 `#006d99`（白底 5.76:1）。暗色模式维持 Material 默认，因为 cyan-800 在 slate 底只有 2.27:1。内容里的小色标签（首页公告、活动页徽章）也都调到 4.5:1 以上。
+
 ### 示意图用色
 
 `docs/diagrams/` 的手写 SVG 是被 `img` 标签引用的独立文件，取不到页面的 CSS 变量，所以下面这一组没有写成 `var(--x)`，是直接抄 hex 进 SVG 的 `<style>`。class 名称也照抄，三十几张图用的是同一套，换图的人才不用重新认。

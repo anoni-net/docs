@@ -325,7 +325,7 @@ uv run python ooni.py sheetrow --path=./lookback_TW_20250101_36_hours.csv
 
 - 預設使用正體中文（zh-TW）撰寫
 - 部落格文章放在 `docs/{lang}/blog/posts/` 目錄
-- 使用 YAML front matter 設定文章 metadata（title, date, categories）
+- front matter、註腳、圖表與結構化資料的寫法見貢獻者百科的「文章格式」一節
 - 支援 Vega-Lite 圖表（使用 ````vegalite` code fence）
 - 寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)（原始檔 `docs/zh-TW/community/contributor-handbook.md`）的「寫作風格規範」一節。要新增或修改規則先改那裡
 - 寫作風格規範的套用範圍不限於 `docs/` 的內容。repo 根目錄的說明文件（`README.md`、`CONTRIBUTING.md`、`AGENTS.md`、`CLAUDE.md`、`NOTICE`、各子目錄的 `README.md`）同樣要遵守。這幾個檔案不在 CI 的觸發路徑內，改完自己執行一次 linter。`NOTICE` 沒有 `.md` 副檔名，linter 只收 `.md` 與 `.js`，那一份要人工看

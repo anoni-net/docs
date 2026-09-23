@@ -315,6 +315,29 @@ Align derivative work to these values. The site's `extra.css` already defines th
 | `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | Secondary text, background roles |
 | `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | Image and card borders |
 
+### Guide category colours (sidebar navigation)
+
+On desktop, the five category chips under the "Guides" tab in the left sidebar (concepts, tools, scenarios, advanced, reports) each have their own colour, shared by the text, icon, and border. These are navigation colours, a different layer from the structural secondaries above, and the two sets are not interchangeable.
+
+| Token | Light | Dark | Category |
+|---|---|---|---|
+| `--guide-basics`    | `#0079a3` | `#4dbfff` | Concepts; brand cyan one step darker to pass AA |
+| `--guide-tools`     | `#2e7d32` | `#66bb6a` | Tools; darker than the privacy green `#4caf50` |
+| `--guide-scenarios` | `#ad1457` | `#f06292` | Scenarios |
+| `--guide-advanced`  | `#4527a0` | `#b39ddb` | Advanced; lightened in dark mode to pass AA |
+| `--guide-reports`   | `#946c00` | `#e0b020` | Reports; amber, deliberately away from the blues |
+
+Dark variants are named `--guide-*-d` in the CSS.
+
+- Use them only for the sidebar category chips in `extra.css`. Content tags, admonitions, and the three-track markers use `--cat-*`.
+- Stay clear of the reserved purple `#7b1fa2` and the emergency red `#d32f2f`.
+- All five pass WCAG AA at 4.5:1, light on white and dark on slate. Reports used to be blue and was nearly indistinguishable from the concepts cyan under three simulated colour-vision deficiencies (ΔE as low as 2.7); in amber it separates fully from concepts under red-green deficiency (ΔE above 60). Concepts and advanced stay close under protanopia, and tools and reports under red-green deficiency, so those pairs rely on icons and text labels, with colour as a redundant cue (WCAG 1.4.1).
+- The CSS colours by position (`:nth-of-type(1)` to `(5)`, concepts first and reports fifth), matching the category order under the Guides tab in `mkdocs.yml`. Reorder one and you must reorder the other.
+
+### Interface colour in light mode
+
+Material's default light blue primary reaches only 2.71:1 on white and fails WCAG AA. Light mode therefore uses cyan-800 `#006d99` (5.76:1 on white) for body links, the accent, the header, and breadcrumbs. Dark mode keeps Material's defaults, because cyan-800 is only 2.27:1 on slate. Small coloured labels in content, such as homepage announcements and event badges, are also tuned to at least 4.5:1.
+
 ### Diagram colours
 
 The hand-written SVGs in `docs/diagrams/` are standalone files pulled in by an `img` tag, so they cannot reach the page's CSS variables. The set below is therefore not written as `var(--x)`; copy the hex values straight into the SVG's `<style>`. Copy the class names too, because the thirty-odd diagrams already share one set and the next person to edit one should not have to learn a second.

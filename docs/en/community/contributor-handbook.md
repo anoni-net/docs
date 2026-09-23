@@ -55,6 +55,7 @@ Rule documents spell out every banned punctuation mark and sentence pattern, so 
 
 The English site is written for international peers, researchers, journalists, and English-preferring readers across the Sinophone Asia-Pacific, by people working inside the region. The prose should sound like it.
 
+- Write the name as `anoni.net`, all lowercase, including at the start of a sentence (`anoni.net Docs Project`). Never `Anoni.net`. URLs and email addresses keep their own form.
 - Refer to ourselves as "we, a community based in Taiwan". Avoid "In Taiwan, we...", which addresses the reader as though they were also in Taiwan.
 - Where a passage is specific to Taiwan, add the regional comparison rather than leaving Taiwan as the implied default. Mainland China, Hong Kong and Macau, Singapore, Malaysia, and the diaspora each have their own picture.
 - Do not translate Chinese conceptual shorthand literally. Phrases like 在地脈絡 or 公民團體 turn into stilted English when carried across word for word. Say what is actually meant.
@@ -208,6 +209,47 @@ External links get `{target="_blank"}` so they open in a new tab: `[Freedom on t
 Linking to a page that exists only in Chinese is the one case where you write a full URL, because the language sites build separately and no relative path reaches across them. Use `https://anoni.net/docs/community/privacy-guide/` and mark it `(in Chinese)` so the reader knows what they are clicking. The default language, zh-TW, carries no language segment in its URLs. zh-CN uses lowercase `https://anoni.net/docs/zh-cn/...` and English uses `https://anoni.net/docs/en/...`, while the source directories keep their original casing.
 
 Ending an article with a short "Related" section linking two to four other pages helps. Sideways links between concepts, tools, scenarios, and regional material are worth more than one-directional references.
+
+## Page format
+
+### Front matter
+
+Every page starts with front matter carrying at least three fields:
+
+```yaml
+---
+title: Threat modelling
+description: One complete sentence on what the page covers and what the reader gets from it
+icon: material/shield-account-outline
+---
+```
+
+- `title` takes no question mark and no site name. The page title and the social card add the site name automatically.
+- `description` feeds search-result snippets and social cards. Write it as one complete sentence about what the reader gets from the page, not a restatement of the title.
+- `icon` is usually a `material/` icon, occasionally `fontawesome-solid-` or `fontawesome-brands-`.
+- The H1 follows the front matter directly as `# :material-icon-name: Title`, normally with the same icon as the `icon` field.
+- Blog posts also need `date`, `slug`, `categories`, and `authors`.
+- To change a page's social card title, description, or background, see "Social cards" in [Brand assets](./brand-assets.md).
+
+### Footnotes
+
+Cite research and reporting with Markdown footnotes, collected at the end of the article:
+
+```markdown
+The Great Firewall[^1] has long filtered a large share of international sites.
+
+[^1]: [Original title](https://example.org/article){target="_blank"} - Publication
+```
+
+Avoid paywalled material as the main source. If a paywalled version is all you can find, add an archive.org link as well.
+
+### Charts
+
+The site supports Vega-Lite charts (`mkdocs-charts-plugin`) in code blocks tagged `vegalite`. Prefer the Pulse API (`https://api.anoni.net/api/...`) as the data source. See `taiwan/tor-relay-watcher.md` for an example.
+
+### Structured data
+
+The site-wide `Organization` JSON-LD lives in `docs/overrides/main.html`. Do not add `<script type="application/ld+json">` to individual articles.
 
 ## Pull requests
 
