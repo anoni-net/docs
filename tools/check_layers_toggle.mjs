@@ -193,8 +193,13 @@ const waitOn = async (id, want = true) => {
 // ── 開場的樣子 ──────────────────────────────────────────────
 const chips = JSON.parse(await ev(
   `JSON.stringify([...document.querySelectorAll('[data-ly]')].map((b) => ({ id: b.dataset.ly, on: b.classList.contains('on'), fixed: b.disabled })))`));
-check(chips.length === LAYERS.length,
-      `清單上每一層都有一個格子（${chips.length} 對 ${LAYERS.length}）`);
+// auto 的層（台灣的縣市界）不給按鈕，貼近時自動出現
+const listed = LAYERS.filter((l) => !l.auto);
+check(chips.length === listed.length,
+      `清單上每一層都有一個格子，auto 的層除外（${chips.length} 對 ${listed.length}）`);
+for (const l of LAYERS.filter((x) => x.auto)) {
+  check(!chips.some((c) => c.id === l.id), `${l.id} 是自動層，圖層清單上沒有它的按鈕`);
+}
 const wantOn = LAYERS.filter((l) => l.on).map((l) => l.id).sort();
 const gotOn = chips.filter((c) => c.on).map((c) => c.id).sort();
 check(JSON.stringify(wantOn) === JSON.stringify(gotOn),
@@ -382,32 +387,42 @@ await sleep(300);
   await sleep(300);
 }
 
-// ── 縣市界沒開的時候，貼近台灣輪廓要還在 ──────────────────────
+// ── 台灣的縣市界：貼近自動出現 ──────────────────────────────
 //
-// 台灣的粗輪廓在涵蓋度 36 度到 9.7 度之間淡出，交棒給縣市界。縣市界從 #568 起是
-// 讀者自己開的層，預設關著，交接卻只看涵蓋度，於是預設狀態下貼近台灣，粗輪廓照樣
-// 淡掉，沒有東西接手，台灣的海岸線與國界一起消失。要交棒的前提是縣市界真的在。
+// 縣市界跟其他國家的行政區一樣，貼近台灣就自動出現，讀者不必自己開。它還是獨立的一層
+// （變電所卡片的縣市名稱要用它的資料），由各國行政區那一層判斷什麼時候打開。
+//
+// 台灣的粗輪廓在涵蓋度 36 度到 18 度之間淡出、交棒給縣市界。交棒的前提是縣市界真的
+// 在，#572 修過一次：縣市界沒開時粗輪廓照樣淡掉，台灣的海岸線與國界一起消失。這裡
+// 兩個方向都驗：開著各國行政區時要交棒，關掉時縣市界跟著收、粗輪廓要回來。
 {
+  if (!(await ev(`window.__atlas.isOn('admin1')`))) {
+    await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
+    await waitOn('admin1');
+  }
   if (await ev(`window.__atlas.isOn('tw-admin')`)) await ev(`window.__atlas.off('tw-admin')`);
   await ev(`window.__atlas.fly(23.7, 121.0, 2)`);
   let o = null;
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 200; i++) {
     o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
-    if (o.swap > 0.99) break;
+    if (o.swap > 0.99 && o.admin !== null) break;
     await sleep(250);
   }
+  await sleep(800);
+  o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
   check(o.swap > 0.99, `飛到台灣之後交接進度走完（swap ${o.swap.toFixed(2)}）`);
-  check(o.border > 0.5, `縣市界沒開，貼近台灣時粗國界還在（透明度 ${o.border}）`);
-  await ev(`(async () => { await window.__atlas.on('tw-admin'); })()`);
-  await waitOn('tw-admin');
+  check(await ev(`window.__atlas.isOn('tw-admin')`), '貼近台灣，縣市界自己打開了');
+  check(o.admin > 0.5 && o.border < 0.05, `縣市界出現並交棒（粗國界 ${o.border}、縣市界 ${o.admin}）`);
+  await ev(`window.__atlas.off('admin1')`);
+  await waitOn('admin1', false);
   await sleep(800);
   o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
-  check(o.admin > 0.5 && o.border < 0.05, `打開縣市界之後交棒（粗國界 ${o.border}、縣市界 ${o.admin}）`);
-  await ev(`window.__atlas.off('tw-admin')`);
-  await waitOn('tw-admin', false);
-  await sleep(800);
-  o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
-  check(o.border > 0.5, `再關掉縣市界，粗國界回來（透明度 ${o.border}）`);
+  check(!(await ev(`window.__atlas.isOn('tw-admin')`)), '關掉各國行政區，縣市界跟著收');
+  check(o.border > 0.5, `縣市界收掉之後，貼近台灣時粗國界還在（透明度 ${o.border}）`);
+  await ev(`(async () => { await window.__atlas.on('admin1'); })()`);
+  await waitOn('admin1');
+  for (let i = 0; i < 80 && !(await ev(`window.__atlas.isOn('tw-admin')`)); i++) await sleep(250);
+  check(await ev(`window.__atlas.isOn('tw-admin')`), '重新打開各國行政區，還貼著台灣，縣市界又自己出現');
 }
 
 // ── 各國行政區：貼近那一國才抓 ────────────────────────────────
@@ -443,7 +458,11 @@ await sleep(300);
   check(a.jp > 0.5, `貼近日本，都道府縣的界線抓回來並淡入（透明度 ${a.jp}）`);
   // 涵蓋 14 度的日本畫面裡看得到的只有日本與韓國。東南亞任何一國出現在這裡，就是
   // 「在不在畫面上」那條判斷放太寬，一飛就把半個亞洲的檔案都抓下來
-  const extra = Object.keys(a).filter((k) => !['jp', 'kr'].includes(k));
+  //
+  // 台灣不算多抓。台灣那一筆指向縣市界那一層，刻意不看行政區大小、在交棒開始前就
+  // 載好，所以從中國上空飛向日本的途中，涵蓋度降到 40 度以下那一刻台灣若在畫面中央
+  // 就會被抓。這件事跟幀率有關，本機常常沒抓到而 CI 會抓到，寫死排除才不會時紅時綠。
+  const extra = Object.keys(a).filter((k) => !['jp', 'kr', 'tw'].includes(k));
   check(extra.length === 0, `貼近日本時只抓了畫面上看得到的國家（${Object.keys(a).join('、')}${extra.length ? `，多抓了 ${extra.join('、')}` : ''}）`);
   check((await ev(`window.__atlas.layerObjs('admin1')`)) > 0, '抓回來的界線記在 admin1 這一層名下');
   await ev(`window.__atlas.off('admin1')`);
@@ -479,7 +498,15 @@ for (const id of ['relays', 'ooni', 'torusers', 'tw-admin', 'tw-landing', 'tw-po
   check(await ev(`window.__atlas.isOn('${id}')`), `按下導覽之後 ${id} 自己補載起來`);
 }
 check((await ev(`!document.getElementById('tour').hidden`)), '導覽列出現了');
-check((await ev(`[...document.querySelectorAll('[data-ly].on')].length`)) >= 8, '圖層清單跟著標成開著');
+// 導覽補載的那幾層加上關不掉的國界，扣掉沒有按鈕的自動層（縣市界）
+{
+  const tourIds = ['relays', 'ooni', 'torusers', 'tw-admin', 'tw-landing', 'tw-power', 'tw-grid'];
+  const want = new Set([...LAYERS.filter((l) => l.core).map((l) => l.id),
+    ...tourIds.filter((id) => !LAYERS.find((l) => l.id === id).auto)]);
+  const lit = JSON.parse(await ev(`JSON.stringify([...document.querySelectorAll('[data-ly].on')].map((b) => b.dataset.ly))`));
+  const missing = [...want].filter((id) => !lit.includes(id));
+  check(missing.length === 0, `圖層清單跟著標成開著（${lit.length} 顆${missing.length ? `，少了 ${missing.join('、')}` : ''}）`);
+}
 
 // 檢查跑完了，之後發生的都是收尾
 collecting = false;

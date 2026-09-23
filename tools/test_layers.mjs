@@ -133,7 +133,8 @@ if (new Set(ro).size !== ro.length) fail.push(`RO 裡有重複的 renderOrder：
 // 圖層清單上每一格的名字。key 從 id 推出來，atlas.js 的 lyKey 是同一條規則。
 // 推不出東西的話那一格顯示的是 key 本身，三語系一起壞。
 const lyKey = (id) => 'ly' + id.replace(/(^|-)([a-z])/g, (m, a, b) => b.toUpperCase());
-for (const l of LAYERS) {
+// auto 的層沒有按鈕，也就不需要按鈕上的名字
+for (const l of LAYERS.filter((x) => !x.auto)) {
   const k = lyKey(l.id);
   const miss = LANGS.filter((lang) => !STR[lang] || STR[lang][k] === undefined);
   if (miss.length) fail.push(`${l.id}：圖層清單的 ${k} 缺 ${miss.join('、')}`);

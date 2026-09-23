@@ -30,7 +30,10 @@
 Natural Earth 的一級行政區不是每一國都跟上現況。已知的一處是印尼：2022 年巴布亞
 拆出四個新省，現在是 38 省，這份資料還是 33 省，巴布亞那一帶畫的是舊界線。
 
-台灣不在這裡，縣市界另有一份用內政部資料產的 tw-admin.json。
+台灣的縣市界另有一份用內政部資料產的 tw-admin.json，是獨立的一層（tw-admin），因為
+變電所卡片的縣市名稱、導覽的台灣那一站都要用到它的資料。索引裡台灣那一筆不指向
+檔案，指向那一層（layer: 'tw-admin'），前端貼近台灣時打開那一層，跟其他國家同一套
+判斷。那一份畫的是整圈外框，因為它同時是台灣的海岸線，細節見 NOTICE。
 
 === 香港的區界含海域 ===
 
@@ -305,6 +308,21 @@ def main():
         index.append({'cc': cc, 'file': 'admin1/' + cc + '.json', 'bbox': bbox, 'r': r_deg, 'n': len(names)})
         print(f'  {cc}：{len(names)} 區，共用邊 {n_edges:,} 條，串成 {len(lines)} 條折線、'
               f'簡化後 {pts:,} 點，典型區 {r_deg}°，{os.path.getsize(path) / 1024:.0f} KB')
+    # 台灣：指向 tw-admin 那一層，範圍與典型縣市大小從那一份算
+    with open(os.path.join(HERE, '..', 'docs', 'zh-TW', 'games', 'tor-network', 'play', 'tw-admin.json'),
+              encoding='utf-8') as f:
+        tw = json.load(f)
+    rings = [[(r[i], r[i + 1]) for i in range(0, len(r), 2)] for c in tw['c'] for r in c['p']]
+    # 範圍只算本島、澎湖、金馬與釣魚台那一帶。太平島在北緯 10 度、東沙在東經 116 度，
+    # 算進去的話外接框蓋住整個南海，看越南或菲律賓時都會去抓台灣這份（gzip 63 KB）
+    rings = [r for r in rings if 117.5 <= r[0][0] <= 124.5 and 21.0 <= r[0][1] <= 27.0]
+    lons = [x for r in rings for x, _ in r]
+    lats = [y for r in rings for _, y in r]
+    areas = [sum(ring_area_deg2([(r[i], r[i + 1]) for i in range(0, len(r), 2)]) for r in c['p']) for c in tw['c']]
+    index.append({'cc': 'tw', 'layer': 'tw-admin',
+                  'bbox': [round(min(lons), 2), round(min(lats), 2), round(max(lons), 2), round(max(lats), 2)],
+                  'r': round(math.sqrt(statistics.median(areas)), 3), 'n': len(tw['c'])})
+    print(f"  tw：指向 tw-admin 那一層，{len(tw['c'])} 縣市，典型縣市 {index[-1]['r']}°")
     with open(os.path.join(OUT, 'index.json'), 'w', encoding='utf-8') as f:
         json.dump({'countries': index}, f, ensure_ascii=False, separators=(',', ':'))
     print('DONE →', os.path.normpath(OUT))
