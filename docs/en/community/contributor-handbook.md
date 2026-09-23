@@ -31,7 +31,7 @@ What follows is the English rule set. If you are writing or reviewing Chinese, u
 
 ### What these rules cover
 
-The rules apply to the documentation under `docs/` in all three locales, and to the repository's own explanatory files: `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`, and `NOTICE` at the root, plus the `README.md` in each subdirectory. Readers meet the project through those files, so they follow the same standard as the site.
+The rules apply to the documentation under `docs/` in all three locales, and to the repository's own explanatory files: `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and `NOTICE` at the root, plus the `README.md` in each subdirectory. Readers meet the project through those files, so they follow the same standard as the site.
 
 The `docs-style-lint` job only fires on Markdown changes under `docs/zh-TW`, `docs/zh-CN`, and `docs/en`. After editing an explanatory file, run the linter yourself:
 
@@ -261,6 +261,37 @@ zh-TW is the single source of truth. zh-CN and en are derived from it. The full 
 - When reviewing an English page that derives from a zh-TW original, the class of error to look for is named information being replaced by a category term. [What goes missing when an English page derives from zh-TW](./i18n.md#What-goes-missing-when-an-English-page-derives-from-zh-TW) has the test and how to run it
 
 The English site is a rewrite, not a word-for-word translation. A page whose value is entirely in its Chinese-language context does not automatically get an English version, and an English page can carry regional comparisons its Chinese source does not have. Where an upstream English original already exists, as with translated Tor Project, OONI, Tails, and Signal blog posts, the English site links to the original instead of translating it back.
+
+## Working with AI tools
+
+We do not restrict which AI service contributors use for writing, translation, or code. So that different people with different tools produce consistent work, the rules live in one place, this handbook, and every AI configuration file points back here.
+
+### Entry files
+
+- `AGENTS.md` at the repository root covers the repository layout, development commands, and the places where things tend to go wrong. Most AI tools read it automatically. `pulse/` has its own.
+- `CLAUDE.md` imports `AGENTS.md` and adds notes on the subagents and skill under `.claude/`.
+- If your tool does not read either file on its own, give it `AGENTS.md` and the "Writing style" part of this handbook before you start.
+
+### Checking AI output
+
+AI output goes through the same process as anything written by hand: run `docs_style_lint.py`, work through the pull request template, and go through review. The limits in "Writing about security and privacy" apply in the same way. Open and check every figure, quotation, and source link an AI gives you; the person who opens the pull request is responsible for its content.
+
+### Roles
+
+Writing an article can be split across a few roles, each doing one job. Contributors using Claude Code can call the matching subagent under `.claude/agents/`; with other tools, give the instructions below. Every role assumes the same readers: journalists, civil society groups, and open-source communities, with specialists in Tor, OONI, and digital rights reading too.
+
+Three roles before writing:
+
+- **Topic scout**: scans a given period (the past two weeks by default) for new events in anonymity tools, digital identity and eID, surveillance and censorship legislation, censorship measurement, payment privacy, whistleblowing and leak platforms, and digital rights in Taiwan and the Asia-Pacific, and drops hype, plain product launches, and unrelated items. For each candidate it reports the event in one line, the date, a primary-source link, why the community should cover it, any Taiwan or Asia-Pacific angle, and how time-sensitive it is, ranked by how worth writing it is, six at most. It does not write the article or choose the angle.
+- **Angle adviser**: proposes three or four angles on one topic, saying for each what it approaches from, what the community can add, and whether there is a Taiwan or Asia-Pacific hook, in a suggested order. It offers options only; it does not decide for the author or start writing.
+- **Research**: once a topic is chosen, gathers primary sources (official announcements, original documents, authoritative reporting) with links and publication dates, scans `docs/zh-TW/blog/posts/` for existing articles worth cross-linking with their relative paths, and marks the claims that will need a citation. If the site already has a very similar article, it says so. It does not write the article or choose the angle.
+
+Four roles for review:
+
+- **Structure review**: reads the whole piece, states its core argument and intended audience in one sentence, then checks whether each section serves that line, which should move, which can go, and where transitions are missing. It reports the reading of the argument, structural problems ordered by severity with their locations, and suggested changes. It does not edit sentences.
+- **Line editing**: finds redundant words, vague phrasing, and logical jumps, checks that the tone stays consistent, and in bilingual documents confirms both versions say the same thing. For each problem it gives the location, the issue, and a rewrite, sentence by sentence, without rewriting whole paragraphs.
+- **Fact check**: lists every checkable claim, including figures, dates, country cases, technical descriptions, and descriptions of projects or organisations, rates each as accurate, needs a source, possibly wrong, or overstated, and verifies the possibly wrong ones. For each problem it gives the location and claim, the rating, the evidence or source link, and a suggested fix (change the figure, add a source, soften the claim, or cut it). It does not polish prose or comment on style.
+- **Target reader**: plays a reader who does not know the subject but will spend five minutes on the piece, and marks which sentences lose them, which arguments do not persuade, and what they remember and want to do afterwards. It gives reader reactions only, not editing advice.
 
 ## Where to look before asking
 

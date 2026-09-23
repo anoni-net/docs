@@ -154,3 +154,9 @@ CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個�
 台灣那幾份改用 `sources` 陣列，因為一個檔案裡有兩三個來源），
 `netusers.json` 在 `alt` 底下另有一組，對應台灣那一筆的不同來源。
 畫面上的來源聲明在 `docs/zh-TW/games/tor-network/i18n.js` 的 `creditXxx` 系列，三種語言各一份。
+
+# 第三方程式與文字
+
+| 檔案 | 來源 | 授權 |
+|------|------|------|
+| `.claude/skills/drawio/SKILL.md` | [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) 的 `plugins/claude-code/skills/drawio/SKILL.md` | Apache-2.0，全文在同目錄的 `LICENSE`。開頭「Using this skill in anoni-net/docs」一段是本專案的增補，其餘為上游原文 |

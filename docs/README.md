@@ -100,7 +100,7 @@ rm -rf .cache/plugin/privacy
 
 - 直接編輯 `zh-TW/`、`zh-CN/`、`en/` 下的 Markdown
 - 部落格文章：`{語言}/blog/posts/`
-- 更多說明請見 [CONTRIBUTING.md](../CONTRIBUTING.md)、專案根目錄 [README](../README.md) 與 [CLAUDE.md](../CLAUDE.md)
+- 更多說明請見 [CONTRIBUTING.md](../CONTRIBUTING.md)、專案根目錄 [README](../README.md) 與 [AGENTS.md](../AGENTS.md)
 
 ## 資源連結
 
@@ -212,7 +212,7 @@ rm -rf .cache/plugin/privacy
 
 - Edit Markdown under `zh-TW/`, `zh-CN/`, or `en/`
 - Blog posts: `{lang}/blog/posts/`
-- See [CONTRIBUTING.md](../CONTRIBUTING.md), the project root [README](../README.md), and [CLAUDE.md](../CLAUDE.md) for more.
+- See [CONTRIBUTING.md](../CONTRIBUTING.md), the project root [README](../README.md), and [AGENTS.md](../AGENTS.md) for more.
 
 ## Links
 

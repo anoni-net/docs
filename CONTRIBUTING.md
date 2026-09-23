@@ -11,7 +11,7 @@
 | [`asn_coverage/`](asn_coverage/) | 從 OONI S3 下載並分析涵蓋率、RIPE ASN 列表等 CLI | `ooni.py`、`ripe.py` |
 | [`tools/`](tools/) | 共用腳本與 CI 檢查：編輯標準掃描、前端測試、資料產生、部署 | `docs_style_lint.py`，細節見 [`tools/README.md`](tools/README.md) |
 
-詳細開發指令（`uv`、Docker、API 端點）見 [CLAUDE.md](./CLAUDE.md)。
+詳細開發指令（`uv`、Docker、API 端點）見 [AGENTS.md](./AGENTS.md)。用 AI 工具協助貢獻時，入口檔與角色分工見貢獻者百科的「AI 協作」一節。
 
 ## 分支與 CI（精簡對照）
 
@@ -49,7 +49,7 @@
 
 ## English (short)
 
-This monorepo contains the **docs site**, **Pulse**, **asn_coverage**, and the shared **tools** scripts. See the table above for where to edit. Use [CLAUDE.md](./CLAUDE.md) for `uv`, Docker, and API details.
+This monorepo contains the **docs site**, **Pulse**, **asn_coverage**, and the shared **tools** scripts. See the table above for where to edit. Use [AGENTS.md](./AGENTS.md) for `uv`, Docker, and API details. If you work with AI tools, see "Working with AI tools" in the contributor handbook for entry files and roles.
 
 - **Branches / CI**: site build runs on pushes to the **`docs`** branch (`build_docs.yml`). **`asn_coverage` workflows** run on **`push` to `main` only** (manual and scheduled runs still available).  
 - **Licensing**: docs content is **CC-BY 4.0**; **Pulse** and `tools/` code is **MIT** (`tools/data/` excluded, see [NOTICE](./NOTICE)); **asn_coverage** code is **GPL-3.0**. See [README.md](./README.md).
