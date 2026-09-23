@@ -226,6 +226,23 @@ const ok = [];
 }
 
 
+
+// bindControls 需要的抓取與滑行工具。從 atlas.js 原樣抽出來，不另寫一份假的，
+// 否則改了 atlas.js 這裡照樣綠燈。THREE 只用到 Vector3 的欄位與 set，給個最小替身。
+function grabKit(src) {
+  const a = src.indexOf('// ---- 抓住地表的一點 ----');
+  const b = src.indexOf('// 一格滾輪最多讓涵蓋的地表變動幾成。');
+  if (a < 0 || b < a) throw new Error('atlas.js 裡找不到抓取工具那一段');
+  const wheel = ['WHEEL_K', 'WHEEL_K_PINCH', 'WHEEL_PX_MAX'].map((k) => {
+    const m = src.match(new RegExp('^const ' + k + ' = [^;]+;', 'm'));
+    if (!m) throw new Error('atlas.js 裡找不到 ' + k);
+    return m[0];
+  });
+  return 'const THREE = { Vector3: class { constructor(x = 0, y = 0, z = 0) { this.x = x; this.y = y; this.z = z; }'
+    + ' set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; } } };\n'
+    + src.slice(a, b) + '\n' + wheel.join('\n');
+}
+
 // --- 接線：哪個事件會寫網址、哪個會清掉 --------------------------------------
 {
   const wire = `
@@ -261,6 +278,7 @@ const ok = [];
     const mkBtn = (id) => ({ hidden: true, addEventListener: (t, f) => { if (t === 'click') clicks[id] = f; } });
     const btns = { 'btn-tw': mkBtn('btn-tw'), 'btn-spin': mkBtn('btn-spin') };
     const $ = (id) => btns[id] || null;
+    /*KIT_SRC*/
     /*BIND_SRC*/
     // 地球的操作現在掛在 window 不是畫布上，理由見 atlas.js 的 bindControls 檔頭：
     // 可見的國家標籤設了 pointer-events: auto 才點得開卡片，掛在畫布上的話游標壓在
@@ -300,6 +318,7 @@ const ok = [];
       "const R = 5;",
       decl(/^const COVER_STEP_MAX = [^;]+;/m),
       "const coverDeg = () => 180;",
+      "const coverOfZoom = () => 180;",
       "const targetDist = () => 10;",
       "const fitDist = () => 15.4;",
       "const zoomForCover = () => 0.5;",
@@ -307,7 +326,8 @@ const ok = [];
       extractFn(atlas, 'function goFocus(key)'),
       extractFn(atlas, 'function clearFocus()'),
     ].join('\n'))
-    .replace('/*BIND_SRC*/', extractFn(atlas, 'function bindControls(dom)'));
+    .replace('/*BIND_SRC*/', extractFn(atlas, 'function bindControls(dom)'))
+    .replace('/*KIT_SRC*/', grabKit(atlas));
 
   const W = new Function(src)();
 
