@@ -382,6 +382,34 @@ await sleep(300);
   await sleep(300);
 }
 
+// ── 縣市界沒開的時候，貼近台灣輪廓要還在 ──────────────────────
+//
+// 台灣的粗輪廓在涵蓋度 36 度到 9.7 度之間淡出，交棒給縣市界。縣市界從 #568 起是
+// 讀者自己開的層，預設關著，交接卻只看涵蓋度，於是預設狀態下貼近台灣，粗輪廓照樣
+// 淡掉，沒有東西接手，台灣的海岸線與國界一起消失。要交棒的前提是縣市界真的在。
+{
+  if (await ev(`window.__atlas.isOn('tw-admin')`)) await ev(`window.__atlas.off('tw-admin')`);
+  await ev(`window.__atlas.fly(23.7, 121.0, 2)`);
+  let o = null;
+  for (let i = 0; i < 120; i++) {
+    o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
+    if (o.swap > 0.99) break;
+    await sleep(250);
+  }
+  check(o.swap > 0.99, `飛到台灣之後交接進度走完（swap ${o.swap.toFixed(2)}）`);
+  check(o.border > 0.5, `縣市界沒開，貼近台灣時粗國界還在（透明度 ${o.border}）`);
+  await ev(`(async () => { await window.__atlas.on('tw-admin'); })()`);
+  await waitOn('tw-admin');
+  await sleep(800);
+  o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
+  check(o.admin > 0.5 && o.border < 0.05, `打開縣市界之後交棒（粗國界 ${o.border}、縣市界 ${o.admin}）`);
+  await ev(`window.__atlas.off('tw-admin')`);
+  await waitOn('tw-admin', false);
+  await sleep(800);
+  o = JSON.parse(await ev(`JSON.stringify(window.__atlas.twOutline())`));
+  check(o.border > 0.5, `再關掉縣市界，粗國界回來（透明度 ${o.border}）`);
+}
+
 // ── 導覽按下去要能走完七站 ──────────────────────────────────
 //
 // 七站各自依賴一份資料，而開場只載地理底圖與中繼。導覽開始前沒有把缺的補上的話，
