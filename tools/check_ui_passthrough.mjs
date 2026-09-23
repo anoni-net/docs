@@ -54,6 +54,23 @@ const check = (cond, msg) => { (cond ? ok : fail).push(msg); };
 check(/\.lb\.on\s*\{[^}]*pointer-events:\s*auto/.test(html),
       'CSS 裡可見的國家標籤仍然是 pointer-events: auto（會吃掉事件）');
 
+
+// bindControls 需要的抓取與滑行工具。從 atlas.js 原樣抽出來，不另寫一份假的，
+// 否則改了 atlas.js 這裡照樣綠燈。THREE 只用到 Vector3 的欄位與 set，給個最小替身。
+function grabKit(src) {
+  const a = src.indexOf('// ---- 抓住地表的一點 ----');
+  const b = src.indexOf('// 一格滾輪最多讓涵蓋的地表變動幾成。');
+  if (a < 0 || b < a) throw new Error('atlas.js 裡找不到抓取工具那一段');
+  const wheel = ['WHEEL_K', 'WHEEL_K_PINCH', 'WHEEL_PX_MAX'].map((k) => {
+    const m = src.match(new RegExp('^const ' + k + ' = [^;]+;', 'm'));
+    if (!m) throw new Error('atlas.js 裡找不到 ' + k);
+    return m[0];
+  });
+  return 'const THREE = { Vector3: class { constructor(x = 0, y = 0, z = 0) { this.x = x; this.y = y; this.z = z; }'
+    + ' set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; } } };\n'
+    + src.slice(a, b) + '\n' + wheel.join('\n');
+}
+
 const wire = `
   ${decl(/^const UI_SEL = [^;]+;/m)}
   ${decl(/^const onUI = [^;]+;/m)}
@@ -81,6 +98,7 @@ const wire = `
   let cleared = 0, spinStopped = 0;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const coverDeg = () => 180;          // 飽和，滾輪那段就走原本的 zoom 步進
+  const coverOfZoom = () => 180;
   const targetDist = () => 10;
   const fitDist = () => 15.4;
   const zoomForCover = () => 0.5;
@@ -98,6 +116,8 @@ const wire = `
     hasPointerCapture: (id) => captured.has(id),
   };
   const document = { addEventListener: () => {}, querySelectorAll: () => [] };
+  const REDUCED = false;
+  ${grabKit(atlas)}
   ${extractFn(atlas, 'function bindControls(dom)')}
   bindControls(dom);
   return {
