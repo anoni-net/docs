@@ -60,6 +60,18 @@ export const LAYERS = [
     note: '海岸線。疊在國界之上，把海陸交界描清楚。',
   },
   {
+    id: 'admin1',
+    file: 'admin1/index.json',
+    from: 'docs',
+    group: 'base',
+    // 開場就開。這一份只是索引，0.2 KB，記著每一國的範圍與典型行政區多大。各國的
+    // 界線要等鏡頭貼近那一國才去抓，每國 4 到 11 KB，沒放大去看的讀者完全不付代價。
+    on: true,
+    credit: 'creditAdmin1', creditEl: 'credit-admin1',
+    lift: 1.0047,
+    note: '各國的一級行政區界線（州、省、縣），只畫同一國裡相鄰兩區共用的那條邊，外框交給國界與海岸線。產生器是 tools/gen_admin1.py。台灣不在這裡，縣市界是 tw-admin。',
+  },
+  {
     id: 'bathymetry',
     file: 'bathymetry.json',
     from: 'docs',

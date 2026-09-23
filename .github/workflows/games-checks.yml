@@ -87,3 +87,6 @@ jobs:
 
       - name: 每一層開得起來也關得掉，物件沒有漏收
         run: node tools/check_layers_toggle.mjs
+
+      - name: 各國行政區的資料、預快取與爭議島嶼
+        run: node tools/check_admin1.mjs

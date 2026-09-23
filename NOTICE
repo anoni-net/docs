@@ -16,6 +16,8 @@
 | `countries.json`、`continents.json`、`bathymetry.json` | [Natural Earth](https://www.naturalearthdata.com/) | public domain |
 | `tw-landing.json` | 本專案自建，座標主要取自 [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0（OSM 的部分），其餘為事實彙整 |
 | `tw-admin.json` | [內政部國土測繪中心 直轄市、縣市界線](https://data.gov.tw/dataset/7442) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
+| `admin1/hk.json` | [香港特別行政區政府民政事務總署 地方行政區界線](https://data.gov.hk/tc-data/dataset/hk-had-json1-hong-kong-administrative-boundaries)，經 DATA.GOV.HK 發布 | [DATA.GOV.HK 使用條款](https://data.gov.hk/tc/terms-and-conditions)，可商業與非商業使用，需標明來源並歸屬香港特區政府與提供機關 |
+| `admin1/` 底下其餘各國（日本、韓國與東南亞十一國） | [Natural Earth](https://www.naturalearthdata.com/) 1:10m Admin 1 | public domain |
 | `tw-power.json` 的容量與負載 | [台灣電力公司二次變電所主變壓器裝置容量及負載](https://data.gov.tw/dataset/16960) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `tw-power.json` 的座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
 | `tw-power.json` 的縣市判定 | [內政部國土測繪中心 鄉鎮市區界線](https://data.gov.tw/dataset/7441) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
@@ -23,6 +25,11 @@
 | `tw-grid.json` 的電廠位置與輸電線 | [OpenStreetMap](https://www.openstreetmap.org/copyright) 貢獻者 | ODbL 1.0 |
 | `tw-energy.json` 的三份台電資料 | [再生能源各場址](https://data.gov.tw/dataset/17141)、[各縣市用電統計](https://data.gov.tw/dataset/29935)、[每日尖峰備轉容量率](https://data.gov.tw/dataset/25850) | [政府資料開放授權條款-第1版](https://data.gov.tw/license) |
 | `tw-energy.json` 的場址座標 | [OpenStreetMap](https://www.openstreetmap.org/copyright) Nominatim 地理編碼 | ODbL 1.0 |
+
+`admin1/` 底下是各國的一級行政區界線，產生器是 `tools/gen_admin1.py`，每一份檔案自帶
+`source` 與 `license` 欄位。香港那一份的授權條款要求標明來源並歸屬給香港特區政府與
+提供機關，地球儀的資料來源區塊與說明頁都寫了。只收相鄰兩區共用的邊，外框不收，所以
+Natural Earth 放在沖繩縣底下的釣魚台列嶼不會出現在這一層。
 
 `netusers.json` 一個檔案裡有兩個來源，因為 World Bank 沒有收錄台灣，台灣那一筆另外取自
 數位發展部的調查。兩者放在不同的鍵底下（`pct` 與 `alt.pct`），各自帶自己的 `source` 與
