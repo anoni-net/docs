@@ -294,15 +294,74 @@ const view = { zoom: 1, rx: 0.45, ry: 2.28, spin: true };
 // ZOOM_MIN 停在 0.004（桌機約 0.4 度、44 公里）。再下去就會看到縣市界線被
 // Douglas-Peucker 簡化掉的痕跡，那份資料的容差是 0.0006 度、約 67 公尺，
 // 0.3 度視野下剛好是一個像素。工具能給的精度到哪，這裡就停在哪。
-const ZOOM_MIN = 0.004, ZOOM_MAX = 1.55;
+// zoom 改成相對於廣角之後，同樣 0.4 度的畫面對到的數字變大約 1.2 倍（桌機），
+// 所以下限從 0.004 調成 0.0048，最深能看到的範圍不變。
+const ZOOM_MIN = 0.0048, ZOOM_MAX = 1.55;
 
 // 整顆地球完整入鏡所需的距離。直式手機的水平視野比垂直窄很多，固定距離會把地球裁掉大半。
-function fitDist() {
-  const vFov = camera.fov * Math.PI / 180;
+function fitDistAt(fovDeg) {
+  const vFov = fovDeg * Math.PI / 180;
   const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
   return R * 1.18 / Math.sin(Math.min(vFov, hFov) / 2);
 }
-function targetDist() { return R + (fitDist() - R) * view.zoom; }
+function fitDist() { return fitDistAt(camera.fov); }
+
+// ---- zoom 是廣角鏡頭下的等效高度 ----
+//
+// 貼近地表時鏡頭會從 45 度換成 18 度（理由見 FOV_HI_COVER）。原本的 zoom 是「相對於
+// 當下那顆鏡頭的完整入鏡距離」，鏡頭一換，同一個 zoom 就代表不同的畫面，所以每次換
+// 鏡頭都要把 zoom 補回原本的涵蓋度，而且鏡頭是依「目標」瞬間換掉的，距離卻是慢慢追。
+//
+// 實測從遠處一格一格滾進去，涵蓋度低於 62 度之後每一格都是同一個模式：視角立刻收窄，
+// 相機還停在舊的高度，畫面瞬間多放大一截（53.5 度直接跳到 45.4 度，比一格該有的多一
+// 半），接著相機往上退到補償過的新目標，畫面又縮回去（45.4 度回到 48.7 度）。離地高度
+// 的讀數一路從 5.4 爬回 7.5。每一格都是「猛然拉近再往回退」，滾起來像有東西頂著。
+//
+// 改成 zoom 永遠相對於 45 度廣角：zoom 乘上廣角的入鏡高度，就是「用廣角鏡頭要看到
+// 同樣這麼多地表時站多高」。這樣 zoom 跟畫面涵蓋度一一對應，跟現在換到哪顆鏡頭無關，
+// 不需要補償。每一幀先平滑 zoom 本身，再由它同時推出這一刻的鏡頭與距離（camFor），
+// 鏡頭與距離永遠是同一個狀態的兩個面，涵蓋度保證單調。
+//
+// 換鏡頭的方式也改了。原本是變焦推軌：視角收窄的同時相機往後退，涵蓋度 62 度時站在
+// 離地 5.5，到 26 度換完鏡頭時要站在離地 7.0，所以放大的過程中離地高度會一路爬回去，
+// 而且透視在那一段持續變形。改成換鏡頭那一段相機停住、只收窄視角，也就是純光學變焦，
+// 畫面等於從中心等比例放大。一直收到 18 度鏡頭在同一個位置剛好接上為止（桌機約涵蓋
+// 20 度），之後鏡頭固定、相機往下降。離地高度從頭到尾單調，貼近之後用的是同一顆
+// 18 度鏡頭、同一個距離，平面地圖的效果跟原本完全一樣。
+function fitDistFar() { return fitDistAt(FOV_FAR); }
+/** 這個 zoom 對到的畫面短邊涵蓋度 */
+function coverOfZoom(z) { return coverDeg(R + (fitDistFar() - R) * z, FOV_FAR); }
+/** 站在距離 d 的相機，要讓短邊涵蓋 cover 度需要的垂直視角。
+ * 邊緣那一點在球心看過去是 β = cover/2，從相機看過去的半角 θ 滿足
+ * tan θ = R·sin β / (d − R·cos β)。短邊是水平的時候（直式手機）再換算回垂直視角。 */
+function fovForCoverAt(cover, d) {
+  const b = cover * Math.PI / 360;
+  const th = Math.atan2(R * Math.sin(b), d - R * Math.cos(b));
+  const vHalf = camera.aspect >= 1 ? th : Math.atan(Math.tan(th) / camera.aspect);
+  return 2 * vHalf * 180 / Math.PI;
+}
+/** 用 fovDeg 這顆鏡頭看到短邊涵蓋 cover 度所需的距離。coverDeg 的反函數：
+ * 相機、球心、邊緣那一點構成的三角形，正弦定理給 d = R·sin(θ + β) / sin θ */
+function distForCover(cover, fovDeg) {
+  const v = fovDeg * Math.PI / 180, h = 2 * Math.atan(Math.tan(v / 2) * camera.aspect);
+  const th = Math.min(v, h) / 2, b = cover * Math.PI / 360;
+  return R * Math.sin(th + b) / Math.sin(th);
+}
+/** zoom 推出這一刻的鏡頭與相機距離。三段：廣角推近、原地變焦、望遠推近 */
+function camFor(z, out = {}) {
+  const alt = (fitDistFar() - R) * z;
+  const c = coverDeg(R + alt, FOV_FAR);
+  if (c >= FOV_HI_COVER) { out.fov = FOV_FAR; out.dist = R + alt; return out; }
+  const d0 = distForCover(FOV_HI_COVER, FOV_FAR);        // 開始換鏡頭時站的位置
+  if (c > coverDeg(d0, FOV_NEAR)) { out.dist = d0; out.fov = fovForCoverAt(c, d0); return out; }
+  out.fov = FOV_NEAR;
+  out.dist = distForCover(c, FOV_NEAR);
+  return out;
+}
+function targetDist() { return camFor(view.zoom).dist; }
+// 相機目前走到的 zoom。每一幀往 view.zoom 趨近，鏡頭與距離都由它推出來
+let zoomCam = 1;
+const camNow = {};
 
 // 從「太空視角」過渡到「地圖視角」的程度，0 是太空、1 是貼著地表。
 //
@@ -455,25 +514,25 @@ function clearFocus() {
  * 涵蓋度沒有解析反函數，用二分。
  */
 function zoomForExtent(latDeg, lonDeg) {
-  const vFov = camera.fov * Math.PI / 180;
-  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
-  const f = fitDist();
-  const solve = (halfFov, deg) => {
-    const cov = (d) => {
-      const disc = d * d * Math.cos(halfFov) ** 2 - d * d + R * R;
-      if (disc < 0) return 999;                      // 視線掃出球外，整顆入鏡
-      const t = d * Math.cos(halfFov) - Math.sqrt(disc);
-      return 2 * Math.asin(Math.min(1, t * Math.sin(halfFov) / R)) * 180 / Math.PI;
-    };
-    let lo = ZOOM_MIN, hi = 1;
-    for (let i = 0; i < 60; i++) {
-      const mid = (lo + hi) / 2;
-      if (cov(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
-    }
-    return (lo + hi) / 2;
+  const cov = (d, halfFov) => {
+    const disc = d * d * Math.cos(halfFov) ** 2 - d * d + R * R;
+    if (disc < 0) return 999;                      // 視線掃出球外，整顆入鏡
+    const t = d * Math.cos(halfFov) - Math.sqrt(disc);
+    return 2 * Math.asin(Math.min(1, t * Math.sin(halfFov) / R)) * 180 / Math.PI;
   };
-  // 兩個方向都要滿足，取比較遠的（zoom 較大的）那一個
-  return clamp(Math.max(solve(vFov / 2, latDeg), solve(hFov / 2, lonDeg)), ZOOM_MIN, ZOOM_MAX);
+  // 鏡頭隨 zoom 換，所以每個候選的 zoom 都要用它自己那顆鏡頭算兩個方向的涵蓋度
+  const fits = (z) => {
+    const c = camFor(z);
+    const v = c.fov * Math.PI / 180, h = 2 * Math.atan(Math.tan(v / 2) * camera.aspect);
+    return cov(c.dist, v / 2) >= latDeg && cov(c.dist, h / 2) >= lonDeg;
+  };
+  // 兩個方向都要滿足，取滿足的最小 zoom
+  let lo = ZOOM_MIN, hi = 1;
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2;
+    if (fits(mid)) hi = mid; else lo = mid;
+  }
+  return clamp((lo + hi) / 2, ZOOM_MIN, ZOOM_MAX);
 }
 
 // 貼近地表時把鏡頭從廣角換成望遠，畫面就會平掉。
@@ -482,8 +541,8 @@ function zoomForExtent(latDeg, lonDeg) {
 // 讀起來就是一顆球。同樣涵蓋南北 4.6 度，把視角縮到 18 度、相機退到三倍遠之後，
 // 入射角剩 11.3 度，接近正射，看起來就是一張平面地圖。
 //
-// 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦，所以
-// 換視角的同時要補償 zoom，讓涵蓋度不變，否則按下「關注台灣」之後畫面會自己再縮一段。
+// 這是真的把透視改掉，不是視覺上的障眼法。代價是縮放時鏡頭會跟著變焦。鏡頭與距離
+// 都由同一個 zoom 推出來（camFor），涵蓋度只看 zoom，換鏡頭不需要另外補償。
 const FOV_FAR = 45;    // 太空視角
 // 地圖視角。這是整個縮放過程裡唯一會改變透視的東西，也是「滾到某一段覺得不順」
 // 最可能的來源：變焦推軌的本質就是中心不動而畫面邊緣脹縮。
@@ -494,7 +553,6 @@ const FOV_NEAR = (() => {
   const v = parseFloat(new URLSearchParams(location.search).get('fov-near'));
   return v >= 10 && v <= 45 ? v : 18;
 })();
-const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投影矩陣
 
 // 換鏡頭的區間，用畫面短邊的涵蓋度界定。
 //
@@ -514,48 +572,20 @@ const FOV_STEP = 0.05; // 差距小於這個就不動，免得每幀都重算投
 // 拆開來量是距離佔 15.0 度、視角佔 18.3 度，兩件事剛好撞在一起。
 //
 // 改成 62 度才開始換。那時球已經填滿畫面，涵蓋度對距離的敏感度掉下來了，兩個來源
-// 不再疊加。下緣跟著收到 26，過渡區間的長度維持原樣。
+// 不再疊加。
+//
+// 下緣原本寫死 26 度。換鏡頭改成原地變焦之後（見 camFor 上方的說明），下緣由幾何
+// 決定：18 度鏡頭在開始換的那個位置剛好看到多少，就在那裡換完，桌機約 20 度。
 const FOV_HI_COVER = 62;
-const FOV_LO_COVER = 26;
 
-/** 換鏡頭的進度。頭尾用 smoothstep 抹平，線性斜坡在兩端有硬轉折，看得出來。 */
-function fovT() {
-  const t = clamp((FOV_HI_COVER - coverDeg(targetDist())) / (FOV_HI_COVER - FOV_LO_COVER), 0, 1);
-  return t * t * (3 - 2 * t);
-}
-
-/** 解出在現在的 fov 與長寬比下，短邊涵蓋 deg 度所需的 zoom */
+/** 解出短邊涵蓋 deg 度所需的 zoom。涵蓋度只看 zoom，跟現在換到哪顆鏡頭無關 */
 function zoomForCover(deg) {
-  const f = fitDist();
   let lo = ZOOM_MIN, hi = ZOOM_MAX;
   for (let i = 0; i < 50; i++) {
     const mid = (lo + hi) / 2;
-    if (coverDeg(R + (f - R) * mid) > deg) hi = mid; else lo = mid;
+    if (coverOfZoom(mid) > deg) hi = mid; else lo = mid;
   }
   return clamp((lo + hi) / 2, ZOOM_MIN, ZOOM_MAX);
-}
-
-function updateFov() {
-  const want = FOV_FAR + (FOV_NEAR - FOV_FAR) * fovT();
-  if (Math.abs(camera.fov - want) < FOV_STEP) return;
-  // 換鏡頭前先記下要看到多少地表，換完把 zoom 調回同樣的涵蓋度。
-  // 不補償的話，視角一窄畫面就會自己往裡縮，使用者會覺得縮放失控。
-  //
-  // 這裡要拿「目標距離」的涵蓋度，不是相機當下位置的。相機是平滑趨近目標的，
-  // 滾輪剛改完 view.zoom 的那幾幀相機還沒動到位，用當下位置算的話等於每一幀都把
-  // view.zoom 拉回相機現在所在的地方，滾輪的輸入就被抵消掉了。
-  //
-  // 實測那個 bug 的樣子：視角開始收窄之前每四格滾輪涵蓋度縮 1.45 倍，之後掉到
-  // 1.10 倍，滾很多圈才動一點。
-  //
-  // 飛行目標也要一起換算，而且要在改 fov 之前先用舊的 fov 算出它的涵蓋度，
-  // 改完之後再解回新的 zoom。順序反過來的話等於原地繞一圈，什麼都沒補到。
-  const keep = coverDeg(targetDist());
-  const flyKeep = fly ? coverDeg(R + (fitDist() - R) * fly.zoom) : null;
-  camera.fov = want;
-  camera.updateProjectionMatrix();
-  if (keep < 179) view.zoom = zoomForCover(keep);
-  if (fly && flyKeep !== null && flyKeep < 179) fly.zoom = zoomForCover(flyKeep);
 }
 
 // 縮放讀數。網址加 ?debug 才出現。
@@ -565,17 +595,26 @@ function updateFov() {
 // 淡出的那兩個過渡值。
 const DBG = new URLSearchParams(location.search).has('debug');
 let dbgEl = null, dbgAcc = 0;
+// 幀率。拿真實的幀間隔算，不用 animate 的 dt，那個被夾在 50 毫秒以內，掉到二十幀以下
+// 就看不出來。最慢那一幀另外記，平均漂亮但偶爾卡一下的情況，要看這個數字才抓得到。
+let dbgPrev = 0, dbgFrames = 0, dbgWorst = 0, dbgFps = 0, dbgWorstShown = 0, dbgWin = 0;
 function updateDbg(dt) {
   if (!DBG) return;
   if (!dbgEl) { dbgEl = $('dbg'); if (!dbgEl) return; dbgEl.hidden = false; }
+  const now = performance.now();
+  if (dbgPrev) { dbgFrames++; dbgWorst = Math.max(dbgWorst, now - dbgPrev); } else dbgWin = now;
+  dbgPrev = now;
   dbgAcc += dt;
   if (dbgAcc < 0.1) return;          // 每秒更新十次就夠，不必每幀重排文字
+  dbgFps = dbgFrames * 1000 / Math.max(1, now - dbgWin); dbgWorstShown = dbgWorst;
+  dbgFrames = 0; dbgWorst = 0; dbgWin = now;
   dbgAcc = 0;
   const c = coverDeg();
-  const tc = coverDeg(targetDist());
+  const tc = coverOfZoom(view.zoom);
   const km = (x) => (x >= 180 ? '整顆' : `${Math.round(x * 111).toLocaleString()} km`);
   dbgEl.textContent =
-    `涵蓋 ${c >= 180 ? '整顆' : c.toFixed(2) + '°'}  ${km(c)}\n`
+    `幀率 ${dbgFps.toFixed(0)} fps  最慢 ${dbgWorstShown.toFixed(0)} ms\n`
+    + `涵蓋 ${c >= 180 ? '整顆' : c.toFixed(2) + '°'}  ${km(c)}\n`
     + `目標 ${tc >= 180 ? '整顆' : tc.toFixed(2) + '°'}\n`
     + `zoom ${view.zoom.toFixed(5)}\n`
     + `fov  ${camera.fov.toFixed(1)}°\n`
@@ -604,6 +643,8 @@ function flyTo(lat, lon, spanLat, spanLon) {
   };
   setSpin(false);              // 飛過去之後不該又自己轉走
   spin.rx = spin.ry = 0;
+  anchor = null;               // 飛行接手，前一次滾輪抓住的點不再成立
+  zoomTau = ZOOM_TAU;
   hideCountry();
 }
 
@@ -696,9 +737,147 @@ function dragRate() {
   return DRAG_K * Math.max(0.05, camera.position.z - R) / ref * tanFix;
 }
 
+// ---- 抓住地表的一點 ----
+//
+// Google Maps 與 Apple Maps 順的原因只有一個：手指或游標底下的那一點地表，從按下到
+// 放開都留在手指底下。拖曳是這樣，滾輪縮放與雙指捏合也是這樣，縮放的中心是游標，
+// 不是畫面中央。
+//
+// 這裡原本只做到一半。拖曳是拿前後兩個游標位置各自投影回球面，把經緯度差加進
+// rx、ry。那個近似在赤道正面是準的，但 rx、ry 是先繞 Y 再繞 X 的兩個角度，視線
+// 一離開赤道，「世界座標的經度差」就不等於「ry 要轉多少」，誤差每一步都累積。
+// 模擬拖 400 像素的結果：赤道正面偏 11 像素，北緯 35 度偏 77 像素，北緯 57 度偏
+// 185 像素。滾輪與捏合則完全沒有錨點，永遠朝畫面中央縮，游標在中心外 335 像素時
+// 放大四格，原本在游標底下那一點就跑到 120 像素外。
+//
+// 改成直接解：按下時記住游標底下那一點在地球本身座標裡的位置，之後每一幀解出
+// 「讓被抓住的點落在游標的視線上」的 rx、ry。地球只有這兩個自由度，北方永遠朝上，
+// 所以兩個方程兩個未知數，是閉式解，不必迭代。
+//
+// 繞 Y 轉 ry 不改變 y 分量，繞 X 轉 rx 不改變 x 分量。所以轉完之後的 x 只由 ry
+// 決定：p.x·cos ry + p.z·sin ry = w.x，這是一個 ρ·cos(ry − φ) = w.x 的形式，
+// 兩個解。ry 定了之後，rx 就是 (y, z) 平面上從 q 轉到 w 的角度。兩組解挑離現在
+// 最近、而且 rx 落在可轉範圍內的那一組。
+//
+// |w.x| > ρ 代表那一點離南北極太近，不論怎麼轉 ry 都送不到那條視線上，這時解不
+// 出來，退回舊的比例近似。
+const RX_MAX = 1.2;
+const anchorP = new THREE.Vector3();   // 被抓住的那一點，地球本身的座標
+const anchorW = new THREE.Vector3();
+// null 代表沒有抓著任何一點。kind 是誰抓的：drag、pinch、wheel。
+// 前兩種放開手指就結束，wheel 等縮放動畫收斂才結束。
+let anchor = null;
+
+// 世界座標的方向換成地球本身的座標，也就是 (Rx·Ry)⁻¹ = Ry(−ry)·Rx(−rx)
+function toGlobeLocal(w, out) {
+  const cx = Math.cos(view.rx), sx = Math.sin(view.rx), cy = Math.cos(view.ry), sy = Math.sin(view.ry);
+  const y1 = cx * w.y + sx * w.z, z1 = -sx * w.y + cx * w.z;
+  return out.set(cy * w.x - sy * z1, y1, sy * w.x + cy * z1);
+}
+
+function solveGrab(p, w, rxNow, ryNow) {
+  const rho = Math.hypot(p.x, p.z);
+  if (rho < 1e-6 || Math.abs(w.x) > rho) return null;
+  const phi = Math.atan2(p.z, p.x);
+  const d = Math.acos(clamp(w.x / rho, -1, 1));
+  let best = null;
+  for (const r0 of [phi + d, phi - d]) {
+    const ry = r0 + Math.round((ryNow - r0) / (Math.PI * 2)) * Math.PI * 2;
+    const qz = -Math.sin(ry) * p.x + Math.cos(ry) * p.z;
+    let rx = Math.atan2(w.z, w.y) - Math.atan2(qz, p.y);
+    rx -= Math.round(rx / (Math.PI * 2)) * Math.PI * 2;
+    const out = Math.max(0, Math.abs(rx) - RX_MAX);
+    const cost = out * 100 + Math.abs(rx - rxNow) + Math.abs(ry - ryNow);
+    if (!best || cost < best.cost) best = { rx: clamp(rx, -RX_MAX, RX_MAX), ry, cost };
+  }
+  return best;
+}
+
+/** 抓住螢幕上這個位置底下的地表。打不到球就不抓，回傳 false。 */
+function setAnchor(sx, sy, kind) {
+  const w = sphereAt(sx, sy, anchorW);
+  if (!w) { anchor = null; return false; }
+  toGlobeLocal(w, anchorP);
+  anchor = { sx, sy, kind };
+  return true;
+}
+
+/** 轉地球，讓抓住的那一點回到 anchor.sx、anchor.sy 底下。解不出來回傳 false。 */
+function holdAnchor() {
+  if (!anchor) return false;
+  const w = sphereAt(anchor.sx, anchor.sy, anchorW);
+  if (!w) return false;
+  const r = solveGrab(anchorP, w, view.rx, view.ry);
+  if (!r) return false;
+  view.rx = r.rx; view.ry = r.ry;
+  return true;
+}
+
+// ---- 手感的時間常數 ----
+//
+// 原本的平滑全部是「每幀追多少比例」：相機距離每幀 0.12、飛行每幀 0.09、放開後的
+// 滑行每幀乘 0.92。那樣寫的動畫長度跟螢幕更新率綁在一起，120 Hz 的 MacBook 與
+// iPhone 快一倍，掉到 30 幀的時候慢一倍。同一個縮放在 30 Hz 要 800 毫秒到位，
+// 在 120 Hz 只要 200 毫秒。
+//
+// 改成以秒為單位的時間常數，每幀用 1 − e^(−dt/τ) 當追的比例，任何幀率下同一個
+// 動作花的時間都一樣。τ 取成原本在 60 Hz 下的等效值，手感在 60 Hz 的螢幕上不變。
+const ZOOM_TAU = 0.13;        // 滾輪一格的縮放動畫，60 Hz 下等於原本的每幀 0.12
+// 捏合與觸控板。輸入本身已經連續，再拖一段只會像橡皮筋。地圖 App 的捏合是鎖在
+// 手指上的，0.02 讓手指停下 100 毫秒內追到九成九。不直接設成 0，觸控事件多半是
+// 60 Hz，在 120 Hz 的螢幕上直接套用會每兩幀才動一次，留一點平滑剛好把它抹平。
+const ZOOM_TAU_FAST = 0.02;
+const FLY_TAU = 0.18;         // 飛行定位，60 Hz 下等於原本的每幀 0.09
+const ease = (dt, tau) => 1 - Math.exp(-dt / tau);
+let zoomTau = ZOOM_TAU;
+
+// ---- 放開後的滑行 ----
+//
+// 原本記的是「最後一個 pointermove 的位移」，放開後每幀加一次再乘 0.92。三個問題：
+//
+// 一、那是每個事件的位移，不是速度。滑鼠 60 Hz 與 ProMotion 的 120 Hz，同樣的手速
+//     每個事件的位移差一倍，滑行距離也差一倍。
+// 二、只看最後一個事件，手指放開前那一下的抖動直接決定滑多遠。
+// 三、拖到定點停住再放開，停住的那段時間沒有 pointermove，最後一個位移還留著，
+//     放開時照樣滑出去。最後一步 5 像素的話，停了半天放開還會滑 62 像素。
+//
+// 改成跟地圖 App 一樣：記下最近 100 毫秒的角度，放開時用頭尾算速度。最後一次移動
+// 距離放開超過 60 毫秒就當作已經停住，不滑。速度以時間常數衰減，距離是 v·τ。
+const FLING_TAU = 0.28;
+const FLING_WINDOW = 100;
+const FLING_IDLE = 60;
+const FLING_MAX = 8;          // 弧度每秒。甩得再快也不要轉到看不清楚
+const flingLog = [];          // { t, rx, ry }
+const evTime = (e) => (e && e.timeStamp > 0 ? e.timeStamp : performance.now());
+function logFling(t) {
+  flingLog.push({ t, rx: view.rx, ry: view.ry });
+  while (flingLog.length > 2 && t - flingLog[0].t > FLING_WINDOW) flingLog.shift();
+}
+function startFling(t) {
+  spin.rx = spin.ry = 0;
+  const n = flingLog.length;
+  if (n < 2 || t - flingLog[n - 1].t > FLING_IDLE) { flingLog.length = 0; return; }
+  const a = flingLog[0], b = flingLog[n - 1];
+  const sec = (b.t - a.t) / 1000;
+  flingLog.length = 0;
+  if (sec < 0.012) return;
+  let vy = (b.ry - a.ry) / sec, vx = (b.rx - a.rx) / sec;
+  const v = Math.hypot(vx, vy);
+  if (v > FLING_MAX) { vx *= FLING_MAX / v; vy *= FLING_MAX / v; }
+  spin.ry = vy; spin.rx = vx; spin.v0 = Math.hypot(vx, vy);
+}
+
 // 一格滾輪最多讓涵蓋的地表變動幾成。理由見 wheel 那段。
 // 0.16 是試出來的：小於這個滾起來會覺得推不動，大於的話飽和區那一段仍然會跳。
 const COVER_STEP_MAX = 0.16;
+// 滾輪的縮放係數，單位是每像素的 ln(倍率)。滑鼠一格 deltaY 是 100，
+// 乘出來 e^(∓0.0834) 就是原本的一格 8%。
+const WHEEL_K = Math.log(1 / 0.92) / 100;
+// 觸控板捏合，每像素 1%，跟 Google Maps 同一個量級
+const WHEEL_K_PINCH = 0.01;
+// 單一事件最多算這麼多像素。有些滑鼠一格就送 300 以上，不擋的話一格跳三級。
+// 滾輪維持原本「一個事件最多一格」，捏合的單一事件本來就小，50 是防呆。
+const WHEEL_PX_MAX = 100, PINCH_PX_MAX = 50;
 const tmp = new THREE.Vector3();
 const pointMats = []; // relay 點的材質，載入時淡入
 const relayMeshes = []; // 依角色分開的中繼點，切到單一角色時只留那一組
@@ -744,7 +923,13 @@ const COAST_LIFT = lift('continents');  // 海岸線
 const liftAt = (h, k) => 1 + (h - 1) * k;
 
 const DOT_EXP = 0.85;   // 1 是完全補償螢幕大小。留點餘裕，放大時仍稍微變大，手感自然些
-const DOT_STEP = 0.02;  // 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣
+// 縮放是連續的，變化小於這個比例就不重算 9,889 個矩陣。
+//
+// 要比的是比例，不是差值。原本寫成 |k − 上次| < 0.02，k 在遠看時是 1 附近，0.02 就是
+// 2%，但貼近時 k 只剩 0.02 到 0.04，同一個 0.02 變成五成到一倍：zoom 從 0.05 放到
+// 0.02 只重算兩次、一次跳 52%，從 0.02 放到 0.008 整段一次都不重算，點比該有的大
+// 118%，停下來的那一刻才猛然縮回去。
+const DOT_STEP = 0.02;
 let lastDotK = 1;
 
 // 遠看時只畫一部分的點。
@@ -1214,7 +1399,11 @@ async function initRenderer() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color(COL.bg);
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
-  camera.position.set(0, 0, targetDist());
+  zoomCam = view.zoom;
+  camFor(zoomCam, camNow);
+  camera.fov = camNow.fov;
+  camera.updateProjectionMatrix();
+  camera.position.set(0, 0, camNow.dist);
   scene.add(new THREE.HemisphereLight(0x2a466e, 0x05070d, 0.5)); // 夜側留一點底光，國界與陸地仍讀得到
   globe = new THREE.Group();
   scene.add(globe);
@@ -2820,7 +3009,7 @@ function buildLanding() {
 function rescaleLanding(k) {
   const list = LANDING && LANDING.points;
   if (!landingMesh || !list) return;
-  if (Math.abs(k - lastLandingK) < DOT_STEP) return;
+  if (Math.abs(k / lastLandingK - 1) < DOT_STEP) return;
   lastLandingK = k;
   const m = new THREE.Matrix4();
   const v = new THREE.Vector3();
@@ -2957,7 +3146,7 @@ function buildPower() {
 function rescalePower(k) {
   const list = powerPoints();
   if (!powerMesh || !list.length) return;
-  if (Math.abs(k - lastPowerK) < DOT_STEP) return;
+  if (Math.abs(k / lastPowerK - 1) < DOT_STEP) return;
   lastPowerK = k;
   const m = new THREE.Matrix4();
   const v = new THREE.Vector3();
@@ -3093,7 +3282,7 @@ function buildGrid() {
 function rescalePlants(k) {
   const list = gridPlants();
   if (!plantMesh || !list.length) return;
-  if (Math.abs(k - lastPlantK) < DOT_STEP) return;
+  if (Math.abs(k / lastPlantK - 1) < DOT_STEP) return;
   lastPlantK = k;
   const m = new THREE.Matrix4();
   const v = new THREE.Vector3();
@@ -3198,7 +3387,7 @@ function buildRenew() {
 function rescaleRenew(k) {
   const list = renewSites();
   if (!renewMesh || !list.length) return;
-  if (Math.abs(k - lastRenewK) < DOT_STEP) return;
+  if (Math.abs(k / lastRenewK - 1) < DOT_STEP) return;
   lastRenewK = k;
   const m = new THREE.Matrix4();
   const v = new THREE.Vector3();
@@ -3473,7 +3662,7 @@ function buildRelays(snap, counts) {
 
 // 依鏡頭距離重算每顆點的大小。位置照原樣寫回去，只有 scale 跟著係數變。
 function rescaleDots(k) {
-  if (!dotGroups.length || Math.abs(k - lastDotK) < DOT_STEP) return;
+  if (!dotGroups.length || Math.abs(k / lastDotK - 1) < DOT_STEP) return;
   lastDotK = k;
   const m4 = new THREE.Matrix4();
   for (const g of dotGroups) {
@@ -4576,7 +4765,7 @@ async function fetchLive(btn) {
 
 // ---- 控制：拖曳旋轉、滾輪縮放、閒置自轉 ----
 const pointers = new Map();
-const spin = { rx: 0, ry: 0 }; // 放開拖曳後的滑行速度
+const spin = { rx: 0, ry: 0, v0: 0 }; // 放開拖曳後的滑行速度，弧度每秒
 let last = null, pinchStart = 0, zoomStart = 1;
 const dragA = new THREE.Vector3(), dragB = new THREE.Vector3();
 let dragFrom = null;   // 這一次按下的起點，判斷拖得夠不夠遠用
@@ -4603,7 +4792,18 @@ function bindControls(dom) {
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stopSpin(); spin.rx = spin.ry = 0; last = { x: e.clientX, y: e.clientY };
     dragFrom = { x: e.clientX, y: e.clientY };
-    if (pointers.size === 2) { const p = [...pointers.values()]; pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
+    fly = null;            // 抓住地表就是使用者接手，飛到一半也要停
+    flingLog.length = 0;
+    if (pointers.size === 2) {
+      const p = [...pointers.values()];
+      pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom;
+      // 捏合抓的是兩指中點底下那一點。中點一移動地球就跟著平移，
+      // 張開收合就繞著那一點縮放，跟地圖 App 一樣是同一個手勢。
+      setAnchor((p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2, 'pinch');
+      zoomTau = ZOOM_TAU_FAST;
+    } else if (pointers.size === 1) {
+      setAnchor(e.clientX, e.clientY, 'drag');
+    }
   });
   addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -4612,32 +4812,28 @@ function bindControls(dom) {
       const p = [...pointers.values()];
       const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
       if (pinchStart > 0) { view.zoom = clamp(zoomStart * pinchStart / d, ZOOM_MIN, ZOOM_MAX); clearFocus(); }
+      if (anchor && anchor.kind === 'pinch') {
+        anchor.sx = (p[0].x + p[1].x) / 2; anchor.sy = (p[0].y + p[1].y) / 2;
+        holdAnchor();
+      }
       return;
     }
     if (!last) return;
-    // 先試著讓地表跟著手指走：兩個螢幕位置各自投影回球面，取它們的經緯度差當成
-    // 這一步要轉的角度。這樣拖到哪裡地表就到哪裡，不論在畫面中央還是靠近輪廓。
+    // 讓一開始抓住的那一點留在游標底下，解法見 solveGrab。
     //
-    // 拖出球外就沒有交點可以算，那時退回固定比例的近似，至少還推得動。
-    let dry, drx;
-    const a = DRAG_GRAB ? sphereAt(last.x, last.y, dragA) : null;
-    const b = a ? sphereAt(e.clientX, e.clientY, dragB) : null;
-    if (a && b) {
-      // 經度差要繞回 [-180, 180]，跨過換日線那一下才不會整顆球彈一圈
-      let dlon = Math.atan2(b.x, b.z) - Math.atan2(a.x, a.z);
-      while (dlon > Math.PI) dlon -= Math.PI * 2;
-      while (dlon < -Math.PI) dlon += Math.PI * 2;
-      // 緯度差的符號跟 rotation.x 相反：手指往下拉，看到的是更北邊
-      const dlat = Math.asin(clamp(b.y, -1, 1)) - Math.asin(clamp(a.y, -1, 1));
-      dry = dlon;
-      drx = -dlat;
-    } else {
-      const k = dragRate();
-      dry = (e.clientX - last.x) * k;
-      drx = (e.clientY - last.y) * k;
+    // 抓不到（按下時在球外、拖出球外、或那一點太靠近南北極解不出來）就退回固定比例的
+    // 近似，至少還推得動。退回之後在新位置重新抓一次，回到球面上就恢復精確。
+    let held = false;
+    if (DRAG_GRAB && anchor && anchor.kind === 'drag') {
+      anchor.sx = e.clientX; anchor.sy = e.clientY;
+      held = holdAnchor();
     }
-    view.ry += dry;
-    view.rx = clamp(view.rx + drx, -1.2, 1.2);
+    if (!held) {
+      const k = dragRate();
+      view.ry += (e.clientX - last.x) * k;
+      view.rx = clamp(view.rx + (e.clientY - last.y) * k, -RX_MAX, RX_MAX);
+      if (DRAG_GRAB) setAnchor(e.clientX, e.clientY, 'drag');
+    }
     // 視角真的動了才清網址上的關注區域，而且要動得夠多。掛在 pointerdown 的話，
     // 點一下開變電所卡片也會清掉，可是那時畫面根本沒動，網址反而變得比原本更不準。
     //
@@ -4655,7 +4851,7 @@ function bindControls(dom) {
         if (!dom.hasPointerCapture(e.pointerId)) dom.setPointerCapture(e.pointerId);
       } catch { /* 捕捉不到就算了，事件照樣冒泡 */ }
     }
-    spin.ry = dry; spin.rx = drx; // 記住最後一下的角速度，放開後滑行一段
+    logFling(evTime(e)); // 放開時用最近一段的角度變化算滑行速度
     last = { x: e.clientX, y: e.clientY };
   });
   // 放開手指時要把拖曳的基準點重新對齊到還按著的那一根。
@@ -4673,16 +4869,27 @@ function bindControls(dom) {
     if (!pointers.has(e.pointerId)) return;
     pointers.delete(e.pointerId);
     const n = pointers.size;
-    if (n === 0) { last = null; pauseSpin(); return; }
+    if (n === 0) {
+      const wasDrag = anchor ? anchor.kind === 'drag' : !!last;
+      last = null; anchor = null; pauseSpin();
+      if (wasDrag && !REDUCED) startFling(evTime(e)); else { spin.rx = spin.ry = 0; flingLog.length = 0; }
+      zoomTau = ZOOM_TAU;
+      return;
+    }
     const p = [...pointers.values()];
     if (n === 1) {
       pinchStart = 0;
       last = { x: p[0].x, y: p[0].y }; // 對齊到剩下的那一根，位移從這裡重新起算
       spin.rx = spin.ry = 0;           // 捏合不該留下滑行速度
+      flingLog.length = 0;
+      setAnchor(p[0].x, p[0].y, 'drag'); // 改抓剩下那一根底下的地表
       return;
     }
     // 三指收到剩兩指，捏合的基準距離也要重取，否則縮放會跟著跳
-    if (n === 2) { pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom; }
+    if (n === 2) {
+      pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); zoomStart = view.zoom;
+      setAnchor((p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2, 'pinch');
+    }
   };
   addEventListener('pointerup', up); addEventListener('pointercancel', up);
   // Safari 的捏合走的是 WebKit 專屬的 gesture 事件，touch-action 擋不到它，
@@ -4747,10 +4954,23 @@ function bindControls(dom) {
   addEventListener('wheel', (e) => {
     if (onUI(e)) return;   // 面板要留給它自己捲動
     e.preventDefault();
-    // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝
-    const unit = e.deltaMode === 1 ? 16 : 100; // DOM_DELTA_LINE 換算成大約的像素量
-    const step = Math.sign(e.deltaY) * Math.min(1, Math.abs(e.deltaY) / unit) * 0.08;
-    let next = clamp(view.zoom * (1 + step), ZOOM_MIN, ZOOM_MAX);
+    // 依 deltaY 的量值縮放。只看正負號的話，觸控板的連續小事件每次都吃滿一格，會暴衝。
+    //
+    // 用指數而不是 1 + step。原本一格放大乘 0.92、縮小乘 1.08，兩者不互為倒數，
+    // 放大十格再縮小十格停在 0.938，回不到原本的位置。e^(±k) 放大縮小剛好抵銷。
+    //
+    // Mac 觸控板的雙指捏合送的是帶 ctrlKey 的 wheel，每個事件 deltaY 只有 2 到 10。
+    // 跟滑鼠共用同一個係數的話，一次捏合只縮 0.2% 到 0.8%，比地圖 App 慢十二倍，
+    // 捏了半天才動一點。這一種另外給一個係數，跟 Google Maps 的量級相同。
+    const px = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+    const pinch = e.ctrlKey;
+    const k = pinch ? WHEEL_K_PINCH : WHEEL_K;
+    const cap = pinch ? PINCH_PX_MAX : WHEEL_PX_MAX;
+    const step = clamp(px, -cap, cap) * k;
+    // 觸控板的事件本身就是連續的，再用滾輪那條 130 毫秒的動畫去追，畫面會像被橡皮筋
+    // 拖著走。滑鼠一格一格跳才需要那條動畫。量值小於 40 像素的當成觸控板。
+    zoomTau = pinch || Math.abs(px) < 40 ? ZOOM_TAU_FAST : ZOOM_TAU;
+    let next = clamp(view.zoom * Math.exp(step), ZOOM_MIN, ZOOM_MAX);
     // 一格滾輪最多讓畫面涵蓋的地表變動這麼多。
     //
     // zoom 是相對於 fitDist 的倍率，而涵蓋度跟它高度非線性：球快填滿畫面的那一段，
@@ -4760,9 +4980,9 @@ function bindControls(dom) {
     //
     // 所以改成先算這一格會讓涵蓋度變多少，超過上限就回頭解出剛好走到上限的 zoom。
     // 飽和區（180 度）沒有比例可言，那一段維持原本的 zoom 步進。
-    const before = coverDeg(targetDist());
+    const before = coverOfZoom(view.zoom);
     if (before < 179 && step !== 0) {
-      const after = coverDeg(R + (fitDist() - R) * next);
+      const after = coverOfZoom(next);
       const limit = before * (step < 0 ? 1 - COVER_STEP_MAX : 1 + COVER_STEP_MAX);
       if ((step < 0 && after < limit) || (step > 0 && after > limit)) {
         next = zoomForCover(Math.min(limit, 179));
@@ -4772,6 +4992,12 @@ function bindControls(dom) {
     fly = null;
     clearFocus();
     pauseSpin(); // 滾輪也要打斷自轉，否則對準的國家會一直跑掉
+    spin.rx = spin.ry = 0;
+    // 以游標為中心縮放。抓住游標底下那一點，縮放動畫的每一幀都把它留在原位，
+    // 解法跟拖曳同一支。游標在球外就沒有東西可抓，照舊朝畫面中央縮。
+    //
+    // 拖曳或捏合進行中不換錨點，那時抓著的是手指底下那一點。
+    if (!pointers.size) setAnchor(e.clientX, e.clientY, 'wheel');
   }, { passive: false });
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
@@ -4802,32 +5028,50 @@ let prevNow = performance.now();
 async function animate() {
   const now = performance.now();
   const dt = Math.min(0.05, (now - prevNow) / 1000); prevNow = now;
-  // 飛行定位。三個量一起用同一個係數趨近，到位就把 fly 清掉交還給使用者。
-  // 0.09 比相機距離的 0.12 慢一點，轉動與縮放同時發生時看起來比較穩。
+  // 飛行定位。三個量一起用同一個時間常數趨近，到位就把 fly 清掉交還給使用者。
+  // FLY_TAU 比相機距離的 ZOOM_TAU 慢一點，轉動與縮放同時發生時看起來比較穩。
   // REDUCED 下直接跳過去，那個模式的使用者不想看到大幅度的動畫。
+  //
+  // zoom 在對數上趨近。zoom 正比於離地高度，從整顆地球飛到台灣是兩百倍的落差，
+  // 線性趨近會把前半段一口氣衝完、後半段在最後幾公里慢慢磨。對數上每一幀縮放的
+  // 倍率固定，看起來是等速往下降，跟地圖 App 的飛行一樣。
   if (fly) {
     if (REDUCED) {
       view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
     } else {
-      view.ry += (fly.ry - view.ry) * 0.09;
-      view.rx += (fly.rx - view.rx) * 0.09;
-      view.zoom += (fly.zoom - view.zoom) * 0.09;
+      const a = ease(dt, FLY_TAU);
+      view.ry += (fly.ry - view.ry) * a;
+      view.rx += (fly.rx - view.rx) * a;
+      view.zoom *= Math.pow(fly.zoom / view.zoom, a);
       if (Math.abs(fly.ry - view.ry) < 1e-3 && Math.abs(fly.rx - view.rx) < 1e-3
-          && Math.abs(fly.zoom - view.zoom) < 1e-4) {
+          && Math.abs(Math.log(fly.zoom / view.zoom)) < 1e-3) {
         view.ry = fly.ry; view.rx = fly.rx; view.zoom = fly.zoom; fly = null;
       }
     }
   }
   if (view.spin && !REDUCED) view.ry += dt * 0.06;
-  else if (!REDUCED && pointers.size === 0 && (Math.abs(spin.ry) > 2e-4 || Math.abs(spin.rx) > 2e-4)) {
-    view.ry += spin.ry;
-    view.rx = clamp(view.rx + spin.rx, -1.2, 1.2);
-    spin.ry *= 0.92; spin.rx *= 0.92; // 放開後滑行一小段再停
+  else if (!REDUCED && pointers.size === 0 && (spin.ry || spin.rx)) {
+    // 放開後的滑行。速度是弧度每秒，以 FLING_TAU 衰減，理由見 startFling。
+    view.ry += spin.ry * dt;
+    view.rx = clamp(view.rx + spin.rx * dt, -RX_MAX, RX_MAX);
+    const k = Math.exp(-dt / FLING_TAU);
+    spin.ry *= k; spin.rx *= k;
+    if (Math.hypot(spin.rx, spin.ry) < (spin.v0 || 0) * 0.01) spin.rx = spin.ry = 0;
   }
-  globe.rotation.y = view.ry;
-  globe.rotation.x = view.rx;
   updateSun(); // 直射點每小時移 15 度，每幀重算的成本是幾個三角函數，不值得另外做節流
-  camera.position.z += (targetDist() - camera.position.z) * 0.12;
+  // 相機在對數上趨近目標 zoom，再由走到的 zoom 同時推出鏡頭與距離。
+  //
+  // 對數：原本是距離的線性趨近，放大與縮小不對稱，快速滾十格時縮小的第一幀畫面先
+  // 猛彈一下。對 zoom 取對數再趨近，兩個方向每一幀的倍率一樣。
+  //
+  // 鏡頭與距離一起推：原本鏡頭依目標瞬間換、距離慢慢追，兩者不同步就是 62 度以內
+  // 每滾一格都「拉近再退回」的原因，見 camFor 上方的說明。
+  {
+    zoomCam *= Math.pow(view.zoom / zoomCam, ease(dt, zoomTau));
+    camFor(zoomCam, camNow);
+    camera.position.z = camNow.dist;
+    if (camera.fov !== camNow.fov) { camera.fov = camNow.fov; camera.updateProjectionMatrix(); }
+  }
   // 近裁面要跟著高度縮。原本寫死 0.1，而 ZOOM_MIN 對到的相機離地表只有 0.042，
   // 整顆地球會被切在裁面外面直接消失。取離地高度的十分之一，留一個下限避免
   // near 太小把深度精度吃光。
@@ -4838,7 +5082,23 @@ async function animate() {
   }
   camera.lookAt(0, 0, 0);
   deepU.value = deepT(); // 太空視角與地圖視角的過渡，幾個圖層都吃這一個值
-  updateFov();           // 貼近地表時換成望遠鏡頭，畫面才會平
+  // 相機這一幀的位置與鏡頭都定了，才把抓住的那一點轉回游標底下。
+  // 縮放動畫還在跑的時候，每一幀的距離都不一樣，錨點要每一幀重解，不能只在事件裡解。
+  if (anchor) {
+    // 上面的 camera.lookAt 已經順手更新過矩陣，這一行是保險：哪天鏡頭改成不必
+    // lookAt，sphereAt 讀到的就會是上一幀的相機，錨點每一幀慢一拍。
+    camera.updateMatrixWorld();
+    const ok = holdAnchor();
+    if (anchor.kind === 'wheel') {
+      // 門檻要夠緊。1e-3 時放開得太早，剩下那 0.1% 的距離沒有錨點，游標離中心
+      // 三百多像素的話那一點最後還會滑 0.3 像素，看得出來。
+      const settled = Math.abs(Math.log(zoomCam / view.zoom)) < 1e-4;
+      // 縮小到游標已經在球外，或動畫停了，這次滾輪就結束
+      if (!ok || settled) anchor = null;
+    }
+  }
+  globe.rotation.y = view.ry;
+  globe.rotation.x = view.rx;
   updateDbg(dt);         // ?debug 時右上角的縮放讀數
   // 台灣的粗輪廓與縣市界是一次交接，共用 twSwapT()，不吃 deepU。
   // LineBasicMaterial 不吃 node，這三層的透明度直接寫 opacity。
@@ -5082,6 +5342,23 @@ async function main() {
       // 即時更新那條路。外網連不上的機器測不到按鈕，餵一份假快照進來一樣走得完
       apply: applySnapshot,
       snap: () => JSON.parse(JSON.stringify(SNAP)),
+      // 手感的端對端檢查用。grab 取螢幕位置底下那一點地表（地球本身的座標），
+      // where 把那一點照現在的相機投影回螢幕。拖曳、滾輪、捏合之後兩者對得上，
+      // 就是抓住的那一點留在手指底下。
+      grab: (sx, sy) => {
+        camera.updateMatrixWorld();
+        const w = sphereAt(sx, sy, new THREE.Vector3());
+        if (!w) return null;
+        const q = toGlobeLocal(w, new THREE.Vector3());
+        return { x: q.x, y: q.y, z: q.z };
+      },
+      where: (q) => {
+        globe.updateMatrixWorld(); camera.updateMatrixWorld();
+        const v = new THREE.Vector3(q.x * R, q.y * R, q.z * R).applyMatrix4(globe.matrixWorld).project(camera);
+        return { x: (v.x + 1) / 2 * innerWidth, y: (1 - v.y) / 2 * innerHeight };
+      },
+      view: () => ({ zoom: view.zoom, rx: view.rx, ry: view.ry, fov: camera.fov, spin: [spin.rx, spin.ry],
+        alt: camera.position.z - R, altT: targetDist() - R, cover: coverDeg(), coverT: coverOfZoom(view.zoom) }),
     };
   }
   renderer.setAnimationLoop(animate);
