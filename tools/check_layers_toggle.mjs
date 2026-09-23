@@ -458,7 +458,11 @@ await sleep(300);
   check(a.jp > 0.5, `貼近日本，都道府縣的界線抓回來並淡入（透明度 ${a.jp}）`);
   // 涵蓋 14 度的日本畫面裡看得到的只有日本與韓國。東南亞任何一國出現在這裡，就是
   // 「在不在畫面上」那條判斷放太寬，一飛就把半個亞洲的檔案都抓下來
-  const extra = Object.keys(a).filter((k) => !['jp', 'kr'].includes(k));
+  //
+  // 台灣不算多抓。台灣那一筆指向縣市界那一層，刻意不看行政區大小、在交棒開始前就
+  // 載好，所以從中國上空飛向日本的途中，涵蓋度降到 40 度以下那一刻台灣若在畫面中央
+  // 就會被抓。這件事跟幀率有關，本機常常沒抓到而 CI 會抓到，寫死排除才不會時紅時綠。
+  const extra = Object.keys(a).filter((k) => !['jp', 'kr', 'tw'].includes(k));
   check(extra.length === 0, `貼近日本時只抓了畫面上看得到的國家（${Object.keys(a).join('、')}${extra.length ? `，多抓了 ${extra.join('、')}` : ''}）`);
   check((await ev(`window.__atlas.layerObjs('admin1')`)) > 0, '抓回來的界線記在 admin1 這一層名下');
   await ev(`window.__atlas.off('admin1')`);
