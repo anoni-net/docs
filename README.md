@@ -187,7 +187,7 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 - **GitHub Repo**: [https://github.com/anoni-net/docs](https://github.com/anoni-net/docs)
 - **Tor Onion**: `docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion`
 - **IPFS 閘道**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/)（社群自架，pin 的做法見[鏡像文件](https://anoni.net/docs/community/pin-ipfs-mirror/)）
-- **詳細開發指南**: 請參閱 [CLAUDE.md](./CLAUDE.md)
+- **詳細開發指南**: 請參閱 [AGENTS.md](./AGENTS.md)
 
 ## 🤝 貢獻
 
@@ -414,7 +414,7 @@ Pushing `docs` does not always trigger a build. The trigger paths are limited to
 - **GitHub Repo**: [https://github.com/anoni-net/docs](https://github.com/anoni-net/docs)
 - **Tor Onion**: `docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion`
 - **IPFS Gateway**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/) (community-run; see the [mirror guide](https://anoni.net/docs/en/community/pin-ipfs-mirror/) for pinning)
-- **Detailed Development Guide**: See [CLAUDE.md](./CLAUDE.md)
+- **Detailed Development Guide**: See [AGENTS.md](./AGENTS.md)
 
 ## 🤝 Contributing
 

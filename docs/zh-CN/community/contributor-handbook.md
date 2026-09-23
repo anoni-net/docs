@@ -25,7 +25,7 @@ icon: material/book-open-variant
 
 ### 适用范围
 
-规范适用于 `docs/` 底下三个语系的文件内容，也适用于 repo 自己的说明文件：根目录的 `README.md`、`CONTRIBUTING.md`、`CLAUDE.md`、`NOTICE`，以及各子目录的 `README.md`。读者会从那些文件认识项目，写法跟站上的文件同一套。
+规范适用于 `docs/` 底下三个语系的文件内容，也适用于 repo 自己的说明文件：根目录的 `README.md`、`CONTRIBUTING.md`、`AGENTS.md`、`CLAUDE.md`、`NOTICE`，以及各子目录的 `README.md`。读者会从那些文件认识项目，写法跟站上的文件同一套。
 
 CI 的 `docs-style-lint` 只在 `docs/zh-TW`、`docs/zh-CN`、`docs/en` 的 Markdown 变更时触发。说明文件改完需要自己执行一次：
 
