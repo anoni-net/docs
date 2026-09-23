@@ -1,0 +1,7 @@
+# 讓其他 repo 用 pre-commit 呼叫本 repo 的寫作風格檢查，用法見 tools/README.md 的「在其他 repo 使用」。
+- id: docs-style-lint
+  name: anoni.net 寫作風格檢查
+  description: 貢獻者百科「寫作風格規範」可機器判斷的部分（tools/docs_style_lint.py）
+  entry: tools/docs_style_lint.py
+  language: script
+  types: [markdown]
