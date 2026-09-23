@@ -88,7 +88,8 @@ const GLOBE = '/games/tor-network/play/index.html';
 // 地球儀的資料層預設只開地理底圖與中繼，其餘要讀者自己勾。截圖要看到哪幾層就
 // 用網址帶進去，不然台灣那兩張只有一顆光禿禿的球。層的 id 見
 // docs/zh-TW/games/tor-network/play/layers.js。
-const LAYERS_TW = 'continents,bathymetry,relays,tw-admin,tw-landing,tw-power,tw-grid,tw-energy';
+// 縣市界是自動層，網址指定不了，開著各國行政區（admin1）貼近台灣時自己出現
+const LAYERS_TW = 'continents,admin1,bathymetry,relays,tw-landing,tw-power,tw-grid,tw-energy';
 const GLOBE_TW = `${GLOBE}?layers=${LAYERS_TW}#tw`;
 // 全球那幾張要把全球組開起來。預設只有地理底圖與中繼，而這幾張圖的工作是讓人看出
 // 這件作品能做什麼，少了連線受阻那層紅色漸層，畫面上最有話講的那一塊就不見了。

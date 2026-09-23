@@ -20,6 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LAYERS } from '../docs/zh-TW/games/tor-network/play/layers.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PLAY = path.join(ROOT, 'docs/zh-TW/games/tor-network/play');
@@ -58,6 +59,20 @@ const inside = (x, y, ring) => {
 };
 
 for (const c of index.countries) {
+  // 指向另一層的那幾筆（台灣的縣市界）。那一份畫的是整圈外框，因為它同時是台灣的
+  // 海岸線，所以不套下面「只有內部界線」的檢查，只驗接線：那一層存在、是自動層、
+  // 資料檔在預快取裡，範圍沒有大到蓋住南海
+  if (c.layer) {
+    const l = LAYERS.find((x) => x.id === c.layer);
+    check(!!l, `${c.cc}：索引指到 ${c.layer} 這一層，清單上有它`);
+    if (!l) continue;
+    check(l.auto === true, `${c.cc}：${c.layer} 是自動層，圖層清單上不給按鈕`);
+    check(fs.existsSync(path.join(PLAY, l.file)) && SW.includes(`"games/tor-network/play/${l.file}"`),
+          `${c.cc}：${l.file} 在，也在 sw.js 的預快取清單裡`);
+    const [x0, y0, x1, y1] = c.bbox;
+    check(x1 - x0 < 8 && y1 - y0 < 8, `${c.cc}：範圍 ${(x1 - x0).toFixed(1)}° × ${(y1 - y0).toFixed(1)}°，沒有把南海的島礁算進去`);
+    continue;
+  }
   const file = path.join(PLAY, c.file);
   if (!fs.existsSync(file)) { fail.push(`${c.cc}：索引指到 ${c.file}，檔案不存在`); continue; }
   check(SW.includes(`"games/tor-network/play/${c.file}"`), `${c.cc}：${c.file} 在 sw.js 的預快取清單裡`);

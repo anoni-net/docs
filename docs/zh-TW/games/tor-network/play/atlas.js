@@ -656,8 +656,15 @@ function flyTo(lat, lon, spanLat, spanLon) {
 //
 // 兩層共用這一條，一個往下淡出一個往上淡入，交接才會是一次乾淨的替換。用同一條
 // deepU 的話會出現兩個台灣同時半透明疊著的那一段。
+//
+// 終點原本是 9.7 度。縣市界改成貼近自動出現之後，實測從遠處一格一格滾進來，要滾
+// 十六格才完全出現，日本的都道府縣在 16 度左右就已經完整，台灣反而晚很多。縣市界
+// 在 39.8 度就開始下載，慢速網路（延遲 180 ms、5 Mbps）下 610 毫秒抓完，趕在交棒
+// 開始之前，所以慢的不是下載，是交棒本身拉太長。收到 18 度，跟日本差不多的尺度就
+// 完整出現。變電所、電網、電廠與再生能源那四層也吃這一條，跟著提早，它們是同一組
+// 台灣的細節。
 const SWAP_HI = 36;    // 短邊涵蓋大於這麼多度，只畫粗輪廓
-const SWAP_LO = 9.7;   // 小於這麼多度，只畫縣市界
+const SWAP_LO = 18;    // 小於這麼多度，只畫縣市界
 function twSwapT() {
   return clamp((SWAP_HI - coverDeg()) / (SWAP_HI - SWAP_LO), 0, 1);
 }
@@ -1106,7 +1113,12 @@ const REGISTRY = {
   admin1: {
     // 這一層載入的只是索引，各國的界線由 updateAdmin1 等鏡頭貼近那一國才去抓
     build: (d) => { ADMIN1 = { index: (d && d.countries) || [], got: new Map(), pending: new Set() }; },
-    drop: () => { ADMIN1 = null; },
+    drop: () => {
+      // 貼近時由這一層打開的圖層（台灣的縣市界）跟著收，讀者關掉「各國行政區」就是全部都不要
+      const opened = ADMIN1 ? [...ADMIN1.got.values()].filter((g) => g.layer).map((g) => g.layer) : [];
+      ADMIN1 = null;
+      for (const id of opened) layerOff(id);
+    },
   },
   'tw-admin': {
     build: (d) => { TWADMIN = d; buildTwAdmin(d); },
@@ -1304,6 +1316,9 @@ function wantOn(id) {
   const l = LAYER[id];
   if (!l) return false;
   if (l.core) return true;          // 沒有國界就沒有地球可看
+  // auto 的層由自己的機制打開。舊網址的 ?layers= 裡帶著 tw-admin 也不理它，
+  // 貼近台灣時自然會出現
+  if (l.auto) return false;
   return WANT ? WANT.has(id) : !!l.on;
 }
 
@@ -1316,7 +1331,7 @@ function buildLayerUI() {
   const box = $('layer-list');
   if (!box) return;
   box.innerHTML = LY_GROUPS.map(([g, key]) => {
-    const items = LAYERS.filter((l) => l.group === g);
+    const items = LAYERS.filter((l) => l.group === g && !l.auto); // auto 的層不給按鈕
     if (!items.length) return '';
     const chips = items.map((l) => {
       const fixed = !layerCanToggle(l.id);
@@ -1344,7 +1359,7 @@ function syncLayerUI() {
  * core 的層不寫，它本來就一直開著，寫進去只是讓網址變長。
  */
 function syncLayerUrl() {
-  const on = LAYERS.filter((l) => !l.core && layerCanToggle(l.id) && layerIsOn(l.id)).map((l) => l.id);
+  const on = LAYERS.filter((l) => !l.core && !l.auto && layerCanToggle(l.id) && layerIsOn(l.id)).map((l) => l.id);
   const u = new URL(location.href);
   u.searchParams.set('layers', on.join(','));
   history.replaceState(null, '', u.pathname + u.search + u.hash);
@@ -2124,6 +2139,17 @@ function updateAdmin1() {
   const mLon = cover / 4 * Math.max(1, aspect) / Math.max(0.2, Math.cos(lat * Math.PI / 180));
   const coverFade = clamp((ADMIN1_COVER_HI - cover) / (ADMIN1_COVER_HI - ADMIN1_COVER_LO), 0, 1);
   for (const c of ADMIN1.index) {
+    // 指向另一層的那幾筆（台灣的縣市界）。淡入淡出由那一層自己的交接處理，這裡只管
+    // 什麼時候打開。不看典型行政區多大：台灣的交接從涵蓋 36 度開始，照大小的條件要到
+    // 24 度才會去抓，那時粗輪廓已經淡掉一半，縣市界一出現就是跳一下。
+    if (c.layer) {
+      if (ADMIN1.got.has(c.cc) || coverFade <= 0) continue;
+      const [x0, y0, x1, y1] = c.bbox;
+      if (lat < y0 - mLat || lat > y1 + mLat || lon < x0 - mLon || lon > x1 + mLon) continue;
+      ADMIN1.got.set(c.cc, { mat: null, layer: c.layer });
+      layerOn(c.layer);
+      continue;
+    }
     const size = c.r / cover * px;
     const got = ADMIN1.got.get(c.cc);
     if (got) {
@@ -5204,7 +5230,7 @@ async function animate() {
   // 粗輪廓只有在縣市界真的在的時候才交棒淡出。
   //
   // 縣市界從 #568 起是讀者自己開的層，預設關著。交接原本只看涵蓋度，於是預設狀態下
-  // 貼近台灣，粗輪廓照樣在 36 度到 9.7 度之間淡掉，沒有東西接手，整個台灣的海岸線
+  // 貼近台灣，粗輪廓照樣在交棒區間裡淡掉，沒有東西接手，整個台灣的海岸線
   // 與國界一起不見。twAdminMat 在那一層關掉時會歸零（見 REGISTRY），拿它判斷就好。
   const swapTw = twAdminMat ? swap : 0;
   if (twAdminMat) twAdminMat.opacity = swap * 0.85;
