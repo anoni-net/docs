@@ -86,8 +86,16 @@ The English site is written for international peers, researchers, journalists, a
 - Write like a community member who knows the subject explaining it, not like an encyclopedia entry.
 - Do not end every paragraph with a summarizing sentence. Let paragraphs stop when they are finished.
 - Avoid openers like "It is worth noting that", "In conclusion", and "All in all".
-- Avoid the over-symmetrical three-part structure that reads as machine-generated.
+- Avoid the over-symmetrical three-part structure that reads as machine-generated. Two-part parallel pairs count too: "For people outside... For people inside..." has the shape of an argument without the content. Write the actual scale, numbers, or who is affected.
+- If a point reads clearly as a full sentence, do not break it into a bullet list.
 - Define a concept by stating it completely. Constructions like "what this is about is" or "this refers to" push the definition out of focus without adding anything.
+
+### Narrative structure
+
+- Keep dates, version numbers, PR numbers, and URLs out of the opening paragraph. Open with why the matter is important, and put the facts in the sections they belong to.
+- Carry one argument through the piece and tie each section back to it, so the article does not read as a chronological event log.
+- A timeline can list dates, but frame it: say why the work was worth doing before the list, and who benefits after it.
+- In a call to action, say near the top who is invited, what they would do, and what to do instead if they cannot. Use an admonition (`!!! tip`) when it needs to stand out.
 
 ### No animacy for things that are not people
 
@@ -109,6 +117,7 @@ The edits that come up most in review:
 - Delete the throat-clearing opener. `Let us first lay out the basics of CryptPad. It is...` becomes `CryptPad is...`. Start with the content instead of announcing what is coming.
 - Cut filler transitions: "essentially", "in other words", "to put it plainly". Delete rather than replace where possible.
 - Replace an abstract placeholder with the actual content. `The next section explains why that conclusion does not hold` becomes `The usage figures in the next section contradict it`.
+- Use a metaphor once in a while at most. Do not carry a whole piece on one, and do not stack the same metaphor twice in a sentence. `Each new relay in Taiwan puts another entrance on the map` becomes `Each new relay in Taiwan gives people nearby one more unblocked way into Tor`.
 - Drop intensifiers and emotional colour. `battle-tested under real-world pressure` becomes `has a record of production use`. Ordinary terms do not need quotation marks for emphasis.
 - Do not open a paragraph with a bolded complete sentence. Promote parallel items to headings, and write standalone paragraphs as ordinary prose. `**Location.** OONI records the country and ASN...` becomes a `### Location` heading followed by the text. Bold words as sentence elements or list labels are fine (`the **control day** uses the same parameters`, `**Data source**: ...`). The test is whether the bolded text is a complete sentence ending in a period.
 
@@ -131,6 +140,7 @@ Anonymity and privacy are the subject of this site, and the writing has to hold 
 - All lowercase, hyphen-separated (`tor-browser-advanced.md`, `anonymity-vs-privacy.md`)
 - Slugs in English
 - Acronyms stay lowercase (`vasp-2026.md`, not `VASP-2026.md`)
+- Numbers follow a hyphen directly (`roadmap-2026.md`, `updates-202506.md`)
 
 ### Directory structure
 
@@ -192,6 +202,8 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 - Same directory: `./other-file.md`
 - Across directories: `../basics/anonymity-vs-privacy.md`
 - Across depths: `../../blog/posts/2025to2026.md`
+
+External links get `{target="_blank"}` so they open in a new tab: `[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`.
 
 Linking to a page that exists only in Chinese is the one case where you write a full URL, because the language sites build separately and no relative path reaches across them. Use `https://anoni.net/docs/community/privacy-guide/` and mark it `(in Chinese)` so the reader knows what they are clicking. The default language, zh-TW, carries no language segment in its URLs. zh-CN uses lowercase `https://anoni.net/docs/zh-cn/...` and English uses `https://anoni.net/docs/en/...`, while the source directories keep their original casing.
 
