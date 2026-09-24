@@ -1,6 +1,6 @@
 ---
 title: Software Changelog
-description: Concise English summaries of Tor, tor daemon, Tails, OONI, Arti, OnionShare, iOS, and GrapheneOS releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
+description: Concise English summaries of Tor, tor daemon, Tails, OONI, Arti, OnionShare, operating system, browser and messaging app releases translated from upstream changelogs, with Taiwan and China regional context where relevant.
 icon: material/history
 changelog_digest:
   days: 45
@@ -47,19 +47,19 @@ Release-by-release summaries of the anonymity tools our community follows, plus 
 
 ### Needs action
 
-The latest entry from each of the six pages with urgency ratings, listing only Now and Soon. Each page rates urgency on a different basis, noted after the date on every item.
+The latest entry from each page with urgency ratings (one per product where a page covers two), listing only Now and Soon. Each page rates urgency on a different basis, noted after the date on every item.
 
 <!-- changelog-digest:now -->
 
 ### Last 45 days
 
-Every entry from all twelve pages in this period, newest first.
+Every entry from all pages in this period, newest first.
 
 <!-- changelog-digest:recent -->
 
 ## Where to start
 
-Most people need two pages: the [Tor changelog](./tor.md), plus whichever one matches their device (iOS for iPhone, macOS for Mac, Windows for a PC, Android for an Android phone). The rest serve specific needs, such as running your own relay, switching transports when blocked, or doing censorship measurement.
+Most people need three pages: the [Tor changelog](./tor.md), [browser security updates](./browsers.md), plus whichever one matches their device (iOS for iPhone, macOS for Mac, Windows for a PC, Android for an Android phone). The rest serve specific needs, such as running your own relay, switching transports when blocked, or doing censorship measurement.
 
 Pages marked "with urgency ratings" use three-colour tags to answer how fast to act. The basis for those ratings is not identical across pages and is explained at the top of each one. Pages without tags track progress or features, and ask no update decision of you.
 
@@ -78,6 +78,13 @@ Soon ratings and untagged updates can wait for a regular slot, such as a weekly 
 To confirm updates are done, ask members to check their own version numbers rather than report to a central spreadsheet. Where to look is covered in [Which release line is your device on](./ios.md#Which-release-line-is-your-device-on) for iOS, [Three maintenance lines](./macos.md#Three-maintenance-lines) for macOS and [First, check how far behind your device is](./android.md#First-check-how-far-behind-your-device-is) for Android. Flag devices that no longer receive security updates during the inventory and plan to replace them, as no future Now update will cover them.
 
 When briefing managers or partner organisations, cite the upstream announcement each entry links to. The content here is a summary, and upstream numbers take precedence.
+
+## Browsers and messaging apps
+
+The two kinds of software that handle unfamiliar content all day, summarised by month or by advisory and focused on whether anything is being exploited and which version to update to.
+
+- :material-web-check: [Browser security updates](./browsers.md) — Chrome and Firefox, with urgency ratings <!-- changelog-latest:browsers -->
+- :material-message-lock-outline: [Messaging app security updates](./messaging.md) — WhatsApp and Signal, with urgency ratings <!-- changelog-latest:messaging -->
 
 ## Anonymity tools
 

@@ -1651,6 +1651,7 @@
 	#匿名工具
 	#最近-45-天
 	#最近的更新
+	#瀏覽器與通訊軟體
 	#現在要處理的
 	#組織裡負責資安的人
 	#軟體更新日誌
@@ -1686,6 +1687,16 @@
 	#Arti-更新日誌
 	#c-tor-移植到-Rust-的進度
 	#中繼端做到哪裡
+/changelog/browsers/
+	#Chrome-2026-年-7-月
+	#Chrome-2026-年-8-月
+	#Chrome-2026-年-9-月
+	#Firefox-2026-年-7-月
+	#Firefox-2026-年-8-月
+	#Firefox-2026-年-9-月
+	#兩個瀏覽器的發布節奏
+	#急迫程度怎麼判斷
+	#瀏覽器安全更新
 /changelog/feed-android.xml
 /changelog/feed-iphone.xml
 /changelog/feed-linux.xml
@@ -1723,6 +1734,11 @@
 	#macOS-安全更新
 	#三條維護線
 	#急迫程度怎麼判斷
+/changelog/messaging/
+	#2026-年-7-月到-9-月的狀況
+	#WhatsApp-2026-年-5-月
+	#急迫程度怎麼判斷
+	#通訊軟體安全更新
 /changelog/onionshare/
 	#OnionShare-262
 	#OnionShare-263
@@ -3538,6 +3554,7 @@
 	#Tasks
 /en/changelog/
 	#Anonymity-tools
+	#Browsers-and-messaging-apps
 	#Last-45-days
 	#Needs-action
 	#Operating-systems
@@ -3575,6 +3592,16 @@
 	#Arti-Changelog
 	#How-far-the-relay-side-has-got
 	#c-tor-to-Rust-porting-progress
+/en/changelog/browsers/
+	#Browser-Security-Updates
+	#Chrome-August-2026
+	#Chrome-July-2026
+	#Chrome-September-2026
+	#Firefox-August-2026
+	#Firefox-July-2026
+	#Firefox-September-2026
+	#How-often-each-browser-ships
+	#How-we-rate-urgency
 /en/changelog/feed-android.xml
 /en/changelog/feed-iphone.xml
 /en/changelog/feed-linux.xml
@@ -3612,6 +3639,11 @@
 	#macOS-Tahoe-266-Sequoia-1578-Sonoma-1488
 	#macOS-Tahoe-2661-Sequoia-1579-Sonoma-1489
 	#macOS-Tahoe-2662
+/en/changelog/messaging/
+	#How-we-rate-urgency
+	#July-to-September-2026
+	#Messaging-App-Security-Updates
+	#WhatsApp-May-2026
 /en/changelog/onionshare/
 	#How-we-rate-urgency
 	#OnionShare-262
@@ -8584,6 +8616,7 @@
 	#操作系统
 	#最近-45-天
 	#最近的更新
+	#浏览器与通讯软件
 	#现在要处理的
 	#组织里负责信息安全的人
 	#软件更新日志
@@ -8619,6 +8652,16 @@
 	#Arti-更新日志
 	#c-tor-移植到-Rust-的进度
 	#中继端做到哪里
+/zh-cn/changelog/browsers/
+	#Chrome-2026-年-7-月
+	#Chrome-2026-年-8-月
+	#Chrome-2026-年-9-月
+	#Firefox-2026-年-7-月
+	#Firefox-2026-年-8-月
+	#Firefox-2026-年-9-月
+	#两个浏览器的发布节奏
+	#浏览器安全更新
+	#紧急程度怎么判断
 /zh-cn/changelog/feed-android.xml
 /zh-cn/changelog/feed-iphone.xml
 /zh-cn/changelog/feed-linux.xml
@@ -8656,6 +8699,11 @@
 	#macOS-安全更新
 	#三条维护线
 	#紧急程度怎么判断
+/zh-cn/changelog/messaging/
+	#2026-年-7-月到-9-月的情况
+	#WhatsApp-2026-年-5-月
+	#紧急程度怎么判断
+	#通讯软件安全更新
 /zh-cn/changelog/onionshare/
 	#OnionShare-262
 	#OnionShare-263

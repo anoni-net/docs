@@ -201,6 +201,38 @@ check("feed 自己的網址", root.find("./channel/{http://www.w3.org/2005/Atom}
 check("沒有條目的選項也出一份空的 feed，訂閱不會 404",
       ET.fromstring(feeds["feed-ooni.xml"]).findall("./channel/item"), [])
 
+# --- 一頁收好幾個產品（tracks） ---
+
+browsers = page("browsers", f"""
+## Chrome 2026 年 9 月
+
+> 2026-09-22 · x
+
+- {NOW}已被利用
+
+## Firefox 2026 年 9 月
+
+> 2026-09-15 · x
+
+- {SOON}有安全修補
+
+## Chrome 2026 年 8 月
+
+> 2026-08-25 · x
+
+- {SOON}
+""", name="瀏覽器")
+browsers.tracks = ["Chrome", "Firefox"]
+check("分線的頁面每條線各取最新一則",
+      [e.heading for e in cd.latest_each(browsers)], ["Chrome 2026 年 9 月", "Firefox 2026 年 9 月"])
+check("分線的頁面在「現在要處理的」兩條線都出現",
+      [e.heading for e in cd.pressing([browsers], since)], ["Chrome 2026 年 9 月", "Firefox 2026 年 9 月"])
+check("標題以線名開頭就不加頁面名稱", cd._title(browsers.entries[1], browsers), "Firefox 2026 年 9 月")
+check("清單後面每條線一行",
+      cd.render_latest(browsers, cfg).count('class="cl-latest"'), 2)
+browsers.tracks = []
+check("沒有分線時照舊只取整頁最新一則", [e.heading for e in cd.latest_each(browsers)], ["Chrome 2026 年 9 月"])
+
 
 if failures:
     print(f"{len(failures)} 項失敗：")

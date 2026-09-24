@@ -55,6 +55,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - <span class="urg-tag urg-tag--now">Now</span>1,506 CVEs (248 in Windows itself), 134 rated Critical, one flagged as actively exploited.
 - CVE-2026-68820: privilege escalation in the Ancillary Function Driver for WinSock. It affects desktop Windows 10 1607 and later plus Windows Server 2012 and later, right through to current releases, so do not assume an older machine is out of scope.
 - Privilege escalation flaws are typically chained: something else (a browser, a document) gets code running first, and this takes it to system privileges. On its own it needs local execution, but chained it completes the takeover.
+- On 18 August CISA also added CVE-2026-33824, fixed back in April, to KEV, meaning it has been exploited. It is a double free in the Windows IKE Service Extensions (the system service that handles IPsec key exchange) that lets an unauthenticated attacker execute code remotely over the network, CVSS 9.8, affecting desktop Windows 10 1607 through Windows 11 26H1 and Windows Server 2016 and later. Any machine that has installed a monthly update since April is covered; anything still on March or earlier should update now.
 
 ## July 2026
 
@@ -86,3 +87,4 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - <span class="urg-tag urg-tag--now">Now</span>682 CVEs (139 in Windows itself), 32 rated Critical, two flagged as actively exploited.
 - CVE-2026-32202: a Windows Shell spoofing flaw affecting desktop Windows 10 1607 and later plus Windows Server 2012 and later. Shell is the layer behind File Explorer and shortcut handling, and spoofing flaws there make a malicious file look like something ordinary on screen.
 - The other is a SharePoint Server spoofing flaw, servers only.
+- CVE-2026-33824 (remote code execution in the Windows IKE Service Extensions), fixed the same month, was not flagged as exploited at the time; CISA added it to KEV on 18 August. See the August entry.

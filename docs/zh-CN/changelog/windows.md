@@ -55,6 +55,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - <span class="urg-tag urg-tag--now">立刻</span>1506 个 CVE（Windows 本体 248 个），134 个被评为 Critical，一个标为已被实际利用。
 - CVE-2026-68820：WinSock 的辅助功能驱动程序（Ancillary Function Driver）提权。影响 Windows 10 1607 以后的桌面版与 Windows Server 2012 以后，范围一路涵盖到现行版本，还在用旧机的人不要以为与自己无关。
 - 提权类漏洞的典型用法是接在别的漏洞后面，先从浏览器或文档取得执行机会，再用它取得系统权限。单独看它需要本机执行条件，串起来就是完整的接管。
+- 8 月 18 日 CISA 另外把 4 月修复的 CVE-2026-33824 收入 KEV，代表它已被实际利用。这是 Windows IKE 服务扩展组件（处理 IPsec 密钥交换的系统服务）的重复释放漏洞，未经身份验证的攻击者可以通过网络远程执行代码，CVSS 9.8，影响 Windows 10 1607 到 Windows 11 26H1 的桌面版与 Windows Server 2016 以后。4 月之后装过任何一次每月更新的电脑都已覆盖，还停在 3 月以前的要立刻更新。
 
 ## 2026 年 7 月
 
@@ -86,3 +87,4 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - <span class="urg-tag urg-tag--now">立刻</span>682 个 CVE（Windows 本体 139 个），32 个被评为 Critical，两个标为已被实际利用。
 - CVE-2026-32202：Windows Shell 的伪冒漏洞，影响 Windows 10 1607 以后的桌面版与 Windows Server 2012 以后。Shell 是文件资源管理器与快捷方式处理的那一层，伪冒类问题让恶意文件在界面上看起来像正常的东西。
 - 另一个是 SharePoint Server 的伪冒漏洞，只影响服务器。
+- 同月修复的 CVE-2026-33824（Windows IKE 服务扩展组件的远程代码执行）当时没有标为已被利用，8 月 18 日被 CISA 收入 KEV，细节见 8 月那则。
