@@ -71,8 +71,8 @@ FILTER_ID = re.compile(r"^[a-z0-9-]+$")
 # 「現在要處理的」只收這兩級，順序也照這個排。
 PRESSING = ("now", "soon")
 
-# 頁面上提到 RSS 的地方前面都放這個圖示，讀者一眼認得出是訂閱。
-RSS_ICON = ":material-rss-box:{ .cl-rss-icon }"
+# 全站提到 RSS 的地方前面都放這個圖示，讀者一眼認得出是訂閱。顏色寫在三份 extra.css 的 .rss-icon。
+RSS_ICON = ":material-rss-box:{ .rss-icon }"
 
 # 每份 feed 的則數上限。閱讀器只看得到新進的項目，舊的留著只是讓檔案變大。
 FEED_ITEMS = 50

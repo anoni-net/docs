@@ -60,4 +60,4 @@ Of course, we are also looking for partners familiar with processing large volum
 
 ## Lastly
 
-The above outlines the current progress of this project. We will continue to translate important articles, import observation data from Tor and OONI, and prepare for the workshop activities in August. We welcome you to keep following us or subscribe to updates from [this page](../index.md){target="_blank"} via RSS.
+The above outlines the current progress of this project. We will continue to translate important articles, import observation data from Tor and OONI, and prepare for the workshop activities in August. We welcome you to keep following us or subscribe to updates from [this page](../index.md){target="_blank"} via :material-rss-box:{ .rss-icon } RSS.

@@ -96,6 +96,15 @@
 [data-md-color-scheme="slate"] .chan-tag--stable { background: rgba(76,175,80,.18);  color: #81c784; border-color: rgba(76,175,80,.42); }
 [data-md-color-scheme="slate"] .chan-tag--alpha  { background: rgba(123,31,162,.24); color: #ce93d8; border-color: rgba(123,31,162,.50); }
 
+/* ==========================================================================
+   RSS 圖示：全站提到 RSS 的地方前面都放 :material-rss-box:{ .rss-icon }，
+   用 RSS 慣用的橘色。旁邊一定有「RSS」文字，圖示只是輔助辨識，所以不另外
+   要求文字的對比。放在連結裡也維持橘色，不跟著連結色
+   ========================================================================== */
+.md-typeset .rss-icon {
+  color: #f26522;
+}
+
 /* 议程表：场次图示与标题也套上分类色（对齐 .sess-tag，只在活动页议程表出现；
    :has(+ strong) 精准选到标题前的场次图示，描述列的箭头图示维持中性） */
 .md-typeset td:has(.sess-tag--basic)    strong,
