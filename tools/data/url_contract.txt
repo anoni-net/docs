@@ -1649,6 +1649,10 @@
 	#作業系統
 	#先看哪一頁
 	#匿名工具
+	#最近-45-天
+	#最近的更新
+	#現在要處理的
+	#組織裡負責資安的人
 	#軟體更新日誌
 /changelog/android/
 	#2026-年-4-月
@@ -1682,6 +1686,16 @@
 	#Arti-更新日誌
 	#c-tor-移植到-Rust-的進度
 	#中繼端做到哪裡
+/changelog/feed-android.xml
+/changelog/feed-iphone.xml
+/changelog/feed-linux.xml
+/changelog/feed-mac.xml
+/changelog/feed-ooni.xml
+/changelog/feed-relay.xml
+/changelog/feed-tails.xml
+/changelog/feed-urgent.xml
+/changelog/feed-windows.xml
+/changelog/feed.xml
 /changelog/grapheneos/
 	#2026-年-6-月
 	#2026-年-7-月
@@ -1748,6 +1762,7 @@
 	#tor-04910
 	#tor-04911
 	#tor-04912
+	#tor-04913
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -1771,6 +1786,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
+	#Tor-Browser-160a12Alpha-測試通道
 	#Tor-Browser-160a6Alpha-測試通道
 	#Tor-Browser-160a7Alpha-測試通道
 	#Tor-Browser-160a8Alpha-測試通道
@@ -1829,6 +1845,7 @@
 	#不要這樣用
 	#中性色
 	#中文標題的換行
+	#亮色模式的介面色
 	#六種版型
 	#品牌主色-cyan9-階
 	#品牌素材
@@ -1839,6 +1856,7 @@
 	#如何驗證有-XML
 	#幾何比例與淨空區
 	#手寫-SVG-的規則
+	#指南分類色側欄導覽
 	#接下來
 	#斷行交給版面算
 	#最小尺寸
@@ -1915,14 +1933,20 @@
 	#跟個人架設的差異
 	#驗收與連線測試
 /community/contributor-handbook/
+	#AI-協作
+	#AI-產出的檢查
 	#Branch-命名
 	#Commit-訊息格式
 	#Issue-分類
 	#PR-描述
 	#PR-流程
 	#Review
+	#front-matter
 	#並列引號的標點
+	#入口檔
+	#品牌名稱與受眾
 	#圖片與資源
+	#圖表
 	#套用範圍
 	#安全與隱私寫作
 	#寫作風格規範
@@ -1930,7 +1954,9 @@
 	#提問前先看哪裡
 	#搬檔改名刪頁要補-redirect
 	#擬人化
+	#敘事結構
 	#數字與編號
+	#文章格式
 	#標題句構
 	#標點集合
 	#檔名
@@ -1941,8 +1967,11 @@
 	#禁用句型與標點
 	#第一週的入門路徑
 	#精簡與去-AI-味
+	#結構化資料
 	#翻譯流程
 	#行為準則摘要
+	#角色
+	#註腳
 	#貢獻者百科
 	#跨檔連結規則
 	#這份百科是活文件
@@ -1990,10 +2019,14 @@
 	#上游翻譯工作流從-Weblate-到-release
 	#下一步
 	#中文化與文件翻譯
+	#內文結構
 	#文件站三語同步流程
 	#校對時要抓的是翻漏
+	#檔案與-front-matter
 	#相關規則檔
 	#社群參與過的上游翻譯
+	#翻譯外部文章到-blog
+	#順序與校稿停點
 /community/onionoo-mcp/
 	#API-與-MCP-的差別
 	#MCP-工具一覽
@@ -3505,7 +3538,11 @@
 	#Tasks
 /en/changelog/
 	#Anonymity-tools
+	#Last-45-days
+	#Needs-action
 	#Operating-systems
+	#Recent-updates
+	#Security-contacts-in-organisations
 	#Software-Changelog
 	#Where-to-start
 /en/changelog/android/
@@ -3538,6 +3575,16 @@
 	#Arti-Changelog
 	#How-far-the-relay-side-has-got
 	#c-tor-to-Rust-porting-progress
+/en/changelog/feed-android.xml
+/en/changelog/feed-iphone.xml
+/en/changelog/feed-linux.xml
+/en/changelog/feed-mac.xml
+/en/changelog/feed-ooni.xml
+/en/changelog/feed-relay.xml
+/en/changelog/feed-tails.xml
+/en/changelog/feed-urgent.xml
+/en/changelog/feed-windows.xml
+/en/changelog/feed.xml
 /en/changelog/grapheneos/
 	#August-2026
 	#GrapheneOS-Monthly-Summary
@@ -3601,6 +3648,7 @@
 	#tor-04910
 	#tor-04911
 	#tor-04912
+	#tor-04913
 	#tor-0496-04823
 	#tor-0497-04824
 	#tor-0498
@@ -3618,6 +3666,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
+	#Tor-Browser-160a12-alpha
 	#Tor-Browser-160a7-alpha
 	#Tor-Browser-160a8-alpha
 	#Tor-Browser-160a9-alpha
@@ -3687,6 +3736,8 @@
 	#Downloads
 	#Filenames-carry-the-language
 	#Flows-use-a-centred-connector
+	#Guide-category-colours-sidebar-navigation
+	#Interface-colour-in-light-mode
 	#Keeping-colours-consistent
 	#Leave-line-breaks-to-the-layout
 	#Line-breaking-for-Chinese-titles
@@ -3775,6 +3826,8 @@
 	#torrc-reference
 /en/community/contributor-handbook/
 	#Branch-naming
+	#Charts
+	#Checking-AI-output
 	#Code-of-conduct-in-brief
 	#Commit-messages
 	#Contributor-Handbook
@@ -3782,25 +3835,33 @@
 	#Cutting-the-machine-written-texture
 	#Directory-structure
 	#English-and-Chinese-have-separate-rule-sets
+	#Entry-files
 	#Filenames
 	#Files-and-directories
+	#Footnotes
+	#Front-matter
 	#Headings
 	#How-translation-works
 	#Images-and-assets
 	#Issue-labels
 	#Moving-renaming-or-deleting-a-page-needs-a-redirect
+	#Narrative-structure
 	#No-animacy-for-things-that-are-not-people
 	#Numbers-and-identifiers
 	#PR-descriptions
+	#Page-format
 	#Paragraph-voice
 	#Pull-requests
 	#Review
+	#Roles
 	#Splitting-or-moving-content-needs-the-inbound-links-checked
+	#Structured-data
 	#Terminology
 	#This-handbook-is-a-living-document
 	#Voice-and-positioning
 	#What-these-rules-cover
 	#Where-to-look-before-asking
+	#Working-with-AI-tools
 	#Writing-about-security-and-privacy
 	#Writing-style
 	#Your-first-week
@@ -4146,6 +4207,7 @@
 	#Landmass-brightness-switches-between-metrics
 	#Not-sure-where-to-start-take-the-tour
 	#Pick-the-layers-you-want
+	#Regional-borders-in-East-and-Southeast-Asia-DATAGOVHK-Natural-Earth-public-domain
 	#Relay-distribution-Onionoo-CC0-10
 	#Shutdown-records-Access-Now-KeepItOn-CC-BY-40
 	#Sources-and-licensing
@@ -5432,6 +5494,7 @@
 	#放大到台灣
 	#整合了哪些資料
 	#斷網事件Access-Now-KeepItOnCC-BY-40
+	#東亞與東南亞的行政區界線DATAGOVHKNatural-Earth-public-domain
 	#海底電纜與地理底圖OpenStreetMap-ODbLNatural-Earth-public-domain
 	#球上的動態
 	#球面上有什麼
@@ -8519,6 +8582,10 @@
 	#先看哪一页
 	#匿名工具
 	#操作系统
+	#最近-45-天
+	#最近的更新
+	#现在要处理的
+	#组织里负责信息安全的人
 	#软件更新日志
 /zh-cn/changelog/android/
 	#2026-年-4-月
@@ -8552,6 +8619,16 @@
 	#Arti-更新日志
 	#c-tor-移植到-Rust-的进度
 	#中继端做到哪里
+/zh-cn/changelog/feed-android.xml
+/zh-cn/changelog/feed-iphone.xml
+/zh-cn/changelog/feed-linux.xml
+/zh-cn/changelog/feed-mac.xml
+/zh-cn/changelog/feed-ooni.xml
+/zh-cn/changelog/feed-relay.xml
+/zh-cn/changelog/feed-tails.xml
+/zh-cn/changelog/feed-urgent.xml
+/zh-cn/changelog/feed-windows.xml
+/zh-cn/changelog/feed.xml
 /zh-cn/changelog/grapheneos/
 	#2026-年-6-月
 	#2026-年-7-月
@@ -8619,6 +8696,7 @@
 	#tor-04910
 	#tor-04911
 	#tor-04912
+	#tor-04913
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -8638,6 +8716,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
+	#Tor-Browser-160a12Alpha-测试通道
 	#Tor-Browser-160a7Alpha-测试通道
 	#Tor-Browser-160a8Alpha-测试通道
 	#Tor-Browser-160a9Alpha-测试通道
@@ -8695,6 +8774,7 @@
 	#不要这样用
 	#中性色
 	#中文标题的换行
+	#亮色模式的界面色
 	#六种版型
 	#几何比例与净空区
 	#单页换掉卡片内容
@@ -8706,6 +8786,7 @@
 	#如何储存才会有-embedded-XML
 	#如何验证有-XML
 	#手写-SVG-的规则
+	#指南分类色侧栏导览
 	#接下来
 	#文件名带语系
 	#断行交给版面算
@@ -9089,6 +9170,7 @@
 	#Tor-中继地球仪
 	#上网人口比例World-Bank-CC-BY-40数位发展部-政府数据开放授权条款
 	#不知道从哪看起就走一遍导览
+	#东亚与东南亚的行政区界线DATAGOVHKNatural-Earth-public-domain
 	#中继分布OnionooCC0-10
 	#延伸阅读
 	#放大到台湾

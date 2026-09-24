@@ -13,7 +13,7 @@ hide:
 
 [:material-sign-direction: 从你的身分开始](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: 订阅电子报](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss: RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
+[:material-email-fast-outline: 订阅电子报](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
 
 一群关注匿名网络、隐私与网络自由的在地社群成员。长期推广 Tor、Tails、OONI 等开源工具，维运在地的网络观测，追踪台湾的个资与加密支付法规，并与 EFF、Tor Project、OONI 合作把全球议题带回台湾脉络讨论。完整介绍见 [关于我们](./about/index.md)。
 

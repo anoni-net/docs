@@ -2,6 +2,9 @@
 title: Arti 更新日誌
 description: Arti（Tor Project 以 Rust 開發的新一代 Tor 實作）各版本更新的中文重點整理，方便台灣與華語讀者掌握 RPC、relay 開發、設定系統等關鍵進展。
 icon: material/code-tags
+digest:
+  name: Arti
+  devices: [relay]
 ---
 
 # :material-code-tags: Arti 更新日誌

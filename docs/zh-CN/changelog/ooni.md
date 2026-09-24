@@ -2,6 +2,9 @@
 title: OONI 更新日志
 description: OONI Probe、Explorer、Run 等 OONI 工具各版本更新的中文重点整理，方便华语读者掌握网络审查观测工具的关键变更与新功能。
 icon: material/access-point-network
+digest:
+  name: OONI Probe
+  devices: [ooni]
 ---
 
 # :material-access-point-network: OONI 更新日志

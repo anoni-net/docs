@@ -2,6 +2,10 @@
 title: Tails 更新日志
 description: Tails 操作系统各版本更新的中文重点整理，从上游 changelog 翻译而成，方便华语读者快速掌握每次发布的关键变更、安全修补与 Tor 连接改善。
 icon: material/usb-flash-drive-outline
+digest:
+  name: Tails
+  devices: [tails]
+  basis: 按官方发布形式分级
 ---
 
 # :material-usb-flash-drive-outline: Tails 更新日志

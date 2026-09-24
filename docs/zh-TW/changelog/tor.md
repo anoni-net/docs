@@ -2,6 +2,9 @@
 title: Tor 更新日誌
 description: Tor Browser、Tor daemon、Onion 服務與 Tor Project 周邊工具版本與重大發布的中文重點整理，從上游 release notes 翻譯而成，方便台灣讀者掌握關鍵變更與安全修補。
 icon: simple/torbrowser
+digest:
+  name: Tor Browser
+  devices: [windows, mac, linux, android]
 ---
 
 # :simple-torbrowser: Tor 更新日誌

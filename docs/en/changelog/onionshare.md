@@ -2,6 +2,10 @@
 title: OnionShare Changelog
 description: English summaries of OnionShare releases translated from upstream changelogs and security advisories, with notes on security fixes and new features.
 icon: material/share-variant
+digest:
+  name: OnionShare
+  devices: [windows, mac, linux]
+  basis: any security fix is rated Soon
 ---
 
 # :material-share-variant: OnionShare Changelog

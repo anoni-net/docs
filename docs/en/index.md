@@ -13,7 +13,7 @@ hide:
 
 [:material-sign-direction: Start by role](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: Newsletter](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss: RSS](https://anoni.net/docs/en/feed_rss_created.xml)
+[:material-email-fast-outline: Newsletter](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/en/feed_rss_created.xml)
 
 ## :material-compass-outline: Why this site exists
 

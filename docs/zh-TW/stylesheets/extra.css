@@ -96,6 +96,139 @@
 [data-md-color-scheme="slate"] .chan-tag--stable { background: rgba(76,175,80,.18);  color: #81c784; border-color: rgba(76,175,80,.42); }
 [data-md-color-scheme="slate"] .chan-tag--alpha  { background: rgba(123,31,162,.24); color: #ce93d8; border-color: rgba(123,31,162,.50); }
 
+/* ==========================================================================
+   RSS 圖示：全站提到 RSS 的地方前面都放 :material-rss-box:{ .rss-icon }，
+   用 RSS 慣用的橘色。旁邊一定有「RSS」文字，圖示只是輔助辨識，所以不另外
+   要求文字的對比。放在連結裡也維持橘色，不跟著連結色
+   ========================================================================== */
+.md-typeset .rss-icon {
+  color: #f26522;
+}
+
+/* ==========================================================================
+   更新日誌首頁「最近的更新」，由 hooks/changelog_digest.py 產生
+   篩選是一組 radio 加上 :has()，不用 JavaScript（Tor Browser 最安全等級會關掉它）。
+   各選項藏哪些項目的規則由 hook 跟著選項一起輸出，這裡只管外觀。
+   ========================================================================== */
+.cl-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.8rem 0 0.4rem;
+}
+
+/* radio 本身不顯示，但留在無障礙樹與鍵盤順序裡，方向鍵照樣切換選項 */
+.cl-filter input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.cl-filter label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  padding: 0 0.75rem;
+  font-size: 0.72rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cl-filter label:hover {
+  border-color: var(--md-accent-fg-color);
+}
+
+.cl-filter input:checked + label {
+  background: var(--brand-cyan-800);
+  border-color: var(--brand-cyan-800);
+  color: #fff;
+}
+
+[data-md-color-scheme="slate"] .cl-filter input:checked + label {
+  background: var(--brand-cyan-300);
+  border-color: var(--brand-cyan-300);
+  color: #0d1b24;
+}
+
+/* Material 的 polyfill 加的是 .focus-visible 類別，原生的另寫一條，
+   其中一個選擇器不被認得時另一條照樣生效 */
+.cl-filter input.focus-visible + label {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+.cl-filter input:focus-visible + label {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+.md-typeset .cl-asof,
+.md-typeset .cl-meta,
+.md-typeset .cl-latest,
+.md-typeset .cl-recent time {
+  font-size: 0.68rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .cl-asof {
+  margin-top: 0;
+}
+
+/* RSS 連結一次只露出目前選項那一份，切換規則由 hook 輸出 */
+.md-typeset .cl-feed {
+  font-size: 0.68rem;
+}
+
+.md-typeset .cl-feed [data-feed]:not([data-feed="all"]) {
+  display: none;
+}
+
+.md-typeset ul.cl-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.md-typeset ul.cl-list > li {
+  margin: 0 0 0.6rem;
+}
+
+.md-typeset .cl-meta,
+.md-typeset .cl-latest {
+  display: block;
+}
+
+/* 時間線：日期一欄、內容一欄，內容斷行時對齊內容那一欄 */
+.md-typeset .cl-recent > li {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.md-typeset .cl-recent time {
+  font-variant-numeric: tabular-nums;
+}
+
+.md-typeset .cl-recent > li.cl-empty {
+  display: block;
+}
+
+.md-typeset .cl-empty,
+.md-typeset .cl-none {
+  color: var(--md-default-fg-color--light);
+}
+
+/* 空結果的說明只給選了特定選項的人看，「全部」底下不出現 */
+.md-typeset:has(#cl-f-all:checked) .cl-list .cl-empty {
+  display: none;
+}
+
 /* 議程表：場次圖示與標題也套上分類色（對齊 .sess-tag，只在活動頁議程表出現；
    :has(+ strong) 精準選到標題前的場次圖示，描述列的箭頭圖示維持中性） */
 .md-typeset td:has(.sess-tag--basic)    strong,

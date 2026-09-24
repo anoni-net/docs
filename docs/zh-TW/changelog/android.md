@@ -2,6 +2,9 @@
 title: Android 安全修補等級
 description: Android 每月安全修補等級的整理，說明怎麼查自己的裝置落後多少，以及公開公告在 2026 年 7 月到 8 月缺漏漏洞明細、9 月恢復的影響。
 icon: material/android
+digest:
+  name: Android
+  devices: [android]
 ---
 
 # :material-android: Android 安全修補等級

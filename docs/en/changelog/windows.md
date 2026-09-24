@@ -2,6 +2,10 @@
 title: Windows Security Updates
 description: "Plain-language summaries of monthly Windows updates: whether anything is being actively exploited, whether it hits desktops or servers, and whether you need to update now."
 icon: material/microsoft-windows
+digest:
+  name: Windows
+  devices: [windows]
+  basis: rated by whether Microsoft flags exploitation
 ---
 
 # :material-microsoft-windows: Windows Security Updates

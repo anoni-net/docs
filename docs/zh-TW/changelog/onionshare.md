@@ -2,6 +2,10 @@
 title: OnionShare 更新日誌
 description: OnionShare 各版本更新的中文重點整理，從上游 changelog 與安全公告翻譯而成，方便台灣與華語讀者掌握安全修補與新功能。
 icon: material/share-variant
+digest:
+  name: OnionShare
+  devices: [windows, mac, linux]
+  basis: 有安全修補就標儘快
 ---
 
 # :material-share-variant: OnionShare 更新日誌

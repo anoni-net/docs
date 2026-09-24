@@ -2,6 +2,10 @@
 title: Tails Changelog
 description: English summaries of Tails operating system releases translated from upstream announcements, with notes on what each version means for users in censored regions.
 icon: material/usb-flash-drive-outline
+digest:
+  name: Tails
+  devices: [tails]
+  basis: rated by how upstream ships the release
 ---
 
 # :material-usb-flash-drive-outline: Tails Changelog

@@ -2,6 +2,10 @@
 title: Tails 更新日誌
 description: Tails 作業系統各版本更新的中文重點整理，從上游 release notes 翻譯而成，方便台灣與華語讀者快速掌握每次發布的關鍵變更、安全修補與 Tor 連線改善。
 icon: material/usb-flash-drive-outline
+digest:
+  name: Tails
+  devices: [tails]
+  basis: 依官方發布形式分級
 ---
 
 # :material-usb-flash-drive-outline: Tails 更新日誌

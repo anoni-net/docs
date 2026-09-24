@@ -361,6 +361,7 @@ extra_javascript:
   - js/vega-vega-lite-vega-embed-ondemand.js
 hooks:
   - hooks/latest_posts.py
+  - hooks/changelog_digest.py
   - hooks/offline_index.py
 plugins:
   - search:
