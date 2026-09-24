@@ -4,7 +4,7 @@ description: Arti（Tor Project 以 Rust 開發的新一代 Tor 實作）各版�
 icon: material/code-tags
 digest:
   name: Arti
-  devices: []
+  devices: [relay]
 ---
 
 # :material-code-tags: Arti 更新日誌
