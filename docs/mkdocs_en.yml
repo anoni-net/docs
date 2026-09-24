@@ -173,6 +173,8 @@ nav:
           - changelog/windows.md
           - changelog/grapheneos.md
           - changelog/android.md
+          - changelog/browsers.md
+          - changelog/messaging.md
   - !ENV [NAV_COMMUNITY, "Community"]:
       - community/index.md
       # About is part of the community section. Placed after community/index.md rather
