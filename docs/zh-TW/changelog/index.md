@@ -14,6 +14,7 @@ changelog_digest:
   empty_filtered: 這個選項在這段期間沒有對應的條目。
   subscribe: 訂閱「{label}」
   subscribe_urgent: 只訂閱立刻與儘快
+  feed_label: "RSS："
   feed_title: anoni.net 軟體更新日誌：{label}
   feed_description: 匿名工具與作業系統的版本更新與安全修補，整理自上游公告，每一則連回 anoni.net 文件站上的中文說明。
   feed_urgent: 立刻與儘快

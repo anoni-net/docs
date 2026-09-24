@@ -2,6 +2,9 @@
 title: Tor Changelog
 description: English summaries of Tor Browser, Tor daemon, and Onion service releases translated from upstream changelogs, with notes on security fixes and censorship circumvention improvements.
 icon: simple/torbrowser
+digest:
+  name: Tor Browser
+  devices: [windows, mac, linux, android]
 ---
 
 # :simple-torbrowser: Tor Changelog

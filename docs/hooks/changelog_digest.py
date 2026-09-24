@@ -256,7 +256,7 @@ def render_filter(cfg: dict, today: dt.date) -> str:
         + "".join(options)
         + f'</div>\n\n<p class="cl-asof">{asof}</p>'
         # markdown="span" 讓 md_in_html 處理圖示的 shortcode，連結本身是 HTML 不受影響
-        + f'\n\n<p class="cl-feed" markdown="span">{RSS_ICON} RSS：{"".join(links)} · {urgent}</p>'
+        + f'\n\n<p class="cl-feed" markdown="span">{RSS_ICON} {html.escape(cfg["feed_label"])}{"".join(links)} · {urgent}</p>'
     )
 
 
@@ -443,7 +443,8 @@ def load_pages(directory: Path, filter_ids: set[str]) -> list[PageInfo]:
 
 REQUIRED = ("days", "date_format", "asof", "filter_label", "all", "latest",
             "empty_now", "empty_recent", "empty_filtered", "filters",
-            "subscribe", "subscribe_urgent", "feed_title", "feed_description", "feed_urgent")
+            "subscribe", "subscribe_urgent", "feed_label", "feed_title", "feed_description",
+            "feed_urgent")
 
 
 def _today() -> dt.date:

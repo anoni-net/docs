@@ -2,6 +2,9 @@
 title: OONI Changelog
 description: English summaries of OONI Probe, Explorer, and Run releases, the network censorship measurement tools developed by OONI, with notes on key changes and new features.
 icon: material/access-point-network
+digest:
+  name: OONI Probe
+  devices: [ooni]
 ---
 
 # :material-access-point-network: OONI Changelog

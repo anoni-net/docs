@@ -2,6 +2,9 @@
 title: Android 安全补丁级别
 description: Android 每月安全补丁级别的整理，说明怎么查自己的设备落后多少，以及公开公告在 2026 年 7 月到 8 月缺漏漏洞明细、9 月恢复的影响。
 icon: material/android
+digest:
+  name: Android
+  devices: [android]
 ---
 
 # :material-android: Android 安全补丁级别

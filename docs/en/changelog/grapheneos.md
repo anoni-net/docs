@@ -2,6 +2,9 @@
 title: GrapheneOS Monthly Summary
 description: "Plain-language monthly summaries of GrapheneOS releases: how far the Android security patch level has advanced, which everyday features got fixed, and any changes to device support."
 icon: material/cellphone-lock
+digest:
+  name: GrapheneOS
+  devices: [android]
 ---
 
 # :material-cellphone-lock: GrapheneOS Monthly Summary

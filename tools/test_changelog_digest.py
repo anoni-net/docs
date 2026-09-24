@@ -129,7 +129,7 @@ cfg = {
     "days": 45, "date_format": "{y}/{m}/{d}", "asof": "資料截至 {date}",
     "filter_label": "篩選", "all": "全部", "latest": "最新：{title} · {date}",
     "empty_now": "沒有", "empty_recent": "沒有條目", "empty_filtered": "這個選項沒有",
-    "subscribe": "訂閱「{label}」", "subscribe_urgent": "只訂閱立刻與儘快",
+    "subscribe": "訂閱「{label}」", "subscribe_urgent": "只訂閱立刻與儘快", "feed_label": "RSS：",
     "feed_title": "更新日誌：{label}", "feed_description": "說明", "feed_urgent": "立刻與儘快",
     "filters": [{"id": "windows", "label": "Windows"}, {"id": "iphone", "label": "iPhone"},
                 {"id": "relay", "label": "中繼"}, {"id": "ooni", "label": "觀測"}],

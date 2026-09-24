@@ -2,6 +2,9 @@
 title: 抗审查传输更新日志
 description: Snowflake、WebTunnel、lyrebird 各版本的中文重点整理，说明每次更新对绕过封锁有什么影响，以及三种传输各自适合什么情况。
 icon: material/shield-key-outline
+digest:
+  name: 抗审查传输
+  devices: [windows, mac, linux, android, relay]
 ---
 
 # :material-shield-key-outline: 抗审查传输更新日志

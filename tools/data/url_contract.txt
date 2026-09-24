@@ -1652,6 +1652,7 @@
 	#最近-45-天
 	#最近的更新
 	#現在要處理的
+	#組織裡負責資安的人
 	#軟體更新日誌
 /changelog/android/
 	#2026-年-4-月
@@ -3537,7 +3538,11 @@
 	#Tasks
 /en/changelog/
 	#Anonymity-tools
+	#Last-45-days
+	#Needs-action
 	#Operating-systems
+	#Recent-updates
+	#Security-contacts-in-organisations
 	#Software-Changelog
 	#Where-to-start
 /en/changelog/android/
@@ -3570,6 +3575,16 @@
 	#Arti-Changelog
 	#How-far-the-relay-side-has-got
 	#c-tor-to-Rust-porting-progress
+/en/changelog/feed-android.xml
+/en/changelog/feed-iphone.xml
+/en/changelog/feed-linux.xml
+/en/changelog/feed-mac.xml
+/en/changelog/feed-ooni.xml
+/en/changelog/feed-relay.xml
+/en/changelog/feed-tails.xml
+/en/changelog/feed-urgent.xml
+/en/changelog/feed-windows.xml
+/en/changelog/feed.xml
 /en/changelog/grapheneos/
 	#August-2026
 	#GrapheneOS-Monthly-Summary
@@ -8567,6 +8582,10 @@
 	#先看哪一页
 	#匿名工具
 	#操作系统
+	#最近-45-天
+	#最近的更新
+	#现在要处理的
+	#组织里负责信息安全的人
 	#软件更新日志
 /zh-cn/changelog/android/
 	#2026-年-4-月
@@ -8600,6 +8619,16 @@
 	#Arti-更新日志
 	#c-tor-移植到-Rust-的进度
 	#中继端做到哪里
+/zh-cn/changelog/feed-android.xml
+/zh-cn/changelog/feed-iphone.xml
+/zh-cn/changelog/feed-linux.xml
+/zh-cn/changelog/feed-mac.xml
+/zh-cn/changelog/feed-ooni.xml
+/zh-cn/changelog/feed-relay.xml
+/zh-cn/changelog/feed-tails.xml
+/zh-cn/changelog/feed-urgent.xml
+/zh-cn/changelog/feed-windows.xml
+/zh-cn/changelog/feed.xml
 /zh-cn/changelog/grapheneos/
 	#2026-年-6-月
 	#2026-年-7-月

@@ -2,6 +2,10 @@
 title: macOS 安全更新
 description: Mac 每次安全更新的白话整理，说明这次修了什么、需不需要马上更新，以及三条维护线各自的状态。
 icon: material/apple
+digest:
+  name: macOS
+  devices: [mac]
+  basis: 依 Apple 是否标注已被利用分级
 ---
 
 # :material-apple: macOS 安全更新

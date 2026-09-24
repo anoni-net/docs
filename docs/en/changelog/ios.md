@@ -2,6 +2,10 @@
 title: iOS Security Updates
 description: "Plain-language summaries of iPhone and iPad security updates: what each one fixes, whether you need to install it now, and which older models still get patches."
 icon: material/apple-ios
+digest:
+  name: iOS
+  devices: [iphone]
+  basis: rated by whether Apple flags exploitation
 ---
 
 # :material-apple-ios: iOS Security Updates

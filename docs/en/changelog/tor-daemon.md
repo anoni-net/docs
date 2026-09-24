@@ -2,6 +2,11 @@
 title: tor daemon Changelog
 description: "English summaries of tor daemon releases: what each security release fixes and whether relay and onion service operators need to upgrade immediately."
 icon: material/server-network
+digest:
+  name: tor daemon
+  devices: [relay]
+  basis: rated by whether upstream calls it a security release
+  audience: for people running relays, bridges and onion services
 ---
 
 # :material-server-network: tor daemon Changelog

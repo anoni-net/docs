@@ -2,6 +2,9 @@
 title: Arti Changelog
 description: English summaries of Arti releases, the Rust implementation of Tor under development by the Tor Project, with notes on RPC, relay development, and configuration system progress.
 icon: material/code-tags
+digest:
+  name: Arti
+  devices: [relay]
 ---
 
 # :material-code-tags: Arti Changelog

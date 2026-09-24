@@ -2,6 +2,10 @@
 title: Windows 安全更新
 description: Windows 每月更新的白话整理，说明这个月有没有正在被利用的漏洞、影响的是桌面还是服务器，以及需不需要马上更新。
 icon: material/microsoft-windows
+digest:
+  name: Windows
+  devices: [windows]
+  basis: 依微软是否标注已被利用分级
 ---
 
 # :material-microsoft-windows: Windows 安全更新

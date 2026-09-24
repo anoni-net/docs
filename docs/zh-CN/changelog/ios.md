@@ -2,6 +2,10 @@
 title: iOS 安全更新
 description: iPhone 与 iPad 每次安全更新的白话整理，说明这次修了什么、需不需要马上更新，以及旧机型还收不收得到修补。
 icon: material/apple-ios
+digest:
+  name: iOS
+  devices: [iphone]
+  basis: 依 Apple 是否标注已被利用分级
 ---
 
 # :material-apple-ios: iOS 安全更新

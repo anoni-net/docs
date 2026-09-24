@@ -2,6 +2,10 @@
 title: macOS Security Updates
 description: "Plain-language summaries of Mac security updates: what each one fixes, whether you need to install it now, and where the three maintenance lines stand."
 icon: material/apple
+digest:
+  name: macOS
+  devices: [mac]
+  basis: rated by whether Apple flags exploitation
 ---
 
 # :material-apple: macOS Security Updates

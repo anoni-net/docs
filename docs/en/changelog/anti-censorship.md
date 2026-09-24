@@ -2,6 +2,9 @@
 title: Anti-Censorship Transports Changelog
 description: "English summaries of Snowflake, WebTunnel, and lyrebird releases: what each update means for getting past blocking, and which transport suits which situation."
 icon: material/shield-key-outline
+digest:
+  name: Anti-censorship transports
+  devices: [windows, mac, linux, android, relay]
 ---
 
 # :material-shield-key-outline: Anti-Censorship Transports Changelog
