@@ -15,6 +15,19 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 16.0a12 (alpha)
+
+> 2026-09-22 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a12/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>The alpha channel is for testing only; regular users should stay on the stable channel (15.x).
+- Rebased the Firefox base onto 153.3.0esr (tor-browser#45304), with Android GeckoView following, and backported security fixes from Firefox 156 (tor-browser#45299), the same batch as stable 15.0.23.
+- The bundled tor daemon moves to 0.4.9.12 and NoScript to 13.6.33.90101984. tor 0.4.9.13, released the next day, is not included yet (see the [tor daemon changelog](./tor-daemon.md)).
+- On desktop, onion services using self-signed certificates now show a security exception warning with a button to proceed (tor-browser#42065). WebXR is explicitly disabled (tor-browser#45278), and so is the toolbar share button (tor-browser#45133).
+- The build now passes `--disable-proxy-direct-failover` (tor-browser#45336), removing the fallback that sends traffic directly when the proxy fails.
+- On Android, the "Passwords" UI is gone (tor-browser#44548), search suggestions are disabled entirely (tor-browser#45269), and `about:config` opens again (tor-browser#45280).
+- Alpha releases are now signed with a new GPG subkey (tor-browser-build#41846). If you verify download signatures yourself, refresh the Tor Browser developers' key before checking.
+- The Windows installer signing problem is not resolved yet, as the DigiCert EV certificate is still being renewed. Fresh installs of 16.0a11 or 16.0a12 raise a bad signature warning; upstream suggests installing 16.0a10 and letting automatic updates carry it forward.
+
 ## Tor Browser 15.0.23
 
 > 2026-09-15 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15023/){target="_blank"}

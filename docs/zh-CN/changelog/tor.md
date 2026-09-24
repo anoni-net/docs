@@ -15,6 +15,19 @@ icon: simple/torbrowser
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 16.0a12（Alpha 测试通道）
+
+> 2026-09-22 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a12/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道仅供测试，一般用户请继续用稳定版（15.x）。
+- Firefox 基底 rebase 至 153.3.0esr（tor-browser#45304），Android 版 GeckoView 同步，并从 Firefox 156 backport 安全修补（tor-browser#45299），与稳定版 15.0.23 是同一批。
+- 内置的 tor daemon 更新到 0.4.9.12，NoScript 升至 13.6.33.90101984。隔天发布的 tor 0.4.9.13 还没有包进来（内容见 [tor daemon 更新日志](./tor-daemon.md)）。
+- 桌面版连到使用自签证书的 onion 服务时，改成显示安全例外的警告与按钮（tor-browser#42065）。WebXR 明确停用（tor-browser#45278），工具栏的分享按钮也关掉（tor-browser#45133）。
+- 构建设置加上 `--disable-proxy-direct-failover`（tor-browser#45336），拿掉代理失效时改走直连的后备路径。
+- Android 版移除「密码」相关界面（tor-browser#44548），完全停用搜索建议（tor-browser#45269），并修好 `about:config` 无法打开的问题（tor-browser#45280）。
+- Alpha 版改用新的 GPG 子密钥签名（tor-browser-build#41846）。自行验证下载签名的人，验证前先更新 Tor Browser 开发者的公钥。
+- Windows 的安装包签名问题还没解决，DigiCert EV 证书仍在换发。全新安装 16.0a11 或 16.0a12 会跳出 bad signature 警告，上游建议先装 16.0a10，再让自动更新带到最新版。
+
 ## Tor Browser 15.0.23
 
 > 2026-09-15 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15023/){target="_blank"}

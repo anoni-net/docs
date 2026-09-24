@@ -30,6 +30,22 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 
 Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
 
+## tor 0.4.9.13
+
+> 2026-09-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.13/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>A security release two weeks after 0.4.9.12, carrying ten TROVE identifiers. Upstream states that relays, clients and onion services are all affected and strongly recommends upgrading as soon as possible. Upstream does not mention exploitation in the wild.
+- Upstream again attributes this round to the ongoing stream of LLM-generated reports.
+- As of 24 September, both Tor Browser stable 15.0.23 and alpha 16.0a12 still bundle 0.4.9.12. Browser users can wait for the next release to pick it up; anyone running a relay, bridge or onion service needs to upgrade themselves.
+- TROVE-2026-053 matters most to everyday users. When a client built a circuit to an onion service after the original stream had already closed, the circuit's isolation parameters were wrongly cleared, so a later stream from a different isolation context could reuse it. Upstream states that a malicious onion service or HSDir (a relay that stores onion service descriptors) could use this to break first-party isolation in Tor Browser, the feature that keeps different sites on separate circuits (bug 41368, present since 0.2.3.3-alpha).
+- TROVE-2026-051 and 050 both sit in reverse DNS (looking up a hostname from an IP). The first covers possible memory corruption, double-free and null pointer dereference bugs with some virtual address configurations (bug 41381). The second: PTR responses were still cached with DNS caching disabled, because the guard against it parsed addresses incorrectly and defaulted to caching when parsing failed (bug 41380).
+- TROVE-2026-056: a use-after-free when a TCP connection succeeds immediately but starting its TLS handshake fails (bug 41398).
+- TROVE-2026-058 and 012 are on the onion service side. In the first, a service-side rendezvous circuit that failed before reaching the rendezvous point was relaunched twice, leaving two circuits carrying the same rendezvous cookie and key material. With repeated failures the circuit count per INTRODUCE2 grew exponentially, from N+1 to 2^(N+1)-1 after N failures (bug 41408). The second rotates the intro point when the INTRODUCE2 replay cache fills up (bug 41256).
+- TROVE-2026-030, 038 and 041 are one class of problem. Circuit, stream, directory-request and generic channel-close failures used to be recorded against the entry guard; now a failure is recorded once, and only when an outgoing connection cannot be established (bugs 41360, 41365, 41366). The entry guard is the long-lived first hop a client keeps using, and its failure record feeds into whether the client moves to a different guard. TROVE-2026-030 also covers rejecting INTRODUCE2 cells with an all-zero rendezvous point ntor onion key.
+- TROVE-2026-052: clients stop trying to reattach BEGIN_DIR directory streams. They used to read the reason field in the END cell and retry as if it were a normal exit request, which led to unpredictable behaviour (bug 41369).
+- One more client-side fix: when an exit or onion service answered a BEGIN with an END cell whose reason byte was 0, the stream was treated as a success. SOCKS clients got a success reply and HTTP CONNECT clients got 200 OK for a connection that never existed (bug 41353).
+- Three fixes for operators. Relays now drop circuits from the pending-channel list as soon as they are marked for close (bug 41393). HSDirs rate-limit the "invalid signature length" log message, which upstream says only makes a flooding attack more tolerable without resolving it (ticket 41339). Bridge clients and bridge relays no longer corrupt memory the second time a pluggable transport or socksproxy setting changes (bug 41375).
+
 ## tor 0.4.9.12
 
 > 2026-09-08 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.12/ChangeLog){target="_blank"}
