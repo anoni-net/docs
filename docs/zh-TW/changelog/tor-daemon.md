@@ -2,6 +2,11 @@
 title: tor daemon 更新日誌
 description: Tor 的 C 語言實作 tor daemon 各版本的中文重點整理，說明每次安全釋出修了什麼、中繼與 onion 服務營運者需不需要立刻升級。
 icon: material/server-network
+digest:
+  name: tor daemon
+  devices: [relay]
+  basis: 依官方標為安全釋出分級
+  audience: 給架設中繼、橋接與 onion 服務的人
 ---
 
 # :material-server-network: tor daemon 更新日誌

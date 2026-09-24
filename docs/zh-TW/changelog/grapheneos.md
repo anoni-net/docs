@@ -2,6 +2,9 @@
 title: GrapheneOS 月度更新摘要
 description: GrapheneOS 每月更新的白話整理，說明 Android 安全修補等級進度、日常會碰到的功能修補，以及機型支援變動。
 icon: material/cellphone-lock
+digest:
+  name: GrapheneOS
+  devices: [android]
 ---
 
 # :material-cellphone-lock: GrapheneOS 月度更新摘要

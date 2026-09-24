@@ -111,6 +111,10 @@ jobs:
       - name: 離線內容索引
         run: python3 tools/test_offline_index.py
 
+      # 更新日誌首頁的「最近的更新」：日期怎麼取、哪幾則算要處理、舊的紅標有沒有撤下
+      - name: 更新日誌首頁摘要
+        run: python3 tools/test_changelog_digest.py
+
       # 離線內容管理頁的介面：畫出來的結構、順序、連結，以及送給 SW 的指令
       - name: 離線內容管理頁介面
         run: node tools/test_offline_library.mjs

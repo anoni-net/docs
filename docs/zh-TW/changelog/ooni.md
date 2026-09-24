@@ -2,6 +2,9 @@
 title: OONI 更新日誌
 description: OONI Probe 跨平台應用各版本更新的中文重點整理，從上游 release notes 翻譯而成，方便台灣讀者掌握網路審查觀測工具的關鍵變更與新功能。
 icon: material/access-point-network
+digest:
+  name: OONI Probe
+  devices: [ooni]
 ---
 
 # :material-access-point-network: OONI 更新日誌
