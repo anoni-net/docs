@@ -88,3 +88,4 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 - CVE-2026-32202：Windows Shell 的偽冒漏洞，影響 Windows 10 1607 以後的桌面版與 Windows Server 2012 以後。Shell 是檔案總管與捷徑處理的那一層，偽冒類問題讓惡意檔案在畫面上看起來像正常的東西。
 - 另一個是 SharePoint Server 的偽冒漏洞，只影響伺服器。
 - 同月修掉的 CVE-2026-33824（Windows IKE 服務擴充元件的遠端執行程式碼）當時沒有標為已被利用，8 月 18 日被 CISA 收進 KEV，細節見 8 月那則。
+- 另外，4 月 13 日 CISA 把 2025 年 11 月就修掉的 CVE-2025-60710 收進 KEV，並標注已知被用在勒索軟體攻擊。這是 Windows 工作主機處理程序（Host Process for Windows Tasks）的連結追隨漏洞，已經能在電腦上執行程式的攻擊者可以藉此提權，影響 Windows 11 24H2、25H2 與 Windows Server 2025，微軟當時評為 Important。2025 年 11 月之後裝過任何一次每月更新的電腦都已涵蓋。
