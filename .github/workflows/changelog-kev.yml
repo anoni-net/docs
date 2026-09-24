@@ -1,0 +1,67 @@
+# 每週把 CISA 的已知遭利用漏洞目錄（KEV）跟更新日誌對一遍。
+#
+# 更新日誌的「立刻」建立在「上游標注已被利用」上，而那個標注不一定出現在我們讀的
+# 那份公告裡，也可能在頁面寫完之後才出現。2026 年 9 月漏過兩次：Pixel 數據機的
+# CVE-2026-58704 只寫在晚一週的 Pixel 更新公告，Windows IKE 的 CVE-2026-33824 是 4 月
+# 修的、8 月才進 KEV。兩次都要靠回頭對 KEV 才發現。
+#
+# 找到「要補」的項目時開一張 issue，已經有一張開著就更新它的內文，不會每週多一張。
+# 這支不改任何內容，補在哪一則、怎麼寫由人決定，做法照 docs/CHANGELOG_SOURCES.md。
+name: changelog-kev
+
+on:
+  schedule:
+    # 週一 01:20 UTC，台北時間早上九點二十分
+    - cron: "20 1 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: changelog-kev
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: 對照 KEV
+        id: kev
+        run: |
+          set +e
+          python3 tools/check_changelog_kev.py --output kev-report.md
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+
+      # 結束碼 1 代表有要補的項目。其他非零值是腳本本身壞了（例如抓不到 KEV），
+      # 那種情況讓 job 變紅，不要開一張內容是錯誤訊息的 issue。
+      - name: 腳本失敗
+        if: steps.kev.outputs.status != '0' && steps.kev.outputs.status != '1'
+        run: exit 1
+
+      - name: 開或更新提醒 issue
+        if: steps.kev.outputs.status == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "更新日誌與 KEV 交叉比對：有已被利用、頁面還沒寫的漏洞"
+        run: |
+          existing=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file kev-report.md
+            echo "更新了 #$existing"
+          else
+            gh issue create --title "$TITLE" --body-file kev-report.md
+          fi
+
+      - name: 結果寫進 job summary
+        if: always()
+        run: |
+          [ -f kev-report.md ] && cat kev-report.md >> "$GITHUB_STEP_SUMMARY" || true

@@ -66,6 +66,12 @@ Apple 一天發三到五份公告時，各條線的公告會出現大量同名�
 
 `www.whatsapp.com/security/advisories/<年>/` 用 curl 抓會回 400，換 User-Agent 也一樣，有些網路的 DNS 甚至查不到這個主機名。同樣的內容可以從 NVD API 以 Meta 的 CNA 識別碼查（`sourceIdentifier=cve-assign@fb.com`），結果會混著 React 與 Proxygen 這類 Meta 其他專案，要篩描述裡的 WhatsApp。NVD 的查詢區間最多 120 天，超過會直接回 404。
 
+## 用 KEV 回頭對一遍
+
+上游的利用標注不一定出現在我們讀的那份公告裡，也可能在頁面寫完之後才出現。整理完一輪之後執行 `python3 tools/check_changelog_kev.py`，它會抓 CISA 的已知遭利用漏洞目錄，把近 60 天新增、屬於我們追蹤的產品的 CVE 跟 zh-TW 的頁面對一遍，列出頁面裡還沒有的。`.github/workflows/changelog-kev.yml` 每週一也會執行一次，有漏的就開一張 issue。
+
+列出來的項目要自己判斷補在哪一則。KEV 收錄的常是幾個月前就修掉的漏洞（Windows IKE 的 CVE-2026-33824 是 4 月修、8 月收錄），這種補在收錄那個月的條目，原本修補的那一則加一句指過去。產品對到哪幾頁寫在腳本的 `RULES`，新增追蹤的產品時先到 KEV 查它的 `vendorProject` 與 `product` 實際怎麼寫。
+
 ## 急迫程度分級
 
 有三色標籤的八頁：`ios`、`macos`、`windows`、`browsers`、`messaging`、`tails`、`tor-daemon`、`onionshare`。CSS 是 `docs/<lang>/stylesheets/extra.css` 裡的 `.urg-tag`，`tor.md` 另有 `.chan-tag` 標穩定版與 Alpha。

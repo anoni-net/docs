@@ -115,6 +115,10 @@ jobs:
       - name: 更新日誌首頁摘要
         run: python3 tools/test_changelog_digest.py
 
+      # 更新日誌與 KEV 的對照表：規則寫錯的症狀是一筆都不報，看起來像什麼都沒漏
+      - name: 更新日誌 KEV 對照
+        run: python3 tools/test_check_changelog_kev.py
+
       # 離線內容管理頁的介面：畫出來的結構、順序、連結，以及送給 SW 的指令
       - name: 離線內容管理頁介面
         run: node tools/test_offline_library.mjs
