@@ -156,7 +156,11 @@ def scan(root=OUTPUT):
 
     for lang in LANG_ROOTS:
         base = root / lang if lang else root
-        for name in WELL_KNOWN:
+        names = list(WELL_KNOWN)
+        # 更新日誌的 RSS，一個篩選項一份，檔名跟著篩選項走所以用掃的。拿掉篩選項會讓
+        # 那一份消失，訂閱的閱讀器從此收不到東西也不會報錯，所以跟其他端點一樣登記。
+        names += sorted(p.relative_to(base).as_posix() for p in (base / "changelog").glob("feed*.xml"))
+        for name in names:
             if (base / name).is_file():
                 entries.setdefault(
                     "/" + (f"{lang}/{name}" if lang else name), ("page", [])

@@ -10,6 +10,13 @@
 - `<!-- changelog-digest:recent -->`：期間內所有頁面的條目，由新到舊
 - `<!-- changelog-latest:<檔名> -->`：接在頁面清單每一項後面，寫出該頁最新的一則
 
+同一份條目另外寫成 RSS，放在首頁旁邊：`feed.xml` 收全部，`feed-<篩選項>.xml` 各收一個
+篩選項，`feed-urgent.xml` 只收「立刻」與「儘快」。提供訂閱只做 RSS，不做 email 與網頁
+推播，因為那兩種都要網站保存訂閱者資料，而「誰在追哪個工具的安全漏洞」本身就是敏感
+名單。RSS 由讀者的閱讀器來抓，網站不知道誰訂了。feed 網址登記在網址合約裡
+（tools/check_url_contract.py），拿掉篩選項會讓對應的 feed 消失，那是對訂閱者的破壞性
+變更，CI 會擋。
+
 改成生成的理由跟首頁的 latest_posts 一樣，手寫的摘要會過期。changelog 的數字一週
 內就可能改好幾次（Windows 2026 年 9 月那則三天內改了兩次），摘要要是手抄，首頁與
 內頁很快就對不起來。
@@ -43,7 +50,11 @@ import datetime as dt
 import html
 import logging
 import os
+import posixpath
 import re
+from email.utils import format_datetime
+from urllib.parse import quote
+from xml.sax.saxutils import escape as xml_escape
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -59,6 +70,13 @@ FILTER_ID = re.compile(r"^[a-z0-9-]+$")
 
 # 「現在要處理的」只收這兩級，順序也照這個排。
 PRESSING = ("now", "soon")
+
+# 每份 feed 的則數上限。閱讀器只看得到新進的項目，舊的留著只是讓檔案變大。
+FEED_ITEMS = 50
+
+# on_page_markdown 算好的 feed，等 on_post_build 再寫進產物。
+_feeds: dict[str, str] = {}
+_feed_dir: str | None = None
 
 
 @dataclass
@@ -215,12 +233,26 @@ def render_filter(cfg: dict, today: dt.date) -> str:
             f'<input type="radio" name="cl-filter" id="cl-f-{f["id"]}">'
             f'<label for="cl-f-{f["id"]}">{html.escape(f["label"])}</label>'
         )
+    # 訂閱連結跟著選項切換，一次只露出目前選項那一份。預設（含不支援 :has() 的瀏覽器）
+    # 只露出「全部」，跟篩選沒有作用時看到的內容一致。
+    feed_rules = "\n".join(
+        f'.md-typeset:has(#cl-f-{f["id"]}:checked) .cl-feed [data-feed="all"] {{ display: none; }}\n'
+        f'.md-typeset:has(#cl-f-{f["id"]}:checked) .cl-feed [data-feed="{f["id"]}"] {{ display: inline; }}'
+        for f in filters
+    )
+    links = [f'<a data-feed="all" href="{feed_name(None)}">'
+             f'{html.escape(cfg["subscribe"].format(label=cfg["all"]))}</a>']
+    for f in filters:
+        links.append(f'<a data-feed="{f["id"]}" href="{feed_name(f["id"])}">'
+                     f'{html.escape(cfg["subscribe"].format(label=f["label"]))}</a>')
+    urgent = f'<a href="{feed_name("urgent")}">{html.escape(cfg["subscribe_urgent"])}</a>'
     asof = html.escape(cfg["asof"].format(date=_date(today, cfg["date_format"])))
     return (
-        f"<style>\n{rules}\n</style>\n\n"
+        f"<style>\n{rules}\n{feed_rules}\n</style>\n\n"
         f'<div class="cl-filter" role="radiogroup" aria-label="{html.escape(cfg["filter_label"])}">'
         + "".join(options)
         + f'</div>\n\n<p class="cl-asof">{asof}</p>'
+        + f'\n\n<p class="cl-feed">RSS：{"".join(links)} · {urgent}</p>'
     )
 
 
@@ -271,6 +303,96 @@ def render_latest(page: PageInfo | None, cfg: dict) -> str:
     return f'<span class="cl-latest">{html.escape(text)}</span>'
 
 
+def feed_name(key: str | None) -> str:
+    return "feed.xml" if key is None else f"feed-{key}.xml"
+
+
+def feed_entries(pages: list[PageInfo], key: str | None) -> list[Entry]:
+    """某份 feed 要收的條目，由新到舊，最多 FEED_ITEMS 則。
+
+    `urgent` 收所有標了「立刻」或「儘快」的條目，不只每頁最新一則。訂閱的人要的是
+    「出現新的急迫條目時通知我」，首頁那一塊則是「現在還沒處理完的有哪些」。
+    """
+    if key == "urgent":
+        chosen = [e for p in pages for e in p.entries if e.urgency in PRESSING]
+    elif key is None:
+        chosen = [e for p in pages for e in p.entries]
+    else:
+        chosen = [e for p in pages if key in p.devices for e in p.entries]
+    chosen.sort(key=lambda e: (-e.date.toordinal(), e.page, e.heading))
+    return chosen[:FEED_ITEMS]
+
+
+def render_feed(*, title: str, description: str, link: str, self_link: str, language: str,
+                entries: list[Entry], pages: dict[str, PageInfo], entry_url, cfg: dict,
+                built: dt.datetime) -> str:
+    """寫成 RSS 2.0。站上 blog 的 feed 也是 RSS 2.0，閱讀器那邊的表現一致。"""
+    items = []
+    for entry in entries:
+        page = pages[entry.page]
+        label = entry.urgency_label or entry.channel_label
+        item_title = f"{label} · {_title(entry, page)}" if label else _title(entry, page)
+        meta = [_date(entry.date, cfg["date_format"])]
+        if entry.urgency and page.basis:
+            meta.append(page.basis)
+        if page.audience:
+            meta.append(page.audience)
+        url = entry_url(entry)
+        # guid 用固定格式而不是網址，網站換主機（onion、IPFS）時閱讀器不會把同一則當成新的
+        guid = f"anoni-changelog:{entry.page}:{entry.date.isoformat()}:{entry.heading}"
+        pub = dt.datetime.combine(entry.date, dt.time(0, 0), tzinfo=dt.timezone.utc)
+        items.append(
+            "    <item>\n"
+            f"      <title>{xml_escape(item_title)}</title>\n"
+            f"      <link>{xml_escape(url)}</link>\n"
+            f'      <guid isPermaLink="false">{xml_escape(guid)}</guid>\n'
+            f"      <pubDate>{format_datetime(pub)}</pubDate>\n"
+            f"      <description>{xml_escape(' · '.join(meta))}</description>\n"
+            "    </item>"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "  <channel>\n"
+        f"    <title>{xml_escape(title)}</title>\n"
+        f"    <link>{xml_escape(link)}</link>\n"
+        f'    <atom:link href="{xml_escape(self_link)}" rel="self" type="application/rss+xml"/>\n'
+        f"    <description>{xml_escape(description)}</description>\n"
+        f"    <language>{xml_escape(language)}</language>\n"
+        f"    <lastBuildDate>{format_datetime(built)}</lastBuildDate>\n"
+        + "".join(i + "\n" for i in items)
+        + "  </channel>\n</rss>\n"
+    )
+
+
+def build_feeds(pages: list[PageInfo], cfg: dict, base_url: str, page_url, language: str,
+                built: dt.datetime, slugify) -> dict[str, str]:
+    """回 `檔名 -> RSS 內容`。base_url 是首頁的絕對網址，page_url 把檔名換成頁面的絕對網址。"""
+    by_stem = {p.stem: p for p in pages}
+
+    def entry_url(entry):
+        return page_url(entry.page) + "#" + quote(slugify(entry.heading), safe="-_.")
+
+    feeds = {}
+    keys = [(None, cfg["all"])] + [(f["id"], f["label"]) for f in cfg["filters"]]
+    keys.append(("urgent", cfg["feed_urgent"]))
+    for key, label in keys:
+        name = feed_name(key)
+        feeds[name] = render_feed(
+            title=cfg["feed_title"].format(label=label),
+            description=cfg["feed_description"],
+            link=base_url,
+            self_link=base_url + name,
+            language=language,
+            entries=feed_entries(pages, key),
+            pages=by_stem,
+            entry_url=entry_url,
+            cfg=cfg,
+            built=built,
+        )
+    return feeds
+
+
 def _split_front_matter(text: str) -> tuple[dict, str]:
     import yaml  # 延後載入，tools/ 的測試只測純邏輯，不需要裝 PyYAML
 
@@ -316,7 +438,8 @@ def load_pages(directory: Path, filter_ids: set[str]) -> list[PageInfo]:
 
 
 REQUIRED = ("days", "date_format", "asof", "filter_label", "all", "latest",
-            "empty_now", "empty_recent", "empty_filtered", "filters")
+            "empty_now", "empty_recent", "empty_filtered", "filters",
+            "subscribe", "subscribe_urgent", "feed_title", "feed_description", "feed_urgent")
 
 
 def _today() -> dt.date:
@@ -345,8 +468,10 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
                     page.file.src_uri, "、".join(missing))
         return markdown
     for f in cfg["filters"]:
-        if not FILTER_ID.match(str(f.get("id", ""))):
-            log.warning("changelog_digest：篩選項 id %r 只能用小寫英數與連字號", f.get("id"))
+        if not FILTER_ID.match(str(f.get("id", ""))) or f.get("id") in ("all", "urgent"):
+            # all 與 urgent 已經是「全部」與急迫條目那兩份 feed 的名字
+            log.warning("changelog_digest：篩選項 id %r 只能用小寫英數與連字號，且不能是 all 或 urgent",
+                        f.get("id"))
             return markdown
 
     directory = Path(page.file.abs_src_path).parent
@@ -355,6 +480,23 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     today = _today()
     since = today - dt.timedelta(days=int(cfg["days"]))
     slugify = _slugify(config)
+
+    global _feed_dir
+    here = posixpath.dirname(page.file.src_uri)
+    site_url = config["site_url"] or "/"
+    if not site_url.endswith("/"):
+        site_url += "/"
+
+    def page_url(stem):
+        target = files.get_file_from_path(posixpath.join(here, f"{stem}.md"))
+        return site_url + (target.url if target else f"{here}/{stem}/")
+
+    _feeds.clear()
+    _feeds.update(build_feeds(
+        pages, cfg, site_url + page.url, page_url, config["theme"]["language"],
+        dt.datetime.now(dt.timezone.utc).replace(microsecond=0), slugify,
+    ))
+    _feed_dir = here
 
     def replace(match):
         kind, name = match.groups()
@@ -372,3 +514,19 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         return match.group(0)
 
     return PLACEHOLDER.sub(replace, markdown)
+
+
+def on_pre_build(config, **kwargs):
+    # serve 模式每次重建都會重跑，上一輪算好的 feed 不能留到這一輪
+    global _feed_dir
+    _feed_dir = None
+    _feeds.clear()
+
+
+def on_post_build(config, **kwargs):
+    if _feed_dir is None:
+        return
+    out = Path(config["site_dir"]) / _feed_dir
+    out.mkdir(parents=True, exist_ok=True)
+    for name, body in _feeds.items():
+        (out / name).write_text(body, encoding="utf-8")

@@ -169,6 +169,15 @@
   margin-top: 0;
 }
 
+/* RSS 連結一次只露出目前選項那一份，切換規則由 hook 輸出 */
+.md-typeset .cl-feed {
+  font-size: 0.68rem;
+}
+
+.md-typeset .cl-feed [data-feed]:not([data-feed="all"]) {
+  display: none;
+}
+
 .md-typeset ul.cl-list {
   list-style: none;
   margin-left: 0;
