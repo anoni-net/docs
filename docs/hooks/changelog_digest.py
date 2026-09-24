@@ -71,6 +71,9 @@ FILTER_ID = re.compile(r"^[a-z0-9-]+$")
 # 「現在要處理的」只收這兩級，順序也照這個排。
 PRESSING = ("now", "soon")
 
+# 頁面上提到 RSS 的地方前面都放這個圖示，讀者一眼認得出是訂閱。
+RSS_ICON = ":material-rss-box:{ .cl-rss-icon }"
+
 # 每份 feed 的則數上限。閱讀器只看得到新進的項目，舊的留著只是讓檔案變大。
 FEED_ITEMS = 50
 
@@ -252,7 +255,8 @@ def render_filter(cfg: dict, today: dt.date) -> str:
         f'<div class="cl-filter" role="radiogroup" aria-label="{html.escape(cfg["filter_label"])}">'
         + "".join(options)
         + f'</div>\n\n<p class="cl-asof">{asof}</p>'
-        + f'\n\n<p class="cl-feed">RSS：{"".join(links)} · {urgent}</p>'
+        # markdown="span" 讓 md_in_html 處理圖示的 shortcode，連結本身是 HTML 不受影響
+        + f'\n\n<p class="cl-feed" markdown="span">{RSS_ICON} RSS：{"".join(links)} · {urgent}</p>'
     )
 
 

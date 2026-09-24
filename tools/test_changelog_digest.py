@@ -169,6 +169,7 @@ check("每個選項都有自己的訂閱連結",
       all(f'data-feed="{f["id"]}" href="feed-{f["id"]}.xml"' in html_filter for f in cfg["filters"]), True)
 check("選了選項就換成那一份訂閱連結",
       '.md-typeset:has(#cl-f-windows:checked) .cl-feed [data-feed="windows"] { display: inline; }' in html_filter, True)
+check("提到 RSS 的地方前面有 RSS 圖示", f"{cd.RSS_ICON} RSS：" in html_filter, True)
 check("急迫條目的訂閱連結一直都在", '<a href="feed-urgent.xml">只訂閱立刻與儘快</a>' in html_filter, True)
 
 check("急迫 feed 收所有立刻與儘快，不只每頁最新一則",

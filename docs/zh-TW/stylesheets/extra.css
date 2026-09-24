@@ -178,6 +178,11 @@
   display: none;
 }
 
+/* RSS 慣用的橘色，旁邊有「RSS」文字，圖示只是輔助辨識 */
+.md-typeset .cl-rss-icon {
+  color: #f26522;
+}
+
 .md-typeset ul.cl-list {
   list-style: none;
   margin-left: 0;
