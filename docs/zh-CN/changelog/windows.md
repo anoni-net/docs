@@ -5,7 +5,7 @@ icon: material/microsoft-windows
 digest:
   name: Windows
   devices: [windows]
-  basis: 依微软是否标注已被利用分级
+  basis: 按微软是否标注已被利用分级
 ---
 
 # :material-microsoft-windows: Windows 安全更新

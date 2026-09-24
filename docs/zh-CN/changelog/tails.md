@@ -5,7 +5,7 @@ icon: material/usb-flash-drive-outline
 digest:
   name: Tails
   devices: [tails]
-  basis: 依官方发布形式分级
+  basis: 按官方发布形式分级
 ---
 
 # :material-usb-flash-drive-outline: Tails 更新日志

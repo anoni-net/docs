@@ -5,8 +5,8 @@ icon: material/server-network
 digest:
   name: tor daemon
   devices: [relay]
-  basis: 依官方标为安全发布分级
-  audience: 给架设中继、网桥与 onion 服务的人
+  basis: 按官方是否标为安全发布分级
+  audience: 给搭建中继、网桥与 onion 服务的人
 ---
 
 # :material-server-network: tor daemon 更新日志

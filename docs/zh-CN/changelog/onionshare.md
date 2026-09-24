@@ -5,7 +5,7 @@ icon: material/share-variant
 digest:
   name: OnionShare
   devices: [windows, mac, linux]
-  basis: 有安全修补就标尽快
+  basis: 有安全修补就标为尽快
 ---
 
 # :material-share-variant: OnionShare 更新日志

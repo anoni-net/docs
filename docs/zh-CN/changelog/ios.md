@@ -5,7 +5,7 @@ icon: material/apple-ios
 digest:
   name: iOS
   devices: [iphone]
-  basis: 依 Apple 是否标注已被利用分级
+  basis: 按 Apple 是否标注已被利用分级
 ---
 
 # :material-apple-ios: iOS 安全更新

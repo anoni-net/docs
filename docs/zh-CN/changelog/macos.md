@@ -5,7 +5,7 @@ icon: material/apple
 digest:
   name: macOS
   devices: [mac]
-  basis: 依 Apple 是否标注已被利用分级
+  basis: 按 Apple 是否标注已被利用分级
 ---
 
 # :material-apple: macOS 安全更新
