@@ -1,6 +1,6 @@
 # changelog/ 的資料源與維護方式
 
-`docs/<lang>/changelog/` 底下十二頁的上游在哪、怎麼取、判準怎麼定。這一份不會被建置（`docs_dir` 指向語系目錄），只給維護的人看。
+`docs/<lang>/changelog/` 底下十四頁的上游在哪、怎麼取、判準怎麼定。這一份不會被建置（`docs_dir` 指向語系目錄），只給維護的人看。
 
 ## 資料源
 
@@ -17,8 +17,10 @@
 | `windows.md` | MSRC CVRF | `api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Aug`，單月 4 到 12 MB |
 | `android.md` | Android 安全公告與 Pixel 更新公告 | `source.android.com/docs/security/bulletin/2026/2026-08-01`，Pixel 的在 `bulletin/pixel/2026/2026-08-01`。Pixel 那份晚一週左右發布，利用狀態可能只寫在那一份（2026 年 9 月的 CVE-2026-58704），兩份都要看 |
 | `grapheneos.md` | GrapheneOS 發布 | `grapheneos.org/releases.atom` |
+| `browsers.md` | Chrome 桌面穩定版公告與 Mozilla 安全公告 | `chromereleases.googleblog.com/feeds/posts/default?alt=json`（一次最多 150 則，用 `start-index` 往前翻），Mozilla 的 `github.com/mozilla/foundation-security-advisories` 底下 `announce/<年>/mfsa<年>-<編號>.yml` |
+| `messaging.md` | WhatsApp 安全公告與 Signal 的發布 | WhatsApp 以 NVD API 查 Meta 的 CNA（`sourceIdentifier=cve-assign@fb.com`），Signal 看三個 repo 的 GitHub releases 與 security advisories |
 
-## 八個會踩的坑
+## 十個會踩的坑
 
 ### MSRC 的嚴重度是每個受影響產品各記一筆
 
@@ -56,13 +58,22 @@ Apple 一天發三到五份公告時，各條線的公告會出現大量同名�
 
 那個檔案在 repo 裡是 404，只能看 tag 訊息與提交訊息，條目要寫明資料源比其他專案薄。
 
+### Mozilla 公告裡的「could have been exploited」是固定套語
+
+記憶體安全錯誤的彙總條目一律寫「we presume that with enough effort some of these could have been exploited」，代表理論上可能被利用，不代表有人在利用。拿「exploited」這個字去掃會把每一版都誤判成立刻，要看的是有沒有寫到 in the wild。2026 年 7 月的 Firefox 152.0.6 另有一種寫法，「exploit code for this is public however we are not aware of any attacks in the wild」，利用程式已公開但沒有攻擊，依判準仍是儘快。Chrome 的寫法固定是「Google is aware that an exploit for CVE-… exists in the wild」，而且嚴重度可能只有 Medium（2026 年 9 月的 CVE-2026-87491），不能用嚴重度篩。
+
+### WhatsApp 的公告頁抓不到
+
+`www.whatsapp.com/security/advisories/<年>/` 用 curl 抓會回 400，換 User-Agent 也一樣，有些網路的 DNS 甚至查不到這個主機名。同樣的內容可以從 NVD API 以 Meta 的 CNA 識別碼查（`sourceIdentifier=cve-assign@fb.com`），結果會混著 React 與 Proxygen 這類 Meta 其他專案，要篩描述裡的 WhatsApp。NVD 的查詢區間最多 120 天，超過會直接回 404。
+
 ## 急迫程度分級
 
-有三色標籤的六頁：`ios`、`macos`、`windows`、`tails`、`tor-daemon`、`onionshare`。CSS 是 `docs/<lang>/stylesheets/extra.css` 裡的 `.urg-tag`，`tor.md` 另有 `.chan-tag` 標穩定版與 Alpha。
+有三色標籤的八頁：`ios`、`macos`、`windows`、`browsers`、`messaging`、`tails`、`tor-daemon`、`onionshare`。CSS 是 `docs/<lang>/stylesheets/extra.css` 裡的 `.urg-tag`，`tor.md` 另有 `.chan-tag` 標穩定版與 Alpha。
 
 判準基礎不同，各頁開頭都寫明了，改的時候不要弄混：
 
-- `ios`、`macos`、`windows` 的「立刻」需要證據，也就是上游標注可能已被實際利用，或進了 CISA 目錄
+- `ios`、`macos`、`windows`、`browsers`、`messaging` 的「立刻」需要證據，也就是上游標注可能已被實際利用，或進了 CISA 目錄
+- `messaging` 不收沒有安全公告的版本，只會出現「立刻」與「儘快」
 - `tails`、`tor-daemon` 的「立刻」看的是官方發布形式（緊急釋出、security release），不代表已有攻擊
 - `onionshare` 的「儘快」涵蓋所有安全修補，不分類別，篩選比其他頁寬，且還沒有「立刻」
 

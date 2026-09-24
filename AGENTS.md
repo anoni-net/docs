@@ -145,13 +145,13 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 
 ### 軟體更新日誌（changelog/）
 
-`docs/<lang>/changelog/` 底下十二頁追蹤 Tor 家族、OONI、OnionShare 與五種作業系統的版本更新，目標是讓非工程師讀者能依風險自己判斷要不要更新。
+`docs/<lang>/changelog/` 底下十四頁追蹤 Tor 家族、OONI、OnionShare、五種作業系統、瀏覽器與通訊軟體的版本更新，目標是讓非工程師讀者能依風險自己判斷要不要更新。
 
-動這批頁面之前先讀 [`docs/CHANGELOG_SOURCES.md`](./docs/CHANGELOG_SOURCES.md)，那裡記了各頁的上游在哪、怎麼取，以及八個會踩的坑。最容易誤判的三個：MSRC 的嚴重度是每個受影響產品各記一筆，直接數會膨脹好幾倍。GrapheneOS 發布說明裡的「List of additional fixed CVEs」是提前修補未來月份的累積清單，不是當月涵蓋範圍。Apple 同一輪多條維護線的公告元件同名，修的卻不一定是同一項，歸屬要逐條看 `Impact:`。
+動這批頁面之前先讀 [`docs/CHANGELOG_SOURCES.md`](./docs/CHANGELOG_SOURCES.md)，那裡記了各頁的上游在哪、怎麼取，以及十個會踩的坑。最容易誤判的三個：MSRC 的嚴重度是每個受影響產品各記一筆，直接數會膨脹好幾倍。GrapheneOS 發布說明裡的「List of additional fixed CVEs」是提前修補未來月份的累積清單，不是當月涵蓋範圍。Apple 同一輪多條維護線的公告元件同名，修的卻不一定是同一項，歸屬要逐條看 `Impact:`。
 
 急迫程度標籤的判準各頁不同，有的看證據、有的看官方發布形式，那一份也寫明了。
 
-首頁 `changelog/index.md` 的「最近的更新」與 `changelog/feed*.xml` 的 RSS 由 `docs/hooks/changelog_digest.py` 在建置時產生，資料來自各頁的條目（`## 標題` 加上 `> 日期` 那一行），不要手寫。各頁的顯示名稱、對應的篩選項與分級判準寫在該頁 front matter 的 `digest`，首頁的文字與篩選項寫在 `index.md` 的 `changelog_digest`。新增一頁時兩邊都要補，漏了 `digest` 建置會出 warning。每個篩選項各有一份 feed，登記在網址合約裡，拿掉篩選項等於讓訂閱的人收不到東西，CI 會擋。三語系都接上了，篩選項的 id 三邊要一致。
+首頁 `changelog/index.md` 的「最近的更新」與 `changelog/feed*.xml` 的 RSS 由 `docs/hooks/changelog_digest.py` 在建置時產生，資料來自各頁的條目（`## 標題` 加上 `> 日期` 那一行），不要手寫。各頁的顯示名稱、對應的篩選項與分級判準寫在該頁 front matter 的 `digest`，首頁的文字與篩選項寫在 `index.md` 的 `changelog_digest`。新增一頁時兩邊都要補，漏了 `digest` 建置會出 warning。每個篩選項各有一份 feed，登記在網址合約裡，拿掉篩選項等於讓訂閱的人收不到東西，CI 會擋。三語系都接上了，篩選項的 id 三邊要一致。一頁收兩個產品時（瀏覽器頁的 Chrome 與 Firefox、通訊軟體頁的 WhatsApp 與 Signal），在 `digest.tracks` 列出產品名、條目標題以產品名開頭，首頁會每個產品各取最新一則，否則同一頁的另一個產品會從「現在要處理的」消失。
 
 ## Pulse 監控系統
 

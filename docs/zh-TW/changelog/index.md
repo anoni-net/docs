@@ -1,6 +1,6 @@
 ---
 title: 軟體更新日誌
-description: Tor、tor daemon、Tails、OONI、Arti、OnionShare、iOS 與 GrapheneOS 各版本更新的中文重點整理，從上游 changelog 翻譯而成，方便台灣與華語讀者快速掌握每次發布的關鍵變更與安全修補。
+description: Tor、tor daemon、Tails、OONI、Arti、OnionShare、作業系統、瀏覽器與通訊軟體各版本更新的中文重點整理，從上游 changelog 翻譯而成，方便台灣與華語讀者快速掌握每次發布的關鍵變更與安全修補。
 icon: material/history
 changelog_digest:
   days: 45
@@ -47,19 +47,19 @@ changelog_digest:
 
 ### 現在要處理的
 
-有急迫程度分級的六頁各取最新一則，只列「立刻」與「儘快」。各頁分級的判準不同，寫在每一項的日期後面。
+有急迫程度分級的頁面各取最新一則（一頁收兩個產品的各取一則），只列「立刻」與「儘快」。各頁分級的判準不同，寫在每一項的日期後面。
 
 <!-- changelog-digest:now -->
 
 ### 最近 45 天
 
-十二頁在這段期間的所有條目，新的在最上面。
+所有頁面在這段期間的條目，新的在最上面。
 
 <!-- changelog-digest:recent -->
 
 ## 先看哪一頁
 
-多數人只需要兩頁：[Tor 更新日誌](./tor.md)，加上自己裝置對應的那一頁（iPhone 看 iOS、Mac 看 macOS、Windows 電腦看 Windows、Android 手機看 Android）。其餘頁面是給有特定需求的人，例如自架中繼、被封鎖需要換傳輸、做審查觀測。
+多數人只需要三頁：[Tor 更新日誌](./tor.md)、[瀏覽器安全更新](./browsers.md)，加上自己裝置對應的那一頁（iPhone 看 iOS、Mac 看 macOS、Windows 電腦看 Windows、Android 手機看 Android）。其餘頁面是給有特定需求的人，例如自架中繼、被封鎖需要換傳輸、做審查觀測。
 
 標「含急迫程度分級」的頁面用三色標籤回答「該多快處理」，各頁的判準基礎不完全相同，寫在該頁開頭。沒有標籤的頁面性質是進度或功能整理，讀者不需要為它們做更新決定。
 
@@ -76,6 +76,13 @@ NGO、媒體、社群或小型團隊裡，常有一個人負責提醒大家更�
 確認更新完成時，請成員對照自己的版本號，不必回報到集中的表格。檢查的位置寫在 [iOS 頁的「你的機器走哪一條線」](./ios.md#你的機器走哪一條線)、[macOS 頁的「三條維護線」](./macos.md#三條維護線)與 [Android 頁的「先查自己的裝置落後多少」](./android.md#先查自己的裝置落後多少)。已經拿不到安全更新的舊裝置在盤點時標出來，排進汰換計畫，之後的「立刻」更新都不會涵蓋它們。
 
 向主管或合作單位說明時，以每一則連回的上游公告當依據。這裡的內容是摘譯，數字以上游為準。
+
+## 瀏覽器與通訊軟體
+
+每天都在處理陌生內容的兩類軟體，按月或按公告整理，只看有沒有已被利用的漏洞、要更新到哪一版。
+
+- :material-web-check: [瀏覽器安全更新](./browsers.md)：Chrome 與 Firefox，含急迫程度分級 <!-- changelog-latest:browsers -->
+- :material-message-lock-outline: [通訊軟體安全更新](./messaging.md)：WhatsApp 與 Signal，含急迫程度分級 <!-- changelog-latest:messaging -->
 
 ## 匿名工具
 

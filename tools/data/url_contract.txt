@@ -1651,6 +1651,7 @@
 	#匿名工具
 	#最近-45-天
 	#最近的更新
+	#瀏覽器與通訊軟體
 	#現在要處理的
 	#組織裡負責資安的人
 	#軟體更新日誌
@@ -1686,6 +1687,16 @@
 	#Arti-更新日誌
 	#c-tor-移植到-Rust-的進度
 	#中繼端做到哪裡
+/changelog/browsers/
+	#Chrome-2026-年-7-月
+	#Chrome-2026-年-8-月
+	#Chrome-2026-年-9-月
+	#Firefox-2026-年-7-月
+	#Firefox-2026-年-8-月
+	#Firefox-2026-年-9-月
+	#兩個瀏覽器的發布節奏
+	#急迫程度怎麼判斷
+	#瀏覽器安全更新
 /changelog/feed-android.xml
 /changelog/feed-iphone.xml
 /changelog/feed-linux.xml
@@ -1723,6 +1734,11 @@
 	#macOS-安全更新
 	#三條維護線
 	#急迫程度怎麼判斷
+/changelog/messaging/
+	#2026-年-7-月到-9-月的狀況
+	#WhatsApp-2026-年-5-月
+	#急迫程度怎麼判斷
+	#通訊軟體安全更新
 /changelog/onionshare/
 	#OnionShare-262
 	#OnionShare-263

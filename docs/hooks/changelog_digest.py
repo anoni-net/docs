@@ -101,6 +101,8 @@ class PageInfo:
     basis: str | None = None
     audience: str | None = None
     entries: list[Entry] = field(default_factory=list)
+    # 一頁收好幾個產品時（瀏覽器頁的 Chrome 與 Firefox），各自是一條線，條目標題以線名開頭
+    tracks: list[str] = field(default_factory=list)
 
 
 def _entry_date(quote_line: str) -> dt.date | None:
@@ -143,12 +145,26 @@ def parse_entries(stem: str, body: str) -> list[Entry]:
     return entries
 
 
-def latest(page: PageInfo) -> Entry | None:
-    """該頁最新的一則。Alpha 通道跳過，一般讀者要知道的是穩定版到哪一版。"""
+def latest(page: PageInfo, track: str | None = None) -> Entry | None:
+    """該頁（或該頁某一條線）最新的一則。Alpha 通道跳過，一般讀者要知道的是穩定版到哪一版。"""
     for entry in page.entries:
-        if entry.channel != "alpha":
+        if entry.channel == "alpha":
+            continue
+        if track is None or entry.heading.startswith(track):
             return entry
     return None
+
+
+def latest_each(page: PageInfo) -> list[Entry]:
+    """每條線各自最新的一則，沒有分線的頁面就是整頁最新的一則。
+
+    一頁收兩個產品卻只取整頁最新的一則，會漏掉另一個產品的狀態：瀏覽器頁 2026 年 9 月
+    Chrome 是「立刻」、Firefox 是「儘快」，只看最新一則的話 Firefox 就從首頁消失了。
+    """
+    if not page.tracks:
+        entry = latest(page)
+        return [entry] if entry else []
+    return [e for e in (latest(page, t) for t in page.tracks) if e]
 
 
 def pressing(pages: list[PageInfo], since: dt.date) -> list[Entry]:
@@ -159,9 +175,9 @@ def pressing(pages: list[PageInfo], since: dt.date) -> list[Entry]:
     """
     picked = []
     for page in pages:
-        entry = latest(page)
-        if entry and entry.urgency in PRESSING and entry.date >= since:
-            picked.append(entry)
+        for entry in latest_each(page):
+            if entry.urgency in PRESSING and entry.date >= since:
+                picked.append(entry)
     picked.sort(key=lambda e: (PRESSING.index(e.urgency), -e.date.toordinal(), e.page))
     return picked
 
@@ -176,6 +192,9 @@ def _title(entry: Entry, page: PageInfo) -> str:
     # 標題已經帶著產品名稱（Tor Browser 15.0.23、iOS 27）就不再加前綴，
     # 只寫月份的（2026 年 9 月）或名稱不同的（tor 0.4.9.13）才補上頁面名稱。
     if page.name.lower() in entry.heading.lower():
+        return entry.heading
+    # 分線的頁面，標題本身就以產品名開頭（Chrome 2026 年 9 月）
+    if any(entry.heading.startswith(t) for t in page.tracks):
         return entry.heading
     return f"{page.name} · {entry.heading}"
 
@@ -299,12 +318,14 @@ def render_recent(entries: list[Entry], pages: dict[str, PageInfo], cfg: dict, s
 
 
 def render_latest(page: PageInfo | None, cfg: dict) -> str:
-    entry = latest(page) if page else None
-    if entry is None:
+    if page is None:
         return ""
-    # 接在該頁的連結後面，讀者已經知道是哪一頁，不必再加頁面名稱當前綴
-    text = cfg["latest"].format(title=entry.heading, date=_date(entry.date, cfg["date_format"]))
-    return f'<span class="cl-latest">{html.escape(text)}</span>'
+    # 接在該頁的連結後面，讀者已經知道是哪一頁，不必再加頁面名稱當前綴。分線的頁面每條線一行
+    spans = []
+    for entry in latest_each(page):
+        text = cfg["latest"].format(title=entry.heading, date=_date(entry.date, cfg["date_format"]))
+        spans.append(f'<span class="cl-latest">{html.escape(text)}</span>')
+    return "".join(spans)
 
 
 def feed_name(key: str | None) -> str:
@@ -436,6 +457,7 @@ def load_pages(directory: Path, filter_ids: set[str]) -> list[PageInfo]:
                 basis=digest.get("basis"),
                 audience=digest.get("audience"),
                 entries=parse_entries(path.stem, body),
+                tracks=[str(t) for t in (digest.get("tracks") or [])],
             )
         )
     return pages
