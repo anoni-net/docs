@@ -15,7 +15,7 @@
 | `tails.md` | Tails 公告 | `tails.net/news/version_7.11/`，版本號用點號 |
 | `ios.md`、`macos.md` | Apple 安全性更新 | 總表 `support.apple.com/en-us/100100`，個別公告用數字 ID |
 | `windows.md` | MSRC CVRF | `api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Aug`，單月 4 到 12 MB |
-| `android.md` | Android 安全公告 | `source.android.com/docs/security/bulletin/2026/2026-08-01` |
+| `android.md` | Android 安全公告與 Pixel 更新公告 | `source.android.com/docs/security/bulletin/2026/2026-08-01`，Pixel 的在 `bulletin/pixel/2026/2026-08-01`。Pixel 那份晚一週左右發布，利用狀態可能只寫在那一份（2026 年 9 月的 CVE-2026-58704），兩份都要看 |
 | `grapheneos.md` | GrapheneOS 發布 | `grapheneos.org/releases.atom` |
 
 ## 八個會踩的坑

@@ -32,14 +32,15 @@ Android 设备的实际补丁级别由手机厂决定，跟 Google 公告的日�
 
 ## 2026 年 9 月
 
-> 补丁级别 2026-09-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [GrapheneOS 发布页](https://grapheneos.org/releases){target="_blank"}
+> 补丁级别 2026-09-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [Pixel 更新公告](https://source.android.com/docs/security/bulletin/pixel/2026/2026-09-01){target="_blank"} · [GrapheneOS 发布页](https://grapheneos.org/releases){target="_blank"}
 
 - 公告在 9 月 8 日发布，漏洞明细回来了，所以这一则的数字直接来自 Google 的公告。
 - 180 个 CVE，32 个评为 Critical、148 个 High。分成 2026-09-01 与 2026-09-05 两个补丁级别，设备显示 2026-09-05 或更新才代表两批都涵盖。
 - 最严重的一组在 System 组件，8 个 Critical 的远程代码执行，不需要额外的执行权限，也不需要用户做任何动作。影响范围从 Android 14 到 17（CVE-2026-28604、CVE-2026-28618、CVE-2026-28639、CVE-2026-28662、CVE-2026-49882、CVE-2026-49884、CVE-2026-49919、CVE-2026-49921）。
 - System 另外有 12 个 Critical 提权与 3 个 Critical 拒绝服务，Framework 有 3 个 Critical。内核那一组的 4 个 Critical 提权里有 3 个落在受保护的 KVM（Protected KVM）上。
 - 芯片厂那一侧集中在 Imagination Technologies 25 个与 MediaTek 21 个，都评为 High。
-- 公告没有提到任何项目正在被实际利用。
+- Android 安全公告本身没有提到任何项目正在被实际利用。9 月 15 日另外发布的 Pixel 更新公告写明 CVE-2026-58704 有迹象可能正遭到有限的、针对性的利用，CISA 次日将其收入已知遭利用漏洞目录（KEV）。
+- CVE-2026-58704 位于 Pixel 的移动基带（Modem），是权限检查的逻辑错误，可以用来提权，Google 评为 High。攻击者需要在物理上靠近目标，但不需要用户做任何操作。Pixel 更新到 2026-09-05 补丁级别才覆盖，还停在 2026-09-01 的 Pixel 要尽快更新。Pixel 更新公告只覆盖 Google 自己的手机，其他品牌的情况要看各自的公告。
 - GrapheneOS 这一侧，到 9 月 10 日那版为止提前修好的 CVE 已经涵盖 Google 排定在 2026 年 10 月到 2027 年 3 月公告的内容，详见 [GrapheneOS 月度更新摘要](./grapheneos.md)。
 
 ## 2026 年 8 月
