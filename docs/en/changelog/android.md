@@ -32,14 +32,15 @@ Vendor support periods vary widely. Checking a model's committed support window 
 
 ## September 2026
 
-> Patch level 2026-09-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
+> Patch level 2026-09-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-09-01){target="_blank"} · [Pixel Update Bulletin](https://source.android.com/docs/security/bulletin/pixel/2026/2026-09-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
 
 - The bulletin went up on 8 September with vulnerability details present again, so the figures in this entry come straight from Google.
 - 180 CVEs: 32 rated Critical and 148 High. They split across the 2026-09-01 and 2026-09-05 patch levels, so a device has to report 2026-09-05 or later to be covered by both.
 - The most serious group sits in the System component: eight Critical remote code execution issues needing no additional execution privileges and no user interaction, affecting Android 14 through 17 (CVE-2026-28604, CVE-2026-28618, CVE-2026-28639, CVE-2026-28662, CVE-2026-49882, CVE-2026-49884, CVE-2026-49919, CVE-2026-49921).
 - System also carries 12 Critical privilege escalations and three Critical denial-of-service issues, and Framework has three Critical. Of the four Critical privilege escalations in the Kernel section, three land in Protected KVM.
 - On the chipset side the volume concentrates in Imagination Technologies (25) and MediaTek (21), all rated High.
-- The bulletin does not mention any item under active exploitation.
+- The Android Security Bulletin itself does not mention any item under active exploitation. The separate Pixel Update Bulletin, published on 15 September, states that there are indications CVE-2026-58704 may be under limited, targeted exploitation, and CISA added it to its Known Exploited Vulnerabilities catalogue (KEV) the next day.
+- CVE-2026-58704 sits in the Pixel cellular modem: a logic error in a permission check that allows privilege escalation, rated High by Google. The attacker needs to be physically nearby, but no user interaction is required. Pixels are covered from the 2026-09-05 patch level, so any Pixel still on 2026-09-01 should update promptly. The Pixel bulletin only covers Google's own phones; other manufacturers publish their own.
 - On the GrapheneOS side, the CVEs patched ahead of schedule as of the 10 September release now cover what Google has slated for the October 2026 through March 2027 bulletins. See the [GrapheneOS monthly summary](./grapheneos.md).
 
 ## August 2026
