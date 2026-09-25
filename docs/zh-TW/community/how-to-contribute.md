@@ -34,3 +34,5 @@ icon: material/hand-heart
 - **線上視訊**：定期或主題討論時使用 **Jitsi** 開會，連結會於 Matrix 公布。
 
 下一步：若你還沒使用過這些工具，請先閱讀 [社群自架服務](tools.md)（帳號建立、服務入口、Public Space 連結）。
+
+以組織身分合作的方式另見[組織合作](partners.md)。
