@@ -220,6 +220,9 @@ const makeServiceWorker = (opts) => {
         } else if (message.type === 'OFFLINE_ADD') {
           // 模擬網路很差：service worker 收到了，但一筆都還沒回報
           if (opts.holdAdd) return;
+          // 模擬做到一半被瀏覽器終止：前幾批照常完成，接下來那一批再也沒有回音
+          state.adds = (state.adds || 0) + 1;
+          if (opts.holdAddAfter !== undefined && state.adds > opts.holdAddAfter) return;
           let done = 0;
           for (const p of message.paths) {
             done += 1;
@@ -400,7 +403,7 @@ const load = async (opts = {}) => {
   const fetchStub = async (url) => {
     fetched.push(url);
     if (opts.noIndex) return { ok: false };
-    const index = opts.picker ? PICKER_INDEX : INDEX;
+    const index = opts.index || (opts.picker ? PICKER_INDEX : INDEX);
     return { ok: true, json: async () => JSON.parse(JSON.stringify(index)) };
   };
   // MessageChannel：port2 交給 worker，worker 回話走 port1.onmessage
@@ -426,11 +429,13 @@ const load = async (opts = {}) => {
       });
     }
   }
+  // opts.fastIdle 把「多久沒有回音就放棄」那一分鐘縮成幾毫秒，其餘的計時照舊
+  const setTimeoutStub = (fn, ms) => setTimeout(fn, opts.fastIdle && ms >= 60000 ? 5 : ms);
   new Function(
     'document', 'window', 'navigator', 'location', 'fetch', 'MessageChannel', 'setTimeout', 'URL',
     'caches',
     src
-  )(document, window, navigator, location, fetchStub, MessageChannelStub, setTimeout, URL, caches);
+  )(document, window, navigator, location, fetchStub, MessageChannelStub, setTimeoutStub, URL, caches);
 
   // 等初始化那串 promise 跑完。狀態回覆之後還要問一輪 Cache Storage 算離線可用性，
   // 輪數不夠的話會停在「還在準備」，而畫面上看起來只是狀態列的字不一樣。
@@ -571,6 +576,70 @@ test('更新做完要說結果，失敗幾頁也要說', async () => {
   clickButton(partial.root, '更新已存的內容');
   await tick(30);
   assert.ok(partial.root.textContent.includes('存下 1 頁，1 頁失敗'), partial.root.textContent);
+});
+
+// 一個章節五十頁，超過一批的量
+const BIG_INDEX = {
+  lang: 'zh-TW',
+  assets: { 'img/a.png': 1024 },
+  sections: [
+    {
+      key: '指南|工具',
+      title: '工具',
+      group: '指南',
+      bytes: 5000,
+      pages: Array.from({ length: 50 }, (_, i) => ({
+        url: `tools/t${i}/`,
+        title: `工具 ${i}`,
+        bytes: 100,
+        assets: i === 0 ? ['img/a.png'] : [],
+      })),
+    },
+  ],
+};
+
+test('全部存到裝置切成小批送，每一批都是一個短事件', async () => {
+  // 原本一則訊息四百多個請求，整批掛在 service worker 同一個事件上，慢的網路上
+  // 做不完就被瀏覽器終止，按鈕一直轉圈
+  const { root, sw } = await load({ index: BIG_INDEX });
+  clickButton(root, '全部存到裝置');
+  await tick(60);
+
+  const adds = sw.sent.filter((m) => m.type === 'OFFLINE_ADD');
+  assert.equal(adds.length, 2);
+  assert.equal(adds[0].paths.length, 40);
+  assert.deepEqual(adds[0].assets, []);
+  assert.equal(adds[1].paths.length, 10);
+  // 頁面排在資產前面，中途斷掉時手上是幾頁完整的內容
+  assert.deepEqual(adds[1].assets, ['img/a.png']);
+  // 意圖只跟最後一批走，中途斷掉就不算按過全部
+  assert.equal(adds[0].intent, undefined);
+  assert.equal(adds[1].intent, 'all');
+  // 結果合起來算，讀者看到的跟一次送完一樣
+  assert.ok(root.textContent.includes('完成。存下 50 頁。'), root.textContent);
+});
+
+test('service worker 一分鐘沒有回音就當作失敗，不讓按鈕一直轉圈', async () => {
+  const { root } = await load({ holdAdd: true, fastIdle: true });
+  clickButton(root, '全部存到裝置');
+  await tick(10);
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  await tick(20);
+  assert.ok(root.textContent.includes('沒有完成'), root.textContent);
+  assert.equal(root.querySelectorAll('.anoni-spinner').length, 0);
+});
+
+test('中途斷掉之後重讀狀態，按鈕上只剩缺的頁數', async () => {
+  // 前一批已經在裝置上了，再按一次只該補後面那十頁
+  const { root, sw } = await load({ index: BIG_INDEX, holdAddAfter: 1, fastIdle: true });
+  clickButton(root, '全部存到裝置');
+  await tick(60);
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  await tick(30);
+  assert.ok(root.textContent.includes('沒有完成'), root.textContent);
+  assert.ok(root.textContent.includes('全部存到裝置（10 頁'), root.textContent);
+  // 沒做完就不算按過全部
+  assert.equal(sw.state.saveAll, false);
 });
 
 test('沒按過全部存到裝置的人，更新只送自己勾的那幾頁', async () => {
