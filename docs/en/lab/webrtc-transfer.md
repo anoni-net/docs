@@ -55,9 +55,9 @@ Sending goes to every connected device at once, and step 5 lists timing and the 
 
 ## Comparing throughput
 
-Step 5 has three transfer settings: chunk size, channels per connection, and parallel connections. The defaults are 64 KB, 1 channel and 1 connection. Change one at a time and leave the others at their defaults. Both sides log the settings used for each run, which is what lets the results show which setting made a difference.
+Step 5 has three transfer settings: chunk size, channels per connection, and parallel connections. The defaults are 64 KB, 1 channel and 3 connections. Change one at a time and leave the others at their defaults. Both sides log the settings used for each run, which is what lets the results show which setting made a difference.
 
-Parallel connections open several connections between the same pair of devices, each with its own send window. When a phone's round trip time on Wi-Fi grows, the send window caps how much can go out per second, and more connections may help. The `rttMs` field in the log is that round trip time.
+Parallel connections open several connections between the same pair of devices. In a 2026-09-25 test between an iPhone 15 Pro and Chrome on a Mac, the iPhone sent 100 MB at 4.8 MB per second over 1 connection and about 16.5 MB per second over 3, almost in proportion to the count. More channels inside one connection and different chunk sizes made no difference, so the limit applies per connection, and the default is now 3. The options include 4 and 6 to find where the gain stops. In the log, `rttMs` is the round trip time, and `localNet` and `remoteNet` give the class of each side's address (LAN, mDNS, Tailscale and so on), never the address itself.
 
 Before measuring, time an ordinary file download on the same network, for example by running `python3 -m http.server` on a computer and downloading a large file on the phone. That speed is roughly the ceiling of the network. Tuning the settings only matters when this page comes in well below it.
 
