@@ -11,6 +11,9 @@
  *   2. D 與 E 同時回應對方的發起描述，兩條連線都可能開通，最後每一邊只能留一條。
  *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
  *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
+ *   另外在第 1 種情況裡，換三組傳輸參數送檔，確認多條通道、多條連線照位置組回來。
+ *   4. I 套上一份連不到的回應（候選換成 TEST-NET 位址，產生它的分頁已經關掉），
+ *      15 秒後要判定連不上並收掉那一條，而不是一直停在建立中。
  *
  * 回送量到的兩件事可以信：SDP 的位元組數，以及 SHA-256 比對有沒有一致。回送量到的
  * 吞吐量不能信，那是本機記憶體之間的複製，跟 Wi-Fi 上的數字沒有關係。握手耗時也不能信，
@@ -161,6 +164,24 @@ try {
     }
   }
 
+  // 傳輸參數：多條通道、多條連線、較大的塊，資料照位置組回來，兩台都要一致
+  for (const opts of [{ chunk: 262144, channels: 4, links: 3 }, { chunk: 16384, channels: 1, links: 1 }]) {
+    const before = { b: (await events(b, "recv-done")).length, c: (await events(c, "recv-done")).length };
+    await a.evaluate(`__lab.send(5242880, ${JSON.stringify(opts)})`, true);
+    for (const [tab, key] of [[b, "b"], [c, "c"]]) {
+      const done = await until(async () => {
+        const rows = await events(tab, "recv-done");
+        return rows.length > before[key] ? rows[rows.length - 1] : null;
+      }, `${tab.label} 收完`, 120000);
+      check(done.match && done.links === opts.links && done.channels === opts.channels,
+        `${opts.chunk / 1024} KB · ${opts.channels} 通道 · ${opts.links} 連線，${tab.label} 收到的 SHA-256 一致`);
+    }
+    const sent = (await events(a, "send-done")).slice(-2);
+    const lanes = opts.channels * opts.links;
+    check(sent.every((r) => r.acked && r.lanes === lanes && r.chunk <= opts.chunk),
+      `送出端開了 ${sent.map((r) => r.lanes).join("、")} 條通道，每塊 ${sent[0].chunk} B，都收到對方的確認`);
+  }
+
   // ------------------------------------------------------------ 2. 同時互掃
   console.log("兩台同時回應對方");
   const [d, e] = await Promise.all(["D", "E"].map(openTab));
@@ -200,11 +221,32 @@ try {
   await connected(h, 2);
   const superseded = (await events(h, "peer-closed")).filter((r) => r.reason === "superseded").length;
   check(superseded === 1, "H 收掉回應舊描述的那一條");
+  // ------------------------------------------------------------ 4. 連不上要說得出來
+  console.log("連不到的回應");
+  const [i, j] = await Promise.all(["I", "J"].map(openTab));
+  tabs.push(i);
+  for (const tab of [i, j]) await tab.evaluate("__lab.start()", true);
+  await apply(j, await shown(i, "offer"));
+  const deadAnswer = JSON.parse(await shown(j, "answer"));
+  // 候選換成到不了的位址，ice-ufrag 與 ice-pwd 也換掉。J 的分頁關閉要一點時間，這段期間
+  // 它照樣會送連線檢查過來，帳密對不上，I 就不會把它當成對方。
+  await j.close();
+  deadAnswer.sdp = deadAnswer.sdp
+    .replace(/^a=candidate:(\S+) 1 udp (\d+) \S+ (\d+) typ host.*$/gm, "a=candidate:$1 1 udp $2 192.0.2.1 $3 typ host")
+    .replace(/^a=ice-ufrag:.*$/m, "a=ice-ufrag:dead")
+    .replace(/^a=ice-pwd:.*$/m, "a=ice-pwd:deaddeaddeaddeaddeaddead");
+  const began = Date.now();
+  check((await apply(i, JSON.stringify(deadAnswer))) === "applied", "I 套上連不到的回應");
+  const timeout = await until(async () => (await events(i, "connect-timeout"))[0], "I 判定連不上", 25000);
+  const secs = (Date.now() - began) / 1000;
+  check(secs >= 14 && secs < 20, `${secs.toFixed(1)} 秒後判定連不上（ICE ${timeout.ice}）`);
+  const closed = (await events(i, "peer-closed")).some((r) => r.reason === "timeout");
+  check(closed && (await state(i)).peers.length === 0, "那一條已經收掉，第四區不再列出");
 } catch (err) {
   console.error(String(err && err.message));
   failed = true;
   // 失敗時把各分頁跟配對有關的紀錄印出來，多半一眼就看得出卡在哪一步
-  const keep = ["start", "remote-description", "datachannel-open", "hello", "hello-mismatch", "relay-offer", "relay-answer", "peer-closed", "pool-empty"];
+  const keep = ["start", "remote-description", "datachannel-open", "hello", "hello-mismatch", "relay-offer", "relay-answer", "peer-closed", "pool-empty", "connect-timeout"];
   for (const tab of tabs) {
     const log = JSON.parse(await tab.evaluate("JSON.stringify(__lab.log())"));
     console.error(`--- ${tab.label}`);

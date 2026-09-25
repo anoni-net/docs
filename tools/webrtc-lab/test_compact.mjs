@@ -37,8 +37,8 @@ const consts = ["PACK_MAGIC", "PACK_COMPACT"].map((name) => {
   if (!m) throw new Error(`webrtc-lab.js 裡找不到 ${name}`);
   return m[0];
 });
-const { encodeCompact, decodeCompact, iceTag } = new Function(
-  `${consts.join("\n")}\n${src.slice(begin, end)}\nreturn { encodeCompact, decodeCompact, iceTag };`
+const { encodeCompact, decodeCompact, iceTag, filterCandidates } = new Function(
+  `${consts.join("\n")}\n${src.slice(begin, end)}\nreturn { encodeCompact, decodeCompact, iceTag, filterCandidates };`
 )();
 
 // ---------------------------------------------------------------- 描述
@@ -307,6 +307,18 @@ const tests = [
     const tags = new Set(Array.from(ufrags, iceTag));
     const clash = ufrags.size - tags.size;
     assert.ok(clash <= 3, `碰撞 ${clash} 次`);
+  }],
+
+  ["經由介紹轉交的描述：濾掉 Tailscale 與 TCP，其餘的行原樣保留", () => {
+    const out = filterCandidates(CHROME_ALL.sdp);
+    assert.deepEqual(candidates(out).map((c) => c.address), ["192.168.1.20"]);
+    const rest = (sdp) => sdp.split("\r\n").filter((l) => !l.startsWith("a=candidate:"));
+    assert.deepEqual(rest(out), rest(CHROME_ALL.sdp));
+  }],
+
+  ["經由介紹轉交的描述：候選全被濾掉就原樣送", () => {
+    const desc = chrome({ candidates: ["a=candidate:1 1 udp 2122194687 100.100.1.2 35439 typ host"] });
+    assert.equal(filterCandidates(desc.sdp), desc.sdp);
   }],
 
   ["封包截斷、尾巴多一個位元組、不認得的旗標，解碼都丟例外", () => {

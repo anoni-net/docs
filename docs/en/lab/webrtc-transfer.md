@@ -53,9 +53,17 @@ A third device does not need to scan every other device. One mutual scan with an
 
 Sending goes to every connected device at once, and step 5 lists timing and the hash check per device. Several devices share the same Wi-Fi channel, so each one runs slower than a one-to-one transfer, and how much slower is one of the numbers to measure.
 
+## Comparing throughput
+
+Step 5 has three transfer settings: chunk size, channels per connection, and parallel connections. The defaults are 64 KB, 1 channel and 1 connection. Change one at a time and leave the others at their defaults. Both sides log the settings used for each run, which is what lets the results show which setting made a difference.
+
+Parallel connections open several connections between the same pair of devices, each with its own send window. When a phone's round trip time on Wi-Fi grows, the send window caps how much can go out per second, and more connections may help. The `rttMs` field in the log is that round trip time.
+
+Before measuring, time an ordinary file download on the same network, for example by running `python3 -m http.server` on a computer and downloading a large file on the phone. That speed is roughly the ceiling of the network. Tuning the settings only matters when this page comes in well below it.
+
 ## Where it is known to fail
 
-Public Wi-Fi usually isolates clients from each other, which is exactly the setting where this would be most useful. On such a network this page finishes gathering candidates and then fails to connect.
+Public Wi-Fi usually isolates clients from each other, which is exactly the setting where this would be most useful. On such a network, if the connection has not opened 15 seconds after applying the reply, step 3 says so and suggests a hotspot you run yourself.
 
 Tor Browser disables WebRTC because it leaks your real IP, so that build cannot use this page.
 
