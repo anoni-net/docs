@@ -55,7 +55,7 @@ Sending goes to every connected device at once, and step 5 lists timing and the 
 
 ## Where it is known to fail
 
-Public Wi-Fi usually isolates clients from each other, which is exactly the setting where this would be most useful. On such a network this page finishes gathering candidates and then fails to connect.
+Public Wi-Fi usually isolates clients from each other, which is exactly the setting where this would be most useful. On such a network, if the connection has not opened 15 seconds after applying the reply, step 3 says so and suggests a hotspot you run yourself.
 
 Tor Browser disables WebRTC because it leaks your real IP, so that build cannot use this page.
 

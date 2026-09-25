@@ -4,7 +4,7 @@
 
 | 檔案 | 走哪一條路 |
 |---|---|
-| `run-loopback.mjs` | 複製貼上。一顆 Chrome 開八個分頁，走經由介紹連上第三台、兩台同時互掃、同一張 QR code 被兩台掃到三種情況 |
+| `run-loopback.mjs` | 複製貼上。一顆 Chrome 開十個分頁，走經由介紹連上第三台、兩台同時互掃、同一張 QR code 被兩台掃到、連不上要在 15 秒內判定四種情況 |
 | `run-qr-camera.mjs` | 相機掃 QR。兩顆 Chrome 各接一個假攝影機，兩邊只按開始，互掃對方的 QR code 連上線 |
 | `test_compact.mjs` | QR 裡只帶欄位的封包。不開瀏覽器，也不需要建置產物 |
 
@@ -24,6 +24,7 @@ python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output &
 - A 與 B 互貼、C 與 B 互貼，A 與 C 要靠 B 轉交描述連上，連上之後 A 同時送檔給 B 與 C
 - D 與 E 同時回應對方，兩條連線都可能開通，最後每一邊只能留一條
 - G 與 H 回應同一張 F 的發起描述，晚一步的 H 要被認出來，改回應 F 換上的新描述後照樣連得上
+- I 套上一份連不到的回應（候選換成 TEST-NET 位址、帳密也換掉），15 秒後要記一筆 `connect-timeout` 並收掉那一條
 
 ```bash
 google-chrome --headless=new --remote-debugging-port=9223 \

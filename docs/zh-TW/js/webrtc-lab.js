@@ -44,8 +44,13 @@
  *
  * 按開始的當下先建好一批 RTCPeerConnection 備用。Chrome 在建立連線物件的時候就決定交出
  * 哪些候選，開相機之前建的只交出一個 mDNS 名稱，即使開相機之後才蒐集也一樣（2026-09-25
- * 在 Chrome 153 實測），之後新建的會交出每一張網卡的明碼位址。相機要一直開著掃，
- * 所以之後要用到的連線都要在開相機之前建好。
+ * 在 Chrome 153 實測），之後新建的會交出每一張網卡的明碼位址。發起方畫面上的描述用這一批，
+ * 相機一直開著也只放 mDNS 名稱。
+ *
+ * 回應方反過來用新建的連線，交出明碼的區網位址，讓每一對裝置至少有一邊不必靠 mDNS 解析。
+ * 兩邊都只有 mDNS 名稱時，連不連得上取決於網路能不能解析 .local，同一天 Mac Brave 對 iPhone
+ * 的實測就連不上。WebKit 則是在蒐集的時候才決定，預先建好的連線在 iPhone 上沒有作用。
+ * 已經授權過相機的瀏覽器，頁面一載入就交出明碼位址，這一批也一樣。
  *
  * 這一頁的所有連線共用一張憑證，DTLS 指紋就是這台裝置在這一頁的代號。經由別台轉交描述
  * 建立的連線，開通之後比對代號，確認對方就是被介紹的那一台。
@@ -85,9 +90,12 @@
   const BUFFER_LOW = 1 * 1024 * 1024;
 
   // 按開始時先建好幾條連線備用，理由見開頭的「減少掃描次數」。每一張顯示過的發起描述、
-  // 每一次回應、每一條經由介紹的連線都各用掉一條。一台連四、五台的情況用不完，
-  // 用完了才現建，那一條會交出所有網卡，記一筆 pool-empty。
+  // 每一條經由介紹發起的連線都各用掉一條。一台連四、五台的情況用不完，
+  // 用完了才現建，那一條會交出所有網卡，記一筆 pool-empty。回應方不從這裡拿，見 addPeer。
   const POOL_SIZE = 8;
+  // 套上對方的回應之後等多久還沒開通，就判定連不上。協定本身在區網上不到一秒，
+  // 超過這個時間多半是裝置隔離或 mDNS 解析不到，繼續等也不會通。issue #553 的 H3 要求 15 秒內說得出來。
+  const CONNECT_TIMEOUT_MS = 15000;
 
   const STRINGS = {
     "zh-TW": {
@@ -122,6 +130,11 @@
       scanned: "掃到了，正在套用。",
       answerUsed: "這張回應用的 QR code 對應的那一張已經有別台用掉了。請對方重新掃你畫面上現在那一張。",
       answerUnknown: "這張回應用的 QR code 不是給這台裝置的。",
+      scanAnswered: "掃到了 {peer}。第二區已經換成回應用的 QR code，讓 {peer} 的相機對準它就連上了。",
+      scanApplied: "套上了 {peer} 的回應，正在建立連線。第四區的資料通道變成 open 就連上了。",
+      scanKnown: "已經連著 {peer}，不必再掃。",
+      connectedTo: "已經連上 {peer}。",
+      connectTimeout: "{peer} 超過 15 秒還沒連上。這個網路可能擋掉裝置之間的連線，或解析不到對方的 .local 名稱。改用自己開的熱點再試，或兩台互換，由另一台先掃。",
       apply: "套用",
       badJson: "貼上的內容解不開，要整段貼，不要只貼中間幾行。",
       connTitle: "四、連線狀態",
@@ -208,6 +221,11 @@
       scanned: "扫到了，正在套用。",
       answerUsed: "这张回应用的 QR code 对应的那一张已经有别台用掉了。请对方重新扫你画面上现在那一张。",
       answerUnknown: "这张回应用的 QR code 不是给这台设备的。",
+      scanAnswered: "扫到了 {peer}。第二区已经换成回应用的 QR code，让 {peer} 的相机对准它就连上了。",
+      scanApplied: "套上了 {peer} 的回应，正在建立连线。第四区的数据通道变成 open 就连上了。",
+      scanKnown: "已经连着 {peer}，不必再扫。",
+      connectedTo: "已经连上 {peer}。",
+      connectTimeout: "{peer} 超过 15 秒还没连上。这个网络可能挡掉设备之间的连线，或解析不到对方的 .local 名称。改用自己开的热点再试，或两台互换，由另一台先扫。",
       apply: "套用",
       badJson: "贴上的内容解不开，要整段贴，不要只贴中间几行。",
       connTitle: "四、连线状态",
@@ -294,6 +312,11 @@
       scanned: "Got it, applying.",
       answerUsed: "The code this reply answers was already used by another device. Ask them to scan the code on your screen now.",
       answerUnknown: "This reply code is meant for a different device.",
+      scanAnswered: "Scanned {peer}. Step 2 now shows your reply code. Point the camera of {peer} at it to connect.",
+      scanApplied: "Applied the reply from {peer}, connecting now. You are connected once the data channel in step 4 reads open.",
+      scanKnown: "Already connected to {peer}, no need to scan again.",
+      connectedTo: "Connected to {peer}.",
+      connectTimeout: "{peer} has not connected after 15 seconds. This network may block traffic between devices, or the .local name of the other device does not resolve. Try again on a hotspot you run yourself, or swap roles and let the other device scan first.",
       apply: "Apply",
       badJson: "That text does not parse. Paste the whole block, not a few lines of it.",
       connTitle: "4. Connections",
@@ -699,11 +722,19 @@
     return { type: desc.type, sdp: desc.sdp };
   }
 
+  function relayDesc(desc) {
+    return { type: desc.type, sdp: filterCandidates(desc.sdp) };
+  }
+
   // fp 是這條連線對方描述裡的 DTLS 指紋，id 是對方開通後自己報的代號，expect 是經由介紹
   // 建立時預期的代號。三者在共用憑證的裝置上是同一個值。
+  // 回應方用新建的連線，不從預先建好的那一批拿。回應方剛用相機掃到對方，新建的連線會交出
+  // 明碼的區網位址，每一對裝置就至少有一邊帶明碼位址。兩邊都只有 mDNS 名稱時，連不連得上
+  // 取決於這個網路能不能解析 .local，2026-09-25 Mac Brave 對 iPhone 的實測就卡在這裡。
+  // 交出去的候選仍然濾掉 Tailscale 與 TCP。相機打不開的裝置，新建的連線一樣只有 mDNS 名稱。
   function addPeer(role, via) {
     const peer = {
-      pc: takePc(),
+      pc: role === "answerer" ? createPc() : takePc(),
       channel: null,
       role: role,
       via: via,
@@ -769,6 +800,7 @@
       sinceStartMs: Math.round(peer.openedAt - startedAt),
     });
     sendControl(peer, { kind: "hello", id: selfId, bound: !!cert });
+    if (peer.via !== "relay") scanState.textContent = fill(t.connectedTo, { peer: short(peerKey(peer)) });
     if (peer === shownAnswer) {
       shownAnswer = null;
       refreshDisplay();
@@ -819,9 +851,11 @@
       if (!pair) return null;
       const local = stats.get(pair.localCandidateId);
       const remote = stats.get(pair.remoteCandidateId);
+      // 往返時間拿來判斷吞吐量卡在哪裡。SCTP 一次能在路上的資料有上限，往返越久，每秒送得出去的越少
       return {
         local: local ? local.candidateType : "?",
         remote: remote ? remote.candidateType : "?",
+        rttMs: typeof pair.currentRoundTripTime === "number" ? Math.round(pair.currentRoundTripTime * 1000) : null,
       };
     } catch (err) {
       return null;
@@ -833,7 +867,8 @@
     return peer.via === "paste" ? t.viaPaste : t.viaQr;
   }
 
-  // 還沒有對象的發起描述（畫面上那一張）不列出來，列的是已經知道對方是誰的連線
+  // 還沒有對象的發起描述（畫面上那一張）不列出來，列的是已經知道對方是誰的連線。
+  // 手機上表格要橫向捲動，資料通道與連線狀態緊跟在裝置代號後面，不捲也看得到有沒有連上。
   function renderPeers() {
     const list = peers.filter(function (p) { return !p.closed && peerKey(p); });
     if (!list.length) {
@@ -842,14 +877,14 @@
     }
     grid(
       connTable,
-      [t.peerDevice, t.peerVia, t.role, t.connection, t.channel, t.negotiate, t.pair],
+      [t.peerDevice, t.channel, t.connection, t.peerVia, t.role, t.negotiate, t.pair],
       list.map(function (p) {
         return [
           short(peerKey(p)),
+          p.channel ? p.channel.readyState : t.channelIdle,
+          p.pc.connectionState,
           viaLabel(p),
           p.role === "offerer" ? t.roleValueOfferer : t.roleValueAnswerer,
-          p.pc.connectionState,
-          p.channel ? p.channel.readyState : t.channelIdle,
           p.openedAt && p.appliedAt ? Math.round(p.openedAt - p.appliedAt) + " ms" : "",
           p.pair ? p.pair.local + " / " + p.pair.remote : t.pairIdle,
         ];
@@ -928,7 +963,7 @@
     peer.relay = via;
     record("relay-offer", { peer: short(id), relay: short(via.id) });
     await makeOffer(peer);
-    sendControl(via, { kind: "relay", to: id, from: selfId, desc: plain(peer.pc.localDescription) });
+    sendControl(via, { kind: "relay", to: id, from: selfId, desc: relayDesc(peer.pc.localDescription) });
     renderPeers();
   }
 
@@ -954,7 +989,7 @@
       await peer.pc.setLocalDescription(await peer.pc.createAnswer());
       await waitForGathering(peer.pc);
       record("relay-answer", { peer: short(msg.from), relay: short(from.id) });
-      sendControl(from, { kind: "relay", to: msg.from, from: selfId, desc: plain(peer.pc.localDescription) });
+      sendControl(from, { kind: "relay", to: msg.from, from: selfId, desc: relayDesc(peer.pc.localDescription) });
     } else if (desc.type === "answer") {
       const peer = peers.find(function (p) {
         return !p.closed && p.via === "relay" && p.role === "offerer" && p.expect === msg.from && !p.pc.remoteDescription;
@@ -963,8 +998,25 @@
       peer.fp = fingerprintOf(desc.sdp);
       await peer.pc.setRemoteDescription(plain(desc));
       peer.appliedAt = performance.now();
+      watchConnect(peer);
     }
     renderPeers();
+  }
+
+  // 只在套上回應的那一邊計時。回應方交出描述之後，要等對方拿去套用，中間夾著人工，
+  // 沒辦法判斷多久算太久。
+  function watchConnect(peer) {
+    setTimeout(function () {
+      if (peer.closed || peer.openedAt) return;
+      record("connect-timeout", {
+        peer: short(peerKey(peer)),
+        via: peer.via,
+        ice: peer.pc.iceConnectionState,
+        connection: peer.pc.connectionState,
+      });
+      if (peer.via !== "relay") scanState.textContent = fill(t.connectTimeout, { peer: short(peerKey(peer)) });
+      closePeer(peer, "timeout");
+    }, CONNECT_TIMEOUT_MS);
   }
 
   // 候選蒐集完成才把描述交出去。實驗階段不做 trickle，那需要一條雙向且持續的通道，
@@ -1103,6 +1155,45 @@
     return found ? found[1].trim() : null;
   }
 
+  // 一行 a=candidate 拆成種類、位址與 port。不交給對方的候選帶 reason：
+  // 不是 UDP、不是 host，或是 dropReason 列的那幾種位址。
+  function parseCandidate(line) {
+    const f = line.slice(12).split(" ");
+    let reason = null;
+    let kind = CK_NAME;
+    let addr = null;
+    if (f.length < 8 || f[1] !== "1") reason = "other";
+    else if (f[2].toLowerCase() !== "udp") reason = f[2].toLowerCase();
+    else if (f[7] !== "host") reason = f[7];
+    else {
+      const uuid = f[4].match(MDNS_UUID);
+      if (uuid) {
+        kind = CK_MDNS;
+        addr = uuid.slice(1).join("").match(/../g).map(function (h) { return parseInt(h, 16); });
+      } else if ((addr = parseIPv4(f[4]))) {
+        kind = CK_V4;
+      } else if ((addr = parseIPv6(f[4]))) {
+        kind = CK_V6;
+      } else {
+        addr = Array.from(new TextEncoder().encode(f[4]));
+        if (addr.length > 255) reason = "other";
+      }
+      reason = reason || dropReason(kind, addr);
+    }
+    return { reason: reason, kind: kind, addr: addr, port: Number(f[5]), priority: Number(f[3]) };
+  }
+
+  // 經由介紹轉交的完整描述也照 QR 的規則濾候選，不把 Tailscale 與 TCP 的位址交出去。
+  // 全部被濾掉就原樣送，跟 encodeCompact 退回完整描述的道理相同。
+  function filterCandidates(sdp) {
+    const lines = sdp.split("\r\n");
+    const kept = lines.filter(function (line) {
+      return line.indexOf("a=candidate:") !== 0 || !parseCandidate(line).reason;
+    });
+    const any = kept.some(function (line) { return line.indexOf("a=candidate:") === 0; });
+    return any ? kept.join("\r\n") : sdp;
+  }
+
   // 編不出來時回 error，呼叫的一端退回格式版本 1。kept 與 dropped 只記個數與原因。
   // answer 帶著 for（iceTag 算出來的數字）時一起編進去，offer 帶了也不理。
   function encodeCompact(desc) {
@@ -1154,33 +1245,12 @@
     const cands = [];
     sdp.split(/\r?\n/).forEach(function (line) {
       if (line.indexOf("a=candidate:") !== 0) return;
-      const f = line.slice(12).split(" ");
-      let reason = null;
-      let kind = CK_NAME;
-      let addr = null;
-      if (f.length < 8 || f[1] !== "1") reason = "other";
-      else if (f[2].toLowerCase() !== "udp") reason = f[2].toLowerCase();
-      else if (f[7] !== "host") reason = f[7];
-      else {
-        const uuid = f[4].match(MDNS_UUID);
-        if (uuid) {
-          kind = CK_MDNS;
-          addr = uuid.slice(1).join("").match(/../g).map(function (h) { return parseInt(h, 16); });
-        } else if ((addr = parseIPv4(f[4]))) {
-          kind = CK_V4;
-        } else if ((addr = parseIPv6(f[4]))) {
-          kind = CK_V6;
-        } else {
-          addr = Array.from(new TextEncoder().encode(f[4]));
-          if (addr.length > 255) reason = "other";
-        }
-        reason = reason || dropReason(kind, addr);
-      }
-      if (reason) {
-        dropped[reason] = (dropped[reason] || 0) + 1;
+      const c = parseCandidate(line);
+      if (c.reason) {
+        dropped[c.reason] = (dropped[c.reason] || 0) + 1;
         return;
       }
-      cands.push({ kind: kind, addr: addr, port: Number(f[5]), priority: Number(f[3]) });
+      cands.push(c);
     });
     kept = cands.length;
     // 全部被濾掉就退回完整描述，照原本的候選交出去，至少不比格式版本 1 差
@@ -1527,11 +1597,11 @@
         if (result.json) {
           const ms = Math.round(performance.now() - scan.startedAt);
           scanState.textContent = t.scanned;
+          // 讀到的內容照樣放進下面的文字框。自動套用之後使用者仍然看得到掃到了什麼，
+          // 連不上時也能整段複製出來比對。
+          remoteBox.value = result.json;
           const outcome = await handleRemote(result.json, "qr");
           record("qr-scanned", { ms: ms, bytes: bytes.length, foreignSeen: scan.foreign, outcome: outcome });
-          if (outcome === "used") scanState.textContent = t.answerUsed;
-          else if (outcome === "unmatched") scanState.textContent = t.answerUnknown;
-          else scanState.textContent = t.scanning;
         } else if (result.error === "foreign") {
           scan.foreign += 1;
           scanState.textContent = t.scanForeign;
@@ -1622,7 +1692,30 @@
     }
     const outcome = desc.type === "offer" ? await acceptOffer(desc, source) : await acceptAnswer(desc, source);
     if (source === "paste") record("paste-applied", { type: desc.type, outcome: outcome });
+    explain(outcome, short(fingerprintOf(desc.sdp)));
     return outcome;
+  }
+
+  // 相機在第三區，手機上看不到第一區的說明，所以每一次掃描或貼上的結果都寫在第三區，
+  // 包含下一步該做什麼。
+  function explain(outcome, peer) {
+    // 套上回應到換好下一張發起描述之間，連線可能已經開通，這時不再說「正在建立連線」
+    const opened = peers.some(function (p) { return isOpen(p) && short(peerKey(p)) === peer; });
+    if (outcome === "applied" && opened) {
+      scanState.textContent = fill(t.connectedTo, { peer: peer });
+      return;
+    }
+    const text = {
+      answered: t.scanAnswered,
+      applied: t.scanApplied,
+      known: t.scanKnown,
+      used: t.answerUsed,
+      unmatched: t.answerUnknown,
+    }[outcome];
+    if (text) scanState.textContent = fill(text, { peer: peer });
+    else if (outcome !== "bad") scanState.textContent = scan.stream ? t.scanning : "";
+    // 回應用的 QR code 在第二區，手機上捲到那裡才能給對方掃
+    if (outcome === "answered") qrCanvas.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   async function acceptOffer(desc, source) {
@@ -1673,6 +1766,7 @@
     await peer.pc.setRemoteDescription(plain(desc));
     peer.appliedAt = performance.now();
     record("remote-description", { type: "answer", peer: short(fp), via: source });
+    watchConnect(peer);
     if (peer === shownOffer) {
       shownOffer = null;
       await showNextOffer();
@@ -1786,8 +1880,10 @@
     const rate = (bytes.length / 1024 / 1024 / secs).toFixed(2);
     results.set(peer, [who, t.sending, bytes.length.toLocaleString() + " B", secs.toFixed(2) + " " + t.seconds, rate + " MB/s", ""]);
     renderResults();
+    const pair = await selectedPair(peer);
     record("send-done", {
       peer: who,
+      rttMs: pair ? pair.rttMs : null,
       size: bytes.length,
       sent: sent,
       seconds: Number(secs.toFixed(2)),
@@ -1905,6 +2001,8 @@
     start: start,
     apply: function (text) { return handleRemote(text, "paste"); },
     localSdp: function () { return localBox.value; },
+    remoteText: function () { return remoteBox.value; },
+    scanNote: function () { return scanState.textContent; },
     state: function () {
       return {
         self: short(selfId),

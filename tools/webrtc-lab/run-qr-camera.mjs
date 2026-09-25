@@ -219,6 +219,16 @@ try {
   await until(() => isOpen(a), "A 掃到回應並開通");
   await until(() => isOpen(b), "B 開通");
 
+  // 自動套用之後，掃到的內容仍然要留在第三區的文字框，第三區的說明要寫出已經連上
+  const remoteB = await b.evaluate("__lab.remoteText()");
+  const typeB = remoteB ? JSON.parse(remoteB).type : null;
+  const noteA = await until(async () => {
+    const note = await a.evaluate("__lab.scanNote()");
+    return note && !note.includes("正在") ? note : null;
+  }, "A 的第三區說明更新");
+  console.log(`B 的文字框：${typeB || "空的"}；A 的第三區：${noteA}`);
+  if (typeB !== "offer" || !/已經連上/.test(noteA)) failed = true;
+
   const shownA = (await event(a, "qr-shown")).find((r) => r.type === "offer");
   const shownB = (await event(b, "qr-shown")).find((r) => r.type === "answer");
   const scannedB = (await event(b, "qr-scanned"))[0];
