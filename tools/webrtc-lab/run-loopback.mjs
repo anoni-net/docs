@@ -12,7 +12,7 @@
  *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
  *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
  *   另外在第 1 種情況裡確認預設參數，再換三組傳輸參數送檔（最多 12 條連線），確認多條通道、多條連線照位置組回來。
- *   K 與 L 先選「開好連線並預熱」再配對，連上就開好連線、預熱不算進接收紀錄。接著
+ *   K 與 L 先選「每條連線 4 MB」的預熱再配對，連上就開好連線、預熱不算進接收紀錄。接著
  *   收掉額外的連線再送一次，最後重新整理 K，確認紀錄還在、清除紀錄才清掉。
  *   4. I 套上一份連不到的回應（候選換成 TEST-NET 位址，產生它的分頁已經關掉），
  *      15 秒後要判定連不上並收掉那一條，而不是一直停在建立中。
@@ -239,23 +239,25 @@ try {
   const superseded = (await events(h, "peer-closed")).filter((r) => r.reason === "superseded").length;
   check(superseded === 1, "H 收掉回應舊描述的那一條");
   // ------------------------------------------------------------ 預先準備
-  console.log("預先開好連線並預熱");
+  console.log("預熱每條連線 4 MB");
   const [k, l] = await Promise.all(["K", "L"].map(openTab));
   tabs.push(k, l);
   for (const tab of [k, l]) {
     await tab.evaluate("__lab.start()", true);
-    await tab.evaluate(`__lab.prep("warm")`);
+    await tab.evaluate(`__lab.prep("4")`);
   }
   await apply(l, await shown(k, "offer"));
   await apply(k, await shown(l, "answer"));
   await connected(k, 1);
-  const warmed = await until(async () => (await events(k, "warm-done"))[0], "K 預熱完成", 30000);
+  const warmed = await until(async () => (await events(k, "warm-total"))[0], "K 預熱完成", 60000);
   const prepped = (await events(k, "prep-open"))[0];
-  check(prepped.links === 8 && warmed.acked, `連上就開好 ${prepped.links} 條連線（${prepped.setupMs} ms），預熱 ${warmed.size / 1048576} MB 對方有確認`);
+  const rounds = (await events(k, "warm-done")).filter((r) => r.acked);
+  check(prepped.links === 8 && prepped.warmMb === 4 && rounds.length === 4,
+    `連上就開好 ${prepped.links} 條連線（${prepped.setupMs} ms），分 ${rounds.length} 輪預熱共 ${warmed.size / 1048576} MB，每輪對方都有確認`);
   await k.evaluate("__lab.send(5242880)", true);
   const warmSend = (await events(k, "send-start")).slice(-1)[0];
   const warmRecv = await until(async () => (await events(l, "recv-done"))[0], "L 收完", 60000);
-  check(warmSend.setupMs < 50 && warmSend.youngestLinkMs > 0 && warmSend.prep === "warm",
+  check(warmSend.setupMs < 50 && warmSend.youngestLinkMs > 0 && warmSend.warmMb === 4,
     `送出時不必再開連線（${warmSend.setupMs} ms），最年輕的連線已開通 ${warmSend.youngestLinkMs} ms`);
   check(warmRecv.match && (await events(l, "recv-done")).length === 1,
     "預熱的資料不算進接收紀錄，正式傳輸的 SHA-256 一致");
@@ -266,7 +268,7 @@ try {
   const droppedL = await until(async () => (await events(l, "links-dropped"))[0], "L 收掉連線");
   check(droppedK.by === "local" && droppedL.by === "remote" && droppedK.count > 0,
     `兩邊都收掉額外的連線（K ${droppedK.count} 條、L ${droppedL.count} 條）`);
-  await until(async () => (await events(k, "warm-done")).length >= 2, "K 重新開好並預熱", 30000);
+  await until(async () => (await events(k, "warm-total")).length >= 2, "K 重新開好並預熱", 60000);
   await k.evaluate("__lab.send(5242880)", true);
   const again = (await events(k, "send-start")).slice(-1)[0];
   const againRecv = await until(async () => (await events(l, "recv-done"))[1], "L 收完第二份", 60000);

@@ -158,12 +158,11 @@
       paramsHead: "參數",
       paramsValue: "{chunk} KB · {channels} 通道 · {links} 連線",
       linkShort: "{peer} 額外的連線沒有開通，這一次只用 {n} 條。",
-      prepLabel: "預先準備",
-      prepNone: "不預先",
-      prepOpen: "連上就開好連線",
-      prepWarm: "開好連線並預熱",
+      prepLabel: "預熱",
+      prepNone: "不預熱",
+      prepWarmMb: "每條連線 {n} MB",
       dropLinks: "收掉額外的連線",
-      dropped: "已收掉 {n} 條額外的連線，下一次送出或預先準備會重新開。",
+      dropped: "已收掉 {n} 條額外的連線，下一次送出或預熱會重新開。",
       logTitle: "六、紀錄",
       logHint: "紀錄存在這個分頁裡，重新整理後還在，關掉分頁或按清除紀錄才會清掉。匯出前會把 IP 與 mDNS 名稱遮掉。結果貼回 issue #553。",
       export: "匯出紀錄",
@@ -263,12 +262,11 @@
       paramsHead: "参数",
       paramsValue: "{chunk} KB · {channels} 通道 · {links} 连线",
       linkShort: "{peer} 额外的连线没有开通，这一次只用 {n} 条。",
-      prepLabel: "预先准备",
-      prepNone: "不预先",
-      prepOpen: "连上就开好连线",
-      prepWarm: "开好连线并预热",
+      prepLabel: "预热",
+      prepNone: "不预热",
+      prepWarmMb: "每条连线 {n} MB",
       dropLinks: "收掉额外的连线",
-      dropped: "已收掉 {n} 条额外的连线，下一次送出或预先准备会重新开。",
+      dropped: "已收掉 {n} 条额外的连线，下一次送出或预热会重新开。",
       logTitle: "六、记录",
       logHint: "记录存在这个分页里，刷新后还在，关掉分页或按清除记录才会清掉。导出前会把 IP 与 mDNS 名称遮掉。结果贴回 issue #553。",
       export: "导出记录",
@@ -368,12 +366,11 @@
       paramsHead: "Settings",
       paramsValue: "{chunk} KB · {channels} ch · {links} conn",
       linkShort: "The extra connections to {peer} did not open, this run uses {n}.",
-      prepLabel: "Prepare",
-      prepNone: "Nothing ahead",
-      prepOpen: "Open connections on connect",
-      prepWarm: "Open and warm up",
+      prepLabel: "Warm-up",
+      prepNone: "None",
+      prepWarmMb: "{n} MB per connection",
       dropLinks: "Drop extra connections",
-      dropped: "Dropped {n} extra connections. The next send or prepare opens new ones.",
+      dropped: "Dropped {n} extra connections. The next send or warm-up opens new ones.",
       logTitle: "6. Log",
       logHint: "The log is kept in this tab and survives a reload. Closing the tab or pressing Clear log removes it. IP addresses and mDNS names are masked on export. Post results back to issue #553.",
       export: "Export log",
@@ -638,15 +635,17 @@
   // 分到的越來越少，在每秒 40 MB 上下到頂。Mac 送出從 3 條起就停在每秒 48 到 55 MB，是網路的上限。
   // 12 條只比 8 條快一成，剛開好時的第一次傳輸卻慢最多，所以停在 8 條。
   const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6, 8, 12], 8, same);
-  // 剛開好額外連線後的第一次傳輸明顯偏慢（12 條時 100 MB 從 2 秒變 9 秒）。這個選項用來找原因：
-  // 只是連線還沒開好，還是新連線要先有資料流過。
-  const prepBox = paramSelect(t.prepLabel, ["none", "open", "warm"], "none", function (v) {
-    return { none: t.prepNone, open: t.prepOpen, warm: t.prepWarm }[v];
+  // 剛開好額外連線後的第一次傳輸明顯偏慢（8 條時 100 MB 從 2 秒變 9 到 13 秒）。2026-09-25 的實測
+  // 排除了「連線開著放一段時間就好」：開好之後放 7 到 14 秒，第一次照樣慢。新連線上先流過資料才有用，
+  // 每條 1 MB 時 Mac 送 iPhone 的第一次從約 10 秒縮到 3.5 秒，還沒到第二次的 2 秒。
+  // 這個選單用來找要預熱多少才夠，數字是每條連線流過的量。
+  const prepBox = paramSelect(t.prepLabel, ["0", "1", "4", "16"], "0", function (v) {
+    return v === "0" ? t.prepNone : fill(t.prepWarmMb, { n: v });
   });
   [prepBox, linksBox, channelsBox].forEach(function (box) {
     box.addEventListener("change", function () { prepAll(); });
   });
-  // 換一種預先準備的模式再量「剛開好的連線」，不必重新整理、也不必重新配對
+  // 換一種預熱量再量「剛開好的連線」，不必重新整理、也不必重新配對
   const dropWrap = el("div");
   dropWrap.appendChild(button(t.dropLinks, function () { dropAllLinks(); }));
   sendStep.appendChild(dropWrap);
@@ -2061,7 +2060,7 @@
   }
 
   // 湊齊要用的通道。連線與通道開過就留著，下一次同樣的參數不必重開。
-  // 預先準備與按下送出可能同時要求，排隊進行，才不會同一個缺口開兩次。
+  // 預熱與按下送出可能同時要求，排隊進行，才不會同一個缺口開兩次。
   function ensureLanes(peer, want) {
     const run = peer.laneLock.then(function () { return ensureLanesNow(peer, want); });
     peer.laneLock = run.catch(function () {});
@@ -2099,30 +2098,45 @@
     return run;
   }
 
-  const WARM_PER_LANE = 1024 * 1024;
+  const WARM_ROUND = 1024 * 1024;
 
-  // 預先準備：open 只把額外的連線開好，warm 開好之後再送一小段資料（每條通道 1 MB）。
-  // 預熱的資料不列進第五區的結果，紀錄裡記成 prep-open 與 warm-done。
+  function warmMb() {
+    return Number(prepBox.value) || 0;
+  }
+
+  // 預熱：開好額外的連線，每條連線送指定的量。一輪每條 1 MB，送 n 輪，每一輪只配置
+  // 「條數 × 1 MB」的記憶體，選 16 MB 時也不必一次配置上百 MB。
+  // 預熱的資料不列進第五區的結果，紀錄裡記成 prep-open、warm-done 與 warm-recv。
   function prepPeer(peer) {
-    const mode = prepBox.value;
-    if (mode === "none" || !isOpen(peer) || !peer.id) return;
+    const mb = warmMb();
+    if (!mb || !isOpen(peer) || !peer.id) return;
     enqueue(peer, async function () {
       const want = params();
       const began = performance.now();
       const set = await ensureLanes(peer, want);
       record("prep-open", {
         peer: short(peer.id),
-        mode: mode,
+        warmMb: mb,
         links: set.links,
         lanes: set.lanes.length,
         setupMs: Math.round(performance.now() - began),
       });
-      if (mode !== "warm" || !set.lanes.length) return;
-      const bytes = new Uint8Array(WARM_PER_LANE * set.lanes.length);
+      if (!set.lanes.length) return;
+      const bytes = new Uint8Array(WARM_ROUND * set.lanes.length);
       for (let at = 0; at < bytes.length; at += 65536) {
         crypto.getRandomValues(bytes.subarray(at, Math.min(at + 65536, bytes.length)));
       }
-      await sendTo(peer, bytes, await sha256Hex(bytes), "warm-up", want, function () {}, { warm: true });
+      const hash = await sha256Hex(bytes);
+      const warmBegan = performance.now();
+      for (let round = 0; round < mb; round += 1) {
+        await sendTo(peer, bytes, hash, "warm-up", want, function () {}, { warm: true, round: round + 1, rounds: mb });
+      }
+      record("warm-total", {
+        peer: short(peer.id),
+        warmMb: mb,
+        size: bytes.length * mb,
+        seconds: Number(((performance.now() - warmBegan) / 1000).toFixed(2)),
+      });
     });
   }
 
@@ -2131,7 +2145,7 @@
   }
 
   // 兩個方向的額外連線都收掉：自己開出去的（links）與對方開過來的（linksIn），並請對方也照做。
-  // 排進佇列，傳到一半不會被拆掉。收完如果選了預先準備，馬上重開一批。
+  // 排進佇列，傳到一半不會被拆掉。收完如果選了預熱，馬上重開一批並預熱。
   function dropLinks(peer, by) {
     return enqueue(peer, function () {
       const count = peer.links.length + peer.linksIn.length;
@@ -2245,7 +2259,7 @@
       sendNote.textContent = t.notConnected;
       return;
     }
-    const used = { chunk: want.chunk, channels: want.channels, links: set.links, prep: prepBox.value };
+    const used = { chunk: want.chunk, channels: want.channels, links: set.links, warmMb: warmMb() };
     if (set.links < want.links) sendNote.textContent = fill(t.linkShort, { peer: who, n: set.links });
     // 每一則訊息不能超過兩邊協商出來的上限，Chrome 是 256 KB，扣掉開頭的 12 bytes
     const limit = set.lanes.reduce(function (min, lane) {
@@ -2255,7 +2269,7 @@
     const payload = Math.max(1024, Math.min(want.chunk, limit - HEADER));
     const xfer = Math.floor(Math.random() * 0xffffffff);
     const ready = expectReply(peer, "ready:" + xfer, 10000);
-    sendControl(peer, { kind: "start", xfer: xfer, name: name, size: bytes.length, hash: hash, chunk: payload, channels: used.channels, links: used.links, prep: used.prep, warm: warm });
+    sendControl(peer, { kind: "start", xfer: xfer, name: name, size: bytes.length, hash: hash, chunk: payload, channels: used.channels, links: used.links, warmMb: used.warmMb, warm: warm });
     if (!warm) {
       record("send-start", Object.assign({
         peer: who,
@@ -2296,7 +2310,16 @@
     const secs = Math.max((performance.now() - began) / 1000, 0.001);
     const rate = (bytes.length / 1024 / 1024 / secs).toFixed(2);
     if (warm) {
-      record("warm-done", { peer: who, size: bytes.length, seconds: Number(secs.toFixed(2)), mbps: Number(rate), acked: !!ack, lanes: set.lanes.length });
+      record("warm-done", {
+        peer: who,
+        round: opts.round || 1,
+        rounds: opts.rounds || 1,
+        size: bytes.length,
+        seconds: Number(secs.toFixed(2)),
+        mbps: Number(rate),
+        acked: !!ack,
+        lanes: set.lanes.length,
+      });
       return;
     }
     results.set(peer, [who, t.sending, bytes.length.toLocaleString() + " B", secs.toFixed(2) + " " + t.seconds, rate + " MB/s", "", paramsLabel(used)]);
@@ -2324,7 +2347,7 @@
       expect: msg,
       startedAt: performance.now(),
     };
-    const used = { chunk: msg.chunk, channels: msg.channels, links: msg.links, prep: msg.prep || null };
+    const used = { chunk: msg.chunk, channels: msg.channels, links: msg.links, warmMb: msg.warmMb === undefined ? null : msg.warmMb };
     if (!msg.warm) {
       record("recv-start", Object.assign({ peer: who, size: msg.size, environment: envBox.value || null }, used));
       results.set(peer, [who, t.receiving, msg.size.toLocaleString() + " B", "", "", "", paramsLabel(used)]);
@@ -2358,7 +2381,8 @@
     const hash = await sha256Hex(incoming.buf);
     const rate = (incoming.buf.length / 1024 / 1024 / secs).toFixed(2);
     const ok = hash === incoming.expect.hash;
-    const used = { chunk: incoming.expect.chunk, channels: incoming.expect.channels, links: incoming.expect.links, prep: incoming.expect.prep || null };
+    const expect = incoming.expect;
+    const used = { chunk: expect.chunk, channels: expect.channels, links: expect.links, warmMb: expect.warmMb === undefined ? null : expect.warmMb };
     if (incoming.expect.warm) {
       record("warm-recv", { peer: who, size: incoming.buf.length, seconds: Number(secs.toFixed(2)), mbps: Number(rate), match: ok });
       return;
