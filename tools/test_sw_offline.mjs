@@ -1422,6 +1422,43 @@ test('沒有 query 的導覽不走 ignoreSearch 的線性掃描', async (load) =
   assert.equal(caches.ignoreSearchCalls, 0, '沒有 query 也走了線性掃描');
 });
 
+test('伺服器回 5xx 時給裝置上那一份，不把錯誤頁給讀者', async (load) => {
+  // 部署後 Cloudflare 邊緣快取卡住 502 的那幾次，存著這一頁的讀者看到的也是 502
+  const { sw, caches } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 502, headers: { get: () => null } } : undefined,
+  });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/')), 'CACHED');
+  // 伺服器回得出錯誤就表示連得上，不記成斷線
+  assert.equal(sw.networkLooksDown(), false);
+  // 錯誤頁也不會蓋掉裝置上那一份
+  assert.equal(await pages.match('/docs/tools/what-is-tor/'), 'CACHED');
+});
+
+test('伺服器回 404 照樣給讀者，撤下的頁面不假裝還在', async (load) => {
+  // 導覽請求帶的是完整網址，notFound 比對的是路徑，所以這裡用 respond
+  const { sw, caches } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 404, headers: { get: () => null } } : undefined,
+  });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'));
+  assert.equal(response.status, 404);
+});
+
+test('裝置上沒有副本時，5xx 照樣給讀者', async (load) => {
+  // 沒有更好的東西可以給，伺服器的錯誤頁至少講得出發生了什麼
+  const { sw } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 503, headers: { get: () => null } } : undefined,
+  });
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'));
+  assert.equal(response.status, 503);
+});
+
 test('網路太慢時先給裝置上那一份，不陪著等到瀏覽器放棄', async (load) => {
   // 完全斷線時 fetch 立刻失敗，逾時用不到。這條是為了「連得上但很慢」與「連線被
   // 干擾」那種狀態，而那正是這個網站的讀者比別人更常遇到的網路。

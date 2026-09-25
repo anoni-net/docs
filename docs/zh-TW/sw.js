@@ -1508,6 +1508,13 @@ async function networkFirst(request, event) {
     network.catch(() => null),
     new Promise((resolve) => setTimeout(() => resolve(null), NAVIGATE_TIMEOUT_MS)),
   ]);
+  // 伺服器回 5xx 就給裝置上那一份。原本網路那條只要有回應就照單全收，部署後
+  // Cloudflare 邊緣快取卡住 502 的那幾次，存著這一頁的讀者看到的也是 502。5xx 是
+  // 伺服器那邊暫時出狀況，內容沒有變，舊一點的副本比錯誤頁有用。
+  //
+  // 404 照樣回給讀者，那代表站上已經撤下這一頁，給舊副本等於假裝它還在。網路狀態
+  // 不記成斷線，伺服器回得出錯誤就表示連得上，下一次導覽照常賽跑。
+  if (raced && raced.status >= 500) return cached;
   if (raced) return raced;
 
   // 網路太慢或失敗，先給讀者看得到的那一份。網路那邊還在跑，回來時照樣寫進快取，
