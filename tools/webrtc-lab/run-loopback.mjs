@@ -12,6 +12,7 @@
  *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
  *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
  *   另外在第 1 種情況裡確認預設參數，再換三組傳輸參數送檔（最多 12 條連線），確認多條通道、多條連線照位置組回來。
+ *   K 與 L 先選「開好連線並預熱」再配對，連上就開好連線、預熱不算進接收紀錄。
  *   4. I 套上一份連不到的回應（候選換成 TEST-NET 位址，產生它的分頁已經關掉），
  *      15 秒後要判定連不上並收掉那一條，而不是一直停在建立中。
  *
@@ -167,8 +168,8 @@ try {
   }
 
   const defaults = (await events(a, "send-done")).slice(-2);
-  check(defaults.every((r) => r.links === 6 && r.channels === 1 && r.chunk === 65536),
-    `預設參數是 64 KB · 1 通道 · 6 連線（實際 ${defaults.map((r) => `${r.chunk / 1024} KB · ${r.channels} · ${r.links}`).join("、")}）`);
+  check(defaults.every((r) => r.links === 8 && r.channels === 1 && r.chunk === 65536),
+    `預設參數是 64 KB · 1 通道 · 8 連線（實際 ${defaults.map((r) => `${r.chunk / 1024} KB · ${r.channels} · ${r.links}`).join("、")}）`);
 
   // 傳輸參數：多條通道、多條連線、較大的塊，資料照位置組回來，兩台都要一致
   for (const opts of [{ chunk: 262144, channels: 4, links: 3 }, { chunk: 16384, channels: 1, links: 1 }, { chunk: 65536, channels: 1, links: 12 }]) {
@@ -227,6 +228,28 @@ try {
   await connected(h, 2);
   const superseded = (await events(h, "peer-closed")).filter((r) => r.reason === "superseded").length;
   check(superseded === 1, "H 收掉回應舊描述的那一條");
+  // ------------------------------------------------------------ 預先準備
+  console.log("預先開好連線並預熱");
+  const [k, l] = await Promise.all(["K", "L"].map(openTab));
+  tabs.push(k, l);
+  for (const tab of [k, l]) {
+    await tab.evaluate("__lab.start()", true);
+    await tab.evaluate(`__lab.prep("warm")`);
+  }
+  await apply(l, await shown(k, "offer"));
+  await apply(k, await shown(l, "answer"));
+  await connected(k, 1);
+  const warmed = await until(async () => (await events(k, "warm-done"))[0], "K 預熱完成", 30000);
+  const prepped = (await events(k, "prep-open"))[0];
+  check(prepped.links === 8 && warmed.acked, `連上就開好 ${prepped.links} 條連線（${prepped.setupMs} ms），預熱 ${warmed.size / 1048576} MB 對方有確認`);
+  await k.evaluate("__lab.send(5242880)", true);
+  const warmSend = (await events(k, "send-start")).slice(-1)[0];
+  const warmRecv = await until(async () => (await events(l, "recv-done"))[0], "L 收完", 60000);
+  check(warmSend.setupMs < 50 && warmSend.youngestLinkMs > 0 && warmSend.prep === "warm",
+    `送出時不必再開連線（${warmSend.setupMs} ms），最年輕的連線已開通 ${warmSend.youngestLinkMs} ms`);
+  check(warmRecv.match && (await events(l, "recv-done")).length === 1,
+    "預熱的資料不算進接收紀錄，正式傳輸的 SHA-256 一致");
+
   // ------------------------------------------------------------ 4. 連不上要說得出來
   console.log("連不到的回應");
   const [i, j] = await Promise.all(["I", "J"].map(openTab));

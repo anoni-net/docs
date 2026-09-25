@@ -151,13 +151,17 @@
       sendFile: "送出這個檔案",
       notConnected: "還沒連上任何裝置。",
       noFile: "還沒選檔案。",
-      paramsHint: "下面三個參數用來比較吞吐量。每次只改一個，其餘維持預設，兩端的紀錄都會記下這一次用的參數。",
+      paramsHint: "下面幾個參數用來比較吞吐量。每次只改一個，其餘維持預設，兩端的紀錄都會記下這一次用的參數。",
       chunkLabel: "每塊大小",
       channelsLabel: "每條連線的通道數",
       linksLabel: "並行連線數",
       paramsHead: "參數",
       paramsValue: "{chunk} KB · {channels} 通道 · {links} 連線",
       linkShort: "{peer} 額外的連線沒有開通，這一次只用 {n} 條。",
+      prepLabel: "預先準備",
+      prepNone: "不預先",
+      prepOpen: "連上就開好連線",
+      prepWarm: "開好連線並預熱",
       logTitle: "六、紀錄",
       logHint: "匯出前會把 IP 與 mDNS 名稱遮掉。結果貼回 issue #553。",
       export: "匯出紀錄",
@@ -249,13 +253,17 @@
       sendFile: "送出这个文件",
       notConnected: "还没连上任何设备。",
       noFile: "还没选文件。",
-      paramsHint: "下面三个参数用来比较吞吐量。每次只改一个，其余维持默认，两端的记录都会记下这一次用的参数。",
+      paramsHint: "下面几个参数用来比较吞吐量。每次只改一个，其余维持默认，两端的记录都会记下这一次用的参数。",
       chunkLabel: "每块大小",
       channelsLabel: "每条连线的通道数",
       linksLabel: "并行连线数",
       paramsHead: "参数",
       paramsValue: "{chunk} KB · {channels} 通道 · {links} 连线",
       linkShort: "{peer} 额外的连线没有开通，这一次只用 {n} 条。",
+      prepLabel: "预先准备",
+      prepNone: "不预先",
+      prepOpen: "连上就开好连线",
+      prepWarm: "开好连线并预热",
       logTitle: "六、记录",
       logHint: "导出前会把 IP 与 mDNS 名称遮掉。结果贴回 issue #553。",
       export: "导出记录",
@@ -347,13 +355,17 @@
       sendFile: "Send this file",
       notConnected: "No devices connected yet.",
       noFile: "No file picked yet.",
-      paramsHint: "The three settings below are for comparing throughput. Change one at a time and leave the others at their defaults. Both sides log the settings used for each run.",
+      paramsHint: "The settings below are for comparing throughput. Change one at a time and leave the others at their defaults. Both sides log the settings used for each run.",
       chunkLabel: "Chunk size",
       channelsLabel: "Channels per connection",
       linksLabel: "Parallel connections",
       paramsHead: "Settings",
       paramsValue: "{chunk} KB · {channels} ch · {links} conn",
       linkShort: "The extra connections to {peer} did not open, this run uses {n}.",
+      prepLabel: "Prepare",
+      prepNone: "Nothing ahead",
+      prepOpen: "Open connections on connect",
+      prepWarm: "Open and warm up",
       logTitle: "6. Log",
       logHint: "IP addresses and mDNS names are masked on export. Post results back to issue #553.",
       export: "Export log",
@@ -578,7 +590,7 @@
   envBox.placeholder = t.envPlaceholder;
   envBox.setAttribute("aria-label", t.envLabel);
   sendStep.appendChild(envBox);
-  // 三個傳輸參數，用來找吞吐量卡在哪裡。每次只改一個，數字才比得出差別。放在兩個送出按鈕前面，兩種送法都套用。
+  // 傳輸參數，用來找吞吐量卡在哪裡。每次只改一個，數字才比得出差別。放在兩個送出按鈕前面，兩種送法都套用。
   sendStep.appendChild(el("p", "wl-hint", t.paramsHint));
   const paramsWrap = el("div", "wl-params");
   sendStep.appendChild(paramsWrap);
@@ -599,11 +611,19 @@
   const same = function (v) { return String(v); };
   const chunkBox = paramSelect(t.chunkLabel, [16384, 65536, 262144], CHUNK, kb);
   const channelsBox = paramSelect(t.channelsLabel, [1, 2, 4], 1, same);
-  // 並行連線數預設 6 條。2026-09-25 iPhone 15 Pro 對 Mac Chrome 154，在家用 Wi-Fi 6（5 GHz）上
-  // 實測：iPhone 送出時每條連線固定約每秒 5.5 到 6 MB，3 條約 18 MB、6 條約 33 MB，RTT 一直在
-  // 20 ms 以下，限制在 WebKit 的每條連線上，跟網路無關。Mac 送出從 3 條起就停在每秒 53 到 55 MB，
-  // 那是這個網路的上限。8 與 12 條是為了量出 iPhone 送出從哪裡開始碰到網路上限。
-  const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6, 8, 12], 6, same);
+  // 並行連線數預設 8 條。2026-09-25 iPhone 15 Pro 對 Mac Chrome 154，在家用 Wi-Fi 6（5 GHz）上
+  // 實測：iPhone 送出時 3 條每秒約 18 MB、6 條約 30 MB、8 條約 37 MB、12 條約 41 MB，每條連線
+  // 分到的越來越少，在每秒 40 MB 上下到頂。Mac 送出從 3 條起就停在每秒 48 到 55 MB，是網路的上限。
+  // 12 條只比 8 條快一成，剛開好時的第一次傳輸卻慢最多，所以停在 8 條。
+  const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6, 8, 12], 8, same);
+  // 剛開好額外連線後的第一次傳輸明顯偏慢（12 條時 100 MB 從 2 秒變 9 秒）。這個選項用來找原因：
+  // 只是連線還沒開好，還是新連線要先有資料流過。
+  const prepBox = paramSelect(t.prepLabel, ["none", "open", "warm"], "none", function (v) {
+    return { none: t.prepNone, open: t.prepOpen, warm: t.prepWarm }[v];
+  });
+  [prepBox, linksBox, channelsBox].forEach(function (box) {
+    box.addEventListener("change", function () { prepAll(); });
+  });
   const sizeBox = el("select");
   [
     ["102400", "100 KB"],
@@ -806,6 +826,9 @@
       links: [],
       linksIn: [],
       waiters: new Map(),
+      // 同一台的開連線與傳輸排隊進行。接收端一次只收一份，兩份交錯會互相蓋掉
+      queue: Promise.resolve(),
+      laneLock: Promise.resolve(),
       incoming: null,
     };
     peer.pc.addEventListener("connectionstatechange", function () {
@@ -1003,7 +1026,10 @@
     peer.bound = !!msg.bound;
     record("hello", { peer: short(id), bound: !!msg.bound, via: peer.via });
     settleTwins(id);
-    if (!peer.closed) broadcastPeers();
+    if (!peer.closed) {
+      broadcastPeers();
+      prepPeer(peer);
+    }
     renderPeers();
   }
 
@@ -1958,7 +1984,7 @@
       pc.close();
       return null;
     }
-    return { pc: pc, bulk: [channel] };
+    return { pc: pc, bulk: [channel], openedAt: performance.now() };
   }
 
   async function onLinkOffer(peer, msg) {
@@ -1977,7 +2003,14 @@
   }
 
   // 湊齊要用的通道。連線與通道開過就留著，下一次同樣的參數不必重開。
-  async function ensureLanes(peer, want) {
+  // 預先準備與按下送出可能同時要求，排隊進行，才不會同一個缺口開兩次。
+  function ensureLanes(peer, want) {
+    const run = peer.laneLock.then(function () { return ensureLanesNow(peer, want); });
+    peer.laneLock = run.catch(function () {});
+    return run;
+  }
+
+  async function ensureLanesNow(peer, want) {
     while (peer.links.length < want.links - 1) {
       const link = await openLink(peer);
       if (!link) break;
@@ -1997,7 +2030,46 @@
         if (channel.readyState === "open") lanes.push({ channel: channel, pc: conn.pc });
       });
     });
-    return { lanes: lanes, links: conns.length };
+    // 最年輕的那一條額外連線開通多久了。第一次傳輸偏慢跟連線剛開好有沒有關係，看這個數字
+    const ages = peer.links.slice(0, want.links - 1).map(function (link) { return performance.now() - link.openedAt; });
+    return { lanes: lanes, links: conns.length, youngestLinkMs: ages.length ? Math.round(Math.min.apply(null, ages)) : null };
+  }
+
+  function enqueue(peer, task) {
+    const run = peer.queue.then(task);
+    peer.queue = run.catch(function () {});
+    return run;
+  }
+
+  const WARM_PER_LANE = 1024 * 1024;
+
+  // 預先準備：open 只把額外的連線開好，warm 開好之後再送一小段資料（每條通道 1 MB）。
+  // 預熱的資料不列進第五區的結果，紀錄裡記成 prep-open 與 warm-done。
+  function prepPeer(peer) {
+    const mode = prepBox.value;
+    if (mode === "none" || !isOpen(peer) || !peer.id) return;
+    enqueue(peer, async function () {
+      const want = params();
+      const began = performance.now();
+      const set = await ensureLanes(peer, want);
+      record("prep-open", {
+        peer: short(peer.id),
+        mode: mode,
+        links: set.links,
+        lanes: set.lanes.length,
+        setupMs: Math.round(performance.now() - began),
+      });
+      if (mode !== "warm" || !set.lanes.length) return;
+      const bytes = new Uint8Array(WARM_PER_LANE * set.lanes.length);
+      for (let at = 0; at < bytes.length; at += 65536) {
+        crypto.getRandomValues(bytes.subarray(at, Math.min(at + 65536, bytes.length)));
+      }
+      await sendTo(peer, bytes, await sha256Hex(bytes), "warm-up", want, function () {}, { warm: true });
+    });
+  }
+
+  function prepAll() {
+    peers.forEach(function (peer) { prepPeer(peer); });
   }
 
   // 挑緩衝區最空的那一條送。全部都塞滿時，等任何一條降到下界。
@@ -2064,16 +2136,19 @@
     let done = 0;
     progress.value = 0;
     await Promise.all(targets.map(function (peer) {
-      return sendTo(peer, bytes, hash, name, want, function (n) {
-        done += n;
-        progress.value = (done / total) * 100;
+      return enqueue(peer, function () {
+        return sendTo(peer, bytes, hash, name, want, function (n) {
+          done += n;
+          progress.value = (done / total) * 100;
+        });
       });
     }));
   }
 
   // 計時從對方回 ready 開始，到對方回 got（收齊最後一個位元組）為止。以前是等自己的緩衝區
   // 排空，那只代表資料交給了 SCTP，對方不一定收到了。
-  async function sendTo(peer, bytes, hash, name, want, onChunk) {
+  async function sendTo(peer, bytes, hash, name, want, onChunk, opts) {
+    const warm = !!(opts && opts.warm);
     const who = short(peer.id);
     const setupBegan = performance.now();
     const set = await ensureLanes(peer, want);
@@ -2082,7 +2157,7 @@
       sendNote.textContent = t.notConnected;
       return;
     }
-    const used = { chunk: want.chunk, channels: want.channels, links: set.links };
+    const used = { chunk: want.chunk, channels: want.channels, links: set.links, prep: prepBox.value };
     if (set.links < want.links) sendNote.textContent = fill(t.linkShort, { peer: who, n: set.links });
     // 每一則訊息不能超過兩邊協商出來的上限，Chrome 是 256 KB，扣掉開頭的 12 bytes
     const limit = set.lanes.reduce(function (min, lane) {
@@ -2092,14 +2167,25 @@
     const payload = Math.max(1024, Math.min(want.chunk, limit - HEADER));
     const xfer = Math.floor(Math.random() * 0xffffffff);
     const ready = expectReply(peer, "ready:" + xfer, 10000);
-    sendControl(peer, { kind: "start", xfer: xfer, name: name, size: bytes.length, hash: hash, chunk: payload, channels: used.channels, links: used.links });
-    record("send-start", Object.assign({ peer: who, size: bytes.length, lanes: set.lanes.length, setupMs: setupMs, environment: envBox.value || null }, used, { chunk: payload }));
+    sendControl(peer, { kind: "start", xfer: xfer, name: name, size: bytes.length, hash: hash, chunk: payload, channels: used.channels, links: used.links, prep: used.prep, warm: warm });
+    if (!warm) {
+      record("send-start", Object.assign({
+        peer: who,
+        size: bytes.length,
+        lanes: set.lanes.length,
+        setupMs: setupMs,
+        youngestLinkMs: set.youngestLinkMs,
+        environment: envBox.value || null,
+      }, used, { chunk: payload }));
+    }
     if (!(await ready)) {
-      record("send-failed", { peer: who, reason: "no-ready" });
+      record("send-failed", { peer: who, reason: "no-ready", warm: warm });
       return;
     }
-    results.set(peer, [who, t.sending, bytes.length.toLocaleString() + " B", t.flushing, "", "", paramsLabel(used)]);
-    renderResults();
+    if (!warm) {
+      results.set(peer, [who, t.sending, bytes.length.toLocaleString() + " B", t.flushing, "", "", paramsLabel(used)]);
+      renderResults();
+    }
 
     const began = performance.now();
     const got = expectReply(peer, "got:" + xfer, 600000);
@@ -2121,6 +2207,10 @@
 
     const secs = Math.max((performance.now() - began) / 1000, 0.001);
     const rate = (bytes.length / 1024 / 1024 / secs).toFixed(2);
+    if (warm) {
+      record("warm-done", { peer: who, size: bytes.length, seconds: Number(secs.toFixed(2)), mbps: Number(rate), acked: !!ack, lanes: set.lanes.length });
+      return;
+    }
     results.set(peer, [who, t.sending, bytes.length.toLocaleString() + " B", secs.toFixed(2) + " " + t.seconds, rate + " MB/s", "", paramsLabel(used)]);
     renderResults();
     const pair = await selectedPair(peer);
@@ -2146,10 +2236,12 @@
       expect: msg,
       startedAt: performance.now(),
     };
-    const used = { chunk: msg.chunk, channels: msg.channels, links: msg.links };
-    record("recv-start", Object.assign({ peer: who, size: msg.size, environment: envBox.value || null }, used));
-    results.set(peer, [who, t.receiving, msg.size.toLocaleString() + " B", "", "", "", paramsLabel(used)]);
-    renderResults();
+    const used = { chunk: msg.chunk, channels: msg.channels, links: msg.links, prep: msg.prep || null };
+    if (!msg.warm) {
+      record("recv-start", Object.assign({ peer: who, size: msg.size, environment: envBox.value || null }, used));
+      results.set(peer, [who, t.receiving, msg.size.toLocaleString() + " B", "", "", "", paramsLabel(used)]);
+      renderResults();
+    }
     sendControl(peer, { kind: "ready", xfer: msg.xfer });
     if (msg.size === 0) finishIncoming(peer);
   }
@@ -2178,7 +2270,11 @@
     const hash = await sha256Hex(incoming.buf);
     const rate = (incoming.buf.length / 1024 / 1024 / secs).toFixed(2);
     const ok = hash === incoming.expect.hash;
-    const used = { chunk: incoming.expect.chunk, channels: incoming.expect.channels, links: incoming.expect.links };
+    const used = { chunk: incoming.expect.chunk, channels: incoming.expect.channels, links: incoming.expect.links, prep: incoming.expect.prep || null };
+    if (incoming.expect.warm) {
+      record("warm-recv", { peer: who, size: incoming.buf.length, seconds: Number(secs.toFixed(2)), mbps: Number(rate), match: ok });
+      return;
+    }
     record("recv-done", Object.assign({
       peer: who,
       size: incoming.buf.length,
@@ -2282,6 +2378,10 @@
       if (opts && opts.channels) channelsBox.value = String(opts.channels);
       if (opts && opts.links) linksBox.value = String(opts.links);
       return sendGenerated();
+    },
+    prep: function (mode) {
+      prepBox.value = mode;
+      prepAll();
     },
     environment: function (text) { envBox.value = text; },
     // 把現在顯示的 QR 方格矩陣交出去，檢查腳本拿去寫成假攝影機的 Y4M 畫面
