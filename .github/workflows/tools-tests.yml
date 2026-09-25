@@ -111,6 +111,11 @@ jobs:
       - name: 離線內容索引
         run: python3 tools/test_offline_index.py
 
+      # 導覽列圖示改成外部 sprite：symbol 的 id、viewBox 與外層 <svg> 對不上，建置照樣
+      # 綠燈，畫面上是一排空白或縮成一角的圖示
+      - name: 導覽列圖示 sprite
+        run: python3 tools/test_nav_icon_sprite.py
+
       # 更新日誌首頁的「最近的更新」：日期怎麼取、哪幾則算要處理、舊的紅標有沒有撤下
       - name: 更新日誌首頁摘要
         run: python3 tools/test_changelog_digest.py

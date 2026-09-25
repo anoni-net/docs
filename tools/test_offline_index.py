@@ -249,6 +249,17 @@ check(
     ["manifest.webmanifest", "stylesheets/extra.css"],
 )
 
+# 導覽列圖示的 sprite 用 <use> 引用（hooks/nav_icon_sprite.py），每一頁都有，要落進
+# shell 交給預快取。同一份文件裡的 #參照沒有東西要下載，不列。
+used = offline_index._page_assets(
+    '<svg viewBox="0 0 24 24"><use href="../../assets/nav-icons.ab12cd34.svg#material--home"></use></svg>'
+    '<svg><use href="#local-symbol"></use></svg>'
+    '<svg><use xlink:href="#another"></use></svg>',
+    "tools/what-is-tor/",
+    None,
+)
+check("資產：<use> 指向的 sprite", used, ["assets/nav-icons.ab12cd34.svg"])
+
 # JS 裡 fetch 的東西不會出現在 HTML 標籤上，由該頁的 frontmatter 自己宣告
 declared = offline_index._page_assets(
     "<p>沒有任何標籤</p>",

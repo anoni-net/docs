@@ -390,6 +390,8 @@ extra_javascript:
 hooks:
   - hooks/latest_posts.py
   - hooks/changelog_digest.py
+  # 要排在 offline_index 前面，那支記的頁面大小與資產才是換成 <use> 之後的樣子
+  - hooks/nav_icon_sprite.py
   - hooks/offline_index.py
 plugins:
   - search:

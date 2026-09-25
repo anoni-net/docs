@@ -34,11 +34,14 @@ log = logging.getLogger("mkdocs.hooks.offline_index")
 # 頁面自己引用的資產。存離線副本時只抓 HTML 的話，讀者離線打開會缺圖，而互動類的
 # 頁面（小工具）連跑都跑不起來，它的程式與資料就在這裡面。
 #
-# 抓 <img>、<script> 與 <link>。theme 自己那批帶雜湊檔名的 CSS 與 JS 由
+# 抓 <img>、<script>、<use> 與 <link>。theme 自己那批帶雜湊檔名的 CSS 與 JS 由
 # _ASSET_SKIP_PREFIXES 濾掉，它們寫在 sw.js 的 SHELL_ASSETS 裡。
 _ASSET_PATTERNS = (
     re.compile(r'<img[^>]+src="([^"]+)"'),
     re.compile(r'<script[^>]+src="([^"]+)"'),
+    # 導覽列圖示的 sprite（hooks/nav_icon_sprite.py）。每一頁都引用，會落進 shell。
+    # 只收指向別的檔案的，#開頭的是同一份文件裡的參照，沒有東西要下載。
+    re.compile(r'<use[^>]+href="([^"#]+)#'),
 )
 _ASSET_SKIP_PREFIXES = ("assets/javascripts/", "assets/stylesheets/")
 
