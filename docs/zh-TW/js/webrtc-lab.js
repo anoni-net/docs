@@ -162,9 +162,12 @@
       prepNone: "不預先",
       prepOpen: "連上就開好連線",
       prepWarm: "開好連線並預熱",
+      dropLinks: "收掉額外的連線",
+      dropped: "已收掉 {n} 條額外的連線，下一次送出或預先準備會重新開。",
       logTitle: "六、紀錄",
-      logHint: "匯出前會把 IP 與 mDNS 名稱遮掉。結果貼回 issue #553。",
+      logHint: "紀錄存在這個分頁裡，重新整理後還在，關掉分頁或按清除紀錄才會清掉。匯出前會把 IP 與 mDNS 名稱遮掉。結果貼回 issue #553。",
       export: "匯出紀錄",
+      clearLog: "清除紀錄",
       reset: "重來",
       sdpRaw: "原始大小",
       sdpTrimmed: "精簡後",
@@ -264,9 +267,12 @@
       prepNone: "不预先",
       prepOpen: "连上就开好连线",
       prepWarm: "开好连线并预热",
+      dropLinks: "收掉额外的连线",
+      dropped: "已收掉 {n} 条额外的连线，下一次送出或预先准备会重新开。",
       logTitle: "六、记录",
-      logHint: "导出前会把 IP 与 mDNS 名称遮掉。结果贴回 issue #553。",
+      logHint: "记录存在这个分页里，刷新后还在，关掉分页或按清除记录才会清掉。导出前会把 IP 与 mDNS 名称遮掉。结果贴回 issue #553。",
       export: "导出记录",
+      clearLog: "清除记录",
       reset: "重来",
       sdpRaw: "原始大小",
       sdpTrimmed: "精简后",
@@ -366,9 +372,12 @@
       prepNone: "Nothing ahead",
       prepOpen: "Open connections on connect",
       prepWarm: "Open and warm up",
+      dropLinks: "Drop extra connections",
+      dropped: "Dropped {n} extra connections. The next send or prepare opens new ones.",
       logTitle: "6. Log",
-      logHint: "IP addresses and mDNS names are masked on export. Post results back to issue #553.",
+      logHint: "The log is kept in this tab and survives a reload. Closing the tab or pressing Clear log removes it. IP addresses and mDNS names are masked on export. Post results back to issue #553.",
       export: "Export log",
+      clearLog: "Clear log",
       reset: "Start over",
       sdpRaw: "Raw size",
       sdpTrimmed: "After trimming",
@@ -589,6 +598,19 @@
   envBox.className = "wl-env";
   envBox.placeholder = t.envPlaceholder;
   envBox.setAttribute("aria-label", t.envLabel);
+  // 跟紀錄一樣存在分頁裡，重新整理後不必再填一次
+  try {
+    envBox.value = sessionStorage.getItem("webrtc-lab-env") || "";
+  } catch (err) {
+    // 分頁的儲存空間被停用
+  }
+  envBox.addEventListener("input", function () {
+    try {
+      sessionStorage.setItem("webrtc-lab-env", envBox.value);
+    } catch (err) {
+      // 同上
+    }
+  });
   sendStep.appendChild(envBox);
   // 傳輸參數，用來找吞吐量卡在哪裡。每次只改一個，數字才比得出差別。放在兩個送出按鈕前面，兩種送法都套用。
   sendStep.appendChild(el("p", "wl-hint", t.paramsHint));
@@ -624,6 +646,10 @@
   [prepBox, linksBox, channelsBox].forEach(function (box) {
     box.addEventListener("change", function () { prepAll(); });
   });
+  // 換一種預先準備的模式再量「剛開好的連線」，不必重新整理、也不必重新配對
+  const dropWrap = el("div");
+  dropWrap.appendChild(button(t.dropLinks, function () { dropAllLinks(); }));
+  sendStep.appendChild(dropWrap);
   const sizeBox = el("select");
   [
     ["102400", "100 KB"],
@@ -656,13 +682,17 @@
   const logStep = step(t.logTitle);
   logStep.appendChild(el("p", "wl-hint", t.logHint));
   logStep.appendChild(button(t.export, exportLog));
+  logStep.appendChild(button(t.clearLog, clearLog));
   logStep.appendChild(button(t.reset, function () { location.reload(); }));
   const logBox = el("pre", "wl-log");
   logStep.appendChild(logBox);
 
   // ---------------------------------------------------------------- 狀態
 
-  const log = [];
+  // 紀錄存在這個分頁的 sessionStorage，重新整理不會消失，關掉分頁或按「清除紀錄」才清掉。
+  // 只存在這台裝置上，裡面的位址只有類別，候選與描述的明碼位址不進紀錄。
+  const LOG_KEY = "webrtc-lab-log";
+  const log = loadLog();
   // 每一條連線一筆。兩台同時掃到對方時，同一台對方裝置會短暫有兩筆，開通後只留一筆。
   const peers = [];
   const pool = [];
@@ -679,9 +709,37 @@
   // 傳輸結果，每一台一列
   const results = new Map();
 
+  function loadLog() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(LOG_KEY) || "[]");
+      return Array.isArray(saved) ? saved : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function saveLog() {
+    try {
+      sessionStorage.setItem(LOG_KEY, JSON.stringify(log));
+    } catch (err) {
+      // 分頁的儲存空間滿了或被停用，紀錄照樣留在記憶體裡，只是重新整理會不見
+    }
+  }
+
+  function renderLog() {
+    logBox.textContent = log.map(function (row) { return JSON.stringify(row); }).join("\n");
+  }
+
   function record(event, data) {
     log.push(Object.assign({ at: new Date().toISOString(), event: event }, data || {}));
-    logBox.textContent = log.map(function (row) { return JSON.stringify(row); }).join("\n");
+    saveLog();
+    renderLog();
+  }
+
+  function clearLog() {
+    log.length = 0;
+    saveLog();
+    renderLog();
   }
 
   function fill(text, vars) {
@@ -2072,6 +2130,36 @@
     peers.forEach(function (peer) { prepPeer(peer); });
   }
 
+  // 兩個方向的額外連線都收掉：自己開出去的（links）與對方開過來的（linksIn），並請對方也照做。
+  // 排進佇列，傳到一半不會被拆掉。收完如果選了預先準備，馬上重開一批。
+  function dropLinks(peer, by) {
+    return enqueue(peer, function () {
+      const count = peer.links.length + peer.linksIn.length;
+      peer.links.map(function (l) { return l.pc; }).concat(peer.linksIn).forEach(function (pc) {
+        try {
+          pc.close();
+        } catch (err) {
+          // 已經關掉了
+        }
+      });
+      peer.links = [];
+      peer.linksIn = [];
+      record("links-dropped", { peer: short(peer.id), count: count, by: by });
+      if (by === "local") sendControl(peer, { kind: "drop-links" });
+    }).then(function () { prepPeer(peer); });
+  }
+
+  async function dropAllLinks() {
+    const targets = peers.filter(function (p) { return isOpen(p) && p.id; });
+    if (!targets.length) {
+      sendNote.textContent = t.notConnected;
+      return;
+    }
+    const before = targets.reduce(function (n, p) { return n + p.links.length + p.linksIn.length; }, 0);
+    await Promise.all(targets.map(function (peer) { return dropLinks(peer, "local"); }));
+    sendNote.textContent = fill(t.dropped, { n: before });
+  }
+
   // 挑緩衝區最空的那一條送。全部都塞滿時，等任何一條降到下界。
   async function pickLane(lanes) {
     for (;;) {
@@ -2310,6 +2398,7 @@
     else if (msg.kind === "ready" || msg.kind === "got") settleReply(peer, msg.kind + ":" + msg.xfer, msg);
     else if (msg.kind === "link-offer") onLinkOffer(peer, msg);
     else if (msg.kind === "link-answer") settleReply(peer, "link-answer:" + msg.link, msg);
+    else if (msg.kind === "drop-links") dropLinks(peer, "remote");
   }
 
   async function sendGenerated() {
@@ -2351,6 +2440,9 @@
     URL.revokeObjectURL(link.href);
   }
 
+  renderLog();
+  record("page-load", { restored: log.length });
+
   // 給檢查腳本用的把手，見 tools/webrtc-lab/。人不會用到這幾個。
   window.__lab = {
     start: start,
@@ -2383,6 +2475,8 @@
       prepBox.value = mode;
       prepAll();
     },
+    dropLinks: dropAllLinks,
+    clearLog: clearLog,
     environment: function (text) { envBox.value = text; },
     // 把現在顯示的 QR 方格矩陣交出去，檢查腳本拿去寫成假攝影機的 Y4M 畫面
     qrMatrix: function () {

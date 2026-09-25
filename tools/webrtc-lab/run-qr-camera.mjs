@@ -79,6 +79,8 @@ async function launch(label, port, camera) {
       "--no-sandbox",
       "--disable-gpu",
       "--no-first-run",
+      // 不向系統鑰匙圈要 cookie 的加密金鑰。鑰匙圈卡住時，Chrome 的每一個連線都會停在那裡
+      "--password-store=basic",
       `--user-data-dir=${profile}`,
       `--remote-debugging-port=${port}`,
       "--use-fake-ui-for-media-stream",

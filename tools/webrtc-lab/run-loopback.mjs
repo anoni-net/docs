@@ -12,7 +12,8 @@
  *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
  *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
  *   另外在第 1 種情況裡確認預設參數，再換三組傳輸參數送檔（最多 12 條連線），確認多條通道、多條連線照位置組回來。
- *   K 與 L 先選「開好連線並預熱」再配對，連上就開好連線、預熱不算進接收紀錄。
+ *   K 與 L 先選「開好連線並預熱」再配對，連上就開好連線、預熱不算進接收紀錄。接著
+ *   收掉額外的連線再送一次，最後重新整理 K，確認紀錄還在、清除紀錄才清掉。
  *   4. I 套上一份連不到的回應（候選換成 TEST-NET 位址，產生它的分頁已經關掉），
  *      15 秒後要判定連不上並收掉那一條，而不是一直停在建立中。
  *
@@ -24,7 +25,7 @@
  *
  *   cd docs && SOCIAL_CARDS=false PRIVACY_ASSETS=false bash run.sh
  *   python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output
- *   google-chrome --headless=new --remote-debugging-port=9223 \
+ *   google-chrome --headless=new --password-store=basic --remote-debugging-port=9223 \
  *     --user-data-dir=/tmp/chrome-lab-profile about:blank
  *
  * 用法：
@@ -73,7 +74,16 @@ async function openTab(label) {
     ws.close();
     await fetch(`http://127.0.0.1:${CDP_PORT}/json/close/${target.id}`).catch(() => {});
   };
-  const tab = { label, evaluate, close };
+  const ready = () => until(
+    () => evaluate("typeof __lab === 'object' && document.readyState === 'complete'"),
+    `${label} 頁面載入`
+  );
+  const reload = async () => {
+    await send("Page.reload");
+    await wait(300);
+    await ready();
+  };
+  const tab = { label, evaluate, close, reload };
   await until(
     () => evaluate("typeof __lab === 'object' && document.readyState === 'complete'"),
     `${label} 頁面載入`
@@ -249,6 +259,29 @@ try {
     `送出時不必再開連線（${warmSend.setupMs} ms），最年輕的連線已開通 ${warmSend.youngestLinkMs} ms`);
   check(warmRecv.match && (await events(l, "recv-done")).length === 1,
     "預熱的資料不算進接收紀錄，正式傳輸的 SHA-256 一致");
+
+  // 收掉額外的連線：兩邊都收，選了預熱就馬上重開一批，不必重新整理或重新配對
+  await k.evaluate("__lab.dropLinks()", true);
+  const droppedK = await until(async () => (await events(k, "links-dropped"))[0], "K 收掉連線");
+  const droppedL = await until(async () => (await events(l, "links-dropped"))[0], "L 收掉連線");
+  check(droppedK.by === "local" && droppedL.by === "remote" && droppedK.count > 0,
+    `兩邊都收掉額外的連線（K ${droppedK.count} 條、L ${droppedL.count} 條）`);
+  await until(async () => (await events(k, "warm-done")).length >= 2, "K 重新開好並預熱", 30000);
+  await k.evaluate("__lab.send(5242880)", true);
+  const again = (await events(k, "send-start")).slice(-1)[0];
+  const againRecv = await until(async () => (await events(l, "recv-done"))[1], "L 收完第二份", 60000);
+  check(again.youngestLinkMs < warmSend.youngestLinkMs + 5000 && againRecv.match,
+    `重開的連線照樣傳得到（最年輕的連線開通 ${again.youngestLinkMs} ms），SHA-256 一致`);
+
+  // 紀錄存在分頁裡，重新整理後還在，清除紀錄才清掉
+  const before = (await k.evaluate("__lab.log().length"));
+  await k.reload();
+  const loads = await events(k, "page-load");
+  const kept = await k.evaluate("__lab.log().length");
+  check(kept > before && loads[loads.length - 1].restored === before,
+    `重新整理後紀錄還在（${before} 筆，重新整理後 ${kept} 筆）`);
+  await k.evaluate("__lab.clearLog()");
+  check((await k.evaluate("__lab.log().length")) === 0, "按清除紀錄才清掉");
 
   // ------------------------------------------------------------ 4. 連不上要說得出來
   console.log("連不到的回應");
