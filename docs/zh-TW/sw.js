@@ -115,19 +115,6 @@ const SCOPE_PATH = new URL(self.registration.scope).pathname;
 // 來源，langPrefixOf 與 tools/check_precache.mjs 都讀它。
 const LANG_PREFIXES = ["", "zh-cn/", "en/"];
 
-// 每個語系各一份的資產：theme app shell（hash 檔名與 overrides/base.html 同步），
-// 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
-// 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
-//
-// 這一份也是底線那批的一部分（見 essentialUrlsFor），關掉自動存的讀者一樣會下。
-// 所以只放每一頁都要用的東西，個別頁面的程式放 UTIL_ASSETS。
-//
-// 這份清單只放 bootstrap：帶雜湊檔名的 theme 資產，加上索引本身。站台自己那批每頁
-// 都載入的樣式與腳本（stylesheets/extra.css、js/analytics.js 之類）寫在索引的 shell
-// 欄位，由 shellAssetsFor 讀出來，頁面改了引用什麼不必回來改這裡。
-//
-// 2026-09-04 之前那批沒有人負責：建置端把每頁都出現的資產從個別頁面移除，這裡又
-// 沒有收，於是讀者按了「全部存到裝置」，227 頁的 HTML 一頁不缺，離線打開是白的。
 // 三語系位元組完全相同的資產落在哪些目錄底下。
 //
 // 三次 mkdocs build 產出的內容一模一樣，只有路徑前綴不同，所以讀者切過語言之後，
@@ -157,6 +144,19 @@ function assetUrlFor(prefix, asset) {
   return SCOPE_PATH + (crossLangAsset(asset) ? "" : prefix) + asset;
 }
 
+// 每個語系各一份的資產：theme app shell（hash 檔名與 overrides/base.html 同步），
+// 加上離線內容管理頁要用的兩份。管理頁本身在 CORE_PAGES 裡，但它離線打開時還需要
+// 自己的程式與那份頁面索引，少了索引就只剩「清除全部」可以按。
+//
+// 這一份也是底線那批的一部分（見 essentialUrlsFor），關掉自動存的讀者一樣會下。
+// 所以只放每一頁都要用的東西，個別頁面的程式放 UTIL_ASSETS。
+//
+// 這份清單只放 bootstrap：帶雜湊檔名的 theme 資產，加上索引本身。站台自己那批每頁
+// 都載入的樣式與腳本（stylesheets/extra.css、js/analytics.js 之類）寫在索引的 shell
+// 欄位，由 shellAssetsFor 讀出來，頁面改了引用什麼不必回來改這裡。
+//
+// 2026-09-04 之前那批沒有人負責：建置端把每頁都出現的資產從個別頁面移除，這裡又
+// 沒有收，於是讀者按了「全部存到裝置」，227 頁的 HTML 一頁不缺，離線打開是白的。
 const SHELL_ASSETS = [
   "assets/stylesheets/main.ec1eaa64.min.css",
   "assets/stylesheets/palette.ab4e12ef.min.css",
@@ -613,8 +613,9 @@ const HASHED_ASSET = /\.[0-9a-f]{8}\.min\.(?:css|js)$/;
 // 驗過之後交回來的是那一份 200，這裡要的是伺服器對這兩個標頭的答案。兩種模式都
 // 不會拿 HTTP 快取的舊內容冒充新的，NO_HTTP_CACHE 那段顧慮的事一樣守得住。
 //
-// 網路失敗或伺服器錯誤時沿用舊副本，理由見 previousPrecaches 上面那段。404 不沿用，
-// 那代表站上已經沒有這一頁。
+// 網路失敗或伺服器錯誤時沿用舊副本，理由見 previousPrecaches 上面那段。沒有舊副本
+// 可沿用就丟出錯誤，precacheFor 據此知道這一輪沒做完，下一次導覽再補。404 回
+// undefined，那代表站上沒有這一頁，重試也不會有。
 async function fetchForPrecache(url, previous) {
   const old = await previousCopy(previous, url);
   if (old && HASHED_ASSET.test(url)) return old;
@@ -633,11 +634,15 @@ async function fetchForPrecache(url, previous) {
   try {
     response = await fetch(url, init);
   } catch (err) {
-    return old;
+    if (old) return old;
+    throw err;
   }
   if (response.status === 304) return old;
   if (response.ok) return response;
-  if (response.status >= 500) return old;
+  if (response.status >= 500) {
+    if (old) return old;
+    throw new Error("precache-server-error " + response.status);
+  }
   return undefined;
 }
 
@@ -661,16 +666,6 @@ async function loadOfflineIndex(prefix, previous = []) {
   }
 }
 
-// 沒有網路時至少要有的那一小批：離線提示頁本身，加上撐得起它的 app shell。
-//
-// 為什麼不受「自動存下核心章節」的開關管：那一頁就是離線內容管理頁。讀者想清掉
-// 裝置上的東西、或想知道自己還有哪些內容可讀，往往正好是連不上網的時候，那一頁
-// 進不去的話整個功能等於不存在。少了它，沒快取過的網址在離線時會一路走到
-// networkFirst 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面。
-//
-// 這一批約 0.97 MB（首頁、離線閱讀頁，加上索引 shell 欄位那批每頁共用的樣式與腳本），
-// 相對於完整章節的十 MB 是可以接受的底線。三語系共用的資產只算一份，讀者用過第二個
-// 語系時實際多下的是 0.64 MB。
 // 底線那批裡的頁面。essentialUrlsFor 與 hadFullPrecache 共用這一份：後者要挑一個
 // 「只有完整章節才會有」的頁面當探針，兩邊寫在一起才不會不同步。2026-09-04 首頁進了
 // 底線那批之後，探針原本還指著首頁，只存過底線的裝置就被當成上一版有完整章節。
@@ -689,6 +684,16 @@ const ESSENTIAL_PAGES = ["", "offline/"];
 // 那一頁。
 const FALLBACK_PAGE = "not-stored/";
 
+// 沒有網路時至少要有的那一小批：離線提示頁本身，加上撐得起它的 app shell。
+//
+// 為什麼不受「自動存下核心章節」的開關管：那一頁就是離線內容管理頁。讀者想清掉
+// 裝置上的東西、或想知道自己還有哪些內容可讀，往往正好是連不上網的時候，那一頁
+// 進不去的話整個功能等於不存在。少了它，沒快取過的網址在離線時會一路走到
+// networkFirst 最後的 throw，讀者看到的是瀏覽器自己的網路錯誤畫面。
+//
+// 這一批約 0.97 MB（首頁、離線閱讀頁，加上索引 shell 欄位那批每頁共用的樣式與腳本），
+// 相對於完整章節的十 MB 是可以接受的底線。三語系共用的資產只算一份，讀者用過第二個
+// 語系時實際多下的是 0.64 MB。
 function essentialUrlsFor(prefix) {
   // 首頁跟離線閱讀頁一起進來。首頁是 PWA 的 start_url，也是語言導向的落點：讀者的
   // PWA 是從 zh-TW 的首頁裝的，那一頁的 JS 讀到閱讀語言是 en 就 location.replace 到
@@ -743,29 +748,57 @@ async function hadFullPrecache(prefix) {
 //
 // wantFull 由呼叫端決定要不要下完整章節，見 installPrecache 與 precacheOnNavigation。
 // 這裡只再 AND 上一個條件：讀者關掉自動存或清空過內容時，一律只補底線那一批。
+// 預快取做完一輪的標記，存在 PRECACHE 裡。
+//
+// precachedPrefixes 只活在記憶體裡，而 SW 閒置三十秒左右就會被瀏覽器終止，所以原本
+// 幾乎每一段閱讀的第一次導覽，都要重抓一次 offline-index.json（zh-TW 88 KB），再對
+// 一百多個網址各做一次 cache.match，才知道沒事可做。標記跟著 PRECACHE 的版本走，換版
+// 時整批清掉，新版會重新走一輪。
+//
+// 模式寫進網址。讀者打開內文圖的開關之後，要的東西多了一批，舊的標記不算數。
+const PRECACHE_DONE_URL = "/__anoni-settings/precached/";
+
+function precacheMarker(prefix, mode) {
+  return PRECACHE_DONE_URL + (prefix || "root") + "/" + mode;
+}
+
 async function precacheFor(prefix, wantFull) {
   if (precachedPrefixes.has(prefix + " full")) return;
   const full = wantFull && (await autoPrecacheEnabled());
   const done = prefix + (full ? " full" : " essential");
   if (precachedPrefixes.has(done)) return;
+  // 先記下來，同一個 SW 裡接連幾次導覽送來的 PRECACHE_LANG 不會並行跑好幾輪
   precachedPrefixes.add(done);
+  const images = full && (await precacheImagesEnabled());
+  const mode = full ? (images ? "full+images" : "full") : "essential";
   const cache = await caches.open(PRECACHE);
+  const marker = precacheMarker(prefix, mode);
+  if (await cache.match(marker)) return;
   let urls = full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix);
   const previous = await previousPrecaches();
   // 索引只讀一次，shell 與核心章節的內文圖都從同一份取。
   const index = await loadOfflineIndex(prefix, previous);
   urls = urls.concat(await shellAssetsFor(prefix, index));
-  if (full && (await precacheImagesEnabled())) {
+  if (images) {
     urls = urls.concat(await corePageAssets(prefix, index));
   }
   // 逐一快取並容忍個別失敗（本地開發只有單一語系，其他語系路徑會 404）
-  await Promise.allSettled(
+  const results = await Promise.allSettled(
     urls.map(async (url) => {
       if (await cache.match(url)) return;
       const response = await fetchForPrecache(url, previous);
       if (response) await cache.put(url, response);
     })
   );
+  // 網路或伺服器那邊沒拿到的（fetchForPrecache 丟出來的）還有機會補，不寫標記，
+  // 記憶體裡那筆也拿掉，下一次導覽再試。原本不分成敗一律記成做完，這一輪 SW 活著
+  // 的期間都不會重試。404 算做完：本地開發只建一個語系，zh-CN 也缺幾頁，那些永遠
+  // 補不到。索引沒拿到也不算，shell 那批樣式還不知道有哪些。
+  if (index && results.every((result) => result.status === "fulfilled")) {
+    await cache.put(marker, new Response(""));
+  } else {
+    precachedPrefixes.delete(done);
+  }
 }
 
 // 網址對到建置路徑的語系前綴。zh-TW 由 run.sh 建在根路徑，另外兩語各有前綴。
@@ -960,8 +993,6 @@ async function precachedEntries(prefix) {
   return pages.filter((page) => stored.has(SCOPE_PATH + prefix + page));
 }
 
-// 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
-// refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
 // 同時在飛的請求數。
 //
 // 管理頁上的「全部存到裝置」一次就是四百多個請求，循序跑光是往返就要一分多鐘，
@@ -987,6 +1018,8 @@ async function runPool(items, worker) {
   await Promise.all(runners);
 }
 
+// 存進 library。已經有的跳過，讓「更新」與「新增幾頁」走同一條路。
+// refresh 為真時不管有沒有都重抓，那是管理頁的更新按鈕。
 async function addToLibrary(prefix, paths, assets, refresh, report) {
   const pageCache = await caches.open(LIBRARY);
   const assetCache = await caches.open(LIBRARY_ASSETS);
@@ -1069,9 +1102,8 @@ async function ownCacheNames() {
 async function cacheUsage() {
   let bytes = 0;
   for (const name of await ownCacheNames()) {
-    const cache = await caches.open(name);
-    for (const request of await cache.keys()) {
-      const response = await cache.match(request);
+    // 一個快取一次 matchAll，原本逐筆 keys 再 match，存了整份站的裝置上是上千次讀取
+    for (const response of await (await caches.open(name)).matchAll()) {
       if (!response) continue;
       const declared = response.headers && response.headers.get("content-length");
       if (declared !== null && declared !== undefined && declared !== "") {
@@ -1215,37 +1247,6 @@ self.addEventListener("message", (event) => {
   event.waitUntil(handleLibraryMessage(data, port));
 });
 
-// 一次性遷移：把帶版本後綴的舊 runtime 快取搬進不帶版本的新快取。
-//
-// 這次改動之前每次部署都換快取名稱，activate 會把讀者累積的離線頁面整批刪掉。修法
-// 如果照舊直接刪，等於在升級的當下再清空一次，所以先搬過來。頁面與資產都要搬：舊頁面
-// 引用的是舊 hash 的 CSS 與 JS，只搬頁面的話離線開起來會沒有樣式。
-//
-// 讀者都升過一輪之後（大約兩三次部署）這段就不會再命中任何東西，可以移除。
-async function migrateLegacyRuntime() {
-  const keys = await caches.keys();
-  for (const [legacyPrefix, target] of [
-    ["anoni-docs-pages-", RUNTIME_PAGES],
-    ["anoni-docs-assets-", RUNTIME_ASSETS],
-  ]) {
-    const legacyKeys = keys.filter((key) => key.startsWith(legacyPrefix));
-    if (!legacyKeys.length) continue;
-    const cache = await caches.open(target);
-    for (const key of legacyKeys) {
-      const legacy = await caches.open(key);
-      for (const request of await legacy.keys()) {
-        // 新快取已經有的就不覆蓋，那份比較新
-        if (await cache.match(request)) continue;
-        const response = await legacy.match(request);
-        if (response) await cache.put(request, response);
-      }
-      await caches.delete(key);
-    }
-  }
-  await trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES);
-  await trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES);
-}
-
 // 換版後清掉用不到的快取。
 //
 // LIBRARY、LIBRARY_ASSETS 與 SETTINGS 都不帶版本，換版時要留著。前兩個是讀者自己
@@ -1268,7 +1269,6 @@ async function purgeStaleCaches() {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      await migrateLegacyRuntime();
       await purgeStaleCaches();
       await self.clients.claim();
     })()
@@ -1289,26 +1289,52 @@ function cacheKeyCandidates(pathname) {
   return [pathname];
 }
 
-// 離線時替一個導覽請求找出對應的快取。ignoreSearch 讓帶 ?lang= 或分享參數的網址
-// 也命中，站上的 query 一律只由 client 端 JS 讀取，同一個路徑回傳的 HTML 是同一份。
+// 離線時替一個導覽請求找出對應的快取。只比路徑：站上的 query 一律只由 client 端
+// JS 讀取，同一個路徑回傳的 HTML 是同一份，帶 ?lang= 或分享參數的網址也要命中。
+//
+// 每一個快取的頁面 key 都不帶 query（預快取與 library 用的是索引裡的路徑，執行期
+// 那份由 pageKey 去掉），所以精確比對就夠。原本還有一輪 ignoreSearch，那會讓 Cache
+// Storage 放棄索引、線性掃過每一筆，而裝置上沒有的頁面每次都會走到那一輪。
 async function matchCachedPage(request) {
   const url = new URL(request.url);
-  // 先走精確比對。ignoreSearch 會讓 Cache Storage 放棄索引、線性掃過每一筆，而
-  // 按下「全部存到裝置」之後那是四百多筆，每翻一頁掃兩輪，在手機上是看得出來的
-  // 延遲。站上絕大多數導覽的網址沒有 query，這一條就結束了。
   for (const pathname of cacheKeyCandidates(url.pathname)) {
     const hit = await caches.match(url.origin + pathname);
     if (hit) return hit;
   }
-  // 精確那輪沒中才退回線性掃描。會走到這裡的是快取裡存著帶 query 的 key，例如讀者
-  // 從 /docs/x/?utm=... 進來，RUNTIME_PAGES 就存下了那個形狀。ignoreSearch 讓它跟
-  // 純路徑對得上，站上的 query 一律只由 client 端 JS 讀取，同一個路徑回傳的 HTML
-  // 是同一份。
-  for (const pathname of cacheKeyCandidates(url.pathname)) {
-    const hit = await caches.match(url.origin + pathname, { ignoreSearch: true });
-    if (hit) return hit;
-  }
   return undefined;
+}
+
+// 導覽頁存進 RUNTIME_PAGES 的 key，去掉 query。
+//
+// 原本直接拿請求當 key，讀者從 /docs/x/?utm=... 進來就多存一份，同一頁佔掉兩格
+// 120 頁的上限，離線時還得靠線性掃描才對得上乾淨的網址。
+function pageKey(request) {
+  const url = new URL(request.url);
+  return url.origin + url.pathname;
+}
+
+// 發出一個執行期的請求，拿到就留一份在指定的快取。導覽、自寫的資產與其餘資產三條
+// 策略共用，回的是網路那條的 promise，要不要等它由呼叫端決定。
+//
+// cache 選項的理由見 NO_HTTP_CACHE，這裡傳的是 Request，credentials 由它自己帶。
+// 帶 init 去複製一個 mode 為 navigate 的 Request，規格會把 mode 降成 same-origin。
+// 這裡的請求在 fetch handler 入口已經濾成同源，站內連結也都是 mkdocs 產出的完整
+// 目錄形狀，走不到跨站轉址那條路。
+//
+// 只在「自動存下內容」開著時寫，理由見 RUNTIME_PAGES。裁剪用 waitUntil 而不是
+// await：純 fire-and-forget 的話 SW 可能在裁剪跑完前被瀏覽器終止，上限長期守不住，
+// 改成 await 又會讓每次請求都等裁剪跑完才拿到回應。
+function fetchAndKeep(request, key, cacheName, maxEntries, event) {
+  return fetch(request, { cache: "no-cache" }).then(async (response) => {
+    // 這條路通了。不看 response.ok，回 404 也代表網路本身是好的。
+    networkDownSince = 0;
+    if (response.ok && (await autoPrecacheEnabled())) {
+      const cache = await caches.open(cacheName);
+      await cache.put(key, response.clone());
+      keepAlive(event, trimCache(cacheName, maxEntries));
+    }
+    return response;
+  });
 }
 
 // zh-TW 的 offline 頁在根路徑，另外兩語各在自己的前綴底下。langPrefixOf 回 null
@@ -1438,24 +1464,9 @@ function assetUnavailable() {
 
 async function networkFirst(request, event) {
   // 先把網路那條發出去，不管後面走哪一條，它拿到的東西都要寫進快取。
-  //
-  // cache 選項的理由見 NO_HTTP_CACHE，這裡傳的是 Request，credentials 由它自己帶。
-  // 帶 init 去複製一個 mode 為 navigate 的 Request，規格會把 mode 降成
-  // same-origin。這裡的請求在 fetch handler 入口已經濾成同源，站內連結也都是
-  // mkdocs 產出的完整目錄形狀，走不到跨站轉址那條路。
-  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
-    // 這條路通了。不看 response.ok，回 404 也代表網路本身是好的。
-    networkDownSince = 0;
-    if (response.ok && (await autoPrecacheEnabled())) {
-      const cache = await caches.open(RUNTIME_PAGES);
-      await cache.put(request, response.clone());
-      // 用 waitUntil 而不是 await。純 fire-and-forget 的話 SW 可能在裁剪跑完前
-      // 被瀏覽器終止，上限長期守不住；改成 await 又會讓每次導覽都等裁剪跑完才
-      // 拿到回應。waitUntil 兩邊都要得到：SW 活到裁剪結束，回應不被卡住。
-      keepAlive(event, trimCache(RUNTIME_PAGES, PAGES_MAX_ENTRIES));
-    }
-    return response;
-  });
+  const network = fetchAndKeep(
+    request, pageKey(request), RUNTIME_PAGES, PAGES_MAX_ENTRIES, event
+  );
 
   const cached = await matchCachedPage(request);
   if (!cached) {
@@ -1497,6 +1508,13 @@ async function networkFirst(request, event) {
     network.catch(() => null),
     new Promise((resolve) => setTimeout(() => resolve(null), NAVIGATE_TIMEOUT_MS)),
   ]);
+  // 伺服器回 5xx 就給裝置上那一份。原本網路那條只要有回應就照單全收，部署後
+  // Cloudflare 邊緣快取卡住 502 的那幾次，存著這一頁的讀者看到的也是 502。5xx 是
+  // 伺服器那邊暫時出狀況，內容沒有變，舊一點的副本比錯誤頁有用。
+  //
+  // 404 照樣回給讀者，那代表站上已經撤下這一頁，給舊副本等於假裝它還在。網路狀態
+  // 不記成斷線，伺服器回得出錯誤就表示連得上，下一次導覽照常賽跑。
+  if (raced && raced.status >= 500) return cached;
   if (raced) return raced;
 
   // 網路太慢或失敗，先給讀者看得到的那一份。網路那邊還在跑，回來時照樣寫進快取，
@@ -1552,15 +1570,7 @@ function mutableAsset(url) {
 // 先問網路，拿不到才給裝置上那一份。跟 staleWhileRevalidate 相反的順序，其餘的
 // 離線行為一致：網路已知是斷的就不等，逾時就退回快取，兩種都不會讓讀者卡住。
 async function assetNetworkFirst(request, event) {
-  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
-    networkDownSince = 0;
-    if (response.ok && (await autoPrecacheEnabled())) {
-      const cache = await caches.open(RUNTIME_ASSETS);
-      await cache.put(request, response.clone());
-      keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
-    }
-    return response;
-  });
+  const network = fetchAndKeep(request, request, RUNTIME_ASSETS, ASSETS_MAX_ENTRIES, event);
 
   if (networkLooksDown()) {
     keepAlive(event, network.catch(() => {}));
@@ -1584,18 +1594,8 @@ async function assetNetworkFirst(request, event) {
 
 async function staleWhileRevalidate(request, event) {
   const cached = await matchCachedAsset(request);
-  // 背景那條同樣繞過 HTTP 快取（見 NO_HTTP_CACHE）。theme 資產帶 hash 檔名不會
-  // 變，會變的是自寫的 js 與圖，那些在 mkdocs 產出時沒有 hash。
-  const network = fetch(request, { cache: "no-cache" }).then(async (response) => {
-    // 這條路通了，離線狀態跟著清掉，跟 networkFirst 共用同一個旗標
-    networkDownSince = 0;
-    if (response.ok && (await autoPrecacheEnabled())) {
-      const cache = await caches.open(RUNTIME_ASSETS);
-      await cache.put(request, response.clone());
-      keepAlive(event, trimCache(RUNTIME_ASSETS, ASSETS_MAX_ENTRIES));
-    }
-    return response;
-  });
+  // 資產的 key 保留 query。跟頁面不同，資產的 query 可能真的代表不同內容。
+  const network = fetchAndKeep(request, request, RUNTIME_ASSETS, ASSETS_MAX_ENTRIES, event);
 
   // 裝置上有一份就直接給，revalidate 在背景跑，讀者感覺不到多出來的那個往返。
   if (cached) {

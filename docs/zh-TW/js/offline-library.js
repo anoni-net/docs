@@ -446,6 +446,13 @@
     return readyPromise;
   }
 
+  // 多久沒有任何回音就當作失敗。
+  //
+  // service worker 在工作中途被瀏覽器終止時，port 不會關閉也不會報錯，只是再也沒有
+  // 訊息，沒有這一條的話按鈕會一直轉圈。算的是兩則訊息之間的間隔，不是整件工作的
+  // 長度：下載類的指令每存一項就回報一次，網路再慢，一分鐘內總該有一項做完。
+  const ASK_IDLE_MS = 60000;
+
   // 一次請求一個 MessageChannel。下載類的指令會在同一個 port 上多次回報進度，
   // 最後一則不是 progress，那時才算結束。
   function ask(message, onProgress) {
@@ -458,17 +465,75 @@
             return;
           }
           const channel = new MessageChannel();
+          let timer = null;
+          const arm = () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              channel.port1.onmessage = null;
+              reject(new Error("service-worker-silent"));
+            }, ASK_IDLE_MS);
+          };
           channel.port1.onmessage = (event) => {
             const data = event.data || {};
             if (data.type === "progress") {
+              arm();
               if (onProgress) onProgress(data);
               return;
             }
+            clearTimeout(timer);
             resolve(data);
           };
           worker.postMessage(message, [channel.port2]);
+          arm();
         })
     );
+  }
+
+  // 一則 OFFLINE_ADD 最多帶幾項（頁面加資產）。
+  //
+  // 「全部存到裝置」原本是一則訊息四百多個請求，整批掛在 service worker 同一個事件的
+  // waitUntil 上。瀏覽器對單一事件能延長多久有上限（Chrome 是五分鐘，iOS 回收得更
+  // 早），慢的網路上做不完就被終止。切成小批之後每一批都是一個短事件，中途斷掉的話
+  // 已經存下的那幾批不受影響，讀者再按一次只會補缺的。
+  const ADD_BATCH = 40;
+
+  // 分批送 OFFLINE_ADD，進度與結果合起來算，呼叫端看到的跟一次送完一樣。頁面排在
+  // 資產前面，跟 service worker 裡的順序一致，中途斷掉時手上是幾頁完整的內容。
+  function addInBatches(message, onProgress) {
+    const items = message.paths
+      .map((path) => ({ page: true, path: path }))
+      .concat((message.assets || []).map((path) => ({ page: false, path: path })));
+    const batches = [];
+    for (let i = 0; i < items.length; i += ADD_BATCH) {
+      batches.push(items.slice(i, i + ADD_BATCH));
+    }
+    let offset = 0;
+    let ok = 0;
+    let failed = 0;
+    return batches
+      .reduce(
+        (chain, batch, n) =>
+          chain.then(() => {
+            const part = Object.assign({}, message, {
+              paths: batch.filter((item) => item.page).map((item) => item.path),
+              assets: batch.filter((item) => !item.page).map((item) => item.path),
+            });
+            // intent 只跟最後一批走。「全部存到裝置」中途斷掉的話，讀者要的東西還沒
+            // 到齊，這時記下「按過全部」會讓下一次更新以為已經做完了
+            if (n < batches.length - 1) delete part.intent;
+            return ask(part, (data) => {
+              if (onProgress) {
+                onProgress({ type: "progress", done: offset + data.done, total: items.length });
+              }
+            }).then((result) => {
+              offset += batch.length;
+              ok += result.ok || 0;
+              failed += result.failed || 0;
+            });
+          }),
+        Promise.resolve()
+      )
+      .then(() => ({ type: "done", ok: ok, failed: failed }));
   }
 
   // 這一頁在 /docs/offline/、/docs/en/offline/ 或 /docs/zh-cn/offline/，
@@ -899,7 +964,7 @@
             )
             .then((removeResult) =>
               (toAdd.length
-                ? ask(
+                ? addInBatches(
                     {
                       type: "OFFLINE_ADD",
                       url: location.href,
@@ -993,7 +1058,7 @@
             runTask(key, t.applying, missing.length + assets.length, (report) => {
               // 只送動作代號，不送選了哪一條。那等於身分，是這一頁最不該外流的東西。
               trackOffline("add");
-              return ask(
+              return addInBatches(
                 {
                   type: "OFFLINE_ADD",
                   url: location.href,
@@ -1112,7 +1177,7 @@
         () =>
           runTask("saveAll", t.applying, missing.length + missingAssets.length, (report) => {
             trackOffline("add");
-            return ask(
+            return addInBatches(
               {
                 type: "OFFLINE_ADD",
                 url: location.href,
@@ -1152,7 +1217,7 @@
         const paths = Array.from(state.saved).concat(fresh);
         const assets = Array.from(assetsOf(paths));
         return runTask("refresh", t.refreshing, paths.length + assets.length, (report) =>
-          ask(
+          addInBatches(
             {
               type: "OFFLINE_ADD",
               url: location.href,
@@ -1366,7 +1431,18 @@
         state.busy = false;
         state.task = null;
         state.armedClear = false;
-        render(t.failed);
+        // 分批送的工作中途斷掉時，前面幾批已經在裝置上了。重讀一次狀態，按鈕上的頁數
+        // 與大小才會只剩缺的。讀者勾著還沒套用的，扣掉已經做完的留著，再按一次套用
+        // 就會接著做。
+        const add = Array.from(state.add);
+        const remove = Array.from(state.remove);
+        return refreshStatus()
+          .catch(() => {})
+          .then(() => {
+            for (const path of add) if (!state.saved.has(path)) state.add.add(path);
+            for (const path of remove) if (state.saved.has(path)) state.remove.add(path);
+            render(t.failed);
+          });
       });
   }
 

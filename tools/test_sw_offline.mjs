@@ -12,8 +12,6 @@
  * zh-TW 的索引頁連的是 games/x/play/，en 與 zh-cn 連的是 play/index.html?lang=en。
  * Cache Storage 比對完整網址字串，三種形狀各是一個 key，指的卻是同一個檔案。
  *
- * migrateLegacyRuntime 則是唯一會動到讀者既有資料的一段，搬錯就是把人家存好的
- * 離線內容弄丟，值得有測試守著。
  *
  * === 怎麼驗 ===
  *
@@ -68,6 +66,11 @@ class FakeCache {
       }
     }
     return undefined;
+  }
+  async matchAll() {
+    return [...this.store.values()].map((value) =>
+      value && typeof value.clone === 'function' ? value.clone() : value
+    );
   }
   async keys() {
     // 真的 Cache.keys() 回的是 Request，這裡只需要 url 這個欄位
@@ -138,6 +141,8 @@ const harness = `
   ${grab(/^const VISITS_URL = .*$/m)}
   ${grab(/^async function noteVisit\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function hadFullPrecache\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const PRECACHE_DONE_URL = .*$/m)}
+  ${grab(/^function precacheMarker\(prefix, mode\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precacheFor\(prefix, wantFull\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function precacheOnNavigation\(prefix, settled\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function visitedPrefixes\(\) \{[\s\S]*?\n\}/m)}
@@ -175,12 +180,13 @@ const harness = `
   ${grab(/^const ASSETS_MAX_ENTRIES = .*$/m)}
   ${grab(/^function cacheKeyCandidates\(pathname\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function matchCachedPage\(request\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function pageKey\(request\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function offlinePathFor\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function offlineFallback\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function langCodeOf\(url\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function trimCache\(cacheName, maxEntries\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function migrateLegacyRuntime\(\) \{[\s\S]*?\n\}/m)}
   ${grab(/^function keepAlive\(event, promise\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^function fetchAndKeep\(request, key, cacheName, maxEntries, event\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const NAVIGATE_TIMEOUT_MS = .*$/m)}
   ${grab(/^const NETWORK_DOWN_TTL_MS = .*$/m)}
   ${grab(/^let networkDownSince = .*$/m)}
@@ -199,9 +205,9 @@ const harness = `
   ${grab(/^async function purgeStaleCaches\(\) \{[\s\S]*?\n\}/m)}
   return {
     RUNTIME_PAGES, RUNTIME_ASSETS, PAGES_MAX_ENTRIES, PRECACHE, LIBRARY, LIBRARY_ASSETS, SETTINGS,
-    cacheKeyCandidates, matchCachedPage, offlinePathFor, migrateLegacyRuntime,
+    cacheKeyCandidates, matchCachedPage, offlinePathFor, pageKey,
     langPrefixOf, precacheUrlsFor, essentialUrlsFor, corePageAssets, precacheFor, guessLangPrefix,
-    shellAssetsFor, loadOfflineIndex, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
+    shellAssetsFor, loadOfflineIndex, precacheMarker, ASSET_TIMEOUT_MS, NO_CACHE_TIMEOUT_MS,
     crossLangAsset, assetUrlFor, matchCachedAsset,
     visitedPrefixes, offlineFallback, langCodeOf, fallbackUrls,
     noteVisit, hadFullPrecache, installPrecache, precacheOnNavigation,
@@ -223,7 +229,9 @@ const harness = `
  * 回傳的 fetched 是這一輪實際抓過的網址，用來驗預快取只下了該下的那些。
  */
 const load = (opts = {}) => {
-  const caches = new FakeCacheStorage();
+  // opts.caches 讓兩個 harness 共用同一份 Cache Storage，模擬 SW 被瀏覽器終止之後
+  // 重新啟動：記憶體裡的東西全沒了，快取還在
+  const caches = opts.caches || new FakeCacheStorage();
   const fetched = [];
   // 每次 fetch 的第二個參數。用來驗每一條都繞過瀏覽器自己的 HTTP 快取。
   const fetchInits = [];
@@ -385,44 +393,6 @@ test('路徑上的語系前綴比 query 優先', (load) => {
   assert.equal(sw.offlinePathFor(u('/docs/en/tools/what-is-tor/?lang=zh-cn')), '/docs/en/offline/');
 });
 
-test('舊的帶版本快取搬進不帶版本的新快取', async (load) => {
-  const { sw, caches } = load();
-  const legacyPages = await caches.open('anoni-docs-pages-202601010000');
-  await legacyPages.put('/docs/basics/metadata/', 'OLD-META');
-  await legacyPages.put('/docs/tools/what-is-tor/', 'OLD-TOR');
-  const legacyAssets = await caches.open('anoni-docs-assets-202601010000');
-  await legacyAssets.put('/docs/assets/stylesheets/main.abc.min.css', 'OLD-CSS');
-
-  // 新快取已經有的那一份比較新，不該被舊的蓋掉
-  const pages = await caches.open(sw.RUNTIME_PAGES);
-  await pages.put('/docs/basics/metadata/', 'NEW-META');
-
-  await sw.migrateLegacyRuntime();
-
-  const migratedPages = await caches.open(sw.RUNTIME_PAGES);
-  assert.equal(await migratedPages.match('/docs/basics/metadata/'), 'NEW-META');
-  assert.equal(await migratedPages.match('/docs/tools/what-is-tor/'), 'OLD-TOR');
-  const assets = await caches.open(sw.RUNTIME_ASSETS);
-  assert.equal(await assets.match('/docs/assets/stylesheets/main.abc.min.css'), 'OLD-CSS');
-  // 搬完要刪掉，否則下一次 activate 的清除迴圈才刪，等於白搬
-  assert.equal(await caches.has('anoni-docs-pages-202601010000'), false);
-  assert.equal(await caches.has('anoni-docs-assets-202601010000'), false);
-});
-
-test('遷移不會把自己當成舊快取刪掉', async (load) => {
-  const { sw, caches } = load();
-  // RUNTIME_PAGES 是 anoni-docs-pages，舊的是 anoni-docs-pages-<版本>，
-  // 名稱只差一個連字號，判斷寫鬆一點就會把讀者的離線內容整份刪掉
-  const pages = await caches.open(sw.RUNTIME_PAGES);
-  await pages.put('/docs/basics/metadata/', 'KEEP');
-  await sw.migrateLegacyRuntime();
-  assert.equal(await caches.has(sw.RUNTIME_PAGES), true);
-  // 重新 open，不能拿上面那個參考來驗。整份被刪掉又重建成空的時，舊參考照樣
-  // 讀得到內容，斷言會綠得很沒道理。
-  const survived = await caches.open(sw.RUNTIME_PAGES);
-  assert.equal(await survived.match('/docs/basics/metadata/'), 'KEEP');
-});
-
 test('語系前綴從網址判斷，scope 外回 null', (load) => {
   const { sw } = load();
   assert.equal(sw.langPrefixOf(u('/docs/tools/what-is-tor/')), '');
@@ -546,6 +516,71 @@ test('只存過底線那批的裝置不算有完整章節', async (load) => {
   for (const url of sw.essentialUrlsFor('')) await previous.put(url, 'X');
 
   assert.equal(await sw.hadFullPrecache(''), false);
+});
+
+test('SW 重新啟動之後，做完的預快取不再重抓索引、也不再逐一比對', async (load) => {
+  // precachedPrefixes 只活在記憶體裡，SW 閒置三十秒就被終止。原本幾乎每一段閱讀的
+  // 第一次導覽都重抓一次 offline-index.json，再對一百多個網址各做一次 cache.match
+  const first = load();
+  await first.sw.precacheFor('', true);
+  const cache = await first.caches.open(first.sw.PRECACHE);
+  assert.ok(await cache.match(first.sw.precacheMarker('', 'full')), '做完沒有留下標記');
+
+  const restarted = load({ caches: first.caches });
+  await restarted.sw.precacheFor('', true);
+  assert.deepEqual(restarted.fetched, []);
+});
+
+test('網路沒拿到的項目不寫標記，下一次導覽再補', async (load) => {
+  // 原本不分成敗，開跑前就記成做完，這一輪 SW 活著的期間都不會重試
+  const { sw, caches, net, fetched } = load();
+  net.offline = true;
+  await sw.precacheFor('', true);
+  const cache = await caches.open(sw.PRECACHE);
+  assert.equal(await cache.match(sw.precacheMarker('', 'full')), undefined);
+
+  net.offline = false;
+  fetched.length = 0;
+  await sw.precacheFor('', true);
+  assert.ok(fetched.includes('/docs/tools/what-is-tor/'), '網路回來之後沒有重試');
+  assert.ok(await cache.match(sw.precacheMarker('', 'full')));
+});
+
+test('伺服器錯誤同樣算沒做完，404 算做完', async (load) => {
+  // 本地開發只建一個語系，zh-CN 也缺幾頁，那些 404 重試也不會有，每次導覽重跑一輪
+  // 只是浪費。5xx 是暫時的，要留給下一次
+  const gone = load({ notFound: ['/docs/zh-cn/tools/what-is-cryptpad/'] });
+  await gone.sw.precacheFor('zh-cn/', true);
+  const goneCache = await gone.caches.open(gone.sw.PRECACHE);
+  assert.ok(await goneCache.match(gone.sw.precacheMarker('zh-cn/', 'full')));
+
+  const broken = load({
+    respond: (url) =>
+      url === '/docs/tools/what-is-tor/' ? { ok: false, status: 503, headers: { get: () => null } } : undefined,
+  });
+  await broken.sw.precacheFor('', true);
+  const brokenCache = await broken.caches.open(broken.sw.PRECACHE);
+  assert.equal(await brokenCache.match(broken.sw.precacheMarker('', 'full')), undefined);
+});
+
+test('索引沒拿到不寫標記，shell 那批還不知道有哪些', async (load) => {
+  const { sw, caches } = load({ notFound: ['/docs/offline-index.json'] });
+  await sw.precacheFor('', false);
+  const cache = await caches.open(sw.PRECACHE);
+  assert.equal(await cache.match(sw.precacheMarker('', 'essential')), undefined);
+});
+
+test('打開內文圖之後，只有文字的那個標記不算數', async (load) => {
+  const index = {
+    sections: [{ pages: [{ url: 'tools/what-is-tor/', assets: ['assets/tor.webp'] }] }],
+  };
+  const first = load({ index });
+  await first.sw.precacheFor('', true);
+
+  const restarted = load({ index, caches: first.caches });
+  await restarted.sw.setPrecacheImages(true);
+  await restarted.sw.precacheFor('', true);
+  assert.ok(restarted.fetched.includes('/docs/assets/tor.webp'), '開了圖片卻被舊標記擋下來');
 });
 
 test('一次只抓一個語系的量', async (load) => {
@@ -885,17 +920,6 @@ test('activate 清掉舊版之後不再沿用，新裝置照原本的方式下�
   await sw.precacheFor('', false);
   assert.ok(fetchInits.length > 0);
   for (const init of fetchInits) assert.equal(init.cache, 'no-cache');
-});
-
-test('搬進來超過上限時會裁到上限', async (load) => {
-  const { sw, caches } = load();
-  const legacy = await caches.open('anoni-docs-pages-202601010000');
-  for (let i = 0; i < sw.PAGES_MAX_ENTRIES + 10; i++) {
-    await legacy.put(`/docs/p${i}/`, `P${i}`);
-  }
-  await sw.migrateLegacyRuntime();
-  const pages = await caches.open(sw.RUNTIME_PAGES);
-  assert.equal((await pages.keys()).length, sw.PAGES_MAX_ENTRIES);
 });
 
 test('自動預快取預設開著，關掉之後記得住', async (load) => {
@@ -1369,6 +1393,24 @@ test('網路回來就把離線狀態清掉，讀者不必自己按什麼', async
   assert.equal(sw.networkLooksDown(), false, '網路回來了還當成離線，讀者會一直看到舊的');
 });
 
+test('帶 query 的導覽存成不帶 query 的 key', async (load) => {
+  // 原本直接拿請求當 key，從 ?utm=... 進來就多存一份，同一頁佔兩格上限，離線時
+  // 乾淨的網址還得靠線性掃描才對得上
+  const { sw, caches } = load();
+  await sw.networkFirst(req('/docs/tools/what-is-tor/?utm_source=x'));
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  const keys = (await pages.keys()).map((request) => request.url);
+  assert.deepEqual(keys, [ORIGIN + '/docs/tools/what-is-tor/']);
+  assert.ok(await sw.matchCachedPage(req('/docs/tools/what-is-tor/')));
+});
+
+test('裝置上沒有的頁面也不走線性掃描', async (load) => {
+  // 原本精確那輪沒中就退回 ignoreSearch，偏偏沒存下來的頁面每次都會走到那一輪
+  const { sw, caches } = load();
+  assert.equal(await sw.matchCachedPage(req('/docs/tools/what-is-tor/?x=1')), undefined);
+  assert.equal(caches.ignoreSearchCalls, 0);
+});
+
 test('沒有 query 的導覽不走 ignoreSearch 的線性掃描', async (load) => {
   // ignoreSearch 會讓 Cache Storage 放棄索引、掃過每一筆。存了四百多頁的裝置上
   // 每翻一頁掃兩輪，累積起來就是讀者說的那種停頓。站上絕大多數網址沒有 query。
@@ -1380,15 +1422,41 @@ test('沒有 query 的導覽不走 ignoreSearch 的線性掃描', async (load) =
   assert.equal(caches.ignoreSearchCalls, 0, '沒有 query 也走了線性掃描');
 });
 
-test('精確那輪沒中就退回 ignoreSearch，帶 query 存下的照樣找得到', async (load) => {
-  // 讀者從 /docs/x/?utm=... 之類的網址進來時，RUNTIME_PAGES 存下的就是那個形狀。
-  // 下一次他從乾淨的網址進來，精確比對對不上，這時候線性掃描是唯一找得到的路。
-  const { sw, caches } = load();
+test('伺服器回 5xx 時給裝置上那一份，不把錯誤頁給讀者', async (load) => {
+  // 部署後 Cloudflare 邊緣快取卡住 502 的那幾次，存著這一頁的讀者看到的也是 502
+  const { sw, caches } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 502, headers: { get: () => null } } : undefined,
+  });
   const pages = await caches.open(sw.RUNTIME_PAGES);
-  await pages.put(ORIGIN + '/docs/tools/what-is-tor/?utm_source=x', 'CACHED');
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+  assert.equal(await sw.networkFirst(req('/docs/tools/what-is-tor/')), 'CACHED');
+  // 伺服器回得出錯誤就表示連得上，不記成斷線
+  assert.equal(sw.networkLooksDown(), false);
+  // 錯誤頁也不會蓋掉裝置上那一份
+  assert.equal(await pages.match('/docs/tools/what-is-tor/'), 'CACHED');
+});
 
-  assert.equal(await sw.matchCachedPage(req('/docs/tools/what-is-tor/')), 'CACHED');
-  assert.ok(caches.ignoreSearchCalls > 0, '精確沒中卻沒有退回線性掃描');
+test('伺服器回 404 照樣給讀者，撤下的頁面不假裝還在', async (load) => {
+  // 導覽請求帶的是完整網址，notFound 比對的是路徑，所以這裡用 respond
+  const { sw, caches } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 404, headers: { get: () => null } } : undefined,
+  });
+  const pages = await caches.open(sw.RUNTIME_PAGES);
+  await pages.put('/docs/tools/what-is-tor/', 'CACHED');
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'));
+  assert.equal(response.status, 404);
+});
+
+test('裝置上沒有副本時，5xx 照樣給讀者', async (load) => {
+  // 沒有更好的東西可以給，伺服器的錯誤頁至少講得出發生了什麼
+  const { sw } = load({
+    respond: (url) =>
+      url.includes('what-is-tor') ? { ok: false, status: 503, headers: { get: () => null } } : undefined,
+  });
+  const response = await sw.networkFirst(req('/docs/tools/what-is-tor/'));
+  assert.equal(response.status, 503);
 });
 
 test('網路太慢時先給裝置上那一份，不陪著等到瀏覽器放棄', async (load) => {
@@ -1608,7 +1676,10 @@ test('選過閱讀語言的讀者也會留下造訪紀錄', async (load) => {
 test('佔用量只算自己的快取，同一個 origin 上別人的不算', async (load) => {
   const { sw, caches } = load({ responseBytes: 500 });
   await sw.precacheFor('', false);
-  const mine = (await (await caches.open(sw.PRECACHE)).keys()).length;
+  // 做完一輪的標記也在 PRECACHE 裡，內容是空的，不佔容量
+  const mine = (await (await caches.open(sw.PRECACHE)).keys()).filter(
+    (request) => !request.url.includes('/__anoni-settings/')
+  ).length;
 
   const stranger = await caches.open('someone-elses-cache');
   await stranger.put('/whatever', { headers: { get: () => '999999' } });
@@ -1619,7 +1690,9 @@ test('佔用量只算自己的快取，同一個 origin 上別人的不算', asy
 test('佔用量沒有 content-length 時把 body 讀出來量', async (load) => {
   const { sw, caches } = load({ responseBytes: 300, noContentLength: true });
   await sw.precacheFor('', false);
-  const n = (await (await caches.open(sw.PRECACHE)).keys()).length;
+  const n = (await (await caches.open(sw.PRECACHE)).keys()).filter(
+    (request) => !request.url.includes('/__anoni-settings/')
+  ).length;
   assert.ok(n > 0);
   assert.equal(await sw.cacheUsage(), n * 300);
 });
