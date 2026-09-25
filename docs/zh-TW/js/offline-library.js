@@ -523,6 +523,14 @@
     if (window.anoniTrack) window.anoniTrack("offline-action", { action: action });
   }
 
+  // OFFLINE_ADD 做完之後給讀者看的那一句。四個送 OFFLINE_ADD 的地方共用，原本各寫
+  // 一份，「更新已存的內容」那一處漏寫，做完畫面上什麼都沒有，失敗幾頁也不說。
+  function addedMessage(result) {
+    return result.failed
+      ? fill("doneFailed", { ok: result.ok, failed: result.failed })
+      : fill("done", { ok: result.ok });
+  }
+
   // 沒有網路時這台裝置上打得開什麼。
   //
   // 容量數字回答不了「能不能用」。讀者存了兩百多頁，缺的卻可能是每頁都要的那個
@@ -903,9 +911,7 @@
                 : Promise.resolve({ ok: 0, failed: 0 })
               ).then((addResult) => ({
                 message:
-                  (addResult.failed
-                    ? fill("doneFailed", { ok: addResult.ok, failed: addResult.failed })
-                    : fill("done", { ok: addResult.ok })) +
+                  addedMessage(addResult) +
                   (removeResult.removed
                     ? " " + fill("removed", { n: removeResult.removed })
                     : ""),
@@ -995,11 +1001,7 @@
                   assets: assets,
                 },
                 report
-              ).then((result) => ({
-                message: result.failed
-                  ? fill("doneFailed", { ok: result.ok, failed: result.failed })
-                  : fill("done", { ok: result.ok }),
-              }));
+              ).then((result) => ({ message: addedMessage(result) }));
             })
         );
         save.disabled = state.busy;
@@ -1121,11 +1123,7 @@
                 intent: "all",
               },
               report
-            ).then((result) => ({
-              message: result.failed
-                ? fill("doneFailed", { ok: result.ok, failed: result.failed })
-                : fill("done", { ok: result.ok }),
-            }));
+            ).then((result) => ({ message: addedMessage(result) }));
           })
       );
       saveAll.disabled = state.busy;
@@ -1165,7 +1163,7 @@
               // 是沒有作用的重複，而另一個分頁剛把它取消掉時反而會把取消蓋回去。
             },
             report
-          )
+          ).then((result) => ({ message: addedMessage(result) }))
         );
       }
     );

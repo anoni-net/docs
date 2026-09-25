@@ -34,8 +34,8 @@ const PRECACHE = "anoni-docs-precache-" + VERSION;
 // 這兩個名稱刻意不帶 VERSION。VERSION 是分鐘級時間戳，每次部署必定改變，而
 // activate 會刪掉所有不在保留名單裡的快取，等於讀者累積的離線頁面每次部署都
 // 被清空一次，接著又要把整份預快取重下載一遍。頁面的新鮮度由 network-first
-// 維持，不需要靠換快取名稱來換版。PRECACHE 保留版本後綴，那批是 hash 檔名的
-// app shell，換版後舊的確實該整批丟掉。
+// 維持，不需要靠換快取名稱來換版。PRECACHE 保留版本後綴，換版時整批換掉，
+// 但新版 install 會先從上一版的 PRECACHE 沿用沒變的項目，見 fetchForPrecache。
 // 這兩個快取只在「自動存下內容」開著的時候寫。原本是無條件寫的，結果是讀者按了
 // 「清除所有離線內容」之後，每讀一頁就又被存回裝置一頁，上限 120 頁加 200 個資產，
 // 而管理頁上的說明只講會補回 1 MB。按那顆按鈕的人多半是因為裝置可能被檢查，
@@ -567,13 +567,90 @@ async function shellAssetsFor(prefix, index) {
   return (data.shell || []).map((asset) => assetUrlFor(prefix, asset));
 }
 
+// 上一版留下來的預快取。換版時 install 先到這裡找，沒變的就不必重新下載。
+//
+// 2026-09 這個站一天部署三到四次，多的時候十幾次，而每次部署都換一個 PRECACHE。
+// 原本 install 只查新的那個（一定是空的），每一項都重新請求一次。瀏覽器的 HTTP 快取
+// 還留著副本時，no-cache 會替它做條件請求，傳輸量不大。可是 HTTP 快取是另一塊會被
+// 瀏覽器自行回收的空間，實測清掉之後換版一次，131 項預快取有 132 個請求整份重下
+// （zh-TW 完整章節約 19.5 MB），改成從上一版沿用之後是 128 個 304。
+//
+// 更要緊的是網路失敗的時候。原本抓失敗的項目直接從新版缺席，實測換版時伺服器全回
+// 503，新版的 PRECACHE 是空的，讀者按下更新就什麼都不剩。沿用之後 131 項全在。
+//
+// 只在換版那段時間找得到東西：activate 清掉舊版之後這裡回空陣列，每次多一次
+// caches.keys() 而已。
+async function previousPrecaches() {
+  const found = [];
+  for (const name of await caches.keys()) {
+    if (name.startsWith("anoni-docs-precache-") && name !== PRECACHE) {
+      found.push(await caches.open(name));
+    }
+  }
+  return found;
+}
+
+async function previousCopy(previous, url) {
+  for (const cache of previous) {
+    const hit = await cache.match(url);
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
+// theme 帶內容雜湊的檔名，例如 main.ec1eaa64.min.css。內容變了檔名就跟著變，同一個
+// 檔名的舊副本可以直接沿用，連條件請求都不必發。games/vendor/ 的 three.js 沒有雜湊，
+// 升級時檔名不變，所以不算在這裡，走下面的條件請求。
+const HASHED_ASSET = /\.[0-9a-f]{8}\.min\.(?:css|js)$/;
+
+// 預快取一個網址時實際要存的回應。回 undefined 代表這一項不存。
+//
+// 上一版有副本的話送條件請求，內容沒變時伺服器回 304，只花一個往返。頁面沒有
+// ETag，只有 Last-Modified，而部署時 s3_restore_mtime.py 會讓內容沒變的檔案保留
+// 原本的時間戳，所以 If-Modified-Since 判斷得準。
+//
+// 帶條件的請求改用 no-store。no-cache 會讓瀏覽器拿自己 HTTP 快取裡的副本去驗證，
+// 驗過之後交回來的是那一份 200，這裡要的是伺服器對這兩個標頭的答案。兩種模式都
+// 不會拿 HTTP 快取的舊內容冒充新的，NO_HTTP_CACHE 那段顧慮的事一樣守得住。
+//
+// 網路失敗或伺服器錯誤時沿用舊副本，理由見 previousPrecaches 上面那段。404 不沿用，
+// 那代表站上已經沒有這一頁。
+async function fetchForPrecache(url, previous) {
+  const old = await previousCopy(previous, url);
+  if (old && HASHED_ASSET.test(url)) return old;
+  let init = NO_HTTP_CACHE;
+  if (old) {
+    const headers = {};
+    const etag = old.headers.get("etag");
+    const modified = old.headers.get("last-modified");
+    if (etag) headers["If-None-Match"] = etag;
+    if (modified) headers["If-Modified-Since"] = modified;
+    if (etag || modified) {
+      init = { credentials: "same-origin", cache: "no-store", headers: headers };
+    }
+  }
+  let response;
+  try {
+    response = await fetch(url, init);
+  } catch (err) {
+    return old;
+  }
+  if (response.status === 304) return old;
+  if (response.ok) return response;
+  if (response.status >= 500) return old;
+  return undefined;
+}
+
 // 讀這個語系的離線索引。預快取要從它知道兩件事：每頁都載入的 shell 資產有哪些，
 // 以及核心章節那幾頁引用了哪些內文圖。抓不到就回 null，呼叫端各自退回原本的行為。
-async function loadOfflineIndex(prefix) {
+//
+// previous 是上一版的預快取。換版時網路不穩的話沿用那一份索引，不然 shell 那批
+// 樣式與腳本會從新的 PRECACHE 缺席，activate 之後每一頁離線打開都是白的。
+async function loadOfflineIndex(prefix, previous = []) {
   const url = SCOPE_PATH + prefix + "offline-index.json";
   try {
-    const response = await fetch(url, NO_HTTP_CACHE);
-    if (!response.ok) return null;
+    const response = await fetchForPrecache(url, previous);
+    if (!response || !response.ok) return null;
     // 順手存進預快取。這一份本來就在 SHELL_ASSETS 裡（管理頁離線時要用），
     // 存下來之後 precacheFor 的迴圈就會跳過它，同一個網址不必走兩次網路。
     const cache = await caches.open(PRECACHE);
@@ -674,8 +751,9 @@ async function precacheFor(prefix, wantFull) {
   precachedPrefixes.add(done);
   const cache = await caches.open(PRECACHE);
   let urls = full ? precacheUrlsFor(prefix) : essentialUrlsFor(prefix);
+  const previous = await previousPrecaches();
   // 索引只讀一次，shell 與核心章節的內文圖都從同一份取。
-  const index = await loadOfflineIndex(prefix);
+  const index = await loadOfflineIndex(prefix, previous);
   urls = urls.concat(await shellAssetsFor(prefix, index));
   if (full && (await precacheImagesEnabled())) {
     urls = urls.concat(await corePageAssets(prefix, index));
@@ -684,8 +762,8 @@ async function precacheFor(prefix, wantFull) {
   await Promise.allSettled(
     urls.map(async (url) => {
       if (await cache.match(url)) return;
-      const response = await fetch(url, NO_HTTP_CACHE);
-      if (response.ok) await cache.put(url, response);
+      const response = await fetchForPrecache(url, previous);
+      if (response) await cache.put(url, response);
     })
   );
 }
@@ -912,30 +990,37 @@ async function runPool(items, worker) {
 async function addToLibrary(prefix, paths, assets, refresh, report) {
   const pageCache = await caches.open(LIBRARY);
   const assetCache = await caches.open(LIBRARY_ASSETS);
-  const pageTargets = paths.map((path) => ({ path: path, cache: pageCache }));
+  const pageTargets = paths.map((path) => ({ path: path, cache: pageCache, page: true }));
   const assetTargets = (assets || []).map((path) => ({ path: path, cache: assetCache }));
   const total = pageTargets.length + assetTargets.length;
   let ok = 0;
   let failed = 0;
   let done = 0;
+  // 回給管理頁的結果只數頁面，畫面上寫的是「存下 N 頁」。原本連圖一起數，讀者存
+  // 三頁看到的是存下十幾頁。進度照樣數全部，那是實際要跑完的請求數。
+  let pagesOk = 0;
+  let pagesFailed = 0;
 
   const store = async (target) => {
     const url = SCOPE_PATH + prefix + target.path;
+    let stored = false;
     try {
       if (!refresh && (await target.cache.match(url))) {
-        ok += 1;
+        stored = true;
       } else {
         const response = await fetch(url, NO_HTTP_CACHE);
         if (response.ok) {
           await target.cache.put(url, response);
-          ok += 1;
-        } else {
-          failed += 1;
+          stored = true;
         }
       }
     } catch (err) {
-      failed += 1;
+      stored = false;
     }
+    if (stored) ok += 1;
+    else failed += 1;
+    if (target.page && stored) pagesOk += 1;
+    if (target.page && !stored) pagesFailed += 1;
     done += 1;
     // 逐項回報。整批下載可能要好幾分鐘，沒有進度的話讀者只會看到一個不動的按鈕。
     report({ type: "progress", done: done, total: total, ok: ok, failed: failed });
@@ -945,7 +1030,7 @@ async function addToLibrary(prefix, paths, assets, refresh, report) {
   // 比反過來（一堆圖但沒有半頁可讀）有用。並行只發生在各自那一批裡面。
   await runPool(pageTargets, store);
   await runPool(assetTargets, store);
-  return { ok: ok, failed: failed };
+  return { ok: pagesOk, failed: pagesFailed };
 }
 
 async function removeFromLibrary(prefix, paths, assets) {

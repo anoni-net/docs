@@ -129,7 +129,11 @@ const harness = `
   ${grab(/^function essentialUrlsFor\(prefix\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function corePageAssets\(prefix, index\) \{[\s\S]*?\n\}/m)}
   ${grab(/^async function shellAssetsFor\(prefix, index\) \{[\s\S]*?\n\}/m)}
-  ${grab(/^async function loadOfflineIndex\(prefix\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function previousPrecaches\(\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function previousCopy\(previous, url\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^const HASHED_ASSET = .*$/m)}
+  ${grab(/^async function fetchForPrecache\(url, previous\) \{[\s\S]*?\n\}/m)}
+  ${grab(/^async function loadOfflineIndex\(prefix, previous = \[\]\) \{[\s\S]*?\n\}/m)}
   ${grab(/^const precachedPrefixes = .*$/m)}
   ${grab(/^const VISITS_URL = .*$/m)}
   ${grab(/^async function noteVisit\(prefix\) \{[\s\S]*?\n\}/m)}
@@ -258,6 +262,11 @@ const load = (opts = {}) => {
     fetched.push(url);
     fetchInits.push(init);
     if (net.offline) throw new TypeError("Failed to fetch");
+    // 個別測試自己決定某個網址回什麼（304、500 之類），回 undefined 就照下面的預設
+    if (opts.respond) {
+      const custom = opts.respond(url, init);
+      if (custom !== undefined) return custom;
+    }
     // 「連得上但很慢」。networkFirst 的逾時要比這個短才有得比。
     if (opts.networkDelay) await new Promise((r) => setTimeout(r, opts.networkDelay));
     // 預快取會去讀索引，從裡面挑核心章節那幾頁的內文圖
@@ -760,6 +769,124 @@ test('個別頁面 404 不會讓整批預快取失敗', async (load) => {
   assert.notEqual(await cache.match('/docs/zh-cn/tools/what-is-tor/'), undefined);
 });
 
+// 上一版預快取裡的一筆。真的 Response 會帶伺服器給的標頭，條件請求靠它們。
+const OLD_VERSION = 'anoni-docs-precache-202601010000';
+const oldCopy = (body, headers = {}, json) => ({
+  ok: true,
+  status: 200,
+  body,
+  headers: { get: (name) => headers[name.toLowerCase()] ?? null },
+  json: async () => json,
+  clone: () => oldCopy(body, headers, json),
+});
+const MODIFIED = 'Thu, 24 Sep 2026 20:17:27 GMT';
+const status = (code) => ({ ok: code >= 200 && code < 300, status: code, headers: { get: () => null } });
+
+test('換版時帶雜湊檔名的 theme 資產直接沿用，一個請求都不發', async (load) => {
+  // 內容變了檔名就變，同一個檔名的舊副本就是新版要的那一份
+  const { sw, caches, fetched } = load();
+  const css = '/docs/assets/stylesheets/main.ec1eaa64.min.css';
+  await (await caches.open(OLD_VERSION)).put(css, oldCopy('OLD-CSS'));
+  await sw.precacheFor('', false);
+  assert.ok(!fetched.includes(css), '雜湊檔名的資產不該再抓一次');
+  const hit = await (await caches.open(sw.PRECACHE)).match(css);
+  assert.equal(hit && hit.body, 'OLD-CSS');
+});
+
+test('換版時內容沒變的頁面只送條件請求，304 就沿用上一版', async (load) => {
+  // 每次部署都換一個 PRECACHE，原本 install 對空的新快取整份重下，一天好幾次
+  const inits = {};
+  const { sw, caches } = load({
+    respond: (url, init) => {
+      inits[url] = init;
+      if (url === '/docs/offline/') return status(304);
+      return undefined;
+    },
+  });
+  await (await caches.open(OLD_VERSION)).put(
+    '/docs/offline/',
+    oldCopy('OLD-PAGE', { 'last-modified': MODIFIED })
+  );
+  await sw.precacheFor('', false);
+  const init = inits['/docs/offline/'];
+  assert.equal(init.headers['If-Modified-Since'], MODIFIED);
+  // no-cache 的話瀏覽器會拿自己 HTTP 快取的副本去驗，304 到不了這裡
+  assert.equal(init.cache, 'no-store');
+  const hit = await (await caches.open(sw.PRECACHE)).match('/docs/offline/');
+  assert.equal(hit && hit.body, 'OLD-PAGE');
+});
+
+test('上一版有 ETag 的一併帶上', async (load) => {
+  const inits = {};
+  const { sw, caches } = load({
+    respond: (url, init) => {
+      inits[url] = init;
+      return undefined;
+    },
+  });
+  const js = '/docs/js/offline-library.js';
+  await (await caches.open(OLD_VERSION)).put(js, oldCopy('OLD', { etag: 'W/"abc"' }));
+  await sw.precacheFor('', false);
+  assert.equal(inits[js].headers['If-None-Match'], 'W/"abc"');
+});
+
+test('換版時內容變了的頁面存新的那一份', async (load) => {
+  const { sw, caches } = load();
+  await (await caches.open(OLD_VERSION)).put(
+    '/docs/offline/',
+    oldCopy('OLD-PAGE', { 'last-modified': MODIFIED })
+  );
+  await sw.precacheFor('', false);
+  const hit = await (await caches.open(sw.PRECACHE)).match('/docs/offline/');
+  // 替身的 200 回應沒有 body 欄位，有 url 欄位
+  assert.equal(hit && hit.url, '/docs/offline/');
+});
+
+test('換版時網路斷了，舊副本照樣帶進新版，按下更新之後不會少頁', async (load) => {
+  // install 原本用 allSettled 吞掉失敗，新版照樣進 waiting，讀者按下更新，activate
+  // 清掉舊版，抓失敗的那幾頁就從裝置上消失了
+  const { sw, caches, net } = load();
+  const previous = await caches.open(OLD_VERSION);
+  const index = { shell: ['stylesheets/extra.css'], sections: [] };
+  await previous.put('/docs/offline-index.json', oldCopy('INDEX', {}, index));
+  await previous.put('/docs/tools/what-is-tor/', oldCopy('TOR', { 'last-modified': MODIFIED }));
+  await previous.put('/docs/stylesheets/extra.css', oldCopy('CSS', { 'last-modified': MODIFIED }));
+  net.offline = true;
+  await sw.precacheFor('', true);
+  const now = await caches.open(sw.PRECACHE);
+  assert.equal((await now.match('/docs/tools/what-is-tor/')).body, 'TOR');
+  // shell 清單來自索引，索引抓不到時沿用上一版那份，不然每頁共用的樣式會缺席，
+  // activate 之後離線打開每一頁都是白的
+  assert.equal((await now.match('/docs/stylesheets/extra.css')).body, 'CSS');
+  assert.equal((await now.match('/docs/offline-index.json')).body, 'INDEX');
+});
+
+test('伺服器錯誤沿用舊副本，404 不沿用', async (load) => {
+  const { sw, caches } = load({
+    respond: (url) => {
+      if (url === '/docs/offline/') return status(502);
+      if (url === '/docs/') return status(404);
+      return undefined;
+    },
+  });
+  const previous = await caches.open(OLD_VERSION);
+  await previous.put('/docs/offline/', oldCopy('OFFLINE', { 'last-modified': MODIFIED }));
+  await previous.put('/docs/', oldCopy('HOME', { 'last-modified': MODIFIED }));
+  await sw.precacheFor('', false);
+  const now = await caches.open(sw.PRECACHE);
+  assert.equal((await now.match('/docs/offline/')).body, 'OFFLINE');
+  // 404 代表站上已經沒有這一頁，留著舊的只會讓讀者讀到被撤下的內容
+  assert.equal(await now.match('/docs/'), undefined);
+});
+
+test('activate 清掉舊版之後不再沿用，新裝置照原本的方式下載', async (load) => {
+  const { sw, caches, fetchInits } = load();
+  await caches.open(sw.PRECACHE);
+  await sw.precacheFor('', false);
+  assert.ok(fetchInits.length > 0);
+  for (const init of fetchInits) assert.equal(init.cache, 'no-cache');
+});
+
 test('搬進來超過上限時會裁到上限', async (load) => {
   const { sw, caches } = load();
   const legacy = await caches.open('anoni-docs-pages-202601010000');
@@ -804,6 +931,18 @@ test('已經存過的不重抓，refresh 才強制重來', async (load) => {
 
   await sw.addToLibrary('', ['scenarios/journalist/'], [], true, () => {});
   assert.deepEqual(fetched, ['/docs/scenarios/journalist/']);
+});
+
+test('存進 library 的結果只數頁面，圖另外算在進度裡', async (load) => {
+  // 管理頁寫的是「存下 N 頁」。原本連圖一起數，存三頁看到存下十幾頁
+  const { sw } = load({ notFound: ['/docs/b/', '/docs/y.png'] });
+  let last = null;
+  const result = await sw.addToLibrary('', ['a/', 'b/'], ['x.png', 'y.png', 'z.png'], false, (d) => {
+    last = d;
+  });
+  assert.deepEqual(result, { ok: 1, failed: 1 });
+  assert.equal(last.total, 5);
+  assert.equal(last.done, 5);
 });
 
 test('下載過程逐頁回報進度', async (load) => {
@@ -1760,7 +1899,12 @@ test('每一條網路請求都繞過瀏覽器自己的 HTTP 快取', async (load
   //
   // 這一條守著 sw.js 裡每一個 fetch。少掉任何一個的 no-cache，症狀都是讀者拿不到
   // 剛發布的內容，而那在瀏覽器上點來點去看不出來。
-  const { sw, fetchInits } = load({ clients: ['https://anoni.net/docs/'] });
+  const { sw, caches, fetchInits } = load({ clients: ['https://anoni.net/docs/'] });
+  // 上一版留著一頁，換版時那一頁走條件請求，也要在這一條的守備範圍內
+  await (await caches.open(OLD_VERSION)).put(
+    '/docs/offline/',
+    oldCopy('OLD', { 'last-modified': MODIFIED })
+  );
   await sw.setPrecacheImages(true);
   await sw.installPrecache();
   await sw.precacheOnNavigation('', true);
@@ -1770,9 +1914,18 @@ test('每一條網路請求都繞過瀏覽器自己的 HTTP 快取', async (load
   await sw.addToLibrary('', ['taiwan/'], ['assets/images/logo-white.svg'], true, () => {});
 
   assert.ok(fetchInits.length > 0, '這一輪一個 fetch 都沒發出去，測試本身沒驗到東西');
+  // 條件請求是唯一的例外：它用 no-store 才拿得到伺服器的 304，而 no-store 同樣不讀
+  // HTTP 快取。沒帶條件標頭的 no-store 就是沒有理由的例外，一樣要紅。
+  let conditional = 0;
   for (const init of fetchInits) {
+    if (init && init.cache === 'no-store') {
+      conditional += 1;
+      assert.ok(init.headers && init.headers['If-Modified-Since'], 'no-store 卻沒帶條件標頭');
+      continue;
+    }
     assert.equal(init && init.cache, 'no-cache');
   }
+  assert.ok(conditional > 0, '條件請求那條沒有被走到，這一條就沒驗到它');
 });
 
 for (const [name, fn] of tests) {
