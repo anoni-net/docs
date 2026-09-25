@@ -4,8 +4,8 @@
 
 | 檔案 | 走哪一條路 |
 |---|---|
-| `run-loopback.mjs` | 複製貼上。一顆 Chrome 開兩個分頁，自己跟自己連一次 |
-| `run-qr-camera.mjs` | 相機掃 QR。兩顆 Chrome 各接一個假攝影機，互掃對方的 QR code 連上線 |
+| `run-loopback.mjs` | 複製貼上。一顆 Chrome 開八個分頁，走經由介紹連上第三台、兩台同時互掃、同一張 QR code 被兩台掃到三種情況 |
+| `run-qr-camera.mjs` | 相機掃 QR。兩顆 Chrome 各接一個假攝影機，兩邊只按開始，互掃對方的 QR code 連上線 |
 | `test_compact.mjs` | QR 裡只帶欄位的封包。不開瀏覽器，也不需要建置產物 |
 
 ## 先建置並供裝
@@ -19,6 +19,12 @@ python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output &
 
 ## 複製貼上那條路
 
+三種情況：
+
+- A 與 B 互貼、C 與 B 互貼，A 與 C 要靠 B 轉交描述連上，連上之後 A 同時送檔給 B 與 C
+- D 與 E 同時回應對方，兩條連線都可能開通，最後每一邊只能留一條
+- G 與 H 回應同一張 F 的發起描述，晚一步的 H 要被認出來，改回應 F 換上的新描述後照樣連得上
+
 ```bash
 google-chrome --headless=new --remote-debugging-port=9223 \
   --user-data-dir=/tmp/chrome-lab-profile about:blank &
@@ -26,6 +32,8 @@ LAB_URL=http://127.0.0.1:8790/lab/webrtc-transfer/ node tools/webrtc-lab/run-loo
 ```
 
 ## 相機掃 QR 那條路
+
+兩邊都只按開始，不選角色。B 的鏡頭先看到一個網址的 QR code，再看到 A 的發起描述，B 自動回應，A 的鏡頭看到回應就連上。之後讓 A 的鏡頭看到 B 換回來的發起描述，確認 A 認得出已經連著 B，不會再開第二條。
 
 這一支自己啟動兩顆 Chrome，不必先開。
 
@@ -35,7 +43,7 @@ node tools/webrtc-lab/run-qr-camera.mjs
 
 Chrome 可以拿一個 Y4M 檔當鏡頭拍到的畫面，做法跟 `tools/check_qrstream_browser.mjs` 相同。A 的鏡頭看到 B 的 QR，B 的鏡頭看到 A 的。檔案在呼叫 `getUserMedia` 的時候才打開，所以等對面產生 QR 之後再寫就來得及。
 
-它另外驗一件事：先讓 B 的鏡頭看到一個網址的 QR code，確認頁面認得出那不是自己產生的，繼續掃描而且沒有拿去套用。讀者在現場很可能掃到海報或桌牌上的碼。
+網址的那一張是為了確認頁面認得出那不是自己產生的，繼續掃描而且沒有拿去套用。讀者在現場很可能掃到海報或桌牌上的碼。
 
 兩顆 Chrome 是獨立的行程，解析不到對方的 mDNS 名稱，所以這一支關掉 `WebRtcHideLocalIpsWithMdns`，候選直接帶 IP。另外 `--use-fake-ui-for-media-stream` 讓相機權限從頁面載入就是 `granted`，連線一建立就交出所有網卡。真機第一次使用時只交出一個 mDNS 名稱，那一種描述這一支走不到，交給 `test_compact.mjs`。
 
@@ -53,7 +61,9 @@ QR 優先放格式版本 2，只帶 `ice-ufrag`、`ice-pwd`、DTLS 指紋、候�
 
 數字是 2026-09-21 在 Chrome 153 與 Firefox 157 上量的，兩者互為發起方都連得上。
 
-編不出來就退回格式版本 1 的完整描述，複製貼上那一格也維持完整描述。會退回的情況有：指紋不是 SHA-256、描述裡有媒體軌、`setup` 的值不符合角色，以及候選全被濾掉。
+回應描述多帶 2 B 的回應標記（旗標 bit4），指出它回應的是哪一張發起描述，取發起描述 `ice-ufrag` 的 FNV-1a 雜湊折成 16 位元。發起方畫面上的那一張被兩台同時掃到時，後掃回來的那一張靠它認出來。2026-09-25 以前的頁面不認得這個旗標，解不開新版的回應描述，兩台要用同一版頁面。
+
+編不出來就退回格式版本 1 的完整描述，複製貼上那一格也維持完整描述，回應標記改放在 JSON 的 `for` 欄位。會退回的情況有：指紋不是 SHA-256、描述裡有媒體軌、`setup` 的值不符合角色，以及候選全被濾掉。
 
 候選只留 UDP 的 host，並丟掉 `100.64.0.0/10`、Tailscale 的 `fd7a:115c:a1e0::/48`、loopback 與 link-local。濾掉的只有交出去的候選，瀏覽器從哪張網卡送連線檢查並不受影響。實測 Firefox 發起、Chrome 回應時，Chrome 從它的 Tailscale 位址送出檢查，Firefox 最後選中的就是那一個 prflx 候選。要完全避開 Tailscale，連線要在相機授權之前建立。
 

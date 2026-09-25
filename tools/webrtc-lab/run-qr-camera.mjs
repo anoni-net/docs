@@ -5,6 +5,10 @@
  * run-loopback.mjs 走的是複製貼上那條路，相機與 QR 完全沒碰到。這一支補那一段：
  * 產生 QR、getUserMedia、video、canvas、jsQR、解封包、自動套用，整條都在瀏覽器裡跑。
  *
+ * 兩邊都只按開始，不選角色。B 的鏡頭先看到 A 的發起描述，B 自動回應並換上回應描述，
+ * A 的鏡頭再看到它就連上。之後讓 A 的鏡頭看到 B 換回來的發起描述，確認 A 認得出已經
+ * 連著這一台，不會再開第二條。
+ *
  * 做法跟 tools/check_qrstream_browser.mjs 一樣，Chrome 可以拿一個 Y4M 檔當鏡頭拍到的
  * 畫面（--use-file-for-fake-video-capture）。兩顆 Chrome 各一個檔：A 的鏡頭看到 B 的
  * 螢幕，B 的鏡頭看到 A 的螢幕。檔案在呼叫 getUserMedia 的時候才被打開，所以等對面
@@ -167,10 +171,9 @@ try {
   await until(() => b.evaluate("typeof __lab === 'object' && document.readyState === 'complete'"), "B 頁面載入");
   if (!(await a.evaluate("window.isSecureContext"))) throw new Error("不是安全上下文，網址要用 127.0.0.1");
 
-  // A 發起，產生 QR，B 的鏡頭看到它
-  await a.evaluate("__lab.offer()");
+  // 兩邊都按開始，畫面放各自的發起描述，相機同時打開
+  await a.evaluate("__lab.start()");
   const offerQr = await until(() => a.evaluate("__lab.qrMatrix()"), "A 顯示 QR");
-  writeY4M(camB, offerQr.rows);
 
   // 先讓 B 的鏡頭看到一個網址的 QR code。那不是這一頁產生的，要認得出來而且不能拿去
   // 套用，否則讀者掃到海報上的網址就會把連線弄壞。
@@ -189,8 +192,7 @@ try {
     return rows;
   })()`);
   writeY4M(camB, foreignQr);
-  await b.evaluate("__lab.answer()");
-  await b.evaluate("__lab.scan()");
+  await b.evaluate("__lab.start()");
   const seen = await until(
     async () => {
       const status = await b.evaluate("__lab.scanStatus()");
@@ -203,23 +205,25 @@ try {
   if (!seen.scanning || applied > 0) failed = true;
   await b.evaluate("__lab.stopScan()");
 
-  // B 掃 A，自動產生回應並顯示自己的 QR，A 的鏡頭看到它
+  // B 的鏡頭換成 A 的發起描述。假攝影機的檔案在 getUserMedia 時才讀，所以重新開一次相機。
+  // B 自動回應，畫面換成回應描述，A 的鏡頭看到它
   writeY4M(camB, offerQr.rows);
   await b.evaluate("__lab.scan()");
-  const answerQr = await until(() => b.evaluate("__lab.qrMatrix()"), "B 掃到並顯示回應 QR");
+  await until(async () => (await event(b, "qr-shown")).some((r) => r.type === "answer"), "B 掃到並顯示回應 QR");
+  const answerQr = await b.evaluate("__lab.qrMatrix()");
   writeY4M(camA, answerQr.rows);
 
   // A 掃 B，連上
   await a.evaluate("__lab.scan()");
-  await until(
-    async () => (await a.evaluate("JSON.stringify(__lab.state())")).includes('"open"'),
-    "A 掃到回應並開通"
-  );
+  const isOpen = async (page) => (await page.evaluate("JSON.stringify(__lab.state())")).includes('"channel":"open"');
+  await until(() => isOpen(a), "A 掃到回應並開通");
+  await until(() => isOpen(b), "B 開通");
 
-  const shownA = (await event(a, "qr-shown"))[0];
-  const shownB = (await event(b, "qr-shown"))[0];
+  const shownA = (await event(a, "qr-shown")).find((r) => r.type === "offer");
+  const shownB = (await event(b, "qr-shown")).find((r) => r.type === "answer");
   const scannedB = (await event(b, "qr-scanned"))[0];
-  const scannedA = (await event(a, "qr-scanned"))[0];
+  // qr-scanned 在套用完、換上下一張發起描述之後才記，可能比開通晚一點
+  const scannedA = await until(async () => (await event(a, "qr-scanned"))[0], "A 記下掃描結果");
   const openA = (await event(a, "datachannel-open"))[0];
   console.log("QR 內容");
   console.log(`  發起描述 ${shownA.bytes} B（${shownA.format}），第 ${shownA.version} 版，容錯 ${shownA.level}`);
@@ -236,7 +240,22 @@ try {
   console.log(`  B 掃 A：${scannedB.ms} ms`);
   console.log(`  A 掃 B：${scannedA.ms} ms`);
   console.log(`連線：協定 ${openA.negotiateMs} ms`);
+  if (scannedB.outcome !== "answered" || scannedA.outcome !== "applied") {
+    console.log(`  掃描結果不對：B ${scannedB.outcome}、A ${scannedA.outcome}`);
+    failed = true;
+  }
 
+  // B 連上之後畫面換回自己的發起描述。A 的相機還開著，掃到它要認得出已經連著 B
+  await until(async () => (await event(b, "qr-shown")).filter((r) => r.type === "offer").length >= 2, "B 換回發起描述");
+  writeY4M(camA, (await b.evaluate("__lab.qrMatrix()")).rows);
+  await a.evaluate("__lab.scan()");
+  const again = await until(async () => (await event(a, "qr-scanned"))[1], "A 再掃到 B");
+  const peersA = JSON.parse(await a.evaluate("JSON.stringify(__lab.state())")).peers.length;
+  console.log(`再掃到已連上的裝置：${again.outcome}，A 手上 ${peersA} 條連線`);
+  if (again.outcome !== "known" || peersA !== 1) failed = true;
+
+  await a.evaluate("__lab.stopScan()");
+  await b.evaluate("__lab.stopScan()");
   await a.evaluate("__lab.send(1048576)");
   const recv = await until(async () => (await event(b, "recv-done"))[0], "B 收完 1 MB", 60000);
   console.log(`傳 1 MB：SHA-256 ${recv.match ? "一致" : "不一致"}`);
