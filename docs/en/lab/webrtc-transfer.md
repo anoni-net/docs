@@ -35,16 +35,23 @@ A direct connection inside one local network is far faster. The cost is that bot
 
 Put both devices on the same network. A hotspot you run yourself is the most predictable.
 
-1. On one device press "I start". A QR code appears in step 2
-2. On the other press "The other side starts", then "Scan their QR code" in step 3, and point it at the first screen
-3. Once scanned, the second device creates its reply and step 2 switches to its own QR code
-4. On the first device press scan in step 3 and point it at the second screen. The connection opens as soon as it reads
+1. Press "Start" in step 1 on both devices. Step 2 shows each device's own QR code, and the camera opens
+2. Point one device's camera at the other screen. The device that reads the code replies on its own, and its step 2 switches to a reply code
+3. Point the other camera back at that reply. The connection opens as soon as it reads
 
-The first scan asks for camera permission, and scanning only works once it is allowed. Camera frames are decoded inside this page and are not sent anywhere.
+Nobody has to agree on who goes first; either device can scan first. The camera asks for permission the first time it opens, and scanning only works once it is allowed. Camera frames are decoded inside this page and are not sent anywhere.
+
+Step 3 can switch to the front camera. Hold two phones screen to screen and both front cameras see the other code at once, so the exchange in both directions happens in a single gesture. Front cameras are usually fixed focus, and how close they need to be is one of the numbers this round measures.
 
 When the camera is not an option, copy the whole text block under step 2 to the other device, paste it into step 3 and press apply. The result is the same.
 
 Once connected, either side can send. The receiving side computes SHA-256 and compares it against the source, and a run only counts when they match.
+
+## Three devices or more
+
+A third device does not need to scan every other device. One mutual scan with any device that is already connected is enough. Connected devices tell each other which devices they hold, and the device in the middle hands the connection descriptions across so the missing links open on their own. Step 4 marks each connection as either scanned directly or introduced by a named device.
+
+Sending goes to every connected device at once, and step 5 lists timing and the hash check per device. Several devices share the same Wi-Fi channel, so each one runs slower than a one-to-one transfer, and how much slower is one of the numbers to measure.
 
 ## Where it is known to fail
 
@@ -58,12 +65,12 @@ Corporate and some guest networks block multicast, which stops the `.local` name
 
 There is no fetch, XMLHttpRequest, sendBeacon or WebSocket here, and no external resource is loaded. The connection settings carry no STUN and no TURN server, so a connection only happens through candidate addresses inside the same local network.
 
-File contents move only between the two devices. On export, IP addresses and mDNS names are masked before anything is written to the file.
+File contents move only between connected devices. When a device introduces two others, the connection descriptions pass only through that already connected device. On export, IP addresses and mDNS names are masked before anything is written to the file.
 
 ## Report what you find
 
 Before sending, fill in the field in step 5 with this run's setup, for example "own hotspot, Mac Chrome to iPhone Safari". That line rides along with every log entry, which is what makes the results line up later.
 
-Press "Export log", save the JSON, and attach it to [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}. Export from both devices, so that timings from the sending and the receiving side are both there.
+Press "Export log", save the JSON, and attach it to [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}. Export from every device, so that timings from the sending and the receiving side are all there.
 
 Failures are just as useful. One of the criteria is how quickly a failure becomes visible, and three minutes of a spinner is a very different experience from a clear message saying it will not work here.

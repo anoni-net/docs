@@ -1,32 +1,39 @@
 #!/usr/bin/env node
 /**
- * 用 CDP 開兩個分頁，讓實驗台自己跟自己連一次，走完握手與傳輸。
+ * 用 CDP 開幾個分頁，讓實驗台自己跟自己連，走完配對、互相介紹與傳輸。
  *
- * 這一支不是實驗本身。實驗的數字要在兩台真的裝置上量（見 issue #553 的測試矩陣），
+ * 這一支不是實驗本身。實驗的數字要在實體裝置上量（見 issue #553 的測試矩陣），
  * 這裡量的是同一台機器上的回送，用途是確認頁面邏輯沒壞，以及先看一眼 SDP 的大小。
  *
- * 回送量到的兩件事可以信：SDP 的位元組數與換算出來的 QR 張數（H1 的第一個數字），
- * 以及 SHA-256 比對有沒有一致。回送量到的吞吐量不能信，那是本機記憶體之間的複製，
- * 跟 Wi-Fi 上的數字沒有關係。握手耗時也不能信，它含了這支腳本自己的等待。
+ * 走三種情況，描述都用複製貼上那條路交換（__lab.apply）：
+ *
+ *   1. A 跟 B 互貼，C 再跟 B 互貼。A 與 C 沒有直接交換過描述，要靠 B 介紹連上。
+ *   2. D 與 E 同時回應對方的發起描述，兩條連線都可能開通，最後每一邊只能留一條。
+ *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
+ *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
+ *
+ * 回送量到的兩件事可以信：SDP 的位元組數，以及 SHA-256 比對有沒有一致。回送量到的
+ * 吞吐量不能信，那是本機記憶體之間的複製，跟 Wi-Fi 上的數字沒有關係。握手耗時也不能信，
+ * 它含了這支腳本自己的等待。
  *
  * 前置條件跟 repo 裡其他 check_*.mjs 一樣，要先建置再自己開好兩樣東西：
  *
  *   cd docs && SOCIAL_CARDS=false PRIVACY_ASSETS=false bash run.sh
- *   python3 -m http.server 8790 --directory docs/output
+ *   python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output
  *   google-chrome --headless=new --remote-debugging-port=9223 \
  *     --user-data-dir=/tmp/chrome-lab-profile about:blank
  *
  * 用法：
  *   node tools/webrtc-lab/run-loopback.mjs
- *   LAB_URL=http://localhost:8790/lab/webrtc-transfer/ node tools/webrtc-lab/run-loopback.mjs
+ *   LAB_URL=http://127.0.0.1:8790/lab/webrtc-transfer/ node tools/webrtc-lab/run-loopback.mjs
  */
 const CDP_PORT = process.env.CDP_PORT || "9223";
-const LAB_URL = process.env.LAB_URL || "http://localhost:8790/lab/webrtc-transfer/";
+const LAB_URL = process.env.LAB_URL || "http://127.0.0.1:8790/lab/webrtc-transfer/";
 const SIZES = [1048576, 5242880];
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function openTab() {
+async function openTab(label) {
   const target = await (
     await fetch(`http://127.0.0.1:${CDP_PORT}/json/new?${LAB_URL}`, { method: "PUT" })
   ).json();
@@ -48,13 +55,26 @@ async function openTab() {
       ws.send(JSON.stringify({ id: next, method, params }));
     });
   await send("Runtime.enable");
-  const evaluate = async (expression) => {
-    const reply = await send("Runtime.evaluate", { expression, returnByValue: true });
+  // 新版 Chrome 的 /json/new 不一定照網址載入，停在 about:blank，明確導過去一次
+  await send("Page.enable");
+  await send("Page.navigate", { url: LAB_URL });
+  const evaluate = async (expression, awaitPromise = false) => {
+    const reply = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise });
     const failed = reply.result && reply.result.exceptionDetails;
     if (failed) throw new Error(String(failed.exception && failed.exception.description).slice(0, 300));
     return reply.result && reply.result.result ? reply.result.result.value : undefined;
   };
-  return { evaluate, close: () => ws.close() };
+  // 分頁要真的關掉。只關 WebSocket 的話分頁留著，每一頁有八條備用連線，重跑幾次就累積上百條
+  const close = async () => {
+    ws.close();
+    await fetch(`http://127.0.0.1:${CDP_PORT}/json/close/${target.id}`).catch(() => {});
+  };
+  const tab = { label, evaluate, close };
+  await until(
+    () => evaluate("typeof __lab === 'object' && document.readyState === 'complete'"),
+    `${label} 頁面載入`
+  );
+  return tab;
 }
 
 async function until(fn, label, timeout = 20000) {
@@ -67,54 +87,135 @@ async function until(fn, label, timeout = 20000) {
   throw new Error(`逾時：${label}`);
 }
 
-const a = await openTab();
-const b = await openTab();
-// 固定等一段時間不可靠。頁面多載了 QR 的兩支函式庫之後，1.2 秒常常還沒跑到
-// webrtc-lab.js，改成等把手真的出現。
-const ready = "typeof __lab === 'object' && document.readyState === 'complete'";
-await until(() => a.evaluate(ready), "發起方頁面載入");
-await until(() => b.evaluate(ready), "回應方頁面載入");
+const state = async (tab) => JSON.parse(await tab.evaluate("JSON.stringify(__lab.state())"));
+const events = async (tab, name) =>
+  JSON.parse(await tab.evaluate(`JSON.stringify(__lab.log().filter((r) => r.event === ${JSON.stringify(name)}))`));
+const openPeers = async (tab) => (await state(tab)).peers.filter((p) => p.channel === "open");
 
-await a.evaluate("__lab.offer()");
-const offer = await until(() => a.evaluate("__lab.localSdp()"), "發起方產生描述");
-
-await b.evaluate("__lab.answer()");
-await b.evaluate(`__lab.apply(${JSON.stringify(offer)})`);
-const answer = await until(() => b.evaluate("__lab.localSdp()"), "回應方產生描述");
-await a.evaluate(`__lab.apply(${JSON.stringify(answer)})`);
-
-await until(
-  async () => (await a.evaluate("JSON.stringify(__lab.state())")).includes('"open"'),
-  "DataChannel 開啟"
-);
-
-const sdp = JSON.parse(
-  await a.evaluate('JSON.stringify(__lab.log().filter((r) => r.event === "sdp-stats")[0])')
-);
-console.log("SDP 量測（發起方）");
-console.log(`  原始 ${sdp.raw} B，精簡後 ${sdp.trimmed} B，gzip 加 base64 ${sdp.base64} B`);
-console.log(`  candidate ${sdp.candidates} 行，換算中檔 QR ${sdp.qrFrames} 張，播 ${sdp.qrSeconds} 秒`);
-
-let failed = false;
-for (const size of SIZES) {
-  await a.evaluate(`__lab.send(${size})`);
-  const done = await until(
-    async () => {
-      const rows = JSON.parse(
-        await b.evaluate('JSON.stringify(__lab.log().filter((r) => r.event === "recv-done"))')
-      );
-      const last = rows[rows.length - 1];
-      return last && last.size === size ? last : null;
-    },
-    `${size} 位元組傳完`,
-    120000
-  );
-  const label = `${(size / 1048576).toFixed(0)} MB`;
-  console.log(`傳 ${label}：SHA-256 ${done.match ? "一致" : "不一致"}，耗時 ${done.seconds} 秒`);
-  if (!done.match) failed = true;
+// 第二區現在放的描述，型別對得上才回傳。畫面換描述要等候選蒐集，所以用輪詢。
+async function shown(tab, type, not = null) {
+  return until(async () => {
+    const text = await tab.evaluate("__lab.localSdp()");
+    if (!text || text === not) return null;
+    return JSON.parse(text).type === type ? text : null;
+  }, `${tab.label} 顯示 ${type}`);
 }
 
-a.close();
-b.close();
-console.log(failed ? "\n有一次比對不一致，頁面邏輯要查" : "\n回送流程走完，收到的內容與來源一致");
+const apply = (tab, text) => tab.evaluate(`__lab.apply(${JSON.stringify(text)})`, true);
+
+async function connected(tab, count) {
+  return until(async () => ((await openPeers(tab)).length === count ? true : null), `${tab.label} 連上 ${count} 台`);
+}
+
+let failed = false;
+function check(ok, message) {
+  console.log(`  ${ok ? "✓" : "✗"} ${message}`);
+  if (!ok) failed = true;
+}
+
+const tabs = [];
+try {
+  // ------------------------------------------------------------ 1. 經由介紹
+  console.log("三台：A 與 B 互貼、C 與 B 互貼，A 與 C 由 B 介紹");
+  const [a, b, c] = await Promise.all(["A", "B", "C"].map(openTab));
+  tabs.push(a, b, c);
+  for (const tab of [a, b, c]) await tab.evaluate("__lab.start()", true);
+
+  const offerA = await shown(a, "offer");
+  check((await apply(b, offerA)) === "answered", "B 回應 A 的發起描述");
+  const answerB = await shown(b, "answer");
+  check((await apply(a, answerB)) === "applied", "A 套上 B 的回應");
+  await connected(a, 1);
+  await connected(b, 1);
+
+  // B 連上之後畫面換回自己的發起描述，C 掃的是那一張
+  const offerB = await shown(b, "offer");
+  check((await apply(c, offerB)) === "answered", "C 回應 B 的發起描述");
+  const answerC = await shown(c, "answer");
+  check((await apply(b, answerC)) === "applied", "B 套上 C 的回應");
+
+  await connected(a, 2);
+  await connected(c, 2);
+  await connected(b, 2);
+  const viaA = (await state(a)).peers.find((p) => p.via.startsWith("relay"));
+  const viaC = (await state(c)).peers.find((p) => p.via.startsWith("relay"));
+  check(!!viaA && !!viaC, `A 與 C 經由介紹連上（A 看到 ${viaA && viaA.via}，C 看到 ${viaC && viaC.via}）`);
+  const pairs = await until(async () => {
+    const list = (await events(a, "candidate-pair")).filter((r) => r.via === "relay");
+    return list.length ? list : null;
+  }, "A 記下經由介紹那一條的候選對");
+  check(pairs[0].local === "host" || pairs[0].local === "prflx", `經由介紹的連線走區網直連（${pairs[0].local} / ${pairs[0].remote}）`);
+  const stats = (await events(a, "sdp-stats"))[0];
+  console.log(`  SDP：原始 ${stats.raw} B，QR 用的欄位封包 ${stats.compact} B，mDNS 候選 ${stats.mdns} 個`);
+  check(stats.mdns >= 1, "沒有相機權限時，預先建好的連線只交出 mDNS 名稱");
+
+  for (const size of SIZES) {
+    await a.evaluate(`__lab.send(${size})`, true);
+    for (const tab of [b, c]) {
+      const done = await until(async () => {
+        const rows = await events(tab, "recv-done");
+        const last = rows[rows.length - 1];
+        return last && last.size === size && rows.length >= SIZES.indexOf(size) + 1 ? last : null;
+      }, `${tab.label} 收完 ${size} 位元組`, 120000);
+      check(done.match, `A 同時送 ${(size / 1048576).toFixed(0)} MB，${tab.label} 收到的 SHA-256 一致`);
+    }
+  }
+
+  // ------------------------------------------------------------ 2. 同時互掃
+  console.log("兩台同時回應對方");
+  const [d, e] = await Promise.all(["D", "E"].map(openTab));
+  tabs.push(d, e);
+  await Promise.all([d.evaluate("__lab.start()", true), e.evaluate("__lab.start()", true)]);
+  const [offerD, offerE] = await Promise.all([shown(d, "offer"), shown(e, "offer")]);
+  await Promise.all([apply(d, offerE), apply(e, offerD)]);
+  const [answerD, answerE] = await Promise.all([shown(d, "answer"), shown(e, "answer")]);
+  await Promise.all([apply(d, answerE), apply(e, answerD)]);
+  await connected(d, 1);
+  await connected(e, 1);
+  await wait(3000);
+  const openD = await openPeers(d);
+  const openE = await openPeers(e);
+  check(openD.length === 1 && openE.length === 1, `兩邊各留一條（D ${openD.length}、E ${openE.length}）`);
+  const closedDup = (await events(d, "peer-closed")).filter((r) => r.reason === "duplicate").length +
+    (await events(e, "peer-closed")).filter((r) => r.reason === "duplicate").length;
+  console.log(`  多出來的那一條：關掉 ${closedDup} 次（兩邊都開通過才會是 2，只有一邊來得及開通時是 0 或 1）`);
+  check(openD[0].role !== openE[0].role, "留下的是同一條，一邊發起、一邊回應");
+
+  // ------------------------------------------------------------ 3. 同一張被兩台掃到
+  console.log("同一張發起描述被兩台掃到");
+  const [f, g, h] = await Promise.all(["F", "G", "H"].map(openTab));
+  tabs.push(f, g, h);
+  for (const tab of [f, g, h]) await tab.evaluate("__lab.start()", true);
+  const offerF = await shown(f, "offer");
+  await Promise.all([apply(g, offerF), apply(h, offerF)]);
+  const [answerG, answerH] = await Promise.all([shown(g, "answer"), shown(h, "answer")]);
+  check((await apply(f, answerG)) === "applied", "F 套上先掃回來的 G");
+  check((await apply(f, answerH)) === "used", "H 的回應認得出是晚了一步");
+  const offerF2 = await shown(f, "offer", offerF);
+  check((await apply(h, offerF2)) === "answered", "H 改回應 F 的新描述");
+  const answerH2 = await shown(h, "answer", answerH);
+  check((await apply(f, answerH2)) === "applied", "F 套上 H 的新回應");
+  await connected(f, 2);
+  await connected(g, 2);
+  await connected(h, 2);
+  const superseded = (await events(h, "peer-closed")).filter((r) => r.reason === "superseded").length;
+  check(superseded === 1, "H 收掉回應舊描述的那一條");
+} catch (err) {
+  console.error(String(err && err.message));
+  failed = true;
+  // 失敗時把各分頁跟配對有關的紀錄印出來，多半一眼就看得出卡在哪一步
+  const keep = ["start", "remote-description", "datachannel-open", "hello", "hello-mismatch", "relay-offer", "relay-answer", "peer-closed", "pool-empty"];
+  for (const tab of tabs) {
+    const log = JSON.parse(await tab.evaluate("JSON.stringify(__lab.log())"));
+    console.error(`--- ${tab.label}`);
+    for (const row of log.filter((r) => keep.includes(r.event))) {
+      const { at, event, ...rest } = row;
+      console.error(`  ${at.slice(11, 23)} ${event} ${JSON.stringify(rest)}`);
+    }
+  }
+} finally {
+  for (const tab of tabs) await tab.close();
+}
+
+console.log(failed ? "\n有步驟失敗，頁面邏輯要查" : "\n回送流程走完，配對、介紹與傳輸都對");
 process.exit(failed ? 1 : 0);

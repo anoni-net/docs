@@ -37,8 +37,8 @@ const consts = ["PACK_MAGIC", "PACK_COMPACT"].map((name) => {
   if (!m) throw new Error(`webrtc-lab.js 裡找不到 ${name}`);
   return m[0];
 });
-const { encodeCompact, decodeCompact } = new Function(
-  `${consts.join("\n")}\n${src.slice(begin, end)}\nreturn { encodeCompact, decodeCompact };`
+const { encodeCompact, decodeCompact, iceTag } = new Function(
+  `${consts.join("\n")}\n${src.slice(begin, end)}\nreturn { encodeCompact, decodeCompact, iceTag };`
 )();
 
 // ---------------------------------------------------------------- 描述
@@ -265,6 +265,50 @@ const tests = [
     assert.equal(encodeCompact(desc).error, "setup");
   }],
 
+  ["answer 帶回應標記：多 2 B，解回來原樣帶著", () => {
+    const desc = chrome({ type: "answer", setup: "active", candidates: CHROME_MDNS.sdp.match(/^a=candidate:.*$/gm) });
+    const plainLength = encodeCompact(desc).bytes.length;
+    const tagged = Object.assign({}, desc, { for: iceTag("k5sj") });
+    const { packed, back } = roundTrip(tagged);
+    assert.equal(packed.bytes.length, plainLength + 2);
+    assert.equal(packed.bytes[3], 1 | 16);
+    assert.equal(back.for, tagged.for);
+    sameIdentity(back, desc);
+  }],
+
+  ["offer 帶了回應標記也不編進去", () => {
+    const tagged = Object.assign({}, CHROME_MDNS, { for: 1234 });
+    const packed = encodeCompact(tagged);
+    assert.equal(packed.bytes.length, 79);
+    assert.equal(packed.bytes[3], 0);
+    assert.equal(decodeCompact(packed.bytes).for, undefined);
+  }],
+
+  ["回應標記：同一個 ufrag 算出同一個值，落在 16 位元內", () => {
+    assert.equal(iceTag("k5sj"), iceTag("k5sj"));
+    assert.notEqual(iceTag("k5sj"), iceTag("k5sk"));
+    for (const ufrag of ["", "k5sj", "fb4c22ad", "abcde"]) {
+      const tag = iceTag(ufrag);
+      assert.ok(Number.isInteger(tag) && tag >= 0 && tag <= 0xffff);
+    }
+    // 300 個不重複的 Chrome 式 ufrag。均勻分布時預期碰撞不到一次，超過 3 次代表雜湊折壞了
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let state = 553;
+    const next = () => {
+      state = (Math.imul(state, 1103515245) + 12345) >>> 0;
+      return state >>> 16;
+    };
+    const ufrags = new Set();
+    while (ufrags.size < 300) {
+      let ufrag = "";
+      for (let j = 0; j < 4; j += 1) ufrag += alphabet[next() % 64];
+      ufrags.add(ufrag);
+    }
+    const tags = new Set(Array.from(ufrags, iceTag));
+    const clash = ufrags.size - tags.size;
+    assert.ok(clash <= 3, `碰撞 ${clash} 次`);
+  }],
+
   ["封包截斷、尾巴多一個位元組、不認得的旗標，解碼都丟例外", () => {
     const bytes = encodeCompact(CHROME_MDNS).bytes;
     assert.throws(() => decodeCompact(bytes.subarray(0, bytes.length - 1)), /truncated/);
@@ -272,8 +316,13 @@ const tests = [
     longer.set(bytes);
     assert.throws(() => decodeCompact(longer), /trailing/);
     const flagged = Uint8Array.from(bytes);
-    flagged[3] = 0x10;
+    flagged[3] = 0x20;
     assert.throws(() => decodeCompact(flagged), /flags/);
+    // 回應標記只能出現在 answer
+    const tagOnOffer = new Uint8Array(bytes.length + 2);
+    tagOnOffer.set(bytes);
+    tagOnOffer[3] = 0x10;
+    assert.throws(() => decodeCompact(tagOnOffer), /flags/);
     const kind = Uint8Array.from(bytes);
     kind[bytes.length - 19] = 9;
     assert.throws(() => decodeCompact(kind), /candidate kind/);
