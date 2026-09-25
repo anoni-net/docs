@@ -19,6 +19,8 @@ python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output &
 
 ## 複製貼上那條路
 
+`--password-store=basic` 讓 Chrome 不向系統鑰匙圈要 cookie 的加密金鑰。2026-09-26 遇過鑰匙圈卡住，Chrome 的每一個連線（包含 127.0.0.1）都停著不動，頁面一直載不進來，curl 卻正常。
+
 三種情況：
 
 - A 與 B 互貼、C 與 B 互貼，A 與 C 要靠 B 轉交描述連上，連上之後 A 同時送檔給 B 與 C
@@ -27,7 +29,7 @@ python3 -m http.server 8790 --bind 127.0.0.1 --directory docs/output &
 - I 套上一份連不到的回應（候選換成 TEST-NET 位址、帳密也換掉），15 秒後要記一筆 `connect-timeout` 並收掉那一條
 
 ```bash
-google-chrome --headless=new --remote-debugging-port=9223 \
+google-chrome --headless=new --password-store=basic --remote-debugging-port=9223 \
   --user-data-dir=/tmp/chrome-lab-profile about:blank &
 LAB_URL=http://127.0.0.1:8790/lab/webrtc-transfer/ node tools/webrtc-lab/run-loopback.mjs
 ```
