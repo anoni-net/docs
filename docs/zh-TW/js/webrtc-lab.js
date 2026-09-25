@@ -599,10 +599,11 @@
   const same = function (v) { return String(v); };
   const chunkBox = paramSelect(t.chunkLabel, [16384, 65536, 262144], CHUNK, kb);
   const channelsBox = paramSelect(t.channelsLabel, [1, 2, 4], 1, same);
-  // 並行連線數預設 3 條。2026-09-25 iPhone 15 Pro 對 Mac Chrome 154 的實測，iPhone 送出時
-  // 1 條每秒 4.8 MB、3 條約 16.5 MB，幾乎照條數等比例增加，同一條連線裡多開通道則沒有差別。
-  // 4 與 6 條是為了量出從哪裡開始不再變快。
-  const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6], 3, same);
+  // 並行連線數預設 6 條。2026-09-25 iPhone 15 Pro 對 Mac Chrome 154，在家用 Wi-Fi 6（5 GHz）上
+  // 實測：iPhone 送出時每條連線固定約每秒 5.5 到 6 MB，3 條約 18 MB、6 條約 33 MB，RTT 一直在
+  // 20 ms 以下，限制在 WebKit 的每條連線上，跟網路無關。Mac 送出從 3 條起就停在每秒 53 到 55 MB，
+  // 那是這個網路的上限。8 與 12 條是為了量出 iPhone 送出從哪裡開始碰到網路上限。
+  const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6, 8, 12], 6, same);
   const sizeBox = el("select");
   [
     ["102400", "100 KB"],

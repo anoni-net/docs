@@ -11,7 +11,7 @@
  *   2. D 與 E 同時回應對方的發起描述，兩條連線都可能開通，最後每一邊只能留一條。
  *   3. G 與 H 回應同一張 F 的發起描述。F 套上 G 的回應之後，H 的回應要被認出來是
  *      晚了一步；H 改回應 F 換上的新描述之後照樣連得上，G 與 H 再經由 F 互相介紹。
- *   另外在第 1 種情況裡確認預設參數，再換三組傳輸參數送檔（最多 6 條連線），確認多條通道、多條連線照位置組回來。
+ *   另外在第 1 種情況裡確認預設參數，再換三組傳輸參數送檔（最多 12 條連線），確認多條通道、多條連線照位置組回來。
  *   4. I 套上一份連不到的回應（候選換成 TEST-NET 位址，產生它的分頁已經關掉），
  *      15 秒後要判定連不上並收掉那一條，而不是一直停在建立中。
  *
@@ -167,11 +167,11 @@ try {
   }
 
   const defaults = (await events(a, "send-done")).slice(-2);
-  check(defaults.every((r) => r.links === 3 && r.channels === 1 && r.chunk === 65536),
-    `預設參數是 64 KB · 1 通道 · 3 連線（實際 ${defaults.map((r) => `${r.chunk / 1024} KB · ${r.channels} · ${r.links}`).join("、")}）`);
+  check(defaults.every((r) => r.links === 6 && r.channels === 1 && r.chunk === 65536),
+    `預設參數是 64 KB · 1 通道 · 6 連線（實際 ${defaults.map((r) => `${r.chunk / 1024} KB · ${r.channels} · ${r.links}`).join("、")}）`);
 
   // 傳輸參數：多條通道、多條連線、較大的塊，資料照位置組回來，兩台都要一致
-  for (const opts of [{ chunk: 262144, channels: 4, links: 3 }, { chunk: 16384, channels: 1, links: 1 }, { chunk: 65536, channels: 1, links: 6 }]) {
+  for (const opts of [{ chunk: 262144, channels: 4, links: 3 }, { chunk: 16384, channels: 1, links: 1 }, { chunk: 65536, channels: 1, links: 12 }]) {
     const before = { b: (await events(b, "recv-done")).length, c: (await events(c, "recv-done")).length };
     await a.evaluate(`__lab.send(5242880, ${JSON.stringify(opts)})`, true);
     for (const [tab, key] of [[b, "b"], [c, "c"]]) {
