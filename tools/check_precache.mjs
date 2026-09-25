@@ -200,10 +200,15 @@ for (const [file, base] of INDEX_PAGES) {
 // 把它從個別頁面的資產裡移除，兩邊都以為對方負責。那一份是 render-blocking 的，
 // 離線打開任何一頁都是白的，而線上一切正常，讀者也說不出哪裡壞了。
 //
-// 只驗 CSS、JS 與 manifest。圖片缺了是破圖，讀者看得出來也讀得下去，而且預設本來
-// 就不下載內文圖（那七 MB 由「連同內文圖一起存」那個開關管）。
+// 只驗 CSS、JS、manifest 與導覽列的圖示 sprite。圖片缺了是破圖，讀者看得出來也讀得
+// 下去，而且預設本來就不下載內文圖（那七 MB 由「連同內文圖一起存」那個開關管）。
+//
+// sprite 是 hooks/nav_icon_sprite.py 產生的，導覽列每一個圖示都用 <use> 指向它。缺了
+// 的話離線時整條側邊欄的圖示是空白的，跟 extra.css 同一種「每頁都要、兩邊都以為對方
+// 負責」的漏法，所以一起驗。
 const RENDER_REFS = [
   /<script[^>]+src="([^"]+)"/g,
+  /<use[^>]+href="([^"#]+)#/g,
   /<link[^>]+rel="(?:stylesheet|manifest)"[^>]*href="([^"]+)"/g,
   /<link[^>]+href="([^"]+)"[^>]*rel="(?:stylesheet|manifest)"/g,
 ];
