@@ -599,7 +599,10 @@
   const same = function (v) { return String(v); };
   const chunkBox = paramSelect(t.chunkLabel, [16384, 65536, 262144], CHUNK, kb);
   const channelsBox = paramSelect(t.channelsLabel, [1, 2, 4], 1, same);
-  const linksBox = paramSelect(t.linksLabel, [1, 2, 3], 1, same);
+  // 並行連線數預設 3 條。2026-09-25 iPhone 15 Pro 對 Mac Chrome 154 的實測，iPhone 送出時
+  // 1 條每秒 4.8 MB、3 條約 16.5 MB，幾乎照條數等比例增加，同一條連線裡多開通道則沒有差別。
+  // 4 與 6 條是為了量出從哪裡開始不再變快。
+  const linksBox = paramSelect(t.linksLabel, [1, 2, 3, 4, 6], 3, same);
   const sizeBox = el("select");
   [
     ["102400", "100 KB"],
@@ -896,6 +899,29 @@
     renderPeers();
   }
 
+  // 候選位址的類別。只回類別，位址本身不進紀錄。瀏覽器不給位址（遠端的 mDNS 候選常常是這樣）時回 unknown。
+  function addressClass(candidate) {
+    const addr = candidate && (candidate.address || candidate.ip);
+    if (!addr) return "unknown";
+    if (/\.local$/i.test(addr)) return "mdns";
+    const v4 = parseIPv4(addr);
+    if (v4) {
+      if (v4[0] === 100 && (v4[1] & 0xc0) === 64) return "cgnat";
+      if (v4[0] === 10 || (v4[0] === 172 && (v4[1] & 0xf0) === 16) || (v4[0] === 192 && v4[1] === 168)) return "lan";
+      if (v4[0] === 169 && v4[1] === 254) return "link-local";
+      if (v4[0] === 127) return "loopback";
+      return "public";
+    }
+    const v6 = parseIPv6(addr);
+    if (v6) {
+      const reason = dropReason(CK_V6, v6);
+      if (reason) return reason;
+      if ((v6[0] & 0xfe) === 0xfc) return "ula";
+      return "public";
+    }
+    return "unknown";
+  }
+
   // 走的是同網段的 host 還是別的類型，決定了這條路在真實網路裡是怎麼通的。
   async function selectedPair(peer) {
     if (!peer.pc.getStats) return null;
@@ -910,10 +936,14 @@
       if (!pair) return null;
       const local = stats.get(pair.localCandidateId);
       const remote = stats.get(pair.remoteCandidateId);
-      // 往返時間拿來判斷吞吐量卡在哪裡。SCTP 一次能在路上的資料有上限，往返越久，每秒送得出去的越少
+      // 往返時間拿來判斷吞吐量卡在哪裡。SCTP 一次能在路上的資料有上限，往返越久，每秒送得出去的越少。
+      // 位址只記類別，用來確認流量走的是區網，而不是 Tailscale 之類的通道。
       return {
         local: local ? local.candidateType : "?",
         remote: remote ? remote.candidateType : "?",
+        localNet: addressClass(local),
+        remoteNet: addressClass(remote),
+        localNetworkType: local && local.networkType ? local.networkType : null,
         rttMs: typeof pair.currentRoundTripTime === "number" ? Math.round(pair.currentRoundTripTime * 1000) : null,
       };
     } catch (err) {

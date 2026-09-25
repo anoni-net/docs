@@ -250,6 +250,10 @@ try {
   console.log(`  B 掃 A：${scannedB.ms} ms`);
   console.log(`  A 掃 B：${scannedA.ms} ms`);
   console.log(`連線：協定 ${openA.negotiateMs} ms`);
+  // 相機權限在頁面載入時就有，統計資料才給得出本機位址，位址類別要在這裡驗
+  const pairA = await until(async () => (await event(a, "candidate-pair"))[0], "A 記下候選對");
+  console.log(`候選對：${pairA.local} / ${pairA.remote}，位址類別 ${pairA.localNet} / ${pairA.remoteNet}，RTT ${pairA.rttMs} ms`);
+  if (pairA.localNet === "unknown" || pairA.localNet === "cgnat" || pairA.localNet === "tailscale") failed = true;
   if (scannedB.outcome !== "answered" || scannedA.outcome !== "applied") {
     console.log(`  掃描結果不對：B ${scannedB.outcome}、A ${scannedA.outcome}`);
     failed = true;
