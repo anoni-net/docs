@@ -228,7 +228,9 @@ const makeServiceWorker = (opts) => {
           }
           // 跟真的 service worker 一樣，帶 intent 的才記旗標
           if (message.intent === 'all') state.saveAll = true;
-          reply({ type: 'done', ok: message.paths.length, failed: 0 });
+          // opts.addFailed 模擬其中幾頁抓失敗
+          const failedCount = opts.addFailed || 0;
+          reply({ type: 'done', ok: message.paths.length - failedCount, failed: failedCount });
         } else if (message.type === 'OFFLINE_REMOVE') {
           const before = state.saved.length;
           state.saved = state.saved.filter((p) => !message.paths.includes(p));
@@ -555,6 +557,20 @@ test('按過全部存到裝置的人，更新把站上新增的頁面一起送',
   ]);
   // 新那一頁的圖也要跟著，不然讀者離線打開是缺圖的
   assert.ok(add.assets.includes('img/shared.png'));
+});
+
+test('更新做完要說結果，失敗幾頁也要說', async () => {
+  // 原本更新那一處沒有把結果轉成訊息，做完之後畫面上什麼都沒有，
+  // 讀者不知道更新成功了沒，抓失敗的頁面也無聲無息
+  const ok = await load({ saved: ['basics/', 'basics/metadata/'] });
+  clickButton(ok.root, '更新已存的內容');
+  await tick(30);
+  assert.ok(ok.root.textContent.includes('完成。存下 2 頁。'), ok.root.textContent);
+
+  const partial = await load({ saved: ['basics/', 'basics/metadata/'], addFailed: 1 });
+  clickButton(partial.root, '更新已存的內容');
+  await tick(30);
+  assert.ok(partial.root.textContent.includes('存下 1 頁，1 頁失敗'), partial.root.textContent);
 });
 
 test('沒按過全部存到裝置的人，更新只送自己勾的那幾頁', async () => {
