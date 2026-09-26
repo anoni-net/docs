@@ -1,23 +1,21 @@
 ---
 title: 首页
-description: 推广 Tor、Tails、OONI 与匿名网络工具的台湾社群入口。整理观测数据、华语地区在地脉络（个资法、VASP、揭弊者保护等）、场景指引与工作坊活动，串连华语圈的网络自由实践。
+description: 匿名网络社群 anoni.net 维护的中文文档，整理匿名网络与隐私的概念、工具与各种处境的准备，也追踪华语地区的网络观测与在地脉络（个资法、VASP、揭弊者保护等）。
 icon: material/home-circle
 hide:
   - navigation
   - toc
 ---
 
-# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> 匿名网络社群 anoni.net
+# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net 文档
 
-> 推广 Tor、Tails、OONI，串连台湾的网络自由实践与在地观测。
+> 匿名网络与隐私的中文文档，从概念、工具到各种处境的准备，也追踪华语地区的网络观测与在地脉络。
 
 [:material-sign-direction: 从你的身分开始](./start/index.md){ .md-button .md-button--primary }
 
 [:material-email-fast-outline: 订阅电子报](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
 
-一群关注匿名网络、隐私与网络自由的在地社群成员。长期推广 Tor、Tails、OONI 等开源工具，维运在地的网络观测，追踪台湾的个资与加密支付法规，并与 EFF、Tor Project、OONI 合作把全球议题带回台湾脉络讨论。完整介绍见 [关于我们](./about/index.md)。
-
-2026 年社群投入三个主题，个人隐私指引、Tor Relay 校园建立、匿名支付，进度与参与方式见 [社群参与](./community/index.md)。
+文档由[匿名网络社群 anoni.net](https://anoni.net/){target="_blank"} 维护，社群的介绍见[关于我们](./about/index.md)，2026 年的三个主题与参与方式见[社群参与](./community/index.md)。
 
 ## :material-rocket-launch-outline: 从这里开始
 

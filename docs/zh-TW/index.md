@@ -1,23 +1,21 @@
 ---
 title: 首頁
-description: 推廣 Tor、Tails、OONI 與匿名網路工具的台灣社群入口。整理觀測資料、在地法規（個資法、VASP、揭弊者保護）、場景指引與工作坊活動，串連台灣的網路自由實踐。
+description: 匿名網路社群 anoni.net 維護的正體中文文件，整理匿名網路與隱私的概念、工具與各種處境的準備，也追蹤台灣的網路觀測與法規（個資法、VASP、揭弊者保護）。
 icon: material/home-circle
 hide:
   - navigation
   - toc
 ---
 
-# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> 匿名網路社群 anoni.net
+# <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net 文件
 
-> 推廣 Tor、Tails、OONI，串連台灣的網路自由實踐與在地觀測。
+> 匿名網路與隱私的正體中文文件，從概念、工具到各種處境的準備，也追蹤台灣的網路觀測與法規。
 
 [:material-sign-direction: 從你的身分開始](./start/index.md){ .md-button .md-button--primary }
 
 [:material-email-fast-outline: 訂閱電子報](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/feed_rss_created.xml)
 
-一群關注匿名網路、隱私與網路自由的在地社群成員。長期推廣 Tor、Tails、OONI 等開源工具，維運在地的網路觀測，追蹤台灣的個資與加密支付法規，並與 EFF、Tor Project、OONI 合作把全球議題帶回台灣脈絡討論。完整介紹見 [關於我們](./about/index.md)。
-
-2026 年社群投入三個主題，個人隱私指引、Tor Relay 校園建立、匿名支付，進度與參與方式見 [社群參與](./community/index.md)。
+文件由[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"} 維護，社群的介紹見[關於我們](./about/index.md)，2026 年的三個主題與參與方式見[社群參與](./community/index.md)。
 
 ## :material-rocket-launch-outline: 從這裡開始
 

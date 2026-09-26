@@ -6,7 +6,7 @@
 # 移除任何一行都是對讀者的破壞性變更，新增則隨時可以。判準寫在那支腳本的檔頭。
 #
 /
-	#匿名網路社群-anoninet
+	#anoninet-文件
 	#實際操作看看
 	#從這裡開始
 	#換個處境看看
@@ -4340,10 +4340,12 @@
 	#Reporting-back
 	#What-is-here-now
 /en/lab/webrtc-transfer/
+	#Comparing-throughput
 	#Device-to-device-transfer
 	#Report-what-you-find
 	#Running-it-on-two-devices
 	#This-page-sends-nothing
+	#Three-devices-or-more
 	#Where-it-is-known-to-fail
 	#Why-measure-this
 /en/not-stored/
@@ -5628,8 +5630,10 @@
 	#怎麼回報
 	#現在有什麼
 /lab/webrtc-transfer/
+	#三台以上
 	#兩台裝置怎麼測
 	#已知會失敗的情況
+	#比較吞吐量
 	#測完請回報
 	#為什麼要量這個
 	#裝置之間直接傳檔
@@ -7030,8 +7034,8 @@
 /what-is-tails/ -> /tools/what-is-tails/
 /what-is-tor/ -> /tools/what-is-tor/
 /zh-cn/
+	#anoninet-文档
 	#从这里开始
-	#匿名网络社群-anoninet
 	#实际操作看看
 	#换个处境看看
 	#没有网络也能读
@@ -9342,9 +9346,11 @@
 	#怎么回报
 	#现在有什么
 /zh-cn/lab/webrtc-transfer/
+	#三台以上
 	#两台设备怎么测
 	#为什么要量这个
 	#已知会失败的情况
+	#比较吞吐量
 	#测完请回报
 	#设备之间直接传文件
 	#这一页不送任何数据
