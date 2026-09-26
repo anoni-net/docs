@@ -3,7 +3,6 @@ title: Tor Project 生态与对接
 description: Tor Project 的规划去哪里看、哪些项目还在持续运作、官方沟通渠道、以及对中文社区最容易切入的参与方式，一页看懂如何把在地推广接上游 Tor 生态。
 icon: material/handshake-outline
 ---
-<!-- zh-CN：Claude Code 候选稿，待人工校对（词汇差异与政治措辞） -->
 # :material-handshake-outline: Tor Project 生态与对接
 
 匿名网络社区 anoni.net 这一年在地推广 Tor、Tails、OONI，伙伴问得最多的，是除了自己使用、推广之外，能不能直接参与 Tor 上游的开发与社区。可以，而且门槛比想象低。接上游能带来几件实际的事，在地的观测成果可以回馈给维护网络健康的团队，每多架一个中继就替所在区域增加一个节点、提升 IP 多样性，Tor 的繁体中文翻译也需要人持续维护、跟上每次更新。Tor Project 是公开治理的非营利组织，沟通渠道、源代码、规划文件大多对外开放，无论身在哪个华语环境，都能从翻译、运营中继、办推广开始参与。

@@ -11,8 +11,6 @@ summary: "Signal 在 Android beta 开放不绑手机号的注册方式 Signal Lo
 description: "Signal Login 让 Android 用户付费注册、不必绑手机号。说明付款记录会留下什么、查不到什么，以及依威胁模型决定要不要用、用什么方式付款。"
 ---
 
-<!-- zh-CN：Claude Code 候选稿，待人工校对（词汇差异与政治措辞） -->
-
 # :material-message-lock-outline: Signal 免手机号注册与付款记录
 
 <figure markdown="span">
