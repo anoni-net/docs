@@ -4030,6 +4030,24 @@
 	#OONI-nettest-quick-reference
 	#Where-to-go-from-here
 	#Which-nettests-show-up-in-Taiwan
+/en/community/partners/
+	#Anonymous-accounts-of-practice
+	#Co-hosted-events
+	#How-collaboration-works
+	#Local-context
+	#Local-observation
+	#Local-research
+	#Localization
+	#Localization-and-regional-expertise
+	#Newsroom-intake-channels
+	#Other-ways-to-work-together
+	#Security-update-alerts
+	#Self-hosted-services-for-collaboration
+	#Staff-training-and-device-reviews
+	#What-we-cannot-take-on
+	#Where-to-go-from-here
+	#Who-this-is-for
+	#Working-with-Organizations
 /en/community/payments-research/
 	#Anonymous-Payments-Track
 	#Done-so-far
@@ -9039,6 +9057,20 @@
 	#查不到公开数据的测项
 	#标记为-obsolete-的历史测项
 	#状态标记不等于实际有数据
+/zh-cn/community/partners/
+	#做不到的事
+	#内部培训与设备盘点
+	#协作用的自架服务
+	#可以一起做的事
+	#合作的进行方式
+	#媒体的收件渠道
+	#实务经验的匿名反馈
+	#活动合办
+	#相关阅读
+	#组织合作
+	#组织的信息安全更新提醒
+	#网络观测与可引用的数据
+	#适合的组织
 /zh-cn/community/payments-research/
 	#2026-研究目标
 	#为什么把支付独立成一个主题

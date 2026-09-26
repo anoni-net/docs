@@ -182,6 +182,7 @@ nav:
           - offline.md
       - "加入社群":
           - community/how-to-contribute.md
+          - community/partners.md
           - community/tools.md
           - community/skill-level.md
           - community/tor-project-ecosystem.md

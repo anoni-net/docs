@@ -63,3 +63,5 @@ The full list with links lives on the [Community page](./index.md). In brief:
 ## :material-help-circle-outline: When you're unsure
 
 Ask before you build. The [Public Space on Matrix](https://matrix.to/#/#community:im.anoni.net){target="_blank"} or `whisper@anoni.net` will get you a pointer toward whether a change fits, where it should live, and whether someone is already on it. A short question early is cheaper than a reworked pull request later.
+
+If you are writing on behalf of an organization, [Working with Organizations](partners.md) sets out what we can take on together.
