@@ -15,6 +15,8 @@ hide:
 
 [:material-email-fast-outline: Newsletter](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/en/feed_rss_created.xml)
 
+These docs are maintained by the [anoni.net community](https://anoni.net/en/){target="_blank"}. See [About](./about/index.md) for who we are.
+
 ## :material-compass-outline: Why this site exists
 
 We combine OONI network measurements, Tor relay monitoring, and on-the-ground community context, written by people working inside the region. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the Sinophone diaspora.

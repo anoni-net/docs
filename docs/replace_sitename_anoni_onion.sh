@@ -55,6 +55,15 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i "s|https://pad.anoni.net|http://pad.${ONION_ROOT}|g" {} +
 
+# 連到官網首頁的 Markdown 連結（首頁與幾篇文章寫的「匿名網路社群 anoni.net」）。
+# 只比對 Markdown 連結的 `](...)` 形式，JSON-LD 裡的 `https://anoni.net/#organization`
+# 是組織的識別碼，不是讓讀者點的連結，刻意不改。官網的 onion 版同樣有 /en/。
+find ./ -path './onion' -prune -o \
+	-type f -name '*.md' \
+	-exec sed -i \
+		-e "s|](https://anoni.net/)|](http://${ONION_ROOT}/)|g" \
+		-e "s|](https://anoni.net/en/)|](http://${ONION_ROOT}/en/)|g" {} +
+
 # assets.anoni.net 刻意不改寫。這裡曾經加過一條把它換成 onion /assets 的規則，
 # 理由是「onion 讀者不該繞出口抓圖」，那個前提是錯的：mkdocs 的 privacy plugin
 # 本來就會在建置時把外部資源抓下來鏡像進站內，產出的 HTML 指向
