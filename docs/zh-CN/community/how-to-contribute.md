@@ -35,3 +35,5 @@ icon: material/hand-heart
 
 下一步：如果你还没使用过这些工具，请先阅读[社群自架服务](tools.md)（帐号申请、服务入口、Public Space 链接）。
 
+以组织身分合作的方式另见[组织合作](partners.md)。
+

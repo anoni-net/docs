@@ -138,6 +138,8 @@ If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific a
 - Researchers wanting to use the underlying Pulse and ASN coverage data in published work
 - Translators bridging regional reports between Chinese and English
 
+What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](../community/partners.md).
+
 ## :material-information-outline: Disclaimer
 
 The regional sections summarize public observations and are not legal advice. Regulatory environments shift quickly; specific decisions should be checked against current local law and counsel. Where we cite events, we link to the primary English-language source. Where the original primary source is in Chinese, we say so explicitly and where possible point to a credible English summary as well.

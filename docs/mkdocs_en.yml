@@ -187,6 +187,7 @@ nav:
           - offline.md
       - "Get Involved":
           - community/how-to-contribute.md
+          - community/partners.md
           - community/tools.md
           - community/skill-level.md
           - community/tor-project-ecosystem.md
