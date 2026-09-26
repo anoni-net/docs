@@ -4,8 +4,6 @@ description: cookie 删得掉，指纹删不掉。说明指纹由哪些特征组
 icon: material/fingerprint
 ---
 
-<!-- zh-CN：Claude Code 候选稿，待人工校对（词汇差异与政治措辞） -->
-
 # :material-fingerprint: 浏览器指纹是什么，为什么很难摆脱
 
 清空 cookie、开无痕窗口、换一个账号登录，网站仍然认得出来是同一台机器。原因在于辨认的依据没有存在你的电脑里。
