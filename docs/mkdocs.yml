@@ -341,7 +341,7 @@ extra:
     - material/white-balance-sunny
     - material/weather-night
   # 窄螢幕的短站名，理由見 partials/header.html。留空就照舊顯示完整 site_name。
-  site_name_short: !ENV [SITE_NAME_SHORT, "匿名網路社群"]
+  site_name_short: !ENV [SITE_NAME_SHORT, "anoni.net 文件"]
   # 建在根路徑、網址上沒有語系區段的那一個語系。三份設定填的是同一個值，因為講的是
   # 這個部署長什麼樣，跟正在建哪一份無關。base.html 的偏好轉址只在這個語系的首頁動手，
   # /docs/en/ 那種網址上已經指定過語系的入口不受偏好影響。

@@ -795,8 +795,9 @@ html.js-focus-visible.js body header.md-header.md-header--shadow nav.md-header__
   display: inline-block;
 }
 
-/* 窄螢幕只留圖示。文字要多約 32px，而標題那一格在 320px 上餘裕是 0、360px 是
-   40px，擠進去站名就開始截斷。斷點跟 anoni-variant 那顆藥丸的標籤取同一個。 */
+/* 窄螢幕只留圖示。文字要多約 32px，而標題那一格在 320px 上連短站名都放不下
+   （108px 對 116px）、360px 只剩約 30px，擠進去站名就開始截斷。斷點跟
+   anoni-variant 那顆藥丸的標籤取同一個。 */
 .anoni-settings__button-label {
   display: none;
 }
