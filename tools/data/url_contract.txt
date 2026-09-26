@@ -7364,7 +7364,6 @@
 	#第二题要防谁他们有什么能力
 	#记者保护消息来源
 /zh-cn/blog/
-	#2026-signal-login-numberless
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
 	#Brave-用两种相反的手法抹平-GPU-指纹
@@ -8231,7 +8230,6 @@
 	#项目重启-2025
 /zh-cn/blog/archive/2026/
 	#2026
-	#2026-signal-login-numberless
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
 	#Brave-用两种相反的手法抹平-GPU-指纹
@@ -8370,7 +8368,6 @@
 	#跨社区合作匿名网络社区--ETHTaipei
 	#项目重启-2025
 /zh-cn/blog/category/技术/
-	#2026-signal-login-numberless
 	#Brave-用两种相反的手法抹平-GPU-指纹
 	#OONI-如何分辨坏掉的测量数据从启发式规则到匿名凭证
 	#Signal-免手机号注册与付款记录
@@ -8578,7 +8575,6 @@
 	#测量网络审查挑战趋势与影响
 	#观察
 /zh-cn/blog/category/隐私/
-	#2026-signal-login-numberless
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
 	#Brave-用两种相反的手法抹平-GPU-指纹
