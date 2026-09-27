@@ -7,7 +7,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具层
 
-读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。20 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
+读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。25 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
 
 ## 先看这篇
 
@@ -19,6 +19,7 @@ icon: material/toolbox-outline
 
 - [什么是 Tor](./what-is-tor.md)：Tor 如何使用、跟 VPN 差在哪、什么时候不该用。
 - [Tor Browser 进阶设定](./tor-browser-advanced.md)：桥接、安全等级、Onion 站点与身分隔离。
+- [手机上的 Tor](./tor-browser-mobile.md)：Android 的官方 Tor Browser 与 iOS 的 Onion Browser，安装、第一次启动、确认连接真的经由 Tor，以及什么时候该改用电脑。
 - [Tor Snowflake](./tor-snowflake.md)：开浏览器分页，帮受审查地区的使用者连上 Tor，门槛最低的网络自由贡献方式。
 - [Signal Proxy](./signal-proxy.md)：Signal 被封锁的地区怎么用 proxy 连回服务，以及在网络不受限的地区架一台提供出去的门槛与风险。
 - [OnionShare](./onionshare.md)：透过 Tor 起临时 onion service，匿名传档、收档、架站、聊天。
@@ -52,5 +53,6 @@ icon: material/toolbox-outline
 - [什么是 age](./what-is-age.md)：规范一页、密钥一行、没有选项的文件加密格式。怎么用、格式长什么样、跟 PGP 差在哪，以及站上的文件加密工具为什么选它。
 - [什么是 passkey](./what-is-passkey.md)：存在密码管理器里的凭证，站上拿它当数据的钥匙。两种机制各靠什么、跟密语差在哪、绑域名与遗失的限制。
 - [邮件别名怎么用，以及它把信任交给谁](./email-alias.md)：转发服务、自有域名 catch-all 与加号子地址的差别，别名把往来记录集中到谁手上，以及哪些场合用得上、哪些场合接不上。
+- [RSS 订阅入门](./rss.md)：不必注册账号、按发布时间排列的网站追踪方式，阅读器如何挑选、本地与云端阅读器的取舍，以及经由 Tor 读取 onion 版本的 feed。
 - [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。
 - [用 AI 工作时怎么避免数据外泄](./ai-privacy.md)：贴进去的内容去了哪里、消费版与企业版的分野、删除对话为什么不等于数据消失、你没有主动贴却也送出去的那些，以及境内服务的另一套框架。

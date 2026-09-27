@@ -34,6 +34,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 ## Comparisons and hardening
 
 - [Secure messaging compared](./messaging-comparison.md) — Signal, SimpleX, Session, Briar, and Matrix against a threat-model checklist (metadata, identifiers, network resistance), with the regional twist that phone-number registration ties to a legal identity.
+- [Following sites with RSS](./rss.md) — no account, no ranking algorithm, and a subscription list that stays on your device; local versus cloud readers, reading the onion feeds over Tor, and what changes when a team pipes feeds into Slack, Discord, or Matrix.
 - [Email aliases, and who you hand your trust to](./email-alias.md) — forwarding services, catch-all on your own domain, and why plus-addressing protects nobody; which party ends up holding your correspondence record, and where aliases break.
 - [Asian Diceware passphrase wordlist](./asian-diceware.md) — a community-made, EFF-compatible Diceware list that blends in dictionary-attested Asian loanwords; how to roll up a memorable-yet-strong passphrase with dice or a secure RNG.
 - [What is age?](./what-is-age.md) — a file encryption format with a one-page spec, one-line keys and no options; how to use it, what the format looks like, how it differs from PGP, and why this site's file encryption tool chose it.
@@ -42,6 +43,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 - [Cryptocurrency privacy spectrum](./crypto-privacy-spectrum.md) — where Bitcoin, Lightning, stablecoins, Monero, and Zcash actually sit on a transparency-to-privacy axis, and what that means for at-risk users in the region.
 - [Tails vs Whonix vs Qubes](./tails-vs-whonix-vs-qubes.md) — three different anonymity-OS philosophies (amnesia, isolation, compartmentalization), which threat each fits, routing setup depth to the projects.
 - [Tor Browser advanced settings](./tor-browser-advanced.md) — the security-level slider, fingerprinting protections, and the common hardening mistakes, pointing to the canonical Tor docs for specifics.
+- [Tor on a phone](./tor-browser-mobile.md) — the official Tor Browser on Android and the community-maintained Onion Browser on iOS: installing, first launch, confirming you are actually on Tor, and when to switch to a computer.
 - [VPN: risks and how to choose](./vpn-guide.md) — what a VPN actually changes (it moves the party watching your traffic from your ISP to the provider, not away), how to judge a trustworthy service, the trade-offs of self-hosting, and how to tell whether a VPN is usable where you are.
 - [Encrypted DNS: how to choose, and how to check it actually works](./encrypted-dns.md) — why typing `1.1.1.1` into Wi-Fi settings is not encrypted DNS, what shape each platform's field accepts, which defaults silently fall back to plaintext, and why a filtering resolver quietly corrupts your OONI measurements.
 

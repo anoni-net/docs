@@ -5070,6 +5070,24 @@
 	#Use-a-passphrase-not-a-word
 	#Where-to-go-next
 	#Why-you-need-one
+/en/tools/rss/
+	#A-third-party-joins-in
+	#Choosing-a-reader
+	#Compared-with-social-media-and-newsletters
+	#Feeds-for-a-team
+	#Following-sites-with-RSS
+	#How-RSS-works
+	#If-youd-rather-not-install-a-reader
+	#Local-readers-and-cloud-readers
+	#Reading-feeds-over-Tor
+	#Related-reading
+	#Subscribing
+	#The-list-goes-to-the-platform
+	#The-list-stays-inside-the-organization
+	#The-privacy-trade-offs
+	#Thunderbird
+	#What-the-site-can-still-see
+	#anoninet-feeds
 /en/tools/signal-proxy/
 	#After-you-have-a-link
 	#Assessing-the-risk-of-running-one
@@ -6591,6 +6609,24 @@
 	#系統整合Apple-Passwords--iCloud-Keychain
 	#離線金庫KeePassXC與-GNOME-Secrets
 	#雲端同步Bitwarden
+/tools/rss/
+	#RSS-的運作方式
+	#RSS-的隱私取捨
+	#RSS-訂閱入門
+	#Thunderbird
+	#anoninet-的-feed-網址
+	#不想安裝閱讀器的話
+	#團隊一起收
+	#多一個第三方
+	#本機閱讀器與雲端閱讀器
+	#清單交給平台
+	#清單留在組織內
+	#相關閱讀
+	#經由-Tor-讀取
+	#網站仍然看得到的部分
+	#與社群平台電子報的差別
+	#訂閱的步驟
+	#閱讀器的選擇
 /tools/signal-proxy/
 	#Proxy-怎麼運作
 	#Signal-Proxy
@@ -10192,6 +10228,24 @@
 	#硬件密钥YubiKeySolo
 	#离线密钥库KeePassXC与-GNOME-Secrets
 	#系统整合Apple-Passwords--iCloud-Keychain
+/zh-cn/tools/rss/
+	#RSS-的运作方式
+	#RSS-的隐私取舍
+	#RSS-订阅入门
+	#Thunderbird
+	#anoninet-的-feed-网址
+	#不想安装阅读器的话
+	#与社交平台电子报的差别
+	#列表交给平台
+	#列表留在组织内
+	#团队一起收
+	#多一个第三方
+	#本地阅读器与云端阅读器
+	#相关阅读
+	#经由-Tor-读取
+	#网站仍然看得到的部分
+	#订阅的步骤
+	#阅读器的选择
 /zh-cn/tools/signal-proxy/
 	#Proxy-怎么运作
 	#Signal-Proxy
