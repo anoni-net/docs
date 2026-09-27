@@ -465,7 +465,6 @@ plugins:
       enabled: !ENV [PRIVACY_ASSETS, true]
       assets_exclude:
         - aa.anoni.net/*
-        - static.cloudflareinsights.com/*
   - git-revision-date-localized:
       type: iso_datetime
       locale: en

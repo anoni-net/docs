@@ -82,15 +82,8 @@
 {% block scripts %}
   {{ super() }}
 <!-- anoni-analytics-start (standard build only; stripped by replace_sitename_anoni_ipfs.sh / replace_sitename_anoni_onion.sh) -->
-<!-- Cloudflare Web Analytics。原本擺在這個區塊外面，所以 onion 與 IPFS 版照樣會去
-     載入這支 clearnet 的 beacon，跟 replace_sitename_anoni_onion.sh 開頭寫的
-     「避免 Onion 使用者連到 clearnet endpoint」相反，也跟 utils/leaks 那頁寫的
-     「onion 版完全不載入分析」不符。移進來之後兩者才一致。 -->
-<script
-  defer
-  src="https://static.cloudflareinsights.com/beacon.min.js"
-  data-cf-beacon='{"token": "f38275e7514d451096b184304b1a7e81"}'
-></script>
+{# Cloudflare Web Analytics 的 beacon 由 anoni.net zone 的自動安裝在邊緣注入，涵蓋整個 zone。
+   這裡不要再手動放一支：一頁只能有一支 beacon，2026-09 前手動與自動並存，每頁載入兩支。 #}
 <script>
   // 送出前的最後一道關卡。umami 的每一筆 payload 都會先經過這個函式，回傳 falsy
   // 就整筆不送。加這一層的直接原因是 2026-08 發現的一個外洩：
