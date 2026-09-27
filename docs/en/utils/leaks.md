@@ -77,7 +77,7 @@ Load speed started on the same day. It covers a few standard measurements: First
 
 Every record also carries a build tag such as `21eb17c`, the commit that produced the page you are reading. It keeps figures from before and after a change apart, so when load times get worse we can trace which change caused it. The tag says nothing about you. Every reader of the same build shares it.
 
-**static.cloudflareinsights.com** is Cloudflare Web Analytics. Also traffic statistics, but third party: the data goes to Cloudflare rather than to our machine. The site already sits behind Cloudflare, so that company sees your request regardless; what this beacon adds for them is page-level performance and view counts.
+**static.cloudflareinsights.com** is Cloudflare Web Analytics. Also traffic statistics, but third party: the data goes to Cloudflare rather than to our machine. The site already sits behind Cloudflare, so that company sees your request regardless; what this beacon adds for them is page-level performance and view counts. Cloudflare adds the beacon to each page as it serves it, so you will not find it in the site's source code.
 
 Neither reads any of the values listed on this page.
 

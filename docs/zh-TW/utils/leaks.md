@@ -77,7 +77,7 @@ icon: material/eye-outline
 
 每一筆記錄還帶著一個建置代號，例如 `21eb17c`，就是產生本頁的 commit 短碼。改版前後的數字因此區分得開，載入時間變長時才追得出是哪一次改動造成的。代號跟你無關，同一次建置的所有讀者共用同一個。
 
-**`static.cloudflareinsights.com`** 是 Cloudflare Web Analytics，一樣是流量統計，但它是第三方，資料進到 Cloudflare 而不是我們的機器。網站本來就走 Cloudflare，所以那家公司無論如何都看得到你的請求，這支 beacon 多給它的是頁面層級的效能與瀏覽數字。
+**`static.cloudflareinsights.com`** 是 Cloudflare Web Analytics，一樣是流量統計，但它是第三方，資料進到 Cloudflare 而不是我們的機器。網站本來就走 Cloudflare，所以那家公司無論如何都看得到你的請求，這支 beacon 多給它的是頁面層級的效能與瀏覽數字。beacon 是 Cloudflare 在傳送頁面時自動加進去的，所以在網站的原始碼裡找不到。
 
 兩者都不會去讀這一頁列出的任何數值。
 
