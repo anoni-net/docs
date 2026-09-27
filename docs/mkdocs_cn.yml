@@ -63,6 +63,7 @@ nav:
               - tools/what-is-age.md
               - tools/what-is-passkey.md
               - tools/email-alias.md
+              - tools/rss.md
               - tools/crypto-privacy-spectrum.md
               - tools/ai-privacy.md
       # 顺序跟着 scenarios/index.md 的清单走。
