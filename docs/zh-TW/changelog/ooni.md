@@ -13,6 +13,17 @@ digest:
 
 App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與命令列工具（OONI Probe CLI）是 3.x，app 內建的就是某一版引擎。做資料分析或自己排量測的人看引擎那幾則，量測行為的變動寫在那裡。
 
+## OONI Probe 6.2.1
+
+> 2026-09-28 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}
+
+- 量測引擎維持 OONI Probe CLI v3.30.0，跟 6.2.0 相同。這一版以錯誤修正為主，發布說明沒有列出安全修補。
+- 量測結果新增 DNS 解析方式的註記（`resolver_type`），值有私人 DNS（private_dns）、VPN、系統預設與未知四種。Android 版會偵測系統設定裡的私人 DNS 有沒有開啟。解析方式會影響網站封鎖的判讀，同一個網站透過加密的私人 DNS 查詢與透過電信商預設的 DNS 查詢，結果可能不同。
+- 修掉跨過午夜之後量測結果不見的問題。
+- iOS 版的最低系統需求從 iOS 14 提高到 iOS 15，還在 iOS 14 的裝置裝不了這一版。
+- Passport 升至 0.1.7。macOS 與 iOS 的匿名憑證在鑰匙圈的存取設定改成開機後第一次解鎖就能讀取，原本裝置鎖定時會讀不到而出錯（`errSecInteractionNotAllowed`），背景的自動量測最容易遇到。
+- 依賴項目與翻譯更新。
+
 ## OONI Probe 6.2.0
 
 > 2026-08-13 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.0){target="_blank"}

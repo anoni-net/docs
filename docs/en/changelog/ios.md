@@ -43,6 +43,18 @@ Any iPhone 11 or later can take either line, and 26.7 is there for people who wo
 
 Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a concrete example. A device that no longer receives updates at all means known vulnerabilities go unpatched, so consider replacing it if you handle sensitive material.
 
+## iOS 26.7.1, iPadOS 26.7.1 (27.0.1 shipped the same day)
+
+> 2026-09-28 · [26.7.1 advisory](https://support.apple.com/en-us/149226){target="_blank"} · [Security releases page](https://support.apple.com/en-us/100100){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>A single fix: an out-of-bounds write in CoreGraphics (CVE-2026-86950), where processing a maliciously crafted file may lead to arbitrary code execution. Apple's advisory states it is aware of a report that the issue may have been exploited in an extremely sophisticated attack against specific targeted individuals on versions of iOS before iOS 27. CISA added it to KEV on 29 September.
+- CoreGraphics is the system component that draws graphics and renders PDFs, and many apps pass through it when opening images and documents. The trigger is processing one maliciously crafted file; Apple does not say how that file reaches the device.
+- If you are still on 26.x, update to 26.7.1 today. The iPad Pro 12.9-inch 3rd generation, iPad Pro 11-inch 1st generation, iPad Air 3, iPad 8 and iPad mini 5 cannot move to 27, so this release is their only option.
+- If you are already on 27, update to 27.0.1 as usual. Apple's releases page notes that 27.0.1 has no published CVE entries, the 14 September advisory for 27 does not list this CVE, and the only thing the advisory says about 27 is that the attacks targeted earlier versions.
+- Apple describes the targets as specific individuals, and attacks like this usually aim at a small number of people. If you are likely to be targeted over the long term, turn on Lockdown Mode (described at the top of this page) in addition to updating.
+- The 18.x line got no update this round, and Apple does not say whether that line is affected. Devices still on 18.x remain on 18.7.10 from 17 August.
+- macOS Tahoe 26.7.1 and Sequoia 15.8.1 fix the same flaw on the same day; see [macOS Security Updates](./macos.md).
+
 ## iOS 27, iPadOS 27 (26.7 shipped the same day)
 
 > 2026-09-14 · [27 advisory](https://support.apple.com/en-us/149034){target="_blank"} · [26.7 advisory](https://support.apple.com/en-us/149041){target="_blank"}

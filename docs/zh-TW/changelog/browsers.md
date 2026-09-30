@@ -35,22 +35,24 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Chrome 2026 年 9 月
 
-> 2026-09-22 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}
+> 2026-09-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>兩個已被利用的漏洞都在 V8（Chrome 執行 JavaScript 的引擎），Google 在公告裡標注已有利用程式在外流傳，CISA 也在隔天收進 KEV。更新到 153.0.8010.36 以上兩個都涵蓋，目前最新的是 9 月 22 日的 154.0.8037.57。
+- <span class="urg-tag urg-tag--now">立刻</span>兩個已被利用的漏洞都在 V8（Chrome 執行 JavaScript 的引擎），Google 在公告裡標注已有利用程式在外流傳，CISA 也在隔天收進 KEV。更新到 153.0.8010.36 以上兩個都涵蓋，目前最新的是 9 月 29 日的 154.0.8037.92。
 - CVE-2026-85046：V8 的型別混淆（type confusion），Google 評為 High，9 月 3 日的 152.0.7977.82 修掉。
 - CVE-2026-87491：V8 的越界寫入（out of bounds write），Google 評為 Medium，9 月 8 日的 153.0.8010.36 修掉。
 - Edge、Brave 這類以 Chromium 為基底的瀏覽器用的也是 V8，要等各自的更新。Tor Browser 以 Firefox 為基底，沒有 V8，不受這兩個影響。
-- 這個月六次穩定版更新共修了 434 個安全問題，Critical 23 個。9 月 8 日的 153 與 22 日的 154 兩個大版本就占了 338 個。
+- 9 月 29 日的 154.0.8037.92 修了 32 個安全問題，Critical 1 個，是 ANGLE（把網頁的圖形指令轉成各平台繪圖介面的轉譯層）的緩衝區溢位（CVE-2026-102331）。Google 沒有標注這一版有已被利用的漏洞。
+- 這個月七次穩定版更新共修了 466 個安全問題，Critical 24 個。9 月 8 日的 153 與 22 日的 154 兩個大版本就占了 338 個。
 
 ## Firefox 2026 年 9 月
 
-> 2026-09-15 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-09-29 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>兩個大版本 155（9 月 1 日）與 156（9 月 15 日）都有 High 等級的修補。Mozilla 沒有標注任何一項已被實際利用。
-- 156 的修補特別多，High 就有 29 個。其中兩個是沙箱逃逸（CVE-2026-92035、CVE-2026-92018），8 個是 WebGL 畫布元件的權限提升。沙箱是瀏覽器隔開網頁與作業系統的那道隔離，逃逸類的漏洞常是完整攻擊鏈的最後一步。
+- <span class="urg-tag urg-tag--soon">儘快</span>三個大版本 155（9 月 1 日）、156（9 月 15 日）與 157（9 月 29 日）都有 High 等級的修補。Mozilla 沒有標注任何一項已被實際利用。
+- 157 的修補比 156 還多，High 有 38 個，其中 9 個是沙箱逃逸，連同 Moderate 等級共 15 個。沙箱是瀏覽器隔開網頁與作業系統的那道隔離，逃逸類的漏洞常是完整攻擊鏈的最後一步。WebGPU（網頁直接呼叫顯示卡運算的介面）另有 4 個 High。
+- 156 的 High 有 29 個，其中兩個是沙箱逃逸（CVE-2026-92035、CVE-2026-92018），8 個是 WebGL 畫布元件的權限提升。
 - Android 版另有一個權限提升（CVE-2026-92033），同樣在 156 修掉。
-- ESR 使用者對應的版本是 153.3、140.16 與 115.41，跟 156 同一天發布。Tor Browser 15.0.23 已經跟上 140.16。
+- ESR 使用者對應的最新版本是 153.4、140.17 與 115.42，跟 157 同一天發布。Tor Browser 15.0.24 已經跟上 140.17。
 
 ## Chrome 2026 年 8 月
 

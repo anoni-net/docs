@@ -18,6 +18,17 @@ digest:
 
 Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 跟著改，穩定版的更新會比過去更密。
 
+## Tor Browser 15.0.24
+
+> 2026-09-29 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15024/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>內建的 tor daemon 升到 0.4.9.13。那是 9 月 23 日的安全釋出，一次修了十個 TROVE 編號，其中 TROVE-2026-053 讓惡意的 onion 服務可以打破第一方隔離（細節見 [tor daemon 更新日誌](./tor-daemon.md)）。用瀏覽器上 Tor 的人裝這一版就涵蓋了。
+- Firefox 基底升至 140.17.0esr，並從 Firefox 157 backport 安全修補（tor-browser#45358、tor-browser#45366），Android 版 GeckoView 同步。NoScript 升至 13.6.35.1984。
+- NoScript 解析網站時改成把 onion 別名算進去（tor-browser#45368）。onion 別名是部分新聞網站 SecureDrop 用的好記名稱，對應到真正的 .onion 位址。另一項替內容修補補上 CharacterData 與 Range 插入的攔截點（tor-browser#45371），跟 15.0.23 補上 `setHTMLUnsafe` 攔截點是同一類工作。
+- 穩定版從這一版起改用新的 GPG 子金鑰簽署（tor-browser-build#41847），Alpha 在 16.0a12 已經先換。用 gpg 自行驗證下載的人，驗證前先更新 Tor Browser 開發者的公鑰（`EF6E286DDA85EA2A4BA7DE684E2C6E8793298290`），本機舊的 keyring 裡沒有這把子金鑰。
+- Windows 的簽章問題維持原狀，下載頁的 Windows 版本仍停在 15.0.20，靠自動更新把人帶到新版。要直接安裝新版的人可以從[發布目錄](https://dist.torproject.org/torbrowser/15.0.24/){target="_blank"}取得，過程中會看到憑證過期的警告。
+- 32 位元 Linux 的版本過期提示又出現一次（tor-browser#44996），15.0 系列還沒有收尾。
+
 ## Tor Browser 16.0a12（Alpha 測試通道）
 
 > 2026-09-22 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a12/){target="_blank"}

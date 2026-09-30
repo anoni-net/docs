@@ -35,22 +35,24 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Chrome September 2026
 
-> 2026-09-22 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}
+> 2026-09-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>Both exploited flaws are in V8, Chrome's JavaScript engine. Google's announcements state that exploits exist in the wild, and CISA added each to KEV the following day. Version 153.0.8010.36 or later covers both; the latest is 154.0.8037.57 from 22 September.
+- <span class="urg-tag urg-tag--now">Now</span>Both exploited flaws are in V8, Chrome's JavaScript engine. Google's announcements state that exploits exist in the wild, and CISA added each to KEV the following day. Version 153.0.8010.36 or later covers both; the latest is 154.0.8037.92 from 29 September.
 - CVE-2026-85046: type confusion in V8, rated High by Google, fixed in 152.0.7977.82 on 3 September.
 - CVE-2026-87491: out of bounds write in V8, rated Medium by Google, fixed in 153.0.8010.36 on 8 September.
 - Chromium-based browsers such as Edge and Brave also use V8 and need their own updates. Tor Browser is built on Firefox, has no V8 and is not affected by either.
-- Six stable updates this month fixed 434 security issues in total, 23 of them Critical. The two major versions, 153 on 8 September and 154 on 22 September, account for 338.
+- 154.0.8037.92 on 29 September fixed 32 security issues, one of them Critical: a buffer overflow in ANGLE (CVE-2026-102331), the layer that translates web graphics calls into each platform's native graphics API. Google does not flag anything in this release as exploited.
+- Seven stable updates this month fixed 466 security issues in total, 24 of them Critical. The two major versions, 153 on 8 September and 154 on 22 September, account for 338.
 
 ## Firefox September 2026
 
-> 2026-09-15 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-09-29 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Both major versions, 155 (1 September) and 156 (15 September), carry High-rated fixes. Mozilla does not flag any item as actively exploited.
-- 156 is especially large, with 29 High-rated fixes. Two are sandbox escapes (CVE-2026-92035, CVE-2026-92018) and eight are privilege escalations in the WebGL canvas component. The sandbox is what separates web pages from the operating system, and escaping it is often the final step in a full attack chain.
+- <span class="urg-tag urg-tag--soon">Soon</span>All three major versions, 155 (1 September), 156 (15 September) and 157 (29 September), carry High-rated fixes. Mozilla does not flag any item as actively exploited.
+- 157 is larger still, with 38 High-rated fixes, nine of them sandbox escapes (15 once Moderate ones are counted). The sandbox is what separates web pages from the operating system, and escaping it is often the final step in a full attack chain. WebGPU, the interface that lets web pages run computations on the graphics card, accounts for four more High-rated fixes.
+- 156 has 29 High-rated fixes. Two are sandbox escapes (CVE-2026-92035, CVE-2026-92018) and eight are privilege escalations in the WebGL canvas component.
 - The Android version has one more privilege escalation (CVE-2026-92033), also fixed in 156.
-- The matching ESR versions are 153.3, 140.16 and 115.41, released the same day as 156. Tor Browser 15.0.23 has already moved to 140.16.
+- The latest matching ESR versions are 153.4, 140.17 and 115.42, released the same day as 157. Tor Browser 15.0.24 has already moved to 140.17.
 
 ## Chrome August 2026
 

@@ -13,6 +13,17 @@ digest:
 
 The app and the engine version independently. The cross-platform app is 6.x, while the measurement engine and command-line tool (OONI Probe CLI) are 3.x, and each app build bundles one engine version. If you analyse data or schedule your own measurements, read the engine entries: that is where changes to measurement behaviour land.
 
+## OONI Probe 6.2.1
+
+> 2026-09-28 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}
+
+- The measurement engine stays on OONI Probe CLI v3.30.0, the same as 6.2.0. This is mainly a bug-fix release, and the release notes list no security fixes.
+- Measurements now carry an annotation for how DNS was resolved (`resolver_type`), with four values: private DNS (private_dns), VPN, system default and unknown. On Android the app detects whether Private DNS is turned on in system settings. The resolver affects how blocking is interpreted: the same site can give different results when looked up over encrypted Private DNS and over the ISP's default DNS.
+- Fixed measurement results disappearing after midnight.
+- The minimum iOS version rises from iOS 14 to iOS 15, so devices still on iOS 14 cannot install this release.
+- Passport updated to 0.1.7. On macOS and iOS, the keychain accessibility for anonymous credentials now allows reads after the first unlock following a restart. Previously a locked device made the read fail (`errSecInteractionNotAllowed`), which background automated runs hit most often.
+- Dependency and translation updates.
+
 ## OONI Probe 6.2.0
 
 > 2026-08-13 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.0){target="_blank"}
