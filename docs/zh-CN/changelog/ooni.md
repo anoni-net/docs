@@ -11,6 +11,18 @@ digest:
 
 [OONI](../tools/what-is-ooni.md) Probe、Explorer、Run 等网络审查观测工具的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## OONI Probe 6.2.1
+
+> 2026-09-28 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}
+
+- 量测引擎维持 OONI Probe CLI v3.30.0，跟 6.2.0 相同。这一版以错误修正为主，发布说明没有列出安全修补。
+- 测量结果新增 DNS 解析方式的注记（`resolver_type`），值有私人 DNS（private_dns）、VPN、系统默认与未知四种。Android 版会检测系统设置里的私人 DNS 有没有开启，其他平台只会标成 VPN 或未知。已有用户反馈，开着加密 DNS 测量时，被 DNS 篡改挡掉的网站会显示为可以连接（ooni/probe#2857）。OONI 决定先收集这个注记的数据评估影响，暂时不在 app 里提醒用户关掉，因为关掉加密 DNS 反而让用户多一分风险。
+- 修掉结果页不显示午夜之后新结果的问题，原本要重开 app 才会出现。
+- iOS 版的最低系统要求从 iOS 14 提高到 iOS 15，还在 iOS 14 的设备装不了这一版。
+- iOS 版把匿名凭证存进钥匙串时，改为开机后第一次解锁之后就能访问。重新开机后、还没解锁前的后台运行，写入钥匙串会失败（`errSecInteractionNotAllowed`），现在改为延后保存，不再当成错误。
+- Passport 升至 0.1.7。
+- 依赖项目与翻译更新。
+
 ## OONI Probe 6.2.0
 
 > 2026-08-13 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.0){target="_blank"}

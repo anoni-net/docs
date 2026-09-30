@@ -36,9 +36,19 @@ Apple maintains the current release plus the two before it. Security fixes ship 
 | Tahoe | 26.x | Previous, security fixes keep pace |
 | Sequoia | 15.x | Two back, receives the fewest fixes |
 
-Golden Gate 27 arrived on 14 September 2026 and pushed every line back a step. Sonoma 14.x got no matching release that round, and its last fixes were 14.8.9 on 6 August, so the line looks finished. The next round will confirm it.
+Golden Gate 27 arrived on 14 September 2026 and pushed every line back a step. Sonoma 14.x got no matching release that round, nor in the 28 September round that fixed an actively exploited flaw. Its last operating system fixes were 14.8.9 on 6 August, and Safari 26.6.1 followed on 18 August. Apple's security releases page lists no end-of-support date, so a Mac still on Sonoma should not count on further system fixes.
 
 All three shipping the same day is normal, and so is the gap in fix counts. See the 2026-07-27 entry below for the comparison. If your hardware cannot run the current line, staying on Tahoe or Sequoia still gets you security fixes.
+
+## macOS Tahoe 26.7.1, Sequoia 15.8.1 (Golden Gate 27.0.1 shipped the same day)
+
+> 2026-09-28 · [Tahoe 26.7.1 advisory](https://support.apple.com/en-us/149228){target="_blank"} · [Sequoia 15.8.1 advisory](https://support.apple.com/en-us/149229){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>Each of the two older lines gets one fix, the same out-of-bounds write in CoreGraphics (CVE-2026-86950), where processing a maliciously crafted file may lead to arbitrary code execution. CISA added it to KEV on 29 September, and its entry explicitly covers macOS.
+- Both macOS advisories carry the same exploitation note as the iOS one: the issue may have been exploited in an extremely sophisticated attack against specific targeted individuals on versions of iOS before iOS 27. The advisories do not say whether attacks have been seen on the Mac. It is the same component and the same CVE, and it is in the CISA catalog, so under this page's criteria it rates Now.
+- If you are on Tahoe or Sequoia, update today. Golden Gate 27.0.1 shipped the same day, and Apple notes it has no published CVE entries; the 14 September advisory for Golden Gate 27 does not list this CVE either.
+- Sonoma 14.x again got no matching release; its last operating system fixes remain 14.8.9 from 6 August (see "Three maintenance lines" at the top of this page).
+- The matching iPhone and iPad releases are covered in [iOS Security Updates](./ios.md).
 
 ## macOS Golden Gate 27 (Tahoe 26.7 and Sequoia 15.8 shipped the same day)
 

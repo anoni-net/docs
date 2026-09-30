@@ -18,6 +18,17 @@ digest:
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 15.0.24
+
+> 2026-09-29 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15024/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>内置的 tor daemon 升到 0.4.9.13。那是 9 月 23 日的安全释出，一次修复了十个 TROVE 编号，其中 TROVE-2026-053 让恶意的 onion 服务或 HSDir 有机会打破第一方隔离（细节见 [tor daemon 更新日志](./tor-daemon.md)）。用浏览器上 Tor 的人装这一版就覆盖了。
+- Firefox 基底升至 140.17.0esr，并从 Firefox 157 backport 安全修补（tor-browser#45358、tor-browser#45366），Android 版 GeckoView 同步。NoScript 升至 13.6.35.1984。
+- NoScript 解析网站时改为把 onion 别名算进去（tor-browser#45368）。onion 别名是 Tor Browser 内置的 `.tor.onion` 好记名称，目前收录的是新闻网站的 SecureDrop 地址（形如 `*.securedrop.tor.onion`），对应到真正的 .onion 地址。另一项为内容修补补上 CharacterData 与 Range 插入的拦截点（tor-browser#45371）。
+- 发布文件从这一版起改用新的 GPG 子密钥签名（tor-browser-build#41847），子密钥指纹是 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`。用 gpg 自行验证下载的人，本地旧的 keyring 里没有这把子密钥，可能需要先更新 Tor Browser 开发者的公钥（主密钥 `EF6E286DDA85EA2A4BA7DE684E2C6E8793298290`）。
+- Windows 的签名问题维持原状，下载页的 Windows 版本仍停在 15.0.20，靠自动更新把人带到新版。要直接安装新版的人可以从[发布目录](https://dist.torproject.org/torbrowser/15.0.24/){target="_blank"}获取，过程中会看到证书过期的警告。
+- 32 位 Linux 的版本过期提示这一版仍列在更新记录里（tor-browser#44996）。那个项目针对的是 15.0 系列的最后一版，哪一版真的收尾要等 16.0 稳定版接手才知道。
+
 ## Tor Browser 16.0a12（Alpha 测试通道）
 
 > 2026-09-22 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a12/){target="_blank"}
@@ -28,7 +39,7 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 - 桌面版连到使用自签证书的 onion 服务时，改成显示安全例外的警告与按钮（tor-browser#42065）。WebXR 明确停用（tor-browser#45278），工具栏的分享按钮也关掉（tor-browser#45133）。
 - 构建设置加上 `--disable-proxy-direct-failover`（tor-browser#45336），拿掉代理失效时改走直连的后备路径。
 - Android 版移除「密码」相关界面（tor-browser#44548），完全停用搜索建议（tor-browser#45269），并修好 `about:config` 无法打开的问题（tor-browser#45280）。
-- Alpha 版改用新的 GPG 子密钥签名（tor-browser-build#41846）。自行验证下载签名的人，验证前先更新 Tor Browser 开发者的公钥。
+- 更新记录列了 Alpha 改用新 GPG 子密钥签名的项目（tor-browser-build#41846），不过 16.0a12 的发布文件实际上仍是旧子密钥（`CAAE408AEBE2288E96FC5D5E157432CF78A65729`）签的。新子密钥从稳定版 15.0.24 开始使用。
 - Windows 的安装包签名问题还没解决，DigiCert EV 证书仍在换发。全新安装 16.0a11 或 16.0a12 会跳出 bad signature 警告，上游建议先装 16.0a10，再让自动更新带到最新版。
 
 ## Tor Browser 15.0.23

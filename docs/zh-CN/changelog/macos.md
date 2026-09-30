@@ -36,9 +36,19 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 | Tahoe | 26.x | 前一代，安全修补跟上 |
 | Sequoia | 15.x | 再前一代，收到的修补数量最少 |
 
-2026 年 9 月 14 日 Golden Gate 27 推出，三条线整个往后推一格。Sonoma 14.x 在那一轮没有对应版本，最后一次收到修补是 8 月 6 日的 14.8.9，看起来已经走到终点，下一轮才能确定。
+2026 年 9 月 14 日 Golden Gate 27 推出，三条线整个往后推一格。Sonoma 14.x 在那一轮没有对应版本，9 月 28 日修补已被利用漏洞的那一轮也没有。系统本身最后一次收到修补是 8 月 6 日的 14.8.9，Safari 另在 8 月 18 日收到 26.6.1。Apple 的安全更新页没有列出停止维护的日期，还在 Sonoma 的 Mac 不能指望再收到系统修补。
 
 同一天三条线一起发是常态，数量落差很正常，见下面 2026-07-27 那则的比较。硬件太旧升不上最新线的话，留在 Tahoe 或 Sequoia 仍然收得到安全修补。
+
+## macOS Tahoe 26.7.1、Sequoia 15.8.1（同日另有 Golden Gate 27.0.1）
+
+> 2026-09-28 · [Tahoe 26.7.1 公告](https://support.apple.com/en-us/149228){target="_blank"} · [Sequoia 15.8.1 公告](https://support.apple.com/en-us/149229){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>两条旧线各修复一个漏洞，都是 CoreGraphics 的越界写入（CVE-2026-86950），处理恶意制作的文件可能导致任意代码执行。CISA 在 9 月 29 日把它收入 KEV，收录范围写明包含 macOS。
+- 两份 macOS 公告附的利用说明跟 iOS 那份相同，写的是 iOS 27 之前的版本可能已被用于针对特定人士、极为精密的攻击。Mac 上有没有出现攻击，公告没有交代。同一个组件、同一个 CVE，又进了 CISA 的目录，依本页判准列为立刻。
+- 还在 Tahoe 或 Sequoia 的人今天就更新。Golden Gate 27.0.1 同日发布，Apple 注明那一版没有公布任何 CVE 条目，9 月 14 日的 Golden Gate 27 公告里也没有这个 CVE。
+- Sonoma 14.x 这一轮同样没有对应版本，系统本身最后一次修补仍是 8 月 6 日的 14.8.9（见本页开头的「三条维护线」）。
+- iPhone 与 iPad 的对应版本整理在 [iOS 安全更新](./ios.md)。
 
 ## macOS Golden Gate 27（同日另有 Tahoe 26.7、Sequoia 15.8）
 
