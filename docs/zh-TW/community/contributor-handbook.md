@@ -370,16 +370,20 @@ PR 描述至少包含：
 
 ## Issue 分類
 
-Issue 標籤體系（持續調整中）：
+Issue 標籤沿用 GitHub 預設的那一組，另外加上 `l10n`。用 Issue 模板開單時，類型標籤會自動帶上：
 
-- `type:docs` 文件相關
-- `type:bug` 行為錯誤
-- `type:enhancement` 改進建議
-- `type:question` 問題討論
-- `area:zh-TW` / `area:zh-CN` / `area:en` 語系區分
-- `area:tools` / `area:scenarios` 等對應分類
-- `good first issue` 給新貢獻者的入門 Issue
-- `help wanted` 需要更多協助的 Issue
+| 標籤 | 用途 |
+|---|---|
+| `documentation` | 新增或修改文章內容 |
+| `enhancement` | 改進建議、小工具提案、技術評估 |
+| `bug` | 網站或工具的行為錯誤 |
+| `l10n` | 翻譯與在地化 |
+| `question` | 問題討論 |
+| `good first issue` | 範圍明確，不必先熟悉整個 repo 就能接手 |
+| `help wanted` | 需要更多人手 |
+| `duplicate`、`invalid`、`wontfix` | 結案時註明原因 |
+
+語系與分類不另設標籤，寫在 Issue 的標題或內文。第一次參與可以從 [good first issue 清單](https://github.com/anoni-net/docs/labels/good%20first%20issue){target="_blank"}挑一張，在 Issue 下留言認領，避免兩個人做同一件事。
 
 開 Issue 前可以先在 GitHub 搜尋既有 Issue，避免重複。
 
