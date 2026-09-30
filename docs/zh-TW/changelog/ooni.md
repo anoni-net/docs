@@ -18,10 +18,11 @@ App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與
 > 2026-09-28 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}
 
 - 量測引擎維持 OONI Probe CLI v3.30.0，跟 6.2.0 相同。這一版以錯誤修正為主，發布說明沒有列出安全修補。
-- 量測結果新增 DNS 解析方式的註記（`resolver_type`），值有私人 DNS（private_dns）、VPN、系統預設與未知四種。Android 版會偵測系統設定裡的私人 DNS 有沒有開啟。解析方式會影響網站封鎖的判讀，同一個網站透過加密的私人 DNS 查詢與透過電信商預設的 DNS 查詢，結果可能不同。
-- 修掉跨過午夜之後量測結果不見的問題。
+- 量測結果新增 DNS 解析方式的註記（`resolver_type`），值有私人 DNS（private_dns）、VPN、系統預設與未知四種。Android 版會偵測系統設定裡的私人 DNS 有沒有開啟，其他平台只會標成 VPN 或未知。已有使用者回報，開著加密 DNS 量測時，被 DNS 竄改擋掉的網站會顯示成可以連線（ooni/probe#2857）。OONI 決定先蒐集這個註記的資料評估影響，暫時不在 app 裡提醒使用者關掉，因為關掉加密 DNS 反而讓使用者多一分風險。
+- 修掉結果頁不顯示午夜之後新結果的問題，原本要重開 app 才會出現。
 - iOS 版的最低系統需求從 iOS 14 提高到 iOS 15，還在 iOS 14 的裝置裝不了這一版。
-- Passport 升至 0.1.7。macOS 與 iOS 的匿名憑證在鑰匙圈的存取設定改成開機後第一次解鎖就能讀取，原本裝置鎖定時會讀不到而出錯（`errSecInteractionNotAllowed`），背景的自動量測最容易遇到。
+- iOS 版把匿名憑證存進鑰匙圈時，改成開機後第一次解鎖之後就能存取。重新開機後、還沒解鎖前的背景執行，寫入鑰匙圈會失敗（`errSecInteractionNotAllowed`），現在改成延後儲存，不再當成錯誤。
+- Passport 升至 0.1.7。
 - 依賴項目與翻譯更新。
 
 ## OONI Probe 6.2.0

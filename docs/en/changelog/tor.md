@@ -22,12 +22,12 @@ Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebas
 
 > 2026-09-29 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15024/){target="_blank"}
 
-- <span class="chan-tag chan-tag--stable">Stable</span>The bundled tor daemon moves to 0.4.9.13, the 23 September security release that fixed ten TROVE issues at once. One of them, TROVE-2026-053, lets a malicious onion service break first-party isolation (details in the [tor daemon changelog](./tor-daemon.md)). If you use Tor through the browser, installing this release covers it.
+- <span class="chan-tag chan-tag--stable">Stable</span>The bundled tor daemon moves to 0.4.9.13, the 23 September security release that fixed ten TROVE issues at once. One of them, TROVE-2026-053, could let a malicious onion service or HSDir break first-party isolation (details in the [tor daemon changelog](./tor-daemon.md)). If you use Tor through the browser, installing this release covers it.
 - The Firefox base moves to 140.17.0esr, with security fixes backported from Firefox 157 (tor-browser#45358, tor-browser#45366); GeckoView on Android follows. NoScript moves to 13.6.35.1984.
-- NoScript now accounts for onion aliases when parsing sites (tor-browser#45368). Onion aliases are the memorable names some news sites use for SecureDrop, mapped to the real .onion address. Another fix hooks the CharacterData and Range insertion sinks for content patches (tor-browser#45371), the same kind of work as the `setHTMLUnsafe` hook added in 15.0.23.
-- Stable releases are now signed with a new GPG subkey (tor-browser-build#41847); alpha switched in 16.0a12. If you verify downloads yourself with gpg, refresh the Tor Browser developers' key (`EF6E286DDA85EA2A4BA7DE684E2C6E8793298290`) first, because an older local keyring does not contain the new subkey.
+- NoScript now accounts for onion aliases when parsing sites (tor-browser#45368). Onion aliases are Tor Browser's built-in memorable `.tor.onion` names, currently covering news organisations' SecureDrop addresses (of the form `*.securedrop.tor.onion`), each mapped to the real .onion address. Another fix hooks the CharacterData and Range insertion sinks for content patches (tor-browser#45371).
+- Release files are now signed with a new GPG subkey (tor-browser-build#41847), fingerprint `022DA248432D2A0E0F54E65E316C1FACD62D07D9`. If you verify downloads yourself with gpg, an older local keyring does not contain this subkey, so you may need to refresh the Tor Browser developers' key (primary key `EF6E286DDA85EA2A4BA7DE684E2C6E8793298290`) first.
 - The Windows signing problem is unchanged. The download page still lists 15.0.20 for Windows and relies on automatic updates to bring people to the current version. To install the new release directly, get it from the [distribution directory](https://dist.torproject.org/torbrowser/15.0.24/){target="_blank"} and expect a certificate expiry warning.
-- The 32-bit Linux end-of-life notice appears once more (tor-browser#44996); the 15.0 series has not wrapped up yet.
+- The 32-bit Linux end-of-life notice is still listed in this release's changelog (tor-browser#44996). That item targets the last 15.0 release, and which release actually closes the series will only be clear once 16.0 stable takes over.
 
 ## Tor Browser 16.0a12 (alpha)
 
@@ -39,7 +39,7 @@ Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebas
 - On desktop, onion services using self-signed certificates now show a security exception warning with a button to proceed (tor-browser#42065). WebXR is explicitly disabled (tor-browser#45278), and so is the toolbar share button (tor-browser#45133).
 - The build now passes `--disable-proxy-direct-failover` (tor-browser#45336), removing the fallback that sends traffic directly when the proxy fails.
 - On Android, the "Passwords" UI is gone (tor-browser#44548), search suggestions are disabled entirely (tor-browser#45269), and `about:config` opens again (tor-browser#45280).
-- Alpha releases are now signed with a new GPG subkey (tor-browser-build#41846). If you verify download signatures yourself, refresh the Tor Browser developers' key before checking.
+- The changelog lists an item for signing alpha releases with a new GPG subkey (tor-browser-build#41846), but the 16.0a12 release files are in fact still signed with the old subkey (`CAAE408AEBE2288E96FC5D5E157432CF78A65729`). The new subkey is first used by stable 15.0.24.
 - The Windows installer signing problem is not resolved yet, as the DigiCert EV certificate is still being renewed. Fresh installs of 16.0a11 or 16.0a12 raise a bad signature warning; upstream suggests installing 16.0a10 and letting automatic updates carry it forward.
 
 ## Tor Browser 15.0.23

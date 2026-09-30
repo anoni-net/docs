@@ -18,10 +18,11 @@ The app and the engine version independently. The cross-platform app is 6.x, whi
 > 2026-09-28 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}
 
 - The measurement engine stays on OONI Probe CLI v3.30.0, the same as 6.2.0. This is mainly a bug-fix release, and the release notes list no security fixes.
-- Measurements now carry an annotation for how DNS was resolved (`resolver_type`), with four values: private DNS (private_dns), VPN, system default and unknown. On Android the app detects whether Private DNS is turned on in system settings. The resolver affects how blocking is interpreted: the same site can give different results when looked up over encrypted Private DNS and over the ISP's default DNS.
-- Fixed measurement results disappearing after midnight.
+- Measurements now carry an annotation for how DNS was resolved (`resolver_type`), with four values: private DNS (private_dns), VPN, system default and unknown. On Android the app detects whether Private DNS is turned on in system settings; other platforms only report VPN or unknown. Users have reported that measuring with encrypted DNS turned on makes sites blocked by DNS tampering show up as reachable (ooni/probe#2857). OONI chose to collect this annotation first and assess the impact, and not to prompt users to turn encrypted DNS off, since doing so would expose them to more risk.
+- Fixed the results screen not showing results from after midnight until the app was reopened.
 - The minimum iOS version rises from iOS 14 to iOS 15, so devices still on iOS 14 cannot install this release.
-- Passport updated to 0.1.7. On macOS and iOS, the keychain accessibility for anonymous credentials now allows reads after the first unlock following a restart. Previously a locked device made the read fail (`errSecInteractionNotAllowed`), which background automated runs hit most often.
+- On iOS, anonymous credentials stored in the keychain are now accessible once the device has been unlocked for the first time after a restart. A background run after a restart but before that first unlock gets a failed keychain write (`errSecInteractionNotAllowed`); the app now defers saving instead of treating it as an error.
+- Passport updated to 0.1.7.
 - Dependency and translation updates.
 
 ## OONI Probe 6.2.0
