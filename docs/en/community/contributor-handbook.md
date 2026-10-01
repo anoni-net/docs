@@ -293,16 +293,20 @@ Maintainers merge. Contributors, including AI assistants working on a contributo
 
 ## Issue labels
 
-The label scheme, which is still settling:
+Issues use GitHub's default label set plus `l10n`. Opening an issue from one of the templates applies the type labels for you:
 
-- `type:docs` documentation
-- `type:bug` incorrect behaviour
-- `type:enhancement` improvement proposals
-- `type:question` discussion
-- `area:zh-TW` / `area:zh-CN` / `area:en` by language
-- `area:tools` / `area:scenarios` and the rest by section
-- `good first issue` for newcomers
-- `help wanted` where more hands are needed
+| Label | Use |
+|---|---|
+| `documentation` | New or revised page content |
+| `enhancement` | Improvement proposals, tool proposals, technical evaluations |
+| `bug` | Something on the site or in a tool behaves wrongly |
+| `l10n` | Translation and localisation |
+| `question` | Discussion |
+| `good first issue` | Well scoped, no need to know the whole repo first |
+| `help wanted` | More hands needed |
+| `duplicate`, `invalid`, `wontfix` | Reason for closing |
+
+There are no separate labels for language or section; put those in the issue title or body. If this is your first contribution, pick one from the [good first issue list](https://github.com/anoni-net/docs/labels/good%20first%20issue){target="_blank"} and leave a comment to claim it, so two people don't end up on the same task.
 
 Search existing issues before opening a new one.
 
