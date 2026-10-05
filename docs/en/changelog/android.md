@@ -44,7 +44,7 @@ Vendor support periods vary widely. Checking a model's committed support window 
 - On the chipset side the volume concentrates in Imagination Technologies (25) and MediaTek (21), all rated High.
 - The Android Security Bulletin itself does not mention any item under active exploitation. The separate Pixel Update Bulletin, published on 15 September, states that there are indications CVE-2026-58704 may be under limited, targeted exploitation, and CISA added it to its Known Exploited Vulnerabilities catalogue (KEV) the next day.
 - CVE-2026-58704 sits in the Pixel cellular modem: a logic error in a permission check that allows privilege escalation, rated High by Google. The attacker needs to be physically nearby, but no user interaction is required. Pixels are covered from the 2026-09-05 patch level, so any Pixel still on 2026-09-01 should update promptly. The Pixel bulletin only covers Google's own phones; other manufacturers publish their own.
-- On the GrapheneOS side, the CVEs patched ahead of schedule as of the 10 September release now cover what Google has slated for the October 2026 through March 2027 bulletins. See the [GrapheneOS monthly summary](./grapheneos.md).
+- On the GrapheneOS side, the CVEs patched ahead of schedule as of the 10 September release now cover what Google has slated for the October 2026 through March 2027 bulletins. The listed patch level rose to 2026-09-05 with the 2 October release. See the [GrapheneOS monthly summary](./grapheneos.md).
 
 ## August 2026
 

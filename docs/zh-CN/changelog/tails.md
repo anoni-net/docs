@@ -24,6 +24,20 @@ Tails 上的漏洞后果跟一般操作系统不同。取得管理员权限等�
 
 Tails 官方只区分紧急发布与排程发布，中间那一层是社群志愿者读完公告后补的判断。判断不确定时以较高一级为准。
 
+## Tails 7.14
+
+> 2026-09-30 · [上游公告](https://tails.net/news/version_7.14/){target="_blank"} · [7.13 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.13/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，带进 Tor Browser 与 tor 的安全更新。Tails 另外发了一份 7.13 的已知漏洞公告，要求尽快升级。上游没有提到已被实际利用。
+- Tor Browser 从 15.0.23 升至 15.0.24，基底换成 140.17.0esr 并从 Firefox 157 backport 安全修补，发布文件也改用新的 GPG 子密钥签名，细节见 [Tor 更新日志](./tor.md)。
+- Tor 客户端升至 0.4.9.13，那是一次带十个 TROVE 编号的安全释出，其中一项让恶意的 onion 服务有机会打破 Tor Browser 的第一方隔离，逐条整理在 [tor daemon 更新日志](./tor-daemon.md)。
+- 已知漏洞公告同样没有列出清单，只指向 Tor Browser 的发布说明与 7.13 之后的 Debian 安全公告。拿 7.14 的软件包清单对过 9 月 16 日之后发布的 Debian 公告，装进去的有九份。xdg-dbus-proxy（DSA-6510-1）的消息过滤可以被绕过，恶意的 Flatpak 应用可能在沙箱外执行任意代码。Flatpak 本身（DSA-6524-1）另有 8 个 CVE，后果是拒绝服务或信息泄露。
+- 打开文件就可能触发的有四份：HEIF 与 AVIF 图像的 libheif（DSA-6523-1）、PostScript 与 PDF 的 Ghostscript（DSA-6516-1）、LibreOffice（DSA-6512-1）与 GIMP（DSA-6509-1），处理恶意文件时可能执行任意代码。rsync（DSA-6527-1）升到 3.5.0，一次修复了 33 个 CVE，其中有本地提权。另外两份是 BIND 的 DNS 工具（DSA-6505-1）与内核。
+- 内核从 6.12.107 升到 6.12.111，对应 Debian 9 月 29 日的内核安全公告 DSA-6528-1。
+- 没赶上这一版的有 Debian 9 月 30 日的 OpenSSL 公告（DSA-6531-1，13 个 CVE），7.14 装的仍是修补前的版本，同样没赶上的还有 pcre2（DSA-6530-1）与 WebKitGTK（DSA-6534-1）。
+- 修掉以韩文启动会话时默认键盘输入法错误的问题。
+- 可从 Tails 7.0 以后版本自动升级。全新安装会清除现有的 Persistent Storage。
+
 ## Tails 7.13
 
 > 2026-09-16 · [上游公告](https://tails.net/news/version_7.13/){target="_blank"} · [7.12 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.12/){target="_blank"}

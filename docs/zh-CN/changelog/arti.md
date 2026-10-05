@@ -27,8 +27,8 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 | 流量控制与拥塞控制 | ✅ 2.6.0 起永远启用，`flowctl-cc` 这个开关已移除 | 2.4.0 转 stable、2.6.0（2026-09）默认化 |
 | Counter Galois Onion 加密（CGO） | ✅ 2.6.0 起永远启用 | 2.6.0（2026-09） |
 | 嵌入非 Rust 语言（C FFI） | 🟡 RPC client 已有 C 友好接口，完整 FFI 规划中 | 进行中 |
-| 中继（relay） | 🟡 开发中，官方明说不要拿去接公开网络 | 2.0.0（2026-02）到 2.6.0 持续推进 |
-| 目录权威（directory authority） | 🟡 开发中，文档解析与 microdescriptor 计算已有雏形 | 2.0.0（2026-02）到 2.6.0 持续推进 |
+| 中继（relay） | 🟡 开发中，官方明说不要拿去接公开网络 | 2.0.0（2026-02）到 2.7.0 持续推进 |
+| 目录权威（directory authority） | 🟡 开发中，文档解析与 microdescriptor 计算已有雏形 | 2.0.0（2026-02）到 2.7.0 持续推进 |
 | control-port 协议兼容 | ⬜ 不另行实现，改以 RPC 取代 | — |
 
 图例：✅ 已完成　🟡 开发中　⬜ 不实现
@@ -55,6 +55,20 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 已完成的九项集中在最底层：接受连入通道、双向通道认证、处理与递送 relay cell、CREATE2 与 CREATE\_FAST、EXTEND2、监听 ORPort。也就是说电路建得起来，但一个中继要能真的上线所需的其他东西几乎都还没开始，密钥生成与轮换、发布 router descriptor、带宽上限这些都还在待办。
 
 那份清单自己注明 2026 年 8 月 11 日之后团队还没回头勾选，所以实际进度可能比表上更前面，2.6.0 就补上了 `ntor-v3` 的 CREATE2 握手与中继 DNS 解析器的初步设计。要追精确状态得看 [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"}。
+
+## Arti 2.7.0
+
+> 2026-10-01 · [上游公告](https://blog.torproject.org/arti_2_7_0_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- 一次修复了 12 个安全问题，High 1 个、Medium 5 个、Low 6 个，影响 `arti`、`arti-client`、`arti-ureq` 等软件包。上游没有提到已被实际利用。
+- High 那一项在 half-stream（一端已经关闭、另一端可能还在发送数据的流）的处理，可以被用来耗尽内存，也能形成上游所称的 dropped cells 侧信道攻击（TROVE-2026-047）。
+- Medium 五项多数跟目录数据有关。解析与解压共识文档（consensus，列出整个 Tor 网络有哪些中继的文档）与它的差异文件时，可能占用过多内存（TROVE-2026-028、029）。解析器比目录权威严格，会读不了共识（TROVE-2026-048）。目录镜像可以让 Arti 一直等不到 HTTP 头，更新不了共识与描述符（TROVE-2026-046）。另一项在 RESOLVED 响应里过滤掉本地地址（TROVE-2026-044）。
+- 上游更新了安全策略，不再为 Arti 的安全问题申请 CVE 编号，改用 TROVE、RUSTSEC 这类标识符。为发行版打包 Arti 的人要改用这些编号跟踪。
+- 最低支持的 Rust 版本提高到 1.92。RPC 新增读取与修改配置的功能。
+- 中继端进展：启用以 `DirMgr` 为基础的临时目录服务器后端，中继电路可以收发流层级的 SENDME（流量控制用的确认消息），中继 DNS 解析器有了初步实现（目前处理 RESOLVE），另外为之后的带宽限速加上带宽池工具。
+- 目录权威端进展：为「从投票生成共识」的算法打基础，目录服务器可以把共识写进数据库。
+- 客户端这一侧放宽 pathbias-lite（检测电路异常失败、怀疑入口守卫有问题的机制）触发守卫限制的阈值，备用中继列表更新到 9 月 8 日生成的版本。
+- `README_relay.md` 这一版没有更新，上面「中继端做到哪里」的表格维持 8 月那份。
 
 ## Arti 2.6.0
 

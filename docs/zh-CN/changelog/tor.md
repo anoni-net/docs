@@ -18,6 +18,20 @@ digest:
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 16.0a13（Alpha 测试通道）
+
+> 2026-10-01 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a13/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道仅供测试，一般用户请继续使用稳定版（15.x）。
+- Firefox 基底 rebase 至 153.4.0esr（tor-browser#45359），并从 Firefox 157 backport 安全修补（tor-browser#45366），Android 版 GeckoView 同步。内置的 tor daemon 升到 0.4.9.13，NoScript 升至 13.6.34.90101984。
+- 内置的 OpenSSL 升至 3.5.9，覆盖 OpenSSL 9 月 29 日公告的 14 个问题，评为 High 的那一项在 DTLS。稳定版 15.0.24 的更新记录里没有这一项。
+- 停用跳过 proxy 解析的捷径（tor-browser#45333），Reporting API 维持停用（tor-browser#45080），并停用 Firefox 拦截有害扩展网址的机制（tor-browser#44815）。更新记录没有说明这几项的理由。
+- 跟稳定版 15.0.24 同一批的两项：NoScript 解析网站时把 onion 别名算进去（tor-browser#45368），以及内容修补的 CharacterData 与 Range 拦截点（tor-browser#45371）。
+- 桌面版连到自签证书的 onion 服务时，错误页隐藏验证器与相关错误（tor-browser#45343）。onion 网站错误页点「Learn more…」会崩溃的问题修掉了（tor-browser#45346），语言偏好的自定义移植到新版设置界面（tor-browser#45360）。
+- Android 版在功能稳定之前停用导入书签（tor-browser#45363），分享选取文字只能用一次的问题也修好了（Bug 40627）。
+- Alpha 从这一版起实际改用新的 GPG 子密钥签名（tor-browser-build#41847），实测发布文件的签名是 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，跟稳定版 15.0.24 相同。
+- Windows 版的构建流程改用新的签名证书（tor-browser-build#41890）。公告没有说明 Windows 安装包的签名警告是否已经解决。
+
 ## Tor Browser 15.0.24
 
 > 2026-09-29 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15024/){target="_blank"}
