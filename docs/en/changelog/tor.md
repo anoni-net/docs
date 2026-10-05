@@ -24,7 +24,7 @@ Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebas
 
 - <span class="chan-tag chan-tag--alpha">Alpha</span>The alpha channel is for testing only. Most people should stay on the stable release (15.x).
 - The Firefox base is rebased onto 153.4.0esr (tor-browser#45359) with security fixes backported from Firefox 157 (tor-browser#45366); GeckoView on Android follows. The bundled tor daemon moves to 0.4.9.13 and NoScript to 13.6.34.90101984.
-- The bundled OpenSSL moves to 3.5.9, covering the 14 issues in OpenSSL's 29 September advisory; the one rated High is in DTLS. The stable 15.0.24 changelog has no such item.
+- The bundled OpenSSL moves to 3.5.9, covering the 13 issues in OpenSSL's 29 September advisory that affect the 3.5 series (the advisory lists 14; the other affects only 4.0); the one rated High is in DTLS. The stable 15.0.24 changelog has no such item.
 - The fast path that skips proxy resolution is disabled (tor-browser#45333), the Reporting API stays disabled (tor-browser#45080), and Firefox's harmful add-on URL blocking is disabled (tor-browser#44815). The changelog does not give reasons for these.
 - Two items shared with stable 15.0.24: NoScript now accounts for onion aliases when parsing sites (tor-browser#45368), and the CharacterData and Range hooks for content patches (tor-browser#45371).
 - On desktop, the error page for an onion service with a self-signed certificate hides the verifier and related error (tor-browser#45343). A crash when clicking "Learn more…" on the onion site error page is fixed (tor-browser#45346), and the language preference customisation is ported to the new settings design (tor-browser#45360).

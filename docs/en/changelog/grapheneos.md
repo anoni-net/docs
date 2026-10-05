@@ -19,7 +19,7 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 
 > Releases `2026100200` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
-- Unprivileged hardware keepalives are disabled. Android lets apps ask the network chip to send connection keepalive packets on their behalf, and GrapheneOS states this creates a VPN leak, so this release turns it off.
+- Unprivileged hardware keepalives (keepalive packets the network chip sends on an app's behalf) are disabled. GrapheneOS states they create a VPN leak, so this release turns them off.
 - The listed security patch level rises to 2026-09-05. The release notes say the 2026-09-05 patches had already been in place for a while, and the previous release brought in all the Pixel firmware and driver updates from Android 17 QPR1, so the listed level now reflects that. The cellular modem flaw CVE-2026-58704 from the September entry sits in the 2026-09-05 level; the notes still do not name it.
 - The Pixel kernel restores the Android 17 (CP2A) mmap read-ahead behaviour, fixing stutter under memory pressure caused by an upstream change in QPR1.
 - Fixed an upstream Android bug that set the last-modified time of files restored from Android backups to January 1970, because seconds were passed to an API expecting milliseconds.

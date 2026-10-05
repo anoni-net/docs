@@ -24,7 +24,7 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 
 - <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道仅供测试，一般用户请继续使用稳定版（15.x）。
 - Firefox 基底 rebase 至 153.4.0esr（tor-browser#45359），并从 Firefox 157 backport 安全修补（tor-browser#45366），Android 版 GeckoView 同步。内置的 tor daemon 升到 0.4.9.13，NoScript 升至 13.6.34.90101984。
-- 内置的 OpenSSL 升至 3.5.9，覆盖 OpenSSL 9 月 29 日公告的 14 个问题，评为 High 的那一项在 DTLS。稳定版 15.0.24 的更新记录里没有这一项。
+- 内置的 OpenSSL 升至 3.5.9，覆盖 OpenSSL 9 月 29 日公告里影响 3.5 系列的 13 个问题（公告共 14 个，另一个只影响 4.0），评为 High 的那一项在 DTLS。稳定版 15.0.24 的更新记录里没有这一项。
 - 停用跳过 proxy 解析的捷径（tor-browser#45333），Reporting API 维持停用（tor-browser#45080），并停用 Firefox 拦截有害扩展网址的机制（tor-browser#44815）。更新记录没有说明这几项的理由。
 - 跟稳定版 15.0.24 同一批的两项：NoScript 解析网站时把 onion 别名算进去（tor-browser#45368），以及内容修补的 CharacterData 与 Range 拦截点（tor-browser#45371）。
 - 桌面版连到自签证书的 onion 服务时，错误页隐藏验证器与相关错误（tor-browser#45343）。onion 网站错误页点「Learn more…」会崩溃的问题修掉了（tor-browser#45346），语言偏好的自定义移植到新版设置界面（tor-browser#45360）。

@@ -60,10 +60,10 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 
 > 2026-10-01 · [上游公告](https://blog.torproject.org/arti_2_7_0_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
 
-- 一次修复了 12 个安全问题，High 1 个、Medium 5 个、Low 6 个，影响 `arti`、`arti-client`、`arti-ureq` 等软件包。上游没有提到已被实际利用。
+- 一次修复了 12 个安全问题，High 1 个、Medium 5 个、Low 6 个，影响 `arti`、`arti-client`、`arti-ureq` 等软件包。上游建议这三者的用户尽快升级，架设 onion 服务的人尤其要升。上游没有提到已被实际利用。
 - High 那一项在 half-stream（一端已经关闭、另一端可能还在发送数据的流）的处理，可以被用来耗尽内存，也能形成上游所称的 dropped cells 侧信道攻击（TROVE-2026-047）。
-- Medium 五项多数跟目录数据有关。解析与解压共识文档（consensus，列出整个 Tor 网络有哪些中继的文档）与它的差异文件时，可能占用过多内存（TROVE-2026-028、029）。解析器比目录权威严格，会读不了共识（TROVE-2026-048）。目录镜像可以让 Arti 一直等不到 HTTP 头，更新不了共识与描述符（TROVE-2026-046）。另一项在 RESOLVED 响应里过滤掉本地地址（TROVE-2026-044）。
-- 上游更新了安全策略，不再为 Arti 的安全问题申请 CVE 编号，改用 TROVE、RUSTSEC 这类标识符。为发行版打包 Arti 的人要改用这些编号跟踪。
+- Medium 五项多数跟目录数据有关。解析与解压共识文档（consensus，列出整个 Tor 网络有哪些中继的文档）与它的差异文件时，可能占用过多内存（TROVE-2026-028、029）。解析器比目录权威严格，会读不了共识（TROVE-2026-048）。目录镜像可以让 Arti 一直等不到 HTTP 头，更新不了共识与描述符（TROVE-2026-046）。另一项在 RESOLVED 响应里过滤掉内部地址（TROVE-2026-044）。
+- 上游把安全策略移进 repo 并更新内容，写明不为 Arti 的安全问题申请 CVE 编号，这一点列在给打包者的通知里。策略另外写明 TROVE 只发给 `arti` 这类稳定的产物，RUSTSEC 只发给 High 以上的问题，Medium 以下只记在 issue tracker。
 - 最低支持的 Rust 版本提高到 1.92。RPC 新增读取与修改配置的功能。
 - 中继端进展：启用以 `DirMgr` 为基础的临时目录服务器后端，中继电路可以收发流层级的 SENDME（流量控制用的确认消息），中继 DNS 解析器有了初步实现（目前处理 RESOLVE），另外为之后的带宽限速加上带宽池工具。
 - 目录权威端进展：为「从投票生成共识」的算法打基础，目录服务器可以把共识写进数据库。
