@@ -33,6 +33,14 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 两个浏览器都会在后台下载更新，但要重新启动浏览器才会生效。长时间不关浏览器的人，可能早就下载了新版却一直在运行旧版。Chrome 在地址栏输入 `chrome://settings/help` 可以查看版本，Firefox 在菜单的「帮助」里点「关于 Firefox」。
 
+## Chrome 2026 年 10 月
+
+> 2026-10-01 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>10 月 1 日的 154.0.8037.97 修复了 11 个安全问题，Critical 1 个、High 9 个。Google 没有标注任何一项已被实际利用。
+- Critical 那一项是 WebGL（网页调用显卡绘制 3D 图形的接口）的越界写入（CVE-2026-103628）。High 里有一个 V8 的类型混淆（CVE-2026-103625），其余分散在 FileSystem、SVG、Skia、MediaStream 等组件。
+- 九月那两个已被利用的 V8 漏洞早在 152.0.7977.82 与 153.0.8010.36 修复，更新到这一版同样覆盖。
+
 ## Chrome 2026 年 9 月
 
 > 2026-09-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}

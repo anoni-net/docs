@@ -27,8 +27,8 @@ Arti is the Tor Project's effort, started in 2021, to rewrite the original C imp
 | Flow control and congestion control | ✅ Always on since 2.6.0; the `flowctl-cc` flag is gone | Stable in 2.4.0, on by default in 2.6.0 (2026-09) |
 | Counter Galois Onion cryptography (CGO) | ✅ Always on since 2.6.0 | 2.6.0 (2026-09) |
 | Embedding from non-Rust languages (C FFI) | 🟡 RPC client already has a C-friendly interface; full FFI planned | In progress |
-| Relay | 🟡 In development; upstream says explicitly not to point it at the public network | 2.0.0 (2026-02) through 2.6.0 |
-| Directory authority | 🟡 In development; document parsing and microdescriptor generation have early shape | 2.0.0 (2026-02) through 2.6.0 |
+| Relay | 🟡 In development; upstream says explicitly not to point it at the public network | 2.0.0 (2026-02) through 2.7.0 |
+| Directory authority | 🟡 In development; document parsing and microdescriptor generation have early shape | 2.0.0 (2026-02) through 2.7.0 |
 | control-port protocol compatibility | ⬜ Not reimplemented; replaced by RPC | — |
 
 Legend: ✅ Done　🟡 In development　⬜ Not implemented
@@ -55,6 +55,20 @@ Per that list, as of August 2026:
 The nine finished items sit at the lowest layer: accepting incoming channels, bidirectional channel authentication, processing and delivering relay cells, CREATE2 and CREATE\_FAST, EXTEND2, and listening on ORPort. Circuits can be built, in other words, but almost everything else a relay needs to actually go live is untouched, including key generation and rotation, publishing router descriptors, and bandwidth caps.
 
 The list notes that the team had not revisited the checkboxes since 11 August 2026, so real progress may run ahead of it: 2.6.0 alone added `ntor-v3` CREATE2 handshakes and an initial design for the relay DNS resolver. For exact status, the [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"} is authoritative.
+
+## Arti 2.7.0
+
+> 2026-10-01 · [Upstream announcement](https://blog.torproject.org/arti_2_7_0_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- Twelve security fixes in one release: one High, five Medium and six Low, affecting `arti`, `arti-client`, `arti-ureq` and other crates. Upstream encourages users of those three to upgrade as soon as possible, especially anyone running onion services. Upstream does not mention active exploitation.
+- The High one is in the handling of half-streams (streams one side has closed while the other may still be sending). They could be used to exhaust memory and to mount what upstream calls a "dropped cells" side-channel attack (TROVE-2026-047).
+- Most of the five Medium fixes concern directory data. Parsing and decompressing the consensus (the document listing every relay in the Tor network) and its diffs could use excessive memory (TROVE-2026-028, 029). The parser was stricter than the directory authorities' and could fail to read the consensus (TROVE-2026-048). A directory mirror could stall Arti on the HTTP headers and keep it from updating the consensus and descriptors (TROVE-2026-046). The last one filters internal addresses out of RESOLVED responses (TROVE-2026-044).
+- Upstream moved its security policy into the repository and updated it to state that it does not request CVE identifiers for Arti security issues, flagged in a notice for packagers. The policy also says TROVEs are only published for stable artifacts such as `arti`, RUSTSEC advisories only for High and above, and Medium and lower issues are recorded only in the issue tracker.
+- The minimum supported Rust version rises to 1.92. RPC gains support for inspecting and modifying the configuration.
+- Relay progress: the temporary `DirMgr`-based directory server backend is enabled, relay circuits can send and receive stream-level SENDMEs (the acknowledgements used for flow control), the relay DNS resolver has an initial implementation (handling RESOLVE for now), and a bandwidth pool utility lays groundwork for future rate limiting.
+- Directory authority progress: groundwork for the consensus-from-votes algorithm, and the directory server can now store a consensus in its database.
+- On the client side, the pathbias-lite thresholds (the mechanism that flags unusual circuit failures and suspects the guard) for triggering guard restrictions are relaxed, and the fallback relay list is refreshed to a version generated on 8 September.
+- `README_relay.md` was not updated in this release, so the table under "How far the relay side has got" still reflects the August list.
 
 ## Arti 2.6.0
 

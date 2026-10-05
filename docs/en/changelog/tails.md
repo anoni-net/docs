@@ -24,6 +24,20 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.14
+
+> 2026-09-30 · [Upstream announcement](https://tails.net/news/version_7.14/){target="_blank"} · [Known vulnerabilities in 7.13](https://tails.net/security/known_security_vulnerabilities_in_7.13/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that brings in security updates to Tor Browser and tor. Tails also published a known-vulnerabilities notice for 7.13 asking users to upgrade as soon as possible. Upstream does not mention active exploitation.
+- Tor Browser moves from 15.0.23 to 15.0.24, rebased onto 140.17.0esr with security fixes backported from Firefox 157, and its release files are now signed with a new GPG subkey; see the [Tor changelog](./tor.md).
+- The Tor client moves to 0.4.9.13, a security release carrying ten TROVE identifiers, one of which could let a malicious onion service break Tor Browser's first-party isolation; see the [tor daemon changelog](./tor-daemon.md).
+- The known-vulnerabilities notice again gives no list, only pointing to the Tor Browser release notes and the Debian security advisories since 7.13. Checking the 7.14 package list against Debian advisories published after 16 September, nine besides tor are included. xdg-dbus-proxy (DSA-6510-1) had message filtering that could be bypassed, letting a malicious Flatpak app potentially execute code outside its sandbox. Flatpak itself (DSA-6524-1) has eight more CVEs leading to denial of service or information disclosure.
+- Four can be triggered just by opening a file: libheif for HEIF and AVIF images (DSA-6523-1), Ghostscript for PostScript and PDF (DSA-6516-1), LibreOffice (DSA-6512-1) and GIMP (DSA-6509-1), where a malicious file could lead to arbitrary code execution. rsync (DSA-6527-1) moves to 3.5.0 and fixes 33 CVEs whose combined impact includes local privilege escalation. The remaining two are the BIND DNS tools (DSA-6505-1) and the kernel.
+- The kernel moves from 6.12.107 to 6.12.111, matching Debian's 29 September kernel advisory DSA-6528-1.
+- Debian's 30 September OpenSSL advisory (DSA-6531-1, 13 CVEs) and 29 September pcre2 advisory (DSA-6530-1) missed this release, and 7.14 still ships the pre-fix versions. The WebKitGTK (DSA-6534-1) and libpng (DSA-6537-1) advisories came on 1 October, after 7.14 was released.
+- Fixed the default keyboard input method when starting a session in Korean.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.13
 
 > 2026-09-16 · [Upstream announcement](https://tails.net/news/version_7.13/){target="_blank"} · [Known vulnerabilities in 7.12](https://tails.net/security/known_security_vulnerabilities_in_7.12/){target="_blank"}

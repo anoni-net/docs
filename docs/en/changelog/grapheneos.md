@@ -15,12 +15,24 @@ GrapheneOS updates automatically in the background, so ordinary users need to do
 
 Source data comes from the [official releases page](https://grapheneos.org/releases){target="_blank"}. The official atom feed keeps only the last 20 entries (roughly four months), so anything older has to be looked up on the site.
 
+## October 2026
+
+> Releases `2026100200` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+
+- Unprivileged hardware keepalives (keepalive packets the network chip sends on an app's behalf) are disabled. GrapheneOS states they create a VPN leak, so this release turns them off.
+- The listed security patch level rises to 2026-09-05. The release notes say the 2026-09-05 patches had already been in place for a while, and the previous release brought in all the Pixel firmware and driver updates from Android 17 QPR1, so the listed level now reflects that. The cellular modem flaw CVE-2026-58704 from the September entry sits in the 2026-09-05 level; the notes still do not name it.
+- The Pixel kernel restores the Android 17 (CP2A) mmap read-ahead behaviour, fixing stutter under memory pressure caused by an upstream change in QPR1.
+- Fixed an upstream Android bug that set the last-modified time of files restored from Android backups to January 1970, because seconds were passed to an API expecting milliseconds.
+- All four kernel lines (6.1, 6.6, 6.12, 6.18) moved to the latest GKI LTS revisions, with 6.18 reaching 6.18.33.
+- Vanadium moves to 154.0.8037.92.0, matching Chrome's 29 September stable release.
+- Device coverage runs from Pixel 6 to Pixel 10a, unchanged.
+
 ## September 2026
 
 > Releases `2026090500`, `2026090700`, `2026091000`, `2026091700`, `2026091900`, `2026092500` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
 - The security patch level advanced to the full 2026-09-01 Pixel level on 10 September. Google's September bulletin, published on 8 September, carries vulnerability details again; that month is covered in [Android Security Patch Levels](./android.md).
-- The Pixel Update Bulletin of 15 September says the cellular modem flaw CVE-2026-58704 may be under targeted exploitation (details in [Android Security Patch Levels](./android.md)), with Google's fix in the 2026-09-05 patch level. GrapheneOS release notes up to the 25 September release mention neither 2026-09-05 nor this CVE. The 17 September release backported cellular modem firmware from Android 17 QPR1 and the 25 September release moved the whole hardware support stack to QPR1, but the notes do not say whether either covers this fix.
+- The Pixel Update Bulletin of 15 September says the cellular modem flaw CVE-2026-58704 may be under targeted exploitation (details in [Android Security Patch Levels](./android.md)), with Google's fix in the 2026-09-05 patch level. GrapheneOS release notes up to the 25 September release mention neither 2026-09-05 nor this CVE. The 17 September release backported cellular modem firmware from Android 17 QPR1 and the 25 September release moved the whole hardware support stack to QPR1, but the notes do not say whether either covers this fix. The 2 October release raised the listed patch level to 2026-09-05 (see October 2026).
 - The Dialer gained automatic call recording. The 5 September release shipped it with a per-call opt-out covering both incoming and outgoing calls, and an on-screen notice while recording is active. The 10 September release added an option to record every contact by default with a list of excluded numbers, and declared the microphone and phone foreground service types to fix recording not starting when a call is answered over Bluetooth. From 17 September, anyone turning on automatic recording for the first time gets this exclusion-list mode by default instead of adding contacts one by one. Call recording carries legal constraints in many places, so check the rules where you are before enabling it.
 - Private Space closed two upstream privacy gaps. App drawer search no longer lists apps inside a locked Private Space, something the Pixel Launcher avoids only because it delegates search to Android System Intelligence. Settings also gained a warning that Android's built-in option for hiding a Private Space is superficial and has several known detection tricks. Anyone treating a Private Space as genuinely hidden should reassess.
 - The 17 September release added clipboard read restrictions, set per app or as a global default. With it on, an app cannot read the clipboard by itself; pasting goes through the system selection toolbar, the keyboard, keyboard shortcuts or accessibility services, so the user always initiates it. Clipboards often hold passwords and one-time codes, and this keeps background apps away from them. Blocked reads trigger a notice, and on 19 September the minimum interval between repeats of that notice dropped from one minute to six seconds; anyone who finds it noisy can switch the notice off per app. The 25 September release improved the settings interface for this feature. The bundled keyboard also gained a paste chip that offers recently copied content.

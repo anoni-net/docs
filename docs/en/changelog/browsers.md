@@ -33,6 +33,14 @@ Chrome ships a minor version with security fixes nearly every week. Major versio
 
 Both browsers download updates in the background, but an update only takes effect after the browser restarts. Anyone who keeps their browser open for days may have the new version downloaded while still running the old one. In Chrome, type `chrome://settings/help` into the address bar to see the version; in Firefox, open "Help" in the menu and choose "About Firefox".
 
+## Chrome October 2026
+
+> 2026-10-01 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>154.0.8037.97 on 1 October fixed 11 security issues, one Critical and nine High. Google does not flag any of them as actively exploited.
+- The Critical one is an out of bounds write in WebGL (CVE-2026-103628), the interface web pages use to draw 3D graphics on the graphics card. The High ones include a type confusion in V8 (CVE-2026-103625); the rest are spread across FileSystem, SVG, Skia, MediaStream and other components.
+- The two exploited V8 flaws from September were already fixed in 152.0.7977.82 and 153.0.8010.36, so this release covers them too.
+
 ## Chrome September 2026
 
 > 2026-09-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/09/){target="_blank"}

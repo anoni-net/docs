@@ -18,6 +18,20 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 16.0a13 (alpha)
+
+> 2026-10-01 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a13/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>The alpha channel is for testing only. Most people should stay on the stable release (15.x).
+- The Firefox base is rebased onto 153.4.0esr (tor-browser#45359) with security fixes backported from Firefox 157 (tor-browser#45366); GeckoView on Android follows. The bundled tor daemon moves to 0.4.9.13 and NoScript to 13.6.34.90101984.
+- The bundled OpenSSL moves to 3.5.9, covering the 13 issues in OpenSSL's 29 September advisory that affect the 3.5 series (the advisory lists 14; the other affects only 4.0); the one rated High is in DTLS. The stable 15.0.24 changelog has no such item.
+- The fast path that skips proxy resolution is disabled (tor-browser#45333), the Reporting API stays disabled (tor-browser#45080), and Firefox's harmful add-on URL blocking is disabled (tor-browser#44815). The changelog does not give reasons for these.
+- Two items shared with stable 15.0.24: NoScript now accounts for onion aliases when parsing sites (tor-browser#45368), and the CharacterData and Range hooks for content patches (tor-browser#45371).
+- On desktop, the error page for an onion service with a self-signed certificate hides the verifier and related error (tor-browser#45343). A crash when clicking "Learn more…" on the onion site error page is fixed (tor-browser#45346), and the language preference customisation is ported to the new settings design (tor-browser#45360).
+- On Android, bookmark import is disabled until it is stable (tor-browser#45363), and sharing selected text no longer works only once (Bug 40627).
+- Alpha releases are now actually signed with the new GPG subkey (tor-browser-build#41847). The release files' signature checks out as `022DA248432D2A0E0F54E65E316C1FACD62D07D9`, the same as stable 15.0.24.
+- The Windows build now uses a new signing certificate (tor-browser-build#41890). The announcement does not say whether the signature warning on Windows installers is resolved.
+
 ## Tor Browser 15.0.24
 
 > 2026-09-29 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15024/){target="_blank"}
