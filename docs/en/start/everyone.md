@@ -22,7 +22,7 @@ The [passphrase and password generator](../utils/passphrase.md) runs in your bro
 
 Location, contacts, photos. Most apps ask for far more than they need, and refusing rarely affects use. Most people simply have not had time to go through them.
 
-[How platforms collect your data](../basics/platform-tracking.md) covers how the collected pieces get combined.
+[Phone privacy settings, step by step](../tools/phone-privacy-settings.md) walks you through them in numbered steps, in about thirty minutes. [How platforms collect your data](../basics/platform-tracking.md) covers how the collected pieces get combined.
 
 ### Claims about private browsing and VPNs, with no way to judge them
 

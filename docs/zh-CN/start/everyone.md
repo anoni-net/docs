@@ -22,7 +22,7 @@ icon: material/account-outline
 
 位置、通讯录、相册，多数 app 要的权限远超过它需要的。关掉不影响使用，很多人只是没有时间逐一检查。
 
-[社群平台怎么收集你的数据](../basics/platform-tracking.md)说明收集到的东西怎么被组合起来。
+[手机隐私设置逐步指引](../tools/phone-privacy-settings.md)照编号带你逐项调整，约三十分钟。[社群平台怎么收集你的数据](../basics/platform-tracking.md)说明收集到的东西怎么被组合起来。
 
 ### 看到「隐私浏览窗口」、「VPN」的说法，不确定有没有用
 

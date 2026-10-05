@@ -114,7 +114,7 @@ passkey 值得補一句現況。獨立普查顯示它的覆蓋率遠低於廠商
 
 ### 手機權限與廣告識別碼
 
-關掉廣告識別碼、通訊錄上傳、精確位置，逐項檢查權限清單。各平台的實際路徑與每一級擋不掉什麼，見 [社群平台怎麼收集你的資料](../basics/platform-tracking.md) 的〈你能做什麼〉。
+關掉廣告識別碼、通訊錄上傳、精確位置，逐項檢查權限清單。iPhone、Android、Samsung Galaxy 各自要按哪裡，照 [手機隱私設定逐步指引](../tools/phone-privacy-settings.md) 一步一步做，約三十分鐘。每一級擋不掉什麼，見 [社群平台怎麼收集你的資料](../basics/platform-tracking.md) 的〈你能做什麼〉。
 
 想把「推薦準得可疑」變成看得到的事實，同一頁的〈直接看平台手上有什麼〉給了廣告興趣分類與資料匯出的入口。打開自己的檔案，比讀任何解釋都直接。
 
@@ -237,6 +237,7 @@ Signal 這類工具保護的是內容，不保護「誰在什麼時候聯繫誰�
 - [社群平台怎麼收集你的資料](../basics/platform-tracking.md)：商業資料收集這一條線的完整版
 - [監控現在做得到什麼](../basics/surveillance-capability.md)：商業收集與針對性調查兩種對手的能力邊界，另加電信保存期限與商用間諜軟體
 - [密碼管理器入門](../tools/password-manager.md)：第一層前兩項的工具選擇與備援
+- [手機隱私設定逐步指引](../tools/phone-privacy-settings.md)：第二層的手機設定，照編號在自己的手機上操作
 - [Metadata 是什麼，為什麼重要](../basics/metadata.md)：為什麼內容加密之後仍然留下大量資訊
 - [怎麼維持多個網路身分](../basics/multiple-identities.md)：帳號分層與身分退場
 - [緊急求救](../help/index.md)：錢已經匯給詐騙、帳號被盜、裝置遺失、跟蹤騷擾、個資被公開的立即應對

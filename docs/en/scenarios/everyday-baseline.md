@@ -114,7 +114,7 @@ This is where the first adversary gets addressed — the one behind recommendati
 
 ### Phone permissions and the advertising identifier
 
-Turn off the advertising ID, contact-list upload, and precise location, then walk the permission list app by app. Per-platform steps, and a clear statement of what none of them stops, are in [how platforms collect your data](../basics/platform-tracking.md).
+Turn off the advertising ID, contact-list upload, and precise location, then walk the permission list app by app. Where to tap on iPhone, Android, and Samsung Galaxy is in [phone privacy settings, step by step](../tools/phone-privacy-settings.md), about thirty minutes in numbered steps. What none of these settings stops is in [how platforms collect your data](../basics/platform-tracking.md).
 
 To turn "the recommendations know too much" into something you can see, the same page's section on reading your own file points to ad-interest categories and data export. Opening your own record beats any description of the mechanism.
 
@@ -209,6 +209,7 @@ The baseline above assumes no specific adversary. When one of the following beco
 - [Threat modeling](../basics/threat-model.md) — what to protect, from whom, at what cost; the basis for the ordering on this page
 - [How platforms collect your data](../basics/platform-tracking.md) — the full version of the commercial-collection thread
 - [What surveillance can actually do](../basics/surveillance-capability.md) — capability limits for the commercial-collection and targeted-investigation adversaries above, plus telecom retention and commercial spyware
+- [Phone privacy settings, step by step](../tools/phone-privacy-settings.md) — the tier-two phone settings as numbered steps to follow on your own phone
 - [Why metadata matters](../basics/metadata.md) — why encrypting content still leaves a great deal behind
 - [Maintaining multiple online identities](../basics/multiple-identities.md) — account layering and retiring an identity
 - [My preparation checklist](../utils/checklist.md) — this page's items as a list you can tick off, encrypted with a passkey and kept on your device

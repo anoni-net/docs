@@ -46,6 +46,7 @@ icon: material/toolbox-outline
 
 想从通讯、协作、账号、金流、AI 使用先补齐基础的人，从这群开始。各篇主题各自独立，不必照顺序。
 
+- [手机隐私设置逐步指引](./phone-privacy-settings.md)：拿着自己的手机照编号调整，iPhone、Android、Samsung Galaxy 各有对照的路径，约三十分钟。
 - [匿名通讯工具比较](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端对端加密、Metadata 与身分模型差异。
 - [什么是 CryptPad](./what-is-cryptpad.md)：服务器读不到内容的在线协作办公套件，文档在浏览器端就完成加密，社区自建站点内建简体与正体中文界面。
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。

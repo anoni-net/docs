@@ -1735,6 +1735,7 @@
 	#iOS-2661iPadOS-2661同日另有-18710
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
+	#iOS-2671iPadOS-2671同日另有-2701
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的機器走哪一條線
@@ -1746,6 +1747,7 @@
 	#macOS-Tahoe-2661Sequoia-1579Sonoma-1489
 	#macOS-Tahoe-2662
 	#macOS-Tahoe-266Sequoia-1578Sonoma-1488
+	#macOS-Tahoe-2671Sequoia-1581同日另有-Golden-Gate-2701
 	#macOS-安全更新
 	#三條維護線
 	#急迫程度怎麼判斷
@@ -1769,6 +1771,7 @@
 	#OONI-Probe-610
 	#OONI-Probe-611
 	#OONI-Probe-620
+	#OONI-Probe-621
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
@@ -1815,6 +1818,7 @@
 	#Tor-Browser-15021
 	#Tor-Browser-15022
 	#Tor-Browser-15023
+	#Tor-Browser-15024
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -3671,6 +3675,7 @@
 	#iOS-266-iPadOS-266
 	#iOS-2661-iPadOS-2661-18710-shipped-the-same-day
 	#iOS-2662-iPadOS-2662
+	#iOS-2671-iPadOS-2671-2701-shipped-the-same-day
 	#iOS-27-iPadOS-27-267-shipped-the-same-day
 	#iOS-Security-Updates
 /en/changelog/macos/
@@ -3683,6 +3688,7 @@
 	#macOS-Tahoe-266-Sequoia-1578-Sonoma-1488
 	#macOS-Tahoe-2661-Sequoia-1579-Sonoma-1489
 	#macOS-Tahoe-2662
+	#macOS-Tahoe-2671-Sequoia-1581-Golden-Gate-2701-shipped-the-same-day
 /en/changelog/messaging/
 	#How-we-rate-urgency
 	#July-to-September-2026
@@ -3701,6 +3707,7 @@
 	#OONI-Probe-610
 	#OONI-Probe-611
 	#OONI-Probe-620
+	#OONI-Probe-621
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
@@ -3740,6 +3747,7 @@
 	#Tor-Browser-15021
 	#Tor-Browser-15022
 	#Tor-Browser-15023
+	#Tor-Browser-15024
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -4810,6 +4818,27 @@
 	#See-also
 	#The-questions-copy-one-at-a-time
 	#Turn-the-results-into-a-pocket-emergency-card
+/en/scenarios/travel-connectivity/
+	#Before-you-leave
+	#Checking-your-exit-point-on-arrival
+	#Device-names
+	#Getting-past-the-captive-portal
+	#Hotel-and-venue-Wi-Fi
+	#How-to-choose
+	#Local-SIM-cards
+	#Phone-numbers-and-connectivity-abroad
+	#Roaming-on-your-home-number
+	#The-three-side-by-side
+	#The-two-lines-on-a-dual-SIM-phone
+	#Three-kinds-of-number-and-how-their-traffic-travels
+	#Three-terms-first
+	#Travel-eSIMs
+	#Travel-routers
+	#What-it-blocks
+	#What-it-does-not-block
+	#What-to-set-up-before-you-leave
+	#When-it-is-worth-bringing
+	#Where-to-go-from-here
 /en/setup-repo/ -> /en/community/setup-repo/
 /en/setup-skill-level/ -> /en/community/skill-level/
 /en/setup-tor-relay/ -> /en/community/setup-tor-relay/
@@ -5070,6 +5099,24 @@
 	#Use-a-passphrase-not-a-word
 	#Where-to-go-next
 	#Why-you-need-one
+/en/tools/phone-privacy-settings/
+	#1-System-updates
+	#10-Loss-and-theft
+	#2-Device-name
+	#3-Lock-screen-and-notification-previews
+	#4-Location-permissions
+	#5-Ad-tracking
+	#6-Camera-microphone-and-other-permissions
+	#7-Who-can-see-your-location
+	#8-Analytics-and-diagnostics
+	#9-Account-sign-in-protection
+	#After-the-ten-steps
+	#Before-you-start
+	#Phone-privacy-settings-step-by-step
+	#SIM-PIN-optional
+	#The-ten-steps
+	#Versions-and-sources-checked
+	#Where-to-go-from-here
 /en/tools/rss/
 	#A-third-party-joins-in
 	#Choosing-a-reader
@@ -6174,6 +6221,27 @@
 	#把結果整理成一張隨身緊急卡
 	#調查項目逐項複製
 	#開場-prompt先貼這個設定-AI-角色
+/scenarios/travel-connectivity/
+	#三種方式對照
+	#三種門號流量各自怎麼走
+	#什麼情況值得帶
+	#先認識三個詞
+	#出國的門號與網路連線
+	#出發前的檢查
+	#出發前要設定好的部分
+	#到了之後查一次出口
+	#原門號漫遊
+	#怎麼選
+	#擋不掉的部分
+	#旅行路由器
+	#旅遊-eSIM
+	#旅館與會場的-Wi-Fi
+	#當地-SIM-卡
+	#相關閱讀
+	#能擋掉的部分
+	#裝置名稱
+	#認證頁面的處理
+	#雙卡手機的兩個號碼
 /setup-repo/ -> /community/setup-repo/
 /setup-skill-level/ -> /community/skill-level/
 /setup-tor-relay/ -> /community/setup-tor-relay/
@@ -6609,6 +6677,24 @@
 	#系統整合Apple-Passwords--iCloud-Keychain
 	#離線金庫KeePassXC與-GNOME-Secrets
 	#雲端同步Bitwarden
+/tools/phone-privacy-settings/
+	#1-系統更新
+	#10-遺失與遭竊
+	#2-裝置名稱
+	#3-鎖定畫面與通知預覽
+	#4-位置權限
+	#5-廣告追蹤
+	#6-相機麥克風與其他權限
+	#7-誰看得到你的位置
+	#8-分析與診斷資料
+	#9-帳號的登入保護
+	#做完之後
+	#十個步驟
+	#手機隱私設定逐步指引
+	#本頁的核對
+	#相關閱讀
+	#選做SIM-卡-PIN-碼
+	#開始之前
 /tools/rss/
 	#RSS-的運作方式
 	#RSS-的隱私取捨
@@ -8802,6 +8888,7 @@
 	#iOS-2661iPadOS-2661同日另有-18710
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
+	#iOS-2671iPadOS-2671同日另有-2701
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的机器走哪一条线
@@ -8813,6 +8900,7 @@
 	#macOS-Tahoe-2661Sequoia-1579Sonoma-1489
 	#macOS-Tahoe-2662
 	#macOS-Tahoe-266Sequoia-1578Sonoma-1488
+	#macOS-Tahoe-2671Sequoia-1581同日另有-Golden-Gate-2701
 	#macOS-安全更新
 	#三条维护线
 	#紧急程度怎么判断
@@ -8834,6 +8922,7 @@
 	#OONI-Probe-610
 	#OONI-Probe-611
 	#OONI-Probe-620
+	#OONI-Probe-621
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
@@ -8879,6 +8968,7 @@
 	#Tor-Browser-15021
 	#Tor-Browser-15022
 	#Tor-Browser-15023
+	#Tor-Browser-15024
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道
@@ -9790,6 +9880,27 @@
 	#怎么用
 	#把结果整理成一张随身紧急卡
 	#调查项目逐项复制
+/zh-cn/scenarios/travel-connectivity/
+	#三种号码流量各自怎么走
+	#三种方式对照
+	#什么情况值得带
+	#先认识三个词
+	#出发前的检查
+	#出发前要设置好的部分
+	#出国的手机号与网络连接
+	#到了之后查一次出口
+	#原号码漫游
+	#双卡手机的两个号码
+	#当地-SIM-卡
+	#怎么选
+	#挡不掉的部分
+	#旅游-eSIM
+	#旅行路由器
+	#相关阅读
+	#能挡掉的部分
+	#认证页面的处理
+	#设备名称
+	#酒店与会场的-Wi-Fi
 /zh-cn/setup-repo/ -> /zh-cn/community/setup-repo/
 /zh-cn/setup-skill-level/ -> /zh-cn/community/skill-level/
 /zh-cn/setup-tor-relay/ -> /zh-cn/community/setup-tor-relay/
@@ -10228,6 +10339,24 @@
 	#硬件密钥YubiKeySolo
 	#离线密钥库KeePassXC与-GNOME-Secrets
 	#系统整合Apple-Passwords--iCloud-Keychain
+/zh-cn/tools/phone-privacy-settings/
+	#1-系统更新
+	#10-丢失与被盗
+	#2-设备名称
+	#3-锁屏与通知预览
+	#4-位置权限
+	#5-广告跟踪
+	#6-相机麦克风与其他权限
+	#7-谁看得到你的位置
+	#8-分析与诊断数据
+	#9-账号的登录保护
+	#做完之后
+	#十个步骤
+	#开始之前
+	#手机隐私设置逐步指引
+	#本页的核对
+	#相关阅读
+	#选做SIM-卡-PIN-码
 /zh-cn/tools/rss/
 	#RSS-的运作方式
 	#RSS-的隐私取舍
