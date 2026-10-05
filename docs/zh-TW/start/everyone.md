@@ -22,7 +22,7 @@ icon: material/account-outline
 
 位置、通訊錄、相簿，多數 app 要的權限遠超過它需要的。關掉不影響使用，很多人只是沒有時間逐一檢查。
 
-[社群平台怎麼收集你的資料](../basics/platform-tracking.md)說明收集到的東西怎麼被組合起來。
+[手機隱私設定逐步指引](../tools/phone-privacy-settings.md)照編號帶你逐項調整，約三十分鐘。[社群平台怎麼收集你的資料](../basics/platform-tracking.md)說明收集到的東西怎麼被組合起來。
 
 ### 看到「無痕模式」、「VPN」的說法，不確定有沒有用
 

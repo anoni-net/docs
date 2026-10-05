@@ -56,6 +56,7 @@ nav:
               - tools/what-is-ooni.md
               - tools/ooni-run-v2.md
           - "日常隐私基本功":
+              - tools/phone-privacy-settings.md
               - tools/messaging-comparison.md
               - tools/what-is-cryptpad.md
               - tools/password-manager.md
@@ -77,6 +78,7 @@ nav:
           - scenarios/mainland-speech.md
           - scenarios/singapore-malaysia-speech.md
           - scenarios/asia-travel.md
+          - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
@@ -259,6 +261,7 @@ theme:
     - search.share
     - content.tooltips
     - content.code.copy
+    - content.tabs.link
     - content.footnote.tooltips
     - announce.dismiss
 extra:

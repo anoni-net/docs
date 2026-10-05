@@ -48,6 +48,7 @@ nav:
               - tools/onionshare.md
               - tools/grapheneos.md
               - tools/password-manager.md
+              - tools/phone-privacy-settings.md
           - "Comparisons and hardening":
               - tools/messaging-comparison.md
               - tools/asian-diceware.md
@@ -78,6 +79,7 @@ nav:
           - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
           - scenarios/asia-travel.md
+          - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md
           - scenarios/shutdown.md
       - !ENV [NAV_ADVANCED, "Advanced"]:
@@ -267,6 +269,7 @@ theme:
     - search.share
     - content.tooltips
     - content.code.copy
+    - content.tabs.link
     - content.footnote.tooltips
     - announce.dismiss
 extra:

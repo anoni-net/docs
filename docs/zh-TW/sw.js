@@ -231,6 +231,7 @@ const CORE_PAGES_ZH = [
   "tools/tor-browser-mobile/",
   "tools/what-is-age/",
   "tools/what-is-passkey/",
+  "tools/phone-privacy-settings/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
@@ -255,6 +256,7 @@ const CORE_PAGES_ZH = [
   "scenarios/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
+  "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
@@ -355,10 +357,12 @@ const CORE_PAGES_EN = [
   "tools/tor-browser-mobile/",
   "tools/what-is-age/",
   "tools/what-is-passkey/",
+  "tools/phone-privacy-settings/",
   // scenarios（場景，只留不指向特定受威脅身分的）
   "scenarios/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
+  "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
