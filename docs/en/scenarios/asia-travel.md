@@ -81,9 +81,11 @@ The SIM in your phone carries a record, and the question is who holds it and whe
 
 - **Local real-name SIM bought on arrival**: your passport (and, in a growing number of places, your face) is bound to a local number that sits in the local carrier's and often the government's database. Local law enforcement can query it on the spot, and the record is frequently retained long-term.
 - **Home-number roaming**: the carrier that holds your identity is back home. The destination sees a foreign roaming connection and its locations, but tying that to you usually requires a cross-border legal request.
-- **Data-only eSIM with no local number**: there's no local-SIM layer at all; your identity mostly lives with the eSIM provider and your payment record.
+- **Data-only eSIM with no local number**: there's no local-SIM layer at all; your identity sits in the eSIM seller's account and your payment record. The trade-off is that traffic often exits from a third country and passes through more carriers, and sellers rarely say which.
 
 For the threat of *destination surveillance*, roaming and data-only eSIMs keep the identity mapping outside the destination, which makes on-the-spot attribution harder. A long-term personal SIM crossing into a hostile jurisdiction is the opposite: it carries your telco history and prior locations with it. Buy a local real-name SIM only when you genuinely need a local number (for example to receive a verification code), and weigh that against the on-arrival registration it triggers. One caveat to the eSIM advantage: real-name registration is spreading even to data-only eSIMs in some places, so verify the destination's current rule rather than assuming an eSIM is anonymous.
+
+Where each option's traffic actually exits, what the local network can see, and how to handle the two lines on a dual-SIM phone, hotel Wi-Fi, and travel routers are covered in [phone numbers and connectivity abroad](./travel-connectivity.md).
 
 ## Buying a burner abroad, and taking it home
 
@@ -154,6 +156,7 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 
 Only changes that alter what you should do are listed here; typos, formatting, and copy edits are not. For the full revision history, see [this page's commits on GitHub](https://github.com/anoni-net/docs/commits/main/docs/en/scenarios/asia-travel.md){target="_blank"}.
 
+- **2026-10-05:** Corrected the data-only eSIM item in the SIM section: the seller holds more than a payment record, and traffic often exits from a third country. The technical side of numbers and hotel networks now has its own page, [phone numbers and connectivity abroad](./travel-connectivity.md).
 - **2026-09-08:** Added the State Council's Provisions on Exit and Entry Administration (effective 15 September 2026) to the mainland China section and to the return-to-mainland-China warning, and moved the framing date to September 2026.
 - **2026-08-05:** Refreshed to the August 2026 verification pass. Hong Kong moved to the top of the border-inspection range after the 23 March 2026 national-security decryption duty, and three claims that could not be substantiated were withdrawn.
 - **2026-08-04:** Added the burner section, covering the handset-versus-number split, buying abroad, and what changes when you take it home.
@@ -162,6 +165,7 @@ Only changes that alter what you should do are listed here; typos, formatting, a
 ## Where to go from here
 
 - [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
+- [Phone numbers and connectivity abroad](./travel-connectivity.md) — where traffic exits with roaming, a travel eSIM, or a local SIM card, plus hotel Wi-Fi and travel routers
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — generate a destination-specific censorship, legal, SIM, and emergency-contact briefing for any country, with no query reaching us.
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.
 - [Threat modeling](../basics/threat-model.md) — the five questions to ask before deciding how far to minimize for a given trip.

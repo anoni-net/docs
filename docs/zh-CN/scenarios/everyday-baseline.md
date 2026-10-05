@@ -114,7 +114,7 @@ passkey 值得补一句现况。独立普查显示它的覆盖率远低于厂商
 
 ### 手机权限与广告标识符
 
-关掉广告标识符、通讯录上传、精确位置，逐项检查权限清单。各平台的实际路径与每一级挡不掉什么，见 [社群平台怎么收集你的数据](../basics/platform-tracking.md) 的〈你能做什么〉。
+关掉广告标识符、通讯录上传、精确位置，逐项检查权限清单。iPhone、Android、Samsung Galaxy 各自要按哪里，照 [手机隐私设置逐步指引](../tools/phone-privacy-settings.md) 一步一步做，约三十分钟。每一级挡不掉什么，见 [社群平台怎么收集你的数据](../basics/platform-tracking.md) 的〈你能做什么〉。
 
 想把「推荐准得可疑」变成看得到的事实，同一页的〈直接看平台手上有什么〉给了广告兴趣分类与数据导出的入口。打开自己的档案，比读任何解释都直接。
 
@@ -220,6 +220,7 @@ Signal 这类工具保护的是内容，不保护「谁在什么时候联系谁�
 - [社群平台怎么收集你的数据](../basics/platform-tracking.md)：商业数据收集这一条线的完整版
 - [监控现在做得到什么](../basics/surveillance-capability.md)：商业收集与针对性调查两种对手的能力边界，另加电信保存期限与商用间谍软件
 - [密码管理器入门](../tools/password-manager.md)：第一层前两项的工具选择与备援
+- [手机隐私设置逐步指引](../tools/phone-privacy-settings.md)：第二层的手机设置，照编号在自己的手机上操作
 - [Metadata 是什么，为什么重要](../basics/metadata.md)：为什么内容加密之后仍然留下大量信息
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：账号分层与身分退场
 - [紧急求救](../help/index.md)：钱已经汇给诈骗、账号被盗、设备遗失、跟踪骚扰、个资被公开的立即应对

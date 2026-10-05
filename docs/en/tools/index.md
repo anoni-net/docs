@@ -30,6 +30,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 - [OnionShare](./onionshare.md) — temporary onion services for sending files, receiving files, hosting, and one-off chat.
 - [GrapheneOS](./grapheneos.md) — hardened, de-Googled Android, what it protects, and where the line at anonymity sits.
 - [Getting started with password managers](./password-manager.md) — the four categories, TOTP, passkeys, hardware keys, and the regional situations international guides skip.
+- [Phone privacy settings, step by step](./phone-privacy-settings.md) — work through your own phone in numbered steps, with matching paths for iPhone, Android, and Samsung Galaxy, in about thirty minutes.
 
 ## Comparisons and hardening
 

@@ -83,7 +83,7 @@ Northeastern University 的研究團隊在美國實測了一批旅遊 eSIM，發
 
 用旅遊 eSIM 上網時，台灣的門號如果還開著，兩個號碼都連在當地網路上，都收得到電話與簡訊[^apple-esim-travel]。關掉台灣的門號，就收不到寄到這個號碼的簡訊驗證碼。
 
-出發前能換的先換。Google、Apple、社群帳號這類支援驗證 App 或 passkey 的服務，把兩步驟驗證從簡訊換掉，關掉台灣門號也不會被鎖在帳號外面。驗證 App 是在手機上每 30 秒產生一組數字的 App，passkey 是存在手機或密碼管理器裡的登入憑證，兩者都不需要收簡訊，差別見 [什麼是 passkey](../tools/what-is-passkey.md)。銀行這類只能收簡訊的服務換不掉，就讓台灣門號開著。
+出發前能換的先換。Google、Apple、社群帳號這類支援驗證 App 或 passkey 的服務，把兩步驟驗證從簡訊換掉，關掉台灣門號也不會被鎖在帳號外面。驗證 App 是在手機上每 30 秒產生一組數字的 App，passkey 是存在手機或密碼管理器裡的登入憑證，兩者都不需要收簡訊，差別見 [什麼是 passkey](../tools/what-is-passkey.md)，各帳號的檢查位置見 [手機隱私設定逐步指引](../tools/phone-privacy-settings.md#9-帳號的登入保護)。銀行這類只能收簡訊的服務換不掉，就讓台灣門號開著。
 
 台灣門號要關掉時：
 
