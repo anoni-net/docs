@@ -1699,10 +1699,12 @@
 	#Arti-250
 	#Arti-251
 	#Arti-260
+	#Arti-270
 	#Arti-更新日誌
 	#c-tor-移植到-Rust-的進度
 	#中繼端做到哪裡
 /changelog/browsers/
+	#Chrome-2026-年-10-月
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
@@ -1723,6 +1725,7 @@
 /changelog/feed-windows.xml
 /changelog/feed.xml
 /changelog/grapheneos/
+	#2026-年-10-月
 	#2026-年-6-月
 	#2026-年-7-月
 	#2026-年-8-月
@@ -1782,6 +1785,7 @@
 	#Tails-711
 	#Tails-712
 	#Tails-713
+	#Tails-714
 	#Tails-771
 	#Tails-772
 	#Tails-773
@@ -1822,6 +1826,7 @@
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
+	#Tor-Browser-160a13Alpha-測試通道
 	#Tor-Browser-160a6Alpha-測試通道
 	#Tor-Browser-160a7Alpha-測試通道
 	#Tor-Browser-160a8Alpha-測試通道
@@ -2192,6 +2197,16 @@
 	#活動規劃
 	#研究與報告翻譯
 	#路線圖更新
+/community/send-privacy/
+	#Cloudflare
+	#sendanoninet-的資料處理
+	#伺服器保存的資料
+	#伺服器無法取得的內容
+	#你的瀏覽器保存的資料
+	#存取紀錄
+	#更隱密的用法
+	#聯絡與檢舉
+	#資料調閱要求
 /community/setup-onion-service/
 	#HTTPS-的取捨
 	#vanity-位址證明不了身分
@@ -3637,6 +3652,7 @@
 	#Arti-250
 	#Arti-251
 	#Arti-260
+	#Arti-270
 	#Arti-Changelog
 	#How-far-the-relay-side-has-got
 	#c-tor-to-Rust-porting-progress
@@ -3644,6 +3660,7 @@
 	#Browser-Security-Updates
 	#Chrome-August-2026
 	#Chrome-July-2026
+	#Chrome-October-2026
 	#Chrome-September-2026
 	#Firefox-August-2026
 	#Firefox-July-2026
@@ -3665,6 +3682,7 @@
 	#GrapheneOS-Monthly-Summary
 	#July-2026
 	#June-2026
+	#October-2026
 	#September-2026
 /en/changelog/ios/
 	#How-we-rate-urgency
@@ -3718,6 +3736,7 @@
 	#Tails-711
 	#Tails-712
 	#Tails-713
+	#Tails-714
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -3751,6 +3770,7 @@
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
+	#Tor-Browser-160a13-alpha
 	#Tor-Browser-160a7-alpha
 	#Tor-Browser-160a8-alpha
 	#Tor-Browser-160a9-alpha
@@ -4119,6 +4139,16 @@
 	#Tor-relays-on-university-campuses
 	#Working-with-others
 	#Workshops-and-meetups
+/en/community/send-privacy/
+	#Access-logs
+	#Cloudflare
+	#Contact-and-abuse-reports
+	#How-sendanoninet-Handles-Your-Data
+	#Requests-for-data
+	#Staying-more-private
+	#What-the-server-cannot-see
+	#What-the-server-stores
+	#What-your-browser-stores
 /en/community/setup-onion-service/
 	#1-The-way-the-Tor-Project-documents-it
 	#2-Routing-through-nginx
@@ -8852,10 +8882,12 @@
 	#Arti-250
 	#Arti-251
 	#Arti-260
+	#Arti-270
 	#Arti-更新日志
 	#c-tor-移植到-Rust-的进度
 	#中继端做到哪里
 /zh-cn/changelog/browsers/
+	#Chrome-2026-年-10-月
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
@@ -8876,6 +8908,7 @@
 /zh-cn/changelog/feed-windows.xml
 /zh-cn/changelog/feed.xml
 /zh-cn/changelog/grapheneos/
+	#2026-年-10-月
 	#2026-年-6-月
 	#2026-年-7-月
 	#2026-年-8-月
@@ -8938,6 +8971,7 @@
 	#Tails-711
 	#Tails-712
 	#Tails-713
+	#Tails-714
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -8972,6 +9006,7 @@
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道
+	#Tor-Browser-160a13Alpha-测试通道
 	#Tor-Browser-160a7Alpha-测试通道
 	#Tor-Browser-160a8Alpha-测试通道
 	#Tor-Browser-160a9Alpha-测试通道
@@ -9259,6 +9294,16 @@
 	#活动规划
 	#研究与报告翻译
 	#路线图更新
+/zh-cn/community/send-privacy/
+	#Cloudflare
+	#sendanoninet-的数据处理
+	#你的浏览器保存的数据
+	#数据调取要求
+	#更隐蔽的用法
+	#服务器保存的数据
+	#服务器无法获取的内容
+	#联系与举报
+	#访问日志
 /zh-cn/community/setup-onion-service/
 	#HTTPS-的取舍
 	#vanity-地址证明不了身份

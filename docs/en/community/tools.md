@@ -57,8 +57,9 @@ For why we self-host Matrix in particular, and the privacy trade-offs behind tha
 
 - **Use**: temporary encrypted file transfer, with links that can carry a password, a download limit, and an expiry time.
 - **Entry point**: [https://send.anoni.net/](https://send.anoni.net/){target="_blank"}
-- **Getting an account**: none needed. Signing in generally raises the size quota and retention window, depending on configuration.
+- **Getting an account**: none needed, and there is no sign-in. Each upload can be up to 2.5 GB in total and lasts at most 7 days.
 - **How to use it**: upload the file, choose an expiry, set a download limit, add a password if the material warrants one, and share the link. The file is deleted once it expires or hits the download limit. Step-by-step instructions are in [Sending us sensitive material](./upload-sensitive.md).
+- **Data handling**: the server has no access to file contents and keeps no routine access logs. What it stores, and for how long, is in [How send.anoni.net handles your data](./send-privacy.md).
 
 ## Community operations
 
