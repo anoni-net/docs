@@ -323,7 +323,6 @@
 /blog/
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#Signal-免門號註冊與付款紀錄
 	#一份英文密語詞表裡的-292-個亞洲外來語是怎麼選出來的
 	#匿名網路社群前往-Global-Gathering-2026
@@ -331,6 +330,7 @@
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
+	#新聞導讀-anoninetnews-與導讀歷史
 	#近期公告
 /blog/2025/01/project-relaunch-2025/ -> /blog/
 /blog/2025/01/專案重啟-2025/
@@ -1147,6 +1147,15 @@
 	#舊版讀者的補充事項
 	#設定抽屜
 	#近期的三篇文章
+/blog/2026/10/2026-anoni-net-news-launch/
+	#八個分類
+	#回報與參與
+	#導讀歷史的每日回看
+	#新聞導讀-anoninetnews-與導讀歷史
+	#為什麼做新聞導讀
+	#相關閱讀
+	#訂閱新聞導讀
+	#選題與查核
 /blog/archive/2025/
 	#2025
 	#202508-專案進度更新
@@ -1196,7 +1205,6 @@
 	#2026
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#Signal-免門號註冊與付款紀錄
 	#一份英文密語詞表裡的-292-個亞洲外來語是怎麼選出來的
 	#匿名網路社群前往-Global-Gathering-2026
@@ -1204,10 +1212,11 @@
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
+	#新聞導讀-anoninetnews-與導讀歷史
 /blog/archive/2026/page/2/
 	#2026
+	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#COSCUP-2026-匿名網路社群議程軌徵現場工作人員三個崗位808809-兩天
-	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#一段預告過的降速813-用-OONI-記錄北部行動網路的-30-分鐘
 	#介紹-Signal-自動金鑰驗證
@@ -1221,7 +1230,7 @@
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
 	#COSCUP-2026-匿名網路社群議程軌808809-兩天免費入場走進教室就能參加
 	#CryptPad-202650-上線正體中文zh_Hant正式收進內建語系
-	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
+	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#OONI-如何分辨壞掉的量測資料從啟發式規則到匿名憑證
 	#Unredacted-如何幫受審查地區的人連上開放網路
 	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
@@ -1230,8 +1239,8 @@
 	#測量網路審查挑戰趨勢與影響
 /blog/archive/2026/page/4/
 	#2026
-	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#Cure53-完成-Tor-VPN-安全稽核
+	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#OONI-新版-Probe-Desktop-測試邀請
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#onionoo-MCP-上線用一句中文問-Tor-中繼節點現況
@@ -1249,6 +1258,7 @@
 	#202603-社群近況更新
 	#Arti-210-更新發佈
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
+	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#GNOME-Secrets
 	#OONI-全新的匿名憑證系統
 	#RightsCon-Taipei
@@ -1330,6 +1340,7 @@
 	#匿名網路社群前往-Global-Gathering-2026
 	#專案重啟-2025
 	#投稿方式請先看這裡
+	#新聞導讀-anoninetnews-與導讀歷史
 	#校園-Tor-Relay-範本工具包提案SOPFAQ-三份範本上線
 	#跨社群合作匿名網路社群--ETHTaipei
 	#關於-COSCUP
@@ -1442,12 +1453,11 @@
 	#實體活動才有的文宣小物-Global-Gathering-會場見
 	#從-OONI-公開資料看-813-北部行動網路降速的-30-分鐘
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
-	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
+	#新聞導讀-anoninetnews-與導讀歷史
 	#社群
 /blog/category/社群/page/2/
 	#COSCUP-2026-匿名網路社群議程軌808809-兩天免費入場走進教室就能參加
-	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#COSCUP-2026-匿名網路社群議程軌徵現場工作人員三個崗位808809-兩天
 	#CryptPad-202650-上線正體中文zh_Hant正式收進內建語系
 	#onionoo-MCP-上線用一句中文問-Tor-中繼節點現況
@@ -1455,6 +1465,7 @@
 	#倫理與開源授權提醒
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#投稿方式請先看這裡
+	#撤回自己寫過的話近兩週更正了哪些內容
 	#校園-Tor-Relay-範本工具包提案SOPFAQ-三份範本上線
 	#社群
 	#虛擬資產服務法草案行政院通過了什麼還差什麼
@@ -1465,10 +1476,9 @@
 	#202506-專案進度更新匿名網路工作坊開始報名
 	#202508-專案進度更新
 	#202603-社群近況更新
+	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#RightsCon-Taipei
 	#前言為什麼在校園談匿名網路
-	#匿名網路工作坊籌備
-	#匿名網路工作坊進度更新
 	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
 	#專案提案---g0v-Hackath71n-零時政府第-71-次黑客松
 	#延續-2025走向-2026個人隱私指引Tor-Relay-校園建立競賽匿名支付探索
@@ -1484,6 +1494,7 @@
 	#202505-專案進度更新
 	#匿名網路工作坊招募工作人員與培訓小幫手
 	#匿名網路工作坊籌備
+	#匿名網路工作坊進度更新
 	#回顧網路自由工作坊TorTailsOONI
 	#專案提案---g0v-Hackath65n-零時政府第-65-次黑客松
 	#專案重啟-2025
@@ -1560,8 +1571,8 @@
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#隱私
 /blog/page/2/
+	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#COSCUP-2026-匿名網路社群議程軌徵現場工作人員三個崗位808809-兩天
-	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#一段預告過的降速813-用-OONI-記錄北部行動網路的-30-分鐘
 	#介紹-Signal-自動金鑰驗證
@@ -1575,7 +1586,7 @@
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
 	#COSCUP-2026-匿名網路社群議程軌808809-兩天免費入場走進教室就能參加
 	#CryptPad-202650-上線正體中文zh_Hant正式收進內建語系
-	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
+	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#OONI-如何分辨壞掉的量測資料從啟發式規則到匿名憑證
 	#Unredacted-如何幫受審查地區的人連上開放網路
 	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
@@ -1584,8 +1595,8 @@
 	#測量網路審查挑戰趨勢與影響
 	#近期公告
 /blog/page/4/
-	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#Cure53-完成-Tor-VPN-安全稽核
+	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#OONI-新版-Probe-Desktop-測試邀請
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#onionoo-MCP-上線用一句中文問-Tor-中繼節點現況
@@ -1603,12 +1614,11 @@
 	#202603-社群近況更新
 	#Arti-210-更新發佈
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
+	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#GNOME-Secrets
 	#OONI-全新的匿名憑證系統
 	#RightsCon-Taipei
 	#Tails-76-發佈說明
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
 	#專案提案---g0v-Hackath71n-零時政府第-71-次黑客松
 	#延續-2025走向-2026個人隱私指引Tor-Relay-校園建立競賽匿名支付探索
 	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
@@ -1621,10 +1631,11 @@
 	#202508-專案進度更新
 	#OnionMasqTor-為-VPN-式流量隔離實驗修正
 	#Tails-70-發佈
-	#Tails-70-發佈第二個最終測試版本70rc2
 	#Tails-71-發佈與說明
 	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
+	#前言為什麼在校園談匿名網路
+	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
 	#技術分析報告網路政變
 	#擺攤手冊
 	#更新訊息
@@ -1638,24 +1649,25 @@
 	#202506-專案進度更新匿名網路工作坊開始報名
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
 	#Tails-618-支援-WebTunnel-橋接協定
+	#Tails-70-發佈第二個最終測試版本70rc2
 	#WebTunnel-橋接方式
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
 	#其他更新
-	#匿名網路工作坊招募工作人員與培訓小幫手
 	#匿名網路工作坊籌備
 	#匿名網路工作坊進度更新
-	#工作任務
 	#新功能
 	#社群專案建立---匿名網路社群
 	#近期公告
 /blog/page/8/
 	#202503-專案進度更新
 	#Arti-141-更新發佈
+	#匿名網路工作坊招募工作人員與培訓小幫手
 	#去識別化的觀測資料安全
 	#回顧網路自由工作坊TorTailsOONI
 	#專案提案---g0v-Hackath65n-零時政府第-65-次黑客松
 	#專案重啟-2025
+	#工作任務
 	#為什麼要為-OONI-建立匿名憑證系統
 	#發佈新-OONI-Explorer-主題審查頁面
 	#網路自由工作坊TorTailsOONI
@@ -2628,7 +2640,6 @@
 	#Where-to-go-from-here
 	#Why-the-adversary-is-regional
 /en/blog/
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
@@ -2639,6 +2650,7 @@
 	#The-Anonymity-Networks-Community-Is-Going-to-Global-Gathering-2026
 	#We-print-this-zine-only-for-events-and-hand-it-out-at-Global-Gathering
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
+	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/2025/01/project-relaunch-2025/
 	#ASN-Autonomous-System-Network-Observation-Data-Analysis
 	#Event-Announcements
@@ -3219,6 +3231,15 @@
 	#Three-new-regional-pages
 	#Tor-on-a-phone-and-Emergency-Help
 	#Withdrawn-statements
+/en/blog/2026/10/2026-anoni-net-news-launch/
+	#Eight-categories
+	#How-stories-are-chosen-and-checked
+	#Related-reading
+	#Reporting-and-taking-part
+	#Same-Day-Years-Apart
+	#Subscribing
+	#Why-we-started-anoninetnews
+	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/archive/2025/
 	#2025
 	#202504-Project-Status-and-Updates
@@ -3244,7 +3265,6 @@
 	#Review-Internet-Freedom-Workshop-TorTailsOONI
 /en/blog/archive/2026/
 	#2026
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
@@ -3254,39 +3274,40 @@
 	#The-Anonymity-Networks-Community-Is-Going-to-Global-Gathering-2026
 	#We-print-this-zine-only-for-events-and-hand-it-out-at-Global-Gathering
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
+	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/archive/2026/page/2/
 	#2026
+	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#COSCUP-2026-Anonymity-Networks-Community-track-needs-on-site-crew-for-three-roles-Aug-89
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
 	#Drawing-an-anonymity-network-onto-a-globe-the-Interactive-section-and-the-open-data-walls-we-hit
-	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Recording-30-Minutes-of-Northern-Taiwans-Mobile-Networks-During-an-Announced-Throttle-on-13-August
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
 	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Thirty-Minutes-of-Mobile-Throttling-in-Northern-Taiwan-Read-from-OONIs-Public-Data
 	#Two-online-sessions-on-digital-security-with-Tian-Jian-and-the-26-August-one-is-still-open
-	#What-the-original-article-covers
 /en/blog/archive/2026/page/3/
 	#2026
 	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Android-17-ships-the-real-GrapheneOS-story-is-who-decides-what-runs-on-your-phone
 	#Brief-yourself-before-you-travel--take-the-right-questions-to-your-own-AI
 	#COSCUP-2026-Anonymity-Networks-Community-track-runs-two-days-Aug-89-free-entry-just-walk-in
-	#Campus-Tor-Relay-templates-proposal-SOP-and-FAQ-now-published
 	#CryptPad-202650-zh_Hant-Lands-as-a-Built-in-Locale-After-Two-and-a-Half-Years-Upstream
 	#How-Unredacted-Helps-People-in-Censored-Regions-Reach-the-Open-Internet
 	#MADLink-Mandarin-Translation-is-Live-with-an-Editorial-Observation-Page-on-Taiwans-Response
+	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#OONI-is-guarding-its-data-against-bad-measurements--what-that-means-if-you-build-on-it
 	#We-surveyed-all-336-OONI-Run-v2-links-and-three-of-them-drive-72-of-all-measurements
+	#What-the-original-article-covers
 	#Why-this-matters-especially-in-APAC
 /en/blog/archive/2026/page/4/
 	#2026
-	#202603-Community-Update
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
 	#About-COSCUP
 	#Arti-220-better-network-fit-now-stronger-Tor-plumbing-later
 	#COSCUP-2026-Anonymity-Networks-Community-Track-Call-for-Proposals
+	#Campus-Tor-Relay-templates-proposal-SOP-and-FAQ-now-published
 	#Cross-Community-Collaboration-Anonymity-Networks-Community--ETHTaipei
 	#Ethics-and-Open-Licensing-Reminder
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
@@ -3301,6 +3322,7 @@
 /en/blog/archive/2026/page/5/
 	#2025
 	#2026
+	#202603-Community-Update
 	#Continuing-from-2025-into-2026-Personal-Privacy-Guidelines-Tor-Relay-Campus-Deployment-Competition-and-Exploration-of-Anonymous-Payments
 	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
 	#Learning-from-TPAs-ADR-model
@@ -3315,17 +3337,16 @@
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#How-292-Asian-loanwords-ended-up-in-an-English-passphrase-wordlist
 	#Recording-30-Minutes-of-Northern-Taiwans-Mobile-Networks-During-an-Announced-Throttle-on-13-August
-	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#The-Anonymity-Networks-Community-Is-Going-to-Global-Gathering-2026
 	#Thirty-Minutes-of-Mobile-Throttling-in-Northern-Taiwan-Read-from-OONIs-Public-Data
 	#Two-online-sessions-on-digital-security-with-Tian-Jian-and-the-26-August-one-is-still-open
 	#We-print-this-zine-only-for-events-and-hand-it-out-at-Global-Gathering
+	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/category/community/page/2/
 	#About-COSCUP
 	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Brief-yourself-before-you-travel--take-the-right-questions-to-your-own-AI
-	#COSCUP-2026-Anonymity-Networks-Community-Track-Call-for-Proposals
 	#COSCUP-2026-Anonymity-Networks-Community-track-needs-on-site-crew-for-three-roles-Aug-89
 	#COSCUP-2026-Anonymity-Networks-Community-track-runs-two-days-Aug-89-free-entry-just-walk-in
 	#Campus-Tor-Relay-templates-proposal-SOP-and-FAQ-now-published
@@ -3334,6 +3355,7 @@
 	#CryptPad-202650-zh_Hant-Lands-as-a-Built-in-Locale-After-Two-and-a-Half-Years-Upstream
 	#Ethics-and-Open-Licensing-Reminder
 	#How-to-Submit-Read-First
+	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Taiwans-Virtual-Asset-Service-Bill-What-the-Cabinet-Approved-and-What-Happens-Next
 	#onionoo-MCP-is-now-public-query-the-Tor-relay-network-in-plain-language
 /en/blog/category/community/page/3/
@@ -3341,9 +3363,8 @@
 	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
 	#202508-Project-Update
 	#202603-Community-Update
-	#Anonymous-Network-Workshop-Preparation
-	#Anonymous-Network-Workshop-Progress-Update
 	#BoothBrochure
+	#COSCUP-2026-Anonymity-Networks-Community-Track-Call-for-Proposals
 	#Community
 	#Community-Project-Establishment---Anonymity-Network-Community
 	#Continuing-from-2025-into-2026-Personal-Privacy-Guidelines-Tor-Relay-Campus-Deployment-Competition-and-Exploration-of-Anonymous-Payments
@@ -3359,6 +3380,7 @@
 	#202504-Project-Status-and-Updates
 	#202505-Project-Status-and-Updates
 	#Anonymous-Network-Workshop-Preparation
+	#Anonymous-Network-Workshop-Progress-Update
 	#Community
 	#Internet-Freedom-Workshop-TorTailsOONI
 	#Project-Relaunch-2025
@@ -3388,10 +3410,10 @@
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
 	#How-292-Asian-loanwords-ended-up-in-an-English-passphrase-wordlist
 	#How-Unredacted-Helps-People-in-Censored-Regions-Reach-the-Open-Internet
-	#MADLink-Mandarin-Translation-is-Live-with-an-Editorial-Observation-Page-on-Taiwans-Response
 	#News
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#The-Anonymity-Networks-Community-Is-Going-to-Global-Gathering-2026
+	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/category/news/page/2/
 	#2025
 	#202603-Community-Update
@@ -3403,12 +3425,12 @@
 	#Ethics-and-Open-Licensing-Reminder
 	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
 	#How-to-Submit-Read-First
+	#MADLink-Mandarin-Translation-is-Live-with-an-Editorial-Observation-Page-on-Taiwans-Response
 	#News
 	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
 	#RightsCon-Taipei
 	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
 	#Taiwans-Virtual-Asset-Service-Bill-What-the-Cabinet-Approved-and-What-Happens-Next
-	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 	#The-rules-and-the-data-belong-to-whoever-runs-the-server
 	#onionoo-MCP-is-now-public-query-the-Tor-relay-network-in-plain-language
 /en/blog/category/news/page/3/
@@ -3424,6 +3446,7 @@
 	#News
 	#Project-Relaunch-2025
 	#Recruiting-Staff-and-Training-Helpers-for-the-Anonymous-Network-Workshop
+	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 /en/blog/category/observation/
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Observation
@@ -3540,10 +3563,10 @@
 	#Learning-from-TPAs-ADR-model
 	#Updates
 /en/blog/page/2/
+	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#COSCUP-2026-Anonymity-Networks-Community-track-needs-on-site-crew-for-three-roles-Aug-89
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
 	#Drawing-an-anonymity-network-onto-a-globe-the-Interactive-section-and-the-open-data-walls-we-hit
-	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Recent-Updates
 	#Recording-30-Minutes-of-Northern-Taiwans-Mobile-Networks-During-an-Announced-Throttle-on-13-August
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
@@ -3551,26 +3574,26 @@
 	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Thirty-Minutes-of-Mobile-Throttling-in-Northern-Taiwan-Read-from-OONIs-Public-Data
 	#Two-online-sessions-on-digital-security-with-Tian-Jian-and-the-26-August-one-is-still-open
-	#What-the-original-article-covers
 /en/blog/page/3/
 	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Android-17-ships-the-real-GrapheneOS-story-is-who-decides-what-runs-on-your-phone
 	#Brief-yourself-before-you-travel--take-the-right-questions-to-your-own-AI
 	#COSCUP-2026-Anonymity-Networks-Community-track-runs-two-days-Aug-89-free-entry-just-walk-in
-	#Campus-Tor-Relay-templates-proposal-SOP-and-FAQ-now-published
 	#CryptPad-202650-zh_Hant-Lands-as-a-Built-in-Locale-After-Two-and-a-Half-Years-Upstream
 	#How-Unredacted-Helps-People-in-Censored-Regions-Reach-the-Open-Internet
 	#MADLink-Mandarin-Translation-is-Live-with-an-Editorial-Observation-Page-on-Taiwans-Response
+	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#OONI-is-guarding-its-data-against-bad-measurements--what-that-means-if-you-build-on-it
 	#Recent-Updates
 	#We-surveyed-all-336-OONI-Run-v2-links-and-three-of-them-drive-72-of-all-measurements
+	#What-the-original-article-covers
 	#Why-this-matters-especially-in-APAC
 /en/blog/page/4/
-	#202603-Community-Update
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
 	#About-COSCUP
 	#Arti-220-better-network-fit-now-stronger-Tor-plumbing-later
 	#COSCUP-2026-Anonymity-Networks-Community-Track-Call-for-Proposals
+	#Campus-Tor-Relay-templates-proposal-SOP-and-FAQ-now-published
 	#Cross-Community-Collaboration-Anonymity-Networks-Community--ETHTaipei
 	#Ethics-and-Open-Licensing-Reminder
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
@@ -3585,8 +3608,8 @@
 	#onionoo-MCP-is-now-public-query-the-Tor-relay-network-in-plain-language
 /en/blog/page/5/
 	#2025
-	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
 	#202508-Project-Update
+	#202603-Community-Update
 	#BoothBrochure
 	#Continuing-from-2025-into-2026-Personal-Privacy-Guidelines-Tor-Relay-Campus-Deployment-Competition-and-Exploration-of-Anonymous-Payments
 	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
@@ -3605,16 +3628,19 @@
 	#202503-Project-Status-and-Updates
 	#202504-Project-Status-and-Updates
 	#202505-Project-Status-and-Updates
+	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
 	#Anonymous-Network-Workshop-Preparation
 	#Anonymous-Network-Workshop-Progress-Update
 	#Community-Project-Establishment---Anonymity-Network-Community
 	#Internet-Freedom-Workshop-TorTailsOONI
-	#Project-Relaunch-2025
 	#Project-proposals-at-g0v-Hackath65n-the-65th-g0v-hackathon
 	#Recent-Updates
 	#Recruiting-Staff-and-Training-Helpers-for-the-Anonymous-Network-Workshop
 	#Review-Internet-Freedom-Workshop-TorTailsOONI
 	#Tasks
+/en/blog/page/7/
+	#Project-Relaunch-2025
+	#Recent-Updates
 /en/changelog/
 	#Anonymity-tools
 	#Browsers-and-messaging-apps
@@ -7518,7 +7544,6 @@
 /zh-cn/blog/
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#Signal-免手机号注册与付款记录
 	#一份英文密语词表里的-292-个亚洲外来语是怎么选出来的
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
@@ -7526,6 +7551,7 @@
 	#实体活动才有的文宣小物-Global-Gathering-会场见
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
+	#新闻导读-anoninetnews-与导读历史
 	#近期公告
 /zh-cn/blog/2025/01/project-relaunch-2025/ -> /zh-cn/blog/
 /zh-cn/blog/2025/01/專案重啟-2025/ -> /zh-cn/blog/
@@ -8335,6 +8361,15 @@
 	#系列的范围与节奏
 	#设置抽屉
 	#近期的三篇文章
+/zh-cn/blog/2026/10/2026-anoni-net-news-launch/
+	#为什么做新闻导读
+	#八个分类
+	#导读历史的每日回看
+	#报告与参与
+	#新闻导读-anoninetnews-与导读历史
+	#相关阅读
+	#订阅新闻导读
+	#选题与核查
 /zh-cn/blog/archive/2025/
 	#2025
 	#202508-项目进度更新
@@ -8384,7 +8419,6 @@
 	#2026
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#Signal-免手机号注册与付款记录
 	#一份英文密语词表里的-292-个亚洲外来语是怎么选出来的
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
@@ -8392,10 +8426,11 @@
 	#实体活动才有的文宣小物-Global-Gathering-会场见
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
+	#新闻导读-anoninetnews-与导读历史
 /zh-cn/blog/archive/2026/page/2/
 	#2026
+	#Brave-用两种相反的手法抹平-GPU-指纹
 	#COSCUP-2026-匿名网络社群议程轨征现场工作人员三个岗位808809-两天
-	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#一段预告过的降速813-用-OONI-记录台湾北部移动网络的-30-分钟
 	#介绍-Signal-自动密钥验证
@@ -8409,7 +8444,7 @@
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#COSCUP-2026-匿名网络社群议程轨808809-两天免费入场走进教室就能参加
 	#CryptPad-202650-上线正体中文zh_Hant正式收进内建语系
-	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
+	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#OONI-如何分辨坏掉的测量数据从启发式规则到匿名凭证
 	#Unredacted-如何帮受审查地区的人连上开放网络
 	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
@@ -8418,9 +8453,9 @@
 	#测量网络审查挑战趋势与影响
 /zh-cn/blog/archive/2026/page/4/
 	#2026
-	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#COSCUP-2026-匿名网络社群议程轨公开征稿
 	#Cure53-完成-Tor-VPN-安全审计
+	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#OONI-新版-Probe-Desktop-测试邀请
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#onionoo-MCP-上线用一句中文问-Tor-中继节点现况
@@ -8436,6 +8471,7 @@
 	#2026
 	#202603-社区近况更新
 	#Arti-210-更新发布
+	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#GNOME-Secrets
 	#OONI-全新的匿名凭证系统
 	#RightsCon-Taipei
@@ -8517,6 +8553,7 @@
 	#关于-COSCUP
 	#匿名网络社区前往-Global-Gathering-2026
 	#投稿方式请先看这里
+	#新闻导读-anoninetnews-与导读历史
 	#跨社区合作匿名网络社区--ETHTaipei
 	#项目重启-2025
 /zh-cn/blog/category/技术/
@@ -8628,11 +8665,10 @@
 	#在田间学的两场数字安全线上课826-这场还能报名
 	#实体活动才有的文宣小物-Global-Gathering-会场见
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
-	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
+	#新闻导读-anoninetnews-与导读历史
 	#社区
 /zh-cn/blog/category/社区/page/2/
-	#202603-社区近况更新
 	#COSCUP-2026-匿名网络社群议程轨808809-两天免费入场走进教室就能参加
 	#COSCUP-2026-匿名网络社群议程轨公开征稿
 	#COSCUP-2026-匿名网络社群议程轨征现场工作人员三个岗位808809-两天
@@ -8643,14 +8679,15 @@
 	#关于-COSCUP
 	#出国前数字安全把该问的问题带回去问你自己的-AI
 	#投稿方式请先看这里
+	#撤回自己写过的话近两周更正了哪些内容
 	#社区
 	#虚拟资产服务法草案行政院通过了什么还差什么
 	#跨社区合作匿名网络社区--ETHTaipei
 /zh-cn/blog/category/社区/page/3/
 	#2025
-	#202505-项目进度更新
 	#202506-项目进度更新匿名网络工作坊开始报名
 	#202508-项目进度更新
+	#202603-社区近况更新
 	#RightsCon-Taipei
 	#从-Discord-年龄验证谈起我们为什么自架-Matrix
 	#前言为什么在校园谈匿名网络
@@ -8667,7 +8704,9 @@
 /zh-cn/blog/category/社区/page/4/
 	#202503-项目进度更新
 	#202504-项目进度更新
+	#202505-项目进度更新
 	#匿名网络工作坊招募工作人员与培训小助手
+	#匿名网络工作坊筹备
 	#回顾网络自由工作坊TorTailsOONI
 	#工作任务
 	#提案---g0v-Hackath65n-零时政府第-65-次黑客松
@@ -8744,8 +8783,8 @@
 	#出国前数字安全把该问的问题带回去问你自己的-AI
 	#隐私
 /zh-cn/blog/page/2/
+	#Brave-用两种相反的手法抹平-GPU-指纹
 	#COSCUP-2026-匿名网络社群议程轨征现场工作人员三个岗位808809-两天
-	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#一段预告过的降速813-用-OONI-记录台湾北部移动网络的-30-分钟
 	#介绍-Signal-自动密钥验证
@@ -8759,7 +8798,7 @@
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#COSCUP-2026-匿名网络社群议程轨808809-两天免费入场走进教室就能参加
 	#CryptPad-202650-上线正体中文zh_Hant正式收进内建语系
-	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
+	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#OONI-如何分辨坏掉的测量数据从启发式规则到匿名凭证
 	#Unredacted-如何帮受审查地区的人连上开放网络
 	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
@@ -8768,9 +8807,9 @@
 	#测量网络审查挑战趋势与影响
 	#近期公告
 /zh-cn/blog/page/4/
-	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#COSCUP-2026-匿名网络社群议程轨公开征稿
 	#Cure53-完成-Tor-VPN-安全审计
+	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#OONI-新版-Probe-Desktop-测试邀请
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#onionoo-MCP-上线用一句中文问-Tor-中继节点现况
@@ -8786,11 +8825,11 @@
 	#2025
 	#202603-社区近况更新
 	#Arti-210-更新发布
+	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#GNOME-Secrets
 	#OONI-全新的匿名凭证系统
 	#RightsCon-Taipei
 	#Tails-76-发布说明
-	#Tor-用户文档的新家
 	#从-Discord-年龄验证谈起我们为什么自架-Matrix
 	#前言为什么在校园谈匿名网络
 	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
@@ -8803,11 +8842,11 @@
 	#项目提案---g0v-Hackath71n-零时政府第-71-次黑客松
 /zh-cn/blog/page/6/
 	#202508-项目进度更新
-	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#OnionMasqTor-为-VPN-式流量隔离实验修正
 	#Tails-70-发布
 	#Tails-70-发布第二个最终测试版本70rc2
 	#Tails-71-发布与说明
+	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#技术分析报告网络政变
 	#摊位手册
@@ -8820,6 +8859,7 @@
 	#202504-项目进度更新
 	#202505-项目进度更新
 	#202506-项目进度更新匿名网络工作坊开始报名
+	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#Tails-618-支持-WebTunnel-桥接协议
 	#WebTunnel-桥接方式
 	#介绍-oniux针对任何-Linux-应用程序的内核级别-Tor-隔离技术
@@ -8827,7 +8867,6 @@
 	#匿名网络工作坊招募工作人员与培训小助手
 	#匿名网络工作坊筹备
 	#匿名网络工作坊进度更新
-	#发布新-OONI-Explorer-专题审查页面
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#工作任务
 	#新功能
@@ -8838,6 +8877,7 @@
 	#Arti-141-更新发布
 	#为什么要为-OONI-建立匿名凭证系统
 	#去识别化的观测数据安全
+	#发布新-OONI-Explorer-专题审查页面
 	#回顾网络自由工作坊TorTailsOONI
 	#提案---g0v-Hackath65n-零时政府第-65-次黑客松
 	#网络自由工作坊TorTailsOONI
