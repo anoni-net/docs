@@ -15,7 +15,7 @@ Summaries of Android's monthly security updates. This page works differently fro
 
 Google's Android Security Bulletin changed in July 2026: the public pages no longer list vulnerability details. The June 2026 bulletin still carried 119 CVEs, split across Framework, System, Kernel, and the various chipset vendors, each tagged with a type and severity. The July and August pages contain nothing but explanatory text, right down to the boilerplate describing what the Type column of the details table means, while the table itself is absent. Rendering the page in a full browser gives the same result, so what is missing is the content itself.
 
-The 8 September bulletin put the details back: 18 tables, 180 CVEs, component sections and severities all present. July and August now look like a two-month gap. Whether to bring urgency ratings back is better decided after this holds for a few more months — switching now would leave the July and August entries with an empty slot, and readers could not tell "checked, nothing there" from "no data available".
+The 8 September bulletin put the details back: 18 tables, 180 CVEs, component sections and severities all present. The 5 October bulletin has details too. July and August now look like a two-month gap. Whether to bring urgency ratings back is better decided after this holds for a few more months — switching now would leave the July and August entries with an empty slot, and readers could not tell "checked, nothing there" from "no data available".
 
 Without the details there is no way to tell whether anything is under active exploitation in a given month, and that is exactly what the iOS and Windows pages rate. Rather than force a rating on uncertain data, this page tracks three things that can be established: how far the patch level advanced, how many CVEs it covers and at what severity, and how far behind your own device is.
 
@@ -32,6 +32,18 @@ How to read that date:
 - A device that has stopped receiving updates will not get fixes for known vulnerabilities at all. If you handle sensitive contacts or reporting work, consider replacing it or installing a system that is still maintained.
 
 Vendor support periods vary widely. Checking a model's committed support window before buying costs less than discovering it afterwards.
+
+## October 2026
+
+> Patch level 2026-10-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-10-01){target="_blank"} · [Pixel Update Bulletin](https://source.android.com/docs/security/bulletin/pixel/2026/2026-10-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
+
+- The bulletin went up on 5 October in the same detailed format as September, so the figures here come straight from Google.
+- It is much smaller than September: 25 CVEs, 7 Critical and 18 High, all under a single 2026-10-01 patch level. There are only two sections, Framework and System, with nothing for the kernel or chip vendors; September had 180 CVEs.
+- The most serious group is in the System component: four Critical privilege escalations that need no additional execution privileges and no user interaction, affecting Android 16 and later (CVE-2026-55269, CVE-2026-55280, CVE-2026-58835, CVE-2026-58880). System also has two Critical denial-of-service issues, and Framework has one remotely triggerable Critical denial of service (CVE-2026-58865) affecting Android 14 to 17.
+- The only remote code execution is rated High (CVE-2026-49878), in the Wi-Fi module. It ships through Google Play system updates together with CVE-2026-45524 in the same module and CVE-2026-58859 in telephony core, so devices on that update channel (some devices on Android 10 and later) can receive these three without waiting for a full update from the manufacturer.
+- The Pixel Update Bulletin on 6 October lists six additional Pixel-specific CVEs at the 2026-10-05 patch level. The three Critical ones are a Bluetooth privilege escalation (CVE-2026-55330), a privilege escalation in the GDMC component (CVE-2026-56952) and an information disclosure in the GSA component (CVE-2026-55307).
+- Google does not flag anything in either bulletin as actively exploited.
+- GrapheneOS released `2026100600` the same day as the Pixel bulletin, bringing the full 2026-10-05 patch level; see [GrapheneOS monthly summary](./grapheneos.md).
 
 ## September 2026
 

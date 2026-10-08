@@ -1683,6 +1683,7 @@
 	#組織裡負責資安的人
 	#軟體更新日誌
 /changelog/android/
+	#2026-年-10-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -1697,10 +1698,12 @@
 	#Snowflake-21312121
 	#Snowflake-2140
 	#Snowflake-2141
+	#Snowflake-21502151
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
 	#lyrebird-081
+	#lyrebird-090
 	#三種傳輸適合什麼情況
 	#抗審查傳輸更新日誌
 /changelog/arti/
@@ -1720,6 +1723,7 @@
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
+	#Firefox-2026-年-10-月
 	#Firefox-2026-年-7-月
 	#Firefox-2026-年-8-月
 	#Firefox-2026-年-9-月
@@ -1813,6 +1817,7 @@
 	#tor-04911
 	#tor-04912
 	#tor-04913
+	#tor-04914
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -3659,6 +3664,7 @@
 	#July-2026
 	#June-2026
 	#May-2026
+	#October-2026
 	#September-2026
 	#Why-this-page-has-no-urgency-ratings
 /en/changelog/anti-censorship/
@@ -3667,11 +3673,13 @@
 	#Snowflake-2131-2121
 	#Snowflake-2140
 	#Snowflake-2141
+	#Snowflake-2150-2151
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
 	#Which-transport-suits-which-situation
 	#lyrebird-081
+	#lyrebird-090
 /en/changelog/arti/
 	#Arti-220
 	#Arti-240
@@ -3690,6 +3698,7 @@
 	#Chrome-September-2026
 	#Firefox-August-2026
 	#Firefox-July-2026
+	#Firefox-October-2026
 	#Firefox-September-2026
 	#How-often-each-browser-ships
 	#How-we-rate-urgency
@@ -3777,6 +3786,7 @@
 	#tor-04911
 	#tor-04912
 	#tor-04913
+	#tor-04914
 	#tor-0496-04823
 	#tor-0497-04824
 	#tor-0498
@@ -8894,6 +8904,7 @@
 	#组织里负责信息安全的人
 	#软件更新日志
 /zh-cn/changelog/android/
+	#2026-年-10-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -8908,10 +8919,12 @@
 	#Snowflake-21312121
 	#Snowflake-2140
 	#Snowflake-2141
+	#Snowflake-21502151
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
 	#lyrebird-081
+	#lyrebird-090
 	#三种传输适合什么情况
 	#抗审查传输更新日志
 /zh-cn/changelog/arti/
@@ -8931,6 +8944,7 @@
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
+	#Firefox-2026-年-10-月
 	#Firefox-2026-年-7-月
 	#Firefox-2026-年-8-月
 	#Firefox-2026-年-9-月
@@ -9025,6 +9039,7 @@
 	#tor-04911
 	#tor-04912
 	#tor-04913
+	#tor-04914
 	#tor-049604823
 	#tor-049704824
 	#tor-0498

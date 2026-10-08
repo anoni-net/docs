@@ -17,14 +17,19 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 
 ## October 2026
 
-> Releases `2026100200` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+> Releases `2026100200`, `2026100600` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
-- Unprivileged hardware keepalives (keepalive packets the network chip sends on an app's behalf) are disabled. GrapheneOS states they create a VPN leak, so this release turns them off.
+- `2026100600` on 6 October brings the full 2026-10-05 security patch level and the October Pixel firmware, the same day as Google's Pixel Update Bulletin. The October bulletin is summarised in [Android Security Patch Levels](./android.md).
+- The security preview release (`2026100601`) now covers patches Google has scheduled for its November 2026 to April 2027 bulletins. The list of additional fixed CVEs has 122 entries (8 Critical, 114 High); the October batch has been published officially and dropped off the list.
+- Fixed an upstream integer overflow in `ZipFileRO.cpp` that caused memory corruption with a ZIP entry name of 65,535 bytes.
+- system_server JARs and non-APEX APKs are now always compiled ahead of time with the speed compiler filter, instead of speed-profile when a profile exists; GrapheneOS says this improves core OS performance.
+- Seedvault (the system backup tool) moves to the latest upstream Android 17 branch in place of GrapheneOS's own port, along with fixes for a batch of bugs and interface problems.
+- The 2 October release disabled unprivileged hardware keepalives (keepalive packets the network chip sends on an app's behalf). GrapheneOS states they create a VPN leak, so they are turned off.
 - The listed security patch level rises to 2026-09-05. The release notes say the 2026-09-05 patches had already been in place for a while, and the previous release brought in all the Pixel firmware and driver updates from Android 17 QPR1, so the listed level now reflects that. The cellular modem flaw CVE-2026-58704 from the September entry sits in the 2026-09-05 level; the notes still do not name it.
 - The Pixel kernel restores the Android 17 (CP2A) mmap read-ahead behaviour, fixing stutter under memory pressure caused by an upstream change in QPR1.
 - Fixed an upstream Android bug that set the last-modified time of files restored from Android backups to January 1970, because seconds were passed to an API expecting milliseconds.
-- All four kernel lines (6.1, 6.6, 6.12, 6.18) moved to the latest GKI LTS revisions, with 6.18 reaching 6.18.33.
-- Vanadium moves to 154.0.8037.92.0, matching Chrome's 29 September stable release.
+- All four kernel lines (6.1, 6.6, 6.12, 6.18) moved to the latest GKI LTS revisions, with 6.18 reaching 6.18.33 on 2 October and 6.12 reaching 6.12.94 on 6 October.
+- Vanadium moved to 154.0.8037.92.0 on 2 October, matching Chrome's 29 September stable release, then to 154.0.8037.126.0 on 6 October.
 - Device coverage runs from Pixel 6 to Pixel 10a, unchanged.
 
 ## September 2026
