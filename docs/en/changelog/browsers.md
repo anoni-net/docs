@@ -29,17 +29,26 @@ Mozilla advisories often say "we presume that with enough effort some of these c
 
 ## How often each browser ships
 
-Chrome ships a minor version with security fixes nearly every week. Major versions used to arrive about every four weeks, but 153 and 154 in September 2026 were only two weeks apart. Firefox also moved to a major version every two weeks from September, and maintains three Extended Support Release (ESR) lines: 153, 140 and 115, the last mainly for people still on Windows 7, 8.1 and older macOS.
+Chrome ships a minor version with security fixes nearly every week. Major versions used to arrive about every four weeks, but since September 2026 153, 154 and 155 have each come two weeks apart. Firefox also moved to a major version every two weeks from September, and maintains three Extended Support Release (ESR) lines: 153, 140 and 115, the last mainly for people still on Windows 7, 8.1 and older macOS.
 
 Both browsers download updates in the background, but an update only takes effect after the browser restarts. Anyone who keeps their browser open for days may have the new version downloaded while still running the old one. In Chrome, type `chrome://settings/help` into the address bar to see the version; in Firefox, open "Help" in the menu and choose "About Firefox".
 
 ## Chrome October 2026
 
-> 2026-10-01 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-06 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>154.0.8037.97 on 1 October fixed 11 security issues, one Critical and nine High. Google does not flag any of them as actively exploited.
+- <span class="urg-tag urg-tag--soon">Soon</span>Major version 155.0.8059.39 on 6 October fixed 247 security issues, 4 Critical and 53 High. Google does not flag any of them as actively exploited.
+- All four Critical issues are use-after-free bugs (memory used again after being released), in Chromecast, the browser process, Navigation and Track (CVE-2026-106382, CVE-2026-106197, CVE-2026-106358, CVE-2026-106347). Among the High ones, seven are in ANGLE and three in V8, plus an incorrect authorization in Site Isolation (CVE-2026-102322).
+- 154.0.8037.97 on 1 October fixed 11 security issues, one Critical and nine High. Google does not flag any of them as actively exploited.
 - The Critical one is an out of bounds write in WebGL (CVE-2026-103628), the interface web pages use to draw 3D graphics on the graphics card. The High ones include a type confusion in V8 (CVE-2026-103625); the rest are spread across FileSystem, SVG, Skia, MediaStream and other components.
 - The two exploited V8 flaws from September were already fixed in 152.0.7977.82 and 153.0.8010.36, so this release covers them too.
+
+## Firefox October 2026
+
+> 2026-10-06 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>157.0.1 on 6 October fixed a single Moderate issue, a mitigation bypass in the File Handling component (CVE-2026-106016). Mozilla does not flag it as actively exploited.
+- The three ESR lines had no matching update this time; the latest remain 153.4, 140.17 and 115.42.
 
 ## Chrome September 2026
 

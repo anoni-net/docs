@@ -35,6 +35,19 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 
 Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
 
+## tor 0.4.9.14
+
+> 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.14/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>A security release two weeks after 0.4.9.13, carrying three TROVE identifiers plus an unnumbered conflux fix listed under the same security heading. Upstream states that relays, clients, onion services and directory authorities are all affected and strongly recommends upgrading as soon as possible. Upstream does not mention exploitation in the wild.
+- As of 8 October, neither Tor Browser nor Tails has shipped a release with this version; stable 15.0.24 still bundles 0.4.9.13. People running relays, bridges and onion services need to upgrade themselves.
+- The conflux fix affects relays. A client could link a rendezvous-point circuit into a conflux set and then send a LINK cell with a forged sequence number, making the relay tear the set down from inside the rendezvous splice and hit a fatal assertion that terminates the relay process (bug 41328, present since 0.4.8.1-alpha). Relays now accept CONFLUX_LINK only on plain circuits and refuse to turn a conflux leg into an introduction or rendezvous point.
+- TROVE-2026-067: nodes other than directory authorities ignored the MiddleOnly flag. Authorities use that flag to confine suspicious relays to the middle position; with it ignored, clients could place those relays in inappropriate roles in onion service circuits (bug 41410, since 0.4.8.15).
+- TROVE-2026-062: a relay descriptor is now treated as expired if any of its family certificates has expired. The certificate expiry was previously ignored (bug 41413, since 0.4.9.2-alpha).
+- TROVE-2026-064 affects directory authorities only. AuthDirMaxServersPerAddr, which caps how many relays can share one address, now counts only relays found reachable there and no longer resets the uptime history of relays over the limit (bug 41405).
+- Two client fixes touch connection stability and traffic analysis. Cancelling a circuit before its first hop completed made tor stop using a working guard connection and abort unrelated directory requests. Those cancellations could be triggered remotely, and the extra TLS connections to the same guard could aid traffic analysis (bug 41412). Separately, the circuit build timeout history could fill up with "abandoned" entries, leaving the timeout stuck at a value low enough to break connectivity (bug 41420).
+- Onion service operators should note a behaviour change. HiddenServiceAllowUnknownPorts exists to slow down port scanning of onion services, but its logic was accidentally inverted during the move to v3 onion services. This release restores the original design: when a client asks for a port that is not configured, the service closes the circuit (bug 41435).
+
 ## tor 0.4.9.13
 
 > 2026-09-23 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.13/ChangeLog){target="_blank"}

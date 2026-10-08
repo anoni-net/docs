@@ -21,6 +21,25 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## Snowflake 2.15.0, 2.15.1
+
+> 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- Most of the 2.15.0 changes are on the broker (the server that matches clients with proxies) and the proxy side. The Tor Project runs the broker, so people using the Snowflake built into Tor Browser have nothing to do; people running their own Snowflake proxy should update. Upstream does not mention exploitation in the wild.
+- The broker again rate-limits proxy polls per IP (issue 40506). Rate limiting had been removed entirely because it applied to every endpoint and was suspected of slowing client matching. Without it, a malicious proxy could poll often, get assigned a disproportionate share of clients, and then drop or throttle their connections.
+- An external security audit found a Medium-severity issue: a proxy could spoof its source IP with a self-supplied Forwarded header, bypassing that rate limit and skewing the proxy counts and location statistics published on Tor Metrics (issue 40564). The broker now trusts only the X-Forwarded-For value added by its reverse proxy.
+- NAT matching moves from two categories to three (issue 40077): open (no NAT, full cone or restricted cone NAT), moderate (port-restricted cone NAT) and strict (symmetric NAT). The old split could pair a client behind a port-restricted NAT with a proxy behind a symmetric NAT that it cannot actually reach. With more proxies running on phones and IPv4 addresses getting scarcer, those failed pairings would keep growing.
+- The proxy and Probetest now accept only the first data channel opened (issues 40554, 40563). The proxy gains an `-interface` option to restrict which network interface outbound connections use (issue 40380).
+- Releases now build Debian packages with goreleaser (issue 40409), and the Go toolchain moves to 1.25. 2.15.1 only fixes the tarball build image used for releases; functionally it matches 2.15.0.
+
+## lyrebird 0.9.0
+
+> 2026-10-06 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}
+
+- Fixes Snowflake ignoring proxy settings. When an upstream proxy was configured in Tor (for example the proxy option in Tor Browser's connection settings), Snowflake running through lyrebird did not go through it, so it could not connect on networks that only allow traffic via a proxy.
+- Releases now build packages with goreleaser, and dependencies were updated. This release has no security issues, so the question of exploitation does not arise.
+- The ChangeLog dates this release 21 September, the day the fix was merged; the version tag was only created on 6 October. As of 8 October, Tor Browser has not shipped a release with it.
+
 ## WebTunnel 0.0.7
 
 > 2026-09-15 · [Project page](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}

@@ -21,6 +21,25 @@ digest:
 
 三種都在 Tor Browser 的連線設定裡，不必另外安裝。橋接位址可以從 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自動取得。
 
+## Snowflake 2.15.0、2.15.1
+
+> 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- 2.15.0 的修補大多落在 Broker（替用戶端與代理配對的中介伺服器）與代理端。Broker 由 Tor Project 營運，用 Tor Browser 內建 Snowflake 的人不需要做任何事，自己架設 Snowflake 代理的人要更新。上游沒有提到已被實際利用。
+- Broker 恢復依 IP 限制代理輪詢的頻率（issue 40506）。頻率限制先前套用到所有端點，疑似拖慢用戶端配對而整個拿掉。沒有限制時，惡意代理可以頻繁輪詢，分到不成比例的用戶端，再丟棄或拖慢它們的連線。
+- 外部安全稽核找到一個 Medium 等級的問題，代理可以用自己填的 Forwarded 標頭偽造來源 IP，繞過上面那項頻率限制，也能操弄 Tor Metrics 公布的代理數量與地區統計（issue 40564）。修正後 Broker 只採信反向代理附上的 X-Forwarded-For。
+- NAT 配對從兩類改成三類（issue 40077）：open（沒有 NAT、full cone 或 restricted cone NAT）、moderate（port-restricted cone NAT）與 strict（symmetric NAT）。原本的分法會讓 port-restricted NAT 後面的用戶端配到 symmetric NAT 後面、實際上連不通的代理。手機代理越來越多、IPv4 位址越來越緊，這種配對失敗會跟著增加。
+- 代理端與 Probetest 只接受第一個開啟的資料通道（issue 40554、40563）。代理端新增 `-interface` 選項，可以限定對外連線使用的網路介面（issue 40380）。
+- 發布流程改用 goreleaser 產生 Debian 套件（issue 40409），Go 工具鏈升到 1.25。2.15.1 只修發布用的 tarball 建置映像檔，功能跟 2.15.0 相同。
+
+## lyrebird 0.9.0
+
+> 2026-10-06 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}
+
+- 修掉 Snowflake 傳輸忽略代理設定的錯誤。在 Tor 裡設定上游代理時（例如 Tor Browser 連線設定裡的代理選項），透過 lyrebird 執行的 Snowflake 原本不會經過那個代理，只能透過代理上網的環境會因此無法連線。
+- 發布流程改用 goreleaser 產生套件，相依套件同步更新。這一版沒有安全問題，也就沒有利用與否的問題。
+- ChangeLog 上這一版標的日期是 9 月 21 日，那是修正合併的日子，版本標籤在 10 月 6 日才建立。截至 10 月 8 日，Tor Browser 還沒有帶這一版的新版本。
+
 ## WebTunnel 0.0.7
 
 > 2026-09-15 · [專案頁](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel){target="_blank"}

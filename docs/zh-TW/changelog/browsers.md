@@ -29,17 +29,26 @@ Mozilla 的公告裡常見「we presume that with enough effort some of these co
 
 ## 兩個瀏覽器的發布節奏
 
-Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版，2026 年 9 月的 153 與 154 只隔兩週。Firefox 也從 9 月起改成兩週一個大版本，另外維護三條延長支援版（ESR）：153、140 與 115，115 這條主要給還在用 Windows 7、8.1 與舊版 macOS 的人。
+Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版，2026 年 9 月起的 153、154、155 都只隔兩週。Firefox 也從 9 月起改成兩週一個大版本，另外維護三條延長支援版（ESR）：153、140 與 115，115 這條主要給還在用 Windows 7、8.1 與舊版 macOS 的人。
 
 兩個瀏覽器都會在背景下載更新，但要重新啟動瀏覽器才會生效。長時間不關瀏覽器的人，可能早就下載了新版卻一直在執行舊版。Chrome 在網址列輸入 `chrome://settings/help` 可以查版本，Firefox 在選單的「說明」裡點「關於 Firefox」。
 
 ## Chrome 2026 年 10 月
 
-> 2026-10-01 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-06 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>10 月 1 日的 154.0.8037.97 修了 11 個安全問題，Critical 1 個、High 9 個。Google 沒有標注任何一項已被實際利用。
+- <span class="urg-tag urg-tag--soon">儘快</span>10 月 6 日的大版本 155.0.8059.39 修了 247 個安全問題，Critical 4 個、High 53 個。Google 沒有標注任何一項已被實際利用。
+- 4 個 Critical 都是 use-after-free（程式把記憶體還回去之後又拿來用），分別在 Chromecast、瀏覽器本體、頁面導覽（Navigation）與 Track 元件（CVE-2026-106382、CVE-2026-106197、CVE-2026-106358、CVE-2026-106347）。High 裡 ANGLE 有 7 個、V8 有 3 個，另有一個網站隔離（Site Isolation）的授權錯誤（CVE-2026-102322）。
+- 10 月 1 日的 154.0.8037.97 修了 11 個安全問題，Critical 1 個、High 9 個。Google 沒有標注任何一項已被實際利用。
 - Critical 那一項是 WebGL（網頁呼叫顯示卡繪製 3D 圖形的介面）的越界寫入（CVE-2026-103628）。High 裡有一個 V8 的型別混淆（CVE-2026-103625），其餘分散在 FileSystem、SVG、Skia、MediaStream 等元件。
 - 九月那兩個已被利用的 V8 漏洞早在 152.0.7977.82 與 153.0.8010.36 修掉，更新到這一版同樣涵蓋。
+
+## Firefox 2026 年 10 月
+
+> 2026-10-06 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>10 月 6 日的 157.0.1 只修了一個 Moderate 等級的問題，檔案處理元件的防護機制可以被繞過（CVE-2026-106016）。Mozilla 沒有標注它已被實際利用。
+- ESR 三條線這次沒有對應的更新，最新版本維持 153.4、140.17 與 115.42。
 
 ## Chrome 2026 年 9 月
 
