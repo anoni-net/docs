@@ -9,6 +9,8 @@ changelog_digest:
   filter_label: Filter by device and role
   all: All
   latest: "Latest: {title} · {date}"
+  pinned: tor
+  pinned_note: Nearly every release carries security fixes, so update whenever prompted
   empty_now: Nothing rated Now or Soon in the past 45 days.
   empty_recent: No new entries in the past 45 days.
   empty_filtered: No entries for this option in this period.
@@ -48,6 +50,8 @@ Release-by-release summaries of the anonymity tools our community follows, plus 
 ### Needs action
 
 The latest entry from each page with urgency ratings (one per product where a page covers two), listing only Now and Soon. Each page rates urgency on a different basis, noted after the date on every item.
+
+Tor Browser has no urgency rating. Its current stable release is pinned at the top instead; compare it with the version shown under Help → About Tor Browser in the browser menu (in Settings on Android) to see whether you are behind.
 
 <!-- changelog-digest:now -->
 

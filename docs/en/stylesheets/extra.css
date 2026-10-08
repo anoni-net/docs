@@ -221,6 +221,12 @@
   display: block;
 }
 
+/* 「現在要處理的」最上面固定的 Tor Browser 穩定版，跟底下的急迫條目隔開 */
+.md-typeset ul.cl-now > li.cl-pinned {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--md-default-fg-color--lightest);
+}
+
 .md-typeset .cl-empty,
 .md-typeset .cl-none {
   color: var(--md-default-fg-color--light);

@@ -6,7 +6,7 @@
 
 - `<!-- changelog-digest:filter -->`：依裝置與用途篩選的選項，以及資料截至哪一天
 - `<!-- changelog-digest:now -->`：有急迫程度分級的頁面，各取最新一則，只留「立刻」
-  與「儘快」
+  與「儘快」。`changelog_digest.pinned` 指定的頁面（Tor Browser）另外固定放在最上面
 - `<!-- changelog-digest:recent -->`：期間內所有頁面的條目，由新到舊
 - `<!-- changelog-latest:<檔名> -->`：接在頁面清單每一項後面，寫出該頁最新的一則
 
@@ -39,6 +39,12 @@
 正好有很多人在用它。做法是一組 radio 加上 `:has()` 選擇器，選中某個選項就藏起
 `data-cl` 不含該 id 的項目。每個選項對應一條 CSS 規則，規則隨選項清單一起由這支產生，
 兩邊不會對不上。不支援 `:has()` 的瀏覽器篩選沒有作用，所有項目照常顯示。
+
+Tor Browser 是這一頁的讀者最多人在用的工具，tor.md 卻沒有急迫程度分級：穩定版幾乎每版
+都帶 Firefox 或 tor daemon 的安全修補，硬訂判準只會每一版都是同一級。所以首頁不替它
+分級，在「現在要處理的」最上面固定放一列目前的穩定版，不受期間限制，讀者對照自己的
+版本號就知道有沒有落後。要固定哪一頁寫在 `changelog_digest.pinned`，旁邊那句說明寫在
+`pinned_note`。
 
 「最近」以建置當天為準，網站沒有重新建置的話這一塊不會自己前進，所以輸出裡寫明
 資料截至哪一天。預覽時可以用環境變數 CHANGELOG_DIGEST_TODAY=YYYY-MM-DD 固定日期。
@@ -279,10 +285,25 @@ def render_filter(cfg: dict, today: dt.date) -> str:
     )
 
 
-def render_now(entries: list[Entry], pages: dict[str, PageInfo], cfg: dict, slugify) -> str:
-    if not entries:
+def _pinned_item(entry: Entry, pages: dict[str, PageInfo], cfg: dict, slugify) -> str:
+    page = pages[entry.page]
+    meta = [_date(entry.date, cfg["date_format"])]
+    if cfg.get("pinned_note"):
+        meta.append(cfg["pinned_note"])
+    return (
+        f'<li class="cl-pinned" data-cl="{_devices(page)}" markdown="span">{_tag(entry)}'
+        f'{_link(entry, page, slugify)}<span class="cl-meta">{html.escape(" · ".join(meta))}</span></li>'
+    )
+
+
+def render_now(entries: list[Entry], pages: dict[str, PageInfo], cfg: dict, slugify,
+               pinned: Entry | None = None) -> str:
+    if not entries and pinned is None:
         return f'<p class="cl-none">{html.escape(cfg["empty_now"])}</p>'
-    items = []
+    items = [_pinned_item(pinned, pages, cfg, slugify)] if pinned else []
+    if not entries:
+        # 固定列底下仍要說明期間內沒有急迫的條目，不帶 data-cl，每個選項都看得到
+        items.append(f'<li class="cl-none">{html.escape(cfg["empty_now"])}</li>')
     for entry in entries:
         page = pages[entry.page]
         meta = [_date(entry.date, cfg["date_format"])]
@@ -296,7 +317,8 @@ def render_now(entries: list[Entry], pages: dict[str, PageInfo], cfg: dict, slug
             f'<span class="cl-meta">{meta_html}</span></li>'
         )
     ids = [f["id"] for f in cfg["filters"]]
-    items.append(_empty_items(_count_by_filter(entries, pages), ids, cfg["empty_filtered"]))
+    if entries:
+        items.append(_empty_items(_count_by_filter(entries, pages), ids, cfg["empty_filtered"]))
     return '<ul class="cl-list cl-now" markdown="block">\n' + "\n".join(i for i in items if i) + "\n</ul>"
 
 
@@ -525,6 +547,15 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     ))
     _feed_dir = here
 
+    pinned = None
+    if cfg.get("pinned"):
+        pinned_page = by_stem.get(str(cfg["pinned"]))
+        pinned = latest(pinned_page) if pinned_page else None
+        if pinned is None:
+            # 固定列消失也不會讓建置變紅燈，讀者只會發現 Tor Browser 不見了
+            log.warning("changelog_digest：changelog_digest.pinned 指定的 %s 找不到穩定版的條目",
+                        cfg["pinned"])
+
     def replace(match):
         kind, name = match.groups()
         if kind == "latest":
@@ -534,7 +565,7 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         if name == "filter":
             return render_filter(cfg, today)
         if name == "now":
-            return render_now(pressing(pages, since), by_stem, cfg, slugify)
+            return render_now(pressing(pages, since), by_stem, cfg, slugify, pinned)
         if name == "recent":
             return render_recent(recent(pages, since), by_stem, cfg, slugify)
         log.warning("changelog_digest：不認得的佔位符 changelog-digest:%s", name)
