@@ -147,6 +147,24 @@ check("只寫月份的標題補上頁面名稱", "[windows · 2026 年 9 月](./
 check("篩選後會空的選項才有說明列", '<li class="cl-empty" data-cl="ooni">' in html_now, True)
 check("期間內什麼都沒有時給整段說明", cd.render_now([], pages, cfg, slug), '<p class="cl-none">沒有</p>')
 
+# --- 固定列 ---
+
+tor.devices = ["windows", "iphone"]
+tor_pages = {**pages, "tor": tor}
+cfg_pin = {**cfg, "pinned_note": "看到更新提示就更新"}
+pin = cd.latest(tor)
+html_pin = cd.render_now(picked, tor_pages, cfg_pin, slug, pin)
+check("固定列排在最上面", html_pin.split("\n")[1].startswith('<li class="cl-pinned"'), True)
+check("固定列是最新的穩定版，帶通道標籤與說明",
+      (f"{STABLE}[Tor Browser 15.0.23]" in html_pin, "2026/09/15 · 看到更新提示就更新" in html_pin),
+      (True, True))
+check("固定列跟著頁面的篩選項", '<li class="cl-pinned" data-cl="windows iphone"' in html_pin, True)
+html_pin_only = cd.render_now([], tor_pages, cfg_pin, slug, pin)
+check("沒有急迫條目時仍列出固定列，並說明期間內沒有急迫條目",
+      ('class="cl-pinned"' in html_pin_only, '<li class="cl-none">沒有</li>' in html_pin_only,
+       "cl-empty" in html_pin_only),
+      (True, True, False))
+
 html_filter = cd.render_filter(cfg, today)
 for fid in ("windows", "iphone", "relay", "ooni"):
     check(f"選項 {fid} 有 radio 也有對應的 CSS 規則",

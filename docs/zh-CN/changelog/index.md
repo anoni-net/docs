@@ -9,6 +9,8 @@ changelog_digest:
   filter_label: 按设备与用途筛选
   all: 全部
   latest: 最新：{title} · {date}
+  pinned: tor
+  pinned_note: 几乎每一版都带安全修补，看到更新提示就更新
   empty_now: 过去 45 天没有需要立刻或尽快处理的更新。
   empty_recent: 过去 45 天没有新的条目。
   empty_filtered: 这个选项在这段时间内没有对应的条目。
@@ -48,6 +50,8 @@ changelog_digest:
 ### 现在要处理的
 
 有紧急程度分级的页面各取最新一条（一页收两个产品的各取一条），只列「立刻」与「尽快」。各页分级的判断标准不同，写在每一项的日期后面。
+
+Tor Browser 不分级，最上面固定列出当前的稳定版，对照浏览器菜单「帮助」里「关于 Tor Browser」显示的版本号（Android 版在「设置」里），就知道自己有没有落后。
 
 <!-- changelog-digest:now -->
 

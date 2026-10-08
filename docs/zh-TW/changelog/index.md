@@ -9,6 +9,8 @@ changelog_digest:
   filter_label: 依裝置與用途篩選
   all: 全部
   latest: 最新：{title} · {date}
+  pinned: tor
+  pinned_note: 幾乎每一版都帶安全修補，看到更新提示就更新
   empty_now: 過去 45 天沒有需要立刻或儘快處理的更新。
   empty_recent: 過去 45 天沒有新的條目。
   empty_filtered: 這個選項在這段期間沒有對應的條目。
@@ -48,6 +50,8 @@ changelog_digest:
 ### 現在要處理的
 
 有急迫程度分級的頁面各取最新一則（一頁收兩個產品的各取一則），只列「立刻」與「儘快」。各頁分級的判準不同，寫在每一項的日期後面。
+
+Tor Browser 不分級，最上面固定列出目前的穩定版，對照瀏覽器選單「說明」裡「關於 Tor Browser」顯示的版本號（Android 版在「設定」裡），就知道自己有沒有落後。
 
 <!-- changelog-digest:now -->
 
