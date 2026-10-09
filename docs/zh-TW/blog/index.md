@@ -1,10 +1,10 @@
 ---
 title: 近期公告
 subtitle: 公告與軟體更新日誌
-description: anoni.net 社群的活動更新、技術分析、外部研究中譯與在地觀察。從工具新版本到法規動態，帶台灣讀者跟上匿名網路與網路自由的脈動。
+description: 外部研究與工具公告的中譯、技術分析、在地觀測報告與文件站的更新。社群的活動公告在 anoni.net 的社群動態。
 icon: material/bullhorn-outline
 ---
 
 # :material-bullhorn-outline: 近期公告
 
-專案更新進度、訊息公告或[訂閱郵件群組](https://anoni.net/contact/)。
+外部文章的翻譯、技術分析、觀測報告與文件站的更新。社群的活動公告、專案上線與工作進度，2026/10 起發在 [anoni.net 的社群動態](https://anoni.net/updates/)，也可以[訂閱電子報](https://anoni.net/contact/)。

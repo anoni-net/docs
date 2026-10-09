@@ -154,10 +154,12 @@ The structure stays flat. New articles go into an existing section:
 | `scenarios/` | Situations and roles, and what they change |
 | `regional/` | Regional observation and local regulatory context across the Sinophone Asia-Pacific |
 | `reports/` | Curated external research, indexed with links to the originals |
-| `community/` | Governance, process, and entry points |
-| `blog/` | Posts and original commentary |
+| `community/` | Guides to running nodes, reading measurement data, and the contribution and translation guidelines |
+| `blog/` | Translations of outside articles, technical analysis, measurement reports and updates about the docs site |
 
 The English site uses `regional/` where the Chinese site uses `taiwan/`. An English reader who sees `taiwan/` assumes a site about Taiwan, while the content spans several jurisdictions with Taiwan as the anchor point.
+
+Pages and announcements about the community itself are not on the docs site. About, how to take part, community services, events and community updates live on [anoni.net](https://anoni.net/en/), with the source in [`anoni-net/www`](https://github.com/anoni-net/www). Community announcements such as events, project launches and progress reports go in that repository's `updates/` directory.
 
 If you are not sure where an article belongs, ask on Matrix before opening a PR, rather than moving it afterwards.
 
