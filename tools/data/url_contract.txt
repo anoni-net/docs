@@ -1911,6 +1911,8 @@
 	#中文標題的換行
 	#亮色模式的介面色
 	#六種版型
+	#只在文件站用的顏色
+	#各站的視覺分工
 	#品牌主色-cyan9-階
 	#品牌素材
 	#單頁換掉卡片內容
@@ -1938,6 +1940,7 @@
 	#配色-Token
 	#配色一致性drawio-palette-預設
 	#配色使用守則
+	#頂層網站的細線
 /community/campus-relay-faq/
 	#如何使用這份-FAQ
 	#常見疑慮-QA
@@ -3855,6 +3858,7 @@
 	#Brand-Assets
 	#Brand-cyan-nine-steps
 	#Colour-tokens
+	#Colours-used-only-on-the-docs-site
 	#Contributing-technical-diagrams
 	#Diagram-colours
 	#Diagram-files-live-on-assetsanoninet
@@ -3863,6 +3867,7 @@
 	#Filenames-carry-the-language
 	#Flows-use-a-centred-connector
 	#Guide-category-colours-sidebar-navigation
+	#How-each-site-uses-the-brand
 	#Interface-colour-in-light-mode
 	#Keeping-colours-consistent
 	#Leave-line-breaks-to-the-layout
@@ -3882,6 +3887,7 @@
 	#Structural-secondaries-for-the-three-2026-tracks-category-tags-only
 	#The-eyebrow-is-muted-and-the-alt-is-the-only-authoritative-text
 	#The-layout-reference
+	#Thin-lines-on-the-top-level-site
 	#Turn-horizontal-layouts-vertical
 	#Using-a-diagram-in-an-article
 	#Using-the-colours
@@ -9103,6 +9109,8 @@
 	#几何比例与净空区
 	#单页换掉卡片内容
 	#发布
+	#只在文档站用的颜色
+	#各站的视觉分工
 	#品牌主色-cyan9-阶
 	#品牌素材
 	#图档放在-assetsanoninet
@@ -9127,6 +9135,7 @@
 	#配色-Token
 	#配色一致性drawio-palette-默认
 	#配色使用守则
+	#顶层网站的细线
 /zh-cn/community/campus-relay-faq/ -> /zh-cn/community/
 /zh-cn/community/campus-tor-relay-proposal/ -> /zh-cn/community/
 /zh-cn/community/campus-tor-relay-sop/ -> /zh-cn/community/

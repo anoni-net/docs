@@ -440,6 +440,40 @@ Border colours land between 1.5 and 2.8:1 against the page background, short of 
 - `Event` uses `--accent-action`
 - `Updated` uses `--cat-privacy`, sharing a colour with the privacy track, where the weak visual association is acceptable
 
+## :material-view-dashboard-outline: How each site uses the brand
+
+Three sites live under anoni.net. They share the logo and the tokens above, and each is told apart by the colour of its header, so readers moving between them can see where they are. All three use `--brand-cyan-*` as the only main hue and add no others.
+
+| Site | Header | Layout | Where the styles live |
+|---|---|---|---|
+| [anoni.net](https://anoni.net/en/){target="_blank"} | White, logo plus `anoni.net` | Each page sits inside one thin-line frame, cyan as the only hue | `static/css/site.css` in `anoni-net/www` |
+| [anoni.net/docs](../index.md) | `--brand-cyan-800` with white text | Material for MkDocs, sidebar in the guide category colours | `docs/*/stylesheets/extra.css` in this repository |
+| [anoni.net/news](https://anoni.net/news/en/){target="_blank"} | `--brand-cyan-900` with white text, an ink tone | A hand-written single-column layout with serif headings | `static/css/news.css` in `anoni-net/news` |
+
+From light to dark the headers run top level, docs, news, so the three are easy to tell apart side by side.
+
+### Thin lines on the top-level site
+
+The top-level site (home, about, join, projects, services and the other community pages) keeps the look of the home page as it was before the October 2026 redesign: white background, 1px lines and a single hue. New page types follow this spec and don't bring in filled blocks or a second hue.
+
+| Element | Spec |
+|---|---|
+| Frame | 1px `--brand-cyan-500` line with a 4px `--brand-cyan-50` halo, 8px corners, at most 42rem wide |
+| Dividers | 1px `--brand-cyan-100`, for the line trailing each section heading, list rows and the footer |
+| Fill | Only `--brand-cyan-50`, and only on the cards for the two content projects, Docs and News |
+| Card hover | A 3px ring of `--brand-cyan-500` at 25% opacity |
+| Keyboard focus | 2px `--brand-cyan-500` outline, 2px from the element |
+| Text | Body `#1d2b31`, secondary `#52646b`, links `--brand-cyan-800` |
+| Dark mode | Background `#00202d`, lines in `--brand-cyan-600`, links in `--brand-cyan-200` |
+
+### Colours used only on the docs site
+
+- **Guide category colours** (`--guide-*`) identify sections in the docs sidebar and appear nowhere else
+- **Structural secondaries** (`--cat-*`, the green, purple and orange) are also limited to the docs site. The top-level site stays single-hue and marks the three tracks with outlined circular icons instead of colour
+- **Material interface colours** (the set that moves the light-mode header to `--brand-cyan-800`) only concern the Material theme
+
+When News or the top-level site needs an accent, follow "Using the colours" above, and keep the emergency red for emergencies.
+
 ## :material-share-variant-outline: Social cards (Open Graph)
 
 Paste any page of the docs into Mastodon, LinkedIn, X, Bluesky or a chat room, and the preview image comes straight from the build. One card per page per language, no manual artwork.

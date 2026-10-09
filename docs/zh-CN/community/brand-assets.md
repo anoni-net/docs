@@ -440,6 +440,40 @@ Material 默认的 light blue 当主色时，在白底的对比只有 2.71:1，�
 - `活动` → `--accent-action`（橘）
 - `更新` → `--cat-privacy`（绿，跟个人隐私指引同色，视觉关联弱可接受）
 
+## :material-view-dashboard-outline: 各站的视觉分工
+
+anoni.net 底下有三个网站，共用同一组 logo 与上面的色票，各自用页首的颜色区分，读者从一个网站换到另一个时看得出自己在哪里。三个网站都只用 `--brand-cyan-*` 这一个色相当主色，不另外新增色相。
+
+| 网站 | 页首 | 版面 | 样式的位置 |
+|---|---|---|---|
+| [anoni.net](https://anoni.net/zh-cn/){target="_blank"} | 白底，logo 加 `anoni.net` | 整页装在一张细线外框里，只用 cyan 一个色相 | `anoni-net/www` 的 `static/css/site.css` |
+| [anoni.net/docs](../index.md) | `--brand-cyan-800` 底、白字 | Material for MkDocs，侧栏用指南分类色 | 本 repo 的 `docs/*/stylesheets/extra.css` |
+| [anoni.net/news](https://anoni.net/news/zh-cn/){target="_blank"} | `--brand-cyan-900` 底、白字，墨色调 | 自己写的单栏版面，标题用宋体 | `anoni-net/news` 的 `static/css/news.css` |
+
+颜色由浅到深是顶层、文档站、新闻导读，三者并排时一眼分得出来。
+
+### 顶层网站的细线
+
+顶层网站（首页、关于、参与、项目、服务等社群页面）沿用 2026-10 改版前那一页首页的样式：白底、1px 细线、单一色相。之后新增的页型照这组规格，不要引入色块或第二个色相。
+
+| 元素 | 规格 |
+|---|---|
+| 外框 | 1px `--brand-cyan-500` 线，外加 4px `--brand-cyan-50` 外光晕，圆角 8px，最宽 42rem |
+| 分隔线 | 1px `--brand-cyan-100`，用在小标题右侧延伸的线、列表的上下线与页尾 |
+| 填色 | 只有 `--brand-cyan-50` 一种，只给文档与新闻导读两个项目的卡片 |
+| 滑过卡片 | 外围加一圈 3px、25% 透明度的 `--brand-cyan-500` |
+| 键盘焦点 | 2px `--brand-cyan-500` 外框，离元素 2px |
+| 文字 | 正文 `#1d2b31`，次要文字 `#52646b`，链接 `--brand-cyan-800` |
+| 深色模式 | 底色 `#00202d`，线改用 `--brand-cyan-600`，链接改用 `--brand-cyan-200` |
+
+### 只在文档站用的颜色
+
+- **指南分类色**（`--guide-*`）是文档站侧栏的导览识别色，只在文档站出现
+- **结构性次色**（`--cat-*`）的绿、紫、橙也限定在文档站。顶层网站要维持单色，三大主题在顶层用圆形线框图标区分，不套颜色
+- **Material 的界面色**（亮色模式页首改用 `--brand-cyan-800` 那组）只跟 Material 主题有关
+
+新闻导读与顶层网站要用到 accent 的时候，照上面的「配色使用守则」，紧急红只用在紧急情境。
+
 ## :material-share-variant-outline: 社群分享卡（Open Graph）
 
 把文件站的任何一页贴到 Mastodon、LinkedIn、X、Bluesky 或聊天室，对方看到的预览图由构建流程自动生成，三个语系各一份，不需要人工做图。
