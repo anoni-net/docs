@@ -80,7 +80,7 @@ anoni-net-docs/
 
 | 群組 | 內容 |
 |------|------|
-| 編輯標準 | `docs_style_lint.py` 把[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)「寫作風格規範」可機器判斷的部分做成檢查。三語系都掃，中英各一組規則。細節見 [`tools/README.md`](./tools/README.md) |
+| 編輯標準 | `docs_style_lint.py` 把社群首頁[寫作風格規範](https://anoni.net/join/writing-style/)可機器判斷的部分做成檢查。三語系都掃，中英各一組規則。細節見 [`tools/README.md`](./tools/README.md) |
 | 前端守門測試 | 小工具區每一支 js 的行為驗證：取樣與熵、QR code 編碼往返、指紋示範頁不送出資料、網址清理不誤刪必要參數、隱形字元偵測的誤判案例。分析事件另有白名單測試，擋住搜尋詞之類的內容被送出 |
 | 離線與 PWA | service worker 的離線路徑、語言偏好導向、離線索引分組、離線內容管理頁的介面，以及預快取清單與建置產物的比對 |
 | 建置一致性 | `check_theme_assets.py` 比對 `overrides/base.html` 與 `sw.js` 寫死的主題資產雜湊與實際安裝的版本，升級 mkdocs-material 漏同步時會擋下來 |
@@ -198,7 +198,7 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 - **想提新主題、補在地案例，或推薦來源** → 用[內容提案](https://github.com/anoni-net/docs/issues/new?template=content.yml)或[來源建議](https://github.com/anoni-net/docs/issues/new?template=source-suggestion.yml) Issue。
 - **想參與推廣、活動或維運** → 到 Matrix [社群 Public Space](https://matrix.to/#/#community:im.anoni.net) 打聲招呼。
 
-工具操作與安全情境類內容（tools、scenarios、advanced）由維護者技術審核才合併，其餘內容輕量審核。寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)的「寫作風格規範」一節，送 PR 前可先執行 `tools/docs_style_lint.py` 自檢。完整入門見[如何參與與認領主題](https://anoni.net/join/)。流程、分支與 CI、授權見 [CONTRIBUTING.md](./CONTRIBUTING.md)，互動規範見[行為準則](./CODE_OF_CONDUCT.md)。
+工具操作與安全情境類內容（tools、scenarios、advanced）由維護者技術審核才合併，其餘內容輕量審核。寫作風格的單一來源是社群首頁的[寫作風格規範](https://anoni.net/join/writing-style/)，檔名、PR 流程與翻譯規範見[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)，送 PR 前可先執行 `tools/docs_style_lint.py` 自檢。完整入門見[如何參與與認領主題](https://anoni.net/join/)。流程、分支與 CI、授權見 [CONTRIBUTING.md](./CONTRIBUTING.md)，互動規範見[行為準則](./CODE_OF_CONDUCT.md)。
 
 **找人**：Matrix [Public Space](https://matrix.to/#/#community:im.anoni.net)（帳號申請來信 whisper@anoni.net）、[GitHub Discussions](https://github.com/anoni-net/docs/discussions)、加密共筆 [Cryptpad](https://cryptpad.anoni.net/)。
 
@@ -307,7 +307,7 @@ Cross-subproject scripts, mostly dependency-free, triggered by GitHub Actions on
 
 | Group | Content |
 |-------|---------|
-| Style linting | `docs_style_lint.py` turns the machine-checkable parts of the [contributor handbook's](https://anoni.net/docs/community/contributor-handbook/) writing style rules into a linter. It scans all three locales with separate Chinese and English rule sets. See [`tools/README.md`](./tools/README.md) |
+| Style linting | `docs_style_lint.py` turns the machine-checkable parts of the [writing style](https://anoni.net/en/join/writing-style/) rules on the community site into a linter. It scans all three locales with separate Chinese and English rule sets. See [`tools/README.md`](./tools/README.md) |
 | Frontend guard tests | Behavioral checks for every script in the utilities section: sampling and entropy, QR code encode/decode round-trip, the fingerprint demo sending nothing, the URL cleaner not stripping required parameters, false-positive cases for invisible-character detection. Analytics events have their own allowlist test that keeps content such as search terms from being sent |
 | Offline and PWA | Service worker offline paths, language preference routing, offline index grouping, the offline content manager UI, and a precache-list comparison against build output |
 | Build consistency | `check_theme_assets.py` compares the theme asset hashes hardcoded in `overrides/base.html` and `sw.js` against the installed version, catching a missed sync after a mkdocs-material upgrade |
@@ -425,7 +425,7 @@ We welcome contributions of all kinds. Pick your starting point:
 - **Propose a topic, add a local case, or suggest a source** → use the [content](https://github.com/anoni-net/docs/issues/new?template=content.yml) or [source](https://github.com/anoni-net/docs/issues/new?template=source-suggestion.yml) issue forms.
 - **Help with outreach, events, or ops** → say hi in the Matrix [community Public Space](https://matrix.to/#/#community:im.anoni.net).
 
-Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge; everything else is lighter. The single source of truth for writing style is the writing style section of the [contributor handbook](https://anoni.net/docs/community/contributor-handbook/), and `tools/docs_style_lint.py` is available for a local self-check. See [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow, branches, CI, and licensing, and the [Code of Conduct](./CODE_OF_CONDUCT.md). Reach us via Matrix Public Space (account requests: whisper@anoni.net), [GitHub Discussions](https://github.com/anoni-net/docs/discussions), or [Cryptpad](https://cryptpad.anoni.net/).
+Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge; everything else is lighter. The single source of truth for writing style is the [writing style](https://anoni.net/en/join/writing-style/) page on the community site, file naming and the PR process are in the [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/), and `tools/docs_style_lint.py` is available for a local self-check. See [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow, branches, CI, and licensing, and the [Code of Conduct](./CODE_OF_CONDUCT.md). Reach us via Matrix Public Space (account requests: whisper@anoni.net), [GitHub Discussions](https://github.com/anoni-net/docs/discussions), or [Cryptpad](https://cryptpad.anoni.net/).
 
 ## 📝 License
 

@@ -1,6 +1,6 @@
 # docs 編輯標準掃描器（docs_style_lint）
 
-把公開[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)「寫作風格規範」裡可機器判斷的硬規則做成檢查，輸出 `file:line` 與規則代碼。
+把社群首頁公開的[寫作風格規範](https://anoni.net/join/writing-style/)裡可機器判斷的硬規則做成檢查，輸出 `file:line` 與規則代碼。
 
 編輯標準的單一來源是貢獻者百科，這支腳本是它的執法工具。三個語系都掃，但套用的規則不同。中文那組是標點與句型，套用在 zh-TW 與 zh-CN。英文那組獨立（破折號與分號在英文是正常標點），2026-08 起納入 docs/en，目前實作 `bold-lead-sentence`、`title-colon` 與 `machine-field` 三條。linter 依路徑自動選規則集，見 `is_english_doc`。透過 [`.github/workflows/docs-style-lint.yml`](../.github/workflows/docs-style-lint.yml) 在每個 PR 對變更的 Markdown 自動執行。error 級擋 merge，warn 級只提醒。
 
@@ -123,7 +123,7 @@ pre-commit autoupdate --repo https://github.com/anoni-net/docs --bleeding-edge
 
 ## 關閉特定檢查
 
-- 規則文件本身（`contributor-handbook.md`、`docs-writing-style.md`）會引用被禁的句型當例子，預設略過。要連它們一起掃用 `--include-rule-docs`。
+- 規則文件本身（`writing-style.md`、`contributor-handbook.md`、`docs-writing-style.md`）會引用被禁的句型當例子，預設略過。要連它們一起掃用 `--include-rule-docs`。
 - 任何頁面要展示違規範例時，用 inline 指令局部關閉：
 
     ```markdown

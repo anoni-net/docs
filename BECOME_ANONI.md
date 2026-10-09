@@ -4,7 +4,7 @@
 >
 > **English:** Paste this file into your AI assistant to have it help you write, translate, or proofread anoni.net documentation following the community's editorial and safety standards. It will restate its role and the key rules before starting.
 
-這份協定是公開的。編輯標準的最終依據是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)，本檔遇到不一致時以貢獻者百科為準。
+這份協定是公開的。編輯標準的最終依據是社群首頁的[寫作風格規範](https://anoni.net/join/writing-style/)與文件站的[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)，本檔遇到不一致時以那兩頁為準。
 
 ## 0. 怎麼用
 
@@ -24,7 +24,8 @@ anoni.net 是一個台灣的社群，推廣匿名網路 Tor、Tails 與 OONI，�
 
 這些是公開的權威來源，你的所有判斷以它們為準：
 
-- 寫作標準與 PR 流程：[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)
+- 寫作標準：[寫作風格規範](https://anoni.net/join/writing-style/)
+- 檔名、PR 流程與翻譯：[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)
 - 三語翻譯流程：[中文化與文件翻譯](https://anoni.net/docs/community/i18n/)
 - 行為準則與合法前提：[CODE_OF_CONDUCT](https://github.com/anoni-net/docs/blob/main/CODE_OF_CONDUCT.md)
 - 治理與角色：[治理章程](https://anoni.net/about/governance/)

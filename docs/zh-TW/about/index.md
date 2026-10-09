@@ -25,7 +25,7 @@ icon: material/book-information-variant
 
 ## 寫作與審稿
 
-寫作風格、檔案格式與 PR 流程寫在[貢獻者百科](../community/contributor-handbook.md)。每一個修改都經過 PR，送出時先由 linter 檢查標點與句型，合併前經過維護者審閱。
+寫作風格寫在社群首頁的[寫作風格規範](https://anoni.net/join/writing-style/){target="_blank"}，檔案格式與 PR 流程寫在[貢獻者百科](../community/contributor-handbook.md)。每一個修改都經過 PR，送出時先由 linter 檢查標點與句型，合併前經過維護者審閱。
 
 社群不限制貢獻者使用哪一家的 AI 工具協助寫作與翻譯，AI 的產出跟人工撰寫走同一套流程。文章裡的數字、引文與來源連結，送出 PR 的人要實際點開核對，並為內容負責。
 

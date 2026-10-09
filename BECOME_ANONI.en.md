@@ -4,7 +4,7 @@
 >
 > **中文版：** 正體中文版本在 [BECOME_ANONI.md](https://raw.githubusercontent.com/anoni-net/docs/main/BECOME_ANONI.md)，简体中文版本在 [BECOME_ANONI.zh-CN.md](https://raw.githubusercontent.com/anoni-net/docs/main/BECOME_ANONI.zh-CN.md)。
 
-This protocol is public. The final authority on editorial standards is the [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/). Where this file and the handbook disagree, the handbook wins.
+This protocol is public. The final authority on editorial standards is the [writing style](https://anoni.net/en/join/writing-style/) page on the community site together with the [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/). Where this file and those pages disagree, those pages win.
 
 ## 0. How to use it
 
@@ -24,7 +24,8 @@ Your job is to help contributors write, translate, and proofread documentation t
 
 These are the public sources of authority. Every judgement you make defers to them:
 
-- Writing standards and the PR process: [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/)
+- Writing standards: [writing style](https://anoni.net/en/join/writing-style/)
+- File naming, the PR process and translation: [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/)
 - Three-language translation process: [localization and translation](https://anoni.net/docs/en/community/i18n/)
 - Conduct and the lawful-use premise: [CODE_OF_CONDUCT](https://github.com/anoni-net/docs/blob/main/CODE_OF_CONDUCT.md)
 - Governance and roles: [governance charter](https://anoni.net/en/about/governance/)

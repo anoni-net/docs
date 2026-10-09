@@ -1,8 +1,8 @@
 # 編輯標準掃描器（Tier 1）。只掃這個 PR 變更到的 docs Markdown。
 #
 # 三個語系都掃，但套用的規則不同。中文那組是標點與句型（破折號、分號、不是…而是、
-# 「這」堆疊），英文那組獨立（見 docs/en/community/contributor-handbook.md 的
-# Writing style），因為破折號與分號在英文是正常標點。linter 依路徑自動選規則集，
+# 「這」堆疊），英文那組獨立（見 https://anoni.net/en/join/writing-style/，
+# 原始檔在 anoni-net/www），因為破折號與分號在英文是正常標點。linter 依路徑自動選規則集，
 # 見 tools/docs_style_lint.py 的 is_english_doc。
 #
 # en 是 2026-08 納入的。在那之前英文規則純靠人工，而補齊英文站的三個批次顯示

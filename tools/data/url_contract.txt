@@ -1930,31 +1930,19 @@
 	#PR-流程
 	#Review
 	#front-matter
-	#並列引號的標點
 	#入口檔
-	#品牌名稱與受眾
 	#圖片與資源
 	#圖表
-	#套用範圍
-	#安全與隱私寫作
+	#執行-linter
 	#寫作風格規範
 	#拆頁或搬走段落要回頭檢查入口連結
 	#提問前先看哪裡
 	#搬檔改名刪頁要補-redirect
-	#擬人化
-	#敘事結構
-	#數字與編號
 	#文章格式
-	#標題句構
-	#標點集合
 	#檔名
 	#檔案命名與目錄
-	#段落語氣
-	#用詞與譯名
 	#目錄結構
-	#禁用句型與標點
 	#第一週的入門路徑
-	#精簡與去-AI-味
 	#結構化資料
 	#翻譯流程
 	#行為準則摘要
@@ -3740,37 +3728,27 @@
 	#Commit-messages
 	#Contributor-Handbook
 	#Cross-file-links
-	#Cutting-the-machine-written-texture
 	#Directory-structure
-	#English-and-Chinese-have-separate-rule-sets
 	#Entry-files
 	#Filenames
 	#Files-and-directories
 	#Footnotes
 	#Front-matter
-	#Headings
 	#How-translation-works
 	#Images-and-assets
 	#Issue-labels
 	#Moving-renaming-or-deleting-a-page-needs-a-redirect
-	#Narrative-structure
-	#No-animacy-for-things-that-are-not-people
-	#Numbers-and-identifiers
 	#PR-descriptions
 	#Page-format
-	#Paragraph-voice
 	#Pull-requests
 	#Review
 	#Roles
+	#Running-the-linter
 	#Splitting-or-moving-content-needs-the-inbound-links-checked
 	#Structured-data
-	#Terminology
 	#This-handbook-is-a-living-document
-	#Voice-and-positioning
-	#What-these-rules-cover
 	#Where-to-look-before-asking
 	#Working-with-AI-tools
-	#Writing-about-security-and-privacy
 	#Writing-style
 	#Your-first-week
 /en/community/governance/ -> https://anoni.net/en/about/governance/
@@ -8717,24 +8695,19 @@
 	#Review
 	#写作风格规范
 	#图片与资源
-	#并列引号的标点
+	#执行-linter
 	#拆页或搬走段落要回头检查入口链接
 	#提问前先看哪里
 	#搬档改名删页要补-redirect
 	#文件名
 	#文件命名与目录
-	#标点集合
-	#段落语气
-	#用词
 	#目录结构
-	#禁用句型与标点
 	#第一周的入门路径
 	#翻译流程
 	#行为准则摘要
 	#贡献者百科
 	#跨档链接规则
 	#这份百科是活文件
-	#适用范围
 /zh-cn/community/governance/ -> https://anoni.net/zh-cn/about/governance/
 /zh-cn/community/how-to-contribute/ -> https://anoni.net/zh-cn/join/
 /zh-cn/community/i18n/
