@@ -379,6 +379,15 @@ plugins:
         # These pages are the fallback for hosts without that nginx, such as the IPFS mirror.
         'contact.md': 'https://anoni.net/en/contact/'
         'community/tools.md': 'https://anoni.net/en/services/'
+        'community/index.md': 'https://anoni.net/en/join/'
+        'community/governance.md': 'https://anoni.net/en/about/governance/'
+        'community/partners.md': 'https://anoni.net/en/about/partners/'
+        'community/roadmap-2026.md': 'https://anoni.net/en/join/roadmap-2026/'
+        'community/privacy-guide.md': 'https://anoni.net/en/join/privacy-guide/'
+        'community/relay-on-campus.md': 'https://anoni.net/en/join/relay-on-campus/'
+        'community/payments-research.md': 'https://anoni.net/en/join/payments-research/'
+        'community/upload-sensitive.md': 'https://anoni.net/en/join/upload-sensitive/'
+        'community/send-privacy.md': 'https://anoni.net/en/services/send/'
         # offline-install 併進 offline（安裝說明與離線內容管理收成一頁）
         'offline-install.md': 'offline.md'
         # 2026 flat → categorised restructure (3aa2a65). Pages whose English content
@@ -399,9 +408,9 @@ plugins:
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
         'setup-skill-level.md': 'community/skill-level.md'
         # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
-        'about/community.md': 'community/index.md'
-        'about/community/communication-tools.md': 'community/index.md'
-        'about/community/participate.md': 'community/index.md'
+        'about/community.md': 'https://anoni.net/en/join/'
+        'about/community/communication-tools.md': 'https://anoni.net/en/join/'
+        'about/community/participate.md': 'https://anoni.net/en/join/'
         'about/send-censorship.md': 'about/index.md'
         'advanced.md': 'advanced/index.md'
         'blog/2025/01/專案重啟-2025.md': 'blog/index.md'

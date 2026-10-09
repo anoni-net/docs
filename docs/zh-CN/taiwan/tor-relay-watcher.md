@@ -349,7 +349,7 @@ Tor 软件版本的更新状况，以及各节点所具备的能力标签分布�
 
 !!! example "想实现？"
 
-    - :material-server-network: **想自己架 Tor relay**：见 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校园架 relay 是 anoni.net 2026 三大主题之一，可看 [Tor Relay 校园建立](../community/relay-on-campus.md)。
+    - :material-server-network: **想自己架 Tor relay**：见 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校园架 relay 是 anoni.net 2026 三大主题之一，可看 [Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/)。
     - :material-chart-bar: **观测数据来源**：本页图表通过 [Pulse 后端 API](https://anoni.net/api/readme){target="_blank"} 提供，观察项目与数据服务都还在持续调整中。
 
 ## :fontawesome-solid-diagram-project: 下一步
@@ -358,7 +358,7 @@ Tor 软件版本的更新状况，以及各节点所具备的能力标签分布�
 
 - [:material-api: 用一句中文查 Tor 节点现况](../community/onionoo-mcp.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
-- [:material-school: Tor Relay 校园建立](../community/relay-on-campus.md)
+- [:material-school: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/)
 - [:material-access-point-network: ASNs 自治网络观测数据分析](./ooni-asn-coverage.md)
 - [:material-chat-question: 什么是 Tor？](../tools/what-is-tor.md)
 

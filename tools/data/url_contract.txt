@@ -22,7 +22,7 @@
 	#相關閱讀
 	#閱讀方式
 	#關於文件站
-/about/community/ -> /community/
+/about/community/ -> https://anoni.net/join/
 /about/community/communication-tools/ -> https://anoni.net/services/
 /about/community/participate/ -> https://anoni.net/join/
 /about/how-you-are-reading/
@@ -33,7 +33,7 @@
 	#怎麼選
 	#標準網站
 	#相關閱讀
-/about/send-censorship/ -> /community/upload-sensitive/
+/about/send-censorship/ -> https://anoni.net/join/upload-sensitive/
 /activity/
 	#活動參與
 /activity/coscup-2026-cfp/
@@ -1867,10 +1867,7 @@
 	#Windows-安全更新
 	#先看清楚受影響的是哪一種產品
 	#急迫程度怎麼判斷
-/community/
-	#2026-三大主題
-	#你可以如何參與
-	#社群參與
+/community/ -> https://anoni.net/join/
 /community/asn-coverage-howto/
 	#ASN-觀測資料擷取與分析
 	#S3-資料集的擺放方式
@@ -2042,29 +2039,7 @@
 	#貢獻者百科
 	#跨檔連結規則
 	#這份百科是活文件
-/community/governance/
-	#互動原則
-	#共識決為主
-	#合法前提
-	#對事的爭議
-	#對人的爭議
-	#對外言行
-	#成員角色
-	#投票例外狀況
-	#提案流程
-	#核心成員
-	#機敏資訊處理
-	#決策方式
-	#治理章程
-	#爭議處理
-	#相關文件
-	#章程修訂
-	#行為準則
-	#觀察員
-	#訪客
-	#貢獻者
-	#違反處置
-	#適用範圍
+/community/governance/ -> https://anoni.net/about/governance/
 /community/how-to-contribute/ -> https://anoni.net/join/
 /community/i18n/
 	#1-確認專案的翻譯平台與貢獻管道
@@ -2137,36 +2112,14 @@
 	#查不到公開資料的測項
 	#標記為-obsolete-的歷史測項
 	#狀態標記不等於實際有資料
-/community/partners/
-	#做不到的事
-	#內部培訓與裝置盤點
-	#協作用的自架服務
-	#可以一起做的事
-	#合作的進行方式
-	#媒體的收件管道
-	#實務經驗的匿名回饋
-	#活動合辦
-	#相關閱讀
-	#組織合作
-	#組織的資安更新提醒
-	#網路觀測與可引用的資料
-	#適合的組織
+/community/partners/ -> https://anoni.net/about/partners/
 /community/passkey-lab/
 	#passkey-userHandle-實驗
 	#已知的結果
 	#怎麼用
 	#為什麼要量
 	#這一頁留下了什麼
-/community/payments-research/
-	#2026-研究目標
-	#匿名支付研究專題
-	#如何加入討論
-	#已完成的事
-	#待翻譯與延伸閱讀
-	#為什麼把支付獨立成一個主題
-	#相關文章
-	#議題守則
-	#進行中與待完成
+/community/payments-research/ -> https://anoni.net/join/payments-research/
 /community/pin-ipfs-mirror/
 	#LinuxmacOSDockeranoni-pinsh
 	#Windowsanoni-pinps1
@@ -2183,53 +2136,10 @@
 	#相關閱讀
 	#維護與注意事項
 	#運作原理為什麼排程就夠不用等通知
-/community/privacy-guide/
-	#2026-研究目標
-	#個人隱私指引研究專題
-	#如何加入討論
-	#已完成的事
-	#待翻譯與延伸閱讀
-	#為什麼把個人隱私指引獨立成一個主題
-	#相關文章
-	#議題守則
-	#進行中與待完成
-/community/relay-on-campus/
-	#2026-推動目標
-	#Tor-Relay-校園建立研究專題
-	#如何加入討論
-	#已完成的事
-	#待翻譯與延伸閱讀
-	#為什麼把校園-Tor-Relay-獨立成一個主題
-	#相關文章
-	#範本工具包可直接拿去用
-	#議題守則
-	#進行中與待完成
-/community/roadmap-2026/
-	#2026-年度路線圖
-	#COSCUP-2026
-	#Tor-Relay-校園建立
-	#三大主題
-	#個人隱私指引
-	#匿名支付探索
-	#外部活動參與
-	#如何加入
-	#對外協作
-	#工作坊與小聚
-	#技術維運項目
-	#文件站建設節奏
-	#活動規劃
-	#研究與報告翻譯
-	#路線圖更新
-/community/send-privacy/
-	#Cloudflare
-	#sendanoninet-的資料處理
-	#伺服器保存的資料
-	#伺服器無法取得的內容
-	#你的瀏覽器保存的資料
-	#存取紀錄
-	#更隱密的用法
-	#聯絡與檢舉
-	#資料調閱要求
+/community/privacy-guide/ -> https://anoni.net/join/privacy-guide/
+/community/relay-on-campus/ -> https://anoni.net/join/relay-on-campus/
+/community/roadmap-2026/ -> https://anoni.net/join/roadmap-2026/
+/community/send-privacy/ -> https://anoni.net/services/send/
 /community/setup-onion-service/
 	#HTTPS-的取捨
 	#vanity-位址證明不了身分
@@ -2322,10 +2232,7 @@
 	#目前的重點方向與活躍專案
 	#相關閱讀
 	#看-sponsor-判斷哪些方向會持續做
-/community/upload-sensitive/
-	#上傳機敏資訊流程
-	#上傳流程
-	#流程示意圖
+/community/upload-sensitive/ -> https://anoni.net/join/upload-sensitive/
 /community/vault-lab/
 	#一把鑰匙服務兩件事
 	#備援金鑰
@@ -2368,9 +2275,9 @@
 	#Three-editions
 	#Ways-to-read
 	#What-the-site-covers
-/en/about/community/ -> /en/community/
-/en/about/community/communication-tools/ -> /en/community/
-/en/about/community/participate/ -> /en/community/
+/en/about/community/ -> https://anoni.net/en/join/
+/en/about/community/communication-tools/ -> https://anoni.net/en/join/
+/en/about/community/participate/ -> https://anoni.net/en/join/
 /en/about/how-you-are-reading/
 	#How-you-are-reading-this
 	#IPFS-mirror
@@ -3811,23 +3718,7 @@
 	#May-2026
 	#September-2026
 	#Windows-Security-Updates
-/en/community/
-	#Background-reading
-	#Community--Collaboration
-	#Concrete-ways-to-contribute
-	#Encrypted-email
-	#For-sensitive-submissions
-	#GitHub
-	#How-to-reach-us
-	#Matrix-real-time-ongoing-collaboration
-	#Newsletter
-	#OONI-Probe-and-ASN-coverage
-	#Regional-observation
-	#Self-hosted-tools-we-use
-	#Tor-relay-support
-	#Translation
-	#What-we-welcome
-	#Workshops-and-events
+/en/community/ -> https://anoni.net/en/join/
 /en/community/asn-coverage-howto/
 	#ASN-observation-data-retrieval-and-analysis
 	#Calculating-ASN-coverage
@@ -3997,30 +3888,7 @@
 	#Writing-about-security-and-privacy
 	#Writing-style
 	#Your-first-week
-/en/community/governance/
-	#Amending-this-charter
-	#Code-of-conduct
-	#Consensus-by-default
-	#Contributors
-	#Core-members
-	#Decision-making
-	#Dispute-resolution
-	#Enforcement
-	#Governance-Charter
-	#Handling-sensitive-information
-	#Interpersonal-disputes
-	#Lawful-use-is-a-precondition
-	#Moving-between-roles
-	#Observers
-	#Principles-of-interaction
-	#Related-documents
-	#Roles
-	#Scope
-	#Speaking-on-behalf-of-the-community
-	#Substantive-disputes
-	#The-proposal-process
-	#Visitors
-	#Voting-the-exception
+/en/community/governance/ -> https://anoni.net/en/about/governance/
 /en/community/how-to-contribute/
 	#Discuss-first
 	#How-to-Contribute
@@ -4086,34 +3954,8 @@
 	#OONI-nettest-quick-reference
 	#Where-to-go-from-here
 	#Which-nettests-show-up-in-Taiwan
-/en/community/partners/
-	#Anonymous-accounts-of-practice
-	#Co-hosted-events
-	#How-collaboration-works
-	#Local-context
-	#Local-observation
-	#Local-research
-	#Localization
-	#Localization-and-regional-expertise
-	#Newsroom-intake-channels
-	#Other-ways-to-work-together
-	#Security-update-alerts
-	#Self-hosted-services-for-collaboration
-	#Staff-training-and-device-reviews
-	#What-we-cannot-take-on
-	#Where-to-go-from-here
-	#Who-this-is-for
-	#Working-with-Organizations
-/en/community/payments-research/
-	#Anonymous-Payments-Track
-	#Done-so-far
-	#Ground-rules
-	#How-to-join
-	#In-progress
-	#Reading-and-translation-candidates
-	#Related-articles
-	#Research-goals-for-2026
-	#Why-payments-is-a-track-of-its-own
+/en/community/partners/ -> https://anoni.net/en/about/partners/
+/en/community/payments-research/ -> https://anoni.net/en/join/payments-research/
 /en/community/pin-ipfs-mirror/
 	#Help-pin-the-sites-IPFS-mirror
 	#How-it-works-why-a-schedule-is-enough-no-notification-needed
@@ -4130,53 +3972,10 @@
 	#Windows-anoni-pinps1
 	#ipfs-maintenance-2026
 	#peering
-/en/community/privacy-guide/
-	#Done-so-far
-	#Ground-rules
-	#How-to-join
-	#In-progress
-	#Personal-Privacy-Guide-Track
-	#Reading-and-translation-candidates
-	#Related-articles
-	#Research-goals-for-2026
-	#Why-this-is-a-track-of-its-own
-/en/community/relay-on-campus/
-	#Done-so-far
-	#Goals-for-2026
-	#Ground-rules
-	#How-to-join
-	#In-progress
-	#Reading-and-translation-candidates
-	#Related-articles
-	#The-template-kit
-	#Tor-Relays-on-Campus-Track
-	#Why-campuses
-/en/community/roadmap-2026/
-	#2026-Roadmap
-	#Anonymous-payments
-	#COSCUP-2026
-	#Documentation-build-out
-	#Events
-	#How-to-get-involved
-	#Personal-privacy-guide
-	#Research-and-report-translation
-	#Roadmap-updates
-	#Showing-up-at-other-peoples-events
-	#Technical-projects
-	#Three-thematic-tracks
-	#Tor-relays-on-university-campuses
-	#Working-with-others
-	#Workshops-and-meetups
-/en/community/send-privacy/
-	#Access-logs
-	#Cloudflare
-	#Contact-and-abuse-reports
-	#How-sendanoninet-Handles-Your-Data
-	#Requests-for-data
-	#Staying-more-private
-	#What-the-server-cannot-see
-	#What-the-server-stores
-	#What-your-browser-stores
+/en/community/privacy-guide/ -> https://anoni.net/en/join/privacy-guide/
+/en/community/relay-on-campus/ -> https://anoni.net/en/join/relay-on-campus/
+/en/community/roadmap-2026/ -> https://anoni.net/en/join/roadmap-2026/
+/en/community/send-privacy/ -> https://anoni.net/en/services/send/
 /en/community/setup-onion-service/
 	#1-The-way-the-Tor-Project-documents-it
 	#2-Routing-through-nginx
@@ -4270,12 +4069,7 @@
 	#The-technical-threads
 	#Where-the-plans-are
 	#Where-this-communitys-work-connects
-/en/community/upload-sensitive/
-	#Related
-	#Sending-Us-Sensitive-Material
-	#Upload-steps
-	#Walkthrough
-	#When-Send-is-not-the-right-tool
+/en/community/upload-sensitive/ -> https://anoni.net/en/join/upload-sensitive/
 /en/community/zh-hant-naming/
 	#Citing-this
 	#Common-responses
@@ -7234,7 +7028,7 @@
 	#更正
 	#相关阅读
 	#阅读方式
-/zh-cn/about/community/ -> /zh-cn/community/
+/zh-cn/about/community/ -> https://anoni.net/zh-cn/join/
 /zh-cn/about/community/communication-tools/ -> https://anoni.net/zh-cn/services/
 /zh-cn/about/community/participate/ -> https://anoni.net/zh-cn/join/
 /zh-cn/about/how-you-are-reading/
@@ -9062,10 +8856,7 @@
 	#Windows-安全更新
 	#先看清楚受影响的是哪一种产品
 	#紧急程度怎么判断
-/zh-cn/community/
-	#2026-三大主题
-	#你可以如何参与
-	#社群参与
+/zh-cn/community/ -> https://anoni.net/zh-cn/join/
 /zh-cn/community/asn-coverage-howto/
 	#ASN-观测数据提取与分析
 	#S3-数据集的摆放方式
@@ -9136,9 +8927,9 @@
 	#配色一致性drawio-palette-默认
 	#配色使用守则
 	#顶层网站的细线
-/zh-cn/community/campus-relay-faq/ -> /zh-cn/community/
-/zh-cn/community/campus-tor-relay-proposal/ -> /zh-cn/community/
-/zh-cn/community/campus-tor-relay-sop/ -> /zh-cn/community/
+/zh-cn/community/campus-relay-faq/ -> https://anoni.net/docs/community/campus-relay-faq/
+/zh-cn/community/campus-tor-relay-proposal/ -> https://anoni.net/docs/community/campus-tor-relay-proposal/
+/zh-cn/community/campus-tor-relay-sop/ -> https://anoni.net/docs/community/campus-tor-relay-sop/
 /zh-cn/community/contributor-handbook/
 	#Branch-命名
 	#Commit-消息格式
@@ -9166,29 +8957,7 @@
 	#跨档链接规则
 	#这份百科是活文件
 	#适用范围
-/zh-cn/community/governance/
-	#争议处理
-	#互动原则
-	#共识决为主
-	#决策方式
-	#合法前提
-	#对事的争议
-	#对人的争议
-	#对外言行
-	#成员角色
-	#投票例外状况
-	#提案流程
-	#机敏信息处理
-	#核心成员
-	#治理章程
-	#相关文件
-	#章程修订
-	#行为准则
-	#观察员
-	#访客
-	#贡献者
-	#违反处置
-	#适用范围
+/zh-cn/community/governance/ -> https://anoni.net/zh-cn/about/governance/
 /zh-cn/community/how-to-contribute/ -> https://anoni.net/zh-cn/join/
 /zh-cn/community/i18n/
 	#1-确认项目的翻译平台与贡献管道
@@ -9257,30 +9026,8 @@
 	#查不到公开数据的测项
 	#标记为-obsolete-的历史测项
 	#状态标记不等于实际有数据
-/zh-cn/community/partners/
-	#做不到的事
-	#内部培训与设备盘点
-	#协作用的自架服务
-	#可以一起做的事
-	#合作的进行方式
-	#媒体的收件渠道
-	#实务经验的匿名反馈
-	#活动合办
-	#相关阅读
-	#组织合作
-	#组织的信息安全更新提醒
-	#网络观测与可引用的数据
-	#适合的组织
-/zh-cn/community/payments-research/
-	#2026-研究目标
-	#为什么把支付独立成一个主题
-	#匿名支付研究专题
-	#如何加入讨论
-	#已完成的事
-	#待翻译与延伸阅读
-	#相关文章
-	#议题守则
-	#进行中与待完成
+/zh-cn/community/partners/ -> https://anoni.net/zh-cn/about/partners/
+/zh-cn/community/payments-research/ -> https://anoni.net/zh-cn/join/payments-research/
 /zh-cn/community/pin-ipfs-mirror/
 	#LinuxmacOSDockeranoni-pinsh
 	#Windowsanoni-pinps1
@@ -9297,52 +9044,10 @@
 	#相关阅读
 	#维护与注意事项
 	#运作原理为什么定时就够不用等通知
-/zh-cn/community/privacy-guide/
-	#2026-研究目标
-	#个人隐私指引研究专题
-	#为什么把个人隐私指引独立成一个主题
-	#如何加入讨论
-	#已完成的事
-	#待翻译与延伸阅读
-	#相关文章
-	#议题守则
-	#进行中与待完成
-/zh-cn/community/relay-on-campus/
-	#2026-推动目标
-	#Tor-Relay-校园建立研究专题
-	#为什么把校园-Tor-Relay-独立成一个主题
-	#如何加入讨论
-	#已完成的事
-	#待翻译与延伸阅读
-	#相关文章
-	#议题守则
-	#进行中与待完成
-/zh-cn/community/roadmap-2026/
-	#2026-年度路线图
-	#COSCUP-2026
-	#Tor-Relay-校园建立
-	#三大主题
-	#个人隐私指引
-	#匿名支付探索
-	#外部活动参与
-	#如何加入
-	#对外协作
-	#工作坊与小聚
-	#技术维运项目
-	#文件站建设节奏
-	#活动规划
-	#研究与报告翻译
-	#路线图更新
-/zh-cn/community/send-privacy/
-	#Cloudflare
-	#sendanoninet-的数据处理
-	#你的浏览器保存的数据
-	#数据调取要求
-	#更隐蔽的用法
-	#服务器保存的数据
-	#服务器无法获取的内容
-	#联系与举报
-	#访问日志
+/zh-cn/community/privacy-guide/ -> https://anoni.net/zh-cn/join/privacy-guide/
+/zh-cn/community/relay-on-campus/ -> https://anoni.net/zh-cn/join/relay-on-campus/
+/zh-cn/community/roadmap-2026/ -> https://anoni.net/zh-cn/join/roadmap-2026/
+/zh-cn/community/send-privacy/ -> https://anoni.net/zh-cn/services/send/
 /zh-cn/community/setup-onion-service/
 	#HTTPS-的取舍
 	#vanity-地址证明不了身份
@@ -9434,10 +9139,7 @@
 	#目前的重点方向与活跃项目
 	#相关阅读
 	#看-sponsor-判断哪些方向会持续做
-/zh-cn/community/upload-sensitive/
-	#上传机敏信息流程
-	#上传流程
-	#流程示意图
+/zh-cn/community/upload-sensitive/ -> https://anoni.net/zh-cn/join/upload-sensitive/
 /zh-cn/community/zh-hant-naming/
 	#为什么
 	#为什么我们用正体中文而非繁体中文

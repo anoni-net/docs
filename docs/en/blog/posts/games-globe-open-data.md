@@ -121,4 +121,4 @@ One technical detail is worth recording separately. OONI's data is CC BY-NC-SA 4
 
 All three pieces run in the browser with three.js, need no install, and support Traditional Chinese, Simplified Chinese and English. The source lives in [anoni-net/docs](https://github.com/anoni-net/docs) under `docs/zh-TW/games/`, with no build step, so you edit a file, save, and reload.
 
-If you have an idea or want to build one with us, come find us in the [community](../../community/index.md).
+If you have an idea or want to build one with us, come find us in the [community](https://anoni.net/en/join/).

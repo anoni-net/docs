@@ -31,7 +31,7 @@ icon: material/cash-multiple
 
 金流审查也不只发生在美国。为 2019 年反送中运动被捕者提供人道援助的「612 人道支援基金」，在压力下于 2021 年宣布停止运作，五名信托人（包括陈日君枢机、前立法会议员吴霭仪、歌手何韵诗等）2022 年 5 月一度以《国安法》第 29 条「勾结外国势力」被捕，最终检方未循《国安法》起诉，改以《社团条例》未注册定罪、各被罚款[^hk]。对香港的捐款人而言，这里的风险层级远高于「账号被平台停用」，除了收款管道被切断，资金用途本身可能被定性为危害国家安全。
 
-对个人使用者来说，「金流隐私」既包含别人能否看到我付了什么，也包含我的收款管道会不会被单方面切断。社群在 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相关案例与华语六地区的故事，[匿名支付研究专题](../community/payments-research.md) 也持续追踪相关讨论。
+对个人使用者来说，「金流隐私」既包含别人能否看到我付了什么，也包含我的收款管道会不会被单方面切断。社群在 [金融公司也能当审查者](../blog/posts/2026-financial-companies-as-censors.md) 一文中整理了相关案例与华语六地区的故事，[匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/) 也持续追踪相关讨论。
 
 ## 现金是最成熟的匿名支付
 
@@ -101,6 +101,6 @@ icon: material/cash-multiple
 - 场景面：[倡议组织的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)
 - 进阶面：[零知识身份验证与支付](../advanced/zk-identity-payments.md)
 - 台湾案例：[台湾 VASP 法 2026](../taiwan/vasp-2026.md)
-- 社群研究入口：[匿名支付研究专题](../community/payments-research.md)
+- 社群研究入口：[匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/)
 
 [^hk]: 「612 人道支援基金」信托人案见 [Cardinal Zen and 4 others appeal against conviction over failing to register protester relief fund as society](https://hongkongfp.com/2022/12/14/cardinal-zen-and-4-others-appeal-against-conviction-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"} - Hong Kong Free Press。

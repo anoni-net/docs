@@ -12,7 +12,7 @@ Look at what you have, then pick a line. The four are independent; starting one 
 
 ## Twenty minutes to pick a direction
 
-1. [2026 roadmap](../community/roadmap-2026.md): this year's three themes and where each stands, to see whether one of them is yours
+1. [2026 roadmap](https://anoni.net/en/join/roadmap-2026/): this year's three themes and where each stands, to see whether one of them is yours
 2. [How to contribute](../community/how-to-contribute.md): choosing a topic, saying so on Matrix, and what ongoing participation looks like
 3. [Self-skills evaluation form](../community/skill-level.md): a self-assessment across Tor, Tails, and OONI, with reading listed under each level
 

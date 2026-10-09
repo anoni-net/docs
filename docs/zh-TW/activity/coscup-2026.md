@@ -209,7 +209,7 @@ og:
 
     學術網路頻寬穩定、IP 聲譽良好，一直是全球 Tor 網路最重要的支柱之一，但在校園環境部署 Tor 節點要同時處理技術配置與校內政策。講者會分享在國立臺灣師範大學（NTNU）建立學術 Tor 節點的完整歷程。
 
-    從 EFF 發起的 Tor University Challenge 計畫緣起與意義，到 Linux 環境下的節點配置與防火牆規則、如何與學校資訊單位溝通並應用 EFF 提供的法律指南，以及建立節點後的流量觀察，你會得到一套能複製到自己學校的實戰參考，講者也希望藉這段經驗鼓勵更多台灣學研單位投入全球隱私基礎設施的建設。社群整理過的校園架設脈絡見[校園 Tor Relay 建立](../community/relay-on-campus.md)。
+    從 EFF 發起的 Tor University Challenge 計畫緣起與意義，到 Linux 環境下的節點配置與防火牆規則、如何與學校資訊單位溝通並應用 EFF 提供的法律指南，以及建立節點後的流量觀察，你會得到一套能複製到自己學校的實戰參考，講者也希望藉這段經驗鼓勵更多台灣學研單位投入全球隱私基礎設施的建設。社群整理過的校園架設脈絡見[校園 Tor Relay 建立](https://anoni.net/join/relay-on-campus/)。
 
     :material-open-in-new: [COSCUP 官方議程頁](https://pretalx.coscup.org/coscup-2026/talk/7AP8HY/){target="_blank"}
 

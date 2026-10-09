@@ -21,7 +21,7 @@ icon: material/snowflake
 
     同樣的技術在香港可行，但參與前要把國安監控算進來。Snowflake 把你的瀏覽器變成替他人轉發 Tor 流量的節點，在 2020 年《國安法》與 2026 年 3 月生效的裝置解密義務（調查國安案件時可要求交出裝置密碼，一般須法院手令，拒絕最高一年徒刑）之下，一旦裝置被搜查，「為什麼你的瀏覽器在幫審查地區的人連 Tor」本身可能引來額外關注。技術上合法、可用，脈絡見 [VPN 的風險與選擇](./vpn-guide.md) 的香港小節。
 
-對於有興趣投入更多的人，下一步可以參考 [Tor Relay 校園建立](../community/relay-on-campus.md)。
+對於有興趣投入更多的人，下一步可以參考 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)。
 
 ## 啟動瀏覽器版橋接點
 
@@ -111,7 +111,7 @@ icon: material/snowflake
 
 - [:material-tunnel-outline: 如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
-- [:material-school-outline: Tor Relay 校園建立](../community/relay-on-campus.md)
+- [:material-school-outline: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>

@@ -250,7 +250,7 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 個人隱私指引研究專題](../community/privacy-guide.md)
+- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)
 - [:material-server-network-outline: 社群自架服務](https://anoni.net/services/)
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 

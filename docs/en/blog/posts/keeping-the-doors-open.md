@@ -52,7 +52,7 @@ Unredacted running 123 exit relays on 400W makes for friendly operating economic
 
 The key is designing the hardware to scale. Raspberry Pi 5 is familiar to maker communities everywhere, and PoE+ HATs and PoE switches are easy to buy through ordinary electronics retail. ComputeBlade (the 20-module 1U chassis) has fewer retail channels and is usually obtained through official overseas ordering or a community group buy. An institutional server room suits this better than a home network, for three reasons: a static IP, institutional bandwidth, and someone on site to check the machines.
 
-Campus Tor relays are one of anoni.net's three focus areas for 2026, and the community is collecting field experience into a setup playbook ([Tor relays on campus track](../../community/relay-on-campus.md), plus the writeup [Setting up a Tor relay at NTNU](ntnu-nz.md)). Unredacted's engineering approach with GreenWare is a useful reference point for the next school weighing a deployment: start with a single PoE-powered Raspberry Pi 5 middle relay, and once it runs stably, consider exits and chassis density.
+Campus Tor relays are one of anoni.net's three focus areas for 2026, and the community is collecting field experience into a setup playbook ([Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/), plus the writeup [Setting up a Tor relay at NTNU](ntnu-nz.md)). Unredacted's engineering approach with GreenWare is a useful reference point for the next school weighing a deployment: start with a single PoE-powered Raspberry Pi 5 middle relay, and once it runs stably, consider exits and chassis density.
 
 For an individual or a small group, running a Snowflake proxy (a browser extension or Docker) carries almost no electricity cost and is the lowest-barrier entry into circumvention infrastructure (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
 
@@ -63,8 +63,8 @@ If Unredacted's work makes you want to help people in censored regions reach the
 - **Learn about Unredacted**: visit [unredacted.org](https://unredacted.org/){target="_blank"} for their services and transparency information, then decide whether to support their servers, bandwidth, and staffing through their official channels.
 - **Run Snowflake**: the lowest-barrier contribution, run from a browser extension or Docker (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
 - **Run a Tor relay or bridge**: this needs a steady network and a little operational effort. The Tor Project's [relay guide](https://community.torproject.org/relay/){target="_blank"} walks through the setup, and the community wrote up [how to set up a Tor WebTunnel bridge](../../community/setup-tor-webtunnel.md).
-- **Campus Tor relays**: if you work or study at a college or university, start your assessment from the [Tor relays on campus track](../../community/relay-on-campus.md).
-- **Join the anoni.net community discussion**: trade notes with other members over Matrix; the entry point is on the [community page](../../community/index.md), and other contact channels are on the [contact page](https://anoni.net/en/contact/).
+- **Campus Tor relays**: if you work or study at a college or university, start your assessment from the [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/).
+- **Join the anoni.net community discussion**: trade notes with other members over Matrix; the entry point is on the [community page](https://anoni.net/en/join/), and other contact channels are on the [contact page](https://anoni.net/en/contact/).
 
 ## Related reading
 

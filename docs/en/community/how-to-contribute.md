@@ -6,7 +6,7 @@ icon: material/source-pull
 
 # :material-source-pull: How to Contribute
 
-This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](./index.md). For who maintains the project and how decisions get made, see [governance](./governance.md) and the [About page](https://anoni.net/en/about/).
+This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](https://anoni.net/en/join/). For who maintains the project and how decisions get made, see [governance](https://anoni.net/en/about/governance/) and the [About page](https://anoni.net/en/about/).
 
 Everything below assumes you've already found something to work on. If you haven't, start with the Community page first.
 
@@ -39,7 +39,7 @@ The site, Pulse, and the ASN coverage tooling all live in one repository: [githu
 
 ## :material-format-list-bulleted: Types of contribution, at a glance
 
-The full list with links lives on the [Community page](./index.md). In brief:
+The full list with links lives on the [Community page](https://anoni.net/en/join/). In brief:
 
 - **Regional observation** — primary observations and regulatory updates from your jurisdiction.
 - **Translation** — bridging long-form regional research between Chinese and English, and refining the English regional voice.
@@ -64,4 +64,4 @@ The full list with links lives on the [Community page](./index.md). In brief:
 
 Ask before you build. The [Public Space on Matrix](https://matrix.to/#/#community:im.anoni.net){target="_blank"} or `whisper@anoni.net` will get you a pointer toward whether a change fits, where it should live, and whether someone is already on it. A short question early is cheaper than a reworked pull request later.
 
-If you are writing on behalf of an organization, [Working with Organizations](partners.md) sets out what we can take on together.
+If you are writing on behalf of an organization, [Working with Organizations](https://anoni.net/en/about/partners/) sets out what we can take on together.

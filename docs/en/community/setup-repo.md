@@ -107,6 +107,6 @@ GitHub will then show a **Compare & pull request** button on your repository pag
 
 - [:material-hand-heart-outline: How to contribute](./how-to-contribute.md) — pick a topic and open your first pull request
 - [:material-stairs: Self-skills evaluation](./skill-level.md) — work out where to start based on what you already know
-- [:material-account-group-outline: Join the community](./index.md) — our Matrix space, and how to reach us if you get stuck
+- [:material-account-group-outline: Join the community](https://anoni.net/en/join/) — our Matrix space, and how to reach us if you get stuck
 
 </div>

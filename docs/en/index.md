@@ -43,7 +43,7 @@ If one of civil society, a newsroom, independent journalism, open-source develop
 
     Peer organizations, funders, and AP-based contributors who want to work with a Taiwan-based community on regional measurement, advocacy, or documentation. Existing partnerships (Tor Project, OONI, EFF, university hosts) are listed on the [About page](https://anoni.net/en/about/).
 
-    [:octicons-arrow-right-24: Working with organizations](./community/partners.md)
+    [:octicons-arrow-right-24: Working with organizations](https://anoni.net/en/about/partners/)
 
 - :material-compass-outline:{ .lg .middle style="color: var(--brand-cyan-500);" } **Find a regional guide**
 

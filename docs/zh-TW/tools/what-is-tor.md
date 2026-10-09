@@ -99,7 +99,7 @@ Tor 不是萬能匿名鈕。把它用在不對的場景，會付出效能代價�
 
 ??? question "用 Tor 速度為什麼這麼慢？"
 
-    三層加密 + 三跳節點 + 出口節點頻寬有限是物理結構，不會大改善。但有兩個簡單的調整能改善體感：在 Tor Browser 設定裡換出口節點地區（避開壅塞國家）、避免高頻寬內容（看 8K 影片不是 Tor 的設計目的）。台灣本地頻寬充足，社群長期推動 [Tor Relay 校園建立](../community/relay-on-campus.md) 也是希望讓本地網路成為全球 Tor 容量的一部分，整體變快。
+    三層加密 + 三跳節點 + 出口節點頻寬有限是物理結構，不會大改善。但有兩個簡單的調整能改善體感：在 Tor Browser 設定裡換出口節點地區（避開壅塞國家）、避免高頻寬內容（看 8K 影片不是 Tor 的設計目的）。台灣本地頻寬充足，社群長期推動 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/) 也是希望讓本地網路成為全球 Tor 容量的一部分，整體變快。
 
 ??? question "Tor 真的不會被破解嗎？"
 
@@ -109,7 +109,7 @@ Tor 不是萬能匿名鈕。把它用在不對的場景，會付出效能代價�
 
 下載安裝 Tor Browser 是起點，[Tor 官方下載頁](https://www.torproject.org/zh-TW/download/){target="_blank"} 有 Windows、macOS、Linux、Android 版本（iOS 因為平台限制官方推薦 Onion Browser）。裝好後先讀 [Tor Browser 進階設定](./tor-browser-advanced.md) 處理橋接、安全等級、隔離策略，再看 [Tor Snowflake](./tor-snowflake.md) 學習如何貢獻一個分頁的橋接。
 
-更投入的人可以接 [如何搭建 Tor Relay](../community/setup-tor-relay.md) 或 [Tor Relay 校園建立](../community/relay-on-campus.md)，把本地頻寬接進全球網路。
+更投入的人可以接 [如何搭建 Tor Relay](../community/setup-tor-relay.md) 或 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)，把本地頻寬接進全球網路。
 
 ## :material-chat-question: 一同瞭解
 
@@ -126,7 +126,7 @@ Tor 不是萬能匿名鈕。把它用在不對的場景，會付出效能代價�
 <div class="grid cards" markdown>
 
 - [:material-snowflake: 啟動 Tor Snowflake 橋接](./tor-snowflake.md)
-- [:material-school-outline: Tor Relay 校園建立](../community/relay-on-campus.md)
+- [:material-school-outline: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 
 </div>

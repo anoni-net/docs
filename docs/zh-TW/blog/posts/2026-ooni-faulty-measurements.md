@@ -156,7 +156,7 @@ OONI 的公開資料目前沒有被大量惡意污染，看到的異常多半來
 - [台灣 OONI ASN 涵蓋觀測](../../taiwan/ooni-asn-coverage.md)
 - [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md)
 - [我們普查了 336 條 OONI Run v2 清單，3 條就佔了全網 72% 的檢測量](./2026-ooni-run-v2-usage-patterns.md)
-- [個人隱私指引研究專題](../../community/privacy-guide.md)
+- [個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)
 
 [^1]: [From Heuristics to Anonymous Credentials: Assessing OONI's Approach to Bad Measurements, OONI 2026-07-06](https://ooni.org/post/2026-faulty-measurements/){target="_blank"}
 [^2]: [Requirements for OONI's anonymous credentials, OONI](https://ooni.org/post/2025-requirements-for-oonis-anonymous-credentials/){target="_blank"}

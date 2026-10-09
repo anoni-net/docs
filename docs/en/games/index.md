@@ -82,7 +82,7 @@ Knowing JavaScript is enough to work on the copy, the level design and the inter
 
 ## What comes next
 
-These are the first three pieces, all focused on Tor. Plenty of other privacy topics deserve the same treatment: what metadata gives away, how a threat model shifts with your situation, what the money trail behind anonymous payments looks like. All of them are on the list. If you have an idea or want to build one with us, come find us in the [community](../community/index.md).
+These are the first three pieces, all focused on Tor. Plenty of other privacy topics deserve the same treatment: what metadata gives away, how a threat model shifts with your situation, what the money trail behind anonymous payments looks like. All of them are on the list. If you have an idea or want to build one with us, come find us in the [community](https://anoni.net/en/join/).
 
 <!-- Structured data. The three works ship their own JSON-LD in their head, since
      they never pass through the mkdocs template, and point isPartOf back at the

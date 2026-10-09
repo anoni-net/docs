@@ -29,7 +29,7 @@ The writing style, file formats and pull request flow are set out in the [Contri
 
 Contributors may use any AI tool to help with writing or translation, and AI output goes through the same process as anything written by hand. Whoever opens the pull request has to open and check every number, quotation and source link, and is responsible for the content.
 
-We don't publish step-by-step recipes that could be misused, we don't expose the personal accounts of people whose observations we cite, and material about victims or unpublished research goes through our [sensitive material process](../community/upload-sensitive.md).
+We don't publish step-by-step recipes that could be misused, we don't expose the personal accounts of people whose observations we cite, and material about victims or unpublished research goes through our [sensitive material process](https://anoni.net/en/join/upload-sensitive/).
 
 ## Three editions
 

@@ -123,4 +123,4 @@ Freedom House 的 Freedom on the Net 与无国界记者的新闻自由指数，�
 
 三件作品都以 three.js 在浏览器中运行，免安装，支持正体中文、简体中文与英文。源代码在 [anoni-net/docs](https://github.com/anoni-net/docs) 的 `docs/zh-TW/games/` 底下，没有构建流程，改完保存刷新就看得到。
 
-有想法或想一起做，欢迎到[社群](../../community/index.md)找我们。
+有想法或想一起做，欢迎到[社群](https://anoni.net/zh-cn/join/)找我们。

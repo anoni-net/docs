@@ -111,7 +111,7 @@ If your computer is on for long stretches, the extension version is better than 
 
 - [:material-tunnel-outline: How to run a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md)
 - [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
-- [:material-school-outline: Running a Tor relay on campus](../community/relay-on-campus.md)
+- [:material-school-outline: Running a Tor relay on campus](https://anoni.net/en/join/relay-on-campus/)
 - [:material-server-network: Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"}
 - [:material-translate-variant: Localization and doc translation](../community/i18n.md)
 

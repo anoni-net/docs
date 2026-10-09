@@ -12,7 +12,7 @@ icon: material/console
 
 ## 二十分鐘：先確認方向
 
-1. [2026 年度路線圖](../community/roadmap-2026.md)：社群今年投入的三個主題與各自的進度，先看有沒有你想接的
+1. [2026 年度路線圖](https://anoni.net/join/roadmap-2026/)：社群今年投入的三個主題與各自的進度，先看有沒有你想接的
 2. [如何參與與認領主題](https://anoni.net/join/)：怎麼選題、怎麼在 Matrix 表達意願、平時的參與方式
 3. [自我技能評估表](../community/skill-level.md)：Tor、Tails、OONI 三個工具的分級自評，每一級下面都列了補齊用的文章
 

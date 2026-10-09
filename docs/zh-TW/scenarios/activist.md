@@ -364,7 +364,7 @@ Google Docs、Notion、騰訊文件這類雲端共筆好用，但有兩個問題
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：會場、飯店公共網路上的連線層防護與服務選擇
 - [密碼管理器入門](../tools/password-manager.md)：行動前的帳號衛生基礎
 - [OnionShare 透過 Tor 匿名傳輸](../tools/onionshare.md)：一次性檔案交換的工具選擇
-- [個人隱私指引研究專題](../community/privacy-guide.md)：把場景指引串回個人隱私的整體規劃
+- [個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)：把場景指引串回個人隱私的整體規劃
 
 [^1]: 2020 年 Royal Holloway 研究團隊指出 Bridgefy 加密設計缺陷，見 [Bridgefy, the messenger promoted for mass protests, is a privacy disaster](https://arstechnica.com/information-technology/2020/08/bridgefy-the-messenger-promoted-for-mass-protests-is-a-privacy-disaster/){target="_blank"} - Ars Technica，原始研究見 [Mesh Messaging in Large-scale Protests: Breaking Bridgefy](https://eprint.iacr.org/2021/214.pdf){target="_blank"}
 [^2]: [民間司法改革基金會](https://www.jrf.org.tw/){target="_blank"} - 法律倡議、案件支援

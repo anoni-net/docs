@@ -46,4 +46,4 @@ There is no need to read all five in order. Several ways in:
 - **You want the principles**: [Advanced](../advanced/index.md) covers encryption, post-quantum, and the rest
 - **You want external sources**: [Reports](../reports/index.md) has the curated research
 
-For regional regulation and measurement, continue to the [Regional Observatory](../regional/index.md). To work with the community, see [Community](../community/index.md).
+For regional regulation and measurement, continue to the [Regional Observatory](../regional/index.md). To work with the community, see [Community](https://anoni.net/en/join/).

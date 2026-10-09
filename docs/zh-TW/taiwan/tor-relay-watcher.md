@@ -351,7 +351,7 @@ Tor 軟體版本的更新狀況，以及各節點所具備的能力標籤（Flag
 
 !!! example "想實作？"
 
-    - :material-server-network: **想自己架 Tor relay**：見 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校園架 relay 是 anoni.net 2026 三大主題之一，可看 [Tor Relay 校園建立](../community/relay-on-campus.md)。
+    - :material-server-network: **想自己架 Tor relay**：見 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。校園架 relay 是 anoni.net 2026 三大主題之一，可看 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)。
     - :material-chart-bar: **觀測資料來源**：本頁圖表透過 [Pulse 後端 API](https://anoni.net/api/readme){target="_blank"} 提供，觀察項目與資料服務都還在持續調整中。
 
 ## 下一步
@@ -360,7 +360,7 @@ Tor 軟體版本的更新狀況，以及各節點所具備的能力標籤（Flag
 
 - [:material-api: 用一句中文查 Tor 節點現況](../community/onionoo-mcp.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
-- [:material-school: Tor Relay 校園建立](../community/relay-on-campus.md)
+- [:material-school: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)
 - [:material-chat-question: 什麼是 Tor？](../tools/what-is-tor.md)
 

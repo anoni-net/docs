@@ -127,7 +127,7 @@ The core risk for donation-based advocacy there is not the payment mechanism. It
 
 Crypto business activity is comprehensively banned, which puts the question outside the regulatory frame entirely rather than inside a stricter version of it.
 
-For why anonymous payments matter to advocacy work generally, see [why anonymous payments matter](../basics/payments-anonymity.md). The community tracks this area in the [anonymous payments track](../community/payments-research.md).
+For why anonymous payments matter to advocacy work generally, see [why anonymous payments matter](../basics/payments-anonymity.md). The community tracks this area in the [anonymous payments track](https://anoni.net/en/join/payments-research/).
 
 ## :material-chat-question: Related concepts
 
@@ -144,7 +144,7 @@ For why anonymous payments matter to advocacy work generally, see [why anonymous
 
 <div class="grid cards" markdown>
 
-- [:material-cash-multiple: Anonymous payments track](../community/payments-research.md)
+- [:material-cash-multiple: Anonymous payments track](https://anoni.net/en/join/payments-research/)
 - [:material-scale-balance: Taiwan's 2026 Virtual Asset Service Act](../regional/taiwan-vasp-2026.md)
 - [:material-handshake-outline: Anonymous donations for advocacy organizations](../scenarios/nonprofit-anonymous-donation.md)
 

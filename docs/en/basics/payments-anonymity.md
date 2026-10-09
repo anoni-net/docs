@@ -97,6 +97,6 @@ Every option is a trade-off: technical barrier, legality, counterparty acceptanc
 - Scenario level: [anonymous donation channels for advocacy organizations](../scenarios/nonprofit-anonymous-donation.md).
 - Advanced level: [zero-knowledge identity and payments](../advanced/zk-identity-payments.md).
 - Regional level: [Taiwan's Virtual Asset Service Act](../regional/taiwan-vasp-2026.md).
-- Community research: [the anonymous payments track](../community/payments-research.md).
+- Community research: [the anonymous payments track](https://anoni.net/en/join/payments-research/).
 
 [^hk]: On the 612 Humanitarian Relief Fund trustees' case, see [Hong Kong court convicts Cardinal Zen and 5 others over failing to register protester relief fund as society](https://hongkongfp.com/2022/11/25/breaking-hong-kong-court-convicts-cardinal-zen-and-5-others-over-failing-to-register-protester-relief-fund-as-society/){target="_blank"}, Hong Kong Free Press. Their appeal was heard by the High Court in late 2025 and a ruling is pending.

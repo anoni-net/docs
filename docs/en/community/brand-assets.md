@@ -777,4 +777,4 @@ If a diagram also has to work as a social card, in print, or in an external deck
 
 - [Contributor handbook](./contributor-handbook.md): the overall contribution process, PR conventions, and translation workflow
 - [Community services](https://anoni.net/en/services/): Matrix, CryptPad, Etherpad, SearXNG, Send, and Formbricks
-- [2026 roadmap](./roadmap-2026.md): the three tracks and the schedule
+- [2026 roadmap](https://anoni.net/en/join/roadmap-2026/): the three tracks and the schedule

@@ -132,7 +132,7 @@ Anonymity and privacy are the subject of this site, and the writing has to hold 
 
 - Do not publish recipes that can be misused. Even where the data and APIs are public, we do not walk readers through full enumeration, bulk scraping, de-anonymization, or bypassing a security control. State the result instead: `we took a snapshot of the full list on a given day`, rather than printing the command that iterates every identifier.
 - Do not expose individual operators' accounts or handles. Refer to someone's observations by region or role (`an observer in Thailand`), and name people only when they are already public and naming them is necessary.
-- Material involving victims, unpublished research, or personal data goes through [Sending us sensitive material](./upload-sensitive.md).
+- Material involving victims, unpublished research, or personal data goes through [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/).
 
 ## Files and directories
 
@@ -367,12 +367,12 @@ If none of those answer it, ask on Matrix. Include what you are trying to do, wh
 
 ## Code of conduct, in brief
 
-The community works on openness, mutual support, and staying within the law. This is the short version. The full text, including role definitions, decision-making, and dispute handling, is in the [governance charter](./governance.md), which takes precedence where the two differ.
+The community works on openness, mutual support, and staying within the law. This is the short version. The full text, including role definitions, decision-making, and dispute handling, is in the [governance charter](https://anoni.net/en/about/governance/), which takes precedence where the two differ.
 
 - **Mutual respect**: members get the same treatment regardless of background or familiarity with the subject
 - **Argue the issue, not the person**
 - **Lawful purposes**: all discussion and collaboration presumes lawful use. We do not assist money laundering, tax evasion, harassment, stalking, or unauthorized intrusion
-- **Disclosure**: anything involving personal data or sensitive material goes through [Sending us sensitive material](./upload-sensitive.md)
+- **Disclosure**: anything involving personal data or sensitive material goes through [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/)
 - **Disputes**: raise it on Matrix first. Without consensus there, it goes to the next community sync
 
 Conduct that breaches these gets handled by core members under the governance charter.

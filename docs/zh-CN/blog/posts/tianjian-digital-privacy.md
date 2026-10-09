@@ -80,6 +80,6 @@ description: "《田间》的「数字安全与隐私保护系列」两场线上
 - [:material-shield-account: 记者保护消息来源](../../scenarios/journalist.md)
 - [:material-key-chain: 密码管理器入门](../../tools/password-manager.md)
 - [:material-fingerprint: 浏览器指纹是什么，为什么很难摆脱](../../basics/browser-fingerprinting.md)
-- [:material-account-group: 社区参与](../../community/index.md)
+- [:material-account-group: 社区参与](https://anoni.net/zh-cn/join/)
 
 </div>

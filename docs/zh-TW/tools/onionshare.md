@@ -143,7 +143,7 @@ icon: material/share-circle
 
 ## 接下來
 
-第一次要把敏感檔案傳出去，先挑一個模式試行一次（送檔最單純），熟悉「產生 `.onion` 網址、透過安全管道交給對方」這個流程。要把它接進完整的工作流程，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](../community/upload-sensitive.md)。
+第一次要把敏感檔案傳出去，先挑一個模式試行一次（送檔最單純），熟悉「產生 `.onion` 網址、透過安全管道交給對方」這個流程。要把它接進完整的工作流程，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)。
 
 ## :material-chat-question: 一同瞭解
 
