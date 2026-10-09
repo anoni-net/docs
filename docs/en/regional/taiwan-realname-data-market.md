@@ -654,7 +654,7 @@ The provisos to the first two preserve business necessity and written consent. F
 
 Under the Personal Data Protection Act, a data subject has rights of enquiry and access to their own data. To find out how many times your number has been queried and against which databases, a request can be put to your carrier. If you bank or shop with an institution, you can ask whether it uses MID Plus, which authorisation model, and whether the person is notified at the time of the query.
 
-None of the answers to these questions is currently in public sources, so any response is newly public information. Readers who obtain one are welcome to tell us through the channels on the [community services](../community/tools.md) page, and this page will be updated with attribution.
+None of the answers to these questions is currently in public sources, so any response is newly public information. Readers who obtain one are welcome to tell us through the channels on the [community services](https://anoni.net/en/services/) page, and this page will be updated with attribution.
 
 ## Limits of this page
 

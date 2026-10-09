@@ -399,7 +399,7 @@ The three sections below each expand one tool across its three levels. Read acro
         ??? question "Send an encrypted email with Thunderbird"
 
             - After creating a GnuPG key pair and setting up Thunderbird, you can try sending an encrypted email to `whisper@anoni.net`.
-            - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](../contact.md)" page.
+            - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](https://anoni.net/en/contact/)" page.
             - Compose the email in Thunderbird, choose to encrypt it, and send. The recipient will decrypt it using their private key.
 
 ## OONI skills
@@ -556,7 +556,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
 This form is for your own reference. Nobody collects the results, so just pick your next step from where you landed:
 
-- **Awareness level:** subscribe to the [newsletter](../contact.md) to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
+- **Awareness level:** subscribe to the [newsletter](https://anoni.net/en/contact/) to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
 - **Hands-on level:** follow the "Not there yet? Start here." steps under each tool and actually install and use it. Bring problems to Matrix.
 - **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](./index.md) for how to join.
 

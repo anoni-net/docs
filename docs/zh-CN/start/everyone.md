@@ -70,7 +70,7 @@ icon: material/account-outline
 
 - [威胁模型清单](../utils/threat-model.md)：三题答完会知道自己该把力气放在哪，答案不存起来，重新整理就没了
 - 小工具区的页面都可以离线使用，见[离线阅读](../offline.md)
-- 想聊聊到 [Matrix 公开 room](../community/tools.md)
+- 想聊聊到 [Matrix 公开 room](https://anoni.net/zh-cn/services/)
 
 ## 这条路径没有处理的
 

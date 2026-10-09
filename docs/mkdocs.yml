@@ -387,6 +387,12 @@ plugins:
         - en
   - redirects:
       redirect_maps:
+        # 2026-10 搬到 anoni.net 頂層的頁面（toomore/anoni-net-ws#397）。m6 的 nginx 會先回 301，
+        # 對照表在 anoni-net/www 的 tools/nginx-docs-moved.conf，這裡是給沒有那層 nginx 的
+        # 鏡像（例如 IPFS）用的。
+        'contact.md': 'https://anoni.net/contact/'
+        'community/tools.md': 'https://anoni.net/services/'
+        'community/how-to-contribute.md': 'https://anoni.net/join/'
         'report/index.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index.md': 'reports/interseclab-network-coup/index.md'
         'report/interseclab-the-internet-coup/index_1.md': 'reports/interseclab-network-coup/index_1.md'
@@ -414,8 +420,8 @@ plugins:
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
         'setup-skill-level.md': 'community/skill-level.md'
         'about/community/index.md': 'community/index.md'
-        'about/community/participate.md': 'community/how-to-contribute.md'
-        'about/community/communication-tools.md': 'community/tools.md'
+        'about/community/participate.md': 'https://anoni.net/join/'
+        'about/community/communication-tools.md': 'https://anoni.net/services/'
         'about/send-censorship.md': 'community/upload-sensitive.md'
         # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
         'about/community.md': 'community/index.md'

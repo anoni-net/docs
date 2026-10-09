@@ -397,7 +397,7 @@ icon: octicons/paste-24
         ??? question "通过 Thunderbird 寄送加密邮件。"
 
             - 完成 GnuPG 密钥建立与 Thunderbird 设置后，可以尝试向本项目的加密邮件地址 `whisper@anoni.net` 寄送加密邮件。
-            - 取得 `whisper@anoni.net` 的公开密钥，请参考「[持续关注](../contact.md){target="_blank"}」页面。
+            - 取得 `whisper@anoni.net` 的公开密钥，请参考「[持续关注](https://anoni.net/zh-cn/contact/){target="_blank"}」页面。
             - 在 Thunderbird 撰写邮件，选择加密后寄出，收件方会使用其私钥解密。
 
 ## OONI 技能分级
@@ -572,6 +572,6 @@ icon: octicons/paste-24
 
 这份量表是自我参照用的，勾选结果不用回报给谁，直接照结果挑下一步就好：
 
-- **认识层**：先订阅 [电子报](../contact.md) 跟读社群动态，或到 [指南](../guides/index.md) 把概念补齐。
+- **认识层**：先订阅 [电子报](https://anoni.net/zh-cn/contact/) 跟读社群动态，或到 [指南](../guides/index.md) 把概念补齐。
 - **实现层**：照各工具分级下的「从这里开始」实际操作安装、日常操作，遇到问题到 Matrix 发问。
-- **贡献层**：到 [如何参与与认领主题](./how-to-contribute.md) 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社群会协助你接上手。账号申请与服务入口见 [社群自架服务](./tools.md)。
+- **贡献层**：到 [如何参与与认领主题](https://anoni.net/zh-cn/join/) 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社群会协助你接上手。账号申请与服务入口见 [社群自架服务](https://anoni.net/zh-cn/services/)。

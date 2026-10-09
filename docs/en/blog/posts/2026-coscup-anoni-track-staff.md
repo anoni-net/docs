@@ -24,7 +24,7 @@ Changeovers on Aug 9 are only five minutes long. Someone needs to raise the time
     - **Roles**: recording (1), front-of-room runner (1), door runner (1)
     - **Requirements**: no background in Tor, anonymity networks, or any privacy technology
     - **Availability**: both days is ideal, one day is welcome too, and we will rotate shifts if enough people sign up
-    - **To sign up or ask**: reach us through any channel on [contact](../../contact.md) and tell us which role you want and which days you can make
+    - **To sign up or ask**: reach us through any channel on [contact](https://anoni.net/en/contact/) and tell us which role you want and which days you can make
 
 <!-- more -->
 
@@ -62,4 +62,4 @@ Note that the track itself runs mostly in Mandarin, though the crew roles are la
 
 !!! info "How to sign up"
 
-    Reach the community through any channel on the [contact](../../contact.md) page and tell us the role you want, the days you can make, and how best to reach you. Even once the three roles are filled you are still welcome to join, since pre-event promotion and post-event write-ups need people too.
+    Reach the community through any channel on the [contact](https://anoni.net/en/contact/) page and tell us the role you want, the days you can make, and how best to reach you. Even once the three roles are filled you are still welcome to join, since pre-event promotion and post-event write-ups need people too.

@@ -76,7 +76,7 @@ Suggested reading order: start with the [interview](../blog/posts/ntnu-nz.md) fo
 
 ## How to join
 
-Discussion happens on Matrix (homeserver `im.anoni.net`), in the relevant rooms of the community's public Space. Account requests and service entry points are on [Community services](./tools.md).
+Discussion happens on Matrix (homeserver `im.anoni.net`), in the relevant rooms of the community's public Space. Account requests and service entry points are on [Community services](https://anoni.net/en/services/).
 
 Backgrounds we would particularly welcome:
 

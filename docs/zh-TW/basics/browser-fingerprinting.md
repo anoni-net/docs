@@ -142,7 +142,7 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 ## 本頁會過期
 
-瀏覽器每幾個月改版一次，預設值與功能名稱都會變動。本頁寫的是機制與判斷方式，實際狀態請以各瀏覽器當下的官方說明為準。發現描述與現況不符，歡迎到 [社群 Matrix 公開 room](../community/tools.md) 回報。
+瀏覽器每幾個月改版一次，預設值與功能名稱都會變動。本頁寫的是機制與判斷方式，實際狀態請以各瀏覽器當下的官方說明為準。發現描述與現況不符，歡迎到 [社群 Matrix 公開 room](https://anoni.net/services/) 回報。
 
 ## 接下來
 

@@ -200,4 +200,4 @@ Three things that help right now:
 - **What a tool lacks in your situation**: an unrecognised field, a format that will not open, an explanation that does not land
 - **Real video or PDF samples**: files whose metadata will not come off, or that stop opening once cleaned
 
-Reach us in the public Matrix room (home server `im.anoni.net`, link on the [community tools page](../../community/tools.md)), or open an issue on [anoni-net/docs](https://github.com/anoni-net/docs/issues){target="_blank"}. Anything you would rather not attach your name to can go to whisper@anoni.net ([GPG key](../../contact.md)).
+Reach us in the public Matrix room (home server `im.anoni.net`, link on the [community tools page](https://anoni.net/en/services/)), or open an issue on [anoni-net/docs](https://github.com/anoni-net/docs/issues){target="_blank"}. Anything you would rather not attach your name to can go to whisper@anoni.net ([GPG key](https://anoni.net/en/contact/)).

@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        想新增一篇文章，或替既有文章補上台灣在地案例都從這裡開始。工具操作與安全情境類內容（tools、scenarios、advanced）會由維護者做技術審核才合併，動手前可先看[如何參與與認領主題](https://anoni.net/docs/community/how-to-contribute/)。
+        想新增一篇文章，或替既有文章補上台灣在地案例都從這裡開始。工具操作與安全情境類內容（tools、scenarios、advanced）會由維護者做技術審核才合併，動手前可先看[如何參與與認領主題](https://anoni.net/join/)。
 
-        Propose a new article or add a Taiwan local case here. Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge. See [how to contribute](https://anoni.net/docs/community/how-to-contribute/).
+        Propose a new article or add a Taiwan local case here. Tool and operational-security content (tools, scenarios, advanced) is reviewed by maintainers before merge. See [how to contribute](https://anoni.net/join/).
   - type: dropdown
     id: kind
     attributes:

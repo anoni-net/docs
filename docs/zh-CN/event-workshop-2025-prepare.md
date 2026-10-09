@@ -11,7 +11,7 @@ icon: octicons/workflow-24
 !!! info ""
 
     - 我们即将在今年 08/09 ~ 08/10 的 [COSCUP 开源人年会](https://blog.coscup.org/2025/04/coscup-2025-call-for-proposals.html){target="_blank"}上举办「匿名网络工作坊」活动。在活动开始前需要招募**工作伙伴**、**培训小助手**、**活动筹备志愿者**。如果您对这个活动感兴趣，并愿意和我们一起筹备工作坊，请详阅以下说明后，找到合适的参与方式加入我们！
-    - 目前工作坊正在筹备中，我们预计在 2025/07 初宣传并开放报名，如果您提前抵达这一页面想要报名活动，可[加入群组信箱](./contact.md)即时收到我们的活动报名通知！未来活动正式报名页面请参阅[此页面](./event-workshop-2025.md)。
+    - 目前工作坊正在筹备中，我们预计在 2025/07 初宣传并开放报名，如果您提前抵达这一页面想要报名活动，可[加入群组信箱](https://anoni.net/zh-cn/contact/)即时收到我们的活动报名通知！未来活动正式报名页面请参阅[此页面](./event-workshop-2025.md)。
 
 这次我们会有一天的议程轨来举办工作坊活动，由于目前 COSCUP 还没有公布被分配在哪一天，但这不影响工作坊的前置准备。工作坊的进行方式会延续在 [2025/02 Tor、OONI 团队所举办的工作坊形式](./blog/posts/rightscon25-pre-event.md)，唯一不同的是我们会**在地化调整**与使用**华语**的方式进行。
 
@@ -187,7 +187,7 @@ icon: octicons/workflow-24
 
         - [x] 使用密码管理器 KeePassXC。
         - [x] 使用 GnuPG 与 Kleopatra 建立加密密钥与加密文件。
-        - [x] 通过 Thunderbird 发送加密邮件到 `whisper@anoni.net`（取得公开密钥请参考「[持续关注](./contact.md)」）。
+        - [x] 通过 Thunderbird 发送加密邮件到 `whisper@anoni.net`（取得公开密钥请参考「[持续关注](https://anoni.net/zh-cn/contact/)」）。
         - [x] 安全的移除文件操作流程。
 
 ### :octicons-bookmark-16: OONI 网络干预观测
@@ -242,7 +242,7 @@ icon: octicons/workflow-24
 
 圆桌会议（Round-Table）每场预计不超过 25 人的讨论，会议上指派 1 ~ 2 位协调员（Facilitator）、1 位记录员（Note-taker）。
 
-在活动前，我们会邀请对以下议题或类型感兴趣的人成为协调员。如果您或者您有推荐的人选，也欢迎[让我们知道](./contact.md)，一起加入邀请、参与讨论！
+在活动前，我们会邀请对以下议题或类型感兴趣的人成为协调员。如果您或者您有推荐的人选，也欢迎[让我们知道](https://anoni.net/zh-cn/contact/)，一起加入邀请、参与讨论！
 
 ??? tip "角色与功能"
     - **协调员（Facilitator）**：负责主持会议，确保议程按照计划进行。主持人控制讨论的节奏，维持时间管理，并确保每位参与者有机会发言。促进有效沟通，确保会议目标得以实现。

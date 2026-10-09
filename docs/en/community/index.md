@@ -35,7 +35,7 @@ We run our own Matrix homeserver at `im.anoni.net`. Most ongoing community work 
 
 ### Encrypted email
 
-- **`whisper@anoni.net`** — for partnership inquiries, sensitive material submissions, and requests that don't fit Matrix. PGP key is on the [contact page](../contact.md). Core members handle this rotation.
+- **`whisper@anoni.net`** — for partnership inquiries, sensitive material submissions, and requests that don't fit Matrix. PGP key is on the [contact page](https://anoni.net/en/contact/). Core members handle this rotation.
 
 ### GitHub
 
@@ -44,7 +44,7 @@ We run our own Matrix homeserver at `im.anoni.net`. Most ongoing community work 
 
 ### Newsletter
 
-- Sign up on the [contact page](../contact.md) for occasional updates (project releases, regional reports, workshop announcements).
+- Sign up on the [contact page](https://anoni.net/en/contact/) for occasional updates (project releases, regional reports, workshop announcements).
 
 ## :material-tools: Self-hosted tools we use
 
@@ -94,7 +94,7 @@ We organize and co-organize workshops and meetups. Past include the 2025 Anonymo
 
 ## :material-file-document-outline: For sensitive submissions
 
-If you have sensitive material (whistleblowing, leaked documents, primary observation that needs careful handling), email `whisper@anoni.net` from a fresh account using PGP encryption (key on the [contact page](../contact.md)), or hand off in person at meetups and conferences.
+If you have sensitive material (whistleblowing, leaked documents, primary observation that needs careful handling), email `whisper@anoni.net` from a fresh account using PGP encryption (key on the [contact page](https://anoni.net/en/contact/)), or hand off in person at meetups and conferences.
 
 We do not advise on, or assist with, illegal activity (see the [governance code of conduct](./governance.md) for explicit refusals). For sensitive material related to journalism, advocacy, research, or personal safety, however, we'll handle it with appropriate care.
 

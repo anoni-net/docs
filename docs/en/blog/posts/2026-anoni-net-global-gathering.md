@@ -124,5 +124,5 @@ Whatever the booth collects will be written up and published in a later newslett
 ## Channels
 
 - During the event: Matrix room [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, for the three days of the Global Gathering
-- Live discussion: [public Matrix room](../../community/tools.md) (home server `im.anoni.net`)
-- Anonymous tips: whisper@anoni.net ([GPG key](../../contact.md)), checked within a few hours during the Gathering
+- Live discussion: [public Matrix room](https://anoni.net/en/services/) (home server `im.anoni.net`)
+- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/)), checked within a few hours during the Gathering

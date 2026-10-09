@@ -75,7 +75,7 @@ With traffic still flowing through it day after day, a handful of bridges is cle
 
 !!! info "Need a connection? Write to us"
 
-    The community currently runs one Tor WebTunnel bridge each in Taiwan and Singapore. To keep censors from simply blocking the addresses, these bridge lines aren't posted publicly. If you or someone you know needs one, you're welcome to email <whisper@anoni.net> to request it (other ways to reach us are on the [contact page](../../contact.md)).
+    The community currently runs one Tor WebTunnel bridge each in Taiwan and Singapore. To keep censors from simply blocking the addresses, these bridge lines aren't posted publicly. If you or someone you know needs one, you're welcome to email <whisper@anoni.net> to request it (other ways to reach us are on the [contact page](https://anoni.net/en/contact/)).
 
 ## Why WebTunnel
 
@@ -121,7 +121,7 @@ Iran's shutdown was extreme, but censorship and shutdowns aren't a distant excep
 
 One node doesn't change much, but many nodes spread across the world add up to a network a censor can't pull down all at once. If you have a spare VPS or physical machine, a domain, and a little time, we'd love for you to help stand up more bridges, wherever you are.
 
-Community discussion happens on [Matrix](../../contact.md) (home server `im.anoni.net`); how to join and other ways to reach us are on that page.
+Community discussion happens on [Matrix](https://anoni.net/en/contact/) (home server `im.anoni.net`); how to join and other ways to reach us are on that page.
 
 ## Related reading
 

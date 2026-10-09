@@ -193,7 +193,7 @@ The software changelog also has separate feeds by device and use, for iPhone and
 
 ## If you'd rather not install a reader
 
-You can [subscribe to the newsletter](../contact.md) instead, which brings project progress and event news to your inbox. To avoid handing over your everyday address, sign up with an [email alias](./email-alias.md) and switch the alias off when you no longer want the mail.
+You can [subscribe to the newsletter](https://anoni.net/en/contact/) instead, which brings project progress and event news to your inbox. To avoid handing over your everyday address, sign up with an [email alias](./email-alias.md) and switch the alias off when you no longer want the mail.
 
 ## Related reading
 

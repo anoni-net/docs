@@ -15,7 +15,7 @@ Everything below assumes you've already found something to work on. If you haven
 For anything beyond a typo or a small fix, send a brief heads-up before you start. A two-line note saves you from rewriting work that doesn't fit, and it lets someone tell you if a piece is already underway.
 
 - **Matrix** — the [Public Space at `#community:im.anoni.net`](https://matrix.to/#/#community:im.anoni.net){target="_blank"} is the fastest way to reach people. Account requests go to `whisper@anoni.net` (the homeserver is `im.anoni.net`, accounts are individually approved).
-- **Encrypted email** — `whisper@anoni.net` works if you'd rather not be on Matrix, or if the topic is sensitive. PGP key is on the [contact page](../contact.md).
+- **Encrypted email** — `whisper@anoni.net` works if you'd rather not be on Matrix, or if the topic is sensitive. PGP key is on the [contact page](https://anoni.net/en/contact/).
 
 You don't need permission to fix an obvious error. The heads-up matters most when a change touches structure, scope, or claims that others may already be working on.
 

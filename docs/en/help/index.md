@@ -223,4 +223,4 @@ This is a technical community, not a legal service, a counselling service, or la
 
 We cannot file a case on your behalf, issue a protective order, perform forensics on a device, or give legal advice. If the situation is urgent, contact the professional lines first.
 
-If you would like to help maintain or strengthen the resources on this page, particularly for jurisdictions other than Taiwan, the channels on [Community services](../community/tools.md) reach us.
+If you would like to help maintain or strengthen the resources on this page, particularly for jurisdictions other than Taiwan, the channels on [Community services](https://anoni.net/en/services/) reach us.

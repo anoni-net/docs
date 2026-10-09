@@ -306,7 +306,7 @@ UFW 也要對應放行 v6 流量。IPv6 雖然是選用，但對 Tor 網路的�
 
     Relay 上線後，這個案例就活在 Tor 網路裡了。建議：
 
-    - **回報案例**：透過 [社群自架服務](./tools.md) 聯繫匿名網路社群 anoni.net，我們會把你的案例加進 [Tor Relay 校園建立研究專題](./relay-on-campus.md) 的「已完成的事」，讓第三、第四所學校有更多參考
+    - **回報案例**：透過 [社群自架服務](https://anoni.net/services/) 聯繫匿名網路社群 anoni.net，我們會把你的案例加進 [Tor Relay 校園建立研究專題](./relay-on-campus.md) 的「已完成的事」，讓第三、第四所學校有更多參考
     - **長期維運參考**：[如何搭建 Tor Relay](./setup-tor-relay.md) 末尾的 FAQ 有 nyx 監控、套件升級、Guard Relay 機制的補充
     - **想做更多**：可以額外運行 [Tor Snowflake 橋接點](../tools/tor-snowflake.md) 幫助審查地區的使用者連上 Tor
 
@@ -325,4 +325,4 @@ UFW 也要對應放行 v6 流量。IPv6 雖然是選用，但對 Tor 網路的�
 
 這份 SOP 由社群夥伴 **蘇恩立（NZ）** 提供原始設計文件與實作經驗，整理自他在台灣師範大學的部署過程。原始材料由 NZ 同意以本站 [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權釋出。
 
-如果你照這份 SOP 走，發現有任何步驟對你的學校環境不適用、或可以補強的細節，**歡迎回報給社群**。我們會持續更新這份 SOP，讓它愈用愈接近台灣校園的實際情況。聯絡方式見 [社群自架服務](./tools.md)。
+如果你照這份 SOP 走，發現有任何步驟對你的學校環境不適用、或可以補強的細節，**歡迎回報給社群**。我們會持續更新這份 SOP，讓它愈用愈接近台灣校園的實際情況。聯絡方式見 [社群自架服務](https://anoni.net/services/)。

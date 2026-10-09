@@ -85,4 +85,4 @@ Once you know your role, the pages that path links to can be stored on your phon
 
 ## If none of these fit
 
-These five are the audiences this community works with most often, and plenty of situations fall outside them. Tell us about yours in the [public Matrix room](../community/tools.md) and it helps us decide which entry point to write next. To share practical experience anonymously, write to [whisper@anoni.net](mailto:whisper@anoni.net).
+These five are the audiences this community works with most often, and plenty of situations fall outside them. Tell us about yours in the [public Matrix room](https://anoni.net/en/services/) and it helps us decide which entry point to write next. To share practical experience anonymously, write to [whisper@anoni.net](mailto:whisper@anoni.net).

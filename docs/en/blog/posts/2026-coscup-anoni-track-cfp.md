@@ -64,7 +64,7 @@ On **Day 2 (Aug 9)**, both communities plan to co-organize a dedicated session o
 - In your proposal, make sure to choose **"匿名網路社群 anoni.net"** as the track topic so your submission enters this track's review process.
 - Clearly include your topic direction, intended format, audience background, requested duration (30 or 50 minutes), and demo needs (if any).
 
-If you have questions, contact us via [Contact](../../contact.md){target="_blank"}.
+If you have questions, contact us via [Contact](https://anoni.net/en/contact/){target="_blank"}.
 
 ## Ethics and Open Licensing Reminder
 

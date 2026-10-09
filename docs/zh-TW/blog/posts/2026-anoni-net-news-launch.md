@@ -74,8 +74,8 @@ description: "anoni.net 社群的新網站新聞導讀 anoni.net/news，每天�
 ## 回報與參與
 
 - 回報錯誤：在 [GitHub 開 issue](https://github.com/anoni-net/news/issues/new){target="_blank"}，寫明是哪一篇、哪一句，能附上出處更好
-- 即時討論：Matrix 公開 room（家伺服器 `im.anoni.net`，連結見[社群工具頁](../../community/tools.md)）
-- 匿名線索：whisper@anoni.net（[GPG 公鑰](../../contact.md)）
+- 即時討論：Matrix 公開 room（家伺服器 `im.anoni.net`，連結見[社群工具頁](https://anoni.net/services/)）
+- 匿名線索：whisper@anoni.net（[GPG 公鑰](https://anoni.net/contact/)）
 
 ## 相關閱讀
 

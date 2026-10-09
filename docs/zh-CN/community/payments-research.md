@@ -64,7 +64,7 @@ icon: material/folder-search-outline
 
 ## 如何加入讨论
 
-社群讨论在 Matrix（家服务器 `im.anoni.net`）。匿名支付主题目前以社群 Public Space 中的相关 room 为主要沟通管道。共笔协作使用 Cryptpad，定期视频使用 Jitsi。账号申请与服务入口请见 [社群自架服务](./tools.md)。
+社群讨论在 Matrix（家服务器 `im.anoni.net`）。匿名支付主题目前以社群 Public Space 中的相关 room 为主要沟通管道。共笔协作使用 Cryptpad，定期视频使用 Jitsi。账号申请与服务入口请见 [社群自架服务](https://anoni.net/zh-cn/services/)。
 
 如果你有以下任一背景，特别欢迎加入：
 

@@ -169,6 +169,6 @@ uv run python ripe.py save --loc=TW
 - [:material-table-search: OONI 測項速查表](./ooni-nettests-map.md)
 - [:material-access-point-network: ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
 - [:octicons-mark-github-24: 專案研究預先準備](./setup-repo.md)
-- [:material-hand-heart: 如何參與與認領主題](./how-to-contribute.md)
+- [:material-hand-heart: 如何參與與認領主題](https://anoni.net/join/)
 
 </div>

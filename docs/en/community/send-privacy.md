@@ -60,6 +60,6 @@ If who sends files to whom is itself sensitive, connect with Tor Browser (see [W
 
 ## Contact and abuse reports
 
-Send security issues and reports of abuse, such as someone using the service to spread harmful content, to [whisper@anoni.net](mailto:whisper@anoni.net). If you need encryption, use the PGP public key on our [contact page](../contact.md). When reporting a file, include only the part of the share link before the `#`. We delete by file ID and do not need the key.
+Send security issues and reports of abuse, such as someone using the service to spread harmful content, to [whisper@anoni.net](mailto:whisper@anoni.net). If you need encryption, use the PGP public key on our [contact page](https://anoni.net/en/contact/). When reporting a file, include only the part of the share link before the `#`. We delete by file ID and do not need the key.
 
-More about the service is on [Community Services](./tools.md).
+More about the service is on [Community Services](https://anoni.net/en/services/).

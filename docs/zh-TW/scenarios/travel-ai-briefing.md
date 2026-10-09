@@ -207,4 +207,4 @@ CIVICUS Monitor 評級。是否有 foreign-agent／NGO 註冊法、誹謗或冒�
 
 ---
 
-這一頁給的是「該問的問題」，不是現成答案。若你有特定目的地的實地經驗想分享，歡迎到 [Matrix 公開 room](../community/tools.md) 討論，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+這一頁給的是「該問的問題」，不是現成答案。若你有特定目的地的實地經驗想分享，歡迎到 [Matrix 公開 room](https://anoni.net/services/) 討論，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

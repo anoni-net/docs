@@ -146,6 +146,11 @@ def scan(root=OUTPUT):
         kind, payload = read_page(path.read_text(encoding="utf-8", errors="replace"))
         if kind == "redirect":
             # meta refresh 寫的是相對路徑，換成站台路徑才比得出「目的地變了」。
+            # 搬到站外的頁面（例如 2026-10 搬到 anoni.net 頂層的聯絡頁）寫的是完整網址，
+            # 原樣記下，接到站台路徑後面會變成 /contact/https:/anoni.net/contact/。
+            if "://" in payload:
+                entries[url] = ("redirect", payload)
+                continue
             target = posixpath.normpath(posixpath.join(url, payload))
             if not target.endswith("/") and payload.endswith("/"):
                 target += "/"

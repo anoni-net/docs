@@ -361,6 +361,12 @@ plugins:
         - en
   - redirects:
       redirect_maps:
+        # 2026-10 搬到 anoni.net 顶层的页面（toomore/anoni-net-ws#397）。m6 的 nginx 会先回 301，
+        # 对照表在 anoni-net/www 的 tools/nginx-docs-moved.conf，这里是给没有那层 nginx 的
+        # 镜像（例如 IPFS）用的。
+        'contact.md': 'https://anoni.net/zh-cn/contact/'
+        'community/tools.md': 'https://anoni.net/zh-cn/services/'
+        'community/how-to-contribute.md': 'https://anoni.net/zh-cn/join/'
         # 2026 扁平结构 → 7 分类改版（ceaf889）旧网址止血
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'
@@ -376,8 +382,8 @@ plugins:
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
         'setup-skill-level.md': 'community/skill-level.md'
         'about/community/index.md': 'community/index.md'
-        'about/community/participate.md': 'community/how-to-contribute.md'
-        'about/community/communication-tools.md': 'community/tools.md'
+        'about/community/participate.md': 'https://anoni.net/zh-cn/join/'
+        'about/community/communication-tools.md': 'https://anoni.net/zh-cn/services/'
         # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
         'about/community.md': 'community/index.md'
         'about/send-censorship.md': 'about/index.md'

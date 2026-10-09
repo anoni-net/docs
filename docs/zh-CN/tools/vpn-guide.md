@@ -275,7 +275,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 <div class="grid cards" markdown>
 
 - [:material-shield-lock-outline: 个人隐私指引研究专题](../community/privacy-guide.md)
-- [:material-server-network-outline: 社群自架服务](../community/tools.md)
+- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

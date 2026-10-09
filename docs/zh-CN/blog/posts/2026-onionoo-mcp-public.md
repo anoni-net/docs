@@ -102,7 +102,7 @@ anoni.net 目前在 Tor 观测这条线上有三个入口，可以依任务挑�
 ## 参与与反馈
 
 - 回报问题或提建议：<https://github.com/anoni-net/onionoo-fastapi/issues>
-- 想讨论该补哪些任务导向工具、或请社区示范某类查询，欢迎到 [Matrix 公开 room](../../community/tools.md) 提出来。
+- 想讨论该补哪些任务导向工具、或请社区示范某类查询，欢迎到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 提出来。
 - 想自行架设一份（例如在 .onion 服务、内网或实验环境），完整文件的「自架（Docker）」段落有 Docker 启动指令与环境变数列表。
 
 服务以 MIT 授权释出，源代码在 <https://github.com/anoni-net/onionoo-fastapi>，任何 issue、PR 都欢迎。

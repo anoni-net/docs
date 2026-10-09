@@ -46,7 +46,7 @@ icon: material/gavel
 
 具體有產出的成員，包括寫文章、翻譯、寫程式、籌備活動、做設計、做研究等。在 Matrix Public Space 內的相關 room 活躍參與。
 
-加入方式：到 [如何參與與認領主題](./how-to-contribute.md) 認領主題、提 PR，或參與活動籌備。沒有正式門檻。
+加入方式：到 [如何參與與認領主題](https://anoni.net/join/) 認領主題、提 PR，或參與活動籌備。沒有正式門檻。
 
 ### 觀察員
 
@@ -171,6 +171,6 @@ icon: material/gavel
 ## 相關文件
 
 - [貢獻者百科](./contributor-handbook.md)：寫作風格、PR 流程、Issue 分類
-- [如何參與與認領主題](./how-to-contribute.md)：第一次參與的入門路徑
+- [如何參與與認領主題](https://anoni.net/join/)：第一次參與的入門路徑
 - [上傳機敏資訊流程](./upload-sensitive.md)：機敏內容的處理規範
-- [社群自架服務](./tools.md)：Matrix、Cryptpad 等服務的入口與帳號申請
+- [社群自架服務](https://anoni.net/services/)：Matrix、Cryptpad 等服務的入口與帳號申請

@@ -60,7 +60,7 @@ External resources the community has flagged, where help translating or summariz
 
 ## How to join
 
-Discussion happens on Matrix (homeserver `im.anoni.net`), in the relevant rooms of the community's public Space. Collaborative writing uses CryptPad, and regular calls use Jitsi. Account requests and service entry points are on [Community services](./tools.md).
+Discussion happens on Matrix (homeserver `im.anoni.net`), in the relevant rooms of the community's public Space. Collaborative writing uses CryptPad, and regular calls use Jitsi. Account requests and service entry points are on [Community services](https://anoni.net/en/services/).
 
 Backgrounds we would particularly welcome:
 

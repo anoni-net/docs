@@ -79,12 +79,12 @@ Pulse and ASN Coverage live with their issue trackers in [anoni-net/docs on GitH
 
 You do not need a technical background. Pick whichever entry point fits:
 
-- **Following the issues and the community**: subscribe to the [newsletter](../contact.md) and join Matrix
+- **Following the issues and the community**: subscribe to the [newsletter](https://anoni.net/en/contact/) and join Matrix
 - **Translation and writing**: see [Localization and translation](./i18n.md) and [How to contribute](./how-to-contribute.md)
 - **Working out how deep you want to go technically**: see the [skill level self-assessment](./skill-level.md)
-- **Understanding the collaboration tools**: see [Community services](./tools.md)
+- **Understanding the collaboration tools**: see [Community services](https://anoni.net/en/services/)
 
-Discussion happens mainly on Matrix (homeserver `im.anoni.net`), collaborative writing on CryptPad, and calls on Jitsi. Account requests and setup instructions for all of them are on the [Community services](./tools.md) page.
+Discussion happens mainly on Matrix (homeserver `im.anoni.net`), collaborative writing on CryptPad, and calls on Jitsi. Account requests and setup instructions for all of them are on the [Community services](https://anoni.net/en/services/) page.
 
 ## Roadmap updates
 

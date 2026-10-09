@@ -23,8 +23,8 @@
 	#閱讀方式
 	#關於文件站
 /about/community/ -> /community/
-/about/community/communication-tools/ -> /community/tools/
-/about/community/participate/ -> /community/how-to-contribute/
+/about/community/communication-tools/ -> https://anoni.net/services/
+/about/community/participate/ -> https://anoni.net/join/
 /about/how-you-are-reading/
 	#IPFS-鏡像
 	#Onion
@@ -2062,11 +2062,7 @@
 	#貢獻者
 	#違反處置
 	#適用範圍
-/community/how-to-contribute/
-	#2026-三大主題
-	#如何參與與認領主題
-	#如何選擇與認領
-	#平時如何參與
+/community/how-to-contribute/ -> https://anoni.net/join/
 /community/i18n/
 	#1-確認專案的翻譯平台與貢獻管道
 	#2-註冊翻譯平台帳號找對應子專案
@@ -2311,19 +2307,7 @@
 	#Tor-技能分級
 	#自我技能評估表
 	#評估完之後
-/community/tools/
-	#Cryptpad加密共筆
-	#Etherpad即時共筆
-	#Formbricks隱私表單
-	#Jitsi線上視訊
-	#Matrix即時討論
-	#SearXNG隱私搜尋
-	#Send端對端加密檔案分享
-	#個人隱私工具
-	#即時溝通與長期協作
-	#社群自架服務
-	#社群運作工具
-	#線上會議外部
+/community/tools/ -> https://anoni.net/services/
 /community/tor-project-ecosystem/
 	#Tor-Project-生態與對接
 	#匿名網路社群的對接脈絡
@@ -2357,9 +2341,7 @@
 	#繁字暗示的不對稱
 	#跟-zh_Hant--zh_Hans-的關係
 	#這是普及工作的一部分
-/contact/
-	#持續關注
-	#社群討論與視訊
+/contact/ -> https://anoni.net/contact/
 /en/
 	#Cutting-across-the-above
 	#Four-ways-to-use-this-site
@@ -4270,19 +4252,7 @@
 	#Self-skills-evaluation-form
 	#Tails-skills
 	#Tor-skills
-/en/community/tools/
-	#Community-Services
-	#Community-operations
-	#CryptPad-encrypted-collaborative-documents
-	#Etherpad-lightweight-shared-notes
-	#Formbricks-privacy-respecting-forms
-	#Jitsi
-	#Matrix-real-time-discussion
-	#Personal-privacy-tools
-	#Real-time-discussion-and-long-term-collaboration
-	#SearXNG-private-search
-	#Send-end-to-end-encrypted-file-transfer
-	#Video-calls-external
+/en/community/tools/ -> https://anoni.net/en/services/
 /en/community/tor-project-ecosystem/
 	#An-activity-snapshot
 	#Current-directions-and-active-projects
@@ -4311,9 +4281,7 @@
 	#What-繁-implies
 	#Why
 	#Why-We-Say-Orthodox-Chinese-Rather-Than-Complex-Chinese
-/en/contact/
-	#Community-Discussion--Video
-	#Stay-Informed
+/en/contact/ -> https://anoni.net/en/contact/
 /en/event-workshop-2025-prepare/
 	#Event-Organizer
 	#Free-Software-and-Digital-Rights-Why-Is-Open-Source-Key-to-Anonymous-Tools
@@ -7261,8 +7229,8 @@
 	#相关阅读
 	#阅读方式
 /zh-cn/about/community/ -> /zh-cn/community/
-/zh-cn/about/community/communication-tools/ -> /zh-cn/community/tools/
-/zh-cn/about/community/participate/ -> /zh-cn/community/how-to-contribute/
+/zh-cn/about/community/communication-tools/ -> https://anoni.net/zh-cn/services/
+/zh-cn/about/community/participate/ -> https://anoni.net/zh-cn/join/
 /zh-cn/about/how-you-are-reading/
 	#IPFS-镜像
 	#Onion
@@ -9212,11 +9180,7 @@
 	#贡献者
 	#违反处置
 	#适用范围
-/zh-cn/community/how-to-contribute/
-	#2026-三大主题
-	#如何参与与认领主题
-	#如何选择与认领
-	#平时如何参与
+/zh-cn/community/how-to-contribute/ -> https://anoni.net/zh-cn/join/
 /zh-cn/community/i18n/
 	#1-确认项目的翻译平台与贡献管道
 	#2-注册翻译平台帐号找对应子项目
@@ -9449,19 +9413,7 @@
 	#Tor-技能分级
 	#自我技能评估表
 	#评估完之后
-/zh-cn/community/tools/
-	#Cryptpad加密协作文档
-	#Etherpad即时共笔
-	#Formbricks隐私表单
-	#Jitsi在线视频
-	#Matrix即时讨论
-	#SearXNG隐私搜索
-	#Send端到端加密文件分享
-	#个人隐私工具
-	#即时沟通与长期协作
-	#在线会议外部
-	#沟通与协作工具
-	#社群运作工具
+/zh-cn/community/tools/ -> https://anoni.net/zh-cn/services/
 /zh-cn/community/tor-project-ecosystem/
 	#Tor-Project-生态与对接
 	#从哪里看-Tor-的规划
@@ -9488,9 +9440,7 @@
 	#繁字暗示的不对称
 	#跟-zh_Hant--zh_Hans-的关系
 	#这是普及工作的一部分
-/zh-cn/contact/
-	#持续关注
-	#社区讨论与视频通话
+/zh-cn/contact/ -> https://anoni.net/zh-cn/contact/
 /zh-cn/event-workshop-2025-prepare/
 	#OONI-网络干预观测
 	#TorTails-匿名网络

@@ -28,7 +28,7 @@ After the event, we compiled a summary article and presentation collection from 
 
 In this event, participants in the Tor/Tails and OONI workshop gained a preliminary understanding of issues related to 'internet freedom' and 'anonymous networks.' They also engaged in hands-on practice with tools to enhance their security and privacy defenses. After the event, we received valuable feedback and suggestions regarding the workshop arrangements. As a result, we have decided to apply for a workshop session at this year's COSCUP to continue promoting these topics, adjusting them to better align with Taiwan's local context and language.
 
-COSCUP is scheduled to be held on August 9th and 10th at National Taiwan University of Science and Technology. We plan to host a workshop on one of those days. Before August, we need to adjust our presentations and materials to include content in Mandarin and Taiwanese terminology. Additionally, we need to start recruiting team members to prepare for the workshop and train workshop assistants. If you are interested in the workshop, please remember to [contact us](../../contact.md). We anticipate starting the preparations in the second week of April.
+COSCUP is scheduled to be held on August 9th and 10th at National Taiwan University of Science and Technology. We plan to host a workshop on one of those days. Before August, we need to adjust our presentations and materials to include content in Mandarin and Taiwanese terminology. Additionally, we need to start recruiting team members to prepare for the workshop and train workshop assistants. If you are interested in the workshop, please remember to [contact us](https://anoni.net/en/contact/). We anticipate starting the preparations in the second week of April.
 
 ## Anonymous Credentials
 
@@ -56,7 +56,7 @@ A [Tor Relays observation station](../../regional/tor-relay-watcher.md){target="
 
 Currently, this page is still under development and testing, and we cannot guarantee it will operate 24/7 (we are working on solving stability issues XD). The development code has not yet been merged into the main branch. Interested partners can refer to the '[pulse](https://github.com/anoni-net/docs/compare/main...pulse?expand=1){target="_blank"}' and '[api](https://github.com/anoni-net/docs/compare/main...api?expand=1){target="_blank"}' branches, or you can freely experiment on the [API documentation page](https://anoni.net/api/readme){target="_blank"}. We are using Python's [FastAPI](https://fastapi.tiangolo.com/){target="_blank"} and [Pydantic](https://docs.pydantic.dev/latest/){target="_blank"} as the development framework.
 
-Of course, we are also looking for partners familiar with processing large volumes of data. If interested, please feel free to [contact us](../../contact.md){target="_blank"} directly!
+Of course, we are also looking for partners familiar with processing large volumes of data. If interested, please feel free to [contact us](https://anoni.net/en/contact/){target="_blank"} directly!
 
 ## Lastly
 

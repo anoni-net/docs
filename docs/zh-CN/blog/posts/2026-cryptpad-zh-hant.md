@@ -63,7 +63,7 @@ CryptPad 由法国 [XWiki SAS](https://xwiki.com/){target="_blank"} 开发，使
 
 ## 为什么社区选择 CryptPad 作为自架的协作平台
 
-社区自架的服务不只 CryptPad，也有 [Etherpad](https://pad.anoni.net/){target="_blank"} 做即时共笔、Matrix 做即时讨论（三者分工见 [沟通与协作工具](../../community/tools.md)）。CryptPad 在我们的选择顺位里，承担的是「需要长期保存、需要加密、需要多人协作完整文档」的场景。愿意花两年半把界面翻成正体中文，理由有几个。
+社区自架的服务不只 CryptPad，也有 [Etherpad](https://pad.anoni.net/){target="_blank"} 做即时共笔、Matrix 做即时讨论（三者分工见 [沟通与协作工具](https://anoni.net/zh-cn/services/)）。CryptPad 在我们的选择顺位里，承担的是「需要长期保存、需要加密、需要多人协作完整文档」的场景。愿意花两年半把界面翻成正体中文，理由有几个。
 
 **E2EE 与 zero-knowledge 架构**：社区讨论的内容很常涉及威胁模型、揭弊者保护、Tor Relay 校园推动的协商记录，这些东西放在 Google Docs 或 Notion 上，等于把所有未公开的策略摊在第三方平台与其广告合作对象面前。CryptPad 从架构上把「运营者能看到内容」这件事拿掉，技术保证远强于 SLA 承诺。
 
@@ -122,12 +122,12 @@ CryptPad 本身是 E2EE 的，无论你的连线管道是 Tor、VPN 或直连，
 - **入口**：[https://cryptpad.anoni.net/](https://cryptpad.anoni.net/){target="_blank"}
 - **帐号申请**：写信到 <whisper@anoni.net> 申请注册码。默认容量 50 MB，后续可调整。注册时不要求邮箱、不绑定实名，跟 Matrix 的申请流程一致。
 - **切换语系**：升级后右上角设定页可选「中文(正体)」或「中文(简体)」。网址加 `?lang=zh_Hant` 或 `?lang=zh_Hans` 也能切换。
-- **完整工具清单**：见 [沟通与协作工具](../../community/tools.md)。
+- **完整工具清单**：见 [沟通与协作工具](https://anoni.net/zh-cn/services/)。
 
 如果你发现翻译有错字、用词不顺、或是有新版字串还没翻完，欢迎到 Weblate 上的 [zh_Hant](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} 或 [zh_Hans](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hans/){target="_blank"} 项目直接提交修改，或来信 <whisper@anoni.net> 告诉我们。
 
 ## 相关阅读
 
 - [从 Discord 年龄验证谈起：我们为什么自架 Matrix](2026-discord-matrix-statement.md)
-- [沟通与协作工具](../../community/tools.md)
+- [沟通与协作工具](https://anoni.net/zh-cn/services/)
 - [中文化与文件翻译](../../community/i18n.md)

@@ -742,5 +742,5 @@ alt 要把圖的內容說完整，不要只寫「示意圖」三個字。語音�
 ## :material-link-variant: 接下來
 
 - [貢獻者百科](contributor-handbook.md)：整體貢獻流程、PR 規範、翻譯流程
-- [社群自架服務](tools.md)：Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口與帳號需求
+- [社群自架服務](https://anoni.net/services/)：Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口與帳號需求
 - [2026 年度路線圖](roadmap-2026.md)：三大主題與時程

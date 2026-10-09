@@ -11,7 +11,7 @@ icon: material/account-group
 
 !!! tip "第一次来，想先做点什么？"
 
-    很多事情不需要账号就能开始：订阅 [电子报](../contact.md) 跟读社群动态、直接用 [社群自架服务](tools.md) 里的 SearXNG 搜索与 Send 传档、读 [指南](../guides/index.md) 里的隐私文章。想进一步参与讨论，再来信申请 Matrix 账号即可。
+    很多事情不需要账号就能开始：订阅 [电子报](https://anoni.net/zh-cn/contact/) 跟读社群动态、直接用 [社群自架服务](https://anoni.net/zh-cn/services/) 里的 SearXNG 搜索与 Send 传档、读 [指南](../guides/index.md) 里的隐私文章。想进一步参与讨论，再来信申请 Matrix 账号即可。
 
 ## 2026 三大主题
 
@@ -27,13 +27,13 @@ icon: material/account-group
 
 <div class="grid cards" markdown>
 
-- [:material-hand-heart: 如何参与与认领主题](how-to-contribute.md)
+- [:material-hand-heart: 如何参与与认领主题](https://anoni.net/zh-cn/join/)
     - 随时参与、到 Matrix 表达意愿、平时用 Matrix rooms 讨论
 
-- [:material-server-network-outline: 社群自架服务](tools.md)
+- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/)
     - Matrix、Cryptpad、Etherpad、SearXNG、Send、Formbricks 的入口与账号需求
 
-- [:material-email-fast-outline: 持续关注](../contact.md)
+- [:material-email-fast-outline: 持续关注](https://anoni.net/zh-cn/contact/)
     - 订阅电子报、PGP 联络方式
 
 </div>

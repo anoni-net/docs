@@ -228,6 +228,6 @@ PGP 留在它该在的地方，站上的[敏感数据上传](../../community/upl
 
 ## 联络与反馈
 
-- 即时讨论：Matrix 公开 room（家服务器 `im.anoni.net`，链接见[社区工具页](../../community/tools.md)）
-- 匿名线索：whisper@anoni.net（[GPG 公钥](../../contact.md)）
+- 即时讨论：Matrix 公开 room（家服务器 `im.anoni.net`，链接见[社区工具页](https://anoni.net/zh-cn/services/)）
+- 匿名线索：whisper@anoni.net（[GPG 公钥](https://anoni.net/zh-cn/contact/)）
 - 源代码与 issue：[anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}

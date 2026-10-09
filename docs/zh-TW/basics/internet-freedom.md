@@ -94,7 +94,7 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 
 - **想先理解概念**：往 basics/ 其他四篇繼續走。[匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 釐清詞彙，[威脅模型如何建立](./threat-model.md) 給判斷框架，[Metadata 是什麼](./metadata.md) 補上「機密 ≠ 匿名」的盲點，[為什麼匿名支付重要](./payments-anonymity.md) 把金流納入匿名思維。
 - **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md) 則是社群長期維運的在地資料。
-- **想參與實作**：往 [community/](../community/index.md) 走。可以先看 [2026 年度路線圖](../community/roadmap-2026.md)、[匿名支付研究專題](../community/payments-research.md)、[如何參與與認領主題](../community/how-to-contribute.md)，再依興趣選一個方向加入 Matrix 討論。
+- **想參與實作**：往 [community/](../community/index.md) 走。可以先看 [2026 年度路線圖](../community/roadmap-2026.md)、[匿名支付研究專題](../community/payments-research.md)、[如何參與與認領主題](https://anoni.net/join/)，再依興趣選一個方向加入 Matrix 討論。
 
 執行 OONI 測試、架設 Tor 中繼、協助翻譯、寫一篇文章、把這頁分享給可能受用的人，每一個都算數。
 

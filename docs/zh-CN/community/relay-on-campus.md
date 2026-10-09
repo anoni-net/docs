@@ -67,7 +67,7 @@ Tor 网络的匿名性靠**多元的中继节点**支撑。当绝大多数中继
 
 ## 如何加入讨论
 
-社群讨论在 Matrix（家服务器 `im.anoni.net`）。Tor Relay 校园主题目前以社群 Public Space 中的相关 room 为主要沟通管道。账号申请与服务入口请见 [社群自架服务](./tools.md)。
+社群讨论在 Matrix（家服务器 `im.anoni.net`）。Tor Relay 校园主题目前以社群 Public Space 中的相关 room 为主要沟通管道。账号申请与服务入口请见 [社群自架服务](https://anoni.net/zh-cn/services/)。
 
 如果你有以下任一背景，特别欢迎加入：
 

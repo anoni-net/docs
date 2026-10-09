@@ -136,7 +136,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 - **取得管道**：Tails、Whonix、Qubes 三套官網在台灣都直連無問題，下載速度可考慮 [Tails 鏡像清單](https://tails.net/install/index.en.html){target="_blank"}。Tor Browser 不必橋接就能下載，這層門檻比審查地區低得多。
 - **硬體取得**：台灣常見的 Intel-based ThinkPad（X、T、P 系列）多數在 Qubes HCL 上有相容紀錄。Apple Silicon 在 Tails 與 Qubes 上不可用，買機前一定先查 [HCL 官方頁](https://www.qubes-os.org/hcl/){target="_blank"}。Whonix 跨平台靈活，現有筆電多半可執行。
-- **社群實踐**：anoni.net 社群長期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)。Whonix、Qubes 在台灣社群既有經驗較少，如果你長期使用任一套，歡迎到 [Matrix 公開 room](../community/tools.md) 分享經驗。
+- **社群實踐**：anoni.net 社群長期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)。Whonix、Qubes 在台灣社群既有經驗較少，如果你長期使用任一套，歡迎到 [Matrix 公開 room](https://anoni.net/services/) 分享經驗。
 
 ## 常見問題
 

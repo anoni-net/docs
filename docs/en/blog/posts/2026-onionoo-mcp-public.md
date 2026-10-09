@@ -102,7 +102,7 @@ The three rely on different data sources (Pulse's own historical time series, OO
 ## Contribute or report back
 
 - File issues or feature requests: <https://github.com/anoni-net/onionoo-fastapi/issues>
-- To discuss which task-oriented tools we should add next, or to ask the community to demonstrate a particular query, drop by our [Matrix room](../../community/tools.md). English is welcome in the room.
+- To discuss which task-oriented tools we should add next, or to ask the community to demonstrate a particular query, drop by our [Matrix room](https://anoni.net/en/services/). English is welcome in the room.
 - To run your own instance (for a .onion service, internal network, or experimentation), the "Self-hosting (Docker)" section of the full guide has Docker commands and the full environment variable list.
 
 The service is released under the MIT license. Source code: <https://github.com/anoni-net/onionoo-fastapi>. Issues and PRs welcome.

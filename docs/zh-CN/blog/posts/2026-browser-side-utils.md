@@ -188,7 +188,7 @@ XMP 另有一个陷阱，把文档目录里指向 XMP 的引用删掉、重新�
 
 八个工具各有一支测试，执行方式是 `node tools/test_<名称>.mjs`，不需要安装任何包，每一支都在 CI 里执行。测试守的是画面看起来正常、结果却是错的那几种情况：取样有没有偏差、生成的 QR code 扫回来内容对不对、指纹示范页有没有偷偷送出数据、网址清理有没有误删必要参数、威胁模型的答案有没有被写进存储。
 
-目前缺的东西列在各工具页的不支持清单里，HEIC、TIFF、RAW、MKV、WebM、AVI 与 Office 文档都还没有人做。着手之前先开一个 issue 或到 Matrix room 说一声，避免两个人做同一件事。流程见 [CONTRIBUTING](https://github.com/anoni-net/docs/blob/main/CONTRIBUTING.md){target="_blank"} 与[如何参与与认领主题](../../community/how-to-contribute.md)。
+目前缺的东西列在各工具页的不支持清单里，HEIC、TIFF、RAW、MKV、WebM、AVI 与 Office 文档都还没有人做。着手之前先开一个 issue 或到 Matrix room 说一声，避免两个人做同一件事。流程见 [CONTRIBUTING](https://github.com/anoni-net/docs/blob/main/CONTRIBUTING.md){target="_blank"} 与[如何参与与认领主题](https://anoni.net/zh-cn/join/)。
 
 ## 接下来
 
@@ -200,4 +200,4 @@ XMP 另有一个陷阱，把文档目录里指向 XMP 的引用删掉、重新�
 - **工具在你的情境下缺了什么**：某个字段没有被识别、某种文件格式无法打开、说明看不懂都算
 - **视频或 PDF 的实际案例**：手上有无法清除 metadata 的文件，或清完之后无法打开的文件，都欢迎回报
 
-回报渠道是 Matrix 公开 room（家服务器 `im.anoni.net`，链接见[社区工具页](../../community/tools.md)），或 [anoni-net/docs](https://github.com/anoni-net/docs/issues){target="_blank"} 的 issue。不方便具名的部分可寄到 whisper@anoni.net（[GPG 公钥](../../contact.md)）。
+回报渠道是 Matrix 公开 room（家服务器 `im.anoni.net`，链接见[社区工具页](https://anoni.net/zh-cn/services/)），或 [anoni-net/docs](https://github.com/anoni-net/docs/issues){target="_blank"} 的 issue。不方便具名的部分可寄到 whisper@anoni.net（[GPG 公钥](https://anoni.net/zh-cn/contact/)）。

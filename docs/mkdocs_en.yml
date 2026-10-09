@@ -374,6 +374,11 @@ plugins:
         - en
   - redirects:
       redirect_maps:
+        # Moved to the anoni.net top level in 2026-10 (toomore/anoni-net-ws#397). nginx on m6
+        # answers these with a 301 first, see tools/nginx-docs-moved.conf in anoni-net/www.
+        # These pages are the fallback for hosts without that nginx, such as the IPFS mirror.
+        'contact.md': 'https://anoni.net/en/contact/'
+        'community/tools.md': 'https://anoni.net/en/services/'
         # offline-install 併進 offline（安裝說明與離線內容管理收成一頁）
         'offline-install.md': 'offline.md'
         # 2026 flat → categorised restructure (3aa2a65). Pages whose English content

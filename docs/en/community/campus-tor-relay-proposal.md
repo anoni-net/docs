@@ -292,4 +292,4 @@ This template comes from community member NZ, who provided the original proposal
 
     **Adapt the placeholder version on this page rather than forking the original**: The original contains NZ's personal email address, supervisor details, and campus IP ranges, and missing one of those when submitting is an easy mistake. The archive is there so you can see what a real version looks like and learn the structure and register.
 
-If you get a relay running at your own institution using this template, **tell us**. We will add your case to the [Tor relays on campus track](./relay-on-campus.md) so the third and fourth have more to work from. Contact routes are on [Community services](./tools.md).
+If you get a relay running at your own institution using this template, **tell us**. We will add your case to the [Tor relays on campus track](./relay-on-campus.md) so the third and fourth have more to work from. Contact routes are on [Community services](https://anoni.net/en/services/).
