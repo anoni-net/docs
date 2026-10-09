@@ -59,5 +59,6 @@ icon: material/book-information-variant
 
 - [贡献者百科](../community/contributor-handbook.md)
 - [中文化与文档翻译](../community/i18n.md)
-- [品牌素材](../community/brand-assets.md)
+- [文档站的视觉规范](../community/visual-guide.md)
+- [品牌素材](https://anoni.net/zh-cn/brand/)
 - [社群首页 anoni.net](https://anoni.net/zh-cn/)

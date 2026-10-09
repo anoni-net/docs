@@ -4,7 +4,7 @@
 # mkdocs*.yml 的 cards_layout_options（字型、版面上顯示的站名），版型本身改這裡，
 # 不要各語系各存一份。
 #
-# 配色取自貢獻者百科的品牌素材頁（community/brand-assets.md）。底色是 cyan-900，
+# 配色取自品牌素材頁（https://anoni.net/brand/），版型說明在 community/visual-guide.md。底色是 cyan-900，
 # 左緣三段色塊由上而下是 cyan-300、cyan-500、cyan-700，對應 logo 三個六角形的層次。
 # 白字放在 cyan-900 上對比 11.5:1，之前的 cyan-500 底配白字只有 2.5:1，縮到社群平台
 # 的預覽尺寸幾乎讀不出來。
@@ -21,7 +21,7 @@
 
 definitions:
 
-  # 品牌色票（brand-assets.md 的 token，改色請先改那一頁）
+  # 品牌色票（https://anoni.net/brand/ 的 token，改色請先改那一頁）
   - &brand_cyan_300 "#4dbfff"
   - &brand_cyan_500 "#00aeff"
   - &brand_cyan_700 "#0089bf"

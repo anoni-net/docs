@@ -1861,51 +1861,7 @@
 	#8-交付前自我檢查
 	#9-載入確認
 	#BECOME_ANONI--anoninet-貢獻者-AI-載入協定
-/community/brand-assets/
-	#AccentCTA-與緊急
-	#Logo-專用
-	#V3-cyan-tonal主視覺
-	#V3-mono-black印刷與單色場合
-	#V3-mono-white品牌色塊上的露出
-	#Wordmarklogo-加文字
-	#eyebrow-用-mutedalt-是唯一的權威文字
-	#下載
-	#不要用-Export
-	#不要這樣用
-	#中性色
-	#中文標題的換行
-	#亮色模式的介面色
-	#六種版型
-	#只在文件站用的顏色
-	#各站的視覺分工
-	#品牌主色-cyan9-階
-	#品牌素材
-	#單頁換掉卡片內容
-	#圖檔放在-assetsanoninet
-	#套到-markdown-文章
-	#如何儲存才會有-embedded-XML
-	#如何驗證有-XML
-	#幾何比例與淨空區
-	#手寫-SVG-的規則
-	#指南分類色側欄導覽
-	#接下來
-	#斷行交給版面算
-	#最小尺寸
-	#橫的東西都翻成直的
-	#檔名帶語系
-	#流程用置中的連接線
-	#版型範本
-	#畫布寬度照手機訂
-	#發布
-	#示意圖用色
-	#社群分享卡Open-Graph
-	#純-SVG--PNG-export-的場合
-	#結構性次色2026-三大主題限分類標籤
-	#貢獻技術圖示
-	#配色-Token
-	#配色一致性drawio-palette-預設
-	#配色使用守則
-	#頂層網站的細線
+/community/brand-assets/ -> https://anoni.net/brand/
 /community/campus-relay-faq/
 	#如何使用這份-FAQ
 	#常見疑慮-QA
@@ -2208,6 +2164,33 @@
 	#它怎麼運作
 	#換一台裝置
 	#跟站上檔案加密的差別
+/community/visual-guide/
+	#eyebrow-用-mutedalt-是唯一的權威文字
+	#不要用-Export
+	#中文標題的換行
+	#亮色模式的介面色
+	#單頁換掉卡片內容
+	#圖檔放在-assetsanoninet
+	#套到-markdown-文章
+	#如何儲存才會有-embedded-XML
+	#如何驗證有-XML
+	#手寫-SVG-的規則
+	#指南分類色側欄導覽
+	#接下來
+	#文件站專用的配色
+	#文件站的視覺規範
+	#斷行交給版面算
+	#橫的東西都翻成直的
+	#檔名帶語系
+	#流程用置中的連接線
+	#版型範本
+	#畫布寬度照手機訂
+	#發布
+	#示意圖用色
+	#社群分享卡Open-Graph
+	#純-SVG--PNG-export-的場合
+	#貢獻技術圖示
+	#配色一致性drawio-palette-預設
 /community/zh-hant-naming/
 	#主張
 	#命名會影響認知
@@ -2502,7 +2485,13 @@
 	#Project-Relaunch-2025
 /en/blog/2025/01/專案重啟-2025/ -> /en/blog/
 /en/blog/2025/01/项目重启-2025/ -> /en/blog/
-/en/blog/2025/02/g0v-hackath65n/ -> /en/blog/
+/en/blog/2025/02/g0v-hackath65n/
+	#ASN-observation-data-analysis
+	#Localization-and-terminology-review
+	#Project-proposals-at-g0v-Hackath65n-the-65th-g0v-hackathon
+	#Related
+	#Updating-the-OONI-website-testing-list
+	#What-we-want-to-move-forward
 /en/blog/2025/02/rightscon25-tor-tails-ooni/
 	#Internet-Freedom-Workshop-TorTailsOONI
 	#Keynote
@@ -3684,51 +3673,7 @@
 	#8-Self-check-before-delivering
 	#9-Load-confirmation
 	#BECOME_ANONI--anoninet-contributor-AI-loading-protocol
-/en/community/brand-assets/
-	#Accent-for-calls-to-action-and-emergencies
-	#Brand-Assets
-	#Brand-cyan-nine-steps
-	#Colour-tokens
-	#Colours-used-only-on-the-docs-site
-	#Contributing-technical-diagrams
-	#Diagram-colours
-	#Diagram-files-live-on-assetsanoninet
-	#Do-not-use-Export
-	#Downloads
-	#Filenames-carry-the-language
-	#Flows-use-a-centred-connector
-	#Guide-category-colours-sidebar-navigation
-	#How-each-site-uses-the-brand
-	#Interface-colour-in-light-mode
-	#Keeping-colours-consistent
-	#Leave-line-breaks-to-the-layout
-	#Line-breaking-for-Chinese-titles
-	#Logo-fills
-	#Minimum-size
-	#Neutrals
-	#Next
-	#Overriding-a-single-page
-	#Proportions-and-clear-space
-	#Publishing
-	#Rules-for-hand-written-SVG
-	#Saving-so-the-XML-is-embedded
-	#Six-layouts
-	#Size-the-canvas-for-phones
-	#Social-cards-Open-Graph
-	#Structural-secondaries-for-the-three-2026-tracks-category-tags-only
-	#The-eyebrow-is-muted-and-the-alt-is-the-only-authoritative-text
-	#The-layout-reference
-	#Thin-lines-on-the-top-level-site
-	#Turn-horizontal-layouts-vertical
-	#Using-a-diagram-in-an-article
-	#Using-the-colours
-	#V3-cyan-tonal-primary
-	#V3-mono-black-print-and-single-colour
-	#V3-mono-white-on-brand-colour
-	#Verifying-the-XML-is-there
-	#What-not-to-do
-	#When-a-plain-SVG-or-PNG-is-needed
-	#Wordmark-the-logo-with-the-name
+/en/community/brand-assets/ -> https://anoni.net/en/brand/
 /en/community/campus-relay-faq/
 	#Campus-Tor-Relay-an-FAQ-for-university-administrators-and-legal-counsel
 	#How-to-use-it
@@ -4010,6 +3955,33 @@
 	#Where-the-plans-are
 	#Where-this-communitys-work-connects
 /en/community/upload-sensitive/ -> https://anoni.net/en/join/upload-sensitive/
+/en/community/visual-guide/
+	#Colours-used-only-on-the-docs-site
+	#Contributing-technical-diagrams
+	#Diagram-colours
+	#Diagram-files-live-on-assetsanoninet
+	#Do-not-use-Export
+	#Docs-Visual-Guide
+	#Filenames-carry-the-language
+	#Flows-use-a-centred-connector
+	#Guide-category-colours-sidebar-navigation
+	#Interface-colour-in-light-mode
+	#Keeping-colours-consistent
+	#Leave-line-breaks-to-the-layout
+	#Line-breaking-for-Chinese-titles
+	#Next
+	#Overriding-a-single-page
+	#Publishing
+	#Rules-for-hand-written-SVG
+	#Saving-so-the-XML-is-embedded
+	#Size-the-canvas-for-phones
+	#Social-cards-Open-Graph
+	#The-eyebrow-is-muted-and-the-alt-is-the-only-authoritative-text
+	#The-layout-reference
+	#Turn-horizontal-layouts-vertical
+	#Using-a-diagram-in-an-article
+	#Verifying-the-XML-is-there
+	#When-a-plain-SVG-or-PNG-is-needed
 /en/community/zh-hant-naming/
 	#Citing-this
 	#Common-responses
@@ -8732,51 +8704,7 @@
 	#8-交付前自我检查
 	#9-加载确认
 	#BECOME_ANONI--anoninet-贡献者-AI-加载协议
-/zh-cn/community/brand-assets/
-	#AccentCTA-与紧急
-	#Logo-专用
-	#V3-cyan-tonal主视觉
-	#V3-mono-black印刷与单色场合
-	#V3-mono-white品牌色块上的露出
-	#Wordmarklogo-加文字
-	#eyebrow-用-mutedalt-是唯一的权威文字
-	#下载
-	#不要用-Export
-	#不要这样用
-	#中性色
-	#中文标题的换行
-	#亮色模式的界面色
-	#六种版型
-	#几何比例与净空区
-	#单页换掉卡片内容
-	#发布
-	#只在文档站用的颜色
-	#各站的视觉分工
-	#品牌主色-cyan9-阶
-	#品牌素材
-	#图档放在-assetsanoninet
-	#套到-markdown-文章
-	#如何储存才会有-embedded-XML
-	#如何验证有-XML
-	#手写-SVG-的规则
-	#指南分类色侧栏导览
-	#接下来
-	#文件名带语系
-	#断行交给版面算
-	#最小尺寸
-	#横的东西都翻成竖的
-	#流程用居中的连接线
-	#版型范本
-	#画布宽度照手机订
-	#示意图用色
-	#社群分享卡Open-Graph
-	#纯-SVG--PNG-export-的场合
-	#结构性次色2026-三大主题限分类标签
-	#贡献技术图示
-	#配色-Token
-	#配色一致性drawio-palette-默认
-	#配色使用守则
-	#顶层网站的细线
+/zh-cn/community/brand-assets/ -> https://anoni.net/zh-cn/brand/
 /zh-cn/community/campus-relay-faq/ -> https://anoni.net/docs/community/campus-relay-faq/
 /zh-cn/community/campus-tor-relay-proposal/ -> https://anoni.net/docs/community/campus-tor-relay-proposal/
 /zh-cn/community/campus-tor-relay-sop/ -> https://anoni.net/docs/community/campus-tor-relay-sop/
@@ -8990,6 +8918,33 @@
 	#相关阅读
 	#看-sponsor-判断哪些方向会持续做
 /zh-cn/community/upload-sensitive/ -> https://anoni.net/zh-cn/join/upload-sensitive/
+/zh-cn/community/visual-guide/
+	#eyebrow-用-mutedalt-是唯一的权威文字
+	#不要用-Export
+	#中文标题的换行
+	#亮色模式的界面色
+	#单页换掉卡片内容
+	#发布
+	#图档放在-assetsanoninet
+	#套到-markdown-文章
+	#如何储存才会有-embedded-XML
+	#如何验证有-XML
+	#手写-SVG-的规则
+	#指南分类色侧栏导览
+	#接下来
+	#文件名带语系
+	#文档站专用的配色
+	#文档站的视觉规范
+	#断行交给版面算
+	#横的东西都翻成竖的
+	#流程用居中的连接线
+	#版型范本
+	#画布宽度照手机订
+	#示意图用色
+	#社群分享卡Open-Graph
+	#纯-SVG--PNG-export-的场合
+	#贡献技术图示
+	#配色一致性drawio-palette-默认
 /zh-cn/community/zh-hant-naming/
 	#为什么
 	#为什么我们用正体中文而非繁体中文

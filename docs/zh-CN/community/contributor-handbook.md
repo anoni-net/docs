@@ -151,7 +151,7 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 - 有 lightbox（点击放大）时，HTML 用 `<figure>` + `<a href>` 包 `<img>`，两个的相对路径都要对齐
 - 三个语系的 `assets/images/` 各自独立，补了一个语系记得补另外两个。漏掉的话构建不会报错，站上就是一页破图，执行 `python3 tools/check_image_refs.py` 扫得出来
 
-示意图（流程图、架构图、对照矩阵、时间轴）的原始文件放 `docs/diagrams/`，发布到 assets.anoni.net，三个语系引用同一个网址。制作、命名与发布流程见[品牌识别](brand-assets.md)的「贡献技术图示」一节。
+示意图（流程图、架构图、对照矩阵、时间轴）的原始文件放 `docs/diagrams/`，发布到 assets.anoni.net，三个语系引用同一个网址。制作、命名与发布流程见[文档站的视觉规范](visual-guide.md)的「贡献技术图示」一节。
 
 ## 跨档链接规则
 

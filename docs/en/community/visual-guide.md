@@ -1,323 +1,22 @@
 ---
-title: Brand Assets
-description: The three anoni.net logo variants (cyan tonal, mono white, mono black), when to use each, download links, and the colour tokens. For community members making event materials, social cards, slides, and print.
-icon: material/palette-outline
+title: Docs Visual Guide
+description: Visual specifications used only on anoni.net/docs, covering the guide category colours in the sidebar, the Material interface colours, the diagram palette and how to make diagrams, and the social card layout. For contributors drawing diagrams or adjusting the docs styles.
+icon: material/vector-square
 ---
 
-# :material-palette-outline: Brand Assets
+# :material-vector-square: Docs Visual Guide
 
-The anoni.net logo is three hexagons, evoking a network of nodes and layered observation, derived and coloured from the Material `hexagon-multiple-outline` icon. The three hexagons sit top, middle, and bottom, corresponding to the three reading layers the community works across: concepts, tools, and regional context.
-
-When making event materials, social cards, slides, or print, take one of the three variants below according to your background colour and situation, rather than recolouring or reshaping the mark.
+This page collects the visual specifications that only the docs site uses: the guide category colours in the sidebar, the Material interface colours, the diagram palette and how to make diagrams, and the social card layout. The logo, the wordmark and the shared colour tokens belong to the whole community and are on the [brand assets](https://anoni.net/en/brand/){target="_blank"} page on anoni.net.
 
 <style scoped>
-.brand-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin: 16px 0 24px; }
-.brand-card { background: white; border: 1px solid #cdcdcd; border-radius: 8px; padding: 20px; }
-.brand-card.dark { background: #1a1a1a; border-color: #333; }
-.brand-card.cyan { background: #00aeff; border-color: #0089bf; }
-.brand-card.cyan-deep { background: #003e57; border-color: #006d99; }
-.brand-card-label { font-size: 12px; color: #888; margin: 0 0 12px; font-weight: 500; }
-.brand-card.dark .brand-card-label { color: #888; }
-.brand-card.cyan .brand-card-label,
-.brand-card.cyan-deep .brand-card-label { color: rgba(255,255,255,0.7); }
-.brand-sizes { display: flex; align-items: end; gap: 12px; }
-.brand-size { display: flex; flex-direction: column; align-items: center; }
-.brand-size img { display: block; }
-.brand-size-label { font-size: 10px; color: #999; margin-top: 4px; }
-.brand-card.dark .brand-size-label,
-.brand-card.cyan .brand-size-label,
-.brand-card.cyan-deep .brand-size-label { color: rgba(255,255,255,0.5); }
 .color-swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #cdcdcd; border-radius: 3px; vertical-align: middle; margin-right: 8px; }
-.wm-row { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-.wm-card { display: flex; flex-direction: column; }
-.wm-card .wm-box { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 84px; }
-.wm-card img { width: 100%; max-width: 230px; height: auto; }
-.wm-card.wm-stack img { max-width: 120px; }
 </style>
 
-## :material-palette-swatch-outline: V3 cyan tonal (primary)
-
-The three hexagons in `cyan-300`, `cyan-500`, and `cyan-700`, giving the nodes depth. Default use: white and light backgrounds, general documentation, slide interiors.
-
-<div class="brand-row">
-  <div class="brand-card">
-    <p class="brand-card-label">White</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card dark">
-    <p class="brand-card-label">Dark</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan">
-    <p class="brand-card-label">cyan-500</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan-deep">
-    <p class="brand-card-label">cyan-900</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-tonal.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-</div>
-
-[:material-download: Download logo-tonal.svg](../assets/images/logo-tonal.svg){ .md-button download="anoni-logo-tonal.svg" }
-
-## :material-palette-swatch-outline: V3 mono white (on brand colour)
-
-Pure white, for the highest contrast on brand colours (`cyan-500`, `cyan-900`) and dark blocks. The site header logo uses it against the blue navigation bar, as do OG images, social cards, and event banners on cyan.
-
-<div class="brand-row">
-  <div class="brand-card">
-    <p class="brand-card-label">White (not recommended)</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card dark">
-    <p class="brand-card-label">Dark</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan">
-    <p class="brand-card-label">cyan-500</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan-deep">
-    <p class="brand-card-label">cyan-900</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-white.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-</div>
-
-[:material-download: Download logo-white.svg](../assets/images/logo-white.svg){ .md-button download="anoni-logo-white.svg" }
-
-## :material-palette-swatch-outline: V3 mono black (print and single-colour)
-
-Pure black, for print, fax, and single-colour stencils where colour is unavailable. It is rarely used online and is kept here for completeness.
-
-<div class="brand-row">
-  <div class="brand-card">
-    <p class="brand-card-label">White</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card dark">
-    <p class="brand-card-label">Dark (not recommended)</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan">
-    <p class="brand-card-label">cyan-500 (not recommended)</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-  <div class="brand-card cyan-deep">
-    <p class="brand-card-label">cyan-900 (not recommended)</p>
-    <div class="brand-sizes">
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="64" height="64"><span class="brand-size-label">64</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="32" height="32"><span class="brand-size-label">32</span></div>
-      <div class="brand-size"><img src="../../assets/images/logo-black.svg" width="16" height="16"><span class="brand-size-label">16</span></div>
-    </div>
-  </div>
-</div>
-
-[:material-download: Download logo-black.svg](../assets/images/logo-black.svg){ .md-button download="anoni-logo-black.svg" }
-
-## :material-format-letter-case: Wordmark (the logo with the name)
-
-The three variants above are the mark on its own, without the community name. Where the name needs to be read at a glance, use a wordmark instead: slide headers, business cards, event backdrops, posters, roll-up banners. Keep the icon-only versions for places that are either very small or already carry the name nearby, such as favicons, chat avatars, and slide corners.
-
-The lettering is converted to paths, so it renders identically whether or not the device has the fonts installed, and no character can silently fall back to a different typeface. The Chinese subtitle is fixed as 匿名網路社群 in Traditional Chinese, matching the site name shared across all three editions.
-
-### Six layouts
-
-| Filename | Layout | Where to use it |
-|---|---|---|
-| `logo-wordmark-*` | Horizontal, logo plus anoni.net | The default. Slide headers, site header, business cards |
-| `logo-wordmark-zh-*` | Horizontal with the Chinese subtitle 匿名網路社群 | Chinese-language settings, where the Chinese name should be visible |
-| `logo-wordmark-en-*` | Horizontal with the English subtitle Anonymity Network Community | International settings such as Global Gathering or ETHTaipei |
-| `logo-wordmark-fullname-*` | Single line, 匿名網路社群 anoni.net | Long banners and backdrop headers in Chinese-language settings |
-| `logo-wordmark-stack-*` | Stacked, logo above the name | Posters, roll-up banners, exhibition boards |
-| `logo-wordmark-stack-zh-*` | Stacked with the Chinese subtitle | As above, in Chinese-language settings |
-
-Each layout comes in `tonal`, `white`, and `black`, following the same selection rules as the icon-only variants above.
-
-**The four horizontal layouts, cyan tonal on white**
-
-<div class="brand-row wm-row">
-  <div class="brand-card wm-card">
-    <p class="brand-card-label">logo-wordmark</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-tonal.svg"></div>
-  </div>
-  <div class="brand-card wm-card">
-    <p class="brand-card-label">logo-wordmark-zh</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-tonal.svg"></div>
-  </div>
-  <div class="brand-card wm-card">
-    <p class="brand-card-label">logo-wordmark-en</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-tonal.svg"></div>
-  </div>
-  <div class="brand-card wm-card">
-    <p class="brand-card-label">logo-wordmark-fullname</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-tonal.svg"></div>
-  </div>
-</div>
-
-**The same four in mono white, on cyan-900**
-
-<div class="brand-row wm-row">
-  <div class="brand-card cyan-deep wm-card">
-    <p class="brand-card-label">logo-wordmark-white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-white.svg"></div>
-  </div>
-  <div class="brand-card cyan-deep wm-card">
-    <p class="brand-card-label">logo-wordmark-zh-white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-zh-white.svg"></div>
-  </div>
-  <div class="brand-card cyan-deep wm-card">
-    <p class="brand-card-label">logo-wordmark-en-white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-en-white.svg"></div>
-  </div>
-  <div class="brand-card cyan-deep wm-card">
-    <p class="brand-card-label">logo-wordmark-fullname-white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-fullname-white.svg"></div>
-  </div>
-</div>
-
-**Stacked, for posters and roll-up banners**
-
-<div class="brand-row wm-row">
-  <div class="brand-card wm-card wm-stack">
-    <p class="brand-card-label">logo-wordmark-stack</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-tonal.svg"></div>
-  </div>
-  <div class="brand-card wm-card wm-stack">
-    <p class="brand-card-label">logo-wordmark-stack-zh</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-tonal.svg"></div>
-  </div>
-  <div class="brand-card dark wm-card wm-stack">
-    <p class="brand-card-label">stack-zh mono white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-zh-white.svg"></div>
-  </div>
-  <div class="brand-card cyan wm-card wm-stack">
-    <p class="brand-card-label">stack mono white</p>
-    <div class="wm-box"><img src="../../assets/images/logo-wordmark-stack-white.svg"></div>
-  </div>
-</div>
-
-### Proportions and clear space
-
-The proportions are fixed. To change the size, scale the whole lockup; do not adjust one part on its own.
-
-- Horizontal: the logo height is 1.35 times the visual height of the anoni.net lettering, and the gap between them is 0.40 times the logo width
-- Stacked: the logo height is 1.90 times the type size, with the lettering centred under the mark
-- Clear space: 0.25 times the logo height on all four sides. The SVG viewBox already includes it, so do not crop inwards when placing the file
-
-The lettering is Public Sans SemiBold and the Chinese subtitle is Noto Sans TC Medium, the same faces as the body text on the English and Traditional Chinese editions. In the tonal variant, `.net` uses `cyan-700`, matching the lowest hexagon; the mono variants are a single colour throughout.
-
-### Minimum size
-
-Below these heights the lettering blurs, so switch to the icon-only mark.
-
-| Layout | Minimum height |
-|---|---|
-| No subtitle (`logo-wordmark-*`, `logo-wordmark-fullname-*`) | 18 px |
-| Chinese subtitle (`-zh-`) | 32 px |
-| English subtitle (`-en-`) | 40 px |
-
-In print terms, 18 px at 300 dpi is roughly 1.5 mm; in practice the horizontal version is safe at 8 mm high and above.
-
-### Downloads
-
-| Layout | cyan tonal | mono white | mono black |
-|---|---|---|---|
-| Horizontal | [SVG](../assets/images/logo-wordmark-tonal.svg) | [SVG](../assets/images/logo-wordmark-white.svg) | [SVG](../assets/images/logo-wordmark-black.svg) |
-| Horizontal, Chinese subtitle | [SVG](../assets/images/logo-wordmark-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-zh-white.svg) | [SVG](../assets/images/logo-wordmark-zh-black.svg) |
-| Horizontal, English subtitle | [SVG](../assets/images/logo-wordmark-en-tonal.svg) | [SVG](../assets/images/logo-wordmark-en-white.svg) | [SVG](../assets/images/logo-wordmark-en-black.svg) |
-| Single line, full name | [SVG](../assets/images/logo-wordmark-fullname-tonal.svg) | [SVG](../assets/images/logo-wordmark-fullname-white.svg) | [SVG](../assets/images/logo-wordmark-fullname-black.svg) |
-| Stacked | [SVG](../assets/images/logo-wordmark-stack-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-white.svg) | [SVG](../assets/images/logo-wordmark-stack-black.svg) |
-| Stacked, Chinese subtitle | [SVG](../assets/images/logo-wordmark-stack-zh-tonal.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-white.svg) | [SVG](../assets/images/logo-wordmark-stack-zh-black.svg) |
-
-## :material-palette: Colour tokens
-
-Align derivative work to these values. The site's `extra.css` already defines them as CSS variables, so use `var(--brand-cyan-500)` rather than an inline hex code.
-
-### Brand cyan, nine steps
-
-| Token | Hex | Use |
-|---|---|---|
-| `--brand-cyan-50`  | <span class="color-swatch" style="background:#e0f4ff"></span>`#e0f4ff` | Lightest background, card fill, admonition fill |
-| `--brand-cyan-100` | <span class="color-swatch" style="background:#b3e3ff"></span>`#b3e3ff` | Light background, selection state |
-| `--brand-cyan-200` | <span class="color-swatch" style="background:#80d1ff"></span>`#80d1ff` | Dividers, borders, disabled text |
-| `--brand-cyan-300` | <span class="color-swatch" style="background:#4dbfff"></span>`#4dbfff` | Secondary links, tag borders, top logo hexagon |
-| `--brand-cyan-400` | <span class="color-swatch" style="background:#26b3ff"></span>`#26b3ff` | Hover state |
-| `--brand-cyan-500` | <span class="color-swatch" style="background:#00aeff"></span>`#00aeff` | **Brand base**, middle logo hexagon |
-| `--brand-cyan-600` | <span class="color-swatch" style="background:#009ee6"></span>`#009ee6` | Primary hover and active, "new" announcement tag |
-| `--brand-cyan-700` | <span class="color-swatch" style="background:#0089bf"></span>`#0089bf` | Primary text on light backgrounds, bottom logo hexagon |
-| `--brand-cyan-800` | <span class="color-swatch" style="background:#006d99"></span>`#006d99` | Emphasis text, dark variants |
-| `--brand-cyan-900` | <span class="color-swatch" style="background:#003e57"></span>`#003e57` | Dark mode background contrast |
-
-### Accent, for calls to action and emergencies
-
-| Token | Hex | Use |
-|---|---|---|
-| `--accent-action`    | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | Call-to-action buttons, event announcements |
-| `--accent-emergency` | <span class="color-swatch" style="background:#d32f2f"></span>`#d32f2f` | Emergency help, security warnings |
-
-### Structural secondaries, for the three 2026 tracks (category tags only)
-
-| Token | Hex | Use |
-|---|---|---|
-| `--cat-privacy`  | <span class="color-swatch" style="background:#4caf50"></span>`#4caf50` | Personal privacy guide |
-| `--cat-relay`    | <span class="color-swatch" style="background:#7b1fa2"></span>`#7b1fa2` | Tor relays on campus |
-| `--cat-payments` | <span class="color-swatch" style="background:#ef6c00"></span>`#ef6c00` | Anonymous payments, sharing the accent action colour |
-
-### Neutrals
-
-| Token | Hex | Use |
-|---|---|---|
-| `--neutral-text`   | Material default | Body text |
-| `--neutral-muted`  | <span class="color-swatch" style="background:#546e7a"></span>`#546e7a` | Secondary text, background roles |
-| `--neutral-border` | <span class="color-swatch" style="background:#cdcdcd"></span>`#cdcdcd` | Image and card borders |
+## :material-palette: Colours used only on the docs site
 
 ### Guide category colours (sidebar navigation)
 
-On desktop, the five category chips under the "Guides" tab in the left sidebar (concepts, tools, scenarios, advanced, reports) each have their own colour, shared by the text, icon, and border. These are navigation colours, a different layer from the structural secondaries above, and the two sets are not interchangeable.
+On desktop, the five category chips under the "Guides" tab in the left sidebar (concepts, tools, scenarios, advanced, reports) each have their own colour, shared by the text, icon, and border. These are navigation colours, a different layer from the structural secondaries on the [brand assets](https://anoni.net/en/brand/){target="_blank"} page, and the two sets are not interchangeable.
 
 | Token | Light | Dark | Category |
 |---|---|---|---|
@@ -399,86 +98,15 @@ Colour must never be the only thing carrying the meaning. The text inside each b
 
 Measured contrast puts every text pairing above the WCAG AA threshold of 4.5:1. `#212121` scores 14.1 to 16.1 on the six light fills, `#eceff1` scores 12.3 to 14.0 on the six dark fills, `#546e7a` scores 5.4 on white, 5.0 on the neutral card and 4.8 on the cyan card, and `#b0bec5` scores 7.7 to 8.4 on the dark cards.
 
-`.t-mute` is `#546e7a`, which is also `--neutral-muted` in the neutral set above. The older `#607d8b` reached only 4.37:1 on white, just under AA. The vertical rework on 2026-09-19 replaced every instance, and none remain across the 77 hand-written files.
+`.t-mute` is `#546e7a`, which is also `--neutral-muted` in the neutral set of the brand assets. The older `#607d8b` reached only 4.37:1 on white, just under AA. The vertical rework on 2026-09-19 replaced every instance, and none remain across the 77 hand-written files.
 
 Border colours land between 1.5 and 2.8:1 against the page background, short of the 3:1 in WCAG 1.4.11. The judgement here is that the border reinforces and the words inside carry the meaning, so the threshold is not enforced. It does not extend to diagrams where colour genuinely does the distinguishing, such as scatter plots and bar charts; label every data point in those.
-
-### Logo fills
-
-| Colour | Hex | Use |
-|---|---|---|
-| White | <span class="color-swatch" style="background:#ffffff"></span>`#ffffff` | mono white fill, on brand-colour blocks only |
-| Black | <span class="color-swatch" style="background:#000000"></span>`#000000` | mono black fill, print only |
-
-## :material-information-outline: Using the colours
-
-**Brand cyan**
-
-- Brand-consistent surfaces: hero areas, alongside the logo, primary call-to-action borders
-- Primary links and navigation highlights
-
-**Accent action (orange `#ef6c00`)**
-
-- Buttons where the reader takes an action: register, subscribe, join
-- Event announcements
-
-**Accent emergency (red `#d32f2f`)**
-
-- The entry point to the emergency help page
-- Security warnings such as account compromise and stalking response
-- Not for "click this button" in non-urgent contexts
-
-**Structural secondaries (green, purple, orange)**
-
-- Card icon colours for the three tracks
-- Category tags and section markers
-- Not for general calls to action or decoration
-
-**Announcement tags** (inline tags on the home page and blog announcements)
-
-- `New` uses `--brand-cyan-600`
-- `Event` uses `--accent-action`
-- `Updated` uses `--cat-privacy`, sharing a colour with the privacy track, where the weak visual association is acceptable
-
-## :material-view-dashboard-outline: How each site uses the brand
-
-Three sites live under anoni.net. They share the logo and the tokens above, and each is told apart by the colour of its header, so readers moving between them can see where they are. All three use `--brand-cyan-*` as the only main hue and add no others.
-
-| Site | Header | Layout | Where the styles live |
-|---|---|---|---|
-| [anoni.net](https://anoni.net/en/){target="_blank"} | White, logo plus `anoni.net` | Each page sits inside one thin-line frame, cyan as the only hue | `static/css/site.css` in `anoni-net/www` |
-| [anoni.net/docs](../index.md) | `--brand-cyan-800` with white text | Material for MkDocs, sidebar in the guide category colours | `docs/*/stylesheets/extra.css` in this repository |
-| [anoni.net/news](https://anoni.net/news/en/){target="_blank"} | `--brand-cyan-900` with white text, an ink tone | A hand-written single-column layout with serif headings | `static/css/news.css` in `anoni-net/news` |
-
-From light to dark the headers run top level, docs, news, so the three are easy to tell apart side by side.
-
-### Thin lines on the top-level site
-
-The top-level site (home, about, join, projects, services and the other community pages) keeps the look of the home page as it was before the October 2026 redesign: white background, 1px lines and a single hue. New page types follow this spec and don't bring in filled blocks or a second hue.
-
-| Element | Spec |
-|---|---|
-| Frame | 1px `--brand-cyan-500` line with a 4px `--brand-cyan-50` halo, 8px corners, at most 42rem wide |
-| Dividers | 1px `--brand-cyan-100`, for the line trailing each section heading, list rows and the footer |
-| Fill | Only `--brand-cyan-50`, and only on the cards for the two content projects, Docs and News |
-| Card hover | A 3px ring of `--brand-cyan-500` at 25% opacity |
-| Keyboard focus | 2px `--brand-cyan-500` outline, 2px from the element |
-| Text | Body `#1d2b31`, secondary `#52646b`, links `--brand-cyan-800` |
-| Dark mode | Background `#00202d`, lines in `--brand-cyan-600`, links in `--brand-cyan-200` |
-
-### Colours used only on the docs site
-
-- **Guide category colours** (`--guide-*`) identify sections in the docs sidebar and appear nowhere else
-- **Structural secondaries** (`--cat-*`, the green, purple and orange) are also limited to the docs site. The top-level site stays single-hue and marks the three tracks with outlined circular icons instead of colour
-- **Material interface colours** (the set that moves the light-mode header to `--brand-cyan-800`) only concern the Material theme
-
-When News or the top-level site needs an accent, follow "Using the colours" above, and keep the emergency red for emergencies.
 
 ## :material-share-variant-outline: Social cards (Open Graph)
 
 Paste any page of the docs into Mastodon, LinkedIn, X, Bluesky or a chat room, and the preview image comes straight from the build. One card per page per language, no manual artwork.
 
-The card uses the palette from this page. cyan-900 is the background, and a three-part bar runs down the left edge in cyan-300, cyan-500 and cyan-700, matching the three hexagons of the logo. The mono white logo and the site name sit at the top left, the page title in the middle, and the page description and URL below it. When a page sets `icon` in its front matter, that icon is enlarged into a 10% white watermark on the right. Pages without one get `material/hexagon-multiple-outline`, the icon the logo was derived from.
+The card uses the palette from the [brand assets](https://anoni.net/en/brand/){target="_blank"}. cyan-900 is the background, and a three-part bar runs down the left edge in cyan-300, cyan-500 and cyan-700, matching the three hexagons of the logo. The mono white logo and the site name sit at the top left, the page title in the middle, and the page description and URL below it. When a page sets `icon` in its front matter, that icon is enlarged into a 10% white watermark on the right. Pages without one get `material/hexagon-multiple-outline`, the icon the logo was derived from.
 
 The background is cyan-900 rather than the brand colour cyan-500, so that the text stays readable. White on cyan-500 has a contrast ratio of 2.5:1, which turns to mush at the size social platforms display. On cyan-900 it is 11.5:1. The description uses cyan-100 at 8.4:1, and the footer URL cyan-300 at 5.6:1.
 
@@ -505,27 +133,6 @@ social:
 A background image uses the same option. The path in `background_image` is relative to the directory mkdocs runs in, which is `docs/`, so write it as `zh-TW/assets/images/xxx.png`. A missing file fails the build. Give the image on its own and the background colour becomes an 80% cyan-900 scrim, which keeps white text readable over any image. For the raw image, add `background_color: transparent`, at the cost of losing the title and the footer URL on a light image.
 
 Pages that need artwork of their own (event key visuals, the interactive section) take a different route: set `og.enabled: true` and `og.image` in the front matter, and the site template uses that image and skips the generated one. The COSCUP event pages and the interactive section work this way.
-
-## :material-alert-octagon-outline: What not to do
-
-**Logo**
-
-- Do not place it on oversaturated fluorescent colours or multicolour gradients, which blur the hexagon edges
-- Do not set it immediately adjacent to partner logos such as Tor, OONI, or EFF, where the marks compete
-- Do not use mono white on white, or cyan tonal on cyan, where the contrast disappears
-- Do not use mono black as a primary mark or on the web, since it is the print variant
-- Do not adjust the hexagons' arrangement, spacing, or corner radius
-- Do not extract a single hexagon for another purpose. The three are one mark
-- Do not re-space or resize the logo and lettering inside a wordmark independently; scale the whole lockup
-- Do not swap a wordmark's subtitle for an event name or other text. Lay that out separately and place the wordmark into it as one element
-- Below the minimum size, drop to the version without a subtitle. A blurred subtitle reads worse than none
-
-**Colour**
-
-- Do not pick arbitrary Material defaults (brown, lime, indigo) for decoration
-- Do not use multicolour gradients as backgrounds, outside a deliberate hero experiment
-- Do not use oversaturated colours such as pure red `#ff0000` or pure green `#00ff00`
-- Do not write `style="color: #...;"` inline. Use the CSS variable
 
 ## :material-vector-square: Contributing technical diagrams
 
@@ -619,7 +226,7 @@ Expect 1 or more. A result of 0 means the file has no embedded XML and cannot be
 
 ### Keeping colours consistent
 
-New diagrams use the brand cyan scale above. Pasting this into drawio Desktop under **Extras → Configuration** makes the brand colours the picker defaults:
+New diagrams use the brand cyan scale from the [brand assets](https://anoni.net/en/brand/){target="_blank"}. Pasting this into drawio Desktop under **Extras → Configuration** makes the brand colours the picker defaults:
 
 ```json
 {
@@ -776,5 +383,4 @@ If a diagram also has to work as a social card, in print, or in an external deck
 ## :material-link-variant: Next
 
 - [Contributor handbook](./contributor-handbook.md): the overall contribution process, PR conventions, and translation workflow
-- [Community services](https://anoni.net/en/services/): Matrix, CryptPad, Etherpad, SearXNG, Send, and Formbricks
-- [2026 roadmap](https://anoni.net/en/join/roadmap-2026/): the three tracks and the schedule
+- [Brand assets](https://anoni.net/en/brand/): the logo, the wordmark, the shared colour tokens, and how each site uses them

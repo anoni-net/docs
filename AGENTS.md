@@ -128,7 +128,7 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
   - `social`: Open Graph 社群分享卡。版型是 `docs/layouts/anoni.yml`，三個語系共用一份，
     語系差異（字型、卡片上的站名）寫在各自的 `mkdocs*.yml`。`cards_layout_dir` 相對於
     執行 mkdocs 的目錄，所以建置一律在 `docs/` 底下執行。設計說明見
-    `docs/zh-TW/community/brand-assets.md` 的「社群分享卡」一節
+    `docs/zh-TW/community/visual-guide.md` 的「社群分享卡」一節
 - **特殊功能**: 使用 `custom_dir` 設定客製化的 overrides（針對不同語言有不同的 overrides 目錄）
 
 ### 軟體更新日誌（changelog/）
