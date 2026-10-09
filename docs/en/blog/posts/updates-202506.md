@@ -14,7 +14,7 @@ description: "Registration is now open for the workshop happening on August 9th 
 
 ![Anonymous Network Workshop Progress Update](./assets/images/post-update.png){style="border-radius: 10px; box-shadow: 1px 1px 0.6rem #00aeff;"}
 
-June 2025 has passed, and this month we continued our preparations for the workshop event scheduled for August. We've also conducted online training sessions focusing on the basics of Tor/Tails and OONI. The "[Anonymous Network Workshop](../../event-workshop-2025.md){target="_blank"}" event information has been fully updated, with the two-day event agenda and registration form now completed. Registration is now open!
+June 2025 has passed, and this month we continued our preparations for the workshop event scheduled for August. We've also conducted online training sessions focusing on the basics of Tor/Tails and OONI. The "[Anonymous Network Workshop](https://anoni.net/en/events/workshop-2025/){target="_blank"}" event information has been fully updated, with the two-day event agenda and registration form now completed. Registration is now open!
 
 In addition, we have moved the project to the "[anoni.net Community](https://anoni.net/en/){target="_blank"}" [GitHub](https://github.com/anoni-net){target="_blank"} page. The original OONI-Research project page will automatically redirect to the new domain, serving as a promotional tool for the "anonymous network" alongside Tor/Tails.
 
@@ -30,7 +30,7 @@ The primary goal of the anonymity network community is to establish Taiwan as a 
 
 Therefore, if you happen to be available on August 9th and 10th, we invite you to join our workshop. This time, we have also arranged several roundtable discussions, providing an opportunity to hear your thoughts and visions about "anonymous networks."
 
-Feel free to share our [event information](../../event-workshop-2025.md){target="_blank"} with friends who might be interested in "anonymous networks."
+Feel free to share our [event information](https://anoni.net/en/events/workshop-2025/){target="_blank"} with friends who might be interested in "anonymous networks."
 
 <figure markdown="span">
   ![Event Schedule](../../assets/images/event_workshop_2025_schedule.svg)

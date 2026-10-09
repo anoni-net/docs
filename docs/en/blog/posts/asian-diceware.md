@@ -114,7 +114,7 @@ CC-BY-4.0 means you can print it, hand it out, and modify it, as long as the att
 
 One practical detail from making the booklet is worth passing on. CJK fonts have to be embedded in the PDF, or the Chinese turns into empty boxes on someone else's computer, and the license for macOS's built-in PingFang does not permit embedding for redistribution. So the booklet uses Noto Sans TC and JetBrains Mono, both freely embeddable, and anyone can reprint it without a licensing problem. If you want other people to be free to redistribute your work, the font layer needs handling too.
 
-The community brings printed copies to workshops, meetups, and conferences. If you pick one up at an event, or simply run into us, come and say hello. Ask about passphrases, ask about anonymity networks, or just chat. Where we will turn up next is on the [activity page](../../activity/index.md).
+The community brings printed copies to workshops, meetups, and conferences. If you pick one up at an event, or simply run into us, come and say hello. Ask about passphrases, ask about anonymity networks, or just chat. Where we will turn up next is on the [activity page](https://anoni.net/en/events/).
 
 ## Why a community like ours builds a wordlist
 

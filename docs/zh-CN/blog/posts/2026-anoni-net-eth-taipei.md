@@ -30,7 +30,7 @@ description: "匿名网络社区与 ETHTaipei 合作：参与 COSCUP 2026，公�
 - 提案主题务必选择「匿名网络社区 anoni.net」，稿件才会进入本议程轨审查。
 - 提案内容请明确写出：议题方向、预计形式、听众背景、时间需求（30 或 50 分钟）、Demo 需求（若有）。
 
-[:material-arrow-right-circle-outline: 阅读完整征稿信息与投稿说明](../../activity/coscup-2026-cfp.md){ .md-button .md-button--primary target="_blank"}
+[:material-arrow-right-circle-outline: 阅读完整征稿信息与投稿说明](https://anoni.net/zh-cn/events/coscup-2026-cfp/){ .md-button .md-button--primary target="_blank"}
 
 ## 伦理与开源授权提醒
 

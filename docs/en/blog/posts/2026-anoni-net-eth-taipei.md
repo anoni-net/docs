@@ -30,7 +30,7 @@ On **Day 2 (Aug 9)**, both communities plan to co-organize a dedicated session o
 - In your proposal, make sure to choose **"匿名網路社群 anoni.net"** as the track topic so your submission enters this track's review process.
 - Clearly include your topic direction, intended format, audience background, requested duration (30 or 50 minutes), and demo needs (if any).
 
-[:material-arrow-right-circle-outline: Read the full CFP details and submission guide](../../activity/coscup-2026-cfp.md){ .md-button .md-button--primary target="_blank"}
+[:material-arrow-right-circle-outline: Read the full CFP details and submission guide](https://anoni.net/en/events/coscup-2026-cfp/){ .md-button .md-button--primary target="_blank"}
 
 ## Ethics and Open Licensing Reminder
 

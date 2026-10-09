@@ -34,42 +34,10 @@
 	#標準網站
 	#相關閱讀
 /about/send-censorship/ -> https://anoni.net/join/upload-sensitive/
-/activity/
-	#活動參與
-/activity/coscup-2026-cfp/
-	#2026-年度目標
-	#anoni-netxETHTaipei
-	#個人隱私
-	#倫理與開源授權提醒
-	#其他相關主題
-	#匿名支付
-	#匿名網路社群公開徵稿COSCUP-2026-社群議程軌
-	#匿名網路與網路自由
-	#國際參與
-	#徵稿主題
-	#投稿方式
-	#活動與時程
-	#相關連結
-	#關於-COSCUP
-/activity/coscup-2026/
-	#COSCUP-2026-匿名網路社群議程軌
-	#Day-120260808六
-	#Day-1808-上午開源匿名網路導論
-	#Day-1808-下午ETHTaipei-合辦匿名支付場
-	#Day-220260809日
-	#Day-2809七場錄取議程
-	#相關連結
-	#講者簡介
-	#議程介紹
-	#議程總覽
-	#跨社群合作
-/activity/gg2026/
-	#Global-Gathering-2026
-	#其他找到我們的方式
-	#攤位上想聊的事
-	#用-passkey-當鑰匙資料留在自己手上
-	#關掉網路照樣能用的小工具
-	#需要之前先存起來
+/activity/ -> https://anoni.net/events/
+/activity/coscup-2026-cfp/ -> https://anoni.net/events/coscup-2026-cfp/
+/activity/coscup-2026/ -> https://anoni.net/events/coscup-2026/
+/activity/gg2026/ -> https://anoni.net/events/gg2026/
 /advanced/
 	#文章一覽
 	#進階層
@@ -2287,38 +2255,10 @@
 	#The-three-editions-side-by-side
 	#Which-one-to-use
 /en/about/send-censorship/ -> /en/about/
-/en/activity/
-	#Activity
-/en/activity/coscup-2026-cfp/
-	#About-COSCUP
-	#Anonymous-networks-and-internet-freedom
-	#Anonymous-payments
-	#Call-for-proposals-COSCUP-2026-community-track
-	#Ethics-and-open-licensing
-	#Event-and-timeline
-	#Goals-for-2026
-	#How-to-submit
-	#International-participation
-	#Other-related-topics
-	#Personal-privacy
-	#Related-links
-	#Topics
-	#anoni-netxETHTaipei
-/en/activity/coscup-2026/
-	#COSCUP-2026-Anonymity-Networks-Community-track
-	#Day-1-20260808-Sat
-	#Day-2-20260809-Sun
-	#Related-links
-	#cross-community
-	#schedule-overview
-	#speakers
-/en/activity/gg2026/
-	#Global-Gathering-2026
-	#Other-ways-to-find-us
-	#Passkeys-as-the-key-to-data-that-stays-with-you
-	#Store-them-before-you-need-them
-	#Tools-that-keep-working-when-the-network-does-not
-	#What-we-want-to-talk-about-at-the-booth
+/en/activity/ -> https://anoni.net/en/events/
+/en/activity/coscup-2026-cfp/ -> https://anoni.net/en/events/coscup-2026-cfp/
+/en/activity/coscup-2026/ -> https://anoni.net/en/events/coscup-2026/
+/en/activity/gg2026/ -> https://anoni.net/en/events/gg2026/
 /en/advanced/ -> /en/advanced/
 /en/advanced/dweb-ipfs-onion/
 	#Combinations-that-work
@@ -4082,38 +4022,8 @@
 	#Why
 	#Why-We-Say-Orthodox-Chinese-Rather-Than-Complex-Chinese
 /en/contact/ -> https://anoni.net/en/contact/
-/en/event-workshop-2025-prepare/
-	#Event-Organizer
-	#Free-Software-and-Digital-Rights-Why-Is-Open-Source-Key-to-Anonymous-Tools
-	#From-User-to-Contributor-How-Taiwan-Can-Establish-Community-Nodes-and-Feedback-Models-for-TorOONI
-	#How-to-Localize-an-Open-Source-Anonymous-Toolkit
-	#Monthly-Tasks
-	#OONI-Network-Interference-Observation
-	#Potential-for-Regional-Open-Source-Collaboration-Connecting-with-Other-Anonymous-Network-Communities-in-Asia
-	#Preparation-Team
-	#Promoting-a-Decentralized-Open-Source-Collaborative-Anonymous-Network-Initiative
-	#Proposed-Discussion-Topics
-	#Registering-Staff
-	#Round-Table
-	#Schedule
-	#The-Open-Source-foundation-and-Local-Participation-Possibilities-of-TorTailsOONI
-	#Tor-Tails-Anonymous-Network
-	#WIP-Anonymous-Network-Workshop-202508
-	#Workshop-Helper
-	#Workshop-Registration
-/en/event-workshop-2025/
-	#Anonymous-Network-Workshop-202508
-	#By-attending-the-workshop-you-will-gain
-	#By-participating-in-the-roundtable-discussions-you-will-gain-deeper-insights-into
-	#Complete-Event-Schedule
-	#Day-1
-	#Day-2
-	#Event-Information
-	#OONI-Network-Interference-Observation
-	#Roundtable-Discussions
-	#Tor-Tails-Anonymous-Network
-	#Workshop-Lecture
-	#Workshop-Registration
+/en/event-workshop-2025-prepare/ -> https://anoni.net/en/events/workshop-2025-prepare/
+/en/event-workshop-2025/ -> https://anoni.net/en/events/workshop-2025/
 /en/feed_rss_created.xml
 /en/feed_rss_updated.xml
 /en/games/
@@ -5424,36 +5334,8 @@
 /en/what-is-ooni/ -> /en/tools/what-is-ooni/
 /en/what-is-tails/ -> /en/tools/what-is-tails/
 /en/what-is-tor/ -> /en/tools/what-is-tor/
-/event-workshop-2025-prepare/
-	#OONI-網路干預觀察
-	#TorTails-匿名網路
-	#TorTailsOONI-的開源基礎與在地參與可能
-	#候選討論議題
-	#區域性開源協作的潛力與亞洲其他匿名網路社群連線
-	#各月份工作任務
-	#圓桌會議Round-Table
-	#報名工作人員
-	#如何在地化一套開源匿名工具包
-	#工作坊小幫手
-	#從使用者到貢獻者台灣如何建立-TorOONI-的社群節點與回饋模式
-	#推動一個去中心開源協作的匿名網路推廣計畫
-	#時程表
-	#活動籌備人員
-	#籌備匿名網路工作坊-202508
-	#自由軟體與數位人權為何開源是匿名工具的關鍵
-/event-workshop-2025/
-	#Day-1
-	#Day-2
-	#OONI-網路審核干預資料分析
-	#TorTails-匿名網路工作坊
-	#匿名網路工作坊-202508
-	#參加工作坊你將可以獲得
-	#參與圓桌討論會議你也將能深入理解與探討
-	#圓桌討論會議
-	#完整活動時程表
-	#工作坊報名
-	#工作坊講座
-	#活動資訊
+/event-workshop-2025-prepare/ -> https://anoni.net/events/workshop-2025-prepare/
+/event-workshop-2025/ -> https://anoni.net/events/workshop-2025/
 /feed_rss_created.xml
 /feed_rss_updated.xml
 /games/
@@ -7040,42 +6922,10 @@
 	#标准网站
 	#相关阅读
 /zh-cn/about/send-censorship/ -> /zh-cn/about/
-/zh-cn/activity/
-	#活动参与
-/zh-cn/activity/coscup-2026-cfp/
-	#2026-年度目标
-	#anoni-netxETHTaipei
-	#个人隐私
-	#伦理与开源许可提醒
-	#关于-COSCUP
-	#其他相关主题
-	#匿名支付
-	#匿名网络与网络自由
-	#匿名网络社群公开征稿COSCUP-2026-社群议程轨
-	#国际参与
-	#征稿主题
-	#投稿方式
-	#活动与时程
-	#相关链接
-/zh-cn/activity/coscup-2026/
-	#COSCUP-2026-匿名网络社群议程轨
-	#Day-120260808六
-	#Day-1808-上午开源匿名网络导论
-	#Day-1808-下午ETHTaipei-合办匿名支付场
-	#Day-220260809日
-	#Day-2809七场录取议程
-	#相关链接
-	#议程介绍
-	#议程总览
-	#讲者简介
-	#跨社群合作
-/zh-cn/activity/gg2026/
-	#Global-Gathering-2026
-	#关掉网络照样能用的小工具
-	#其他找到我们的方式
-	#展位上想聊的事
-	#用-passkey-当钥匙数据留在自己手上
-	#需要之前先存起来
+/zh-cn/activity/ -> https://anoni.net/zh-cn/events/
+/zh-cn/activity/coscup-2026-cfp/ -> https://anoni.net/zh-cn/events/coscup-2026-cfp/
+/zh-cn/activity/coscup-2026/ -> https://anoni.net/zh-cn/events/coscup-2026/
+/zh-cn/activity/gg2026/ -> https://anoni.net/zh-cn/events/gg2026/
 /zh-cn/advanced/
 	#文章一览
 	#进阶层
@@ -9152,36 +9002,8 @@
 	#跟-zh_Hant--zh_Hans-的关系
 	#这是普及工作的一部分
 /zh-cn/contact/ -> https://anoni.net/zh-cn/contact/
-/zh-cn/event-workshop-2025-prepare/
-	#OONI-网络干预观测
-	#TorTails-匿名网络
-	#TorTailsOONI-的开源基础与在地参与可能
-	#从用户到贡献者台湾如何建立-TorOONI-的社区节点与反馈模式
-	#候选讨论议题
-	#区域性开源协作的潜力与亚洲其他匿名网络社区连线
-	#各月份工作任务
-	#圆桌会议Round-Table
-	#如何在地化一套开源匿名工具包
-	#工作坊小助手
-	#报名工作人员
-	#推动一个去中心开源协作的匿名网络推广计划
-	#时间表
-	#活动筹备人员
-	#筹备匿名网络工作坊-202508
-	#自由软件与数字人权为何开源是匿名工具的关键
-/zh-cn/event-workshop-2025/
-	#Day-1
-	#Day-2
-	#OONI-网络审核干预数据分析
-	#TorTails-匿名网络工作坊
-	#匿名网络工作坊-202508
-	#参与圆桌讨论会议你也将能深入理解与探讨
-	#参加工作坊你将可以获得
-	#圆桌讨论会议
-	#完整活动时间表
-	#工作坊报名
-	#工作坊讲座
-	#活动信息
+/zh-cn/event-workshop-2025-prepare/ -> https://anoni.net/zh-cn/events/workshop-2025-prepare/
+/zh-cn/event-workshop-2025/ -> https://anoni.net/zh-cn/events/workshop-2025/
 /zh-cn/feed_rss_created.xml
 /zh-cn/feed_rss_updated.xml
 /zh-cn/games/

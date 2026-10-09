@@ -133,7 +133,7 @@ macOS 那段写着 `brew install ipfs`，Homebrew 的 formula 已经改名为 `k
 
 [wu858430049](https://github.com/wu858430049){target="_blank"} 补上了 [BECOME_ANONI](../../community/become-anoni.md) 协议的简中版，正本放在 repo 根目录，位置比照 zh-TW，文档页用 snippets 嵌入以维持单一来源，同一个 PR 一并修正两个会让页面无法显示的设定问题。翻译是站上长期缺人的一条路线，简中与英文都还有大量页面没有对应版本。
 
-[ChihChengLiang](https://github.com/ChihChengLiang){target="_blank"} 更新了 [COSCUP 2026](../../activity/coscup-2026.md) 隐私支付实现工作坊的介绍。原本写着不需自备电脑，在旁观看即可，有意参与实现的人依此准备会不足。实际上现场已备妥模拟网络与模拟链，鼓励参加者携带电脑实际操作。这一项不需要碰任何程序，需要的是知道现场实况并愿意把那段文字改掉。
+[ChihChengLiang](https://github.com/ChihChengLiang){target="_blank"} 更新了 [COSCUP 2026](https://anoni.net/zh-cn/events/coscup-2026/) 隐私支付实现工作坊的介绍。原本写着不需自备电脑，在旁观看即可，有意参与实现的人依此准备会不足。实际上现场已备妥模拟网络与模拟链，鼓励参加者携带电脑实际操作。这一项不需要碰任何程序，需要的是知道现场实况并愿意把那段文字改掉。
 
 两个 PR 都移除了会让读者做出错误判断的内容。最低的一步是开一个 issue，指出哪一句不对并附上你查到的来源。想直接修改内容，[如何参与与认领主题](https://anoni.net/zh-cn/join/)说明怎么选题与认领，贡献者百科的「第一周的入门路径」则依写作、翻译、技术维运、活动筹备分成四条线。
 

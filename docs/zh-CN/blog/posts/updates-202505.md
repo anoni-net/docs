@@ -18,9 +18,9 @@ description: "项目当前近况与更新 2025/05"
 
 ## 匿名网络工作坊（筹备）
 
-即将在 2025/08 于 COSCUP 开源人年会上举办的「[匿名网络工作坊](../../event-workshop-2025-prepare.md)」活动，目前我们在 5/18 举办了第一次线上筹备会议，会议记录可以参考[这份](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感谢许多伙伴来报名这次的活动。下次开会时间在 2025/06/08 21:00 `UTC+8`，预计讨论培训时间、活动筹备等事宜。
+即将在 2025/08 于 COSCUP 开源人年会上举办的「[匿名网络工作坊](https://anoni.net/zh-cn/events/workshop-2025-prepare/)」活动，目前我们在 5/18 举办了第一次线上筹备会议，会议记录可以参考[这份](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感谢许多伙伴来报名这次的活动。下次开会时间在 2025/06/08 21:00 `UTC+8`，预计讨论培训时间、活动筹备等事宜。
 
-教材目前也正在[翻译中](https://docs.google.com/presentation/d/16XWWrSX8DqmZ9uEORiaI-jT0RpquswXFDbzvr6srYjA/edit){target="_blank"}，我们使用 Tor/Tails 的教材先以不调整结构、仅翻译为华文的方式，将教材转换为适合华语方式进行。培训小助手的部分报名很踊跃，活动协助的部分还需要一些志愿者伙伴帮助，例如活动宣传、报名页面、当天活动的筹划等。如果您还有兴趣，[欢迎报名](../../event-workshop-2025-prepare.md#%E5%A0%B1%E5%90%8D%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%93%A1){target="_blank"}！
+教材目前也正在[翻译中](https://docs.google.com/presentation/d/16XWWrSX8DqmZ9uEORiaI-jT0RpquswXFDbzvr6srYjA/edit){target="_blank"}，我们使用 Tor/Tails 的教材先以不调整结构、仅翻译为华文的方式，将教材转换为适合华语方式进行。培训小助手的部分报名很踊跃，活动协助的部分还需要一些志愿者伙伴帮助，例如活动宣传、报名页面、当天活动的筹划等。如果您还有兴趣，[欢迎报名](https://anoni.net/zh-cn/events/workshop-2025-prepare/#%E5%A0%B1%E5%90%8D%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%93%A1){target="_blank"}！
 
 !!! info "工作人员报名"
     - 预计活动会分成二组：活动组、助教组，没有限定只能参加一组，依自己可以投入的时间为主。
@@ -34,7 +34,7 @@ description: "项目当前近况与更新 2025/05"
   <figcaption>活动两日当天预计的行程表。</figcaption>
 </figure>
 
-这次 COSCUP 开源人年会我们争取到两日的活动时间，会有充裕的活动时间，因此我们希望加入圆桌会议讨论的方式，将开源社区、匿名网络、本地社区建设等议题带到 COSCUP 上讨论。我们大致规划了三大分类、六个议题，也正在寻找合适的协调者能协助当天议题讨论的推动，如果您或您觉得有合适的对象，都欢迎让我们知道，我们将诚心邀请他们一起加入讨论，相关的讨论说明可以参考[此页面](../../event-workshop-2025-prepare.md#%E5%9C%93%E6%A1%8C%E6%9C%83%E8%AD%B0Round-Table){target="_blank"}的规划。
+这次 COSCUP 开源人年会我们争取到两日的活动时间，会有充裕的活动时间，因此我们希望加入圆桌会议讨论的方式，将开源社区、匿名网络、本地社区建设等议题带到 COSCUP 上讨论。我们大致规划了三大分类、六个议题，也正在寻找合适的协调者能协助当天议题讨论的推动，如果您或您觉得有合适的对象，都欢迎让我们知道，我们将诚心邀请他们一起加入讨论，相关的讨论说明可以参考[此页面](https://anoni.net/zh-cn/events/workshop-2025-prepare/#%E5%9C%93%E6%A1%8C%E6%9C%83%E8%AD%B0Round-Table){target="_blank"}的规划。
 
 - **主题一：开源技术与匿名工具的交集**
 
@@ -71,7 +71,7 @@ description: "项目当前近况与更新 2025/05"
 
 我们也尽量自己搭建或使用可匿名的服务（[Etherpad](https://pad.anoni.net/){target="_blank"}、[Formbricks](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}、[Jitsi](https://jitsi.goodmeet.asia/){target="_blank"}），试着建立相对应的 onion 服务（[项目文件](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Etherpad](http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Formbricks](http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/s/cmaxjo2p40000o10131byw3do){target="_blank"}），尽量有意识地协助参与伙伴可以保持一定的匿名方式与我们一起办活动（行事历还在寻找、邮件还在评估是否用 [Stalwart](https://stalw.art/){target="_blank"} 架设）。
 
-目前希望在八月份的「[匿名网络工作坊](../../event-workshop-2025.md)」顺利办完后，可能要开始思考一个「**社区**」可以成长成什么样子，无论是在台湾还是在亚太地区、印太地区可以提供什么样的服务、如何参与国际事务。我们希望大家可以多给我们一些意见，即使是**要求**也行 XD。
+目前希望在八月份的「[匿名网络工作坊](https://anoni.net/zh-cn/events/workshop-2025/)」顺利办完后，可能要开始思考一个「**社区**」可以成长成什么样子，无论是在台湾还是在亚太地区、印太地区可以提供什么样的服务、如何参与国际事务。我们希望大家可以多给我们一些意见，即使是**要求**也行 XD。
 
 接下来距离工作坊活动剩下约两个月的时间筹备，也会开始忙碌，以上所汇报的进度再请大家多多帮忙了，感谢！
 

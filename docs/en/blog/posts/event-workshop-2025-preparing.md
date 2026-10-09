@@ -15,7 +15,7 @@ description: "Recruiting workshop preparation staff and training helpers for the
 
 ![Anonymous Network Workshop Tor, Tails, OONI](./assets/images/event-workshop-2025.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-This year, we have applied for a track at COSCUP and secured an opportunity to host a workshop. We are now starting to recruit event preparation staff and training course helpers. If you are interested in topics like **internet freedom, internet censorship, internet surveillance, anonymous networks**, etc., and willing to dedicate some time over the next three months (until 2025/08) to help us prepare and organize this workshop, please refer to the instructions on the [event page](../../event-workshop-2025.md) for more details!
+This year, we have applied for a track at COSCUP and secured an opportunity to host a workshop. We are now starting to recruit event preparation staff and training course helpers. If you are interested in topics like **internet freedom, internet censorship, internet surveillance, anonymous networks**, etc., and willing to dedicate some time over the next three months (until 2025/08) to help us prepare and organize this workshop, please refer to the instructions on the [event page](https://anoni.net/en/events/workshop-2025/) for more details!
 
 The format of the workshop will follow the style of the workshop hosted by the [Tor and OONI teams in 2025/02](./rightscon25-pre-event.md), with the only difference being localized adjustments and conducted in Chinese.
 
@@ -50,4 +50,4 @@ The "Workshop Helper" will have training courses to elevate skills to **Basic L3
 | 2025/07 | Event promotion and registration.                           |
 | 2025/08 | Event day execution, post-event records, and notifications. |
 
-[View the Instructions on the Workshop Recruitment Page](../../event-workshop-2025-prepare.md){ .md-button .md-button--primary }
+[View the Instructions on the Workshop Recruitment Page](https://anoni.net/en/events/workshop-2025-prepare/){ .md-button .md-button--primary }
