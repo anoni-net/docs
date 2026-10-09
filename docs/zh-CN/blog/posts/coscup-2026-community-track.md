@@ -58,7 +58,7 @@ description: "匿名网络社群在 COSCUP 2026 开了两天社群议程轨，8/
 - [COSCUP 2026 匿名网络社群议程轨](../../activity/coscup-2026.md)：两天完整议程、各场摘要与讲者简介
 - [COSCUP 2026 公开征稿](../../activity/coscup-2026-cfp.md)：征稿主题、跨社群合作与投稿说明
 - [延续 2025，走向 2026：个人隐私指引、Tor Relay 校园创建竞赛、匿名支付探索](./2025to2026.md)
-- [关于我们](../../about/index.md)
+- [关于我们](https://anoni.net/zh-cn/about/)
 
 !!! info "活动更新与联系"
 

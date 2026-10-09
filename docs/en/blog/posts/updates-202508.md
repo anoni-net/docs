@@ -71,4 +71,4 @@ Of course, there is an even easier way to contribute a bridge point: by using a 
 
 ## Conclusion
 
-The above outlines the current progress of our community's work. If you have any suggestions or feedback, please feel free to [email us](../../about/index.md){target="_blank"} directly. Thank you!
+The above outlines the current progress of our community's work. If you have any suggestions or feedback, please feel free to [email us](https://anoni.net/en/contact/){target="_blank"} directly. Thank you!

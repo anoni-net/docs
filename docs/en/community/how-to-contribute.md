@@ -6,7 +6,7 @@ icon: material/source-pull
 
 # :material-source-pull: How to Contribute
 
-This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](./index.md). For who maintains the project and how decisions get made, see [governance](./governance.md) and the [About page](../about/index.md).
+This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](./index.md). For who maintains the project and how decisions get made, see [governance](./governance.md) and the [About page](https://anoni.net/en/about/).
 
 Everything below assumes you've already found something to work on. If you haven't, start with the Community page first.
 
@@ -56,7 +56,7 @@ The full list with links lives on the [Community page](./index.md). In brief:
 ## :material-license: Licensing and attribution
 
 - **Documentation content is [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}**: When you contribute documentation, you're contributing it under that license: others may share and adapt it with attribution.
-- **Code is licensed separately** — Pulse under MIT, the ASN coverage tooling under GPL-3.0. See the [About page](../about/index.md) for details.
+- **Code is licensed separately** — Pulse under MIT, the ASN coverage tooling under GPL-3.0. See the [About page](https://anoni.net/en/about/) for details.
 - **Contributors are credited**: Your work is attributed to you (under your name or a pseudonym, as you prefer), and it stays visible in the GitHub commit history and contributor list.
 - **We don't claim others' work**: When we translate or build on an external report, we attribute it to the original authors and link the source.
 

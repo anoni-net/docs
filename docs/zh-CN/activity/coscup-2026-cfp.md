@@ -139,6 +139,6 @@ og:
 
 ## 相关链接
 
-- [关于我们](../about/index.md)
+- [关于我们](https://anoni.net/zh-cn/about/)
 - [延续 2025，走向 2026：个人隐私指引、Tor Relay 校园建立竞赛、匿名支付探索](../blog/posts/2025to2026.md)
 - [匿名网络工作坊 2025（活动记录）](../event-workshop-2025.md)

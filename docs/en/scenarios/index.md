@@ -47,5 +47,5 @@ If you work with a population whose situation isn't well covered by existing Eng
 
 - [Regional observatory](../regional/index.md) for empirical observations
 - [Basics: networked freedom](../basics/internet-freedom.md) for the conceptual frame
-- [About us](../about/index.md) for the community behind the writing
+- [About us](https://anoni.net/en/about/) for the community behind the writing
 - For introductory privacy material outside our regional scope: [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}

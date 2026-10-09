@@ -313,7 +313,7 @@ Common threads when moving across the region:
 - [Regional Observatory](../regional/index.md) — the empirical regional work
 - [Privacy Guides — messaging comparison](https://www.privacyguides.org/en/real-time-communication/){target="_blank"} — Signal, SimpleX, Briar, Matrix at a glance
 - [Privacy Guides — password managers](https://www.privacyguides.org/en/passwords/){target="_blank"} — the infrastructure for account separation
-- [About anoni.net](../about/index.md) and [Community](../community/index.md) — collaboration and contact
+- [About anoni.net](https://anoni.net/en/about/) and [Community](../community/index.md) — collaboration and contact
 
 [^1]: [ILGA World — Sexual Orientation Laws Map](https://database.ilga.org/){target="_blank"}, the global LGBTI law database.
 [^2]: [Chinese university LGBT WeChat accounts shut down overnight](https://www.bbc.com/news/world-asia-china-57756840){target="_blank"} — BBC News, 7 July 2021.

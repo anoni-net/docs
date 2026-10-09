@@ -243,7 +243,7 @@ og:
 
 ## :material-account-voice: 講者簡介 { #講者簡介 }
 
-8/08 上午前三場開源匿名網路導論由 anoni.net 社群成員擔綱（社群中實際維運 Tor 中繼節點、參與 Tails 與 OONI 正體中文化與問題回報的成員），社群背景見[關於我們](../about/index.md)。以下依議程順序列出邀請與合辦講者，點名字可看 COSCUP pretalx 上講者本人提供的完整簡介。
+8/08 上午前三場開源匿名網路導論由 anoni.net 社群成員擔綱（社群中實際維運 Tor 中繼節點、參與 Tails 與 OONI 正體中文化與問題回報的成員），社群背景見[關於我們](https://anoni.net/about/)。以下依議程順序列出邀請與合辦講者，點名字可看 COSCUP pretalx 上講者本人提供的完整簡介。
 
 **8/08 上午 邀請議程**
 
@@ -271,7 +271,7 @@ og:
 - [COSCUP 2026 公開徵稿](./coscup-2026-cfp.md)：徵稿主題、跨社群合作與投稿說明
 - [匿名網路工作坊 2025（活動紀錄）](../event-workshop-2025.md)：去年兩日工作坊與圓桌會議的內容
 - [延續 2025，走向 2026：個人隱私指引、Tor Relay 校園建立競賽、匿名支付探索](../blog/posts/2025to2026.md)
-- [關於我們](../about/index.md)
+- [關於我們](https://anoni.net/about/)
 - [如何參與與認領主題](../community/how-to-contribute.md)：想一起貢獻 Tor、OONI、翻譯或架設節點的入口
 - [Tor Project 生態與對接](../community/tor-project-ecosystem.md)：與上游 Tor 專案對接的導引
 

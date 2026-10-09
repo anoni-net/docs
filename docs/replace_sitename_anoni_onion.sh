@@ -55,14 +55,16 @@ find ./ -path './onion' -prune -o \
 	-type f ! -name 'replace_sitename_anoni_onion.sh' \
 	-exec sed -i "s|https://pad.anoni.net|http://pad.${ONION_ROOT}|g" {} +
 
-# 連到官網首頁的 Markdown 連結（首頁與幾篇文章寫的「匿名網路社群 anoni.net」）。
-# 只比對 Markdown 連結的 `](...)` 形式，JSON-LD 裡的 `https://anoni.net/#organization`
-# 是組織的識別碼，不是讓讀者點的連結，刻意不改。官網的 onion 版同樣有 /en/。
+# 連到官網的 Markdown 連結，例如首頁的「匿名網路社群 anoni.net」，以及 2026-10 社群頁面
+# 搬到官網之後改連過去的 /about/、/contact/。官網的 onion 版三個語系的路徑跟 clearnet
+# 相同。只比對 Markdown 連結的 `](...)` 形式，JSON-LD 裡的 `https://anoni.net/#organization`
+# 是組織的識別碼，不是讓讀者點的連結，刻意不改。/docs 與 /api 在上面已經改過，
+# /news 是另一個子網域，要排在根位址那一條之前。
 find ./ -path './onion' -prune -o \
 	-type f -name '*.md' \
 	-exec sed -i \
-		-e "s|](https://anoni.net/)|](http://${ONION_ROOT}/)|g" \
-		-e "s|](https://anoni.net/en/)|](http://${ONION_ROOT}/en/)|g" {} +
+		-e "s|](https://anoni.net/news|](http://news.${ONION_ROOT}|g" \
+		-e "s|](https://anoni.net/|](http://${ONION_ROOT}/|g" {} +
 
 # 側邊欄連回官網的那一項（mkdocs*.yml 的 nav，值是 https://anoni.net/、/zh-cn/、/en/）。
 # 只改行尾整個是官網首頁的網址，site_url 這類 /docs 開頭的上面已經改過。

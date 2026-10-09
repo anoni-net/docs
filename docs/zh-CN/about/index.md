@@ -1,27 +1,63 @@
 ---
-title: 关于我们
-description: 匿名网络社群 anoni.net 的缘起、关注范围与 2026 三大主题（个人隐私指引、Tor Relay 校园建立、匿名支付）。给想了解社群工作方向的华语读者。
-icon: material/account-box-outline
+title: 关于文档站
+description: anoni.net 文档站写什么、怎么写成、三个语言版本的关系、写错了怎么更正，以及内容的授权。社群本身的介绍在 anoni.net。
+icon: material/book-information-variant
 ---
 
-# :material-account-box-outline: 关于我们
+# :material-book-information-variant: 关于文档站
 
-我们是一群关注「**匿名网络**」、「**网络自由**」的人，通过 Tor、Tails、OONI 工具唤起大众对网络自由重要性的关注，并在台湾推动隐私保护的实践。
+文档站整理匿名网络与隐私的知识，从概念、工具到不同处境的准备，也追踪台湾的网络观测与相关法规。内容由匿名网络社群 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社区关注华语六地区（中国大陆、香港、澳门、新加坡、马来西亚、台湾），以及在各地之间移动的华语离散社群（diaspora）。台湾是我们唯一能以第一手经验发言的地方。其余地区我们通过公开数据与当地联络人追踪，凡是依据二手材料的内容都会在页面上标明。
+社群的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/)，这一页只谈文档站本身。
 
-多数英文隐私资源以西方的威胁模型为前提，区域内的差异少有人整理。社区补上的是同一个工具在中国大陆与台湾的行为差异、一条在地法规对威胁模型的影响，以及来自区域内部的观测数据。
+## 内容范围
 
-项目初期我们仅关注 OONI 项目，通过[调查](../taiwan/ooni-asn-coverage.md)台湾 ASNs 在 OONI 数据库中观测数据的完整性。后来我们逐步扩展定位，进一步专注于「**匿名网络**」议题的推广与工具建立。2025/08，我们在国立台湾科技大学顺利举办了「[匿名网络工作坊](../event-workshop-2025.md)」，招募到第一批社区伙伴，共同开展 2026 年的工作。
+| 分类 | 内容 |
+|---|---|
+| [开始](../start/index.md) | 按身份整理的起步路径，从公民团体、媒体到一般读者 |
+| [指南](../guides/index.md) | 概念、工具、场景、进阶、报告五个层次，由浅到深 |
+| [在地脉络](../taiwan/index.md) | 台湾的连线观测、法规与制度，以及读懂观测数据的方法 |
+| [小工具](../utils/index.md) | 在浏览器里运行的工具，数据不会上传 |
+| [信息更新](../blog/index.md) | 社群公告、外部文章的翻译与软件更新日志 |
+| [架设与运营](../community/setup-tor-relay.md) | 架设 Tor 中继节点、网桥、onion 服务与镜像 |
 
-**2026 年，社区聚焦三大主题**（完整规划与各季交付见 [2026 工作蓝图](../community/roadmap-2026.md)）：
+关注的范围是华语六地区（中国大陆、香港、澳门、新加坡、马来西亚、台湾），以及在各地之间移动的华语使用者。台湾是社群唯一能以第一手经验发言的地方，其他地区依据公开资料与当地联系人的说法撰写，用到二手材料的段落会在页面上标明。
 
-- **[个人隐私指引](../community/privacy-guide.md)**：整理可实际操作的隐私保护指引，依情境（日常、敏感工作、高风险）提供工具与步骤。
-- **[Tor Relay 校园建设](../community/relay-on-campus.md)**：与 EFF、Tor Project 合作推动校园中继节点，国立台湾师范大学已有一个节点运行中。社区把该案例整理成提案范本、技术 SOP、校方 FAQ 三份文件，并把台湾专属的内容另外标记，其他地区的推动者替换那几段就能沿用其余部分（三份文件目前仅在[正体中文版](https://anoni.net/docs/community/campus-tor-relay-proposal/){target="_blank"}提供，简体中文版会随社群翻译滚动补上）。
-- **[匿名支付](../community/payments-research.md)**：探索现金以外情境下的匿名支付（如稳定币、区块链应用），含法规与实践面向。目前在研究阶段，收集真实情境，也是 [Global Gathering 2026](../blog/posts/2026-anoni-net-global-gathering.md) 展位的主题（2026/09/06，葡萄牙 Estoril）。
+## 写作与审稿
 
-区域观测的近期成果是 [2026/08/13 台湾北部移动网络降速 30 分钟的记录](../blog/posts/ooni-mobile-throttle-drill-results.md)。演练的日期、时段、县市与运营商都已事先公告，降速研究少有这种已知条件。文中每一条查询都免验证免密钥，任何人都能自行复验。
+写作风格、文件格式与 PR 流程写在[贡献者百科](../community/contributor-handbook.md)。每一个修改都经过 PR，提交时先由 linter 检查标点与句型，合并前经过维护者审阅。
 
-如果你想参与或加入日常讨论，请前往[社群参与](../community/index.md)。
+社群不限制贡献者使用哪一家的 AI 工具协助写作与翻译，AI 的产出跟人工撰写走同一套流程。文章里的数字、引文与来源链接，提交 PR 的人要实际点开核对，并为内容负责。
 
-[:material-email-fast-outline: 关注我们](../contact.md){ .md-button }
+内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](../community/upload-sensitive.md)。
+
+## 三个语言版本
+
+- **正体中文**是正本，新文章先写正体中文
+- **简体中文**从正体中文同步，词汇与政治措辞调整成简体中文读者惯用的说法
+- **英文**是另外整理的版本，不逐页对应。英文世界已经有人写得更完整的主题，英文版直接链接过去
+
+翻译的做法与分工见[中文化与文档翻译](../community/i18n.md)。三个语言版本不一定同时上线，简体中文与英文按人力陆续补上。
+
+## 更正
+
+写错的地方直接修改原文，影响读者做法的更正另外写成公告，说明改了什么、依据在哪里，以及照着旧版做过准备的人要补上什么，例如 [2026/08 的更正回顾](../blog/posts/docs-corrections-202608.md)与 [2026/09 的文档站更新回顾](../blog/posts/site-updates-202609.md)。
+
+发现错误或过时的内容，可以到 [GitHub 开 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或写信到 <whisper@anoni.net>（PGP 公钥见[联系页](https://anoni.net/zh-cn/contact/#pgp)）。
+
+## 阅读方式
+
+文档站同时发布成标准网站、Tor onion 与 IPFS 镜像三份，内容相同，差别在过程中谁看得到什么，见[你正在用哪一种方式阅读](./how-you-are-reading.md)。标准网站另外可以存进设备，没有网络时照样能读，见[离线阅读](../offline.md)。
+
+## 授权
+
+内容以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权，转载或改作时注明出处即可，写法是「anoni.net 文档站，页面网址，CC BY 4.0」。
+
+少数外部资料沿用原始的授权，例如互动作品用到的 OONI 资料是 CC BY-NC-SA 4.0，清单见 repo 根目录的 [`NOTICE`](https://github.com/anoni-net/docs/blob/main/NOTICE){target="_blank"}。程序代码的授权另外标示，Pulse 是 MIT，ASN Coverage 是 GPL-3.0。
+
+## 相关阅读
+
+- [贡献者百科](../community/contributor-handbook.md)
+- [中文化与文档翻译](../community/i18n.md)
+- [品牌素材](../community/brand-assets.md)
+- [社群首页 anoni.net](https://anoni.net/zh-cn/)

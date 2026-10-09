@@ -56,7 +56,7 @@ description: "匿名網路社群徵 COSCUP 2026 議程軌的現場工作人員�
 
 - [COSCUP 2026 匿名網路社群議程軌：8/08、8/09 兩天，免費入場、走進教室就能參加](./coscup-2026-community-track.md)
 - [如何參與與認領主題](../../community/how-to-contribute.md)
-- [關於我們](../../about/index.md)
+- [關於我們](https://anoni.net/about/)
 
 !!! info "報名方式"
 

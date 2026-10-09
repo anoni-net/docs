@@ -201,7 +201,9 @@ nav:
       - community/campus-tor-relay-sop.md
       - community/campus-relay-faq.md
       - community/pin-ipfs-mirror.md
+  # about/index.md comes first so navigation.indexes uses it as the section index.
   - "About the Docs":
+      - about/index.md
       - about/how-you-are-reading.md
       - offline.md
       - community/contributor-handbook.md

@@ -122,7 +122,7 @@ We have produced full Traditional Chinese translations of two pieces of regional
 
 **Public sources we read and cite (no affiliation implied)**:
 
-The list below is third-party material we find useful for regional work; inclusion here is not a claim of partnership or coordination with any of these organizations. The only documented partnerships are listed on the [About page](../about/index.md).
+The list below is third-party material we find useful for regional work; inclusion here is not a claim of partnership or coordination with any of these organizations. The only documented partnerships are listed on the [About page](https://anoni.net/en/about/).
 
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"}: a public OONI tool from a documented partner (see About). Widely-used reference dataset for circumvention-tool and platform reachability; you can filter by country code and timeframe directly.
 - [Tor Metrics](https://metrics.torproject.org/){target="_blank"}: a public Tor Project tool from a documented partner (see About). Relay, guard, and bridge counts by country; useful for understanding regional Tor capacity.
