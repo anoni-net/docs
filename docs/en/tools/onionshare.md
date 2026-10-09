@@ -141,7 +141,7 @@ The decision:
 
 ## Next steps
 
-For a first sensitive transfer, try one mode end to end (Share Files is the simplest) and get comfortable with the pattern: generate the `.onion` address, deliver it through a secure channel. To fit it into a complete workflow, [protecting your sources as a journalist](../scenarios/journalist.md) and [sending us sensitive material](../community/upload-sensitive.md) are the next reads.
+For a first sensitive transfer, try one mode end to end (Share Files is the simplest) and get comfortable with the pattern: generate the `.onion` address, deliver it through a secure channel. To fit it into a complete workflow, [protecting your sources as a journalist](../scenarios/journalist.md) and [sending us sensitive material](https://anoni.net/en/join/upload-sensitive/) are the next reads.
 
 ## :material-chat-question: Related concepts
 

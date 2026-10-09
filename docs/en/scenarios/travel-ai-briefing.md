@@ -216,4 +216,4 @@ After running the items above, copy the key contacts from section 4 (emergency c
 
 ---
 
-This page gives you the *questions*, not ready-made answers. If you have on-the-ground experience for a specific destination, come discuss it in our [Matrix room](../community/index.md), or send it anonymously to [whisper@anoni.net](mailto:whisper@anoni.net).
+This page gives you the *questions*, not ready-made answers. If you have on-the-ground experience for a specific destination, come discuss it in our [Matrix room](https://anoni.net/en/join/), or send it anonymously to [whisper@anoni.net](mailto:whisper@anoni.net).

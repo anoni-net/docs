@@ -208,7 +208,7 @@ multisig 的常见坑：
 
 <div class="grid cards" markdown>
 
-- [:material-folder-search-outline: 匿名支付研究专题](../community/payments-research.md)
+- [:material-folder-search-outline: 匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/)
 - [:material-scale-balance: 台湾 VASP 法 2026](../taiwan/vasp-2026.md)
 
 </div>

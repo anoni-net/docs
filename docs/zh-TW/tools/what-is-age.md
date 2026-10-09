@@ -88,7 +88,7 @@ age 也放棄了幾件事。它不簽章，能解開一個檔案不代表知道�
 
 在公開格式裡選 age 而非 PGP，理由是上面那張表的每一列都指向同一件事：沒有選項就沒有設錯的機會，規格短就能在瀏覽器裡實作得小而能審，密語模式不需要任何金鑰管理。[本機檔案加密](../utils/age.md)有密語、passkey 與公鑰三種模式，最簡單的一條只要選檔案、輸入密語、下載。
 
-PGP 留在它該在的地方。站上的[敏感資料上傳](../community/upload-sensitive.md)流程用 PGP，因為那裡需要長期的身分、要跟郵件生態相容，而且對方是已經在用 PGP 的記者與組織。分工是：郵件與身分用 PGP，檔案與備份用 age。
+PGP 留在它該在的地方。站上的[敏感資料上傳](https://anoni.net/join/upload-sensitive/)流程用 PGP，因為那裡需要長期的身分、要跟郵件生態相容，而且對方是已經在用 PGP 的記者與組織。分工是：郵件與身分用 PGP，檔案與備份用 age。
 
 ## 注意
 
@@ -103,4 +103,4 @@ PGP 留在它該在的地方。站上的[敏感資料上傳](../community/upload
 - [密語與密碼產生器](../utils/passphrase.md)：在瀏覽器裡抽一組，不送出任何資料
 - [端對端加密](../advanced/e2ee.md)：加密在傳輸與儲存兩端各解決什麼
 - [網路中斷時的準備與應對](../scenarios/shutdown.md)：加密備份要斷網也解得開，age 不需要連線
-- [敏感資料上傳](../community/upload-sensitive.md)：站上用 PGP 的地方
+- [敏感資料上傳](https://anoni.net/join/upload-sensitive/)：站上用 PGP 的地方

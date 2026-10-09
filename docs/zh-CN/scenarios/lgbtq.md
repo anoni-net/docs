@@ -321,7 +321,7 @@ LGBTQ+ 在不同国家的法律处境差异极大。依 ILGA World 2025 年统�
 - [Metadata 是什么](../basics/metadata.md)：理解照片、文件、消息背后的元数据风险
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [密码管理器入门](../tools/password-manager.md)：账号分流的基础设施
-- [个人隐私指引研究专题](../community/privacy-guide.md)：把场景指引串回个人隐私的整体规划
+- [个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)：把场景指引串回个人隐私的整体规划
 
 [^1]: [ILGA World - Sexual Orientation Laws Map](https://database.ilga.org/){target="_blank"} - 国际 LGBTI 协会的全球法律地图
 [^2]: [中国大学 LGBT 学生公众号一夜被封](https://www.bbc.com/zhongwen/simp/chinese-news-57756840){target="_blank"} - BBC 中文 2021/07/07 报导

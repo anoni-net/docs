@@ -12,7 +12,7 @@ icon: material/console
 
 ## 二十分钟：先确认方向
 
-1. [2026 年度路线图](../community/roadmap-2026.md)：社群今年投入的三个主题与各自的进度，先看有没有你想接的
+1. [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/)：社群今年投入的三个主题与各自的进度，先看有没有你想接的
 2. [如何参与与认领主题](https://anoni.net/zh-cn/join/)：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
 3. [自我技能评估表](../community/skill-level.md)：Tor、Tails、OONI 三个工具的分级自评，每一级下面都列了补齐用的文章
 
@@ -51,7 +51,7 @@ icon: material/console
 
 ### 在学校内部有影响力
 
-- [Tor Relay 校园建立研究专题](../community/relay-on-campus.md)：校园中继节点需要的是能跟行政与法务沟通的人，技术反而是简单的部分。这个专题整理了目前的进展与可以接手的部分
+- [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/)：校园中继节点需要的是能跟行政与法务沟通的人，技术反而是简单的部分。这个专题整理了目前的进展与可以接手的部分
 
 ## 你自己也需要一份基线
 

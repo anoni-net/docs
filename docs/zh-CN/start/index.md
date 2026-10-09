@@ -73,7 +73,7 @@ icon: material/sign-direction
 | 我面对某个风险，要完整的处理流程 | [场景](../scenarios/index.md) |
 | 某个工具的用途、限制与设置 | [工具](../tools/index.md) |
 | 匿名、隐私、metadata 这些词的意思 | [概念](../basics/index.md) |
-| 我想加入社群一起做事 | [社群参与](../community/index.md) |
+| 我想加入社群一起做事 | [社群参与](https://anoni.net/zh-cn/join/) |
 | 现在就需要找到人求助 | [紧急求救](../help/index.md) |
 
 ## 地区差异请自行评估

@@ -266,7 +266,7 @@ compose 默认自动更新桥接本体。系统层的 Docker、nginx、certbot �
 <div class="grid cards" markdown>
 
 - [:material-server-network: 如何搭建 Tor Relay](./setup-tor-relay.md)
-- [:material-school-outline: Tor Relay 校园建立](./relay-on-campus.md)
+- [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/)
 - [:material-list-status: Tor Relays 观测点](../taiwan/tor-relay-watcher.md)
 
 </div>

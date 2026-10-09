@@ -558,6 +558,6 @@ This form is for your own reference. Nobody collects the results, so just pick y
 
 - **Awareness level:** subscribe to the [newsletter](https://anoni.net/en/contact/) to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
 - **Hands-on level:** follow the "Not there yet? Start here." steps under each tool and actually install and use it. Bring problems to Matrix.
-- **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](./index.md) for how to join.
+- **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](https://anoni.net/en/join/) for how to join.
 
 You do not need to be at the same level in all three tools. Being at contribution level for OONI and awareness level for Tails is a perfectly normal place to be.

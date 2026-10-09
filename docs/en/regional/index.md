@@ -132,13 +132,13 @@ The list below is third-party material we find useful for regional work; inclusi
 
 ## :material-handshake-outline: Working with us on regional observation
 
-If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific and would like to compare notes, contribute primary observation, or co-publish, the [Community](../community/index.md) page lists the channels (Matrix, email, encrypted submission). We particularly welcome:
+If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific and would like to compare notes, contribute primary observation, or co-publish, the [Community](https://anoni.net/en/join/) page lists the channels (Matrix, email, encrypted submission). We particularly welcome:
 
 - Region-specific contributors who can sharpen the country sections from inside their own jurisdiction
 - Researchers wanting to use the underlying Pulse and ASN coverage data in published work
 - Translators bridging regional reports between Chinese and English
 
-What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](../community/partners.md).
+What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](https://anoni.net/en/about/partners/).
 
 ## :material-information-outline: Disclaimer
 

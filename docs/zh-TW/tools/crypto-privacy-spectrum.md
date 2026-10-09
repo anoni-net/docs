@@ -204,7 +204,7 @@ mixers 與 CoinJoin 的法律風險主要在美國司法管轄。對台灣使用
 
 <div class="grid cards" markdown>
 
-- [:material-folder-search-outline: 匿名支付研究專題](../community/payments-research.md)
+- [:material-folder-search-outline: 匿名支付研究專題](https://anoni.net/join/payments-research/)
 - [:material-scale-balance: 台灣 VASP 法 2026](../taiwan/vasp-2026.md)
 
 </div>

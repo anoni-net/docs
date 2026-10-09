@@ -78,6 +78,6 @@ Snowflake Volunteer 可以從 [F-Droid](https://f-droid.org/en/packages/io.bloco
 
 - [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)：瀏覽器版橋接點如何開，以及香港讀者要注意的風險
 - [伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](iran-blackout-webtunnel.md)：橋接點在真實審查情境下的作用
-- [Tor Relay 校園建立研究專題](../../community/relay-on-campus.md)：想投入更多心力的下一步
+- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)：想投入更多心力的下一步
 
 [^1]: 統計依據 2026 年 1 月 1 日至 6 月 30 日、共 180 份 Snowflake broker 每日報告，數據來自 Tor Metrics 的 [CollecTor 封存](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"} 彙整的 snowflake-stats descriptor。

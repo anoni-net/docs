@@ -86,9 +86,9 @@ Ordered by how feasible each is for a regional community, with the local how-to 
 
 - **Traditional Chinese documentation and terminology**: The community already maintains `zh_Hant` translation and terminology standards, and carrying that into Tor's Weblate is the most natural extension
 - **Reachability measurement**: Pulse, the source behind the [Tor relay watcher](../regional/tor-relay-watcher.md), and the ASN coverage tooling behind [ASN observation data analysis](../regional/ooni-asn-coverage.md) correspond to the network-health team's work and to `S112`, and the results can be brought to that team's community sessions
-- **Campus relays**: The [Tor relays on campus track](./relay-on-campus.md) follows from the Tor University Challenge, EFF's campaign with Tor Project involvement, and the first running case at National Taiwan Normal University (see [the interview](../blog/posts/ntnu-nz.md)) is a concrete result of connecting local advocacy back to the ecosystem
+- **Campus relays**: The [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/) follows from the Tor University Challenge, EFF's campaign with Tor Project involvement, and the first running case at National Taiwan Normal University (see [the interview](../blog/posts/ntnu-nz.md)) is a concrete result of connecting local advocacy back to the ecosystem
 
-How these fit the community's annual rhythm is in the [2026 roadmap](./roadmap-2026.md). The community session of State of the Onion has an open call for community updates, which is where results like these get an international audience.
+How these fit the community's annual rhythm is in the [2026 roadmap](https://anoni.net/en/join/roadmap-2026/). The community session of State of the Onion has an open call for community updates, which is where results like these get an international audience.
 
 ## :fontawesome-solid-diagram-project: Related
 

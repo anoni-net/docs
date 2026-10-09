@@ -92,7 +92,7 @@ Unredacted 把 123 个 exit relays 运作于 400W 上，这个数字换算成运
 
 关键在硬件规模化的设计。Raspberry Pi 5 对各地 maker 社群都不陌生，PoE+ HAT 与 PoE 交换机在常见零售管道都能买到（台湾如 Cytron、群创、PChome，其他地区可循当地电子零售管道）。ComputeBlade（20 模组 1U 机箱）目前零售管道较少，可以通过官方海外订购或社群代购取得。机构机房比家用网络更适合做这件事，原因有三：固定 IP、机构网络带宽、有人巡检机器。
 
-Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md) 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
+Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/) 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
 
 对想参与的个人或小团体，从 Snowflake proxy 开始（浏览器扩展或 Docker）几乎没有电费负担，是进入抗审查基础建设最低门槛的入口（见 [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)）。
 
@@ -103,15 +103,15 @@ Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把
 - **了解 Unredacted**：到 [unredacted.org](https://unredacted.org/){target="_blank"} 看他们的服务与透明度信息，再决定是否通过官方管道支持服务器、带宽与人力成本。
 - **自架 Snowflake**：最低门槛的抗审查贡献，用浏览器扩展或 Docker 就能执行（见 [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)）。
 - **架设 Tor relay 或 bridge**：需要稳定网络与一点运维心力，社群整理了 [如何搭建 Tor Relay](../../community/setup-tor-relay.md) 的步骤与经验。
-- **校园 Tor Relay**：在大专院校工作或就读的人，可以从 [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md) 开始评估。
-- **加入 anoni.net 社群讨论**：通过 Matrix 跟其他社群成员交换经验，入口在 [社群参与](../../community/index.md)。
+- **校园 Tor Relay**：在大专院校工作或就读的人，可以从 [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/) 开始评估。
+- **加入 anoni.net 社群讨论**：通过 Matrix 跟其他社群成员交换经验，入口在 [社群参与](https://anoni.net/zh-cn/join/)。
 
 ## 延伸阅读
 
 - [什么是 Tor](../../tools/what-is-tor.md)
 - [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)
 - [什么是 OONI](../../tools/what-is-ooni.md)
-- [Tor Relay 校园建立研究专题](../../community/relay-on-campus.md)
+- [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/)
 - [Tor Relays 观测点](../../taiwan/tor-relay-watcher.md)
 - [ASN 观测数据分析](../../taiwan/ooni-asn-coverage.md)
 - 同系列：[Defending the public's right to know（OONI）](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}、[Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}

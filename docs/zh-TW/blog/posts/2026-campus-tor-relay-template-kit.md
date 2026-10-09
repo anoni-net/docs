@@ -33,7 +33,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 **[校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)**：十題校方資訊中心、法務、網管最常擔心的問題，每題都有台灣脈絡補充，刑法妨害電腦使用罪章、個資法第 2 條、TANet 對外連線審核機制都已經對到具體條文。頁尾另外整理「給網管的一頁摘要」與「給校方行政與法務的一頁摘要」，30 秒讀完，可以直接複製貼進 mail 開頭或當會議 handout。
 
-三份檔案的整體入口、推動目標、案例累積，以及「待翻譯延伸閱讀」清單，都收在 [Tor Relay 校園建立研究專題](../../community/relay-on-campus.md)。
+三份檔案的整體入口、推動目標、案例累積，以及「待翻譯延伸閱讀」清單，都收在 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)。
 
 ## 建議的閱讀順序
 

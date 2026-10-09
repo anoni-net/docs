@@ -29,7 +29,7 @@ icon: material/book-information-variant
 
 社群不限制贡献者使用哪一家的 AI 工具协助写作与翻译，AI 的产出跟人工撰写走同一套流程。文章里的数字、引文与来源链接，提交 PR 的人要实际点开核对，并为内容负责。
 
-内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](../community/upload-sensitive.md)。
+内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)。
 
 ## 三个语言版本
 

@@ -35,7 +35,7 @@ Three documents cover the three roles in the rollout sequence: proposal author, 
 
 The hub page collects all three with case studies, project goals, and a backlog of external resources awaiting translation:
 
-- [Tor relays on campus track](../../community/relay-on-campus.md)
+- [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/)
 
 ## For readers outside Taiwan
 

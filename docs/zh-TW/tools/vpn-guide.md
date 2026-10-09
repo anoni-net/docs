@@ -282,7 +282,7 @@ VPN 在某地能不能用沒有全球通用答案，會隨地區與時間變。�
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 個人隱私指引研究專題](../community/privacy-guide.md)
+- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)
 - [:material-server-network-outline: 社群自架服務](https://anoni.net/services/)
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 

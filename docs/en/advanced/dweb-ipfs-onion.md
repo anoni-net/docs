@@ -151,7 +151,7 @@ For the design of the Tor network itself, see [what is Tor](../tools/what-is-tor
 
 - [:simple-ipfs: Pin the documentation site's IPFS mirror](../community/pin-ipfs-mirror.md)
 - [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
-- [:material-school-outline: Tor relays on campus](../community/relay-on-campus.md)
+- [:material-school-outline: Tor relays on campus](https://anoni.net/en/join/relay-on-campus/)
 - [:material-translate-variant: Localization and translation](../community/i18n.md)
 
 </div>

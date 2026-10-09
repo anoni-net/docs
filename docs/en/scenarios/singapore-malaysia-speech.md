@@ -17,7 +17,7 @@ It is a regional companion, not a full playbook: the general operational securit
     - **Singapore** — POFMA's present enforcement posture (correction notice vs. criminal charge), the FICA "politically significant person" designation thresholds, how far the Public Order Act reaches online organizing, and current SIM-registration and Singpass specifics.
     - **Malaysia** — the post-February-2025 wording and penalties of CMA Section 233 and how the 2026 *Heidy Quah* intent test works in practice, the current pace of Sedition Act enforcement, the Societies Act threshold for what counts as "organizing," the scope of state-level Syariah enforcement, and current SIM / MyDigital ID requirements.
 
-    If you organize, give, or work on digital rights in either jurisdiction and can help verify or co-author, reach us through the [Community](../community/index.md) page.
+    If you organize, give, or work on digital rights in either jurisdiction and can help verify or co-author, reach us through the [Community](https://anoni.net/en/join/) page.
 
 ## Why the regional frame is load-bearing
 

@@ -64,7 +64,7 @@ Helpers on mobile networks are especially valuable. Existing measurements cluste
 
 !!! info "We are looking for volunteers"
 
-    If you are interested in data tracing, research, and analysis, we would like to hear from you. Say hello in the anoni-net public space on Matrix, see [Community](../community/index.md) for how to join.
+    If you are interested in data tracing, research, and analysis, we would like to hear from you. Say hello in the anoni-net public space on Matrix, see [Community](https://anoni.net/en/join/) for how to join.
 
 ### Running a test yourself
 

@@ -25,7 +25,7 @@ Fill in the [threat model checklist](../utils/threat-model.md) first. It produce
 
 They may be an employee, a directly affected person, or a witness who does not want to be identified. Ordinary forms and mailboxes leave correlatable records, and the sender has no way to assess the risk. They need a channel they can evaluate for themselves.
 
-See [sending us sensitive material](../community/upload-sensitive.md), the channel the community uses itself: the file goes to a self-hosted Send instance, the link is set to expire after one download and carries an agreed password.
+See [sending us sensitive material](https://anoni.net/en/join/upload-sensitive/), the channel the community uses itself: the file goes to a self-hosted Send instance, the link is set to expire after one download and carries an agreed password.
 
 ### Donors do not want a record, and the organization still has to issue receipts
 
@@ -50,7 +50,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 
 ### Intake and donations
 
-- [Sending us sensitive material](../community/upload-sensitive.md): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
+- [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
 - [File metadata stripper](../utils/strip-metadata.md): clean files in the browser before publishing, nothing is uploaded
 - [Anonymous donation channels](../scenarios/nonprofit-anonymous-donation.md): the full workflow and its legal constraints
 
@@ -58,7 +58,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 
 - [Taiwan's 2025 data protection overhaul](../regional/taiwan-pdpa-2025.md): what changed for organizations holding personal data
 - [Taiwan's whistleblower protection act](../regional/taiwan-whistleblower-law.md): how far the law protects an employee who speaks
-- [Governance charter](../community/governance.md): how this community makes decisions and handles disputes, useful as a reference when drafting your own
+- [Governance charter](https://anoni.net/en/about/governance/): how this community makes decisions and handles disputes, useful as a reference when drafting your own
 
 ## Your own baseline still matters
 

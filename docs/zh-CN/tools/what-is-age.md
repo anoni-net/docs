@@ -88,7 +88,7 @@ age 也放弃了几件事。它不签名，能解开一个文件不代表知道�
 
 在公开格式里选 age 而非 PGP，理由是上面那张表的每一行都指向同一件事：没有选项就没有设错的机会，规范短就能在浏览器里实现得小而能审，密语模式不需要任何密钥管理。[本机文件加密](../utils/age.md)有密语、passkey 与公钥三种模式，最简单的一条只要选文件、输入密语、下载。
 
-PGP 留在它该在的地方。站上的[敏感数据上传](../community/upload-sensitive.md)流程用 PGP，因为那里需要长期的身份、要跟邮件生态兼容，而且对方是已经在用 PGP 的记者与组织。分工是：邮件与身份用 PGP，文件与备份用 age。
+PGP 留在它该在的地方。站上的[敏感数据上传](https://anoni.net/zh-cn/join/upload-sensitive/)流程用 PGP，因为那里需要长期的身份、要跟邮件生态兼容，而且对方是已经在用 PGP 的记者与组织。分工是：邮件与身份用 PGP，文件与备份用 age。
 
 ## 注意
 
@@ -103,4 +103,4 @@ PGP 留在它该在的地方。站上的[敏感数据上传](../community/upload
 - [密语与密码生成器](../utils/passphrase.md)：在浏览器里抽一组，不送出任何数据
 - [端对端加密](../advanced/e2ee.md)：加密在传输与存储两端各解决什么
 - [网络中断时的准备与应对](../scenarios/shutdown.md)：加密备份要断网也解得开，age 不需要联网
-- [敏感数据上传](../community/upload-sensitive.md)：站上用 PGP 的地方
+- [敏感数据上传](https://anoni.net/zh-cn/join/upload-sensitive/)：站上用 PGP 的地方

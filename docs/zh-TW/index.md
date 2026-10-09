@@ -15,7 +15,7 @@ hide:
 
 [:material-email-fast-outline: 訂閱電子報](https://anoni.net/contact/) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/feed_rss_created.xml)
 
-文件由[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"} 維護，社群的介紹見[關於我們](https://anoni.net/about/)，2026 年的三個主題與參與方式見[社群參與](./community/index.md)。
+文件由[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"} 維護，社群的介紹見[關於我們](https://anoni.net/about/)，2026 年的三個主題與參與方式見[社群參與](https://anoni.net/join/)。
 
 ## :material-rocket-launch-outline: 從這裡開始
 

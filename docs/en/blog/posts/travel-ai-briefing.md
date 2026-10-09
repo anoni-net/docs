@@ -40,4 +40,4 @@ Splitting it this way keeps your destination and identity off our servers, while
 
 The full priming prompt and the dozen-plus questions are on [Pre-departure digital safety — brief yourself with AI prompts](../../scenarios/travel-ai-briefing.md) — copy and you are ready to start.
 
-If you have on-the-ground experience for a specific destination, come share it through the channels on our [Community](../../community/index.md) page, or send it anonymously to [whisper@anoni.net](mailto:whisper@anoni.net).
+If you have on-the-ground experience for a specific destination, come share it through the channels on our [Community](https://anoni.net/en/join/) page, or send it anonymously to [whisper@anoni.net](mailto:whisper@anoni.net).

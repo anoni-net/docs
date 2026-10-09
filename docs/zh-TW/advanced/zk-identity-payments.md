@@ -119,7 +119,7 @@ zk-SNARKs 的應用不限於支付。把它套到「身分驗證」會出現一�
 
 香港的框架與風險層級不同。當地自 2023 年 6 月起實施 VATP（虛擬資產交易平台）發牌制度，法源是《打擊洗錢及恐怖分子資金籌集條例》（AMLO），證監會（SFC）是發牌與監理機關。穩定幣發行另走一套，自 2025 年 8 月起由金融管理局（HKMA）依《穩定幣條例》發牌。散戶只能在持牌平台交易符合資格的代幣，Monero、Zcash 這類隱私幣因與 AML（洗錢防制）、KYC 要求衝突，實務上幾乎無法在持牌平台上架[^hk]。香港倡議捐款要擔心的核心風險，是資金用途本身可能被定性為危害國家安全。在為 2019 年反送中運動被捕者提供人道援助的「612 人道支援基金」案裡，基金遭調查停運，五名信託人一度以《國安法》第 29 條被捕，最終與祕書共六人改以《社團條例》未註冊定罪，判處罰款而非徒刑。上訴於 2025 年 12 月辯論完畢，判決待下。零知識身分驗證的意義，是讓捐款人不必把身分留在可能被國安調查回溯的紀錄裡，但它擋不掉「資金流向本身被定性為危害國安」這一層，技術做得再乾淨也無法取代法律風險評估。
 
-關於 VASP 法的詳細條文與技術影響，見 [台灣 VASP 法 2026](../taiwan/vasp-2026.md)。對「為什麼匿名支付對社運倡議重要」的整體脈絡，見 [為什麼匿名支付重要](../basics/payments-anonymity.md)。社群在 [匿名支付研究專題](../community/payments-research.md) 持續追蹤這個方向。
+關於 VASP 法的詳細條文與技術影響，見 [台灣 VASP 法 2026](../taiwan/vasp-2026.md)。對「為什麼匿名支付對社運倡議重要」的整體脈絡，見 [為什麼匿名支付重要](../basics/payments-anonymity.md)。社群在 [匿名支付研究專題](https://anoni.net/join/payments-research/) 持續追蹤這個方向。
 
 ## :material-chat-question: 一同瞭解
 
@@ -136,7 +136,7 @@ zk-SNARKs 的應用不限於支付。把它套到「身分驗證」會出現一�
 
 <div class="grid cards" markdown>
 
-- [:material-cash-multiple: 匿名支付研究專題](../community/payments-research.md)
+- [:material-cash-multiple: 匿名支付研究專題](https://anoni.net/join/payments-research/)
 - [:material-scale-balance: 台灣 VASP 法 2026](../taiwan/vasp-2026.md)
 - [:material-handshake-outline: 倡議組織的匿名捐款](../scenarios/nonprofit-anonymous-donation.md)
 

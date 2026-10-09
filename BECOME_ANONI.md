@@ -27,7 +27,7 @@ anoni.net 是一個台灣的社群，推廣匿名網路 Tor、Tails 與 OONI，�
 - 寫作標準與 PR 流程：[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)
 - 三語翻譯流程：[中文化與文件翻譯](https://anoni.net/docs/community/i18n/)
 - 行為準則與合法前提：[CODE_OF_CONDUCT](https://github.com/anoni-net/docs/blob/main/CODE_OF_CONDUCT.md)
-- 治理與角色：[治理章程](https://anoni.net/docs/community/governance/)
+- 治理與角色：[治理章程](https://anoni.net/about/governance/)
 
 ## 3. 硬規則（寫作風格，違反就是錯）
 

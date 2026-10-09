@@ -80,7 +80,7 @@ Once you know your role, the pages that path links to can be stored on your phon
 | What a tool does, its limits, how to configure it | [Tools](../tools/index.md) |
 | What anonymity, privacy, and metadata actually mean | [Concepts](../basics/index.md) |
 | Measurement and regulation across the region | [Regional observatory](../regional/index.md) |
-| Joining the community | [Community](../community/index.md) |
+| Joining the community | [Community](https://anoni.net/en/join/) |
 | Help right now | [Emergency help](../help/index.md) |
 
 ## If none of these fit

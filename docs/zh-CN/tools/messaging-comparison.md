@@ -287,7 +287,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 个人隐私指引研究专题](../community/privacy-guide.md)
+- [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)
 - [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 

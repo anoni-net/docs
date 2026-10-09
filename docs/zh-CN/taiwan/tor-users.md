@@ -220,7 +220,7 @@ bridge 占比有它的极限。越南的 1.18% 比德国的 1.93% 还低，而�
 - [:material-chart-bar: Tor Relays 观测点](./tor-relay-watcher.md)
 - [:material-access-point-network: ASN 自治网络观测数据分析](./ooni-asn-coverage.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
-- [:material-school: Tor Relay 校园建立](../community/relay-on-campus.md)
+- [:material-school: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/)
 
 </div>
 

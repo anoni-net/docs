@@ -73,7 +73,7 @@ icon: material/sign-direction
 | 我面對某個風險，要完整的處理流程 | [場景](../scenarios/index.md) |
 | 某個工具的用途、限制與設定 | [工具](../tools/index.md) |
 | 匿名、隱私、metadata 這些詞的意思 | [概念](../basics/index.md) |
-| 我想加入社群一起做事 | [社群參與](../community/index.md) |
+| 我想加入社群一起做事 | [社群參與](https://anoni.net/join/) |
 | 現在就需要找到人求助 | [緊急求救](../help/index.md) |
 
 ## 找不到你的身分

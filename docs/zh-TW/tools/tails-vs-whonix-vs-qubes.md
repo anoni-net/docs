@@ -126,7 +126,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 依 [威脅模型](../basics/threat-model.md) 的角色思考：
 
 - **一般使用者**（沒有特別敏感工作）：通常不需要這三套任何一套，[Tor Browser](./what-is-tor.md) + [密碼管理器](./password-manager.md) 已經涵蓋多數場景。
-- **記者**（保護消息來源）：預設 Tails。詳細工作流見 [記者保護消息來源](../scenarios/journalist.md)。長期進行很多採訪、累積大量檔案，可考慮升級到 Whonix（搭配 [上傳機敏資訊流程](../community/upload-sensitive.md)）。
+- **記者**（保護消息來源）：預設 Tails。詳細工作流見 [記者保護消息來源](../scenarios/journalist.md)。長期進行很多採訪、累積大量檔案，可考慮升級到 Whonix（搭配 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)）。
 - **社運參與者**：行動現場 Tails（USB 帶著走，被臨檢時抽出來），長期協作回家用一般筆電 + Signal。詳細場景見 [社運行動者的數位準備](../scenarios/activist.md)。
 - **家暴倖存者**（準備離開）：Tails 在加害者看不到的環境（圖書館、咖啡店）使用。詳細場景見 [家暴受害者的數位準備](../scenarios/domestic-violence.md)。
 - **IT 從業者、安全研究員**：依硬體與時間投入挑 Whonix（低門檻）或 Qubes（高隔離）。需要把 work / personal / banking 嚴格分開的選 Qubes。
@@ -185,7 +185,7 @@ Tails 的完整介紹與安裝步驟在 [什麼是 Tails](./what-is-tails.md)。
 <div class="grid cards" markdown>
 
 - [:material-newspaper-variant-outline: 記者保護消息來源](../scenarios/journalist.md)
-- [:material-upload-outline: 上傳機敏資訊流程](../community/upload-sensitive.md)
+- [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)
 - [:material-account-group-outline: 社運行動者的數位準備](../scenarios/activist.md)
 
 </div>

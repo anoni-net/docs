@@ -44,7 +44,7 @@ offline_caution: true
 ### 建立收件渠道
 
 - [OnionShare](../tools/onionshare.md)：来源不需要注册账号就能传文件给你
-- [上传机敏信息流程](../community/upload-sensitive.md)：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
+- [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：后续联络走哪一套
 
 ### 素材的保存与清理

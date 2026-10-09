@@ -306,7 +306,7 @@ UFW 也要對應放行 v6 流量。IPv6 雖然是選用，但對 Tor 網路的�
 
     Relay 上線後，這個案例就活在 Tor 網路裡了。建議：
 
-    - **回報案例**：透過 [社群自架服務](https://anoni.net/services/) 聯繫匿名網路社群 anoni.net，我們會把你的案例加進 [Tor Relay 校園建立研究專題](./relay-on-campus.md) 的「已完成的事」，讓第三、第四所學校有更多參考
+    - **回報案例**：透過 [社群自架服務](https://anoni.net/services/) 聯繫匿名網路社群 anoni.net，我們會把你的案例加進 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/) 的「已完成的事」，讓第三、第四所學校有更多參考
     - **長期維運參考**：[如何搭建 Tor Relay](./setup-tor-relay.md) 末尾的 FAQ 有 nyx 監控、套件升級、Guard Relay 機制的補充
     - **想做更多**：可以額外運行 [Tor Snowflake 橋接點](../tools/tor-snowflake.md) 幫助審查地區的使用者連上 Tor
 
@@ -317,7 +317,7 @@ UFW 也要對應放行 v6 流量。IPv6 雖然是選用，但對 Tor 網路的�
 - [如何搭建 Tor Relay](./setup-tor-relay.md)：個人/家用視角的基礎安裝
 - [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md)：跟學校溝通的提案文件範本
 - [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A
-- [Tor Relay 校園建立研究專題](./relay-on-campus.md)：社群推動主題入口
+- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)：社群推動主題入口
 - [Tor Project Relay Operator Guides](https://community.torproject.org/relay/){target="_blank"}：官方營運指南
 - [Tor Relay Post-install and good practices](https://community.torproject.org/relay/setup/post-install/){target="_blank"}：上線後注意事項
 

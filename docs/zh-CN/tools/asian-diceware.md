@@ -179,7 +179,7 @@ asian-diceware 是一份 7776 字、与 EFF 兼容的密语词表，可以当成
 
 - [:material-source-branch: Tor Project 生态与对接](../community/tor-project-ecosystem.md)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
-- [:material-hand-coin-outline: 匿名支付研究专题](../community/payments-research.md)
+- [:material-hand-coin-outline: 匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/)
 
 </div>
 

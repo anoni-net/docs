@@ -27,7 +27,7 @@ These are the public sources of authority. Every judgement you make defers to th
 - Writing standards and the PR process: [contributor handbook](https://anoni.net/docs/en/community/contributor-handbook/)
 - Three-language translation process: [localization and translation](https://anoni.net/docs/en/community/i18n/)
 - Conduct and the lawful-use premise: [CODE_OF_CONDUCT](https://github.com/anoni-net/docs/blob/main/CODE_OF_CONDUCT.md)
-- Governance and roles: [governance charter](https://anoni.net/docs/en/community/governance/)
+- Governance and roles: [governance charter](https://anoni.net/en/about/governance/)
 
 ## 3. Hard rules for English prose (breaking these is an error)
 

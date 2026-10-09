@@ -171,7 +171,7 @@ The defaults that come with it: applications attempting to bypass Tor are blocke
 
 ## Next steps
 
-Follow the [Tails installation guide](https://tails.net/install/index.en.html){target="_blank"} to build a USB stick. If you are a journalist, researcher, or field worker, [protecting your sources as a journalist](../scenarios/journalist.md) and [sending us sensitive material](../community/upload-sensitive.md) design the surrounding workflow.
+Follow the [Tails installation guide](https://tails.net/install/index.en.html){target="_blank"} to build a USB stick. If you are a journalist, researcher, or field worker, [protecting your sources as a journalist](../scenarios/journalist.md) and [sending us sensitive material](https://anoni.net/en/join/upload-sensitive/) design the surrounding workflow.
 
 ## :material-chat-question: Related concepts
 
@@ -188,7 +188,7 @@ Follow the [Tails installation guide](https://tails.net/install/index.en.html){t
 <div class="grid cards" markdown>
 
 - [:material-newspaper-variant-outline: Protecting your sources as a journalist](../scenarios/journalist.md)
-- [:material-upload-outline: Sending us sensitive material](../community/upload-sensitive.md)
+- [:material-upload-outline: Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/)
 - [:material-list-status: OONI Website Testing List](../regional/ooni-checklist.md)
 
 </div>
