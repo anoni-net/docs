@@ -23,6 +23,8 @@ nav:
   - !ENV [NAV_GUIDES, "指南"]:
       - guides/index.md
       - help/index.md
+      - community/skill-level.md
+      - community/tor-project-ecosystem.md
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -125,6 +127,12 @@ nav:
           - taiwan/realname-data-market.md
           - taiwan/vasp-2026.md
           - taiwan/whistleblower-law.md
+      - "讀懂觀測資料":
+          - community/ooni-data-format.md
+          - community/ooni-blocking-determination.md
+          - community/ooni-nettests-map.md
+          - community/asn-coverage-howto.md
+          - community/onionoo-mcp.md
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
       # 十四支工具排成一列，手機的左側抽屜要 732px 才裝得下，390x844 剛好塞滿、
@@ -192,58 +200,29 @@ nav:
           - changelog/android.md
           - changelog/browsers.md
           - changelog/messaging.md
-  - !ENV [NAV_COMMUNITY, "社群"]:
-      - community/index.md
-      # 關於我們是社群的一部分，收進去讓第一層再短一項。放在 community/index.md
-      # 之後而不是之前：navigation.indexes 要 index 頁排第一，section 標題才點得進去。
-      - !ENV [NAV_ABOUT, "關於我們"]:
-          - about/index.md
-          - about/how-you-are-reading.md
-          - contact.md
-          - offline.md
-      - "加入社群":
-          - community/how-to-contribute.md
-          - community/partners.md
-          - community/tools.md
-          - community/send-privacy.md
-          - community/skill-level.md
-          - community/tor-project-ecosystem.md
-          - community/upload-sensitive.md
-          - community/governance.md
-      - "文件與開發":
-          - community/contributor-handbook.md
-          - community/i18n.md
-          - community/zh-hant-naming.md
-          - community/become-anoni.md
-          - community/setup-repo.md
-          - community/brand-assets.md
-      - "架設節點":
-          - community/setup-tor-relay.md
-          - community/setup-tor-webtunnel.md
-          - community/setup-onion-service.md
-          - community/campus-tor-relay-proposal.md
-          - community/campus-tor-relay-sop.md
-          - community/campus-relay-faq.md
-          - community/pin-ipfs-mirror.md
-      - "讀懂觀測資料":
-          - community/ooni-data-format.md
-          - community/ooni-blocking-determination.md
-          - community/ooni-nettests-map.md
-          - community/asn-coverage-howto.md
-          - community/onionoo-mcp.md
-      - "2026 主題":
-          - community/roadmap-2026.md
-          - community/privacy-guide.md
-          - community/relay-on-campus.md
-          - community/payments-research.md
-      - !ENV [NAV_EVENT, "活動參與"]:
-          - activity/index.md
-          - activity/gg2026.md
-          - activity/coscup-2026-cfp.md
-          - activity/coscup-2026.md
-          - event-workshop-2025.md
-          - !ENV [NAV_EVENT_PREPARE, "籌備頁面"]:
-              - event-workshop-2025-prepare.md
+  # 社群本身的頁面（關於我們、參與方式、自架服務、三大主題、活動）2026-10 起搬到
+  # anoni.net 頂層，規劃見 toomore/anoni-net-ws#397。這裡只留一個連過去的入口，
+  # 知識類頁面換到下面的「架設與營運」與在地脈絡的「讀懂觀測資料」，文件站自己的
+  # 說明收進「關於文件站」。拿掉的頁面網址不變，照樣開得到，等轉址時再處理。
+  # 連結的 onion 版由 replace_sitename_anoni_onion.sh 改寫。
+  - "架設與營運":
+      - community/setup-tor-relay.md
+      - community/setup-tor-webtunnel.md
+      - community/setup-onion-service.md
+      - community/campus-tor-relay-proposal.md
+      - community/campus-tor-relay-sop.md
+      - community/campus-relay-faq.md
+      - community/pin-ipfs-mirror.md
+  - "關於文件站":
+      - about/how-you-are-reading.md
+      - offline.md
+      - community/contributor-handbook.md
+      - community/i18n.md
+      - community/zh-hant-naming.md
+      - community/setup-repo.md
+      - community/become-anoni.md
+      - community/brand-assets.md
+  - "社群 anoni.net": https://anoni.net/
 theme:
   name: material
   logo: assets/images/logo-white.svg
