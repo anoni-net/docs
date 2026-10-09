@@ -67,7 +67,7 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 [OONI](http://ooni.org/){target="_blank"} 是由全球一群志愿者伙伴通过 [Probe 观测程序](https://ooni.org/install/){target="_blank"} 协助检测所在地是否存在网络封锁、内容审查等问题。通过 OONI Probe 检查后的检测信息会上传到项目的[公开数据库](https://registry.opendata.aws/ooni/){target="_blank"}进行记录，并提供后续分析与利用。
 
-在 2023/11 ~ 2024/03 期间，我们通过[程序抓取](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"}分析公开数据，并对目前观测数据的情况进行初步检视，以了解是观测数据不足还是存在其他问题。
+在 2023/11 ~ 2024/03 期间，我们通过[程序抓取](https://github.com/anoni-net/asn-coverage){target="_blank"}分析公开数据，并对目前观测数据的情况进行初步检视，以了解是观测数据不足还是存在其他问题。
 
 根据 2023/12 的[报告](https://ocf.tw/p/ooni/report/202312.html){target="_blank"}中的发现，台湾的观察数据在 OONI Explorer 数据库中位列前十，以数量上来说是充足的，但就数据样本而言，大部分的观察数据都集中在 [AS3462](https://radar.cloudflare.com/zh-cn/as3462){target="_blank"} 和 [AS18041](https://radar.cloudflare.com/zh-cn/as18041){target="_blank"} 所贡献的观测数据，占所有观测数据的 78.94%。台湾目前约有 437 组 ASNs，观测数据中不重复的 ASNs 数量仅占 7.32%，多样性的观测显得不足。
 

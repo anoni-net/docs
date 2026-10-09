@@ -12,7 +12,7 @@ Set up your environment first with [Development environment setup](./setup-repo.
 
 !!! tip "Where to run these commands"
 
-    Every command below runs from the `anoni-net-docs/asn_coverage/` directory. On first use, `cd` into it, run `uv sync` to install dependencies, then follow the examples below using `uv run python ooni.py ...`.
+    Every command below runs from a clone of [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"}. On first use, clone the repository, `cd` into it, run `uv sync` to install dependencies, then follow the examples below using `uv run python ooni.py ...`.
 
 ## Three ways in
 
@@ -24,7 +24,7 @@ OONI's observation data has three entry points serving quite different purposes.
 | [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"} | Filtering by criteria, fetching one complete measurement | A cap on results per request |
 | [OONI Explorer](https://explorer.ooni.org/){target="_blank"} | Looking things up by hand, checking individual measurements | Not suited to programmatic access |
 
-`asn_coverage` takes the S3 route, since its purpose is coverage statistics rather than single lookups. For single measurements or small-scale filtering, [Reading an OONI measurement](./ooni-data-format.md) covers the API.
+ASN Coverage takes the S3 route, since its purpose is coverage statistics rather than single lookups. For single measurements or small-scale filtering, [Reading an OONI measurement](./ooni-data-format.md) covers the API.
 
 ## What the scripts can answer
 

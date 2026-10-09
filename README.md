@@ -2,19 +2,24 @@
 
 > 推廣與翻譯匿名網路 Tor、Tails 與 OONI 觀測工具
 
-「匿名網路社群 anoni.net」的核心文件系統。倉庫裡有四個目錄：對外的多語系文件網站、Tor 中繼監控後端、OONI 觀測資料分析 CLI，以及支撐前三者的共用腳本與 CI 檢查。
+「匿名網路社群 anoni.net」的核心文件系統。倉庫裡有兩個目錄：對外的多語系文件網站，以及支撐它的共用腳本與 CI 檢查。
 
 ## 📚 專案結構
 
 ```
 anoni-net-docs/
 ├── docs/           # MkDocs 多語系文件網站（zh-TW、zh-CN、en）
-├── pulse/          # Tor 中繼監控系統（FastAPI + PostgreSQL）
-├── asn_coverage/   # OONI 觀測資料與 ASN 涵蓋率分析 CLI
 └── tools/          # 共用腳本：編輯標準掃描、前端測試、資料產生、部署
 ```
 
-四個目錄各有自己的 README，授權也不同，見下方「授權」一節。
+兩個目錄的授權不同，見下方「授權」一節。
+
+文件站觀測頁用到的兩個工具在 2026-10 拆成獨立的 repo，commit 歷史一併帶過去：
+
+| 工具 | repo | 授權 |
+|------|------|------|
+| Pulse：Tor 中繼監控系統，提供觀測頁圖表的 API | [`anoni-net/pulse`](https://github.com/anoni-net/pulse) | MIT |
+| ASN Coverage：OONI 觀測資料的 ASN 涵蓋率分析 CLI | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 |
 
 ### 1. docs：文件網站
 
@@ -40,41 +45,7 @@ anoni-net-docs/
 - PWA 與離線閱讀：`docs/zh-TW/sw.js` 提供離線路徑，建置時由 `docs/hooks/offline_index.py` 產出各語系的 `offline-index.json`，離線內容管理頁據此列出可下載的章節
 - 三種部署目標：Clearnet（S3 加 Cloudflare）、Tor Onion（同一個 bucket 的另一個 prefix）、IPFS（IPNS 名稱指向最新版本）
 
-### 2. pulse：Tor 中繼監控系統
-
-定期收集與統計 Tor 網路中繼資料的系統，提供 API 供前端查詢與視覺化。
-
-**功能特點：**
-
-- 每小時收集指定國家（TW、JP、KR、HK）的 Tor 中繼資料
-- PostgreSQL 資料庫儲存歷史紀錄
-- FastAPI REST API 與 Vega-Lite 圖表端點
-- 健康檢查分兩個端點：`/api/healthz` 只回版本，`/api/readyz` 每次呼叫都連資料庫
-- Docker Compose 一鍵部署
-
-**技術架構：**
-
-- Backend: Python 3.12+ / FastAPI / psycopg 3
-- Database: PostgreSQL 17
-- Scheduler: Alpine crond
-- Deployment: Docker + Docker Compose
-
-### 3. asn_coverage：OONI 涵蓋率分析
-
-分析 OONI 觀測資料在各區域 ASN 的涵蓋狀況，協助識別測量盲點。
-
-**資料來源：**
-
-- OONI AWS S3 公開資料集（`ooni-data-eu-fra`）
-- 支援回溯歷史資料與指定時間區間分析
-
-**主要功能：**
-
-- 統計各 ASN 的 OONI 測量次數
-- 多執行緒平行下載與處理
-- 輸出 CSV 格式分析報告
-
-### 4. tools：共用腳本與檢查
+### 2. tools：共用腳本與檢查
 
 跨子專案的腳本，多數零外部相依，由 GitHub Actions 在 PR 觸發。
 
@@ -94,7 +65,6 @@ anoni-net-docs/
 
 - **Python**: 3.12+
 - **套件管理**: [uv](https://github.com/astral-sh/uv)
-- **Docker**: 用於 Pulse 系統部署（可選）
 - **Node.js**: 用於 `tools/` 的前端測試（可選，僅需標準庫）
 
 ### 安裝 uv
@@ -123,28 +93,6 @@ sh run_en.sh       # en
 ```
 
 直接執行 `mkdocs build -f mkdocs_en.yml` 會因為 `DOCS_DIR` 之類的環境變數落回預設值而產生假警報，驗證三語系請走這三支腳本。`build_docs_anoni*.sh` 是正式機的部署腳本，內含伺服器專用路徑，本機不要執行。
-
-#### Pulse 監控系統
-
-```bash
-cd pulse
-cp .env.sample .env
-# 編輯 .env 設定資料庫密碼等
-
-docker-compose up -d
-```
-
-API 文件位於：`http://localhost:8000/api/readme`
-
-#### ASN Coverage 分析工具
-
-```bash
-cd asn_coverage
-uv sync
-
-# 回溯最近 36 小時的 TW 觀測資料
-uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
-```
 
 ### 送 PR 之前
 
@@ -179,7 +127,6 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 | `invisible-chars` | PR | 全站隱形字元掃描。零寬字元、BOM、Markdown 裡的不斷行空白會擋 merge |
 | `tools-tests` | PR | `tools/` 底下零相依的測試，執行完不到十秒 |
 | `games-checks` | PR | Tor 中繼地球儀的互動與版面檢查（headless Chrome） |
-| `RIPE ASN name lists`、`Lookback OONI Data` | push `main`、每日排程、手動 | `asn_coverage/` 的資料抓取 |
 
 ## 📖 文件與資源
 
@@ -209,13 +156,10 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 | 範圍 | 授權 |
 |------|------|
 | `docs/` 網站內容（Markdown 等） | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| [`pulse/`](pulse/) 程式碼 | [MIT](pulse/LICENSE) |
-| [`asn_coverage/`](asn_coverage/) 程式碼 | [GPL-3.0](asn_coverage/LICENSE) |
 | [`tools/`](tools/) 腳本與測試 | [MIT](tools/LICENSE)（不含 `tools/data/`）|
 | `docs/zh-TW/games/tor-network/` 的外部資料 | 各自沿用原始授權，清單見 [`NOTICE`](./NOTICE) |
 
 - 根目錄 [`LICENSE`](LICENSE) 為 **CC-BY 4.0** 全文，作為文件與網站內容之預設授權標示。
-- 根目錄 [`LICENSE-asn_coverage`](LICENSE-asn_coverage) 為 **`asn_coverage` 子專案 GPL-3.0** 全文之副本，便於在根目錄瀏覽。以 [`asn_coverage/LICENSE`](asn_coverage/LICENSE) 為準。
 - 地球儀的外部資料中，`ooni.json` 為 CC BY-NC-SA 4.0，**禁止商業使用**，重製前請先看 [`NOTICE`](./NOTICE)。
 - `tools/data/` 放的是資料來源檔，座標部分取自 OpenStreetMap 採 ODbL，不在 `tools/` 的 MIT 範圍內，見 [`NOTICE`](./NOTICE)。
 
@@ -229,19 +173,24 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 
 > Promoting and translating Tor, Tails, and OONI measurement tools for anonymous networks
 
-The core documentation system for the "Anonymous Network Community anoni.net". The repository holds four directories: the public multilingual documentation site, the Tor relay monitoring backend, the OONI measurement analysis CLI, and the shared scripts and CI checks that support the first three.
+The core documentation system for the "Anonymous Network Community anoni.net". The repository holds two directories: the public multilingual documentation site, and the shared scripts and CI checks that support it.
 
 ## 📚 Project Structure
 
 ```
 anoni-net-docs/
 ├── docs/           # MkDocs multilingual documentation site (zh-TW, zh-CN, en)
-├── pulse/          # Tor relay monitoring system (FastAPI + PostgreSQL)
-├── asn_coverage/   # OONI measurement data and ASN coverage analysis CLI
 └── tools/          # Shared scripts: style linting, frontend tests, data generation, deployment
 ```
 
-Each directory has its own README and its own license. See the License section below.
+The two directories are under different licenses. See the License section below.
+
+The two tools behind the docs site's measurement pages were split into their own repositories in 2026-10, with their commit history:
+
+| Tool | Repository | License |
+|------|------------|---------|
+| Pulse: Tor relay monitoring, serving the API behind the measurement charts | [`anoni-net/pulse`](https://github.com/anoni-net/pulse) | MIT |
+| ASN Coverage: a CLI for ASN coverage analysis of OONI measurements | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 |
 
 ### 1. docs: Documentation Website
 
@@ -267,41 +216,7 @@ A multilingual site built on [MkDocs Material](https://squidfunk.github.io/mkdoc
 - PWA and offline reading: `docs/zh-TW/sw.js` handles the offline path, and `docs/hooks/offline_index.py` emits a per-locale `offline-index.json` at build time that the offline content manager reads to list downloadable sections
 - Three deployment targets: clearnet (S3 plus Cloudflare), Tor Onion (a second prefix in the same bucket), and IPFS (an IPNS name pointing at the latest build)
 
-### 2. pulse: Tor Relay Monitoring System
-
-Collects and aggregates Tor relay data on a schedule, exposing APIs for frontend queries and visualization.
-
-**Key features:**
-
-- Hourly collection of Tor relay data for selected countries (TW, JP, KR, HK)
-- PostgreSQL for historical records
-- FastAPI REST API with Vega-Lite chart endpoints
-- Two health endpoints: `/api/healthz` returns the version only, `/api/readyz` hits the database on every call
-- One-command deployment with Docker Compose
-
-**Technical stack:**
-
-- Backend: Python 3.12+ / FastAPI / psycopg 3
-- Database: PostgreSQL 17
-- Scheduler: Alpine crond
-- Deployment: Docker + Docker Compose
-
-### 3. asn_coverage: OONI Coverage Analysis
-
-Analyzes OONI measurement coverage across regional ASNs to help identify measurement blind spots.
-
-**Data source:**
-
-- OONI AWS S3 public dataset (`ooni-data-eu-fra`)
-- Supports historical lookback and explicit time ranges
-
-**Main features:**
-
-- Measurement counts per ASN
-- Multi-threaded parallel download and processing
-- CSV analysis reports
-
-### 4. tools: Shared Scripts and Checks
+### 2. tools: Shared Scripts and Checks
 
 Cross-subproject scripts, mostly dependency-free, triggered by GitHub Actions on pull requests.
 
@@ -321,7 +236,6 @@ Cross-subproject scripts, mostly dependency-free, triggered by GitHub Actions on
 
 - **Python**: 3.12+
 - **Package Manager**: [uv](https://github.com/astral-sh/uv)
-- **Docker**: For Pulse deployment (optional)
 - **Node.js**: For the frontend tests in `tools/` (optional, standard library only)
 
 ### Install uv
@@ -350,28 +264,6 @@ sh run_en.sh       # en
 ```
 
 Running `mkdocs build -f mkdocs_en.yml` directly lets variables such as `DOCS_DIR` fall back to their defaults and raises spurious warnings, so verify locales through these three scripts. The `build_docs_anoni*.sh` scripts are for the production host and contain server-specific paths; do not run them locally.
-
-#### Pulse Monitoring System
-
-```bash
-cd pulse
-cp .env.sample .env
-# Edit .env to configure database password, etc.
-
-docker-compose up -d
-```
-
-API documentation available at: `http://localhost:8000/api/readme`
-
-#### ASN Coverage Analysis Tool
-
-```bash
-cd asn_coverage
-uv sync
-
-# Lookback recent 36 hours of TW measurement data
-uv run python ooni.py lookback --units=36 --loc=TW --frame=hours
-```
 
 ### Before Opening a PR
 
@@ -406,7 +298,6 @@ Pushing `docs` does not always trigger a build. The trigger paths are limited to
 | `invisible-chars` | PR | Repository-wide invisible-character scan. Zero-width characters, BOM, and non-breaking spaces in Markdown block merge |
 | `tools-tests` | PR | The dependency-free tests under `tools/`, finishing in under ten seconds |
 | `games-checks` | PR | Interaction and layout checks for the Tor relay globe (headless Chrome) |
-| `RIPE ASN name lists`, `Lookback OONI Data` | push to `main`, daily schedule, manual | Data fetching for `asn_coverage/` |
 
 ## 📖 Documentation & Resources
 
@@ -434,13 +325,10 @@ This repository contains multiple licenses. Use the table below and each subdire
 | Scope | License |
 |-------|---------|
 | `docs/` site content (Markdown, etc.) | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| [`pulse/`](pulse/) code | [MIT](pulse/LICENSE) |
-| [`asn_coverage/`](asn_coverage/) code | [GPL-3.0](asn_coverage/LICENSE) |
 | [`tools/`](tools/) scripts and tests | [MIT](tools/LICENSE) (excluding `tools/data/`) |
 | Third-party data under `docs/zh-TW/games/tor-network/` | Retains its original license; see [`NOTICE`](./NOTICE) |
 
 - The root [`LICENSE`](LICENSE) file is the full **CC-BY 4.0** text used as the default license notice for documentation and site content.
-- Root [`LICENSE-asn_coverage`](LICENSE-asn_coverage) is a **duplicate copy** of the GPL-3.0 text for `asn_coverage`; [`asn_coverage/LICENSE`](asn_coverage/LICENSE) is authoritative.
 - Among the globe datasets, `ooni.json` is CC BY-NC-SA 4.0 and **prohibits commercial use**. Read [`NOTICE`](./NOTICE) before redistributing.
 - `tools/data/` holds source data files whose coordinates come partly from OpenStreetMap under ODbL. They fall outside the MIT license covering `tools/`; see [`NOTICE`](./NOTICE).
 

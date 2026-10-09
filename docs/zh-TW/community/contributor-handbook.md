@@ -182,7 +182,7 @@ icon: material/shield-account-outline
 <body>
 ```
 
-常用 type：`docs`、`feat`、`fix`、`chore`、`refactor`。scope 用語系或子專案名稱（`zh-TW`、`zh-CN`、`en`、`pulse`、`asn_coverage`）。
+常用 type：`docs`、`feat`、`fix`、`chore`、`refactor`。scope 用語系或子專案名稱（`zh-TW`、`zh-CN`、`en`、`tools`）。
 
 ### PR 描述
 
@@ -234,7 +234,7 @@ zh-TW 是 single source of truth，zh-CN 與 en 從 zh-TW 同步。詳細流程�
 
 ### 入口檔
 
-- repo 根目錄的 `AGENTS.md` 整理 repo 結構、開發指令與容易出錯的地方，多數 AI 工具會自動讀它。`pulse/` 另有一份
+- repo 根目錄的 `AGENTS.md` 整理 repo 結構、開發指令與容易出錯的地方，多數 AI 工具會自動讀它。`tools/` 與 `.github/` 各有一份
 - `CLAUDE.md` 引入 `AGENTS.md`，另外說明 `.claude/` 底下的 subagent 與 skill
 - 使用的工具不會自動讀這兩份時，開工前把 `AGENTS.md` 與這份百科的「寫作風格規範」一節提供給它
 

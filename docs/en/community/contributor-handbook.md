@@ -186,7 +186,7 @@ Conventional commits:
 <body>
 ```
 
-Common types: `docs`, `feat`, `fix`, `chore`, `refactor`. The scope is a language or sub-project name (`zh-TW`, `zh-CN`, `en`, `pulse`, `asn_coverage`).
+Common types: `docs`, `feat`, `fix`, `chore`, `refactor`. The scope is a language or sub-project name (`zh-TW`, `zh-CN`, `en`, `tools`).
 
 ### PR descriptions
 
@@ -241,7 +241,7 @@ We do not restrict which AI service contributors use for writing, translation, o
 
 ### Entry files
 
-- `AGENTS.md` at the repository root covers the repository layout, development commands, and the places where things tend to go wrong. Most AI tools read it automatically. `pulse/` has its own.
+- `AGENTS.md` at the repository root covers the repository layout, development commands, and the places where things tend to go wrong. Most AI tools read it automatically. `tools/` and `.github/` each have their own.
 - `CLAUDE.md` imports `AGENTS.md` and adds notes on the subagents and skill under `.claude/`.
 - If your tool does not read either file on its own, give it `AGENTS.md` and the "Writing style" part of this handbook before you start.
 
