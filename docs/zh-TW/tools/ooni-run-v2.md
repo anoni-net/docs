@@ -181,7 +181,7 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 
     1. 確認問題：使用 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} 進一步調查，查詢具體的測量結果，了解該網站是否已被確認封鎖或出現異常情況。
     2. 分析結果：根據測量結果分析問題類型，看是否是暫時性的網路問題或是內容審查所導致。
-    3. 分享測試結果：考慮將你的測試結果分享給 [OONI 社群](https://slack.ooni.org/){target="_blank"}和[其他](../about/index.md){target="_blank"}關注**網路自由**的組織，幫助更多人了解問題的範圍和嚴重性。
+    3. 分享測試結果：考慮將你的測試結果分享給 [OONI 社群](https://slack.ooni.org/){target="_blank"}和[其他](https://anoni.net/about/){target="_blank"}關注**網路自由**的組織，幫助更多人了解問題的範圍和嚴重性。
     4. 報告問題：若確認為網路封鎖，你可以向相關監督機關或法律顧問反映問題，探索進一步的合法行動。
     5. 嘗試解決方法：如果你需要訪問該網站，可嘗試透過 VPN 換區域、Tor 瀏覽或其他繞過審查的方法來解決訪問限制問題。
 

@@ -58,7 +58,7 @@ Note that the track itself runs mostly in Mandarin, though the crew roles are la
 
 - [COSCUP 2026 Anonymity Networks Community track: two days, Aug 8–9, free entry, just walk in](./coscup-2026-community-track.md)
 - [How to contribute and claim a topic](../../community/how-to-contribute.md)
-- [About us](../../about/index.md)
+- [About us](https://anoni.net/en/about/)
 
 !!! info "How to sign up"
 

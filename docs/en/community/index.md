@@ -9,7 +9,7 @@ icon: material/account-group
 
 The community behind anoni.net is small, volunteer-run, and built around self-hosted infrastructure. Documented partners are Tor Project, OONI, EFF, and our university hosts in Taiwan; we are open to working with more peer organizations, researchers, journalists, and individual contributors. This page lists the channels.
 
-If you are evaluating us before a collaboration, the [About page](../about/index.md) covers governance, partnerships, and how to verify what we do.
+If you are evaluating us before a collaboration, the [About page](https://anoni.net/en/about/) covers governance, partnerships, and how to verify what we do.
 
 ## :material-handshake-outline: What we welcome
 
@@ -100,7 +100,7 @@ We do not advise on, or assist with, illegal activity (see the [governance code 
 
 ## :material-information-outline: Background reading
 
-- [About anoni.net](../about/index.md) — governance, partnerships, licensing, how to verify what we do
+- [About anoni.net](https://anoni.net/en/about/) — governance, partnerships, licensing, how to verify what we do
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame
 - [Regional Observatory](../regional/index.md) — what we publish empirically
 - [Self-skills evaluation](./skill-level.md) — work out where to start across Tor, Tails, and OONI

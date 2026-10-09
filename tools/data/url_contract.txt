@@ -14,7 +14,14 @@
 	#近期公告
 /404.html
 /about/
-	#關於我們
+	#三個語系
+	#內容範圍
+	#寫作與審稿
+	#授權
+	#更正
+	#相關閱讀
+	#閱讀方式
+	#關於文件站
 /about/community/ -> /community/
 /about/community/communication-tools/ -> /community/tools/
 /about/community/participate/ -> /community/how-to-contribute/
@@ -2368,17 +2375,14 @@
 	#anoninet-Docs
 /en/404.html
 /en/about/
-	#About-anoninet
-	#Funding-and-resources
-	#Governance
-	#How-to-verify-what-we-do
+	#About-the-Docs
+	#Corrections
+	#How-pages-are-written-and-reviewed
 	#Licensing
-	#Other-engagement-and-contributions
-	#Partnerships-and-collaborations
-	#Reaching-us
-	#What-we-are
-	#What-we-are-working-on-in-2026
-	#What-we-publish
+	#Related-reading
+	#Three-editions
+	#Ways-to-read
+	#What-the-site-covers
 /en/about/community/ -> /en/community/
 /en/about/community/communication-tools/ -> /en/community/
 /en/about/community/participate/ -> /en/community/
@@ -7248,7 +7252,14 @@
 	#近期公告
 /zh-cn/404.html
 /zh-cn/about/
-	#关于我们
+	#三个语言版本
+	#关于文档站
+	#内容范围
+	#写作与审稿
+	#授权
+	#更正
+	#相关阅读
+	#阅读方式
 /zh-cn/about/community/ -> /zh-cn/community/
 /zh-cn/about/community/communication-tools/ -> /zh-cn/community/tools/
 /zh-cn/about/community/participate/ -> /zh-cn/community/how-to-contribute/

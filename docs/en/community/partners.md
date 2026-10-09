@@ -10,7 +10,7 @@ This page is for civil-society groups, advocacy organizations, newsrooms, indepe
 
 Taiwan is the only jurisdiction where we have first-hand standing. Mainland China, Hong Kong, Macau, Singapore, and Malaysia we follow through public sources and contacts in the diaspora, and we say so whenever it matters to the work.
 
-Apart from the public projects listed under [Partnerships and collaborations](../about/index.md#Partnerships-and-collaborations) on the About page, we don't publish which organizations have worked with us, and no page describes the tools a particular organization uses. For advocacy groups and newsrooms in the region, having asked a community for security help is itself something that can end up in a file.
+Apart from the public projects listed under [Partnerships and collaborations](https://anoni.net/en/about/#partnerships-and-collaborations) on the About page, we don't publish which organizations have worked with us, and no page describes the tools a particular organization uses. For advocacy groups and newsrooms in the region, having asked a community for security help is itself something that can end up in a file.
 
 ## Who this is for
 
@@ -93,4 +93,4 @@ What you send us is used only to arrange the work. It is not passed to third par
 
 - [How to Contribute](./how-to-contribute.md): how individuals join the community's work
 - [Regional Observatory](../regional/index.md): what we cover in each jurisdiction and how
-- [About anoni.net](../about/index.md): the partnerships we have and how we are funded
+- [About anoni.net](https://anoni.net/en/about/): the partnerships we have and how we are funded

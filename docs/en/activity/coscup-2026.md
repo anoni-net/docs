@@ -94,7 +94,7 @@ Aug 9 is a full day of seven accepted talks, spanning network and censorship bas
 
 ## :material-account-voice: Speakers { #speakers }
 
-The first three Aug 8 morning primers are led by anoni.net community members (people who actually run Tor relays and work on the Traditional Chinese localization and bug reports for Tails and OONI), and the fourth is an invited talk; more about the community is on [About us](../about/index.md). Below are the invited and co-organized speakers in program order — click a name for their full bio on COSCUP pretalx.
+The first three Aug 8 morning primers are led by anoni.net community members (people who actually run Tor relays and work on the Traditional Chinese localization and bug reports for Tails and OONI), and the fourth is an invited talk; more about the community is on [About us](https://anoni.net/en/about/). Below are the invited and co-organized speakers in program order — click a name for their full bio on COSCUP pretalx.
 
 **Aug 8 morning · invited talk**
 
@@ -126,7 +126,7 @@ This year the community is partnering with [ETHTaipei](https://ethtaipei.org/){t
 - [COSCUP 2026 Call for Proposals](./coscup-2026-cfp.md): topics, cross-community collaboration, and how to submit
 - [Anonymous network workshop 2025 (event recap)](../event-workshop-2025.md): last year's two-day workshop and roundtables
 - [From 2025 to 2026: privacy guidance, campus Tor relay contest, anonymous payments](../blog/posts/2025to2026.md)
-- [About us](../about/index.md)
+- [About us](https://anoni.net/en/about/)
 - [How to contribute](../community/how-to-contribute.md): the entry point for helping with Tor, OONI, translation, or running a node
 
 !!! info "Updates and contact"

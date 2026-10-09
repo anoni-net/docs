@@ -12,7 +12,7 @@ icon: material/gavel
 
 Once a community grows past a certain size, it helps to write down how decisions get made so the same basic principles don't get re-argued every time. This charter sets out anoni.net's roles, decision-making, dispute resolution, and code of conduct. It is a living document. Significant changes are discussed openly in Matrix before any revision is merged.
 
-This is the full charter behind the governance headlines on the [About page](../about/index.md). Two ways to read it: first-time participants can skim the [Roles](#Roles) and [Code of conduct](#Code-of-conduct) sections to understand the basic expectations of joining. Long-time members, proposal authors, and core members who handle disputes should read it through once.
+This is the full charter behind the governance headlines on the [About page](https://anoni.net/en/about/). Two ways to read it: first-time participants can skim the [Roles](#Roles) and [Code of conduct](#Code-of-conduct) sections to understand the basic expectations of joining. Long-time members, proposal authors, and core members who handle disputes should read it through once.
 
 ## Scope
 
@@ -177,4 +177,4 @@ In an emergency (for example, a new form of harassment that calls for an immedia
 - [Community & Collaboration](./index.md) — how to reach us and what we welcome
 - [How to contribute and claim a topic](./how-to-contribute.md) — the entry path for first-time participants
 - [Translation and localization](./i18n.md) — how the three editions relate
-- [About anoni.net](../about/index.md) — the governance headlines this charter expands on
+- [About anoni.net](https://anoni.net/en/about/) — the governance headlines this charter expands on

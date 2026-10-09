@@ -139,6 +139,6 @@ The conference is **free to attend** and not run for ticket revenue, which keeps
 
 ## Related links
 
-- [About us](../about/index.md)
+- [About us](https://anoni.net/en/about/)
 - [From 2025 to 2026: privacy guidance, campus Tor relay contest, anonymous payments](../blog/posts/2025to2026.md)
 - [Anonymous network workshop 2025 (event recap)](../event-workshop-2025.md)

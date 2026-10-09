@@ -15,7 +15,7 @@ hide:
 
 [:material-email-fast-outline: Newsletter](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/en/feed_rss_created.xml)
 
-These docs are maintained by the [anoni.net community](https://anoni.net/en/){target="_blank"}. See [About](./about/index.md) for who we are.
+These docs are maintained by the [anoni.net community](https://anoni.net/en/){target="_blank"}. See [About](https://anoni.net/en/about/) for who we are.
 
 ## :material-compass-outline: Why this site exists
 
@@ -41,7 +41,7 @@ If one of civil society, a newsroom, independent journalism, open-source develop
 
     ---
 
-    Peer organizations, funders, and AP-based contributors who want to work with a Taiwan-based community on regional measurement, advocacy, or documentation. Existing partnerships (Tor Project, OONI, EFF, university hosts) are listed on the [About page](./about/index.md).
+    Peer organizations, funders, and AP-based contributors who want to work with a Taiwan-based community on regional measurement, advocacy, or documentation. Existing partnerships (Tor Project, OONI, EFF, university hosts) are listed on the [About page](https://anoni.net/en/about/).
 
     [:octicons-arrow-right-24: Working with organizations](./community/partners.md)
 

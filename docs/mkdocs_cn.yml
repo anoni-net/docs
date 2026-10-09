@@ -192,7 +192,9 @@ nav:
       - community/setup-tor-webtunnel.md
       - community/setup-onion-service.md
       - community/pin-ipfs-mirror.md
+  # about/index.md 排第一，navigation.indexes 才会把它当成这一组的索引页。
   - "关于文档站":
+      - about/index.md
       - about/how-you-are-reading.md
       - offline.md
       - community/contributor-handbook.md
