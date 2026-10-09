@@ -157,7 +157,7 @@ A few things keep a codebook workable: agree on meanings in person and do not wr
 
 We formatted the 7,776-word list as an A5 dice-lookup booklet, complete with a cover, instructions, a QR code, and a copyright page. It is the printed version of the table Method 1 above looks words up in, so anyone who would rather not install anything and just roll dice can print one and get started.
 
-The wordlist is CC-BY-4.0, so anyone can print it and hand it out. When the community runs in-person events (mostly in Taiwan), we bring printed copies; if you run into us, you are welcome to say hello. See [Activity](../activity/index.md) for where we will be next, or [Stay Informed](https://anoni.net/en/contact/) for updates.
+The wordlist is CC-BY-4.0, so anyone can print it and hand it out. When the community runs in-person events (mostly in Taiwan), we bring printed copies; if you run into us, you are welcome to say hello. See [Activity](https://anoni.net/en/events/) for where we will be next, or [Stay Informed](https://anoni.net/en/contact/) for updates.
 
 !!! tip "Download the A5 booklet (PDF)"
     [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"} (about 36 pages; prints on A4 or US Letter with any home or shop printer, then fold into a booklet). The wordlist data is CC-BY-4.0, so you are welcome to print, hand out, and reuse it — please keep the attribution on the colophon page.
@@ -181,7 +181,7 @@ The wordlist is CC-BY-4.0, so anyone can print it and hand it out. When the comm
 
 - [:material-hand-heart-outline: How to Contribute](../community/how-to-contribute.md)
 - [:material-translate-variant: Localization and Translation](../community/i18n.md)
-- [:material-calendar-star: Activity](../activity/index.md)
+- [:material-calendar-star: Activity](https://anoni.net/en/events/)
 
 </div>
 

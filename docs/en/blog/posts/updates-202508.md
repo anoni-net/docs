@@ -15,7 +15,7 @@ description: "Current Project Status and Updates 2025/08"
 
 ![Project Update](./assets/images/post-update.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-The [workshop](../../event-workshop-2025.md){target="_blank"} held from 8/9 to 8/10 was successfully completed. We are currently preparing for post-workshop discussions and reviews, and considering future directions for improvement. Whether or not you participated in the two-day event, we sincerely thank you for your continued attention to our activities.
+The [workshop](https://anoni.net/en/events/workshop-2025/){target="_blank"} held from 8/9 to 8/10 was successfully completed. We are currently preparing for post-workshop discussions and reviews, and considering future directions for improvement. Whether or not you participated in the two-day event, we sincerely thank you for your continued attention to our activities.
 
 Up next, we would like to share some updates with you for the period in August 2025.
 

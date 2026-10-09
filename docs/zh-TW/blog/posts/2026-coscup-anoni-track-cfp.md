@@ -17,7 +17,7 @@ description: "匿名網路社群公開徵稿：投稿 COSCUP 2026 社群議程�
 
 匿名網路社群現正公開徵稿，邀請你投稿 **COSCUP 2026 匿名網路社群議程軌**。這是社群第二年在 COSCUP 推動相關議程。我們希望透過公開徵稿，讓更多關心或實踐「匿名」的夥伴加入分享。議程軌為期兩天，涵蓋演講、工作坊、Demo 與實務分享。
 
-[:material-arrow-right-circle-outline: 閱讀完整徵稿資訊與投稿說明](../../activity/coscup-2026-cfp.md){ .md-button .md-button--primary target="_blank"}
+[:material-arrow-right-circle-outline: 閱讀完整徵稿資訊與投稿說明](https://anoni.net/events/coscup-2026-cfp/){ .md-button .md-button--primary target="_blank"}
 
 <!-- more -->
 
@@ -36,7 +36,7 @@ description: "匿名網路社群公開徵稿：投稿 COSCUP 2026 社群議程�
 - **國際參與**：聚焦在地社群與國際組織協作，內容可涵蓋 Tor Project、Tails、OONI、EFF 等跨國合作與在地落地經驗。
 - **其他相關主題**：可涵蓋吹哨者保護、匿名舉報、安全通訊、去識別化與 metadata、開源授權、可重現建構等延伸方向。
 
-詳細範圍與提案方向，請以[徵稿頁](../../activity/coscup-2026-cfp.md){target="_blank"}說明為準。
+詳細範圍與提案方向，請以[徵稿頁](https://anoni.net/events/coscup-2026-cfp/){target="_blank"}說明為準。
 
 ## 主題聚焦
 

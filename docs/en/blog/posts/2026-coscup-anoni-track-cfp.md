@@ -17,7 +17,7 @@ description: "Anonymity Networks Community is accepting proposals for the COSCUP
 
 The Anonymity Networks Community is now accepting proposals for the **COSCUP 2026 Anonymity Networks Community Track**. This is our second year running related sessions at COSCUP. Through this open CFP, we hope to invite more people who care about or actively practice anonymity to share their work. The track runs for two days and includes talks, workshops, demos, and field experience sharing.
 
-[:material-arrow-right-circle-outline: Read the full CFP details and submission guide](../../activity/coscup-2026-cfp.md){ .md-button .md-button--primary target="_blank"}
+[:material-arrow-right-circle-outline: Read the full CFP details and submission guide](https://anoni.net/en/events/coscup-2026-cfp/){ .md-button .md-button--primary target="_blank"}
 
 <!-- more -->
 
@@ -36,7 +36,7 @@ The Anonymity Networks Community is now accepting proposals for the **COSCUP 202
 - **International participation**: local-to-global collaboration with organizations such as Tor Project, Tails, OONI, and EFF, including concrete local implementation experience.
 - **Other related topics**: whistleblower protection, anonymous reporting, secure communication, de-identification and metadata, open-source licensing, and reproducible builds.
 
-For topic scope and proposal direction, please refer to the [CFP page](../../activity/coscup-2026-cfp.md){target="_blank"}.
+For topic scope and proposal direction, please refer to the [CFP page](https://anoni.net/en/events/coscup-2026-cfp/){target="_blank"}.
 
 ## Focus Areas
 

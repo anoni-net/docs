@@ -46,7 +46,7 @@ All three roles follow a set routine. We hold one online briefing the week befor
 
 When you are not on a shift you can go listen to talks, and the Aug 8 afternoon is almost entirely free. Meals during your shift are covered by the community. Both the briefing and the event itself put you in direct contact with the speakers on this track.
 
-This year the track covers how the internet and censorship work, OpenWRT home networks, the practical work of building the NTNU Tor node, browser-fingerprint tracking, the right to opt out of the national health-insurance database, and a 2026 privacy guide spanning individuals and organizations. The full schedule and session summaries are on the [event page](../../activity/coscup-2026.md).
+This year the track covers how the internet and censorship work, OpenWRT home networks, the practical work of building the NTNU Tor node, browser-fingerprint tracking, the right to opt out of the national health-insurance database, and a 2026 privacy guide spanning individuals and organizations. The full schedule and session summaries are on the [event page](https://anoni.net/en/events/coscup-2026/).
 
 ## No experience needed
 
@@ -54,7 +54,7 @@ The community's regular work is translating the interfaces of open-source tools 
 
 Note that the track itself runs mostly in Mandarin, though the crew roles are largely operational and don't require following the talks.
 
-[See the full schedule and session summaries](../../activity/coscup-2026.md){ .md-button .md-button--primary }
+[See the full schedule and session summaries](https://anoni.net/en/events/coscup-2026/){ .md-button .md-button--primary }
 
 - [COSCUP 2026 Anonymity Networks Community track: two days, Aug 8–9, free entry, just walk in](./coscup-2026-community-track.md)
 - [How to contribute and claim a topic](../../community/how-to-contribute.md)

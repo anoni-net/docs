@@ -379,6 +379,12 @@ plugins:
         # These pages are the fallback for hosts without that nginx, such as the IPFS mirror.
         'contact.md': 'https://anoni.net/en/contact/'
         'community/tools.md': 'https://anoni.net/en/services/'
+        'activity/index.md': 'https://anoni.net/en/events/'
+        'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
+        'activity/coscup-2026-cfp.md': 'https://anoni.net/en/events/coscup-2026-cfp/'
+        'activity/coscup-2026.md': 'https://anoni.net/en/events/coscup-2026/'
+        'event-workshop-2025.md': 'https://anoni.net/en/events/workshop-2025/'
+        'event-workshop-2025-prepare.md': 'https://anoni.net/en/events/workshop-2025-prepare/'
         'community/index.md': 'https://anoni.net/en/join/'
         'community/governance.md': 'https://anoni.net/en/about/governance/'
         'community/partners.md': 'https://anoni.net/en/about/partners/'

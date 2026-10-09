@@ -36,7 +36,7 @@ The main thread from 2 to 8 September was offline reading and passkeys, already 
 - [File hash comparison](../../utils/hash.md) computes a SHA-256 to check against the string you were given, confirming that a file delivered by hand or pulled off a download matches the original, and it handles files of several gigabytes.
 - [Speaking online from Singapore and Malaysia](../../scenarios/singapore-malaysia-speech.md) gained Traditional and Simplified Chinese versions; the English one was already up.
 - [Preparing for and responding to a network shutdown](../../scenarios/shutdown.md) filled in how to work during an outage, judgement calls when alone, dividing tasks in a shared household, and the location exposure that comes with reconnecting.
-- [Global Gathering 2026](../../activity/gg2026.md) gained an on-site page for finding people, with a photo of the printed wrapper, a globe screenshot and a payment illustration. Six terms of art gained footnotes, placed where attendees on site had trouble reading.
+- [Global Gathering 2026](https://anoni.net/en/events/gg2026/) gained an on-site page for finding people, with a photo of the printed wrapper, a globe screenshot and a payment illustration. Six terms of art gained footnotes, placed where attendees on site had trouble reading.
 
 ## The Lab and the WebRTC transfer measurement
 
