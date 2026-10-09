@@ -275,7 +275,7 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 - 有 lightbox（點擊放大）時，HTML 用 `<figure>` + `<a href>` 包 `<img>`，兩個的相對路徑都要對齊
 - 三個語系的 `assets/images/` 各自獨立，補了一個語系記得補另外兩個。漏掉的話建置不會報錯，站上就是一頁破圖，執行 `python3 tools/check_image_refs.py` 掃得出來
 
-示意圖（流程圖、架構圖、對照矩陣、時間軸）的原始檔放 `docs/diagrams/`，發布到 assets.anoni.net，三個語系引用同一個網址。製作、命名與發布流程見[品牌識別](brand-assets.md)的「貢獻技術圖示」一節。
+示意圖（流程圖、架構圖、對照矩陣、時間軸）的原始檔放 `docs/diagrams/`，發布到 assets.anoni.net，三個語系引用同一個網址。製作、命名與發布流程見[文件站的視覺規範](visual-guide.md)的「貢獻技術圖示」一節。
 
 ## 跨檔連結規則
 
@@ -312,7 +312,7 @@ icon: material/shield-account-outline
 - `icon` 以 `material/` 為主，少數情境用 `fontawesome-solid-`、`fontawesome-brands-`
 - front matter 之後緊接 H1，寫成 `# :material-icon-name: 標題`，圖示通常與 `icon` 欄位相同
 - blog 文章另外要有 `date`、`slug`、`categories`、`authors`
-- 社群分享卡要換標題、描述或底圖時，見[品牌素材](./brand-assets.md)的「社群分享卡」一節
+- 社群分享卡要換標題、描述或底圖時，見[文件站的視覺規範](./visual-guide.md)的「社群分享卡」一節
 
 ### 註腳
 

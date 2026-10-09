@@ -202,7 +202,7 @@ nav:
       - community/zh-hant-naming.md
       - community/setup-repo.md
       - community/become-anoni.md
-      - community/brand-assets.md
+      - community/visual-guide.md
   - "社群 anoni.net": https://anoni.net/zh-cn/
 theme:
   name: material
@@ -367,6 +367,7 @@ plugins:
         'contact.md': 'https://anoni.net/zh-cn/contact/'
         'community/tools.md': 'https://anoni.net/zh-cn/services/'
         'community/how-to-contribute.md': 'https://anoni.net/zh-cn/join/'
+        'community/brand-assets.md': 'https://anoni.net/zh-cn/brand/'
         'activity/index.md': 'https://anoni.net/zh-cn/events/'
         'activity/gg2026.md': 'https://anoni.net/zh-cn/events/gg2026/'
         'activity/coscup-2026-cfp.md': 'https://anoni.net/zh-cn/events/coscup-2026-cfp/'

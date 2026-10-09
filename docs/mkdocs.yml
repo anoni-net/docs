@@ -223,7 +223,7 @@ nav:
       - community/zh-hant-naming.md
       - community/setup-repo.md
       - community/become-anoni.md
-      - community/brand-assets.md
+      - community/visual-guide.md
   - "社群 anoni.net": https://anoni.net/
 theme:
   name: material
@@ -393,6 +393,7 @@ plugins:
         'contact.md': 'https://anoni.net/contact/'
         'community/tools.md': 'https://anoni.net/services/'
         'community/how-to-contribute.md': 'https://anoni.net/join/'
+        'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'
         'activity/coscup-2026-cfp.md': 'https://anoni.net/events/coscup-2026-cfp/'

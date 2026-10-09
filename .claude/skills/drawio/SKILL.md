@@ -7,12 +7,12 @@ description: Always use when user asks to create, generate, draw, or design a di
 
 ## Using this skill in anoni-net/docs
 
-This repository's diagram workflow is described in `docs/zh-TW/community/brand-assets.md`, section 「貢獻技術圖示」. Where it differs from the upstream defaults below, that section wins:
+This repository's diagram workflow is described in `docs/zh-TW/community/visual-guide.md`, section 「貢獻技術圖示」. Where it differs from the upstream defaults below, that section wins:
 
 - Save the source in `docs/diagrams/` as an editable `.drawio.svg` (SVG with the diagram XML embedded). Name it `<slug>.<lang>.drawio.svg`; drop the language part when the diagram has no text or only English terms.
 - The `.drawio.svg` is the source file. Do not export PNG or PDF for the site, and do not delete it after export. To produce it from a `.drawio` file, export with `-f svg -e`, remove the intermediate `.drawio`, and confirm `grep -c mxfile <file>` prints 1 or more.
 - Never overwrite an existing diagram with the same filename. For a substantive change, save under a new name (the convention is a version suffix such as `-v2`) and update the Markdown references with it.
-- Use the brand colour palette from `brand-assets.md`.
+- Use the diagram colours in `visual-guide.md`, section 「示意圖用色」. The shared brand tokens behind them are on https://anoni.net/brand/.
 - Publishing to assets.anoni.net needs server access, so `tools/publish_diagrams.sh` is run by a maintainer. Add the diagram to `docs/diagrams/` in the pull request and say in the description that it needs publishing.
 
 # Draw.io Diagram Skill

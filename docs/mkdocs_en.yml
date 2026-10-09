@@ -211,7 +211,7 @@ nav:
       - community/zh-hant-naming.md
       - community/setup-repo.md
       - community/become-anoni.md
-      - community/brand-assets.md
+      - community/visual-guide.md
   - "Community anoni.net": https://anoni.net/en/
 theme:
   name: material
@@ -379,6 +379,7 @@ plugins:
         # These pages are the fallback for hosts without that nginx, such as the IPFS mirror.
         'contact.md': 'https://anoni.net/en/contact/'
         'community/tools.md': 'https://anoni.net/en/services/'
+        'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
         'activity/coscup-2026-cfp.md': 'https://anoni.net/en/events/coscup-2026-cfp/'
@@ -421,7 +422,6 @@ plugins:
         'advanced.md': 'advanced/index.md'
         'blog/2025/01/專案重啟-2025.md': 'blog/index.md'
         'blog/2025/01/项目重启-2025.md': 'blog/index.md'
-        'blog/2025/02/g0v-hackath65n.md': 'blog/index.md'
         'blog/2025/03/2025-probe-security-without-identification.md': 'blog/index.md'
         'blog/2025/03/arti_1_4_1_released.md': 'blog/index.md'
         'blog/2025/04/2025-ooni-explorer-thematic-censorship-pages.md': 'blog/index.md'

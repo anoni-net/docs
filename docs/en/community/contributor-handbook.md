@@ -196,7 +196,7 @@ Screenshots (application windows, web pages) go in `docs/<lang>/assets/images/`:
 - For a lightbox image, wrap `<img>` in `<figure>` and `<a href>`, and keep both relative paths aligned.
 - The three language trees have independent copies of `assets/images/`. Adding a file to one means adding it to the other two. A missing copy produces no build error, just a broken image on the page. `python3 tools/check_image_refs.py` finds them.
 
-Diagrams (flowcharts, architecture diagrams, comparison matrices, timelines) keep their source in `docs/diagrams/`, are published to assets.anoni.net, and are referenced by all three languages through the same URL. See "Contributing technical diagrams" in the [brand guide](brand-assets.md) for how to make, name, and publish one.
+Diagrams (flowcharts, architecture diagrams, comparison matrices, timelines) keep their source in `docs/diagrams/`, are published to assets.anoni.net, and are referenced by all three languages through the same URL. See "Contributing technical diagrams" in the [docs visual guide](visual-guide.md) for how to make, name, and publish one.
 
 ## Cross-file links
 
@@ -233,7 +233,7 @@ icon: material/shield-account-outline
 - `icon` is usually a `material/` icon, occasionally `fontawesome-solid-` or `fontawesome-brands-`.
 - The H1 follows the front matter directly as `# :material-icon-name: Title`, normally with the same icon as the `icon` field.
 - Blog posts also need `date`, `slug`, `categories`, and `authors`.
-- To change a page's social card title, description, or background, see "Social cards" in [Brand assets](./brand-assets.md).
+- To change a page's social card title, description, or background, see "Social cards" in the [docs visual guide](./visual-guide.md).
 
 ### Footnotes
 

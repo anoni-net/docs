@@ -59,5 +59,6 @@ A few pieces of outside data keep their original licenses. For example, the OONI
 
 - [Contributor Handbook](../community/contributor-handbook.md)
 - [Localization and Translation](../community/i18n.md)
-- [Brand Assets](../community/brand-assets.md)
+- [Docs Visual Guide](../community/visual-guide.md)
+- [Brand Assets](https://anoni.net/en/brand/)
 - [The anoni.net community](https://anoni.net/en/)
