@@ -45,7 +45,8 @@ icon: material/console
 
 简体中文版由志愿者维护，缺口比正体中文版大，这条线的进入门槛最低。
 
-- [贡献者百科](../community/contributor-handbook.md)：写作风格规范的单一来源，动笔前先读
+- [写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}：三个网站共用的写作规则，动笔前先读
+- [贡献者百科](../community/contributor-handbook.md)：文件名、链接格式、PR 流程与翻译流程
 - [中文化与文件翻译](../community/i18n.md)：三语系的翻译流程
 - [项目研究预先准备](../community/setup-repo.md)：开始一个新主题之前的准备工作
 

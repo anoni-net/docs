@@ -51,7 +51,8 @@ icon: material/console
 
 ### 會寫文件，會翻譯
 
-- [貢獻者百科](../community/contributor-handbook.md)：寫作風格規範的單一來源，動筆前先讀
+- [寫作風格規範](https://anoni.net/join/writing-style/){target="_blank"}：三個網站共用的寫作規則，動筆前先讀
+- [貢獻者百科](../community/contributor-handbook.md)：檔名、連結格式、PR 流程與翻譯流程
 - [中文化與文件翻譯](../community/i18n.md)：三語系的翻譯流程
 - [專案研究預先準備](../community/setup-repo.md)：開始一個新主題之前的準備工作
 

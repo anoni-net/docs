@@ -51,7 +51,8 @@ Campus relays need someone who can talk to administration and legal. The technic
 
 ### You write documentation, or translate
 
-- [Contributor handbook](../community/contributor-handbook.md): the single source for writing conventions, read it before drafting
+- [Writing style](https://anoni.net/en/join/writing-style/){target="_blank"}: the writing rules shared by all three sites, read it before drafting
+- [Contributor handbook](../community/contributor-handbook.md): file naming, link format, the PR process and translation
 - [Localization and translation](../community/i18n.md): the workflow across three language editions
 - [Development environment setup](../community/setup-repo.md): preparation before starting a new topic
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """anoni.net/docs 編輯標準掃描器（Tier 1）。
 
-把貢獻者百科「寫作風格規範」裡可機器判斷的硬規則做成檢查，輸出 file:line 與
+把社群首頁「寫作風格規範」（https://anoni.net/join/writing-style/）裡可機器判斷的硬規則做成檢查，輸出 file:line 與
 規則代碼。語意層的規則（去 AI 味、安全配方、操作者帳號、三段對稱）需 AI 或人工
 複審，不在此掃描，清單見 tools/README.md。
 
@@ -66,8 +66,8 @@ PROSE_RULES = [
      "段落開頭不要用粗體整句，並列項目改成「**標籤**：內文」或升成小標題"),
 ]
 
-# docs/en 的規則集。英文版的編輯標準見 docs/en/community/contributor-handbook.md
-# 的 Writing style 一節，跟中文那套是兩組獨立規則，不是翻譯：破折號與分號在英文
+# docs/en 的規則集。英文版的編輯標準見 https://anoni.net/en/join/writing-style/
+#（原始檔在 anoni-net/www），跟中文那套是兩組獨立規則，不是翻譯：破折號與分號在英文
 # 是正常標點，「不是…而是…」「這」堆疊這類判準在英文不存在。
 #
 # 這裡只實作能用純模式判斷的兩條。擬人化（文件說話、軟體「看到」）與翻漏（zh-TW
@@ -288,6 +288,8 @@ def changed_lines(ref: str, path: Path):
 
 
 RULE_DOCS = {
+    # anoni-net/www 的 pages/<語系>/join/writing-style.md，寫作風格規範的原始檔
+    "writing-style.md",
     "contributor-handbook.md",
     "docs-writing-style.md",
     "BECOME_ANONI.md",
@@ -413,7 +415,7 @@ def check_zhe_repeat(raw: str, clean: str, rx: re.Pattern = ZHE_RE, word: str = 
 def is_english_doc(path: Path) -> bool:
     """en 文件套 PROSE_RULES_EN，中文那組規則不適用。
 
-    英文的編輯標準是獨立的一套（見 docs/en/community/contributor-handbook.md），
+    英文的編輯標準是獨立的一套（見 https://anoni.net/en/join/writing-style/），
     破折號與分號在英文是正常標點，中文的句型與指代判準在英文不存在。CI 從 2026-08
     起同時掃 docs/en。
     """

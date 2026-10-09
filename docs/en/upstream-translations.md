@@ -32,4 +32,4 @@ The Chinese editions carry the translated upstream posts along with everything a
 - [Traditional Chinese](https://anoni.net/docs/blog/){target="_blank"}
 - [Simplified Chinese](https://anoni.net/docs/zh-cn/blog/){target="_blank"}
 
-Translations are done by volunteers, and helping is welcome. The process is in [localization and translation](./community/i18n.md), and the terminology standard is the [contributor handbook](./community/contributor-handbook.md).
+Translations are done by volunteers, and helping is welcome. The process is in [localization and translation](./community/i18n.md), and the terminology standard is the [writing style](https://anoni.net/en/join/writing-style/){target="_blank"} page on the community site.

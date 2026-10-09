@@ -25,7 +25,7 @@ The region we cover is Mainland China, Hong Kong, Macau, Singapore, Malaysia, Ta
 
 ## How pages are written and reviewed
 
-The writing style, file formats and pull request flow are set out in the [Contributor Handbook](../community/contributor-handbook.md). Every change goes through a pull request, a linter checks punctuation and phrasing when it is submitted, and a maintainer reviews it before merging.
+The writing style is set out on the community site's [writing style](https://anoni.net/en/join/writing-style/){target="_blank"} page, and file formats and the pull request flow in the [Contributor Handbook](../community/contributor-handbook.md). Every change goes through a pull request, a linter checks punctuation and phrasing when it is submitted, and a maintainer reviews it before merging.
 
 Contributors may use any AI tool to help with writing or translation, and AI output goes through the same process as anything written by hand. Whoever opens the pull request has to open and check every number, quotation and source link, and is responsible for the content.
 
