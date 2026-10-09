@@ -238,7 +238,9 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `advanced/` | 進階層，技術深度的延伸閱讀 |
 | `taiwan/` | 在地脈絡，台灣的法規、觀測、研究 |
 | `reports/` | 嚴選報告，外部研究的中譯 |
-| `community/` | 社群文件，治理、流程、入口頁 |
+| `community/` | 架設與營運的教學、讀懂觀測資料的方法、貢獻與翻譯規範 |
+
+社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/)，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www)，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
 
 如果你的新文章不確定該放哪一類，先在 Matrix 上問一聲，避免直接 PR 後又要搬。
 
