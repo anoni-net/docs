@@ -64,6 +64,14 @@ find ./ -path './onion' -prune -o \
 		-e "s|](https://anoni.net/)|](http://${ONION_ROOT}/)|g" \
 		-e "s|](https://anoni.net/en/)|](http://${ONION_ROOT}/en/)|g" {} +
 
+# 側邊欄連回官網的那一項（mkdocs*.yml 的 nav，值是 https://anoni.net/、/zh-cn/、/en/）。
+# 只改行尾整個是官網首頁的網址，site_url 這類 /docs 開頭的上面已經改過。
+sed -i \
+	-e "s|: https://anoni.net/\$|: http://${ONION_ROOT}/|" \
+	-e "s|: https://anoni.net/zh-cn/\$|: http://${ONION_ROOT}/zh-cn/|" \
+	-e "s|: https://anoni.net/en/\$|: http://${ONION_ROOT}/en/|" \
+	./mkdocs.yml ./mkdocs_cn.yml ./mkdocs_en.yml
+
 # assets.anoni.net 刻意不改寫。這裡曾經加過一條把它換成 onion /assets 的規則，
 # 理由是「onion 讀者不該繞出口抓圖」，那個前提是錯的：mkdocs 的 privacy plugin
 # 本來就會在建置時把外部資源抓下來鏡像進站內，產出的 HTML 指向

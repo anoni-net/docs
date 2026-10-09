@@ -23,6 +23,8 @@ nav:
   - !ENV [NAV_GUIDES, "Guides"]:
       - guides/index.md
       - help/index.md
+      - community/skill-level.md
+      - community/tor-project-ecosystem.md
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -105,6 +107,12 @@ nav:
           - regional/taiwan-realname-data-market.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
+      - "Reading Measurement Data":
+          - community/ooni-data-format.md
+          - community/ooni-blocking-determination.md
+          - community/ooni-nettests-map.md
+          - community/asn-coverage-howto.md
+          - community/onionoo-mcp.md
   - !ENV [NAV_UTILS, "Utilities"]:
       - utils/index.md
       # Fourteen utilities in one flat list need 732px in the mobile drawer. That
@@ -178,59 +186,31 @@ nav:
           - changelog/android.md
           - changelog/browsers.md
           - changelog/messaging.md
-  - !ENV [NAV_COMMUNITY, "Community"]:
-      - community/index.md
-      # About is part of the community section. Placed after community/index.md rather
-      # than before it: navigation.indexes needs the index page first for the section
-      # heading to stay clickable.
-      - !ENV [NAV_ABOUT, "About"]:
-          - about/index.md
-          - about/how-you-are-reading.md
-          - contact.md
-          - offline.md
-      - "Get Involved":
-          - community/how-to-contribute.md
-          - community/partners.md
-          - community/tools.md
-          - community/send-privacy.md
-          - community/skill-level.md
-          - community/tor-project-ecosystem.md
-          - community/upload-sensitive.md
-          - community/governance.md
-      - "Docs and Development":
-          - community/contributor-handbook.md
-          - community/i18n.md
-          - community/zh-hant-naming.md
-          - community/become-anoni.md
-          - community/setup-repo.md
-          - community/brand-assets.md
-      - "Run a Node":
-          - community/setup-tor-relay.md
-          - community/setup-tor-webtunnel.md
-          - community/setup-onion-service.md
-          - community/campus-tor-relay-proposal.md
-          - community/campus-tor-relay-sop.md
-          - community/campus-relay-faq.md
-          - community/pin-ipfs-mirror.md
-      - "Reading Measurement Data":
-          - community/ooni-data-format.md
-          - community/ooni-blocking-determination.md
-          - community/ooni-nettests-map.md
-          - community/asn-coverage-howto.md
-          - community/onionoo-mcp.md
-      - "2026 Themes":
-          - community/roadmap-2026.md
-          - community/privacy-guide.md
-          - community/relay-on-campus.md
-          - community/payments-research.md
-      - !ENV [NAV_EVENT, "Events"]:
-          - activity/index.md
-          - activity/gg2026.md
-          - activity/coscup-2026-cfp.md
-          - activity/coscup-2026.md
-          - event-workshop-2025.md
-          - !ENV [NAV_EVENT_PREPARE, "Pre-Event"]:
-              - event-workshop-2025-prepare.md
+  # The community's own pages (about, how to take part, self-hosted services, the 2026
+  # tracks, events) moved to the anoni.net top level in 2026-10, see
+  # toomore/anoni-net-ws#397. Only a link to it stays here. Reference pages moved to
+  # "Run a Node" below and to "Reading Measurement Data" under Regional, and pages about
+  # the docs site itself sit under "About the Docs". The pages taken out keep their URLs
+  # until redirects are set up. The onion build rewrites the link in
+  # replace_sitename_anoni_onion.sh.
+  - "Run a Node":
+      - community/setup-tor-relay.md
+      - community/setup-tor-webtunnel.md
+      - community/setup-onion-service.md
+      - community/campus-tor-relay-proposal.md
+      - community/campus-tor-relay-sop.md
+      - community/campus-relay-faq.md
+      - community/pin-ipfs-mirror.md
+  - "About the Docs":
+      - about/how-you-are-reading.md
+      - offline.md
+      - community/contributor-handbook.md
+      - community/i18n.md
+      - community/zh-hant-naming.md
+      - community/setup-repo.md
+      - community/become-anoni.md
+      - community/brand-assets.md
+  - "Community anoni.net": https://anoni.net/en/
 theme:
   name: material
   logo: assets/images/logo-white.svg
