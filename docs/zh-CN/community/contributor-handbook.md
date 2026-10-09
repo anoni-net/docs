@@ -132,7 +132,7 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 <body>
 ```
 
-常用 type：`docs`、`feat`、`fix`、`chore`、`refactor`。scope 用语系或子项目名称（`zh-TW`、`zh-CN`、`en`、`pulse`、`asn_coverage`）。
+常用 type：`docs`、`feat`、`fix`、`chore`、`refactor`。scope 用语系或子项目名称（`zh-TW`、`zh-CN`、`en`、`tools`）。
 
 ### PR 描述
 

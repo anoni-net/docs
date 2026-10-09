@@ -33,16 +33,8 @@ GitHub Actions 各個 workflow 的觸發條件、建置與部署流程，以及�
 - **changelog-kev.yml**: 每週一執行 `tools/check_changelog_kev.py`，有已被利用、更新日誌還沒寫的漏洞時開一張 issue，已經有開著的就更新內文
   - 結束碼 1 代表有要補的項目，其他非零值代表腳本本身失敗（例如抓不到 KEV），那種情況 job 變紅、不開 issue
 
-- **check-ripe.yml** 與 **lookback-ooni.yml**: `asn_coverage/` 的資料抓取
-  - 觸發路徑：`asn_coverage/**` 與各自的 workflow。原本任何 main 的 push 都觸發，2026-08-19 一天被 docs 的 PR 觸發 18 次，每次四個 job（2 OS × 2 Python），把並行額度佔滿，連 BuildDocs 都排不進去
-  - `timeout-minutes: 30` 與 `concurrency` 的 `cancel-in-progress`。同一天有六個 run 卡在 `apt-get update`（runner 的 apt mirror 沒有回應），沒有 timeout 就會佔著 runner 到預設的六小時
-  - 憑證那一步改成 `continue-on-error`，runner image 本來就帶 ca-certificates，那一步失敗不該擋住整個 job
+- **check-ripe.yml** 與 **lookback-ooni.yml**：2026-10 隨 ASN Coverage 搬到 [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage)。搬之前限定觸發路徑、加上 timeout 的經過寫在那兩支 workflow 的註解與本檔的 git 歷史
 
 - **games-checks.yml**: 「Tor 中繼地球儀」的互動與版面檢查（headless Chrome）
   - 觸發路徑：`docs/zh-TW/games/tor-network/**`、`tools/check_*.mjs`
   - 檢查項目：捏合放開不彈開、擋掉 iOS Safari 雙擊放大、網址關注區域的取景、變電所容量計版面（280 座 × 三語系 × 寬窄視窗）、六角層的幾何與國碼對齊、國家標籤上的事件穿透、點標籤與點地表開得出卡片、工作坊導覽走得完、圖層清單與來源檔案及三語字串對得上、每一層開得起來也關得掉、拖曳滾輪捏合時手指底下那一點不動（`check_globe_nav.mjs` 驗算法，`check_globe_nav_browser.mjs` 在真的頁面上驗接線）、各國行政區界線的資料與預快取對得上且爭議島嶼沒被畫進去（`check_admin1.mjs`）
-
-- **check-ripe.yml**: 檢查 RIPE ASN 資料（`asn_coverage/`）
-  - **push** 僅在 **`main`** 分支觸發。`workflow_dispatch` 與 `schedule` 維持可用
-- **lookback-ooni.yml**: 定期回溯 OONI 資料（`asn_coverage/`）
-  - **push** 僅在 **`main`** 分支觸發。`workflow_dispatch` 與 `schedule` 維持可用

@@ -12,7 +12,7 @@ icon: material/database-search
 
 !!! tip "執行位置"
 
-    以下指令均在 `anoni-net-docs/asn_coverage/` 目錄下執行。初次使用先 `cd` 進該目錄，執行 `uv sync` 安裝依賴，再依下方範例以 `uv run python ooni.py ...` 執行。
+    以下指令在 [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"} 的目錄下執行。初次使用先 clone 這個 repo、`cd` 進該目錄，執行 `uv sync` 安裝依賴，再依下方範例以 `uv run python ooni.py ...` 執行。
 
 ## 三種取用路徑
 
@@ -24,7 +24,7 @@ OONI 的觀測資料有三個入口，用途差異很大，著手前需先選定
 | [OONI API](https://api.ooni.org/api/v1/measurements){target="_blank"} | 依條件篩選、取單筆完整測量 | 單次回傳筆數有上限 |
 | [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} | 人工查閱、確認個別測量 | 不適合程式化取用 |
 
-`asn_coverage` 採用 S3 路徑，目的是統計覆蓋率而非查詢單筆。單筆查詢與小量篩選的 API 用法見 [OONI 測量資料結構導覽](./ooni-data-format.md)。
+ASN Coverage 採用 S3 路徑，目的是統計覆蓋率而非查詢單筆。單筆查詢與小量篩選的 API 用法見 [OONI 測量資料結構導覽](./ooni-data-format.md)。
 
 ## 程式能回答什麼
 

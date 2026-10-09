@@ -22,12 +22,6 @@
 /CODE_OF_CONDUCT.md                  @anoni-net/maintainers
 /docs/zh-TW/community/governance.md  @anoni-net/maintainers
 
-# 子系統（程式碼）
-/pulse/                              @anoni-net/maintainers
-/asn_coverage/                       @anoni-net/maintainers
-
 # 待補（範例，補上實際帳號或團隊後取消註解）：
 # /docs/zh-CN/                       @anoni-net/translation-reviewers
 # /docs/en/                          @anoni-net/translation-reviewers
-# /pulse/                            @anoni-net/pulse-owners
-# /asn_coverage/                     @anoni-net/asn-owners

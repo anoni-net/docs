@@ -38,7 +38,7 @@ icon: material/access-point-network
 
 [OONI](http://ooni.org/){target="_blank"} 透過全球志工夥伴使用 [Probe 觀測程式](https://ooni.org/install/){target="_blank"} 檢測網路審查狀況。所有測量結果上傳到專案的 [公開資料庫](https://registry.opendata.aws/ooni/){target="_blank"}。
 
-2023/11 ~ 2024/03 期間，社群透過 [程式抓取](https://github.com/anoni-net/docs/tree/main/asn_coverage){target="_blank"} 公開資料初步分析台灣的觀測樣態。根據 2023/12 的 [報告](https://ocf.tw/p/ooni/report/202312.html){target="_blank"}：
+2023/11 ~ 2024/03 期間，社群透過 [程式抓取](https://github.com/anoni-net/asn-coverage){target="_blank"} 公開資料初步分析台灣的觀測樣態。根據 2023/12 的 [報告](https://ocf.tw/p/ooni/report/202312.html){target="_blank"}：
 
 - 台灣的觀察資料數量在 OONI Explorer 排名前十名，**數量上充足**
 - 但 78.94% 的測量集中在 [AS3462（中華電信）](https://radar.cloudflare.com/zh-tw/as3462){target="_blank"} 與 [AS18041（Taiwan Digital Streaming）](https://radar.cloudflare.com/zh-tw/as18041){target="_blank"}
