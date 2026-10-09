@@ -397,7 +397,7 @@ icon: octicons/paste-24
         ??? question "透過 Thunderbird 寄送加密郵件。"
 
             - 完成 GNOME Secrets 金鑰建立與 Thunderbird 設定後，可以嘗試向本專案的加密郵件地址 `whisper@anoni.net` 寄送加密郵件。
-            - 取得 `whisper@anoni.net` 的公開金鑰，請參考「[持續關注](../contact.md){target="_blank"}」頁面。
+            - 取得 `whisper@anoni.net` 的公開金鑰，請參考「[持續關注](https://anoni.net/contact/){target="_blank"}」頁面。
             - 在 Thunderbird 撰寫郵件，選擇加密後寄出，收件方會使用其私鑰解密。
 
 ## OONI 技能分級
@@ -572,6 +572,6 @@ icon: octicons/paste-24
 
 這份量表是自我參照用的，勾選結果不用回報給誰，直接照結果挑下一步就好：
 
-- **認識層**：先訂閱 [電子報](../contact.md) 跟讀社群動態，或到 [指南](../guides/index.md) 把概念補齊。
+- **認識層**：先訂閱 [電子報](https://anoni.net/contact/) 跟讀社群動態，或到 [指南](../guides/index.md) 把概念補齊。
 - **實作層**：照各工具分級下的「從這裡開始」實際操作安裝、日常操作，遇到問題到 Matrix 發問。
-- **貢獻層**：到 [如何參與與認領主題](./how-to-contribute.md) 選一個方向，在 Matrix 對應 room 說明自己的程度與想做的事，社群會協助你接上手。帳號申請與服務入口見 [社群自架服務](./tools.md)。
+- **貢獻層**：到 [如何參與與認領主題](https://anoni.net/join/) 選一個方向，在 Matrix 對應 room 說明自己的程度與想做的事，社群會協助你接上手。帳號申請與服務入口見 [社群自架服務](https://anoni.net/services/)。

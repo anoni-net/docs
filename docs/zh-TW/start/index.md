@@ -78,4 +78,4 @@ icon: material/sign-direction
 
 ## 找不到你的身分
 
-這五種身分是社群目前接觸最多的對象，涵蓋不到的處境還很多。到 [Matrix 公開 room](../community/tools.md) 說明你的狀況，會幫助我們判斷下一個入口頁要寫哪一種。有實務經驗想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+這五種身分是社群目前接觸最多的對象，涵蓋不到的處境還很多。到 [Matrix 公開 room](https://anoni.net/services/) 說明你的狀況，會幫助我們判斷下一個入口頁要寫哪一種。有實務經驗想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

@@ -77,12 +77,12 @@ Pulse 與 ASN Coverage 的程式碼與議題追蹤在 [GitHub anoni-net/docs](ht
 
 不需要技術背景就可以參與。可以從以下幾個方向選一個入口：
 
-- 想理解議題、跟讀社群動態：訂閱 [電子報](../contact.md)、加入 Matrix
-- 想參與翻譯與寫作：見 [中文化與文件翻譯](./i18n.md)、[如何參與與認領主題](./how-to-contribute.md)
+- 想理解議題、跟讀社群動態：訂閱 [電子報](https://anoni.net/contact/)、加入 Matrix
+- 想參與翻譯與寫作：見 [中文化與文件翻譯](./i18n.md)、[如何參與與認領主題](https://anoni.net/join/)
 - 想評估自己的技術涉入程度：見 [自我技能評估表](./skill-level.md)
-- 想了解溝通協作工具：見 [社群自架服務](./tools.md)
+- 想了解溝通協作工具：見 [社群自架服務](https://anoni.net/services/)
 
-社群討論主要在 Matrix（家伺服器 `im.anoni.net`），共筆使用 Cryptpad，視訊使用 Jitsi。帳號申請與入口設定都整理在 [社群自架服務](./tools.md)。
+社群討論主要在 Matrix（家伺服器 `im.anoni.net`），共筆使用 Cryptpad，視訊使用 Jitsi。帳號申請與入口設定都整理在 [社群自架服務](https://anoni.net/services/)。
 
 ## 路線圖更新
 

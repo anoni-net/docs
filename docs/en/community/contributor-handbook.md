@@ -8,14 +8,14 @@ icon: material/book-open-variant
 
 Any community that collaborates for long enough accumulates unwritten rules: how to phrase a heading, how to name a file, what belongs in a pull request description, how issues get sorted, and the questions that come up in a contributor's first week. This handbook collects what would otherwise stay scattered across the README, issue comments, and Matrix conversations, so a new contributor can read it in one sitting and experienced members have something common to point at.
 
-If this is your first time here, start with [How to contribute](./how-to-contribute.md) to pick a direction, then come back for the specifics. Account requests and service entry points are on [Community services](./tools.md).
+If this is your first time here, start with [How to contribute](./how-to-contribute.md) to pick a direction, then come back for the specifics. Account requests and service entry points are on [Community services](https://anoni.net/en/services/).
 
 ## Your first week
 
 Sorted by what you want to do:
 
 - **Read first, decide later**: pick anything from [Concepts](../basics/index.md), then use the [skill level self-assessment](./skill-level.md) to gauge how familiar you are with Tor, Tails, and OONI
-- **Write or translate**: request a Matrix account (see [Community services](./tools.md)), join the public Space, say what you would like to work on, and claim an issue
+- **Write or translate**: request a Matrix account (see [Community services](https://anoni.net/en/services/)), join the public Space, say what you would like to work on, and claim an issue
 - **Technical maintenance**: request collaborator access to [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, then follow [Development environment setup](./setup-repo.md)
 - **Event organizing**: ask in the relevant Matrix room about what is coming up, and help with materials, on-site logistics, or registration
 
@@ -204,7 +204,7 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 - Across directories: `../basics/anonymity-vs-privacy.md`
 - Across depths: `../../blog/posts/2025to2026.md`
 
-Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](./tools.md)`.
+Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](https://anoni.net/en/services/)`.
 
 External links get `{target="_blank"}` so they open in a new tab: `[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`.
 
@@ -358,7 +358,7 @@ Four roles for review:
 | Question | Page |
 |---|---|
 | How do I pick something to work on? | [How to contribute](./how-to-contribute.md) |
-| How do I get a Matrix account? | [Community services](./tools.md) |
+| How do I get a Matrix account? | [Community services](https://anoni.net/en/services/) |
 | What suits my level? | [Skill level self-assessment](./skill-level.md) |
 | How do I set up the development environment? | [Development environment setup](./setup-repo.md) |
 | What are the translation rules? | [Localization and translation](./i18n.md) |

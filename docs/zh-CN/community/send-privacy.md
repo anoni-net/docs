@@ -60,6 +60,6 @@ Send 不使用 cookie，也没有任何分析或追踪工具。
 
 ## 联系与举报
 
-安全问题与服务被滥用的举报，例如有人利用它散布不当内容，请发邮件到 [whisper@anoni.net](mailto:whisper@anoni.net)，需要加密时使用[联系页](../contact.md)上的 PGP 公钥。举报时附上分享链接 `#` 之前的部分就好，我们用文件 ID 删除，不需要密钥。
+安全问题与服务被滥用的举报，例如有人利用它散布不当内容，请发邮件到 [whisper@anoni.net](mailto:whisper@anoni.net)，需要加密时使用[联系页](https://anoni.net/zh-cn/contact/)上的 PGP 公钥。举报时附上分享链接 `#` 之前的部分就好，我们用文件 ID 删除，不需要密钥。
 
-服务的其他信息见[沟通与协作工具](./tools.md)。
+服务的其他信息见[沟通与协作工具](https://anoni.net/zh-cn/services/)。

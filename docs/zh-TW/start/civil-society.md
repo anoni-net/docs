@@ -46,7 +46,7 @@ offline_caution: true
 - [威脅模型如何建立](../basics/threat-model.md)：清單背後的三題怎麼想出來的，帶團隊討論時需要這一篇
 - [Metadata 是什麼，為什麼重要](../basics/metadata.md)：誰跟誰在什麼時候聯絡過，內容加密擋不住這一層
 - [什麼是 CryptPad](../tools/what-is-cryptpad.md)：共筆與表單的替代方案
-- [社群自架服務](../community/tools.md)：Matrix、CryptPad、Send、表單，社群自架的幾套都開放使用
+- [社群自架服務](https://anoni.net/services/)：Matrix、CryptPad、Send、表單，社群自架的幾套都開放使用
 
 ### 對外的線索與捐款
 
@@ -71,8 +71,8 @@ offline_caution: true
 ## 帶得走的東西
 
 - 威脅模型清單答完按「複製摘要」，貼進組織的共筆或會議紀錄，換人接手時不用重問一次
-- [社群自架服務](../community/tools.md)的 Matrix、CryptPad 與 Send 都開放社群使用，不需要另外架
-- 有問題到 [Matrix 公開 room](../community/tools.md) 問，需要傳敏感檔案寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- [社群自架服務](https://anoni.net/services/)的 Matrix、CryptPad 與 Send 都開放社群使用，不需要另外架
+- 有問題到 [Matrix 公開 room](https://anoni.net/services/) 問，需要傳敏感檔案寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 這條路徑沒有處理的
 

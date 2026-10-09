@@ -68,4 +68,4 @@ You don't have to wait for the event to get to know us. To learn about the commu
 
 !!! info "Updates and contact"
 
-    Session details and times may still change before the event; for the latest times, follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. To get community event updates, [stay in touch](../../contact.md) through our newsletter and contact channels.
+    Session details and times may still change before the event; for the latest times, follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. To get community event updates, [stay in touch](https://anoni.net/en/contact/) through our newsletter and contact channels.

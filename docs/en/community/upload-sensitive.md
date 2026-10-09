@@ -42,9 +42,9 @@ Copy the link and send it to the recipient.
 Send runs on infrastructure the community operates, which means you are trusting us with the fact that a transfer happened, even though the file contents are encrypted in your browser before upload. For most collaboration material that trade-off is fine. Two cases where it is not:
 
 - **Anonymity from the recipient or from us**: use [OnionShare](https://onionshare.org/){target="_blank"} over Tor instead. It serves the file directly from your own machine through an onion service, so no third party holds the file at any point.
-- **Risk if the transfer itself were discovered**: raise it in Matrix first without the details, so we can agree on a channel before anything moves. Contact routes are on the [Community services](./tools.md) page.
+- **Risk if the transfer itself were discovered**: raise it in Matrix first without the details, so we can agree on a channel before anything moves. Contact routes are on the [Community services](https://anoni.net/en/services/) page.
 
 ## Related
 
-- [Community services](./tools.md) covers the rest of our self-hosted infrastructure, including how to request a Matrix or CryptPad account.
+- [Community services](https://anoni.net/en/services/) covers the rest of our self-hosted infrastructure, including how to request a Matrix or CryptPad account.
 - [Governance charter](./governance.md) sets out how the community handles disclosure and disputes.

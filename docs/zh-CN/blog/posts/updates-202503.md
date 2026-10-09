@@ -29,7 +29,7 @@ RightsCon 2025 顺利在二月最后一周举办完毕，我们在活动前一�
 
 在这次的活动中，Tor/Tails、OONI 工作坊的参与者对「网络自由」、「匿名网络」议题上有着初步的理解，并实际操作工具来提升安全与隐私的抵御能力。活动后，我们收到了许多关于工作坊安排的反馈与建议，因此决定申请今年 COSCUP 开源人年会的工作坊议程，继续把此议题调整得更切合台湾本地的脉络与语言进行推广。
 
-COSCUP 预计在 8/9、10 于台湾科技大学举办，我们会在这两天的其中一天举办工作坊。在八月前，我们需要针对简报、教材调整成华语与台湾用语的内容。另外也需要开始招募工作伙伴筹备工作坊活动与培训工作坊小助手。如果你对工作坊活动有兴趣，请记得与[我们联系](../../contact.md){target="_blank"}，预计在四月的第二周开始启动筹备。
+COSCUP 预计在 8/9、10 于台湾科技大学举办，我们会在这两天的其中一天举办工作坊。在八月前，我们需要针对简报、教材调整成华语与台湾用语的内容。另外也需要开始招募工作伙伴筹备工作坊活动与培训工作坊小助手。如果你对工作坊活动有兴趣，请记得与[我们联系](https://anoni.net/zh-cn/contact/){target="_blank"}，预计在四月的第二周开始启动筹备。
 
 ## 「匿名凭证」
 
@@ -57,7 +57,7 @@ COSCUP 预计在 8/9、10 于台湾科技大学举办，我们会在这两天的
 
 目前这个页面还在开发与尝试中，不保证 24 小时都能运作（我们正在解决稳定性问题 XD），开发的代码也还没有合并到主线上，有兴趣的伙伴可以参考 [pulse](https://github.com/anoni-net/docs/compare/main...pulse?expand=1){target="_blank"} 与 [api](https://github.com/anoni-net/docs/compare/main...api?expand=1){target="_blank"} 这两个分支，或是在 [API 文档页面](https://anoni.net/api/readme){target="_blank"}随意尝试，目前用到 Python 语言的 [FastAPI](https://fastapi.tiangolo.com/){target="_blank"}、[Pydantic](https://docs.pydantic.dev/latest/){target="_blank"} 作为开发的框架。
 
-当然，我们也在找寻熟悉大量处理数据的伙伴，有兴趣也可以直接与[我们联系](../../contact.md){target="_blank"}！
+当然，我们也在找寻熟悉大量处理数据的伙伴，有兴趣也可以直接与[我们联系](https://anoni.net/zh-cn/contact/){target="_blank"}！
 
 ## 最后
 

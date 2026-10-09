@@ -413,7 +413,7 @@ Phone systems change every year, and setting names and locations move with them.
 - Android: Android 16 and Android 17 on Google Pixel, from Google's Android Help, Pixel Help, and the Android Open Source Project, checked October 2026
 - Samsung Galaxy: One UI 8 and later, from Samsung's official support pages, checked October 2026. Where a menu name couldn't be confirmed in official documentation, the step relies on search keywords
 
-If you follow along and can't find an option, search for its name in Settings first. If it still isn't there, tell us your phone model and system version in the community chat (the [public Matrix room](../community/tools.md)), and we'll check and update the page.
+If you follow along and can't find an option, search for its name in Settings first. If it still isn't there, tell us your phone model and system version in the community chat (the [public Matrix room](https://anoni.net/en/services/)), and we'll check and update the page.
 
 ## Where to go from here
 

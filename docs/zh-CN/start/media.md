@@ -77,7 +77,7 @@ offline_caution: true
 
 - 威胁模型清单答完按「复制摘要」，贴进编辑台的共笔，换人接手时不用重问一次
 - [隐形字符检测](../utils/invisible.md)与[文件 metadata 清除器](../utils/strip-metadata.md)都在浏览器里执行，不送出任何数据，可以直接推荐给整个编辑台
-- 有问题到 [Matrix 公开 room](../community/tools.md) 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 这条路径没有处理的
 

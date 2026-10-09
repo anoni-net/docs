@@ -99,7 +99,7 @@ Tor 把 IRC（OFTC 网络）与 Matrix 双向桥接，用 Element 加入 Matrix 
 - [:material-translate-variant: 中文化与文件翻译](./i18n.md)
 - [:simple-torproject: 如何搭建 Tor Relay](./setup-tor-relay.md)
 - [:material-tunnel-outline: 设置 Tor WebTunnel](./setup-tor-webtunnel.md)
-- [:material-hand-heart: 如何参与与认领主题](./how-to-contribute.md)
+- [:material-hand-heart: 如何参与与认领主题](https://anoni.net/zh-cn/join/)
 
 </div>
 

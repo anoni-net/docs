@@ -13,7 +13,7 @@ hide:
 
 [:material-sign-direction: 从你的身分开始](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: 订阅电子报](./contact.md) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
+[:material-email-fast-outline: 订阅电子报](https://anoni.net/zh-cn/contact/) · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
 
 文档由[匿名网络社群 anoni.net](https://anoni.net/){target="_blank"} 维护，社群的介绍见[关于我们](https://anoni.net/zh-cn/about/)，2026 年的三个主题与参与方式见[社群参与](./community/index.md)。
 

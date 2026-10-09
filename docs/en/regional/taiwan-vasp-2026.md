@@ -168,7 +168,7 @@ We advocate for Tor, Tails, and OONI, and we pay attention to how payments and i
 
 The Chinese-language version of this page is at [台灣 VASP 法 2026](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}.
 
-If you have first-hand hearing records, or track amendments after third reading, the channels on the [Community services](../community/tools.md) page reach us and we will update this page.
+If you have first-hand hearing records, or track amendments after third reading, the channels on the [Community services](https://anoni.net/en/services/) page reach us and we will update this page.
 
 ## Related
 

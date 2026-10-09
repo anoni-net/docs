@@ -27,7 +27,7 @@ icon: material/handshake-outline
 
 ### 協作用的自架服務
 
-Matrix、CryptPad、Send、Etherpad 與表單都由社群自架，用途與申請方式見[社群自架服務](./tools.md)。Send 與 Etherpad 不需要帳號，Matrix 與 CryptPad 需要來信申請。
+Matrix、CryptPad、Send、Etherpad 與表單都由社群自架，用途與申請方式見[社群自架服務](https://anoni.net/services/)。Send 與 Etherpad 不需要帳號，Matrix 與 CryptPad 需要來信申請。
 
 服務由志工維運，沒有服務等級的承諾，適合拿來協作，不適合當成組織資料的正式存放處。收發敏感檔案的做法可以參考[上傳機敏資訊流程](./upload-sensitive.md)。
 
@@ -62,7 +62,7 @@ Matrix、CryptPad、Send、Etherpad 與表單都由社群自架，用途與申�
 
 ## 合作的進行方式
 
-1. 寄信到 [whisper@anoni.net](mailto:whisper@anoni.net)，簡單說明組織的類型與想一起做的事，需要加密時用[持續關注](../contact.md)頁上的 PGP 公鑰
+1. 寄信到 [whisper@anoni.net](mailto:whisper@anoni.net)，簡單說明組織的類型與想一起做的事，需要加密時用[持續關注](https://anoni.net/contact/)頁上的 PGP 公鑰
 2. 社群回覆後約一次線上討論，視訊用社群平常開會的 Jitsi
 3. 討論之前，雙方各自填一次威脅模型清單，按「複製摘要」帶進討論
 4. 決定要做哪幾項，時程依志工的時間安排
@@ -71,6 +71,6 @@ Matrix、CryptPad、Send、Etherpad 與表單都由社群自架，用途與申�
 
 ## 相關閱讀
 
-- [如何參與與認領主題](./how-to-contribute.md)：個人想加入社群一起做事的方式
-- [社群自架服務](./tools.md)：各項服務的用途與申請方式
+- [如何參與與認領主題](https://anoni.net/join/)：個人想加入社群一起做事的方式
+- [社群自架服務](https://anoni.net/services/)：各項服務的用途與申請方式
 - [2026 年度路線圖](./roadmap-2026.md)：社群今年投入的三大主題與活動規劃

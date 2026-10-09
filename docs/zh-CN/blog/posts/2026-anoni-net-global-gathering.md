@@ -124,5 +124,5 @@ Cofacts 也到了 Estoril，展位是 Booth `10`，9 月 6 日 `13:00` 到 `15:0
 ## 联系方式
 
 - 活动期间联系：Matrix room [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}，供 Global Gathering 三天使用
-- 即时讨论：[Matrix 公开 room](../../community/tools.md)（家服务器 `im.anoni.net`）
-- 匿名线索：whisper@anoni.net（[GPG 公钥](../../contact.md)），活动期间几小时内查看
+- 即时讨论：[Matrix 公开 room](https://anoni.net/zh-cn/services/)（家服务器 `im.anoni.net`）
+- 匿名线索：whisper@anoni.net（[GPG 公钥](https://anoni.net/zh-cn/contact/)），活动期间几小时内查看

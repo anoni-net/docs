@@ -64,7 +64,7 @@ If Unredacted's work makes you want to help people in censored regions reach the
 - **Run Snowflake**: the lowest-barrier contribution, run from a browser extension or Docker (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
 - **Run a Tor relay or bridge**: this needs a steady network and a little operational effort. The Tor Project's [relay guide](https://community.torproject.org/relay/){target="_blank"} walks through the setup, and the community wrote up [how to set up a Tor WebTunnel bridge](../../community/setup-tor-webtunnel.md).
 - **Campus Tor relays**: if you work or study at a college or university, start your assessment from the [Tor relays on campus track](../../community/relay-on-campus.md).
-- **Join the anoni.net community discussion**: trade notes with other members over Matrix; the entry point is on the [community page](../../community/index.md), and other contact channels are on the [contact page](../../contact.md).
+- **Join the anoni.net community discussion**: trade notes with other members over Matrix; the entry point is on the [community page](../../community/index.md), and other contact channels are on the [contact page](https://anoni.net/en/contact/).
 
 ## Related reading
 

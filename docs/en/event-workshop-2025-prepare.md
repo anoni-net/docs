@@ -14,7 +14,7 @@ icon: octicons/workflow-24
 ## Workshop Registration
 
 !!! warning "Preparation in Progress…"
-    - The workshop is currently in preparation. We expect to promote and open registration in early July 2025. If you arrive at this page early and want to register, you can [join the group email](./contact.md) to receive our registration notifications instantly!
+    - The workshop is currently in preparation. We expect to promote and open registration in early July 2025. If you arrive at this page early and want to register, you can [join the group email](https://anoni.net/en/contact/) to receive our registration notifications instantly!
 
 ---
 
@@ -192,7 +192,7 @@ Help participants understand how the Tor anonymous network works, what the Onion
 
         - [x] Use the KeePassXC password manager.
         - [x] Create encryption keys and encrypt files using GnuPG and Kleopatra.
-        - [x] Send encrypted mail to `whisper@anoni.net` via Thunderbird (refer to [Stay Updated](./contact.md) for public keys).
+        - [x] Send encrypted mail to `whisper@anoni.net` via Thunderbird (refer to [Stay Updated](https://anoni.net/en/contact/) for public keys).
         - [x] Secure file deletion procedures.
 
 #### :octicons-bookmark-16: OONI Network Interference Observation
@@ -247,7 +247,7 @@ We successfully secured a two-day schedule for this event. The workshop is plann
 
 Each round-table discussion is expected to have no more than 25 participants. We'll assign 1 to 2 facilitators and 1 note-taker per session.
 
-Before the event, we will invite those who are interested in the topics or roles to become facilitators. If you, or someone you recommend, are interested, please [let us know](./contact.md) so we can send an invitation and get them involved in the discussion!
+Before the event, we will invite those who are interested in the topics or roles to become facilitators. If you, or someone you recommend, are interested, please [let us know](https://anoni.net/en/contact/) so we can send an invitation and get them involved in the discussion!
 
 ??? tip "Roles and Functions"
 

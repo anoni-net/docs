@@ -76,7 +76,7 @@ The newsroom can have every process in place and still expose a source when one 
 
 - Press "copy summary" after the threat model checklist and paste it into the desk's shared notes
 - The [invisible character detector](../utils/invisible.md) and [file metadata stripper](../utils/strip-metadata.md) both run in the browser and upload nothing, so they can be recommended to the whole desk as-is
-- Ask in the [public Matrix room](../community/tools.md), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
+- Ask in the [public Matrix room](https://anoni.net/en/services/), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## What this path does not cover
 

@@ -302,7 +302,7 @@ The difference between a campus relay and a personal one is that **people gradua
 
     Once the relay is live, the case exists inside the Tor network.
 
-    - **Tell us**: get in touch through [Community services](./tools.md) and we will add your case to the [Tor relays on campus track](./relay-on-campus.md), so the next institution has more to work from
+    - **Tell us**: get in touch through [Community services](https://anoni.net/en/services/) and we will add your case to the [Tor relays on campus track](./relay-on-campus.md), so the next institution has more to work from
     - **Ongoing operation**: the FAQ at the end of [how to run a Tor relay](./setup-tor-relay.md) covers monitoring with nyx, package upgrades, and how the guard relay mechanism works
     - **Doing more**: running a [Tor Snowflake bridge](../tools/tor-snowflake.md) alongside it helps users in censored regions reach Tor
 
@@ -321,4 +321,4 @@ The difference between a campus relay and a personal one is that **people gradua
 
 This procedure comes from community member NZ, who provided the original design documentation and operational experience from the deployment at National Taiwan Normal University. The material is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"} with NZ's agreement.
 
-If you follow this and find a step that does not fit your institution, or something worth adding, **tell us**. We keep updating it. Contact routes are on [Community services](./tools.md).
+If you follow this and find a step that does not fit your institution, or something worth adding, **tell us**. We keep updating it. Contact routes are on [Community services](https://anoni.net/en/services/).

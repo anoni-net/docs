@@ -14,7 +14,7 @@ description: "anoni.net Docs relaunches in 2025 with three sub-projects on inter
 
 Hello everyone, anoni.net Docs is set to reboot in 2025, with three sub-projects currently planned as the focus and goals for our 2025 research. If you are interested in this topic, consider joining us to explore, discuss, and work on issues related to ["Internet Freedom"](../../basics/internet-freedom.md){target="_blank"}.
 
-This document site will also serve as a place for ongoing updates, event announcements, and the publication of research results. We recommend subscribing to the [mailing list](../../contact.md){target="_blank"}, as we will use it to send notifications about any new information updates.
+This document site will also serve as a place for ongoing updates, event announcements, and the publication of research results. We recommend subscribing to the [mailing list](https://anoni.net/en/contact/){target="_blank"}, as we will use it to send notifications about any new information updates.
 
 <!-- more -->
 
@@ -64,4 +64,4 @@ As [RightsCon 2025](https://rightscon.summit.tc/catalog/rightscon-2025){target="
 
 ??? question "How to Register?"
 
-    Since the event registration process is still being prepared, you can first subscribe to the [mailing list](../../contact.md){target="_blank"}. Once the event location and registration methods are confirmed, a reminder notification will be sent via the project mailing list. Don't miss it!
+    Since the event registration process is still being prepared, you can first subscribe to the [mailing list](https://anoni.net/en/contact/){target="_blank"}. Once the event location and registration methods are confirmed, a reminder notification will be sent via the project mailing list. Don't miss it!

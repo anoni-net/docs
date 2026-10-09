@@ -46,7 +46,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 - [Threat modeling](../basics/threat-model.md): where the three questions come from, which you need when facilitating a team discussion
 - [Metadata, and why it matters](../basics/metadata.md): who contacted whom and when, a layer content encryption does not cover
 - [What is CryptPad?](../tools/what-is-cryptpad.md): an alternative for shared documents and forms
-- [Community services](../community/tools.md): Matrix, CryptPad, Send, and forms, all community-run and open for use
+- [Community services](https://anoni.net/en/services/): Matrix, CryptPad, Send, and forms, all community-run and open for use
 
 ### Intake and donations
 
@@ -70,8 +70,8 @@ The organisation can have every process in place and still lose the whole thread
 ## What to take with you
 
 - Press "copy summary" after the threat model checklist and paste it into the organization's notes, so the next person does not start over
-- Matrix, CryptPad, and Send at [community services](../community/tools.md) are open for use, with nothing to self-host
-- Ask in the [public Matrix room](../community/tools.md), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
+- Matrix, CryptPad, and Send at [community services](https://anoni.net/en/services/) are open for use, with nothing to self-host
+- Ask in the [public Matrix room](https://anoni.net/en/services/), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## What this path does not cover
 

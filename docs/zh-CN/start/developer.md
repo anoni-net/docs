@@ -13,7 +13,7 @@ icon: material/console
 ## 二十分钟：先确认方向
 
 1. [2026 年度路线图](../community/roadmap-2026.md)：社群今年投入的三个主题与各自的进度，先看有没有你想接的
-2. [如何参与与认领主题](../community/how-to-contribute.md)：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
+2. [如何参与与认领主题](https://anoni.net/zh-cn/join/)：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
 3. [自我技能评估表](../community/skill-level.md)：Tor、Tails、OONI 三个工具的分级自评，每一级下面都列了补齐用的文章
 
 ## 四条可以认领的线
@@ -62,9 +62,9 @@ icon: material/console
 
 ## 带得走的东西
 
-- [Matrix 公开 room](../community/tools.md)：认领主题前先在这里说一声，避免两个人做同一件事
+- [Matrix 公开 room](https://anoni.net/zh-cn/services/)：认领主题前先在这里说一声，避免两个人做同一件事
 - [GitHub 的 anoni-net/docs](https://github.com/anoni-net/docs)：文件站的源码与 issue，每个 issue 都写了预期内容
-- 社群自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](../community/tools.md)
+- 社群自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](https://anoni.net/zh-cn/services/)
 
 ## 这条路径没有处理的
 

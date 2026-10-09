@@ -402,7 +402,7 @@ VPN 使用合法但受网安法规范，建议行前装好设定。Tor 直连大
 
 ## 回报过时信息
 
-审查现况变动快，本表难免有落后现实的地方。如果你发现某地的封锁、VPN、SIM 或入境规定已经跟表上不同，欢迎到 [社群 Matrix 公开 room](../community/tools.md) 回报，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，我们会查证后更新。有当地第一手经验、愿意补充逐地注记的人，也欢迎一起参与。
+审查现况变动快，本表难免有落后现实的地方。如果你发现某地的封锁、VPN、SIM 或入境规定已经跟表上不同，欢迎到 [社群 Matrix 公开 room](https://anoni.net/zh-cn/services/) 回报，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，我们会查证后更新。有当地第一手经验、愿意补充逐地注记的人，也欢迎一起参与。
 
 ## 相关阅读
 

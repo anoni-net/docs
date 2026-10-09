@@ -8,14 +8,14 @@ icon: material/book-open-variant
 
 社群協作久了會累積許多不成文規定：標題該如何下、檔名如何命名、PR 描述要寫什麼、Issue 如何分類、新貢獻者第一週會碰到的疑問。貢獻者百科把散落在 README、Issue 留言、Matrix 對話裡的內容整合成一頁，方便新成員一次看完，也讓資深成員有共同對話的依據。
 
-如果你是第一次參與，建議先看 [如何參與與認領主題](./how-to-contribute.md) 決定方向，再回來這頁查具體做法。完整的工具入口與帳號申請見 [社群自架服務](./tools.md)。
+如果你是第一次參與，建議先看 [如何參與與認領主題](https://anoni.net/join/) 決定方向，再回來這頁查具體做法。完整的工具入口與帳號申請見 [社群自架服務](https://anoni.net/services/)。
 
 ## 第一週的入門路徑
 
 依「我想做什麼」分流：
 
 - **想試水溫，先看看內容**：先讀 [基礎概念](../basics/index.md) 任一篇，再用 [自我技能評估表](./skill-level.md) 評估自己對 Tor、Tails、OONI 的熟悉度
-- **想開始寫作或翻譯**：申請 Matrix 帳號（見 [社群自架服務](./tools.md)）→ 加入 Public Space → 表達意願 → 認領一個 Issue
+- **想開始寫作或翻譯**：申請 Matrix 帳號（見 [社群自架服務](https://anoni.net/services/)）→ 加入 Public Space → 表達意願 → 認領一個 Issue
 - **想參與技術維運**：申請 GitHub 對 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 的協作權限 → 看 [專案研究預先準備](./setup-repo.md) 建好開發環境
 - **想加入活動籌備**：到 Matrix 對應 room 詢問近期活動（COSCUP、工作坊、小聚），協助文宣、現場、報名等任務
 
@@ -283,7 +283,7 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 - 跨目錄：`../basics/anonymity-vs-privacy.md`
 - 跨深度：`../../blog/posts/2025to2026.md`
 
-正文的連結用描述性的文字，不直接露出網址，也不拿網址當連結文字。例：`詳見[社群工具頁](./tools.md)`。
+正文的連結用描述性的文字，不直接露出網址，也不拿網址當連結文字。例：`詳見[社群工具頁](https://anoni.net/services/)`。
 
 外部連結加 `{target="_blank"}`，在新分頁開啟：`[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`。
 
@@ -435,8 +435,8 @@ AI 產出與人工撰寫走同一套流程：執行 `docs_style_lint.py`、照 P
 
 | 問題 | 看這裡 |
 |---|---|
-| 如何選擇主題開始？ | [如何參與與認領主題](./how-to-contribute.md) |
-| 如何申請 Matrix 帳號？ | [社群自架服務](./tools.md) |
+| 如何選擇主題開始？ | [如何參與與認領主題](https://anoni.net/join/) |
+| 如何申請 Matrix 帳號？ | [社群自架服務](https://anoni.net/services/) |
 | 我的程度適合做什麼？ | [自我技能評估表](./skill-level.md) |
 | 如何設定開發環境？ | [專案研究預先準備](./setup-repo.md) |
 | 翻譯有什麼規範？ | [中文化與文件翻譯](./i18n.md) |

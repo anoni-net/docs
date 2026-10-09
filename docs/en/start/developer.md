@@ -64,9 +64,9 @@ Technical ability and personal operational habits are separate things. Someone h
 
 ## What to take with you
 
-- [Public Matrix room](../community/tools.md): say what you are picking up before you start, so two people do not do the same work
+- [Public Matrix room](https://anoni.net/en/services/): say what you are picking up before you start, so two people do not do the same work
 - [anoni-net/docs on GitHub](https://github.com/anoni-net/docs): the site source and its issues, each written with the expected scope
-- Community-run CryptPad and Etherpad are available for drafting proposals, see [community services](../community/tools.md)
+- Community-run CryptPad and Etherpad are available for drafting proposals, see [community services](https://anoni.net/en/services/)
 
 ## What this path does not cover
 

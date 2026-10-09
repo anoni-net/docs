@@ -228,6 +228,6 @@ Anything you would rather not attach your name to can go to the anonymous addres
 
 ## Channels
 
-- Real-time discussion: public Matrix room (home server `im.anoni.net`, link on the [community tools page](../../community/tools.md))
-- Anonymous tips: whisper@anoni.net ([GPG key](../../contact.md))
+- Real-time discussion: public Matrix room (home server `im.anoni.net`, link on the [community tools page](https://anoni.net/en/services/))
+- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/))
 - Source and issues: [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}

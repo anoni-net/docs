@@ -130,7 +130,7 @@ The site also gained a URL contract, recording every page URL, every heading anc
 
 The WebRTC page in the Lab needs real measurements: two devices, one network, and the exported record pasted back onto [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}. Every network environment is useful, whether that is a home router, a phone hotspot or the shared Wi-Fi at a venue, and a failure to connect is just as worth recording.
 
-The cadence, scope and shape of this series are all still being worked out. If a section is too granular, if one deserves more room, or if there are changes you want to see covered, we would like to hear it. Contact details are on [Stay Informed](../../contact.md).
+The cadence, scope and shape of this series are all still being worked out. If a section is too granular, if one deserves more room, or if there are changes you want to see covered, we would like to hear it. Contact details are on [Stay Informed](https://anoni.net/en/contact/).
 
 ## Further reading
 

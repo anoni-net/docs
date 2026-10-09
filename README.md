@@ -198,7 +198,7 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 - **想提新主題、補在地案例，或推薦來源** → 用[內容提案](https://github.com/anoni-net/docs/issues/new?template=content.yml)或[來源建議](https://github.com/anoni-net/docs/issues/new?template=source-suggestion.yml) Issue。
 - **想參與推廣、活動或維運** → 到 Matrix [社群 Public Space](https://matrix.to/#/#community:im.anoni.net) 打聲招呼。
 
-工具操作與安全情境類內容（tools、scenarios、advanced）由維護者技術審核才合併，其餘內容輕量審核。寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)的「寫作風格規範」一節，送 PR 前可先執行 `tools/docs_style_lint.py` 自檢。完整入門見[如何參與與認領主題](https://anoni.net/docs/community/how-to-contribute/)。流程、分支與 CI、授權見 [CONTRIBUTING.md](./CONTRIBUTING.md)，互動規範見[行為準則](./CODE_OF_CONDUCT.md)。
+工具操作與安全情境類內容（tools、scenarios、advanced）由維護者技術審核才合併，其餘內容輕量審核。寫作風格的單一來源是[貢獻者百科](https://anoni.net/docs/community/contributor-handbook/)的「寫作風格規範」一節，送 PR 前可先執行 `tools/docs_style_lint.py` 自檢。完整入門見[如何參與與認領主題](https://anoni.net/join/)。流程、分支與 CI、授權見 [CONTRIBUTING.md](./CONTRIBUTING.md)，互動規範見[行為準則](./CODE_OF_CONDUCT.md)。
 
 **找人**：Matrix [Public Space](https://matrix.to/#/#community:im.anoni.net)（帳號申請來信 whisper@anoni.net）、[GitHub Discussions](https://github.com/anoni-net/docs/discussions)、加密共筆 [Cryptpad](https://cryptpad.anoni.net/)。
 

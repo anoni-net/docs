@@ -66,12 +66,14 @@ find ./ -path './onion' -prune -o \
 		-e "s|](https://anoni.net/news|](http://news.${ONION_ROOT}|g" \
 		-e "s|](https://anoni.net/|](http://${ONION_ROOT}/|g" {} +
 
-# 側邊欄連回官網的那一項（mkdocs*.yml 的 nav，值是 https://anoni.net/、/zh-cn/、/en/）。
-# 只改行尾整個是官網首頁的網址，site_url 這類 /docs 開頭的上面已經改過。
+# 設定檔裡連到官網的兩種寫法：側邊欄連回官網的那一項（行尾整個是 https://anoni.net/、
+# /zh-cn/、/en/），以及 redirect_maps 指到官網的轉址（值用單引號包住，例如
+# 'https://anoni.net/contact/'）。site_url 這類 /docs 開頭的上面已經改過。
 sed -i \
 	-e "s|: https://anoni.net/\$|: http://${ONION_ROOT}/|" \
 	-e "s|: https://anoni.net/zh-cn/\$|: http://${ONION_ROOT}/zh-cn/|" \
 	-e "s|: https://anoni.net/en/\$|: http://${ONION_ROOT}/en/|" \
+	-e "s|'https://anoni.net/|'http://${ONION_ROOT}/|g" \
 	./mkdocs.yml ./mkdocs_cn.yml ./mkdocs_en.yml
 
 # assets.anoni.net 刻意不改寫。這裡曾經加過一條把它換成 onion /assets 的規則，

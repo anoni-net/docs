@@ -40,4 +40,4 @@ og:
 
 完整的開場 prompt 與十幾個調查問題都在 [出國前數位安全：用 AI 自助產生目的地概況](../../scenarios/travel-ai-briefing.md)，照著複製就能開始。如果你的目的地在東亞、東南亞，我們另外整理了一份預先填好十四地的對照表 [出差與研討會的數位準備](../../scenarios/asia-travel.md)，兩頁可以互相對照。
 
-有特定目的地的實地經驗想分享，歡迎到 [Matrix 公開 room](../../community/tools.md) 討論，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+有特定目的地的實地經驗想分享，歡迎到 [Matrix 公開 room](https://anoni.net/services/) 討論，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

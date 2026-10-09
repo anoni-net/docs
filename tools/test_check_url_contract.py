@@ -106,6 +106,18 @@ def test_redirect_target_becomes_a_site_path(tmp_root):
     assert target == "/basics/internet-freedom/", target
 
 
+def test_offsite_redirect_target_is_kept_as_is(tmp_root):
+    # 搬到站外的頁面（例如 2026-10 搬到 anoni.net 頂層的聯絡頁），meta refresh 寫的是
+    # 完整網址。接到站台路徑後面會變成 /contact/https:/anoni.net/contact/。
+    html = REDIRECT_HTML.replace("../basics/internet-freedom/", "https://anoni.net/contact/")
+    (tmp_root / "contact").mkdir(parents=True, exist_ok=True)
+    (tmp_root / "contact" / "index.html").write_text(html, encoding="utf-8")
+    entries = checker.scan(tmp_root)
+    kind, target = entries["/contact/"]
+    assert kind == "redirect", kind
+    assert target == "https://anoni.net/contact/", target
+
+
 def test_render_and_parse_round_trip():
     entries = {
         "/": ("page", ["近期公告"]),
@@ -237,6 +249,7 @@ def main():
         check("版面元件與註腳的 id 不算錨點", test_non_heading_ids_are_not_anchors)
         check("redirect 頁不算一篇文章", test_redirect_page_is_not_a_page)
         check("redirect 目的地換算成站台路徑", lambda: test_redirect_target_becomes_a_site_path(tmp_root))
+        check("站外的 redirect 目的地原樣記下", lambda: test_offsite_redirect_target_is_kept_as_is(tmp_root))
         check("寫出去的合約讀得回來", test_render_and_parse_round_trip)
         check("孤兒錨點會報錯", test_anchor_without_a_page_is_loud)
         check("移除頁面是錯誤", test_removed_page_is_an_error)

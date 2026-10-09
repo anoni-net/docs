@@ -74,8 +74,8 @@ Each language version has its own RSS feed, with no account and no email address
 ## Reporting and taking part
 
 - Report an error: [open a GitHub issue](https://github.com/anoni-net/news/issues/new){target="_blank"} naming the piece and the sentence, with a source if you have one
-- Real-time discussion: Matrix public room (home server `im.anoni.net`, link on the [community tools page](../../community/tools.md))
-- Anonymous tips: whisper@anoni.net ([GPG key](../../contact.md))
+- Real-time discussion: Matrix public room (home server `im.anoni.net`, link on the [community tools page](https://anoni.net/en/services/))
+- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/))
 
 ## Related reading
 

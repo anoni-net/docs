@@ -399,7 +399,7 @@ VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大
 
 ## 回報過時資訊
 
-審查現況變動快，本表難免有落後現實的地方。如果你發現某地的封鎖、VPN、SIM 或入境規定已經跟表上不同，歡迎到 [社群 Matrix 公開 room](../community/tools.md) 回報，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，我們會查證後更新。有當地第一手經驗、願意補充逐地註記的人，也歡迎一起參與。
+審查現況變動快，本表難免有落後現實的地方。如果你發現某地的封鎖、VPN、SIM 或入境規定已經跟表上不同，歡迎到 [社群 Matrix 公開 room](https://anoni.net/services/) 回報，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，我們會查證後更新。有當地第一手經驗、願意補充逐地註記的人，也歡迎一起參與。
 
 ## 相關閱讀
 

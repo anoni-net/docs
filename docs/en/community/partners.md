@@ -54,7 +54,7 @@ We can walk your staff through a device review. The procedure is in [Walking a n
 
 ### Self-hosted services for collaboration
 
-The community self-hosts Matrix, CryptPad, Send, Etherpad, and a forms service, described in [Community Services](./tools.md). Send and Etherpad need no account, while Matrix and CryptPad accounts are issued on request. The services are run by volunteers with no service-level commitment, so they suit collaboration better than being your organization's system of record. For exchanging sensitive files, [Sending Us Sensitive Material](./upload-sensitive.md) describes our own process.
+The community self-hosts Matrix, CryptPad, Send, Etherpad, and a forms service, described in [Community Services](https://anoni.net/en/services/). Send and Etherpad need no account, while Matrix and CryptPad accounts are issued on request. The services are run by volunteers with no service-level commitment, so they suit collaboration better than being your organization's system of record. For exchanging sensitive files, [Sending Us Sensitive Material](./upload-sensitive.md) describes our own process.
 
 ### Newsroom intake channels
 
@@ -82,7 +82,7 @@ The community has run a track at COSCUP two years in a row and has co-hosted ses
 
 ## How collaboration works
 
-1. Write to [whisper@anoni.net](mailto:whisper@anoni.net) with the kind of organization you are and what you have in mind. If you need encryption, use the PGP key on [Stay Informed](../contact.md)
+1. Write to [whisper@anoni.net](mailto:whisper@anoni.net) with the kind of organization you are and what you have in mind. If you need encryption, use the PGP key on [Stay Informed](https://anoni.net/en/contact/)
 2. We reply and set up a call on Jitsi, which the community uses for its own meetings
 3. Before the call, each side fills in the threat model checklist and brings the copied summary
 4. We agree on which pieces to take on, on a timeline set by volunteer availability

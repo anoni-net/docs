@@ -60,6 +60,6 @@ Send 不使用 cookie，也沒有任何分析或追蹤工具。
 
 ## 聯絡與檢舉
 
-安全問題與服務被濫用的檢舉，例如有人利用它散布不當內容，請寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，需要加密時使用[聯絡頁](../contact.md)上的 PGP 公開金鑰。檢舉時附上分享連結 `#` 之前的部分就好，我們用檔案 ID 刪除，不需要金鑰。
+安全問題與服務被濫用的檢舉，例如有人利用它散布不當內容，請寄到 [whisper@anoni.net](mailto:whisper@anoni.net)，需要加密時使用[聯絡頁](https://anoni.net/contact/)上的 PGP 公開金鑰。檢舉時附上分享連結 `#` 之前的部分就好，我們用檔案 ID 刪除，不需要金鑰。
 
-服務的其他資訊見[社群自架服務](./tools.md)。
+服務的其他資訊見[社群自架服務](https://anoni.net/services/)。
