@@ -131,7 +131,6 @@ nav:
           - community/ooni-blocking-determination.md
           - community/ooni-nettests-map.md
           - community/asn-coverage-howto.md
-          - community/onionoo-mcp.md
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
       # 十四支工具排成一列，手機的左側抽屜要 732px 才裝得下，390x844 剛好塞滿、
@@ -393,6 +392,7 @@ plugins:
         'community/tools.md': 'https://anoni.net/services/'
         'community/how-to-contribute.md': 'https://anoni.net/join/'
         'taiwan/tor-relay-watcher.md': 'https://anoni.net/projects/pulse/'
+        'community/onionoo-mcp.md': 'https://anoni.net/projects/onionoo-mcp/'
         'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'

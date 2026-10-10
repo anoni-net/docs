@@ -1977,22 +1977,7 @@
 	#社群參與過的上游翻譯
 	#翻譯外部文章到-blog
 	#順序與校稿停點
-/community/onionoo-mcp/
-	#API-與-MCP-的差別
-	#MCP-工具一覽
-	#onionoo-MCPTor-中繼節點查詢服務
-	#參與與貢獻
-	#可以直接複製的問句
-	#它能幫你回答什麼
-	#我查到的數字可靠嗎能不能引用
-	#接成-MCP-伺服器設定檔
-	#為什麼做這個服務
-	#當作-HTTP-API-直接呼叫
-	#範例用-AI-代理盤點臺灣-Tor-貢獻
-	#給工程師與想自架的人
-	#自架Docker
-	#觀測指標與運維
-	#開始使用不用寫程式
+/community/onionoo-mcp/ -> https://anoni.net/projects/onionoo-mcp/
 /community/ooni-blocking-determination/
 	#OONI-怎麼判定一個網站被封鎖
 	#dns解析結果不一致
@@ -3770,22 +3755,7 @@
 	#What-goes-missing-when-an-English-page-derives-from-zh-TW
 	#What-helping-with-en-actually-means
 	#Where-to-go-from-here
-/en/community/onionoo-mcp/
-	#API-vs-MCP
-	#Are-the-numbers-reliable--can-I-cite-them
-	#Call-it-as-an-HTTP-API
-	#Example-surveying-Taiwans-Tor-footprint-with-an-agent
-	#For-engineers-and-self-hosters
-	#Get-involved
-	#Getting-started-no-code-required
-	#MCP-tools-at-a-glance
-	#Observability-and-operations
-	#Questions-you-can-copy-and-paste
-	#Self-host-with-Docker
-	#What-it-can-answer-for-you
-	#Why-this-service
-	#Wire-it-up-as-an-MCP-server-config-file
-	#onionoo-MCP-a-query-service-for-Tor-relays
+/en/community/onionoo-mcp/ -> https://anoni.net/en/projects/onionoo-mcp/
 /en/community/ooni-blocking-determination/
 	#From-one-measurement-to-a-credible-conclusion
 	#How-OONI-decides-a-site-is-blocked
@@ -8718,22 +8688,7 @@
 	#校对时要抓的是翻漏
 	#相关规则文件
 	#社区参与过的上游翻译
-/zh-cn/community/onionoo-mcp/
-	#API-与-MCP-的差别
-	#MCP-工具一览
-	#onionoo-MCPTor-中继节点查询服务
-	#为什么做这个服务
-	#参与与贡献
-	#可以直接复制的问句
-	#它能帮你回答什么
-	#开始使用不用写代码
-	#当作-HTTP-API-直接调用
-	#我查到的数字可靠吗能不能引用
-	#接成-MCP-服务器配置文件
-	#给工程师与想自架的人
-	#自架Docker
-	#范例用-AI-代理盘点台湾-Tor-贡献
-	#观测指标与运维
+/zh-cn/community/onionoo-mcp/ -> https://anoni.net/zh-cn/projects/onionoo-mcp/
 /zh-cn/community/ooni-blocking-determination/
 	#OONI-怎么判定一个网站被封锁
 	#dns解析结果不一致

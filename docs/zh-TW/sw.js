@@ -298,7 +298,6 @@ const CORE_PAGES_ZH = [
   "utils/qr-stream/",
   "utils/passphrase/",
   // community（社群，選錄離線可讀的工具頁）
-  "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
   "games/",
 ];
@@ -390,7 +389,6 @@ const CORE_PAGES_EN = [
   "utils/qr-stream/",
   "utils/passphrase/",
   // community（社群，選錄離線可讀的工具頁）
-  "community/onionoo-mcp/",
   // 互動與呈現的索引頁。作品本體不在這裡，見下面的 GAME_APPS。
   "games/",
 ];
