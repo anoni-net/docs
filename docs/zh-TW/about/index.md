@@ -1,6 +1,6 @@
 ---
 title: 關於文件站
-description: anoni.net 文件站寫什麼、怎麼寫成、三個語系的關係、寫錯了怎麼更正，以及內容的授權。社群本身的介紹在 anoni.net。
+description: anoni.net 文件站寫什麼、如何寫成、三個語系的關係、錯誤如何更正，以及內容的授權。社群本身的介紹在 anoni.net。
 icon: material/book-information-variant
 ---
 
@@ -41,13 +41,13 @@ icon: material/book-information-variant
 
 ## 更正
 
-寫錯的地方直接修改原文，影響讀者做法的更正另外寫成公告，說明改了什麼、依據在哪裡，以及照著舊版做過準備的人要補上什麼，例如 [2026/08 的更正回顧](../blog/posts/docs-corrections-202608.md)與 [2026/09 的文件站更新回顧](../blog/posts/site-updates-202609.md)。
+寫錯的地方直接修改原文，影響讀者做法的更正另外寫成公告。公告說明改了什麼、依據在哪裡，以及照著舊版做過準備的人要補上什麼，例如 [2026/08 的更正回顧](../blog/posts/docs-corrections-202608.md)與 [2026/09 的文件站更新回顧](../blog/posts/site-updates-202609.md)。
 
 發現錯誤或過時的內容，可以到 [GitHub 開 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或寫信到 <whisper@anoni.net>（PGP 公鑰見[聯絡頁](https://anoni.net/contact/#pgp)）。
 
 ## 閱讀方式
 
-文件站同時發布成標準網站、Tor onion 與 IPFS 鏡像三份，內容相同，差別在過程中誰看得到什麼，見[你正在用哪一種方式閱讀](./how-you-are-reading.md)。標準網站另外可以存進裝置，沒有網路時照樣能讀，見[離線閱讀](../offline.md)。
+文件站同時發布成標準網站、Tor onion 與 IPFS 鏡像三份，內容相同，差別在過程中誰可以看到什麼，見[你正在用哪一種方式閱讀](./how-you-are-reading.md)。標準網站另外可以存進裝置，沒有網路時照樣能讀，見[離線閱讀](../offline.md)。
 
 ## 授權
 

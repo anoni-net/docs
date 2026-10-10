@@ -12,7 +12,7 @@ icon: material/database-search
 
 !!! tip "執行位置"
 
-    以下指令在 [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"} 的目錄下執行。初次使用先 clone 這個 repo、`cd` 進該目錄，執行 `uv sync` 安裝依賴，再依下方範例以 `uv run python ooni.py ...` 執行。
+    以下指令在 [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"} 的目錄下執行。初次使用先 clone 這個 repo、`cd` 進該目錄，執行 `uv sync` 安裝相依套件，再依下方範例以 `uv run python ooni.py ...` 執行。
 
 ## 三種取用路徑
 

@@ -55,7 +55,7 @@ icon: material/access-point-network
 
 要補上覆蓋，最直接的做法是讓一台裝置在還沒人測過的 ASN 上持續執行。社群維運的 OONI Run 連結 `10328` 是現成的入口，行動裝置安裝 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 之後點一次連結就完成設定，接著讓它留在背景執行。安裝前的風險前提與清單內容見 [OONI Run v2 操作說明](../tools/ooni-run-v2.md)。
 
-用行動網路的協助者特別有幫助。現有測量幾乎都落在少數固網 ASN 上，行動業者與第二類電信的資料最缺。目前還沒有測量的網路列在 OONI 觀測涵蓋率頁的「還沒有測量的網路」。
+現有測量幾乎都落在少數固網 ASN 上，行動業者與第二類電信的資料最缺，用行動網路的協助者特別有幫助。目前還沒有測量的網路列在 OONI 觀測涵蓋率頁的「還沒有測量的網路」。
 
 [:material-help-network: 怎麼參與觀測](../tools/ooni-run-v2.md){ .md-button }
 

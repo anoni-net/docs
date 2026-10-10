@@ -27,7 +27,7 @@ icon: material/book-open-variant
 
 ### 執行 linter
 
-CI 的 `docs-style-lint` 只在 `docs/zh-TW`、`docs/zh-CN`、`docs/en` 的 Markdown 變更時觸發。根目錄的 `README.md`、`CONTRIBUTING.md` 這類說明文件改完，需要自己執行一次：
+CI 的 `docs-style-lint` 只在 `docs/zh-TW`、`docs/zh-CN`、`docs/en` 的 Markdown 變更時觸發。根目錄的 `README.md`、`CONTRIBUTING.md` 這類說明文件改完，需要自行執行一次：
 
 ```bash
 python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
@@ -35,7 +35,7 @@ python3 tools/docs_style_lint.py README.md CONTRIBUTING.md
 
 `NOTICE` 沒有 `.md` 副檔名，linter 只收 `.md` 與 `.js`，那一份要人工看。
 
-有一組規則明文豁免既有內容，目前只有寫作風格規範「標題句構」的 `title-colon`。CI 傳 `--changed-since <base>`，讓這組規則只在這個 PR 真的動過的行上報。本機想看整個檔案的全貌就不要帶那個旗標：
+有一組規則明文豁免既有內容，目前只有寫作風格規範「標題句構」的 `title-colon`。CI 傳 `--changed-since <base>`，讓這組規則只在本次 PR 實際修改的行上報。本機想看整個檔案的全貌就不要帶那個旗標：
 
 ```bash
 python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-guide.md
@@ -68,7 +68,7 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `reports/` | 嚴選報告，外部研究的中譯 |
 | `community/` | 架設與營運的教學、讀懂觀測資料的方法、貢獻與翻譯規範 |
 
-社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/)，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www)，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
+社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/)，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www){target="_blank"}，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
 
 如果你的新文章不確定該放哪一類，先在 Matrix 上問一聲，避免直接 PR 後又要搬。
 
@@ -156,7 +156,7 @@ icon: material/shield-account-outline
 
 ### 圖表
 
-文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫。圖表在讀者的瀏覽器裡抓資料，onion 版的讀者也會連到資料來源，資料要放在站內或支援 onion 的位址。Pulse 的觀測圖表在 2026-10 搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，改成建置時產生的靜態圖表。
+文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫。圖表在讀者的瀏覽器裡載入資料，onion 版的讀者也會連到資料來源，資料要放在站內或支援 onion 的位址。Pulse 的觀測圖表在 2026-10 搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，改成建置時產生的靜態圖表。
 
 ### 結構化資料
 
