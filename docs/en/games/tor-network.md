@@ -136,7 +136,7 @@ Every data file carries `source`, `sourceUrl`, `license` and `licenseUrl` fields
 - Where the globe's data comes from: [Where the globe's data comes from](../blog/posts/games-globe-open-data.md)
 - How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
-- Running a relay and watching the network: [Tor relay watcher](../regional/tor-relay-watcher.md)
+- Running a relay and watching the network: [Tor relay watcher](https://anoni.net/en/projects/pulse/)
 - The other two works: [Interactive](index.md)
 
 <script type="application/ld+json">

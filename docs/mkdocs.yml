@@ -119,7 +119,6 @@ nav:
       - "連線層的在地觀測":
           - taiwan/ooni-checklist.md
           - taiwan/ooni-asn-coverage.md
-          - taiwan/tor-relay-watcher.md
           - taiwan/tor-users.md
       - "法規與制度":
           - taiwan/pdpa-2025.md
@@ -393,6 +392,7 @@ plugins:
         'contact.md': 'https://anoni.net/contact/'
         'community/tools.md': 'https://anoni.net/services/'
         'community/how-to-contribute.md': 'https://anoni.net/join/'
+        'taiwan/tor-relay-watcher.md': 'https://anoni.net/projects/pulse/'
         'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'
@@ -430,7 +430,7 @@ plugins:
         'tor-snowflake.md': 'tools/tor-snowflake.md'
         'ooni-asns-coverage.md': 'taiwan/ooni-asn-coverage.md'
         'ooni-weblists.md': 'taiwan/ooni-checklist.md'
-        'watcher-tor-relays.md': 'taiwan/tor-relay-watcher.md'
+        'watcher-tor-relays.md': 'https://anoni.net/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
@@ -445,7 +445,7 @@ plugins:
         'blog/2025/01/项目重启-2025.md': 'blog/index.md'
         'blog/2026/02/ooni-全新的匿名凭证系统.md': 'blog/index.md'
         'regional.md': 'taiwan/index.md'
-        'regional/tor-relay-watcher.md': 'taiwan/index.md'
+        'regional/tor-relay-watcher.md': 'https://anoni.net/projects/pulse/'
   # 社群分享卡。版型在 layouts/anoni.yml，三個語系共用同一份，這裡只帶語系差異。
   # 配色、間距、圖層都寫在版型裡，不要在這裡覆蓋單一顏色，那會讓三個語系慢慢長歪。
   #

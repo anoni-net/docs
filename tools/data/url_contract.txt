@@ -4252,13 +4252,7 @@
 	#Where-the-law-does-not-reach
 	#Who-is-covered
 	#Why-an-anonymity-community-tracks-whistleblower-law
-/en/regional/tor-relay-watcher/
-	#Cross-region-snapshot
-	#Diversity
-	#Health
-	#Related
-	#Tor-relay-watcher
-	#Version-and-flags
+/en/regional/tor-relay-watcher/ -> https://anoni.net/en/projects/pulse/
 /en/report/interseclab-the-internet-coup/ -> /en/reports/
 /en/report/interseclab-the-internet-coup/index_3/ -> /en/reports/
 /en/report/interseclab-the-internet-coup/index_5/ -> /en/reports/
@@ -4622,7 +4616,7 @@
 /en/taiwan/ooni-asn-coverage/ -> /en/regional/ooni-asn-coverage/
 /en/taiwan/ooni-checklist/ -> /en/regional/ooni-checklist/
 /en/taiwan/pdpa-2025/ -> /en/regional/taiwan-pdpa-2025/
-/en/taiwan/tor-relay-watcher/ -> /en/regional/tor-relay-watcher/
+/en/taiwan/tor-relay-watcher/ -> https://anoni.net/en/projects/pulse/
 /en/taiwan/vasp-2026/ -> /en/regional/taiwan-vasp-2026/
 /en/taiwan/whistleblower-law/ -> /en/regional/taiwan-whistleblower-law/
 /en/tools/
@@ -5279,7 +5273,7 @@
 	#Threat-model-checklist
 	#What-this-page-does
 	#Works-offline
-/en/watcher-tor-relays/ -> /en/regional/tor-relay-watcher/
+/en/watcher-tor-relays/ -> https://anoni.net/en/projects/pulse/
 /en/what-is-anonymous-network/ -> /en/tools/what-is-anonymity-network/
 /en/what-is-ooni/ -> /en/tools/what-is-ooni/
 /en/what-is-tails/ -> /en/tools/what-is-tails/
@@ -5404,7 +5398,7 @@
 /ooni-i18n/ -> /community/i18n/
 /ooni-weblists/ -> /taiwan/ooni-checklist/
 /regional/ -> /taiwan/
-/regional/tor-relay-watcher/ -> /taiwan/
+/regional/tor-relay-watcher/ -> https://anoni.net/projects/pulse/
 /report/ -> /reports/
 /report/interseclab-the-internet-coup/ -> /reports/interseclab-network-coup/
 /report/interseclab-the-internet-coup/index_1/ -> /reports/interseclab-network-coup/index_1/
@@ -6099,13 +6093,7 @@
 	#通知義務只蓋到其中一類
 	#電信業者查政府的資料庫
 	#預設值是誰設的又該由誰來改
-/taiwan/tor-relay-watcher/
-	#Tor-Relays-觀測點
-	#下一步
-	#健康狀態
-	#各地區比較
-	#多樣性指標
-	#版本與標籤
+/taiwan/tor-relay-watcher/ -> https://anoni.net/projects/pulse/
 /taiwan/tor-users/
 	#2025-年那次十倍跳升是計數錯誤
 	#bridge-使用在-2026-年成長原因還不清楚
@@ -6838,7 +6826,7 @@
 	#vendor
 	#為什麼不自己寫
 	#為什麼臉部偵測用-pico-而不是-TensorFlowjs
-/watcher-tor-relays/ -> /taiwan/tor-relay-watcher/
+/watcher-tor-relays/ -> https://anoni.net/projects/pulse/
 /what-is-anonymous-network/ -> /tools/what-is-anonymity-network/
 /what-is-ooni/ -> /tools/what-is-ooni/
 /what-is-tails/ -> /tools/what-is-tails/
@@ -9043,7 +9031,7 @@
 /zh-cn/ooni-i18n/ -> /zh-cn/community/i18n/
 /zh-cn/ooni-weblists/ -> /zh-cn/taiwan/ooni-checklist/
 /zh-cn/regional/ -> /zh-cn/taiwan/
-/zh-cn/regional/tor-relay-watcher/ -> /zh-cn/taiwan/
+/zh-cn/regional/tor-relay-watcher/ -> https://anoni.net/zh-cn/projects/pulse/
 /zh-cn/report/interseclab-the-internet-coup/ -> /zh-cn/reports/
 /zh-cn/report/interseclab-the-internet-coup/index_3/ -> /zh-cn/reports/
 /zh-cn/report/interseclab-the-internet-coup/index_5/ -> /zh-cn/reports/
@@ -9612,13 +9600,7 @@
 	#这门生意的四个窗口
 	#通知义务只盖到其中一类
 	#默认值是谁设的又该由谁来改
-/zh-cn/taiwan/tor-relay-watcher/
-	#Tor-Relays-观测点
-	#下一步
-	#健康状态
-	#各地区比较
-	#多样性指标
-	#版本与标签
+/zh-cn/taiwan/tor-relay-watcher/ -> https://anoni.net/zh-cn/projects/pulse/
 /zh-cn/taiwan/tor-users/
 	#2025-年那次十倍跳升是计数错误
 	#bridge-使用在-2026-年增长原因还不清楚
@@ -10343,7 +10325,7 @@
 	#答案预设不存
 	#跟威胁模型那篇文章的关系
 	#这份清单是活的
-/zh-cn/watcher-tor-relays/ -> /zh-cn/taiwan/tor-relay-watcher/
+/zh-cn/watcher-tor-relays/ -> https://anoni.net/zh-cn/projects/pulse/
 /zh-cn/what-is-anonymous-network/ -> /zh-cn/tools/what-is-anonymity-network/
 /zh-cn/what-is-ooni/ -> /zh-cn/tools/what-is-ooni/
 /zh-cn/what-is-tails/ -> /zh-cn/tools/what-is-tails/

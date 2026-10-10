@@ -129,7 +129,7 @@ Community discussion happens on [Matrix](https://anoni.net/en/contact/) (home se
 - [Snowflake (Tor Project)](https://snowflake.torproject.org/){target="_blank"}
 - [Set up a Tor relay (Tor Project)](https://community.torproject.org/relay/){target="_blank"}
 - [Why internet freedom matters](../../basics/internet-freedom.md)
-- [Tor relay observation in Taiwan](../../regional/tor-relay-watcher.md)
+- [Tor relay observation in Taiwan](https://anoni.net/en/projects/pulse/)
 
 [^1]: [Cloudflare Radar — Iran](https://radar.cloudflare.com/ir){target="_blank"} - Cloudflare Radar
 [^2]: [Internet shutdown in Iran amid military actions](https://x.com/CloudflareRadar/status/2027709437981450502){target="_blank"} - Cloudflare Radar

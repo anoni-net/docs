@@ -69,6 +69,15 @@ find ./ -path './onion' -prune -o \
 		-e "s|](https://anoni.net/news|](http://news.${ONION_ROOT}|g" \
 		-e "s|](https://anoni.net/|](http://${ONION_ROOT}/|g" {} +
 
+# 互動作品的 JS 裡連到官網的連結，例如洋蔥路由英文版連到 2026-10 搬到官網的
+# Tor 中繼節點觀測（/en/projects/pulse/）。只改 games 底下的 JS，寫法是單引號包住的
+# 路徑與 href 屬性兩種，/docs 與 /api 在上面已經改過。
+find ./ -path './onion' -prune -o \
+	-type f -path '*/games/*' -name '*.js' \
+	-exec sed -i \
+		-e "s|'https://anoni.net/|'http://${ONION_ROOT}/|g" \
+		-e "s|href=\"https://anoni.net/|href=\"http://${ONION_ROOT}/|g" {} +
+
 # 設定檔裡連到官網的兩種寫法：側邊欄連回官網的那一項（行尾整個是 https://anoni.net/、
 # /zh-cn/、/en/），以及 redirect_maps 指到官網的轉址（值用單引號包住，例如
 # 'https://anoni.net/contact/'）。site_url 這類 /docs 開頭的上面已經改過。

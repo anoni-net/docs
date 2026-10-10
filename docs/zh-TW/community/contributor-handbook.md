@@ -156,7 +156,7 @@ icon: material/shield-account-outline
 
 ### 圖表
 
-文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫，資料來源優先用 Pulse API（`https://api.anoni.net/api/...`）。可參考 `taiwan/tor-relay-watcher.md`。
+文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫。圖表在讀者的瀏覽器裡抓資料，onion 版的讀者也會連到資料來源，資料要放在站內或支援 onion 的位址。Pulse 的觀測圖表在 2026-10 搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，改成建置時產生的靜態圖表。
 
 ### 結構化資料
 

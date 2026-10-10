@@ -182,11 +182,11 @@ const EN = {
   sepBar: ' | ',
   docOverview: '../../../en/games/',
   docTor: '../../../en/basics/anonymity-vs-privacy/',
-  docAsn: '../../../en/regional/tor-relay-watcher/',
+  docAsn: 'https://anoni.net/en/projects/pulse/',
   docSnowflake: '../../../en/tools/tor-snowflake/',
 
   // 英文站沒有 what-is-tor 與 ASN 涵蓋那兩頁，所以延伸閱讀改指實際存在的英文頁。
-  backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/basics/anonymity-vs-privacy/">Anonymity vs privacy</a>, <a href="../../../en/regional/tor-relay-watcher/">Tor relay watcher</a>',
+  backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/basics/anonymity-vs-privacy/">Anonymity vs privacy</a>, <a href="https://anoni.net/en/projects/pulse/">Tor Relay Watch</a>',
 };
 
 const ZH_CN = {

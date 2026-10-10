@@ -268,7 +268,7 @@ The agent breaks the question into a handful of MCP tool calls and assembles a s
 ## Get involved
 
 - **Report bugs or suggest tools**: <https://github.com/anoni-net/onionoo-fastapi/issues>
-- **Want to run your own Tor relay?** See the [Tor Relays Observatory](../regional/tor-relay-watcher.md) for the data we publish on relays in the region.
+- **Want to run your own Tor relay?** See the [Tor Relays Observatory](https://anoni.net/en/projects/pulse/) for the data we publish on relays in the region.
 - **Pre-travel checks**: [Pre-departure digital safety — brief yourself with AI prompts](../scenarios/travel-ai-briefing.md). When a journalist or NGO needs to assess a destination's Tor reachability before a trip, connecting onionoo MCP lets the AI pull real, citable Onionoo numbers.
 - **Background reading**: the [About page](https://anoni.net/en/about/) covers governance and how the wider site fits together; the [Regional Observatory](../regional/index.md) is where this service's outputs feed back into public analysis.
 

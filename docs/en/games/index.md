@@ -69,7 +69,7 @@ These pages cover concepts that show up in the current works.
 
 - How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
-- Running a relay and watching the network: [Tor relay watcher](../regional/tor-relay-watcher.md)
+- Running a relay and watching the network: [Tor relay watcher](https://anoni.net/en/projects/pulse/)
 - Getting through when Tor is blocked: [Tor Snowflake bridges](../tools/tor-snowflake.md)
 
 ## Want to help build them

@@ -185,7 +185,7 @@ CIVICUS Monitor 評級。是否有 foreign-agent／NGO 註冊法、誹謗或冒�
 ## 一手來源（請自行核對 AI 的答案）
 
 - **OONI Explorer**（各國網路審查、封鎖量測）：<https://explorer.ooni.org/>{target="_blank"}
-- **Tor Metrics**（Tor relay、bridge、各國連線數）：<https://metrics.torproject.org/>{target="_blank"}（anoni.net 自己的 [Tor relay watcher](../taiwan/tor-relay-watcher.md) 也用同一套 Onionoo 資料）
+- **Tor Metrics**（Tor relay、bridge、各國連線數）：<https://metrics.torproject.org/>{target="_blank"}（anoni.net 自己的 [Tor relay watcher](https://anoni.net/projects/pulse/) 也用同一套 Onionoo 資料）
 - **Access Now Digital Security Helpline**（24/7 數位安全求助）：<https://www.accessnow.org/help/>{target="_blank"}
 - **Access Now #KeepItOn**（網路關閉追蹤）：<https://www.accessnow.org/keepiton/>{target="_blank"}
 - **你的國家外交部、領務局**：旅遊警示與駐外館處急難電話（台灣使用者可查 [外交部領事事務局](https://www.boca.gov.tw/){target="_blank"}）

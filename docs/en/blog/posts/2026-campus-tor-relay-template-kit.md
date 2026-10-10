@@ -52,7 +52,7 @@ If your university already runs a relay through EFF's Tor University Challenge p
 
 Tor's anonymity rests on relay diversity. When relays concentrate in a few countries or network providers, the network's ability to resist traffic analysis weakens. Taiwan's relay count on Tor Metrics is still limited, and each stable node adds another margin of resistance. Real-time observation:
 
-- [Tor Relays watcher](../../regional/tor-relay-watcher.md)
+- [Tor Relays watcher](https://anoni.net/en/projects/pulse/)
 
 University campuses are a reasonable place to close that gap: stable academic bandwidth, students and staff with the skill to operate the node, a clearer institutional review path than residential or small-company hosting, and direct alignment with EFF's [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}.
 

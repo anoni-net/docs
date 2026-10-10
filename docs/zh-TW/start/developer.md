@@ -27,7 +27,7 @@ icon: material/console
 - [Tor Snowflake](../tools/tor-snowflake.md)：門檻最低的一種，開著那一頁就在幫忙，要常駐再裝擴充套件
 - [如何搭建 .onion 服務](../community/setup-onion-service.md)：把手上的服務多開一個 onion 入口
 - [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)：目前是單點，多一個 pin 就多一份備援
-- [Tor Relays 觀測點](../taiwan/tor-relay-watcher.md)：先看台灣現在有多少節點、分布在哪些 ASN
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)：先看台灣現在有多少節點、分布在哪些 ASN
 
 ### 會寫程式，會處理資料
 

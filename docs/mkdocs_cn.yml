@@ -101,7 +101,6 @@ nav:
       - "连线层的在地观测":
           - taiwan/ooni-checklist.md
           - taiwan/ooni-asn-coverage.md
-          - taiwan/tor-relay-watcher.md
           - taiwan/tor-users.md
       - "法规与制度":
           - taiwan/pdpa-2025.md
@@ -367,6 +366,7 @@ plugins:
         'contact.md': 'https://anoni.net/zh-cn/contact/'
         'community/tools.md': 'https://anoni.net/zh-cn/services/'
         'community/how-to-contribute.md': 'https://anoni.net/zh-cn/join/'
+        'taiwan/tor-relay-watcher.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'community/brand-assets.md': 'https://anoni.net/zh-cn/brand/'
         'activity/index.md': 'https://anoni.net/zh-cn/events/'
         'activity/gg2026.md': 'https://anoni.net/zh-cn/events/gg2026/'
@@ -392,7 +392,7 @@ plugins:
         'tor-snowflake.md': 'tools/tor-snowflake.md'
         'ooni-asns-coverage.md': 'taiwan/ooni-asn-coverage.md'
         'ooni-weblists.md': 'taiwan/ooni-checklist.md'
-        'watcher-tor-relays.md': 'taiwan/tor-relay-watcher.md'
+        'watcher-tor-relays.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
@@ -410,7 +410,7 @@ plugins:
         'community/campus-tor-relay-proposal.md': 'https://anoni.net/docs/community/campus-tor-relay-proposal/'
         'community/campus-tor-relay-sop.md': 'https://anoni.net/docs/community/campus-tor-relay-sop/'
         'regional.md': 'taiwan/index.md'
-        'regional/tor-relay-watcher.md': 'taiwan/index.md'
+        'regional/tor-relay-watcher.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'report/interseclab-the-internet-coup.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'

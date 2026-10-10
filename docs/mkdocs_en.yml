@@ -97,7 +97,6 @@ nav:
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
       - "Measurement and framing":
-          - regional/tor-relay-watcher.md
           - regional/taiwan-tor-users.md
           - regional/ooni-asn-coverage.md
           - regional/ooni-checklist.md
@@ -379,6 +378,7 @@ plugins:
         # These pages are the fallback for hosts without that nginx, such as the IPFS mirror.
         'contact.md': 'https://anoni.net/en/contact/'
         'community/tools.md': 'https://anoni.net/en/services/'
+        'regional/tor-relay-watcher.md': 'https://anoni.net/en/projects/pulse/'
         'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
@@ -409,7 +409,7 @@ plugins:
         'what-is-ooni.md': 'tools/what-is-ooni.md'
         'ooni-asns-coverage.md': 'regional/ooni-asn-coverage.md'
         'ooni-weblists.md': 'regional/ooni-checklist.md'
-        'watcher-tor-relays.md': 'regional/tor-relay-watcher.md'
+        'watcher-tor-relays.md': 'https://anoni.net/en/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
         'setup-tor-relay.md': 'community/setup-tor-relay.md'
@@ -461,7 +461,7 @@ plugins:
         'taiwan/ooni-checklist.md': 'regional/ooni-checklist.md'
         'taiwan/pdpa-2025.md': 'regional/taiwan-pdpa-2025.md'
         'taiwan/digital-wallet-privacy.md': 'regional/taiwan-digital-wallet-privacy.md'
-        'taiwan/tor-relay-watcher.md': 'regional/tor-relay-watcher.md'
+        'taiwan/tor-relay-watcher.md': 'https://anoni.net/en/projects/pulse/'
         'taiwan/vasp-2026.md': 'regional/taiwan-vasp-2026.md'
         'taiwan/whistleblower-law.md': 'regional/taiwan-whistleblower-law.md'
   # 社群分享卡，說明見 mkdocs.yml 的同一段。
