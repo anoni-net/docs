@@ -53,7 +53,7 @@ icon: material/book-information-variant
 
 內容以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權，轉載或改作時註明出處即可，寫法是「anoni.net 文件站，頁面網址，CC BY 4.0」。
 
-少數外部資料沿用原始的授權，例如互動作品用到的 OONI 資料是 CC BY-NC-SA 4.0，清單見 repo 根目錄的 [`NOTICE`](https://github.com/anoni-net/docs/blob/main/NOTICE){target="_blank"}。程式碼的授權另外標示，Pulse 是 MIT，ASN Coverage 是 GPL-3.0。
+少數外部資料沿用原始的授權，例如互動作品用到的 OONI 資料是 CC BY-NC-SA 4.0，清單見 repo 根目錄的 [`NOTICE`](https://github.com/anoni-net/docs/blob/main/NOTICE){target="_blank"}。程式碼的授權另外標示，Tor 中繼節點觀測（Pulse）是 MIT，OONI 觀測涵蓋率（ASN Coverage）是 GPL-3.0。
 
 ## 相關閱讀
 

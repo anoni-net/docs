@@ -6,7 +6,7 @@ icon: material/account-group-outline
 
 # :material-account-group-outline: 台湾有多少人在用 Tor
 
-从 [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"} 接续。前一页看的是节点端，台湾架了多少中继、分散在哪些 ASN、贡献多少带宽。本页换到用户端，看有多少人从台湾连上 [Tor](../tools/what-is-tor.md)、四年来如何变化、使用形态与其他地区的差异。
+从 [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"} 接续。前一页看的是节点端，台湾架了多少中继、分散在哪些 ASN、贡献多少带宽。本页换到用户端，看有多少人从台湾连上 [Tor](../tools/what-is-tor.md)、四年来如何变化、使用形态与其他地区的差异。
 
 !!! info "关于 anoni.net"
 
@@ -200,7 +200,7 @@ bridge 占比有它的极限。越南的 1.18% 比德国的 1.93% 还低，而�
 
 ## 使用的人多，提供中继的人少
 
-台湾用户约占全球的 0.33%，而台湾的中继数只占全网的 0.12%，消费与贡献之间有大约三倍的落差[^11]。每个在地中继对应的本地用户数，台湾是 795，美国 168、德国 188。比值量的是责任分配，不是实际的流量负担，Tor 选路不会优先挑同一个国家的中继。节点端的实时数字与 ASN 分布在 [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}，想增加一个节点可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
+台湾用户约占全球的 0.33%，而台湾的中继数只占全网的 0.12%，消费与贡献之间有大约三倍的落差[^11]。每个在地中继对应的本地用户数，台湾是 795，美国 168、德国 188。比值量的是责任分配，不是实际的流量负担，Tor 选路不会优先挑同一个国家的中继。节点端的实时数字与 ASN 分布在 [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}，想增加一个节点可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
 
 !!! example "想自己重现？"
 
@@ -217,7 +217,7 @@ bridge 占比有它的极限。越南的 1.18% 比德国的 1.93% 还低，而�
 
 <div class="grid cards" markdown>
 
-- [:material-chart-bar: Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
+- [:material-chart-bar: Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [:material-access-point-network: ASN 自治网络观测数据分析](./ooni-asn-coverage.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 - [:material-school: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}

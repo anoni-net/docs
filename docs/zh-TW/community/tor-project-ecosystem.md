@@ -87,7 +87,7 @@ Tor 把 IRC（OFTC 網路）與 Matrix 雙向橋接，用 Element 加入 Matrix 
 社群現有的工作跟 Tor 幾個方向接得起來：
 
 - 正體中文文件與用語。社群已在做 zh-Hant 的翻譯與用語規範，直接轉成 Weblate 上的 Tor 翻譯貢獻，是最自然的延伸。
-- 網路可達性觀測。社群維運的 Pulse（[Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"} 的圖表來源）與 ASN Coverage（[ASN 觀測資料分析](../taiwan/ooni-asn-coverage.md)）對應 network-health 團隊與 `S112` 的工作方向，觀測成果可帶到該團隊的社群分享。
+- 網路可達性觀測。社群維運的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}（Pulse）與 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){target="_blank"}（ASN Coverage）對應 network-health 團隊與 `S112` 的工作方向，觀測成果可帶到該團隊的社群分享。
 - 校園中繼。[Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 源自 EFF 與 Tor Project 合作的 Tor University Challenge，台師大已有運行中的案例（見 [台師大 NZ 訪談](../blog/posts/ntnu-nz.md)），是把在地推廣接回 Tor 生態的具體成果。
 
 這些方向如何排進社群的年度節奏，見 [2026 年度路線圖](https://anoni.net/join/roadmap-2026/){target="_blank"}。State of the Onion 的社群場會公開徵集社群更新，是把這些成果對國際亮相的場合。

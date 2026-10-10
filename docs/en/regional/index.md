@@ -87,7 +87,7 @@ Three threads run through the regional observation:
 
 ### Measurement we run or contribute to
 
-The Pulse system tracks Tor relay distribution across Taiwan, Hong Kong, Japan, and South Korea, surfaced as Vega charts on this site. The ASN (Autonomous System Number) coverage analysis tooling pulls OONI public data to map observation completeness across Sinophone-region autonomous systems. We file OONI Probe runs ourselves and translate OONI methodology updates.
+[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} (Pulse) tracks Tor relays in Taiwan and fourteen other regions. [OONI Coverage](https://anoni.net/en/projects/asn-coverage/){target="_blank"} (ASN Coverage) sets OONI's public measurements against each network's users to show which networks in the region are not being measured. We file OONI Probe runs ourselves and translate OONI methodology updates.
 
 ### Regulation we track
 
@@ -102,7 +102,7 @@ We have produced full Traditional Chinese translations of two pieces of regional
 **Measurement and framing**:
 
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
-- [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"} — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
+- [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} — hourly observation of Tor relays in Taiwan and fourteen other regions, collected by Pulse.
 - [How many people use Tor in Taiwan](./taiwan-tor-users.md) — the user side of the same connection layer, four years of Taiwan figures set against Mainland China and Hong Kong, and why the tenfold spike of 2025 was a counting bug.
 - [ASN observation data analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
@@ -135,7 +135,7 @@ The list below is third-party material we find useful for regional work; inclusi
 If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific and would like to compare notes, contribute primary observation, or co-publish, the [Community](https://anoni.net/en/join/){target="_blank"} page lists the channels (Matrix, email, encrypted submission). We particularly welcome:
 
 - Region-specific contributors who can sharpen the country sections from inside their own jurisdiction
-- Researchers wanting to use the underlying Pulse and ASN coverage data in published work
+- Researchers wanting to use the data behind Tor Relay Watch and OONI Coverage in published work
 - Translators bridging regional reports between Chinese and English
 
 What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](https://anoni.net/en/about/partners/){target="_blank"}.

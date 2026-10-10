@@ -152,7 +152,7 @@ Measurements return to OONI's database and can be analyzed by region and by test
 
 - [:material-list-status: OONI Website Testing List](../regional/ooni-checklist.md)
 - [:material-access-point-network: ASN observation data analysis](../regional/ooni-asn-coverage.md)
-- [:material-server-network: Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
+- [:material-server-network: Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
 
 </div>
 

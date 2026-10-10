@@ -187,7 +187,7 @@ The three sections below each expand one tool across its three levels. Read acro
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
         2. Read "[How to set up a Tor relay](./setup-tor-relay.md)" for the full installation and configuration process.
-        3. See "[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}" to learn how to observe relay status.
+        3. See "[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}" to learn how to observe relay status.
         4. See "[Tor Snowflake](../tools/tor-snowflake.md)" to learn how to run a Snowflake bridge via browser extension or standalone program.
 
     !!! abstract "Reference"
@@ -221,7 +221,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
             1. Go to [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} to search relays by country, nickname, or fingerprint.
             2. For Taiwan (TW), select Country: TW in Advanced options to see a list of active relays.
-            3. The "[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}" page also provides visualized monitoring data.
+            3. The "[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}" page also provides visualized monitoring data.
 
         ??? question "Set up and maintain a Tor relay"
 

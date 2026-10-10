@@ -6,7 +6,7 @@ icon: material/account-group-outline
 
 # :material-account-group-outline: How many people use Tor in Taiwan
 
-[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"} counts the relays a region contributes. This page looks at the other side of the same connection layer: how many people connect to [Tor](../tools/what-is-tor.md) (onion routing network) from Taiwan, how that has moved over four years, and what the shape of that usage says about the network environment around it.
+[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} counts the relays a region contributes. This page looks at the other side of the same connection layer: how many people connect to [Tor](../tools/what-is-tor.md) (onion routing network) from Taiwan, how that has moved over four years, and what the shape of that usage says about the network environment around it.
 
 We are a community based in Taiwan, and Taiwan is the one jurisdiction where we have first-hand standing. It is also useful to readers who work on other parts of the Sinophone Asia-Pacific, because it supplies something the region otherwise lacks: a baseline for what Tor usage looks like where nothing is blocking it. Mainland China, Hong Kong, and Taiwan share a language and much of a platform ecosystem while sitting in very different network conditions, so the same measurement taken in all three separates the effect of blocking from everything else. The comparisons below are there for that purpose.
 
@@ -200,7 +200,7 @@ Worth noting for anyone reading this from a jurisdiction with heavier controls: 
 
 Taiwan accounts for about 0.33% of Tor users worldwide while hosting about 0.12% of the network's relays, a gap of roughly three to one between consumption and contribution[^11]. Per local relay that works out to 795 local users, against 168 in the United States and 188 in Germany. The ratio measures how the load is distributed as a matter of fairness, not actual traffic: Tor path selection does not prefer relays in the user's own country.
 
-The comparison needs one qualification. Relay counts in the United States and Germany are high partly because those are cheap, legally settled hosting markets where volunteers worldwide place their nodes, so the figure reflects hosting economics as much as local participation. Relay-side detail and the autonomous-system breakdown are on the [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"} page, and [how to run a Tor relay](../community/setup-tor-relay.md) covers adding one.
+The comparison needs one qualification. Relay counts in the United States and Germany are high partly because those are cheap, legally settled hosting markets where volunteers worldwide place their nodes, so the figure reflects hosting economics as much as local participation. Relay-side detail and the autonomous-system breakdown are on the [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} page, and [how to run a Tor relay](../community/setup-tor-relay.md) covers adding one.
 
 ## Reproducing this
 
@@ -217,7 +217,7 @@ Both return the full history from 2011 onwards, about 37 MB each, if `start` and
 
 <div class="grid cards" markdown>
 
-- [:material-chart-bar: Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
+- [:material-chart-bar: Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
 - [:material-access-point-network: ASN observation data analysis](./ooni-asn-coverage.md)
 - [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
 - [:material-map-outline: Regional Observatory](./index.md)

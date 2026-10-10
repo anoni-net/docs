@@ -27,7 +27,7 @@ icon: material/console
 - [Tor Snowflake](../tools/tor-snowflake.md)：門檻最低的一種，開著那一頁就在幫忙，要常駐再裝擴充套件
 - [如何搭建 .onion 服務](../community/setup-onion-service.md)：把手上的服務多開一個 onion 入口
 - [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)：目前是單點，多一個 pin 就多一份備援
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}：先看台灣現在有多少節點、分布在哪些 ASN
+- [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}：先看台灣現在有多少節點、分布在哪些 ASN
 
 ### 會寫程式，會處理資料
 
@@ -38,7 +38,7 @@ icon: material/console
 - [OONI 測項速查表](../community/ooni-nettests-map.md)：各測項測的是什麼
 - [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)：社群自己那支擷取程式怎麼設定與使用，含 S3 公開資料集的路徑結構
 - [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)：台灣目前的涵蓋狀況，缺口就是題目
-- [onionoo MCP](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中繼查詢服務，也是一個可以延伸的介面
+- [AI 助理的 Tor 節點查詢](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中繼查詢服務（onionoo MCP），也是一個可以延伸的介面
 - [OONI 網站檢測清單](../taiwan/ooni-checklist.md)：台灣的檢測清單怎麼維護，分類與更新都需要人
 
 ### 在學校或公司內部有影響力

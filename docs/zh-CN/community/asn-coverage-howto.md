@@ -1,12 +1,12 @@
 ---
 title: ASN 观测数据提取与分析
-description: anoni-net/docs 提供的 OONI 数据提取程序如何设置与使用，包含 S3 公开数据集的路径结构、三种取用路径的取舍、程序输出的 CSV 栏位格式，以及覆盖率的计算方式。
+description: OONI 观测覆盖率的命令行工具 ASN Coverage 如何设置与使用，包含 S3 公开数据集的路径结构、三种取用路径的取舍、程序输出的 CSV 栏位格式，以及覆盖率的计算方式。
 icon: material/database-search
 ---
 
 # :material-database-search: ASN 观测数据提取与分析
 
-本页是 [ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 的技术延伸，说明 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的提取程序如何设置与使用，用于提取 OONI 公开数据并计算特定区域 ASN 的观测覆盖率。
+本页是 [ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 的技术延伸，说明 [OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){target="_blank"} 的命令行工具 ASN Coverage（[`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"}）如何设置与使用，用于提取 OONI 公开数据并计算特定区域 ASN 的观测覆盖率。
 
 开始前建议先读 [项目研究预先准备](./setup-repo.md) 建置开发环境。
 
