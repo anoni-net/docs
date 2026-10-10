@@ -27,7 +27,7 @@ The most direct contribution. Start with a relay; switch to a bridge if bandwidt
 - [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, keep the page open and you are already helping; install the extension to leave it running
 - [Setting up a .onion service](../community/setup-onion-service.md): give a service you already run an onion entrance
 - [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): currently a single point, and each additional pin is redundancy
-- [Tor relay watcher](../regional/tor-relay-watcher.md): see how many relays exist in the region and which ASNs they sit in
+- [Tor relay watcher](https://anoni.net/en/projects/pulse/): see how many relays exist in the region and which ASNs they sit in
 
 ### You write code and work with data
 

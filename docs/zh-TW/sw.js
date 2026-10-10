@@ -269,14 +269,13 @@ const CORE_PAGES_ZH = [
   "advanced/zk-identity-payments/",
   "advanced/mistaken-for-anonymity/",
   // taiwan（在地。whistleblower-law 依上面的判準排除，不是漏掉。
-  // ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
+  // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
   "taiwan/",
   "taiwan/ooni-checklist/",
   "taiwan/pdpa-2025/",
   "taiwan/vasp-2026/",
   "taiwan/realname-data-market/",
   "taiwan/ooni-asn-coverage/",
-  "taiwan/tor-relay-watcher/",
   "taiwan/tor-users/",
   "taiwan/digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引）
@@ -375,14 +374,13 @@ const CORE_PAGES_EN = [
   "advanced/zk-identity-payments/",
   "advanced/mistaken-for-anonymity/",
   // regional（在地脈絡。taiwan-whistleblower-law 依上面的判準排除，不是漏掉。
-  // ooni-asn-coverage 與 tor-relay-watcher 的 vega 圖表離線不渲染，文字仍可讀）
+  // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
   "regional/",
   "regional/ooni-checklist/",
   "regional/taiwan-pdpa-2025/",
   "regional/taiwan-vasp-2026/",
   "regional/taiwan-realname-data-market/",
   "regional/ooni-asn-coverage/",
-  "regional/tor-relay-watcher/",
   "regional/taiwan-tor-users/",
   "regional/taiwan-digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引，理由見 CORE_PAGES_ZH 的同一段註解）

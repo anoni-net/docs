@@ -150,7 +150,7 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 网站检测清单](./ooni-checklist.md)
-- [:material-chart-bar: Tor Relay 观测点](./tor-relay-watcher.md)
+- [:material-chart-bar: Tor Relay 观测点](https://anoni.net/zh-cn/projects/pulse/)
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 

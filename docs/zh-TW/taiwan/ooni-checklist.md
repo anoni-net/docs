@@ -110,7 +110,7 @@ weight = priority / max(msmt_cnt, 0.1)
 <div class="grid cards" markdown>
 
 - [:material-access-point-network: ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)
-- [:material-chart-bar: Tor Relays 觀測點](./tor-relay-watcher.md)
+- [:material-chart-bar: Tor Relays 觀測點](https://anoni.net/projects/pulse/)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 - [:material-chat-question: 什麼是 OONI？](../tools/what-is-ooni.md)
 

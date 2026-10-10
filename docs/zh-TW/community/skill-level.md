@@ -186,7 +186,7 @@ icon: octicons/paste-24
     ??? tip "還沒到這個程度？從這裡開始"
         1. 先完成「實作」層的所有項目。
         2. 閱讀「[如何搭建 Tor Relay](./setup-tor-relay.md){target="_blank"}」，了解中繼站的安裝與設定流程。
-        3. 參考「[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md){target="_blank"}」，了解如何觀察中繼站的運作狀況。
+        3. 參考「[Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}」，了解如何觀察中繼站的運作狀況。
         4. 參考「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」，了解如何透過瀏覽器或獨立程式提供 Snowflake 橋接。
 
     !!! abstract "參考說明"
@@ -220,7 +220,7 @@ icon: octicons/paste-24
 
             1. 前往 [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"}，可依國家、名稱或 Fingerprint 搜尋中繼點。
             2. 以臺灣（TW）為例，可在「Advanced options」中選擇 Country: TW，查看目前運作中的中繼站清單。
-            3. 也可以在「[Tor Relays 觀測點](../taiwan/tor-relay-watcher.md){target="_blank"}」頁面查看本專案整理的視覺化觀測資料。
+            3. 也可以在「[Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}」頁面查看本專案整理的視覺化觀測資料。
 
         ??? question "建立並維護 Tor Relay 中繼點。"
 

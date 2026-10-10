@@ -120,7 +120,9 @@ test('用得到圖表的頁面就是那幾頁，數量對得上', () => {
     counts[lang] = mdFiles(lang).filter((f) => /```vegalite/.test(fs.readFileSync(f, 'utf8'))).length;
   }
   for (const [lang, n] of Object.entries(counts)) {
-    assert.equal(n, 3, `${lang} 有 ${n} 頁用圖表，預期 3 頁。多出來的頁面請一併確認有沒有引用 snippet`);
+    // 2026-10 Tor Relays 觀測點搬到社群首頁（/projects/pulse/），剩下兩篇部落格：
+    // 2026-ooni-run-v2-usage-patterns 與 ooni-mobile-throttle-drill-results
+    assert.equal(n, 2, `${lang} 有 ${n} 頁用圖表，預期 2 頁。多出來的頁面請一併確認有沒有引用 snippet`);
   }
 });
 

@@ -227,7 +227,7 @@ Before running OONI Probe, run them in reverse: turn off every third-party resol
 
 - [:material-access-point-network: What is OONI?](./what-is-ooni.md)
 - [:material-help-network: OONI Run v2 for regional measurement](./ooni-run-v2.md)
-- [:material-chart-bar: Tor relay watcher](../regional/tor-relay-watcher.md)
+- [:material-chart-bar: Tor relay watcher](https://anoni.net/en/projects/pulse/)
 - [:material-snowflake: Tor Snowflake](./tor-snowflake.md)
 
 </div>

@@ -58,7 +58,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 ## 為什麼台灣需要更多校園 Tor Relay
 
-Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在少數國家或少數網路供應商，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能觀測到的中繼數量仍然有限，每多一個穩定運作的節點，整個網路對抗流量分析的能力就多一分。即時觀測見 anoni.net 的 [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md)。
+Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在少數國家或少數網路供應商，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能觀測到的中繼數量仍然有限，每多一個穩定運作的節點，整個網路對抗流量分析的能力就多一分。即時觀測見 anoni.net 的 [Tor Relays 觀測點](https://anoni.net/projects/pulse/)。
 
 大學校園是補上這個缺口的合適切入點：
 

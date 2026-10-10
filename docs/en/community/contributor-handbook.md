@@ -160,7 +160,7 @@ Avoid paywalled material as the main source. If a paywalled version is all you c
 
 ### Charts
 
-The site supports Vega-Lite charts (`mkdocs-charts-plugin`) in code blocks tagged `vegalite`. Prefer the Pulse API (`https://api.anoni.net/api/...`) as the data source. See `taiwan/tor-relay-watcher.md` for an example.
+The site supports Vega-Lite charts (`mkdocs-charts-plugin`) in code blocks tagged `vegalite`. The charts fetch their data in the reader's browser, so readers of the onion site also connect to the data source; keep the data on the site or at an address with an onion version. The Pulse charts moved to [Tor Relay Watch](https://anoni.net/en/projects/pulse/) on the community site in 2026-10, where they are rendered as static charts at build time.
 
 ### Structured data
 

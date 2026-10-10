@@ -93,7 +93,7 @@ curl -s 'https://onionoo.anoni.net/v1/aggregate/countries?running=true' | jq .
 
 anoni.net 目前在 Tor 觀測這條線上有三個入口，可以依任務挑。
 
-- **[Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md)**：圖表面板，看臺灣中繼節點的數量與頻寬趨勢，適合想看走勢的場合。
+- **[Tor Relays 觀測點](https://anoni.net/projects/pulse/)**：圖表面板，看臺灣中繼節點的數量與頻寬趨勢，適合想看走勢的場合。
 - **[ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)**：OONI 觀測資料的 ASN 涵蓋分析，適合想知道哪些 ASN 的使用者實際在被觀測到。
 - **onionoo MCP**（這次新增）：用問句快速做 ad-hoc 查詢，適合想針對某個 relay、某個 ASN、某個國家盤點現況。
 
@@ -110,6 +110,6 @@ anoni.net 目前在 Tor 觀測這條線上有三個入口，可以依任務挑�
 ## 相關閱讀
 
 - [onionoo MCP：Tor 中繼節點查詢服務](../../community/onionoo-mcp.md)：完整使用文件
-- [Tor Relays 觀測點](../../taiwan/tor-relay-watcher.md)
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)
 - [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - [什麼是 Tor？](../../tools/what-is-tor.md)
