@@ -15,7 +15,7 @@ description: "匿名網路工作坊招募活動籌備人員與培訓小幫手！
 
 ![匿名網路工作坊 Tor, Tails, OONI](./assets/images/event-workshop-2025.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-我們今年有申請 COSCUP 議程軌，取得了一個工作坊舉辦的機會，現在我們要開始招募活動籌備人員與培訓課程小幫手。如果對於**網路自由、網路審查、網路監控、匿名網路**...等主題感興趣，也願意在接下來的三個月（到 2025/08）撥出一點時間與我們一起籌備、舉辦這場工作坊活動，請參考工作坊[活動頁面](https://anoni.net/events/workshop-2025/)的說明與介紹！
+我們今年有申請 COSCUP 議程軌，取得了一個工作坊舉辦的機會，現在我們要開始招募活動籌備人員與培訓課程小幫手。如果對於**網路自由、網路審查、網路監控、匿名網路**...等主題感興趣，也願意在接下來的三個月（到 2025/08）撥出一點時間與我們一起籌備、舉辦這場工作坊活動，請參考工作坊[活動頁面](https://anoni.net/events/workshop-2025/){target="_blank"}的說明與介紹！
 
 工作坊的進行方式會延續在 [2025/02 Tor、OONI 團隊所舉辦的工作坊形式](./rightscon25-pre-event.md)，唯一不同的是我們會**在地化調整**與使用**華語**的方式進行。
 
@@ -50,4 +50,4 @@ description: "匿名網路工作坊招募活動籌備人員與培訓小幫手！
 | 2025/07 | 活動宣傳與報名。                     |
 | 2025/08 | 活動日與會後紀錄與通知。             |
 
-[查看工作坊招募頁面說明](https://anoni.net/events/workshop-2025-prepare/){ .md-button .md-button--primary }
+[查看工作坊招募頁面說明](https://anoni.net/events/workshop-2025-prepare/){ .md-button .md-button--primary target="_blank" }

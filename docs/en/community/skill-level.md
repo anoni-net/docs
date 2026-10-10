@@ -187,7 +187,7 @@ The three sections below each expand one tool across its three levels. Read acro
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
         2. Read "[How to set up a Tor relay](./setup-tor-relay.md)" for the full installation and configuration process.
-        3. See "[Tor relay watcher](https://anoni.net/en/projects/pulse/)" to learn how to observe relay status.
+        3. See "[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}" to learn how to observe relay status.
         4. See "[Tor Snowflake](../tools/tor-snowflake.md)" to learn how to run a Snowflake bridge via browser extension or standalone program.
 
     !!! abstract "Reference"
@@ -221,7 +221,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
             1. Go to [Relay Search](https://metrics.torproject.org/rs.html){target="_blank"} to search relays by country, nickname, or fingerprint.
             2. For Taiwan (TW), select Country: TW in Advanced options to see a list of active relays.
-            3. The "[Tor relay watcher](https://anoni.net/en/projects/pulse/)" page also provides visualized monitoring data.
+            3. The "[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}" page also provides visualized monitoring data.
 
         ??? question "Set up and maintain a Tor relay"
 
@@ -399,7 +399,7 @@ The three sections below each expand one tool across its three levels. Read acro
         ??? question "Send an encrypted email with Thunderbird"
 
             - After creating a GnuPG key pair and setting up Thunderbird, you can try sending an encrypted email to `whisper@anoni.net`.
-            - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](https://anoni.net/en/contact/)" page.
+            - To get the public key for `whisper@anoni.net`, see the "[Stay Informed](https://anoni.net/en/contact/){target="_blank"}" page.
             - Compose the email in Thunderbird, choose to encrypt it, and send. The recipient will decrypt it using their private key.
 
 ## OONI skills
@@ -556,8 +556,8 @@ The three sections below each expand one tool across its three levels. Read acro
 
 This form is for your own reference. Nobody collects the results, so just pick your next step from where you landed:
 
-- **Awareness level:** subscribe to the [newsletter](https://anoni.net/en/contact/) to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
+- **Awareness level:** subscribe to the [newsletter](https://anoni.net/en/contact/){target="_blank"} to follow what the community is doing, or work through [Guides](../guides/index.md) to fill in the gaps.
 - **Hands-on level:** follow the "Not there yet? Start here." steps under each tool and actually install and use it. Bring problems to Matrix.
-- **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](https://anoni.net/en/join/) for how to join.
+- **Contribution level:** pick a direction from [How to contribute](./how-to-contribute.md), then say in the matching Matrix room what your level is and what you would like to work on. Someone will help you get started. See [Community](https://anoni.net/en/join/){target="_blank"} for how to join.
 
 You do not need to be at the same level in all three tools. Being at contribution level for OONI and awareness level for Tails is a perfectly normal place to be.

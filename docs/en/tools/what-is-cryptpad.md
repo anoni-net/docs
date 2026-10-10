@@ -120,7 +120,7 @@ Further reading: [how end-to-end encryption works](../advanced/e2ee.md) covers t
 **Not good for**:
 
 - One-off public collaboration, where [Etherpad](https://pad.anoni.net/){target="_blank"} is enough and encryption is not a requirement
-- Large-scale real-time chat, which is what [Matrix](https://anoni.net/en/services/) is for
+- Large-scale real-time chat, which is what [Matrix](https://anoni.net/en/services/){target="_blank"} is for
 - Anything requiring AI summarization or full-text search across a whole database
 - Video calls, which CryptPad does not do
 
@@ -160,7 +160,7 @@ Further reading: [how end-to-end encryption works](../advanced/e2ee.md) covers t
 
 ??? question "CryptPad or Etherpad?"
 
-    It depends on the purpose. **Etherpad suits temporary, disposable, unencrypted shared notes** such as live event records or brainstorming, with no account needed and access by link. **CryptPad suits long-term, sensitive, encrypted collaboration**, requiring an account while keeping content invisible to the server. The community runs both, and the division is described on [Community services](https://anoni.net/en/services/).
+    It depends on the purpose. **Etherpad suits temporary, disposable, unencrypted shared notes** such as live event records or brainstorming, with no account needed and access by link. **CryptPad suits long-term, sensitive, encrypted collaboration**, requiring an account while keeping content invisible to the server. The community runs both, and the division is described on [Community services](https://anoni.net/en/services/){target="_blank"}.
 
 ??? question "Can I use AI summarization or automatic translation?"
 
@@ -188,7 +188,7 @@ Further reading: [how end-to-end encryption works](../advanced/e2ee.md) covers t
 
 <div class="grid cards" markdown>
 
-- [:material-account-group: Community services](https://anoni.net/en/services/)
+- [:material-account-group: Community services](https://anoni.net/en/services/){target="_blank"}
 - [:material-translate-variant: Localization and translation](../community/i18n.md)
 - [:material-file-document: CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md)
 

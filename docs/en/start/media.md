@@ -44,7 +44,7 @@ See [keeping multiple sources apart](../scenarios/journalist.md#Keeping-multiple
 ### Setting up intake
 
 - [OnionShare](../tools/onionshare.md): a source can send files without registering an account
-- [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
+- [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}: the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
 - [Secure messaging compared](../tools/messaging-comparison.md): what follow-up contact runs on
 
 ### Retention and cleanup
@@ -76,7 +76,7 @@ The newsroom can have every process in place and still expose a source when one 
 
 - Press "copy summary" after the threat model checklist and paste it into the desk's shared notes
 - The [invisible character detector](../utils/invisible.md) and [file metadata stripper](../utils/strip-metadata.md) both run in the browser and upload nothing, so they can be recommended to the whole desk as-is
-- Ask in the [public Matrix room](https://anoni.net/en/services/), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
+- Ask in the [public Matrix room](https://anoni.net/en/services/){target="_blank"}, or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## What this path does not cover
 

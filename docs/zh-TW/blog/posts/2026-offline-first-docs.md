@@ -209,7 +209,7 @@ age -d -o backup.tar backup.tar.age
 
 加密完成後，頁面會用同一組鑰匙把輸出解回來比對，一致才提供下載。加解密用的函式庫原封不動放在站上，一行都沒有改動，所以想驗證的人可以拿它跟上游的版本逐位元組比對。改過就失去這個可對照性，剩下的只有相信我們的說法。
 
-PGP 留在它該在的地方，站上的[敏感資料上傳](https://anoni.net/join/upload-sensitive/)流程用 PGP，因為那裡需要長期的身分、要跟郵件生態相容。分工是郵件與身分用 PGP，檔案與備份用 age。
+PGP 留在它該在的地方，站上的[敏感資料上傳](https://anoni.net/join/upload-sensitive/){target="_blank"}流程用 PGP，因為那裡需要長期的身分、要跟郵件生態相容。分工是郵件與身分用 PGP，檔案與備份用 age。
 
 ## 目前的狀態，以及我們想聽什麼
 
@@ -228,6 +228,6 @@ PGP 留在它該在的地方，站上的[敏感資料上傳](https://anoni.net/j
 
 ## 聯絡與回報
 
-- 即時討論：Matrix 公開 room（家伺服器 `im.anoni.net`，連結見[社群工具頁](https://anoni.net/services/)）
-- 匿名線索：whisper@anoni.net（[GPG 公鑰](https://anoni.net/contact/)）
+- 即時討論：Matrix 公開 room（家伺服器 `im.anoni.net`，連結見[社群工具頁](https://anoni.net/services/){target="_blank"}）
+- 匿名線索：whisper@anoni.net（[GPG 公鑰](https://anoni.net/contact/){target="_blank"}）
 - 原始碼與 issue：[anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}

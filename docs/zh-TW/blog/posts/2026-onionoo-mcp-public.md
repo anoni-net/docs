@@ -93,7 +93,7 @@ curl -s 'https://onionoo.anoni.net/v1/aggregate/countries?running=true' | jq .
 
 anoni.net 目前在 Tor 觀測這條線上有三個入口，可以依任務挑。
 
-- **[Tor Relays 觀測點](https://anoni.net/projects/pulse/)**：圖表面板，看臺灣中繼節點的數量與頻寬趨勢，適合想看走勢的場合。
+- **[Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}**：圖表面板，看臺灣中繼節點的數量與頻寬趨勢，適合想看走勢的場合。
 - **[ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)**：OONI 觀測資料的 ASN 涵蓋分析，適合想知道哪些 ASN 的使用者實際在被觀測到。
 - **onionoo MCP**（這次新增）：用問句快速做 ad-hoc 查詢，適合想針對某個 relay、某個 ASN、某個國家盤點現況。
 
@@ -102,7 +102,7 @@ anoni.net 目前在 Tor 觀測這條線上有三個入口，可以依任務挑�
 ## 參與與回饋
 
 - 回報問題或提建議：<https://github.com/anoni-net/onionoo-fastapi/issues>
-- 想討論該補哪些任務導向工具、或請社群示範某類查詢，歡迎到 [Matrix 公開 room](https://anoni.net/services/) 提出來。
+- 想討論該補哪些任務導向工具、或請社群示範某類查詢，歡迎到 [Matrix 公開 room](https://anoni.net/services/){target="_blank"} 提出來。
 - 想自行架設一份（例如在 .onion 服務、內網或實驗環境），完整文件的「自架（Docker）」段落有 Docker 啟動指令與環境變數列表。
 
 服務以 MIT 授權釋出，原始碼在 <https://github.com/anoni-net/onionoo-fastapi>，任何 issue、PR 都歡迎。
@@ -110,6 +110,6 @@ anoni.net 目前在 Tor 觀測這條線上有三個入口，可以依任務挑�
 ## 相關閱讀
 
 - [onionoo MCP：Tor 中繼節點查詢服務](../../community/onionoo-mcp.md)：完整使用文件
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 - [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - [什麼是 Tor？](../../tools/what-is-tor.md)

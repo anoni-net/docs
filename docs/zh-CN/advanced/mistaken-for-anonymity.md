@@ -137,7 +137,7 @@ tunnel 在 I2P 是单向的，outbound 送出去、inbound 收进来，每个参
 
 - [:material-share-variant-outline: OnionShare](../tools/onionshare.md)
 - [:material-chart-bar: 台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md)
-- [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/)
+- [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 
 </div>
 

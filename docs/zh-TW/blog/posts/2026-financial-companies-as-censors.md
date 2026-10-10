@@ -65,14 +65,14 @@ Stripe 是「從一開始就不接這個市場」。台灣的個人或公司不�
 
 社群把 2026 年的三大主題之一定在匿名支付，原本想說的是「個人金流是 metadata 的獨立維度」。Reitman 的新書讓我們看到金流還會被主動拿來當審查工具，這個風險對倡議組織、獨立媒體、創作者不是抽象議題。既有的 [為什麼匿名支付重要](../../basics/payments-anonymity.md) 處理的是金流被動被觀察的問題，這篇處理的是金流主動被切斷的問題，兩篇對照看比較完整。
 
-下一步預計推進的方向，包括在《台灣 VASP 法 2026》補一段「跨境制裁與過度合規副作用」的觀察，以及從 EFF 過去十多年 Financial Censorship 系列文章選 5 到 8 篇做策展性翻譯。替代金流系統的進展也值得追蹤，歐洲 European Payments Initiative、巴西 Pix 是兩個現有實作[^17][^18]，但金流在各國都是高度管制行業，規模化替代系統的建立成本不低。如果你關心這個主題，歡迎透過 [匿名支付研究專題](https://anoni.net/join/payments-research/) 加入社群討論。
+下一步預計推進的方向，包括在《台灣 VASP 法 2026》補一段「跨境制裁與過度合規副作用」的觀察，以及從 EFF 過去十多年 Financial Censorship 系列文章選 5 到 8 篇做策展性翻譯。替代金流系統的進展也值得追蹤，歐洲 European Payments Initiative、巴西 Pix 是兩個現有實作[^17][^18]，但金流在各國都是高度管制行業，規模化替代系統的建立成本不低。如果你關心這個主題，歡迎透過 [匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"} 加入社群討論。
 
 ## 相關閱讀
 
 - [為什麼匿名支付重要](../../basics/payments-anonymity.md)：金流為什麼是 metadata 的獨立維度
 - [倡議組織的匿名捐款管道](../../scenarios/nonprofit-anonymous-donation.md)：給組織與捐款人雙方的合法匿名捐款流程
 - [台灣 VASP 法 2026](../../taiwan/vasp-2026.md)：草案架構、罰則、對組織的影響
-- [匿名支付研究專題](https://anoni.net/join/payments-research/)：社群討論入口、待翻譯資源、COSCUP 議程合作
+- [匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"}：社群討論入口、待翻譯資源、COSCUP 議程合作
 
 [^1]: [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} - EFF Deeplinks
 [^2]: [Transaction Denied 購書頁](https://www.beacon.org/Transaction-Denied-P2455.aspx){target="_blank"} - Beacon Press

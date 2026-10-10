@@ -189,7 +189,7 @@ Several situations recur across the region that international guides do not usua
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: Personal privacy guide track](https://anoni.net/en/join/privacy-guide/)
+- [:material-shield-lock-outline: Personal privacy guide track](https://anoni.net/en/join/privacy-guide/){target="_blank"}
 - [:material-message-lock-outline: Secure messaging compared](./messaging-comparison.md)
 - [:material-translate-variant: Localization and translation](../community/i18n.md)
 

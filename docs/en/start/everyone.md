@@ -70,7 +70,7 @@ All four run on your own device and upload nothing.
 
 - [Threat model checklist](../utils/threat-model.md): three questions and you will know where your effort belongs. Answers are never stored and are gone on reload
 - The tools section works offline, see [offline reading](../offline.md)
-- Come talk in the [public Matrix room](https://anoni.net/en/services/)
+- Come talk in the [public Matrix room](https://anoni.net/en/services/){target="_blank"}
 
 ## What this path does not cover
 

@@ -44,7 +44,7 @@ offline_caution: true
 ### 建立收件渠道
 
 - [OnionShare](../tools/onionshare.md)：来源不需要注册账号就能传文件给你
-- [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
+- [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：后续联络走哪一套
 
 ### 素材的保存与清理
@@ -77,7 +77,7 @@ offline_caution: true
 
 - 威胁模型清单答完按「复制摘要」，贴进编辑台的共笔，换人接手时不用重问一次
 - [隐形字符检测](../utils/invisible.md)与[文件 metadata 清除器](../utils/strip-metadata.md)都在浏览器里执行，不送出任何数据，可以直接推荐给整个编辑台
-- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 这条路径没有处理的
 

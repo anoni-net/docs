@@ -75,7 +75,7 @@ description: "伊朗封网 80 多天后重新开放，大量流量经过社群�
 
 !!! info "需要连接的人，可以来信索取"
 
-    社群目前在台湾、新加坡各运作一个 Tor WebTunnel 桥接。为了不让审查者直接把位址封掉，这些 bridge line 不会公开贴出来。你或你认识的人若需要，欢迎来信 <whisper@anoni.net> 索取（其他联络方式见[持续关注](https://anoni.net/zh-cn/contact/)）。
+    社群目前在台湾、新加坡各运作一个 Tor WebTunnel 桥接。为了不让审查者直接把位址封掉，这些 bridge line 不会公开贴出来。你或你认识的人若需要，欢迎来信 <whisper@anoni.net> 索取（其他联络方式见[持续关注](https://anoni.net/zh-cn/contact/){target="_blank"}）。
 
 ## 为什么是 WebTunnel
 
@@ -121,7 +121,7 @@ WebTunnel 的做法不同，它把 Tor 流量包进一个真正的 HTTPS 连接�
 
 一个节点不会改变什么，但很多个分散在世界各地的节点加起来，就是审查者很难一次拔掉的网络。如果你有一台闲置的 VPS 或实体主机、一个域名，和一点时间，欢迎一起架起更多桥接。
 
-社群讨论在 [Matrix](https://anoni.net/zh-cn/contact/)（家服务器 `im.anoni.net`），加入方式与其他联络管道都在那页。
+社群讨论在 [Matrix](https://anoni.net/zh-cn/contact/){target="_blank"}（家服务器 `im.anoni.net`），加入方式与其他联络管道都在那页。
 
 ## 相关阅读
 

@@ -419,7 +419,7 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 - Android：Google Pixel 的 Android 16 与 Android 17，依 Google 的 Android 帮助中心、Pixel 帮助中心与 Android 开放源代码项目，2026 年 10 月核对。部分上层菜单的简体中文名称还没有核对到，那几步以描述为主
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支持页，2026 年 10 月核对。简体中文界面的菜单名称没有逐一核对，这个分页以描述与搜索关键词为主
 
-照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社群的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/)）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
+照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社群的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
 
 ## 相关阅读
 

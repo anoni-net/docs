@@ -27,7 +27,7 @@ icon: material/chat-question
 
 連線層的自由，在於你能不能連上想連的服務、用信任的工具，過程中不留下能識別到你的痕跡。
 
-這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](https://anoni.net/join/roadmap-2026/)，把台灣的頻寬納入全球 Tor 網路的基礎建設。在香港這類國安監控升高的地區，公開架設或宣傳 Tor relay 的政治風險與台灣不同，參與前要按在地處境分開評估。
+這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](https://anoni.net/join/roadmap-2026/){target="_blank"}，把台灣的頻寬納入全球 Tor 網路的基礎建設。在香港這類國安監控升高的地區，公開架設或宣傳 Tor relay 的政治風險與台灣不同，參與前要按在地處境分開評估。
 
 ### 個資與身分的自由
 
@@ -39,7 +39,7 @@ icon: material/chat-question
 
 金流是社群比較新的關注點。一筆轉帳的時間、金額、收款人，配上信用卡號或銀行戶名，幾乎能還原一個人的社交網路與行動軌跡。這份 metadata 比通訊 metadata 更黏：強制連結到實名、長期保留、跨機構交叉。
 
-社群把這個議題寫成 [為什麼匿名支付重要](./payments-anonymity.md)，並在 [匿名支付研究專題](https://anoni.net/join/payments-research/) 持續累積素材。在地脈絡上，[2026 台灣 VASP 法](../taiwan/vasp-2026.md) 已於 2026 年 6 月 30 日三讀通過，施行日待行政院指定，加密資產監理從登記制走向許可制，是另一條制度性的轉折。
+社群把這個議題寫成 [為什麼匿名支付重要](./payments-anonymity.md)，並在 [匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"} 持續累積素材。在地脈絡上，[2026 台灣 VASP 法](../taiwan/vasp-2026.md) 已於 2026 年 6 月 30 日三讀通過，施行日待行政院指定，加密資產監理從登記制走向許可制，是另一條制度性的轉折。
 
 !!! tip "想直接參與？"
     這三個面向的工作都還在進行、也都需要更多人。如果你已經想行動，可以先跳到文末的「你可以從哪裡開始」挑一個方向。想先理解為什麼現在更值得關注，就繼續往下看。
@@ -93,8 +93,8 @@ Tor 網路在台灣也已經有公開可見的中繼與守護節點，社群的 
 社群的工作是一份持續累積、需要更多人加入的進行式，沒有單一的「完成」時刻。看你想從哪個方向切入，三條建議路徑：
 
 - **想先理解概念**：往 basics/ 其他四篇繼續走。[匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md) 釐清詞彙，[威脅模型如何建立](./threat-model.md) 給判斷框架，[Metadata 是什麼](./metadata.md) 補上「機密 ≠ 匿名」的盲點，[為什麼匿名支付重要](./payments-anonymity.md) 把金流納入匿名思維。
-- **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](https://anoni.net/projects/pulse/) 則是社群長期維運的在地資料。
-- **想參與實作**：往 [community/](https://anoni.net/join/) 走。可以先看 [2026 年度路線圖](https://anoni.net/join/roadmap-2026/)、[匿名支付研究專題](https://anoni.net/join/payments-research/)、[如何參與與認領主題](https://anoni.net/join/)，再依興趣選一個方向加入 Matrix 討論。
+- **想看在地脈絡**：往 [taiwan/](../taiwan/index.md) 走。[個資法 2025 修法](../taiwan/pdpa-2025.md) 與 [VASP 法 2026](../taiwan/vasp-2026.md) 是兩個進行中的關鍵法規，[ASN 觀測](../taiwan/ooni-asn-coverage.md)、[OONI 網站檢測清單](../taiwan/ooni-checklist.md)、[Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"} 則是社群長期維運的在地資料。
+- **想參與實作**：往 [community/](https://anoni.net/join/){target="_blank"} 走。可以先看 [2026 年度路線圖](https://anoni.net/join/roadmap-2026/){target="_blank"}、[匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"}、[如何參與與認領主題](https://anoni.net/join/){target="_blank"}，再依興趣選一個方向加入 Matrix 討論。
 
 執行 OONI 測試、架設 Tor 中繼、協助翻譯、寫一篇文章、把這頁分享給可能受用的人，每一個都算數。
 

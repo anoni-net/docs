@@ -277,7 +277,7 @@ icon: material/file-document-edit-outline
 - [台師大案例訪談](../blog/posts/ntnu-nz.md)：第一個成功案例的完整過程
 - [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：技術細節（torrc、UFW、監控、事件處置）
 - [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A
-- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)：社群推動主題入口
+- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}：社群推動主題入口
 - [EFF Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"}：全球大學校園計畫官網
 - [Tor Project blog：Setting Up a Tor University Relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}：台師大案例英文版
 
@@ -295,4 +295,4 @@ icon: material/file-document-edit-outline
 
     **要在自己學校推動，請用本頁上方已 placeholder 化的範本來改寫，不要直接 fork 原始 Doc**：原檔內含 NZ 個人 email、指導教授資訊、學校 IP 段等具體資訊，沒清乾淨容易在送出去時露餡。原始存檔保留下來，是讓你能對照「真實版本長什麼樣」，學寫作結構與用語。
 
-如果你用這份範本成功在自己學校架設了 Tor Relay，**歡迎回報給社群**，我們會把你的案例加進 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)，讓第三、第四所學校接著有更多參考。聯絡方式見 [社群自架服務](https://anoni.net/services/)。
+如果你用這份範本成功在自己學校架設了 Tor Relay，**歡迎回報給社群**，我們會把你的案例加進 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}，讓第三、第四所學校接著有更多參考。聯絡方式見 [社群自架服務](https://anoni.net/services/){target="_blank"}。

@@ -139,7 +139,7 @@ The third is the easiest to answer and the most often skipped, since a project's
 
 - [:material-share-variant-outline: OnionShare](../tools/onionshare.md)
 - [:material-chart-bar: ASN observation coverage](../regional/ooni-asn-coverage.md)
-- [:material-shield-account-outline: Personal privacy guide](https://anoni.net/en/join/privacy-guide/)
+- [:material-shield-account-outline: Personal privacy guide](https://anoni.net/en/join/privacy-guide/){target="_blank"}
 
 </div>
 

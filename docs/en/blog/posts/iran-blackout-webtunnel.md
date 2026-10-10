@@ -75,7 +75,7 @@ With traffic still flowing through it day after day, a handful of bridges is cle
 
 !!! info "Need a connection? Write to us"
 
-    The community currently runs one Tor WebTunnel bridge each in Taiwan and Singapore. To keep censors from simply blocking the addresses, these bridge lines aren't posted publicly. If you or someone you know needs one, you're welcome to email <whisper@anoni.net> to request it (other ways to reach us are on the [contact page](https://anoni.net/en/contact/)).
+    The community currently runs one Tor WebTunnel bridge each in Taiwan and Singapore. To keep censors from simply blocking the addresses, these bridge lines aren't posted publicly. If you or someone you know needs one, you're welcome to email <whisper@anoni.net> to request it (other ways to reach us are on the [contact page](https://anoni.net/en/contact/){target="_blank"}).
 
 ## Why WebTunnel
 
@@ -121,7 +121,7 @@ Iran's shutdown was extreme, but censorship and shutdowns aren't a distant excep
 
 One node doesn't change much, but many nodes spread across the world add up to a network a censor can't pull down all at once. If you have a spare VPS or physical machine, a domain, and a little time, we'd love for you to help stand up more bridges, wherever you are.
 
-Community discussion happens on [Matrix](https://anoni.net/en/contact/) (home server `im.anoni.net`); how to join and other ways to reach us are on that page.
+Community discussion happens on [Matrix](https://anoni.net/en/contact/){target="_blank"} (home server `im.anoni.net`); how to join and other ways to reach us are on that page.
 
 ## Related reading
 
@@ -129,7 +129,7 @@ Community discussion happens on [Matrix](https://anoni.net/en/contact/) (home se
 - [Snowflake (Tor Project)](https://snowflake.torproject.org/){target="_blank"}
 - [Set up a Tor relay (Tor Project)](https://community.torproject.org/relay/){target="_blank"}
 - [Why internet freedom matters](../../basics/internet-freedom.md)
-- [Tor relay observation in Taiwan](https://anoni.net/en/projects/pulse/)
+- [Tor relay observation in Taiwan](https://anoni.net/en/projects/pulse/){target="_blank"}
 
 [^1]: [Cloudflare Radar — Iran](https://radar.cloudflare.com/ir){target="_blank"} - Cloudflare Radar
 [^2]: [Internet shutdown in Iran amid military actions](https://x.com/CloudflareRadar/status/2027709437981450502){target="_blank"} - Cloudflare Radar

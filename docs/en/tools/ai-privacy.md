@@ -148,7 +148,7 @@ Beyond leakage, wrong answers cause harm. Language models state incorrect things
 
 ## This page will age
 
-AI terms and settings change quickly. Verified 2026-08. The mechanisms and the question list are built to last longer than any specific policy; check each vendor's current pages before relying on a detail, and tell us via the [Community](https://anoni.net/en/join/) page if something here no longer matches.
+AI terms and settings change quickly. Verified 2026-08. The mechanisms and the question list are built to last longer than any specific policy; check each vendor's current pages before relying on a detail, and tell us via the [Community](https://anoni.net/en/join/){target="_blank"} page if something here no longer matches.
 
 ## Where to go from here
 

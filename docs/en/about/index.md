@@ -8,7 +8,7 @@ icon: material/book-information-variant
 
 The anoni.net Docs collect what we know about anonymity networks and privacy, from concepts and tools to preparing for specific situations, and track network measurement and regulation in Taiwan and the wider Sinophone Asia-Pacific. Members of the anoni.net community write and maintain the pages, and the source and full edit history are public on [GitHub](https://github.com/anoni-net/docs){target="_blank"}.
 
-Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/). This page is about the documentation site itself.
+Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/){target="_blank"}. This page is about the documentation site itself.
 
 ## What the site covers
 
@@ -29,7 +29,7 @@ The writing style is set out on the community site's [writing style](https://ano
 
 Contributors may use any AI tool to help with writing or translation, and AI output goes through the same process as anything written by hand. Whoever opens the pull request has to check every number and quotation and open every source link, and is responsible for the content.
 
-We don't publish step-by-step recipes that could be misused, we don't expose the personal accounts of people whose observations we cite, and material about victims or unpublished research goes through our [sensitive material process](https://anoni.net/en/join/upload-sensitive/).
+We don't publish step-by-step recipes that could be misused, we don't expose the personal accounts of people whose observations we cite, and material about victims or unpublished research goes through our [sensitive material process](https://anoni.net/en/join/upload-sensitive/){target="_blank"}.
 
 ## Three editions
 
@@ -43,7 +43,7 @@ How translation is done and who does what is in [Localization and Translation](.
 
 We fix mistakes in the page itself. When a correction changes what readers should do, we also publish a note saying what changed, what the change is based on, and what anyone who followed the old version should do now, as in [the August 2026 corrections](../blog/posts/docs-corrections-202608.md) and [the September 2026 site update](../blog/posts/site-updates-202609.md).
 
-If you find something wrong or out of date, [open an issue on GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} or email <whisper@anoni.net> (the PGP key is on the [contact page](https://anoni.net/en/contact/#pgp)).
+If you find something wrong or out of date, [open an issue on GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} or email <whisper@anoni.net> (the PGP key is on the [contact page](https://anoni.net/en/contact/#pgp){target="_blank"}).
 
 ## Ways to read
 
@@ -60,5 +60,5 @@ A few pieces of outside data keep their original licenses. For example, the OONI
 - [Contributor Handbook](../community/contributor-handbook.md)
 - [Localization and Translation](../community/i18n.md)
 - [Docs Visual Guide](../community/visual-guide.md)
-- [Brand Assets](https://anoni.net/en/brand/)
-- [The anoni.net community](https://anoni.net/en/)
+- [Brand Assets](https://anoni.net/en/brand/){target="_blank"}
+- [The anoni.net community](https://anoni.net/en/){target="_blank"}

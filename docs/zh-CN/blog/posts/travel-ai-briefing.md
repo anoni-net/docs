@@ -40,4 +40,4 @@ og:
 
 完整的开场 prompt 与十几个调查问题都在 [出国前数字安全：用 AI 自助生成目的地概况](../../scenarios/travel-ai-briefing.md)，照着复制就能开始。如果你的目的地在东亚、东南亚，我们另外整理了一份预先填好十四地的对照表 [出差与研讨会的数字准备](../../scenarios/asia-travel.md)，两页可以互相对照。
 
-有特定目的地的实地经验想分享，欢迎到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 讨论，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+有特定目的地的实地经验想分享，欢迎到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 讨论，或匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

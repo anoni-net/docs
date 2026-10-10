@@ -34,7 +34,7 @@ This is our first time at the Global Gathering, and the main hope is to meet mor
 
 We are a group of volunteers who care about anonymity networks and internet freedom, starting from Taiwan, and what we do covers keeping journalists' sources protected, letting activists organize without leaving traces, and helping people support sensitive causes without exposing who they are. All three rest on having an anonymity network that works. We run the Matrix home server `im.anoni.net` and this docs site, which keeps our observations and discussions somewhere they can be checked.
 
-The community counts from the [anonymity network workshop](https://anoni.net/en/events/workshop-2025/) we ran in August 2025, where the first group of members came together. Three threads are open in 2026, with practical privacy guides sorted by scenario for everyday life, sensitive work, and high risk, campus Tor relays pushed forward together with EFF and the Tor Project and one already running at National Taiwan Normal University, and the anonymous payment work we are bringing to the booth.
+The community counts from the [anonymity network workshop](https://anoni.net/en/events/workshop-2025/){target="_blank"} we ran in August 2025, where the first group of members came together. Three threads are open in 2026, with practical privacy guides sorted by scenario for everyday life, sensitive work, and high risk, campus Tor relays pushed forward together with EFF and the Tor Project and one already running at National Taiwan Normal University, and the anonymous payment work we are bringing to the booth.
 
 Others across the Asia-Pacific work on the same problems, and so far each side has not known the other exists. Sinophone communities are spread across Taiwan, Hong Kong, China, Japan, and Southeast Asia, the situations they run into are connected, and opportunities to compare experiences are rare.
 
@@ -124,5 +124,5 @@ Whatever the booth collects will be written up and published in a later newslett
 ## Channels
 
 - During the event: Matrix room [`#gg2026:im.anoni.net`](https://matrix.to/#/%23gg2026:im.anoni.net){target="_blank"}, for the three days of the Global Gathering
-- Live discussion: [public Matrix room](https://anoni.net/en/services/) (home server `im.anoni.net`)
-- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/)), checked within a few hours during the Gathering
+- Live discussion: [public Matrix room](https://anoni.net/en/services/){target="_blank"} (home server `im.anoni.net`)
+- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/){target="_blank"}), checked within a few hours during the Gathering

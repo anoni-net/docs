@@ -304,7 +304,7 @@ This page did not put these findings to moda for comment; every official positio
 
 The Chinese-language version of this page is at [數位憑證皮夾保護了什麼](https://anoni.net/docs/taiwan/digital-wallet-privacy/){target="_blank"}, which quotes the Chinese sources in their original wording.
 
-If you have official clarification on the trust list's blockchain component, or measurements of the app's network behaviour, the channels on the [Community services](https://anoni.net/en/services/) page reach us and we will update this page.
+If you have official clarification on the trust list's blockchain component, or measurements of the app's network behaviour, the channels on the [Community services](https://anoni.net/en/services/){target="_blank"} page reach us and we will update this page.
 
 [^1]: [moda holds a press conference on the Digital Credential Wallet trial operation and application experience](https://moda.gov.tw/press/press-releases/18262){target="_blank"} - Ministry of Digital Affairs, 2025-12-17 (in Chinese)
 [^2]: [The digital wallet lacks legal protection for fundamental rights and will become the next Taipei Pass](https://www.amnesty.tw/node/23762){target="_blank"} - Amnesty International Taiwan (in Chinese)

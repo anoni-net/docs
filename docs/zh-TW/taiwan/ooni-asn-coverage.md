@@ -46,9 +46,9 @@ icon: material/access-point-network
 
 這幾個數字合起來，說明台灣的觀測還不夠全面與多樣，無法反映完整的網路樣態。三大電信業者、有線電視寬頻、固網、第二類電信（租用電信基礎設施提供服務的業者，例如虛擬行動網路、網路電話轉售等）等，都有覆蓋不足的問題。
 
-2023 年之後的變化可以看社群首頁的 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/)。頁面每小時重新產生，讀取 OONI 最近 60 天的測量，對照 APNIC 估計的各網路使用者人數，列出使用者多、測量少的網路。2026/10 的資料裡，測量最多的仍是中華電信 HiNet（AS3462），中華電信行動網路（AS17421）有約 16% 的使用者，測量占比卻不到 0.1%。
+2023 年之後的變化可以看社群首頁的 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){target="_blank"}。頁面每小時重新產生，讀取 OONI 最近 60 天的測量，對照 APNIC 估計的各網路使用者人數，列出使用者多、測量少的網路。2026/10 的資料裡，測量最多的仍是中華電信 HiNet（AS3462），中華電信行動網路（AS17421）有約 16% 的使用者，測量占比卻不到 0.1%。
 
-[:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){ .md-button .md-button--primary }
+[:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){ .md-button .md-button--primary target="_blank" }
 [:material-chart-bar: 2023/12 觀察報告](https://ocf.tw/p/ooni/report/202312.html){ .md-button target="_blank" }
 
 ### 你可以補上一格
@@ -118,8 +118,8 @@ icon: material/access-point-network
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 網站檢測清單](./ooni-checklist.md)
-- [:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/)
-- [:material-chart-bar: Tor 中繼節點觀測](https://anoni.net/projects/pulse/)
+- [:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){target="_blank"}
+- [:material-chart-bar: Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
 - [:material-database-search: ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 

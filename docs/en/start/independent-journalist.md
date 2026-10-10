@@ -77,8 +77,8 @@ Working alone, your personal baseline is your work baseline: the same accounts a
 
 - Press "copy summary" after the threat model checklist, paste it somewhere you choose, and fill it in again when you change beats
 - [Invisible character detector](../utils/invisible.md): scan a document when you receive it, since invisible markers are a common way to identify who leaked it
-- Matrix, CryptPad, and Send at [community services](https://anoni.net/en/services/) are open for use, so a one-person outlet does not have to self-host
-- Ask in the [public Matrix room](https://anoni.net/en/services/), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
+- Matrix, CryptPad, and Send at [community services](https://anoni.net/en/services/){target="_blank"} are open for use, so a one-person outlet does not have to self-host
+- Ask in the [public Matrix room](https://anoni.net/en/services/){target="_blank"}, or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## What this path does not cover
 

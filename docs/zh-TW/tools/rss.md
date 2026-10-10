@@ -189,7 +189,7 @@ Tor 本身的介紹見[什麼是 Tor](./what-is-tor.md)。
 
 ## 不想安裝閱讀器的話
 
-也可以[訂閱電子報](https://anoni.net/contact/)，社群的專案進度與活動資訊會寄到信箱。不想交出平常用的 email，可以用[郵件別名](./email-alias.md)訂閱，日後不想收時直接關掉別名。
+也可以[訂閱電子報](https://anoni.net/contact/){target="_blank"}，社群的專案進度與活動資訊會寄到信箱。不想交出平常用的 email，可以用[郵件別名](./email-alias.md)訂閱，日後不想收時直接關掉別名。
 
 ## 相關閱讀
 

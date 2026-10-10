@@ -150,7 +150,7 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 - [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
 - [:material-access-point-network: ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
-- [:material-server-network: Tor Relay 观测点](https://anoni.net/zh-cn/projects/pulse/)
+- [:material-server-network: Tor Relay 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 
 </div>
 

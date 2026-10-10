@@ -185,7 +185,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 <div class="grid cards" markdown>
 
 - [:material-tunnel-outline: How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md) — for censored networks where a plain relay will not reach users
-- [:material-radar: Tor relay watcher](https://anoni.net/en/projects/pulse/) — what relay operation looks like across the region
-- [:material-account-group-outline: Join the community](https://anoni.net/en/join/) — our Matrix space, and how to reach us if you get stuck
+- [:material-radar: Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"} — what relay operation looks like across the region
+- [:material-account-group-outline: Join the community](https://anoni.net/en/join/){target="_blank"} — our Matrix space, and how to reach us if you get stuck
 
 </div>

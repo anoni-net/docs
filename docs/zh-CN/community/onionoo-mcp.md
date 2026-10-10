@@ -268,7 +268,7 @@ docker compose up -d --build
 ## 参与与贡献
 
 - **回报问题 / 提建议**：<https://github.com/anoni-net/onionoo-fastapi/issues>
-- **想自行架设 Tor relay**：见 [如何搭建 Tor Relay](./setup-tor-relay.md)，相关观测指标在 [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/)。
+- **想自行架设 Tor relay**：见 [如何搭建 Tor Relay](./setup-tor-relay.md)，相关观测指标在 [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}。
 - **出国前评估**：[出国前数字安全：用 AI 自助生成目的地概况](../scenarios/travel-ai-briefing.md)。记者、NGO 出国前要查目的地的 Tor 可达性时，接上 onionoo MCP 就能让 AI 查到真实、可引用的 Onionoo 数字。
 - **延伸阅读**：[什么是 Tor？](../tools/what-is-tor.md)、[ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)。
 

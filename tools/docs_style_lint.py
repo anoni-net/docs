@@ -225,6 +225,30 @@ DEPLOY_RULES = [
      "內文寫出分析端點的主機名，onion 建置的驗證會中止上傳。改用「anoni.net 底下的子網域」"),
 ]
 
+# 連到 anoni.net 其他網站的連結要在新分頁開啟（貢獻者百科「跨檔連結規則」）。
+# 社群首頁、新聞導讀與 API 跟文件站同網域，但不是同一個網站，讀者點了之後
+# 文件站的側欄與搜尋都不見了。2026-10-10 全站補齊 611 條，之後靠這條維持。
+# 只掃文件站三語系的內容：README 這類說明檔在 GitHub 上看，那裡不認得
+# {target="_blank"}，加了反而會照字面顯示出來。
+ANONI_SITE_LINK_RE = re.compile(
+    r'\[(?:[^\[\]]|\[[^\]]*\])*\]\(https://anoni\.net(?!/docs(?:[/#)]))[^)\s]*\)(\{[^}]*\})?')
+SITE_DOC_RE = re.compile(r"/docs/(zh-TW|zh-CN|en)/")
+
+
+def check_anoni_site_links(i: int, raw: str, clean: str):
+    findings = []
+    for m in ANONI_SITE_LINK_RE.finditer(raw):
+        # strip_noise 把 inline code 換成空白，落在裡面的是在講寫法的例子
+        if not clean[m.start()].strip():
+            continue
+        if m.group(1) and "target=" in m.group(1):
+            continue
+        findings.append((i, WARN, "anoni-link-new-tab",
+                         "連到 anoni.net 其他網站（/docs/ 以外）的連結加上 {target=\"_blank\"}，"
+                         "已有屬性時寫進同一組大括號", raw[m.start(): m.start() + 40]))
+    return findings
+
+
 # 其餘口語詞（貢獻者百科「口語字改書面語」）。比對方式與 JIANG 相同：
 # 取命中處前後各 2 字的視窗去對例外清單，避開正當複合詞。繁簡兩種寫法都收。
 # 全部列為 warn，因為替換詞要看語境（跑 → 執行／架設／運作／營運），不宜機器直接改。
@@ -633,6 +657,7 @@ def lint_file(path: Path):
 
     english = is_english_doc(path)
     simplified = is_simplified_doc(path)
+    site_doc = SITE_DOC_RE.search(path.as_posix()) is not None
     state = {}
     in_fm = bool(fm_lines)
     fm_end_line = body_start  # 1-based 行號：front matter 結尾的 --- 行
@@ -656,6 +681,8 @@ def lint_file(path: Path):
             continue
         clean = strip_noise(raw, state)
         findings.extend(lint_line(i, raw, clean, english, simplified))
+        if site_doc:
+            findings.extend(check_anoni_site_links(i, raw, clean))
     return findings
 
 

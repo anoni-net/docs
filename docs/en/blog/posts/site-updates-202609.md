@@ -36,7 +36,7 @@ The main thread from 2 to 8 September was offline reading and passkeys, already 
 - [File hash comparison](../../utils/hash.md) computes a SHA-256 to check against the string you were given, confirming that a file delivered by hand or pulled off a download matches the original, and it handles files of several gigabytes.
 - [Speaking online from Singapore and Malaysia](../../scenarios/singapore-malaysia-speech.md) gained Traditional and Simplified Chinese versions; the English one was already up.
 - [Preparing for and responding to a network shutdown](../../scenarios/shutdown.md) filled in how to work during an outage, judgement calls when alone, dividing tasks in a shared household, and the location exposure that comes with reconnecting.
-- [Global Gathering 2026](https://anoni.net/en/events/gg2026/) gained an on-site page for finding people, with a photo of the printed wrapper, a globe screenshot and a payment illustration. Six terms of art gained footnotes, placed where attendees on site had trouble reading.
+- [Global Gathering 2026](https://anoni.net/en/events/gg2026/){target="_blank"} gained an on-site page for finding people, with a photo of the printed wrapper, a globe screenshot and a payment illustration. Six terms of art gained footnotes, placed where attendees on site had trouble reading.
 
 ## The Lab and the WebRTC transfer measurement
 
@@ -130,7 +130,7 @@ The site also gained a URL contract, recording every page URL, every heading anc
 
 The WebRTC page in the Lab needs real measurements: two devices, one network, and the exported record pasted back onto [issue #553](https://github.com/anoni-net/docs/issues/553){target="_blank"}. Every network environment is useful, whether that is a home router, a phone hotspot or the shared Wi-Fi at a venue, and a failure to connect is just as worth recording.
 
-The cadence, scope and shape of this series are all still being worked out. If a section is too granular, if one deserves more room, or if there are changes you want to see covered, we would like to hear it. Contact details are on [Stay Informed](https://anoni.net/en/contact/).
+The cadence, scope and shape of this series are all still being worked out. If a section is too granular, if one deserves more room, or if there are changes you want to see covered, we would like to hear it. Contact details are on [Stay Informed](https://anoni.net/en/contact/){target="_blank"}.
 
 ## Further reading
 

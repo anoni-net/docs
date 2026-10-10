@@ -39,6 +39,6 @@ icon: material/account-group-outline
 
 ## 如何参与
 
-- **想看哪个场景**：到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 表达需求，会帮助我们判断哪些主题优先写
+- **想看哪个场景**：到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 表达需求，会帮助我们判断哪些主题优先写
 - **想协助撰写**：认领对应的 GitHub issue（每个 issue 都列出预期内容），先在 Matrix 表达意愿再开始
 - **有实务经验想分享**：欢迎匿名透过 [whisper@anoni.net](mailto:whisper@anoni.net) 寄数据给我们，会在征得同意后纳入文章

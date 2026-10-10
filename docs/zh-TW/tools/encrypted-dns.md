@@ -226,7 +226,7 @@ DoT 的第 853 埠很容易被擋掉。DoH 混在 HTTPS 裡比較難用埠號擋
 
 - [:material-access-point-network: 什麼是 OONI](./what-is-ooni.md)
 - [:material-chart-bar: 台灣 ASN 涵蓋率](../taiwan/ooni-asn-coverage.md)
-- [:material-shield-account-outline: 個人隱私指引](https://anoni.net/join/privacy-guide/)
+- [:material-shield-account-outline: 個人隱私指引](https://anoni.net/join/privacy-guide/){target="_blank"}
 
 </div>
 

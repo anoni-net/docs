@@ -223,7 +223,7 @@ Proton 有非营利组织折扣，涵盖 Mail、Drive、VPN、Pass 的商务版�
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)
+- [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 - [:material-lifebuoy: 紧急求救](../help/index.md)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 

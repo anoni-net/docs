@@ -8,7 +8,7 @@ icon: material/book-information-variant
 
 文档站整理匿名网络与隐私的知识，从概念、工具到不同处境的准备，也追踪台湾的网络观测与相关法规。内容由匿名网络社群 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社群的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/)，这一页只谈文档站本身。
+社群的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/){target="_blank"}，这一页只谈文档站本身。
 
 ## 内容范围
 
@@ -29,7 +29,7 @@ icon: material/book-information-variant
 
 社群不限制贡献者使用哪一家的 AI 工具协助写作与翻译，AI 的产出跟人工撰写走同一套流程。文章里的数字、引文与来源链接，提交 PR 的人要实际点开核对，并为内容负责。
 
-内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)。
+内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}。
 
 ## 三个语言版本
 
@@ -43,7 +43,7 @@ icon: material/book-information-variant
 
 写错的地方直接修改原文，影响读者做法的更正另外写成公告。公告说明改了什么、依据在哪里，以及照着旧版做过准备的人要补上什么，例如 [2026/08 的更正回顾](../blog/posts/docs-corrections-202608.md)与 [2026/09 的文档站更新回顾](../blog/posts/site-updates-202609.md)。
 
-发现错误或过时的内容，可以到 [GitHub 开 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或写信到 <whisper@anoni.net>（PGP 公钥见[联系页](https://anoni.net/zh-cn/contact/#pgp)）。
+发现错误或过时的内容，可以到 [GitHub 开 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或写信到 <whisper@anoni.net>（PGP 公钥见[联系页](https://anoni.net/zh-cn/contact/#pgp){target="_blank"}）。
 
 ## 阅读方式
 
@@ -60,5 +60,5 @@ icon: material/book-information-variant
 - [贡献者百科](../community/contributor-handbook.md)
 - [中文化与文档翻译](../community/i18n.md)
 - [文档站的视觉规范](../community/visual-guide.md)
-- [品牌素材](https://anoni.net/zh-cn/brand/)
-- [社群首页 anoni.net](https://anoni.net/zh-cn/)
+- [品牌素材](https://anoni.net/zh-cn/brand/){target="_blank"}
+- [社群首页 anoni.net](https://anoni.net/zh-cn/){target="_blank"}

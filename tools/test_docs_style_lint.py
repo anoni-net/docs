@@ -295,6 +295,36 @@ ZH_HEADING_CASES: list[tuple[str, bool, str]] = [
 ]
 
 
+# anoni-link-new-tab 只掃文件站三語系的內容，案例要寫進 docs/<語系>/ 底下才會生效。
+# (本文, 應該被攔下來嗎, 說明)
+LINK_CASES: list[tuple[str, bool, str]] = [
+    ("詳見[社群工具頁](https://anoni.net/services/)。", True, "連到社群首頁沒有開新分頁"),
+    ("詳見[社群工具頁](https://anoni.net/services/){target=\"_blank\"}。", False, "有 target"),
+    ("[報名](https://anoni.net/events/gg2026/){ .md-button }", True, "有其他屬性但沒有 target"),
+    ("[報名](https://anoni.net/events/gg2026/){ .md-button target=\"_blank\" }", False, "target 跟其他屬性寫在一起"),
+    ("[新聞導讀](https://anoni.net/news/)", True, "新聞導讀也是其他網站"),
+    ("[首頁](https://anoni.net/)", True, "首頁本身"),
+    ("[文件站](https://anoni.net/docs/)與[這篇](https://anoni.net/docs/tools/what-is-tor/)", False, "/docs/ 是文件站自己"),
+    ("寫成 `[社群工具頁](https://anoni.net/services/)` 這種形式。", False, "inline code 裡的寫法示範"),
+    ("[Freedom on the Net](https://freedomhouse.org/)", False, "這條只管 anoni.net，其他外部連結不在範圍"),
+]
+
+
+def run_lint_site(body: str, tmpdir: pathlib.Path) -> int:
+    """寫進 docs/zh-TW/ 底下，讓只對文件站內容生效的規則跑得到。"""
+    d = tmpdir / "site" / "docs" / "zh-TW"
+    d.mkdir(parents=True, exist_ok=True)
+    f = d / "case.md"
+    f.write_text(f"---\ntitle: t\n---\n\n# t\n\n{body}\n", encoding="utf-8")
+    out = subprocess.run(
+        [sys.executable, str(LINT), str(f)], capture_output=True, text=True
+    ).stdout
+    m = SUMMARY.search(out)
+    if not m:
+        raise AssertionError(f"無法解析 linter 輸出：\n{out}")
+    return int(m.group(1)) + int(m.group(2))
+
+
 def run_lint_raw(doc: str, tmpdir: pathlib.Path, english: bool = False) -> int:
     """跟 run_lint 一樣，但不自動補標題，整份內容照原樣寫入。"""
     d = tmpdir / "raw" / ("en" if english else "zh")
@@ -518,10 +548,19 @@ def main() -> int:
                 f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{doc!r}"
             )
 
+    for body, should_flag, label in LINK_CASES:
+        n = run_lint_site(body, tmpdir)
+        flagged = n > 0
+        if flagged != should_flag:
+            failures.append(
+                f"  [{label}] 期望{'攔下' if should_flag else '放行'}，"
+                f"實際{'攔下' if flagged else '放行'}（{n} 件）\n    輸入：{body!r}"
+            )
+
     failures.extend(run_grandfather_cases())
 
     total = (len(CASES) + 1 + len(CN_CASES) + len(EN_CASES) + len(HEADING_CASES)
-             + len(ZH_HEADING_CASES) + len(JS_CASES) + 4)
+             + len(ZH_HEADING_CASES) + len(JS_CASES) + len(LINK_CASES) + 4)
     if failures:
         print(f"失敗 {len(failures)} / {total}\n")
         print("\n".join(failures))

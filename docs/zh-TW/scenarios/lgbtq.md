@@ -296,7 +296,7 @@ LGBTQ+ 在不同國家的法律處境差異極大。依 ILGA World 2025 年統�
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同場景的取捨
 - [家暴受害者的數位準備](./domestic-violence.md)：家庭關係惡化時的離家數位準備
 - [密碼管理器入門](../tools/password-manager.md)：帳號分流的基礎設施
-- [個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)：把場景指引串回個人隱私的整體規劃
+- [個人隱私指引研究專題](https://anoni.net/join/privacy-guide/){target="_blank"}：把場景指引串回個人隱私的整體規劃
 
 [^1]: [ILGA World - Sexual Orientation Laws Map](https://database.ilga.org/){target="_blank"} - 國際 LGBTI 協會的全球法律地圖
 [^2]: [台灣同志諮詢熱線協會](https://hotline.org.tw/){target="_blank"} - 情感支持、出櫃諮詢、家庭協助

@@ -44,6 +44,6 @@ description: "快速回顧，國家級的監控，我們還可以採取什麼樣
 
 ---
 
-以上是「網路自由小聚」活動當晚的快速回顧，也感謝[開放文化基金會](https://ocf.tw/){target="_blank"}的邀約，給予「[匿名網路社群](https://anoni.net/about/)」一個分享的機會。如果您還未閱讀我們已翻譯的報告，請透過[這裡閱讀](../../reports/index.md)！我們也準備針對報告中的發現，嘗試建立一個一般大眾可以上手的抵禦能力，或許會先從**隱私保護**開始，有興趣的夥伴也可以透過[這個頻道](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}來討論。
+以上是「網路自由小聚」活動當晚的快速回顧，也感謝[開放文化基金會](https://ocf.tw/){target="_blank"}的邀約，給予「[匿名網路社群](https://anoni.net/about/){target="_blank"}」一個分享的機會。如果您還未閱讀我們已翻譯的報告，請透過[這裡閱讀](../../reports/index.md)！我們也準備針對報告中的發現，嘗試建立一個一般大眾可以上手的抵禦能力，或許會先從**隱私保護**開始，有興趣的夥伴也可以透過[這個頻道](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}來討論。
 
-當然，也可以直接寄信給[我們](https://anoni.net/contact/)！
+當然，也可以直接寄信給[我們](https://anoni.net/contact/){target="_blank"}！

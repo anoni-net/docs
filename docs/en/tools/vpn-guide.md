@@ -281,7 +281,7 @@ What actually matters is often what you left in your accounts and what you publi
 
 <div class="grid cards" markdown>
 
-- [:material-account-group-outline: Join the community](https://anoni.net/en/join/)
+- [:material-account-group-outline: Join the community](https://anoni.net/en/join/){target="_blank"}
 - [:material-bridge: Set up a Tor WebTunnel](../community/setup-tor-webtunnel.md)
 - [:material-server-network-outline: Query Tor relays with the onionoo MCP](../community/onionoo-mcp.md)
 

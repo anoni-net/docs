@@ -278,7 +278,7 @@ From the first case, the places people get stuck:
 - [The NTNU interview](../blog/posts/ntnu-nz.md): the full account of the first case
 - [Campus Tor relay deployment SOP](./campus-tor-relay-sop.md): the technical detail
 - [Campus Tor relay FAQ](./campus-relay-faq.md): the institutional concerns
-- [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/): the community's entry point for this work
+- [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/){target="_blank"}: the community's entry point for this work
 - [EFF Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}: the international programme
 - [Setting up a Tor university relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}: the case on the Tor Project blog
 
@@ -292,4 +292,4 @@ This template comes from community member NZ, who provided the original proposal
 
     **Adapt the placeholder version on this page rather than forking the original**: The original contains NZ's personal email address, supervisor details, and campus IP ranges, and missing one of those when submitting is an easy mistake. The archive is there so you can see what a real version looks like and learn the structure and register.
 
-If you get a relay running at your own institution using this template, **tell us**. We will add your case to the [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/) so the third and fourth have more to work from. Contact routes are on [Community services](https://anoni.net/en/services/).
+If you get a relay running at your own institution using this template, **tell us**. We will add your case to the [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/){target="_blank"} so the third and fourth have more to work from. Contact routes are on [Community services](https://anoni.net/en/services/){target="_blank"}.

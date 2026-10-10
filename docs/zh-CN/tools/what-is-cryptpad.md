@@ -122,7 +122,7 @@ CryptPad 自 2026.5.0 起内建以下中文界面：
 **不适合**：
 
 - 一次性公开协作（用 [Etherpad](https://pad.anoni.net/){target="_blank"} 就够了，加密不是必要条件）
-- 大规模实时聊天（用 [Matrix 或其他 IM](https://anoni.net/zh-cn/services/)）
+- 大规模实时聊天（用 [Matrix 或其他 IM](https://anoni.net/zh-cn/services/){target="_blank"}）
 - 需要 AI 自动摘要、全文检索整个数据库的场景（Notion 系生态）
 - 视频会议（CryptPad 不做视频）
 
@@ -164,7 +164,7 @@ CryptPad 自 2026.5.0 起内建以下中文界面：
 
 ??? question "CryptPad 跟 Etherpad 该选哪个？"
 
-    看用途。**Etherpad 适合临时、可丢弃、无加密的共笔**（活动现场记录、提案 brainstorm），无须帐号、有链接就能进。**CryptPad 适合长期、敏感、加密协作**，需要帐号但内容对服务器不可见。社区两个都有自建，分工见 [社区自建服务](https://anoni.net/zh-cn/services/)。
+    看用途。**Etherpad 适合临时、可丢弃、无加密的共笔**（活动现场记录、提案 brainstorm），无须帐号、有链接就能进。**CryptPad 适合长期、敏感、加密协作**，需要帐号但内容对服务器不可见。社区两个都有自建，分工见 [社区自建服务](https://anoni.net/zh-cn/services/){target="_blank"}。
 
 ??? question "可以做 AI 摘要、自动翻译吗？"
 
@@ -192,7 +192,7 @@ CryptPad 自 2026.5.0 起内建以下中文界面：
 
 <div class="grid cards" markdown>
 
-- [:material-account-group: 社区自建服务](https://anoni.net/zh-cn/services/)
+- [:material-account-group: 社区自建服务](https://anoni.net/zh-cn/services/){target="_blank"}
 - [:material-translate-variant: 中文化与文档翻译](../community/i18n.md)
 - [:material-file-document: CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](../blog/posts/2026-cryptpad-zh-hant.md)
 

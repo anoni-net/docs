@@ -413,7 +413,7 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 - Android：Google Pixel 的 Android 16 與 Android 17，依 Google 的 Android 說明中心、Pixel 說明中心與 Android 開放原始碼專案，2026 年 10 月核對
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支援頁，2026 年 10 月核對。部分選單名稱在官方的台灣說明頁還查不到，這些步驟以搜尋關鍵字為主
 
-照著做卻找不到選項，先用設定裡的搜尋欄位找名稱。仍然找不到的話，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/)）告訴我們手機型號與系統版本，我們會查證後更新。
+照著做卻找不到選項，先用設定裡的搜尋欄位找名稱。仍然找不到的話，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們手機型號與系統版本，我們會查證後更新。
 
 ## 相關閱讀
 

@@ -100,7 +100,7 @@ OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){t
 
 ### 對照 OONI Probe 在台灣的觀測資料
 
-台灣常被認為是「網路自由度高」的地區，這不代表網路層完全沒有干擾。透過 [OONI Probe](https://ooni.org/install/){target="_blank"} 在台灣固網 ISP 與行動網路上的長期測量，可以盤點是否出現 TLS 干擾、DNS 操縱或封鎖跡象，作為討論「數位韌性」議題時的本地證據。社群已經在 [Tor Relays 觀測點](https://anoni.net/projects/pulse/)與 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)上累積了一部分基礎，測量者社群的規模仍然偏小，覆蓋率不足會直接影響到可信度。
+台灣常被認為是「網路自由度高」的地區，這不代表網路層完全沒有干擾。透過 [OONI Probe](https://ooni.org/install/){target="_blank"} 在台灣固網 ISP 與行動網路上的長期測量，可以盤點是否出現 TLS 干擾、DNS 操縱或封鎖跡象，作為討論「數位韌性」議題時的本地證據。社群已經在 [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}與 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)上累積了一部分基礎，測量者社群的規模仍然偏小，覆蓋率不足會直接影響到可信度。
 
 ### 反詐騙阻擋與「合理執法」的界線
 
@@ -114,6 +114,6 @@ OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){t
 
 - [什麼是 OONI？](../../tools/what-is-ooni.md)
 - [OONI 網站檢測清單](../../taiwan/ooni-checklist.md)
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 - [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - [OONI Run v2 操作說明](../../tools/ooni-run-v2.md)

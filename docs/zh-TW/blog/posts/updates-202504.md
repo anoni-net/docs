@@ -22,11 +22,11 @@ description: "專案目前近況與更新 2025/04"
 
 ![EFF, Tor University](./assets/images/eff-tor-university-zh-tw.png){style="border-radius: 5px;"}
 
-最重要的是，預計在 2025/08 舉辦的「[匿名網路工作坊](https://anoni.net/events/workshop-2025/)」已開始啟動籌備了！
+最重要的是，預計在 2025/08 舉辦的「[匿名網路工作坊](https://anoni.net/events/workshop-2025/){target="_blank"}」已開始啟動籌備了！
 
 ## 「匿名網路工作坊」招募工作人員與培訓小幫手
 
-我們預計在今年的 COSCUP 開源人年會上舉辦「[匿名網路工作坊](https://anoni.net/events/workshop-2025/)」，延續在 RightsCon 前的[工作坊活動](./rightscon25-pre-event.md)，這次我們會針對教材**翻譯**與**在地化調整**，並用**華語**的方式進行。2025/08 活動前，會針對 Tor/Tails、OONI 來培訓小幫手，在工作坊活動日可以帶領現場的參與者更快瞭解匿名網路、網路自由的重要性。
+我們預計在今年的 COSCUP 開源人年會上舉辦「[匿名網路工作坊](https://anoni.net/events/workshop-2025/){target="_blank"}」，延續在 RightsCon 前的[工作坊活動](./rightscon25-pre-event.md)，這次我們會針對教材**翻譯**與**在地化調整**，並用**華語**的方式進行。2025/08 活動前，會針對 Tor/Tails、OONI 來培訓小幫手，在工作坊活動日可以帶領現場的參與者更快瞭解匿名網路、網路自由的重要性。
 
 在接下來的三個月期間，我們也需要活動籌劃的工作人員，協助我們協調、宣傳、報名、通知等活動事宜。也歡迎害羞的新手可以透過與我們一起辦活動的方式，慢慢認識我們與匿名網路、網路自由的議題。
 
@@ -34,6 +34,6 @@ description: "專案目前近況與更新 2025/04"
 
 也希望可以透過這次的工作坊，讓對相關議題有興趣的夥伴，一起來提升關於 Tor/Tails、OONI 等知識！我們有設計一個技能分級表，後續的培訓希望把大家提升到 **Basic Level 3** 的層級！
 
-[瞭解「匿名網路工作坊」籌備事項！](https://anoni.net/events/workshop-2025-prepare/){ .md-button .md-button--primary }
+[瞭解「匿名網路工作坊」籌備事項！](https://anoni.net/events/workshop-2025-prepare/){ .md-button .md-button--primary target="_blank" }
 
 如果你對工作坊籌備與培訓小幫手感興趣，歡迎直接回信給我，另外開放文化基金會的志工招募也[同步公告](https://volunteer.ocf.tw/blog/)工作坊招募資訊。

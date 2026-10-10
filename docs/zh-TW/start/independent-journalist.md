@@ -76,8 +76,8 @@ offline_caution: true
 
 - 威脅模型清單答完按「複製摘要」，貼到你自己選的地方，換題目時回頭再填一次
 - [隱形字元偵測](../utils/invisible.md)：取得文件先掃一次，隱形標記是常見的追人手法
-- [社群自架服務](https://anoni.net/services/)的 Matrix、CryptPad 與 Send 都開放使用，一人團隊不必自己架
-- 有問題到 [Matrix 公開 room](https://anoni.net/services/) 問，需要傳敏感檔案寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- [社群自架服務](https://anoni.net/services/){target="_blank"}的 Matrix、CryptPad 與 Send 都開放使用，一人團隊不必自己架
+- 有問題到 [Matrix 公開 room](https://anoni.net/services/){target="_blank"} 問，需要傳敏感檔案寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 這條路徑沒有處理的
 

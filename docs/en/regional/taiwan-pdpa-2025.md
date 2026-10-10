@@ -166,7 +166,7 @@ Which one fits depends on the situation, and knowing both is what makes the choi
 
 The Chinese-language version of this page is at [台灣個資法 2025 修法](https://anoni.net/docs/taiwan/pdpa-2025/){target="_blank"}.
 
-If you have the Commission's latest secondary legislation or rulings, the channels on the [Community services](https://anoni.net/en/services/) page reach us and we will update this page.
+If you have the Commission's latest secondary legislation or rulings, the channels on the [Community services](https://anoni.net/en/services/){target="_blank"} page reach us and we will update this page.
 
 ## Related
 

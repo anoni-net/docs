@@ -144,7 +144,7 @@ All three assume your jurisdiction permits the tools. Direct Tor connections are
 
 ## This page will go out of date
 
-Browsers ship every few weeks, and defaults and feature names move with them. What is written here is the mechanism and the way to judge a claim; check the current state against each vendor's own documentation. If something no longer matches what you see, tell us in the [community Matrix room](https://anoni.net/en/services/).
+Browsers ship every few weeks, and defaults and feature names move with them. What is written here is the mechanism and the way to judge a claim; check the current state against each vendor's own documentation. If something no longer matches what you see, tell us in the [community Matrix room](https://anoni.net/en/services/){target="_blank"}.
 
 ## Where to go from here
 

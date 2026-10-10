@@ -12,7 +12,7 @@ Look at what you have, then pick a line. The four are independent; starting one 
 
 ## Twenty minutes to pick a direction
 
-1. [2026 roadmap](https://anoni.net/en/join/roadmap-2026/): this year's three themes and where each stands, to see whether one of them is yours
+1. [2026 roadmap](https://anoni.net/en/join/roadmap-2026/){target="_blank"}: this year's three themes and where each stands, to see whether one of them is yours
 2. [How to contribute](../community/how-to-contribute.md): choosing a topic, saying so on Matrix, and what ongoing participation looks like
 3. [Self-skills evaluation form](../community/skill-level.md): a self-assessment across Tor, Tails, and OONI, with reading listed under each level
 
@@ -27,7 +27,7 @@ The most direct contribution. Start with a relay; switch to a bridge if bandwidt
 - [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, keep the page open and you are already helping; install the extension to leave it running
 - [Setting up a .onion service](../community/setup-onion-service.md): give a service you already run an onion entrance
 - [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): currently a single point, and each additional pin is redundancy
-- [Tor relay watcher](https://anoni.net/en/projects/pulse/): see how many relays exist in the region and which ASNs they sit in
+- [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}: see how many relays exist in the region and which ASNs they sit in
 
 ### You write code and work with data
 
@@ -65,9 +65,9 @@ Technical ability and personal operational habits are separate things. Someone h
 
 ## What to take with you
 
-- [Public Matrix room](https://anoni.net/en/services/): say what you are picking up before you start, so two people do not do the same work
+- [Public Matrix room](https://anoni.net/en/services/){target="_blank"}: say what you are picking up before you start, so two people do not do the same work
 - [anoni-net/docs on GitHub](https://github.com/anoni-net/docs): the site source and its issues, each written with the expected scope
-- Community-run CryptPad and Etherpad are available for drafting proposals, see [community services](https://anoni.net/en/services/)
+- Community-run CryptPad and Etherpad are available for drafting proposals, see [community services](https://anoni.net/en/services/){target="_blank"}
 
 ## What this path does not cover
 

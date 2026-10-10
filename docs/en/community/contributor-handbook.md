@@ -8,14 +8,14 @@ icon: material/book-open-variant
 
 Any community that collaborates for long enough accumulates unwritten rules: how to name a file, what belongs in a pull request description, how issues get sorted, and the questions that come up in a contributor's first week. This handbook collects what would otherwise stay scattered across the README, issue comments, and Matrix conversations, so a new contributor can read it in one sitting and experienced members have something common to point at.
 
-If this is your first time here, start with [How to contribute](./how-to-contribute.md) to pick a direction, then come back for the specifics. Account requests and service entry points are on [Community services](https://anoni.net/en/services/).
+If this is your first time here, start with [How to contribute](./how-to-contribute.md) to pick a direction, then come back for the specifics. Account requests and service entry points are on [Community services](https://anoni.net/en/services/){target="_blank"}.
 
 ## Your first week
 
 Sorted by what you want to do:
 
 - **Read first, decide later**: pick anything from [Concepts](../basics/index.md), then use the [skill level self-assessment](./skill-level.md) to gauge how familiar you are with Tor, Tails, and OONI
-- **Write or translate**: request a Matrix account (see [Community services](https://anoni.net/en/services/)), join the public Space, say what you would like to work on, and claim an issue
+- **Write or translate**: request a Matrix account (see [Community services](https://anoni.net/en/services/){target="_blank"}), join the public Space, say what you would like to work on, and claim an issue
 - **Technical maintenance**: request collaborator access to [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, then follow [Development environment setup](./setup-repo.md)
 - **Event organizing**: ask in the relevant Matrix room about what is coming up, and help with materials, on-site logistics, or registration
 
@@ -23,7 +23,7 @@ Every one of these starts with saying hello on Matrix. The community works async
 
 ## Writing style
 
-The writing style is shared by all three anoni.net sites, and the full rule set is on the community site's [writing style](https://anoni.net/en/join/writing-style/) page. Chinese has its own set, on the [Chinese version](https://anoni.net/join/writing-style/) of that page. This section only covers running the linter on the docs site.
+The writing style is shared by all three anoni.net sites, and the full rule set is on the community site's [writing style](https://anoni.net/en/join/writing-style/){target="_blank"} page. Chinese has its own set, on the [Chinese version](https://anoni.net/join/writing-style/){target="_blank"} of that page. This section only covers running the linter on the docs site.
 
 ### Running the linter
 
@@ -70,7 +70,7 @@ The structure stays flat. New articles go into an existing section:
 
 The English site uses `regional/` where the Chinese site uses `taiwan/`. An English reader who sees `taiwan/` assumes a site about Taiwan, while the content spans several jurisdictions with Taiwan as the anchor point.
 
-Pages and announcements about the community itself are not on the docs site. About, how to take part, community services, events and community updates live on [anoni.net](https://anoni.net/en/), with the source in [`anoni-net/www`](https://github.com/anoni-net/www). Community announcements such as events, project launches and progress reports go in that repository's `updates/` directory.
+Pages and announcements about the community itself are not on the docs site. About, how to take part, community services, events and community updates live on [anoni.net](https://anoni.net/en/){target="_blank"}, with the source in [`anoni-net/www`](https://github.com/anoni-net/www). Community announcements such as events, project launches and progress reports go in that repository's `updates/` directory.
 
 If you are not sure where an article belongs, ask on Matrix before opening a PR, rather than moving it afterwards.
 
@@ -117,9 +117,9 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 - Across directories: `../basics/anonymity-vs-privacy.md`
 - Across depths: `../../blog/posts/2025to2026.md`
 
-Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](https://anoni.net/en/services/)`.
+Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](https://anoni.net/en/services/){target="_blank"}`.
 
-External links get `{target="_blank"}` so they open in a new tab: `[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`.
+External links get `{target="_blank"}` so they open in a new tab: `[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`. The community homepage, the news briefings, the API and anything else on anoni.net outside `/docs/` count as other sites and get it too. When a link already has attributes, put it in the same braces, for example `{ .md-button target="_blank" }`.
 
 Linking to a page that exists only in Chinese is the one case where you write a full URL, because the language sites build separately and no relative path reaches across them. Use `https://anoni.net/docs/community/privacy-guide/` and mark it `(in Chinese)` so the reader knows what they are clicking. The default language, zh-TW, carries no language segment in its URLs. zh-CN uses lowercase `https://anoni.net/docs/zh-cn/...` and English uses `https://anoni.net/docs/en/...`, while the source directories keep their original casing.
 
@@ -160,7 +160,7 @@ Avoid paywalled material as the main source. If a paywalled version is all you c
 
 ### Charts
 
-The site supports Vega-Lite charts (`mkdocs-charts-plugin`) in code blocks tagged `vegalite`. The charts fetch their data in the reader's browser, so readers of the onion site also connect to the data source; keep the data on the site or at an address with an onion version. The Pulse charts moved to [Tor Relay Watch](https://anoni.net/en/projects/pulse/) on the community site in 2026-10, where they are rendered as static charts at build time.
+The site supports Vega-Lite charts (`mkdocs-charts-plugin`) in code blocks tagged `vegalite`. The charts fetch their data in the reader's browser, so readers of the onion site also connect to the data source; keep the data on the site or at an address with an onion version. The Pulse charts moved to [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} on the community site in 2026-10, where they are rendered as static charts at build time.
 
 ### Structured data
 
@@ -271,7 +271,7 @@ Four roles for review:
 | Question | Page |
 |---|---|
 | How do I pick something to work on? | [How to contribute](./how-to-contribute.md) |
-| How do I get a Matrix account? | [Community services](https://anoni.net/en/services/) |
+| How do I get a Matrix account? | [Community services](https://anoni.net/en/services/){target="_blank"} |
 | What suits my level? | [Skill level self-assessment](./skill-level.md) |
 | How do I set up the development environment? | [Development environment setup](./setup-repo.md) |
 | What are the translation rules? | [Localization and translation](./i18n.md) |
@@ -280,12 +280,12 @@ If none of those answer it, ask on Matrix. Include what you are trying to do, wh
 
 ## Code of conduct, in brief
 
-The community works on openness, mutual support, and staying within the law. This is the short version. The full text, including role definitions, decision-making, and dispute handling, is in the [governance charter](https://anoni.net/en/about/governance/), which takes precedence where the two differ.
+The community works on openness, mutual support, and staying within the law. This is the short version. The full text, including role definitions, decision-making, and dispute handling, is in the [governance charter](https://anoni.net/en/about/governance/){target="_blank"}, which takes precedence where the two differ.
 
 - **Mutual respect**: members get the same treatment regardless of background or familiarity with the subject
 - **Argue the issue, not the person**
 - **Lawful purposes**: all discussion and collaboration presumes lawful use. We do not assist money laundering, tax evasion, harassment, stalking, or unauthorized intrusion
-- **Disclosure**: anything involving personal data or sensitive material goes through [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/)
+- **Disclosure**: anything involving personal data or sensitive material goes through [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}
 - **Disputes**: raise it on Matrix first. Without consensus there, it goes to the next community sync
 
 Conduct that breaches these gets handled by core members under the governance charter.

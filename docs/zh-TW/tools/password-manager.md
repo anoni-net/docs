@@ -183,7 +183,7 @@ Tails 使用者：把 `.kdbx` 存進 Persistent Storage 並另外備份到加密
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)
+- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/){target="_blank"}
 - [:material-lifebuoy: 緊急求救](../help/index.md)
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 

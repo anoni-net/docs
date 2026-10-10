@@ -69,7 +69,7 @@ These pages cover concepts that show up in the current works.
 
 - How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
-- Running a relay and watching the network: [Tor relay watcher](https://anoni.net/en/projects/pulse/)
+- Running a relay and watching the network: [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
 - Getting through when Tor is blocked: [Tor Snowflake bridges](../tools/tor-snowflake.md)
 
 ## Want to help build them
@@ -82,7 +82,7 @@ Knowing JavaScript is enough to work on the copy, the level design and the inter
 
 ## What comes next
 
-These are the first three pieces, all focused on Tor. Plenty of other privacy topics deserve the same treatment: what metadata gives away, how a threat model shifts with your situation, what the money trail behind anonymous payments looks like. All of them are on the list. If you have an idea or want to build one with us, come find us in the [community](https://anoni.net/en/join/).
+These are the first three pieces, all focused on Tor. Plenty of other privacy topics deserve the same treatment: what metadata gives away, how a threat model shifts with your situation, what the money trail behind anonymous payments looks like. All of them are on the list. If you have an idea or want to build one with us, come find us in the [community](https://anoni.net/en/join/){target="_blank"}.
 
 <!-- Structured data. The three works ship their own JSON-LD in their head, since
      they never pass through the mkdocs template, and point isPartOf back at the

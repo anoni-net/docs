@@ -154,7 +154,7 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 
 - [:simple-ipfs: 帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
-- [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/)
+- [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

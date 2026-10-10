@@ -154,9 +154,9 @@ OONI 的公开数据目前没有被大量恶意污染，看到的异常多半来
 
 - [什么是 OONI](../../tools/what-is-ooni.md)
 - [OONI ASN 涵盖观测（台湾案例）](../../taiwan/ooni-asn-coverage.md)
-- [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/)
+- [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [我们普查了 336 条 OONI Run v2 清单，3 条就占了全网 72% 的检测量](./2026-ooni-run-v2-usage-patterns.md)
-- [个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)
+- [个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 
 [^1]: [From Heuristics to Anonymous Credentials: Assessing OONI's Approach to Bad Measurements, OONI 2026-07-06](https://ooni.org/post/2026-faulty-measurements/){target="_blank"}
 [^2]: [Requirements for OONI's anonymous credentials, OONI](https://ooni.org/post/2025-requirements-for-oonis-anonymous-credentials/){target="_blank"}

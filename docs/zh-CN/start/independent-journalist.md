@@ -77,8 +77,8 @@ offline_caution: true
 
 - 威胁模型清单答完按「复制摘要」，贴到你自己选的地方，换题目时回头再填一次
 - [隐形字符检测](../utils/invisible.md)：取得文件先扫一次，隐形标记是常见的追人手法
-- [沟通与协作工具](https://anoni.net/zh-cn/services/)的 Matrix、CryptPad 与 Send 都开放使用，一人团队不必自己架
-- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- [沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}的 Matrix、CryptPad 与 Send 都开放使用，一人团队不必自己架
+- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 这条路径没有处理的
 

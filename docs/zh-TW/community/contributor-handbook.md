@@ -8,14 +8,14 @@ icon: material/book-open-variant
 
 社群協作久了會累積許多不成文規定：檔名如何命名、PR 描述要寫什麼、Issue 如何分類、新貢獻者第一週會碰到的疑問。貢獻者百科把散落在 README、Issue 留言、Matrix 對話裡的內容整合成一頁，方便新成員一次看完，也讓資深成員有共同對話的依據。
 
-如果你是第一次參與，建議先看 [如何參與與認領主題](https://anoni.net/join/) 決定方向，再回來這頁查具體做法。完整的工具入口與帳號申請見 [社群自架服務](https://anoni.net/services/)。
+如果你是第一次參與，建議先看 [如何參與與認領主題](https://anoni.net/join/){target="_blank"} 決定方向，再回來這頁查具體做法。完整的工具入口與帳號申請見 [社群自架服務](https://anoni.net/services/){target="_blank"}。
 
 ## 第一週的入門路徑
 
 依「我想做什麼」分流：
 
 - **想試水溫，先看看內容**：先讀 [基礎概念](../basics/index.md) 任一篇，再用 [自我技能評估表](./skill-level.md) 評估自己對 Tor、Tails、OONI 的熟悉度
-- **想開始寫作或翻譯**：申請 Matrix 帳號（見 [社群自架服務](https://anoni.net/services/)）→ 加入 Public Space → 表達意願 → 認領一個 Issue
+- **想開始寫作或翻譯**：申請 Matrix 帳號（見 [社群自架服務](https://anoni.net/services/){target="_blank"}）→ 加入 Public Space → 表達意願 → 認領一個 Issue
 - **想參與技術維運**：申請 GitHub 對 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 的協作權限 → 看 [專案研究預先準備](./setup-repo.md) 建好開發環境
 - **想加入活動籌備**：到 Matrix 對應 room 詢問近期活動（COSCUP、工作坊、小聚），協助文宣、現場、報名等任務
 
@@ -23,7 +23,7 @@ icon: material/book-open-variant
 
 ## 寫作風格規範
 
-寫作風格是 anoni.net 三個網站共用的規範，全文在社群首頁的[寫作風格規範](https://anoni.net/join/writing-style/)，英文照它的[英文版](https://anoni.net/en/join/writing-style/)。這一節只寫文件站執行 linter 的方式。
+寫作風格是 anoni.net 三個網站共用的規範，全文在社群首頁的[寫作風格規範](https://anoni.net/join/writing-style/){target="_blank"}，英文照它的[英文版](https://anoni.net/en/join/writing-style/){target="_blank"}。這一節只寫文件站執行 linter 的方式。
 
 ### 執行 linter
 
@@ -68,7 +68,7 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `reports/` | 嚴選報告，外部研究的中譯 |
 | `community/` | 架設與營運的教學、讀懂觀測資料的方法、貢獻與翻譯規範 |
 
-社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/)，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www){target="_blank"}，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
+社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/){target="_blank"}，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www){target="_blank"}，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
 
 如果你的新文章不確定該放哪一類，先在 Matrix 上問一聲，避免直接 PR 後又要搬。
 
@@ -113,9 +113,9 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 - 跨目錄：`../basics/anonymity-vs-privacy.md`
 - 跨深度：`../../blog/posts/2025to2026.md`
 
-正文的連結用描述性的文字，不直接露出網址，也不拿網址當連結文字。例：`詳見[社群工具頁](https://anoni.net/services/)`。
+正文的連結用描述性的文字，不直接露出網址，也不拿網址當連結文字。例：`詳見[社群工具頁](https://anoni.net/services/){target="_blank"}`。
 
-外部連結加 `{target="_blank"}`，在新分頁開啟：`[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`。
+外部連結加 `{target="_blank"}`，在新分頁開啟：`[Freedom on the Net](https://freedomhouse.org/explore-the-map){target="_blank"}`。社群首頁、新聞導讀、API 這些 `anoni.net/docs/` 以外的網址屬於其他網站，同樣加上。已經有其他屬性時寫在同一組大括號裡，例如 `{ .md-button target="_blank" }`。
 
 需要寫對外完整網址時（社群貼文、外部引用），網站預設語系 zh-TW 不帶語系區段：`docs/zh-TW/community/i18n.md` 對應 `https://anoni.net/docs/community/i18n/`。zh-CN 用小寫 `https://anoni.net/docs/zh-cn/...`，en 用 `https://anoni.net/docs/en/...`。資料夾路徑仍保留語系大小寫。
 
@@ -156,7 +156,7 @@ icon: material/shield-account-outline
 
 ### 圖表
 
-文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫。圖表在讀者的瀏覽器裡載入資料，onion 版的讀者也會連到資料來源，資料要放在站內或支援 onion 的位址。Pulse 的觀測圖表在 2026-10 搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，改成建置時產生的靜態圖表。
+文件站支援 Vega-Lite 圖表（`mkdocs-charts-plugin`），用語言標記為 `vegalite` 的程式碼區塊撰寫。圖表在讀者的瀏覽器裡載入資料，onion 版的讀者也會連到資料來源，資料要放在站內或支援 onion 的位址。Pulse 的觀測圖表在 2026-10 搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}，改成建置時產生的靜態圖表。
 
 ### 結構化資料
 
@@ -265,8 +265,8 @@ AI 產出與人工撰寫走同一套流程：執行 `docs_style_lint.py`、照 P
 
 | 問題 | 看這裡 |
 |---|---|
-| 如何選擇主題開始？ | [如何參與與認領主題](https://anoni.net/join/) |
-| 如何申請 Matrix 帳號？ | [社群自架服務](https://anoni.net/services/) |
+| 如何選擇主題開始？ | [如何參與與認領主題](https://anoni.net/join/){target="_blank"} |
+| 如何申請 Matrix 帳號？ | [社群自架服務](https://anoni.net/services/){target="_blank"} |
 | 我的程度適合做什麼？ | [自我技能評估表](./skill-level.md) |
 | 如何設定開發環境？ | [專案研究預先準備](./setup-repo.md) |
 | 翻譯有什麼規範？ | [中文化與文件翻譯](./i18n.md) |
@@ -276,12 +276,12 @@ AI 產出與人工撰寫走同一套流程：執行 `docs_style_lint.py`、照 P
 
 ## 行為準則摘要
 
-社群以開放、互助、合法為原則。以下是快速摘要，完整版（含角色定義、決策流程、爭議處理）見 [治理章程](https://anoni.net/about/governance/)，兩者不一致時以治理章程為準。重點：
+社群以開放、互助、合法為原則。以下是快速摘要，完整版（含角色定義、決策流程、爭議處理）見 [治理章程](https://anoni.net/about/governance/){target="_blank"}，兩者不一致時以治理章程為準。重點：
 
 - **互相尊重**：不同背景、不同熟悉度的成員一視同仁
 - **討論議題不攻擊個人**：對事不對人
 - **合法前提**：所有討論與協作以合法用途為前提，不協助洗錢、規避稅務、騷擾、跟蹤、未授權入侵等行為
-- **資訊揭露**：涉及個人資料、機敏資訊的處理走 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)
+- **資訊揭露**：涉及個人資料、機敏資訊的處理走 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}
 - **爭議處理**：先在 Matrix 討論，沒有共識可提案到下一次社群同步討論
 
 違反原則的行為會由核心成員依治理章程處理。

@@ -87,10 +87,10 @@ Tor 把 IRC（OFTC 网络）与 Matrix 双向桥接，用 Element 加入 Matrix 
 社区现有的工作跟 Tor 几个方向接得起来：
 
 - 繁体中文文件与用语。社区已在做 zh-Hant 的翻译与用语规范，直接转成 Weblate 上的 Tor 翻译贡献，是最自然的延伸。
-- 网络可达性观测。社区维运的 Pulse（[Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/) 的图表来源）与 ASN Coverage（[ASN 观测数据分析](../taiwan/ooni-asn-coverage.md)）对应 network-health 团队与 `S112` 的工作方向，观测成果可带到该团队的社区分享。
-- 校园中继。[Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/) 源自 EFF 与 Tor Project 合作的 Tor University Challenge，台师大已有运行中的案例（见 [台师大 NZ 访谈](../blog/posts/ntnu-nz.md)），是把在地推广接回 Tor 生态的具体成果。
+- 网络可达性观测。社区维运的 Pulse（[Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"} 的图表来源）与 ASN Coverage（[ASN 观测数据分析](../taiwan/ooni-asn-coverage.md)）对应 network-health 团队与 `S112` 的工作方向，观测成果可带到该团队的社区分享。
+- 校园中继。[Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"} 源自 EFF 与 Tor Project 合作的 Tor University Challenge，台师大已有运行中的案例（见 [台师大 NZ 访谈](../blog/posts/ntnu-nz.md)），是把在地推广接回 Tor 生态的具体成果。
 
-这些方向如何排进社区的年度节奏，见 [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/)。State of the Onion 的社区场会公开征集社区更新，是把这些成果对国际亮相的场合。
+这些方向如何排进社区的年度节奏，见 [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/){target="_blank"}。State of the Onion 的社区场会公开征集社区更新，是把这些成果对国际亮相的场合。
 
 ## :fontawesome-solid-diagram-project: 相关阅读
 
@@ -99,7 +99,7 @@ Tor 把 IRC（OFTC 网络）与 Matrix 双向桥接，用 Element 加入 Matrix 
 - [:material-translate-variant: 中文化与文件翻译](./i18n.md)
 - [:simple-torproject: 如何搭建 Tor Relay](./setup-tor-relay.md)
 - [:material-tunnel-outline: 设置 Tor WebTunnel](./setup-tor-webtunnel.md)
-- [:material-hand-heart: 如何参与与认领主题](https://anoni.net/zh-cn/join/)
+- [:material-hand-heart: 如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"}
 
 </div>
 

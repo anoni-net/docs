@@ -238,4 +238,4 @@ icon: material/lifebuoy
 
 我们不能：代为提告、发出保护令、进入装置取证、提供法律意见。情境急迫请优先联系专业专线。
 
-如果你想协助维护或补强这页的资源，欢迎透过 [社群自架服务](https://anoni.net/zh-cn/services/) 加入社群讨论。
+如果你想协助维护或补强这页的资源，欢迎透过 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 加入社群讨论。

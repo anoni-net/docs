@@ -158,7 +158,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 - 群组规模成长到上千人时，旧版 Megolm 的同步压力会明显，MLS 过渡完成前是过渡期
 - 在中国大陆访问境外 homeserver（含 anoni.net 的 `im.anoni.net`）需可靠的境外网络连接
 
-加入 anoni.net 的 Matrix（含注册方式）见 [社群自架服务](https://anoni.net/zh-cn/services/)。
+加入 anoni.net 的 Matrix（含注册方式）见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
 
 ## 不在主名单的工具
 
@@ -233,7 +233,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 **iOS AirDrop 受限**（2022 年 11 月起）：国行 iPhone 的 AirDrop「所有人」选项被改为 10 分钟自动关闭，对在公共空间用 AirDrop 临时传讯的场景产生明显影响。Briar 的 Bluetooth、Wi-Fi Direct 是一个替代方案。
 
-**社群讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社群自架服务](https://anoni.net/zh-cn/services/)。境内访问需可靠的境外网络连接。
+**社群讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。境内访问需可靠的境外网络连接。
 
 **协议层细节**：Signal 与 Matrix 各自的协议设计与威胁模型见 [端对端加密如何运作](../advanced/e2ee.md)。
 
@@ -267,7 +267,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
     视规模、技术人力与所在地法规。20 人以下的小社群、没专人维运，用 anoni.net 或其他公开 homeserver 比较划算。50 人以上、有长期维护人力、想完全控制 metadata 的组织值得自架。自架要处理的不只是 server 本身，还有 storage、联邦的网络设置、E2EE 密钥备份、device verification 教学、突发 spam 与 abuse 处理。
 
-    在中国大陆境内自架公开 homeserver 还要处理 ICP 备案与内容合规义务，这条路对多数社群来说成本过高，常见做法是改用境外 homeserver（如 anoni.net 的 `im.anoni.net`），代价是访问需要可靠的境外网络连接。社群可参考 [社群自架服务](https://anoni.net/zh-cn/services/) 看 anoni.net 的部署选择。
+    在中国大陆境内自架公开 homeserver 还要处理 ICP 备案与内容合规义务，这条路对多数社群来说成本过高，常见做法是改用境外 homeserver（如 anoni.net 的 `im.anoni.net`），代价是访问需要可靠的境外网络连接。社群可参考 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 看 anoni.net 的部署选择。
 
 ??? question "P2P 消息工具（Briar、SimpleX）会被防火墙挡吗"
 
@@ -287,8 +287,8 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)
-- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/)
+- [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
+- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

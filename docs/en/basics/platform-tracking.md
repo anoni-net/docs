@@ -104,7 +104,7 @@ Note what this list does not claim: none of it stops behavioral profiling inside
 
 ## This page will age
 
-Platform settings and policies change every few months. The mechanisms are durable; the menu paths are not. Verify against each platform's current privacy settings before relying on a specific step, and tell us via the [Community](https://anoni.net/en/join/) page if something here no longer matches reality.
+Platform settings and policies change every few months. The mechanisms are durable; the menu paths are not. Verify against each platform's current privacy settings before relying on a specific step, and tell us via the [Community](https://anoni.net/en/join/){target="_blank"} page if something here no longer matches reality.
 
 ## Where to go from here
 
