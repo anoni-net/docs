@@ -66,7 +66,7 @@ All three language versions share one program. The language is set by a URL para
 
 - How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
-- Running a relay and watching the network: [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
+- Running a relay and watching the network: [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
 - Getting through when Tor is blocked: [Tor Snowflake bridges](../tools/tor-snowflake.md)
 - The other two works: [Interactive](index.md)
 

@@ -73,7 +73,7 @@ In Claude Desktop, Cursor, or any other MCP-capable client, add this to the `mcp
 
 Save the config, restart the client, and the `onionoo` tool set will appear in the tool list. The full guide covers local stdio transport setup, all available tools, permission options, and self-hosted (Docker) instructions.
 
-[:material-arrow-right-circle-outline: Read the full onionoo MCP guide](https://anoni.net/en/projects/onionoo-mcp/){ .md-button .md-button--primary target="_blank" }
+[:material-arrow-right-circle-outline: Read the full guide to Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){ .md-button .md-button--primary target="_blank" }
 
 ### For direct API users
 
@@ -93,7 +93,7 @@ The full endpoint list and parameters are in the [Swagger UI](https://onionoo.an
 
 anoni.net now has three entry points for Tor network observation, each suited to a different task.
 
-- **[Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}**: chart dashboards for Taiwan's relay counts and bandwidth trends. Good when you want to see how something has moved over time.
+- **[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}**: chart dashboards for Taiwan's relay counts and bandwidth trends. Good when you want to see how something has moved over time.
 - **[ASN observation data analysis](../../regional/ooni-asn-coverage.md)**: OONI observation data broken down by ASN. Good when you want to know which ASNs are actually being measured.
 - **onionoo MCP** (new): ask ad-hoc questions in plain language. Good when you want to scope out a specific relay, ASN, or country.
 
@@ -109,7 +109,7 @@ The service is released under the MIT license. Source code: <https://github.com/
 
 ## Related reading
 
-- [onionoo MCP: a query service for Tor relays](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"} — full usage guide
-- [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
+- [Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"} — full usage guide
+- [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
 - [ASN observation data analysis](../../regional/ooni-asn-coverage.md)
 - [What is Tor?](../../tools/what-is-tor.md)

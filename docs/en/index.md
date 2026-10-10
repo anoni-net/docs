@@ -33,7 +33,7 @@ If one of civil society, a newsroom, independent journalism, open-source develop
 
     ---
 
-    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run a Tor relay monitoring system across TW / HK / JP / KR (Pulse), an ASN (Autonomous System Number) coverage analysis tool over OONI public data, and have published full Chinese translations of two regional reports (InterSecLab's Geedge / MESA leak and MADLink, both 2025). English regulatory explainers covering Taiwan's data protection overhaul, the Virtual Asset Service Act, and whistleblower protection are published.
+    Researchers, journalists, and INGOs looking for regional context on Internet freedom in the Sinophone Asia-Pacific. We run Tor Relay Watch, which tracks Tor relays in Taiwan and fourteen other regions, and OONI Coverage, which maps how completely OONI measurements cover each network, and have published full Chinese translations of two regional reports (InterSecLab's Geedge / MESA leak and MADLink, both 2025). English regulatory explainers covering Taiwan's data protection overhaul, the Virtual Asset Service Act, and whistleblower protection are published.
 
     [:octicons-arrow-right-24: Regional observatory](./regional/index.md)
 

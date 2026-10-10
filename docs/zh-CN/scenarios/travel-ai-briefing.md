@@ -83,8 +83,8 @@ icon: material/shield-airplane-outline
 连线策略与备援顺序。
 ```
 
-!!! tip "（进阶）想让 AI 查到真实的 Tor 节点数字，可接 onionoo MCP"
-    这题问的 relay、bridge 数量与带宽，AI 若没有外部数据来源，很可能凭记忆编一个给你（就是这页开头警告的那种错）。如果你用的是 claude.ai 这类支持 MCP（让 AI 连到外部实时数据源的标准接口）的助理，可以接上社群自架的 [onionoo MCP](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}，它把 Tor Project 的 Onionoo 公开数据接成一个网址，AI 就能查到当下、可引用的真实数字。只用 ChatGPT 网页版的话，跳过这段即可，记得拿 AI 的回答去对照本页底部的 Tor Metrics。
+!!! tip "（进阶）想让 AI 查到真实的 Tor 节点数字，可接上社区的 AI 助手 Tor 节点查询"
+    这题问的 relay、bridge 数量与带宽，AI 若没有外部数据来源，很可能凭记忆编一个给你（就是这页开头警告的那种错）。如果你用的是 claude.ai 这类支持 MCP（让 AI 连到外部实时数据源的标准接口）的助理，可以接上社群自架的 [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}（onionoo MCP），它把 Tor Project 的 Onionoo 公开数据接成一个网址，AI 就能查到当下、可引用的真实数字。只用 ChatGPT 网页版的话，跳过这段即可，记得拿 AI 的回答去对照本页底部的 Tor Metrics。
 
 ```text
 【数字环境 3／VPN 合法性与可用性】在目的地使用 VPN 是否合法？WireGuard、
@@ -201,7 +201,7 @@ CIVICUS Monitor 评级。是否有 foreign-agent／NGO 注册法、诽谤或冒�
 - [威胁模型](../basics/threat-model.md)：先想清楚对手是谁、能取得什么。
 - [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：这页的两个提醒框在那边有完整版，包含消费版与企业版的分野、数据保留期限与该问供应商的问题。
 - [什么是 OONI](../tools/what-is-ooni.md)、[什么是 Tor](../tools/what-is-tor.md)、[Snowflake](../tools/tor-snowflake.md)、[通讯软件比较](../tools/messaging-comparison.md)
-- [onionoo MCP：Tor 中继节点查询服务](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：把上面【数字环境 2】那题交给 AI 自己查。接上这个网址，AI 助理就能用中文问出某地有几个 Tor 节点、带宽多少、落在哪些电信网络，数字来自 Tor Project 官方 Onionoo。
+- [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：把上面【数字环境 2】那题交给 AI 自己查。接上这个网址，AI 助理就能用中文问出某地有几个 Tor 节点、带宽多少、落在哪些电信网络，数字来自 Tor Project 官方 Onionoo。
 - [一般人平常该做到什么](./everyday-baseline.md)：不分身分的共同基线，这一页假设你已经做到
 - [这页背后的想法（blog）](../blog/posts/travel-ai-briefing.md)：为什么把该问的问题打包成 prompt，带回去问你自己信任的 AI。
 

@@ -154,7 +154,7 @@ OONI 的公開資料目前沒有被大量惡意污染，看到的異常多半來
 
 - [什麼是 OONI](../../tools/what-is-ooni.md)
 - [台灣 OONI ASN 涵蓋觀測](../../taiwan/ooni-asn-coverage.md)
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
+- [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
 - [我們普查了 336 條 OONI Run v2 清單，3 條就佔了全網 72% 的檢測量](./2026-ooni-run-v2-usage-patterns.md)
 - [個人隱私指引研究專題](https://anoni.net/join/privacy-guide/){target="_blank"}
 

@@ -114,6 +114,6 @@ OONI Probe 的测量本身会产生可被网络侧观察到的流量。在网络
 
 - [什么是 OONI](../../tools/what-is-ooni.md)
 - [OONI 网站检测清单](../../taiwan/ooni-checklist.md)
-- [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
+- [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)
 - [OONI Run v2 操作说明](../../tools/ooni-run-v2.md)

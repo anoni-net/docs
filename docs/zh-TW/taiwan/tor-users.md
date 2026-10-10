@@ -6,7 +6,7 @@ icon: material/account-group-outline
 
 # :material-account-group-outline: 台灣有多少人在用 Tor
 
-從 [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"} 接續。前一頁看的是節點端，台灣架了多少中繼、分散在哪些 ASN、貢獻多少頻寬。本頁換到使用者端，看有多少人從台灣連上 [Tor](../tools/what-is-tor.md)、四年來如何變化、使用型態與其他地區的差異。
+從 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"} 接續。前一頁看的是節點端，台灣架了多少中繼、分散在哪些 ASN、貢獻多少頻寬。本頁換到使用者端，看有多少人從台灣連上 [Tor](../tools/what-is-tor.md)、四年來如何變化、使用型態與其他地區的差異。
 
 資料來自 Tor Metrics 的公開 CSV，授權是 CC0，取得方式列在頁尾，任何人都能自行重現。
 
@@ -194,7 +194,7 @@ bridge 佔比有它的極限。越南的 1.18% 比德國的 1.93% 還低，而�
 
 ## 使用的人多，提供中繼的人少
 
-台灣使用者約佔全球的 0.33%，而台灣的中繼數只佔全網的 0.12%，消費與貢獻之間有大約三倍的落差[^11]。每個在地中繼對應的本地使用者數，台灣是 795，美國 168、德國 188。比值量的是責任分配，不是實際的流量負擔，Tor 選路不會優先挑同一個國家的中繼。節點端的即時數字與 ASN 分布在 [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}，想增加一個節點可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
+台灣使用者約佔全球的 0.33%，而台灣的中繼數只佔全網的 0.12%，消費與貢獻之間有大約三倍的落差[^11]。每個在地中繼對應的本地使用者數，台灣是 795，美國 168、德國 188。比值量的是責任分配，不是實際的流量負擔，Tor 選路不會優先挑同一個國家的中繼。節點端的即時數字與 ASN 分布在 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}，想增加一個節點可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
 
 !!! example "想自己重現？"
 
@@ -211,7 +211,7 @@ bridge 佔比有它的極限。越南的 1.18% 比德國的 1.93% 還低，而�
 
 <div class="grid cards" markdown>
 
-- [:material-chart-bar: Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
+- [:material-chart-bar: Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
 - [:material-access-point-network: ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)
 - [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
 - [:material-school: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/){target="_blank"}

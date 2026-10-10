@@ -1,12 +1,12 @@
 ---
 title: ASN observation data retrieval and analysis
-description: How to set up and use the OONI data retrieval scripts in anoni-net/docs, covering the S3 public dataset's path layout, the trade-offs between the three ways in, the CSV fields the scripts output, and how coverage is calculated.
+description: How to set up and use ASN Coverage, the command-line tool behind OONI Coverage, covering the S3 public dataset's path layout, the trade-offs between the three ways in, the CSV fields the scripts output, and how coverage is calculated.
 icon: material/database-search
 ---
 
 # :material-database-search: ASN observation data retrieval and analysis
 
-This page is the technical companion to [ASN observation data analysis](../regional/ooni-asn-coverage.md). When you want to pull OONI's public data yourself and work out the observation coverage of a region's ASNs, what follows covers how to set up and use the retrieval scripts in [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}.
+This page is the technical companion to [ASN observation data analysis](../regional/ooni-asn-coverage.md). When you want to pull OONI's public data yourself and work out the observation coverage of a region's ASNs, what follows covers how to set up and use ASN Coverage ([`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"}), the command-line tool behind [OONI Coverage](https://anoni.net/en/projects/asn-coverage/){target="_blank"}.
 
 Set up your environment first with [Development environment setup](./setup-repo.md).
 

@@ -7,7 +7,7 @@ icon: octicons/mark-github-24
 
 ## What you need first
 
-anoni.net's documentation site, Pulse, and the ASN Coverage tools all live in [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} on GitHub. The project uses Git for version control and takes contributions through pull requests. Before you start you need:
+anoni.net's documentation site, Tor Relay Watch (Pulse) and OONI Coverage (ASN Coverage) live in the [anoni-net organisation](https://github.com/anoni-net){target="_blank"} on GitHub, one repository each (`docs`, `pulse`, `asn-coverage`). The project uses Git for version control and takes contributions through pull requests. Before you start you need:
 
 - A [GitHub account](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github){target="_blank"}
 - Git, Python, uv, and an editor installed locally, covered below

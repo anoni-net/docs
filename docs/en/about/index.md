@@ -53,7 +53,7 @@ The site is published three ways with the same content: the standard website, a 
 
 The content is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. You can share and adapt it with attribution, in the form "anoni.net Docs Project, URL of the page, CC BY 4.0".
 
-A few pieces of outside data keep their original licenses. For example, the OONI data used in the interactive pieces is CC BY-NC-SA 4.0, and the full list is in the [`NOTICE`](https://github.com/anoni-net/docs/blob/main/NOTICE){target="_blank"} file at the root of the repository. Code is licensed separately: Pulse is MIT and ASN Coverage is GPL-3.0.
+A few pieces of outside data keep their original licenses. For example, the OONI data used in the interactive pieces is CC BY-NC-SA 4.0, and the full list is in the [`NOTICE`](https://github.com/anoni-net/docs/blob/main/NOTICE){target="_blank"} file at the root of the repository. Code is licensed separately: Tor Relay Watch (Pulse) is MIT and OONI Coverage (ASN Coverage) is GPL-3.0.
 
 ## Related reading
 

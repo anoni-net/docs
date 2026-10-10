@@ -1,12 +1,12 @@
 ---
 title: ASN 觀測資料擷取與分析
-description: anoni-net/docs 提供的 OONI 資料擷取程式如何設定與使用，包含 S3 公開資料集的路徑結構、三種取用路徑的取捨、程式輸出的 CSV 欄位格式，以及覆蓋率的計算方式。
+description: OONI 觀測涵蓋率的命令列工具 ASN Coverage 如何設定與使用，包含 S3 公開資料集的路徑結構、三種取用路徑的取捨、程式輸出的 CSV 欄位格式，以及覆蓋率的計算方式。
 icon: material/database-search
 ---
 
 # :material-database-search: ASN 觀測資料擷取與分析
 
-本頁是 [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 的技術延伸，說明 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 提供的擷取程式如何設定與使用，用於擷取 OONI 公開資料並計算特定區域 ASN 的觀測覆蓋率。
+本頁是 [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 的技術延伸，說明 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){target="_blank"} 的命令列工具 ASN Coverage（[`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage){target="_blank"}）如何設定與使用，用於擷取 OONI 公開資料並計算特定區域 ASN 的觀測覆蓋率。
 
 開始前建議先讀 [專案研究預先準備](./setup-repo.md) 建置開發環境。
 

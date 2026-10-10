@@ -153,7 +153,7 @@ anoni.net 社群把這套做法整理在 [issue #78](https://github.com/anoni-ne
 
 - [OONI Run v2 操作說明](../../tools/ooni-run-v2.md)
 - [台灣 ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
+- [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
 - [onionoo MCP 上線：用一句中文問 Tor 中繼節點現況](./2026-onionoo-mcp-public.md)
 
 [^1]: [OONI API（aggregation 端點）](https://api.ooni.org/){target="_blank"} - OONI

@@ -21,7 +21,7 @@ You don't need permission to fix an obvious error. The heads-up matters most whe
 
 ## :material-github: The GitHub flow
 
-The site, Pulse, and the ASN coverage tooling all live in one repository: [github.com/anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}.
+The site, Tor Relay Watch (Pulse) and OONI Coverage (ASN Coverage) each have a repository in the [anoni-net organisation](https://github.com/anoni-net){target="_blank"}: `docs`, `pulse` and `asn-coverage`.
 
 1. **Open an issue first for non-trivial work**: Describe what you want to change and why. This is where scope gets agreed before code or prose is written. Small, self-evident fixes can skip straight to a pull request.
 2. **Fork the repository** to your own account.
@@ -56,7 +56,7 @@ The full list with links lives on the [Community page](https://anoni.net/en/join
 ## :material-license: Licensing and attribution
 
 - **Documentation content is [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}**: When you contribute documentation, you're contributing it under that license: others may share and adapt it with attribution.
-- **Code is licensed separately** — Pulse under MIT, the ASN coverage tooling under GPL-3.0. See the [About page](https://anoni.net/en/about/){target="_blank"} for details.
+- **Code is licensed separately** — Tor Relay Watch (Pulse) under MIT, OONI Coverage (ASN Coverage) under GPL-3.0. See the [About page](https://anoni.net/en/about/){target="_blank"} for details.
 - **Contributors are credited**: Your work is attributed to you (under your name or a pseudonym, as you prefer), and it stays visible in the GitHub commit history and contributor list.
 - **We don't claim others' work**: When we translate or build on an external report, we attribute it to the original authors and link the source.
 

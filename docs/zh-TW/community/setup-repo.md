@@ -1,13 +1,13 @@
 ---
 title: 專案研究預先準備
-description: 加入 anoni.net 文件站、Pulse、ASN Coverage 等專案開發前的環境設定指南，包含 git、GitHub、本機開發環境基礎。給想實際參與協作的台灣志工。
+description: 加入 anoni.net 文件站、Tor 中繼節點觀測（Pulse）、OONI 觀測涵蓋率（ASN Coverage）等專案開發前的環境設定指南，包含 git、GitHub、本機開發環境基礎。給想實際參與協作的台灣志工。
 icon: octicons/mark-github-24
 ---
 # :octicons-mark-github-24: 專案研究預先準備
 
 ## 你需要先準備什麼
 
-anoni.net 的文件站、Pulse、ASN Coverage 都放在 GitHub（[anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}），用 git 做版本控制、用 Pull Request 收貢獻。操作前你需要：
+anoni.net 的文件站、Tor 中繼節點觀測（Pulse）、OONI 觀測涵蓋率（ASN Coverage）都放在 GitHub 的 [anoni-net 組織](https://github.com/anoni-net){target="_blank"}，各自一個 repo（`docs`、`pulse`、`asn-coverage`），用 git 做版本控制、用 Pull Request 收貢獻。操作前你需要：
 
 - 一個 [GitHub 帳號](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github){target="_blank"}
 - 本機裝好 git、Python、uv 與一個編輯器（下面逐項說明）
@@ -26,7 +26,7 @@ anoni.net 的文件站、Pulse、ASN Coverage 都放在 GitHub（[anoni-net/docs
 
 ### Python
 
-anoni.net 的 Pulse 與 ASN Coverage 都用 Python 寫，文件站的建置腳本也是。三個子專案都要求 Python 3.12 以上，先依下面的指引把 Python 裝起來。
+Pulse 與 ASN Coverage 都用 Python 寫，文件站的建置腳本也是。三個子專案都要求 Python 3.12 以上，先依下面的指引把 Python 裝起來。
 
 !!! tip "安裝指引"
 

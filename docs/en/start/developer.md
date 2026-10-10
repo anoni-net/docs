@@ -27,7 +27,7 @@ The most direct contribution. Start with a relay; switch to a bridge if bandwidt
 - [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, keep the page open and you are already helping; install the extension to leave it running
 - [Setting up a .onion service](../community/setup-onion-service.md): give a service you already run an onion entrance
 - [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): currently a single point, and each additional pin is redundancy
-- [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}: see how many relays exist in the region and which ASNs they sit in
+- [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}: see how many relays exist in the region and which ASNs they sit in
 
 ### You write code and work with data
 
@@ -38,7 +38,7 @@ The measurement line needs people who can read raw results and turn them into an
 - [OONI nettest quick reference](../community/ooni-nettests-map.md): what each test actually measures
 - [ASN observation data retrieval and analysis](../community/asn-coverage-howto.md): how this community's retrieval tool is configured and used, including the S3 public dataset layout
 - [ASN observation data analysis](../regional/ooni-asn-coverage.md): current coverage, where the gaps are the open questions
-- [onionoo MCP](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a community-run relay query service, and an interface worth extending
+- [Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a community-run relay query service (onionoo MCP), and an interface worth extending
 - [OONI website testing list](../regional/ooni-checklist.md): how the test list is maintained, where classification and updates need people
 
 ### Influence inside a university or a company
