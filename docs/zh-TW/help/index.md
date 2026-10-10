@@ -234,4 +234,4 @@ icon: material/lifebuoy
 
 我們不能：代為提告、發出保護令、進入裝置取證、提供法律意見。情境急迫請優先聯繫專業專線。
 
-如果你想協助維護或補強這頁的資源，歡迎透過 [社群自架服務](https://anoni.net/services/) 加入社群討論。
+如果你想協助維護或補強這頁的資源，歡迎透過 [社群自架服務](https://anoni.net/services/){target="_blank"} 加入社群討論。

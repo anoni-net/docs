@@ -88,7 +88,7 @@ When a reader needs to open a backup three years from now, they may have nothing
 
 Among public formats, age over PGP comes down to every row of the table above pointing the same way: no options means nothing to misconfigure, a short specification means a browser implementation small enough to audit, and passphrase mode needs no key management at all. [Local file encryption](../utils/age.md) offers passphrase, passkey and public-key modes; the simplest path is pick a file, type a passphrase, download. The reader picks a file, types a passphrase, and downloads.
 
-PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upload-sensitive/) process on this site uses PGP, because that needs a long-lived identity, has to work with the email ecosystem, and the people on the other end are journalists and organisations who already use PGP. The split is: PGP for mail and identity, age for files and backups.
+PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upload-sensitive/){target="_blank"} process on this site uses PGP, because that needs a long-lived identity, has to work with the email ecosystem, and the people on the other end are journalists and organisations who already use PGP. The split is: PGP for mail and identity, age for files and backups.
 
 ## Things to keep in mind
 
@@ -103,4 +103,4 @@ PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upl
 - [Passphrase and password generator](../utils/passphrase.md): draw one in the browser, nothing is sent anywhere
 - [End-to-end encryption](../advanced/e2ee.md): what encryption solves in transit and at rest
 - [Preparing for and handling network shutdowns](../scenarios/shutdown.md): encrypted backups have to open offline, and age needs no connection
-- [Sensitive upload](https://anoni.net/en/join/upload-sensitive/): where this site uses PGP
+- [Sensitive upload](https://anoni.net/en/join/upload-sensitive/){target="_blank"}: where this site uses PGP

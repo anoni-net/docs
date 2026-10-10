@@ -223,7 +223,7 @@ Back up the vault itself. When aliases are scattered and you only remember a few
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: Personal privacy guidance track](https://anoni.net/en/join/privacy-guide/)
+- [:material-shield-lock-outline: Personal privacy guidance track](https://anoni.net/en/join/privacy-guide/){target="_blank"}
 - [:material-lifebuoy: Emergency help](../help/index.md)
 - [:material-translate-variant: Translation and localization](../community/i18n.md)
 

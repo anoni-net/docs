@@ -363,7 +363,7 @@ Google Docs、Notion、腾讯文档这类云端共笔好用，但有两个问题
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、Matrix、Briar 在不同场景的取舍
 - [密码管理器入门](../tools/password-manager.md)：行动前的账号卫生基础
 - [OnionShare 透过 Tor 匿名传输](../tools/onionshare.md)：一次性文件交换的工具选择
-- [个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/)：把场景指引串回个人隐私的整体规划
+- [个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}：把场景指引串回个人隐私的整体规划
 
 [^1]: 2020 年 Royal Holloway 研究团队指出 Bridgefy 加密设计缺陷，见 [Bridgefy, the messenger promoted for mass protests, is a privacy disaster](https://arstechnica.com/information-technology/2020/08/bridgefy-the-messenger-promoted-for-mass-protests-is-a-privacy-disaster/){target="_blank"} - Ars Technica，原始研究见 [Mesh Messaging in Large-scale Protests: Breaking Bridgefy](https://eprint.iacr.org/2021/214.pdf){target="_blank"}
 [^2]: [民间司法改革基金会](https://www.jrf.org.tw/){target="_blank"} - 法律倡议、案件支持

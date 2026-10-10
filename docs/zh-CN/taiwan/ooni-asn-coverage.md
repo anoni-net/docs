@@ -75,9 +75,9 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 详细内容可以参考以下报告。
 
-2023 年之后的变化可以看社区首页的 [OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/)。页面每小时重新生成，读取 OONI 最近 60 天的测量，对照 APNIC 估计的各网络用户人数，列出用户多、测量少的网络。2026/10 的数据里，测量最多的仍是中华电信 HiNet（AS3462），中华电信移动网络（AS17421）有约 16% 的用户，测量占比却不到 0.1%。
+2023 年之后的变化可以看社区首页的 [OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){target="_blank"}。页面每小时重新生成，读取 OONI 最近 60 天的测量，对照 APNIC 估计的各网络用户人数，列出用户多、测量少的网络。2026/10 的数据里，测量最多的仍是中华电信 HiNet（AS3462），中华电信移动网络（AS17421）有约 16% 的用户，测量占比却不到 0.1%。
 
-[:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){ .md-button .md-button--primary }
+[:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){ .md-button .md-button--primary target="_blank" }
 [:material-chart-bar: 2023/12 观察报告](https://ocf.tw/p/ooni/report/202312.html){ .md-button target="_blank" }
 
 ### 你可以补上一格
@@ -153,8 +153,8 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 网站检测清单](./ooni-checklist.md)
-- [:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/)
-- [:material-chart-bar: Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/)
+- [:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){target="_blank"}
+- [:material-chart-bar: Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 

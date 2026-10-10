@@ -104,7 +104,7 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 
 ??? question "Why is Tor so slow?"
 
-    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: switch the exit region in Tor Browser's settings to avoid congested countries, and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/), so local capacity becomes part of the global network.
+    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: switch the exit region in Tor Browser's settings to avoid congested countries, and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/){target="_blank"}, so local capacity becomes part of the global network.
 
 ??? question "Has Tor ever been broken?"
 
@@ -114,7 +114,7 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 
 Downloading Tor Browser is the starting point. The [official download page](https://www.torproject.org/download/){target="_blank"} covers Windows, macOS, Linux, and Android. On iOS, platform restrictions mean the Tor Project recommends Onion Browser. Once installed, read [Tor Browser advanced settings](./tor-browser-advanced.md) for bridges, security levels, and isolation, then [Tor Snowflake](./tor-snowflake.md) to learn how to contribute a bridge from one browser tab.
 
-If you want to go further, [how to run a Tor relay](../community/setup-tor-relay.md) and [Tor relays on campus](https://anoni.net/en/join/relay-on-campus/) connect local bandwidth to the global network.
+If you want to go further, [how to run a Tor relay](../community/setup-tor-relay.md) and [Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"} connect local bandwidth to the global network.
 
 ## :material-chat-question: Related concepts
 
@@ -131,7 +131,7 @@ If you want to go further, [how to run a Tor relay](../community/setup-tor-relay
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Run a Tor Snowflake bridge](./tor-snowflake.md)
-- [:material-school-outline: Tor relays on campus](https://anoni.net/en/join/relay-on-campus/)
+- [:material-school-outline: Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"}
 - [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
 
 </div>

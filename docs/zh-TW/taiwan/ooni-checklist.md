@@ -103,14 +103,14 @@ weight = priority / max(msmt_cnt, 0.1)
 - 想參與技術擷取分析：見 [ASN 自治網路觀測資料分析](./ooni-asn-coverage.md) 與 [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)
 - 想讀懂測量資料本身：見 [OONI 測量資料結構導覽](../community/ooni-data-format.md) 與 [OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)
 - 想知道清單以外還有哪些測項：見 [OONI 測項速查表](../community/ooni-nettests-map.md)
-- 想了解整體社群運作：見 [如何參與與認領主題](https://anoni.net/join/)
+- 想了解整體社群運作：見 [如何參與與認領主題](https://anoni.net/join/){target="_blank"}
 
 ## 下一步
 
 <div class="grid cards" markdown>
 
 - [:material-access-point-network: ASN 自治網路觀測資料分析](./ooni-asn-coverage.md)
-- [:material-chart-bar: Tor Relays 觀測點](https://anoni.net/projects/pulse/)
+- [:material-chart-bar: Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 - [:material-chat-question: 什麼是 OONI？](../tools/what-is-ooni.md)
 

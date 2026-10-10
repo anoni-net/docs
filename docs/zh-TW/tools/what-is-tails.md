@@ -173,7 +173,7 @@ Tails 內建一系列預設安全的開源工具：
 
 ## 接下來
 
-下載 [Tails 安裝指引](https://tails.net/install/index.en.html){target="_blank"}，按官方步驟做一支 USB。如果你是記者、研究者、行動工作者，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/) 把工作流程一起設計起來。
+下載 [Tails 安裝指引](https://tails.net/install/index.en.html){target="_blank"}，按官方步驟做一支 USB。如果你是記者、研究者、行動工作者，可以延伸看 [記者保護消息來源](../scenarios/journalist.md) 與 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"} 把工作流程一起設計起來。
 
 ## :material-chat-question: 一同瞭解
 
@@ -190,7 +190,7 @@ Tails 內建一系列預設安全的開源工具：
 <div class="grid cards" markdown>
 
 - [:material-newspaper-variant-outline: 記者保護消息來源](../scenarios/journalist.md)
-- [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)
+- [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}
 - [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
 
 </div>

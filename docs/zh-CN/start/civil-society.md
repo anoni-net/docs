@@ -25,7 +25,7 @@ offline_caution: true
 
 对方可能是体制内的员工、当事人，或不想曝光的目击者。一般的表单与邮箱会留下可比对的记录，对方需要一条能自己判断风险的通道。
 
-看 [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)，社群自己在用的那条通道就是这样做的：文件传上自架的 Send，链接设成一次下载就失效并加上密码，再把链接给收件人。
+看 [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}，社群自己在用的那条通道就是这样做的：文件传上自架的 Send，链接设成一次下载就失效并加上密码，再把链接给收件人。
 
 ### 捐款人不想留下记录，组织仍需开立收据
 
@@ -46,11 +46,11 @@ offline_caution: true
 - [威胁模型如何建立](../basics/threat-model.md)：清单背后的三题怎么想出来的，带团队讨论时需要这一篇
 - [Metadata 是什么，为什么重要](../basics/metadata.md)：谁跟谁在什么时候联络过，内容加密挡不住这一层
 - [什么是 CryptPad](../tools/what-is-cryptpad.md)：共笔与表单的替代方案
-- [沟通与协作工具](https://anoni.net/zh-cn/services/)：Matrix、CryptPad、Send、表单，社群自架的几套都开放使用
+- [沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}：Matrix、CryptPad、Send、表单，社群自架的几套都开放使用
 
 ### 对外的线索与捐款
 
-- [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/)：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
+- [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}：社群自己在用的那条通道，文件走自架的 Send，链接会自动失效
 - [文件 metadata 清除器](../utils/strip-metadata.md)：发布素材前在浏览器里清干净，文件不会送出去
 - [倡议组织的匿名捐款渠道](../scenarios/nonprofit-anonymous-donation.md)：完整流程与法规限制
 
@@ -60,7 +60,7 @@ offline_caution: true
 
 - [台湾个资法 2025 修法](../taiwan/pdpa-2025.md)：组织持有个人信息的义务有变动
 - [揭弊者保护法的技术观察](../taiwan/whistleblower-law.md)：内部员工愿意说话时，法律保护到哪里
-- [治理章程](https://anoni.net/zh-cn/about/governance/)：社群自己的决策方式与争议处理，需要写组织章程时可以参考
+- [治理章程](https://anoni.net/zh-cn/about/governance/){target="_blank"}：社群自己的决策方式与争议处理，需要写组织章程时可以参考
 
 ## 个人的基线也要顾
 
@@ -72,8 +72,8 @@ offline_caution: true
 ## 带得走的东西
 
 - 威胁模型清单答完按「复制摘要」，贴进组织的共笔或会议记录，换人接手时不用重问一次
-- [沟通与协作工具](https://anoni.net/zh-cn/services/)的 Matrix、CryptPad 与 Send 都开放社群使用，不需要另外架
-- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/) 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
+- [沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}的 Matrix、CryptPad 与 Send 都开放社群使用，不需要另外架
+- 有问题到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 问，需要传敏感文件寄 [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## 这条路径没有处理的
 

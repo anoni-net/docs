@@ -63,7 +63,7 @@ The core property is that **all content is encrypted in your browser before it e
 
 ## Why the community self-hosts CryptPad
 
-We self-host more than CryptPad. There is also [Etherpad](https://pad.anoni.net/){target="_blank"} for quick shared notes and Matrix for live discussion (the [Community](https://anoni.net/en/join/) page covers how the three fit together). CryptPad is what we reach for whenever a document needs **long-term storage, end-to-end encryption, and full multi-user collaboration in the same place**. Spending two and a half years on the Traditional Chinese translation made sense for several reasons.
+We self-host more than CryptPad. There is also [Etherpad](https://pad.anoni.net/){target="_blank"} for quick shared notes and Matrix for live discussion (the [Community](https://anoni.net/en/join/){target="_blank"} page covers how the three fit together). CryptPad is what we reach for whenever a document needs **long-term storage, end-to-end encryption, and full multi-user collaboration in the same place**. Spending two and a half years on the Traditional Chinese translation made sense for several reasons.
 
 **E2EE and zero-knowledge by design**: Community discussions routinely touch threat models, whistleblower-protection notes, and the back-and-forth of pushing Tor relays onto university campuses. Putting those in Google Docs or Notion is functionally identical to handing every unpublished strategy to a third-party platform and its advertising partners. CryptPad removes “the operator can read your content” at the architectural level — a guarantee that is far stronger than an SLA promise.
 
@@ -124,11 +124,11 @@ To start:
 - **Entry point**: [https://cryptpad.anoni.net/](https://cryptpad.anoni.net/){target="_blank"}
 - **Account requests**: email <whisper@anoni.net> for a registration code. Default quota is 50 MB, adjustable later. Registration does not ask for an email address inside the system and does not bind to a real-name identity, matching the Matrix flow.
 - **Switching locale**: after the upgrade, the top-right settings page offers “中文(正體)” and “中文(簡體)”. The query strings `?lang=zh_Hant` or `?lang=zh_Hans` also work.
-- **Full tooling list**: see [Community](https://anoni.net/en/join/).
+- **Full tooling list**: see [Community](https://anoni.net/en/join/){target="_blank"}.
 
 If you spot a typo, awkward wording, or a new string that hasn’t been translated yet, contributions are very welcome — head straight to the [zh_Hant](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} or [zh_Hans](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hans/){target="_blank"} project on Weblate, or email <whisper@anoni.net> to let us know.
 
 ## Further reading
 
 - [From Discord’s Age Verification to Why We Self-Host Matrix](2026-discord-matrix-statement.md)
-- [Community](https://anoni.net/en/join/)
+- [Community](https://anoni.net/en/join/){target="_blank"}

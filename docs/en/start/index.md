@@ -80,9 +80,9 @@ Once you know your role, the pages that path links to can be stored on your phon
 | What a tool does, its limits, how to configure it | [Tools](../tools/index.md) |
 | What anonymity, privacy, and metadata actually mean | [Concepts](../basics/index.md) |
 | Measurement and regulation across the region | [Regional observatory](../regional/index.md) |
-| Joining the community | [Community](https://anoni.net/en/join/) |
+| Joining the community | [Community](https://anoni.net/en/join/){target="_blank"} |
 | Help right now | [Emergency help](../help/index.md) |
 
 ## If none of these fit
 
-These five are the audiences this community works with most often, and plenty of situations fall outside them. Tell us about yours in the [public Matrix room](https://anoni.net/en/services/) and it helps us decide which entry point to write next. To share practical experience anonymously, write to [whisper@anoni.net](mailto:whisper@anoni.net).
+These five are the audiences this community works with most often, and plenty of situations fall outside them. Tell us about yours in the [public Matrix room](https://anoni.net/en/services/){target="_blank"} and it helps us decide which entry point to write next. To share practical experience anonymously, write to [whisper@anoni.net](mailto:whisper@anoni.net).

@@ -191,7 +191,7 @@ Tor 本身的介绍见[什么是 Tor](./what-is-tor.md)。
 
 ## 不想安装阅读器的话
 
-也可以[订阅电子报](https://anoni.net/zh-cn/contact/)，社群的项目进度与活动信息会寄到邮箱。不想交出平常用的 email，可以用[邮件别名](./email-alias.md)订阅，日后不想收时直接关掉别名。
+也可以[订阅电子报](https://anoni.net/zh-cn/contact/){target="_blank"}，社群的项目进度与活动信息会寄到邮箱。不想交出平常用的 email，可以用[邮件别名](./email-alias.md)订阅，日后不想收时直接关掉别名。
 
 ## 相关阅读
 

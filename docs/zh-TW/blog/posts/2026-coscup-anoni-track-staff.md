@@ -24,7 +24,7 @@ description: "匿名網路社群徵 COSCUP 2026 議程軌的現場工作人員�
     - **崗位**：錄影 1 位、台前機動 1 位、場外機動 1 位
     - **條件**：不需要具備 Tor、匿名網路或任何隱私技術的背景
     - **時間**：兩天都能到最好，只能到一天也歡迎，人多的話會排輪班
-    - **報名或詢問**：透過[聯絡我們](https://anoni.net/contact/)的任一管道告訴我們，註明想擔任的崗位與可以到的日期
+    - **報名或詢問**：透過[聯絡我們](https://anoni.net/contact/){target="_blank"}的任一管道告訴我們，註明想擔任的崗位與可以到的日期
 
 <!-- more -->
 
@@ -46,18 +46,18 @@ description: "匿名網路社群徵 COSCUP 2026 議程軌的現場工作人員�
 
 不在崗位上的時段可以自由去聽議程，8/08 下午幾乎整段都是空的。值勤時段的餐點由社群準備。行前說明會與活動當天都能直接認識這一軌的講者。
 
-這一軌今年談的內容涵蓋網路與審查如何運作、OpenWRT 家用網路、臺師大 Tor 節點建立實務、瀏覽器指紋追蹤、健保資料庫的停止利用權，以及從個人到組織的隱私指南 2026，完整議程與各場摘要放在[活動頁](https://anoni.net/events/coscup-2026/)。
+這一軌今年談的內容涵蓋網路與審查如何運作、OpenWRT 家用網路、臺師大 Tor 節點建立實務、瀏覽器指紋追蹤、健保資料庫的停止利用權，以及從個人到組織的隱私指南 2026，完整議程與各場摘要放在[活動頁](https://anoni.net/events/coscup-2026/){target="_blank"}。
 
 ## 沒有經驗也可以
 
 社群平常在做的事，是把 Tor、Tails、OONI 這些開源工具的介面翻譯成正體中文、回報問題、協助在校園架設中繼節點。這次的現場工作同樣不需要事先具備專業背景，願意花兩天陪著把議程執行完就夠了。沒有參加過 COSCUP 也沒有關係，說明會上會把該知道的細節都交代清楚。
 
-[看完整議程與各場摘要](https://anoni.net/events/coscup-2026/){ .md-button .md-button--primary }
+[看完整議程與各場摘要](https://anoni.net/events/coscup-2026/){ .md-button .md-button--primary target="_blank" }
 
 - [COSCUP 2026 匿名網路社群議程軌：8/08、8/09 兩天，免費入場、走進教室就能參加](./coscup-2026-community-track.md)
-- [如何參與與認領主題](https://anoni.net/join/)
-- [關於我們](https://anoni.net/about/)
+- [如何參與與認領主題](https://anoni.net/join/){target="_blank"}
+- [關於我們](https://anoni.net/about/){target="_blank"}
 
 !!! info "報名方式"
 
-    請透過[聯絡我們](https://anoni.net/contact/)的任一管道與社群聯繫，告訴我們想擔任的崗位、可以到的日期，以及方便的聯絡方式。三個崗位額滿之後仍然歡迎加入，會前宣傳與會後整理同樣需要人。
+    請透過[聯絡我們](https://anoni.net/contact/){target="_blank"}的任一管道與社群聯繫，告訴我們想擔任的崗位、可以到的日期，以及方便的聯絡方式。三個崗位額滿之後仍然歡迎加入，會前宣傳與會後整理同樣需要人。

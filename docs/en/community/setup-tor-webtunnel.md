@@ -266,7 +266,7 @@ The compose file auto-updates the bridge itself. System-level Docker, nginx, and
 <div class="grid cards" markdown>
 
 - [:material-server-network: Set up a Tor relay (Tor Project)](https://community.torproject.org/relay/){target="_blank"}
-- [:material-list-status: Tor relay observation in Taiwan](https://anoni.net/en/projects/pulse/)
+- [:material-list-status: Tor relay observation in Taiwan](https://anoni.net/en/projects/pulse/){target="_blank"}
 - [:material-bullhorn: After Iran's blackout: traffic surged through our WebTunnel bridge](../blog/posts/iran-blackout-webtunnel.md)
 
 </div>

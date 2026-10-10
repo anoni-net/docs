@@ -18,11 +18,11 @@ Long time no see. April was a very busy period, and the anoni.net Docs project p
 
 ![EFF, Tor University](./assets/images/eff-tor-university-zh-tw.png){style="border-radius: 5px;"}
 
-Most importantly, we have started preparing for the "[Anonymous Network Workshop](https://anoni.net/en/events/workshop-2025/)" scheduled for 2025/08!
+Most importantly, we have started preparing for the "[Anonymous Network Workshop](https://anoni.net/en/events/workshop-2025/){target="_blank"}" scheduled for 2025/08!
 
 ## Recruiting Staff and Training Helpers for the "Anonymous Network Workshop"
 
-We plan to host the "[Anonymous Network Workshop](https://anoni.net/en/events/workshop-2025/)" at this year's COSCUP 2025 conference, continuing from [the workshop held before RightsCon](./rightscon25-pre-event.md). This time, we will focus on translating and localizing the teaching materials and conduct the sessions in Mandarin. Before the event in 2025/08, we will provide training for helpers on Tor/Tails, and OONI, enabling them to lead participants more effectively on the day of the workshop to understand the importance of anonymous networks and internet freedom.
+We plan to host the "[Anonymous Network Workshop](https://anoni.net/en/events/workshop-2025/){target="_blank"}" at this year's COSCUP 2025 conference, continuing from [the workshop held before RightsCon](./rightscon25-pre-event.md). This time, we will focus on translating and localizing the teaching materials and conduct the sessions in Mandarin. Before the event in 2025/08, we will provide training for helpers on Tor/Tails, and OONI, enabling them to lead participants more effectively on the day of the workshop to understand the importance of anonymous networks and internet freedom.
 
 Over the next three months, we also need event planning staff to assist with coordination, promotion, registration, notifications, and other event-related tasks. We welcome shy newcomers to join us in organizing the event and gradually get to know us and the issues of anonymous networks and internet freedom.
 
@@ -30,6 +30,6 @@ We have set up an event page for the workshop, where the preparation tasks, sche
 
 We also hope to enhance the knowledge of those interested in Tor/Tails and OONI through this workshop! We designed a skill grading chart, and our future training hopes to elevate everyone to **Basic Level 3**!
 
-[Learn about the details!](https://anoni.net/en/events/workshop-2025-prepare/){ .md-button .md-button--primary }
+[Learn about the details!](https://anoni.net/en/events/workshop-2025-prepare/){ .md-button .md-button--primary target="_blank" }
 
 If you're interested in preparing for the workshop and training helpers, feel free to reply to me directly. The recruitment information for the workshop is also [simultaneously announced](https://volunteer.ocf.tw/blog/) by the Open Culture Foundation's volunteer recruitment.

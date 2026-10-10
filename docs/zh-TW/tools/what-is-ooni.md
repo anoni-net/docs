@@ -146,7 +146,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 - [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
 - [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
-- [:material-server-network: Tor Relay 觀測點](https://anoni.net/projects/pulse/)
+- [:material-server-network: Tor Relay 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 
 </div>
 

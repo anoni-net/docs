@@ -8,7 +8,7 @@ icon: material/book-information-variant
 
 文件站整理匿名網路與隱私的知識，從概念、工具到不同處境的準備，也追蹤台灣的網路觀測與相關法規。內容由匿名網路社群 anoni.net 的成員撰寫與維護，原始檔與修改紀錄都公開在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/)，這一頁只談文件站本身。
+社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/){target="_blank"}，這一頁只談文件站本身。
 
 ## 內容範圍
 
@@ -29,7 +29,7 @@ icon: material/book-information-variant
 
 社群不限制貢獻者使用哪一家的 AI 工具協助寫作與翻譯，AI 的產出跟人工撰寫走同一套流程。文章裡的數字、引文與來源連結，送出 PR 的人要實際點開核對，並為內容負責。
 
-內容不提供可被濫用的操作配方，引用他人的觀測時不揭露個人帳號，涉及受害者與未公開研究的資料走[上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)。
+內容不提供可被濫用的操作配方，引用他人的觀測時不揭露個人帳號，涉及受害者與未公開研究的資料走[上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}。
 
 ## 三個語系
 
@@ -43,7 +43,7 @@ icon: material/book-information-variant
 
 寫錯的地方直接修改原文，影響讀者做法的更正另外寫成公告。公告說明改了什麼、依據在哪裡，以及照著舊版做過準備的人要補上什麼，例如 [2026/08 的更正回顧](../blog/posts/docs-corrections-202608.md)與 [2026/09 的文件站更新回顧](../blog/posts/site-updates-202609.md)。
 
-發現錯誤或過時的內容，可以到 [GitHub 開 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或寫信到 <whisper@anoni.net>（PGP 公鑰見[聯絡頁](https://anoni.net/contact/#pgp)）。
+發現錯誤或過時的內容，可以到 [GitHub 開 Issue](https://github.com/anoni-net/docs/issues){target="_blank"}，或寫信到 <whisper@anoni.net>（PGP 公鑰見[聯絡頁](https://anoni.net/contact/#pgp){target="_blank"}）。
 
 ## 閱讀方式
 
@@ -60,5 +60,5 @@ icon: material/book-information-variant
 - [貢獻者百科](../community/contributor-handbook.md)
 - [中文化與文件翻譯](../community/i18n.md)
 - [文件站的視覺規範](../community/visual-guide.md)
-- [品牌素材](https://anoni.net/brand/)
-- [社群首頁 anoni.net](https://anoni.net/)
+- [品牌素材](https://anoni.net/brand/){target="_blank"}
+- [社群首頁 anoni.net](https://anoni.net/){target="_blank"}

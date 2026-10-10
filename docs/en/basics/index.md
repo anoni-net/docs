@@ -26,5 +26,5 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 
 - [Regional observatory](../regional/index.md) for the empirical work and country-by-country observations
 - [Scenarios](../scenarios/index.md) for practical guides written with regional context
-- [About us](https://anoni.net/en/about/) for the community behind this site
+- [About us](https://anoni.net/en/about/){target="_blank"} for the community behind this site
 - For introductory privacy material: [EFF SSD](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, [Tor Project Support](https://support.torproject.org/){target="_blank"}

@@ -12,8 +12,8 @@ icon: material/console
 
 ## 二十分钟：先确认方向
 
-1. [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/)：社群今年投入的三个主题与各自的进度，先看有没有你想接的
-2. [如何参与与认领主题](https://anoni.net/zh-cn/join/)：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
+1. [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/){target="_blank"}：社群今年投入的三个主题与各自的进度，先看有没有你想接的
+2. [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"}：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
 3. [自我技能评估表](../community/skill-level.md)：Tor、Tails、OONI 三个工具的分级自评，每一级下面都列了补齐用的文章
 
 ## 四条可以认领的线
@@ -27,7 +27,7 @@ icon: material/console
 - [Tor Snowflake](../tools/tor-snowflake.md)：门槛最低的一种，开着那一页就在帮忙，要常驻再装扩展
 - [如何搭建 .onion 服务](../community/setup-onion-service.md)：把手上的服务多开一个 onion 入口
 - [帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)：目前是单点，多一个 pin 就多一份备援
-- [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/)：先看台湾现在有多少节点、分布在哪些 ASN
+- [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}：先看台湾现在有多少节点、分布在哪些 ASN
 
 ### 会写程序，会处理数据
 
@@ -52,7 +52,7 @@ icon: material/console
 
 ### 在学校内部有影响力
 
-- [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/)：校园中继节点需要的是能跟行政与法务沟通的人，技术反而是简单的部分。这个专题整理了目前的进展与可以接手的部分
+- [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}：校园中继节点需要的是能跟行政与法务沟通的人，技术反而是简单的部分。这个专题整理了目前的进展与可以接手的部分
 
 ## 你自己也需要一份基线
 
@@ -63,9 +63,9 @@ icon: material/console
 
 ## 带得走的东西
 
-- [Matrix 公开 room](https://anoni.net/zh-cn/services/)：认领主题前先在这里说一声，避免两个人做同一件事
+- [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}：认领主题前先在这里说一声，避免两个人做同一件事
 - [GitHub 的 anoni-net/docs](https://github.com/anoni-net/docs)：文件站的源码与 issue，每个 issue 都写了预期内容
-- 社群自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](https://anoni.net/zh-cn/services/)
+- 社群自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}
 
 ## 这条路径没有处理的
 

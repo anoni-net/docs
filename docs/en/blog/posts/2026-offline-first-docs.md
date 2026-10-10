@@ -209,7 +209,7 @@ Three key modes cover different situations. Passphrase mode requires no key mana
 
 After encrypting, the page decrypts its own output with the same key and compares before offering the download. The libraries doing the encryption sit on the site unmodified, not one line changed, so anyone who wants to check can compare them byte for byte against the upstream release. Modifying them would remove that comparison, leaving a reader with nothing but our word for it.
 
-PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upload-sensitive/) process on the site uses PGP, because that context needs a long-lived identity and has to work with the mail ecosystem. Mail and identity use PGP, files and backups use age.
+PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upload-sensitive/){target="_blank"} process on the site uses PGP, because that context needs a long-lived identity and has to work with the mail ecosystem. Mail and identity use PGP, files and backups use age.
 
 ## Where this stands, and what we want to hear
 
@@ -228,6 +228,6 @@ Anything you would rather not attach your name to can go to the anonymous addres
 
 ## Channels
 
-- Real-time discussion: public Matrix room (home server `im.anoni.net`, link on the [community tools page](https://anoni.net/en/services/))
-- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/))
+- Real-time discussion: public Matrix room (home server `im.anoni.net`, link on the [community tools page](https://anoni.net/en/services/){target="_blank"})
+- Anonymous tips: whisper@anoni.net ([GPG key](https://anoni.net/en/contact/){target="_blank"})
 - Source and issues: [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}

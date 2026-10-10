@@ -26,7 +26,7 @@ description: "匿名网络社群在 COSCUP 2026 开了两天社群议程轨，8/
     - 入场：COSCUP 免费入场，社群议程轨不需另外报名，当天到场即可参与
     - 参加方式：当天可自由选听场次、中途进出，不需全程参与。交通与教室位置以 COSCUP 官方场地信息为准，议程时间到活动前仍可能微调，以 COSCUP 官方议程为准
 
-[看完整议程与各场摘要](https://anoni.net/zh-cn/events/coscup-2026/){ .md-button .md-button--primary }
+[看完整议程与各场摘要](https://anoni.net/zh-cn/events/coscup-2026/){ .md-button .md-button--primary target="_blank" }
 
 <!-- more -->
 
@@ -36,7 +36,7 @@ description: "匿名网络社群在 COSCUP 2026 开了两天社群议程轨，8/
 
 ## 两天议程重点
 
-议程刻意做成从入门到协议层（偏底层的技术实现）都有，可以照自己的背景挑场次，完整的十六场议程与各场摘要都放在[活动页](https://anoni.net/zh-cn/events/coscup-2026/)。
+议程刻意做成从入门到协议层（偏底层的技术实现）都有，可以照自己的背景挑场次，完整的十六场议程与各场摘要都放在[活动页](https://anoni.net/zh-cn/events/coscup-2026/){target="_blank"}。
 
 **8/08 上午，四场开源匿名网络导论（`TR-510`）**。前三场由社群成员担纲，第四场是邀请议程。四场都特别适合公民团体、新闻媒体与独立记者，也适合第一次接触这些主题的人。四场从入门角度切入，扣着开源主轴，介绍匿名网络社群在做什么、如何用威胁模型（先想清楚要防的是谁）与 Metadata（谁在什么时间联系了谁的纪录）判断自己该防谁、记者与 NGO 现实中在用哪些开源工具，以及如何以开放标准的可验证凭证证明资格，而不必揭露身分。
 
@@ -48,18 +48,18 @@ description: "匿名网络社群在 COSCUP 2026 开了两天社群议程轨，8/
 
 - **新闻媒体、独立记者**：先听 8/08 上午「现实世界的开源隐私工具」与「威胁模型与 Metadata 入门」，8/09 下午的「浏览器追踪技术、反追踪策略」会拆解你每天用的浏览器如何泄漏你联系过谁，可延伸看[记者保护消息来源](../../scenarios/journalist.md)。
 - **公民团体、NGO**：8/08 上午四场导论最贴近组织处境，想评估匿名捐款管道，下午 ETHTaipei 合办场的「我不洗钱，为何要理解匿名支付？」是白话入门，不需要加密货币背景。
-- **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能实际操作，8/08 下午的零知识证明与隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](https://anoni.net/zh-cn/join/)。
+- **开源、科技社群**：8/09 技术含量最高，OpenWRT、台师大 Tor 节点、浏览器指纹研究都能实际操作，8/08 下午的零知识证明与隐匿地址是协议层最扎实的内容。想一起贡献见[如何参与](https://anoni.net/zh-cn/join/){target="_blank"}。
 - **想拿回上网主导权的一般人**：8/09 下午「浏览器追踪技术、反追踪策略」拆解你每天用的浏览器如何被追踪，「隐私指南 2026」给出从个人到设备的实用防护。8/09 上午「The Workings of the Internet」用寄明信片的比喻，说清楚你连上网站时路上有谁能偷看，英文进行、但不预设技术背景。
 
 ## 八月，台科大见
 
-不用等到活动当天才认识我们。想先了解社群、或想一起把 Tor、OONI、翻译与节点架设做起来，都可以先从[如何参与与认领主题](https://anoni.net/zh-cn/join/)开始。活动当天，带着同事、伙伴一起走进 `TR-510` 就好。
+不用等到活动当天才认识我们。想先了解社群、或想一起把 Tor、OONI、翻译与节点架设做起来，都可以先从[如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"}开始。活动当天，带着同事、伙伴一起走进 `TR-510` 就好。
 
-- [COSCUP 2026 匿名网络社群议程轨](https://anoni.net/zh-cn/events/coscup-2026/)：两天完整议程、各场摘要与讲者简介
-- [COSCUP 2026 公开征稿](https://anoni.net/zh-cn/events/coscup-2026-cfp/)：征稿主题、跨社群合作与投稿说明
+- [COSCUP 2026 匿名网络社群议程轨](https://anoni.net/zh-cn/events/coscup-2026/){target="_blank"}：两天完整议程、各场摘要与讲者简介
+- [COSCUP 2026 公开征稿](https://anoni.net/zh-cn/events/coscup-2026-cfp/){target="_blank"}：征稿主题、跨社群合作与投稿说明
 - [延续 2025，走向 2026：个人隐私指引、Tor Relay 校园创建竞赛、匿名支付探索](./2025to2026.md)
-- [关于我们](https://anoni.net/zh-cn/about/)
+- [关于我们](https://anoni.net/zh-cn/about/){target="_blank"}
 
 !!! info "活动更新与联系"
 
-    议程细节与时间到活动前仍可能调整，最新时间请以 [COSCUP 官方议程](https://pretalx.coscup.org/coscup-2026/){target="_blank"} 为准。想收到社群活动通知，欢迎[持续关注](https://anoni.net/zh-cn/contact/)我们的电子报与联系管道。
+    议程细节与时间到活动前仍可能调整，最新时间请以 [COSCUP 官方议程](https://pretalx.coscup.org/coscup-2026/){target="_blank"} 为准。想收到社群活动通知，欢迎[持续关注](https://anoni.net/zh-cn/contact/){target="_blank"}我们的电子报与联系管道。

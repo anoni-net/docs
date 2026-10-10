@@ -153,7 +153,7 @@ E2EE 是房間級別的開關，不是預設全部啟用。建立私人房間時
 - Device verification 流程比 Signal 複雜，新裝置加入時的 cross-signing 操作對新手不友善
 - 群組規模成長到上千人時，舊版 Megolm 的同步壓力會明顯，MLS 過渡完成前是過渡期
 
-加入 anoni.net 的 Matrix（含註冊方式）見 [社群自架服務](https://anoni.net/services/)。
+加入 anoni.net 的 Matrix（含註冊方式）見 [社群自架服務](https://anoni.net/services/){target="_blank"}。
 
 ## 不在主名單的工具
 
@@ -200,7 +200,7 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 **Telegram 在反送中後曾累積特定使用者**：因為當時香港社運使用，部分台灣使用者誤以為它是「保密工具」。實際上 Telegram 預設不是 E2EE，把它當「平台分流」可以，但不要當「加密通訊」。
 
-**社群討論在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，帳號申請與加入方式見 [社群自架服務](https://anoni.net/services/)。
+**社群討論在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，帳號申請與加入方式見 [社群自架服務](https://anoni.net/services/){target="_blank"}。
 
 **協議層的台灣脈絡**：Signal、Matrix 為什麼是社群兩條主要路徑，協議層的細節見 [端對端加密如何運作](../advanced/e2ee.md) 的「在地脈絡」一節。
 
@@ -230,7 +230,7 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 ??? question "Matrix 自架值得嗎"
 
-    視規模與技術人力。20 人以下的小社群、沒專人維運，用 anoni.net 或其他公開 homeserver 比較划算。50 人以上、有長期維護人力、想完全控制 metadata 的組織值得自架。自架要處理的不只是 server 本身，還有 storage、聯邦的網路設定、E2EE 金鑰備份、device verification 教學、突發 spam 與 abuse 處理。社群可參考 [社群自架服務](https://anoni.net/services/) 看 anoni.net 的部署選擇。
+    視規模與技術人力。20 人以下的小社群、沒專人維運，用 anoni.net 或其他公開 homeserver 比較划算。50 人以上、有長期維護人力、想完全控制 metadata 的組織值得自架。自架要處理的不只是 server 本身，還有 storage、聯邦的網路設定、E2EE 金鑰備份、device verification 教學、突發 spam 與 abuse 處理。社群可參考 [社群自架服務](https://anoni.net/services/){target="_blank"} 看 anoni.net 的部署選擇。
 
 ??? question "P2P 訊息工具（Briar、SimpleX）會被防火牆擋嗎"
 
@@ -250,8 +250,8 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 <div class="grid cards" markdown>
 
-- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/)
-- [:material-server-network-outline: 社群自架服務](https://anoni.net/services/)
+- [:material-shield-lock-outline: 個人隱私指引研究專題](https://anoni.net/join/privacy-guide/){target="_blank"}
+- [:material-server-network-outline: 社群自架服務](https://anoni.net/services/){target="_blank"}
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>

@@ -216,7 +216,7 @@ The layer you defend has to match the layer you actually face. The framework for
 
 ## This page will age
 
-Both capability and law keep moving, and the facial-recognition legislative track and individual spyware cases change fastest. Everything here reflects the state at the time of verification, and every claim carries a date. If something no longer matches reality, please report it in the [community Matrix room](https://anoni.net/en/join/).
+Both capability and law keep moving, and the facial-recognition legislative track and individual spyware cases change fastest. Everything here reflects the state at the time of verification, and every claim carries a date. If something no longer matches reality, please report it in the [community Matrix room](https://anoni.net/en/join/){target="_blank"}.
 
 ## Where to go from here
 

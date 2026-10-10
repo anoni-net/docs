@@ -155,7 +155,7 @@ asian-diceware 是一份 7776 字、与 EFF 兼容的密语词表，可以当成
 
 我们把 7776 词表排成一本 A5 掷骰查表小册，含封面、使用教学、QR 与版权页。这就是上面〈如何使用〉方法一要查的那张表的纸本版，不必安装软件、只想掷骰的人，印一本就能上手。
 
-社群在台湾参加工作坊、小聚、研讨会这类实体活动时，也会带几本印好的小册到现场发送。如果你在活动里取得一本、或刚好遇到我们，非常欢迎过来聊聊，问密语、问匿名网络，或只是打声招呼都可以。想知道我们最近会出现在哪，见 [活动参与](https://anoni.net/zh-cn/events/)。想直接找我们，可以到社群的 Matrix（入口见 [沟通与协作工具](https://anoni.net/zh-cn/services/)），或 [持续关注](https://anoni.net/zh-cn/contact/) 我们的后续消息。
+社群在台湾参加工作坊、小聚、研讨会这类实体活动时，也会带几本印好的小册到现场发送。如果你在活动里取得一本、或刚好遇到我们，非常欢迎过来聊聊，问密语、问匿名网络，或只是打声招呼都可以。想知道我们最近会出现在哪，见 [活动参与](https://anoni.net/zh-cn/events/){target="_blank"}。想直接找我们，可以到社群的 Matrix（入口见 [沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}），或 [持续关注](https://anoni.net/zh-cn/contact/){target="_blank"} 我们的后续消息。
 
 !!! tip "下载 A5 小册（PDF）"
     [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}（约 36 页，用家里或便利店的打印机打印 A4、对折成册即可）。词表数据采 CC-BY-4.0，欢迎自行打印、发放与再利用，请保留版权页的出处标注。
@@ -179,7 +179,7 @@ asian-diceware 是一份 7776 字、与 EFF 兼容的密语词表，可以当成
 
 - [:material-source-branch: Tor Project 生态与对接](../community/tor-project-ecosystem.md)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
-- [:material-hand-coin-outline: 匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/)
+- [:material-hand-coin-outline: 匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"}
 
 </div>
 

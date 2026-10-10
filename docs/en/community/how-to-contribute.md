@@ -6,7 +6,7 @@ icon: material/source-pull
 
 # :material-source-pull: How to Contribute
 
-This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](https://anoni.net/en/join/). For who maintains the project and how decisions get made, see [governance](https://anoni.net/en/about/governance/) and the [About page](https://anoni.net/en/about/).
+This page is the *how*: the working mechanics of getting a change into anoni.net. For the *what* (the structured workstreams you can join, from regional observation to translation to Tor relay support), see the [Community page's "Concrete ways to contribute"](https://anoni.net/en/join/){target="_blank"}. For who maintains the project and how decisions get made, see [governance](https://anoni.net/en/about/governance/){target="_blank"} and the [About page](https://anoni.net/en/about/){target="_blank"}.
 
 Everything below assumes you've already found something to work on. If you haven't, start with the Community page first.
 
@@ -15,7 +15,7 @@ Everything below assumes you've already found something to work on. If you haven
 For anything beyond a typo or a small fix, send a brief heads-up before you start. A two-line note saves you from rewriting work that doesn't fit, and it lets someone tell you if a piece is already underway.
 
 - **Matrix** — the [Public Space at `#community:im.anoni.net`](https://matrix.to/#/#community:im.anoni.net){target="_blank"} is the fastest way to reach people. Account requests go to `whisper@anoni.net` (the homeserver is `im.anoni.net`, accounts are individually approved).
-- **Encrypted email** — `whisper@anoni.net` works if you'd rather not be on Matrix, or if the topic is sensitive. PGP key is on the [contact page](https://anoni.net/en/contact/).
+- **Encrypted email** — `whisper@anoni.net` works if you'd rather not be on Matrix, or if the topic is sensitive. PGP key is on the [contact page](https://anoni.net/en/contact/){target="_blank"}.
 
 You don't need permission to fix an obvious error. The heads-up matters most when a change touches structure, scope, or claims that others may already be working on.
 
@@ -39,7 +39,7 @@ The site, Pulse, and the ASN coverage tooling all live in one repository: [githu
 
 ## :material-format-list-bulleted: Types of contribution, at a glance
 
-The full list with links lives on the [Community page](https://anoni.net/en/join/). In brief:
+The full list with links lives on the [Community page](https://anoni.net/en/join/){target="_blank"}. In brief:
 
 - **Regional observation** — primary observations and regulatory updates from your jurisdiction.
 - **Translation** — bridging long-form regional research between Chinese and English, and refining the English regional voice.
@@ -56,7 +56,7 @@ The full list with links lives on the [Community page](https://anoni.net/en/join
 ## :material-license: Licensing and attribution
 
 - **Documentation content is [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}**: When you contribute documentation, you're contributing it under that license: others may share and adapt it with attribution.
-- **Code is licensed separately** — Pulse under MIT, the ASN coverage tooling under GPL-3.0. See the [About page](https://anoni.net/en/about/) for details.
+- **Code is licensed separately** — Pulse under MIT, the ASN coverage tooling under GPL-3.0. See the [About page](https://anoni.net/en/about/){target="_blank"} for details.
 - **Contributors are credited**: Your work is attributed to you (under your name or a pseudonym, as you prefer), and it stays visible in the GitHub commit history and contributor list.
 - **We don't claim others' work**: When we translate or build on an external report, we attribute it to the original authors and link the source.
 
@@ -64,4 +64,4 @@ The full list with links lives on the [Community page](https://anoni.net/en/join
 
 Ask before you build. The [Public Space on Matrix](https://matrix.to/#/#community:im.anoni.net){target="_blank"} or `whisper@anoni.net` will get you a pointer toward whether a change fits, where it should live, and whether someone is already on it. A short question early is cheaper than a reworked pull request later.
 
-If you are writing on behalf of an organization, [Working with Organizations](https://anoni.net/en/about/partners/) sets out what we can take on together.
+If you are writing on behalf of an organization, [Working with Organizations](https://anoni.net/en/about/partners/){target="_blank"} sets out what we can take on together.

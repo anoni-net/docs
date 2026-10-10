@@ -134,4 +134,4 @@ OONI Run 在建立新名单时也可以指定一组关联号码（Link ID），�
 ---
 
 !!! note "项目后续"
-    [anoni.net Docs](../../index.md)也将持续在台湾推广 Tor/Tails、OONI 的使用，就网络自由、网络审查的议题上继续努力。若对参与或继续接收我们的信息有兴趣，可以参考「[持续关注](https://anoni.net/zh-cn/contact/)」的加入方式。我们预计在 2025/08 的 COSCUP 活动中举办 Tor/Tails、OONI 的工作坊，会以**华语**的方式进行，并由助教从旁协助参与者进行（暂定）。活动前我们会需要编修教材、培训等筹备准备，如果您对这项活动有兴趣参与，也欢迎参阅「[持续关注](https://anoni.net/zh-cn/contact/)」的联络方式告知我们。
+    [anoni.net Docs](../../index.md)也将持续在台湾推广 Tor/Tails、OONI 的使用，就网络自由、网络审查的议题上继续努力。若对参与或继续接收我们的信息有兴趣，可以参考「[持续关注](https://anoni.net/zh-cn/contact/){target="_blank"}」的加入方式。我们预计在 2025/08 的 COSCUP 活动中举办 Tor/Tails、OONI 的工作坊，会以**华语**的方式进行，并由助教从旁协助参与者进行（暂定）。活动前我们会需要编修教材、培训等筹备准备，如果您对这项活动有兴趣参与，也欢迎参阅「[持续关注](https://anoni.net/zh-cn/contact/){target="_blank"}」的联络方式告知我们。

@@ -383,4 +383,4 @@ alt 要把图的内容说完整，不要只写「示意图」三个字。语音�
 ## :material-link-variant: 接下来
 
 - [贡献者百科](contributor-handbook.md)：整体贡献流程、PR 规范、翻译流程
-- [品牌素材](https://anoni.net/zh-cn/brand/)：logo、wordmark、共用色票与各站的视觉分工
+- [品牌素材](https://anoni.net/zh-cn/brand/){target="_blank"}：logo、wordmark、共用色票与各站的视觉分工

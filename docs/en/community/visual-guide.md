@@ -383,4 +383,4 @@ If a diagram also has to work as a social card, in print, or in an external deck
 ## :material-link-variant: Next
 
 - [Contributor handbook](./contributor-handbook.md): the overall contribution process, PR conventions, and translation workflow
-- [Brand assets](https://anoni.net/en/brand/): the logo, the wordmark, the shared colour tokens, and how each site uses them
+- [Brand assets](https://anoni.net/en/brand/){target="_blank"}: the logo, the wordmark, the shared colour tokens, and how each site uses them

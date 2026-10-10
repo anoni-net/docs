@@ -92,7 +92,7 @@ icon: material/chat-question
 - **Tor Relay 校園建立**：在臺灣各大學推動中繼節點部署，讓本地頻寬成為全球 Tor 網路的一部分，強化整體基礎建設的韌性。
 - **匿名支付**：探索現金以外情境下的匿名支付可能性，含法規、穩定幣與區塊鏈應用等面向，補齊匿名實踐中常被忽略的一塊。
 
-這三個方向的完整說明，可以在[社群參與頁面](https://anoni.net/join/)與[2026 年度規劃](../blog/posts/2025to2026.md)中找到。
+這三個方向的完整說明，可以在[社群參與頁面](https://anoni.net/join/){target="_blank"}與[2026 年度規劃](../blog/posts/2025to2026.md)中找到。
 
 ## :material-chat-question: 一同瞭解
 
@@ -108,8 +108,8 @@ icon: material/chat-question
 
 <div class="grid cards" markdown>
 
-- [:material-shield-account-outline: 個人隱私指引](https://anoni.net/join/privacy-guide/)
-- [:material-school-outline: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/)
-- [:material-currency-btc: 匿名支付研究](https://anoni.net/join/payments-research/)
+- [:material-shield-account-outline: 個人隱私指引](https://anoni.net/join/privacy-guide/){target="_blank"}
+- [:material-school-outline: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/){target="_blank"}
+- [:material-currency-btc: 匿名支付研究](https://anoni.net/join/payments-research/){target="_blank"}
 
 </div>

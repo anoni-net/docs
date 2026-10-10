@@ -226,7 +226,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 
 - [:material-access-point-network: 什么是 OONI](./what-is-ooni.md)
 - [:material-chart-bar: 台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md)
-- [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/)
+- [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 
 </div>
 

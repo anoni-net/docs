@@ -73,9 +73,9 @@ icon: material/sign-direction
 | 我面對某個風險，要完整的處理流程 | [場景](../scenarios/index.md) |
 | 某個工具的用途、限制與設定 | [工具](../tools/index.md) |
 | 匿名、隱私、metadata 這些詞的意思 | [概念](../basics/index.md) |
-| 我想加入社群一起做事 | [社群參與](https://anoni.net/join/) |
+| 我想加入社群一起做事 | [社群參與](https://anoni.net/join/){target="_blank"} |
 | 現在就需要找到人求助 | [緊急求救](../help/index.md) |
 
 ## 找不到你的身分
 
-這五種身分是社群目前接觸最多的對象，涵蓋不到的處境還很多。到 [Matrix 公開 room](https://anoni.net/services/) 說明你的狀況，會幫助我們判斷下一個入口頁要寫哪一種。有實務經驗想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+這五種身分是社群目前接觸最多的對象，涵蓋不到的處境還很多。到 [Matrix 公開 room](https://anoni.net/services/){target="_blank"} 說明你的狀況，會幫助我們判斷下一個入口頁要寫哪一種。有實務經驗想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

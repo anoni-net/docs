@@ -102,7 +102,7 @@ We have produced full Traditional Chinese translations of two pieces of regional
 **Measurement and framing**:
 
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
-- [Tor relay watcher](https://anoni.net/en/projects/pulse/) — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
+- [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"} — live observation of Tor relay activity across Taiwan, Japan, South Korea, and Hong Kong, drawn from our Pulse API.
 - [How many people use Tor in Taiwan](./taiwan-tor-users.md) — the user side of the same connection layer, four years of Taiwan figures set against Mainland China and Hong Kong, and why the tenfold spike of 2025 was a counting bug.
 - [ASN observation data analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
 - [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
@@ -122,7 +122,7 @@ We have produced full Traditional Chinese translations of two pieces of regional
 
 **Public sources we read and cite (no affiliation implied)**:
 
-The list below is third-party material we find useful for regional work; inclusion here is not a claim of partnership or coordination with any of these organizations. The only documented partnerships are listed on the [About page](https://anoni.net/en/about/).
+The list below is third-party material we find useful for regional work; inclusion here is not a claim of partnership or coordination with any of these organizations. The only documented partnerships are listed on the [About page](https://anoni.net/en/about/){target="_blank"}.
 
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"}: a public OONI tool from a documented partner (see About). Widely-used reference dataset for circumvention-tool and platform reachability; you can filter by country code and timeframe directly.
 - [Tor Metrics](https://metrics.torproject.org/){target="_blank"}: a public Tor Project tool from a documented partner (see About). Relay, guard, and bridge counts by country; useful for understanding regional Tor capacity.
@@ -132,13 +132,13 @@ The list below is third-party material we find useful for regional work; inclusi
 
 ## :material-handshake-outline: Working with us on regional observation
 
-If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific and would like to compare notes, contribute primary observation, or co-publish, the [Community](https://anoni.net/en/join/) page lists the channels (Matrix, email, encrypted submission). We particularly welcome:
+If you cover, fund, or research Internet freedom in the Sinophone Asia-Pacific and would like to compare notes, contribute primary observation, or co-publish, the [Community](https://anoni.net/en/join/){target="_blank"} page lists the channels (Matrix, email, encrypted submission). We particularly welcome:
 
 - Region-specific contributors who can sharpen the country sections from inside their own jurisdiction
 - Researchers wanting to use the underlying Pulse and ASN coverage data in published work
 - Translators bridging regional reports between Chinese and English
 
-What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](https://anoni.net/en/about/partners/).
+What organizations can do with us on localization, local context, research, and observation, and what we cannot take on, is set out in [Working with Organizations](https://anoni.net/en/about/partners/){target="_blank"}.
 
 ## :material-information-outline: Disclaimer
 

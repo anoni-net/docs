@@ -24,7 +24,7 @@ Changeovers on Aug 9 are only five minutes long. Someone needs to raise the time
     - **Roles**: recording (1), front-of-room runner (1), door runner (1)
     - **Requirements**: no background in Tor, anonymity networks, or any privacy technology
     - **Availability**: both days is ideal, one day is welcome too, and we will rotate shifts if enough people sign up
-    - **To sign up or ask**: reach us through any channel on [contact](https://anoni.net/en/contact/) and tell us which role you want and which days you can make
+    - **To sign up or ask**: reach us through any channel on [contact](https://anoni.net/en/contact/){target="_blank"} and tell us which role you want and which days you can make
 
 <!-- more -->
 
@@ -46,7 +46,7 @@ All three roles follow a set routine. We hold one online briefing the week befor
 
 When you are not on a shift you can go listen to talks, and the Aug 8 afternoon is almost entirely free. Meals during your shift are covered by the community. Both the briefing and the event itself put you in direct contact with the speakers on this track.
 
-This year the track covers how the internet and censorship work, OpenWRT home networks, the practical work of building the NTNU Tor node, browser-fingerprint tracking, the right to opt out of the national health-insurance database, and a 2026 privacy guide spanning individuals and organizations. The full schedule and session summaries are on the [event page](https://anoni.net/en/events/coscup-2026/).
+This year the track covers how the internet and censorship work, OpenWRT home networks, the practical work of building the NTNU Tor node, browser-fingerprint tracking, the right to opt out of the national health-insurance database, and a 2026 privacy guide spanning individuals and organizations. The full schedule and session summaries are on the [event page](https://anoni.net/en/events/coscup-2026/){target="_blank"}.
 
 ## No experience needed
 
@@ -54,12 +54,12 @@ The community's regular work is translating the interfaces of open-source tools 
 
 Note that the track itself runs mostly in Mandarin, though the crew roles are largely operational and don't require following the talks.
 
-[See the full schedule and session summaries](https://anoni.net/en/events/coscup-2026/){ .md-button .md-button--primary }
+[See the full schedule and session summaries](https://anoni.net/en/events/coscup-2026/){ .md-button .md-button--primary target="_blank" }
 
 - [COSCUP 2026 Anonymity Networks Community track: two days, Aug 8–9, free entry, just walk in](./coscup-2026-community-track.md)
 - [How to contribute and claim a topic](../../community/how-to-contribute.md)
-- [About us](https://anoni.net/en/about/)
+- [About us](https://anoni.net/en/about/){target="_blank"}
 
 !!! info "How to sign up"
 
-    Reach the community through any channel on the [contact](https://anoni.net/en/contact/) page and tell us the role you want, the days you can make, and how best to reach you. Even once the three roles are filled you are still welcome to join, since pre-event promotion and post-event write-ups need people too.
+    Reach the community through any channel on the [contact](https://anoni.net/en/contact/){target="_blank"} page and tell us the role you want, the days you can make, and how best to reach you. Even once the three roles are filled you are still welcome to join, since pre-event promotion and post-event write-ups need people too.

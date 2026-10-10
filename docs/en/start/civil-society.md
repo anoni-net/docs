@@ -25,7 +25,7 @@ Fill in the [threat model checklist](../utils/threat-model.md) first. It produce
 
 They may be an employee, a directly affected person, or a witness who does not want to be identified. Ordinary forms and mailboxes leave correlatable records, and the sender has no way to assess the risk. They need a channel they can evaluate for themselves.
 
-See [sending us sensitive material](https://anoni.net/en/join/upload-sensitive/), the channel the community uses itself: the file goes to a self-hosted Send instance, the link is set to expire after one download and carries an agreed password.
+See [sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}, the channel the community uses itself: the file goes to a self-hosted Send instance, the link is set to expire after one download and carries an agreed password.
 
 ### Donors do not want a record, and the organization still has to issue receipts
 
@@ -46,11 +46,11 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 - [Threat modeling](../basics/threat-model.md): where the three questions come from, which you need when facilitating a team discussion
 - [Metadata, and why it matters](../basics/metadata.md): who contacted whom and when, a layer content encryption does not cover
 - [What is CryptPad?](../tools/what-is-cryptpad.md): an alternative for shared documents and forms
-- [Community services](https://anoni.net/en/services/): Matrix, CryptPad, Send, and forms, all community-run and open for use
+- [Community services](https://anoni.net/en/services/){target="_blank"}: Matrix, CryptPad, Send, and forms, all community-run and open for use
 
 ### Intake and donations
 
-- [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/): the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
+- [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}: the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
 - [File metadata stripper](../utils/strip-metadata.md): clean files in the browser before publishing, nothing is uploaded
 - [Anonymous donation channels](../scenarios/nonprofit-anonymous-donation.md): the full workflow and its legal constraints
 
@@ -58,7 +58,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 
 - [Taiwan's 2025 data protection overhaul](../regional/taiwan-pdpa-2025.md): what changed for organizations holding personal data
 - [Taiwan's whistleblower protection act](../regional/taiwan-whistleblower-law.md): how far the law protects an employee who speaks
-- [Governance charter](https://anoni.net/en/about/governance/): how this community makes decisions and handles disputes, useful as a reference when drafting your own
+- [Governance charter](https://anoni.net/en/about/governance/){target="_blank"}: how this community makes decisions and handles disputes, useful as a reference when drafting your own
 
 ## Your own baseline still matters
 
@@ -70,8 +70,8 @@ The organisation can have every process in place and still lose the whole thread
 ## What to take with you
 
 - Press "copy summary" after the threat model checklist and paste it into the organization's notes, so the next person does not start over
-- Matrix, CryptPad, and Send at [community services](https://anoni.net/en/services/) are open for use, with nothing to self-host
-- Ask in the [public Matrix room](https://anoni.net/en/services/), or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
+- Matrix, CryptPad, and Send at [community services](https://anoni.net/en/services/){target="_blank"} are open for use, with nothing to self-host
+- Ask in the [public Matrix room](https://anoni.net/en/services/){target="_blank"}, or send sensitive files to [whisper@anoni.net](mailto:whisper@anoni.net)
 
 ## What this path does not cover
 

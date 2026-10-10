@@ -18,7 +18,7 @@ description: "專案目前近況與更新 2025/05"
 
 ## 匿名網路工作坊（籌備）
 
-即將在 2025/08 於 COSCUP 開源人年會上舉辦的「[匿名網路工作坊](https://anoni.net/events/workshop-2025-prepare/)」活動，目前我們在 5/18 舉辦了第一次線上籌備會議，會議記錄可以參考[共筆頁面](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感謝許多夥伴來報名這次的活動。下次開會時間在 2025/06/08 21:00 `UTC+8`，預計討論培訓時間、活動籌備...等事宜。
+即將在 2025/08 於 COSCUP 開源人年會上舉辦的「[匿名網路工作坊](https://anoni.net/events/workshop-2025-prepare/){target="_blank"}」活動，目前我們在 5/18 舉辦了第一次線上籌備會議，會議記錄可以參考[共筆頁面](https://pad.anoni.net/p/anoni-workshop){target="_blank"}，感謝許多夥伴來報名這次的活動。下次開會時間在 2025/06/08 21:00 `UTC+8`，預計討論培訓時間、活動籌備...等事宜。
 
 教材目前也正在[翻譯中](https://docs.google.com/presentation/d/16XWWrSX8DqmZ9uEORiaI-jT0RpquswXFDbzvr6srYjA/edit){target="_blank"}，我們使用 Tor/Tails 的教材先以不調整架構、僅翻譯為華文的方式，將教材轉變為適合華語方式進行。培訓小幫手的部分報名很踴躍，活動協助的部分還需要一些志工夥伴幫忙，例如活動宣傳、報名頁面、當天活動的籌劃 ... 等。如果您還有興趣，[歡迎報名](https://anoni.net/events/workshop-2025-prepare/){target="_blank"}（請見頁內「報名工作人員」段落）。
 
@@ -67,7 +67,7 @@ description: "專案目前近況與更新 2025/05"
 
 我們也盡量自己搭建或使用可匿名的服務（[Etherpad](https://pad.anoni.net/){target="_blank"}、[Formbricks](https://form.anoni.net/s/cmaxjo2p40000o10131byw3do){target="_blank"}、[Jitsi](https://jitsi.goodmeet.asia/){target="_blank"}），試著建立相對應的 onion 服務（[專案文件](http://docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Etherpad](http://pad.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/){target="_blank"}、[Formbricks](http://form.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion/s/cmaxjo2p40000o10131byw3do){target="_blank"}），盡量有意識的協助參與夥伴可以保有一定的匿名方式與我們一起辦活動（行事曆還在尋找、郵件還在評估是否用 [Stalwart](https://stalw.art/){target="_blank"} 架設）。
 
-目前希望把八月份的「[匿名網路工作坊](https://anoni.net/events/workshop-2025/)」順利辦完後，可能要來開始思考一個「**社群**」可以長成什麼樣態，在臺灣或是在亞太地區、印太地區可以提供什麼樣的服務、如何參與國際事務。我們希望大家可以多給我們一些意見，即使是**要求**也行 XD。
+目前希望把八月份的「[匿名網路工作坊](https://anoni.net/events/workshop-2025/){target="_blank"}」順利辦完後，可能要來開始思考一個「**社群**」可以長成什麼樣態，在臺灣或是在亞太地區、印太地區可以提供什麼樣的服務、如何參與國際事務。我們希望大家可以多給我們一些意見，即使是**要求**也行 XD。
 
 接下來距離工作坊活動剩下約二個月的時間籌備，也會是開始忙碌的時刻，以上所回報的進度再請大家多多幫忙了，感謝！
 

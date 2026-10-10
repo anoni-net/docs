@@ -35,7 +35,7 @@ Three documents cover the three roles in the rollout sequence: proposal author, 
 
 The hub page collects all three with case studies, project goals, and a backlog of external resources awaiting translation:
 
-- [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/)
+- [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/){target="_blank"}
 
 ## For readers outside Taiwan
 
@@ -52,7 +52,7 @@ If your university already runs a relay through EFF's Tor University Challenge p
 
 Tor's anonymity rests on relay diversity. When relays concentrate in a few countries or network providers, the network's ability to resist traffic analysis weakens. Taiwan's relay count on Tor Metrics is still limited, and each stable node adds another margin of resistance. Real-time observation:
 
-- [Tor Relays watcher](https://anoni.net/en/projects/pulse/)
+- [Tor Relays watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
 
 University campuses are a reasonable place to close that gap: stable academic bandwidth, students and staff with the skill to operate the node, a clearer institutional review path than residential or small-company hosting, and direct alignment with EFF's [Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}.
 

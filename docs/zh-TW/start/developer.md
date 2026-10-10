@@ -12,8 +12,8 @@ icon: material/console
 
 ## 二十分鐘：先確認方向
 
-1. [2026 年度路線圖](https://anoni.net/join/roadmap-2026/)：社群今年投入的三個主題與各自的進度，先看有沒有你想接的
-2. [如何參與與認領主題](https://anoni.net/join/)：怎麼選題、怎麼在 Matrix 表達意願、平時的參與方式
+1. [2026 年度路線圖](https://anoni.net/join/roadmap-2026/){target="_blank"}：社群今年投入的三個主題與各自的進度，先看有沒有你想接的
+2. [如何參與與認領主題](https://anoni.net/join/){target="_blank"}：怎麼選題、怎麼在 Matrix 表達意願、平時的參與方式
 3. [自我技能評估表](../community/skill-level.md)：Tor、Tails、OONI 三個工具的分級自評，每一級下面都列了補齊用的文章
 
 ## 四條可以認領的線
@@ -27,7 +27,7 @@ icon: material/console
 - [Tor Snowflake](../tools/tor-snowflake.md)：門檻最低的一種，開著那一頁就在幫忙，要常駐再裝擴充套件
 - [如何搭建 .onion 服務](../community/setup-onion-service.md)：把手上的服務多開一個 onion 入口
 - [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)：目前是單點，多一個 pin 就多一份備援
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)：先看台灣現在有多少節點、分布在哪些 ASN
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}：先看台灣現在有多少節點、分布在哪些 ASN
 
 ### 會寫程式，會處理資料
 
@@ -65,9 +65,9 @@ icon: material/console
 
 ## 帶得走的東西
 
-- [Matrix 公開 room](https://anoni.net/services/)：認領主題前先在這裡說一聲，避免兩個人做同一件事
+- [Matrix 公開 room](https://anoni.net/services/){target="_blank"}：認領主題前先在這裡說一聲，避免兩個人做同一件事
 - [GitHub 的 anoni-net/docs](https://github.com/anoni-net/docs)：文件站的原始碼與 issue，每個 issue 都寫了預期內容
-- 社群自架的 CryptPad 與 Etherpad 可以直接用來寫提案草稿，見[社群自架服務](https://anoni.net/services/)
+- 社群自架的 CryptPad 與 Etherpad 可以直接用來寫提案草稿，見[社群自架服務](https://anoni.net/services/){target="_blank"}
 
 ## 這條路徑沒有處理的
 

@@ -26,7 +26,7 @@ The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work 
     - Admission: COSCUP is free, and the community track needs no separate registration. Just show up.
     - Getting there: sessions are drop-in, so you can come and go and don't need to stay all day. For transport and room locations, follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"} and venue info, which are authoritative (times may still shift before the event).
 
-[See the full schedule and session summaries](https://anoni.net/en/events/coscup-2026/){ .md-button .md-button--primary }
+[See the full schedule and session summaries](https://anoni.net/en/events/coscup-2026/){ .md-button .md-button--primary target="_blank" }
 
 <!-- more -->
 
@@ -36,7 +36,7 @@ The **Anonymity Networks Community (anoni.net)** brings a year of hands-on work 
 
 ## Two days at a glance
 
-The program is deliberately designed to run from entry-level to protocol-level (the lower-level technical implementation), so you can pick sessions based on your own background. All sixteen sessions and their summaries live on the [event page](https://anoni.net/en/events/coscup-2026/).
+The program is deliberately designed to run from entry-level to protocol-level (the lower-level technical implementation), so you can pick sessions based on your own background. All sixteen sessions and their summaries live on the [event page](https://anoni.net/en/events/coscup-2026/){target="_blank"}.
 
 ### Aug 8 morning, four open-source anonymity primers (`TR-510`)
 
@@ -61,11 +61,11 @@ Topics run from how the internet and censorship work, through OpenWRT (an open-s
 
 You don't have to wait for the event to get to know us. To learn about the community, or to help with Tor, OONI, translation, and running relays, start from [how to contribute and claim a topic](../../community/how-to-contribute.md). On the day, just bring a colleague or two and walk into `TR-510`.
 
-- [COSCUP 2026 Anonymity Networks Community track](https://anoni.net/en/events/coscup-2026/): the full two-day schedule, session summaries, and speaker bios
-- [COSCUP 2026 open call for proposals](https://anoni.net/en/events/coscup-2026-cfp/): topics, cross-community collaboration, and how to submit
+- [COSCUP 2026 Anonymity Networks Community track](https://anoni.net/en/events/coscup-2026/){target="_blank"}: the full two-day schedule, session summaries, and speaker bios
+- [COSCUP 2026 open call for proposals](https://anoni.net/en/events/coscup-2026-cfp/){target="_blank"}: topics, cross-community collaboration, and how to submit
 - [From 2025 into 2026: a personal privacy guide, a campus Tor relay challenge, and exploring anonymous payments](./2025to2026.md)
-- [About us](https://anoni.net/en/about/)
+- [About us](https://anoni.net/en/about/){target="_blank"}
 
 !!! info "Updates and contact"
 
-    Session details and times may still change before the event; for the latest times, follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. To get community event updates, [stay in touch](https://anoni.net/en/contact/) through our newsletter and contact channels.
+    Session details and times may still change before the event; for the latest times, follow the [official COSCUP schedule](https://pretalx.coscup.org/coscup-2026/){target="_blank"}. To get community event updates, [stay in touch](https://anoni.net/en/contact/){target="_blank"} through our newsletter and contact channels.

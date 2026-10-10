@@ -82,7 +82,7 @@ Tor 網路靠願意替它維運基礎設施的人與組織撐起。Exit 是這�
 
 Unredacted 文章裡那位中國使用者的話格外少見，因為身處審查環境的人多半沒有管道、也難以安全地對外發聲。對照到正體中文社群，台灣讀者本身並沒有遭遇這種審查封鎖。台灣的網路環境相對自由，沒有 GFW、沒有強制 VPN 註冊、ISP 也沒有國家審查命令。也因為如此，台灣有條件替被封鎖地區架設 Tor 中繼與橋接，分擔一部分抗審查基礎建設的工作。
 
-匿名網路社群 anoni.net 一直透過 [Pulse 即時觀測](https://anoni.net/api/readme){target="_blank"} 追蹤台灣 Tor 中繼節點的數量與分布。截至 2026-05-31，台灣境內 Onionoo（Tor 官方的中繼資料查詢服務）看得到的、運作中的中繼節點是 12 個，其中具有 Exit 旗標的只有 3 個（initramfs、GuruKopi、jerryrelay）。對照 Unredacted 一個組織就執行 123 個 exit relay、30 天承載近 300 TiB 流量，台灣的全國 exit 規模還不到他們的 3%。我們在 [Tor Relays 觀測點](https://anoni.net/projects/pulse/) 持續更新這個數字，並在 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md) 補上 OONI 對台灣與鄰近地區的審查觀測。
+匿名網路社群 anoni.net 一直透過 [Pulse 即時觀測](https://anoni.net/api/readme){target="_blank"} 追蹤台灣 Tor 中繼節點的數量與分布。截至 2026-05-31，台灣境內 Onionoo（Tor 官方的中繼資料查詢服務）看得到的、運作中的中繼節點是 12 個，其中具有 Exit 旗標的只有 3 個（initramfs、GuruKopi、jerryrelay）。對照 Unredacted 一個組織就執行 123 個 exit relay、30 天承載近 300 TiB 流量，台灣的全國 exit 規模還不到他們的 3%。我們在 [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"} 持續更新這個數字，並在 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md) 補上 OONI 對台灣與鄰近地區的審查觀測。
 
 香港、澳門以及使用中文的東南亞華語使用者，在 2020 年後實際的翻牆需求增加，而正體中文的抗審查資源相對稀缺。anoni.net 的工作之一是把這套中文資源補起來，包括 [什麼是 Tor](../../tools/what-is-tor.md)、[Tor Snowflake 橋接點](../../tools/tor-snowflake.md)、[什麼是 OONI](../../tools/what-is-ooni.md) 等基礎文件，跟 Unredacted 的 Unredacted Education 走在同一條路上。
 
@@ -92,7 +92,7 @@ Unredacted 把 123 個 exit relays 運作於 400W 上，這個數字對台灣社
 
 關鍵在硬體規模化的設計。台灣 maker 社群對 Raspberry Pi 5 並不陌生，PoE+ HAT 與 PoE 交換器在台灣的常見零售管道都能買到（如 Cytron、群創、PChome）。ComputeBlade（20 模組 1U 機箱）目前在台灣較少零售管道，可以透過官方海外訂購或社群代購取得。校園機房比家用網路更適合做這件事，原因有三：固定 IP、學術網路頻寬、有人巡檢機器。
 
-Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把校園架設的經驗整理成一份 SOP（見 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/) 與 [在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做為下一所學校評估架設方案時的參考點，先用 PoE 餵電的 Raspberry Pi 5 試做一台 middle relay，等運作穩定後再考慮 exit 與機箱密度。
+Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把校園架設的經驗整理成一份 SOP（見 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 與 [在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做為下一所學校評估架設方案時的參考點，先用 PoE 餵電的 Raspberry Pi 5 試做一台 middle relay，等運作穩定後再考慮 exit 與機箱密度。
 
 對想參與的個人或小團體，從 Snowflake proxy 開始（瀏覽器外掛或 Docker）幾乎沒有電費負擔，是進入抗審查基礎建設最低門檻的入口（見 [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)）。
 
@@ -103,16 +103,16 @@ Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把
 - **了解 Unredacted**：到 [unredacted.org](https://unredacted.org/){target="_blank"} 看他們的服務與透明度資訊，再決定是否透過官方頻道支持伺服器、頻寬與人力成本。
 - **自架 Snowflake**：最低門檻的抗審查貢獻，用瀏覽器外掛或 Docker 就能執行（見 [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)）。
 - **架設 Tor relay 或 bridge**：需要穩定網路與一點維運心力，社群整理了 [如何搭建 Tor Relay](../../community/setup-tor-relay.md) 的步驟與經驗。
-- **校園 Tor Relay**：在大專院校工作或就讀的人，可以從 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/) 開始評估。
-- **加入 anoni.net 社群討論**：透過 Matrix 跟其他社群成員交換經驗，入口在 [社群參與](https://anoni.net/join/)。
+- **校園 Tor Relay**：在大專院校工作或就讀的人，可以從 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 開始評估。
+- **加入 anoni.net 社群討論**：透過 Matrix 跟其他社群成員交換經驗，入口在 [社群參與](https://anoni.net/join/){target="_blank"}。
 
 ## 延伸閱讀
 
 - [什麼是 Tor](../../tools/what-is-tor.md)
 - [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)
 - [什麼是 OONI](../../tools/what-is-ooni.md)
-- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)
-- [Tor Relays 觀測點](https://anoni.net/projects/pulse/)
+- [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}
+- [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 - [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - 同系列：[Defending the public's right to know（OONI）](https://blog.torproject.org/Defending-the-right-to-know/){target="_blank"}、[Preserving evidence: How OpenArchive fosters accountability and media sovereignty](https://blog.torproject.org/preserving-evidence-openarchive-fosters-accountability-media-sovereignty/){target="_blank"}
 

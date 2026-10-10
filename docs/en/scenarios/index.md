@@ -41,11 +41,11 @@ If none of them matches your situation, [what an ordinary person should actually
 
 ## :material-help-circle-outline: How to suggest a scenario
 
-If you work with a population whose situation isn't well covered by existing English-language privacy sites, especially groups with significant cross-border or Sinophone-region context, let us know via the channels on the [Community](https://anoni.net/en/join/) page. We are particularly interested in scenarios where the regional framing is load-bearing: the same situation in a different jurisdiction would call for materially different practice.
+If you work with a population whose situation isn't well covered by existing English-language privacy sites, especially groups with significant cross-border or Sinophone-region context, let us know via the channels on the [Community](https://anoni.net/en/join/){target="_blank"} page. We are particularly interested in scenarios where the regional framing is load-bearing: the same situation in a different jurisdiction would call for materially different practice.
 
 ## Other paths
 
 - [Regional observatory](../regional/index.md) for empirical observations
 - [Basics: networked freedom](../basics/internet-freedom.md) for the conceptual frame
-- [About us](https://anoni.net/en/about/) for the community behind the writing
+- [About us](https://anoni.net/en/about/){target="_blank"} for the community behind the writing
 - For introductory privacy material outside our regional scope: [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}

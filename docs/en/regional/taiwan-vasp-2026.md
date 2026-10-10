@@ -150,7 +150,7 @@ When reading coverage, keep industry associations, government agencies, and huma
 
 ## Why an anonymity community tracks financial regulation
 
-We advocate for Tor, Tails, and OONI, and we pay attention to how payments and identity expose people. The regulatory density of a VASP regime directly shapes the choice structure between a compliant exchange and self-custody on-chain. Setting out where the legislation stands gives the community shared ground for discussing privacy, fraud prevention, and compliance together rather than past each other. Further reading: [the anonymous payments research track](https://anoni.net/en/join/payments-research/) and [the cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md).
+We advocate for Tor, Tails, and OONI, and we pay attention to how payments and identity expose people. The regulatory density of a VASP regime directly shapes the choice structure between a compliant exchange and self-custody on-chain. Setting out where the legislation stands gives the community shared ground for discussing privacy, fraud prevention, and compliance together rather than past each other. Further reading: [the anonymous payments research track](https://anoni.net/en/join/payments-research/){target="_blank"} and [the cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md).
 
 ## Sources
 
@@ -168,7 +168,7 @@ We advocate for Tor, Tails, and OONI, and we pay attention to how payments and i
 
 The Chinese-language version of this page is at [台灣 VASP 法 2026](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}.
 
-If you have first-hand hearing records, or track amendments after third reading, the channels on the [Community services](https://anoni.net/en/services/) page reach us and we will update this page.
+If you have first-hand hearing records, or track amendments after third reading, the channels on the [Community services](https://anoni.net/en/services/){target="_blank"} page reach us and we will update this page.
 
 ## Related
 

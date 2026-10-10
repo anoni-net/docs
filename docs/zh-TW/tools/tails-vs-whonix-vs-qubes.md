@@ -126,7 +126,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 依 [威脅模型](../basics/threat-model.md) 的角色思考：
 
 - **一般使用者**（沒有特別敏感工作）：通常不需要這三套任何一套，[Tor Browser](./what-is-tor.md) + [密碼管理器](./password-manager.md) 已經涵蓋多數場景。
-- **記者**（保護消息來源）：預設 Tails。詳細工作流見 [記者保護消息來源](../scenarios/journalist.md)。長期進行很多採訪、累積大量檔案，可考慮升級到 Whonix（搭配 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)）。
+- **記者**（保護消息來源）：預設 Tails。詳細工作流見 [記者保護消息來源](../scenarios/journalist.md)。長期進行很多採訪、累積大量檔案，可考慮升級到 Whonix（搭配 [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}）。
 - **社運參與者**：行動現場 Tails（USB 帶著走，被臨檢時抽出來），長期協作回家用一般筆電 + Signal。詳細場景見 [社運行動者的數位準備](../scenarios/activist.md)。
 - **家暴倖存者**（準備離開）：Tails 在加害者看不到的環境（圖書館、咖啡店）使用。詳細場景見 [家暴受害者的數位準備](../scenarios/domestic-violence.md)。
 - **IT 從業者、安全研究員**：依硬體與時間投入挑 Whonix（低門檻）或 Qubes（高隔離）。需要把 work / personal / banking 嚴格分開的選 Qubes。
@@ -136,7 +136,7 @@ Tails、Whonix、Qubes 各自處理這個問題的方向不同。Tails 走拋棄
 
 - **取得管道**：Tails、Whonix、Qubes 三套官網在台灣都直連無問題，下載速度可考慮 [Tails 鏡像清單](https://tails.net/install/index.en.html){target="_blank"}。Tor Browser 不必橋接就能下載，這層門檻比審查地區低得多。
 - **硬體取得**：台灣常見的 Intel-based ThinkPad（X、T、P 系列）多數在 Qubes HCL 上有相容紀錄。Apple Silicon 在 Tails 與 Qubes 上不可用，買機前一定先查 [HCL 官方頁](https://www.qubes-os.org/hcl/){target="_blank"}。Whonix 跨平台靈活，現有筆電多半可執行。
-- **社群實踐**：anoni.net 社群長期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)。Whonix、Qubes 在台灣社群既有經驗較少，如果你長期使用任一套，歡迎到 [Matrix 公開 room](https://anoni.net/services/) 分享經驗。
+- **社群實踐**：anoni.net 社群長期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)。Whonix、Qubes 在台灣社群既有經驗較少，如果你長期使用任一套，歡迎到 [Matrix 公開 room](https://anoni.net/services/){target="_blank"} 分享經驗。
 
 ## 常見問題
 
@@ -185,7 +185,7 @@ Tails 的完整介紹與安裝步驟在 [什麼是 Tails](./what-is-tails.md)。
 <div class="grid cards" markdown>
 
 - [:material-newspaper-variant-outline: 記者保護消息來源](../scenarios/journalist.md)
-- [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/)
+- [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}
 - [:material-account-group-outline: 社運行動者的數位準備](../scenarios/activist.md)
 
 </div>

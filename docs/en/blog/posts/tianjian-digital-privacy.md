@@ -82,6 +82,6 @@ The first session focused on what a journalist controls directly: devices, accou
 - [:material-shield-account: Journalists and source protection](../../scenarios/journalist.md)
 - [:material-key-chain: Getting Started with Password Managers](../../tools/password-manager.md)
 - [:material-fingerprint: A browser fingerprint cannot be cleared the way a cookie can](../../basics/browser-fingerprinting.md)
-- [:material-account-group: Community & Collaboration](https://anoni.net/en/join/)
+- [:material-account-group: Community & Collaboration](https://anoni.net/en/join/){target="_blank"}
 
 </div>

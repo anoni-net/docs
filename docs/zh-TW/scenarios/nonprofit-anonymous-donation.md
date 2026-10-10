@@ -169,7 +169,7 @@ icon: material/hand-coin-outline
 - **接收方對資金來源的盡職調查（DD）義務**。組織收到大額加密貨幣捐款時，即使技術上無法識別捐款人，仍可能被要求對資金來源做合理判斷。設計一個「異常金額觸發內部審查」的政策，比假裝沒看到要安全得多
 - **工具中立不等於使用者中立**。隱私工具本身在多數司法管轄下合法，但用這個工具做特定事情可能違法。組織用 Monero 接收一般支持者的小額捐款是工具中立的使用，用同樣的工具大規模收受洗錢資金就不是。決定法律風險的是你拿工具做了什麼，工具本身中立
 
-延伸閱讀建議追蹤 [Coin Center](https://www.coincenter.org/){target="_blank"} 與 [EFF](https://www.eff.org/){target="_blank"} 對相關案件的法律分析。社群也把 Tornado Cash 案例的完整時序整理列為待翻譯的候選資源（見 [匿名支付研究專題](https://anoni.net/join/payments-research/)）。
+延伸閱讀建議追蹤 [Coin Center](https://www.coincenter.org/){target="_blank"} 與 [EFF](https://www.eff.org/){target="_blank"} 對相關案件的法律分析。社群也把 Tornado Cash 案例的完整時序整理列為待翻譯的候選資源（見 [匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"}）。
 
 ## 跨情境的共通取捨
 
@@ -244,5 +244,5 @@ icon: material/hand-coin-outline
 - [為什麼匿名支付重要](../basics/payments-anonymity.md)：金流為什麼是 metadata 的獨立維度
 - [加密貨幣的隱私光譜](../tools/crypto-privacy-spectrum.md)：BTC、ETH、Monero、Zcash、穩定幣的隱私差異
 - [台灣 VASP 法 2026](../taiwan/vasp-2026.md)：草案架構、罰則、對組織的影響
-- [匿名支付研究專題](https://anoni.net/join/payments-research/)：社群討論入口、待翻譯資源、COSCUP 議程合作
+- [匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"}：社群討論入口、待翻譯資源、COSCUP 議程合作
 - [威脅模型如何建立](../basics/threat-model.md)：先盤點誰是對手、會看到哪些金流線索

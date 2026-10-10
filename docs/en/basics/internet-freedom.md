@@ -84,7 +84,7 @@ Beyond consuming this data, anoni.net runs the [Pulse](https://github.com/anoni-
 
 - [Regional observatory](../regional/index.md) — the empirical work and country-by-country observations
 - [LGBTQ+ scenarios](../scenarios/lgbtq.md) — a worked-through showcase of how regional framing applies to one population
-- [About anoni.net](https://anoni.net/en/about/) — how the community works and how to collaborate
+- [About anoni.net](https://anoni.net/en/about/){target="_blank"} — how the community works and how to collaborate
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"} and [Tor Metrics](https://metrics.torproject.org/){target="_blank"} — go directly to the upstream measurement portals
 
 [^1]: [Great Firewall — Wikipedia](https://en.wikipedia.org/wiki/Great_Firewall){target="_blank"}, with extensive sourced citations to academic and journalistic accounts.

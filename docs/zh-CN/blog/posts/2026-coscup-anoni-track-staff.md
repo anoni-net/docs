@@ -24,7 +24,7 @@ description: "匿名网络社群征 COSCUP 2026 议程轨的现场工作人员�
     - **岗位**：录影 1 位、台前机动 1 位、场外机动 1 位
     - **条件**：不需要具备 Tor、匿名网络或任何隐私技术的背景
     - **时间**：两天都能到最好，只能到一天也欢迎，人多的话会排轮班
-    - **报名或询问**：透过[联系我们](https://anoni.net/zh-cn/contact/)的任一管道告诉我们，注明想担任的岗位与可以到的日期
+    - **报名或询问**：透过[联系我们](https://anoni.net/zh-cn/contact/){target="_blank"}的任一管道告诉我们，注明想担任的岗位与可以到的日期
 
 <!-- more -->
 
@@ -46,18 +46,18 @@ description: "匿名网络社群征 COSCUP 2026 议程轨的现场工作人员�
 
 不在岗位上的时段可以自由去听议程，8/08 下午几乎整段都是空的。值勤时段的餐点由社群准备。行前说明会与活动当天都能直接认识这一轨的讲者。
 
-这一轨今年的内容涵盖网络与审查如何运作、OpenWRT 家用网络、台师大 Tor 节点创建实务、浏览器指纹追踪、健保数据库的停止利用权，以及从个人到组织的隐私指南 2026，完整议程与各场摘要放在[活动页](https://anoni.net/zh-cn/events/coscup-2026/)。
+这一轨今年的内容涵盖网络与审查如何运作、OpenWRT 家用网络、台师大 Tor 节点创建实务、浏览器指纹追踪、健保数据库的停止利用权，以及从个人到组织的隐私指南 2026，完整议程与各场摘要放在[活动页](https://anoni.net/zh-cn/events/coscup-2026/){target="_blank"}。
 
 ## 没有经验也可以
 
 社群平常在做的事，是把 Tor、Tails、OONI 这些开源工具的界面翻译成正体中文、回报问题、协助在校园架设中继节点。这次的现场工作同样不需要事先具备专业背景，愿意花两天陪着把议程执行完就够了。没有参加过 COSCUP 也没有关系，说明会上会把该知道的细节都交代清楚。
 
-[看完整议程与各场摘要](https://anoni.net/zh-cn/events/coscup-2026/){ .md-button .md-button--primary }
+[看完整议程与各场摘要](https://anoni.net/zh-cn/events/coscup-2026/){ .md-button .md-button--primary target="_blank" }
 
 - [COSCUP 2026 匿名网络社群议程轨：8/08、8/09 两天，免费入场、走进教室就能参加](./coscup-2026-community-track.md)
-- [如何参与与认领主题](https://anoni.net/zh-cn/join/)
-- [关于我们](https://anoni.net/zh-cn/about/)
+- [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"}
+- [关于我们](https://anoni.net/zh-cn/about/){target="_blank"}
 
 !!! info "报名方式"
 
-    请透过[联系我们](https://anoni.net/zh-cn/contact/)的任一管道与社群联系，告诉我们想担任的岗位、可以到的日期，以及方便的联系方式。三个岗位额满之后仍然欢迎加入，会前宣传与会后整理同样需要人。
+    请透过[联系我们](https://anoni.net/zh-cn/contact/){target="_blank"}的任一管道与社群联系，告诉我们想担任的岗位、可以到的日期，以及方便的联系方式。三个岗位额满之后仍然欢迎加入，会前宣传与会后整理同样需要人。

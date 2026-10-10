@@ -33,7 +33,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 **[校園 Tor Relay：給校方與法務的 FAQ](../../community/campus-relay-faq.md)**：十題校方資訊中心、法務、網管最常擔心的問題，每題都有台灣脈絡補充，刑法妨害電腦使用罪章、個資法第 2 條、TANet 對外連線審核機制都已經對到具體條文。頁尾另外整理「給網管的一頁摘要」與「給校方行政與法務的一頁摘要」，30 秒讀完，可以直接複製貼進 mail 開頭或當會議 handout。
 
-三份檔案的整體入口、推動目標、案例累積，以及「待翻譯延伸閱讀」清單，都收在 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/)。
+三份檔案的整體入口、推動目標、案例累積，以及「待翻譯延伸閱讀」清單，都收在 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}。
 
 ## 建議的閱讀順序
 
@@ -58,7 +58,7 @@ description: "NZ 把台師大校園 Tor Relay 的提案計畫、溝通 email、�
 
 ## 為什麼台灣需要更多校園 Tor Relay
 
-Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在少數國家或少數網路供應商，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能觀測到的中繼數量仍然有限，每多一個穩定運作的節點，整個網路對抗流量分析的能力就多一分。即時觀測見 anoni.net 的 [Tor Relays 觀測點](https://anoni.net/projects/pulse/)。
+Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在少數國家或少數網路供應商，Tor 對抗流量分析的能力就會降低。台灣目前在 Tor Metrics 上能觀測到的中繼數量仍然有限，每多一個穩定運作的節點，整個網路對抗流量分析的能力就多一分。即時觀測見 anoni.net 的 [Tor Relays 觀測點](https://anoni.net/projects/pulse/){target="_blank"}。
 
 大學校園是補上這個缺口的合適切入點：
 
@@ -79,7 +79,7 @@ Tor 網路的匿名性靠多元的中繼節點支撐。當全球中繼集中在�
 
 不需要架過 Tor Relay 也歡迎參與。「我想學」就是合理的加入動機，社群會搭配[「如何搭建 Tor Relay」](../../community/setup-tor-relay.md)文件協助你實際操作。
 
-如果你正在自己學校推動、卡在某個環節想找人討論，或者已經有想法但不知道如何跟教授開口，任何一個階段都歡迎聯繫社群。常用入口整理在[社群自架服務](https://anoni.net/services/)頁面，Matrix 公開 room 也可以直接打招呼。
+如果你正在自己學校推動、卡在某個環節想找人討論，或者已經有想法但不知道如何跟教授開口，任何一個階段都歡迎聯繫社群。常用入口整理在[社群自架服務](https://anoni.net/services/){target="_blank"}頁面，Matrix 公開 room 也可以直接打招呼。
 
 ## 致謝
 
