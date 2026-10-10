@@ -68,5 +68,5 @@ The reach of OONI's open data is uneven across the Sinophone region. Closing tha
 ## Related reading
 
 - [Internet Freedom](../../basics/internet-freedom.md): why the broader internet freedom frame matters for measurement infrastructure
-- [onionoo MCP: Tor relay query service](../../community/onionoo-mcp.md): a related tool the anoni.net community runs for Tor network observation
+- [onionoo MCP: Tor relay query service](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a related tool the anoni.net community runs for Tor network observation
 - [Financial Companies as Censors: A Sinophone Asia-Pacific Reading](./2026-financial-companies-as-censors.md): the same "global anchor + Sinophone Asia-Pacific reading" format applied to financial censorship

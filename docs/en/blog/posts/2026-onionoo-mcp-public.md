@@ -73,7 +73,7 @@ In Claude Desktop, Cursor, or any other MCP-capable client, add this to the `mcp
 
 Save the config, restart the client, and the `onionoo` tool set will appear in the tool list. The full guide covers local stdio transport setup, all available tools, permission options, and self-hosted (Docker) instructions.
 
-[:material-arrow-right-circle-outline: Read the full onionoo MCP guide](../../community/onionoo-mcp.md){ .md-button .md-button--primary }
+[:material-arrow-right-circle-outline: Read the full onionoo MCP guide](https://anoni.net/en/projects/onionoo-mcp/){ .md-button .md-button--primary target="_blank" }
 
 ### For direct API users
 
@@ -109,7 +109,7 @@ The service is released under the MIT license. Source code: <https://github.com/
 
 ## Related reading
 
-- [onionoo MCP: a query service for Tor relays](../../community/onionoo-mcp.md) — full usage guide
+- [onionoo MCP: a query service for Tor relays](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"} — full usage guide
 - [Tor relay watcher](https://anoni.net/en/projects/pulse/){target="_blank"}
 - [ASN observation data analysis](../../regional/ooni-asn-coverage.md)
 - [What is Tor?](../../tools/what-is-tor.md)

@@ -38,7 +38,7 @@ icon: material/console
 - [OONI 測項速查表](../community/ooni-nettests-map.md)：各測項測的是什麼
 - [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)：社群自己那支擷取程式怎麼設定與使用，含 S3 公開資料集的路徑結構
 - [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)：台灣目前的涵蓋狀況，缺口就是題目
-- [onionoo MCP](../community/onionoo-mcp.md)：社群自架的 Tor 中繼查詢服務，也是一個可以延伸的介面
+- [onionoo MCP](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中繼查詢服務，也是一個可以延伸的介面
 - [OONI 網站檢測清單](../taiwan/ooni-checklist.md)：台灣的檢測清單怎麼維護，分類與更新都需要人
 
 ### 在學校或公司內部有影響力

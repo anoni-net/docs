@@ -38,7 +38,7 @@ The measurement line needs people who can read raw results and turn them into an
 - [OONI nettest quick reference](../community/ooni-nettests-map.md): what each test actually measures
 - [ASN observation data retrieval and analysis](../community/asn-coverage-howto.md): how this community's retrieval tool is configured and used, including the S3 public dataset layout
 - [ASN observation data analysis](../regional/ooni-asn-coverage.md): current coverage, where the gaps are the open questions
-- [onionoo MCP](../community/onionoo-mcp.md): a community-run relay query service, and an interface worth extending
+- [onionoo MCP](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a community-run relay query service, and an interface worth extending
 - [OONI website testing list](../regional/ooni-checklist.md): how the test list is maintained, where classification and updates need people
 
 ### Influence inside a university or a company

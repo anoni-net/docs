@@ -73,7 +73,7 @@ Onionoo 的规范本身完整，但对 AI 代理来说有三个门槛。
 
 存档、重启客户端，工具列表中就会出现 onionoo 这组工具，可以直接用自然语言要求代理查询。本机 stdio transport 安装方式、完整工具一览、权限调整、自架（Docker）等细节，完整使用文件都有写。
 
-[:material-arrow-right-circle-outline: 阅读完整 onionoo MCP 使用文件](../../community/onionoo-mcp.md){ .md-button .md-button--primary }
+[:material-arrow-right-circle-outline: 阅读完整 onionoo MCP 使用文件](https://anoni.net/zh-cn/projects/onionoo-mcp/){ .md-button .md-button--primary target="_blank" }
 
 ### 给写程序直接调用的用户
 
@@ -109,7 +109,7 @@ anoni.net 目前在 Tor 观测这条线上有三个入口，可以依任务挑�
 
 ## 相关阅读
 
-- [onionoo MCP：Tor 中继节点查询服务](../../community/onionoo-mcp.md)：完整使用文件
+- [onionoo MCP：Tor 中继节点查询服务](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：完整使用文件
 - [Tor Relays 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)
 - [什么是 Tor？](../../tools/what-is-tor.md)

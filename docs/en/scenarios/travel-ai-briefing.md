@@ -86,7 +86,7 @@ WebTunnel)? Give me an on-arrival connection plan with a fallback order.
 ```
 
 !!! tip "(advanced) Want real Tor relay numbers? You can connect onionoo MCP"
-    With no external data source, an AI will often invent the relay/bridge counts and bandwidth this question asks for (exactly the failure this page warns about). If your assistant supports MCP (a standard interface that lets an AI connect to external live data sources), such as claude.ai, you can connect our community-run [onionoo MCP](../community/onionoo-mcp.md). It wraps Tor Project's public Onionoo data behind a single URL, so the AI can pull real, citable numbers as of the moment you ask, instead of guessing. If you only use the ChatGPT web app, skip this and cross-check the AI's answer against Tor Metrics at the bottom of this page.
+    With no external data source, an AI will often invent the relay/bridge counts and bandwidth this question asks for (exactly the failure this page warns about). If your assistant supports MCP (a standard interface that lets an AI connect to external live data sources), such as claude.ai, you can connect our community-run [onionoo MCP](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}. It wraps Tor Project's public Onionoo data behind a single URL, so the AI can pull real, citable numbers as of the moment you ask, instead of guessing. If you only use the ChatGPT web app, skip this and cross-check the AI's answer against Tor Metrics at the bottom of this page.
 
 ```text
 [Digital 3 / VPN legality & usability] Is using a VPN legal in the destination? Are
@@ -210,7 +210,7 @@ After running the items above, copy the key contacts from section 4 (emergency c
 - [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
 - [Using AI at work without leaking data](../tools/ai-privacy.md) — the fuller version of the caution above: tier differences, retention periods, and what to ask a provider
 - [Regional observatory](../regional/index.md) — empirical censorship and Tor-reachability observations for the region.
-- [onionoo MCP — a query service for Tor relays](../community/onionoo-mcp.md) — hand "Digital 2" above to the AI directly. Connect this URL and your assistant can answer how many Tor relays a country has, how much bandwidth, and which networks host them, with numbers straight from Tor Project's Onionoo.
+- [onionoo MCP — a query service for Tor relays](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"} — hand "Digital 2" above to the AI directly. Connect this URL and your assistant can answer how many Tor relays a country has, how much bandwidth, and which networks host them, with numbers straight from Tor Project's Onionoo.
 - [Basics: networked freedom](../basics/internet-freedom.md) — the conceptual frame behind these scenarios.
 - [The thinking behind this page (blog)](../blog/posts/travel-ai-briefing.md) — why we package the questions worth asking into a prompt pack you run on your own trusted AI.
 

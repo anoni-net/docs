@@ -84,7 +84,7 @@ icon: material/shield-airplane-outline
 ```
 
 !!! tip "（進階）想讓 AI 查到真實的 Tor 節點數字，可接 onionoo MCP"
-    本題問的 relay、bridge 數量與頻寬，AI 若沒有外部資料來源，很可能憑記憶編一個給你（就是本頁開頭警告的那種錯）。如果你用的是 claude.ai 這類支援 MCP（讓 AI 連到外部即時資料源的標準介面）的助理，可以接上社群自架的 [onionoo MCP](../community/onionoo-mcp.md)，它把 Tor Project 的 Onionoo 公開資料接成一個網址，AI 就能查到當下、可引用的真實數字。只用 ChatGPT 網頁版的話，跳過這段即可，記得拿 AI 的回答去對照本頁底部的 Tor Metrics。
+    本題問的 relay、bridge 數量與頻寬，AI 若沒有外部資料來源，很可能憑記憶編一個給你（就是本頁開頭警告的那種錯）。如果你用的是 claude.ai 這類支援 MCP（讓 AI 連到外部即時資料源的標準介面）的助理，可以接上社群自架的 [onionoo MCP](https://anoni.net/projects/onionoo-mcp/){target="_blank"}，它把 Tor Project 的 Onionoo 公開資料接成一個網址，AI 就能查到當下、可引用的真實數字。只用 ChatGPT 網頁版的話，跳過這段即可，記得拿 AI 的回答去對照本頁底部的 Tor Metrics。
 
 ```text
 【數位環境 3／VPN 合法性與可用性】在目的地使用 VPN 是否合法？WireGuard、
@@ -201,7 +201,7 @@ CIVICUS Monitor 評級。是否有 foreign-agent／NGO 註冊法、誹謗或冒�
 - [威脅模型](../basics/threat-model.md)：先想清楚對手是誰、能取得什麼。
 - [用 AI 工作時怎麼避免資料外洩](../tools/ai-privacy.md)：這頁的兩個提醒框在那邊有完整版，包含消費版與企業版的分野、資料保留期限與該問供應商的問題。
 - [什麼是 OONI](../tools/what-is-ooni.md)、[什麼是 Tor](../tools/what-is-tor.md)、[Snowflake](../tools/tor-snowflake.md)、[通訊軟體比較](../tools/messaging-comparison.md)
-- [onionoo MCP：Tor 中繼節點查詢服務](../community/onionoo-mcp.md)：把上面【數位環境 2】那題交給 AI 自己查。接上這個網址，AI 助理就能用中文問出某地有幾個 Tor 節點、頻寬多少、落在哪些電信網路，數字來自 Tor Project 官方 Onionoo。
+- [onionoo MCP：Tor 中繼節點查詢服務](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：把上面【數位環境 2】那題交給 AI 自己查。接上這個網址，AI 助理就能用中文問出某地有幾個 Tor 節點、頻寬多少、落在哪些電信網路，數字來自 Tor Project 官方 Onionoo。
 - [一般人平常該做到什麼](./everyday-baseline.md)：不分身分都要做到的那些，這一頁假設你已經做到
 - [這頁背後的想法（blog）](../blog/posts/travel-ai-briefing.md)：為什麼把該問的問題打包成 prompt，帶回去問你自己信任的 AI。
 
