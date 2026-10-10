@@ -47,7 +47,7 @@ CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE
 # 安裝 uv (如果尚未安裝)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 同步文件網站的依賴
+# 同步文件網站的相依套件
 cd docs && uv sync
 ```
 
@@ -128,17 +128,17 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 
 ## 拆出去的工具
 
-文件站觀測頁用到的兩個工具在 2026-10 拆成獨立的 repo，commit 歷史一併帶過去，開發說明各自寫在那邊的 `AGENTS.md` 與 README。
+文件站原本放在 repo 裡的兩個觀測工具在 2026-10 拆成獨立的 repo，commit 歷史一併帶過去，開發說明各自寫在那邊的 `AGENTS.md` 與 README。
 
 | 工具 | repo | 授權 | 跟文件站的關係 |
 |------|------|------|----------------|
-| Pulse | [`anoni-net/pulse`](https://github.com/anoni-net/pulse) | MIT | 提供 `https://anoni.net/api/` 的資料，「Tor Relays 觀測點」等頁的 Vega-Lite 圖表直接呼叫這個 API |
-| ASN Coverage | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 | 「ASNs 自治網路觀測資料分析」與 `community/asn-coverage-howto` 的分析與操作步驟來自這個工具 |
+| Pulse | [`anoni-net/pulse`](https://github.com/anoni-net/pulse) | MIT | 提供 `https://anoni.net/api/` 的資料。原本的「Tor Relays 觀測點」搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，文件站只剩部落格文章連到 API 說明 |
+| ASN Coverage | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 | 「ASN 自治網路觀測資料分析」與 `community/asn-coverage-howto` 的分析與操作步驟來自這個工具 |
 
 兩者都沒有讀這個 repo 的檔案，文件站也沒有讀它們的產出，只透過 API 網址與頁面連結銜接。
 
 ## 程式碼風格
 
 - 文件：使用 `tools/docs_style_lint.py`，規則出自貢獻者百科，三語系都掃。error 級擋 merge，warn 級只提醒
-- 使用 uv 管理所有 Python 專案依賴
+- 使用 uv 管理所有 Python 專案的相依套件
 - 所有專案使用 Python 3.12+

@@ -2,7 +2,7 @@
 
 > 推廣與翻譯匿名網路 Tor、Tails 與 OONI 觀測工具
 
-「匿名網路社群 anoni.net」的核心文件系統。倉庫裡有兩個目錄：對外的多語系文件網站，以及支撐它的共用腳本與 CI 檢查。
+「匿名網路社群 anoni.net」的核心文件系統。儲存庫裡有兩個目錄：對外的多語系文件網站，以及支撐它的共用腳本與 CI 檢查。
 
 ## 📚 專案結構
 
@@ -108,7 +108,7 @@ node tools/test_sw_offline.mjs
 
 ### 分支模型
 
-`main` 是開發分支，`docs` 是建置觸發分支。PR 合併進 `main` 只代表內容進了倉庫，正式站讀取的來源是 S3，需要推 `docs` 分支才會建置並上傳：
+`main` 是開發分支，`docs` 是建置觸發分支。PR 合併進 `main` 只代表內容進了儲存庫，正式站讀取的來源是 S3，需要推 `docs` 分支才會建置並上傳：
 
 ```bash
 git push origin origin/main:refs/heads/docs

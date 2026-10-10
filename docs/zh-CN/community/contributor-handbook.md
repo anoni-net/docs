@@ -1,6 +1,6 @@
 ---
 title: 贡献者百科
-description: 文档站的文件命名、链接规则、PR 流程、Issue 分类与翻译流程，以及新贡献者第一周会碰到的疑问。写作风格规范在社群首页。
+description: 文档站的文件命名、链接与文章格式、PR 流程、Issue 分类与翻译流程，以及新贡献者第一周会碰到的疑问。写作风格规范在社群首页。
 icon: material/book-open-variant
 ---
 

@@ -27,7 +27,7 @@ The region we cover is Mainland China, Hong Kong, Macau, Singapore, Malaysia, Ta
 
 The writing style is set out on the community site's [writing style](https://anoni.net/en/join/writing-style/){target="_blank"} page, and file formats and the pull request flow in the [Contributor Handbook](../community/contributor-handbook.md). Every change goes through a pull request, a linter checks punctuation and phrasing when it is submitted, and a maintainer reviews it before merging.
 
-Contributors may use any AI tool to help with writing or translation, and AI output goes through the same process as anything written by hand. Whoever opens the pull request has to open and check every number, quotation and source link, and is responsible for the content.
+Contributors may use any AI tool to help with writing or translation, and AI output goes through the same process as anything written by hand. Whoever opens the pull request has to check every number and quotation and open every source link, and is responsible for the content.
 
 We don't publish step-by-step recipes that could be misused, we don't expose the personal accounts of people whose observations we cite, and material about victims or unpublished research goes through our [sensitive material process](https://anoni.net/en/join/upload-sensitive/).
 

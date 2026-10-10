@@ -43,7 +43,7 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 
 Without it, changing a single image reference surfaces annotations for every old heading in the file, none of them related to the author's change, and the ones that do need fixing get lost among them.
 
-Rule documents spell out every banned punctuation mark and sentence pattern, so the linter flags its own rule descriptions. The writing style page on the community site, this handbook and the workspace projection are exempted by filename through the linter's `RULE_DOCS`, and the rule table and known-limits section in `tools/README.md` are wrapped in `<!-- docs-style-lint: disable -->` and `enable`. Follow the same approach when writing rule documentation, and leave the quoted examples as they are.
+Rule documents spell out every banned punctuation mark and sentence pattern, so the linter would otherwise flag its own rule descriptions. The writing style page on the community site, this handbook and the workspace projection are exempted by filename through the linter's `RULE_DOCS`, and the rule table and known-limits section in `tools/README.md` are wrapped in `<!-- docs-style-lint: disable -->` and `enable`. Follow the same approach when writing rule documentation, and leave the quoted examples as they are.
 
 ## Files and directories
 
