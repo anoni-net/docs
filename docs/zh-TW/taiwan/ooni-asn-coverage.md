@@ -46,13 +46,16 @@ icon: material/access-point-network
 
 這幾個數字合起來，說明台灣的觀測還不夠全面與多樣，無法反映完整的網路樣態。三大電信業者、有線電視寬頻、固網、第二類電信（租用電信基礎設施提供服務的業者，例如虛擬行動網路、網路電話轉售等）等，都有覆蓋不足的問題。
 
-[:material-chart-bar: 2023/12 觀察報告](https://ocf.tw/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
+2023 年之後的變化可以看社群首頁的 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/)。頁面每小時重新產生，讀取 OONI 最近 60 天的測量，對照 APNIC 估計的各網路使用者人數，列出使用者多、測量少的網路。2026/10 的資料裡，測量最多的仍是中華電信 HiNet（AS3462），中華電信行動網路（AS17421）有約 16% 的使用者，測量占比卻不到 0.1%。
+
+[:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){ .md-button .md-button--primary }
+[:material-chart-bar: 2023/12 觀察報告](https://ocf.tw/p/ooni/report/202312.html){ .md-button target="_blank" }
 
 ### 你可以補上一格
 
 要補上覆蓋，最直接的做法是讓一台裝置在還沒人測過的 ASN 上持續執行。社群維運的 OONI Run 連結 `10328` 是現成的入口，行動裝置安裝 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 之後點一次連結就完成設定，接著讓它留在背景執行。安裝前的風險前提與清單內容見 [OONI Run v2 操作說明](../tools/ooni-run-v2.md)。
 
-用行動網路的協助者特別有幫助。現有測量幾乎都落在少數固網 ASN 上，行動業者與第二類電信的資料最缺。
+用行動網路的協助者特別有幫助。現有測量幾乎都落在少數固網 ASN 上，行動業者與第二類電信的資料最缺。目前還沒有測量的網路列在 OONI 觀測涵蓋率頁的「還沒有測量的網路」。
 
 [:material-help-network: 怎麼參與觀測](../tools/ooni-run-v2.md){ .md-button }
 
@@ -107,8 +110,7 @@ icon: material/access-point-network
 
 ## 後續方向
 
-- 持續追蹤台灣 ASN 覆蓋率隨時間的變化（社群志工協作中）
-- 把 [Pulse 後端](https://anoni.net/api/readme){target="_blank"} 的觀測資料用 Vega-Lite 圖表呈現在這頁
+- 依網路類型（行動網路、家用寬頻）分開看覆蓋率。這需要原始測量裡的欄位，OONI 的彙總 API 沒有，目前只能用 [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md) 的工具手動整理
 - 與 [OONI 網站檢測清單](./ooni-checklist.md) 維護工作搭配，提升觀測品質與多樣性
 
 ## 下一步
@@ -116,7 +118,8 @@ icon: material/access-point-network
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 網站檢測清單](./ooni-checklist.md)
-- [:material-chart-bar: Tor Relays 觀測點](https://anoni.net/projects/pulse/)
+- [:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/)
+- [:material-chart-bar: Tor 中繼節點觀測](https://anoni.net/projects/pulse/)
 - [:material-database-search: ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 

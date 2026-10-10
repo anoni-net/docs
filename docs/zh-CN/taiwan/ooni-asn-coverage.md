@@ -75,13 +75,16 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 详细内容可以参考以下报告。
 
-[:material-chart-bar: 2023/12 观察报告](https://ocf.tw/p/ooni/report/202312.html){ .md-button .md-button--primary target="_blank" }
+2023 年之后的变化可以看社区首页的 [OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/)。页面每小时重新生成，读取 OONI 最近 60 天的测量，对照 APNIC 估计的各网络用户人数，列出用户多、测量少的网络。2026/10 的数据里，测量最多的仍是中华电信 HiNet（AS3462），中华电信移动网络（AS17421）有约 16% 的用户，测量占比却不到 0.1%。
+
+[:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/){ .md-button .md-button--primary }
+[:material-chart-bar: 2023/12 观察报告](https://ocf.tw/p/ooni/report/202312.html){ .md-button target="_blank" }
 
 ### 你可以补上一格
 
 要补上覆盖，最直接的做法是让一台装置在还没人测过的 ASN 上持续执行。社群维运的 OONI Run 链接 `10328` 是现成的入口，移动装置安装 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 之后点一次链接就完成设定，接着让它留在背景执行。安装前的风险前提与清单内容见 [OONI Run v2 操作说明](../tools/ooni-run-v2.md)。
 
-用移动网络的协助者特别有帮助。现有测量几乎都落在少数固网 ASN 上，移动业者与第二类电信的数据最缺。
+用移动网络的协助者特别有帮助。现有测量几乎都落在少数固网 ASN 上，移动业者与第二类电信的数据最缺。目前还没有测量的网络列在 OONI 观测覆盖率页的「还没有测量的网络」。
 
 [:material-help-network: 怎么参与观测](../tools/ooni-run-v2.md){ .md-button }
 
@@ -150,7 +153,8 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI 网站检测清单](./ooni-checklist.md)
-- [:material-chart-bar: Tor Relay 观测点](https://anoni.net/zh-cn/projects/pulse/)
+- [:material-chart-areaspline: OONI 观测覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/)
+- [:material-chart-bar: Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/)
 - [:octicons-mark-github-24: 项目研究预先准备](../community/setup-repo.md)
 - [:material-chat-question: 什么是 OONI？](../tools/what-is-ooni.md)
 
