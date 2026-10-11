@@ -409,6 +409,8 @@ plugins:
         'community/payments-research.md': 'https://anoni.net/join/payments-research/'
         'community/upload-sensitive.md': 'https://anoni.net/join/upload-sensitive/'
         'community/send-privacy.md': 'https://anoni.net/services/send/'
+        # 部落格的社群文章搬到社群首頁的動態（anoni-net/www#42），正式站與 onion 由 nginx 回 301，這裡給 IPFS 鏡像用
+        'blog/2025/07/move-to-anoni-net.md': 'https://anoni.net/updates/2025/07/move-to-anoni-net/'
         'report/index.md': 'reports/index.md'
         'report/interseclab-the-internet-coup/index.md': 'reports/interseclab-network-coup/index.md'
         'report/interseclab-the-internet-coup/index_1.md': 'reports/interseclab-network-coup/index_1.md'
