@@ -10,7 +10,7 @@ What do you reach for when a document cannot be exposed? Google Docs is the smoo
 
 [CryptPad](https://cryptpad.org/){target="_blank"} is one of the few collaborative office suites where the server genuinely cannot see the content. It is developed by [XWiki SAS](https://xwiki.com/){target="_blank"} in France under the [AGPLv3](https://github.com/cryptpad/cryptpad/blob/main/LICENSE){target="_blank"}. Content is encrypted in your browser and the server receives ciphertext, while the feature set still covers most of what people use Google Workspace for.
 
-The community instance at [cryptpad.anoni.net](https://cryptpad.anoni.net/){target="_blank"} ships built-in Traditional Chinese (`zh_Hant`) as of CryptPad 2026.5.0, released on 13 May 2026, so users across Taiwan, Hong Kong, Macau, and the diaspora can work in the interface without learning English menus first. The translation history is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md).
+The community instance at [cryptpad.anoni.net](https://cryptpad.anoni.net/){target="_blank"} ships built-in Traditional Chinese (`zh_Hant`) as of CryptPad 2026.5.0, released on 13 May 2026, so users across Taiwan, Hong Kong, Macau, and the diaspora can work in the interface without learning English menus first. The translation history is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}.
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/cryptpad-drive-zh-hant.png" target="_blank">
@@ -93,7 +93,7 @@ CryptPad ships both Chinese interfaces as of 2026.5.0:
 
 Switch from the settings page after signing in, or append `?lang=zh_Hant` or `?lang=zh_Hans` to the URL. Accounts previously set to `zh_CN` or `zh_TW` fall back to the corresponding new locale codes automatically rather than reverting to English after the upgrade.
 
-The community put two and a half years of upstream translation work into `zh_Hant`, and the account from first pull request to built-in locale is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md). To help with new strings or fix a typo, the [zh_Hant project on Weblate](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} is where that happens.
+The community put two and a half years of upstream translation work into `zh_Hant`, and the account from first pull request to built-in locale is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}. To help with new strings or fix a typo, the [zh_Hant project on Weblate](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} is where that happens.
 
 ## Compared with other collaboration tools
 
@@ -190,6 +190,6 @@ Further reading: [how end-to-end encryption works](../advanced/e2ee.md) covers t
 
 - [:material-account-group: Community services](https://anoni.net/en/services/){target="_blank"}
 - [:material-translate-variant: Localization and translation](../community/i18n.md)
-- [:material-file-document: CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md)
+- [:material-file-document: CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}
 
 </div>

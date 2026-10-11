@@ -405,6 +405,11 @@ plugins:
         'blog/2025/06/updates-202505.md': 'https://anoni.net/en/updates/2025/06/updates-202505/'
         'blog/2025/05/updates-202504.md': 'https://anoni.net/en/updates/2025/05/updates-202504/'
         'blog/2025/03/updates-202503.md': 'https://anoni.net/en/updates/2025/03/updates-202503/'
+        'blog/2026/10/2026-anoni-net-news-launch.md': 'https://anoni.net/en/updates/2026/10/2026-anoni-net-news-launch/'
+        'blog/2026/05/2026-campus-tor-relay-template-kit.md': 'https://anoni.net/en/updates/2026/05/2026-campus-tor-relay-template-kit/'
+        'blog/2026/05/2026-cryptpad-zh-hant.md': 'https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/'
+        'blog/2026/05/2026-onionoo-mcp-public.md': 'https://anoni.net/en/updates/2026/05/2026-onionoo-mcp-public/'
+        'blog/2026/09/asian-diceware.md': 'https://anoni.net/en/updates/2026/09/asian-diceware/'
         # offline-install 併進 offline（安裝說明與離線內容管理收成一頁）
         'offline-install.md': 'offline.md'
         # 2026 flat → categorised restructure (3aa2a65). Pages whose English content

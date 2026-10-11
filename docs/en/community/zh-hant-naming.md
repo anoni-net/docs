@@ -45,7 +45,7 @@ Both names carry a position and neither is neutral. Our community adopting 正�
 
 Operating systems, third-party software, and the media generally still use 繁體中文. Asking everyone to change is neither realistic nor our aim. **Using the script's own name in the translations and content we contribute ourselves** is something anyone can do in passing, and it accumulates.
 
-CryptPad 2026.5.0 changing its menu entry from 中文(繁體) to 中文(正體) is one concrete result. The story is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md).
+CryptPad 2026.5.0 changing its menu entry from 中文(繁體) to 中文(正體) is one concrete result. The story is in [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}.
 
 ## How this relates to `zh_Hant` and `zh_Hans`
 
@@ -93,5 +93,5 @@ https://anoni.net/docs/community/zh-hant-naming/
 ## Related
 
 - [Localization and translation](./i18n.md)
-- [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](../blog/posts/2026-cryptpad-zh-hant.md)
+- [CryptPad 2026.5.0 ships Traditional Chinese as a built-in locale](https://anoni.net/en/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}
 - [Contributor handbook](./contributor-handbook.md)

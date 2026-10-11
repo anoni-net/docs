@@ -10,7 +10,7 @@ icon: material/file-lock-outline
 
 [CryptPad](https://cryptpad.org/){target="_blank"} 是少数真正让服务器看不到内容的在线协作办公套件。由法国 [XWiki SAS](https://xwiki.com/){target="_blank"} 开发，采用 [AGPLv3](https://github.com/cryptpad/cryptpad/blob/main/LICENSE){target="_blank"} 授权。内容在你浏览器端就完成加密，服务器收到的是密文，但功能完整到一个界面就能涵盖大部分 Google Workspace 的常用情境。
 
-社区自建的 [cryptpad.anoni.net](https://cryptpad.anoni.net/){target="_blank"} 自 CryptPad 2026.5.0（2026/05/13）起，界面内建简体（zh_Hans）与正体（zh_Hant）中文，简体与正体中文用户打开界面即可上手，不必先学英文菜单。详细的翻译历程见 [CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](../blog/posts/2026-cryptpad-zh-hant.md)。
+社区自建的 [cryptpad.anoni.net](https://cryptpad.anoni.net/){target="_blank"} 自 CryptPad 2026.5.0（2026/05/13）起，界面内建简体（zh_Hans）与正体（zh_Hant）中文，简体与正体中文用户打开界面即可上手，不必先学英文菜单。详细的翻译历程见 [CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](https://anoni.net/zh-cn/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}。
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/cryptpad-drive-zh-hant.png" target="_blank">
@@ -95,7 +95,7 @@ CryptPad 自 2026.5.0 起内建以下中文界面：
 
 切换方式：登录后右上角设置页可选语言，或于 URL 加 `?lang=zh_Hans`、`?lang=zh_Hant`。旧有以 `zh_CN`、`zh_TW` 为设置值的帐号会自动 fallback 到对应的新语系码，不会在升级后退回英文。
 
-社区为 zh_Hant 投入两年半的上游翻译历程，从第一个 PR 到内建语系的细节见 [CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](../blog/posts/2026-cryptpad-zh-hant.md)。要协助补新版本字符串或修错字，到 [Weblate 上的 zh_Hant 项目](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} 即可。
+社区为 zh_Hant 投入两年半的上游翻译历程，从第一个 PR 到内建语系的细节见 [CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](https://anoni.net/zh-cn/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}。要协助补新版本字符串或修错字，到 [Weblate 上的 zh_Hant 项目](https://weblate.cryptpad.org/projects/cryptpad/-/zh_Hant/){target="_blank"} 即可。
 
 ## CryptPad vs 其他协作工具
 
@@ -194,6 +194,6 @@ CryptPad 自 2026.5.0 起内建以下中文界面：
 
 - [:material-account-group: 社区自建服务](https://anoni.net/zh-cn/services/){target="_blank"}
 - [:material-translate-variant: 中文化与文档翻译](../community/i18n.md)
-- [:material-file-document: CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](../blog/posts/2026-cryptpad-zh-hant.md)
+- [:material-file-document: CryptPad 2026.5.0 上线：正体中文（zh_Hant）正式收进内建语系](https://anoni.net/zh-cn/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}
 
 </div>
