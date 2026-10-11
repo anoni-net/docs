@@ -154,7 +154,7 @@ This report's data is a snapshot taken on 2026-06-01, pulled link by link from O
 - [OONI Run, the official guide](https://ooni.org/support/ooni-run/){target="_blank"}
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"}
 - [OONI data and the public dataset](https://ooni.org/data/){target="_blank"}
-- [onionoo MCP is now public: query the Tor relay network in plain language](./2026-onionoo-mcp-public.md)
+- [onionoo MCP is now public: query the Tor relay network in plain language](https://anoni.net/en/updates/2026/05/2026-onionoo-mcp-public/){target="_blank"}
 
 [^1]: [OONI API (aggregation endpoint)](https://api.ooni.org/){target="_blank"} - OONI
 

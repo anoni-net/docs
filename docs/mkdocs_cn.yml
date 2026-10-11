@@ -393,6 +393,10 @@ plugins:
         'blog/2025/06/updates-202505.md': 'https://anoni.net/zh-cn/updates/2025/06/updates-202505/'
         'blog/2025/05/updates-202504.md': 'https://anoni.net/zh-cn/updates/2025/05/updates-202504/'
         'blog/2025/03/updates-202503.md': 'https://anoni.net/zh-cn/updates/2025/03/updates-202503/'
+        'blog/2026/10/2026-anoni-net-news-launch.md': 'https://anoni.net/zh-cn/updates/2026/10/2026-anoni-net-news-launch/'
+        'blog/2026/05/2026-cryptpad-zh-hant.md': 'https://anoni.net/zh-cn/updates/2026/05/2026-cryptpad-zh-hant/'
+        'blog/2026/05/2026-onionoo-mcp-public.md': 'https://anoni.net/zh-cn/updates/2026/05/2026-onionoo-mcp-public/'
+        'blog/2026/09/asian-diceware.md': 'https://anoni.net/zh-cn/updates/2026/09/asian-diceware/'
         # 2026 扁平结构 → 7 分类改版（ceaf889）旧网址止血
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'

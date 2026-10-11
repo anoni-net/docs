@@ -45,7 +45,7 @@ Asian loanwords are only about 3.8% of the list, so a six-word passphrase carrie
 
 The wordlist is open source (code under MIT, the wordlist data under CC-BY-4.0); the source and full list are at [GitHub anoni-net/asian-diceware](https://github.com/anoni-net/asian-diceware){target="_blank"}. The list itself only makes the individual words easy to recognize and remember; it provides no encryption. The real security comes from how you generate, store, and use the passphrase.
 
-For how the words were picked, the breakdown by source language, and what the build pipeline throws out, see [How 292 Asian loanwords ended up in an English passphrase wordlist](../blog/posts/asian-diceware.md).
+For how the words were picked, the breakdown by source language, and what the build pipeline throws out, see [How 292 Asian loanwords ended up in an English passphrase wordlist](https://anoni.net/en/updates/2026/09/asian-diceware/){target="_blank"}.
 
 ## How to use it
 

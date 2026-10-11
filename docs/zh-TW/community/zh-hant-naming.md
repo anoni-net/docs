@@ -41,7 +41,7 @@ anoni.net 社群在自己撰寫、翻譯、貢獻給上游的內容裡，盡量�
 
 OS、第三方軟體、媒體仍普遍使用「繁體中文」。要求所有人改變稱呼不現實，也不是我們的目標。但**在我們自己貢獻的翻譯與內容裡，把字系叫回它原本的名字**，是隨手能做、長期累積會產生影響的工作。
 
-CryptPad 2026.5.0 介面選單從「中文(繁體)」改成「中文(正體)」，就是這個工作的一個具體成果，詳見 [CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](../blog/posts/2026-cryptpad-zh-hant.md)。
+CryptPad 2026.5.0 介面選單從「中文(繁體)」改成「中文(正體)」，就是這個工作的一個具體成果，詳見 [CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](https://anoni.net/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}。
 
 ## 跟 zh_Hant / zh_Hans 的關係
 
@@ -89,5 +89,5 @@ https://anoni.net/docs/community/zh-hant-naming/
 ## 相關閱讀
 
 - [中文化與文件翻譯](./i18n.md)
-- [CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](../blog/posts/2026-cryptpad-zh-hant.md)
+- [CryptPad 2026.5.0 上線：正體中文（zh_Hant）正式收進內建語系](https://anoni.net/updates/2026/05/2026-cryptpad-zh-hant/){target="_blank"}
 - [貢獻者百科](./contributor-handbook.md)
