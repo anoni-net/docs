@@ -307,16 +307,9 @@
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
 	#近期公告
-/blog/2025/01/project-relaunch-2025/ -> /blog/
-/blog/2025/01/專案重啟-2025/
-	#ASNs-自治網路觀測資料分析
-	#OONI-網站檢測清單
-	#中文化與文件翻譯
-	#參與方式
-	#專案計畫
-	#專案重啟-2025
-	#活動預告
-/blog/2025/01/项目重启-2025/ -> /blog/
+/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/updates/2025/01/project-relaunch-2025/
+/blog/2025/01/專案重啟-2025/ -> https://anoni.net/updates/2025/01/project-relaunch-2025/
+/blog/2025/01/项目重启-2025/ -> https://anoni.net/updates/2025/01/project-relaunch-2025/
 /blog/2025/02/g0v-hackath65n/ -> https://anoni.net/updates/2025/02/g0v-hackath65n/
 /blog/2025/02/rightscon25-tor-tails-ooni/ -> https://anoni.net/updates/2025/02/rightscon25-tor-tails-ooni/
 /blog/2025/03/2025-probe-security-without-identification/
@@ -452,25 +445,10 @@
 	#協助我們翻譯全新的支援入口網站
 	#所有使用者文件的一個家
 	#社群共同的努力
-/blog/2025/12/ntnu-nz/
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
-	#常見踩雷
-	#為什麼想在學校架-Tor-Relay
-	#社團與推廣讓-Tor-在校園裡走出標籤
-	#結語
-	#給其他大學的行動建議與踩雷提醒
-	#行動建議
-	#行政流程真的很麻煩但不是死路
-	#跟學校如何談關鍵是讓對方能交代
+/blog/2025/12/ntnu-nz/ -> https://anoni.net/updates/2025/12/ntnu-nz/
 /blog/2026/01/2025to2026/ -> https://anoni.net/updates/2026/01/2025to2026/
 /blog/2026/01/g0v-hackath71n/ -> https://anoni.net/updates/2026/01/g0v-hackath71n/
-/blog/2026/02/2026-discord-matrix-statement/
-	#在隱私與社群品質之間為什麼目前採申請制帳號
-	#對正在使用-Discord-的朋友說的話
-	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
-	#我們真正在意的是誰決定規則誰拿走資料
-	#為什麼我們選擇自架-Matrixtuwunel--imanoninet
+/blog/2026/02/2026-discord-matrix-statement/ -> https://anoni.net/updates/2026/02/2026-discord-matrix-statement/
 /blog/2026/02/ooni-全新的匿名凭证系统/ -> /blog/
 /blog/2026/02/ooni-全新的匿名憑證系統/
 	#OONI-全新的匿名憑證系統
@@ -603,14 +581,7 @@
 	#接下來社群想推進什麼
 	#相關閱讀
 /blog/2026/05/2026-onionoo-mcp-public/ -> https://anoni.net/updates/2026/05/2026-onionoo-mcp-public/
-/blog/2026/05/iran-blackout-webtunnel/
-	#不只是伊朗
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
-	#在台灣你也可以架一個
-	#封了-80-多天的網路
-	#為什麼是-WebTunnel
-	#相關閱讀
-	#社群的-WebTunnel-在伊朗重新開放網路後流量跳升
+/blog/2026/05/iran-blackout-webtunnel/ -> https://anoni.net/updates/2026/05/iran-blackout-webtunnel/
 /blog/2026/05/report-madlink/
 	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#報告找到了什麼
@@ -966,28 +937,25 @@
 	#2025
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
 	#OnionMasqTor-為-VPN-式流量隔離實驗修正
+	#Tails-618-支援-WebTunnel-橋接協定
 	#Tails-70-發佈
 	#Tails-70-發佈第二個最終測試版本70rc2
 	#Tails-71-發佈與說明
 	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
+	#WebTunnel-橋接方式
+	#其他更新
 	#技術分析報告網路政變
+	#新功能
 	#更新訊息
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
 	#追憶
 /blog/archive/2025/page/2/
 	#2025
 	#Arti-141-更新發佈
-	#Tails-618-支援-WebTunnel-橋接協定
-	#WebTunnel-橋接方式
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
-	#其他更新
 	#去識別化的觀測資料安全
-	#專案重啟-2025
-	#新功能
 	#為什麼要為-OONI-建立匿名憑證系統
 	#發佈新-OONI-Explorer-主題審查頁面
 /blog/archive/2026/
@@ -1018,25 +986,22 @@
 	#2026
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
 	#Cure53-完成-Tor-VPN-安全稽核
+	#GNOME-Secrets
 	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#OONI-新版-Probe-Desktop-測試邀請
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
+	#Tails-76-發佈說明
 	#Unredacted-如何幫受審查地區的人連上開放網路
 	#一台會遺忘的伺服器探索-Stateless-Relays
 	#什麼是差分隱私
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
+	#新功能
+	#自動-Tor-橋接器
 	#虛擬資產服務法草案行政院通過了什麼還差什麼
 /blog/archive/2026/page/4/
 	#2026
 	#Arti-210-更新發佈
-	#GNOME-Secrets
 	#OONI-全新的匿名憑證系統
-	#Tails-76-發佈說明
-	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
-	#我們真正在意的是誰決定規則誰拿走資料
-	#新功能
 	#用-ADR-記錄決策Tor-系統管理團隊的新做法
-	#自動-Tor-橋接器
 /blog/category/ooni/
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
 	#OONI
@@ -1056,7 +1021,6 @@
 /blog/category/relay/
 	#Relay
 	#一台會遺忘的伺服器探索-Stateless-Relays
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
 /blog/category/tails/
 	#GNOME-Secrets
 	#Tails
@@ -1075,20 +1039,19 @@
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
 	#追憶
 /blog/category/tor/
+	#Arti-210-更新發佈
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
 	#Cure53-完成-Tor-VPN-安全稽核
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#Tor
 	#Unredacted-如何幫受審查地區的人連上開放網路
 	#一台會遺忘的伺服器探索-Stateless-Relays
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把匿名網路畫成一顆地球互動區上線以及我們在開放資料上撞到的牆
 	#用-ADR-記錄決策Tor-系統管理團隊的新做法
 /blog/category/tor/page/2/
 	#Arti-141-更新發佈
-	#Arti-210-更新發佈
 	#OnionMasqTor-為-VPN-式流量隔離實驗修正
 	#Tor
 	#Tor-使用者文件的新家
@@ -1096,9 +1059,7 @@
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
-/blog/category/公告/
-	#公告
-	#專案重啟-2025
+/blog/category/公告/ -> https://anoni.net/updates/
 /blog/category/技術/
 	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#OONI-全新的匿名憑證系統
@@ -1125,9 +1086,9 @@
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
+	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#Unredacted-如何幫受審查地區的人連上開放網路
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把匿名網路畫成一顆地球互動區上線以及我們在開放資料上撞到的牆
 	#撤回自己寫過的話近兩週更正了哪些內容
@@ -1137,10 +1098,10 @@
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
 	#Cure53-完成-Tor-VPN-安全稽核
 	#GNOME-Secrets
-	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#OONI-新版-Probe-Desktop-測試邀請
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Tails-76-發佈說明
+	#Tor-使用者文件的新家
 	#一台會遺忘的伺服器探索-Stateless-Relays
 	#新功能
 	#更新
@@ -1148,49 +1109,34 @@
 	#自動-Tor-橋接器
 	#虛擬資產服務法草案行政院通過了什麼還差什麼
 /blog/category/更新/page/3/
+	#Arti-141-更新發佈
 	#Tails-618-支援-WebTunnel-橋接協定
 	#Tails-70-發佈
 	#Tails-70-發佈第二個最終測試版本70rc2
 	#Tails-71-發佈與說明
-	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
 	#WebTunnel-橋接方式
+	#共同成長自-Tails-與-Tor-合併以來的成果
 	#其他更新
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
-	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
-	#我們真正在意的是誰決定規則誰拿走資料
 	#技術分析報告網路政變
 	#新功能
 	#更新
 	#更新訊息
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
 	#追憶
-/blog/category/更新/page/4/
-	#Arti-141-更新發佈
-	#共同成長自-Tails-與-Tor-合併以來的成果
-	#更新
 /blog/category/活動/
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
 	#活動
 /blog/category/社群/
 	#202609-文件站更新回顧
 	#一段預告過的降速813-用-OONI-記錄北部行動網路的-30-分鐘
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
-	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
 	#從-OONI-公開資料看-813-北部行動網路降速的-30-分鐘
-	#我們真正在意的是誰決定規則誰拿走資料
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
 	#社群
 	#虛擬資產服務法草案行政院通過了什麼還差什麼
-/blog/category/社群/page/2/
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
-	#專案重啟-2025
-	#社群
 /blog/category/翻譯文章/
 	#Cure53-完成-Tor-VPN-安全稽核
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
@@ -1274,39 +1220,37 @@
 /blog/page/3/
 	#Arti-220-釋出HTTP-CONNECTRPC-與-relay-開發進展
 	#Cure53-完成-Tor-VPN-安全稽核
+	#GNOME-Secrets
 	#InterSecLab-MADLink-翻譯上線凌華-1708-台-CSA-7400-進入哈薩克審查系統社群同步整理編輯觀察
 	#OONI-新版-Probe-Desktop-測試邀請
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
+	#Tails-76-發佈說明
 	#Unredacted-如何幫受審查地區的人連上開放網路
 	#一台會遺忘的伺服器探索-Stateless-Relays
 	#什麼是差分隱私
-	#伊朗封網-80-多天後重新開放流量湧進社群架設的-Tor-WebTunnel
+	#新功能
+	#自動-Tor-橋接器
 	#虛擬資產服務法草案行政院通過了什麼還差什麼
 	#近期公告
 /blog/page/4/
 	#Arti-210-更新發佈
-	#GNOME-Secrets
 	#OONI-全新的匿名憑證系統
 	#OnionMasqTor-為-VPN-式流量隔離實驗修正
+	#Tails-70-發佈
 	#Tails-71-發佈與說明
-	#Tails-76-發佈說明
 	#Tor-使用者文件的新家
-	#前言為什麼在校園談匿名網路
-	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
-	#從-Discord-年齡驗證談起我們為什麼自架-Matrix
-	#我們真正在意的是誰決定規則誰拿走資料
+	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
 	#技術分析報告網路政變
-	#新功能
 	#更新訊息
 	#用-ADR-記錄決策Tor-系統管理團隊的新做法
-	#自動-Tor-橋接器
+	#貪腐與控管土庫曼如何將網路審查變成一門生意
 	#近期公告
+	#追憶
 /blog/page/5/
+	#Arti-141-更新發佈
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
 	#Tails-618-支援-WebTunnel-橋接協定
-	#Tails-70-發佈
 	#Tails-70-發佈第二個最終測試版本70rc2
-	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
 	#WebTunnel-橋接方式
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
@@ -1315,12 +1259,6 @@
 	#新功能
 	#為什麼要為-OONI-建立匿名憑證系統
 	#發佈新-OONI-Explorer-主題審查頁面
-	#貪腐與控管土庫曼如何將網路審查變成一門生意
-	#近期公告
-	#追憶
-/blog/page/6/
-	#Arti-141-更新發佈
-	#專案重啟-2025
 	#近期公告
 /changelog/
 	#作業系統
@@ -2123,16 +2061,9 @@
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#Thirty-Minutes-of-Mobile-Throttling-in-Northern-Taiwan-Read-from-OONIs-Public-Data
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
-/en/blog/2025/01/project-relaunch-2025/
-	#ASN-Autonomous-System-Network-Observation-Data-Analysis
-	#Event-Announcements
-	#How-to-Participate
-	#Localization-and-Document-Translation
-	#OONI-Website-Testing-List
-	#Project-Plan
-	#Project-Relaunch-2025
-/en/blog/2025/01/專案重啟-2025/ -> /en/blog/
-/en/blog/2025/01/项目重启-2025/ -> /en/blog/
+/en/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
+/en/blog/2025/01/專案重啟-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
+/en/blog/2025/01/项目重启-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
 /en/blog/2025/02/g0v-hackath65n/ -> https://anoni.net/en/updates/2025/02/g0v-hackath65n/
 /en/blog/2025/02/rightscon25-tor-tails-ooni/ -> https://anoni.net/en/updates/2025/02/rightscon25-tor-tails-ooni/
 /en/blog/2025/03/2025-probe-security-without-identification/ -> /en/blog/
@@ -2164,25 +2095,10 @@
 	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 /en/blog/2025/10/tails-7-1-released/ -> /en/blog/
 /en/blog/2025/10/tor-support-new-home/ -> /en/blog/
-/en/blog/2025/12/ntnu-nz/
-	#Actionable-Advice
-	#Common-Pitfalls
-	#Conclusion
-	#How-Did-He-Talk-to-the-University-The-Key-Wasnt-Persuasion-but-Giving-Them-Something-They-Could-Account-For
-	#Practical-Advice-and-Pitfalls-for-Others
-	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
-	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
-	#Student-Organizations-and-Outreach-Helping-Tor-Step-Out-of-Its-Label-on-Campus
-	#The-Administrative-Process-Is-Truly-a-Hassle-but-Not-a-Dead-End
-	#Why-Set-Up-a-Tor-Relay-at-a-University
+/en/blog/2025/12/ntnu-nz/ -> https://anoni.net/en/updates/2025/12/ntnu-nz/
 /en/blog/2026/01/2025to2026/ -> https://anoni.net/en/updates/2026/01/2025to2026/
 /en/blog/2026/01/g0v-hackath71n/ -> https://anoni.net/en/updates/2026/01/g0v-hackath71n/
-/en/blog/2026/02/2026-discord-matrix-statement/
-	#A-word-to-people-who-use-Discord
-	#Accounts-need-a-registration-code-and-that-is-a-deliberate-trade-off
-	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
-	#The-rules-and-the-data-belong-to-whoever-runs-the-server
-	#Why-we-self-host-Matrix-tuwunel--imanoninet
+/en/blog/2026/02/2026-discord-matrix-statement/ -> https://anoni.net/en/updates/2026/02/2026-discord-matrix-statement/
 /en/blog/2026/02/ooni-全新的匿名凭证系统/ -> /en/blog/
 /en/blog/2026/02/ooni-全新的匿名憑證系統/ -> /en/blog/
 /en/blog/2026/03/arti-2-2-0-released-http-connect-rpc-and-relay-development/
@@ -2256,14 +2172,7 @@
 	#What-Reitman-compiles-a-decade-plus-of-financial-censorship-cases
 	#What-the-community-wants-to-advance-next
 /en/blog/2026/05/2026-onionoo-mcp-public/ -> https://anoni.net/en/updates/2026/05/2026-onionoo-mcp-public/
-/en/blog/2026/05/iran-blackout-webtunnel/
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
-	#More-than-80-days-offline
-	#Not-just-Iran
-	#Related-reading
-	#Run-one-from-your-region
-	#Traffic-jumped-once-Iran-reopened
-	#Why-WebTunnel
+/en/blog/2026/05/iran-blackout-webtunnel/ -> https://anoni.net/en/updates/2026/05/iran-blackout-webtunnel/
 /en/blog/2026/05/report-madlink/
 	#Acknowledgements-and-how-to-join
 	#Further-reading
@@ -2550,9 +2459,6 @@
 /en/blog/2026/10/2026-anoni-net-news-launch/ -> https://anoni.net/en/updates/2026/10/2026-anoni-net-news-launch/
 /en/blog/archive/2025/
 	#2025
-	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
-	#Project-Relaunch-2025
-	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
 	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 /en/blog/archive/2026/
 	#2026
@@ -2583,7 +2489,6 @@
 /en/blog/archive/2026/page/3/
 	#2026
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Arti-220-better-network-fit-now-stronger-Tor-plumbing-later
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Learning-from-TPAs-ADR-model
@@ -2596,47 +2501,27 @@
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#Why-this-is-worth-translating
 	#Why-this-one-matters-especially-in-regional-context
-/en/blog/archive/2026/page/4/
-	#2026
-	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
-	#The-rules-and-the-data-belong-to-whoever-runs-the-server
 /en/blog/category/community/
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Brief-yourself-before-you-travel--take-the-right-questions-to-your-own-AI
 	#Community
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
-	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
 	#Recording-30-Minutes-of-Northern-Taiwans-Mobile-Networks-During-an-Announced-Throttle-on-13-August
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#Taiwans-Virtual-Asset-Service-Bill-What-the-Cabinet-Approved-and-What-Happens-Next
-	#The-rules-and-the-data-belong-to-whoever-runs-the-server
 	#Thirty-Minutes-of-Mobile-Throttling-in-Northern-Taiwan-Read-from-OONIs-Public-Data
-/en/blog/category/community/page/2/
-	#Community
-	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
-	#Project-Relaunch-2025
-	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
 /en/blog/category/event/ -> https://anoni.net/en/updates/
 /en/blog/category/events/ -> https://anoni.net/en/updates/
 /en/blog/category/news/
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Docs-site-update-review-September-2026
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
-	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
 	#How-Unredacted-Helps-People-in-Censored-Regions-Reach-the-Open-Internet
 	#MADLink-Mandarin-Translation-is-Live-with-an-Editorial-Observation-Page-on-Taiwans-Response
 	#News
-	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
-	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
 	#Taiwans-Virtual-Asset-Service-Bill-What-the-Cabinet-Approved-and-What-Happens-Next
 	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
-	#The-rules-and-the-data-belong-to-whoever-runs-the-server
-/en/blog/category/news/page/2/
-	#News
-	#Project-Relaunch-2025
 /en/blog/category/observation/
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Observation
@@ -2676,7 +2561,6 @@
 	#What-is-Differential-Privacy
 /en/blog/category/relay/
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Relay
 	#Three-deployment-paths-three-trade-offs
 	#What-stateless-relay-changes-in-practice
@@ -2699,7 +2583,6 @@
 	#What-is-Differential-Privacy
 /en/blog/category/tor/
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Arti-220-better-network-fit-now-stronger-Tor-plumbing-later
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
 	#Drawing-an-anonymity-network-onto-a-globe-the-Interactive-section-and-the-open-data-walls-we-hit
@@ -2766,7 +2649,6 @@
 	#Why-this-matters-especially-in-APAC
 /en/blog/page/3/
 	#A-Server-That-Forgets-why-this-relay-design-deserves-attention
-	#After-Irans-80-day-blackout-traffic-surged-through-our-communitys-Tor-WebTunnel-bridge
 	#Arti-220-better-network-fit-now-stronger-Tor-plumbing-later
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Learning-from-TPAs-ADR-model
@@ -2774,20 +2656,13 @@
 	#Recent-Updates
 	#Tails-76-bridges-you-can-actually-find-and-a-quieter-password-manager-swap
 	#Taiwans-Virtual-Asset-Service-Bill-What-the-Cabinet-Approved-and-What-Happens-Next
+	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 	#Three-deployment-paths-three-trade-offs
 	#What-is-Differential-Privacy
 	#What-stateless-relay-changes-in-practice
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#Why-this-is-worth-translating
 	#Why-this-one-matters-especially-in-regional-context
-/en/blog/page/4/
-	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
-	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
-	#Project-Relaunch-2025
-	#Recent-Updates
-	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
-	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
-	#The-rules-and-the-data-belong-to-whoever-runs-the-server
 /en/changelog/
 	#Anonymity-tools
 	#Browsers-and-messaging-apps
@@ -6444,16 +6319,9 @@
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
 	#近期公告
-/zh-cn/blog/2025/01/project-relaunch-2025/ -> /zh-cn/blog/
-/zh-cn/blog/2025/01/專案重啟-2025/ -> /zh-cn/blog/
-/zh-cn/blog/2025/01/项目重启-2025/
-	#ASNs-自治网络观测数据分析
-	#OONI-网站检测清单
-	#中文化与文档翻译
-	#参与方式
-	#活动预告
-	#项目计划
-	#项目重启-2025
+/zh-cn/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
+/zh-cn/blog/2025/01/專案重啟-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
+/zh-cn/blog/2025/01/项目重启-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
 /zh-cn/blog/2025/02/g0v-hackath65n/ -> https://anoni.net/zh-cn/updates/2025/02/g0v-hackath65n/
 /zh-cn/blog/2025/02/rightscon25-tor-tails-ooni/ -> https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/
 /zh-cn/blog/2025/03/2025-probe-security-without-identification/
@@ -6589,25 +6457,10 @@
 	#帮助我们翻译全新的支持门户网站
 	#所有用户文档的一个家
 	#社区共同的努力
-/zh-cn/blog/2025/12/ntnu-nz/
-	#为什么想在学校架设-Tor-Relay
-	#前言为什么在校园谈匿名网络
-	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
-	#常见踩雷
-	#社团与推广让-Tor-在校园里走出标签
-	#结语
-	#给其他大学的行动建议与踩雷提醒
-	#行动建议
-	#行政流程真的很麻烦但不是死路
-	#跟学校如何谈关键是让对方能交代
+/zh-cn/blog/2025/12/ntnu-nz/ -> https://anoni.net/zh-cn/updates/2025/12/ntnu-nz/
 /zh-cn/blog/2026/01/2025to2026/ -> https://anoni.net/zh-cn/updates/2026/01/2025to2026/
 /zh-cn/blog/2026/01/g0v-hackath71n/ -> https://anoni.net/zh-cn/updates/2026/01/g0v-hackath71n/
-/zh-cn/blog/2026/02/2026-discord-matrix-statement/
-	#为什么我们选择自架-Matrixtuwunel--imanoninet
-	#从-Discord-年龄验证谈起我们为什么自架-Matrix
-	#在隐私与社群品质之间为什么目前采申请制帐号
-	#对正在使用-Discord-的朋友说的话
-	#我们真正在意的是谁决定规则谁拿走数据
+/zh-cn/blog/2026/02/2026-discord-matrix-statement/ -> https://anoni.net/zh-cn/updates/2026/02/2026-discord-matrix-statement/
 /zh-cn/blog/2026/02/ooni-全新的匿名凭证系统/
 	#OONI-全新的匿名凭证系统
 	#OONI-的凭证长什么样
@@ -6740,14 +6593,7 @@
 	#接下来社群想推进什么
 	#相关阅读
 /zh-cn/blog/2026/05/2026-onionoo-mcp-public/ -> https://anoni.net/zh-cn/updates/2026/05/2026-onionoo-mcp-public/
-/zh-cn/blog/2026/05/iran-blackout-webtunnel/
-	#不只是伊朗
-	#为什么是-WebTunnel
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
-	#你也可以架一个
-	#封了-80-多天的网络
-	#相关阅读
-	#社群的-WebTunnel-在伊朗重新开放网络后流量跳升
+/zh-cn/blog/2026/05/iran-blackout-webtunnel/ -> https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/
 /zh-cn/blog/2026/05/report-madlink/
 	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#为什么做这页观察
@@ -7103,30 +6949,27 @@
 	#2025
 	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#OnionMasqTor-为-VPN-式流量隔离实验修正
+	#Tails-618-支持-WebTunnel-桥接协议
 	#Tails-70-发布
 	#Tails-70-发布第二个最终测试版本70rc2
 	#Tails-71-发布与说明
 	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
-	#前言为什么在校园谈匿名网络
-	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
+	#WebTunnel-桥接方式
+	#其他更新
 	#技术分析报告网络政变
+	#新功能
 	#更新消息
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 	#追忆
 /zh-cn/blog/archive/2025/page/2/
 	#2025
 	#Arti-141-更新发布
-	#Tails-618-支持-WebTunnel-桥接协议
-	#WebTunnel-桥接方式
 	#为什么要为-OONI-建立匿名凭证系统
 	#介绍-oniux针对任何-Linux-应用程序的内核级别-Tor-隔离技术
-	#其他更新
 	#去识别化的观测数据安全
 	#发布新-OONI-Explorer-专题审查页面
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
-	#新功能
-	#项目重启-2025
 /zh-cn/blog/archive/2026/
 	#2026
 	#202609-文档站更新回顾
@@ -7155,25 +6998,22 @@
 	#2026
 	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#Cure53-完成-Tor-VPN-安全审计
+	#GNOME-Secrets
 	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#OONI-新版-Probe-Desktop-测试邀请
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
+	#Tails-76-发布说明
 	#Unredacted-如何帮受审查地区的人连上开放网络
 	#一台会遗忘的服务器探索-Stateless-Relays
 	#什么是差分隐私
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
+	#新功能
+	#自动-Tor-网桥
 	#虚拟资产服务法草案行政院通过了什么还差什么
 /zh-cn/blog/archive/2026/page/4/
 	#2026
 	#Arti-210-更新发布
-	#GNOME-Secrets
 	#OONI-全新的匿名凭证系统
-	#Tails-76-发布说明
-	#从-Discord-年龄验证谈起我们为什么自架-Matrix
-	#我们真正在意的是谁决定规则谁拿走数据
-	#新功能
 	#用-ADR-记录决策Tor-系统管理团队的新做法
-	#自动-Tor-网桥
 /zh-cn/blog/category/ooni/
 	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#OONI
@@ -7193,7 +7033,6 @@
 /zh-cn/blog/category/relay/
 	#Relay
 	#一台会遗忘的服务器探索-Stateless-Relays
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
 /zh-cn/blog/category/tails/
 	#GNOME-Secrets
 	#Tails
@@ -7212,6 +7051,7 @@
 	#自动-Tor-网桥
 	#追忆
 /zh-cn/blog/category/tor/
+	#Arti-210-更新发布
 	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#Cure53-完成-Tor-VPN-安全审计
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
@@ -7220,12 +7060,10 @@
 	#一台会遗忘的服务器探索-Stateless-Relays
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
 	#把匿名网络画成一颗地球互动区上线以及我们在开放数据上撞到的墙
 	#用-ADR-记录决策Tor-系统管理团队的新做法
 /zh-cn/blog/category/tor/page/2/
 	#Arti-141-更新发布
-	#Arti-210-更新发布
 	#OnionMasqTor-为-VPN-式流量隔离实验修正
 	#Tor
 	#Tor-用户文档的新家
@@ -7233,9 +7071,7 @@
 	#介绍-oniux针对任何-Linux-应用程序的内核级别-Tor-隔离技术
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
-/zh-cn/blog/category/公告/
-	#公告
-	#项目重启-2025
+/zh-cn/blog/category/公告/ -> https://anoni.net/zh-cn/updates/
 /zh-cn/blog/category/技术/
 	#Brave-用两种相反的手法抹平-GPU-指纹
 	#OONI-全新的匿名凭证系统
@@ -7262,10 +7098,10 @@
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
+	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#Unredacted-如何帮受审查地区的人连上开放网络
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
 	#把匿名网络画成一颗地球互动区上线以及我们在开放数据上撞到的墙
 	#撤回自己写过的话近两周更正了哪些内容
 	#更新
@@ -7274,10 +7110,10 @@
 	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#Cure53-完成-Tor-VPN-安全审计
 	#GNOME-Secrets
-	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#OONI-新版-Probe-Desktop-测试邀请
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Tails-76-发布说明
+	#Tor-用户文档的新家
 	#一台会遗忘的服务器探索-Stateless-Relays
 	#新功能
 	#更新
@@ -7285,49 +7121,34 @@
 	#自动-Tor-网桥
 	#虚拟资产服务法草案行政院通过了什么还差什么
 /zh-cn/blog/category/更新/page/3/
+	#Arti-141-更新发布
 	#Tails-618-支持-WebTunnel-桥接协议
 	#Tails-70-发布
 	#Tails-70-发布第二个最终测试版本70rc2
 	#Tails-71-发布与说明
-	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#WebTunnel-桥接方式
-	#从-Discord-年龄验证谈起我们为什么自架-Matrix
 	#其他更新
-	#前言为什么在校园谈匿名网络
-	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
-	#我们真正在意的是谁决定规则谁拿走数据
+	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#技术分析报告网络政变
 	#新功能
 	#更新
 	#更新消息
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 	#追忆
-/zh-cn/blog/category/更新/page/4/
-	#Arti-141-更新发布
-	#团结更强大自-Tails-Tor-合并以来我们取得的成就
-	#更新
 /zh-cn/blog/category/活动/
 	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#活动
 /zh-cn/blog/category/社区/
 	#202609-文档站更新回顾
 	#一段预告过的降速813-用-OONI-记录台湾北部移动网络的-30-分钟
-	#从-Discord-年龄验证谈起我们为什么自架-Matrix
 	#从-OONI-公开数据看-813-台湾北部移动网络降速的-30-分钟
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
 	#出国前数字安全把该问的问题带回去问你自己的-AI
-	#我们真正在意的是谁决定规则谁拿走数据
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
 	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
 	#社区
 	#虚拟资产服务法草案行政院通过了什么还差什么
-/zh-cn/blog/category/社区/page/2/
-	#前言为什么在校园谈匿名网络
-	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
-	#社区
-	#项目重启-2025
 /zh-cn/blog/category/翻译文章/
 	#Cure53-完成-Tor-VPN-安全审计
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
@@ -7411,39 +7232,37 @@
 /zh-cn/blog/page/3/
 	#Arti-220-发布HTTP-CONNECTRPC-与-relay-开发进展
 	#Cure53-完成-Tor-VPN-安全审计
+	#GNOME-Secrets
 	#InterSecLab-MADLink-翻译上线凌华-1708-台-CSA-7400-进入哈萨克斯坦审查系统社区同步整理编辑观察
 	#OONI-新版-Probe-Desktop-测试邀请
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
+	#Tails-76-发布说明
 	#Unredacted-如何帮受审查地区的人连上开放网络
 	#一台会遗忘的服务器探索-Stateless-Relays
 	#什么是差分隐私
-	#伊朗封网-80-多天后重新开放流量涌进社群架设的-Tor-WebTunnel
+	#新功能
+	#自动-Tor-网桥
 	#虚拟资产服务法草案行政院通过了什么还差什么
 	#近期公告
 /zh-cn/blog/page/4/
 	#Arti-210-更新发布
-	#GNOME-Secrets
 	#OONI-全新的匿名凭证系统
 	#OnionMasqTor-为-VPN-式流量隔离实验修正
+	#Tails-70-发布
 	#Tails-71-发布与说明
-	#Tails-76-发布说明
 	#Tor-用户文档的新家
-	#从-Discord-年龄验证谈起我们为什么自架-Matrix
-	#前言为什么在校园谈匿名网络
-	#在台师大架设-Tor-Relay一段与学校沟通留下可能性的实现经验
-	#我们真正在意的是谁决定规则谁拿走数据
+	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#技术分析报告网络政变
-	#新功能
 	#更新消息
 	#用-ADR-记录决策Tor-系统管理团队的新做法
-	#自动-Tor-网桥
+	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 	#近期公告
+	#追忆
 /zh-cn/blog/page/5/
+	#Arti-141-更新发布
 	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
 	#Tails-618-支持-WebTunnel-桥接协议
-	#Tails-70-发布
 	#Tails-70-发布第二个最终测试版本70rc2
-	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#WebTunnel-桥接方式
 	#为什么要为-OONI-建立匿名凭证系统
 	#介绍-oniux针对任何-Linux-应用程序的内核级别-Tor-隔离技术
@@ -7452,13 +7271,7 @@
 	#发布新-OONI-Explorer-专题审查页面
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#新功能
-	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 	#近期公告
-	#追忆
-/zh-cn/blog/page/6/
-	#Arti-141-更新发布
-	#近期公告
-	#项目重启-2025
 /zh-cn/changelog/
 	#先看哪一页
 	#匿名工具

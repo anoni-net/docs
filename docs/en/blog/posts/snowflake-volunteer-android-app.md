@@ -29,7 +29,7 @@ description: "Snowflake Volunteer turns being a Snowflake bridge into a single-p
     <figcaption>Image source: <a target="_blank" href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/">Tor Project Blog</a>.</figcaption>
 </figure>
 
-We've [written before](iran-blackout-webtunnel.md) that [Snowflake](../../tools/tor-snowflake.md) is the lowest-barrier way to help people reach Tor: open a browser tab, leave it running, and you're relaying anonymous traffic. On 3 August, Tor Project lowered that barrier again with **Snowflake Volunteer**, a standalone Android app whose only job is being a Snowflake bridge.
+We've [written before](https://anoni.net/en/updates/2026/05/iran-blackout-webtunnel/){target="_blank"} that [Snowflake](../../tools/tor-snowflake.md) is the lowest-barrier way to help people reach Tor: open a browser tab, leave it running, and you're relaying anonymous traffic. On 3 August, Tor Project lowered that barrier again with **Snowflake Volunteer**, a standalone Android app whose only job is being a Snowflake bridge.
 
 <!-- more -->
 
@@ -71,7 +71,7 @@ Snowflake Volunteer is on [F-Droid](https://f-droid.org/en/packages/io.bloco.sno
 ## Related reading
 
 - [Tor Snowflake bridge](../../tools/tor-snowflake.md): how the browser-tab version works, and the Hong Kong risk note
-- [After Iran's 80-day blackout, traffic surged through our community's Tor WebTunnel bridge](iran-blackout-webtunnel.md): why we already recommend Snowflake as the low-effort option
+- [After Iran's 80-day blackout, traffic surged through our community's Tor WebTunnel bridge](https://anoni.net/en/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}: why we already recommend Snowflake as the low-effort option
 - [Set up a Tor relay](https://community.torproject.org/relay/){target="_blank"}: the next step up if you want to commit a server
 
 [^1]: Based on 180 daily Snowflake broker reports covering 1 January through 30 June 2026, aggregated from the `snowflake-stats` descriptors in Tor Metrics' [CollecTor archive](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"}.

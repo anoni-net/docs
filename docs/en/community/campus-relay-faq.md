@@ -27,7 +27,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
     **Regional note**
 
-    Taiwan's first case is at the Computer Science and Information Engineering department of National Taiwan Normal University, live since November 2025. It is written up in a [guest post on the Tor Project blog](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} and in a [community interview](../blog/posts/ntnu-nz.md).
+    Taiwan's first case is at the Computer Science and Information Engineering department of National Taiwan Normal University, live since November 2025. It is written up in a [guest post on the Tor Project blog](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} and in a [community interview](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}.
 
 ??? question "Who pays for the machine, the rack space, and the electricity?"
 
@@ -184,7 +184,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
     **Precedent**
 
     - Universities worldwide run relays, including MIT, Stanford, Cambridge, and Carnegie Mellon
-    - The first case in Taiwan: [National Taiwan Normal University, live November 2025](../blog/posts/ntnu-nz.md)
+    - The first case in Taiwan: [National Taiwan Normal University, live November 2025](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}
     - The international programme: [EFF Tor University Challenge](https://toruniversity.eff.org/){target="_blank"}
 
 ## One-page summary for administration and legal counsel { #summary-for-administration-and-legal }
@@ -217,7 +217,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
     **Reference cases**
 
-    - Locally: [National Taiwan Normal University, live November 2025](../blog/posts/ntnu-nz.md)
+    - Locally: [National Taiwan Normal University, live November 2025](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}
     - Internationally: [Setting up a Tor university relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}, on the Tor Project blog
 
 !!! tip "Next step"
@@ -232,7 +232,7 @@ The regional notes throughout come from the Taiwanese case, where the first camp
 
 - [Campus Tor relay proposal template](./campus-tor-relay-proposal.md): a fork-and-fill proposal document
 - [Campus Tor relay deployment SOP](./campus-tor-relay-sop.md): the technical detail
-- [The National Taiwan Normal University interview](../blog/posts/ntnu-nz.md): the full account of the first case
+- [The National Taiwan Normal University interview](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}: the full account of the first case
 - [What is Tor](../tools/what-is-tor.md): the underlying concepts
 - [EFF Tor legal FAQ](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"}: the full legal FAQ from a US law perspective
 

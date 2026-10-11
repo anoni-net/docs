@@ -6,7 +6,7 @@ icon: material/file-document-edit-outline
 
 # :material-file-document-edit-outline: Campus Tor Relay Proposal Template
 
-This page provides a proposal document you can copy and adapt, assembled from community member NZ's work at National Taiwan Normal University. NZ took it through the full administrative process inside TANet, Taiwan's academic network, producing the country's first campus Tor relay. The account is in [an interview about setting up a Tor relay at NTNU](../blog/posts/ntnu-nz.md).
+This page provides a proposal document you can copy and adapt, assembled from community member NZ's work at National Taiwan Normal University. NZ took it through the full administrative process inside TANet, Taiwan's academic network, producing the country's first campus Tor relay. The account is in [an interview about setting up a Tor relay at NTNU](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}.
 
 If you want to do this at your own institution, you do not have to start from nothing. Copy the template, replace each `<placeholder>` with your own details, attach the [FAQ for administrators and legal counsel](./campus-relay-faq.md) and the [deployment SOP](./campus-tor-relay-sop.md), and you have a complete proposal.
 
@@ -254,7 +254,7 @@ Handling these first saves a lot of back and forth:
 - [ ] **Plan the handover before you propose it.** A successor, joint society operation, or transfer to the laboratory all work, and the proposal should say which
 - [ ] **Read the [FAQ](./campus-relay-faq.md)**, so nothing in a meeting catches you out
 - [ ] **Read the [SOP](./campus-tor-relay-sop.md)**, for the technical picture
-- [ ] **Read the [NTNU interview](../blog/posts/ntnu-nz.md)**, for the tone and the pitfalls
+- [ ] **Read the [NTNU interview](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}**, for the tone and the pitfalls
 
 ## Pitfalls
 
@@ -275,7 +275,7 @@ From the first case, the places people get stuck:
 
 ## Related
 
-- [The NTNU interview](../blog/posts/ntnu-nz.md): the full account of the first case
+- [The NTNU interview](https://anoni.net/en/updates/2025/12/ntnu-nz/){target="_blank"}: the full account of the first case
 - [Campus Tor relay deployment SOP](./campus-tor-relay-sop.md): the technical detail
 - [Campus Tor relay FAQ](./campus-relay-faq.md): the institutional concerns
 - [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/){target="_blank"}: the community's entry point for this work

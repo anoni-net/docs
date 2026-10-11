@@ -70,7 +70,7 @@ attestation 的壓力在 2026 年明顯增強，下面三件事幾乎同時推�
 
 Google 收緊 AOSP、用 Play Integrity 決定哪些系統合格，Microsoft 跟著把不合格的系統排除，歐盟研議自己的認證框架，Android 17 要求側載先過驗證。這些機制累加下來，你手機上能執行什麼系統、能裝什麼 app，能自己決定的部分越來越少。
 
-這跟我們在 [從 Discord 年齡驗證談起：我們為什麼自架 Matrix](./2026-discord-matrix-statement.md) 與 [金融公司當起審查者](./2026-financial-companies-as-censors.md) 談過的是同一類問題。當關鍵的基礎設施掌握在少數平台手中，規則由它們單方面決定，一般使用者難以參與，也難以脫離。手機作業系統是其中最貼身的一層，定位、通訊、相簿與身分都存在這一層上。
+這跟我們在 [從 Discord 年齡驗證談起：我們為什麼自架 Matrix](https://anoni.net/updates/2026/02/2026-discord-matrix-statement/){target="_blank"} 與 [金融公司當起審查者](./2026-financial-companies-as-censors.md) 談過的是同一類問題。當關鍵的基礎設施掌握在少數平台手中，規則由它們單方面決定，一般使用者難以參與，也難以脫離。手機作業系統是其中最貼身的一層，定位、通訊、相簿與身分都存在這一層上。
 
 GrapheneOS 的價值，就在於它讓使用者在原廠系統之外仍然有選擇。它不完美，依賴 Pixel、可能被部分 app 拒絕執行、需要一定的學習成本，但它證明了這件事在技術上可行。
 

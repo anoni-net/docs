@@ -6,7 +6,7 @@ icon: material/file-document-edit-outline
 
 # :material-file-document-edit-outline: 校園 Tor Relay 提案範本
 
-這頁提供一份可直接複製改寫的「校園 Tor Relay 提案文件」，內容由社群夥伴 NZ 在台灣師範大學的實作經驗整理而來。NZ 在 TANet（臺灣學術網路）體系內走完整套行政流程，是台灣校園首個 Tor 中繼節點，整段過程記錄在 [在台師大架設 Tor Relay 訪談](../blog/posts/ntnu-nz.md)。
+這頁提供一份可直接複製改寫的「校園 Tor Relay 提案文件」，內容由社群夥伴 NZ 在台灣師範大學的實作經驗整理而來。NZ 在 TANet（臺灣學術網路）體系內走完整套行政流程，是台灣校園首個 Tor 中繼節點，整段過程記錄在 [在台師大架設 Tor Relay 訪談](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}。
 
 如果你想在自己學校推動，不用從零開始。把這份範本複製出去，把 `<placeholder>` 換成自己學校的資料，附上 [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md) 與 [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)，就是一份完整的對校提案。
 
@@ -251,7 +251,7 @@ icon: material/file-document-edit-outline
 - [ ] **想清楚畢業後的交接方案**。學弟妹接手、社團共同維運、轉給教授實驗室都可以，但要在提案時就說清楚
 - [ ] **讀完 [校園 FAQ](./campus-relay-faq.md)**。確保自己被問到時都答得出來
 - [ ] **讀完 [校園架設 SOP](./campus-tor-relay-sop.md)**。對技術全貌有感，知道自己要做什麼
-- [ ] **讀完 [台師大案例訪談](../blog/posts/ntnu-nz.md)**。對溝通語氣、踩雷點有感
+- [ ] **讀完 [台師大案例訪談](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}**。對溝通語氣、踩雷點有感
 
 ## 踩雷提醒
 
@@ -274,7 +274,7 @@ icon: material/file-document-edit-outline
 
 ## 相關閱讀
 
-- [台師大案例訪談](../blog/posts/ntnu-nz.md)：第一個成功案例的完整過程
+- [台師大案例訪談](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}：第一個成功案例的完整過程
 - [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：技術細節（torrc、UFW、監控、事件處置）
 - [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A
 - [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}：社群推動主題入口
