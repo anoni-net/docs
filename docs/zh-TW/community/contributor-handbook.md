@@ -111,7 +111,7 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 
 - 同一目錄：`./other-file.md` 或直接 `other-file.md`
 - 跨目錄：`../basics/anonymity-vs-privacy.md`
-- 跨深度：`../../blog/posts/2025to2026.md`
+- 跨深度：`../../blog/posts/keeping-the-doors-open.md`
 
 正文的連結用描述性的文字，不直接露出網址，也不拿網址當連結文字。例：`詳見[社群工具頁](https://anoni.net/services/){target="_blank"}`。
 

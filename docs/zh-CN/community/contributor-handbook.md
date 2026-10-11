@@ -110,7 +110,7 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 
 - 同一目录：`./other-file.md` 或直接 `other-file.md`
 - 跨目录：`../basics/anonymity-vs-privacy.md`
-- 跨深度：`../../blog/posts/2025to2026.md`
+- 跨深度：`../../blog/posts/keeping-the-doors-open.md`
 
 文章末尾建议放「接下来」、「相关阅读」之类的小节，链接到 2–4 篇相关文章。基础、工具、场景、进阶之间的横向链接比单向引用更有用。
 

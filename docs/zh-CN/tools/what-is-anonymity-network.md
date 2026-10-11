@@ -92,7 +92,7 @@ icon: material/chat-question
 - **Tor Relay 校园建立**：在台湾各大学推动中继节点部署，让本地带宽成为全球 Tor 网络的一部分，强化整体基础建设的韧性。
 - **匿名支付**：探索现金以外情境下的匿名支付可能性，含法规、稳定币与区块链应用等面向，补齐匿名实践中常被忽略的一块。
 
-这三个方向的完整说明，可以在[社区参与页面](https://anoni.net/zh-cn/join/){target="_blank"}与 [2026 年度规划](../blog/posts/2025to2026.md)中找到。
+这三个方向的完整说明，可以在[社区参与页面](https://anoni.net/zh-cn/join/){target="_blank"}与 [2026 年度规划](https://anoni.net/zh-cn/updates/2026/01/2025to2026/){target="_blank"}中找到。
 
 ## :material-chat-question: 一同了解
 
