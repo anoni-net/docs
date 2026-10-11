@@ -395,6 +395,8 @@ plugins:
         'community/payments-research.md': 'https://anoni.net/en/join/payments-research/'
         'community/upload-sensitive.md': 'https://anoni.net/en/join/upload-sensitive/'
         'community/send-privacy.md': 'https://anoni.net/en/services/send/'
+        # 部落格的社群文章搬到社群首頁的動態（anoni-net/www#42），正式站與 onion 由 nginx 回 301，這裡給 IPFS 鏡像用
+        'blog/2025/07/move-to-anoni-net.md': 'https://anoni.net/en/updates/2025/07/move-to-anoni-net/'
         # offline-install 併進 offline（安裝說明與離線內容管理收成一頁）
         'offline-install.md': 'offline.md'
         # 2026 flat → categorised restructure (3aa2a65). Pages whose English content

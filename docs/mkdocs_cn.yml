@@ -383,6 +383,8 @@ plugins:
         'community/payments-research.md': 'https://anoni.net/zh-cn/join/payments-research/'
         'community/upload-sensitive.md': 'https://anoni.net/zh-cn/join/upload-sensitive/'
         'community/send-privacy.md': 'https://anoni.net/zh-cn/services/send/'
+        # 部落格的社群文章搬到社群首頁的動態（anoni-net/www#42），正式站與 onion 由 nginx 回 301，這裡給 IPFS 鏡像用
+        'blog/2025/07/move-to-anoni-net.md': 'https://anoni.net/zh-cn/updates/2025/07/move-to-anoni-net/'
         # 2026 扁平结构 → 7 分类改版（ceaf889）旧网址止血
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'

@@ -395,8 +395,7 @@
 	#最後
 	#簡體中文語系支援
 	#開源與匿名網路圓桌會議
-/blog/2025/07/move-to-anoni-net/
-	#社群專案建立---匿名網路社群
+/blog/2025/07/move-to-anoni-net/ -> https://anoni.net/updates/2025/07/move-to-anoni-net/
 /blog/2025/07/tails-6-18-webtunnel/
 	#Tails-618-支援-WebTunnel-橋接協定
 	#WebTunnel-橋接方式
@@ -1159,20 +1158,19 @@
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
 	#其他更新
+	#匿名網路工作坊招募工作人員與培訓小幫手
 	#匿名網路工作坊籌備
 	#匿名網路工作坊進度更新
+	#工作任務
 	#新功能
-	#社群專案建立---匿名網路社群
 /blog/archive/2025/page/3/
 	#2025
 	#202503-專案進度更新
 	#Arti-141-更新發佈
-	#匿名網路工作坊招募工作人員與培訓小幫手
 	#去識別化的觀測資料安全
 	#回顧網路自由工作坊TorTailsOONI
 	#專案提案---g0v-Hackath65n-零時政府第-65-次黑客松
 	#專案重啟-2025
-	#工作任務
 	#為什麼要為-OONI-建立匿名憑證系統
 	#發佈新-OONI-Explorer-主題審查頁面
 	#網路自由工作坊TorTailsOONI
@@ -1392,6 +1390,7 @@
 	#202504-專案進度更新
 	#202505-專案進度更新
 	#202506-專案進度更新匿名網路工作坊開始報名
+	#Arti-141-更新發佈
 	#Tails-618-支援-WebTunnel-橋接協定
 	#Tails-70-發佈第二個最終測試版本70rc2
 	#WebTunnel-橋接方式
@@ -1401,11 +1400,7 @@
 	#匿名網路工作坊進度更新
 	#新功能
 	#更新
-	#社群專案建立---匿名網路社群
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
-/blog/category/更新/page/5/
-	#Arti-141-更新發佈
-	#更新
 /blog/category/活動/
 	#COSCUP-2026-匿名網路社群議程軌808809-兩天免費入場走進教室就能參加
 	#OMG第三屆-Open-Measurement-GatheringOMG的有問必答AMA活動總結
@@ -1454,6 +1449,8 @@
 	#COSCUP-2026-匿名網路社群議程軌公開徵稿
 	#RightsCon-Taipei
 	#前言為什麼在校園談匿名網路
+	#匿名網路工作坊籌備
+	#匿名網路工作坊進度更新
 	#在台師大架設-Tor-Relay一段與學校溝通留下可能性的實作經驗
 	#專案提案---g0v-Hackath71n-零時政府第-71-次黑客松
 	#延續-2025走向-2026個人隱私指引Tor-Relay-校園建立競賽匿名支付探索
@@ -1461,7 +1458,6 @@
 	#我們真正在意的是誰決定規則誰拿走資料
 	#擺攤手冊
 	#社群
-	#社群專案建立---匿名網路社群
 	#網路自由小聚-202510數位威權主義商品化---網路政變報告分享會
 /blog/category/社群/page/4/
 	#202503-專案進度更新
@@ -1469,7 +1465,6 @@
 	#202505-專案進度更新
 	#匿名網路工作坊招募工作人員與培訓小幫手
 	#匿名網路工作坊籌備
-	#匿名網路工作坊進度更新
 	#回顧網路自由工作坊TorTailsOONI
 	#專案提案---g0v-Hackath65n-零時政府第-65-次黑客松
 	#專案重啟-2025
@@ -1629,20 +1624,19 @@
 	#介紹-oniux針對任何-Linux-應用程式的核心層級-Tor-隔離技術
 	#共同成長自-Tails-與-Tor-合併以來的成果
 	#其他更新
+	#匿名網路工作坊招募工作人員與培訓小幫手
 	#匿名網路工作坊籌備
 	#匿名網路工作坊進度更新
+	#工作任務
 	#新功能
-	#社群專案建立---匿名網路社群
 	#近期公告
 /blog/page/8/
 	#202503-專案進度更新
 	#Arti-141-更新發佈
-	#匿名網路工作坊招募工作人員與培訓小幫手
 	#去識別化的觀測資料安全
 	#回顧網路自由工作坊TorTailsOONI
 	#專案提案---g0v-Hackath65n-零時政府第-65-次黑客松
 	#專案重啟-2025
-	#工作任務
 	#為什麼要為-OONI-建立匿名憑證系統
 	#發佈新-OONI-Explorer-主題審查頁面
 	#網路自由工作坊TorTailsOONI
@@ -2513,8 +2507,7 @@
 	#In-Conclusion
 	#Open-Source-and-Anonymous-Network-Roundtable-Conference
 	#Simplified-Chinese-Language-Support
-/en/blog/2025/07/move-to-anoni-net/
-	#Community-Project-Establishment---Anonymity-Network-Community
+/en/blog/2025/07/move-to-anoni-net/ -> https://anoni.net/en/updates/2025/07/move-to-anoni-net/
 /en/blog/2025/07/tails-6-18-webtunnel/ -> /en/blog/
 /en/blog/2025/07/tor-tails-stronger-together/ -> /en/blog/
 /en/blog/2025/07/updates-202506/
@@ -3045,6 +3038,7 @@
 	#anoninetnews-and-Same-Day-Years-Apart
 /en/blog/archive/2025/
 	#2025
+	#202503-Project-Status-and-Updates
 	#202504-Project-Status-and-Updates
 	#202505-Project-Status-and-Updates
 	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
@@ -3052,7 +3046,6 @@
 	#Anonymous-Network-Workshop-Preparation
 	#Anonymous-Network-Workshop-Progress-Update
 	#BoothBrochure
-	#Community-Project-Establishment---Anonymity-Network-Community
 	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
 	#Recruiting-Staff-and-Training-Helpers-for-the-Anonymous-Network-Workshop
 	#Setting-Up-a-Tor-Relay-at-National-Taiwan-Normal-University-A-Practical-Experience-of-Communicating-with-the-University-and-Leaving-Open-Possibilities
@@ -3061,7 +3054,6 @@
 	#The-Internet-Coup-documents-how-a-Chinese-company-exports-the-Great-Firewall
 /en/blog/archive/2025/page/2/
 	#2025
-	#202503-Project-Status-and-Updates
 	#Internet-Freedom-Workshop-TorTailsOONI
 	#Project-Relaunch-2025
 	#Project-proposals-at-g0v-Hackath65n-the-65th-g0v-hackathon
@@ -3166,10 +3158,11 @@
 	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
 	#202508-Project-Update
 	#202603-Community-Update
+	#Anonymous-Network-Workshop-Preparation
+	#Anonymous-Network-Workshop-Progress-Update
 	#BoothBrochure
 	#COSCUP-2026-Anonymity-Networks-Community-Track-Call-for-Proposals
 	#Community
-	#Community-Project-Establishment---Anonymity-Network-Community
 	#Continuing-from-2025-into-2026-Personal-Privacy-Guidelines-Tor-Relay-Campus-Deployment-Competition-and-Exploration-of-Anonymous-Payments
 	#From-Discords-Age-Verification-to-Why-We-Self-Host-Matrix
 	#Preface-Why-Talk-About-Anonymous-Networks-on-Campus
@@ -3183,7 +3176,6 @@
 	#202504-Project-Status-and-Updates
 	#202505-Project-Status-and-Updates
 	#Anonymous-Network-Workshop-Preparation
-	#Anonymous-Network-Workshop-Progress-Update
 	#Community
 	#Internet-Freedom-Workshop-TorTailsOONI
 	#Project-Relaunch-2025
@@ -3245,7 +3237,6 @@
 	#Anonymous-Network-Workshop-Preparation
 	#Anonymous-Network-Workshop-Progress-Update
 	#BoothBrochure
-	#Community-Project-Establishment---Anonymity-Network-Community
 	#News
 	#Project-Relaunch-2025
 	#Recruiting-Staff-and-Training-Helpers-for-the-Anonymous-Network-Workshop
@@ -3434,16 +3425,13 @@
 	#202506-Project-Update-Anonymous-Network-Workshop-Registration-Open
 	#Anonymous-Network-Workshop-Preparation
 	#Anonymous-Network-Workshop-Progress-Update
-	#Community-Project-Establishment---Anonymity-Network-Community
 	#Internet-Freedom-Workshop-TorTailsOONI
+	#Project-Relaunch-2025
 	#Project-proposals-at-g0v-Hackath65n-the-65th-g0v-hackathon
 	#Recent-Updates
 	#Recruiting-Staff-and-Training-Helpers-for-the-Anonymous-Network-Workshop
 	#Review-Internet-Freedom-Workshop-TorTailsOONI
 	#Tasks
-/en/blog/page/7/
-	#Project-Relaunch-2025
-	#Recent-Updates
 /en/changelog/
 	#Anonymity-tools
 	#Browsers-and-messaging-apps
@@ -7190,8 +7178,7 @@
 	#开源与匿名网络圆桌会议
 	#最后
 	#简体中文语系支持
-/zh-cn/blog/2025/07/move-to-anoni-net/
-	#社群项目建立---匿名网络社群
+/zh-cn/blog/2025/07/move-to-anoni-net/ -> https://anoni.net/zh-cn/updates/2025/07/move-to-anoni-net/
 /zh-cn/blog/2025/07/tails-6-18-webtunnel/
 	#Tails-618-支持-WebTunnel-桥接协议
 	#WebTunnel-桥接方式
@@ -7944,21 +7931,20 @@
 	#WebTunnel-桥接方式
 	#介绍-oniux针对任何-Linux-应用程序的内核级别-Tor-隔离技术
 	#其他更新
+	#匿名网络工作坊招募工作人员与培训小助手
 	#匿名网络工作坊筹备
 	#匿名网络工作坊进度更新
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
+	#工作任务
 	#新功能
-	#社群项目建立---匿名网络社群
 /zh-cn/blog/archive/2025/page/3/
 	#2025
 	#202503-项目进度更新
 	#Arti-141-更新发布
 	#为什么要为-OONI-建立匿名凭证系统
-	#匿名网络工作坊招募工作人员与培训小助手
 	#去识别化的观测数据安全
 	#发布新-OONI-Explorer-专题审查页面
 	#回顾网络自由工作坊TorTailsOONI
-	#工作任务
 	#提案---g0v-Hackath65n-零时政府第-65-次黑客松
 	#网络自由工作坊TorTailsOONI
 	#项目重启-2025
@@ -8176,6 +8162,7 @@
 	#202504-项目进度更新
 	#202505-项目进度更新
 	#202506-项目进度更新匿名网络工作坊开始报名
+	#Arti-141-更新发布
 	#Tails-618-支持-WebTunnel-桥接协议
 	#Tails-70-发布第二个最终测试版本70rc2
 	#WebTunnel-桥接方式
@@ -8185,11 +8172,7 @@
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#新功能
 	#更新
-	#社群项目建立---匿名网络社群
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
-/zh-cn/blog/category/更新/page/5/
-	#Arti-141-更新发布
-	#更新
 /zh-cn/blog/category/活动/
 	#COSCUP-2026-匿名网络社群议程轨808809-两天免费入场走进教室就能参加
 	#OMG第三届-Open-Measurement-GatheringOMG的有问必答AMA活动总结
@@ -8232,6 +8215,7 @@
 	#跨社区合作匿名网络社区--ETHTaipei
 /zh-cn/blog/category/社区/page/3/
 	#2025
+	#202505-项目进度更新
 	#202506-项目进度更新匿名网络工作坊开始报名
 	#202508-项目进度更新
 	#202603-社区近况更新
@@ -8245,15 +8229,12 @@
 	#我们真正在意的是谁决定规则谁拿走数据
 	#摊位手册
 	#社区
-	#社群项目建立---匿名网络社群
 	#网络自由小聚-202510数字威权主义商品化---网络政变报告分享会
 	#项目提案---g0v-Hackath71n-零时政府第-71-次黑客松
 /zh-cn/blog/category/社区/page/4/
 	#202503-项目进度更新
 	#202504-项目进度更新
-	#202505-项目进度更新
 	#匿名网络工作坊招募工作人员与培训小助手
-	#匿名网络工作坊筹备
 	#回顾网络自由工作坊TorTailsOONI
 	#工作任务
 	#提案---g0v-Hackath65n-零时政府第-65-次黑客松
@@ -8414,17 +8395,16 @@
 	#匿名网络工作坊招募工作人员与培训小助手
 	#匿名网络工作坊筹备
 	#匿名网络工作坊进度更新
+	#发布新-OONI-Explorer-专题审查页面
 	#团结更强大自-Tails-Tor-合并以来我们取得的成就
 	#工作任务
 	#新功能
-	#社群项目建立---匿名网络社群
 	#近期公告
 /zh-cn/blog/page/8/
 	#202503-项目进度更新
 	#Arti-141-更新发布
 	#为什么要为-OONI-建立匿名凭证系统
 	#去识别化的观测数据安全
-	#发布新-OONI-Explorer-专题审查页面
 	#回顾网络自由工作坊TorTailsOONI
 	#提案---g0v-Hackath65n-零时政府第-65-次黑客松
 	#网络自由工作坊TorTailsOONI
