@@ -15,7 +15,7 @@ description: "邀请您于 2026 年 1 月 25 日参加 g0v Hackath71n 零时政�
 
 ![g0v hackath71n / 零时政府第 71 次黑客松](https://assets.anoni.net/blog/g0v-hackath71n.webp)
 
-这一次我们要南下前往[高雄](https://zh.wikipedia.org/zh-cn/%E9%AB%98%E9%9B%84%E5%B8%82){target="_blank"}（Kaohsiung、打狗），参与「[g0v Hackath71n 零时政府第 71 次黑客松](https://jothon.g0v.tw/){target="_blank"}」活动。如果您这段时间在南部，或是也想一起南下到高雄，**顺便旅行、远程工作**几天并参与活动，欢迎在黑客松活动现场来找我们。我们也报名了一摊，来推进「匿名网络社群」[2026](./2025to2026.md) 的进度！
+这一次我们要南下前往[高雄](https://zh.wikipedia.org/zh-cn/%E9%AB%98%E9%9B%84%E5%B8%82){target="_blank"}（Kaohsiung、打狗），参与「[g0v Hackath71n 零时政府第 71 次黑客松](https://jothon.g0v.tw/){target="_blank"}」活动。如果您这段时间在南部，或是也想一起南下到高雄，**顺便旅行、远程工作**几天并参与活动，欢迎在黑客松活动现场来找我们。我们也报名了一摊，来推进「匿名网络社群」[2026](https://anoni.net/zh-cn/updates/2026/01/2025to2026/){target="_blank"} 的进度！
 
 目前看来活动还有一点点名额，如果您对我们的项目感兴趣、想要做出贡献，欢迎在活动当天加入我们（不论您来自什么背景、专业）！
 
@@ -40,7 +40,7 @@ description: "邀请您于 2026 年 1 月 25 日参加 g0v Hackath71n 零时政�
 
 - [:fontawesome-regular-circle-question: 网络自由为什么重要？](../../basics/internet-freedom.md)
 - [:octicons-mark-github-24: 项目研究预先准备](../../community/setup-repo.md)
-- [:simple-readdotcv: 2026 规划蓝图](./2025to2026.md)
+- [:simple-readdotcv: 2026 规划蓝图](https://anoni.net/zh-cn/updates/2026/01/2025to2026/){target="_blank"}
 - [:simple-readdotcv: 在台师大架设 Tor Relay](./ntnu-nz.md)
 
 </div>

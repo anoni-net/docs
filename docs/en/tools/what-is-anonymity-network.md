@@ -102,7 +102,7 @@ Tools are the foundation, and using an anonymity network in practice is consider
 - **Tor relays on campus**: getting relays deployed at universities in Taiwan, so local bandwidth becomes part of the global Tor network and the infrastructure gets more resilient
 - **Anonymous payments**: what anonymous payment looks like outside cash, covering regulation, stablecoins, and on-chain applications, filling in the part of anonymity practice that usually gets skipped
 
-The full description of all three is on the [Community](https://anoni.net/en/join/){target="_blank"} page and in [From 2025 into 2026](../blog/posts/2025to2026.md).
+The full description of all three is on the [Community](https://anoni.net/en/join/){target="_blank"} page and in [From 2025 into 2026](https://anoni.net/en/updates/2026/01/2025to2026/){target="_blank"}.
 
 ## :material-chat-question: Related concepts
 

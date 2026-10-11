@@ -63,7 +63,7 @@ You don't have to wait for the event to get to know us. To learn about the commu
 
 - [COSCUP 2026 Anonymity Networks Community track](https://anoni.net/en/events/coscup-2026/){target="_blank"}: the full two-day schedule, session summaries, and speaker bios
 - [COSCUP 2026 open call for proposals](https://anoni.net/en/events/coscup-2026-cfp/){target="_blank"}: topics, cross-community collaboration, and how to submit
-- [From 2025 into 2026: a personal privacy guide, a campus Tor relay challenge, and exploring anonymous payments](./2025to2026.md)
+- [From 2025 into 2026: a personal privacy guide, a campus Tor relay challenge, and exploring anonymous payments](https://anoni.net/en/updates/2026/01/2025to2026/){target="_blank"}
 - [About us](https://anoni.net/en/about/){target="_blank"}
 
 !!! info "Updates and contact"

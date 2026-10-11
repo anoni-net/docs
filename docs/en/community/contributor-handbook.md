@@ -115,7 +115,7 @@ Internal links use relative paths, not absolute `/docs/en/...` paths:
 
 - Same directory: `./other-file.md`
 - Across directories: `../basics/anonymity-vs-privacy.md`
-- Across depths: `../../blog/posts/2025to2026.md`
+- Across depths: `../../blog/posts/keeping-the-doors-open.md`
 
 Link text describes the destination. Do not paste a bare URL into the body or use the URL itself as the link text: write `see the [community tools page](https://anoni.net/en/services/){target="_blank"}`.
 

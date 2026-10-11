@@ -16,7 +16,7 @@ description: "You are invited to join the g0v Hackath71n, the 71st g0v Hackathon
 ![g0v hackath71n / g0v the 71st Hackathon](https://assets.anoni.net/blog/g0v-hackath71n.webp)
 
 This time, we’re heading south to [Kaohsiung](https://en.wikipedia.org/wiki/Kaohsiung){target="_blank"} (a.k.a. Takao) to participate in the “[g0v Hackath71n – g0v the 71st Hackathon](https://jothon.g0v.tw/){target="_blank"}.”
-If you happen to be in southern Taiwan during this period, or if you’d like to travel south to Kaohsiung together—**combining a short trip with a few days of remote work** while joining the event—feel free to come find us at the hackathon. We’ve registered a booth to help move forward the progress of the “Anonymous Online Community” [2026](./2025to2026.md) project!
+If you happen to be in southern Taiwan during this period, or if you’d like to travel south to Kaohsiung together—**combining a short trip with a few days of remote work** while joining the event—feel free to come find us at the hackathon. We’ve registered a booth to help move forward the progress of the “Anonymous Online Community” [2026](https://anoni.net/en/updates/2026/01/2025to2026/){target="_blank"} project!
 
 At the moment, it looks like there are still a few spots available. If you’re interested in our project and would like to contribute, you’re very welcome to join us on the day of the event—**no matter your background or area of expertise**.
 
@@ -46,7 +46,7 @@ The January 25 hackathon will focus on advancing :simple-readdotcv:{style="color
 
 - [:fontawesome-regular-circle-question: Why does Internet Freedom matter?](../../basics/internet-freedom.md)
 - [:octicons-mark-github-24: Development environment setup](https://anoni.net/en/join/){target="_blank"}
-- [:simple-readdotcv: 2026 Roadmap](./2025to2026.md)
+- [:simple-readdotcv: 2026 Roadmap](https://anoni.net/en/updates/2026/01/2025to2026/){target="_blank"}
 - [:simple-readdotcv: Setting Up a Tor Relay at National Taiwan Normal University](./ntnu-nz.md)
 
 </div>
