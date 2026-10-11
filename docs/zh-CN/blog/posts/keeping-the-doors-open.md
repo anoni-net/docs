@@ -92,7 +92,7 @@ Unredacted 把 123 个 exit relays 运作于 400W 上，这个数字换算成运
 
 关键在硬件规模化的设计。Raspberry Pi 5 对各地 maker 社群都不陌生，PoE+ HAT 与 PoE 交换机在常见零售管道都能买到（台湾如 Cytron、群创、PChome，其他地区可循当地电子零售管道）。ComputeBlade（20 模组 1U 机箱）目前零售管道较少，可以通过官方海外订购或社群代购取得。机构机房比家用网络更适合做这件事，原因有三：固定 IP、机构网络带宽、有人巡检机器。
 
-Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"} 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
+Tor Relay 校园建立是 anoni.net 2026 的三大主题之一，社群正在把校园架设的经验整理成一份 SOP（见 [Tor Relay 校园建立研究专题](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"} 与 [在台师大架设 Tor Relay：一段与学校沟通、留下可能性的实现经验](https://anoni.net/zh-cn/updates/2025/12/ntnu-nz/){target="_blank"}）。Unredacted 在 GreenWare 上的工程做法，可以做为下一所学校评估架设方案时的参考点，先用 PoE 喂电的 Raspberry Pi 5 试做一台 middle relay，等运作稳定后再考虑 exit 与机箱密度。
 
 对想参与的个人或小团体，从 Snowflake proxy 开始（浏览器扩展或 Docker）几乎没有电费负担，是进入抗审查基础建设最低门槛的入口（见 [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)）。
 

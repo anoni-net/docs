@@ -92,7 +92,7 @@ Unredacted 把 123 個 exit relays 運作於 400W 上，這個數字對台灣社
 
 關鍵在硬體規模化的設計。台灣 maker 社群對 Raspberry Pi 5 並不陌生，PoE+ HAT 與 PoE 交換器在台灣的常見零售管道都能買到（如 Cytron、群創、PChome）。ComputeBlade（20 模組 1U 機箱）目前在台灣較少零售管道，可以透過官方海外訂購或社群代購取得。校園機房比家用網路更適合做這件事，原因有三：固定 IP、學術網路頻寬、有人巡檢機器。
 
-Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把校園架設的經驗整理成一份 SOP（見 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 與 [在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](ntnu-nz.md)）。Unredacted 在 GreenWare 上的工程做法，可以做為下一所學校評估架設方案時的參考點，先用 PoE 餵電的 Raspberry Pi 5 試做一台 middle relay，等運作穩定後再考慮 exit 與機箱密度。
+Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把校園架設的經驗整理成一份 SOP（見 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 與 [在台師大架設 Tor Relay：一段與學校溝通、留下可能性的實作經驗](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}）。Unredacted 在 GreenWare 上的工程做法，可以做為下一所學校評估架設方案時的參考點，先用 PoE 餵電的 Raspberry Pi 5 試做一台 middle relay，等運作穩定後再考慮 exit 與機箱密度。
 
 對想參與的個人或小團體，從 Snowflake proxy 開始（瀏覽器外掛或 Docker）幾乎沒有電費負擔，是進入抗審查基礎建設最低門檻的入口（見 [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)）。
 

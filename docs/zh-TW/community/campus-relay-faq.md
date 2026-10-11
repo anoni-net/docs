@@ -25,7 +25,7 @@ icon: material/chat-question-outline
 
     **台灣脈絡補充**
 
-    台灣已有國立臺灣師範大學資訊工程學系完成首例（2025 年 11 月上線），詳見 [Tor Project blog 客座文章](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} 與 [社群訪談](../blog/posts/ntnu-nz.md)。台灣高教體系本來就承載資訊工程、資訊安全、網路治理的教學任務，校園 Tor Relay 可作為實際的教學案例。
+    台灣已有國立臺灣師範大學資訊工程學系完成首例（2025 年 11 月上線），詳見 [Tor Project blog 客座文章](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"} 與 [社群訪談](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}。台灣高教體系本來就承載資訊工程、資訊安全、網路治理的教學任務，校園 Tor Relay 可作為實際的教學案例。
 
 ??? question "我們不想架 Exit Relay，這樣可以嗎？"
 
@@ -183,7 +183,7 @@ icon: material/chat-question-outline
     **參考**
 
     - 全球大學（MIT、Stanford、Cambridge、CMU 等）均有運行
-    - 台灣首例：[國立臺灣師範大學資訊工程學系（2025/11 上線）](../blog/posts/ntnu-nz.md)
+    - 台灣首例：[國立臺灣師範大學資訊工程學系（2025/11 上線）](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}
     - 國際計畫：[EFF Tor University Challenge](https://toruniversity.eff.org/zh-tw/){target="_blank"}
 
 ## 給校方行政與法務的一頁摘要
@@ -216,7 +216,7 @@ icon: material/chat-question-outline
 
     **參考案例**
 
-    - 國內：[國立臺灣師範大學資訊工程學系（2025/11 上線）](../blog/posts/ntnu-nz.md)
+    - 國內：[國立臺灣師範大學資訊工程學系（2025/11 上線）](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}
     - 國際：[Tor Project blog：Setting Up a Tor University Relay in Taiwan](https://blog.torproject.org/setting-up-tor-university-relay-taiwan/){target="_blank"}
 
 !!! tip "下一步"
@@ -231,7 +231,7 @@ icon: material/chat-question-outline
 
 - [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md)：給其他學校 fork-and-fill 的提案文件
 - [校園 Tor Relay 架設 SOP](./campus-tor-relay-sop.md)：技術細節（torrc、UFW、監控、事件處置）
-- [台師大案例訪談](../blog/posts/ntnu-nz.md)：第一個成功案例的完整過程
+- [台師大案例訪談](https://anoni.net/updates/2025/12/ntnu-nz/){target="_blank"}：第一個成功案例的完整過程
 - [什麼是 Tor](../tools/what-is-tor.md)：Tor 基本概念
 - [EFF Tor Legal FAQ](https://community.torproject.org/relay/community-resources/eff-tor-legal-faq/){target="_blank"}：美國法觀點的完整法律 FAQ（待翻譯）
 

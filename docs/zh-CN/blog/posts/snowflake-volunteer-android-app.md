@@ -29,7 +29,7 @@ description: "翻译 Tor Project 官方公告，介绍 Snowflake Volunteer 这�
     <figcaption>图片来源：<a target="_blank" href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/">Tor Project Blog</a>。</figcaption>
 </figure>
 
-我们在[伊朗封网后的那篇](iran-blackout-webtunnel.md)提过，[Snowflake](../../tools/tor-snowflake.md) 是帮人连上 Tor 门槛最低的方式：开一个浏览器标签页放着不动，就是在帮忙转发流量。2026 年 8 月 3 日，Tor Project 发文介绍 4 月已经上架的 Snowflake Volunteer，把「贡献志愿者桥接」做成一支独立的 Android App，门槛又降了一阶。过去要贡献 Snowflake 桥接，需通过浏览器扩展、网站内嵌 widget、桌面版命令行工具，或 Android 上的 [Orbot Kindness Mode](https://orbot.app/en/kindness/){target="_blank"}。新 App 只做这一件事，界面与设置都只为此设计。
+我们在[伊朗封网后的那篇](https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}提过，[Snowflake](../../tools/tor-snowflake.md) 是帮人连上 Tor 门槛最低的方式：开一个浏览器标签页放着不动，就是在帮忙转发流量。2026 年 8 月 3 日，Tor Project 发文介绍 4 月已经上架的 Snowflake Volunteer，把「贡献志愿者桥接」做成一支独立的 Android App，门槛又降了一阶。过去要贡献 Snowflake 桥接，需通过浏览器扩展、网站内嵌 widget、桌面版命令行工具，或 Android 上的 [Orbot Kindness Mode](https://orbot.app/en/kindness/){target="_blank"}。新 App 只做这一件事，界面与设置都只为此设计。
 
 <!-- more -->
 
@@ -77,7 +77,7 @@ Snowflake Volunteer 可以从 [F-Droid](https://f-droid.org/en/packages/io.bloco
 ## 相关阅读
 
 - [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)：浏览器版桥接点如何开，以及需要留意的风险
-- [伊朗封网 80 多天后重新开放，流量涌进社群架设的 Tor WebTunnel](iran-blackout-webtunnel.md)：桥接点在真实审查情境下的作用
+- [伊朗封网 80 多天后重新开放，流量涌进社群架设的 Tor WebTunnel](https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}：桥接点在真实审查情境下的作用
 - [如何搭建 Tor Relay](../../community/setup-tor-relay.md)：想投入更多心力的下一步
 
 [^1]: 统计依据 2026 年 1 月 1 日至 6 月 30 日、共 180 份 Snowflake broker 每日报告，数据来自 Tor Metrics 的 [CollecTor 存档](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"} 汇整的 snowflake-stats descriptor。

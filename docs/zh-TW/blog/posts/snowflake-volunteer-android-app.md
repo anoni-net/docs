@@ -29,7 +29,7 @@ description: "翻譯 Tor Project 官方公告，介紹 Snowflake Volunteer 這�
     <figcaption>圖片來源：<a target="_blank" href="https://blog.torproject.org/snowflake-volunteer-standalone-app-to-help-people-bypass-censorship/">Tor Project Blog</a>。</figcaption>
 </figure>
 
-我們在[伊朗封網後的那篇](iran-blackout-webtunnel.md)提過，[Snowflake](../../tools/tor-snowflake.md) 是幫人連上 Tor 門檻最低的方式：開一個瀏覽器分頁放著不動，就是在幫忙轉發流量。2026 年 8 月 3 日，Tor Project 發文介紹 4 月已經上架的 Snowflake Volunteer，把「貢獻志工橋接」做成一支獨立的 Android App，門檻又降了一階。過去要貢獻 Snowflake 橋接，需透過瀏覽器擴充功能、網站內嵌 widget、桌面版命令列工具，或 Android 上的 [Orbot Kindness Mode](https://orbot.app/en/kindness/){target="_blank"}。新 App 只做這一件事，介面與設定都只為此設計。
+我們在[伊朗封網後的那篇](https://anoni.net/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}提過，[Snowflake](../../tools/tor-snowflake.md) 是幫人連上 Tor 門檻最低的方式：開一個瀏覽器分頁放著不動，就是在幫忙轉發流量。2026 年 8 月 3 日，Tor Project 發文介紹 4 月已經上架的 Snowflake Volunteer，把「貢獻志工橋接」做成一支獨立的 Android App，門檻又降了一階。過去要貢獻 Snowflake 橋接，需透過瀏覽器擴充功能、網站內嵌 widget、桌面版命令列工具，或 Android 上的 [Orbot Kindness Mode](https://orbot.app/en/kindness/){target="_blank"}。新 App 只做這一件事，介面與設定都只為此設計。
 
 <!-- more -->
 
@@ -77,7 +77,7 @@ Snowflake Volunteer 可以從 [F-Droid](https://f-droid.org/en/packages/io.bloco
 ## 相關閱讀
 
 - [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)：瀏覽器版橋接點如何開，以及香港讀者要注意的風險
-- [伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](iran-blackout-webtunnel.md)：橋接點在真實審查情境下的作用
+- [伊朗封網 80 多天後重新開放，流量湧進社群架設的 Tor WebTunnel](https://anoni.net/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}：橋接點在真實審查情境下的作用
 - [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}：想投入更多心力的下一步
 
 [^1]: 統計依據 2026 年 1 月 1 日至 6 月 30 日、共 180 份 Snowflake broker 每日報告，數據來自 Tor Metrics 的 [CollecTor 封存](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"} 彙整的 snowflake-stats descriptor。
