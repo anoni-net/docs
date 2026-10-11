@@ -10,7 +10,7 @@ icon: simple/tails
 
 對正體中文使用者，Tails 對應的場景包括採訪敏感議題的記者要保護消息來源、研究員要處理外來檔案而不污染主機、行動現場要在不熟悉的網路環境工作、機敏檔案要審閱但不希望留在筆電上。這些場景下，日常電腦的長期使用痕跡是個大破口，Tails 把任務切到一個臨時的乾淨環境，做完抽 USB 走人。
 
-Tails 基於 [Debian Linux](https://zh.wikipedia.org/zh-tw/Debian){target="_blank"}，由獨立非營利組織開發，跟 Tor Project 長期合作。社群在 2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)，後續會持續推。
+Tails 基於 [Debian Linux](https://zh.wikipedia.org/zh-tw/Debian){target="_blank"}，由獨立非營利組織開發，跟 Tor Project 長期合作。社群在 2025 年 2 月跟 Tails、Tor 團隊在台北辦過一場 [Pre-RightsCon 工作坊](https://anoni.net/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}，後續會持續推。
 
 ## Tails 的三個設計選擇
 

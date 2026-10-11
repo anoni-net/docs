@@ -4,7 +4,6 @@ rm -rf .cache/plugin/privacy
 sh ./run.sh
 sh ./run_en.sh
 sh ./run_zh-cn.sh
-sh ./replace_og.sh
 # PWA: 注入 build 版本到 service worker，讓每次部署換版並清掉舊快取
 BUILD_VERSION=$(date +%Y%m%d%H%M)
 find ./output -name 'sw.js' -exec sed -i "s/__BUILD_VERSION__/${BUILD_VERSION}/" {} \;
