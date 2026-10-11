@@ -129,7 +129,7 @@ WebTunnel 的做法不同，它把 Tor 流量包进一个真正的 HTTPS 连接�
 - [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)
 - [如何搭建 Tor Relay](../../community/setup-tor-relay.md)
 - [网络自由为什么重要](../../basics/internet-freedom.md)
-- [2025 年 10 月国际网络自由观察](./internetfreedom-oct2025.md)
+- [2025 年 10 月国际网络自由观察](https://anoni.net/zh-cn/updates/2025/10/internetfreedom-oct2025/){target="_blank"}
 
 [^1]: [Cloudflare Radar（Iran）](https://radar.cloudflare.com/ir){target="_blank"} - Cloudflare Radar
 [^2]: [Internet shutdown in Iran amid military actions](https://x.com/CloudflareRadar/status/2027709437981450502){target="_blank"} - Cloudflare Radar

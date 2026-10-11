@@ -62,7 +62,7 @@ icon: material/chat-question
     <figcaption>Freedom House「Freedom on the Net」互動地圖（各國分數隨年度報告更新，畫面為站內示意截圖）</figcaption>
 </figure>
 
-「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](../blog/posts/internetfreedom-oct2025.md) 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。2025 年 9 月再有大量防火長城內部資料外流（外洩規模約 500GB 到 600GB，來自承包商 Geedge Networks 與中國科學院信息工程研究所旗下的 MESA Lab），文件顯示這套技術已輸出到哈薩克、衣索比亞、緬甸、巴基斯坦等國，並提及另一個未具名國家，讓外界長期推測的「把審查系統當產品輸出」首次有了內部文件層級的佐證[^11]。
+「狀態正在改變」的訊號近期愈來愈具體。2025 年 InterSecLab 公布了一份關於中國防火長城技術輸出的研究報告，社群完成中譯後在 [網路自由小聚](https://anoni.net/updates/2025/10/internetfreedom-oct2025/){target="_blank"} 分享：當監控技術以容器化、產品化的方式對外輸出時，過去給個人的資安建議需要重新檢視。完整的中譯版本見 [網路政變：InterSecLab 報告](../reports/interseclab-network-coup/index.md)。2025 年 9 月再有大量防火長城內部資料外流（外洩規模約 500GB 到 600GB，來自承包商 Geedge Networks 與中國科學院信息工程研究所旗下的 MESA Lab），文件顯示這套技術已輸出到哈薩克、衣索比亞、緬甸、巴基斯坦等國，並提及另一個未具名國家，讓外界長期推測的「把審查系統當產品輸出」首次有了內部文件層級的佐證[^11]。
 
 亞太地區的封鎖與干預需要可被驗證的公開紀錄。OONI 透過志工探測讓特定網路與規避工具的可及性以圖表與開放資料呈現。
 

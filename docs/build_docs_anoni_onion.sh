@@ -8,7 +8,6 @@ rm -rf .cache/plugin/privacy
 sh ./run.sh
 sh ./run_en.sh
 sh ./run_zh-cn.sh
-sh ./replace_og.sh
 rm -rf /srv/ooni-docs-output/*
 # service worker 只在 clearnet 註冊（overrides/base.html 的 hostname 白名單），
 # onion 與 IPFS 版不會用到，且這裡沒有做 __BUILD_VERSION__ 替換。

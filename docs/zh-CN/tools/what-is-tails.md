@@ -14,7 +14,7 @@ Tails 基于 [Debian Linux](https://zh.wikipedia.org/zh-cn/Debian){target="_blan
 
 !!! info "anoni.net 是台湾的社群"
 
-    社群在 2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](../blog/posts/rightscon25-pre-event.md)，后续会持续推。其他简中读者如果对在地的 Tails 工作坊有兴趣，可参考 anoni.net 的活动页关注。
+    社群在 2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}，后续会持续推。其他简中读者如果对在地的 Tails 工作坊有兴趣，可参考 anoni.net 的活动页关注。
 
 ## Tails 的三个设计选择
 

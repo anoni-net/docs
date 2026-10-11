@@ -9,7 +9,7 @@ icon: material/snowflake
 
 ## 為什麼要開 Snowflake
 
-在伊朗、緬甸、白俄羅斯這類嚴重審查地區，Tor 的入口節點長期被偵測與封鎖。當地使用者要連上 Tor，需要透過外部志工提供的「橋接點」繞過。Snowflake 把你的瀏覽器變成一個臨時橋接點，受審查地區的 Tor 使用者透過你的瀏覽器連上 Tor 網路。可參考 [InterSecLab 中國防火長城資料外洩研究](../reports/interseclab-network-coup/index_7.md)、[2025 年 10 月國際網路自由觀察](../blog/posts/internetfreedom-oct2025.md)，了解全球審查現況。
+在伊朗、緬甸、白俄羅斯這類嚴重審查地區，Tor 的入口節點長期被偵測與封鎖。當地使用者要連上 Tor，需要透過外部志工提供的「橋接點」繞過。Snowflake 把你的瀏覽器變成一個臨時橋接點，受審查地區的 Tor 使用者透過你的瀏覽器連上 Tor 網路。可參考 [InterSecLab 中國防火長城資料外洩研究](../reports/interseclab-network-coup/index_7.md)、[2025 年 10 月國際網路自由觀察](https://anoni.net/updates/2025/10/internetfreedom-oct2025/){target="_blank"}，了解全球審查現況。
 
 在台灣，這是門檻最低的網路自由貢獻方式：
 
