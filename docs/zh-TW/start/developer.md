@@ -45,9 +45,9 @@ icon: material/console
 
 校園中繼節點需要的是能跟行政與法務溝通的人，技術反而是簡單的部分。
 
-- [校園 Tor Relay 提案範本](../community/campus-tor-relay-proposal.md)：從台灣師範大學的成功案例整理出的提案文件、四封溝通信與行政時間軸，可以直接改寫送審
-- [校園 Tor Relay 架設 SOP](../community/campus-tor-relay-sop.md)：提案通過之後的實際步驟
-- [給校方與法務的 FAQ](../community/campus-relay-faq.md)：審核時會被問到的問題與回答
+- [校園 Tor Relay 提案範本](https://anoni.net/join/relay-on-campus/proposal/){target="_blank"}：從台灣師範大學的成功案例整理出的提案文件、四封溝通信與行政時間軸，可以直接改寫送審
+- [校園 Tor Relay 架設 SOP](https://anoni.net/join/relay-on-campus/sop/){target="_blank"}：提案通過之後的實際步驟
+- [給校方與法務的校園 Tor Relay FAQ](https://anoni.net/join/relay-on-campus/faq/){target="_blank"}：審核時會被問到的問題與回答
 
 ### 會寫文件，會翻譯
 
@@ -71,5 +71,5 @@ icon: material/console
 
 ## 這條路徑沒有處理的
 
-- **中繼節點的法律風險評估**：出口節點與中繼節點的差別很大，[校園 Tor Relay 的 FAQ](../community/campus-relay-faq.md) 有整理法務面的問答，個人架設前建議一併看過
+- **中繼節點的法律風險評估**：出口節點與中繼節點的差別很大，[校園 Tor Relay 的 FAQ](https://anoni.net/join/relay-on-campus/faq/){target="_blank"} 有整理法務面的問答，個人架設前建議一併看過
 - **Tor 本身的協定細節**：站上寫到工具層與觀測層為止，協定規格請直接看 Tor Project 的文件

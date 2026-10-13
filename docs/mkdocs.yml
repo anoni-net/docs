@@ -199,11 +199,7 @@ nav:
   # 連結的 onion 版由 replace_sitename_anoni_onion.sh 改寫。
   # 「讀懂觀測資料」四頁 2026-10-13 搬到社群首頁的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
   # 架設 Tor Relay、WebTunnel 橋接、.onion 服務與 pin IPFS 鏡像四頁 2026-10-13 搬到社群首頁的 /join/ 底下（#406）。
-  - "架設與營運":
-      - setup/index.md
-      - community/campus-tor-relay-proposal.md
-      - community/campus-tor-relay-sop.md
-      - community/campus-relay-faq.md
+  # 三份校園範本同一天搬到 /join/relay-on-campus/ 底下，「架設與營運」整組拿掉，索引頁轉到 /join/。
   # about/index.md 排第一，navigation.indexes 才會把它當成這一組的索引頁。
   - "關於文件站":
       - about/index.md
@@ -395,6 +391,10 @@ plugins:
         'community/setup-tor-webtunnel.md': 'https://anoni.net/join/setup-tor-webtunnel/'
         'community/setup-onion-service.md': 'https://anoni.net/join/setup-onion-service/'
         'community/pin-ipfs-mirror.md': 'https://anoni.net/join/pin-ipfs-mirror/'
+        'community/campus-tor-relay-proposal.md': 'https://anoni.net/join/relay-on-campus/proposal/'
+        'community/campus-tor-relay-sop.md': 'https://anoni.net/join/relay-on-campus/sop/'
+        'community/campus-relay-faq.md': 'https://anoni.net/join/relay-on-campus/faq/'
+        'setup/index.md': 'https://anoni.net/join/'
         'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'

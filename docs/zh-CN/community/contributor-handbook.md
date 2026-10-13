@@ -65,9 +65,9 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `advanced/` | 进阶层，技术深度的延伸阅读 |
 | `taiwan/` | 在地脉络，台湾的法规、观测、研究 |
 | `reports/` | 严选报告，外部研究的中译 |
-| `community/` | 架设与运营的教程、读懂观测数据的方法、贡献与翻译规范 |
+| `community/` | 贡献与翻译规范、开发环境准备、技能自评与视觉指南 |
 
-社群本身的页面与公告不放在文档站。关于我们、参与方式、自架服务、活动与社群动态在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，源代码是 [`anoni-net/www`](https://github.com/anoni-net/www)，活动公告、项目上线、工作进度这类社群公告发在该 repo 的 `updates/`。文档站的 `blog/` 放外部文章的翻译、技术分析、观测报告与文档站自己的更新回顾。
+社群本身的页面与公告不放在文档站。关于我们、参与方式、自架服务、活动与社群动态在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，源代码是 [`anoni-net/www`](https://github.com/anoni-net/www)，活动公告、项目上线、工作进度这类社群公告发在该 repo 的 `updates/`。架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，写给已经熟悉 Tor 的技术读者，2026-10 起也放在 anoni.net。文档站的 `blog/` 放外部文章的翻译、技术分析、观测报告与文档站自己的更新回顾。
 
 如果你的新文章不确定该放哪一类，先在 Matrix 上问一声，避免直接 PR 后又要搬。
 

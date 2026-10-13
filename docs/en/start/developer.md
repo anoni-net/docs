@@ -45,9 +45,9 @@ The measurement line needs people who can read raw results and turn them into an
 
 Campus relays need someone who can talk to administration and legal. The technical part is the easy half.
 
-- [Campus Tor relay proposal template](../community/campus-tor-relay-proposal.md): a proposal document, four outreach emails, and an administrative timeline drawn from a successful deployment at National Taiwan Normal University, ready to adapt
-- [Campus Tor relay deployment SOP](../community/campus-tor-relay-sop.md): the steps once a proposal clears
-- [An FAQ for university administrators and legal counsel](../community/campus-relay-faq.md): the questions that come up in review, with answers
+- [Campus Tor Relay Proposal Template](https://anoni.net/en/join/relay-on-campus/proposal/){target="_blank"}: a proposal document, four outreach emails, and an administrative timeline drawn from a successful deployment at National Taiwan Normal University, ready to adapt
+- [Campus Tor Relay Deployment SOP](https://anoni.net/en/join/relay-on-campus/sop/){target="_blank"}: the steps once a proposal clears
+- [Campus Tor Relay FAQ for University Administrators and Legal Counsel](https://anoni.net/en/join/relay-on-campus/faq/){target="_blank"}: the questions that come up in review, with answers
 
 ### You write documentation, or translate
 
@@ -71,5 +71,5 @@ Technical ability and personal operational habits are separate things. Someone h
 
 ## What this path does not cover
 
-- **Legal risk assessment for running a relay**: exit relays and middle relays differ substantially, and so does the law where you are. The [campus relay FAQ](../community/campus-relay-faq.md) collects the legal questions, and individual operators should assess against their own jurisdiction
+- **Legal risk assessment for running a relay**: exit relays and middle relays differ substantially, and so does the law where you are. The [campus relay FAQ](https://anoni.net/en/join/relay-on-campus/faq/){target="_blank"} collects the legal questions, and individual operators should assess against their own jurisdiction
 - **Tor protocol internals**: this site covers the tool and measurement layers. For specifications, go to the Tor Project's documentation

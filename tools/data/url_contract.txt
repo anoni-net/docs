@@ -1471,64 +1471,9 @@
 	#9-載入確認
 	#BECOME_ANONI--anoninet-貢獻者-AI-載入協定
 /community/brand-assets/ -> https://anoni.net/brand/
-/community/campus-relay-faq/
-	#如何使用這份-FAQ
-	#常見疑慮-QA
-	#校園-Tor-Relay給校方與法務的-FAQ
-	#相關閱讀
-	#給校方行政與法務的一頁摘要
-	#給網管的一頁摘要
-	#資料來源與致謝
-/community/campus-tor-relay-proposal/
-	#1-架設類型
-	#2-所需資源
-	#3-維運方式
-	#Tor-University-Challenge-at
-	#伍計畫流程
-	#典型行政時間軸
-	#參安全性與風險說明
-	#壹計畫背景
-	#如何使用這份範本
-	#專案計畫說明書
-	#提案前的準備清單
-	#提案文件主體可整段複製
-	#校園-Tor-Relay-提案範本
-	#溝通-email-範本
-	#相關閱讀
-	#肆學術與校園價值
-	#貳計畫內容
-	#資料來源與致謝
-	#踩雷提醒
-	#這份範本是什麼
-	#附錄
-	#陸聯絡資訊
-/community/campus-tor-relay-sop/
-	#IPv6-設定選用
-	#Nginx--TLS-重點
-	#Tor-安裝建議
-	#UFW-防火牆設計
-	#torrc-參考設定
-	#主機層可觀測性
-	#事件處置-Runbook
-	#交接與畢業後維運
-	#作業系統與安全基準
-	#備份與金鑰保全
-	#專案範疇與非範疇
-	#對外主動連線Outbound
-	#對外公開的連接埠Inbound
-	#對外狀態網頁方案
-	#帳變與稽核
-	#方案-ANginx--Onionoo簡潔低風險推薦
-	#方案-BMetricsPort--Prometheus--Grafana可觀測性完整
-	#日誌
-	#明確封鎖
-	#服務與連線一覽
-	#校園-Tor-Relay-架設-SOP
-	#監控日誌與事件處置
-	#相關閱讀
-	#資料來源與致謝
-	#跟個人架設的差異
-	#驗收與連線測試
+/community/campus-relay-faq/ -> https://anoni.net/join/relay-on-campus/faq/
+/community/campus-tor-relay-proposal/ -> https://anoni.net/join/relay-on-campus/proposal/
+/community/campus-tor-relay-sop/ -> https://anoni.net/join/relay-on-campus/sop/
 /community/contributor-handbook/
 	#AI-協作
 	#AI-產出的檢查
@@ -2744,64 +2689,9 @@
 	#9-Load-confirmation
 	#BECOME_ANONI--anoninet-contributor-AI-loading-protocol
 /en/community/brand-assets/ -> https://anoni.net/en/brand/
-/en/community/campus-relay-faq/
-	#Campus-Tor-Relay-an-FAQ-for-university-administrators-and-legal-counsel
-	#How-to-use-it
-	#Related
-	#Sources-and-acknowledgements
-	#The-questions
-	#summary-for-administration-and-legal
-	#summary-for-network-administrators
-/en/community/campus-tor-relay-proposal/
-	#1-Background
-	#2-Scope
-	#21-Type-of-relay
-	#22-Resources-required
-	#23-Operation
-	#3-Security-and-risk
-	#4-Academic-and-institutional-value
-	#5-Process
-	#6-Contact
-	#A-typical-administrative-timeline
-	#Appendices
-	#Before-you-start
-	#Campus-Tor-Relay-Proposal-Template
-	#Email-templates
-	#How-to-use-it
-	#Pitfalls
-	#Project-proposal
-	#Related
-	#Sources-and-acknowledgements
-	#The-proposal-body
-	#Tor-University-Challenge-at
-	#What-this-is
-/en/community/campus-tor-relay-sop/
-	#Acceptance-testing
-	#Audit
-	#Backups-and-key-protection
-	#Campus-Tor-Relay-Deployment-SOP
-	#Explicitly-blocked
-	#Firewall
-	#Handover-and-life-after-graduation
-	#Host-observability
-	#How-a-campus-differs-from-a-personal-deployment
-	#IPv6-optional
-	#Inbound
-	#Incident-runbook
-	#Installing-Tor
-	#Logs
-	#Monitoring-logging-and-incident-response
-	#Nginx-and-TLS
-	#Operating-system-baseline
-	#Option-A-Nginx-and-Onionoo-simple-low-risk-recommended
-	#Option-B-MetricsPort-Prometheus-and-Grafana-full-observability
-	#Outbound
-	#Related
-	#Scope-and-non-scope
-	#Services-and-connections
-	#Sources-and-acknowledgements
-	#The-public-status-page
-	#torrc-reference
+/en/community/campus-relay-faq/ -> https://anoni.net/en/join/relay-on-campus/faq/
+/en/community/campus-tor-relay-proposal/ -> https://anoni.net/en/join/relay-on-campus/proposal/
+/en/community/campus-tor-relay-sop/ -> https://anoni.net/en/join/relay-on-campus/sop/
 /en/community/contributor-handbook/
 	#Branch-naming
 	#Charts
@@ -3485,11 +3375,7 @@
 /en/setup-repo/ -> /en/community/setup-repo/
 /en/setup-skill-level/ -> /en/community/skill-level/
 /en/setup-tor-relay/ -> https://anoni.net/en/join/setup-tor-relay/
-/en/setup/
-	#Mirroring-the-docs-site
-	#Run-a-Node
-	#Tor-nodes-and-onion-services
-	#Tor-relays-on-campus
+/en/setup/ -> https://anoni.net/en/join/
 /en/sitemap.xml
 /en/sitemap.xml.gz
 /en/start/
@@ -4865,11 +4751,7 @@
 /setup-repo/ -> /community/setup-repo/
 /setup-skill-level/ -> /community/skill-level/
 /setup-tor-relay/ -> https://anoni.net/join/setup-tor-relay/
-/setup/
-	#Tor-節點與-onion-服務
-	#文件站的鏡像
-	#架設與營運
-	#校園-Tor-Relay
+/setup/ -> https://anoni.net/join/
 /sitemap.xml
 /sitemap.xml.gz
 /start/
@@ -7251,9 +7133,9 @@
 	#9-加载确认
 	#BECOME_ANONI--anoninet-贡献者-AI-加载协议
 /zh-cn/community/brand-assets/ -> https://anoni.net/zh-cn/brand/
-/zh-cn/community/campus-relay-faq/ -> https://anoni.net/docs/community/campus-relay-faq/
-/zh-cn/community/campus-tor-relay-proposal/ -> https://anoni.net/docs/community/campus-tor-relay-proposal/
-/zh-cn/community/campus-tor-relay-sop/ -> https://anoni.net/docs/community/campus-tor-relay-sop/
+/zh-cn/community/campus-relay-faq/ -> https://anoni.net/zh-cn/join/relay-on-campus/faq/
+/zh-cn/community/campus-tor-relay-proposal/ -> https://anoni.net/zh-cn/join/relay-on-campus/proposal/
+/zh-cn/community/campus-tor-relay-sop/ -> https://anoni.net/zh-cn/join/relay-on-campus/sop/
 /zh-cn/community/contributor-handbook/
 	#Branch-命名
 	#Commit-消息格式
@@ -7864,10 +7746,7 @@
 /zh-cn/setup-repo/ -> /zh-cn/community/setup-repo/
 /zh-cn/setup-skill-level/ -> /zh-cn/community/skill-level/
 /zh-cn/setup-tor-relay/ -> https://anoni.net/zh-cn/join/setup-tor-relay/
-/zh-cn/setup/
-	#Tor-节点与-onion-服务
-	#文档站的镜像
-	#架设与运营
+/zh-cn/setup/ -> https://anoni.net/zh-cn/join/
 /zh-cn/sitemap.xml
 /zh-cn/sitemap.xml.gz
 /zh-cn/start/

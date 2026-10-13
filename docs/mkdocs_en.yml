@@ -188,12 +188,9 @@ nav:
   # The four "Reading Measurement Data" pages moved to /projects/asn-coverage/ on the
   # community site on 2026-10-13 (toomore/anoni-net-ws#406).
   # The Tor relay, WebTunnel bridge, onion service and IPFS pinning guides moved to /join/
-  # on the community site on 2026-10-13 (#406).
-  - "Run a Node":
-      - setup/index.md
-      - community/campus-tor-relay-proposal.md
-      - community/campus-tor-relay-sop.md
-      - community/campus-relay-faq.md
+  # on the community site on 2026-10-13 (#406). The three campus relay templates moved to
+  # /join/relay-on-campus/ the same day, so the whole "Run a Node" group is gone and its
+  # index page redirects to /join/.
   # about/index.md comes first so navigation.indexes uses it as the section index.
   - "About the Docs":
       - about/index.md
@@ -383,6 +380,10 @@ plugins:
         'community/setup-tor-webtunnel.md': 'https://anoni.net/en/join/setup-tor-webtunnel/'
         'community/setup-onion-service.md': 'https://anoni.net/en/join/setup-onion-service/'
         'community/pin-ipfs-mirror.md': 'https://anoni.net/en/join/pin-ipfs-mirror/'
+        'community/campus-tor-relay-proposal.md': 'https://anoni.net/en/join/relay-on-campus/proposal/'
+        'community/campus-tor-relay-sop.md': 'https://anoni.net/en/join/relay-on-campus/sop/'
+        'community/campus-relay-faq.md': 'https://anoni.net/en/join/relay-on-campus/faq/'
+        'setup/index.md': 'https://anoni.net/en/join/'
         'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
