@@ -1,6 +1,6 @@
 ---
 title: Home
-description: A Taiwan-anchored volunteer observatory tracking networked freedom across the Sinophone Asia-Pacific region — OONI measurements, Tor relay monitoring, and on-the-ground community context.
+description: Plain-language guides to anonymity networks and privacy for people just starting out, with no prior knowledge of Tor needed, written with the context of the Sinophone Asia-Pacific built in. The whole site can be saved for offline reading.
 icon: material/home-circle
 hide:
   - navigation
@@ -9,17 +9,17 @@ hide:
 
 # <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net Docs
 
-> A Taiwan-anchored volunteer observatory for networked freedom across the Sinophone (Chinese-speaking) Asia-Pacific.
+> Plain-language guides to anonymity networks and privacy for people just starting out, with the context of the Sinophone (Chinese-speaking) Asia-Pacific built in. You do not need to know what Tor or .onion is, and the whole site can be saved to your phone for reading offline.
 
 [:material-sign-direction: Start by role](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: Newsletter](https://anoni.net/en/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/en/feed_rss_created.xml)
+[:material-wifi-off: Offline reading](./offline.md) · [:material-email-fast-outline: Newsletter](https://anoni.net/en/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/en/feed_rss_created.xml)
 
 These docs are maintained by the [anoni.net community](https://anoni.net/en/){target="_blank"}. See [About](https://anoni.net/en/about/){target="_blank"} for who we are.
 
 ## :material-compass-outline: Why this site exists
 
-We combine OONI network measurements, Tor relay monitoring, and on-the-ground community context, written by people working inside the region. The site covers Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the Sinophone diaspora.
+The guides are written for readers who are new to anonymity tools, by people working inside the region, and cover Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the Sinophone diaspora. Our measurement projects, Tor Relay Watch and OONI Coverage, along with the guides to running relays and onion services, live on the [community site](https://anoni.net/en/projects/){target="_blank"}.
 
 For general digital safety guidance written for a global audience, well-established English resources include [EFF Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, [Privacy Guides](https://www.privacyguides.org/){target="_blank"}, and the [Tor Project Support Portal](https://support.torproject.org/){target="_blank"}, and we link to them rather than duplicating them. What we add is the regional layer those sites are not set up to produce: how a tool behaves in Mainland China versus Taiwan, what a local statute changes about the threat model, and measurement from inside the region. Our introductions to Tor, Tails, OONI, and CryptPad are written with that context built in rather than as generic explainers.
 

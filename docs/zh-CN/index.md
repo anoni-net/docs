@@ -1,6 +1,6 @@
 ---
 title: 首页
-description: 匿名网络社区 anoni.net 维护的中文文档，整理匿名网络与隐私的概念、工具与各种处境的准备，也追踪华语地区的网络观测与在地脉络（个资法、VASP、揭弊者保护等）。
+description: 给刚开始接触匿名网络与隐私的人的中文文档，不需要先知道 Tor 是什么。整理概念、工具与各种处境的准备，也追踪华语地区的网络观测与在地脉络，整站可以存进设备离线阅读。
 icon: material/home-circle
 hide:
   - navigation
@@ -9,11 +9,11 @@ hide:
 
 # <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net 文档
 
-> 匿名网络与隐私的中文文档，从概念、工具到各种处境的准备，也追踪华语地区的网络观测与在地脉络。
+> 给刚开始接触匿名网络与隐私的人，不需要先知道 Tor 或 .onion 是什么。从概念、工具到各种处境的准备，读完就能照着做，整站也可以存进手机，没有网络时照样能读。
 
 [:material-sign-direction: 从你的身分开始](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: 订阅电子报](https://anoni.net/zh-cn/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
+[:material-wifi-off: 离线阅读](./offline.md) · [:material-email-fast-outline: 订阅电子报](https://anoni.net/zh-cn/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/zh-cn/feed_rss_created.xml)
 
 文档由[匿名网络社区 anoni.net](https://anoni.net/){target="_blank"} 维护，社区的介绍见[关于我们](https://anoni.net/zh-cn/about/){target="_blank"}，2026 年的三个主题与参与方式见[社区参与](https://anoni.net/zh-cn/join/){target="_blank"}。
 

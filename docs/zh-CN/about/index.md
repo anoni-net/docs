@@ -1,14 +1,20 @@
 ---
 title: 关于文档站
-description: anoni.net 文档站写什么、如何写成、三个语言版本的关系、错误如何更正，以及内容的授权。社区本身的介绍在 anoni.net。
+description: anoni.net 文档站写给谁、与社区首页如何分工、如何写成、三个语言版本的关系、错误如何更正，以及内容的授权。社区本身的介绍在 anoni.net。
 icon: material/book-information-variant
 ---
 
 # :material-book-information-variant: 关于文档站
 
-文档站整理匿名网络与隐私的知识，从概念、工具到不同处境的准备，也追踪台湾的网络观测与相关法规。内容由匿名网络社区 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
+文档站写给刚开始接触匿名网络与隐私的人，读者不需要先知道 Tor、.onion 是什么。内容从概念、工具到不同处境的准备，写成读完就能照着做的步骤，也追踪台湾的网络观测与相关法规。内容由匿名网络社区 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社区的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/){target="_blank"}，架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法也在那里。这一页只谈文档站本身。
+整站可以存进手机或电脑，网络受限或断线时照样能读，做法见[离线阅读](../offline.md)。
+
+社区的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/){target="_blank"}，这一页只谈文档站本身。
+
+## 文档站与 anoni.net 的分工
+
+一页内容要放在哪里，看它写给谁。读之前需要先懂 Tor 的内容放在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，例如架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，读者是要运营节点或自己分析数据的技术同好。不需要先懂 Tor、读完就能保护自己的内容放在文档站。写新内容前不确定该放哪一边，可以先在 Matrix 上询问。
 
 ## 内容范围
 

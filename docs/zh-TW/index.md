@@ -1,6 +1,6 @@
 ---
 title: 首頁
-description: 匿名網路社群 anoni.net 維護的正體中文文件，整理匿名網路與隱私的概念、工具與各種處境的準備，也追蹤台灣的網路觀測與法規（個資法、VASP、揭弊者保護）。
+description: 給剛開始接觸匿名網路與隱私的人的正體中文文件，不需要先知道 Tor 是什麼。整理概念、工具與各種處境的準備，也追蹤台灣的網路觀測與法規，整站可以存進裝置離線閱讀。
 icon: material/home-circle
 hide:
   - navigation
@@ -9,11 +9,11 @@ hide:
 
 # <img src="./assets/images/logo-tonal.svg" alt="anoni.net logo" class="hero-icon"> anoni.net 文件
 
-> 匿名網路與隱私的正體中文文件，從概念、工具到各種處境的準備，也追蹤台灣的網路觀測與法規。
+> 給剛開始接觸匿名網路與隱私的人，不需要先知道 Tor 或 .onion 是什麼。從概念、工具到各種處境的準備，讀完就能照著做，整站也可以存進手機，沒有網路時照樣能讀。
 
 [:material-sign-direction: 從你的身分開始](./start/index.md){ .md-button .md-button--primary }
 
-[:material-email-fast-outline: 訂閱電子報](https://anoni.net/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/feed_rss_created.xml)
+[:material-wifi-off: 離線閱讀](./offline.md) · [:material-email-fast-outline: 訂閱電子報](https://anoni.net/contact/){target="_blank"} · [:material-chat-processing-outline: Matrix](https://matrix.to/#/#community:im.anoni.net){ target="_blank" rel="noopener" } · [:material-rss-box:{ .rss-icon } RSS](https://anoni.net/docs/feed_rss_created.xml)
 
 文件由[匿名網路社群 anoni.net](https://anoni.net/){target="_blank"} 維護，社群的介紹見[關於我們](https://anoni.net/about/){target="_blank"}，2026 年的三個主題與參與方式見[社群參與](https://anoni.net/join/){target="_blank"}。
 

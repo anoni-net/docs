@@ -1,14 +1,20 @@
 ---
 title: About the Docs
-description: What the anoni.net Docs cover, how pages are written and reviewed, how the three language editions relate, how corrections work, and how the content is licensed. The community itself is introduced on anoni.net.
+description: Who the anoni.net Docs are written for, how they divide the work with the community site, how pages are written and reviewed, how the three language editions relate, how corrections work, and how the content is licensed. The community itself is introduced on anoni.net.
 icon: material/book-information-variant
 ---
 
 # :material-book-information-variant: About the Docs
 
-The anoni.net Docs collect what we know about anonymity networks and privacy, from concepts and tools to preparing for specific situations, and track network measurement and regulation in Taiwan and the wider Sinophone Asia-Pacific. Members of the anoni.net community write and maintain the pages, and the source and full edit history are public on [GitHub](https://github.com/anoni-net/docs){target="_blank"}.
+The anoni.net Docs are written for people just starting out with anonymity networks and privacy, and assume no prior knowledge of what Tor or .onion is. The pages run from concepts and tools to preparing for specific situations, written as steps a reader can follow, and track network measurement and regulation in Taiwan and the wider Sinophone Asia-Pacific. Members of the anoni.net community write and maintain the pages, and the source and full edit history are public on [GitHub](https://github.com/anoni-net/docs){target="_blank"}.
 
-Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/){target="_blank"}, along with the guides to running Tor relays, bridges and onion services and to reading OONI measurement data. This page is about the documentation site itself.
+The whole site can be saved to a phone or computer and read when the network is restricted or down; see [offline reading](../offline.md).
+
+Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/){target="_blank"}. This page is about the documentation site itself.
+
+## How the docs and anoni.net divide the work
+
+Where a page goes depends on who it is written for. Anything that assumes the reader already understands Tor lives on [anoni.net](https://anoni.net/en/){target="_blank"}, such as the guides to running Tor relays, bridges and onion services and to reading OONI measurement data, written for technical readers who run nodes or analyse data themselves. Anything a newcomer can read and act on to protect themselves belongs here. If you are not sure which side a new page belongs on, ask on Matrix first.
 
 ## What the site covers
 
