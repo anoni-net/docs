@@ -192,6 +192,7 @@ nav:
   # until redirects are set up. The onion build rewrites the link in
   # replace_sitename_anoni_onion.sh.
   - "Run a Node":
+      - setup/index.md
       - community/setup-tor-relay.md
       - community/setup-tor-webtunnel.md
       - community/setup-onion-service.md

@@ -1,6 +1,7 @@
 ---
 title: MADLink / 台灣在 Geedge 供應鏈中的遺留 | InterSecLab
 description: InterSecLab 揭露台灣公司凌華科技於 2019 至 2020 年出貨 1,708 台 CSA-7400 網路安全設備給中國 Geedge Networks，最終部署於哈薩克的國家級網路審查系統。
+icon: material/file-outline
 ---
 
 # :material-file-outline: MADLink：台灣在 Geedge 供應鏈中的遺留 - InterSecLab

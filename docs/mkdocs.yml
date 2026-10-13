@@ -204,6 +204,7 @@ nav:
   # 說明收進「關於文件站」。拿掉的頁面網址不變，照樣開得到，等轉址時再處理。
   # 連結的 onion 版由 replace_sitename_anoni_onion.sh 改寫。
   - "架設與營運":
+      - setup/index.md
       - community/setup-tor-relay.md
       - community/setup-tor-webtunnel.md
       - community/setup-onion-service.md

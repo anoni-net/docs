@@ -3739,6 +3739,11 @@
 /en/setup-repo/ -> /en/community/setup-repo/
 /en/setup-skill-level/ -> /en/community/skill-level/
 /en/setup-tor-relay/ -> /en/community/setup-tor-relay/
+/en/setup/
+	#Mirroring-the-docs-site
+	#Run-a-Node
+	#Tor-nodes-and-onion-services
+	#Tor-relays-on-campus
 /en/sitemap.xml
 /en/sitemap.xml.gz
 /en/start/
@@ -5114,6 +5119,11 @@
 /setup-repo/ -> /community/setup-repo/
 /setup-skill-level/ -> /community/skill-level/
 /setup-tor-relay/ -> /community/setup-tor-relay/
+/setup/
+	#Tor-節點與-onion-服務
+	#文件站的鏡像
+	#架設與營運
+	#校園-Tor-Relay
 /sitemap.xml
 /sitemap.xml.gz
 /start/
@@ -8234,6 +8244,10 @@
 /zh-cn/setup-repo/ -> /zh-cn/community/setup-repo/
 /zh-cn/setup-skill-level/ -> /zh-cn/community/skill-level/
 /zh-cn/setup-tor-relay/ -> /zh-cn/community/setup-tor-relay/
+/zh-cn/setup/
+	#Tor-节点与-onion-服务
+	#文档站的镜像
+	#架设与运营
 /zh-cn/sitemap.xml
 /zh-cn/sitemap.xml.gz
 /zh-cn/start/
