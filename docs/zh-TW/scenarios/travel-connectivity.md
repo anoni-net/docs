@@ -199,6 +199,7 @@ FBI 對旅館 Wi-Fi 的提醒[^fbi-hotel]還有兩件事：
 - [出差與研討會的數位準備](./asia-travel.md)：十四地的審查、VPN 與 Tor 可達性、SIM 實名與入境查機，以及乾淨機的取捨
 - [出國前數位安全：用 AI 自助產生目的地概況](./travel-ai-briefing.md)：任何目的地都適用的行前概況產生方式
 - [手機隱私設定逐步指引](../tools/phone-privacy-settings.md)：出發前先把手機的基本設定做完
+- [網路中斷時的準備與應對](./shutdown.md)：連線被擋或整區斷網時，判斷是哪一種中斷，以及事前要跟人約好的事
 - [VPN 的風險與選擇](../tools/vpn-guide.md)：在旅館與路由器上用 VPN 之前，先挑一家值得信任的業者
 - [Metadata 是什麼，為什麼重要](../basics/metadata.md)：內容加密之後，電信網路仍然看得到的那一層
 

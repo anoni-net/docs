@@ -199,6 +199,7 @@ A router left in the room all day, unattended, could in principle be tampered wi
 - [Device minimization and border crossings in Asia](./asia-travel.md) — device preparation for any border, plus Asia-specific border-search context and the burner question
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — a way to generate a destination overview that works for anywhere
 - [Phone privacy settings, step by step](../tools/phone-privacy-settings.md) — get the phone's basic settings done before you leave
+- [Preparing for and responding to a network shutdown](./shutdown.md) — when a service is blocked or a whole area goes dark, how to tell which kind of outage it is and what to agree with people beforehand
 - [VPN: risks and how to choose](../tools/vpn-guide.md) — before using a VPN at the hotel or on a router, pick a provider worth trusting
 - [Metadata, and why it matters](../basics/metadata.md) — the layer the mobile network can still see after content is encrypted
 
