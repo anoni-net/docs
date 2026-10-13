@@ -8,7 +8,7 @@ icon: material/currency-btc
 
 你想匿名訂閱一份政治敏感的電子報、給海外的調查記者打賞、為準備離開的家暴倖存者備一筆對方看不到的資金。每個情境都有人推薦用加密貨幣付款當預設答案，但比特幣與 Monero 的隱私差距，跟現金與信用卡的差距一樣大。
 
-這篇文章把幾個常見幣種排出一條光譜，幫你判斷對手是誰、願意付出多少摩擦、哪一段隱私強度足夠你的需求。不需要懂密碼學，原理連結放在每段，等你需要時再深入。如果想直接讀技術細節，可延伸到 [零知識身分驗證與支付](../advanced/zk-identity-payments.md)。
+這篇文章把幾個常見幣種排出一條光譜，幫你判斷對手是誰、願意付出多少摩擦、哪一段隱私強度足夠你的需求。不需要懂密碼學，原理連結放在每段，等你需要時再深入。如果想直接讀技術細節，可延伸到 [零知識身分驗證與支付](https://anoni.net/articles/zk-identity-payments/){target="_blank"}。
 
 !!! tip "30 秒結論"
 
@@ -42,7 +42,7 @@ icon: material/currency-btc
 - **圖譜**：A 跟 B 之間的轉帳路徑。比特幣可重建完整圖譜，以太坊類似，Monero 用環簽名製造誘餌，Zcash 遮蔽池內部不可見。
 - **Metadata**：交易由哪個 IP、哪個錢包客戶端、什麼時間送出。所有鏈都依賴 P2P 網路層的隱私（搭配 Tor、Dandelion++）。
 
-四個維度的內部機制與鏈上分析的能與不能，在 [零知識身分驗證與支付](../advanced/zk-identity-payments.md) 有完整討論。本頁只用這四個維度當作後續比較的尺。
+四個維度的內部機制與鏈上分析的能與不能，在 [零知識身分驗證與支付](https://anoni.net/articles/zk-identity-payments/){target="_blank"} 有完整討論。本頁只用這四個維度當作後續比較的尺。
 
 ## 對應你的情境
 
@@ -108,7 +108,7 @@ CoinJoin 是比特幣早期的隱私強化路線：多名使用者把交易合�
 
 ## Monero：強匿名，取得有摩擦 {#monero}
 
-Monero 把帳戶、金額、圖譜這三個維度的隱藏內建成預設行為。stealth address、ring signatures、RingCT 三個機制疊加，鏈上看不到 Alice 與 Bob 的概念，只看到「某個一次性地址收到一筆隱藏金額，由 16 個可能寄件人之一送出」。原理細節見 [零知識身分驗證與支付](../advanced/zk-identity-payments.md)。
+Monero 把帳戶、金額、圖譜這三個維度的隱藏內建成預設行為。stealth address、ring signatures、RingCT 三個機制疊加，鏈上看不到 Alice 與 Bob 的概念，只看到「某個一次性地址收到一筆隱藏金額，由 16 個可能寄件人之一送出」。原理細節見 [零知識身分驗證與支付](https://anoni.net/articles/zk-identity-payments/){target="_blank"}。
 
 - **錢包**：Cake Wallet（行動裝置與桌面）、Feather Wallet（桌面、輕量、開源）、Monero GUI（官方桌面）。
 - **合規處境**：在台灣個人持有與點對點交易未受明文禁止，但本地交易所幾乎不提供 XMR 對接。VASP 法 2026 通過後，本地對接可能更受限。
@@ -195,7 +195,7 @@ mixers 與 CoinJoin 的法律風險主要在美國司法管轄。對台灣使用
 <div class="grid cards" markdown>
 
 - [:material-cash-multiple: 為什麼匿名支付重要](../basics/payments-anonymity.md)
-- [:material-shield-key-outline: 零知識身分驗證與支付](../advanced/zk-identity-payments.md)
+- [:material-shield-key-outline: 零知識身分驗證與支付](https://anoni.net/articles/zk-identity-payments/){target="_blank"}
 - [:material-handshake-outline: 倡議組織的匿名捐款](../scenarios/nonprofit-anonymous-donation.md)
 
 </div>

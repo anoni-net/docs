@@ -1,21 +1,21 @@
 ---
 title: Guides
 subtitle: Concept through practice
-description: The core reading paths through this site — concepts, tools, scenarios, advanced material, and curated external reports.
+description: The core reading paths through the docs site, from concepts, tools and scenarios to full translations of external research reports.
 icon: material/compass-outline
 ---
 
 # :material-compass-outline: Guides
 
-Guides collects the site's core reading paths, from foundational concepts through specific tools and situations to advanced subjects and external research. Each layer has its own index listing everything in it.
+Guides collects the docs site's core reading paths, from foundational concepts through specific tools and situations, plus full translations of external research. Each layer has its own index listing everything in it.
 
-## Five layers
+## Four Layers { #Five-layers }
 
 <div class="grid cards" markdown>
 
 - [:material-school-outline: Concepts](../basics/index.md)
 
-    The thinking tools behind anonymity and privacy: clarifying the vocabulary, building a threat model, metadata, how platforms collect data, what surveillance can currently do, maintaining multiple identities, networked freedom, and anonymous payments. Start here for the shared vocabulary.
+    The thinking tools behind anonymity and privacy: clarifying the vocabulary, building a threat model, metadata, how platforms collect data, what surveillance can currently do, maintaining multiple identities, networked freedom, anonymous payments, end-to-end encryption, and the networks often mistaken for anonymity. Start here for the shared vocabulary.
 
 - [:material-toolbox-outline: Tools](../tools/index.md)
 
@@ -25,25 +25,20 @@ Guides collects the site's core reading paths, from foundational concepts throug
 
     Situations and roles: an everyday baseline, journalists, activists, domestic violence survivors, LGBTQ+ people, election observers, anonymous donations, travel and border crossing, and speaking on Mainland Chinese platforms.
 
-- [:material-lock-outline: Advanced](../advanced/index.md)
+- [:material-file-pdf-box: Translated Reports](../reports/index.md)
 
-    Technical depth: end-to-end encryption, post-quantum cryptography, decentralized publishing, zero-knowledge identity and payments, and which networks are mistaken for anonymity.
-
-- [:material-file-pdf-box: Reports](../reports/index.md)
-
-    Curated external research, indexed with links to the English originals and our Chinese translations.
+    External research reports, indexed with links to the English originals and our full Traditional Chinese translations.
 
 </div>
 
-## How to use them
+## How to Use Them { #How-to-use-them }
 
-There is no need to read all five in order. Several ways in:
+There is no need to read all four in order. Several ways in:
 
 - **You want to know what to do and can read the reasoning later**: start with [an everyday baseline](../scenarios/everyday-baseline.md), ordered by actual effect
 - **First time with anonymity networks**: start with [Concepts](../basics/index.md) and read through for the vocabulary and the motivation
 - **Looking for a specific tool**: go straight to [Tools](../tools/index.md) for the introduction and the threat model each one addresses
 - **You have a specific situation**: find the closest role in [Scenarios](../scenarios/index.md) and read the whole workflow
-- **You want the principles**: [Advanced](../advanced/index.md) covers encryption, post-quantum, and the rest
-- **You want external sources**: [Reports](../reports/index.md) has the curated research
+- **You want external research**: [Translated Reports](../reports/index.md) indexes the reports and their originals
 
-For regional regulation and measurement, continue to the [Regional Observatory](../regional/index.md). To work with the community, see [Community](https://anoni.net/en/join/){target="_blank"}.
+For regional regulation and measurement, continue to the [Regional Observatory](../regional/index.md). The protocols and cryptography behind these tools (post-quantum cryptography, decentralized website publishing, zero-knowledge identity and more) are written up for technical readers in the community site's [Articles](https://anoni.net/en/articles/){target="_blank"}. To work with the community, see [Community](https://anoni.net/en/join/){target="_blank"}.

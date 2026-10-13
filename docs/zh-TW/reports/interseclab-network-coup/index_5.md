@@ -186,7 +186,7 @@ Ether Fabric 的硬體組件在很大程度上是可互換的，其建造基於�
 
 ### Network Zodiac 監控網路硬體
 
-Network Zodiac（哪吒）是由 Geedge Networks 開發的一款網路級資產管理和監控解決方案。Network Zodiac 顯然是以 Grafana 為藍本開發的，Grafana 是許多商業實體廣泛使用的開源分析和監控平台。與 Grafana 相似，Network Zodiac 幫助組織即時視覺化和理解其網路的效能、使用情況和錯誤。然而，雖然 Grafana 主要提供針對軟體應用的分析，Network Zodiac 則擴展了這一功能以分析硬體網路設備的效能。Network Zodiac 還允許監控大量的設備。該產品提供客戶診斷網路問題的能力，利用一個分佈式的監控架構，一個稱為 "NZ-TALON" 的軟體代理從每個節點（單個硬體設備）收集數據，並在客戶（政府）或 ISP 管理的數據中心聚合所有的指標。這些數據隨後傳輸到一個全球 NZ-Agent 節點中以進行長期儲存，允許客戶在 Network Zodiac 網頁介面中查詢全球節點，以檢索和視覺化聚合的效能指標。
+Network Zodiac（哪吒）是由 Geedge Networks 開發的一款網路級資產管理和監控解決方案[^17]。Network Zodiac 顯然是以 Grafana 為藍本開發的，Grafana 是許多商業實體廣泛使用的開源分析和監控平台。與 Grafana 相似，Network Zodiac 幫助組織即時視覺化和理解其網路的效能、使用情況和錯誤。然而，雖然 Grafana 主要提供針對軟體應用的分析，Network Zodiac 則擴展了這一功能以分析硬體網路設備的效能[^18]。Network Zodiac 還允許監控大量的設備。該產品提供客戶診斷網路問題的能力，利用一個分佈式的監控架構，一個稱為 "NZ-TALON" 的軟體代理從每個節點（單個硬體設備）收集數據，並在客戶（政府）或 ISP 管理的數據中心聚合所有的指標。這些數據隨後傳輸到一個全球 NZ-Agent 節點中以進行長期儲存，允許客戶在 Network Zodiac 網頁介面中查詢全球節點，以檢索和視覺化聚合的效能指標。
 
 <figure markdown="span">
   [![圖片於報告 28 頁](https://assets.anoni.net/the-internet-coup/index-5-28-1.png)](https://assets.anoni.net/the-internet-coup/index-5-28-1.png){target="_blank"}
@@ -196,18 +196,20 @@ Network Zodiac（哪吒）是由 Geedge Networks 開發的一款網路級資產�
 Network Zodiac 與流行的開源解決方案的一個顯著不同功能是其集成的網頁終端，該終端允許網路管理員使用 SSH 遠端連接到任何受監控的端點。這一功能為客戶提供直接訪問網路設備的能力，方便進行故障排除和管理。然而，網頁終端也使客戶承受了顯著的安全風險。在最壞的情況下，駭客可能會訪問部署在一個國家內部的所有安全設備。這種取捨顯示 Geedge 優先考慮大規模管理的便捷和易用性，而非基本的安全性。
 
 [^4]: 從資料中看到的客戶部署情況顯示，Cyber Narrator 運行於中國伺服器製造商浪潮的高密度儲存伺服器上。該軟體本身並不依賴於特定硬體，可部署於任何供應商的通用伺服器硬體上。
-[^5]: 它基於 Apache Kafka，利用了 Apache Druid 資料儲存、Apache Rink 分散式處理引擎和 ClickHouse 分析型資料庫構建而成。
+[^5]: 它基於 Apache Kafka，利用了 Apache Druid 資料儲存、Apache Flink 分散式處理引擎和 ClickHouse 分析型資料庫構建而成。
 [^6]: SQL 模式本質上是一個資料庫的組織系統。
 [^7]: 這意味著，TSG Galaxy 的客戶可以將網路流量歸因於一個 IP 位址，以及特定的手機或 SIM 卡。
 [^8]: 在中國神話中，天狗通常被描繪為一隻在日食或月食中吞噬太陽或月亮的狗。
-[^9]: Minqshi Wuet et al, "How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic", Proceedings of  the 32nd USENIX Securitmposium. August 9-11 2023. Anaheim CA USA <https://www.usenix.org/conference/usenixsecurity23/presentation/wu-mingshi>{target="_blank"}.
+[^9]: Mingshi Wu et al.，[How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic](https://www.usenix.org/conference/usenixsecurity23/presentation/wu-mingshi){target="_blank"}，Proceedings of the 32nd USENIX Security Symposium，2023 年 8 月 9 日至 11 日，美國加州安納罕。
 [^10]: 為了提取這些指紋，Geedge 和 Mesalab 的學生使用了一個開源工具 tcpdump 的修改版本，稱為 tcpdump_mesa。接著，指紋會被轉換為規則集，使用四個深度數據包檢查系統之一：SAPP（Stream Analyze Process Platform），一個 C 語言的封包解析和注入庫。Stellar，一個狀態防火牆插件平台，相較於 SAPP 運作在更高的抽象層次。或是 Maat，一個宣告式系統。與 SAPP 和 Stellar 不同，Maat 不需要編程知識以開發新規則。Maat 能夠匹配常見的連接指紋，包括 IP 位址、域名、TLS 伺服器名稱指示（SNI）、JA3/JA4 指紋，指紋內容在 JSON 文件中指定。Maat 規則透過使用 Redis 資料庫進行同步，以確保規則在 TSG 叢集的節點中一致應用。另一個執行深度數據包檢查的系統由兩個二進位文件組成，分別為「libqmengine.so」和「libqmbundle.so」。雖然洩漏的資訊不包括相關的原始碼，其中包含的 Jira 票據將該系統稱作 QDPI 或「第三方識別引擎庫」，暗示它可能不是由 Geedge Networks 開發。分析數據中的 Jira 票據表達了關於無法修改第三方引擎行為的擔憂，並強調了在獲取此系統技術支援時的挑戰。上述擔憂進一步支持了這些二進位文件不是由 Geedge Networks 開發的觀點。對兩個二進位文件的初步逆向工程指出它們參與了網路協議和服務的分類。與第三方引擎的整合是透過使用名為 qdpi_detector 的 Stellar 插件來完成的。
 [^11]: 他們在中國的一個區域性國內客戶中試驗了這個系統。該軟體的初始版本收到此客戶的負面反饋，主要原因是需要在 Python 中進行使用者介面自動化腳本編寫以促進與應用程式的互動。這成了一個重大挑戰，因為終端使用者通常缺乏必要的腳本編寫技能。此外，客戶擔心自動分類過程可能會導致誤報，將廣告網路和由第三方庫產生的其他網路請求錯誤分類為指紋。
 [^12]: 儘管當今市場上大多數網路分享檢測解決方案主要依靠分析收到的 IP 封包的生存時間（TTL）值，TSG 採用的是更為複雜的方法。它結合被動作業系統檢測技術與深度數據包檢查來識別與驗證入口網頁檢測（特別是所謂的 generate_204 請求）相關的 HTTP 請求，而請求內容會隨所用的作業系統而不同。因此，任何透過行動連線進入網路的桌面作業系統客戶均被視為網路分享活動的指示。天狗安全閘道採用的另一種技術涉及分析 TCP 時間戳值中的差異，在現代 TCP 堆疊中，這個計數器在啟動時初始化為一個隨機值。這些值的變化表明在網路位址轉換（NAT）背後存在多個裝置。
-[^13]: Bill Marczak et al, "China's Great Cannon", published on April 10 2025. <https://citizenlab.ca/2015/04/chinas-great-cannon/>{target="_blank"}.
+[^13]: Bill Marczak et al.，[China’s Great Cannon](https://citizenlab.ca/2015/04/chinas-great-cannon/){target="_blank"}，2015-04-10（原報告誤植為 2025 年）。
 [^14]: 在中國神話中，畢方是一種獨腳鳥，象徵著不幸的預兆，特別是與火相關的不幸。據信它的出現預示著該地區可能有災難發生。
 [^15]: 該系統整合了統一認證，並由中央設定儲存支撐，這可將設置同步到叢集中的各個節點，同時還整合了故障轉移機制以確保運營的連續性。其底層使用一個 Restful API 來查詢叢集中的各種組件以獲取狀態和故障資訊。此 API 在內部被稱為 TSG-OAM，其中 OAM 是運營和維護的縮寫。
-[^16]: Intel Corporation. "EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration. Solution Brief. November 2023. <https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf>{target="_blank"}.
+[^16]: Intel Corporation，[EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf){target="_blank"}，技術簡報（Solution Brief），2023 年 11 月。
+[^17]: 在中國神話中，哪吒是一位守護神，常以少年戰士的形象出現。
+[^18]: Network Zodiac 的主要差異，在於可以同時使用 Prometheus 與 PromQL，以及在網路設備上更普遍的簡易網路管理協定（SNMP）。
 
 *[Cyber Narrator]: Cyber Narrator 是由 Geedge Networks 開發的運營商級別安全資訊和事件管理（SIEM）以及線上分析處理（OLAP）解決方案。這是客戶在使用 Geedge 的監控產品時主要的使用者介面，也是唯一為非技術使用者設計的產品。在實際應用中，政府分析師會在國家指揮中心的辦公室中使用這個介面來存取資料。
 *[DPI]: 深度封包檢測 Deep Packet Inspection，縮寫為 DPI，是一種電腦網路封包過濾技術，用來檢查透過檢測點封包的資料部分（也可能包含其標頭），以搜尋不符合規範的協定、病毒、垃圾郵件、入侵，或以預定準則來決定封包是否可透過或需被路由至其他不同目的地，或是為了收集統計資料。

@@ -11,17 +11,17 @@ icon: material/file-outline
   <figcaption markdown="span">圖片來源：[MADLink: A Taiwanese Vestige in the Geedge Supply Chain | InterSecLab](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}</figcaption>
 </figure>
 
-這份報告是 InterSecLab 在 2025 年 9 月發布的「[The Internet Coup](../interseclab-network-coup/index.md)」之後的供應鏈延伸調查系列第一篇，揭露台灣上市公司凌華科技（ADLINK Technologies，股票代號 6166）於 2019 至 2020 年間，向中國 Geedge Networks（積至公司）出貨 1,708 台 CSA-7400 高密度網路平台設備。這批硬體最終被部署在哈薩克，運作 Geedge 的旗艦產品天狗安全閘道（Tiangou Secure Gateway，TSG），其功能可媲美中國防火長城。報告也在緬甸部署的 EtherFabric 客製化網路封包經紀設備中發現含有 ADLINK 元件，顯示 ADLINK 在 Geedge 產品線中的影響並非僅止於 CSA-7400 一筆交易。
+MADLink 是 InterSecLab 繼 2025 年 9 月發布「[The Internet Coup](../interseclab-network-coup/index.md)」之後，供應鏈延伸調查系列的第一篇。InterSecLab 的調查發現，台灣上市公司凌華科技（ADLINK Technologies，股票代號 6166）於 2019 至 2020 年間，向中國 Geedge Networks（積至公司）出貨 1,708 台 CSA-7400 高密度網路平台設備。這批硬體最終被部署在哈薩克，運作 Geedge 的旗艦產品天狗安全閘道（Tiangou Secure Gateway，TSG），功能可媲美中國防火長城。緬甸部署的 EtherFabric 客製化網路封包經紀設備中也有 ADLINK 元件，ADLINK 在 Geedge 產品線中的角色不只 CSA-7400 這一筆交易。
 
-本報告的核心議題對台灣讀者高度相關。報告引述凌華科技的回應、台灣經濟部國際貿易署的書面說明，以及立法委員沈伯洋對台灣出口管制框架的批評，討論台灣現行制度是否能有效防止監控與審查技術流向威權政府。為了讓華語地區的讀者能更深入理解這份報告，我們將其翻譯成正體中文（臺灣用語）。
+報告收錄凌華科技的回應、台灣經濟部國際貿易署的書面說明，以及立法委員沈伯洋對台灣出口管制框架的批評，焦點在台灣現行制度能否有效防止監控與審查技術流向威權政府，與台灣讀者直接相關。社群把報告譯成正體中文（臺灣用語），讓台灣、香港、澳門與其他華語環境的讀者都能讀到全文。
 
-本篇**研選報告**翻譯自「[MADLink: A Taiwanese Vestige in the Geedge Supply Chain | InterSecLab](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}」，內容以正體中文、臺灣用語翻譯。
+本篇收錄在[研究報告中譯](../index.md)，翻譯自「[MADLink: A Taiwanese Vestige in the Geedge Supply Chain | InterSecLab](https://interseclab.org/research/madlink-a-taiwanese-vestige-in-the-geedge-supply-chain/){target="_blank"}」，以正體中文、臺灣用語翻譯。
 
 !!! tip ":material-eye-outline: 編輯觀察 / Editorial observation"
 
-    這份報告點名了一家台灣上市公司，理應引發本地媒體追問、立委質詢、主管機關回應，但截至 2026-05 的觀察，台灣中文公共領域明顯安靜。編輯團隊另整理一頁「[編輯觀察：台灣對 MADLink 報告的後續反應](./index_6.md)」，記錄媒體覆蓋對比、為什麼這麼安靜的可能因素，以及後續可追蹤的指標。
+    MADLink 報告點名了一家台灣上市公司，截至 2026-05 的觀察，台灣的中文公共領域卻少有討論。社群把當時的觀察整理成一篇社群動態「[台灣對 MADLink 報告的反應，2026 年 5 月的觀察紀錄](https://anoni.net/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}」，記錄國內外媒體報導的對比、討論冷淡的可能原因，以及可追蹤的指標。
 
-    The MADLink report names a publicly listed Taiwanese company, yet Taiwan's Chinese-language public sphere has remained noticeably quiet. We've put together a snapshot, **[Editorial observation: Taiwan's response to MADLink](./index_6.md#English-summary-for-international-readers)**, mapping international vs. local coverage, hypotheses for the silence, and indicators worth watching. Recommended reading for anyone trying to understand how this report has been received on the ground in Taiwan.
+    The MADLink report names a publicly listed Taiwanese company, yet Taiwan's Chinese-language public sphere stayed noticeably quiet. The community's snapshot from May 2026, [Taiwan's Response to the MADLink Report](https://anoni.net/en/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}, maps international and local coverage, possible reasons for the silence, and indicators worth watching.
 
 原報告為單頁網路文章，無明確章節編號。為了便於閱讀以及在 Matrix 上分章節討論，翻譯團隊按主題切分為 5 個章節呈現：
 
@@ -37,16 +37,16 @@ icon: material/file-outline
 
 ## 參與討論
 
-這份報告與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論延用同一個頻道，可透過以下連結加入（需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號）。
+MADLink 與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論沿用同一個 Matrix 頻道，加入需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號。
 
-* :material-chat-processing-outline: <https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net>{target="_blank"}
+* :material-chat-processing-outline: [#interseclab-the-internet-coup:im.anoni.net](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}
 
 ## 更新紀錄
 
 * **2026/05/16：**正體中文（臺灣用語）翻譯初稿釋出。
-* **2026/05/16：**新增「[編輯觀察：台灣對 MADLink 報告的後續反應](./index_6.md)」頁，整理報告發布後本地媒體、政府、立委的接收狀況（中英並列）。
-* **2026/05/20：**於「[編輯觀察](./index_6.md)」頁新增「外部交叉驗證」段落（中英並列），列出 OUI、CSA-7400 行銷定位、積至海南公司登記、New Bloom 報導、台灣媒體零覆蓋、沈伯洋無公開發言、凌華未發重訊等可獨立復現的查證點。
-* **2026/05/20：**擴充「[編輯觀察](./index_6.md)」頁的「後續可追蹤指標」段落（中英並列），按政府/媒體/公民社會分組，列出各單位的觀察入口（國貿署、立法院、公開資訊觀測站、監察院等的 URL）與 4 種成本不同的執行方式（Google Alerts、手動巡查、RSS bot、自動化爬蟲）。
+* **2026/05/16：**新增「[編輯觀察：台灣對 MADLink 報告的後續反應](https://anoni.net/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}」頁，整理報告發布後本地媒體、政府、立委的接收狀況（中英並列）。
+* **2026/05/20：**於「[編輯觀察](https://anoni.net/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}」頁新增「外部交叉驗證」段落（中英並列），列出 OUI、CSA-7400 行銷定位、積至海南公司登記、New Bloom 報導、台灣媒體零覆蓋、沈伯洋無公開發言、凌華未發重訊等可獨立復現的查證點。
+* **2026/05/20：**擴充「[編輯觀察](https://anoni.net/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}」頁的「後續可追蹤指標」段落（中英並列），按政府、媒體、公民社會分組，列出各單位的觀察入口（國貿署、立法院、公開資訊觀測站、監察院等的 URL）與 4 種成本不同的執行方式（Google Alerts、手動巡查、RSS bot、自動化爬蟲）。
 
 !!! info ":material-image-outline: 圖片來源說明"
 
@@ -54,7 +54,7 @@ icon: material/file-outline
 
 !!! info ":material-note-edit-outline: 編輯圖示"
 
-    每個頁面的右上方、標題後方都有一個「**:material-note-edit-outline: 編輯圖示**」，如果在頁面上發現任何需要修正的內容，都可以直接透過「**:material-note-edit-outline: 編輯圖示**」的連結到 Github 上編輯、提交修正。
+    每個頁面的右上方、標題後方都有一個「**:material-note-edit-outline: 編輯圖示**」，如果在頁面上發現任何需要修正的內容，都可以直接透過「**:material-note-edit-outline: 編輯圖示**」的連結到 GitHub 上編輯、提交修正。
 
 ## 關於 InterSecLab
 
@@ -69,3 +69,4 @@ icon: material/file-outline
 ## 相關閱讀
 
 * [The Internet Coup / 網路政變 - InterSecLab](../interseclab-network-coup/index.md)：本系列首部報告，解析 Geedge Networks 如何輸出中國防火長城到威權政權
+* **2026/10/13：**編輯觀察從報告翻譯拆出，改成社群首頁的[社群動態](https://anoni.net/updates/2026/05/madlink-editorial-2026-05/){target="_blank"}，以 2026-05-20 的快照保存，報告的章節只留原報告的譯文。

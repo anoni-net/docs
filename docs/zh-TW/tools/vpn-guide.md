@@ -187,7 +187,7 @@ Tor Project 自己也做了一個叫 Tor VPN 的 app。它以系統的 VPN 機�
 幾個現實限制：
 
 - 出口是 Tor exit node，速度比一般 VPN 慢，也不適合解地理限制或看串流，主流平台多半封鎖 Tor 的出口 IP。
-- 目前只有 Android。iOS 上沒有 Tor VPN，要在 iPhone、iPad 用 Tor 改用 Tor 官方推薦的 [Onion Browser](https://onionbrowser.com/){target="_blank"}，可搭配 Guardian Project 的 Orbot 強化防漏[^ios-tor]。要在 Linux 桌面做類似的全流量 Tor 隔離，可看社群介紹的 [oniux 核心層級隔離工具](../blog/posts/oniux-kernel-level-tor.md)。
+- 目前只有 Android。iOS 上沒有 Tor VPN，要在 iPhone、iPad 用 Tor 改用 Tor 官方推薦的 [Onion Browser](https://onionbrowser.com/){target="_blank"}，可搭配 Guardian Project 的 Orbot 強化防漏[^ios-tor]。要在 Linux 桌面做類似的全流量 Tor 隔離，可看社群介紹的 [oniux 核心層級隔離工具](https://anoni.net/articles/oniux/){target="_blank"}。
 - 跟 Guardian Project 的 Orbot 功能高度重疊，差別在開發團隊與底層引擎（Orbot 用較舊的 C 版 Tor，Tor VPN 用 Arti），官方目前沒有明說哪個取代哪個[^torvpn-orbot]。
 
 安全性上，Tor Project 在 2025 年委託 Cure53 對 Tor VPN 的 Android 版與 Onionmasq 網路層做了原始碼稽核，2026 年 4 月公開報告，結論是核心路由穩固、沒有根本性問題，待改善的是輸入驗證、DNS 處理、明文設定存儲等項目。完整中文摘要見社群整理的 [Cure53 完成 Tor VPN 安全稽核](../blog/posts/2026-code-audit-for-tor-vpn-completed-by-cure53.md)。
@@ -274,7 +274,7 @@ VPN 在某地能不能用沒有全球通用答案，會隨地區與時間變。�
 - [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-incognito-circle: 匿名與隱私的差別](../basics/anonymity-vs-privacy.md)
 - [:material-airplane: 亞洲出差與研討會的數位準備](../scenarios/asia-travel.md)
-- [:material-incognito-off: 常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
+- [:material-incognito-off: 常被誤認為匿名的網路](../basics/mistaken-for-anonymity.md)
 
 </div>
 

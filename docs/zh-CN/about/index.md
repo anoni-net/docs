@@ -21,7 +21,7 @@ icon: material/book-information-variant
 | 分类 | 内容 |
 |---|---|
 | [开始](../start/index.md) | 按身份整理的起步路径，从公民团体、媒体到一般读者 |
-| [指南](../guides/index.md) | 概念、工具、场景、进阶、报告五个层次，由浅到深 |
+| [指南](../guides/index.md) | 概念、工具、场景三个层次由浅到深，另有外部研究报告的中译 |
 | [在地脉络](../taiwan/index.md) | 台湾的连线观测、法规与制度 |
 | [小工具](../utils/index.md) | 在浏览器里运行的工具，数据不会上传 |
 | [信息更新](../blog/index.md) | 社区公告、外部文章的翻译与软件更新日志 |

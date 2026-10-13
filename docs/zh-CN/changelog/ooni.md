@@ -97,9 +97,9 @@ digest:
 
 ## OONI Probe Desktop 6.0.1 beta
 
-> 2026-04-11 · [GitHub 发布页](https://github.com/ooni/probe-multiplatform/releases/v6.0.1){target="_blank"} · [完整翻译文章](../blog/posts/2026-ooni-probe-desktop-beta.md)
+> 2026-04-11 · [GitHub 发布页](https://github.com/ooni/probe-multiplatform/releases/v6.0.1){target="_blank"}
 
-- 推出全新跨平台 OONI Probe Desktop 与仪表板，邀请社区下载内测版回报问题与建议。
+- 推出全新跨平台 OONI Probe Desktop 与仪表板，邀请社区下载内测版试用。程序错误用 app 内置的错误报告发送（会一并附上 app 的日志），其他意见写信到 team@ooni.org 或在 [GitHub](https://github.com/ooni/probe-multiplatform/issues){target="_blank"} 开 issue。
 
 ## OONI Probe CLI v3.29.0
 

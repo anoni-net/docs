@@ -104,11 +104,25 @@ The list notes that the team had not revisited the checkboxes since 11 August 20
 
 ## Arti 2.2.0
 
-> 2026-03-31 · [Upstream announcement](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [Full translation](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
+> 2026-03-31 · [Upstream announcement](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"}
 
 - HTTP CONNECT included in the full build and enabled by default, stronger RPC management capabilities, continued progress toward making Arti usable as a Tor relay.
 - Security fix: one low-severity issue. An application embedding arti that also pulls in `weak-table` with `ahash` enabled becomes somewhat less DoS-resistant on machines without hardware AES support (TROVE-2026-005).
 
+## Arti 2.1.0
+
+> 2026-03-03 · [Upstream announcement](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"}
+
+- Internal groundwork for relay support, a configuration system rebuilt on `derive-deftly` macros that makes new configuration types cheaper to add, continued RPC polishing, and MSRV raised to Rust 1.89.0.
+- Three security fixes, all dependency upgrades: `bytes` to 0.11.1, avoiding undefined behavior from an integer overflow in `BytesMut::reserve()` (TROVE-2026-001, RUSTSEC-2026-0007). `keccak` to 0.1.6, avoiding possible undefined behavior from an ARMv8 assembly bug. `time` to 0.3.47, clearing the RUSTSEC-2026-0009 audit warning.
+
+## Arti 1.4.1
+
+> 2025-03-03 · [Upstream announcement](https://blog.torproject.org/arti_1_4_1_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md#arti-141--3-march-2025){target="_blank"}
+
+- Client-side implementation of Family IDs (also known as Happy Families, see [proposal 321](https://spec.torproject.org/proposals/321-happy-families.html){target="_blank"}), which will save relay operators time and bandwidth once used everywhere.
+- Groundwork for a full Conflux implementation (see [proposal 329](https://spec.torproject.org/proposals/329-traffic-splitting.html){target="_blank"}), which improves performance by sending traffic over multiple paths.
+
 !!! info "Earlier versions"
 
-    Translations of Arti 2.3.0, 2.1.0, and 1.4.1 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/arti/){target="_blank"}. English versions will be added as the community translates them.
+    The Arti 2.3.0 entry is currently available only in [traditional Chinese](https://anoni.net/docs/changelog/arti/){target="_blank"}. An English version will be added as the community translates it.

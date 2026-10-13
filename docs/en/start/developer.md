@@ -61,7 +61,7 @@ Campus relays need someone who can talk to administration and legal. The technic
 Technical ability and personal operational habits are separate things. Someone holding root and a pile of API keys is worth more to an attacker than an average user.
 
 - [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, twenty minutes
-- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): how far blockchains, private browsing windows, and VPNs are overestimated
+- [Networks mistaken for anonymity](../basics/mistaken-for-anonymity.md): why encrypted DNS, IPFS, and similar tools do not make you anonymous, and four questions for judging any tool
 
 ## What to take with you
 

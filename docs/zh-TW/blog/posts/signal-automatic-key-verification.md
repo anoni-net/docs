@@ -494,7 +494,7 @@ Cloudflare 在 2024 年為 WhatsApp 的稽核做了一套任何人都能執行�
 站內：
 
 - [一般人平常該做到什麼](../../scenarios/everyday-baseline.md)，沒有特殊威脅模型的話，先把那裡的順序做完再回頭看自動金鑰驗證。
-- [端對端加密如何運作](../../advanced/e2ee.md)，Double Ratchet、前向保密與多裝置同步的工程取捨。
+- [端對端加密的協定機制](https://anoni.net/articles/e2ee-protocols/){target="_blank"}，Double Ratchet、前向保密與多裝置同步的工程取捨。
 - [匿名通訊工具比較](../../tools/messaging-comparison.md)，Signal 與其他工具在身分模型與 Metadata 上的差別。
 - [威脅模型如何建立](../../basics/threat-model.md)，判斷自己需要哪一層驗證的起點。
 - [匿名、隱私、假名、機密性的差別](../../basics/anonymity-vs-privacy.md)，自動金鑰驗證保證識別碼與金鑰一致，跟保證匿名是不同的事。

@@ -95,7 +95,7 @@ Where local laws shape the threat model, we publish English-language explainers 
 
 ### Translated reports
 
-We have produced full Traditional Chinese translations of two pieces of regional research: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} and the MADLink report on the Taiwanese link in the Geedge supply chain. The English [curated index](../reports/index.md) points readers to InterSecLab's English originals alongside our Chinese translations. Future translations get added case by case, when a report fills a Chinese-language gap.
+We have produced full Traditional Chinese translations of two pieces of regional research: the 2025 [InterSecLab Geedge Networks / MESA Lab leak report](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} and the MADLink report on the Taiwanese link in the Geedge supply chain. The [Translated Reports](../reports/index.md) index points readers to InterSecLab's English originals alongside our Chinese translations. Future translations get added case by case, when a report fills a Chinese-language gap.
 
 ## :material-file-document-outline: Articles in this section
 

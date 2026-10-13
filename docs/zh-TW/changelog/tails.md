@@ -164,3 +164,37 @@ Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志�
 - Tor Browser 升至 15.0.11，修補 Firefox 140.10.1 多個漏洞。
 - Thunderbird 升至 140.10.0。
 - 停止支援以 ISO 映像從 USB 隨身碟開機，ISO 映像僅供 DVD 與虛擬機使用，USB 隨身碟請改用 USB image（自 2019 年起為推薦做法）。
+
+## Tails 7.6
+
+> 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。公告沒有列出這一版修掉的漏洞，上游也沒有提到已被實際利用。
+- Tor 連線助理可以直接協助取得[橋接](../tools/tor-browser-advanced.md)。橋接是不公開列出的 Tor 中繼，網路封鎖 Tor 時可以當成連進 Tor 的第一站。選擇自動連線而連不上時，畫面會多出「依所在區域請求 Tor 橋接」的選項。
+- Tails 透過 Tor Project 的 Moat API 下載較可能在當地有效的橋接，這段連線用網域前置（domain fronting，把連線偽裝成連向其他網站的技術）規避封鎖。Tails 以外的 Tor Browser 從 11.5 版起就用同一套做法。
+- 內建的密碼管理器從 KeePassXC 改成 GNOME 的 Secrets。兩者的檔案格式相同，Secrets 會自動嘗試解鎖原本在 KeePassXC 使用的資料庫，螢幕小鍵盤、游標大小等無障礙功能也能再次搭配使用。仍需要 KeePassXC 進階功能的人，可以把它安裝成 Persistent Storage 的附加軟體（additional software）。
+- Tor Browser 升至 15.0.8，Thunderbird 升至 140.8.0，Electrum 從 4.5.8 升至 4.7.0。
+- 更新部分 firmware 套件，改善較新硬體的支援，包含顯示卡、Wi-Fi 等。
+- 修正土耳其語環境下的自動升級，以及 Thunderbird 遷移通知裡「了解更多」按鈕的問題。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
+## Tails 7.1
+
+> 2025-10-14 · [上游公告](https://tails.net/news/version_7.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。公告沒有列出這一版修掉的漏洞，上游也沒有提到已被實際利用。
+- Tails 裡的 Tor Browser 首頁改成離線頁面，外觀與 Tails 以外的 Tor Browser 首頁相近，啟動時不再載入 Tails 網站上的線上頁面。
+- 開啟需要管理員密碼的應用程式、而歡迎畫面沒有設定管理員密碼時，提示訊息改寫得更清楚。
+- Tor Browser 升至 14.5.8，Tor 用戶端升至 0.4.8.19，Thunderbird 升至 140.3.0。
+- 移除 `ifupdown` 套件。
+- Tor Browser 的新分頁不再顯示 Tor 連線不由 Tor Browser 管理的訊息（[#21215](https://gitlab.tails.boum.org/tails/tails/-/issues/21215){target="_blank"}）。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
+## Tails 6.18
+
+> 2025-07-25 · [上游公告](https://tails.net/news/version_6.18/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非緊急安全釋出。公告沒有列出這一版修掉的漏洞，上游也沒有提到已被實際利用。
+- 可以用 WebTunnel 橋接連上 Tor 網路。WebTunnel 把連線偽裝成一般的網頁流量，在 obfs4 橋接被封鎖的地方仍有機會連上。WebTunnel 橋接可以從 [Tor Project 的橋接發放網站](https://bridges.torproject.org/){target="_blank"}取得。
+- Tor Browser 升至 14.5.5，Thunderbird 升至 128.12.0。
+- 可從 Tails 6.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。

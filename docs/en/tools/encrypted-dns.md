@@ -214,7 +214,7 @@ Before running OONI Probe, run them in reverse: turn off every third-party resol
 
 <div class="grid cards" markdown>
 
-- [:material-incognito-off: Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md)
+- [:material-incognito-off: Networks mistaken for anonymity](../basics/mistaken-for-anonymity.md)
 - [:material-file-tree: What metadata is and why it matters](../basics/metadata.md)
 - [:material-vpn: VPN: risks and how to choose](./vpn-guide.md)
 - [:material-chat-question: Building a threat model](../basics/threat-model.md)

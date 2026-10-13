@@ -62,9 +62,8 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `basics/` | 概念层，匿名与隐私的核心思考工具 |
 | `tools/` | 工具层，具体的工具介绍与比较 |
 | `scenarios/` | 场景层，特定角色或情境的应用 |
-| `advanced/` | 进阶层，技术深度的延伸阅读 |
 | `taiwan/` | 在地脉络，台湾的法规、观测、研究 |
-| `reports/` | 严选报告，外部研究的中译 |
+| `reports/` | 研究报告中译，外部研究报告的正体中文翻译 |
 | `community/` | 贡献与翻译规范、开发环境准备、技能自评与视觉指南 |
 
 社区本身的页面与公告不放在文档站。关于我们、参与方式、自架服务、活动与社区动态在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，源代码是 [`anoni-net/www`](https://github.com/anoni-net/www)，活动公告、项目上线、工作进度这类社区公告发在该 repo 的 `updates/`。架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，写给已经熟悉 Tor 的技术读者，2026-10 起也放在 anoni.net。文档站的 `blog/` 放外部文章的翻译、技术分析、观测报告与文档站自己的更新回顾。
@@ -112,7 +111,7 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 - 跨目录：`../basics/anonymity-vs-privacy.md`
 - 跨深度：`../../blog/posts/keeping-the-doors-open.md`
 
-文章末尾建议放「接下来」、「相关阅读」之类的小节，链接到 2–4 篇相关文章。基础、工具、场景、进阶之间的横向链接比单向引用更有用。
+文章末尾建议放「接下来」、「相关阅读」之类的小节，链接到 2–4 篇相关文章。概念、工具、场景之间的横向链接比单向引用更有用。
 
 ## PR 流程
 

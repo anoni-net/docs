@@ -8,7 +8,7 @@ icon: material/message-text-outline
 
 「端对端加密」这几个字在 微信、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意义差很多。差异涵盖多个面向：密钥由谁持有、注册时要不要绑手机号码或邮箱、Metadata 留在哪个 server、服务器掉线后还能不能通讯、群组与多装置的设计选择。
 
-这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。操作前可以先回头看 [威胁模型如何建立](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密如何运作](../advanced/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
+这篇文章从几个面向比较常见的匿名通讯工具，重点放在 5 个主轴（Signal、SimpleX、Session、Briar、Matrix/Element）与 3 个对照（微信、Telegram、WhatsApp）。操作前可以先回头看 [威胁模型如何建立](../basics/threat-model.md) 了解自己在抗谁，需要协议层细节（Double Ratchet、Sender Keys、MLS）可参考 [端对端加密的保护范围](../basics/e2ee.md)，Metadata 为什么是独立风险可看 [Metadata 是什么](../basics/metadata.md)。在中国大陆，本文 5 个主名单工具多数需要先解决境外网络可达性才能稳定使用，可达性细节见后面的「在中国大陆的补充」一节。
 
 ## 为什么要分开比较这些工具
 
@@ -59,7 +59,7 @@ icon: material/message-text-outline
 
 ## Signal
 
-[Signal](https://signal.org/){target="_blank"} 是 E2EE 通讯工具的当前共识答案，协议成熟、UX 接近主流 IM。一对一用 Double Ratchet（每则消息独立密钥），群组用 Sender Keys，协议细节见 [端对端加密如何运作](../advanced/e2ee.md)。
+[Signal](https://signal.org/){target="_blank"} 是 E2EE 通讯工具的当前共识答案，协议成熟、UX 接近主流 IM。一对一用 Double Ratchet（每则消息独立密钥），群组用 Sender Keys，协议细节见 [端对端加密的保护范围](../basics/e2ee.md)。
 
 身份模型上，Signal 注册仍需手机号码，但 2024 年正式推出 username 功能，可以在不揭露号码的情况下交换联络方式。Sealed Sender 设计让 server 看不到单则消息的寄件人，私联络人探索（private contact discovery）也让 server 不知道你的通讯录。
 
@@ -110,7 +110,7 @@ icon: material/message-text-outline
 - 群组功能比 Signal、SimpleX 都弱，大群组支持限制较多
 - Lokinet 路由的设计过去曾因不同于 Tor 的选择被质疑，社区审计仍在持续
 - 消息送达延迟明显比 Signal 高（因为走多跳 onion routing）
-- 早期版本没有完整前向保密，新版本仍在转换中（决定使用前可看 [端对端加密如何运作](../advanced/e2ee.md) 的协议对照）
+- 早期版本没有完整前向保密，新版本仍在转换中（决定使用前可看 [端对端加密的协议机制](https://anoni.net/zh-cn/articles/e2ee-protocols/){target="_blank"}的协议对照）
 - 在中国大陆 Lokinet 节点被封锁，与 Signal 同样需要桥接
 
 ## Briar
@@ -235,7 +235,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 **社区讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。境内访问需可靠的境外网络连接。
 
-**协议层细节**：Signal 与 Matrix 各自的协议设计与威胁模型见 [端对端加密如何运作](../advanced/e2ee.md)。
+**协议层细节**：Signal 与 Matrix 各自的协议设计与威胁模型见[端对端加密的协议机制](https://anoni.net/zh-cn/articles/e2ee-protocols/){target="_blank"}。
 
 香港的分流对象与威胁模型跟大陆不同：
 
@@ -279,7 +279,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 - [:material-chat-question: 威胁模型如何建立](../basics/threat-model.md)
 - [:material-shield-search: Metadata 是什么](../basics/metadata.md)
-- [:material-key-chain-variant: 端对端加密如何运作](../advanced/e2ee.md)
+- [:material-key-chain-variant: 端对端加密的保护范围](../basics/e2ee.md)
 
 </div>
 

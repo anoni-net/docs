@@ -99,6 +99,7 @@ App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與
 
 - 量測引擎使用 OONI Probe CLI v3.29.0。
 - 修正 auto-run 失效導致 OONI 測試無法自動執行的問題。
+- 發布頁附上 Windows 與 macOS 的桌面版安裝檔。OONI 當時把桌面版當成測試版，邀請社群下載試用。程式錯誤用 app 內建的錯誤回報送出（會一併附上 app 的紀錄），其他意見寫信到 team@ooni.org 或在 [GitHub](https://github.com/ooni/probe-multiplatform/issues){target="_blank"} 開 issue。
 
 ## OONI Probe 6.0.0
 

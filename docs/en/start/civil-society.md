@@ -65,7 +65,7 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 The organisation can have every process in place and still lose the whole thread when one member's account is taken over. The two pages below are role-independent and apply to everyone.
 
 - [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, twenty minutes
-- [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): how far blockchains, private browsing windows, and VPNs are overestimated
+- [Networks mistaken for anonymity](../basics/mistaken-for-anonymity.md): why encrypted DNS, IPFS, and similar tools do not make you anonymous, and four questions for judging any tool
 
 ## What to take with you
 

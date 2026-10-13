@@ -10,7 +10,7 @@ icon: material/access-point-network
 
     The coverage analysis below was carried out between November 2023 and March 2024, and the report it draws on is from December 2023. The numbers describe that period. The method is what carries over: you can run the same audit against current data for any country.
 
-    A more recent snapshot, computed the same way against OONI public data for 12 July to 11 August 2026, is in [Taiwan's OONI coverage is 39.3% one ISP](../blog/posts/ooni-mobile-throttle-drill.md#Taiwans-OONI-coverage-is-393-one-ISP). The concentration pattern has not changed. Two fixed-line networks still carry most of the observations, and all three mobile carriers together account for 3.6%.
+    A more recent snapshot, computed the same way against OONI public data for 12 July to 11 August 2026, is in [Taiwan's OONI coverage is 39.3% one ISP](https://anoni.net/en/updates/2026/08/ooni-mobile-throttle-drill/){target="_blank"}. The concentration pattern has not changed. Two fixed-line networks still carry most of the observations, and all three mobile carriers together account for 3.6%.
 
 ## Why ASN diversity matters
 

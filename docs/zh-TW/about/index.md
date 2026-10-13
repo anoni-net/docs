@@ -21,7 +21,7 @@ icon: material/book-information-variant
 | 分類 | 內容 |
 |---|---|
 | [開始](../start/index.md) | 依身分整理的起步路徑，從公民團體、媒體到一般讀者 |
-| [指南](../guides/index.md) | 概念、工具、場景、進階、報告五個層次，由淺到深 |
+| [指南](../guides/index.md) | 概念、工具、場景三個層次由淺到深，另有外部研究報告的中譯 |
 | [在地脈絡](../taiwan/index.md) | 台灣的連線觀測、法規與制度 |
 | [小工具](../utils/index.md) | 在瀏覽器裡執行的工具，資料不會上傳 |
 | [資訊更新](../blog/index.md) | 社群公告、外部文章的翻譯與軟體更新日誌 |

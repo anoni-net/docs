@@ -40,7 +40,7 @@ Memorize it, write it on paper, put it somewhere secure. A sealed copy with fami
 
 [KeePassXC](https://keepassxc.org/){target="_blank"} keeps the vault in a `.kdbx` file on your own machine, and cross-device synchronization is yours to arrange ([Syncthing](https://syncthing.net/){target="_blank"}, self-hosted storage, an encrypted drive). Clients are available across platforms: KeePassXC on desktop, KeePassDX on Android, Strongbox on iOS.
 
-[Tails 7.6](../blog/posts/2026-tails-7-6.md) onward ships GNOME Secrets in place of KeePassXC, using the same `.kdbx` format, so an existing vault opens directly.
+[Tails 7.6](../changelog/tails.md) onward ships GNOME Secrets in place of KeePassXC, using the same `.kdbx` format, so an existing vault opens directly.
 
 `.kdbx` is an open format, and since 2017 a generation of clients has implemented it from scratch and can open the same vault: [KeePassium](https://keepassium.com/){target="_blank"} and [Strongbox](https://strongboxsafe.com/){target="_blank"} natively on Apple platforms, and cross-platform [AuthPass](https://authpass.app/){target="_blank"}. Switching clients moves no data, because the vault format travels with you and no vendor holds it.
 

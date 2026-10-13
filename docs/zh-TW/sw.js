@@ -205,6 +205,8 @@ const CORE_PAGES_ZH = [
   "basics/surveillance-capability/",
   "basics/multiple-identities/",
   "basics/browser-fingerprinting/",
+  "basics/e2ee/",
+  "basics/mistaken-for-anonymity/",
   // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
@@ -261,13 +263,6 @@ const CORE_PAGES_ZH = [
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
   "scenarios/shutdown/",
-  // advanced（進階，全部）
-  "advanced/",
-  "advanced/e2ee/",
-  "advanced/post-quantum/",
-  "advanced/dweb-ipfs-onion/",
-  "advanced/zk-identity-payments/",
-  "advanced/mistaken-for-anonymity/",
   // taiwan（在地。whistleblower-law 依上面的判準排除，不是漏掉。
   // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
   "taiwan/",
@@ -329,6 +324,8 @@ const CORE_PAGES_EN = [
   "basics/surveillance-capability/",
   "basics/multiple-identities/",
   "basics/browser-fingerprinting/",
+  "basics/e2ee/",
+  "basics/mistaken-for-anonymity/",
   // tools（工具，全部）
   "tools/",
   "tools/what-is-anonymity-network/",
@@ -365,13 +362,6 @@ const CORE_PAGES_EN = [
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
   "scenarios/shutdown/",
-  // advanced（進階，全部）
-  "advanced/",
-  "advanced/e2ee/",
-  "advanced/post-quantum/",
-  "advanced/dweb-ipfs-onion/",
-  "advanced/zk-identity-payments/",
-  "advanced/mistaken-for-anonymity/",
   // regional（在地脈絡。taiwan-whistleblower-law 依上面的判準排除，不是漏掉。
   // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
   "regional/",

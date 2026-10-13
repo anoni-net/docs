@@ -27,7 +27,7 @@
 
 === 涵蓋範圍 ===
 
-只掃註解寫著「全部」的那幾區（概念、工具、進階、在地）。`scenarios/` 與 `utils/`
+只掃註解寫著「全部」的那幾區（概念、工具、在地）。進階區 2026-10-13 取消，兩頁併進概念、其餘搬到社群首頁。`scenarios/` 與 `utils/`
 刻意只選錄，預設就是不收，新增一頁不進清單是正確的行為，不該報。
 
 用法：
@@ -49,13 +49,13 @@ TRACKS = (
         "name": "zh",
         "const": "CORE_PAGES_ZH",
         "docs": ("zh-TW", "zh-CN"),
-        "dirs": ("basics", "tools", "advanced", "taiwan"),
+        "dirs": ("basics", "tools", "taiwan"),
     },
     {
         "name": "en",
         "const": "CORE_PAGES_EN",
         "docs": ("en",),
-        "dirs": ("basics", "tools", "advanced", "regional"),
+        "dirs": ("basics", "tools", "regional"),
     },
 )
 

@@ -146,7 +146,7 @@ Hsieh Feng-ying, Director General of the central bank's Department of Banking, s
 
 The pre-announced version (50 articles, penalties at Articles 41 to 48) and the approved version (56 articles, penalties at Articles 47 to 54) differ by six in article numbering, while the elements, sentences, and fines for fraud and manipulation and for unlicensed operation or stablecoin issuance are the same.
 
-When reading coverage, keep industry associations, government agencies, and human rights or consumer NGOs apart. A trade association is not civil society in the broader sense.
+When reading coverage, keep industry associations, government agencies, and human rights or consumer NGOs apart. A trade association is not civil society in the broader sense. Check any list of participants against the speaker records and written submissions the Legislative Yuan publishes, and do not imply that an NGO took part if its name is not in the record.
 
 ## Why an anonymity community tracks financial regulation
 
@@ -164,7 +164,6 @@ We advocate for Tor, Tails, and OONI, and we pay attention to how payments and i
 - [Central News Agency: exchange commissions two crypto guidance documents for listed company risk management, 29 May 2026](https://www.cna.com.tw/news/afe/202605290284.aspx){target="_blank"} (in Chinese)
 - [Accounting Research and Development Foundation](https://www.ardf.org.tw/cpa9.html){target="_blank"} (in Chinese; primary source for the stablecoin accounting guidance)
 - [Taiwan Stock Exchange domestic outreach site](https://dsp.twse.com.tw/){target="_blank"} (in Chinese; download for the internal control guidance)
-- [Our observation of the Cabinet's approval](../blog/posts/2026-taiwan-vasp-draft-cabinet.md)
 
 The Chinese-language version of this page is at [台灣 VASP 法 2026](https://anoni.net/docs/taiwan/vasp-2026/){target="_blank"}.
 

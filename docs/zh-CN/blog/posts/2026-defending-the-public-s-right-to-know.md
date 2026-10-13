@@ -105,6 +105,6 @@ OONI Probe 桌面版与移动版都能在家用网络、移动网络、公共 Wi
 ## 相关阅读
 
 - [发布：新 OONI Explorer 专题审查页面](./2025-ooni-explorer-thematic-censorship-pages.md)
-- [OONI 全新的匿名凭证系统](./2026-ooni-anonymous-credentials.md)
+- [OONI Probe 匿名凭证系统的设计与实现](https://anoni.net/zh-cn/articles/ooni-anonymous-credentials/){target="_blank"}
 - [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)
 - [OONI 网站检测清单](../../taiwan/ooni-checklist.md)

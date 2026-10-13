@@ -11,7 +11,7 @@ icon: material/school-outline
 
 ## 文章一覽
 
-不確定從哪篇開始，建議先讀 [網路自由為什麼重要](./internet-freedom.md) 建立在地脈絡，再依關心的問題挑其餘八篇。
+不確定從哪篇開始，建議先讀 [網路自由為什麼重要](./internet-freedom.md) 建立在地脈絡，再依關心的問題挑其餘十篇。
 
 - [網路自由為什麼重要](./internet-freedom.md)：從匿名網路社群的視角看連線、個資、金流三個面向。
 - [匿名、隱私、假名、機密性的差別](./anonymity-vs-privacy.md)：四個常被混用的詞，先把界線畫清楚。
@@ -22,3 +22,5 @@ icon: material/school-outline
 - [監控現在做得到什麼](./surveillance-capability.md)：按平台、電信、國家、商用間諜軟體四層盤點能力邊界，每一條標出證據與日期。
 - [怎麼維持多個網路身分](./multiple-identities.md)：要幾層身分、每層的工具邊界、被反查的途徑，以及長期維持與收尾。
 - [為什麼匿名支付重要](./payments-anonymity.md)：金流如何變成最黏的 metadata，現金為什麼是最成熟的匿名支付。
+- [端對端加密的保護範圍](./e2ee.md)：傳輸加密、端對端加密與儲存加密各自擋得住誰，以及有加密之後還留下哪些紀錄。
+- [常被誤認為匿名的網路](./mistaken-for-anonymity.md)：加密 DNS、IPFS 這類工具為什麼不等於匿名，以及判斷任何工具的四個提問。

@@ -223,7 +223,7 @@ Anthropic 掌握的只有經過自家模型的那一側，其他模型上的同�
 - [社群平台怎麼收集你的資料](./platform-tracking.md)：第一層的完整機制
 - [威脅模型如何建立](./threat-model.md)：把上面的能力邊界換算成你自己的判斷
 - [Metadata 是什麼，為什麼重要](./metadata.md)：為什麼通聯紀錄常常比內容更有價值
-- [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)：換工具不等於減少觀察者
+- [常被誤認為匿名的網路](mistaken-for-anonymity.md)：換工具不等於減少觀察者
 - [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：本頁四層之外的一種作業，材料全來自公開來源的情報建檔，人力成本已降到單一操作者可維持
 
 [^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日，全文 154 頁，記錄 2025 年 12 月至 2026 年 8 月之間偵測並中止的濫用案例。本節的頁碼對應該報告的 PDF 全文。歸因與信心等級由 Anthropic 自行判定。查證日期 2026-09。

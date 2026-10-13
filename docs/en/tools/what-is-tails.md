@@ -10,7 +10,7 @@ icon: simple/tails
 
 The situations it fits: a journalist reporting on a sensitive subject who needs to protect a source, a researcher handling files from outside without contaminating their own machine, someone working in the field on an unfamiliar network, or anyone reviewing sensitive documents who does not want them landing on a laptop. In all of these, the accumulated traces on an everyday computer are the weak point. Tails moves the task into a temporary clean environment that you pull out and walk away from.
 
-Tails is built on Debian Linux, developed by an independent non-profit, and has worked with the Tor Project for years. In February 2025 the community ran a [pre-RightsCon workshop](https://anoni.net/en/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"} in Taipei with the Tails and Tor teams.
+Tails is built on Debian Linux. It was developed by an independent non-profit that worked closely with the Tor Project for years, and in September 2024 it merged into the Tor Project, which now develops and maintains it (see the [Tor Project's merger announcement](https://blog.torproject.org/tor-tails-join-forces/){target="_blank"}). In February 2025 the community ran a [pre-RightsCon workshop](https://anoni.net/en/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"} in Taipei with the Tails and Tor teams.
 
 ## Three design decisions
 

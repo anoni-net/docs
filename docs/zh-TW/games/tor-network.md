@@ -133,7 +133,7 @@ og:
 
 ## 延伸閱讀
 
-- 這顆地球儀的資料怎麼來的：[地球儀的資料從哪來](../blog/posts/games-globe-open-data.md)
+- 這顆地球儀的資料怎麼來的：[地球儀的資料從哪來](https://anoni.net/updates/2026/07/games-globe-open-data/){target="_blank"}
 - 三跳路由與匿名原理：[什麼是 Tor](../tools/what-is-tor.md)
 - 台灣的觀測涵蓋：[台灣 ASN 觀測涵蓋](../taiwan/ooni-asn-coverage.md)
 - 其他兩件作品：[互動與呈現](index.md)

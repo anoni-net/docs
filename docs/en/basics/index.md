@@ -21,6 +21,8 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 - [A browser fingerprint cannot be cleared the way a cookie can](./browser-fingerprinting.md) — what the fingerprint is made of, the three reasons it resists a clean fix, and where Tor Browser, Brave, Safari, Firefox, and Chrome each stand by default.
 - [What surveillance can actually do](./surveillance-capability.md) — a layer-by-layer account of what platforms, telecoms, states, and commercial spyware can and cannot currently do, each claim dated and sourced, with a table of which measure stops which layer.
 - [Maintaining multiple online identities](./multiple-identities.md) — how many layers you need, the tool boundary for each, how observers correlate accounts, and the long-haul maintenance and exit that most introductory material stops short of.
+- [The Scope of End-to-End Encryption](./e2ee.md) — what transport, end-to-end and at-rest encryption each protect you from, and the records that remain once a conversation is encrypted.
+- [Networks Mistaken for Anonymity](./mistaken-for-anonymity.md) — why encrypted DNS, IPFS, and similar tools do not make you anonymous, and four questions for judging any tool.
 
 ## Where to go from here
 

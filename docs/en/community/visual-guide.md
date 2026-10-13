@@ -16,22 +16,21 @@ This page collects the visual specifications that only the docs site uses: the g
 
 ### Guide category colours (sidebar navigation)
 
-On desktop, the five category chips under the "Guides" tab in the left sidebar (concepts, tools, scenarios, advanced, reports) each have their own colour, shared by the text, icon, and border. These are navigation colours, a different layer from the structural secondaries on the [brand assets](https://anoni.net/en/brand/){target="_blank"} page, and the two sets are not interchangeable.
+On desktop, the four category chips under the "Guides" tab in the left sidebar (concepts, tools, scenarios, reports) each have their own colour, shared by the text, icon, and border. These are navigation colours, a different layer from the structural secondaries on the [brand assets](https://anoni.net/en/brand/){target="_blank"} page, and the two sets are not interchangeable.
 
 | Token | Light | Dark | Category |
 |---|---|---|---|
 | `--guide-basics`    | `#0079a3` | `#4dbfff` | Concepts; brand cyan one step darker to pass AA |
 | `--guide-tools`     | `#2e7d32` | `#66bb6a` | Tools; darker than the privacy green `#4caf50` |
 | `--guide-scenarios` | `#ad1457` | `#f06292` | Scenarios |
-| `--guide-advanced`  | `#4527a0` | `#b39ddb` | Advanced; lightened in dark mode to pass AA |
 | `--guide-reports`   | `#946c00` | `#e0b020` | Reports; amber, deliberately away from the blues |
 
 Dark variants are named `--guide-*-d` in the CSS.
 
 - Use them only for the sidebar category chips in `extra.css`. Content tags, admonitions, and the three-track markers use `--cat-*`.
 - Stay clear of the reserved purple `#7b1fa2` and the emergency red `#d32f2f`.
-- All five pass WCAG AA at 4.5:1, light on white and dark on slate. Reports used to be blue and was nearly indistinguishable from the concepts cyan under three simulated colour-vision deficiencies (ΔE as low as 2.7); in amber it separates fully from concepts under red-green deficiency (ΔE above 60). Concepts and advanced stay close under protanopia, and tools and reports under red-green deficiency, so those pairs rely on icons and text labels, with colour as a redundant cue (WCAG 1.4.1).
-- The CSS colours by position (`:nth-of-type(1)` to `(5)`, concepts first and reports fifth), matching the category order under the Guides tab in `mkdocs.yml`. Reorder one and you must reorder the other.
+- All four pass WCAG AA at 4.5:1, light on white and dark on slate. Reports used to be blue and was nearly indistinguishable from the concepts cyan under three simulated colour-vision deficiencies (ΔE as low as 2.7); in amber it separates fully from concepts under red-green deficiency (ΔE above 60). Tools and reports stay close under red-green deficiency, so that pair relies on icons and text labels, with colour as a redundant cue (WCAG 1.4.1).
+- The CSS colours by position (`:nth-of-type(1)` to `(4)`, concepts first and reports fourth), matching the category order under the Guides tab in `mkdocs.yml`. Reorder one and you must reorder the other.
 
 ### Interface colour in light mode
 

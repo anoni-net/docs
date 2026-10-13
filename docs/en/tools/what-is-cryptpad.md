@@ -106,7 +106,7 @@ The community put two and a half years of upstream translation work into `zh_Han
 | Self-hosting | AGPLv3, fully self-hostable | Not possible | Not possible | Open source, self-hostable |
 | Fits | Long-term, sensitive, encrypted collaboration | General office work | Knowledge bases, project management | Throwaway shared notes, live events |
 
-Further reading: [how end-to-end encryption works](../advanced/e2ee.md) covers the cryptographic basis.
+Further reading: [The Scope of End-to-End Encryption](../basics/e2ee.md) explains who end-to-end encryption protects you from, and who it does not.
 
 ## When to use it, and when not to
 

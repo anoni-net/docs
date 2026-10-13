@@ -257,9 +257,9 @@ const ZH_TW = {
   tourInfraTitle: '連線靠的是這些實體設施',
   tourInfraBody: '貼近之後多出五層：縣市界、海纜登陸點、變電所、發電廠與 345kV 骨幹。海外的封包從登陸點上岸，機房要有電才轉得動。點任何一個設施可以看細節。',
   tourEndTitle: '導覽到這裡',
-  tourEndBody: '接下來自己轉、自己點。想讀文字版：<a href="../../../tools/what-is-tor/">什麼是 Tor</a>、<a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../utils/">離線小工具</a>。',
+  tourEndBody: '接下來自己轉、自己點。想讀文字版：<a href="../../../tools/what-is-tor/">什麼是 Tor</a>、<a href="https://anoni.net/updates/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../utils/">離線小工具</a>。',
 
-  backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="../../../blog/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a>',
+  backlink: '← <a href="../../">互動與呈現</a>　延伸閱讀 <a href="https://anoni.net/updates/2026/07/games-globe-open-data/">地球儀的資料從哪來</a>、<a href="../../../tools/what-is-tor/">什麼是 Tor</a>',
 };
 
 const EN = {
@@ -496,9 +496,9 @@ const EN = {
   tourInfraTitle: 'What the connection physically rests on',
   tourInfraBody: 'Five more layers appear up close: county borders, cable landing points, substations, power stations and the 345 kV backbone. Traffic from abroad comes ashore at a landing point, and a machine room needs power to forward any of it. Click any facility for detail.',
   tourEndTitle: 'That is the tour',
-  tourEndBody: 'Spin it and click around from here. In text: <a href="../../../en/tools/what-is-tor/">What is Tor</a>, <a href="../../../en/blog/2026/07/games-globe-open-data/">where this globe\'s data comes from</a>, <a href="../../../en/utils/">offline tools</a>.',
+  tourEndBody: 'Spin it and click around from here. In text: <a href="../../../en/tools/what-is-tor/">What is Tor</a>, <a href="https://anoni.net/en/updates/2026/07/games-globe-open-data/">where this globe\'s data comes from</a>, <a href="../../../en/utils/">offline tools</a>.',
 
-  backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="../../../en/blog/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
+  backlink: '← <a href="../../../en/games/">Interactive</a>　Further reading: <a href="https://anoni.net/en/updates/2026/07/games-globe-open-data/">Where this globe\'s data comes from</a>',
 };
 
 const ZH_CN = {
@@ -734,9 +734,9 @@ const ZH_CN = {
   tourInfraTitle: '连线靠的是这些实体设施',
   tourInfraBody: '贴近之后多出五层：县市界、海缆登陆点、变电所、发电厂与 345kV 骨干。海外的封包从登陆点上岸，机房要有电才转得动。点任何一个设施可以看细节。',
   tourEndTitle: '导览到这里',
-  tourEndBody: '接下来自己转、自己点。想读文字版：<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/utils/">离线小工具</a>。',
+  tourEndBody: '接下来自己转、自己点。想读文字版：<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>、<a href="https://anoni.net/zh-cn/updates/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/utils/">离线小工具</a>。',
 
-  backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="../../../zh-cn/blog/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
+  backlink: '← <a href="../../../zh-cn/games/">互动与呈现</a>　延伸阅读 <a href="https://anoni.net/zh-cn/updates/2026/07/games-globe-open-data/">地球仪的数据从哪来</a>、<a href="../../../zh-cn/tools/what-is-tor/">什么是 Tor</a>',
 };
 
 export const STR = { 'zh-TW': ZH_TW, 'en': EN, 'zh-cn': ZH_CN };

@@ -63,9 +63,8 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `basics/` | 概念層，匿名與隱私的核心思考工具 |
 | `tools/` | 工具層，具體的工具介紹與比較 |
 | `scenarios/` | 場景層，特定角色或情境的應用 |
-| `advanced/` | 進階層，技術深度的延伸閱讀 |
 | `taiwan/` | 在地脈絡，台灣的法規、觀測、研究 |
-| `reports/` | 嚴選報告，外部研究的中譯 |
+| `reports/` | 研究報告中譯，外部研究報告的正體中文翻譯 |
 | `community/` | 貢獻與翻譯規範、開發環境準備、技能自評與視覺指南 |
 
 社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/){target="_blank"}，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www){target="_blank"}，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。架設 Tor 中繼節點、橋接與 onion 服務的指南，以及讀懂 OONI 觀測資料的方法，寫給已經熟悉 Tor 的技術讀者，2026-10 起也放在 anoni.net。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
@@ -119,7 +118,7 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 
 需要寫對外完整網址時（社群貼文、外部引用），網站預設語系 zh-TW 不帶語系區段：`docs/zh-TW/community/i18n.md` 對應 `https://anoni.net/docs/community/i18n/`。zh-CN 用小寫 `https://anoni.net/docs/zh-cn/...`，en 用 `https://anoni.net/docs/en/...`。資料夾路徑仍保留語系大小寫。
 
-文章末尾建議放「接下來」、「相關閱讀」之類的小節，連結到 2–4 篇相關文章。基礎、工具、場景、進階之間的橫向連結比單向引用更有用。
+文章末尾建議放「接下來」、「相關閱讀」之類的小節，連結到 2–4 篇相關文章。概念、工具、場景之間的橫向連結比單向引用更有用。
 
 ## 文章格式
 
