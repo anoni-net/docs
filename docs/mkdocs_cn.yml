@@ -181,8 +181,7 @@ nav:
   # 链接的 onion 版由 replace_sitename_anoni_onion.sh 改写。
   # 「读懂观测资料」四页 2026-10-13 搬到社群首页的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
   # 架设 Tor Relay、WebTunnel 桥接、.onion 服务与 pin IPFS 镜像四页 2026-10-13 搬到社群首页的 /join/ 底下（#406）。
-  - "架设与运营":
-      - setup/index.md
+  # 三份校园范本同一天搬到 /join/relay-on-campus/ 底下，「架设与运营」整组拿掉，索引页转到 /join/。
   # about/index.md 排第一，navigation.indexes 才会把它当成这一组的索引页。
   - "关于文档站":
       - about/index.md
@@ -369,6 +368,10 @@ plugins:
         'community/setup-tor-webtunnel.md': 'https://anoni.net/zh-cn/join/setup-tor-webtunnel/'
         'community/setup-onion-service.md': 'https://anoni.net/zh-cn/join/setup-onion-service/'
         'community/pin-ipfs-mirror.md': 'https://anoni.net/zh-cn/join/pin-ipfs-mirror/'
+        'community/campus-tor-relay-proposal.md': 'https://anoni.net/zh-cn/join/relay-on-campus/proposal/'
+        'community/campus-tor-relay-sop.md': 'https://anoni.net/zh-cn/join/relay-on-campus/sop/'
+        'community/campus-relay-faq.md': 'https://anoni.net/zh-cn/join/relay-on-campus/faq/'
+        'setup/index.md': 'https://anoni.net/zh-cn/join/'
         'community/brand-assets.md': 'https://anoni.net/zh-cn/brand/'
         'activity/index.md': 'https://anoni.net/zh-cn/events/'
         'activity/gg2026.md': 'https://anoni.net/zh-cn/events/gg2026/'
@@ -441,9 +444,6 @@ plugins:
         # 「公告」分類的文章都搬到社群首頁之後，分類頁不再產生
         'blog/category/公告.md': 'https://anoni.net/zh-cn/updates/'
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
-        'community/campus-relay-faq.md': 'https://anoni.net/docs/community/campus-relay-faq/'
-        'community/campus-tor-relay-proposal.md': 'https://anoni.net/docs/community/campus-tor-relay-proposal/'
-        'community/campus-tor-relay-sop.md': 'https://anoni.net/docs/community/campus-tor-relay-sop/'
         'regional.md': 'taiwan/index.md'
         'regional/tor-relay-watcher.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'report/interseclab-the-internet-coup.md': 'reports/index.md'

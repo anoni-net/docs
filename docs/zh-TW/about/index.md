@@ -8,7 +8,7 @@ icon: material/book-information-variant
 
 文件站整理匿名網路與隱私的知識，從概念、工具到不同處境的準備，也追蹤台灣的網路觀測與相關法規。內容由匿名網路社群 anoni.net 的成員撰寫與維護，原始檔與修改紀錄都公開在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/){target="_blank"}，這一頁只談文件站本身。
+社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/){target="_blank"}，架設 Tor 中繼節點、橋接與 onion 服務的指南，以及讀懂 OONI 觀測資料的方法也在那裡。這一頁只談文件站本身。
 
 ## 內容範圍
 
@@ -16,10 +16,9 @@ icon: material/book-information-variant
 |---|---|
 | [開始](../start/index.md) | 依身分整理的起步路徑，從公民團體、媒體到一般讀者 |
 | [指南](../guides/index.md) | 概念、工具、場景、進階、報告五個層次，由淺到深 |
-| [在地脈絡](../taiwan/index.md) | 台灣的連線觀測、法規與制度，以及讀懂觀測資料的方法 |
+| [在地脈絡](../taiwan/index.md) | 台灣的連線觀測、法規與制度 |
 | [小工具](../utils/index.md) | 在瀏覽器裡執行的工具，資料不會上傳 |
 | [資訊更新](../blog/index.md) | 社群公告、外部文章的翻譯與軟體更新日誌 |
-| [架設與營運](../setup/index.md) | 架設 Tor 中繼節點、橋接、onion 服務與鏡像 |
 
 關注的範圍是華語六地區（中國大陸、香港、澳門、新加坡、馬來西亞、台灣），以及在各地之間移動的華語使用者。台灣是社群唯一能以第一手經驗發言的地方，其他地區依據公開資料與當地聯絡人的說法撰寫，用到二手材料的段落會在頁面上標明。
 

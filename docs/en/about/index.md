@@ -8,7 +8,7 @@ icon: material/book-information-variant
 
 The anoni.net Docs collect what we know about anonymity networks and privacy, from concepts and tools to preparing for specific situations, and track network measurement and regulation in Taiwan and the wider Sinophone Asia-Pacific. Members of the anoni.net community write and maintain the pages, and the source and full edit history are public on [GitHub](https://github.com/anoni-net/docs){target="_blank"}.
 
-Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/){target="_blank"}. This page is about the documentation site itself.
+Who we are, how to take part and the services we run are on [anoni.net](https://anoni.net/en/about/){target="_blank"}, along with the guides to running Tor relays, bridges and onion services and to reading OONI measurement data. This page is about the documentation site itself.
 
 ## What the site covers
 
@@ -16,10 +16,9 @@ Who we are, how to take part and the services we run are on [anoni.net](https://
 |---|---|
 | [Start](../start/index.md) | Starting paths by role, from civil society and newsrooms to everyday readers |
 | [Guides](../guides/index.md) | Concepts, tools, scenarios, advanced topics and reports, from basic to in-depth |
-| [Regional](../regional/index.md) | Network measurement and regulation in Taiwan, and how to read the measurement data |
+| [Regional](../regional/index.md) | Network measurement and regulation in Taiwan |
 | [Utilities](../utils/index.md) | Tools that run in your browser and never upload your data |
 | [Updates](../blog/index.md) | Community news, translated articles and software changelogs |
-| [Run a Node](../setup/index.md) | Setting up Tor relays, bridges, onion services and mirrors |
 
 The region we cover is Mainland China, Hong Kong, Macau, Singapore, Malaysia, Taiwan, and the Chinese-speaking diaspora moving between them. Taiwan is the only place we can speak to first-hand. Everything else rests on public sources and contacts in those places, and pages say so where they rely on second-hand material.
 
