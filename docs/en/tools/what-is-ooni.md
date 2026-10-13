@@ -34,7 +34,7 @@ Running measurements adds your own network's observations to the public dataset.
     3. **HTTP blocking**: intercepting at the web layer, commonly returning a block notice page
     4. **TLS-based interference**: cutting the connection as encryption is being negotiated, for example a reset or timeout right after the ClientHello
 - **Tor**: the onion routing network, relaying requests through three nodes
-- **Helper**: OONI's test helper servers on unaffected networks. After a probe tests a URL, the helper tests the same URL from a network without interference, and the difference between the two results is what the determination rests on. The full mechanism is in [how OONI determines that a site is blocked](../community/ooni-blocking-determination.md)
+- **Helper**: OONI's test helper servers on unaffected networks. After a probe tests a URL, the helper tests the same URL from a network without interference, and the difference between the two results is what the determination rests on. The full mechanism is in [how OONI determines that a site is blocked](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
 
 ### Blocking is not always censorship, and the data does not pretend to know
 
@@ -160,9 +160,9 @@ Measurements return to OONI's database and can be analyzed by region and by test
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: A tour of OONI measurement data](../community/ooni-data-format.md)
-- [:material-shield-search: How OONI determines that a site is blocked](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI test quick reference](../community/ooni-nettests-map.md)
-- [:material-database-search: Extracting and analyzing ASN observation data](../community/asn-coverage-howto.md)
+- [:material-code-json: The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"}
+- [:material-shield-search: OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
+- [:material-table-search: OONI Nettest Quick Reference](https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
+- [:material-database-search: ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"}
 
 </div>

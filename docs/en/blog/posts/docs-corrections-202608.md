@@ -55,7 +55,7 @@ Five of the items above change preparations a reader may already have made. Here
 
 ## Taiwan's blocking determination, recomputed over the full dataset
 
-[How OONI decides a site is blocked](../../community/ooni-blocking-determination.md) draws on OONI, a public measurement project for internet censorship in which volunteers around the world run tests and every result is published. The page had reported a sample of 40 anomalous measurements (31 `dns`, 6 `tcp_ip`, 3 `http-failure`, 0 `http-diff`) and concluded from that sample that Taiwan showed no block-page redirection pattern. Recomputing over the full 24 hours preceding 2026-08-05 (22,105 measurements) broke both the distribution and the sampling method behind it:
+[OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"} draws on OONI, a public measurement project for internet censorship in which volunteers around the world run tests and every result is published. The page had reported a sample of 40 anomalous measurements (31 `dns`, 6 `tcp_ip`, 3 `http-failure`, 0 `http-diff`) and concluded from that sample that Taiwan showed no block-page redirection pattern. Recomputing over the full 24 hours preceding 2026-08-05 (22,105 measurements) broke both the distribution and the sampling method behind it:
 
 | Determination | Count | Share |
 |---|---:|---:|
@@ -70,7 +70,7 @@ Five of the items above change preparations a reader may already have made. Here
 
 What the recomputation overturned was the distribution and the sampling method. The conclusion itself, that Taiwan shows no block pages, still holds. Fifteen of those 35 `http-diff` cases were sampled from a four-hour window, and `body_proportion` (how much of the content the Probe received matches the control) fell between `0.004` and `0.21`. The Probe received far less content than the control, the opposite of a block page approaching `1`. Establishing the cause requires going through the evidence layer measurement by measurement, so the page reports the observed pattern without drawing a conclusion.
 
-The recomputation became possible because the field tally was finally implemented. [Reading an OONI measurement](../../community/ooni-data-format.md) had said from day one that the smallest useful step was to also read `test_keys.blocking` during line-by-line parsing, which would extend the statistics from measurement counts to per-ASN anomaly distributions. (An ASN, or autonomous system number, identifies a block of IPs run by one operator or organisation.) The code never did it, and that was the one place where our documentation described something we had only written down. Adding it in early August contradicted the page above as soon as the first results came out.
+The recomputation became possible because the field tally was finally implemented. [The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"} had said from day one that the smallest useful step was to also read `test_keys.blocking` during line-by-line parsing, which would extend the statistics from measurement counts to per-ASN anomaly distributions. (An ASN, or autonomous system number, identifies a block of IPs run by one operator or organisation.) The code never did it, and that was the one place where our documentation described something we had only written down. Adding it in early August contradicted the page above as soon as the first results came out.
 
 ## Seven corrections on the Interactive overview page
 
@@ -138,12 +138,12 @@ Both pull requests removed content that would have led readers to a wrong decisi
 
 The site is about privacy and security, and readers change their behaviour based on what it says, so the cost of a wrong sentence lands on the reader. The harder part is that readers cannot check for themselves: a distribution drawn from a sample, written up as a general rule, reads exactly like one computed over everything, and no reader can tell whether the conclusion came from 40 measurements or 22,105. So the corrections are published with their reasoning, including the original wording of what was withdrawn and why we did not accept it.
 
-The same period also added a Taiwan infrastructure layer in the [Interactive](../../games/index.md) section, four [OONI technical documents](../../community/ooni-data-format.md), and a .onion build variant in CI. If you find something that does not match the facts, open an issue on [GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} or send a pull request, and we will verify and update.
+The same period also added a Taiwan infrastructure layer in the [Interactive](../../games/index.md) section, four [OONI technical documents](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"}, and a .onion build variant in CI. If you find something that does not match the facts, open an issue on [GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} or send a pull request, and we will verify and update.
 
 ## Related reading
 
-- [How OONI decides a site is blocked](../../community/ooni-blocking-determination.md): the page the full dataset overturned, now carrying a warning box about this correction
-- [Reading an OONI measurement](../../community/ooni-data-format.md): the version after the field tally was completed
+- [OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}: the page the full dataset overturned, now carrying a warning box about this correction
+- [The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"}: the version after the field tally was completed
 - [Device minimization and border crossings in Asia](../../scenarios/asia-travel.md): current guidance after the Hong Kong correction
 - [Maintaining multiple online identities](../../basics/multiple-identities.md): TOTP app guidance is now criteria-based rather than brand-based
 - [Help pin the site's IPFS mirror](../../community/pin-ipfs-mirror.md): the three-identifier comparison table and the new peering section

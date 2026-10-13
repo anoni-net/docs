@@ -34,7 +34,7 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
     3. HTTP 封锁（HTTP blocking，例如：封锁页面）
     4. 基于 TLS 的干扰（例如 TLS 握手期间 ClientHello 信息后出现连线重置或连线逾时（timeout））
 - **Tor：**[洋葱路由网络](https://zh.wikipedia.org/zh-cn/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1){target="_blank"}，将连线请求透过三层节点的转介传送取得资讯。
-- **Helper：**OONI 架设在外部网络的测量服务器（test helper）。Probe 测完一个网址后，helper 会从未受干预的网络对同一个网址再测一次，两边结果的差异才是判定依据。完整判定机制见 [OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)。
+- **Helper：**OONI 架设在外部网络的测量服务器（test helper）。Probe 测完一个网址后，helper 会从未受干预的网络对同一个网址再测一次，两边结果的差异才是判定依据。完整判定机制见 [OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}。
 
 !!! info "anoni.net 是台湾的社群"
 
@@ -158,9 +158,9 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 测量数据结构导览](../community/ooni-data-format.md)
-- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
-- [:material-database-search: ASN 观测数据提取与分析](../community/asn-coverage-howto.md)
+- [:material-code-json: OONI 测量数据的结构](https://anoni.net/zh-cn/projects/asn-coverage/ooni-data-format/){target="_blank"}
+- [:material-shield-search: OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
+- [:material-table-search: OONI 测项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
+- [:material-database-search: ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}
 
 </div>

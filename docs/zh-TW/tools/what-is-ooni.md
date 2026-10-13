@@ -34,7 +34,7 @@ OONI 的工作可以拆成四塊。核心是 [OONI Probe](https://ooni.org/insta
     3. HTTP 封鎖（HTTP blocking）：在網頁連線層攔截，常見是跳出一頁封鎖告示。
     4. 基於 TLS 的干擾：在加密連線剛要建立（TLS 握手）時把它切斷，例如 ClientHello 訊息後出現連線重置或連線逾時（timeout）。
 - **Tor：**[洋蔥路由網路](https://zh.wikipedia.org/zh-tw/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1 "前往 Wiki 了解更多！"){target="_blank"}，將連線請求透過三層節點的轉介傳送取得資訊。
-- **Helper：**OONI 架設在外部網路的測量伺服器（test helper）。Probe 測完一個網址後，helper 會從未受干預的網路對同一個網址再測一次，兩邊結果的差異才是判定依據。完整判定機制見 [OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)。
+- **Helper：**OONI 架設在外部網路的測量伺服器（test helper）。Probe 測完一個網址後，helper 會從未受干預的網路對同一個網址再測一次，兩邊結果的差異才是判定依據。完整判定機制見 [OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}。
 
 在臺灣比較熟悉與類似的阻擋行為與技術如中華電信提供的「[色情守門員](https://hicare.hinet.net/CHT/hicare/){target="_blank"}」、透過 DNS 阻擋廣告、惡意網站的 [AdGuard](https://adguard.com/zh_tw/welcome.html){target="_blank"}、[Pi-Hole](https://pi-hole.net/){target="_blank"}。 或是數位發展部與財團法人臺灣網路資訊中心（TWNIC）進行網域阻擋的[打擊詐騙方式](https://moda.gov.tw/press/press-releases/6303){target="_blank"}，都可算是阻擋網頁瀏覽。
 
@@ -154,9 +154,9 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 測量資料結構導覽](../community/ooni-data-format.md)
-- [:material-shield-search: OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI 測項速查表](../community/ooni-nettests-map.md)
-- [:material-database-search: ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)
+- [:material-code-json: OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}
+- [:material-shield-search: OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
+- [:material-table-search: OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
+- [:material-database-search: ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}
 
 </div>

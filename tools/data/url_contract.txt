@@ -1456,18 +1456,7 @@
 	#先看清楚受影響的是哪一種產品
 	#急迫程度怎麼判斷
 /community/ -> https://anoni.net/join/
-/community/asn-coverage-howto/
-	#ASN-觀測資料擷取與分析
-	#S3-資料集的擺放方式
-	#三種取用路徑
-	#下一步
-	#取得區間資料
-	#回看觀察資料
-	#擷取與分析指令
-	#程式能回答什麼
-	#計算-ASN-覆蓋率
-	#輸出的-CSV-欄位格式
-	#轉換為試算表資料
+/community/asn-coverage-howto/ -> https://anoni.net/projects/asn-coverage/howto/
 /community/become-anoni/
 	#0-怎麼用
 	#1-你是誰
@@ -1598,37 +1587,9 @@
 	#翻譯外部文章到-blog
 	#順序與校稿停點
 /community/onionoo-mcp/ -> https://anoni.net/projects/onionoo-mcp/
-/community/ooni-blocking-determination/
-	#OONI-怎麼判定一個網站被封鎖
-	#dns解析結果不一致
-	#http-diff取得的內容不一致
-	#http-failure連線建立後取不到內容
-	#tcp_ip連不到目標位址
-	#判定建立在雙邊對照上
-	#台灣現況
-	#四種判定對應的證據
-	#延伸閱讀
-	#從單筆測量到可信結論
-	#誤判的來源
-/community/ooni-data-format/
-	#OONI-測量資料結構導覽
-	#一筆測量的三層結構
-	#判定是測量得出的結論
-	#取得一筆測量
-	#外殼記錄誰在哪裡測的
-	#延伸閱讀
-	#版本與相容性
-	#證據是支撐結論的原始紀錄
-/community/ooni-nettests-map/
-	#OONI-測項速查表
-	#仍在產出資料的測項
-	#依用途分群
-	#偶爾才有資料的測項
-	#台灣觀測到哪些測項
-	#延伸閱讀
-	#查不到公開資料的測項
-	#標記為-obsolete-的歷史測項
-	#狀態標記不等於實際有資料
+/community/ooni-blocking-determination/ -> https://anoni.net/projects/asn-coverage/ooni-blocking-determination/
+/community/ooni-data-format/ -> https://anoni.net/projects/asn-coverage/ooni-data-format/
+/community/ooni-nettests-map/ -> https://anoni.net/projects/asn-coverage/ooni-nettests-map/
 /community/partners/ -> https://anoni.net/about/partners/
 /community/passkey-lab/
 	#passkey-userHandle-實驗
@@ -2846,18 +2807,7 @@
 	#September-2026
 	#Windows-Security-Updates
 /en/community/ -> https://anoni.net/en/join/
-/en/community/asn-coverage-howto/
-	#ASN-observation-data-retrieval-and-analysis
-	#Calculating-ASN-coverage
-	#Convert-to-spreadsheet-rows
-	#How-the-S3-dataset-is-laid-out
-	#Look-back-over-recent-observations
-	#Retrieval-and-analysis-commands
-	#Retrieve-a-date-range
-	#The-CSV-output-format
-	#Three-ways-in
-	#What-the-scripts-can-answer
-	#Where-to-go-from-here
+/en/community/asn-coverage-howto/ -> https://anoni.net/en/projects/asn-coverage/howto/
 /en/community/become-anoni/
 	#0-How-to-use-it
 	#1-Who-you-are
@@ -2981,37 +2931,9 @@
 	#What-helping-with-en-actually-means
 	#Where-to-go-from-here
 /en/community/onionoo-mcp/ -> https://anoni.net/en/projects/onionoo-mcp/
-/en/community/ooni-blocking-determination/
-	#From-one-measurement-to-a-credible-conclusion
-	#How-OONI-decides-a-site-is-blocked
-	#The-evidence-behind-each-verdict
-	#The-verdict-rests-on-a-two-sided-comparison
-	#What-Taiwans-data-looks-like
-	#Where-misreadings-come-from
-	#Where-to-go-from-here
-	#dns-resolution-disagrees
-	#http-diff-the-content-differs
-	#http-failure-connects-but-returns-nothing
-	#tcp_ip-cannot-reach-the-target-address
-/en/community/ooni-data-format/
-	#Reading-an-OONI-measurement
-	#Retrieving-a-measurement
-	#The-envelope-records-who-measured-from-where
-	#The-evidence-is-the-raw-record-behind-the-verdict
-	#The-verdict-is-what-the-measurement-concluded
-	#Three-layers-in-one-measurement
-	#Versions-and-compatibility
-	#Where-to-go-from-here
-/en/community/ooni-nettests-map/
-	#A-status-marker-is-not-a-data-supply
-	#Grouped-by-purpose
-	#Historical-nettests-marked-obsolete
-	#Nettests-still-producing-data
-	#Nettests-with-no-public-data
-	#Nettests-with-only-occasional-data
-	#OONI-nettest-quick-reference
-	#Where-to-go-from-here
-	#Which-nettests-show-up-in-Taiwan
+/en/community/ooni-blocking-determination/ -> https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/
+/en/community/ooni-data-format/ -> https://anoni.net/en/projects/asn-coverage/ooni-data-format/
+/en/community/ooni-nettests-map/ -> https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/
 /en/community/partners/ -> https://anoni.net/en/about/partners/
 /en/community/payments-research/ -> https://anoni.net/en/join/payments-research/
 /en/community/pin-ipfs-mirror/
@@ -7470,18 +7392,7 @@
 	#先看清楚受影响的是哪一种产品
 	#紧急程度怎么判断
 /zh-cn/community/ -> https://anoni.net/zh-cn/join/
-/zh-cn/community/asn-coverage-howto/
-	#ASN-观测数据提取与分析
-	#S3-数据集的摆放方式
-	#三种取用路径
-	#下一步
-	#取得区间数据
-	#回看观察数据
-	#提取与分析指令
-	#程序能回答什么
-	#计算-ASN-覆盖率
-	#转换为试算表数据
-	#输出的-CSV-栏位格式
+/zh-cn/community/asn-coverage-howto/ -> https://anoni.net/zh-cn/projects/asn-coverage/howto/
 /zh-cn/community/become-anoni/
 	#0-怎么用
 	#1-你是谁
@@ -7544,37 +7455,9 @@
 	#相关规则文件
 	#社区参与过的上游翻译
 /zh-cn/community/onionoo-mcp/ -> https://anoni.net/zh-cn/projects/onionoo-mcp/
-/zh-cn/community/ooni-blocking-determination/
-	#OONI-怎么判定一个网站被封锁
-	#dns解析结果不一致
-	#http-diff取得的内容不一致
-	#http-failure连线建立后取不到内容
-	#tcp_ip连不到目标位址
-	#从单笔测量到可信结论
-	#判定建立在双边对照上
-	#台湾现况
-	#四种判定对应的证据
-	#延伸阅读
-	#误判的来源
-/zh-cn/community/ooni-data-format/
-	#OONI-测量数据结构导览
-	#一笔测量的三层结构
-	#判定是测量得出的结论
-	#取得一笔测量
-	#外壳记录谁在哪里测的
-	#延伸阅读
-	#版本与兼容性
-	#证据是支撑结论的原始纪录
-/zh-cn/community/ooni-nettests-map/
-	#OONI-测项速查表
-	#仍在产出数据的测项
-	#依用途分群
-	#偶尔才有数据的测项
-	#台湾观测到哪些测项
-	#延伸阅读
-	#查不到公开数据的测项
-	#标记为-obsolete-的历史测项
-	#状态标记不等于实际有数据
+/zh-cn/community/ooni-blocking-determination/ -> https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/
+/zh-cn/community/ooni-data-format/ -> https://anoni.net/zh-cn/projects/asn-coverage/ooni-data-format/
+/zh-cn/community/ooni-nettests-map/ -> https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/
 /zh-cn/community/partners/ -> https://anoni.net/zh-cn/about/partners/
 /zh-cn/community/payments-research/ -> https://anoni.net/zh-cn/join/payments-research/
 /zh-cn/community/pin-ipfs-mirror/

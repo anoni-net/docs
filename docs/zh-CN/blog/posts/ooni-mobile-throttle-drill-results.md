@@ -252,11 +252,11 @@ OONI 记录国家与 ASN，不记录县市，也不记录基站位置。从数�
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：网页界面，适合查单条测量、看某个国家或 ASN 的趋势，无须写程序。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免验证免密钥，可依国家、测试项、ASN 切分做统计。起讫只接受日期，适合看天级以上的趋势。
 - **Measurements API**：`https://api.ooni.org/api/v1/measurements`，接受精确到秒的时间区间，返回逐条记录。本文的主要数据出自此端点。
-- **AWS S3 公开数据集**：`ooni-data-eu-fra`，逐条原始 JSON，适合需要检视测量细节或做大规模分析的研究。取用方式与 CSV 输出格式写在 [ASN 观测数据抓取与分析](../../community/asn-coverage-howto.md)，社区维护的抓取程序也在该页。
+- **AWS S3 公开数据集**：`ooni-data-eu-fra`，逐条原始 JSON，适合需要检视测量细节或做大规模分析的研究。取用方式与 CSV 输出格式写在 [ASN 观测数据抓取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}，社区维护的抓取程序也在该页。
 
 不写程序也能参与。装一次 [OONI Probe](https://ooni.org/install/){target="_blank"} 并执行，每一条测量都会进入公开数据库，成为台湾网络状态的长期记录。前 30 天全台平均一天只有 34 条连接速度测试，多一部手机的日常测量，基准就厚一分。下一次遇到非预期的网络变慢时，能不能分辨是自己的问题还是网络的问题，取决于平常累积了多少。
 
-台湾还有不少题目尚待投入。移动网络的长期基准目前仍然很薄，三家运营商的覆盖差了一到两个数量级，细节见 [ASN 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)。要判断某个问题该用哪个测试项，[OONI 测试项速查表](../../community/ooni-nettests-map.md)整理了每个测试项测量什么、规格状态，以及台湾是否有数据。
+台湾还有不少题目尚待投入。移动网络的长期基准目前仍然很薄，三家运营商的覆盖差了一到两个数量级，细节见 [ASN 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)。要判断某个问题该用哪个测试项，[OONI 测试项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}整理了每个测试项测量什么、规格状态，以及台湾是否有数据。
 
 判读数据时最常见的误解，是把异常（anomaly）当成封锁。异常只代表测试未照预期完成，成因包含审查、网络不稳、ISP 暂时故障，以及测试程序本身的问题。以 Tor 测试为例，加拿大、瑞士、新西兰等没有审查的国家，异常率同样落在 `16%` 到 `22%` 之间。把异常率直接当成封锁率会产生假指控。
 

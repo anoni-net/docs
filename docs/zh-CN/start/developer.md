@@ -33,10 +33,10 @@ icon: material/console
 
 观测数据这条线缺的是能把原始测量读懂、写成分析的人。
 
-- [OONI 测量数据结构导览](../community/ooni-data-format.md)：原始测量的字段长什么样
-- [OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)：判定逻辑先弄懂才不会误读数据
-- [OONI 测项速查表](../community/ooni-nettests-map.md)：各测项测的是什么
-- [ASN 观测数据提取与分析](../community/asn-coverage-howto.md)：社群自己那支提取程序怎么设置与使用，含 S3 公开数据集的路径结构
+- [OONI 测量数据的结构](https://anoni.net/zh-cn/projects/asn-coverage/ooni-data-format/){target="_blank"}：原始测量的字段长什么样
+- [OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：判定逻辑先弄懂才不会误读数据
+- [OONI 测项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}：各测项测的是什么
+- [ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}：社群自己那支提取程序怎么设置与使用，含 S3 公开数据集的路径结构
 - [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)：台湾目前的涵盖状况，缺口就是题目
 - [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中继查询服务（onionoo MCP），也是一个可以延伸的接口
 - [OONI 网站检测清单](../taiwan/ooni-checklist.md)：检测清单怎么维护，分类与更新都需要人

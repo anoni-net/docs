@@ -96,9 +96,9 @@ icon: material/access-point-network
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 測量資料結構導覽](../community/ooni-data-format.md)
-- [:material-shield-search: OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI 測項速查表](../community/ooni-nettests-map.md)
+- [:material-code-json: OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}
+- [:material-shield-search: OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
+- [:material-table-search: OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
 
 </div>
 
@@ -106,11 +106,11 @@ icon: material/access-point-network
 
 如果你想自己擷取與分析 OONI 公開資料，計算特定區域的 ASN 覆蓋率，相關工具設定與指令見：
 
-[:material-database-search: ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
+[:material-database-search: ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){ .md-button .md-button--primary target="_blank" }
 
 ## 後續方向
 
-- 依網路類型（行動網路、家用寬頻）分開看覆蓋率。這需要原始測量裡的欄位，OONI 的彙總 API 沒有，目前只能用 [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md) 的工具手動整理
+- 依網路類型（行動網路、家用寬頻）分開看覆蓋率。這需要原始測量裡的欄位，OONI 的彙總 API 沒有，目前只能用 [ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"} 的工具手動整理
 - 與 [OONI 網站檢測清單](./ooni-checklist.md) 維護工作搭配，提升觀測品質與多樣性
 
 ## 下一步
@@ -120,7 +120,7 @@ icon: material/access-point-network
 - [:material-list-status: OONI 網站檢測清單](./ooni-checklist.md)
 - [:material-chart-areaspline: OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/){target="_blank"}
 - [:material-chart-bar: Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
-- [:material-database-search: ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)
+- [:material-database-search: ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
 
 </div>

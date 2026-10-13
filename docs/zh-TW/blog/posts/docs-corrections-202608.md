@@ -55,7 +55,7 @@ description: "香港的入境查機風險由中升到高、日本境外 eSIM 的
 
 ## 台灣的封鎖判定改用全量資料重算
 
-[OONI 怎麼判定一個網站被封鎖](../../community/ooni-blocking-determination.md)引用的是 OONI（全球網路審查的公開量測計畫，各地志工執行測試、結果全部公開）的觀測資料，原本寫著抽查 40 筆異常測量，`dns` 31 筆、`tcp_ip` 6 筆、`http-failure` 3 筆、`http-diff` 0 筆，並據此寫成台灣沒有出現重導向到封鎖告示頁的樣態。改用 2026-08-05 往前 24 小時的全量資料（22,105 筆）重算之後，那份分布與支撐它的抽樣方法都不成立：
+[OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}引用的是 OONI（全球網路審查的公開量測計畫，各地志工執行測試、結果全部公開）的觀測資料，原本寫著抽查 40 筆異常測量，`dns` 31 筆、`tcp_ip` 6 筆、`http-failure` 3 筆、`http-diff` 0 筆，並據此寫成台灣沒有出現重導向到封鎖告示頁的樣態。改用 2026-08-05 往前 24 小時的全量資料（22,105 筆）重算之後，那份分布與支撐它的抽樣方法都不成立：
 
 | 判定 | 筆數 | 佔比 |
 |---|---:|---:|
@@ -70,7 +70,7 @@ description: "香港的入境查機風險由中升到高、日本境外 eSIM 的
 
 被推翻的是分布數字與抽樣方法，「台灣沒有封鎖告示頁」這個結論本身反而站得住。那 35 筆 `http-diff` 抽查了 4 小時內的 15 筆，`body_proportion`（Probe 取到的內容與對照組相符的比例）全部落在 `0.004` 到 `0.21` 之間，內容遠短於對照組（control），與告示頁逼近 `1` 的樣態相反。成因需要逐筆查驗證據層（evidence layer），文件因此只陳述觀察到的樣態，不下結論。
 
-能重算的原因是欄位統計終於補上。[OONI 測量資料結構導覽](../../community/ooni-data-format.md)上線時就寫著，最小的一步是在逐行解析時多取 `test_keys.blocking`，統計就能從測量筆數延伸到各 ASN（自治系統編號，網路上一個業者或組織所管的一群 IP）的異常分布。程式一直沒有做，是文件與程式之間唯一一處只寫在紙上的規劃，八月初補上之後，新資料一產出就推翻了上面那段敘述。
+能重算的原因是欄位統計終於補上。[OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}上線時就寫著，最小的一步是在逐行解析時多取 `test_keys.blocking`，統計就能從測量筆數延伸到各 ASN（自治系統編號，網路上一個業者或組織所管的一群 IP）的異常分布。程式一直沒有做，是文件與程式之間唯一一處只寫在紙上的規劃，八月初補上之後，新資料一產出就推翻了上面那段敘述。
 
 ## 互動作品總覽頁的七處更正
 
@@ -141,12 +141,12 @@ macOS 那段寫著 `brew install ipfs`，Homebrew 的 formula 已經改名為 `k
 
 網站的主題是隱私與安全，讀者依照文件的建議調整自己的行為，一句錯的敘述成本落在讀者身上。更難處理的是讀者沒有辦法自己驗證，抽樣得到的分布寫成通則，讀起來跟全量算出來的一模一樣，讀者無從分辨那是 40 筆還是 22,105 筆。更正的過程與依據因此一併寫出來，包含被撤回敘述的原文與不予採信的理由。
 
-同一段時間新增的內容包括[互動與呈現](../../games/index.md)區的台灣基礎設施圖層、四篇 [OONI 技術文件](../../community/ooni-data-format.md)，以及納入 CI 的 .onion 版建置。若讀到與事實不符的內容，歡迎到 [GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} 開一個 issue 或直接送 PR，我們會查證後更新。
+同一段時間新增的內容包括[互動與呈現](../../games/index.md)區的台灣基礎設施圖層、四篇 [OONI 技術文件](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}，以及納入 CI 的 .onion 版建置。若讀到與事實不符的內容，歡迎到 [GitHub](https://github.com/anoni-net/docs/issues){target="_blank"} 開一個 issue 或直接送 PR，我們會查證後更新。
 
 ## 相關閱讀
 
-- [OONI 怎麼判定一個網站被封鎖](../../community/ooni-blocking-determination.md)：被全量資料推翻的那一頁，警示區記著這次更正
-- [OONI 測量資料結構導覽](../../community/ooni-data-format.md)：欄位統計補完之後的版本
+- [OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：被全量資料推翻的那一頁，警示區記著這次更正
+- [OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}：欄位統計補完之後的版本
 - [出差與研討會的數位準備](../../scenarios/asia-travel.md)：三處撤回與香港風險升等後的現況
 - [怎麼維持多個網路身分](../../basics/multiple-identities.md)：TOTP app 的判斷標準已改為看條件不看品牌
 - [幫忙 pin 文件站的 IPFS 鏡像](../../community/pin-ipfs-mirror.md)：三串識別碼的對照表與新增的 peering 設定

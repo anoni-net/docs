@@ -136,9 +136,9 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 <div class="grid cards" markdown>
 
-- [:material-code-json: OONI 测量数据结构导览](../community/ooni-data-format.md)
-- [:material-shield-search: OONI 怎么判定一个网站被封锁](../community/ooni-blocking-determination.md)
-- [:material-table-search: OONI 测项速查表](../community/ooni-nettests-map.md)
+- [:material-code-json: OONI 测量数据的结构](https://anoni.net/zh-cn/projects/asn-coverage/ooni-data-format/){target="_blank"}
+- [:material-shield-search: OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}
+- [:material-table-search: OONI 测项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
 
 </div>
 
@@ -146,7 +146,7 @@ AS 可以被理解为一个单一的管理实体（例如：一家公司、一�
 
 如果你想自己提取与分析 OONI 公开数据，计算特定区域的 ASN 覆盖率，相关工具设置与指令见：
 
-[:material-database-search: ASN 观测数据提取与分析](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
+[:material-database-search: ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){ .md-button .md-button--primary target="_blank" }
 
 ## :fontawesome-solid-diagram-project: 下一步
 

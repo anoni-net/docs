@@ -252,11 +252,11 @@ OONI 記錄國家與 ASN，不記錄縣市，也不記錄基地台位置。從�
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：網頁介面，適合查單筆量測、看某個國家或 ASN 的趨勢，無須寫程式。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免驗證免金鑰，可依國家、測項、ASN 切分做統計。起訖只接受日期，適合看天級以上的趨勢。
 - **Measurements API**：`https://api.ooni.org/api/v1/measurements`，接受精確到秒的時間區間，回傳逐筆紀錄。本文的主要資料出自此端點。
-- **AWS S3 公開資料集**：`ooni-data-eu-fra`，逐筆原始 JSON，適合需要檢視量測細節或做大規模分析的研究。取用方式與 CSV 輸出格式寫在 [ASN 觀測資料擷取與分析](../../community/asn-coverage-howto.md)，社群維護的擷取程式也在該頁。
+- **AWS S3 公開資料集**：`ooni-data-eu-fra`，逐筆原始 JSON，適合需要檢視量測細節或做大規模分析的研究。取用方式與 CSV 輸出格式寫在 [ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}，社群維護的擷取程式也在該頁。
 
 不寫程式也能參與。裝一次 [OONI Probe](https://ooni.org/install/){target="_blank"} 並執行，每一筆量測都會進入公開資料庫，成為台灣網路狀態的長期紀錄。前 30 天全台平均一天只有 34 筆連線速度測試，多一支手機的日常量測，基準就厚一分。下一次遇到非預期的網路變慢時，能不能分辨是自己的問題還是網路的問題，取決於平常累積了多少。
 
-台灣還有不少題目尚待投入。行動網路的長期基準目前仍然很薄，三家業者的覆蓋差了一到兩個數量級，細節見 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)。要判斷某個問題該用哪個測項，[OONI 測項速查表](../../community/ooni-nettests-map.md)整理了每個測項量測什麼、規格狀態，以及台灣是否有資料。
+台灣還有不少題目尚待投入。行動網路的長期基準目前仍然很薄，三家業者的覆蓋差了一到兩個數量級，細節見 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)。要判斷某個問題該用哪個測項，[OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}整理了每個測項量測什麼、規格狀態，以及台灣是否有資料。
 
 判讀資料時最常見的誤解，是把異常（anomaly）當成封鎖。異常只代表測試未照預期完成，成因包含審查、網路不穩、ISP 暫時故障，以及測試程式本身的問題。以 Tor 測試為例，加拿大、瑞士、紐西蘭等沒有審查的國家，異常率同樣落在 `16%` 到 `22%` 之間。把異常率直接當成封鎖率會產生假指控。
 
