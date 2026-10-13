@@ -176,7 +176,7 @@ nyx -s /run/tor-instances/{instance-name}/control
 
 <div class="grid cards" markdown>
 
-- [:material-handshake-outline: Tor Project 生態與對接](./tor-project-ecosystem.md)
+- [:material-handshake-outline: 參與 Tor Project](https://anoni.net/join/tor-project/){target="_blank"}
 - [:material-tunnel-outline: 設置 Tor WebTunnel](./setup-tor-webtunnel.md)
 
 </div>

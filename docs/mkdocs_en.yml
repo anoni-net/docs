@@ -24,7 +24,6 @@ nav:
       - guides/index.md
       - help/index.md
       - community/skill-level.md
-      - community/tor-project-ecosystem.md
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
           - basics/internet-freedom.md
@@ -380,6 +379,7 @@ plugins:
         'community/tools.md': 'https://anoni.net/en/services/'
         'regional/tor-relay-watcher.md': 'https://anoni.net/en/projects/pulse/'
         'community/onionoo-mcp.md': 'https://anoni.net/en/projects/onionoo-mcp/'
+        'community/tor-project-ecosystem.md': 'https://anoni.net/en/join/tor-project/'
         'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
