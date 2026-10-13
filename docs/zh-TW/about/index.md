@@ -1,14 +1,20 @@
 ---
 title: 關於文件站
-description: anoni.net 文件站寫什麼、如何寫成、三個語系的關係、錯誤如何更正，以及內容的授權。社群本身的介紹在 anoni.net。
+description: anoni.net 文件站寫給誰、與社群首頁如何分工、如何寫成、三個語系的關係、錯誤如何更正，以及內容的授權。社群本身的介紹在 anoni.net。
 icon: material/book-information-variant
 ---
 
 # :material-book-information-variant: 關於文件站
 
-文件站整理匿名網路與隱私的知識，從概念、工具到不同處境的準備，也追蹤台灣的網路觀測與相關法規。內容由匿名網路社群 anoni.net 的成員撰寫與維護，原始檔與修改紀錄都公開在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
+文件站寫給剛開始接觸匿名網路與隱私的人，讀者不需要先知道 Tor、.onion 是什麼。內容從概念、工具到不同處境的準備，寫成讀完就能照著做的步驟，也追蹤台灣的網路觀測與相關法規。內容由匿名網路社群 anoni.net 的成員撰寫與維護，原始檔與修改紀錄都公開在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/){target="_blank"}，架設 Tor 中繼節點、橋接與 onion 服務的指南，以及讀懂 OONI 觀測資料的方法也在那裡。這一頁只談文件站本身。
+整站可以存進手機或電腦，網路受限或斷線時照樣能讀，做法見[離線閱讀](../offline.md)。
+
+社群的介紹、參與方式與自架服務在 [anoni.net](https://anoni.net/about/){target="_blank"}，這一頁只談文件站本身。
+
+## 文件站與 anoni.net 的分工
+
+一頁內容要放在哪裡，看它寫給誰。讀之前需要先懂 Tor 的內容放在 [anoni.net](https://anoni.net/){target="_blank"}，例如架設 Tor 中繼節點、橋接與 onion 服務的指南，以及讀懂 OONI 觀測資料的方法，讀者是要營運節點或自己分析資料的技術同好。不需要先懂 Tor、讀完就能保護自己的內容放在文件站。寫新內容前不確定該放哪一邊，可以先在 Matrix 上詢問。
 
 ## 內容範圍
 
