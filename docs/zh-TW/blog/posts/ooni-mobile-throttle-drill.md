@@ -233,9 +233,9 @@ M-Lab 的[隱私政策](https://www.measurementlab.net/privacy/){target="_blank"
 - **[OONI Explorer](https://explorer.ooni.org/){target="_blank"}**：網頁介面，適合查單筆量測、看某個國家或 ASN 的趨勢，無須寫程式。
 - **Aggregation API**：`https://api.ooni.org/api/v1/aggregation`，免驗證免金鑰，可依國家、測項、ASN 切分做統計。本文的 30 天 ASN 分布與比率出自此端點。`since` 與 `until` 只接受日期，帶上時間會回 `date_from_datetime_inexact` 錯誤，所以它適合看天級以上的趨勢。
 - **Measurements API**：`https://api.ooni.org/api/v1/measurements`，同樣免驗證，接受精確到秒的時間窗，回傳逐筆紀錄。本文中部場 30 分鐘的表格出自此端點。
-- **AWS S3 公開資料集**：`ooni-data-eu-fra`，逐筆原始 JSON，適合需要檢視量測細節或做大規模分析的研究。原始資料以整點批次上傳，落地 S3 的延遲約在半小時到一兩小時之間，取用方式與 CSV 輸出格式寫在 [ASN 觀測資料擷取與分析](../../community/asn-coverage-howto.md)，社群維護的擷取程式也在該頁。
+- **AWS S3 公開資料集**：`ooni-data-eu-fra`，逐筆原始 JSON，適合需要檢視量測細節或做大規模分析的研究。原始資料以整點批次上傳，落地 S3 的延遲約在半小時到一兩小時之間，取用方式與 CSV 輸出格式寫在 [ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}，社群維護的擷取程式也在該頁。
 
-以本次演練為例，30 分鐘的時間窗要用 measurements 端點：`probe_cc=TW`、`test_name=ndt`（或 `dash`）、`since=2026-08-13T06:00:00Z`、`until=2026-08-13T08:00:00Z`，回傳的每一筆都帶 `probe_asn`，再自行歸到 `24158`、`17421`、`9674` 三組。所有時間一律使用 UTC，台灣時間需減 8 小時。要判斷某個問題該用哪個測項，[OONI 測項速查表](../../community/ooni-nettests-map.md)整理了每個測項量測什麼、規格狀態，以及台灣是否有資料。台灣的 ASN 覆蓋現況見 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)。
+以本次演練為例，30 分鐘的時間窗要用 measurements 端點：`probe_cc=TW`、`test_name=ndt`（或 `dash`）、`since=2026-08-13T06:00:00Z`、`until=2026-08-13T08:00:00Z`，回傳的每一筆都帶 `probe_asn`，再自行歸到 `24158`、`17421`、`9674` 三組。所有時間一律使用 UTC，台灣時間需減 8 小時。要判斷某個問題該用哪個測項，[OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}整理了每個測項量測什麼、規格狀態，以及台灣是否有資料。台灣的 ASN 覆蓋現況見 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)。
 
 最常見的誤解是把異常（anomaly）當成封鎖。OONI 的 `anomaly` 只代表測試未照預期完成，成因包含審查、網路不穩、ISP 暫時故障，以及測試程式本身的問題，將 `anomaly` 比率直接視為封鎖率會產生假指控。以 `tor` 測項的實測為例，取 2026-07-12 到 2026-08-12 這 30 天，加拿大 `16.3%`（母數 14,042）、瑞士 `22.1%`（母數 3,231）、紐西蘭 `20.1%`（母數 562），皆為沒有審查的國家。前一段 90 天的 `ndt` 與 `dash` 用的是另一個時間窗，複查三國的比率要換成 30 天的參數。中段數值屬於雜訊，只有比率極端高的少數國家與現實相符。
 

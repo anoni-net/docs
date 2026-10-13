@@ -33,10 +33,10 @@ The most direct contribution. Start with a relay; switch to a bridge if bandwidt
 
 The measurement line needs people who can read raw results and turn them into analysis.
 
-- [Reading an OONI measurement](../community/ooni-data-format.md): what the raw fields look like
-- [How OONI decides a site is blocked](../community/ooni-blocking-determination.md): understand the logic before reading the data, or you will misread it
-- [OONI nettest quick reference](../community/ooni-nettests-map.md): what each test actually measures
-- [ASN observation data retrieval and analysis](../community/asn-coverage-howto.md): how this community's retrieval tool is configured and used, including the S3 public dataset layout
+- [The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"}: what the raw fields look like
+- [OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}: understand the logic before reading the data, or you will misread it
+- [OONI Nettest Quick Reference](https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/){target="_blank"}: what each test actually measures
+- [ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"}: how this community's retrieval tool is configured and used, including the S3 public dataset layout
 - [ASN observation data analysis](../regional/ooni-asn-coverage.md): current coverage, where the gaps are the open questions
 - [Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a community-run relay query service (onionoo MCP), and an interface worth extending
 - [OONI website testing list](../regional/ooni-checklist.md): how the test list is maintained, where classification and updates need people

@@ -33,10 +33,10 @@ icon: material/console
 
 觀測資料這條線缺的是能把原始測量讀懂、寫成分析的人。
 
-- [OONI 測量資料結構導覽](../community/ooni-data-format.md)：原始測量的欄位長什麼樣
-- [OONI 怎麼判定一個網站被封鎖](../community/ooni-blocking-determination.md)：判定邏輯先弄懂才不會誤讀資料
-- [OONI 測項速查表](../community/ooni-nettests-map.md)：各測項測的是什麼
-- [ASN 觀測資料擷取與分析](../community/asn-coverage-howto.md)：社群自己那支擷取程式怎麼設定與使用，含 S3 公開資料集的路徑結構
+- [OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}：原始測量的欄位長什麼樣
+- [OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：判定邏輯先弄懂才不會誤讀資料
+- [OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}：各測項測的是什麼
+- [ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}：社群自己那支擷取程式怎麼設定與使用，含 S3 公開資料集的路徑結構
 - [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)：台灣目前的涵蓋狀況，缺口就是題目
 - [AI 助理的 Tor 節點查詢](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中繼查詢服務（onionoo MCP），也是一個可以延伸的介面
 - [OONI 網站檢測清單](../taiwan/ooni-checklist.md)：台灣的檢測清單怎麼維護，分類與更新都需要人

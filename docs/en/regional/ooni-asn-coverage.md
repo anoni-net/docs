@@ -109,16 +109,16 @@ Finally, in the "Raw Measurement Data" section, you can find all the raw data of
 
 If you want to retrieve and analyse OONI's public data to calculate ASN coverage for a region, the tooling setup and commands are here:
 
-[:material-database-search: ASN observation data retrieval and analysis](../community/asn-coverage-howto.md){ .md-button .md-button--primary }
+[:material-database-search: ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){ .md-button .md-button--primary target="_blank" }
 
 ## :fontawesome-solid-diagram-project: Where to go from here
 
 <div class="grid cards" markdown>
 
 - [:material-list-status: OONI Website Testing List](./ooni-checklist.md) — the list these measurements are collected against, and how to help maintain it
-- [:material-code-json: Reading an OONI measurement](../community/ooni-data-format.md) — what the fields in a single measurement mean
-- [:material-shield-search: How OONI decides a site is blocked](../community/ooni-blocking-determination.md) — how the verdict is computed, and why a value is not a confirmed block
-- [:material-table-search: OONI nettest quick reference](../community/ooni-nettests-map.md) — what each nettest measures and which still produce data
+- [:material-code-json: The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"} — what the fields in a single measurement mean
+- [:material-shield-search: OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"} — how the verdict is computed, and why a value is not a confirmed block
+- [:material-table-search: OONI Nettest Quick Reference](https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/){target="_blank"} — what each nettest measures and which still produce data
 - [:material-radar: Regional Observatory](./index.md) — the rest of what we measure and publish
 - [:octicons-mark-github-24: Development environment setup](../community/setup-repo.md) — set up the environment to run the analysis yourself
 

@@ -105,11 +105,6 @@ nav:
           - regional/taiwan-realname-data-market.md
           - regional/taiwan-vasp-2026.md
           - regional/taiwan-whistleblower-law.md
-      - "Reading Measurement Data":
-          - community/ooni-data-format.md
-          - community/ooni-blocking-determination.md
-          - community/ooni-nettests-map.md
-          - community/asn-coverage-howto.md
   - !ENV [NAV_UTILS, "Utilities"]:
       - utils/index.md
       # Fourteen utilities in one flat list need 732px in the mobile drawer. That
@@ -190,6 +185,8 @@ nav:
   # the docs site itself sit under "About the Docs". The pages taken out keep their URLs
   # until redirects are set up. The onion build rewrites the link in
   # replace_sitename_anoni_onion.sh.
+  # The four "Reading Measurement Data" pages moved to /projects/asn-coverage/ on the
+  # community site on 2026-10-13 (toomore/anoni-net-ws#406).
   - "Run a Node":
       - setup/index.md
       - community/setup-tor-relay.md
@@ -380,6 +377,10 @@ plugins:
         'regional/tor-relay-watcher.md': 'https://anoni.net/en/projects/pulse/'
         'community/onionoo-mcp.md': 'https://anoni.net/en/projects/onionoo-mcp/'
         'community/tor-project-ecosystem.md': 'https://anoni.net/en/join/tor-project/'
+        'community/ooni-data-format.md': 'https://anoni.net/en/projects/asn-coverage/ooni-data-format/'
+        'community/ooni-blocking-determination.md': 'https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/'
+        'community/ooni-nettests-map.md': 'https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/'
+        'community/asn-coverage-howto.md': 'https://anoni.net/en/projects/asn-coverage/howto/'
         'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'

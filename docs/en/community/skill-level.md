@@ -550,7 +550,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
             OONI publishes raw measurement data on AWS S3 (`ooni-data-eu-fra`, eu-central-1), which you can use to analyse ASN coverage, track a site's blocking status over time, or compare across regions.
 
-            [ASN observation data retrieval and analysis](./asn-coverage-howto.md) has the retrieval scripts and commands, and [ASN observation data analysis](../regional/ooni-asn-coverage.md) explains what the resulting numbers mean.
+            [ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"} has the retrieval scripts and commands, and [ASN observation data analysis](../regional/ooni-asn-coverage.md) explains what the resulting numbers mean.
 
 ## After the assessment
 

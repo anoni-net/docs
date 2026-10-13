@@ -125,11 +125,6 @@ nav:
           - taiwan/realname-data-market.md
           - taiwan/vasp-2026.md
           - taiwan/whistleblower-law.md
-      - "讀懂觀測資料":
-          - community/ooni-data-format.md
-          - community/ooni-blocking-determination.md
-          - community/ooni-nettests-map.md
-          - community/asn-coverage-howto.md
   - !ENV [NAV_UTILS, "小工具"]:
       - utils/index.md
       # 十四支工具排成一列，手機的左側抽屜要 732px 才裝得下，390x844 剛好塞滿、
@@ -202,6 +197,7 @@ nav:
   # 知識類頁面換到下面的「架設與營運」與在地脈絡的「讀懂觀測資料」，文件站自己的
   # 說明收進「關於文件站」。拿掉的頁面網址不變，照樣開得到，等轉址時再處理。
   # 連結的 onion 版由 replace_sitename_anoni_onion.sh 改寫。
+  # 「讀懂觀測資料」四頁 2026-10-13 搬到社群首頁的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
   - "架設與營運":
       - setup/index.md
       - community/setup-tor-relay.md
@@ -394,6 +390,10 @@ plugins:
         'taiwan/tor-relay-watcher.md': 'https://anoni.net/projects/pulse/'
         'community/onionoo-mcp.md': 'https://anoni.net/projects/onionoo-mcp/'
         'community/tor-project-ecosystem.md': 'https://anoni.net/join/tor-project/'
+        'community/ooni-data-format.md': 'https://anoni.net/projects/asn-coverage/ooni-data-format/'
+        'community/ooni-blocking-determination.md': 'https://anoni.net/projects/asn-coverage/ooni-blocking-determination/'
+        'community/ooni-nettests-map.md': 'https://anoni.net/projects/asn-coverage/ooni-nettests-map/'
+        'community/asn-coverage-howto.md': 'https://anoni.net/projects/asn-coverage/howto/'
         'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'

@@ -133,7 +133,7 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 | 工具 | repo | 授權 | 跟文件站的關係 |
 |------|------|------|----------------|
 | Pulse | [`anoni-net/pulse`](https://github.com/anoni-net/pulse) | MIT | 提供 `https://anoni.net/api/` 的資料。原本的「Tor Relays 觀測點」搬到社群首頁的 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/)，文件站只剩部落格文章連到 API 說明 |
-| ASN Coverage | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 | 「ASN 自治網路觀測資料分析」與 `community/asn-coverage-howto` 的分析與操作步驟來自這個工具 |
+| ASN Coverage | [`anoni-net/asn-coverage`](https://github.com/anoni-net/asn-coverage) | GPL-3.0 | 「ASN 自治網路觀測資料分析」與社群首頁 `/projects/asn-coverage/howto/` 的分析與操作步驟來自這個工具 |
 
 兩者都沒有讀這個 repo 的檔案，文件站也沒有讀它們的產出，只透過 API 網址與頁面連結銜接。
 
