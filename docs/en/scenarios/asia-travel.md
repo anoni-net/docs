@@ -16,7 +16,7 @@ This page is built in two halves. The first is general device-minimization OPSEC
 
 !!! warning "General framing, not legal advice"
 
-    Border-search law changes fast and varies by checkpoint, officer, and your nationality. The per-jurisdiction notes below are a starting point for your own research, not legal advice. Verify the current rules against official sources and, for real exposure, consult a lawyer or an organization on the ground before you travel. For what changed in each revision, see the [change log](#Change-log) at the foot of the page.
+    Border-search law changes fast and varies by checkpoint, officer, and your nationality. The per-jurisdiction notes below are a starting point for your own research, not legal advice. Verify the current rules against official sources and, for real exposure, consult a lawyer or an organization on the ground before you travel. If something goes wrong once you're there, see [if something goes wrong](#If-something-goes-wrong). For what changed in each revision, see the [change log](#Change-log) at the foot of the page.
 
 ## Why minimize before you travel
 
@@ -154,11 +154,39 @@ For Macau and several other Asian jurisdictions, public, verifiable information 
 
 Myanmar is the exception worth naming, because its rule is about the handset itself. Under a requirement announced in mid-July 2026, each traveler entering through an international airport, land crossing, or seaport may bring at most two phones, must list each unregistered phone's IMEI on the customs Passenger Declaration Form, and has 30 days from that declaration to register it with the Central Equipment Identity Register (CEIR) and pay any tax, with penalties for late filing. Your handset's hardware identifier is tied to your passport at the border, clean device or not[^12]. For a country-by-country briefing tuned to your exact destination, dates, and role, our [pre-departure AI briefing page](./travel-ai-briefing.md) gives you copy-paste prompts to run on your own AI without any query reaching us, and lists the primary sources (OONI, Freedom House, Access Now, your foreign ministry) to verify the answers against.
 
+## If something goes wrong
+
+However thorough the preparation, things still break on the ground: a tool stops connecting, a local SIM can't be registered, or an officer asks for your phone. The situations below are in rough order of how often they happen, each with the first thing to do and a link to the page on this site that covers it in full. Before you leave, install this site as an offline app (the steps are on the [emergency help](../help/index.md) page) so this section and the help page still open when the network doesn't.
+
+### An app or website won't connect
+
+First work out whether one service is blocked or the whole connection is down. If other sites load and only one app sits on "connecting", that is usually targeted blocking, and the VPN or Tor bridge you set up before leaving should get you through; Signal can also be pointed at a proxy ([Signal Proxy](../tools/signal-proxy.md)). To confirm a local block, run OONI Probe once or check the recent measurements on [OONI Explorer](https://explorer.ooni.org/){target="_blank"}. If an ordinary VPN fails too, switch to an obfuscated protocol or to WebTunnel or Snowflake bridges ([Tor Browser advanced settings](../tools/tor-browser-advanced.md)). If only the hotel or venue network fails while mobile data works, the problem is usually the venue's network, and switching to mobile data is quicker than fiddling with the VPN.
+
+### The whole area loses connectivity
+
+In places like Myanmar's conflict areas a whole region can go dark, and no VPN or bridge helps. What helps is what you agreed with colleagues or family before leaving: how often you check in, how long a silence counts as a problem, and which channel to fall back to. The levels of shutdown, how to keep working during one, and what not to let sync automatically when the connection returns are in [preparing for and responding to a network shutdown](./shutdown.md).
+
+### A local SIM can't be registered or gets cut off
+
+Registration rules keep tightening. In Vietnam, a number moved to a different handset is suspended if facial verification isn't completed within 30 days; Malaysia and Indonesia now check faces for new registrations; Thailand caps foreigners at three SIMs per carrier. If registration fails or the line is cut, fall back to home-number roaming or a travel eSIM for data. Keep verification codes for important accounts on your home number or an authenticator app, so a local number is never the only way back in. How each option routes traffic is in [phone numbers and connectivity abroad](./travel-connectivity.md).
+
+### Your device was out of your sight at the border
+
+Treat a device that was taken away, even briefly, as possibly tampered with. Once you're somewhere safe, sign in to your important accounts from another trusted device, review recent sign-ins, sign out other sessions, and change passwords (the steps are in [account compromise](../help/index.md#account-compromise)). Don't use that device for sensitive work until you're home, and reset it if in doubt. Whatever happens at the desk, never give a false password or a false account of what's on the device: in Hong Kong, knowingly giving false information carries a heavier penalty than refusing.
+
+### A device is lost or seized
+
+Lock it remotely and mark it lost from another device, report the SIM to the carrier, and change passwords for every service signed in on it, following [lost or stolen device](../help/index.md#Lost-or-stolen-device). If local authorities are holding it, contact your embassy or representative office and a lawyer as well.
+
+### You are detained, out of contact, or questioned over something you posted
+
+Contact your embassy or representative office first. Look up its number and your foreign ministry's emergency line before you travel and write them on paper, because a seized phone or a dead network is exactly when you'll need them; for Taiwanese nationals, the numbers are listed under [travelling or working across borders](../help/index.md#Travelling-or-working-across-borders). For a digital-security incident, such as a compromised account or a device you no longer trust, journalists, human rights defenders, and civil-society workers can reach the [Access Now Digital Security Helpline](https://www.accessnow.org/help/){target="_blank"} around the clock. When travelling as a team, agree in advance who handles outside contact and how long a silence triggers these channels.
+
 ## Change log
 
 Only changes that alter what you should do are listed here; typos, formatting, and copy edits are not. For the full revision history, see [this page's commits on GitHub](https://github.com/anoni-net/docs/commits/main/docs/en/scenarios/asia-travel.md){target="_blank"}.
 
-- **2026-10-13:** Refreshed to the October 2026 verification pass. Added Myanmar's July 2026 rule requiring travelers to declare each phone's IMEI on entry and register it with CEIR, noted Malaysia's facial passport check for non-citizen SIM registration, and widened the tourist-SIM validity range to three months. The mainland China section now says no public account of the new electronic-data demand being used has surfaced yet.
+- **2026-10-13:** Refreshed to the October 2026 verification pass. Added Myanmar's July 2026 rule requiring travelers to declare each phone's IMEI on entry and register it with CEIR, noted Malaysia's facial passport check for non-citizen SIM registration, and widened the tourist-SIM validity range to three months. The mainland China section now says no public account of the new electronic-data demand being used has surfaced yet. Added an "If something goes wrong" section covering six situations, from a blocked app to detention, each with the first step and a link to the page that covers it.
 - **2026-10-05:** Corrected the data-only eSIM item in the SIM section: the seller holds more than a payment record, and traffic often exits from a third country. The technical side of numbers and hotel networks now has its own page, [phone numbers and connectivity abroad](./travel-connectivity.md).
 - **2026-09-08:** Added the State Council's Provisions on Exit and Entry Administration (effective 15 September 2026) to the mainland China section and to the return-to-mainland-China warning, and moved the framing date to September 2026.
 - **2026-08-05:** Refreshed to the August 2026 verification pass. Hong Kong moved to the top of the border-inspection range after the 23 March 2026 national-security decryption duty, and three claims that could not be substantiated were withdrawn.
@@ -168,6 +196,8 @@ Only changes that alter what you should do are listed here; typos, formatting, a
 ## Where to go from here
 
 - [What an ordinary person should actually do](./everyday-baseline.md) — the shared baseline underneath every scenario, which this page assumes you already have
+- [Preparing for and responding to a network shutdown](./shutdown.md) — the four levels of shutdown, what to agree with people beforehand, and how to work during and after one
+- [Emergency help](../help/index.md) — step-by-step lists for a compromised account, a lost device, and getting help across borders
 - [Phone numbers and connectivity abroad](./travel-connectivity.md) — where traffic exits with roaming, a travel eSIM, or a local SIM card, plus hotel Wi-Fi and travel routers
 - [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — generate a destination-specific censorship, legal, SIM, and emergency-contact briefing for any country, with no query reaching us.
 - [LGBTQ+ digital safety](./lgbtq.md) — the border section there covers the same device prep with attention to dating apps and destinations that criminalize same-sex conduct.

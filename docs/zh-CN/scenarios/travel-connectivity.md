@@ -201,6 +201,7 @@ FBI 对酒店 Wi-Fi 的提醒[^fbi-hotel]还有两件事：
 - [出差与研讨会的数字准备](./asia-travel.md)：十四地的审查、VPN 与 Tor 可达性、SIM 实名与入境查机，以及干净机的取舍
 - [出国前数字安全：用 AI 自助生成目的地概况](./travel-ai-briefing.md)：任何目的地都适用的行前概况生成方式
 - [手机隐私设置逐步指引](../tools/phone-privacy-settings.md)：出发前先把手机的基本设置做完
+- [网络中断时的准备与应对](./shutdown.md)：连接被挡或整区断网时，判断是哪一种中断，以及事前要跟人约好的事
 - [VPN 的风险与选择](../tools/vpn-guide.md)：在酒店与路由器上用 VPN 之前，先挑一家值得信任的业者
 - [Metadata 是什么，为什么重要](../basics/metadata.md)：内容加密之后，电信网络仍然看得到的那一层
 
