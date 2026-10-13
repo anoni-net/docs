@@ -11,7 +11,7 @@ icon: material/bag-suitcase-outline
 這篇整理東亞與東南亞十四個常見地點的現況，做成一張對照表，再給出依風險分層的準備清單。無論你是從台灣、香港、澳門或其他華語環境出發，都可以拿這張表當行前依據。
 
 !!! warning "查證日與時效"
-    審查現況變動很快，VPN 能不能用、哪個服務被封，可能幾個月就翻一次。本表整體查證日為 **2026 年 9 月**，逐地註記末尾括號裡的月份是該地來源最近一次查證的時間。出發前請以 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查目的地的最新觀測、以各地官方公告查 SIM 與入境規定，不要把靜態表格當成當下的保證。每地的[逐地註記](#逐地註記)末尾都附了該地的 OONI Explorer 直達連結。想知道每一版改了什麼，看頁尾的[更新紀錄](#更新紀錄)。
+    審查現況變動很快，VPN 能不能用、哪個服務被封，可能幾個月就翻一次。本表整體查證日為 **2026 年 10 月**，逐地註記末尾括號裡的月份是該地來源最近一次查證的時間。出發前請以 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 查目的地的最新觀測、以各地官方公告查 SIM 與入境規定，不要把靜態表格當成當下的保證。每地的[逐地註記](#逐地註記)末尾都附了該地的 OONI Explorer 直達連結。想知道每一版改了什麼，看頁尾的[更新紀錄](#更新紀錄)。
 
 ## 如何讀這張表
 
@@ -28,20 +28,20 @@ icon: material/bag-suitcase-outline
 | 日本 | 78（自由） | 合法 | 可直連 | 語音門號實名，數據 SIM 納管待施行 | 低 |
 | 南韓 | 65（部分自由） | 合法 | 可直連 | 護照實名 | 低 |
 | 菲律賓 | 61（部分自由） | 合法 | 可直連 | 護照實名，旅客卡 30 天 | 低 |
-| 馬來西亞 | 60（部分自由） | 合法 | 可直連 | 護照正本、住宿地址 | 中 |
+| 馬來西亞 | 60（部分自由） | 合法 | 可直連 | 護照正本與臉部比對，旅客卡 3 個月 | 中 |
 | 新加坡 | 53（部分自由） | 合法 | 可直連 | 護照實名，30 天效期 | 中（搜查授權強） |
 | 印尼 | 48（部分自由） | 合法 | 可直連 | 護照實名、IMEI 登錄 | 中 |
 | 香港 | 未單獨評分（FiW 41，部分自由） | 合法 | 一般可直連 | 護照實名（2023 起） | **高**（2026/3 起國安調查可要求解鎖，含轉機） |
 | 澳門 | 未涵蓋 | 合法 | 一般可直連 | 護照實名、ISP 留存一年 | 中（資料少） |
-| 柬埔寨 | 42（部分自由） | 合法 | 一般可直連 | 多需證件，無強制法 | 低 |
+| 柬埔寨 | 42（部分自由） | 合法 | 一般可直連 | 須出示證件，2026 年加嚴查核 | 低 |
 | 泰國 | 39（不自由） | 合法 | 建議備橋接 | 護照、臉部辨識，每業者上限 3 張 | 中高 |
 | 越南 | 22（不自由） | 合法（受網安法規範） | 建議備橋接 | 護照實名 | 中（資料少） |
 | 中國大陸 | 9（不自由） | 灰色，須強混淆 | 重度封鎖 | 護照、人臉 | 高（2026/9 起新規可要求提供電子數據）|
-| 緬甸 | 9（不自由） | 提供服務入罪（2025 網安法） | 重度封鎖 | 護照或 NRC、攔截設備 | 高 |
+| 緬甸 | 9（不自由） | 提供服務入罪（2025 網安法） | 重度封鎖 | 護照或 NRC、攔截設備 | 高（入境手機須申報 IMEI） |
 
-香港、澳門未列入 FOTN 單獨評分，香港的 FiW（Freedom in the World）2026 年為 41 分（部分自由）僅供質性對照。FOTN 2026 年版尚未發布，分數欄位仍是 2025 年版。SIM 與入境規定為 2026 年 9 月查證，細節以出發前官方公告為準。
+香港、澳門未列入 FOTN 單獨評分，香港的 FiW（Freedom in the World）2026 年為 41 分（部分自由）僅供質性對照。FOTN 2026 年版預定 2026 年 10 月 22 日發表，分數欄位在那之前仍是 2025 年版，發表後另行更新。SIM 與入境規定為 2026 年 10 月查證，細節以出發前官方公告為準。
 
-自上一版（2026 年 8 月）以來改動最大的是中國大陸。《國務院關於出境入境管理的規定》在 2026 年 9 月 15 日施行，條文寫明移民管理機構與簽證機關核實身分與申請事由時可以要求出入境人員提供電子數據，陸委會已分幾次就赴陸風險發出提醒，細節見後面逐地註記的中國大陸一節。香港 2026 年 3 月的國安裝置解密義務維持不變，入境裝置檢查仍在最高一級。這一輪還動到南韓、印尼、越南與緬甸，逐條列在頁尾的[更新紀錄](#更新紀錄)。
+自上一版（2026 年 9 月）以來，入境裝置檢查欄多了緬甸的手機申報，入境時要在海關列出手機的 IMEI（硬體識別碼），每人最多帶兩支。SIM 欄修正兩地，馬來西亞的旅客卡改為以護照做臉部比對、最長 3 個月，柬埔寨的實名登記 2023 年就有法律依據、2026 年起加嚴查核。日本納管數據 SIM 的範圍則可能只到能收發簡訊的款式。菲律賓 9 月曾以行政指令封鎖 Discord 一天，越南的 Telegram 在多數量測裡已經可以直連。中國大陸 9 月 15 日施行的出入境新規與香港 3 月的國安裝置解密義務維持原判斷，入境裝置檢查仍在最高一級。逐條改動列在頁尾的[更新紀錄](#更新紀錄)。
 
 ## 出發前的通用準備（每個地點都適用）
 
@@ -57,7 +57,7 @@ icon: material/bag-suitcase-outline
     - **本國門號漫遊**：登記你身分的是家鄉的電信商，當地只看到一個外國漫遊號碼的連線與位置，要對應到本人通常得走跨境調取。
     - **純數據 eSIM（無本地號碼）**：連本地門號這層都省掉，身分留在 eSIM 賣家的帳號與付款紀錄裡。代價是流量常從第三國出去，經手的業者也比較多，賣家多半不會說明。
 
-    對「目的地監控」這個威脅來說，漫遊與 eSIM 把對應留在境外，比較難被當場對應到本人。需要本地號碼收驗證碼時，再評估是否落地辦卡。實名要求正在往 eSIM 延伸，日本已修法把純數據 SIM 與 eSIM 納入本人確認義務，施行日由政令另訂、最遲 2027 年 5 月，境外供應商是否納管也尚未明確。各地規則不同而且都在變，出發前查目的地的當下規定，不要預設 eSIM 一定匿名。
+    對「目的地監控」這個威脅來說，漫遊與 eSIM 把對應留在境外，比較難被當場對應到本人。需要本地號碼收驗證碼時，再評估是否落地辦卡。實名要求正在往 eSIM 延伸，日本已修法把數據 SIM 與 eSIM 納入本人確認義務（主管機關傾向只管能收發簡訊的款式），施行日由政令另訂、最遲 2027 年 5 月，境外供應商是否納管也尚未明確。各地規則不同而且都在變，出發前查目的地的當下規定，不要預設 eSIM 一定匿名。
 
     三種方式的流量各自從哪裡出去、當地網路看得到什麼，以及雙卡手機的兩個號碼、旅館 Wi-Fi 與旅行路由器的取捨，見 [出國的門號與網路連線](./travel-connectivity.md)。
 
@@ -92,7 +92,7 @@ icon: material/bag-suitcase-outline
 
 ### 極高風險：緬甸
 
-數位環境是亞洲最危險的之一。2025 年網路安全法把未經授權的 VPN 服務入罪化，街頭與檢查哨會臨檢手機、搜查 VPN App 與社群貼文，衝突區隨時可能全面斷網。攜帶最簡化的乾淨裝置、避免落地辦卡綁定身分、全程假設受監控。涉及敏感主題者面臨人身與資料雙重風險，行前應做完整的威脅評估，必要時諮詢有當地經驗的組織。
+數位環境是亞洲最危險的之一。2025 年網路安全法把未經授權的 VPN 服務入罪化，街頭與檢查哨會臨檢手機、搜查 VPN App 與社群貼文，衝突區隨時可能全面斷網。2026 年 7 月起入境要在海關申報手機的 IMEI，每人最多帶兩支。攜帶最簡化的乾淨裝置、避免落地辦卡綁定身分、全程假設受監控。涉及敏感主題者面臨人身與資料雙重風險，行前應做完整的威脅評估，必要時諮詢有當地經驗的組織。
 
 ## 乾淨機與 burner 手機的取捨
 
@@ -120,11 +120,11 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 ### 在境外買不見得比較匿名
 
-「在外地買一張沒人知道是我的卡」在東亞與東南亞幾乎做不到。上面對照表的「SIM 實名」欄就是答案，十四地裡只有柬埔寨沒有強制實名的法規，而當地電信商辦卡多半仍要求出示證件。日本的純數據 SIM 目前也還沒有本人確認義務，但納管的法律已經公布，最遲 2027 年 5 月施行，空隙有期限。
+「在外地買一張沒人知道是我的卡」在東亞與東南亞幾乎做不到。上面對照表的「SIM 實名」欄就是答案，十四地都有 SIM 實名的規定，柬埔寨過去執行鬆散，2026 年也開始加嚴查核。日本的純數據 SIM 目前也還沒有本人確認義務，但納管的法律已經公布，最遲 2027 年 5 月施行，空隙有期限。
 
 - 落地辦實名卡等於把護照送進當地電信商與政府的資料庫
 - 中國大陸與泰國另外要求人臉，泰國自 2025 年 8 月起導入臉部活體偵測
-- 旅客卡多半有效期短，新加坡 30 天、泰國 60 天
+- 旅客卡多半有效期短，新加坡 30 天、泰國 60 天、馬來西亞 3 個月
 
 降低當地政府當場把門號對應到你的風險，做法在上面的通用準備已經給過（漫遊或純數據 eSIM，把對應留在境外）。境外購買本身不提供匿名。
 
@@ -167,7 +167,7 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 防火長城（Great Firewall）長期完整封鎖 Google、YouTube、Facebook、Instagram、WhatsApp、Signal、Telegram、X 與全語系 Wikipedia，外媒多數被封。手法含 DNS 污染、SNI 過濾與深度封包檢測（DPI，逐筆分析連線判斷是否放行的技術）。個人翻牆屬違法灰色地帶，2025 年底國安部公開警告會究責。VPN 要選有強混淆的方案、入境前裝好至少兩款。Tor 直連在中國無法使用，obfs4 橋接長期被封。Tor Project 對中國目前建議優先用 WebTunnel，Snowflake、meek 作為備選，但可用性會隨封鎖更新大幅波動，出發前務必先測試，並多備幾種橋接。SIM 自 2019 年底起強制實名加人臉，外籍旅客同樣適用。2024 年 7 月起《國家安全機關行政執法程序規定》授權國安人員查驗手機、電腦等電子設備，官方說法是查驗的前提、對象與流程都要明確、不查一般人。實際被翻查的公開案例集中在手機，深圳福田口岸與上海機場都有旅客回報，筆電當場被查驗則沒有查到對應案例。海基會的行前建議是先檢查手機與個人電腦裡的內容，或改用新的裝備與門號。
 
-2026 年 7 月 31 日公布、9 月 15 日施行的《國務院關於出境入境管理的規定》把查驗授權寫得更明確。全文 19 條，第三條寫明移民管理機構與簽證機關核實出境入境人員的身分與申請事由時，可以詢問相關情況並要求出示、提供有關文件、資料、電子數據等信息。第四條前兩款把不準出境的期間定為 6 個月至 3 年，第三款針對違反出口管制、技術進出口管理而可能危害產業安全與技術安全的情形，只寫不準出境、沒有期間上限。第六條在可能影響國家安全、刑事案件偵查等情形下可以不告知當事人。逐一檢查所有旅客的裝置並沒有寫進條文，實際影響在於官方要調取手機或雲端內容時有了明文依據，而構成要件寬、裁量權在執法一方。條文只寫「中國公民」與「外國人」，沒有提到台灣居民或台胞證，陸委會的風險評估建立在中國慣常把台胞證持有人視為中國公民的立場上。
+2026 年 7 月 31 日公布、9 月 15 日施行的《國務院關於出境入境管理的規定》把查驗授權寫得更明確。全文 19 條，第三條寫明移民管理機構與簽證機關核實出境入境人員的身分與申請事由時，可以詢問相關情況並要求出示、提供有關文件、資料、電子數據等信息。第四條前兩款把不準出境的期間定為 6 個月至 3 年，第三款針對違反出口管制、技術進出口管理而可能危害產業安全與技術安全的情形，只寫不準出境、沒有期間上限。第六條在可能影響國家安全、刑事案件偵查等情形下可以不告知當事人。逐一檢查所有旅客的裝置並沒有寫進條文，截至 2026 年 10 月中，還查不到施行後因這條被要求提供電子數據的公開個案。實際影響在於官方要調取手機或雲端內容時有了明文依據，而構成要件寬、裁量權在執法一方。條文只寫「中國公民」與「外國人」，沒有提到台灣居民或台胞證，陸委會的風險評估建立在中國慣常把台胞證持有人視為中國公民的立場上。
 
 陸委會的提醒分幾次發布。主委邱垂正 2026 年 8 月 5 日請國人赴陸前審慎評估風險，副主委梁文傑 8 月 6 日點名科技業與半導體業相關人士，理由是可能在不知情中誤觸出口管制與技術進出口的規定，對應的正是第四條第三款。8 月 17 日邱垂正把台商與台企幹部一併列入，副主委沈有忠另外提到相關產業鏈、公務員與宗教人士。行前清理裝置裡的敏感內容是海基會《大陸旅行安全手冊》長期就有的一般建議，不是這波新規才新增。
 
@@ -175,10 +175,10 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 最新觀測：[OONI Explorer 中國大陸](https://explorer.ooni.org/zh-Hant/country/CN){target="_blank"}。
 
-??? note "查證來源（2026-09），8 筆"
+??? note "查證來源（2026-10），8 筆"
 
     - [FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"}
-    - [Tor 對中國的連線指引](https://support.torproject.org/censorship/connecting-from-china/){target="_blank"}
+    - [Tor 對中國的連線指引](https://support.torproject.org/tor-browser/circumvention/connecting-from-censored-regions/){target="_blank"}
     - [《國務院關於出境入境管理的規定》全文](https://www.gov.cn/zhengce/content/202607/content_7077172.htm){target="_blank"} - 中國政府網
     - [陸委會提醒赴陸應審慎評估風險](https://www.seftb.org/cp-1021-2753-732f6-1.html){target="_blank"} - 海基會兩岸經貿網
     - [陸委會點名科技業與半導體業風險較高](https://www.cna.com.tw/news/acn/202608060280.aspx){target="_blank"} - 中央社
@@ -198,7 +198,7 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 最新觀測：[OONI Explorer 香港](https://explorer.ooni.org/zh-Hant/country/HK){target="_blank"}。
 
-??? note "查證來源（2026-08），6 筆"
+??? note "查證來源（2026-10），6 筆"
 
     - [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - HKFP
     - [2026 年第 43 條實施細則修訂刊憲](https://www.info.gov.hk/gia/general/202603/23/P2026032300310.htm){target="_blank"} - 香港政府新聞公報
@@ -213,20 +213,21 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 最新觀測：[OONI Explorer 澳門](https://explorer.ooni.org/zh-Hant/country/MO){target="_blank"}。
 
-??? note "查證來源（2026-08），1 筆"
+??? note "查證來源（2026-10），1 筆"
 
     - [FOTN 2025 報告](https://freedomhouse.org/report/freedom-net/2025/uncertain-future-global-internet){target="_blank"}（未含澳門，說明覆蓋範圍）
 
 ### 日本
 
-無系統性封鎖，一般旅客連線完全開放。唯一的灰色地帶是盜版網站的著作權執法走法院途徑，不影響日常上網。VPN 完全合法，Tor 直連可用，日本本身就是 Tor 中繼與出口節點的重要所在地。SIM 實名規定正在分兩階段收緊，兩者容易被混為一談。2026 年 4 月起生效的省令，強化的是既有規範對象（語音門號與可收簡訊的 SIM、eSIM）的驗證方式，廢止上傳證件照片，改以讀取 IC 晶片核對身分。把純數據 SIM 與 eSIM 一併納入本人確認義務的則是另一部法律修正案，2026 年 5 月 29 日公布，施行日由政令另訂、最遲不超過 2027 年 5 月 29 日，截至 2026 年 8 月尚未施行。修法動機是詐騙集團以盜用的帳號密碼大量取得數據 SIM。境外 eSIM 供應商是否納入規範，法律事務所的解說指出法案文件並未寫明，留待後續省令釐清，出發前不要把「境外買的 eSIM 一定不受規範」當成確定前提。語音門號一向要驗證身分、短期旅客多半辦不到，本國門號保留收銀行驗證碼。
+無系統性封鎖，一般旅客連線完全開放。唯一的灰色地帶是盜版網站的著作權執法走法院途徑，不影響日常上網。VPN 完全合法，Tor 直連可用，日本本身就是 Tor 中繼與出口節點的重要所在地。SIM 實名規定正在分兩階段收緊，兩者容易被混為一談。2026 年 4 月起生效的省令，強化的是既有規範對象（語音門號與可收簡訊的 SIM、eSIM）的驗證方式，廢止上傳證件照片，改以讀取 IC 晶片核對身分。把數據 SIM 與 eSIM 一併納入本人確認義務的則是另一部法律修正案，2026 年 5 月 29 日公布，施行日由政令另訂、最遲不超過 2027 年 5 月 29 日，截至 2026 年 10 月中政令仍未發布。總務省工作小組 2026 年 7 月以後的整理，傾向只納入能收發簡訊的數據 SIM，沒有簡訊功能的排除，短期滯留的外國人可以只憑護照完成本人確認，範圍要等省令定案。修法動機是詐騙集團以盜用的帳號密碼大量取得數據 SIM。境外 eSIM 供應商是否納入規範，法律事務所的解說指出法案文件並未寫明，留待後續省令釐清，出發前不要把「境外買的 eSIM 一定不受規範」當成確定前提。語音門號一向要驗證身分、短期旅客多半辦不到，本國門號保留收銀行驗證碼。
 
 最新觀測：[OONI Explorer 日本](https://explorer.ooni.org/zh-Hant/country/JP){target="_blank"}。
 
-??? note "查證來源（2026-08），2 筆"
+??? note "查證來源（2026-10），3 筆"
 
     - [FOTN 2025 Japan](https://freedomhouse.org/country/japan/freedom-net/2025){target="_blank"}
     - [本人確認義務擴大至數據 SIM 的修法解說](https://www.morihamada.com/ja/insights/newsletters/138336){target="_blank"} - 森・濱田松本法律事務所
+    - [數據 SIM 納管範圍與短期滯留外國人的護照確認](https://www.soumu.go.jp/main_content/001085220.pdf){target="_blank"} - 總務省工作小組
 
 ### 南韓
 
@@ -238,7 +239,7 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 最新觀測：[OONI Explorer 南韓](https://explorer.ooni.org/zh-Hant/country/KR){target="_blank"}。
 
-??? note "查證來源（2026-09），10 筆"
+??? note "查證來源（2026-10），10 筆"
 
     - [FOTN 2025 South Korea](https://freedomhouse.org/country/south-korea/freedom-net/2025){target="_blank"}
     - [South Korea SNI filtering](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/){target="_blank"} - BleepingComputer
@@ -253,36 +254,43 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 ### 台灣（基準）
 
-全亞洲最開放的網路環境，FOTN 2025 亞洲第 1、全球第 7，主流服務皆不封鎖，作為本表的最低風險對照。Freedom House 點出的疑慮在制度層面：TWNIC 透明度報告顯示 2025 上半年逾 5 萬個網域被列入 RPZ 屏蔽，多數透過緊急請求（RPZ 1.5）、未經事前司法審查，屬治理透明度問題，非旅客日常會遇到的廣泛封鎖。TWNIC 已上線 2025 下半年與年度報告，並開放歷年報告下載，要引用數字時以該站當期公布為準。VPN 合法、Tor 直連可用。SIM 預付卡須出示護照（含入境章），通常還要第二證件，機場購買多半只需護照。
+全亞洲最開放的網路環境，FOTN 2025 亞洲第 1、全球第 7，主流的國際服務都不封鎖，作為本表的最低風險對照。例外是中國的社群 App 小紅書，內政部 2025 年 12 月 4 日依《詐欺犯罪危害防制條例》第 42 條發出停止解析與限制接取命令，暫定一年，內政部長 2026 年 8 月表示到期後很可能再延一年。Freedom House 點出的疑慮在制度層面：TWNIC 透明度報告顯示 2025 上半年逾 5 萬個網域被列入 RPZ 屏蔽，多數透過緊急請求（RPZ 1.5）、未經事前司法審查，屬治理透明度問題，非旅客日常會遇到的廣泛封鎖。TWNIC 已上線 2025 下半年與年度報告，並開放歷年報告下載，要引用數字時以該站當期公布為準。VPN 合法、Tor 直連可用。SIM 預付卡須出示護照（含入境章），通常還要第二證件，機場購買多半只需護照。
 
 最新觀測：[OONI Explorer 台灣](https://explorer.ooni.org/zh-Hant/country/TW){target="_blank"}。
 
-??? note "查證來源（2026-08），2 筆"
+??? note "查證來源（2026-10），4 筆"
 
     - [FOTN 2025 Taiwan](https://freedomhouse.org/country/taiwan/freedom-net/2025){target="_blank"}
     - [TWNIC RPZ 透明度報告](https://rpz.twnic.tw/){target="_blank"}
+    - [內政部對小紅書發出停止解析與限制接取命令](https://www.bnext.com.tw/article/85407/interior-ministry-cracks-down-on-xiaohongshu-involved-in-1706-fraud-cases-in-a-year){target="_blank"} - 數位時代
+    - [內政部長談小紅書封鎖成效與可能延長](https://unwire.hk/2026/08/22/xiaohongshu-taiwan-fraud-ban/software/){target="_blank"} - Unwire HK
 
 ### 菲律賓
 
-東南亞中相對開放的一個，無系統性封鎖。最受關注的事件是 NTC 在 2022 年依《反恐法》要求封鎖含獨立媒體 Bulatlat、Pinoy Weekly 在內的 27 個網站，該封鎖令已於 2025 年 11 月經法院判違憲撤銷。一度傳出要封 Telegram，2026 年 2 月政府與平台達成內容防制協議後不予封鎖。VPN 與 Tor 可正常使用。SIM 依 2022 年《SIM Registration Act》（RA 11934）強制實名，旅客以護照加當地地址登記，卡片 30 天有效。主要法律風險是網路誹謗（cyberlibel），公開發表留意用詞。
+東南亞中相對開放的一個，無系統性封鎖。最受關注的事件是 NTC 在 2022 年依《反恐法》要求封鎖含獨立媒體 Bulatlat、Pinoy Weekly 在內的 27 個網站，該封鎖令已於 2025 年 11 月經法院判違憲撤銷。一度傳出要封 Telegram，2026 年 2 月政府與平台達成內容防制協議後不予封鎖。2026 年 9 月南部接連發生校園槍擊之後，網路犯罪調查協調中心（CICC）9 月 22 日要求 Reddit 與 Discord 在 24 小時內設立當地窗口，NTC 隔天發出備忘錄，Globe、DITO 等業者的使用者連 Discord 只看到封鎖頁面。Discord 承諾加強兒少保護之後，封鎖在 9 月 24 日解除，Reddit 沒被封鎖。10 月 1 日有科技從業者向最高法院聲請撤銷這兩份指令。封鎖由行政指令直接執行、一天內就生效，團隊在菲律賓仰賴單一平台聯絡時，要先約好備用管道。VPN 與 Tor 可正常使用。SIM 依 2022 年《SIM Registration Act》（RA 11934）強制實名，旅客以護照加當地地址登記，卡片 30 天有效。主要法律風險是網路誹謗（cyberlibel），公開發表留意用詞。
 
 最新觀測：[OONI Explorer 菲律賓](https://explorer.ooni.org/zh-Hant/country/PH){target="_blank"}。
 
-??? note "查證來源（2026-08），2 筆"
+??? note "查證來源（2026-10），5 筆"
 
     - [FOTN 2025 Philippines](https://freedomhouse.org/country/philippines/freedom-net/2025){target="_blank"}
     - [Court voids NTC blocking order](https://www.bulatlat.com/2025/11/25/bulatlat-wins-censorship-case-court-voids-memo-blocking-27-websites/){target="_blank"} - Bulatlat
+    - [Discord 被封、Reddit 維持可用](https://www.manilatimes.net/2026/09/24/news/discord-banned-in-ph-reddit-allowed-to-continue/2431946){target="_blank"} - The Manila Times
+    - [Discord 封鎖解除](https://www.philstar.com/headlines/2026/09/24/2558634/cybersecurity-body-lifts-ban-discord){target="_blank"} - Philstar
+    - [向最高法院聲請撤銷封鎖指令](https://newsbytes.ph/2026/10/02/sc-asked-to-curb-dict-cicc-ntc-powers-to-block-online-platforms/){target="_blank"} - Newsbytes.PH
 
 ### 馬來西亞
 
-有封鎖，但以線上賭博、色情、侵權為大宗，2018 至 2024 年累計封逾 24,000 個網站。政治動機封鎖過 Sarawak Report、Medium，兩者已於 2025 年 3 月前解封。2024 年底兩項新法擴權：《通訊與多媒體法》修正案，以及《線上安全法》（Online Safety Act 2025，2024 年 12 月國會通過），賦予 MCMC 更廣的內容移除與監控權。《線上安全法》已於 2026 年 1 月 1 日生效，在馬用戶數達 800 萬以上的社群與通訊平台自動視為持牌，須配合內容處置要求，子法的風險緩解與兒少保護規範則到 2026 年 6 月才陸續到位。法規對象是平台業者，一般使用者不在直接規範範圍，實際影響落在內容被移除的速度變快。2025 年對 Telegram 取得針對特定公開頻道的法院禁制令。WhatsApp、Telegram、Signal 一般可用，VPN 與 Tor 可用。SIM 自 2018 年起強制實名，旅客須出示護照正本（不接受影本）加在馬住宿地址，2025 年底起本地新卡登記須綁 MyDigital ID（限馬國公民，外國旅客不適用，仍以護照登記）。真正的紅線是涉及王室、煽動、宗教與種族的內容。
+有封鎖，但以線上賭博、色情、侵權為大宗，2018 至 2024 年累計封逾 24,000 個網站。政治動機封鎖過 Sarawak Report、Medium，兩者已於 2025 年 3 月前解封。2024 年底兩項新法擴權：《通訊與多媒體法》修正案，以及《線上安全法》（Online Safety Act 2025，2024 年 12 月國會通過），賦予 MCMC 更廣的內容移除與監控權。《線上安全法》已於 2026 年 1 月 1 日生效，在馬用戶數達 800 萬以上的社群與通訊平台自動視為持牌，須配合內容處置要求，子法的風險緩解與兒少保護規範則到 2026 年 6 月才陸續到位。法規對象是平台業者，一般使用者不在直接規範範圍，實際影響落在內容被移除的速度變快。2025 年對 Telegram 取得針對特定公開頻道的法院禁制令。WhatsApp、Telegram、Signal 一般可用，VPN 與 Tor 可用。SIM 自 2018 年起強制實名，旅客須出示護照正本（不接受影本）加在馬住宿地址。2026 年 2 月 26 日登錄的預付卡登記強制標準再規定，非公民要以護照做臉部比對、每家業者最多 2 張，旅客卡最長 3 個月後自動終止。2025 年底起本地新卡登記須綁 MyDigital ID（限馬國公民，外國旅客不適用，仍以護照登記）。真正的紅線是涉及王室、煽動、宗教與種族的內容。
 
 最新觀測：[OONI Explorer 馬來西亞](https://explorer.ooni.org/zh-Hant/country/MY){target="_blank"}。
 
-??? note "查證來源（2026-08），2 筆"
+??? note "查證來源（2026-10），4 筆"
 
     - [FOTN 2025 Malaysia](https://freedomhouse.org/country/malaysia/freedom-net/2025){target="_blank"}
     - [MCMC SIM 登記 FAQ](https://www.mcmc.gov.my/en/faqs/prepaid-registration/what-type-of-documents-can-be-used-for-the-registr){target="_blank"}
+    - [預付卡登記強制標準的非公民規定](https://www.thestar.com.my/news/nation/2026/02/26/mcmc-introduces-mandatory-standard-to-tighten-prepaid-sim-card-registration){target="_blank"} - The Star
+    - [外國人以護照做臉部比對、旅客卡 3 個月](https://www.lowyat.net/2026/384391/mcmc-enforces-prepaid-sim-registration-rules/){target="_blank"} - Lowyat.NET
 
 ### 新加坡
 
@@ -292,7 +300,7 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 最新觀測：[OONI Explorer 新加坡](https://explorer.ooni.org/zh-Hant/country/SG){target="_blank"}。
 
-??? note "查證來源（2026-09），5 筆"
+??? note "查證來源（2026-10），5 筆"
 
     - [FOTN 2025 Singapore](https://freedomhouse.org/country/singapore/freedom-net/2025){target="_blank"}
     - [Criminal Procedure Amendments Act 2024](https://sso.agc.gov.sg/Acts-Supp/5-2024/Published/20240318?DocDate=20240318){target="_blank"}
@@ -302,70 +310,76 @@ burner 這個俗稱把兩件事混在一起，風險來源並不相同：
 
 ### 印尼
 
-中度且大致可預測的審查，封鎖集中在色情與賭博，透過 Trust Positif 黑名單以 DNS 竄改執行。另有 PSE 平台註冊制，未註冊就封鎖：2022 年曾封 PayPal、Steam、Epic Games 等，2024 年 7 月封 DuckDuckGo，2026 年 2 月 25 日到 4 月 30 日封鎖 Wikimedia 的登入網域 `auth.wikimedia.org`，同樣以未完成註冊為由，該期間讀者瀏覽條目不受影響，受阻的是登入與編輯。2026 年 5 月 22 日以線上賭博為由封鎖預測市場平台 Polymarket。同一套機制也會反向解封，2026 年 7 月初 Komdigi 在 Reddit 完成地區封鎖、移除賭博與色情內容並承諾登記 PSE 之後，解除了 2015 年起長達 11 年的封鎖。兒少數位空間保護規則（PP Tunas，`PP Nomor 17 Tahun 2025`）於 2025 年 3 月公告，未滿 16 歲不得在高風險平台持有帳號，平台須配合驗證年齡。實施細則（`Permenkomdigi Nomor 9 Tahun 2026`）自 2026 年 3 月 28 日起要求平台分階段停用未滿 16 歲的帳號。WhatsApp、Tor 在測試期間多為可達，VPN 普及合法。SIM 外國旅客以護照辦理，另自 2020 年起手機須登錄 IMEI，用本地 SIM 時需在入境向海關登錄裝置。整體對一般商務旅客風險可控，行前確認常用服務是否在封鎖名單上，需要登入編輯維基或使用小眾服務的人尤其要先測。
+中度且大致可預測的審查，封鎖集中在色情與賭博，透過 Trust Positif 黑名單以 DNS 竄改執行。另有 PSE 平台註冊制，未註冊就封鎖：2022 年曾封 PayPal、Steam、Epic Games 等，2024 年 7 月封 DuckDuckGo，2026 年 2 月 25 日到 4 月 30 日封鎖 Wikimedia 的登入網域 `auth.wikimedia.org`，同樣以未完成註冊為由，該期間讀者瀏覽條目不受影響，受阻的是登入與編輯。2026 年 5 月 22 日以線上賭博為由封鎖預測市場平台 Polymarket。同一套機制也會反向解封，2026 年 7 月初 Komdigi 在 Reddit 完成地區封鎖、移除賭博與色情內容並承諾登記 PSE 之後，解除了 2015 年起長達 11 年的封鎖。兒少數位空間保護規則（PP Tunas，`PP Nomor 17 Tahun 2025`）於 2025 年 3 月公告，未滿 16 歲不得在高風險平台持有帳號，平台須配合驗證年齡。實施細則（`Permenkomdigi Nomor 9 Tahun 2026`）自 2026 年 3 月 28 日起要求平台分階段停用未滿 16 歲的帳號。WhatsApp、Tor 在測試期間多為可達，VPN 普及合法。SIM 外國旅客以護照辦理，2026 年 7 月 1 日起新辦門號改以臉部生物特徵驗證，報導沒寫明外國護照怎麼辦理。另自 2020 年起手機須登錄 IMEI，用本地 SIM 時需在入境向海關登錄裝置。整體對一般商務旅客風險可控，行前確認常用服務是否在封鎖名單上，需要登入編輯維基或使用小眾服務的人尤其要先測。
 
 最新觀測：[OONI Explorer 印尼](https://explorer.ooni.org/zh-Hant/country/ID){target="_blank"}。
 
-??? note "查證來源（2026-09），4 筆"
+??? note "查證來源（2026-10），5 筆"
 
     - [FOTN 2025 Indonesia](https://freedomhouse.org/country/indonesia/freedom-net/2025){target="_blank"}
     - [iMAP Indonesia 2024](https://imap.sinarproject.org/reports/2024/imap-indonesia-2024-internet-censorship-report){target="_blank"} - Sinar Project
     - [Reddit 解封與 PSE 登記條件](https://en.antaranews.com/news/421473/indonesia-lifts-11-year-reddit-ban-after-regulatory-compliance){target="_blank"} - ANTARA News
+    - [新辦門號自 7 月 1 日起須臉部生物特徵驗證](https://www.lightreading.com/regulatory-politics/indonesia-s-new-sim-rule-facial-biometrics-mandatory-from-july-1){target="_blank"} - Light Reading
     - [PP Tunas 的實施細則與 3 月 28 日起停用未滿 16 歲帳號](https://www.setneg.go.id/baca/index/lindungi_anak_di_ranah_digital_kemkomdigi_terbitkan_aturan_teknis_pp_tunas){target="_blank"} - 印尼國務秘書處
 
 ### 柬埔寨
 
-採選擇性 DNS 封鎖獨立媒體，非全國性大斷網。Voice of Democracy 於 2023 年被關閉，2023 年大選前封鎖 Cambodia Daily、Radio Free Asia 等。OONI 量測顯示被封站多為新聞與人權類，由多家 ISP 以 DNS 執行。VPN 與 Tor 合法可用，是繞過被封新聞站的常見手段，邊境一般不查手機。SIM 目前無強制實名法規，但電信商辦卡多會要求出示證件。需留意 National Internet Gateway（國家閘道）計畫在 2025 年復活、規劃 2026 年起建設單一對外閘道，一旦上線會大幅增加集中式審查與監控能力。這項計畫自 2022 年原定啟用日起多次延期，截至 2026 年 9 月仍未見上線的公開確認，出發前值得再查一次狀態。
+採選擇性 DNS 封鎖獨立媒體，非全國性大斷網。Voice of Democracy 於 2023 年被關閉，2023 年大選前封鎖 Cambodia Daily、Radio Free Asia 等。OONI 量測顯示被封站多為新聞與人權類，由多家 ISP 以 DNS 執行。VPN 與 Tor 合法可用，是繞過被封新聞站的常見手段，邊境一般不查手機。SIM 依 2023 年 2 月的法律須登記在郵電部的全國資料庫，過去執行鬆散，約 1,300 萬名用戶裡有 500 萬人用的是別人名下的卡。2026 年 6 月起主管機關加嚴查核，未收證件就賣卡的個人最高罰 5,000 美元、業者最高 100 萬美元，辦卡要準備護照。需留意 National Internet Gateway（國家閘道）計畫在 2025 年復活、規劃 2026 年起建設單一對外閘道，一旦上線會大幅增加集中式審查與監控能力。這項計畫自 2022 年原定啟用日起多次延期，截至 2026 年 10 月仍未見上線的公開確認，出發前值得再查一次狀態。
 
 最新觀測：[OONI Explorer 柬埔寨](https://explorer.ooni.org/zh-Hant/country/KH){target="_blank"}。國家閘道若上線，斷網樣態會先變，可用 [IODA 柬埔寨](https://ioda.inetintel.cc.gatech.edu/country/KH){target="_blank"} 追連線中斷的狀況，這跟 OONI 的封鎖觀測是不同訊號。
 
-??? note "查證來源（2026-08），2 筆"
+??? note "查證來源（2026-10），4 筆"
 
     - [FOTN 2025 Cambodia](https://freedomhouse.org/country/cambodia/freedom-net/2025){target="_blank"}
+    - [2023 年法律要求 SIM 登記在全國資料庫](https://developingtelecoms.com/telecom-business/telecom-regulation/16689-cambodian-regulator-cracks-down-on-unregistered-sim-cards.html){target="_blank"} - Developing Telecoms
+    - [主管機關加嚴查核冒名登記的 SIM](https://cambodianess.com/article/trc-targets-illegal-sim-registrations-after-fraud-case-exposes-security-gaps){target="_blank"} - Cambodianess
     - [Cambodia resurrects internet gateway plan](https://asia.nikkei.com/business/telecommunication/cambodia-resurrects-plan-for-controversial-internet-gateway){target="_blank"} - Nikkei Asia
 
 ### 泰國
 
-東南亞主要商旅目的地中審查最受關注的一個，FOTN 列為不自由（與越南、緬甸同列）。法源是《電腦犯罪法》與刑法第 112 條（冒犯王室，lèse-majesté，刑期 3 至 15 年）。法院下令、數位經濟與社會部執行 URL 封鎖，泰國皇家警察的科技犯罪打擊中心統計 2025 年 10 月到 2026 年 5 月封鎖逾 71 萬個賭博相關 URL。LINE 為主流，WhatsApp、Telegram、Signal 目前可用。VPN 合法普遍，但近年封鎖規模大增，建議旅客預設 Tor 橋接以防直連受阻。
+東南亞主要商旅目的地中審查最受關注的一個，FOTN 列為不自由（與越南、緬甸同列）。法源是《電腦犯罪法》與刑法第 112 條（冒犯王室，lèse-majesté，刑期 3 至 15 年）。法院下令、數位經濟與社會部執行 URL 封鎖，該部統計 2026 會計年度（2025 年 10 月到 2026 年 9 月）封鎖 945,075 個賭博相關 URL，其中 835,207 個出自法院命令。LINE 為主流，WhatsApp、Telegram、Signal 目前可用。VPN 合法普遍，但近年封鎖規模大增，建議旅客預設 Tor 橋接以防直連受阻。
 
 NBTC 於 2026 年 5 月 15 日公報、5 月 16 日生效的科技犯罪防制公告修訂了 2025 年 8 月版，外國人在每一家業者最多只能登記 3 張 SIM，護照為主要登記文件、須本人到場並通過含生物特徵的查驗，插滿四張卡以上的多卡設備會被業者阻斷。有兩個都成立、意義卻不同的 60 天要分清楚，一是旅客卡本身的使用效期上限為 60 天，逾期不能靠儲值延長、須重新以護照驗證身分才能續用，二是 2026 年新增的規定，登記後 60 天內未啟用就要重新驗證才能開通。實際販售的旅客方案（8 天、15 天、30 天等）效期通常遠短於這個上限。
 
-第 112 條與電腦犯罪法適用境內任何人、不分國籍，外國人曾因相關貼文被捕、沒收護照、驅逐並終身禁入，按讚與轉發都可能擔責。絕不公開評論王室。
+第 112 條與電腦犯罪法適用境內任何人、不分國籍，外國人曾因相關貼文被捕、沒收護照、驅逐並終身禁入，按讚與轉發都可能擔責。2026 年 7 月 18 日起，依電腦犯罪法第 20 條發布的緊急必要公告讓主管官員不必先經部長核准，就能直接向法院聲請移除內容，事後再向部長報告。觸發條件是延遲處理可能危害國家安全、宗教、王室、公共道德或公共秩序，可移除的類別也擴大到仇恨言論、電子菸、大麻等。下架的速度因此變快，被移除的是貼文本身，發文的法律風險沒有跟著降低。絕不公開評論王室。
 
 最新觀測：[OONI Explorer 泰國](https://explorer.ooni.org/zh-Hant/country/TH){target="_blank"}。
 
-??? note "查證來源（2026-08），6 筆"
+??? note "查證來源（2026-10），7 筆"
 
     - [FOTN 2025 Thailand](https://freedomhouse.org/country/thailand/freedom-net/2025){target="_blank"}
     - [Thailand biometric SIM registration](https://www.biometricupdate.com/202508/thailand-mandates-biometric-liveness-detection-for-sim-registration){target="_blank"} - Biometric Update
     - [NBTC 收緊電信登記與 IP 位址規則](https://www.tilleke.com/insights/thailand-tightens-telecom-registration-data-and-ip-address-rules-to-combat-tech-crime/){target="_blank"} - Tilleke & Gibbins
     - [泰國 2026 年 SIM 卡新規](https://lexbangkok.com/thailand-sim-card-rules-2026/){target="_blank"} - Lex Bangkok
-    - [科技犯罪打擊中心的賭博站封鎖統計](https://news.worldcasinodirectory.com/thailand-intensifies-fight-against-online-gambling-123003){target="_blank"}
+    - [數位經濟與社會部 2026 會計年度的賭博 URL 封鎖統計](https://www.igamingtoday.com/thailand-blocks-945075-gambling-related-urls-in-fiscal-2026/){target="_blank"} - iGaming Today
+    - [電腦犯罪法第 20 條緊急下架公告的程序與類別](https://www.bakermckenzie.com/en/insight/publications/2026/08/thailand-urgent-content-takedown-scope-expanded){target="_blank"} - Baker McKenzie
     - [True Tourist SIM（60 天效期上限、護照登記）](https://www.true.th/en/prepaid/sim/tourist){target="_blank"}
 
 ### 越南
 
-高審查環境，FOTN 22 分。2025 年 5 月電信局下令 ISP 封鎖 Telegram，用戶未掛 VPN 即難以連上。Decree 53/2022 要求外國業者資料在地化、留存資料至少 24 個月。Decree 147/2024 要求大型平台以越南手機號或身分證實名、24 小時內移除違法內容，Facebook 受影響最大。另有數萬人規模的「47 部隊」網軍以檢舉與帶風向壓制異議。
+高審查環境，FOTN 22 分。2025 年 5 月電信局下令 ISP 封鎖 Telegram，OONI 量測的異常集中在 2025 年 5 到 7 月，8 月起多數量測已可直連，官方至今沒有解封公告，能否直連可能依業者與時期而變。Decree 53/2022 要求外國業者資料在地化、留存資料至少 24 個月。Decree 147/2024 要求大型平台以越南手機號或身分證實名、24 小時內移除違法內容，Facebook 受影響最大。另有數萬人規模的「47 部隊」網軍以檢舉與帶風向壓制異議。
 
 修訂版《網路安全法》（Law 116/2025/QH15）自 2026 年 7 月 1 日生效，取代 2018 年網安法與 2015 年網路資訊安全法，整併成單一框架，維持資料在地化與留存要求，並把下架時限寫進法律，一般違法內容 24 小時、緊急案件 6 小時內須依公安部要求移除。《個人資料保護法》（Law 91/2025/QH15）也於 2026 年 1 月 1 日生效。這幾部法的規範對象都是業者，對旅客的意義在境內平台的下架速度更快、連線與帳號紀錄留在越南境內的量更大。新法未新增針對 VPN 的專屬條文，個人使用在觀光與商務旅客層級實務上幾乎不見執法。配套的三部子法 Decree 331/2026、332/2026 與 333/2026 於 2026 年 8 月 19 日生效，把要留在越南境內的資料類型列得更細，帳號名稱、使用時間、付費資訊、最近的登入登出 IP 位址與帳號綁定的電話號碼都在內，一般留存期自主管機關要求日起至少 24 個月，系統日誌與 IP 配發紀錄至少 12 個月。境外業者原則上不強制在地化，公安部另行決定要求時給 12 個月的遵循期。
 
-VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大致可用，但審查機制活躍，建議備妥 WebTunnel 或 Snowflake 橋接。SIM 強制護照實名。會場與飯店 Wi-Fi 不應視為可信，敏感通訊改用 Signal 並先確認可達。
+VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大致可用，但審查機制活躍，2026 年 9 月中到 10 月中 OONI 的 Tor 測試約三成五出現異常，比 8 月的兩成高，建議備妥 WebTunnel 或 Snowflake 橋接。SIM 強制護照實名。2026 年 4 月 15 日施行的 Circular 08/2026 要求新辦門號以臉部特徵比對身分，門號換到另一支手機時，電信業者要在兩小時內限制撥出，30 天內沒完成臉部驗證就停話。來源沒寫明外國護照持有人怎麼處理，在當地辦卡的人避免把同一張卡換插到不同手機。會場與飯店 Wi-Fi 不應視為可信，敏感通訊改用 Signal 並先確認可達。
 
 最新觀測：[OONI Explorer 越南](https://explorer.ooni.org/zh-Hant/country/VN){target="_blank"}。
 
-??? note "查證來源（2026-09），3 筆"
+??? note "查證來源（2026-10），5 筆"
 
     - [FOTN 2025 Vietnam](https://freedomhouse.org/country/vietnam/freedom-net/2025){target="_blank"}
     - [Vietnam orders Telegram ban](https://www.aljazeera.com/news/2025/5/24/vietnam-orders-ban-on-popular-messaging-app){target="_blank"} - Al Jazeera
+    - [Telegram 部分網路恢復連線、官方未公告解封（2025 年 7 月）](https://24hmoney.vn/news/telegram-bat-ngo-truy-cap-duoc-tro-lai-tai-viet-nam-c2a2606341.html){target="_blank"} - 24hMoney
+    - [新辦門號與換機的臉部比對（Circular 08/2026）](https://www.biometricupdate.com/202604/vietnam-mandates-face-biometrics-for-mobile-device-registration){target="_blank"} - Biometric Update
     - [三部子法的資料在地化與留存要求](https://blogs.duanemorris.com/vietnam/2026/08/27/vietnams-cybersecurity-reset-three-new-decrees-redefine-compliance-for-foreign-investors-and-fies/){target="_blank"} - Duane Morris
 
 ### 緬甸
 
-與中國並列全球最差，FOTN 9 分。政變後封鎖 Facebook、X、Instagram、WhatsApp，2024 年中封鎖 Signal 與主要 VPN。2024 年起以中國 Geedge Networks 的 DPI 技術全國封鎖 VPN，《Cybersecurity Law No. 1/2025》於 2025 年 7 月 30 日生效，未經授權提供 VPN 服務可判 1 至 6 個月徒刑或併科 100 萬至 1,000 萬緬元罰款，且具域外效力。這部法律的規範對象是未經授權的 VPN 服務提供者，定稿版把早期草案中針對個人使用的刑責拿掉了，條文在這點上並不含糊。剩下的不確定性在執法與解讀，對旅客來說實際風險來自臨檢時手機裡被搜出 VPN App 與社群內容。Tor 與 Psiphon 都被當作非法目標封鎖，旅客不應假設預設 Tor 或一般橋接能連上。SIM 強制實名，軍方已令電信商安裝攔截設備，SIM 與國民登記卡連結。城市出入口、道路檢查哨與橋樑都以人員審查監控系統（Person Scrutinization and Monitoring System，PSMS，部分報導作 Public Security Management System）核對身分，旅館與客棧須把住客名單送交當局，觀光部的住客名單系統（GLIS）把本國與外國旅客分開回報，2026 年 7 月起 PSMS 也擴及長途特快列車的乘客。街頭與檢查哨會搜查手機裡的 VPN 與社群內容。2026 年通過的反線上詐騙法第 17 條再要求電信業者保存用戶位置資料與通話明細供當局取用。衝突區頻繁全面斷網，Access Now 記錄緬甸 2024 年至少 85 次、2025 年至少 95 次斷網，連兩年居全球之冠。2025 年全球至少 313 次、遍及 52 國，是該組織有紀錄以來最高，緬甸一國就占了約三成。涉敏感主題者面臨人身與資料雙重風險。
+與中國並列全球最差，FOTN 9 分。政變後封鎖 Facebook、X、Instagram、WhatsApp，2024 年中封鎖 Signal 與主要 VPN。2024 年起以中國 Geedge Networks 的 DPI 技術全國封鎖 VPN，《Cybersecurity Law No. 1/2025》於 2025 年 7 月 30 日生效，未經授權提供 VPN 服務可判 1 至 6 個月徒刑或併科 100 萬至 1,000 萬緬元罰款，且具域外效力。這部法律的規範對象是未經授權的 VPN 服務提供者，定稿版把早期草案中針對個人使用的刑責拿掉了，條文在這點上並不含糊。剩下的不確定性在執法與解讀，對旅客來說實際風險來自臨檢時手機裡被搜出 VPN App 與社群內容。Tor 與 Psiphon 都被當作非法目標封鎖，旅客不應假設預設 Tor 或一般橋接能連上。SIM 強制實名，軍方已令電信商安裝攔截設備，SIM 與國民登記卡連結。城市出入口、道路檢查哨與橋樑都以人員審查監控系統（Person Scrutinization and Monitoring System，PSMS，部分報導作 Public Security Management System）核對身分，旅館與客棧須把住客名單送交當局，觀光部的住客名單系統（GLIS）把本國與外國旅客分開回報，2026 年 7 月起 PSMS 也擴及長途特快列車的乘客。街頭與檢查哨會搜查手機裡的 VPN 與社群內容。2026 年 7 月中公布的規定要求經國際機場、陸路口岸與海港入境的旅客每人最多帶兩支手機，未登記的手機要在海關的旅客申報單（PD Form）列出 IMEI，申報後 30 天內向中央設備識別登記（CEIR）申請並繳稅，逾期加罰。手機的硬體識別碼在入境時就跟護照資料連在一起，乾淨機也一樣會留下這筆紀錄。2026 年通過的反線上詐騙法第 17 條再要求電信業者保存用戶位置資料與通話明細供當局取用。衝突區頻繁全面斷網，Access Now 記錄緬甸 2024 年至少 85 次、2025 年至少 95 次斷網，連兩年居全球之冠。2025 年全球至少 313 次、遍及 52 國，是該組織有紀錄以來最高，緬甸一國就占了約三成。涉敏感主題者面臨人身與資料雙重風險。
 
 最新觀測：[OONI Explorer 緬甸](https://explorer.ooni.org/zh-Hant/country/MM){target="_blank"}。斷網狀態：[IODA 緬甸](https://ioda.inetintel.cc.gatech.edu/country/MM){target="_blank"}，這個站偵測的是連線中斷，與 OONI 的封鎖觀測是不同訊號。
 
-??? note "查證來源（2026-09），7 筆"
+??? note "查證來源（2026-10），9 筆"
 
     - [FOTN 2025 Myanmar](https://freedomhouse.org/country/myanmar/freedom-net/2025){target="_blank"}
     - [Myanmar cybersecurity law restricts VPNs](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"} - RFA
@@ -373,6 +387,8 @@ VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大
     - [PSMS 擴及長途列車與反線上詐騙法第 17 條（2026 年 5 至 7 月）](https://www.myanmarinternet.info/post/quarterly_may_july_2026){target="_blank"} - Myanmar Internet Project
     - [PSMS 在城市出入口、檢查哨、橋樑與旅館的部署](https://www.bnionline.net/en/news/mon-state-sees-tighter-enforcement-psms-surveillance-system){target="_blank"} - Burma News International
     - [政變五年後的數位威權樣態與 PSMS 全稱](https://www.techpolicy.press/five-years-after-coup-myanmars-digital-authoritarianism-enters-new-phase/){target="_blank"} - Tech Policy Press
+    - [入境旅客的手機 CEIR 登記流程與文件](https://www.dfdl.com/insights/legal-and-tax-updates/myanmar-mobile-phone-registration-for-travelers-entering-myanmar/){target="_blank"} - DFDL
+    - [入境每人限帶兩支手機，涵蓋陸路與海港](https://www.thestar.com.my/aseanplus/aseanplus-news/2026/07/17/passengers-entering-myanmar-limited-to-two-mobile-phones-each){target="_blank"} - The Star
     - [觀光部住客名單系統](https://glis.tourism.gov.mm/){target="_blank"} - GLIS
 
 ## 研討會場景的特別提醒
@@ -390,6 +406,7 @@ VPN 使用合法但受網安法規範，建議行前裝好設定。Tor 直連大
 
 只記會改變準備動作的變更，錯字、排版與翻譯潤稿不列。更早的修訂看 [GitHub 上這一頁的修訂紀錄](https://github.com/anoni-net/docs/commits/main/docs/zh-TW/scenarios/asia-travel.md){target="_blank"}。
 
+- **2026/10/13：**查證日更新至 2026 年 10 月。緬甸補上入境手機的 IMEI 申報與 CEIR 登記，對照表的入境裝置檢查欄加註。SIM 欄修正兩地，柬埔寨原寫「無強制法」不正確，2023 年起就有登記法規，馬來西亞補上旅客卡的臉部比對與 3 個月上限。日本的數據 SIM 納管範圍補上總務省傾向只管能收發簡訊的款式。菲律賓補 9 月的 Discord 封鎖，越南的 Telegram 依 OONI 量測改為多數可直連，另補 Tor 異常率上升與新辦門號的臉部比對。泰國補電腦犯罪法第 20 條的緊急下架公告，台灣補小紅書封鎖，印尼補新辦門號的臉部生物特徵驗證。FOTN 2026 年版預定 10 月 22 日發表，分數欄位到時再更新。
 - **2026/10/05：**通用準備的 SIM 一項修正純數據 eSIM 的說法，賣家手上的資料不只付款紀錄，流量也常從第三國出去。門號與旅館網路的技術面另寫成 [出國的門號與網路連線](./travel-connectivity.md)。
 - **2026/09/08：**查證日更新至 2026 年 9 月。中國大陸新增《國務院關於出境入境管理的規定》（2026 年 9 月 15 日施行），對照表的入境裝置檢查欄加註可要求提供電子數據，研討會提醒多一條行程含中國大陸的準備項。南韓補 7 月 1 日的圖片事前過濾義務與 7 月 7 日的虛假操作資訊修法。印尼補 Reddit 解封。越南補 8 月 19 日生效的三部子法。緬甸補 PSMS 的查驗範圍與反線上詐騙法。同日的事實查核另修正四處：南韓圖片過濾義務的適用門檻（10 萬人，原誤寫百萬）、陸委會三次提醒的日期歸屬、印尼 PP Tunas 與實施細則的生效日歸屬、新加坡線上安全委員會的命令層級。另把中國海關查驗的公開案例收斂到手機，筆電當場被查沒有對應案例，並標出緬甸 PSMS 全稱在來源間的歧異。
 - **2026/08/10：**逐地註記末尾補上各地的 OONI Explorer 直達連結，柬埔寨與緬甸另附 IODA 的斷網觀測。
