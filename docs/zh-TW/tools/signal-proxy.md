@@ -152,7 +152,7 @@ Signal Proxy 只把流量轉給 Signal 的伺服器，不是任意目的地的�
 
 - [:material-chat-question: 匿名通訊工具比較](./messaging-comparison.md)
 - [:material-chat-question: 網路自由為什麼重要](../basics/internet-freedom.md)
-- [:material-chat-question: 端對端加密如何運作](../advanced/e2ee.md)
+- [:material-chat-question: 端對端加密的保護範圍](../basics/e2ee.md)
 
 </div>
 

@@ -148,7 +148,7 @@ As far as we know, a jurisdiction without censorship mandates — Taiwan, for in
 
 - [:material-chat-question: Secure messaging compared](./messaging-comparison.md)
 - [:material-chat-question: Why networked freedom matters](../basics/internet-freedom.md)
-- [:material-chat-question: How end-to-end encryption works](../advanced/e2ee.md)
+- [:material-chat-question: The scope of end-to-end encryption](../basics/e2ee.md)
 
 </div>
 

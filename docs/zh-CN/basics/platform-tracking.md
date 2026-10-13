@@ -187,7 +187,7 @@ Citizen Lab 的实证研究指出，微信的关键词过滤只对中国大陆�
 - [Metadata 是什么，为什么重要](./metadata.md)：通讯与文件本身带的元数据，跟本页的平台侧收集互补
 - [威胁模型如何建立](./threat-model.md)：平台收集属于哪一级对手，你需要付出多少成本对应
 - [怎么维持多个网络身分](./multiple-identities.md)：把不同用途的账号切开，减少跨站关联
-- [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：换工具不等于减少观察者，同一个判断方式也适用于本页
+- [常被误认为匿名的网络](mistaken-for-anonymity.md)：换工具不等于减少观察者，同一个判断方式也适用于本页
 - [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：把同一套「这些数据流向谁」的问法用在 AI 服务上
 
 [^eff]: [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror){target="_blank"} - Electronic Frontier Foundation，2019 年 12 月。第三方追踪技术的完整整理，包含追踪像素、浏览器指纹、移动端追踪与数据掮客生态。

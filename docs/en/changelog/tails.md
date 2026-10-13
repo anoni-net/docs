@@ -10,7 +10,7 @@ digest:
 
 # :material-usb-flash-drive-outline: Tails Changelog
 
-[Tails](https://tails.net/){target="_blank"} operating system release summaries. Newest at the top. Each entry links back to the full translation.
+[Tails](https://tails.net/){target="_blank"} operating system release summaries, condensed from the upstream release notes. Newest at the top.
 
 ## How we rate urgency
 
@@ -138,12 +138,40 @@ The Tails project only distinguishes emergency from scheduled releases. The midd
 - The Secure Boot CA upgrade prompt now only appears when Secure Boot is enabled, avoiding misleading notifications when it is disabled.
 - WhisperBack error reports now include installed Flatpak applications and runtimes.
 
-## Tails 7.6
-
-> 2026-03-26 · [Upstream announcement](https://tails.net/news/version_7.6/){target="_blank"} · [Full translation](../blog/posts/2026-tails-7-6.md)
-
-- <span class="urg-tag urg-tag--routine">Routine</span>Automatic Tor bridges (region-aware via Moat API), GNOME Secrets replaces KeePassXC as the built-in password manager, routine component bumps (Tor Browser 15.0.8, Thunderbird 140.8.0, Electrum 4.7.0).Upstream mentions no real-world attacks involving these.
-
 !!! info "Earlier versions"
 
-    Translations of Tails 7.7.3, 7.7.2, 7.7.1, 7.7, 7.1, 7.0, 7.0~rc2, and 6.18 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.
+    Entries for Tails 7.7.3, 7.7.2, and 7.7.1 are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/tails/){target="_blank"}. English versions will be added as the community translates them.
+
+## Tails 7.6
+
+> 2026-03-26 · [Upstream announcement](https://tails.net/news/version_7.6/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update. The announcement lists no fixed vulnerabilities, and upstream does not mention any being exploited.
+- The Tor Connection assistant can now help you get a [bridge](../tools/tor-browser-advanced.md). Bridges are unlisted Tor relays that serve as a first hop into Tor on networks that block it. If connecting automatically fails, the bridge settings offer a new option to ask for a Tor bridge based on your region.
+- Tails downloads bridges likely to work in your region through the Tor Project's Moat API, disguising that connection with domain fronting (a technique that makes it look like a connection to a different website). Tor Browser outside Tails has used the same approach since version 11.5.
+- The built-in password manager changes from KeePassXC to GNOME Secrets. Both use the same file format, so Secrets tries to unlock your existing KeePassXC database automatically, and accessibility features such as the on-screen keyboard and cursor size work with it again. If you still need KeePassXC's advanced features, you can install it as additional software in Persistent Storage.
+- Tor Browser moves to 15.0.8, Thunderbird to 140.8.0, and Electrum from 4.5.8 to 4.7.0.
+- Updated firmware packages improve support for newer hardware, including graphics and Wi-Fi.
+- Fixed automatic upgrades in Turkish and the "Learn More" button in the Thunderbird migration notification.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
+## Tails 7.1
+
+> 2025-10-14 · [Upstream announcement](https://tails.net/news/version_7.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update. The announcement lists no fixed vulnerabilities, and upstream does not mention any being exploited.
+- The Tor Browser home page in Tails is now an offline page, close to the one in Tor Browser outside Tails, so starting the browser no longer loads an online page from the Tails website.
+- Clearer message when an application needs an administration password but none was set in the Welcome Screen.
+- Tor Browser moves to 14.5.8, the Tor client to 0.4.8.19, and Thunderbird to 140.3.0.
+- Removed the `ifupdown` package.
+- New tabs in Tor Browser no longer show the message that your Tor connection is not managed by Tor Browser ([#21215](https://gitlab.tails.boum.org/tails/tails/-/issues/21215){target="_blank"}).
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
+## Tails 6.18
+
+> 2025-07-25 · [Upstream announcement](https://tails.net/news/version_6.18/){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Regular scheduled release, not an emergency security update. The announcement lists no fixed vulnerabilities, and upstream does not mention any being exploited.
+- You can now connect to Tor with WebTunnel bridges. WebTunnel disguises your connection as ordinary web traffic and may work where obfs4 bridges are blocked. WebTunnel bridges are available from the [Tor Project's bridge distribution site](https://bridges.torproject.org/){target="_blank"}.
+- Tor Browser moves to 14.5.5 and Thunderbird to 128.12.0.
+- Automatic upgrades are available from Tails 6.0 or later. A fresh install wipes any existing Persistent Storage.

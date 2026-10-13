@@ -64,7 +64,7 @@ The structure stays flat. New articles go into an existing section:
 | `tools/` | Specific tools, comparisons, and hardening guidance |
 | `scenarios/` | Situations and roles, and what they change |
 | `regional/` | Regional observation and local regulatory context across the Sinophone Asia-Pacific |
-| `reports/` | Curated external research, indexed with links to the originals |
+| `reports/` | Translated Reports: external research translated into Traditional Chinese, indexed with links to the originals |
 | `community/` | Contribution and translation guidelines, development environment setup, skill self-assessment and the visual guide |
 | `blog/` | Translations of outside articles, technical analysis, measurement reports and updates about the docs site |
 

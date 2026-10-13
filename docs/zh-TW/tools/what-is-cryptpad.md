@@ -108,7 +108,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 | 自架成本 | AGPLv3，可完整自架 | 不可 | 不可 | 開源，可自架 |
 | 適用情境 | 長期、敏感、加密協作 | 一般辦公 | 知識庫、專案管理 | 臨時共筆、活動現場 |
 
-延伸閱讀：[端對端加密如何運作](../advanced/e2ee.md) 解釋 E2EE 的密碼學基礎。
+延伸閱讀：[端對端加密的保護範圍](../basics/e2ee.md)說明端對端加密擋得住誰、擋不住誰。
 
 ## 什麼時候用 CryptPad，什麼時候不用
 
@@ -182,7 +182,7 @@ CryptPad 自 2026.5.0 起內建以下中文介面：
 
 <div class="grid cards" markdown>
 
-- [:material-chat-question: 端對端加密如何運作](../advanced/e2ee.md)
+- [:material-chat-question: 端對端加密的保護範圍](../basics/e2ee.md)
 - [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-chat-question: 什麼是匿名網路](./what-is-anonymity-network.md)
 

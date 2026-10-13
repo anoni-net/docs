@@ -133,7 +133,7 @@ Every data file carries `source`, `sourceUrl`, `license` and `licenseUrl` fields
 
 ## Further reading
 
-- Where the globe's data comes from: [Where the globe's data comes from](../blog/posts/games-globe-open-data.md)
+- Where the globe's data comes from: [Where the globe's data comes from](https://anoni.net/en/updates/2026/07/games-globe-open-data/){target="_blank"}
 - How Tor actually works: [What is Tor?](../tools/what-is-tor.md)
 - Anonymity and what it does not cover: [Anonymity vs privacy](../basics/anonymity-vs-privacy.md)
 - Running a relay and watching the network: [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}

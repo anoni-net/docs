@@ -10,7 +10,7 @@ digest:
 
 # :material-usb-flash-drive-outline: Tails 更新日志
 
-[Tails](../tools/what-is-tails.md) 操作系统的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
+[Tails](../tools/what-is-tails.md) 操作系统的版本发布整理，从上游 release notes 条列摘译。新版本永远在最上面。
 
 ## 紧急程度怎么判断
 
@@ -144,15 +144,28 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社区志�
 
 ## Tails 7.6
 
-> 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"} · [完整翻译文章](../blog/posts/2026-tails-7-6.md)
+> 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>自动 Tor 桥接（依用户区域获取）、GNOME Secrets 取代 KeePassXC 作为内置密码管理器、例行组件更新（Tor Browser 15.0.8、Thunderbird 140.8.0、Electrum 4.7.0）。上游没有提到这些漏洞有实际攻击案例。
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。公告没有列出这一版修掉的漏洞，上游也没有提到已被实际利用。
+- Tor 连接助手可以直接协助获取[桥接](../tools/tor-browser-advanced.md)。桥接是不公开列出的 Tor 中继，网络封锁 Tor 时可以当成连进 Tor 的第一站。选择自动连接而连不上时，界面会多出「按所在地区请求 Tor 桥接」的选项。
+- Tails 通过 Tor Project 的 Moat API 下载较可能在当地有效的桥接，这段连接用域前置（domain fronting，把连接伪装成连向其他网站的技术）规避封锁。Tails 以外的 Tor Browser 从 11.5 版起就用同一套做法。
+- 内置的密码管理器从 KeePassXC 改成 GNOME 的 Secrets。两者的文件格式相同，Secrets 会自动尝试解锁原本在 KeePassXC 使用的数据库，屏幕键盘、光标大小等无障碍功能也能再次搭配使用。仍需要 KeePassXC 高级功能的人，可以把它安装成 Persistent Storage 的附加软件（additional software）。
+- Tor Browser 升至 15.0.8，Thunderbird 升至 140.8.0，Electrum 从 4.5.8 升至 4.7.0。
+- 更新部分 firmware 套件，改善较新硬件的支持，包含显卡、Wi-Fi 等。
+- 修正土耳其语环境下的自动升级，以及 Thunderbird 迁移通知里「了解更多」按钮的问题。
+- 可从 Tails 7.0 以后版本自动升级。全新安装会清除既有的 Persistent Storage。
 
 ## Tails 7.1
 
-> 2025-10-15 · [上游公告](https://tails.net/news/version_7.1/){target="_blank"} · [完整翻译文章](../blog/posts/tails-7-1-released.md)
+> 2025-10-14 · [上游公告](https://tails.net/news/version_7.1/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>Tor Browser 首页改为离线版本（移除启动时的 metadata 泄露）、Snowflake 桥接更新方式翻新、例行组件更新（Tor Browser 14.5.8、Tor 客户端 0.4.8.19、Thunderbird 140.3.0）。上游没有提到这些漏洞有实际攻击案例。
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。公告没有列出这一版修掉的漏洞，上游也没有提到已被实际利用。
+- Tails 里的 Tor Browser 首页改成离线页面，外观与 Tails 以外的 Tor Browser 首页相近，启动时不再加载 Tails 网站上的在线页面。
+- 打开需要管理员密码的应用程序、而欢迎界面没有设置管理员密码时，提示信息改写得更清楚。
+- Tor Browser 升至 14.5.8，Tor 客户端升至 0.4.8.19，Thunderbird 升至 140.3.0。
+- 移除 `ifupdown` 套件。
+- Tor Browser 的新标签页不再显示 Tor 连接不由 Tor Browser 管理的信息（[#21215](https://gitlab.tails.boum.org/tails/tails/-/issues/21215){target="_blank"}）。
+- 可从 Tails 7.0 以后版本自动升级。全新安装会清除既有的 Persistent Storage。
 
 ## Tails 7.0
 
@@ -162,12 +175,15 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社区志�
 
 ## Tails 7.0~rc2
 
-> 2025-08-29 · [上游公告](https://tails.net/news/test_7.0-rc2/){target="_blank"} · [完整翻译文章](../blog/posts/tails-7-rc.md)
+> 2025-08-29 · [上游公告](https://tails.net/news/test_7.0-rc2/){target="_blank"}
 
 - <span class="chan-tag chan-tag--alpha">RC 测试版</span>Tails 7.0 第二个发行候选版（RC2），开放社区协助测试 Debian 13 与 GNOME 48 新基底、自动升级流程、持久存储迁移。上游没有提到这些漏洞有实际攻击案例。
 
 ## Tails 6.18
 
-> 2025-07-31 · [上游公告](https://tails.net/news/version_6.18/){target="_blank"} · [完整翻译文章](../blog/posts/tails-6-18-webtunnel.md)
+> 2025-07-25 · [上游公告](https://tails.net/news/version_6.18/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>新增 WebTunnel 桥接协议支持，把 Tor 流量伪装成 HTTPS，对无法直接连入 Tor 的网络环境多一条进入路径。上游没有提到这些漏洞有实际攻击案例。
+- <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。公告没有列出这一版修掉的漏洞，上游也没有提到已被实际利用。
+- 可以用 WebTunnel 桥接连上 Tor 网络。WebTunnel 把连接伪装成普通的网页流量，在 obfs4 桥接被封锁的地方仍有机会连上。WebTunnel 桥接可以从 [Tor Project 的桥接分发网站](https://bridges.torproject.org/){target="_blank"}获取。
+- Tor Browser 升至 14.5.5，Thunderbird 升至 128.12.0。
+- 可从 Tails 6.0 以后版本自动升级。全新安装会清除既有的 Persistent Storage。

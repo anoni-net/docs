@@ -8,7 +8,7 @@ icon: material/dns
 
 在手機的 Wi-Fi 設定裡把 DNS 那一欄填成 `1.1.1.1`，是很多人做過的第一個隱私設定。換掉的只有回答你的那台伺服器，查詢本身仍然以明文送出去，路徑上的設備照樣讀得到你問過哪些網域。
 
-要不要換，看你想解決什麼，想讓電信商看不到你查詢過哪些網域，加密 DNS 有效，代價是換一家業者保管這批紀錄。想繞過封鎖，需先確認封鎖在哪一層。想匿名，加密 DNS 做不到，理由寫在 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)。
+要不要換，看你想解決什麼，想讓電信商看不到你查詢過哪些網域，加密 DNS 有效，代價是換一家業者保管這批紀錄。想繞過封鎖，需先確認封鎖在哪一層。想匿名，加密 DNS 做不到，理由寫在 [常被誤認為匿名的網路](../basics/mistaken-for-anonymity.md)。
 
 這頁不寫各平台的逐步設定畫面，那類步驟隨系統版本改變，網路上的轉貼往往沒跟著更新。給的是不管在哪個平台都用得上的東西：各家欄位收什麼形狀、失敗時會不會靜默退回明文，以及設完之後怎麼實測。
 
@@ -65,7 +65,7 @@ DoH 常被說成抗封鎖能力最好，這句話要限縮。它擋住的只有�
 
 ### 過濾型 resolver 的兩面
 
-過濾型 resolver 對被擋的網域回傳一個不通的位址，Cloudflare 會回 `0.0.0.0`[^cf-ip]。這確實擋得住一部分惡意網域，對家庭與小型組織是低成本的防護。它跟 DNS 層審查是同一個技術動作，差別只在由誰決定，姊妹頁 [常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md) 對這一層有完整討論。
+過濾型 resolver 對被擋的網域回傳一個不通的位址，Cloudflare 會回 `0.0.0.0`[^cf-ip]。這確實擋得住一部分惡意網域，對家庭與小型組織是低成本的防護。它跟 DNS 層審查是同一個技術動作，差別只在由誰決定，姊妹頁 [常被誤認為匿名的網路](../basics/mistaken-for-anonymity.md) 對這一層有完整討論。
 
 完整的封鎖清單與分類方法通常不公開，你不會事先知道哪些網域被歸進去，遇到誤擋時只能從「這個網站怎麼連不上」開始查。另一個代價落在量測上，執行 OONI Probe 時被過濾掉的網域會被記成異常，來源是你自己的 resolver，跟當地網路無關。
 
@@ -214,7 +214,7 @@ DoT 的第 853 埠很容易被擋掉。DoH 混在 HTTPS 裡比較難用埠號擋
 
 <div class="grid cards" markdown>
 
-- [:material-incognito-off: 常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
+- [:material-incognito-off: 常被誤認為匿名的網路](../basics/mistaken-for-anonymity.md)
 - [:material-file-tree: Metadata 是什麼，為什麼重要](../basics/metadata.md)
 - [:material-vpn: VPN 的風險與選擇](./vpn-guide.md)
 

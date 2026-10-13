@@ -71,7 +71,7 @@ offline_caution: true
 一个人工作的时候，个人的基线就是工作的基线，同一组账号与同一台设备两边都在用。下面两篇跟身分无关，每一种处境都适用。
 
 - [一般人平常该做到什么](../scenarios/everyday-baseline.md)：依实际效果排序的做法，二十分钟读完
-- [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：区块链、隐私浏览窗口、VPN 这几项常被高估到什么程度
+- [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)：加密 DNS、IPFS 这类工具为什么不等于匿名，以及判断任何工具的四个提问
 
 ## 带得走的东西
 

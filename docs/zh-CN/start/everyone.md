@@ -28,13 +28,13 @@ icon: material/account-outline
 
 两者都有用途，只是能挡的范围比广告词窄很多。用错地方会产生虚假的安全感。
 
-[常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)逐项说明各自实际挡掉什么。
+[常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)用加密 DNS、IPFS 等例子说明换了工具不等于匿名，并整理成可以套用在任何工具上的四个提问，VPN 另见 [VPN 的风险与选择](../tools/vpn-guide.md)。
 
 ## 二十分钟：先读这三篇
 
 1. [一般人平常该做到什么](../scenarios/everyday-baseline.md)：做法依实际效果排序，也列出被高估的做法。整份路径只读一篇的话读这篇
 2. [密语与密码生成器](../utils/passphrase.md)：投入最少、效果最直接的一项，读完顺手生成几组
-3. [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：先把误会清掉，才不会把力气花在没有效果的地方
+3. [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)：先把误会清掉，才不会把力气花在没有效果的地方
 
 ## 一周：把基本功补起来
 

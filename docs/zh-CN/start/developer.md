@@ -59,7 +59,7 @@ icon: material/console
 技术能力跟个人的操作习惯是两件事。手上有 root 权限与一堆 API 密钥的人，被盯上的价值比一般用户高。
 
 - [一般人平常该做到什么](../scenarios/everyday-baseline.md)：依实际效果排序的做法，二十分钟读完
-- [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)：区块链、隐私浏览窗口、VPN 这几项常被高估到什么程度
+- [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)：加密 DNS、IPFS 这类工具为什么不等于匿名，以及判断任何工具的四个提问
 
 ## 带得走的东西
 

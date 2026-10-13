@@ -170,7 +170,7 @@ In good light at the right distance, one or two passes fill it. In poor conditio
 
 A QR code is a way of drawing data as a picture, not a way of encrypting it. Anyone who photographs the playback can rebuild your file: a camera on the wall, the other phone's automatic photo backup, the person standing behind you.
 
-If what you are sending is sensitive, **encrypt it on your own device first** and send the encrypted file through this page, passing the password through a different channel. [End-to-end encryption](../advanced/e2ee.md) covers how that works. In practice the two usual routes are encrypting to the recipient's PGP public key, or putting it in a password-protected archive.
+If what you are sending is sensitive, **encrypt it on your own device first** and send the encrypted file through this page, passing the password through a different channel. [End-to-end encryption](../basics/e2ee.md) covers how that works. In practice the two usual routes are encrypting to the recipient's PGP public key, or putting it in a password-protected archive.
 
 There is no fixed rule for what counts as sensitive. One question usually settles it: if a third person in the room photographed this, would anyone be affected? A public key is fine, since it is meant to be public. A Tor bridge line is not, because it could get that bridge blocked and cut other people off. Contact lists, drafts and unpublished documents all count.
 

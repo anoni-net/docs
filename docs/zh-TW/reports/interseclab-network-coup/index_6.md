@@ -26,7 +26,7 @@ Geedge Networks 將其產品作為整套方案出售給客戶（政府）。在�
 
 ### 國內系統架構
 
-雖然 Geedge 在客戶國家的系統架構大致相似，但各客戶之間的架構仍存在一些差異。通常，Geedge 的國內設置涉及一個指揮與控制中心，通常被稱為國家中心。一些國家擁有兩個國家中心，而不是僅有一個。在大多數情況下，國家中心構成系統的核心，它連接到十幾個或更多其他節點，這些節點向國家中心提供數據。節點位於各地區中心的獨立 ISP 場所。Geedge 只查詢從這些從屬節點中儲存在地區中心的儲存伺服器上的數據。
+雖然 Geedge 在客戶國家的系統架構大致相似，但各客戶之間的架構仍存在一些差異。通常，Geedge 的國內設置涉及一個指揮與控制中心，通常被稱為國家中心。一些國家擁有兩個國家中心，而不是僅有一個。在大多數情況下，國家中心構成系統的核心，它連接到十幾個或更多其他節點，這些節點向國家中心提供數據[^19]。節點位於各地區中心的獨立 ISP 場所。Geedge 只查詢從這些從屬節點中儲存在地區中心的儲存伺服器上的數據。
 
 <figure markdown="span">
   [![圖片於報告 31 頁](https://assets.anoni.net/the-internet-coup/index-6-31-1.png)](https://assets.anoni.net/the-internet-coup/index-6-31-1.png){target="_blank"}
@@ -57,7 +57,7 @@ Geedge 系統可以部署在兩種主要模式中：鏡像模式和內聯模式�
 
 ## 客戶樣態：Geedge 在各國的運營
 
-洩漏的文件揭示了 Geedge Networks 在多個國家的運營情況，包括 Geedge 開始在每個客戶國家或地區運營的時間點，擴展的修訂日誌和記錄，政府如何與 Geedge 合作準備網路封鎖的線索，以及 Geedge 與客戶（政府）的持續關係。根據 2024 年的一份新聞稿，Geedge Networks 的首席科學家是被譽為中國防火長城之父的方濱興。
+洩漏的文件揭示了 Geedge Networks 在多個國家的運營情況，包括 Geedge 開始在每個客戶國家或地區運營的時間點，擴展的修訂日誌和記錄，政府如何與 Geedge 合作準備網路封鎖的線索，以及 Geedge 與客戶（政府）的持續關係。根據 2024 年的一份新聞稿，Geedge Networks 的首席科學家是被譽為中國防火長城之父的方濱興[^20]。
 
 有人可能會假設，因為這些技術在許多方面繼承並擴展了中國防火長城的能力，所以它們首先在中國部署，然後出口到其他國家。然而，公司的時間線顯示，Geedge 實際上是先為國際客戶開發這些產品，然後才將同樣的工具銷售至中國國內。Geedge Networks 成立於 2018 年，其第一個客戶（政府）是 2019 年的哈薩克。我們的研究顯示，Geedge 直到 2022 年才在中國部署產品，當時它開始與中國三個省的地方政府合作。
 
@@ -74,41 +74,41 @@ Geedge 系統可以部署在兩種主要模式中：鏡像模式和內聯模式�
 
 ## K18 和 K24：哈薩克
 
-在哈薩克斯坦，立法支持政府對通訊系統的審查和控制。2011 年 12 月透過的《國家安全法》賦予哈薩克政府權力，以應對恐怖主義或騷亂而暫停電信服務。[^21] 政府於 2017 年 7 月 27 日發布的第 457 號法令，並於 2019 年 3 月 26 日修訂，賦予政府對全國網路基礎設施的壟斷。[^22] 政府還強制所有國際網路流量透過國家技術服務局運營的集中網路交換，由國家安全委員會控制。[^23] 獨立的網路交換點僅提供國內流量的對等聯繫。Freedom House 報告稱 2024 年哈薩克斯坦發生了數次短期且地理上針對性的網路中斷。[^24]
+在哈薩克斯坦，立法支持政府對通訊系統的審查和控制。2011 年 12 月透過的《國家安全法》賦予哈薩克政府權力，以應對恐怖主義或騷亂而暫停電信服務[^21]。政府於 2017 年 7 月 27 日發布的第 457 號法令，並於 2019 年 3 月 26 日修訂，賦予政府對全國網路基礎設施的壟斷[^22]。政府還強制所有國際網路流量透過國家技術服務局運營的集中網路交換，由國家安全委員會控制[^23]。獨立的網路交換點僅提供國內流量的對等聯繫。Freedom House 報告稱 2024 年哈薩克斯坦發生了數次短期且地理上針對性的網路中斷[^24]。
 
-哈薩克斯坦自 2015 年開始準備降低國內網路通訊的完整性，當時建立了一個根證書。擁有該根證書將使得政府能夠攔截和解密該國內所有的加密網路流量，讓他們能夠訪問私人通訊的元數據和實際內容。2019 年，哈薩克政府宣布該國網路使用者必須下載這個根證書。諸如 Google、Mozilla 和 Apple 等科技公司抵制將虛假證書插入其操作系統和瀏覽器的嘗試，認識到允許該類證書會損害現代資安的基礎，特別是如果其他國家也發行自己的根證書。也正是在這一時期，Geedge 與哈薩克的關係開始。
+哈薩克斯坦自 2015 年開始準備降低國內網路通訊的完整性，當時建立了一個根證書。擁有該根證書將使得政府能夠攔截和解密該國內所有的加密網路流量，讓他們能夠訪問私人通訊的元數據和實際內容。2019 年，哈薩克政府宣布該國網路使用者必須下載這個根證書。諸如 Google、Mozilla 和 Apple 等科技公司抵制將虛假證書插入其操作系統和瀏覽器的嘗試，認識到允許該類證書會損害現代資安的基礎，特別是如果其他國家也發行自己的根證書[^25]。也正是在這一時期，Geedge 與哈薩克的關係開始。
 
 ### 哈薩克與 Geedge
 
 根據洩漏的文件，哈薩克似乎是 Geedge 的第一個客戶。他們的合作關係始於卡西姆-若馬爾特·托卡耶夫（Kassym-Jomart Tokayev）當選總統的時期，他在北京的蘇聯大使館擔任外交官開始其職業生涯，當選年份為 2019 年。
 
-Geedge 的產品天狗安全閘道（TSG）能夠執行類似於由政府發行的根證書的攻擊，這可能是 Geedge 當初向哈薩克政府推銷時的一個賣點。
+Geedge 的產品天狗安全閘道（TSG）能夠執行類似於由政府發行的根證書的攻擊[^26]，這可能是 Geedge 當初向哈薩克政府推銷時的一個賣點。
 
-一張標註日期為 2020 年 10 月 16 日的圖片列出了一個國家中心及其他 17 個城市的IP地址，這些地點運行著三個獨立的 Geedge 產品：Bifang（中央管理）、Galaxy（TSG-Galaxy 的原名）和 Nezha（Network Zodiac 的早期名稱）。一份未完成的網路規劃文件顯示了從 2020 年 9 月開始，和哈薩克國家中心相關的事件。該日誌一直收集事件至 2022 年 10 月，並包括一張表格，列出了該專案的修訂紀錄，包括日期、版本號、所做更改和每次更新的作者。
+一張標註日期為 2020 年 10 月 16 日的圖片列出了一個國家中心及其他 17 個城市的IP地址，這些地點運行著三個獨立的 Geedge 產品：Bifang（中央管理）、Galaxy（TSG-Galaxy 的原名）和 Nezha（Network Zodiac 的早期名稱）[^27]。一份未完成的網路規劃文件顯示了從 2020 年 9 月開始，和哈薩克國家中心相關的事件。該日誌一直收集事件至 2022 年 10 月，並包括一張表格，列出了該專案的修訂紀錄，包括日期、版本號、所做更改和每次更新的作者。
 
-此外，國際特赦組織獲得了關於 Geedge 向哈薩克斯坦發貨的公開來源情報（OSINT），並與更大的聯盟分享。發貨數據來自於商貿數據聚合網站。發貨數據包括兩筆記錄，日期為 2024 年 9 月 25 日和 2024 年 10 月 21 日，從中國運往哈薩克斯坦。這兩筆貨物都是由哈薩克公司 TOO TJJ-Company 接收的。一份發貨記錄中將運送的產品識別為 "光纖開關切換器（optical bypass protectors）"。儘管 TJJ-Company 似乎仍在運作，但其郵件伺服器在接收這些貨件幾個月後便下線，至報告發布時，該公司網站（`tjj[.]kz`）已無法訪問。然而，其網站的存檔顯示，他們的專家曾參與 "哈薩克斯坦網路防護盾" 的開發和實施。一名前 TJJ 員工，曾在 2024 年 5 月之前擔任專案經理，其公司職責包括「建立成功的綜合網路安全系統，包括深度封包檢測」。
+此外，國際特赦組織獲得了關於 Geedge 向哈薩克斯坦發貨的公開來源情報（OSINT），並與更大的聯盟分享。發貨數據來自於商貿數據聚合網站。發貨數據包括兩筆記錄，日期為 2024 年 9 月 25 日和 2024 年 10 月 21 日，從中國運往哈薩克斯坦。這兩筆貨物都是由哈薩克公司 TOO TJJ-Company 接收的[^28]。一份發貨記錄中將運送的產品識別為 "光纖開關切換器（optical bypass protectors）"。儘管 TJJ-Company 似乎仍在運作，但其郵件伺服器在接收這些貨件幾個月後便下線，至報告發布時，該公司網站（`tjj[.]kz`）已無法訪問。然而，其網站的存檔顯示，他們的專家曾參與 "哈薩克斯坦網路防護盾" 的開發和實施[^29]。一名前 TJJ 員工，曾在 2024 年 5 月之前擔任專案經理，其公司職責包括「建立成功的綜合網路安全系統，包括深度封包檢測」。
 
 ### 中國與俄羅斯系統的差異
 
-從洩漏文件和發貨記錄中發現的關鍵證據顯示，哈薩克的網路監控設備來自中國的 Geedge，而不是之前研究資料所推測的俄羅斯。長期以來，人們認為哈薩克政府運行基於俄羅斯 SORM（行動偵查系統）的深度封包檢測（DPI）系統。這種假設可能來自於兩國之間的緊密文化關係，以及 2019 年提到 SORM 和俄羅斯連結的聲明與報告。
+從洩漏文件和發貨記錄中發現的關鍵證據顯示，哈薩克的網路監控設備來自中國的 Geedge，而不是之前研究資料所推測的俄羅斯。長期以來，人們認為哈薩克政府運行基於俄羅斯 SORM（行動偵查系統）的深度封包檢測（DPI）系統。這種假設可能來自於兩國之間的緊密文化關係，以及 2019 年提到 SORM 和俄羅斯連結的聲明與報告[^30]。
 
-與 SORM 相比，Geedge 套件是具更多先進監控能力的獨特系統。SORM 可以被視作一種「合法攔截（LI）系統」，收集如連接時間戳記和使用者 IP 地址等簡單數據。Geedge 系統不僅透過 DPI 提取大量資訊，還被設計成能進行超越合法攔截能力的大規模監控。
+與 SORM 相比，Geedge 套件是具更多先進監控能力的獨特系統。SORM 可以被視作一種「合法攔截（LI）系統」，收集如連接時間戳記和使用者 IP 地址等簡單數據[^31]。Geedge 系統不僅透過 DPI 提取大量資訊，還被設計成能進行超越合法攔截能力的大規模監控。
 
 洩漏的原始文件顯示，Geedge 在哈薩克項目中將最終使用者文件翻譯為俄文，而非哈薩克官方語言，這可能顯示其有意將產品推向其他獨立國家聯合體（CIS）國家。
 
-作為 Geedge Networks 的第一個客戶，哈薩克為這家公司的早期商業模式提供了洞察。該國的立法環境為 Geedge 創造了有利的市場。此外，哈薩克使用 Geedge 的產品套件，讓卡西姆-若馬爾特·托卡耶夫的政府在看似政治改革的表象下，行使對其人民和反對派的前所未有的控制。托卡耶夫所謂的「傾聽國家」理念，隨著 Geedge Networks 的技術，而讓國家可以監聽整個國家的網路和行動通訊，展現出另類且令人不安的意義。
+作為 Geedge Networks 的第一個客戶，哈薩克為這家公司的早期商業模式提供了洞察。該國的立法環境為 Geedge 創造了有利的市場。此外，哈薩克使用 Geedge 的產品套件，讓卡西姆-若馬爾特·托卡耶夫的政府在看似政治改革的表象下，行使對其人民和反對派的前所未有的控制。托卡耶夫所謂的「傾聽國家」理念，隨著 Geedge Networks 的技術，而讓國家可以監聽整個國家的網路和行動通訊，展現出另類且令人不安的意義[^32]。
 
 ## E21：衣索比亞
 
 （one drawing）
 
-衣索比亞政府歷來在衝突時期使用網路中斷作為一種控制手段。Access Now 的「Keep It On」聯盟紀錄了2016 年至 2023 年間的 26 次中斷事件。
+衣索比亞政府歷來在衝突時期使用網路中斷作為一種控制手段。Access Now 的「Keep It On」聯盟紀錄了2016 年至 2023 年間的 26 次中斷事件[^33]。
 
-政府通常以國家安全和防止虛假資訊及仇恨言論的傳播為理由來正當化這些中斷。他們依賴國家安全立法，例如《資訊網路安全局重建公告》第 808/2013 號和第 320/2014 號、《2020 年網路犯罪法案》以及緊急狀態作為這些中斷的法律依據。
+政府通常以國家安全和防止虛假資訊及仇恨言論的傳播為理由來正當化這些中斷[^34]。他們依賴國家安全立法，例如《資訊網路安全局重建公告》第 808/2013 號和第 320/2014 號、《2020 年網路犯罪法案》以及緊急狀態作為這些中斷的法律依據[^35]。
 
-衣索比亞使用網路中斷的最明顯例子之一是 2020 年 11 月至 2023 年 1 月的提格雷地區網路封鎖。自 2020 年以來，衣索比亞軍隊與厄利垂亞軍隊在提格雷地區與提格雷人民解放陣線發生內戰。戰爭導致了對種族滅絕的指控。2022 年 11 月 2 日，在聯合國網際網路治理論壇（IGF）的國際代表抵達亞的斯亞貝巴前兩周，提格雷簽署停火協議。報導指出，到 2023 年 1 月，提格雷的一部分網路接入得以恢復。提格雷的網路封鎖是歷史上最長的網路中斷之一，聯邦政府將數百萬人與網路和電話通訊隔絕超過兩年。
+衣索比亞使用網路中斷的最明顯例子之一是 2020 年 11 月至 2023 年 1 月的提格雷地區網路封鎖。自 2020 年以來，衣索比亞軍隊與厄利垂亞軍隊在提格雷地區與提格雷人民解放陣線發生內戰。戰爭導致了對種族滅絕的指控。2022 年 11 月 2 日，在聯合國網際網路治理論壇（IGF）的國際代表抵達亞的斯亞貝巴前兩周，提格雷簽署停火協議。報導指出，到 2023 年 1 月，提格雷的一部分網路接入得以恢復[^36]。提格雷的網路封鎖是歷史上最長的網路中斷之一，聯邦政府將數百萬人與網路和電話通訊隔絕超過兩年。
 
-衣索比亞的網路長期以來由國有壟斷企業 Ethio Telecom 提供。2021 年，肯亞電信公司 Safaricom 獲得許可開始在衣索比亞運營。國際投資者為成立 Safaricom Telecommunications Ethiopia，即肯亞巨頭的當地子公司，提供了資金支持。公開紀錄顯示，Safaricom 於 2022 年 10 月啟動其全國網路。儘管政府持續進行網路中斷，Safaricom 進入衣索比亞電信市場被宣傳為通信自由化和商業機遇的重要里程碑。
+衣索比亞的網路長期以來由國有壟斷企業 Ethio Telecom 提供。2021 年，肯亞電信公司 Safaricom 獲得許可開始在衣索比亞運營。國際投資者為成立 Safaricom Telecommunications Ethiopia，即肯亞巨頭的當地子公司，提供了資金支持。公開紀錄顯示，Safaricom 於 2022 年 10 月啟動其全國網路[^37]。儘管政府持續進行網路中斷，Safaricom 進入衣索比亞電信市場被宣傳為通信自由化和商業機遇的重要里程碑[^38]。
 
 ### 衣索比亞與 Geedge
 
@@ -119,47 +119,47 @@ Geedge 的產品天狗安全閘道（TSG）能夠執行類似於由政府發行�
 * 包含兩個表格，一個列出了所有啟用的區域和國家數據中心及網路連結，另一個表格詳細列出每個數據中心設定的主要變更。
 * 描述維護和運營工作，記錄變更日期，以及每項變更獲得批準的 Geedge 員工姓名。
 
-修訂日誌涵蓋了 2021 年 9 月至 2024 年 6 月之間的事件。2022 年 12 月的日誌記錄指出，Geedge 首席技術官鄭超批准了位於亞的斯亞貝巴的兩個 Safaricom 區域數據中心的工作。2023 年 2 月的修訂日誌條目還詳細記錄了 Geedge 為 Safaricom 增加容量的工作。儘管 Geedge 為支援在 Safaricom 衣索比亞數據中心安裝監控和審查技術進行工作，該公司於 2023 年 6 月獲得了包括世界銀行集團和英國政府發展金融機構英國國際投資組織在內的投資者 10.9 百萬美元的投資。
+修訂日誌涵蓋了 2021 年 9 月至 2024 年 6 月之間的事件。2022 年 12 月的日誌記錄指出，Geedge 首席技術官鄭超批准了位於亞的斯亞貝巴的兩個 Safaricom 區域數據中心的工作。2023 年 2 月的修訂日誌條目還詳細記錄了 Geedge 為 Safaricom 增加容量的工作。儘管 Geedge 為支援在 Safaricom 衣索比亞數據中心安裝監控和審查技術進行工作，該公司於 2023 年 6 月獲得了包括世界銀行集團和英國政府發展金融機構英國國際投資組織在內的投資者 10.9 百萬美元的投資[^39]。
 
 2023 年期間，Geedge 繼續增加容量並擴展至新的數據中心。日誌在 2024 年只記錄了兩次維護事件，其中一次與修理網路卡相關。
 
 ### 作為壓制社會動盪的工具
 
-雖然提格雷內戰可能是促使衣索比亞政府決定聘請新的網路審查和監控承包商的一個動機，但從獨立測量中看出，一旦系統建立，它也被用來應對其他社會動盪的事件。2023 年 2 月，埃塞俄比亞東正教會與國家政府之間的爭端導致奧羅米亞地區的抗議活動，導致數人死亡。監控網路審查的組織如網路干擾開放測量計劃（Open Observatory of Network Interference，OONI）報告說，對社交媒體網路的訪問受到限制。TSG 一類的 Geedge 服務可以實施這類有針對性的中斷和限制。
+雖然提格雷內戰可能是促使衣索比亞政府決定聘請新的網路審查和監控承包商的一個動機，但從獨立測量中看出，一旦系統建立，它也被用來應對其他社會動盪的事件。2023 年 2 月，埃塞俄比亞東正教會與國家政府之間的爭端導致奧羅米亞地區的抗議活動，導致數人死亡[^40]。監控網路審查的組織如網路干擾開放測量計劃（Open Observatory of Network Interference，OONI）報告說，對社交媒體網路的訪問受到限制[^41]。TSG 一類的 Geedge 服務可以實施這類有針對性的中斷和限制。
 
-Geedge 的修訂日誌顯示，從鏡像模式轉為內聯模式與政府準備進行網路關閉之間存在相關性。例如，從鏡像轉換為內聯設定可能表明網路關閉迫在眉睫，因為一般而言，鏡像模式更適合監控，而內聯模式更適合網路關閉。共計日誌顯示埃塞俄比亞進行了 18 次內聯模式的更改，其中包括在 2023 年 2 月網路關閉之前在 Safaricom 數據中心進行的兩次切換。
+Geedge 的修訂日誌顯示，從鏡像模式轉為內聯模式與政府準備進行網路關閉之間存在相關性[^42]。例如，從鏡像轉換為內聯設定可能表明網路關閉迫在眉睫，因為一般而言，鏡像模式更適合監控，而內聯模式更適合網路關閉。共計日誌顯示埃塞俄比亞進行了 18 次內聯模式的更改，其中包括在 2023 年 2 月網路關閉之前在 Safaricom 數據中心進行的兩次切換。
 
-埃塞俄比亞的例子具有多方面的啟示。埃塞俄比亞是中國在非洲的重要合作夥伴國，亞的斯亞貝巴是非洲聯盟和其他國際治理組織的所在地。與埃塞俄比亞的合約是一個國家利用 Geedge 支持的網路關閉來掩蓋國家嚴重罪行的實例，這些罪行包括可能的戰爭罪和種族滅絕。考慮到埃塞俄比亞電信業的歷史背景，能夠研究 Geedge 系統在競爭有限且近期由國家壟斷的網路服務背景下如何部署。最後，由於埃塞俄比亞是我們所知的唯一在亞洲以外的 Geedge 客戶（國家），有關此領域的運營知識可以提供公司未來擴展的洞察力。
+埃塞俄比亞的例子具有多方面的啟示。埃塞俄比亞是中國在非洲的重要合作夥伴國，亞的斯亞貝巴是非洲聯盟和其他國際治理組織的所在地[^43]。與埃塞俄比亞的合約是一個國家利用 Geedge 支持的網路關閉來掩蓋國家嚴重罪行的實例，這些罪行包括可能的戰爭罪和種族滅絕。考慮到埃塞俄比亞電信業的歷史背景，能夠研究 Geedge 系統在競爭有限且近期由國家壟斷的網路服務背景下如何部署。最後，由於埃塞俄比亞是我們所知的唯一在亞洲以外的 Geedge 客戶（國家），有關此領域的運營知識可以提供公司未來擴展的洞察力。
 
 ## P19：巴基斯坦
 
 （one drawing）
 
-多年來，巴基斯坦政府一直在為監控和審查其民眾打下基礎。Access Now 的「Keep It On」聯盟從 2016 年開始記錄巴基斯坦的中斷事件。
+多年來，巴基斯坦政府一直在為監控和審查其民眾打下基礎。Access Now 的「Keep It On」聯盟從 2016 年開始記錄巴基斯坦的中斷事件[^44]。
 
-在 2024 年，「Keep It On」記錄了 21 次中斷，這是該國一年內最大規模的中斷數量。巴基斯坦電信管理局（PTA）2024 年的年度報告承認封鎖干擾了超過 100,000 個具體內容。根據他們的報告，大多數網站因「道德」、「國家安全」和「基於宗教的仇恨煽動」的理由被封鎖。然而，法律並未對這些術語提供明確定義。此外，《2016 年電子犯罪預防法》使政府能夠進行大規模和有針對性的監控。2013 年，公民實驗室報告稱巴基斯坦使用來自加拿大公司 Netsweeper 的技術來過濾和封鎖網路流量。2018 年 3 月，PTA 發布了一個網站管理系統（WMS）招標，希望系統能夠「自學」並識別冒犯宗教或威脅國家安全的網站。招標之後，Coda Story 報導稱，巴基斯坦於 2018 年 12 月與第二家加拿大公司 Sandvine 簽署了一份價值 1850 萬美元的合約，涉及該系統的一個版本。透過審查出貨數據記錄，國際特赦組織的安全實驗室得出結論，Sandvine 的 WMS 技術自 2017 年開始出貨並持續至 2022 年。
+在 2024 年，「Keep It On」記錄了 21 次中斷，這是該國一年內最大規模的中斷數量。巴基斯坦電信管理局（PTA）2024 年的年度報告承認封鎖干擾了超過 100,000 個具體內容[^45]。根據他們的報告，大多數網站因「道德」、「國家安全」和「基於宗教的仇恨煽動」的理由被封鎖。然而，法律並未對這些術語提供明確定義。此外，《2016 年電子犯罪預防法》使政府能夠進行大規模和有針對性的監控。2013 年，公民實驗室報告稱巴基斯坦使用來自加拿大公司 Netsweeper 的技術來過濾和封鎖網路流量[^46]。2018 年 3 月，PTA 發布了一個網站管理系統（WMS）招標，希望系統能夠「自學」並識別冒犯宗教或威脅國家安全的網站[^47]。招標之後，Coda Story 報導稱，巴基斯坦於 2018 年 12 月與第二家加拿大公司 Sandvine 簽署了一份價值 1850 萬美元的合約，涉及該系統的一個版本[^48]。透過審查出貨數據記錄，國際特赦組織的安全實驗室得出結論，Sandvine 的 WMS 技術自 2017 年開始出貨並持續至 2022 年[^49]。
 
 巴基斯坦國家防火牆或 WMS 的第一代版本使用深度封包檢測來作為電信監管機構 PTA 監控通信。
 
 ### 巴基斯坦與 Geedge
 
-Geedge 為其在巴基斯坦的專案使用的代號是 P19。根據新文件中的證據，Geedge 在該國的運營直到 2023 年才開始。這與 Sandvine 在 2023 年 11 月結束與巴基斯坦的合約的時間相符，該合約終止是因為受到美國商務部制裁的影響。
+Geedge 為其在巴基斯坦的專案使用的代號是 P19。根據新文件中的證據，Geedge 在該國的運營直到 2023 年才開始。這與 Sandvine 在 2023 年 11 月結束與巴基斯坦的合約的時間相符，該合約終止是因為受到美國商務部制裁的影響[^50]。
 
 Geedge 版本的巴基斯坦國家防火牆，被國際特赦組織安全實驗室稱為 WMS 2.0，增加了 TSG-OS 提供的新功能。這個現代化的防火牆可以儲存有關誰在使用審查規避工具以及哪些 IP 地址訪問了哪些網站的詳細資訊。該系統能夠監控國內的網路流量和電話通訊，並可以追蹤和封鎖如 VPN 和特定網站的規避工具的使用。
 
-一位不具名的巴基斯坦 ISP 高層在接受半島電視台採訪時所使用的語言，與 Geedge 的市場推廣資料非常相似。該高層指出，新 WMS 不僅在該國的網路閘道部署，還在行動服務提供者和 ISP 的當地數據中心部署。由於之前的系統只能監控進出國家的內容，巴基斯坦無法審查由如 Netflix 和 Meta 運營的當地快取內容傳遞網路（CDN）所託管的內容。該高階主管將 WMS 1.0 與 WMS 2.0 比較時表示：「與 Sandvine 系統不同的是，基於 DPI 的新系統現在能夠監控本地網路流量」，使用「內聯網路」，這也可能增加使用者的網速降低的機率。這位高階主管還指出，中國（Geedge）的技術能夠在「更細緻的層次」上管理應用程式和網站，提供比 Sandvine 更好的功能。
+一位不具名的巴基斯坦 ISP 高層在接受半島電視台採訪時所使用的語言，與 Geedge 的市場推廣資料非常相似[^51]。該高層指出，新 WMS 不僅在該國的網路閘道部署，還在行動服務提供者和 ISP 的當地數據中心部署[^52]。由於之前的系統只能監控進出國家的內容，巴基斯坦無法審查由如 Netflix 和 Meta 運營的當地快取內容傳遞網路（CDN）所託管的內容。該高階主管將 WMS 1.0 與 WMS 2.0 比較時表示：「與 Sandvine 系統不同的是，基於 DPI 的新系統現在能夠監控本地網路流量」，使用「內聯網路」，這也可能增加使用者的網速降低的機率。這位高階主管還指出，中國（Geedge）的技術能夠在「更細緻的層次」上管理應用程式和網站，提供比 Sandvine 更好的功能。
 
 與使用 Geedge 服務的其他國家不同的是，巴基斯坦並沒有國家或地區中心。取而代之的是，這可能是舊 Sandvine 系統的遺留設定，Geedge 被安裝在三個地點：PCAP（數據中心的通用術語，註明 "備份"）、MSH（大多數 TSG 硬體所在之處），以及 TWA（可能是由 Transworld Associates 公司擁有的卡拉奇海底電纜登陸站）。
 
 ### Geedge 平台在舊硬體上的運行與令人擔憂的隱私問題
 
-在《控制的陰影》這份新報告中，國際特赦組織的安全實驗室指出，從 Geedge Networks 洩漏文件中發現的重要啟示之一是「來自不同供應商的技術如何能夠相互依賴並重新利用以協同運作。」也就是說，Sandvine 建立的系統成為基礎，而當其合約未獲續約，Geedge 能夠重新利用 Sandvine 的硬體來運行 Geedge 的作業系統。國際特赦組織找到的一份 2023 年 7 月 20 日的文件顯示，Geedge 的 TSG 平台運行於重新利用的 Sandvine 硬體上。
+在《控制的陰影》這份新報告中，國際特赦組織的安全實驗室指出，從 Geedge Networks 洩漏文件中發現的重要啟示之一是「來自不同供應商的技術如何能夠相互依賴並重新利用以協同運作。」[^53]也就是說，Sandvine 建立的系統成為基礎，而當其合約未獲續約，Geedge 能夠重新利用 Sandvine 的硬體來運行 Geedge 的作業系統。國際特赦組織找到的一份 2023 年 7 月 20 日的文件顯示，Geedge 的 TSG 平台運行於重新利用的 Sandvine 硬體上[^54]。
 
-雖然是建在重新利用的硬體上，但 Al Jazeera 的一篇報導暗示了 Geedge 系統可能的成本：與卡塔爾新聞網廣播談話的官員，條件是匿名，他們表示，來自未具名供應商的新中國系統將使巴基斯坦支付 200 至 300 億盧比（約 7200 萬至 1.07 億美元），並且在 2024 年下半年使用者報告的網速變慢和全面關閉負責。
+雖然是建在重新利用的硬體上，但 Al Jazeera 的一篇報導暗示了 Geedge 系統可能的成本：與卡塔爾新聞網廣播談話的官員，條件是匿名，他們表示，來自未具名供應商的新中國系統將使巴基斯坦支付 200 至 300 億盧比（約 7200 萬至 1.07 億美元），並且在 2024 年下半年使用者報告的網速變慢和全面關閉負責[^55]。
 
-Geedge 系統不僅能捕獲元資料。如果連接未加密，系統還會機會主義地捕獲內容。國際特赦組織在 Geedge 的 Jira 系統中發現了一張支援票據，其中包含兩封郵件（包括附件）以及郵件密碼的完整內容，這些是在未加密連線到郵件伺服器時被 TSG 攔截的。
+Geedge 系統不僅能捕獲元資料。如果連接未加密，系統還會機會主義地捕獲內容。國際特赦組織在 Geedge 的 Jira 系統中發現了一張支援票據，其中包含兩封郵件（包括附件）以及郵件密碼的完整內容，這些是在未加密連線到郵件伺服器時被 TSG 攔截的[^56]。
 
-讓人擔憂的是，敏感使用者資料被包含在第三方服務提供商的支援票據中，而且這些敏感資料成為洩漏的一部分。為了進一步闡明巴基斯坦案例中的使用者資料和隱私問題，正如國際特赦組織指出的，自 2015 年起，該國發放的每張新 SIM 卡都必須註冊到特定使用者並與生物特徵（例如指紋）相連，這些特徵是透過國家資料庫和註冊管理局（NADRA）註冊的。人們需要 NADRA 檔案以訪問基本服務，如醫療保健、銀行及教育。NADRA 檔案還連結到其他資料庫，如選民登記和稅務記錄，結合起來建立了每個公民的綜合紀錄。
+讓人擔憂的是，敏感使用者資料被包含在第三方服務提供商的支援票據中，而且這些敏感資料成為洩漏的一部分。為了進一步闡明巴基斯坦案例中的使用者資料和隱私問題，正如國際特赦組織指出的，自 2015 年起，該國發放的每張新 SIM 卡都必須註冊到特定使用者並與生物特徵（例如指紋）相連，這些特徵是透過國家資料庫和註冊管理局（NADRA）註冊的。人們需要 NADRA 檔案以訪問基本服務，如醫療保健、銀行及教育。NADRA 檔案還連結到其他資料庫，如選民登記和稅務記錄，結合起來建立了每個公民的綜合紀錄[^57]。
 
 Geedge 的 Sanity Directory 組件的一個核心功能是將流量歸因於特定的 SIM 卡。這不僅能進行大規模監控，還能對巴基斯坦和其他 Geedge 營運的國家的特定個體進行高度針對性的小規模監控。
 
@@ -167,15 +167,15 @@ Geedge 的 Sanity Directory 組件的一個核心功能是將流量歸因於特�
 
 ## M22：緬甸
 
-2021 年 2 月，一場軍事政變推翻了翁山蘇姬的民選政府。這次政變使得該國陷入廣泛的不安與動盪，親民主團體及全國各地的少數民族武裝組織進行了武裝抵抗。到 2023 年，軍政府（國家管理委員會，SAC）未能鞏固其權力，無法完全控制人民和領土。自政變以來，軍政府加強了對人民的監控，並利用網路中斷作為武器，僅在 2024 年就下令進行了 76 次網路中斷。正如《紐約時報》在2025年3月指出的，由於該國有著網路審查的歷史，對緬甸發生的毀滅性地震的應對因而受阻......軍方多次關閉網路並切斷對社交媒體的訪問，將該國數位上與世界其他地方隔離開來。
+2021 年 2 月，一場軍事政變推翻了翁山蘇姬的民選政府。這次政變使得該國陷入廣泛的不安與動盪，親民主團體及全國各地的少數民族武裝組織進行了武裝抵抗。到 2023 年，軍政府（國家管理委員會，SAC）未能鞏固其權力，無法完全控制人民和領土[^58]。自政變以來，軍政府加強了對人民的監控，並利用網路中斷作為武器，僅在 2024 年就下令進行了 76 次網路中斷[^59]。正如《紐約時報》在2025年3月指出的，由於該國有著網路審查的歷史，對緬甸發生的毀滅性地震的應對因而受阻......軍方多次關閉網路並切斷對社交媒體的訪問，將該國數位上與世界其他地方隔離開來[^60]。
 
-2024 年 5 月，緬甸軍政府宣布禁用 VPN，軍隊搜查手機，並威脅、罰款及逮捕使用 VPN 的人士。2025 年 1 月，軍政府實施了一項長期威脅的《網路安全法》，對使用 VPN 的人進行懲罰。
+2024 年 5 月，緬甸軍政府宣布禁用 VPN，軍隊搜查手機，並威脅、罰款及逮捕使用 VPN 的人士[^61]。2025 年 1 月，軍政府實施了一項長期威脅的《網路安全法》，對使用 VPN 的人進行懲罰[^62]。
 
 ### 緬甸與 Geedge
 
-根據公民團體「緬甸正義」在 2024 年 6 月發佈的研究報告，自 2024 年 5 月以後，緬甸的網路審查系統由 Geedge Networks 提供。然而，洩漏的文件顯示，系統的實施始於前一年，也就是軍政府上臺後的 2023 年。
+根據公民團體「緬甸正義」在 2024 年 6 月發佈的研究報告，自 2024 年 5 月以後，緬甸的網路審查系統由 Geedge Networks 提供[^63]。然而，洩漏的文件顯示，系統的實施始於前一年，也就是軍政府上臺後的 2023 年。
 
-來源資料提供了 Geedge 系統在 2025 年地震前的快照。直到 2024 年，這些文件記錄表明軍政府成功阻止了對網路、VPN，甚至匿名網路如 Tor 的連接。
+來源資料提供了 Geedge 系統在 2025 年地震前的快照[^64]。直到 2024 年，這些文件記錄表明軍政府成功阻止了對網路、VPN，甚至匿名網路如 Tor 的連接。
 
 關於緬甸的文件包括：Geedge 系統實施的計畫文件、部署計畫、網路拓撲、變更日誌、統計數據、測試 Geedge 服務阻擋 VPN 等規避工具的效果，以及與修復硬體、軟體和性能問題相關的通訊。
 
@@ -183,7 +183,7 @@ Geedge 的 Sanity Directory 組件的一個核心功能是將流量歸因於特�
 
 緬甸的變更日誌記錄的建立日期為 2023 年 11 月，可以視為事件發生時的快照。該日誌列出數據中心名稱、託管城市、容量及流量資訊，以及每個數據中心為 Geedge 使用而安裝的伺服器數量。該日誌顯示，到 2023 年底，Geedge 的系統已安裝在 30 個數據中心。後來的一份報告（2024 年 2 月 24 日）顯示，其系統在三個城市的實施狀態達到 100%。
 
-一份文件包含了有關仰光、曼德勒、大其力、內比都、木姐和妙瓦底等地的數據中心的網路圖和部署計畫。負責管理和控制流量的國家指揮中心設在內比都，儘管表格中顯示在仰光也有一個國家中心。國家中心由 Geedge 運營，而區域中心由 ISP 運營，包含由國家中心協調的 Geedge 系統。此外，一位未具名的 Geedge 員工回應客戶指內比都國家中心「主要用於展示」，這表明仰光地點才是真正的指揮控制中心。總計，表格中涵蓋了在這六個城市中的 30 個數據中心、兩個國家中心和 28 個區域中心。
+一份文件包含了有關仰光、曼德勒、大其力、內比都、木姐和妙瓦底等地的數據中心的網路圖和部署計畫。負責管理和控制流量的國家指揮中心設在內比都，儘管表格中顯示在仰光也有一個國家中心。國家中心由 Geedge 運營，而區域中心由 ISP 運營，包含由國家中心協調的 Geedge 系統。此外，一位未具名的 Geedge 員工回應客戶指內比都國家中心「主要用於展示」[^65]，這表明仰光地點才是真正的指揮控制中心。總計，表格中涵蓋了在這六個城市中的 30 個數據中心、兩個國家中心和 28 個區域中心。
 
 規劃文件註明了每個國內 ISP 無論是國有還是私營數據中心。「四大」ISP（MyTel、Ooredoo、MPT 和 ATOM），以及較小的提供商如 Frontiir、Global Technology Group、Golden TMH Telecom、Stream Net、IM-Net、Myanmar Broadband Telecom、Myanmar Telecommunications Network Public Company Limited、Campana 和 China Unicom 都在列表中。
 
@@ -191,7 +191,7 @@ Geedge 的 Sanity Directory 組件的一個核心功能是將流量歸因於特�
 
 ### ISP 否認使用 Geedge 硬體及專注於封鎖 VPN
 
-2025 年 5 月，Finance Uncovered 和 Myanmar Now 報導指出，從丹麥、挪威和英國政府獲得外國投資的 ISP Frontiir 在其數據中心運行搭載 Geedge 技術，該技術能「追踪在線上的人，封鎖網站和 VPN」。Frontiir 的發言人否認曾在其網路上「建構、計畫或設計任何與監控有關的內容」。不過，洩漏文件顯示，Geedge 硬體已安裝在緬甸所有 ISP 的建築內，包括 Frontiir。文件提供了這些安裝的細節以及 ISP 連接是如何互相連結的。網路規劃文件的圖表展示了 Geedge 系統如何整合到 Frontiir 的數據中心內。
+2025 年 5 月，Finance Uncovered 和 Myanmar Now 報導指出，從丹麥、挪威和英國政府獲得外國投資的 ISP Frontiir 在其數據中心運行搭載 Geedge 技術，該技術能「追踪在線上的人，封鎖網站和 VPN」[^66]。Frontiir 的發言人否認曾在其網路上「建構、計畫或設計任何與監控有關的內容」。不過，洩漏文件顯示，Geedge 硬體已安裝在緬甸所有 ISP 的建築內，包括 Frontiir。文件提供了這些安裝的細節以及 ISP 連接是如何互相連結的。網路規劃文件的圖表展示了 Geedge 系統如何整合到 Frontiir 的數據中心內。
 
 必須注意的是，Geedge 需獲得 ISP 的知情和合作才能安裝其硬體。有洩漏文件的證據，我們知道 Frontiir 等 ISP 否認他們了解部署在其網路上的監控設備是事實不符的。
 
@@ -204,11 +204,11 @@ Investcom Holding 的完整內容見於附錄。
   <figcaption>圖片說明：從 Geedge Networks 資料數據中提取的圖像顯示了 Frontiir 仰光數據中心的網路拓撲，其中 Geedge 的硬體整合到了 ISP 的網路基礎設施中。</figcaption>
 </figure>
 
-洩漏的文件還包含有關封鎖 VPN、Tor（特別是 Tor 在行動裝置上的 Orbot）和 Psiphon 的詳細訊息。緬甸的封鎖 VPN 名單比一些其他客戶（國家，如：衣索比亞或哈薩克）的名單還長。文件記錄了攔截「高優先級應用」的規則制定過程，其中包括共計 55 款應用程式的封鎖規則，比如即時通訊應用 Signal 和 WhatsApp。這些封鎖規則由 Geedge 制定，而非客戶（國家）。這很可能不是大多數競爭產品的做法。
+洩漏的文件還包含有關封鎖 VPN、Tor（特別是 Tor 在行動裝置上的 Orbot）和 Psiphon 的詳細訊息。緬甸的封鎖 VPN 名單比一些其他客戶（國家，如：衣索比亞或哈薩克）的名單還長。文件記錄了攔截「高優先級應用」的規則制定過程，其中包括共計 55 款應用程式的封鎖規則，比如即時通訊應用 Signal 和 WhatsApp[^67]。這些封鎖規則由 Geedge 制定，而非客戶（國家）。這很可能不是大多數競爭產品的做法。
 
 將「規則制定」外包給客戶，對於不想直接參與特定社交媒體應用、VPN 和網站封鎖規則的客戶來說，可能是一個賣點。
 
-在緬甸部署 Geedge 的監控技術強調了軍政府依賴數位工具來維持對人民的控制。2023 年，距離政變僅兩年，系統的實施顯示了 Geedge 利用該國現有基礎設施的能力，以及他們願意擴展軍政府的監控能力。洩漏文件揭示 Geedge 系統的進階程度，包括封鎖 VPN 和試圖阻止 Tor 的能力，突顯了該公司願意調整其技術以滿足壓迫性政府的需求。2025 年 3 月在緬甸的地震暴露了網路關閉及通信限制的毀滅性後果，這些關閉妨礙了緊急救援工作並導致可避免的死亡。這是 Geedge Networks 的系統與威權政府相結合如何妨礙人道主義響應的一個危險案例。
+在緬甸部署 Geedge 的監控技術強調了軍政府依賴數位工具來維持對人民的控制。2023 年，距離政變僅兩年，系統的實施顯示了 Geedge 利用該國現有基礎設施的能力，以及他們願意擴展軍政府的監控能力。洩漏文件揭示 Geedge 系統的進階程度，包括封鎖 VPN 和試圖阻止 Tor 的能力，突顯了該公司願意調整其技術以滿足壓迫性政府的需求。2025 年 3 月在緬甸的地震暴露了網路關閉及通信限制的毀滅性後果，這些關閉妨礙了緊急救援工作並導致可避免的死亡[^68]。這是 Geedge Networks 的系統與威權政府相結合如何妨礙人道主義響應的一個危險案例。
 
 ## A24：處於初期階段的未知客戶
 
@@ -234,15 +234,15 @@ Investcom Holding 的完整內容見於附錄。
 
 ## 中國
 
-2025 年，由吳明世和 Ali Zohaib 等人進行的一項研究提出，區域性審查是中國防火長城的下一步演變。根據對中國七個不同地區的數據分析，作者得出結論，河南是他們測量的七個地區之一，正在實行更為嚴格的區域性審查機制，這「本地化的審查顯示出中國正從集中式的審查設備轉向，使當地政府能夠在其各自地區施加更大的控制」。Geedge Networks 和 Mesalab 的洩漏文件似乎證實了吳等人識別出的這一新興趨勢。
+2025 年，由吳明世和 Ali Zohaib 等人進行的一項研究提出，區域性審查是中國防火長城的下一步演變[^69]。根據對中國七個不同地區的數據分析，作者得出結論，河南是他們測量的七個地區之一，正在實行更為嚴格的區域性審查機制，這「本地化的審查顯示出中國正從集中式的審查設備轉向，使當地政府能夠在其各自地區施加更大的控制」。Geedge Networks 和 Mesalab 的洩漏文件似乎證實了吳等人識別出的這一新興趨勢。
 
 ## J24：新疆
 
-新疆地區被形容為全球監控最密集的地區之一，擁有高度集中的高科技系統，旨在控制和監控當地人口。該地區居住著 1100 萬維吾爾族人，這是中國的語言和宗教少數群體。新疆被稱為一個實驗場，許多技術工具會先在這裡部署、試驗和修改，之後再應用於其他地區的人群。
+新疆地區被形容為全球監控最密集的地區之一，擁有高度集中的高科技系統，旨在控制和監控當地人口。該地區居住著 1100 萬維吾爾族人，這是中國的語言和宗教少數群體。新疆被稱為一個實驗場，許多技術工具會先在這裡部署、試驗和修改，之後再應用於其他地區的人群[^70]。
 
 ### 新疆與 Geedge
 
-洩漏資料包含來自 2024 年 6 月 22 日在中國科學院新疆分中心的演講筆記。這些筆記很可能是由 Geedge 的一名員工所記錄，記載了 Geedge 的計畫旨在將該地區中心轉變為反恐先鋒力量，特別是在壓制翻牆工具方面。筆記中提到，「國家級防火牆正從集中化模式演進至分散式模式」，而新疆的地區中心旨在「成為省級防火牆建設的典範，可供其他地方複製或學習」。在筆記中，演講者表示其分中心的重點是如何利用技術打擊翻牆工具的使用，而非針對個人。其他來自 Geedge 洩漏的文件指出，公司正在建立同時具備這兩者能力的系統。會議筆記顯示一些政治連結的證據，提到一位部長在 2024 年 4 月收到會議的簡報。
+洩漏資料包含來自 2024 年 6 月 22 日在中國科學院新疆分中心的演講筆記。這些筆記很可能是由 Geedge 的一名員工所記錄，記載了 Geedge 的計畫旨在將該地區中心轉變為反恐先鋒力量，特別是在壓制翻牆工具方面[^71]。筆記中提到，「國家級防火牆正從集中化模式演進至分散式模式」，而新疆的地區中心旨在「成為省級防火牆建設的典範，可供其他地方複製或學習」。在筆記中，演講者表示其分中心的重點是如何利用技術打擊翻牆工具的使用，而非針對個人。其他來自 Geedge 洩漏的文件指出，公司正在建立同時具備這兩者能力的系統。會議筆記顯示一些政治連結的證據，提到一位部長在 2024 年 4 月收到會議的簡報。
 
 ### 新疆計劃
 
@@ -281,16 +281,66 @@ J24 計畫還包括用於針對特定群體的功能。這些功能允許在地�
 
 幾份文件還提到一個位於中國東部沿海的江蘇省專案。Geedge 與當地江蘇省公安廳（JPSB）合作的理由是打擊網路詐騙。通訊顯示，JPSB 對於允許 Geedge 建立大數據資料庫猶豫不決，更希望 Geedge 在現有基礎設施上部署工具。一個名為江蘇南京的初步測試環境於 2023 年 2 月開始運行，而江蘇反詐騙專案似已於2024 年 3 月 15 日進入生產模式。
 
-在他們的研究中，吳等人寫道，他們「從美國到中國各地的測試一貫識別出 GFW 阻擋的相同的 411 個域名，僅有一個例外：從美國到江蘇省的測試檢測到 440 個被阻擋的域名。」作者於 2023 年 11 月至 2025 年 3 月之間進行測量，其中 2024 年 3 月至 10 月間有一測量間隙。這些測量可能已捕捉到 Geedge 在該省的新興運營。
+在他們的研究中，吳等人寫道，他們「從美國到中國各地的測試一貫識別出 GFW 阻擋的相同的 411 個域名，僅有一個例外：從美國到江蘇省的測試檢測到 440 個被阻擋的域名。」[^72]作者於 2023 年 11 月至 2025 年 3 月之間進行測量，其中 2024 年 3 月至 10 月間有一測量間隙。這些測量可能已捕捉到 Geedge 在該省的新興運營。
 
 Geedge Networks 曾於多個時間點在中國其他省份部署測試環境和示範，但這些似乎只是暫時性的，用於展示產品或學術目的。
 
 總之，Geedge 在中國的存在從新疆延伸至其他地區，由福建和江蘇省的試點專案表明。儘管由於文獻匱乏，細節有限，但這些計畫揭示了該公司在迎合區域當局需求方面不斷擴展的影響力和適應性。這些發展強調了區域化審查和監控趨勢，正如前述，Geedge Networks 正不斷擴大其在中國廣泛的網路控制系統中的影響力。
 
-[^21]: （翻譯內容中）
-[^22]: （翻譯內容中）
-[^23]: （翻譯內容中）
-[^24]: （翻譯內容中）
+[^19]: 巴基斯坦是例外，沿用先前與另一家供應商合約留下的硬體，所以架構略有不同。
+[^20]: 這份新聞稿使用的是 Geedge 的舊公司名稱。Sohu，[海南省方滨兴院士工作站在海南生态软件园揭牌](https://www.sohu.com/a/751088620_121719902){target="_blank"}（方濱興院士在海南省的工作站於海南生態軟體園揭牌），2024-01-11。
+[^21]: ARTICLE 19，[Analysis on National Security Law](https://www.article19.org/data/files/medialibrary/37125/Kazakhstan--National-Security-Law.pdf){target="_blank"}。
+[^22]: Zakon.kz，[Постановление Правительства Республики Казахстан от 27 июля 2017 года № 457 О некоторых вопросах государственной технической службы (с изменениями от 26.03.2019 г.)](https://online.zakon.kz/Document/?doc_id=33104760#pos=0;124.44445037841797){target="_blank"}（哈薩克政府 2017 年 7 月 27 日第 457 號決議〈關於國家技術服務局的若干問題〉，2019 年 3 月 26 日修訂）。
+[^23]: 這種集中化對 Geedge 系統的運作並非必要，可能是早先集中審查與監控的嘗試所留下的。
+[^24]: Freedom House，[Freedom in the World 2025, Kazakhstan](https://freedomhouse.org/country/kazakhstan/freedom-world/2025){target="_blank"}，2025。
+[^25]: 2019 年，Apple 明確封鎖了哈薩克主權憑證機構攔截 TLS 通訊的嘗試。
+[^26]: 透過名為天狗前端引擎（Tiangou Frontend Engine，TFE）的元件進行 TLS 中間人攻擊。
+[^27]: 哈薩克可能是 Geedge 的第一個海外客戶，當地執行的是完整的 Geedge 產品套件，文件中使用的則是這些產品的舊名稱。
+[^28]: TOO 是俄文「有限責任公司」（LLC）的縮寫。見 [TOO TJJ-Company 的公司登記資料](https://ba.prg.kz/710000000-astana/191140019083-too-tjj-company/){target="_blank"}。
+[^29]: TJJ-Company 的前技術長 Ramil Bektimirov 曾在國家技術服務局任職九年。他在網路上的社群媒體個人檔案中寫到，自己參與過 Qaznet 根憑證的中間人攻擊專案。TJJ 網站的存檔見 [Internet Archive 的頁面快照](https://web.archive.org/web/20220407023616/https:/tjj.kz/?page_id=169){target="_blank"}。
+[^30]: 例如，瑞典 ISP Tele2 在 2019 年退出哈薩克市場，在說明這件事的倫理報告中向股東提到 SORM 是當地的合法攔截系統，並認為該系統有遭濫用的疑慮。報告中寫道：「Tele2 KZ 無從得知 SORM 系統被使用的頻率，也無從得知是否已取得必要的法院許可。」此外，當地媒體報導 2020 年俄語駭客團體「Digital Revolution」的外洩事件時，把從事 SORM 相關專案的俄羅斯研究機構 Kwant-labs，錯誤連結到另一家同名的哈薩克公司。那家哈薩克公司不久前才得標一項秘密的政府標案，要開發一套「分析哈薩克語影音資料」的軟體。報導把兩個實體的名稱當作哈薩克正在導入俄羅斯 SORM 式 DPI 的證據，這個錯誤之後也被其他網路自由研究引用。
+[^31]: ISP 必須在網路中安裝合法攔截系統，保留上網紀錄。執法單位可以向合法攔截系統調閱資料，要取得個別使用者的資訊則需要法院許可。
+[^32]: David Wemer，[First Glimpses of Tokayev’s Kazakhstan: The Listening State?](https://www.atlanticcouncil.org/commentary/long-take/first-glimpses-of-tokayevs-kazakhstan/){target="_blank"}，Atlantic Council，2019-09-17。
+[^33]: Access Now，[Preserving Freedom in Crisis: Ethiopia’s Internet Shutdowns Must Not Become the Norm](https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/){target="_blank"}，2023-09-12。
+[^34]: 2020 年，奧羅莫族歌手暨社運人士 Hachalu Hundessa 遇害後，衣索比亞斷網兩週（[NetBlocks 的報告](https://netblocks.org/reports/internet-cut-in-ethiopia-amid-unrest-following-killing-of-singer-pA25Z28b){target="_blank"}）。2023 年 4 月至 7 月，衣索比亞國防軍（ENDF）與 Fano 民兵在阿姆哈拉地區交戰，當地斷網數月（[Internet Society Pulse 的紀錄](https://pulse.internetsociety.org/en/shutdowns/internet-shutdown-in-amhara-region-ethiopia-april-2023/){target="_blank"}）。2023 年 8 月，當局再度下令阿姆哈拉地區斷網，直到 2024 年 7 月才結束（[Internet Society Pulse 的紀錄](https://pulse.internetsociety.org/en/shutdowns/internet-shutdown-in-amhara-region-ethiopia-august-2023/){target="_blank"}）。
+[^35]: Kinfe Micheal Yilma，[Network Disruptions and the Law in Ethiopia: A Legal Guide](https://internews.org/wp-content/uploads/2022/08/Network-Disruptions-and-the-Law-in-Ethiopia.pdf){target="_blank"}，Internews，2021。
+[^36]: Internet Society Pulse，[Shutdown - Ethiopia](https://pulse.internetsociety.org/en/shutdowns/ethiopia-2/){target="_blank"}，日期不詳。Carolyn Tackett、Felicia Anthonio，[After Years under a Shutdown, Tigray Is Slowly Coming Back Online](https://www.accessnow.org/tigray-shutdown-slowly-coming-back-online/){target="_blank"}，Access Now，2023-03-17。
+[^37]: Paula Gilbert，[Ethiopia’s Telecoms Liberalization Makes Progress – Omdia](https://www.connectingafrica.com/connectivity/ethiopia-s-telecoms-liberalization-makes-progress-omdia){target="_blank"}，Connecting Africa，2024-10-21。
+[^38]: Paula Gilbert，[Ethiopia’s Telecoms Liberalization Makes Progress – Omdia](https://www.connectingafrica.com/connectivity/ethiopia-s-telecoms-liberalization-makes-progress-omdia){target="_blank"}，Connecting Africa，2024-10-21。Natalie Donback，[Faster, Cheaper: How Ending the Government Monopoly Improved Ethiopia’s Internet](https://restofworld.org/2023/safaricom-creates-competition-ethio-telecom/){target="_blank"}，Rest of World，2023-03-17。
+[^39]: British International Investment，[Safaricom Telecommunications Ethiopia Private Limited ...](https://www.bii.co.uk/en/our-impact/investment/safaricom-telecommunications-ethiopia-private-limited-company-investment-01){target="_blank"}，2025-08-13 讀取。International Finance Corporation，[Flagship Telecommunications Project to Bring Affordable, Reliable Internet and Mobile Services to Millions More in Ethiopia](https://www.ifc.org/en/pressroom/2023/flagship-telecommunications-project-to-bring-affordable-reliable-internet-and-mobile-services-to-millions-more-in-ethiopia){target="_blank"}，2023-06-08。
+[^40]: Al Jazeera，[Social Media Restricted in Ethiopia as Church Rift Turns Violent](https://www.aljazeera.com/news/2023/2/10/social-media-restricted-in-ethiopia-after-church-rift-turns-violent){target="_blank"}，2023-02-10。
+[^41]: NetBlocks，[Social Media and Messaging Apps Restricted in Ethiopia amid Religious Tensions](https://netblocks.org/reports/social-media-and-messaging-apps-restricted-in-ethiopia-amid-religious-tensions-DA3RJz8W){target="_blank"}，2023-02-09。Maria Xynou、Arturo Filastò，[Ethiopia: Ongoing Blocking of Social Media](https://ooni.org/post/2023-ethiopia-blocks-social-media/){target="_blank"}，OONI，2023-02-15。Amnesty International，[Social Media Blockade in Ethiopia Enters Second Month](https://www.amnesty.org/en/latest/news/2023/03/ethiopians-in-social-media-blackout-for-second-month/){target="_blank"}，2023-03-15。
+[^42]: 更具體地說，在鏡像模式下，Geedge 硬體故障時使用者仍能上網，失效的是 Geedge 系統的審查功能。在內聯模式下，故障的結果是斷網。需要強調的是，無論鏡像或內聯模式，TSG 都能攔截與竄改流量。兩種模式的技術細節見本章的「系統模式：審查與監控」一節。
+[^43]: ROAPE，[Ethiopia as a Belt and Road Initiative Model](https://roape.net/2024/07/24/ethiopia-as-a-belt-and-road-initiative-model/){target="_blank"}，2024-07-24。
+[^44]: Access Now，[EMBOLDENED OFFENDERS, ENDANGERED COMMUNITIES: Internet Shutdowns in 2024](https://www.accessnow.org/wp-content/uploads/2025/02/KeepItOn-2024-Internet-Shutdowns-Annual-Report.pdf){target="_blank"}，2025 年 2 月。
+[^45]: Pakistan Telecommunication Authority，[Annual Report 2024](https://www.pta.gov.pk/assets/media/2024-12-16-pta_annual_report.pdf){target="_blank"}，2024-12-16。
+[^46]: Irene Poetranto，[Netsweeper in Pakistan](https://citizenlab.ca/2013/08/netsweeper-in-pakistan/){target="_blank"}，The Citizen Lab，2013-08-01。
+[^47]: Pakistan Telecommunication Authority，[Replies to Queries Raised on Pre-Qualification Process for Web Management System](https://pta.gov.pk/assets/media/response_queries_210318.pdf){target="_blank"}，2018-03-20。
+[^48]: Umer Ali、Ramsha Jahangir，[Pakistan Moves to Install Nationwide ‘Web Monitoring System.’](https://www.codastory.com/authoritarian-tech/pakistan-nationwide-web-monitoring/){target="_blank"}，Coda Story，2019-10-24。
+[^49]: Amnesty International，[Shadows of Control](https://www.amnesty.org/en/documents/asa33/0206/2025/en/){target="_blank"}，2025-09-09。
+[^50]: 美國商務部自 2024 年 2 月 28 日起將 Sandvine 列入實體清單（Entity List），出口須符合更嚴格的許可要求。見 U.S. Department of State，[The United States Adds Sandvine to the Entity List for Enabling Human Rights Abuses](https://2021-2025.state.gov/the-united-states-adds-sandvine-to-the-entity-list-for-enabling-human-rights-abuses/){target="_blank"}，2024-02-28。這項制裁在 2024 年 11 月解除，但 Sandvine 在巴基斯坦的業務已接近尾聲。
+[^51]: Al Jazeera 的報導寫到，Sandvine 與巴基斯坦的合約自 2018 年開始、原訂 2023 年到期，2022 年政府更迭後沒有續約。新的領導階層轉而尋找能提供更細緻內容過濾的公司。見 Hussain，[Pakistan Tests Secret China-like ‘Firewall’ to Tighten Online Surveillance](https://www.aljazeera.com/news/2024/11/26/pakistan-tests-china-like-digital-firewall-to-tighten-online-surveillance){target="_blank"}，Al Jazeera，2024-11-26。
+[^52]: Al Jazeera 的報導並未指名 Geedge 就是與新 WMS 相關的那家中國科技公司。
+[^53]: Amnesty International，[Shadows of Control](https://www.amnesty.org/en/documents/asa33/0206/2025/en/){target="_blank"}。
+[^54]: Amnesty International，[Shadows of Control](https://www.amnesty.org/en/documents/asa33/0206/2025/en/){target="_blank"}。
+[^55]: Hussain，[Pakistan Tests Secret China-like ‘Firewall’ to Tighten Online Surveillance](https://www.aljazeera.com/news/2024/11/26/pakistan-tests-china-like-digital-firewall-to-tighten-online-surveillance){target="_blank"}，Al Jazeera，2024-11-26。
+[^56]: Amnesty International，[Shadows of Control](https://www.amnesty.org/en/documents/asa33/0206/2025/en/){target="_blank"}。
+[^57]: Amnesty International，[Shadows of Control](https://www.amnesty.org/en/documents/asa33/0206/2025/en/){target="_blank"}。
+[^58]: Matteo Fumagalli，[Myanmar 2023: New Conflicts and Coalitions Reshape War Narrative, Challenging an Embattled Junta](https://www.asiamaior.org/the-journal/18-asia-maior-vol-xxxiv-2023/myanmar-2023-new-conflicts-and-coalitions-reshape-war-narrative-challenging-an-embattled-junta.html){target="_blank"}，Asia Maior（義大利的亞洲研究智庫），2024。
+[^59]: Tommy Walker、Darko Janjevic，[Myanmar: Why Is Junta Shutting down Internet?](https://www.dw.com/en/myanmar-why-is-junta-shutting-down-internet/a-71770580){target="_blank"}，dw.com，2025-02-27。
+[^60]: Adam Satariano、Paul Mozur，[Myanmar’s Internet Censorship Limits Information about Earthquake](https://www.nytimes.com/2025/03/28/world/asia/myanmar-earthquake-internet-censorship.html){target="_blank"}，The New York Times，2025-03-28。
+[^61]: RFA Burmese，[Myanmar Junta Imposes Random Searches for VPNS](https://www.rfa.org/english/news/myanmar/myanmar-internet-restrictions-vpn-ban-06132024163512.html){target="_blank"}，Radio Free Asia，2024-06-13。Golda Benjamin、Wai Phyo Myint，[Worse than China or Iran? Myanmar’s Dangerous VPN Ban](https://www.accessnow.org/myanmar-vpn-ban/){target="_blank"}，Access Now，2024-06-26。
+[^62]: RFA Burmese，[Myanmar Enacts Cybersecurity Law That Aims to Restrict Use of Vpns](https://www.rfa.org/english/myanmar/2025/01/02/cybersecurity-law-vpn/){target="_blank"}，Radio Free Asia，2025-01-02。
+[^63]: Justice For Myanmar，[The Myanmar Junta’s Partners in Digital Surveillance and Censorship](https://www.justiceformyanmar.org/stories/the-myanmar-juntas-partners-in-digital-surveillance-and-censorship){target="_blank"}，2024-06-19。
+[^64]: 這些文件沒有涵蓋 2024 年 12 月之後的事件。不過有報導指出，部分審查系統在 2025 年 3 月的地震中損毀。
+[^65]: 內比都是新首都，這個據點可能是為政府官員設置的，用於拍照與官方參訪，而非日常運作。
+[^66]: Caroline Henshaw、Aung Naing，[Chinese Technology Capable of Mass Surveillance ‘installed’ by Myanmar Internet Company Funded by UK](https://www.financeuncovered.org/stories/british-norwegian-and-danish-governments-back-internet-provider-in-military-run-myanmar-which-hosts-notorious-chinese-surveillance-system){target="_blank"}，Finance Uncovered，2025-05-21。Caroline Henshaw、Aung Naing，[European Govts Back Company That Uses Chinese Tech to Monitor Myanmar Internet Users](https://myanmar-now.org/en/news/european-govts-back-company-that-uses-chinese-tech-to-monitor-myanmar-internet-users/){target="_blank"}，Myanmar Now，2025-05-23。
+[^67]: 根據外洩文件，Geedge 的應用程式清單共有 281 個應用程式。外洩資料中的另一份文件列出緬甸軍政府提供的 55 個高優先級應用程式。
+[^68]: Access Now，[Joint Statement: Myanmar Must Lift Internet Restrictions Following Devastating Earthquake](https://www.accessnow.org/press-release/call-for-lifting-of-internet-restrictions-myanmar/?tztc=1){target="_blank"}，2025-04-04。
+[^69]: Mingshi Wu、Ali Zohaib、Zakir Durumeric、Amir Houmansadr、Eric Wustrow，[A Wall Behind A Wall: Emerging Regional Censorship in China](https://gfw.report/publications/sp25/data/paper/paper.pdf){target="_blank"}，Great Firewall Report，2025 年 5 月。
+[^70]: Human Rights Watch，[China’s Algorithms of Repression](https://www.hrw.org/report/2019/05/01/chinas-algorithms-repression/reverse-engineering-xinjiang-police-mass){target="_blank"}，2019-05-01。Zeyi Yang，[The Chinese Surveillance State Proves That the Idea of Privacy Is More ‘Malleable’ than You’d Expect](https://www.technologyreview.com/2022/10/10/1060982/china-pandemic-cameras-surveillance-state-book/){target="_blank"}，MIT Technology Review，2022-10-10。Josh Chin、Clément Bürge，[Twelve Days in Xinjiang: How China’s Surveillance State Overwhelms Daily Life](https://www.wsj.com/articles/twelve-days-in-xinjiang-how-chinas-surveillance-state-overwhelms-daily-life-1513700355){target="_blank"}，The Wall Street Journal，2017-12-19。Chris Buckley、Paul Mozur，[How China Uses High-Tech Surveillance to Subdue Minorities](https://www.nytimes.com/2019/05/22/world/asia/china-surveillance-xinjiang.html){target="_blank"}，The New York Times，2019-05-22。
+[^71]: 會議筆記中稱為 FQ，應是指「翻墙」（fān qiáng），字面意思是「爬牆」。在中國，這個詞常用來指稱繞過防火長城的行為。
+[^72]: Mingshi Wu、Ali Zohaib、Zakir Durumeric、Amir Houmansadr、Eric Wustrow，[A Wall Behind A Wall: Emerging Regional Censorship in China](https://gfw.report/publications/sp25/data/paper/paper.pdf){target="_blank"}，Great Firewall Report，2025 年 5 月。
 
 *[Cyber Narrator]: Cyber Narrator 是由 Geedge Networks 開發的運營商級別安全資訊和事件管理（SIEM）以及線上分析處理（OLAP）解決方案。這是客戶在使用 Geedge 的監控產品時主要的使用者介面，也是唯一為非技術使用者設計的產品。在實際應用中，政府分析師會在國家指揮中心的辦公室中使用這個介面來存取資料
 *[DPI]: 深度封包檢測 Deep Packet Inspection，縮寫為 DPI，是一種電腦網路封包過濾技術，用來檢查透過檢測點封包的資料部分（也可能包含其標頭），以搜尋不符合規範的協定、病毒、垃圾郵件、入侵，或以預定準則來決定封包是否可透過或需被路由至其他不同目的地，或是為了收集統計資料。

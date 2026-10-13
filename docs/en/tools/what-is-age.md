@@ -101,6 +101,6 @@ PGP stays where it belongs. The [sensitive upload](https://anoni.net/en/join/upl
 
 - [Asian Diceware](./asian-diceware.md): passphrase mode needs a strong passphrase
 - [Passphrase and password generator](../utils/passphrase.md): draw one in the browser, nothing is sent anywhere
-- [End-to-end encryption](../advanced/e2ee.md): what encryption solves in transit and at rest
+- [End-to-end encryption](../basics/e2ee.md): what encryption solves in transit and at rest
 - [Preparing for and handling network shutdowns](../scenarios/shutdown.md): encrypted backups have to open offline, and age needs no connection
 - [Sensitive upload](https://anoni.net/en/join/upload-sensitive/){target="_blank"}: where this site uses PGP

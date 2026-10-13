@@ -89,7 +89,8 @@ The app and the engine version independently. The cross-platform app is 6.x, whi
 
 !!! info "Earlier OONI Probe versions"
 
-    OONI Probe 6.0.1, 6.0.0, and 5.3.0 release notes, plus the OONI Probe Desktop 6.0.1 beta and OONI Explorer thematic censorship pages translations, are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/ooni/){target="_blank"}. English versions will be added as the community translates them.
+    OONI Probe 6.0.1, 6.0.0, and 5.3.0 release notes, plus the OONI Explorer thematic censorship pages translation, are currently available only in [traditional Chinese](https://anoni.net/docs/changelog/ooni/){target="_blank"}. English versions will be added as the community translates them.
+
 ## OONI Probe CLI v3.29.1
 
 > 2026-05-12 · [Upstream release](https://github.com/ooni/probe-cli/releases/tag/v3.29.1){target="_blank"}

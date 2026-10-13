@@ -43,7 +43,7 @@ icon: material/routes
 
 要注意的是走 IPFS 读不会让连接变匿名。你用的是一般浏览器连到一台网关，那台网关看得到你的 IP 与你请求的每一个地址，在网络上你看起来就是一个普通的 HTTPS 客户端。想同时要抗下架与连接匿名，用 Tor Browser 打开 Onion 版。
 
-完整的暴露面说明见 [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)，发布端的设计取舍见 [去中心化网站发布](../advanced/dweb-ipfs-onion.md)。
+完整的暴露面说明见 [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)，发布端的设计取舍见 [去中心化网站发布](https://anoni.net/zh-cn/articles/dweb-ipfs-onion/){target="_blank"}。
 
 ## 怎么选
 
@@ -57,8 +57,8 @@ icon: material/routes
 
 <div class="grid cards" markdown>
 
-- [:material-web-box: 去中心化网站发布](../advanced/dweb-ipfs-onion.md)
-- [:material-incognito: 常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)
+- [:material-web-box: 去中心化网站发布](https://anoni.net/zh-cn/articles/dweb-ipfs-onion/){target="_blank"}
+- [:material-incognito: 常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)
 - [:simple-ipfs: 文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}
 - [:material-download: 离线阅读](../offline.md)
 

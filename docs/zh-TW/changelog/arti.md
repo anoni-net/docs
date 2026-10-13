@@ -138,3 +138,10 @@ Arti 是 Tor Project 從 2021 年開始的計畫，把原本用 C 寫成的 Tor�
 - RPC 介面持續打磨，加入更多管理用 API。
 - MSRV（最低支援 Rust 版本）提升至 Rust 1.89.0。
 - 安全修補三項，都是相依套件升級：`bytes` 升到 0.11.1，避開 `BytesMut::reserve()` 整數溢位造成的未定義行為（TROVE-2026-001、RUSTSEC-2026-0007）。`keccak` 升到 0.1.6，避開 ARMv8 組譯錯誤可能造成的未定義行為。`time` 升到 0.3.47，清掉 RUSTSEC-2026-0009 的稽核警告。
+
+## Arti 1.4.1
+
+> 2025-03-03 · [上游公告](https://blog.torproject.org/arti_1_4_1_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md#arti-141--3-march-2025){target="_blank"}
+
+- 用戶端實作 Family IDs（又稱 Happy Families，見[提案 321](https://spec.torproject.org/proposals/321-happy-families.html){target="_blank"}），各處全面採用之後，可以節省中繼營運者的時間與頻寬。
+- 開始為完整實作 Conflux（見[提案 329](https://spec.torproject.org/proposals/329-traffic-splitting.html){target="_blank"}）打基礎，Conflux 把流量分散到多條路徑傳送，用來改善效能。

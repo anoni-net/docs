@@ -101,6 +101,6 @@ PGP 留在它該在的地方。站上的[敏感資料上傳](https://anoni.net/j
 
 - [Asian Diceware 密語字典](./asian-diceware.md)：密語模式要配夠強的密語
 - [密語與密碼產生器](../utils/passphrase.md)：在瀏覽器裡抽一組，不送出任何資料
-- [端對端加密](../advanced/e2ee.md)：加密在傳輸與儲存兩端各解決什麼
+- [端對端加密](../basics/e2ee.md)：加密在傳輸與儲存兩端各解決什麼
 - [網路中斷時的準備與應對](../scenarios/shutdown.md)：加密備份要斷網也解得開，age 不需要連線
 - [敏感資料上傳](https://anoni.net/join/upload-sensitive/){target="_blank"}：站上用 PGP 的地方

@@ -23,7 +23,7 @@ Original writing rather than translation:
 
 - **Regional observation and analysis**: measurement work, regulatory tracking, and what we see from inside the Sinophone Asia-Pacific. The [Regional Observatory](./regional/index.md) collects it
 - **Community reporting**: what happened at an event, how a deployment went, what a piece of upstream work took. The [Updates](./blog/index.md) section has these
-- **Curated reports**: external research worth reading in full, indexed with links to the originals alongside our Chinese translations, in [Reports](./reports/index.md)
+- **Translated reports**: external research worth reading in full, indexed with links to the originals alongside our Chinese translations, in [Translated Reports](./reports/index.md)
 
 ## If you read Chinese
 

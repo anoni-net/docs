@@ -8,7 +8,7 @@ icon: material/message-text-outline
 
 「端對端加密」這幾個字在 LINE、Telegram、WhatsApp、Signal、SimpleX、Session、Briar、Matrix 上意義差很多。差異落在金鑰由誰持有、註冊時是否要綁手機號碼或郵件、Metadata 留在哪個 server、伺服器掉線後是否仍能通訊，以及群組與多裝置的設計選擇。
 
-這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。操作前可以先回頭看 [威脅模型如何建立](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密如何運作](../advanced/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
+這篇文章從幾個面向比較常見的匿名通訊工具，重點放在 5 個主軸（Signal、SimpleX、Session、Briar、Matrix/Element）與 3 個對照（LINE、Telegram、WhatsApp）。操作前可以先回頭看 [威脅模型如何建立](../basics/threat-model.md) 了解自己在抗誰，需要協議層細節（Double Ratchet、Sender Keys、MLS）可參考 [端對端加密的保護範圍](../basics/e2ee.md)，Metadata 為什麼是獨立風險可看 [Metadata 是什麼](../basics/metadata.md)。
 
 ## 為什麼要分開比較這些工具
 
@@ -59,7 +59,7 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 ## Signal
 
-[Signal](https://signal.org/){target="_blank"} 是 E2EE 通訊工具的當前共識答案，協議成熟、UX 接近主流 IM。一對一用 Double Ratchet（每則訊息獨立金鑰），群組用 Sender Keys，協議細節見 [端對端加密如何運作](../advanced/e2ee.md)。
+[Signal](https://signal.org/){target="_blank"} 是 E2EE 通訊工具的當前共識答案，協議成熟、UX 接近主流 IM。一對一用 Double Ratchet（每則訊息獨立金鑰），群組用 Sender Keys，協議細節見 [端對端加密的保護範圍](../basics/e2ee.md)。
 
 身分模型上，Signal 註冊仍需手機號碼，但 2024 年正式推出 username 功能，可以在不揭露號碼的情況下交換聯絡方式。Sealed Sender 設計讓 server 看不到單則訊息的寄件人，私聯絡人探索（private contact discovery）也讓 server 不知道你的通訊錄。
 
@@ -108,7 +108,7 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 - 群組功能比 Signal、SimpleX 都弱，大群組支援限制較多
 - Lokinet 路由的設計過去曾因不同於 Tor 的選擇被質疑，社群審計仍在持續
 - 訊息送達延遲明顯比 Signal 高（因為走多跳 onion routing）
-- 早期版本沒有完整前向保密，新版本仍在轉換中（決定使用前可看 [端對端加密如何運作](../advanced/e2ee.md) 的協議對照）
+- 早期版本沒有完整前向保密，新版本仍在轉換中（決定使用前可看 [端對端加密的協定機制](https://anoni.net/articles/e2ee-protocols/){target="_blank"}的協定對照）
 
 ## Briar
 
@@ -202,7 +202,7 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 **社群討論在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，帳號申請與加入方式見 [社群自架服務](https://anoni.net/services/){target="_blank"}。
 
-**協議層的台灣脈絡**：Signal、Matrix 為什麼是社群兩條主要路徑，協議層的細節見 [端對端加密如何運作](../advanced/e2ee.md) 的「在地脈絡」一節。
+**協議層的台灣脈絡**：Signal、Matrix 為什麼是社群兩條主要路徑，協議層的細節見 [端對端加密的保護範圍](../basics/e2ee.md) 的「在地脈絡」一節。
 
 香港的分流對象與威脅模型不同：
 
@@ -242,7 +242,7 @@ LINE 屬於「有部分加密的社交平台」，稱不上「加密通訊工具
 
 - [:material-chat-question: 威脅模型如何建立](../basics/threat-model.md)
 - [:material-shield-search: Metadata 是什麼](../basics/metadata.md)
-- [:material-key-chain-variant: 端對端加密如何運作](../advanced/e2ee.md)
+- [:material-key-chain-variant: 端對端加密的保護範圍](../basics/e2ee.md)
 
 </div>
 

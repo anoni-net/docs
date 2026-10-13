@@ -36,7 +36,7 @@ icon: material/key-variant
 
 [KeePassXC](https://keepassxc.org/){target="_blank"} 把金庫存在你電腦上的 `.kdbx` 檔，跨裝置同步靠你自己處理（[Syncthing](https://syncthing.net/){target="_blank"}、自架雲端、加密硬碟）。客戶端齊全：桌面用 KeePassXC、Android 用 KeePassDX、iOS 用 Strongbox。
 
-[Tails 7.6](../blog/posts/2026-tails-7-6.md) 起預裝 GNOME Secrets 取代 KeePassXC，使用相同的 `.kdbx` 格式，原本的金庫檔可以直接開啟。
+[Tails 7.6](../changelog/tails.md) 起預裝 GNOME Secrets 取代 KeePassXC，使用相同的 `.kdbx` 格式，原本的金庫檔可以直接開啟。
 
 `.kdbx` 是公開格式，2017 年後陸續有新一代客戶端從零開始實作、能開同一個金庫：Apple 平台原生 SwiftUI 的 [KeePassium](https://keepassium.com/){target="_blank"} 與 [Strongbox](https://strongboxsafe.com/){target="_blank"}（GPL）、跨平台 Flutter 的 [AuthPass](https://authpass.app/){target="_blank"}。換 client 不用搬資料，金庫格式跟著你走，不被任何一家綁死。
 

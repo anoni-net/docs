@@ -8,7 +8,7 @@ icon: material/dns
 
 在手机的 Wi-Fi 设置里把 DNS 那一栏填成 `1.1.1.1`，是很多人做过的第一个隐私设置。换掉的只有回答你的那台服务器，查询本身仍然以明文送出去，路径上的设备照样读得到你问过哪些域名。
 
-要不要做这件事，看你想解决什么，想让运营商看不到你查询过哪些域名，加密 DNS 有效，代价是换一家业者保管这批记录。想绕过封锁，需先确认封锁在哪一层。想匿名，加密 DNS 做不到，理由写在 [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)。
+要不要做这件事，看你想解决什么，想让运营商看不到你查询过哪些域名，加密 DNS 有效，代价是换一家业者保管这批记录。想绕过封锁，需先确认封锁在哪一层。想匿名，加密 DNS 做不到，理由写在 [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)。
 
 这页不写各平台的逐步设置画面，那类步骤随系统版本改变，网络上的转贴往往没跟着更新。给的是不管在哪个平台都用得上的东西：各家栏位收什么形状、失败时会不会静默退回明文，以及设完之后怎么实测。
 
@@ -65,7 +65,7 @@ DoH 常被说成抗封锁能力最好，这句话要限缩。它挡住的只有�
 
 ### 过滤型 resolver 的两面
 
-过滤型 resolver 对被挡的域名返回一个不通的地址，Cloudflare 会回 `0.0.0.0`[^cf-ip]。这确实挡得住一部分恶意域名，对家庭与小型组织是低成本的防护。它跟 DNS 层审查是同一个技术动作，差别在这个动作由谁决定，姊妹页 [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md) 对这一层有完整讨论。
+过滤型 resolver 对被挡的域名返回一个不通的地址，Cloudflare 会回 `0.0.0.0`[^cf-ip]。这确实挡得住一部分恶意域名，对家庭与小型组织是低成本的防护。它跟 DNS 层审查是同一个技术动作，差别在这个动作由谁决定，姊妹页 [常被误认为匿名的网络](../basics/mistaken-for-anonymity.md) 对这一层有完整讨论。
 
 完整的封锁清单与分类方法通常不公开，你不会事先知道哪些域名被归进去，遇到误挡时只能从「这个网站怎么连不上」开始查。另一个代价落在测量上，执行 OONI Probe 时被过滤掉的域名会被记成异常，来源是你自己的 resolver，跟当地网络无关。
 
@@ -214,7 +214,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 
 <div class="grid cards" markdown>
 
-- [:material-incognito-off: 常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)
+- [:material-incognito-off: 常被误认为匿名的网络](../basics/mistaken-for-anonymity.md)
 - [:material-file-tree: Metadata 是什么，为什么重要](../basics/metadata.md)
 - [:material-vpn: VPN 的风险与选择](./vpn-guide.md)
 

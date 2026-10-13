@@ -35,6 +35,8 @@ nav:
           - basics/surveillance-capability.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
+          - basics/e2ee.md
+          - basics/mistaken-for-anonymity.md
       # 子分组沿用 tools/index.md 的四层分法，侧边栏与索引页看到的是同一套结构。
       # 改这里的分组时同步改那一页，不要各写各的。
       - !ENV [NAV_TOOLS, "工具"]:
@@ -84,14 +86,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/shutdown.md
-      - !ENV [NAV_ADVANCED, "进阶"]:
-          - advanced/index.md
-          - advanced/e2ee.md
-          - advanced/post-quantum.md
-          - advanced/dweb-ipfs-onion.md
-          - advanced/zk-identity-payments.md
-          - advanced/mistaken-for-anonymity.md
-      - !ENV [NAV_REPORTS, "报告"]:
+      - !ENV [NAV_REPORTS, "研究报告中译"]:
           - reports/index.md
   # taiwan/index.md 把法规那三篇分成「个资与身分」「金流」「制度与技术交界」，各自
   # 只有一篇。侧边栏做成三个单页分组只会更难扫，所以合并成「法规与制度」一组。
@@ -372,6 +367,41 @@ plugins:
         'community/campus-tor-relay-sop.md': 'https://anoni.net/zh-cn/join/relay-on-campus/sop/'
         'community/campus-relay-faq.md': 'https://anoni.net/zh-cn/join/relay-on-campus/faq/'
         'setup/index.md': 'https://anoni.net/zh-cn/join/'
+        # 2026-10-13 取消進階層（#406）。端對端加密與常被誤認為匿名的網路移到概念層，
+        # 另外三頁搬到社群首頁的技術文章，索引頁轉到指南。
+        'advanced/index.md': 'guides/index.md'
+        'advanced/e2ee.md': 'basics/e2ee.md'
+        'advanced/mistaken-for-anonymity.md': 'basics/mistaken-for-anonymity.md'
+        'advanced/dweb-ipfs-onion.md': 'https://anoni.net/zh-cn/articles/dweb-ipfs-onion/'
+        'advanced/zk-identity-payments.md': 'https://anoni.net/zh-cn/articles/zk-identity-payments/'
+        'advanced/post-quantum.md': 'https://anoni.net/zh-cn/articles/post-quantum/'
+        # 部落格文章同一天分流（#406）：寫給技術讀者的分析與翻譯導讀搬到社群首頁的技術文章，
+        # 活動與上線公告搬到社群動態，舊版發布公告與過時的文章轉到承接的頁面。
+        'blog/2026/04/a-server-that-forgets-exploring-stateless-relays.md': 'https://anoni.net/zh-cn/articles/stateless-relays/'
+        'blog/2026/07/2026-ooni-faulty-measurements.md': 'https://anoni.net/zh-cn/articles/ooni-faulty-measurements/'
+        'blog/2026/06/2026-ooni-run-v2-usage-patterns.md': 'https://anoni.net/zh-cn/articles/ooni-run-v2-usage-patterns/'
+        'blog/2026/02/ooni-全新的匿名凭证系统.md': 'https://anoni.net/zh-cn/articles/ooni-anonymous-credentials/'
+        'blog/2025/03/2025-probe-security-without-identification.md': 'https://anoni.net/zh-cn/articles/ooni-anonymous-credentials/'
+        'blog/2026/08/ooni-mobile-throttle-drill-results.md': 'https://anoni.net/zh-cn/articles/ooni-mobile-throttle-results/'
+        'blog/2026/06/keeping-the-doors-open.md': 'https://anoni.net/zh-cn/articles/keeping-the-doors-open/'
+        'blog/2026/03/tpa-adr.md': 'https://anoni.net/zh-cn/articles/tpa-adr/'
+        'blog/2025/05/oniux-kernel-level-tor.md': 'https://anoni.net/zh-cn/articles/oniux/'
+        'blog/2025/09/tor-sambent-onionmasq.md': 'https://anoni.net/zh-cn/articles/oniux/'
+        'blog/2026/08/ooni-mobile-throttle-drill.md': 'https://anoni.net/zh-cn/updates/2026/08/ooni-mobile-throttle-drill/'
+        'blog/2026/07/games-globe-open-data.md': 'https://anoni.net/zh-cn/updates/2026/07/games-globe-open-data/'
+        'blog/2026/05/report-madlink.md': 'https://anoni.net/zh-cn/updates/2026/05/report-madlink/'
+        'blog/2025/10/report-the-internet-coup.md': 'https://anoni.net/zh-cn/updates/2025/10/report-the-internet-coup/'
+        'blog/2025/03/arti_1_4_1_released.md': 'changelog/arti.md'
+        'blog/2026/03/arti_2_1_0_released.md': 'changelog/arti.md'
+        'blog/2026/03/arti-2-2-0-released-http-connect-rpc-and-relay-development.md': 'changelog/arti.md'
+        'blog/2025/07/tails-6-18-webtunnel.md': 'changelog/tails.md'
+        'blog/2025/10/tails-7-1-released.md': 'changelog/tails.md'
+        'blog/2026/03/tails-7-6.md': 'changelog/tails.md'
+        'blog/2025/08/tails-7-rc.md': 'blog/posts/tails-7-released.md'
+        'blog/2026/04/ooni-probe-desktop-beta-2026.md': 'changelog/ooni.md'
+        'blog/2025/08/ooni-omg-2025.md': 'https://ooni.org/post/2025-omg/'
+        'blog/2026/04/taiwan-vasp-draft-cabinet.md': 'taiwan/vasp-2026.md'
+        'blog/2025/07/tor-tails-stronger-together.md': 'tools/what-is-tails.md'
         'community/brand-assets.md': 'https://anoni.net/zh-cn/brand/'
         'activity/index.md': 'https://anoni.net/zh-cn/events/'
         'activity/gg2026.md': 'https://anoni.net/zh-cn/events/gg2026/'
@@ -452,7 +482,7 @@ plugins:
         'report/interseclab-the-internet-coup/index_8.md': 'reports/index.md'
         'reports/interseclab-madlink.md': 'reports/index.md'
         'reports/interseclab-madlink/index_3.md': 'reports/index.md'
-        'reports/interseclab-madlink/index_6.md': 'reports/index.md'
+        'reports/interseclab-madlink/index_6.md': 'https://anoni.net/zh-cn/updates/2026/05/madlink-editorial-2026-05/'
         'reports/interseclab-network-coup.md': 'reports/index.md'
         'reports/interseclab-network-coup/index_1.md': 'reports/index.md'
         'reports/interseclab-network-coup/index_2.md': 'reports/index.md'

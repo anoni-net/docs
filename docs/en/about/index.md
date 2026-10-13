@@ -21,7 +21,7 @@ Where a page goes depends on who it is written for. Anything that assumes the re
 | Section | What is in it |
 |---|---|
 | [Start](../start/index.md) | Starting paths by role, from civil society and newsrooms to everyday readers |
-| [Guides](../guides/index.md) | Concepts, tools, scenarios, advanced topics and reports, from basic to in-depth |
+| [Guides](../guides/index.md) | Concepts, tools and scenarios, from basic to in-depth, plus translated research reports |
 | [Regional](../regional/index.md) | Network measurement and regulation in Taiwan |
 | [Utilities](../utils/index.md) | Tools that run in your browser and never upload your data |
 | [Updates](../blog/index.md) | Community news, translated articles and software changelogs |

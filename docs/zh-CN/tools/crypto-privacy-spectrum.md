@@ -8,7 +8,7 @@ icon: material/currency-btc
 
 你想匿名订阅一份政治敏感的电子报、给海外的调查记者打赏、为准备离开的家暴幸存者备一笔对方看不到的资金。每个情境都有人推荐「用加密货币付款」当默认答案，但比特币与 Monero 的隐私差距，跟现金与信用卡的差距一样大。
 
-这篇文章把几个常见币种排出一条光谱，帮你判断对手是谁、愿意付出多少摩擦、哪一段隐私强度足够你的需求。不需要懂密码学，原理链接放在每段，等你需要时再深入。如果想直接读技术细节，可延伸到 [零知识身份验证与支付](../advanced/zk-identity-payments.md)。
+这篇文章把几个常见币种排出一条光谱，帮你判断对手是谁、愿意付出多少摩擦、哪一段隐私强度足够你的需求。不需要懂密码学，原理链接放在每段，等你需要时再深入。如果想直接读技术细节，可延伸到 [零知识身份验证与支付](https://anoni.net/zh-cn/articles/zk-identity-payments/){target="_blank"}。
 
 !!! tip "30 秒结论"
 
@@ -42,7 +42,7 @@ icon: material/currency-btc
 - **图谱**：A 跟 B 之间的转账路径。比特币可重建完整图谱，以太坊类似，Monero 用环签名制造诱饵，Zcash 屏蔽池内部不可见。
 - **Metadata**：交易由哪个 IP、哪个钱包客户端、什么时间送出。所有链都依赖 P2P 网络层的隐私（搭配 Tor、Dandelion++）。
 
-四个维度的内部机制与链上分析的能与不能，在 [零知识身份验证与支付](../advanced/zk-identity-payments.md) 有完整讨论。这页只用四个维度当作后续比较的尺。
+四个维度的内部机制与链上分析的能与不能，在 [零知识身份验证与支付](https://anoni.net/zh-cn/articles/zk-identity-payments/){target="_blank"} 有完整讨论。这页只用四个维度当作后续比较的尺。
 
 ## 对应你的情境
 
@@ -108,7 +108,7 @@ CoinJoin 是比特币早期的隐私强化路线：多名用户把交易合并�
 
 ## Monero：强匿名，取得有摩擦 {#monero}
 
-Monero 把账户、金额、图谱这三个维度的隐藏内建成默认行为。stealth address、ring signatures、RingCT 三个机制叠加，链上看不到 Alice 与 Bob 的概念，只看到「某个一次性地址收到一笔隐藏金额，由 16 个可能寄件人之一送出」。原理细节见 [零知识身份验证与支付](../advanced/zk-identity-payments.md)。
+Monero 把账户、金额、图谱这三个维度的隐藏内建成默认行为。stealth address、ring signatures、RingCT 三个机制叠加，链上看不到 Alice 与 Bob 的概念，只看到「某个一次性地址收到一笔隐藏金额，由 16 个可能寄件人之一送出」。原理细节见 [零知识身份验证与支付](https://anoni.net/zh-cn/articles/zk-identity-payments/){target="_blank"}。
 
 - **钱包**：Cake Wallet（移动设备与桌面）、Feather Wallet（桌面、轻量、开源）、Monero GUI（官方桌面）。
 - **合规处境**：在多数司法管辖，个人持有与点对点交易未受明文禁止，但本地交易所是否提供 XMR 对接因地区而异。
@@ -199,7 +199,7 @@ multisig 的常见坑：
 <div class="grid cards" markdown>
 
 - [:material-cash-multiple: 为什么匿名支付重要](../basics/payments-anonymity.md)
-- [:material-shield-key-outline: 零知识身份验证与支付](../advanced/zk-identity-payments.md)
+- [:material-shield-key-outline: 零知识身份验证与支付](https://anoni.net/zh-cn/articles/zk-identity-payments/){target="_blank"}
 - [:material-handshake-outline: 倡议组织的匿名捐款](../scenarios/nonprofit-anonymous-donation.md)
 
 </div>

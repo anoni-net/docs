@@ -95,7 +95,7 @@ Every option is a trade-off: technical barrier, legality, counterparty acceptanc
 - Read [what metadata is](./metadata.md) to see money as one dimension of metadata.
 - Tool level: [the cryptocurrency privacy spectrum](../tools/crypto-privacy-spectrum.md).
 - Scenario level: [anonymous donation channels for advocacy organizations](../scenarios/nonprofit-anonymous-donation.md).
-- Advanced level: [zero-knowledge identity and payments](../advanced/zk-identity-payments.md).
+- Advanced level: [zero-knowledge identity and payments](https://anoni.net/en/articles/zk-identity-payments/){target="_blank"}.
 - Regional level: [Taiwan's Virtual Asset Service Act](../regional/taiwan-vasp-2026.md).
 - Community research: [the anonymous payments track](https://anoni.net/en/join/payments-research/){target="_blank"}.
 

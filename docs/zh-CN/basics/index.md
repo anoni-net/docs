@@ -24,3 +24,5 @@ icon: material/school-outline
 - [监控现在做得到什么](./surveillance-capability.md)：按平台、电信、国家、商用间谍软件四层盘点能力边界，每一条标出证据与日期。
 - [怎么维持多个网络身分](./multiple-identities.md)：要几层身分、每层的工具边界、被反查的途径，以及长期维持与收尾。
 - [为什么匿名支付重要](./payments-anonymity.md)：金流如何变成最黏的 metadata，现金为什么是最成熟的匿名支付。
+- [端对端加密的保护范围](./e2ee.md)：传输加密、端对端加密与存储加密各自挡得住谁，以及有加密之后还留下哪些记录。
+- [常被误认为匿名的网络](./mistaken-for-anonymity.md)：加密 DNS、IPFS 这类工具为什么不等于匿名，以及判断任何工具的四个提问。

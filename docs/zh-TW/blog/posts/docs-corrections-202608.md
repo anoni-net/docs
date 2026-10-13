@@ -111,7 +111,7 @@ Cloudflare 近 90 天的資料（排除子網域與 bot）顯示英文版佔文�
 
 [個人隱私指引](https://anoni.net/join/privacy-guide/){target="_blank"}在 8/6 補上「相關文章」索引時，下方的進度段落沒有跟著改，同一頁出現兩種說法。上面列了概念層八篇，下面寫著「概念層五篇上線」並只列原本那五篇。各層索引也累積落後了一段時間，工具層實際 18 篇只列 7 篇、場景層 10 篇只列 5 篇、進階層 5 篇只列 2 篇，這次補進 14 篇。
 
-同一頁的「常見誤區整理」列了四項，讀起來像整條還沒動工。實際盤點後有兩項早已寫完，只是沒被連到，「VPN ≠ 匿名」在 [VPN 指南](../../tools/vpn-guide.md)有整篇，「去中心化 ≠ 匿名」在[被誤認為匿名的技術](../../advanced/mistaken-for-anonymity.md)完整涵蓋 IPFS、Yggdrasil、DN42 與 I2P。另外兩項確實還沒動工，改後分別標明現況。
+同一頁的「常見誤區整理」列了四項，讀起來像整條還沒動工。實際盤點後有兩項早已寫完，只是沒被連到，「VPN ≠ 匿名」在 [VPN 指南](../../tools/vpn-guide.md)有整篇，「去中心化 ≠ 匿名」在[被誤認為匿名的技術](../../basics/mistaken-for-anonymity.md)完整涵蓋 IPFS、Yggdrasil、DN42 與 I2P。另外兩項確實還沒動工，改後分別標明現況。
 
 [文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}有三處對不上現況，其中兩處是讀者實際操作後才發現的。
 

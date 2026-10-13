@@ -99,7 +99,7 @@ icon: material/cash-multiple
 - 看 [Metadata 是什麼](./metadata.md)，理解金流是 metadata 的一個維度
 - 工具面：[加密貨幣的隱私光譜](../tools/crypto-privacy-spectrum.md)
 - 場景面：[倡議組織的匿名捐款管道](../scenarios/nonprofit-anonymous-donation.md)
-- 進階面：[零知識身分驗證與支付](../advanced/zk-identity-payments.md)
+- 進階面：[零知識身分驗證與支付](https://anoni.net/articles/zk-identity-payments/){target="_blank"}
 - 在地面：[台灣 VASP 法 2026](../taiwan/vasp-2026.md)
 - 社群研究入口：[匿名支付研究專題](https://anoni.net/join/payments-research/){target="_blank"}
 

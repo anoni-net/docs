@@ -103,6 +103,6 @@ OONI Probe 桌面版與行動版都能在家用網路、行動網路、公共 Wi
 ## 相關閱讀
 
 - [發佈：新 OONI Explorer 主題審查頁面](./2025-ooni-explorer-thematic-censorship-pages.md)
-- [OONI 全新的匿名憑證系統](./2026-ooni-anonymous-credentials.md)
+- [OONI Probe 匿名憑證系統的設計與實作](https://anoni.net/articles/ooni-anonymous-credentials/){target="_blank"}
 - [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)
 - [OONI 網站檢測清單](../../taiwan/ooni-checklist.md)

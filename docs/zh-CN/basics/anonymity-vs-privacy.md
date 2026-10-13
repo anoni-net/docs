@@ -83,4 +83,4 @@ icon: material/incognito-circle
 - 想知道为什么「机密 ≠ 匿名」，请进一步阅读 [Metadata 是什么](./metadata.md)
 - 想把假名真的维持住，见 [怎么维持多个网络身分](./multiple-identities.md)，处理的正是「同一个假名下的行为会被关联」这件事
 - 想看具体场景下这四个概念如何选用，可以看 [场景层](../scenarios/index.md) 的各篇文章
-- 想看「加密了」、「去中心化了」这两种说法各自不等于匿名的具体例子，见 [常被误认为匿名的网络](../advanced/mistaken-for-anonymity.md)
+- 想看「加密了」、「去中心化了」这两种说法各自不等于匿名的具体例子，见 [常被误认为匿名的网络](mistaken-for-anonymity.md)

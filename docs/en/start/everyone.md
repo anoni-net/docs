@@ -28,13 +28,13 @@ Location, contacts, photos. Most apps ask for far more than they need, and refus
 
 Both have real uses, and both cover a much narrower range than the marketing suggests. Applied to the wrong problem they produce false confidence.
 
-[Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md) goes through what each one actually blocks.
+[Networks mistaken for anonymity](../basics/mistaken-for-anonymity.md) uses encrypted DNS, IPFS, and similar tools to show why switching tools does not make you anonymous, and turns that into four questions you can ask of any tool. VPNs have their own page, [VPN: risks and how to choose](../tools/vpn-guide.md).
 
 ## Three pages for your first twenty minutes
 
 1. [What an ordinary person should actually do](../scenarios/everyday-baseline.md): ordered by real-world effect, and explicit about which measures are overestimated. If you read only one page, read this one
 2. [Passphrase and password generator](../utils/passphrase.md): the lowest effort for the most direct effect, generate a few while you are there
-3. [Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md): clear the misconceptions first, so effort does not go where it has no effect
+3. [Networks mistaken for anonymity](../basics/mistaken-for-anonymity.md): clear the misconceptions first, so effort does not go where it has no effect
 
 ## Building the foundation over a week
 

@@ -195,8 +195,6 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 
     Tor Browser 15.0.14、15.0.13、16.0a6（Alpha 测试通道）、15.0.12、15.0.11 等条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/tor/){target="_blank"} 提供，简体中文版会随社区翻译滚动补上。
 
-    更多 Tor 相关翻译保留在 [近期公告](../blog/index.md)，包括：
+    oniux 的介绍搬到了社区首页的[技术文章](https://anoni.net/zh-cn/articles/oniux/){target="_blank"}。更多 Tor 相关翻译保留在 [近期公告](../blog/index.md)，包括：
 
-    - [Onionmasq 流量隔离实验](../blog/posts/tor-sambent-onionmasq.md)
-    - [oniux 内核层级 Tor 隔离技术](../blog/posts/oniux-kernel-level-tor.md)
     - [Cure53 完成 Tor VPN 安全审计](../blog/posts/2026-code-audit-for-tor-vpn-completed-by-cure53.md)

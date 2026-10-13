@@ -104,23 +104,24 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 
 ## Arti 2.2.0
 
-> 2026-03-31 · [上游公告](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/2026-arti-2-2-0-released-http-connect-rpc-and-relay-development.md)
+> 2026-03-31 · [上游公告](https://blog.torproject.org/arti_2_2_0_released/){target="_blank"}
 
 - HTTP CONNECT 纳入完整构建并默认启用、RPC 管理能力增强、持续推进 relay 开发朝「Arti 可作为 Tor 中继」迈进。
 - 安全修补：一个低危问题。嵌入 arti 的应用程序如果也用了 `weak-table` 且开启 `ahash`，在没有硬件 AES 支持的机器上，抗拒绝服务的能力会变差（TROVE-2026-005）。
 
 ## Arti 2.1.0
 
-> 2026-03-03 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"} · [完整翻译文章](../blog/posts/arti-210.md)
+> 2026-03-03 · [上游公告](https://blog.torproject.org/arti_2_1_0_released/){target="_blank"}
 
 - 中继支持的内部建设、配置系统改用 `derive-deftly` 架构降低新增配置类型成本、RPC 接口持续打磨、MSRV 提升至 Rust 1.89.0。
 - 安全修补三项，都是依赖包升级：`bytes` 升到 0.11.1，避开 `BytesMut::reserve()` 整数溢出造成的未定义行为（TROVE-2026-001、RUSTSEC-2026-0007）。`keccak` 升到 0.1.6，避开 ARMv8 汇编错误可能造成的未定义行为。`time` 升到 0.3.47，清掉 RUSTSEC-2026-0009 的审计警告。
 
 ## Arti 1.4.1
 
-> 2025-03-16 · [上游公告](https://blog.torproject.org/arti_1_4_1_released/){target="_blank"} · [完整翻译文章](../blog/posts/arti-141.md)
+> 2025-03-03 · [上游公告](https://blog.torproject.org/arti_1_4_1_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md#arti-141--3-march-2025){target="_blank"}
 
-- Arti 客户端例行更新，包含错误修正与稳定性改善，为后续中继支持与 RPC 工作铺路。
+- 客户端实现 Family IDs（又称 Happy Families，见[提案 321](https://spec.torproject.org/proposals/321-happy-families.html){target="_blank"}），各处全面采用之后，可以节省中继运营者的时间与带宽。
+- 开始为完整实现 Conflux（见[提案 329](https://spec.torproject.org/proposals/329-traffic-splitting.html){target="_blank"}）打基础，Conflux 把流量分散到多条路径传送，用来改善性能。
 
 !!! info "更早的 Arti 版本"
 
