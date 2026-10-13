@@ -1615,15 +1615,11 @@
 	#這是普及工作的一部分
 /contact/ -> https://anoni.net/contact/
 /en/
-	#Cutting-across-the-above
 	#Four-ways-to-use-this-site
 	#Recent-updates
 	#The-same-tools-different-situations
 	#Try-it-hands-on
-	#What-we-follow-closely
-	#What-we-keep-an-eye-on
 	#What-we-observe
-	#Where-we-work-from
 	#Why-this-site-exists
 	#Works-without-a-network
 	#anoninet-Docs
