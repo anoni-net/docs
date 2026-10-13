@@ -186,6 +186,7 @@ nav:
   # 说明收进「关于文档站」。拿掉的页面网址不变，照样打得开，等转址时再处理。
   # 链接的 onion 版由 replace_sitename_anoni_onion.sh 改写。
   - "架设与运营":
+      - setup/index.md
       - community/setup-tor-relay.md
       - community/setup-tor-webtunnel.md
       - community/setup-onion-service.md
