@@ -161,7 +161,7 @@ asian-diceware 是一份 7776 字、与 EFF 兼容的密语词表，可以当成
     [asian_diceware_7776_booklet_a5_v0.4.0.pdf](https://assets.anoni.net/file/asian_diceware_7776_booklet_a5_v0.4.0.pdf){target="_blank"}（约 36 页，用家里或便利店的打印机打印 A4、对折成册即可）。词表数据采 CC-BY-4.0，欢迎自行打印、发放与再利用，请保留版权页的出处标注。
 
 !!! info "还在规划：一个匿名服务平台"
-    社群接下来也想做一个类似 [AnonTicket](https://anonticket.torproject.org/){target="_blank"} 的匿名服务平台（还在规划阶段）。AnonTicket 是 Tor Project 的匿名服务，让人不必透露身分就能匿名向 Tor 的 GitLab 提交问题回报，用系统产生的一组随机英文字代码辨识身分，而非 email。这种账号代码正是从随机词表抽字组成的，asian-diceware 词表就是为了当未来同类服务的代码字源而准备。AnonTicket 本身如何用在与 Tor 上游协作，见 [Tor Project 生态与对接](../community/tor-project-ecosystem.md)。
+    社群接下来也想做一个类似 [AnonTicket](https://anonticket.torproject.org/){target="_blank"} 的匿名服务平台（还在规划阶段）。AnonTicket 是 Tor Project 的匿名服务，让人不必透露身分就能匿名向 Tor 的 GitLab 提交问题回报，用系统产生的一组随机英文字代码辨识身分，而非 email。这种账号代码正是从随机词表抽字组成的，asian-diceware 词表就是为了当未来同类服务的代码字源而准备。AnonTicket 本身如何用在与 Tor 上游协作，见社区首页的[参与 Tor Project](https://anoni.net/zh-cn/join/tor-project/){target="_blank"}。
 
 ## :material-chat-question: 一同了解
 
@@ -177,7 +177,7 @@ asian-diceware 是一份 7776 字、与 EFF 兼容的密语词表，可以当成
 
 <div class="grid cards" markdown>
 
-- [:material-source-branch: Tor Project 生态与对接](../community/tor-project-ecosystem.md)
+- [:material-source-branch: 参与 Tor Project](https://anoni.net/zh-cn/join/tor-project/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 - [:material-hand-coin-outline: 匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"}
 

@@ -1738,17 +1738,7 @@
 	#自我技能評估表
 	#評估完之後
 /community/tools/ -> https://anoni.net/services/
-/community/tor-project-ecosystem/
-	#Tor-Project-生態與對接
-	#匿名網路社群的對接脈絡
-	#如何開始對接
-	#官方溝通管道
-	#從哪裡看-Tor-的規劃
-	#技術主線
-	#活躍度快照
-	#目前的重點方向與活躍專案
-	#相關閱讀
-	#看-sponsor-判斷哪些方向會持續做
+/community/tor-project-ecosystem/ -> https://anoni.net/join/tor-project/
 /community/upload-sensitive/ -> https://anoni.net/join/upload-sensitive/
 /community/vault-lab/
 	#一把鑰匙服務兩件事
@@ -3126,17 +3116,7 @@
 	#Tails-skills
 	#Tor-skills
 /en/community/tools/ -> https://anoni.net/en/services/
-/en/community/tor-project-ecosystem/
-	#An-activity-snapshot
-	#Current-directions-and-active-projects
-	#How-to-start
-	#Official-channels
-	#Reading-the-sponsors-to-see-what-will-continue
-	#Related
-	#The-Tor-Project-Ecosystem-and-How-to-Connect-to-It
-	#The-technical-threads
-	#Where-the-plans-are
-	#Where-this-communitys-work-connects
+/en/community/tor-project-ecosystem/ -> https://anoni.net/en/join/tor-project/
 /en/community/upload-sensitive/ -> https://anoni.net/en/join/upload-sensitive/
 /en/community/visual-guide/
 	#Colours-used-only-on-the-docs-site
@@ -7697,17 +7677,7 @@
 	#自我技能评估表
 	#评估完之后
 /zh-cn/community/tools/ -> https://anoni.net/zh-cn/services/
-/zh-cn/community/tor-project-ecosystem/
-	#Tor-Project-生态与对接
-	#从哪里看-Tor-的规划
-	#匿名网络社区的对接脉络
-	#如何开始对接
-	#官方沟通渠道
-	#技术主线
-	#活跃度快照
-	#目前的重点方向与活跃项目
-	#相关阅读
-	#看-sponsor-判断哪些方向会持续做
+/zh-cn/community/tor-project-ecosystem/ -> https://anoni.net/zh-cn/join/tor-project/
 /zh-cn/community/upload-sensitive/ -> https://anoni.net/zh-cn/join/upload-sensitive/
 /zh-cn/community/visual-guide/
 	#eyebrow-用-mutedalt-是唯一的权威文字
