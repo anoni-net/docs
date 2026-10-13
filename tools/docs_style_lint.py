@@ -197,6 +197,21 @@ REGIONAL_RULES = [
      "「志願者」是中國慣用詞，臺灣用「志工」", False),
 ]
 
+# 只掃簡體版的用詞。REGIONAL_RULES 是「正體版不要用中國慣用詞」，這一組反過來，
+# 是簡體版要用簡體讀者慣用的說法。
+#
+# 「社群」在簡體讀者看來比較像聊天群組，指 community 時簡體慣用「社区」（开源社区、
+# Tor 社区），指社交平台時用「社交」（社交媒体、社交平台、社交分享卡）。2026-10-13
+# 兩站的簡體版統一改成「社区」之前，社群與社区混用，各約 3 比 1。
+#
+# 小標後面的 { #… } 不掃。改字時為了不讓外部連結失效，舊錨點用這個寫法留下來，
+# 錨點裡的「社群」是刻意保留的。
+ATTR_ANCHOR_RE = re.compile(r"\{[^}]*#[^}]*\}")
+SIMPLIFIED_RULES = [
+    ("simplified-term-community", re.compile(r"社群"), None,
+     "簡體版指 community 用「社区」，指社交平台用「社交」（社交媒体、社交平台）"),
+]
+
 # 掃過一遍全站之後刻意沒有收進來的詞，記在這裡免得有人以為是漏掉的：
 #
 #   數據、崩潰、優化   臺灣完全通用，「資料」「當機」「最佳化」只是另一種說法
@@ -631,6 +646,12 @@ def lint_line(i: int, raw: str, clean: str, english: bool, simplified: bool):
         if simplified and not both_scripts:
             continue
         scan_terms(code, rx, allow, msg)
+    if simplified:
+        no_anchor = ATTR_ANCHOR_RE.sub("", clean)
+        for code, rx, allow, msg in SIMPLIFIED_RULES:
+            for m in rx.finditer(no_anchor):
+                findings.append((i, WARN, code, msg,
+                                 no_anchor[max(0, m.start() - 6): m.start() + 6].strip()))
 
     return findings
 

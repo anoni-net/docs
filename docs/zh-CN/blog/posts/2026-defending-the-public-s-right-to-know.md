@@ -47,7 +47,7 @@ OONI 的观测数据是[全球最大的网络审查开放数据集](https://expl
 
 2025 年新增的「[新闻媒体封锁](https://explorer.ooni.org/news-media){target="_blank"}」页面就是一个例子，读者不必翻数十亿笔原始测量，就能直接看到这些发现。包括埃及封锁独立媒体 [Zawia3](https://explorer.ooni.org/findings/99431807200){target="_blank"}、约旦封锁 [12 个新闻媒体网站](https://explorer.ooni.org/findings/101531332700){target="_blank"}、印度在与巴基斯坦军事冲突期间封锁 [The Wire](https://explorer.ooni.org/findings/667455800){target="_blank"}。
 
-[网络审查事件通常发生的时间点](https://ooni.org/reports/){target="_blank"}，往往是选举、抗议、武装冲突、全国性大考、政局动荡期间，正是民众最需要取得信息的时候。在这些关键时刻，受影响的社群可以从 OONI 观测数据取得共同的事实基础，后续才有机会究责。
+[网络审查事件通常发生的时间点](https://ooni.org/reports/){target="_blank"}，往往是选举、抗议、武装冲突、全国性大考、政局动荡期间，正是民众最需要取得信息的时候。在这些关键时刻，受影响的社区可以从 OONI 观测数据取得共同的事实基础，后续才有机会究责。
 
 ## 新闻工作者与媒体组织如何运用 OONI
 
@@ -62,7 +62,7 @@ OONI 的观测数据是[全球最大的网络审查开放数据集](https://expl
 
 2025 年，俄罗斯流亡媒体中相当知名的 [Meduza](https://meduza.io/en){target="_blank"} [发表了一篇文章介绍 OONI 工具](https://meduza.io/cards/tsenzury-v-runete-vse-bolshe-kak-mozhno-otslezhivat-blokirovki){target="_blank"}，邀请读者实际试用。从 Meduza 这个案例可以看到，新闻编辑室除了用网络审查测量来写报道，也可以把它当作公共教育的一环，让读者理解网络干扰是如何运作的、可以如何被记录下来、自己又能如何贡献到这份证据基础里。
 
-新闻网站被封锁，影响从来不只是技术层面，代表的是大众失去取得报道的管道、社群失去即时信息、记者失去他们的读者。只有当这件事被记录成可以被引用、可以被分析的数据，后续行动才有立足点。
+新闻网站被封锁，影响从来不只是技术层面，代表的是大众失去取得报道的管道、社区失去即时信息、记者失去他们的读者。只有当这件事被记录成可以被引用、可以被分析的数据，后续行动才有立足点。
 
 最具体的串接案例发生在肯尼亚。OONI 观测数据被当作证据，用在一场挑战「非法切断网络连线」的公益诉讼。[这场诉讼由一个联盟提出](https://blog.bake.co.ke/2025/05/14/bake-6-other-organizations-challenge-internet-shutdowns-in-kenya-in-landmark-public-interest-case/){target="_blank"}，成员包括 BAKE、ICJ Kenya、Paradigm Initiative、肯尼亚记者工会（Kenya Union of Journalists）、Katiba Institute、肯尼亚律师协会（Law Society of Kenya）和 CIPESA。为了支持这份提交给肯尼亚高等法院（High Court of Kenya）的声请，OONI 以专家意见的形式产出了一份[详细的研究报告](https://blog.bake.co.ke/wp-content/uploads/2025/05/HCCHRPET.276.2025-ICJ-v-CA-Internet-Shutdown-Case.pdf){target="_blank"}，记录 Telegram 在肯尼亚 2023 与 2024 年 KCSE 全国性大考（肯尼亚的中学毕业会考，当局以防堵考题外泄为由，在考试期间限制社交与通讯软件）期间被封锁的情形。
 
@@ -80,7 +80,7 @@ OONI 在肯尼亚、坦桑尼亚、约旦、印度、埃及的故事，地理位
 
 ### 华语六地区的 OONI 观测覆盖现况
 
-中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在执行 OONI 的网络。其中，台湾的匿名网络社群长期维护一份 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
+中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在执行 OONI 的网络。其中，台湾的匿名网络社区长期维护一份 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
 
 OONI 全球数据集再庞大，每个地区仍然要靠在地使用者持续[运行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能补上盲点。哪个 ASN 没人在执行 OONI，未来如果在那条路径上发生封锁或中断，就缺少能引用的证据。
 
@@ -92,14 +92,14 @@ OONI 全球数据集再庞大，每个地区仍然要靠在地使用者持续[�
 
 ### 把家用网络、移动网络接进这份公共纪录
 
-OONI Probe 桌面版与移动版都能在家用网络、移动网络、公共 Wi-Fi 上运行，每换一个连线环境就能多留下一笔纪录。对社群与民间组织来说，可以把它放进既有的工作节奏，例如在不同据点、活动现场、成员的移动网络上轮流测量，让覆盖从少数几家网络扩散到更多日常情境。这跟前面提到的盲点是同一件事的两面，一边是看出哪里还没被测到，一边是把那些网络一笔一笔补上来。
+OONI Probe 桌面版与移动版都能在家用网络、移动网络、公共 Wi-Fi 上运行，每换一个连线环境就能多留下一笔纪录。对社区与民间组织来说，可以把它放进既有的工作节奏，例如在不同据点、活动现场、成员的移动网络上轮流测量，让覆盖从少数几家网络扩散到更多日常情境。这跟前面提到的盲点是同一件事的两面，一边是看出哪里还没被测到，一边是把那些网络一笔一笔补上来。
 
 ## 你可以做的事
 
 不论你是想补观测、做研究，还是要把数据用在报道或倡议，都有可以着手的起点。
 
 - **一般读者**：[安装 OONI Probe](https://ooni.org/install/){target="_blank"} 执行一轮，让你这条网络出现在公共纪录里（运行前可先看 OONI 对[潜在风险的说明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想纳入定期测量的网站，可以到 OONI 的[测试列表编辑器](https://test-lists.ooni.org/login){target="_blank"}提交，之后全球的 OONI Probe 就会把它排进测试。
-- **研究者与技术社群**：参考 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md) 上的盲点分布做法，再评估自己这条网络或实验环境可以补上哪些测量，并把数据整理成可重复比对的图表。
+- **研究者与技术社区**：参考 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md) 上的盲点分布做法，再评估自己这条网络或实验环境可以补上哪些测量，并把数据整理成可重复比对的图表。
 - **记者、媒体编辑、人权律师**：下次处理中国大陆、香港、缅甸等地封锁事件的报道时，[OONI Explorer](https://explorer.ooni.org/){target="_blank"} 上的测量截图、调查发现（findings）短篇报告、长篇研究报告都可以引用做公开佐证。要走到公益诉讼层级的案件，肯尼亚案示范了向 OONI 申请专家意见报告的流程。
 
 ## 相关阅读

@@ -87,7 +87,7 @@ digest:
 
 !!! info "OONI Probe 6.0.1、6.0.0 与 5.3.0"
 
-    OONI Probe 6.0.1、6.0.0、5.3.0 等版本的发布条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/ooni/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。下方保留早期的策展条目。
+    OONI Probe 6.0.1、6.0.0、5.3.0 等版本的发布条目目前仅在 [正体中文版](https://anoni.net/docs/changelog/ooni/){target="_blank"} 提供，简体中文版会随社区翻译滚动补上。下方保留早期的策展条目。
 
 ## OONI Probe CLI v3.29.1
 
@@ -99,7 +99,7 @@ digest:
 
 > 2026-04-11 · [GitHub 发布页](https://github.com/ooni/probe-multiplatform/releases/v6.0.1){target="_blank"} · [完整翻译文章](../blog/posts/2026-ooni-probe-desktop-beta.md)
 
-- 推出全新跨平台 OONI Probe Desktop 与仪表板，邀请社群下载内测版回报问题与建议。
+- 推出全新跨平台 OONI Probe Desktop 与仪表板，邀请社区下载内测版回报问题与建议。
 
 ## OONI Probe CLI v3.29.0
 

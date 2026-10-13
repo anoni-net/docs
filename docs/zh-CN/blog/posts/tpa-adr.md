@@ -20,7 +20,7 @@ description: "TPA 从 RFC 改为 ADR 的缘由与做法，以及为何「先决�
 
     - [Keeping track of decisions using the ADR model, by anarcat | February 16, 2026](https://blog.torproject.org/tpa-adr/){target="_blank"}
 
-    文末另有一节「**台湾项目与社群的现状**」，整理台湾在地脉络与为什么值得引进 ADR，欢迎直接跳读。
+    文末另有一节「**台湾项目与社区的现状**」，整理台湾在地脉络与为什么值得引进 ADR，欢迎直接跳读。
 
 ![Tor](./assets/images/tor.webp)
 
@@ -127,9 +127,9 @@ description: "TPA 从 RFC 改为 ADR 的缘由与做法，以及为何「先决�
     
     - **GitLab**：部分子项目（例如 GitLab Chart）逐步把架构文件改写成 ADR 格式，属于「既有文件 ADR 化」的实践。
     
-    - **ADR 社群、MADR**：[adr.github.io](https://adr.github.io/){target="_blank"} 提供 MADR（Markdown Architectural Decision Records）模板与工具，许多项目采用，通用且轻量。
+    - **ADR 社区、MADR**：[adr.github.io](https://adr.github.io/){target="_blank"} 提供 MADR（Markdown Architectural Decision Records）模板与工具，许多项目采用，通用且轻量。
     
-    - **Rust**：通过 [rust-lang/rfcs](https://github.com/rust-lang/rfcs){target="_blank"} 的 **RFC** 流程，编号提案、社群讨论、最终决策记录，推动语言与标准库变更。
+    - **Rust**：通过 [rust-lang/rfcs](https://github.com/rust-lang/rfcs){target="_blank"} 的 **RFC** 流程，编号提案、社区讨论、最终决策记录，推动语言与标准库变更。
     
     - **Python**：使用 **PEP**（Python Enhancement Proposal）作为语言与标准库变更的正式提案与编号制度。
     
@@ -137,11 +137,11 @@ description: "TPA 从 RFC 改为 ADR 的缘由与做法，以及为何「先决�
     
     整体来说：有的项目「RFC 讨论 + ADR 记录」并行（如 GOV.UK），有的以 ADR 为主（如 Bitwarden、TPA），大型生态则常用编号提案（RFC、PEP、KEP）。Tor TPA 的特别之处在于明确「先决定谁做决定」、以及把「决策记录」与「对外沟通」分开处理。
 
-!!! info "台湾项目与社群的现状"
+!!! info "台湾项目与社区的现状"
 
-    在台湾，多数项目或社群已经有「提案、讨论、共识」的流程，只是**不一定用 ADR 这个名字**，也较少把决策文件以 `adr/` 目录或 MADR 模板的形式公开出来。
+    在台湾，多数项目或社区已经有「提案、讨论、共识」的流程，只是**不一定用 ADR 这个名字**，也较少把决策文件以 `adr/` 目录或 MADR 模板的形式公开出来。
     
-    - **公民科技与社群（例如 g0v 生态）**：  
+    - **公民科技与社区（例如 g0v 生态）**：  
       常见作法是「提案文件、[HackMD 协作文档](https://g0v.hackmd.io/@jothon/intro){target="_blank"}、黑客松或线上会议讨论」（可参考 [g0v 开源协作手册](https://g0v.hackmd.io/@jothon/g0v-cowork-guideline/){target="_blank"}），项目讨论与决策多散落在协作文档、issue 或大松提案中，架构层级的关键决策往往分散在 issue、PR、简报或协作文档里，过一段时间就不容易追溯「当初为什么这样决定」。
     
     - **政府与公共部门合作案**：  
@@ -150,7 +150,7 @@ description: "TPA 从 RFC 改为 ADR 的缘由与做法，以及为何「先决�
     - **企业开源项目（台湾团队）**：  
       某些团队在公司内部有用「决策记录」或「设计文件」的方式管理架构变更，但经常只在内部运维知识库中存在，开源出去的只有代码本身，看不到决策历史。
     
-    目前的状况，台湾社群不是没有决策的流程，主要是少一种「稳定、好追溯、又对外面友善」的记录方式。这也是为什么 Tor TPA 用的 ADR 模型，或许也可能适合台湾的项目参考：
+    目前的状况，台湾社区不是没有决策的流程，主要是少一种「稳定、好追溯、又对外面友善」的记录方式。这也是为什么 Tor TPA 用的 ADR 模型，或许也可能适合台湾的项目参考：
 
     - 每个重要决定都可以写成一份小文件，把「为什么要这样决定」记清楚。
     - 不用大家硬写一大本规格书，又比只丢在 issue 里容易长久维护。

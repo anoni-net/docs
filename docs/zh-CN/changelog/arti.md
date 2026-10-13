@@ -13,7 +13,7 @@ Arti 是 [Tor Project](../tools/what-is-tor.md) 以 Rust 开发的新一代 Tor 
 
 ## c-tor 移植到 Rust 的进度
 
-Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor（社群惯称 c-tor）整套以 Rust 重写，换取更好的内存安全、模块化架构与可嵌入性。开发顺序先把客户端补到足以取代 c-tor，再往中继端推进。下表依据官方 [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"} 与 release notes 整理，状态以实际发布的功能为准。
+Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor（社区惯称 c-tor）整套以 Rust 重写，换取更好的内存安全、模块化架构与可嵌入性。开发顺序先把客户端补到足以取代 c-tor，再往中继端推进。下表依据官方 [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"} 与 release notes 整理，状态以实际发布的功能为准。
 
 | 功能领域 | 进度 | 完成 / 进行的版本 |
 |---|---|---|
@@ -124,4 +124,4 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 
 !!! info "更早的 Arti 版本"
 
-    Arti 2.3.0 的完整摘要目前仅在 [正体中文版](https://anoni.net/docs/changelog/arti/){target="_blank"} 提供，简体中文版会随社群翻译滚动补上。
+    Arti 2.3.0 的完整摘要目前仅在 [正体中文版](https://anoni.net/docs/changelog/arti/){target="_blank"} 提供，简体中文版会随社区翻译滚动补上。

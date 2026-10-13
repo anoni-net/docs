@@ -31,9 +31,9 @@ icon: material/account-multiple-outline
 
 | 处境 | 建议层数 | 分法 |
 |---|---|---|
-| 一般读者 | 2 | 本名层（工作、家人、银行）加上一个不挂本名的日常层（论坛、购物、兴趣社群） |
+| 一般读者 | 2 | 本名层（工作、家人、银行）加上一个不挂本名的日常层（论坛、购物、兴趣社区） |
 | 出差与研讨会 | 2 到 3 | 本名层、商务联络层，敏感议题的活动再加一个活动专用层 |
-| LGBTQ+ 与性少数 | 2 到 3 | 日常层、社群层，探索期再加一个生命周期短的探索层 |
+| LGBTQ+ 与性少数 | 2 到 3 | 日常层、社区层，探索期再加一个生命周期短的探索层 |
 | 记者 | 3 | 本名层（署名发稿）、采访联络层、跟高风险来源往返的一次性层 |
 | 社运参与者 | 2 到 3 | 本名层、动员层，被告知特定风险时再加一个只在行动期间存在的层 |
 | 家暴幸存者 | 2 | 加害者已知的旧层（先维持看起来如常）、加害者完全不知道的新层 |
@@ -64,7 +64,7 @@ icon: material/account-multiple-outline
 注册与经营阶段，最容易留下的是平台侧的串连点。你看不到它，平台看得到：
 
 - **注册用同一支手机号或 email**：IG、Twitter/X、TikTok 都会做「你可能认识的人」推荐，注册时用过的手机或 email 会被反向匹配
-- **汇入通讯录**：app 第一次启动的「找朋友」功能会上传整份通讯录，等于把你所有联络人的电话送到后端，新身分立刻被放进旧的社交圈。平台侧怎么用这些数据做反向匹配，见 [社群平台怎么收集你的数据](./platform-tracking.md)
+- **汇入通讯录**：app 第一次启动的「找朋友」功能会上传整份通讯录，等于把你所有联络人的电话送到后端，新身分立刻被放进旧的社交圈。平台侧怎么用这些数据做反向匹配，见 [社交平台怎么收集你的数据](./platform-tracking.md)
 - **互相关注或常互动**：两个账号互按爱心或留言，平台侧数据一比就连起来
 
 实务做法：
@@ -81,7 +81,7 @@ icon: material/account-multiple-outline
 
 ### 头像反查
 
-Google 图片搜索、Yandex、TinEye 都能用一张照片找出网络上其他出现过的位置。PimEyes 这类脸孔搜索服务更进一步，能用一张脸找出公开网页上同一张脸出现的地方（PimEyes 官方说明搜索范围限公开网页，不涵盖社群与影片平台，但配合头像反查与 username 仍可能串到账号）。
+Google 图片搜索、Yandex、TinEye 都能用一张照片找出网络上其他出现过的位置。PimEyes 这类脸孔搜索服务更进一步，能用一张脸找出公开网页上同一张脸出现的地方（PimEyes 官方说明搜索范围限公开网页，不涵盖社区与影片平台，但配合头像反查与 username 仍可能串到账号）。
 
 对策：
 
@@ -128,13 +128,13 @@ Google 图片搜索、Yandex、TinEye 都能用一张照片找出网络上其他
 
 同一个浏览器 profile 开了两层的网站，cookies 与登录状态就在同一个容器里。平台不需要多聪明的分析，光是同一组 cookie、同一个 session、同一个设备指纹就足以把两个账号放进同一个档案。
 
-- 两层的网站永远不在同一个 profile 开，手机上则靠不同的浏览器 app 分开。社群 app 比浏览器难分，Android 可以用工作设定档或厂商的双开功能，iOS 没有系统级的多使用者，实务上第二台设备往往是唯一干净的答案
+- 两层的网站永远不在同一个 profile 开，手机上则靠不同的浏览器 app 分开。社区 app 比浏览器难分，Android 可以用工作设定档或厂商的双开功能，iOS 没有系统级的多使用者，实务上第二台设备往往是唯一干净的答案
 - 手机的「用 Google 账号登录」、「用 Apple 账号登录」按钮特别危险，一按就把两层绑在同一个身分底下，次要层一律用 email 加密码注册
 - 需要更强的隔离时，[Tor Browser](../tools/tor-browser-advanced.md) 的 New Identity 会清掉当前的所有状态并换一条电路，适合处理一次性层
 
 ### 金流是最黏的那条线
 
-同一张信用卡、同一个银行账户、同一个电子钱包，会把两层直接绑死，而且金流记录的保存期限通常比社群平台长很多。次要层要付费时（网域、VPS、订阅制服务、平台会员），可用的做法与各自的取舍见 [为什么匿名支付重要](./payments-anonymity.md)，实体场景的现金与礼物卡仍然是最成熟的选项。
+同一张信用卡、同一个银行账户、同一个电子钱包，会把两层直接绑死，而且金流记录的保存期限通常比社交平台长很多。次要层要付费时（网域、VPS、订阅制服务、平台会员），可用的做法与各自的取舍见 [为什么匿名支付重要](./payments-anonymity.md)，实体场景的现金与礼物卡仍然是最成熟的选项。
 
 ### 作息与时区
 
@@ -151,7 +151,7 @@ Google 图片搜索、Yandex、TinEye 都能用一张照片找出网络上其他
 两个账号的追踪者名单如果有大量重叠，平台端与外部观察者都算得出来。你把新身分介绍给同一批朋友，关联就完成了。
 
 - 次要层不主动追踪本名层认识的人，也谨慎接受他们的追踪
-- 同一个小众社群里两层都出现，重叠率会非常高，这种时候只留一层
+- 同一个小众社区里两层都出现，重叠率会非常高，这种时候只留一层
 - 邀请朋友到新身分时，用线下或已加密的渠道说明，不要在平台上发起
 
 ### 每季一次的自我检查
@@ -204,10 +204,10 @@ Google 图片搜索、Yandex、TinEye 都能用一张照片找出网络上其他
 - [匿名、隐私、假名、机密性的差别](./anonymity-vs-privacy.md)：先把匿名与假名的界线画清楚
 - [威胁模型如何建立](./threat-model.md)：决定要几层之前，先回答保护什么、防谁、能付多少成本
 - [Metadata 是什么，为什么重要](./metadata.md)：时间、位置、设备这些外围资讯怎么把两层接起来
-- [社群平台怎么收集你的数据](./platform-tracking.md)：平台侧用哪些讯号把两个账号放进同一个档案
+- [社交平台怎么收集你的数据](./platform-tracking.md)：平台侧用哪些讯号把两个账号放进同一个档案
 - [为什么匿名支付重要](./payments-anonymity.md)：金流是最难切干净的一条线
 - [LGBTQ+ 与性少数的匿名社交](../scenarios/lgbtq.md)：出柜节奏下的分层实例，含交友 app 与家人共用设备的处理
 - [在新加坡与马来西亚的网络发言](../scenarios/singapore-malaysia-speech.md)：实名身份层让分层更难维持的地方
 
-[^raivo]: [PSA: Raivo OTP for iOS was acquired by Mobime a few months ago](https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/){target="_blank"} - gHacks，2023 年 12 月。Privacy Guides 社群同期讨论指出新东家的隐私政策含 Facebook 与 Google AdMob 追踪器并收集 IP 等 log 数据。查证日 2026-08。
+[^raivo]: [PSA: Raivo OTP for iOS was acquired by Mobime a few months ago](https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/){target="_blank"} - gHacks，2023 年 12 月。Privacy Guides 社区同期讨论指出新东家的隐私政策含 Facebook 与 Google AdMob 追踪器并收集 IP 等 log 数据。查证日 2026-08。
 [^justalk]: [Messaging app JusTalk is spilling millions of unencrypted messages](https://techcrunch.com/2022/07/22/justalk-unencrypted/){target="_blank"} - TechCrunch 2022/07 对 JusTalk 假 E2EE 与虚拟门号明文外泄的调查报导

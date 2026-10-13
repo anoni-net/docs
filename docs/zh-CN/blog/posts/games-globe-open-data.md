@@ -83,7 +83,7 @@ Access Now 的断网事件则相反，每一笔都经过人工查证，成因清
 
 台湾的[海缆动态地图](https://smc.peering.tw/)的做法值得记下来，也是许可不明朗时最务实的选择：源代码采 MIT 开源，但几何数据放在另一个 repo，对外是 404。主 repo 的 README 直接写「You can leave the folder empty」。
 
-那颗地球仪上的海缆最后取自 OpenStreetMap 贡献者标注的路径，`228` 段。覆盖以欧洲、地中海与大西洋较完整，太平洋中段几乎是空的。翻出 OSM 社群 [2011 年的讨论串](https://lists.openstreetmap.org/pipermail/talk/2011-October/060415.html)，当年有人提议把 TeleGeography 的数据并进 OSM，社群成员的判断是那份许可禁止商业使用与改作，跟 ODbL 不兼容，那则提议没有下文。十五年过去，太平洋还是空的。
+那颗地球仪上的海缆最后取自 OpenStreetMap 贡献者标注的路径，`228` 段。覆盖以欧洲、地中海与大西洋较完整，太平洋中段几乎是空的。翻出 OSM 社区 [2011 年的讨论串](https://lists.openstreetmap.org/pipermail/talk/2011-October/060415.html)，当年有人提议把 TeleGeography 的数据并进 OSM，社区成员的判断是那份许可禁止商业使用与改作，跟 ODbL 不兼容，那则提议没有下文。十五年过去，太平洋还是空的。
 
 ### 网络基础建设
 
@@ -111,7 +111,7 @@ Freedom House 的 Freedom on the Net 与无国界记者的新闻自由指数，�
 
 我们的架构也不容许「应该没问题」的侥幸。文档站是静态网站，数据文件会直接发出去，而且会推上 IPFS。内容定址意味着发出去就收不回来，镜像可能长期存在。
 
-反过来看，地球仪能做出来，很大程度是因为 Tor Project 把 Onionoo 与 Tor Metrics 都放成 CC0，Natural Earth 放成公有领域。当年那可能只是一行设定，却让十几年后一个不相干的社群能够直接拿去用，不必写信谈许可，也不必担心哪天被要求下架。
+反过来看，地球仪能做出来，很大程度是因为 Tor Project 把 Onionoo 与 Tor Metrics 都放成 CC0，Natural Earth 放成公有领域。当年那可能只是一行设定，却让十几年后一个不相干的社区能够直接拿去用，不必写信谈许可，也不必担心哪天被要求下架。
 
 有一个技术细节值得另外记下来。OONI 那份是 CC BY-NC-SA 4.0，其中的相同方式分享（ShareAlike）跟网站的 CC BY 4.0 互不兼容。处理方式是让 `ooni.json` 保持独立的一份，不把它的内容并进其他数据文件，画面上也只跟其他来源并列，让整体属于 CC 定义的「集合」，相同方式分享的范围停在那一份文件身上。前提已经写进 `NOTICE`，否则哪天有人把 OONI 的字段并进中继快照，整份衍生物就落入相同方式分享了。
 
@@ -123,4 +123,4 @@ Freedom House 的 Freedom on the Net 与无国界记者的新闻自由指数，�
 
 三件作品都以 three.js 在浏览器中运行，免安装，支持正体中文、简体中文与英文。源代码在 [anoni-net/docs](https://github.com/anoni-net/docs) 的 `docs/zh-TW/games/` 底下，没有构建流程，改完保存刷新就看得到。
 
-有想法或想一起做，欢迎到[社群](https://anoni.net/zh-cn/join/){target="_blank"}找我们。
+有想法或想一起做，欢迎到[社区](https://anoni.net/zh-cn/join/){target="_blank"}找我们。

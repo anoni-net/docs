@@ -234,7 +234,7 @@ App 很多的话，现场只处理标着「始终」或「始终允许」的那�
 
     广告不会因此变少，只是不再依你的数据挑选。
 
-平台自己在 App 内记录的行为、用 email 与手机号码做的比对，这一步挡不掉，机制见 [社群平台怎么收集你的数据](../basics/platform-tracking.md)。
+平台自己在 App 内记录的行为、用 email 与手机号码做的比对，这一步挡不掉，机制见 [社交平台怎么收集你的数据](../basics/platform-tracking.md)。
 
 ### 6. 相机、麦克风与其他权限
 
@@ -344,7 +344,7 @@ App 很多的话，现场先看联系人与麦克风两项，其他回家再看�
     2. Google 账号：搜索「Google」，点管理 Google 账号的按钮 >「安全性与登录」，看两步验证是否已开启
     3. 同一页的「您的设备」，点「管理所有设备」。旧手机、旧平板也会列在这里，确定是不再使用、或完全不认得的设备，才点进去退出登录
 
-两步验证还在用短信收验证码的账号，能换成验证 App 或 passkey 就换，差别见 [什么是 passkey](./what-is-passkey.md) 与 [密码管理器入门](./password-manager.md)。通讯 app 与社群账号的登录中设备一样要看，收在 [我的准备清单](../utils/checklist.md) 的一年一次检查。
+两步验证还在用短信收验证码的账号，能换成验证 App 或 passkey 就换，差别见 [什么是 passkey](./what-is-passkey.md) 与 [密码管理器入门](./password-manager.md)。通讯 app 与社交账号的登录中设备一样要看，收在 [我的准备清单](../utils/checklist.md) 的一年一次检查。
 
 ### 10. 丢失与被盗
 
@@ -419,12 +419,12 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 - Android：Google Pixel 的 Android 16 与 Android 17，依 Google 的 Android 帮助中心、Pixel 帮助中心与 Android 开放源代码项目，2026 年 10 月核对。部分上层菜单的简体中文名称还没有核对到，那几步以描述为主
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支持页，2026 年 10 月核对。简体中文界面的菜单名称没有逐一核对，这个分页以描述与搜索关键词为主
 
-照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社群的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
+照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社区的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
 
 ## 相关阅读
 
 - [一般人平常该做到什么](../scenarios/everyday-baseline.md)：本页各步骤为什么重要，以及第二层、第三层的做法
-- [社群平台怎么收集你的数据](../basics/platform-tracking.md)：广告标识符与权限之外，平台还收集了什么
+- [社交平台怎么收集你的数据](../basics/platform-tracking.md)：广告标识符与权限之外，平台还收集了什么
 - [出国的手机号与网络连接](../scenarios/travel-connectivity.md)：漫游、旅游 eSIM、当地 SIM 卡与酒店网络
 - [我的准备清单](../utils/checklist.md)：把做过的项目勾起来，一年后回来对照
 

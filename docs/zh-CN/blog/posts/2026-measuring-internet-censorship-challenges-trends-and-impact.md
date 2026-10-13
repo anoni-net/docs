@@ -66,7 +66,7 @@ OONI 的[长期数据](https://ooni.org/data){target="_blank"}揭示了几项全
 
 ### 系统性压制的长期封锁
 
-长期封锁会持续数年，目的是在网络上强制执行某种意识形态、政策或法律。相较于针对特定站点或 App 的短期封锁，长期封锁往往限制整个被视为「在法律或社会上不可接受」的内容类别。这类审查经常压抑边缘群体、强化既有体制。例子包括[封锁 LGBTQI 权益相关网站](https://ooni.org/post/2021-no-access-lgbtiq-website-censorship-six-countries/){target="_blank"}、[族群或宗教少数团体相关内容](https://ooni.org/post/iran-internet-censorship/#human-rights-issues){target="_blank"}，以及[生育权相关网站](https://ooni.org/post/2019-blocking-abortion-rights-websites-women-on-waves-web/){target="_blank"}。以坦桑尼亚为例，在多年针对 LGBTQI 社群的打压之后，[针对 LGBTQI 相关内容的大规模封锁](https://ooni.org/post/2024-tanzania-lgbtiq-censorship-and-other-targeted-blocks/){target="_blank"}陆续被观察到。
+长期封锁会持续数年，目的是在网络上强制执行某种意识形态、政策或法律。相较于针对特定站点或 App 的短期封锁，长期封锁往往限制整个被视为「在法律或社会上不可接受」的内容类别。这类审查经常压抑边缘群体、强化既有体制。例子包括[封锁 LGBTQI 权益相关网站](https://ooni.org/post/2021-no-access-lgbtiq-website-censorship-six-countries/){target="_blank"}、[族群或宗教少数团体相关内容](https://ooni.org/post/iran-internet-censorship/#human-rights-issues){target="_blank"}，以及[生育权相关网站](https://ooni.org/post/2019-blocking-abortion-rights-websites-women-on-waves-web/){target="_blank"}。以坦桑尼亚为例，在多年针对 LGBTQI 社区的打压之后，[针对 LGBTQI 相关内容的大规模封锁](https://ooni.org/post/2024-tanzania-lgbtiq-censorship-and-other-targeted-blocks/){target="_blank"}陆续被观察到。
 
 ### 加密化网络中越来越不透明的审查
 
@@ -94,7 +94,7 @@ OONI 的[长期数据](https://ooni.org/data){target="_blank"}揭示了几项全
 
 OONI 数据集的规模也强化了倡议价值。自 2012 年起，已从 245 个国家与地区、30,000 个网络收集到[超过 30 亿笔测量](https://explorer.ooni.org/){target="_blank"}，[OONI 数据](https://ooni.org/data){target="_blank"}是同类型中全球最大的网络审查公开数据集。每个月都有数千万笔新的测量从约 180 个国家收进来，每天则持续以即时方式发布来自世界各地的新测量。
 
-OONI 数据是一份等待被探索的[丰富数据集](https://ooni.org/data){target="_blank"}。它的广度与深度能支持研究，即时发布的特性则能支持倡议与快速响应行动。它也定期被收进 [ISOC 的 Pulse Shutdown 项目](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用来记录全球的社交媒体封锁。你也可以使用这份数据，[加入社群](https://ooni.org/get-involved/){target="_blank"}，一起捍卫自由开放的网络。
+OONI 数据是一份等待被探索的[丰富数据集](https://ooni.org/data){target="_blank"}。它的广度与深度能支持研究，即时发布的特性则能支持倡议与快速响应行动。它也定期被收进 [ISOC 的 Pulse Shutdown 项目](https://pulse.internetsociety.org/en/shutdowns/){target="_blank"}用来记录全球的社交媒体封锁。你也可以使用这份数据，[加入社区](https://ooni.org/get-involved/){target="_blank"}，一起捍卫自由开放的网络。
 
 ## 简体中文使用者地区的观察
 

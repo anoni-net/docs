@@ -57,7 +57,7 @@ IPFS 的内容寻址与 DHT（Distributed Hash Table，分布式哈希表）怎�
 
 Yggdrasil 是一个端对端加密的 IPv6 叠加网络，运作在现有的互联网之上，节点之间用 `tcp://` 或 `tls://` 建立 peering（两个节点互相对接、交换路由与流量的关系）。地址落在 `0200::/7` 这个 IETF 已经废弃的范围，选它是为了避开与既有地址的冲突。节点自己产生一组密钥对，稳定的 IPv6 地址由这把密钥推导出来，不需要中央机构配发[^ygg-about]。这个寻址方式跟 Tor 的 v3 洋葱地址是同一种思路，地址本身带着验证信息。
 
-社群拿它来串接分散各地的私有网络、架设社群内部服务、做 mesh 网络实验，用途偏向连通性。
+社区拿它来串接分散各地的私有网络、架设社区内部服务、做 mesh 网络实验，用途偏向连通性。
 
 匿名性上走的方向不同，FAQ 那一题的回答是「不，提供匿名并非 Yggdrasil 项目的目标。互联网上的直接 peer 看得到你的 IP 地址，并可能用这项信息判断你的位置或身分」，后面还补上一句，同一个局域网内经由 multicast（一台设备同时对局域网上多台设备广播的传送方式）自动建立的 peering，通常会暴露你的设备 MAC 地址[^ygg-faq]。项目同时把自己标为 alpha 阶段的软件。
 
@@ -89,7 +89,7 @@ tunnel 在 I2P 是单向的，outbound 送出去、inbound 收进来，每个参
 
 台湾读者换掉 DNS 设置的常见动机是解析比较快，或者某些域名在运营商的 resolver 上连不到，两个动机都合理，但换 resolver 只对 DNS 层的封锁有用，如果封锁发生在 IP 或 SNI 那一层，换谁回答你都连不上。
 
-换掉之后会一并失去哪些既有的 DNS 层防护、执行 OONI Probe 时设备该如何设置，都写在 [加密 DNS 怎么选、怎么确认真的生效](../tools/encrypted-dns.md)。社群长期在整理的 [台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md) 就靠这些测量。
+换掉之后会一并失去哪些既有的 DNS 层防护、执行 OONI Probe 时设备该如何设置，都写在 [加密 DNS 怎么选、怎么确认真的生效](../tools/encrypted-dns.md)。社区长期在整理的 [台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md) 就靠这些测量。
 
 ## 回到威胁模型，表上那几栏各自对应什么提问
 
@@ -126,7 +126,7 @@ tunnel 在 I2P 是单向的，outbound 送出去、inbound 收进来，每个参
 
 - [:material-incognito-circle: 匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)
 - [:material-file-tree: Metadata 是什么，为什么重要](../basics/metadata.md)
-- [:material-radar: 社群平台怎么收集你的数据](../basics/platform-tracking.md)
+- [:material-radar: 社交平台怎么收集你的数据](../basics/platform-tracking.md)
 - [:material-vpn: VPN 的风险与选择](../tools/vpn-guide.md)
 
 </div>

@@ -32,7 +32,7 @@ icon: material/newspaper-variant-outline
 
 - **SecureDrop**：[Freedom of the Press Foundation](https://freedom.press/){target="_blank"} 维运的开源系统，记者透过 Tor 隐藏服务（只能用 Tor 连到的网站，连线双方互相看不到对方位置）收件，大幅减少记者与消息来源之间的通讯轨迹。注意它不会自动清掉文件本身的 metadata（EXIF、作者栏位），那仍要消息来源上传前自清、或记者收到后处理。需要技术部署与长期维运，通常是国际大型媒体（纽约时报、卫报、Intercept）才架得起来。个人记者用下面的 Signal 或 anoni.net Send 就够，不必为了 SecureDrop 焦虑
 - **Signal 号码**：个人记者最常见的入口，但要注意 Signal 仍绑手机号码，第一次接触前对方可能不想暴露号码
-- **Tor 上的隐蔽收件箱**：自架的 onion service（Tor 隐藏服务）加简易表单系统（社群可考虑用 [OnionShare](../tools/onionshare.md) 的 Receive 模式架轻量版收件箱）
+- **Tor 上的隐蔽收件箱**：自架的 onion service（Tor 隐藏服务）加简易表单系统（社区可考虑用 [OnionShare](../tools/onionshare.md) 的 Receive 模式架轻量版收件箱）
 - **PGP 公钥**：传统的加密邮件方式，安全但设定门槛高，多数消息来源不会用，现在较少当第一线入口
 - **邮件别名**：门槛最低的入口，公开一个转发别名，对方用任何信箱都寄得进来。防护力也最低，转发商看得到对方的原始发件地址与来源 IP，所有别名又指向你同一个信箱，敏感度一升高就要引导对方换到上面几种，取舍见 [邮件别名怎么用，以及它把信任交给谁](../tools/email-alias.md)
 
@@ -184,7 +184,7 @@ icon: material/newspaper-variant-outline
 
 - **VeraCrypt**：跨平台加密容器，把敏感文件放进去再卸载
 - **macOS FileVault + 加密 dmg**：建立随需挂载的加密磁盘映像
-- **Cryptpad Drive**：上传到社群的 Cryptpad 加密储存（注意 Cryptpad 的加密是客户端的，server 看不到内容）
+- **Cryptpad Drive**：上传到社区的 Cryptpad 加密储存（注意 Cryptpad 的加密是客户端的，server 看不到内容）
 - **Tails 持久卷宗**：在 Tails 系统里直接处理，把暂时性文件放到加密的 persistence storage
 
 ### 传递媒介
@@ -317,7 +317,7 @@ icon: material/newspaper-variant-outline
 
 ### 定期看自己的名字被拿去做什么
 
-- 每季用自己的姓名、惯用 ID 与服务的媒体名称搜索一次，包含各社群平台的账号搜索
+- 每季用自己的姓名、惯用 ID 与服务的媒体名称搜索一次，包含各社交平台的账号搜索
 - 发现被复制的账号时，先通知常用联络人，再向平台举报。举报之前把截图与网址留下来
 - 被冒充影响到的是你的联络人，通知他们的优先顺序高于平台处理的速度
 
@@ -393,7 +393,7 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 报导刊出、记者离境之后，境内的人才开始面对后果。
 
 - 刊出前把后续联系方式与停联期约定好，刊出后不要主动联系
-- 不要在社群媒体上感谢境内协助者，也不要提行程细节
+- 不要在社交媒体上感谢境内协助者，也不要提行程细节
 - 对方主动联系时，先确认是不是本人在操作
 - 评估对方是否需要暂时离开，判断交给有在地经验的组织，不要自己下结论
 
@@ -424,5 +424,5 @@ fixer、翻译、司机、帮忙介绍受访者的朋友，法律风险不比受
 - [用 AI 工作时怎么避免数据外泄](../tools/ai-privacy.md)：逐字稿、翻译、摘要都可能把来源的原话送给第三方，贴进去之前要先判断
 - [匿名通讯工具比较](../tools/messaging-comparison.md)：Signal、SimpleX、Briar 在不同场景的取舍
 - [出差与研讨会的数字准备](./asia-travel.md)：前往中国大陆或东南亚采访前的逐地审查、SIM 实名与入境查机现况
-- [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}：anoni.net 提供给公益用途的协作工具入口
+- [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}：anoni.net 提供给公益用途的协作工具入口
 - [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：监控章节把台湾的政治人物与媒体列成监控类目，另有一个案例以维吾尔流亡记者为压制对象，每一段都标了报告页码

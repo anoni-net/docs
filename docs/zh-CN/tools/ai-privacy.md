@@ -185,14 +185,14 @@ DeepSeek、豆包、Kimi、通义等在境内提供的生成式 AI 服务，受�
 
 ## 本页会过期
 
-AI 服务的条款与设定界面变动很快，本页的查证日是 2026 年 8 月。上面描述的机制与提问清单设计成能撑久一点，具体的政策内容请以各家官方页当下的版本为准。发现本页描述与现况不符，欢迎到 [社群 Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 回报。
+AI 服务的条款与设定界面变动很快，本页的查证日是 2026 年 8 月。上面描述的机制与提问清单设计成能撑久一点，具体的政策内容请以各家官方页当下的版本为准。发现本页描述与现况不符，欢迎到 [社区 Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 回报。
 
 ## 接下来
 
 - [出国前数字安全：用 AI 自助生成目的地概况](../scenarios/travel-ai-briefing.md)：把该问的问题打包成 prompt，带回去问你自己信任的 AI
 - [端对端加密如何运作](../advanced/e2ee.md)：为什么「有加密」不代表服务端看不到内容
 - [威胁模型如何建立](../basics/threat-model.md)：先判断对手是谁，再决定要用哪一种 AI 服务
-- [社群平台怎么收集你的数据](../basics/platform-tracking.md)：同一套「这些数据流向谁」的问法，用在社群平台上
+- [社交平台怎么收集你的数据](../basics/platform-tracking.md)：同一套「这些数据流向谁」的问法，用在社交平台上
 - [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：用户数据从第三方模型路由服务外流的实际案例，以及被窃的 API 密钥在犯罪经济里的用途
 
 [^anthropic2026]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日，全文 154 页。本节的页码对应该报告的 PDF 全文。站上另有[逐段的整理](../blog/posts/2026-anthropic-threat-report-taiwan.md)。查证日 2026-09。

@@ -1,12 +1,12 @@
 ---
 title: 文档站的视觉规范
-description: 只在 anoni.net/docs 用到的视觉规格：侧栏的指南分类色、Material 的界面色、示意图的用色与制作方式，以及社群分享卡的版型。给要画示意图或调整文档站样式的贡献者。
+description: 只在 anoni.net/docs 用到的视觉规格：侧栏的指南分类色、Material 的界面色、示意图的用色与制作方式，以及社交分享卡的版型。给要画示意图或调整文档站样式的贡献者。
 icon: material/vector-square
 ---
 
 # :material-vector-square: 文档站的视觉规范
 
-这一页收录只在文档站用到的视觉规格：侧栏的指南分类色、Material 主题的界面色、示意图的用色与制作方式，以及社群分享卡的版型。logo、wordmark 与共用色票属于整个社群，写在 anoni.net 的[品牌素材](https://anoni.net/zh-cn/brand/){target="_blank"}。
+这一页收录只在文档站用到的视觉规格：侧栏的指南分类色、Material 主题的界面色、示意图的用色与制作方式，以及社交分享卡的版型。logo、wordmark 与共用色票属于整个社区，写在 anoni.net 的[品牌素材](https://anoni.net/zh-cn/brand/){target="_blank"}。
 
 <style scoped>
 .color-swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #cdcdcd; border-radius: 3px; vertical-align: middle; margin-right: 8px; }
@@ -102,7 +102,7 @@ Material 默认的 light blue 当主色时，在白底的对比只有 2.71:1，�
 
 框色对页面底色多半在 1.5 到 2.8:1，没有到 WCAG 1.4.11 的 3:1。这一组的判断是框色属于加强，语义由框内的文字承担，所以不强求。真的要靠颜色分辨的图（散点图、条形图）不适用这个判断，那种图的每一个数据点都要标到文字。
 
-## :material-share-variant-outline: 社群分享卡（Open Graph）
+## :material-share-variant-outline: 社交分享卡（Open Graph） { #社群分享卡Open-Graph }
 
 把文件站的任何一页贴到 Mastodon、LinkedIn、X、Bluesky 或聊天室，对方看到的预览图由构建流程自动生成，三个语系各一份，不需要人工做图。
 
@@ -378,7 +378,7 @@ alt 要把图的内容说完整，不要只写「示意图」三个字。语音�
 
 ### 纯 SVG / PNG export 的场合
 
-如果某张图也要做 SNS 卡片、印刷品、外部投影片用（不需要重编能力），再多 Export 一份纯 SVG 或 PNG 即可。**这份 export 不要进 repo**（避免重复），放本机或社群素材库即可。
+如果某张图也要做 SNS 卡片、印刷品、外部投影片用（不需要重编能力），再多 Export 一份纯 SVG 或 PNG 即可。**这份 export 不要进 repo**（避免重复），放本机或社区素材库即可。
 
 ## :material-link-variant: 接下来
 

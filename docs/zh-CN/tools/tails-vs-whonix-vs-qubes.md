@@ -8,7 +8,7 @@ icon: material/compare-horizontal
 
 多数匿名浏览需求，装 [Tor Browser](./what-is-tor.md) 就够用。但有些工作会把整台电脑的安全前提一起拖下水：审阅外来机敏文件、长期维持一个跟你日常身分切开的工作流、要在不信任的硬件上做敏感任务。这时要连操作系统一起切。
 
-社群最常被一起提到的三套匿名操作系统是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它们的设计目标不同，适合的情境也不同。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md)，把「我在抗谁、能投入多少」厘清，比直接挑工具更重要。
+社区最常被一起提到的三套匿名操作系统是 [Tails](https://tails.net/){target="_blank"}、[Whonix](https://www.whonix.org/){target="_blank"}、[Qubes OS](https://www.qubes-os.org/){target="_blank"}。它们的设计目标不同，适合的情境也不同。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md)，把「我在抗谁、能投入多少」厘清，比直接挑工具更重要。
 
 !!! tip "30 秒结论"
 
@@ -132,13 +132,13 @@ Tails、Whonix、Qubes 各自处理这个问题的方向不同。Tails 走抛弃
 - **IT 从业者、安全研究员**：依硬件与时间投入挑 Whonix（低门槛）或 Qubes（高隔离）。需要把 work / personal / banking 严格分开的选 Qubes。
 - **跨平台 macOS 使用者**：Apple Silicon 机型实际可选的只有 Whonix on UTM（仍实验性）。要做严肃的整机隔离工作，多数人会准备一台 Intel PC。
 
-!!! info "anoni.net 是台湾的社群"
+!!! info "anoni.net 是台湾的社区"
 
-    下面这段反映 anoni.net 在台湾的社群实践与硬件取得脉络，其他简中读者可以对照当地情境参考。
+    下面这段反映 anoni.net 在台湾的社区实践与硬件取得脉络，其他简中读者可以对照当地情境参考。
 
     - **取得管道**：Tails、Whonix、Qubes 三套官网在台湾都直连无问题，下载速度可考虑 [Tails 镜像清单](https://tails.net/install/index.en.html){target="_blank"}。Tor Browser 不必桥接就能下载，这层门槛比审查地区低得多。
     - **硬件取得**：台湾常见的 Intel-based ThinkPad（X、T、P 系列）多数在 Qubes HCL 上有兼容纪录。Apple Silicon 在 Tails 与 Qubes 上不可用，买机前一定先查 [HCL 官方页](https://www.qubes-os.org/hcl/){target="_blank"}。Whonix 跨平台灵活，现有笔电多半可执行。
-    - **社群实践**：anoni.net 社群长期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}。Whonix、Qubes 在台湾社群既有经验较少，如果你长期使用任一套，欢迎到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 分享经验。
+    - **社区实践**：anoni.net 社区长期推 Tails 工作坊，2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}。Whonix、Qubes 在台湾社区既有经验较少，如果你长期使用任一套，欢迎到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 分享经验。
 
 ## 常见问题
 

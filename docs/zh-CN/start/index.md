@@ -73,15 +73,15 @@ icon: material/sign-direction
 | 我面对某个风险，要完整的处理流程 | [场景](../scenarios/index.md) |
 | 某个工具的用途、限制与设置 | [工具](../tools/index.md) |
 | 匿名、隐私、metadata 这些词的意思 | [概念](../basics/index.md) |
-| 我想加入社群一起做事 | [社群参与](https://anoni.net/zh-cn/join/){target="_blank"} |
+| 我想加入社区一起做事 | [社区参与](https://anoni.net/zh-cn/join/){target="_blank"} |
 | 现在就需要找到人求助 | [紧急求救](../help/index.md) |
 
 ## 地区差异请自行评估
 
-下面五页的法规段落多数以台湾脉络撰写，社群的直接经验也在台湾。中国大陆、香港、澳门读者阅读时请对照自身处境重新评估，风险层级与可用的求助渠道差距很大。
+下面五页的法规段落多数以台湾脉络撰写，社区的直接经验也在台湾。中国大陆、香港、澳门读者阅读时请对照自身处境重新评估，风险层级与可用的求助渠道差距很大。
 
 在中国大陆的读者，[在中国大陆的公开平台传播信息](../scenarios/mainland-speech.md)写的是实名与网号网证之后的环境，比五个身分入口更贴近你的处境，建议先读那一篇。
 
 ## 找不到你的身分
 
-这五种身分是社群目前接触最多的对象，涵盖不到的处境还很多。到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 说明你的状况，会帮助我们判断下一个入口页要写哪一种。有实务经验想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。
+这五种身分是社区目前接触最多的对象，涵盖不到的处境还很多。到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 说明你的状况，会帮助我们判断下一个入口页要写哪一种。有实务经验想分享，也可以匿名寄到 [whisper@anoni.net](mailto:whisper@anoni.net)。

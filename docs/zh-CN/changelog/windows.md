@@ -10,7 +10,7 @@ digest:
 
 # :material-microsoft-windows: Windows 安全更新
 
-Windows 每月更新的整理。微软固定在每月第二个星期二发布（社群惯称 Patch Tuesday），单月的 CVE 数以千计，2026 年 8 月那一轮写稿时就有 1506 个。
+Windows 每月更新的整理。微软固定在每月第二个星期二发布（社区惯称 Patch Tuesday），单月的 CVE 数以千计，2026 年 8 月那一轮写稿时就有 1506 个。
 
 那个数字涵盖微软整个产品线，跟桌面 Windows 直接相关的只是其中一小部分。8 月的 1506 个里，Windows 本体占 248 个，Azure Linux（Mariner，用在云端与容器）占 698 个，从 Chromium 转载的 Edge 漏洞占 362 个，其余是别的微软产品。看到「单月上千个漏洞」的说法时，要先知道这件事。比例每个月都不一样，2026 年 9 月就反过来，截至 9 月 23 日的 2001 个里有 729 个落在 Windows 本体上。
 

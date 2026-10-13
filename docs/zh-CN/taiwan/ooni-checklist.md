@@ -1,6 +1,6 @@
 ---
 title: OONI 网站检测清单
-description: OONI Probe 在台湾使用的网站检测清单如何维护，以及社群如何协助分类与更新。
+description: OONI Probe 在台湾使用的网站检测清单如何维护，以及社区如何协助分类与更新。
 icon: material/list-status
 ---
 # :material-list-status: OONI 网站检测清单
@@ -18,7 +18,7 @@ icon: material/list-status
 
 OONI Probe 每次检测都依据一份事先列举的网站清单，逐一检查每个网址的连接状况。这份清单由 [Citizen Lab](https://citizenlab.ca/){target="_blank"} 维护的 [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 项目管理，分成本地（local）与全球（global）两种，分别收录各地与全球的热门网址。
 
-全球名单以英文网站为主。本地名单由各地区社群协助搜集，贴近当地脉络、用当地语言呈现。在有互联网审查的国家，本地清单也会收录已被封锁的网站，方便后续观测。
+全球名单以英文网站为主。本地名单由各地区社区协助搜集，贴近当地脉络、用当地语言呈现。在有互联网审查的国家，本地清单也会收录已被封锁的网站，方便后续观测。
 
 名单收录标准粗分为四大主题（实际 CSV 以约 30 个细项分类标记）：
 
@@ -81,7 +81,7 @@ weight = priority / max(msmt_cnt, 0.1)
 
 !!! info "PR #1444"
 
-    社群在 2023/09/28 [提交过一份检测名单修正](https://github.com/citizenlab/test-lists/pull/1444){target="_blank"}，后续持续整理中。
+    社区在 2023/09/28 [提交过一份检测名单修正](https://github.com/citizenlab/test-lists/pull/1444){target="_blank"}，后续持续整理中。
 
 ## 名单新增
 

@@ -1,23 +1,23 @@
 ---
 title: 在新加坡与马来西亚的网络发言
-description: 新加坡与马来西亚的网络言论法规（POFMA、FICA、CMA 第 233 条、煽动法）与实名身份层，以及华语社群与离散社群怎么降低法律风险与被指认的机会。
+description: 新加坡与马来西亚的网络言论法规（POFMA、FICA、CMA 第 233 条、煽动法）与实名身份层，以及华语社区与离散社区怎么降低法律风险与被指认的机会。
 icon: material/comment-alert-outline
 ---
 
 # :material-comment-alert-outline: 在新加坡与马来西亚的网络发言
 
-英文世界的网络言论指引多半以美国或欧洲的法律框架为前提。新加坡与马来西亚各有一套直接管到网络言论的法规，又搭配深度整合的实名身份体系，两种既有框架都对不上。本页写给人在新马两国、或者从当地出去的读者，也写给更广的华语离散社群，适用于在政治、种族、宗教、王室、劳工、LGBTQ 这类敏感话题上发帖、转发或留言，同时想降低法律风险与被指认出身份的机会。
+英文世界的网络言论指引多半以美国或欧洲的法律框架为前提。新加坡与马来西亚各有一套直接管到网络言论的法规，又搭配深度整合的实名身份体系，两种既有框架都对不上。本页写给人在新马两国、或者从当地出去的读者，也写给更广的华语离散社区，适用于在政治、种族、宗教、王室、劳工、LGBTQ 这类敏感话题上发帖、转发或留言，同时想降低法律风险与被指认出身份的机会。
 
 本页是在地脉络的补充，不涵盖完整的操作流程。通用的操作安全在 [威胁模型如何建立](../basics/threat-model.md)、[社运行动者的数字准备](./activist.md) 与 [记者保护消息来源](./journalist.md)，本页补上那几页预设你已经具备的新马层次。
 
 !!! warning "在地伙伴的查核尚未完成"
 
-    我们透过公开资料与离散社群的联系追踪新加坡与马来西亚，没有第一手的在地实务经验，而两地的法规变动很快。以下的描述请当成查找的地图，内容以撰写当时为准，并非法律意见。在有人依赖本页做判断之前，需要新加坡或马来西亚的伙伴确认几项现况：
+    我们透过公开资料与离散社区的联系追踪新加坡与马来西亚，没有第一手的在地实务经验，而两地的法规变动很快。以下的描述请当成查找的地图，内容以撰写当时为准，并非法律意见。在有人依赖本页做判断之前，需要新加坡或马来西亚的伙伴确认几项现况：
 
     - **新加坡**：POFMA 目前的执法姿态（更正通知或刑事起诉）、FICA「政治重要人士」的认定门槛、公共秩序法对线上动员的涵盖范围，以及 SIM 卡实名与 Singpass 的现行细节。
     - **马来西亚**：CMA 第 233 条在 2025 年 2 月修法后的条文与刑度、2026 年 *Heidy Quah* 案的意图判准在实务上如何运作、煽动法目前的执法密度、社团法对「组织」的认定门槛、各州伊斯兰法（Syariah）执法的范围，以及 SIM 卡与 MyDigital ID 的现行要求。
 
-    在这两地从事组织、捐助或数字权利工作，能协助查核或共同撰写的话，欢迎透过 [社群参与](https://anoni.net/zh-cn/join/){target="_blank"} 页面联系我们。
+    在这两地从事组织、捐助或数字权利工作，能协助查核或共同撰写的话，欢迎透过 [社区参与](https://anoni.net/zh-cn/join/){target="_blank"} 页面联系我们。
 
 ## 为什么在地的法规框架是关键
 
@@ -45,7 +45,7 @@ icon: material/comment-alert-outline
 ## 马来西亚的法规环境
 
 - **1998 年通讯与多媒体法（CMA）第 233 条**：对付网络言论最常被使用的条文。2025 年 2 月修法之后，涵盖范围是「猥亵、不雅、不实、具威胁性，或带有烦扰、辱骂、威胁、骚扰意图而**严重**冒犯」的内容，刑度上限也大幅提高，罚金最高 50 万林吉特（RM500,000）或两年以下有期徒刑，涉及未成年人时更高[^cma]。有两个限定要注意。条文管得到转发与留言，不限于原创贴文。另一方面，2026 年联邦法院的判决要求检方证明真正的意图，所以条文写得宽不代表任何贴文都自动构成犯罪[^heidy]。
-- **1948 年煽动法**：殖民时期留下来的法律，至今仍然有效且持续被使用，适用于触及「3R」敏感议题（种族 race、宗教 religion、王室 royalty）的言论。近至 2026 年，社群媒体上谈论王室的贴文仍有起诉与定罪的案例[^sedition]。
+- **1948 年煽动法**：殖民时期留下来的法律，至今仍然有效且持续被使用，适用于触及「3R」敏感议题（种族 race、宗教 religion、王室 royalty）的言论。近至 2026 年，社交媒体上谈论王室的贴文仍有起诉与定罪的案例[^sedition]。
 - **SOSMA（2012 年安全罪行（特别措施）法）**：为安全罪行提供特别程序，包含延长羁押。它落在最重的一端，适用对象是恐怖主义与国安犯罪，日常言论案件用不到，可以当成风险光谱的天花板，一般发帖者很少碰到。
 - **1966 年社团法**：以团体形式进行有协调的组织活动可能需要登记，未登记的社团本身带有暴露面。一次性的 hashtag 不构成社团，有成员、有干部、有持续活动的组织才可能落入其中。言论一旦变成组织行动，回头读 [社运行动者的数字准备](./activist.md)。
 - **各州的宗教执法**：在上述法律之外，各州的伊斯兰宗教机关执行只适用于穆斯林的 Syariah 罪行，例如被认定侮辱伊斯兰的内容。它与煽动法的 3R 范围是两套不同的机制，不要当成互相重叠。
@@ -63,7 +63,7 @@ icon: material/comment-alert-outline
 
 - **匿名在这里的实际上限**：两国都强制 SIM 卡实名，马来西亚现在还绑上 MyDigital ID 的生物特征验证，Singpass 或 MyKad 又是许多服务的基础，要取得一组真正不指向任何人的手机号码与付款管道很困难，握有法律程序的国家行为者往往仍然能还原身份。实际的目标放在区隔与减少连结，完美匿名做不到。发言身份用另一组邮箱、另一个浏览器设定档、另一台装置，不与本名账号有任何接触，两边不交叉发帖也不交叉登录，发言账号不绑主要号码与 Singpass 或 MyKad 相关的服务。风险高又无法真正切断连结时，更大的杠杆常常在说什么、传多远，账号名称反而其次。
 - **选通讯软件要看 metadata，不只看加密**：哪个 app 绑你的手机号码、哪个不绑，在这里比加密本身更关键。见 [匿名通讯工具比较](../tools/messaging-comparison.md)。
-- **预先设想入境时的装置检查**：跨境移动是离散社群常见的暴露点，出发前先把装置整理好。见 [出差与研讨会的数字准备（东亚与东南亚）](./asia-travel.md)。
+- **预先设想入境时的装置检查**：跨境移动是离散社区常见的暴露点，出发前先把装置整理好。见 [出差与研讨会的数字准备（东亚与东南亚）](./asia-travel.md)。
 - **依处境转到对应的场景**：处境与 LGBTQ 有关的话，[LGBTQ+ 与性少数的匿名社交](./lgbtq.md) 有新加坡与马来西亚的细节。要保护消息来源的话，见 [记者保护消息来源](./journalist.md)。
 
 ## 相关阅读
@@ -78,4 +78,4 @@ icon: material/comment-alert-outline
 [^pofma]: 新加坡于 2026 年 3 月首度依 POFMA 就散布不实事实陈述提出刑事指控，2026 年 4 月首度就违抗更正指示提出指控。见 [Singapore: Drop All Criminal Charges Against Government Critic](https://www.hrw.org/news/2026/03/25/singapore-drop-all-criminal-charges-against-government-critic-and-repeal-repressive){target="_blank"} - Human Rights Watch，2026 年 3 月 25 日，以及 [Singapore activist Kokila Annamalai charged under POFMA](https://theonlinecitizen.com/2026/04/23/singapore-activist-kokila-annamalai-charged-under-pofma-over-refusal-to-comply-with-correction-order){target="_blank"} - The Online Citizen，2026 年 4 月 23 日。
 [^cma]: 2025 年通讯与多媒体（修正）法于 2025 年 2 月 11 日生效，把第 233(1)(a) 条的「冒犯」改为「严重冒犯」，刑度提高到罚金最高 50 万林吉特或两年以下有期徒刑。见 [Amendments to the Communications and Multimedia Act 1998 Come into Force on 11 February 2025](https://www.skrine.com/insights/alerts/february-2025/amendments-to-the-communications-and-multimedi-1){target="_blank"} - Skrine。
 [^heidy]: *Government of Malaysia v Heidy Quah Gaik Li*（联邦法院，2026 年 2 月 6 日）维持「冒犯」与「烦扰」用语的合宪性，同时要求证明真实意图，并认定对 Quah 脸书贴文的起诉欠缺正当性。见 [Article 19 的新闻摘要](https://www.article19.org/wp-content/uploads/2026/02/GOVERNMENT-OF-MALAYSIA-v-HEIDY-QUAH-GAIK-LI_Press_Summary.pdf){target="_blank"}。
-[^sedition]: 例如行动者 Chegubard 于 2026 年 6 月因一则涉及森美兰州王室的社群贴文被起诉，2026 年 7 月又因另一则被判罚款。见 [Malay Mail，2026 年 6 月 25 日](https://www.malaymail.com/news/malaysia/2026/06/25/sedition-charge-for-chegubard-over-social-media-post-on-negeri-sembilan-royalty/225132){target="_blank"}。
+[^sedition]: 例如行动者 Chegubard 于 2026 年 6 月因一则涉及森美兰州王室的社交媒体帖文被起诉，2026 年 7 月又因另一则被判罚款。见 [Malay Mail，2026 年 6 月 25 日](https://www.malaymail.com/news/malaysia/2026/06/25/sedition-charge-for-chegubard-over-social-media-post-on-negeri-sembilan-royalty/225132){target="_blank"}。
