@@ -39,7 +39,7 @@ icon: material/routes
 
 ## IPFS 鏡像
 
-內容用指紋（CID）定址，任何節點都能提供同一份內容，沒有單一可以被下架的位置。社群成員可以幫忙留存一份，做法見 [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)。
+內容用指紋（CID）定址，任何節點都能提供同一份內容，沒有單一可以被下架的位置。社群成員可以幫忙留存一份，做法見 [文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}。
 
 要注意的是走 IPFS 讀不會讓連線變匿名。你用的是一般瀏覽器連到一台閘道，那台閘道看得到你的 IP 與你要求的每一個位址，在網路上你看起來就是一個普通的 HTTPS 客戶端。想同時要抗下架與連線匿名，用 Tor Browser 開 Onion 版。
 
@@ -59,7 +59,7 @@ icon: material/routes
 
 - [:material-web-box: 去中心化網站發布](../advanced/dweb-ipfs-onion.md)
 - [:material-incognito: 常被誤認為匿名的網路](../advanced/mistaken-for-anonymity.md)
-- [:simple-ipfs: 幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)
+- [:simple-ipfs: 文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}
 - [:material-download: 離線閱讀](../offline.md)
 
 </div>

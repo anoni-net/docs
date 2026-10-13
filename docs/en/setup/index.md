@@ -10,9 +10,9 @@ Every Tor relay or bridge gives users in censored places one more way into Tor, 
 
 ## Tor nodes and onion services
 
-- [How to set up a Tor relay](../community/setup-tor-relay.md): installing and running a middle relay, with an FAQ on legal risk, home networks and bandwidth.
-- [How to set up a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md): disguising Tor traffic as ordinary HTTPS, from VPS, domain and TLS through nginx and Docker.
-- [Setting up a .onion service](../community/setup-onion-service.md): a v3 onion service set up the way the Tor Project documents it, routed through nginx with subdomains.
+- [Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}: installing and running a middle relay, with an FAQ on legal risk, home networks and bandwidth.
+- [Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}: disguising Tor traffic as ordinary HTTPS, from VPS, domain and TLS through nginx and Docker.
+- [Onion Service Setup Guide](https://anoni.net/en/join/setup-onion-service/){target="_blank"}: a v3 onion service set up the way the Tor Project documents it, routed through nginx with subdomains.
 
 ## Tor relays on campus
 
@@ -24,4 +24,4 @@ Running a relay at a university takes more time talking to the IT centre and leg
 
 ## Mirroring the docs site
 
-- [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): one always-on IPFS node and a scheduled script that keep another copy of the docs site.
+- [Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}: one always-on IPFS node and a scheduled script that keep another copy of the docs site.

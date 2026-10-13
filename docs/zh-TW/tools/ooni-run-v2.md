@@ -204,6 +204,6 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 - [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
 - [:material-table-search: OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
 - [:material-code-json: OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}
 
 </div>

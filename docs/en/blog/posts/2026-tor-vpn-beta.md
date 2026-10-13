@@ -131,7 +131,7 @@ Freedom House's Freedom on the Net 2025 covers 1 June 2024 to 31 May 2025[^fotn]
 
 ## What this means for Tor VPN Beta
 
-Bridges are the feature that matters in this region, and the design decision to require a Tor connection before exit selection is the right one for the place where it counts. For anyone introducing the app in China, bridge configuration is the first thing to teach and exit selection is a distraction. Our own guides on [Snowflake bridges](../../tools/tor-snowflake.md) and [running a WebTunnel bridge](../../community/setup-tor-webtunnel.md) cover the mechanics.
+Bridges are the feature that matters in this region, and the design decision to require a Tor connection before exit selection is the right one for the place where it counts. For anyone introducing the app in China, bridge configuration is the first thing to teach and exit selection is a distraction. Our own guides on [Snowflake bridges](../../tools/tor-snowflake.md) and [running a WebTunnel bridge](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"} cover the mechanics.
 
 Install channels are not a side note either. Google Play is unavailable in China, so the F-Droid listing and the direct APK download are what make the app reachable at all — with the caveat that the download hosts themselves may be unreachable, which makes fetching and verifying the package in advance the practical approach.
 

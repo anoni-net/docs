@@ -39,7 +39,7 @@ Which app to use on a phone, how to install it, and why iOS has no official Tor 
 
 ## IPFS mirror
 
-Content is addressed by fingerprint (CID), so any node can serve the same copy and there is no single location to take down. Community members can help keep a copy alive, described in [pin the IPFS mirror](../community/pin-ipfs-mirror.md).
+Content is addressed by fingerprint (CID), so any node can serve the same copy and there is no single location to take down. Community members can help keep a copy alive, described in [pin the IPFS mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}.
 
 Note that reading over IPFS does not make the connection anonymous. You are using an ordinary browser to reach a gateway, that gateway sees your IP address and every address you request, and on the network you look like an ordinary HTTPS client. To get takedown resistance and connection anonymity together, open the onion edition in Tor Browser.
 
@@ -59,7 +59,7 @@ When the standard site is unreachable and Tor Browser is not at hand, the IPFS m
 
 - [:material-web-box: Decentralized website publishing](../advanced/dweb-ipfs-onion.md)
 - [:material-incognito: Networks mistaken for anonymity](../advanced/mistaken-for-anonymity.md)
-- [:simple-ipfs: Pin the IPFS mirror](../community/pin-ipfs-mirror.md)
+- [:simple-ipfs: Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}
 - [:material-download: Offline reading](../offline.md)
 
 </div>

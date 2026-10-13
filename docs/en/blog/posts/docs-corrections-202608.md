@@ -110,7 +110,7 @@ The [personal privacy guide](https://anoni.net/join/privacy-guide/){target="_bla
 
 The same page lists four common misconceptions in a way that reads as though none had been started. Two were already written and simply never linked: "VPN ≠ anonymity" has a full article in the [VPN guide](../../tools/vpn-guide.md), and "decentralised ≠ anonymous" is covered for IPFS, Yggdrasil, DN42 and I2P in [Networks mistaken for anonymity](../../advanced/mistaken-for-anonymity.md). The other two have genuinely not been started, and the page now says so.
 
-[Help pin the site's IPFS mirror](../../community/pin-ipfs-mirror.md) had three passages that no longer matched reality, two of them found by readers who actually followed the instructions.
+[Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"} had three passages that no longer matched reality, two of them found by readers who actually followed the instructions.
 
 The macOS section said `brew install ipfs`. The Homebrew formula has since been renamed to `kubo`. The old name still installs it, but `brew services` matches on the real formula name, so anyone who installed via the old instructions and then tried to set up a persistent daemon hit a name mismatch. The persistence advice said only "use `brew services` or launchd" without giving a command, when the formula itself already defines a service and `brew services start kubo` keeps it resident and starts it at login.
 
@@ -146,4 +146,4 @@ The same period also added a Taiwan infrastructure layer in the [Interactive](..
 - [The Structure of an OONI Measurement](https://anoni.net/en/projects/asn-coverage/ooni-data-format/){target="_blank"}: the version after the field tally was completed
 - [Device minimization and border crossings in Asia](../../scenarios/asia-travel.md): current guidance after the Hong Kong correction
 - [Maintaining multiple online identities](../../basics/multiple-identities.md): TOTP app guidance is now criteria-based rather than brand-based
-- [Help pin the site's IPFS mirror](../../community/pin-ipfs-mirror.md): the three-identifier comparison table and the new peering section
+- [Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}: the three-identifier comparison table and the new peering section

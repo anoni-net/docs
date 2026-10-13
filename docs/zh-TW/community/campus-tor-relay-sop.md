@@ -6,7 +6,7 @@ icon: material/server-network-outline
 
 # :material-server-network-outline: 校園 Tor Relay 架設 SOP
 
-這份 SOP 是 [如何搭建 Tor Relay](./setup-tor-relay.md) 的進階補充，專門處理**校園網路場景**下的特殊性。內容整理自社群夥伴 NZ 在台灣師範大學的實作經驗，請搭配 [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md) 與 [校園 FAQ](./campus-relay-faq.md) 一併使用。
+這份 SOP 是 [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"} 的進階補充，專門處理**校園網路場景**下的特殊性。內容整理自社群夥伴 NZ 在台灣師範大學的實作經驗，請搭配 [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md) 與 [校園 FAQ](./campus-relay-faq.md) 一併使用。
 
 如果你還在評估「該不該做」、「如何說服學校」，請先回到 [校園提案範本](./campus-tor-relay-proposal.md)。這一頁假設你已經取得上線許可，正準備著手。
 
@@ -307,14 +307,14 @@ UFW 也要對應放行 v6 流量。IPv6 雖然是選用，但對 Tor 網路的�
     Relay 上線後，這個案例就活在 Tor 網路裡了。建議：
 
     - **回報案例**：透過 [社群自架服務](https://anoni.net/services/){target="_blank"} 聯繫匿名網路社群 anoni.net，我們會把你的案例加進 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 的「已完成的事」，讓第三、第四所學校有更多參考
-    - **長期維運參考**：[如何搭建 Tor Relay](./setup-tor-relay.md) 末尾的 FAQ 有 nyx 監控、套件升級、Guard Relay 機制的補充
+    - **長期維運參考**：[Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"} 末尾的 FAQ 有 nyx 監控、套件升級、Guard Relay 機制的補充
     - **想做更多**：可以額外運行 [Tor Snowflake 橋接點](../tools/tor-snowflake.md) 幫助審查地區的使用者連上 Tor
 
     每個成功上線的校園 Relay 都讓推動成本變低一點。你的案例會幫到下一所學校。
 
 ## 相關閱讀
 
-- [如何搭建 Tor Relay](./setup-tor-relay.md)：個人/家用視角的基礎安裝
+- [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}：個人/家用視角的基礎安裝
 - [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md)：跟學校溝通的提案文件範本
 - [校園 Tor Relay：給校方與法務的 FAQ](./campus-relay-faq.md)：校方常見疑慮 Q&A
 - [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"}：社群推動主題入口

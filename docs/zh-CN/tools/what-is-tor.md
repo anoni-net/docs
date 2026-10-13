@@ -115,7 +115,7 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 下载安装 Tor Browser 是起点，[Tor 官方下载页](https://www.torproject.org/download/){target="_blank"} 有 Windows、macOS、Linux、Android 版本（iOS 因为平台限制官方推荐 Onion Browser）。装好后先读 [Tor Browser 进阶设定](./tor-browser-advanced.md) 处理桥接、安全等级、隔离策略，再看 [Tor Snowflake](./tor-snowflake.md) 学习如何贡献一个分页的桥接。
 
-更投入的人可以接 [如何搭建 Tor Relay](../community/setup-tor-relay.md) 或 [Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}，把本地频宽接进全球网络。
+更投入的人可以接 [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"} 或 [Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}，把本地频宽接进全球网络。
 
 ## :material-chat-question: 一同了解
 
@@ -133,6 +133,6 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 - [:material-snowflake: 启动 Tor Snowflake 桥接](./tor-snowflake.md)
 - [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 
 </div>

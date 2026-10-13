@@ -102,7 +102,7 @@ Tor Relay 校園建立是 anoni.net 2026 的三大主題之一，社群正在把
 
 - **了解 Unredacted**：到 [unredacted.org](https://unredacted.org/){target="_blank"} 看他們的服務與透明度資訊，再決定是否透過官方頻道支持伺服器、頻寬與人力成本。
 - **自架 Snowflake**：最低門檻的抗審查貢獻，用瀏覽器外掛或 Docker 就能執行（見 [Tor Snowflake 橋接點](../../tools/tor-snowflake.md)）。
-- **架設 Tor relay 或 bridge**：需要穩定網路與一點維運心力，社群整理了 [如何搭建 Tor Relay](../../community/setup-tor-relay.md) 的步驟與經驗。
+- **架設 Tor relay 或 bridge**：需要穩定網路與一點維運心力，社群整理了 [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"} 的步驟與經驗。
 - **校園 Tor Relay**：在大專院校工作或就讀的人，可以從 [Tor Relay 校園建立研究專題](https://anoni.net/join/relay-on-campus/){target="_blank"} 開始評估。
 - **加入 anoni.net 社群討論**：透過 Matrix 跟其他社群成員交換經驗，入口在 [社群參與](https://anoni.net/join/){target="_blank"}。
 

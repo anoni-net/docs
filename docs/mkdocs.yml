@@ -198,15 +198,12 @@ nav:
   # 說明收進「關於文件站」。拿掉的頁面網址不變，照樣開得到，等轉址時再處理。
   # 連結的 onion 版由 replace_sitename_anoni_onion.sh 改寫。
   # 「讀懂觀測資料」四頁 2026-10-13 搬到社群首頁的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
+  # 架設 Tor Relay、WebTunnel 橋接、.onion 服務與 pin IPFS 鏡像四頁 2026-10-13 搬到社群首頁的 /join/ 底下（#406）。
   - "架設與營運":
       - setup/index.md
-      - community/setup-tor-relay.md
-      - community/setup-tor-webtunnel.md
-      - community/setup-onion-service.md
       - community/campus-tor-relay-proposal.md
       - community/campus-tor-relay-sop.md
       - community/campus-relay-faq.md
-      - community/pin-ipfs-mirror.md
   # about/index.md 排第一，navigation.indexes 才會把它當成這一組的索引頁。
   - "關於文件站":
       - about/index.md
@@ -394,6 +391,10 @@ plugins:
         'community/ooni-blocking-determination.md': 'https://anoni.net/projects/asn-coverage/ooni-blocking-determination/'
         'community/ooni-nettests-map.md': 'https://anoni.net/projects/asn-coverage/ooni-nettests-map/'
         'community/asn-coverage-howto.md': 'https://anoni.net/projects/asn-coverage/howto/'
+        'community/setup-tor-relay.md': 'https://anoni.net/join/setup-tor-relay/'
+        'community/setup-tor-webtunnel.md': 'https://anoni.net/join/setup-tor-webtunnel/'
+        'community/setup-onion-service.md': 'https://anoni.net/join/setup-onion-service/'
+        'community/pin-ipfs-mirror.md': 'https://anoni.net/join/pin-ipfs-mirror/'
         'community/brand-assets.md': 'https://anoni.net/brand/'
         'activity/index.md': 'https://anoni.net/events/'
         'activity/gg2026.md': 'https://anoni.net/events/gg2026/'
@@ -462,7 +463,7 @@ plugins:
         'watcher-tor-relays.md': 'https://anoni.net/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
-        'setup-tor-relay.md': 'community/setup-tor-relay.md'
+        'setup-tor-relay.md': 'https://anoni.net/join/setup-tor-relay/'
         'setup-skill-level.md': 'community/skill-level.md'
         'about/community/index.md': 'https://anoni.net/join/'
         'about/community/participate.md': 'https://anoni.net/join/'

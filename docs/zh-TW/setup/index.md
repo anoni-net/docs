@@ -10,9 +10,9 @@ icon: material/hammer-wrench
 
 ## Tor 節點與 onion 服務
 
-- [如何搭建 Tor Relay](../community/setup-tor-relay.md)：中繼、橋接與出口節點的差別，以及架設時的法律、技術與行政考量。
-- [如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)：把 Tor 流量偽裝成一般的 HTTPS 連線，從 VPS、網域、TLS 到 nginx 與 Docker 的完整步驟。
-- [如何搭建 .onion 服務](../community/setup-onion-service.md)：用 Tor 官方方式架設 v3 onion 服務，接上 nginx 與子網域。
+- [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}：中繼、橋接與出口節點的差別，以及架設時的法律、技術與行政考量。
+- [Tor WebTunnel 橋接架設指南](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}：把 Tor 流量偽裝成一般的 HTTPS 連線，從 VPS、網域、TLS 到 nginx 與 Docker 的完整步驟。
+- [.onion 服務架設指南](https://anoni.net/join/setup-onion-service/){target="_blank"}：用 Tor 官方方式架設 v3 onion 服務，接上 nginx 與子網域。
 
 ## 校園 Tor Relay
 
@@ -24,4 +24,4 @@ icon: material/hammer-wrench
 
 ## 文件站的鏡像
 
-- [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)：用一個常駐的 IPFS 節點加排程腳本，替文件站多保存一份副本。
+- [文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}：用一個常駐的 IPFS 節點加排程腳本，替文件站多保存一份副本。

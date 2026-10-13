@@ -186,7 +186,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
-        2. Read "[How to set up a Tor relay](./setup-tor-relay.md)" for the full installation and configuration process.
+        2. Read "[Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}" for the full installation and configuration process.
         3. See "[Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}" to learn how to observe relay status.
         4. See "[Tor Snowflake](../tools/tor-snowflake.md)" to learn how to run a Snowflake bridge via browser extension or standalone program.
 
@@ -227,13 +227,13 @@ The three sections below each expand one tool across its three levels. Read acro
 
             Setting up a Tor relay requires basic Linux skills and a server with a static IP and stable bandwidth.
 
-            See "[How to set up a Tor relay](./setup-tor-relay.md)" for the full guide, covering:
+            See "[Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}" for the full guide, covering:
 
             - Middle relay installation and configuration (`/etc/tor/torrc`)
             - Running multiple instances with `tor-instance-create`
             - Monitoring with nyx, and post-installation best practices
 
-            For a bridge that survives heavy censorship, see "[How to set up a Tor WebTunnel bridge](./setup-tor-webtunnel.md)".
+            For a bridge that survives heavy censorship, see "[Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}".
 
         ??? question "Host a `.onion` website"
 

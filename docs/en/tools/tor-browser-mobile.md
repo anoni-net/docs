@@ -91,7 +91,7 @@ With the browser installed, the settings themselves are in [Tor Browser advanced
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake bridges](./tor-snowflake.md)
-- [:material-server-network: Running a Tor relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 - [:material-translate-variant: Translation and localisation](../community/i18n.md)
 
 </div>

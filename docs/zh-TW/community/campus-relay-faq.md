@@ -8,7 +8,7 @@ icon: material/chat-question-outline
 
 這份 FAQ 整理校方資訊中心、法務、網管在面對「校園架設 Tor Relay」時最常擔心的十個問題。內容由 [校園 Tor Relay 提案範本](./campus-tor-relay-proposal.md) 衍生而來，補上台灣脈絡，可直接附在提案文件後面，或在面談前先寄給對方參考。
 
-跟 [如何搭建 Tor Relay](./setup-tor-relay.md) 末尾的個人 operator 視角 FAQ 不同，這頁假設讀者是**學校行政、法務、網管**，重點放在「對學校的風險評估」與「對外被問到時如何回答」。
+跟 [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"} 末尾的個人 operator 視角 FAQ 不同，這頁假設讀者是**學校行政、法務、網管**，重點放在「對學校的風險評估」與「對外被問到時如何回答」。
 
 ## 如何使用這份 FAQ
 

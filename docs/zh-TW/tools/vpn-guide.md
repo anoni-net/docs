@@ -95,7 +95,7 @@ VPN 做不到的事：
 - 把 WireGuard 包進 TLS 的偽裝（Proton VPN 的 Stealth）
 - 各家自有名稱：ExpressVPN 的自動混淆、NordVPN 的 NordWhisper、Surfshark 的 Camouflage Mode、Astrill 的 StealthVPN
 
-兩點提醒。第一，強審查系統會主動探測（active probing，主動連向可疑伺服器、測試它是不是 VPN 或 proxy，中國的防火長城就會這樣做），耐得住探測的混淆才頂得住。第二，混淆沒有一勞永逸，審查方會持續更新偵測，今天能用的協定下個月可能就被封，所以要備兩種以上並在出發前實際測試（詳情見後面的地區章節）。若混淆協定也遭封鎖，可改用 Tor 的 [WebTunnel](../community/setup-tor-webtunnel.md) 或 [Snowflake](./tor-snowflake.md) 橋接作為備援。
+兩點提醒。第一，強審查系統會主動探測（active probing，主動連向可疑伺服器、測試它是不是 VPN 或 proxy，中國的防火長城就會這樣做），耐得住探測的混淆才頂得住。第二，混淆沒有一勞永逸，審查方會持續更新偵測，今天能用的協定下個月可能就被封，所以要備兩種以上並在出發前實際測試（詳情見後面的地區章節）。若混淆協定也遭封鎖，可改用 Tor 的 [WebTunnel](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"} 或 [Snowflake](./tor-snowflake.md) 橋接作為備援。
 
 下面逐一介紹符合上述準則的服務，照你的威脅模型挑一個就好，不必全部看完。沒有特別技術背景、預算有限的話，從 Proton VPN 的免費方案或 Mullvad 開始最簡便。
 
@@ -214,7 +214,7 @@ VPN 在某地能不能用沒有全球通用答案，會隨地區與時間變。�
 
 - 使用 VPN 本身可能被 DPI 辨識、被標記。
 - 街頭臨檢與入境查機可能搜查裝置裡的 VPN App 與社群內容，緬甸與部分地區已有案例（詳見 [亞洲出差與研討會的數位準備](../scenarios/asia-travel.md)）。
-- 高敏感任務帶乾淨裝置（一台沒有平常帳號、沒有個人資料的專用機，例如重設出廠或另外準備的手機），全程假設受監控。VPN 連不上時改走 Tor 的 WebTunnel、Snowflake 橋接，設定見 [Tor Snowflake](./tor-snowflake.md) 與 [如何架設 Tor WebTunnel](../community/setup-tor-webtunnel.md)。
+- 高敏感任務帶乾淨裝置（一台沒有平常帳號、沒有個人資料的專用機，例如重設出廠或另外準備的手機），全程假設受監控。VPN 連不上時改走 Tor 的 WebTunnel、Snowflake 橋接，設定見 [Tor Snowflake](./tor-snowflake.md) 與 [如何架設 Tor WebTunnel](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}。
 
 ## VPN 還是 Tor
 

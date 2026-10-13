@@ -14,7 +14,7 @@ icon: material/snowflake
 在台灣，這是門檻最低的網路自由貢獻方式：
 
 - 對外連線受審查程度低、頻寬充足，是合適的橋接點來源地區。
-- 比起架 [Tor Relay](../community/setup-tor-relay.md) 需要的伺服器、頻寬、運維成本，Snowflake 只需要一個分頁。
+- 比起架 [Tor Relay](https://anoni.net/join/setup-tor-relay/){target="_blank"} 需要的伺服器、頻寬、運維成本，Snowflake 只需要一個分頁。
 - 適合白天電腦長開、放著分頁背景執行的工作者。
 
 !!! warning "香港讀者：參與前先評估風險"
@@ -85,7 +85,7 @@ icon: material/snowflake
 
 ??? question "跟架 Tor Relay 比，貢獻有差嗎？"
 
-    兩者貢獻量級與架設門檻都差很多。Tor Relay 提供穩定中繼，需要公網 IP 與長時間運轉的伺服器。Snowflake 提供短暫橋接，分頁開著就在運作，門檻最低。如果你有穩定上行頻寬與運維能力，Relay 的貢獻量級更大，可參考 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。如果是一般瀏覽用網路，從 Snowflake 開始是合適的入門。
+    兩者貢獻量級與架設門檻都差很多。Tor Relay 提供穩定中繼，需要公網 IP 與長時間運轉的伺服器。Snowflake 提供短暫橋接，分頁開著就在運作，門檻最低。如果你有穩定上行頻寬與運維能力，Relay 的貢獻量級更大，可參考 [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}。如果是一般瀏覽用網路，從 Snowflake 開始是合適的入門。
 
 ??? question "VPN 開著可以同時執行 Snowflake 嗎？"
 
@@ -109,8 +109,8 @@ icon: material/snowflake
 
 <div class="grid cards" markdown>
 
-- [:material-tunnel-outline: 如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-tunnel-outline: Tor WebTunnel 橋接架設指南](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}
 - [:material-school-outline: Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/){target="_blank"}
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 

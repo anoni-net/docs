@@ -98,7 +98,7 @@ Before picking a combination, two places where the decentralization promise does
 
 Publish the main site to the ordinary web, and alongside it:
 
-- **An IPFS mirror**, with a CID for each release that community volunteers can pin. The instructions are in [pinning the documentation site's IPFS mirror](../community/pin-ipfs-mirror.md)
+- **An IPFS mirror**, with a CID for each release that community volunteers can pin. The instructions are in [pinning the documentation site's IPFS mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}
 - **An onion mirror**, carrying the same content and offering anonymous access
 
 EFF and Proton run official onion mirrors, and the New York Times ran one until closing it in March 2025[^2]. Cloudflare also offers onion routing, where a site behind Cloudflare can have Tor Browser visitors routed to a Cloudflare `.onion` endpoint rather than through an exit relay[^3].
@@ -122,7 +122,7 @@ The anoni.net documentation site is itself an IPFS and onion mirroring case.
 
 The operational trade-offs:
 
-- **Pinning and survival**: community members can pin to improve the odds ([instructions](../community/pin-ipfs-mirror.md)), and there is no guarantee from us
+- **Pinning and survival**: community members can pin to improve the odds ([instructions](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}), and there is no guarantee from us
 - **Onion latency**: Tor's latency makes single-page applications and heavy JavaScript unpleasant, which is why the site stays static with minimal JavaScript
 - **Three domains, one trust story**: search engines index the main site, with IPFS and onion as the redundancy and anti-blocking layers
 
@@ -149,8 +149,8 @@ For the design of the Tor network itself, see [what is Tor](../tools/what-is-tor
 
 <div class="grid cards" markdown>
 
-- [:simple-ipfs: Pin the documentation site's IPFS mirror](../community/pin-ipfs-mirror.md)
-- [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
+- [:simple-ipfs: Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}
+- [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 - [:material-school-outline: Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"}
 - [:material-translate-variant: Localization and translation](../community/i18n.md)
 

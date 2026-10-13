@@ -113,7 +113,7 @@ Cloudflare 近 90 天的資料（排除子網域與 bot）顯示英文版佔文�
 
 同一頁的「常見誤區整理」列了四項，讀起來像整條還沒動工。實際盤點後有兩項早已寫完，只是沒被連到，「VPN ≠ 匿名」在 [VPN 指南](../../tools/vpn-guide.md)有整篇，「去中心化 ≠ 匿名」在[被誤認為匿名的技術](../../advanced/mistaken-for-anonymity.md)完整涵蓋 IPFS、Yggdrasil、DN42 與 I2P。另外兩項確實還沒動工，改後分別標明現況。
 
-[幫忙 pin 文件站的 IPFS 鏡像](../../community/pin-ipfs-mirror.md)有三處對不上現況，其中兩處是讀者實際操作後才發現的。
+[文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}有三處對不上現況，其中兩處是讀者實際操作後才發現的。
 
 macOS 那段寫著 `brew install ipfs`，Homebrew 的 formula 已經改名為 `kubo`。舊名仍然裝得起來，可是 `brew services` 認的是實際名字，依舊文安裝之後再設定常駐服務就會對不上。常駐做法原本只寫「可以用 `brew services` 或 launchd」，沒有給指令，實際上 formula 本身已定義 service，一行 `brew services start kubo` 就會常駐並在登入時自動啟動。
 
@@ -149,4 +149,4 @@ macOS 那段寫著 `brew install ipfs`，Homebrew 的 formula 已經改名為 `k
 - [OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}：欄位統計補完之後的版本
 - [出差與研討會的數位準備](../../scenarios/asia-travel.md)：三處撤回與香港風險升等後的現況
 - [怎麼維持多個網路身分](../../basics/multiple-identities.md)：TOTP app 的判斷標準已改為看條件不看品牌
-- [幫忙 pin 文件站的 IPFS 鏡像](../../community/pin-ipfs-mirror.md)：三串識別碼的對照表與新增的 peering 設定
+- [文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}：三串識別碼的對照表與新增的 peering 設定

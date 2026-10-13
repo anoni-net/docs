@@ -1598,56 +1598,12 @@
 	#為什麼要量
 	#這一頁留下了什麼
 /community/payments-research/ -> https://anoni.net/join/payments-research/
-/community/pin-ipfs-mirror/
-	#LinuxmacOSDockeranoni-pinsh
-	#Windowsanoni-pinps1
-	#ipfs-maintenance-2026
-	#peering
-	#三串識別碼不要混用
-	#不想自架節點時改用-pinning-service-代-pin
-	#幫忙-pin-文件站的-IPFS-鏡像
-	#步驟一架設一個常駐的-IPFS-節點
-	#步驟三設定排程
-	#步驟二取得-pin-腳本
-	#步驟四驗證
-	#為什麼-CID-每次都不一樣IPFS-30-秒入門
-	#相關閱讀
-	#維護與注意事項
-	#運作原理為什麼排程就夠不用等通知
+/community/pin-ipfs-mirror/ -> https://anoni.net/join/pin-ipfs-mirror/
 /community/privacy-guide/ -> https://anoni.net/join/privacy-guide/
 /community/relay-on-campus/ -> https://anoni.net/join/relay-on-campus/
 /community/roadmap-2026/ -> https://anoni.net/join/roadmap-2026/
 /community/send-privacy/ -> https://anoni.net/services/send/
-/community/setup-onion-service/
-	#HTTPS-的取捨
-	#vanity-位址證明不了身分
-	#一Tor-官方的做法
-	#七卡住的時候
-	#三子網域怎麼運作
-	#主動下線
-	#九Caddy-的做法
-	#二接到-nginx
-	#五vanity-位址選用
-	#八上線之後
-	#六上線前的檢查
-	#出站連線要通
-	#取得位址
-	#四限制誰能存取
-	#套用設定
-	#如何搭建-onion-服務
-	#字元集的限制
-	#延遲是固定成本
-	#成本
-	#換機器要搬的是-HiddenServiceDir
-	#改用-Unix-socket
-	#日誌在哪裡看
-	#最常出錯的地方
-	#服務不會自己通報故障
-	#目錄權限
-	#相關閱讀
-	#確認你的網頁服務監聽在哪
-	#重啟會有空窗
-	#需要什麼
+/community/setup-onion-service/ -> https://anoni.net/join/setup-onion-service/
 /community/setup-repo/
 	#Fork-專案
 	#Python
@@ -1656,42 +1612,8 @@
 	#你需要先準備什麼
 	#專案研究預先準備
 	#開發環境安裝
-/community/setup-tor-relay/
-	#使用-nyx-監控
-	#使用-nyx-監控新的設定檔
-	#啟動
-	#如何建立-Middle-Relay
-	#如何搭建-Tor-Relay
-	#安裝-tor
-	#建立多組-Tor-設定檔-tor-instance-create
-	#建立新的-Tor-Instance
-	#搭建-Tor-Relay-的常見問題
-	#相關閱讀
-	#設定
-	#設定新的設定檔
-/community/setup-tor-webtunnel/
-	#一同瞭解
-	#下一步可參與的專案
-	#下載-docker-compose-設定
-	#事件處置-runbook
-	#偽裝頁設計
-	#取得-TLS-憑證
-	#取得橋接行並驗證
-	#如何搭建-Tor-WebTunnel-橋接
-	#安裝-Docker
-	#官方參考文件
-	#常見問題
-	#建立-env-設定檔
-	#為什麼台灣適合架-WebTunnel
-	#監控與健康檢查
-	#第一部分網域TLS-與-nginx-反向代理
-	#第二部分用-Docker-執行-WebTunnel-橋接
-	#設定-DNS
-	#設定-nginx-反向代理
-	#軟體更新
-	#進階維運
-	#開始前要準備的東西
-	#防火牆
+/community/setup-tor-relay/ -> https://anoni.net/join/setup-tor-relay/
+/community/setup-tor-webtunnel/ -> https://anoni.net/join/setup-tor-webtunnel/
 /community/skill-level/
 	#OONI-技能分級
 	#Tails-技能分級
@@ -2936,56 +2858,12 @@
 /en/community/ooni-nettests-map/ -> https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/
 /en/community/partners/ -> https://anoni.net/en/about/partners/
 /en/community/payments-research/ -> https://anoni.net/en/join/payments-research/
-/en/community/pin-ipfs-mirror/
-	#Help-pin-the-sites-IPFS-mirror
-	#How-it-works-why-a-schedule-is-enough-no-notification-needed
-	#Linux-macOS-Docker-anoni-pinsh
-	#Maintenance-and-notes
-	#Pinning-through-a-service-instead-of-running-a-node
-	#Related-reading
-	#Step-1-Run-an-always-on-IPFS-node
-	#Step-2-Get-the-pin-script
-	#Step-3-Schedule-it
-	#Step-4-Verify
-	#Three-lookalike-identifiers
-	#Why-the-CID-changes-every-time-30-second-IPFS-primer
-	#Windows-anoni-pinps1
-	#ipfs-maintenance-2026
-	#peering
+/en/community/pin-ipfs-mirror/ -> https://anoni.net/en/join/pin-ipfs-mirror/
 /en/community/privacy-guide/ -> https://anoni.net/en/join/privacy-guide/
 /en/community/relay-on-campus/ -> https://anoni.net/en/join/relay-on-campus/
 /en/community/roadmap-2026/ -> https://anoni.net/en/join/roadmap-2026/
 /en/community/send-privacy/ -> https://anoni.net/en/services/send/
-/en/community/setup-onion-service/
-	#1-The-way-the-Tor-Project-documents-it
-	#2-Routing-through-nginx
-	#3-How-subdomains-work
-	#4-Restricting-who-can-connect
-	#5-Vanity-addresses-optional
-	#6-Before-you-announce-it
-	#7-When-you-get-stuck
-	#8-After-it-goes-live
-	#9-The-Caddy-route
-	#A-vanity-address-proves-nothing-about-identity
-	#Applying-the-configuration
-	#Check-where-your-web-service-listens
-	#Directory-permissions
-	#Getting-your-address
-	#Latency-is-a-fixed-cost
-	#Moving-machines-means-moving-HiddenServiceDir
-	#Outbound-connections-have-to-work
-	#Related-reading
-	#Restarts-leave-a-gap
-	#Setting-up-a-onion-service
-	#Taking-it-down-deliberately
-	#The-HTTPS-trade-off
-	#The-character-set-limits-what-is-possible
-	#The-service-will-not-tell-you-when-it-breaks
-	#Using-a-Unix-socket-instead
-	#What-it-costs
-	#What-you-need
-	#Where-deployments-usually-go-wrong
-	#Where-the-logs-are
+/en/community/setup-onion-service/ -> https://anoni.net/en/join/setup-onion-service/
 /en/community/setup-repo/
 	#An-editor
 	#Development-environment
@@ -2995,42 +2873,8 @@
 	#What-you-need-first
 	#Where-to-go-from-here
 	#uv
-/en/community/setup-tor-relay/
-	#Common-questions
-	#Create-a-new-Tor-instance
-	#Edit-the-new-instance-configuration
-	#How-to-set-up-a-Tor-relay
-	#How-to-set-up-a-middle-relay
-	#Install-Tor
-	#Monitor-the-new-instance-with-nyx
-	#Monitor-the-relay-with-nyx
-	#Run-multiple-relays-with-tor-instance-create
-	#Setup
-	#Start
-	#Where-to-go-from-here
-/en/community/setup-tor-webtunnel/
-	#Advanced-operations
-	#Configure-the-nginx-reverse-proxy
-	#Create-the-env-file
-	#Designing-the-cover-page
-	#Download-the-docker-compose-config
-	#FAQ
-	#Firewall
-	#Get-a-TLS-certificate
-	#Get-the-bridge-line-and-verify
-	#How-to-set-up-a-Tor-WebTunnel-bridge
-	#Incident-handling-runbook
-	#Install-Docker
-	#Learn-more
-	#Monitoring-and-health-checks
-	#Next-steps-to-get-involved
-	#Official-references
-	#Part-1-domain-TLS-and-the-nginx-reverse-proxy
-	#Part-2-run-the-WebTunnel-bridge-with-Docker
-	#Set-up-DNS
-	#Software-updates
-	#What-to-prepare-before-you-start
-	#Why-we-need-more-WebTunnel-bridges
+/en/community/setup-tor-relay/ -> https://anoni.net/en/join/setup-tor-relay/
+/en/community/setup-tor-webtunnel/ -> https://anoni.net/en/join/setup-tor-webtunnel/
 /en/community/skill-level/
 	#After-the-assessment
 	#OONI-skills
@@ -3640,7 +3484,7 @@
 	#Where-to-go-from-here
 /en/setup-repo/ -> /en/community/setup-repo/
 /en/setup-skill-level/ -> /en/community/skill-level/
-/en/setup-tor-relay/ -> /en/community/setup-tor-relay/
+/en/setup-tor-relay/ -> https://anoni.net/en/join/setup-tor-relay/
 /en/setup/
 	#Mirroring-the-docs-site
 	#Run-a-Node
@@ -5020,7 +4864,7 @@
 	#雙卡手機的兩個號碼
 /setup-repo/ -> /community/setup-repo/
 /setup-skill-level/ -> /community/skill-level/
-/setup-tor-relay/ -> /community/setup-tor-relay/
+/setup-tor-relay/ -> https://anoni.net/join/setup-tor-relay/
 /setup/
 	#Tor-節點與-onion-服務
 	#文件站的鏡像
@@ -7460,56 +7304,12 @@
 /zh-cn/community/ooni-nettests-map/ -> https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/
 /zh-cn/community/partners/ -> https://anoni.net/zh-cn/about/partners/
 /zh-cn/community/payments-research/ -> https://anoni.net/zh-cn/join/payments-research/
-/zh-cn/community/pin-ipfs-mirror/
-	#LinuxmacOSDockeranoni-pinsh
-	#Windowsanoni-pinps1
-	#ipfs-maintenance-2026
-	#peering
-	#三串标识符不要混用
-	#不想自架节点时改用-pinning-service-代-pin
-	#为什么-CID-每次都不一样IPFS-30-秒入门
-	#帮忙-pin-文件站的-IPFS-镜像
-	#步骤一架设一个常驻的-IPFS-节点
-	#步骤三设定定时任务
-	#步骤二取得-pin-脚本
-	#步骤四验证
-	#相关阅读
-	#维护与注意事项
-	#运作原理为什么定时就够不用等通知
+/zh-cn/community/pin-ipfs-mirror/ -> https://anoni.net/zh-cn/join/pin-ipfs-mirror/
 /zh-cn/community/privacy-guide/ -> https://anoni.net/zh-cn/join/privacy-guide/
 /zh-cn/community/relay-on-campus/ -> https://anoni.net/zh-cn/join/relay-on-campus/
 /zh-cn/community/roadmap-2026/ -> https://anoni.net/zh-cn/join/roadmap-2026/
 /zh-cn/community/send-privacy/ -> https://anoni.net/zh-cn/services/send/
-/zh-cn/community/setup-onion-service/
-	#HTTPS-的取舍
-	#vanity-地址证明不了身份
-	#一Tor-官方的做法
-	#七卡住的时候
-	#三子域名怎么运作
-	#主动下线
-	#九Caddy-的做法
-	#二接到-nginx
-	#五vanity-地址可选
-	#八上线之后
-	#六上线前的检查
-	#出站连接要通
-	#四限制谁能访问
-	#如何搭建-onion-服务
-	#字符集的限制
-	#应用配置
-	#延迟是固定成本
-	#成本
-	#换机器要搬的是-HiddenServiceDir
-	#改用-Unix-socket
-	#日志在哪里看
-	#最常出错的地方
-	#服务不会自己通报故障
-	#目录权限
-	#相关阅读
-	#确认你的网页服务监听在哪
-	#获取地址
-	#重启会有空窗
-	#需要什么
+/zh-cn/community/setup-onion-service/ -> https://anoni.net/zh-cn/join/setup-onion-service/
 /zh-cn/community/setup-repo/
 	#Fork-项目
 	#Python
@@ -7518,41 +7318,8 @@
 	#你需要先准备什么
 	#开发环境安装
 	#项目研究预先准备
-/zh-cn/community/setup-tor-relay/
-	#使用-nyx-监控
-	#使用-nyx-监控新的配置文件
-	#启动
-	#如何建立-Middle-Relay
-	#如何搭建-Tor-Relay
-	#安装-tor
-	#建立多组-Tor-配置文件-tor-instance-create
-	#建立新的-Tor-Instance
-	#搭建-Tor-Relay-的常见问题
-	#设置
-	#设置新的配置文件
-/zh-cn/community/setup-tor-webtunnel/
-	#一同了解
-	#下一步可参与的专案
-	#下载-docker-compose-设定
-	#为什么需要更多-WebTunnel
-	#事件处置-runbook
-	#伪装页设计
-	#取得-TLS-证书
-	#取得桥接行并验证
-	#如何搭建-Tor-WebTunnel-桥接
-	#安装-Docker
-	#官方参考文件
-	#常见问题
-	#建立-env-设定档
-	#开始前要准备的东西
-	#监控与健康检查
-	#第一部分域名TLS-与-nginx-反向代理
-	#第二部分用-Docker-执行-WebTunnel-桥接
-	#设定-DNS
-	#设定-nginx-反向代理
-	#软件更新
-	#进阶维运
-	#防火墙
+/zh-cn/community/setup-tor-relay/ -> https://anoni.net/zh-cn/join/setup-tor-relay/
+/zh-cn/community/setup-tor-webtunnel/ -> https://anoni.net/zh-cn/join/setup-tor-webtunnel/
 /zh-cn/community/skill-level/
 	#OONI-技能分级
 	#Tails-技能分级
@@ -8096,7 +7863,7 @@
 	#酒店与会场的-Wi-Fi
 /zh-cn/setup-repo/ -> /zh-cn/community/setup-repo/
 /zh-cn/setup-skill-level/ -> /zh-cn/community/skill-level/
-/zh-cn/setup-tor-relay/ -> /zh-cn/community/setup-tor-relay/
+/zh-cn/setup-tor-relay/ -> https://anoni.net/zh-cn/join/setup-tor-relay/
 /zh-cn/setup/
 	#Tor-节点与-onion-服务
 	#文档站的镜像

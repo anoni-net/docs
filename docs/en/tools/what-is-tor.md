@@ -114,7 +114,7 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 
 Downloading Tor Browser is the starting point. The [official download page](https://www.torproject.org/download/){target="_blank"} covers Windows, macOS, Linux, and Android. On iOS, platform restrictions mean the Tor Project recommends Onion Browser. Once installed, read [Tor Browser advanced settings](./tor-browser-advanced.md) for bridges, security levels, and isolation, then [Tor Snowflake](./tor-snowflake.md) to learn how to contribute a bridge from one browser tab.
 
-If you want to go further, [how to run a Tor relay](../community/setup-tor-relay.md) and [Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"} connect local bandwidth to the global network.
+If you want to go further, [how to run a Tor relay](https://anoni.net/en/join/setup-tor-relay/){target="_blank"} and [Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"} connect local bandwidth to the global network.
 
 ## :material-chat-question: Related concepts
 
@@ -132,6 +132,6 @@ If you want to go further, [how to run a Tor relay](../community/setup-tor-relay
 
 - [:material-snowflake: Run a Tor Snowflake bridge](./tor-snowflake.md)
 - [:material-school-outline: Tor relays on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"}
-- [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 
 </div>

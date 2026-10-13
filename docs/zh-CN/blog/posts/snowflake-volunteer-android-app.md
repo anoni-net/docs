@@ -78,6 +78,6 @@ Snowflake Volunteer 可以从 [F-Droid](https://f-droid.org/en/packages/io.bloco
 
 - [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)：浏览器版桥接点如何开，以及需要留意的风险
 - [伊朗封网 80 多天后重新开放，流量涌进社群架设的 Tor WebTunnel](https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}：桥接点在真实审查情境下的作用
-- [如何搭建 Tor Relay](../../community/setup-tor-relay.md)：想投入更多心力的下一步
+- [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}：想投入更多心力的下一步
 
 [^1]: 统计依据 2026 年 1 月 1 日至 6 月 30 日、共 180 份 Snowflake broker 每日报告，数据来自 Tor Metrics 的 [CollecTor 存档](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"} 汇整的 snowflake-stats descriptor。

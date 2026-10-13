@@ -169,7 +169,7 @@ Tor Browser 的匿名性靠「全球使用者長得一樣」維持。幾個基�
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake 橋接點](./tor-snowflake.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>

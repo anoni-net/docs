@@ -22,11 +22,11 @@ icon: material/console
 
 最直接的贡献。从中继节点开始，带宽不足或 IP 会变动的话改做桥接。
 
-- [如何搭建 Tor Relay](../community/setup-tor-relay.md)：中继节点的完整设置
-- [如何搭建 Tor WebTunnel 桥接](../community/setup-tor-webtunnel.md)：桥接对带宽的要求低很多，在审查环境下的价值也更高
+- [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}：中继节点的完整设置
+- [Tor WebTunnel 桥接架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}：桥接对带宽的要求低很多，在审查环境下的价值也更高
 - [Tor Snowflake](../tools/tor-snowflake.md)：门槛最低的一种，开着那一页就在帮忙，要常驻再装扩展
-- [如何搭建 .onion 服务](../community/setup-onion-service.md)：把手上的服务多开一个 onion 入口
-- [帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)：目前是单点，多一个 pin 就多一份备援
+- [.onion 服务架设指南](https://anoni.net/zh-cn/join/setup-onion-service/){target="_blank"}：把手上的服务多开一个 onion 入口
+- [文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}：目前是单点，多一个 pin 就多一份备援
 - [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}：先看台湾现在有多少节点、分布在哪些 ASN
 
 ### 会写程序，会处理数据

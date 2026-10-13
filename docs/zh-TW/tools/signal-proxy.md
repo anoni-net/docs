@@ -33,7 +33,7 @@ Signal 官方的做法叫做 TLS proxy，跟一般的 HTTP proxy 有明顯差別
 
 TLS proxy 對付的是「Signal 的伺服器位址被封」這一類手法。審查系統靠 DNS、IP 黑名單、SNI 過濾認出目的地時，把連線導向一台還沒被列管的伺服器就繞得過去。
 
-審查強度更高的環境要另外評估。中國的防火長城會做主動探測（active probing，主動連向可疑的伺服器測試它是不是 proxy），DPI 的辨識能力也比多數地區強，Signal Proxy 在這種環境不保證能用。當地使用者手邊需要有備援方案，可以看 [WebTunnel 橋接](../community/setup-tor-webtunnel.md)、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的風險與選擇](./vpn-guide.md) 裡的混淆協議一節。
+審查強度更高的環境要另外評估。中國的防火長城會做主動探測（active probing，主動連向可疑的伺服器測試它是不是 proxy），DPI 的辨識能力也比多數地區強，Signal Proxy 在這種環境不保證能用。當地使用者手邊需要有備援方案，可以看 [WebTunnel 橋接](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的風險與選擇](./vpn-guide.md) 裡的混淆協議一節。
 
 ## 使用者怎麼套用 proxy
 
@@ -66,7 +66,7 @@ https://signal.tube/#proxy.example.com
 
 !!! info "台灣讀者用不到，但可以提供"
 
-    台灣的網路環境沒有針對 Signal 的封鎖，本地使用不需要 proxy。這頁對台灣讀者的意義在後半段，架一台提供給被封鎖地區的人，跟 [Tor Snowflake](./tor-snowflake.md)、[WebTunnel 橋接](../community/setup-tor-webtunnel.md) 是同一類的貢獻。
+    台灣的網路環境沒有針對 Signal 的封鎖，本地使用不需要 proxy。這頁對台灣讀者的意義在後半段，架一台提供給被封鎖地區的人，跟 [Tor Snowflake](./tor-snowflake.md)、[WebTunnel 橋接](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"} 是同一類的貢獻。
 
 ## anoni.net 社群的 proxy
 
@@ -120,7 +120,7 @@ docker compose up --detach
 
 ### 在台灣架的風險評估
 
-Signal Proxy 只把流量轉給 Signal 的伺服器，不是任意目的地的通用出口。從法律風險看，它跟 [Tor Exit Relay](../community/setup-tor-relay.md) 差距很大，Exit 會有任意使用者的任意流量以你的 IP 出去，Signal Proxy 的目的地固定且單一，濫用空間小得多。
+Signal Proxy 只把流量轉給 Signal 的伺服器，不是任意目的地的通用出口。從法律風險看，它跟 [Tor Exit Relay](https://anoni.net/join/setup-tor-relay/){target="_blank"} 差距很大，Exit 會有任意使用者的任意流量以你的 IP 出去，Signal Proxy 的目的地固定且單一，濫用空間小得多。
 
 就目前掌握的資訊，台灣沒有限制個人或組織提供這類轉接服務的規定，這段是社群的整理，不構成法律意見。實際要留意的是主機商的服務條款，以及頻寬用量是否超出方案限制。租用前可以先看主機商對 proxy 與 VPN 類服務的政策說明。
 
@@ -144,7 +144,7 @@ Signal Proxy 只把流量轉給 Signal 的伺服器，不是任意目的地的�
 
 ??? question "跟 Tor Snowflake 比，哪個貢獻比較大？"
 
-    兩者服務的對象不同。Snowflake 幫的是連不上 Tor 網路的人，涵蓋整體網路瀏覽的匿名需求。Signal Proxy 只處理 Signal 的通訊需求，範圍窄但直接對應「聯絡不上家人朋友」這個具體處境。架設門檻上，Snowflake 開分頁就能運作，Signal Proxy 需要 VPS 與網域，跟 [WebTunnel 橋接](../community/setup-tor-webtunnel.md) 接近。
+    兩者服務的對象不同。Snowflake 幫的是連不上 Tor 網路的人，涵蓋整體網路瀏覽的匿名需求。Signal Proxy 只處理 Signal 的通訊需求，範圍窄但直接對應「聯絡不上家人朋友」這個具體處境。架設門檻上，Snowflake 開分頁就能運作，Signal Proxy 需要 VPS 與網域，跟 [WebTunnel 橋接](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"} 接近。
 
 ## :material-chat-question: 一同瞭解
 
@@ -161,7 +161,7 @@ Signal Proxy 只把流量轉給 Signal 的伺服器，不是任意目的地的�
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake 橋接點](./tor-snowflake.md)
-- [:material-tunnel-outline: 如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-tunnel-outline: Tor WebTunnel 橋接架設指南](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}
 
 </div>

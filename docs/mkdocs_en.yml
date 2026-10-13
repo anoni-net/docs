@@ -187,15 +187,13 @@ nav:
   # replace_sitename_anoni_onion.sh.
   # The four "Reading Measurement Data" pages moved to /projects/asn-coverage/ on the
   # community site on 2026-10-13 (toomore/anoni-net-ws#406).
+  # The Tor relay, WebTunnel bridge, onion service and IPFS pinning guides moved to /join/
+  # on the community site on 2026-10-13 (#406).
   - "Run a Node":
       - setup/index.md
-      - community/setup-tor-relay.md
-      - community/setup-tor-webtunnel.md
-      - community/setup-onion-service.md
       - community/campus-tor-relay-proposal.md
       - community/campus-tor-relay-sop.md
       - community/campus-relay-faq.md
-      - community/pin-ipfs-mirror.md
   # about/index.md comes first so navigation.indexes uses it as the section index.
   - "About the Docs":
       - about/index.md
@@ -381,6 +379,10 @@ plugins:
         'community/ooni-blocking-determination.md': 'https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/'
         'community/ooni-nettests-map.md': 'https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/'
         'community/asn-coverage-howto.md': 'https://anoni.net/en/projects/asn-coverage/howto/'
+        'community/setup-tor-relay.md': 'https://anoni.net/en/join/setup-tor-relay/'
+        'community/setup-tor-webtunnel.md': 'https://anoni.net/en/join/setup-tor-webtunnel/'
+        'community/setup-onion-service.md': 'https://anoni.net/en/join/setup-onion-service/'
+        'community/pin-ipfs-mirror.md': 'https://anoni.net/en/join/pin-ipfs-mirror/'
         'community/brand-assets.md': 'https://anoni.net/en/brand/'
         'activity/index.md': 'https://anoni.net/en/events/'
         'activity/gg2026.md': 'https://anoni.net/en/events/gg2026/'
@@ -445,7 +447,7 @@ plugins:
         'watcher-tor-relays.md': 'https://anoni.net/en/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
-        'setup-tor-relay.md': 'community/setup-tor-relay.md'
+        'setup-tor-relay.md': 'https://anoni.net/en/join/setup-tor-relay/'
         'setup-skill-level.md': 'community/skill-level.md'
         # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
         'about/community.md': 'https://anoni.net/en/join/'

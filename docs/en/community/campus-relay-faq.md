@@ -8,7 +8,7 @@ icon: material/chat-question-outline
 
 This FAQ collects the eleven questions university IT centres, legal offices, and network administrators most often raise about running a Tor relay on campus. It derives from the [campus Tor relay proposal template](./campus-tor-relay-proposal.md), and works as an appendix to a proposal or as reading sent ahead of a meeting.
 
-It differs from the operator-facing FAQ at the end of [how to run a Tor relay](./setup-tor-relay.md). This page assumes the reader is **university administration, legal counsel, or network operations**, so it focuses on institutional risk assessment and on how to answer when someone else asks.
+It differs from the operator-facing FAQ at the end of [how to run a Tor relay](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}. This page assumes the reader is **university administration, legal counsel, or network operations**, so it focuses on institutional risk assessment and on how to answer when someone else asks.
 
 The regional notes throughout come from the Taiwanese case, where the first campus relay went live in November 2025. The general answers apply anywhere. The Taiwan-specific parts are marked, and a proposer elsewhere should replace them with their own jurisdiction's equivalents.
 
