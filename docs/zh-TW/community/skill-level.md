@@ -185,7 +185,7 @@ icon: octicons/paste-24
 
     ??? tip "還沒到這個程度？從這裡開始"
         1. 先完成「實作」層的所有項目。
-        2. 閱讀「[如何搭建 Tor Relay](./setup-tor-relay.md){target="_blank"}」，了解中繼站的安裝與設定流程。
+        2. 閱讀「[Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}」，了解中繼站的安裝與設定流程。
         3. 參考「[Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}」，了解如何觀察中繼站的運作狀況。
         4. 參考「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」，了解如何透過瀏覽器或獨立程式提供 Snowflake 橋接。
 
@@ -226,7 +226,7 @@ icon: octicons/paste-24
 
             建立 Tor Relay 需要具備 Linux 基本操作能力，以及一台具有固定 IP 和穩定頻寬的伺服器。
 
-            完整的安裝與設定步驟請參考「[如何搭建 Tor Relay](./setup-tor-relay.md){target="_blank"}」，其中涵蓋：
+            完整的安裝與設定步驟請參考「[Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}」，其中涵蓋：
 
             - Middle Relay 的安裝與設定（`/etc/tor/torrc`）
             - Bridge 橋接點的建立

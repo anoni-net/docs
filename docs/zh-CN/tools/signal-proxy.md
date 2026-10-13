@@ -33,7 +33,7 @@ Signal 官方的做法叫做 TLS proxy，跟一般的 HTTP proxy 有明显差别
 
 TLS proxy 对付的是「Signal 的服务器地址被封」这一类手法。审查系统靠 DNS、IP 黑名单、SNI 过滤认出目的地时，把连接导向一台还没被列管的服务器就绕得过去。
 
-审查强度更高的环境要另外评估。防火长城会做主动探测（active probing，主动连向可疑的服务器测试它是不是 proxy），DPI 的辨识能力也比多数地区强，Signal Proxy 在这种环境不保证能用。手边需要有备援方案，可以看 [WebTunnel 桥接](../community/setup-tor-webtunnel.md)、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的风险与选择](./vpn-guide.md) 里的混淆协议一节。
+审查强度更高的环境要另外评估。防火长城会做主动探测（active probing，主动连向可疑的服务器测试它是不是 proxy），DPI 的辨识能力也比多数地区强，Signal Proxy 在这种环境不保证能用。手边需要有备援方案，可以看 [WebTunnel 桥接](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的风险与选择](./vpn-guide.md) 里的混淆协议一节。
 
 !!! warning "境内使用者请先评估法律风险"
 
@@ -120,7 +120,7 @@ docker compose up --detach
 
 ### 架设端的风险评估
 
-Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的通用出口。从法律风险看，它跟 [Tor Exit Relay](../community/setup-tor-relay.md) 差距很大，Exit 会有任意用户的任意流量以你的 IP 出去，Signal Proxy 的目的地固定且单一，滥用空间小得多。
+Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的通用出口。从法律风险看，它跟 [Tor Exit Relay](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"} 差距很大，Exit 会有任意用户的任意流量以你的 IP 出去，Signal Proxy 的目的地固定且单一，滥用空间小得多。
 
 就目前掌握的信息，台湾这类没有审查命令的地区，没有限制个人或组织提供转接服务的规定。以上是社区的整理，不构成法律意见。实际要留意的是主机商的服务条款，以及带宽用量是否超出方案限制。租用前可以先看主机商对 proxy 与 VPN 类服务的政策说明。人在对绕行审查工具有管制的司法管辖区，架设本身要另外评估，不能照搬。
 
@@ -144,7 +144,7 @@ Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的�
 
 ??? question "跟 Tor Snowflake 比，哪个贡献比较大？"
 
-    两者服务的对象不同。Snowflake 帮的是连不上 Tor 网络的人，涵盖整体网络浏览的匿名需求。Signal Proxy 只处理 Signal 的通讯需求，范围窄但直接对应「联络不上家人朋友」这个具体处境。架设门槛上，Snowflake 开分页就能运作，Signal Proxy 需要 VPS 与域名，跟 [WebTunnel 桥接](../community/setup-tor-webtunnel.md) 接近。
+    两者服务的对象不同。Snowflake 帮的是连不上 Tor 网络的人，涵盖整体网络浏览的匿名需求。Signal Proxy 只处理 Signal 的通讯需求，范围窄但直接对应「联络不上家人朋友」这个具体处境。架设门槛上，Snowflake 开分页就能运作，Signal Proxy 需要 VPS 与域名，跟 [WebTunnel 桥接](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"} 接近。
 
 [^china]: [FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。2025 年底官方公开示警见 [AI Cop Signals VPN Crackdown](https://chinamediaproject.org/2025/11/13/ai-cop-signals-vpn-crackdown/){target="_blank"} - China Media Project
 
@@ -163,7 +163,7 @@ Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的�
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake 桥接点](./tor-snowflake.md)
-- [:material-tunnel-outline: 如何搭建 Tor WebTunnel 桥接](../community/setup-tor-webtunnel.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-tunnel-outline: Tor WebTunnel 桥接架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 
 </div>

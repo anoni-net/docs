@@ -93,7 +93,7 @@ Onion Browser 在 App Store 上架，開源，貢獻者包含 Mike Tigas、Benja
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake 橋接點](./tor-snowflake.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}
 - [:material-translate-variant: 中文化與文件翻譯](../community/i18n.md)
 
 </div>

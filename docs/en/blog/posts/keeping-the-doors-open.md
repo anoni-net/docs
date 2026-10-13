@@ -62,7 +62,7 @@ If Unredacted's work makes you want to help people in censored regions reach the
 
 - **Learn about Unredacted**: visit [unredacted.org](https://unredacted.org/){target="_blank"} for their services and transparency information, then decide whether to support their servers, bandwidth, and staffing through their official channels.
 - **Run Snowflake**: the lowest-barrier contribution, run from a browser extension or Docker (see [Snowflake](https://snowflake.torproject.org/){target="_blank"}).
-- **Run a Tor relay or bridge**: this needs a steady network and a little operational effort. The Tor Project's [relay guide](https://community.torproject.org/relay/){target="_blank"} walks through the setup, and the community wrote up [how to set up a Tor WebTunnel bridge](../../community/setup-tor-webtunnel.md).
+- **Run a Tor relay or bridge**: this needs a steady network and a little operational effort. The Tor Project's [relay guide](https://community.torproject.org/relay/){target="_blank"} walks through the setup, and the community wrote up [how to set up a Tor WebTunnel bridge](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}.
 - **Campus Tor relays**: if you work or study at a college or university, start your assessment from the [Tor relays on campus track](https://anoni.net/en/join/relay-on-campus/){target="_blank"}.
 - **Join the anoni.net community discussion**: trade notes with other members over Matrix; the entry point is on the [community page](https://anoni.net/en/join/){target="_blank"}, and other contact channels are on the [contact page](https://anoni.net/en/contact/){target="_blank"}.
 

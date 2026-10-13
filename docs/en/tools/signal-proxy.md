@@ -33,7 +33,7 @@ End-to-end encryption is untouched throughout. Messages are encrypted on your de
 
 A TLS proxy answers the "Signal's server addresses are blocked" family of censorship. When censors identify destinations through DNS, IP blacklists, or SNI filtering, pointing the connection at a host that isn't on any list yet is enough to get around it.
 
-Stronger censorship needs a separate assessment. China's Great Firewall performs active probing — connecting to suspicious hosts to test whether they are proxies — and its DPI is more capable than most. A Signal Proxy is not guaranteed to work there, and users in that situation need fallbacks: see [WebTunnel bridges](../community/setup-tor-webtunnel.md), [Tor Snowflake](./tor-snowflake.md), and the obfuscation-protocol section of [VPN: risks and how to choose](./vpn-guide.md).
+Stronger censorship needs a separate assessment. China's Great Firewall performs active probing — connecting to suspicious hosts to test whether they are proxies — and its DPI is more capable than most. A Signal Proxy is not guaranteed to work there, and users in that situation need fallbacks: see [WebTunnel bridges](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}, [Tor Snowflake](./tor-snowflake.md), and the obfuscation-protocol section of [VPN: risks and how to choose](./vpn-guide.md).
 
 ## How users apply a proxy
 
@@ -116,7 +116,7 @@ At community scale the approach is several hosts across different network provid
 
 ### Assessing the risk of running one
 
-A Signal Proxy forwards traffic only to Signal's servers, never to arbitrary destinations. That puts its legal exposure far below a [Tor exit relay](../community/setup-tor-relay.md), where arbitrary traffic from arbitrary users leaves under your IP. With a single fixed destination, the room for abuse is much smaller.
+A Signal Proxy forwards traffic only to Signal's servers, never to arbitrary destinations. That puts its legal exposure far below a [Tor exit relay](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}, where arbitrary traffic from arbitrary users leaves under your IP. With a single fixed destination, the room for abuse is much smaller.
 
 As far as we know, a jurisdiction without censorship mandates — Taiwan, for instance — places no restriction on individuals or organizations offering this kind of relay, though this is a community summary rather than legal advice. The practical constraints are your hosting provider's terms of service and the bandwidth allowance on your plan, so check the provider's stated policy on proxy and VPN services before you sign up. In jurisdictions that regulate circumvention tools, the assessment is a different one and does not carry over.
 
@@ -140,7 +140,7 @@ As far as we know, a jurisdiction without censorship mandates — Taiwan, for in
 
 ??? question "Compared with Tor Snowflake, which contributes more?"
 
-    They serve different people. Snowflake helps those who cannot reach the Tor network at all, covering anonymity for general browsing. A Signal Proxy handles only Signal, a narrower scope that maps directly onto "I cannot reach my family and friends." On setup, Snowflake needs a browser tab while a Signal Proxy needs a VPS and a domain, closer to a [WebTunnel bridge](../community/setup-tor-webtunnel.md).
+    They serve different people. Snowflake helps those who cannot reach the Tor network at all, covering anonymity for general browsing. A Signal Proxy handles only Signal, a narrower scope that maps directly onto "I cannot reach my family and friends." On setup, Snowflake needs a browser tab while a Signal Proxy needs a VPS and a domain, closer to a [WebTunnel bridge](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}.
 
 ## :material-chat-question: Related reading
 
@@ -157,7 +157,7 @@ As far as we know, a jurisdiction without censorship mandates — Taiwan, for in
 <div class="grid cards" markdown>
 
 - [:material-snowflake: Tor Snowflake bridge](./tor-snowflake.md)
-- [:material-tunnel-outline: How to set up a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md)
-- [:material-server-network: How to set up a Tor relay](../community/setup-tor-relay.md)
+- [:material-tunnel-outline: Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 
 </div>

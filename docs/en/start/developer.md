@@ -22,11 +22,11 @@ Look at what you have, then pick a line. The four are independent; starting one 
 
 The most direct contribution. Start with a relay; switch to a bridge if bandwidth is limited or the address changes.
 
-- [How to set up a Tor relay](../community/setup-tor-relay.md): full configuration
-- [How to set up a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md): far lower bandwidth requirements, and worth more in a censored environment
+- [Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}: full configuration
+- [Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}: far lower bandwidth requirements, and worth more in a censored environment
 - [Tor Snowflake](../tools/tor-snowflake.md): the lowest barrier of all, keep the page open and you are already helping; install the extension to leave it running
-- [Setting up a .onion service](../community/setup-onion-service.md): give a service you already run an onion entrance
-- [Help pin the site's IPFS mirror](../community/pin-ipfs-mirror.md): currently a single point, and each additional pin is redundancy
+- [Onion Service Setup Guide](https://anoni.net/en/join/setup-onion-service/){target="_blank"}: give a service you already run an onion entrance
+- [Pinning the Docs Site's IPFS Mirror](https://anoni.net/en/join/pin-ipfs-mirror/){target="_blank"}: currently a single point, and each additional pin is redundancy
 - [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}: see how many relays exist in the region and which ASNs they sit in
 
 ### You write code and work with data

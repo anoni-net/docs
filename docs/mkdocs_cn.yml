@@ -180,12 +180,9 @@ nav:
   # 说明收进「关于文档站」。拿掉的页面网址不变，照样打得开，等转址时再处理。
   # 链接的 onion 版由 replace_sitename_anoni_onion.sh 改写。
   # 「读懂观测资料」四页 2026-10-13 搬到社群首页的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
+  # 架设 Tor Relay、WebTunnel 桥接、.onion 服务与 pin IPFS 镜像四页 2026-10-13 搬到社群首页的 /join/ 底下（#406）。
   - "架设与运营":
       - setup/index.md
-      - community/setup-tor-relay.md
-      - community/setup-tor-webtunnel.md
-      - community/setup-onion-service.md
-      - community/pin-ipfs-mirror.md
   # about/index.md 排第一，navigation.indexes 才会把它当成这一组的索引页。
   - "关于文档站":
       - about/index.md
@@ -368,6 +365,10 @@ plugins:
         'community/ooni-blocking-determination.md': 'https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/'
         'community/ooni-nettests-map.md': 'https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/'
         'community/asn-coverage-howto.md': 'https://anoni.net/zh-cn/projects/asn-coverage/howto/'
+        'community/setup-tor-relay.md': 'https://anoni.net/zh-cn/join/setup-tor-relay/'
+        'community/setup-tor-webtunnel.md': 'https://anoni.net/zh-cn/join/setup-tor-webtunnel/'
+        'community/setup-onion-service.md': 'https://anoni.net/zh-cn/join/setup-onion-service/'
+        'community/pin-ipfs-mirror.md': 'https://anoni.net/zh-cn/join/pin-ipfs-mirror/'
         'community/brand-assets.md': 'https://anoni.net/zh-cn/brand/'
         'activity/index.md': 'https://anoni.net/zh-cn/events/'
         'activity/gg2026.md': 'https://anoni.net/zh-cn/events/gg2026/'
@@ -423,7 +424,7 @@ plugins:
         'watcher-tor-relays.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
         'setup-repo.md': 'community/setup-repo.md'
-        'setup-tor-relay.md': 'community/setup-tor-relay.md'
+        'setup-tor-relay.md': 'https://anoni.net/zh-cn/join/setup-tor-relay/'
         'setup-skill-level.md': 'community/skill-level.md'
         'about/community/index.md': 'https://anoni.net/zh-cn/join/'
         'about/community/participate.md': 'https://anoni.net/zh-cn/join/'

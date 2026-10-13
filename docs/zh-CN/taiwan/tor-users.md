@@ -200,7 +200,7 @@ bridge 占比有它的极限。越南的 1.18% 比德国的 1.93% 还低，而�
 
 ## 使用的人多，提供中继的人少
 
-台湾用户约占全球的 0.33%，而台湾的中继数只占全网的 0.12%，消费与贡献之间有大约三倍的落差[^11]。每个在地中继对应的本地用户数，台湾是 795，美国 168、德国 188。比值量的是责任分配，不是实际的流量负担，Tor 选路不会优先挑同一个国家的中继。节点端的实时数字与 ASN 分布在 [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}，想增加一个节点可以看 [如何搭建 Tor Relay](../community/setup-tor-relay.md)。
+台湾用户约占全球的 0.33%，而台湾的中继数只占全网的 0.12%，消费与贡献之间有大约三倍的落差[^11]。每个在地中继对应的本地用户数，台湾是 795，美国 168、德国 188。比值量的是责任分配，不是实际的流量负担，Tor 选路不会优先挑同一个国家的中继。节点端的实时数字与 ASN 分布在 [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}，想增加一个节点可以看 [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}。
 
 !!! example "想自己重现？"
 
@@ -219,7 +219,7 @@ bridge 占比有它的极限。越南的 1.18% 比德国的 1.93% 还低，而�
 
 - [:material-chart-bar: Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 - [:material-access-point-network: ASN 自治网络观测数据分析](./ooni-asn-coverage.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 - [:material-school: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}
 
 </div>

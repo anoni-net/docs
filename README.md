@@ -133,7 +133,7 @@ workflow 執行完，clearnet 與 onion 兩份產物就上線。沒有自動把 
 - **線上文件**: [https://anoni.net/docs/](https://anoni.net/docs/)
 - **GitHub Repo**: [https://github.com/anoni-net/docs](https://github.com/anoni-net/docs)
 - **Tor Onion**: `docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion`
-- **IPFS 閘道**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/)（社群自架，pin 的做法見[鏡像文件](https://anoni.net/docs/community/pin-ipfs-mirror/)）
+- **IPFS 閘道**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/)（社群自架，pin 的做法見[鏡像文件](https://anoni.net/join/pin-ipfs-mirror/)）
 - **詳細開發指南**: 請參閱 [AGENTS.md](./AGENTS.md)
 
 ## 🤝 貢獻
@@ -304,7 +304,7 @@ Pushing `docs` does not always trigger a build. The trigger paths are limited to
 - **Online Documentation**: [https://anoni.net/docs/](https://anoni.net/docs/)
 - **GitHub Repo**: [https://github.com/anoni-net/docs](https://github.com/anoni-net/docs)
 - **Tor Onion**: `docs.anoninetru5tflukgfaehun7q6khowgmymcff3gtk5oyesqazhmfxtyd.onion`
-- **IPFS Gateway**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/) (community-run; see the [mirror guide](https://anoni.net/docs/en/community/pin-ipfs-mirror/) for pinning)
+- **IPFS Gateway**: [https://ipfs.anoni.net/](https://ipfs.anoni.net/) (community-run; see the [mirror guide](https://anoni.net/en/join/pin-ipfs-mirror/) for pinning)
 - **Detailed Development Guide**: See [AGENTS.md](./AGENTS.md)
 
 ## 🤝 Contributing

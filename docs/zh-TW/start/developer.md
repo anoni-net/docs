@@ -22,11 +22,11 @@ icon: material/console
 
 最直接的貢獻。從中繼節點開始，頻寬不足或 IP 會變動的話改做橋接。
 
-- [如何搭建 Tor Relay](../community/setup-tor-relay.md)：中繼節點的完整設定
-- [如何搭建 Tor WebTunnel 橋接](../community/setup-tor-webtunnel.md)：橋接對頻寬的要求低很多，在審查環境下的價值也更高
+- [Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}：中繼節點的完整設定
+- [Tor WebTunnel 橋接架設指南](https://anoni.net/join/setup-tor-webtunnel/){target="_blank"}：橋接對頻寬的要求低很多，在審查環境下的價值也更高
 - [Tor Snowflake](../tools/tor-snowflake.md)：門檻最低的一種，開著那一頁就在幫忙，要常駐再裝擴充套件
-- [如何搭建 .onion 服務](../community/setup-onion-service.md)：把手上的服務多開一個 onion 入口
-- [幫忙 pin 文件站的 IPFS 鏡像](../community/pin-ipfs-mirror.md)：目前是單點，多一個 pin 就多一份備援
+- [.onion 服務架設指南](https://anoni.net/join/setup-onion-service/){target="_blank"}：把手上的服務多開一個 onion 入口
+- [文件站 IPFS 鏡像的 pin 節點](https://anoni.net/join/pin-ipfs-mirror/){target="_blank"}：目前是單點，多一個 pin 就多一份備援
 - [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}：先看台灣現在有多少節點、分布在哪些 ASN
 
 ### 會寫程式，會處理資料

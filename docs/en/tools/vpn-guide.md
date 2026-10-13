@@ -95,7 +95,7 @@ Each product page has its own marketing name, but they all point to the same obf
 - Wrapping WireGuard inside TLS (Proton VPN's Stealth).
 - Vendor-specific names: ExpressVPN's automatic obfuscation, NordVPN's NordWhisper, Surfshark's Camouflage Mode, Astrill's StealthVPN.
 
-Two cautions. First, strong censorship systems use active probing (actively connecting to a suspicious server to test whether it's a VPN or proxy — China's Great Firewall does this), so only obfuscation that withstands probing holds up. Second, obfuscation is never settled once and for all: censors keep updating their detection, and a protocol that works today may be blocked next month — so carry two or more options and actually test before you travel. If obfuscated protocols are also blocked, fall back to Tor's [WebTunnel](../community/setup-tor-webtunnel.md) or [Snowflake](https://snowflake.torproject.org/){target="_blank"} bridges.
+Two cautions. First, strong censorship systems use active probing (actively connecting to a suspicious server to test whether it's a VPN or proxy — China's Great Firewall does this), so only obfuscation that withstands probing holds up. Second, obfuscation is never settled once and for all: censors keep updating their detection, and a protocol that works today may be blocked next month — so carry two or more options and actually test before you travel. If obfuscated protocols are also blocked, fall back to Tor's [WebTunnel](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"} or [Snowflake](https://snowflake.torproject.org/){target="_blank"} bridges.
 
 The services that meet the criteria above are described one by one below. Pick one that fits your threat model — you don't have to read them all. Without a particular technical background and on a limited budget, starting with Proton VPN's free plan or Mullvad is the least hassle.
 
@@ -214,7 +214,7 @@ Extra risks in censored countries:
 
 - Using a VPN at all may be identified and flagged by DPI.
 - Street checks and border device inspections may search the VPN apps and social content on your device — Myanmar and some regions already have such cases.
-- For high-sensitivity tasks, bring a clean device (a dedicated phone with no everyday accounts and no personal data, e.g. a factory reset or a separately prepared one), and assume monitoring throughout. When the VPN won't connect, switch to Tor's WebTunnel or Snowflake bridges; for setup see [Set up a Tor WebTunnel](../community/setup-tor-webtunnel.md).
+- For high-sensitivity tasks, bring a clean device (a dedicated phone with no everyday accounts and no personal data, e.g. a factory reset or a separately prepared one), and assume monitoring throughout. When the VPN won't connect, switch to Tor's WebTunnel or Snowflake bridges; for setup see [Set up a Tor WebTunnel](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}.
 
 For the full pre-departure briefing workflow — censorship, legal, SIM, and emergency contacts for any destination — see [Pre-departure digital safety](../scenarios/travel-ai-briefing.md).
 
@@ -282,7 +282,7 @@ What actually matters is often what you left in your accounts and what you publi
 <div class="grid cards" markdown>
 
 - [:material-account-group-outline: Join the community](https://anoni.net/en/join/){target="_blank"}
-- [:material-bridge: Set up a Tor WebTunnel](../community/setup-tor-webtunnel.md)
+- [:material-bridge: Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}
 - [:material-server-network-outline: Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}
 
 </div>

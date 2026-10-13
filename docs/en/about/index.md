@@ -19,7 +19,7 @@ Who we are, how to take part and the services we run are on [anoni.net](https://
 | [Regional](../regional/index.md) | Network measurement and regulation in Taiwan, and how to read the measurement data |
 | [Utilities](../utils/index.md) | Tools that run in your browser and never upload your data |
 | [Updates](../blog/index.md) | Community news, translated articles and software changelogs |
-| [Run a Node](../community/setup-tor-relay.md) | Setting up Tor relays, bridges, onion services and mirrors |
+| [Run a Node](../setup/index.md) | Setting up Tor relays, bridges, onion services and mirrors |
 
 The region we cover is Mainland China, Hong Kong, Macau, Singapore, Malaysia, Taiwan, and the Chinese-speaking diaspora moving between them. Taiwan is the only place we can speak to first-hand. Everything else rests on public sources and contacts in those places, and pages say so where they rely on second-hand material.
 

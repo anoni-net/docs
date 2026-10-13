@@ -109,8 +109,8 @@ If your computer is on for long stretches, the extension version is better than 
 
 <div class="grid cards" markdown>
 
-- [:material-tunnel-outline: How to run a Tor WebTunnel bridge](../community/setup-tor-webtunnel.md)
-- [:material-server-network: How to run a Tor relay](../community/setup-tor-relay.md)
+- [:material-tunnel-outline: Tor WebTunnel Bridge Setup Guide](https://anoni.net/en/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 - [:material-school-outline: Running a Tor relay on campus](https://anoni.net/en/join/relay-on-campus/){target="_blank"}
 - [:material-server-network: Tor Project relay guide](https://community.torproject.org/relay/){target="_blank"}
 - [:material-translate-variant: Localization and doc translation](../community/i18n.md)

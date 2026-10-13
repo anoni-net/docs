@@ -98,7 +98,7 @@ Tor Onion 服务（v3）让网站直接运作于 Tor 网络：
 
 主站发布到一般 Web，同时：
 
-- IPFS 镜像：固定 CID 对应每次发布的内容，社群志工可协助 pin（做法见 [帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)）。
+- IPFS 镜像：固定 CID 对应每次发布的内容，社群志工可协助 pin（做法见 [文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}）。
 - Onion 镜像：跟主站同内容、提供匿名访问。
 
 EFF、ProtonMail、纽约时报、BBC、CIA（美国中央情报局）都架设过官方 Onion 镜像[^2]。Cloudflare 也提供 Onion Routing：使用 Cloudflare 的网站启用后，Tor Browser 访客会自动改走 Cloudflare 的 .onion 端点连入、不经 exit node[^3]。
@@ -125,7 +125,7 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 
 维运上的取舍：
 
-- **IPFS pin 与内容存活**：社群成员可协助 pin 增加存活率（[操作指南](../community/pin-ipfs-mirror.md)），没有官方保证。
+- **IPFS pin 与内容存活**：社群成员可协助 pin 增加存活率（[操作指南](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}），没有官方保证。
 - **Onion 镜像延迟**：Tor 的延迟让 SPA 或大型 JS 套件 UX 较差，所以文件站走纯静态 + minimal JS。
 - **三套域名的 SEO 与 trust 处理**：搜索引擎主要索引 anoni.net 主站，IPFS 与 Onion 是备援与抗封锁层。
 
@@ -152,8 +152,8 @@ anoni.net 文件站本身就是一个 IPFS + Onion 双镜像案例。简化的�
 
 <div class="grid cards" markdown>
 
-- [:simple-ipfs: 帮忙 pin 文件站的 IPFS 镜像](../community/pin-ipfs-mirror.md)
-- [:material-server-network: 如何搭建 Tor Relay](../community/setup-tor-relay.md)
+- [:simple-ipfs: 文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}
+- [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 - [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
