@@ -35,9 +35,9 @@ description: "2017 年 5 月 9 日 PayPal 关闭台湾境内交易，2026 年的
 
 Rainey Reitman 在 EFF 任职 11 年，先后担任 Activism Director 与 Chief Program Officer，2022 年离开。她也是新闻自由基金会 Freedom of the Press Foundation 的共同创办人与现任董事会主席[^3]，这本书的作者版税有半数捐给该基金会。EFF 执行长 Cindy Cohn 在介绍这本书的 Deeplinks 文章写道[^1]：「Rainey 既是说故事的人，也是倡议者。她揭露隐藏的权力系统，这些系统形塑我们的选择、我们的言论，最终形塑我们的社会。」
 
-书中花最多篇幅在整理过去十多年实际发生过的案例。EFF 在 2012 年领衔的反书籍审查联盟，逼使 PayPal 收回对自出版小说平台 Smashwords 强加的书籍内容限制[^4]。同一年的 Nifty Archive Alliance 案，Stripe 一开始切断这个从 1992 年运作至今的 LGBTQ 色情书写社群的支付管道，倡议行动之后改了决定[^5]。
+书中花最多篇幅在整理过去十多年实际发生过的案例。EFF 在 2012 年领衔的反书籍审查联盟，逼使 PayPal 收回对自出版小说平台 Smashwords 强加的书籍内容限制[^4]。同一年的 Nifty Archive Alliance 案，Stripe 一开始切断这个从 1992 年运作至今的 LGBTQ 色情书写社区的支付管道，倡议行动之后改了决定[^5]。
 
-2021 年的 Larry Brandt 案没有这样的反转。Brandt 是美国一位个人捐款人，近 20 年用 PayPal 持续发小额赞助给世界各地的 Tor 中继维护者，2021 年某天 PayPal 账号被无预警关停，没有申诉管道，也没人能解释原因[^6]。Tor 是匿名网络社群长期介绍、许多读者实际在用的匿名网络工具，全球各地的 Tor 中继维护者本来就是靠这类个人赞助维持运作。换到华语读者熟悉的情境，如果你长期用境外金流定期支持港媒、缅甸独立记者、乌克兰基层或某个跨国人权专案，被切断的情形是一样的，不会因为金额小、用途明确、捐了很多年就豁免。
+2021 年的 Larry Brandt 案没有这样的反转。Brandt 是美国一位个人捐款人，近 20 年用 PayPal 持续发小额赞助给世界各地的 Tor 中继维护者，2021 年某天 PayPal 账号被无预警关停，没有申诉管道，也没人能解释原因[^6]。Tor 是匿名网络社区长期介绍、许多读者实际在用的匿名网络工具，全球各地的 Tor 中继维护者本来就是靠这类个人赞助维持运作。换到华语读者熟悉的情境，如果你长期用境外金流定期支持港媒、缅甸独立记者、乌克兰基层或某个跨国人权专案，被切断的情形是一样的，不会因为金额小、用途明确、捐了很多年就豁免。
 
 当一位长年小额赞助者连发起一笔赞助都被当作可疑交易切断账号，「金融机构不算言论审查者」这个说法就难以继续成立。同类案例还能再列，教波斯诗歌的美国公民被 PayPal 与 Venmo 冻结账号、纽约穆斯林市议员转账备注写了孟加拉餐厅名字被挡下交易、Palestinians PayPal 案被挡的整个区域使用者[^7]。
 
@@ -73,18 +73,18 @@ Reitman 在书里没有展开亚洲案例，但她整理出的四个元素「合
 
 台湾被 PayPal 2017 关闭、Stripe 至今未开放的处境也属于同一套机制，只是台湾的支付讨论习惯归到「合规取舍」，比较少被识别成金融审查。
 
-## 接下来社群想推进什么
+## 接下来社区想推进什么 { #接下来社群想推进什么 }
 
-社群把 2026 年的三大主题之一定在匿名支付，原本想说的是「个人金流是 metadata 的独立维度」。Reitman 这本书让我们看到金流还会被主动拿来当审查工具，这个风险对倡议组织、独立媒体、创作者不是抽象议题。既有的 [为什么匿名支付重要](../../basics/payments-anonymity.md) 处理的是金流被动被观察的问题，这篇处理的是金流主动被切断的问题，两篇对照看比较完整。
+社区把 2026 年的三大主题之一定在匿名支付，原本想说的是「个人金流是 metadata 的独立维度」。Reitman 这本书让我们看到金流还会被主动拿来当审查工具，这个风险对倡议组织、独立媒体、创作者不是抽象议题。既有的 [为什么匿名支付重要](../../basics/payments-anonymity.md) 处理的是金流被动被观察的问题，这篇处理的是金流主动被切断的问题，两篇对照看比较完整。
 
-下一步预计推进的方向，包括在《台湾 VASP 法 2026》补一段「跨境制裁与过度合规副作用」的观察，以及从 EFF 过去十多年 Financial Censorship 系列文章选 5 到 8 篇做策展性翻译。替代金流系统的进展也值得追踪，欧洲 European Payments Initiative、巴西 Pix 是两个现有实现[^17][^18]，但金流在各国都是高度管制行业，规模化替代系统的建立成本不低。如果你关心这个主题，欢迎透过 [匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"} 加入社群讨论。
+下一步预计推进的方向，包括在《台湾 VASP 法 2026》补一段「跨境制裁与过度合规副作用」的观察，以及从 EFF 过去十多年 Financial Censorship 系列文章选 5 到 8 篇做策展性翻译。替代金流系统的进展也值得追踪，欧洲 European Payments Initiative、巴西 Pix 是两个现有实现[^17][^18]，但金流在各国都是高度管制行业，规模化替代系统的建立成本不低。如果你关心这个主题，欢迎透过 [匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"} 加入社区讨论。
 
 ## 相关阅读
 
 - [为什么匿名支付重要](../../basics/payments-anonymity.md)：金流为什么是 metadata 的独立维度
 - [倡议组织的匿名捐款管道](../../scenarios/nonprofit-anonymous-donation.md)：给组织与捐款人双方的合法匿名捐款流程
 - [台湾 VASP 法 2026](../../taiwan/vasp-2026.md)：草案架构、罚则、对组织的影响
-- [匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"}：社群讨论入口、待翻译资源、COSCUP 议程合作
+- [匿名支付研究专题](https://anoni.net/zh-cn/join/payments-research/){target="_blank"}：社区讨论入口、待翻译资源、COSCUP 议程合作
 
 [^1]: [Former EFF Activism Director's New Book, Transaction Denied, Explores What Happens When Financial Companies Act like Censors](https://www.eff.org/deeplinks/2026/04/former-eff-activism-directors-new-book-transaction-denied-explores-what-happens){target="_blank"} - EFF Deeplinks
 [^2]: [Transaction Denied 购书页](https://www.beacon.org/Transaction-Denied-P2455.aspx){target="_blank"} - Beacon Press

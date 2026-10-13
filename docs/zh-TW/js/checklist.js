@@ -329,7 +329,7 @@
         "sms-2fa": { label: "两步验证还停在短信的重要账号，有没有可以升级的？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
         "backup-codes": { label: "备援码还找得到吗？换过手机之后尤其要确认", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
         "dormant-accounts": { label: "一年没登录的账号，删掉", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
-        "logged-in-devices": { label: "通讯 app 与社群账号的登录中设备，有没有你不认得的？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
+        "logged-in-devices": { label: "通讯 app 与社交账号的登录中设备，有没有你不认得的？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
         "location-sharing": { label: "谁还看得到你的位置分享？家庭共享、日历、相册都算", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
         "app-permissions": { label: "手机权限清单，新装的 app 要了什么？", href: "../../scenarios/everyday-baseline/#一年一次的检查" },
         "restore-test": { label: "备份还原得回来吗？没有试过还原的备份不算备份", href: "../../scenarios/everyday-baseline/#一年一次的检查" },

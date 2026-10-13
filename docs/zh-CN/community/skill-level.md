@@ -1,6 +1,6 @@
 ---
 title: 自我技能评估表
-description: 评估自己对 Tor、Tails、OONI 的理解程度，搭配学习路径指引。给刚接触匿名网络的华语志愿者，作为加入社群协作前的参考量表。
+description: 评估自己对 Tor、Tails、OONI 的理解程度，搭配学习路径指引。给刚接触匿名网络的华语志愿者，作为加入社区协作前的参考量表。
 icon: octicons/paste-24
 ---
 
@@ -14,11 +14,11 @@ icon: octicons/paste-24
     |------|------------|---------|
     | **了解** | 阅读文件、理解概念 | 任何想了解网络自由议题的人 |
     | **实践** | 实际操作安装、日常操作工具 | 记者、公民社会工作者、任何需要保护通讯安全的人 |
-    | **贡献** | 技术建置、数据分析、社群参与 | 具备基本命令行操作或数据分析能力的开源社群成员 |
+    | **贡献** | 技术建置、数据分析、社区参与 | 具备基本命令行操作或数据分析能力的开源社区成员 |
 
 <figure markdown="span">
     <img class="diagram-tall" src="https://assets.anoni.net/diagrams/skill-level-matrix-v4.zh-CN.svg"
-        alt="三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献三个层级。认识层适合任何想了解的人，在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层适合记者与公民社会工作者，在 Tor 是装好浏览器并会用桥接，在 Tails 是做出开机U盘并从 USB 进系统，在 OONI 是执行 Probe 产出检测报告。贡献层适合开源社群成员，在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与用 GnuPG 管理密钥，在 OONI 是用命令行执行指定测试、整理观测名单与分析原始数据。三栏各自独立，不必依序点满。">
+        alt="三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献三个层级。认识层适合任何想了解的人，在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层适合记者与公民社会工作者，在 Tor 是装好浏览器并会用桥接，在 Tails 是做出开机U盘并从 USB 进系统，在 OONI 是执行 Probe 产出检测报告。贡献层适合开源社区成员，在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与用 GnuPG 管理密钥，在 OONI 是用命令行执行指定测试、整理观测名单与分析原始数据。三栏各自独立，不必依序点满。">
     <figcaption>同一个层级在三个工具上分别代表什么。三栏各自独立，不必依序点满。挑跟你想参与的主题相关的那一栏，从目前所在的那一格往上走。每一格在页面上都有对应的自我评估清单，还没到的话，那一级的「从这里开始」列了要补的文章。</figcaption>
 </figure>
 
@@ -502,7 +502,7 @@ icon: octicons/paste-24
 
             - 在 OONI Explorer 主页中，可查看关于全球网络审查和封锁的最新报告和趋势。
             - 浏览「[搜索](https://explorer.ooni.org/zh-Hant/search){target="_blank"}」，或搜索特定服务和网站查看连接性状况。
-            - 也可查看「[网络审查](https://explorer.ooni.org/zh-Hant/social-media){target="_blank"}」底下不同的测试类型，例如社群网站、新闻媒体等。
+            - 也可查看「[网络审查](https://explorer.ooni.org/zh-Hant/social-media){target="_blank"}」底下不同的测试类型，例如社交网站、新闻媒体等。
 
         ??? question "建立 OONI Run 检测链接并找到线上报告。"
 
@@ -572,6 +572,6 @@ icon: octicons/paste-24
 
 这份量表是自我参照用的，勾选结果不用回报给谁，直接照结果挑下一步就好：
 
-- **认识层**：先订阅 [电子报](https://anoni.net/zh-cn/contact/){target="_blank"} 跟读社群动态，或到 [指南](../guides/index.md) 把概念补齐。
+- **认识层**：先订阅 [电子报](https://anoni.net/zh-cn/contact/){target="_blank"} 跟读社区动态，或到 [指南](../guides/index.md) 把概念补齐。
 - **实现层**：照各工具分级下的「从这里开始」实际操作安装、日常操作，遇到问题到 Matrix 发问。
-- **贡献层**：到 [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社群会协助你接上手。账号申请与服务入口见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
+- **贡献层**：到 [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} 选一个方向，在 Matrix 对应 room 说明自己的程度与想做的事，社区会协助你接上手。账号申请与服务入口见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。

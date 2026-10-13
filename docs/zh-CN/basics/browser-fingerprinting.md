@@ -10,7 +10,7 @@ icon: material/fingerprint
 
 浏览器每次载入网页，网页上的 JavaScript 可以问它几十个问题：屏幕多大、时区设在哪、装了哪些字体、显卡是哪一款、支持哪些功能。单独看每个答案，跟你一样的人很多。全部组合起来，跟你完全一样的人可能一个都没有。组合出来的标识符就是浏览器指纹（browser fingerprint）。
 
-本页说明指纹由什么组成、为什么结构上难以规避，以及各家浏览器现在做到哪里。平台侧主动收集的数据属于另一个主题，见 [社群平台怎么收集你的数据](./platform-tracking.md)。
+本页说明指纹由什么组成、为什么结构上难以规避，以及各家浏览器现在做到哪里。平台侧主动收集的数据属于另一个主题，见 [社交平台怎么收集你的数据](./platform-tracking.md)。
 
 ## cookie 删得掉，指纹删不掉
 
@@ -142,11 +142,11 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 
 ## 本页会过期
 
-浏览器每几个月改版一次，默认值与功能名称都会变动。本页写的是机制与判断方式，实际状态请以各浏览器当下的官方说明为准。发现描述与现况不符，欢迎到 [社群 Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 回报。
+浏览器每几个月改版一次，默认值与功能名称都会变动。本页写的是机制与判断方式，实际状态请以各浏览器当下的官方说明为准。发现描述与现况不符，欢迎到 [社区 Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 回报。
 
 ## 接下来
 
-- [社群平台怎么收集你的数据](./platform-tracking.md)：指纹在整套跟踪生态里的位置
+- [社交平台怎么收集你的数据](./platform-tracking.md)：指纹在整套跟踪生态里的位置
 - [威胁模型如何建立](./threat-model.md)：先确认在防谁，再决定要付出多少成本
 - [怎么维持多个网络身分](./multiple-identities.md)：账号分层碰上指纹时的限制
 - [Tor Browser 进阶设置](../tools/tor-browser-advanced.md)：一致化路线的实际操作

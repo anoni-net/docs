@@ -10,11 +10,11 @@ description: 如何建立动态的 OONI Probe 检测名单，协助观察特定�
 
 你想追踪一批网站是否被特定地区封锁，但又无法亲自到当地测试。OONI Run v2 的解法是：建立一个移动装置链接、把要测的网站列进去、分享给当地协助者，协助者用 [OONI Probe](https://ooni.org/install/mobile){target="_blank"} 开启链接就能执行测试，结果即时上传到 [OONI](./what-is-ooni.md) 的公开数据库。
 
-[OONI Run](https://run.ooni.org/){target="_blank"} 是这个流程的入口。委内瑞拉、马来西亚、印度等地的社群长期[用它做审查测量活动](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把当地的封锁事件即时观测下来。OONI 团队根据 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社群回馈，于 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，链接变短、可动态更新、协助者已安装过就会自动同步新加的网站，不用重发。测量结果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 用链接 ID 搜索。
+[OONI Run](https://run.ooni.org/){target="_blank"} 是这个流程的入口。委内瑞拉、马来西亚、印度等地的社区长期[用它做审查测量活动](https://ooni.org/support/ooni-censorship-measurement-campaigns#examples-of-ooni-censorship-measurement-campaigns){target="_blank"}，把当地的封锁事件即时观测下来。OONI 团队根据 2020 年[可用性研究](https://ooni.org/post/2020-06-09-ooni-run-usability-study-findings/){target="_blank"}的社区回馈，于 [2024 年 10 月推出 v2](https://ooni.org/post/2024-launch-ooni-run-v2/){target="_blank"}，链接变短、可动态更新、协助者已安装过就会自动同步新加的网站，不用重发。测量结果可以直接在 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 用链接 ID 搜索。
 
 ## OONI Run v2 适合谁
 
-OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个案做纵贯观察、记者要为其他国家的封锁事件取证、倡议者组织社群驱动的检测活动。透过 OONI Run，你可以**分享一个移动装置链接，让协助者用 OONI Probe 测试你选定的网站是否被审查**，测试结果会即时上传到 OONI 的公开数据库。
+OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个案做纵贯观察、记者要为其他国家的封锁事件取证、倡议者组织社区驱动的检测活动。透过 OONI Run，你可以**分享一个移动装置链接，让协助者用 OONI Probe 测试你选定的网站是否被审查**，测试结果会即时上传到 OONI 的公开数据库。
 
 跟 v1 比，v2 的链接更短、更容易分享，也可以自定义链接要呈现给协助者的资讯。建立链接后，登录 OONI Run v2 平台就能编辑，把你想加进来的网站直接更新到既有链接，**不必另发一条新链接**。协助者只要在 OONI Probe 移动 App 内安装过你的链接，后续的更新会自动同步，链接内的网站也会持续被测试，覆盖量会随时间累积。所有测量结果即时公开在 OONI Explorer 上。
 
@@ -37,9 +37,9 @@ OONI Run 适合需要追踪特定网站封锁状况的人：研究员针对个�
 
 ## anoni.net 如何使用
 
-社群维运的 OONI Run 链接 ID 是 `10328`，网址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，清单目前有 10 个网址，涵盖官网、Etherpad、CryptPad、SearXNG、Send、Matrix、Cinny、电子报表单与静态资源站。协助者用 OONI Probe 安装这条链接后，每次执行测试都会把这几个自架服务的可达性回传到 OONI 公开数据库。对社群来说，这是长期确认「我们的服务在台湾不同电信商眼中还连得上」的低成本方式。
+社区维运的 OONI Run 链接 ID 是 `10328`，网址 [run.ooni.org/v2/10328](https://run.ooni.org/v2/10328){target="_blank"}，清单目前有 10 个网址，涵盖官网、Etherpad、CryptPad、SearXNG、Send、Matrix、Cinny、电子报表单与静态资源站。协助者用 OONI Probe 安装这条链接后，每次执行测试都会把这几个自架服务的可达性回传到 OONI 公开数据库。对社区来说，这是长期确认「我们的服务在台湾不同电信商眼中还连得上」的低成本方式。
 
-安装过一次之后让它留在背景持续执行，效果比偶尔手动测一轮好得多。社群做过的[全站普查](../blog/posts/2026-ooni-run-v2-usage-patterns.md)显示，336 条 Run v2 清单里有 112 条生涯检测量挂零，193 条不到 100 笔，真正产出数据的清单，共通点都是背后有一台持续运行的装置。
+安装过一次之后让它留在背景持续执行，效果比偶尔手动测一轮好得多。社区做过的[全站普查](../blog/posts/2026-ooni-run-v2-usage-patterns.md)显示，336 条 Run v2 清单里有 112 条生涯检测量挂零，193 条不到 100 笔，真正产出数据的清单，共通点都是背后有一台持续运行的装置。
 
 链接之外，[OONI 网站检测清单](../taiwan/ooni-checklist.md) 整理了台湾脉络下值得长期观测的网站清单，配套的 [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部结果按 ASN 切开，看不同电信商连到不同国际服务的状况。如果你想协助执行这条链接的测试，移动装置安装 OONI Probe 后点上面的网址即可。
 
@@ -85,7 +85,7 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-4.png" alt="填写标题、说明文字" style="width:80%">
 </figure>
 
-* **步骤 5.** 为你的 OONI Run 链接建立一个标题。你也可以选择性地为你的标题增加翻译。「标题」将会显示在测试者安装于其 OONI Probe 移动应用程序内的 OONI Run 链接卡片中。建议使用一个简短且能清晰传达测试类型的标题。在上述范例中，我们将标题设为「**匿名网络社群 anoni.net**」，因为我们希望在 OONI Run 链接中纳入社群所建立的服务网站进行测试。
+* **步骤 5.** 为你的 OONI Run 链接建立一个标题。你也可以选择性地为你的标题增加翻译。「标题」将会显示在测试者安装于其 OONI Probe 移动应用程序内的 OONI Run 链接卡片中。建议使用一个简短且能清晰传达测试类型的标题。在上述范例中，我们将标题设为「**匿名网络社区 anoni.net**」，因为我们希望在 OONI Run 链接中纳入社区所建立的服务网站进行测试。
 * **步骤 6.** 为你的 OONI Run 链接新增一个简短的描述。你也可以选择性地增加多语言的翻译。在上述范例中，我们已指定计划新增到 OONI Run 链接中的网站服务，并请求 OONI Probe 移动应用程序用户进行测试。我们建议具体标明测试的平台或新增其他有用的内容，以鼓励进行测试。
 * **步骤 7.** 为你的 OONI Run 链接新增一个「较长的」描述。透过这样的方式来详细说明测试内容，以及为什么这些测试很重要。你也可以选择性地增加翻译。
 
@@ -129,7 +129,7 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m1.png" alt="移动装置上的 Install Link 徵询画面" style="width:50%">
 </figure>
 
-透过 OONI Probe 安装完成后，在「仪表板」列表中可以找到标题为「**匿名网络社群 anoni.net**」的检测卡片。进入卡片后可以按下上方「**执行 :material-timer-outline:**」的按钮后，画面移动到最下方按下「**Run 1 tests**」的按钮开启执行检测。
+透过 OONI Probe 安装完成后，在「仪表板」列表中可以找到标题为「**匿名网络社区 anoni.net**」的检测卡片。进入卡片后可以按下上方「**执行 :material-timer-outline:**」的按钮后，画面移动到最下方按下「**Run 1 tests**」的按钮开启执行检测。
 
 <figure markdown="span">
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m2.png" alt="OONI Probe 仪表板上的检测卡片与执行按钮" style="width:50%">
@@ -147,7 +147,7 @@ miniooni oonirun -i https://run.ooni.org/v2/10328
 miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 ```
 
-原因是 miniooni 的 `-i` 会把你给的网址当成 descriptor JSON 端点直接 GET，期望取得 JSON 回来。`run.ooni.org/v2/<ID>` 是给浏览器看的网页，响应是 HTML，CLI 解析就会失败。实际的 descriptor 由 API 提供，网址格式为 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接从网页网址末段获取（社群链接为 `10328`）。
+原因是 miniooni 的 `-i` 会把你给的网址当成 descriptor JSON 端点直接 GET，期望取得 JSON 回来。`run.ooni.org/v2/<ID>` 是给浏览器看的网页，响应是 HTML，CLI 解析就会失败。实际的 descriptor 由 API 提供，网址格式为 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接从网页网址末段获取（社区链接为 `10328`）。
 
 桌面版与移动 App 不受这个限制影响，操作系统会把 `https://run.ooni.org/v2/<ID>` 交给 OONI Probe 自行处理。这个限制目前只影响 miniooni CLI，upstream 已有 [TODO 标注](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，后续可能会补上自动转换。
 
@@ -181,7 +181,7 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 
     1. 确认问题：使用 [OONI Explorer](https://explorer.ooni.org/zh-Hans){target="_blank"} 进一步调查，查询具体的测量结果，了解该网站是否已被确认封锁或出现异常情况。
     2. 分析结果：根据测量结果分析问题类型，看是否是暂时性的网络问题或是内容审查所导致。
-    3. 分享测试结果：考虑将你的测试结果分享给 [OONI 社群](https://slack.ooni.org/){target="_blank"}和[其他](https://anoni.net/zh-cn/about/){target="_blank"}关注**网络自由**的组织，帮助更多人了解问题的范围和严重性。
+    3. 分享测试结果：考虑将你的测试结果分享给 [OONI 社区](https://slack.ooni.org/){target="_blank"}和[其他](https://anoni.net/zh-cn/about/){target="_blank"}关注**网络自由**的组织，帮助更多人了解问题的范围和严重性。
     4. 报告问题：若确认为网络封锁，你可以向相关监督机关或法律顾问反映问题，探索进一步的合法行动。
     5. 尝试解决方法：如果你需要访问该网站，可尝试透过 VPN 换区域、Tor 浏览或其他绕过审查的方法来解决访问限制问题。
 

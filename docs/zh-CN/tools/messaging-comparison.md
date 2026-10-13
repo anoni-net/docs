@@ -20,7 +20,7 @@ icon: material/message-text-outline
 
 微信、Telegram、WhatsApp 三家在前述三个问题上都有明显短处，所以不在主名单。在中国大陆，微信仍然是社交基础建设切不掉，后面的「在中国大陆的补充」会提到如何分流。
 
-主名单的 5 个工具是社群实际在用、且设计目标就是 E2EE 与 Metadata 最小化的选项。下面先给判读框架，再开始一个一个介绍。
+主名单的 5 个工具是社区实际在用、且设计目标就是 E2EE 与 Metadata 最小化的选项。下面先给判读框架，再开始一个一个介绍。
 
 ## 五个比较轴
 
@@ -63,7 +63,7 @@ icon: material/message-text-outline
 
 身份模型上，Signal 注册仍需手机号码，但 2024 年正式推出 username 功能，可以在不揭露号码的情况下交换联络方式。Sealed Sender 设计让 server 看不到单则消息的寄件人，私联络人探索（private contact discovery）也让 server 不知道你的通讯录。
 
-**适合谁**：日常通讯首选、跟记者第一次接触（搭配 username 可以避开手机号码）、跨组织协作的长期通道。台湾社群多数对外联络的工作通道都是 Signal。
+**适合谁**：日常通讯首选、跟记者第一次接触（搭配 username 可以避开手机号码）、跨组织协作的长期通道。台湾社区多数对外联络的工作通道都是 Signal。
 
 **限制**：
 
@@ -108,7 +108,7 @@ icon: material/message-text-outline
 **限制**：
 
 - 群组功能比 Signal、SimpleX 都弱，大群组支持限制较多
-- Lokinet 路由的设计过去曾因不同于 Tor 的选择被质疑，社群审计仍在持续
+- Lokinet 路由的设计过去曾因不同于 Tor 的选择被质疑，社区审计仍在持续
 - 消息送达延迟明显比 Signal 高（因为走多跳 onion routing）
 - 早期版本没有完整前向保密，新版本仍在转换中（决定使用前可看 [端对端加密如何运作](../advanced/e2ee.md) 的协议对照）
 - 在中国大陆 Lokinet 节点被封锁，与 Signal 同样需要桥接
@@ -133,21 +133,21 @@ icon: material/message-text-outline
 - 不适合日常通讯，更像「行动现场备援」
 - 在中国大陆 Tor 模式需 Snowflake 桥接，但 Bluetooth 与 Wi-Fi Direct 不受 ISP 层级封锁影响
 
-跟 Briar 同类的工具还有 Bridgefy，但 2020 年 Bridgefy 被研究团队指出加密设计缺陷[^1]，社群推荐从 Bridgefy 迁移到 Briar 或其他验证过的方案。
+跟 Briar 同类的工具还有 Bridgefy，但 2020 年 Bridgefy 被研究团队指出加密设计缺陷[^1]，社区推荐从 Bridgefy 迁移到 Briar 或其他验证过的方案。
 
 ## Matrix / Element
 
 [Matrix](https://matrix.org/){target="_blank"} 是联邦化的开源即时通讯协议，最常用的客户端是 [Element](https://element.io/){target="_blank"}（也叫 Element X 在新版）。设计上类似 email：每个人有一个 homeserver，homeserver 之间互通。
 
-anoni.net 自行架设一个 Matrix homeserver（`im.anoni.net`），是社群长期协作的主要管道。社群的 Public Space 在 `#community:im.anoni.net`，公开房间可以加入。
+anoni.net 自行架设一个 Matrix homeserver（`im.anoni.net`），是社区长期协作的主要管道。社区的 Public Space 在 `#community:im.anoni.net`，公开房间可以加入。
 
 E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时可以勾选 E2EE，公开房间通常不开（因为要让新成员看得到历史）。协议目前用 Megolm（类 Sender Keys 的设计），未来转向 MLS。
 
 **适合谁**：
 
-- 社群长期协作（多人、多房间、需要保留历史）
+- 社区长期协作（多人、多房间、需要保留历史）
 - 跨组织讨论（不同 homeserver 的人可以在同一个房间）
-- 社群想自架 server 的场景（联邦化让你不被单一服务商绑死）
+- 社区想自架 server 的场景（联邦化让你不被单一服务商绑死）
 - 整合既有 IRC、bridge 到其他平台（Discord、Slack、Telegram）
 
 **限制**：
@@ -158,7 +158,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 - 群组规模成长到上千人时，旧版 Megolm 的同步压力会明显，MLS 过渡完成前是过渡期
 - 在中国大陆访问境外 homeserver（含 anoni.net 的 `im.anoni.net`）需可靠的境外网络连接
 
-加入 anoni.net 的 Matrix（含注册方式）见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
+加入 anoni.net 的 Matrix（含注册方式）见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
 
 ## 不在主名单的工具
 
@@ -229,11 +229,11 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 **实名制与手机号**：境内手机号注册需身份证实名验证，注册 SIM 卡时已经把号码与身份证绑定。这意味着「短信 2FA」事实上等同身份验证。能改 TOTP（Aegis、Ente Auth、Google Authenticator）的服务一律改 TOTP，做法见 [密码管理器入门](./password-manager.md) 的对应段落。境外服务（Signal、ProtonMail）注册时若使用境内手机号，号码与身份的关联仍然存在。
 
-**自架 Matrix 在境内的合规风险**：境内 ICP 备案要求让自架公开 Matrix homeserver 的合规成本高，多数社群最后选择用境外 homeserver（如 anoni.net 的 `im.anoni.net`）。访问境外 homeserver 仍需要可靠的网络连接，这层成本要先评估。
+**自架 Matrix 在境内的合规风险**：境内 ICP 备案要求让自架公开 Matrix homeserver 的合规成本高，多数社区最后选择用境外 homeserver（如 anoni.net 的 `im.anoni.net`）。访问境外 homeserver 仍需要可靠的网络连接，这层成本要先评估。
 
 **iOS AirDrop 受限**（2022 年 11 月起）：国行 iPhone 的 AirDrop「所有人」选项被改为 10 分钟自动关闭，对在公共空间用 AirDrop 临时传讯的场景产生明显影响。Briar 的 Bluetooth、Wi-Fi Direct 是一个替代方案。
 
-**社群讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。境内访问需可靠的境外网络连接。
+**社区讨论在 Matrix**：anoni.net 的 Matrix homeserver `im.anoni.net` 有 Public Space `#community:im.anoni.net`，账号申请与加入方式见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。境内访问需可靠的境外网络连接。
 
 **协议层细节**：Signal 与 Matrix 各自的协议设计与威胁模型见 [端对端加密如何运作](../advanced/e2ee.md)。
 
@@ -241,7 +241,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 - **要分流的主流工具是 WhatsApp（非微信）**：香港最普及的即时通讯是 WhatsApp，跟家人、公司、服务商多半切不掉。务实做法同样是分流，把敏感、长期留痕的对话切到 Signal 或 Matrix，一般生活留在 WhatsApp。
 - **2FA 生态不同**：香港的银行与政府服务（HKID、iAM Smart 数字身份）多用短信 OTP，SIM swap 同样是风险，能改 TOTP 的服务就改，做法见 [密码管理器入门](./password-manager.md) 的对应段落。
-- **威胁模型要对应国安监控**：2019 年反送中运动期间，Telegram、Signal 因为群组动员与较强的加密特性被大量采用。《国安法》之后，通讯与社群平台上的记录成为国安、煽动案件的证据来源[^hk]，这层政治风险跟大陆的合规关切不是同一量级，脉络见 [VPN 的风险与选择](./vpn-guide.md)。
+- **威胁模型要对应国安监控**：2019 年反送中运动期间，Telegram、Signal 因为群组动员与较强的加密特性被大量采用。《国安法》之后，通讯与社交平台上的记录成为国安、煽动案件的证据来源[^hk]，这层政治风险跟大陆的合规关切不是同一量级，脉络见 [VPN 的风险与选择](./vpn-guide.md)。
 
 ## 常见问题
 
@@ -265,9 +265,9 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ??? question "Matrix 自架值得吗"
 
-    视规模、技术人力与所在地法规。20 人以下的小社群、没专人维运，用 anoni.net 或其他公开 homeserver 比较划算。50 人以上、有长期维护人力、想完全控制 metadata 的组织值得自架。自架要处理的不只是 server 本身，还有 storage、联邦的网络设置、E2EE 密钥备份、device verification 教学、突发 spam 与 abuse 处理。
+    视规模、技术人力与所在地法规。20 人以下的小社区、没专人维运，用 anoni.net 或其他公开 homeserver 比较划算。50 人以上、有长期维护人力、想完全控制 metadata 的组织值得自架。自架要处理的不只是 server 本身，还有 storage、联邦的网络设置、E2EE 密钥备份、device verification 教学、突发 spam 与 abuse 处理。
 
-    在中国大陆境内自架公开 homeserver 还要处理 ICP 备案与内容合规义务，这条路对多数社群来说成本过高，常见做法是改用境外 homeserver（如 anoni.net 的 `im.anoni.net`），代价是访问需要可靠的境外网络连接。社群可参考 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 看 anoni.net 的部署选择。
+    在中国大陆境内自架公开 homeserver 还要处理 ICP 备案与内容合规义务，这条路对多数社区来说成本过高，常见做法是改用境外 homeserver（如 anoni.net 的 `im.anoni.net`），代价是访问需要可靠的境外网络连接。社区可参考 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 看 anoni.net 的部署选择。
 
 ??? question "P2P 消息工具（Briar、SimpleX）会被防火墙挡吗"
 
@@ -288,7 +288,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 <div class="grid cards" markdown>
 
 - [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
-- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}
+- [:material-server-network-outline: 社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

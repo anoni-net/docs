@@ -12,9 +12,9 @@ Tails 解决的场景很具体：采访敏感议题的记者要保护消息来�
 
 Tails 基于 [Debian Linux](https://zh.wikipedia.org/zh-cn/Debian){target="_blank"}，由独立非营利组织开发，跟 Tor Project 长期合作。
 
-!!! info "anoni.net 是台湾的社群"
+!!! info "anoni.net 是台湾的社区"
 
-    社群在 2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}，后续会持续推。其他简中读者如果对在地的 Tails 工作坊有兴趣，可参考 anoni.net 的活动页关注。
+    社区在 2025 年 2 月跟 Tails、Tor 团队在台北办过一场 [Pre-RightsCon 工作坊](https://anoni.net/zh-cn/updates/2025/02/rightscon25-tor-tails-ooni/){target="_blank"}，后续会持续推。其他简中读者如果对在地的 Tails 工作坊有兴趣，可参考 anoni.net 的活动页关注。
 
 ## Tails 的三个设计选择
 
@@ -169,7 +169,7 @@ Tails 内建一系列默认安全的开源工具：
 
 ??? question "可以同时保留两个 USB，一个工作一个个人吗？"
 
-    可以，这是社群常见做法。一个 USB 对应一个工作情境（例如「采访 A 议题」、「行动现场 B」），各自的永久储存独立、各自的金钥独立。只要不在同一次开机里混用两个 USB 即可。
+    可以，这是社区常见做法。一个 USB 对应一个工作情境（例如「采访 A 议题」、「行动现场 B」），各自的永久储存独立、各自的金钥独立。只要不在同一次开机里混用两个 USB 即可。
 
 ??? question "Tails 多久更新一次？"
 

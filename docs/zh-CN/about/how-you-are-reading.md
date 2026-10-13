@@ -39,7 +39,7 @@ icon: material/routes
 
 ## IPFS 镜像
 
-内容用指纹（CID）寻址，任何节点都能提供同一份内容，没有单一可以被下架的位置。社群成员可以帮忙留存一份，做法见 [文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}。
+内容用指纹（CID）寻址，任何节点都能提供同一份内容，没有单一可以被下架的位置。社区成员可以帮忙留存一份，做法见 [文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}。
 
 要注意的是走 IPFS 读不会让连接变匿名。你用的是一般浏览器连到一台网关，那台网关看得到你的 IP 与你请求的每一个地址，在网络上你看起来就是一个普通的 HTTPS 客户端。想同时要抗下架与连接匿名，用 Tor Browser 打开 Onion 版。
 

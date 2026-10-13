@@ -1,6 +1,6 @@
 ---
 title: 开源科技开发者
-description: 给开源社群开发者的参与路径。依照你手上有的资源分成四条线，架设节点、观测数据分析、文档与翻译、校园研究，各自列出可以认领的工作。
+description: 给开源社区开发者的参与路径。依照你手上有的资源分成四条线，架设节点、观测数据分析、文档与翻译、校园研究，各自列出可以认领的工作。
 icon: material/console
 ---
 
@@ -12,7 +12,7 @@ icon: material/console
 
 ## 二十分钟：先确认方向
 
-1. [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/){target="_blank"}：社群今年投入的三个主题与各自的进度，先看有没有你想接的
+1. [2026 年度路线图](https://anoni.net/zh-cn/join/roadmap-2026/){target="_blank"}：社区今年投入的三个主题与各自的进度，先看有没有你想接的
 2. [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"}：怎么选题、怎么在 Matrix 表达意愿、平时的参与方式
 3. [自我技能评估表](../community/skill-level.md)：Tor、Tails、OONI 三个工具的分级自评，每一级下面都列了补齐用的文章
 
@@ -36,9 +36,9 @@ icon: material/console
 - [OONI 测量数据的结构](https://anoni.net/zh-cn/projects/asn-coverage/ooni-data-format/){target="_blank"}：原始测量的字段长什么样
 - [OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：判定逻辑先弄懂才不会误读数据
 - [OONI 测项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}：各测项测的是什么
-- [ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}：社群自己那支提取程序怎么设置与使用，含 S3 公开数据集的路径结构
+- [ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}：社区自己那支提取程序怎么设置与使用，含 S3 公开数据集的路径结构
 - [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)：台湾目前的涵盖状况，缺口就是题目
-- [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中继查询服务（onionoo MCP），也是一个可以延伸的接口
+- [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：社区自架的 Tor 中继查询服务（onionoo MCP），也是一个可以延伸的接口
 - [OONI 网站检测清单](../taiwan/ooni-checklist.md)：检测清单怎么维护，分类与更新都需要人
 
 ### 会写文档，会翻译
@@ -65,7 +65,7 @@ icon: material/console
 
 - [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}：认领主题前先在这里说一声，避免两个人做同一件事
 - [GitHub 的 anoni-net/docs](https://github.com/anoni-net/docs)：文件站的源码与 issue，每个 issue 都写了预期内容
-- 社群自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}
+- 社区自架的 CryptPad 与 Etherpad 可以直接用来写提案草稿，见[沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}
 
 ## 这条路径没有处理的
 

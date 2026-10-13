@@ -99,16 +99,16 @@ Signal 在 2025 年加入加密消息备份（Secure Backups）[^4]，采取「�
 - **SimpleX**：无 user identifier 是设计差异最大的点，metadata 抗监控强。代价是生态小、UX 仍在演进。
 - **Session**：流量走类 Tor 网络降低 metadata，跨装置只靠一段 mnemonic 门槛低。代价是消息延迟较高，旧版协议缺乏前向保密，目前仍在向新版本迁移。
 
-## 在地脉络：正体中文社群为何用 Signal 与 Matrix
+## 在地脉络：正体中文社区为何用 Signal 与 Matrix { #在地脉络正体中文社群为何用-Signal-与-Matrix }
 
 台湾最普及的消息工具 Line 自 2021 年起默认启用端对端加密 Letter Sealing（2015 年推出一对一、2016 年扩及群组）[^5]。一对一与一般群组在 Letter Sealing 生效时，Line 服务器理论上看不到明文。限制在于超过人数上限的大型群组、或有官方账号（bot）加入的聊天室会退回只有传输层加密，服务器在司法协助请求下可提供这些内容。Line 客户端不开源、密钥管理无法独立稽核，metadata 也仍经过服务器。
 
-对照前面四个协议，Line 的落差集中在群组加密与 metadata 这两层。anoni.net 社群与多数关注隐私的台湾用户偏好两条路：
+对照前面四个协议，Line 的落差集中在群组加密与 metadata 这两层。anoni.net 社区与多数关注隐私的台湾用户偏好两条路：
 
 - **Signal**：一对一与小群组首选，UX 接近 Line，门槛低。
-- **Matrix**（如 anoni.net 自建的服务器）：开源、联邦化、可自架，群组与社群讨论为主。
+- **Matrix**（如 anoni.net 自建的服务器）：开源、联邦化、可自架，群组与社区讨论为主。
 
-香港的起点不同。当地最普及的即时通讯工具是 WhatsApp（非 LINE），2019 年反送中运动期间，Telegram、Signal 因为群组动员与较强的加密特性被大量采用。《国安法》之后，通讯与社群平台上的记录成为国安、煽动案件的证据来源[^hk]。对香港读者，Signal 与 Matrix 的价值同样落在群组加密与 metadata 这两层，差别在于，这里的威胁模型要对应国安监控，不只是一般的司法协助请求。
+香港的起点不同。当地最普及的即时通讯工具是 WhatsApp（非 LINE），2019 年反送中运动期间，Telegram、Signal 因为群组动员与较强的加密特性被大量采用。《国安法》之后，通讯与社交平台上的记录成为国安、煽动案件的证据来源[^hk]。对香港读者，Signal 与 Matrix 的价值同样落在群组加密与 metadata 这两层，差别在于，这里的威胁模型要对应国安监控，不只是一般的司法协助请求。
 
 在敏感工作情境（记者保护消息来源、社运行动现场、家暴受害者寻求协助）下，这两条路的差异会继续展开到 [scenarios/journalist.md](../scenarios/journalist.md)、[scenarios/activist.md](../scenarios/activist.md) 与 [scenarios/domestic-violence.md](../scenarios/domestic-violence.md)。
 

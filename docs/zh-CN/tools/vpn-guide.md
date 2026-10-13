@@ -77,7 +77,7 @@ VPN 做不到的事：
 | Mullvad | 瑞典 | 是 | 高 | 无需 email，现金、Monero、BTC | 有（Shadowsocks 桥接） | 是 |
 | Proton VPN | 瑞士 | 是 | 高 | BTC、现金 | 有（Stealth 协议） | 是 |
 | IVPN | 直布罗陀 | 是 | 高 | Monero、现金、BTC | 有限（以多跳为主） | 是 |
-| Riseup VPN、CalyxVPN | 非营利维护 | 不记录（非营利） | 高 | 免费，限人权社群 | 有限 | 是（LEAP/Bitmask） |
+| Riseup VPN、CalyxVPN | 非营利维护 | 不记录（非营利） | 高 | 免费，限人权社区 | 有限 | 是（LEAP/Bitmask） |
 | (对照) ExpressVPN | 英属维尔京群岛 | 是 | 低（Kape 集团） | BTC | 有（自动混淆） | 仅协议开源（Lightway） |
 | (对照) NordVPN、Surfshark | 巴拿马、荷兰 | 是 | 中（同属 Nord Security） | 加密货币 | 有 | 部分 |
 
@@ -136,14 +136,14 @@ VPN 做不到的事：
 
 ### Riseup VPN、CalyxVPN
 
-[Riseup VPN](https://riseup.net/en/vpn){target="_blank"} 与 CalyxVPN 由非营利组织提供，技术上都建在 LEAP 的 Bitmask 平台，免费给人权与社运社群使用、不记录用户 IP。Calyx Institute 是美国 501(c)(3) 非营利，Riseup VPN 免费开放下载，而 Riseup 整体服务定位在认同其使命的行动者社群。
+[Riseup VPN](https://riseup.net/en/vpn){target="_blank"} 与 CalyxVPN 由非营利组织提供，技术上都建在 LEAP 的 Bitmask 平台，免费给人权与社运社区使用、不记录用户 IP。Calyx Institute 是美国 501(c)(3) 非营利，Riseup VPN 免费开放下载，而 Riseup 整体服务定位在认同其使命的行动者社区。
 
-**适合谁**：预算有限的行动者与社运社群、需要一个不靠卖数据维生的免费基本隐私工具。
+**适合谁**：预算有限的行动者与社运社区、需要一个不靠卖数据维生的免费基本隐私工具。
 
 **限制**：
 
 - 容量、速度与服务器选择有限
-- Riseup 的定位是服务社运社群，使用前建议了解并认同其使命
+- Riseup 的定位是服务社运社区，使用前建议了解并认同其使命
 - 混淆能力有限，把它当日常基本隐私够用，高敏感的匿名仍要走 Tor
 
 ### 主流商用服务（ExpressVPN、NordVPN、Surfshark 等）
@@ -187,10 +187,10 @@ Tor Project 自己也做了一个叫 Tor VPN 的 app。它以系统的 VPN 机�
 几个现实限制：
 
 - 出口是 Tor exit node，速度比一般 VPN 慢，也不适合解地理限制或看串流，主流平台多半封锁 Tor 的出口 IP。
-- 目前只有 Android。iOS 上没有 Tor VPN，要在 iPhone、iPad 用 Tor 改用 Tor 官方推荐的 [Onion Browser](https://onionbrowser.com/){target="_blank"}，可搭配 Guardian Project 的 Orbot 强化防漏[^ios-tor]。要在 Linux 桌面做类似的全流量 Tor 隔离，可看社群介绍的 [oniux 内核层级隔离工具](../blog/posts/oniux-kernel-level-tor.md)。
+- 目前只有 Android。iOS 上没有 Tor VPN，要在 iPhone、iPad 用 Tor 改用 Tor 官方推荐的 [Onion Browser](https://onionbrowser.com/){target="_blank"}，可搭配 Guardian Project 的 Orbot 强化防漏[^ios-tor]。要在 Linux 桌面做类似的全流量 Tor 隔离，可看社区介绍的 [oniux 内核层级隔离工具](../blog/posts/oniux-kernel-level-tor.md)。
 - 跟 Guardian Project 的 Orbot 功能高度重叠，差别在开发团队与底层引擎（Orbot 用较旧的 C 版 Tor，Tor VPN 用 Arti），官方目前没有明说哪个取代哪个[^torvpn-orbot]。
 
-安全性上，Tor Project 在 2025 年委托 Cure53 对 Tor VPN 的 Android 版与 Onionmasq 网络层做了源代码审计，2026 年 4 月公开报告，结论是核心路由稳固、没有根本性问题，待改善的是输入验证、DNS 处理、明文配置存储等项目。完整中文摘要见社群整理的 [Cure53 完成 Tor VPN 安全审计](../blog/posts/2026-code-audit-for-tor-vpn-completed-by-cure53.md)。
+安全性上，Tor Project 在 2025 年委托 Cure53 对 Tor VPN 的 Android 版与 Onionmasq 网络层做了源代码审计，2026 年 4 月公开报告，结论是核心路由稳固、没有根本性问题，待改善的是输入验证、DNS 处理、明文配置存储等项目。完整中文摘要见社区整理的 [Cure53 完成 Tor VPN 安全审计](../blog/posts/2026-code-audit-for-tor-vpn-completed-by-cure53.md)。
 
 ## 各地区能不能用：先评估，不要落地才试
 
@@ -213,7 +213,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 审查国的额外风险：
 
 - 使用 VPN 本身可能被 DPI 辨识、被标记。
-- 街头临检与入境查机可能搜查设备里的 VPN App 与社群内容，缅甸与部分地区已有案例（详见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)）。
+- 街头临检与入境查机可能搜查设备里的 VPN App 与社区内容，缅甸与部分地区已有案例（详见 [亚洲出差与研讨会的数字准备](../scenarios/asia-travel.md)）。
 - 高敏感任务带干净设备（一台没有平常账号、没有个人数据的专用机，例如重设出厂或另外准备的手机），全程假设受监控。VPN 连不上时改走 Tor 的 WebTunnel、Snowflake 桥接，设定见 [Tor Snowflake](./tor-snowflake.md) 与 [如何架设 Tor WebTunnel](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}。
 
 ## VPN 还是 Tor
@@ -233,7 +233,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 
 ??? question "免费 VPN 到底能不能用"
 
-    分两种。来路不明的免费 App 多半靠卖你的数据或塞广告赚钱，避开。可信的免费方案是少数有清楚金主的服务：Proton VPN 有不限流量的免费方案，Riseup 与 CalyxVPN 由非营利提供给人权社群。判准一样是它靠什么赚钱、有没有被审计。
+    分两种。来路不明的免费 App 多半靠卖你的数据或塞广告赚钱，避开。可信的免费方案是少数有清楚金主的服务：Proton VPN 有不限流量的免费方案，Riseup 与 CalyxVPN 由非营利提供给人权社区。判准一样是它靠什么赚钱、有没有被审计。
 
 ??? question "用了 VPN 我就匿名了吗"
 
@@ -275,7 +275,7 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 <div class="grid cards" markdown>
 
 - [:material-shield-lock-outline: 个人隐私指引研究专题](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
-- [:material-server-network-outline: 社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}
+- [:material-server-network-outline: 社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>
@@ -294,5 +294,5 @@ VPN 在某地能不能用没有全球通用答案，会随地区与时间变。�
 [^torvpn-about]: [About Tor VPN](https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/){target="_blank"} - Tor Project 官方支持文件（含 Beta 警语）
 [^torvpn-install]: [Download and Install - Tor VPN](https://support.torproject.org/tor-vpn/getting-started/download-and-install/){target="_blank"} - Tor Project 官方支持文件。BSD 3-Clause 授权见 [Tor VPN Beta on F-Droid](https://f-droid.org/en/packages/org.torproject.vpn/){target="_blank"} - F-Droid
 [^torvpn-intro]: [Tor VPN Threat Model](https://support.torproject.org/tor-vpn/security/threat-model/){target="_blank"} - Tor Project 官方支持文件（每个 app 独立 circuit 与信任模型）
-[^torvpn-orbot]: [What's the difference between TorVPN and Orbot](https://forum.torproject.org/t/whats-the-difference-between-torvpn-and-orbot/21204){target="_blank"} - Tor Project 官方论坛（社群讨论）。Orbot 底层为 C-tor，见 [orbot-android](https://github.com/guardianproject/orbot-android){target="_blank"} - Guardian Project
+[^torvpn-orbot]: [What's the difference between TorVPN and Orbot](https://forum.torproject.org/t/whats-the-difference-between-torvpn-and-orbot/21204){target="_blank"} - Tor Project 官方论坛（社区讨论）。Orbot 底层为 C-tor，见 [orbot-android](https://github.com/guardianproject/orbot-android){target="_blank"} - Guardian Project
 [^ios-tor]: iOS 官方推荐 Onion Browser 见 [Tor Project download page](https://www.torproject.org/download/){target="_blank"} - Tor Project。搭配 Orbot 强化防漏的建议见 [Onion Browser Review](https://www.privacyguides.org/articles/2024/09/18/onion-browser-review/){target="_blank"} - Privacy Guides

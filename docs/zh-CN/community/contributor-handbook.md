@@ -1,29 +1,29 @@
 ---
 title: 贡献者百科
-description: 文档站的文件命名、链接与文章格式、PR 流程、Issue 分类与翻译流程，以及新贡献者第一周会碰到的疑问。写作风格规范在社群首页。
+description: 文档站的文件命名、链接与文章格式、PR 流程、Issue 分类与翻译流程，以及新贡献者第一周会碰到的疑问。写作风格规范在社区首页。
 icon: material/book-open-variant
 ---
 
 # :material-book-open-variant: 贡献者百科
 
-社群协作久了会累积许多不成文规定：文件名如何命名、PR 描述要写什么、Issue 如何分类、新贡献者第一周会碰到的疑问。这份贡献者百科把这些散落在 README、Issue 留言、Matrix 对话里的内容整合成一页，方便新成员一次看完，也让资深成员有共同对话的依据。
+社区协作久了会累积许多不成文规定：文件名如何命名、PR 描述要写什么、Issue 如何分类、新贡献者第一周会碰到的疑问。这份贡献者百科把这些散落在 README、Issue 留言、Matrix 对话里的内容整合成一页，方便新成员一次看完，也让资深成员有共同对话的依据。
 
-如果你是第一次参与，建议先看 [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} 决定方向，再回来这页查具体做法。完整的工具入口与账号申请见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
+如果你是第一次参与，建议先看 [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} 决定方向，再回来这页查具体做法。完整的工具入口与账号申请见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}。
 
 ## 第一周的入门路径
 
 依「我想做什么」分流：
 
 - **想试水温，先看看内容**：先读 [基础概念](../basics/index.md) 任一篇，再用 [自我技能评估表](./skill-level.md) 评估自己对 Tor、Tails、OONI 的熟悉度
-- **想开始写作或翻译**：申请 Matrix 账号（见 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"}）→ 加入 Public Space → 表达意愿 → 认领一个 Issue
+- **想开始写作或翻译**：申请 Matrix 账号（见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}）→ 加入 Public Space → 表达意愿 → 认领一个 Issue
 - **想参与技术维运**：申请 GitHub 对 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 的协作权限 → 看 [项目研究预先准备](./setup-repo.md) 建好开发环境
 - **想加入活动筹备**：到 Matrix 对应 room 询问近期活动（COSCUP、工作坊、小聚），协助文宣、现场、报名等任务
 
-每条路径的第一步都是「进到 Matrix 表达意愿」。社群运作偏向 async，留消息后等一两天回复是正常节奏。
+每条路径的第一步都是「进到 Matrix 表达意愿」。社区运作偏向 async，留消息后等一两天回复是正常节奏。
 
 ## 写作风格规范
 
-写作风格是 anoni.net 三个网站共用的规范，全文在社群首页的[写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}，规则以[正体中文版](https://anoni.net/join/writing-style/){target="_blank"}为准，英文照它的[英文版](https://anoni.net/en/join/writing-style/){target="_blank"}。这一节只写文档站执行 linter 的方式。
+写作风格是 anoni.net 三个网站共用的规范，全文在社区首页的[写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}，规则以[正体中文版](https://anoni.net/join/writing-style/){target="_blank"}为准，英文照它的[英文版](https://anoni.net/en/join/writing-style/){target="_blank"}。这一节只写文档站执行 linter 的方式。
 
 ### 执行 linter
 
@@ -43,7 +43,7 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 
 没有这个机制的话，改一行图片引用就会带出整篇旧标题的 annotation，跟作者的改动无关，而真正该修的那几条会被淹在里面。
 
-规则文件本身逐条写出被禁用的标点与句型，扫自己的规则描述必然全红。社群首页的写作风格规范、这份百科与工作区的投影文件靠 linter 的 `RULE_DOCS` 依文件名豁免，`tools/README.md` 的规则表与已知边界两段用 `<!-- docs-style-lint: disable -->` 与 `enable` 包住。写规则说明时照同一个做法，引用的例子要保持原样。
+规则文件本身逐条写出被禁用的标点与句型，扫自己的规则描述必然全红。社区首页的写作风格规范、这份百科与工作区的投影文件靠 linter 的 `RULE_DOCS` 依文件名豁免，`tools/README.md` 的规则表与已知边界两段用 `<!-- docs-style-lint: disable -->` 与 `enable` 包住。写规则说明时照同一个做法，引用的例子要保持原样。
 
 ## 文件命名与目录
 
@@ -67,7 +67,7 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `reports/` | 严选报告，外部研究的中译 |
 | `community/` | 贡献与翻译规范、开发环境准备、技能自评与视觉指南 |
 
-社群本身的页面与公告不放在文档站。关于我们、参与方式、自架服务、活动与社群动态在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，源代码是 [`anoni-net/www`](https://github.com/anoni-net/www)，活动公告、项目上线、工作进度这类社群公告发在该 repo 的 `updates/`。架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，写给已经熟悉 Tor 的技术读者，2026-10 起也放在 anoni.net。文档站的 `blog/` 放外部文章的翻译、技术分析、观测报告与文档站自己的更新回顾。
+社区本身的页面与公告不放在文档站。关于我们、参与方式、自架服务、活动与社区动态在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，源代码是 [`anoni-net/www`](https://github.com/anoni-net/www)，活动公告、项目上线、工作进度这类社区公告发在该 repo 的 `updates/`。架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，写给已经熟悉 Tor 的技术读者，2026-10 起也放在 anoni.net。文档站的 `blog/` 放外部文章的翻译、技术分析、观测报告与文档站自己的更新回顾。
 
 如果你的新文章不确定该放哪一类，先在 Matrix 上问一声，避免直接 PR 后又要搬。
 
@@ -138,7 +138,7 @@ redirect 管不到内容搬移。页面留着、只有其中一段被拆到新�
 
 PR 描述至少包含：
 
-- 改动的「为什么」（链接 Issue 或社群讨论）
+- 改动的「为什么」（链接 Issue 或社区讨论）
 - 改动的范围（哪些文件、哪几个段落）
 - 对读者的影响（链接是否会坏、URL 是否变更、有没有相依的文件要一起改）
 
@@ -172,10 +172,10 @@ Issue 标签沿用 GitHub 默认的那一组，另外加上 `l10n`。用 Issue �
 zh-TW 是 single source of truth，zh-CN 与 en 从 zh-TW 同步。详细流程见 [中文化与文件翻译](./i18n.md)：
 
 - 新文章默认先写 zh-TW
-- zh-CN 用 AI 协作工具直接翻译为候选稿（包含台式→中式词汇、政治措辞调适），再由社群成员校对词汇与政治措辞差异
+- zh-CN 用 AI 协作工具直接翻译为候选稿（包含台式→中式词汇、政治措辞调适），再由社区成员校对词汇与政治措辞差异
 - 既有 zh-CN 档已有人类校对版本，结构搬迁时只 git mv，不重翻覆盖
 - en 需要更多人工，因为文化脉络转换比语系翻译费时
-- zh-CN 与 en 的翻译不必同步上线，依社群人力滚动处理
+- zh-CN 与 en 的翻译不必同步上线，依社区人力滚动处理
 - 校对时要抓「翻漏」，也就是 zh-TW 具名的国家、公司、机构、法条、数字在译文被换成上位词。判准与检查方式见 [校对时要抓的是翻漏](./i18n.md#校对时要抓的是翻漏)
 
 ## 提问前先看哪里
@@ -185,7 +185,7 @@ zh-TW 是 single source of truth，zh-CN 与 en 从 zh-TW 同步。详细流程�
 | 问题 | 看这里 |
 |---|---|
 | 如何选择主题开始？ | [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} |
-| 如何申请 Matrix 账号？ | [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"} |
+| 如何申请 Matrix 账号？ | [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"} |
 | 我的程度适合做什么？ | [自我技能评估表](./skill-level.md) |
 | 如何设定开发环境？ | [项目研究预先准备](./setup-repo.md) |
 | 翻译有什么规范？ | [中文化与文件翻译](./i18n.md) |
@@ -195,13 +195,13 @@ zh-TW 是 single source of truth，zh-CN 与 en 从 zh-TW 同步。详细流程�
 
 ## 行为准则摘要
 
-社群以开放、互助、合法为原则。以下是快速摘要，完整版（含角色定义、决策流程、争议处理）见 [治理章程](https://anoni.net/zh-cn/about/governance/){target="_blank"}，两者不一致时以治理章程为准。重点：
+社区以开放、互助、合法为原则。以下是快速摘要，完整版（含角色定义、决策流程、争议处理）见 [治理章程](https://anoni.net/zh-cn/about/governance/){target="_blank"}，两者不一致时以治理章程为准。重点：
 
 - **互相尊重**：不同背景、不同熟悉度的成员一视同仁
 - **讨论议题不攻击个人**：对事不对人
 - **合法前提**：所有讨论与协作以合法用途为前提，不协助洗钱、规避税务、骚扰、跟踪、未授权入侵等行为
 - **信息披露**：涉及个人数据、机敏信息的处理走 [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}
-- **争议处理**：先在 Matrix 讨论，没有共识可提案到下一次社群同步讨论
+- **争议处理**：先在 Matrix 讨论，没有共识可提案到下一次社区同步讨论
 
 违反原则的行为会由核心成员依治理章程处理。
 

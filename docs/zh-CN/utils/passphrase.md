@@ -26,7 +26,7 @@ offline_assets:
 
 ## 密语与随机密码怎么抽出来
 
-「密语」模式从 [asian-diceware](../tools/asian-diceware.md) 的 7776 字词表里独立抽几个字串起来。那份词表是社群参考 EFF Diceware 做的版本，混进了 `oolong`、`boba`、`tofu` 这类已经进英文字典的亚洲外来语，对在台湾与亚洲各地生活的人更好认、更好记。
+「密语」模式从 [asian-diceware](../tools/asian-diceware.md) 的 7776 字词表里独立抽几个字串起来。那份词表是社区参考 EFF Diceware 做的版本，混进了 `oolong`、`boba`、`tofu` 这类已经进英文字典的亚洲外来语，对在台湾与亚洲各地生活的人更好认、更好记。
 
 「随机密码」模式从你勾选的字符集里逐字抽。适合用密码管理器保管、不需要用手打的场合。
 

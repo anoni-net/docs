@@ -11,7 +11,7 @@ digest:
 
 # :material-server-network: tor daemon 更新日志
 
-tor daemon（社群惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C 语言实现，中继、网桥与 onion 服务都运作在它上面。这一页整理每次发布修了什么、需不需要立刻升级，读者主要是自己架设中继或 onion 服务的人。用 Tor Browser 上网的读者不需要看这一页，浏览器会自己带着对应版本，那些变动整理在 [Tor 更新日志](./tor.md)。
+tor daemon（社区惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C 语言实现，中继、网桥与 onion 服务都运作在它上面。这一页整理每次发布修了什么、需不需要立刻升级，读者主要是自己架设中继或 onion 服务的人。用 Tor Browser 上网的读者不需要看这一页，浏览器会自己带着对应版本，那些变动整理在 [Tor 更新日志](./tor.md)。
 
 新版本永远在最上面。原始数据来自官方的 [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/main/ChangeLog){target="_blank"}。
 

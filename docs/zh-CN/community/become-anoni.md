@@ -1,6 +1,6 @@
 ---
 title: BECOME_ANONI
-description: anoni.net 贡献者 AI 加载协议。将内容粘贴到 AI 助手中，按照社群标准编写、翻译和校对文件。
+description: anoni.net 贡献者 AI 加载协议。将内容粘贴到 AI 助手中，按照社区标准编写、翻译和校对文件。
 icon: material/robot-outline
 ---
 

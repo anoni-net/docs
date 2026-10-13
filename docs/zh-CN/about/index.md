@@ -1,14 +1,14 @@
 ---
 title: 关于文档站
-description: anoni.net 文档站写什么、如何写成、三个语言版本的关系、错误如何更正，以及内容的授权。社群本身的介绍在 anoni.net。
+description: anoni.net 文档站写什么、如何写成、三个语言版本的关系、错误如何更正，以及内容的授权。社区本身的介绍在 anoni.net。
 icon: material/book-information-variant
 ---
 
 # :material-book-information-variant: 关于文档站
 
-文档站整理匿名网络与隐私的知识，从概念、工具到不同处境的准备，也追踪台湾的网络观测与相关法规。内容由匿名网络社群 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
+文档站整理匿名网络与隐私的知识，从概念、工具到不同处境的准备，也追踪台湾的网络观测与相关法规。内容由匿名网络社区 anoni.net 的成员撰写与维护，源文件与修改记录都公开在 [GitHub](https://github.com/anoni-net/docs){target="_blank"}。
 
-社群的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/){target="_blank"}，架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法也在那里。这一页只谈文档站本身。
+社区的介绍、参与方式与自架服务在 [anoni.net](https://anoni.net/zh-cn/about/){target="_blank"}，架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法也在那里。这一页只谈文档站本身。
 
 ## 内容范围
 
@@ -18,15 +18,15 @@ icon: material/book-information-variant
 | [指南](../guides/index.md) | 概念、工具、场景、进阶、报告五个层次，由浅到深 |
 | [在地脉络](../taiwan/index.md) | 台湾的连线观测、法规与制度 |
 | [小工具](../utils/index.md) | 在浏览器里运行的工具，数据不会上传 |
-| [信息更新](../blog/index.md) | 社群公告、外部文章的翻译与软件更新日志 |
+| [信息更新](../blog/index.md) | 社区公告、外部文章的翻译与软件更新日志 |
 
-关注的范围是华语六地区（中国大陆、香港、澳门、新加坡、马来西亚、台湾），以及在各地之间移动的华语用户。台湾是社群唯一能以第一手经验发言的地方，其他地区依据公开资料与当地联系人的说法撰写，用到二手材料的段落会在页面上标明。
+关注的范围是华语六地区（中国大陆、香港、澳门、新加坡、马来西亚、台湾），以及在各地之间移动的华语用户。台湾是社区唯一能以第一手经验发言的地方，其他地区依据公开资料与当地联系人的说法撰写，用到二手材料的段落会在页面上标明。
 
 ## 写作与审稿
 
-写作风格写在社群首页的[写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}，文件格式与 PR 流程写在[贡献者百科](../community/contributor-handbook.md)。每一个修改都经过 PR，提交时先由 linter 检查标点与句型，合并前经过维护者审阅。
+写作风格写在社区首页的[写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}，文件格式与 PR 流程写在[贡献者百科](../community/contributor-handbook.md)。每一个修改都经过 PR，提交时先由 linter 检查标点与句型，合并前经过维护者审阅。
 
-社群不限制贡献者使用哪一家的 AI 工具协助写作与翻译，AI 的产出跟人工撰写走同一套流程。文章里的数字、引文与来源链接，提交 PR 的人要实际点开核对，并为内容负责。
+社区不限制贡献者使用哪一家的 AI 工具协助写作与翻译，AI 的产出跟人工撰写走同一套流程。文章里的数字、引文与来源链接，提交 PR 的人要实际点开核对，并为内容负责。
 
 内容不提供可被滥用的操作配方，引用他人的观测时不揭露个人账号，涉及受害者与未公开研究的资料走[上传敏感信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}。
 
@@ -60,4 +60,4 @@ icon: material/book-information-variant
 - [中文化与文档翻译](../community/i18n.md)
 - [文档站的视觉规范](../community/visual-guide.md)
 - [品牌素材](https://anoni.net/zh-cn/brand/){target="_blank"}
-- [社群首页 anoni.net](https://anoni.net/zh-cn/){target="_blank"}
+- [社区首页 anoni.net](https://anoni.net/zh-cn/){target="_blank"}

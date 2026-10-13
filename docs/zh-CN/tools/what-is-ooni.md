@@ -8,11 +8,11 @@ icon: material/access-point-network
 
 连不上某个网站时，第一个直觉通常是「是我网络有问题吗？」OONI（Open Observatory of Network Interference，网络干扰开放观测）就是为了把这种感受转成可验证的数据。它提供开源检测工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 与公开数据平台 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，让任何人都能执行检测、查纪录，把封锁、监控、降速这些行为留下时间、地点、ASN 都对得上的观测痕迹。
 
-OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社群、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
+OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社区、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
 
 ## OONI 计划主要推动事项
 
-OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/install/){target="_blank"} 这个检测应用程序，用来检查特定网站或在线服务是否被封锁。产出的结果会[公开成数据集](https://ooni.org/data/){target="_blank"}，任何人都能[在线查阅与分析](https://explorer.ooni.org/){target="_blank"}，了解[各地网络](https://explorer.ooni.org/countries){target="_blank"}的审查状况。OONI 同时跟研究人员、倡议者合作，分析这些数据、追踪全球与区域网络干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}，也跟[各地组织](https://ooni.org/partners/){target="_blank"}与在地社群合作，把检测能力铺到更多网络角落。
+OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/install/){target="_blank"} 这个检测应用程序，用来检查特定网站或在线服务是否被封锁。产出的结果会[公开成数据集](https://ooni.org/data/){target="_blank"}，任何人都能[在线查阅与分析](https://explorer.ooni.org/){target="_blank"}，了解[各地网络](https://explorer.ooni.org/countries){target="_blank"}的审查状况。OONI 同时跟研究人员、倡议者合作，分析这些数据、追踪全球与区域网络干扰的[趋势与影响](https://ooni.org/post/){target="_blank"}，也跟[各地组织](https://ooni.org/partners/){target="_blank"}与在地社区合作，把检测能力铺到更多网络角落。
 
 参与 OONI 的检测活动，等于把你这条网络的观测数据留进公开数据集。当其他人需要佐证封锁事件、追跨境差异、或对照不同 ASN 的状况时，会有更多元的纪录可以引用。
 
@@ -36,7 +36,7 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
 - **Tor：**[洋葱路由网络](https://zh.wikipedia.org/zh-cn/%E6%B4%8B%E8%91%B1%E8%B7%AF%E7%94%B1){target="_blank"}，将连线请求透过三层节点的转介传送取得资讯。
 - **Helper：**OONI 架设在外部网络的测量服务器（test helper）。Probe 测完一个网址后，helper 会从未受干预的网络对同一个网址再测一次，两边结果的差异才是判定依据。完整判定机制见 [OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}。
 
-!!! info "anoni.net 是台湾的社群"
+!!! info "anoni.net 是台湾的社区"
 
     下面这段反映 anoni.net 在台湾观察到的善意阻挡与刻意阻挡的边界，其他简中读者可对照当地情境参考。
 
@@ -46,7 +46,7 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
 
 ## OONI 适合做什么、不适合做什么
 
-OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社群、媒体、研究者观测网络环境用。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
+OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一样：Tor 与 Tails 给使用者保护自己用，OONI 给社区、媒体、研究者观测网络环境用。操作前先回头看 [威胁模型如何建立](../basics/threat-model.md) 有助于厘清需求是不是真的对得上 OONI 解决的问题。
 
 **适合**：
 

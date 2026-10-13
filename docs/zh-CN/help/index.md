@@ -88,7 +88,7 @@ icon: material/lifebuoy
 
 ### 之后的整理
 
-- 把所有关键账号（Email、银行、社群、云端）的密码换成独立、随机的长密码
+- 把所有关键账号（Email、银行、社区、云端）的密码换成独立、随机的长密码
 - 全部开启 2FA，优先使用 TOTP（Authy、Aegis 等）或硬件密钥，尽量不用短信
 - 进一步阅读：[密码管理器入门](../tools/password-manager.md)、[威胁模型如何建立](../basics/threat-model.md)
 
@@ -135,7 +135,7 @@ icon: material/lifebuoy
 
 ### 数字防护的同步动作
 
-- 把社群媒体切换到仅限好友或私人账号
+- 把社交媒体切换到仅限好友或私人账号
 - 移除照片中的位置标签、Metadata。新照片上传前以 Tails 内建的 Metadata Cleaner 或类似工具去识别
 - 关闭相关 App 的位置共享（Google Maps、Find My）
 - 进一步阅读：[家暴受害者的数字准备](../scenarios/domestic-violence.md)、[Metadata 是什么](../basics/metadata.md)
@@ -230,7 +230,7 @@ icon: material/lifebuoy
 
 ## 我们不能做的事
 
-匿名网络社群是技术社群，不是法律服务、不是心理咨商、不是执法单位。我们能：
+匿名网络社区是技术社区，不是法律服务、不是心理咨商、不是执法单位。我们能：
 
 - 整理工具与资源让你判断
 - 在数字防护面提供经验
@@ -238,4 +238,4 @@ icon: material/lifebuoy
 
 我们不能：代为提告、发出保护令、进入装置取证、提供法律意见。情境急迫请优先联系专业专线。
 
-如果你想协助维护或补强这页的资源，欢迎透过 [社群自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 加入社群讨论。
+如果你想协助维护或补强这页的资源，欢迎透过 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"} 加入社区讨论。

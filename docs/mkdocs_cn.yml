@@ -1,11 +1,11 @@
 docs_dir: !ENV [DOCS_DIR, "zh-CN"]
-site_name: !ENV [SITE_NAME, "匿名网络社群 anoni.net/Docs"]
+site_name: !ENV [SITE_NAME, "匿名网络社区 anoni.net/Docs"]
 site_url: !ENV [SITE_URL, "https://anoni.net/docs/zh-cn/"]
 site_description:
   !ENV [SITE_DESC, "推广与翻译匿名网络 Tor、Tails 与 OONI 观测工具"]
 site_author: anoni.net Volunteer
 repo_url: https://github.com/anoni-net/docs
-repo_name: 匿名网络社群文件
+repo_name: 匿名网络社区文件
 copyright: "CC-BY 4.0 2023-2026 anoni.net Docs Project"
 nav:
   - index.md
@@ -193,7 +193,7 @@ nav:
       - community/setup-repo.md
       - community/become-anoni.md
       - community/visual-guide.md
-  - "社群 anoni.net": https://anoni.net/zh-cn/
+  - "社区 anoni.net": https://anoni.net/zh-cn/
 theme:
   name: material
   logo: assets/images/logo-white.svg

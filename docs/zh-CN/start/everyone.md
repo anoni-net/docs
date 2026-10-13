@@ -22,7 +22,7 @@ icon: material/account-outline
 
 位置、通讯录、相册，多数 app 要的权限远超过它需要的。关掉不影响使用，很多人只是没有时间逐一检查。
 
-[手机隐私设置逐步指引](../tools/phone-privacy-settings.md)照编号带你逐项调整，约三十分钟。[社群平台怎么收集你的数据](../basics/platform-tracking.md)说明收集到的东西怎么被组合起来。
+[手机隐私设置逐步指引](../tools/phone-privacy-settings.md)照编号带你逐项调整，约三十分钟。[社交平台怎么收集你的数据](../basics/platform-tracking.md)说明收集到的东西怎么被组合起来。
 
 ### 看到「隐私浏览窗口」、「VPN」的说法，不确定有没有用
 
@@ -48,7 +48,7 @@ icon: material/account-outline
 
 - [匿名、隐私、假名、机密性的差别](../basics/anonymity-vs-privacy.md)：四个词常被混用，混用会选错工具
 - [Metadata 是什么，为什么重要](../basics/metadata.md)：谁跟谁在什么时候联络过，内容加密挡不住这一层
-- [社群平台怎么收集你的数据](../basics/platform-tracking.md)：你没填的字段是怎么被推出来的
+- [社交平台怎么收集你的数据](../basics/platform-tracking.md)：你没填的字段是怎么被推出来的
 - [浏览器指纹是什么，为什么很难摆脱](../basics/browser-fingerprinting.md)：清 cookie 之后还剩下什么
 
 ### 在浏览器里直接用的小工具
@@ -64,7 +64,7 @@ icon: material/account-outline
 
 - [什么是 Tor](../tools/what-is-tor.md)：多数人听过名字，用途与限制值得看清楚
 - [互动与呈现](../games/index.md)：三件以 Tor 为题的作品，走一遍三跳洋葱路由的解谜、连线在会合点相遇的动态呈现、全球中继的地球仪
-- [帮忙做一次网络观测](../tools/ooni-run-v2.md)：手机安装 OONI Probe 并加入社群的检测清单，让它在背景执行，就会持续回报台湾各家电信连不连得上
+- [帮忙做一次网络观测](../tools/ooni-run-v2.md)：手机安装 OONI Probe 并加入社区的检测清单，让它在背景执行，就会持续回报台湾各家电信连不连得上
 
 ## 带得走的东西
 

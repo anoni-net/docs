@@ -1,6 +1,6 @@
 ---
 title: 手机上的 Tor
-description: Android 有 Tor Project 官方的 Tor Browser，iOS 没有官方版本，只能用社群维护的 Onion Browser。这一页说明两边各自的安装方式、第一次启动要处理什么、如何确认自己真的走在 Tor 上，以及什么时候应该放下手机改用电脑。
+description: Android 有 Tor Project 官方的 Tor Browser，iOS 没有官方版本，只能用社区维护的 Onion Browser。这一页说明两边各自的安装方式、第一次启动要处理什么、如何确认自己真的走在 Tor 上，以及什么时候应该放下手机改用电脑。
 icon: material/cellphone-lock
 ---
 

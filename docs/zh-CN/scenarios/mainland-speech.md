@@ -14,7 +14,7 @@ icon: material/broadcast
 
 同一个区域里另一套法律框架下的处境，见 [在新加坡与马来西亚的网络发言](./singapore-malaysia-speech.md)。
 
-要先理解对手能取得什么，可以回头看 [威胁模型如何建立](../basics/threat-model.md) 与 [社群平台怎么收集你的数据](../basics/platform-tracking.md)。
+要先理解对手能取得什么，可以回头看 [威胁模型如何建立](../basics/threat-model.md) 与 [社交平台怎么收集你的数据](../basics/platform-tracking.md)。
 
 ## 现在的环境
 
@@ -176,7 +176,7 @@ Citizen Lab 对微信的一系列实证研究拆解了其中几个机制，有�
 - [记者保护消息来源](./journalist.md)：中国大陆的脉络一节处理境内受访者与协作者的风险
 - [出差与研讨会的数字准备](./asia-travel.md)：中国大陆段的封锁现况、SIM 实名与入境查机
 - [怎么维持多个网络身分](../basics/multiple-identities.md)：分层的设定与长期维持，以及换账号挡不掉的部分
-- [社群平台怎么收集你的数据](../basics/platform-tracking.md)：平台侧的数据收集与行为讯号
+- [社交平台怎么收集你的数据](../basics/platform-tracking.md)：平台侧的数据收集与行为讯号
 - [威胁模型如何建立](../basics/threat-model.md)：每次行动前先盘点对手与能承受的代价
 - [Anthropic 九月威胁报告写到台湾的四个段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：同一套体系用 AI 产出舆情简报的实例，公开发言被评分、改写，最后进到呈给官员的简报
 

@@ -85,7 +85,7 @@ Northeastern University 的研究团队在美国实测了一批旅游 eSIM，发
 
 用旅游 eSIM 上网时，原号码如果还开着，两个号码都连在当地网络上，都收得到电话与短信[^apple-esim-travel]。关掉原号码，就收不到发到这个号码的短信验证码。
 
-出发前能换的先换。Google、Apple、社群账号这类支持验证 App 或 passkey 的服务，把两步验证从短信换掉，关掉原号码也不会被锁在账号外面。验证 App 是在手机上每 30 秒生成一组数字的 App，passkey 是存在手机或密码管理器里的登录凭证，两者都不需要收短信，差别见 [什么是 passkey](../tools/what-is-passkey.md)，各账号的检查位置见 [手机隐私设置逐步指引](../tools/phone-privacy-settings.md#9-账号的登录保护)。银行这类只能收短信的服务换不掉，就让原号码开着。
+出发前能换的先换。Google、Apple、社交账号这类支持验证 App 或 passkey 的服务，把两步验证从短信换掉，关掉原号码也不会被锁在账号外面。验证 App 是在手机上每 30 秒生成一组数字的 App，passkey 是存在手机或密码管理器里的登录凭证，两者都不需要收短信，差别见 [什么是 passkey](../tools/what-is-passkey.md)，各账号的检查位置见 [手机隐私设置逐步指引](../tools/phone-privacy-settings.md#9-账号的登录保护)。银行这类只能收短信的服务换不掉，就让原号码开着。
 
 原号码要关掉时：
 

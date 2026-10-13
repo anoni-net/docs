@@ -84,7 +84,7 @@ icon: material/shield-airplane-outline
 ```
 
 !!! tip "（进阶）想让 AI 查到真实的 Tor 节点数字，可接上社区的 AI 助手 Tor 节点查询"
-    这题问的 relay、bridge 数量与带宽，AI 若没有外部数据来源，很可能凭记忆编一个给你（就是这页开头警告的那种错）。如果你用的是 claude.ai 这类支持 MCP（让 AI 连到外部实时数据源的标准接口）的助理，可以接上社群自架的 [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}（onionoo MCP），它把 Tor Project 的 Onionoo 公开数据接成一个网址，AI 就能查到当下、可引用的真实数字。只用 ChatGPT 网页版的话，跳过这段即可，记得拿 AI 的回答去对照本页底部的 Tor Metrics。
+    这题问的 relay、bridge 数量与带宽，AI 若没有外部数据来源，很可能凭记忆编一个给你（就是这页开头警告的那种错）。如果你用的是 claude.ai 这类支持 MCP（让 AI 连到外部实时数据源的标准接口）的助理，可以接上社区自架的 [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}（onionoo MCP），它把 Tor Project 的 Onionoo 公开数据接成一个网址，AI 就能查到当下、可引用的真实数字。只用 ChatGPT 网页版的话，跳过这段即可，记得拿 AI 的回答去对照本页底部的 Tor Metrics。
 
 ```text
 【数字环境 3／VPN 合法性与可用性】在目的地使用 VPN 是否合法？WireGuard、

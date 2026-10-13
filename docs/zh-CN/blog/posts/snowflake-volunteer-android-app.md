@@ -58,9 +58,9 @@ Bloco 站在 [Guardian Project](https://guardianproject.info){target="_blank"} �
 
 ## 上线后的成效
 
-Snowflake Volunteer 经过一段社群测试与意见反馈后，于 4 月正式在 [F-Droid](https://f-droid.org/en/packages/io.bloco.snowflake/){target="_blank"} 与 [Google Play](https://play.google.com/store/apps/details?id=io.bloco.snowflake){target="_blank"} 上架。5 月平均每天约 1,300 个不重复志愿者桥接 IP，6 月成长到约 1,700 个，单月成长 29%，单日峰值曾超过 2,100 个桥接。相对于整体约 146,000 个桥接的规模，这批新增志愿者还只是一小块，但原本并不在池子里，多半是过去被浏览器标签页版本挡在门外的手机用户。
+Snowflake Volunteer 经过一段社区测试与意见反馈后，于 4 月正式在 [F-Droid](https://f-droid.org/en/packages/io.bloco.snowflake/){target="_blank"} 与 [Google Play](https://play.google.com/store/apps/details?id=io.bloco.snowflake){target="_blank"} 上架。5 月平均每天约 1,300 个不重复志愿者桥接 IP，6 月成长到约 1,700 个，单月成长 29%，单日峰值曾超过 2,100 个桥接。相对于整体约 146,000 个桥接的规模，这批新增志愿者还只是一小块，但原本并不在池子里，多半是过去被浏览器标签页版本挡在门外的手机用户。
 
-App 目前支持 8 种语言（英文、法文、德文、日文、葡萄牙文、土耳其文、越南文，以及简体中文），这些语言版本来自社群本地化志愿者的贡献。想协助支持更多语言，可以到 [Weblate 项目页](https://hosted.weblate.org/projects/snowflake-volunteers/){target="_blank"}，或先读 [Tor 的本地化流程说明](https://community.torproject.org/localization/){target="_blank"}。
+App 目前支持 8 种语言（英文、法文、德文、日文、葡萄牙文、土耳其文、越南文，以及简体中文），这些语言版本来自社区本地化志愿者的贡献。想协助支持更多语言，可以到 [Weblate 项目页](https://hosted.weblate.org/projects/snowflake-volunteers/){target="_blank"}，或先读 [Tor 的本地化流程说明](https://community.torproject.org/localization/){target="_blank"}。
 
 ## 什么情况下适合用这支 App
 
@@ -77,7 +77,7 @@ Snowflake Volunteer 可以从 [F-Droid](https://f-droid.org/en/packages/io.bloco
 ## 相关阅读
 
 - [Tor Snowflake 桥接点](../../tools/tor-snowflake.md)：浏览器版桥接点如何开，以及需要留意的风险
-- [伊朗封网 80 多天后重新开放，流量涌进社群架设的 Tor WebTunnel](https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}：桥接点在真实审查情境下的作用
+- [伊朗封网 80 多天后重新开放，流量涌进社区架设的 Tor WebTunnel](https://anoni.net/zh-cn/updates/2026/05/iran-blackout-webtunnel/){target="_blank"}：桥接点在真实审查情境下的作用
 - [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}：想投入更多心力的下一步
 
 [^1]: 统计依据 2026 年 1 月 1 日至 6 月 30 日、共 180 份 Snowflake broker 每日报告，数据来自 Tor Metrics 的 [CollecTor 存档](https://metrics.torproject.org/collector/archive/snowflakes/){target="_blank"} 汇整的 snowflake-stats descriptor。
