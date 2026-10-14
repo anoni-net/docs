@@ -151,6 +151,7 @@ EFF 的 [Cover Your Tracks](https://coveryourtracks.eff.org/){target="_blank"} �
 - [怎么维持多个网络身分](./multiple-identities.md)：账号分层碰上指纹时的限制
 - [Tor Browser 进阶设置](../tools/tor-browser-advanced.md)：一致化路线的实际操作
 - [监控现在做得到什么](./surveillance-capability.md)：把指纹放进四层能力对照
+- [Brave 抹平 GPU 指纹的两种相反手法](https://anoni.net/zh-cn/articles/brave-gpu-fingerprinting/){target="_blank"}：`1.93` 版显卡防护的技术细节，写在社区首页的技术文章
 
 [^google2019]: [Building a more private web](https://blog.google/products-and-platforms/products/chrome/building-a-more-private-web/){target="_blank"} - Justin Schuh，Google，2019 年 8 月 22 日。原文为「Unlike cookies, users cannot clear their fingerprint, and therefore cannot control how their information is collected. We think this subverts user choice and is wrong.」查证日 2026-08-18。
 [^eckersley]: [How Unique Is Your Web Browser?](https://coveryourtracks.eff.org/static/browser-uniqueness.pdf){target="_blank"} - Peter Eckersley，Electronic Frontier Foundation，PETS 2010。470,161 个样本、83.6% 唯一、18.1 bits 熵的数字出自此文。

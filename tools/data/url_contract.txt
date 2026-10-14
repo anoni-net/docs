@@ -261,11 +261,11 @@
 /blog/
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#Signal-免門號註冊與付款紀錄
 	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
+	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
 	#近期公告
 	#部落格技術文章的新位置
@@ -483,16 +483,7 @@
 	#開始之前先答三題
 	#隱形字元偵測
 /blog/2026/08/2026-gg2026-printed-wrapper/ -> https://anoni.net/updates/2026/08/2026-gg2026-printed-wrapper/
-/blog/2026/08/brave-gpu-fingerprinting/
-	#Brave-用兩種相反的手法抹平-GPU-指紋
-	#Tor-Browser-把一致化做到底
-	#farbling-的種子怎麼運作
-	#一致化與隨機化各自處理哪一種資料
-	#台灣讀者可以怎麼用
-	#延伸閱讀
-	#為什麼不全部一致化
-	#還沒做完的部分
-	#顯示卡為什麼是一組好用的指紋
+/blog/2026/08/brave-gpu-fingerprinting/ -> https://anoni.net/articles/brave-gpu-fingerprinting/
 /blog/2026/08/docs-corrections-202608/
 	#互動作品總覽頁的七處更正
 	#你沒有辦法自己驗證的那部分
@@ -676,11 +667,11 @@
 	#2026
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#Signal-免門號註冊與付款紀錄
 	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
+	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
 	#部落格技術文章的新位置
 	#部落格社群文章的新位置
@@ -694,7 +685,6 @@
 	#什麼是差分隱私
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
-	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
 /blog/category/ooni/
 	#OONI
@@ -718,7 +708,6 @@
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
 /blog/category/公告/ -> https://anoni.net/updates/
 /blog/category/技術/
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#Signal-免門號註冊與付款紀錄
 	#什麼是差分隱私
 	#介紹-Signal-自動金鑰驗證
@@ -777,17 +766,14 @@
 /blog/category/隱私/
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
-	#Brave-用兩種相反的手法抹平-GPU-指紋
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Signal-免門號註冊與付款紀錄
+	#什麼是差分隱私
 	#介紹-Signal-自動金鑰驗證
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
-	#隱私
-/blog/category/隱私/page/2/
-	#什麼是差分隱私
 	#隱私
 /blog/page/2/
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
@@ -795,15 +781,14 @@
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
+	#Tor-使用者文件的新家
 	#什麼是差分隱私
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
-	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
 	#近期公告
 /blog/page/3/
 	#Tails-70-發佈
-	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
 	#發佈新-OONI-Explorer-主題審查頁面
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
@@ -1373,7 +1358,6 @@
 	#Why-the-adversary-is-regional
 /en/blog/
 	#A-new-home-for-the-blogs-community-posts
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
@@ -1381,6 +1365,7 @@
 	#Recent-Updates
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
+	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
 /en/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
@@ -1518,16 +1503,7 @@
 	#Whose-code-is-in-here
 	#Working-on-this-with-us
 /en/blog/2026/08/2026-gg2026-printed-wrapper/ -> https://anoni.net/en/updates/2026/08/2026-gg2026-printed-wrapper/
-/en/blog/2026/08/brave-gpu-fingerprinting/
-	#A-graphics-card-makes-an-unusually-good-fingerprint
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
-	#Parts-of-the-problem-stay-open
-	#The-farbling-seed-changes-per-session-and-per-site
-	#Tor-Browser-takes-uniformity-all-the-way
-	#Uniformity-and-randomization-each-take-different-signals
-	#Uniformity-everywhere-would-break-feature-negotiation
-	#Where-to-go-from-here
-	#Which-one-to-use-depends-on-your-threat-model
+/en/blog/2026/08/brave-gpu-fingerprinting/ -> https://anoni.net/en/articles/brave-gpu-fingerprinting/
 /en/blog/2026/08/docs-corrections-202608/
 	#A-2FA-app-we-recommended-had-changed-owners
 	#A-white-strip-on-narrow-screens-traced-back-to-the-language-switcher
@@ -1663,13 +1639,13 @@
 /en/blog/archive/2026/
 	#2026
 	#A-new-home-for-the-blogs-community-posts
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
 	#New-Home-for-the-Blogs-Technical-Posts
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
+	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
 /en/blog/archive/2026/page/2/
@@ -1680,7 +1656,6 @@
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
-	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#What-the-original-article-covers
@@ -1716,7 +1691,6 @@
 	#Perspective
 /en/blog/category/privacy/
 	#Android-17-ships-the-real-GrapheneOS-story-is-who-decides-what-runs-on-your-phone
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Brief-yourself-before-you-travel--take-the-right-questions-to-your-own-AI
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
@@ -1728,7 +1702,6 @@
 	#What-is-Differential-Privacy
 	#Why-this-matters-especially-in-APAC
 /en/blog/category/technology/
-	#Brave-flattens-GPU-fingerprints-two-opposite-ways
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Signal-Login-and-the-payment-trail-it-leaves
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
@@ -1766,7 +1739,6 @@
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Recent-Updates
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
-	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#What-the-original-article-covers
@@ -2293,19 +2265,7 @@
 	#Window-one-the-government-sells-its-own
 	#Window-three-the-advertising-identifier
 	#Window-two-what-the-carriers-sell-directly
-/en/regional/taiwan-tor-users/
-	#A-weekday-shaped-curve
-	#Almost-nobody-needs-a-bridge
-	#Bridge-use-grew-during-2026-for-reasons-that-are-not-clear
-	#Four-years-of-slow-growth
-	#How-many-people-use-Tor-in-Taiwan
-	#Mid-range-within-the-Asia-Pacific
-	#More-people-use-the-network-than-help-carry-it
-	#Next
-	#Reproducing-this
-	#The-tenfold-spike-was-a-counting-bug
-	#What-the-number-actually-measures
-	#What-usage-in-Taiwan-looks-like
+/en/regional/taiwan-tor-users/ -> https://anoni.net/en/projects/pulse/tor-users/
 /en/regional/taiwan-vasp-2026/
 	#Cross-border-sanctions-and-the-over-compliance-side-effect
 	#Defining-virtual-asset-and-where-NFTs-sit
@@ -2870,7 +2830,7 @@
 	#How-our-community-uses-it
 	#Learn-alongside
 	#OONI-Run-v2-for-regional-measurement
-	#The-miniooni-CLI-gotcha
+	#Running-a-list-from-the-command-line
 	#What-it-is-for-regionally
 	#What-you-should-know
 /en/tools/password-manager/
@@ -4168,18 +4128,7 @@
 	#電信業者查政府的資料庫
 	#預設值是誰設的又該由誰來改
 /taiwan/tor-relay-watcher/ -> https://anoni.net/projects/pulse/
-/taiwan/tor-users/
-	#2025-年那次十倍跳升是計數錯誤
-	#bridge-使用在-2026-年成長原因還不清楚
-	#下一步
-	#亞太區的中段位置
-	#使用的人多提供中繼的人少
-	#使用者數是怎麼算出來的
-	#台灣使用者的四個特徵
-	#台灣有多少人在用-Tor
-	#四年來緩慢上升
-	#工作日型的使用曲線
-	#幾乎不需要-bridge
+/taiwan/tor-users/ -> https://anoni.net/projects/pulse/tor-users/
 /taiwan/vasp-2026/
 	#上市公司持有證交所的會計與內控指引2026-05
 	#參考來源
@@ -4390,7 +4339,6 @@
 	#常見問題
 	#建立和分享連結
 	#操作說明
-	#用-miniooni-CLI-執行檢測
 	#觀察資料
 /tools/password-manager/
 	#Passkeys取代密碼的新方案
@@ -5158,13 +5106,13 @@
 /zh-cn/blog/
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#Signal-免手机号注册与付款记录
 	#介绍-Signal-自动密钥验证
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
 	#博客技术文章的新位置
 	#博客社区文章的新位置
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
+	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
 	#近期公告
 /zh-cn/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
@@ -5380,16 +5328,7 @@
 	#送出去之前先清一次
 	#隐形字符检测
 /zh-cn/blog/2026/08/2026-gg2026-printed-wrapper/ -> https://anoni.net/zh-cn/updates/2026/08/2026-gg2026-printed-wrapper/
-/zh-cn/blog/2026/08/brave-gpu-fingerprinting/
-	#Brave-用两种相反的手法抹平-GPU-指纹
-	#Tor-Browser-把一致化做到底
-	#farbling-的种子怎么运作
-	#一致化与随机化各自处理哪一种数据
-	#为什么不全部一致化
-	#延伸阅读
-	#显卡为什么是一组好用的指纹
-	#读者可以怎么选
-	#还没做完的部分
+/zh-cn/blog/2026/08/brave-gpu-fingerprinting/ -> https://anoni.net/zh-cn/articles/brave-gpu-fingerprinting/
 /zh-cn/blog/2026/08/docs-corrections-202608/
 	#两位社群伙伴的贡献
 	#两页的叙述已经对不上现况
@@ -5573,13 +5512,13 @@
 	#2026
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#Signal-免手机号注册与付款记录
 	#介绍-Signal-自动密钥验证
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
 	#博客技术文章的新位置
 	#博客社区文章的新位置
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
+	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
 /zh-cn/blog/archive/2026/page/2/
 	#2026
@@ -5591,7 +5530,6 @@
 	#什么是差分隐私
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
-	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
 /zh-cn/blog/category/ooni/
 	#OONI
@@ -5615,7 +5553,6 @@
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 /zh-cn/blog/category/公告/ -> https://anoni.net/zh-cn/updates/
 /zh-cn/blog/category/技术/
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#Signal-免手机号注册与付款记录
 	#什么是差分隐私
 	#介绍-Signal-自动密钥验证
@@ -5674,17 +5611,14 @@
 /zh-cn/blog/category/隐私/
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
-	#Brave-用两种相反的手法抹平-GPU-指纹
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Signal-免手机号注册与付款记录
+	#什么是差分隐私
 	#介绍-Signal-自动密钥验证
 	#出国前数字安全把该问的问题带回去问你自己的-AI
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
-	#隐私
-/zh-cn/blog/category/隐私/page/2/
-	#什么是差分隐私
 	#隐私
 /zh-cn/blog/page/2/
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
@@ -5692,15 +5626,14 @@
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
+	#Tor-用户文档的新家
 	#什么是差分隐私
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
-	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
 	#近期公告
 /zh-cn/blog/page/3/
 	#Tails-70-发布
-	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#发布新-OONI-Explorer-专题审查页面
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
@@ -6690,18 +6623,7 @@
 	#通知义务只盖到其中一类
 	#默认值是谁设的又该由谁来改
 /zh-cn/taiwan/tor-relay-watcher/ -> https://anoni.net/zh-cn/projects/pulse/
-/zh-cn/taiwan/tor-users/
-	#2025-年那次十倍跳升是计数错误
-	#bridge-使用在-2026-年增长原因还不清楚
-	#下一步
-	#亚太区的中段位置
-	#使用的人多提供中继的人少
-	#几乎不需要-bridge
-	#台湾有多少人在用-Tor
-	#台湾用户的四个特征
-	#四年来缓慢上升
-	#工作日型的使用曲线
-	#用户数是怎么算出来的
+/zh-cn/taiwan/tor-users/ -> https://anoni.net/zh-cn/projects/pulse/tor-users/
 /zh-cn/taiwan/vasp-2026/
 	#中国对应制度速览
 	#为什么匿名网络社群会关心这件事
@@ -6913,7 +6835,6 @@
 	#常见问题
 	#建立和分享链接
 	#操作说明
-	#用-miniooni-CLI-执行检测
 	#观察数据
 /zh-cn/tools/password-manager/
 	#Passkeys取代密码的新方案

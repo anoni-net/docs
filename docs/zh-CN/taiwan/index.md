@@ -22,7 +22,7 @@ icon: material/island
 - [OONI 网站检测清单的维护](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"}：在地清单如何维护、分类与更新，是观测数据的入门起点。
 - [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}：台湾各 ASN 的 OONI 测试覆盖与盲点。
 - [Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}：台湾 Tor 中继节点的即时运作状况与区域比较。
-- [台湾有多少人在用 Tor](./tor-users.md)：用户端的规模与四年趋势，对照中国大陆与香港的同期数据，以及 2025 年那次十倍跳升为什么是计数错误。
+- [台湾有多少人在用 Tor](https://anoni.net/zh-cn/projects/pulse/tor-users/){target="_blank"}：用户端的规模与四年趋势，对照中国大陆与香港的同期数据，以及 2025 年那次十倍跳升为什么是计数错误。
 - [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：社区自架的查询服务，不用写代码，在 claude.ai 接上后直接问台湾与各地有多少 Tor 中继、带宽多大、落在哪些电信网络。
 
 ### 个资与身分

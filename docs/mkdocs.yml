@@ -109,7 +109,6 @@ nav:
   # 只有一篇。側邊欄做成三個單頁分組只會更難掃，所以合併成「法規與制度」一組。
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
       - taiwan/index.md
-      - taiwan/tor-users.md
       - "法規與制度":
           - taiwan/pdpa-2025.md
           - taiwan/digital-wallet-privacy.md
@@ -385,6 +384,9 @@ plugins:
         'community/campus-tor-relay-sop.md': 'https://anoni.net/join/relay-on-campus/sop/'
         'community/campus-relay-faq.md': 'https://anoni.net/join/relay-on-campus/faq/'
         'setup/index.md': 'https://anoni.net/join/'
+        # 2026-10-14 #406 剩下四頁的盤點：台灣 Tor 使用者數搬到 Tor 中繼節點觀測底下，Brave GPU 指紋搬到技術文章
+        'taiwan/tor-users.md': 'https://anoni.net/projects/pulse/tor-users/'
+        'blog/2026/08/brave-gpu-fingerprinting.md': 'https://anoni.net/articles/brave-gpu-fingerprinting/'
         # 2026-10-14 在地脈絡與社群區的三頁搬到社群首頁（toomore/anoni-net-ws#406）
         'taiwan/ooni-asn-coverage.md': 'https://anoni.net/projects/asn-coverage/asn-diversity/'
         'taiwan/ooni-checklist.md': 'https://anoni.net/join/ooni-test-list/'

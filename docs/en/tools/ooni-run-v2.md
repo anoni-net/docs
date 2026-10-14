@@ -36,19 +36,9 @@ Leaving the link running in the background after a one-time install is far more 
 
 If you want to help, install that link in OONI Probe (Android; check OONI for current iOS support) and run it. How that connects to broader ASN coverage is in the [regional observatory](../regional/index.md).
 
-## The miniooni CLI gotcha
+## Running a list from the command line
 
-Beyond mobile, OONI has a command-line build, [miniooni](https://github.com/ooni/probe-cli){target="_blank"}, handy on a server, in a research script, or in automation. Feeding it an OONI Run v2 link has one trap worth knowing: **do not hand the web URL straight to `-i`.**
-
-```bash
-# Does not work: the CLI gets HTML, and JSON parsing fails
-miniooni oonirun -i https://run.ooni.org/v2/<LINK_ID>
-
-# Correct: point at the API's descriptor JSON
-miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>
-```
-
-miniooni's `-i` treats the URL you give it as a descriptor-JSON endpoint and GETs it expecting JSON back. `run.ooni.org/v2/<ID>` is a web page for browsers and returns HTML, so the CLI's parse fails. The actual descriptor is served by the API at `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`, where `<LINK_ID>` is the trailing segment of the web URL. Desktop and mobile are unaffected: the OS hands `run.ooni.org/v2/<ID>` to OONI Probe to handle. This limit affects only the miniooni CLI.
+To run a list on a server, in a research script or on a schedule, see [miniooni and OONI Run v2 lists](https://anoni.net/en/projects/asn-coverage/howto/#miniooni){target="_blank"} on the community site.
 
 ## Learn alongside
 

@@ -153,6 +153,7 @@ Browsers ship every few weeks, and defaults and feature names move with them. Wh
 - [Maintaining multiple online identities](./multiple-identities.md) — the limits account separation runs into when fingerprinting is in play
 - [Tor Browser advanced settings](../tools/tor-browser-advanced.md) — the uniformity approach in practice
 - [What surveillance can actually do](./surveillance-capability.md) — fingerprinting placed against the four-layer capability comparison
+- [Two Opposite Approaches to Flattening GPU Fingerprints in Brave](https://anoni.net/en/articles/brave-gpu-fingerprinting/){target="_blank"} — the technical detail behind the graphics protections in version `1.93`, in the community site's Articles
 
 [^google2019]: [Building a more private web](https://blog.google/products-and-platforms/products/chrome/building-a-more-private-web/){target="_blank"} — Justin Schuh, Google, 22 August 2019. "Unlike cookies, users cannot clear their fingerprint, and therefore cannot control how their information is collected. We think this subverts user choice and is wrong." Verified 2026-08-18.
 [^eckersley]: [How Unique Is Your Web Browser?](https://coveryourtracks.eff.org/static/browser-uniqueness.pdf){target="_blank"} — Peter Eckersley, Electronic Frontier Foundation, PETS 2010. Source for the 470,161 samples, the 83.6% unique share, and the 18.1 bits of entropy.
