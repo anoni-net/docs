@@ -191,7 +191,7 @@ Tails 內建一系列預設安全的開源工具：
 
 - [:material-newspaper-variant-outline: 記者保護消息來源](../scenarios/journalist.md)
 - [:material-upload-outline: 上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}
-- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
+- [:material-list-status: OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}
 
 </div>
 

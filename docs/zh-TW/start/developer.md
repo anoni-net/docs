@@ -37,9 +37,9 @@ icon: material/console
 - [OONI 的封鎖判定方式](https://anoni.net/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：判定邏輯先弄懂才不會誤讀資料
 - [OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}：各測項測的是什麼
 - [ASN 觀測資料的擷取與分析](https://anoni.net/projects/asn-coverage/howto/){target="_blank"}：社群自己那支擷取程式怎麼設定與使用，含 S3 公開資料集的路徑結構
-- [ASN 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)：台灣目前的涵蓋狀況，缺口就是題目
+- [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}：台灣目前的涵蓋狀況，缺口就是題目
 - [AI 助理的 Tor 節點查詢](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的 Tor 中繼查詢服務（onionoo MCP），也是一個可以延伸的介面
-- [OONI 網站檢測清單](../taiwan/ooni-checklist.md)：台灣的檢測清單怎麼維護，分類與更新都需要人
+- [OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"}：台灣的檢測清單怎麼維護，分類與更新都需要人
 
 ### 在學校或公司內部有影響力
 
@@ -54,7 +54,7 @@ icon: material/console
 - [寫作風格規範](https://anoni.net/join/writing-style/){target="_blank"}：三個網站共用的寫作規則，動筆前先讀
 - [貢獻者百科](../community/contributor-handbook.md)：檔名、連結格式、PR 流程與翻譯流程
 - [中文化與文件翻譯](../community/i18n.md)：三語系的翻譯流程
-- [專案研究預先準備](../community/setup-repo.md)：開始一個新主題之前的準備工作
+- [參與開發的環境準備](https://anoni.net/join/dev-setup/){target="_blank"}：開始一個新主題之前的準備工作
 
 ## 不分身分都要做到的
 

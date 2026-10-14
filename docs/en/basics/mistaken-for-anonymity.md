@@ -79,7 +79,7 @@ The most common reason people in Taiwan change their DNS settings is faster look
 
 The picture differs across the region. In Mainland China, DNS tampering is one layer among several, so encrypted DNS alone changes little when IP blocking and TLS interference operate alongside it. In Hong Kong, network-level filtering exists but is narrow: OONI has recorded a small number of sites blocked by DNS tampering across several operators, so a DNS change can matter for those sites while the broader pressure is legal. In Taiwan, the DNS-layer blocking that exists targets fraud domains through the response policy zone mechanism rather than political content, so choosing a DNS provider is closer to a privacy decision than a way around censorship.
 
-What DNS-layer protections you give up by switching, and how to set up a device before running OONI Probe, are in [the encrypted DNS guide](../tools/encrypted-dns.md). The [ASN coverage](../regional/ooni-asn-coverage.md) work the community maintains depends on those measurements.
+What DNS-layer protections you give up by switching, and how to set up a device before running OONI Probe, are in [the encrypted DNS guide](../tools/encrypted-dns.md). The [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} work the community maintains depends on those measurements.
 
 ## Four questions for judging a tool
 
@@ -126,7 +126,7 @@ The third is the easiest to answer and the most often skipped. A project's FAQ o
 <div class="grid cards" markdown>
 
 - [:material-share-variant-outline: OnionShare](../tools/onionshare.md)
-- [:material-chart-bar: ASN observation coverage](../regional/ooni-asn-coverage.md)
+- [:material-chart-bar: ASN observation coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-shield-account-outline: Personal privacy guide](https://anoni.net/en/join/privacy-guide/){target="_blank"}
 
 </div>

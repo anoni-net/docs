@@ -8,7 +8,7 @@ icon: material/access-point-network
 
 When a site will not load, the first instinct is usually to wonder whether it is your own connection. OONI (Open Observatory of Network Interference) exists to turn that experience into verifiable data. It provides an open source measurement tool, [OONI Probe](https://ooni.org/install/){target="_blank"}, and a public data platform, [OONI Explorer](https://explorer.ooni.org/){target="_blank"}, so anyone can run a test, look up records, and leave blocking, monitoring, and throttling with a trace that has a time, a location, and an autonomous system number (ASN) attached.
 
-The value is that it moves an argument onto data. A site being unreachable does not have to stop at speculation about whether it was blocked. OONI leaves a record that communities, journalists, and researchers can cite and reproduce. That is also why [ASN observation coverage](../regional/ooni-asn-coverage.md) is worth tracking over time: the more varied the vantage points, the more representative the record.
+The value is that it moves an argument onto data. A site being unreachable does not have to stop at speculation about whether it was blocked. OONI leaves a record that communities, journalists, and researchers can cite and reproduce. That is also why [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} is worth tracking over time: the more varied the vantage points, the more representative the record.
 
 ## What the OONI project does
 
@@ -44,7 +44,7 @@ Compare that with Mainland China, where the Great Firewall's interference spans 
 
 !!! question "Is the network we are on actually free?"
 
-    The examples above are mostly benign blocking aimed at malicious sites, ads, and phishing. The harder question is what happens when blocking is deliberate, or when it comes from an ASN nobody is measuring. **Current data for Taiwan shows no large-scale blocking**, with anomalies at roughly 3% and confirmed blocking well under 0.01% of web measurements over the year to August 2026. The largest single share of observations comes from one carrier, Chunghwa Telecom ([`AS3462`](https://radar.cloudflare.com/as3462){target="_blank"}), at about a third of the total, with a long tail of networks contributing far less. Evening out that distribution is what the [ASN coverage](../regional/ooni-asn-coverage.md) work exists to address, by identifying which networks in Taiwan still have no vantage point at all.
+    The examples above are mostly benign blocking aimed at malicious sites, ads, and phishing. The harder question is what happens when blocking is deliberate, or when it comes from an ASN nobody is measuring. **Current data for Taiwan shows no large-scale blocking**, with anomalies at roughly 3% and confirmed blocking well under 0.01% of web measurements over the year to August 2026. The largest single share of observations comes from one carrier, Chunghwa Telecom ([`AS3462`](https://radar.cloudflare.com/as3462){target="_blank"}), at about a third of the total, with a long tail of networks contributing far less. Evening out that distribution is what the [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} work exists to address, by identifying which networks in Taiwan still have no vantage point at all.
 
     Worth keeping apart: the fraud domains handled through DNS RPZ are not on OONI's test list for Taiwan, so that mechanism does not appear in these figures at all. No large-scale blocking is an accurate reading. No blocking would not be.
 
@@ -134,7 +134,7 @@ Measurements return to OONI's database and can be analyzed by region and by test
 
 ??? question "What is the easiest way to contribute?"
 
-    Install [OONI Probe](https://ooni.org/install/){target="_blank"} on your phone and let it run once a day. If you have a Linux machine at home, the cron job above accumulates observations continuously. Going further, the [OONI Website Testing List](../regional/ooni-checklist.md) covers adding sites of local interest, and [ASN observation coverage](../regional/ooni-asn-coverage.md) shows which networks still lack a vantage point.
+    Install [OONI Probe](https://ooni.org/install/){target="_blank"} on your phone and let it run once a day. If you have a Linux machine at home, the cron job above accumulates observations continuously. Going further, the [Maintaining the OONI Test List](https://anoni.net/en/join/ooni-test-list/){target="_blank"} covers adding sites of local interest, and [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} shows which networks still lack a vantage point.
 
 ## :material-chat-question: Related concepts
 
@@ -150,8 +150,8 @@ Measurements return to OONI's database and can be analyzed by region and by test
 
 <div class="grid cards" markdown>
 
-- [:material-list-status: OONI Website Testing List](../regional/ooni-checklist.md)
-- [:material-access-point-network: ASN observation data analysis](../regional/ooni-asn-coverage.md)
+- [:material-list-status: OONI Website Testing List](https://anoni.net/en/join/ooni-test-list/){target="_blank"}
+- [:material-access-point-network: ASN observation data analysis](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-server-network: Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
 
 </div>

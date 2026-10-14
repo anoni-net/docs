@@ -266,7 +266,7 @@ icon: material/lan-disconnect
 
 **海缆与电网**：[Tor 中继地球仪](../games/tor-network.md)放大到台湾之后会显示海缆登陆点、变电站、发电厂与 345kV（千伏特，台湾主要高压输电干线的电压等级）骨干，每一层都标了数据来源与精度。登陆点的数量、变电站的容量余裕这类数字，可以用来理解对外连线与供电的集中程度。
 
-**网络观测的涵盖范围**：[台湾 ASN 观测涵盖](../taiwan/ooni-asn-coverage.md)说明目前有哪些自治系统（ASN，互联网上由单一组织例如运营商统一管理的一段网络）被实际测量到。这决定了发生异常时，公开数据能不能佐证。
+**网络观测的涵盖范围**：[ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}说明目前有哪些自治系统（ASN，互联网上由单一组织例如运营商统一管理的一段网络）被实际测量到。这决定了发生异常时，公开数据能不能佐证。
 
 **这些数据不能拿来做什么**：它们说明的是现况与集中程度，不足以推论任何特定事件会不会发生、何时发生。看到集中度高就推论即将发生中断，是过度解读。
 
@@ -321,5 +321,5 @@ icon: material/lan-disconnect
 - [离线阅读](../offline.md)：把这个站存进设备，以及管理设备上留了哪些内容
 - [小工具](../utils/index.md)：全部在浏览器里运算，存进设备之后没有网络也能用
 - [Tor 中继地球仪](../games/tor-network.md)：放大到台湾可以看到海缆登陆点、变电站、发电厂与 345kV 骨干
-- [台湾 ASN 观测涵盖](../taiwan/ooni-asn-coverage.md)：目前有哪些自治系统被实际测量到
+- [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}：目前有哪些自治系统被实际测量到
 - [威胁模型](../basics/threat-model.md)：依自己的处境决定准备到什么程度

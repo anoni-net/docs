@@ -41,7 +41,7 @@ OONI Run 適合需要追蹤特定網站封鎖狀況的人：研究員針對個�
 
 安裝過一次之後讓它留在背景持續執行，效果比偶爾手動測一輪好得多。社群做過的[全站普查](https://anoni.net/articles/ooni-run-v2-usage-patterns/){target="_blank"}顯示，336 條 Run v2 清單裡有 112 條生涯檢測量掛零，193 條不到 100 筆，真正產出資料的清單，共通點都是背後有一台持續運行的裝置。
 
-連結之外，[OONI 網站檢測清單](../taiwan/ooni-checklist.md) 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md) 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助執行這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
+連結之外，[OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"} 整理了台灣脈絡下值得長期觀測的網站清單，配套的 [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"} 把 OONI 全部結果按 ASN 切開，看不同電信商連到不同國際服務的狀況。如果你想協助執行這條連結的測試，行動裝置安裝 OONI Probe 後點上面的網址即可。
 
 ## 操作說明
 
@@ -200,8 +200,8 @@ miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
 
 <div class="grid cards" markdown>
 
-- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-table-search: OONI 測項速查表](https://anoni.net/projects/asn-coverage/ooni-nettests-map/){target="_blank"}
 - [:material-code-json: OONI 測量資料的結構](https://anoni.net/projects/asn-coverage/ooni-data-format/){target="_blank"}
 - [:material-server-network: Tor Relay 架設指南](https://anoni.net/join/setup-tor-relay/){target="_blank"}

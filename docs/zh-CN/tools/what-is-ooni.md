@@ -8,7 +8,7 @@ icon: material/access-point-network
 
 连不上某个网站时，第一个直觉通常是「是我网络有问题吗？」OONI（Open Observatory of Network Interference，网络干扰开放观测）就是为了把这种感受转成可验证的数据。它提供开源检测工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 与公开数据平台 [OONI Explorer](https://explorer.ooni.org/){target="_blank"}，让任何人都能执行检测、查纪录，把封锁、监控、降速这些行为留下时间、地点、ASN 都对得上的观测痕迹。
 
-OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社区、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
+OONI 的价值不只在于「有没有被封锁」这个单点问题，而在于它让讨论能以数据为基础。社区、媒体、研究者要佐证一次连线异常时，有可引用、可重现的纪录可用。也因此，[ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"} 在各地区都是值得长期关注的议题：观测点越多元，这份纪录的代表性就越强。
 
 ## OONI 计划主要推动事项
 
@@ -132,7 +132,7 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 ??? question "最简单的贡献方式是什么？"
 
-    手机装 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天让它执行一次自动检测就是有效贡献。如果家里有 Linux 主机，照本文「如何安装」段的 cronjob 范例设定，就能持续累积。想再进一步可以参考 [OONI 网站检测清单](../taiwan/ooni-checklist.md) 补充本地关注的网站，或读 [ASN 观测涵盖率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 还缺观测点。
+    手机装 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天让它执行一次自动检测就是有效贡献。如果家里有 Linux 主机，照本文「如何安装」段的 cronjob 范例设定，就能持续累积。想再进一步可以参考 [OONI 网站检测清单的维护](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"} 补充本地关注的网站，或读 [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"} 了解哪些 ASN 还缺观测点。
 
 ## :material-chat-question: 一同了解
 
@@ -148,8 +148,8 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-list-status: OONI 网站检测清单](../taiwan/ooni-checklist.md)
-- [:material-access-point-network: ASN 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 网站检测清单](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"}
+- [:material-access-point-network: ASN 自治网络观测数据分析](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-server-network: Tor Relay 观测点](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}
 
 </div>

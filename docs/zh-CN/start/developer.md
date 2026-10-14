@@ -37,9 +37,9 @@ icon: material/console
 - [OONI 的封锁判定方式](https://anoni.net/zh-cn/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}：判定逻辑先弄懂才不会误读数据
 - [OONI 测项速查表](https://anoni.net/zh-cn/projects/asn-coverage/ooni-nettests-map/){target="_blank"}：各测项测的是什么
 - [ASN 观测数据的提取与分析](https://anoni.net/zh-cn/projects/asn-coverage/howto/){target="_blank"}：社区自己那支提取程序怎么设置与使用，含 S3 公开数据集的路径结构
-- [ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)：台湾目前的涵盖状况，缺口就是题目
+- [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}：台湾目前的涵盖状况，缺口就是题目
 - [AI 助手的 Tor 节点查询](https://anoni.net/zh-cn/projects/onionoo-mcp/){target="_blank"}：社区自架的 Tor 中继查询服务（onionoo MCP），也是一个可以延伸的接口
-- [OONI 网站检测清单](../taiwan/ooni-checklist.md)：检测清单怎么维护，分类与更新都需要人
+- [OONI 网站检测清单的维护](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"}：检测清单怎么维护，分类与更新都需要人
 
 ### 会写文档，会翻译
 
@@ -48,7 +48,7 @@ icon: material/console
 - [写作风格规范](https://anoni.net/zh-cn/join/writing-style/){target="_blank"}：三个网站共用的写作规则，动笔前先读
 - [贡献者百科](../community/contributor-handbook.md)：文件名、链接格式、PR 流程与翻译流程
 - [中文化与文件翻译](../community/i18n.md)：三语系的翻译流程
-- [项目研究预先准备](../community/setup-repo.md)：开始一个新主题之前的准备工作
+- [参与开发的环境准备](https://anoni.net/zh-cn/join/dev-setup/){target="_blank"}：开始一个新主题之前的准备工作
 
 ### 在学校内部有影响力
 

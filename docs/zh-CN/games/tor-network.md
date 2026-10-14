@@ -135,7 +135,7 @@ og:
 
 - 这颗地球仪的数据怎么来的：[地球仪的数据从哪来](https://anoni.net/zh-cn/updates/2026/07/games-globe-open-data/){target="_blank"}
 - 三跳路由与匿名原理：[什么是 Tor](../tools/what-is-tor.md)
-- 台湾的观测覆盖：[台湾 ASN 观测覆盖](../taiwan/ooni-asn-coverage.md)
+- 台湾的观测覆盖：[ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
 - 其他两件作品：[互动与呈现](index.md)
 
 <script type="application/ld+json">

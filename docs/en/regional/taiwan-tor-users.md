@@ -218,7 +218,7 @@ Both return the full history from 2011 onwards, about 37 MB each, if `start` and
 <div class="grid cards" markdown>
 
 - [:material-chart-bar: Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"}
-- [:material-access-point-network: ASN observation data analysis](./ooni-asn-coverage.md)
+- [:material-access-point-network: ASN observation data analysis](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 - [:material-map-outline: Regional Observatory](./index.md)
 

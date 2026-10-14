@@ -77,7 +77,7 @@ I2P 是表上唯一跟 Tor 一样把匿名列为设计目标的系统，官方�
 
 在台湾，换 DNS 常见的理由是解析比较快，或某些域名在运营商的 DNS 上连不到。两个理由都合理，但换 DNS 只对发生在 DNS 层的封锁有用。封锁发生在 IP 或 SNI 那一层时，换谁回答都一样连不上。
 
-换掉之后会一并失去哪些原有的 DNS 防护、执行 OONI Probe 前设备该如何设置，都写在 [加密 DNS 怎么选、怎么确认真的生效](../tools/encrypted-dns.md)。社区长期整理的 [台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md) 就靠这些测量。
+换掉之后会一并失去哪些原有的 DNS 防护、执行 OONI Probe 前设备该如何设置，都写在 [加密 DNS 怎么选、怎么确认真的生效](../tools/encrypted-dns.md)。社区长期整理的 [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"} 就靠这些测量。
 
 ## 判断工具的四个提问
 
@@ -124,7 +124,7 @@ I2P 是表上唯一跟 Tor 一样把匿名列为设计目标的系统，官方�
 <div class="grid cards" markdown>
 
 - [:material-share-variant-outline: OnionShare](../tools/onionshare.md)
-- [:material-chart-bar: 台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md)
+- [:material-chart-bar: 台湾 ASN 覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 
 </div>

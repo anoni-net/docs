@@ -266,7 +266,7 @@ Taiwan's external connectivity and electricity supply can both be seen in rough 
 
 **Undersea cables and the grid:** The [Tor relay globe](../games/tor-network.md) zoomed to Taiwan shows cable landing points, substations, power plants and the 345kV (kilovolt, the voltage class of Taiwan's main high-voltage transmission lines) backbone, each layer labelled with its source and precision. Figures such as the number of landing points and the capacity headroom at substations give a sense of how concentrated external connectivity and power supply are.
 
-**How far network measurement reaches:** [ASN measurement coverage in Taiwan](../regional/ooni-asn-coverage.md) sets out which autonomous systems (ASNs, blocks of the internet each administered by a single organisation such as a carrier) are actually being measured. That determines whether public data can corroborate an anomaly when one occurs.
+**How far network measurement reaches:** [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} sets out which autonomous systems (ASNs, blocks of the internet each administered by a single organisation such as a carrier) are actually being measured. That determines whether public data can corroborate an anomaly when one occurs.
 
 **What this data cannot be used for:** It describes the current state and the degree of concentration. It does not support any inference about whether a particular event will happen, or when. Reading high concentration as a sign that an outage is imminent is over-reading it.
 
@@ -321,5 +321,5 @@ So the honest description of "Agreeing things with other people in advance" is a
 - [Offline reading](../offline.md): storing this site on your device, and managing what is kept there
 - [Utilities](../utils/index.md): everything computes in your browser, and they work with no network once stored
 - [Tor relay globe](../games/tor-network.md): zoom to Taiwan for cable landing points, substations, power plants and the 345kV backbone
-- [ASN measurement coverage in Taiwan](../regional/ooni-asn-coverage.md): which autonomous systems are actually being measured
+- [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}: which autonomous systems are actually being measured
 - [Threat modelling](../basics/threat-model.md): deciding how far to prepare based on your own situation

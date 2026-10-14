@@ -430,7 +430,7 @@ icon: octicons/paste-24
         ??? question "OONI 的檢測運作方式。"
 
             - OONI 提供免費的開源工具 OONI Probe，使用者可在自己的網路環境執行測試，檢測網路是否被審查。
-            - OONI Probe 會定期發送請求至多個網站和服務，確認[名單上](../taiwan/ooni-checklist.md){target="_blank"}的網站是否可以正常訪問。
+            - OONI Probe 會定期發送請求至多個網站和服務，確認 [OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}上的網站是否可以正常訪問。
             - 測試結果會匿名上傳到 OONI 的資料伺服器，並在 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"} 上公開，供研究者和公眾使用。
 
         ??? question "不同地區在網路監視與審查上的差異。"
@@ -482,7 +482,7 @@ icon: octicons/paste-24
 
             - ASN 是用於識別自治網路（AS）的唯一識別碼。
             - 自治網路是由一個或多個網路服務提供者（ISP）或大型企業管理的一組 IP 位址區塊。每個 AS 透過 ASN 在網際網路上互相通訊，交換路由資訊。
-            - 可參考「[ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md){target="_blank"}」中的介紹。
+            - 可參考「[ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}」中的介紹。
 
         ??? question "透過 OONI Explorer 整理特定國家近期的觀測資料。"
 
@@ -524,8 +524,8 @@ icon: octicons/paste-24
 
     ??? tip "還沒到這個程度？從這裡開始"
         1. 先完成「實作」層的所有項目。
-        2. 閱讀「[OONI 網站檢測清單](../taiwan/ooni-checklist.md){target="_blank"}」，了解名單的收錄方式與現況。
-        3. 閱讀「[ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md){target="_blank"}」，了解原始資料的分析方式。
+        2. 閱讀「[OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"}」，了解名單的收錄方式與現況。
+        3. 閱讀「[ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}」，了解原始資料的分析方式。
         4. 前往 [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} GitHub 專案，瀏覽各國的名單格式。
 
     !!! abstract "參考說明"
@@ -548,7 +548,7 @@ icon: octicons/paste-24
 
             名單的收錄分為四大類別：政治、社會、衝突與安全、網際網路工具。
 
-            可參考「[OONI 網站檢測清單](../taiwan/ooni-checklist.md){target="_blank"}」了解更多。
+            可參考「[OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"}」了解更多。
 
         ??? question "如何協助整理與更新名單。"
 
@@ -557,7 +557,7 @@ icon: octicons/paste-24
             1. 前往 [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} 找到 `lists/tw.csv`。
             2. 逐一檢查名單中的網址，標記需更新（網址失效、已更換域名）或可棄用（網站已停止營運）的項目。
             3. 修改完成後，提交 Pull Request 請求更新。
-            4. 詳細流程可參考「[OONI 網站檢測清單](../taiwan/ooni-checklist.md){target="_blank"}」中的說明。
+            4. 詳細流程可參考「[OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"}」中的說明。
 
         ??? question "透過原始觀測資料進行分析。"
 

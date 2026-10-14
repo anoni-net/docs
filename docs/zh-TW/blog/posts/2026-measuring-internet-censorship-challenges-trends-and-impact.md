@@ -100,7 +100,7 @@ OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){t
 
 ### 對照 OONI Probe 在台灣的觀測資料
 
-台灣常被認為是「網路自由度高」的地區，這不代表網路層完全沒有干擾。透過 [OONI Probe](https://ooni.org/install/){target="_blank"} 在台灣固網 ISP 與行動網路上的長期測量，可以盤點是否出現 TLS 干擾、DNS 操縱或封鎖跡象，作為討論「數位韌性」議題時的本地證據。社群已經在 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}與 [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)上累積了一部分基礎，測量者社群的規模仍然偏小，覆蓋率不足會直接影響到可信度。
+台灣常被認為是「網路自由度高」的地區，這不代表網路層完全沒有干擾。透過 [OONI Probe](https://ooni.org/install/){target="_blank"} 在台灣固網 ISP 與行動網路上的長期測量，可以盤點是否出現 TLS 干擾、DNS 操縱或封鎖跡象，作為討論「數位韌性」議題時的本地證據。社群已經在 [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}與 [ASN 觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}上累積了一部分基礎，測量者社群的規模仍然偏小，覆蓋率不足會直接影響到可信度。
 
 ### 反詐騙阻擋與「合理執法」的界線
 
@@ -108,12 +108,12 @@ OONI 資料是一份等待被探索的[豐富資料集](https://ooni.org/data){t
 
 ### 在台灣推廣 OONI Probe 與測量貢獻者社群
 
-中文圈的網路審查觀測資料長期偏少。台灣作為正體中文使用者的主要在地之一，有條件擔任這份補上資料的角色。可以從基礎內容在地化開始，把 OONI Probe 的安裝、安全使用、資料解讀整理成中文文件，讓有興趣的人能自己上手。長期則需要更多元的參與者，包括公民科技社群、學術網路、校園與企業內網的志工，才能累積足夠的測量涵蓋率。社群這側已經整理了 [OONI 網站檢測清單](../../taiwan/ooni-checklist.md)，可以作為入門起點。
+中文圈的網路審查觀測資料長期偏少。台灣作為正體中文使用者的主要在地之一，有條件擔任這份補上資料的角色。可以從基礎內容在地化開始，把 OONI Probe 的安裝、安全使用、資料解讀整理成中文文件，讓有興趣的人能自己上手。長期則需要更多元的參與者，包括公民科技社群、學術網路、校園與企業內網的志工，才能累積足夠的測量涵蓋率。社群這側已經整理了 [OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}，可以作為入門起點。
 
 ## 延伸閱讀
 
 - [什麼是 OONI？](../../tools/what-is-ooni.md)
-- [OONI 網站檢測清單](../../taiwan/ooni-checklist.md)
+- [OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}
 - [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}
-- [ASN 觀測資料分析](../../taiwan/ooni-asn-coverage.md)
+- [ASN 觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [OONI Run v2 操作說明](../../tools/ooni-run-v2.md)

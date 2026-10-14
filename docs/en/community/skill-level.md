@@ -432,7 +432,7 @@ The three sections below each expand one tool across its three levels. Read acro
         ??? question "How OONI testing works"
 
             - OONI provides the free, open-source tool OONI Probe. Users can run tests on their own network to detect censorship.
-            - OONI Probe periodically sends requests to multiple websites and services, checking whether the sites on [OONI Website Testing List](../regional/ooni-checklist.md) are accessible.
+            - OONI Probe periodically sends requests to multiple websites and services, checking whether the sites on [the OONI test list](https://anoni.net/en/join/ooni-test-list/){target="_blank"} are accessible.
             - Test results are uploaded anonymously to OONI's servers and published on [OONI Explorer](https://explorer.ooni.org/){target="_blank"} for researchers and the public.
 
         ??? question "Differences in surveillance and censorship across regions"
@@ -484,7 +484,7 @@ The three sections below each expand one tool across its three levels. Read acro
 
             - An ASN (Autonomous System Number) is the unique identifier for an Autonomous System (AS).
             - An AS is a group of IP address blocks managed by one or more ISPs or large organizations. Each AS uses its ASN to exchange routing information with other ASes on the internet.
-            - See "[ASN observation data analysis](../regional/ooni-asn-coverage.md)" for an introduction.
+            - See "[ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}" for an introduction.
 
         ??? question "Review recent measurement data on OONI Explorer"
 
@@ -526,8 +526,8 @@ The three sections below each expand one tool across its three levels. Read acro
 
     ??? tip "Not there yet? Start here."
         1. Complete all items in the Practice level first.
-        2. Read "[OONI Website Testing List](../regional/ooni-checklist.md)" to understand how lists are curated and maintained.
-        3. Read "[ASN observation data analysis](../regional/ooni-asn-coverage.md)" to learn how raw data is analyzed.
+        2. Read "[Maintaining the OONI Test List](https://anoni.net/en/join/ooni-test-list/){target="_blank"}" to understand how lists are curated and maintained.
+        3. Read "[ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}" to learn how raw data is analyzed.
         4. Browse the [citizenlab/test-lists](https://github.com/citizenlab/test-lists){target="_blank"} repository on GitHub to explore the list format for different countries.
 
     !!! abstract "Reference"
@@ -544,13 +544,13 @@ The three sections below each expand one tool across its three levels. Read acro
 
             OONI Probe measures against the [test-lists](https://github.com/citizenlab/test-lists){target="_blank"} project maintained by [Citizen Lab](https://citizenlab.ca/){target="_blank"}: a global list plus one per country, sorted into four categories.
 
-            [OONI Website Testing List](../regional/ooni-checklist.md) covers how the lists work, what shape a country list is typically in, and the review-and-pull-request workflow for helping maintain one. It needs no programming.
+            [Maintaining the OONI Test List](https://anoni.net/en/join/ooni-test-list/){target="_blank"} covers how the lists work, what shape a country list is typically in, and the review-and-pull-request workflow for helping maintain one. It needs no programming.
 
         ??? question "Process and analyze raw OONI measurement data"
 
             OONI publishes raw measurement data on AWS S3 (`ooni-data-eu-fra`, eu-central-1), which you can use to analyse ASN coverage, track a site's blocking status over time, or compare across regions.
 
-            [ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"} has the retrieval scripts and commands, and [ASN observation data analysis](../regional/ooni-asn-coverage.md) explains what the resulting numbers mean.
+            [ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"} has the retrieval scripts and commands, and [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} explains what the resulting numbers mean.
 
 ## After the assessment
 

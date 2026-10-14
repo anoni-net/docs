@@ -8,7 +8,7 @@ icon: material/access-point-network
 
 連不上某個網站時，第一個直覺通常是「是我網路有問題嗎？」OONI（Open Observatory of Network Interference，網路干擾開放觀測）就是為了把這種感受轉成可驗證的資料。它提供開源檢測工具 [OONI Probe](https://ooni.org/install/){target="_blank"} 與公開資料平台 [OONI Explorer](https://explorer.ooni.org/zh-Hant){target="_blank"}，讓任何人都能執行檢測、查紀錄，把封鎖、監控、降速這些行為留下時間、地點、ASN 都對得上的觀測痕跡。
 
-對正體中文使用者，OONI 的核心價值在於讓討論能以資料為基礎。某個網站連不上，不必停在「是不是被封鎖了」的猜測，OONI 能留下時間、地點、ASN 都對得上的紀錄，讓社群、媒體、研究者佐證一次連線異常時有可引用、可重現的依據。也因此，[ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 在台灣才會是個值得長期關注的議題，觀測點越多元，這份紀錄的代表性就越強。
+對正體中文使用者，OONI 的核心價值在於讓討論能以資料為基礎。某個網站連不上，不必停在「是不是被封鎖了」的猜測，OONI 能留下時間、地點、ASN 都對得上的紀錄，讓社群、媒體、研究者佐證一次連線異常時有可引用、可重現的依據。也因此，[ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"} 在台灣才會是個值得長期關注的議題，觀測點越多元，這份紀錄的代表性就越強。
 
 ## OONI 計畫主要推動事項
 
@@ -128,7 +128,7 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 ??? question "最簡單的貢獻方式是什麼？"
 
-    手機裝 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天讓它執行一次自動檢測就是有效貢獻。如果家裡有 Linux 主機，照本文「如何安裝」段的 cronjob 範例設定，就能持續累積。想再進一步可以參考 [OONI 網站檢測清單](../taiwan/ooni-checklist.md) 補充本地關注的網站，或讀 [ASN 觀測涵蓋率](../taiwan/ooni-asn-coverage.md) 了解哪些 ASN 還缺觀測點。
+    手機裝 [OONI Probe](https://ooni.org/install/){target="_blank"}，每天讓它執行一次自動檢測就是有效貢獻。如果家裡有 Linux 主機，照本文「如何安裝」段的 cronjob 範例設定，就能持續累積。想再進一步可以參考 [OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"} 補充本地關注的網站，或讀 [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"} 了解哪些 ASN 還缺觀測點。
 
 ## :material-chat-question: 一同瞭解
 
@@ -144,8 +144,8 @@ OONI Probe 觀測程式提供[行動裝置版本](https://ooni.org/install/){tar
 
 <div class="grid cards" markdown>
 
-- [:material-list-status: OONI 網站檢測清單](../taiwan/ooni-checklist.md)
-- [:material-access-point-network: ASNs 自治網路觀測資料分析](../taiwan/ooni-asn-coverage.md)
+- [:material-list-status: OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}
+- [:material-access-point-network: ASNs 自治網路觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-server-network: Tor Relay 觀測點](https://anoni.net/projects/pulse/){target="_blank"}
 
 </div>

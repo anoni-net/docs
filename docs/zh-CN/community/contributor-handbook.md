@@ -16,7 +16,7 @@ icon: material/book-open-variant
 
 - **想试水温，先看看内容**：先读 [基础概念](../basics/index.md) 任一篇，再用 [自我技能评估表](./skill-level.md) 评估自己对 Tor、Tails、OONI 的熟悉度
 - **想开始写作或翻译**：申请 Matrix 账号（见 [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"}）→ 加入 Public Space → 表达意愿 → 认领一个 Issue
-- **想参与技术维运**：申请 GitHub 对 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 的协作权限 → 看 [项目研究预先准备](./setup-repo.md) 建好开发环境
+- **想参与技术维运**：申请 GitHub 对 [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"} 的协作权限 → 看 [参与开发的环境准备](https://anoni.net/zh-cn/join/dev-setup/){target="_blank"} 建好开发环境
 - **想加入活动筹备**：到 Matrix 对应 room 询问近期活动（COSCUP、工作坊、小聚），协助文宣、现场、报名等任务
 
 每条路径的第一步都是「进到 Matrix 表达意愿」。社区运作偏向 async，留消息后等一两天回复是正常节奏。
@@ -186,7 +186,7 @@ zh-TW 是 single source of truth，zh-CN 与 en 从 zh-TW 同步。详细流程�
 | 如何选择主题开始？ | [如何参与与认领主题](https://anoni.net/zh-cn/join/){target="_blank"} |
 | 如何申请 Matrix 账号？ | [社区自架服务](https://anoni.net/zh-cn/services/){target="_blank"} |
 | 我的程度适合做什么？ | [自我技能评估表](./skill-level.md) |
-| 如何设定开发环境？ | [项目研究预先准备](./setup-repo.md) |
+| 如何设定开发环境？ | [参与开发的环境准备](https://anoni.net/zh-cn/join/dev-setup/){target="_blank"} |
 | 翻译有什么规范？ | [中文化与文件翻译](./i18n.md) |
 | 紧急情况的对外资源？ | [紧急求救](../help/index.md) |
 

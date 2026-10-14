@@ -1217,8 +1217,8 @@ test('狀態查詢依網址挑對語系的預設清單', async (load) => {
     { postMessage: (data) => replies.push(data) }
   );
   // en 的章節路徑跟 zh 不同（在地脈絡叫 regional/ 不叫 taiwan/）
-  assert.ok(replies[0].precached.includes('regional/ooni-checklist/'));
-  assert.ok(!replies[0].precached.includes('taiwan/ooni-checklist/'));
+  assert.ok(replies[0].precached.includes('regional/taiwan-tor-users/'));
+  assert.ok(!replies[0].precached.includes('taiwan/tor-users/'));
 });
 
 test('按過全部存到裝置就記下來，狀態查詢回報得出來', async (load) => {

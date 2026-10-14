@@ -170,7 +170,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 
 执行 OONI Probe 的人要特别留意。依 `ts-017` 规格，网络连接测试（Web Connectivity）先用系统 resolver 解析域名，再跟测试辅助服务器解出来的结果比对，地址或 ASN 对得上才算一致[^ooni-wc]。
 
-设备上任何第三方 resolver 都会影响结果，而且方向不同。过滤型 resolver 让被挡的域名解到 `0.0.0.0`，测量看起来像当地网络遭到干扰，那是假阳性，至少会有人去查。不过滤的境外加密 resolver 更麻烦，它会直接绕过运营商层真正的封锁，测量显示一切正常，没有人会发现漏掉了什么。社区长期在整理 [台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md)，测量的目标就是台湾本地网络的 DNS 行为，所以测量时请使用该网络 DHCP 发下来的 resolver，关掉所有第三方加密 DNS，不分过不过滤。
+设备上任何第三方 resolver 都会影响结果，而且方向不同。过滤型 resolver 让被挡的域名解到 `0.0.0.0`，测量看起来像当地网络遭到干扰，那是假阳性，至少会有人去查。不过滤的境外加密 resolver 更麻烦，它会直接绕过运营商层真正的封锁，测量显示一切正常，没有人会发现漏掉了什么。社区长期在整理 [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}，测量的目标就是台湾本地网络的 DNS 行为，所以测量时请使用该网络 DHCP 发下来的 resolver，关掉所有第三方加密 DNS，不分过不过滤。
 
 三个容易漏掉的地方：手机的 Android 私人 DNS 是全系统设置，跨 Wi-Fi 与移动网络都生效。家里的 Pi-hole 或 AdGuard Home 会让设备上明明没设置却已经被过滤。笔电整理干净了不代表手机也是。
 
@@ -225,7 +225,7 @@ DoT 的第 853 端口很容易被挡掉。DoH 混在 HTTPS 里比较难用端口
 <div class="grid cards" markdown>
 
 - [:material-access-point-network: 什么是 OONI](./what-is-ooni.md)
-- [:material-chart-bar: 台湾 ASN 覆盖率](../taiwan/ooni-asn-coverage.md)
+- [:material-chart-bar: 台湾 ASN 覆盖率](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-shield-account-outline: 个人隐私指引](https://anoni.net/zh-cn/join/privacy-guide/){target="_blank"}
 
 </div>

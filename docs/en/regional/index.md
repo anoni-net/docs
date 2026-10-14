@@ -104,8 +104,8 @@ We have produced full Traditional Chinese translations of two pieces of regional
 - [Why networked freedom matters](../basics/internet-freedom.md) — the conceptual frame for everything in this section.
 - [Tor Relay Watch](https://anoni.net/en/projects/pulse/){target="_blank"} — hourly observation of Tor relays in Taiwan and fourteen other regions, collected by Pulse.
 - [How many people use Tor in Taiwan](./taiwan-tor-users.md) — the user side of the same connection layer, four years of Taiwan figures set against Mainland China and Hong Kong, and why the tenfold spike of 2025 was a counting bug.
-- [ASN observation data analysis](./ooni-asn-coverage.md) — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
-- [OONI Website Testing List](./ooni-checklist.md) — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
+- [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} — a coverage audit of OONI measurement data for Taiwan, and the method for running the same audit elsewhere.
+- [Maintaining the OONI Test List](https://anoni.net/en/join/ooni-test-list/){target="_blank"} — how the Citizen Lab test list is maintained, why list quality caps measurement quality, and how to help.
 - [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](../scenarios/lgbtq.md) — the showcase scenario, with the full multi-region context section.
 
 **Taiwan's regulatory environment**, the five threads we track in detail:
