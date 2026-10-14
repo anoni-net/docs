@@ -104,7 +104,7 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 
 ??? question "Why is Tor so slow?"
 
-    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: switch the exit region in Tor Browser's settings to avoid congested countries, and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/){target="_blank"}, so local capacity becomes part of the global network.
+    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: use New Circuit when a site is especially slow to get a fresh path (Tor picks new middle and exit relays at random, and Tor Browser has no option to choose the exit region), and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/){target="_blank"}, so local capacity becomes part of the global network.
 
 ??? question "Has Tor ever been broken?"
 

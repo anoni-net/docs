@@ -157,7 +157,7 @@ icon: material/lifebuoy
 
 - **特定网站无法打开**：先用 OONI Probe 或 [OONI Explorer](https://explorer.ooni.org/){target="_blank"} 确认是个别封锁还是区域问题，可参考 [ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"} 看 TW 的观测现况
 - **整个家用网络被中断**：先确认是否电信端的问题（拨打 ISP 客服）。如果怀疑是针对性处置，记录时间、IP、服务名称与消息截图
-- **跨境连线受限**：尝试 Tor Browser 与内建网桥（obfs4、Snowflake、meek-azure）。网桥建立可参考 [Tor Snowflake](../tools/tor-snowflake.md)
+- **跨境连线受限**：尝试 Tor Browser 与内建网桥（obfs4、Snowflake、meek）。网桥建立可参考 [Tor Snowflake](../tools/tor-snowflake.md)
 - **完全无法连上 Tor**：透过电子邮件（[bridges@torproject.org](mailto:bridges@torproject.org)）申请非公开网桥
 
 ## 趁有网络时，把文档站装成离线 App
