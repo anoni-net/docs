@@ -207,7 +207,7 @@ Network Zodiac 與流行的開源解決方案的一個顯著不同功能是其�
 [^13]: Bill Marczak et al.，[China’s Great Cannon](https://citizenlab.ca/2015/04/chinas-great-cannon/){target="_blank"}，2015-04-10（原報告誤植為 2025 年）。
 [^14]: 在中國神話中，畢方是一種獨腳鳥，象徵著不幸的預兆，特別是與火相關的不幸。據信它的出現預示著該地區可能有災難發生。
 [^15]: 該系統整合了統一認證，並由中央設定儲存支撐，這可將設置同步到叢集中的各個節點，同時還整合了故障轉移機制以確保運營的連續性。其底層使用一個 Restful API 來查詢叢集中的各種組件以獲取狀態和故障資訊。此 API 在內部被稱為 TSG-OAM，其中 OAM 是運營和維護的縮寫。
-[^16]: Intel Corporation，[EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf){target="_blank"}，技術簡報（Solution Brief），2023 年 11 月。
+[^16]: Intel Corporation，[EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration](https://web.archive.org/web/20250624201825/https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf){target="_blank"}，技術簡報（Solution Brief），2023 年 11 月。
 [^17]: 在中國神話中，哪吒是一位守護神，常以少年戰士的形象出現。
 [^18]: Network Zodiac 的主要差異，在於可以同時使用 Prometheus 與 PromQL，以及在網路設備上更普遍的簡易網路管理協定（SNMP）。
 
