@@ -37,9 +37,9 @@ The measurement line needs people who can read raw results and turn them into an
 - [OONI Blocking Verdicts](https://anoni.net/en/projects/asn-coverage/ooni-blocking-determination/){target="_blank"}: understand the logic before reading the data, or you will misread it
 - [OONI Nettest Quick Reference](https://anoni.net/en/projects/asn-coverage/ooni-nettests-map/){target="_blank"}: what each test actually measures
 - [ASN Observation Data Retrieval and Analysis](https://anoni.net/en/projects/asn-coverage/howto/){target="_blank"}: how this community's retrieval tool is configured and used, including the S3 public dataset layout
-- [ASN observation data analysis](../regional/ooni-asn-coverage.md): current coverage, where the gaps are the open questions
+- [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"}: current coverage, where the gaps are the open questions
 - [Tor relay lookup for AI assistants](https://anoni.net/en/projects/onionoo-mcp/){target="_blank"}: a community-run relay query service (onionoo MCP), and an interface worth extending
-- [OONI website testing list](../regional/ooni-checklist.md): how the test list is maintained, where classification and updates need people
+- [Maintaining the OONI Test List](https://anoni.net/en/join/ooni-test-list/){target="_blank"}: how the test list is maintained, where classification and updates need people
 
 ### Influence inside a university or a company
 
@@ -54,7 +54,7 @@ Campus relays need someone who can talk to administration and legal. The technic
 - [Writing style](https://anoni.net/en/join/writing-style/){target="_blank"}: the writing rules shared by all three sites, read it before drafting
 - [Contributor handbook](../community/contributor-handbook.md): file naming, link format, the PR process and translation
 - [Localization and translation](../community/i18n.md): the workflow across three language editions
-- [Development environment setup](../community/setup-repo.md): preparation before starting a new topic
+- [Development Environment Setup](https://anoni.net/en/join/dev-setup/){target="_blank"}: preparation before starting a new topic
 
 ## You need a baseline of your own
 

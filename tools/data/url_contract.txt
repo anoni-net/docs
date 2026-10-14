@@ -1095,14 +1095,7 @@
 /community/roadmap-2026/ -> https://anoni.net/join/roadmap-2026/
 /community/send-privacy/ -> https://anoni.net/services/send/
 /community/setup-onion-service/ -> https://anoni.net/join/setup-onion-service/
-/community/setup-repo/
-	#Fork-專案
-	#Python
-	#VS-Code
-	#uv
-	#你需要先準備什麼
-	#專案研究預先準備
-	#開發環境安裝
+/community/setup-repo/ -> https://anoni.net/join/dev-setup/
 /community/setup-tor-relay/ -> https://anoni.net/join/setup-tor-relay/
 /community/setup-tor-webtunnel/ -> https://anoni.net/join/setup-tor-webtunnel/
 /community/skill-level/
@@ -2039,15 +2032,7 @@
 /en/community/roadmap-2026/ -> https://anoni.net/en/join/roadmap-2026/
 /en/community/send-privacy/ -> https://anoni.net/en/services/send/
 /en/community/setup-onion-service/ -> https://anoni.net/en/join/setup-onion-service/
-/en/community/setup-repo/
-	#An-editor
-	#Development-environment
-	#Development-environment-setup
-	#Fork-a-Project
-	#Python
-	#What-you-need-first
-	#Where-to-go-from-here
-	#uv
+/en/community/setup-repo/ -> https://anoni.net/en/join/dev-setup/
 /en/community/setup-tor-relay/ -> https://anoni.net/en/join/setup-tor-relay/
 /en/community/setup-tor-webtunnel/ -> https://anoni.net/en/join/setup-tor-webtunnel/
 /en/community/skill-level/
@@ -2208,9 +2193,9 @@
 	#Offline-reading
 	#Things-to-try-without-a-network
 	#Three-steps-to-get-ready
-/en/ooni-asns-coverage/ -> /en/regional/ooni-asn-coverage/
+/en/ooni-asns-coverage/ -> https://anoni.net/en/projects/asn-coverage/asn-diversity/
 /en/ooni-i18n/ -> /en/community/i18n/
-/en/ooni-weblists/ -> /en/regional/ooni-checklist/
+/en/ooni-weblists/ -> https://anoni.net/en/join/ooni-test-list/
 /en/regional/
 	#Articles-in-this-section
 	#Cutting-across-the-above
@@ -2225,25 +2210,8 @@
 	#What-we-keep-an-eye-on
 	#Where-we-work-from
 	#Working-with-us-on-regional-observation
-/en/regional/ooni-asn-coverage/
-	#ASN-observation-data-analysis
-	#Fill-in-one-of-the-gaps
-	#Measurement-in-Taiwan-concentrates-in-a-few-carriers
-	#Reading-a-single-measurement
-	#Reading-the-raw-data
-	#Running-a-test-yourself
-	#Want-to-run-the-analysis-yourself
-	#Where-to-go-from-here
-	#Why-ASN-diversity-matters
-/en/regional/ooni-checklist/
-	#Adding-to-the-list
-	#Categories-decide-how-often-a-URL-gets-tested
-	#Current-status-of-the-Taiwan-test-list
-	#How-volunteers-can-help
-	#OONI-Website-Testing-List
-	#The-same-rule-table-responds-to-sudden-events
-	#Updating-the-list
-	#Where-to-go-from-here
+/en/regional/ooni-asn-coverage/ -> https://anoni.net/en/projects/asn-coverage/asn-diversity/
+/en/regional/ooni-checklist/ -> https://anoni.net/en/join/ooni-test-list/
 /en/regional/taiwan-digital-wallet-privacy/
 	#A-more-fundamental-criticism-points-outside-the-wallet
 	#Different-verifiers-can-link-you
@@ -2411,12 +2379,16 @@
 	#The-Asia-Pacific-delta
 	#Where-to-go-from-here
 /en/scenarios/asia-travel/
+	#A-device-is-lost-or-seized
+	#A-local-SIM-cant-be-registered-or-gets-cut-off
+	#An-app-or-website-wont-connect
 	#At-the-border-conduct-and-device-state
 	#Back-up-before-you-go-and-watch-the-cloud-double-edge
 	#Buying-a-burner-abroad-and-taking-it-home
 	#Change-log
 	#Device-minimization-and-border-crossings-in-Asia
 	#Hong-Kong
+	#If-something-goes-wrong
 	#Macau-and-the-rest-of-the-region
 	#Mainland-China
 	#Malaysia
@@ -2425,10 +2397,13 @@
 	#Singapore
 	#Thailand
 	#The-clean-device-strategy
+	#The-whole-area-loses-connectivity
 	#United-States-and-United-Kingdom-the-rules-people-already-know
 	#What-changes-when-you-take-it-home
 	#Where-to-go-from-here
 	#Why-minimize-before-you-travel
+	#You-are-detained-out-of-contact-or-questioned-over-something-you-posted
+	#Your-device-was-out-of-your-sight-at-the-border
 /en/scenarios/domestic-violence/
 	#Account-access-and-shared-plans
 	#Build-the-new-identity-off-to-the-side
@@ -2657,7 +2632,7 @@
 	#What-to-set-up-before-you-leave
 	#When-it-is-worth-bringing
 	#Where-to-go-from-here
-/en/setup-repo/ -> /en/community/setup-repo/
+/en/setup-repo/ -> https://anoni.net/en/join/dev-setup/
 /en/setup-skill-level/ -> /en/community/skill-level/
 /en/setup-tor-relay/ -> https://anoni.net/en/join/setup-tor-relay/
 /en/setup/ -> https://anoni.net/en/join/
@@ -2740,8 +2715,8 @@
 	#Your-own-baseline-still-matters
 /en/taiwan/ -> /en/regional/
 /en/taiwan/digital-wallet-privacy/ -> /en/regional/taiwan-digital-wallet-privacy/
-/en/taiwan/ooni-asn-coverage/ -> /en/regional/ooni-asn-coverage/
-/en/taiwan/ooni-checklist/ -> /en/regional/ooni-checklist/
+/en/taiwan/ooni-asn-coverage/ -> https://anoni.net/en/projects/asn-coverage/asn-diversity/
+/en/taiwan/ooni-checklist/ -> https://anoni.net/en/join/ooni-test-list/
 /en/taiwan/pdpa-2025/ -> /en/regional/taiwan-pdpa-2025/
 /en/taiwan/tor-relay-watcher/ -> https://anoni.net/en/projects/pulse/
 /en/taiwan/vasp-2026/ -> /en/regional/taiwan-vasp-2026/
@@ -3521,9 +3496,9 @@
 	#沒有網路時可以試試
 	#裝置上的離線內容
 	#離線閱讀
-/ooni-asns-coverage/ -> /taiwan/ooni-asn-coverage/
+/ooni-asns-coverage/ -> https://anoni.net/projects/asn-coverage/asn-diversity/
 /ooni-i18n/ -> /community/i18n/
-/ooni-weblists/ -> /taiwan/ooni-checklist/
+/ooni-weblists/ -> https://anoni.net/join/ooni-test-list/
 /regional/ -> /taiwan/
 /regional/tor-relay-watcher/ -> https://anoni.net/projects/pulse/
 /report/ -> /reports/
@@ -3702,10 +3677,13 @@
 	#中國大陸
 	#中風險菲律賓馬來西亞新加坡印尼澳門
 	#乾淨機與-burner-手機的取捨
+	#人被留置失聯或因發文被約談
 	#低風險台灣基準日本南韓
 	#依風險分層的加碼準備
 	#先把裝置與門號分開
+	#入境時被要求解鎖或交出裝置
 	#出差與研討會的數位準備東亞與東南亞
+	#出狀況時的應變
 	#出發前的通用準備每個地點都適用
 	#南韓
 	#印尼
@@ -3714,19 +3692,23 @@
 	#在境外買不見得比較匿名
 	#如何讀這張表
 	#帶回台灣會發生什麼
+	#整個地區斷網
 	#新加坡
 	#日本
 	#更新紀錄
 	#東亞與東南亞網路監控對照表
+	#某個-App-或網站連不上
 	#柬埔寨
 	#極高風險緬甸
 	#比較實際的做法
 	#泰國
 	#澳門
+	#當地門號辦不成或被停話
 	#相關閱讀
 	#研討會場景的特別提醒
 	#緬甸
 	#菲律賓
+	#裝置遺失或被扣
 	#誰需要
 	#越南
 	#逐地註記
@@ -4013,7 +3995,7 @@
 	#裝置名稱
 	#認證頁面的處理
 	#雙卡手機的兩個號碼
-/setup-repo/ -> /community/setup-repo/
+/setup-repo/ -> https://anoni.net/join/dev-setup/
 /setup-skill-level/ -> /community/skill-level/
 /setup-tor-relay/ -> https://anoni.net/join/setup-tor-relay/
 /setup/ -> https://anoni.net/join/
@@ -4125,24 +4107,8 @@
 	#知道自己在同意什麼
 	#讀者可以做什麼
 	#追蹤法制進度
-/taiwan/ooni-asn-coverage/
-	#ASN-自治網路觀測資料分析
-	#下一步
-	#你可以補上一格
-	#台灣現況少數電信商佔掉大半測量
-	#如何解讀單筆測量資料進階
-	#後續方向
-	#想著手分析
-	#為什麼關注-ASN-多樣性
-/taiwan/ooni-checklist/
-	#OONI-用同一組規則應對突發事件
-	#OONI-網站檢測清單
-	#下一步
-	#分類決定一個網址多常被測到
-	#台灣觀察名單現況
-	#名單新增
-	#名單更新
-	#志工如何參與
+/taiwan/ooni-asn-coverage/ -> https://anoni.net/projects/asn-coverage/asn-diversity/
+/taiwan/ooni-checklist/ -> https://anoni.net/join/ooni-test-list/
 /taiwan/pdpa-2025/
 	#修法背景
 	#個保會的設立進度
@@ -5999,14 +5965,7 @@
 /zh-cn/community/roadmap-2026/ -> https://anoni.net/zh-cn/join/roadmap-2026/
 /zh-cn/community/send-privacy/ -> https://anoni.net/zh-cn/services/send/
 /zh-cn/community/setup-onion-service/ -> https://anoni.net/zh-cn/join/setup-onion-service/
-/zh-cn/community/setup-repo/
-	#Fork-项目
-	#Python
-	#VS-Code
-	#uv
-	#你需要先准备什么
-	#开发环境安装
-	#项目研究预先准备
+/zh-cn/community/setup-repo/ -> https://anoni.net/zh-cn/join/dev-setup/
 /zh-cn/community/setup-tor-relay/ -> https://anoni.net/zh-cn/join/setup-tor-relay/
 /zh-cn/community/setup-tor-webtunnel/ -> https://anoni.net/zh-cn/join/setup-tor-webtunnel/
 /zh-cn/community/skill-level/
@@ -6166,9 +6125,9 @@
 	#没有网络时可以试试
 	#离线阅读
 	#设备上的离线内容
-/zh-cn/ooni-asns-coverage/ -> /zh-cn/taiwan/ooni-asn-coverage/
+/zh-cn/ooni-asns-coverage/ -> https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/
 /zh-cn/ooni-i18n/ -> /zh-cn/community/i18n/
-/zh-cn/ooni-weblists/ -> /zh-cn/taiwan/ooni-checklist/
+/zh-cn/ooni-weblists/ -> https://anoni.net/zh-cn/join/ooni-test-list/
 /zh-cn/regional/ -> /zh-cn/taiwan/
 /zh-cn/regional/tor-relay-watcher/ -> https://anoni.net/zh-cn/projects/pulse/
 /zh-cn/report/interseclab-the-internet-coup/ -> /zh-cn/reports/
@@ -6231,11 +6190,14 @@
 	#东亚与东南亚网络监控对照表
 	#中国大陆
 	#中风险菲律宾马来西亚新加坡印尼澳门
+	#人被留置失联或因发文被约谈
 	#低风险台湾参照日本南韩
 	#依风险分层的加码准备
 	#先把装置与号码分开
+	#入境时被要求解锁或交出设备
 	#出发前的通用准备每个地点都适用
 	#出差与研讨会的数字准备东亚与东南亚
+	#出状况时的应对
 	#南韩
 	#印尼
 	#台湾参照
@@ -6244,10 +6206,13 @@
 	#如何读这张表
 	#带回中国境内会发生什么
 	#干净机与-burner-手机的取舍
+	#当地号码办不成或被停机
+	#整个地区断网
 	#新加坡
 	#日本
 	#更新记录
 	#极高风险缅甸
+	#某个-App-或网站连不上
 	#柬埔寨
 	#比较实际的做法
 	#泰国
@@ -6256,6 +6221,7 @@
 	#研讨会场景的特别提醒
 	#缅甸
 	#菲律宾
+	#设备遗失或被扣
 	#谁需要
 	#越南
 	#逐地注记
@@ -6550,7 +6516,7 @@
 	#认证页面的处理
 	#设备名称
 	#酒店与会场的-Wi-Fi
-/zh-cn/setup-repo/ -> /zh-cn/community/setup-repo/
+/zh-cn/setup-repo/ -> https://anoni.net/zh-cn/join/dev-setup/
 /zh-cn/setup-skill-level/ -> /zh-cn/community/skill-level/
 /zh-cn/setup-tor-relay/ -> https://anoni.net/zh-cn/join/setup-tor-relay/
 /zh-cn/setup/ -> https://anoni.net/zh-cn/join/
@@ -6662,25 +6628,8 @@
 	#知道自己在同意什么
 	#读者可以做什么
 	#追踪法制进度
-/zh-cn/taiwan/ooni-asn-coverage/
-	#AS-会作坏事吗
-	#ASNs-自治网络观测数据分析
-	#OONI-Probe-观测分析
-	#下一步
-	#什么是自治系统-AS
-	#你可以补上一格
-	#如何分析
-	#如何检视检测数据
-	#想着手分析
-	#观测数据分析
-/zh-cn/taiwan/ooni-checklist/
-	#OONI-用同一组规则应对突发事件
-	#OONI-网站检测清单
-	#下一步
-	#分类决定一个网址多常被测到
-	#台湾观察名单现况
-	#名单新增
-	#名单更新
+/zh-cn/taiwan/ooni-asn-coverage/ -> https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/
+/zh-cn/taiwan/ooni-checklist/ -> https://anoni.net/zh-cn/join/ooni-test-list/
 /zh-cn/taiwan/pdpa-2025/
 	#与-GDPR-的对照
 	#个保会的设立进度

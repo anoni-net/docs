@@ -189,7 +189,7 @@ Follow the [Tails installation guide](https://tails.net/install/index.en.html){t
 
 - [:material-newspaper-variant-outline: Protecting your sources as a journalist](../scenarios/journalist.md)
 - [:material-upload-outline: Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}
-- [:material-list-status: OONI Website Testing List](../regional/ooni-checklist.md)
+- [:material-list-status: OONI Website Testing List](https://anoni.net/en/join/ooni-test-list/){target="_blank"}
 
 </div>
 

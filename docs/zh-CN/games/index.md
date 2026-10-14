@@ -68,7 +68,7 @@ og:
 以下三篇对应目前作品中出现的概念。
 
 - 三跳路由与匿名原理：[什么是 Tor](../tools/what-is-tor.md)
-- 中继要分散在不同 ASN：[台湾 ASN 观测覆盖](../taiwan/ooni-asn-coverage.md)
+- 中继要分散在不同 ASN：[ASN 多样性与台湾的观测缺口](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
 - 封锁时的网桥：[Tor Snowflake 网桥](../tools/tor-snowflake.md)
 
 ## 想一起做

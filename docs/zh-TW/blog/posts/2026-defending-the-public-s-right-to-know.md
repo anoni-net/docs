@@ -80,7 +80,7 @@ OONI 在肯亞、坦尚尼亞、約旦、印度、埃及的故事，地理位置
 
 ### 台灣的 OONI 觀測覆蓋還有盲點
 
-匿名網路社群長期維護一份 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)，把台灣每個 ASN（自治系統編號，可粗略理解成每家 ISP 的網路編號，中華電信、台哥大各自不同）的 OONI 觀測筆數整理成圖表。實際看下來，觀測集中在少數幾家網路，行動網路、學術網路、許多本地 ISP 仍然是空白。OONI 全球資料集再龐大，台灣這塊還是要靠在地使用者持續[執行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能補上盲點。
+匿名網路社群長期維護一份 [ASN 自治網路觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}，把台灣每個 ASN（自治系統編號，可粗略理解成每家 ISP 的網路編號，中華電信、台哥大各自不同）的 OONI 觀測筆數整理成圖表。實際看下來，觀測集中在少數幾家網路，行動網路、學術網路、許多本地 ISP 仍然是空白。OONI 全球資料集再龐大，台灣這塊還是要靠在地使用者持續[執行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能補上盲點。
 
 台灣的情況也一樣，哪個 ASN 沒人在執行 OONI，未來如果在那條路徑上發生封鎖或中斷，就缺少能引用的證據。
 
@@ -97,12 +97,12 @@ OONI Probe 桌面版與行動版都能在家用網路、行動網路、公共 Wi
 不論你是想補觀測、做研究，還是要把資料用在報導或倡議，都有可以著手的起點。
 
 - **一般讀者**：[安裝 OONI Probe](https://ooni.org/install/){target="_blank"} 執行一輪，讓你這條網路出現在公共紀錄裡（執行前可先看 OONI 對[潛在風險的說明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想納入定期測量的網站，可以到 OONI 的[測試清單編輯器](https://test-lists.ooni.org/login){target="_blank"}提交，之後全球的 OONI Probe 就會把它排進測試。
-- **研究者與技術社群**：先看 [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md) 上台灣 ASN 的盲點分布，再評估自己這條網路或實驗環境可以補上哪些量測，並把資料整理成可重複比對的圖表。
+- **研究者與技術社群**：先看 [ASN 自治網路觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"} 上台灣 ASN 的盲點分布，再評估自己這條網路或實驗環境可以補上哪些量測，並把資料整理成可重複比對的圖表。
 - **記者、媒體編輯、人權律師**：下次處理中國、香港、緬甸等地封鎖事件的報導時，[OONI Explorer](https://explorer.ooni.org/){target="_blank"} 上的量測截圖、調查發現（findings）短篇報告、長篇研究報告都可以引用做公開佐證。要走到公共利益訴訟層級的案件，肯亞案示範了向 OONI 申請專家意見報告的流程。
 
 ## 相關閱讀
 
 - [發佈：新 OONI Explorer 主題審查頁面](./2025-ooni-explorer-thematic-censorship-pages.md)
 - [OONI Probe 匿名憑證系統的設計與實作](https://anoni.net/articles/ooni-anonymous-credentials/){target="_blank"}
-- [ASN 自治網路觀測資料分析](../../taiwan/ooni-asn-coverage.md)
-- [OONI 網站檢測清單](../../taiwan/ooni-checklist.md)
+- [ASN 自治網路觀測資料分析](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}
+- [OONI 網站檢測清單](https://anoni.net/join/ooni-test-list/){target="_blank"}

@@ -16,7 +16,7 @@ Sorted by what you want to do:
 
 - **Read first, decide later**: pick anything from [Concepts](../basics/index.md), then use the [skill level self-assessment](./skill-level.md) to gauge how familiar you are with Tor, Tails, and OONI
 - **Write or translate**: request a Matrix account (see [Community services](https://anoni.net/en/services/){target="_blank"}), join the public Space, say what you would like to work on, and claim an issue
-- **Technical maintenance**: request collaborator access to [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, then follow [Development environment setup](./setup-repo.md)
+- **Technical maintenance**: request collaborator access to [anoni-net/docs](https://github.com/anoni-net/docs){target="_blank"}, then follow [Development Environment Setup](https://anoni.net/en/join/dev-setup/){target="_blank"}
 - **Event organizing**: ask in the relevant Matrix room about what is coming up, and help with materials, on-site logistics, or registration
 
 Every one of these starts with saying hello on Matrix. The community works asynchronously, so a reply landing a day or two later is the normal rhythm, not a snub.
@@ -273,7 +273,7 @@ Four roles for review:
 | How do I pick something to work on? | [How to contribute](./how-to-contribute.md) |
 | How do I get a Matrix account? | [Community services](https://anoni.net/en/services/){target="_blank"} |
 | What suits my level? | [Skill level self-assessment](./skill-level.md) |
-| How do I set up the development environment? | [Development environment setup](./setup-repo.md) |
+| How do I set up the development environment? | [Development Environment Setup](https://anoni.net/en/join/dev-setup/){target="_blank"} |
 | What are the translation rules? | [Localization and translation](./i18n.md) |
 
 If none of those answer it, ask on Matrix. Include what you are trying to do, what you have already tried, and where you are stuck.

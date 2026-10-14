@@ -80,7 +80,7 @@ OONI 在肯尼亚、坦桑尼亚、约旦、印度、埃及的故事，地理位
 
 ### 华语六地区的 OONI 观测覆盖现况
 
-中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在执行 OONI 的网络。其中，台湾的匿名网络社区长期维护一份 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
+中国大陆有 OONI Probe 使用者持续上传测量数据，能看到防火长城对常见社交媒体、即时通讯应用、新闻媒体与翻墙工具的封锁情况。香港、澳门、新加坡、马来西亚与台湾的 ASN（自治系统编号，可粗略理解成每家 ISP 的网络编号）也都有不同程度的覆盖，但每个地区都存在没人在执行 OONI 的网络。其中，台湾的匿名网络社区长期维护一份 [ASNs 自治网络观测数据分析](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}，可以当作各华语地区检视自家 ASN 覆盖状况的参考做法。
 
 OONI 全球数据集再庞大，每个地区仍然要靠在地使用者持续[运行 OONI Probe](https://ooni.org/install/){target="_blank"} 才能补上盲点。哪个 ASN 没人在执行 OONI，未来如果在那条路径上发生封锁或中断，就缺少能引用的证据。
 
@@ -99,12 +99,12 @@ OONI Probe 桌面版与移动版都能在家用网络、移动网络、公共 Wi
 不论你是想补观测、做研究，还是要把数据用在报道或倡议，都有可以着手的起点。
 
 - **一般读者**：[安装 OONI Probe](https://ooni.org/install/){target="_blank"} 执行一轮，让你这条网络出现在公共纪录里（运行前可先看 OONI 对[潜在风险的说明](https://ooni.org/about/risks/){target="_blank"}）。如果有你常用、想纳入定期测量的网站，可以到 OONI 的[测试列表编辑器](https://test-lists.ooni.org/login){target="_blank"}提交，之后全球的 OONI Probe 就会把它排进测试。
-- **研究者与技术社区**：参考 [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md) 上的盲点分布做法，再评估自己这条网络或实验环境可以补上哪些测量，并把数据整理成可重复比对的图表。
+- **研究者与技术社区**：参考 [ASNs 自治网络观测数据分析](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"} 上的盲点分布做法，再评估自己这条网络或实验环境可以补上哪些测量，并把数据整理成可重复比对的图表。
 - **记者、媒体编辑、人权律师**：下次处理中国大陆、香港、缅甸等地封锁事件的报道时，[OONI Explorer](https://explorer.ooni.org/){target="_blank"} 上的测量截图、调查发现（findings）短篇报告、长篇研究报告都可以引用做公开佐证。要走到公益诉讼层级的案件，肯尼亚案示范了向 OONI 申请专家意见报告的流程。
 
 ## 相关阅读
 
 - [发布：新 OONI Explorer 专题审查页面](./2025-ooni-explorer-thematic-censorship-pages.md)
 - [OONI Probe 匿名凭证系统的设计与实现](https://anoni.net/zh-cn/articles/ooni-anonymous-credentials/){target="_blank"}
-- [ASNs 自治网络观测数据分析](../../taiwan/ooni-asn-coverage.md)
-- [OONI 网站检测清单](../../taiwan/ooni-checklist.md)
+- [ASNs 自治网络观测数据分析](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
+- [OONI 网站检测清单](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"}

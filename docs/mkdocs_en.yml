@@ -90,10 +90,7 @@ nav:
   # Groups follow the article list in regional/index.md.
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
-      - "Measurement and framing":
-          - regional/taiwan-tor-users.md
-          - regional/ooni-asn-coverage.md
-          - regional/ooni-checklist.md
+      - regional/taiwan-tor-users.md
       - "Taiwan's regulatory environment":
           - regional/taiwan-pdpa-2025.md
           - regional/taiwan-digital-wallet-privacy.md
@@ -194,7 +191,6 @@ nav:
       - community/contributor-handbook.md
       - community/i18n.md
       - community/zh-hant-naming.md
-      - community/setup-repo.md
       - community/become-anoni.md
       - community/visual-guide.md
   - "Community anoni.net": https://anoni.net/en/
@@ -379,6 +375,10 @@ plugins:
         'community/campus-tor-relay-sop.md': 'https://anoni.net/en/join/relay-on-campus/sop/'
         'community/campus-relay-faq.md': 'https://anoni.net/en/join/relay-on-campus/faq/'
         'setup/index.md': 'https://anoni.net/en/join/'
+        # 2026-10-14 在地脈絡與社群區的三頁搬到社群首頁（toomore/anoni-net-ws#406）
+        'regional/ooni-asn-coverage.md': 'https://anoni.net/en/projects/asn-coverage/asn-diversity/'
+        'regional/ooni-checklist.md': 'https://anoni.net/en/join/ooni-test-list/'
+        'community/setup-repo.md': 'https://anoni.net/en/join/dev-setup/'
         # 2026-10-13 取消進階層（#406）。端對端加密與常被誤認為匿名的網路移到概念層，
         # 另外三頁搬到社群首頁的技術文章，索引頁轉到指南。
         'advanced/index.md': 'guides/index.md'
@@ -461,11 +461,11 @@ plugins:
         'what-is-anonymous-network.md': 'tools/what-is-anonymity-network.md'
         'tor-snowflake.md': 'tools/tor-snowflake.md'
         'what-is-ooni.md': 'tools/what-is-ooni.md'
-        'ooni-asns-coverage.md': 'regional/ooni-asn-coverage.md'
-        'ooni-weblists.md': 'regional/ooni-checklist.md'
+        'ooni-asns-coverage.md': 'https://anoni.net/en/projects/asn-coverage/asn-diversity/'
+        'ooni-weblists.md': 'https://anoni.net/en/join/ooni-test-list/'
         'watcher-tor-relays.md': 'https://anoni.net/en/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
-        'setup-repo.md': 'community/setup-repo.md'
+        'setup-repo.md': 'https://anoni.net/en/join/dev-setup/'
         'setup-tor-relay.md': 'https://anoni.net/en/join/setup-tor-relay/'
         'setup-skill-level.md': 'community/skill-level.md'
         # GSC 404 補漏（2026-07-22 匯出）：C 分類頁→section index、E blog→blog index、F report/→reports
@@ -515,8 +515,8 @@ plugins:
         'reports/interseclab-network-coup/index_7.md': 'reports/index.md'
         'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
         'taiwan.md': 'regional/index.md'
-        'taiwan/ooni-asn-coverage.md': 'regional/ooni-asn-coverage.md'
-        'taiwan/ooni-checklist.md': 'regional/ooni-checklist.md'
+        'taiwan/ooni-asn-coverage.md': 'https://anoni.net/en/projects/asn-coverage/asn-diversity/'
+        'taiwan/ooni-checklist.md': 'https://anoni.net/en/join/ooni-test-list/'
         'taiwan/pdpa-2025.md': 'regional/taiwan-pdpa-2025.md'
         'taiwan/digital-wallet-privacy.md': 'regional/taiwan-digital-wallet-privacy.md'
         'taiwan/tor-relay-watcher.md': 'https://anoni.net/en/projects/pulse/'

@@ -264,13 +264,11 @@ const CORE_PAGES_ZH = [
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
   "scenarios/shutdown/",
   // taiwan（在地。whistleblower-law 依上面的判準排除，不是漏掉。
-  // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
+  // tor-relay-watcher、ooni-checklist、ooni-asn-coverage 2026-10 搬到社群首頁）
   "taiwan/",
-  "taiwan/ooni-checklist/",
   "taiwan/pdpa-2025/",
   "taiwan/vasp-2026/",
   "taiwan/realname-data-market/",
-  "taiwan/ooni-asn-coverage/",
   "taiwan/tor-users/",
   "taiwan/digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引）
@@ -363,13 +361,11 @@ const CORE_PAGES_EN = [
   // 斷了，靠執行期快取的話讀者要在斷網前剛好打開過才用得到
   "scenarios/shutdown/",
   // regional（在地脈絡。taiwan-whistleblower-law 依上面的判準排除，不是漏掉。
-  // ooni-asn-coverage 的 vega 圖表離線不渲染，文字仍可讀。tor-relay-watcher 2026-10 搬到社群首頁）
+  // tor-relay-watcher、ooni-checklist、ooni-asn-coverage 2026-10 搬到社群首頁）
   "regional/",
-  "regional/ooni-checklist/",
   "regional/taiwan-pdpa-2025/",
   "regional/taiwan-vasp-2026/",
   "regional/taiwan-realname-data-market/",
-  "regional/ooni-asn-coverage/",
   "regional/taiwan-tor-users/",
   "regional/taiwan-digital-wallet-privacy/",
   // utils（小工具，收斷網現場用得到的四頁加索引，理由見 CORE_PAGES_ZH 的同一段註解）

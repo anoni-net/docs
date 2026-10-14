@@ -170,7 +170,7 @@ DoT 的第 853 埠很容易被擋掉。DoH 混在 HTTPS 裡比較難用埠號擋
 
 執行 OONI Probe 的人要特別留意。依 `ts-017` 規格，網路連線測試（Web Connectivity）先用系統 resolver 解析網域，再跟測試輔助伺服器解出來的結果比對，位址或 ASN 對得上才算一致[^ooni-wc]。
 
-裝置上任何第三方 resolver 都會影響結果，而且方向不同。過濾型 resolver 讓被擋的網域解到 `0.0.0.0`，量測看起來像當地網路遭到干擾，那是假陽性，至少會有人去查。不過濾的境外加密 resolver 更麻煩，它會直接繞過電信商層真正的封鎖，量測顯示一切正常，沒有人會發現漏掉了什麼。社群長期在整理 [台灣 ASN 涵蓋率](../taiwan/ooni-asn-coverage.md)，量測的目標就是台灣本地網路的 DNS 行為，所以量測時請使用該網路 DHCP 發下來的 resolver，關掉所有第三方加密 DNS，不分過不過濾。
+裝置上任何第三方 resolver 都會影響結果，而且方向不同。過濾型 resolver 讓被擋的網域解到 `0.0.0.0`，量測看起來像當地網路遭到干擾，那是假陽性，至少會有人去查。不過濾的境外加密 resolver 更麻煩，它會直接繞過電信商層真正的封鎖，量測顯示一切正常，沒有人會發現漏掉了什麼。社群長期在整理 [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}，量測的目標就是台灣本地網路的 DNS 行為，所以量測時請使用該網路 DHCP 發下來的 resolver，關掉所有第三方加密 DNS，不分過不過濾。
 
 三個容易漏掉的地方：手機的 Android 私人 DNS 是全系統設定，跨 Wi-Fi 與行動網路都生效。家裡的 Pi-hole 或 AdGuard Home 會讓裝置上明明沒設定卻已經被過濾。筆電整理乾淨了不代表手機也是。
 
@@ -225,7 +225,7 @@ DoT 的第 853 埠很容易被擋掉。DoH 混在 HTTPS 裡比較難用埠號擋
 <div class="grid cards" markdown>
 
 - [:material-access-point-network: 什麼是 OONI](./what-is-ooni.md)
-- [:material-chart-bar: 台灣 ASN 涵蓋率](../taiwan/ooni-asn-coverage.md)
+- [:material-chart-bar: 台灣 ASN 涵蓋率](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}
 - [:material-shield-account-outline: 個人隱私指引](https://anoni.net/join/privacy-guide/){target="_blank"}
 
 </div>

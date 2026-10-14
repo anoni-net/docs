@@ -266,7 +266,7 @@ icon: material/lan-disconnect
 
 **海纜與電網**：[Tor 中繼地球儀](../games/tor-network.md)放大到台灣之後會顯示海纜登陸點、變電所、發電廠與 345kV（千伏特，台灣主要高壓輸電幹線的電壓等級）骨幹，每一層都標了資料來源與精度。登陸點的數量、變電所的容量餘裕這類數字，可以用來理解對外連線與供電的集中程度。
 
-**網路觀測的涵蓋範圍**：[台灣 ASN 觀測涵蓋](../taiwan/ooni-asn-coverage.md)說明目前有哪些自治系統（ASN，網際網路上由單一組織例如電信商統一管理的一段網路）被實際量測到。這決定了發生異常時，公開資料能不能佐證。
+**網路觀測的涵蓋範圍**：[ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}說明目前有哪些自治系統（ASN，網際網路上由單一組織例如電信商統一管理的一段網路）被實際量測到。這決定了發生異常時，公開資料能不能佐證。
 
 **這些資料不能拿來做什麼**：它們說明的是現況與集中程度，不足以推論任何特定事件會不會發生、何時發生。看到集中度高就推論即將發生中斷，是過度解讀。
 
@@ -321,5 +321,5 @@ icon: material/lan-disconnect
 - [離線閱讀](../offline.md)：把這個站存進裝置，以及管理裝置上留了哪些內容
 - [小工具](../utils/index.md)：全部在瀏覽器裡運算，存進裝置之後沒有網路也能用
 - [Tor 中繼地球儀](../games/tor-network.md)：放大到台灣可以看到海纜登陸點、變電所、發電廠與 345kV 骨幹
-- [台灣 ASN 觀測涵蓋](../taiwan/ooni-asn-coverage.md)：目前有哪些自治系統被實際量測到
+- [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}：目前有哪些自治系統被實際量測到
 - [威脅模型](../basics/threat-model.md)：依自己的處境決定準備到什麼程度

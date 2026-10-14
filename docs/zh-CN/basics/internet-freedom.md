@@ -79,8 +79,8 @@ icon: material/chat-question
 <div class="grid cards" markdown>
 
 - [:material-chat-question: 什么是匿名网络？](../tools/what-is-anonymity-network.md)
-- [:material-access-point-network: ASNs 自治网络观测数据分析](../taiwan/ooni-asn-coverage.md)
-- [:material-list-status: OONI 网站检测列表](../taiwan/ooni-checklist.md)
+- [:material-access-point-network: ASNs 自治网络观测数据分析](https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/){target="_blank"}
+- [:material-list-status: OONI 网站检测列表](https://anoni.net/zh-cn/join/ooni-test-list/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

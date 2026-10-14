@@ -92,10 +92,7 @@ nav:
   # 只有一篇。侧边栏做成三个单页分组只会更难扫，所以合并成「法规与制度」一组。
   - !ENV [NAV_TAIWAN, "在地脉络"]:
       - taiwan/index.md
-      - "连线层的在地观测":
-          - taiwan/ooni-checklist.md
-          - taiwan/ooni-asn-coverage.md
-          - taiwan/tor-users.md
+      - taiwan/tor-users.md
       - "法规与制度":
           - taiwan/pdpa-2025.md
           - taiwan/digital-wallet-privacy.md
@@ -185,7 +182,6 @@ nav:
       - community/contributor-handbook.md
       - community/i18n.md
       - community/zh-hant-naming.md
-      - community/setup-repo.md
       - community/become-anoni.md
       - community/visual-guide.md
   - "社区 anoni.net": https://anoni.net/zh-cn/
@@ -367,6 +363,10 @@ plugins:
         'community/campus-tor-relay-sop.md': 'https://anoni.net/zh-cn/join/relay-on-campus/sop/'
         'community/campus-relay-faq.md': 'https://anoni.net/zh-cn/join/relay-on-campus/faq/'
         'setup/index.md': 'https://anoni.net/zh-cn/join/'
+        # 2026-10-14 在地脈絡與社群區的三頁搬到社群首頁（toomore/anoni-net-ws#406）
+        'taiwan/ooni-asn-coverage.md': 'https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/'
+        'taiwan/ooni-checklist.md': 'https://anoni.net/zh-cn/join/ooni-test-list/'
+        'community/setup-repo.md': 'https://anoni.net/zh-cn/join/dev-setup/'
         # 2026-10-13 取消進階層（#406）。端對端加密與常被誤認為匿名的網路移到概念層，
         # 另外三頁搬到社群首頁的技術文章，索引頁轉到指南。
         'advanced/index.md': 'guides/index.md'
@@ -452,11 +452,11 @@ plugins:
         'what-is-tails.md': 'tools/what-is-tails.md'
         'what-is-tor.md': 'tools/what-is-tor.md'
         'tor-snowflake.md': 'tools/tor-snowflake.md'
-        'ooni-asns-coverage.md': 'taiwan/ooni-asn-coverage.md'
-        'ooni-weblists.md': 'taiwan/ooni-checklist.md'
+        'ooni-asns-coverage.md': 'https://anoni.net/zh-cn/projects/asn-coverage/asn-diversity/'
+        'ooni-weblists.md': 'https://anoni.net/zh-cn/join/ooni-test-list/'
         'watcher-tor-relays.md': 'https://anoni.net/zh-cn/projects/pulse/'
         'ooni-i18n.md': 'community/i18n.md'
-        'setup-repo.md': 'community/setup-repo.md'
+        'setup-repo.md': 'https://anoni.net/zh-cn/join/dev-setup/'
         'setup-tor-relay.md': 'https://anoni.net/zh-cn/join/setup-tor-relay/'
         'setup-skill-level.md': 'community/skill-level.md'
         'about/community/index.md': 'https://anoni.net/zh-cn/join/'

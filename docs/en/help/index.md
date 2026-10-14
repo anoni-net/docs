@@ -145,7 +145,7 @@ What follows is the digital preparation for someone who has not yet left, or is 
 
 ## Cut off, censored, or blocked
 
-- **A specific site will not load**: check with OONI Probe or [OONI Explorer](https://explorer.ooni.org/){target="_blank"} whether it is individual or regional. [ASN observation coverage](../regional/ooni-asn-coverage.md) shows the current measurement picture
+- **A specific site will not load**: check with OONI Probe or [OONI Explorer](https://explorer.ooni.org/){target="_blank"} whether it is individual or regional. [ASN Diversity and Gaps in Taiwan's OONI Coverage](https://anoni.net/en/projects/asn-coverage/asn-diversity/){target="_blank"} shows the current measurement picture
 - **The whole home connection is down**: first establish whether it is a carrier fault by calling their support. If you suspect it is targeted, record the time, IP address, service name, and screenshots
 - **Cross-border connections are restricted**: try Tor Browser with a built-in bridge (obfs4, Snowflake, meek-azure). [Tor Snowflake](../tools/tor-snowflake.md) covers running one yourself
 - **Tor will not connect at all**: request unlisted bridges from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"}, or by emailing [bridges@torproject.org](mailto:bridges@torproject.org) with `get transport obfs4` in the body. The email request only works from a Riseup or Gmail address. WebTunnel bridges, which look like ordinary HTTPS traffic, are requested this way rather than found in the browser's built-in list
