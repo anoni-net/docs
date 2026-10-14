@@ -52,7 +52,7 @@ Psiphon 採用多層伺服器發現過程，允許客戶端找尋可用的伺服
 
 自 2024 年 5 月以來，隨著 Geedge 套件在緬甸的部署，Psiphon 觀察到使用者行為的顯著轉變。REMOTE 使用者的比例下降，而 OBFUSCATED 的使用則相應增加，這與試圖透過伺服器枚舉進行封鎖的預期影響一致。這一發展表明，Geedge 對 Psiphon 的封鎖努力只能部分成功，因為使用者繼續調整並找到替代路徑。
 
-[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後陸續由 SafeNet、Gemalto 收購，目前屬於法國航太與國防集團 Thales。（譯註：原報告這則註腳的內容與所在段落對應不上，內容與[第 6 章](./index_6.md)「西方公司的共謀」一節的正文相同，照原文翻譯。）
+[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後陸續由 SafeNet、Gemalto 收購，目前屬於法國航太與國防集團 Thales。（譯註：原報告這則註腳的內容與所在段落對應不上，內容與原報告第 55 頁、[第 6 章「西方公司的共謀」](./index_6.md#西方公司的共謀)一節的正文相同，照原文翻譯。）
 [^75]: Brody Ford，[Cubans Evade Internet Curbs with u.s.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
 [^76]: Brody Ford，[Cubans Evade Internet Curbs with u.s.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
 
