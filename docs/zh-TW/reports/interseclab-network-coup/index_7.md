@@ -40,7 +40,7 @@ WebTunnel 是一種新的 Tor 可插拔傳輸，可以將網路流量偽裝成�
 
 ## 繞過 Psiphon 的保護措施
 
-由位於加拿大的 Psiphon Inc. 開發的 Psiphon 是一款免費且開源的網路規避工具，旨在幫助使用者繞過網路審查並訪問受限內容[^75]。Psiphon 主要在有嚴重網路審查的國家使用，包括中國、伊朗、埃及和土耳其[^76]。它在政治動盪時期（如 2021 年緬甸反軍政府抗議和 2021 年古巴抗議）中發揮了重要作用，使訊息能夠被訪問。
+由位於加拿大的 Psiphon Inc. 開發的 Psiphon 是一款免費且開源的網路規避工具，旨在幫助使用者繞過網路審查並訪問受限內容[^74]。Psiphon 主要在有嚴重網路審查的國家使用，包括中國、伊朗、埃及和土耳其[^75]。它在政治動盪時期（如 2021 年緬甸反軍政府抗議和 2021 年古巴抗議）中發揮了重要作用，使訊息能夠被訪問。
 
 Psiphon3 使用一種稱為混淆伺服器列表（OSL）的系統來促進向客戶端分發伺服器節點訊息。與其他 VPN 應用相比，這個伺服器列表使用伺服器列表加密密鑰（SLOKs）的方法進行加密。這種加密的目的是確保只有受信任的客戶端才能訪問完整的伺服器節點列表，從而防止自動化的爬蟲和偶然的對手從中抓取訊息。
 
@@ -52,9 +52,9 @@ Psiphon 採用多層伺服器發現過程，允許客戶端找尋可用的伺服
 
 自 2024 年 5 月以來，隨著 Geedge 套件在緬甸的部署，Psiphon 觀察到使用者行為的顯著轉變。REMOTE 使用者的比例下降，而 OBFUSCATED 的使用則相應增加，這與試圖透過伺服器枚舉進行封鎖的預期影響一致。這一發展表明，Geedge 對 Psiphon 的封鎖努力只能部分成功，因為使用者繼續調整並找到替代路徑。
 
-[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後陸續由 SafeNet、Gemalto 收購，目前屬於法國航太與國防集團 Thales。（譯註：原報告這則註腳的內容與所在段落對應不上，內容與[第 6 章](./index_6.md)「西方公司的共謀」一節的正文相同，照原文翻譯。）
-[^75]: Brody Ford，[Cubans Evade Internet Curbs with u.s.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
-[^76]: Brody Ford，[Cubans Evade Internet Curbs with u.s.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
+[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後陸續由 SafeNet、Gemalto 收購，目前屬於法國航太與國防集團 Thales。（譯註：原報告這則註腳的內容與所在段落對應不上，內容與原報告第 55 頁、[第 6 章「西方公司的共謀」](./index_6.md#西方公司的共謀)一節的正文相同，照原文翻譯。）
+[^74]: Brody Ford，[Cubans Evade Internet Curbs with U.S.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
+[^75]: Brody Ford，[Cubans Evade Internet Curbs with U.S.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
 
 *[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
 *[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。

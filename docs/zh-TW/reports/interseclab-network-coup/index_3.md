@@ -24,7 +24,7 @@ icon: material/arrow-right-bottom
 
 我們的研究顯示，快速擴展的可能性很大。隨著一站式網路控制解決方案需求增長，Geedge 一類公司持續向新客戶推銷、創新與擴展其業務。我們敦促國際社會使用本報告提供的見解，以面對這些技術商品化和數位壓制全球市場進化的現實。
 
-[^1]: Access Now，[Open Statement: Internet Shutdown in Amhara](https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/){target="_blank"}，2023-04-06。
+[^1]: Access Now，[Open Statement: Internet Shutdown in Amhara](https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/){target="_blank"}，2023-04-06。（譯註：標題與日期照錄原報告。這個網址在 2026-10 查核時是 Access Now 2023-09-12 的〈Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm〉，跟[第 6 章](./index_6.md)的第 33 則相同。）
 [^2]: Africanews，[Kenya’s Safaricom to Enter Ethiopia](https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/){target="_blank"}，2022-10-07。
 [^3]: United Nations，[IGF 2022 – Conference Room 1 – English](https://www.youtube.com/live/UOpmpxRFh-4?t=33662s){target="_blank"}，YouTube 影片（9:20:32 處），2022 年 11 月發布。
 
