@@ -135,21 +135,7 @@ The link can be used on multiple devices and will expire in 24 hours.
     <img class="brand-frame" src="https://assets.anoni.net/docs/ooni-run-v2-m2.png" alt="OONI Probe 仪表板上的检测卡片与执行按钮" style="width:50%">
 </figure>
 
-### 用 miniooni CLI 执行检测
-
-移动装置之外，OONI 也有命令行版本 [miniooni](https://github.com/ooni/probe-cli){target="_blank"}，方便在服务器、研究脚本或自动化环境执行检测。把 OONI Run v2 链接喂给 CLI 有个容易遇到的雷，**不能直接把网页版的网址丢给 `-i`**。
-
-```bash
-# 不会 work，CLI 拿到 HTML，JSON 解析就会失败
-miniooni oonirun -i https://run.ooni.org/v2/10328
-
-# 正确用法，直接指向 API 的 descriptor JSON
-miniooni oonirun -i https://api.ooni.org/api/v2/oonirun/links/10328
-```
-
-原因是 miniooni 的 `-i` 会把你给的网址当成 descriptor JSON 端点直接 GET，期望取得 JSON 回来。`run.ooni.org/v2/<ID>` 是给浏览器看的网页，响应是 HTML，CLI 解析就会失败。实际的 descriptor 由 API 提供，网址格式为 `https://api.ooni.org/api/v2/oonirun/links/<LINK_ID>`，`<LINK_ID>` 直接从网页网址末段获取（社区链接为 `10328`）。
-
-桌面版与移动 App 不受这个限制影响，操作系统会把 `https://run.ooni.org/v2/<ID>` 交给 OONI Probe 自行处理。这个限制目前只影响 miniooni CLI，upstream 已有 [TODO 标注](https://github.com/ooni/probe-cli/blob/master/internal/oonirun/link.go){target="_blank"}，后续可能会补上自动转换。
+要在服务器、研究脚本或定时任务里用命令行运行清单，见社区首页的 [miniooni 与 OONI Run v2 清单](https://anoni.net/zh-cn/projects/asn-coverage/howto/#miniooni){target="_blank"}。
 
 ## 观察数据
 

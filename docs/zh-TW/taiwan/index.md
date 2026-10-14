@@ -18,7 +18,7 @@ icon: material/island
 - [OONI 網站檢測清單的維護](https://anoni.net/join/ooni-test-list/){target="_blank"}：在地清單如何維護、分類與更新，是觀測資料的入門起點。
 - [ASN 多樣性與台灣的觀測缺口](https://anoni.net/projects/asn-coverage/asn-diversity/){target="_blank"}：台灣各 ASN 的 OONI 測試覆蓋與盲點。
 - [Tor 中繼節點觀測](https://anoni.net/projects/pulse/){target="_blank"}：台灣 Tor 中繼節點的即時運作狀況與區域比較。
-- [台灣有多少人在用 Tor](./tor-users.md)：使用者端的規模與四年趨勢，以及 2025 年那次十倍跳升為什麼是計數錯誤。
+- [台灣有多少人在用 Tor](https://anoni.net/projects/pulse/tor-users/){target="_blank"}：使用者端的規模與四年趨勢，以及 2025 年那次十倍跳升為什麼是計數錯誤。
 - [AI 助理的 Tor 節點查詢](https://anoni.net/projects/onionoo-mcp/){target="_blank"}：社群自架的查詢服務，不用寫程式，在 claude.ai 接上後直接問台灣與各地有多少 Tor 中繼、頻寬多大、落在哪些電信網路。
 
 ### 個資與身分

@@ -90,7 +90,6 @@ nav:
   # Groups follow the article list in regional/index.md.
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
-      - regional/taiwan-tor-users.md
       - "Taiwan's regulatory environment":
           - regional/taiwan-pdpa-2025.md
           - regional/taiwan-digital-wallet-privacy.md
@@ -375,6 +374,9 @@ plugins:
         'community/campus-tor-relay-sop.md': 'https://anoni.net/en/join/relay-on-campus/sop/'
         'community/campus-relay-faq.md': 'https://anoni.net/en/join/relay-on-campus/faq/'
         'setup/index.md': 'https://anoni.net/en/join/'
+        # 2026-10-14 #406 剩下四頁的盤點：台灣 Tor 使用者數搬到 Tor 中繼節點觀測底下，Brave GPU 指紋搬到技術文章
+        'regional/taiwan-tor-users.md': 'https://anoni.net/en/projects/pulse/tor-users/'
+        'blog/2026/08/brave-gpu-fingerprinting.md': 'https://anoni.net/en/articles/brave-gpu-fingerprinting/'
         # 2026-10-14 在地脈絡與社群區的三頁搬到社群首頁（toomore/anoni-net-ws#406）
         'regional/ooni-asn-coverage.md': 'https://anoni.net/en/projects/asn-coverage/asn-diversity/'
         'regional/ooni-checklist.md': 'https://anoni.net/en/join/ooni-test-list/'
