@@ -25,7 +25,7 @@ description: "自从互联网在土库曼斯坦开始普及以来，就一直受
 
 2021 年 7 月，关于 Tor 使用量在土库曼斯坦骤降的现象[引起了我们的注意](https://archive.is/5Kp4s){target="_blank"}。Tor 后来了解到，这标志着土库曼斯坦这个后苏联国家进入了审查与限制的新时代。不过让我们回到事件的起源看看整件事情的发展...
 
-Tor 社区长期以来致力于捍卫网络自由，运营中继节点并[提供桥接服务以对抗网络审查](https://blog.torproject.org/2024-defend-internet-freedom-during-elections/){target="_blank"}。多年来，Tor 项目呼吁更多人加入[架设桥接](https://forum.torproject.org/t/tor-relays-help-turkmens-to-bypass-internet-censorship-run-an-obfs4-bridge/7002){target="_blank"}、使用 Snowflake 代理，同时我们也调查并调整我们的反审查策略，并分享有关土库曼网络审查的信息。
+Tor 社区长期以来致力于捍卫网络自由，运营中继节点并[提供网桥服务以对抗网络审查](https://blog.torproject.org/2024-defend-internet-freedom-during-elections/){target="_blank"}。多年来，Tor 项目呼吁更多人加入[架设网桥](https://forum.torproject.org/t/tor-relays-help-turkmens-to-bypass-internet-censorship-run-an-obfs4-bridge/7002){target="_blank"}、使用 Snowflake 代理，同时我们也调查并调整我们的反审查策略，并分享有关土库曼网络审查的信息。
 
 现代的网络审查规避系统通常建立在「[附带损害](https://www.bamsoftware.com/papers/fronting/){target="_blank"}」的概念上，即审查者如果要封锁某些内容，就必须封锁整个互联网或某些热门的在线服务。然而，在土库曼斯坦，审查者的行为却出奇地不同。他们毫不避讳地封锁了互联网的大部分内容，对于可能造成的附带损害不以为意，这引发了人们的好奇：为什么土库曼斯坦的审查者似乎对其行为产生的附带损害无动于衷呢？
 

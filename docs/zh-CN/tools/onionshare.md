@@ -156,7 +156,7 @@ icon: material/share-circle
 <div class="grid cards" markdown>
 
 - [:material-newspaper: 记者保护消息来源（场景）](../scenarios/journalist.md)
-- [:material-snowflake: Tor Snowflake 桥接点](./tor-snowflake.md)
+- [:material-snowflake: Tor Snowflake 网桥](./tor-snowflake.md)
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>

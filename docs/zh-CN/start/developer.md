@@ -6,7 +6,7 @@ icon: material/console
 
 # :material-console: 开发者从这里开始
 
-其他身分的入口页说明怎么保护自己，这一页说明你的技能能接到哪里。匿名网络的多数基础设施由志愿者维运，中继节点、桥接、观测数据、镜像站，每一项都缺人。
+其他身分的入口页说明怎么保护自己，这一页说明你的技能能接到哪里。匿名网络的多数基础设施由志愿者维运，中继节点、网桥、观测数据、镜像站，每一项都缺人。
 
 先看你手上有什么，再决定走哪一条线。四条线互相独立，挑一条开始就好。
 
@@ -20,10 +20,10 @@ icon: material/console
 
 ### 有一台长期开机的机器与稳定带宽
 
-最直接的贡献。从中继节点开始，带宽不足或 IP 会变动的话改做桥接。
+最直接的贡献。从中继节点开始，带宽不足或 IP 会变动的话改做网桥。
 
 - [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}：中继节点的完整设置
-- [Tor WebTunnel 桥接架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}：桥接对带宽的要求低很多，在审查环境下的价值也更高
+- [Tor WebTunnel 网桥架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}：网桥对带宽的要求低很多，在审查环境下的价值也更高
 - [Tor Snowflake](../tools/tor-snowflake.md)：门槛最低的一种，开着那一页就在帮忙，要常驻再装扩展
 - [.onion 服务架设指南](https://anoni.net/zh-cn/join/setup-onion-service/){target="_blank"}：把手上的服务多开一个 onion 入口
 - [文档站 IPFS 镜像的 pin 节点](https://anoni.net/zh-cn/join/pin-ipfs-mirror/){target="_blank"}：目前是单点，多一个 pin 就多一份备援

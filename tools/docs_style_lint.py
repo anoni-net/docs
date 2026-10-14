@@ -210,6 +210,11 @@ ATTR_ANCHOR_RE = re.compile(r"\{[^}]*#[^}]*\}")
 SIMPLIFIED_RULES = [
     ("simplified-term-community", re.compile(r"社群"), None,
      "簡體版指 community 用「社区」，指社交平台用「社交」（社交媒体、社交平台）"),
+    # Tor Browser 的簡體介面一律寫「网桥」（设置 > 连接 > 网桥、请求网桥），讀者照著文件找按鈕，
+    # 用詞要對得上。2026-10-14 兩站統一（toomore/anoni-net-ws#411）。Matrix 與 IRC 這類協定互通
+    # 不是 Tor bridge，改寫成「互通」，不要寫「桥接」
+    ("simplified-term-bridge", re.compile(r"桥接"), None,
+     "簡體版的 Tor bridge 用「网桥」，跟 Tor Browser 簡體介面一致"),
 ]
 
 # 掃過一遍全站之後刻意沒有收進來的詞，記在這裡免得有人以為是漏掉的：

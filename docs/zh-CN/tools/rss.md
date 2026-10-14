@@ -74,7 +74,7 @@ Thunderbird 要先建立一个收取点账户，之后的订阅都放在这个�
 
 ## 经由 Tor 读取
 
-anoni.net 的每一份 feed 都有 onion 版本（网址在[本页最后的列表](#anoninet-的-feed-网址)）。经由 Tor 读取 onion 版本时，网站端看不到你的 IP，你的网络运营商也只看得到你在使用 Tor。所在的网络封锁了 anoni.net 的话，onion 版本的 feed 照样可以读取。在中国大陆，Tor 本身也被封锁，Tor Browser 要先设置网桥才能连上（见[中继点与桥接点](./what-is-tor.md#中继点与桥接点)）。
+anoni.net 的每一份 feed 都有 onion 版本（网址在[本页最后的列表](#anoninet-的-feed-网址)）。经由 Tor 读取 onion 版本时，网站端看不到你的 IP，你的网络运营商也只看得到你在使用 Tor。所在的网络封锁了 anoni.net 的话，onion 版本的 feed 照样可以读取。在中国大陆，Tor 本身也被封锁，Tor Browser 要先设置网桥才能连上（见[中继点与网桥](./what-is-tor.md#中继点与网桥)）。
 
 阅读器需要支持 SOCKS 代理才能经由 Tor 连接。Thunderbird 的设置方式：
 

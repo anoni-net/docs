@@ -175,7 +175,7 @@ nav:
   # 说明收进「关于文档站」。拿掉的页面网址不变，照样打得开，等转址时再处理。
   # 链接的 onion 版由 replace_sitename_anoni_onion.sh 改写。
   # 「读懂观测资料」四页 2026-10-13 搬到社群首页的 /projects/asn-coverage/ 底下（toomore/anoni-net-ws#406）。
-  # 架设 Tor Relay、WebTunnel 桥接、.onion 服务与 pin IPFS 镜像四页 2026-10-13 搬到社群首页的 /join/ 底下（#406）。
+  # 架设 Tor Relay、WebTunnel 网桥、.onion 服务与 pin IPFS 镜像四页 2026-10-13 搬到社群首页的 /join/ 底下（#406）。
   # 三份校园范本同一天搬到 /join/relay-on-campus/ 底下，「架设与运营」整组拿掉，索引页转到 /join/。
   # about/index.md 排第一，navigation.indexes 才会把它当成这一组的索引页。
   - "关于文档站":

@@ -19,7 +19,7 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 |---|---|---|
 | 客户端核心（SOCKS 代理、`arti-client` 嵌入库） | ✅ 已完成，宣告 stable | 1.0.0（2022-09） |
 | DNS 代理 | ✅ 已完成 | 1.0.0（2022-09） |
-| 抗审查：桥接与 pluggable transports（obfs4、Snowflake、WebTunnel） | ✅ 已完成 | 1.1.0（2022-11） |
+| 抗审查：网桥与 pluggable transports（obfs4、Snowflake、WebTunnel） | ✅ 已完成 | 1.1.0（2022-11） |
 | 连接 onion 服务（客户端） | ✅ 已完成 | 1.1.6（2023-06） |
 | 架设 onion 服务（服务端，含 full vanguards、限制性发现、客户端授权） | ✅ 已完成 | 1.2.0（2024-03）起 |
 | RPC 控制接口（取代 c-tor 的 control port） | ✅ 已完成，转 stable | 1.4.2（2025-03） |
@@ -33,7 +33,7 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 
 图例：✅ 已完成　🟡 开发中　⬜ 不实现
 
-客户端这一侧的能力已大致对齐 c-tor，能当 SOCKS 代理、连接与架设 onion 服务、走桥接与 pluggable transports。计划现在的主力放在中继端，还无法用 Arti 架设 Tor 中继，这部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 接口取代，设计取向不同。
+客户端这一侧的能力已大致对齐 c-tor，能当 SOCKS 代理、连接与架设 onion 服务、走网桥与 pluggable transports。计划现在的主力放在中继端，还无法用 Arti 架设 Tor 中继，这部分目前只能用 c-tor。c-tor 的 control port 在 Arti 改以 RPC 接口取代，设计取向不同。
 
 ## 中继端做到哪里
 

@@ -71,7 +71,7 @@ icon: material/message-text-outline
 - Sealed Sender 隐藏单则消息的寄件人，不隐藏「账号存在」这件事
 - 多装置靠 device linking，新装置看不到旧消息（除非开启 2024 年加入的加密消息备份）
 - 客户端 UX 偏「美式」，部分功能（已读回条、群组权限）跟亚洲使用者习惯不一致
-- 在中国大陆被「长城防火墙」（Great Firewall, GFW）封锁（约 2021 年起），需透过 Tor Snowflake、WebTunnel 等桥接才能稳定连接
+- 在中国大陆被「长城防火墙」（Great Firewall, GFW）封锁（约 2021 年起），需透过 Tor Snowflake、WebTunnel 等网桥才能稳定连接
 
 ## SimpleX
 
@@ -111,7 +111,7 @@ icon: material/message-text-outline
 - Lokinet 路由的设计过去曾因不同于 Tor 的选择被质疑，社区审计仍在持续
 - 消息送达延迟明显比 Signal 高（因为走多跳 onion routing）
 - 早期版本没有完整前向保密，新版本仍在转换中（决定使用前可看 [端对端加密的协议机制](https://anoni.net/zh-cn/articles/e2ee-protocols/){target="_blank"}的协议对照）
-- 在中国大陆 Lokinet 节点被封锁，与 Signal 同样需要桥接
+- 在中国大陆 Lokinet 节点被封锁，与 Signal 同样需要网桥
 
 ## Briar
 
@@ -131,7 +131,7 @@ icon: material/message-text-outline
 - UX 偏粗糙，年代较早、设计目标不是大众化
 - 消息要对方上线才送达（没有中继 server 暂存），离线太久会收不到
 - 不适合日常通讯，更像「行动现场备援」
-- 在中国大陆 Tor 模式需 Snowflake 桥接，但 Bluetooth 与 Wi-Fi Direct 不受 ISP 层级封锁影响
+- 在中国大陆 Tor 模式需 Snowflake 网桥，但 Bluetooth 与 Wi-Fi Direct 不受 ISP 层级封锁影响
 
 跟 Briar 同类的工具还有 Bridgefy，但 2020 年 Bridgefy 被研究团队指出加密设计缺陷[^1]，社区推荐从 Bridgefy 迁移到 Briar 或其他验证过的方案。
 
@@ -188,7 +188,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ### Telegram
 
-[Telegram](https://telegram.org/){target="_blank"} 在中国大陆被封锁（2015 年起），需桥接才能连入。即便能用，默认非 E2EE 这一事实仍然成立：
+[Telegram](https://telegram.org/){target="_blank"} 在中国大陆被封锁（2015 年起），需借助翻墙工具才能连入。即便能用，默认非 E2EE 这一事实仍然成立：
 
 - **Secret Chat**：唯一走 E2EE 的模式，需要手动开启，限一对一，不能跨装置同步
 - **一般对话、群组、频道**：走 client-server 加密，Telegram server 看得到所有内容
@@ -212,14 +212,14 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 | 工具 | 直连 | 解法 |
 |------|------|------|
-| Signal | 不可（约 2021 年起） | Tor Snowflake、WebTunnel 桥接 |
+| Signal | 不可（约 2021 年起） | Tor Snowflake、WebTunnel 网桥 |
 | SimpleX | 视 server 而定 | 自架 server 或换 server |
-| Session | 不可 | 桥接 |
-| Briar (Tor) | 不可 | Snowflake 桥接 |
+| Session | 不可 | 网桥 |
+| Briar (Tor) | 不可 | Snowflake 网桥 |
 | Briar (Bluetooth、Wi-Fi mesh) | 可 | 不需要外网，限实体距离 |
-| Matrix（境外 homeserver） | 不可 | 桥接 |
+| Matrix（境外 homeserver） | 不可 | 网桥 |
 
-桥接选项 Tor Snowflake、WebTunnel 在 2025 年底仍是境内较稳定的进入路径，操作细节见 [Tor Browser 进阶设定](./tor-browser-advanced.md) 的桥接段落，原理见 [Tor Snowflake 桥接点](./tor-snowflake.md)。
+网桥选项 Tor Snowflake、WebTunnel 在 2025 年底仍是境内较稳定的进入路径，操作细节见 [Tor Browser 进阶设定](./tor-browser-advanced.md) 的网桥段落，原理见 [Tor Snowflake 网桥](./tor-snowflake.md)。
 
 **微信是社会基础建设，先承认再分流**：跟家人、单位、政府服务（医保、社保、政务通办）、商业服务（外卖、约车、医院挂号、预约缴费）都切不掉。务实做法是分流：
 
@@ -247,9 +247,9 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ??? question "我所有人都在微信，怎么开始用 Signal"
 
-    分流而不是替换。但在中国大陆，要先解决一个前提：Signal 在境内被封锁，你跟对方都需要稳定的桥接（Tor Snowflake、WebTunnel 等）才能用。这层不解决，邀请别人下载也用不起来。
+    分流而不是替换。但在中国大陆，要先解决一个前提：Signal 在境内被封锁，你跟对方都需要稳定的网桥（Tor Snowflake、WebTunnel 等）才能用。这层不解决，邀请别人下载也用不起来。
 
-    桥接稳定后，先把 3-5 个最敏感的对话对象（家人、特定议题的同事、需要长期保护的合作对象）邀到 Signal，其他人继续留在微信。Signal 的 username 功能让你不需要先公开手机号码也能交换联络。期待「全部人换掉」是不切实际的目标，期待「对的对话用对的工具」才实际。
+    网桥稳定后，先把 3-5 个最敏感的对话对象（家人、特定议题的同事、需要长期保护的合作对象）邀到 Signal，其他人继续留在微信。Signal 的 username 功能让你不需要先公开手机号码也能交换联络。期待「全部人换掉」是不切实际的目标，期待「对的对话用对的工具」才实际。
 
 ??? question "群组里有不熟的人，metadata 还是会泄漏吗"
 
@@ -271,7 +271,7 @@ E2EE 是房间级别的开关，不是默认全部启用。建立私人房间时
 
 ??? question "P2P 消息工具（Briar、SimpleX）会被防火墙挡吗"
 
-    在中国大陆，Briar 默认走 Tor，会遇到跟 Tor Browser 一样的封锁，需要 Snowflake 桥接（见 [Tor Snowflake 桥接点](./tor-snowflake.md)）。Briar 的 Bluetooth 与 Wi-Fi Direct 不受 ISP 层级封锁影响，是 Briar 在境内的主要价值，限制是实体距离。SimpleX 的官方 server 是普通 HTTPS 端点，部分 IP 或域名层级受影响，可能需要换 server 或自架。境内 DPI（深度包检测）比一般地区更积极，对 P2P 工具的检测与封锁会持续演化，工具选择要把这层成本算进去。
+    在中国大陆，Briar 默认走 Tor，会遇到跟 Tor Browser 一样的封锁，需要 Snowflake 网桥（见 [Tor Snowflake 网桥](./tor-snowflake.md)）。Briar 的 Bluetooth 与 Wi-Fi Direct 不受 ISP 层级封锁影响，是 Briar 在境内的主要价值，限制是实体距离。SimpleX 的官方 server 是普通 HTTPS 端点，部分 IP 或域名层级受影响，可能需要换 server 或自架。境内 DPI（深度包检测）比一般地区更积极，对 P2P 工具的检测与封锁会持续演化，工具选择要把这层成本算进去。
 
 ## :material-chat-question: 一同了解
 

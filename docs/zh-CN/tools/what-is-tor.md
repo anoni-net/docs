@@ -44,27 +44,27 @@ icon: simple/torproject
     <figcaption>Tor Relay 类型</figcaption>
 </figure>
 
-## 中继点与桥接点
+## 中继点与网桥 { #中继点与桥接点 }
 
-Tor 的节点分两类：公开的中继点（Relay）与隐藏的桥接点（Bridge）。
+Tor 的节点分两类：公开的中继点（Relay）与隐藏的网桥（Bridge）。
 
 中继点清单是公开的，这是 Tor 设计的一部分：任何人都能验证网络上有哪些节点、谁在运营、运营多久了。公开可查也是 Tor 比起私有匿名网络（例如某些 VPN）多一层信任的原因。
 
-但公开清单也是封锁的目标。在中国、伊朗、白俄罗斯这类严重审查地区，当地 ISP 会直接封锁所有公开的 Tor 中继 IP。为了让这些地区的人仍能连上 Tor，社区另外设计了**桥接点（Bridge）**：IP 不公开、靠官方网页、Email、Telegram 等管道分发给有需要的人。
+但公开清单也是封锁的目标。在中国、伊朗、白俄罗斯这类严重审查地区，当地 ISP 会直接封锁所有公开的 Tor 中继 IP。为了让这些地区的人仍能连上 Tor，社区另外设计了**网桥（Bridge）**：IP 不公开、靠官方网页、Email、Telegram 等管道分发给有需要的人。
 
-桥接点还可以搭配 **Pluggable Transports** 进一步伪装流量：
+网桥还可以搭配 **Pluggable Transports** 进一步伪装流量：
 
 - **Obfs4**：把 Tor 流量看起来像随机乱码，避免被 DPI 直接特征识别。
 - **meek**：把流量包装成连到 Microsoft Azure 这类大型云端服务（早年也用过 Google、Cloudflare，后来陆续关闭了 domain fronting），审查者要嘛全挡、要嘛放行。
-- **[Snowflake](./tor-snowflake.md)**：把流量包装成 WebRTC（视频会议常用协议），由全球志工的浏览器分页临时当桥接。
+- **[Snowflake](./tor-snowflake.md)**：把流量包装成 WebRTC（视频会议常用协议），由全球志工的浏览器分页临时当网桥。
 
 !!! info "anoni.net 是台湾的社区"
 
-    在审查不重的地区（如台湾），使用 Tor 不需要桥接（直接用公开中继就连得上），但可以开 [Snowflake 浏览器分页](./tor-snowflake.md) 变成桥接给审查地区的人用。这是门槛最低的网络自由贡献方式。
+    在审查不重的地区（如台湾），使用 Tor 不需要网桥（直接用公开中继就连得上），但可以开 [Snowflake 浏览器分页](./tor-snowflake.md) 变成网桥给审查地区的人用。这是门槛最低的网络自由贡献方式。
 
 !!! warning "香港读者：参与前请先评估风险"
 
-    香港对外连线同样不受全面封锁，开 Snowflake 分页在技术上一样可行，但参与前要把国安监控算进来，详见 [Tor Snowflake 桥接点](./tor-snowflake.md) 给香港读者的提醒。
+    香港对外连线同样不受全面封锁，开 Snowflake 分页在技术上一样可行，但参与前要把国安监控算进来，详见 [Tor Snowflake 网桥](./tor-snowflake.md) 给香港读者的提醒。
 
 ## Tor 适合做什么、不适合做什么
 
@@ -101,7 +101,7 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 ??? question "ISP 看得到我在用 Tor 吗？"
 
-    在不开桥接的情况下，看得到。ISP 看到你的 IP 连到一个公开 Tor 入口节点的 IP（公开清单查得到），它会知道你在用 Tor，但看不到你接下来连什么。这层「技术可见度」在哪里都一样，但「被看到在用 Tor」会不会有后果，要看所在地区的威胁模型。以香港为例，2020 年《国安法》后监控与寒蝉效应升高，记者、社运工作者被观察到使用 Tor 虽不违法，仍可能引来额外关注，判断方式见 [威胁模型如何建立](../basics/threat-model.md) 与 [VPN 的风险与选择](./vpn-guide.md)。如果你在意这层暴露（例如在敏感工作场所网络，或身处监控较强的地区），可以开桥接 + Pluggable Transports 把这层也藏起来。
+    在不开网桥的情况下，看得到。ISP 看到你的 IP 连到一个公开 Tor 入口节点的 IP（公开清单查得到），它会知道你在用 Tor，但看不到你接下来连什么。这层「技术可见度」在哪里都一样，但「被看到在用 Tor」会不会有后果，要看所在地区的威胁模型。以香港为例，2020 年《国安法》后监控与寒蝉效应升高，记者、社运工作者被观察到使用 Tor 虽不违法，仍可能引来额外关注，判断方式见 [威胁模型如何建立](../basics/threat-model.md) 与 [VPN 的风险与选择](./vpn-guide.md)。如果你在意这层暴露（例如在敏感工作场所网络，或身处监控较强的地区），可以开网桥 + Pluggable Transports 把这层也藏起来。
 
 ??? question "Tor 速度为什么这么慢？"
 
@@ -113,7 +113,7 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 ## 接下来
 
-下载安装 Tor Browser 是起点，[Tor 官方下载页](https://www.torproject.org/download/){target="_blank"} 有 Windows、macOS、Linux、Android 版本（iOS 因为平台限制官方推荐 Onion Browser）。装好后先读 [Tor Browser 进阶设定](./tor-browser-advanced.md) 处理桥接、安全等级、隔离策略，再看 [Tor Snowflake](./tor-snowflake.md) 学习如何贡献一个分页的桥接。
+下载安装 Tor Browser 是起点，[Tor 官方下载页](https://www.torproject.org/download/){target="_blank"} 有 Windows、macOS、Linux、Android 版本（iOS 因为平台限制官方推荐 Onion Browser）。装好后先读 [Tor Browser 进阶设定](./tor-browser-advanced.md) 处理网桥、安全等级、隔离策略，再看 [Tor Snowflake](./tor-snowflake.md) 学习如何贡献一个分页的网桥。
 
 更投入的人可以接 [Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"} 或 [Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}，把本地频宽接进全球网络。
 
@@ -131,7 +131,7 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 <div class="grid cards" markdown>
 
-- [:material-snowflake: 启动 Tor Snowflake 桥接](./tor-snowflake.md)
+- [:material-snowflake: 启动 Tor Snowflake 网桥](./tor-snowflake.md)
 - [:material-school-outline: Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"}
 - [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 

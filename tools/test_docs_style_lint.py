@@ -246,6 +246,10 @@ CN_CASES: list[tuple[str, bool, str]] = [
     ("把社群媒体切换成仅限好友。", True, "簡體版指社交平台用「社交」"),
     ("社区成员一起维护这份文档。", False, "「社区」是簡體版的正確用詞"),
     ("## 技术社区的评价 { #技术社群的评价 }", False, "保留的舊錨點不算"),
+    ("架设一个 WebTunnel 桥接。", True, "簡體版的 Tor bridge 用「网桥」"),
+    ("架设一个 WebTunnel 网桥。", False, "「网桥」跟 Tor Browser 簡體介面一致"),
+    ("## WebTunnel 网桥 { #WebTunnel-桥接 }", False, "保留的舊錨點不算"),
+    ("把橋接流量偽裝成 HTTPS。", False, "正體字的「橋接」不在簡體規則裡"),
 ]
 
 

@@ -14,7 +14,7 @@ icon: material/book-information-variant
 
 ## 文档站与 anoni.net 的分工
 
-一页内容要放在哪里，看它写给谁。读之前需要先懂 Tor 的内容放在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，例如架设 Tor 中继节点、桥接与 onion 服务的指南，以及读懂 OONI 观测数据的方法，读者是要运营节点或自己分析数据的技术同好。不需要先懂 Tor、读完就能保护自己的内容放在文档站。写新内容前不确定该放哪一边，可以先在 Matrix 上询问。
+一页内容要放在哪里，看它写给谁。读之前需要先懂 Tor 的内容放在 [anoni.net](https://anoni.net/zh-cn/){target="_blank"}，例如架设 Tor 中继节点、网桥与 onion 服务的指南，以及读懂 OONI 观测数据的方法，读者是要运营节点或自己分析数据的技术同好。不需要先懂 Tor、读完就能保护自己的内容放在文档站。写新内容前不确定该放哪一边，可以先在 Matrix 上询问。
 
 ## 内容范围
 

@@ -41,7 +41,7 @@
 <rect class="card-w2" x="12" y="129" width="376" height="92" rx="8"/>
 <text class="t-main lab" x="26" y="153">高风险</text>
 <text class="t-main h2" x="26" y="173">香港、泰国、越南、柬埔寨、中国大陆</text>
-<text class="t-main bd" x="26" y="190">混淆型 VPN 与 Tor 桥接先在家测好，</text>
+<text class="t-main bd" x="26" y="190">混淆型 VPN 与 Tor 网桥先在家测好，</text>
 <text class="t-main bd" x="26" y="207">带干净机，敏感工作不在当地网络做。</text>
 <rect class="card-w1" x="12" y="231" width="376" height="92" rx="8"/>
 <text class="t-mute lab" x="26" y="255">中风险</text>
