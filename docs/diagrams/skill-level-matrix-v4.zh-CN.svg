@@ -42,7 +42,7 @@
 <text class="t-main lab" x="26" y="326">记者、公民社会工作者</text>
 <text class="t-main h2" x="26" y="346">实作</text>
 <text class="t-main lab" x="26" y="367">Tor</text>
-<text class="t-main bd" x="36" y="384">装好 Tor Browser，会用桥接连线</text>
+<text class="t-main bd" x="36" y="384">装好 Tor Browser，会用网桥连线</text>
 <text class="t-main lab" x="26" y="405">Tails</text>
 <text class="t-main bd" x="36" y="422">做出开机 U 盘，从 USB 进系统</text>
 <text class="t-main lab" x="26" y="443">OONI</text>

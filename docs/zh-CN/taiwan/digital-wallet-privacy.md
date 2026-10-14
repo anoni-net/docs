@@ -108,7 +108,7 @@ encodedList = ZipUtils.gzipCompressThenBase64(bytes);
 
 零知识证明在数字身份皮夹上还没有成熟的大规模实现，这不是台湾独有的落后。eIDAS 2.0 的前言第 14 点把它列为鼓励方向，但没有写成有拘束力的条文或施行细则[^19]，相关的技术规格也还在公开征询[^11]。差别在欧盟先用批次发行把影响降到最低，而欧盟自己的文件写明那只是部分缓解（partly mitigate）[^9]。
 
-数位发展部的另一个项目 `tw-did` 把行动自然人凭证（TW FidO）桥接到 W3C 的分布式识别码，其中一种模式用 Semaphore 的零知识证明，README 写明发证方与验证方在验证过程中都认不出是哪一位国民[^35]，而皮夹目前缺的正是这个性质。两个项目在代码层面没有关联，`tw-did` 的定位是桥接与研究，规模与正式服务的工程约束不同，不宜当成皮夹应该比照的范例，但它说明该路径在同一个部会的视野之内。
+数位发展部的另一个项目 `tw-did` 把行动自然人凭证（TW FidO）衔接到 W3C 的分布式识别码，其中一种模式用 Semaphore 的零知识证明，README 写明发证方与验证方在验证过程中都认不出是哪一位国民[^35]，而皮夹目前缺的正是这个性质。两个项目在代码层面没有关联，`tw-did` 的定位是衔接与研究，规模与正式服务的工程约束不同，不宜当成皮夹应该比照的范例，但它说明该路径在同一个部会的视野之内。
 
 ## 皮夹查询验证方身份却不挡下请求
 
@@ -337,5 +337,5 @@ VERIFIER_ATTESTATION("verifier_attestation")
 [^32]: [Singpass API Introduction](https://docs.developer.singpass.gov.sg/docs/introduction){target="_blank"} - Singpass 官方开发者文件
 [^33]: [Japanese Public Key Infrastructure (JPKI)](https://www.digital.go.jp/en/policies/mynumber/private-business/jpki-introduction){target="_blank"} - 日本デジタル庁
 [^34]: [블록체인 기반 DID 기술 적용한 디지털 신분증](http://www.boannews.com/media/view.asp?idx=97149){target="_blank"} - 보안뉴스，韩国行政安全部的行动身份证以区块链 DID 为基础
-[^35]: [moda-gov-tw/tw-did](https://github.com/moda-gov-tw/tw-did){target="_blank"} - 数位发展部，把 TW FidO 桥接到 W3C DID 的项目，支持 Semaphore 零知识证明模式
+[^35]: [moda-gov-tw/tw-did](https://github.com/moda-gov-tw/tw-did){target="_blank"} - 数位发展部，把 TW FidO 衔接到 W3C DID 的项目，支持 Semaphore 零知识证明模式
 [^22]: [X relying party registration](https://eudi.dev/latest/discussion-topics/x-relying-party-registration/){target="_blank"} - EU Digital Identity Wallet 的 Architecture and Reference Framework 讨论文件，高阶需求第 8 条

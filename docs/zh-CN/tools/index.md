@@ -18,7 +18,7 @@ icon: material/toolbox-outline
 想匿名浏览、传档、或贡献网络自由基础建设的人，从这群开始。其中 Signal Proxy 与 VPN 两篇不属于 Tor 家族，同样是绕行封锁会用到的连接工具，放这里对照着读。
 
 - [什么是 Tor](./what-is-tor.md)：Tor 如何使用、跟 VPN 差在哪、什么时候不该用。
-- [Tor Browser 进阶设定](./tor-browser-advanced.md)：桥接、安全等级、Onion 站点与身分隔离。
+- [Tor Browser 进阶设定](./tor-browser-advanced.md)：网桥、安全等级、Onion 站点与身分隔离。
 - [手机上的 Tor](./tor-browser-mobile.md)：Android 的官方 Tor Browser 与 iOS 的 Onion Browser，安装、第一次启动、确认连接真的经由 Tor，以及什么时候该改用电脑。
 - [Tor Snowflake](./tor-snowflake.md)：开浏览器分页，帮受审查地区的使用者连上 Tor，门槛最低的网络自由贡献方式。
 - [Signal Proxy](./signal-proxy.md)：Signal 被封锁的地区怎么用 proxy 连回服务，以及在网络不受限的地区架一台提供出去的门槛与风险。

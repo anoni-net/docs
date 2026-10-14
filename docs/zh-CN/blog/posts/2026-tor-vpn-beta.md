@@ -8,8 +8,8 @@ categories:
     - 翻译文章
 slug: 2026-tor-vpn-beta
 image: "https://forum.torproject.org/uploads/default/original/2X/1/1705e443e3cb9fe39eedf2432cf559090323d6fe.png"
-summary: "Tor Project 在 2026 年 9 月 9 日发表 Tor VPN Beta 的开发回顾。构想始于 2021 年的用户研究，第一个平台选 Android，去年秋天限量发布之后最主要的用途很快确定，用户要的是解除封锁。这篇整理官方回顾的内容，包含每个 app 各走一条独立 Tor circuit 的隔离设计、Apps 界面新增搜索、出口选择在可用性测试中造成的误用（需要桥接的人去调了出口位置，因此现在必须先连上 Tor 才能选出口）、采用集中在伊朗与土库曼斯坦这类高度审查地区、1.4.0 beta 优先补上 WebTunnel 桥接、底层 Arti 带来的稳定性、可复现构建与 F-Droid 上架，以及拥塞控制尚未从 C 版 Tor 移植过来这件未完成的工作。文末补上中国境内与海外华人视角的四点提醒。"
-description: "Tor Project 在 2026 年 9 月 9 日发表 Tor VPN Beta 的开发回顾。构想始于 2021 年的用户研究，第一个平台选 Android，去年秋天限量发布之后最主要的用途很快确定，用户要的是解除封锁。这篇整理官方回顾的内容，包含每个 app 各走一条独立 Tor circuit 的隔离设计、Apps 界面新增搜索、出口选择在可用性测试中造成的误用（需要桥接的人去调了出口位置，因此现在必须先连上 Tor 才能选出口）、采用集中在伊朗与土库曼斯坦这类高度审查地区、1.4.0 beta 优先补上 WebTunnel 桥接、底层 Arti 带来的稳定性、可复现构建与 F-Droid 上架，以及拥塞控制尚未从 C 版 Tor 移植过来这件未完成的工作。文末补上中国境内与海外华人视角的四点提醒。"
+summary: "Tor Project 在 2026 年 9 月 9 日发表 Tor VPN Beta 的开发回顾。构想始于 2021 年的用户研究，第一个平台选 Android，去年秋天限量发布之后最主要的用途很快确定，用户要的是解除封锁。这篇整理官方回顾的内容，包含每个 app 各走一条独立 Tor circuit 的隔离设计、Apps 界面新增搜索、出口选择在可用性测试中造成的误用（需要网桥的人去调了出口位置，因此现在必须先连上 Tor 才能选出口）、采用集中在伊朗与土库曼斯坦这类高度审查地区、1.4.0 beta 优先补上 WebTunnel 网桥、底层 Arti 带来的稳定性、可复现构建与 F-Droid 上架，以及拥塞控制尚未从 C 版 Tor 移植过来这件未完成的工作。文末补上中国境内与海外华人视角的四点提醒。"
+description: "Tor Project 在 2026 年 9 月 9 日发表 Tor VPN Beta 的开发回顾。构想始于 2021 年的用户研究，第一个平台选 Android，去年秋天限量发布之后最主要的用途很快确定，用户要的是解除封锁。这篇整理官方回顾的内容，包含每个 app 各走一条独立 Tor circuit 的隔离设计、Apps 界面新增搜索、出口选择在可用性测试中造成的误用（需要网桥的人去调了出口位置，因此现在必须先连上 Tor 才能选出口）、采用集中在伊朗与土库曼斯坦这类高度审查地区、1.4.0 beta 优先补上 WebTunnel 网桥、底层 Arti 带来的稳定性、可复现构建与 F-Droid 上架，以及拥塞控制尚未从 C 版 Tor 移植过来这件未完成的工作。文末补上中国境内与海外华人视角的四点提醒。"
 ---
 
 # 从零打造 Android 上的 Tor VPN，Beta 一年下来学到的事
@@ -42,13 +42,13 @@ app 层级的控制随版本演进做得更好用。Apps 界面现在可以搜�
 
 出口选择是一般人熟悉的 VPN 功能，对想绕过审查的用户来说不见得是对的做法。官方把这件事列为开发阶段的可用性测试与早期反馈带来的最重要一课。
 
-最初的方向是让用户对出口选择有更多控制权，设计在纸上看起来很合理，做出来却造成混淆。想绕过封锁的用户去调了出口位置，他们需要的功能是桥接（bridges）[^bridge]。Tor 的运作方式与用户以为的运作方式之间有落差，目前的设计因此要求先把 app 连上 Tor 网络，之后才能选出口。出口选择仍在官方的后续规划里，前提是引入的方式不会在高风险场景下诱发操作错误。
+最初的方向是让用户对出口选择有更多控制权，设计在纸上看起来很合理，做出来却造成混淆。想绕过封锁的用户去调了出口位置，他们需要的功能是网桥（bridges）[^bridge]。Tor 的运作方式与用户以为的运作方式之间有落差，目前的设计因此要求先把 app 连上 Tor 网络，之后才能选出口。出口选择仍在官方的后续规划里，前提是引入的方式不会在高风险场景下诱发操作错误。
 
 ## 用户集中在高度审查的地区
 
 早期的采用集中在高度审查地区，包含伊朗与土库曼斯坦。Tor Browser for Android 的用户分布偏向全球北方，Tor VPN Beta 这边看到的是全球南方用户更深的投入，网络限制对他们是每天要面对的现实。
 
-规避能力的改善力度因此加倍。一个例子是在早期版本之一（1.4.0 beta）优先加入 WebTunnel[^webtunnel] 桥接，它让 Tor 流量看起来像一般的加密网页流量，审查方要检测并封锁连接因此变得更难。桥接支持整体也修掉几个错误、做了几项体验改善，目标是让桥接用起来更可靠。
+规避能力的改善力度因此加倍。一个例子是在早期版本之一（1.4.0 beta）优先加入 WebTunnel[^webtunnel] 网桥，它让 Tor 流量看起来像一般的加密网页流量，审查方要检测并封锁连接因此变得更难。网桥支持整体也修掉几个错误、做了几项体验改善，目标是让网桥用起来更可靠。
 
 ## 稳定性、可复现构建与 F-Droid
 
@@ -68,7 +68,7 @@ Tor VPN Beta 是横跨数年的协作成果。官方在文中感谢 [The Guardia
 
 ## 中国境内与海外华人视角
 
-**解除封锁这个主要用途，在境内的门槛更高**：Tor 的公开入口地址在中国境内长期无法直接连上，连不上要处理的是桥接，出口位置解决的是另一件事。可用性测试里出现的那种误用，在这里的代价更高，因为尝试的机会本来就有限。文章里写的 1.4.0 beta 优先补上的 WebTunnel，正是为会针对 Tor 特征过滤的网络准备的传输方式。桥接类型的说明见 [Tor Snowflake 桥接点建立](../../tools/tor-snowflake.md)，境内公开表达的整体考虑见[在中国大陆的公开平台传播信息](../../scenarios/mainland-speech.md)。
+**解除封锁这个主要用途，在境内的门槛更高**：Tor 的公开入口地址在中国境内长期无法直接连上，连不上要处理的是网桥，出口位置解决的是另一件事。可用性测试里出现的那种误用，在这里的代价更高，因为尝试的机会本来就有限。文章里写的 1.4.0 beta 优先补上的 WebTunnel，正是为会针对 Tor 特征过滤的网络准备的传输方式。网桥类型的说明见 [Tor Snowflake 网桥建立](../../tools/tor-snowflake.md)，境内公开表达的整体考虑见[在中国大陆的公开平台传播信息](../../scenarios/mainland-speech.md)。
 
 **安装渠道的差别是实际的**：Google Play 在中国境内不可用，官方这次把 F-Droid 与 APK 直接下载都补上，对取不到 Play 的人是能落地的差别。同时要有准备，下载站点本身也可能不可达，在网络还通的时候先取得安装包并核对官方签名，比事后再想办法可靠得多。
 
@@ -83,8 +83,8 @@ Tor VPN Beta 是横跨数年的协作成果。官方在文中感谢 [The Guardia
 
 [^tor-browser]: Tor Browser 是 Tor Project 维护的浏览器，以 Firefox ESR 为基础，连接经由 Tor 网络送出，并内置跨站追踪隔离与浏览器指纹一致化。站内介绍见[什么是 Tor](../../tools/what-is-tor.md)，官方下载页见 [Download Tor Browser](https://www.torproject.org/download/){target="_blank"} - Tor Project。查证日 2026-09-11。
 [^circuit]: Tor circuit（连接路径）是流量在 Tor 网络里经过的一组中继，通常由入口、中间与出口三个节点组成，每一段各自加密。单一节点只知道相邻的前后一段，没有任何一个节点同时掌握来源与目的地。站内说明见[什么是 Tor](../../tools/what-is-tor.md)。
-[^bridge]: 桥接（bridge）是没有公开列在 Tor 目录里的入口中继。公开的入口 IP 被封锁时，改用桥接仍然连得上 Tor 网络，取得方式与可用类型见 [桥接](https://support.torproject.org/zh-CN/bridges/){target="_blank"} - Tor Project 官方支持文件。查证日 2026-09-11。
-[^webtunnel]: WebTunnel 是一种可插拔传输（pluggable transport），把 Tor 流量包进 HTTPS 连接里，在网络上看起来像连往一般网站，适合用在会针对 Tor 特征过滤的网络。站内的搭建教程见[Tor WebTunnel 桥接架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}，设计说明见 [Hiding in plain sight: Introducing WebTunnel](https://blog.torproject.org/introducing-webtunnel-evading-censorship-by-hiding-in-plain-sight/){target="_blank"} - Tor Project 博客，2024 年 3 月 12 日。查证日 2026-09-11。
+[^bridge]: 网桥（bridge）是没有公开列在 Tor 目录里的入口中继。公开的入口 IP 被封锁时，改用网桥仍然连得上 Tor 网络，取得方式与可用类型见 [网桥](https://support.torproject.org/zh-CN/bridges/){target="_blank"} - Tor Project 官方支持文件。查证日 2026-09-11。
+[^webtunnel]: WebTunnel 是一种可插拔传输（pluggable transport），把 Tor 流量包进 HTTPS 连接里，在网络上看起来像连往一般网站，适合用在会针对 Tor 特征过滤的网络。站内的搭建教程见[Tor WebTunnel 网桥架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}，设计说明见 [Hiding in plain sight: Introducing WebTunnel](https://blog.torproject.org/introducing-webtunnel-evading-censorship-by-hiding-in-plain-sight/){target="_blank"} - Tor Project 博客，2024 年 3 月 12 日。查证日 2026-09-11。
 [^arti]: Arti 是 Tor Project 以 Rust 从头撰写的 Tor 实现，用来接手 C 语言版 tor 的角色。它以库为主要形式，方便被其他软件嵌进去使用，Tor VPN 的底层就是它。站内的版本记录见 [Arti 更新日志](../../changelog/arti.md)，源代码见 [arti](https://gitlab.torproject.org/tpo/core/arti){target="_blank"} - Tor Project GitLab。查证日 2026-09-11。
 [^reproducible]: 可复现构建（reproducible builds）指同一份源代码在不同机器、不同时间构建，都产生比特完全相同的成品。任何人因此可以自行构建一次，比对哈希值，确认手上的可执行文件确实来自公开的那份源代码。说明见 [Reproducible Builds](https://reproducible-builds.org/){target="_blank"} - Reproducible Builds 项目。查证日 2026-09-11。
 [^fdroid]: F-Droid 是 Android 上的自由软件应用商店，收录的 app 由 F-Droid 自行从源代码构建，安装与更新都不需要 Google 账号。Tor VPN Beta 的页面见 [Tor VPN Beta on F-Droid](https://f-droid.org/en/packages/org.torproject.vpn/){target="_blank"} - F-Droid。查证日 2026-09-11。

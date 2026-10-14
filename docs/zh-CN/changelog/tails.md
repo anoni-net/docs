@@ -147,8 +147,8 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社区志�
 > 2026-03-26 · [上游公告](https://tails.net/news/version_7.6/){target="_blank"}
 
 - <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。公告没有列出这一版修掉的漏洞，上游也没有提到已被实际利用。
-- Tor 连接助手可以直接协助获取[桥接](../tools/tor-browser-advanced.md)。桥接是不公开列出的 Tor 中继，网络封锁 Tor 时可以当成连进 Tor 的第一站。选择自动连接而连不上时，界面会多出「按所在地区请求 Tor 桥接」的选项。
-- Tails 通过 Tor Project 的 Moat API 下载较可能在当地有效的桥接，这段连接用域前置（domain fronting，把连接伪装成连向其他网站的技术）规避封锁。Tails 以外的 Tor Browser 从 11.5 版起就用同一套做法。
+- Tor 连接助手可以直接协助获取[网桥](../tools/tor-browser-advanced.md)。网桥是不公开列出的 Tor 中继，网络封锁 Tor 时可以当成连进 Tor 的第一站。选择自动连接而连不上时，界面会多出「按所在地区请求 Tor 网桥」的选项。
+- Tails 通过 Tor Project 的 Moat API 下载较可能在当地有效的网桥，这段连接用域前置（domain fronting，把连接伪装成连向其他网站的技术）规避封锁。Tails 以外的 Tor Browser 从 11.5 版起就用同一套做法。
 - 内置的密码管理器从 KeePassXC 改成 GNOME 的 Secrets。两者的文件格式相同，Secrets 会自动尝试解锁原本在 KeePassXC 使用的数据库，屏幕键盘、光标大小等无障碍功能也能再次搭配使用。仍需要 KeePassXC 高级功能的人，可以把它安装成 Persistent Storage 的附加软件（additional software）。
 - Tor Browser 升至 15.0.8，Thunderbird 升至 140.8.0，Electrum 从 4.5.8 升至 4.7.0。
 - 更新部分 firmware 套件，改善较新硬件的支持，包含显卡、Wi-Fi 等。
@@ -184,6 +184,6 @@ Tails 官方只区分紧急发布与排程发布，中间那一层是社区志�
 > 2025-07-25 · [上游公告](https://tails.net/news/version_6.18/){target="_blank"}
 
 - <span class="urg-tag urg-tag--routine">一般</span>例行排程版本，非紧急安全发布。公告没有列出这一版修掉的漏洞，上游也没有提到已被实际利用。
-- 可以用 WebTunnel 桥接连上 Tor 网络。WebTunnel 把连接伪装成普通的网页流量，在 obfs4 桥接被封锁的地方仍有机会连上。WebTunnel 桥接可以从 [Tor Project 的桥接分发网站](https://bridges.torproject.org/){target="_blank"}获取。
+- 可以用 WebTunnel 网桥连上 Tor 网络。WebTunnel 把连接伪装成普通的网页流量，在 obfs4 网桥被封锁的地方仍有机会连上。WebTunnel 网桥可以从 [Tor Project 的网桥分发网站](https://bridges.torproject.org/){target="_blank"}获取。
 - Tor Browser 升至 14.5.5，Thunderbird 升至 128.12.0。
 - 可从 Tails 6.0 以后版本自动升级。全新安装会清除既有的 Persistent Storage。

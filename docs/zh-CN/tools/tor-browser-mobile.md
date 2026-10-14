@@ -8,7 +8,7 @@ icon: material/cellphone-lock
 
 看到一个 `.onion` 地址，用平常的浏览器打不开，需要的是 Tor。手机上要装什么，Android 与 iOS 的答案不一样，两边能做到的事也不一样。
 
-先读过 [什么是 Tor](./what-is-tor.md) 会比较好理解底下的取舍。桥接与安全等级的细节在 [Tor Browser 进阶设置](./tor-browser-advanced.md)，这一页只说明手机上不同的部分。
+先读过 [什么是 Tor](./what-is-tor.md) 会比较好理解底下的取舍。网桥与安全等级的细节在 [Tor Browser 进阶设置](./tor-browser-advanced.md)，这一页只说明手机上不同的部分。
 
 ## 两个平台的差别
 
@@ -44,7 +44,7 @@ Tor Project 的签名验证说明只涵盖 Windows、macOS 与 Linux，没有 An
 
 ## 第一次启动要处理的事
 
-打开 Tor Browser for Android 之后会先连线。连不上的话，通常是网络端挡掉了 Tor。App 里有 Connection Assist，也可以手动选桥接。哪一种桥接适合哪一种封锁，写在 [Tor Browser 进阶设置](./tor-browser-advanced.md#连线Connection-Assist-与桥接)。
+打开 Tor Browser for Android 之后会先连线。连不上的话，通常是网络端挡掉了 Tor。App 里有 Connection Assist，也可以手动选网桥。哪一种网桥适合哪一种封锁，写在 [Tor Browser 进阶设置](./tor-browser-advanced.md#连线Connection-Assist-与网桥)。
 
 安全等级预设是 **Standard**。要提高到 **Safer** 或 **Safest** 之前，先看 [安全等级的说明](./tor-browser-advanced.md#安全等级Security-Level)，等级愈高，愈多网站会显示不正常，值不值得取决于你在抗谁。
 
@@ -90,7 +90,7 @@ Onion Browser 在 App Store 上架，开源，贡献者包含 Mike Tigas、Benja
 
 <div class="grid cards" markdown>
 
-- [:material-snowflake: Tor Snowflake 桥接点](./tor-snowflake.md)
+- [:material-snowflake: Tor Snowflake 网桥](./tor-snowflake.md)
 - [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 

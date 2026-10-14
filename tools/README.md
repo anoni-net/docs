@@ -89,6 +89,7 @@ pre-commit autoupdate --repo https://github.com/anoni-net/docs --bleeding-edge
 | `zhe-repeat` | warn | 「這／这」同句堆疊（3 次以上，或相鄰兩個相隔不到 9 個字）|
 | `regional-term-site` | warn | 「站台」（中國慣用詞，臺灣用「網站」）|
 | `simplified-term-community` | warn | 只掃簡體版：「社群」，指 community 用「社区」、指社交平台用「社交」（小標後面保留的舊錨點 `{ #… }` 不掃）|
+| `simplified-term-bridge` | warn | 只掃簡體版：「桥接」，Tor bridge 用「网桥」，跟 Tor Browser 簡體介面一致（舊錨點同樣不掃）|
 | `colloquial-jiang` | warn | 口語「講」（已扣除演講/講座等正當詞）|
 | `colloquial-run` | warn | 口語「跑」當執行軟體用（已扣除跑步/賽跑等正當詞）|
 | `colloquial-get` | warn | 「拿到」，改用「取得」|

@@ -1,36 +1,36 @@
 ---
 title: Tor Browser 进阶设定
-description: 桥接、安全等级、Onion 站点、身份隔离与常见错误排解。
+description: 网桥、安全等级、Onion 站点、身份隔离与常见错误排解。
 icon: material/cog-outline
 ---
 
 # :material-cog-outline: Tor Browser 进阶设定
 
-Tor Browser 的默认值已能涵盖大部分日常情境，但在被封锁的网络、进阶威胁模型、需要切换多个身份时，默认值不够用。这篇文章逐项看 Tor Browser 的进阶设定：连线（Connection Assist 与桥接）、安全等级、身份隔离、电路检视、Onion 站点偏好、指纹抗性、移动版，最后列出在台湾常见的错误消息与排解步骤。动设定之前可以先回头看 [威胁模型如何建立](../basics/threat-model.md)，知道自己在抗谁。
+Tor Browser 的默认值已能涵盖大部分日常情境，但在被封锁的网络、进阶威胁模型、需要切换多个身份时，默认值不够用。这篇文章逐项看 Tor Browser 的进阶设定：连线（Connection Assist 与网桥）、安全等级、身份隔离、电路检视、Onion 站点偏好、指纹抗性、移动版，最后列出在台湾常见的错误消息与排解步骤。动设定之前可以先回头看 [威胁模型如何建立](../basics/threat-model.md)，知道自己在抗谁。
 
 如果还没读过 Tor 的基本原理，可以先看 [什么是 Tor](./what-is-tor.md)。本文默认读者已知道 Guard、Middle、Exit 三层中继。
 
-## 连线：Connection Assist 与桥接
+## 连线：Connection Assist 与网桥 { #连线Connection-Assist-与桥接 }
 
-Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：检测你的地区与连线状况，自动选择合适的桥接（bridge）配置。在台湾多数情境不需要桥接，网络自由度高、ISP 不主动封锁 Tor 入口节点。出国（中国、伊朗、缅甸这类审查地区）才需要手动启用桥接。
+Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：检测你的地区与连线状况，自动选择合适的网桥（bridge）配置。在台湾多数情境不需要网桥，网络自由度高、ISP 不主动封锁 Tor 入口节点。出国（中国、伊朗、缅甸这类审查地区）才需要手动启用网桥。
 
-可选的桥接类型：
+可选的网桥类型：
 
 - **obfs4**：流量混淆，老牌 pluggable transport，多数情境可用
-- **Snowflake**：短暂配对的 WebRTC 桥接点，IP 流动性高
+- **Snowflake**：短暂配对的 WebRTC 网桥，IP 流动性高
 - **meek-azure**：流量伪装成往 Microsoft Azure 的 HTTPS 请求
 - **WebTunnel**：较新的 transport（2024 年后成熟），完全伪装成一般 HTTPS 站点流量
 
-如果 Connection Assist 找到的桥接不通，可以手动取得新桥接：到 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 领取、写信给 `bridges@torproject.org`、或使用 Telegram bot `@GetBridgesBot`。
+如果 Connection Assist 找到的网桥不通，可以手动取得新网桥：到 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 领取、写信给 `bridges@torproject.org`、或使用 Telegram bot `@GetBridgesBot`。
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/docs/tb-connection-assist.png" target="_blank">
         <img src="https://assets.anoni.net/docs/tb-connection-assist.png"
-            alt="Tor Browser 的 Connection Assist 与桥接设定"
-            title="Tor Browser 的 Connection Assist 与桥接设定"
+            alt="Tor Browser 的 Connection Assist 与网桥设定"
+            title="Tor Browser 的 Connection Assist 与网桥设定"
             class="brand-frame">
     </a>
-    <figcaption>Tor Browser 的 Connection Assist 与桥接设定（详见 <a href="https://support.torproject.org/zh-CN/bridges/" target="_blank">Tor 官方说明：桥接</a>）</figcaption>
+    <figcaption>Tor Browser 的 Connection Assist 与网桥设定（详见 <a href="https://support.torproject.org/zh-CN/bridges/" target="_blank">Tor 官方说明：网桥</a>）</figcaption>
 </figure>
 
 ## 安全等级（Security Level）
@@ -138,15 +138,15 @@ Tor Browser 的匿名性靠「全球用户长得一样」维持。几个基本�
 移动装置上的 Tor 体验较弱，跟桌面版有几个差异：
 
 - iOS 因 WebKit 限制，无法做到桌面版完整的指纹抗性
-- 浏览器标签页版的 Snowflake 在手机上效果有限，标签页进入后台后系统经常中断 WebRTC 连线。想用手机长期贡献，改用官方的独立 App，见 [Tor Snowflake 桥接点](./tor-snowflake.md)
+- 浏览器标签页版的 Snowflake 在手机上效果有限，标签页进入后台后系统经常中断 WebRTC 连线。想用手机长期贡献，改用官方的独立 App，见 [Tor Snowflake 网桥](./tor-snowflake.md)
 - 进阶威胁模型（记者、行动者）建议优先用桌面版的 Tor Browser，或直接改用 [Tails](./what-is-tails.md)
 
 ## 台湾常见错误排解
 
 | 消息 | 可能原因 | 处理 |
 |---|---|---|
-| `Tor failed to establish a network connection` | ISP 短暂干扰、防火墙阻挡 | 重试。仍失败则启用桥接 |
-| `PT_PROXY_FAILED` | pluggable transport 启动失败 | 换桥接类型，例如 obfs4 换 meek-azure |
+| `Tor failed to establish a network connection` | ISP 短暂干扰、防火墙阻挡 | 重试。仍失败则启用网桥 |
+| `PT_PROXY_FAILED` | pluggable transport 启动失败 | 换网桥类型，例如 obfs4 换 meek-azure |
 | Cloudflare CAPTCHA 无限循环 | 出口节点被该站封锁 | 用 New Tor Circuit for this Site 换出口 |
 | 校园或企业网络阻挡 Tor | 网络管理员封锁 entry 节点 | 启用 Connection Assist，自动选 obfs4 或 meek-azure 穿透 |
 
@@ -164,7 +164,7 @@ Tor Browser 的匿名性靠「全球用户长得一样」维持。几个基本�
 
 <div class="grid cards" markdown>
 
-- [:material-snowflake: Tor Snowflake 桥接点](./tor-snowflake.md)
+- [:material-snowflake: Tor Snowflake 网桥](./tor-snowflake.md)
 - [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 

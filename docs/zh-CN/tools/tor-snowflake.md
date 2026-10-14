@@ -1,17 +1,17 @@
 ---
 title: Tor Snowflake
-description: 通过 WebRTC 伪装为视频通信方式协助建立桥接点
+description: 通过 WebRTC 伪装为视频通信方式协助建立网桥
 icon: material/snowflake
 ---
-# :material-snowflake: Tor Snowflake 桥接点建立（网页版）
+# :material-snowflake: Tor Snowflake 网桥建立（网页版） { #Tor-Snowflake-桥接点建立网页版 }
 
-直接通过网页的方式建立 Tor 桥接点，只需要一步「启用」，即可帮助无法通过传统的 Tor 连接方式建立 onion 连接。
+直接通过网页的方式建立 Tor 网桥，只需要一步「启用」，即可帮助无法通过传统的 Tor 连接方式建立 onion 连接。
 
 !!! warning "香港读者：参与前请先评估风险"
 
-    Snowflake 会让你的浏览器暂时变成替他人转发 Tor 流量的桥接点。在香港，2020 年《国安法》与 2026 年 3 月生效的装置解密义务（调查国安案件时可要求交出装置密码，一般须法院手令，拒绝最高可判一年徒刑）之下[^hk]，一旦装置被搜查，「为什么你的浏览器在帮审查地区的人连接 Tor」本身可能引来额外关注。技术上合法、可用，但请先按自身所在地区评估风险，可参考 [VPN 的风险与选择](./vpn-guide.md)。
+    Snowflake 会让你的浏览器暂时变成替他人转发 Tor 流量的网桥。在香港，2020 年《国安法》与 2026 年 3 月生效的装置解密义务（调查国安案件时可要求交出装置密码，一般须法院手令，拒绝最高可判一年徒刑）之下[^hk]，一旦装置被搜查，「为什么你的浏览器在帮审查地区的人连接 Tor」本身可能引来额外关注。技术上合法、可用，但请先按自身所在地区评估风险，可参考 [VPN 的风险与选择](./vpn-guide.md)。
 
-## 启动 Snowflake 桥接点
+## 启动 Snowflake 网桥 { #启动-Snowflake-桥接点 }
 
 <div class="grid cards" markdown>
 
@@ -29,7 +29,7 @@ icon: material/snowflake
 
 ### 什么是 Snowflake？
 
-Tor Snowflake 是一种用于 Tor 网络的桥接技术，主要帮助用户绕过互联网审查。通过全世界志愿者使用 WebRTC 通讯建立临时的点对点连接，使被封锁或受限的用户能够访问被阻挡的网站和服务。
+Tor Snowflake 是一种用于 Tor 网络的网桥技术，主要帮助用户绕过互联网审查。通过全世界志愿者使用 WebRTC 通讯建立临时的点对点连接，使被封锁或受限的用户能够访问被阻挡的网站和服务。
 
 ### Snowflake 如何运作？
 

@@ -33,7 +33,7 @@ Signal 官方的做法叫做 TLS proxy，跟一般的 HTTP proxy 有明显差别
 
 TLS proxy 对付的是「Signal 的服务器地址被封」这一类手法。审查系统靠 DNS、IP 黑名单、SNI 过滤认出目的地时，把连接导向一台还没被列管的服务器就绕得过去。
 
-审查强度更高的环境要另外评估。防火长城会做主动探测（active probing，主动连向可疑的服务器测试它是不是 proxy），DPI 的辨识能力也比多数地区强，Signal Proxy 在这种环境不保证能用。手边需要有备援方案，可以看 [WebTunnel 桥接](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的风险与选择](./vpn-guide.md) 里的混淆协议一节。
+审查强度更高的环境要另外评估。防火长城会做主动探测（active probing，主动连向可疑的服务器测试它是不是 proxy），DPI 的辨识能力也比多数地区强，Signal Proxy 在这种环境不保证能用。手边需要有备援方案，可以看 [WebTunnel 网桥](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}、[Tor Snowflake](./tor-snowflake.md)，以及 [VPN 的风险与选择](./vpn-guide.md) 里的混淆协议一节。
 
 !!! warning "境内使用者请先评估法律风险"
 
@@ -116,7 +116,7 @@ docker compose up --detach
 
 地址暴露得越广，被封锁得越快。实务上的做法是公开表明「我有一台 Signal proxy」，地址走私信、加密邮件或小群组给出去。同一台服务器如果服务对象太集中在一个地区，也会加速被当地审查系统盯上。
 
-社区层级的做法是多备几台、分散在不同的网络供应商，一台被封就换下一台，这跟 Tor 桥接分发的逻辑相同。
+社区层级的做法是多备几台、分散在不同的网络供应商，一台被封就换下一台，这跟 Tor 网桥分发的逻辑相同。
 
 ### 架设端的风险评估
 
@@ -144,7 +144,7 @@ Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的�
 
 ??? question "跟 Tor Snowflake 比，哪个贡献比较大？"
 
-    两者服务的对象不同。Snowflake 帮的是连不上 Tor 网络的人，涵盖整体网络浏览的匿名需求。Signal Proxy 只处理 Signal 的通讯需求，范围窄但直接对应「联络不上家人朋友」这个具体处境。架设门槛上，Snowflake 开分页就能运作，Signal Proxy 需要 VPS 与域名，跟 [WebTunnel 桥接](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"} 接近。
+    两者服务的对象不同。Snowflake 帮的是连不上 Tor 网络的人，涵盖整体网络浏览的匿名需求。Signal Proxy 只处理 Signal 的通讯需求，范围窄但直接对应「联络不上家人朋友」这个具体处境。架设门槛上，Snowflake 开分页就能运作，Signal Proxy 需要 VPS 与域名，跟 [WebTunnel 网桥](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"} 接近。
 
 [^china]: [FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。2025 年底官方公开示警见 [AI Cop Signals VPN Crackdown](https://chinamediaproject.org/2025/11/13/ai-cop-signals-vpn-crackdown/){target="_blank"} - China Media Project
 
@@ -162,8 +162,8 @@ Signal Proxy 只把流量转给 Signal 的服务器，不是任意目的地的�
 
 <div class="grid cards" markdown>
 
-- [:material-snowflake: Tor Snowflake 桥接点](./tor-snowflake.md)
-- [:material-tunnel-outline: Tor WebTunnel 桥接架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}
+- [:material-snowflake: Tor Snowflake 网桥](./tor-snowflake.md)
+- [:material-tunnel-outline: Tor WebTunnel 网桥架设指南](https://anoni.net/zh-cn/join/setup-tor-webtunnel/){target="_blank"}
 - [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 
 </div>

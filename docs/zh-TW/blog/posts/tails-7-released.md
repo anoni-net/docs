@@ -20,15 +20,15 @@ description: "Tails 7.0 已發佈是首個基於 Debian 13（代號 Trixie）和
 
 ## 追憶
 
-Tails 7.0 獻給 Lunar（1982–2024）的追憶。Lunar 是 Tails 的貢獻者、Tor 的志工、自由軟體黑客以及社群組織者。
+Tails 7.0 獻給 Lunar（1982–2024）的追憶。Lunar 是 Tails 的貢獻者、Tor 的志工、自由軟體駭客以及社群組織者。
 
-在 Tails 的發展歷程中，Lunar 始終與我們並肩作戰。從最初的項目萌芽到最終與 Tor 的合併，他提供了明智的技術建議、富有創意的產品設計點子、外展支持和關懷的組織建議。
+在 Tails 的發展歷程中，Lunar 始終與我們並肩作戰。從最初的專案萌芽到最終與 Tor 的合併，他提供了明智的技術建議、富有創意的產品設計點子、外展支援和關懷的組織建議。
 
-除了在 Tor 的貢獻之外，Lunar 還致力於多個非常成功的自由軟體項目，如 [Debian](https://www.debian.org/){target="_blank"} 項目（Tails 所基於的 Linux 發行版），以及協助我們驗證 [Tails 版本完整性](https://tails.net/contribute/build/reproducible/){target="_blank"}的 [Reproducible Builds](https://reproducible-builds.org/){target="_blank"} 項目。
+除了在 Tor 的貢獻之外，Lunar 還致力於多個非常成功的自由軟體專案，如 [Debian](https://www.debian.org/){target="_blank"} 專案（Tails 所基於的 Linux 發行版），以及協助我們驗證 [Tails 版本完整性](https://tails.net/contribute/build/reproducible/){target="_blank"}的 [Reproducible Builds](https://reproducible-builds.org/){target="_blank"} 專案。
 
 Lunar 的離去，對於我們的社群以及他所參與的其他許多社群都是莫大的損失。
 
-另見其他項目寫給 Lunar 的[紀念文章](https://lunar.anargeek.net/liens/#autres-sites){target="_blank"}。
+另見其他專案寫給 Lunar 的[紀念文章](https://lunar.anargeek.net/liens/#autres-sites){target="_blank"}。
 
 <!-- more -->
 

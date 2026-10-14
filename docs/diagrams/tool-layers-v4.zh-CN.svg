@@ -32,7 +32,7 @@
 <rect class="card-c2" x="12" y="120" width="376" height="93" rx="8"/>
 <text class="t-main lab" x="26" y="144">连线层</text>
 <text class="t-main h2" x="26" y="164">Tor 工具家族</text>
-<text class="t-main bd" x="26" y="182">Tor Browser、Snowflake、OnionShare、桥接</text>
+<text class="t-main bd" x="26" y="182">Tor Browser、Snowflake、OnionShare、网桥</text>
 <text class="t-main bd" x="26" y="199">把连线藏进多层加密与随机路径，让 IP 与行为难以被追踪。</text>
 <rect class="card-c1" x="12" y="223" width="376" height="92" rx="8"/>
 <text class="t-mute lab" x="26" y="247">基础层</text>

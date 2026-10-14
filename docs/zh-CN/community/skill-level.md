@@ -18,7 +18,7 @@ icon: octicons/paste-24
 
 <figure markdown="span">
     <img class="diagram-tall" src="https://assets.anoni.net/diagrams/skill-level-matrix-v4.zh-CN.svg"
-        alt="三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献三个层级。认识层适合任何想了解的人，在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层适合记者与公民社会工作者，在 Tor 是装好浏览器并会用桥接，在 Tails 是做出开机U盘并从 USB 进系统，在 OONI 是执行 Probe 产出检测报告。贡献层适合开源社区成员，在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与用 GnuPG 管理密钥，在 OONI 是用命令行执行指定测试、整理观测名单与分析原始数据。三栏各自独立，不必依序点满。">
+        alt="三栏三行的对照表。三栏是 Tor、Tails、OONI，三行是认识、实作、贡献三个层级。认识层适合任何想了解的人，在 Tor 是说得出洋葱路由与三层中继，在 Tails 是说得出跟一般操作系统差在哪，在 OONI 是说得出它在测什么。实作层适合记者与公民社会工作者，在 Tor 是装好浏览器并会用网桥，在 Tails 是做出开机U盘并从 USB 进系统，在 OONI 是执行 Probe 产出检测报告。贡献层适合开源社区成员，在 Tor 是架 Relay、Bridge 或 WebTunnel，在 Tails 是备份 Persistent Storage 与用 GnuPG 管理密钥，在 OONI 是用命令行执行指定测试、整理观测名单与分析原始数据。三栏各自独立，不必依序点满。">
     <figcaption>同一个层级在三个工具上分别代表什么。三栏各自独立，不必依序点满。挑跟你想参与的主题相关的那一栏，从目前所在的那一格往上走。每一格在页面上都有对应的自我评估清单，还没到的话，那一级的「从这里开始」列了要补的文章。</figcaption>
 </figure>
 
@@ -103,14 +103,14 @@ icon: octicons/paste-24
     - [ ] 我能够下载并安装 Tor 浏览器。
     - [ ] 我能够说明 Bridge、Snowflake、WebTunnel 各自的使用场景。
     - [ ] 我能够判断是否应搭配 VPN 使用 Tor，以及两者的差异。
-    - [ ] 我能够通过直接连接与桥接方式连接 Tor 网络，并已实际使用至少一周。
+    - [ ] 我能够通过直接连接与网桥方式连接 Tor 网络，并已实际使用至少一周。
     - [ ] 我能够操作切换目前的连接路径（New Tor Circuit）。
     - [ ] 我能够连接到 `.onion` 网域。
 
     ??? tip "还没到这个程度？从这里开始"
         1. 前往 [Tor Project 官方网站](https://www.torproject.org/zh-TW/download/){target="_blank"} 下载 Tor 浏览器。
         2. 安装后，用 Tor 浏览器进行日常浏览，持续至少一周，熟悉其界面与特性。
-        3. 尝试连接到本项目的 `.onion` 网站，确认桥接连接方式也能运作。
+        3. 尝试连接到本项目的 `.onion` 网站，确认网桥连接方式也能运作。
 
     !!! abstract "参考说明"
 
@@ -127,19 +127,19 @@ icon: octicons/paste-24
             3. **临时使用设计**：关闭 Tor 浏览器后，浏览历史、Cookies、登录信息等临时数据会自动清除。
             4. **开放源代码**：Tor 的源代码公开，允许开发人员和安全专家进行检视与修正。
 
-        ??? question "Tor 桥接（Bridge）类型：Bridge、Snowflake、WebTunnel。"
+        ??? question "Tor 网桥（Bridge）类型：Bridge、Snowflake、WebTunnel。"
 
-            桥接（Bridge）服务器的存在，是为了帮助受到网络审查或封锁的用户连上 Tor。以下是几种不同类型的 Tor 桥接：
+            网桥（Bridge）服务器的存在，是为了帮助受到网络审查或封锁的用户连上 Tor。以下是几种不同类型的 Tor 网桥：
 
-            1. **Bridge**：最基本的 Tor 桥接类型。桥接是一种不列于公开 Tor 网络中的秘密入口点，因此不易被封锁。用户可手动取得桥接来连接 Tor 网络。（可参考如何取得 [Tor Bridge](https://bridges.torproject.org/){target="_blank"}）
+            1. **Bridge**：最基本的 Tor 网桥类型。网桥是一种不列于公开 Tor 网络中的秘密入口点，因此不易被封锁。用户可手动取得网桥来连接 Tor 网络。（可参考如何取得 [Tor Bridge](https://bridges.torproject.org/){target="_blank"}）
             2. **Snowflake**：通过 WebRTC 协议让志工使用浏览器成为临时的 Tor 入口点。因为动态且去中心化，封锁难度较高。（可参考如何安装 [Snowflake](https://snowflake.torproject.org/){target="_blank"}）
             3. **WebTunnel**：使用 HTTPS 服务器作为入口点，流量难以与一般 HTTPS 流量区分，适合应对更复杂的封锁策略。（可参考如何建立 [WebTunnel](https://community.torproject.org/relay/setup/webtunnel/){target="_blank"}）
 
-        ??? question "各桥接类型的使用场景与时机。"
+        ??? question "各网桥类型的使用场景与时机。"
 
             1. **Bridge**：适合在对 Tor 有基本封锁的环境（如某些学校、职场），足以解决大多数基于 IP 的封锁。
             2. **Snowflake**：面临类似中国、伊朗等使用深层封包检测（DPI）的强力封锁时，Snowflake 是更好的选择。
-            3. **WebTunnel**：当其他桥接类型均失效，且面临极端封锁策略时尝试使用。其 HTTPS 伪装能更有效地隐藏 Tor 流量。
+            3. **WebTunnel**：当其他网桥类型均失效，且面临极端封锁策略时尝试使用。其 HTTPS 伪装能更有效地隐藏 Tor 流量。
 
         ??? question "是否可以通过 VPN 连接 Tor？"
 
@@ -154,12 +154,12 @@ icon: octicons/paste-24
             2. 完成下载后，按照指示安装并启动 Tor 浏览器。
             3. 在整个使用的一周内，用 Tor 浏览器进行日常的网络浏览，熟悉界面和特性，注意使用时的匿名性与安全性，也留意可能造成的不便之处。
 
-        ??? question "通过直接连接与桥接方式连接到 Tor 网络。"
+        ??? question "通过直接连接与网桥方式连接到 Tor 网络。"
 
             1. 启动 Tor 浏览器时，通常会看到浏览器正在建立连接。
             2. 输入网址即直接通过 Tor 网络浏览，此途径最适合未封锁 Tor 网络的地区。
             3. 可通过网址列左侧第一个图示（Tor Circuit，类似 :material-map-marker-path: 的图示）点击查看目前的路线与连接方式。
-            4. 假设你的网络封锁了 Tor，请选择「设置（Settings）」、「连接（Connection）」、「桥接（Bridges）」，从内建桥接服务器类型中选择，或输入你从其他途径取得的桥接连接信息。
+            4. 假设你的网络封锁了 Tor，请选择「设置（Settings）」、「连接（Connection）」、「网桥（Bridges）」，从内建网桥服务器类型中选择，或输入你从其他途径取得的网桥连接信息。
 
         ??? question "操作切换目前的连接路径。"
 
@@ -176,18 +176,18 @@ icon: octicons/paste-24
     **自我评估**（勾选你已能做到的项目）：
 
     - [ ] 我能够清楚区分 Tor（洋葱路由协议）、Onion 网络、Tor 浏览器三者各自所指的技术。
-    - [ ] 我能够使用 Snowflake 浏览器扩展套件建立 Tor 桥接。
+    - [ ] 我能够使用 Snowflake 浏览器扩展套件建立 Tor 网桥。
     - [ ] 我能够启动 Tor 服务并通过 SOCKS v5 方式让其他程序使用。
     - [ ] 我能够在 [metrics.torproject.org](https://metrics.torproject.org){target="_blank"} 查询特定地区的中继点状态。
     - [ ] 我能够建立并维护 Tor Relay 中继点。
-    - [ ] 我能够建立 Tor Bridge 桥接点或 WebTunnel 中继点。
+    - [ ] 我能够建立 Tor Bridge 网桥或 WebTunnel 中继点。
     - [ ] 我能够建立 `.onion` 网站。
 
     ??? tip "还没到这个程度？从这里开始"
         1. 先完成「实践」层的所有项目。
         2. 阅读「[Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}」，了解中继站的安装与设置流程。
         3. 参考「[Tor 中继节点观测](https://anoni.net/zh-cn/projects/pulse/){target="_blank"}」，了解如何观察中继站的运作状况。
-        4. 参考「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」，了解如何通过浏览器或独立程序提供 Snowflake 桥接。
+        4. 参考「[Tor Snowflake](../tools/tor-snowflake.md){target="_blank"}」，了解如何通过浏览器或独立程序提供 Snowflake 网桥。
 
     !!! abstract "参考说明"
 
@@ -197,9 +197,9 @@ icon: octicons/paste-24
             - **Onion 网络**：指以 `.onion` 结尾的隐藏服务网络，只能通过 Tor 协议访问。
             - **Tor 浏览器**：以 Firefox ESR 为基础，整合 Tor 协议的浏览器，让一般用户能方便地连接 Tor 网络与 `.onion` 网站。
 
-        ??? question "使用 Snowflake 浏览器扩展套件建立桥接。"
+        ??? question "使用 Snowflake 浏览器扩展套件建立网桥。"
 
-            Snowflake 让你用浏览器成为一个临时的 Tor 桥接，协助受审查地区的用户连接。
+            Snowflake 让你用浏览器成为一个临时的 Tor 网桥，协助受审查地区的用户连接。
 
             1. 在 Chrome 或 Firefox 安装 [Snowflake 扩展套件](https://snowflake.torproject.org/){target="_blank"}。
             2. 安装后会自动运作。你可以在扩展套件图示上查看目前转发的连接数量。
@@ -229,7 +229,7 @@ icon: octicons/paste-24
             完整的安装与设置步骤请参考「[Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}」，其中涵盖：
 
             - Middle Relay 的安装与设置（`/etc/tor/torrc`）
-            - Bridge 桥接点的建立
+            - Bridge 网桥的建立
             - WebTunnel 中继点的建立
             - 安装后的维护注意事项
 
@@ -279,7 +279,7 @@ icon: octicons/paste-24
     - [ ] 我知道哪些 Mac 机型无法使用 Tails，原因为何。
     - [ ] 我了解 Tails 的主要使用情境与限制。
     - [ ] 我能够建立持久性加密磁区（Persistent Storage）。
-    - [ ] 我能够设置 Bridge 桥接，调整 Tails 的 Tor 连接方式。
+    - [ ] 我能够设置 Bridge 网桥，调整 Tails 的 Tor 连接方式。
     - [ ] 我能够使用 OnionShare 通过 Tor 网络分享文件，并已实际使用 Tails 至少一周。
 
     ??? tip "还没到这个程度？从这里开始"
@@ -324,8 +324,8 @@ icon: octicons/paste-24
         ??? question "使用 Bridge 设置 Tails 的 Tor 连接。"
 
             - 登录 Tails 后，会出现连接到 Tor 的网络设置画面。
-            - 若你的地区封锁了直接连接至 Tor，选择设置桥接（Bridge）方式。
-            - 可选择内建的桥接，或手动输入已取得的桥接信息以绕过封锁。
+            - 若你的地区封锁了直接连接至 Tor，选择设置网桥（Bridge）方式。
+            - 可选择内建的网桥，或手动输入已取得的网桥信息以绕过封锁。
 
         ??? question "使用 OnionShare 分享文件。"
 
