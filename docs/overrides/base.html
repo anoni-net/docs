@@ -51,10 +51,19 @@
       <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-9.7.6">
     {% endblock %}
     {% block htmltitle %}
-      {% if page.meta and page.meta.title %}
-        <title>{{ page.meta.title }} - {{ config.site_name }}</title>
-      {% elif page.title and not page.is_homepage %}
-        <title>{{ page.title | striptags }} - {{ config.site_name }}</title>
+      {#
+        內頁標題的後綴。英文站名很長，接在每頁後面會讓搜尋結果把標題截掉，所以
+        mkdocs_en.yml 另設 extra.title_suffix 用短名，中文兩版沒設，照舊用 site_name。
+        首頁的 front matter 有 title（給導覽列用），要先判斷 is_homepage，
+        首頁才會是完整站名而不是「首頁 - 站名」。
+      #}
+      {% set suffix = config.extra.title_suffix or config.site_name %}
+      {% if page.is_homepage %}
+        <title>{{ config.site_name }}</title>
+      {% elif page.meta and page.meta.title %}
+        <title>{{ page.meta.title }} - {{ suffix }}</title>
+      {% elif page.title %}
+        <title>{{ page.title | striptags }} - {{ suffix }}</title>
       {% else %}
         <title>{{ config.site_name }}</title>
       {% endif %}

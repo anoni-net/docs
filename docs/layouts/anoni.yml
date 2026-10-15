@@ -161,7 +161,7 @@ definitions:
   # 底下兩個給 meta 標籤用，補空白的版本只給畫面，標籤要原文
   - &meta_title >-
     {%- if not page.is_homepage -%}
-      {{ page.meta.get("title", page.title) }} - {{ config.site_name }}
+      {{ page.meta.get("title", page.title) }} - {{ config.extra.title_suffix or config.site_name }}
     {%- else -%}
       {{ config.site_name }}
     {%- endif -%}
