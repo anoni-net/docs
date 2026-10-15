@@ -18,7 +18,7 @@ Tor Browser 11.5 起，**Connection Assist**[^1] 达到稳定版本：检测你�
 
 - **obfs4**：流量混淆，老牌 pluggable transport，多数情境可用
 - **Snowflake**：短暂配对的 WebRTC 网桥，IP 流动性高
-- **meek-azure**：流量伪装成往 Microsoft Azure 的 HTTPS 请求
+- **meek**：流量伪装成往大型云服务的 HTTPS 请求（Tor Browser 15.0 以前叫 meek-azure）
 - **WebTunnel**：较新的 transport（2024 年后成熟），完全伪装成一般 HTTPS 站点流量
 
 如果 Connection Assist 找到的网桥不通，可以手动取得新网桥：到 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 领取、写信给 `bridges@torproject.org`、或使用 Telegram bot `@GetBridgesBot`。
@@ -146,9 +146,9 @@ Tor Browser 的匿名性靠「全球用户长得一样」维持。几个基本�
 | 消息 | 可能原因 | 处理 |
 |---|---|---|
 | `Tor failed to establish a network connection` | ISP 短暂干扰、防火墙阻挡 | 重试。仍失败则启用网桥 |
-| `PT_PROXY_FAILED` | pluggable transport 启动失败 | 换网桥类型，例如 obfs4 换 meek-azure |
+| `PT_PROXY_FAILED` | pluggable transport 启动失败 | 换网桥类型，例如 obfs4 换 meek |
 | Cloudflare CAPTCHA 无限循环 | 出口节点被该站封锁 | 用 New Tor Circuit for this Site 换出口 |
-| 校园或企业网络阻挡 Tor | 网络管理员封锁 entry 节点 | 启用 Connection Assist，自动选 obfs4 或 meek-azure 穿透 |
+| 校园或企业网络阻挡 Tor | 网络管理员封锁 entry 节点 | 启用 Connection Assist，自动选 obfs4 或 meek 穿透 |
 
 ## :material-chat-question: 一同了解
 

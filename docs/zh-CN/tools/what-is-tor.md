@@ -55,7 +55,7 @@ Tor 的节点分两类：公开的中继点（Relay）与隐藏的网桥（Bridg
 网桥还可以搭配 **Pluggable Transports** 进一步伪装流量：
 
 - **Obfs4**：把 Tor 流量看起来像随机乱码，避免被 DPI 直接特征识别。
-- **meek**：把流量包装成连到 Microsoft Azure 这类大型云端服务（早年也用过 Google、Cloudflare，后来陆续关闭了 domain fronting），审查者要嘛全挡、要嘛放行。
+- **meek**：把流量包装成连到大型 CDN 的 HTTPS 连接（早年也用过 Google、Amazon、Azure，后来各家陆续关闭了 domain fronting），审查者要嘛全挡、要嘛放行。
 - **[Snowflake](./tor-snowflake.md)**：把流量包装成 WebRTC（视频会议常用协议），由全球志工的浏览器分页临时当网桥。
 
 !!! info "anoni.net 是台湾的社区"
@@ -105,7 +105,7 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 
 ??? question "Tor 速度为什么这么慢？"
 
-    三层加密 + 三跳节点 + 出口节点频宽有限是物理结构，不会大改善。但有两个简单的调整能改善体感：在 Tor Browser 设定里换出口节点地区（避开壅塞国家）、避免高频宽内容（看 8K 影片不是 Tor 的设计目的）。整体的 Tor 网络容量取决于全球有多少志工愿意运作节点，[Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"} 等社区推动也是为了把更多本地频宽接进网络。
+    三层加密 + 三跳节点 + 出口节点频宽有限是物理结构，不会大改善。但有两个简单的调整能改善体感：某个网站特别慢时用 [New Tor Circuit for this Site](./tor-browser-advanced.md#身份隔离New-Identity-与-New-Tor-Circuit) 换一条线路（中间与出口节点会随机换掉，Tor Browser 没有指定出口地区的选项）、避免高频宽内容（看 8K 影片不是 Tor 的设计目的）。换线路时入口节点会保留，慢在入口节点的话换了帮助不大。整体的 Tor 网络容量取决于全球有多少志工愿意运作节点，[Tor Relay 校园建立](https://anoni.net/zh-cn/join/relay-on-campus/){target="_blank"} 等社区推动也是为了把更多本地频宽接进网络。
 
 ??? question "Tor 真的不会被破解吗？"
 

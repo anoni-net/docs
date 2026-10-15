@@ -55,7 +55,7 @@ A public list is also a blocking target. In heavily censored environments, local
 Bridges combine with **pluggable transports** to disguise the traffic itself:
 
 - **obfs4** makes Tor traffic look like random noise, defeating direct signature matching by deep packet inspection
-- **meek** wraps traffic to look like a connection to a large cloud service such as Microsoft Azure. Google and Cloudflare were used in earlier years before domain fronting was shut down. The censor's choice becomes blocking everything or allowing it
+- **meek** wraps traffic to look like an HTTPS connection to a large CDN. Google, Amazon, and Azure were used in earlier years until they shut down domain fronting. The censor's choice becomes blocking everything or allowing it
 - **[Snowflake](./tor-snowflake.md)** wraps traffic as WebRTC, the protocol video calls use, with volunteers' browser tabs around the world serving as temporary bridges
 
 ### What this looks like across the region
@@ -104,7 +104,7 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 
 ??? question "Why is Tor so slow?"
 
-    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: switch the exit region in Tor Browser's settings to avoid congested countries, and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/){target="_blank"}, so local capacity becomes part of the global network.
+    Three layers of encryption, three hops, and limited exit bandwidth are structural and will not improve dramatically. Two adjustments help the experience: use [New Tor Circuit for this Site](./tor-browser-advanced.md#New-Identity-and-New-Circuit) when a site is especially slow to get a fresh path (Tor picks new middle and exit relays at random, and Tor Browser has no option to choose the exit region), and avoid high-bandwidth content, since streaming in 8K is not what Tor is designed for. A new circuit keeps the same guard relay, so it won't help when the slowdown is at the entry. Bandwidth in Taiwan is plentiful, which is part of why the community works on [getting Tor relays onto campuses](https://anoni.net/en/join/relay-on-campus/){target="_blank"}, so local capacity becomes part of the global network.
 
 ??? question "Has Tor ever been broken?"
 

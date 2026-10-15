@@ -55,7 +55,7 @@ Tor 的節點分兩類：公開的中繼點（Relay）與隱藏的橋接點（Br
 橋接點還可以搭配 **Pluggable Transports** 進一步偽裝流量：
 
 - **Obfs4**：把 Tor 流量看起來像隨機亂碼，避免被 DPI 直接特徵識別。
-- **meek**：把流量包裝成連到 Microsoft Azure 這類大型雲端服務（早年也用過 Google、Cloudflare，後來陸續關閉了 domain fronting），審查者要嘛全擋、要嘛放行。
+- **meek**：把流量包裝成連到大型 CDN 的 HTTPS 連線（早年也用過 Google、Amazon、Azure，後來各家陸續關閉了 domain fronting），審查者要嘛全擋、要嘛放行。
 - **[Snowflake](./tor-snowflake.md)**：把流量包裝成 WebRTC（視訊會議常用協議），由全球志工的瀏覽器分頁臨時當橋接。
 
 在台灣，使用 Tor 不需要橋接（直接用公開中繼就連得上），也可以開 [Snowflake 瀏覽器分頁](./tor-snowflake.md) 變成橋接給審查地區的人用，這是門檻最低的網路自由貢獻方式。香港對外連線同樣不受全面封鎖、技術上可行，但參與前要評估國安監控的風險，見 [Tor Snowflake 橋接點](./tor-snowflake.md) 的香港小節。
@@ -99,7 +99,7 @@ Tor 不是萬能匿名鈕。把它用在不對的場景，會付出效能代價�
 
 ??? question "用 Tor 速度為什麼這麼慢？"
 
-    三層加密 + 三跳節點 + 出口節點頻寬有限是物理結構，不會大改善。但有兩個簡單的調整能改善體感：在 Tor Browser 設定裡換出口節點地區（避開壅塞國家）、避免高頻寬內容（看 8K 影片不是 Tor 的設計目的）。台灣本地頻寬充足，社群長期推動 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/){target="_blank"} 也是希望讓本地網路成為全球 Tor 容量的一部分，整體變快。
+    三層加密 + 三跳節點 + 出口節點頻寬有限是物理結構，不會大改善。但有兩個簡單的調整能改善體感：某個網站特別慢時用 [New Tor Circuit for this Site](./tor-browser-advanced.md#身分隔離New-Identity-與-New-Tor-Circuit) 換一條線路（中間與出口節點會隨機換掉，Tor Browser 沒有指定出口地區的選項）、避免高頻寬內容（看 8K 影片不是 Tor 的設計目的）。換線路時入口節點會保留，慢在入口節點的話換了幫助不大。台灣本地頻寬充足，社群長期推動 [Tor Relay 校園建立](https://anoni.net/join/relay-on-campus/){target="_blank"} 也是希望讓本地網路成為全球 Tor 容量的一部分，整體變快。
 
 ??? question "Tor 真的不會被破解嗎？"
 
