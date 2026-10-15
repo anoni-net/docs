@@ -299,6 +299,11 @@ extra:
   # Short site name for narrow screens, see partials/header.html. Leave empty
   # to keep the full site_name.
   site_name_short: !ENV [SITE_NAME_SHORT, "anoni.net Docs"]
+  # Suffix for inner-page <title>, og:title and twitter:title, see
+  # overrides/base.html. The full site_name is long enough that search results
+  # cut every title off. The homepage keeps the full site_name. A separate key
+  # from site_name_short, which the zh configs also set for the header.
+  title_suffix: !ENV [TITLE_SUFFIX, "anoni.net Docs"]
   # 建在根路徑、網址上沒有語系區段的那一個語系，三份設定同一個值，理由見 mkdocs.yml。
   # 底下 alternate 把 English 排第一是選單的版面安排，跟這裡無關。
   default_lang: zh-TW
