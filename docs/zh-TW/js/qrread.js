@@ -602,6 +602,12 @@
   const ATTEMPTS = [
     // 第一階最快，清楚的照片在這裡就結束
     { max: 1600, crop: 0 },
+    // 翻拍螢幕的照片。白底上會拍到螢幕子像素的直紋，jsQR 依區塊的明暗決定黑白，
+    // 紋路被當成一格格黑點，放得越大越讀不出來。把相鄰的像素平均掉紋路就不見了，
+    // 實測一張翻拍的取件碼縮到長邊三百像素才讀得出來。縮小由 shrinkPixels 自己算，
+    // 不交給 canvas：WebKit（iPhone 上的每個瀏覽器）縮圖時只取樣部分像素，縮到
+    // 多小紋路都還在。縮小很快，所以排在第二階
+    { max: 1200, crop: 0, halving: true },
     // 拍照的人多半把 QR 放在畫面中間。裁掉外圍等於把它放大，順便丟掉外圈的雜訊，
     // 對顆粒粗的照片特別有效。實測一張雜訊很重的圖，整張掃要四秒還讀不出來，
     // 裁過之後兩百毫秒就解開了，所以這一階排在前面。
@@ -653,7 +659,59 @@
     };
   }
 
+  // 取像素時的長邊上限。iOS 的 canvas 面積上限約 1677 萬像素，4:3 的照片放得下
+  const CAPTURE_MAX = 4096;
+  // 減半到長邊比這個小就停，QR 的模組會小於兩個像素
+  const MIN_SIDE = 250;
+
+  // 每 f×f 個像素平均成一個，除不盡的邊緣捨去
+  function shrinkPixels(pixels, f) {
+    if (f <= 1) return pixels;
+    const width = Math.max(1, Math.floor(pixels.width / f));
+    const height = Math.max(1, Math.floor(pixels.height / f));
+    const data = new Uint8ClampedArray(width * height * 4);
+    const n = f * f;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let r = 0;
+        let g = 0;
+        let b = 0;
+        for (let dy = 0; dy < f; dy++) {
+          let i = ((y * f + dy) * pixels.width + x * f) * 4;
+          for (let dx = 0; dx < f; dx++, i += 4) {
+            r += pixels.data[i];
+            g += pixels.data[i + 1];
+            b += pixels.data[i + 2];
+          }
+        }
+        const o = (y * width + x) * 4;
+        data[o] = r / n;
+        data[o + 1] = g / n;
+        data[o + 2] = b / n;
+        data[o + 3] = 255;
+      }
+    }
+    return { data: data, width: width, height: height };
+  }
+
+  // 縮到長邊不超過 max 再讀，讀不到就逐級減半
+  function readHalving(pixels, max, read) {
+    let img = shrinkPixels(pixels, Math.ceil(Math.max(pixels.width, pixels.height) / max));
+    for (;;) {
+      const found = read(img.data, img.width, img.height);
+      if (found && found.data) return found;
+      if (Math.max(img.width, img.height) / 2 < MIN_SIDE) return null;
+      img = shrinkPixels(img, 2);
+    }
+  }
+
   function drawAndRead(image, plan, box) {
+    if (plan.halving) {
+      const scale = Math.min(1, CAPTURE_MAX / Math.max(image.width, image.height));
+      box = { sx: 0, sy: 0, sw: image.width, sh: image.height,
+              w: Math.max(1, Math.round(image.width * scale)),
+              h: Math.max(1, Math.round(image.height * scale)) };
+    }
     const canvas = document.createElement("canvas");
     canvas.width = box.w;
     canvas.height = box.h;
@@ -661,7 +719,9 @@
     ctx.drawImage(image, box.sx, box.sy, box.sw, box.sh, 0, 0, box.w, box.h);
     let pixels = ctx.getImageData(0, 0, box.w, box.h);
     if (plan.contrast) pixels = boostContrast(pixels);
-    return window.jsQR ? window.jsQR(pixels.data, box.w, box.h) : null;
+    if (!window.jsQR) return null;
+    if (plan.halving) return readHalving(pixels, plan.max, window.jsQR);
+    return window.jsQR(pixels.data, box.w, box.h);
   }
 
   function decode(source) {
@@ -673,7 +733,7 @@
         const tried = [];
         for (const plan of ATTEMPTS) {
           const box = planSize(image, plan);
-          const key = box.w + "x" + box.h + (plan.contrast ? "c" : "");
+          const key = box.w + "x" + box.h + (plan.contrast ? "c" : "") + (plan.halving ? "h" : "");
           if (tried.indexOf(key) >= 0) continue;
           tried.push(key);
           // 交還主執行緒，讓「解讀中」那行字畫得出來。少了這一步，慢的圖會讓

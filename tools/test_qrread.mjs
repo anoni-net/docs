@@ -56,10 +56,14 @@ const harness = `
   ${grab(/^  function statusFor\(result\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  const KIND_GROUPS = \{[\s\S]*?\n  \};/m)}
   ${grab(/^  function kindGroup\(kind\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  const CAPTURE_MAX = .*$/m)}
+  ${grab(/^  const MIN_SIDE = .*$/m)}
+  ${grab(/^  function shrinkPixels\(pixels, f\) \{[\s\S]*?\n  \}/m)}
+  ${grab(/^  function readHalving\(pixels, max, read\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function drawAndRead\(image, plan, box\) \{[\s\S]*?\n  \}/m)}
   ${grab(/^  function decode\(source\) \{[\s\S]*?\n  \}/m)}
   return { SCALE, QUIET, classify, maskRaw, STRINGS, SHORTENERS, TRACKERS,
-           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize, sniffFormat, statusFor, decode, kindGroup, KIND_GROUPS };
+           ATTEMPTS, DECODE_BUDGET_MS, boostContrast, planSize, shrinkPixels, readHalving, sniffFormat, statusFor, decode, kindGroup, KIND_GROUPS };
 `;
 // decode 需要 Image 與 URL。這裡只驗「瀏覽器打不開這張圖」那一條，替身讓
 // image.src 一被設定就觸發 onerror，跟 Chrome 拿到 HEIC 時的行為一樣。
@@ -501,6 +505,40 @@ test('每一階之間會把主執行緒交還給畫面', () => {
   const body = fn.slice(0, fn.indexOf('image.onerror'));
   assert.ok(/await new Promise\(\(next\) => setTimeout\(next, 0\)\)/.test(body),
             '階段之間沒有讓出主執行緒');
+});
+
+test('翻拍螢幕的直紋：原尺寸讀不出來，平均縮小之後讀得出來', () => {
+  // 白底上每三個像素一條灰線，模擬翻拍螢幕時拍到的子像素紋路。jsQR 依區塊明暗
+  // 二值化，紋路被當成黑點。2026-10 讀者翻拍的取件碼就是這樣讀不出來
+  const img = render('4493932457', 'M', 30);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const x = (i / 4) % img.width;
+    const v = img.data[i] === 0 ? 20 : x % 3 === 0 ? 170 : 235;
+    img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+  }
+  assert.equal(jsQR(img.data, img.width, img.height), null, '原尺寸就讀得出來，這張圖驗不到紋路的問題');
+  const found = tool.readHalving(img, 1200, jsQR);
+  assert.ok(found, '減半之後還是讀不出來');
+  assert.equal(found.data, '4493932457');
+});
+
+test('平均縮小是把每一塊的像素平均，不是挑其中一個', () => {
+  // canvas 在 WebKit 上縮圖只取樣部分像素，紋路會留著，所以要自己算平均
+  const pixels = { width: 2, height: 2, data: new Uint8ClampedArray([
+    0, 0, 0, 255,      200, 100, 40, 255,
+    100, 100, 100, 9,  100, 0, 60, 255,
+  ]) };
+  const out = tool.shrinkPixels(pixels, 2);
+  assert.equal(out.width, 1);
+  assert.equal(out.height, 1);
+  assert.deepEqual(Array.from(out.data), [100, 50, 50, 255]);
+  assert.equal(tool.shrinkPixels(pixels, 1), pixels, '不縮的時候直接用原本的');
+});
+
+test('減半那一階排在第二，翻拍螢幕的照片不必等過大尺寸的幾階', () => {
+  const at = tool.ATTEMPTS.findIndex((a) => a.halving);
+  assert.equal(at, 1, '減半那一階不在第二');
+  assert.ok(tool.ATTEMPTS[at].max <= 1600);
 });
 
 test('拉對比是把像素推到純黑與純白', () => {
