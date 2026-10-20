@@ -10,7 +10,7 @@ GitHub Actions 各個 workflow 的觸發條件、建置與部署流程，以及�
   - 建置所有語言版本（zh-TW, zh-CN, en）
   - 處理 Open Graph 圖片
   - 以 `aws s3 sync --delete` 上傳至 S3：clearnet 產物在 `docs/`，onion 產物在同一個 bucket 的 `docs-onion/`。單一步覆寫，站上任何時刻都有完整的一份，不再有先清空再上傳造成的空窗
-  - 第三格 `ipfs` 建置 anoni.net IPFS 鏡像裡的 `/docs/`（toomore/anoni-net-ws#422）：建置前拿掉流量統計，建置後由 `tools/ipfs_links.py` 改寫 `<body>` 的連結並檢查，打包成 `docs-ipfs/docs-ipfs.tar.gz` 與 `.sha256`。這一份不是讀者直接讀的網站，`anoni-net/ipfs-mirror` 在 m6 上從 bucket 的網站端點下載，跟社群首頁、新聞導讀、隱私推理遊戲組在一起發布到 IPNS，不清 Cloudflare 快取
+  - 第三格 `ipfs` 建置 anoni.net IPFS 鏡像裡的 `/docs/`（toomore/anoni-net-ws#422）：建置前拿掉流量統計，建置後由 `tools/ipfs_links.py` 改寫 `<body>` 的連結並檢查，打包成 `docs-ipfs/docs-ipfs.tar.gz` 與 `.sha256`。這一份不是讀者直接讀的網站，`anoni-net/ipfs-mirror` 在 m6 上從 S3 的 HTTPS 端點下載（物件是 public-read，不需要憑證），跟社群首頁、新聞導讀、隱私推理遊戲組在一起發布到 IPNS，不清 Cloudflare 快取
   - 上傳後由 `tools/cf_purge.py` 清除這次產出網址的 Cloudflare 快取，範圍限 `/docs/`，不動 zone 內其他服務
 
   **S3 是正式站的讀取來源**，所以推 `docs` 分支且這個 workflow 執行完，內容就已經上線，不需要額外的手動發布步驟。發布指令：

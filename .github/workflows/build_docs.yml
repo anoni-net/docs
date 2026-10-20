@@ -318,8 +318,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
         run: source ./.venv/bin/activate; aws s3 sync ./output "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --acl public-read --delete
 
-      # IPFS 版不是讀者直接讀的網站，m6 一天下載一次，所以打包成一個檔案，m6 從 bucket 的
-      # 網站端點用 HTTP 下載即可，不需要 AWS 的憑證。先傳打包檔再傳 .sha256，m6 拿 .sha256
+      # IPFS 版不是讀者直接讀的網站，m6 一天下載一次，所以打包成一個檔案。物件是 public-read，
+      # m6 從 S3 的 HTTPS 端點下載，不需要 AWS 的憑證。先傳打包檔再傳 .sha256，m6 拿 .sha256
       # 核對，傳到一半被讀到的話對不上，那一輪就沿用上一份。
       - name: Upload IPFS bundle
         if: matrix.variant == 'ipfs'
