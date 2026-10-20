@@ -13,7 +13,13 @@ clearnet 排列，文件站在 /docs/（toomore/anoni-net-ws#422，組裝在 ano
 路徑，在鏡像裡連到同一個目錄的其他專案。Gears 與 API 不在鏡像裡，維持 clearnet。<head>
 與內文寫出來的網址（例如程式碼區塊）都不動。
 
-檢查三件事：<body> 沒有漏改的連結、canonical 指向 clearnet、產物裡沒有流量統計的端點。
+例外是 mkdocs-redirects 產生的轉址頁。搬到社群首頁的頁面留下一頁轉址，目標寫在 <head> 的
+meta refresh 與一段 location.href 裡，不改的話鏡像的讀者打開舊網址會被送回 clearnet，所以
+這兩處也改寫。轉址頁的 canonical 指向社群首頁，同樣是 clearnet，維持原樣。
+
+檢查三件事：沒有漏改的連結與轉址、三個語系首頁的 canonical 指向 clearnet（site_url 沒被
+改掉）、產物裡沒有流量統計的端點。canonical 只看首頁：轉址頁的是相對路徑或社群首頁，翻譯
+文章的指向原文，逐頁比對只會擋到這些合理的例外。
 """
 
 from __future__ import annotations
@@ -23,11 +29,14 @@ import re
 import sys
 from pathlib import Path
 
-SITE = "https://anoni.net/docs"
+SITE = "https://anoni.net/docs/"
+HOMES = ("index.html", "zh-cn/index.html", "en/index.html")
 # 不在鏡像裡的網站，連結維持 clearnet
 KEEP = ("https://anoni.net/gears", "https://anoni.net/api")
 ATTR = re.compile(r'\b(href|src)="([^"]*)"')
 CANONICAL = re.compile(r'<link rel="canonical" href="([^"]*)"')
+# mkdocs-redirects 的轉址頁：<meta http-equiv="refresh" content="0; url=…"> 與 location.href="…"
+REDIRECT = re.compile(r'(http-equiv="refresh" content="\d+; url=|location\.href=")([^"]*)(")')
 ANALYTICS = "aa.anoni.net"
 
 
@@ -42,6 +51,7 @@ def rewrite_url(url: str) -> str:
 
 
 def rewrite_html(text: str) -> str:
+    text = REDIRECT.sub(lambda m: m[1] + rewrite_url(m[2]) + m[3], text)
     head, mark, body = text.partition("<body")
     if not mark:
         return text
@@ -50,13 +60,13 @@ def rewrite_html(text: str) -> str:
 
 def problems_in(text: str, where: str) -> list[str]:
     problems = []
-    head, _, body = text.partition("<body")
+    _, _, body = text.partition("<body")
     for _, url in ATTR.findall(body):
         if rewrite_url(url) != url:
             problems.append(f"{where}：連結沒有改寫 {url}")
-    for url in CANONICAL.findall(head):
-        if not url.startswith(SITE):
-            problems.append(f"{where}：canonical 沒有指向 {SITE}（{url}）")
+    for _, url, _ in REDIRECT.findall(text):
+        if rewrite_url(url) != url:
+            problems.append(f"{where}：轉址沒有改寫 {url}")
     return problems
 
 
@@ -67,6 +77,11 @@ def check(root: Path) -> list[str]:
         return [f"{root} 底下沒有任何頁面"]
     for page in pages:
         problems += problems_in(page.read_text(encoding="utf-8"), str(page.relative_to(root)))
+    for rel in HOMES:
+        home = root / rel
+        found = CANONICAL.findall(home.read_text(encoding="utf-8")) if home.exists() else []
+        if not found or not found[0].startswith(SITE):
+            problems.append(f"{rel}：canonical 沒有指向 {SITE}（{found[0] if found else '沒有 canonical'}）")
     for path in sorted(root.rglob("*")):
         if path.suffix in {".html", ".js"} and ANALYTICS in path.read_text(encoding="utf-8", errors="replace"):
             problems.append(f"{path.relative_to(root)}：有流量統計的端點 {ANALYTICS}")

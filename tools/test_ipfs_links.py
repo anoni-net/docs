@@ -64,14 +64,34 @@ expect("改寫過的頁面檢查通過", problems_in(out, "p"), [])
 
 # 檢查要擋得下的三種
 expect("漏改的連結", problems_in(PAGE, "p"), ["p：連結沒有改寫 https://anoni.net/join/", "p：連結沒有改寫 https://anoni.net/docs/assets/x.png"])
-bad_canonical = out.replace('canonical" href="https://anoni.net/docs/', 'canonical" href="https://ipfs.anoni.net/docs/')
-expect("canonical 指到閘道", len(problems_in(bad_canonical, "p")), 1)
+
+# 搬到社群首頁的頁面留下的轉址頁，轉址目標要改，canonical 不改
+REDIRECT_PAGE = (
+    '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting...</title>'
+    '<link rel="canonical" href="https://anoni.net/join/">'
+    '<script>var anchor=window.location.hash.substr(1);location.href="https://anoni.net/join/"+(anchor?"#"+anchor:"")</script>'
+    '<meta http-equiv="refresh" content="0; url=https://anoni.net/join/"></head>'
+    '<body>You\'re being redirected to a <a href="https://anoni.net/join/">new destination</a>.</body></html>'
+)
+moved = rewrite_html(REDIRECT_PAGE)
+expect("轉址頁的 canonical 不動", '<link rel="canonical" href="https://anoni.net/join/">' in moved, True)
+expect("轉址頁的 location.href", 'location.href="/join/"' in moved, True)
+expect("轉址頁的 meta refresh", 'content="0; url=/join/"' in moved, True)
+expect("轉址頁改寫後檢查通過", problems_in(moved, "r"), [])
+expect("轉址頁沒改寫", len(problems_in(REDIRECT_PAGE, "r")), 3)
 
 with tempfile.TemporaryDirectory() as tmp:
     root = pathlib.Path(tmp)
     expect("空目錄", check(root), [f"{root} 底下沒有任何頁面"])
-    (root / "index.html").write_text(out, encoding="utf-8")
+    home = out.replace("https://anoni.net/docs/tools/", "https://anoni.net/docs/")
+    for rel in ("index.html", "zh-cn/index.html", "en/index.html"):
+        (root / rel).parent.mkdir(parents=True, exist_ok=True)
+        (root / rel).write_text(home.replace("/docs/", "/docs/" + rel.replace("index.html", "")), encoding="utf-8")
     expect("乾淨的產物", check(root), [])
+    # site_url 被改成閘道的話，三個首頁的 canonical 都會跟著錯
+    (root / "en/index.html").write_text(home.replace('canonical" href="https://anoni.net/docs/', 'canonical" href="https://ipfs.anoni.net/'), encoding="utf-8")
+    expect("canonical 指到閘道", check(root), ["en/index.html：canonical 沒有指向 https://anoni.net/docs/（https://ipfs.anoni.net/）"])
+    (root / "en/index.html").write_text(home.replace("/docs/", "/docs/en/"), encoding="utf-8")
     (root / "js").mkdir()
     (root / "js" / "analytics.js").write_text('fetch("https://aa.anoni.net/api/send")', encoding="utf-8")
     expect("流量統計的端點", check(root), ["js/analytics.js：有流量統計的端點 aa.anoni.net"])
