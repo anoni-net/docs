@@ -46,14 +46,17 @@ jobs:
         # standard = clearnet（anoni.net/docs）。
         # onion = docs.<onion>，站內絕對網址改寫成 onion，並拿掉只在 clearnet 生效的
         # 分析區塊，等同 m6 上手動跑的 build_docs_anoni_onion.sh。
-        variant: ["standard", "onion"]
+        # ipfs = anoni.net 整站 IPFS 鏡像裡的 /docs/（toomore/anoni-net-ws#422）。路徑與
+        # canonical 跟 clearnet 相同，拿掉分析區塊，<body> 的連結改成根目錄的相對路徑。
+        # 打包成一個檔案放到 docs-ipfs/，由 anoni-net/ipfs-mirror 在 m6 上下載、組裝、發布。
+        variant: ["standard", "onion", "ipfs"]
     runs-on: ${{ matrix.os }}
     env:
-      # clearnet 產物維持在既有的 docs/，onion 產物放同一個 bucket 的 docs-onion/。
-      S3_PREFIX: ${{ matrix.variant == 'onion' && 'docs-onion' || 'docs' }}
-      # 頁首的版本小標記讀這個值。matrix 的兩個值剛好就是模板要的字串，
-      # 本機的 build_docs_anoni_onion.sh 也 export 同一個名字。IPFS 版不在這個
-      # workflow 裡建，它由 build_docs_anoni_ipfs.sh 帶 BUILD_VARIANT=ipfs。
+      # clearnet 產物維持在既有的 docs/，onion 產物放同一個 bucket 的 docs-onion/，
+      # IPFS 版的打包檔放 docs-ipfs/。
+      S3_PREFIX: ${{ matrix.variant == 'onion' && 'docs-onion' || matrix.variant == 'ipfs' && 'docs-ipfs' || 'docs' }}
+      # 頁首的版本小標記讀這個值。matrix 的三個值剛好就是模板要的字串，
+      # 本機的 build_docs_anoni_onion.sh 與 build_docs_anoni_ipfs.sh 也 export 同一個名字。
       BUILD_VARIANT: ${{ matrix.variant }}
       # onion 位址。replace_sitename_anoni_onion.sh 與下面的產物驗證都讀這一個，
       # 那支腳本自己也有同樣的預設值供本機執行時用。三份 mkdocs 設定的 onion_base
@@ -88,6 +91,11 @@ jobs:
       - name: Rewrite URLs for onion
         if: matrix.variant == 'onion'
         run: sh ./replace_sitename_anoni_onion.sh
+
+      # IPFS 版建置前只拿掉流量統計，連結的改寫在建置之後對產物做（見 Rewrite links for IPFS）。
+      - name: Strip analytics for IPFS
+        if: matrix.variant == 'ipfs'
+        run: sh ./replace_sitename_anoni_ipfs.sh
 
       # runner 的 apt sources 走內建的 mirrorlist（/etc/apt/apt-mirrors.txt），第一順位
       # 是 azure.archive.ubuntu.com。2026-08-19 的發布連兩次卡死在這一步：那台 mirror
@@ -237,9 +245,18 @@ jobs:
       # 14KB 的死重量，而且它的註解提到 aa.anoni.net，會讓下一步的驗證誤判。
       #
       # 這也是 m6 上 onion 產物本來就沒有 sw.js 的原因，刪掉是回到既有行為。
-      - name: Drop service worker from onion build
-        if: matrix.variant == 'onion'
+      #
+      # IPFS 版也一樣，service worker 只在 host 是 anoni.net 時註冊。
+      - name: Drop service worker from onion and IPFS builds
+        if: matrix.variant != 'standard'
         run: find ./output -name 'sw.js' -delete
+
+      # <body> 裡連到 anoni.net 的網址改成根目錄的相對路徑，鏡像裡就連到同一個目錄的社群首頁、
+      # 新聞導讀與隱私推理遊戲。<head> 的 canonical、og 與 hreflang 維持 clearnet。改完接著檢查
+      # 沒有漏改、canonical 指向 clearnet、沒有流量統計，任何一項不過就不上傳。
+      - name: Rewrite links for IPFS
+        if: matrix.variant == 'ipfs'
+        run: python3 ../tools/ipfs_links.py ./output
 
       # replace_sitename_anoni_onion.sh 靠 GNU sed 的就地改寫，但它的結束碼來自最後
       # 那行診斷用的 grep，改寫整批失敗也一樣回 0（在 BSD sed 上實測過，全部沒改到、
@@ -273,6 +290,7 @@ jobs:
       #
       # 讀不到清單或出任何狀況都退回什麼都不做，讓 sync 照原本的方式完整上傳。
       - name: Skip unchanged files
+        if: matrix.variant != 'ipfs'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
@@ -294,10 +312,27 @@ jobs:
       # 結尾的斜線不能省。`s3://bucket/docs` 是前綴比對，會連 `docs-onion/` 底下的
       # 物件一起刪掉，兩格同時跑就會互相清空。
       - name: Upload to S3
+        if: matrix.variant != 'ipfs'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
         run: source ./.venv/bin/activate; aws s3 sync ./output "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/" --acl public-read --delete
+
+      # IPFS 版不是讀者直接讀的網站，m6 一天下載一次，所以打包成一個檔案，m6 從 bucket 的
+      # 網站端點用 HTTP 下載即可，不需要 AWS 的憑證。先傳打包檔再傳 .sha256，m6 拿 .sha256
+      # 核對，傳到一半被讀到的話對不上，那一輪就沿用上一份。
+      - name: Upload IPFS bundle
+        if: matrix.variant == 'ipfs'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DOC_S3_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_S3_KEY }}
+        run: |
+          source ./.venv/bin/activate
+          tar -czf ../docs-ipfs.tar.gz -C ./output .
+          (cd .. && sha256sum docs-ipfs.tar.gz > docs-ipfs.tar.gz.sha256)
+          ls -l ../docs-ipfs.tar.gz
+          aws s3 cp ../docs-ipfs.tar.gz "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/docs-ipfs.tar.gz" --acl public-read
+          aws s3 cp ../docs-ipfs.tar.gz.sha256 "s3://${{ secrets.DOC_BUCKET }}/${S3_PREFIX}/docs-ipfs.tar.gz.sha256" --acl public-read
 
       # S3 換好之後 Cloudflare edge 還是握著舊的 HTML，站上看到的仍是上一版。origin
       # 送的是 `max-age=14400, must-revalidate`，但實測 age 超過 45000 秒依然回 HIT，

@@ -12,7 +12,7 @@ The site is published three times over, with identical content. What differs is 
 
 | | Standard site | Onion | IPFS mirror |
 |---|---|---|---|
-| Address | `anoni.net/docs` | `docs.…onion` | `ipfs.anoni.net` or another gateway |
+| Address | `anoni.net/docs` | `docs.…onion` | `ipfs.anoni.net/docs` or another gateway |
 | Who sees your IP address | our CDN and host | nobody | the gateway operator you connect to |
 | Who knows which pages you read | same as above | nobody | same as above |
 | What your ISP sees | that you reached anoni.net | that you are using Tor | that you reached that gateway |

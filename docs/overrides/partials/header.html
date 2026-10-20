@@ -174,7 +174,7 @@
         </a>
       {% endif %}
       {% if config.extra.ipfs_gateway and config.extra.build_variant != "ipfs" %}
-        <a href="{{ config.extra.ipfs_gateway }}/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
+        <a href="{{ config.extra.ipfs_gateway }}/docs/{{ config.extra.mirror_prefix }}{{ page.url }}" class="anoni-settings__link">
           <span class="anoni-settings__link-icon">{% include ".icons/simple/ipfs.svg" %}</span>
           <span>{{ config.extra.settings_route_ipfs }}</span>
         </a>
