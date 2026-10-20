@@ -527,6 +527,7 @@ plugins:
       categories: true
       categories_name: !ENV [CATE_NAME, "文章类型"]
   - rss:
+      image: assets/images/logo-tonal.svg
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
