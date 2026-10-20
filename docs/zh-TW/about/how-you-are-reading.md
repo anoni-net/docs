@@ -12,7 +12,7 @@ icon: material/routes
 
 | | 標準網站 | Onion | IPFS 鏡像 |
 |---|---|---|---|
-| 位址 | `anoni.net/docs` | `docs.…onion` | `ipfs.anoni.net` 或其他閘道 |
+| 位址 | `anoni.net/docs` | `docs.…onion` | `ipfs.anoni.net/docs` 或其他閘道 |
 | 誰看得到你的 IP | 我們的 CDN 與主機 | 沒有人 | 你連上的閘道業者 |
 | 誰知道你讀了哪幾頁 | 同上 | 沒有人 | 同上 |
 | 你的網路業者看得到 | 你連了 anoni.net | 你在用 Tor | 你連了那個閘道 |

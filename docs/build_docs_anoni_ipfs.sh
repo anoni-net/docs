@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-# 建置 anoni.net docs 的 IPFS 鏡像版本（zh-TW / en / zh-CN）並 publish 到 IPNS
+# 在本機建置 anoni.net docs 的 IPFS 版本（zh-TW / en / zh-CN），產物在 ./anoni-net-docs-ipfs/
 #
 # Usage:
-#   ./build_docs_anoni_ipfs.sh              # build + upload + publish IPNS
-#   ./build_docs_anoni_ipfs.sh --no-upload  # 只 build 不 upload，產物在 ./anoni-net-docs-ipfs/
-#   IPFS_GATEWAY=https://ipfs.example.net ./build_docs_anoni_ipfs.sh  # 換公開入口
+#   ./build_docs_anoni_ipfs.sh
+#   IPFS_GATEWAY=https://ipfs.example.net ./build_docs_anoni_ipfs.sh  # 換頁尾連結的公開入口
+#
+# 2026-10 起 IPFS 鏡像是 anoni.net 整站，文件站放在鏡像的 /docs/，組裝、上傳與發布 IPNS 由
+# anoni-net/ipfs-mirror 在 m6 上進行（toomore/anoni-net-ws#422）。正式的產物由 build_docs.yml
+# 的 ipfs 那一格建置，這支給本機預覽與除錯用，不上傳。
 #
 # 流程：
 #   1. 確認 working tree clean（避免 replace_sitename in-place 改動污染未提交修改）
 #   2. 設 trap，任何狀況退出都 git restore 還原 source
-#   3. 跑 replace_sitename_anoni_ipfs.sh 把 source URL 改成 IPFS URL（in-place）
-#   4. mkdocs build 三語（zh-TW 建在根路徑，en 與 zh-CN 各自語系區段），產物匯到 ./anoni-net-docs-ipfs/
-#   5. sanity check 確認鏡像內無殘留 https://anoni.net/docs URL
-#   6. (預設) 跑 upload_to_ipfs.sh 上傳 + publish IPNS
+#   3. 跑 replace_sitename_anoni_ipfs.sh 拿掉流量統計（in-place）
+#   4. mkdocs build 三語（zh-TW 建在根路徑，en 與 zh-CN 各自語系區段），結構跟 clearnet 相同
+#   5. tools/ipfs_links.py 改寫 <body> 的連結並檢查，產物匯到 ./anoni-net-docs-ipfs/
 
 set -euo pipefail
 
-# IPFS 鏡像的公開入口，一個值餵三個地方：replace_sitename_anoni_ipfs.sh 用它改寫
-# site_url，mkdocs*.yml 的 extra.ipfs_gateway 用它產生頁尾連結，upload_to_ipfs.sh
-# 用它 pre-warm。鏡像的內部連結是網站根目錄的相對路徑，換 gateway 只要改這個環境變數，
-# 不必重建鏡像。
+# IPFS 鏡像的公開入口，mkdocs*.yml 的 extra.ipfs_gateway 用它產生頁尾與頁首的連結。
+# 鏡像的內部連結是網站根目錄的相對路徑，換 gateway 不必重建鏡像。
 export IPFS_GATEWAY="${IPFS_GATEWAY:-https://ipfs.anoni.net}"
 
 # 頁首的版本小標記與 IPFS 版專屬的橫幅讀這個值。
@@ -85,30 +85,6 @@ rm -rf ./anoni-net-docs-ipfs/*
 # onion 與 IPFS 版不會用到，且這裡沒有做 __BUILD_VERSION__ 替換。
 # 留著是永遠不會執行的死檔案，會誤導後人，部署前移除。
 find ./output -name "sw.js" -delete
+python3 ../tools/ipfs_links.py ./output
 cp -r ./output/* ./anoni-net-docs-ipfs/
-
-# Sanity check：IPFS 鏡像內不該還有主站 URL
-echo "[build] sanity check：確認 IPFS 鏡像內無殘留 https://anoni.net/docs URL"
-if grep -r "https://anoni.net/docs" ./anoni-net-docs-ipfs/ >/dev/null 2>&1; then
-  echo "[build] ERROR: replace_sitename_anoni_ipfs.sh 沒跑完整，仍有 https://anoni.net/docs 出現於：" >&2
-  grep -rl "https://anoni.net/docs" ./anoni-net-docs-ipfs/ | head -5 | sed 's/^/  /' >&2
-  exit 1
-fi
-
-# Sanity check：canonical 與 og:url 來自 site_url，必須是 gateway 的絕對網址。
-# 三個語系的 site_url 分別由 mkdocs.yml、run_en.sh、run_zh-cn.sh 決定，漏改任何一個
-# 都會讓那個語系的 canonical 掉回主站網址，這裡逐語系檢查。
-echo "[build] sanity check：確認三個語系的 canonical 指向 $IPFS_GATEWAY"
-for page in ./anoni-net-docs-ipfs/index.html \
-            ./anoni-net-docs-ipfs/en/index.html \
-            ./anoni-net-docs-ipfs/zh-cn/index.html; do
-  if ! grep -q "rel=\"canonical\" href=\"$IPFS_GATEWAY" "$page"; then
-    echo "[build] ERROR: $page 的 canonical 不是 $IPFS_GATEWAY，site_url 沒被改寫" >&2
-    grep -o 'rel="canonical" href="[^"]*"' "$page" | head -1 | sed 's/^/  /' >&2
-    exit 1
-  fi
-done
-
-if [ "${1:-}" != "--no-upload" ]; then
-  sh ./upload_to_ipfs.sh
-fi
+echo "[build] 產物在 ./anoni-net-docs-ipfs/，在鏡像裡放在 /docs/"
