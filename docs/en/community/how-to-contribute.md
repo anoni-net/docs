@@ -14,7 +14,7 @@ Everything below assumes you've already found something to work on. If you haven
 
 For anything beyond a typo or a small fix, send a brief heads-up before you start. A two-line note saves you from rewriting work that doesn't fit, and it lets someone tell you if a piece is already underway.
 
-- **Matrix** — the [Public Space at `#community:im.anoni.net`](https://matrix.to/#/#community:im.anoni.net){target="_blank"} is the fastest way to reach people. Account requests go to `whisper@anoni.net` (the homeserver is `im.anoni.net`, accounts are individually approved).
+- **Matrix** — the [Public Space at `#community:im.anoni.net`](https://matrix.anoni.net/#/room/%23community:im.anoni.net){target="_blank"} is the fastest way to reach people. Account requests go to `whisper@anoni.net` (the homeserver is `im.anoni.net`, accounts are individually approved). If you already have an account on `matrix.org` or another server, join [through matrix.to](https://matrix.to/#/#community:im.anoni.net){target="_blank"} instead.
 - **Encrypted email** — `whisper@anoni.net` works if you'd rather not be on Matrix, or if the topic is sensitive. PGP key is on the [contact page](https://anoni.net/en/contact/){target="_blank"}.
 
 You don't need permission to fix an obvious error. The heads-up matters most when a change touches structure, scope, or claims that others may already be working on.
@@ -62,6 +62,6 @@ The full list with links lives on the [Community page](https://anoni.net/en/join
 
 ## :material-help-circle-outline: When you're unsure
 
-Ask before you build. The [Public Space on Matrix](https://matrix.to/#/#community:im.anoni.net){target="_blank"} or `whisper@anoni.net` will get you a pointer toward whether a change fits, where it should live, and whether someone is already on it. A short question early is cheaper than a reworked pull request later.
+Ask before you build. The [Public Space on Matrix](https://anoni.net/en/join/#Joining-the-discussion){target="_blank"} or `whisper@anoni.net` will get you a pointer toward whether a change fits, where it should live, and whether someone is already on it. A short question early is cheaper than a reworked pull request later.
 
 If you are writing on behalf of an organization, [Working with Organizations](https://anoni.net/en/about/partners/){target="_blank"} sets out what we can take on together.

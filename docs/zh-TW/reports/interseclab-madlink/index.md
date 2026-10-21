@@ -37,9 +37,9 @@ MADLink 是 InterSecLab 繼 2025 年 9 月發布「[The Internet Coup](../inters
 
 ## 參與討論
 
-MADLink 與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論沿用同一個 Matrix 頻道，加入需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號。
+MADLink 與 InterSecLab 的「The Internet Coup」屬同一系列調查，社群討論沿用同一個 Matrix 頻道，加入需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號。點下方的連結會開啟社群自架的 Element，請用 `im.anoni.net` 的帳號登入。已有 `matrix.org` 或其他伺服器帳號的話，改[從 matrix.to 加入](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}。
 
-* :material-chat-processing-outline: [#interseclab-the-internet-coup:im.anoni.net](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}
+* :material-chat-processing-outline: [#interseclab-the-internet-coup:im.anoni.net](https://matrix.anoni.net/#/room/%23interseclab-the-internet-coup:im.anoni.net){target="_blank"}
 
 ## 更新紀錄
 

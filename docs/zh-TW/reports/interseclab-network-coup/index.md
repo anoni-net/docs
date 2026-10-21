@@ -25,9 +25,9 @@ InterSecLab 分析外洩的約 500GB 檔案，說明 Geedge Networks（積至公
 
 ## 參與討論
 
-社群為這份報告開了一個 Matrix 討論頻道，加入需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號。
+社群為這份報告開了一個 Matrix 討論頻道，加入需要 :simple-matrix: [Element/Matrix](https://element.io/){target="_blank"} 帳號。點下方的連結會開啟社群自架的 Element，請用 `im.anoni.net` 的帳號登入。已有 `matrix.org` 或其他伺服器帳號的話，改[從 matrix.to 加入](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}。
 
-* :material-chat-processing-outline: [#interseclab-the-internet-coup:im.anoni.net](https://matrix.to/#/#interseclab-the-internet-coup:im.anoni.net){target="_blank"}
+* :material-chat-processing-outline: [#interseclab-the-internet-coup:im.anoni.net](https://matrix.anoni.net/#/room/%23interseclab-the-internet-coup:im.anoni.net){target="_blank"}
 
 ## 更新紀錄
 
