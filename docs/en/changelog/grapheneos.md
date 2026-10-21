@@ -17,8 +17,14 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 
 ## October 2026
 
-> Releases `2026100200`, `2026100600` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+> Releases `2026100200`, `2026100600`, `2026101600` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
+- `2026101600` on 16 October moves the Pixel kernel drivers to the October 2026 versions. GrapheneOS states the update was delayed because Google had not released the source code as required by GPLv2, and also states that none of the security fixes listed in Google's October Pixel Update Bulletin fall in the kernel drivers for 6th through 10th generation Pixels, so the delay did not hold those fixes back.
+- The same release fixes two upstream Android vulnerabilities: WindowManagerService mixing up the PID and UID parameters, and an activity that had been covered by the lock screen being shown again after another activity finished.
+- The Sensors permission now extends to device-specific sensor types, which on Pixels adds the temperature, pressure and proximity sensors. Apps without the permission cannot read them.
+- Sandboxed Google Play switches to a new way of communicating with the OS to support newer Play services releases, and the Play Store's install confirmation dialog is improved. A firmware update problem with NFC, eSE and eSIM on 9th generation Pixels, introduced with the October update, is fixed.
+- The security preview release still covers patches Google has scheduled for its November 2026 to April 2027 bulletins; the list of additional fixed CVEs grows from 122 to 136 entries (7 Critical, 129 High).
+- The 6.12 kernel moves to 6.12.96, and 6.1 and 6.18 follow the latest GKI LTS revisions. Vanadium moves through 155.0.8059.39.0, 155.0.8059.79.0 and 155.0.8059.84.0, matching Chrome's stable releases of 6, 13 and 15 October. Time zone data is updated to 2026e, and the boot animation is replaced with GrapheneOS's own.
 - `2026100600` on 6 October brings the full 2026-10-05 security patch level and the October Pixel firmware, the same day as Google's Pixel Update Bulletin. The October bulletin is summarised in [Android Security Patch Levels](./android.md).
 - The security preview release (`2026100601`) now covers patches Google has scheduled for its November 2026 to April 2027 bulletins. The list of additional fixed CVEs has 122 entries (8 Critical, 114 High); the October batch has been published officially and dropped off the list.
 - Fixed an upstream integer overflow in `ZipFileRO.cpp` that caused memory corruption with a ZIP entry name of 65,535 bytes.

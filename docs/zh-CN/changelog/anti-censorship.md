@@ -21,6 +21,14 @@ digest:
 
 三种都在 Tor Browser 的连接设置里，不必另外安装。网桥地址可以从 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自动获取。
 
+## Snowflake 2.15.2
+
+> 2026-10-20 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- 只涉及代理端，用 Tor Browser 内置 Snowflake 的人不需要做任何事。这一版没有安全问题，也就没有利用与否的问题。
+- 代理用 `-outbound-address` 指定对外地址时，原本只替换 WebRTC 的本机候选地址（host candidate），通过 STUN 取得的那一组（srflx candidate）仍是另一个对外地址。这一版两组都改用指定的地址（issue 40380），有多张网卡或多个对外 IP 的代理，客户端看到的地址会跟配置一致。
+- Go 的最低版本升到 1.26.10，并修正说明文件（man page）的文件权限。
+
 ## Snowflake 2.15.0、2.15.1
 
 > 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}

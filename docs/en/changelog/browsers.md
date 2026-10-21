@@ -29,15 +29,20 @@ Mozilla advisories often say "we presume that with enough effort some of these c
 
 ## How often each browser ships
 
-Chrome ships a minor version with security fixes nearly every week. Major versions used to arrive about every four weeks, but since September 2026 153, 154 and 155 have each come two weeks apart. Firefox also moved to a major version every two weeks from September, and maintains three Extended Support Release (ESR) lines: 153, 140 and 115, the last mainly for people still on Windows 7, 8.1 and older macOS.
+Chrome ships a minor version with security fixes nearly every week. Major versions used to arrive about every four weeks, but since September 2026 versions 153 through 156 have each come two weeks apart. Firefox also moved to a major version every two weeks from September, and maintains Extended Support Release (ESR) lines 153 and 115, the latter mainly for people still on Windows 7, 8.1 and older macOS. ESR 140 has had no new release since 140.17 on 29 September, and Mozilla's release notes no longer list that line.
 
 Both browsers download updates in the background, but an update only takes effect after the browser restarts. Anyone who keeps their browser open for days may have the new version downloaded while still running the old one. In Chrome, type `chrome://settings/help` into the address bar to see the version; in Firefox, open "Help" in the menu and choose "About Firefox".
 
 ## Chrome October 2026
 
-> 2026-10-06 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-20 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Major version 155.0.8059.39 on 6 October fixed 247 security issues, 4 Critical and 53 High. Google does not flag any of them as actively exploited.
+- <span class="urg-tag urg-tag--soon">Soon</span>Major version 156.0.8078.47 on 20 October fixed 353 security issues, 6 Critical and 61 High. Across this month's four desktop stable announcements, Google does not flag any item as actively exploited, and this release is the latest.
+- Five of the six Critical issues in 156 are memory corruption, in Skia (the graphics engine), Accessibility, CSS, Paint and WebRTC (CVE-2026-113341, CVE-2026-113279, CVE-2026-113072, CVE-2026-113280, CVE-2026-113303); the sixth is a use-after-free in Accessibility (CVE-2026-113271). Among the High ones, V8 and its Turbolev compiler account for seven, plus a use-after-free in Site Isolation (CVE-2026-113101) and insufficient input validation in Proxy (CVE-2026-113040).
+- 155.0.8059.79 on 13 October fixed 37, 7 Critical and 29 High. All seven Critical issues are memory errors, in ANGLE, the browser process, PDF, Network, Core, SVG and Media; the PDF one (CVE-2026-110136) is reached simply by opening a PDF. The High ones include a privilege escalation in the Windows installer (CVE-2026-110150) and an incorrect authorization in the updater (CVE-2026-110159).
+- 155.0.8059.84 on 15 October fixed 10, one Critical, a use-after-free in Prerender (CVE-2026-110922); three of the six High ones are in V8.
+- The Android version ships alongside desktop, and its announcements state that it carries the same fixes. Extended Stable 152 was also updated on 13 and 15 October; the latest is 152.0.7977.169.
+- Major version 155.0.8059.39 on 6 October fixed 247 security issues, 4 Critical and 53 High. Google does not flag any of them as actively exploited.
 - All four Critical issues are use-after-free bugs (memory used again after being released), in Chromecast, the browser process, Navigation and Track (CVE-2026-106382, CVE-2026-106197, CVE-2026-106358, CVE-2026-106347). Among the High ones, seven are in ANGLE and three in V8, plus an incorrect authorization in Site Isolation (CVE-2026-102322).
 - 154.0.8037.97 on 1 October fixed 11 security issues, one Critical and nine High. Google does not flag any of them as actively exploited.
 - The Critical one is an out of bounds write in WebGL (CVE-2026-103628), the interface web pages use to draw 3D graphics on the graphics card. The High ones include a type confusion in V8 (CVE-2026-103625); the rest are spread across FileSystem, SVG, Skia, MediaStream and other components.
@@ -45,10 +50,14 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Firefox October 2026
 
-> 2026-10-06 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-20 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">Routine</span>157.0.1 on 6 October fixed a single Moderate issue, a mitigation bypass in the File Handling component (CVE-2026-106016). Mozilla does not flag it as actively exploited.
-- The three ESR lines had no matching update this time; the latest remain 153.4, 140.17 and 115.42.
+- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 158 on 13 October fixed 77 issues, 30 High, 33 Moderate and 14 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. The latest is 158.0.1 from 20 October.
+- Starting with this release Mozilla changed how it writes advisories: memory safety bugs found internally are no longer rolled into a single aggregate CVE, and each bug now gets its own number. That inflates the High count compared with earlier releases, which is worth knowing when comparing figures across months. The stock "could have been exploited" sentence that appeared in every release went away together with the aggregate entries.
+- The High fixes in 158 include four sandbox escapes in networking and graphics components (CVE-2026-109705, CVE-2026-109707, CVE-2026-109708, CVE-2026-109712), a privilege escalation in the application update component (CVE-2026-109704), and seven in the JavaScript engine and JIT compiler. Most of the rest are use-after-free bugs in DOM, SVG, graphics and media components.
+- 158.0.1 fixed four issues, two of them High. One concerns certificates: intermediate certificates from eMudhra were misused, and Mozilla blocked them through OneCRL (Firefox's certificate revocation list) on 17 October. OneCRL normally updates automatically through remote settings; this release ships the updated list inside the program, so people who have turned remote settings off are protected too (CVE-2026-113470). The other is a boundary condition error in SVG (CVE-2026-113399).
+- ESR 153.5 and 115.43 shipped with 158 on 13 October, fixing 61 and 17 respectively, and 153.5.1 and 115.43.1 on 20 October added the eMudhra fix. ESR 140 had no matching release this round.
+- 157.0.1 on 6 October fixed a single Moderate issue, a mitigation bypass in the File Handling component (CVE-2026-106016).
 
 ## Chrome September 2026
 

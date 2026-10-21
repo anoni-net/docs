@@ -36,6 +36,17 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 
 在 Windows 上使用 Tor Browser 或其他匿名工具的人另外要知道：操作系统被取得权限之后，上面运行的任何工具都保护不了你。提权（让程序取得比原本更高的系统权限）类的修补对这个情境的重要性不亚于浏览器本身的漏洞。
 
+## 2026 年 10 月
+
+> 2026-10-13 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>截至 10 月 21 日有 2575 个 CVE（Windows 本体 1171 个），206 个被评为 Critical，一个标为已被实际利用，打得到桌面版。CISA 在发布当天就把它收入 KEV。
+- CVE-2026-96951：Windows Shell 的安全功能绕过，可以绕过网络标记（Mark of the Web）。从网上下载或从邮件、即时消息收到的文件，Windows 会加上这个标记，打开时弹出警告或改用受保护的视图。攻击者通过邮件或即时消息发送特制的文件，用户点开链接或附件就会触发，那一层警告不会出现。微软在数据里标的是已检测到利用行为，CVSS 8.8。
+- 影响范围从 Windows 10 的 1607、1809、21H2、22H2 到 Windows 11 的 23H2、24H2、25H2、26H1、26H2，以及 Windows Server 2012 R2 以后。它拿掉的是打开文件前的那一层警告，9 月那两个则是取得权限之后的提权。收到不明来源的文件就点开，是这类攻击最常见的起点。
+- Windows 本体的 1171 个比 9 月的 729 个又多了一截，几乎都在 10 月 13 日发布当天就登记，之后只多了 3 个。最多的四个组件是 DNS Server 52 个、Windows Kernel 46 个、Windows Installer 38 个与 Win32k 36 个。Windows 本体的 Critical 有 42 个，DHCP Server 的 5 个远程执行代码与 VBS Enclave 的 5 个提权最集中。
+- 另外两个是公开披露、还没有被利用的。.NET Framework 的 CVE-2026-108398 可以绕过 Windows Defender 应用程序控制（WDAC），需要已经登录的本地攻击者。CVE-2026-92707 是 .NET 的 SignalR 用的 MessagePack 包拒绝服务，跟一般桌面用户关系不大。
+- 总数 2575 个里，Azure Linux 占 868 个、Edge 占 255 个。发布当天的总数是 1758 个，之后增加的几乎都落在这两条产品线。
+
 ## 2026 年 9 月
 
 > 2026-09-08 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
@@ -47,6 +58,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - 两个合起来，从 Windows 10 1607 到 Windows 11 26H1 的桌面版都在范围内。两个都是提权，CVSS 都是 7.8，都需要先在机器上取得执行机会，配合浏览器或文档的漏洞就构成完整的接管。
 - Windows 本体的 729 个是这半年最高的一次，同样以 9 月 23 日的数据重数，8 月是 253 个、7 月是 439 个。数量集中在少数组件上：Windows Biometric Service 64 个、DHCP Server 36 个、NTFS 29 个、Win32k 23 个。
 - 对用 Tor Browser 的人来说，这个月两个被利用的都是提权，正是本页开头提到的那个情境：操作系统被取得权限之后，上面运行的匿名工具保护不了你。
+- 9 月 25 日 CISA 另外把 8 月修复的 CVE-2026-65660 收入 KEV。这是 SharePoint 的代码注入，影响 SharePoint Enterprise Server 2016、2019 与 Subscription Edition，CVSS 8.8，只打得到服务器，桌面用户不受影响。微软在 8 月那份数据的修订记录里补了一句「As of 9/25/2026, Microsoft had reliable evidence of observed attacks」，已被利用的字段却仍是 No，只看那个字段的话会漏掉。管理 SharePoint 的人要确认 8 月的更新已经装上。
 
 ## 2026 年 8 月
 
@@ -56,6 +68,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - CVE-2026-68820：WinSock 的辅助功能驱动程序（Ancillary Function Driver）提权。影响 Windows 10 1607 以后的桌面版与 Windows Server 2012 以后，范围一路涵盖到现行版本，还在用旧机的人不要以为与自己无关。
 - 提权类漏洞的典型用法是接在别的漏洞后面，先从浏览器或文档取得执行机会，再用它取得系统权限。单独看它需要本机执行条件，串起来就是完整的接管。
 - 8 月 18 日 CISA 另外把 4 月修复的 CVE-2026-33824 收入 KEV，代表它已被实际利用。这是 Windows IKE 服务扩展组件（处理 IPsec 密钥交换的系统服务）的重复释放漏洞，未经身份验证的攻击者可以通过网络远程执行代码，CVSS 9.8，影响 Windows 10 1607 到 Windows 11 26H1 的桌面版与 Windows Server 2016 以后。4 月之后装过任何一次每月更新的电脑都已覆盖，还停在 3 月以前的要立刻更新。
+- 这个月修复的 SharePoint 漏洞 CVE-2026-65660 在 9 月 25 日被收入 KEV，写在 2026 年 9 月那则。
 
 ## 2026 年 7 月
 

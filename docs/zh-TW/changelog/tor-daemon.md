@@ -40,7 +40,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 > 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.14/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全釋出，距離 0.4.9.13 兩週，帶三個 TROVE 編號，另有一項沒有編號、同樣列在安全修補底下的 conflux 問題。官方寫明中繼、用戶端、onion 服務與目錄權威全部受影響，強烈建議盡快升級。上游沒有提到已被實際利用。
-- 截至 10 月 8 日，Tor Browser 與 Tails 都還沒有帶這一版的新版本，穩定版 15.0.24 內建的仍是 0.4.9.13。架設中繼、橋接與 onion 服務的人要自己升級。
+- 用瀏覽器上 Tor 的人，10 月 12 日的 Tor Browser 15.0.25 與 10 月 13 日的 Tails 7.15 都帶進了這一版（見 [Tor 更新日誌](./tor.md)與 [Tails 更新日誌](./tails.md)）。架設中繼、橋接與 onion 服務的人要自己升級。
 - conflux 那一項影響中繼。用戶端可以把會合點電路連進 conflux 組，再送出序號偽造的 LINK 資料元，讓中繼在會合拼接的過程中拆掉整組電路，觸發致命的斷言失敗，中繼行程直接結束（bug 41328，問題從 0.4.8.1-alpha 就存在）。修正後中繼只在一般電路上接受 CONFLUX_LINK，也不再讓 conflux 的電路轉成引介點或會合點。
 - TROVE-2026-067：目錄權威以外的節點原本會忽略 MiddleOnly 旗標。目錄權威用這個旗標把可疑的中繼限制在中間位置，忽略之後，用戶端在 onion 服務電路裡可能把這些中繼放在不該用的位置（bug 41410，問題從 0.4.8.15 開始）。
 - TROVE-2026-062：中繼描述檔裡任何一張家族憑證過期，整份描述檔就視為過期。原本會忽略家族憑證的到期時間（bug 41413，問題從 0.4.9.2-alpha 開始）。

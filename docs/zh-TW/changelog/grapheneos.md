@@ -17,8 +17,14 @@ GrapheneOS 走自動更新，裝置在背景就會裝好，一般使用者不需
 
 ## 2026 年 10 月
 
-> 版本 `2026100200`、`2026100600` · [官方發布頁](https://grapheneos.org/releases){target="_blank"}
+> 版本 `2026100200`、`2026100600`、`2026101600` · [官方發布頁](https://grapheneos.org/releases){target="_blank"}
 
+- 10 月 16 日的 `2026101600` 把 Pixel 的核心驅動換成 2026 年 10 月的版本。GrapheneOS 寫明這次更新延後，原因是 Google 一直沒有依 GPLv2 釋出原始碼，也寫明 Google 十月 Pixel 更新公告列的安全修補，沒有一項落在第 6 到第 10 代 Pixel 的核心驅動裡，所以這次延後沒有讓那些修補跟著延後。
+- 同一版修掉兩個上游 Android 的安全弱點：WindowManagerService 把 PID 與 UID 兩個參數弄混，以及一個 activity 結束之後，原本被鎖定畫面蓋住的 activity 會被恢復顯示。
+- 感測器權限的範圍擴大到裝置自訂的感測器類型，在 Pixel 上實際多涵蓋溫度、氣壓與距離感測器。沒有給這項權限的 app，讀不到這幾種感測器。
+- Sandboxed Google Play 改用新的方式與系統溝通，以支援新版的 Play 服務，Play 商店的安裝確認對話框也改善了。修掉第 9 代 Pixel 的 NFC、eSE 與 eSIM 韌體更新問題，那是從十月的更新開始出現的。
+- security preview 版提前套用的範圍仍是 Google 排定在 2026 年 11 月到 2027 年 4 月公告的修補，額外修好的 CVE 清單從 122 個變成 136 個（7 個 Critical、129 個 High）。
+- 6.12 核心升到 6.12.96，6.1 與 6.18 跟上 GKI LTS 的最新修訂。Vanadium 依序升到 155.0.8059.39.0、155.0.8059.79.0 與 155.0.8059.84.0，對應 Chrome 10 月 6 日、13 日與 15 日的穩定版。時區資料更新到 2026e，開機動畫也換成 GrapheneOS 自己的版本。
 - 10 月 6 日的 `2026100600` 帶上完整的 2026-10-05 安全修補等級與 Pixel 十月韌體，跟 Google 的 Pixel 更新公告同一天。十月公告的內容整理在 [Android 安全修補等級](./android.md)。
 - security preview 版（`2026100601`）提前套用的範圍往後推到 Google 排定在 2026 年 11 月到 2027 年 4 月公告的修補，額外修好的 CVE 清單有 122 個（8 個 Critical、114 個 High）。十月那批已經正式公告，從清單裡移出。
 - 修掉上游 `ZipFileRO.cpp` 的整數溢位，條目名稱長達 65,535 位元組的 ZIP 檔會造成記憶體毀損。

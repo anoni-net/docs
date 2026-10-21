@@ -29,15 +29,20 @@ Mozilla 的公告里常见「we presume that with enough effort some of these co
 
 ## 两个浏览器的发布节奏
 
-Chrome 每周都有带安全修补的小版本，大版本原本约四周一版，2026 年 9 月起的 153、154、155 都只隔两周。Firefox 也从 9 月起改成两周一个大版本，另外维护三条延长支持版（ESR）：153、140 与 115，115 这条主要给还在用 Windows 7、8.1 与旧版 macOS 的人。
+Chrome 每周都有带安全修补的小版本，大版本原本约四周一版，2026 年 9 月起的 153 到 156 都只隔两周。Firefox 也从 9 月起改成两周一个大版本，另外维护延长支持版（ESR）153 与 115，115 这条主要给还在用 Windows 7、8.1 与旧版 macOS 的人。ESR 140 在 9 月 29 日的 140.17 之后就没有新版，Mozilla 的版本信息也不再列出这条线。
 
 两个浏览器都会在后台下载更新，但要重新启动浏览器才会生效。长时间不关浏览器的人，可能早就下载了新版却一直在运行旧版。Chrome 在地址栏输入 `chrome://settings/help` 可以查看版本，Firefox 在菜单的「帮助」里点「关于 Firefox」。
 
 ## Chrome 2026 年 10 月
 
-> 2026-10-06 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-20 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>10 月 6 日的大版本 155.0.8059.39 修复了 247 个安全问题，Critical 4 个、High 53 个。Google 没有标注任何一项已被实际利用。
+- <span class="urg-tag urg-tag--soon">尽快</span>10 月 20 日的大版本 156.0.8078.47 修复了 353 个安全问题，Critical 6 个、High 61 个。这个月四份桌面稳定版公告，Google 都没有标注任何一项已被实际利用，目前最新的就是这一版。
+- 156 的 6 个 Critical 有 5 个是内存损坏，分别在 Skia（绘图引擎）、Accessibility、CSS、Paint 与 WebRTC（CVE-2026-113341、CVE-2026-113279、CVE-2026-113072、CVE-2026-113280、CVE-2026-113303），另一个是 Accessibility 的 use-after-free（CVE-2026-113271）。High 里 V8 与它的编译器 Turbolev 合计 7 个，另有一个站点隔离的 use-after-free（CVE-2026-113101）与一个 Proxy 的输入验证不足（CVE-2026-113040）。
+- 10 月 13 日的 155.0.8059.79 修复了 37 个，Critical 7 个、High 29 个。7 个 Critical 都是内存错误，落在 ANGLE、浏览器本体、PDF、Network、Core、SVG 与 Media，其中 PDF 那一个（CVE-2026-110136）打开 PDF 就会经过。High 里有 Windows 安装程序的提权（CVE-2026-110150）与更新程序的授权错误（CVE-2026-110159）。
+- 10 月 15 日的 155.0.8059.84 修复了 10 个，Critical 1 个，是预渲染（Prerender）的 use-after-free（CVE-2026-110922），High 6 个里有 3 个在 V8。
+- Android 版跟着桌面版发布，公告写明修补内容相同。扩展稳定版（Extended Stable）152 也在 10 月 13 日与 15 日跟着更新，最新是 152.0.7977.169。
+- 10 月 6 日的大版本 155.0.8059.39 修复了 247 个安全问题，Critical 4 个、High 53 个。Google 没有标注任何一项已被实际利用。
 - 4 个 Critical 都是 use-after-free（程序把内存释放之后又拿来用），分别在 Chromecast、浏览器本体、页面导航（Navigation）与 Track 组件（CVE-2026-106382、CVE-2026-106197、CVE-2026-106358、CVE-2026-106347）。High 里 ANGLE 有 7 个、V8 有 3 个，另有一个站点隔离（Site Isolation）的授权错误（CVE-2026-102322）。
 - 10 月 1 日的 154.0.8037.97 修复了 11 个安全问题，Critical 1 个、High 9 个。Google 没有标注任何一项已被实际利用。
 - Critical 那一项是 WebGL（网页调用显卡绘制 3D 图形的接口）的越界写入（CVE-2026-103628）。High 里有一个 V8 的类型混淆（CVE-2026-103625），其余分散在 FileSystem、SVG、Skia、MediaStream 等组件。
@@ -45,10 +50,14 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 ## Firefox 2026 年 10 月
 
-> 2026-10-06 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-20 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--routine">一般</span>10 月 6 日的 157.0.1 只修复了一个 Moderate 等级的问题，文件处理组件的防护机制可以被绕过（CVE-2026-106016）。Mozilla 没有标注它已被实际利用。
-- ESR 三条线这次没有对应的更新，最新版本维持 153.4、140.17 与 115.42。
+- <span class="urg-tag urg-tag--soon">尽快</span>10 月 13 日的 Firefox 158 修复了 77 个问题，High 30 个、Moderate 33 个、Low 14 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。目前最新的是 10 月 20 日的 158.0.1。
+- Mozilla 从这一版起改了公告的写法，内部发现的内存安全错误不再合并成一个汇总的 CVE，改成一个错误一个编号。High 的数量因此比过去多，跨月比较数字时要知道这件事。过去每版都有的那句「could have been exploited」固定套话，也跟着汇总条目一起消失了。
+- 158 的 High 里有 4 个沙箱逃逸，落在网络与图形组件（CVE-2026-109705、CVE-2026-109707、CVE-2026-109708、CVE-2026-109712），应用程序更新组件有一个提权（CVE-2026-109704），JavaScript 引擎与 JIT 编译器有 7 个。其余多是 DOM、SVG、图形与音视频组件的 use-after-free。
+- 158.0.1 修复了 4 个问题，其中 2 个 High。一个跟证书有关，eMudhra 的中间证书遭到滥用，Mozilla 在 10 月 17 日通过 OneCRL（Firefox 的证书吊销列表）封锁了它们。OneCRL 平常靠远程设置自动更新，这一版把更新后的列表直接放进程序里，关掉远程设置的人也会拦下这些证书（CVE-2026-113470）。另一个是 SVG 的边界条件错误（CVE-2026-113399）。
+- ESR 153.5 与 115.43 在 10 月 13 日跟着 158 发布，分别修复了 61 个与 17 个，10 月 20 日的 153.5.1 与 115.43.1 再补上 eMudhra 那一项。ESR 140 这一轮没有对应的版本。
+- 10 月 6 日的 157.0.1 只修复了一个 Moderate 等级的问题，文件处理组件的防护机制可以被绕过（CVE-2026-106016）。
 
 ## Chrome 2026 年 9 月
 

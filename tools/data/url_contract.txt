@@ -821,6 +821,7 @@
 	#Snowflake-2140
 	#Snowflake-2141
 	#Snowflake-21502151
+	#Snowflake-2152
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -903,6 +904,7 @@
 	#OnionShare-263
 	#OnionShare-264
 	#OnionShare-265
+	#OnionShare-27
 	#OnionShare-更新日誌
 	#急迫程度怎麼判斷
 /changelog/ooni/
@@ -927,6 +929,7 @@
 	#Tails-712
 	#Tails-713
 	#Tails-714
+	#Tails-715
 	#Tails-76
 	#Tails-771
 	#Tails-772
@@ -966,10 +969,12 @@
 	#Tor-Browser-15022
 	#Tor-Browser-15023
 	#Tor-Browser-15024
+	#Tor-Browser-15025
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
 	#Tor-Browser-160a13Alpha-測試通道
+	#Tor-Browser-160a14Alpha-測試通道
 	#Tor-Browser-160a6Alpha-測試通道
 	#Tor-Browser-160a7Alpha-測試通道
 	#Tor-Browser-160a8Alpha-測試通道
@@ -977,6 +982,7 @@
 	#Tor-更新日誌
 	#兩個發布通道
 /changelog/windows/
+	#2026-年-10-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -1771,6 +1777,7 @@
 	#Snowflake-2140
 	#Snowflake-2141
 	#Snowflake-2150-2151
+	#Snowflake-2152
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -1852,6 +1859,7 @@
 	#OnionShare-263
 	#OnionShare-264
 	#OnionShare-265
+	#OnionShare-27
 	#OnionShare-Changelog
 /en/changelog/ooni/
 	#OONI-Changelog
@@ -1873,6 +1881,7 @@
 	#Tails-712
 	#Tails-713
 	#Tails-714
+	#Tails-715
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -1904,10 +1913,12 @@
 	#Tor-Browser-15022
 	#Tor-Browser-15023
 	#Tor-Browser-15024
+	#Tor-Browser-15025
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
 	#Tor-Browser-160a13-alpha
+	#Tor-Browser-160a14-alpha
 	#Tor-Browser-160a7-alpha
 	#Tor-Browser-160a8-alpha
 	#Tor-Browser-160a9-alpha
@@ -1921,6 +1932,7 @@
 	#July-2026
 	#June-2026
 	#May-2026
+	#October-2026
 	#September-2026
 	#Windows-Security-Updates
 /en/community/ -> https://anoni.net/en/join/
@@ -5666,6 +5678,7 @@
 	#Snowflake-2140
 	#Snowflake-2141
 	#Snowflake-21502151
+	#Snowflake-2152
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -5747,6 +5760,7 @@
 	#OnionShare-263
 	#OnionShare-264
 	#OnionShare-265
+	#OnionShare-27
 	#OnionShare-更新日志
 	#紧急程度怎么判断
 /zh-cn/changelog/ooni/
@@ -5772,6 +5786,7 @@
 	#Tails-712
 	#Tails-713
 	#Tails-714
+	#Tails-715
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -5804,16 +5819,19 @@
 	#Tor-Browser-15022
 	#Tor-Browser-15023
 	#Tor-Browser-15024
+	#Tor-Browser-15025
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道
 	#Tor-Browser-160a13Alpha-测试通道
+	#Tor-Browser-160a14Alpha-测试通道
 	#Tor-Browser-160a7Alpha-测试通道
 	#Tor-Browser-160a8Alpha-测试通道
 	#Tor-Browser-160a9Alpha-测试通道
 	#Tor-更新日志
 	#两个发布通道
 /zh-cn/changelog/windows/
+	#2026-年-10-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
