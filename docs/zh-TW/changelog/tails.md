@@ -24,6 +24,18 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.15
+
+> 2026-10-13 · [上游公告](https://tails.net/news/version_7.15/){target="_blank"} · [7.14 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.14/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，帶進 Tor Browser 與 tor 的安全更新。Tails 另外發了一份 7.14 的已知漏洞公告，要求儘快升級。上游沒有提到已被實際利用。
+- Tor Browser 從 15.0.24 升至 15.0.25，從 Firefox 158 backport 安全修補，細節見 [Tor 更新日誌](./tor.md)。Tor 用戶端升至 0.4.9.14，那是一次帶三個 TROVE 編號的安全釋出，逐條整理在 [tor daemon 更新日誌](./tor-daemon.md)。
+- 已知漏洞公告一樣沒有列出清單。拿 7.15 的套件清單對過 9 月 29 日之後的 Debian 安全公告，7.14 沒趕上的四份都裝進去了：OpenSSL（DSA-6531-1，13 個 CVE）、pcre2（DSA-6530-1）、WebKitGTK（DSA-6534-1，連同 10 月 2 日的回歸修正）與 libpng（DSA-6537-1）。
+- 9 月 30 日之後新發的公告，裝進去的有五份。開啟檔案就可能觸發的是 LibreOffice（DSA-6543-1，6 個 CVE）、Ghostscript（DSA-6550-1）與 SVG 影像的 librsvg（DSA-6555-1），另外兩份是 xz-utils（DSA-6549-1）與讀寫 NTFS 磁碟的 ntfs-3g（DSA-6557-1）。後者跟 Tails 的用法直接相關，插上一顆來源不明的 Windows 隨身碟時，處理檔案系統的正是它。
+- 核心維持 6.12.111，Debian 10 月 16 日的核心安全公告（DSA-6568-1）晚於這一版。curl（DSA-6558-1）、JPEG XL（DSA-6564-1）與 expat（DSA-6566-1）的公告也都在 10 月 14 日之後，7.15 裝的仍是修補前的版本。
+- 更新部分韌體套件，改善較新硬體的顯示卡與 Wi-Fi 支援。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.14
 
 > 2026-09-30 · [上游公告](https://tails.net/news/version_7.14/){target="_blank"} · [7.13 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.13/){target="_blank"}

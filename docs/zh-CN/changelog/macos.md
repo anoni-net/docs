@@ -61,6 +61,9 @@ Apple 同时维护最新版与前两代，安全修补三条线都发，但只�
 - 沙箱逃逸与沙箱限制绕过，Golden Gate 27 有 9 个、Tahoe 26.7 有 7 个、Sequoia 15.8 有 6 个，整轮出现的组件有 AppleMobileFileIntegrity、Archive Utility、Automator、iWork、libxpc 与 quarantine。Golden Gate 27 另有一个 MediaRemote，沙箱内的应用读得到系统钥匙串。
 - 三份清单不是单纯的包含关系。Tahoe 26.7 有 4 个、Sequoia 15.8 有 11 个没有出现在 Golden Gate 27 的清单里。
 - 跟踪类的修补与 iOS 那一侧重叠。三条线都有的是 AuthKit 的常驻账号标识符、NetworkExtension 可以查出你装了哪些其他应用、Symptom Framework 可以判定用户当前的位置。App Store 的标识符问题只出现在 Golden Gate 27 与 Tahoe 26.7，Sandbox Profiles 的用户指纹识别只出现在 Golden Gate 27。逐项说明写在 [iOS 安全更新](./ios.md)。
+- Apple 在 10 月 19 日修订三份公告，Golden Gate 27 从 210 个增加到 242 个，Tahoe 26.7 从 153 个、Sequoia 15.8 从 154 个都增加到 173 个，上面的数字是初版的。修订后的公告仍然没有标注任何一项已被实际利用，已经装了这几版以后的人不需要再做什么。
+- 补进来的项目里，三条线都有的是 Core Bluetooth 的 CVE-2026-86919（配对过的蓝牙设备可能执行任意代码）、DesktopServices 打开指向网络共享的文件可能执行非预期的程序（CVE-2026-84579），以及 Heimdal 可能被冒充成其他用户（CVE-2026-86868）。Multi-Touch 另有一个绕过隐私偏好的项目，三条线也都有。只在 Golden Gate 27 的是一个 WebKit（CVE-2026-86922）与一个系统设置挡不住被篡改的应用启动（CVE-2026-28854），后者属于 Gatekeeper 那一类。
+- udf 的 CVE-2026-84506 被调低，从以内核权限执行任意代码改成造成系统异常终止或内核内存损坏。三份清单的差异也跟着变了，Tahoe 26.7 有 8 个、Sequoia 15.8 有 15 个没有出现在 Golden Gate 27 的清单里。
 
 ## macOS Tahoe 26.6.2
 

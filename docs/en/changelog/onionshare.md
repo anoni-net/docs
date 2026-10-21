@@ -23,6 +23,19 @@ OnionShare ships far less often than Tor Browser or Tails: fifteen months passed
 
 Releases are infrequent and none so far has warranted same-day installation, so this page has no "Now" entries yet.
 
+## OnionShare 2.7
+
+> 2026-10-16 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7){target="_blank"} · [GHSA-2pj7-hh2q-hjrh](https://github.com/onionshare/onionshare/security/advisories/GHSA-2pj7-hh2q-hjrh){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>Closes a path that the symlink fix in 2.6.4 missed. 2.6.4 and 2.6.5 are affected, in both the desktop app and `onionshare-cli`. The advisory includes only a proof of concept and does not mention active exploitation.
+- GHSA-2pj7-hh2q-hjrh has no CVE identifier and is rated medium severity (CVSS 4.8). CVE-2026-54706 in 2.6.4 blocked symlinks inside a shared directory, but sharing a single file uses a different download path that had no such check. If the shared file is itself a symlink pointing elsewhere, whoever has the onion address can read any local file readable by the OnionShare process. The developers note that this requires the user to share the wrong file, or a computer that is already compromised.
+- A new Download mode lets you fetch files someone else is sharing with OnionShare directly inside OnionShare, without opening Tor Browser.
+- Connection settings now support WebTunnel bridges (the differences between the three transports are in the [anti-censorship transports changelog](./anti-censorship.md)). The bundled meek-azure is renamed meek, following upstream.
+- Receive mode can cap upload size, either per upload or across the whole time the service runs. When you leave Receive mode open for submissions from strangers, this keeps the disk from filling up.
+- On Linux and macOS the local web server now listens on a UNIX socket instead of opening a TCP port. The release notes do not explain the reason for the change. The bundled Tor and OnionShare caches move from `~/.config` to `XDG_CACHE_HOME`.
+- The bundled tor moves to 0.4.9.14, and the signing key used to verify Tor downloads is updated as well. Fixes include an exception thrown when Receive mode's auto-stop timer runs out while a large file is still uploading, and an overflow in the compression progress bar for large files.
+- Supported platforms are unchanged: Windows, macOS, Flatpak and Snap.
+
 ## OnionShare 2.6.5
 
 > 2026-07-28 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}

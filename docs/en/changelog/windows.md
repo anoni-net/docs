@@ -36,6 +36,17 @@ Microsoft Defender is another common misunderstanding. Its fixes ship through au
 
 One more thing worth knowing if you run Tor Browser or other anonymity tools on Windows: once the operating system is compromised, nothing running on top of it can protect you. Privilege escalation (a program obtaining higher system privileges than it started with) fixes matter as much in that scenario as browser flaws do.
 
+## October 2026
+
+> 2026-10-13 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>As of 21 October, 2,575 CVEs (1,171 in Windows itself), 206 rated Critical, one flagged as actively exploited, and it reaches desktop machines. CISA added it to KEV on release day.
+- CVE-2026-96951: a security feature bypass in Windows Shell that gets around the Mark of the Web. Windows attaches this mark to files downloaded from the internet or received by email or instant message, and shows a warning or opens them in Protected View. An attacker sends a crafted file by email or instant message, and when the user opens the link or attachment, that warning never appears. Microsoft's data marks it as exploitation detected, CVSS 8.8.
+- Affected versions run from Windows 10 1607, 1809, 21H2 and 22H2 through Windows 11 23H2, 24H2, 25H2, 26H1 and 26H2, plus Windows Server 2012 R2 and later. It removes the warning layer before a file is opened, whereas September's two were privilege escalations after access was gained. Opening a file from an unknown sender is the most common starting point for this kind of attack.
+- The 1,171 in Windows itself are another step up from September's 729, and nearly all were listed on release day, 13 October, with only 3 added since. The four largest components are DNS Server with 52, Windows Kernel 46, Windows Installer 38 and Win32k 36. Windows itself has 42 Critical, most concentrated in 5 remote code execution flaws in DHCP Server and 5 privilege escalations in VBS Enclave.
+- Two more were publicly disclosed but not exploited. CVE-2026-108398 in .NET Framework can bypass Windows Defender Application Control (WDAC) and requires a local attacker who is already logged in. CVE-2026-92707 is a denial of service in the MessagePack package used by .NET's SignalR, of little concern to ordinary desktop users.
+- Of the 2,575 total, Azure Linux accounts for 868 and Edge for 255. The release-day total was 1,758, and nearly all the growth since falls in those two product lines.
+
 ## September 2026
 
 > 2026-09-08 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
@@ -47,6 +58,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - Together they cover desktop Windows from 10 1607 through 11 26H1, so no supported desktop version sits outside the range. Both are privilege escalations scoring CVSS 7.8, both need code running on the machine first, and paired with a browser or document flaw either one completes a takeover.
 - The 729 CVEs in Windows itself are the highest of the past six months; recounting from the same 23 September data, August has 253 and July 439. They cluster in a handful of components: Windows Biometric Service 64, DHCP Server 36, NTFS 29, Win32k 23.
 - For anyone running Tor Browser, both exploited flaws this month are privilege escalations, which is exactly the scenario described at the top of this page: once the operating system is owned, the anonymity tools running on it cannot protect you.
+- On 25 September CISA also added CVE-2026-65660, fixed in August, to KEV. It is a code injection flaw in SharePoint affecting SharePoint Enterprise Server 2016, 2019 and Subscription Edition, CVSS 8.8, reachable only on servers; desktop users are unaffected. Microsoft added the line "As of 9/25/2026, Microsoft had reliable evidence of observed attacks" to the revision history of its August entry, yet the exploited field still reads No, so anyone checking only that field would miss it. Anyone running SharePoint should confirm the August update is installed.
 
 ## August 2026
 
@@ -56,6 +68,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - CVE-2026-68820: privilege escalation in the Ancillary Function Driver for WinSock. It affects desktop Windows 10 1607 and later plus Windows Server 2012 and later, right through to current releases, so do not assume an older machine is out of scope.
 - Privilege escalation flaws are typically chained: something else (a browser, a document) gets code running first, and this takes it to system privileges. On its own it needs local execution, but chained it completes the takeover.
 - On 18 August CISA also added CVE-2026-33824, fixed back in April, to KEV, meaning it has been exploited. It is a double free in the Windows IKE Service Extensions (the system service that handles IPsec key exchange) that lets an unauthenticated attacker execute code remotely over the network, CVSS 9.8, affecting desktop Windows 10 1607 through Windows 11 26H1 and Windows Server 2016 and later. Any machine that has installed a monthly update since April is covered; anything still on March or earlier should update now.
+- CVE-2026-65660, a SharePoint flaw fixed this month, was added to KEV on 25 September; see the September 2026 entry.
 
 ## July 2026
 

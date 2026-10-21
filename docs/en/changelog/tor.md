@@ -18,6 +18,25 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 16.0a14 (alpha)
+
+> 2026-10-15 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a14/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>The alpha channel is for testing only. Most people should stay on the stable release (15.x).
+- The Firefox base is rebased onto 153.5.0esr (tor-browser#45380) with security fixes backported from Firefox 158 (tor-browser#45382); GeckoView on Android follows. The bundled tor daemon moves to 0.4.9.14 and NoScript to 13.6.36.90201984.
+- The bundled lyrebird moves to 0.9.0 (tor-browser-build#41896), so if you have set a proxy in Tor Browser's connection settings, Snowflake now goes through it (details in the [anti-censorship transports changelog](./anti-censorship.md)). The Go toolchain moves to 1.26.9.
+- Every other item in this release is in the build process, with no interface or behaviour changes. The release files' signing subkey remains `022DA248432D2A0E0F54E65E316C1FACD62D07D9`.
+
+## Tor Browser 15.0.25
+
+> 2026-10-12 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15025/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>The bundled tor daemon moves to 0.4.9.14, the 7 October security release that fixed three TROVE issues and a conflux bug that crashed relays (details in the [tor daemon changelog](./tor-daemon.md)). Upstream does not mention exploitation in the wild.
+- Security fixes are backported from Firefox 158 (tor-browser#45382), and the Firefox base stays at 140.17.0esr. Firefox ESR 140 has had no new release since 140.17 on 29 September, and Mozilla's 13 October round shipped only 153.5 and 115.43, so every Firefox fix in this release depends on the Tor Project's own backports until 16.0 stable moves to the 153 base.
+- The bundled OpenSSL moves to 3.5.9; the fixes that alpha 16.0a13 brought in first only reach stable with this release. NoScript moves to 13.6.36.1984.
+- The Windows signing problem is resolved. The build now uses a new signing certificate (tor-browser-build#41890), and in our check the 15.0.25 Windows installer is signed with an EV certificate issued by DigiCert to The Tor Project, valid from 30 September 2026 to 1 January 2028. The download page's Windows version has also caught up from 15.0.20 to 15.0.25, so a fresh install no longer runs into the certificate expiry warning.
+- The release files' GPG signing subkey is the same as for 15.0.24, `022DA248432D2A0E0F54E65E316C1FACD62D07D9`.
+
 ## Tor Browser 16.0a13 (alpha)
 
 > 2026-10-01 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a13/){target="_blank"}

@@ -38,6 +38,8 @@ Apple 一天發三到五份公告時，各條線的公告會出現大量同名�
 
 利用狀態同樣逐份確認，掃公告全文的 `exploited` 這個字。那一輪五份公告都沒有出現，才寫得出「Apple 沒有標注任何一項已被實際利用」。
 
+Apple 會在發布幾週後修訂舊公告、補進新的 CVE，總表不會因此出現新的一列。9 月 14 日那一輪在 10 月 19 日修訂，iOS 27 從 126 個變成 145 個，Golden Gate 27 從 210 個變成 242 個，還有一項的 `Impact:` 被調降。每次更新時把最近一兩輪的公告重新數一次，搜尋「Entry added」與「Entry updated」，數字變了就在原條目補一句修訂，不要直接覆寫初版的數字。
+
 ### GrapheneOS 的「List of additional fixed CVEs」不是當月修補
 
 那是 security preview release 提前套用未來數月公告的清單，會逐版累積，原文寫明涵蓋哪幾個月的公告。誤讀成當月涵蓋範圍會讓整頁的數據失去意義。
@@ -60,7 +62,7 @@ Apple 一天發三到五份公告時，各條線的公告會出現大量同名�
 
 ### Mozilla 公告裡的「could have been exploited」是固定套語
 
-記憶體安全錯誤的彙總條目一律寫「we presume that with enough effort some of these could have been exploited」，代表理論上可能被利用，不代表有人在利用。拿「exploited」這個字去掃會把每一版都誤判成立刻，要看的是有沒有寫到 in the wild。2026 年 7 月的 Firefox 152.0.6 另有一種寫法，「exploit code for this is public however we are not aware of any attacks in the wild」，利用程式已公開但沒有攻擊，依判準仍是儘快。Chrome 的寫法固定是「Google is aware that an exploit for CVE-… exists in the wild」，而且嚴重度可能只有 Medium（2026 年 9 月的 CVE-2026-87491），不能用嚴重度篩。
+記憶體安全錯誤的彙總條目一律寫「we presume that with enough effort some of these could have been exploited」，代表理論上可能被利用，不代表有人在利用。拿「exploited」這個字去掃會把每一版都誤判成立刻，要看的是有沒有寫到 in the wild。2026 年 7 月的 Firefox 152.0.6 另有一種寫法，「exploit code for this is public however we are not aware of any attacks in the wild」，利用程式已公開但沒有攻擊，依判準仍是儘快。2026 年 10 月的 Firefox 158 起，Mozilla 不再把內部找到的記憶體安全錯誤併成一個彙總 CVE，改成一個錯誤一個編號，那句套語也跟著消失。High 的數量因此暴增，跟 9 月以前的版本比數字沒有意義。Chrome 的寫法固定是「Google is aware that an exploit for CVE-… exists in the wild」，而且嚴重度可能只有 Medium（2026 年 9 月的 CVE-2026-87491），不能用嚴重度篩。
 
 ### WhatsApp 的公告頁抓不到
 
@@ -70,7 +72,9 @@ Apple 一天發三到五份公告時，各條線的公告會出現大量同名�
 
 上游的利用標注不一定出現在我們讀的那份公告裡，也可能在頁面寫完之後才出現。整理完一輪之後執行 `python3 tools/check_changelog_kev.py`，它會抓 CISA 的已知遭利用漏洞目錄，把近 60 天新增、屬於我們追蹤的產品的 CVE 跟 zh-TW 的頁面對一遍，列出頁面裡還沒有的。`.github/workflows/changelog-kev.yml` 每週一也會執行一次，有漏的就開一張 issue。
 
-列出來的項目要自己判斷補在哪一則。KEV 收錄的常是幾個月前就修掉的漏洞（Windows IKE 的 CVE-2026-33824 是 4 月修、8 月收錄），這種補在收錄那個月的條目，原本修補的那一則加一句指過去。產品對到哪幾頁寫在腳本的 `RULES`，新增追蹤的產品時先到 KEV 查它的 `vendorProject` 與 `product` 實際怎麼寫。
+列出來的項目要自己判斷補在哪一則。KEV 收錄的常是幾個月前就修掉的漏洞（Windows IKE 的 CVE-2026-33824 是 4 月修、8 月收錄），這種補在收錄那個月的條目，原本修補的那一則加一句指過去。
+
+MSRC 的 `Exploited:Yes` 不一定會跟著事後的證據更新。8 月修掉的 SharePoint CVE-2026-65660 在 9 月 25 日進了 KEV，CVRF 的修訂紀錄也寫了「Microsoft had reliable evidence of observed attacks」，到 10 月 21 日 `Threats` 裡仍是 `Exploited:No`。只數那個欄位會漏掉，所以 Windows 頁一定要再對一次 KEV。產品對到哪幾頁寫在腳本的 `RULES`，新增追蹤的產品時先到 KEV 查它的 `vendorProject` 與 `product` 實際怎麼寫。
 
 ## 急迫程度分級
 

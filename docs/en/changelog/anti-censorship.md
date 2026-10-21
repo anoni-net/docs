@@ -21,6 +21,14 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## Snowflake 2.15.2
+
+> 2026-10-20 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- Only the proxy side changes, so people using the Snowflake built into Tor Browser have nothing to do. This release has no security issues, so the question of exploitation does not arise.
+- When a proxy set its outbound address with `-outbound-address`, only the WebRTC host candidate was replaced; the server reflexive (srflx) candidate obtained via STUN still carried a different outbound address. Both now use the specified address (issue 40380), so for proxies with several network interfaces or several public IPs, the address clients see matches the configuration.
+- The minimum Go version rises to 1.26.10, and the file permissions of the man page are fixed.
+
 ## Snowflake 2.15.0, 2.15.1
 
 > 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}

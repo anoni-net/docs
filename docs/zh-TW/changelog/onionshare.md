@@ -23,6 +23,19 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 發版節奏慢，目前沒有出現過需要當天更新的等級，所以這一頁還沒有「立刻」。
 
+## OnionShare 2.7
+
+> 2026-10-16 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.7){target="_blank"} · [GHSA-2pj7-hh2q-hjrh](https://github.com/onionshare/onionshare/security/advisories/GHSA-2pj7-hh2q-hjrh){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>補完 2.6.4 那個符號連結（symlink）修補漏掉的一條路徑，影響 2.6.4 與 2.6.5，桌面版與 `onionshare-cli` 都受影響。安全公告只附了概念驗證，沒有提到已被實際利用。
+- GHSA-2pj7-hh2q-hjrh 沒有 CVE 編號，嚴重度評為中等（CVSS 4.8）。2.6.4 的 CVE-2026-54706 擋住了資料夾裡的符號連結，分享內容只有單一檔案時走的是另一條下載路徑，那裡沒有檢查。分享的那個檔案本身是指向別處的符號連結時，取得 onion 網址的對方就能讀到 OnionShare 行程讀得到的任何本機檔案。開發者附註，這需要使用者分享錯檔案，或電腦已經遭到入侵才會發生。
+- 新增下載模式，可以直接在 OnionShare 裡下載別人用 OnionShare 分享的檔案，不必另外開 Tor Browser。
+- 連線設定支援 WebTunnel 橋接（三種傳輸的差別見[抗審查傳輸更新日誌](./anti-censorship.md)）。內建的 meek-azure 依上游改名為 meek。
+- 接收模式可以設定上傳大小的上限，分成單次上傳與整段服務期間兩種。開著接收模式等陌生人投件時，可以避免磁碟被塞滿。
+- Linux 與 macOS 上的本機網頁伺服器改用 UNIX socket，不再開 TCP 連接埠。發布說明沒有交代改動的理由。內建 Tor 與 OnionShare 的快取從 `~/.config` 搬到 `XDG_CACHE_HOME`。
+- 內建的 tor 升到 0.4.9.14，驗證 Tor 下載檔用的簽章公鑰也一併更新。修掉接收模式在自動停止的時間到了、大檔還在上傳時拋出例外，以及大檔案的壓縮進度條數值溢位等問題。
+- 支援的平台沒有變動，仍是 Windows、macOS、Flatpak 與 Snap。
+
 ## OnionShare 2.6.5
 
 > 2026-07-28 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.5){target="_blank"}

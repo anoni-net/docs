@@ -24,6 +24,18 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.15
+
+> 2026-10-13 · [Upstream announcement](https://tails.net/news/version_7.15/){target="_blank"} · [Known vulnerabilities in 7.14](https://tails.net/security/known_security_vulnerabilities_in_7.14/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that brings in security updates to Tor Browser and tor. Tails also published a known-vulnerabilities notice for 7.14 asking users to upgrade as soon as possible. Upstream does not mention active exploitation.
+- Tor Browser moves from 15.0.24 to 15.0.25, with security fixes backported from Firefox 158; see the [Tor changelog](./tor.md). The Tor client moves to 0.4.9.14, a security release carrying three TROVE identifiers, each covered in the [tor daemon changelog](./tor-daemon.md).
+- The known-vulnerabilities notice again gives no list. Checking the 7.15 package list against Debian security advisories since 29 September, the four that missed 7.14 are all included: OpenSSL (DSA-6531-1, 13 CVEs), pcre2 (DSA-6530-1), WebKitGTK (DSA-6534-1, together with the 2 October regression fix) and libpng (DSA-6537-1).
+- Five advisories issued after 30 September are included. Three can be triggered just by opening a file: LibreOffice (DSA-6543-1, 6 CVEs), Ghostscript (DSA-6550-1) and librsvg for SVG images (DSA-6555-1). The other two are xz-utils (DSA-6549-1) and ntfs-3g (DSA-6557-1), which reads and writes NTFS disks. The latter matters directly for how Tails is used: plug in a Windows USB stick of unknown origin, and ntfs-3g is what handles its file system.
+- The kernel stays at 6.12.111; Debian's 16 October kernel security advisory (DSA-6568-1) came after this release. The curl (DSA-6558-1), JPEG XL (DSA-6564-1) and expat (DSA-6566-1) advisories also came after 14 October, and 7.15 still ships the pre-fix versions.
+- Some firmware packages are updated, improving graphics and Wi-Fi support on newer hardware.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.14
 
 > 2026-09-30 · [Upstream announcement](https://tails.net/news/version_7.14/){target="_blank"} · [Known vulnerabilities in 7.13](https://tails.net/security/known_security_vulnerabilities_in_7.13/){target="_blank"}

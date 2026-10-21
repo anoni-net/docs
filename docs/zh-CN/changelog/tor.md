@@ -18,6 +18,25 @@ digest:
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 16.0a14（Alpha 测试通道）
+
+> 2026-10-15 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a14/){target="_blank"}
+
+- <span class="chan-tag chan-tag--alpha">Alpha</span>Alpha 通道仅供测试，一般用户请继续使用稳定版（15.x）。
+- Firefox 基底 rebase 至 153.5.0esr（tor-browser#45380），并从 Firefox 158 backport 安全修补（tor-browser#45382），Android 版 GeckoView 同步。内置的 tor daemon 升到 0.4.9.14，NoScript 升至 13.6.36.90201984。
+- 内置的 lyrebird 升到 0.9.0（tor-browser-build#41896），在 Tor Browser 连接设置里开了代理的人，Snowflake 会改走那个代理（细节见[抗审查传输更新日志](./anti-censorship.md)）。Go 工具链升到 1.26.9。
+- 这一版其余的项目都在构建流程，没有界面与行为上的变更。发布文件的签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`。
+
+## Tor Browser 15.0.25
+
+> 2026-10-12 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15025/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>内置的 tor daemon 升到 0.4.9.14。那是 10 月 7 日的安全释出，修复了三个 TROVE 编号与一个让中继崩溃的 conflux 错误（细节见 [tor daemon 更新日志](./tor-daemon.md)）。上游没有提到已被实际利用。
+- 从 Firefox 158 backport 安全修补（tor-browser#45382），Firefox 基底维持 140.17.0esr。Firefox ESR 140 在 9 月 29 日的 140.17 之后就没有新版，Mozilla 10 月 13 日那一轮只发布了 153.5 与 115.43，所以这一版的 Firefox 修补全部靠 Tor Project 自己 backport，要等 16.0 稳定版才会换到 153 的基底。
+- 内置的 OpenSSL 升至 3.5.9，Alpha 16.0a13 先带进的那一批修补，稳定版到这一版才跟上。NoScript 升至 13.6.36.1984。
+- Windows 的签名问题解决了。构建流程改用新的签名证书（tor-browser-build#41890），实测 15.0.25 的 Windows 安装包由 DigiCert 签发给 The Tor Project 的 EV 证书签名，有效期从 2026 年 9 月 30 日到 2028 年 1 月 1 日。下载页的 Windows 版本也从 15.0.20 跟上到 15.0.25，全新安装不必再经过证书过期的警告。
+- 发布文件的 GPG 签名子密钥跟 15.0.24 相同，是 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`。
+
 ## Tor Browser 16.0a13（Alpha 测试通道）
 
 > 2026-10-01 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a13/){target="_blank"}
