@@ -552,6 +552,7 @@ plugins:
       categories: true
       categories_name: !ENV [CATE_NAME, "文章類型"]
   - rss:
+      image: https://anoni.net/docs/assets/images/logo-tonal.png
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
