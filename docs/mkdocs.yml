@@ -86,6 +86,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/shutdown.md
+          - scenarios/org-website-vulnerability.md
       - !ENV [NAV_REPORTS, "研究報告中譯"]:
           - reports/index.md
           - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:

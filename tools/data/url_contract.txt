@@ -2526,6 +2526,20 @@
 	#Whats-next
 	#Where-the-Tornado-Cash-sanctions-case-puts-the-legal-line
 	#Why-this-needs-its-own-guide
+/en/scenarios/org-website-vulnerability/
+	#Checking-and-responding-to-a-critical-vulnerability-on-your-organisations-website
+	#Checks-after-patching
+	#How-this-differs-by-situation
+	#Options-when-patching-is-not-yet-possible
+	#Preparing-ahead
+	#Questions-for-your-host-or-contractor
+	#Reading-version-numbers
+	#Related-reading
+	#Scope-of-this-page
+	#Taiwan-in-context
+	#When-something-looks-wrong
+	#Where-the-site-lives-and-who-is-responsible-for-each-layer
+	#Where-to-get-help
 /en/scenarios/shutdown/
 	#Agree-who-does-what-with-the-people-you-live-with
 	#Agreeing-things-with-other-people-in-advance
@@ -2625,6 +2639,7 @@
 	#Organizational-data-scattered-across-free-services
 	#Regulation-as-a-worked-example
 	#Someone-wants-to-pass-you-information-but-will-not-use-a-named-channel
+	#The-organizations-website
 	#Three-pages-for-your-first-twenty-minutes
 	#Three-things-you-are-probably-dealing-with
 	#What-this-path-does-not-cover
@@ -3889,6 +3904,20 @@
 	#跨情境的共通取捨
 	#通道對應表
 	#顯示收款地址的網頁設計
+/scenarios/org-website-vulnerability/
+	#不同處境的差異
+	#修補後的檢查
+	#台灣的脈絡
+	#平時的準備
+	#暫時無法修補時的選項
+	#本頁的範圍
+	#求助管道
+	#版本號的判讀
+	#發現異常時
+	#相關閱讀
+	#組織網站遇到重大漏洞時的確認與應對
+	#給主機商或外包商的問題
+	#網站放在哪裡誰負責哪一層
 /scenarios/shutdown/
 	#一要談好的六件事
 	#三驗證的人必須先知道答案
@@ -3991,6 +4020,7 @@
 	#捐款人不想留下紀錄組織仍需開立收據
 	#有人想提供線索卻不敢用實名管道
 	#組織內部的協作
+	#組織的網站
 	#組織的資料散在各種免費服務上
 	#這條路徑沒有處理的
 /start/developer/
@@ -6389,6 +6419,20 @@
 	#警示Tornado-Cash-制裁案例
 	#跨情境的共通取舍
 	#通道对应表
+/zh-cn/scenarios/org-website-vulnerability/
+	#不同处境的差异
+	#修补后的检查
+	#发现异常时
+	#台湾的脉络
+	#平时的准备
+	#暂时无法修补时的选项
+	#本页的范围
+	#求助渠道
+	#版本号的判读
+	#相关阅读
+	#组织网站遇到重大漏洞时的确认与应对
+	#给主机商或外包商的问题
+	#网站放在哪里谁负责哪一层
 /zh-cn/scenarios/shutdown/
 	#一要谈好的六件事
 	#三验证的人必须先知道答案
@@ -6493,6 +6537,7 @@
 	#有人想提供线索却不敢用实名渠道
 	#组织内部的协作
 	#组织的数据散在各种免费服务上
+	#组织的网站
 	#这条路径没有处理的
 /zh-cn/start/developer/
 	#二十分钟先确认方向

@@ -48,6 +48,10 @@ offline_caution: true
 - [什麼是 CryptPad](../tools/what-is-cryptpad.md)：共筆與表單的替代方案
 - [社群自架服務](https://anoni.net/services/){target="_blank"}：Matrix、CryptPad、Send、表單，社群自架的幾套都開放使用
 
+### 組織的網站
+
+- [組織網站遇到重大漏洞時的確認與應對](../scenarios/org-website-vulnerability.md)：網站的哪一層歸誰更新、要問主機商或外包商什麼，以及修補後的檢查
+
 ### 對外的線索與捐款
 
 - [上傳機敏資訊流程](https://anoni.net/join/upload-sensitive/){target="_blank"}：社群自己在用的那條通道，檔案走自架的 Send，連結會自動失效

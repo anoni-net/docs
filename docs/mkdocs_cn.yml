@@ -86,6 +86,7 @@ nav:
           - scenarios/domestic-violence.md
           - scenarios/election-observer.md
           - scenarios/shutdown.md
+          - scenarios/org-website-vulnerability.md
       - !ENV [NAV_REPORTS, "研究报告中译"]:
           - reports/index.md
   # taiwan/index.md 把法规那三篇分成「个资与身分」「金流」「制度与技术交界」，各自

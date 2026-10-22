@@ -48,6 +48,10 @@ offline_caution: true
 - [什么是 CryptPad](../tools/what-is-cryptpad.md)：共笔与表单的替代方案
 - [沟通与协作工具](https://anoni.net/zh-cn/services/){target="_blank"}：Matrix、CryptPad、Send、表单，社区自架的几套都开放使用
 
+### 组织的网站
+
+- [组织网站遇到重大漏洞时的确认与应对](../scenarios/org-website-vulnerability.md)：网站的哪一层归谁更新、要问主机商或外包商什么，以及修补后的检查
+
 ### 对外的线索与捐款
 
 - [上传机敏信息流程](https://anoni.net/zh-cn/join/upload-sensitive/){target="_blank"}：社区自己在用的那条通道，文件走自架的 Send，链接会自动失效
