@@ -83,12 +83,15 @@ Specific amounts and calculation methods follow the operative text and the Commi
 
 ## Breach notification
 
-This is a new obligation, effective only after establishment and the designated commencement date. Organizations can build detection and notification procedures ahead of time rather than scrambling when the law starts running.
+Article 12 as currently in force requires a government agency or non-government entity that violates the PDPA, resulting in personal data being stolen, leaked, altered or otherwise infringed, to notify the data subjects by appropriate means after investigating. This duty applies now. Article 12 sets no deadline and does not require a report to a supervisory authority. Where a sector regulator has its own rules, those apply.
 
-Two layers of duty become explicit:
+The amendments promulgated on 11 November 2025 rewrite Article 12, and take effect only on a commencement date set by the Executive Yuan. As of 22 October 2026, that date had not been set. The amended duties fall into three parts:
 
-- **Notify the Commission**: a data controller must notify within a prescribed period after discovering a breach. The parent act delegates the specific deadline to secondary legislation, and the draft is structured close to GDPR's 72 hours. The final text is pending
-- **Notify data subjects**: where a breach is likely to pose serious risk to the individuals concerned
+- **Notify data subjects**: on becoming aware that personal data it holds has been stolen, altered, damaged, destroyed or leaked, an entity must notify the data subjects. The amended text does not make this depend on a violation of the act or on the level of risk
+- **Report to the Commission**: where a breach falls within a prescribed reporting scope, a non-government entity must report it to the competent authority (the Commission), which passes it on to the relevant sector regulator
+- **Respond and keep records**: take prompt and effective measures to stop the incident from spreading, and record the facts, the impact and the measures taken, keeping those records for inspection
+
+The amendments leave the content, method, deadline and scope of notification and reporting, along with response measures and record-keeping, to regulations issued by the Commission. As of 22 October 2026, no such regulations appeared in Taiwan's Laws & Regulations Database, so the deadline is not yet known. Under amended Article 48(2), a non-government entity that breaches the reporting, response-measure and record-keeping rules faces a fine of NT$20,000 to NT$200,000 and an order to correct the breach within a set period, with repeated fines if it does not. An entity that fails to notify data subjects is first ordered to correct this under Article 48(1), and fined repeatedly only if it does not.
 
 For organizations this means an internal standard operating procedure for detection, assessment, and notification. For individuals it means treating such a notice as real and acting on it: change the password, turn on two-factor authentication, check for unfamiliar sessions.
 
@@ -129,7 +132,7 @@ The amended PDPA moves visibly toward GDPR while keeping differences:
 | Supervisory authority | Member state data protection authorities (DPAs) | Personal Data Protection Commission |
 | Cross-border transfer | Adequacy decisions, standard contractual clauses, binding corporate rules | Commission-published adequacy list, plus supplementary safeguards |
 | Maximum fine | 4% of global annual turnover or €20 million, whichever is higher | Fixed ceiling, per the operative text and rulings |
-| Breach notification | 72 hours to the supervisory authority | Within a prescribed period to the Commission |
+| Breach notification | 72 hours to the supervisory authority | Report to the Commission where the prescribed scope applies, with the deadline left to regulations not found in the database as of 22 October 2026 (amended text, not yet in force) |
 | DPO | Mandatory in specified circumstances | Advisory, potentially mandatory in specific sectors |
 | Scope | Extraterritorial reach | Natural and legal persons processing personal data in Taiwan |
 
