@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 565" width="400" height="565" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 582" width="400" height="582" role="img" aria-labelledby="title">
 <title id="title">場景層的閱讀地圖，先做到共同基準再依身分往上走</title>
 <style>
   text { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif; }
@@ -45,9 +45,10 @@
 <text class="t-main h2" x="26" y="406">依你在哪裡發言</text>
 <text class="t-mute bd" x="26" y="423">在中國大陸的公開平台傳播資訊</text>
 <text class="t-mute bd" x="26" y="440">在新加坡與馬來西亞的網路發言</text>
-<rect class="card-n" x="12" y="464" width="376" height="89" rx="8"/>
+<rect class="card-n" x="12" y="464" width="376" height="106" rx="8"/>
 <text class="t-main h2" x="26" y="488">依移動與外部事件</text>
 <text class="t-mute bd" x="26" y="505">出差與研討會的數位準備</text>
 <text class="t-mute bd" x="26" y="522">出國前用 AI 產生目的地概況</text>
 <text class="t-mute bd" x="26" y="539">網路中斷時的準備與應對</text>
+<text class="t-mute bd" x="26" y="556">組織網站遇到重大漏洞時的應對</text>
 </svg>

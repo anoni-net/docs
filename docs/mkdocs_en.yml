@@ -85,6 +85,7 @@ nav:
           - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md
           - scenarios/shutdown.md
+          - scenarios/org-website-vulnerability.md
       - !ENV [NAV_REPORTS, "Translated Reports"]:
           - reports/index.md
   # Groups follow the article list in regional/index.md.

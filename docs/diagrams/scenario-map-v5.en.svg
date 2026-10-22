@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 653" width="400" height="653" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 670" width="400" height="670" role="img" aria-labelledby="title">
 <title id="title">A reading map for the scenarios, starting from one shared baseline</title>
 <style>
   text { font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; }
@@ -50,9 +50,10 @@
 <text class="t-main h2" x="26" y="494">By where you speak</text>
 <text class="t-mute bd" x="26" y="511">Publishing on mainland Chinese platforms</text>
 <text class="t-mute bd" x="26" y="528">Posting online in Singapore and Malaysia</text>
-<rect class="card-n" x="12" y="552" width="376" height="89" rx="8"/>
+<rect class="card-n" x="12" y="552" width="376" height="106" rx="8"/>
 <text class="t-main h2" x="26" y="576">By travel and external events</text>
 <text class="t-mute bd" x="26" y="593">Business trips and conferences</text>
 <text class="t-mute bd" x="26" y="610">An AI-assisted destination briefing</text>
 <text class="t-mute bd" x="26" y="627">Preparing for a network shutdown</text>
+<text class="t-mute bd" x="26" y="644">A critical flaw on your organisation&#39;s site</text>
 </svg>

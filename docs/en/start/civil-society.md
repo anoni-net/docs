@@ -48,6 +48,10 @@ See [anonymous donation channels for advocacy organizations](../scenarios/nonpro
 - [What is CryptPad?](../tools/what-is-cryptpad.md): an alternative for shared documents and forms
 - [Community services](https://anoni.net/en/services/){target="_blank"}: Matrix, CryptPad, Send, and forms, all community-run and open for use
 
+### The organization's website
+
+- [Checking and responding to a critical vulnerability on your organisation's website](../scenarios/org-website-vulnerability.md): which layer of the site is whose to update, what to ask your host or contractor, and the checks after patching
+
 ### Intake and donations
 
 - [Sending us sensitive material](https://anoni.net/en/join/upload-sensitive/){target="_blank"}: the channel the community uses itself, files go through a self-hosted Send instance and links expire on their own
