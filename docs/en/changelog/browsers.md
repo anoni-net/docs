@@ -50,13 +50,13 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Firefox October 2026
 
-> 2026-10-20 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-21 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 158 on 13 October fixed 77 issues, 30 High, 33 Moderate and 14 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. The latest is 158.0.1 from 20 October.
+- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 158 on 13 October fixed 77 issues, 30 High, 33 Moderate and 14 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. The latest desktop release is 158.0.1 from 20 October.
 - Starting with this release Mozilla changed how it writes advisories: memory safety bugs found internally are no longer rolled into a single aggregate CVE, and each bug now gets its own number. That inflates the High count compared with earlier releases, which is worth knowing when comparing figures across months. The stock "could have been exploited" sentence that appeared in every release went away together with the aggregate entries.
 - The High fixes in 158 include four sandbox escapes in networking and graphics components (CVE-2026-109705, CVE-2026-109707, CVE-2026-109708, CVE-2026-109712), a privilege escalation in the application update component (CVE-2026-109704), and seven in the JavaScript engine and JIT compiler. Most of the rest are use-after-free bugs in DOM, SVG, graphics and media components.
 - 158.0.1 fixed four issues, two of them High. One concerns certificates: intermediate certificates from eMudhra were misused, and Mozilla blocked them through OneCRL (Firefox's certificate revocation list) on 17 October. OneCRL normally updates automatically through remote settings; this release ships the updated list inside the program, so people who have turned remote settings off are protected too (CVE-2026-113470). The other is a boundary condition error in SVG (CVE-2026-113399).
-- ESR 153.5 and 115.43 shipped with 158 on 13 October, fixing 61 and 17 respectively, and 153.5.1 and 115.43.1 on 20 October added the eMudhra fix. ESR 140 had no matching release this round.
+- ESR 153.5 and 115.43 shipped with 158 on 13 October, fixing 61 and 17 respectively, and 153.5.1 and 115.43.1 on 20 October added the eMudhra fix. ESR 140 had no matching release this round. On Android, 158.0.2 followed on 21 October with only the eMudhra fix. For the matching Tor Browser 15.0.26 and GrapheneOS updates, see the [Tor changelog](./tor.md) and the [GrapheneOS monthly summary](./grapheneos.md).
 - 157.0.1 on 6 October fixed a single Moderate issue, a mitigation bypass in the File Handling component (CVE-2026-106016).
 
 ## Chrome September 2026

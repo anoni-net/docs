@@ -17,8 +17,13 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 
 ## October 2026
 
-> Releases `2026100200`, `2026100600`, `2026101600` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+> Releases `2026100200`, `2026100600`, `2026101600`, `2026102100` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
+- `2026102100` on 21 October removes eMudhra's ECDSA root certificate because intermediate certificates under it were compromised. Vanadium already received this removal through GrapheneOS's servers as an out-of-band component update when it shipped for Chrome; this release removes the copy built into the system. Both legacy eMudhra roots go too, leaving only the heavily used RSA root, which GrapheneOS says it is considering removing or disabling by default even though other platforms are not removing it at this time. The matching Firefox fix is in [browser security updates](./browsers.md).
+- Auditor gets a built-in exemption from app hibernation. After 90 days without being opened, hibernation removed Auditor's scheduled remote attestation job, which then produced alerts until the user opened the app again.
+- Sandboxed Google Play fixes two compatibility problems: some services crashing with new versions of Play services and the Play Store, and the Google Search app failing to install.
+- The hardening for apps with lockscreen activities added in the previous release is reverted because of compatibility issues. The release notes do not say whether this is the same item as the lockscreen weakness fixed in that release.
+- All four kernel branches (6.1, 6.6, 6.12, 6.18) get additional upstream security patches not yet in the GKI LTS branches, and 6.12 and 6.18 move to the latest GKI LTS revision. 6.18 brings back linear map randomization, which makes kernel memory addresses harder to predict.
 - `2026101600` on 16 October moves the Pixel kernel drivers to the October 2026 versions. GrapheneOS states the update was delayed because Google had not released the source code as required by GPLv2, and also states that none of the security fixes listed in Google's October Pixel Update Bulletin fall in the kernel drivers for 6th through 10th generation Pixels, so the delay did not hold those fixes back.
 - The same release fixes two upstream Android vulnerabilities: WindowManagerService mixing up the PID and UID parameters, and an activity that had been covered by the lock screen being shown again after another activity finished.
 - The Sensors permission now extends to device-specific sensor types, which on Pixels adds the temperature, pressure and proximity sensors. Apps without the permission cannot read them.

@@ -13,6 +13,17 @@ digest:
 
 App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與命令列工具（OONI Probe CLI）是 3.x，app 內建的就是某一版引擎。做資料分析或自己排量測的人看引擎那幾則，量測行為的變動寫在那裡。
 
+## OONI Probe CLI v3.31.0
+
+> 2026-10-22 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.31.0){target="_blank"}
+
+- 量測引擎與命令列工具的新版。跨平台應用最新的 6.2.1 仍帶 v3.30.0，app 要等下一次發版才會換上這一版引擎。
+- 安全相關的有兩項，發布說明沒有提到已被實際利用。內建的 CA 憑證清單移除 eMudhra 的根憑證，原因是它底下的中繼憑證遭到盜用（#1853）。Go 升到 1.27.3，納入 CVE-2026-111943 的修補，Go 的 `crypto/x509` 新增一份黑名單，系統的信任清單沒有更新時，也會拒絕已知不再可信的中繼憑證（#1854）。
+- 新增 richer input 的支援，排給量測的每個網址或目標可以附帶各自的設定。網路連線測試（Web Connectivity）、即時通訊類的測試，以及從 check-in 取得清單的實驗都已經接上，check-in 也可以指定實驗的版本。命令列的 miniooni 支援 OONI Run v2.1。
+- 新增 DDR 實驗，檢查系統使用的 DNS 解析器有沒有透過 DDR（RFC 9462，讓解析器告訴用戶端自己支援哪些加密 DNS 的協定）公布加密 DNS 的入口。TLS 中間設備探測（tlsmiddlebox）加上 TCP traceroute，也為了在手機版推出做了調整。
+- 修正：Psiphon 測試停用時不再送出它的量測結果，echcheck 在 TCP 連線失敗時不再嘗試 TLS 交握，原本使用的 STUN 伺服器 stun.ekiga.net 換成 Cloudflare 的。
+- 建置工具鏈更新：Go 從 1.26 系列升到 1.27.3，Debian 映像檔換成 bookworm，Android NDK 與 C 相依套件升到最新版，quic-go 升到 0.56.0。
+
 ## OONI Probe 6.2.1
 
 > 2026-09-28 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}

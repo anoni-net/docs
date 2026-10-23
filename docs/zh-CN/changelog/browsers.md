@@ -50,13 +50,13 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 ## Firefox 2026 年 10 月
 
-> 2026-10-20 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-21 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>10 月 13 日的 Firefox 158 修复了 77 个问题，High 30 个、Moderate 33 个、Low 14 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。目前最新的是 10 月 20 日的 158.0.1。
+- <span class="urg-tag urg-tag--soon">尽快</span>10 月 13 日的 Firefox 158 修复了 77 个问题，High 30 个、Moderate 33 个、Low 14 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。桌面版目前最新的是 10 月 20 日的 158.0.1。
 - Mozilla 从这一版起改了公告的写法，内部发现的内存安全错误不再合并成一个汇总的 CVE，改成一个错误一个编号。High 的数量因此比过去多，跨月比较数字时要知道这件事。过去每版都有的那句「could have been exploited」固定套话，也跟着汇总条目一起消失了。
 - 158 的 High 里有 4 个沙箱逃逸，落在网络与图形组件（CVE-2026-109705、CVE-2026-109707、CVE-2026-109708、CVE-2026-109712），应用程序更新组件有一个提权（CVE-2026-109704），JavaScript 引擎与 JIT 编译器有 7 个。其余多是 DOM、SVG、图形与音视频组件的 use-after-free。
 - 158.0.1 修复了 4 个问题，其中 2 个 High。一个跟证书有关，eMudhra 的中间证书遭到滥用，Mozilla 在 10 月 17 日通过 OneCRL（Firefox 的证书吊销列表）封锁了它们。OneCRL 平常靠远程设置自动更新，这一版把更新后的列表直接放进程序里，关掉远程设置的人也会拦下这些证书（CVE-2026-113470）。另一个是 SVG 的边界条件错误（CVE-2026-113399）。
-- ESR 153.5 与 115.43 在 10 月 13 日跟着 158 发布，分别修复了 61 个与 17 个，10 月 20 日的 153.5.1 与 115.43.1 再补上 eMudhra 那一项。ESR 140 这一轮没有对应的版本。
+- ESR 153.5 与 115.43 在 10 月 13 日跟着 158 发布，分别修复了 61 个与 17 个，10 月 20 日的 153.5.1 与 115.43.1 再补上 eMudhra 那一项。ESR 140 这一轮没有对应的版本。Android 版在 10 月 21 日另发 158.0.2，同样只补 eMudhra 那一项。Tor Browser 15.0.26 与 GrapheneOS 的对应更新见 [Tor 更新日志](./tor.md)与 [GrapheneOS 月度更新摘要](./grapheneos.md)。
 - 10 月 6 日的 157.0.1 只修复了一个 Moderate 等级的问题，文件处理组件的防护机制可以被绕过（CVE-2026-106016）。
 
 ## Chrome 2026 年 9 月

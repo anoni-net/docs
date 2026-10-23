@@ -17,8 +17,13 @@ GrapheneOS 走自动更新，设备在后台就会装好，一般用户不需要
 
 ## 2026 年 10 月
 
-> 版本 `2026100200`、`2026100600`、`2026101600` · [官方发布页](https://grapheneos.org/releases){target="_blank"}
+> 版本 `2026100200`、`2026100600`、`2026101600`、`2026102100` · [官方发布页](https://grapheneos.org/releases){target="_blank"}
 
+- 10 月 21 日的 `2026102100` 移除 eMudhra 的 ECDSA 根证书，原因是它下面的中间证书遭到盗用。Vanadium 在 Chrome 推出这项移除时，就通过 GrapheneOS 的服务器以组件更新的方式收到了，这一版移除的是系统内置的那一份。两张旧的 eMudhra 根证书也一并移除，只剩使用量很大的 RSA 根证书，GrapheneOS 写明正在考虑移除或默认停用它，尽管其他平台目前没有这样做。Firefox 那边的同一项修补见[浏览器安全更新](./browsers.md)。
+- Auditor 加入 app 休眠的内置豁免。Auditor 90 天没有打开就会被系统休眠，远程验证的排程任务跟着被移除，之后会一直产生警示，直到用户打开 app 为止。
+- Sandboxed Google Play 修复两个兼容问题：新版 Play 服务与 Play 商店的部分服务会崩溃，以及无法安装 Google 搜索 app。
+- 撤回上一版给带有锁屏 activity 的 app 加上的强化，原因是兼容性问题。发布说明没有写明这一项跟上一版修复的锁屏弱点是否同一件事。
+- 四条内核线（6.1、6.6、6.12、6.18）补上还没进入 GKI LTS 分支的上游安全修补，6.12 与 6.18 跟上 GKI LTS 的最新修订。6.18 恢复线性映射随机化（linear map randomization），让内核内存的地址更难预测。
 - 10 月 16 日的 `2026101600` 把 Pixel 的内核驱动换成 2026 年 10 月的版本。GrapheneOS 写明这次更新推迟，原因是 Google 一直没有按 GPLv2 发布源代码，也写明 Google 十月 Pixel 更新公告列出的安全修补，没有一项落在第 6 到第 10 代 Pixel 的内核驱动里，所以这次推迟没有让那些修补跟着推迟。
 - 同一版修掉两个上游 Android 的安全漏洞：WindowManagerService 把 PID 与 UID 两个参数弄混，以及一个 activity 结束之后，原本被锁屏界面盖住的 activity 会被恢复显示。
 - 传感器权限的范围扩大到设备自定义的传感器类型，在 Pixel 上实际多涵盖温度、气压与距离传感器。没有授予这项权限的 app，读不到这几种传感器。

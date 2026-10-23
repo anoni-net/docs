@@ -18,6 +18,15 @@ digest:
 
 Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 跟著改，穩定版的更新會比過去更密。
 
+## Tor Browser 15.0.26
+
+> 2026-10-21 · [上游公告](https://blog.torproject.org/new-release-tor-browser-15026/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>這一版只有一項變更，更新內建的 CA 中繼憑證清單與其他設定資料（tor-browser#45397），擋下 eMudhra 遭到盜用的中繼憑證。Firefox 158.0.1 修的是同一個問題（CVE-2026-113470，細節見[瀏覽器安全更新](./browsers.md)），上游沒有提到已被實際利用。
+- Firefox ESR 140 沒有對應的新版，這一項由 Tor Project 自己帶進來。工單把它標成高影響的安全問題，也評估過直接改發 16.0 穩定版。
+- 公告提醒，更新後第一次啟動時，更新過的憑證撤銷資料庫可能要幾分鐘才建好。
+- 其餘元件跟 15.0.25 相同，發布檔的簽章子金鑰仍是 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`。
+
 ## Tor Browser 16.0a14（Alpha 測試通道）
 
 > 2026-10-15 · [上游公告](https://blog.torproject.org/new-alpha-release-tor-browser-160a14/){target="_blank"}

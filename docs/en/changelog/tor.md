@@ -18,6 +18,15 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 15.0.26
+
+> 2026-10-21 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-15026/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>This release has a single change: it updates the bundled CA intermediate certificates and other settings dumps (tor-browser#45397), blocking the compromised eMudhra intermediate certificates. Firefox 158.0.1 fixed the same issue (CVE-2026-113470, details in [browser security updates](./browsers.md)). Upstream does not mention exploitation in the wild.
+- Firefox ESR 140 has no matching release, so the Tor Project brought this fix in itself. The ticket marks it as a high-impact security issue and also weighed shipping 16.0 stable straight away instead.
+- The announcement notes that the first time the browser starts after updating, the updated revocation database can take a few minutes to build.
+- Everything else is the same as 15.0.25, and the release files' signing subkey is still `022DA248432D2A0E0F54E65E316C1FACD62D07D9`.
+
 ## Tor Browser 16.0a14 (alpha)
 
 > 2026-10-15 · [Upstream announcement](https://blog.torproject.org/new-alpha-release-tor-browser-160a14/){target="_blank"}
