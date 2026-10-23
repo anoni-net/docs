@@ -13,6 +13,17 @@ digest:
 
 The app and the engine version independently. The cross-platform app is 6.x, while the measurement engine and command-line tool (OONI Probe CLI) are 3.x, and each app build bundles one engine version. If you analyse data or schedule your own measurements, read the engine entries: that is where changes to measurement behaviour land.
 
+## OONI Probe CLI v3.31.0
+
+> 2026-10-22 · [Upstream release](https://github.com/ooni/probe-cli/releases/tag/v3.31.0){target="_blank"}
+
+- A new release of the measurement engine and command-line tool. The latest cross-platform app, 6.2.1, still bundles v3.30.0, so the app picks up this engine only in its next release.
+- Two changes are security-related, and the release notes do not mention exploitation in the wild. The bundled CA certificate list drops eMudhra's root certificate after the compromise of intermediates under it (#1853). Go moves to 1.27.3 to include the fix for CVE-2026-111943, which adds a denylist to Go's `crypto/x509` so that known untrustworthy intermediate certificates are rejected even where the system trust store has not been updated (#1854).
+- Adds richer input support, so each URL or target scheduled for measurement can carry its own settings. Web Connectivity, the instant messaging tests, and the experiments that get their list from check-in are all wired up, and check-in can also specify experiment versions. The miniooni command-line tool supports OONI Run v2.1.
+- Adds a DDR experiment that checks whether the system's DNS resolver advertises encrypted DNS endpoints through DDR (RFC 9462, which lets a resolver tell clients which encrypted DNS protocols it supports). The TLS middlebox probe (tlsmiddlebox) gains TCP traceroute and was adjusted for its launch on mobile.
+- Fixes: Psiphon measurements are no longer submitted when Psiphon is disabled, echcheck no longer attempts a TLS handshake when the TCP connection failed, and the STUN server stun.ekiga.net is replaced with Cloudflare's.
+- Toolchain updates: Go moves from the 1.26 series to 1.27.3, the Debian image moves to bookworm, the Android NDK and C dependencies move to their latest versions, and quic-go moves to 0.56.0.
+
 ## OONI Probe 6.2.1
 
 > 2026-09-28 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}

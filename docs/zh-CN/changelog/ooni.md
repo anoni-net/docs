@@ -11,6 +11,17 @@ digest:
 
 [OONI](../tools/what-is-ooni.md) Probe、Explorer、Run 等网络审查观测工具的版本更新整理。新版本永远在最上面，每个条目附「完整翻译文章」链接。
 
+## OONI Probe CLI v3.31.0
+
+> 2026-10-22 · [上游发布页](https://github.com/ooni/probe-cli/releases/tag/v3.31.0){target="_blank"}
+
+- 测量引擎与命令行工具的新版。跨平台应用最新的 6.2.1 仍带 v3.30.0，app 要等下一次发版才会换上这一版引擎。
+- 安全相关的有两项，发布说明没有提到已被实际利用。内置的 CA 证书列表移除 eMudhra 的根证书，原因是它下面的中间证书遭到盗用（#1853）。Go 升到 1.27.3，纳入 CVE-2026-111943 的修补，Go 的 `crypto/x509` 新增一份黑名单，系统的信任列表没有更新时，也会拒绝已知不再可信的中间证书（#1854）。
+- 新增 richer input 的支持，排给测量的每个网址或目标可以附带各自的设置。网络连接测试（Web Connectivity）、即时通讯类的测试，以及从 check-in 获取列表的实验都已经接上，check-in 也可以指定实验的版本。命令行的 miniooni 支持 OONI Run v2.1。
+- 新增 DDR 实验，检查系统使用的 DNS 解析器有没有通过 DDR（RFC 9462，让解析器告诉客户端自己支持哪些加密 DNS 的协议）公布加密 DNS 的入口。TLS 中间设备探测（tlsmiddlebox）加上 TCP traceroute，也为了在手机版推出做了调整。
+- 修正：Psiphon 测试停用时不再提交它的测量结果，echcheck 在 TCP 连接失败时不再尝试 TLS 握手，原本使用的 STUN 服务器 stun.ekiga.net 换成 Cloudflare 的。
+- 构建工具链更新：Go 从 1.26 系列升到 1.27.3，Debian 镜像换成 bookworm，Android NDK 与 C 依赖升到最新版，quic-go 升到 0.56.0。
+
 ## OONI Probe 6.2.1
 
 > 2026-09-28 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.2.1){target="_blank"}

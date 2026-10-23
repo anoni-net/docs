@@ -919,6 +919,7 @@
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
+	#OONI-Probe-CLI-v3310
 	#OONI-更新日誌
 /changelog/tails/
 	#Tails-618
@@ -970,6 +971,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-15024
 	#Tor-Browser-15025
+	#Tor-Browser-15026
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -1871,6 +1873,7 @@
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
+	#OONI-Probe-CLI-v3310
 /en/changelog/tails/
 	#How-we-rate-urgency
 	#Tails-618
@@ -1914,6 +1917,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-15024
 	#Tor-Browser-15025
+	#Tor-Browser-15026
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -5803,6 +5807,7 @@
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
+	#OONI-Probe-CLI-v3310
 	#OONI-Probe-Desktop-601-beta
 	#OONI-更新日志
 /zh-cn/changelog/tails/
@@ -5850,6 +5855,7 @@
 	#Tor-Browser-15023
 	#Tor-Browser-15024
 	#Tor-Browser-15025
+	#Tor-Browser-15026
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道
