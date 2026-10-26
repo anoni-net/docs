@@ -65,6 +65,10 @@ Encoding is handled by [qrcode-generator](https://github.com/kazuhikoarase/qrcod
 
 We wrote a separate decoder inside the test suite that reads the generated image back into text and compares, so the way we call the library is covered. Writing that test turned up a real defect: the library treats strings as Latin-1 by default, which mangles anything outside ASCII.
 
+## Gears
+
+[Gears](https://anoni.net/gears/en/qrcode/){target="_blank"}, the community's file workbench, can also make QR codes, with extra formats for Wi-Fi, contacts, events, locations, email, phone calls and text messages that a phone camera turns straight into an action (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the rest of this section, the code is stored on your device and runs without a network. Try it with the network off. It still draws, which means what you typed cannot have been sent anywhere.

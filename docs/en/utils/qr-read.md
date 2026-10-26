@@ -100,6 +100,10 @@ Decoding is handled by [jsQR](https://github.com/cozmo/jsQR){target="_blank"} (A
 
 Decoding means finding the code in the frame, straightening out the angle it was shot at, and restoring parts that are obscured or dirty, a considerably larger job than encoding. The tests generate codes with known contents using qrcode-generator from the [generator](qrcode.md) page and read them back with jsQR, so two independent libraries check each other.
 
+## Gears
+
+[Gears](https://anoni.net/gears/en/qr-read/){target="_blank"}, the community's file workbench, can also read QR codes. It also recognizes barcodes such as boarding passes, product codes and Taiwanese e-invoices, plus payment codes, Tor bridges and passkey cross-device sign-in codes, and warns about the risky ones (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the rest of this section, the code is stored on your device and runs without a network. What you scan may be exactly what you do not want leaving your machine, and reading it offline keeps the image away from any server.

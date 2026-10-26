@@ -45,6 +45,7 @@ find .. -maxdepth 1 -type f -name '*.md' -exec sed -i \
 	-e "s|https://form.anoni.net|http://form.${ONION_ROOT}|g" \
 	-e "s|https://pad.anoni.net|http://pad.${ONION_ROOT}|g" \
 	-e "s|](https://anoni.net/news|](http://news.${ONION_ROOT}|g" \
+	-e "s|](https://anoni.net/gears|](http://gears.${ONION_ROOT}|g" \
 	-e "s|](https://anoni.net/|](http://${ONION_ROOT}/|g" \
 	{} +
 
@@ -62,11 +63,13 @@ find ./ -path './onion' -prune -o \
 # 搬到官網之後改連過去的 /about/、/contact/。官網的 onion 版三個語系的路徑跟 clearnet
 # 相同。只比對 Markdown 連結的 `](...)` 形式，JSON-LD 裡的 `https://anoni.net/#organization`
 # 是組織的識別碼，不是讓讀者點的連結，刻意不改。/docs 與 /api 在上面已經改過，
-# /news 是另一個子網域，要排在根位址那一條之前。
+# /news 與 /gears 各是另一個子網域（news.<onion>、gears.<onion>，路徑裡的語系照舊），
+# 要排在根位址那一條之前。
 find ./ -path './onion' -prune -o \
 	-type f -name '*.md' \
 	-exec sed -i \
 		-e "s|](https://anoni.net/news|](http://news.${ONION_ROOT}|g" \
+		-e "s|](https://anoni.net/gears|](http://gears.${ONION_ROOT}|g" \
 		-e "s|](https://anoni.net/|](http://${ONION_ROOT}/|g" {} +
 
 # 互動作品的 JS 裡連到官網的連結，例如洋蔥路由英文版連到 2026-10 搬到官網的

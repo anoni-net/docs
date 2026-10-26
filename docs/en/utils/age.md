@@ -147,6 +147,10 @@ Passphrase mode has no keys to manage, at the cost that the strength of the encr
 - The first use needs a connection to fetch the code. After that it stays on the device.
 - Browsers with the JavaScript JIT off compute scrypt fifty times slower or more. One pass took 50 seconds on a desktop in testing. IronFox turns the JIT off by default (Settings, Security), and Tor Browser's Safer level does too. The tool measures first and shows an estimate. The page stays usable while it works.
 
+## Gears
+
+Encryption in [Gears](https://anoni.net/gears/en/encrypt/){target="_blank"}, the community's file workbench, also produces age files, with a passphrase or the recipient's public key, and the finished screen includes decryption instructions for the recipient. It also has an [age key generator](https://anoni.net/gears/en/age-keygen/){target="_blank"} and [text encryption](https://anoni.net/gears/en/text-crypt/){target="_blank"} (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the rest of this section, the code stays on your device once stored and works without a network. That is the most direct proof that neither the file nor the passphrase was sent anywhere.

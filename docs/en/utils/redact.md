@@ -85,6 +85,10 @@ No blur and no pixelation, for the reason above.
 
 No video.
 
+## Gears
+
+[Gears](https://anoni.net/gears/en/redact/){target="_blank"}, the community's file workbench, can also redact. It accepts PDFs (each page becomes an image before it is blacked out, so the original text layer is gone) and can use on-device text recognition to find phone numbers, email addresses and ID numbers. It only draws the boxes; the decision stays with you. When a photo is evidence, you can choose to keep the capture time and place (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the rest of this section, the code stays on your device once stored and works without a network. That is the most direct proof that the image was never sent anywhere.

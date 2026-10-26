@@ -171,6 +171,10 @@ No face blurring. Face blurring needs a face detection model, which is an entire
 
 Annotations and attachments inside a PDF can each carry their own author and timestamps. The page only handles document-level descriptive fields and flags files that carry annotations in the results.
 
+## Gears
+
+[Gears](https://anoni.net/gears/en/strip-metadata/){target="_blank"}, the community's file workbench, can also remove metadata and handles more formats than this page, including iPhone HEIC, AVIF, TIFF, MKV, WebM, AVI, FLAC, Ogg and OpenDocument. Files inside a ZIP archive are cleaned too (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the other tools in this section, the code runs from your device once it has been stored, with no network needed. Working while disconnected is the most direct evidence there is that the file is not being sent anywhere.
