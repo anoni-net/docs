@@ -84,6 +84,10 @@ No password removal. Unlock a protected PDF with whatever you normally use to op
 
 No automatic judgement about what is sensitive. "Look inside" lays the text out for you, but only you know which part matters.
 
+## Gears
+
+When you only want to hand over some pages of a PDF, [Gears](https://anoni.net/gears/en/pdf-pages/){target="_blank"}, the community's file workbench, also strips the references other pages leave in links, bookmarks and forms, warns you when kept and removed pages share fonts, and can turn the pages into images instead (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like everything else in this section, the code works with the network off once it is stored on your device, which is the most direct proof that your files are not being sent anywhere.

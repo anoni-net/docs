@@ -170,6 +170,10 @@ TIFF、RAW、MKV、WebM、AVI、FLAC、OGG 與 OpenDocument（ODT、ODS）目前
 
 PDF 裡的註解與附件各自可能帶著作者與時間，頁面只處理文件層級的描述欄位，遇到帶註解的檔案會在處理結果裡標出來。
 
+## Gears 檔案工作台
+
+社群另外開發的[Gears 檔案工作台](https://anoni.net/gears/strip-metadata/){target="_blank"}也能清除 metadata，支援的格式比這一頁多，包含 iPhone 的 HEIC、AVIF、TIFF、MKV、WebM、AVI、FLAC、Ogg 與 OpenDocument，ZIP 壓縮檔裡的檔案也會一起處理（Gears 跟這一區的差別見[小工具首頁](index.md#Gears-檔案工作台)）。
+
 ## 離線可用
 
 跟這一區其他工具一樣，程式存進裝置之後斷網也能用，那就是檔案沒有偷偷送出去最直接的證明。

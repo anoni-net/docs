@@ -146,6 +146,10 @@ age -d -o note.txt note.txt.age
 - 第一次使用需要連上網把程式抓回來，之後會留在裝置上。
 - 關掉 JavaScript JIT 的瀏覽器算 scrypt 慢五十倍以上，桌機實測一次要 50 秒。IronFox 預設關閉，可在設定的 Security 開啟。Tor Browser 的「較安全」等級也會關。工具會先量一次再告訴你預估時間，期間頁面照常能操作。
 
+## Gears 檔案工作台
+
+社群另外開發的[Gears 檔案工作台](https://anoni.net/gears/encrypt/){target="_blank"}的加密一樣輸出 age 格式，可以用密語或對方的公鑰加密，完成的畫面附上給對方的解密說明。另外有 [age 金鑰產生器](https://anoni.net/gears/age-keygen/){target="_blank"}與[加密一段文字](https://anoni.net/gears/text-crypt/){target="_blank"}（Gears 跟這一區的差別見[小工具首頁](index.md#Gears-檔案工作台)）。
+
 ## 離線可用
 
 跟這一區其他工具一樣，程式存進裝置之後斷網也能用，那就是檔案與密語沒有偷偷送出去最直接的證明。

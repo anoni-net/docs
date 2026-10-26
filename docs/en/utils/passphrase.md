@@ -80,6 +80,10 @@ Be extra careful on phones, where the clipboard is often shared across apps.
 - Somewhere to keep what you generated: [password managers](../tools/password-manager.md)
 - How the list was built and what the selection rules were: [Asian Diceware](../tools/asian-diceware.md)
 
+## Gears
+
+[Gears](https://anoni.net/gears/en/passphrase/){target="_blank"}, the community's file workbench, has a passphrase and password generator too, using the same asian-diceware word list (see the [tools overview](index.md#Gears) for how Gears differs from this section).
+
 ## Works offline
 
 Like the rest of this section, the code is stored on your device and runs without a network. The wordlist is stored alongside it, so passphrases still come out with the network off.

@@ -65,6 +65,10 @@ QR 編碼交給 [qrcode-generator](https://github.com/kazuhikoarase/qrcode-gener
 
 我們另外寫了一個獨立的解碼器放在測試裡，把產生出來的圖讀回文字再比對，所以「呼叫的方式對不對」有測試守著。寫測試的過程中就抓到一個真的缺陷：函式庫預設把字串當 Latin-1 處理，中文會被截斷成亂碼。
 
+## Gears 檔案工作台
+
+社群另外開發的[Gears 檔案工作台](https://anoni.net/gears/qrcode/){target="_blank"}也能產生 QR code，另外有 Wi-Fi、聯絡資料、活動、位置、Email、電話與簡訊的格式，手機的相機掃到之後會直接帶出對應的動作（Gears 跟這一區的差別見[小工具首頁](index.md#Gears-檔案工作台)）。
+
 ## 離線可用
 
 跟這一區其他工具一樣，程式存進裝置之後沒有網路也能用。把網路關掉試一次，照樣畫得出來，代表你輸入的內容不可能被送到任何地方。

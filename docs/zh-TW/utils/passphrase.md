@@ -80,6 +80,10 @@ Diceware 原本就是擲骰子的方法。詞表的順序本身就是編碼：�
 - 產生好的密語要有地方放，見[密碼管理器入門](../tools/password-manager.md)
 - 詞表怎麼做出來的、選字有什麼原則，見 [Asian Diceware](../tools/asian-diceware.md)
 
+## Gears 檔案工作台
+
+社群另外開發的[Gears 檔案工作台](https://anoni.net/gears/passphrase/){target="_blank"}也有密語與密碼產生器，用的是同一份 asian-diceware 字詞表（Gears 跟這一區的差別見[小工具首頁](index.md#Gears-檔案工作台)）。
+
 ## 離線可用
 
 跟這一區其他工具一樣，程式存進裝置之後沒有網路也能用。詞表也會一起存下來，斷網時照樣抽得出密語。
