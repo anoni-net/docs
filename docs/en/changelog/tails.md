@@ -24,6 +24,18 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.15.1
+
+> 2026-10-23 · [Upstream announcement](https://tails.net/news/version_7.15.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>An emergency release to remove a compromised certificate authority. Upstream states it is not aware of exit nodes using this attack so far.
+- Tor Browser moves to 15.0.26, fixing CVE-2026-113470. Intermediate certificates of the certificate authority eMudhra were compromised; Mozilla blocked its certificates on 17 October, and Tor Browser 15.0.26 blocks all eMudhra certificates as well (see the [Tor changelog](./tor.md)).
+- With one of the compromised intermediate certificates, an attacker can impersonate any website, even over HTTPS. The announcement names a Tor exit node, the internet service provider of an exit node, or a government as able to do this. Onion sites are not affected.
+- Applications other than Tor Browser rely on Debian's ca-certificates package to decide which certificates to trust, and that package is updated too. This corresponds to Debian's DSA-6572-1 of 20 October, which removes two root certificates, emSign ECC Root CA - G3 and Comodo AAA Services root, so the whole system stops trusting that batch of eMudhra certificates.
+- Checking the 7.15.1 package list, the Debian advisories that missed 7.15 are now included. The kernel moves from 6.12.111 to 6.12.113, covering the 16 October kernel security advisory DSA-6568-1, and curl (DSA-6558-1), JPEG XL (DSA-6564-1) and expat (DSA-6566-1) are all at fixed versions. The announcement itself does not mention these packages.
+- tor stays at 0.4.9.14; 0.4.9.15 came out on 28 October, after this release (see the [tor daemon changelog](./tor-daemon.md)).
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.15
 
 > 2026-10-13 · [Upstream announcement](https://tails.net/news/version_7.15/){target="_blank"} · [Known vulnerabilities in 7.14](https://tails.net/security/known_security_vulnerabilities_in_7.14/){target="_blank"}

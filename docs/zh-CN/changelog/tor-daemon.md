@@ -35,6 +35,19 @@ tor daemon（社区惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 
 下面多则条目都在修 conflux。它让客户端同时用两条电路传同一个连接的数据以提升速度，2023 年进入 Tor，是这半年多起安全问题的共同来源。新的代码路径带来新的错误面，这批修补集中在那里并不意外。
 
+## tor 0.4.9.15
+
+> 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.15/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>安全发布，距离 0.4.9.14 三周，修补的是中继收到大量目录请求时的拒绝服务防御。官方写明主要影响中继，请尽快升级。这次没有附 TROVE 编号，上游也没有提到已被实际利用。
+- 用浏览器连上 Tor 的人暂时不需要做什么。截至 10 月 29 日，Tor Browser 15.0.26 与 Tails 7.15.1 带的仍是 0.4.9.14，之后的版本跟进时会整理在 [Tor 更新日志](./tor.md)与 [Tails 更新日志](./tails.md)。架设中继、网桥与 onion 服务的人要自行升级。
+- 0.4.8 以前的版本从这一版起无法在 Tor 网络上运作。目录权威把 DESC_NO_TAP 与 MICRODESC_NO_TAP 列为客户端与中继的必要协议能力，并启用新的共识方法，从 microdescriptor（客户端下载的精简版中继描述文件）移除所有 TAP key 与家族清单，省下大量目录带宽。0.4.9.12 起 0.4.8.x 的中继已经被挡在网络外面，这次连客户端也无法连接。用发行版软件包或其他内置 tor 的 app 的人，要确认版本已经是 0.4.9.x。
+- 目录权威另外把 RELAY_NEGOTIATE_SUBPROTO 与 RELAY_CRYPT_CGO 列为中继的必要能力。客户端之后可以假设每个中继都支持 Counter Galois Onion 加密（CGO），连还没出现在共识里的中继也直接使用。
+- 新的拒绝服务防御都跟 BEGIN_DIR（在电路上开一条目录请求的流）有关（ticket 41411）。目录缓存可以按电路限制 BEGIN_DIR 的频率，由 DoSBeginDirRateEnabled、DoSBeginDirRate、DoSBeginDirBurst 与 DoSBeginDirDefenseType 控制，四个选项在共识参数与 torrc 都能设置，默认开启。另一项让目录缓存拒绝已验证中继在同一条电路上的第二个 BEGIN_DIR，由 DoSBeginDirLimitEnabled 控制，默认关闭。
+- onion 服务目录则一律只接受已验证中继在每条电路上获取或上传一次描述文件，之后再有请求，整条电路就会被关闭。被拒绝的次数记在 heartbeat 与 `relay_dos_total` 指标。中继端也改成每个目录请求各开一条电路，让目录缓存之后能把中继限制在每条电路一个 BEGIN_DIR。
+- HSDir 标志（HSDir 是存放 onion 服务描述文件的中继）改成重新启动也不会丢失。中继在最近的共识里有这个标志的话，重新启动后即使在线时间不够，目录权威也会继续给它。中继不必再等 96 小时才重新获得（ticket 41175）。
+- 另有四项修正。目录权威处理 MiddleOnly 标志时，新生成的共识不再把它覆盖掉，避免标志反复切换（bug 41457，问题出在 0.4.9.14）。控制端口不再允许把流附加到还没完成连接的 conflux 电路（bug 41454）。每一次 HSPOST 控制端口命令原本会泄漏大约一份描述文件大小的内存（bug 41455）。调度器从队列移除项目的错误，可能让高优先级的电路暂时无法分得带宽（bug 41428）。
+
 ## tor 0.4.9.14
 
 > 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.14/ChangeLog){target="_blank"}

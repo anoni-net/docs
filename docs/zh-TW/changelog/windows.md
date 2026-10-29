@@ -46,6 +46,7 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 - Windows 本體的 1171 個比 9 月的 729 個又多了一截，幾乎都在 10 月 13 日發布當天就登錄，之後只多了 3 個。最多的四個元件是 DNS Server 52 個、Windows Kernel 46 個、Windows Installer 38 個與 Win32k 36 個。Windows 本體的 Critical 有 42 個，DHCP Server 的 5 個遠端執行程式碼與 VBS Enclave 的 5 個提權最集中。
 - 另外兩個是公開揭露、還沒有被利用的。.NET Framework 的 CVE-2026-108398 可以繞過 Windows Defender 應用程式控制（WDAC），需要已經登入的本機攻擊者。CVE-2026-92707 是 .NET 的 SignalR 用的 MessagePack 套件阻斷服務，跟一般桌面使用者關係不大。
 - 總數 2575 個裡，Azure Linux 佔 868 個、Edge 佔 255 個。發布當天的總數是 1758 個，之後增加的幾乎都落在這兩條產品線。
+- 10 月 29 日再查一次，總數增加到 3327 個、Critical 231 個。10 月 21 日之後補進的 742 個裡，Edge 佔 451 個、Azure Linux 佔 284 個，其餘 7 個分散在其他產品，Windows 本體沒有增加。已被利用的仍只有 CVE-2026-96951。
 
 ## 2026 年 9 月
 
@@ -59,6 +60,7 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 - Windows 本體的 729 個是這半年最高的一次，同樣以 9 月 23 日的資料重數，8 月是 253 個、7 月是 439 個。數量集中在少數元件上：Windows Biometric Service 64 個、DHCP Server 36 個、NTFS 29 個、Win32k 23 個。
 - 對用 Tor Browser 的人來說，這個月兩個被利用的都是提權，正是本頁開頭提到的那個情境：作業系統被取得權限之後，上面執行的匿名工具保護不了你。
 - 9 月 25 日 CISA 另外把 8 月修掉的 CVE-2026-65660 收進 KEV。這是 SharePoint 的程式碼注入，影響 SharePoint Enterprise Server 2016、2019 與 Subscription Edition，CVSS 8.8，只打得到伺服器，桌面使用者不受影響。微軟在 8 月那份資料的修訂紀錄裡補了一句「As of 9/25/2026, Microsoft had reliable evidence of observed attacks」，已被利用的欄位卻仍是 No，只看那個欄位的話會漏掉。管理 SharePoint 的人要確認 8 月的更新已經裝上。
+- 10 月 28 日微軟又修訂一次，總數增加到 2988 個、Critical 183 個。9 月 23 日之後補進的 977 個裡，Azure Linux 佔 640 個、Edge 佔 145 個，另有 192 個沒有列出受影響的產品，Windows 本體沒有增加。標為已被實際利用的仍是本則開頭那兩個。
 
 ## 2026 年 8 月
 

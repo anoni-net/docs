@@ -35,9 +35,12 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Chrome 2026 年 10 月
 
-> 2026-10-20 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-27 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>10 月 20 日的大版本 156.0.8078.47 修了 353 個安全問題，Critical 6 個、High 61 個。這個月四份桌面穩定版公告，Google 都沒有標注任何一項已被實際利用，目前最新的就是這一版。
+- <span class="urg-tag urg-tag--soon">儘快</span>10 月 27 日的 156.0.8078.73 修了 52 個安全問題，Critical 4 個、High 46 個。10 月的五份桌面穩定版公告，Google 都沒有標注任何一項已被實際利用，目前最新的就是 156.0.8078.73。
+- 4 個 Critical 落在 FileSystem 的記憶體損毀（CVE-2026-118306）、FileAPI 與 Skia 的輸入驗證不足（CVE-2026-118331、CVE-2026-118348），以及 Layout 的 use-after-free（CVE-2026-118344）。High 裡 V8 與 Turbolev 合計 6 個，PDF 引擎 PDFium 另有一個 use-after-free（CVE-2026-118345）。Android 版同日發布，公告寫明修補內容跟桌面版相同。
+- 157 已經在 10 月 22 日與 28 日以搶先穩定版（Early Stable）推給一小部分 Windows 使用者，兩份公告都沒有列出安全修補。
+- 10 月 20 日的大版本 156.0.8078.47 修了 353 個安全問題，Critical 6 個、High 61 個。
 - 156 的 6 個 Critical 有 5 個是記憶體損毀，分別在 Skia（繪圖引擎）、Accessibility、CSS、Paint 與 WebRTC（CVE-2026-113341、CVE-2026-113279、CVE-2026-113072、CVE-2026-113280、CVE-2026-113303），另一個是 Accessibility 的 use-after-free（CVE-2026-113271）。High 裡 V8 與它的編譯器 Turbolev 合計 7 個，另有一個網站隔離的 use-after-free（CVE-2026-113101）與一個 Proxy 的輸入驗證不足（CVE-2026-113040）。
 - 10 月 13 日的 155.0.8059.79 修了 37 個，Critical 7 個、High 29 個。7 個 Critical 都是記憶體錯誤，落在 ANGLE、瀏覽器本體、PDF、Network、Core、SVG 與 Media，其中 PDF 那一個（CVE-2026-110136）開啟 PDF 就會經過。High 裡有 Windows 安裝程式的提權（CVE-2026-110150）與更新程式的授權錯誤（CVE-2026-110159）。
 - 10 月 15 日的 155.0.8059.84 修了 10 個，Critical 1 個，是預先轉譯（Prerender）的 use-after-free（CVE-2026-110922），High 6 個裡有 3 個在 V8。
@@ -50,9 +53,13 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Firefox 2026 年 10 月
 
-> 2026-10-21 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-27 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>10 月 13 日的 Firefox 158 修了 77 個問題，High 30 個、Moderate 33 個、Low 14 個，沒有 Critical。Mozilla 沒有標注任何一項已被實際利用，公告裡也沒有出現 in the wild 的字樣。桌面版目前最新的是 10 月 20 日的 158.0.1。
+- <span class="urg-tag urg-tag--soon">儘快</span>10 月 27 日的 Firefox 159 修了 167 個問題，High 108 個、Moderate 52 個、Low 7 個，沒有 Critical。Mozilla 沒有標注任何一項已被實際利用，公告裡也沒有出現 in the wild 的字樣。桌面版目前最新的就是 159。
+- 159 的 High 裡有 3 個沙箱逃逸，落在頁面導覽、表單管理與網路元件（CVE-2026-117861、CVE-2026-117864、CVE-2026-117868），另有 5 個提權、3 個同源政策繞過與 5 個 JIT 編譯器的問題。Moderate 裡還有 10 個沙箱逃逸，一半在圖形與 WebRender。
+- ESR 153.6 與 115.44 同日發布，分別修了 145 個與 80 個。ESR 140 這一輪同樣沒有對應的版本，Tor Browser 會從 159 帶進哪些修補，要等 Tor Project 的下一版公告（見 [Tor 更新日誌](./tor.md)）。
+- iOS 版在 10 月 26 日發布 156.1，修了 2 個問題。Moderate 等級的是 FaceTime 的通訊協定處理可以被用來偽冒（CVE-2026-116632），Low 等級的是 tel: 連結讓網址列顯示偽冒的位址（CVE-2026-116631）。
+- 10 月 13 日的 Firefox 158 修了 77 個問題，High 30 個、Moderate 33 個、Low 14 個，沒有 Critical。
 - Mozilla 從這一版起改了公告的寫法，內部找到的記憶體安全錯誤不再併成一個彙總的 CVE，改成一個錯誤一個編號。High 的數量因此比過去多，跨月比較數字時要知道這件事。過去每版都有的那句「could have been exploited」固定套語，也跟著彙總條目一起消失了。
 - 158 的 High 裡有 4 個沙箱逃逸，落在網路與圖形元件（CVE-2026-109705、CVE-2026-109707、CVE-2026-109708、CVE-2026-109712），應用程式更新元件有一個提權（CVE-2026-109704），JavaScript 引擎與 JIT 編譯器有 7 個。其餘多是 DOM、SVG、圖形與影音元件的 use-after-free。
 - 158.0.1 修了 4 個問題，其中 2 個 High。一個跟憑證有關：eMudhra 的中繼憑證遭到濫用，Mozilla 在 10 月 17 日透過 OneCRL（Firefox 的憑證撤銷清單）封鎖了它們。OneCRL 平常靠遠端設定自動更新，這一版把更新後的清單直接放進程式裡，關掉遠端設定的人也會擋下這些憑證（CVE-2026-113470）。另一個是 SVG 的邊界條件錯誤（CVE-2026-113399）。

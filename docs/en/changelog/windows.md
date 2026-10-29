@@ -46,6 +46,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - The 1,171 in Windows itself are another step up from September's 729, and nearly all were listed on release day, 13 October, with only 3 added since. The four largest components are DNS Server with 52, Windows Kernel 46, Windows Installer 38 and Win32k 36. Windows itself has 42 Critical, most concentrated in 5 remote code execution flaws in DHCP Server and 5 privilege escalations in VBS Enclave.
 - Two more were publicly disclosed but not exploited. CVE-2026-108398 in .NET Framework can bypass Windows Defender Application Control (WDAC) and requires a local attacker who is already logged in. CVE-2026-92707 is a denial of service in the MessagePack package used by .NET's SignalR, of little concern to ordinary desktop users.
 - Of the 2,575 total, Azure Linux accounts for 868 and Edge for 255. The release-day total was 1,758, and nearly all the growth since falls in those two product lines.
+- Rechecked on 29 October, the total has grown to 3,327 with 231 rated Critical. Of the 742 added after 21 October, Edge accounts for 451 and Azure Linux for 284, with the remaining 7 spread across other products; Windows itself gained none. CVE-2026-96951 remains the only one marked exploited.
 
 ## September 2026
 
@@ -59,6 +60,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - The 729 CVEs in Windows itself are the highest of the past six months; recounting from the same 23 September data, August has 253 and July 439. They cluster in a handful of components: Windows Biometric Service 64, DHCP Server 36, NTFS 29, Win32k 23.
 - For anyone running Tor Browser, both exploited flaws this month are privilege escalations, which is exactly the scenario described at the top of this page: once the operating system is owned, the anonymity tools running on it cannot protect you.
 - On 25 September CISA also added CVE-2026-65660, fixed in August, to KEV. It is a code injection flaw in SharePoint affecting SharePoint Enterprise Server 2016, 2019 and Subscription Edition, CVSS 8.8, reachable only on servers; desktop users are unaffected. Microsoft added the line "As of 9/25/2026, Microsoft had reliable evidence of observed attacks" to the revision history of its August entry, yet the exploited field still reads No, so anyone checking only that field would miss it. Anyone running SharePoint should confirm the August update is installed.
+- Microsoft revised the data again on 28 October, bringing the total to 2,988 with 183 rated Critical. Of the 977 added after 23 September, Azure Linux accounts for 640 and Edge for 145, and another 192 list no affected product; Windows itself gained none. The two marked as actively exploited are still the two at the top of this entry.
 
 ## August 2026
 

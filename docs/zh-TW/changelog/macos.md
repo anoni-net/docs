@@ -40,6 +40,20 @@ Apple 同時維護最新版與前兩代，安全修補三條線都發，但只�
 
 同一天三條線一起發是常態，數量落差很正常，見下面 2026-07-27 那則的比較。硬體太舊升不上最新線的話，留在 Tahoe 或 Sequoia 仍然收得到安全修補。
 
+## macOS Golden Gate 27.2、Tahoe 26.7.2、Sequoia 15.8.2
+
+> 2026-10-26 · [Golden Gate 27.2 公告](https://support.apple.com/en-us/149521){target="_blank"} · [Tahoe 26.7.2 公告](https://support.apple.com/en-us/149522){target="_blank"} · [Sequoia 15.8.2 公告](https://support.apple.com/en-us/149523){target="_blank"} · [Safari 27.2 公告](https://support.apple.com/en-us/149527){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>三條線同日發出，分別補 263、213 與 197 個 CVE。Apple 沒有標注任何一項已被實際利用，同日的 Safari 27.2 公告也沒有。
+- 取得 root 權限或以系統權限執行程式碼的項目，Golden Gate 27.2 有 17 個、兩條舊線各 19 個，StorageKit 與 Security 佔最多。三條線都有 Kernel 一個沒有權限的攻擊者可以用 root 執行任意程式碼（CVE-2026-112438），以及 CloudKit、configd、CVMS、SecurityAgent 各一個。兩條舊線另外多一個 CUPS，沙箱內的 app 逃出之後直接取得 root（CVE-2026-84545），Golden Gate 那一側在 27 就修好了。
+- Gatekeeper 的繞過，Golden Gate 27.2 有 8 個、Tahoe 26.7.2 有 11 個、Sequoia 15.8.2 有 9 個，落在 ArchiveService、BOM、Carbon Core、DesktopServices 與系統設定等元件。其中兩項僅憑惡意製作的 ZIP 壓縮檔或檔案就能繞過（BOM 的 CVE-2026-112672、ArchiveService 的 CVE-2026-112568），常從網路下載壓縮檔的人特別要更新。隱私偏好的繞過三條線各 7 個，落在 Accounts、控制中心、Kernel、Photos Storage、Spotlight 與 Time Machine。
+- 沙箱逃逸與沙箱限制繞過三條線各 14 個。App Store 有一個遠端攻擊者可能逃出網頁內容的沙箱（CVE-2026-112690），iOS 也修了同一項。
+- 螢幕共享與遠端管理這一輪有 10 到 11 個，包含同一個區域網路上的攻擊者可以損毀行程記憶體、惡意的螢幕共享對象可以建立任意符號連結，以及惡意 app 以系統權限執行程式碼。只在 Golden Gate 27.2 的 CVE-2026-112427 最嚴重，遠端攻擊者可能執行任意程式碼。平常不用的人，在系統設定的一般、共享裡把螢幕共享與遠端管理都關掉，直接少掉一整組暴露面。
+- 位置資訊這一側，Wi-Fi 一個 app 可以讀取敏感的位置資訊（CVE-2026-112537），三條線都有，Golden Gate 27.2 與 Tahoe 26.7.2 另有 AirPort 的同類問題（CVE-2026-112551）。
+- 瀏覽器引擎的修補，Golden Gate 27.2 直接包在系統更新裡，30 個 WebKit 相關的 CVE 有 8 個可能導致任意程式碼執行。Tahoe 與 Sequoia 要另外裝 Safari 27.2，它列出的 33 個就是同一批 WebKit 修補，加上 LinkPresentation 與 WebRTC 的 3 個。只裝了系統更新的話，WebKit 那一組還沒補上，要確認 Safari 也升上去。
+- 三份清單不是包含關係，Tahoe 26.7.2 有 30 個、Sequoia 15.8.2 有 31 個沒有出現在 Golden Gate 27.2 的清單裡，其中分別有 25 個與 21 個是 Apple 同一天補進 9 月 Golden Gate 27 公告的項目，代表 Golden Gate 那一側早就修好。
+- iPhone 與 iPad 的對應版本整理在 [iOS 安全更新](./ios.md)。Sonoma 14.x 這一輪仍然沒有對應版本。
+
 ## macOS Tahoe 26.7.1、Sequoia 15.8.1（同日另有 Golden Gate 27.0.1）
 
 > 2026-09-28 · [Tahoe 26.7.1 公告](https://support.apple.com/en-us/149228){target="_blank"} · [Sequoia 15.8.1 公告](https://support.apple.com/en-us/149229){target="_blank"}
@@ -64,6 +78,8 @@ Apple 同時維護最新版與前兩代，安全修補三條線都發，但只�
 - Apple 在 10 月 19 日修訂三份公告，Golden Gate 27 從 210 個增加到 242 個，Tahoe 26.7 從 153 個、Sequoia 15.8 從 154 個都增加到 173 個，上面的數字是初版的。修訂後的公告仍然沒有標注任何一項已被實際利用，已經裝了這幾版以後的人不需要再做什麼。
 - 補進來的項目裡，三條線都有的是 Core Bluetooth 的 CVE-2026-86919（配對過的藍牙裝置可能執行任意程式碼）、DesktopServices 開啟指向網路共享的檔案可能執行非預期的程式（CVE-2026-84579），以及 Heimdal 可能被冒充成其他使用者（CVE-2026-86868）。Multi-Touch 另有一個繞過隱私偏好的項目，三條線也都有。只在 Golden Gate 27 的是一個 WebKit（CVE-2026-86922）與一個系統設定擋不住被竄改的 app 啟動（CVE-2026-28854），後者屬於 Gatekeeper 那一類。
 - udf 的 CVE-2026-84506 被調降，從以核心權限執行任意程式碼改成造成系統異常終止或核心記憶體損毀。三份清單的差異也跟著變了，Tahoe 26.7 有 8 個、Sequoia 15.8 有 15 個沒有出現在 Golden Gate 27 的清單裡。
+- Apple 在 10 月 26 日再次修訂三份公告，Golden Gate 27 目前列出 276 個，Tahoe 26.7 列出 178 個、Sequoia 15.8 列出 180 個。修訂後仍然沒有標注任何一項已被實際利用。
+- 這一次補進 Golden Gate 27 的項目最多，包含 CUPS 讓沙箱內的 app 逃出並取得 root（CVE-2026-84545）、Screen Sharing Server 讓惡意 app 取得 root（CVE-2026-65373），以及三個 Gatekeeper 的繞過，分別經由惡意的 ZIP 壓縮檔（BOM，CVE-2026-84610）、惡意的磁碟映像檔（CoreServicesUIAgent，CVE-2026-65368）與 quarantine（CVE-2026-64789）。三條線都補進了 ImageIO 處理惡意圖片可能導致任意程式碼執行（CVE-2026-64759），以及 Kernel 一個 2019 年的舊編號 CVE-2019-5598，遠端攻擊者可能繞過防火牆規則。
 
 ## macOS Tahoe 26.6.2
 
