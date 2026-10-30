@@ -1,6 +1,6 @@
 ---
 title: 摘要
-description: 網路政變 / The Internet Coup | InterSecLab
+description: InterSecLab 分析 Geedge Networks 的外洩文件，說明中國如何把防火長城做成產品，賣給其他國家的政府。
 icon: material/arrow-right-bottom
 ---
 
@@ -8,24 +8,18 @@ icon: material/arrow-right-bottom
 
 !!! note ""
 
-    - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
-    - 本章節內容翻譯範圍為報告 **INDEX 1/8** 的內容。
-    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
+    - 本章翻譯自 InterSecLab 的報告「[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}」（[報告介紹頁](https://interseclab.org/research/the-internet-coup/){target="_blank"}），以正體中文、臺灣用語翻譯。
+    - 本章對應原報告目錄（INDEX）的第 1/8 章。
+    - 歡迎[參與討論](./index.md#參與討論)，或查看譯文的[更新紀錄](./index.md#更新紀錄)。
 
-> 技術分析：一家中國公司如何向威權政權出口防火長城
+> 一家中國公司如何向威權政權輸出防火長城的技術分析
 
-過去二十年來，中國政府一直在國內透過監控和審查技術不斷完善其網路管控模式，同時以「數位主權（Digital Sovereignty）」為名向其他國家推廣這一做法。透過出口監控技術，中國不僅擴大其全球影響力，也為一個聯邦化的網路治理系統奠定了基礎。在該系統中，中國公司為客戶（政府）提供基礎設施和專業知識，使其更容易監控和控制自己的網路，並從這些部署中學習，以提升全球範圍的數位威權主義集體能力。
+過去二十年來，中國政府在國內用監控與審查技術，一步步改進自己的網路控制模式，同時打著「數位主權」（digital sovereignty）的旗號，向其他國家推銷同一套做法。中國輸出監控與審查技術，一方面擴大自己在全球的影響力，一方面也替聯邦式的網路治理體系打下基礎。在聯邦式的體系裡，中國企業提供基礎設施與專業知識，讓政府客戶更容易監控、控制自己的網路，企業也從各地的部署中學習，提升全球推行數位威權的整體能力。
 
-這項由 InterSecLab 進行的研究揭示了 Geedge Networks，一家與中國科學院研究實驗室 Massive and Effective Stream Analysis（Mesalab）有關聯的私人公司，出口類似於中國防火長城技術套件的證據。我們團隊的調查辨識出監控能力商業化的趨勢，Geedge Networks 提供一套產品，能夠全面監控和控制網路使用者。
+InterSecLab 的研究找到 Geedge Networks（積至公司）輸出一整套近似中國防火長城技術的證據。Geedge Networks 是一家民營公司，跟它有關聯的學術單位是中國科學院（中科院）的研究實驗室 Mesalab（Massive and Effective Stream Analysis）。我們團隊的調查看出監控能力商業化的模式，Geedge Networks 提供一整套產品，可以全面監控、控制網路使用者。
 
-InterSecLab 的分析顯示，Geedge Networks 已與哈薩克、衣索比亞、巴基斯坦、緬甸及一個未知國家的政府簽約，建立先進的網路審查和監控系統。此外，我們的研究結果表明，Geedge Networks 也參與在中國境內（包括新疆及其他地區）部署類似系統的開發。
+從 InterSecLab 的分析可以看到，Geedge Networks 跟哈薩克、衣索比亞、巴基斯坦、緬甸，以及另一個尚未查明的國家的政府簽約，替它們建立精密的網路審查與監控系統。我們的研究結果也顯示，Geedge Networks 參與開發部署在中國境內的同類系統，地點包括新疆與其他地區。
 
-基於與 InterSecLab 分享的超過 10 萬份 Geedge Networks 文件洩漏文件的分析，這項研究揭示了 Geedge Networks 系統的功能和能力，包括深度封包檢測、行動使用者的即時監控、細緻的網路流量控制，以及可根據各區域定制的審查規則。洩漏的文件也揭示了 Geedge Networks 與學術實體 Mesalab 的關係，以及他們與客戶（政府）的互動。對於資料主權的意涵極其重大，我們的發現引發了對監控和資訊控制技術商品化的顧慮。
+有人把超過 10 萬份 Geedge Networks 的外洩文件提供給 InterSecLab。本研究分析這批文件，說明 Geedge Networks 系統的功能與能力，包括深度封包檢測、即時監控行動網路用戶、精細控制網路流量，以及可以依各地區量身設定的審查規則。外洩文件也透露 Geedge Networks 跟學術單位 Mesalab 的關係，以及 Geedge Networks 與政府客戶的往來。這些發現對資料主權有重大影響，也讓人擔憂監控與資訊控制技術正在變成商品。
 
-這項研究探討了 Geedge Networks 系統在多個國家的近期發展情形，包括其部署時間線。透過分析公司的內部文件，InterSecLab 得以紀錄商用國家防火牆的擴展，並推測這類系統擴散對全球網路未來的影響。
-
-*[DPI]: 深度封包檢測 Deep Packet Inspection，縮寫為 DPI，是一種電腦網路封包過濾技術，用來檢查透過檢測點封包的資料部分（也可能包含其標頭），以搜尋不符合規範的協定、病毒、垃圾郵件、入侵，或以預定準則來決定封包是否可透過或需被路由至其他不同目的地，或是為了收集統計資料。
-*[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[InterSecLab]: 資安實驗室，本報告發佈的組織
-*[Mesalab]: 中國科學院信息工程研究所的研究室（處理架構組）
+本研究檢視 Geedge Networks 的系統近年在各國的發展，包括目前已知的部署時程。InterSecLab 分析公司的內部文件，記錄市售的國家防火牆如何擴張，也推想這類系統擴散之後，全球網路的未來會受到什麼影響。
