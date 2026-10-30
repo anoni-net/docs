@@ -13,7 +13,14 @@ description: "What a year of research on the Geedge leak has established and wha
 
 # What a Year of Research on the Geedge Leak Found
 
-![Map of Geedge deployment locations recorded in the leaked documents](https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp"
+            alt="Map of Geedge deployment locations recorded in the leaked documents"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;">
+    </a>
+    <figcaption markdown="span">Geedge deployment locations recorded in the leaked documents: ① Kazakhstan, ② Ethiopia, ③ Pakistan and ④ Myanmar, with ⑤ to ⑦ marking Xinjiang, Fujian and Jiangsu in China. Boundaries from Natural Earth (public domain).</figcaption>
+</figure>
 
 In September 2025, internal files and source code (the text of a software program) leaked from Geedge Networks, a company that builds internet censorship systems for China and other countries. Until then, outsiders could only infer how the Great Firewall (the system China uses to censor and monitor the internet) works by testing it from outside; for the first time, researchers could read the code of censorship equipment directly. A year on, part of the Great Firewall likely runs Geedge's code, results for other countries are mostly inconclusive, and some news coverage has gone further than the research supports.
 
@@ -23,7 +30,7 @@ In September 2025, internal files and source code (the text of a software progra
 
 Geedge works closely with the MESA Lab at the Chinese Academy of Sciences, and according to GFW Report, a group that studies the Great Firewall, Fang Binxing, known as the "father of the Great Firewall", is Geedge's chief scientist. The leak amounts to 572 GiB (about 600 GB), including source code, project management records and customer deployment configurations. According to the investigative organisation InterSecLab, Geedge sold its censorship system to the governments of Kazakhstan, Ethiopia, Pakistan and Myanmar, and built provincial firewalls in Xinjiang, Fujian and Jiangsu in China.
 
-The numbers on the map above are ① Kazakhstan, ② Ethiopia, ③ Pakistan and ④ Myanmar, with ⑤ to ⑦ marking Xinjiang, Fujian and Jiangsu. The community has translated InterSecLab's two reports into Traditional Chinese: "[The Internet Coup](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}" is about Geedge's products and customers, and "[MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}" is about where Geedge's hardware comes from.
+The community has translated InterSecLab's two reports into Traditional Chinese: "[The Internet Coup](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}" is about Geedge's products and customers, and "[MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}" is about where Geedge's hardware comes from.
 
 ## What the Research Found
 

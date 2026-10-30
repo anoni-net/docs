@@ -13,7 +13,14 @@ description: "Geedge 外泄一年来，研究确认了什么、还不确定什�
 
 # Geedge 外泄一年后的研究重点
 
-![外泄文件记录的 Geedge 部署地点地图](https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp"
+            alt="外泄文件记录的 Geedge 部署地点地图"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;">
+    </a>
+    <figcaption markdown="span">外泄文件记录的 Geedge 部署地点：① 哈萨克斯坦、② 埃塞俄比亚、③ 巴基斯坦、④ 缅甸，⑤ 到 ⑦ 是中国的新疆、福建与江苏。国界数据来自 Natural Earth（公有领域）。</figcaption>
+</figure>
 
 2025 年 9 月，为中国与其他国家构建网络审查系统的 Geedge Networks（积至公司）发生外泄，内部文件与源代码（软件的程序本文）都被公开。过去外界只能从墙外推测防火长城（中国用来审查与监控网络的系统）如何运作，这次研究者第一次可以直接读审查设备的程序。一年下来，防火长城有一部分设备很可能用了 Geedge 的程序，其他国家多半还无法确认，部分报道也写得比研究更肯定。
 
@@ -23,7 +30,7 @@ description: "Geedge 外泄一年来，研究确认了什么、还不确定什�
 
 Geedge 与中国科学院的 MESA 实验室关系密切，依研究防火长城的 GFW Report 整理，被称为「防火长城之父」的方滨兴是 Geedge 的首席科学家。外泄的文件共 572 GiB（约 600 GB），包含源代码、项目管理记录与客户的部署配置。依调查组织 InterSecLab 的报告，Geedge 把审查系统卖给哈萨克斯坦、埃塞俄比亚、巴基斯坦与缅甸的政府，也在中国的新疆、福建与江苏构建省级的防火墙。
 
-上方地图的编号依序是 ① 哈萨克斯坦、② 埃塞俄比亚、③ 巴基斯坦、④ 缅甸，⑤ 到 ⑦ 是新疆、福建与江苏。社区翻译了 InterSecLab 的两份报告（正体中文），〈[网络政变](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}〉的主题是 Geedge 的产品与客户，〈[MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}〉的主题是 Geedge 硬件的来源。
+社区翻译了 InterSecLab 的两份报告（正体中文），〈[网络政变](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}〉的主题是 Geedge 的产品与客户，〈[MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}〉的主题是 Geedge 硬件的来源。
 
 ## 研究的结果
 
