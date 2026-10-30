@@ -1,6 +1,6 @@
 ---
 title: 引言
-description: 網路政變 / The Internet Coup | InterSecLab
+description: 2022 年 IGF 在衣索比亞召開時，政府正與 Geedge Networks 合作建置監控系統，本章交代報告的背景與架構。
 icon: material/arrow-right-bottom
 ---
 
@@ -8,26 +8,22 @@ icon: material/arrow-right-bottom
 
 !!! note ""
 
-    - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
-    - 本章節內容翻譯範圍為報告 **INDEX 3/8** 的內容。
-    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
+    - 本章翻譯自 InterSecLab 的報告「[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}」（[報告介紹頁](https://interseclab.org/research/the-internet-coup/){target="_blank"}），以正體中文、臺灣用語翻譯。
+    - 本章對應原報告目錄（INDEX）的第 3/8 章。
+    - 歡迎[參與討論](./index.md#參與討論)，或查看譯文的[更新紀錄](./index.md#更新紀錄)。
 
-當聯合國 2022 網際網路治理論壇（IGF）的參與者齊聚在衣索比亞的亞的斯亞貝巴（Addis），討論「連結所有人並保障人權」時，提格雷（Tigray）地區的七百萬衣索比亞人已經經歷了超過兩年的網路封鎖[^1]，無法上網。儘管通訊中斷持續進行，國際論壇的代表對於兩週前簽署的停火協議保持樂觀。他們也在慶祝電信業的自由化，以及 Safaricom 進入當地市場（這是第一家獲得該國營運許可的國際公司[^2]）。在為期一週的會議結束時，衣索比亞副總理德梅克·梅科南·哈森（Demeke Mekonnen Hassen）代表政府發表告別演說，感謝來自聯合國和多個成員國的國際貴賓。當他完成書面講稿時，一個不知名的聲音打斷了直播畫面，對遠端參會者播放：「恢復提格雷的網路連線的時間表是什麼？」這個問題不斷重複[^3]。
+2022 年，聯合國網際網路治理論壇（IGF）在衣索比亞的阿迪斯阿貝巴（Addis Ababa）召開，與會者討論「連結所有人、保障人權」（Connecting All People and Safeguarding Human Rights）。同一時間，衣索比亞提格雷（Tigray）地區的七百萬人已經斷網超過兩年，仍然無法上網[^1]。雖然電信中斷還在持續，參加論壇的各國代表對兩週前簽訂的停火協定抱持樂觀，也在慶祝衣索比亞的電信業自由化，以及肯亞電信業者 Safaricom 進入當地市場。Safaricom 是第一家取得衣索比亞營運執照的國際公司[^2]。為期一週的會議來到閉幕典禮，副總理 Demeke Mekonnen Hassen 代表政府致閉幕詞，感謝來自聯合國與數十個會員國的國際貴賓。他念完講稿時，一個不見人影的聲音插進播給遠端與會者的直播畫面，重複問道：「提格雷的網路什麼時候恢復？」[^3]
 
-這一時刻突顯了衣索比亞在網路治理方法上的矛盾，以及國際社會對電信自由化和競爭自然改善網路自由的期待。實際上，當 IGF 正在進行時，中國公司 Geedge Networks 同時在與政府合作，安裝複雜的硬體和軟體產品包，以實現前所未有的監控和審查能力。
+這一幕凸顯衣索比亞的網路治理方式與國際社會期待之間的矛盾，國際社會原本以為電信自由化與市場競爭自然會改善網路自由。實際上，就在 IGF 舉辦期間，衣索比亞政府正同時與中國公司 Geedge Networks（積至公司）合作，大幅強化控制機制，安裝一整套精密的軟硬體產品，讓政府在全國擁有前所未有的監控與審查能力。
 
-這份報告基於來自 Geedge Networks（在本報告中也稱為 Geedge）的超過 10 萬份文件的龐大資料洩漏的分析，提供了該公司如何將數位壓制技術出口到全球的獨特內幕，包括從衣索比亞到哈薩克再到巴基斯坦與緬甸。它也揭示了公司如何參與中國防火長城的區域化，讓中國新疆、福建和江蘇等地區更準確地進行控制。報告概述了 Geedge Networks 所銷售的產品以及服務的全面能力，展示了 Geedge 工具在洩漏中識別的國家中是如何部署的，並探討了這些技術對於審查規避和數位安全倡議者的意涵，也對網路自由社群提供反思。
+本報告分析 Geedge Networks（本報告也簡稱 Geedge）外洩的大批資料，共超過 10 萬份文件，從少見的內部視角，呈現這家公司如何把數位鎮壓的技術輸出到世界各地，從衣索比亞、哈薩克、巴基斯坦到緬甸。報告也說明 Geedge 如何參與中國防火長城的區域化，讓新疆、福建、江蘇等地區的控制更加精準。報告概述 Geedge Networks 整套產品與服務的能力，以及這些工具在外洩資料提到的國家如何部署。接著說明相關技術對規避審查的工作與數位安全倡議者的影響，最後依研究發現，為網路自由社群提出反思。
 
-這份報告雖然包含詳細的技術章節，但我們努力使其對非技術受眾，包括數位權利倡議者和政策制定者，也能夠理解。為了便於更容易地引導發現，我們先描述 Geedge 銷售的每個產品和服務，突顯其監控和審查的能力。接著，我們說明這些產品如何安裝並作為硬體和軟體產品的套件協同運作，將資料數據傳送給客戶（國家）的當局和 Geedge Networks。然後，我們檢視洩漏資料中揭露的中國以外國家及中國內部 Geedge 安裝技術的區域中，獨特的關係和運作時間線。最後，我們提供該批洩漏資料對於主要規避工具的意義分析，並指出進一步研究和行動的下一步。
+本報告雖然有幾章深入的技術內容，我們仍盡力讓數位權利倡議者、政策制定者等沒有技術背景的讀者也能理解研究發現。為了方便讀者查閱，報告先逐一介紹 Geedge 銷售的每項產品與服務，著重說明監控與審查的能力。接著說明產品如何安裝，如何組成一整套軟硬體協同運作，把資料傳給客戶國家的主管機關與 Geedge Networks。然後從資料檢視 Geedge 在中國以外的國家與中國境內各地區安裝技術的情況，各自有什麼特殊的合作關係與營運時程。最後分析外洩資料對主要規避工具的影響，並提出後續研究與行動的方向。
 
-我們選擇在全球網路自由緊要關頭發表這份報告。過去十年，威權政府一直在開發自己網路控制系統，與各種不透明的公司和供應商合作，建立拼圖式系統來封鎖網上內容、關閉網路，並監控使用者。本報告揭示了一個根本的轉變：Geedge 一類公司現在公開推銷全面的產品套件，為任何政府提供廣泛的先進工具進行大規模和精準監控及審查，甚至提供自動與每個客戶共享的軟體更新。這些公司創新以識別、封鎖和禁用審查規避工具，同時在其系統中建立韌性，並透過設計與大多數商用網路硬體提供商的互操作性使其不受制裁影響。
+我們在全球網路自由的關鍵時刻發表本報告。過去十年，威權政府一直在發展自己的網路控制系統，跟各種不透明的公司與供應商合作，東拼西湊出各種系統，用來封鎖網路內容、切斷網路、監控使用者。本報告揭露的根本轉變，在於像 Geedge 這樣的公司如今公開推銷整套產品，讓任何政府都能取得大量尖端工具，同時做大規模與精準的監控與審查，甚至還提供自動派送給每個客戶的軟體更新。這類公司不斷研發辨識、封鎖、癱瘓規避審查工具的技術，也刻意讓產品跟大多數商用網路硬體互通，增強韌性，不受制裁影響。
 
-我們的研究顯示，快速擴展的可能性很大。隨著一站式網路控制解決方案需求增長，Geedge 一類公司持續向新客戶推銷、創新與擴展其業務。我們敦促國際社會使用本報告提供的見解，以面對這些技術商品化和數位壓制全球市場進化的現實。
+從我們的研究來看，這類系統很可能快速擴張。隨著買來就能上線的網路控制方案需求增加，像 Geedge 這樣的公司持續爭取新客戶、研發新功能、擴大營運規模。我們呼籲國際社會善用本報告的分析，正視現實，這些技術已經商品化，數位鎮壓的全球市場也在持續演變。
 
 [^1]: Access Now，[Open Statement: Internet Shutdown in Amhara](https://www.accessnow.org/press-release/open-statement-internet-shutdown-amhara/){target="_blank"}，2023-04-06。（譯註：標題與日期照錄原報告。這個網址在 2026-10 查核時是 Access Now 2023-09-12 的〈Preserving freedom in crisis: Ethiopia’s internet shutdowns must not become the norm〉，跟[第 6 章](./index_6.md)的第 33 則相同。）
 [^2]: Africanews，[Kenya’s Safaricom to Enter Ethiopia](https://www.africanews.com/2022/10/07/kenyas-safaricom-to-enter-ethiopia/){target="_blank"}，2022-10-07。
 [^3]: United Nations，[IGF 2022 – Conference Room 1 – English](https://www.youtube.com/live/UOpmpxRFh-4?t=33662s){target="_blank"}，YouTube 影片（9:20:32 處），2022 年 11 月發布。
-
-*[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[IGF]: 網際網路治理論壇（IGF，全名 Internet Governance Forum）是由聯合國主導的一個全球性平台，其目的在於促進多方利益相關者就網際網路相關政策問題進行對話和交流。IGF 提供了一個開放且包容的場域，讓各國政府、企業、技術社群、公民社會和學術機構得以共同探討和討論網際網路治理的各種議題，例如網路安全、隱私保護、數位包容等。儘管 IGF 不具約束力，也不會產出具法律效力的文件，但它在促進跨界合作和知識共享方面發揮了重要作用。
