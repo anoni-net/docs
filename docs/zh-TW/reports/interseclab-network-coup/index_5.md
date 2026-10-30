@@ -1,6 +1,6 @@
 ---
 title: 產品與服務
-description: 網路政變 / The Internet Coup | InterSecLab
+description: Geedge Networks 銷售的監控與審查產品，從 Cyber Narrator、TSG 到 Network Zodiac 的功能與部署方式。
 icon: material/arrow-right-bottom
 ---
 
@@ -8,212 +8,209 @@ icon: material/arrow-right-bottom
 
 !!! note ""
 
-    - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
-    - 本章節內容翻譯範圍為報告 **INDEX 5/8** 的內容。
-    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
+    - 本章翻譯自 InterSecLab 的報告「[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}」（[報告介紹頁](https://interseclab.org/research/the-internet-coup/){target="_blank"}），以正體中文、臺灣用語翻譯。
+    - 本章對應原報告目錄（INDEX）的第 5/8 章。
+    - 歡迎[參與討論](./index.md#參與討論)，或查看譯文的[更新紀錄](./index.md#更新紀錄)。
 
-洩漏資料的分析提供了對 Geedge Networks 向其客戶推銷的監控和審查能力的詳細理解，並深入剖析了 Geedge 的開發過程、與客戶互動以及其產品如何建立在現有網路軟硬體之上。以下，我們概述了 Geedge Networks 提供的各項產品，提供這些產品如何在技術上部署的見解，其功能，以及對 Geedge 運營地區內網路使用者的影響。
+分析外洩資料，可以詳細了解 Geedge Networks（積至公司）向客戶推銷的監控與審查能力，也能深入掌握 Geedge 的開發流程、與客戶的往來，以及旗下產品如何建立在既有的網路軟硬體之上。我們在下方逐一介紹 Geedge Networks 提供的產品，說明各項產品在技術上如何部署、有哪些功能，以及對 Geedge 營運所在地區的網路使用者有什麼影響。
 
-雖然以下產品是獨立描述的，但需要注意的是，Geedge Networks[^4] 以完整套件形式銷售這些產品。該公司在初期階段與客戶（政府）密切合作，以滿足其訂製的審查和監控需求，並能夠重新使用現有硬體或透過新硬體完全建立系統。
-
-<figure markdown="span">
-  [![圖片於報告 13 頁](https://assets.anoni.net/the-internet-coup/index-5-13-1.png)](https://assets.anoni.net/the-internet-coup/index-5-13-1.png){target="_blank"}
-  <figcaption>圖片說明：這是一張來自 Geedge Networks 的簡報圖示，顯示其系統如何整合進 ISP 的現有網路。灰色圖標代表 ISP 的原始基礎設施，而彩色圖標代表作為 Geedge 系統一部分安裝的組件。圖中顯示來自所有接入點的使用者流量如何透過 TSG-X，經由中央管理系統過濾，記錄在 TSG Galaxy 中，並透過 Cyber Narrator 進行視覺化。此外，它也展示了 Network Zodiac 如何提供 Geedge 系統性能的即時網路見解，並強調了 Geedge 的網路流量複製器（network packet broker, NPB） Ether Fabric。</figcaption>
-</figure>
-
-## Cyber Narrator：全視之眼
-
-Cyber Narrator 是由 Geedge Networks 開發的運營商級別安全資訊和事件管理（SIEM）以及線上分析處理（OLAP）解決方案。這是客戶在使用 Geedge 的監控產品時主要的使用者介面，也是唯一為非技術使用者設計的產品。在實際應用中，政府分析師會在國家指揮中心的辦公室中使用這個介面來存取資料。
-
-Cyber Narrator 是個強大的工具，能夠追蹤網路流量到個別使用者層級，並透過將其活動與特定的基地台標識（cell IDs）連結來即時識別行動使用者的地理位置。系統也允許政府客戶查看匯總的網路流量，因此，可以用來監控特定地區的網路使用者群體，如抗議或大型人群聚集的活動中。
+下方雖然先分別介紹各項產品，但要特別說明，Geedge Networks 是把這些產品當成整套方案銷售。在建置初期，Geedge 與政府客戶密切合作，依對方的需求量身打造審查與監控功能，可以沿用既有的硬體，也可以全部改用新硬體建置系統。
 
 <figure markdown="span">
-  [![圖片於報告 14 頁](https://assets.anoni.net/the-internet-coup/index-5-14-1.png)](https://assets.anoni.net/the-internet-coup/index-5-14-1.png){target="_blank"}
-  <figcaption>圖片說明：這是一個來自 Cyber Narrator 的定位地圖截圖，顯示它如何監控特定區域的個人群體。六角形顏色代表人口密度。顯示的數據包括 CID、MSISDN 和群體分類。此範例中，特定行動使用者在上海被標示為恐怖份子首腦。Cyber Narrator 使用者可以點擊六角形來查看使用者數，區分當地人、訪客和使用漫遊服務的人群。</figcaption>
+  [![圖 1](https://assets.anoni.net/the-internet-coup/index-5-13-1.png)](https://assets.anoni.net/the-internet-coup/index-5-13-1.png){target="_blank"}
+  <figcaption>圖 1：Geedge Networks 簡報裡的示意圖，說明 Geedge 的系統如何整合進 ISP（網路服務供應商）既有的網路。灰色圖示是 ISP 原有的基礎設施，彩色圖示是安裝 Geedge 系統時加入的元件。圖中可以看到，來自所有接取點的使用者流量都會經過 TSG-X，由中央管理系統（Central Management）過濾、記錄在 TSG Galaxy，再透過 Cyber Narrator 呈現成視覺化畫面。圖中也說明 Network Zodiac 如何即時監測 Geedge 系統的效能，並特別標示 Geedge 的網路封包代理器（NPB）Ether Fabric。</figcaption>
 </figure>
 
-Cyber Narrator 從其資料倉儲解決方案 TSG Galaxy 所收集的數據，以及另一個由 Geedge Networks 開發的工具 WebSketch 中提取資料。WebSketch 是一個由 Geedge 建立並運行的網路情報搜尋工具，是 Geedge 唯一一個不在客戶端設置，而由 Geedge 自己托管的產品。WebSketch 的數據來源於 Geedge 自身的網路研究，並透過與第三方數據經紀公司獲取的資訊進行彙整。
+## Cyber Narrator，全知的監看介面
 
-WebSketch 結合了流行的資安情報服務 Shodan 和 Greynoise 的功能。像 Shodan 一樣，WebSketch 透過掃描網際網路以發現連接的設備，如攝影機、路由器和伺服器。WebSketch 也仿效 Greynoise 的功能，讓客戶能將原本無意義的標識如 IP 位址和域名標記為連結到特定網路服務，如微信或 VPN 服務。WebSketch 的設計文件中 Geedge 員工被要求在設計新功能時參考 Greynoise，這顯示其對 Greynoise 的高度依賴。分析該報告的洩漏數據中包含了在中國新疆部署 Cyber Narrator 的詳細要求清單，確保產品能識別「可疑」的通信模式，如使用 VPN 和國際漫遊。Cyber Narrator 的此類使用案例（如下述中國部署部分所述）明確顯示出，Cyber Narrator 能夠使客戶（政府）和安全部隊更容易標記使用隱蔽工具或訪問其他應用程式或網頁的個別使用者，這些工具和網站都被客戶（政府）視為可能的惡意工具。Cyber Narrator 的分析能力也能阻擋對特定網站或虛擬私人網路（VPN）服務的訪問。
+Cyber Narrator 是 Geedge Networks 開發的電信等級安全資訊與事件管理（SIEM）與線上分析處理（OLAP）方案[^4]。客戶使用 Geedge 的產品從事監控時，主要操作的就是 Cyber Narrator 的使用者介面，它也是 Geedge 唯一為非技術人員設計的產品。實際使用時，政府分析人員會在國家指揮控制中心的辦公室裡，透過 Cyber Narrator 存取資料。
 
-透過 Cyber Narrator，客戶（政府）還能識別出在限制實施之前訪問過該內容或服務的個人。實際上，客戶（國家）因此可以「回溯時間」找出那些曾經訪問過後來被定為非法網站的人。這對公民自由和言論自由具有令人擔憂的含義，因為網路使用者可能因於當初合法的線上行為而被識別、監控甚至受懲罰。這種能力是透過另一 Geedge 產品天狗安全閘道（Tiangou Secure Gateway，TSG）的巨量資料數據收集和聚合功能實現的，更詳細的描述可在 Tiangou Secure Gateway 章節中找到。
-
-### TSG GALAXY：聚合分析以進行大規模監控
-
-TSG Galaxy 是 Geedge Networks 的提取、轉換、載入（Extract, Transform, Load, ETL）資料倉儲解決方案，專為網際網路級別的大規模監控而設計，收集並整合客戶國家所有網路使用者以及透過網路傳輸的海量數據。它基於開源的 Apache Kafka 流處理平台[^5]，這是一個常用於為線上電子商務和廣告商提供客戶分析的資料數據處理軟體。本研究分析的洩漏數據包含 TSG Galaxy 的 SQL 模式[^6]，顯示 TSG Galaxy 被用來儲存所有 TCP 和 UDP 會話（兩者是寬頻和行動數據主要使用的傳輸協議），以及國內所有 SIP 會話。SIP 是用於 VoIP（網際網路語音協議）的協議，是大多數現代電話網路的基礎。這意味著 TSG Galaxy 不僅能監控網際網路上的流量和內容，還能監控電話通話。
-
-TSG Galaxy 使用 IP 資料數據流訊息輸出（IP Flow Information Export, IPFIX）來分析流量，並使用深度封包檢測（DPI）萃取元資料數據。透過 DPI，他們可以萃取詳細的獨一無二的指紋數據，包括 TLS 和 QUIC 伺服器名稱指示、DNS 查詢和電子郵件標頭。TSG Galaxy 還實施了連接指紋技術，如 JA3 哈希，允許 Cyber Narrator 識別模式以幫助確定使用者所使用的操作系統以及他們所用來連接的應用程式。這項技術可用來幫助識別使用者是否使用了如 VPN 等規避工具來隱藏流量或繞過審查。在 TSG Galaxy 中，所有這些訊息與來自網路服務提供商（ISP）的訊息相結合，透過各種標記，如 IP 地址、使用者 ID、IMEI 和 IMSI[^7]，將其連接到個別網路使用者。從 TSG Galaxy 萃取的元數據被發送到一個可由客戶透過 Cyber Narrator 進行查詢的數據資料庫。
+Cyber Narrator 功能強大，可以追蹤到個別用戶層級的網路流量，也能把行動網路用戶的活動對應到特定的基地台識別碼（Cell ID），即時找出用戶所在的地理位置。系統也讓政府客戶查看彙整後的網路流量，因此 Cyber Narrator 可以用來監控特定地理區域裡的網路使用者群體，例如抗議現場或大型群眾活動。
 
 <figure markdown="span">
-  [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-1.png)](https://assets.anoni.net/the-internet-coup/index-5-16-1.png){target="_blank"}
-  <figcaption>圖片說明：這個圖示展示了流量記錄如何被吸收以及數據從 TSG 流向 Cyber Narrator 的過程。起初，網路使用者嘗試訪問一個網站，對 "example.com" 的網站請求被送往 ISP 的基礎設施並在此由 TSG-X 捕捉。TSG-X 查詢 Sanity Directory 以識別使用者 IP 的所有者。這一由 Sanity Directory 從 ISP 信號收集的身份回傳為 Jane Doe。然後 TSG-X 將該 IP 標記為 IP 所有者名和訪問的網站，並將該筆記錄存入 TSG Galaxy 中。透過 Cyber Narrator，一名政府官員可以查詢 Jane Doe 訪問過的網站。</figcaption>
+  [![圖 2](https://assets.anoni.net/the-internet-coup/index-5-14-1.png)](https://assets.anoni.net/the-internet-coup/index-5-14-1.png){target="_blank"}
+  <figcaption>圖 2：Cyber Narrator 位置地圖的截圖，可以看到系統如何監控特定區域裡的人群。六角形的顏色代表人口密度，畫面上的資料包括 CID、MSISDN（手機門號）與群體分類。範例把上海的特定行動網路用戶標記為恐怖分子首腦。Cyber Narrator 的使用者可以點選六角形查看用戶數，並區分當地居民、外來訪客與使用漫遊服務的人。</figcaption>
 </figure>
 
-本研究的一個重要發現是，所有在客戶（政府）位置內由 TSG Galaxy 收集的網路使用者數據似乎對 Geedge Networks 的員工可見。數據同時顯示，真實客戶資料數據的快照有時會分享給中科院的 Mesalab，這是一個似乎與 Geedge Networks 緊密相關的學術實驗室。資料數據顯示，Mesalab 的工程學生使用這些真實世界的客戶資訊進行研究，目的是更好地理解和阻止網路審查規避。Geedge 與其附屬機構保存客戶數據的時間長短仍不明確。
+Cyber Narrator 的資料來源有兩個，一是 Geedge 的資料倉儲方案 TSG Galaxy 所蒐集的資料，二是 Geedge Networks 開發的另一項工具 WebSketch。WebSketch 是由 Geedge 託管與營運的網路情報搜尋服務，也是 Geedge 唯一不架設在客戶端的機房、改由 Geedge 自行託管的產品。WebSketch 的資料來自 Geedge 自己的網路調查，以及從第三方資料仲介取得的資訊彙整。
+
+WebSketch 整合 Shodan 與 Greynoise 這兩個熱門資安情報服務的功能。WebSketch 和 Shodan 一樣，會掃描整個網際網路，依裝置獨有的識別碼找出網路攝影機、路由器、伺服器等連網裝置。WebSketch 也仿照 Greynoise，讓客戶可以把 IP 位址、網域名稱等本身沒有意義的識別碼，標記為與特定網路服務有關，例如微信之類的通訊 App 或虛擬私人網路（VPN）服務。WebSketch 明顯以 Greynoise 為藍本，Geedge 的設計文件甚至寫明員工開發新功能時要參考 Greynoise。本報告分析的外洩資料中，有一份在中國新疆部署 Cyber Narrator 的詳細需求清單，明訂產品要能辨識「可疑」的通訊模式，例如使用 VPN 與國際漫遊。
+
+Cyber Narrator 在新疆的使用情境（詳見[第 6 章](./index_6.md)的中國一節）清楚顯示，Cyber Narrator 可以讓政府客戶與安全部隊更容易標記個別用戶。用戶遭到標記的原因，可能是使用規避工具，或使用政府客戶認為可能有惡意的其他應用程式、造訪這類網頁。Cyber Narrator 的分析能力也能用來阻擋使用者連上特定網站或 VPN 服務。政府客戶還可以透過 Cyber Narrator，找出在限制生效之前就造訪過特定內容、使用過特定服務的人。實際上，客戶國家可以「回到過去」，找出曾經造訪某個網站、而網站後來才列為非法的人。公民自由與言論自由可能因此受到令人憂心的影響，網路使用者可能因為當時合法的線上活動遭到識別、監控，甚至受罰。這項能力仰賴 Geedge 另一項產品天狗安全閘道（TSG）的大規模資料蒐集與彙整功能，詳見「天狗安全閘道」一節。
+
+## TSG Galaxy，大規模監控的彙整分析
+
+TSG Galaxy 是 Geedge Networks 的擷取、轉換、載入（ETL）資料倉儲方案，專為涵蓋整個網際網路的大規模監控而設計。TSG Galaxy 在客戶國家蒐集並彙整大量資訊，對象包括所有網路使用者，以及在網路上傳送的內容。TSG Galaxy 建立在開源的 Apache Kafka 串流處理平台上[^5]，Apache Kafka 是常見的資料處理軟體，經常用在網路零售商與廣告商的顧客分析。本研究分析的外洩資料包含 TSG Galaxy 的 SQL 結構描述（schema）[^6]，從中可以看出 TSG Galaxy 用來儲存所有 TCP 與 UDP 連線的紀錄，以及國內所有的 SIP 通話連線。TCP 與 UDP 是寬頻與行動網路主要使用的傳輸協定，SIP 則是網路電話（VoIP，Voice over Internet Protocol）使用的協定，大多數現代電話網路都以 VoIP 為基礎。也就是說，TSG Galaxy 不只能監控網際網路上的流量與內容，也能監控電話通話。
+
+TSG Galaxy 使用 IP 流量資訊匯出（IPFIX）分析流量，並以深度封包檢測（DPI）擷取中繼資料。透過 DPI 可以擷取詳細的指紋，包括傳輸層安全（TLS）與 QUIC 連線的伺服器名稱指示（SNI，連線時以明文送出的網站名稱）、DNS 查詢與電子郵件標頭。TSG Galaxy 也採用 JA3 雜湊值這類連線指紋辨識技術，讓 Cyber Narrator 找出模式，協助判斷使用者的作業系統，以及連線時用的是哪些應用程式。這項技術可以協助辨識使用者是否用 VPN 這類規避工具隱藏流量或繞過審查。在 TSG Galaxy 裡，這些資訊會結合 ISP 提供的資訊，對應到個別網路使用者，使用的識別碼包括 IP 位址、用戶 ID、IMEI（手機的裝置序號）與 IMSI（SIM 卡上的用戶識別碼）[^7]。從 TSG Galaxy 擷取的中繼資料會送進一個資料庫，客戶可以透過 Cyber Narrator 查詢。
+
+本研究的一項重要發現是，TSG Galaxy 在政府客戶所在地蒐集的網路使用者資料，Geedge Networks 的員工似乎都能存取。從資料看來，真實客戶資料的快照有時會分享給中國科學院（中科院）的 Mesalab 實驗室（Massive and Effective Stream Analysis），這個學術實驗室看起來與 Geedge Networks 關係密切。資料也透露，Mesalab 的工程系學生可能曾用真實世界的客戶資訊做研究，目的是更了解並阻擋規避網路審查的行為。Geedge 與相關單位保留客戶資料多久，目前仍不清楚。
 
 <figure markdown="span">
-  [![圖片於報告 16 頁](https://assets.anoni.net/the-internet-coup/index-5-16-2.png)](https://assets.anoni.net/the-internet-coup/index-5-16-2.png){target="_blank"}
-  <figcaption>圖片說明：這些是來自 Mesalab 文件的照片，顯示了 2021 年 3 月 14 日至 4 月 28 日期間的一次新疆出差，可能是由中國科學院的成員或畢業生在 TSG 部署工作期間拍攝的，照片中可能是在伺服器室拍攝的。這些照片是報告的一部分，報導集中於實驗室的政治、科學和商業目標，引用科學家呼籲為國家的利益服務。據報導，由於北京團隊辦公空間有限，不得不「窩」在伺服器室裡。</figcaption>
+  [![圖 3](https://assets.anoni.net/the-internet-coup/index-5-16-2.png)](https://assets.anoni.net/the-internet-coup/index-5-16-2.png){target="_blank"}
+  <figcaption>圖 3：Mesalab 文件裡的照片，記錄一趟新疆出差（2021 年 3 月 14 日至 4 月 28 日），可能是中國科學院的成員或畢業生在部署 TSG 期間，於伺服器機房裡拍攝。照片收在一份報告裡，報告的重點是實驗室的政治、科學與商業目標，並引用一段號召科學家為中國國家利益服務的話。據稱北京團隊因為辦公空間有限，只好「窩」在伺服器機房裡。</figcaption>
 </figure>
-
-### 天狗安全閘道：審查與控制中心
-
-天狗安全閘道（TSG）是 Geedge Networks 提供的旗艦產品，作為一個運營商級別或國家級防火牆與流量管理解決方案，其全面能力可媲美中國防火長城（GFW）。TSG[^8] 允許對整個國家所有使用者流量進行全面監控，並促進識別和阻擋網頁內容及應用程式。TSG 與企業環境中部署的防火牆設備相似，但能夠擴展以處理整個國家的網際網路流量。這項技術似乎缺乏保障人權的倫理限制。
-
-TSG 具備全面的監控和審查功能，透過深度封包檢測，具備識別和封鎖 VPN 及翻牆工具、限制流量、監控、追蹤、標記及阻擋個別網路使用者，並能夠向使用者植入惡意軟體的能力。以下章節將描述這些功能，並詳細說明 TSG 軟硬體如何部署與管理。
 
 <figure markdown="span">
-  [![圖片於報告 17 頁](https://assets.anoni.net/the-internet-coup/index-5-17-1.png)](https://assets.anoni.net/the-internet-coup/index-5-17-1.png){target="_blank"}
-  <figcaption>圖片說明：這是 TSG 為緬甸設置的主儀表板截圖。截圖顯示了根據總頻寬和活躍連接數分類的即時流量快照。另外，它顯示了由 Network Zodiac 提供的監控摘要，以及管理網路流量的活躍政策數量。下方，顯示了按用戶端、伺服器 IP 和熱門應用程式分類的被監控網際網路流量。</figcaption>
+  [![圖 4](https://assets.anoni.net/the-internet-coup/index-5-16-1.png)](https://assets.anoni.net/the-internet-coup/index-5-16-1.png){target="_blank"}
+  <figcaption>圖 4：流量紀錄匯入系統、資料從 TSG 流向 Cyber Narrator 的過程。一位網路使用者想連上「example.com」，網路請求先送到 ISP 的基礎設施，由 TSG-X 擷取。TSG-X 向 Sanity Directory 查詢這個 IP 的使用者是誰。Sanity Directory 從 ISP 的信令（signaling，電信網路用來建立連線、驗證用戶的控制訊息）取得身分，回傳 Jane Doe（代稱）。TSG-X 在這個 IP 上標記擁有者的名字與造訪的網站，寫成一筆紀錄存進 TSG Galaxy。之後，政府官員就能在 Cyber Narrator 查詢 Jane Doe 造訪過哪些網站。</figcaption>
 </figure>
 
-## TSG 的功能能力
+## 天狗安全閘道，審查與控制中心
 
-### 深度封包檢測
+天狗安全閘道（TSG）是 Geedge Networks 的旗艦產品，屬於電信等級或國家等級的防火牆與流量管理方案，功能完整，可以和中國的防火長城（GFW）相提並論。TSG[^8] 可以監看整個國家所有使用者的流量，也能辨識並封鎖網頁內容與應用程式。TSG 和企業環境裡部署的防火牆設備相去不遠，差別在於規模可以擴充到處理整個國家的網際網路流量。這項技術看起來不受任何維護人權的倫理防線約束。
 
-TSG 使用深度封包和流量檢查技術來處理網際網路協議（IP）資料包，以達成進階分類、攔截和操作應用程式與使用者流量的效果。TSG 能對多種運輸和應用協議提供廣泛的可視性，包括 HTTP、DNS、電子郵件、TLS、QUIC 和 SIP。TSG 設計用來監控網路流量和電話會話，並且可以過濾網站、應用程式和其他規避技術（如 VPN）以即時進行審查。TSG 具備識別與封鎖虛擬私人網路（VPN）的能力，也能對 HTTP 回應進行偽造、重定向，改變標頭、注入腳本、取代文字並覆蓋回應內容。
-
-TSG 能夠透過匹配 IP 地址、主機名稱、內建和使用者定義的類別、URL 和 TLS 指紋的一系列元數據，來封鎖、監控、攔截或操作網路流量。如果連接沒有使用 TLS 加密，它甚至可以攔截 HTTP 標頭內容。更進一步，TSG 可以提取電子郵件地址、簽名、附件的元數據，以及電話和電子郵件通訊的來源與目的地號碼。
-
-TSG 能夠透過兩種主要的方法分析傳輸層安全（TLS）流量。第一種方法是使用中間人（MITM）技術進行完整的解密，需要使用者安裝自簽名的根證書機構（CA）證書。第二種方法則運用深度封包檢測（DPI）和機器學習技術，從加密流量中提取元數據。由於後者對網路使用者是隱形的，無需使用者安裝 CA 證書或設定代理設置，因此更常被使用。再者，可以進行混合操作，僅對特定子集的域名進行完整解密。解密後的流量也可以鏡像到另一設備以供進一步檢查。負責執行 TLS MITM 攻擊的組件被稱為天狗前端引擎（TFE）。
-
-公司使用這兩種不同的 TLS 分析方法可能起源於 Geedge 在第一個客戶（國家）之一哈薩克部署時所做的決定。當時，哈薩克曾嘗試在全國推行網路審查，遠在 Geedge 成立之前，該國探索要求所有網路使用者安裝政府控制的 TLS 證書授權機構。這種方法將允許他們透過運行自己的 CA 來攔截所有加密流量，並運作在全球網路信任系統之外。然而，該做法因需於每個裝置上手動安裝而被證明不切實際，且最終在國際瀏覽器製造商封鎖根證書後失敗。哈薩克的例子在國家部署章節中有更詳細描述。
-
-### 阻擋 VPN 和翻牆工具
-
-TSG 也運用深度封包檢測來全面識別與虛擬私人網路（VPN）和翻牆工具相關的協議，例如 OpenVPN 和 WireGuard。它允許客戶與 Geedge Networks 合作制定規則來阻擋特定服務供應商的訪問，Geedge 同時管理一個行動裝置農場，在受控環境下安裝和運行 VPN 應用程式。此外，Geedge Networks 的員工似乎有能力在其辦公室內建立 Wi-Fi 網路，以遠端連接任何裝置到客戶網路。這一功能讓他們能在真實情境中驗證封鎖機制是否運作有效。
-
-即使當 TSG 無法識別與使用者活動相關的應用程式或服務時，系統也能標記任何異常的大流量為可疑流量。系統能夠設定將這些標記的流量在預定時間（例如 24 小時）後進行封鎖。這種方法與防火長城（GFW）的觀察結果一致，觀察顯示其在一段時間後封鎖任何高頻寬加密流量，即使無法識別流量的具體性質[^9]。
-
-AppSketch 是一個資料庫，作為集中式儲存庫，其中 Geedge 根據流量指紋[^10]為所有服務提供商創建檔案，讓客戶能夠更選擇性地阻擋 VPN 和其他應用程式，這些應用程式可能被公司或政府組織使用。AppSketch 的設計使得制定阻擋規則的人員不需要具有深厚的技術知識，這意味著客戶（政府）可以將某些公司列入白名單以使用 VPN，並決定哪些 VPN 可以被允許使用。舉例來說，緬甸的網路安全法規定，緬甸政府會維護一個允許使用受限制的 VPN 和應用程式的公司清單。
-
-Geedge Networks 正在開發一個稱為 AppSketch Works 的沙盒引擎，旨在自動生成應用程式分類檔案。這類產品將允許客戶在手機上運行任何應用程式，系統將自動學習如何在網路上封鎖它。
-
-然而，在洩漏的時間點上，AppSketch Works 項目似乎仍處於開發初期階段，由於需要較高級別的技術技能來設定它以及誤分類的問題[^11]，該原型受到了客戶的不利反饋。不過此工具的進一步開發將允許 Geedge 將定義封鎖規則的責任轉移給政府客戶，取代客戶總是將此過程外包給 Geedge。
+TSG 的功能相當廣泛，包括以深度封包檢測做到的監控與審查、辨識並封鎖 VPN 與規避工具、對流量限速、監控、追蹤、標記並封鎖個別網路使用者，還能讓使用者感染惡意軟體。下方各節先說明這些功能，再詳細介紹 TSG 的軟硬體如何部署與管理。
 
 <figure markdown="span">
-  [![圖片於報告 20 頁](https://assets.anoni.net/the-internet-coup/index-5-20-1.png)](https://assets.anoni.net/the-internet-coup/index-5-20-1.png){target="_blank"}
-  <figcaption>圖片說明：這是從 Geedge Networks 數據集中截取的 AppSketch 截圖。此截圖包含在指導客戶如何透過在上傳新版本之前刪除舊版本的應用程式封鎖規則來更新封鎖功能的指南中。</figcaption>
+  [![圖 5](https://assets.anoni.net/the-internet-coup/index-5-17-1.png)](https://assets.anoni.net/the-internet-coup/index-5-17-1.png){target="_blank"}
+  <figcaption>圖 5：TSG 緬甸主儀表板的截圖，呈現即時流量的快照，依總頻寬與活躍連線數分類。畫面上也有 Network Zodiac 提供的監控摘要，以及用來管控網路流量、目前啟用中的規則（policy）數量。下方是受監控的網際網路流量，依用戶端（Client）、伺服器 IP 與熱門應用程式（Top Applications）分類。</figcaption>
 </figure>
 
-### 限制流量
+### TSG 的功能
 
-TSG 包含流量調整功能，能優先處理或限制來自特定服務的流量，從而降低服務品質而不是直接封鎖。這可以透過直接的流量調整或應用差異化服務代碼點（DSCP）標記來完成，後者是限制或最佳化流量的業界標準。這再次顯示 Geedge 的客戶能夠使用任何廠商的網路設備，且都能與 TSG 相容。
+#### 深度封包檢測
 
-### 賦予使用者聲譽分數
+TSG 對 IP 封包使用深度封包與流量檢測技術，對應用程式與使用者的流量做進階的分類、攔截與竄改。TSG 可以深入檢視多種傳輸與應用協定，包括 HTTP、DNS、電子郵件、TLS、QUIC 與 SIP。TSG 設計成可以同時監控網際網路流量與電話通訊，還能辨識並審查特定的應用程式與網站，以及封鎖 VPN 和其他規避方法。TSG 也能即時竄改 HTTP 連線，手法包括偽造重新導向回應、修改標頭、注入指令碼、替換文字與覆寫回應內容。
 
-Sanity Directory（SAN）或使用者聲譽流量管理系統是一個訂閱者識別系統，專為與網際網路服務提供商（ISPs）現有的信令和認證、授權與計費（AAA）協定（包括 RADIUS、3GPP 和 CGNAT）無縫整合而設計，這種的整合方式促進將流量歸因於真實身份。
+TSG 可以比對一系列中繼資料，包括 IP 位址、主機名稱、內建與使用者自訂的分類、URL 與 TLS 指紋，據此封鎖、監控、攔截或竄改網路流量。連線沒有用 TLS 加密時，TSG 甚至能攔截 HTTP 標頭特徵、密碼、電子郵件信箱、附件與電子郵件內容。此外，TSG 也能擷取電話通訊的中繼資料，包括發話與受話雙方的電話號碼。
 
-該系統具備為每位訂閱者維持聲譽分數的能力，分數由他們的線上活動和系統所收集的個人訊息的數量所決定。如果訂閱者的聲譽分數顯著下降，他們的網路服務可能會被切斷，並可能需要進行照片 ID 和面部辨識驗證來確認其身份並改善其分數。此外，系統可以識別個別訂閱者為已知的 VPN 使用者，並在後續追蹤他們的網路使用情況，將任何未來未知的高頻寬流量標記為可疑。這種個人化的分類可能導致識別和封鎖先前未被識別的服務，當網路使用者切換到新 VPN 供應商時，可能會揭露此新 VPN，並牽連到不僅是被識別的網路使用者，還包括所有其他使用該服務的使用者。
+TSG 分析 TLS 流量的方法主要有兩種。第一種是用中間人攻擊（MITM）的技術完整解密，前提是用戶要安裝一張自簽的根憑證授權單位（CA）憑證。第二種是用深度封包檢測與機器學習技術，從加密流量擷取中繼資料。第二種比較常用，因為網路使用者完全無法察覺，不需要安裝 CA 憑證，也不必設定任何代理伺服器。兩種方法也可以混用，只對特定的一部分網域完整解密。解密後的流量還可以鏡像到另一台設備做進一步檢查。負責執行 TLS 中間人攻擊的元件稱為天狗前端引擎（Tiangou Frontend Engine，TFE）。
 
-### 識別和封鎖個別網路使用者
+Geedge 採用兩種不同的 TLS 分析方法，可能與在哈薩克部署時做的決定有關，哈薩克是 Geedge 最早的客戶國家之一。遠在 Geedge 成立之前，哈薩克第一次嘗試實施全國性審查，就曾考慮要求所有網路使用者安裝一張由政府控制的 TLS 憑證授權單位憑證。政府若自行營運 CA、在全球網路的信任體系之外運作，就能攔截所有加密流量。不過每台裝置都需要手動安裝憑證，實務上不可行，國際瀏覽器廠商封鎖這張根憑證之後，做法便宣告失敗。[第 6 章](./index_6.md)的哈薩克一節有更詳細的說明。
 
-TSG 還能識別共享相同公共 IP 地址的個別網路使用者。TSG 包含自己的網路位址轉換（NAT）實作，稱為 WAN-NAT，可以在「來源 NAT」（SNAT）模式下運作以實現運營商級別網路位址轉換（CGNAT），或在「目的地 NAT」（DNAT）模式下運作以重定向往網際網路的流量。例如，它可以重新路由原本打算給公共 DNS 解析器的流量到由運營商或政府控制的 DNS 解析器。TSG 也能偵測並封鎖使用手機網路共享，即「網路分享」（tethering）功能將行動裝置網路連接分享給其他設備的使用者[^12]。
+#### 封鎖 VPN 與規避工具
 
-這些功能值得注意，因為它們對網路服務提供商（ISPs）來說頗具吸引力，而不僅僅是針對客戶（政府），滿足了網路管理和成本節約的需求。這可能有助於透過提供額外的吸引服務，例如更廣泛的監控和審查功能，來確保 ISPs 在其網路上安裝 Geedge 的支持。
+TSG 也用深度封包檢測全面辨識 VPN 與規避工具使用的協定，例如 OpenVPN 與 WireGuard。接著客戶可以和 Geedge Networks 合作制定規則集，封鎖特定服務供應商的連線。Geedge 管理一座行動裝置農場，在受控的環境裡安裝並執行 VPN 應用程式。此外，Geedge Networks 的員工似乎可以在辦公室裡架設 Wi-Fi 網路，讓任何裝置從遠端連進客戶的網路，用來確認封鎖機制在真實環境中確實有效。
 
-### 用惡意軟體感染使用者
+即使 TSG 無法辨識使用者活動所對應的應用程式或服務，也能把任何異常的大流量標記為可疑。標記之後，系統可以設定在預定的時間後封鎖這些流量，例如 24 小時。這個做法與外界對 GFW 的觀察相符，GFW 也會在一段時間後封鎖高頻寬的加密流量，即使無法判斷流量的實際性質[^9]。
 
-TSG 配備了沿路注入功能，允許在網路傳輸的檔案中插入惡意代碼。Geedge Networks 明確指出這一功能用於在經過 TSG 系統的網路流量中插入惡意軟體。這個功能可與其他沿路注入系統相媲美，如之前由 FinFisher 出售的 FinFly ISP 系統以及在埃及用於將使用者重定向到有害流量的 Sandvine PacketLogic 系統。TSG 能夠在使用者訪問的網頁中注入惡意的 JavaScript 和 CSS，也可以即時修改和嵌入惡意代碼到下載的可執行文件中。
+AppSketch 是集中存放特徵檔的資料庫。Geedge 在這裡依流量指紋[^10]替所有服務供應商建立特徵檔，客戶便能選擇性地封鎖 VPN 與其他應用程式，同時保留給核准的公司或政府機關使用。有了 AppSketch，制定封鎖規則的人不需要深厚的技術知識，政府客戶就能把特定公司列入白名單、允許使用 VPN，並決定哪些 VPN 可以放行。舉例來說，依緬甸的《網路安全法》，緬甸政府維護一份可以使用受限 VPN 與應用程式的公司名單（詳見[第 6 章](./index_6.md)的緬甸一節）。
 
-TSG 的沿路注入功能系統能針對特定使用者進行精確針對性的惡意代碼插入，支持對多種檔案格式的動態修改，包括 HTML、CSS 和 JavaScript，以及 Android APK 檔案、Windows EXE 檔案、macOS DMG 磁碟映像和 Linux RPM 軟體包。此外，TSG 還能修改多種圖像格式，如 JPG、GIF、PNG 和 SVG，及各種壓縮格式，如 ZIP 和 RAR，以及辦公文件、PDF、JSON 和 XML 檔案。這也得到了 Cyber Narrator 的補充，其擁有分析功能，能識別最合適的網址進行劫持以感染特定個人。例如，它能針對某人經常訪問但不使用傳輸層安全性（TLS）的網路。
+Geedge Networks 正在開發名為 AppSketch Works 的沙盒引擎，用來自動產生應用程式的分類特徵檔。這類產品一旦完成，客戶只要在手機上執行任何應用程式，系統就能自動學會如何在網路上封鎖它。
 
-作為該功能的例證，Geedge 的政府客戶不必再靠盲猜定位使用者，可以直接回溯使用者的網路活動，查看他們是否曾經做過讓自己容易被駭入的行為，從而在未來利用這一弱點來感染他們的裝置。
-
-### DDoS 作為一項服務
-
-上面描述的功能可以用來感染使用者以部署任何其他公司提供的間諜軟體。不過 Geedge Networks 也試圖自行將此功能武器化。
-
-在洩漏的資料數據中，Geedge Networks 識別出的最令人困惑的產品之一是 DLL Active Defence，屬於通常只在網路犯罪黑市上才會找到的產品。乍看之下，這似乎是一個用來防護分散式阻斷服務（DDoS）攻擊的系統。然而，細看之後發現，它實際上是一個用來對付被認為在政治上不受歡迎的網站和其他網路服務的 DDoS 攻擊平台。這看起來像是 Geedge 對中國「大炮」（Great Cannon） 的自主實作，如 2015 年公民實驗室（Citizen Lab）報告[^13]所描述的那樣。
-
-這一功能的存在意味著，當國家防火牆可以封鎖國內公民無法訪問的網站時，DLL Active Defence 功能則可以使該網站對全球所有網路使用者都無法訪問，而不僅僅是在國家防火牆範圍內。
-
-DLL 透過網路掃描來識別流量放大點，比如遞迴 DNS 伺服器，這些可以用作反射型拒絕服務攻擊的發起點。它利用 TSG 中的沿路注入功能，有效地將毫無防備的使用者電腦招募為攻擊的一部分，從而建立一個僵屍網路。這是首次確認有資安公司向其客戶提供實質上作為 DDoS 租用的「booter」解決方案。
+不過在資料外洩的時候，AppSketch Works 專案似乎還在開發初期，原型也收到客戶的負面回饋，原因是設定需要較高的技術能力，而且有誤判分類的問題[^11]。即便如此，這項工具仍然值得留意。工具若進一步開發，Geedge 將可以把定義封鎖規則的責任轉移給政府客戶，客戶也不必每次都把這項工作外包給 Geedge。
 
 <figure markdown="span">
-  [![圖片於報告 23 頁](https://assets.anoni.net/the-internet-coup/index-5-23-1.png)](https://assets.anoni.net/the-internet-coup/index-5-23-1.png){target="_blank"}
-  <figcaption>圖片說明：這個圖表展示當網路使用者訪問一個網站時，TSG 系統會發生什麼。TSG 首先會檢查國家中心由中央管理制定的政策。符合政府制定政策的流量獲准並被導向使用者，不允許的流量則被即時封鎖或修改。</figcaption>
+  [![圖 6](https://assets.anoni.net/the-internet-coup/index-5-20-1.png)](https://assets.anoni.net/the-internet-coup/index-5-20-1.png){target="_blank"}
+  <figcaption>圖 6：從 Geedge Networks 資料集擷取的 AppSketch 截圖。截圖出自一份給客戶的操作指南，說明更新封鎖功能時，要先刪除針對各應用程式的舊版封鎖規則，再上傳新的規則。</figcaption>
 </figure>
 
-## TSG 的運作方式
+#### 流量限速
 
-以下的技術分析將探討天狗安全閘道（TSG）背後的軟體開發實踐和網路硬體運作。儘管細節繁多，但這些資訊對於理解系統的實際功能和實施方法至關重要。
+TSG 內建流量整形（traffic shaping）功能，可以優先處理或限速特定服務的流量，降低服務品質而不直接封鎖。實作方式有兩種，一是直接整形流量，二是加上差異化服務代碼點（DSCP）標記，DSCP 是限制或優先處理流量的業界標準。我們從這裡再次看到，Geedge 的客戶可以使用任何廠牌的網路設備，這些設備都能與 TSG 相容。
 
-### TSGX：Geedge 的整合硬體解決方案
+#### 使用者信譽分數
 
-天狗安全閘道主要作為一個整合硬體解決方案，稱為 TSGX。在早期階段，它運行於由 HP Enterprise 和 DELL 提供的白牌硬體上。然而，現在它使用由中國伺服器製造商 Nettrix 提供的硬體，該公司是超級計算機製造商中科曙光（Sugon）的分支。中科曙光因據稱與中國人民解放軍有聯繫，而遭到美國政府制裁。
+Sanity Directory（SAN），又稱使用者信譽流量管理系統，是一套用戶感知系統，設計用來讓 TSG 與 ISP 既有的信令，以及 RADIUS、3GPP、電信等級網路位址轉換（CGNAT）等身分驗證、授權與計費（AAA）協定緊密整合。整合之後，流量就能對應到真實身分。
+
+系統可以替每位用戶維護一個信譽分數，依據是用戶的線上活動，以及系統掌握了他多少個人資訊。用戶的信譽分數大幅下降時，網路服務可能遭到切斷，用戶可能需要通過附照片的身分證件與臉部辨識驗證，證明身分並提高分數。此外，系統可以把個別用戶標記為已知的 VPN 使用者，之後持續追蹤他的網路使用情況，把未來任何無法辨識的高頻寬流量都歸類為可疑。網路使用者換用新的 VPN 供應商時，這種針對個人的分類可能讓原本尚未辨識出來的服務也遭到辨識與封鎖。新的 VPN 可能因此曝光，受牽連的除了已遭辨識的那位網路使用者，還有這項服務的所有其他使用者。
+
+#### 個別網路使用者的識別與封鎖
+
+TSG 也能辨識共用同一個公有 IP 位址的個別網路使用者。TSG 內含自己實作的網路位址轉換（NAT），稱為 WAN-NAT，可以用來源 NAT（SNAT）模式實作 CGNAT，也可以用目的地 NAT（DNAT）模式，把要送往網際網路的流量重新導向。例如，TSG 可以把原本要送到公共 DNS 解析器的流量，轉送到電信業者或政府控制的 DNS 解析器。TSG 也能偵測並封鎖使用網路共用（tethering）功能、把手機的網路連線分享給其他裝置的用戶[^12]。這幾項功能的特別之處，在於吸引的是 ISP 而非政府客戶，對應的是網路管理與節省成本的需求。除了範圍更廣的監控與審查功能，再提供這些吸引 ISP 的服務，或許有助於讓 ISP 願意在自己的網路上安裝 Geedge 的系統。
+
+#### 惡意軟體感染
+
+TSG 具備路徑內注入（in-path injection）功能，可以在網路上傳輸的檔案裡插入惡意程式碼。Geedge Networks 毫不掩飾這項功能的用途，就是在網際網路流量通過 TSG 系統時植入惡意軟體。這項功能類似其他路徑內注入系統，例如 FinFisher 過去販售的 FinFly ISP 系統，以及在埃及用來把使用者導向有害流量的 Sandvine PacketLogic 系統。TSG 可以在使用者造訪的網頁注入惡意的 JavaScript 與 CSS，也能即時竄改使用者下載的執行檔，嵌入惡意程式碼。
+
+透過路徑內注入，TSG 可以讓惡意程式碼精準鎖定特定使用者，即時修改多種格式的檔案，包括 HTML、CSS、JavaScript，還有 Android 的 APK 檔、Windows 的 EXE 檔、macOS 的 DMG 磁碟映像檔與 Linux 的 RPM 套件。TSG 也能竄改 JPG、GIF、PNG、SVG 等多種圖片格式，ZIP、RAR 等壓縮檔格式，以及文書檔案、PDF、JSON 與 XML 檔案。Cyber Narrator 的分析功能也能從旁配合，找出最適合劫持的網址，用來感染特定的人，例如鎖定某個人常造訪、卻沒有使用 TLS 的網站。
+
+舉例來說，Geedge 的政府客戶不必猜測如何鎖定一位使用者。政府客戶可以回頭查看這位網路使用者過去的活動，看他是否做過讓裝置容易遭到入侵的事，再利用這個弱點，在之後感染他的裝置。
+
+#### DDoS 即服務
+
+前面描述的功能可以用來讓使用者感染任何其他公司提供的傭兵間諜軟體（mercenary spyware，由商業公司開發、賣給政府監控特定對象的間諜軟體）。不過 Geedge Networks 自己也嘗試把路徑內注入功能武器化，格外引人注意。
+
+外洩資料集裡最令人費解的 Geedge Networks 產品之一是 DLL Active Defence，比較像是會在網路犯罪黑市看到的產品。DLL Active Defence 乍看之下像是用來防禦分散式阻斷服務（DDoS）攻擊的系統，仔細檢視才發現，它實際上是對政治上不受歡迎的網站與其他網路服務發動 DDoS 攻擊的平台。DLL Active Defence 看起來是 Geedge 自己實作的中國「大砲」（Great Cannon），公民實驗室（Citizen Lab）在 2015 年的報告裡記錄過大砲的運作[^13]。
+
+也就是說，國家防火牆封鎖的網站，只有國內民眾無法連上，DLL Active Defence 則能讓全世界的網路使用者都無法連上同一個網站，範圍不限於國家防火牆之內。
 
 <figure markdown="span">
-  [![圖片於報告 24 頁](https://assets.anoni.net/the-internet-coup/index-5-24-1.png)](https://assets.anoni.net/the-internet-coup/index-5-24-1.png){target="_blank"}
-  <figcaption>左圖：Nettrix 提供的硬體上的 TSGX 圖像。右圖：HP Enterprise 提供的白牌硬體上的 TSGX 圖像。</figcaption>
+  [![圖 7](https://assets.anoni.net/the-internet-coup/index-5-23-1.png)](https://assets.anoni.net/the-internet-coup/index-5-23-1.png){target="_blank"}
+  <figcaption>圖 7：網路使用者造訪網站時 TSG 系統的處理流程。TSG 會先檢查國家中心的中央管理系統定義的規則。符合政府所定規則的流量會放行，再送到使用者端，不允許的流量則即時遭到封鎖或竄改。</figcaption>
 </figure>
 
-TSG 節點被設計為可以被組合成一個叢集，並且網路流量透過其中並在節點間分配。TSGX 不僅僅是擁有一個或兩個防火牆設備以提高冗餘能力，而是可以水平擴展，客戶可以新增更多節點。每個節點都增加了處理更多網路流量的能力。個別節點透過網路封包經紀進行連接，根據流量的來源和目的地來進行負載平衡。網路封包經紀（NPBs）是硬體設備，數據顯示 Geedge 有使用來自第三方供應商如 Niagara Networks 的 NPBs。此外，Geedge 還提供他們自己的產品 Ether Fabric，以下將有詳細介紹。
+DLL 的做法是掃描網際網路，找出遞迴 DNS 伺服器這類可以放大流量的節點，當作反射式阻斷服務攻擊的發射台。DLL 再利用 TSG 的路徑內注入功能，讓毫不知情的使用者電腦加入攻擊，形成殭屍網路（botnet）。這是首次證實有資安公司向客戶提供實質上等同「booter」的 DDoS 租用服務（DDoS-for-hire）。
 
-TSG 叢集中的節點透過一個名為中央管理系統（Central Management, CM）來進行集中管理，該系統也以其前內部名稱「畢方」（Bifang）[^14]識別。這個系統提供一個網頁介面和應用程式介面（API），用於與所有運行防火牆的 TSG 硬體進行互動和設定[^15]。
+### TSG 的運作方式
 
-### TSG-OS
+我們在下方從技術面分析 TSG 背後的軟體開發做法與網路硬體運作。內容雖然細節很多，但要理解系統實際的功能與實作方式，這些資訊不可或缺。
 
-Geedge 的軟體開發實踐顯得非常現代化。TSG 採用了內部開發的作業系統，稱為 TSG-OS，這個系統基於 Red Hat Enterprise Linux，並使用 Open Network Install Environment（ONIE）進行初始設置。TSG-OS 使用了現代 DevOps 工具包開發，運用 Ansible 進行部署和宣告式設定，而 TSG 的各個組件則使用 Docker 和 K3s（輕量級 Kubernetes）進行容器化。這種架構顯示出與許多西方傳統網路供應商的做法有重大不同，後者的代碼庫往往包含數十年的遺留複雜性。Geedge Networks 成立於 2018 年，其提供的軟體在現代化程度上顯著對比。
+#### TSGX，Geedge 的整合式硬體方案
 
-TSG-OS 也能運行在標準商用硬體上或作為虛擬設備。例如，在巴基斯坦的初期運作中，TSG-OS 部署在來自加拿大公司 Sandvine 的改裝 ActiveLogic 硬體上。這家公司之前因向包括埃及在內的威權政權提供深度封包檢測技術而受到關注和美國政府的制裁。在 Sandvine 於 2024 年清理其業務操作並解除制裁後，Geedge Networks 可能看到商機，為受到制裁影響的政權提供替代的作業系統和支援合約。Geedge 進入巴基斯坦市場，協助他們透過改裝 Sandvine 的現有硬體設施以降低成本。我們在下面的巴基斯坦部署章節中會更詳細地討論這一點。
+天狗安全閘道主要以整合式硬體方案 TSGX 的形式銷售。TSGX 起初執行在 HP Enterprise 與 DELL 提供的白牌硬體（不掛原廠品牌、由其他廠商貼上自家品牌銷售的硬體）上。現在 TSGX 改用中國伺服器製造商寧暢（Nettrix）提供的硬體。寧暢是超級電腦製造商中科曙光（Sugon）分拆出來的公司，中科曙光因為遭指控與中國人民解放軍有關聯，受到美國政府制裁。
 
 <figure markdown="span">
-  [![圖片於報告 25 頁](https://assets.anoni.net/the-internet-coup/index-5-25-1.png)](https://assets.anoni.net/the-internet-coup/index-5-25-1.png){target="_blank"}
-  <figcaption>圖片說明：此圖來自關於 Geedge 在巴基斯坦部署的洩漏資料。PCAP、MSH 和 TWA 是 Geedge 系統部署的三個數據中心。圖中顯示 TSG-OS 安裝在來自加拿大公司 Sandvine 的 ActiveLogic 硬體上。</figcaption>
+  [![圖 8 與圖 9](https://assets.anoni.net/the-internet-coup/index-5-24-1.png)](https://assets.anoni.net/the-internet-coup/index-5-24-1.png){target="_blank"}
+  <figcaption>圖 8 與圖 9：左側是中國伺服器製造商寧暢提供的硬體上的 TSG-X（圖 9），右側是 HP Enterprise 提供的白牌硬體上的 TSG-X（圖 8）。</figcaption>
 </figure>
 
-### MARSIO
+TSG 節點設計成可以組成叢集，網際網路流量通過叢集時會分散到各個節點。一般的防火牆部署只有一台設備，或為了備援準備兩台。TSG-X 則可以水平擴充，客戶可以自行增加節點，每多一個節點就能多處理一些網際網路流量。各個節點透過網路封包代理器相連，依來源與目的地平衡流量負載。NPB 是硬體設備，從資料可以看到，有些部署案用的是第三方廠商的 NPB，例如 Niagara Networks。Geedge 也提供自家的產品 Ether Fabric，後面會再說明。
 
-MARSIO 是 Geedge Networks 在 Linux 基礎上的使用者空間實作，作為 Layer-2 和 Layer-3 網路轉發平臺，旨在支持 TSG-OS 中的交換和路由功能。其主要功能包括 VLAN 支持與生成樹協議等交換能力，以及如最長前綴匹配尋徑、路由權重排序，並與 OSPF 和 BGP 等協議相容的路由功能。這一實作透過繞過 Linux 核心數據和轉發平面的局限性，促進高效的深度封包檢測，適用於大多數經由天狗安全閘道處理的資料包。由於 Linux 核心網路堆疊的內在效率低下，這種架構在其他網路設備供應商中也很常見。MARSIO 基於由 Linux 基金會管理的開源數據平面開發工具包（DPDK）專案。
+TSG 叢集裡的節點由中央管理系統（Central Management，CM）集中管理，這套系統也以舊的內部代號 Bifang（毕方）稱呼[^14]。中央管理系統提供網頁介面與應用程式介面（API），用來操作與設定執行防火牆的所有 TSG 硬體[^15]。
 
-使用開源 DPDK 讓他們能夠使網路堆疊避免依賴於特定的硬體供應商，因為該堆疊已經被設計為與多種網路硬體相容。
+#### TSG-OS
 
-### Ether Fabric
+Geedge 的軟體開發做法相當現代。TSG 使用 Geedge Networks 自行開發的作業系統 TSG-OS，以 Red Hat Enterprise Linux 為基礎，初始佈建使用開放網路安裝環境（Open Network Install Environment，ONIE）。TSG-OS 以現代的 DevOps 工具建置，用 Ansible 做部署與宣告式設定，TSG 的各個元件則以 Docker 與 K3s（輕量版 Kubernetes）容器化。這種架構與許多老牌西方網路設備廠商的做法大不相同，老牌廠商的程式碼往往累積數十年的舊有複雜度。Geedge Networks 成立於 2018 年，相較之下提供的軟體明顯現代得多。
 
-Ether Fabric 是一款網路流量複製器（network packet broker, NPB），專為在叢集設定中連接和負載平衡多個 TSG 節點而設計。它基於 IP 5-tuple 的哈希值來將監控的流量分配到這些節點，並可以以主動（線路內）或被動（鏡像）設定的方式部署。這意味著負載平衡的實施確保與特定連接相關的封包始終被發送到同一個 TSG 節點，從而避免「分裂腦（Split-Brain Problem）」問題。除了負載平衡能力外，Ether Fabric 還能選擇特定的網路流量並將其導向到特定的節點。Ether Fabric 是 Geedge Networks 建立的專屬硬體產品，也是他們產品中唯一一個不是現成的白牌硬體。
+TSG-OS 也能執行在一般的通用硬體上，或以虛擬設備的形式運作，這點值得注意。例如在巴基斯坦的初期營運中，TSG-OS 部署在加拿大公司 Sandvine 的 ActiveLogic 硬體上，硬體是改作他用的舊設備。Sandvine 先前向埃及等威權政權提供深度封包檢測技術，因而受到外界檢視，也遭美國政府制裁。Sandvine 在 2024 年整頓業務做法、制裁隨後解除，Geedge Networks 可能從中看到商機，向受制裁影響的政權提供替代的作業系統與技術支援合約。Geedge 打進巴基斯坦市場，沿用 Sandvine 既有的硬體，協助巴基斯坦降低成本。[第 6 章](./index_6.md)的巴基斯坦一節有更詳細的說明。
 
 <figure markdown="span">
-  [![圖片於報告 26 頁](https://assets.anoni.net/the-internet-coup/index-5-26-1.png)](https://assets.anoni.net/the-internet-coup/index-5-26-1.png){target="_blank"}
-  <figcaption>圖片說明：Ether Fabric 硬體的照片，這是 Geedge Networks 唯一一款專屬硬體，展示了 ATCA 規格的樣子。</figcaption>
+  [![圖 10](https://assets.anoni.net/the-internet-coup/index-5-25-1.png)](https://assets.anoni.net/the-internet-coup/index-5-25-1.png){target="_blank"}
+  <figcaption>圖 10：外洩資料中與 Geedge 巴基斯坦部署相關的示意圖。PCAP、MSH 與 TWA 是部署 Geedge 系統的三座資料中心。圖中可以看到 TSG-OS 安裝在加拿大公司 Sandvine 的 ActiveLogic 硬體上。</figcaption>
 </figure>
 
-Ether Fabric 的硬體組件在很大程度上是可互換的，其建造基於先進電信計算架構（ATCA）模組化工業 PC 規格，這在電信設備中很常見。獨立的組件安裝在滑板上，並在後面有專用連接器連接電源和乙太網，這與通常會放入數據中心的普通伺服器形式不同。交換板基於中國公司北京恒光信息技術有限公司（恒光信息）的 VELA 平台。在內部，Ether Fabric 使用了 Barefoot Networks（隸屬於 Intel）的一款 3.2 Tbit/s 交換芯片，可以使用 P4 編程語言進行編程，以管理網路設備中的封包轉發平面。
+#### MARSIO
 
-有關恒光 VELA 平台的公開訊息有限。然而，硬體似乎類似於中國公司 Embedway 生產的 OptiWay ATCA 平台。此外，文件中所包含的管理介面供應商 MAC 地址查詢結果顯示，部分硬體可能由台灣公司 ADLINK Technology Inc. 製造。控制平面基於 Open Network Linux，並由 Geedge Networks 內部開發。
+MARSIO 是 Geedge Networks 在 Linux 使用者空間（userspace）實作的第二層與第三層網路轉送平面（forwarding plane），在 TSG-OS 裡提供交換與路由功能。主要功能包括 VLAN 與生成樹協定（spanning tree）等交換功能，以及最長前綴比對（longest-prefix match）的路徑選擇、路由權重排序、相容 OSPF 與 BGP 等協定的路由功能。通過天狗安全閘道的封包，大多數不必經過 Linux 核心的資料平面與轉送平面，避開核心的限制，深度封包檢測因此更有效率。Linux 核心的網路堆疊先天效率不佳，所以其他網路設備廠商也常採用這種架構。MARSIO 以資料平面開發套件（Data Plane Development Kit，DPDK）為基礎，DPDK 是 Linux 基金會管理的開源專案。
 
-由於 P4 編程語言的目標獨立性，Barefoot 交換芯片是可以互換的。洩露的資訊指出，Geedge Networks 已經研究了來自 AMD、博通和美滿（隸屬於 NVIDIA）的替代解決方案。例如，P4 也可以用於 FPGA 平台，如 Intel 的 PA8921 加速卡，用於 Embedway 的其他產品中。根據 Intel 在其官方網站上發布的 2023 年 11 月技術簡報，Intel 確實向 Embedway 提供了用於深度封包檢測應用的加速卡[^16]。不過，我們的研究沒有發現任何這些加速卡由 Geedge Networks 使用的證據。
+使用開源的 DPDK，讓 Geedge 的網路堆疊不受限於特定的硬體廠商，因為與各種網路硬體相容的工作，DPDK 專案已經替 Geedge 完成。
 
-### Network Zodiac 監控網路硬體
+#### Ether Fabric
 
-Network Zodiac（哪吒）是由 Geedge Networks 開發的一款網路級資產管理和監控解決方案[^17]。Network Zodiac 顯然是以 Grafana 為藍本開發的，Grafana 是許多商業實體廣泛使用的開源分析和監控平台。與 Grafana 相似，Network Zodiac 幫助組織即時視覺化和理解其網路的效能、使用情況和錯誤。然而，雖然 Grafana 主要提供針對軟體應用的分析，Network Zodiac 則擴展了這一功能以分析硬體網路設備的效能[^18]。Network Zodiac 還允許監控大量的設備。該產品提供客戶診斷網路問題的能力，利用一個分佈式的監控架構，一個稱為 "NZ-TALON" 的軟體代理從每個節點（單個硬體設備）收集數據，並在客戶（政府）或 ISP 管理的數據中心聚合所有的指標。這些數據隨後傳輸到一個全球 NZ-Agent 節點中以進行長期儲存，允許客戶在 Network Zodiac 網頁介面中查詢全球節點，以檢索和視覺化聚合的效能指標。
+Ether Fabric 是網路封包代理器，用來在叢集架構裡連接多個 TSG 節點並平衡負載。Ether Fabric 依 IP 五元組（5-tuple，來源與目的地的 IP 位址、連接埠，加上傳輸協定）的雜湊值，把受監控的流量分配到各個節點，可以用主動（串接，in-line）或被動（鏡像，mirrored）的方式部署。這樣的負載平衡方式，讓同一條連線的封包永遠送到同一個 TSG 節點，避免腦裂（split-brain，同一條連線分散到不同節點，各節點掌握的狀態互相矛盾）問題。除了平衡負載，Ether Fabric 也能挑出特定的網路流，導向特定節點。Ether Fabric 是 Geedge Networks 自行設計的專用硬體產品，據我們所知，也是 Geedge 產品線中唯一不採用市售白牌硬體的產品。
 
 <figure markdown="span">
-  [![圖片於報告 28 頁](https://assets.anoni.net/the-internet-coup/index-5-28-1.png)](https://assets.anoni.net/the-internet-coup/index-5-28-1.png){target="_blank"}
-  <figcaption>圖片說明：這是從 Geedge Networks 數據集提取的 Network Zodiac 儀表板截圖，顯示監控設備的地圖以及每個數據中心內的狀態。</figcaption>
+  [![圖 11](https://assets.anoni.net/the-internet-coup/index-5-26-1.png)](https://assets.anoni.net/the-internet-coup/index-5-26-1.png){target="_blank"}
+  <figcaption>圖 11：Ether Fabric 硬體的照片。Ether Fabric 是 Geedge Networks 唯一的專用硬體，從照片可以看到先進電信運算架構（AdvancedTCA，ATCA）規格的外觀。</figcaption>
 </figure>
 
-Network Zodiac 與流行的開源解決方案的一個顯著不同功能是其集成的網頁終端，該終端允許網路管理員使用 SSH 遠端連接到任何受監控的端點。這一功能為客戶提供直接訪問網路設備的能力，方便進行故障排除和管理。然而，網頁終端也使客戶承受了顯著的安全風險。在最壞的情況下，駭客可能會訪問部署在一個國家內部的所有安全設備。這種取捨顯示 Geedge 優先考慮大規模管理的便捷和易用性，而非基本的安全性。
+Ether Fabric 的硬體元件大多可以互換。硬體採用 ATCA 規格，屬於電信設備常用的模組化工業電腦規格。各個元件裝在抽取式托架（sled）上，背面有專用接頭連接電源與乙太網路，資料中心常用的通用伺服器很少採用這種規格。交換板以中國公司 Beijing Hengguang Information Technology Co., Ltd.（恒光信息）的 VELA 平台為基礎。Ether Fabric 內部使用 Barefoot Networks（隸屬 Intel）的 3.2 Tbit/s 交換晶片，晶片可以用 P4 程式語言編寫。P4 是用來管理網路設備封包轉送平面的程式語言。
 
-[^4]: 從資料中看到的客戶部署情況顯示，Cyber Narrator 運行於中國伺服器製造商浪潮的高密度儲存伺服器上。該軟體本身並不依賴於特定硬體，可部署於任何供應商的通用伺服器硬體上。
-[^5]: 它基於 Apache Kafka，利用了 Apache Druid 資料儲存、Apache Flink 分散式處理引擎和 ClickHouse 分析型資料庫構建而成。
-[^6]: SQL 模式本質上是一個資料庫的組織系統。
-[^7]: 這意味著，TSG Galaxy 的客戶可以將網路流量歸因於一個 IP 位址，以及特定的手機或 SIM 卡。
-[^8]: 在中國神話中，天狗通常被描繪為一隻在日食或月食中吞噬太陽或月亮的狗。
+恒光 VELA 平台的公開資訊有限，不過硬體看起來與中國公司 EmbedWay 生產的 OptiWay ATCA 平台相似。此外，用文件中管理介面的 MAC 位址查詢廠商，結果顯示部分硬體可能由台灣公司凌華科技（ADLINK Technology Inc.）製造。控制平面以 Open Network Linux 為基礎，由 Geedge Networks 自行開發。
+
+P4 程式語言與目標硬體無關（target-independence），所以 Barefoot 交換晶片可以替換。外洩資料中有資訊顯示，Geedge Networks 已經評估過 AMD、博通（Broadcom）與 Mellanox（隸屬 NVIDIA）的替代方案。例如，P4 也能用在以 FPGA 為基礎的平台，像是 EmbedWay 其他產品採用的 Intel PA8921 加速卡。根據 Intel 在官方網站發布、至今仍可在網路上取得的 2023 年 11 月技術簡報，Intel 確實提供加速卡給 EmbedWay，用於深度封包檢測應用[^16]。不過我們的研究並未發現 Geedge Networks 使用這些加速卡的證據。
+
+## Network Zodiac，網路硬體的監控
+
+Network Zodiac（Nezha，哪吒）是 Geedge Networks 開發的全網資產管理與監控方案[^17]。Network Zodiac 似乎以 Grafana 為範本，Grafana 是許多企業使用的熱門開源分析與監控平台。Network Zodiac 和 Grafana 一樣，讓組織能以視覺化的方式即時掌握網路的效能、使用情況與錯誤。不過 Grafana 主要分析的是軟體應用程式，Network Zodiac 則把功能延伸到分析網路硬體設備的效能[^18]。Network Zodiac 能監控的設備數量也多得多。客戶可以用這項產品診斷整個網路的問題。Network Zodiac 採用分散式的監控架構，由名為「NZ-TALON」的軟體代理程式從每個節點（個別的硬體設備）蒐集資料，再把所有指標彙整到政府客戶或 ISP 營運的資料中心。資料接著傳送到全域的 NZ-Agent 執行個體長期保存，客戶可以在 Network Zodiac 的網頁介面查詢這個全域執行個體，取得並以視覺化方式呈現彙整後的效能指標。
+
+<figure markdown="span">
+  [![圖 12](https://assets.anoni.net/the-internet-coup/index-5-28-1.png)](https://assets.anoni.net/the-internet-coup/index-5-28-1.png){target="_blank"}
+  <figcaption>圖 12：從 Geedge Networks 資料集擷取的 Network Zodiac 儀表板截圖，顯示受監控設備的地圖，以及每座資料中心裡的設備狀態。</figcaption>
+</figure>
+
+Network Zodiac 與熱門開源方案的一大差異，是內建網頁終端機，網路管理員可以用 SSH 從遠端連上任何受監控的端點。客戶因此可以直接存取網路設備，排除問題與管理設備，但也讓客戶暴露在重大的資安風險中。最壞的情況下，駭客可能取得客戶在國內部署的所有安全設備的存取權。這種取捨顯示，Geedge 把大規模管理的便利與易用放在基本資安之前。
+
+[^4]: 資料中看到的客戶部署案，Cyber Narrator 都執行在中國伺服器製造商浪潮（Inspur）的高密度儲存伺服器上。軟體本身不綁定特定硬體，可以部署在任何廠商的通用伺服器硬體上。
+[^5]: TSG Galaxy 以 Apache Kafka 為基礎，並使用 Apache Druid 資料儲存、Apache Flink 分散式處理引擎與 ClickHouse 分析資料庫。
+[^6]: SQL 結構描述（schema）基本上就是資料庫的組織架構。
+[^7]: 也就是說，TSG Galaxy 的客戶可以把網路流量對應到一個 IP 位址，也能對應到特定的手機或 SIM 卡。
+[^8]: 在中國神話裡，天狗常以狗的形象出現，在日食或月食時吞食太陽或月亮。
 [^9]: Mingshi Wu et al.，[How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic](https://www.usenix.org/conference/usenixsecurity23/presentation/wu-mingshi){target="_blank"}，Proceedings of the 32nd USENIX Security Symposium，2023 年 8 月 9 日至 11 日，美國加州安納罕。
-[^10]: 為了提取這些指紋，Geedge 和 Mesalab 的學生使用了一個開源工具 tcpdump 的修改版本，稱為 tcpdump_mesa。接著，指紋會被轉換為規則集，使用四個深度數據包檢查系統之一：SAPP（Stream Analyze Process Platform），一個 C 語言的封包解析和注入庫。Stellar，一個狀態防火牆插件平台，相較於 SAPP 運作在更高的抽象層次。或是 Maat，一個宣告式系統。與 SAPP 和 Stellar 不同，Maat 不需要編程知識以開發新規則。Maat 能夠匹配常見的連接指紋，包括 IP 位址、域名、TLS 伺服器名稱指示（SNI）、JA3/JA4 指紋，指紋內容在 JSON 文件中指定。Maat 規則透過使用 Redis 資料庫進行同步，以確保規則在 TSG 叢集的節點中一致應用。另一個執行深度數據包檢查的系統由兩個二進位文件組成，分別為「libqmengine.so」和「libqmbundle.so」。雖然洩漏的資訊不包括相關的原始碼，其中包含的 Jira 票據將該系統稱作 QDPI 或「第三方識別引擎庫」，暗示它可能不是由 Geedge Networks 開發。分析數據中的 Jira 票據表達了關於無法修改第三方引擎行為的擔憂，並強調了在獲取此系統技術支援時的挑戰。上述擔憂進一步支持了這些二進位文件不是由 Geedge Networks 開發的觀點。對兩個二進位文件的初步逆向工程指出它們參與了網路協議和服務的分類。與第三方引擎的整合是透過使用名為 qdpi_detector 的 Stellar 插件來完成的。
-[^11]: 他們在中國的一個區域性國內客戶中試驗了這個系統。該軟體的初始版本收到此客戶的負面反饋，主要原因是需要在 Python 中進行使用者介面自動化腳本編寫以促進與應用程式的互動。這成了一個重大挑戰，因為終端使用者通常缺乏必要的腳本編寫技能。此外，客戶擔心自動分類過程可能會導致誤報，將廣告網路和由第三方庫產生的其他網路請求錯誤分類為指紋。
-[^12]: 儘管當今市場上大多數網路分享檢測解決方案主要依靠分析收到的 IP 封包的生存時間（TTL）值，TSG 採用的是更為複雜的方法。它結合被動作業系統檢測技術與深度數據包檢查來識別與驗證入口網頁檢測（特別是所謂的 generate_204 請求）相關的 HTTP 請求，而請求內容會隨所用的作業系統而不同。因此，任何透過行動連線進入網路的桌面作業系統客戶均被視為網路分享活動的指示。天狗安全閘道採用的另一種技術涉及分析 TCP 時間戳值中的差異，在現代 TCP 堆疊中，這個計數器在啟動時初始化為一個隨機值。這些值的變化表明在網路位址轉換（NAT）背後存在多個裝置。
-[^13]: Bill Marczak et al.，[China’s Great Cannon](https://citizenlab.ca/2015/04/chinas-great-cannon/){target="_blank"}，2015-04-10（原報告誤植為 2025 年）。
-[^14]: 在中國神話中，畢方是一種獨腳鳥，象徵著不幸的預兆，特別是與火相關的不幸。據信它的出現預示著該地區可能有災難發生。
-[^15]: 該系統整合了統一認證，並由中央設定儲存支撐，這可將設置同步到叢集中的各個節點，同時還整合了故障轉移機制以確保運營的連續性。其底層使用一個 Restful API 來查詢叢集中的各種組件以獲取狀態和故障資訊。此 API 在內部被稱為 TSG-OAM，其中 OAM 是運營和維護的縮寫。
+[^10]: Geedge 與 Mesalab 的學生用自行修改的開源工具 tcpdump 擷取這些指紋，修改版稱為 tcpdump_mesa。指紋擷取之後，再用四套深度封包檢測系統的其中一套轉換成規則集。第一套是 SAPP（Stream Analyze Process Platform），以 C 語言撰寫的封包解析與注入函式庫。第二套是 Stellar，有狀態防火牆的外掛平台，抽象層級比 SAPP 高。第三套是宣告式系統 Maat，用 Maat 開發新規則不需要程式設計知識，SAPP 與 Stellar 則需要。Maat 可以比對常見的連線指紋，包括 IP 位址、網域名稱、TLS 的 SNI、JA3/JA4 指紋，比對條件寫在 JSON 檔案裡。TSG 叢集的各節點透過 Redis 資料庫同步 Maat 的規則，讓每個節點套用相同的規則。第四套深度封包檢測系統由兩個二進位檔組成，檔名是「libqmengine.so」與「libqmbundle.so」。外洩資料裡沒有這套系統的原始碼，只有 Jira 工單提到它，稱為 QDPI 或「第三方识别引擎库」（third-party recognition engine library），可見它可能不是 Geedge Networks 開發的。我們分析的 Jira 工單裡，有人擔心無法修改第三方引擎的行為，也有人提到難以取得技術支援的聯絡窗口，更佐證兩個二進位檔並非 Geedge Networks 自行開發。初步逆向工程的結果顯示，這兩個二進位檔參與網路協定與服務的分類。與第三方引擎的整合，是透過名為 qdpi_detector 的 Stellar 外掛完成。
+[^11]: Geedge 找了中國國內的一個地區客戶試用這套系統。軟體的初期版本收到這個客戶的負面回饋，主要原因是要和應用程式互動，需要用 Python 撰寫使用者介面自動化指令碼。終端使用者通常沒有撰寫指令碼的能力，成為很大的障礙。此外，客戶擔心自動分類流程可能誤判，把廣告聯播網與第三方函式庫產生的其他網路請求誤當成指紋，造成誤報。
+[^12]: 目前市面上的網路共用偵測方案，大多分析收到的 IP 封包的存活時間（TTL）值，TSG 採用的方法更精密。TSG 結合被動式作業系統偵測技術與深度封包檢測，辨識與強制登入頁面（captive portal）偵測有關的 HTTP 請求，也就是所謂的 generate_204 請求，這類請求依使用的作業系統而不同。因此，只要有用戶透過行動連線、以桌上型電腦的作業系統上網，系統就會視為有網路共用的跡象。天狗安全閘道採用的另一種技術，是分析 TCP 時間戳記（TCP Timestamp）值的差異。在現代的 TCP 協定堆疊中，時間戳記是開機時以隨機值初始化的計數器，數值不一致代表網路位址轉換（NAT）後面有多台裝置。
+[^13]: Bill Marczak et al.，[China’s Great Cannon](https://citizenlab.ca/2015/04/chinas-great-cannon/){target="_blank"}，2015 年 4 月 10 日（原報告誤植為 2025 年）。
+[^14]: 在中國神話裡，畢方是一種單腳的鳥，是不祥之兆，尤其與火災有關，據說牠一出現，當地就可能發生災禍。
+[^15]: 中央管理系統整合統一身分驗證，背後有一個中央設定儲存區，負責把設定同步到叢集裡的各個節點，也整合容錯移轉（failover）機制，確保營運不中斷。在底層，CM 透過 RESTful API 查詢叢集裡各元件的狀態與故障資訊。這組 API 在內部稱為 TSG-OAM，OAM 是營運與維護（Operations and Maintenance）的縮寫。
 [^16]: Intel Corporation，[EmbedWay Shipping PA8921 FPGA Acceleration Card Based on Intel Agilex® 7 FPGAs F-Series Optimized for DPI and RDMA Network Acceleration](https://web.archive.org/web/20250624201825/https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/embedway-shipping-pa88921-fpga-acceleration-card-solution-brief.pdf){target="_blank"}，技術簡報（Solution Brief），2023 年 11 月。
-[^17]: 在中國神話中，哪吒是一位守護神，常以少年戰士的形象出現。
-[^18]: Network Zodiac 的主要差異，在於可以同時使用 Prometheus 與 PromQL，以及在網路設備上更普遍的簡易網路管理協定（SNMP）。
+[^17]: 在中國神話裡，哪吒是一位護法神，常以少年戰士的形象出現。（譯註：原報告正文寫作「哪吃」，應為「哪吒」。）
+[^18]: Network Zodiac 的主要差異，在於可以同時使用 Prometheus 與 PromQL，以及網路設備上更普遍的簡易網路管理協定（SNMP）。
 
-*[Cyber Narrator]: Cyber Narrator 是由 Geedge Networks 開發的運營商級別安全資訊和事件管理（SIEM）以及線上分析處理（OLAP）解決方案。這是客戶在使用 Geedge 的監控產品時主要的使用者介面，也是唯一為非技術使用者設計的產品。在實際應用中，政府分析師會在國家指揮中心的辦公室中使用這個介面來存取資料。
-*[DPI]: 深度封包檢測 Deep Packet Inspection，縮寫為 DPI，是一種電腦網路封包過濾技術，用來檢查透過檢測點封包的資料部分（也可能包含其標頭），以搜尋不符合規範的協定、病毒、垃圾郵件、入侵，或以預定準則來決定封包是否可透過或需被路由至其他不同目的地，或是為了收集統計資料。
-*[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[MITM]: 中間人攻擊 Man-in-the-middle attack，縮寫：MITM，在密碼學和電腦安全領域中是指攻擊者與通訊的兩端分別建立獨立的聯絡，並交換其所收到的資料，使通訊的兩端認為他們正在透過一個私密的連接與對方直接對話，但事實上整個對談都被攻擊者完全控制。
-*[TSG]: 天狗安全閘道（TSG）是 Geedge Networks 提供的旗艦產品，作為一個運營商級別或國家級防火牆與流量管理解決方案，其全面能力可媲美中國防火長城（GFW）。TSG5 允許對整個國家所有使用者流量進行全面監控，並促進識別和阻擋網頁內容及應用程式。TSG 與企業環境中部署的防火牆設備相似，但能夠擴展以處理整個國家的網際網路流量。這項技術似乎缺乏保障人權的倫理限制。
+*[DPI]: 深度封包檢測，逐一分析封包內容、判斷是否放行的技術
+*[MITM]: 中間人攻擊，攻擊者介入通訊雙方之間，攔截或竄改內容
+*[TSG]: 天狗安全閘道，Geedge Networks 的旗艦防火牆與流量管理產品
+*[Geedge Networks]: 積至公司，開發並出口審查與監控技術的中國公司
+*[Geedge]: 積至公司，開發並出口審查與監控技術的中國公司
