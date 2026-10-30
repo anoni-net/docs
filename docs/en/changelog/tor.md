@@ -13,10 +13,25 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 ## Two release channels
 
-- <span class="chan-tag chan-tag--stable">Stable</span>What regular users should run, versioned like 15.0.20.
+- <span class="chan-tag chan-tag--stable">Stable</span>What regular users should run, versioned like 16.0 or 15.0.26.
 - <span class="chan-tag chan-tag--alpha">Alpha</span>Testing only. It may contain bugs affecting usability, security, and privacy, and is versioned with an a (16.0a10, for example). Do not use it if you need strong anonymity.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
+
+## Tor Browser 16.0
+
+> 2026-10-29 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-160/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>A new major version and the first stable release based on Firefox ESR 153. Desktop moves to 153.6.0esr, with GeckoView on Android updated to match. ESR 153.6 fixed 145 issues on 27 October (see [browser security updates](./browsers.md)), and the bundled tor moves to 0.4.9.15, the security release of 28 October (see the [tor daemon changelog](./tor-daemon.md)). The announcement does not mention active exploitation.
+- As usual when changing base, the Tor Project ran its annual ESR transition audit, reviewing a year of Firefox changes for privacy and security impact and addressing over 270 Bugzilla issues. Among the results, WebGPU is disabled until audited (tor-browser#44763), AI-related settings and features are hidden or turned off, and several features that could aid browser fingerprinting are removed or disabled.
+- The desktop Settings pages are fully reorganised, following Firefox's redesign in June. The old General page is split into Appearance, Downloads, Tabs and browsing, Accessibility and Languages, and the Connection and Security Level pages are rebuilt with the new components. Settings that could compromise privacy or make the browser easier to fingerprint if enabled are either hidden or carry clear warnings. Existing preferences are kept, and the search bar at the top of Settings finds anything that has moved.
+- A new option under Privacy and security replaces every window title with "Tor Browser". Other programs on your computer can read window titles, which show the page you are viewing, without special permissions. The option is off by default because the Tor Project has not finished evaluating its effect on screen readers and other assistive tools, and it invites users to try it and report problems. For fuller protection from other software on the same computer, the announcement recommends Tails.
+- The built-in manual (about:manual) is replaced with content from the new support site, and on desktop it can still be read offline, which helps most when you cannot connect to the Tor network.
+- Several platform changes. Linux gains a stable build for 64-bit ARM (AArch64), such as a Raspberry Pi or an Apple Silicon Mac running Linux, so people who used Alpha for this can switch back to stable. 32-bit x86 Linux loses support along with Firefox; the announcement notes the platform now sees only about 200 update checks a day. Android also drops its 32-bit x86 build (tor-browser-build#41573), while the 32-bit Windows build remains available.
+- On Android, large parts of the interface move to Material Design 3, features such as password management and bookmark import are removed, and NoScript is now always enabled.
+- Two changes concern onion sites. Onion sites using self-signed certificates now show a security exception warning and button (tor-browser#42065), and Location.ancestorOrigins no longer reveals onion origins (tor-browser#44801).
+- NoScript moves to 13.6.37.1984 and the Go toolchain to 1.26.10. The release signing subkey remains `022DA248432D2A0E0F54E65E316C1FACD62D07D9`, checked against the 16.0 `sha256sums-signed-build.txt.asc`.
+- The announcement previews a new circuit display coming to Alpha that can draw multi-path (conflux) circuits, and that will bring a circuit display to Android for the first time.
 
 ## Tor Browser 15.0.26
 

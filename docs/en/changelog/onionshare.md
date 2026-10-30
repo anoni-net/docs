@@ -23,6 +23,14 @@ OnionShare ships far less often than Tor Browser or Tails: fifteen months passed
 
 Releases are infrequent and none so far has warranted same-day installation, so this page has no "Now" entries yet.
 
+## OnionShare 2.7.1
+
+> 2026-10-29 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7.1){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>Bug fixes and dependency updates. This release has no security fixes of its own, so the question of exploitation does not arise. If you are still on 2.6.5 or earlier, treat this as "Soon": moving up brings the security fix from 2.7 (GHSA-2pj7-hh2q-hjrh) with it, and you can install 2.7.1 directly.
+- Fixes freezes, most common on Windows, caused by tor output overloading subprocess pipes. Single-file shares are no longer compressed and can be resumed after an interrupted download (a range request issue).
+- Three more crash and error fixes: reporting an exception with no message no longer crashes with a KeyError, `is_authenticated()` is now correctly called as a method, and the Flatpak build no longer crashes after the drag-and-drop alert and can start again without a lock-file problem.
+
 ## OnionShare 2.7
 
 > 2026-10-16 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7){target="_blank"} · [GHSA-2pj7-hh2q-hjrh](https://github.com/onionshare/onionshare/security/advisories/GHSA-2pj7-hh2q-hjrh){target="_blank"}

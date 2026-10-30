@@ -13,10 +13,25 @@ digest:
 
 ## 两个发布通道
 
-- <span class="chan-tag chan-tag--stable">稳定版</span>一般用户用这个，版本号形如 15.0.20。
+- <span class="chan-tag chan-tag--stable">稳定版</span>一般用户用这个，版本号形如 16.0、15.0.26。
 - <span class="chan-tag chan-tag--alpha">Alpha</span>仅供测试，可能含影响可用性、安全与隐私的错误，版本号带 a（例如 16.0a10）。需要强匿名保护的人不要用。
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
+
+## Tor Browser 16.0
+
+> 2026-10-29 · [上游公告](https://blog.torproject.org/new-release-tor-browser-160/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>新的大版本，也是第一个以 Firefox ESR 153 为基础的稳定版。桌面版换到 153.6.0esr，Android 版的 GeckoView 同步。ESR 153.6 在 10 月 27 日修复了 145 个问题（见[浏览器安全更新](./browsers.md)），内置的 tor 也升到 10 月 28 日的安全发布 0.4.9.15（见 [tor daemon 更新日志](./tor-daemon.md)）。公告没有提到已被实际利用的问题。
+- 换基础版本时 Tor Project 照例做了年度的 ESR 转换审计，检查 Firefox 这一年的变更有没有影响隐私与安全，处理了超过 270 张 Bugzilla 工单。结果之一是停用还没审计的 WebGPU（tor-browser#44763）、隐藏或关闭 AI 相关的设置与功能，并移除或关闭几项可能被用来做浏览器指纹的功能。
+- 桌面版的设置页跟着 Firefox 6 月的改版全面重整。原本的「常规」页拆成外观、下载、标签页与浏览、无障碍、语言几页，连接与安全级别两页用新组件重做。启用后可能损害隐私或让浏览器更容易被识别的设置，有的被隐藏，有的加上明确的警告。已有的偏好设置都会保留，找不到的项目可以用设置页顶端的搜索。
+- 设置的隐私与安全下面新增一个选项，开启后所有窗口标题一律显示「Tor Browser」。电脑上的其他程序不需要特别权限就能读取窗口标题，也就是你正在看的网页标题。选项目前默认关闭，Tor Project 还没评估完它对读屏软件等辅助工具的影响，欢迎试用并反馈问题。要更完整地防范同一台电脑上的其他程序，公告建议改用 Tails。
+- 内置的使用手册（about:manual）换成新版支持网站的内容，桌面版一样可以离线阅读，无法连上 Tor 网络时查问题特别有用。
+- 平台支持有几项变动。Linux 新增 64 位 ARM（AArch64）的正式版，例如树莓派或装了 Linux 的 Apple Silicon Mac，原本为此改用 Alpha 的人可以换回稳定版。32 位 x86 的 Linux 跟着 Firefox 停止支持，公告写明这个平台现在每天大约只有 200 次更新检查。Android 也移除了 32 位 x86 的版本（tor-browser-build#41573），Windows 的 32 位版仍有提供。
+- Android 版有大片界面换成 Material Design 3，密码管理、导入书签等功能被移除，NoScript 改为一律启用。
+- onion 网站相关的调整有两项。使用自签名证书的 onion 网站会显示安全例外的警告与按钮（tor-browser#42065），Location.ancestorOrigins 也不再返回 onion 网站的来源（tor-browser#44801）。
+- NoScript 升至 13.6.37.1984，Go 工具链升到 1.26.10。发布文件的签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0 的 `sha256sums-signed-build.txt.asc` 核对。
+- 公告预告之后会在 Alpha 推出新的电路显示，可以画出多路径（conflux）电路，Android 版也会第一次有电路显示。
 
 ## Tor Browser 15.0.26
 

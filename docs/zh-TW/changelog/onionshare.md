@@ -23,6 +23,14 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 發版節奏慢，目前沒有出現過需要當天更新的等級，所以這一頁還沒有「立刻」。
 
+## OnionShare 2.7.1
+
+> 2026-10-29 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.7.1){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>錯誤修正與相依套件更新，這一版本身沒有安全修補，也就沒有利用與否的問題。還停在 2.6.5 或更早的人請視同「儘快」，升上來會一併帶進 2.7 的安全修補（GHSA-2pj7-hh2q-hjrh），直接裝 2.7.1 即可。
+- 修正 tor 的輸出塞滿子程序的管線、讓程式凍結的問題，Windows 上特別常見。分享單一檔案時不再壓縮，下載中斷之後也可以續傳（range request 的問題）。
+- 另外修正三個當機或錯誤：回報沒有訊息的例外時不再因 KeyError 當機、`is_authenticated()` 改成正確地當方法呼叫、Flatpak 版拖放檔案跳出警告後不再當機，重新啟動也不會被鎖定檔擋住。
+
 ## OnionShare 2.7
 
 > 2026-10-16 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.7){target="_blank"} · [GHSA-2pj7-hh2q-hjrh](https://github.com/onionshare/onionshare/security/advisories/GHSA-2pj7-hh2q-hjrh){target="_blank"}

@@ -40,7 +40,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 > 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.15/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全釋出，距離 0.4.9.14 三週，修補的是中繼收到大量目錄請求時的阻斷服務防禦。官方寫明主要影響中繼，請盡快升級。這次沒有附 TROVE 編號，上游也沒有提到已被實際利用。
-- 用瀏覽器連上 Tor 的人暫時不需要做什麼。截至 10 月 29 日，Tor Browser 15.0.26 與 Tails 7.15.1 帶的仍是 0.4.9.14，之後的版本跟進時會整理在 [Tor 更新日誌](./tor.md)與 [Tails 更新日誌](./tails.md)。架設中繼、橋接與 onion 服務的人要自行升級。
+- 用瀏覽器連上 Tor 的人，10 月 29 日的 Tor Browser 16.0 已經帶進這一版（見 [Tor 更新日誌](./tor.md)）。Tails 7.15.1 帶的仍是 0.4.9.14，下一版跟進時會整理在 [Tails 更新日誌](./tails.md)。架設中繼、橋接與 onion 服務的人要自行升級。
 - 0.4.8 以前的版本從這一版起無法在 Tor 網路上運作。目錄權威把 DESC_NO_TAP 與 MICRODESC_NO_TAP 列為用戶端與中繼的必要協定能力，並啟用新的共識方法，從 microdescriptor（用戶端下載的精簡版中繼描述檔）移除所有 TAP key 與家族清單，省下大量目錄頻寬。0.4.9.12 起 0.4.8.x 的中繼已經被擋在網路外面，這次連用戶端也無法連線。用發行版套件或其他內建 tor 的 app 的人，要確認版本已經是 0.4.9.x。
 - 目錄權威另外把 RELAY_NEGOTIATE_SUBPROTO 與 RELAY_CRYPT_CGO 列為中繼的必要能力。用戶端之後可以假設每個中繼都支援 Counter Galois Onion 加密（CGO），連還沒出現在共識裡的中繼也直接使用。
 - 新的阻斷服務防禦都跟 BEGIN_DIR（在電路上開一條目錄請求的串流）有關（ticket 41411）。目錄快取可以依電路限制 BEGIN_DIR 的頻率，由 DoSBeginDirRateEnabled、DoSBeginDirRate、DoSBeginDirBurst 與 DoSBeginDirDefenseType 控制，四個選項在共識參數與 torrc 都能設定，預設開啟。另一項讓目錄快取拒絕已驗證中繼在同一條電路上的第二個 BEGIN_DIR，由 DoSBeginDirLimitEnabled 控制，預設關閉。

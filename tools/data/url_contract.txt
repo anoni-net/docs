@@ -909,6 +909,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-更新日誌
 	#急迫程度怎麼判斷
 /changelog/ooni/
@@ -978,6 +979,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -1872,6 +1874,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-Changelog
 /en/changelog/ooni/
 	#OONI-Changelog
@@ -1930,6 +1933,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -5811,6 +5815,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-更新日志
 	#紧急程度怎么判断
 /zh-cn/changelog/ooni/
@@ -5874,6 +5879,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道

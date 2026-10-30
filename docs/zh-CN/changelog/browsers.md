@@ -35,9 +35,11 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 ## Chrome 2026 年 10 月
 
-> 2026-10-27 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">尽快</span>10 月 27 日的 156.0.8078.73 修复了 52 个安全问题，Critical 4 个、High 46 个。10 月的五份桌面稳定版公告，Google 都没有标注任何一项已被实际利用，目前最新的就是 156.0.8078.73。
+- <span class="urg-tag urg-tag--soon">尽快</span>10 月 29 日的 156.0.8078.79 修复了 21 个安全问题，Critical 1 个、High 19 个、Medium 1 个。10 月的六份桌面稳定版公告，Google 都没有标注任何一项已被实际利用，目前最新的就是 156.0.8078.79。
+- Critical 那一项是 MediaStream（网页使用摄像头与麦克风的接口）的内存损坏（CVE-2026-76024）。High 里 FileSystem 有 3 个，Quota、CacheStorage 与 Skia 各 2 个，另有 V8 与 Dawn（WebGPU 的实现）各一个。扩展稳定版（Extended Stable）这一次也换到 156.0.8078.79。Android 版同日发布，公告写明修补内容跟桌面版相同。
+- 10 月 27 日的 156.0.8078.73 修复了 52 个安全问题，Critical 4 个、High 46 个。
 - 4 个 Critical 落在 FileSystem 的内存损坏（CVE-2026-118306）、FileAPI 与 Skia 的输入验证不足（CVE-2026-118331、CVE-2026-118348），以及 Layout 的 use-after-free（CVE-2026-118344）。High 里 V8 与 Turbolev 合计 6 个，PDF 引擎 PDFium 另有一个 use-after-free（CVE-2026-118345）。Android 版同日发布，公告写明修补内容跟桌面版相同。
 - 157 已经在 10 月 22 日与 28 日以抢先稳定版（Early Stable）推给一小部分 Windows 用户，两份公告都没有列出安全修补。
 - 10 月 20 日的大版本 156.0.8078.47 修复了 353 个安全问题，Critical 6 个、High 61 个。
@@ -57,7 +59,7 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 - <span class="urg-tag urg-tag--soon">尽快</span>10 月 27 日的 Firefox 159 修复了 167 个问题，High 108 个、Moderate 52 个、Low 7 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。桌面版目前最新的就是 159。
 - 159 的 High 里有 3 个沙箱逃逸，落在页面导航、表单管理与网络组件（CVE-2026-117861、CVE-2026-117864、CVE-2026-117868），另有 5 个提权、3 个同源策略绕过与 5 个 JIT 编译器的问题。Moderate 里还有 10 个沙箱逃逸，一半在图形与 WebRender。
-- ESR 153.6 与 115.44 同日发布，分别修复了 145 个与 80 个。ESR 140 这一轮同样没有对应的版本，Tor Browser 会从 159 带进哪些修补，要等 Tor Project 的下一版公告（见 [Tor 更新日志](./tor.md)）。
+- ESR 153.6 与 115.44 同日发布，分别修复了 145 个与 80 个。ESR 140 这一轮同样没有对应的版本，Tor Browser 在 10 月 29 日发布的 16.0 直接换到 153.6.0esr 为基础（见 [Tor 更新日志](./tor.md)）。
 - iOS 版在 10 月 26 日发布 156.1，修复了 2 个问题。Moderate 等级的是 FaceTime 的协议处理可以被用来伪冒（CVE-2026-116632），Low 等级的是 tel: 链接让地址栏显示伪冒的地址（CVE-2026-116631）。
 - 10 月 13 日的 Firefox 158 修复了 77 个问题，High 30 个、Moderate 33 个、Low 14 个，没有 Critical。
 - Mozilla 从这一版起改了公告的写法，内部发现的内存安全错误不再合并成一个汇总的 CVE，改成一个错误一个编号。High 的数量因此比过去多，跨月比较数字时要知道这件事。过去每版都有的那句「could have been exploited」固定套话，也跟着汇总条目一起消失了。
