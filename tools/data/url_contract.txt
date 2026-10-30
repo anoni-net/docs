@@ -265,8 +265,8 @@
 	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
-	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
+	#網路政變報告的全文重譯
 	#近期公告
 	#部落格技術文章的新位置
 	#部落格社群文章的新位置
@@ -651,6 +651,16 @@
 	#搬過去的文章
 	#舊網址與-RSS
 	#部落格社群文章的新位置
+/blog/2026/10/interseclab-coup-retranslation/
+	#Geedge-對-WebTunnel-的封鎖研究
+	#公司回覆信
+	#各國資料的存取與分享
+	#沒有加密的連線
+	#相關閱讀
+	#網路政變報告的全文重譯
+	#舊連結與回報
+	#補上與更正的內容
+	#讀過舊版的人可以回頭看的四個地方
 /blog/2026/10/tech-articles-moved/
 	#搬走與調整的內容
 	#舊網址
@@ -671,8 +681,8 @@
 	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
-	#撤回自己寫過的話近兩週更正了哪些內容
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
+	#網路政變報告的全文重譯
 	#部落格技術文章的新位置
 	#部落格社群文章的新位置
 /blog/archive/2026/page/2/
@@ -685,6 +695,7 @@
 	#什麼是差分隱私
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
+	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
 /blog/category/ooni/
 	#OONI
@@ -720,15 +731,16 @@
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
-	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#撤回自己寫過的話近兩週更正了哪些內容
 	#更新
+	#網路政變報告的全文重譯
 	#部落格技術文章的新位置
 	#部落格社群文章的新位置
 /blog/category/更新/page/2/
 	#Cure53-完成-Tor-VPN-安全稽核
+	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Tails-70-發佈
 	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
@@ -781,14 +793,15 @@
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
-	#Tor-使用者文件的新家
 	#什麼是差分隱私
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
+	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
 	#近期公告
 /blog/page/3/
 	#Tails-70-發佈
+	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
 	#發佈新-OONI-Explorer-主題審查頁面
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
@@ -1373,6 +1386,7 @@
 	#Where-to-go-from-here
 	#Why-the-adversary-is-regional
 /en/blog/
+	#A-Full-Retranslation-of-The-Internet-Coup
 	#A-new-home-for-the-blogs-community-posts
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
@@ -1381,7 +1395,6 @@
 	#Recent-Updates
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
-	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
 /en/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
@@ -1648,12 +1661,18 @@
 	#A-new-home-for-the-blogs-community-posts
 	#Old-addresses-and-RSS
 	#What-moved
+/en/blog/2026/10/interseclab-coup-retranslation/
+	#A-Full-Retranslation-of-The-Internet-Coup
+	#For-Readers-and-Partners
+	#Related-Reading
+	#What-the-First-Version-Got-Wrong
 /en/blog/2026/10/tech-articles-moved/
 	#New-Home-for-the-Blogs-Technical-Posts
 	#Old-Addresses
 	#What-Moved
 /en/blog/archive/2026/
 	#2026
+	#A-Full-Retranslation-of-The-Internet-Coup
 	#A-new-home-for-the-blogs-community-posts
 	#Docs-site-update-review-September-2026
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
@@ -1661,7 +1680,6 @@
 	#New-Home-for-the-Blogs-Technical-Posts
 	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
-	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
 /en/blog/archive/2026/page/2/
@@ -1672,6 +1690,7 @@
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
+	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#What-the-original-article-covers
@@ -1686,6 +1705,7 @@
 /en/blog/category/event/ -> https://anoni.net/en/updates/
 /en/blog/category/events/ -> https://anoni.net/en/updates/
 /en/blog/category/news/
+	#A-Full-Retranslation-of-The-Internet-Coup
 	#A-new-home-for-the-blogs-community-posts
 	#Docs-site-update-review-September-2026
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
@@ -1755,6 +1775,7 @@
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Recent-Updates
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
+	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 	#What-the-original-article-covers
@@ -3104,6 +3125,7 @@
 	#Before-you-send
 	#Cases-at-work
 	#Everyday-cases
+	#Gears
 	#Handing-things-over
 	#How-the-tools-connect
 	#One-conflict-to-know-about-if-you-use-Tor-Browser
@@ -3116,6 +3138,7 @@
 /en/utils/age/
 	#Across-devices-through-your-password-manager
 	#Encrypting-to-someone-elses-public-key
+	#Gears
 	#How-to-use-it
 	#Local-file-encryption
 	#The-passphrase-is-everything
@@ -3283,6 +3306,7 @@
 /en/utils/passphrase/
 	#About-that-entropy-number
 	#Clear-the-clipboard-afterwards
+	#Gears
 	#Next
 	#Passphrase-and-password-generator
 	#Physical-dice-with-nothing-to-trust-on-this-machine
@@ -3291,6 +3315,7 @@
 	#Works-offline
 /en/utils/pdf-pages/
 	#Checked-once-before-you-get-it
+	#Gears
 	#How-to-use-it
 	#Look-inside
 	#PDF-page-tidy-up
@@ -3299,6 +3324,7 @@
 	#When-you-need-this
 	#Works-offline
 /en/utils/qr-read/
+	#Gears
 	#No-link-is-opened-for-you
 	#Passwords-are-masked-the-raw-content-is-not
 	#QR-code-reader
@@ -3342,6 +3368,7 @@
 /en/utils/qrcode/
 	#Choosing-an-error-correction-level
 	#Downloading-as-SVG
+	#Gears
 	#QR-code-generator
 	#What-is-inside-a-QR-code-is-in-the-clear
 	#When-this-helps
@@ -3349,6 +3376,7 @@
 	#Works-offline
 /en/utils/redact/
 	#Face-detection-only-proposes
+	#Gears
 	#How-to-use-it
 	#Screenshot-redaction
 	#The-output-is-re-encoded
@@ -3360,6 +3388,7 @@
 	#Comments-tracked-changes-and-notes-are-left-alone
 	#Every-cleaned-file-is-opened-once-before-you-get-it
 	#File-metadata-stripper
+	#Gears
 	#Office-documents
 	#One-trace-cannot-be-removed
 	#PDF-cannot-be-guaranteed-lossless
@@ -3567,6 +3596,7 @@
 	#國際資助的網路服務供應商涉入其中
 	#在中國內部推動防火長城的區域化
 	#在資料共享和使用上沒有內建的法律或道德限制
+	#對資料主權的重大影響
 	#監控能力的商品化
 	#複製並改進現有商業產品和開源程式碼
 	#設計與商用硬體廠商的互操作性使得針對性制裁更加困難
@@ -3622,6 +3652,11 @@
 	#服務導入與日常運營
 	#系統模式審查與監控
 	#緬甸與-Geedge
+	#背景
+	#背景_1
+	#背景_2
+	#背景_3
+	#背景_4
 	#衣索比亞與-Geedge
 	#西方公司的共謀
 	#透過-J24-計劃測試額外功能
@@ -3636,11 +3671,18 @@
 	#Investcom-HoldingATOM-前-Telenor-Myanmar的母公司
 	#Thales-集團
 	#三井物產Campana-的股東
+	#人權盡職調查
+	#以TSG封鎖-VPN網站與應用程式
+	#出版資訊
+	#在採購進口安裝與啟用中的角色以及第三方的參與
 	#對-Geedge-客戶國家網路使用者的影響
+	#對以-Geedge-產品為-MOTC-實施大規模監控與審查的知情程度
 	#對國際社會的影響
 	#對法證研究人員的影響
 	#對關注自由和開放網路的技術社群的影響
 	#技術研究人員
+	#相關-Geedge-技術的安裝或啟用時間
+	#終端使用者的安全疑慮
 	#結論反思與未來步驟反擊作為服務的數位威權主義
 	#編輯團隊
 	#致謝
@@ -4621,6 +4663,7 @@
 	#接下來
 /tor-snowflake/ -> /tools/tor-snowflake/
 /utils/
+	#Gears-檔案工作台
 	#密碼與加密
 	#小工具
 	#工作情境
@@ -4636,6 +4679,7 @@
 	#要離線帶著走
 	#送出去之前
 /utils/age/
+	#Gears-檔案工作台
 	#密語就是全部
 	#怎麼用
 	#本機檔案加密
@@ -4803,6 +4847,7 @@
 	#讓-passkey-跟著你走
 	#這把鑰匙能做什麼
 /utils/passphrase/
+	#Gears-檔案工作台
 	#密語與密碼產生器
 	#密語與隨機密碼怎麼抽出來
 	#接下來
@@ -4812,6 +4857,7 @@
 	#複製之後記得清剪貼簿
 	#離線可用
 /utils/pdf-pages/
+	#Gears-檔案工作台
 	#PDF-頁面整理
 	#不做的事
 	#交出去之前先驗一次
@@ -4821,6 +4867,7 @@
 	#輸出比原檔乾淨
 	#離線可用
 /utils/qr-read/
+	#Gears-檔案工作台
 	#QR-code-讀取器
 	#不會幫你開啟連結
 	#什麼時候用得上
@@ -4862,6 +4909,7 @@
 	#跟隨身碟比呢
 	#離線可用
 /utils/qrcode/
+	#Gears-檔案工作台
 	#QR-code-產生器
 	#QR-code-裡面是明文
 	#下載成-SVG
@@ -4870,6 +4918,7 @@
 	#編碼用的是誰的程式
 	#離線可用
 /utils/redact/
+	#Gears-檔案工作台
 	#不做的事
 	#什麼時候用得上
 	#怎麼用
@@ -4879,6 +4928,7 @@
 	#輸出重新編碼過
 	#離線可用
 /utils/strip-metadata/
+	#Gears-檔案工作台
 	#Office-文件
 	#PDF-是另一種處理方式
 	#PDF-沒辦法保證無損
@@ -5174,8 +5224,8 @@
 	#博客技术文章的新位置
 	#博客社区文章的新位置
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
-	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
+	#网络政变报告的全文重译
 	#近期公告
 /zh-cn/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
 /zh-cn/blog/2025/01/專案重啟-2025/ -> https://anoni.net/zh-cn/updates/2025/01/project-relaunch-2025/
@@ -5558,6 +5608,16 @@
 	#博客社区文章的新位置
 	#搬过去的文章
 	#旧网址与-RSS
+/zh-cn/blog/2026/10/interseclab-coup-retranslation/
+	#Geedge-对-WebTunnel-的封锁研究
+	#公司回复信
+	#各国数据的访问与分享
+	#旧链接与反馈
+	#没有加密的连接
+	#相关阅读
+	#网络政变报告的全文重译
+	#补上与更正的内容
+	#读过旧版的人可以回头看的四个地方
 /zh-cn/blog/2026/10/tech-articles-moved/
 	#博客技术文章的新位置
 	#搬走与调整的内容
@@ -5580,8 +5640,8 @@
 	#博客技术文章的新位置
 	#博客社区文章的新位置
 	#把整个文档站与小工具存进设备没有网络的时候照样可以打开
-	#撤回自己写过的话近两周更正了哪些内容
 	#文档站新增八个小工具全部在读者自己的浏览器里执行
+	#网络政变报告的全文重译
 /zh-cn/blog/archive/2026/page/2/
 	#2026
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
@@ -5592,6 +5652,7 @@
 	#什么是差分隐私
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
+	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
 /zh-cn/blog/category/ooni/
 	#OONI
@@ -5627,15 +5688,16 @@
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
-	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
 	#博客技术文章的新位置
 	#博客社区文章的新位置
 	#撤回自己写过的话近两周更正了哪些内容
 	#更新
+	#网络政变报告的全文重译
 /zh-cn/blog/category/更新/page/2/
 	#Cure53-完成-Tor-VPN-安全审计
+	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Tails-70-发布
 	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
@@ -5688,14 +5750,15 @@
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
-	#Tor-用户文档的新家
 	#什么是差分隐私
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
+	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
 	#近期公告
 /zh-cn/blog/page/3/
 	#Tails-70-发布
+	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
 	#发布新-OONI-Explorer-专题审查页面
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
@@ -7145,6 +7208,7 @@
 	#接下来
 /zh-cn/tor-snowflake/ -> /zh-cn/tools/tor-snowflake/
 /zh-cn/utils/
+	#Gears-文件工作台
 	#发出去之前
 	#密码与加密
 	#小工具
@@ -7160,6 +7224,7 @@
 	#要离线带着走
 	#要防什么
 /zh-cn/utils/age/
+	#Gears-文件工作台
 	#密语就是全部
 	#怎么用
 	#本机文件加密
@@ -7327,6 +7392,7 @@
 	#让-passkey-跟着你走
 	#这把钥匙能做什么
 /zh-cn/utils/passphrase/
+	#Gears-文件工作台
 	#为什么密码生成器可以放在网页上
 	#复制之后记得清剪贴板
 	#密语与密码生成器
@@ -7336,6 +7402,7 @@
 	#用实体骰子不用信任这台电脑
 	#离线可用
 /zh-cn/utils/pdf-pages/
+	#Gears-文件工作台
 	#PDF-页面整理
 	#不做的事
 	#交出去之前先验一次
@@ -7345,6 +7412,7 @@
 	#离线可用
 	#输出比原文件干净
 /zh-cn/utils/qr-read/
+	#Gears-文件工作台
 	#QR-code-读取器
 	#不会帮你打开链接
 	#什么时候用得上
@@ -7386,6 +7454,7 @@
 	#跟-U-盘比呢
 	#跟我的准备清单的接法
 /zh-cn/utils/qrcode/
+	#Gears-文件工作台
 	#QR-code-生成器
 	#QR-code-里面是明文
 	#下载成-SVG
@@ -7394,6 +7463,7 @@
 	#纠错等级怎么选
 	#编码用的是谁的程序
 /zh-cn/utils/redact/
+	#Gears-文件工作台
 	#不做的事
 	#为什么是实心填色
 	#什么时候用得上
@@ -7403,6 +7473,7 @@
 	#自动找出人脸只是提案
 	#输出重新编码过
 /zh-cn/utils/strip-metadata/
+	#Gears-文件工作台
 	#Office-文档
 	#PDF-是另一种处理方式
 	#PDF-没办法保证无损
