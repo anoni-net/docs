@@ -17,6 +17,17 @@ description: "Geedge 外泄一年来，从文件调查、供应链追查到代�
 
 <!-- more -->
 
+!!! abstract "一年来的研究时间轴"
+
+    - 2025-09-09：InterSecLab 发表〈网络政变〉
+    - 2025-09-11：外泄的文件全部公开
+    - 2025-09-12：GFW Report 发表外泄的分析文章
+    - 2025-10：社区发布〈网络政变〉的中译
+    - 2026-02-19：FOCI 论文比对外泄文件里的域名
+    - 2026-04-24：InterSecLab 发表〈MADLink〉
+    - 2026-08-12：USENIX Security 论文比对代码与真实网络
+    - 2026-10-30：社区重译〈网络政变〉，并发表研究回顾
+
 ## 从文件开始的调查
 
 外泄之初，合作的媒体与调查组织 InterSecLab 先读的是文件与工单。InterSecLab 在 2025 年 9 月发表报告〈网络政变〉，整理出 Geedge 把审查系统卖给哈萨克斯坦、埃塞俄比亚、巴基斯坦与缅甸的政府，也在中国的新疆、福建与江苏构建省级的防火墙。Geedge 与中国科学院的 MESA 实验室关系密切，依研究防火长城的 GFW Report 整理，被称为「防火长城之父」的方滨兴是 Geedge 的首席科学家。外泄的文件共 572 GiB（约 600 GB），包含源代码、项目管理记录与客户的部署配置。
@@ -42,7 +53,25 @@ description: "Geedge 外泄一年来，从文件调查、供应链追查到代�
 
 读文件之外，另一条研究线是直接读代码。2026 年 8 月，美国与德国几所大学和 GFW Report 的研究者发表论文，他们把外泄的源代码实际构建起来，在隔离的环境测试 Geedge 的审查系统（简称 TSG），再到各地的网络上比对审查设备的反应。在 DNS 注入（抢先发回假的域名查询结果）与中断连接这两项，防火长城有三台设备的行为与 TSG 高度吻合。研究者的结论是，外泄的代码或与它相近的版本，很可能部署在防火长城的一部分。
 
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-stack-zh-cn-ed9bdccc.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-stack-zh-cn-ed9bdccc.webp"
+            alt="Geedge 审查系统的分层示意图"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;max-width:420px;width:100%;">
+    </a>
+    <figcaption markdown="span">Geedge 审查系统的分层示意，依外泄的版本整理。方块依组件的来源标示，分成自行开发、开源、商用闭源，以及台湾与中国厂商的硬件，完整说明见技术文章。</figcaption>
+</figure>
+
 同样测量过的其他防火长城设备与 TSG 不吻合，那些设备由谁提供，目前没有公开的证据。哈萨克斯坦、缅甸与巴基斯坦的结果多半停在「可能」或「无法确认」，埃塞俄比亚没有测量。新闻网站 Risky Bulletin 的报道里，TSG 是防火长城「三种已知流量过滤能力之一」，论文里没有这种写法，同一篇报道引用的研究者也提到 Geedge 只是参与防火长城的厂商之一。
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-modes-zh-cn-9393cc3e.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-modes-zh-cn-9393cc3e.webp"
+            alt="镜像模式与内联模式的审查设备示意图"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;max-width:480px;width:100%;">
+    </a>
+    <figcaption markdown="span">审查设备接入网络的两种方式。镜像模式的设备只取得流量的副本，只能抢先发出伪造的数据包。内联模式的设备串在线路上，可以直接丢包，从外面无法分辨是哪一台设备丢包，哈萨克斯坦与巴基斯坦的部分结果因此无法判断。</figcaption>
+</figure>
 
 〈网络政变〉的副标题写的是一家中国公司把防火长城输出到威权国家，那是从文件看到的销售与部署。代码的比对回答的是另一个问题，结果是防火长城的一部分用了 Geedge 的程序，其他国家的部署还有待测量确认。
 

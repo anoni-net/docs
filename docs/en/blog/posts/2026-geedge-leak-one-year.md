@@ -17,6 +17,17 @@ In September 2025, internal files and source code (the text of a software progra
 
 <!-- more -->
 
+!!! abstract "The year at a glance"
+
+    - 2025-09-09: InterSecLab publishes "The Internet Coup"
+    - 2025-09-11: The leaked files are released in full
+    - 2025-09-12: GFW Report publishes its analysis of the leak
+    - 2025-10: The community releases its Chinese translation of "The Internet Coup"
+    - 2026-02-19: A FOCI paper compares the domains in the leaked files
+    - 2026-04-24: InterSecLab publishes "MADLink"
+    - 2026-08-12: A USENIX Security paper compares the code with real networks
+    - 2026-10-30: The community retranslates "The Internet Coup" and publishes its research review
+
 ## Starting from the Documents
 
 In the first weeks, partner media outlets and the investigative organisation InterSecLab worked from the documents and tickets. InterSecLab published its report "The Internet Coup" in September 2025, setting out how Geedge sold its censorship system to the governments of Kazakhstan, Ethiopia, Pakistan and Myanmar, and built provincial firewalls in Xinjiang, Fujian and Jiangsu in China. Geedge works closely with the MESA Lab at the Chinese Academy of Sciences, and according to GFW Report, a group that studies the Great Firewall, Fang Binxing, known as the "father of the Great Firewall", is Geedge's chief scientist. The leak amounts to 572 GiB (about 600 GB), including source code, project management records and customer deployment configurations.
@@ -42,7 +53,25 @@ ADLINK's reply to InterSecLab says it screened against export control lists befo
 
 Alongside the document work, a second line of research read the code itself. In August 2026, researchers from universities in the United States and Germany and from GFW Report published a paper. They built the leaked source code, tested Geedge's censorship system (known as TSG) in an isolated environment, and then compared how censorship equipment in different places responds on real networks. On DNS injection (sending back fake answers to website lookups) and cutting connections, three Great Firewall devices behave in ways that closely match TSG. The researchers conclude that the leaked code, or a close version of it, is likely deployed on part of the Great Firewall.
 
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-stack-en-dd45509b.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-stack-en-dd45509b.webp"
+            alt="Layered diagram of Geedge's censorship system"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;max-width:420px;width:100%;">
+    </a>
+    <figcaption markdown="span">A layered view of Geedge's censorship system, as of the leaked version. Boxes are marked by where each component comes from: developed in-house, open source, proprietary, or hardware from Taiwanese and Chinese vendors. The technical article explains it in full.</figcaption>
+</figure>
+
 Other Great Firewall devices measured in the same way do not match TSG, and there is no public evidence of who supplied them. Results for Kazakhstan, Myanmar and Pakistan mostly stop at "possible" or "cannot confirm", and Ethiopia was not measured. In a report by the news site Risky Bulletin, TSG is "one of the Great Firewall's three known traffic filtering capabilities", wording that does not appear in the paper, and a researcher quoted in the same report noted that Geedge is only one of the vendors involved in the Great Firewall.
+
+<figure markdown="span">
+    <a href="https://assets.anoni.net/blog/2026-geedge-modes-en-48601f1c.webp" target="_blank">
+        <img src="https://assets.anoni.net/blog/2026-geedge-modes-en-48601f1c.webp"
+            alt="Diagram of censorship equipment in mirrored and in-line mode"
+            style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;max-width:480px;width:100%;">
+    </a>
+    <figcaption markdown="span">Two ways censorship equipment connects to a network. A device in mirrored mode only receives a copy of the traffic and can only race to send forged packets. An in-line device sits on the line and can drop packets directly, and from outside there is no way to tell which device dropped them, which is why some results for Kazakhstan and Pakistan are inconclusive.</figcaption>
+</figure>
 
 The subtitle of "The Internet Coup" describes how a Chinese company is exporting the Great Firewall to autocratic regimes, which is what the documents show about sales and deployments. The code comparison answers a different question, and its answer is that part of the Great Firewall uses Geedge's code, while deployments in other countries still await confirmation by measurement.
 
